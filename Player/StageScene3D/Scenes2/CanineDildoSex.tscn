@@ -1,0 +1,261 @@
+[gd_scene load_steps=62 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/Props/CanineDildo.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Player/StageScene3D/Scenes2/CanineDildoSex.gd" type="Script" id=5]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=593]
+animation = "CanineDildoRideFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=594]
+animation = "CanineDildoRideHover_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=595]
+animation = "CanineDildoRideInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=596]
+animation = "CanineDildoRideKnotFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=597]
+animation = "CanineDildoRideKnotInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=598]
+animation = "CanineDildoRideKnot_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=599]
+animation = "CanineDildoRideTeaseToHover_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=600]
+animation = "CanineDildoRideTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=601]
+animation = "CanineDildoRide_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=602]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=603]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=604]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=605]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=606]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=607]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=608]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=609]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=610]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=611]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=612]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=613]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=614]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=615]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=616]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=617]
+states/CanineDildoRideFast_1-loop/node = SubResource( 593 )
+states/CanineDildoRideFast_1-loop/position = Vector2( 372, 479 )
+states/CanineDildoRideHover_1-loop/node = SubResource( 594 )
+states/CanineDildoRideHover_1-loop/position = Vector2( 552, 169 )
+states/CanineDildoRideInside_1-loop/node = SubResource( 595 )
+states/CanineDildoRideInside_1-loop/position = Vector2( 372, 276 )
+states/CanineDildoRideKnotFast_1-loop/node = SubResource( 596 )
+states/CanineDildoRideKnotFast_1-loop/position = Vector2( 732, 521 )
+states/CanineDildoRideKnotInside_1-loop/node = SubResource( 597 )
+states/CanineDildoRideKnotInside_1-loop/position = Vector2( 723, 326 )
+states/CanineDildoRideKnot_1-loop/node = SubResource( 598 )
+states/CanineDildoRideKnot_1-loop/position = Vector2( 732, 423 )
+states/CanineDildoRideTeaseToHover_1-loop/node = SubResource( 599 )
+states/CanineDildoRideTeaseToHover_1-loop/position = Vector2( 202, 130 )
+states/CanineDildoRideTease_1-loop/node = SubResource( 600 )
+states/CanineDildoRideTease_1-loop/position = Vector2( 541, 56 )
+states/CanineDildoRide_1-loop/node = SubResource( 601 )
+states/CanineDildoRide_1-loop/position = Vector2( 372, 382 )
+transitions = [ "CanineDildoRideTease_1-loop", "CanineDildoRideTeaseToHover_1-loop", SubResource( 602 ), "CanineDildoRideTeaseToHover_1-loop", "CanineDildoRideHover_1-loop", SubResource( 603 ), "CanineDildoRideHover_1-loop", "CanineDildoRideTease_1-loop", SubResource( 604 ), "CanineDildoRideHover_1-loop", "CanineDildoRideInside_1-loop", SubResource( 605 ), "CanineDildoRideInside_1-loop", "CanineDildoRideHover_1-loop", SubResource( 606 ), "CanineDildoRideInside_1-loop", "CanineDildoRide_1-loop", SubResource( 607 ), "CanineDildoRide_1-loop", "CanineDildoRideInside_1-loop", SubResource( 608 ), "CanineDildoRideInside_1-loop", "CanineDildoRideKnotInside_1-loop", SubResource( 609 ), "CanineDildoRideKnotInside_1-loop", "CanineDildoRideInside_1-loop", SubResource( 610 ), "CanineDildoRideKnotInside_1-loop", "CanineDildoRideKnot_1-loop", SubResource( 611 ), "CanineDildoRideKnot_1-loop", "CanineDildoRideKnotInside_1-loop", SubResource( 612 ), "CanineDildoRideKnot_1-loop", "CanineDildoRideKnotFast_1-loop", SubResource( 613 ), "CanineDildoRideKnotFast_1-loop", "CanineDildoRideKnot_1-loop", SubResource( 614 ), "CanineDildoRide_1-loop", "CanineDildoRideFast_1-loop", SubResource( 615 ), "CanineDildoRideFast_1-loop", "CanineDildoRide_1-loop", SubResource( 616 ) ]
+start_node = "CanineDildoRideTease_1-loop"
+graph_offset = Vector2( -43, 181 )
+
+[sub_resource type="AnimationNodeBlendTree" id=565]
+graph_offset = Vector2( -268.114, -7.70406 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 617 )
+nodes/StateMachine/position = Vector2( 120, 80 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=460]
+
+[sub_resource type="AnimationNodeAnimation" id=566]
+animation = "CanineDildoRideFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=567]
+animation = "CanineDildoRideHover_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=568]
+animation = "CanineDildoRideInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=569]
+animation = "CanineDildoRideKnotFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=570]
+animation = "CanineDildoRideKnotInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=571]
+animation = "CanineDildoRideKnot_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=572]
+animation = "CanineDildoRideTeaseToHover_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=573]
+animation = "CanineDildoRideTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=574]
+animation = "CanineDildoRide_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=575]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=576]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=579]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=580]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=581]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=582]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=583]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=584]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=585]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=586]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=587]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=588]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=589]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=590]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=618]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=591]
+states/CanineDildoRideFast_2-loop/node = SubResource( 566 )
+states/CanineDildoRideFast_2-loop/position = Vector2( 575, 565 )
+states/CanineDildoRideHover_2-loop/node = SubResource( 567 )
+states/CanineDildoRideHover_2-loop/position = Vector2( 542, 266 )
+states/CanineDildoRideInside_2-loop/node = SubResource( 568 )
+states/CanineDildoRideInside_2-loop/position = Vector2( 568, 361 )
+states/CanineDildoRideKnotFast_2-loop/node = SubResource( 569 )
+states/CanineDildoRideKnotFast_2-loop/position = Vector2( 916, 638 )
+states/CanineDildoRideKnotInside_2-loop/node = SubResource( 570 )
+states/CanineDildoRideKnotInside_2-loop/position = Vector2( 916, 441 )
+states/CanineDildoRideKnot_2-loop/node = SubResource( 571 )
+states/CanineDildoRideKnot_2-loop/position = Vector2( 908, 525 )
+states/CanineDildoRideTeaseToHover_2-loop/node = SubResource( 572 )
+states/CanineDildoRideTeaseToHover_2-loop/position = Vector2( 306, 178 )
+states/CanineDildoRideTease_2-loop/node = SubResource( 573 )
+states/CanineDildoRideTease_2-loop/position = Vector2( 506, 77 )
+states/CanineDildoRide_2-loop/node = SubResource( 574 )
+states/CanineDildoRide_2-loop/position = Vector2( 554, 451 )
+transitions = [ "CanineDildoRideTease_2-loop", "CanineDildoRideTeaseToHover_2-loop", SubResource( 575 ), "CanineDildoRideTeaseToHover_2-loop", "CanineDildoRideHover_2-loop", SubResource( 576 ), "CanineDildoRideHover_2-loop", "CanineDildoRideInside_2-loop", SubResource( 579 ), "CanineDildoRideInside_2-loop", "CanineDildoRideHover_2-loop", SubResource( 580 ), "CanineDildoRideInside_2-loop", "CanineDildoRide_2-loop", SubResource( 581 ), "CanineDildoRide_2-loop", "CanineDildoRideInside_2-loop", SubResource( 582 ), "CanineDildoRideInside_2-loop", "CanineDildoRideKnotInside_2-loop", SubResource( 583 ), "CanineDildoRideKnotInside_2-loop", "CanineDildoRideInside_2-loop", SubResource( 584 ), "CanineDildoRide_2-loop", "CanineDildoRideFast_2-loop", SubResource( 585 ), "CanineDildoRideFast_2-loop", "CanineDildoRide_2-loop", SubResource( 586 ), "CanineDildoRideKnotInside_2-loop", "CanineDildoRideKnot_2-loop", SubResource( 587 ), "CanineDildoRideKnot_2-loop", "CanineDildoRideKnotInside_2-loop", SubResource( 588 ), "CanineDildoRideKnot_2-loop", "CanineDildoRideKnotFast_2-loop", SubResource( 589 ), "CanineDildoRideKnotFast_2-loop", "CanineDildoRideKnot_2-loop", SubResource( 590 ), "CanineDildoRideHover_2-loop", "CanineDildoRideTease_2-loop", SubResource( 618 ) ]
+start_node = "CanineDildoRideTease_2-loop"
+graph_offset = Vector2( -15, -43 )
+
+[sub_resource type="AnimationNodeBlendTree" id=592]
+graph_offset = Vector2( -250.6, -19.234 )
+nodes/StateMachine/node = SubResource( 591 )
+nodes/StateMachine/position = Vector2( 300, 160 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "StateMachine" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=473]
+
+[node name="CanineDildoSex" instance=ExtResource( 2 )]
+script = ExtResource( 5 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.317465, -0.553263 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="CanineDildo" parent="." index="1" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.105933, -0.042, 0 )
+
+[node name="Doll3D" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.105856, -0.041567, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 565 )
+anim_player = NodePath("../Doll3D/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 460 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 592 )
+anim_player = NodePath("../CanineDildo/AnimationPlayer")
+parameters/StateMachine/playback = SubResource( 473 )
+
+[editable path="CanineDildo"]
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]

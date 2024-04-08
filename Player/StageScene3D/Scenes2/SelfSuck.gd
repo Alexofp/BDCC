@@ -64,7 +64,7 @@ func playAnimation(animID, _args = {}):
 	var state_machine = animationTree["parameters/StateMachine/playback"]
 	var state_machine2 = animationTree2["parameters/StateMachine/playback"]
 
-	if(animID in ["inside", "sex", "fast"]):
+	if(animID != "tease"):
 		doll.clampPenisScale(0.95, 1.2)
 		if(doll.getState("mouth") in ["", null]):
 			doll.setTemporaryState("mouth", "open")
@@ -81,6 +81,15 @@ func playAnimation(animID, _args = {}):
 	if(animID == "fast"):
 		state_machine.travel("SelfSuckFast_1-loop")
 		state_machine2.travel("SelfSuckFast_2-loop")
+	if(animID == "fuckinside"):
+		state_machine.travel("SelfSuckFuckInside_1-loop")
+		state_machine2.travel("SelfSuckFuckInside_2-loop")
+	if(animID == "fuck"):
+		state_machine.travel("SelfSuckFuck_1-loop")
+		state_machine2.travel("SelfSuckFuck_2-loop")
+	if(animID == "fuckfast"):
+		state_machine.travel("SelfSuckFuckFast_1-loop")
+		state_machine2.travel("SelfSuckFuckFast_2-loop")
 
 
 
@@ -97,4 +106,4 @@ func canTransitionTo(_actionID, _args = []):
 	return true
 
 func getSupportedStates():
-	return ["tease", "inside", "sex", "fast"]
+	return ["tease", "inside", "sex", "fast", "fuckinside", "fuck", "fuckfast"]
