@@ -2752,3 +2752,10 @@ func hasTightHoles():
 		return true
 	else:
 		return false
+
+func getRopeHarnessColor(defaultColor=Color.red):
+	var theHarness = inventory.getEquippedItemByID("ropeharness")
+	if(theHarness != null):
+		return theHarness.clothesColor
+	
+	return defaultColor
