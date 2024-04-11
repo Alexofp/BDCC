@@ -4,6 +4,7 @@ onready var animationTree = $AnimationTree
 onready var animationTree2 = $AnimationTree2
 onready var doll = $Doll3D
 #onready var doll2 = $Doll3D2
+onready var tentacles = $Tentacles
 
 func _init():
 	id = StageScene.TentaclesSex
@@ -40,6 +41,11 @@ func playAnimation(animID, _args = {}):
 		doll.applyBodyState({})
 
 	updateSubAnims()
+	
+	if(_args.has("plant") && _args["plant"]):
+		tentacles.setPlant()
+	else:
+		tentacles.setLatex()
 	
 	var state_machine = animationTree["parameters/StateMachine/playback"]
 	var state_machine2 = animationTree2["parameters/StateMachine/playback"]
