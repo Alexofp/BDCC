@@ -40,7 +40,7 @@ func _run():
 
 		addButton("Take a look", "See if something is wrong with Artica's hind leg", "take_look")
 	if(state == "take_look"):
-		# (( Check foot anim here
+		playAnimation(StageScene.CheckPaw, "check", {pc="artica", npc="pc"})
 		saynn("You look under the table.. but it's too dark there to see anything.")
 
 		saynn("[say=pc]Alright, let me take a look.[/say]")
@@ -137,7 +137,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "paw_massage"):
-		# (( Paw massage anim?
+		playAnimation(StageScene.CheckPaw, "beans", {pc="artica", npc="pc"})
 		saynn("[say=pc]Nothing a little massage can't fix.[/say]")
 
 		saynn("[say=artica]I.. I d-don't know if..[/say]")
