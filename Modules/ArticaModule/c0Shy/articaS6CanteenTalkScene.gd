@@ -76,8 +76,98 @@ func _run():
 			saynn("Your actions seem to help Artica to open up. What do you want to do with her?")
 
 		addButton("Check beans", "Make sure Artica's hind leg is still alright", "kinky_checkbeans")
-		addButton("Force her", "Enough beating around the bush. Enough trying to be kind. Time to force Artica out of her comfort zone", "do_force_her")
+		addButton("Force her", "The best way to force Artica out of her comfort zone is by shoving her face into your crotch!", "do_force_her")
 		addButton("Back", "Go to the previous menu", "")
+	if(state == "do_force_her"):
+		playAnimation(StageScene.ChairCrotchSniff, "prepare", {pc="artica", npc="pc"})
+		saynn("You know exactly what will make Artica stop being so shy. You doubt that she will be down for it.. feels like she never is. So you just gotta force a little.")
+
+		saynn("[say=pc]Hey, Artica.[/say]")
+
+		saynn("Her ears perk, hearing your strict voice. You get up and position yourself in front of the girl.")
+
+		saynn("[say=artica]Eep?..[/say]")
+
+		saynn("[say=pc]Look at me. Now.[/say]")
+
+		saynn("She raises her gaze slowly. Eye contact makes her get all small and shy again. You sigh, annoyed. A threat of punishment might help here..")
+
+		saynn("[say=pc]Look me in the eyes. And don't dare to pull away. Or I will have your muzzle sniffing my crotch.[/say]")
+
+		saynn("[say=artica]Oh..[/say]")
+
+		saynn("Artica starts to look up at you again, gradually shifting her gaze higher and higher.. until it collides with your stern one. Her deep green eyes are so.. cute.")
+
+		saynn("At first, she is doing alright, holding eye contact. But very soon, her body begins to sway from side to side a bit.. her tail curling around the chair.. her hind paws standing on curling toes.. her eyes blinking a lot..")
+
+		saynn("..until she can't take it anymore. Artica looks away.")
+
+		saynn("Well..")
+
+		addButton("Grab her", "Do what you promised to do", "kinky_force_sniff")
+	if(state == "kinky_force_sniff"):
+		playAnimation(StageScene.ChairCrotchSniff, "sniff", {pc="artica", npc="pc"})
+		saynn("You walk up to Artica.. and grab her by the hair, forcing her to see your mean face..")
+
+		saynn("[say=artica]Ow.. eep.. e-e.. ah.. w-wai-..[/say]")
+
+		saynn("..before you yank her close, her snout gets pushed against your crotch.."+str(" against your {pc.penis}.." if GM.pc.hasPenis() else (" against your pussy.." if GM.pc.hasReachableVagina() else ""))+"")
+
+		saynn("[say=artica]Agh!.. H-hey.. eep.. e-ep..[/say]")
+
+		saynn("[say=pc]Sniff! I wanna hear you take in my scent, girl.[/say]")
+
+		saynn("She tries to pull away.. tries. Artica is barely putting up any resistance, letting you drag her face over your crotch.")
+
+		saynn("[say=artica]W-wai-.. nn.n..[/say]")
+
+		saynn("[say=pc]SNIFF![/say]")
+
+		saynn("Artica closes her eyes and audibly huffs in your scent.")
+
+		saynn("[say=artica]Hh-h.. mhh-h..[/say]")
+
+		if (GM.pc.hasPenis()):
+			saynn("[say=pc]More. I want you to get some of that cock's odor.[/say]")
+
+			saynn("Artica's snout is stuck into the area under your shaft and above your balls. Each time she breathes in, your strong scent fills her lungs..")
+
+			saynn("?elif")
+
+			saynn("[say=pc]More. I want you to get some of that pussy's odor.[/say]")
+
+			saynn("Artica's snout is directly brushing against your needy pussy. Each time she breathes in, your strong horny scent fills her lungs..")
+
+		else:
+			saynn("[say=pc]More.[/say]")
+
+			saynn("Artica's snout is directly brushing against your crotch. Each time she breathes in, your strong horny scent fills her lungs..")
+
+		saynn("She keeps huffing and puffing but you don't let go. Eventually, her weak resistance begins to fade..")
+
+		saynn("[say=artica]Mmm-m.. ah-.. ahm..[/say]")
+
+		saynn("Artica is making cute muffled noises. The lack of resistance allows you to start grinding her face across your crotch.. making sure that your scent will stay with her for a while.")
+
+		saynn("[say=artica]..nn-nh-h.. n-nya-ah..[/say]")
+
+		saynn("The more she breathes it in, the more she melts from it.")
+
+		saynn("After this.. treatment.. you finally pull away from her.")
+
+		saynn("[say=pc]Now look at me.[/say]")
+
+		saynn("Artica's eyes.. are sparkling with joy.. she looks a bit high even. The girl establishes eye contact with you, her cheeks blushing deeply.")
+
+		saynn("Seconds pass.. but she doesn't look away. Hah. She is just squirming and moaning softly, her shorts bulging visibly.")
+
+		saynn("[say=pc]Good girl. You're not shy anymore, are you?[/say]")
+
+		saynn("[say=artica]Mhh-hm.. m-maybe.. ah..[/say]")
+
+		saynn("Well, the progress is obvious.")
+
+		addButton("Continue", "See what happens next", "")
 	if(state == "kinky_checkbeans"):
 		playAnimation(StageScene.CheckPaw, "tease", {pc="artica", npc="pc"})
 		saynn("You get up and crouch near Artica's bench.")
@@ -111,10 +201,6 @@ func _run():
 			addDisabledButton("Beans", "Artica is too shy to do this")
 		else:
 			addButton("Beans", "Give her cyan beans a few rubs", "kinky_checkpaw_beans")
-		if (pawslut < 0.2):
-			addDisabledButton("Lick beans", "Artica's is not into paws enough yet")
-		else:
-			addButton("Lick beans", "Give her beans some treatment with your tongue", "kinky_checkpaw_lick")
 	if(state == "kinky_checkpaw_ankle"):
 		playAnimation(StageScene.CheckPaw, "check", {pc="artica", npc="pc"})
 		saynn("While still crouching, you reach your left hand out, waiting for Artica to do the next move.")
@@ -236,7 +322,6 @@ func _run():
 		playAnimation(StageScene.CheckPaw, "beans", {pc="pc", npc="artica"})
 		var isDigi = GM.pc.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsDigi)
 		var isHoofs = GM.pc.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsHoofs)
-		#var pawsname = ("feet" if (!isDigi  && !isHoofs) else ("paws" if isDigi else "hoofs"))
 		var pawname = ("foot" if (!isDigi  && !isHoofs) else ("paw" if isDigi else "hoof"))
 		saynn("Seeing that Artica seems to like this.. you wonder if she would be down to try to do it herself.")
 
@@ -256,7 +341,7 @@ func _run():
 
 		saynn("[say=artica]I can t-try..[/say]")
 
-		saynn("Hah. You switch places. Artica crouches in front of you, for once, and carefully lifts your left "+str(pawname)+". She inspects it from up close.. her eyes seem to be showing a lot of interest. She bites her lips.. before parting her maw wide and seemingly trying to fit your..")
+		saynn("Hah. You switch places. Artica crouches in front of you, for once, and carefully lifts your left "+str(pawname)+". She inspects it from up close.. her gaze seems intrigued.. almost hypnotized by the sight. She sniffs your "+str(pawname)+" and bites her lips.. before parting her maw wide and seemingly trying to fit your..")
 
 		saynn("[say=pc]You don't have to eat it, silly.[/say]")
 
@@ -279,6 +364,130 @@ func _run():
 		saynn("[say=pc]Good job, Artica.[/say]")
 
 		saynn("She chrrrs happily.")
+
+		addButton("Enough", "Enough fun", "")
+		if (pawslut < 0.3):
+			addDisabledButton("Let her lick", "Artica's is not into paws enough to do this")
+		else:
+			addButton("Let her lick", "Let her do what she wanted to do", "kinky_checkpaw_let_lick")
+		if (pawslut < 0.4):
+			addDisabledButton("Rub crotch", "Artica's is not into paws enough to do this")
+		else:
+			addButton("Rub crotch", "Rub her crotch with your foot", "kinky_checkpaw_rub_crotch")
+	if(state == "kinky_checkpaw_let_lick"):
+		playAnimation(StageScene.CheckPaw, "beans", {pc="pc", npc="artica"})
+		var isDigi = GM.pc.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsDigi)
+		var isHoofs = GM.pc.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsHoofs)
+		var pawname = ("foot" if (!isDigi  && !isHoofs) else ("paw" if isDigi else "hoof"))
+		var toesname = ("toes" if !isHoofs else "sole")
+		saynn("She is getting good at this.. maybe you can trust Artica with something even more.. kinky.")
+
+		saynn("[say=pc]You were trying to lick my "+str(pawname)+", weren't you?[/say]")
+
+		saynn("[say=artica]I don't.. k-know.. mm.m.. maybe?..[/say]")
+
+		saynn("Poor fluff's shyness shines through even now, after so many.. interactions between you and her.")
+
+		saynn("[say=pc]Feel free to lick it.[/say]")
+
+		saynn("You see sparks in her eyes.")
+
+		saynn("[say=artica]Oh?..[/say]")
+
+		saynn("[say=pc]If you don't want to, then let's..[/say]")
+
+		saynn("Without much thought, Artica brings your "+str(pawname)+" closer to her face. She lets it rub against her lips.. before she parts them and gives your "+str(toesname)+" a quick lick.")
+
+		saynn("It tickles.. in a cute way. You smile while watching Artica nuzzle and lick your "+str(pawname)+" more. Occasionally you feel her warm breath as she takes short pauses to sniff it.")
+
+		saynn("[say=artica]Nh-hh..h..[/say]")
+
+		saynn("Your hand lands on her hair and gentle strokes it, one of your digits reaches out to play with the dream catcher attached to her ear.")
+
+		saynn("[say=pc]Good.. girl..[/say]")
+
+		saynn("Her tongue travels along your "+str(pawname)+".. your "+str(toesname)+".. now with more confidence. The fluff seems to be enjoying this quite a bit.. you notice her shorts bulging as she completely gives in to this.")
+
+		saynn("You start getting strange looks from inmates around.. so you should probably wrap this up for now.")
+
+		saynn("[say=pc]You may stop now.[/say]")
+
+		saynn("Artica nods and pulls away from your leg.")
+
+		saynn("[say=artica]..t-thank.k.. you..[/say]")
+
+		saynn("Thank you?")
+
+		addButton("Continue", "See what happens next", "")
+	if(state == "kinky_checkpaw_rub_crotch"):
+		playAnimation(StageScene.CheckPaw, "crotch", {pc="pc", npc="artica"})
+		var isDigi = GM.pc.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsDigi)
+		var isHoofs = GM.pc.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsHoofs)
+		var pawname = ("foot" if (!isDigi  && !isHoofs) else ("paw" if isDigi else "hoof"))
+		var toesname = ("toes" if !isHoofs else "sole")
+		saynn("[say=pc]I want to reward you, Artica.[/say]")
+
+		saynn("[say=artica]Oh?..[/say]")
+
+		saynn("You gently push her hands away with your leg.. before reaching for her crotch, your "+str(pawname)+" follows her thigh.. before gently bumping into.. something that is hiding under her shorts.")
+
+		saynn("[say=pc]You seem to be packing, girl..[/say]")
+
+		saynn("[say=artica]Eep..[/say]")
+
+		saynn("She instinctively closes her legs.. but you keep thrusting your "+str(pawname)+" between them, your "+str(toesname)+" brushing against the growing bump.")
+
+		saynn("[say=artica]Nnn..ngh.. too m-much..[/say]")
+
+		saynn("[say=pc]Should I stop~?[/say]")
+
+		saynn("You don't hear a response to your question.. just Artica's cute noises as you keep stroking her crotch through the shorts.. the friction of her inner thighs makes it pretty tiring though.")
+
+		saynn("[say=pc]Open your legs. Now.[/say]")
+
+		saynn("Artica whines.. but obeys your order and parts her legs, opening up a great view of her bulging shorts.. with 2 wet spots on them.. The fluff blushes deeply while you resume the teasing, your "+str(pawname)+" stroking that bump along its hidden length.")
+
+		saynn("Poor girl is squirming under your onslaught.")
+
+		saynn("[say=artica]Ah.. ah..ah-h.. p..please.. Nn..[/say]")
+
+		saynn("She desperately tries to stay quiet to not attract any extra attention.. not very successfully.")
+
+		saynn("[say=pc]Do you like this?[/say]")
+
+		saynn("[say=artica]e..eep.. oh..ah-h.. Ngh-h.. so i-intense..[/say]")
+
+		saynn("Your leg keeps stroking her bulge relentlessly.. your "+str(toesname)+" rubbing the wet spot that only gets more wet from that..")
+
+		saynn("[say=pc]Artica? Do you like this?[/say]")
+
+		saynn("[say=artica]Nh-h.. I-I.. I'm.. n-nh-h.not.. s-sure.. ah..[/say]")
+
+		saynn("Pff. You're not sure if she is lying or just being incredibly shy. Suddenly, you stop moving your "+str(pawname)+", stealing the source of pleasure.")
+
+		saynn("[say=artica]H-hey.. hnh-hh-h.. ah-h.. p-please.. h-h.. y-yes..[/say]")
+
+		saynn("[say=pc]Yes what?[/say]")
+
+		saynn("She starts humping your leg.. so cute. But you don't let her get off, pulling your "+str(pawname)+" away as she does that.")
+
+		saynn("[say=artica]P-p-please-e.. ah.. I d-do like this..[/say]")
+
+		saynn("[say=pc]You like what?[/say]")
+
+		saynn("She tries to catch your leg with her hands.. but you push them away.")
+
+		saynn("[say=artica]I like.. paws.. feet.. hoofs.. y-yes.. nh-h.n.nn..[/say]")
+
+		saynn("Aww. Finally. You stroke a girl's crotch a bit more.. before pushing your "+str(pawname)+" into her face.. where she starts to nuzzle it eagerly, the scent making her bulge throbbing.")
+
+		saynn("As you do that, you start getting strange looks from other inmates.")
+
+		saynn("[say=pc]Good girl. But let's not attract any more attention.. and avoid leaving any messes.[/say]")
+
+		saynn("[say=artica]Huff-f.. nh..[/say]")
+
+		saynn("You let the girl cooldown and give her lots of pats.")
 
 		addButton("Continue", "See what happens next", "")
 	if(state == "ask_leg"):
@@ -467,6 +676,10 @@ func _react(_action: String, _args):
 		#getModule("ArticaModule").removeShy(0.03)
 		#getModule("ArticaModule").addPawslut(0.03)
 
+	if(_action == "kinky_force_sniff"):
+		processTime(10*60)
+		getModule("ArticaModule").removeShy(1.0)
+
 	if(_action == "kinky_checkpaw_ankle"):
 		processTime(15*60)
 		getModule("ArticaModule").removeShy(0.05)
@@ -476,15 +689,20 @@ func _react(_action: String, _args):
 		getModule("ArticaModule").removeShy(0.05)
 		getModule("ArticaModule").addPawslut(0.03)
 
-	if(_action == "kinky_checkpaw_lick"):
-		processTime(15*60)
-		getModule("ArticaModule").removeShy(0.05)
-		getModule("ArticaModule").addPawslut(0.06)
-
 	if(_action == "kinky_checkpaw_switch"):
 		processTime(15*60)
 		getModule("ArticaModule").removeShy(0.05)
 		getModule("ArticaModule").addPawslut(0.06)
+
+	if(_action == "kinky_checkpaw_let_lick"):
+		processTime(15*60)
+		getModule("ArticaModule").removeShy(0.05)
+		getModule("ArticaModule").addPawslut(0.1)
+
+	if(_action == "kinky_checkpaw_rub_crotch"):
+		processTime(15*60)
+		getModule("ArticaModule").removeShy(0.1)
+		getModule("ArticaModule").addPawslut(0.1)
 
 	if(_action == "leg_otherways"):
 		getModule("ArticaModule").removeShy(0.05)
