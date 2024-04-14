@@ -8,6 +8,7 @@ func getFlags():
 		"s6AskedLeg": flag(FlagType.Bool),
 		"s6AskedRisha": flag(FlagType.Bool),
 		"s6AskedPaws": flag(FlagType.Bool),
+		"s6AskedMood": flag(FlagType.Bool),
 	}
 
 func _init():

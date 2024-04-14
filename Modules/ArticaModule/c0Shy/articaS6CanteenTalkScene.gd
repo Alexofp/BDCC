@@ -3,6 +3,7 @@ extends SceneBase
 var isFirstTime = false
 var shyness = 0.0
 var pawslut = 0.0
+var grabCollar = false
 
 func _init():
 	sceneID = "articaS6CanteenTalkScene"
@@ -57,7 +58,7 @@ func _run():
 			saynn(""+str(getModule("ArticaModule").getPawslutString())+"")
 
 		if (shyness <= 0.0):
-			saynn("Huh.. You notice that Artica is doing something under the table.")
+			saynn("Huh.. You notice that Artica's hands are under the table, doing something.")
 
 		if (!getFlag("ArticaModule.s6AskedLeg")):
 			addButton("How is leg", "Ask Artica how is her leg doing", "ask_leg")
@@ -66,6 +67,9 @@ func _run():
 				addButton("Risha", "Ask if Risha is still bullying Artica", "ask_risha")
 		if (!getFlag("ArticaModule.s6AskedRisha")):
 			addButton("Paws", "Ask Artica if she has interest in paws", "ask_paws")
+		if (getFlag("ArticaModule.s6AskedRisha") && getFlag("ArticaModule.s6AskedPaws")):
+			if (!getFlag("ArticaModule.s6AskedMood")):
+				addButton("How's mood", "Just ask Artica about her overall mood", "ask_mood")
 		addButton("Get kinky", "Show a list of lewd stuff that you can try to do", "get_kinky_menu")
 		addButton("Enough chat", "Time to go", "endthescene")
 	if(state == "get_kinky_menu"):
@@ -76,8 +80,52 @@ func _run():
 			saynn("Your actions seem to help Artica to open up. What do you want to do with her?")
 
 		addButton("Check beans", "Make sure Artica's hind leg is still alright", "kinky_checkbeans")
+		addButton("Headpats", "Give Artica some headpats. For no reason in particular", "kinky_headpats")
 		addButton("Force her", "The best way to force Artica out of her comfort zone is by shoving her face into your crotch!", "do_force_her")
 		addButton("Back", "Go to the previous menu", "")
+	if(state == "kinky_headpats"):
+		playAnimation(StageScene.Grope, "pat", {pc="artica", npc="pc"})
+		if (shyness > 0.7):
+			saynn("You get up and approach Artica before giving her a pat on the head.")
+
+			saynn("[say=artica]Eep..[/say]")
+
+			saynn("She leans to the side and looks at you, confused and embarrassed.")
+
+			saynn("[say=artica]W-wha?..[/say]")
+
+			saynn("[say=pc]Just felt like giving you a pat, calm down fluff.[/say]")
+
+			saynn("[say=artica]Oh-h..[/say]")
+
+			saynn("Maybe you just need to pat her more to help her get used to it.")
+
+		elif (shyness > 0.5):
+			saynn("You approach Artica and decide to give her a small headpat.")
+
+			saynn("[say=artica]Yip..[/say]")
+
+			saynn("Her ears flick slightly as you give her a few more.")
+
+			saynn("At least she doesn't recoil away.")
+
+		elif (shyness > 0.3):
+			saynn("You approach Artica and decide to give her a few pats on the head. The fluff smiles and leans into the pats, chrrrrring contently as you deliver one pat after another.")
+
+			saynn("[say=pc]Adorable.[/say]")
+
+			saynn("Her ears flick slightly as you give her a few more.")
+
+			saynn("She seems to be getting used to this.")
+
+		else:
+			saynn("You approach Artica and give her a few good pats on the head. The fluff smiles and leans into the pats, chrrrrring contently as you deliver one pat after another, her ears bob up and down.")
+
+			saynn("[say=artica]N-nya-ah..[/say]")
+
+			saynn("Your free hand finds one of her ears and starts scritching behind it. That causes Artica's hind paw to move involuntarily. Looking at it, you find a perfect scratching spot.. Headpats coupled with scritches makes the fluff moan softly, her leg kicking the floor!")
+
+		addButton("Continue", "See what happens next", "")
 	if(state == "do_force_her"):
 		playAnimation(StageScene.ChairCrotchSniff, "prepare", {pc="artica", npc="pc"})
 		saynn("You know exactly what will make Artica stop being so shy. You doubt that she will be down for it.. feels like she never is. So you just gotta force a little.")
@@ -96,7 +144,7 @@ func _run():
 
 		saynn("[say=artica]Oh..[/say]")
 
-		saynn("Artica starts to look up at you again, gradually shifting her gaze higher and higher.. until it collides with your stern one. Her deep green eyes are so.. cute.")
+		saynn("Artica starts to look up at you again, gradually shifting her gaze higher and higher.. until it collides with your stern one. Her deep cyan eyes are so.. cute.")
 
 		saynn("At first, she is doing alright, holding eye contact. But very soon, her body begins to sway from side to side a bit.. her tail curling around the chair.. her hind paws standing on curling toes.. her eyes blinking a lot..")
 
@@ -149,7 +197,7 @@ func _run():
 
 		saynn("Artica is making cute muffled noises. The lack of resistance allows you to start grinding her face across your crotch.. making sure that your scent will stay with her for a while.")
 
-		saynn("[say=artica]..nn-nh-h.. n-nya-ah..[/say]")
+		saynn("[say=artica]..nn-nh-h.. n-nya-ah.. gods..[/say]")
 
 		saynn("The more she breathes it in, the more she melts from it.")
 
@@ -465,7 +513,7 @@ func _run():
 
 		saynn("Pff. You're not sure if she is lying or just being incredibly shy. Suddenly, you stop moving your "+str(pawname)+", stealing the source of pleasure.")
 
-		saynn("[say=artica]H-hey.. hnh-hh-h.. ah-h.. p-please.. h-h.. y-yes..[/say]")
+		saynn("[say=artica]H-hey.. hnh-hh-h.. ah-h.. p-please.. h-h.. y-yes.. oh god..[/say]")
 
 		saynn("[say=pc]Yes what?[/say]")
 
@@ -635,11 +683,11 @@ func _run():
 
 		saynn("[say=pc]What, gonna try to bite me~?[/say]")
 
-		saynn("You see some obvious signs of fear in her green eyes. Poor fluff is shaking.")
+		saynn("You see some obvious signs of fear in her cyan eyes. Poor fluff is shaking.")
 
 		saynn("[say=artica]N-n.no..[/say]")
 
-		saynn("Her shorts are bulging..")
+		saynn("Her shorts are bulging in the crotch region..")
 
 		saynn("[say=pc]Yeah, you know better than that~. Relax. For some reason I feel like you will enjoy most of the things that I will do to you.[/say]")
 
@@ -651,7 +699,227 @@ func _run():
 
 		saynn("Artica tilts her head.")
 
-		saynn("[say=artica]..Do I?..[/say]")
+		if (pawslut > 0.3):
+			saynn("[say=artica]..Do I?.. Maybe only a little bit..[/say]")
+
+		else:
+			saynn("[say=artica]..Do I?.. I'm not really sure..[/say]")
+
+		saynn("While glancing under the table, you can notice her rubbing her hind paws against each other.")
+
+		addButton("Shrug", "Maybe you were wrong", "ask_paws_shrug")
+		addButton("Tease her", "Play with the fluff", "ask_paws_tease")
+	if(state == "ask_paws_shrug"):
+		saynn("You shrug.")
+
+		saynn("[say=pc]Just kinda felt like that. Maybe I'm wrong.[/say]")
+
+		saynn("Artica lowers her gaze and copies your shrug.")
+
+		saynn("[say=artica]Maybe..[/say]")
+
+		addButton("Continue", "See what happens next", "enough_talk")
+	if(state == "ask_paws_tease"):
+		playAnimation(StageScene.PawJobUnderTable, "tease", {npc="pc", pc="artica"})
+		var isDigi = GM.pc.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsDigi)
+		var isHoofs = GM.pc.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsHoofs)
+		var pawname = ("foot" if (!isDigi  && !isHoofs) else ("paw" if isDigi else "hoof"))
+		var toesname = ("toes" if !isHoofs else "sole")
+		saynn("Carefully, you slide your "+str(pawname)+" closer to Artica's, your "+str(toesname)+" pressing her two hind paws into the floor, trapping them.")
+
+		saynn("[say=artica]..eep..[/say]")
+
+		saynn("Then you proceed to gently knead her toes like that, sneakily, under the table.. all the while watching her cute shy face.")
+
+		saynn("[say=pc]Something is wrong?[/say]")
+
+		saynn("She shakes her head, making her dream catcher dangle.")
+
+		saynn("[say=artica]..n.no.. all good..[/say]")
+
+		saynn("That sounds like an invitation.")
+
+		addButton("Tease more", "", "ask_paws_teasemore")
+	if(state == "ask_paws_teasemore"):
+		playAnimation(StageScene.PawJobUnderTable, "rub", {npc="pc", pc="artica"})
+		var isDigi = GM.pc.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsDigi)
+		var isHoofs = GM.pc.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsHoofs)
+		var pawname = ("foot" if (!isDigi  && !isHoofs) else ("paw" if isDigi else "hoof"))
+		var toesname = ("toes" if !isHoofs else "sole")
+		saynn("Without saying anything, you slide your "+str(pawname)+" higher, following the curves of her digitigrade leg.")
+
+		saynn("You tilt your head slightly and smile as your "+str(toesname)+" brush against Artica's inner thighs through the cloth of her shorts, getting dangerously close to a source of heat..")
+
+		saynn("[say=artica]Kghm.. h-hh..[/say]")
+
+		saynn("[say=pc]Yes, Artica?[/say]")
+
+		saynn("As soon as she parts her lips to say something, you purposefully rub her crotch a little with your "+str(pawname)+"..")
+
+		saynn("[say=artica]Ah~..[/say]")
+
+		saynn("You can't help but to giggle.. which only works to make her cheeks even more red.")
+
+		saynn("[say=pc]You don't have to tell me anything, your body already did~.[/say]")
+
+		addButton("Enough", "That was fun", "enough_talk")
+		addButton("Rub more", "Make that girl squiiirm", "ask_paws_teaseevenmore")
+	if(state == "ask_paws_teaseevenmore"):
+		playAnimation(StageScene.PawJobUnderTable, "fast", {npc="pc", pc="artica"})
+		var isDigi = GM.pc.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsDigi)
+		var isHoofs = GM.pc.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsHoofs)
+		var pawname = ("foot" if (!isDigi  && !isHoofs) else ("paw" if isDigi else "hoof"))
+		var toesname = ("toes" if !isHoofs else "sole")
+		saynn("Why not tease the girl even more, your "+str(pawname)+" gently lands on Artica's crotch and proceeds to rub it with its "+str(toesname)+".")
+
+		saynn("[say=artica]Nh-h..[/say]")
+
+		saynn("The more you do it, the more you feel something growing behind those shorts. You find its tip.. and focus on stroking it specifically.")
+
+		saynn("[say=artica]Ah..h.hah..[/say]")
+
+		saynn("Cute little moans leave her maw as she parts her legs more, her own hind paws curling and sprawling its toes, her body squirming from so much teasing.")
+
+		saynn("[say=pc]You clearly like it~.[/say]")
+
+		saynn("Inmates are walking past with trays full of prisoner food. Seeing them makes Artica cover her mouth and moan into her paw, her eyes closed.. as you just keep stroking that.. hard.. drippy.. bump.. between her legs.")
+
+		saynn("[say=artica]nh-h.. ah.. so.. intense.. gods.. p-please..[/say]")
+
+		saynn("You could stop there..")
+
+		addButton("Enough", "That was fun", "enough_talk")
+		addButton("Keep at it", "See what happens", "ask_paws_cum")
+	if(state == "ask_paws_cum"):
+		saynn("Whatever it is that's in her pants.. it's grown to its full size, putting so much pressure onto the cloth that you begin to see some cyan through it. The girl is dripping eagerly, that bump that you are teasing is now throbbing softly.. while the fluff is actively squirming on that bench.")
+
+		saynn("[say=artica]I'm.. ah..ah-h.. I'm g-gon.. p-please.. oh g-god.. ah..[/say]")
+
+		saynn("You just keep smiling and stroking that bulge.. until Artica suddenly arches her back.")
+
+		saynn("[say=artica]NHh-hH!..[/say]")
+
+		saynn("Something in her shorts is throbbing wildly, the poor girl is struggling to contain herself, her clawed hind paws scratching the concrete, her tail spazzing out in the air, the dream catcher attached to her flicking ear is ringing softly.")
+
+		saynn("[say=artica]Ah!.. ah.. Ahh-h..[/say]")
+
+		saynn("Her body tries to arch itself but the bench and the table prevent that, her lusty eyes roll up high, her paws stop covering her moans and instead land on her twitching throbbing crotch..")
+
+		saynn("[say=artica]I.. I.. I n-n.need to.. nh-h..[/say]")
+
+		saynn("As soon as she can, Artica springs up and takes off towards the nearest bathroom.")
+
+		saynn("Hah.")
+
+		saynn("You look under the table.. Ooh.. What a mess.. Better switch to another table.")
+
+		saynn("You do that and wait for Artica to come back.. She is still panting.")
+
+		saynn("[say=artica]Uh.. ah..[/say]")
+
+		saynn("[say=pc]You're okay, fluff?[/say]")
+
+		saynn("She keeps her eyes low.")
+
+		saynn("[say=artica]Y-yeah.. just n-needed to..[/say]")
+
+		saynn("[say=pc]I know. I know~.[/say]")
+
+		saynn("Well, that was fun.")
+
+		addButton("Continue", "See what happens next", "enough_talk")
+	if(state == "ask_mood"):
+		saynn("[say=pc]So, how is your mood, overall? Settled in by now?[/say]")
+
+		saynn("Artica nods softly.")
+
+		saynn("[say=artica]Yeah.. bit by bit, haha.[/say]")
+
+		saynn("She says that.. but you still notice her body swaying slightly, her tail brushing the floor, her hind paws exploring the cold floor.. her nervousness.")
+
+		saynn("[say=artica]I've been sitting here mostly.. maybe it's time to explore more..[/say]")
+
+		saynn("[say=pc]Not the worst idea.[/say]")
+
+		saynn("[say=artica]I'm just.. still kinda lost..[/say]")
+
+		saynn("This would be a perfect opportunity to show her around!")
+
+		addButton("Grab her hand", "Show her around the prison", "ask_mood_hand")
+		addButton("Grab her collar", "Show her around the prison", "ask_mood_collar")
+	if(state == "ask_mood_hand"):
+		playAnimation(StageScene.Duo, "stand", {npc="artica"})
+		aimCameraAndSetLocName("main_punishment_spot")
+		if (grabCollar):
+			saynn("Grabbing hands with people is too unsanitary so you just slip your digits under Artica's collar and pull her out of the canteen and into the main hall!")
+
+			saynn("[say=artica]Eeep![/say]")
+
+		else:
+			saynn("Without saying much, you grab Artica's hand and pull her out of the canteen and into the main hall!")
+
+			saynn("[say=artica]Eep..[/say]")
+
+		saynn("Together, you climb to the main platform that has all the punishment devices with a bunch of benches nearby.")
+
+		saynn("Artica inspects the sturdy-looking metal stocks. She tries but she can't even lift the top part of them.")
+
+		if (grabCollar):
+			saynn("[say=pc]If you misbehave, you might end up in these.[/say]")
+
+			saynn("[say=artica]Really?..[/say]")
+
+			saynn("[say=pc]Yeah. Lilac sluts end up there too occasionally, don't worry.[/say]")
+
+			saynn("That makes her blush, fluffy tail curling around her leg.")
+
+		else:
+			saynn("[say=pc]If you misbehave, you might end up in these.[/say]")
+
+			saynn("[say=artica]Really?..[/say]")
+
+			saynn("[say=pc]Yeah. Just don't be too cocky with the staff or other inmates and you will be fine.[/say]")
+
+			saynn("She nods subtly and keeps eyeing out the device, her tail curling around her leg.")
+
+		saynn("You also point at where the bathroom, laundry and a vendomat are. Time to move on.")
+
+		addButton("Medical", "Show Artica where the medical wing is", "ask_mood_show_medical")
+	if(state == "ask_mood_show_medical"):
+		aimCameraAndSetLocName("med_lobby_start")
+		if (grabCollar):
+			saynn("You grab Artica's collar again and bring her into the main lift.")
+
+			saynn("[say=artica]Eep ..don't have to.. g-grab my collar..[/say]")
+
+			saynn("[say=pc]You don't like that?[/say]")
+
+			saynn("She tugs on it.")
+
+			saynn("[say=artica]I.. um..[/say]")
+
+			saynn("The lift arrives on the lower floor. You grab Artica's collar and pull her out into the lobby.")
+
+			if (!getFlag("ArticaModule.s5GaveMassage", false)):
+				saynn("[say=pc]Anyway, this is the medical. We were here already but I'm showing it to you again, just in case.[/say]")
+
+			else:
+				saynn("[say=pc]Anyway, this is the medical. Probably weren't here yet.[/say]")
+
+			saynn("She looks around.")
+
+			saynn("[say=artica]Mhm..[/say]")
+
+			saynn("[say=pc]A place where you get your gaping used holes fixed up and your broken mind repaired.[/say]")
+
+			saynn("[say=artica]Oh.. It can get that bad?..[/say]")
+
+			saynn("Your smile says a lot.")
+
+			saynn("[say=artica]Eep..[/say]")
+
+		else:
+			saynn("You grab Artica's hand again and bring her to the main lift. While it's busy moving you down to the right floor, the fluff keeps swaying from side to side and standing on her toes, curling them up.")
 
 
 func _react(_action: String, _args):
@@ -671,10 +939,17 @@ func _react(_action: String, _args):
 		setFlag("ArticaModule.s6AskedRisha", true)
 		getModule("ArticaModule").removeShy(0.1)
 
+	if(_action == "ask_mood"):
+		setFlag("ArticaModule.s6AskedMood", true)
+
 	if(_action == "kinky_checkbeans"):
 		processTime(3*60)
 		#getModule("ArticaModule").removeShy(0.03)
 		#getModule("ArticaModule").addPawslut(0.03)
+
+	if(_action == "kinky_headpats"):
+		processTime(5*60)
+		getModule("ArticaModule").removeShy(0.07)
 
 	if(_action == "kinky_force_sniff"):
 		processTime(10*60)
@@ -722,6 +997,39 @@ func _react(_action: String, _args):
 	if(_action == "risha_youare"):
 		getModule("ArticaModule").removeShy(0.05)
 
+	if(_action == "ask_paws_shrug"):
+		getModule("ArticaModule").removeShy(0.05)
+
+	if(_action == "ask_paws_teasemore"):
+		processTime(5*60)
+		getModule("ArticaModule").removeShy(0.05)
+		getModule("ArticaModule").addPawslut(0.05)
+
+	if(_action == "ask_paws_teaseevenmore"):
+		processTime(5*60)
+		getModule("ArticaModule").removeShy(0.05)
+		getModule("ArticaModule").addPawslut(0.05)
+
+	if(_action == "ask_paws_cum"):
+		processTime(15*60)
+		getModule("ArticaModule").removeShy(0.05)
+		getModule("ArticaModule").addPawslut(0.1)
+
+	if(_action == "ask_mood_hand"):
+		processTime(10*60)
+		getModule("ArticaModule").removeShy(0.05)
+		grabCollar = false
+
+	if(_action == "ask_mood_collar"):
+		processTime(10*60)
+		getModule("ArticaModule").removeShy(0.1)
+		grabCollar = true
+		setState("ask_mood_hand")
+		return
+
+	if(_action == "ask_mood_show_medical"):
+		processTime(3*60)
+
 	setState(_action)
 
 func saveData():
@@ -730,6 +1038,7 @@ func saveData():
 	data["isFirstTime"] = isFirstTime
 	data["shyness"] = shyness
 	data["pawslut"] = pawslut
+	data["grabCollar"] = grabCollar
 
 	return data
 
@@ -739,3 +1048,4 @@ func loadData(data):
 	isFirstTime = SAVE.loadVar(data, "isFirstTime", false)
 	shyness = SAVE.loadVar(data, "shyness", 0.0)
 	pawslut = SAVE.loadVar(data, "pawslut", 0.0)
+	grabCollar = SAVE.loadVar(data, "grabCollar", false)
