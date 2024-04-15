@@ -873,6 +873,8 @@ func _run():
 
 			saynn("That makes her blush, fluffy tail curling around her leg.")
 
+			saynn("[say=artica]In my tribe, the worst way to punish someone is through.. banishment.[/say]")
+
 		else:
 			saynn("[say=pc]If you misbehave, you might end up in these.[/say]")
 
@@ -881,6 +883,8 @@ func _run():
 			saynn("[say=pc]Yeah. Just don't be too cocky with the staff or other inmates and you will be fine.[/say]")
 
 			saynn("She nods subtly and keeps eyeing out the device, her tail curling around her leg.")
+
+			saynn("[say=artica]In my tribe, the worst way to punish someone is through.. banishment.[/say]")
 
 		saynn("You also point at where the bathroom, laundry and a vendomat are. Time to move on.")
 
@@ -896,7 +900,7 @@ func _run():
 
 			saynn("She tugs on it.")
 
-			saynn("[say=artica]I.. um..[/say]")
+			saynn("[say=artica]I.. um.. I'm not..[/say]")
 
 			saynn("The lift arrives on the lower floor. You grab Artica's collar and pull her out into the lobby.")
 
@@ -904,7 +908,7 @@ func _run():
 				saynn("[say=pc]Anyway, this is the medical. We were here already but I'm showing it to you again, just in case.[/say]")
 
 			else:
-				saynn("[say=pc]Anyway, this is the medical. Probably weren't here yet.[/say]")
+				saynn("[say=pc]Anyway, this is the medical. Probably your first time here?[/say]")
 
 			saynn("She looks around.")
 
@@ -918,9 +922,206 @@ func _run():
 
 			saynn("[say=artica]Eep..[/say]")
 
-		else:
-			saynn("You grab Artica's hand again and bring her to the main lift. While it's busy moving you down to the right floor, the fluff keeps swaying from side to side and standing on her toes, curling them up.")
+			saynn("You also point to your right.")
 
+			saynn("[say=pc]Nursery. Prepare to go there often.[/say]")
+
+			saynn("[say=artica]..why?[/say]")
+
+			saynn("[say=pc]You will see.[/say]")
+
+			saynn("Artica blinks a lot. She might be regretting not staying in the canteen by now.")
+
+			saynn("[say=artica]It all looks.. fancy. We didn't have anything like this.. just medical plants and.. rituals..[/say]")
+
+		else:
+			saynn("You grab Artica's hand again and bring her to the main lift. While it's busy moving you down to the right floor, the fluff keeps swaying from side to side and standing on her toes, her hand squeezing yours occasionally.")
+
+			saynn("[say=artica]Do we have to.. hold hands?..[/say]")
+
+			saynn("[say=pc]You don't like that?[/say]")
+
+			saynn("[say=artica]A bit too.. strange.. haha.[/say]")
+
+			saynn("The lift arrives on the lower floor, allowing you to step out into the busy medical wing lobby.")
+
+			if (!getFlag("ArticaModule.s5GaveMassage", false)):
+				saynn("[say=pc]Anyway, this is the medical. We were here already but I'm showing it to you again, just in case.[/say]")
+
+			else:
+				saynn("[say=pc]Anyway, this is the medical. Probably your first time here?[/say]")
+
+			saynn("She looks around.")
+
+			saynn("[say=artica]Mhm..[/say]")
+
+			saynn("[say=pc]If something hurts.. or if you got something gaping, you go here.[/say]")
+
+			saynn("[say=artica]Gaping.. A gaping wound?[/say]")
+
+			saynn("[say=pc]Uh.. sure.[/say]")
+
+			saynn("[say=artica]It can get that bad?..[/say]")
+
+			saynn("Your silent nod says a lot.")
+
+			saynn("[say=artica]Eep..[/say]")
+
+			saynn("You also point to your right.")
+
+			saynn("[say=pc]Nursery. If you're pregnant, you go there.[/say]")
+
+			saynn("[say=artica]..pregnant?[/say]")
+
+			saynn("[say=pc]Yeah.[/say]")
+
+			saynn("Artica blinks a lot. She might be regretting not staying in the canteen by now.")
+
+			saynn("[say=artica]It all looks.. fancy. We didn't have anything like this.. just medical plants and.. rituals..[/say]")
+
+		addButton("Workshop", "Show her the workshop", "ask_mood_workshop")
+	if(state == "ask_mood_workshop"):
+		aimCameraAndSetLocName("eng_workshop")
+		if (grabCollar):
+			saynn("You grab Artica's collar again and pull her back into the lift. This time she idly tries to pry your digits off of it.. but you're not letting go that easy.")
+
+			saynn("The doors open.")
+
+			saynn("[say=artica]Oh.. mine shafts.. You're gonna make me work?[/say]")
+
+			saynn("[say=pc]There are better ways to make you work. No, I'm showing you something else.[/say]")
+
+		else:
+			saynn("You grab Artica's hand again and pull her back into the lift. This time she idly tries to free her paw.")
+
+			saynn("The doors open.")
+
+			saynn("[say=artica]Oh.. mine shafts.. You're gonna make me work?[/say]")
+
+			saynn("[say=pc]No, don't worry. I'm showing you something else.[/say]")
+
+		saynn("You bring Artica to the workshop, a place with a bunch of work benches and engineers using them.")
+
+		saynn("[say=artica]More equipment that we could only dream about.. We mostly just crafted things with our hands..[/say]")
+
+		saynn("[say=pc]Well, welcome to the space age. How did you end up here even if you never saw something like this?[/say]")
+
+		saynn("[say=artica]It's.. a.. a long..[/say]")
+
+		saynn("The noises of all the machinery makes it hard to hear her. Better to move on.")
+
+		addButton("Yard", "Show her the green area", "ask_mood_yard")
+	if(state == "ask_mood_yard"):
+		aimCameraAndSetLocName("yard_vaulthere")
+		if (grabCollar):
+			saynn("Your digits under her collar, you bring her up to the main floor.. This time you head towards the prison's yard.")
+
+		else:
+			saynn("Your hand holding hers, you bring her up to the main floor.. This time you head towards the prison's yard.")
+
+		saynn("[say=artica]Ohh-h.. This feels much more.. familiar to me..[/say]")
+
+		saynn("You follow the stone pathway, Artica fascinated by the pit-pat noises that her hind paws make when traveling over the stone tiles.")
+
+		saynn("[say=artica]Brings back so many memories..[/say]")
+
+		saynn("You show her the gym area.. but she doesn't seem to be interested in that. Instead, she draws you in closer to one of the deadends. It's not a deadend per say.. but there is no real way for you to scale this wall and get to the higher level.")
+
+		saynn("[say=artica]I like this scent.. What is up there?..[/say]")
+
+		saynn("[say=pc]Greenhouses I think. They grow stuff there. Inmates are not allowed.[/say]")
+
+		saynn("[say=artica]Oh.. aw..[/say]")
+
+		if (grabCollar):
+			saynn("[say=pc]You can try sneaking in. Just don't complain later that you ended up in stocks.[/say]")
+
+		else:
+			saynn("[say=pc]You can try sneaking in. But you might get caught.[/say]")
+
+		saynn("Artica nods and starts heading back, following the many pathways. Her ears perk as she hears a noise of running water.")
+
+		saynn("[say=artica]Let's go there, please..[/say]")
+
+		saynn("Might as well.")
+
+		addButton("Waterfall", "Go check it out", "ask_mood_waterfall")
+	if(state == "ask_mood_waterfall"):
+		aimCameraAndSetLocName("yard_waterfall")
+		GM.pc.setLocation("yard_waterfall")
+		playAnimation(StageScene.Duo, "sit", {npc="artica", flipNPC=true})
+		saynn("Artica rushes to the waterfall as soon as she sees it. There is a little water pond before it that the fluff stands near. She gets one of her hind paws wet, wiggling her toes in it.")
+
+		saynn("[say=pc]You like waterfalls that much?[/say]")
+
+		saynn("You decide to sit on the bench that's nearby.")
+
+		saynn("[say=artica]There is something.. hypnotic.. about running water. The sound and how it looks.. But.. I also just miss my tribe..[/say]")
+
+		saynn("[say=pc]Did something happen to it?[/say]")
+
+		saynn("Artica looks at you for a second and then frowns and lowers her gaze. Her hand reaches to rub her little dreamcatcher that's attached to her ear.")
+
+		saynn("[say=artica]Yes. The balance.. it was disturbed.. destroyed.. and Gods are not happy about that..[/say]")
+
+		saynn("Huh. She seems.. upset. Strange.")
+
+		saynn("[say=pc]Balance?[/say]")
+
+		saynn("[say=artica]Right.. um.. I am one of Jogauni.. We are the guardians of the integral forces, the keepers of all things basic and vital.. Our Gods gave a task to us.. bring balance to the unordered chaos.[/say]")
+
+		saynn("Artica watches the waterfall.. standing completely still. No usual fidgeting.. no swaying to the sides.")
+
+		saynn("[say=artica]I come from a water tribe.. But there are also 7 others: fire, air, earth, shadow, light, metal and wood.[/say]")
+
+		saynn("Some of these seem to be opposites.. but at same time.. Some of them also compliment each other.")
+
+		saynn("[say=artica]We are.. the preservers.. of elementals.. Used to be.. Before our planet was found.. and colonized.[/say]")
+
+		saynn("Makes sense. AlphaCorp is not exactly known for their.. care for the environment.")
+
+		saynn("[say=artica]Spaceships arrived.. Towns were built.. Resources were exploited.. Jogauni.. were too.. Our connection with nature.. our connection with our elements.. severed.[/say]")
+
+		saynn("[say=pc]Technology isn't inherently bad.[/say]")
+
+		saynn("[say=artica]I'm not saying it is.. Everything is well in moderation.. But constant expansion ruined the careful balance that Jogauni were trying to achieve.. We failed our Gods.[/say]")
+
+		saynn("She looks at you again.")
+
+		saynn("[say=artica]I fought back.. The only way I knew how.. It was fun actually. But now I'm here. Away from my tribe and my family.[/say]")
+
+		saynn("Her paw reaches to her dreamcatcher again.")
+
+		saynn("[say=artica]..my last memory.[/say]")
+
+		addButton("Fought how?", "She is wearing a lilac uniform after all", "ask_mood_waterfall_foughthow")
+		addButton("Water tribe?", "Artica doesn't exactly look like she is from the water tribe", "ask_mood_waterfall_watertribe")
+		addButton("Nod", "Don't ask any extra questions", "ask_mood_waterfall_nod")
+	if(state == "ask_mood_waterfall_foughthow"):
+		saynn("[say=pc]You were trying to fight an entire corporation? You had weapons to do it?[/say]")
+
+		saynn("[say=artica]..we did have swords.. staves..[/say]")
+
+		saynn("Not exactly the kind of weapons that you need to fight spaceships, huh.")
+
+		saynn("[say=artica]We almost shoved them back too.. Jogauni consists of 8 different, sometimes opposite, tribes.. But we managed to combine our efforts. Our 8 elementals were our weapons.[/say]")
+
+		saynn("She shrugs.")
+
+		saynn("[say=artica]Sadly, they knew where to strike. They brought disarray.. turned the tribes against each other..[/say]")
+
+		saynn("You look at her lilac inmate uniform.")
+
+		saynn("[say=pc]How did you fight back though? I'm curious.[/say]")
+
+		saynn("Artica scratches behind her ear and under her chin.")
+
+		saynn("[say=artica]Um.. You know.. Fighting propaganda.. spreading our own message to all the Jogauni.. I wasn't gonna hide.. so I got caught eventually.. I don't regret it though.. was fun while it lasted..[/say]")
+
+		saynn("Informational war is sometimes more effective than a normal one.")
+
+		addButton("Water tribe?", "Artica doesn't exactly look like she is from the water tribe", "ask_mood_waterfall_watertribe")
+		addButton("Nod", "Don't ask any extra questions", "ask_mood_waterfall_nod")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -1029,6 +1230,15 @@ func _react(_action: String, _args):
 
 	if(_action == "ask_mood_show_medical"):
 		processTime(3*60)
+
+	if(_action == "ask_mood_workshop"):
+		processTime(15*60)
+
+	if(_action == "ask_mood_yard"):
+		processTime(10*60)
+
+	if(_action == "ask_mood_waterfall"):
+		processTime(5*60)
 
 	setState(_action)
 
