@@ -4,6 +4,7 @@ var isFirstTime = false
 var shyness = 0.0
 var pawslut = 0.0
 var grabCollar = false
+var willHappenAnyway = false
 
 func _init():
 	sceneID = "articaS6CanteenTalkScene"
@@ -1094,8 +1095,8 @@ func _run():
 
 		saynn("[say=artica]..my last memory.[/say]")
 
-		addButton("Fought how?", "She is wearing a lilac uniform after all", "ask_mood_waterfall_foughthow")
-		addButton("Water tribe?", "Artica doesn't exactly look like she is from the water tribe", "ask_mood_waterfall_watertribe")
+		addButton("Fought how?", "Artica doesn't seem like a warrior", "ask_mood_waterfall_foughthow")
+		addButton("Religion", "Artica seems to be a religious fluff", "ask_mood_waterfall_relegion")
 		addButton("Nod", "Don't ask any extra questions", "ask_mood_waterfall_nod")
 	if(state == "ask_mood_waterfall_foughthow"):
 		saynn("[say=pc]You were trying to fight an entire corporation? You had weapons to do it?[/say]")
@@ -1104,24 +1105,148 @@ func _run():
 
 		saynn("Not exactly the kind of weapons that you need to fight spaceships, huh.")
 
-		saynn("[say=artica]We almost shoved them back too.. Jogauni consists of 8 different, sometimes opposite, tribes.. But we managed to combine our efforts. Our 8 elementals were our weapons.[/say]")
+		saynn("[say=artica]We almost shoved them back too.. Jogauni consists of 8 different, sometimes opposite, tribes. Imbalance of power.. creates a new power of sorts..[/say]")
 
 		saynn("She shrugs.")
 
 		saynn("[say=artica]Sadly, they knew where to strike. They brought disarray.. turned the tribes against each other..[/say]")
 
-		saynn("You look at her lilac inmate uniform.")
+		saynn("You look at her body.. she doesn't seem like a warrior who is capable of killing.")
 
 		saynn("[say=pc]How did you fight back though? I'm curious.[/say]")
 
 		saynn("Artica scratches behind her ear and under her chin.")
 
-		saynn("[say=artica]Um.. You know.. Fighting propaganda.. spreading our own message to all the Jogauni.. I wasn't gonna hide.. so I got caught eventually.. I don't regret it though.. was fun while it lasted..[/say]")
+		saynn("[say=artica]Um.. You know.. Fighting propaganda.. spreading our own message to all the Jogauni.. There was no point in hiding..[/say]")
 
-		saynn("Informational war is sometimes more effective than a normal one.")
+		saynn("Informational war is sometimes more effective than a normal one it seems.")
 
-		addButton("Water tribe?", "Artica doesn't exactly look like she is from the water tribe", "ask_mood_waterfall_watertribe")
+		saynn("[say=artica]I don't regret it though.. was fun while it lasted..[/say]")
+
+		addButton("Religion", "Artica seems to be a religious fluff", "ask_mood_waterfall_relegion")
 		addButton("Nod", "Don't ask any extra questions", "ask_mood_waterfall_nod")
+	if(state == "ask_mood_waterfall_relegion"):
+		saynn("[say=pc]Jogauni people seem to be quite.. religious?[/say]")
+
+		saynn("She nods.")
+
+		saynn("[say=artica]It's a big part of our culture.. Of who we are.[/say]")
+
+		saynn("She says that and sighs, her gaze low, watching her snowy-white fur.")
+
+		saynn("[say=artica]I feel like.. I'm somehow different though.[/say]")
+
+		saynn("[say=pc]You don't share their beliefs?[/say]")
+
+		saynn("Artica shrugs.")
+
+		saynn("[say=artica]Something or someone created us, gave us a mission, I think.. But upholding the global balance for eternity, age after age.. it feels.. not sure.[/say]")
+
+		saynn("Looks like she is questioning her purpose in life.")
+
+		saynn("[say=pc]It feels boring to you?[/say]")
+
+		saynn("She shrugs again and holds onto her dreamcatcher.")
+
+		saynn("[say=artica]I don't wanna say that.. I saw a mystical being with my own eyes once, it saved my life..[/say]")
+
+		saynn("[say=pc]Do what's fun for you, Artica. Can't go wrong with that.[/say]")
+
+		saynn("She offers you a little smile.")
+
+		saynn("[say=artica]Maybe..[/say]")
+
+		addButton("Fought how?", "Artica doesn't seem like a warrior", "ask_mood_waterfall_foughthow")
+		addButton("Nod", "Don't ask any extra questions", "ask_mood_waterfall_nod")
+	if(state == "ask_mood_waterfall_nod"):
+		saynn("You nod and just watch the waterfall with Artica.")
+
+		saynn("So weird.. it makes a lot of noise.. and yet.. It's calming.")
+
+		saynn("[say=artica]Sorry about all this.. I guess sometimes I just want to be one with nature again.. It was great back then, I didn't even need to wear any clothes.. haha. Unlike now..[/say]")
+
+		saynn("She looks down at her lilac inmate uniform.")
+
+		saynn("Seems like a good opportunity to help her.. open up.")
+
+		addButton("Encourage", "Encourage Artica to be one with nature for a bit", "ask_mood_waterfall_encourage")
+		addButton("No clothes?", "Ask why she doesn't need clothes", "ask_mood_waterfall_noclothes")
+	if(state == "ask_mood_waterfall_noclothes"):
+		saynn("[say=pc]You didn't need clothes on your planet? Was it a warm one?[/say]")
+
+		saynn("She shakes her head.")
+
+		saynn("[say=artica]Far from it.. We have.. had.. very warm summers.. but also very harsh winters. Luckily, my fur helps against the latter..[/say]")
+
+		saynn("[say=pc]Your fur doesn't seem that long.[/say]")
+
+		saynn("[say=artica]It's not, haha.. But I had something happen to me.. Can't really show what without.. mm-m.. undressing..[/say]")
+
+		addButton("Encourage", "Encourage Artica to be one with nature for a bit", "ask_mood_waterfall_encourage")
+	if(state == "ask_mood_waterfall_encourage"):
+		saynn("[say=pc]Well, why not. You can be with nature again, for a little bit.[/say]")
+
+		saynn("Artica blushes softly and stands up on her toes, her tail swishing behind her.")
+
+		saynn("[say=artica]I.. I don't know.. It's what got me into trouble to begin with..[/say]")
+
+		addButton("Comfort her", "Tell her that it will be okay. Only you are here", "ask_mood_waterfall_comfort")
+		addButton("Will happen anyway", "Tell her that she won't be able to keep her clothes forever anyway", "ask_mood_waterfall_comfort")
+	if(state == "ask_mood_waterfall_comfort"):
+		playAnimation(StageScene.Duo, "sit", {npc="artica", npcBodyState={naked=true,hard=true}, flipNPC=true})
+		if (willHappenAnyway):
+			saynn("[say=pc]It will happen anyway, Artica. Someone will tear your uniform to pieces one day, no point in hiding what's between your legs.[/say]")
+
+		else:
+			saynn("[say=pc]It will be okay, Artica. No one is here, besides me. And I can close my eyes if you want.[/say]")
+
+		saynn("Artica stays quiet for a bit, just swaying from side to side, her toes curling, her tail twitches nervously.")
+
+		if (willHappenAnyway):
+			saynn("[say=artica]..I g-guess you're r-right..[/say]")
+
+		else:
+			saynn("[say=artica]Well..[/say]")
+
+		saynn("Her upper paws reach for her shirt and begin to unbutton it. As she starts sliding the cloth off of her shoulders, you notice some fancy dark cyan patterns on her fur.. and the only one you can clearly recognize is a.. snowflake?")
+
+		saynn("Shirt is gone, resting on the stones. From this angle you only see her back.. cyan fur.. same color as the long stripe on her muzzle.")
+
+		saynn("It's clearly not enough for her.. Artica tugs on the rubber band of her shorts, deliberating if she should do it. Her gaze inspects the greenery around her.. before she finally commits to it.")
+
+		saynn("She pulls her shorts down slightly.. and then wiggles her cute round butt out of them. As the cloth drops to the floor, a nice view opens up to your eyes, her swishing tail occasionally offering you a glimpse of her bits.. both male and female ones..")
+
+		saynn("Artica breathes in deeply, fresh air filling her lungs as she spreads her arms a bit.")
+
+		saynn("[say=artica]Ah..h-h..[/say]")
+
+		saynn("You let her enjoy the moment.")
+
+		addButton("Snowflake?", "Wasn't Artica from the water tribe..", "ask_mood_waterfall_watertribe")
+		addButton("Enough nudity", "Tell her to dress up", "ask_mood_waterfall_dressup")
+		addButton("Grab her throat", "Enough playing nice. The sight makes you horny for more. Way more", "ask_mood_waterfall_grabthroat")
+	if(state == "ask_mood_waterfall_watertribe"):
+		playAnimation(StageScene.Duo, "sit", {npc="artica", npcBodyState={naked=true,hard=true}})
+		saynn("[say=pc]Is that a snowflake pattern on your shoulder? I thought you're from the water tribe.[/say]")
+
+		saynn("Without thinking about it, Artica tries to look at her shoulder.. which makes her lean and turn towards you, giving you a great view of her sheath.. a half-hard canine member peeking out of it, bobbing up and down while the fluff wiggles around.")
+
+		saynn("[say=artica]I am.. But I'm an Ice Jogauni..[/say]")
+
+		saynn("While trying to recall if Ice was one of the 8 tribes, Artica realizes that you're looking directly at her crotch. She blushes deeply and tries to cover her sheath up.")
+
+		saynn("[say=artica]Eep..[/say]")
+
+		saynn("You chuckle softly.")
+
+		saynn("[say=pc]Ice Jogauni?[/say]")
+
+		saynn("[say=artica]Y-yeah.. It's a l-long story..[/say]")
+
+		saynn("Her paws squeeze her sheath and balls.. which only seems to make her get harder.")
+
+		addButton("Hear the story", "Encourage her to tell you her story", "ask_mood_waterfall_hearstory")
+		addButton("Enough nudity", "Tell her to dress up", "ask_mood_waterfall_dressup")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -1240,6 +1365,16 @@ func _react(_action: String, _args):
 	if(_action == "ask_mood_waterfall"):
 		processTime(5*60)
 
+	if(_action == "ask_mood_waterfall_comfort"):
+		processTime(3*60)
+		getModule("ArticaModule").removeShy(0.2)
+		setState("ask_mood_waterfall_comfort")
+		willHappenAnyway = true
+		return
+
+	if(_action == "ask_mood_waterfall_hearstory"):
+		setFlag("ArticaModule.s6HeardStory", true)
+
 	setState(_action)
 
 func saveData():
@@ -1249,6 +1384,7 @@ func saveData():
 	data["shyness"] = shyness
 	data["pawslut"] = pawslut
 	data["grabCollar"] = grabCollar
+	data["willHappenAnyway"] = willHappenAnyway
 
 	return data
 
@@ -1259,3 +1395,4 @@ func loadData(data):
 	shyness = SAVE.loadVar(data, "shyness", 0.0)
 	pawslut = SAVE.loadVar(data, "pawslut", 0.0)
 	grabCollar = SAVE.loadVar(data, "grabCollar", false)
+	willHappenAnyway = SAVE.loadVar(data, "willHappenAnyway", false)
