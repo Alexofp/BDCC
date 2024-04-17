@@ -11,7 +11,7 @@ func _init():
 	npcSkinData={
 	"hair": {"r": Color("ffffffff"),"g": Color("ff15eff2"),"b": Color("ff009b93"),},
 	"ears": {"b": Color("ff646464"),},
-	"penis": {"r": Color("fff6f6f6"),},
+	"penis": {"r": Color("fff6f6f6"),"g": Color("ff15eff2"),"b": Color("ff009b93"),},
 	}
 	
 	npcHasMenstrualCycle = true

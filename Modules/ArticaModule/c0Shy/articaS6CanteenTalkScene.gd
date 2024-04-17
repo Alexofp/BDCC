@@ -1194,6 +1194,7 @@ func _run():
 		addButton("Will happen anyway", "Tell her that she won't be able to keep her clothes forever anyway", "ask_mood_waterfall_comfort")
 	if(state == "ask_mood_waterfall_comfort"):
 		playAnimation(StageScene.Duo, "sit", {npc="artica", npcBodyState={naked=true,hard=true}, flipNPC=true})
+		addCharacter("artica", ["naked"])
 		if (willHappenAnyway):
 			saynn("[say=pc]It will happen anyway, Artica. Someone will tear your uniform to pieces one day, no point in hiding what's between your legs.[/say]")
 
@@ -1225,6 +1226,182 @@ func _run():
 		addButton("Snowflake?", "Wasn't Artica from the water tribe..", "ask_mood_waterfall_watertribe")
 		addButton("Enough nudity", "Tell her to dress up", "ask_mood_waterfall_dressup")
 		addButton("Grab her throat", "Enough playing nice. The sight makes you horny for more. Way more", "ask_mood_waterfall_grabthroat")
+	if(state == "ask_mood_waterfall_grabthroat"):
+		playAnimation(StageScene.Choking, "idle", {pc="pc", npc="artica", npcBodyState={naked=true}})
+		saynn("Finally, you got her where you wanted. Artica is alone, vulnerable and even with her cock and pussy out. The stars aligned for this perfect moment.")
+
+		saynn("You get up and slowly approach her, your eyes full of intention.")
+
+		saynn("[say=artica]Oh, h-hey-.. NH-Hh-![/say]")
+
+		saynn("As soon as she notices you behind her, your hand darts out, firmly wrapping around her throat.")
+
+		saynn("Her eyes widen in surprise, she gasps softly but any air gets caught in her throat as your digits cut off the supply.")
+
+		saynn("[say=artica]Nn-.. n..h..[/say]")
+
+		saynn("You lean in closer, a low growl escapes your lips.. while Artica's ones tremble from fear.")
+
+		saynn("[say=pc]You were right to be afraid, Artica. Happy dreams never become a reality here, only bad ends. Don't worry though..[/say]")
+
+		saynn("Another few silent gasps leave her maw, her shaking hands grab onto the one that is choking her.. desperately trying to pull it off.")
+
+		saynn("[say=pc]I won't kill you.. If you behave that is.[/say]")
+
+		saynn("All the while, your free hand lands on her tits and squeezes one tight.. before sliding down along her gray belly and reaching her thighs. The absolute shock made the fluff lose any lust that she had, her {artica.penis} went soft.. and the pussy that is hiding behind her balls is barely wet. The scent is quite inviting though..")
+
+		saynn("[say=pc]I just want to.. turn you into who you really are..[/say]")
+
+		saynn("She stands on her toes, her tail spazzing out. She is shaking her head a bit.. her scared eyes.. quickly getting weaker, the adrenaline seems to be running out fast..")
+
+		saynn("[say=pc]A whore.[/say]")
+
+		saynn("And with that, you relax the grip a bit, letting the fluff catch some much-needed air.")
+
+		saynn("[say=artica]Kh-h.. h-h.. l-let.. kh-h.. g-go.. pp-p..please..[/say]")
+
+		addButton("Let go", "This was enough for now", "rough_letgo")
+		addButtonWithChecks("Breed", "Breed the scared fluff", "rough_breed", [], [[ButtonChecks.HasReachablePenis]])
+		addButtonWithChecks("Get bred", "Use her cock for your pleasure", "rough_get_bred", [], [[ButtonChecks.HasReachableVagina]])
+	if(state == "rough_get_bred"):
+		playAnimation(StageScene.SexCowgirlChoke, "inside", {pc="artica", npc="pc", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You ignore her pleading. She just doesn't know how much fun are gonna have with her.")
+
+		saynn("Gradually, you lower the fluff down to the floor.. before straddling her, one of your hands still holding that throat, making sure Artica is always feeling the pressure there.")
+
+		saynn("You look down at her sheath.. and let out a sigh, the terrified state left her mostly limp.")
+
+		saynn("[say=artica]P-please.. I w-won't.. t-t..tell..[/say]")
+
+		saynn("Nuh-uh. You use your hand to spread your {pc.pussyStretch} pussy, offering a glorious lewd display to the fluff.")
+
+		saynn("[say=pc]I'm not walking away without your pups in here.[/say]")
+
+		saynn("Artica gulps audibly, her toes curling. She is still trying to break free, even now. The tip of her canine cock is peeking out of its sheath.. which allows you to start gently grinding it with your pussy.")
+
+		saynn("[say=artica]Nh-h.. pp-please.. n-no..[/say]")
+
+		saynn("You shush the fluff and keep slowly moving your hips back and forth, your wet pussy sliding along the growing shaft, spreading its juices.")
+
+		saynn("[say=pc]Such a subby slut..[/say]")
+
+		saynn("Even just this feels good, little moans begin escaping your mouth"+str(", your own {pc.penis} getting hard too from all this.." if GM.pc.hasPenis() else "")+". You notice a bump on her cock near the base, a deflated knot.. fun..")
+
+		saynn("And so, after forcefully getting the girl hard, you position yourself above, your slick dripping pussy hovering just above the twitching tip of Artica's {artica.penis}. Her eyes widen in shock as she feels your folds testing the waters, gently pressing down on her length. Artica's breath catching in her throat as she still struggles against your grasp.. but you keep her well-pinned, your mean eyes sending fear down her spine.")
+
+		saynn("She is ready..")
+
+	if(state == "rough_breed"):
+		playAnimation(StageScene.Choking, "tease", {pc="pc", npc="artica", bodyState={exposedCrotch=true, hard=true}, npcBodyState={naked=true}})
+		saynn("You ignore her pleading and use your free hand to pull her balls up, revealing a dry cunt.")
+
+		saynn("[say=artica]P-please.. I w-won't.. t-t..tell..[/say]")
+
+		saynn("A few of your digits slip between her cyan folds, piercing her tight slit.. and proceeding to thrust them in and out.")
+
+		saynn("[say=pc]Sh-h.. Focus on getting wet, slut.[/say]")
+
+		saynn("Her own cock is still mostly in its sheath.. but yours is hard as a rock. Artica sees that.. and shakes her head more, her body tensing up around your digits, her pussy gripping them..")
+
+		saynn("But you just keep finger-fucking her, until her twitching cunt gives up.. and becomes slightly more wet..")
+
+		saynn("[say=artica]W-wai-.. h-hh.. I'm n-not r-rea.. d-d..[/say]")
+
+		saynn("Too late.")
+
+		addButton("Take her", "Time for the fun part", "rough_breed_fuck")
+	if(state == "rough_breed_fuck"):
+		playAnimation(StageScene.Choking, "sex", {pc="pc", npc="artica", bodyState={exposedCrotch=true, hard=true}, npcBodyState={naked=true}})
+		var pcHasKnot = GM.pc.bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)
+		saynn("With a desperate whine, she tries to break free.. but her efforts end up being useless as you guide your {pc.penis} under hers and put pressure on her quivering pussy..")
+
+		saynn("Then, with a sudden thrust, you enter her, the intruding cock spreading her delicate cyan folds and plunges deep into her.. tight, clenching slit.")
+
+		saynn("[say=artica]Agh.. h-h..[/say]")
+
+		saynn("Terror floods her mind as you start fucking her raw, pulling back slightly.. just to ram your dick inside, her pussy clenching instinctively around your shaft as you do that, a futile attempt to resist the forced act.")
+
+		saynn("[say=artica]Ah! I-it's too much!.. I can't.. p-please.. M.m-mercy..[/say]")
+
+		saynn("Any cries of protest are silenced by the noise of the waterfall. Your free hand grabs her leg and raises it high, giving you more free access to her slit while the second keeps a firm grip on the neck, putting extra pressure on it when you feel Artica trying to escape.")
+
+		saynn("Even though the fluff is resisting as much as she can, her body begins to betray her, the inner cyan walls becoming slick as your member slides through them, her juices coating the intruding length. At the same time, her own cock is still mostly hiding in its sheath.. but more of it is coming out as Artica seems to be approaching something.. Just like you.")
+
+		saynn("[say=artica]P-please!.. S-stop.. ngh-h.. ah..ah.. t-too much..[/say]")
+
+		if (pcHasKnot):
+			saynn("The knot on your cock is inflating.. it's pushing on Artica's folds, failing to fit.. so you gotta make it fit.")
+
+			addButton("Knot her", "Breed the fluff", "rough_breed_breed")
+		else:
+			addButton("Cum inside", "Breed the fluff", "rough_breed_breed")
+	if(state == "rough_breed_breed"):
+		playAnimation(StageScene.Choking, "inside", {pc="pc", npc="artica", bodyState={exposedCrotch=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		var pcHasKnot = GM.pc.bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)
+		if (pcHasKnot):
+			saynn("With a final, relentless thrust, your fat orb slips past Artica's tight pussy entrance, stretching her out to an extreme level and tying her to your cock.")
+
+			saynn("[say=artica]Oh gods!.. Ah-h!.. T-too much.. It's too much!.. Ah.h.h-h..[/say]")
+
+		else:
+			saynn("With a final, relentless thrust, you ram your cock as deep as that tight pussy allows, stretching her out and breaking into her babymaker.")
+
+			saynn("[say=artica]Oh gods.. it's too intense.. Ah.h-h..[/say]")
+
+		saynn("Her hot inner walls clench hard around your throbbing member, her pussy releasing a shower of transparent fluids.. Her own cock pulses and releases its pent-up seed onto her belly as you make sure to trap it angled that way.")
+
+		saynn("Finally, with a mean growl, your hot sticky seed is spilling into Artica's quivering mess of a pussy as she trembles before you. Her eyes rolling high up as she feels your {pc.cum} stuffing her womb full, her toes and tail twitching after each throb.")
+
+		saynn("[say=pc]Grr-r.. Enjoy the first batch of pups, slut.[/say]")
+
+		saynn("[say=artica]Nh-h.. ah.. ah.ah.. fuh-h.. nn-n..[/say]")
+
+		if (pcHasKnot):
+			saynn("You look her right into the sorry eyes, your cock still fully inside her, the knot preventing most of the leakage. Her legs are.. shaking.. though..")
+
+		else:
+			saynn("You look her right into the sorry eyes, your cock still fully inside her, some of your seed already dripping down onto her snowy fur.")
+
+		addButton("Pull out", "Breeding well done", "rough_breed_pullout")
+	if(state == "rough_breed_pullout"):
+		playAnimation(StageScene.Choking, "inside", {pc="pc", npc="artica", bodyState={exposedCrotch=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		var pcHasKnot = GM.pc.bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)
+		if (pcHasKnot):
+			saynn("You wait for the knot to deflate.. before yanking it out with full force, causing a flood of your seed that leaves quite a mess on her fur.")
+
+			saynn("[say=artica]EEP!.. ah.. h-h..[/say]")
+
+		else:
+			saynn("You let the girl be your cock warmer for a bit.. before pulling your cock out, causing a bigger flood of your seed that leaves quite a mess.")
+
+			saynn("[say=artica]Ah..[/say]")
+
+		saynn("You let go of her neck.. allowing Artica to flop onto the ground. She is panting heavily, her used pussy still twitching and dripping excessively, her soft cock pulsing after the release.")
+
+		saynn("[say=pc]Go and cry to someone, see what happens.[/say]")
+
+		saynn("She reaches for her uniform.. and notices that it's soaked with cum.. Still, she grabs it and just escapes when given the chance.")
+
+		saynn("Well, time to go.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "rough_letgo"):
+		playAnimation(StageScene.SexStart, "start", {npc="artica", npcBodyState={naked=true}})
+		saynn("As you let go of Artica's throat, she falls to the floor, coughing and whining, her hands rubbing the marks that your digits left on her neck, above her collar.")
+
+		saynn("You just look down at her, your mean eyes piercing her terrified gaze.")
+
+		saynn("[say=pc]Try to tell anyone. And see what happens.[/say]")
+
+		addButton("Continue", "See what happens next", "rough_artica_runs_away")
+	if(state == "rough_artica_runs_away"):
+		removeCharacter("artica")
+		playAnimation(StageScene.Solo, "stand")
+		saynn("After catching her breath somewhat, Artica grabs her uniform.. and dashes away.")
+
+		saynn("Well, time to go then.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "ask_mood_waterfall_watertribe"):
 		playAnimation(StageScene.Duo, "sit", {npc="artica", npcBodyState={naked=true,hard=true}})
 		saynn("[say=pc]Is that a snowflake pattern on your shoulder? I thought you're from the water tribe.[/say]")
@@ -1371,6 +1548,31 @@ func _react(_action: String, _args):
 		setState("ask_mood_waterfall_comfort")
 		willHappenAnyway = true
 		return
+
+	if(_action == "ask_mood_waterfall_grabthroat"):
+		setFlag("ArticaModule.s6GrabbedThroat", true)
+		getModule("ArticaModule").removeShy(1.0)
+
+	if(_action == "rough_letgo"):
+		processTime(3*60)
+
+	if(_action == "rough_breed"):
+		setFlag("ArticaModule.s6HadRoughSex", true)
+		setFlag("ArticaModule.s6HadRoughSexCameInside", true)
+
+	if(_action == "rough_get_bred"):
+		setFlag("ArticaModule.s6HadRoughSex", true)
+
+	if(_action == "rough_breed_fuck"):
+		processTime(3*60)
+
+	if(_action == "rough_breed_breed"):
+		getCharacter("artica").cummedInVaginaBy("pc")
+		getCharacter("artica").cummedOnBy("artica")
+		GM.pc.orgasmFrom("artica")
+
+	if(_action == "rough_breed_pullout"):
+		processTime(10*60)
 
 	if(_action == "ask_mood_waterfall_hearstory"):
 		setFlag("ArticaModule.s6HeardStory", true)

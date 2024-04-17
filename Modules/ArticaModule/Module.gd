@@ -10,6 +10,9 @@ func getFlags():
 		"s6AskedPaws": flag(FlagType.Bool),
 		"s6AskedMood": flag(FlagType.Bool),
 		"s6HeardStory": flag(FlagType.Bool),
+		"s6GrabbedThroat": flag(FlagType.Bool),
+		"s6HadRoughSex": flag(FlagType.Bool),
+		"s6HadRoughSexCameInside": flag(FlagType.Bool),
 	}
 
 func _init():
