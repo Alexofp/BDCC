@@ -61,6 +61,7 @@ func _run():
 		if (shyness <= 0.0):
 			saynn("Huh.. You notice that Artica's hands are under the table, doing something.")
 
+			addButton("Under table", "(Next stage) See what it is that Artica is doing", "start_corrupt")
 		if (!getFlag("ArticaModule.s6AskedLeg")):
 			addButton("How is leg", "Ask Artica how is her leg doing", "ask_leg")
 		else:
@@ -72,7 +73,25 @@ func _run():
 			if (!getFlag("ArticaModule.s6AskedMood")):
 				addButton("How's mood", "Just ask Artica about her overall mood", "ask_mood")
 		addButton("Get kinky", "Show a list of lewd stuff that you can try to do", "get_kinky_menu")
+		var eatLastDay = getFlag("ArticaModule.s6ateday", 0)
+		if (GM.main.getDays() > eatLastDay):
+			addButton("Eat together", "Just spend some time together", "just_eat_together")
+		else:
+			addDisabledButton("Eat together", "You already did that")
 		addButton("Enough chat", "Time to go", "endthescene")
+	if(state == "just_eat_together"):
+		saynn("You and Artica spend some time together, casually chatting and consuming your meals.")
+
+		if (shyness > 0.6):
+			saynn("Not much has happened.. The fluff is still quite shy in your presence, avoiding eye contact and just staring at her tray.")
+
+		elif (shyness > 0.0):
+			saynn("Not much has happened.. but looks like the fluff is getting used to your presence more.")
+
+		else:
+			saynn("The fluff fidgets a lot and doesn't mind asking you certain questions.. mostly about how the prison works.. but also about you specifically.")
+
+		addButton("Continue", "See what happens next", "")
 	if(state == "get_kinky_menu"):
 		if (shyness > 0.6):
 			saynn("Artica is still quite shy. Doing some kinky things with her should help her to open up.")
@@ -1597,6 +1616,12 @@ func _react(_action: String, _args):
 		endScene()
 		return
 
+	if(_action == "start_corrupt"):
+		runScene("articaS7FirstShowerScene")
+		setFlag("ArticaModule.corruptionBegan", true)
+		endScene()
+		return
+
 	if(_action == "ask_leg"):
 		setFlag("ArticaModule.s6AskedLeg", true)
 		getModule("ArticaModule").removeShy(0.05)
@@ -1611,6 +1636,13 @@ func _react(_action: String, _args):
 
 	if(_action == "ask_mood"):
 		setFlag("ArticaModule.s6AskedMood", true)
+
+	if(_action == "just_eat_together"):
+		processTime(15*60)
+		setFlag("ArticaModule.s6ateday", GM.main.getDays())
+		setFlag("Canteen_PlayerAteToday", true)
+		GM.pc.afterEatingAtCanteen()
+		getModule("ArticaModule").removeShy(0.1)
 
 	if(_action == "kinky_checkbeans"):
 		processTime(3*60)

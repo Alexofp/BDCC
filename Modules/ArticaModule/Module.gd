@@ -13,6 +13,9 @@ func getFlags():
 		"s6GrabbedThroat": flag(FlagType.Bool),
 		"s6HadRoughSex": flag(FlagType.Bool),
 		"s6HadRoughSexCameInside": flag(FlagType.Bool),
+		"s6ateday": flag(FlagType.Number),
+		
+		"corruptionBegan": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -27,6 +30,7 @@ func _init():
 		"res://Modules/ArticaModule/c0Shy/articaS4CanteenScene.gd",
 		"res://Modules/ArticaModule/c0Shy/articaS5CanteenPawsScene.gd",
 		"res://Modules/ArticaModule/c0Shy/articaS6CanteenTalkScene.gd",
+		"res://Modules/ArticaModule/c0Shy/articaS7FirstShowerScene.gd",
 		]
 	characters = [
 		"res://Modules/ArticaModule/ArticaCharacter.gd",
