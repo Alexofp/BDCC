@@ -16,6 +16,7 @@ func getFlags():
 		"s6ateday": flag(FlagType.Number),
 		
 		"corruptionBegan": flag(FlagType.Bool),
+		"NoClothes": flag(FlagType.Bool),
 	}
 
 func _init():
