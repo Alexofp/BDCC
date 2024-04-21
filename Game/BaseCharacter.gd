@@ -2176,6 +2176,9 @@ func hasWombIn(bodypartSlot):
 func getDefaultArtwork(_variant = []):
 	return "res://Images/UI/GenericFace.png"
 
+func adjustArtworkVariant(_variant:Array):
+	pass
+
 func hasIllegalItems():
 	return getInventory().hasIllegalItems()
 

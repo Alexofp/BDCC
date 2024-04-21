@@ -30,6 +30,8 @@ func addCharacter(charID:String, variant:Array):
 	var data = {}
 	
 	var character = GlobalRegistry.getCharacter(charID)
+	if(character != null):
+		character.adjustArtworkVariant(variant)
 	
 	var isGenericPortrait = true
 	var imageArtist = null

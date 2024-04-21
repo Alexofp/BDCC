@@ -12,11 +12,11 @@ func _init():
 func _reactInit():
 	isFirstTime = getFlag("ArticaModule.s6FirstTime", false)
 	if(!isFirstTime):
-		addCharacter("artica")
-		setState("talk_menu")
+		setState("intro")
+	setFlag("ArticaModule.s6FirstTime", true)
 
 func _run():
-	if(state == ""):
+	if(state == "intro"):
 		addCharacter("artica")
 		playAnimation(StageScene.PawJobUnderTable, "start", {npc="pc", pc="artica"})
 		saynn("You do the usual, grabbing a prisoner's meal before heading for Artica's table.")
@@ -46,8 +46,9 @@ func _run():
 
 		saynn("She pulls up her hind paw and takes a look at the pawpads, probably to make sure they're alright.")
 
-		addButton("Continue", "See what happens next", "talk_menu")
-	if(state == "talk_menu"):
+		addButton("Continue", "See what happens next", "")
+	if(state == ""):
+		addCharacter("artica")
 		playAnimation(StageScene.PawJobUnderTable, "start", {npc="pc", pc="artica"})
 		saynn("You sit near Artica in the canteen.")
 
@@ -67,7 +68,7 @@ func _run():
 		else:
 			if (!getFlag("ArticaModule.s6AskedRisha")):
 				addButton("Risha", "Ask if Risha is still bullying Artica", "ask_risha")
-		if (!getFlag("ArticaModule.s6AskedRisha")):
+		if (!getFlag("ArticaModule.s6AskedPaws")):
 			addButton("Paws", "Ask Artica if she has interest in paws", "ask_paws")
 		if (getFlag("ArticaModule.s6AskedRisha") && getFlag("ArticaModule.s6AskedPaws")):
 			if (!getFlag("ArticaModule.s6AskedMood")):
@@ -1526,6 +1527,7 @@ func _run():
 
 		addButton("Hear the story", "Encourage her to tell you her story", "ask_mood_waterfall_hearstory")
 		addButton("Enough nudity", "Tell her to dress up", "ask_mood_waterfall_dressup")
+		addButton("Grab her throat", "Enough playing nice. The sight makes you horny for more. Way more", "ask_mood_waterfall_grabthroat")
 	if(state == "ask_mood_waterfall_hearstory"):
 		saynn("[say=pc]I'm curious. Really.[/say]")
 
@@ -1586,6 +1588,7 @@ func _run():
 		saynn("She smiles.. Her smile is contagious.")
 
 		addButton("Continue", "Time to wrap up probably", "ask_mood_waterfall_dressup")
+		addButton("Grab her throat", "Enough playing nice. The sight makes you horny for more. Way more", "ask_mood_waterfall_grabthroat")
 	if(state == "ask_mood_waterfall_dressup"):
 		playAnimation(StageScene.Duo, "stand", {npc="artica"})
 		addCharacter("artica")
@@ -1631,7 +1634,7 @@ func _react(_action: String, _args):
 		getModule("ArticaModule").removeShy(0.1)
 
 	if(_action == "ask_paws"):
-		setFlag("ArticaModule.s6AskedRisha", true)
+		setFlag("ArticaModule.s6AskedPaws", true)
 		getModule("ArticaModule").removeShy(0.1)
 
 	if(_action == "ask_mood"):
@@ -1690,7 +1693,7 @@ func _react(_action: String, _args):
 
 	if(_action == "enough_talk"):
 		processTime(10*60)
-		setState("talk_menu")
+		setState("")
 		return
 
 	if(_action == "risha_whoknows"):

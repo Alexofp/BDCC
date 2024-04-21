@@ -17,6 +17,8 @@ func _init():
 	npcHasMenstrualCycle = true
 	
 func _getName():
+	if(GM.main != null && !GM.main.getFlag("ArticaModule.s4happened", false)):
+		return "White fluff"
 	return "Artica"
 
 func getGender():
@@ -58,5 +60,11 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
 
 func getDefaultEquipment():
+	if(GM.main != null && GM.main.getFlag("ArticaModule.NoClothes", false)):
+		return ["inmatecollar"]
 	return ["inmatecollar", "inmateuniformSexDeviant"]
-	
+
+func adjustArtworkVariant(_variant:Array):
+	if(GM.main != null && GM.main.getFlag("ArticaModule.NoClothes", false)):
+		if(!_variant.has("naked")):
+			_variant.append("naked")

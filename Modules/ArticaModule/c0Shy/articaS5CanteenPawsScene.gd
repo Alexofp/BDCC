@@ -92,7 +92,7 @@ func _run():
 		addButton("Continue", "See what happens next", "in_medical")
 	if(state == "in_medical"):
 		addCharacter("eliza")
-		playAnimation(StageScene.Duo, "struggle_legs", {npc="eliza"})
+		playAnimation(StageScene.Duo, "struggle_legs", {npc="eliza", pc="artica"})
 		saynn("The doctor quickly approaches you two as you hop into the lobby.")
 
 		saynn("[say=eliza]Dr. Quinn here. Easy there, let me see.[/say]")
