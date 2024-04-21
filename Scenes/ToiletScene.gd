@@ -19,7 +19,7 @@ func _run():
 			if(GM.pc.getInventory().getItemsWithTag(ItemTag.CanPeeInto).size() == 0):
 				addDisabledButton("Pee into..", "You don't have any bottles to pee into")
 			else:
-				addButton("Pee into..", "Pee into of of your bottles", "peeintomenu")
+				addButton("Pee into..", "Pee into one of your bottles", "peeintomenu")
 		else:
 			addDisabledButton("Pee into..", "You don't feel like peeing")
 		if(GM.pc.hasEffect(StatusEffect.HasCumInsideAnus) || GM.pc.hasEffect(StatusEffect.HasCumInsideVagina)):
