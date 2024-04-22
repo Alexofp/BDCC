@@ -27,13 +27,36 @@ func _run():
 		saynn("Chastity: "+str(Util.roundF(chastity*100.0, 1))+"%")
 
 		addButton("Tease", "Do something half-lewd with her", "tease_menu")
-		addButton("Sex", "See what kind of kinky things you can do with her", "sex_menu")
-		addButton("Wait..", "See what Artica will do if left alone", "trigger_wait")
-		addButton("Kidnap", "Steal Artica into your cell to do bad things with her", "do_kidnap")
+		if (getModule("ArticaModule").isLusty()):
+			addButton("Sex", "See what kind of kinky things you can do with her", "sex_menu")
+		else:
+			addDisabledButton("Sex", "Artica is not horny enough")
+		if (getModule("ArticaModule").canTriggerWaitScene()):
+			saynn("Artica is gonna do something if you wait for her to do so..")
+
+			addButton("Wait..", "See what Artica will do if left alone", "trigger_wait")
+		else:
+			addDisabledButton("Wait..", "Nothing will happen if you do this. Can try to make Artica horny to encourage her to explore the station")
 		addButton("Leave", "Time to go", "endthescene")
+	if(state == "tease_menu"):
+		saynn("What do you want to do?")
+
+		addButton("Canteen", "Invite Artica to go eat", "do_tease_canteen")
+		addButton("Your cell", "Invite Artica to your cell", "do_tease_cell")
+		addButton("Back", "Go back to the previous menu", "")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
+		endScene()
+		return
+
+	if(_action == "do_tease_canteen"):
+		runScene("articaCanteenTeaseScene")
+		endScene()
+		return
+
+	if(_action == "do_tease_cell"):
+		runScene("")
 		endScene()
 		return
 

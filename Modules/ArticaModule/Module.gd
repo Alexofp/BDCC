@@ -52,6 +52,8 @@ func _init():
 		"res://Modules/ArticaModule/c0Shy/articaS7FirstShowerScene.gd",
 		
 		"res://Modules/ArticaModule/c1Corruption/articaTalkScene.gd",
+		
+		"res://Modules/ArticaModule/c1Corruption/Tease/articaCanteenTeaseScene.gd",
 		]
 	characters = [
 		"res://Modules/ArticaModule/ArticaCharacter.gd",
@@ -114,6 +116,15 @@ func addCorruption(howMuch, showMessage = true):
 	
 	setFlag("ArticaModule.corruption", newValue)
 
+func triggerCorruption(howMuch, showMessage = true):
+	addCorruption(howMuch, showMessage)
+
+func isSlut():
+	return getCorruption() >= 0.4
+
+func isVerySlut():
+	return getCorruption() >= 0.8
+
 func getChastity():
 	return clamp(getFlag("ArticaModule.chastity", 0.0), 0.0, 1.0)
 
@@ -163,3 +174,8 @@ func getPawslutString():
 func isLusty():
 	return false
 
+func makeLusty():
+	pass
+
+func canTriggerWaitScene():
+	return false
