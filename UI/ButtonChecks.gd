@@ -34,6 +34,7 @@ enum {
 	HasPenisPump,
 	NotWearingItem,
 	CanStartSex,
+	HasReachableOrCagedPenisOrReachableVagina,
 }
 
 static func getReasonText(reason):
@@ -103,6 +104,8 @@ static func getReasonText(reason):
 		return "You need to get rid of "+GlobalRegistry.getItemRef(args[1]).getVisibleName()
 	if(reason == CanStartSex):
 		return "You can't start sex while you are wearing restraints"
+	if(reason == HasReachableOrCagedPenisOrReachableVagina):
+		return "You need to have a penis or a reachable vagina"
 	return "Error?"
 
 static func check(checks: Array):
@@ -216,6 +219,9 @@ static func check(checks: Array):
 				return NotLegsRestrained
 			if(GM.pc.isOralBlocked()):
 				return NotOralBlocked
+		if(reason == HasReachableOrCagedPenisOrReachableVagina):
+			if(!GM.pc.hasReachablePenis() && !GM.pc.isWearingChastityCage() && !GM.pc.hasReachableVagina()):
+				return reason
 			
 	return null
 

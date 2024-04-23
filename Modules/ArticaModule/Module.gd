@@ -35,6 +35,7 @@ func getFlags():
 		
 		"corruptionBegan": flag(FlagType.Bool),
 		"NoClothes": flag(FlagType.Bool),
+		"isLusty": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -54,6 +55,7 @@ func _init():
 		"res://Modules/ArticaModule/c1Corruption/articaTalkScene.gd",
 		
 		"res://Modules/ArticaModule/c1Corruption/Tease/articaCanteenTeaseScene.gd",
+		"res://Modules/ArticaModule/c1Corruption/Tease/articaCellTeaseScene.gd",
 		]
 	characters = [
 		"res://Modules/ArticaModule/ArticaCharacter.gd",
@@ -91,6 +93,9 @@ func removeShy(howMuch, showMessage = true):
 func getPawSlut():
 	return clamp(getFlag("ArticaModule.pawslut", 0.0), 0.0, 1.0)
 
+func getPawslut():
+	return getPawSlut()
+
 func addPawslut(howMuch, showMessage = true):
 	var oldPawslut = getPawSlut()
 	var newValue = clamp(oldPawslut + howMuch, 0.0, 1.0)
@@ -118,6 +123,7 @@ func addCorruption(howMuch, showMessage = true):
 
 func triggerCorruption(howMuch, showMessage = true):
 	addCorruption(howMuch, showMessage)
+	setFlag("ArticaModule.isLusty", false)
 
 func isSlut():
 	return getCorruption() >= 0.4
@@ -172,10 +178,10 @@ func getPawslutString():
 		return "Artica has no obvious interest in paws"
 
 func isLusty():
-	return false
+	return getFlag("ArticaModule.isLusty", false)
 
 func makeLusty():
-	pass
+	setFlag("ArticaModule.isLusty", true)
 
 func canTriggerWaitScene():
 	return false

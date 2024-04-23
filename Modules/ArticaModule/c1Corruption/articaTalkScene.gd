@@ -56,7 +56,7 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "do_tease_cell"):
-		runScene("")
+		runScene("articaCellTeaseScene")
 		endScene()
 		return
 
@@ -77,3 +77,25 @@ func loadData(data):
 	corruption = SAVE.loadVar(data, "corruption", 0.0)
 	pawslut = SAVE.loadVar(data, "pawslut", 0.0)
 	chastity = SAVE.loadVar(data, "chastity", 0.0)
+
+
+func getDebugActions():
+	return [
+		{
+			"id": "setCorruption",
+			"name": "Set Corruption",
+			"args": [
+				{
+					"id": "corruption",
+					"name": "How much (0-100)",
+					"type": "number",
+					"value": 100,
+				},
+			],
+		},
+	]
+
+func doDebugAction(_id, _args = {}):
+	if(_id == "setCorruption"):
+		setFlag("ArticaModule.corruption", clamp(_args["corruption"]/100.0, 0.0, 1.0))
+		corruption = getModule("ArticaModule").getCorruption()

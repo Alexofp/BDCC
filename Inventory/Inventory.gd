@@ -428,6 +428,9 @@ func getItemsWithTag(tag):
 			result.append(item)
 	return result
 		
+func hasItemsWithTag(tag):
+	return getItemsWithTag(tag).size() > 0
+		
 func getEquippedItemsWithTag(tag):
 	var result = []
 	for itemSlot in equippedItems.keys():

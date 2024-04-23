@@ -36,6 +36,8 @@ enum {
 	
 	AllowsEnslaving,
 	ReturnsToPCIfSlaveReleased,
+	
+	RopeHarness,
 }
 
 static func getName(tag):

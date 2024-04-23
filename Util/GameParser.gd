@@ -348,4 +348,40 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 			return object.getNpcSlavery().getSlaveTypeName().to_lower()
 		return "slave"
 	
+	if(_command in ["foot"] && _args.size() == 0):
+		var isDigi = object.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsDigi)
+		var isHoofs = object.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsHoofs)
+		if(isDigi):
+			return "paw"
+		if(isHoofs):
+			return "hoof"
+		return "foot"
+	
+	if(_command in ["feet"] && _args.size() == 0):
+		var isDigi = object.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsDigi)
+		var isHoofs = object.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsHoofs)
+		if(isDigi):
+			return "paws"
+		if(isHoofs):
+			return "hoofs"
+		return "feet"
+	
+	if(_command in ["toes"] && _args.size() == 0):
+		var isDigi = object.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsDigi)
+		var isHoofs = object.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsHoofs)
+		if(isDigi):
+			return "toes"
+		if(isHoofs):
+			return "soles"
+		return "toes"
+	
+	if(_command in ["toe"] && _args.size() == 0):
+		var isDigi = object.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsDigi)
+		var isHoofs = object.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsHoofs)
+		if(isDigi):
+			return "toe"
+		if(isHoofs):
+			return "sole"
+		return "toe"
+	
 	return "[color=red]!RUNTIME ERROR NO COMMAND FOUND "+_obj+"."+_command+" "+str(_args)+"![/color]"
