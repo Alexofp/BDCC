@@ -50,7 +50,7 @@ static func grab(ar):
 		return null
 	
 	var elementI = randi() % ar.size()
-	var value = ar[randi() % ar.size()]
+	var value = ar[elementI]
 	ar.remove(elementI)
 	return value
 

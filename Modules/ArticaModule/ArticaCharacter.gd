@@ -68,3 +68,6 @@ func adjustArtworkVariant(_variant:Array):
 	if(GM.main != null && GM.main.getFlag("ArticaModule.NoClothes", false)):
 		if(!_variant.has("naked")):
 			_variant.append("naked")
+
+func canDoSelfCare():
+	return false

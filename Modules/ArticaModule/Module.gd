@@ -56,6 +56,7 @@ func _init():
 		
 		"res://Modules/ArticaModule/c1Corruption/Tease/articaCanteenTeaseScene.gd",
 		"res://Modules/ArticaModule/c1Corruption/Tease/articaCellTeaseScene.gd",
+		"res://Modules/ArticaModule/c1Corruption/Tease/articaSlaveGangbangScene.gd",
 		]
 	characters = [
 		"res://Modules/ArticaModule/ArticaCharacter.gd",
