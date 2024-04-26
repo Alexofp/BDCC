@@ -46,10 +46,20 @@ func _run():
 		else:
 			addDisabledButton("Ropes!", "You don't have any rope harnesses in your inventory")
 		var pcSlaves = GM.main.getPCSlavesIDs()
-		if (pcSlaves.size() >= 2):
+		if (pcSlaves.size() >= 1):
 			addButton("Slave Gangbang", "(Roughness) Let your slaves gangbang Artica", "start_gangbang")
 		else:
-			addDisabledButton("Slave Gangbang", "You need at least 2 slaves stored in your cell to let them gangbang Artica")
+			addDisabledButton("Slave Gangbang", "You need at least 1 slave stored in your cell to let them gangbang Artica")
+		if (corruption > 0.2):
+			if (GM.pc.getInventory().getItemsWithTag(ItemTag.BreastPump).size() <= 0 && GM.pc.getInventory().getItemsWithTag(ItemTag.PenisPump).size() <= 0):
+				addDisabledButton("Milking", "You need to have a breast pump or a penis pump to be able to milk Artica")
+			else:
+				if (getCharacter("artica").hasEffect(StatusEffect.SoreNipplesAfterMilking)):
+					addDisabledButton("Milking", "Give Artica some rest.. Her nips are still sore")
+				else:
+					addButton("Milking", "Use your breast pumps or penis pumps to milk Artica!", "start_milkscene")
+		else:
+			addDisabledButton("Milking", "Artica's corruption needs to be 20% or higher to milk her")
 		if (isNaked):
 			addButton("Give clothes", "Give Artica back her uniform", "give_uniform")
 	if(state == "give_uniform"):
@@ -273,6 +283,11 @@ func _react(_action: String, _args):
 	if(_action == "start_gangbang"):
 		endScene()
 		runScene("articaSlaveGangbangScene")
+		return
+
+	if(_action == "start_milkscene"):
+		endScene()
+		runScene("articaMilkingInCellScene")
 		return
 
 	if(_action == "give_uniform"):

@@ -107,14 +107,14 @@ func processTurn():
 			return
 		
 		affectSub(subInfo.fetishScore({Fetish.Lactation: 1.0})+0.3, 0.1, -0.02, 0.0)
-		subInfo.addArousalForeplay(max(0.0, subInfo.fetishScore({Fetish.Lactation: 0.1})))
+		subInfo.addArousalForeplay(0.03 + max(0.0, subInfo.fetishScore({Fetish.Lactation: 0.07})))
 		
 		timesMilked += 1
 		var text = ""
 		if(getSub().canBeMilked()):
 			var howMuchToExtract = 10.0
 			if(pumpItem.has_method("getMilkSpeedPerMinuteMin")):
-				howMuchToExtract = RNG.randf_range(pumpItem.getMilkSpeedPerMinuteMin(), pumpItem.getMilkSpeedPerMinuteMax())
+				howMuchToExtract = RNG.randf_range(pumpItem.getMilkSpeedPerMinuteMin(), pumpItem.getMilkSpeedPerMinuteMax()) / (5.0 - min(4.0, getSub().getArousal()*10.0))
 			
 			var howMuchCollected = getSub().getBodypart(BodypartSlot.Breasts).getFluids().transferAmountTo(pumpItem, howMuchToExtract)
 			

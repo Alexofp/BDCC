@@ -1413,10 +1413,10 @@ func stimulateLactation():
 	var production: Lactation = breasts.getFluidProduction()
 	if(production == null):
 		return false
+	if(isPlayer()):
+		addSkillExperience(Skill.Milking, 5)
 	if(production.has_method("stimulate")):
 		return production.stimulate()
-	if(isPlayer()):
-		addSkillExperience(Skill.Milking, 10)
 	return false
 
 func canBeSeedMilked():

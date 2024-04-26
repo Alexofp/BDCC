@@ -1,10 +1,13 @@
-[gd_scene load_steps=76 format=2]
+[gd_scene load_steps=79 format=2]
 
 [ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Props/sybian.png" type="Texture" id=2]
 [ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player/Props/platform.png" type="Texture" id=4]
 [ext_resource path="res://Player/StageScene3D/Scenes/SybianOral.gd" type="Script" id=5]
+[ext_resource path="res://Player/Player3D/Chains/ChainMaterial.tres" type="Material" id=6]
+[ext_resource path="res://Player/Player3D/Parts/MyBoneAttachment.gd" type="Script" id=7]
+[ext_resource path="res://Player/Player3D/Chains/CurveRenderer.gd" type="Script" id=8]
 
 [sub_resource type="AnimationNodeAnimation" id=3]
 animation = "CuffedArms-loop"
@@ -286,6 +289,12 @@ script = ExtResource( 5 )
 [node name="Doll3D" parent="." index="0" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.161258, 0, 0 )
 
+[node name="Neck" type="Position3D" parent="Doll3D" index="6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.373118, 6.56541, 0.074 )
+script = ExtResource( 7 )
+skeleton = NodePath("../DollSkeleton/Doll3D/Skeleton")
+boneId = "Neck"
+
 [node name="Doll3D2" parent="." index="1" instance=ExtResource( 3 )]
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0.161258, 0, 0 )
 
@@ -298,6 +307,16 @@ region_rect = Rect2( 1, 1, 1022, 62 )
 [node name="Sybian" type="Sprite3D" parent="." index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17906, 1.23267, -0.0600427 )
 texture = ExtResource( 2 )
+
+[node name="ChainRenderer" type="ImmediateGeometry" parent="Sybian" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.33843, 0.241961, 0.149743 )
+material_override = ExtResource( 6 )
+script = ExtResource( 8 )
+anchorPath = NodePath("../../Doll3D/Neck")
+width = 0.727
+flex = 0.28
+expected_length = 15.115
+max_sagging_length = 0.1
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="4"]
 tree_root = SubResource( 476 )
@@ -313,3 +332,4 @@ parameters/StateMachine/playback = SubResource( 516 )
 
 [editable path="Doll3D"]
 [editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]

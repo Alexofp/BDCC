@@ -5,6 +5,8 @@ var lactationTimer = 0
 var lactationProgress = 0.0
 
 func induceLactation():
+	if(lactationTimer <= 0.0):
+		fillPercent(RNG.randf_range(0.3, 0.5))
 	lactationTimer = Util.maxi(lactationTimer, 60*60*24*7)
 
 func afterMilked():

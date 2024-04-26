@@ -54,6 +54,8 @@ func playAnimation(animID, _args = {}):
 	
 	updateSubAnims()
 	
+	$Sybian/ChainRenderer.visible = (_args.has("chained") && _args["chained"])
+	
 	var state_machine = animationTree["parameters/StateMachine/playback"]
 	var state_machine2 = animationTree2["parameters/StateMachine/playback"]
 

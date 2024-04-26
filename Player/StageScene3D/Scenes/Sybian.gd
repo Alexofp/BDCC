@@ -33,6 +33,8 @@ func playAnimation(animID, _args = {}):
 	
 	updateSubAnims()
 	
+	$Sybian/ChainRenderer.visible = (_args.has("chained") && _args["chained"])
+	
 	var state_machine = animationTree["parameters/AnimationNodeStateMachine/playback"]
 	if(animID == "idle"):
 		state_machine.travel("Idle")

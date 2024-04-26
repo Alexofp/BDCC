@@ -494,6 +494,7 @@ func after_gangbang():
 		getCharacter(slaveID).removeStrapon()
 		
 		getCharacter("artica").cummedOnBy(slaveID)
+	getModule("ArticaModule").makeLusty()
 
 func addNextGangButton():
 	if(sceneAmount <= 1):
