@@ -190,12 +190,12 @@ func _run():
 				playAnimation(StageScene.SybianOral, "ride", {pc="artica", npc="pc", chained=true, bodyState={naked=true, hard=true}})
 		else:
 			if (isArticaClose):
-				if (penisMilking):
+				if (penisMilking || isCaged):
 					playAnimation(StageScene.BreastGroping, "grope", {pc="pc", npc="artica", npcBodyState={naked=true, hard=true}})
 				else:
 					playAnimation(StageScene.BreastGroping, "stroke", {pc="pc", npc="artica", npcBodyState={naked=true, hard=true}})
 			else:
-				if (penisMilking):
+				if (penisMilking || isCaged):
 					playAnimation(StageScene.BreastGroping, "grope", {pc="pc", npc="artica", npcBodyState={naked=true, hard=true}})
 				else:
 					playAnimation(StageScene.BreastGroping, "stroke", {pc="pc", npc="artica", npcBodyState={naked=true, hard=true}})

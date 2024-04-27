@@ -1995,6 +1995,13 @@ func addConsciousness(newc:float):
 func isReadyToPenetrate() -> bool:
 	return getLustLevel() >= 0.5 || getLust() >= 50 || getArousal() >= 0.4 || isWearingStrapon()
 
+func getWornChastityCage():
+	if(getInventory().hasSlotEquipped(InventorySlot.Penis)):
+		var item = getInventory().getEquippedItem(InventorySlot.Penis)
+		if(item.hasTag(ItemTag.ChastityCage)):
+			return item
+	return null
+
 func isWearingChastityCage() -> bool:
 	# Having a chastity cage also means that you have a penis
 	if(!hasBodypart(BodypartSlot.Penis)):

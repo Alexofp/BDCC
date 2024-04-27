@@ -36,6 +36,11 @@ func getFlags():
 		"corruptionBegan": flag(FlagType.Bool),
 		"NoClothes": flag(FlagType.Bool),
 		"isLusty": flag(FlagType.Bool),
+		
+		"gotChastityDenied": flag(FlagType.Bool),
+		"cagedDay": flag(FlagType.Number),
+		"cagedTotalDays": flag(FlagType.Number),
+		"cagedAcceptStage": flag(FlagType.Number),
 	}
 
 func _init():
@@ -74,6 +79,31 @@ func _init():
 	worldEdits = [
 		"res://Modules/ArticaModule/c1Corruption/ArticaWorldEdit.gd",
 	]
+
+func startCaged():
+	setFlag("ArticaModule.cagedDay", GM.main.getDays())
+
+func endCaged():
+	var cagedDay = getFlag("ArticaModule.cagedDay", -1)
+	if(cagedDay > 0):
+		var daysCaged = GM.main.getDays() - cagedDay
+		increaseFlag("ArticaModule.cagedTotalDays", daysCaged)
+	setFlag("ArticaModule.cagedDay", -1)
+
+func getCagedDaysCurrently():
+	var cagedDay = getFlag("ArticaModule.cagedDay", -1)
+	if(cagedDay > 0):
+		var daysCaged = GM.main.getDays() - cagedDay
+		return daysCaged
+	return 0
+
+func getCagedDays():
+	var recordedDaysCaged = getFlag("ArticaModule.cagedTotalDays", 0)
+	var cagedDay = getFlag("ArticaModule.cagedDay", -1)
+	if(cagedDay > 0):
+		var daysCaged = GM.main.getDays() - cagedDay
+		recordedDaysCaged += daysCaged
+	return recordedDaysCaged
 
 func resetFlagsOnNewDay():
 	pass

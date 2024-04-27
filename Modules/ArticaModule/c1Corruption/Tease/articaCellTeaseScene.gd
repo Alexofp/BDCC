@@ -7,6 +7,10 @@ var isSlut = false
 var isVerySlut = false
 var isLusty = false
 var nakedAndShy = false
+var cagedDays = 0
+var cagedDaysTotal = 0
+var cageID = ""
+var isFirstChastDeny = false
 
 func _init():
 	sceneID = "articaCellTeaseScene"
@@ -41,10 +45,6 @@ func _run():
 			saynn("Artica's uniform is stashed here. You can give it back to her if you want.")
 
 		addButton("Cuddle", "Just cuddle together with Artica", "do_cuddle")
-		if (GM.pc.getInventory().hasItemsWithTag(ItemTag.RopeHarness)):
-			addButton("Ropes!", "Use ropes to suspend Artica above the floor in your cell.. to make her hang around in your cell a little longer", "pick_ropes_menu")
-		else:
-			addDisabledButton("Ropes!", "You don't have any rope harnesses in your inventory")
 		var pcSlaves = GM.main.getPCSlavesIDs()
 		if (pcSlaves.size() >= 1):
 			addButton("Slave Gangbang", "(Roughness) Let your slaves gangbang Artica", "start_gangbang")
@@ -133,12 +133,227 @@ func _run():
 		saynn("A close personal touch made Artica needy for more.. But it's time to return back to the main hall.")
 
 		addButton("Continue", "See what happens next", "endthescene")
-		if (!isCaged && isNaked):
-			addButtonWithChecks("Cage her", "Sneakily put a chastity cage on her", "chast_menu", [], [[ButtonChecks.HasChastityCageInInventory]])
-		elif (isCaged):
-			addDisabledButton("Cage her", "Artica is already wearing a chastity cage")
-		elif (!isNaked):
-			addDisabledButton("Cage her", "Artica needs to be forced to be naked for you to sneakily put a chastity cage on her")
+		if (!isCaged):
+			if (isNaked):
+				addButtonWithChecks("Cage her", "Sneakily put a chastity cage on her", "chast_menu", [], [[ButtonChecks.HasChastityCageInInventory]])
+			else:
+				addDisabledButton("Cage her", "Artica needs to be forced to be naked for you to sneakily put a chastity cage on her")
+		else:
+			addButton("Check cage", "See how her caged cock is doing", "do_start_remove_chast")
+	if(state == "do_start_remove_chast"):
+		playAnimation(StageScene.Cuddling, "idle", {pc="pc", npc="artica", npcBodyState={naked=true, hard=true}})
+		if (cagedDays <= 0):
+			saynn("Artica has worn that cage for.. zero days.."+str(" and "+str(cagedDaysTotal)+" days in total.." if cagedDaysTotal != cagedDays else "")+" not much, huh.. she can totally endure a few more days!.. Or weeks.")
+
+			saynn("You show Artica the key to her chastity cage..")
+
+			saynn("[say=artica]Oh.. already?..[/say]")
+
+		elif (cagedDays <= 1):
+			saynn("Artica has worn that cage for.. a single day.."+str(" and "+str(cagedDaysTotal)+" days in total.." if cagedDaysTotal != cagedDays else "")+" not much, huh.. she can totally do longer than that!")
+
+			saynn("[say=artica]Oh.. I did it? That wasn't so hard..[/say]")
+
+		elif (cagedDays <= 5):
+			saynn("Artica has worn that cage for.. "+str(cagedDays)+" days.."+str(" and "+str(cagedDaysTotal)+" days in total.." if cagedDaysTotal != cagedDays else "")+" That's something..")
+
+			saynn("[say=artica]Oh-h.. You're g-gonna unlock me, r-right?..[/say]")
+
+		elif (cagedDays < 10):
+			saynn("Artica has worn that cage for.. "+str(cagedDays)+" days.."+str(" and "+str(cagedDaysTotal)+" days in total.." if cagedDaysTotal != cagedDays else "")+" Not bad!")
+
+			saynn("[say=artica]Oh-h.. That's the key.. r-right?.. to my c-cock?.. p-please.. ah..[/say]")
+
+		else:
+			saynn("Artica has worn that cage for.. "+str(cagedDays)+" days.."+str(" and "+str(cagedDaysTotal)+" days in total.." if cagedDaysTotal != cagedDays else "")+" Wow, you really tested her!")
+
+			saynn("[say=artica]Oh-h.. That's the key.. r-right?.. to my c-cock?.. p-please.. ah.. I f-f..feel it pulsing.. e-every d-day..[/say]")
+
+		saynn(""+str("She doesn't resist as you pull her shorts down.. exposing her caged cock.." if !isNaked else "You direct your attention towards her caged cock..")+" Dragging the key along the metal.. makes her twitch, precum leaking from the sheath.. There is a lot of pressure in there.."+str(" even if you haven't kept her like this for very long.." if cagedDays < 5 else "")+"")
+
+		addButton("Unlock", "Remove the cage from her cock", "do_unlock_chastity")
+		addButton("Unlock for a bit", "Train her to rely on her cock less. Will have effect on her if she is caged for at least 10 days", "do_unlock_chastity_tease")
+		if (getFlag("ArticaModule.cagedAcceptStage", 0) >= 3):
+			addButton("Deny her", "Make her squirm..", "do_deny_chastity_unlock")
+		else:
+			addDisabledButton("Deny her", "Train Artica to rely less on receiving pleasure from her cock before doing this..")
+	if(state == "do_deny_chastity_unlock"):
+		playAnimation(StageScene.BreastGroping, "stroke", {pc="pc", npc="artica", npcBodyState={naked=true, hard=true}})
+		saynn("You slide the key into the keyhole.. and turn it..")
+
+		saynn("..soft click..")
+
+		saynn("[say=artica]Ah..[/say]")
+
+		saynn("Artica's heart is racing as you slowly take off the cage from her cock.. cock that turns hard in seconds.. She bites her lip while watching it drip pre..")
+
+		saynn("[say=artica]I.. k-know b-better than to t-touch..[/say]")
+
+		saynn("You smile.")
+
+		saynn("[say=pc]Oh yeah. You've been a very good girl, accepting that your cock is useless so fast.. almost like you always felt that way. I think you deserve a small reward.[/say]")
+
+		saynn("Your hand reaches towards her shaft.. digits about to wrap around..")
+
+		saynn("[say=artica]Ah-..[/say]")
+
+		saynn("So needy.. wait.. you didn't touch her dick yet. Hm..")
+
+		saynn("Instead of stroking her shaft.. you just hover your hand over it, teasingly.. This makes Artica whimper in frustration, the heat of your palm making her body tremble.. her member twitch..")
+
+		saynn("[say=artica]Nhh-h.. ah..[/say]")
+
+		saynn("With a sly smile, you begin to stroke.. the air.. near Artica's cock.. sliding your palm along it.. but never actually touching it..")
+
+		saynn("[say=artica]Ah-h-hh!.. ahh-h.. ahh.. ahh..ah..[/say]")
+
+		saynn("Artica moans eagerly as the sensations send shockwaves of pleasure through her body, her cock becoming harder.. throbbing.. shooting little spurts of pre.. balls tensing up.. toes curling.. tail spazzing wildly..")
+
+		saynn("[say=pc]So sensitive you've gotten..[/say]")
+
+		saynn("She is squirming in your hands.. while you're just pretending to stroke her.. the mental connection alone enough to trigger her knot to start inflating with blood..")
+
+		saynn("[say=artica]I'm.. ahh-h.. g-gonna.. ah.. t-too much.. g-gods.. ah.. nn-yaahh-h..[/say]")
+
+		saynn("But just as soon as you find her on the brink of orgasm.. you suddenly stop, your hand pulling away from her cock.")
+
+		saynn("[say=artica]Www-waaai.. ahh-h.. n-nnoo!.. ah.. ppp-pleaseee-e!.. ahh-h.. I'm ss-soo..[/say]")
+
+		saynn("Poor fluff arches her back.. and whimpers loudly, rubbing against you.. while your hands just hold her still in place.")
+
+		saynn("[say=artica]P-pp-please!.. ah.. J-ju-ustt.. a t-tiny-y.. bit.. mmmoore-e.. ahh-h..[/say]")
+
+		saynn("[say=pc]No. You're forgetting who your cock belongs to, whore.[/say]")
+
+		saynn("[say=artica]Huff-f-f-ff.. ahh-h..[/say]")
+
+		saynn("Your hand lands on her neck and applies a fair amount of pressure, stealing her breath.")
+
+		saynn("[say=pc]You're nothing but a fucktoy. Forget about your cock, you're only cumming from your holes being fucked.. or you're not cumming at all. Understand?[/say]")
+
+		saynn("[say=artica]Khh-h.. hh-h.. y-y..ah.. k-k..ah..[/say]")
+
+		saynn("She nods.. as much as your hand allows it.. her cock is still twitching and shooting precum, knot pulsing. Caging her now would surely make her cum in the process.. so you're just taking it slow, letting her cool down a bit.")
+
+		saynn("Your hand lets go of her throat, letting her cough and breath.")
+
+		saynn("[say=pc]Good. I might still decide to use your cock.. but when I'm not around.. only your pussy and ass. Understand?[/say]")
+
+		saynn("She nods more.")
+
+		saynn("[say=artica]Y-yes.. m-my c-cock is only f-for you.. hh.. khh.. for me it's.. useless..[/say]")
+
+		saynn("[say=pc]Good girl. Now let's..[/say]")
+
+		addButton("Lock her up", "Put the cage back onto her", "do_deny_chastity_lock")
+	if(state == "do_deny_chastity_lock"):
+		playAnimation(StageScene.BreastGroping, "tease", {pc="pc", npc="artica", npcBodyState={naked=true, hard=true}})
+		saynn("You lock the cage around Artica's cock again.. and then bring the horny fluff back into the main hall.")
+
+		if (isFirstChastDeny):
+			saynn("Waiting and seeing what she would do now would be interesting..")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_unlock_chastity"):
+		playAnimation(StageScene.Duo, "stand", {pc="pc", npc="artica", npcBodyState={naked=true, hard=true}})
+		saynn("You slide the key into the keyhole.. and turn it..")
+
+		saynn("..soft click..")
+
+		saynn("[say=artica]Ah.. T-thank you-u!..[/say]")
+
+		saynn("[say=pc]You're welcome.[/say]")
+
+		saynn("Her cock becomes erect as soon as it is freed.")
+
+		saynn("You recover the cage and bring the horny fluff back into the main hall.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_unlock_chastity_tease"):
+		playAnimation(StageScene.Cuddling, "squirm", {pc="pc", npc="artica", npcBodyState={naked=true, hard=true}})
+		saynn("You slide the key into the keyhole.. and turn it..")
+
+		saynn("..soft click..")
+
+		saynn("[say=artica]Ah.. T-thank you-u!..[/say]")
+
+		saynn("As you remove the cage.. her cock instantly springs into its fully erect state.")
+
+		var acceptCaged = getFlag("ArticaModule.cagedAcceptStage", 0)
+		if (acceptCaged <= 1):
+			saynn("Artica instantly reaches her hand to start stroking it.. but you slap it away before she gets a chance to cum.")
+
+			saynn("[say=pc]No. Stop right now or I will cage you and break the key.[/say]")
+
+			saynn("[say=artica]Oh.. aw.. ah.. b-but.. ah-h..[/say]")
+
+			saynn("Her little moans turn into whimpers.. as she is forced to look at her hard juicy cyan cock.. twitching.. leaking pre.. without being able to touch it.")
+
+			saynn("[say=pc]Only I decide if you're allowed to touch it, understand?[/say]")
+
+			saynn("You hear more whines and little moans from the fluff.")
+
+			saynn("[say=artica]Ah-h.. huff-f.. h-h.. y-yes.. o-okay.. n-no touching..[/say]")
+
+			saynn("You smile and smooch the girl on the cheek.. before putting the cage back onto her cock, forcing her hard cyan shaft back into the sheath.")
+
+			saynn("[say=artica]H-h.hey.. ah!.. eep.. m-my..! But I.. ahh-h..[/say]")
+
+			saynn("Artica's paws land on her crotch.. clawed digits start tugging on the metal..")
+
+			saynn("[say=pc]The faster you understand your place, the easier it will be for you.[/say]")
+
+		elif (acceptCaged <= 2):
+			saynn("Artica's hand reaches for her hard juicy cock.. digits wrap around the cyan shaft.. twitching.. but not moving.")
+
+			saynn("[say=artica]I.. ah.. I-I.. w-will only s-stroke if you a-allow..[/say]")
+
+			saynn("You can hear her panting.. her cock is pulsing in her paw.. a lonely drop of pre sliding down from the tip and reaching the hand..")
+
+			saynn("[say=pc]Good. Because I don't allow you to stroke. Your cock is my toy to play with. For you.. it's useless.[/say]")
+
+			saynn("[say=artica]Ah-h.. ahh-hhh..h..[/say]")
+
+			saynn("Your words only seem to make her more desperate.. Her hand.. shaking.. while she is making all sorts of cute noises.")
+
+			saynn("[say=artica]O-okay.. y-yes.. m-my cock.. u-useless..[/say]")
+
+			saynn("She learns her place fast, huh.")
+
+			saynn("[say=pc]Paws away from the cock, slut.[/say]")
+
+			saynn("Quiet whines escape her maw.. but she does obey, her hand relaxing the grip and sliding off..")
+
+			saynn("As she does it, you begin securing the cage again, fighting her erection.. until you hear a click.")
+
+			saynn("[say=artica]Ahh-h~.. it's.. t-too much..[/say]")
+
+			saynn("[say=pc]My toy~.[/say]")
+
+			saynn("Her paws tug on the cage a little bit. Seeing that she can't take it off, her paws start rubbing and squeezing her own ballsack.. before bringing these paws to her snout and sniffing her scent.")
+
+			saynn("[say=artica]Nhh-h..[/say]")
+
+			saynn("[say=pc]So needy.[/say]")
+
+		else:
+			saynn("Artica's big eyes watch her hard juicy cock twitch and drip pre eagerly.. but she doesn't even reach for it.")
+
+			saynn("[say=artica]..m-my c-cock.. useless.. just a.. ah.. f-fucktoy..[/say]")
+
+			saynn("[say=pc]Mhm. It's not useless for me though.. a handy indicator for when you're cumming.[/say]")
+
+			saynn("She is panting softly.. her heart is beating at the same rate as her cock is throbbing..")
+
+			saynn("[say=artica]Y-yes.. can stay locked away.. f-fforever..[/say]")
+
+			saynn("After a short minute of freedom.. you press the top part of the cage against the tip of her cock.. before forcing the veiny throbbing shaft into the sheath until the two metal parts click together.")
+
+			saynn("[say=artica]Ah-h-h.. g-gods..[/say]")
+
+		saynn("You bring the needy fluff back to the main hall.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "chast_menu"):
 		saynn("Which of your cages do you want to put on her?")
 
@@ -296,12 +511,54 @@ func _react(_action: String, _args):
 		isNaked = false
 		nakedAndShy = false
 
+	if(_action == "do_start_remove_chast"):
+		cagedDays = getModule("ArticaModule").getCagedDaysCurrently()
+		cagedDaysTotal = getModule("ArticaModule").getCagedDays()
+
+	if(_action == "do_unlock_chastity"):
+		processTime(3*60)
+		var cage = getCharacter("artica").getWornChastityCage()
+		if(cage != null):
+			getCharacter("artica").getInventory().removeEquippedItem(cage)
+			GM.pc.getInventory().addItem(cage)
+		getModule("ArticaModule").endCaged()
+
+	if(_action == "do_unlock_chastity_tease"):
+		processTime(3*60)
+		getModule("ArticaModule").makeLusty()
+		if(cagedDays >= 10):
+			var acceptCaged = getFlag("ArticaModule.cagedAcceptStage", 0)
+			if(acceptCaged < 3):
+				acceptCaged += 1
+				setFlag("ArticaModule.cagedAcceptStage", acceptCaged)
+
+	if(_action == "do_deny_chastity_unlock"):
+		processTime(3*60)
+		var alreadyWasDenied = getFlag("ArticaModule.gotChastityDenied", false)
+		if(!alreadyWasDenied):
+			isFirstChastDeny = true
+			getModule("ArticaModule").addCorruption(0.05)
+		setFlag("ArticaModule.gotChastityDenied", true)
+		getModule("ArticaModule").makeLusty()
+		var cage = getCharacter("artica").getWornChastityCage()
+		if(cage != null):
+			cageID = cage.uniqueID
+			getCharacter("artica").getInventory().removeEquippedItem(cage)
+			GM.pc.getInventory().addItem(cage)
+
+	if(_action == "do_deny_chastity_lock"):
+		var cage = GM.pc.getInventory().getItemByUniqueID(cageID)
+		if(cage != null):
+			GM.pc.getInventory().removeItem(cage)
+			getCharacter("artica").getInventory().forceEquipStoreOtherUnlessRestraint(cage)
+
 	if(_action == "chast_puton"):
 		processTime(5*60)
 		var strapon = _args[0]
 		GM.pc.getInventory().removeItem(strapon)
 		getCharacter("artica").getInventory().forceEquipStoreOtherUnlessRestraint(strapon)
 		isCaged = true
+		getModule("ArticaModule").startCaged()
 
 	if(_action == "chast_getup"):
 		processTime(3*60)
@@ -318,6 +575,10 @@ func saveData():
 	data["isVerySlut"] = isVerySlut
 	data["isLusty"] = isLusty
 	data["nakedAndShy"] = nakedAndShy
+	data["cagedDays"] = cagedDays
+	data["cagedDaysTotal"] = cagedDaysTotal
+	data["cageID"] = cageID
+	data["isFirstChastDeny"] = isFirstChastDeny
 
 	return data
 
@@ -331,3 +592,7 @@ func loadData(data):
 	isVerySlut = SAVE.loadVar(data, "isVerySlut", false)
 	isLusty = SAVE.loadVar(data, "isLusty", false)
 	nakedAndShy = SAVE.loadVar(data, "nakedAndShy", false)
+	cagedDays = SAVE.loadVar(data, "cagedDays", 0)
+	cagedDaysTotal = SAVE.loadVar(data, "cagedDaysTotal", 0)
+	cageID = SAVE.loadVar(data, "cageID", "")
+	isFirstChastDeny = SAVE.loadVar(data, "isFirstChastDeny", false)
