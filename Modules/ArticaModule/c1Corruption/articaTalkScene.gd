@@ -43,6 +43,28 @@ func _run():
 		else:
 			addDisabledButton("Wait..", "Nothing will happen if you do this. Can try to make Artica horny to encourage her to explore the station")
 		addButton("Leave", "Time to go", "endthescene")
+	if(state == "sex_menu"):
+		saynn("Artica is horny. How do you wanna solve that?")
+
+		addButton("Breed her", "Try for some pups", "sex_breed")
+		addButton("Ride her", "Artica has a nice cock.. why not ride it", "sex_ride")
+		if (corruption >= 0.2):
+			addButton("Pawjob", "Make Artica cum with just your feet", "sex_pawjob")
+		else:
+			addDisabledButton("Pawjob", "Artica's corruption needs to be above 20% for her to agree to this")
+		if (corruption >= 0.3):
+			addButton("Ropes!", "Use some ropes to suspend Artica above the floor.. and then have some fun with her", "sex_ropes")
+		else:
+			addDisabledButton("Ropes!", "Artica's corruption needs to be above 30% for her to agree.. also.. prepare a rope harness")
+		if (corruption >= 0.5):
+			addButton("Mutual pawjob", "Help each other out with your paws", "sex_mutualpawjob")
+		else:
+			addDisabledButton("Mutual pawjob", "Artica's corruption needs to be above 50% for her to be kinky enough to do this!")
+		if (corruption >= 0.8):
+			addButton("Hypnovisor fun..", "Mess with Artica's mind a little..", "sex_hypnovisorfun")
+		else:
+			addDisabledButton("Mutual pawjob", "Artica's corruption needs to be above 80% for her to be kinky enough to do this.. also don't forget to bring a hypnovisor!")
+		addButton("Back", "Never mind", "")
 	if(state == "tease_menu"):
 		saynn("What do you want to do?")
 
@@ -327,12 +349,12 @@ func getDebugActions():
 	"id": "setCorruption",
 	"name": "Set Corruption",
 	"args": [
-		 {
-		 "id": "corruption",
-		 "name": "How much (0-100)",
-		 "type": "number",
-		 "value": 100,
-		 },
+			 {
+			 "id": "corruption",
+			 "name": "How much (0-100)",
+			 "type": "number",
+			 "value": 100,
+			 },
 	],
 	},
 	]
@@ -346,6 +368,36 @@ func doDebugAction(_id, _args = {}):
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
+		return
+
+	if(_action == "sex_breed"):
+		endScene()
+		runScene("articaSexBreedScene")
+		return
+
+	if(_action == "sex_ride"):
+		endScene()
+		runScene("articaSexRideScene")
+		return
+
+	if(_action == "sex_pawjob"):
+		endScene()
+		runScene("articaSexPawjobScene")
+		return
+
+	if(_action == "sex_ropes"):
+		endScene()
+		runScene("articaSexRopesScene")
+		return
+
+	if(_action == "sex_mutualpawjob"):
+		endScene()
+		runScene("articaSexMutualPawjobScene")
+		return
+
+	if(_action == "sex_hypnovisorfun"):
+		endScene()
+		runScene("articaSexHypnovisorScene")
 		return
 
 	if(_action == "do_tease_canteen"):
