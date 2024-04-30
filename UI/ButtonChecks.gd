@@ -26,6 +26,7 @@ enum {
 	ContentEnabled,
 	CanWearStrapon,
 	HasStraponAndCanWear,
+	HasStrapons,
 	IsWearingChastityCage,
 	HasChastityCageInInventory,
 	HasItemID,
@@ -86,6 +87,8 @@ static func getReasonText(reason):
 		return "You can't wear strapons"
 	if(reason == HasStraponAndCanWear):
 		return "You don't have any strapons or can't put on one"
+	if(reason == HasStrapons):
+		return "You need a strapon in your inventory to do this"
 	if(reason == IsWearingChastityCage):
 		return "You're not wearing a chastity cage"
 	if(reason == NotCollapsed):
@@ -184,6 +187,9 @@ static func check(checks: Array):
 		if(reason == HasStraponAndCanWear):
 			if(!GM.pc.canWearStrapon()):
 				return args
+			if(!GM.pc.hasStrapons()):
+				return args
+		if(reason == HasStrapons):
 			if(!GM.pc.hasStrapons()):
 				return args
 		if(reason == IsWearingChastityCage):
