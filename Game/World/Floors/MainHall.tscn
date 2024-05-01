@@ -153,6 +153,7 @@ population = 3
 
 [node name="MainHallRoom48" parent="." index="16" instance=ExtResource( 2 )]
 position = Vector2( 128, 448 )
+roomName = "Stairs"
 roomDescription = "A set of stairs that lead to the greenhouses level. Markings on the floor remind the inmates that the greenhouses are [color=red]off-limits[/color] for them"
 gridColor = 2
 population = 2
