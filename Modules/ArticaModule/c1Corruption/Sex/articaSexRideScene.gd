@@ -126,7 +126,7 @@ func _run():
 		saynn("Which strapon do you want to put on Artica?")
 
 		addStraponButtons()
-		addButton("Back", "You changed your mind", "")
+		addButton("Back", "You changed your mind", "in_cell")
 		if (false):
 			addButton("Nope", "You shouldn't see this", "do_put_on_strapon_on_artica")
 	if(state == "do_put_on_strapon_on_artica"):
@@ -594,6 +594,7 @@ func _react(_action: String, _args):
 	if(_action == "do_put_on_strapon_on_artica"):
 		processTime(2*60)
 		var strapon = _args[0]
+		GM.pc.getInventory().removeItem(strapon)
 		getCharacter("artica").getInventory().forceEquipStoreOtherUnlessRestraint(strapon)
 		var theFluids = strapon.getFluids()
 		if(theFluids != null):
