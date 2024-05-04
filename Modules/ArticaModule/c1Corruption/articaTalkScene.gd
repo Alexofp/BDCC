@@ -53,7 +53,7 @@ func _run():
 		else:
 			addDisabledButton("Pawjob", "Artica's corruption needs to be above 20% for her to agree to this")
 		if (corruption >= 0.3):
-			addButton("Ropes!", "Use some ropes to suspend Artica above the floor.. and then have some fun with her", "sex_ropes")
+			addButtonWithChecks("Ropes!", "Use some ropes to suspend Artica above the floor.. and then have some fun with her (Requires a rope harness!)", "sex_ropes", [], [[ButtonChecks.HasItemWithTag, ItemTag.RopeHarness]])
 		else:
 			addDisabledButton("Ropes!", "Artica's corruption needs to be above 30% for her to agree.. also.. prepare a rope harness")
 		if (corruption >= 0.5):
@@ -349,12 +349,12 @@ func getDebugActions():
 	"id": "setCorruption",
 	"name": "Set Corruption",
 	"args": [
-			 {
-			 "id": "corruption",
-			 "name": "How much (0-100)",
-			 "type": "number",
-			 "value": 100,
-			 },
+	 {
+	 "id": "corruption",
+	 "name": "How much (0-100)",
+	 "type": "number",
+	 "value": 100,
+	 },
 	],
 	},
 	]

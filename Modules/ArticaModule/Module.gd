@@ -67,6 +67,7 @@ func _init():
 		"res://Modules/ArticaModule/c1Corruption/Sex/articaSexRideScene.gd",
 		"res://Modules/ArticaModule/c1Corruption/Sex/articaSexBreedScene.gd",
 		"res://Modules/ArticaModule/c1Corruption/Sex/articaSexPawjobScene.gd",
+		"res://Modules/ArticaModule/c1Corruption/Sex/articaSexRopesScene.gd",
 		]
 	characters = [
 		"res://Modules/ArticaModule/ArticaCharacter.gd",

@@ -36,6 +36,7 @@ enum {
 	NotWearingItem,
 	CanStartSex,
 	HasReachableOrCagedPenisOrReachableVagina,
+	HasItemWithTag,
 }
 
 static func getReasonText(reason):
@@ -109,6 +110,8 @@ static func getReasonText(reason):
 		return "You can't start sex while you are wearing restraints"
 	if(reason == HasReachableOrCagedPenisOrReachableVagina):
 		return "You need to have a penis or a reachable vagina"
+	if(reason == HasItemWithTag):
+		return "You don't have the required kind of item"
 	return "Error?"
 
 static func check(checks: Array):
@@ -228,6 +231,9 @@ static func check(checks: Array):
 		if(reason == HasReachableOrCagedPenisOrReachableVagina):
 			if(!GM.pc.hasReachablePenis() && !GM.pc.isWearingChastityCage() && !GM.pc.hasReachableVagina()):
 				return reason
+		if(reason == HasItemWithTag):
+			if(GM.pc.getInventory().getItemsWithTag(args[1]).size() <= 0):
+				return args
 			
 	return null
 
