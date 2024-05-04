@@ -74,7 +74,7 @@ func doTextCommand(command):
 			
 			split_text.pop_front()
 			if(split_text.size() != command_entry["params"].size()):
-				printLine("Wrong amount of arguments, expected: "+str(command_entry["paramCount"]))
+				printLine("Wrong amount of arguments, expected: "+str(command_entry["params"].size()))
 				return
 			command_entry["function"].call_funcv(split_text)
 
