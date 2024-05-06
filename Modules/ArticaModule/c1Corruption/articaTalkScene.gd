@@ -57,7 +57,10 @@ func _run():
 		else:
 			addDisabledButton("Ropes!", "Artica's corruption needs to be above 30% for her to agree.. also.. prepare a rope harness")
 		if (corruption >= 0.5):
-			addButton("Mutual pawjob", "Help each other out with your paws", "sex_mutualpawjob")
+			if (!isCaged):
+				addButton("Mutual pawjob", "Help each other out with your paws", "sex_mutualpawjob")
+			else:
+				addDisabledButton("Mutual pawjob", "Artica can not be caged for this scene. Sorry!")
 		else:
 			addDisabledButton("Mutual pawjob", "Artica's corruption needs to be above 50% for her to be kinky enough to do this!")
 		if (corruption >= 0.8):
