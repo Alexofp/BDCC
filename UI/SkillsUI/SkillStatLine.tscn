@@ -6,9 +6,6 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="."]
 margin_top = 353.0
@@ -21,6 +18,12 @@ margin_left = 81.0
 margin_right = 101.0
 margin_bottom = 720.0
 text = "+"
+
+[node name="Amount" type="SpinBox" parent="."]
+margin_left = 105.0
+margin_right = 179.0
+margin_bottom = 720.0
+value = 1.0
 
 [connection signal="mouse_entered" from="." to="." method="_on_SkillStatLine_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_SkillStatLine_mouse_exited"]

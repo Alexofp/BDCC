@@ -213,6 +213,7 @@ margin_left = -233.0
 margin_top = -59.0
 margin_right = 233.0
 margin_bottom = 59.0
+rect_min_size = Vector2( 150, 52.5 )
 dialog_autowrap = true
 
 [node name="ModBrowser" parent="." instance=ExtResource( 6 )]
