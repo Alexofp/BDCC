@@ -64,7 +64,7 @@ func _run():
 		else:
 			addDisabledButton("Mutual pawjob", "Artica's corruption needs to be above 50% for her to be kinky enough to do this!")
 		if (corruption >= 0.8):
-			addButton("Hypnovisor fun..", "Mess with Artica's mind a little..", "sex_hypnovisorfun")
+			addButtonWithChecks("Hypnovisor fun..", "Mess with Artica's mind a little.. You will need a hypnovisor for this", "sex_hypnovisorfun", [], [[ButtonChecks.HasItemWithTag, ItemTag.Hypnovisor]])
 		else:
 			addDisabledButton("Mutual pawjob", "Artica's corruption needs to be above 80% for her to be kinky enough to do this.. also don't forget to bring a hypnovisor!")
 		addButton("Back", "Never mind", "")

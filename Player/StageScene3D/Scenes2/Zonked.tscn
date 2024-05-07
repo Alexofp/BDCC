@@ -1,0 +1,194 @@
+[gd_scene load_steps=46 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes2/Zonked.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=474]
+animation = "Zonked-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=475]
+animation = "ZonkedCum-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=476]
+animation = "ZonkedRub-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=477]
+animation = "ZonkedRubCum-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=478]
+animation = "ZonkedStroke-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=479]
+animation = "ZonkedStrokeCum-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=480]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=481]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=482]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=483]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=484]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=485]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=486]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=487]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=488]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=489]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=490]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=491]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=492]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=493]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=494]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=495]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=496]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=497]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=498]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=499]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=500]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=501]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=507]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=508]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=509]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=510]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=502]
+states/Zonked-loop/node = SubResource( 474 )
+states/Zonked-loop/position = Vector2( 407, 28 )
+states/ZonkedCum-loop/node = SubResource( 475 )
+states/ZonkedCum-loop/position = Vector2( 629, 28 )
+states/ZonkedRub-loop/node = SubResource( 476 )
+states/ZonkedRub-loop/position = Vector2( 265, 114 )
+states/ZonkedRubCum-loop/node = SubResource( 477 )
+states/ZonkedRubCum-loop/position = Vector2( 280, 204 )
+states/ZonkedStroke-loop/node = SubResource( 478 )
+states/ZonkedStroke-loop/position = Vector2( 854, 126 )
+states/ZonkedStrokeCum-loop/node = SubResource( 479 )
+states/ZonkedStrokeCum-loop/position = Vector2( 872, 212 )
+transitions = [ "Zonked-loop", "ZonkedCum-loop", SubResource( 480 ), "ZonkedCum-loop", "Zonked-loop", SubResource( 481 ), "ZonkedRub-loop", "Zonked-loop", SubResource( 482 ), "Zonked-loop", "ZonkedRub-loop", SubResource( 483 ), "ZonkedRub-loop", "ZonkedRubCum-loop", SubResource( 484 ), "ZonkedRubCum-loop", "ZonkedRub-loop", SubResource( 485 ), "ZonkedCum-loop", "ZonkedStroke-loop", SubResource( 486 ), "ZonkedStroke-loop", "ZonkedCum-loop", SubResource( 487 ), "Zonked-loop", "ZonkedStroke-loop", SubResource( 488 ), "ZonkedStroke-loop", "Zonked-loop", SubResource( 489 ), "ZonkedRub-loop", "ZonkedCum-loop", SubResource( 490 ), "ZonkedCum-loop", "ZonkedRub-loop", SubResource( 491 ), "ZonkedStroke-loop", "ZonkedStrokeCum-loop", SubResource( 492 ), "ZonkedStrokeCum-loop", "ZonkedStroke-loop", SubResource( 493 ), "ZonkedRubCum-loop", "ZonkedStrokeCum-loop", SubResource( 494 ), "ZonkedStrokeCum-loop", "ZonkedRubCum-loop", SubResource( 495 ), "ZonkedRub-loop", "ZonkedStroke-loop", SubResource( 496 ), "ZonkedStroke-loop", "ZonkedRub-loop", SubResource( 497 ), "ZonkedRub-loop", "ZonkedStrokeCum-loop", SubResource( 498 ), "ZonkedStrokeCum-loop", "ZonkedRub-loop", SubResource( 499 ), "ZonkedRubCum-loop", "ZonkedStroke-loop", SubResource( 500 ), "ZonkedStroke-loop", "ZonkedRubCum-loop", SubResource( 501 ), "ZonkedRubCum-loop", "ZonkedCum-loop", SubResource( 507 ), "ZonkedCum-loop", "ZonkedRubCum-loop", SubResource( 508 ), "ZonkedCum-loop", "ZonkedStrokeCum-loop", SubResource( 509 ), "ZonkedStrokeCum-loop", "ZonkedCum-loop", SubResource( 510 ) ]
+start_node = "Zonked-loop"
+graph_offset = Vector2( 13, -49 )
+
+[sub_resource type="AnimationNodeBlendTree" id=503]
+graph_offset = Vector2( -348.69, 38.9555 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 502 )
+nodes/StateMachine/position = Vector2( 172.31, 83.9555 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=460]
+
+[sub_resource type="AnimationNodeAnimation" id=504]
+animation = "Beg_2-loop"
+
+[sub_resource type="AnimationNodeStateMachine" id=505]
+states/Beg_2-loop/node = SubResource( 504 )
+states/Beg_2-loop/position = Vector2( 471, 91 )
+start_node = "Beg_2-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=506]
+graph_offset = Vector2( -322.532, 74.6842 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 505 )
+nodes/StateMachine/position = Vector2( 160, 140 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=473]
+
+[node name="Zonked" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.317465, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.324891, -0.120824, 0 )
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -0.68412, -0.120824, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 503 )
+anim_player = NodePath("../Doll3D/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 460 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 506 )
+anim_player = NodePath("../Doll3D2/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 473 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]
+[editable path="Doll3D2"]
+[editable path="Doll3D2/DollSkeleton"]
+[editable path="Doll3D2/DollSkeleton2"]
