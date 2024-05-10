@@ -451,13 +451,23 @@ func _run():
 			playAnimation(StageScene.SexPawLick, "stroketease", {pc="nova", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		else:
 			playAnimation(StageScene.SexPawLick, "tease", {pc="nova", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Nova settles the fluff on one of the flat rocks and positions herself between her legs, Artica's wet pussy and {artica.penis} was on full display..")
+
 		if (!isCaged):
-			saynn("Nova notices Artica's pulsing cock.")
+			saynn("The husky presses her shaft against Artica's and wraps her digits around both, stroking them casually.")
 
 			saynn("[say=nova]One thing though..[/say]")
 
 			addButton("Continue", "See what happens next", "nova_cages_artica")
 		else:
+			saynn("The husky admires that caged member and smiles, her free paw gently tugging on it to check how tight it sits.")
+
+			saynn("[say=nova]Wonder who has the key~.[/say]")
+
+			saynn("Artica looks at her locked cock.. and doesn't look sad about it, her fuckhole is dripping just as much..")
+
+			saynn("[say=nova]Now..[/say]")
+
 			addButton("Continue", "See what happens next", "nova_fucks_artica")
 	if(state == "nova_cages_artica"):
 		playAnimation(StageScene.SexPawLick, "tease", {pc="nova", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, caged=true}})
@@ -476,6 +486,109 @@ func _run():
 		addButton("Continue", "See what happens next", "nova_fucks_artica")
 	if(state == "nova_fucks_artica"):
 		playAnimation(StageScene.SexPawLick, "sex", {pc="nova", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, caged=true}})
+		saynn("Gripping one of Artica's legs firmly, Nova lines up herself with that slick inviting entrance.. Then with a single, powerful thrust, she buries herself inside, that red rocket of hers is displacing the cum that was already there, spreading and stretching Artica's folds and eliciting a cute moan from her.")
+
+		saynn("[say=nova]Ah.. Such a nice obedient pussy.. Hope you don't mind me snowballing it, cutie~.[/say]")
+
+		saynn("Hypnotized Artica is just busy moaning, her body reacting to the deep thrusts, squirming and arching, her toes sprawling in caressing Nova's cheek..")
+
+		saynn("[say=nova]Mommy loves your beans..[/say]")
+
+		saynn("Husky leans in to give Artica's hind paw some kisses, dotting them around her cyan paw pads, giggling when the toes curl up near her muzzle.")
+
+		addButton("Continue", "See what happens next", "nova_fucks_artica_fast")
+	if(state == "nova_fucks_artica_fast"):
+		playAnimation(StageScene.SexPawLick, "fast", {pc="nova", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, caged=true}})
+		saynn("Artica's cock is throbbing in its little cage while Nova is picking up the pace of her trusts, driving into that pussy with increasing eagerness, her cock delving deep into her slick folds, brushing against the pleasure spot.. which makes the girl's walls tighten around Nova's girth.")
+
+		saynn("[say=nova]Is someone cumming already~? You have my permission, sweetheart.[/say]")
+
+		saynn("Almost like she is ordered, Artica reaches her peak, long strings of cum erupt from the little hole of her chastity cage and land on her gray belly, a passionate noise escapes her lips while her pussy is spasming around Nova's cock.. making the husky grunt and shower that hind paw with more little kisses.")
+
+		saynn("[say=nova]So messy, nhh-h~..[/say]")
+
+		saynn("Nova's knot is inflating with blood while Artica's pussy continues to clench around it, too tight to accept it.. And yet, the husky keeps going, ramming her member as deep as the cyan pussy allows, stretching it further bit by bit..")
+
+		addButton("Continue", "See what happens next", "nova_cums_in_artica")
+	if(state == "nova_cums_in_artica"):
+		playAnimation(StageScene.SexPawLick, "inside", {pc="nova", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, caged=true}})
+		saynn("With one final, powerful thrust, Nova buries her cock deep inside Artica, the fat swollen knot slips past the tight folds, tying the two lovers together! The fluff moans again, a new impulse sends her body to squirm hard, her locked hard shooting more weak spurts of seed out of it, pussy clenching around the rod.")
+
+		saynn("[say=nova]Ngh-h-hh~.. Sorry, cutie, I had to~. Here it comes..[/say]")
+
+		saynn("Nova throws her head back as the clenching pussy walls push her over the edge, her {nova.penis} pulses and unloads its hot sticky load deep inside, stuffing Artica's womb to the brim.. while it still had the old cream inside it..")
+
+		if (getCharacter("artica").isVisiblyPregnant()):
+			saynn("[say=nova]Wonder if that belly is your litter.. or just all the cum that you have taken inside..[/say]")
+
+		else:
+			saynn("[say=nova]Nhh.. Find me if you get knocked up with my pups~.[/say]")
+
+		saynn("They spend some time like that, tied together.. The husky is adding more writings on the messy snowy fur to kill the time..")
+
+		saynn("Nova waits for her knot to deflate.. before finally yanking it out, making the used slit gush with seed..")
+
+		if (!isCaged):
+			saynn("[say=nova]Oh yeah, gimme that cage back~.[/say]")
+
+			saynn("She unlocks Artica's locked member.. and puts her cage away..")
+
+		saynn("The guard smooches the cyan beans for the last time and helps the white fluff to get up.")
+
+		saynn("[say=nova]Please take care~.[/say]")
+
+		addButton("Continue", "See what happens next", "artica_walks_into_gym")
+	if(state == "artica_walks_into_gym"):
+		removeCharacter("nova")
+		playAnimation(StageScene.Solo, "stand", {pc="artica", bodyState={naked=true, hard=true}})
+		aimCameraAndSetLocName("gym_yoga")
+		saynn("Hypnotized fluff continues to explore the prison on her own, swaying from side to side as her used fuckhole is dripping seed.. She seems to be pretty determined, huh..")
+
+		saynn("You continue to just watch her from afar, making sure she doesn't get into trouble.. wait.. Artica has stumbled upon the gym area..")
+
+		saynn("An area that is full of sweaty dudes and gals..")
+
+		addButton("Continue", "See what happens next", "artica_finds_gang")
+	if(state == "artica_finds_gang"):
+		addCharacter("gymbully")
+		addCharacter("gymbully2")
+		addCharacter("gymbully3")
+		playAnimation(StageScene.Duo, "stand", {pc="artica", npc="gymbully", bodyState={naked=true, hard=true}})
+		saynn("A gang.. of three.. is quick to surround the fluff, all of them wearing red colors..")
+
+		saynn("[say=gymbully]Look who we have here. Wait, what's up with your eyes?[/say]")
+
+		saynn("The main guy crosses his arms and eyes the messy naked girl.")
+
+		saynn("[say=gymbully3]Wowies! This slut is, like, totally zonked![/say]")
+
+		saynn("The female inmate pushes herself closer to Artica's face, inspecting out the hypnovisor and Artica's eyes.")
+
+		saynn("[say=gymbully3]Ohhh.. so spiral-y, HAHA. I can already feel myself wanting to suck cock more.. Cooooock..[/say]")
+
+		saynn("[say=gymbully]That's your normal state.[/say]")
+
+		saynn("[say=gymbully3]PFFF! You are soo-oo-o-o.. not exactly not right.[/say]")
+
+		saynn("The third gang member is quiet, just blocking the only exit.")
+
+		saynn("[say=gymbully]Huh.. She doesn't seem to have any credits on her.[/say]")
+
+		saynn("[say=gymbully3]YEAH! Where are your pockets, MISS SLUT?[/say]")
+
+		saynn("The crazy one pulls Artica's tail high up, exposing her used dripping cunt and a tight asshole.")
+
+		saynn("[say=gymbully3]In there?! Should I shove my fist into her and look for some?![/say]")
+
+		saynn("[say=gymbully]Huh.. I think there are better things that we can shove into her..[/say]")
+
+		saynn("Artica just bleps back at them, her hypnotized eyes don't show any protest.")
+
+		saynn("Well, hopefully they won't break her.. more than she is already broken.")
+
+		addButton("Continue", "See what happens next", "gang_start")
+	if(state == "gang_start"):
+		playAnimation(StageScene.SexGangbang, "tease", {pc="artica", npc="gymbully", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2="gymbully3", npc2BodyState={naked=true, hard=true}, npc3="gymbully2", npc3BodyState={naked=true, hard=true}})
 func addPumpButtons(go_id):
 	var pumps = GM.pc.getInventory().getItemsWithTag(ItemTag.Hypnovisor)
 	for pump in pumps:
@@ -566,6 +679,7 @@ func _react(_action: String, _args):
 		getCharacter("artica").cummedInVaginaBy("risha")
 		getCharacter("artica").addBodywritingRandom()
 		getCharacter("artica").addBodywritingRandom()
+		getCharacter("artica").addTallymarkCrotch()
 
 	if(_action == "artica_after_risha"):
 		processTime(5*60)
@@ -588,6 +702,27 @@ func _react(_action: String, _args):
 
 	if(_action == "nova_fucks_artica"):
 		processTime(5*60)
+
+	if(_action == "nova_fucks_artica_fast"):
+		processTime(5*60)
+		getCharacter("artica").cummedOnBy("artica")
+
+	if(_action == "nova_cums_in_artica"):
+		processTime(5*60)
+		getModule("ArticaModule").triggerCorruption(0.01)
+		getCharacter("artica").cummedInVaginaBy("nova")
+		getCharacter("artica").addBodywritingRandom()
+		getCharacter("artica").addBodywritingRandom()
+		getCharacter("artica").addTallymarkCrotch()
+
+	if(_action == "artica_walks_into_gym"):
+		processTime(5*60)
+
+	if(_action == "artica_finds_gang"):
+		processTime(3*60)
+
+	if(_action == "gang_start"):
+		getCharacter("gymbully2").getInventory().equipItem(GlobalRegistry.createItem("StraponCanine"))
 
 	setState(_action)
 
