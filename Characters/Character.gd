@@ -286,9 +286,11 @@ func getWrongEquippedItems(includeDamaged=true):
 	
 	return result
 
-func resetEquipment(keepPersistent = true, keepImportant = true):
+func resetEquipment(keepPersistent = true, keepImportant = true, keepRestraints=false):
 	var badItems = getWrongEquippedItems()
 	for item in badItems:
+		if(keepRestraints && item.isRestraint()):
+			continue
 		if(keepPersistent && item.isPersistent()):
 			continue
 		if(keepImportant && item.isImportant()):

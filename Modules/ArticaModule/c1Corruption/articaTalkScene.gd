@@ -36,6 +36,10 @@ func _run():
 			addButton("Sex", "See what kind of kinky things you can do with her", "sex_menu")
 		else:
 			addDisabledButton("Sex", "Artica is not horny enough")
+		if (getCharacter("artica").hasEffect(StatusEffect.HasBodyWritings) || getCharacter("artica").hasEffect(StatusEffect.CoveredInCum)):
+			addButton("Shower", "Wait until Artica heads to the showers on her own..", "start_showers")
+		else:
+			addDisabledButton("Shower", "Artica won't go to the showers unless she is messy")
 		if (getModule("ArticaModule").canTriggerWaitScene()):
 			saynn("Artica is gonna do something if you wait for her to do so..")
 
@@ -352,12 +356,12 @@ func getDebugActions():
 	"id": "setCorruption",
 	"name": "Set Corruption",
 	"args": [
-	 {
-	 "id": "corruption",
-	 "name": "How much (0-100)",
-	 "type": "number",
-	 "value": 100,
-	 },
+	{
+	"id": "corruption",
+	"name": "How much (0-100)",
+	"type": "number",
+	"value": 100,
+	},
 	],
 	},
 	]
@@ -371,6 +375,11 @@ func doDebugAction(_id, _args = {}):
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
+		return
+
+	if(_action == "start_showers"):
+		endScene()
+		runScene("articaShowerScene")
 		return
 
 	if(_action == "sex_breed"):

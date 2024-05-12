@@ -507,7 +507,7 @@ func _react(_action: String, _args):
 
 	if(_action == "give_uniform"):
 		setFlag("ArticaModule.NoClothes", false)
-		getCharacter("artica").resetEquipment()
+		getCharacter("artica").resetEquipment(true, true, true)
 		isNaked = false
 		nakedAndShy = false
 
