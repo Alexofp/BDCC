@@ -253,8 +253,8 @@ func _run():
 
 		addButton("Keep clothes", "Force Artica to stay naked", "steal_clothes_fully")
 		addButton("Stop covering up!", "Order Artica to present everything without covering up", "order_showeverything")
-		if (GM.pc.hasReachablePenis() || GM.pc.hasReachableVagina()):
-			addDisabledButton("Oral", "Artica is not corrupted enough to agree to this yet")
+		#if (GM.pc.hasReachablePenis() || GM.pc.hasReachableVagina()):
+		#	addDisabledButton("Oral", "Artica is not corrupted enough to agree to this yet")
 	if(state == "order_showeverything"):
 		playAnimation(StageScene.Yoga, "dog", {pc="artica", bodyState={naked=true, hard=true}})
 		saynn("You show Artica her uniform. She reaches her paw out to grab it.. but you pull your hand away.")
