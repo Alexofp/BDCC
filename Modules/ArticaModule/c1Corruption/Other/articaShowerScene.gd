@@ -319,9 +319,40 @@ func _run():
 		addButton("Wash together", "Just have a nice shower together", "do_shower_together")
 		addButtonWithChecks("Rail her", "Pin Artica against the wall and rail her", "rail_artica", [], [[ButtonChecks.HasReachablePenis]])
 		if (!isCaged):
-			addButton("Ride her", "Pin Artica against the wall and ride her cock", "ride_artica")
+			addButtonWithChecks("Ride her", "Pin Artica against the wall and ride her cock with your pussy", "ride_artica", [], [[ButtonChecks.HasReachableVagina]])
 		else:
 			addDisabledButton("Ride her", "Artica can not be caged for this")
+		if (getCharacter("artica").hasEffect(StatusEffect.HasCumInsideVagina) || getCharacter("artica").hasEffect(StatusEffect.HasCumInsideAnus)):
+			addButton("'Clean inside'", "Eat Artica's pussy out!", "do_eat_pussy")
+		else:
+			addDisabledButton("'Clean inside'", "Artica doesn't have any cum in her pussy or asshole")
+	if(state == "do_eat_pussy"):
+		playAnimation(StageScene.SexPinnedBehind, "lick", {pc="pc", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You lick your lips while watching Artica's dripping holes..")
+
+		saynn("[say=artica]What do you.. eep![/say]")
+
+		saynn("Overcome with desire, you pin Artica against the concrete and drop to your knees, revealing both her holes to you. You use your hands to spread her buttcheeks wide, making her start dripping old fluids actively.")
+
+		saynn("That's not it though.. With a wild hunger, you bury your face in there, your tongue delving deep into her pussy as you begin to lap up at her inner walls, trying to catch any mess that you are quick to swallow!")
+
+		saynn("[say=artica]Ah!.. ah.. w-wai..[/say]")
+
+		saynn("Each stroke of your tongue sends waves of pleasure through Artica's body, her hips swaying back and forth, "+str("her chastity cage leaking pre profusely" if isCaged else "her hard cock producing pre and brushing against the concrete")+".")
+
+		saynn("[say=artica]Ah.. I.. I'm.. I c-can't.. ah..[/say]")
+
+		saynn("As your tongue explores every inch of Artica's dripping slit, you push her further and further.. until the girl can't take it anymore. Her slick inner walls clench around you as she cums, releasing a shower of girlcum directly into your face, marking it with her scent.. but luckily that quickly gets washed away by the running water.")
+
+		saynn("[say=pc]There we go. All clean, inside and outside~.[/say]")
+
+		saynn("She is still panting, her body shivering.")
+
+		saynn("[say=artica]Nh-h.. t-tha.. ah.. ahnks..[/say]")
+
+		saynn("You giggle and help her to get back to her spot after this.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "do_shower_together"):
 		playAnimation(StageScene.Grope, "grope", {pc="artica", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("[say=pc]Let me help you.[/say]")
@@ -395,6 +426,243 @@ func _run():
 		saynn("You stand together like this for a little longer.. before it comes time to return out into the main hall..")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "ride_artica"):
+		playAnimation(StageScene.SexStandRide, "tease", {pc="artica", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		if (isLusty):
+			saynn("The sight of her stroking her cock.. is making you eager to feel it inside you. Artica gets visibly more nervous as you bite your lip, your gaze occasionally slipping down to her sheath.. She freezes, her paws are not doing anything anymore.")
+
+		else:
+			saynn("Artica gets visibly more nervous as you bite your lip, your gaze occasionally slipping down to her sheath.. She freezes, her paws are not rubbing her wet fur anymore.")
+
+		saynn("[say=pc]Are you done showering~?[/say]")
+
+		saynn("[say=artica]Y-yeah.. I t-think s-so..[/say]")
+
+		saynn("Unable to think of anything better to do, she turns off the cold water and tries to head for the exit..")
+
+		saynn("With a swift motion, you raise your leg high and pin Artica against the wall with it, doing a casual vertical split.")
+
+		saynn("[say=pc]I'm not~.[/say]")
+
+		saynn("You turn the cold water back on, letting it wash over both of your bodies. Things are sure to get heated anyway..")
+
+		saynn("[say=artica]Eep..[/say]")
+
+		if (!isLusty):
+			saynn("Artica is not hard.. but that's easy to fix. Your hand lands on her sheath and gently kneads, one of your fingers finds the hidden tip and rubs it.. until her cyan shaft starts poking out more and more.. the tip is now brushing against your crotch..")
+
+		else:
+			saynn("You admire her hard cock with your hungry eyes. Your hand lands on her.. fluffy balls.. and cups them, feeling how full they are with virile seed..")
+
+			saynn("[say=pc]And you wanted to waste all of that high-quality spunk?.. Tsk.. tsk..[/say]")
+
+		saynn("Her eyes open wider as you position yourself closer, your pussy hovering just above Artica's cyan cock. She whimpers quietly.. such a silly fluff..")
+
+		saynn("You grab her chin and make her look at you.")
+
+		saynn("[say=pc]I know that you're a slut that likes her holes getting pounded. Just imagine yourself in my place~.[/say]")
+
+		addButton("Ride", "Start riding the girl", "ride_sex")
+	if(state == "ride_sex"):
+		playAnimation(StageScene.SexStandRide, "sex", {pc="artica", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("With a wicked grin, you lower yourself onto Artica's cock, your pussy enveloping that juicy cyan member inch by inch. Artica gasps as she feels her shaft spreading your folds and getting buried within your eager cunt.")
+
+		saynn("[say=artica]Nhh-h.. ah..[/say]")
+
+		saynn("She just grips the concrete wall behind her while you ride her, each thrust driving her cock deeper into you until the pointy tip starts kissing your cervix. Feels great for you as well, you bite your lip again and whisper dirty things to her while your free hand is idly playing with your clit..")
+
+		if (isLusty):
+			saynn("[say=pc]Your cock feels so good inside me, Artica~. Is that what you were dreaming about while stroking~?[/say]")
+
+		else:
+			saynn("[say=pc]Your cock feels so good inside me, Artica~.[/say]")
+
+		saynn("[say=artica]S-so.. i-intense..[/say]")
+
+		saynn("Intense? You can show her what intense means.")
+
+		addButton("Faster", "Ride her cock faster", "ride_fast")
+	if(state == "ride_fast"):
+		playAnimation(StageScene.SexStandRide, "fast", {pc="artica", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Even though Artica's cock is already twitching inside your slit, you increase the pace, impaling yourself onto that great canine dick with more passion, your slick inner walls welcoming it by coating it with your pussy juices.")
+
+		saynn("[say=artica]Ah.. ahh.ah.. p-please.. ah.. t-too m-much..[/say]")
+
+		saynn("With each thrust, Artica's knot is swelling more and more..")
+
+		saynn("[say=pc]Should I stop~? Say stop and I will. Do it, slut..[/say]")
+
+		saynn("She just moans back, shaking her head subtly, her shy cyan eyes refuse to ever meet with yours.")
+
+		if (!GM.pc.isVisiblyPregnant()):
+			saynn("[say=pc]I want you to knot me~. I want you to drain your balls inside me. Give me your pups, Artica, I want you to breed me.[/say]")
+
+		else:
+			saynn("[say=pc]I want you to knot me~. I want you to drain your balls inside me. Give me your cum, Artica, I want you to cum inside me.[/say]")
+
+		saynn("Your words are making the poor fluff squirm harder under you, her member throbbing inside you more and more, her moans sounds more like desperate whimpers.")
+
+		addButton("Knot yourself", "Force her full length inside you", "ride_cum")
+	if(state == "ride_cum"):
+		playAnimation(StageScene.SexStandRide, "inside", {pc="artica", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("With one last trust of your hips, you suddenly feel her big, fat orb stretching your pussy enough to slide in!")
+
+		saynn("[say=pc]Ah-h~!..[/say]")
+
+		saynn("Your whole body is shivering as you take Artica's whole length inside. You throw your head back and moan into the air as your walls are clenching tightly around the throbbing shaft.. until you feel hot sticky cum flowing inside you.")
+
+		saynn("[say=artica]I'm c.cumm-ming.. ah-hh.. ah..[/say]")
+
+		saynn("She is pumping her seed directly inside your womb as you cling onto her shoulders, her body shuddering with pleasure as you milk her balls dry.")
+
+		saynn("[say=pc]Good.. g-good.. girl..[/say]")
+
+		if (GM.pc.isWearingChastityCage() || GM.pc.hasReachablePenis()):
+			saynn("Your own member is shooting {pc.cum} onto Artica's belly.. but all the mess is quickly washed away by the running water..")
+
+		saynn("After your orgasms begin to fade.. you are both left panting.. still tied by Artica's knot.. in a pretty awkward pose.")
+
+		saynn("[say=pc]Hah.. I guess we're staying here like this.[/say]")
+
+		saynn("[say=artica]Y-yeah.. ah..[/say]")
+
+		saynn("Since you're stuck anyway, you start washing her and your body, your hands traveling along both.")
+
+		saynn("[say=artica]It f-felt g-great..[/say]")
+
+		saynn("You chuckle and lean in to leave a kiss on her lips.")
+
+		addButton("Wait", "All you can do now is wait", "ride_after_knot")
+	if(state == "ride_after_knot"):
+		playAnimation(StageScene.Duo, "stand", {npc="artica", bodyState={naked=true}, npcBodyState={naked=true}})
+		saynn("You turn off the cold water and just spend some time together until her knot starts to deflate. That's when you manage to free your stuffed pussy, making the girl moan and stand high on her toes.")
+
+		saynn("[say=artica]Ah..[/say]")
+
+		saynn("[say=pc]Mmm.. You like my creamed pussy?[/say]")
+
+		saynn("[say=artica]Y-yeah..[/say]")
+
+		saynn("You catch some of her seed and bring your hand to her lips.")
+
+		saynn("[say=artica]Ee..[/say]")
+
+		saynn("[say=pc]Lick~.[/say]")
+
+		saynn("Artica nods subtly and starts sucking on your digits, tasting your juices and her own seed..")
+
+		saynn("[say=pc]Good girl. Let's go back now~.[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "rail_artica"):
+		if (isCaged):
+			playAnimation(StageScene.SexPinnedBehind, "tease", {pc="pc", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		else:
+			playAnimation(StageScene.SexPinnedBehind, "stroke", {pc="pc", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Artica gets visibly more nervous as you stare at her intently.. She freezes, her paws are not rubbing her wet fur anymore.")
+
+		saynn("[say=pc]Are you done showering?[/say]")
+
+		saynn("[say=artica]Y-yeah.. I t-think s-so..[/say]")
+
+		saynn("Unable to think of anything better to do, she turns off the cold water and tries to head for the exit..")
+
+		saynn("With a swift motion, you grab her and pin against the concrete wall, your hands gripping her hips with possessive force. She gasps as you press your body against hers, your member already pressing against her fluffy thigh.")
+
+		saynn("[say=pc]But I'm not done with you.[/say]")
+
+		saynn("[say=artica]Eep..[/say]")
+
+		if (isCaged):
+			saynn("She is swaying so much that you have to grab her hind paw and yank it high, forcing the girl to stay on one leg.")
+
+			saynn("[say=pc]Couldn't stroke your useless cock so you resorted to playing with your pussy? Let me help you.[/say]")
+
+		else:
+			saynn("She is swaying so much that you have to grab her hind paw and yank it high, forcing the girl to stay on one leg. At the same time, your other hand lands on her sheath and gives her hard member some strokes.")
+
+			saynn("[say=pc]Maybe I should just lock this so you won't be able to do this..[/say]")
+
+		addButton("Sex", "Rail her pussy", "rail_fuck_sex")
+	if(state == "rail_fuck_sex"):
+		playAnimation(StageScene.SexPinnedBehind, "sex", {pc="pc", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Without waiting for a response, you plunge deep into her slick, welcoming pussy. Artica gasps as your {pc.penis} fills her completely, her body trembling, her toes curling and poking your hand.")
+
+		saynn("[say=artica]Ah!.. W-wai.. T-too f-fast!.. ah..[/say]")
+
+		saynn("[say=pc]Should I stop?[/say]")
+
+		saynn("No response, the girl is just moaning while her "+str("chastity cage" if isCaged else "canine cock")+" is brushing against the concrete, dripping pre.")
+
+		saynn("[say=pc]Your moans are so slutty. Tell me who you are.[/say]")
+
+		saynn("[say=artica]Ah.. s-slut.. I'm.. a s-slut..[/say]")
+
+		saynn("She doesn't need much persuasion, huh, your cock seems to be doing most of the work, spreading her folds wide, hammering away at her tight womb entrance.. making her squirm.")
+
+		addButton("Faster", "Rail her pussy faster", "rail_fuck_sex_fast")
+	if(state == "rail_fuck_sex_fast"):
+		playAnimation(StageScene.SexPinnedBehind, "fast", {pc="pc", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Your pace quickens, your movement becoming more raw and passionate as you try to make the girl feel helpless.. but needed. And you seem to be succeeding, her stretched wide pussy is getting tight around you, her slick inner walls kneading your member nicely.")
+
+		saynn("[say=pc]Are you, huh?[/say]")
+
+		saynn("[say=artica]Y-yes.. I l-love g-getting fucked.. b-bred.. l-like a mindless w-whore that I am.. ah..[/say]")
+
+		saynn("Her own dirty tongue seems to be driving her closer and closer to the edge, her cries of pleasure echoing around the shower room. You can feel her muscles tensing up..")
+
+		saynn("Before a wave hits her.. Artica throws her head back and lets out a passionate noise, her"+str(" locked cock throbbing and dripping seed onto the concrete wall" if isCaged else " canine member shooting lines of seed that land on the concrete wall")+", her pussy gripping your dick hard, increasing the friction..")
+
+		saynn("[say=artica]Ah..ahh.ah.. g-gods.. t-too m-much..[/say]")
+
+		var pcHasKnot = GM.pc.bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)
+		saynn("Her tongue is out and drooling, her hind paw shaking in your hand.. while you just keep pushing through, pounding her orgasming cunt.. until your own orgasm creeps by"+str(", the knot on your cock inflating fast" if pcHasKnot else "")+"..")
+
+		addButton("Cum inside", "Breed the fluff", "rail_fuck_sex_cum")
+	if(state == "rail_fuck_sex_cum"):
+		playAnimation(StageScene.SexPinnedBehind, "inside", {pc="pc", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		var pcHasKnot = GM.pc.bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)
+		if (pcHasKnot):
+			saynn("With one final trust, you bury your {pc.penis} deep inside Artica's quivering pussy.. until the knot slips inside, stretching her folds to their limits. It makes the fluff shake again, her inner walls squeezing your cock.. until she feels a hot rush of your {pc.cum} filling her womb, her orgasm crashing over yours..")
+
+		else:
+			saynn("With one final trust, you bury your {pc.penis} deep inside Artica's quivering pussy, breaking into her womb. It makes the fluff shake again, her inner walls squeezing your cock.. until she feels a hot rush of your {pc.cum} filling her up, her orgasm crashing over yours..")
+
+		saynn("[say=artica]Nya-a-ah.. ah.!..[/say]")
+
+		saynn("Poor fluff is squirming desperately, her tongue licking the cold concrete in front of her, her eyes pulled high up, her mind high on pleasure.")
+
+		saynn("[say=pc]Is this what you dream about, Artica?[/say]")
+
+		saynn("[say=artica]Y-yes-sh..h.. hah..[/say]")
+
+		saynn("Both lovers are panting. You turn the cold water on to help the girl to cool down a bit.. and wash away any sweat.. the room smells of raw sex..")
+
+		if (pcHasKnot):
+			saynn("You're stuck together because of your knot.. so might as well just have a shower together. Your hands land on her back and rub her fur.")
+
+		else:
+			saynn("Might as well just have a shower together.. a kinky kind. Your hands land on her back and rub her fur.. while you are using her as your cock warmer.")
+
+		saynn("[say=artica]Nh-h..[/say]")
+
+		addButton("Rest", "Just shower together", "rail_after_sex")
+	if(state == "rail_after_sex"):
+		playAnimation(StageScene.Duo, "stand", {npc="artica", bodyState={naked=true}, npcBodyState={naked=true}})
+		var pcHasKnot = GM.pc.bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)
+		if (pcHasKnot):
+			saynn("After your knot deflates, you finally pull out, causing Artica's stretched, used pussy to start gushing your seed.")
+
+		else:
+			saynn("After some time, you finally pull out, causing Artica's stretched, used pussy to start gushing your seed.")
+
+		saynn("[say=artica]Ah.. So much..[/say]")
+
+		saynn("You shower together, washing off any sweat.. or other bodily fluids.. off of each other. Artica is still moaning occasionally, the afterglow making her act so cute.")
+
+		saynn("But now it was time to return to her spot.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -432,6 +700,43 @@ func _react(_action: String, _args):
 		processTime(5*60)
 		getCharacter("artica").afterTakingAShower()
 		GM.pc.afterTakingAShower()
+
+	if(_action == "do_eat_pussy"):
+		processTime(5*60)
+		getCharacter("artica").bodypartTransferFluidsTo(BodypartSlot.Vagina, "pc", BodypartSlot.Head, 1.0)
+		getCharacter("artica").bodypartTransferFluidsTo(BodypartSlot.Anus, "pc", BodypartSlot.Head, 1.0)
+		getModule("ArticaModule").triggerCorruption(0.01)
+
+	if(_action == "ride_sex"):
+		processTime(5*60)
+
+	if(_action == "ride_fast"):
+		processTime(5*60)
+
+	if(_action == "ride_cum"):
+		processTime(3*60)
+		getModule("ArticaModule").triggerCorruption(0.01)
+		GM.pc.gotVaginaFuckedBy("artica")
+		GM.pc.cummedInVaginaByAdvanced("artica", {knotted=true})
+		GM.pc.orgasmFrom("artica")
+
+	if(_action == "ride_after_knot"):
+		processTime(10*60)
+
+	if(_action == "rail_fuck_sex"):
+		processTime(5*60)
+
+	if(_action == "rail_fuck_sex_fast"):
+		processTime(5*60)
+
+	if(_action == "rail_fuck_sex_cum"):
+		processTime(3*60)
+		getModule("ArticaModule").triggerCorruption(0.01)
+		getCharacter("artica").cummedInVaginaBy("pc")
+		GM.pc.orgasmFrom("artica")
+
+	if(_action == "rail_after_sex"):
+		processTime(5*60)
 
 	setState(_action)
 
