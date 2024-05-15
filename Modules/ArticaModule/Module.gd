@@ -36,6 +36,7 @@ func getFlags():
 		"corruptionBegan": flag(FlagType.Bool),
 		"NoClothes": flag(FlagType.Bool),
 		"isLusty": flag(FlagType.Bool),
+		"firstTimeWait": flag(FlagType.Bool),
 		
 		"gotChastityDenied": flag(FlagType.Bool),
 		"cagedDay": flag(FlagType.Number),
@@ -72,6 +73,8 @@ func _init():
 		"res://Modules/ArticaModule/c1Corruption/Sex/articaSexHypnovisorScene.gd",
 		
 		"res://Modules/ArticaModule/c1Corruption/Other/articaShowerScene.gd",
+		
+		"res://Modules/ArticaModule/c1Corruption/Event/articaEventTentacles1Scene.gd",
 		]
 	characters = [
 		"res://Modules/ArticaModule/ArticaCharacter.gd",
