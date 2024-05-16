@@ -186,6 +186,226 @@ func _run():
 
 		saynn("[say=nova]Ohh, look who's back already~.[/say]")
 
+		addButton("Continue", "See what happens next", "nova_catches_artica")
+	if(state == "nova_catches_artica"):
+		addCharacter("nova")
+		playAnimation(StageScene.Duo, "stand", {pc="artica", npc="nova"})
+		saynn("That guard stands near the entrance, blocking the only exit for Artica. You manage to stay unseen, hiding behind some trays.")
+
+		saynn("[say=artica]Eep..[/say]")
+
+		saynn("[say=nova]Somehow I knew I'd find you here~. Got lost, sweetie?[/say]")
+
+		saynn(""+str("Naked Artica shrugs and covers her privates" if isNaked else "Artica shrugs")+", her legs shaking a little.")
+
+		saynn("[say=nova]So.. what are we gonna do with you? I guess you can start by emptying your pockets..[/say]")
+
+		saynn("The guard starts slowly approaching the girl, each loud step of her armored boots makes Artica get smaller and smaller.. Until she gives up and shows the flower that she took.")
+
+		saynn("[say=artica].. .. ..[/say]")
+
+		saynn("[say=nova]Really, huh~? You love flowers that much~? Never would have guessed.[/say]")
+
+		saynn("[say=artica]..[/say]")
+
+		saynn("Artica carefully puts the colorful plant on the floor and steps back. The guard smiles and licks her lips, still advancing.")
+
+		saynn("[say=nova]Somehow I doubt that you came here because of your love of flowers~. You will have to show me.. everything that's you've got, cutie pie.[/say]")
+
+		saynn("Poor Artica is shivering, her eyes opened wide."+str(" For some reason her state of fear isn't affecting her arousal, the girl is hard as a rock.." if isNaked else " For some reason her state of fear isn't affecting her arousal, the girl's shorts are bulging..")+"")
+
+		addButton("Just watch", "(Corruption) Let Nova grope Artica during a strip-search..", "let_nova_fun")
+		addButton("Fight Nova", "Let yourself be known", "fight_nova")
+		addButton("Psst..", "Try to distract the husky enough to make a fast escape. You will have to come back for the plant some other time..", "psst_husky")
+	if(state == "psst_husky"):
+		playAnimation(StageScene.Duo, "stand", {npc="artica"})
+		saynn("Maybe you can try to distract the husky the same way Artica distracted that other guard..")
+
+		saynn("[say=pc]Psst..[/say]")
+
+		saynn("Nova stops, her ears perk.. just like the fluff's.")
+
+		saynn("[say=nova]Gonna play nice I.. what was that?[/say]")
+
+		saynn("You change your hiding spot, hiding behind a different tray while Nova is checking where the noise is coming from.")
+
+		saynn("[say=pc]Psst..[/say]")
+
+		saynn("Only Artica notices you this time, her eyes look surprised. You try to make her come to you, speaking quietly.")
+
+		saynn("[say=pc]..let's go, c'mon..[/say]")
+
+		saynn("Hearing Artica's hind paws tippy-toe along the floor tiles makes Nova go into alert mode instantly.")
+
+		saynn("[say=nova]Hey![/say]")
+
+		saynn("The guard notices you too.. so you quickly get up and grab Artica's hand before pulling her towards the exit.")
+
+		saynn("[say=nova]Come back here, right now![/say]")
+
+		addButton("Run!", "Time to leave", "after_escape")
+	if(state == "after_escape"):
+		removeCharacter("nova")
+		aimCameraAndSetLocName("yard_vaulthere")
+		saynn("You rush out of the greenhouses and leap over the first railing that you see. It's a little high.. but luckily you manage to land on some soft grass.")
+
+		saynn("Nova tries to catch you.. but she quickly loses track, running the wrong direction.")
+
+		saynn("Artica is panting.")
+
+		saynn("[say=artica]Wow.. ah.. hah.. how d-did you..[/say]")
+
+		saynn("[say=pc]I steal from there occasionally too.[/say]")
+
+		saynn("She nods.. and then lowers her gaze, realizing something.")
+
+		saynn("[say=artica]Oh yeah.. Sadly, I d-didn't keep anything.. t-thank you for saving me though..[/say]")
+
+		saynn("Looks like you will have to come back there and get her the required plant yourself. At least you know how it looks now!")
+
+		saynn("[say=artica]I g-guess I will return back to my spot..[/say]")
+
+		saynn("You nod and notice that she is still aroused.. the fear that she experienced didn't extinguish her desire at all.")
+
+		saynn("[say=pc]Take care.[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "let_nova_fun"):
+		playAnimation(StageScene.SexStanding, "tease", {pc="nova", npc="artica", npcBodyState={naked=true, hard=true}})
+		addCharacter("artica", ["naked"])
+		saynn("You decide to stay and see how this scene will unravel itself. Maybe you will get a chance to get that plant that Artica needs..")
+
+		saynn("[say=nova]Gonna play nice I hope~?[/say]")
+
+		if (!isNaked):
+			saynn("Without much effort, Nova makes Artica lean against one of the walls with her hands positioned high.")
+
+			saynn("[say=nova]Good. Be an obedient girl for me and stay still while I do this.[/say]")
+
+			saynn("The husky puts her paws all over Artica's lilac uniform, searching for anything that's poking out too much.. And obviously finding some.. but nothing criminal.")
+
+			saynn("[say=nova]Hmm.. No contraband. Will have to strip-search you though to make sure that you're clean~.[/say]")
+
+			saynn("[say=artica]Eep..[/say]")
+
+			saynn("With some fast paws, Nova unbuttons Artica's shirt and makes her take it off, exposing Artica's {artica.breasts}.")
+
+			saynn("[say=nova]Cute~.[/say]")
+
+			saynn("Then, she presses Artica against the wall again and pulls down her shorts this time, exposing her tight tailhole that's covered up by her tail.. and also her aroused slit and her "+str("locked away member" if isCaged else "hard dripping member")+"..")
+
+			if (isCaged):
+				saynn("[say=nova]Someone caged you? That is adorable.[/say]")
+
+			else:
+				saynn("[say=nova]A herm.. just like me. Interesting~.[/say]")
+
+		else:
+			saynn("Without much effort, Nova makes Artica lean against one of the walls with her hands positioned high.")
+
+			saynn("[say=nova]Good. Be an obedient girl for me and stay still while I do this.[/say]")
+
+			saynn("Nova's paws roam around Artica's fur while she is doing a quick visual check, obviously noticing that Artica has both, an aroused slit and a "+str("locked away member" if isCaged else "hard dripping member")+"..")
+
+			if (isCaged):
+				saynn("[say=nova]Someone caged you? That is adorable.[/say]")
+
+			else:
+				saynn("[say=nova]A herm.. just like me. Interesting~.[/say]")
+
+			saynn("The guard checks Artica's legs and arms too, dragging her palms along their curves.")
+
+			saynn("[say=nova]No contraband. I think I need to do a.. more thorough search.. to make sure~.[/say]")
+
+		saynn("Artica doesn't dare to even move a muscle, the fear makes her freeze up completely.. And Nova sees that.")
+
+		saynn("[say=nova]Aw.. Relax, I won't hurt you~. You should be afraid only if you've been a bad girl that deserves to be punished..[/say]")
+
+		saynn("Doesn't make it much easier for the poor fluff.")
+
+		saynn("Nova's fingers trace the curves of Artica's breasts.. before squeezing them firmly, eliciting a soft gasp from her lips.."+str(" Some breast milk squirts out from her swollen dark nips.." if getCharacter("artica").isLactating() else "")+"")
+
+		if (getCharacter("artica").isLactating()):
+			saynn("[say=nova]Such milky breasts you've got there~.[/say]")
+
+		else:
+			saynn("[say=nova]Such nice breasts you've got there~.[/say]")
+
+		saynn("With a sly smile on her face, the guard moved lower, her digits following the girl's"+str(" pregnant" if getCharacter("artica").isVisiblyPregnant() else " fluff")+" belly and her sides until she reaches that nice girly butt.")
+
+		var hasCumInHoles = (getCharacter("artica").hasEffect(StatusEffect.HasCumInsideVagina) || getCharacter("artica").hasEffect(StatusEffect.HasCumInsideAnus))
+		saynn("Nova kneads Artica's buttcheeks for a bit, removing tension.. before carefully spreading them"+str(", making the fluff's holes leak some of the mess onto her thighs.." if hasCumInHoles else ", making the fluff's tight holes look stretched")+".")
+
+		if (hasCumInHoles):
+			saynn("[say=nova]Ohh.. Such a messy girl~. But no contraband.[/say]")
+
+		else:
+			saynn("[say=nova]Slick and clean~. No contraband.[/say]")
+
+		saynn("Artica is squirming under Nova's touch, her"+str(" cock pulsing in its small cage" if isCaged else " cock throbbing with need")+" as she is being teased relentlessly. The guard takes note of that..")
+
+		saynn("[say=nova]So needy.. Turn around for me, cutie.[/say]")
+
+		addButton("Continue", "See what happens next", "nova_makes_artica_cum")
+	if(state == "nova_makes_artica_cum"):
+		playAnimation(StageScene.Grope, "grope", {pc="artica", npc="nova", bodyState={naked=true, hard=true}})
+		saynn("Artica does so, presenting herself to the guard. But when Nova grabs her stun baton, the fluff's eyes go wide again.")
+
+		saynn("[say=artica]..[/say]")
+
+		saynn("[say=nova]This~? I just want to do this..[/say]")
+
+		saynn("The husky squeezes the handle of her weapon, making it zap the air. Seeing that sends waves of fear through Artica, her body squirming more..")
+
+		if (!isCaged):
+			saynn("Nova relaxes the grip on the handle and then traces the tip of the baton along Artica's hard cock, making it pulse wildly, her balls tensing up even without any electricity going through them..")
+
+		else:
+			saynn("Nova relaxes the grip on the handle and then traces the tip of the baton along Artica's metal chastity cage, making the cock inside pulse wildly, her balls tensing up even without any electricity going through them..")
+
+		saynn("[say=nova]What did you steal, cutie pie?[/say]")
+
+		saynn("[say=artica].. ..!..[/say]")
+
+		saynn("[say=nova]Just the flower, huh..[/say]")
+
+		saynn("Nova holds the weapon a few inches away before squeezing the handle again, making it spark with electricity. Artica gasps and arches her back, "+str("her locked cock putting more pressure on its cage, precum actively leaking from the tip.." if isCaged else "her hard cock throbbing hard, the knot near the base inflating with blood..")+"")
+
+		saynn("[say=artica].. .. ..[/say]")
+
+		saynn("[say=nova]Uh huh~. I hear you~.[/say]")
+
+		saynn("Nova seems to be fascinated by that reaction, she relaxes the grip and brings the baton closer to Artica's pussy instead, the cold tip of her weapon brushing against the wet sensitive folds.")
+
+		saynn("Artica is shivering, her gaze glued to that baton.. And the guard takes full advantage of that, by pretending that she is squeezing the handle.. until Artica suddenly cums!")
+
+		saynn("Almost like from an electrifying jolt, an orgasm takes over her body, her legs shaking as her {artica.penis} erupts in a torrent of hot cum, strings of it flying out far and landing on some of the plants..")
+
+		saynn("[say=artica]N-nya-ah-h..[/say]")
+
+		saynn("Nova is smiling non-stop, watching the embarrassed orgasming girl struggle to contain herself.")
+
+		saynn("[say=nova]Did you just cum from fear alone~?[/say]")
+
+		saynn("She chuckles as Artica's cheek blush deeply.")
+
+		saynn("[say=nova]I'm so impressed, I'm not even sure if I should punish you by this point~. Fine, "+str("grab your clothes and " if !isNaked else "")+"let me show you out.[/say]")
+
+		saynn("Nova clicks a chain to Artica's collar.. before pulling her away. The fluff's eyes track the lonely flower that is left on the floor..")
+
+		addButton("Flower!", "Grab it", "after_nova_grab_flower")
+	if(state == "after_nova_grab_flower"):
+		removeCharacter("nova")
+		removeCharacter("artica")
+		playAnimation(StageScene.Solo, "stand")
+		GM.pc.setLocation("main_greenhouses")
+		saynn("When they walk away, you quickly rush to the flower and pick it up.")
+
+		saynn("Artica will probably be glad to have it.")
+
+		saynn("Time to go though.. before someone spots you here.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -209,6 +429,23 @@ func _react(_action: String, _args):
 
 	if(_action == "artica_takes_plant"):
 		processTime(3*60)
+
+	if(_action == "nova_catches_artica"):
+		processTime(3*60)
+
+	if(_action == "after_escape"):
+		processTime(3*60)
+		addExperienceToPlayer(20)
+		addMessage("Steal a plant from the greenhouses to help Artica")
+
+	if(_action == "nova_makes_artica_cum"):
+		processTime(3*60)
+		getModule("ArticaModule").triggerCorruption(0.05)
+
+	if(_action == "after_nova_grab_flower"):
+		processTime(5*60)
+		setFlag("ArticaModule.TentaclesPcHasFlower", true)
+		addExperienceToPlayer(50)
 
 	setState(_action)
 

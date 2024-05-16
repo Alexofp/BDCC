@@ -42,6 +42,9 @@ func getFlags():
 		"cagedDay": flag(FlagType.Number),
 		"cagedTotalDays": flag(FlagType.Number),
 		"cagedAcceptStage": flag(FlagType.Number),
+		
+		"TentaclesPcHasFlower": flag(FlagType.Bool),
+		"TentaclesArticaHasFlower": flag(FlagType.Bool),
 	}
 
 func _init():
