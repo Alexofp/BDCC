@@ -217,6 +217,137 @@ func _run():
 		addButton("Just watch", "(Corruption) Let Nova grope Artica during a strip-search..", "let_nova_fun")
 		addButton("Fight Nova", "Let yourself be known", "fight_nova")
 		addButton("Psst..", "Try to distract the husky enough to make a fast escape. You will have to come back for the plant some other time..", "psst_husky")
+	if(state == "fight_nova"):
+		playAnimation(StageScene.Duo, "shove", {npc="nova", npcAction="hurt"})
+		saynn("You're not gonna let that guard bully Artica, with a swift dash you shove the husky away from your fluff.. both of them seem quite surprised.")
+
+		saynn("[say=artica]Ah![/say]")
+
+		saynn("[say=nova]Agh.. Wow, where did you come from?[/say]")
+
+		saynn("Nova switches her full attention to you.")
+
+		saynn("[say=nova]Are you her guardian angel~? I'm the real Angel here though~.[/say]")
+
+		saynn("She reaches for her stun baton.. While Artica just hugs the wall behind her, blinking lots.")
+
+		saynn("Time for a fight!")
+
+		addButton("Fight", "Start the fight", "start_fight")
+	if(state == "won_nova"):
+		playAnimation(StageScene.Duo, "stand", {npc="nova", npcAction="defeat"})
+		saynn("Defeated, Nova drops to her knees before you.")
+
+		saynn("[say=nova]Agh..[/say]")
+
+		saynn("Artica quickly runs up to you.")
+
+		saynn("[say=artica]How d-did you..[/say]")
+
+		saynn("[say=pc]I steal from here too, you know.[/say]")
+
+		saynn("[say=artica]Oh..[/say]")
+
+		saynn("Nova smiles seeing you two together.")
+
+		saynn("[say=nova]You two.. are adorable.[/say]")
+
+		saynn("[say=pc]Uh huh.[/say]")
+
+		saynn("You whisper to Artica to go grab whatever she needs. The girl quickly picks up the flower that she dropped when surrendering to Nova and returns to you.")
+
+		saynn("[say=artica]G-got it..[/say]")
+
+		saynn("While the husky is still busy recovering, you just grab Artica's hand and run away before any more guards show up!")
+
+		saynn("[say=nova]Not even a goodbye kiss..[/say]")
+
+		addButton("Run", "Leave fast", "won_runaway")
+		addButton("Goodbye kiss", "Just because she is asking..", "meme_kiss")
+	if(state == "meme_kiss"):
+		playAnimation(StageScene.Hug, "kiss", {pc="pc", npc="nova"})
+		saynn("You stop dead in your tracks.. and return to Nova.")
+
+		saynn("With a stern gaze, you help her to get up.. before pulling into a tight hug, your lips colliding with hers, delivering a long passionate kiss, your tongue sneaking into her maw and swirling around hers.")
+
+		saynn("Artica just stands and blinks a lot, her maw opened wide.")
+
+		saynn("By the end of it, Nova's gaze becomes spaced out..")
+
+		saynn("[say=pc]There you go. A small goodbye kiss.[/say]")
+
+		saynn("[say=nova]W-wow..[/say]")
+
+		saynn("You grab Artica's hand and run away.. for real this time..")
+
+		addButton("Run", "Leave fast", "won_runaway")
+	if(state == "won_runaway"):
+		removeCharacter("nova")
+		playAnimation(StageScene.Duo, "stand", {npc="artica"})
+		aimCameraAndSetLocName("yard_vaulthere")
+		GM.pc.setLocation("yard_vaulthere")
+		saynn("You and Artica vault over one of the railing, ending up in the lush yard area.")
+
+		saynn("[say=artica]Thank y-you.. I n-need that flower to.. um..[/say]")
+
+		saynn("[say=pc]You don't have to tell me, Artica. It's yours.[/say]")
+
+		saynn("She nods and chrrrrs quietly.")
+
+		saynn("[say=artica]You're so nice.. I will s-see you around..[/say]")
+
+		saynn("After that, the girl walks towards her spot. Seeing how lusty she is still, she will probably go back to that doctor soon..")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "lost_nova"):
+		playAnimation(StageScene.Duo, "defeat", {npc="nova"})
+		saynn("Defeated, you drop to your knees before the guard.. Artica gasps and rushes to you, trying to help you.")
+
+		saynn("[say=nova]Aww.. Now you're making me feel bad.[/say]")
+
+		saynn("[say=artica]Are you o-okay?..[/say]")
+
+		saynn("[say=pc]Yeah, sorry, I couldn't do it.[/say]")
+
+		saynn("Nova frowns.")
+
+		saynn("[say=nova]Sorry I couldn't help you steal? You two deserve to be punished for being here.[/say]")
+
+		saynn("[say=artica]It's ok-kay.. I can g-go work in the mines again if that's n-needed..[/say]")
+
+		saynn("The guard's expression softens.")
+
+		saynn("[say=nova]Aww.. Whatever. Leave, you two. Before I changed my mind.[/say]")
+
+		addButton("Leave", "Run while you can!", "lose_nova_run")
+	if(state == "lose_nova_run"):
+		removeCharacter("nova")
+		playAnimation(StageScene.Duo, "stand", {npc="artica"})
+		aimCameraAndSetLocName("yard_vaulthere")
+		GM.pc.setLocation("yard_vaulthere")
+		saynn("You grab Artica's hand and rush out of the greenhouses before leaping over one the railings to avoid other guards.")
+
+		saynn("[say=artica]T-thank you.. H-h-how did you..[/say]")
+
+		saynn("[say=pc]I steal from there too.[/say]")
+
+		saynn("[say=artica]Oh..[/say]")
+
+		saynn("Artica lowers her gaze, realizing something.")
+
+		saynn("[say=artica]I.. d-dropped it there..[/say]")
+
+		saynn("[say=pc]It's okay. Maybe I can help?[/say]")
+
+		saynn("She shrugs.")
+
+		saynn("Looks like you will have to get back there some other time and steal that flower yourself.")
+
+		saynn("[say=artica]I'm not a g-good thief.. I w-will be at my spot..[/say]")
+
+		saynn("You nod and let her go.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "psst_husky"):
 		playAnimation(StageScene.Duo, "stand", {npc="artica"})
 		saynn("Maybe you can try to distract the husky the same way Artica distracted that other guard..")
@@ -247,6 +378,7 @@ func _run():
 	if(state == "after_escape"):
 		removeCharacter("nova")
 		aimCameraAndSetLocName("yard_vaulthere")
+		GM.pc.setLocation("yard_vaulthere")
 		saynn("You rush out of the greenhouses and leap over the first railing that you see. It's a little high.. but luckily you manage to land on some soft grass.")
 
 		saynn("Nova tries to catch you.. but she quickly loses track, running the wrong direction.")
@@ -433,6 +565,20 @@ func _react(_action: String, _args):
 	if(_action == "nova_catches_artica"):
 		processTime(3*60)
 
+	if(_action == "start_fight"):
+		runScene("FightScene", ["nova"], "novaFight")
+		return
+
+	if(_action == "won_runaway"):
+		processTime(3*60)
+
+	if(_action == "meme_kiss"):
+		processTime(3*60)
+
+	if(_action == "lose_nova_run"):
+		processTime(3*60)
+		addMessage("You will have to sneak to the greenhouses yourself to steal that plant for Artica")
+
 	if(_action == "after_escape"):
 		processTime(3*60)
 		addExperienceToPlayer(20)
@@ -448,6 +594,20 @@ func _react(_action: String, _args):
 		addExperienceToPlayer(50)
 
 	setState(_action)
+
+func _react_scene_end(_tag, _result):
+	if(_tag == "novaFight"):
+		processTime(20 * 60)
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			setState("won_nova")
+			addExperienceToPlayer(50)
+			setFlag("ArticaModule.TentaclesArticaHasFlower", true)
+			getModule("ArticaModule").addCorruption(0.02)
+		else:
+			setState("lost_nova")
+			addExperienceToPlayer(5)
 
 func saveData():
 	var data = .saveData()
