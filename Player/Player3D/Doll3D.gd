@@ -365,7 +365,8 @@ func setBreastsScale(breastsScale: float):
 	breastsJiggleBone.stiffness = min(1.0, 0.16 / max(0.1, breastsScale))
 
 func setPregnancy(progress: float):
-	setBoneOffset("DeformBelly", Vector3(-0.03244, 0.706324, 0.0)*progress)
+	#setBoneOffset("DeformBelly", Vector3(-0.03244, 0.706324, 0.0)*progress)
+	setBoneScaleAndOffset("DeformBelly", 1.0+max(0.0, progress-1.0), Vector3(-0.03244, 0.706324, 0.0)*clamp(progress, -0.1, 1.0))
 	bellyJiggleBone.stiffness = 0.1 / ((clamp(progress, 0.0, 1.0) + 0.2) / 1.2)
 
 func setThighThickness(progress: float):

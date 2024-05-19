@@ -1595,8 +1595,9 @@ func softUpdateDoll(doll: Doll3D):
 	
 	var cumInflationLevel = getCumInflationLevel()
 	pregnancyValue += clamp(cumInflationLevel / 2.0, 0.0, 1.0)
+	pregnancyValue += getCustomAttribute(BuffAttribute.InflatedBelly)
 	
-	doll.setPregnancy(clamp(pregnancyValue, -0.5, 1.1))
+	doll.setPregnancy(clamp(pregnancyValue, -0.5, 1.1 + max(-1.1, getCustomAttribute(BuffAttribute.MaxBellySize))))
 	
 	var theTailScale = 1.0
 	if(hasBodypart(BodypartSlot.Tail)):
