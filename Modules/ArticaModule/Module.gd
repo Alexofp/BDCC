@@ -45,6 +45,8 @@ func getFlags():
 		
 		"TentaclesPcHasFlower": flag(FlagType.Bool),
 		"TentaclesArticaHasFlower": flag(FlagType.Bool),
+		
+		"nextReaction": flag(FlagType.Text), #
 	}
 
 func _init():
@@ -82,6 +84,8 @@ func _init():
 		"res://Modules/ArticaModule/c1Corruption/Event/articaEventTentacles2Scene.gd",
 		"res://Modules/ArticaModule/c1Corruption/Event/articaEventTentacles3Scene.gd",
 		"res://Modules/ArticaModule/c1Corruption/Event/articaEventTentacles4Scene.gd",
+		
+		"res://Modules/ArticaModule/c1Corruption/Event/articaEventSelfsuck1Scene.gd",
 		]
 	characters = [
 		"res://Modules/ArticaModule/ArticaCharacter.gd",
