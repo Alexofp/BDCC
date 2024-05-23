@@ -58,6 +58,7 @@ func _run():
 		addCharacter("gymbully")
 		addCharacter("gymbully2")
 		addCharacter("gymbully3")
+		GM.pc.setLocation("gym_yoga")
 		saynn("Artica's eyes open wide as she hears a girl giggling near her.. As she does that, she notices 3 gang members surrounding her.. The main guy and the crazy girl seem to be doing all the talking while the third guy is just quietly standing near..")
 
 		saynn("[say=gymbully]Well, well well, what do we have here? I don't remember you paying for the privilege of using these yoga mats.[/say]")
@@ -169,6 +170,239 @@ func _run():
 		saynn("After that, she gets up"+str(", grabs her clothes," if !isNaked else "")+" and quickly runs away..")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "try_stop_bullies"):
+		playAnimation(StageScene.Duo, "stand", {npc="gymbully2", npcAction="defeat", flipNPC=true})
+		saynn("You can't let these bullies have it their way with Artica. While she was busy trying to satisfy their cruel request, you began to act..")
+
+		saynn("With silent precision, you creep behind the guy who didn't say a word so far. In one swift motion, you wrap your hands around his neck and mouth.. quickly pulling him to one of the benches for lifting weights. The barbells there are all connected to the floor with some chains, probably to avoid them being used as weapons by inmates.. And so you use one of these chains to wrap around the guy's wrists and waist, rendering him harmless.")
+
+		saynn("[say=gymbully2]Uh![/say]")
+
+		saynn("[say=pc]Tsshh-h..[/say]")
+
+		saynn("You grab his bandana and gag him with it, quickly crumbling it and shoving it into his mouth.")
+
+		addButton("Continue", "See what happens next", "artica_gets_bullied_anyway_abit")
+	if(state == "artica_gets_bullied_anyway_abit"):
+		addCharacter("artica", ["naked"])
+		playAnimation(StageScene.SelfSuck, "tease", {pc="artica", bodyState={naked=true, hard=true}})
+		saynn("The other two gang members didn't seem to notice their quiet guy gone.. Good.. But they're still bullying Artica.")
+
+		if (!isNaked):
+			saynn("[say=gymbully3]Nu huh, your clothes first![/say]")
+
+			saynn("The girl quickly pulls the shorts off of Artica, exposing her"+str(" caged up member" if isCaged else "hard canine member")+"..")
+
+			if (isCaged):
+				saynn("[say=gymbully3]Oh, you're fucking locked? You're doing it anyway, bitch! Just bend more![/say]")
+
+			else:
+				saynn("[say=gymbully3]That's one juicy cock, wow! C'mon, do it! I would do it if I was you.[/say]")
+
+		else:
+			if (isCaged):
+				saynn("[say=gymbully3]I don't care that you're locked. You're doing it anyway, bitch! Just bend more![/say]")
+
+			else:
+				saynn("[say=gymbully3]You got one juicy ass cock! C'mon, do it! I would do it if I was you.[/say]")
+
+		saynn("Artica's breathing became erratic, her body trembling with a mix of shame and fear. Slowly, she begins trying to bend more, her {artica.penis} swaying in the air, always so close.. but never quite close enough..")
+
+		saynn("[say=gymbully3]You want some help or what?! Just suck your cock already![/say]")
+
+		saynn("That girl is so annoying, she just has to be the next..")
+
+		addButton("Crazy girl", "Pacify her next", "crazy_girl_pacified")
+	if(state == "crazy_girl_pacified"):
+		playAnimation(StageScene.SexStart, "defeated", {pc="pc", npc="gymbully3"})
+		saynn("You quietly approach the crazy girl, who was still taunting the poor fluff. Without a word, you grab her and pull her into the crowd.. before shoving a ballgag into her mouth, muffling her protests.")
+
+		saynn("[say=gymbully3]MmmHHHMMM!.. MmmHHH!..[/say]")
+
+		saynn("The noise of the crowd was enough to cover her cute noises up. You quickly drag the girl under one of the barbell poles.. positioning it so she was effectively trapped.")
+
+		saynn("The crazy girl's eyes widened in panic as she realized she was too weak to lift the barbell off herself..")
+
+		addButton("Continue", "See what happens next", "prefight")
+	if(state == "prefight"):
+		playAnimation(StageScene.Duo, "stand", {npc="gymbully"})
+		saynn("It doesn't take long for their leader to notice the absence of two of his goons.")
+
+		saynn("[say=gymbully]Huh. I was wondering why it became so quiet all of the sudden.[/say]")
+
+		saynn("He raises his fists.")
+
+		saynn("[say=gymbully]I guess we're breaking you in half next.[/say]")
+
+		saynn("You feel like bad things will happen to you if you lose this one..")
+
+		saynn("Looks like it's a fight..")
+
+		addButton("Fight", "Start the fight", "start_fight")
+	if(state == "lost_fight"):
+		playAnimation(StageScene.Solo, "defeat")
+		saynn("Unable to continue fighting, you drop to your knees..")
+
+		saynn("[say=gymbully]Never should have messed with us.[/say]")
+
+		saynn("The quiet guy manages to wiggle free from his chains. He quickly frees himself and then moves on to helping the crazy girl, lifting the barbell and removing the ballgag.")
+
+		saynn("[say=gymbully3]YOU BITCH! Looks like you're NOT so tough of a HERO, are you!?[/say]")
+
+		saynn("All of them surround you, the eyes of the crazy girl shining with malice..")
+
+		saynn("Something is about to happen..")
+
+		addButton("Continue", "See what happens next", "lose_pc_in_half")
+	if(state == "lose_pc_in_half"):
+		playAnimation(StageScene.SelfSuck, "tease", {pc="pc", npc="gymbully3", bodyState={naked=true, hard=true}})
+		saynn("[say=gymbully3]Hold him down!"+str(" Takes {pc.his} clothes off too!" if !GM.pc.isFullyNaked() else "")+"[/say]")
+
+		saynn("As the girl barks, the two guys pin you to the ground, forcing your arms behind your back."+str(" They then {pc.undressMessage}, leaving you exposed!" if !GM.pc.isFullyNaked() else "")+"")
+
+		saynn("Artica watches in horror, her heart racing as she feels helpless.")
+
+		saynn("The mean girl approaches you, her expression full of sadistic intent..")
+
+		saynn("[say=gymbully3]You thought you could play the hero, huh? Let's see how flexible you are then![/say]")
+
+		saynn("No matter how much you resist, the whole gang uses her combined strength to bend your body as much as it allows it.. and then some.. pushing your own crotch into your face"+str(", your own pussy is clearly visible by your own eyes.. wow.." if (GM.pc.hasReachableVagina() && !GM.pc.isWearingChastityCage() && !GM.pc.hasReachablePenis()) else "")+""+str(", your own chastity cage is clearly visible by your own eyes.. wow.." if (!GM.pc.hasReachableVagina() && GM.pc.isWearingChastityCage() && !GM.pc.hasReachablePenis()) else "")+""+str(", your own cock is clearly visible by your own eyes.. wow.." if (!GM.pc.hasReachableVagina() && GM.pc.isWearingChastityCage() && !GM.pc.hasReachablePenis()) else "")+".")
+
+		saynn("Having your spine bent and your body stretched like that.. it hurts quite a bit..")
+
+		if (GM.pc.hasReachablePenis()):
+			saynn("[say=gymbully3]Come on, get to it! Suck yourself off like the pathetic little worm you are![/say]")
+
+			addButton("Suck yourself off", "Do it", "lost_selfsuck")
+			addButton("Refuse", "You'd rather not..", "lost_selfsuck_refuse")
+		elif (GM.pc.isWearingChastityCage()):
+			saynn("[say=gymbully3]I don't care that you're caged! Get to it! Suck yourself off like the pathetic little worm you are![/say]")
+
+			addButton("Suck yourself off", "Do it", "lost_selfsuck")
+			addButton("Refuse", "You'd rather not..", "lost_selfsuck_refuse")
+		else:
+			saynn("[say=gymbully3]Aww.. you don't have anything to suck on. You're a lucky stupid bitch..[/say]")
+
+			saynn("They just kick you a few times.. and leave it at that.")
+
+			saynn("[say=gymbully]Let's go, {pc.he} got what was coming for {pc.him}.[/say]")
+
+			addButton("Continue", "See what happens next", "lost_leavealone")
+	if(state == "lost_selfsuck_refuse"):
+		saynn("No matter what they do to you, you refuse.. so eventually they get tired and give up.")
+
+		saynn("They just kick you a few times.. and leave it at that.")
+
+		saynn("[say=gymbully]Let's go, {pc.he} got what was coming for {pc.him}.[/say]")
+
+		addButton("Continue", "See what happens next", "lost_leavealone")
+	if(state == "lost_leavealone"):
+		removeCharacter("gymbully")
+		removeCharacter("gymbully2")
+		removeCharacter("gymbully3")
+		playAnimation(StageScene.Duo, "stand", {npc="artica"})
+		saynn("As soon as they are gone, Artica crawls up to you, helping you to get up..")
+
+		saynn("[say=artica]S-sorry..[/say]")
+
+		saynn("[say=pc]Ow.. ow.. It's me who should be sorry.[/say]")
+
+		saynn("She blinks many times.")
+
+		saynn("[say=artica]Are you o-okay?..[/say]")
+
+		saynn("[say=pc]Mostly. Don't worry about me.[/say]")
+
+		saynn("She nods and nuzzles your cheek, her tail swishing wildly.")
+
+		saynn("[say=artica]I.. will go back to my spot..[/say]")
+
+		saynn("[say=pc]Be careful.[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "lost_selfsuck"):
+		playAnimation(StageScene.SelfSuck, "sex", {pc="pc", npc="gymbully3", bodyState={naked=true, hard=true}})
+		saynn("You groan in pain, struggling to resist.. but the gang held you firmly in place. With no better choice, you decide to submit, your lips making their first contact with your "+str("chastity cage" if GM.pc.isWearingChastityCage() else "own cock")+", the humiliating act making your cheeks flush.")
+
+		saynn("[say=gymbully3]Do it~.[/say]")
+
+		if (!GM.pc.isWearingChastityCage()):
+			saynn("You open your mouth, reluctantly taking in the tip of that shaft. The sensation was surreal, it really felt like your own lips wrapped around your own cock.. Inch by inch, more of it slipped into your mouth. The taste of your own precum hit your senses.. salty..")
+
+			saynn("Just as unwillingly, you begin to suck, your lips sliding up and down along your length, your tongue swirling around the tip, tasting more of that salty pre as it leaked out..")
+
+			saynn("The gang watched with an expression of twisted satisfaction on their faces as you were forced to pleasure yourself. Your body began betraying you, responding involuntarily, your arousal building.. And so you suck harder, your mouth moving rhythmically along your own cock..")
+
+		else:
+			saynn("You open your mouth, reluctantly taking in the tip of that cage. The sensation was surreal, your cock really felt the heat of your lips and the warm breath.. Inch by inch, more of it slipped into your mouth. The taste of your own precum hit your senses.. salty..")
+
+			saynn("Just as unwillingly, you begin to suck the metal object, your lips sliding up and down along your cage, your tongue swirling around and teasing the tip of your cock that's trapped inside, tasting more of that salty pre as it leaked out..")
+
+			saynn("The gang watched with an expression of twisted satisfaction on their faces as you were forced to pleasure yourself. Your body began betraying you, responding involuntarily, your arousal building.. And so you suck harder, your mouth moving rhythmically along your own chastity cage, tongue licking it more..")
+
+		saynn("[say=gymbully3. Haha. Look at you, getting into it. Such a good little slut~.][/say]")
+
+		saynn("Your body is reacting more and more, your {pc.penis} throbbing in your mouth as you feel your orgasm building..")
+
+		saynn("And then, with a final, choked, gasp, you cum, your dick pulsing violently, spurting thick ropes of {pc.cum} directly into your mouth. You swallow convulsively, unable to stop the flow, the bitter salty taste filling your senses, adding to the shame.")
+
+		saynn("The crazy girl giggles and steps back, letting you collapse.")
+
+		saynn("[say=gymbully3]Looks like our work here is done![/say]")
+
+		saynn("She wipes her hands as if to get rid of the filth..")
+
+		addButton("Continue", "See what happens next", "lost_leavealone")
+	if(state == "won_fight"):
+		playAnimation(StageScene.Duo, "stand", {npc="gymbully", npcAction="defeat"})
+		saynn("The last guy gets defeated as well.")
+
+		saynn("[say=gymbully]Grhr.. fuck.[/say]")
+
+		saynn("[say=pc]Not this time. Get your little band and get the fuck out of here.[/say]")
+
+		saynn("He snarls at you.. but decides to obey, unchaining his buddies and making their escape together.")
+
+		addButton("Artica", "Check if she is okay", "won_checkokay")
+	if(state == "won_checkokay"):
+		removeCharacter("gymbully")
+		removeCharacter("gymbully2")
+		removeCharacter("gymbully3")
+		playAnimation(StageScene.Zonked, "tease", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
+		saynn("You look at Artica.. who is still stuck in an awkward bent-in-half pose.. with her"+str(" locked" if isCaged else "")+" drippy dick out..")
+
+		saynn("[say=pc]Let me help you.[/say]")
+
+		saynn("[say=artica]Help h-how.. oh.. r-right..[/say]")
+
+		saynn("She grabs your hand and gets up with your help.")
+
+		saynn("[say=artica]Thank you.. this was embarrassing.. haha..[/say]")
+
+		saynn("[say=pc]Oh yeah, stretching yourself in front of everyone like that, I can tell.[/say]")
+
+		saynn("The girl is blushing.")
+
+		saynn("[say=artica]It's.. k-kinda.. w-why I'm doing it..[/say]")
+
+		saynn("After everything that you saw.. It makes sense.")
+
+		saynn("[say=artica]I'm not a g-gym person.. I'm just doing this to..[/say]")
+
+		saynn("[say=pc]I know. You really want to suck your own cock.[/say]")
+
+		saynn("Her cheeks become fully red.")
+
+		saynn("[say=artica]It.. it's.. mmm.. I..[/say]")
+
+		saynn("She is struggling to produce a single word.")
+
+		saynn("[say=artica]Do you wanna see me try?..[/say]")
+
+		saynn("..but then spews out the whole sentence in a single second..")
+
+		addButton("Sure", "Watch Artica try to pleasure herself", "won_sure")
+		addButton("Nah", "It's okay", "won_nah")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -195,7 +429,52 @@ func _react(_action: String, _args):
 	if(_action == "artica_runs_away"):
 		processTime(3*60)
 
+	if(_action == "crazy_girl_pacified"):
+		processTime(3*60)
+
+	if(_action == "prefight"):
+		processTime(3*60)
+
+	if(_action == "start_fight"):
+		runScene("FightScene", ["gymbully"], "gymFight")
+		return
+
+	if(_action == "lose_pc_in_half"):
+		processTime(3*60)
+		GM.pc.addPain(30)
+		getModule("ArticaModule").triggerCorruption(0.0)
+
+	if(_action == "lost_selfsuck"):
+		processTime(13*60)
+		GM.pc.cummedInMouthBy("pc")
+		GM.pc.orgasmFrom("pc")
+
+	if(_action == "lost_selfsuck_refuse"):
+		processTime(3*60)
+		GM.pc.addPain(10)
+
+	if(_action == "won_checkokay"):
+		processTime(3*60)
+
+	if(_action == "won_sure"):
+		processTime(3*60)
+
+	if(_action == "won_nah"):
+		processTime(3*60)
+
 	setState(_action)
+
+func _react_scene_end(_tag, _result):
+	if(_tag == "gymFight"):
+		processTime(10 * 60)
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			setState("won_fight")
+			addExperienceToPlayer(50)
+		else:
+			setState("lost_fight")
+			addExperienceToPlayer(5)
 
 func saveData():
 	var data = .saveData()

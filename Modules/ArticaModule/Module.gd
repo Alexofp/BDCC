@@ -172,7 +172,7 @@ func addCorruption(howMuch, showMessage = true):
 	if(oldCorruption != newValue && showMessage):
 		if(newValue > oldCorruption):
 			GM.main.addMessage("Artica's corruption has increased to "+str(Util.roundF(newValue*100.0, 1))+"%!")
-		else:
+		elif(newValue < oldCorruption):
 			GM.main.addMessage("Artica's corruption has decreased to "+str(Util.roundF(newValue*100.0, 1))+"%!")
 	
 	setFlag("ArticaModule.corruption", newValue)
