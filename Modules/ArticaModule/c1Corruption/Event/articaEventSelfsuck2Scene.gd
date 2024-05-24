@@ -403,6 +403,126 @@ func _run():
 
 		addButton("Sure", "Watch Artica try to pleasure herself", "won_sure")
 		addButton("Nah", "It's okay", "won_nah")
+	if(state == "won_nah"):
+		addCharacter("artica")
+		playAnimation(StageScene.Duo, "stand", {npc="artica", npcBodyState={hard=true}})
+		saynn("[say=pc]I trust that you can do it, Artica. I don't have to watch.[/say]")
+
+		saynn("[say=artica]Okay.. no problem. See you around![/say]")
+
+		saynn("The girl rubs herself against you while chrrring quietly.. before walking away.")
+
+		addButton("Continue", "See what happens next", "artica_cums_no_watch")
+	if(state == "artica_cums_no_watch"):
+		removeCharacter("artica")
+		playAnimation(StageScene.Solo, "stand")
+		saynn("For some reason, a silent vibration of someone's moans echoes in your mind..")
+
+		saynn("You get a feeling that it was Artica's.. She is fast, that girl.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "won_sure"):
+		addCharacter("artica", ["naked"])
+		playAnimation(StageScene.Duo, "sit", {npc="artica", npcBodyState={naked=true,hard=true}})
+		GM.pc.setLocation("cellblock_lilac_nearcell")
+		aimCameraAndSetLocName("cellblock_lilac_nearcell")
+		saynn("It's a strange offer.. but why not. You agree and follow the girl to her cell.")
+
+		saynn("Artica takes a deep breath"+str(" and then undresses" if !isNaked else "")+", glancing at you nervously, while completely vulnerable and exposed, "+str("her hard canine cock out on full display" if !isCaged else "her locked canine cock out on full display")+".")
+
+		saynn("You just sit on some chair.. while Artica goes towards her bed.")
+
+		addButton("Continue", "See what happens next", "won_artica_starts")
+	if(state == "won_artica_starts"):
+		playAnimation(StageScene.SelfSuck, "tease", {pc="artica", bodyState={naked=true, hard=true}})
+		saynn("Artica started with some more stretching, doing poses that put emphasis on her spine, probably to warm it up a bit..")
+
+		saynn("[say=artica]Let's see..[/say]")
+
+		saynn("After that, she positions herself on the bed, her legs high above her head, balancing as she supports her spine with her hands.. In this position, her {artica.penis} is dangling tantalizingly close to her face. Something about seeing it from so close.. is making her lick her lips."+str(". even if the shaft is mostly hidden behind the tight chastity cage.." if isCaged else "")+"")
+
+		saynn("[say=artica]Mmm..[/say]")
+
+		saynn("Her precum dripping onto her face is only making her eager to reach it..")
+
+		addButton("Continue", "See what happens next", "won_artica_selfsuck")
+	if(state == "won_artica_selfsuck"):
+		playAnimation(StageScene.SelfSuck, "sex", {pc="artica", bodyState={naked=true, hard=true}})
+		saynn("Artica exhales all of the air out of her lungs.. and begins trying to her body further..")
+
+		saynn("Each extra inch is.. harder and harder for her to conquer, her long and drooly canine tongue is out, trying to reach as far as it can..")
+
+		saynn("[say=artica]Hhh.. mmh..[/say]")
+
+		saynn("Finally, she manages to get to the pointy tip of her"+str(" cock" if !isCaged else " chastity cage")+", grabbing it with her lips while her spine is making a perfect arc.")
+
+		saynn("The girl moans softly around the shaft, her tongue"+str(" finding a hole in the cage and slipping inside before" if isCaged else "")+" swirling around the head, licking up the precum. All the while you just watch in fascination..")
+
+		saynn("Artica wasn't happy with just the tip though, getting a taste for it only made her more eager to push herself further. Slowly, she begins to suck herself off, moving her head back and forth as much as her neck allows, her lips sliding along the "+str("shaft" if !isCaged else "chastity cage")+", taking slightly more of her length each time.. Her hips are bucking, trying to push that "+str("veiny cock" if !isCaged else "cage")+" deeper into her mouth..")
+
+		saynn("[say=artica]Mmhh.. mmh-hmm..[/say]")
+
+		saynn("You get a feeling that you can help her.. reach higher heights.. or rather.. deeper depths.")
+
+		addButton("Help her", "Encourage Artica to go deeper and faster", "won_do_help_artica")
+		addButton("Just watch", "She is doing just fine by herself", "won_do_nohelp")
+	if(state == "won_do_nohelp"):
+		playAnimation(StageScene.SelfSuck, "inside", {pc="artica", bodyState={naked=true, hard=true}})
+		saynn("You decide to just let Artica have fun on her own, she seems to be able to suck herself off just fine. You could easily see her growing more needy, her pussy dripping juices shows it quite clear. Her sucking becomes a little faster and more frantic..")
+
+		saynn("Until she closes her eyes and lets as much of her "+str("cock" if !isCaged else "cage")+" inside her mouth as she can, her tongue working fast, licking her "+str("cyan shaft that has a knot quickly growing at its base.." if !isCaged else "trapped cyan shaft that's desperately trying to get hard behind the chastity..")+"")
+
+		saynn("[say=artica]Mmm.. mmhh-hmm.. Mhh-Mh![/say]")
+
+		saynn("And soon, with a muffled cry, Artica cums hard, her {artica.penis} throbbing in her mouth, ropes of thick cum erupt from it and go directly down her throat. The fluff swallows eagerly, savoring the taste of her own seed, her pussy clenching and gushing with juices, adding to the mess.. her body convulsing with a unique kind of pleasure..")
+
+		saynn("[say=pc]Wow. Impressive feat, girl. Most impressive.[/say]")
+
+		saynn("While the orgasm is still hammering at her senses, she opens her eyes and looks at you with her cock in her mouth.. blushing deeply.")
+
+		saynn("You get up and gently tap her butt.")
+
+		saynn("[say=pc]I guess you can take care of the cleanup.. with that nice tongue of yours. See you around, Artica.[/say]")
+
+		saynn("[say=artica]Mmmhmm..[/say]")
+
+		saynn("Time to go.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "won_do_help_artica"):
+		playAnimation(StageScene.SelfSuck, "fast", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
+		saynn("Might as well help the girl. You get up and position yourself near, your hands landing on her fluffy butt and pushing on it, making Artica swallow more of her length.")
+
+		saynn("[say=artica]Mmmhh-hh!.. mmmh!..[/say]")
+
+		saynn("She doesn't resist.. but she is certainly surprised. Your help made it so her cock hit the back of throat with each thrust, teasing her gag-reflex.. that she seems to be able to suppress by now.")
+
+		saynn("[say=pc]Just enjoy it, Artica.[/say]")
+
+		saynn("You could easily see her growing more needy, her pussy dripping juices shows it quite clear. Her sucking becomes faster and more frantic..")
+
+		saynn("Until she closes her eyes and lets as much of her "+str("cock" if !isCaged else "cage")+" inside her mouth as she can, her tongue working tirelessly, licking her "+str("cyan shaft that has a knot quickly growing at its base.." if !isCaged else "trapped cyan shaft that's desperately trying to get hard behind the chastity..")+"")
+
+		saynn("[say=artica]..mm-m.. mmhmm..[/say]")
+
+		addButton("Continue", "See what happens next", "won_artica_help_cum")
+	if(state == "won_artica_help_cum"):
+		playAnimation(StageScene.SelfSuck, "inside", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
+		saynn("And soon, with a muffled cry, Artica cums hard, her {artica.penis} throbbing in her mouth, ropes of thick cum erupt from it and go directly down her throat. The fluff swallows eagerly, savoring the taste of her own seed, her pussy clenching and gushing with juices, adding to the mess.. her body convulsing with a unique kind of pleasure..")
+
+		saynn("You get up and gently tap her butt.")
+
+		saynn("[say=pc]Wow. Impressive feat, girl. Most impressive.[/say]")
+
+		saynn("While the orgasm is still hammering at her senses, she opens her eyes and looks at you with her cock in her mouth.. blushing deeply.")
+
+		saynn("[say=pc]I guess you can take care of the cleanup.. with that nice tongue of yours. See you around, Artica.[/say]")
+
+		saynn("[say=artica]Mmmhmm..[/say]")
+
+		saynn("Time to go.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -461,6 +581,29 @@ func _react(_action: String, _args):
 
 	if(_action == "won_nah"):
 		processTime(3*60)
+
+	if(_action == "artica_cums_no_watch"):
+		processTime(5*60)
+		getModule("ArticaModule").triggerCorruption(0.07)
+
+	if(_action == "won_artica_starts"):
+		processTime(3*60)
+
+	if(_action == "won_artica_selfsuck"):
+		processTime(5*60)
+
+	if(_action == "won_do_help_artica"):
+		processTime(5*60)
+
+	if(_action == "won_do_nohelp"):
+		processTime(5*60)
+		getModule("ArticaModule").triggerCorruption(0.07)
+		getCharacter("artica").cummedInMouthBy("artica")
+
+	if(_action == "won_artica_help_cum"):
+		processTime(5*60)
+		getModule("ArticaModule").triggerCorruption(0.07)
+		getCharacter("artica").cummedInMouthBy("artica")
 
 	setState(_action)
 
