@@ -42,7 +42,6 @@ func combine(_args = []):
 func getBuffs():
 	return [
 		buff(Buff.InflatedBellyBuff, [100.0 + sqrt(eggAmount)*10.0]),
-		buff(Buff.InflatedBellyMaxSizeBuff, [sqrt(eggAmount)*10.0]),
 	]
 
 func saveData():

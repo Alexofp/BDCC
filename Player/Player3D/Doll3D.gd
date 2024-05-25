@@ -342,6 +342,17 @@ func setBoneScaleAndOffset(boneName: String, boneScale: float, offset: Vector3):
 	
 	skeleton.set_bone_custom_pose(boneId, newTransform)
 
+func setBoneScale3AndOffset(boneName: String, boneScale: Vector3, offset: Vector3):
+	var skeleton:Skeleton = getDollSkeleton().getSkeleton()
+	var boneId = skeleton.find_bone(boneName)
+	if(boneId < 0):
+		return
+	var newTransform:Transform = Transform.IDENTITY
+	newTransform = newTransform.scaled(boneScale)
+	newTransform = newTransform.translated(offset)
+	
+	skeleton.set_bone_custom_pose(boneId, newTransform)
+
 func setBoneOffset(boneName: String, offset: Vector3):
 	var skeleton:Skeleton = getDollSkeleton().getSkeleton()
 	var boneId = skeleton.find_bone(boneName)
@@ -365,8 +376,12 @@ func setBreastsScale(breastsScale: float):
 	breastsJiggleBone.stiffness = min(1.0, 0.16 / max(0.1, breastsScale))
 
 func setPregnancy(progress: float):
+	progress = min(5.0, progress) # 5.0 is a hard limit. It already looks weird at 5 and only gets worse
+	var horisontalBellyScale = 1.0+max(0.0, progress-1.0)
+	var verticalBellyScale = clamp(1.0+max(0.0, progress-1.0), 0.0, 2.0)
+	
 	#setBoneOffset("DeformBelly", Vector3(-0.03244, 0.706324, 0.0)*progress)
-	setBoneScaleAndOffset("DeformBelly", 1.0+max(0.0, progress-1.0), Vector3(-0.03244, 0.706324, 0.0)*clamp(progress, -0.1, 1.0))
+	setBoneScale3AndOffset("DeformBelly", Vector3(verticalBellyScale, horisontalBellyScale, horisontalBellyScale), Vector3(-0.03244*0.0, 0.706324, 0.0)*clamp(progress, -0.1, 1.0))
 	bellyJiggleBone.stiffness = 0.1 / ((clamp(progress, 0.0, 1.0) + 0.2) / 1.2)
 
 func setThighThickness(progress: float):

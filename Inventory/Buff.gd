@@ -52,7 +52,7 @@ const OvulationEggsAmountBuff = "OvulationEggsAmountBuff"
 const MinOvulationEggsAmountBuff = "MinOvulationEggsAmountBuff"
 const PregnancySpeedBuff = "PregnancySpeedBuff"
 const InflatedBellyBuff = "InflatedBellyBuff"
-const InflatedBellyMaxSizeBuff = "InflatedBellyMaxSizeBuff"
+const PregnantBellySizeModifierBuff = "PregnantBellySizeModifierBuff"
 
 const SkillExperienceBuff = "SkillExperienceBuff"
 const StatusEffectImmunityBuff = "StatusEffectImmunityBuff"

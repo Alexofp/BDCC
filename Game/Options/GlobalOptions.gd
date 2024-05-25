@@ -11,6 +11,8 @@ var eggCellLifespanHours: int
 var playerPregnancyTimeDays: int
 var npcPregnancyTimeDays: int
 var impregnationChanceModifier: int
+var bellySizeDependsOnLitterSize: bool = false
+var bellyMaxSizeModifier: float = 1.0
 
 # Difficulty options
 var hardStruggleEnabled: bool = false
@@ -60,7 +62,9 @@ func resetToDefaults():
 	eggCellLifespanHours = 48
 	playerPregnancyTimeDays = 5
 	npcPregnancyTimeDays = 5
+	bellySizeDependsOnLitterSize = false
 	impregnationChanceModifier = 100
+	bellyMaxSizeModifier = 1.0
 	hardStruggleEnabled = false
 	shouldScaleUI = true
 	uiScaleMultiplier = 1.0
@@ -135,6 +139,12 @@ func getImpregnationChanceModifier() -> float:
 	var resultValue:float = float(impregnationChanceModifier) / 100.0
 	resultValue = clamp(resultValue, 0.0, 1000.0)
 	return resultValue
+
+func getBellyMaxSizeDependsOnLitterSize() -> bool:
+	return bellySizeDependsOnLitterSize
+
+func getBellyMaxSizeModifier() -> float:
+	return bellyMaxSizeModifier
 
 func isHardStruggleEnabled():
 	return hardStruggleEnabled
@@ -270,6 +280,34 @@ func getChangeableOptions():
 					"id": "impregnationChanceModifier",
 					"type": "int",
 					"value": impregnationChanceModifier,
+				},
+				{
+					"name": "Belly size depends on litter amount",
+					"description": "If enabled, pregnant bellies will look bigger depending on the amount of kids it carries. For example, it will look roughly twice as big with 16 kids",
+					"id": "bellySizeDependsOnLitterSize",
+					"type": "checkbox",
+					"value": bellySizeDependsOnLitterSize,
+				},
+				{
+					"name": "Pregnant belly size (%)",
+					"description": "Just a visual thing. Probaby best to leave it at 100% if you're gonna enable the option above.",
+					"id": "bellyMaxSizeModifier",
+					"type": "list",
+					"value": bellyMaxSizeModifier,
+					"values": [
+						[0.0, "0%"],
+						[0.25, "25%"],
+						[0.5, "50%"],
+						[0.7, "70%"],
+						[0.8, "80%"],
+						[0.9, "90%"],
+						[1.0, "100%"],
+						[1.10, "110%"],
+						[1.25, "125%"],
+						[1.5, "150%"],
+						[1.75, "175%"],
+						[2.0, "200%"],
+					],
 				},
 			]
 		},
@@ -659,6 +697,10 @@ func applyOption(categoryID, optionID, value):
 			npcPregnancyTimeDays = value
 		if(optionID == "impregnationChanceModifier"):
 			impregnationChanceModifier = value
+		if(optionID == "bellySizeDependsOnLitterSize"):
+			bellySizeDependsOnLitterSize = value
+		if(optionID == "bellyMaxSizeModifier"):
+			bellyMaxSizeModifier = value
 	
 	if categoryID == "difficulty":
 		if optionID == "hardStruggleEnabled":
@@ -744,6 +786,8 @@ func saveData():
 		"playerPregnancyTimeDays": playerPregnancyTimeDays,
 		"npcPregnancyTimeDays": npcPregnancyTimeDays,
 		"impregnationChanceModifier": impregnationChanceModifier,
+		"bellySizeDependsOnLitterSize": bellySizeDependsOnLitterSize,
+		"bellyMaxSizeModifier": bellyMaxSizeModifier,
 		"hardStruggleEnabled": hardStruggleEnabled,
 		"shouldScaleUI": shouldScaleUI,
 		"uiScaleMultiplier": uiScaleMultiplier,
@@ -785,6 +829,8 @@ func loadData(data):
 	playerPregnancyTimeDays = loadVar(data, "playerPregnancyTimeDays", 5)
 	npcPregnancyTimeDays = loadVar(data, "npcPregnancyTimeDays", 5)
 	impregnationChanceModifier = loadVar(data, "impregnationChanceModifier", 100)
+	bellySizeDependsOnLitterSize = loadVar(data, "bellySizeDependsOnLitterSize", false)
+	bellyMaxSizeModifier = loadVar(data, "bellyMaxSizeModifier", 1.0)
 	hardStruggleEnabled = loadVar(data, "hardStruggleEnabled", false)
 	shouldScaleUI = loadVar(data, "shouldScaleUI", true)
 	uiScaleMultiplier = loadVar(data, "uiScaleMultiplier", 1.0)
