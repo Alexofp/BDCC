@@ -88,6 +88,8 @@ func _init():
 		"res://Modules/ArticaModule/c1Corruption/Event/articaEventSelfsuck1Scene.gd",
 		"res://Modules/ArticaModule/c1Corruption/Event/articaEventSelfsuck2Scene.gd",
 		"res://Modules/ArticaModule/c1Corruption/Event/articaEventSelfsuck3Scene.gd",
+		
+		"res://Modules/ArticaModule/c1Corruption/Event/articaEventDildo1Scene.gd",
 		]
 	characters = [
 		"res://Modules/ArticaModule/ArticaCharacter.gd",
