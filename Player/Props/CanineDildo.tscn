@@ -6,4 +6,5 @@
 [node name="CanineDildo" instance=ExtResource( 1 )]
 
 [node name="CanineDildo" parent="CanineDildoArmature/Skeleton" index="0"]
+software_skinning_transform_normals = false
 material/0 = ExtResource( 2 )
