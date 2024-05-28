@@ -58,6 +58,17 @@ func playAnimation(animID, _args = {}):
 	
 	var state_machine = animationTree["parameters/StateMachine/playback"]
 	var state_machine2 = animationTree2["parameters/StateMachine/playback"]
+	
+	if(_args.has("skipToHover") && _args["skipToHover"]): # Don't ask me
+		state_machine.stop()
+		state_machine2.stop()
+		yield(get_tree(), "idle_frame")
+		yield(get_tree(), "idle_frame")
+		state_machine.start("CanineDildoRideHover_1-loop")
+		state_machine2.start("CanineDildoRideHover_2-loop")
+		yield(get_tree(), "idle_frame")
+		yield(get_tree(), "idle_frame")
+		#return
 
 	if(animID == "tease"):
 		state_machine.travel("CanineDildoRideTease_1-loop")
