@@ -188,6 +188,7 @@ func _run():
 	if(state == "artica_trips"):
 		playAnimation(StageScene.Solo, "defeat", {pc="artica"})
 		aimCameraAndSetLocName("cellblock_lilac_nearcell")
+		GM.pc.setLocation("cellblock_lilac_nearcell")
 		saynn("..in her haste, she trips.")
 
 		saynn("[say=artica]EE-eek![/say]")
@@ -365,6 +366,162 @@ func _run():
 
 		addButton("Comfort her", "Try to calm the fluff down", "do_comfort")
 		addButton("Participate yourself!", "Try to win that dildo for Artica", "do_participate")
+	if(state == "do_comfort"):
+		playAnimation(StageScene.Hug, "hug", {pc="pc", npc="artica", npcBodyState={naked=true, hard=true}})
+		saynn("You offer the fluff a warm hug, your arms wrapping around her trembling body while she buries her face into your shoulder.")
+
+		saynn("[say=pc]You did great, Artica. Really. Was a great show.[/say]")
+
+		saynn("[say=artica]..but I didn't..[/say]")
+
+		saynn("[say=pc]Yeah, it's fine.[/say]")
+
+		saynn("Random inmates continue to push their luck with the toy, trying to force it inside fully, their moans echoing around the whole cellblock..")
+
+		saynn("[say=pc]Sometimes giving up is the right choice. Gotta learn when to cut your losses.[/say]")
+
+		saynn("Artica rests on her head on your shoulder.. sneakily watching others try and fail."+str(" Seeing her scaled up cock is making her horny again, her real member brushing against your leg as she is hugging you.." if !isCaged else " Seeing her scaled up cock is making her horny again, her chastity cage rubbing against your leg and she is gently humping your leg..")+"")
+
+		saynn("[say=artica]..you t-think.. I can t-try again maybe?..[/say]")
+
+		saynn("[say=pc]Are you sure? That might not be a good idea, your..[/say]")
+
+		saynn("While you were saying that, Artica was already standing in the queue again, waiting for her turn.")
+
+		saynn("[say=artica]I will try again..[/say]")
+
+		saynn("She sure wants that dildo.. makes sense though.")
+
+		addButton("Continue", "See what happens next", "again_start")
+	if(state == "again_start"):
+		playAnimation(StageScene.CanineDildoSex, "hover", {pc="artica", bodyState={naked=true, hard=true}})
+		saynn("Soon, it was her turn once more. Artica stepped forward, meeting with her dildo again. You give her a reassuring nod, a good luck of sorts..")
+
+		saynn("The fluff positions herself above the giant knotted dildo, her pussy already slick from anticipation.")
+
+		saynn("[sayMale]You again? You really want to destroy your cunt, don't you?![/sayMale]")
+
+		saynn("[sayFemale]I mean.. loose holes are good for double penetrations..[/sayFemale]")
+
+		saynn("She didn't listen to the crowd, just focussing on her body and her breathing..")
+
+		addButton("Continue", "See what happens next", "again_starts_riding")
+	if(state == "again_starts_riding"):
+		playAnimation(StageScene.CanineDildoSex, "sex", {pc="artica", bodyState={naked=true, hard=true}})
+		saynn("Slowly, she lowers herself onto the toy, feeling the thick shaft filling her pussy once again, every vein and ridge pressing against her inner walls. She began with a gentle rhythm, bouncing up and down on the toy, letting her body adjust to the shape. She is going deeper and deeper on it though..")
+
+		saynn("[say=artica]Mmhh-.. ah..[/say]")
+
+		saynn("A first moan leaves her lips as the toy's tip finds her tight cervix, sending electrifying jolts of pleasure though her, "+str("her cock twitching eagerly" if !isCaged else "her caged cock twitching eagerly")+"..")
+
+		saynn("[sayFemale]Mmm.. doubt that she will do it.. but this is so hot..[/sayFemale]")
+
+		saynn("Even when the dildo starts hammering away at her womb entrance, Artica keeps trying to impale herself deeper, creating a cute bump on her belly as the toy squeezes and pushes on her tight babymaker..")
+
+		addButton("Continue", "See what happens next", "again_artica_rides_faster")
+	if(state == "again_artica_rides_faster"):
+		playAnimation(StageScene.CanineDildoSex, "fast", {pc="artica", bodyState={naked=true, hard=true}})
+		saynn("Gradually, Artica picks up the pace, her hips moving faster, pussy greedily swallowing the fat girthy shaft. She could feel the knot pressing insistently at her entrance.. but she just tried not to think about it, enjoying the ride and letting the fat orb stretch her pussy wider with each thrust.")
+
+		saynn("[say=artica]Mmhh.. ah.. ahh..ah.. s-such a good c-cock.. ah..[/say]")
+
+		saynn("You can tell that the pressure is already building in her, the fluff is moaning patiently, her body shivering.")
+
+		saynn("[sayMale]C'mon, cum already and move on, you're wasting our time.[/sayMale]")
+
+		saynn("Whoever that is, they are wrong.. Something is about to happen, for sure..")
+
+		addButton("Continue", "See what happens next", "artica_knots_dildo_yay")
+	if(state == "artica_knots_dildo_yay"):
+		playAnimation(StageScene.CanineDildoSex, "knotinside", {pc="artica", bodyState={naked=true, hard=true}})
+		saynn("The pressure built to an almost unbearable peak, Artica's pussy clenching tightly around the thick shaft. But then, suddenly, after one of the big thrusts, the fluff feels the knot slip inside her with a wet, satisfying pop..")
+
+		saynn("[say=artica]AHHHhhh..!..[/say]")
+
+		saynn("Artica screams in ecstasy, her body convulsing as the full length went inside her, the pointy tip breaking through her cervix and pushing on the womb. All her muscles tensing up, she instinctively tries to yank herself away.. but the heavy toy keeps her grounded, instead making her slump back, her shaking paws supporting her from collapsing and hurting herself..")
+
+		saynn("[sayMale]Holy.. What the..[/sayMale]")
+
+		saynn("[sayFemale]NOOOO! IT SHOULD HAVE BEEN ME![/sayFemale]")
+
+		saynn("[sayMale]I've never seen someone hilt that big of a knot..[/sayMale]")
+
+		saynn("The girl throws her head back and cums hard, her pussy gushing out girlcum and milking that big fat replica of her own cock as her mind is flooded with pleasure. Her real cock throbs and shoots strings of cum, her balls tensing up from her g-spot being smashed by that fat orb..")
+
+		saynn("[sayMale]And so, we got a winner! This white and cyan lilac gets to keep the dildo all for herself![/sayMale]")
+
+		saynn("[sayFemale]She will surely need it to get off after destroying her cunt like this..[/sayFemale]")
+
+		saynn("Someone walks up to Artica and pats her on the head. While the fluff just moans and drools eagerly, her cock and pussy are still pulsing..")
+
+		saynn("[sayMale]Anything you wanna say?[/sayMale]")
+
+		saynn("[say=artica]Ahh-h.. y-yess.. I'm s-such a.. k-knot slut.. ahh-h..[/say]")
+
+		saynn("Endearing. Makes you feel happy for the girl.")
+
+		saynn("[sayMale]That you are. Enjoy your new toy, you earned it.[/sayMale]")
+
+		addButton("Artica", "Go check on her", "after_won_artica")
+	if(state == "after_won_artica"):
+		playAnimation(StageScene.Duo, "stand", {npc="artica", npcBodyState={naked=true,hard=true}})
+		saynn("Slowly, the crowd begins to disperse.. leaving you and Artica alone..")
+
+		saynn("[say=pc]You did it, Artica.[/say]")
+
+		saynn("[say=artica]Y-yeah.. ah.. t-thank you. I might.. n-need some help.. g-getting up.. ah..[/say]")
+
+		saynn("You nod and offer her a hand.. two hands. Gently, you begin to pull her up off the toy. The thick knot, that's still lodged deep inside her, resisted at first, stretching her pussy even wider.. but it slowly began to slip out.")
+
+		saynn("[say=artica]Ah.. AH![/say]")
+
+		saynn("With a wet, audible pop, the knot finally slides out, leaving her pussy to gape wide open.. You support Artica as her legs are still weak.")
+
+		saynn("The toy.. looks wet.. coated in a layer of lube and Artica's juices..")
+
+		saynn("[say=artica]I will.. b-bring it to my cell..[/say]")
+
+		saynn("[say=pc]Sure. Enjoy yourself.[/say]")
+
+		saynn("[say=artica]I will.. haha.. Thank you..[/say]")
+
+		saynn("She grabs the toy and starts taking a few shaky steps, her hind paws slowly regaining their strength.")
+
+		saynn("After that great show, it was time to go..")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_participate"):
+		playAnimation(StageScene.CanineDildoSex, "tease", {pc="pc"})
+		saynn("You can't watch Artica when she is so sad. You gotta help her win that dildo.. So you join the queue.")
+
+		saynn("Artica tilts her head, seeing you.")
+
+		saynn("[say=pc]Don't worry, you're not alone in this. I will help you get the toy.[/say]")
+
+		saynn("[say=artica]You will?.. H-how?..[/say]")
+
+		saynn("Your eager smile tells her everything. Her eyes go big, she opens her mouth to tell you something secret.. but decides against it.")
+
+		saynn("The queue of inmates moves quickly, people cumming from that toy only after a few minutes each..")
+
+		saynn("It was finally your turn..")
+
+		saynn("[say=artica]G-good luck..[/say]")
+
+		saynn("Seeing how many people failed to hilt that dildo.. you will surely need it..")
+
+		addButton("Dildo", "Approach it", "pc_approach_dildo")
+	if(state == "pc_approach_dildo"):
+		playAnimation(StageScene.CanineDildoSex, "hover", {pc="pc", bodyState={naked=true, hard=true}})
+		saynn("You stepped forward confidently"+str(", undressing and revealing your naked form to the crowd" if GM.pc.isFullyNaked() else ", displaying your naked form to the crowd proudly")+".")
+
+		saynn("Without wasting much time, you position yourself over the giant knotted dildo. Your pussy is already slick and needy just from looking at it, arousal dripping down your juices.")
+
+		saynn("You guide the tip towards your {pc.pussyStretch} entrance.. and begin to lower yourself slowly, feeling the pointy silicon tip part your slit.. and spread the petals open.")
+
+		addButton("Deeper..", "Take it as deep as you can", "pc_deeper")
+	if(state == "pc_deeper"):
+		playAnimation(StageScene.CanineDildoSex, "inside", {pc="pc", bodyState={naked=true, hard=true}})
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -438,6 +595,29 @@ func _react(_action: String, _args):
 
 	if(_action == "do_participate"):
 		processTime(3*60)
+
+	if(_action == "again_start"):
+		processTime(5*60)
+
+	if(_action == "again_starts_riding"):
+		processTime(3*60)
+
+	if(_action == "again_artica_rides_faster"):
+		processTime(5*60)
+
+	if(_action == "artica_knots_dildo_yay"):
+		processTime(3*60)
+		getModule("ArticaModule").triggerCorruption(0.05)
+
+	if(_action == "after_won_artica"):
+		processTime(3*60)
+
+	if(_action == "pc_approach_dildo"):
+		processTime(5*60)
+
+	if(_action == "pc_deeper"):
+		processTime(2*60)
+		GM.pc.gotOrificeStretchedWith(BodypartSlot.Vagina, 50)
 
 	setState(_action)
 
