@@ -515,13 +515,190 @@ func _run():
 		playAnimation(StageScene.CanineDildoSex, "hover", {pc="pc", bodyState={naked=true, hard=true}})
 		saynn("You stepped forward confidently"+str(", undressing and revealing your naked form to the crowd" if GM.pc.isFullyNaked() else ", displaying your naked form to the crowd proudly")+".")
 
-		saynn("Without wasting much time, you position yourself over the giant knotted dildo. Your pussy is already slick and needy just from looking at it, arousal dripping down your juices.")
+		saynn("Without wasting much time, you position yourself over the giant knotted dildo. Your "+str("pussy is already slick and needy just from looking at it, arousal dripping down your juices." if GM.pc.hasReachableVagina() else "tailhole is already twitching needy just from looking at it.")+"")
 
-		saynn("You guide the tip towards your {pc.pussyStretch} entrance.. and begin to lower yourself slowly, feeling the pointy silicon tip part your slit.. and spread the petals open.")
+		if (GM.pc.hasReachableVagina()):
+			saynn("You guide the tip towards your {pc.pussyStretch} entrance.. and begin to lower yourself slowly, feeling the pointy silicon tip part your slit.. and spread the petals open.")
+
+		else:
+			saynn("You guide the tip towards your {pc.anusStretch} entrance.. and begin to lower yourself slowly, feeling the pointy silicon tip push on your star.. and spread it open.")
 
 		addButton("Deeper..", "Take it as deep as you can", "pc_deeper")
 	if(state == "pc_deeper"):
 		playAnimation(StageScene.CanineDildoSex, "inside", {pc="pc", bodyState={naked=true, hard=true}})
+		saynn("The toy's massive girth stretches your slick inner walls as you take more of it in, each inch making you feel fuller. Your hips move with deliberate slowness as you're trying to get used to Artica's scaled up member inside you, your "+str("pussy" if GM.pc.hasReachableVagina() else "tailhole")+" molding around its shape, feeling every ridge and vein..")
+
+		saynn("[say=pc]So big.. nhh..[/say]")
+
+		saynn("Artica bites her lip, watching you lowering yourself onto that toy.. Her paws keep nervously her body, cupping her {artica.breasts} and gently squeezing them"+str(", making some milk come out" if getCharacter("artica").canBeMilked() else "")+"..")
+
+		saynn("[sayMale]C'mon, get it over with already, people are waiting.[/sayMale]")
+
+		saynn("[sayFemale]Shut up and let {pc.him} enjoy it.[/sayFemale]")
+
+		saynn("Eventually, the knot hits your "+str("pussy folds" if GM.pc.hasReachableVagina() else "anal star")+".. the ultimate challenge. You try to lower yourself further, feeling the swollen orb pressing against your entrance, stretching your "+str("slit" if GM.pc.hasReachableVagina() else "ass")+" to its natural maximum.. but not nearly enough to squeeze in..")
+
+		saynn("It's obvious that it won't be that easy..")
+
+		addButton("Ride it", "Try to work it in", "pc_ride_dildo_sex")
+	if(state == "pc_ride_dildo_sex"):
+		playAnimation(StageScene.CanineDildoSex, "sex", {pc="pc", bodyState={naked=true, hard=true}})
+		saynn("Determined to help Artica, you start riding the dildo, sliding your "+str("pussy along its slick surface, its tip hammering at your cervix while the thick shaft rubs against your g-spot, making you moan eagerly." if GM.pc.hasReachableVagina() else "tailhole along its slick lubed-up surface, its tip reaching deep inside you while the thick shaft rubs against your pleasure spot, making you moan eagerly.")+"")
+
+		saynn("Your "+str("pussy" if GM.pc.hasReachableVagina() else "ring")+" tightens around it.. but you keep trying to take it deep, the knot slapping against your sensitive flesh, each attempt stretching you out a bit more.")
+
+		saynn("[say=pc]Mhh.. hell yeah.. ah..[/say]")
+
+		saynn("You give Artica one quick glance.. She is squirming and panting, her eyes glued to you, her paws covering up her blushing cheeks.."+str(" Her real cock putting pressure on its cage.." if isCaged else " Her real cock is hard and drippy..")+"")
+
+		saynn("You try and try.. but so far all you get is a feeling of fullness.. and a stretched "+str("pussy" if GM.pc.hasReachableVagina() else "tailhole")+".. you have to increase the onslaught..")
+
+		addButton("Harder", "Ride the toy harder", "pc_ride_faster")
+	if(state == "pc_ride_faster"):
+		playAnimation(StageScene.CanineDildoSex, "fast", {pc="pc", bodyState={naked=true, hard=true}})
+		saynn("You need to win.. you must win.. so you ride that toy harder and faster, bringing yourself onto that knot with powerful thrusts, purposefully trying to stretch your "+str("pussy" if GM.pc.hasReachableVagina() else "ass")+".")
+
+		saynn("Your moans fill the air, your inner walls gripping the dildo tightly. One forceful thrust after another.. the knot begins to slip inside you, inch by inch.. But the way it stimulates your every nerve.. makes you close already."+str(" Your cock is ready to burst at any second.." if GM.pc.hasPenis() else "")+"")
+
+		saynn("[say=pc]Fuck.. ah.. c'mon.. s-stupid knot.. ah..[/say]")
+
+		saynn("You try.. but you can't.. no matter how much you try to push it back, an orgasm overwhelms you eventually.. Your body begins to shake around that fat girthy cock, loud passionate moans leave your lips as your overstimulated "+str("pussy squirts all over the toy" if GM.pc.hasReachableVagina() else "tailhole clenches tightly around the toy")+""+str(", your {pc.penis} shooting thick ropes of {pc.cum} forward, your balls tensing up.." if GM.pc.hasPenis() else "")+"")
+
+		saynn("[sayFemale]Aw. Not even {pc.he} could do it.[/sayFemale]")
+
+		saynn("[sayMale]Uh huh. Stop stealing that bitch-breaker all for yourself, get up already.[/sayMale]")
+
+		saynn("Looks like you failed.. all your muscles tense up, making riding that toy so hard, your sensitive "+str("pussy slit" if GM.pc.hasReachableVagina() else "asshole")+" becoming extra sensitive after that orgasm..")
+
+		saynn("You look at Artica again.. and see her big sorry eyes.. they make you want to keep going.. How can you betray her like this?")
+
+		saynn("Slowly, through all the pain and discomfort.. you continue impaling yourself on that replica of Artica's cock.. Your "+str("pussy" if GM.pc.hasReachableVagina() else "tailhole is")+" aching.. but you keep stretching it further..")
+
+		saynn("[say=pc]Nghh.. f-fuck.. hh..[/say]")
+
+		saynn("[sayFemale]Oh wow, {pc.he} keeps going![/sayFemale]")
+
+		saynn("[sayMale]Give up already, you're making people wait.[/sayMale]")
+
+		saynn("You moan louder and ride that toy harder, just to shut up that asshole. The discomfort slowly goes away as your love tunnel lubes itself up again, allowing you to quickly pick up the pace..")
+
+		addButton("Harder", "Ride the toy even harder!", "pc_accidently_knots_toy")
+	if(state == "pc_accidently_knots_toy"):
+		playAnimation(StageScene.CanineDildoSex, "knotinside", {pc="pc", bodyState={naked=true, hard=true}})
+		saynn("Suddenly, one of the thrusts causes your "+str("pussy" if GM.pc.hasReachableVagina() else "anal ring")+" to stretch just enough..")
+
+		saynn("The fat knot of that huge dildo slips inside a wet pop, filling you completely!")
+
+		saynn("[say=pc]AH! Oh fuck![/say]")
+
+		saynn("It's too much, your body is shaking, legs give up, making you slump back and catch yourself with your arms.. The toy.. it's fully inside you.. "+str("the tip breaking into your womb and stretching it out" if GM.pc.hasReachableVagina() else "the tip pushing on your inner walls")+", creating a huge bump on your belly..")
+
+		saynn("[sayFemale]{pc.He} did it! Wow![/sayFemale]")
+
+		saynn("[sayMale]Holy.. fuck..[/sayMale]")
+
+		if (GM.pc.hasReachableVagina()):
+			saynn("Pussy squirts, gushing girlcum all over the toy.. again and again.. the stimulation is enough to push you over the edge.. no, the whole ladder..")
+
+		else:
+			saynn("Your ass clenches around the toy.. again and again.. the stimulation is enough to push you over the edge.. no, the whole ladder..")
+
+		saynn("You cry out a series of passionate moans, your inner walls squeezing that toy hard.."+str(" Your {pc.penis} wastes the rest of its {pc.cum}, your balls getting emptied in seconds.." if GM.pc.hasPenis() else "")+"")
+
+		saynn("One of the inmates approaches you and crouches, making sure the full knot is inside you.. it is..")
+
+		saynn("[sayMale]Looks like we have a winner! This inmates gets to keep the dildo all for {pc.himself}![/sayMale]")
+
+		saynn("[sayFemale]NOOOO! IT SHOULD HAVE BEEN ME![/sayFemale]")
+
+		saynn("[sayMale]I've never seen someone hilt that big of a knot..[/sayMale]")
+
+		saynn("You look at Artica.. as best as you can. Oh wow, her expression is that of a lusty slut, she is panting while her paws are covering her "+str("caged throbbing cock" if isCaged else "hard throbbing cock")+", spurts of seed seem to be escaping between her clawed digits as she is struggling to contain her sudden orgasm.")
+
+		saynn("The crowd begins to disperse.. some people sigh disappointed.")
+
+		addButton("Enough", "Try to free yourself and give Artica the reward!", "pc_enough_givetoy")
+		addButton("Knot-fucking!", "Why stop there?", "pc_knotfuck")
+	if(state == "pc_enough_givetoy"):
+		playAnimation(StageScene.Hug, "hug", {pc="pc", npc="artica", npcBodyState={naked=true, hard=true}})
+		saynn("By applying some real strength.. you manage to free yourself, the knot slipping out of your gaping stretched fuckhole with a satisfying pop.")
+
+		saynn("[say=pc]Ah..[/say]")
+
+		saynn("The toy is.. drenched in lube and your juices..")
+
+		saynn("Artica approaches you, her cheeks burning red as she is coming down from her own orgasm..")
+
+		saynn("[say=pc]It's yours, Artica. You can.. grab it. Just.. carefully.[/say]")
+
+		saynn("[say=artica]R-Really?.. You won it..[/say]")
+
+		saynn("[say=pc]I won it for you.[/say]")
+
+		saynn("Artica hugs you and nuzzles your cheek, chrrrring happily.")
+
+		saynn("[say=artica]Thank you-u-u.. I couldn't do it w-without you..[/say]")
+
+		saynn("You smirk.")
+
+		saynn("[say=pc]I think you can~.[/say]")
+
+		saynn("It makes her blush again. She grabs the toy by its base.. and licks the wet tip playfully.")
+
+		saynn("[say=pc]The shape is amazing, one of the best cocks that I have ridden~.[/say]")
+
+		saynn("[say=artica]Ah.. y-you t-think s-so?..[/say]")
+
+		saynn("You nod, making the fluff squirm more while you just chuckle.")
+
+		saynn("[say=pc]Go, hide it somewhere in your cell.[/say]")
+
+		saynn("She nods back.. and quickly runs away towards her cell.")
+
+		saynn("Wow, your "+str("pussy" if GM.pc.hasReachableVagina() else "tailhole")+" is still pulsing, struggling to close.. The afterglow is so strong..")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "pc_knotfuck"):
+		playAnimation(StageScene.CanineDildoSex, "knot", {pc="pc", bodyState={naked=true, hard=true}})
+		saynn("..but you still feel needy. Somehow, your body is craving more.")
+
+		saynn("With one powerful yank, you free yourself from that knot, your gaping "+str("pussy" if GM.pc.hasReachableVagina() else "tailhole")+" pulsing as a wave of pleasure spreads through your whole body..")
+
+		saynn("But rather than stop there, you continue riding the shaft, forcing your "+str("pussy" if GM.pc.hasReachableVagina() else "butt")+" onto that length again, making the knot pop in, locking you with the toy.. until you yank it out again.")
+
+		saynn("[say=pc]Ah!.. Fuck yeah..[/say]")
+
+		saynn("[sayFemale]What the fuck? Is {pc.she}..[/sayFemale]")
+
+		saynn("[sayMale]Knot-fucking that giant dildo, yes. What a crazy slut.[/sayMale]")
+
+		saynn("The crowd watches in awe as you casually let that fat knot pop in and out of your stretched, slick "+str("cunt" if GM.pc.hasReachableVagina() else "asshole")+", moaning passionately while doing so..")
+
+		saynn("Your fuckhole, loosened up by that cock, stretches easily around the knot now.. allowing you to ride it faster.. Each time the knot pops out, you feel a cold emptiness inside you.. emptiness that is soon filled again by the thick silicone girth.")
+
+		saynn("The knot is stimulating your sensitive spots perfectly.. smashing all of them.. You throw your head back and just moan, your body trembling as another orgasm washes over you, your "+str("pussy gushing out juices" if GM.pc.hasReachableVagina() else "asshole clenching again")+""+str(", cock dribbling your seed" if GM.pc.hasPenis() else "")+"..")
+
+		addButton("Faster!", "More! More!", "pc_knotfuck_fast")
+	if(state == "pc_knotfuck_fast"):
+		playAnimation(StageScene.CanineDildoSex, "knotfast", {pc="pc", bodyState={naked=true, hard=true}})
+		saynn("Artica watches, mesmerized, her real cock throbbing with need as she can't look away from you..")
+
+		saynn("Even during multiple orgasms, you keep going, pushing yourself further, testing your stamina. The knot pops in and out, keeping your "+str("pussy" if GM.pc.hasReachableVagina() else "tailhole")+" gaping loose, your body a quivering mess, slutty noises escaping you.")
+
+		saynn("[say=pc]Ah.. ah.. I'm s-such a knot slut..[/say]")
+
+		saynn("That dildo is filling you completely, making you feel so good.. Your mind is flooded with pleasure. As you cum again and again, your hips shake wildly, your love tunnel clamping down on the toy, trying to milk it. The cycle seems to be endless, each orgasm blending into the next, your body pushes to the brink.."+str(" Your cock barely shoots any seed, just twitching during each climax.." if GM.pc.hasPenis() else "")+"")
+
+		addButton("Continue", "See what happens next", "pc_knotfuck_ends")
+	if(state == "pc_knotfuck_ends"):
+		playAnimation(StageScene.CanineDildoSex, "knotinside", {pc="pc", bodyState={naked=true, hard=true}})
+		saynn("Finally, you begin to slow down, the exhaustion begins to win over.. Your mind gradually clears up..")
+
+		saynn("You just sit there, impaled on the knotted dildo, your "+str("pussy" if GM.pc.hasReachableVagina() else "anus")+" stretched and used, juices dripping onto its shaft..")
+
+		saynn("You glance at shy Artica, a satisfied smile on your lips as you watch her cum again, her cock throbbing in her paws. Makes you wonder if her watching you ride the copy of her cock made her do that..")
+
+		addButton("Enough", "Try to free yourself and give Artica the reward!", "pc_enough_givetoy")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -617,7 +794,39 @@ func _react(_action: String, _args):
 
 	if(_action == "pc_deeper"):
 		processTime(2*60)
-		GM.pc.gotOrificeStretchedWith(BodypartSlot.Vagina, 50)
+		GM.pc.gotOrificeStretchedWith(BodypartSlot.Vagina if GM.pc.hasReachableVagina() else BodypartSlot.Anus, 50)
+
+	if(_action == "pc_ride_dildo_sex"):
+		processTime(3*60)
+		GM.pc.gotOrificeStretchedWith(BodypartSlot.Vagina if GM.pc.hasReachableVagina() else BodypartSlot.Anus, 50)
+
+	if(_action == "pc_ride_faster"):
+		processTime(3*60)
+		GM.pc.gotOrificeStretchedWith(BodypartSlot.Vagina if GM.pc.hasReachableVagina() else BodypartSlot.Anus, 50)
+		GM.pc.orgasmFrom("pc")
+
+	if(_action == "pc_accidently_knots_toy"):
+		processTime(3*60)
+		GM.pc.gotOrificeStretchedWith(BodypartSlot.Vagina if GM.pc.hasReachableVagina() else BodypartSlot.Anus, 50)
+		GM.pc.orgasmFrom("pc")
+		getModule("ArticaModule").triggerCorruption(0.03)
+
+	if(_action == "pc_enough_givetoy"):
+		processTime(3*60)
+
+	if(_action == "pc_knotfuck"):
+		processTime(5*60)
+		GM.pc.gotOrificeStretchedWith(BodypartSlot.Vagina if GM.pc.hasReachableVagina() else BodypartSlot.Anus, 50)
+
+	if(_action == "pc_knotfuck_fast"):
+		processTime(3*60)
+		GM.pc.orgasmFrom("pc")
+		GM.pc.gotOrificeStretchedWith(BodypartSlot.Vagina if GM.pc.hasReachableVagina() else BodypartSlot.Anus, 60)
+
+	if(_action == "pc_knotfuck_ends"):
+		processTime(3*60)
+		GM.pc.addStamina(-500)
+		getModule("ArticaModule").triggerCorruption(0.02)
 
 	setState(_action)
 
