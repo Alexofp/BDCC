@@ -165,16 +165,88 @@ func _run():
 
 		saynn("Foxy looks at that sight.. and sighs.")
 
-		saynn("[say=alexrynard]Right.. I'm pretty sure there is a bias in your mind..[/say]")
+		saynn("[say=alexrynard]You know what.. I'm pretty sure there is a bias in your head..[/say]")
 
 		saynn("Artica tilts her head.")
 
-		saynn("[say=alexrynard]If we stop here, you're gonna do more slutty stuff, aren't you? You want to get off?[/say]")
+		saynn("[say=alexrynard]If we stop now, you're gonna want to do more slutty stuff, aren't you? You want to get off?[/say]")
 
 		saynn("Artica nods eagerly, her tongue out and drooling, her hypnotized eyes watching the fancy colors with great interest.. Other engineers begin to notice the girl on the floor, stuck in a very compromised position.")
 
-		saynn("[say=alexrynard]Well.. go ahead then. Show me how you feel or whatever. Just avoid my work bench.[/say]")
+		saynn("[say=alexrynard]Well.. go ahead then. Show me how you feel. Just not on my work bench.[/say]")
 
+		saynn("Looks like that's all that Artica needed to hear..")
+
+		addButton("Continue", "See what happens next", "artica_cums_from_order")
+	if(state == "artica_cums_from_order"):
+		if (isCaged):
+			playAnimation(StageScene.Zonked, "rubcum", {pc="artica", npc="alexrynard", bodyState={naked=true, hard=true}})
+			saynn("Her obedience is immediate, her cock is caged up so her paws reach between her legs, fingers plunging into her wet pussy fast and hard, like she was desperate.. Moans slip past her lips, her body arching, her mind instantly lost in the overwhelming pleasure..")
+
+			saynn("Her cock throbs in its metal trap, leaking precum that she smears over her clawed digits, her pussy clenching around them and dripping juices on the cold floor, the stimulation driving her to the edge..")
+
+		else:
+			playAnimation(StageScene.Zonked, "strokecum", {pc="artica", npc="alexrynard", bodyState={naked=true, hard=true}})
+			saynn("Her obedience was immediate, her paws landing on her cock and proceeding to stroke it fast and hard, like she was desperate.. Moans slip past her lips, her body arching, her mind instantly lost in the overwhelming pleasure..")
+
+			saynn("Her cock throbs, leaking precum that she smears over her clawed digits, her neglected pussy dripping juices on the cold floor, the stimulation driving her to the edge..")
+
+		saynn("The engineer scratches the back of his head watching it, more annoyed than anything. At least he is still getting his entropy data or whatever he was seeking..")
+
+		saynn("With a final, slutty cry, Artica cums, her cock shooting thick ropes of cum, splattering over her own"+str(" pregnant" if getCharacter("artica").isVisiblyPregnant() else "")+" belly and {artica.breasts}, her pussy gushing, squirting wildly all over the floor.")
+
+		saynn("[say=alexrynard]Aw, c'mon. I told you, no mess near my workspace.[/say]")
+
+		saynn("Hearing that, Artica instantly flips to her belly.. and starts eagerly licking up her own girlcum off the floor, cleaning after herself..")
+
+		saynn("[say=alexrynard]Oh no, stop that, you're lapping up so much dirt.[/say]")
+
+		saynn("Artica nods and pants heavily, her muscles still tensing up randomly from the orgasm.")
+
+		saynn("[say=alexrynard]Hope you had fun or something.[/say]")
+
+		saynn("The engineer reaches to turn off the prototype and take it off.")
+
+		addButton("Continue", "See what happens next", "alex_removes_visor")
+	if(state == "alex_removes_visor"):
+		playAnimation(StageScene.Zonked, "tease", {pc="artica", npc="alexrynard", bodyState={naked=true, hard=true}})
+		addCharacter("artica", ["naked"])
+		saynn("Foxy carefully dissasembles the prototype and takes it off Artica's eyes.. eyes that continue to show that interesting swirly pattern.")
+
+		saynn("[say=alexrynard]Oh fuck. Don't tell me I broke your mind.[/say]")
+
+		saynn("But as she blinks, the patterns begin to fade away.. Artica's gaze is focused on some faraway point in space.. she is not hypnotized anymore.. but she is not here either..")
+
+		saynn("[say=alexrynard]Hey, you.[/say]")
+
+		saynn("Only when the engineer snaps his fingers in front of Artica's face, she snaps out of it, gasping softly and looking around, still laying in a very compromising position, all her bits visible to anyone around..")
+
+		saynn("[say=artica].. .. ..?..[/say]")
+
+		saynn("[say=alexrynard]I don't know why you are on the floor. Get up, inmate.[/say]")
+
+		saynn("Artica looks down.. and sees cum on her naked tits.. which makes her blush hard.")
+
+		addButton("Continue", "See what happens next", "artica_dressesup")
+	if(state == "artica_dressesup"):
+		playAnimation(StageScene.Duo, "stand", {pc="artica", npc="alexrynard"})
+		saynn("Artica quickly gets up and covers herself up, trying to hide all the mess..")
+
+		saynn("[say=alexrynard]I've seen everything, don't worry about it.[/say]")
+
+		saynn("The engineer shows the visor.")
+
+		saynn("[say=alexrynard]I'm gonna be processing the data now. Go away.[/say]")
+
+		saynn("Artica nods and lowers her chin, turning around and preparing to leave..")
+
+		saynn("[say=alexrynard]And.. thanks.[/say]")
+
+		saynn("[say=artica]..![/say]")
+
+		saynn("The fluff chrrrrs and runs away.. to her spot probably..")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -189,9 +261,22 @@ func _react(_action: String, _args):
 
 	if(_action == "artica_with_visor_on"):
 		processTime(3*60)
+		getCharacter("artica").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("HypnovisorMk1"))
 
 	if(_action == "artica_becomes_sextoy"):
 		processTime(5*60)
+
+	if(_action == "artica_cums_from_order"):
+		processTime(3*60)
+		getModule("ArticaModule").triggerCorruption(0.05)
+		getCharacter("artica").cummedOnBy("artica")
+
+	if(_action == "alex_removes_visor"):
+		processTime(3*60)
+		getCharacter("artica").resetEquipment()
+
+	if(_action == "artica_dressesup"):
+		processTime(3*60)
 
 	setState(_action)
 
