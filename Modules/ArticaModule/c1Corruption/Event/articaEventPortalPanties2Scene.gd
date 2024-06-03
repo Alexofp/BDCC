@@ -143,6 +143,207 @@ func _run():
 
 		saynn("[say=artica]I should stop.. r-right now.. ah.. just a few more.. mhmm-m.. and that's all..[/say]")
 
+		saynn("She is close, her body squirming on her bed, shivers rushing through her..")
+
+		saynn("[say=artica]I gotta s-stop..[/say]")
+
+		addButton("Continue", "See what happens next", "artica_doesnt_stop")
+	if(state == "artica_doesnt_stop"):
+		playAnimation(StageScene.FleshlightSit, "cum", {pc="artica", bodyState={naked=true, hard=true}})
+		saynn("The tightness of her own pussy was too much to endure, Artica lets out a noise of passion as she forces the full length of her cock inside that fleshlight.. the knot slipping in with a satisfying pop..")
+
+		saynn("[say=artica]Nhh.. I c-can't stop..[/say]")
+
+		saynn("Her body trembles, orgasm crashing over her. More moans leave her lips as her thick creamy cum shoots through her cock, pumping her own pussy full of it.. She could probably feel every spurt, the warmth spreading inside her..")
+
+		saynn("Her sprawled toes reaching out far, her chin high.. her eyes sparkling with lust..")
+
+		saynn("[say=artica]W-why did I do that.. ah..[/say]")
+
+		saynn("You know why..")
+
+		addButton("Continue", "See what happens next", "after_first_orgasm")
+	if(state == "after_first_orgasm"):
+		playAnimation(StageScene.FleshlightSit, "inside", {pc="artica", bodyState={naked=true, hard=true}})
+		saynn("As the orgasm begins to fade, she is left panting, her own length still fully inside her, creating a cute bump on her belly..")
+
+		if (getCharacter("artica").isVisiblyPregnant()):
+			saynn("[say=artica]At l-least I'm already pregnant..[/say]")
+
+		else:
+			saynn("[say=artica]I'm g-gonna knock myself up like this..[/say]")
+
+		saynn("Artica looks down at herself.. the knot prevents any leakage.. pulling out now would mean unleashing a flow of seed onto her bed..")
+
+		saynn("Even after that orgasm, Artica's eyes are still somehow lusty..")
+
+		saynn("[say=artica]Well.. Since I already came inside m-myself..[/say]")
+
+		saynn("Is she really gonna continue.. what a needy fluff.")
+
+		addButton("Continue", "See what happens next", "artica_more_horny")
+	if(state == "artica_more_horny"):
+		playAnimation(StageScene.FleshlightSit, "standsex", {pc="artica", bodyState={naked=true, hard=true}})
+		saynn("She carefully pulls the fleshluight off her swollen knot.. gasping as it pops out, leaving her pussy gaping slightly and dripping her own cum. Then, without wasting another moment, Artica positions herself better on the bed, her paw lining up the fleshlight with her cock once more..")
+
+		saynn("This time, she thrusts into her pussy rather than stroking her shaft with it, her hips already moving at a steady pace, her tight, slick pussy enveloping her member nicely, all the seed making her love tunnel extra slick..")
+
+		saynn("[say=artica]Ah.. w-why does my pussy f-feel so good..[/say]")
+
+		saynn("Maybe you should help her..")
+
+		addButton("Just watch", "Just watch Artica snowballing her own pussy", "just_watch")
+		addButton("Join", "Grab Artica's fleshlight and help her fuck herself..", "join_in")
+	if(state == "just_watch"):
+		playAnimation(StageScene.FleshlightSit, "standfast", {pc="artica", bodyState={naked=true, hard=true}})
+		saynn("Naaah, you'd rather just let her have fun. Why would you startle the fluff.. when she is moaning so desperately and slutty..")
+
+		saynn("She increases the pace, her paws gripping the fleshlight tightly as she thrust faster and harder, her half-deflated knot slapping against her stuffed pussy, occasionally slipping in and out..")
+
+		saynn("[say=artica]Ah.. ah.. You're s-such a slut, Artica.. F-fucking your own pussy like t-this.. ah.. so tight..[/say]")
+
+		saynn("The pleasure is making her head spin, her balls tensing up more, her member throbbing inside the fleshlight as she nears her second climax..")
+
+		addButton("Continue", "See what happens next", "artica_cums_inside_herself_again")
+	if(state == "artica_cums_inside_herself_again"):
+		playAnimation(StageScene.FleshlightSit, "standinside", {pc="artica", bodyState={naked=true, hard=true}})
+		saynn("Her knot inflates with blood again.. which makes her eager to do.. it..")
+
+		saynn("With one rough thrust, she manages to knot her pussy again.. her orgasming inner walls clenching around her canine cock.. until she cums hard, dumping a second load deep inside her womb, snowballing her own pussy..")
+
+		saynn("[say=artica]Ah.. ny-yaahhh.. ah..[/say]")
+
+		saynn("She kept thrusting, her body moving on its own, milking every last drop of cum from her balls.. She is panting.. shaking.. her slit keeps getting tight around the knot..")
+
+		addButton("Continue", "See what happens next", "artica_after_double")
+	if(state == "artica_after_double"):
+		playAnimation(StageScene.FleshlightSit, "inside", {pc="artica", bodyState={naked=true, hard=true}})
+		saynn("Finally, exhausted and utterly spent, Artica collapses on the bed, her cock still stuck inside her pussy.")
+
+		saynn("She lays there, panting and basking in the afterglow, her body still tingling.")
+
+		if (getCharacter("artica").isVisiblyPregnant()):
+			saynn("[say=artica]I s-shouldn't have done this.. How am I ever gonna jack myself off any other way.. haha..[/say]")
+
+		else:
+			saynn("[say=artica]I have definetly knocked myself up.. haha..[/say]")
+
+		saynn("You let the girl recover.. and just leave. Such a kinky fluff she is..")
+
+		addButton("Continue", "See what happens next", "endthescene_removepanties")
+	if(state == "join_in"):
+		playAnimation(StageScene.SexFleshlight, "tease", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
+		saynn("Artica was so busy fucking herself.. that she didn't even hear your footsteps approaching her bed..")
+
+		saynn("Without much warning, you grab the fleshlight out of Artica's hands, making her gasp.")
+
+		saynn("[say=artica]AH! EEP![/say]")
+
+		saynn("You pull the fluff into your embrace with your other hand.")
+
+		saynn("[say=pc]Wow.. Look at that.. your pussy is so wet..[/say]")
+
+		saynn("[say=artica]Wh-what.. are you..[/say]")
+
+		saynn("You don't answer, instead bringing the fleshlight close to her twitching cock, brushing the sensetive cyan folds against the pointy canine cock tip.. Artica shivers, her body reacting to the teasing touch.")
+
+		saynn("[say=pc]Such an eager girl..[/say]")
+
+		saynn("She whimpers, her hips instinctively thrusting forward, seeking the warmth and tightness.. but you just pull her pussy away when that happens.")
+
+		saynn("[say=artica]Please..[/say]")
+
+		saynn("Her voice becomes a desperate whisper..")
+
+		saynn("[say=artica]Please.. I n-need it..[/say]")
+
+		saynn("You slowly slide the fleshlight over the head of Artica's cock, teasing her hard by moving the toy up and down, her pussy never taking the full length inside.. Artica moans, her hips bucking more as she tries to force herself deeper into the fleshlight.. but you keep her held firmly..")
+
+		saynn("[say=artica]Please.. anything.. I will do anything.. I n-need to..[/say]")
+
+		saynn("[say=pc]You need what?[/say]")
+
+		saynn("[say=artica]I need to cum.. i-inside my own p-pussy.. I w-wanna breed myself.. p-please..[/say]")
+
+		saynn("Artica begging is making you smile.. How can you say no?")
+
+		addButton("Give it to her", "Slide the fleshlight along her cock..", "pc_slides_felshlight")
+	if(state == "pc_slides_felshlight"):
+		playAnimation(StageScene.SexFleshlight, "sex", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
+		saynn("Your chin lands on her shoulder as you finally slide the fleshlight down over Artica's cock, the half-deflated knot slipping in as well..")
+
+		saynn("[say=artica]Ah..[/say]")
+
+		saynn("Artica moans loudly as the familliar tightness envelops her cock.. a familliar member stretching her fuckhole..")
+
+		saynn("You begin to stroke her cock with the fleshlight at a pace that is making her squirm and rub against you..")
+
+		saynn("[say=pc]You love fucking yourself?[/say]")
+
+		saynn("[say=artica]Y-yes.. ah..[/say]")
+
+		saynn("[say=pc]Do it then, fuck yourself.[/say]")
+
+		addButton("Continue", "See what happens next", "pc_slides_felshlight_fast")
+	if(state == "pc_slides_felshlight_fast"):
+		playAnimation(StageScene.SexFleshlight, "fast", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
+		saynn("Artica obeys, thrusting her hips forward a bit to meet the fleshlight. The sensations of fucking herself is driving her wild, more passionate noises escaping her lips.. as you stroke her cock faster with that handy fleshlight.")
+
+		saynn("[say=artica]Ah.. ah.. ah..[/say]")
+
+		saynn("You can feel her pussy resisting, her inner walls clenching around the pulsing knotted cock, increasing the friction. But you keep pushing through, forcing that pussy to swallow most of the length.. the fat orb getting swollen with blood again and slapping against her folds..")
+
+		saynn("[say=pc]What should I do with that knot?[/say]")
+
+		saynn("[say=artica]I-inside.. please.. ah.. r-ram it in.. k-knot my p-pussy.. please.. ah..[/say]")
+
+		saynn("Such a needy fluff..")
+
+		addButton("Knot", "Shove full length of Artica's cock inside her pussy", "pc_makes_artica_knot_herself_cum")
+	if(state == "pc_makes_artica_knot_herself_cum"):
+		playAnimation(StageScene.SexFleshlight, "inside", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
+		saynn("As Artica was nearing her orgasm, you suddenly slid the fleshlight further, forcing the knot to part Artica's pussy wide and slip inside with a cute pop noise.")
+
+		saynn("[say=artica]AH!.. Ahh-hh..[/say]")
+
+		saynn("Artica cries out a moan, her pussy gripping the full length of her shaft hard. Being knotted.. by her own cock.. is quickly sending the fluff over the edge.")
+
+		saynn("[say=artica]I'm.. Ah-h..[/say]")
+
+		saynn("Her {artica.penis} is throbbing and shooting thick ropes of cum into the fleshlight.. snowballing her own womb, adding to the seed that was already there. You continue to tug on the fleshlight, trying to milk every last drop of spunk from her balls.")
+
+		saynn("[say=pc]Good girl. Yeah, breed yourself, like that..[/say]")
+
+		saynn("She is leaning into you, her legs are all shaky, her toes keep curling up.")
+
+		addButton("Cuddle", "Pull her into some cuddles", "do_cuddle_after_sex")
+	if(state == "do_cuddle_after_sex"):
+		playAnimation(StageScene.Cuddling, "squirm", {pc="pc", npc="artica", npcBodyState={naked=true, hard=true}})
+		saynn("You pull the exhausted, spent Artica onto the bed and cuddle her.. while her cock is still fully inside that fleshlight, the knot keeping it secured nicely..")
+
+		saynn("[say=artica]Hh-hh.. mmhh..[/say]")
+
+		saynn("You chukle as she is still squirming in your hands.")
+
+		saynn("[say=pc]Enjoying yourself?[/say]")
+
+		saynn("[say=artica]Yes-..s.. ah.. how did you..[/say]")
+
+		saynn("[say=pc]You weren't exactly hiding, were you.[/say]")
+
+		saynn("She lowers her eyes.")
+
+		saynn("[say=artica]M-maybe.. haha..[/say]")
+
+		saynn("You nuzzle her cheek while she chrrrrs quietly.")
+
+		saynn("[say=pc]Such an eager girl.[/say]")
+
+		saynn("You just spend some time like this.. while Artica is being a cockwarmer.. for her own cock..")
+
+		saynn("But eventually it was time to go.")
+
+		addButton("Continue", "See what happens next", "endthescene_removepanties")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -166,6 +367,50 @@ func _react(_action: String, _args):
 
 	if(_action == "artica_fucks_herself_faster"):
 		processTime(3*60)
+
+	if(_action == "artica_doesnt_stop"):
+		processTime(3*60)
+		getCharacter("artica").cummedInVaginaBy("artica")
+		getModule("ArticaModule").triggerCorruption(0.05)
+
+	if(_action == "after_first_orgasm"):
+		processTime(2*60)
+
+	if(_action == "artica_more_horny"):
+		processTime(2*60)
+
+	if(_action == "just_watch"):
+		processTime(3*60)
+
+	if(_action == "join_in"):
+		processTime(3*60)
+
+	if(_action == "artica_cums_inside_herself_again"):
+		processTime(3*60)
+		getCharacter("artica").cummedInVaginaBy("artica")
+		getModule("ArticaModule").triggerCorruption(0.05)
+
+	if(_action == "artica_after_double"):
+		processTime(3*60)
+
+	if(_action == "endthescene_removepanties"):
+		getCharacter("artica").getInventory().clearSlot(InventorySlot.UnderwearBottom)
+		endScene()
+		return
+
+	if(_action == "pc_slides_felshlight"):
+		processTime(3*60)
+
+	if(_action == "pc_slides_felshlight_fast"):
+		processTime(3*60)
+
+	if(_action == "pc_makes_artica_knot_herself_cum"):
+		processTime(3*60)
+		getCharacter("artica").cummedInVaginaBy("artica")
+		getModule("ArticaModule").triggerCorruption(0.05)
+
+	if(_action == "do_cuddle_after_sex"):
+		processTime(5*60)
 
 	setState(_action)
 
