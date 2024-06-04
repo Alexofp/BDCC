@@ -47,6 +47,11 @@ func getFlags():
 		"TentaclesArticaHasFlower": flag(FlagType.Bool),
 		
 		"nextReaction": flag(FlagType.Text), #
+		
+		"eventTentacles": flag(FlagType.Number),
+		"eventSelfsuck": flag(FlagType.Number),
+		"eventDildo": flag(FlagType.Number),
+		"eventPortalPanties": flag(FlagType.Number),
 	}
 
 func _init():
@@ -104,6 +109,7 @@ func _init():
 		"res://Modules/ArticaModule/c1Corruption/ArticaTalkEvent.gd",
 		"res://Modules/ArticaModule/c0Shy/ArticaIntroEvent.gd",
 		"res://Modules/ArticaModule/c0Shy/ArticaShyTalkEvent.gd",
+		"res://Modules/ArticaModule/c1Corruption/Event/ArticaGreenhousesStealFlowerEvent.gd",
 	]
 	species = [
 		"res://Modules/ArticaModule/IceJogauniSpecies.gd",
@@ -248,4 +254,187 @@ func makeLusty():
 	setFlag("ArticaModule.isLusty", true)
 
 func canTriggerWaitScene():
+	return getNextWaitSceneInfo() != null
+
+#		"TentaclesPcHasFlower": flag(FlagType.Bool),
+#		"TentaclesArticaHasFlower": flag(FlagType.Bool),
+#
+#		"nextReaction": flag(FlagType.Text), #
+#
+#		"eventTentacles": flag(FlagType.Number),
+#		"eventSelfsuck": flag(FlagType.Number),
+#		"eventDildo": flag(FlagType.Number),
+#		"eventPortalPanties": flag(FlagType.Number),
+
+func getCorruptionEventScenes():
+	return {
+		"eventTentacles": [
+			{
+				"name": "Scouting greenhouses",
+				"scene": "articaEventTentacles1Scene",
+			},
+			{
+				"name": "Small tentacles",
+				"scene": "articaEventTentacles2Scene",
+				"canstart": getFlag("ArticaModule.TentaclesArticaHasFlower", false),
+				"hint": "Artica needs a special flower. Steal one from the greenhouses and give it to her!",
+			},
+			{
+				"name": "Big tentacles",
+				"scene": "articaEventTentacles3Scene",
+			},
+		],
+		"eventSelfsuck": [
+			{
+				"name": "First Yoga",
+				"scene": "articaEventSelfsuck1Scene",
+			},
+			{
+				"name": "Gym conflict",
+				"scene": "articaEventSelfsuck2Scene",
+			},
+			{
+				"name": "Bending deep..",
+				"scene": "articaEventSelfsuck3Scene",
+			}
+		],
+		"eventDildo": [
+			{
+				"name": "Creating a mold",
+				"scene": "articaEventDildo1Scene",
+			},
+			{
+				"name": "Dildo royale!",
+				"scene": "articaEventDildo2Scene",
+			},
+			{
+				"name": "Big reward",
+				"scene": "articaEventDildo3Scene",
+			}
+		],
+		"eventPortalPanties": [
+			{
+				"name": "Hypnovisor",
+				"scene": "articaEventPortalPanties1Scene",
+			},
+			{
+				"name": "Portal panties",
+				"scene": "articaEventPortalPanties2Scene",
+				"canstart": !GlobalRegistry.getCharacter("artica").isWearingChastityCage(),
+				"hint": "Artica can not be wearing a chastity cage",
+			}
+		]
+	}
+
+func getNextWaitSceneInfo():
+	var possible = []
+	
+	var scenesInfo = getCorruptionEventScenes()
+	
+	for eventID in scenesInfo:
+		var eventScenes:Array = scenesInfo[eventID]
+		var sceneAmount = eventScenes.size()
+		var flagValue = int(getFlag("ArticaModule."+eventID, 0))
+		
+		if(flagValue >= sceneAmount):
+			continue
+		
+		var theSceneInfo = eventScenes[flagValue]
+		var canStart = (true if (!theSceneInfo.has("canstart")) else theSceneInfo["canstart"])
+		
+		if(canStart):
+			possible.append([theSceneInfo["scene"], eventID])
+		
+	if(possible.size() == 0):
+		return null
+	
+	return RNG.pick(possible)
+
+func hasAnyWaitScenesLeft():
+	var scenesInfo = getCorruptionEventScenes()
+	
+	for eventID in scenesInfo:
+		var eventScenes:Array = scenesInfo[eventID]
+		var sceneAmount = eventScenes.size()
+		var flagValue = int(getFlag("ArticaModule."+eventID, 0))
+		
+		if(flagValue < sceneAmount):
+			return true
+	
 	return false
+
+func getBlockingReqs():
+	var allblockingreqs = []
+	
+	var scenesInfo = getCorruptionEventScenes()
+	
+	for eventID in scenesInfo:
+		var eventScenes:Array = scenesInfo[eventID]
+		var sceneAmount = eventScenes.size()
+		var flagValue = int(getFlag("ArticaModule."+eventID, 0))
+		
+		if(flagValue >= sceneAmount):
+			continue
+		
+		var theSceneInfo = eventScenes[flagValue]
+		var canStart = (true if (!theSceneInfo.has("canstart")) else theSceneInfo["canstart"])
+		
+		if(!canStart):
+			allblockingreqs.append(theSceneInfo["hint"])
+		
+	return Util.join(allblockingreqs, "\n")
+
+#		"eventTentacles": flag(FlagType.Number),
+#		"eventSelfsuck": flag(FlagType.Number),
+#		"eventDildo": flag(FlagType.Number),
+#		"eventPortalPanties": flag(FlagType.Number),
+func getReplayMenuScenes():
+	var possible = {}
+	
+	var scenesInfo = getCorruptionEventScenes()
+	
+	var eventIDToName = {
+		"eventTentacles": "Tentacles",
+		"eventSelfsuck": "Self-sucking",
+		"eventDildo": "Big canine dildo",
+		"eventPortalPanties": "Test subject",
+	}
+	for eventID in scenesInfo:
+		possible[eventID] = {
+			"name": eventIDToName[eventID],
+			"scenes": [],
+		}
+		
+		var eventScenes:Array = scenesInfo[eventID]
+		#var sceneAmount = eventScenes.size()
+		var flagValue = int(getFlag("ArticaModule."+eventID, 0))
+		
+		var _i = 0
+		for theSceneInfo in eventScenes:
+			var canStart = (true if (!theSceneInfo.has("canstart")) else theSceneInfo["canstart"])
+			
+			if(!canStart):
+				possible[eventID]["scenes"].append({
+					"name": theSceneInfo["name"],
+					"desc": "Can't replay this scene!\n\n"+theSceneInfo["hint"],
+					"canstart": canStart,
+					"scene": theSceneInfo["scene"],
+				})
+			elif(flagValue <= _i):
+				possible[eventID]["scenes"].append({
+					"name": theSceneInfo["name"],
+					"desc": "This scene hasn't happened yet",
+					"canstart": false,
+					"scene": theSceneInfo["scene"],
+				})
+			elif(canStart):
+				possible[eventID]["scenes"].append({
+					"name": theSceneInfo["name"],
+					"desc": "Replay this scene",
+					"canstart": canStart,
+					"scene": theSceneInfo["scene"],
+				})
+
+			_i += 1
+		
+	return possible

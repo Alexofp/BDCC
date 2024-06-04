@@ -27,5 +27,11 @@ func getPriority():
 func onButton(_method, _args):
 	if(_method == "talk"):
 		GM.main.applyWorldEdit("ArticaWorldEdit")
+		if(getCharacter("artica").hasEffect(StatusEffect.ArticaFullWithPlantEggs)):
+			var fullWithEggs = getCharacter("artica").getEffect(StatusEffect.ArticaFullWithPlantEggs)
+			if(fullWithEggs.turns <= 0):
+				runScene("articaEventTentacles4Scene")
+				return
+		
 		if(!GM.ES.triggerReact(Trigger.TalkingToNPC, ["artica"])):
 			runScene("articaTalkScene")

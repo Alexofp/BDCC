@@ -64,7 +64,7 @@ func _run():
 		addCharacter("artica", ["naked"])
 		playAnimation(StageScene.RopesSolo, "struggle", {pc="artica", bodyState={naked=true, hard=true}})
 		aimCameraAndSetLocName(GM.pc.getCellLocation())
-		GM.pc.setPosition(GM.pc.getCellLocation())
+		GM.pc.setLocation(GM.pc.getCellLocation())
 		saynn("You stop behind her.. before getting close and putting your hand on her maw, shushing any her protests.")
 
 		saynn("[say=artica]..ee-e.. p..[/say]")
@@ -676,7 +676,7 @@ func _react(_action: String, _args):
 			if(theHarness != null):
 				getCharacter("artica").getInventory().removeEquippedItem(theHarness)
 				GM.pc.getInventory().addItem(theHarness)
-		getCharacter("artica").removeEquippedItemsWithBuff(Buff.GagBuff)
+		getCharacter("artica").getInventory().removeEquippedItemsWithBuff(Buff.GagBuff)
 
 	setState(_action)
 

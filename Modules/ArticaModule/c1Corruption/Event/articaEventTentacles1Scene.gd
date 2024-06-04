@@ -121,7 +121,7 @@ func _run():
 
 		saynn("[say=eliza]See this plant? They're not letting me anywhere close to it. And I think I know why! Its molecular structure can be a base for a very potent artificial fertilizer.. among some other things.. Think you can bring it to me?[/say]")
 
-		saynn("[say=artica .. .. ..?][/say]")
+		saynn("[say=artica].. .. ..?[/say]")
 
 		saynn("Doctor shrugs and scratches behind her ear.")
 

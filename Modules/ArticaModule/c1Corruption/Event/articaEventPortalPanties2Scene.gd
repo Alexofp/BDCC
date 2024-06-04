@@ -76,7 +76,7 @@ func _run():
 		aimCameraAndSetLocName("cellblock_lilac_nearcell")
 		GM.pc.setLocation("cellblock_lilac_nearcell")
 		addCharacter("artica", ["naked"])
-		playAnimation(StageScene.SexPortalOral, "tease", {pc="artica", bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexPortalOral, "tease", {pc="artica", onlyRight=true, bodyState={naked=true, hard=true}})
 		removeCharacter("alexrynard")
 		saynn("Artica rushes into her cell"+str(", quickly throws her clothes on the bed" if !isNaked else "")+" and puts on the unassuming purple panties.")
 

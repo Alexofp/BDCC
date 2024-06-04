@@ -7,6 +7,7 @@ var isSlut = false
 var isVerySlut = false
 var isLusty = false
 var nakedAndShy = false
+var pickedReplayEvent = ""
 
 func _init():
 	sceneID = "articaTalkScene"
@@ -40,13 +41,52 @@ func _run():
 			addButton("Shower", "Wait until Artica heads to the showers on her own..", "start_showers")
 		else:
 			addDisabledButton("Shower", "Artica won't go to the showers unless she is messy")
-		if (getModule("ArticaModule").canTriggerWaitScene()):
-			saynn("Artica is gonna do something if you wait for her to do so..")
+		if (getModule("ArticaModule").hasAnyWaitScenesLeft()):
+			if (getModule("ArticaModule").isLusty()):
+				if (getModule("ArticaModule").canTriggerWaitScene()):
+					saynn("Artica is gonna do something if you wait for her to do so..")
 
-			addButton("Wait..", "See what Artica will do if left alone", "trigger_wait")
-		else:
-			addDisabledButton("Wait..", "Nothing will happen if you do this. Can try to make Artica horny to encourage her to explore the station")
+					addButton("Wait..", "See what Artica will do if left alone", "trigger_wait")
+				else:
+					addDisabledButton("Wait..", "Conditions aren't met to start the next scene!\n"+getModule("ArticaModule").getBlockingReqs())
+			else:
+				addDisabledButton("Wait..", "Nothing will happen if you do this. Can try to make Artica horny to encourage her to explore the station")
+		if (true):
+			addButton("Memories", "Replay one of the old lewd scenes", "replay_menu")
 		addButton("Leave", "Time to go", "endthescene")
+		if (getFlag("ArticaModule.TentaclesPcHasFlower") && !getFlag("ArticaModule.TentaclesArticaHasFlower")):
+			addButton("Flower!", "Give Artica the flower that she is looking for", "do_give_flower")
+	if(state == "replay_menu"):
+		saynn("Pick which event you want to see again.")
+
+		addEventReplayButtons()
+		if (false):
+			addButton("Error", "You shouldn't see this", "do_pick_replay_event")
+		addButton("Back", "You changed your mind", "")
+	if(state == "do_pick_replay_event"):
+		saynn("Which scene of that event do you want to see again?")
+
+		addEventReplaySceneButtons()
+		if (false):
+			addButton("Error", "You shouldn't see this", "do_start_replay_scene")
+		addButton("Back", "You changed your mind", "replay_menu")
+	if(state == "trigger_wait"):
+		playAnimation(StageScene.Solo, "stand", {pc="artica"})
+		var firstTimeWait = getFlag("ArticaModule.firstTimeWait", false)
+		if (!firstTimeWait):
+			setFlag("ArticaModule.firstTimeWait", true)
+			saynn("Artica is looking around intently.. you get a feeling that she wants to do something.. on her own.. but her inherent shyness prevents her from telling you that outright.")
+
+			saynn("So you just leave her alone. You find a spot from where you can watch her.. and then just wait.")
+
+			saynn("And, not even a few minutes later, Artica starts heading somewhere, her desire makes her eager to explore the prison.")
+
+		else:
+			saynn("Artica's behavior makes it obvious that she wants to explore the station on her own more.")
+
+			saynn("So you just leave her alone. You find a spot from where you can watch her.. and then just wait. Soon enough, Artica starts heading somewhere..")
+
+		addButton("Follow", "See what Artica will do", "start_corruption_event")
 	if(state == "sex_menu"):
 		saynn("Artica is horny. How do you wanna solve that?")
 
@@ -371,6 +411,19 @@ func doDebugAction(_id, _args = {}):
 		setFlag("ArticaModule.corruption", clamp(_args["corruption"]/100.0, 0.0, 1.0))
 		corruption = getModule("ArticaModule").getCorruption()
 
+func addEventReplayButtons():
+	var replayScenes = getModule("ArticaModule").getReplayMenuScenes()
+	for eventID in replayScenes:
+		addButton(replayScenes[eventID]["name"], "Pick this event", "do_pick_replay_event", [eventID])
+
+func addEventReplaySceneButtons():
+	var replayScenes = getModule("ArticaModule").getReplayMenuScenes()
+	for sceneInfo in replayScenes[pickedReplayEvent]["scenes"]:
+		if(sceneInfo["canstart"]):
+			addButton(sceneInfo["name"], sceneInfo["desc"], "do_start_replay_scene", [sceneInfo["scene"]])
+		else:
+			addDisabledButton(sceneInfo["name"], sceneInfo["desc"])
+
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -380,6 +433,34 @@ func _react(_action: String, _args):
 	if(_action == "start_showers"):
 		endScene()
 		runScene("articaShowerScene")
+		return
+
+	if(_action == "do_give_flower"):
+		setFlag("ArticaModule.TentaclesArticaHasFlower", true)
+		runScene("articaEventTentacles1dot5Scene")
+		return
+
+	if(_action == "do_pick_replay_event"):
+		if(_args.size() > 0):
+			pickedReplayEvent = _args[0]
+
+	if(_action == "do_start_replay_scene"):
+		runScene(_args[0])
+		endScene()
+		return
+
+	if(_action == "start_corruption_event"):
+		var nextSceneInfo = getModule("ArticaModule").getNextWaitSceneInfo()
+		
+		var nextSceneID = nextSceneInfo[0]
+		var flagToIncrease = nextSceneInfo[1]
+		
+		increaseFlag("ArticaModule."+flagToIncrease)
+		
+		addExperienceToPlayer(50)
+		
+		endScene()
+		runScene(nextSceneID)
 		return
 
 	if(_action == "sex_breed"):
@@ -442,6 +523,7 @@ func saveData():
 	data["isVerySlut"] = isVerySlut
 	data["isLusty"] = isLusty
 	data["nakedAndShy"] = nakedAndShy
+	data["pickedReplayEvent"] = pickedReplayEvent
 
 	return data
 
@@ -455,3 +537,4 @@ func loadData(data):
 	isVerySlut = SAVE.loadVar(data, "isVerySlut", false)
 	isLusty = SAVE.loadVar(data, "isLusty", false)
 	nakedAndShy = SAVE.loadVar(data, "nakedAndShy", false)
+	pickedReplayEvent = SAVE.loadVar(data, "pickedReplayEvent", "")
