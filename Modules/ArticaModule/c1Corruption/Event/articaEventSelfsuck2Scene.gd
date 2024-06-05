@@ -94,6 +94,7 @@ func _run():
 		addButton("Watch", "Just watch Artica humiliate herself further..", "artica_selfsuck_helped")
 		addButton("Act", "Try to stop the bullies", "try_stop_bullies")
 	if(state == "artica_selfsuck_helped"):
+		setFlag("ArticaModule.nextReaction", "s2bul")
 		GM.pc.setLocation("gym_yoga")
 		addCharacter("artica", ["naked"])
 		playAnimation(StageScene.SelfSuck, "tease", {pc="artica", npc="gymbully3", bodyState={naked=true, hard=true}})
@@ -240,6 +241,7 @@ func _run():
 
 		addButton("Fight", "Start the fight", "start_fight")
 	if(state == "lost_fight"):
+		setFlag("ArticaModule.nextReaction", "s2lost")
 		playAnimation(StageScene.Solo, "defeat")
 		saynn("Unable to continue fighting, you drop to your knees..")
 
@@ -354,6 +356,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "lost_leavealone")
 	if(state == "won_fight"):
+		setFlag("ArticaModule.nextReaction", "s2won")
 		playAnimation(StageScene.Duo, "stand", {npc="gymbully", npcAction="defeat"})
 		saynn("The last guy gets defeated as well.")
 

@@ -194,6 +194,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "artica_recover")
 	if(state == "artica_recover"):
+		setFlag("ArticaModule.nextReaction", "t3hap")
 		playAnimation(StageScene.GivingBirth, "idle", {pc="artica", bodyState={naked=true, hard=true}})
 		saynn("The tentacles slowly retracted, leaving Artica gasping for breath as her gaping holes began gushing with plant's fluids.. They carefully set her on the floor.. before retracting away.. letting her be..")
 

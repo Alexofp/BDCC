@@ -35,6 +35,7 @@ func getFlags():
 		
 		"corruptionBegan": flag(FlagType.Bool),
 		"NoClothes": flag(FlagType.Bool),
+		"wearsPortalPanties": flag(FlagType.Bool),
 		"isLusty": flag(FlagType.Bool),
 		"firstTimeWait": flag(FlagType.Bool),
 		
@@ -46,7 +47,7 @@ func getFlags():
 		"TentaclesPcHasFlower": flag(FlagType.Bool),
 		"TentaclesArticaHasFlower": flag(FlagType.Bool),
 		
-		"nextReaction": flag(FlagType.Text), #
+		"nextReaction": flag(FlagType.Text), # t1won t1lost t1ran t1bully t2con t2noncon t3hap t4hap s1hap s2bul s2lost s2won s3hap d1hap d2won d2pc d3hap p1hap p2pc p2alone
 		
 		"eventTentacles": flag(FlagType.Number),
 		"eventSelfsuck": flag(FlagType.Number),
@@ -438,3 +439,75 @@ func getReplayMenuScenes():
 			_i += 1
 		
 	return possible
+
+func getReactionFor(_topic):
+	if(_topic == "t1won"):
+		return "You really showed that husky.. haha.. Thank you again, I’d never be able to get that flower on my own.."
+	if(_topic == "t1lost"):
+		return "So unfortunate that I couldn’t get my paws on that flower.. But thank you anyway.."
+	if(_topic == "t1ran"):
+		return "That husky was gonna do something to me.. I wonder what.. So unfortunate that I left the flower there.."
+	if(_topic == "t1bully"):
+		return "Some guards are such meanies.. Their stun batons are so.. s-scary.. mmmhh.. mm.."
+	if(_topic == "t2con"):
+		return "I s-suggest being careful near the greenhouses.. S-some plants have grown bigger than a person.."
+	if(_topic == "t2noncon"):
+		return "I s-suggest being careful near the greenhouses.. S-some plants have grown so big t-they can.. yeah.. mmhh.."
+	if(_topic == "t3hap"):
+		return "Um.. Does my belly look bigger than normal?..  I t-think I a-ate too much today.. y-yeah.. mm.."
+	if(_topic == "t4hap"):
+		return "At least my belly isn’t as big anymore.. It was a-akward when people were looking at me, thinking I’m pregnant.. I’m c-curious, do the eggs taste.. a-alright?.."
+	if(_topic == "s1hap"):
+		return "I’m making progress but.. I’m still not that flexible... I think with a bit more practice, I’ll be able to take it all the way. Um.. you know.. get the full experience.. uh.. yoga experience.. y-yeah.. yoga.."
+	if(_topic == "s2bul"):
+		return "I’ve met some meanies today.. But I t-think it was.. a b-blessing in disguise?.. D-don’t worry about it.."
+	if(_topic == "s2lost"):
+		return "T-thank you for trying to save me.. S-sorry that it happened like that.."
+	if(_topic == "s2won"):
+		return "T-thank you for your help, r-really.. I think I can still.. improve. I wanna see how far I can go.. you k-know.."
+	if(_topic == "s3hap"):
+		return "You probably t-think that I’m a.. s-slut.. It's just.. y-you know.. um.. I c-can’t r-really say anything against t-that.."
+	if(_topic == "d1hap"):
+		return "I met a very helpful girl today.. Not e-everyone here seems to be mean.. Oh, I mean.. y-you’re not mean.. of c-course.. haha.. But that girl is also so h-happy.. wonder if it has a-anything to do with her.. nakedness.. hah."
+	if(_topic == "d2won"):
+		return "I w-was ready to g-give up.. But you h-helped me.. to push through.. mm-mh.. t-thank you for helping me keep my.. I mean.. um.. eep.. win that toy, hah.."
+	if(_topic == "d2pc"):
+		return "I t-thought I was gonna l-lose my.. I m-mean.. that.. t-toy.. I w-wasn’t gonna g-get.. I thought.. Um.. eep.. t-thank you.."
+	if(_topic == "d3hap"):
+		return "My legs are still shaky.. You c-can’t imagine how good your own.. umm.. i-ignore that.. haha.. That t-toy is really good though.. gods, I talk like a s-slut.."
+	if(_topic == "p1hap"):
+		return "Um.. hai.. haha.. I’m such a whore for hypnosis.. Yeah-hhh.. w-wait.. what did I just say.. gods.. What did I just say to you?.. M-my mind is s-scrambled a bit, i-ignore it if I said something s-silly.."
+	if(_topic == "p2pc"):
+		return "I w-was told I could k-keep the panties.. T-they are so.. cool.. I s-still can’t imagine that something like this is p-possible.. W-want me to put t-them on?.."
+	if(_topic == "p2alone"):
+		return "Hey.. um.. I found some cool panties.. they’re like.. um.. hard to explain.. they’re like see-through ones.. but not see.. they’re more like.. touch-through?.. Want m-me to try them on?.. I h-had a lot of fun with them.. l-lightly speaking.."
+	
+	return ""
+
+func getReaction():
+	var customReaction = getReactionFor(getFlag("ArticaModule.nextReaction", ""))
+	if(customReaction != ""):
+		setFlag("ArticaModule.nextReaction", "")
+		return customReaction
+	
+	var theCorruption = getCorruption()
+	
+	if(theCorruption > 0.8):
+		return RNG.pick([
+			"Hey there..",
+			"Heya.. Hope you're doing well, haha.",
+			"Hello..",
+			"Hellos..",
+		])
+	elif(theCorruption > 0.4):
+		return RNG.pick([
+			"Hey there.. Always good to see you..",
+			"Hello..",
+			"Heya..",
+		])
+	else:
+		return RNG.pick([
+			"Oh.. hey..",
+			"Hello..",
+			"Hey..",
+		])

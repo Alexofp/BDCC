@@ -25,13 +25,23 @@ func _run():
 		isLusty = getModule("ArticaModule").isLusty()
 		nakedAndShy = (isNaked && !isSlut)
 		if (getModule("ArticaModule").isLusty()):
-			saynn("Artica is swaying a lot, her cheeks blushing slightly.")
+			saynn("Artica is swaying and fidgeting a lot, her cheeks blushing slightly."+str(" Her heavy belly is protruding out a lot, her paws support and caress it lovingly.." if getCharacter("artica").isVisiblyPregnant() else "")+"")
 
 		else:
-			saynn("Artica is standing still.")
+			if (nakedAndShy):
+				saynn("Artica is covering herself up as much as she can, her lack of clothes is making her blush. "+str(" Her heavy belly is protruding out a lot, clearly carrying a whole litter.." if getCharacter("artica").isVisiblyPregnant() else "")+"")
+
+			elif (isNaked):
+				saynn("Artica is swaying about like her usual self, her paws aren't hiding her private bits, allowing anyone to check them out.. Including you."+str(" Her heavy belly is protruding out a lot, clearly carrying a whole litter.." if getCharacter("artica").isVisiblyPregnant() else "")+"")
+
+			else:
+				saynn("Artica is swaying about, rarely standing still for longer than a few seconds."+str(" Her heavy belly is protruding out a lot, her paws caressing it gently.." if getCharacter("artica").isVisiblyPregnant() else "")+"")
+
+		saynn("[say=artica]"+str(getModule("ArticaModule").getReaction())+"[/say]")
 
 		saynn("Corruption: "+str(Util.roundF(corruption*100.0, 1))+"%")
 
+		addButton("Talk", "Chat about stuff", "talk_menu")
 		addButton("Tease", "Do something half-lewd with her", "tease_menu")
 		if (getModule("ArticaModule").isLusty()):
 			addButton("Sex", "See what kind of kinky things you can do with her", "sex_menu")
@@ -56,6 +66,52 @@ func _run():
 		addButton("Leave", "Time to go", "endthescene")
 		if (getFlag("ArticaModule.TentaclesPcHasFlower") && !getFlag("ArticaModule.TentaclesArticaHasFlower")):
 			addButton("Flower!", "Give Artica the flower that she is looking for", "do_give_flower")
+	if(state == "talk_menu"):
+		saynn("What do you want to talk about?")
+
+		if (getFlag("ArticaModule.eventPortalPanties", 0) >= 2):
+			addButton("Portal panties", "Ask Artica to put on or remove the portal panties", "toggle_portal_panties")
+		else:
+			addDisabledButton("Portal panties", "Artica doesn't yet have portal panties.. Let her explore the station and maybe find some")
+		addButton("Back", "Enough chatting", "")
+	if(state == "toggle_portal_panties"):
+		if (getFlag("ArticaModule.wearsPortalPanties", false)):
+			saynn("[say=pc]Those panties that you have.. Can I take a look?[/say]")
+
+			saynn("Artica's ears twitch nervously, her cheeks flushing a bit. She pulls the purple panties out and presents them. They look generic enough, with a cute red heart on them.. but the inner sides hides a few thin metal rings that have closed apertures on them..")
+
+			saynn("[say=artica]Here..[/say]")
+
+			saynn("[say=pc]Can you put them on?[/say]")
+
+			saynn("[say=artica]Oh.. um.. Here?[/say]")
+
+			saynn("You nod confidently, making the fluff blush more.")
+
+			saynn("[say=artica]Oki..[/say]")
+
+			if (isNaked):
+				saynn("Artica carefully steps into the panties and pulls them up, adjusting the fit until they rest comfortably on her hips, the cold portal rings brushing against her sensitive bits don't seem to bother her at all..")
+
+			else:
+				saynn("Artica pulls her shorts down, exposing her private bits to you.. Then she carefully steps into the panties and pulls them up, adjusting the fit until they rest comfortably on her hips. The cold portal rings brushing against her sensitive bits don't seem to bother her at all..")
+
+			saynn("[say=artica]Here..[/say]")
+
+			saynn("[say=pc]Thank you, Artica.[/say]")
+
+			saynn("She offers you a cute smile.")
+
+		else:
+			saynn("[say=pc]Can you take off your portal panties, Artica.[/say]")
+
+			saynn("She nods.")
+
+			saynn("[say=artica]Sure..[/say]")
+
+			saynn("Artica pulls her purple panties off and stores them. Enough fun with portals for now.")
+
+		addButton("Continue", "See what happens next", "talk_menu")
 	if(state == "replay_menu"):
 		saynn("Pick which event you want to see again.")
 
@@ -439,6 +495,10 @@ func _react(_action: String, _args):
 		setFlag("ArticaModule.TentaclesArticaHasFlower", true)
 		runScene("articaEventTentacles1dot5Scene")
 		return
+
+	if(_action == "toggle_portal_panties"):
+		setFlag("ArticaModule.wearsPortalPanties", !getFlag("ArticaModule.wearsPortalPanties", false))
+		getCharacter("artica").resetEquipment()
 
 	if(_action == "do_pick_replay_event"):
 		if(_args.size() > 0):

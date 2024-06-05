@@ -367,6 +367,7 @@ func _run():
 		addButton("Comfort her", "Try to calm the fluff down", "do_comfort")
 		addButton("Participate yourself!", "Try to win that dildo for Artica", "do_participate")
 	if(state == "do_comfort"):
+		setFlag("ArticaModule.nextReaction", "d2won")
 		playAnimation(StageScene.Hug, "hug", {pc="pc", npc="artica", npcBodyState={naked=true, hard=true}})
 		saynn("You offer the fluff a warm hug, your arms wrapping around her trembling body while she buries her face into your shoulder.")
 
@@ -491,6 +492,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "do_participate"):
+		setFlag("ArticaModule.nextReaction", "d2pc")
 		playAnimation(StageScene.CanineDildoSex, "tease", {pc="pc"})
 		saynn("You can't watch Artica when she is so sad. You gotta help her win that dildo.. So you join the queue.")
 

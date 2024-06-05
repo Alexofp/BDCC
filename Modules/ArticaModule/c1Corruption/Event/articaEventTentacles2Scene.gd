@@ -107,6 +107,7 @@ func _run():
 		addButton("Lock the doors", "(Noncon variant) Prevent Artica from escaping the monster that she created..", "lock_doors")
 		addButton("Just watch", "(Consensual variant) Just watch what happens next", "con_variant")
 	if(state == "lock_doors"):
+		setFlag("ArticaModule.nextReaction", "t2noncon")
 		addCharacter("artica", ["naked"])
 		playAnimation(StageScene.TentaclesTease, "tease", {pc="artica", plant=true, bodyState={hard=true, naked=true}})
 		saynn("Artica is about to escape the green tentacles.. but you're way too curious to see what they will do to her.. so you just quickly slip out of the greenhouse and lock the doors, trapping the fluff inside..")
@@ -178,6 +179,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "con_variant"):
+		setFlag("ArticaModule.nextReaction", "t2con")
 		playAnimation(StageScene.Solo, "stand", {pc="artica"})
 		saynn("You decide to hide and just watch, reserving any action only if Artica will be in big danger. And so far.. she seems to be fine.. mostly.")
 

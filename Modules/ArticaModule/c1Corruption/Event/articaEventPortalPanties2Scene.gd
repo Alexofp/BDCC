@@ -7,6 +7,7 @@ var isSlut = false
 var isVerySlut = false
 var isLusty = false
 var nakedAndShy = false
+var hasPortalPantiesAlready = false
 
 func _init():
 	sceneID = "articaEventPortalPanties2Scene"
@@ -195,6 +196,7 @@ func _run():
 		addButton("Just watch", "Just watch Artica snowballing her own pussy", "just_watch")
 		addButton("Join", "Grab Artica's fleshlight and help her fuck herself..", "join_in")
 	if(state == "just_watch"):
+		setFlag("ArticaModule.nextReaction", "p2alone")
 		playAnimation(StageScene.FleshlightSit, "standfast", {pc="artica", bodyState={naked=true, hard=true}})
 		saynn("Naaah, you'd rather just let her have fun. Why would you startle the fluff.. when she is moaning so desperately and slutty..")
 
@@ -232,6 +234,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene_removepanties")
 	if(state == "join_in"):
+		setFlag("ArticaModule.nextReaction", "p2pc")
 		playAnimation(StageScene.SexFleshlight, "tease", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
 		saynn("Artica was so busy fucking herself.. that she didn't even hear your footsteps approaching her bed..")
 
@@ -355,9 +358,12 @@ func _react(_action: String, _args):
 
 	if(_action == "in_cell"):
 		processTime(3*60)
-		var thePanties = GlobalRegistry.createItem("PortalPanties")
-		thePanties.coversPenis = false
-		getCharacter("artica").getInventory().forceEquipStoreOtherUnlessRestraint(thePanties)
+		if(!getCharacter("artica").getInventory().hasSlotEquipped(InventorySlot.UnderwearBottom)):
+			var thePanties = GlobalRegistry.createItem("PortalPanties")
+			thePanties.coversPenis = false
+			getCharacter("artica").getInventory().forceEquipStoreOtherUnlessRestraint(thePanties)
+		else:
+			hasPortalPantiesAlready = true
 
 	if(_action == "artica_sits"):
 		processTime(3*60)
@@ -394,7 +400,8 @@ func _react(_action: String, _args):
 		processTime(3*60)
 
 	if(_action == "endthescene_removepanties"):
-		getCharacter("artica").getInventory().clearSlot(InventorySlot.UnderwearBottom)
+		if(!hasPortalPantiesAlready):
+			getCharacter("artica").getInventory().clearSlot(InventorySlot.UnderwearBottom)
 		endScene()
 		return
 
@@ -424,6 +431,7 @@ func saveData():
 	data["isVerySlut"] = isVerySlut
 	data["isLusty"] = isLusty
 	data["nakedAndShy"] = nakedAndShy
+	data["hasPortalPantiesAlready"] = hasPortalPantiesAlready
 
 	return data
 
@@ -437,3 +445,4 @@ func loadData(data):
 	isVerySlut = SAVE.loadVar(data, "isVerySlut", false)
 	isLusty = SAVE.loadVar(data, "isLusty", false)
 	nakedAndShy = SAVE.loadVar(data, "nakedAndShy", false)
+	hasPortalPantiesAlready = SAVE.loadVar(data, "hasPortalPantiesAlready", false)

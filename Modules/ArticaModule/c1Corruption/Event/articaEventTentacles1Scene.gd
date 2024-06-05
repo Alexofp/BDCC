@@ -282,6 +282,7 @@ func _run():
 
 		addButton("Run", "Leave fast", "won_runaway")
 	if(state == "won_runaway"):
+		setFlag("ArticaModule.nextReaction", "t1won")
 		removeCharacter("nova")
 		playAnimation(StageScene.Duo, "stand", {npc="artica"})
 		aimCameraAndSetLocName("yard_vaulthere")
@@ -300,6 +301,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "lost_nova"):
+		setFlag("ArticaModule.nextReaction", "t1lost")
 		playAnimation(StageScene.Duo, "defeat", {npc="nova"})
 		saynn("Defeated, you drop to your knees before the guard.. Artica gasps and rushes to you, trying to help you.")
 
@@ -349,6 +351,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "psst_husky"):
+		setFlag("ArticaModule.nextReaction", "t1ran")
 		playAnimation(StageScene.Duo, "stand", {npc="artica"})
 		saynn("Maybe you can try to distract the husky the same way Artica distracted that other guard..")
 
@@ -403,6 +406,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "let_nova_fun"):
+		setFlag("ArticaModule.nextReaction", "t1bully")
 		playAnimation(StageScene.SexStanding, "tease", {pc="nova", npc="artica", npcBodyState={naked=true, hard=true}})
 		addCharacter("artica", ["naked"])
 		saynn("You decide to stay and see how this scene will unravel itself. Maybe you will get a chance to get that plant that Artica needs..")

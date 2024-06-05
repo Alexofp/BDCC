@@ -60,9 +60,12 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
 
 func getDefaultEquipment():
+	var result = ["inmatecollar", "inmateuniformSexDeviant"]
 	if(GM.main != null && GM.main.getFlag("ArticaModule.NoClothes", false)):
-		return ["inmatecollar"]
-	return ["inmatecollar", "inmateuniformSexDeviant"]
+		result = ["inmatecollar"]
+	if(GM.main != null && GM.main.getFlag("ArticaModule.wearsPortalPanties", false)):
+		result.append("PortalPantiesUnlocked")
+	return result
 
 func adjustArtworkVariant(_variant:Array):
 	if(GM.main != null && GM.main.getFlag("ArticaModule.NoClothes", false)):

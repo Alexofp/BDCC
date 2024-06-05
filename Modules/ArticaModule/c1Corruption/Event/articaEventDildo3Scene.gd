@@ -17,6 +17,7 @@ func _init():
 
 func _run():
 	if(state == ""):
+		setFlag("ArticaModule.nextReaction", "d3hap")
 		addCharacter("artica")
 		isNaked = getFlag("ArticaModule.NoClothes", false)
 		isCaged = getCharacter("artica").isWearingChastityCage()
