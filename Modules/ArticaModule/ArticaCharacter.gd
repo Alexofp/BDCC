@@ -68,6 +68,9 @@ func getDefaultEquipment():
 	return result
 
 func adjustArtworkVariant(_variant:Array):
+	if(GM.main != null && GM.main.getFlag("ArticaModule.articaLostDreamcatcher", false)):
+		if(!_variant.has("sad")):
+			_variant.append("sad")
 	if(GM.main != null && GM.main.getFlag("ArticaModule.NoClothes", false)):
 		if(!_variant.has("naked")):
 			_variant.append("naked")

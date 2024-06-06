@@ -53,6 +53,10 @@ func getFlags():
 		"eventSelfsuck": flag(FlagType.Number),
 		"eventDildo": flag(FlagType.Number),
 		"eventPortalPanties": flag(FlagType.Number),
+		
+		"lastQuestStarted": flag(FlagType.Bool),
+		"articaLostDreamcatcher": flag(FlagType.Bool),
+		"lastQuestSawPorn": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -101,6 +105,8 @@ func _init():
 		
 		"res://Modules/ArticaModule/c1Corruption/Event/articaEventPortalPanties1Scene.gd",
 		"res://Modules/ArticaModule/c1Corruption/Event/articaEventPortalPanties2Scene.gd",
+		
+		"res://Modules/ArticaModule/c2LastQuest/articaLastQuest1Scene.gd",
 		]
 	characters = [
 		"res://Modules/ArticaModule/ArticaCharacter.gd",
