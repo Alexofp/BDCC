@@ -85,13 +85,13 @@ func _run():
 
 		saynn("[say=artica]Um..[/say]")
 
-		saynn("[say=risha]I can tell if you want. I can tell you exactly how many 'lovers' she already had~. It's all in her files.[/say]")
+		saynn("[say=risha]I can tell if you want. She is not a lilac for nothing, you know. It's all in her files..[/say]")
 
 		saynn("[say=artica]H-hey.. um..[/say]")
 
 		saynn("[say=risha]Artica is a slut. And she always was, from day zero. From way before that. I bet she was spreading legs left and right. How quickly did she do that for you? Ohh, it took some time, didn't it~? I guess she was pretending to be shy or something~. Or maybe she just didn't like your face..[/say]")
 
-		saynn("You don't even know what to think. Is she lying? She must be..")
+		saynn("You don't even know what to think. Is she lying? She must be.. But Artica is wearing lilac colors.. which means her crimes are of a sexual nature..")
 
 		saynn("[say=risha]You don't trust me, do you~?[/say]")
 
@@ -146,7 +146,7 @@ func _run():
 
 		saynn("[say=risha]How many people have fucked her tight pussy I wonder.. Judging from all of this juicy stuff..[/say]")
 
-		saynn("[say=pc]I get it, you can stop already.[/say]")
+		saynn("[say=pc]And that's all? I get it, you can stop already.[/say]")
 
 		saynn("Risha smiles and puts the cracked datapad away.")
 
@@ -154,7 +154,7 @@ func _run():
 
 		saynn("Risha smooches the air, doing a loud lip-smack.. and then walks away, leaving you and Artica alone.")
 
-		saynn("You sure do..")
+		saynn("It's interesting..")
 
 		addButton("Artica", "Ask her some things", "ask_fluff")
 	if(state == "stay_ignorant"):
@@ -176,9 +176,9 @@ func _run():
 
 		saynn("[say=risha]Pfffff-f. See if I care. Whatever, stay ignorant~. Maybe you will understand it one day.[/say]")
 
-		saynn("Risha smooches the air, doing a loud lip-smack.. and then walks away, leaving you and Artica alone.")
+		saynn("Risha smooches the air, doing a loud lip-smack.. and then walks away, leaving you and Artica alone. What a bitch.")
 
-		saynn("You certainly have a few questions for the fluff..")
+		saynn("Time to see if Artica is okay.")
 
 		addButton("Artica", "Ask her some things", "ask_fluff")
 	if(state == "ask_fluff"):
@@ -186,13 +186,21 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {npc="artica"})
 		saynn("You turn towards Artica.. and find her in a state of distress.. understandably.")
 
-		saynn("[say=pc]Is that true? You were always a slut, Artica?[/say]")
+		if (getFlag("ArticaModule.lastQuestSawPorn")):
+			saynn("[say=pc]Is that true? You're here because of your slutty behaviour, Artica?[/say]")
+
+		else:
+			saynn("[say=pc]You're okay, Artica? Let's ignore whatever that guard said.[/say]")
 
 		saynn("[say=artica]I.. I.. didn't.. I.. can.. I.. um.. I don't know..[/say]")
 
 		saynn("She is stuttering so much. Way more than usual.")
 
-		saynn("[say=pc]What's there to know?[/say]")
+		if (getFlag("ArticaModule.lastQuestSawPorn")):
+			saynn("[say=pc]What's there to know?[/say]")
+
+		else:
+			saynn("[say=pc]Relax, please.[/say]")
 
 		saynn("[say=artica]I can.. um.. ex.. ex-x.. p..[/say]")
 
@@ -200,7 +208,7 @@ func _run():
 
 		saynn("You don't know how to feel. On one hand.. who cares.. Artica could fuck with anyone she wants. But why was she acting like a shy inexperienced girl then? Was it really because of how you look or act.. or is there some kind of dark reason?")
 
-		saynn("Tears stream down Artica's cheeks.. She is crying. Is she trying to force sympathy?")
+		saynn("Tears stream down Artica's cheeks.. She is crying. You never saw her cry before..")
 
 		saynn("[say=artica]s-someone.. s-s..[/say]")
 
@@ -210,8 +218,87 @@ func _run():
 
 		saynn("[say=pc]Is your dream catcher missing?[/say]")
 
-		saynn("You swear that it was there just a minute ago..")
+		saynn("You swear that it was there just a minute ago.. So much is happening at the same time. You try to push your other thoughts away for now..")
 
+		saynn("[say=artica]Y-yeah.. It's.. the l-last link that I have with my tribe and family.. n-no.. h-had..[/say]")
+
+		saynn("The realization begins to settle in.. Artica whines quietly..")
+
+		saynn("[say=pc]What happened to it?[/say]")
+
+		saynn("[say=artica]S-so..s-someone.. s-s.. stole..[/say]")
+
+		saynn("Someone stole it, huh.. Right when you were arguing with that big cat..")
+
+		saynn("[say=pc]Did you see them?[/say]")
+
+		saynn("Artica shakes her head.")
+
+		saynn("[say=artica]It w-was just.. g-gone..[/say]")
+
+		saynn("Could be anywhere. You look around.. there are some onlookers, some of them probably saw something. You doubt that you will get much info out of them though.. without some convincing.")
+
+		addButton("Comfort", "Try to cheer Artica up", "do_comfort")
+		addButton("Ask to explain", "You're not planning to do anything for her until she explains herself", "no_trust")
+	if(state == "no_trust"):
+		aimCameraAndSetLocName("cellblock_lilac_nearcell")
+		GM.pc.setLocation("cellblock_lilac_nearcell")
+		saynn("[say=pc]After everything that happened, I hope you can excuse me if I don't trust your words.[/say]")
+
+		saynn("Artica wipes her tears.. but more appear.")
+
+		saynn("[say=artica]I'm s-s.sorry.. I c-can explain..[/say]")
+
+		saynn("[say=pc]Yeah, that'd be nice.[/say]")
+
+		saynn("She looks at you with her big sorry eyes.. sniffing a lot..")
+
+		saynn("[say=artica]Um.. I.. d-don't.. k-know.. w-where to start..[/say]")
+
+		saynn("[say=pc]From the beginning.[/say]")
+
+		saynn("She parts her lips.. but no words come out. Artica is just shaking more and more.. She is clearly not in a state to tell you anything.")
+
+		saynn("[say=pc]Alright, relax. Calm down. I will look for your dreamcatcher but I can't promise anything.[/say]")
+
+		saynn("The fluff nods-nods.. She lowers her head low, her ears flicking.. but without making any noise this time..")
+
+		saynn("[say=artica]S-sorry..[/say]")
+
+		saynn("She heads towards her cell, unable to endure being out in public anymore. Her paw is rubbing her ear constantly..")
+
+		saynn("At some point she stumbles and falls. Ow. So you decide to help her get to her cell.")
+
+		saynn("After that.. It was time to see if anyone here saw anything.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_comfort"):
+		playAnimation(StageScene.Hug, "hug", {pc="pc", npc="artica"})
+		aimCameraAndSetLocName("cellblock_lilac_nearcell")
+		GM.pc.setLocation("cellblock_lilac_nearcell")
+		saynn("You offer Artica a warm hug. You can feel her stress through all the random twitches that her body is doing..")
+
+		saynn("[say=pc]I will find it, Artica. Even if I will have to beat up every inmate of this prison.[/say]")
+
+		saynn("She nods subtly.")
+
+		saynn("[say=artica]S-sorry..[/say]")
+
+		saynn("[say=pc]Don't be. You're gonna be okay for now?[/say]")
+
+		saynn("She shrugs.")
+
+		saynn("[say=artica]I w-will be.. hiding in my c-cell..[/say]")
+
+		saynn("[say=pc]You do that, try to stay calm.[/say]")
+
+		saynn("You end the hug, allowing Artica to start heading towards her cell. Her paw is rubbing her ear constantly..")
+
+		saynn("At some point she stumbles and falls. Ow. So you decide to help her get to her cell.")
+
+		saynn("After that.. It was time to see if anyone here saw anything.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -233,6 +320,12 @@ func _react(_action: String, _args):
 
 	if(_action == "ask_fluff"):
 		processTime(3*60)
+
+	if(_action == "do_comfort"):
+		addMessage("New task added!")
+
+	if(_action == "no_trust"):
+		addMessage("New task added!")
 
 	setState(_action)
 

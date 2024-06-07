@@ -107,6 +107,7 @@ func _init():
 		"res://Modules/ArticaModule/c1Corruption/Event/articaEventPortalPanties2Scene.gd",
 		
 		"res://Modules/ArticaModule/c2LastQuest/articaLastQuest1Scene.gd",
+		"res://Modules/ArticaModule/c2LastQuest/articaSadTalkScene.gd",
 		]
 	characters = [
 		"res://Modules/ArticaModule/ArticaCharacter.gd",
@@ -517,3 +518,15 @@ func getReaction():
 			"Hello..",
 			"Hey..",
 		])
+
+func getLastQuestHints():
+	return [
+		"Someone stole the dreamcatcher. Artica didn’t just lose it.",
+		"The dreamcatcher was stolen by some thief while Artica was wearing it.",
+		"It was one of the inmates.",
+		"The inmate was a cat.",
+		"The inmate was wearing a general block uniform.",
+		"The inmate had brown fur and blue eyes.",
+		"The inmate had a ponytail.",
+		"The inmate was a girl.",
+	]
