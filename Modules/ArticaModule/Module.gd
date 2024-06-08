@@ -57,6 +57,7 @@ func getFlags():
 		"lastQuestStarted": flag(FlagType.Bool),
 		"articaLostDreamcatcher": flag(FlagType.Bool),
 		"lastQuestSawPorn": flag(FlagType.Bool),
+		"LQArticaGotDreamCatcher": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -108,6 +109,7 @@ func _init():
 		
 		"res://Modules/ArticaModule/c2LastQuest/articaLastQuest1Scene.gd",
 		"res://Modules/ArticaModule/c2LastQuest/articaSadTalkScene.gd",
+		"res://Modules/ArticaModule/c2LastQuest/articaLastQuest2Scene.gd",
 		]
 	characters = [
 		"res://Modules/ArticaModule/ArticaCharacter.gd",
