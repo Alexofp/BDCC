@@ -59,6 +59,14 @@ func createBodyparts():
 	giveBodypartUnlessSame(tail)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
 
+func updateBodyparts():
+	var shouldHaveNoCatcher = (GM.main != null && GM.main.getFlag("ArticaModule.articaLostDreamcatcher", false) && !GM.main.getFlag("ArticaModule.LQArticaGotDreamCatcher", false))
+	
+	if(shouldHaveNoCatcher):
+		giveBodypartUnlessSame(GlobalRegistry.createBodypart("canineears2"))
+	else:
+		giveBodypartUnlessSame(GlobalRegistry.createBodypart("canineears2tribal"))
+	
 func getDefaultEquipment():
 	var result = ["inmatecollar", "inmateuniformSexDeviant"]
 	if(GM.main != null && GM.main.getFlag("ArticaModule.NoClothes", false)):

@@ -222,18 +222,228 @@ func _run():
 
 		saynn("Before Artica can even finish her sentence, Rahi licks her claw and pierces the fluff's ear with it.. she then quickly pushes the ring of the piercing through it, making the familiar dreamcatcher now hang from it.")
 
-		saynn("[say=rahi]Here.. That's a good girl, took it like a champ..[/say]")
+		saynn("[say=rahi]Here.. That's a good girl..[/say]")
 
-		saynn("Artica blushes and blinks at the feline, the sudden praise catching her off-guard.")
+		saynn("Artica blushes and blinks at the feline, the sudden praise catching her off-guard. Rahi smiles cutely.")
 
 		if (isFullSlave):
 			saynn("[say=rahi]Name is Rahi.[/say]")
 
+			saynn("[say=artica]T-thank you.. Rahi..[/say]")
+
 		else:
 			saynn("[say=rahi]Name is.. kitty. Just call her kitty..[/say]")
 
-		saynn("[say=artica].. ..I'm Artica.[/say]")
+			saynn("[say=artica]T-thank you.. k-kitty..[/say]")
 
+		saynn("An awkward silence settles in while the feline stares at the fluff, clearly waiting for something.")
+
+		saynn("[say=artica]..oh.. I'm Artica. Sorry, I'm still a bit..[/say]")
+
+		saynn("Rahi chuckles softly and bats at Artica's dreamcatcher.")
+
+		saynn("[say=rahi]You have a nice name, Artica. Very fitting for your soft fur.. meow..[/say]")
+
+		saynn("[say=artica]Yip..[/say]")
+
+		saynn("Rahi leans in close to that ear that she pierced with her claw.. and whispers something.. something that makes the herm blush. She then gently nibbles on that ear, making Artica's member twitch slightly inside of its sheath..")
+
+		saynn("[say=artica]Ah..[/say]")
+
+		saynn("Kitty smiles and returns to you, her eyes shine with a predator-like aura that you have rarely seen before..")
+
+		saynn("[say=pc]What did you tell her?[/say]")
+
+		saynn("[say=rahi]Nothing.. nothing that Artica doesn't know already..[/say]")
+
+		saynn("Somehow Artica manages to act more subby than the shy kitty. Rahi's gaze quickly switches between you and blushy Artica.. who stares at you..")
+
+		if (isFullSlave):
+			saynn("[say=rahi]I will leave you two be.. I didn't steal anything, promise..[/say]")
+
+		else:
+			saynn("[say=rahi]She will leave you two be.. She didn't steal anything, promise..[/say]")
+
+		saynn("[say=artica]S-see you-s..[/say]")
+
+		saynn("Rahi winks at Artica.. and that somehow makes the fluff lower her gaze.")
+
+		if (isFullSlave):
+			saynn("[say=rahi]Can't wait to get my paws on you~.[/say]")
+
+		else:
+			saynn("[say=rahi]She can't wait to get her paws on you~.[/say]")
+
+		saynn("And just like that, Rahi dashes away, leaving you and the red swaying fluff alone..")
+
+		addButton("Continue", "See what happens next", "artica_pc_alone")
+	if(state == "artica_pc_alone"):
+		removeCharacter("rahi")
+		playAnimation(StageScene.Duo, "stand", {npc="artica", npcAction="stand", npcBodyState={naked=true}})
+		saynn("Artica puts her paw on her dreamcatcher. You slowly approach her.")
+
+		saynn("[say=pc]How do you feel?[/say]")
+
+		saynn("[say=artica]Better..[/say]")
+
+		saynn("[say=pc]I'm glad.[/say]")
+
+		saynn("[say=artica]I don't know how to.. thank you.. I thought I was g-gone..[/say]")
+
+		saynn("You shrug.")
+
+		saynn("[say=pc]Don't worry about it.[/say]")
+
+		saynn("[say=artica]You probably want to know.. about what that big cat said..[/say]")
+
+		saynn("[say=pc]Don't push yourself.[/say]")
+
+		saynn("Artica closes the distance herself, standing so close that you can feel her warm breath on your chest.")
+
+		saynn("[say=artica]I was always shy.. But I had.. fantasies.. you know?..[/say]")
+
+		saynn("Shy ones are often the most kinky ones, it's true.")
+
+		saynn("[say=artica]I felt like I was alone like that.. in my tribe.. There was no way for me to.. act on my dreams..[/say]")
+
+		saynn("Artica looks around, gazing upon all the metal and concrete that she is surrounded with..")
+
+		saynn("[say=artica]But when.. the balance was disturbed.. it gave me a sense of purpose..[/say]")
+
+		saynn("She looks down at her naked body, her paws sliding along her fur. The fluff is wiggling her rear.")
+
+		saynn("[say=artica]I'm quiet.. But I turned my naked body into a loud message.. of protest..[/say]")
+
+		saynn("Weaponizing your exhibitionism urges.. smart..")
+
+		saynn("[say=artica]That guard.. might be kinda right.. I was always a slut..[/say]")
+
+		saynn("[say=pc]Don't listen to that..[/say]")
+
+		saynn("[say=artica]..and I loved being your slut..[/say]")
+
+		saynn("Artica looks you in the eyes.. while hers are sparkling..")
+
+		saynn("[say=artica]You helped uncover my kinky side.. And so I will forever be eager to spread my legs for you.."+str(" And carry your pups.." if GM.pc.hasPenis() else "")+""+str(" All while my useless cock is locked away until you need it.. or be it forever too.." if getCharacter("artica").isWearingChastityCage() else "")+"[/say]")
+
+		addButton("Continue", "See what happens next", "artica_kneels")
+	if(state == "artica_kneels"):
+		playAnimation(StageScene.Beg, "beg", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
+		saynn("Artica gets on her knees before you, her legs spread to make sure not to hide anything.")
+
+		saynn("[say=artica]There is nothing more that I would love.. than to be your whore.. pawslut.. breeding bitch.. puppy maker.. crotch sniffer.. chastity slut.. fuck toy..[/say]")
+
+		saynn("A shy fluffer.. who was afraid to make a single noise too loud.. is now degrading herself in front of you.. kneeling.. proudly displaying her bouncing tits"+str(", pregnant belly " if getCharacter("artica").isVisiblyPregnant() else "")+", cock and pussy..")
+
+		saynn("[say=artica]Please.. Make me yours.. Mark me any way you want..[/say]")
+
+		addButton("Headpats!", "Just give her some headpats", "do_headpats")
+		addButton("Bodywritings", "Give Artica some headpats.. but also draw all over her body!", "do_bodywritings")
+		addButton("Face to crotch", "Push her face into your crotch and mark her with your scent", "do_crotchface")
+		addButtonWithChecks("Piss on", "Mark her as your property like the dogs do it", "do_piss_on", [], [[ButtonChecks.ContentEnabled, ContentType.Watersports]])
+	if(state == "do_headpats"):
+		playAnimation(StageScene.Beg, "pat", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
+		saynn("Marking seems to be a bit excessive.. so you decide to just pat the heck out of that fluff. Artica chrrrrs and nuzzles into your touch, bouncing happily.")
+
+		saynn("[say=pc]You are my slut. My headpat slut. Understand?[/say]")
+
+		saynn("[say=artica]Yes~. I'm a total slut for headpats. Haha.[/say]")
+
+		saynn("You smile and make sure her head is properly headpatted, until her ears go flat with her hair!")
+
+		saynn("[say=pc]Good. Very good. You can go to your spot or stay here if you want.[/say]")
+
+		saynn("She nods-nods.")
+
+		saynn("[say=artica]Oki-s! Yip-yip..[/say]")
+
+		saynn("You help her to get up. She seems to prefer her public spot.. so she heads there. She gives you one last glance, letting you see sparkling eyes and sticked out tongue.")
+
+		saynn("(( Artica's content ends here. Thank you for playing <3 ))")
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_bodywritings"):
+		playAnimation(StageScene.Beg, "pat", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
+		saynn("Marking.. you know exactly how to mark that fluff.. with a marker!")
+
+		saynn("You grab one and begin writing all sorts of words and messages on her body, her white fur contrasts greatly with the black ink. After that you decide to just pat the heck out of that fluff. Artica chrrrrs and nuzzles into your touch, bouncing happily and proudly displaying all the bodywritings.")
+
+		saynn("[say=pc]You are my slut. My property to mark as I wish. Understand?[/say]")
+
+		saynn("[say=artica]Yes~. I'm a total slut for bodywritings. Haha.[/say]")
+
+		saynn("You smile and make sure her head is properly headpatted, until her ears go flat with her hair!")
+
+		saynn("[say=pc]Good. Very good. You can go to your spot or stay here if you want.[/say]")
+
+		saynn("She nods-nods.")
+
+		saynn("[say=artica]Oki-s! Yip-yip..[/say]")
+
+		saynn("You help her to get up. She seems to prefer her public spot.. so she heads there. She gives you one last glance, letting you see sparkling eyes and sticked out tongue.")
+
+		saynn("(( Artica's content ends here. Thank you for playing <3 ))")
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_crotchface"):
+		playAnimation(StageScene.ChairCrotchSniff, "grind", {pc="artica", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Marking.. you know exactly how to mark that girl. You push her onto her bed.. before grabbing her face and shoving it into your crotch!"+str(" You make sure to grind your wet, needy pussy against that snout, forcing your scent into her fur and also making her breathe it in." if (GM.pc.hasReachableVagina() && !GM.pc.hasReachablePenis()) else "")+""+str(" You make sure to push her snout against your ballsack, forcing your scent into her fur while also making her breathe it in." if (!GM.pc.hasReachableVagina() && GM.pc.hasReachablePenis()) else "")+"")
+
+		saynn("[say=pc]You are my slut. My personal slut. Understand?[/say]")
+
+		saynn("Your intoxicating smell is making her lusty in seconds..")
+
+		saynn("[say=artica]Ah.. y-yes~. I'm a total slut for your scent.. H.. h-haha. mmhh-h..[/say]")
+
+		saynn("You smile and soon let go of her hair.")
+
+		saynn("[say=pc]Good. Very good. You can go to your spot or stay here if you want.[/say]")
+
+		saynn("She nods-nods, her body is swaying a bit as she struggles to maintain balance, her senses overloaded..")
+
+		saynn("[say=artica]Oki-s! Yip-yip..[/say]")
+
+		saynn("You help her to get up. She seems to prefer her public spot.. so she heads there. She gives you one last glance, letting you see sparkling eyes and sticked out tongue.")
+
+		saynn("(( Artica's content ends here. Thank you for playing <3 ))")
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_piss_on"):
+		if (GM.pc.hasReachablePenis() || GM.pc.isWearingChastityCage()):
+			playAnimation(StageScene.SexPawjob, "tease", {pc="pc", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+			saynn("Marking.. you know exactly how to mark that fluff in a way that will make her remember it..")
+
+			saynn("You push her onto the floor.. and whip your cock cock. You hold her there while waiting for the urge to happen.. and soon..")
+
+		else:
+			playAnimation(StageScene.ChairCrotchSniff, "sniff", {pc="artica", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+			saynn("Marking.. you know exactly how to mark that fluff in a way that will make her remember it..")
+
+			saynn("You grab her by the short hair.. and push her face against your "+str("pussy" if GM.pc.hasVagina() else "crotch")+". You hold her there while waiting for the urge to happen.. and soon..")
+
+		saynn("[say=artica]Eep..[/say]")
+
+		saynn("..a stream of your yellow smelly piss emerges from your piss hole.. A stream that begins to stream down from her snout, along the cheeks, creating little golden rivers along her white fur..")
+
+		saynn("[say=pc]You are my slut. My personal slut. Understand?[/say]")
+
+		saynn("Somehow, this extremely humiliating and degrading act is turning her on in seconds. Artica is moaning while huffing your gross scent, your urine flowing down her curves, dripping from her perky nips, coating her cock and pussy..")
+
+		saynn("[say=artica]Ah.. y-yes~. I'm a total slut for your.. piss.. H.. h-haha. mmhh-h..[/say]")
+
+		if (GM.pc.hasReachablePenis() || GM.pc.isWearingChastityCage()):
+			saynn("You smile as you empty your bladder onto her.")
+
+		else:
+			saynn("You smile and soon let go of her hair.")
+
+		saynn("[say=pc]Good. Very good. You can go to your spot or stay here if you want.[/say]")
+
+		saynn("She nods-nods, her body is swaying a bit as she struggles to maintain balance, her senses overloaded..")
+
+		saynn("[say=artica]Oki-s! Yip-yip..[/say]")
+
+		saynn("You help her to get up. She seems to prefer her public spot.. so she heads there, seemingly proud of her new facials.. She gives you one last glance, letting you see sparkling eyes and sticked out tongue.")
+
+		saynn("(( Artica's content ends here. Thank you for playing <3 ))")
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -247,6 +457,32 @@ func _react(_action: String, _args):
 		processTime(3*60)
 		setFlag("ArticaModule.LQArticaGotDreamCatcher", true)
 		getCharacter("artica").updateBodyparts()
+		addMessage("Artica + Rahi scene unlocked")
+
+	if(_action == "artica_pc_alone"):
+		processTime(3*60)
+
+	if(_action == "artica_kneels"):
+		processTime(3*60)
+		addExperienceToPlayer(500)
+		addMessage("Task completed")
+
+	if(_action == "do_headpats"):
+		processTime(3*60)
+
+	if(_action == "do_bodywritings"):
+		processTime(3*60)
+		for _i in range(10):
+			getCharacter("artica").addBodywritingRandom()
+
+	if(_action == "do_crotchface"):
+		processTime(5*60)
+		getModule("ArticaModule").makeLusty()
+
+	if(_action == "do_piss_on"):
+		processTime(5*60)
+		getCharacter("artica").pissedOnBy("pc")
+		getModule("ArticaModule").makeLusty()
 
 	setState(_action)
 
