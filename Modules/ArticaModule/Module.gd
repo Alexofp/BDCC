@@ -58,6 +58,7 @@ func getFlags():
 		"articaLostDreamcatcher": flag(FlagType.Bool),
 		"lastQuestSawPorn": flag(FlagType.Bool),
 		"LQArticaGotDreamCatcher": flag(FlagType.Bool),
+		"rewardNotFirst": flag(FlagType.Bool),
 	}
 
 func _init():
