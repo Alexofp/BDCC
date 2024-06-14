@@ -8,6 +8,7 @@ func _init():
 
 func _run():
 	if(state == ""):
+		setFlag("ArticaModule.nextReaction", "rahireturned")
 		addCharacter("rahi")
 		isSlave = getModule("RahiModule").isInSlavery()
 		isFullSlave = getModule("RahiModule").canTalkInFirstPerson()

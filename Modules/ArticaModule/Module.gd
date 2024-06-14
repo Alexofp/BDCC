@@ -47,7 +47,7 @@ func getFlags():
 		"TentaclesPcHasFlower": flag(FlagType.Bool),
 		"TentaclesArticaHasFlower": flag(FlagType.Bool),
 		
-		"nextReaction": flag(FlagType.Text), # t1won t1lost t1ran t1bully t2con t2noncon t3hap t4hap s1hap s2bul s2lost s2won s3hap d1hap d2won d2pc d3hap p1hap p2pc p2alone
+		"nextReaction": flag(FlagType.Text), # t1won t1lost t1ran t1bully t2con t2noncon t3hap t4hap s1hap s2bul s2lost s2won s3hap d1hap d2won d2pc d3hap p1hap p2pc p2alone rahireturned
 		
 		"eventTentacles": flag(FlagType.Number),
 		"eventSelfsuck": flag(FlagType.Number),
@@ -58,7 +58,12 @@ func getFlags():
 		"articaLostDreamcatcher": flag(FlagType.Bool),
 		"lastQuestSawPorn": flag(FlagType.Bool),
 		"LQArticaGotDreamCatcher": flag(FlagType.Bool),
+		"LQArticaGotBrainwashed": flag(FlagType.Bool),
 		"rewardNotFirst": flag(FlagType.Bool),
+		
+		"gaveBirthTimes": flag(FlagType.Number),
+		"canReactGaveBirth": flag(FlagType.Bool),
+		"gaveBirthToEggs": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -452,6 +457,9 @@ func getReplayMenuScenes():
 	return possible
 
 func getReactionFor(_topic):
+	if(_topic == "rahireturned"):
+		return "T-thank you again.. I w-will never forget what you did.. T-that k-kitty.. R-Rahi?.. I'm n-not angry at her.. H-her stare is making me f-feel strange though.."
+	
 	if(_topic == "t1won"):
 		return "You really showed that husky.. haha.. Thank you again, I’d never be able to get that flower on my own.."
 	if(_topic == "t1lost"):
@@ -496,13 +504,103 @@ func getReactionFor(_topic):
 	return ""
 
 func getReaction():
+	# Gave birth reaction
+	if(getFlag("ArticaModule.canReactGaveBirth")):
+		var gaveBirthReaction = ""
+		var gaveBirthAmount = getFlag("ArticaModule.gaveBirthTimes", 0)
+		
+		if(gaveBirthAmount <= 1):
+			gaveBirthReaction = "Oh hey.. I.. I just had them.. I-I never thought I'd be a mommy.. eep.. T-they said I c-can't keep them.. m-maybe that's for the better.."
+		elif(gaveBirthAmount <= 2):
+			gaveBirthReaction = "H-Hello. I had more.. pups.. gods.. It’s getting easier, but I’m still.. unsure. It's s-strange.."
+		elif(gaveBirthAmount <= 3):
+			gaveBirthReaction = "H-hey.. I.. g-gave birth.. again.. I think I’m getting the hang of this. It's p-painful.. but I.. I kind of enjoy seeing my pups for the f-first time.. h-hearing their c-cute voices.. Does that make me.. w-weird?"
+		elif(gaveBirthAmount <= 4):
+			gaveBirthReaction = "Hey-heys.. I gave birth to another litter.. I’m starting to feel like.. maybe this is what I’m meant for. It’s.. kind of thrilling, in a way.. haha.."
+		elif(gaveBirthAmount <= 5):
+			gaveBirthReaction = "Hey. I.. I’ve had more.. pups.. T-to be honest.. I can’t help but feel excited now. I love seeing them, feeling them grow inside me. It’s.. addictive.."
+		elif(gaveBirthAmount <= 6):
+			gaveBirthReaction = "Hellos.. More and more pups.. I think.. I think I’m really starting to love this. Being filled, giving birth. It’s.. it’s what I crave.. When will you.. mm.."
+		elif(gaveBirthAmount <= 7):
+			gaveBirthReaction = "Hey-heys.. I.. I can't stop thinking about it. I love being pregnant, feeling them inside me. I want m-more. I need m-more.. P-please?.."
+		elif(gaveBirthAmount <= 8):
+			gaveBirthReaction = "I'm totally addicted to this.. I love being a breeding slut, filled with pups. I want to be used again and again.. I w-want my p-pussy pumped f-full of virile s-spunk.. I c-can't stop thinking about it.."
+		elif(gaveBirthAmount <= 9):
+			gaveBirthReaction = "Heys.. gods.. another litter. I love being a kitten factory, a breeding bitch, a pup maker.. P-please, m-more.. I want to be filled, to give b-birth again and again.."
+		else:
+			gaveBirthReaction = RNG.pick([
+				"Hey-heys.. Gave b-birth to more kids.. and I s-still love it. I love being a pup factory, a slut for breeding. I crave more i-impregnations.. I need it. Please, make me a breeding slut forever..",
+				"H-heya-s.. I g-gave birth to so many.. I'm s-such a.. b-breeding slut.. it has b-became my purpose..",
+				"Heys.. I l-lost track how m-many times I g-gave birth by n-now.. m-more than ten f-for sure.. I c-can't h-help it.. I w-want more..",
+			])
+		
+		setFlag("ArticaModule.canReactGaveBirth", false)
+		return gaveBirthReaction
+	
+	# Corruption event reaction
 	var customReaction = getReactionFor(getFlag("ArticaModule.nextReaction", ""))
 	if(customReaction != ""):
 		setFlag("ArticaModule.nextReaction", "")
 		return customReaction
 	
-	var theCorruption = getCorruption()
+	# Visibly pregnant reaction
+	if(GlobalRegistry.getCharacter("artica").isVisiblyPregnant()):
+		#var gaveBirthReaction = ""
+		var gaveBirthAmount = getFlag("ArticaModule.gaveBirthTimes", 0)
+		
+		if(GlobalRegistry.getCharacter("artica").isVisiblyPregnantFromPlayer()):
+			if(gaveBirthAmount <= 0):
+				return RNG.pick([
+					"Oh.. h-hi.. I t-think.. I'm p-pregnant.. from you.. I've never b-been pregnant b-before..",
+					"Hello.. I.. I'm.. p-pregnant.. f-from you I t-think.. w-what do I do..",
+					"H-hey.. I'm g-gonna be a m-mommy s-soon.. f-for the first t-time.. I'm s-scared..",
+				])
+			elif(gaveBirthAmount <= 3):
+				return RNG.pick([
+					"Hh-hey.. I’m pregnant again. It’s.. still scary, but I’m getting used to it.. They move so much, and my.. my nipples are so sensitive..",
+					"My body’s changing so much.. M-my b-breasts look s-so swollen.. and my b-belly.. so big.. w-with your l-litter..",
+					"My b-belly is so big.. I c-can barely m-move.. ah.. t-they are k-kicking inside sometimes..",
+				])
+			elif(gaveBirthAmount <= 6):
+				return RNG.pick([
+					"I.. I think I’m starting to enjoy feeling them i-inside me..",
+					"Hey-heys.. I’m full of your pups again. Haha.. I.. I can’t help but feel excited. I’m starting to love this f-feeling..",
+					"M-my nipples are so itchy and s-sensitive. I think.. I think I’m starting to crave this.."
+				])
+			else:
+				return RNG.pick([
+					"Please, make me your breeding bitch.. always full of your pups..",
+					"I l-love being stuffed full.. and I l-love carrying your l-litter..",
+					"L-look.. it's y-your p-pups in me..",
+				])
+		else:
+			if(gaveBirthAmount <= 0):
+				return RNG.pick([
+					"Oh.. h-hi.. I t-think.. I'm p-pregnant.. and I d-don't even know from w-who.. I've never b-been pregnant b-before..",
+					"Hello.. I.. I'm.. p-pregnant.. f-from s-someone.. I d-don't k-know.. w-what do I do..",
+					"H-hey.. I'm g-gonna be a m-mommy s-soon.. f-for the first t-time.. I'm s-scared..",
+				])
+			elif(gaveBirthAmount <= 3):
+				return RNG.pick([
+					"Hh-hey.. I’m pregnant again. It’s.. still scary, but I’m getting used to it.. They move so much, and my.. my nipples are so sensitive..",
+					"My body’s changing so much.. M-my b-breasts look s-so swollen.. and my b-belly.. so big.. w-with someone's l-litter..",
+					"My b-belly is so big.. I c-can barely m-move.. ah.. t-they are k-kicking inside sometimes.. a-and I don't e-even know the f-father..",
+				])
+			elif(gaveBirthAmount <= 6):
+				return RNG.pick([
+					"I.. I think I’m starting to enjoy feeling them i-inside me..",
+					"Hey-heys.. I’m full of pups again. S-someone's.. Haha.. I.. I can’t help but feel excited. I’m starting to love this f-feeling..",
+					"M-my nipples are so itchy and s-sensitive. I think.. I think I’m starting to crave this.."
+				])
+			else:
+				return RNG.pick([
+					"I l-love being a breeding bitch.. always full of pups..",
+					"I l-love being stuffed full.. and I l-love carrying l-litter after litter..",
+					"I'm c-carrying someone's pups.. f-feels so good..",
+				])
 	
+	# Corruption based, last resort
+	var theCorruption = getCorruption()
 	if(theCorruption > 0.8):
 		return RNG.pick([
 			"Hey there..",

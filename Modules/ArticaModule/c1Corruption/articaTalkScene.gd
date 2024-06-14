@@ -61,14 +61,244 @@ func _run():
 					addDisabledButton("Wait..", "Conditions aren't met to start the next scene!\n"+getModule("ArticaModule").getBlockingReqs())
 			else:
 				addDisabledButton("Wait..", "Nothing will happen if you do this. Can try to make Artica horny to encourage her to explore the station")
-		if (true):
+		if (getFlag("ArticaModule.LQArticaGotDreamCatcher") || getFlag("ArticaModule.LQArticaGotBrainwashed")):
 			addButton("Memories", "Replay one of the old lewd scenes", "replay_menu")
 		addButton("Leave", "Time to go", "endthescene")
 		if (getFlag("ArticaModule.TentaclesPcHasFlower") && !getFlag("ArticaModule.TentaclesArticaHasFlower")):
 			addButton("Flower!", "Give Artica the flower that she is looking for", "do_give_flower")
+	if(state == "ask_lilac"):
+		saynn("[say=pc]So why are you a lilac? What did you do to earn that purple color?[/say]")
+
+		if (getFlag("ArticaModule.LQArticaGotBrainwashed")):
+			saynn("[say=artica]Um.. I d-don't remember actually.. All I know is.. I'm your fucktoy slut.. Nothing else matters.. haha..[/say]")
+
+			saynn("Artica chrrrrs softly as she nuzzles your cheek.")
+
+		elif (getFlag("ArticaModule.LQArticaGotDreamCatcher")):
+			saynn("[say=artica]That corporation.. AlphaCorp?.. It invaded my planet.. Destroyed the careful balance.. I don't know why..[/say]")
+
+			saynn("Artica looks down on herself..")
+
+			saynn("[say=artica]So I.. wrote words of encouragement.. on my body.. everywhere.. I w-wasn't gonna fight myself.. But I didn't want to do n-nothing.. And then I.. tried to make everyone s-see me..[/say]")
+
+			saynn("That's one way to spread the message..")
+
+			saynn("[say=artica]I h-hope I helped other Jogauni not to give up.. but I s-soon got caught..[/say]")
+
+			saynn("[say=pc]Sounds like simple public indecency.[/say]")
+
+			saynn("[say=artica]M-maybe.. they w-were very mean to me though.. S-something about.. setting the precedent..[/say]")
+
+			saynn("Makes sense.")
+
+		else:
+			saynn("[say=artica]I.. um.. it's a long story.. our planet got invaded..[/say]")
+
+			saynn("Artica looks at her paws.")
+
+			saynn("[say=artica]I couldn't r-really fight.. but.. d-doing nothing was a-also bad.. t-that's what they wanted.. T-they wanted to convince us that everything was g-gonna be alright soon..[/say]")
+
+			saynn("Sounds like AlphaCorp alright.")
+
+			saynn("[say=artica]I knew that we had to resist if we wanted to stay the Jogauni that we are.. I.. I d-don't know.. I d-did what I could.. I.. um.. I w-was spreading the message.. message that they didn't like..[/say]")
+
+			saynn("Huh.")
+
+			saynn("[say=pc]Still.. What are your crimes? They charged you with something sexual related, right?[/say]")
+
+			saynn("Artica lowers her gaze and scratches behind her ear.")
+
+			saynn("[say=artica]Y-.y.. yea..h..[/say]")
+
+			saynn("Looks like you're not gonna get that out of her.")
+
+		addButton("Continue", "See what happens next", "talk_menu")
+	if(state == "ask_gym"):
+		saynn("[say=pc]You like going to the gym?[/say]")
+
+		if (getFlag("ArticaModule.LQArticaGotBrainwashed")):
+			saynn("[say=artica]I.. I j-just wanted to get flexible enough to be able to suck my own cock..[/say]")
+
+			saynn("Wow. What a bold fluff.")
+
+			saynn("[say=artica]So I can p-pleasure myself between all the times that you fuck me.. haha..[/say]")
+
+		else:
+			saynn("[say=artica]Me? Not really.. no.. why are you asking?..[/say]")
+
+			saynn("Hah. Interesting.")
+
+			saynn("[say=pc]No reason.[/say]")
+
+			saynn("[say=artica]I was going out on hunts sometimes.. I was often the slowest fluff though.. K-Kept getting lost..[/say]")
+
+			saynn("Tribal life, huh.")
+
+			saynn("[say=pc]How does your old life compare to.. this?[/say]")
+
+			saynn("Artica shrugs.")
+
+			saynn("[say=artica]I miss my tribe.. but.. y-yeah.. it's v-very different..[/say]")
+
+			if (getFlag("ArticaModule.eventSelfsuck", 0) >= 2):
+				saynn("[say=pc]I think I know why you were going to the gym, Artica~.[/say]")
+
+				saynn("She blushes deeply.")
+
+				saynn("[say=artica]Eep..[/say]")
+
+				saynn("You pat her on the head, offering some comfort.")
+
+				saynn("[say=pc]You can keep trying, I liked what I saw.[/say]")
+
+				saynn("She chrrrrrs softly..")
+
+				if (getFlag("ArticaModule.LQArticaGotDreamCatcher")):
+					saynn("[say=artica]Y-yeah.. I just wanted to.. you know.. become more flexible.. I w-was really curious h-how my cock tasted..[/say]")
+
+		addButton("Continue", "See what happens next", "talk_menu")
+	if(state == "ask_mommy"):
+		saynn("[say=pc]How do you feel.. now that you're a mommy?[/say]")
+
+		var gaveBirthAmount = getFlag("ArticaModule.gaveBirthTimes", 0)
+		saynn("[say=artica]First time was.. s-scary.. and painful.. but the nurses were n-nice to me..[/say]")
+
+		saynn("Artica looks down at her belly..")
+
+		saynn("[say=artica]They let me feed my pups for a bit.. it felt strange.. but kinda good..[/say]")
+
+		if (gaveBirthAmount >= 2):
+			saynn("[say=pc]It's not your first time though.[/say]")
+
+			saynn("[say=artica]Y-yeah.. I t-think it's not the last too.. haha..[/say]")
+
+		if (gaveBirthAmount >= 4):
+			saynn("She scratches behind her ear.")
+
+			saynn("[say=artica]Is it s-strange to say.. t-that I want more..[/say]")
+
+			saynn("[say=pc]It's not. You're a good mommy, Artica.[/say]")
+
+			saynn("She chrrrrrs happily and nuzzles your cheek, her tail swishing happily.")
+
+		if (gaveBirthAmount >= 7):
+			saynn("[say=artica]T-thank you.. f-for m-making mommy so many times.. I l-love being your little slutty b-breeding bitch..[/say]")
+
+			saynn("Awww, so cute.")
+
+		if (gaveBirthAmount >= 10):
+			saynn("Looks like she wants to add some more to her last sentence..")
+
+			saynn("[say=artica]I'm like.. a total slut for more pups.. nyaah.. I w-wanna be filled with c-cum always.. I wanna b-be bred.. again and again..[/say]")
+
+			saynn("You really messed with her mind, huh.. Looks like she can not get any more eager about pregnancy.. You can only pat yourself for accomplishing this!")
+
+		saynn("You recall that Artica gave birth.. exactly "+str(gaveBirthAmount)+" "+str("times" if gaveBirthAmount  != 1 else "time")+".")
+
+		addButton("Continue", "See what happens next", "talk_menu")
+	if(state == "ask_sizequeen"):
+		saynn("[say=pc]Would you consider yourself.. a size queen?[/say]")
+
+		saynn("[say=artica]A size q-queen? W-what's that..[/say]")
+
+		saynn("[say=pc]Well, you know, a queen of big sizes.[/say]")
+
+		saynn("Artica scratches her chin.")
+
+		saynn("[say=artica]I'm n-not r-really a q-queen of anything..[/say]")
+
+		if (getFlag("ArticaModule.eventDildo", 0) >= 2):
+			saynn("[say=pc]Yeah, that would be stretching it, really.. haha..[/say]")
+
+			saynn("Artica instantly realizes what you mean.. her cheeks red like fire..")
+
+		if (getFlag("ArticaModule.eventDildo", 0) >= 3):
+			saynn("[say=artica]I g-guess.. then.. y-yeah.. I m-might be..[/say]")
+
+			saynn("You tilt your head.")
+
+			saynn("[say=pc]What was that?[/say]")
+
+			saynn("[say=artica]D-does it count if it's my.. mmm..[/say]")
+
+			saynn("[say=pc]It definitely counts, Artica.[/say]")
+
+			saynn("[say=artica]..hah..[/say]")
+
+		addButton("Continue", "See what happens next", "talk_menu")
+	if(state == "ask_tentacles"):
+		saynn("[say=pc]Do you have interest in.. tentacles.. Artica?[/say]")
+
+		saynn("Artica blinks and coughs.")
+
+		saynn("[say=artica]Tentacles?..[/say]")
+
+		saynn("[say=pc]Yeah, tentacles, long flexible tendrils.[/say]")
+
+		saynn("She scratches behind her head.")
+
+		saynn("[say=artica]Well.. when I was young.. I got lost and ran into some mystical creature.. it d-did had t-those..[/say]")
+
+		saynn("[say=pc]So.. you are?[/say]")
+
+		saynn("She blushes deeply..")
+
+		if (getFlag("ArticaModule.eventTentacles", 0) >= 3):
+			saynn("[say=artica]Um.. Just..[/say]")
+
+			saynn("[say=pc]C'mon. I saw your belly, it wasn't a pregnant belly~.[/say]")
+
+			saynn("She covers her face.")
+
+			saynn("[say=artica]Eep.. I..[/say]")
+
+			saynn("She speaks very quietly.")
+
+			saynn("[say=artica]..g-guess..[/say]")
+
+			saynn("Such a shy fluff. You saw it though, you know the full truth.")
+
+			if (getFlag("ArticaModule.gaveBirthToEggs")):
+				saynn("[say=artica]I d-did find s-some..[/say]")
+
+				saynn("Find huh. Interesting choice of words.")
+
+				saynn("[say=artica]And it d-did.. s-stuff me full of.. some kind of eggs..[/say]")
+
+				saynn("[say=pc]Must have felt awful, huh~?[/say]")
+
+				saynn("[say=artica]You s-saw it yourself.. S-so many e-eggs.. eep.. I t-think I c-came j.just laying them..[/say]")
+
+				saynn("[say=pc]You're a slut for tentacles, Artica~.[/say]")
+
+				saynn("[say=artica]..haha.. y-yeah.. I g-guess..[/say]")
+
+		else:
+			saynn("[say=artica]Um.. Just.. fascinated..[/say]")
+
+			saynn("Interesting..")
+
+		addButton("Continue", "See what happens next", "talk_menu")
 	if(state == "talk_menu"):
 		saynn("What do you want to talk about?")
 
+		addButton("Lilac", "Ask why Artica is a lilac", "ask_lilac")
+		if (getFlag("ArticaModule.eventSelfsuck", 0) >= 1):
+			addButton("Gym", "Ask Artica if she likes doing sport activities", "ask_gym")
+		else:
+			addDisabledButton("Gym", "You have no reason to ask that yet..")
+		if (getFlag("ArticaModule.gaveBirthTimes", 0) > 0):
+			addButton("Mommy", "Ask Artica about how she feels to be a mommy", "ask_mommy")
+		else:
+			addDisabledButton("Mommy", "Artica never gave birth.. yet..")
+		if (getFlag("ArticaModule.eventDildo", 0) >= 1):
+			addButton("Size queen", "Ask Artica if she is a size queen", "ask_sizequeen")
+		else:
+			addDisabledButton("Size queen", "You have no reason to ask that yet..")
+		if (getFlag("ArticaModule.eventTentacles", 0) >= 2):
+			addButton("Tentacles", "Ask Artica if she likes tentacles", "ask_tentacles")
+		else:
+			addDisabledButton("Tentacles", "You have no reason to ask that yet..")
 		if (getFlag("ArticaModule.eventPortalPanties", 0) >= 2):
 			addButton("Portal panties", "Ask Artica to put on or remove the portal panties", "toggle_portal_panties")
 		else:
@@ -167,6 +397,8 @@ func _run():
 			addButtonWithChecks("Hypnovisor fun..", "Mess with Artica's mind a little.. You will need a hypnovisor for this", "sex_hypnovisorfun", [], [[ButtonChecks.HasItemWithTag, ItemTag.Hypnovisor]])
 		else:
 			addDisabledButton("Mutual pawjob", "Artica's corruption needs to be above 80% for her to be kinky enough to do this.. also don't forget to bring a hypnovisor!")
+		if (getFlag("ArticaModule.LQArticaGotDreamCatcher")):
+			addButton("Invite Rahi..", "Let Rahi and Artica do some kinky stuff together..", "do_invite_rahi")
 		addButton("Back", "Never mind", "")
 	if(state == "tease_menu"):
 		saynn("What do you want to do?")
@@ -551,6 +783,11 @@ func _react(_action: String, _args):
 	if(_action == "sex_hypnovisorfun"):
 		endScene()
 		runScene("articaSexHypnovisorScene")
+		return
+
+	if(_action == "do_invite_rahi"):
+		endScene()
+		runScene("articaPlusRahiScene")
 		return
 
 	if(_action == "do_tease_canteen"):
