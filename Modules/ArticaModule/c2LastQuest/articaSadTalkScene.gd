@@ -7,6 +7,7 @@ func _init():
 
 func _run():
 	if(state == ""):
+		setFlag("ArticaModule.LQTalkedOnce", true)
 		addCharacter("artica", ["sad", "naked"])
 		isCaged = getCharacter("artica").isWearingChastityCage()
 		playAnimation(StageScene.SexStart, "start", {pc="pc", npc="artica", npcBodyState={naked=true}})

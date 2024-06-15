@@ -55,6 +55,7 @@ func getFlags():
 		"eventPortalPanties": flag(FlagType.Number),
 		
 		"lastQuestStarted": flag(FlagType.Bool),
+		"LQTalkedOnce": flag(FlagType.Bool),
 		"articaLostDreamcatcher": flag(FlagType.Bool),
 		"lastQuestSawPorn": flag(FlagType.Bool),
 		"LQArticaGotDreamCatcher": flag(FlagType.Bool),
@@ -117,6 +118,7 @@ func _init():
 		"res://Modules/ArticaModule/c2LastQuest/articaLastQuest1Scene.gd",
 		"res://Modules/ArticaModule/c2LastQuest/articaSadTalkScene.gd",
 		"res://Modules/ArticaModule/c2LastQuest/articaLastQuest2Scene.gd",
+		"res://Modules/ArticaModule/c2LastQuest/articaLastQuestBadEndScene.gd",
 		]
 	characters = [
 		"res://Modules/ArticaModule/ArticaCharacter.gd",
