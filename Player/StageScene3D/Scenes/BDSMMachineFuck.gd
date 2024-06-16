@@ -43,6 +43,8 @@ func playAnimation(animID, _args = {}):
 	
 	if(_args.has("noDildos") && _args["noDildos"]):
 		$BDSMMachine.setDildosVisible(false)
+	else:
+		$BDSMMachine.setDildosVisible(true)
 	
 	var state_machine = animationTree["parameters/StateMachine/playback"]
 	var state_machine2 = animationTree2["parameters/StateMachine/playback"]

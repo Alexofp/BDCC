@@ -730,7 +730,8 @@ func _react(_action: String, _args):
 
 	if(_action == "toggle_portal_panties"):
 		setFlag("ArticaModule.wearsPortalPanties", !getFlag("ArticaModule.wearsPortalPanties", false))
-		getCharacter("artica").resetEquipment()
+		getCharacter("artica").getInventory().clearSlot(InventorySlot.UnderwearBottom)
+		getCharacter("artica").resetEquipment(true, true, true)
 
 	if(_action == "do_pick_replay_event"):
 		if(_args.size() > 0):

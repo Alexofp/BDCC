@@ -65,6 +65,7 @@ func getFlags():
 		"gaveBirthTimes": flag(FlagType.Number),
 		"canReactGaveBirth": flag(FlagType.Bool),
 		"gaveBirthToEggs": flag(FlagType.Bool),
+		"CurvyForm": flag(FlagType.Bool),
 	}
 
 func _init():

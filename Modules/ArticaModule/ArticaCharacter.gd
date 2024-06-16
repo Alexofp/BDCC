@@ -66,6 +66,15 @@ func updateBodyparts():
 		giveBodypartUnlessSame(GlobalRegistry.createBodypart("canineears2"))
 	else:
 		giveBodypartUnlessSame(GlobalRegistry.createBodypart("canineears2tribal"))
+		
+	var isCurvy = (GM.main != null && GM.main.getFlag("ArticaModule.CurvyForm", false))
+	if(isCurvy):
+		var penis = getBodypart(BodypartSlot.Penis)
+		if(penis != null):
+			penis.lengthCM = 28
+		var breasts = getBodypart(BodypartSlot.Breasts)
+		if(breasts != null):
+			breasts.size = 5
 	
 func getDefaultEquipment():
 	var result = ["inmatecollar", "inmateuniformSexDeviant"]

@@ -687,7 +687,7 @@ func _react(_action: String, _args):
 
 	if(_action == "steal_clothes_fully"):
 		setFlag("ArticaModule.NoClothes", true)
-		getCharacter("artica").resetEquipment(true,true,true)
+		getCharacter("artica").getInventory().clearSlot(InventorySlot.Body)
 
 	if(_action == "make_convince"):
 		processTime(3*60)
