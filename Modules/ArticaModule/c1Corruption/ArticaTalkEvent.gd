@@ -9,6 +9,9 @@ func registerTriggers(es):
 func run(_triggerID, _args):
 	if(!getFlag("ArticaModule.corruptionBegan", false)):
 		return
+	if(getFlag("ArticaModule.lastQuestStarted") && !getFlag("ArticaModule.LQArticaGotDreamCatcher") && !getFlag("ArticaModule.LQArticaGotBrainwashed")):
+		addDisabledButton("Artica", "Artica is in her cell")
+		return
 	
 	if(checkCharacterBusy("ArticaBusy", "Seems like the fluff is not here", "Artica")):
 		return
@@ -32,6 +35,11 @@ func onButton(_method, _args):
 			if(fullWithEggs.turns <= 0):
 				runScene("articaEventTentacles4Scene")
 				return
+		
+		if(!getFlag("ArticaModule.lastQuestStarted") && getModule("ArticaModule").getCorruption() >= 1.0):
+			setFlag("ArticaModule.lastQuestStarted", true)
+			runScene("articaLastQuest1Scene")
+			return
 		
 		if(!GM.ES.triggerReact(Trigger.TalkingToNPC, ["artica"])):
 			runScene("articaTalkScene")

@@ -24,8 +24,8 @@ func _run():
 		isVerySlut = getModule("ArticaModule").isVerySlut()
 		isLusty = getModule("ArticaModule").isLusty()
 		nakedAndShy = (isNaked && !isSlut)
-		if (getModule("ArticaModule").isLusty()):
-			saynn("Artica is swaying and fidgeting a lot, her cheeks blushing slightly."+str(" Her heavy belly is protruding out a lot, her paws support and caress it lovingly.." if getCharacter("artica").isVisiblyPregnant() else "")+"")
+		if (getModule("ArticaModule").isLusty() || getFlag("ArticaModule.LQArticaGotBrainwashed")):
+			saynn("Artica is swaying and fidgeting a lot, her cheeks blushing slightly."+str(" Her heavy belly is protruding out a lot, her paws support and caress it lovingly.." if getCharacter("artica").isVisiblyPregnant() else "")+""+str(" Her eyes are sparkling with lust and eternal obedience as she is looking at you.." if getFlag("ArticaModule.LQArticaGotBrainwashed") else "")+"")
 
 		else:
 			if (nakedAndShy):
@@ -43,7 +43,7 @@ func _run():
 
 		addButton("Talk", "Chat about stuff", "talk_menu")
 		addButton("Tease", "Do something half-lewd with her", "tease_menu")
-		if (getModule("ArticaModule").isLusty()):
+		if (getModule("ArticaModule").isLusty() || getFlag("ArticaModule.LQArticaGotBrainwashed")):
 			addButton("Sex", "See what kind of kinky things you can do with her", "sex_menu")
 		else:
 			addDisabledButton("Sex", "Artica is not horny enough")
@@ -52,7 +52,7 @@ func _run():
 		else:
 			addDisabledButton("Shower", "Artica won't go to the showers unless she is messy")
 		if (getModule("ArticaModule").hasAnyWaitScenesLeft()):
-			if (getModule("ArticaModule").isLusty()):
+			if (getModule("ArticaModule").isLusty() || getFlag("ArticaModule.LQArticaGotBrainwashed")):
 				if (getModule("ArticaModule").canTriggerWaitScene()):
 					saynn("Artica is gonna do something if you wait for her to do so..")
 

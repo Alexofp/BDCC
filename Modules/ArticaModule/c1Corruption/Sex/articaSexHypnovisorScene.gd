@@ -588,7 +588,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "gang_start")
 	if(state == "gang_start"):
-		playAnimation(StageScene.SexGangbang, "tease", {pc="artica", npc="gymbully", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2="gymbully3", npc2BodyState={naked=true, hard=true}, npc3="gymbully2", npc3BodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexGangbang, "tease", {pc="artica", npc="gymbully2", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2="gymbully", npc2BodyState={naked=true, hard=true}, npc3="gymbully3", npc3BodyState={naked=true, hard=true}})
 		saynn("Right there, out in the public, the group forces Artica down onto her hands and knees. The main guy slides below her while the quiet one takes note of her tight ass that wasn't used yet by anyone.")
 
 		saynn("[say=gymbully3]Wait for me! I wanna rail her TOO![/say]")
@@ -601,7 +601,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "gang_sex")
 	if(state == "gang_sex"):
-		playAnimation(StageScene.SexGangbang, "sex", {pc="artica", npc="gymbully", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2="gymbully3", npc2BodyState={naked=true, hard=true}, npc3="gymbully2", npc3BodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexGangbang, "sex", {pc="artica", npc="gymbully2", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2="gymbully", npc2BodyState={naked=true, hard=true}, npc3="gymbully3", npc3BodyState={naked=true, hard=true}})
 		saynn("The loud crazy girl is first, thrusting her rubber cock into Artica's mouth, resting it on her canine tongue as it quickly hits her throat and starts stretching it. As that is happening, the main bully grabs Artica's hips and impales her used dripping slit onto his cock, meeting that cunt with a thrust of his hips, ramming his member deep. Without a word, a quiet bully plunged into her as well, his cock stretching Artica's back entrance, forcing it to spread wide open.")
 
 		saynn("[say=gymbully]Hah, she is still tight. Not for long.[/say]")
@@ -612,7 +612,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "gang_fastsex")
 	if(state == "gang_fastsex"):
-		playAnimation(StageScene.SexGangbang, "fast", {pc="artica", npc="gymbully", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2="gymbully3", npc2BodyState={naked=true, hard=true}, npc3="gymbully2", npc3BodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexGangbang, "fast", {pc="artica", npc="gymbully2", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2="gymbully", npc2BodyState={naked=true, hard=true}, npc3="gymbully3", npc3BodyState={naked=true, hard=true}})
 		saynn("Artica's throat is making wet noises as she struggles to breathe under the onslaught of that crazy girl who forces most of her rubber shaft inside each time, making the fluff choke and gag on its length.")
 
 		saynn("[say=gymbully3]Gonna have to raise the gym taxes, this is a great show that we're offering! LOOK AT THIS BITCH CHOKE![/say]")
@@ -627,7 +627,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "gang_knots_artica")
 	if(state == "gang_knots_artica"):
-		playAnimation(StageScene.SexGangbang, "inside", {pc="artica", npc="gymbully", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2="gymbully3", npc2BodyState={naked=true, hard=true}, npc3="gymbully2", npc3BodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexGangbang, "inside", {pc="artica", npc="gymbully2", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2="gymbully", npc2BodyState={naked=true, hard=true}, npc3="gymbully3", npc3BodyState={naked=true, hard=true}})
 		saynn("All three bullies kept slamming into Artica's tight orgasming holes.. until all three knots suddenly slipped in! Her jaw almost dislocates as the crazy girl knots her mouth, her pussy and ass get stuffed full of throbbing meat.. before the two bullies' cocks release hot, sticky seed inside, filling her womb and ass to the brim, her body writhing and trembling with pure ecstasy as her hypnotized mind is flooded with more and more pleasure..")
 
 		saynn("[say=gymbully3]HAH! Three cocks in one slut! ..fuck, I'm so wet..[/say]")
@@ -1007,7 +1007,7 @@ func _react(_action: String, _args):
 		processTime(3*60)
 
 	if(_action == "gang_start"):
-		getCharacter("gymbully2").getInventory().equipItem(GlobalRegistry.createItem("StraponCanine"))
+		getCharacter("gymbully3").getInventory().equipItem(GlobalRegistry.createItem("StraponCanine"))
 
 	if(_action == "gang_sex"):
 		processTime(5*60)

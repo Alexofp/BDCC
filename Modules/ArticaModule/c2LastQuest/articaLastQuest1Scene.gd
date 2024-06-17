@@ -22,7 +22,7 @@ func _run():
 		isLusty = getModule("ArticaModule").isLusty()
 		nakedAndShy = (isNaked && !isSlut)
 		playAnimation(StageScene.Duo, "stand", {npc="artica"})
-		saynn("You approch Artica. Something feels different.. like you're being watched. You look around and don't find anything suspicious. Oh well.. You decide to direct your full attention to the girl.")
+		saynn("You approach Artica. Something feels different.. like you're being watched. You look around and don't find anything suspicious. Oh well.. You decide to direct your full attention to the girl.")
 
 		saynn("[say=pc]Hey, Artica.[/say]")
 

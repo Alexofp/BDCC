@@ -71,10 +71,10 @@ func updateBodyparts():
 	if(isCurvy):
 		var penis = getBodypart(BodypartSlot.Penis)
 		if(penis != null):
-			penis.lengthCM = 28
+			penis.lengthCM = 26
 		var breasts = getBodypart(BodypartSlot.Breasts)
 		if(breasts != null):
-			breasts.size = 5
+			breasts.size = 6
 	
 func getDefaultEquipment():
 	var result = ["inmatecollar", "inmateuniformSexDeviant"]
@@ -85,12 +85,15 @@ func getDefaultEquipment():
 	return result
 
 func adjustArtworkVariant(_variant:Array):
-	if(GM.main != null && GM.main.getFlag("ArticaModule.articaLostDreamcatcher", false) && !GM.main.getFlag("ArticaModule.LQArticaGotDreamCatcher", false)):
+	if(GM.main != null && GM.main.getFlag("ArticaModule.articaLostDreamcatcher", false) && !GM.main.getFlag("ArticaModule.LQArticaGotDreamCatcher", false) && !GM.main.getFlag("ArticaModule.LQArticaGotBrainwashed", false)):
 		if(!_variant.has("sad")):
 			_variant.append("sad")
 	if(GM.main != null && GM.main.getFlag("ArticaModule.NoClothes", false)):
 		if(!_variant.has("naked")):
 			_variant.append("naked")
+	if(GM.main != null && GM.main.getFlag("ArticaModule.LQArticaGotBrainwashed", false)):
+		if(!_variant.has("nocatcher")):
+			_variant.append("nocatcher")
 
 func canDoSelfCare():
 	return false

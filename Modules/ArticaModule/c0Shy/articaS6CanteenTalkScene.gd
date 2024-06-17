@@ -444,7 +444,7 @@ func _run():
 		else:
 			addButton("Rub crotch", "Rub her crotch with your foot", "kinky_checkpaw_rub_crotch")
 	if(state == "kinky_checkpaw_let_lick"):
-		playAnimation(StageScene.CheckPaw, "beans", {pc="pc", npc="artica"})
+		playAnimation(StageScene.CheckPaw, "lick", {pc="pc", npc="artica"})
 		var isDigi = GM.pc.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsDigi)
 		var isHoofs = GM.pc.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsHoofs)
 		var pawname = ("foot" if (!isDigi  && !isHoofs) else ("paw" if isDigi else "hoof"))
@@ -1211,7 +1211,7 @@ func _run():
 		saynn("[say=artica]I.. I don't know.. It's what got me into trouble to begin with..[/say]")
 
 		addButton("Comfort her", "Tell her that it will be okay. Only you are here", "ask_mood_waterfall_comfort")
-		addButton("Will happen anyway", "Tell her that she won't be able to keep her clothes forever anyway", "ask_mood_waterfall_comfort")
+		addButton("Will happen anyway", "Tell her that she won't be able to keep her clothes forever anyway", "ask_mood_waterfall_happenanyway")
 	if(state == "ask_mood_waterfall_comfort"):
 		playAnimation(StageScene.Duo, "sit", {npc="artica", npcBodyState={naked=true,hard=true}, flipNPC=true})
 		addCharacter("artica", ["naked"])
@@ -1745,6 +1745,12 @@ func _react(_action: String, _args):
 		processTime(5*60)
 
 	if(_action == "ask_mood_waterfall_comfort"):
+		processTime(3*60)
+		getModule("ArticaModule").removeShy(0.2)
+		setState("ask_mood_waterfall_comfort")
+		return
+
+	if(_action == "ask_mood_waterfall_happenanyway"):
 		processTime(3*60)
 		getModule("ArticaModule").removeShy(0.2)
 		setState("ask_mood_waterfall_comfort")

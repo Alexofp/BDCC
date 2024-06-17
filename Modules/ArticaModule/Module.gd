@@ -58,6 +58,8 @@ func getFlags():
 		"LQTalkedOnce": flag(FlagType.Bool),
 		"articaLostDreamcatcher": flag(FlagType.Bool),
 		"lastQuestSawPorn": flag(FlagType.Bool),
+		"lqLastNPC": flag(FlagType.Text),
+		"lqClues": flag(FlagType.Number),
 		"LQArticaGotDreamCatcher": flag(FlagType.Bool),
 		"LQArticaGotBrainwashed": flag(FlagType.Bool),
 		"rewardNotFirst": flag(FlagType.Bool),
@@ -130,12 +132,19 @@ func _init():
 		"res://Modules/ArticaModule/c0Shy/ArticaIntroEvent.gd",
 		"res://Modules/ArticaModule/c0Shy/ArticaShyTalkEvent.gd",
 		"res://Modules/ArticaModule/c1Corruption/Event/ArticaGreenhousesStealFlowerEvent.gd",
+		"res://Modules/ArticaModule/c2LastQuest/articaLQBadEndEvent.gd",
+		"res://Modules/ArticaModule/c2LastQuest/articaLQGoodEndEvent.gd",
+		"res://Modules/ArticaModule/c2LastQuest/ArticaLQInmatesHints.gd",
+		"res://Modules/ArticaModule/c2LastQuest/ArticaSadTalkEvent.gd",
 	]
 	species = [
 		"res://Modules/ArticaModule/IceJogauniSpecies.gd",
 	]
 	worldEdits = [
 		"res://Modules/ArticaModule/c1Corruption/ArticaWorldEdit.gd",
+	]
+	quests = [
+		"res://Modules/ArticaModule/c2LastQuest/ArticaLastQuest.gd",
 	]
 
 func startCaged():
@@ -628,10 +637,10 @@ func getLastQuestHints():
 	return [
 		"Someone stole the dreamcatcher. Artica didn’t just lose it.",
 		"The dreamcatcher was stolen by some thief while Artica was wearing it.",
-		"It was one of the inmates.",
-		"The inmate was a cat.",
-		"The inmate was wearing a general block uniform.",
-		"The inmate had brown fur and blue eyes.",
-		"The inmate had a ponytail.",
-		"The inmate was a girl.",
+		"It was one of the inmates who stole the dreamcatcher.",
+		"The dreamcatcher thief is wearing a general block uniform.",
+		"The dreamcatcher thief has brown fur and blue eyes.",
+		"The dreamcatcher thief is a cat.",
+		"The dreamcatcher thief has a ponytail.",
+		"The dreamcatcher thief is a girl.",
 	]

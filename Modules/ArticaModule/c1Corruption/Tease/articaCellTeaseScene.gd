@@ -250,8 +250,8 @@ func _run():
 		playAnimation(StageScene.BreastGroping, "tease", {pc="pc", npc="artica", npcBodyState={naked=true, hard=true}})
 		saynn("You lock the cage around Artica's cock again.. and then bring the horny fluff back into the main hall.")
 
-		if (isFirstChastDeny):
-			saynn("Waiting and seeing what she would do now would be interesting..")
+		#if (isFirstChastDeny):
+		#	saynn("Waiting and seeing what she would do now would be interesting..")
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "do_unlock_chastity"):

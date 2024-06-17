@@ -724,7 +724,8 @@ func createChainScene(chainType:String):
 
 func updateChains():
 	for chainObject in chainObjects:
-		chainObject.queue_free()
+		if(chainObject != null && is_instance_valid(chainObject)):
+			chainObject.queue_free()
 	chainObjects.clear()
 
 	if(!OPTIONS.shouldSpawnChains()):
