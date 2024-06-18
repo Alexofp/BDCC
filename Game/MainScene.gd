@@ -96,6 +96,8 @@ func updateStaticCharacters():
 		staticCharacters[charID].updateBodyparts()
 	
 func getCharacter(charID):
+	if(charID == "pc"):
+		return GM.pc
 	if(staticCharacters.has(charID)):
 		return staticCharacters[charID]
 	if(dynamicCharacters.has(charID)):

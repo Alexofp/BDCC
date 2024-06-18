@@ -138,6 +138,8 @@ func onSexEvent(_event : SexEvent):
 	
 # The whole thing is hack, never expect it to work or be supported
 func copyEverythingFrom(otherCharacter): #:BaseCharacter
+	var isPc = otherCharacter.isPlayer()
+	
 	npcName = otherCharacter.getName()
 	npcSpecies = otherCharacter.getSpecies()
 	if(otherCharacter.isDynamicCharacter()):
@@ -159,34 +161,52 @@ func copyEverythingFrom(otherCharacter): #:BaseCharacter
 	npcSmallDescription = otherCharacter.getSmallDescription()
 	npcThickness = otherCharacter.getThickness()
 	npcFeminity = otherCharacter.getFemininity()
-	npcDefaultEquipment = otherCharacter.getDefaultEquipment()
-	npcMimicArtworkID = otherCharacter.getID()
+	if(!isPc):
+		npcDefaultEquipment = otherCharacter.getDefaultEquipment()
+	else:
+		if(otherCharacter.inmateType == InmateType.General):
+			npcDefaultEquipment = ["inmatecollar", "inmateuniform"]
+		if(otherCharacter.inmateType == InmateType.HighSec):
+			npcDefaultEquipment = ["inmatecollar", "inmateuniformHighsec"]
+		if(otherCharacter.inmateType == InmateType.SexDeviant):
+			npcDefaultEquipment = ["inmatecollar", "inmateuniformSexDeviant"]
+	if(!isPc):
+		npcMimicArtworkID = otherCharacter.getID()
 	if(otherCharacter.isDynamicCharacter()):
 		npcArchetypes = otherCharacter.npcArchetypes
 	else:
 		npcArchetypes = []
-	npcAttacks = otherCharacter._getAttacks()
+	if(!isPc):
+		npcAttacks = otherCharacter._getAttacks()
+	else:
+		npcAttacks = ["biteattack", "simplekickattack", "shoveattack", "NpcScratch"]
 	if(otherCharacter.isDynamicCharacter()):
 		flags = otherCharacter.flags.duplicate(true)
 	else:
 		flags = {}
 	npcChatColorOverride = otherCharacter.getChatColor()
-	npcStats = otherCharacter.npcStats.duplicate(true)
-	npcLevel = otherCharacter.npcLevel
-	npcLustInterests = otherCharacter.npcLustInterests.duplicate(true)
-	npcPersonality = otherCharacter.npcPersonality.duplicate(true)
-	npcFetishes = otherCharacter.npcFetishes.duplicate(true)
-	npcDefaultFetishInterest = otherCharacter.npcDefaultFetishInterest
-	npcArmor = otherCharacter.npcArmor.duplicate(true)
-	npcBasePain = otherCharacter.npcBasePain
-	npcBaseLust = otherCharacter.npcBaseLust
-	npcBaseStamina = otherCharacter.npcBaseStamina
-	npcBaseRestraintDodgeChanceMult = otherCharacter.npcBaseRestraintDodgeChanceMult
-	npcRestraintStrugglePower = otherCharacter.npcRestraintStrugglePower
-	npcRestraintMinigameResultMin = otherCharacter.npcRestraintMinigameResultMin
-	npcRestraintMinigameResultMax = otherCharacter.npcRestraintMinigameResultMax
-	npcCharacterType = otherCharacter.npcCharacterType
-	npcSkinData = otherCharacter.npcSkinData.duplicate(true)
+	if(!isPc):
+		npcStats = otherCharacter.npcStats.duplicate(true)
+		npcLevel = otherCharacter.npcLevel
+		npcLustInterests = otherCharacter.npcLustInterests.duplicate(true)
+		npcPersonality = otherCharacter.npcPersonality.duplicate(true)
+		npcFetishes = otherCharacter.npcFetishes.duplicate(true)
+		npcDefaultFetishInterest = otherCharacter.npcDefaultFetishInterest
+		npcArmor = otherCharacter.npcArmor.duplicate(true)
+		npcBasePain = otherCharacter.npcBasePain
+		npcBaseLust = otherCharacter.npcBaseLust
+		npcBaseStamina = otherCharacter.npcBaseStamina
+		npcBaseRestraintDodgeChanceMult = otherCharacter.npcBaseRestraintDodgeChanceMult
+		npcRestraintStrugglePower = otherCharacter.npcRestraintStrugglePower
+		npcRestraintMinigameResultMin = otherCharacter.npcRestraintMinigameResultMin
+		npcRestraintMinigameResultMax = otherCharacter.npcRestraintMinigameResultMax
+		npcCharacterType = otherCharacter.npcCharacterType
+		npcSkinData = otherCharacter.npcSkinData.duplicate(true)
+	else:
+		npcCharacterType = CharacterType.Inmate
+		npcBasePain = otherCharacter.getBasePainThreshold()
+		npcBaseLust = otherCharacter.getBaseLustThreshold()
+		npcBaseStamina = otherCharacter.getBaseMaxStamina()
 	
 	pickedSkin = otherCharacter.pickedSkin
 	pickedSkinRColor = otherCharacter.pickedSkinRColor
@@ -210,10 +230,10 @@ func copyEverythingFrom(otherCharacter): #:BaseCharacter
 		var item = inventory.getEquippedItem(itemSlot)
 		item.uniqueID = GlobalRegistry.generateUniqueID()
 	
-	skillsHolder.loadData(skillsHolder.saveData().duplicate(true))
-	lustInterests.loadData(lustInterests.saveData().duplicate(true))
-	personality.loadData(personality.saveData().duplicate(true))
-	fetishHolder.loadData(fetishHolder.saveData().duplicate(true))
+	skillsHolder.loadData(otherCharacter.skillsHolder.saveData().duplicate(true))
+	lustInterests.loadData(otherCharacter.lustInterests.saveData().duplicate(true))
+	personality.loadData(otherCharacter.personality.saveData().duplicate(true))
+	fetishHolder.loadData(otherCharacter.fetishHolder.saveData().duplicate(true))
 
 func saveData():
 	var data = {
