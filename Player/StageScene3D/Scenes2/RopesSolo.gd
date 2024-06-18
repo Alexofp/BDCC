@@ -71,6 +71,8 @@ func playAnimation(animID, _args = {}):
 	var state_machine = animationTree["parameters/StateMachine/playback"]
 	#var state_machine2 = animationTree2["parameters/StateMachine/playback"]
 
+	doll.setTemporaryState("ropeharness", "hanged")
+
 	if(animID == "idle"):
 		state_machine.travel("RopesIdle-loop")
 	if(animID == "struggle"):
