@@ -7,6 +7,8 @@ var timesCame: int = 0
 var memory:Dictionary = {}
 var tick:int = 0
 var lustFull: float = 0.0
+var hadStim:bool = false # Did we have any stimulation this turn?
+var turnsLastStim:int = 0 # How many turns since last stimulation
 
 func getSexEngine():
 	if(sexEngineRef == null):
@@ -39,6 +41,9 @@ func getAverageLust():
 
 func addArousal(howmuch: float):
 	getChar().addArousal(howmuch)
+	if(howmuch > 0.0):
+		hadStim = true
+		turnsLastStim = 0
 
 func getArousal()->float:
 	return getChar().getArousal()
@@ -66,7 +71,17 @@ func canTalk():
 	return true
 
 func arousalNaturalFade():
-	addArousal(-0.01)
+	if(!hadStim):
+		addArousal(-0.01)
+		turnsLastStim += 1
+		
+		if(turnsLastStim > 4):
+			addArousal(-0.02)
+		if(turnsLastStim > 8):
+			addArousal(-0.02)
+	#else:
+	#	turnsLastStim = 0
+	hadStim = false
 
 func addArousalForeplay(howmuch: float):
 	#var lustLevel = getChar().getLustLevel()
@@ -182,6 +197,8 @@ func saveData():
 		"memory": memory,
 		"tick": tick,
 		"lustFull": lustFull,
+		"hadStim": hadStim,
+		"turnsLastStim": turnsLastStim,
 	}
 
 	return data
@@ -192,3 +209,5 @@ func loadData(data):
 	memory = SAVE.loadVar(data, "memory", {})
 	tick = SAVE.loadVar(data, "tick", 0)
 	lustFull = SAVE.loadVar(data, "lustFull", 0.0)
+	hadStim = SAVE.loadVar(data, "hadStim", false)
+	turnsLastStim = SAVE.loadVar(data, "turnsLastStim", 0)

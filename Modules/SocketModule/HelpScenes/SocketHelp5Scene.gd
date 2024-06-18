@@ -168,7 +168,7 @@ func _run():
 		playAnimation(StageScene.SexStealth, "insidebusy", {npc="socket", bodyState={exposedCrotch=true, hard=true}})
 		saynn("Socket lets out a long quiet moan, her pulsing pussy releases a shower of fluids onto the table below, her shaky legs trying to give up.. but you don't let them, supporting Socket with your hands while keeping your cock inside, letting her tight love tunnel push you over the edge.")
 
-		saynn("There is no fucking anymore, you and Socket stand still while you pump her slit full your {pc.cum}, your {pc.penis} throbbing inside you, filling her up more and more.")
+		saynn("There is no fucking anymore, you and Socket stand still while you pump her slit full your {pc.cum}, your {pc.penis} throbbing inside her, filling her up more and more.")
 
 		saynn("[say=pc]Something is wrong?[/say]")
 

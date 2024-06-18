@@ -19,6 +19,13 @@ func _reactInit():
 	if(item == null):
 		return
 	
+	if(!GM.pc.hasPenis()):
+		setState("nopenis")
+		return
+	if(!GM.pc.hasReachablePenis()):
+		setState("noreachpenis")
+		return
+	
 	if(!item.isWornByWearer()):
 		if(!GM.pc.hasBlockedHands()):
 			if(GM.pc.getInventory().hasSlotEquipped(item.getClothingSlot())):
@@ -70,6 +77,18 @@ func _run():
 
 	if(state == "blockedhands"):
 		saynn("You really try to put penis pump on but your blocked hands prevent you from doing so")
+		
+		addButton("Continue", "Aww", "endthescene")
+	
+	if(state == "nopenis"):
+		saynn("You try to put on the penis pump.. But then you realize that you don't have a penis.. Oh no..")
+		
+		saynn("You make sure and check again.. nope.."+str(" All you have is a pussy.. You try to pump your pussy.. but this particular pump works by stroking rather than creating negative pressure.. so you fail spectacularly.." if GM.pc.hasReachableVagina() else ""))
+		
+		addButton("Continue", "Aww", "endthescene")
+	
+	if(state == "noreachpenis"):
+		saynn("You can't reach your penis.. so you can't put on a penis pump on it..")
 		
 		addButton("Continue", "Aww", "endthescene")
 		
