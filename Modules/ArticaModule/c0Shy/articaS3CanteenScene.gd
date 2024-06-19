@@ -20,7 +20,7 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {npc="artica", npcAction="sit"})
 		saynn("You walk up to that lilac's table, still holding the tray.")
 
-		saynn("[say=pc]Might if I?[/say]")
+		saynn("[say=pc]Mind if I?[/say]")
 
 		saynn("Hearing that, the girl jumps! She quickly pulls her paws from under the table and looks at you with big cyan eyes while blinking frantically.")
 
