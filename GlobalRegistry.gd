@@ -67,6 +67,7 @@ var slaveTypes: Dictionary = {}
 var slaveActions: Dictionary = {}
 var slaveEvents: Dictionary = {}
 var slaveActivities: Dictionary = {}
+var datapacks: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -98,6 +99,17 @@ func getModsFolder() -> String:
 		#if permissions.has("android.permission.READ_EXTERNAL_STORAGE"):
 		var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
 		var finalDir = externalDir.plus_file("BDCCMods")
+		modsFolder = finalDir
+		var _ok = Directory.new().make_dir(modsFolder)
+	return modsFolder
+	
+func getDatapacksFolder() -> String:
+	var modsFolder = "user://datapacks"
+	if(OS.get_name() == "Android"):
+		#var permissions: Array = OS.get_granted_permissions() #for Godot 3 branch
+		#if permissions.has("android.permission.READ_EXTERNAL_STORAGE"):
+		var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
+		var finalDir = externalDir.plus_file("BDCCMods/Datapacks")
 		modsFolder = finalDir
 		var _ok = Directory.new().make_dir(modsFolder)
 	return modsFolder
@@ -431,6 +443,11 @@ func registerEverything():
 	sortSpeechModifiersByPriority()
 	
 	GM.GES.registerAll()
+	
+	emit_signal("loadingUpdate", 11.0/totalStages, "Datapacks")
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	loadDatapacksFromFolder(getDatapacksFolder())
 	
 	var end = OS.get_ticks_usec()
 	var worker_time = (end-start)/1000000.0
@@ -1500,6 +1517,27 @@ func getScriptsInFoldersRecursive(folder: String, ignoreBaseDir = false):
 	
 	return result
 
+func getDatapacksInFolder(folder: String):
+	var result = []
+	
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				pass
+				#print("Found directory: " + file_name)
+			else:
+				if(file_name.get_extension() in ["res", "tres"]):
+					var full_path = folder.plus_file(file_name)
+					result.append(full_path)
+			file_name = dir.get_next()
+	else:
+		Log.printerr("An error occurred when trying to access the path "+folder)
+	
+	return result
+
 func registerFetishesFolder(folder: String):
 	var scripts = getScriptsInFolder(folder)
 	for scriptPath in scripts:
@@ -1873,3 +1911,47 @@ func createSlaveActivity(id: String):
 	else:
 		Log.printerr("ERROR: slave activity with the id "+id+" wasn't found")
 		return null
+
+
+
+func getDatapack(id:String) -> Datapack:
+	if(datapacks.has(id)):
+		return datapacks[id]
+	Log.printerr("ERROR: Datapack with the id "+id+" wasn't found")
+	return null
+
+func getDatapacks():
+	return datapacks
+
+func loadDatapacksFromFolder(folder: String):
+	var possiblePacks = getDatapacksInFolder(folder)
+	
+	for possiblePackPath in possiblePacks:
+		if(ResourceLoader.exists(possiblePackPath)):
+			var newPackResource = ResourceLoader.load(possiblePackPath)
+			
+			if(newPackResource is DatapackResource):
+				var newDatapack:Datapack = Datapack.new()
+				newDatapack.loadFromResource(newPackResource)
+				
+				if(datapacks.has(newDatapack.id)):
+					Log.printerr("ERROR: Datapack id collision, two or more datapacks have the same id '"+str(newDatapack.id)+"'")
+				else:
+					datapacks[newDatapack.id] = newDatapack
+			else:
+				Log.printerr("Found datapack that is not of a right type at path: '"+str(possiblePackPath)+"'")
+		else:
+			Log.printerr("Found bad datapack at path: '"+str(possiblePackPath)+"'")
+
+func reloadPacks():
+	datapacks.clear()
+	loadDatapacksFromFolder(getDatapacksFolder())
+
+func deleteDatapack(id:String):
+	if(datapacks.has(id)):
+		var path = getDatapacksFolder().plus_file(datapacks[id].getDatapackFileName())
+		
+		if(Util.removeFile(path) == OK):
+			#reloadPacks()
+			return true
+	return false

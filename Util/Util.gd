@@ -561,6 +561,10 @@ static func removeDirectory(path):
 	else:
 		print("Error removing " + path)
 
+static func removeFile(path):
+	var directory = Directory.new()
+	return directory.remove(path)
+
 # input splitOnFirst("Test.Meow.Woof", ".")
 # output ["Test", "Meow.Woof"]
 static func splitOnFirst(text: String, separator: String):
