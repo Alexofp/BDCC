@@ -23,3 +23,6 @@ func _on_SaveButton_pressed():
 
 func _on_CancelButton_pressed():
 	emit_signal("onCancelButtonPressed", self, datapack)
+
+func onMenuPopped():
+	updateList()

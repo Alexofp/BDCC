@@ -7,7 +7,7 @@ var dollAttachmentZones = {}
 var hiddenPartZones = {}
 var hiddenAttachmentZones = {}
 var overridenPartHidden = {}
-var savedCharacterID: String
+var savedCharacterID
 var temporaryState = {}
 var exposedBodyparts = []
 var skinData = {}
@@ -83,7 +83,7 @@ func testBody():
 	#addPartObject("breasts", load("res://Player/Player3D/Parts/Breasts/BreastsSmall/BreastsSmall.tscn").instance())
 	#addPartObject("breasts", load("res://Player/Player3D/Parts/Breasts/BreastsMedium/BreastsMedium.tscn").instance())
 	#addPartObject("breasts", load("res://Player/Player3D/Parts/Breasts/BreastsCurvy/BreastsCurvy.tscn").instance())
-	addPartObject("breasts", load("res://Player/Player3D/Parts/Breasts/BreastsBig/BreastsBig.tscn").instance())
+	#addPartObject("breasts", load("res://Player/Player3D/Parts/Breasts/BreastsBig/BreastsBig.tscn").instance())
 	addPartObject("hands", load("res://Player/Player3D/Parts/Arms/HumanArms/HumanArms.tscn").instance())
 	#addPartObject("ears", load("res://Player/Player3D/Parts/Ears/HumanEars/HumanEars.tscn").instance())
 	#addPartObject("ears", load("res://Player/Player3D/Parts/Ears/DragonEars/DragonEars.tscn").instance())
@@ -262,14 +262,19 @@ func reconnect():
 
 func disconnectFromOld():
 	if(savedCharacterID != null && savedCharacterID != ""):
-		var ch = GlobalRegistry.getCharacter(savedCharacterID)
+		var ch = getCharFromID(savedCharacterID)
 		if(ch == null || !is_instance_valid(ch)):
 			return
 		if(ch.is_connected("bodypart_changed", self, "onCharacterBodypartChanged")):
 			ch.disconnect("bodypart_changed", self, "onCharacterBodypartChanged")
 
+func getCharFromID(charID):
+	if(!(charID is String)):
+		return charID
+	return GlobalRegistry.getCharacter(charID)
+
 func loadCharacter(charID):
-	var ch = GlobalRegistry.getCharacter(charID)
+	var ch = getCharFromID(charID)
 	if(ch == null || !is_instance_valid(ch)):
 		return
 	
@@ -293,7 +298,7 @@ func prepareCharacter(charID):
 			attachment.clearTemporaryScenes()
 		
 func onCharacterBodypartChanged():
-	var ch = GlobalRegistry.getCharacter(savedCharacterID)
+	var ch = getCharFromID(savedCharacterID)
 	if(ch == null || !is_instance_valid(ch)):
 		return
 	if(ch.has_method("updateDoll")):
@@ -409,8 +414,8 @@ func setBallsScale(newScale: float):
 
 
 func _on_Doll3DTooltip_mouseEntered(bodypartID):
-	if(savedCharacterID != "" && bodypartID != "" && is_visible_in_tree() && !isOnlyPenis):
-		var character = GlobalRegistry.getCharacter(savedCharacterID)
+	if(savedCharacterID is String && savedCharacterID != "" && bodypartID != "" && is_visible_in_tree() && !isOnlyPenis):
+		var character = getCharFromID(savedCharacterID)
 		if(character == null):
 			return
 		
@@ -422,8 +427,8 @@ func _on_Doll3DTooltip_mouseEntered(bodypartID):
 		
 
 func _on_Doll3DTooltip_mouseExited(bodypartID):
-	if(savedCharacterID != "" && bodypartID != ""):
-		var character = GlobalRegistry.getCharacter(savedCharacterID)
+	if(savedCharacterID is String && savedCharacterID != "" && bodypartID != ""):
+		var character = getCharFromID(savedCharacterID)
 		if(character == null):
 			return
 		

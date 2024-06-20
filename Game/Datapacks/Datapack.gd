@@ -14,21 +14,37 @@ var scenes:Dictionary = {}
 func getEditVars():
 	return {
 		"id": {
+			name = "ID",
 			type = "string",
 			value = id,
 			noSave = true,
 		},
 		"name": {
+			name = "Name",
 			type = "string",
 			value = name,
 		},
 		"author": {
+			name = "Author",
 			type = "string",
 			value = author,
 		},
 		"description": {
+			name = "Description",
 			type = "string",
 			value = description,
+		},
+		"characters": {
+			type = "editor",
+			value = characters,
+			name = "Characters",
+			editorKind = "character",
+		},
+		"skins": {
+			type = "editor",
+			value = skins,
+			name = "Skins",
+			editorKind = "skin",
 		},
 	}
 
@@ -44,6 +60,38 @@ func applyEditVar(varid, value):
 	
 	return false
 
+func saveData():
+	var charData = {}
+	for charID in characters:
+		charData[charID] = characters[charID].saveData()
+	
+	return {
+		#"id": id,
+		"name": name,
+		"author": author,
+		"description": description,
+		"characters": charData,
+	}
+
+func loadVar(_data, thekey, defaultValue = null):
+	if(_data.has(thekey)):
+		return _data[thekey]
+	return defaultValue
+
+func loadData(_data):
+	#id = loadVar(_data, "id", "error")
+	name = loadVar(_data, "name", "No name")
+	author = loadVar(_data, "author", "No author")
+	description = loadVar(_data, "description", "No description found")
+	
+	var charData = loadVar(_data, "characters", {})
+	characters.clear()
+	for charID in charData:
+		var newCharacter:DatapackCharacter = DatapackCharacter.new()
+		newCharacter.id = charID
+		newCharacter.loadData(loadVar(charData, charID, {}))
+		characters[charID] = newCharacter
+	
 func getEditVarsOnlyValues():
 	var result = {}
 	var editVars = getEditVars()
@@ -72,7 +120,7 @@ func saveToResource() -> DatapackResource:
 	newDatapackResource.version = 1
 	newDatapackResource.id = id
 	
-	newDatapackResource.data = getEditVarsOnlyValues()
+	newDatapackResource.data = saveData()#getEditVarsOnlyValues()
 	
 	return newDatapackResource
 
@@ -84,8 +132,9 @@ func loadFromResource(datapack:DatapackResource):
 		
 		var theData = datapack.data
 		if(theData is Dictionary):
-			for varID in theData:
-				applyEditVar(varID, theData[varID])
+			loadData(theData)
+			#for varID in theData:
+			#	applyEditVar(varID, theData[varID])
 	else:
 		Log.printerr("Tried to load a datapack with a bad version: "+str(version))
 
@@ -99,3 +148,6 @@ func saveToDisk() -> bool:
 	
 func getDatapackFileName() -> String:
 	return id+".tres"
+
+func needsTogglingOn():
+	return !characters.empty() || !scenes.empty()

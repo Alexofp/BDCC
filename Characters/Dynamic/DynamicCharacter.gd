@@ -413,3 +413,27 @@ func loadData(data):
 		npcSlavery = null
 
 	updateAppearance()
+
+func loadFromDatapackCharacter(_datapackChar:DatapackCharacter):
+	npcName = _datapackChar.name
+	
+	resetSlots()
+	var loadedBodyparts = _datapackChar.bodyparts
+	for slot in loadedBodyparts:
+		if(loadedBodyparts[slot] == null || loadedBodyparts[slot]["id"] == "" || loadedBodyparts[slot]["id"] == null):
+			bodyparts[slot] = null
+			continue
+		var id = SAVE.loadVar(loadedBodyparts[slot], "id", "errorbad")
+		var bodypart = GlobalRegistry.createBodypart(id)
+		if(bodypart == null):
+			var replacementID = BodypartSlot.findReplacement(slot, id)
+			if(replacementID == null || replacementID == ""):
+				Log.printerr("Couldn't find an replacement bodypart for slot "+str(slot))
+				continue
+			bodypart = GlobalRegistry.createBodypart(replacementID)
+			
+		bodypart.loadData(SAVE.loadVar(loadedBodyparts[slot], "data", {}))
+		giveBodypart(bodypart, false)
+	checkSkins(true)
+
+	updateAppearance()

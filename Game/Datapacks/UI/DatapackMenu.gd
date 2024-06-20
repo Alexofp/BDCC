@@ -34,6 +34,8 @@ func updateDatapackDesc(theDatapack:Datapack):
 	
 	datapack_desc_label.bbcode_text = finalText
 
+func isDatapackMenu():
+	return true
 
 func _on_NewPackConfirmationDialog_confirmed():
 	var newPackID:String = $DatapackViewer/NewPackConfirmationDialog/VBoxContainer/NewPackIDLineEdit.text
@@ -98,6 +100,7 @@ func pushMenu(newMenu:Control):
 	
 	menuStack.append(newMenu)
 	add_child(newMenu)
+
 	
 func popMenu():
 	if(!menuStack.empty()):
@@ -108,6 +111,8 @@ func popMenu():
 			$DatapackViewer.visible = true
 		else:
 			menuStack.back().visible = true
+			if(menuStack.back().has_method("onMenuPopped")):
+				menuStack.back().onMenuPopped()
 	else:
 		$DatapackViewer.visible = true
 
