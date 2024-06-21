@@ -56,7 +56,6 @@ projection = 1
 size = 10.0
 
 [node name="Doll3D" parent="VBoxContainer/HBoxContainer/DollWrapper/Viewport" instance=ExtResource( 4 )]
-addTestBody = true
 
 [node name="CustomViewportControl" parent="VBoxContainer/HBoxContainer/DollWrapper" instance=ExtResource( 3 )]
 texture = SubResource( 2 )

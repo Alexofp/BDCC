@@ -417,6 +417,11 @@ func loadData(data):
 func loadFromDatapackCharacter(_datapackChar:DatapackCharacter):
 	npcName = _datapackChar.name
 	
+	pickedSkin = _datapackChar.pickedSkin
+	pickedSkinRColor = _datapackChar.pickedSkinRColor
+	pickedSkinGColor = _datapackChar.pickedSkinGColor
+	pickedSkinBColor = _datapackChar.pickedSkinBColor
+	
 	resetSlots()
 	var loadedBodyparts = _datapackChar.bodyparts
 	for slot in loadedBodyparts:
@@ -432,7 +437,20 @@ func loadFromDatapackCharacter(_datapackChar:DatapackCharacter):
 				continue
 			bodypart = GlobalRegistry.createBodypart(replacementID)
 			
-		bodypart.loadData(SAVE.loadVar(loadedBodyparts[slot], "data", {}))
+		#bodypart.loadData(SAVE.loadVar(loadedBodyparts[slot], "data", {}))
+		var bodypartAttribs = SAVE.loadVar(loadedBodyparts[slot], "data", {})
+		for attribID in bodypartAttribs:
+			bodypart.applyAttribute(attribID, bodypartAttribs[attribID])
+		if(loadedBodyparts[slot].has("pickedSkin")):
+			bodypart.pickedSkin = loadedBodyparts[slot]["pickedSkin"]
+			if(bodypart.pickedSkin == ""):
+				bodypart.pickedSkin = null
+		if(loadedBodyparts[slot].has("pickedR")):
+			bodypart.pickedRColor = loadedBodyparts[slot]["pickedR"]
+		if(loadedBodyparts[slot].has("pickedG")):
+			bodypart.pickedGColor = loadedBodyparts[slot]["pickedG"]
+		if(loadedBodyparts[slot].has("pickedB")):
+			bodypart.pickedBColor = loadedBodyparts[slot]["pickedB"]
 		giveBodypart(bodypart, false)
 	checkSkins(true)
 

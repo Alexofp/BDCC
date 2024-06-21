@@ -20,6 +20,12 @@ func setVariables(_data:Dictionary):
 			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/BodypartsVarUI.tscn").instance()
 		elif(type == "bodypart"):
 			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/BodypartSingleVarUI.tscn").instance()
+		elif(type == "skin"):
+			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/SkinVarUI.tscn").instance()
+		elif(type == "number"):
+			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/NumberVarUI.tscn").instance()
+		elif(type == "selector"):
+			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/SelectorVarUI.tscn").instance()
 		else:
 			Log.printerr("Unknown var type found: "+str(type))
 
