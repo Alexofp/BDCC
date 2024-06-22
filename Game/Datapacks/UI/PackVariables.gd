@@ -2,8 +2,11 @@ extends VBoxContainer
 
 signal onVariableChange(id, value)
 
+var widgets = []
+
 func setVariables(_data:Dictionary):
 	Util.delete_children(self)
+	widgets = []
 	
 	for dataID in _data:
 		var dataLine = _data[dataID]
@@ -31,9 +34,15 @@ func setVariables(_data:Dictionary):
 
 		if(newWidget != null):
 			add_child(newWidget)
+			widgets.append(newWidget)
 			newWidget.id = dataID
 			newWidget.connect("onValueChange", self, "onWidgetValueChange")
 			newWidget.setData(dataLine)
 
 func onWidgetValueChange(id, value):
 	emit_signal("onVariableChange", id, value)
+
+func checkWidgetsFinished():
+	for widget in widgets:
+		widget.onEditorClose()
+	return true

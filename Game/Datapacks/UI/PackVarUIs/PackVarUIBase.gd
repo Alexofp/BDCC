@@ -37,3 +37,6 @@ func setData(_dataLine:Dictionary):
 
 func triggerChange(_newValue):
 	emit_signal("onValueChange", id, _newValue)
+
+func onEditorClose():
+	pass

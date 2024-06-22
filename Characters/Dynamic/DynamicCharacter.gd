@@ -422,6 +422,8 @@ func loadFromDatapackCharacter(_datapackChar:DatapackCharacter):
 	pickedSkinGColor = _datapackChar.pickedSkinGColor
 	pickedSkinBColor = _datapackChar.pickedSkinBColor
 	
+	npcCharacterType = _datapackChar.characterType
+	
 	resetSlots()
 	var loadedBodyparts = _datapackChar.bodyparts
 	for slot in loadedBodyparts:

@@ -151,3 +151,20 @@ func getDatapackFileName() -> String:
 
 func needsTogglingOn():
 	return !characters.empty() || !scenes.empty()
+
+func getFinalCharacterID(charID):
+	return id + ":" + charID
+
+func getSkinIDs():
+	var result = []
+	
+	for skinID in skins:
+		result.append(id+":"+skinID)
+	
+	return result
+
+func getName():
+	return name
+
+func getFancyName():
+	return name + " (by "+author+")"

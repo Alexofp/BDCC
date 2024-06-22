@@ -19,6 +19,7 @@ func _on_PackVariables_onVariableChange(id, value):
 		updateList()
 
 func _on_SaveButton_pressed():
+	pack_variables.checkWidgetsFinished()
 	emit_signal("onSaveButtonPressed", self, datapack)
 
 func _on_CancelButton_pressed():

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://UI/MainMenu/LoadGameScreen.tscn" type="PackedScene" id=1]
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=2]
 [ext_resource path="res://UI/MainMenu/InGameMenu.gd" type="Script" id=3]
 [ext_resource path="res://UI/MainMenu/SaveGameScreen.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game/Datapacks/UI/InGameMenu/DatapackIngameMenu.tscn" type="PackedScene" id=5]
 
 [node name="InGameMenu" type="Control"]
 anchor_right = 1.0
@@ -12,9 +13,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 2 )
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="LoadGameScreen" parent="." instance=ExtResource( 1 )]
 visible = false
@@ -41,9 +39,9 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MainMenuCenter"]
 margin_left = 620.0
-margin_top = 294.0
+margin_top = 271.0
 margin_right = 727.0
-margin_bottom = 458.0
+margin_bottom = 481.0
 size_flags_horizontal = 3
 custom_constants/separation = 20
 
@@ -64,15 +62,26 @@ margin_right = 107.0
 margin_bottom = 118.0
 text = "Load Game"
 
-[node name="MainMenuButton" type="Button" parent="MainMenu/MainMenuCenter/VBoxContainer"]
+[node name="DatapacksButton" type="Button" parent="MainMenu/MainMenuCenter/VBoxContainer"]
 margin_top = 138.0
 margin_right = 107.0
 margin_bottom = 164.0
+text = "Datapacks"
+
+[node name="MainMenuButton" type="Button" parent="MainMenu/MainMenuCenter/VBoxContainer"]
+margin_top = 184.0
+margin_right = 107.0
+margin_bottom = 210.0
 text = "Main Menu"
+
+[node name="DatapackIngameMenu" parent="." instance=ExtResource( 5 )]
+visible = false
 
 [connection signal="onClosePressed" from="LoadGameScreen" to="." method="_on_LoadGameScreen_onClosePressed"]
 [connection signal="onClosePressed" from="SaveGameScreen" to="." method="_on_SaveGameScreen_onClosePressed"]
 [connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
 [connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/SaveGameButton2" to="." method="_on_SaveGameButton2_pressed"]
 [connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
+[connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/DatapacksButton" to="." method="_on_DatapacksButton_pressed"]
 [connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
+[connection signal="onClosePressed" from="DatapackIngameMenu" to="." method="_on_DatapackIngameMenu_onClosePressed"]

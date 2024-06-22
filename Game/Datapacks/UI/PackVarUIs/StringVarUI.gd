@@ -38,3 +38,7 @@ func _on_Button_pressed():
 		setIsEditing(false)
 	else:
 		setIsEditing(true)
+
+func onEditorClose():
+	if(isEditing):
+		_on_Button_pressed()

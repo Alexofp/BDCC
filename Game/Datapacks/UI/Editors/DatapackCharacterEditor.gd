@@ -28,6 +28,7 @@ func getMenu():
 	return null
 
 func _on_SaveButton_pressed():
+	pack_variables.checkWidgetsFinished()
 	getMenu().popMenu()
 
 func _on_PackVariables_onVariableChange(id, value):

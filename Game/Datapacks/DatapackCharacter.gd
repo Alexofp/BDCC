@@ -5,6 +5,8 @@ var id:String = "error"
 var name:String = "Rahi"
 var bodyparts:Dictionary = {}
 
+var characterType:String = CharacterType.Inmate
+
 var pickedSkin:String = "EmptySkin"
 var pickedSkinRColor:Color = Color.white
 var pickedSkinGColor:Color = Color.lightgray
@@ -19,6 +21,12 @@ func getEditVars():
 			name = "Name",
 			type = "string",
 			value = name,
+		},
+		"characterType": {
+			name = "Character type",
+			type = "selector",
+			values = CharacterType.getAllForDatapackCharacter(),
+			value = characterType,
 		},
 		"skin": {
 			name = "Base skin",
@@ -45,6 +53,9 @@ func applyEditVar(varid, value):
 		pickedSkinGColor = value["g"]
 		pickedSkinBColor = value["b"]
 		return true
+	if(varid == "characterType"):
+		characterType = value
+		#return true
 	
 	return false
 
@@ -56,6 +67,7 @@ func saveData():
 		"pickedSkinRColor": pickedSkinRColor.to_html(),
 		"pickedSkinGColor": pickedSkinGColor.to_html(),
 		"pickedSkinBColor": pickedSkinBColor.to_html(),
+		"characterType": characterType,
 	}
 
 func loadData(data):
@@ -65,6 +77,7 @@ func loadData(data):
 	pickedSkinRColor = Color(SAVE.loadVar(data, "pickedSkinRColor", "ffffff"))
 	pickedSkinGColor = Color(SAVE.loadVar(data, "pickedSkinGColor", "cccccc"))
 	pickedSkinBColor = Color(SAVE.loadVar(data, "pickedSkinBColor", "999999"))
+	characterType = loadVar(data, "characterType", CharacterType.Inmate)
 
 func loadVar(_data, thekey, defaultValue = null):
 	if(_data.has(thekey)):
