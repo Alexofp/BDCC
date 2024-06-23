@@ -455,5 +455,23 @@ func loadFromDatapackCharacter(_datapackChar:DatapackCharacter):
 			bodypart.pickedBColor = loadedBodyparts[slot]["pickedB"]
 		giveBodypart(bodypart, false)
 	checkSkins(true)
+	
+	npcDefaultEquipment = []
+	inventory.clearEquippedItems()
+	
+	var datacharEquippedInv = _datapackChar.equippedItems
+	for inventorySlot in datacharEquippedInv:
+		var equipItemData = datacharEquippedInv[inventorySlot]
+		
+		if(equipItemData["id"] != null):
+			var itemRef = GlobalRegistry.getItemRef(equipItemData["id"])
+			if(itemRef == null):
+				continue
+			
+			var newItem = GlobalRegistry.createItem(equipItemData["id"])
+			if(inventory.equipItem(newItem)):
+				if(equipItemData.has("autoEquip") && equipItemData["autoEquip"]):
+					npcDefaultEquipment.append(equipItemData["id"]) # Gets requipped if the character loses it after a while
+	
 
 	updateAppearance()

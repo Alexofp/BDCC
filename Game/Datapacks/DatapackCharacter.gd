@@ -12,6 +12,8 @@ var pickedSkinRColor:Color = Color.white
 var pickedSkinGColor:Color = Color.lightgray
 var pickedSkinBColor:Color = Color.darkgray
 
+var equippedItems:Dictionary = {}
+
 func getEditorName():
 	return "id="+id+" name="+name
 
@@ -39,6 +41,11 @@ func getEditVars():
 			type = "bodyparts",
 			value = bodyparts,
 		},
+		"equippedItems": {
+			name = "Default equipment",
+			type = "equippedItems",
+			value = equippedItems,
+		},
 	}
 
 func applyEditVar(varid, value):
@@ -56,6 +63,9 @@ func applyEditVar(varid, value):
 	if(varid == "characterType"):
 		characterType = value
 		#return true
+	if(varid == "equippedItems"):
+		equippedItems = value
+		return true
 	
 	return false
 
@@ -68,6 +78,7 @@ func saveData():
 		"pickedSkinGColor": pickedSkinGColor.to_html(),
 		"pickedSkinBColor": pickedSkinBColor.to_html(),
 		"characterType": characterType,
+		"equippedItems": equippedItems,
 	}
 
 func loadData(data):
@@ -78,6 +89,7 @@ func loadData(data):
 	pickedSkinGColor = Color(SAVE.loadVar(data, "pickedSkinGColor", "cccccc"))
 	pickedSkinBColor = Color(SAVE.loadVar(data, "pickedSkinBColor", "999999"))
 	characterType = loadVar(data, "characterType", CharacterType.Inmate)
+	equippedItems = loadVar(data, "equippedItems", {})
 
 func loadVar(_data, thekey, defaultValue = null):
 	if(_data.has(thekey)):

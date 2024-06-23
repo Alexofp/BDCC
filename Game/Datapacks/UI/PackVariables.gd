@@ -1,5 +1,6 @@
 extends VBoxContainer
 
+export var addSeparators = true
 signal onVariableChange(id, value)
 
 var widgets = []
@@ -29,6 +30,10 @@ func setVariables(_data:Dictionary):
 			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/NumberVarUI.tscn").instance()
 		elif(type == "selector"):
 			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/SelectorVarUI.tscn").instance()
+		elif(type == "equippedItems"):
+			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/EquippedItemsVarUI.tscn").instance()
+		elif(type == "equippedItem"):
+			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/EquipItemVarUI.tscn").instance()
 		else:
 			Log.printerr("Unknown var type found: "+str(type))
 
@@ -38,6 +43,8 @@ func setVariables(_data:Dictionary):
 			newWidget.id = dataID
 			newWidget.connect("onValueChange", self, "onWidgetValueChange")
 			newWidget.setData(dataLine)
+			
+			add_child(HSeparator.new())
 
 func onWidgetValueChange(id, value):
 	emit_signal("onVariableChange", id, value)
