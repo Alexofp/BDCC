@@ -368,6 +368,25 @@ func _run():
 		saynn("You're both breathing heavily, your legs barely support you..")
 
 		addButton("Rest", "Let the fluff hang around a bit more", "vag_cum_rest")
+	if(state == "do_vag"):
+		playAnimation(StageScene.RopesSex, "tease", {pc="artica", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		saynn("Mean, huh.. Let's see how she will sing after this.")
+
+		saynn("Your hand lands the fur of her back and travels along it, caressing her girly curves. As your digits reach the base of her fluffy tail, it curls around your wrist instinctively.. but she herself doesn't resist against the ropes, just awaiting her faith..")
+
+		saynn("[say=pc]Such a helpless little prey.[/say]")
+
+		saynn("[say=artica]Y-yeah..[/say]")
+
+		saynn("With that, you free your cock and take a spot behind her, your hands now stroking her thighs, the ropes keeping them spread for you.")
+
+		saynn("Such a great view.. both of her hungry holes out on display.. But you're gonna go for the slick one today..")
+
+		saynn("[say=artica]I'm.. s-supposed to be a p-predator.. n-not a c-caught prey..[/say]")
+
+		saynn("Your words seem to call up to Artica's tribal origins.. Might as well push on her buttons more.")
+
+		addButton("Continue", "See what happen next", "vag_sex")
 	if(state == "vag_sex"):
 		playAnimation(StageScene.RopesSex, "sex", {pc="artica", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
 		saynn("Artica is trying to look behind her.. but the ropes make it difficult to see what you are doing.. Time to make her feel it..")
@@ -639,8 +658,8 @@ func _react(_action: String, _args):
 		getModule("ArticaModule").triggerCorruption(0.03)
 		GM.pc.orgasmFrom("artica")
 
-	if(_action == "vag_cum_rest"):
-		processTime(10*60)
+	if(_action == "vag_sex"):
+		processTime(5*60)
 
 	if(_action == "vag_faster"):
 		processTime(3*60)
@@ -650,6 +669,9 @@ func _react(_action: String, _args):
 		getCharacter("artica").cummedInVaginaBy("pc")
 		getModule("ArticaModule").triggerCorruption(0.02)
 		GM.pc.orgasmFrom("artica")
+
+	if(_action == "vag_cum_rest"):
+		processTime(10*60)
 
 	if(_action == "endthescene_getharness"):
 		if(harnessID != ""):
