@@ -42,4 +42,5 @@ func onButton(_method, _args):
 			return
 		
 		if(!GM.ES.triggerReact(Trigger.TalkingToNPC, ["artica"])):
+			getCharacter("artica").removeStrapon()
 			runScene("articaTalkScene")

@@ -201,7 +201,7 @@ func _run():
 		elif (GM.pc.hasReachablePenis()):
 			saynn("That strapon is massaging your "+str("pleasure spot" if !isAnal else "prostate")+" so nicely that you feel the pressure in your own member rising fast..")
 
-		addButton("Faster", "Ride her faster", "ride_pussy_faster")
+		addButton("Faster", "Ride her faster", "ride_strapon_pussy_faster")
 	if(state == "ride_strapon_pussy_faster"):
 		playAnimation(StageScene.SexCowgirlAlt, "fast", {npc="pc", pc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		if (!isAnal):
