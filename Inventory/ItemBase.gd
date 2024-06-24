@@ -583,3 +583,33 @@ func canGroupRestraintWithOtherInFightScene(otherItem):
 	if(canDye() && clothesColor != otherItem.clothesColor):
 		return false
 	return true
+
+func getDatapackEditVars():
+	var result = {}
+	if(canDye()):
+		result["clothesColor"] = {
+			name = "Color",
+			type = "color",
+			value = clothesColor,
+		}
+	if(isRestraint() && restraintData != null):
+		result["restraintLevel"] = {
+			"name": "Restraint level",
+			"type": "number",
+			"int": true,
+			"value": restraintData.getLevel(),
+		}
+		result["aiWontResist"] = {
+			"name": "Disable ai struggle",
+			"type": "checkbox",
+			"value": restraintData.aiWontResist,
+		}
+	return result
+
+func applyDatapackEditVar(_id, _value):
+	if(_id == "clothesColor"):
+		clothesColor = _value
+	if(_id == "restraintLevel"):
+		restraintData.setLevel(_value)
+	if(_id == "aiWontResist"):
+		restraintData.aiWontResist = _value

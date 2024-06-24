@@ -14,10 +14,21 @@ var pickedSkinBColor:Color = Color.darkgray
 
 var equippedItems:Dictionary = {}
 
+var attacks:Array = []
+
+var personality:Dictionary = {}
+
 func getEditorName():
 	return "id="+id+" name="+name
 
 func getEditVars():
+	var attackListFancy = []
+	for attackID in GlobalRegistry.getAttacks():
+		var attackObj:Attack = GlobalRegistry.getAttack(attackID)
+		if(attackObj.isPlayerAttack):
+			continue
+		attackListFancy.append([attackID, attackID+" = "+attackObj.getVisibleName()])
+	
 	return {
 		"name": {
 			name = "Name",
@@ -38,13 +49,29 @@ func getEditVars():
 			noBase = true,
 		},
 		"bodyparts": {
+			name = "Bodyparts",
 			type = "bodyparts",
 			value = bodyparts,
+			collapsable = true,
 		},
 		"equippedItems": {
 			name = "Default equipment",
 			type = "equippedItems",
 			value = equippedItems,
+			collapsable = true,
+		},
+		"attacks": {
+			name = "Attacks",
+			type = "addRemoveList",
+			value = attacks,
+			values = attackListFancy,
+			collapsable = true,
+		},
+		"personality": {
+			name = "Personality",
+			type = "personality",
+			value = personality,
+			collapsable = true,
 		},
 	}
 
@@ -66,6 +93,10 @@ func applyEditVar(varid, value):
 	if(varid == "equippedItems"):
 		equippedItems = value
 		return true
+	if(varid == "attacks"):
+		attacks = value
+	if(varid == "personality"):
+		personality = value
 	
 	return false
 
@@ -79,6 +110,8 @@ func saveData():
 		"pickedSkinBColor": pickedSkinBColor.to_html(),
 		"characterType": characterType,
 		"equippedItems": equippedItems,
+		"attacks": attacks,
+		"personality": personality,
 	}
 
 func loadData(data):
@@ -90,6 +123,8 @@ func loadData(data):
 	pickedSkinBColor = Color(SAVE.loadVar(data, "pickedSkinBColor", "999999"))
 	characterType = loadVar(data, "characterType", CharacterType.Inmate)
 	equippedItems = loadVar(data, "equippedItems", {})
+	attacks = loadVar(data, "attacks", [])
+	personality = loadVar(data, "personality", {})
 
 func loadVar(_data, thekey, defaultValue = null):
 	if(_data.has(thekey)):

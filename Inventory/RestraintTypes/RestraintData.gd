@@ -7,6 +7,7 @@ var item: WeakRef
 var npcDodgeDifficultyMod: float = 1.0
 var npcAiScoreMod: float = 1.0
 var restraintType = RestraintType.Generic
+var aiWontResist:bool = false
 
 func getItem():
 	return item.get_ref()
@@ -90,6 +91,8 @@ func shouldDoStruggleMinigame(_pc):
 	return true
 
 func calculateAIScore(_pc):
+	if(aiWontResist):
+		return 0.0
 	if(!shouldDoStruggleMinigame(_pc)):
 		return 5.0 * npcDodgeDifficultyMod
 	
@@ -188,9 +191,12 @@ func saveData():
 	
 	data["level"] = level
 	data["tightness"] = tightness
+	data["aiWontResist"] = aiWontResist
 
 	return data
 	
 func loadData(_data):
 	level = SAVE.loadVar(_data, "level", 1)
 	tightness = SAVE.loadVar(_data, "tightness", 1.0)
+	if(_data.has("aiWontResist")):
+		aiWontResist = SAVE.loadVar(_data, "aiWontResist", false)

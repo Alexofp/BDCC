@@ -424,6 +424,13 @@ func loadFromDatapackCharacter(_datapackChar:DatapackCharacter):
 	
 	npcCharacterType = _datapackChar.characterType
 	
+	npcAttacks = _datapackChar.attacks.duplicate()
+	
+	npcPersonality = _datapackChar.personality.duplicate()
+	personality.clear()
+	for statID in npcPersonality:
+		personality.setStat(statID, npcPersonality[statID])
+	
 	resetSlots()
 	var loadedBodyparts = _datapackChar.bodyparts
 	for slot in loadedBodyparts:
@@ -469,9 +476,20 @@ func loadFromDatapackCharacter(_datapackChar:DatapackCharacter):
 				continue
 			
 			var newItem = GlobalRegistry.createItem(equipItemData["id"])
+			
+			var foundData = null
+			if(equipItemData.has("data")):
+				foundData = equipItemData["data"]
+			
 			if(inventory.equipItem(newItem)):
 				if(equipItemData.has("autoEquip") && equipItemData["autoEquip"]):
-					npcDefaultEquipment.append(equipItemData["id"]) # Gets requipped if the character loses it after a while
-	
+					if(foundData != null):
+						npcDefaultEquipment.append({id=equipItemData["id"], datapackdata=foundData})
+					else:
+						npcDefaultEquipment.append(equipItemData["id"]) # Gets requipped if the character loses it after a while
+				
+				if(foundData != null):
+					for dataID in foundData:
+						newItem.applyDatapackEditVar(dataID, foundData[dataID])
 
 	updateAppearance()

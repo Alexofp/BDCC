@@ -114,3 +114,24 @@ func loadData(data):
 	.loadData(data)
 	
 	currentColor = SAVE.loadVar(data, "currentColor", 0)
+
+func getDatapackEditVars():
+	var result = .getDatapackEditVars()
+
+	result["currentColor"] = {
+		"name": "Color",
+		"type": "selector",
+		"value": currentColor,
+		"values": [
+			[0, "Red"],
+			[1, "Purple"],
+			[2, "Orange"],
+		],
+	}
+	return result
+
+func applyDatapackEditVar(_id, _value):
+	.applyDatapackEditVar(_id, _value)
+	
+	if(_id == "currentColor"):
+		currentColor = _value

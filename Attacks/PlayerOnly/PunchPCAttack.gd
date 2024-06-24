@@ -8,7 +8,7 @@ func _init():
 	attackPriority = 30
 	
 func getVisibleName(_context = {}):
-	if(GM.pc.hasPerk(Perk.CombatScratching)):
+	if(GM.pc != null && is_instance_valid(GM.pc) && GM.pc.hasPerk(Perk.CombatScratching)):
 		return "Scratch"
 	return "Punch"
 	

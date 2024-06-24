@@ -52,6 +52,7 @@ margin_right = 1280.0
 margin_bottom = 28.0
 custom_fonts/font = SubResource( 7 )
 text = "Character name"
+autowrap = true
 
 [node name="LevelBar" parent="." instance=ExtResource( 4 )]
 anchor_right = 0.0

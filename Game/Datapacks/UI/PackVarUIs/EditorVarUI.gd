@@ -69,7 +69,10 @@ func _on_NewButton_pressed():
 func _on_AddNewDialog_confirmed():
 	var theNewId = new_thing_id_line_edit.text
 
+	theNewId = Util.stripBadCharactersFromID(theNewId)
+
 	if(theNewId == ""):
+		showAlert("Empty ID not allowed")
 		return
 	
 	if(editorKind == "character"):

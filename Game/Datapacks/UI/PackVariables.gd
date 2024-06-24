@@ -3,6 +3,8 @@ extends VBoxContainer
 export var addSeparators = true
 signal onVariableChange(id, value)
 
+var collapseRegionScene = preload("res://Game/Datapacks/UI/PackVarsCollapsableRegion.tscn")
+
 var widgets = []
 
 func setVariables(_data:Dictionary):
@@ -34,17 +36,34 @@ func setVariables(_data:Dictionary):
 			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/EquippedItemsVarUI.tscn").instance()
 		elif(type == "equippedItem"):
 			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/EquipItemVarUI.tscn").instance()
+		elif(type == "addRemoveList"):
+			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/AddRemoveListVarUI.tscn").instance()
+		elif(type == "color"):
+			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/ColorVarUI.tscn").instance()
+		elif(type == "checkbox"):
+			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/CheckboxVarUI.tscn").instance()
+		elif(type == "personality"):
+			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/PersonalityVarUI.tscn").instance()
+		elif(type == "personalityStat"):
+			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/PersonalityStatVarUI.tscn").instance()
 		else:
 			Log.printerr("Unknown var type found: "+str(type))
 
 		if(newWidget != null):
-			add_child(newWidget)
+			if(dataLine.has("collapsable") && dataLine["collapsable"]):
+				var newCollapse = collapseRegionScene.instance()
+				add_child(newCollapse)
+				newCollapse.setText(dataLine["name"] if dataLine.has("name") else dataID)
+				newCollapse.addToRegion(newWidget)
+			else:
+				add_child(newWidget)
 			widgets.append(newWidget)
 			newWidget.id = dataID
 			newWidget.connect("onValueChange", self, "onWidgetValueChange")
 			newWidget.setData(dataLine)
 			
-			add_child(HSeparator.new())
+			if(addSeparators):
+				add_child(HSeparator.new())
 
 func onWidgetValueChange(id, value):
 	emit_signal("onVariableChange", id, value)

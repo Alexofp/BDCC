@@ -691,6 +691,9 @@ func getAttack(id: String):
 		return null
 	return attacks[id]
 
+func getAttacks():
+	return attacks
+
 func getPlayerAttackIDs():
 	return playerAttacksIDS
 

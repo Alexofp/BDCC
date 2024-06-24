@@ -420,8 +420,8 @@ func _run():
 		saynn("You lean in close to Artica, making her feel your hot breath against her ear.")
 
 		var theTopic = RNG.pick(["naked", "whore", "paws"])
-		if (isCaged && RNG.chance(40)):
-			theTopic = "chastity"
+		#if (isCaged && RNG.chance(40)):
+		#	theTopic = "chastity"
 		if (isPregnant && RNG.chance(30)):
 			theTopic = "preg"
 		if (!isPregnant && RNG.chance(30) && GM.pc.hasReachablePenis()):

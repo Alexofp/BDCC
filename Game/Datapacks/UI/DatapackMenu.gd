@@ -40,7 +40,8 @@ func isDatapackMenu():
 func _on_NewPackConfirmationDialog_confirmed():
 	var newPackID:String = $DatapackViewer/NewPackConfirmationDialog/VBoxContainer/NewPackIDLineEdit.text
 	
-	print(newPackID)
+	newPackID = Util.stripBadCharactersFromID(newPackID)
+	#print(newPackID)
 	if(newPackID == ""):
 		showAlert("Empty ID is not allowed")
 		return
