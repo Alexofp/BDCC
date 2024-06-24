@@ -221,6 +221,8 @@ func _run():
 		addButton("Relationship", "See where your relationship is headed", "relationship")
 		addButton("Leave", "Enough talking", "endthescene")
 		
+		GM.ES.triggerRun(Trigger.TalkingToNPC, ["rahiSlavery"])
+		
 	if(state == "talk"):
 		saynn("What do you wanna talk about with Rahi.")
 		
