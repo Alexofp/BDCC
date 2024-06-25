@@ -15,7 +15,7 @@ func setCharacter(theCharacter):
 
 func updateCharacter():
 	pack_variables.setVariables(character.getEditVars())
-	dynamicCharacter.loadFromDatapackCharacter(character)
+	dynamicCharacter.loadFromDatapackCharacter(null, character)
 	doll.loadCharacter(dynamicCharacter)
 	doll.setTemporaryState("cock", "")
 	
@@ -33,7 +33,7 @@ func _on_SaveButton_pressed():
 
 func _on_PackVariables_onVariableChange(id, value):
 	if(character.applyEditVar(id, value)):
-		dynamicCharacter.loadFromDatapackCharacter(character)
+		dynamicCharacter.loadFromDatapackCharacter(null, character)
 		doll.setTemporaryState("cock", "")
 
 func onMenuPopped():

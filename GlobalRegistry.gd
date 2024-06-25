@@ -1068,6 +1068,8 @@ func getPerksIDsBySkill(skillID: String):
 		return []
 	return perksBySkillGroups[skillID]
 
+func getPerks():
+	return perksObjects
 
 
 func registerLustTopic(path: String):

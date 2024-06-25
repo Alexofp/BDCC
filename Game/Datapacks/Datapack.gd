@@ -147,7 +147,7 @@ func saveToDisk() -> bool:
 	return false
 	
 func getDatapackFileName() -> String:
-	return id+".tres"
+	return id+".res"
 
 func needsTogglingOn():
 	return !characters.empty() || !scenes.empty()

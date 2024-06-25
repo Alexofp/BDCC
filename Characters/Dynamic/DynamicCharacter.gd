@@ -16,6 +16,10 @@ var enslaveQuest = null
 var npcSlavery = null
 var npcChatColorOverride = ""
 var npcMimicArtworkID = ""
+var npcCustomSpeciesName = ""
+var npcGender = null
+var npcPronounsGender = null
+var datapackID = null
 
 func _init():
 	npcHasMenstrualCycle = true
@@ -29,10 +33,14 @@ func getChatColor():
 	return .getChatColor()
 
 func getGender():
+	if(npcGender != null):
+		return npcGender
 	return NpcGender.toNormalGender(npcGeneratedGender)
 	
 func getPronounGender():
-	if(getGender() == Gender.Androgynous):
+	if(npcPronounsGender != null):
+		return npcPronounsGender
+	if(npcGeneratedGender in [NpcGender.Herm, NpcGender.Shemale]):
 		return Gender.Female
 	return getGender()
 	
@@ -41,6 +49,11 @@ func getSmallDescription() -> String:
 
 func getSpecies():
 	return npcSpecies
+	
+func getSpeciesFullName():
+	if(npcCustomSpeciesName != ""):
+		return npcCustomSpeciesName
+	return .getSpeciesFullName()
 	
 func getThickness() -> int:
 	return npcThickness
@@ -135,6 +148,10 @@ func onSexEvent(_event : SexEvent):
 	
 	if(npcSlavery != null):
 		npcSlavery.handleSexEvent(_event)
+	
+func adjustArtworkVariant(_variant:Array):
+	if(isFullyNaked() && !_variant.has("naked")):
+		_variant.append("naked")
 	
 # The whole thing is hack, never expect it to work or be supported
 func copyEverythingFrom(otherCharacter): #:BaseCharacter
@@ -264,7 +281,14 @@ func saveData():
 		"pickedSkinBColor": pickedSkinBColor.to_html(),
 		"npcChatColorOverride": npcChatColorOverride,
 		"npcMimicArtworkID": npcMimicArtworkID,
+		"npcCustomSpeciesName": npcCustomSpeciesName,
 	}
+	if(npcGender != null):
+		data["npcGender"] = npcGender
+	if(npcPronounsGender != null):
+		data["npcPronounsGender"] = npcPronounsGender
+	if(datapackID != null && datapackID != ""):
+		data["datapackID"] = datapackID
 	
 	data["bodyparts"] = {}
 	for slot in bodyparts:
@@ -321,6 +345,11 @@ func loadData(data):
 	else:
 		npcGeneratedGender = SAVE.loadVar(data, "npcGeneratedGender", NpcGender.Male)
 	
+	if(data.has("npcGender")):
+		npcGender = SAVE.loadVar(data, "npcGender", Gender.Male)
+	if(data.has("npcPronounsGender")):
+		npcPronounsGender = SAVE.loadVar(data, "npcPronounsGender", null)
+	
 	npcLevel = SAVE.loadVar(data, "npcLevel", 0)
 	npcBasePain = SAVE.loadVar(data, "npcBasePain", 50)
 	pain = SAVE.loadVar(data, "pain", 0)
@@ -332,6 +361,10 @@ func loadData(data):
 	consciousness = SAVE.loadVar(data, "consciousness", 1.0)
 	npcName = SAVE.loadVar(data, "npcName", "Error")
 	npcSpecies = SAVE.loadVar(data, "npcSpecies", ["canine"])
+	if(data.has("npcCustomSpeciesName")):
+		npcCustomSpeciesName = SAVE.loadVar(data, "npcCustomSpeciesName", "")
+	else:
+		npcCustomSpeciesName = ""
 	npcSmallDescription = SAVE.loadVar(data, "npcSmallDescription", "No description")
 	npcThickness = SAVE.loadVar(data, "npcThickness", 50)
 	npcFeminity = SAVE.loadVar(data, "npcFeminity", 50)
@@ -345,6 +378,8 @@ func loadData(data):
 		npcChatColorOverride = SAVE.loadVar(data, "npcChatColorOverride", "")
 	if(data.has("npcMimicArtworkID")):
 		npcMimicArtworkID = SAVE.loadVar(data, "npcMimicArtworkID", "")
+	if(data.has("datapackID")):
+		datapackID = SAVE.loadVar(data, "datapackID", "")
 		
 	if(!data.has("pickedSkin")):
 		applyRandomSkinAndColorsAndParts()
@@ -414,8 +449,19 @@ func loadData(data):
 
 	updateAppearance()
 
-func loadFromDatapackCharacter(_datapackChar:DatapackCharacter):
+func loadFromDatapackCharacter(_datapack:Datapack, _datapackChar:DatapackCharacter):
+	if(_datapack != null):
+		datapackID = _datapack.id
 	npcName = _datapackChar.name
+	npcSmallDescription = _datapackChar.description
+	npcGeneratedGender = _datapackChar.name
+	npcGender = _datapackChar.gender
+	npcPronounsGender = _datapackChar.pronounsGender
+	if(_datapackChar.hasChatColor):
+		npcChatColorOverride = "#"+_datapackChar.chatColor.to_html(false)
+	
+	npcSpecies = _datapackChar.species
+	npcCustomSpeciesName = _datapackChar.customSpeciesName
 	
 	pickedSkin = _datapackChar.pickedSkin
 	pickedSkinRColor = _datapackChar.pickedSkinRColor
@@ -426,10 +472,39 @@ func loadFromDatapackCharacter(_datapackChar:DatapackCharacter):
 	
 	npcAttacks = _datapackChar.attacks.duplicate()
 	
+	skillsHolder.resetPickedPerks()
+	skillsHolder.resetStats()
+	
+	skillsHolder.setLevel(_datapackChar.level)
+	npcBasePain = _datapackChar.basePain
+	npcBaseLust = _datapackChar.baseLust
+	npcBaseStamina = _datapackChar.baseStamina
+	
+	npcStats = _datapackChar.stats.duplicate()
+	for statID in npcStats:
+		if(GlobalRegistry.getStat(statID) != null):
+			skillsHolder.setStat(statID, npcStats[statID])
+	
+	for perkID in _datapackChar.perks:
+		if(GlobalRegistry.getPerk(perkID) != null):
+			skillsHolder.addPerk(perkID)
+	
 	npcPersonality = _datapackChar.personality.duplicate()
 	personality.clear()
 	for statID in npcPersonality:
 		personality.setStat(statID, npcPersonality[statID])
+	
+	npcFetishes = _datapackChar.fetishes.duplicate()
+	fetishHolder.clear()
+	for fetishID in npcFetishes:
+		if(npcFetishes[fetishID] != FetishInterest.Neutral):
+			fetishHolder.setFetish(fetishID, npcFetishes[fetishID])
+	
+	npcLustInterests = _datapackChar.lustInterests.duplicate()
+	lustInterests.clear()
+	for topicID in npcLustInterests:
+		if(npcLustInterests[topicID] != Interest.Neutral):
+			lustInterests.addInterest(topicID, npcLustInterests[topicID])
 	
 	resetSlots()
 	var loadedBodyparts = _datapackChar.bodyparts
@@ -492,4 +567,6 @@ func loadFromDatapackCharacter(_datapackChar:DatapackCharacter):
 					for dataID in foundData:
 						newItem.applyDatapackEditVar(dataID, foundData[dataID])
 
+	updateNonBattleEffects()
+	stamina = getMaxStamina()
 	updateAppearance()

@@ -38,8 +38,16 @@ func addCharacter(charID:String, variant:Array):
 	var imagePath = null
 	var imageData = Images.getCharacter(charID, variant)
 	
-	if(character != null && character.isDynamicCharacter() && character.npcMimicArtworkID != ""):
-		imageData = Images.getCharacter(character.npcMimicArtworkID, variant)
+	if(character != null && character.isDynamicCharacter()):
+		if(character.npcMimicArtworkID != ""):
+			imageData = Images.getCharacter(character.npcMimicArtworkID, variant)
+		elif(character.datapackID != null && character.datapackID != "" && imageData == null):
+			var theDatapack:Datapack = GlobalRegistry.getDatapack(character.datapackID)
+			if(theDatapack != null && (":" in charID) && theDatapack.characters.has(charID.split(":")[1])):
+				var datapackChar:DatapackCharacter = theDatapack.characters[charID.split(":")[1]]
+				var newPortrait = datapackChar.getPortrait(variant)
+				if(newPortrait != null):
+					imageData = [newPortrait, ""]
 		
 	if(imageData == null):
 		if(character != null):

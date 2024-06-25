@@ -6,10 +6,12 @@ signal onVariableChange(id, value)
 var collapseRegionScene = preload("res://Game/Datapacks/UI/PackVarsCollapsableRegion.tscn")
 
 var widgets = []
+var collapsers = []
 
 func setVariables(_data:Dictionary):
 	Util.delete_children(self)
 	widgets = []
+	collapsers = []
 	
 	for dataID in _data:
 		var dataLine = _data[dataID]
@@ -20,6 +22,8 @@ func setVariables(_data:Dictionary):
 		
 		if(type == "string"):
 			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/StringVarUI.tscn").instance()
+		elif(type == "bigString"):
+			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/BigStringVarUI.tscn").instance()
 		elif(type == "editor"):
 			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/EditorVarUI.tscn").instance()
 		elif(type == "bodyparts"):
@@ -46,6 +50,20 @@ func setVariables(_data:Dictionary):
 			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/PersonalityVarUI.tscn").instance()
 		elif(type == "personalityStat"):
 			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/PersonalityStatVarUI.tscn").instance()
+		elif(type == "fetishes"):
+			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/FetishMapVarUI.tscn").instance()
+		elif(type == "fetishSingle"):
+			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/FetishSingleVarUI.tscn").instance()
+		elif(type == "likesDislikes"):
+			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/LikesDislikesMapVarUI.tscn").instance()
+		elif(type == "likesDislikesSingle"):
+			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/LikesDislikesSingleVarUI.tscn").instance()
+		elif(type == "stats"):
+			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/StatsVarUI.tscn").instance()
+		elif(type == "statSingle"):
+			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/StatSingleVarUI.tscn").instance()
+		elif(type == "image"):
+			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/ImageVarUI.tscn").instance()
 		else:
 			Log.printerr("Unknown var type found: "+str(type))
 
@@ -55,6 +73,9 @@ func setVariables(_data:Dictionary):
 				add_child(newCollapse)
 				newCollapse.setText(dataLine["name"] if dataLine.has("name") else dataID)
 				newCollapse.addToRegion(newWidget)
+				collapsers.append(newCollapse)
+			elif(dataLine.has("addtoprev") && dataLine["addtoprev"]):
+				collapsers.back().addToRegion(newWidget)
 			else:
 				add_child(newWidget)
 			widgets.append(newWidget)
@@ -63,7 +84,12 @@ func setVariables(_data:Dictionary):
 			newWidget.setData(dataLine)
 			
 			if(addSeparators):
-				add_child(HSeparator.new())
+				if(dataLine.has("noseparator") && dataLine["noseparator"]):
+					continue
+				if(dataLine.has("addtoprev") && dataLine["addtoprev"]):
+					collapsers.back().addToRegion(HSeparator.new())
+				else:
+					add_child(HSeparator.new())
 
 func onWidgetValueChange(id, value):
 	emit_signal("onVariableChange", id, value)

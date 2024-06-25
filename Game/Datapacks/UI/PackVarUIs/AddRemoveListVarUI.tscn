@@ -19,8 +19,14 @@ margin_top = 18.0
 margin_right = 1280.0
 margin_bottom = 38.0
 
+[node name="AddButton" type="Button" parent="HBoxContainer"]
+margin_right = 37.0
+margin_bottom = 20.0
+text = "Add"
+
 [node name="OptionButton" type="OptionButton" parent="HBoxContainer"]
-margin_right = 1239.0
+margin_left = 41.0
+margin_right = 1280.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 
@@ -30,12 +36,6 @@ margin_left = 839.0
 margin_right = 1239.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 500, 80 )
-
-[node name="AddButton" type="Button" parent="HBoxContainer"]
-margin_left = 1243.0
-margin_right = 1280.0
-margin_bottom = 20.0
-text = "Add"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
 margin_top = 42.0

@@ -12,7 +12,7 @@ margin_right = 1280.0
 margin_bottom = 14.0
 text = "Bodyparts"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="ScrollContainer" type="VBoxContainer" parent="."]
 margin_top = 18.0
 margin_right = 1280.0
 margin_bottom = 720.0

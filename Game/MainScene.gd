@@ -1420,7 +1420,7 @@ func loadDatapack(datapackID):
 		
 		addDynamicCharacter(dynamicCharacter)
 		
-		dynamicCharacter.loadFromDatapackCharacter(newCharacters[charID])
+		dynamicCharacter.loadFromDatapackCharacter(theDatapack, newCharacters[charID])
 		
 		var theCharType = dynamicCharacter.getCharacterType()
 		if(theCharType == CharacterType.Inmate):

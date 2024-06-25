@@ -21,7 +21,7 @@ func setSprites(theSprites):
 		texture = null
 		return
 	
-	if(theSprites is String):
+	if(!(theSprites is Array)):
 		theSprites = [theSprites]
 	
 	if(currentSprites == theSprites):

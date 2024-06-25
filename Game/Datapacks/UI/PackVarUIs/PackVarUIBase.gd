@@ -6,9 +6,9 @@ signal onValueChange(id, newValue)
 func getMenu():
 	var toCheck = self
 	while(toCheck != null):
-		toCheck = toCheck.get_parent()
 		if(toCheck.has_method("isDatapackMenu")):
 			return toCheck
+		toCheck = toCheck.get_parent()
 	return null
 
 func showAlert(theText:String):
