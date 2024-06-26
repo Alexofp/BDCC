@@ -2467,7 +2467,7 @@ func applyRandomSkin():
 		var theSpecies = GlobalRegistry.getSpecies(speciesOne)
 		var skinType = theSpecies.getSkinType()
 		
-		for skinID in GlobalRegistry.getSkins():
+		for skinID in GlobalRegistry.getSkinsAllKeys():
 			var theSkin = GlobalRegistry.getSkin(skinID)
 			var fittingSkinTypes = theSkin.getFittingSkinTypes()
 			if(fittingSkinTypes is Dictionary && fittingSkinTypes.has(skinType)):

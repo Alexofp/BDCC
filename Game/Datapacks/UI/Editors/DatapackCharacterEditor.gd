@@ -1,6 +1,7 @@
 extends Control
 onready var pack_variables = $VBoxContainer/HBoxContainer/ScrollContainer/PackVariables
 
+var datapack:Datapack
 var character:DatapackCharacter
 var dynamicCharacter:DynamicCharacter
 onready var doll = $VBoxContainer/HBoxContainer/DollWrapper/Viewport/Doll3D

@@ -48,7 +48,8 @@ margin_left = 260.0
 margin_right = 515.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
-text = "Cancel changes"
+custom_colors/font_color = Color( 1, 0.423529, 0.423529, 1 )
+text = "Cancel ALL changes"
 
 [connection signal="onVariableChange" from="VBoxContainer/HBoxContainer/PackVariablesScroll/PackVariables" to="." method="_on_PackVariables_onVariableChange"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/SaveButton" to="." method="_on_SaveButton_pressed"]

@@ -84,7 +84,7 @@ func updateSettings():
 	if(partRef.supportsSkin()):
 		var availSkins = []
 		if(!partRef.hasCustomSkinPattern()):
-			availSkins = GlobalRegistry.getSkins().keys()
+			availSkins = GlobalRegistry.getSkinsAllKeys()
 		else:
 			availSkins = [""] + GlobalRegistry.getPartSkins(selectedPartID).keys()
 		

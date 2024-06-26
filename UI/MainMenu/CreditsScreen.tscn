@@ -31,7 +31,7 @@ size_flags_vertical = 3
 
 [node name="ScrollVBox" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 margin_right = 1268.0
-margin_bottom = 697.0
+margin_bottom = 718.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -57,13 +57,13 @@ margin_bottom = 53.0
 [node name="ContentContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
 margin_top = 57.0
 margin_right = 1268.0
-margin_bottom = 697.0
+margin_bottom = 718.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer"]
 margin_right = 1268.0
-margin_bottom = 609.0
+margin_bottom = 630.0
 custom_fonts/bold_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[center]This game is very early in its development. If you are reading this - thank you!
@@ -90,6 +90,7 @@ CanInBad ([url=https://github.com/Alexofp/BDCC/pull/39]#1[/url] [url=https://git
 Ranchar ([url=https://github.com/Alexofp/BDCC/pull/42]#1[/url])
 AverageAce (lots of skins)
 Dalt ([url=https://github.com/Alexofp/BDCC/pull/43]#1[/url] [url=https://github.com/Alexofp/BDCC/pull/56]#2[/url])
+Disillusioned-Gazer ([url=https://github.com/Alexofp/BDCC/pull/89]#1[/url])
 
 The game uses some icons from [url=https://game-icons.net/]game-icons.net[/url] and [url=https://www.flaticon.com/]flaticon.com[/url]
 
@@ -119,6 +120,7 @@ CanInBad (#1 #2, helping me with the mods browser)
 Ranchar (#1)
 AverageAce (lots of skins)
 Dalt (#1 #2)
+Disillusioned-Gazer (#1)
 
 The game uses some icons from game-icons.net and flaticon.com
 
@@ -127,9 +129,9 @@ Thanks to everyone else who I probably forgot..
 fit_content_height = true
 
 [node name="DonationsLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer"]
-margin_top = 619.0
+margin_top = 640.0
 margin_right = 1268.0
-margin_bottom = 640.0
+margin_bottom = 661.0
 custom_fonts/bold_font = SubResource( 1 )
 bbcode_enabled = true
 fit_content_height = true

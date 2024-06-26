@@ -4,6 +4,7 @@ class_name Datapack
 var id:String = "error"
 var name:String = "New pack"
 var author:String = "No author"
+var version:String = "1.0"
 
 var description:String = "No description provided"
 
@@ -29,9 +30,14 @@ func getEditVars():
 			type = "string",
 			value = author,
 		},
+		"version": {
+			name = "Version",
+			type = "string",
+			value = version,
+		},
 		"description": {
 			name = "Description",
-			type = "string",
+			type = "bigString",
 			value = description,
 		},
 		"characters": {
@@ -39,12 +45,14 @@ func getEditVars():
 			value = characters,
 			name = "Characters",
 			editorKind = "character",
+			datapack = self,
 		},
 		"skins": {
 			type = "editor",
 			value = skins,
 			name = "Skins",
 			editorKind = "skin",
+			datapack = self,
 		},
 	}
 
@@ -55,6 +63,8 @@ func applyEditVar(varid, value):
 		name = value
 	if(varid == "author"):
 		author = value
+	if(varid == "version"):
+		version = value
 	if(varid == "description"):
 		description = value
 	
@@ -65,12 +75,18 @@ func saveData():
 	for charID in characters:
 		charData[charID] = characters[charID].saveData()
 	
+	var skinData = {}
+	for skinID in skins:
+		skinData[skinID] = skins[skinID].saveData()
+	
 	return {
 		#"id": id,
 		"name": name,
 		"author": author,
+		"version": version,
 		"description": description,
 		"characters": charData,
+		"skins": skinData,
 	}
 
 func loadVar(_data, thekey, defaultValue = null):
@@ -82,6 +98,7 @@ func loadData(_data):
 	#id = loadVar(_data, "id", "error")
 	name = loadVar(_data, "name", "No name")
 	author = loadVar(_data, "author", "No author")
+	version = loadVar(_data, "version", "1.0")
 	description = loadVar(_data, "description", "No description found")
 	
 	var charData = loadVar(_data, "characters", {})
@@ -91,6 +108,14 @@ func loadData(_data):
 		newCharacter.id = charID
 		newCharacter.loadData(loadVar(charData, charID, {}))
 		characters[charID] = newCharacter
+	
+	var skinData = loadVar(_data, "skins", {})
+	skins.clear()
+	for skinID in skinData:
+		var newSkin:DatapackSkin = DatapackSkin.new()
+		newSkin.id = skinID
+		newSkin.loadData(loadVar(skinData, skinID, {}))
+		skins[skinID] = newSkin
 	
 func getEditVarsOnlyValues():
 	var result = {}
@@ -125,9 +150,9 @@ func saveToResource() -> DatapackResource:
 	return newDatapackResource
 
 func loadFromResource(datapack:DatapackResource):
-	var version = datapack.version
+	var datapackversion = datapack.version
 	
-	if((version is int) && (version in [1])):
+	if((datapackversion is int) && (datapackversion in [1])):
 		id = datapack.id
 		
 		var theData = datapack.data
@@ -135,8 +160,11 @@ func loadFromResource(datapack:DatapackResource):
 			loadData(theData)
 			#for varID in theData:
 			#	applyEditVar(varID, theData[varID])
+			return true
+		return false
 	else:
 		Log.printerr("Tried to load a datapack with a bad version: "+str(version))
+		return false
 
 func saveToDisk() -> bool:
 	var theResource:DatapackResource = saveToResource()

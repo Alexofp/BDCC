@@ -23,11 +23,12 @@ func updateDatapackList():
 		var datapack:Datapack = allDatapacks[packID]
 		
 		datapacksList.append(datapack)
-		datapack_item_list.add_item(datapack.id+"= "+datapack.name+" (By "+datapack.author+")")
+		datapack_item_list.add_item(datapack.name+" (By "+datapack.author+")")
 
 func updateDatapackDesc(theDatapack:Datapack):
 	var finalText = ""
-	finalText += theDatapack.name
+	finalText += "id="+theDatapack.id
+	finalText += "\n"+theDatapack.name
 	finalText += "\nAuthor: "+theDatapack.author
 	finalText += "\n\n"+theDatapack.description
 	finalText += "\n\n"+theDatapack.getContainsString()
@@ -47,6 +48,10 @@ func _on_NewPackConfirmationDialog_confirmed():
 		return
 	#showAlert(newPackID)
 	
+	if(GlobalRegistry.datapacks.has(newPackID)):
+		showAlert("Datapack with this ID already exists")
+		return
+	
 	var newDatapack:Datapack = Datapack.new()
 	newDatapack.id = newPackID
 	startEditingDatapack(newDatapack)
@@ -60,16 +65,17 @@ func startEditingDatapack(datapack:Datapack):
 	datapackEditorScreen.connect("onCancelButtonPressed", self, "onCancelDatapackPressed")
 
 func onSaveDatapackPressed(_menu, datapack:Datapack):
-	popMenu()
+	
 	
 	var _ok = datapack.saveToDisk()
 	if(!_ok):
 		showAlert("Error while saving a datapack. Sorry")
-	reloadAndUpdatePacks()
+	popMenu()
+	#reloadAndUpdatePacks()
 
 func onCancelDatapackPressed(_menu, _datapack:Datapack):
 	popMenu()
-	reloadAndUpdatePacks()
+	#reloadAndUpdatePacks()
 
 
 func _on_NewDatapackButton_pressed():
@@ -87,6 +93,7 @@ func showAlert(theText:String):
 func reloadAndUpdatePacks():
 	GlobalRegistry.reloadPacks()
 	updateDatapackList()
+	datapack_desc_label.bbcode_text = ""
 
 func _on_UpdateButton_pressed():
 	reloadAndUpdatePacks()
@@ -110,6 +117,7 @@ func popMenu():
 		
 		if(menuStack.empty()):
 			$DatapackViewer.visible = true
+			onMenuPopped()
 		else:
 			menuStack.back().visible = true
 			if(menuStack.back().has_method("onMenuPopped")):
@@ -147,3 +155,30 @@ func _on_DatapackItemList_item_selected(index):
 		var datapack:Datapack = datapacksList[index]
 		
 		updateDatapackDesc(datapack)
+
+func _on_DatapackFolderButton_pressed():
+	if(OS.get_name() == "Android"):
+		showAlert("Datapacks on android are loaded from \"Documents/BDCCMods/Datapacks\"\nCreate that folder if it doesn't exist.")
+	else:
+		var _ok = OS.shell_open(ProjectSettings.globalize_path("user://datapacks"))
+
+var datapackBrowserScene = preload("res://Game/Datapacks/UI/DatapackBrowser.tscn")
+func _on_DatapackBrowserButton_pressed():
+	var newMenu = datapackBrowserScene.instance()
+	newMenu.connect("closePressed", self, "popMenu")
+
+	pushMenu(newMenu)
+
+#func popAndUpdate():
+#	popMenu()
+#	GlobalRegistry.reloadPacks()
+#	updateDatapackList()
+
+func onMenuPopped():
+	reloadAndUpdatePacks()
+
+func _on_DatapackDescLabel_meta_clicked(meta):
+	var _ok = OS.shell_open(meta)
+
+func _on_DatapackWikiButton_pressed():
+	var _ok = OS.shell_open("https://github.com/Alexofp/BDCC/wiki/Datapacks")

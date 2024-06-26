@@ -1714,12 +1714,29 @@ func registerSkinsFolder(folder: String, authorOverride = ""):
 func getSkin(id: String):
 	if(skins.has(id)):
 		return skins[id]
+	elif(":" in id):
+		var splitData = Util.splitOnFirst(id, ":")
+		var datapackID = splitData[0]
+		var skinID = splitData[1]
+		
+		if(!datapacks.has(datapackID) || !datapacks[datapackID]["skins"].has(skinID)):
+			Log.printerr("ERROR: skin with the id "+id+" wasn't found")
+			return null
+		return datapacks[datapackID]["skins"][skinID]
 	else:
 		Log.printerr("ERROR: skin with the id "+id+" wasn't found")
 		return null
 
 func getSkins():
 	return skins
+
+func getSkinsAllKeys():
+	var result = skins.keys()
+	for datapackID in datapacks:
+		var datapack = datapacks[datapackID]
+		for skinID in datapack.skins:
+			result.append(datapackID+":"+skinID)
+	return result
 
 func findCustomSkins():
 	var skinsFolder = "user://custom_skins"

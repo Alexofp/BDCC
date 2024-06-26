@@ -62,7 +62,7 @@ func _run():
 				addButton(theSkin.getName(), "Pick this skin"+(("\n[i]Created by:[/i] "+str(skinAuthor)) if (skinAuthor != null && skinAuthor != "") else ""), "changepartskinmenu_select", [skinID])
 		else:
 			addButton("Same as base", "Inherit the skin from the base", "changepartskinmenu_select", [null])
-			for skinID in GlobalRegistry.getSkins():
+			for skinID in GlobalRegistry.getSkinsAllKeys():
 				var theSkin = GlobalRegistry.getSkin(skinID)
 				var skinAuthor = theSkin.getAuthor()
 				addButton(theSkin.getName(), "Pick this skin"+(("\n[i]Created by:[/i] "+str(skinAuthor)) if (skinAuthor != null && skinAuthor != "") else ""), "changepartskinmenu_select", [skinID])

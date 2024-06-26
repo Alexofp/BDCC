@@ -54,37 +54,54 @@ margin_right = 319.0
 margin_bottom = 68.0
 text = "Delete"
 
-[node name="AddNewDialog" type="ConfirmationDialog" parent="."]
+[node name="Control" type="Control" parent="."]
 margin_right = 1280.0
 margin_bottom = 118.0
+mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="AddNewDialog"]
+[node name="AddNewDialog" type="ConfirmationDialog" parent="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -230.0
+margin_top = -75.0
+margin_right = 230.0
+margin_bottom = 75.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/AddNewDialog"]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 1272.0
-margin_bottom = 82.0
+margin_right = 452.0
+margin_bottom = 114.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="AddNewDialog/VBoxContainer"]
-margin_right = 452.0
+[node name="Label" type="Label" parent="Control/AddNewDialog/VBoxContainer"]
+margin_right = 444.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 text = "Lala"
 
-[node name="NewThingIDLineEdit" type="LineEdit" parent="AddNewDialog/VBoxContainer"]
+[node name="NewThingIDLineEdit" type="LineEdit" parent="Control/AddNewDialog/VBoxContainer"]
 margin_top = 18.0
-margin_right = 452.0
+margin_right = 444.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
 caret_blink = true
 caret_blink_speed = 0.5
 
-[node name="ConfirmDeleteDialog" type="ConfirmationDialog" parent="."]
-margin_right = 1280.0
-margin_bottom = 118.0
+[node name="ConfirmDeleteDialog" type="ConfirmationDialog" parent="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -236.0
+margin_top = -43.0
+margin_right = 236.0
+margin_bottom = 43.0
 
-[node name="Label2" type="Label" parent="ConfirmDeleteDialog"]
+[node name="Label2" type="Label" parent="Control/ConfirmDeleteDialog"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -97,5 +114,5 @@ autowrap = true
 [connection signal="pressed" from="VBoxContainer2/HBoxContainer/VBoxContainer/NewButton" to="." method="_on_NewButton_pressed"]
 [connection signal="pressed" from="VBoxContainer2/HBoxContainer/VBoxContainer/EditButton" to="." method="_on_EditButton_pressed"]
 [connection signal="pressed" from="VBoxContainer2/HBoxContainer/VBoxContainer/DeleteButton" to="." method="_on_DeleteButton_pressed"]
-[connection signal="confirmed" from="AddNewDialog" to="." method="_on_AddNewDialog_confirmed"]
-[connection signal="confirmed" from="ConfirmDeleteDialog" to="." method="_on_ConfirmDeleteDialog_confirmed"]
+[connection signal="confirmed" from="Control/AddNewDialog" to="." method="_on_AddNewDialog_confirmed"]
+[connection signal="confirmed" from="Control/ConfirmDeleteDialog" to="." method="_on_ConfirmDeleteDialog_confirmed"]

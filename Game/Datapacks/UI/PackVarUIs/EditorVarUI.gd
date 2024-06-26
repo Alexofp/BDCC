@@ -4,7 +4,8 @@ onready var item_list = $VBoxContainer2/HBoxContainer/ItemList
 var thingIds = []
 var savedThings:Dictionary
 var editorKind:String = ""
-onready var new_thing_id_line_edit = $AddNewDialog/VBoxContainer/NewThingIDLineEdit
+onready var new_thing_id_line_edit = $Control/AddNewDialog/VBoxContainer/NewThingIDLineEdit
+var datapack
 
 func setThings(thingsDict:Dictionary):
 	savedThings = thingsDict
@@ -30,6 +31,8 @@ func setData(_dataLine:Dictionary):
 		$VBoxContainer2/Label.text = _dataLine["name"]
 	if(_dataLine.has("editorKind")):
 		editorKind = _dataLine["editorKind"]
+	if(_dataLine.has("datapack")):
+		datapack = _dataLine["datapack"]
 
 func getSelectedID():
 	var selectedInds = item_list.get_selected_items()
@@ -52,17 +55,17 @@ func _on_DeleteButton_pressed():
 	thingToDeleteID = getSelectedID()
 	if(thingToDeleteID == null):
 		return
-	$ConfirmDeleteDialog.visible = true
+	$Control/ConfirmDeleteDialog.visible = true
 
 
 func _on_NewButton_pressed():
-	$AddNewDialog.visible = true
+	$Control/AddNewDialog.visible = true
 	if(editorKind == "character"):
-		$AddNewDialog/VBoxContainer/Label.text = "Enter an id for a new character. It must be unique"
+		$Control/AddNewDialog/VBoxContainer/Label.text = "Enter an id for a new character. It must be unique"
 	if(editorKind == "scene"):
-		$AddNewDialog/VBoxContainer/Label.text = "Enter an id for a new scene. It must be unique"
+		$Control/AddNewDialog/VBoxContainer/Label.text = "Enter an id for a new scene. It must be unique"
 	if(editorKind == "skin"):
-		$AddNewDialog/VBoxContainer/Label.text = "Enter an id for a new skin. It must be unique"
+		$Control/AddNewDialog/VBoxContainer/Label.text = "Enter an id for a new skin. It must be unique"
 	
 	new_thing_id_line_edit.text = ""
 	
@@ -84,8 +87,22 @@ func _on_AddNewDialog_confirmed():
 		#showAlert("Adding new character, "+theNewId)
 		#print("ADDING NEW CHARACTER, "+theNewId)
 		var charEditor = load("res://Game/Datapacks/UI/Editors/DatapackCharacterEditor.tscn").instance()
+		charEditor.datapack = datapack
 		pushMenu(charEditor)
 		charEditor.setCharacter(newDatapackCharacter)
+
+	if(editorKind == "skin"):
+		var newSkin:DatapackSkin = DatapackSkin.new()
+		newSkin.id = theNewId
+		
+		savedThings[theNewId] = newSkin
+		updateThings()
+		#showAlert("Adding new character, "+theNewId)
+		#print("ADDING NEW CHARACTER, "+theNewId)
+		var skinEditor = load("res://Game/Datapacks/UI/Editors/DatapackSkinEditor.tscn").instance()
+		skinEditor.datapack = datapack
+		pushMenu(skinEditor)
+		skinEditor.setSkin(newSkin)
 
 func _on_EditButton_pressed():
 	var selectedIDToEdit = getSelectedID()
@@ -95,6 +112,12 @@ func _on_EditButton_pressed():
 	#print("EDITING "+str(selectedIDToEdit))
 	if(editorKind == "character"):
 		var charEditor = load("res://Game/Datapacks/UI/Editors/DatapackCharacterEditor.tscn").instance()
+		charEditor.datapack = datapack
 		pushMenu(charEditor)
 		charEditor.setCharacter(savedThings[selectedIDToEdit])
+	if(editorKind == "skin"):
+		var skinEditor = load("res://Game/Datapacks/UI/Editors/DatapackSkinEditor.tscn").instance()
+		skinEditor.datapack = datapack
+		pushMenu(skinEditor)
+		skinEditor.setSkin(savedThings[selectedIDToEdit])
 		

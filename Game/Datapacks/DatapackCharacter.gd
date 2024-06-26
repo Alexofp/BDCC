@@ -2,7 +2,7 @@ extends Reference
 class_name DatapackCharacter
 
 var id:String = "error"
-var name:String = "Rahi"
+var name:String = "New character"
 var description:String = "No description provided"
 var gender = Gender.Male
 var pronounsGender = null
@@ -155,7 +155,7 @@ func getEditVars():
 		"skin": {
 			name = "Base skin",
 			type = "skin",
-			skins = GlobalRegistry.getSkins().keys(),
+			skins = GlobalRegistry.getSkinsAllKeys(),
 			value = {skin=pickedSkin, r=pickedSkinRColor, g=pickedSkinGColor, b=pickedSkinBColor},
 			noBase = true,
 		},

@@ -261,7 +261,7 @@ func reconnect():
 	loadCharacter(cashedCharID)
 
 func disconnectFromOld():
-	if(savedCharacterID != null && savedCharacterID != ""):
+	if(savedCharacterID != null && (savedCharacterID is String && savedCharacterID != "")):
 		var ch = getCharFromID(savedCharacterID)
 		if(ch == null || !is_instance_valid(ch)):
 			return

@@ -606,7 +606,7 @@ func getThickness() -> int:
 
 func getPickableAttributes():
 #	var skinsOptions = []
-#	for skinID in GlobalRegistry.getSkins():
+#	for skinID in GlobalRegistry.getSkinsAllKeys():
 #		var theSkin = GlobalRegistry.getSkin(skinID)
 #		skinsOptions.append([skinID, theSkin.getName(), "Pick this skin"])
 #

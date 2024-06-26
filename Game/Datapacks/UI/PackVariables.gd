@@ -64,6 +64,8 @@ func setVariables(_data:Dictionary):
 			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/StatSingleVarUI.tscn").instance()
 		elif(type == "image"):
 			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/ImageVarUI.tscn").instance()
+		elif(type == "skinTypeWeights"):
+			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/SkinTypeWeightsVarUI.tscn").instance()
 		else:
 			Log.printerr("Unknown var type found: "+str(type))
 
