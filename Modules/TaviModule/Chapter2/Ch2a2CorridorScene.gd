@@ -524,7 +524,7 @@ func _run():
 	if(state == "startsybian"):
 		# (restores some pain maybe so you don’t get softlocked out of struggling)
 
-		saynn("You can’t see anything. And you can’t escape. Your private bits are super sensitive again after you came. You feel like you won’t be able to resist anymore after the next orgasm so you gotta do something now, while you still!")
+		saynn("You can’t see anything. And you can’t escape. Your private bits are super sensitive again after you came. You feel like you won’t be able to resist anymore after the next orgasm so you gotta do something now, while you still can!")
 
 		# (Options are Endure, Struggle and Escape if there are no restraints anymore)
 

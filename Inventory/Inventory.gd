@@ -576,7 +576,7 @@ func findAndEquipInmateUniform():
 	elif(hasItemID("inmateuniformSexDeviant")):
 		forceEquipStoreOtherUnlessRestraint(getFirstOf("inmateuniformSexDeviant"))
 
-func removeBrokenDublicatedItems():
+func removeBrokenDuplicatedItems():
 	var itemsToRemove = []
 	var equippedItemsToRemove = []
 	

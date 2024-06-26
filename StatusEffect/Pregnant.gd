@@ -39,7 +39,7 @@ func getEffectDesc():
 		var kidAmount = character.getMenstrualCycle().getRoughLitterEstimateString(hasFirstPerk && hasSecondPerk)
 		addText += "\n\nYou think there are "+str(kidAmount)+" in this belly"
 	
-	return "You're visible pregnant.. "+addText
+	return "You're visibly pregnant.. "+addText
 
 func getEffectImage():
 	var progress = character.getPregnancyProgress()

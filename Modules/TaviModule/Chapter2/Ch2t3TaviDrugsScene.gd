@@ -418,7 +418,7 @@ func _run():
 		
 		saynn("A few moments later Tavi steps out of the green fire. New Tavi..")
 
-		saynn("The first thing that you notice.. she is much taller, taller than any person that you have seen. Two demonic horns are sticking out of her head. Her differently-colored eyes produce a powerful glow. Her tail is that of some demonic creature, her digigrade feet are now powerful hoofs that leave a burning trail behind.")
+		saynn("The first thing that you notice.. she is much taller, taller than any person that you have seen. Two demonic horns are sticking out of her head. Her differently-colored eyes produce a powerful glow. Her tail is that of some demonic creature, her digitigrade feet are now powerful hoofs that leave a burning trail behind.")
 
 		saynn("She is naked and clearly not ashamed of it. Her tits are so much bigger, they are at least F-cup with green perky nipples. Her hips are wider too to accomodate for that fact. All the glowing spots on her fur are now shining even brighter, giving her a more intimidating look.")
 

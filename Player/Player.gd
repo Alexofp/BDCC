@@ -486,7 +486,7 @@ func loadData(data):
 	for skillID in allSkills:
 		if(allSkills[skillID].alwaysVisible()):
 			skillsHolder.ensureSkillExists(skillID)
-	getInventory().removeBrokenDublicatedItems()
+	getInventory().removeBrokenDuplicatedItems()
 
 func checkLocation():
 	var _roomInfo = GM.world.getRoomByID(getLocation())
