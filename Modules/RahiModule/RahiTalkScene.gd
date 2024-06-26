@@ -95,7 +95,7 @@ func _run():
 		addButton("Back", "Go back", "")
 		
 	if(state == "talk"):
-		saynn("You take a seat nearby and try to relax, though the metal bench isn’t exactly best for that. Feline’s tail begins to wag nervously but she strokes and calms it down.")
+		saynn("You take a seat nearby and try to relax, though the metal bench isn’t exactly best for that. The feline’s tail begins to wag nervously but she strokes and calms it down.")
 
 		saynn("[say=rahi]You wanna talk about something? Meow..[/say]")
 		

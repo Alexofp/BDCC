@@ -176,7 +176,7 @@ func _run():
 
 		saynn("She winks to him.")
 
-		saynn("[say=bulldog]Fuck off while you still have all the bones in tact.[/say]")
+		saynn("[say=bulldog]Fuck off while you still have all the bones intact.[/say]")
 
 		saynn("[say=socket]That wasn't nice![/say]")
 

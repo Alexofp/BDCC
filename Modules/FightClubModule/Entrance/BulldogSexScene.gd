@@ -147,7 +147,7 @@ func _run():
 
 		addButton("Run away!", "Escape before anything happens", "run_away!")
 		addButton("Uhh..", "(Non-con, Group, Drug use) Try to reason? You have a strong feeling that it won’t work..", "uhh..")
-		addButton("Random", "You are panicking. Let the faith decide what happens", "do_random")
+		addButton("Random", "You are panicking. Let fate decide what happens.", "do_random")
 
 	if(state == "run_away!"):
 		saynn("Feeling very exposed, you decide to run away. You swiftly get up and your privates as best as you can before making your escape, leaving a trail of sticky stuff behind you.")

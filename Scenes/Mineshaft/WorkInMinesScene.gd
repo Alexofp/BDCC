@@ -5,12 +5,12 @@ func _init():
 
 func _run():
 	if(state == ""):
-		saynn("You grab a pickaxe and go deep into the mines")
+		saynn("You grab a pickaxe and go deep into the mines.")
 
 		addButton("Work", "Do the work", "work")
 	
 	if(state == "work"):
-		saynn("You spend a few hours, pushing minecarts around and mining rocks. You feel tired as heck but you earned something at least")
+		saynn("You spend a few hours, pushing minecarts around and mining rocks. You feel tired as heck but you earned something at least.")
 		
 		addButton("Continue", "Finally rest", "endthescene")
 

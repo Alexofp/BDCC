@@ -547,7 +547,7 @@ func _run():
 	if(state == "third_risha"):
 		addCharacter("risha")
 		playAnimation(StageScene.Duo, "stand", {npc="risha"})
-		saynn("Right on que, a guard steps into the room.")
+		saynn("Right on cue, a guard steps into the room.")
 
 		saynn("[say=risha]Hey there~.[/say]")
 

@@ -215,7 +215,7 @@ func _run():
 
 		saynn("Her expression softens, her breathing becomes deeper. After some groping, Socket spreads her legs more.. for you.. an invitation.")
 
-		saynn("One hand stays on her breasts while another slides down to her crotch. You feel.. warmth.. irradiating from her cute tight pussy lips.")
+		saynn("One hand stays on her breasts while another slides down to her crotch. You feel.. warmth.. radiating from her cute tight pussy lips.")
 
 		saynn("Your digits brush over her wet folds and tease the clit a little. Socket's eyes become needier while you do that, she bites her lips.. while standing still and letting you continue, pretending that this is normal. Is it not?..")
 

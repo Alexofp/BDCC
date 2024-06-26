@@ -216,7 +216,7 @@ func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):
 			if(_args.size() == 1):
 				var fileIndex = _args[0]
 				if(fileIndex in ["1", "safe.txt"]):
-					return "The safe has a few credit chips that we confiscated from the inmates. Somehow they found a way to dublicate them which caused all sorts of problems. Hopefully there are no more of them going around.\n\nThe safe's ip is 127.0.24\nYou should know the admin's password. If you forgot it - you will have to hack it.\nGood luck"
+					return "The safe has a few credit chips that we confiscated from the inmates. Somehow they found a way to duplicate them which caused all sorts of problems. Hopefully there are no more of them going around.\n\nThe safe's ip is 127.0.24\nYou should know the admin's password. If you forgot it - you will have to hack it.\nGood luck"
 				elif(fileIndex in ["2", "forum.html"]):
 					return "...**[corrupt]corrupted data[/corrupt]**...\n\n<message>Hey guys. What do I do if I forgot my password to one of the servers and I can't login anymore?</message>\n<message>lol noob</message>\n<message>I had such problem. But I just remembered the password one day</message>\n<message>I heard there is a program that can bruteforce password, check this server 127.0.55</message>\n<message>Thanks for the answers guys, real helpful. And I'm not gonna download some shady crap.</message>\n<message>Oh, btw, the ip's last 2 numbers are [corrupt]53[/corrupt], not 55.</message>\n\n...**[corrupt]more corrupted data[/corrupt]**..."
 				elif(fileIndex in ["tuna", "tunya"]):

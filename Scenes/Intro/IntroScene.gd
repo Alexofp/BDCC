@@ -15,7 +15,7 @@ func _run():
 		playAnimation(StageScene.Solo, "stand")
 		
 		addCharacter("intro_detective")
-		saynn("[b]You follow a tall male figure through a long corridor[/b]. You don’t see any windows, everything is lit up by industrial-looking lights. Your head hurts, you suddenly realize that [b]you forgot where you are[/b] and what you are doing here. You panic, your eyes jump form point to point, gray floor tiles, dark-blue concrete walls, an unknown person’s back, what the heck is going on here. [b]Two guys walk by[/b], you notice their blue uniform and [b]badges that say “IIPF”[/b]. You also notice holsters and belts with equipment, the guy that you’re following has these too. You look down at your hands. No, you’re not cuffed.")
+		saynn("[b]You follow a tall male figure through a long corridor[/b]. You don’t see any windows, everything is lit up by industrial-looking lights. Your head hurts, you suddenly realize that [b]you forgot where you are[/b] and what you are doing here. You panic, your eyes jump from point to point, gray floor tiles, dark-blue concrete walls, an unknown person’s back, what the heck is going on here. [b]Two guys walk by[/b], you notice their blue uniform and [b]badges that say “IIPF”[/b]. You also notice holsters and belts with equipment, the guy that you’re following has these too. You look down at your hands. No, you’re not cuffed.")
 
 		saynn("The person that is escorting you [b]stops near one of the doors[/b], unlocks it and [b]invites you in[/b].")
 
@@ -304,7 +304,7 @@ func _run():
 
 		saynn("You turn and look out of the window. Between all the asteroids [b]you see a huge rock[/b], the biggest one, floating in the void [b]with a space station seemingly shoved into it[/b]. The station looks small from this distance but you do see quite a few levels to it.")
 
-		saynn("[sayMale]That’s where you will spent the rest of your life.[/sayMale]")
+		saynn("[sayMale]That’s where you will spend the rest of your life.[/sayMale]")
 
 		saynn("You try to distance yourself from it all and just relax in your metal seat. The shuttle slowly approaches the hangar, its outside entrance has some kind of energy field that allows the shuttles to pass but keep all the air inside. The engines switch to a vertical thrust as the station’s gravity generator begins to affect the shuttle more. Soft touchdown. Maybe you will like it here, who knows.")
 

@@ -7,7 +7,7 @@ func _run():
 	if(state == ""):
 		playAnimation(StageScene.Sleeping, "sleep")
 		
-		saynn("You lay down on your stiff prisoner bed and let out a tired sigh")
+		saynn("You lay down on your stiff prisoner bed and let out a tired sigh.")
 		
 		saynn("What do you wanna do?")
 
@@ -23,18 +23,18 @@ func _run():
 				addDisabledButton("Rest %02d:00" % [t], "Too late for that today")
 			
 	if(state == "rested"):
-		saynn("You spend some time in your cell. You feel less tired")
+		saynn("You spend some time in your cell. You feel less tired.")
 		
 		addButton("Continue", "Time to wake up", "endthescene")
 		
 	if(state == "slept"):
 		playAnimation(StageScene.Sleeping, "sleep", {bodyState={naked=true}})
 		
-		saynn("You slept in your cell. It's not the most pleasent experience but you managed to recover your energy")
+		saynn("You slept in your cell. It's not the most pleasent experience but you managed to recover your energy.")
 		
 		saynn("You wake up when all the prison lights begin to turn on.")
 		
-		saynn("Welcome to day "+str(GM.main.getDays())+" of your sentence")
+		saynn("Welcome to day "+str(GM.main.getDays())+" of your sentence.")
 		
 		addButton("Continue", "Time to wake up", "endthesceneandtriggerevents")
 		

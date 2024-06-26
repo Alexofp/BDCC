@@ -180,7 +180,7 @@ func _run():
 
 		saynn("He pauses.")
 
-		saynn("[say=vion]I have to give the old man credit though. An actual kangagoo for a judge, that was inspired.[/say]")
+		saynn("[say=vion]I have to give the old man credit though. An actual kangaroo for a judge, that was inspired.[/say]")
 
 		saynn("[say=vion]Either way, after ten minutes without me getting a word in I get a guilty verdict, get tossed back in that cell and the very next day I'm shipped off to a questionably-legal space prison facility in the middle of nowhere.[/say]")
 

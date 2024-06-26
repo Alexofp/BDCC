@@ -178,7 +178,7 @@ func _run():
 
 		saynn("Eventually he comes down from it, his cock slowly goes down and starts to deflate. Though he does take the liberty of wiping its tip against your clothes. You can only freely open one eye and opening the mouth would mean getting a taste of his seed.")
 
-		saynn("[say=cp_guard]That was great, you look like a proper cum slut. You’re free to go, won’t frisk you today anymore, whore[/say]")
+		saynn("[say=cp_guard]That was great, you look like a proper cum slut. You’re free to go, won’t frisk you today anymore, whore.[/say]")
 
 		# (scene ends)
 
@@ -194,7 +194,7 @@ func _run():
 
 		saynn("Eventually his bliss state ends, you pull back and show him your mouth full of cum. Then you close it and raise your chin high, showing him the exact moment when you swallow that sticky mess completely. You then lick and suck on your every finger and swallow that too before showing the guard your empty mouth.")
 
-		saynn("[say=cp_guard]Oh f-fuck, that was something else, you’re such a good whore. You’re free to pass for today but I wouldn’t mind using you more[/say]")
+		saynn("[say=cp_guard]Oh f-fuck, that was something else, you’re such a good whore. You’re free to pass for today but I wouldn’t mind using you more.[/say]")
 
 		# (scene ends)
 		addButton("Continue", "That went well", "allowFullAndendthescene")
