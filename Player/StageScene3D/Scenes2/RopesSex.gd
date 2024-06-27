@@ -72,7 +72,7 @@ func playAnimation(animID, _args = {}):
 
 	doll.setTemporaryState("ropeharness", "hanged")
 	
-	if(_args.has("cum") && _args["cum"]):
+	if(_args.has("cum") && _args["cum"] && !(animID in ["tease"])):
 		startCumInside(doll, doll2)
 
 	if(animID == "tease"):
