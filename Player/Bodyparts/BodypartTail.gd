@@ -53,6 +53,7 @@ func getPickableAttributes():
 			[3.0, "300%", "Pick this scale"],
 		],
 		"default": 1.0,
+		"floatinput": true,
 	}
 	return result
 	

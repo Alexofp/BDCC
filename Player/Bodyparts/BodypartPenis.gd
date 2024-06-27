@@ -84,6 +84,7 @@ func getPickableAttributes():
 			[50, Util.cmToString(50), "Pick this length"],
 		],
 		"default": 15,
+		"floatinput": true,
 	}
 	result["ballsscale"] = {
 		"text": "Pick your balls scale",
@@ -105,6 +106,7 @@ func getPickableAttributes():
 			[5.0, "500%", "Pick this scale"],
 		],
 		"default": 1.0,
+		"floatinput": true,
 	}
 	return result
 	

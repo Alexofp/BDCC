@@ -46,6 +46,12 @@ var portraitTexture:ImageTexture
 var portraitNaked:Image
 var portraitNakedTexture:ImageTexture
 
+var lootTableID = "base"
+var lootCreditsChance:float = 50
+var lootCreditsMin:int = 1
+var lootCreditsMax:int = 5
+var lootExtra:Array = []
+
 func createTextures():
 	if(portrait != null):
 		portraitTexture = ImageTexture.new()
@@ -237,6 +243,18 @@ func getEditVars():
 			value = lustInterests,
 			collapsable = true,
 		},
+		"lootTable": {
+			name = "Loot table",
+			type = "lootTable",
+			value = {
+				baseTableID = lootTableID,
+				creditsDropChance = lootCreditsChance,
+				creditsMin = lootCreditsMin,
+				creditsMax = lootCreditsMax,
+				customLoot = lootExtra.duplicate(),
+			},
+			collapsable = true,
+		},
 		"portrait": {
 			name = "Portrait (normal)",
 			type = "image",
@@ -307,6 +325,12 @@ func applyEditVar(varid, value):
 	if(varid == "portraitNaked"):
 		portraitNaked = value
 		portraitNakedTexture = null
+	if(varid == "lootTable"):
+		lootTableID = value["baseTableID"]
+		lootCreditsChance = value["creditsDropChance"]
+		lootCreditsMin = value["creditsMin"]
+		lootCreditsMax = value["creditsMax"]
+		lootExtra = value["customLoot"].duplicate()
 	
 	return false
 
@@ -339,6 +363,11 @@ func saveData():
 		"baseStamina": baseStamina,
 		"portrait": portrait,
 		"portraitNaked": portraitNaked,
+		"lootTableID": lootTableID,
+		"lootCreditsChance": lootCreditsChance,
+		"lootCreditsMin": lootCreditsMin,
+		"lootCreditsMax": lootCreditsMax,
+		"lootExtra": lootExtra,
 	}
 
 func loadData(data):
@@ -371,6 +400,11 @@ func loadData(data):
 	portraitNaked = loadVar(data, "portraitNaked", null)
 	portraitTexture = null
 	portraitNakedTexture = null
+	lootTableID = loadVar(data, "lootTableID", "base")
+	lootCreditsChance = loadVar(data, "lootCreditsChance", 50)
+	lootCreditsMin = loadVar(data, "lootCreditsMin", 1)
+	lootCreditsMax = loadVar(data, "lootCreditsMax", 5)
+	lootExtra = loadVar(data, "lootExtra", [])
 
 func loadVar(_data, thekey, defaultValue = null):
 	if(_data.has(thekey)):

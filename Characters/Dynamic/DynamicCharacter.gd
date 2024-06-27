@@ -20,6 +20,7 @@ var npcCustomSpeciesName = ""
 var npcGender = null
 var npcPronounsGender = null
 var datapackID = null
+var npcLootOverride = null
 
 func _init():
 	npcHasMenstrualCycle = true
@@ -103,6 +104,30 @@ func isDynamicCharacter():
 func getLootTable(_battleName):
 	if(isSlaveToPlayer()):
 		return .getLootTable(_battleName)
+	
+	if(npcLootOverride != null):
+		if(npcLootOverride.has("baseTableID")):
+			var baseTable = GlobalRegistry.createLootTable(npcLootOverride["baseTableID"])
+			if(baseTable == null):
+				return .getLootTable(_battleName)
+			if(npcLootOverride.has("creditsDropChance")):
+				baseTable.creditsChance = npcLootOverride["creditsDropChance"]
+			if(npcLootOverride.has("creditsMin")):
+				baseTable.minCredits = npcLootOverride["creditsMin"]
+			if(npcLootOverride.has("creditsMax")):
+				baseTable.maxCredits = npcLootOverride["creditsMax"]
+			if(npcLootOverride.has("customLoot")):
+				var customLoot = npcLootOverride["customLoot"]
+				if(customLoot != null && customLoot is Array):
+					for lootLine in customLoot:
+						if(lootLine.has("item") && lootLine.has("chance")):
+							if(lootLine.has("min") && lootLine.has("max")):
+								baseTable.addLoot(lootLine["chance"], [[lootLine["item"], lootLine["min"], lootLine["max"]]])
+							else:
+								baseTable.addLoot(lootLine["chance"], [lootLine["item"]])
+			return baseTable
+			
+			
 	if(npcCharacterType == CharacterType.Engineer):
 		return EngineerLoot.new()
 	if(npcCharacterType == CharacterType.Guard):
@@ -289,6 +314,8 @@ func saveData():
 		data["npcPronounsGender"] = npcPronounsGender
 	if(datapackID != null && datapackID != ""):
 		data["datapackID"] = datapackID
+	if(npcLootOverride != null):
+		data["npcLootOverride"] = npcLootOverride
 	
 	data["bodyparts"] = {}
 	for slot in bodyparts:
@@ -380,6 +407,8 @@ func loadData(data):
 		npcMimicArtworkID = SAVE.loadVar(data, "npcMimicArtworkID", "")
 	if(data.has("datapackID")):
 		datapackID = SAVE.loadVar(data, "datapackID", "")
+	if(data.has("npcLootOverride")):
+		npcLootOverride = SAVE.loadVar(data, "npcLootOverride", {})
 		
 	if(!data.has("pickedSkin")):
 		applyRandomSkinAndColorsAndParts()
@@ -566,6 +595,14 @@ func loadFromDatapackCharacter(_datapack:Datapack, _datapackChar:DatapackCharact
 				if(foundData != null):
 					for dataID in foundData:
 						newItem.applyDatapackEditVar(dataID, foundData[dataID])
+
+	npcLootOverride = {
+		baseTableID = _datapackChar.lootTableID,
+		creditsDropChance = _datapackChar.lootCreditsChance,
+		creditsMin = _datapackChar.lootCreditsMin,
+		creditsMax = _datapackChar.lootCreditsMax,
+		customLoot = _datapackChar.lootExtra.duplicate(),
+	}
 
 	updateNonBattleEffects()
 	stamina = getMaxStamina()

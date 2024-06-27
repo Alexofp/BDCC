@@ -41,6 +41,7 @@ var lustActions: Dictionary = {}
 var defaultLustActions: Array = []
 var orgasmLustActions: Array = []
 var lootTables: Dictionary = {}
+var lootTablesClasses: Dictionary = {}
 var lootLists: Dictionary = {}
 var lootListsByCharacter: Dictionary = {}
 var lootListsByBattle: Dictionary = {}
@@ -1611,6 +1612,7 @@ func registerLootTable(path: String):
 	var object = loadedClass.new()
 	
 	lootTables[object.id] = object
+	lootTablesClasses[object.id] = loadedClass
 
 func registerLootTableFolder(folder: String):
 	var scripts = getScriptsInFolder(folder)
@@ -1620,6 +1622,13 @@ func registerLootTableFolder(folder: String):
 func getLootTable(id: String):
 	if(lootTables.has(id)):
 		return lootTables[id]
+	else:
+		Log.printerr("ERROR: loot table with the id "+id+" wasn't found")
+		return null
+
+func createLootTable(id: String):
+	if(lootTablesClasses.has(id)):
+		return lootTablesClasses[id].new()
 	else:
 		Log.printerr("ERROR: loot table with the id "+id+" wasn't found")
 		return null

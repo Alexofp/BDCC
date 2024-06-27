@@ -108,26 +108,26 @@ func updateSettings():
 		if(data["data"].has(attribID)):
 			theValue = data["data"][attribID]
 		
-		if(attribData.has("selector") && attribData["selector"]):
-			var newSelectorVar = selectorVarUIScene.instance()
-			settings_list.add_child(newSelectorVar)
-			newSelectorVar.id = attribID
-			newSelectorVar.setData({
+		if(attribData.has("floatinput") && attribData["floatinput"]):
+			var newNumberVar = numberVarUIScene.instance()
+			settings_list.add_child(newNumberVar)
+			newNumberVar.id = attribID
+			newNumberVar.setData({
 				"value": theValue,
 				"name": attribData["textButton"],
-				"values": attribData["options"],
 			})
-			newSelectorVar.connect("onValueChange", self, "onBodypartSettingChange")
+			newNumberVar.connect("onValueChange", self, "onBodypartSettingChange")
 			continue
-		
-		var newNumberVar = numberVarUIScene.instance()
-		settings_list.add_child(newNumberVar)
-		newNumberVar.id = attribID
-		newNumberVar.setData({
+	
+		var newSelectorVar = selectorVarUIScene.instance()
+		settings_list.add_child(newSelectorVar)
+		newSelectorVar.id = attribID
+		newSelectorVar.setData({
 			"value": theValue,
 			"name": attribData["textButton"],
+			"values": attribData["options"],
 		})
-		newNumberVar.connect("onValueChange", self, "onBodypartSettingChange")
+		newSelectorVar.connect("onValueChange", self, "onBodypartSettingChange")
 
 func onBodypartSettingChange(settingID, value):
 	data["data"][settingID] = value
