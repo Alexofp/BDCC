@@ -169,3 +169,27 @@ func getDolls():
 
 func getChainPoint(_pointID):
 	return null
+
+func getCumIntensity(theDoll:Doll3D):
+	var whoID = theDoll.savedCharacterID
+	var character
+	if(whoID is String):
+		character = GlobalRegistry.getCharacter(whoID)
+	else:
+		character = whoID
+
+	if(character != null && is_instance_valid(character) && (character is BaseCharacter)):
+		if(character.hasPenis()):
+			var penis = character.getBodypart(BodypartSlot.Penis)
+			var cumAmount = penis.getFluidProduction().getCapacity()
+			
+			var intensity = sqrt(cumAmount) / 20.0
+			return intensity
+	return 0.0
+
+func startCumInside(bottomDoll:Doll3D, topDoll:Doll3D, howOften:float = 2.5):
+	startCumInsideSolo(bottomDoll, getCumIntensity(topDoll), howOften)
+
+func startCumInsideSolo(bottomDoll:Doll3D, intensity:float = 1.0, howOften:float = 2.5):
+	if(intensity > 0.0):
+		bottomDoll.startCumInside(intensity, howOften)

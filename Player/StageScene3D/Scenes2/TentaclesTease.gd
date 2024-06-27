@@ -47,6 +47,11 @@ func playAnimation(animID, _args = {}):
 	else:
 		tentacles.setLatex()
 	
+	if(_args.has("cum") && _args["cum"] && !(animID in ["tease"])):
+		startCumInsideSolo(doll, 1.0)
+		#startCumInside(doll2, doll)
+		#startCumInside(doll, doll3)
+	
 	var state_machine = animationTree["parameters/StateMachine/playback"]
 	var state_machine2 = animationTree2["parameters/StateMachine/playback"]
 

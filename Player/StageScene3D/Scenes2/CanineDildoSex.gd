@@ -69,6 +69,9 @@ func playAnimation(animID, _args = {}):
 		yield(get_tree(), "idle_frame")
 		yield(get_tree(), "idle_frame")
 		#return
+	
+	if(_args.has("cum") && _args["cum"] && !(animID in ["tease"])):
+		startCumInsideSolo(doll, 1.0, 2.0)
 
 	if(animID == "tease"):
 		state_machine.travel("CanineDildoRideTease_1-loop")

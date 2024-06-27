@@ -21,6 +21,7 @@ var pussyLeaking = false
 var anusLeaking = false
 var cumAmount = 0
 var cumColor = Color.white
+var cummedInside = 0.0
 
 var temporaryRiggedParts = {}
 
@@ -44,6 +45,8 @@ var dollAttachmentZoneScene = preload("res://Player/Player3D/Parts/DollAttachmen
 onready var nipplesParticles = $BoneAttachments/NipplesBoneAttachment/NipplesParticles
 onready var pussyParticles = $BoneAttachments/VaginaBoneAttachment/PussyParticles
 onready var anusParticles = $BoneAttachments/VaginaBoneAttachment/AnusParticles
+onready var pussy_cum_inside_particles = $BoneAttachments/VaginaBoneAttachment/PussyCumInsideParticles
+
 onready var breastsJiggleBone = $DollSkeleton/BreastsJiggleBone
 onready var bellyJiggleBone = $DollSkeleton/BellyJiggleBone
 onready var buttJiggleBone = $DollSkeleton/ButtJiggleBone
@@ -290,6 +293,7 @@ func loadCharacter(charID):
 		var _ok = ch.connect("bodypart_changed", self, "onCharacterBodypartChanged")
 		
 func prepareCharacter(charID):
+	stopCumInside()
 	clearTemporaryState()
 	loadCharacter(charID)
 	clearOverrideAlpha()
@@ -580,6 +584,26 @@ func setPussyLeaking(newPussyLeaking):
 
 func setAnusLeaking(newAnusLeaking):
 	anusLeaking = newAnusLeaking
+
+var oldCumPartAmount = -1
+func startCumInside(intensity:float, howoften:float = 3.0):
+	#intensity = 1.0
+	#print(intensity)
+	cummedInside = intensity
+	var newAmount = Util.maxi(5, int(intensity * 10.0))
+	if(newAmount != oldCumPartAmount):
+		oldCumPartAmount = newAmount
+		pussy_cum_inside_particles.amount = newAmount
+	pussy_cum_inside_particles.scale_amount = clamp(0.5 + intensity / 2.0, 0.5, 2.5)
+	pussy_cum_inside_particles.lifetime = howoften
+	pussy_cum_inside_particles.tangential_accel = clamp(intensity / 4.0, 0.0, 1.5)
+	pussy_cum_inside_particles.initial_velocity = clamp(intensity*1.1, 0.5, 3.0)
+	if(!pussy_cum_inside_particles.emitting):
+		pussy_cum_inside_particles.emitting = true
+
+func stopCumInside():
+	cummedInside = 0.0
+	pussy_cum_inside_particles.emitting = false
 
 func setCumAmount(theisOnCum):
 	cumAmount = theisOnCum

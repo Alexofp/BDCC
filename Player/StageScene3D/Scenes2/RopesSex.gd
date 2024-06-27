@@ -71,6 +71,9 @@ func playAnimation(animID, _args = {}):
 	var state_machine2 = animationTree2["parameters/StateMachine/playback"]
 
 	doll.setTemporaryState("ropeharness", "hanged")
+	
+	if(_args.has("cum") && _args["cum"]):
+		startCumInside(doll, doll2)
 
 	if(animID == "tease"):
 		state_machine.travel("RopesSexTease_1-loop")

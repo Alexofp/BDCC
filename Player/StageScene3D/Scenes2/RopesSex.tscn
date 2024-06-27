@@ -87,7 +87,7 @@ start_node = "RopesSexTease_1-loop"
 graph_offset = Vector2( -34.5618, -0.458473 )
 
 [sub_resource type="AnimationNodeBlendTree" id=592]
-graph_offset = Vector2( -348.69, 38.9555 )
+graph_offset = Vector2( -201, 54 )
 nodes/Animation/node = SubResource( 446 )
 nodes/Animation/position = Vector2( 140, 280 )
 nodes/CuffsBlend/node = SubResource( 447 )
@@ -95,7 +95,7 @@ nodes/CuffsBlend/position = Vector2( 440, 160 )
 nodes/StateMachine/node = SubResource( 591 )
 nodes/StateMachine/position = Vector2( 160, 100 )
 nodes/output/position = Vector2( 680, 180 )
-node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=460]
 
@@ -178,7 +178,7 @@ nodes/CuffsBlend/position = Vector2( 440, 160 )
 nodes/StateMachine/node = SubResource( 611 )
 nodes/StateMachine/position = Vector2( 201.468, 132.684 )
 nodes/output/position = Vector2( 680, 180 )
-node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=473]
 
