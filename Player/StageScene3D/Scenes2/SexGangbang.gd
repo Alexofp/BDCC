@@ -91,9 +91,11 @@ func playAnimation(animID, _args = {}):
 	var state_machine3 = animationTree3["parameters/StateMachine/playback"]
 	var state_machine4 = animationTree4["parameters/StateMachine/playback"]
 
-	if(_args.has("cum") && _args["cum"] && !(animID in ["tease"])):
+	if(_args.has("npcCum") && _args["npcCum"] && !(animID in ["tease"])):
 		startCumInsideSolo(doll, getCumIntensity(doll2) + getCumIntensity(doll3))
 		#startCumInside(doll, doll2)
+	if(_args.has("pcCum") && _args["pcCum"]):
+		startCumPenis(doll)
 
 	if(animID != "tease"):
 		doll4.clampPenisScale(0.95, 1.1)

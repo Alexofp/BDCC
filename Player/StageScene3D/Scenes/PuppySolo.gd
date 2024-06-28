@@ -33,7 +33,8 @@ func playAnimation(animID, _args = {}):
 	else:
 		doll.applyBodyState({})
 	
-
+	if(_args.has("pcCum") && _args["pcCum"]):
+		startCumPenis(doll)
 	#updateSubAnims()
 	
 	var state_machine = animationTree["parameters/StateMachine/playback"]

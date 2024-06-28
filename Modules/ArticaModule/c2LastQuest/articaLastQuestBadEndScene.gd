@@ -340,9 +340,9 @@ func _run():
 		addButton("Continue", "See what happens next", "artica_gets_fucked")
 	if(state == "artica_gets_fucked"):
 		if (isCaged):
-			playAnimation(StageScene.BDSMMachineFuck, "sexdouble", {pc="artica", bodyState={naked=true, hard=true,chains=[["hose", "breastpump", "scene", "milkIntake"]]}})
+			playAnimation(StageScene.BDSMMachineFuck, "sexdouble", {pc="artica", pcCum=true, bodyState={naked=true, hard=true,chains=[["hose", "breastpump", "scene", "milkIntake"]]}})
 		else:
-			playAnimation(StageScene.BDSMMachineFuck, "sexdouble", {pc="artica", bodyState={naked=true, hard=true,chains=[["hose", "penisPump", "scene", "milkIntake"],["hose", "breastpump", "scene", "milkIntake"]]}})
+			playAnimation(StageScene.BDSMMachineFuck, "sexdouble", {pc="artica", pcCum=true, bodyState={naked=true, hard=true,chains=[["hose", "penisPump", "scene", "milkIntake"],["hose", "breastpump", "scene", "milkIntake"]]}})
 		saynn("Doctor grabs some breast pumps and puts them on Artica.. After switching them on, they quickly start sucking on her tits"+str(" and drawing breast milk out while stimulating the swollen nips" if getCharacter("artica").canBeMilked() else ", trying to draw any milk while stimulating the nips")+"..")
 
 		if (!isCaged):
@@ -396,9 +396,9 @@ func _run():
 		addButton("Continue", "See what happens next", "artica_gets_fucked_faster")
 	if(state == "artica_gets_fucked_faster"):
 		if (isCaged):
-			playAnimation(StageScene.BDSMMachineFuck, "fastdouble", {pc="artica", bodyState={naked=true, hard=true,chains=[["hose", "breastpump", "scene", "milkIntake"]]}})
+			playAnimation(StageScene.BDSMMachineFuck, "fastdouble", {pc="artica", pcCum=true, bodyState={naked=true, hard=true,chains=[["hose", "breastpump", "scene", "milkIntake"]]}})
 		else:
-			playAnimation(StageScene.BDSMMachineFuck, "fastdouble", {pc="artica", bodyState={naked=true, hard=true,chains=[["hose", "penisPump", "scene", "milkIntake"],["hose", "breastpump", "scene", "milkIntake"]]}})
+			playAnimation(StageScene.BDSMMachineFuck, "fastdouble", {pc="artica", pcCum=true, bodyState={naked=true, hard=true,chains=[["hose", "penisPump", "scene", "milkIntake"],["hose", "breastpump", "scene", "milkIntake"]]}})
 		saynn("Doctor presses a button.. that speeds up the pace of the tools even more, to their maximum. By now they have multiple strings of pussy juices hanging from them.. as they keep forcing their way inside, hammering away at Artica's buttons.. and making her cum again and again..")
 
 		saynn("[say=artica]Ahh..Ah..ahh..ahhh-..ah..[/say]")
@@ -425,9 +425,9 @@ func _run():
 		addButton("Nah", "You'd rather her keep her current bits", "do_not_increase_artica")
 	if(state == "do_not_increase_artica"):
 		if (isCaged):
-			playAnimation(StageScene.BDSMMachineFuck, "fastdouble", {pc="artica", bodyState={naked=true, hard=true,chains=[["hose", "breastpump", "scene", "milkIntake"]]}})
+			playAnimation(StageScene.BDSMMachineFuck, "fastdouble", {pc="artica", pcCum=true, bodyState={naked=true, hard=true,chains=[["hose", "breastpump", "scene", "milkIntake"]]}})
 		else:
-			playAnimation(StageScene.BDSMMachineFuck, "fastdouble", {pc="artica", bodyState={naked=true, hard=true,chains=[["hose", "penisPump", "scene", "milkIntake"],["hose", "breastpump", "scene", "milkIntake"]]}})
+			playAnimation(StageScene.BDSMMachineFuck, "fastdouble", {pc="artica", pcCum=true, bodyState={naked=true, hard=true,chains=[["hose", "penisPump", "scene", "milkIntake"],["hose", "breastpump", "scene", "milkIntake"]]}})
 		saynn("You decide against it.")
 
 		saynn("[say=pc]She is good as is. No need to test weird drugs on her.[/say]")
@@ -467,9 +467,9 @@ func _run():
 		addButton("Continue", "See what happens next", "artica_gets_brainwashed_end")
 	if(state == "do_increase_artica"):
 		if (isCaged):
-			playAnimation(StageScene.BDSMMachineFuck, "fastdouble", {pc="artica", bodyState={naked=true, hard=true,chains=[["hose", "breastpump", "scene", "milkIntake"]]}})
+			playAnimation(StageScene.BDSMMachineFuck, "fastdouble", {pc="artica", pcCum=true, bodyState={naked=true, hard=true,chains=[["hose", "breastpump", "scene", "milkIntake"]]}})
 		else:
-			playAnimation(StageScene.BDSMMachineFuck, "fastdouble", {pc="artica", bodyState={naked=true, hard=true,chains=[["hose", "penisPump", "scene", "milkIntake"],["hose", "breastpump", "scene", "milkIntake"]]}})
+			playAnimation(StageScene.BDSMMachineFuck, "fastdouble", {pc="artica", pcCum=true, bodyState={naked=true, hard=true,chains=[["hose", "penisPump", "scene", "milkIntake"],["hose", "breastpump", "scene", "milkIntake"]]}})
 		saynn("Why not..")
 
 		saynn("[say=pc]Sure. Might as well make her look like a slut.[/say]")

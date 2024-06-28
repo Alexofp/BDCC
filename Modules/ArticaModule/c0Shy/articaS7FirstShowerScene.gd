@@ -197,7 +197,7 @@ func _run():
 		addButton("Watch more", "See what happens next", "artica_cums_in_shower")
 		addButton("Lockers", "Return back to the lockers", "return_to_lockers")
 	if(state == "artica_cums_in_shower"):
-		playAnimation(StageScene.Grope, "watchstroke", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.Grope, "watchstroke", {pc="artica", npc="pc", pcCum=true, bodyState={naked=true, hard=true}})
 		saynn("The more she sniffs her own paw, the more her {artica.penis} pulses, precum drips off of the tip.")
 
 		saynn("[say=artica]This s-shouldn't t-turn me on so much-h.. ah..[/say]")

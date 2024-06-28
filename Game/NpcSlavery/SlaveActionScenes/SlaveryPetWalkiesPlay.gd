@@ -175,6 +175,7 @@ func _run():
 		addButton("Continue", "See what happens next", "endthescene")
 	
 	if(state == "feetplay_allowcum"):
+		playAnimation(StageScene.PuppyFeetCrotch, "crotch", {pc="pc", npc=npcID, npcCum=true, npcBodyState={naked=true, hard=true}}) 
 		if (npc.isWearingChastityCage()):
 			saynn("You keep rubbing and caressing your pet's chastity cage and {npc.his} balls.. until the member inside suddenly starts throbbing and shooting {npc.cum} past the little hole in the cage, all of it landing on {npc.his} belly.")
 
@@ -234,7 +235,7 @@ func _run():
 		addButton("Cum inside", "Breed the puppy", "fuck_vag_cuminside")
 		addButton("Pull out", "Cum all over their ass instead", "fuck_vag_pullout")
 	if(state == "fuck_vag_cuminside"):
-		playAnimation(StageScene.PuppySexAllFours, "inside", {pc="pc", npc=npcID, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.PuppySexAllFours, "inside", {pc="pc", npc=npcID, pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("You let the orgasm take over, shoving your cock deep inside that puppy until the tip kisses {npc.his} cervix. Grunts leave your mouth as you paint {npc.his} insides and stuff {npc.his} womb full of your thick {pc.cum}, pumping more and more of it in with each throb.")
 
 		saynn("All the while your pet is shivering as much as the restraints allow, {npc.his} pussy milking your member dry during {npc.his} own climax.")
@@ -247,7 +248,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "fuck_vag_pullout"):
-		playAnimation(StageScene.PuppySexAllFours, "tease", {pc="pc", npc=npcID, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.PuppySexAllFours, "tease", {pc="pc", npc=npcID, pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("You decide against breeding your pet and pull over as soon as you feel the point of no return. Grunts leave your mouth as you paint your pet's back with your thick {pc.cum}, leaving a bigger and bigger lewd mess with each throb.")
 
 		saynn("All the while your pet is shivering as much as the restraints allow, {npc.his} drippy pussy visibly pulsing and twitching during {npc.his} own climax.")
@@ -286,7 +287,7 @@ func _run():
 		addButton("Cum inside", "Breed the puppy", "fuck_ass_cuminside")
 		addButton("Pull out", "Cum all over their ass instead", "fuck_ass_pullout")
 	if(state == "fuck_ass_cuminside"):
-		playAnimation(StageScene.PuppySexAllFours, "inside", {pc="pc", npc=npcID, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.PuppySexAllFours, "inside", {pc="pc", npc=npcID, pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("You let the orgasm take over, shoving your cock deep inside that puppy until the tip reaches {npc.his} guts. Grunts leave your mouth as you paint {npc.his} insides and stuff {npc.him} full of your thick {pc.cum}, pumping more and more of it in with each throb.")
 
 		saynn("All the while your pet is shivering as much as the restraints allow, {npc.his} tailhole milking your member dry during {npc.his} own climax.")
@@ -299,7 +300,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "fuck_ass_pullout"):
-		playAnimation(StageScene.PuppySexAllFours, "tease", {pc="pc", npc=npcID, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.PuppySexAllFours, "tease", {pc="pc", npc=npcID, pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("You decide against breeding your pet and pull over as soon as you feel the point of no return. Grunts leave your mouth as you paint your pet's back with your thick {pc.cum}, leaving a bigger and bigger lewd mess with each throb.")
 
 		saynn("All the while your pet is shivering as much as the restraints allow, {npc.his} need tailhole visibly pulsing and twitching during {npc.his} own climax.")
@@ -355,7 +356,7 @@ func _run():
 		addButton("Make them cum", "Make your puppy orgasm", "fuck_strapon_cuminside")
 		addButton("Pull out", "Deny your puppy", "fuck_strapon_pullout")
 	if(state == "fuck_strapon_cuminside"):
-		playAnimation(StageScene.PuppySexAllFours, "inside", {pc="pc", npc=npcID, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.PuppySexAllFours, "inside", {pc="pc", npc=npcID, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("You let the puppy cum, shoving your strapon deep inside {npc.him} until the rubber tip kisses {npc.his} cervix. You grope your pet's ass while {npc.he} {npc.isAre} shivering and squirming under you, {npc.his} pussy trying to milk the strapon during the climax.")
 
 		saynn("[say=pc]Was that fun?[/say]")
@@ -366,7 +367,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "fuck_strapon_pullout"):
-		playAnimation(StageScene.PuppySexAllFours, "tease", {pc="pc", npc=npcID, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.PuppySexAllFours, "tease", {pc="pc", npc=npcID, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("You decide to be a little mean and deny your pet, pulling the strapon out just when you feel {npc.him} approaching the climax. Instantly, you can hear whining, your pet is shivering as much as the restraints allow, {npc.his} drippy pussy left neglected.")
 
 		saynn("[say=pc]Was that fun?[/say]")

@@ -30,6 +30,9 @@ func playAnimation(animID, _args = {}):
 	
 	#updateSubAnims()
 	
+	if(_args.has("pcCum") && _args["pcCum"]):
+		startCumPenis(doll)
+	
 	var state_machine = animationTree["parameters/AnimationNodeStateMachine/playback"]
 	if(animID == "idle"):
 		state_machine.travel("UrinalIdle-loop")

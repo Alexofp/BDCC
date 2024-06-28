@@ -273,7 +273,7 @@ func _run():
 
 		addButton("Continue", "See the fate of that dildo..", "second_cums")
 	if(state == "second_cums"):
-		playAnimation(StageScene.CanineDildoSex, "inside", {pc=npcID, bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.CanineDildoSex, "inside", {pc=npcID, pcCum=true, bodyState={naked=true, hard=true}})
 		var npcHasPussy = getCharacter(npcID).hasReachableVagina()
 		var npcHasPenis = getCharacter(npcID).hasReachablePenis()
 		var npcHasProstate = (npcHasPenis && !npcHasPussy)
@@ -342,7 +342,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "artica_fails_to_take_the_knot")
 	if(state == "artica_fails_to_take_the_knot"):
-		playAnimation(StageScene.CanineDildoSex, "inside", {pc="artica", bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.CanineDildoSex, "inside", {pc="artica", pcCum=true, bodyState={naked=true, hard=true}})
 		saynn("With one final incredible push, she breaks through the mental barrier, bringing herself down with all her strength.. so hard that the orgasm overwhelms her soon after. Her pussy clenches hard around the dildo, squirting juices onto it, her "+str("caged cock shooting cum wildly, sending thick ropes of seed to splatter all over the floor" if isCaged else "hard cock shooting cum wildly, sending thick ropes of seed to splatter all over the floor")+".. She trembles uncontrollably, the organic waves mixing with a deep sense of.. disappointment..")
 
 		saynn("[say=artica]NHHhh.. AHh-h..ah..[/say]")
@@ -434,7 +434,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "artica_knots_dildo_yay")
 	if(state == "artica_knots_dildo_yay"):
-		playAnimation(StageScene.CanineDildoSex, "knotinside", {pc="artica", bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.CanineDildoSex, "knotinside", {pc="artica", pcCum=true, bodyState={naked=true, hard=true}})
 		saynn("The pressure built to an almost unbearable peak, Artica's pussy clenching tightly around the thick shaft. But then, suddenly, after one of the big thrusts, the fluff feels the knot slip inside her with a wet, satisfying pop..")
 
 		saynn("[say=artica]AHHHhhh..!..[/say]")
@@ -557,7 +557,7 @@ func _run():
 
 		addButton("Harder", "Ride the toy harder", "pc_ride_faster")
 	if(state == "pc_ride_faster"):
-		playAnimation(StageScene.CanineDildoSex, "fast", {pc="pc", bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.CanineDildoSex, "fast", {pc="pc", pcCum=true, bodyState={naked=true, hard=true}})
 		saynn("You need to win.. you must win.. so you ride that toy harder and faster, bringing yourself onto that knot with powerful thrusts, purposefully trying to stretch your "+str("pussy" if GM.pc.hasReachableVagina() else "ass")+".")
 
 		saynn("Your moans fill the air, your inner walls gripping the dildo tightly. One forceful thrust after another.. the knot begins to slip inside you, inch by inch.. But the way it stimulates your every nerve.. makes you close already."+str(" Your cock is ready to burst at any second.." if GM.pc.hasPenis() else "")+"")
@@ -586,7 +586,7 @@ func _run():
 
 		addButton("Harder", "Ride the toy even harder!", "pc_accidently_knots_toy")
 	if(state == "pc_accidently_knots_toy"):
-		playAnimation(StageScene.CanineDildoSex, "knotinside", {pc="pc", bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.CanineDildoSex, "knotinside", {pc="pc", pcCum=true, bodyState={naked=true, hard=true}})
 		saynn("Suddenly, one of the thrusts causes your "+str("pussy" if GM.pc.hasReachableVagina() else "anal ring")+" to stretch just enough..")
 
 		saynn("The fat knot of that huge dildo slips inside a wet pop, filling you completely!")
@@ -682,7 +682,7 @@ func _run():
 
 		addButton("Faster!", "More! More!", "pc_knotfuck_fast")
 	if(state == "pc_knotfuck_fast"):
-		playAnimation(StageScene.CanineDildoSex, "knotfast", {pc="pc", bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.CanineDildoSex, "knotfast", {pc="pc", pcCum=true, bodyState={naked=true, hard=true}})
 		saynn("Artica watches, mesmerized, her real cock throbbing with need as she can't look away from you..")
 
 		saynn("Even during multiple orgasms, you keep going, pushing yourself further, testing your stamina. The knot pops in and out, keeping your "+str("pussy" if GM.pc.hasReachableVagina() else "tailhole")+" gaping loose, your body a quivering mess, slutty noises escaping you.")

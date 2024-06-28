@@ -98,7 +98,7 @@ func _run():
 
 		addButton("Cum inside", "Breed the fluff", "do_cum_inside")
 	if(state == "do_cum_inside"):
-		playAnimation(StageScene.SexMissionary, "inside", {pc="pc", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexMissionary, "inside", {pc="pc", npc="artica", pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
 		var pcHasKnot = GM.pc.bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)
 		saynn("Finally, you ram your cock deep inside,"+str(" knotting her pussy and" if pcHasKnot else "")+" breaking into her womb.")
 

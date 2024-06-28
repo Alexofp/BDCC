@@ -812,6 +812,8 @@ func _run():
 		addButton("Enough", "That was fun", "enough_talk")
 		addButton("Keep at it", "See what happens", "ask_paws_cum")
 	if(state == "ask_paws_cum"):
+		playAnimation(StageScene.PawJobUnderTable, "fast", {npc="pc", pc="artica", pcCum=true})
+		
 		saynn("Whatever it is that's in her pants.. it's grown to its full size, putting so much pressure onto the cloth that you begin to see some cyan through it. The girl is dripping eagerly, that bump that you are teasing is now throbbing softly.. while the fluff is actively squirming on that bench.")
 
 		saynn("[say=artica]I'm.. ah..ah-h.. I'm g-gon.. p-please.. oh g-god.. ah..[/say]")
@@ -1341,7 +1343,7 @@ func _run():
 
 		addButton("Get knotted", "Force it in", "rough_get_bred_ride_cum")
 	if(state == "rough_get_bred_ride_cum"):
-		playAnimation(StageScene.SexCowgirlChoke, "inside", {pc="artica", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexCowgirlChoke, "inside", {pc="artica", npc="pc", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("Artica's eyes are rolling up, her tongue is out and drooling as you keep trying to fit that swell knot inside your {pc.vaginaStretch} pussy. You keep bouncing on it.. making that orb stretch your folds more and more.. until it suddenly slips inside!")
 
 		saynn("Fuck, your legs are shaking as you feel Artica's full member inside you, it's tip has broken into your womb.")
@@ -1439,7 +1441,7 @@ func _run():
 		else:
 			addButton("Cum inside", "Breed the fluff", "rough_breed_breed")
 	if(state == "rough_breed_breed"):
-		playAnimation(StageScene.Choking, "inside", {pc="pc", npc="artica", bodyState={exposedCrotch=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.Choking, "inside", {pc="pc", npc="artica", pcCum=true, npcCum=true, bodyState={exposedCrotch=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		var pcHasKnot = GM.pc.bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)
 		if (pcHasKnot):
 			saynn("With a final, relentless thrust, your fat orb slips past Artica's tight pussy entrance, stretching her out to an extreme level and tying her to your cock.")

@@ -37,6 +37,9 @@ func playAnimation(animID, _args = {}):
 	
 	updateSubAnims()
 	
+	if(_args.has("pcCum") && _args["pcCum"]):
+		startCumPenis(doll)
+	
 	if(animID == "custom"):
 		animationTree.active = false
 		

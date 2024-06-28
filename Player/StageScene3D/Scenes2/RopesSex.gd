@@ -72,8 +72,13 @@ func playAnimation(animID, _args = {}):
 
 	doll.setTemporaryState("ropeharness", "hanged")
 	
-	if(_args.has("cum") && _args["cum"] && !(animID in ["tease"])):
-		startCumInside(doll, doll2)
+	if(_args.has("npcCum") && _args["npcCum"]):
+		if(!(animID in ["tease"])):
+			startCumInside(doll, doll2)
+		else:
+			startCumPenis(doll2)
+	if(_args.has("pcCum") && _args["pcCum"]):
+		startCumPenis(doll)
 
 	if(animID == "tease"):
 		state_machine.travel("RopesSexTease_1-loop")

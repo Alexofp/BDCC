@@ -218,7 +218,7 @@ func _run():
 
 		addButton("Cum", "Time to cum..", "ride_strapon_cum")
 	if(state == "ride_strapon_cum"):
-		playAnimation(StageScene.SexCowgirlAlt, "inside", {npc="pc", pc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexCowgirlAlt, "inside", {npc="pc", pc="artica", pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("With each motion, Artica feels her arousal building more and more.. Until she just can't take it anymore.")
 
 		saynn("[say=artica]Ahhhh-h-h!.. ahh-h..ah.h.ah.a.. g-godds..[/say]")
@@ -346,7 +346,7 @@ func _run():
 
 		addButton("Get knotted", "Force it in!", "ride_pussy_cum")
 	if(state == "ride_pussy_cum"):
-		playAnimation(StageScene.SexCowgirlAlt, "inside", {npc="pc", pc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexCowgirlAlt, "inside", {npc="pc", pc="artica", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("Artica's big blue orb is struggling to fit inside no matter how hard you ride her..")
 
 		saynn("[say=artica]I'm.. g-ggonnaa-aah.hh-hnyaaa-hh!..[/say]")
@@ -435,7 +435,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene_getbackstrapon")
 	if(state == "pussy_knot_fucking"):
-		playAnimation(StageScene.SexCowgirlChoke, "fast", {npc="pc", pc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexCowgirlChoke, "fast", {npc="pc", pc="artica", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("Even with her full length inside you.. you're still hungry for more..")
 
 		saynn("[say=pc]Hold on, fucktoy.. It's gonna be a rough ride..[/say]")

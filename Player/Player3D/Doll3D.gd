@@ -294,6 +294,7 @@ func loadCharacter(charID):
 		
 func prepareCharacter(charID):
 	stopCumInside()
+	stopCumPenis()
 	clearTemporaryState()
 	loadCharacter(charID)
 	clearOverrideAlpha()
@@ -585,19 +586,60 @@ func setPussyLeaking(newPussyLeaking):
 func setAnusLeaking(newAnusLeaking):
 	anusLeaking = newAnusLeaking
 
-var oldCumPartAmount = -1
+func setupCumParticles(particlesNode:CPUParticles, intensity:float, howoften:float = 3.0, velocityMod:float = 1.0, velocityRandom:float = 1.0):
+	howoften *= 2.0
+	var newAmount = Util.maxi(5, int(intensity * 10.0))
+	if(newAmount != particlesNode.amount):
+		particlesNode.amount = newAmount
+	particlesNode.scale_amount = clamp(0.5 + intensity / 2.0, 0.5, 2.5)
+	particlesNode.lifetime = howoften
+	particlesNode.tangential_accel = clamp(intensity / 4.0, 0.0, 1.5)
+	particlesNode.initial_velocity = clamp(intensity*1.1*velocityMod, 0.5, 3.0*velocityMod)
+	particlesNode.initial_velocity_random = velocityRandom
+	particlesNode.explosiveness = clamp(0.5 + howoften / 20.0, 0.0, 0.8)
+	particlesNode.preprocess = howoften - RNG.randf_range(0.0, 1.0)
+	particlesNode.speed_scale = 2.0
+
+onready var penis_cum_particles = $BoneAttachments/PenisTipAttachment/PenisCumParticles
+onready var chastity_cum_particles = $BoneAttachments/PenisBoneAttachment/ChastityCumParticles
+onready var penis_cum_particles_2 = $BoneAttachments/PenisTipAttachment/PenisCumParticles2
+
+func startCumPenis(intensity:float, howoften:float = 3.0, isChastity=false):
+	if(isChastity):
+		chastity_cum_particles.scale = Vector3(1.0/rememberedPenisScale, 1.0/rememberedPenisScale, 1.0/rememberedPenisScale)
+		setupCumParticles(chastity_cum_particles, intensity, howoften, 3.0, 0.3)
+		chastity_cum_particles.emitting = true
+	else:
+		penis_cum_particles.scale = Vector3(1.0/rememberedPenisScale, 1.0/rememberedPenisScale, 1.0/rememberedPenisScale)
+		setupCumParticles(penis_cum_particles, intensity, howoften, 3.0, 0.1)
+		setupCumParticles(penis_cum_particles_2, intensity*0.3, howoften * 1.7, 7.0, 0.2)
+		penis_cum_particles.emitting = true
+		penis_cum_particles_2.emitting = true
+
+func stopCumPenis():
+	chastity_cum_particles.emitting = false
+	penis_cum_particles.emitting = false
+	penis_cum_particles_2.emitting = false
+
+func setupCumParticlesInside(particlesNode:CPUParticles, intensity:float, howoften:float = 3.0, velocityMod:float = 1.0, velocityRandom:float = 1.0):
+	howoften *= 1.0
+	var newAmount = Util.maxi(5, int(intensity * 10.0))
+	if(newAmount != particlesNode.amount):
+		particlesNode.amount = newAmount
+	particlesNode.scale_amount = clamp(0.5 + intensity / 2.0, 0.5, 2.5)
+	particlesNode.lifetime = howoften
+	particlesNode.tangential_accel = clamp(intensity / 4.0, 0.0, 1.5)
+	particlesNode.initial_velocity = clamp(intensity*1.1*velocityMod, 0.5, 3.0*velocityMod)
+	particlesNode.initial_velocity_random = velocityRandom
+	particlesNode.explosiveness = clamp(0.4 + howoften / 20.0, 0.0, 0.8)
+	particlesNode.preprocess = howoften - RNG.randf_range(0.0, 0.3)
+	particlesNode.speed_scale = 1.0
+
 func startCumInside(intensity:float, howoften:float = 3.0):
 	#intensity = 1.0
 	#print(intensity)
 	cummedInside = intensity
-	var newAmount = Util.maxi(5, int(intensity * 10.0))
-	if(newAmount != oldCumPartAmount):
-		oldCumPartAmount = newAmount
-		pussy_cum_inside_particles.amount = newAmount
-	pussy_cum_inside_particles.scale_amount = clamp(0.5 + intensity / 2.0, 0.5, 2.5)
-	pussy_cum_inside_particles.lifetime = howoften
-	pussy_cum_inside_particles.tangential_accel = clamp(intensity / 4.0, 0.0, 1.5)
-	pussy_cum_inside_particles.initial_velocity = clamp(intensity*1.1, 0.5, 3.0)
+	setupCumParticlesInside(pussy_cum_inside_particles, intensity, howoften)
 	if(!pussy_cum_inside_particles.emitting):
 		pussy_cum_inside_particles.emitting = true
 

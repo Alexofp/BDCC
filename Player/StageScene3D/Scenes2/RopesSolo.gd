@@ -61,6 +61,9 @@ func playAnimation(animID, _args = {}):
 	else:
 		doll.applyBodyState({})
 	
+	if(_args.has("pcCum") && _args["pcCum"]):
+		startCumPenis(doll)
+	
 	#if(_args.has("npcBodyState")):
 	#	doll2.applyBodyState(_args["npcBodyState"])
 	#else:

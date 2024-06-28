@@ -113,7 +113,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "artica_knots_herself")
 	if(state == "artica_knots_herself"):
-		playAnimation(StageScene.CanineDildoSex, "knotinside", {pc="artica", bodyState={naked=true,hard=true}})
+		playAnimation(StageScene.CanineDildoSex, "knotinside", {pc="artica", pcCum=true, cum=dildoHasSomething, bodyState={naked=true,hard=true}})
 		saynn("After a few hard pushes.. she felt the knot popping inside her, stretching her pussy to the limit.")
 
 		saynn("[say=artica]AH![/say]")
@@ -164,7 +164,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "artica_rides_even_faster_knot")
 	if(state == "artica_rides_even_faster_knot"):
-		playAnimation(StageScene.CanineDildoSex, "knotfast", {pc="artica", bodyState={naked=true,hard=true}})
+		playAnimation(StageScene.CanineDildoSex, "knotfast", {pc="artica", pcCum=true, bodyState={naked=true,hard=true}})
 		saynn("Artica is panting heavily, the strength required to overcome her own tightness is tiring her down.. but at the same time, her pussy is gradually getting used to being stuffed full.. again and again.. loosing up and allowing the fluff to keep going.")
 
 		saynn("Her movements become more frantic, her moans turning into desperate cries of pleasure. Soon, another orgasm hits her, making her body convulse hard, her sex clenching around the knot, her cock wasting the rest of her stored cum..")
@@ -175,7 +175,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "artica_after_knotknot")
 	if(state == "artica_after_knotknot"):
-		playAnimation(StageScene.CanineDildoSex, "knotinside", {pc="artica", bodyState={naked=true,hard=true}})
+		playAnimation(StageScene.CanineDildoSex, "knotinside", {pc="artica", pcCum=true, cum=dildoHasSomething, bodyState={naked=true,hard=true}})
 		saynn("Eventually, Artica does become too exhausted to continue.. With one final, powerful thrust, she forces the knot inside her.. and lets it stay there.")
 
 		saynn("[say=artica]Yes-s-s.. ah..[/say]")

@@ -117,7 +117,7 @@ func _run():
 
 		addButton("Cum inside", "Breed the eager fluff", "fuck_artica_cum")
 	if(state == "fuck_artica_cum"):
-		playAnimation(StageScene.SelfSuck, "fuckinside", {pc="artica", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SelfSuck, "fuckinside", {pc="artica", npc="pc", npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		var pcHasKnot = GM.pc.bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)
 		saynn("With a final, deep thrust, you ram your cock deep inside,"+str(" knotting that needy pussy," if pcHasKnot else " breaking into her womb,")+" before.. cumming inside. Your shaft is throbbing while pumping her"+str(" busy" if getCharacter("artica").isVisiblyPregnant() else "")+" babymaker full of your hot seed.")
 

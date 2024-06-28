@@ -138,7 +138,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "artica_noncon_cum")
 	if(state == "artica_noncon_cum"):
-		playAnimation(StageScene.TentaclesTease, "inside", {pc="artica", plant=true, bodyState={hard=true, naked=true}})
+		playAnimation(StageScene.TentaclesTease, "inside", {pc="artica", pcCum=true, plant=true, bodyState={hard=true, naked=true}})
 		saynn("Artica's heart is pounding in her as she is desperately trying to struggle free.. and yet.. the plant's hold was unyielding. It's like it had a mind of its own..")
 
 		saynn("A thick, slick tendril presses itself against her pussy, teasing the wet entrance.. before pushing inside, spreading the cyan folds wide in one rough thrust!")
@@ -209,7 +209,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "con_artica_cums")
 	if(state == "con_artica_cums"):
-		playAnimation(StageScene.TentaclesTease, "inside", {pc="artica", plant=true, bodyState={hard=true, naked=true}})
+		playAnimation(StageScene.TentaclesTease, "inside", {pc="artica", pcCum=true, plant=true, bodyState={hard=true, naked=true}})
 		saynn("One of the tendrils wraps around her waist before pulling her closer.. while another slides between her legs, finding and teasing her pussy and"+str(" caged cock" if isCaged else " cock")+" with its gentle caresses.")
 
 		saynn("[say=artica]E-easy.. ah..[/say]")

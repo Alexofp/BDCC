@@ -150,7 +150,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "artica_in_machine")
 	if(state == "artica_in_machine"):
-		playAnimation(StageScene.BDSMMachineFuck, "wand", {pc="artica", noDildos=true, bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.BDSMMachineFuck, "wand", {pc="artica", pcCum=true, noDildos=true, bodyState={naked=true, hard=true}})
 		saynn("The doctor finally manages to get the smart table operational. It carefully grabs Artica with its long manipulator arms and brings her over the table, two tube-like egg collectors get pressed against her wet holes..")
 
 		saynn("[say=eliza]Here![/say]")

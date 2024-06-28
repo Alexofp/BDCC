@@ -127,7 +127,7 @@ func _run():
 		
 	if(state == "sub_cleans_inside_pc"):
 		if(GM.pc.hasEffect(StatusEffect.HasCumInsideVagina)):
-			playAnimation(StageScene.SexOral, "lick", {pc="pc", npc=npcID, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+			playAnimation(StageScene.SexOral, "lick", {pc="pc", npc=npcID, pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 			
 			saynn("Your sub’s eyes sparkle when you order {npc.him} that you need your pussy clean too. Rather than doing it with {npc.his} hands, your submissive decides to get on {npc.his} knees before you. {npc.His} palms land on the inner sides of your thighs and gently push them aside, allowing {npc.him} to dig {npc.his} face into your messy pussy slit.")
 			

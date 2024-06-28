@@ -151,7 +151,7 @@ func _run():
 
 		addButton("Continue", "See if Artica's mind will endure this..", "artica_tentaclessex_fast")
 	if(state == "artica_tentaclessex_fast"):
-		playAnimation(StageScene.TentaclesSex, "fast", {pc="artica", plant=true, bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.TentaclesSex, "fast", {pc="artica", pcCum=true, plant=true, bodyState={naked=true, hard=true}})
 		saynn("The tentacles begin to move faster, their trusts deep and powerful.. more little tentacles manage to slip inside her.. before growing big and thick, stretching her pussy and tailhole to extreme levels, fucking them raw..")
 
 		saynn("Poor helpless fluff is moaning around the tentacle in her mouth, her body trembling with raw pleasure. You can just sense her climax building already, the pressure rising with each passing second of this.. experiment.."+str(" The knot at the base of Artica's is inflating with blood.. and getting squeezed by the tentacle who is also now thrusting it's thin tip down her urethra, fucking her little cockhole.." if !isCaged else " Her chastity cage is twitching a lot as the trapped cock is pulsing inside.. pleasured by the tentacle who is also now thrusting it's thin tip down her urethra, fucking her little cockhole..")+"")
@@ -175,7 +175,7 @@ func _run():
 
 		addButton("Continue", "See the result of Artica's actions..", "artica_gets_stuffed_with_eggs")
 	if(state == "artica_gets_stuffed_with_eggs"):
-		playAnimation(StageScene.TentaclesSex, "inside", {pc="artica", plant=true, bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.TentaclesSex, "inside", {pc="artica", pcCum=true, cum=true, plant=true, bodyState={naked=true, hard=true}})
 		saynn("As another climax washes over her, the tentacles inside her holes suddenly push themselves even deeper, their tips expanding.. as some kind of.. eggs.. travel up them, slipping inside her well-prepared gaping-stretched holes without much trouble..")
 
 		saynn("Artica's eyes widened in shock as she felt the tentacles start depositing big round eggs inside her, stuffing her womb, ass and stomach full of them, her belly swelling slightly more with each egg adding more and more volume to it..")

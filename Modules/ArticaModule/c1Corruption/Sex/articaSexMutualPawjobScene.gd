@@ -104,9 +104,9 @@ func _run():
 		addButton("Faster", "Stroke her cock faster", "stroke_cum")
 	if(state == "stroke_cum"):
 		if (GM.pc.hasReachablePenis()):
-			playAnimation(StageScene.PawJobMutual, "fast", {pc="pc", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+			playAnimation(StageScene.PawJobMutual, "fast", {pc="pc", npc="artica", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		else:
-			playAnimation(StageScene.PawJobMutual, "rubfast", {pc="pc", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+			playAnimation(StageScene.PawJobMutual, "rubfast", {pc="pc", npc="artica", npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		if (GM.pc.isWearingChastityCage()):
 			saynn("Driven by this strange shared passion, you and Artica quicken the pace, stroking each other's cocks faster while loudly showing your love for this activity..")
 

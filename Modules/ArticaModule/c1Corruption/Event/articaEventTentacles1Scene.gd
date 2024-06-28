@@ -484,7 +484,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "nova_makes_artica_cum")
 	if(state == "nova_makes_artica_cum"):
-		playAnimation(StageScene.Grope, "grope", {pc="artica", npc="nova", bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.Grope, "grope", {pc="artica", npc="nova", pcCum=true, bodyState={naked=true, hard=true}})
 		saynn("Artica does so, presenting herself to the guard. But when Nova grabs her stun baton, the fluff's eyes go wide again.")
 
 		saynn("[say=artica]..[/say]")

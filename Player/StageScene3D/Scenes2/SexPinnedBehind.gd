@@ -59,9 +59,14 @@ func playAnimation(animID, _args = {}):
 	var state_machine = animationTree["parameters/StateMachine/playback"]
 	var state_machine2 = animationTree2["parameters/StateMachine/playback"]
 
-	if(_args.has("cum") && _args["cum"] && !(animID in ["tease", "stroke", "lick"])):
+	if(_args.has("pcCum") && _args["pcCum"]):
 		#startCumInsideSolo(doll, getCumIntensity(doll2) + getCumIntensity(doll3))
-		startCumInside(doll2, doll)
+		if(!(animID in ["tease", "stroke", "lick"])):
+			startCumInside(doll2, doll)
+		else:
+			startCumPenis(doll)
+	if(_args.has("npcCum") && _args["npcCum"]):
+		startCumPenis(doll2)
 
 	if(animID == "tease"):
 		state_machine.travel("SexPinnedBehindTease_1-loop")

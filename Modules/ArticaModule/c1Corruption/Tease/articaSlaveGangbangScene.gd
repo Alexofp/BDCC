@@ -172,7 +172,7 @@ func _run():
 		# (( Double penetration SEX FAST with {npc1.name} on the bottom and {npc2.name} behind. ))
 		addButton("Continue", "See what happens next", "dp_cum")
 	if(state == "dp_cum"):
-		playAnimation(StageScene.SexDP, "inside", {pc="artica", npc=npc1, npc2=npc2, bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true,hard=true}, npc2BodyState={exposedCrotch=true,hard=true}})
+		playAnimation(StageScene.SexDP, "inside", {pc="artica", npc=npc1, npc2=npc2, pcCum=true, npcCum=true, npc2Cum=true, bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true,hard=true}, npc2BodyState={exposedCrotch=true,hard=true}})
 		#var pcIncluded = (npc1 == "pc" || npc2 == "pc")
 		#var slavesText = ("your two slaves" if !pcIncluded else "you and your slave")
 		#var onlyCocks = (!getCharacter(npc1).isWearingStrapon() && !getCharacter(npc2).isWearingStrapon())
@@ -273,7 +273,7 @@ func _run():
 		# (( Spitroast SEX FAST with {npc1.name} fucking pussy and {npc2.name} fucking throat. ))
 		addButton("Continue", "See what happens next", "spit_cum")
 	if(state == "spit_cum"):
-		playAnimation(StageScene.SexSpitroast, "inside", {pc="artica", npc=npc1, npc2=npc2, bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true,hard=true}, npc2BodyState={exposedCrotch=true,hard=true}})
+		playAnimation(StageScene.SexSpitroast, "inside", {pc="artica", npc=npc1, npc2=npc2, pcCum=true, npcCum=true, npc2Cum=true, bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true,hard=true}, npc2BodyState={exposedCrotch=true,hard=true}})
 		var pcIncluded = (npc1 == "pc" || npc2 == "pc")
 		var slavesText = ("your two slaves" if !pcIncluded else "you and your slave")
 		#var onlyCocks = (!getCharacter(npc1).isWearingStrapon() && !getCharacter(npc2).isWearingStrapon())
@@ -372,7 +372,7 @@ func _run():
 		# (( Gangbang FAST with {npc1.name} fucking pussy, {npc2.name} fucking ass and {npc3.name} fucking throat. ))
 		addButton("Continue", "See what happens next", "gang_cum")
 	if(state == "gang_cum"):
-		playAnimation(StageScene.SexGangbang, "inside", {pc="artica", npc2=npc1, npc=npc2, npc3=npc3, bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true,hard=true}, npc2BodyState={exposedCrotch=true,hard=true}, npc3BodyState={exposedCrotch=true,hard=true}})
+		playAnimation(StageScene.SexGangbang, "inside", {pc="artica", npc2=npc1, npc=npc2, npc3=npc3, pcCum=true, npcCum=true, npc2Cum=true, bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true,hard=true}, npc2BodyState={exposedCrotch=true,hard=true}, npc3BodyState={exposedCrotch=true,hard=true}})
 		#var pcIncluded = (npc1 == "pc" || npc2 == "pc" || npc3 == "pc")
 		#var slavesText = ("your three slaves" if !pcIncluded else "you and your two slaves")
 		var onlyCocks = (!getCharacter(npc1).isWearingStrapon() && !getCharacter(npc2).isWearingStrapon() && !getCharacter(npc3).isWearingStrapon())

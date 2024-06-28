@@ -64,6 +64,11 @@ func playAnimation(animID, _args = {}):
 	var state_machine = animationTree["parameters/StateMachine/playback"]
 	var state_machine2 = animationTree2["parameters/StateMachine/playback"]
 
+	if(_args.has("pcCum") && _args["pcCum"]):
+		startCumPenis(doll)
+	if(_args.has("npcCum") && _args["npcCum"]):
+		startCumPenis(doll2)
+
 	state_machine2.travel("Beg_2-loop")
 
 	if(animID == "tease"):

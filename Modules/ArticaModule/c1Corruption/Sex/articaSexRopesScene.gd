@@ -129,7 +129,7 @@ func _run():
 
 		addButton("Faster", "Grind her face faster", "do_grind_cum")
 	if(state == "do_grind_cum"):
-		playAnimation(StageScene.RopesOralSex, "lickfast", {pc="artica", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.RopesOralSex, "lickfast", {pc="artica", npc="pc", npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
 		saynn("You find yourself moving faster, both your hands land on her head and hold it steady as you grind her face with your drippy slit.. the sensations making you moan passionately..")
 
 		saynn("All the while tied up Artica just does her best, dragging her cyan tongue over your folds, catching any fluids onto it.")
@@ -224,7 +224,7 @@ func _run():
 		addButton("Continue", "See what happens next", "endthescene_getharness")
 	if(state == "eat_artica_out"):
 		if (isCaged):
-			playAnimation(StageScene.RopesSex, "lick", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
+			playAnimation(StageScene.RopesSex, "lick", {pc="artica", npc="pc", pcCum=true, bodyState={naked=true, hard=true}})
 			saynn("You sigh and kneel behind her.. before stuffing your face into that needy pussy.")
 
 			saynn("[say=artica]Ah..[/say]")
@@ -345,7 +345,7 @@ func _run():
 
 		addButton("Cum inside", "Stuff her butt to the brim!", "anal_sex_cum")
 	if(state == "anal_sex_cum"):
-		playAnimation(StageScene.RopesSex, "inside", {pc="artica", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.RopesSex, "inside", {pc="artica", npc="pc", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
 		var pcHasKnot = GM.pc.bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)
 		if (pcHasKnot):
 			saynn("Holding back is not required anymore.. and it's too late for pulling out.. you ram your cock deep inside.. forcing the fat knot to stretch her entrance wide!")
@@ -431,7 +431,7 @@ func _run():
 
 		addButton("Cum inside", "Breeeeed", "vag_cum")
 	if(state == "vag_cum"):
-		playAnimation(StageScene.RopesSex, "inside", {pc="artica", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.RopesSex, "inside", {pc="artica", npc="pc", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
 		var pcHasKnot = GM.pc.bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)
 		var isPreg = getCharacter("artica").isVisiblyPregnant()
 		if (pcHasKnot):
@@ -531,7 +531,7 @@ func _run():
 
 		addButton("Turn all on", "See how much Artica can endure..", "do_toys_cum")
 	if(state == "do_toys_cum"):
-		playAnimation(StageScene.RopesSolo, "struggle", {pc="artica", bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.RopesSolo, "struggle", {pc="artica", pcCum=true, bodyState={naked=true, hard=true}})
 		saynn("You switch all the toys on, letting them buzz away.. while you just sit on your bed and watch.")
 
 		saynn("As the pleasurable vibrations hit all Artica's sensitive spots, she lets out a muffled moan. Her body is squirming while the vibes stimulate her male and female bits at the same time, the dildo vibrating inside her slick slit.")

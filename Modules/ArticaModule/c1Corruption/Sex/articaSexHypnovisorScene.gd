@@ -215,9 +215,9 @@ func _run():
 		addButton("Continue", "See what happens next", "pet_cum_stroke_cum")
 	if(state == "pet_cum_stroke_cum"):
 		if (isCaged):
-			playAnimation(StageScene.Zonked, "rubcum", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
+			playAnimation(StageScene.Zonked, "rubcum", {pc="artica", npc="pc", pcCum=true, bodyState={naked=true, hard=true}})
 		else:
-			playAnimation(StageScene.Zonked, "rubcum", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
+			playAnimation(StageScene.Zonked, "rubcum", {pc="artica", npc="pc", pcCum=true, bodyState={naked=true, hard=true}})
 		saynn("Then, with a cute moan, pent-up Artica suddenly throws her head back, her {artica.penis} erupting in a torrent of hot, sticky cum that splatters across her tits and stomach. Each pulse is sending waves of pleasure through her body, her toes curling in ecstasy, her needy pussy gushing with girlcum!")
 
 		saynn("Completely spent, Artica lays panting on the floor, her body covered in her own cum as she enjoys the afterglow of her orgasm.")
@@ -226,7 +226,7 @@ func _run():
 
 		addButton("Hypnovisor", "Turn it off", "pet_turnoffvisor")
 	if(state == "pet_cum_handsfree"):
-		playAnimation(StageScene.Zonked, "cum", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.Zonked, "cum", {pc="artica", npc="pc", pcCum=true, bodyState={naked=true, hard=true}})
 		saynn("You notice that Artica is already on the edge of her orgasm. Makes you curious..")
 
 		saynn("[say=pc]Cum, Artica. Paws away from your cock and cunt though.[/say]")
@@ -378,7 +378,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "risha_cums_in_artica")
 	if(state == "risha_cums_in_artica"):
-		playAnimation(StageScene.SexPinnedBehind, "fast", {pc="risha", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexPinnedBehind, "fast", {pc="risha", npc="artica", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn(""+str("Artica's caged cock shoots weak spurts of cum onto the concrete wall in front of her" if isCaged else "Artica's hard cock shoots spurts of cum onto the concrete wall in front of her")+", legs shaking, pussy clenching hard around Risha's feline member..")
 
 		saynn("The guard grabs Artica's face by the cheek, her clawed digits inside that cyan mouth.. while the fluff is just chrrring and drooling, her hypnotized eyes show only desire..")
@@ -498,7 +498,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "nova_fucks_artica_fast")
 	if(state == "nova_fucks_artica_fast"):
-		playAnimation(StageScene.SexPawLick, "fast", {pc="nova", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, caged=true}})
+		playAnimation(StageScene.SexPawLick, "fast", {pc="nova", npc="artica", npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, caged=true}})
 		saynn("Artica's cock is throbbing in its little cage while Nova is picking up the pace of her trusts, driving into that pussy with increasing eagerness, her cock delving deep into her slick folds, brushing against the pleasure spot.. which makes the girl's walls tighten around Nova's girth.")
 
 		saynn("[say=nova]Is someone cumming already~? You have my permission, sweetheart.[/say]")
@@ -511,7 +511,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "nova_cums_in_artica")
 	if(state == "nova_cums_in_artica"):
-		playAnimation(StageScene.SexPawLick, "inside", {pc="nova", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, caged=true}})
+		playAnimation(StageScene.SexPawLick, "inside", {pc="nova", npc="artica", pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, caged=true}})
 		saynn("With one final, powerful thrust, Nova buries her cock deep inside Artica, the fat swollen knot slips past the tight folds, tying the two lovers together! The fluff moans again, a new impulse sends her body to squirm hard, her locked hard shooting more weak spurts of seed out of it, pussy clenching around the rod.")
 
 		saynn("[say=nova]Ngh-h-hh~.. Sorry, cutie, I had to~. Here it comes..[/say]")
@@ -627,7 +627,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "gang_knots_artica")
 	if(state == "gang_knots_artica"):
-		playAnimation(StageScene.SexGangbang, "inside", {pc="artica", npc="gymbully2", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2="gymbully", npc2BodyState={naked=true, hard=true}, npc3="gymbully3", npc3BodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexGangbang, "inside", {pc="artica", npc="gymbully2", pcCum=true, npcCum=true, npc2Cum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2="gymbully", npc2BodyState={naked=true, hard=true}, npc3="gymbully3", npc3BodyState={naked=true, hard=true}})
 		saynn("All three bullies kept slamming into Artica's tight orgasming holes.. until all three knots suddenly slipped in! Her jaw almost dislocates as the crazy girl knots her mouth, her pussy and ass get stuffed full of throbbing meat.. before the two bullies' cocks release hot, sticky seed inside, filling her womb and ass to the brim, her body writhing and trembling with pure ecstasy as her hypnotized mind is flooded with more and more pleasure..")
 
 		saynn("[say=gymbully3]HAH! Three cocks in one slut! ..fuck, I'm so wet..[/say]")
@@ -676,7 +676,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "avy_kicks_the_visor_off")
 	if(state == "avy_kicks_the_visor_off"):
-		playAnimation(StageScene.SexBehind, "fast", {pc="avy", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexBehind, "fast", {pc="avy", npc="artica", npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("Avy yanks on Artica's hair.. before slamming her against the cold floor.. [b]the hypnovisor flies off Artica's eyes as she does it![/b]")
 
 		saynn("[sayOther]Visual Link is lost, shutting down..[/sayOther]")
@@ -689,7 +689,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "avy_breeds_artica")
 	if(state == "avy_breeds_artica"):
-		playAnimation(StageScene.SexBehind, "inside", {pc="avy", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexBehind, "inside", {pc="avy", npc="artica", pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("With a final, savage throw of her hips, Avy buries her entire length inside Artica, her knot stretching that pussy wide while her womb is getting another load of creamy sticky stuff pumped into it, making Artica's belly quite bumpy by now..")
 
 		saynn("[say=avy]Fuck you, whore..[/say]")

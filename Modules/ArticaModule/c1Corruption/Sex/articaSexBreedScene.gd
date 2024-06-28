@@ -236,7 +236,7 @@ func _run():
 		else:
 			addButton("Cum inside", "Breed the fluff", "sex_cum")
 	if(state == "sex_cum"):
-		playAnimation(StageScene.SexPawLick, ("stroke" if isStroking else "")+"inside", {pc="pc", npc="artica", bodyState={naked=true, hard=true, condom=condomUsed}, npcBodyState={naked=true, hard=true, condom=articaCondom}})
+		playAnimation(StageScene.SexPawLick, ("stroke" if isStroking else "")+"inside", {pc="pc", npc="artica", pcCum=true, npcCum=true, bodyState={naked=true, hard=true, condom=condomUsed}, npcBodyState={naked=true, hard=true, condom=articaCondom}})
 		if (isStraponSex):
 			if (straponHasArticaCum || straponHasCum):
 				saynn("Artica's pussy is not just clenching around your rubber shaft.. it spasms, the slick walls trying to milk it hard. So, of course, with a primal growl, you ram your toy deep into that slutty fuckhole.. until the extreme tightness triggers it to release its load..")

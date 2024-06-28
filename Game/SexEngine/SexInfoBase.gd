@@ -10,6 +10,8 @@ var lustFull: float = 0.0
 var hadStim:bool = false # Did we have any stimulation this turn?
 var turnsLastStim:int = 0 # How many turns since last stimulation
 
+var justCame = false
+
 func getSexEngine():
 	if(sexEngineRef == null):
 		return null
@@ -35,6 +37,12 @@ func initFromPersonality():
 func processTurn():
 	tick += 1
 	lustFull += getChar().getLustLevel()
+
+func resetJustCame():
+	justCame = false
+
+func didJustCame():
+	return justCame
 
 func getAverageLust():
 	return lustFull / float(Util.maxi(1, tick))
@@ -112,6 +120,7 @@ func cum(infoCaused = null):
 	if(infoCaused == null):
 		infoCaused = self
 	
+	justCame = true
 	setArousal(0.0)
 	getChar().addLust(-int(getChar().getLust()/2.0))
 	timesCame += 1

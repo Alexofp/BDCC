@@ -211,7 +211,7 @@ func _run():
 
 		addButton("Continue", "See what happens next..", "behind_cum")
 	if(state == "behind_cum"):
-		playAnimation(StageScene.SexTrain, "inside", {pc="artica", npc="rahi", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2="pc", npc2BodyState={naked=true,hard=true}})
+		playAnimation(StageScene.SexTrain, "inside", {pc="artica", npc="rahi", pcCum=true, npcCum=true, npc2Cum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2="pc", npc2BodyState={naked=true,hard=true}})
 		saynn("With a final, desperate thrust, Rahi manages to knot herself on Artica's cock, the sudden spike of pleasure sending them both over the edge!")
 
 		saynn("[say=rahi]Myaa-ah..[/say]")
@@ -349,7 +349,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "front_cum")
 	if(state == "front_cum"):
-		playAnimation(StageScene.SexTrain, "inside", {pc="artica", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2="rahi", npc2BodyState={naked=true,hard=true}})
+		playAnimation(StageScene.SexTrain, "inside", {pc="artica", npc="pc", pcCum=true, npcCum=true, npc2Cum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2="rahi", npc2BodyState={naked=true,hard=true}})
 		saynn("Rahi got a good grip on Artica's hair.. and then.. with one final push.. forces her whole knotted shaft inside, stretching that pussy to its maximum.. and beyond..")
 
 		saynn("[say=artica]Ahh-hh!.. S-so b-big.. ah..[/say]")

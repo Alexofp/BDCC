@@ -87,9 +87,9 @@ func _run():
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "artica_masturbation"):
 		if (isCaged):
-			playAnimation(StageScene.Grope, "watchrub", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
+			playAnimation(StageScene.Grope, "watchrub", {pc="artica", npc="pc", pcCum=true, bodyState={naked=true, hard=true}})
 		else:
-			playAnimation(StageScene.Grope, "watchstroke", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
+			playAnimation(StageScene.Grope, "watchstroke", {pc="artica", npc="pc", pcCum=true, bodyState={naked=true, hard=true}})
 		saynn("Even the cold water cascading over her is unable to extinguish Artica's desire. She stares at her aroused body for some time, her ears lowering themselves..")
 
 		if (!isCaged):
@@ -327,7 +327,7 @@ func _run():
 		else:
 			addDisabledButton("'Clean inside'", "Artica doesn't have any cum in her pussy or asshole")
 	if(state == "do_eat_pussy"):
-		playAnimation(StageScene.SexPinnedBehind, "lick", {pc="pc", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexPinnedBehind, "lick", {pc="pc", npc="artica", npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("You lick your lips while watching Artica's dripping holes..")
 
 		saynn("[say=artica]What do you.. eep![/say]")
@@ -504,7 +504,7 @@ func _run():
 
 		addButton("Knot yourself", "Force her full length inside you", "ride_cum")
 	if(state == "ride_cum"):
-		playAnimation(StageScene.SexStandRide, "inside", {pc="artica", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexStandRide, "inside", {pc="artica", npc="pc", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("With one last trust of your hips, you suddenly feel her big, fat orb stretching your pussy enough to slide in!")
 
 		saynn("[say=pc]Ah-h~!..[/say]")
@@ -620,7 +620,7 @@ func _run():
 
 		addButton("Cum inside", "Breed the fluff", "rail_fuck_sex_cum")
 	if(state == "rail_fuck_sex_cum"):
-		playAnimation(StageScene.SexPinnedBehind, "inside", {pc="pc", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexPinnedBehind, "inside", {pc="pc", npc="artica", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		var pcHasKnot = GM.pc.bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)
 		if (pcHasKnot):
 			saynn("With one final trust, you bury your {pc.penis} deep inside Artica's quivering pussy.. until the knot slips inside, stretching her folds to their limits. It makes the fluff shake again, her inner walls squeezing your cock.. until she feels a hot rush of your {pc.cum} filling her womb, her orgasm crashing over yours..")

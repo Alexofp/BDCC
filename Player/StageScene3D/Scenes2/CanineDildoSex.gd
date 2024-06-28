@@ -72,6 +72,8 @@ func playAnimation(animID, _args = {}):
 	
 	if(_args.has("cum") && _args["cum"] && !(animID in ["tease"])):
 		startCumInsideSolo(doll, 1.0, 2.0)
+	if(_args.has("pcCum") && _args["pcCum"]):
+		startCumPenis(doll)
 
 	if(animID == "tease"):
 		state_machine.travel("CanineDildoRideTease_1-loop")

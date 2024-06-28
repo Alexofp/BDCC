@@ -89,7 +89,7 @@ func _run():
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "force_crotchsniff"):
 		if (isLusty):
-			playAnimation(StageScene.ChairCrotchSniff, "grind", {pc="artica", npc="pc", bodyState={hard=true}, npcBodyState={hard=true}})
+			playAnimation(StageScene.ChairCrotchSniff, "grind", {pc="artica", npc="pc", pcCum=true, bodyState={hard=true}, npcBodyState={hard=true}})
 			saynn("As you abruptly end the meal time and stand up, Artica's heart is already racing with anticipation. Before she can even process what is happening, you grab her by the hair.. and force her face into your crotch, pressing her nose against your "+str("{pc.penis}" if GM.pc.hasPenis() else "wet pussy")+"!")
 
 			saynn("Artica's eyes widen in surprise, a low moan escaping her lips as she inhales deeply, the intoxicating scent overwhelming her senses. With each breath, a wave of pleasure is coursing through her body, her cock throbbing with need"+str(" inside of its cage" if isCaged else "")+".")
@@ -134,7 +134,7 @@ func _run():
 		#var pawname = ("foot" if (!isDigi  && !isHoofs) else ("paw" if isDigi else "hoof"))
 		#var toesname = ("toes" if !isHoofs else "sole")
 		if (isLusty):
-			playAnimation(StageScene.CheckPaw, "crotch", {pc="pc", npc="artica", npcBodyState={hard=true}})
+			playAnimation(StageScene.CheckPaw, "crotch", {pc="pc", npc="artica", npcCum=true, npcBodyState={hard=true}})
 			saynn("You notice Artica's hungry stare on your {pc.feet}.. She seems to be pretty pent up.. so why not help her?")
 
 			saynn("[say=pc]Kneel. Under the table.[/say]")
@@ -256,7 +256,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "stealth_tease"):
-		playAnimation(StageScene.PawJobUnderTable, "fast", {npc="pc", pc="artica", bodyState={hard=true}})
+		playAnimation(StageScene.PawJobUnderTable, "fast", {npc="pc", pc="artica", pcCum=isLusty, bodyState={hard=true}})
 		saynn("The canteen is buzzing with activity as normal.. no one would notice you doing something kinky..")
 
 		if (isLusty):

@@ -627,7 +627,7 @@ func _run():
 
 		addButton("Faster", "Hump it even faster", "8_brat_cum")
 	if(state == "8_brat_cum"):
-		playAnimation(StageScene.SybianOral, "humpfast", {npc="alexrynard", bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SybianOral, "humpfast", {npc="alexrynard", pcCum=true, bodyState={naked=true, hard=true}})
 		if (GM.pc.hasReachableVagina()):
 			saynn("Who even cares anymore about how it looks, you're too desperate to stop now. You hump that dildo like your life depends on it.. and soon enough.. your mind gets overwhelmed with a tidal wave of pleasure, your body getting pushed over the edge, your pussy gripping that vibrating dildo and producing a strong fountain of juices.")
 
@@ -660,7 +660,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "9_rest")
 	if(state == "8_beg"):
-		playAnimation(StageScene.SybianOral, "intense", {npc="alexrynard", bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SybianOral, "intense", {npc="alexrynard", pcCum=true, bodyState={naked=true, hard=true}})
 		saynn("[say=pc]May I.. cum?[/say]")
 
 		saynn("It was a good attempt but Alex is clearly not impressed. He just watches you squirm, his hand resting on the remote.")
@@ -797,7 +797,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "10_extraorgasms")
 	if(state == "10_extraorgasms"):
-		playAnimation(StageScene.SybianOral, "hold", {npc="alexrynard", bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SybianOral, "hold", {npc="alexrynard", pcCum=true, bodyState={naked=true, hard=true}})
 		saynn("It quickly becomes too much.. so you lift yourself slightly to try to avoid some of the stimulation.. But Alex is quick to push you back down onto the dildo.")
 
 		saynn("[say=alexrynard]Nope, not until I hear it.[/say]")
@@ -1026,7 +1026,7 @@ func _run():
 		addButton("Inside", "Let him cum down your throat", "10_bj_inside")
 		addButton("Facial", "Make him pull out", "10_bj_facial")
 	if(state == "10_bj_inside"):
-		playAnimation(StageScene.SybianOral, "blowjobfast", {npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SybianOral, "blowjobfast", {npc="alexrynard", pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("You don't stop him even now.. In fact, you encourage him, moving your head to meet his cock, your jaw getting forced open slightly more each time.. until the knot slips in.")
 
 		saynn("Alex grunts as he feels your tight throat walls clenching around his whole length.")
@@ -1071,7 +1071,7 @@ func _run():
 
 		addButton("Yes Sir", "Cuddles!", "10_end")
 	if(state == "10_bj_facial"):
-		playAnimation(StageScene.SybianOral, "stroke", {npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SybianOral, "stroke", {npc="alexrynard", pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("You do your best, enduring his onslaught for as long as possible. But at some point it does become a little much, your throat struggling. So you tap on his legs when you feel like he is close enough..")
 
 		saynn("[say=alexrynard]Ah.. Fuck.[/say]")

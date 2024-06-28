@@ -98,7 +98,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "receive_pawjob_cum")
 	if(state == "receive_pawjob_cum"):
-		playAnimation(StageScene.SexPawjob, "fast", {pc="pc", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexPawjob, "fast", {pc="pc", npc="artica", pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("With each stroke, you feel your arousal growing more and more, short pleasure noises escaping your lips as Artica's toes and beans rub your member with more passion, your hips bucking instinctively.."+str(" Her own member is dripping plenty in its little cage, creating a wet spot on your bed sheets together with her needy pussy.." if isCaged else " Her own hard member is dripping plenty, creating a wet spot on your bed sheets together with her needy pussy..")+"")
 
 		saynn("[say=pc]Hah..[/say]")
@@ -162,7 +162,7 @@ func _run():
 		addButton("Continue", "See what happens next", "feet_thrust_cum")
 		addButtonWithChecks("Condom!", "Make her wear a condom before she cums and makes a mess on you!", "feet_thrust_condom", [], [[ButtonChecks.HasCondoms]])
 	if(state == "feet_thrust_cum"):
-		playAnimation(StageScene.SexPawjob, "thrustfast", {pc="artica", npc="pc", bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexPawjob, "thrustfast", {pc="artica", npc="pc", pcCum=true, bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
 		if (usedCondom):
 			saynn("Feeling that Artica's cock is already throbbing, desperate for release.. you quickly rip-open one of your condoms and apply it over her cyan shaft.")
 
