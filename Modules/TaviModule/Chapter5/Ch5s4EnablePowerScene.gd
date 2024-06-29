@@ -278,7 +278,7 @@ func _run():
 
 		addButton("Ride it faster", "Might as well see how it will cum..", "sentinel_ride_pussy_cum")
 	if(state == "sentinel_ride_pussy_cum"):
-		playAnimation(StageScene.SexCowgirl, "fast", {npc="pc", pc="sentinelx", bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexCowgirl, "fast", {npc="pc", pc="sentinelx", pcCum=true, npcCum=true, bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("Even though the android can't transform you.. it can still surely try.. Almost your whole body is now coated in this black shiny latex-like goo.. That keeps stimulating you with little bursts of electricity, making you more eager to ride it. Only your womb seems to still be untouched..")
 
 		if (GM.pc.isWearingChastityCage()):
@@ -332,7 +332,7 @@ func _run():
 
 		addButton("Ride it faster", "Might as well see how it will cum..", "sentinel_ride_ass_cum")
 	if(state == "sentinel_ride_ass_cum"):
-		playAnimation(StageScene.SexCowgirl, "fast", {npc="pc", pc="sentinelx", bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexCowgirl, "fast", {npc="pc", pc="sentinelx", pcCum=true, npcCum=true, bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("Even though the android can't transform you.. it can still surely try.. Almost your whole body is now coated in this black shiny latex-like goo.. That keeps stimulating you with little bursts of electricity, making you more eager to ride it. Only your depths seem to still be untouched..")
 
 		if (GM.pc.isWearingChastityCage()):
@@ -438,7 +438,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "sentinel_submit_pussy_cum")
 	if(state == "sentinel_submit_pussy_cum"):
-		playAnimation(StageScene.SexMissionary, "inside", {pc = "sentinelx", npc="pc", bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true,hard=true}})
+		playAnimation(StageScene.SexMissionary, "inside", {pc = "sentinelx", npc="pc", pcCum=true, npcCum=true, bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true,hard=true}})
 		saynn("A loud muffled noise escapes your lips as the android's knot slips inside you, locking you two together. Your body shivers as the android starts pumping you full of some kind of thick sticky black goo.. claiming your insides and stuffing your womb to the brim.. It feels like it's about to.. start changing you..")
 
 		saynn("You arch your back as best as your restraints allow and cum hard, every thought in your head is only about how good this feels. Maybe being like.. it.. won't be the worst thing that happened in your life..")
@@ -485,7 +485,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "sentinel_submit_ass_cum")
 	if(state == "sentinel_submit_ass_cum"):
-		playAnimation(StageScene.SexMissionary, "inside", {pc = "sentinelx", npc="pc", bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true,hard=true}})
+		playAnimation(StageScene.SexMissionary, "inside", {pc = "sentinelx", npc="pc", pcCum=true, npcCum=true, bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true,hard=true}})
 		saynn("A loud muffled noise escapes your lips as the android's knot slips inside you, locking you two together. Your body shivers as the android starts pumping you full of some kind of thick sticky black goo.. claiming your insides and painting your guts black.. It feels like it's about to.. start changing you..")
 
 		saynn("You arch your back as best as your restraints allow and cum hard, every thought in your head is only about how good this feels. Maybe being like.. it.. won't be the worst thing that happened in your life..")

@@ -16,6 +16,7 @@ var currentCategory = ""
 var firstNPC = "pc"
 var secondNPC = "pc"
 var lastSceneString = ""
+var everyoneCumming = false
 
 func _init():
 	sceneID = "SimpleAnimPlayerScene"
@@ -36,8 +37,12 @@ func _run():
 		saynn("pc=\""+firstNPC+"\"")
 		saynn("npc=\""+secondNPC+"\"")
 		
+		if(everyoneCumming):
+			saynn("Everyone will be shown orgasming")
+		
 		addButton("PC", "change first character", "changepcmenu")
 		addButton("NPC", "change second character", "changenpcmenu")
+		addButton("Toggle cum", "Change if everyone is cumming or not", "toggle_cum")
 		addButton("Back", "Meow", "")
 
 	if(state == "changepcmenu" || state == "changenpcmenu"):
@@ -66,7 +71,7 @@ func _react(_action: String, _args):
 		lastSceneString = ""
 		currentCategory = _args[0]
 	if(_action == "playa"):
-		playAnimation(currentCategory, _args[0], {pc=firstNPC, npc=secondNPC, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(currentCategory, _args[0], {pc=firstNPC, npc=secondNPC, pcCum=everyoneCumming, npcCum=everyoneCumming, cum=everyoneCumming, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		lastSceneString = "playAnimation(StageScene."+currentCategory+", \""+_args[0]+"\", \\{pc=\""+firstNPC+"\", npc=\""+secondNPC+"\", bodyState=\\{naked=true, hard=true}, npcBodyState=\\{naked=true, hard=true}})"
 		return
 	if(_action == "changepcmenu_pick"):
@@ -77,6 +82,9 @@ func _react(_action: String, _args):
 		secondNPC = _args[0]
 		setState("settingsmenu")
 		return
+	if(_action == "toggle_cum"):
+		everyoneCumming = !everyoneCumming
+		return
 	
 	setState(_action)
 	
@@ -84,6 +92,7 @@ func saveData():
 	var data = .saveData()
 	
 	data["currentCategory"] = currentCategory
+	data["everyoneCumming"] = everyoneCumming
 	
 	return data
 	
@@ -91,3 +100,4 @@ func loadData(data):
 	.loadData(data)
 	
 	currentCategory = SAVE.loadVar(data, "currentCategory", "")
+	everyoneCumming = SAVE.loadVar(data, "everyoneCumming", false)

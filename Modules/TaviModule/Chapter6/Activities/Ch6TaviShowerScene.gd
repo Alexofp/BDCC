@@ -443,7 +443,7 @@ func _run():
 		addButton("Cum inside", "Try to breed Tavi", "rough_cuminside")
 		addButton("Pull out", "Fight the urge to breed Tavi", "rough_pullout")
 	if(state == "rough_cuminside"):
-		playAnimation(StageScene.SexStanding, "inside", {npc="tavi", pc="pc", bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexStanding, "inside", {npc="tavi", pc="pc", pcCum=true, npcCum=true, bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
 		saynn("After a few final thrusts, you reach your peak.. and decide to use this moment to the end, ramming your cock as deep as Tavi's pussy allows!")
 
 		saynn("[say=tavi]Ah!.. Yes!.. Breed..[/say]")
@@ -458,7 +458,7 @@ func _run():
 
 		addButton("Continue", "That was good", "endthescene")
 	if(state == "rough_pullout"):
-		playAnimation(StageScene.SexStanding, "tease", {npc="tavi", pc="pc", bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexStanding, "tease", {npc="tavi", pc="pc", pcCum=true, npcCum=true, bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
 		saynn("After a few final thrusts, you reach your peak.. And begin fighting yourself. With a growl, you overpower your need to breed and pull out at the last possible second, your {pc.penis} is throbbing and shooting hot sticky strings of {pc.cum} all over Tavi's butt, all of which gets quickly washed away.")
 
 		saynn("[say=tavi]Aw-w.. huff..[/say]")

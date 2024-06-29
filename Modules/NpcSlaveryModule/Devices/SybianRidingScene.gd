@@ -363,9 +363,9 @@ func _run():
 			addButton("Continue", "See what happens next", "do_next_loop")
 	if(state == "do_cum"):
 		if (rideMode == ""):
-			playAnimation(StageScene.Sybian, "ride", {pc="pc", bodyState={naked=true}})
+			playAnimation(StageScene.Sybian, "ride", {pc="pc", pcCum=true, bodyState={naked=true, hard=true}})
 		elif (rideMode == "hump"):
-			playAnimation(StageScene.Sybian, "hump", {pc="pc", bodyState={naked=true}})
+			playAnimation(StageScene.Sybian, "hump", {pc="pc", pcCum=true, bodyState={naked=true, hard=true}})
 		if (GM.pc.hasReachableVagina()):
 			saynn("Your entire body trembles with the force of your climax, your pussy and ass spasming around the dildos as you succumb to the overwhelming waves of pleasure crashing over you.")
 
@@ -373,11 +373,11 @@ func _run():
 			saynn("Your entire body trembles with the force of your climax, your ass spasming around the dildo, your taint twitching as you succumb to the overwhelming waves of pleasure crashing over you.")
 
 		if (rideMode == "suck"):
-			playAnimation(StageScene.SybianOral, "blowjob", {pc="pc", npc=npcID, bodyState={naked=true}, npcBodyState={exposedCrotch=true, hard=true}})
+			playAnimation(StageScene.SybianOral, "blowjob", {pc="pc", pcCum=true, npc=npcID, bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
 			saynn("The taste of your slave's hot, thick {npc.cum} fills your mouth as you swallow eagerly, the sensation sending sparks of pleasure shooting through your body.")
 
 		elif (rideMode == "lick"):
-			playAnimation(StageScene.SybianOral, "lick", {pc="pc", npc=npcID, bodyState={naked=true}, npcBodyState={exposedCrotch=true, hard=true}})
+			playAnimation(StageScene.SybianOral, "lick", {pc="pc", pcCum=true, npc=npcID, bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
 			saynn("Your slave's pussy gushes with sweet nectar, her juices coating your face as you eagerly lap at her dripping cunt, lost in the intoxicating taste of her arousal.")
 
 		if (GM.pc.isWearingChastityCage()):

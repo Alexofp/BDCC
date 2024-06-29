@@ -582,7 +582,7 @@ func _run():
 
 		addButton("Cum inside", "Breed Rahi", "pup_breed_cum")
 	if(state == "pup_breed_cum"):
-		playAnimation(StageScene.PuppySexAllFours, "inside", {npc="rahi", npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.PuppySexAllFours, "inside", {npc="rahi", pcCum=true, npcCum=true, npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
 		saynn("Finally, with a deep groan, you shove your {pc.penis} until its tip kisses Rahi's womb entrance and cum inside her. Rahi can feel your hot seed filling her up.. she whimpers softly from pleasure and this feeling of total submission. Her pussy gripping your throbbing shaft and squeezing every last drop of {pc.cum} out of it.")
 
 		saynn("[say=pc]Ngh~.[/say]")

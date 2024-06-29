@@ -58,6 +58,7 @@ func _run():
 	if(state == "cum!"):
 		playAnimation(StageScene.SexCowgirl, "fast", {
 			pc="pc", npc="rubi", 
+			npcCum=true, pcCum=true,
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})
@@ -95,6 +96,7 @@ func _run():
 	if(state == "let_it_happen"):
 		playAnimation(StageScene.SexHandjob, "tease", {
 			pc="rubi", npc="pc", 
+			pcCum=true,
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={},
 		})

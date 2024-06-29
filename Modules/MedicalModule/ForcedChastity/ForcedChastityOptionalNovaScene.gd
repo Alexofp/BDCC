@@ -202,7 +202,7 @@ func _run():
 
 
 	if(state == "beg_to_cum"):
-		playAnimation(StageScene.HangingSex, "fast", {npc="nova", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.HangingSex, "fast", {npc="nova", pcCum=true, npcCum=true, bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
 		
 		saynn("[say=pc]Please, I’m very close! I wanna cum! I’m a good girl, I will do anything![/say]")
 
@@ -257,7 +257,7 @@ func _run():
 		addButton("Continue", "That was something", "endthescene")
 
 	if(state == "demand"):
-		playAnimation(StageScene.HangingSex, "fast", {npc="nova", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.HangingSex, "fast", {npc="nova", npcCum=true, bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
 		
 		saynn("[say=pc]Don’t stop, I need it. I must cum now.. I really want to.[/say]")
 
@@ -283,8 +283,10 @@ func _run():
 
 		saynn("Even though you didn’t receive a wet orgasm, your mind is blanking from all the pleasure, there is a constant weak flow of precum and prostate juices coming from your locked up dick. Nova waits until her balls are dry before yanking her cock out, letting your hole to gape and leak her seed.")
 
-		saynn("Continue, See what happens next")
-
+		addButton("Continue", "See what happens next", "afterdemand")
+	if(state == "afterdemand"):
+		playAnimation(StageScene.HangingSex, "tease", {npc="nova", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		
 		saynn("Nova slaps your butt again, causing your butt to gush cum.")
 
 		saynn("[say=nova]You are a great fucktoy though, sweetie. Hope you learned your lesson.[/say]")

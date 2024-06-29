@@ -417,7 +417,7 @@ func _run():
 
 		addButton("Breed", "Cum inside the kitty", "breed_cuminside")
 	if(state == "breed_cuminside"):
-		playAnimation(StageScene.SexStanding, "inside", {npc="rahi", pc="pc", bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexStanding, "inside", {npc="rahi", pc="pc", pcCum=true, npcCum=true, bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true}})
 		saynn("A groan escapes from you as Rahi's tight pussy pushes you over the edge. You ram your {pc.penis} as far as her cute slit allows before her cervix gets smashed. As the orgasmic waves begin washing over you, your throbbing length starts flooding her inviting womb with your seed, claiming it as your own.")
 
 		saynn("[say=rahi]Y-yes-s.. good..[/say]")

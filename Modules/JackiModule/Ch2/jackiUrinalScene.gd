@@ -576,7 +576,7 @@ func _run():
 
 		addButton("Cum", "Leave a mess on that cute face of hers", "pick_stroke_cum")
 	if(state == "pick_stroke_cum"):
-		playAnimation(StageScene.UrinalPeeing, "stroke", {pc="jacki", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.UrinalPeeing, "stroke", {pc="jacki", npc="pc", npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("You grunt as your {pc.penis} starts throbbing and shooting thick strings of {pc.cum} all over Jacki's face, leaving quite a mess. Some of your seed lands on her hair and face.. but some goes directly into her mouth, forcing her to taste you.")
 
 		saynn("[say=pc]Swallow, bitch.[/say]")
@@ -783,7 +783,7 @@ func _run():
 
 		addButton("Cum inside", "Stuffs that ass full of your cum", "pick_fuckass_cum")
 	if(state == "pick_fuckass_cum"):
-		playAnimation(StageScene.UrinalSex, "inside", {pc="jacki", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.UrinalSex, "inside", {pc="jacki", npc="pc", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("While Jacki is still going through her climax, you shove your cock deep down her ass and let her orgamic contractions push you over the edge. You grunt as your cock starts stuffing its load deep into Jack's ass, painting her guts white.")
 
 		saynn("[say=pc]Take it, cum dumpster..[/say]")

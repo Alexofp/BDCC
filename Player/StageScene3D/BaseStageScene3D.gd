@@ -186,6 +186,9 @@ func getCumIntensity(theDoll:Doll3D, notCaged = false, noStrapon = true):
 				return 0.0
 			if(noStrapon && character.isWearingStrapon()):
 				return 0.0
+			if(!OPTIONS.getCumShotsDependOnBallsVolume()):
+				return 1.0
+				
 			var penis = character.getBodypart(BodypartSlot.Penis)
 			var cumAmount = penis.getFluidProduction().getCapacity()
 			
@@ -212,10 +215,14 @@ func startCumInside(bottomDoll:Doll3D, topDoll:Doll3D, howOften:float = 2.5):
 	startCumInsideSolo(bottomDoll, getCumIntensity(topDoll), howOften)
 
 func startCumInsideSolo(bottomDoll:Doll3D, intensity:float = 1.0, howOften:float = 2.5):
+	if(!OPTIONS.isVisibleCumShotsEnabled()):
+		return
 	if(intensity > 0.0):
 		bottomDoll.startCumInside(intensity, howOften)
 
 func startCumPenis(theDoll:Doll3D, howOften:float = 2.5, forceChastity=false):
+	if(!OPTIONS.isVisibleCumShotsEnabled()):
+		return
 	var intensity = getCumIntensity(theDoll, false)
 	if(intensity > 0.0):
 		var isDollCaged = isDollCaged(theDoll)

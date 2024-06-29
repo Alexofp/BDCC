@@ -51,6 +51,9 @@ var jigglePhysicsGlobalModifier = 1.0
 
 var advancedShadersEnabled = true
 var chainsEnabled = true
+var cumEnabled = true
+var cumDependsOnBallsSize = true
+var cumIntensityMult = 1.0
 
 var autosaveEnabled = true
 
@@ -217,6 +220,15 @@ func shouldAutosave():
 
 func shouldSpawnChains():
 	return chainsEnabled
+
+func isVisibleCumShotsEnabled():
+	return cumEnabled
+
+func getCumShotsDependOnBallsVolume():
+	return cumDependsOnBallsSize
+
+func getCumShotsIntensityMult():
+	return cumIntensityMult
 
 func getInventoryIconSize():
 	if(inventoryIconsSize == "small"):
@@ -416,6 +428,48 @@ func getChangeableOptions():
 					"value": autosaveEnabled,
 				}
 			],
+		},
+		{
+			"name": "Cum",
+			"id": "cum",
+			"options": [
+				{
+					"name": "Visible cumshots",
+					"description": "Visible particles for when someone cums inside someone else or just shoots their load",
+					"id": "cumEnabled",
+					"type": "checkbox",
+					"value": cumEnabled,
+				},
+				{
+					"name": "Cumshot intensity multiplier",
+					"description": "A multiplier for the amount of cum particles displayed during cumshots and also their velocity",
+					"id": "cumIntensityMult",
+					"type": "list",
+					"value": cumIntensityMult,
+					"values": [
+						[0.1, "10%"],
+						[0.3, "30%"],
+						[0.5, "50%"],
+						[0.7, "70%"],
+						[0.9, "90%"],
+						[1.0, "100%"],
+						[1.1, "110%"],
+						[1.3, "130%"],
+						[1.5, "150%"],
+						[1.7, "170%"],
+						[2.0, "200%"],
+						[3.0, "300%"],
+						[5.0, "500%"],
+					],
+				},
+				{
+					"name": "Cumshots depend on balls volume",
+					"description": "If unchecked, cumshots will always have the same intensity. If checked, they will scale depending on the balls volume.",
+					"id": "cumDependsOnBallsSize",
+					"type": "checkbox",
+					"value": cumDependsOnBallsSize,
+				},
+			]
 		},
 		{
 			"name": "Other",
@@ -676,6 +730,14 @@ func applyOption(categoryID, optionID, value):
 		if(optionID == "jigglePhysicsGlobalModifier"):
 			jigglePhysicsGlobalModifier = value
 
+	if(categoryID == "cum"):
+		if(optionID == "cumEnabled"):
+			cumEnabled = value
+		if(optionID == "cumDependsOnBallsSize"):
+			cumDependsOnBallsSize = value
+		if(optionID == "cumIntensityMult"):
+			cumIntensityMult = value
+
 	if(categoryID == "saves"):
 		if(optionID == "autosaveEnabled"):
 			autosaveEnabled = value
@@ -817,6 +879,9 @@ func saveData():
 		"autosaveEnabled": autosaveEnabled,
 		"inventoryIconsSize": inventoryIconsSize,
 		"genderNamesOverrides": genderNamesOverrides,
+		"cumEnabled": cumEnabled,
+		"cumDependsOnBallsSize": cumDependsOnBallsSize,
+		"cumIntensityMult": cumIntensityMult,
 	}
 	
 	return data
@@ -860,6 +925,9 @@ func loadData(data):
 	autosaveEnabled = loadVar(data, "autosaveEnabled", true)
 	inventoryIconsSize = loadVar(data, "inventoryIconsSize", "small")
 	genderNamesOverrides = loadVar(data, "genderNamesOverrides", {})
+	cumEnabled = loadVar(data, "cumEnabled", true)
+	cumDependsOnBallsSize = loadVar(data, "cumDependsOnBallsSize", true)
+	cumIntensityMult = loadVar(data, "cumIntensityMult", 1.0)
 
 func saveToFile():
 	var saveData = saveData()

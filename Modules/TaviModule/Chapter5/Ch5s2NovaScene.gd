@@ -355,7 +355,7 @@ func _run():
 		addButton("No condom", "Go in raw", "rough_sleepfuck_start")
 		addButtonWithChecks("Use condom", "Use your best condom", "rough_sleepfuck_usecondom", [], [ButtonChecks.HasCondoms])
 	if(state == "rough_sleepfuck_start"):
-		playAnimation(StageScene.SexAllFours, "fastflop", {pc="pc", npc="nova", bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexAllFours, "fastflop", {pc="pc", npc="nova", npcCum=true, bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
 		if (usedCondom):
 			saynn("Even though you're about to fuck her, the pups is the last thing you want. You quickly rip open one of the condom packages before putting it on your {pc.penis}. After that you quickly turn Nova to be lying on her belly and position yourself behind her, your movements deliberate and predatory, your hands holding her round ass high.")
 
@@ -372,7 +372,7 @@ func _run():
 
 		addButton("Cum", "See what happens next", "rough_sleepfuck_cum")
 	if(state == "rough_sleepfuck_cum"):
-		playAnimation(StageScene.SexAllFours, "insideflop", {pc="pc", npc="nova", bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexAllFours, "insideflop", {pc="pc", npc="nova", pcCum=true, bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
 		if (!usedCondom):
 			saynn("You can't help but to grunt as her pussy brings you over the edge, your own cock throbbing as well as it starts stuffing that slut's babymaker full of your seed. You're not holding back, letting her slit milk your balls dry.")
 
@@ -430,7 +430,7 @@ func _run():
 
 		addButton("Panic", "Can't stop now", "rough_ride_vaginal_cum")
 	if(state == "rough_ride_vaginal_cum"):
-		playAnimation(StageScene.SexReverseCowgirl, "inside", {npc="pc", pc="nova", bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexReverseCowgirl, "inside", {npc="pc", pc="nova", pcCum=true, npcCum=true, bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
 		saynn("You notice two guards walking a few meters away, the greenery keeping you and Nova hidden luckily. But then they stop and begin chatting..")
 
 		saynn("And now.. with only a tall green bush separating you.. oh fuck..")
@@ -496,7 +496,7 @@ func _run():
 
 		addButton("Panic", "Can't stop now", "rough_ride_anal_cum")
 	if(state == "rough_ride_anal_cum"):
-		playAnimation(StageScene.SexReverseCowgirl, "inside", {npc="pc", pc="nova", bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexReverseCowgirl, "inside", {npc="pc", pc="nova", pcCum=true, npcCum=true, bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
 		saynn("You notice two guards walking a few meters away, the greenery keeping you and Nova hidden luckily. But then they stop and begin chatting..")
 
 		saynn("And now.. with only a tall green bush separating you.. oh fuck..")
@@ -740,7 +740,7 @@ func _run():
 		addButton("Let her cum", "Make that puppy cum on herself", "do_feet_cum")
 		addButton("Deny her", "The pup needs to be humiliated more", "do_feet_deny")
 	if(state == "do_feet_cum"):
-		playAnimation(StageScene.SexFeetPlay, "head", {pc="pc", npc="nova", npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexFeetPlay, "head", {pc="pc", npc="nova", npcCum=true, npcBodyState={naked=true, hard=true}})
 		saynn("You have picked Nova's fate. But why not tease her a little more for the camera.")
 
 		saynn("[say=pc]Can't hear you.[/say]")
@@ -828,7 +828,7 @@ func _run():
 
 		addButton("Watch", "See what happens next", "generate_use_nova_scene")
 	if(state == "free_use1"):
-		playAnimation(StageScene.SexStanding, "fast", {npc="nova", pc=npcID, bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexStanding, "fast", {npc="nova", pc=npcID, pcCum=RNG.chance(50), npcCum=RNG.chance(50), bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("One of the {npc.masc} inmates approaches Nova and, with a firm grasp, bends her over.")
 
 		saynn("[say=nova]"+str(RNG.pick(["E-easy..", "H-hey..", "W-watch it..", "L-let go.."]))+"[/say]")
@@ -848,7 +848,7 @@ func _run():
 		addButton("More", "See who else is gonna use Nova", "generate_use_nova_scene")
 		addButton("Enough", "That was enough gangbanging for Nova", "stop_gangbang")
 	if(state == "free_use2"):
-		playAnimation(StageScene.SexFreeStanding, "fast", {npc="nova", pc=npcID, bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexFreeStanding, "fast", {npc="nova", pc=npcID, pcCum=RNG.chance(50), npcCum=RNG.chance(50), bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("One of the dominant inmates grabs Nova and quickly asserts control over her body, bending the husky over against her will and wrenching her paws behind her back.")
 
 		saynn("[say=nova]"+str(RNG.pick(["E-easy..", "H-hey..", "W-watch it..", "L-let go.."]))+"[/say]")
@@ -866,7 +866,7 @@ func _run():
 		addButton("More", "See who else is gonna use Nova", "generate_use_nova_scene")
 		addButton("Enough", "That was enough gangbanging for Nova", "stop_gangbang")
 	if(state == "free_use3"):
-		playAnimation(StageScene.SexAllFours, "fast", {npc="nova", pc=npcID, bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexAllFours, "fast", {npc="nova", pc=npcID, pcCum=RNG.chance(50), npcCum=RNG.chance(50), bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("Nova shivers as one of the inmates approaches her. She makes her best attempt to resist but eventually she is overpowered and put on all fours, her ass sticking out.")
 
 		saynn("[say=nova]"+str(RNG.pick(["E-easy..", "H-hey..", "W-watch it..", "L-let go.."]))+"[/say]")
@@ -888,7 +888,7 @@ func _run():
 		addButton("More", "See who else is gonna use Nova", "generate_use_nova_scene")
 		addButton("Enough", "That was enough gangbanging for Nova", "stop_gangbang")
 	if(state == "free_use4"):
-		playAnimation(StageScene.SexStanding, "fast", {npc="nova", pc=npcID, bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexStanding, "fast", {npc="nova", pc=npcID, pcCum=RNG.chance(50), npcCum=RNG.chance(50), bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("One of the {npc.masc} inmates approaches Nova. The husky already knows what {npc.he} needs so she just bends over for {npc.him} and holds onto the wall. The inmate puts {npc.his} hands on Nova's hips and bends her more though.")
 
 		saynn("[say=nova]"+str(RNG.pick(["E-easy..", "H-hey..", "D-don't be so rough..", "H-how much more..", "Don't b-break me..", "Fuck, I'm losing it.."]))+"[/say]")
@@ -908,7 +908,7 @@ func _run():
 		addButton("More", "See who else is gonna use Nova", "generate_use_nova_scene")
 		addButton("Enough", "That was enough gangbanging for Nova", "stop_gangbang")
 	if(state == "free_use5"):
-		playAnimation(StageScene.SexFreeStanding, "fast", {npc="nova", pc=npcID, bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexFreeStanding, "fast", {npc="nova", pc=npcID, pcCum=RNG.chance(50), npcCum=RNG.chance(50), bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("One of the dominant inmates grabs Nova and quickly asserts control over her body, bending the husky over and wrenching her paws behind her back. It feels like she didn't even try to resist though.")
 
 		saynn("[say=nova]"+str(RNG.pick(["E-easy..", "H-hey..", "D-don't be so rough..", "H-how much more..", "Don't b-break me..", "Fuck, I'm losing it.."]))+"[/say]")
@@ -926,7 +926,7 @@ func _run():
 		addButton("More", "See who else is gonna use Nova", "generate_use_nova_scene")
 		addButton("Enough", "That was enough gangbanging for Nova", "stop_gangbang")
 	if(state == "free_use6"):
-		playAnimation(StageScene.SexAllFours, "fast", {npc="nova", pc=npcID, bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexAllFours, "fast", {npc="nova", pc=npcID, pcCum=RNG.chance(50), npcCum=RNG.chance(50), bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("Nova shivers as one of the inmates approaches her. She knows what will happen if she doesn't comply so she just gets on all fours willingly before sticking her ass out for the inmate to grab.")
 
 		saynn("[say=nova]"+str(RNG.pick(["Just.. e-easy..", "H-hey..", "D-don't be so rough..", "H-how much more..", "Don't b-break me..", "Fuck, I'm losing it.."]))+"[/say]")
@@ -948,7 +948,7 @@ func _run():
 		addButton("More", "See who else is gonna use Nova", "generate_use_nova_scene")
 		addButton("Enough", "That was enough gangbanging for Nova", "stop_gangbang")
 	if(state == "free_use7"):
-		playAnimation(StageScene.SexCowgirl, "fast", {npc="nova", pc=npcID, bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexCowgirl, "fast", {npc="nova", pc=npcID, pcCum=RNG.chance(50), npcCum=RNG.chance(50), bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("One of the inmates pulls Nova towards one of the benches and takes a seat. Slutty husky sees {npc.his} {npc.penis} and willingly positions herself atop of {npc.him}, straddling {npc.his} member and letting it penetrate her used pussy!")
 
 		saynn("[say=nova]"+str(RNG.pick(["C'mon, let me feel that cock inside me already..", "Fuck that feels good..", "L-let me do this..", "What am I doing.. Fuck it.."]))+"[/say]")
@@ -968,7 +968,7 @@ func _run():
 		addButton("More", "See who else is gonna use Nova", "generate_use_nova_scene")
 		addButton("Enough", "That was enough gangbanging for Nova", "stop_gangbang")
 	if(state == "free_use8"):
-		playAnimation(StageScene.SexFullNelson, "fast", {npc="nova", pc=npcID, bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexFullNelson, "fast", {npc="nova", pc=npcID, pcCum=RNG.chance(50), npcCum=RNG.chance(50), bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("One of the inmates grabs Nova and lifts her legs above the floor before locking {npc.his} hands behind her neck, trapping the husky into a full nelson position! The slut doesn't seem to mind it though, her lusty eyes shine brightly.")
 
 		saynn("[say=nova]"+str(RNG.pick(["C'mon, let me feel that cock inside me already..", "Yes, fuck me raw!..", "Use me like the slut that I am..", "Fuck this slutty pussy!", "Breed this whore.. f-fuck.."]))+"[/say]")
@@ -986,7 +986,7 @@ func _run():
 		addButton("More", "See who else is gonna use Nova", "generate_use_nova_scene")
 		addButton("Enough", "That was enough gangbanging for Nova", "stop_gangbang")
 	if(state == "free_use9"):
-		playAnimation(StageScene.SexMissionary, "fast", {npc="nova", pc=npcID, bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexMissionary, "fast", {npc="nova", pc=npcID, pcCum=RNG.chance(50), npcCum=RNG.chance(50), bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("Nova bends over as one of the inmates approaches her. But instead of just using Nova like that, {npc.he} instead pulls her down to the floor before pinning her! {npc.He} then raises her legs and shoves {npc.his} {npc.penis} deep down her slutty used cunt.")
 
 		saynn("[say=nova]"+str(RNG.pick(["Fuck, that feels good!..", "Yes, fuck me raw!..", "Use me like the slut that I am..", "Fuck this slutty pussy!", "Breed this whore.. f-fuck.."]))+"[/say]")
@@ -1081,7 +1081,7 @@ func _run():
 
 		addButton("Cum", "See what happens next", "do_fuck_cum")
 	if(state == "do_fuck_cum"):
-		playAnimation(StageScene.SexStanding, "inside", {npc="nova", pc="pc", bodyState={exposedCrotch=true,hard=true,condom=usedCondom}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexStanding, "inside", {npc="nova", pc="pc", pcCum=true, npcCum=true, bodyState={exposedCrotch=true,hard=true,condom=usedCondom}, npcBodyState={naked=true, hard=true}})
 		if (usedCondom && condomBroke):
 			saynn("Why even bother to pull out if you have a condom on. You ram your {pc.cock} as deep as Nova's pussy allows and grunt as her soft insides bring you over the edge.")
 
@@ -1155,7 +1155,7 @@ func _run():
 
 		addButton("Fuck Nova", "Do it", "do_strapon_actually")
 	if(state == "do_strapon_actually"):
-		playAnimation(StageScene.SexStanding, "fast", {npc="nova", pc="pc", bodyState={exposedCrotch=true,hard=true,condom=usedCondom}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexStanding, "fast", {npc="nova", pc="pc", pcCum=true, npcCum=true, bodyState={exposedCrotch=true,hard=true,condom=usedCondom}, npcBodyState={naked=true, hard=true}})
 		saynn("[say=pc]What a slut.[/say]")
 
 		saynn("While you were fiddling with your strapon harness, Nova sees an opportunity and tries to break free.")
@@ -1518,7 +1518,7 @@ func _run():
 
 		addButton("Cum", "It's too much..", "nova_vaginal_fuck_cum")
 	if(state == "nova_vaginal_fuck_cum"):
-		playAnimation(StageScene.SexStanding, "inside", {npc="pc", pc="nova", bodyState={naked=true,hard=true,condom=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexStanding, "inside", {npc="pc", pc="nova", pcCum=true, npcCum=true, bodyState={naked=true,hard=true,condom=true}, npcBodyState={naked=true, hard=true}})
 		saynn("You almost scream as Nova manages to fit her whole length inside you, her knot stretching your pussy extremely wide while the tip is pressed firmly against your cervix, pushing on it so much that there is a visible bump on your belly..")
 
 		saynn("The sensations are too much, it only takes a few seconds of her cock being inside you before you cum hard, your body shaking and squirming around it, your legs wanna give but Nova supports you.. with more than just her paws..")
@@ -1609,7 +1609,7 @@ func _run():
 
 		addButton("Cum", "It's too much..", "nova_anal_fuck_cum")
 	if(state == "nova_anal_fuck_cum"):
-		playAnimation(StageScene.SexStanding, "inside", {npc="pc", pc="nova", bodyState={naked=true,hard=true,condom=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexStanding, "inside", {npc="pc", pc="nova", pcCum=true, npcCum=true, bodyState={naked=true,hard=true,condom=true}, npcBodyState={naked=true, hard=true}})
 		saynn("You almost scream as Nova manages to fit her whole length inside you, her knot stretching your tailhole extremely wide while the tip is shoved deep inside your nethers, pushing on the inner walls so much that there is a visible bump on your belly..")
 
 		saynn("The sensations are too much, it only takes a few seconds of her cock being inside you before you cum hard, your body shaking and squirming around it, your legs wanna give but Nova supports you.. with more than just her paws..")

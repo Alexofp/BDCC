@@ -988,7 +988,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "walkies_meetnova_knot")
 	if(state == "walkies_meetnova_knot"):
-		playAnimation(StageScene.PuppySexAllFours, "inside", {pc="nova", npc="tavi", npcBodyState={naked=true}, bodyState={naked=true, hard=true, condom=true}})
+		playAnimation(StageScene.PuppySexAllFours, "inside", {pc="nova", npc="tavi", pcCum=true, npcCum=true, npcBodyState={naked=true}, bodyState={naked=true, hard=true, condom=true}})
 		if (condomBroke):
 			saynn("Nova grunts as she manages to shove her full length inside Tavi, breaking into her womb. The extreme tightness of the puppy's inner walls shoots husky over the edge instantly. She arches her back as cock starts stuffing the condom inside Tavi's womb.. until something snaps.. Oops.. Seems, [b]the condom has broke, spilling all of its contents inside![/b]")
 

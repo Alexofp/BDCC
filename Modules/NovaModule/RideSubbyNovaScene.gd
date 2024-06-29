@@ -77,6 +77,7 @@ func _run():
 	if(state == "inside"):
 		playAnimation(StageScene.SexCowgirl, "fast", {
 			npc="pc", pc="nova",
+			pcCum=true, npcCum=true,
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})
@@ -119,6 +120,7 @@ func _run():
 	if(state == "outside"):
 		playAnimation(StageScene.SexCowgirl, "tease", {
 			npc="pc", pc="nova",
+			pcCum=true, npcCum=true,
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})
@@ -154,6 +156,7 @@ func _run():
 	if(state == "get_knotted"):
 		playAnimation(StageScene.SexCowgirl, "fast", {
 			npc="pc", pc="nova",
+			pcCum=true, npcCum=true,
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})

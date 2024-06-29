@@ -88,6 +88,7 @@ func _run():
 	if(state == "go_raw"):
 		playAnimation(StageScene.SexCowgirl, "sex", {
 			npc="pc", pc="jack", 
+			npcCum=true,
 			bodyState={exposedCrotch=true,hard=true,condom=usedCondom},
 			npcBodyState={exposedCrotch=true,},
 		})
@@ -135,6 +136,7 @@ func _run():
 	if(state == "inside"):
 		playAnimation(StageScene.SexCowgirl, "fast", {
 			npc="pc", pc="jack", 
+			pcCum=true,
 			bodyState={exposedCrotch=true,hard=true,condom=usedCondom},
 			npcBodyState={exposedCrotch=true,},
 		})
@@ -259,6 +261,7 @@ func _run():
 	if(state == "go_raw1"):
 		playAnimation(StageScene.SexCowgirl, "sex", {
 			npc="pc", pc="jack", 
+			npcCum=true,
 			bodyState={exposedCrotch=true,hard=true,condom=usedCondom,},
 			npcBodyState={exposedCrotch=true,},
 		})
@@ -306,6 +309,7 @@ func _run():
 	if(state == "inside1"):
 		playAnimation(StageScene.SexCowgirl, "fast", {
 			npc="pc", pc="jack", 
+			pcCum=true,
 			bodyState={exposedCrotch=true,hard=true,condom=usedCondom,},
 			npcBodyState={exposedCrotch=true,},
 		})

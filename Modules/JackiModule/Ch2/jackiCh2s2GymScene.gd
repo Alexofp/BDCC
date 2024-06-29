@@ -290,7 +290,7 @@ func _run():
 
 		addButton("Cum", "Feels too good", "perv_makehersuckass_cum")
 	if(state == "perv_makehersuckass_cum"):
-		playAnimation(StageScene.SexRimming, "sex", {npc="jacki", pc="pc", bodyState={exposedCrotch=true,hard=true}})
+		playAnimation(StageScene.SexRimming, "sex", {npc="jacki", pc="pc", pcCum=true, bodyState={exposedCrotch=true,hard=true}})
 		saynn("You don't even have to encourage her anymore, Jacki is treating your ass so well.. that you can't hold back anymore..")
 
 		if (GM.pc.isWearingChastityCage()):
@@ -658,7 +658,7 @@ func _run():
 		addButtonWithChecks("Double creds", "Give her twice as much credits and see what she will do", "gift_creds_hj_double", [], [[ButtonChecks.HasCredits, 10]])
 		addButton("Just cum", "Five creds is enough", "gift_creds_hj_cum")
 	if(state == "gift_creds_hj_cum"):
-		playAnimation(StageScene.SexHandjob, "tease", {pc="pc", npc="jacki", bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexHandjob, "tease", {pc="pc", npc="jacki", pcCum=true, bodyState={naked=true, hard=true}})
 		saynn("You decide not to sweeten the deal, the girl is receiving enough already. But you also decide not to warn her.")
 
 		saynn("And so, suddenly, strings of thick {pc.cum} get pushed out of your {pc.penis} as your orgasm takes over. Jacki gasps as she fails to dodge the first few, causing her to receive some onto her muzzle and hair.")
@@ -693,7 +693,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "gift_creds_hj_double"):
-		playAnimation(StageScene.SexHandjob, "tease", {pc="pc", npc="jacki", bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexHandjob, "tease", {pc="pc", npc="jacki", pcCum=true, bodyState={naked=true, hard=true}})
 		saynn("Everything has a price. You flash Jacki the second chip of the same value. And she seems to understand everything without you saying anything.")
 
 		saynn("Why? Because she positions herself right in front of your cock and raises her chin high while closing her eyes. All the while her paw keeps stroking you more and more.. Until the orgasm takes over.")
@@ -1059,7 +1059,7 @@ func _run():
 
 		addButton("Cum inside", "Give that slut what she deserves", "kind_massage_forcedfuck_cum")
 	if(state == "kind_massage_forcedfuck_cum"):
-		playAnimation(StageScene.SexBehind, "inside", {npc="jacki", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexBehind, "inside", {npc="jacki", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("After a few last rough thrusts, that clenching ass easily pushes you over the edge. Jacki's body quivers under you as you shove your throbbing {pc.penis} deep inside and start flooding her guts full of your sticky {pc.cum}.")
 
 		saynn("When the orgasm is over, you pull out and stop pinning the wolfie. And she is just.. sobbing.. while her used {jackiButt} asshole is leaking your seed. All the accumulated trust.. shattered.. her body bruised.")
@@ -1111,7 +1111,7 @@ func _run():
 
 		addButton("Forced orgasm", "See what happens next", "kind_massage_forcedfisting_cum")
 	if(state == "kind_massage_forcedfisting_cum"):
-		playAnimation(StageScene.SexFisting, "tease", {npc="jacki", npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexFisting, "tease", {npc="jacki", npcCum=true, npcBodyState={exposedCrotch=true}})
 		saynn("Suddenly, Jacki starts arching her back and crying out loudly as her stretched asshole is pulsing around your hand. You're not sure if this is an orgasm.. or something caused by you overstimulating her.. but it's sure a welcomed addition.")
 
 		saynn("When that is over, you pull your fist out and stop pinning the wolfie. While she is just.. sobbing.. her {jackiButt} asshole is struggling to close completely. All the accumulated trust.. shattered.. her body bruised.")
@@ -1735,6 +1735,16 @@ func _run():
 
 			saynn("You nod and let Jacki jog away.")
 
+		elif (plasticBottleFluidID == "Water"):
+			saynn("Jacki empties half the bottle and pours the rest on her face.")
+
+			saynn("[say=jacki]Ah.. that feels good..[/say]")
+
+			saynn("You smile and grab the bottle back.")
+
+			saynn("[say=jacki]Thank you! That helped a lot! I'm gonna go now though.[/say]")
+
+			saynn("You nod and let Jacki jog away.")
 		elif (plasticBottleFluidID == "Cum"):
 			saynn("Thick sticky cum starts flowing down Jacki's tongue as she gulps it all up.. She understands what it is way too late..")
 
@@ -1939,7 +1949,7 @@ func _run():
 		addButton("Cum inside", "Breed Jacki", "jog_breed_fuck_cuminside")
 		addButton("Pull out", "Pull your cock out just before you cum", "jog_breed_fuck_pullout")
 	if(state == "jog_breed_fuck_cuminside"):
-		playAnimation(StageScene.SexAllFours, "inside", {npc="jacki", bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexAllFours, "inside", {npc="jacki", pcCum=true, npcCum=true, bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("You commit to it, shoving your cock as deep as that wolfie's pussy allows, breaking into her womb before cumming inside, your {pc.cum} stuffing her full to the brim. Your hands keep tugging on her hair and tail, making Jacki feel pain too as you breed her.")
 
 		saynn("[say=jacki]Ngh-h-h! I'm such a whore![/say]")
@@ -1950,7 +1960,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "jog_breed_fuck_pullout"):
-		playAnimation(StageScene.SexAllFours, "tease", {npc="jacki", bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexAllFours, "tease", {npc="jacki", pcCum=true, bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("You decide against breeding that wolfie and pull out just before your cock starts throbbing and covering that ass with strings of your thick {pc.cum}. One of your hands keep tugging on her hair, making Jacki feel pain too as you mark her.")
 
 		saynn("[say=jacki]Ngh-h-h! I'm such a cum whore![/say]")
@@ -2046,7 +2056,7 @@ func _run():
 		addButton("Cum inside", "Stuff that asshole", "jog_anal_fuck_cuminside")
 		addButton("Pull out", "Make a mess on Jacki's back", "jog_anal_fuck_pullout")
 	if(state == "jog_anal_fuck_cuminside"):
-		playAnimation(StageScene.SexStanding, "inside", {npc="jacki", bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexStanding, "inside", {npc="jacki", pcCum=true, npcCum=true, bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("No reason to pull gives you a good reason to do the opposite. As your powerful thrusts continue, Jacki's body starts to tremble with overwhelming pleasure. She cums just from having her ass railed.. while you cum from her inner walls stimulating your shaft to the point of no return..")
 
 		saynn("[say=jacki]Yes-s!.. Cum inside that whore's ass![/say]")
@@ -2067,7 +2077,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "jog_anal_fuck_pullout"):
-		playAnimation(StageScene.SexStanding, "tease", {npc="jacki", bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexStanding, "tease", {npc="jacki", pcCum=true, npcCum=true, bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("No reason to pull out.. but you don't need a good reason. As your powerful thrusts continue, Jacki's body starts to tremble with overwhelming pleasure. She cums just from having her ass railed.. while you pull your cock out just before her clenching tailhole brings you over the edge.")
 
 		saynn("[say=jacki]Oh fuck-k..[/say]")
@@ -2176,7 +2186,7 @@ func _run():
 
 		addButton("Make her cum", "Stuff that asshole", "jog_anal_strapon_cum")
 	if(state == "jog_anal_strapon_cum"):
-		playAnimation(StageScene.SexStanding, "inside", {npc="jacki", bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexStanding, "inside", {npc="jacki", pcCum=true, npcCum=true, bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("No reason to pull gives you a good reason to do the opposite. As your powerful thrusts continue, Jacki's body starts to tremble with overwhelming pleasure. She cums just from having her ass railed.. while you cum from her inner walls stimulating your shaft to the point of no return..")
 
 		saynn("[say=jacki]Yes-s!.. Cum inside that whore's ass![/say]")
@@ -2902,7 +2912,7 @@ func _run():
 		addButton("Cum inside", "Stuff that ass", "do_grab_anal_cuminside")
 		addButton("Pull out", "Rather not stuff that ass", "do_grab_anal_pullout")
 	if(state == "do_grab_anal_cuminside"):
-		playAnimation(StageScene.SexBehind, "inside", {npc="jacki", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexBehind, "inside", {npc="jacki", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("Fuck it. You ram your cock deep into that ass and let her clenching anal ring push you over the hill. Grunts and growls escape from you.. as you stuff your thick load into Jacki's ass, painting her guts white.")
 
 		saynn("She is still whining and sobbing softly.. You give her rear a loud smack, making her clench more.")
@@ -2927,7 +2937,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "do_grab_anal_pullout"):
-		playAnimation(StageScene.SexBehind, "tease", {npc="jacki", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexBehind, "tease", {npc="jacki", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("You pull your cock out at the last possible moment before your shaft starts throbbing and unleashing its load all over Jacki's fluffy ass.")
 
 		saynn("She is still whining and sobbing softly.. You give her rear a loud smack, making her clench more.")
@@ -3248,7 +3258,7 @@ func _run():
 
 		addButton("Cum inside", "Breed Jacki's pisshole", "do_grab_urethra_fuck_cum")
 	if(state == "do_grab_urethra_fuck_cum"):
-		playAnimation(StageScene.Choking, "inside", {npc="jacki", bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.Choking, "inside", {npc="jacki", pcCum=true, npcCum=true, bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("You welcome that orgasm and shove your cock as deep as that pisshole allows. Moans leave your mouth as your throbbing member starts stuffing Jacki's bladder full of your thick virile {pc.cum}..")
 
 		saynn("[say=jacki]Nh-h-h!.. M-my.. p-pisshole..[/say]")
@@ -3686,7 +3696,7 @@ func _run():
 		addButton("Inside", "Cum inside Jacki's womb", "do_enslave_fuck_cuminside")
 		addButton("Pull out", "Cum all over her butt instead", "do_enslave_fuck_pullout")
 	if(state == "do_enslave_fuck_cuminside"):
-		playAnimation(StageScene.HangingSex, "inside", {pc="jacki", npc="pc", npcBodyState={naked=true, hard=true}, bodyState={naked=true}})
+		playAnimation(StageScene.HangingSex, "inside", {pc="jacki", npc="pc", pcCum=true, npcCum=true, npcBodyState={naked=true, hard=true}, bodyState={naked=true}})
 		saynn("Why hold back now? Jacki is yours.")
 
 		saynn("Her pussy is basically milking your cock already anyway, pushing you over the edge. You welcome that, shoving your dick deep inside, breaking into Jacki's womb.")
@@ -3707,7 +3717,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "do_enslave_fuck_afterfuck")
 	if(state == "do_enslave_fuck_pullout"):
-		playAnimation(StageScene.HangingSex, "tease", {pc="jacki", npc="pc", npcBodyState={naked=true, hard=true}, bodyState={naked=true}})
+		playAnimation(StageScene.HangingSex, "tease", {pc="jacki", npc="pc", pcCum=true, npcCum=true, npcBodyState={naked=true, hard=true}, bodyState={naked=true}})
 		saynn("There is no need to breed her. A big belly will only ruin her slim curves.")
 
 		saynn("Her pussy is basically milking your cock already anyway, pushing you over the edge. You catch that moment and pull moments before your member starts to throb and shoot thick {pc.cum} all over that fluffy ass!")

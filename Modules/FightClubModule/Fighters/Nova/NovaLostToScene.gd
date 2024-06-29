@@ -103,6 +103,7 @@ func _run():
 	if(state == "getused"):
 		playAnimation(StageScene.SexStanding, "sex", {
 			pc="nova", npc="pc", 
+			pcCum=true, npcCum=true,
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={naked=true,hard=true,},
 		})

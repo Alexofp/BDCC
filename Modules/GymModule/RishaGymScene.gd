@@ -165,6 +165,7 @@ func _run():
 	if(state == "cumAnal"):
 		playAnimation(StageScene.SexAllFours, "fast", {
 			pc="risha", npc="pc", 
+			pcCum=true, npcCum=true,
 			bodyState={naked=true,hard=true},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})
@@ -256,6 +257,7 @@ func _run():
 		# (cum in mouth, stretches mouth, covers in cum)
 		playAnimation(StageScene.SexHandjob, "fast", {
 			pc="risha", npc="pc", 
+			pcCum=true,
 			bodyState={naked=true,hard=true},
 			npcBodyState={},
 		})
@@ -364,6 +366,7 @@ func _run():
 	if(state == "cumVaginal"):
 		playAnimation(StageScene.SexAllFours, "fast", {
 			pc="risha", npc="pc", 
+			pcCum=true, npcCum=true,
 			bodyState={naked=true,hard=true},
 			npcBodyState={exposedCrotch=true,hard=true,},
 		})
@@ -415,6 +418,7 @@ func _run():
 		# (needs cock and strength)
 		playAnimation(StageScene.SexAllFours, "sex", {
 			pc="pc", npc="risha", 
+			npcCum=true,
 			bodyState={exposedCrotch=true,hard=true,},
 			npcBodyState={naked=true,hard=true},
 		})
@@ -468,6 +472,7 @@ func _run():
 	if(state == "cum_inside_risha"):
 		playAnimation(StageScene.SexAllFours, "fast", {
 			pc="pc", npc="risha", 
+			pcCum=true,
 			bodyState={exposedCrotch=true,hard=true,},
 			npcBodyState={naked=true,hard=true},
 		})

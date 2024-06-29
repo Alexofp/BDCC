@@ -363,7 +363,7 @@ func _run():
 
 		addButton("Cum!", "Fill her ass up", "cum_kait_riding_anal")
 	if(state == "cum_kait_riding_anal"):
-		playAnimation(StageScene.SexCowgirl, "inside", {npc="kait", pc="pc", npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.SexCowgirl, "inside", {npc="kait", pc="pc", pcCum=true, npcCum=true, npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
 		saynn("You grip tightly onto the floor while your whole body enters the orgasmic state, your {pc.penis} throbs and twitches inside Kait until finally bursting with {pc.cum}. Kait arches her back and squirms around your member while you stuff her cute fluffy butt to the brim. She makes some very passionate noises. Both her holes are pulsating, her anus milking your cock while her pussy squirts juices all over your body.")
 
 		saynn("[say=kait]Yeah, cum inside the snow leopard's ass like a good pet~.[/say]")
@@ -553,7 +553,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "kait_gets_bred_by_inmates")
 	if(state == "kait_gets_bred_by_inmates"):
-		playAnimation(StageScene.StocksSpitroast, "fast", {pc="kait", npc=first_npc_id, npc2=second_npc_id, bodyState={naked=true}, npcBodyState={exposedCrotch=true, hard=true}, npc2BodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.StocksSpitroast, "fast", {pc="kait", pcCum=true, npcCum=true, npc=first_npc_id, npc2=second_npc_id, bodyState={naked=true}, npcBodyState={exposedCrotch=true, hard=true}, npc2BodyState={exposedCrotch=true, hard=true}})
 		saynn("Inmates reach their peak speed and soon enough cum begins to flow into Kait's holes. Her own body desperately tries to squirm while the two dicks stuff her full of seed. Kait's eyes roll up as some of the cum gets shot out of her nostrils. Lewd.")
 
 		saynn("Soon after that, the inmates pull out. And others take their place.. You think you saw everything, time to go.")
@@ -601,7 +601,7 @@ func _run():
 
 		addButton("Inside", "Breed that slut", "cum_inside_kait")
 	if(state == "cum_inside_kait"):
-		playAnimation(StageScene.StocksSex, "tease", {npc="pc", pc="kait", bodyState={naked=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.StocksSex, "tease", {npc="pc", pc="kait", pcCum=true, npcCum=true, bodyState={naked=true}, npcBodyState={exposedCrotch=true, hard=true}})
 		saynn("Suddenly Kait lets out a muffled moan, her whole body shivers while her pussy gets tight around your cock, too tight for you to just endure it. You pound her cunt a few more times before your own orgasm overwhelms you, strings after strings of {pc.cum} stuff the cat's womb, quickly overflowing it. Your dick keeps throbbing inside the slut's pulsating cunt, your balls are being milked dry.")
 
 		if (GM.pc.hasVagina()):
@@ -652,7 +652,7 @@ func _run():
 
 		addButton("Cum", "Squirt all over that face", "squirt_over_kaits_face")
 	if(state == "squirt_over_kaits_face"):
-		playAnimation(StageScene.StocksSexOral, "pussy", {npc="pc", pc="kait", bodyState={naked=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.StocksSexOral, "pussy", {npc="pc", pc="kait", pcCum=true, npcCum=true, bodyState={naked=true}, npcBodyState={exposedCrotch=true}})
 		saynn("You continue pushing yourself further and further, more moans escape from your lips, until you finally get yourself over the peak. A powerful orgasm overwhelms your body and mind, making your legs and arms shake, your pussy gushing femcum all over that face.")
 
 		saynn("All the while Kait is just keeping her eyes and mouth closed. But this you're doing the opposite, forcing her mouth open so some of the juices flow inside.")

@@ -123,7 +123,7 @@ func _run():
 
 		addButton("Cum inside", "Give Tavi what you both want", "cum_inside")
 	if(state == "cum_inside"):
-		playAnimation(StageScene.SexCowgirl, "inside", {npc="tavi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexCowgirl, "inside", {npc="tavi", pc="pc", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
 		saynn("With a final, deep motion, Tavi brings herself down onto your cock hard, sending both of you over the edge. Your {pc.penis} is throbbing as it releases waves of sticky hot {pc.cum} directly into Tavi's awaiting womb, flooding it to the brim.")
 
 		saynn("Tavi gasps and moans, feeling the warmth of your seed filling her, making her belly slightly bumpy even.")
@@ -178,7 +178,7 @@ func _run():
 
 		addButton("Cum", "See what happens next", "trib_breed")
 	if(state == "trib_breed"):
-		playAnimation(StageScene.SexTribadism, "fast", {npc="pc", pc="tavi", bodyState={naked=true}, npcBodyState={naked=true,hard=true}})
+		playAnimation(StageScene.SexTribadism, "fast", {npc="pc", pc="tavi", pcCum=true, npcCum=true, bodyState={naked=true}, npcBodyState={naked=true,hard=true}})
 		saynn("Your hips move with an almost primal urgency. In this moment, you two lose yourself in the pleasure you give and receive. Your breaths become synchronized, your moans blending into a symphony of lust.. And then you both get thrown over the edge..")
 
 		saynn("Your bodies begin to quiver from pleasure, your legs remain interlocked as your pussies pulsate and even squirt, sharing girlcum, a mesmerizing display.")
@@ -225,7 +225,7 @@ func _run():
 
 		addButton("Cum", "See what happens next", "do_chastity_cum")
 	if(state == "do_chastity_cum"):
-		playAnimation(StageScene.SexCowgirl, "tease", {npc="tavi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexCowgirl, "tease", {npc="tavi", pc="pc", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
 		saynn("Without any direct stimulation, you are pushed past your edge, just from Tavi's crazy amount of teasing. You arch your back as your locked member starts throbbing and shooting weak strings of {pc.cum} onto your own belly. Tavi's orgasm happens at the same time, causing her body to start shivering while the many moans escape her lips.")
 
 		saynn("[say=tavi]Ngh-h~..[/say]")

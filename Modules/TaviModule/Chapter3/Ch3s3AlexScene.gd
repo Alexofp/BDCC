@@ -577,7 +577,7 @@ func _run():
 		addButton("Force knot in", "This must happen", "force_knot_in")
 
 	if(state == "force_knot_in"):
-		playAnimation(StageScene.SexCowgirl, "tease", {pc="alexrynard", npc="pc", bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexCowgirl, "tease", {pc="alexrynard", npc="pc", pcCum=true, npcCum=true, bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true}})
 		
 		saynn("You ride him faster and faster, your motions becoming shaky as his cock sends waves of pleasure throughout your whole body. You’re bouncing on it so hard that your pussy starts squirting girly juices all over his crotch. You can’t hide your moans as you ride him even harder.")
 
@@ -670,7 +670,7 @@ func _run():
 		addButton("Force knot in", "This must happen", "force_knot_in1")
 
 	if(state == "force_knot_in1"):
-		playAnimation(StageScene.SexCowgirl, "tease", {pc="alexrynard", npc="pc", bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexCowgirl, "tease", {pc="alexrynard", npc="pc", pcCum=true, npcCum=true, bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true}})
 		
 		saynn("You ride him faster and faster, your motions becoming shaky as his cock sends waves of pleasure throughout your whole body. You’re bouncing on it so hard that you feel your pleasure spot tingling. You can’t hide your moans as you ride him even harder.")
 

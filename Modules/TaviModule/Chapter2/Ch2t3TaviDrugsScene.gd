@@ -630,7 +630,7 @@ func _run():
 
 	if(state == "continue9"):
 		playAnimation(StageScene.SexMissionary, "fast", {
-			npc="pc", pc="taviDemonFuta",
+			npc="pc", pc="taviDemonFuta", pcCum=true, npcCum=true,
 			bodyState={hard=true},
 			npcBodyState={naked=true,caged=true},
 		})
@@ -892,7 +892,7 @@ func _run():
 
 	if(state == "cum_inside"):
 		playAnimation(StageScene.SexCowgirl, "fast", {
-			pc="pc", npc="taviDemon",
+			pc="pc", npc="taviDemon", pcCum=true, npcCum=true,
 			bodyState={naked=true,hard=true},
 			npcBodyState={hard=true},
 		})
@@ -1043,6 +1043,12 @@ func _run():
 		addButton("Continue", "See what happens next", "continue15")
 
 	if(state == "continue15"):
+		playAnimation(StageScene.SexFaceSitting, "grind", {
+			npc="pc", pc="taviDemon", npcCum=true,
+			bodyState={hard=true},
+			npcBodyState={naked=true,caged=true},
+		})
+		
 		# (if has pussy)
 		if(GM.pc.hasVagina()):
 			saynn("The tail quickly brings you over the line, you try to arch your back and moan but Tavi has you pinned into the floor. Not being able to squirm only makes you cum harder, your slit clenches around the flexible demon tail and squirts from overstimulation.")

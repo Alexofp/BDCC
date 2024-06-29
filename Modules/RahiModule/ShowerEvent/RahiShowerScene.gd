@@ -242,6 +242,7 @@ func _run():
 	if(state == "cum_inside"):
 		playAnimation(StageScene.SexStanding, "fast", {
 			npc="rahi", pc="pc", 
+			pcCum=true, npcCum=true,
 			bodyState={naked=true,hard=true,condom=usedCondom},
 			npcBodyState={naked=true},
 		})

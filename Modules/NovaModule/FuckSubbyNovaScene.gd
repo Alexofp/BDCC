@@ -112,6 +112,7 @@ func _run():
 	if(state == "pull_out"):
 		playAnimation(StageScene.SexAllFours, "tease", {
 			pc="pc",npc="nova",
+			pcCum=true,
 			bodyState={exposedCrotch=true,hard=true,condom=usedCondom},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})
@@ -145,6 +146,7 @@ func _run():
 	if(state == "cum_inside"):
 		playAnimation(StageScene.SexAllFours, "fast", {
 			pc="pc",npc="nova",
+			pcCum=true, npcCum=true,
 			bodyState={exposedCrotch=true,hard=true,condom=usedCondom},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})

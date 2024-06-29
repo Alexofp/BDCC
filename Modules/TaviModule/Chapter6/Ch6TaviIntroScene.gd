@@ -219,7 +219,7 @@ func _run():
 		addButton("Cum inside", "Attempt to breed that slut anyway", "do_fuck_cum_inside")
 		addButton("Pull out", "Deny Tavi her request", "do_fuck_pullout")
 	if(state == "do_fuck_cum_inside"):
-		playAnimation(StageScene.SexStanding, "inside", {npc="tavi", pc="pc", npcBodyState={naked=true}, bodyState={naked=true,hard=true}})
+		playAnimation(StageScene.SexStanding, "inside", {npc="tavi", pc="pc", pcCum=true, npcCum=true, npcBodyState={naked=true}, bodyState={naked=true,hard=true}})
 		saynn("That eager pussy quickly pushes you to your peak just by kneading your cock.. until it's too late to pull out. You grunt as you hold onto Tavi's body tightly and cum inside her, your throbbing cock stuffing her toxic-colored pussy full of your thick virile {pc.cum}.")
 
 		saynn("[say=tavi]Yes-s-s~..[/say]")
@@ -238,7 +238,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "start_talk_scene")
 	if(state == "do_fuck_pullout"):
-		playAnimation(StageScene.SexStanding, "tease", {npc="tavi", pc="pc", npcBodyState={naked=true}, bodyState={naked=true,hard=true}})
+		playAnimation(StageScene.SexStanding, "tease", {npc="tavi", pc="pc", pcCum=true, npcCum=true, npcBodyState={naked=true}, bodyState={naked=true,hard=true}})
 		saynn("That eager pussy quickly pushes you to your peak just by kneading your cock.. But you decide against cumming inside your new pet during her first sex and pull out. Your {pc.penis} throbs and twitches before strings of your thick warm {pc.cum} begin landing on Tavi's bare ass and lower back, adding a new color to her unique color palette.")
 
 		saynn("[say=tavi]Aw.. It's okay.. Thank you for being careful..[/say]")

@@ -121,6 +121,7 @@ func _run():
 	if(state == "get_fucked_orgasm"):
 		playAnimation(StageScene.SexStanding, "inside", {
 			pc="rush", npc="pc",
+			pcCum=true, npcCum=true,
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})

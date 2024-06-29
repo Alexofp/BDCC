@@ -141,7 +141,7 @@ func _run():
 		addButton("Isolation", "And pleasure", "isolation")
 
 	if(state == "isolation"):
-		playAnimation(StageScene.TentaclesSex, "fast", {bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.TentaclesSex, "fast", {pcCum=true, bodyState={naked=true, hard=true}})
 		
 		saynn("Even blindfolded and gagged, you have enough to worry about, the tentacle in your butt had began thrusting in and out at a steady pace, fucking you! Your {pc.analStretch} doesn’t even close fast enough before it’s stuffed again. Then a second tentacle joins, they begin pounding your butt interchangeably, stretching you out so much.")
 
@@ -160,7 +160,7 @@ func _run():
 		addButton("Let it happen", "Ride it to the end..", "let_it_happen")
 
 	if(state == "let_it_happen"):
-		playAnimation(StageScene.TentaclesSex, "inside", {bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.TentaclesSex, "inside", {cum=true, pcCum=true, bodyState={naked=true, hard=true}})
 		
 		saynn("Suddenly your holes are being stuffed with black liquid goo! All the tentacles increase in size, they keep pounding you while cumming inside. Cumming so much that your belly quickly becomes cuminflated, the one in your throat sends goo directly to your belly, quickly filling it. The ones in your butt do the same, stuffing your butt to the brim.")
 

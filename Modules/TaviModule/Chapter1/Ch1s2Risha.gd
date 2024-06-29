@@ -184,7 +184,7 @@ func _run():
 		addButton("Continue", "See what happens next", "getCummedInside")
 
 	if(state == "getCummedInside"):
-		playAnimation(StageScene.SexStanding, "fast", {npc="pc", pc="risha",
+		playAnimation(StageScene.SexStanding, "fast", {npc="pc", pc="risha", pcCum=true, npcCum=true,
 			bodyState={exposedCrotch=true,hard=true,},
 			npcBodyState={exposedCrotch=true,},
 		})

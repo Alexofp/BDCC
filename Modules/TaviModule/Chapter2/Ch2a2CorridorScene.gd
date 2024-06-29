@@ -632,6 +632,7 @@ func _run():
 		addButton("Leave", "Time to go", "endthescene")
 
 	if(state == "give_up"):
+		playAnimation(StageScene.Sybian, "intense", {pcCum=true, bodyState={exposedCrotch=true,hard=true}})
 		# (if has pussy)
 		if(GM.pc.hasVagina()):
 			saynn("It’s just too much, you succumb to the constant source of pleasure and quit resisting completely. Very soon after a third orgasm overwhelms you, making your pussy squirt out all the femcum that it had. You moan like a desperate slut and let yourself enjoy this one fully.")

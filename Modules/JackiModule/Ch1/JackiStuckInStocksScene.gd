@@ -195,7 +195,7 @@ func _run():
 
 
 	if(state == "cum_inside"):
-		playAnimation(StageScene.StocksSex, "fast", {pc="jacki", npc="pc", bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.StocksSex, "fast", {pc="jacki", npc="pc", pcCum=true, npcCum=true, bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true}})
 		
 		saynn("Your orgasm is close and you welcome it, your hand yanks on that tail hard while you ram your cock as deep as that tight clenching asshole allows. Her inner walls start to milk you while your dick shoots long strings of your warm sticky {pc.cum} deep into her ass, stuffing her guts full of your seed.")
 
@@ -217,7 +217,7 @@ func _run():
 		addButton("Continue", "See what happens next", "continue1")
 
 	if(state == "pull_out"):
-		playAnimation(StageScene.StocksSex, "tease", {pc="jacki", npc="pc", bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.StocksSex, "tease", {pc="jacki", npc="pc", npcCum=true, bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true}})
 		
 		saynn("Your orgasm is close and you welcome it. But instead of stuffing the girl’s guts you decide to pull out and cum all over her ass. String of warm sticky {pc.cum} land onto the wolfy’s shirt, back, tail, ass. Some even land on that gaping pulsating star and then drip down over her wet stitched up pussy and messing up her thighs.")
 
@@ -557,7 +557,7 @@ func _run():
 		addButton("Continue", "See what happens next", "bullies_cum")
 
 	if(state == "bullies_cum"):
-		playAnimation(StageScene.StocksSpitroast, "fast", {pc="jacki", npc="gymbully", npc2="gymbully2", bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true,hard=true}, npc2BodyState={exposedCrotch=true,hard=true}})
+		playAnimation(StageScene.StocksSpitroast, "fast", {pc="jacki", npc="gymbully", npc2="gymbully2", pcCum=true, npcCum=true, bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true,hard=true}, npc2BodyState={exposedCrotch=true,hard=true}})
 		
 		saynn("You notice their knots inflating and they both struggle to force them in. The girl’s ass is being stretched too much already, to the point of the soft flesh looking irritated. And her jaw can’t open wide enough. But they both continue pounding her holes until the orgasms overwhelm them roughly at the same time.")
 

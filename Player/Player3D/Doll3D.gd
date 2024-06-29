@@ -594,9 +594,9 @@ func setupCumParticles(particlesNode:CPUParticles, intensity:float, howoften:flo
 	particlesNode.scale_amount = clamp(0.5 + intensity / 2.0, 0.5, 2.5)
 	particlesNode.lifetime = howoften
 	particlesNode.tangential_accel = clamp(intensity / 4.0, 0.0, 1.5)
-	particlesNode.initial_velocity = clamp(intensity*1.1*velocityMod, 0.5, 3.0*velocityMod)
+	particlesNode.initial_velocity = clamp(intensity*1.1*velocityMod, 0.5, 1.2*velocityMod)
 	particlesNode.initial_velocity_random = velocityRandom
-	particlesNode.explosiveness = clamp(0.5 + howoften / 20.0, 0.0, 0.8)
+	particlesNode.explosiveness = clamp(0.7 + howoften / 30.0, 0.0, 0.92)
 	particlesNode.preprocess = howoften - RNG.randf_range(0.0, 1.0)
 	particlesNode.speed_scale = 2.0
 
@@ -605,6 +605,9 @@ onready var chastity_cum_particles = $BoneAttachments/PenisBoneAttachment/Chasti
 onready var penis_cum_particles_2 = $BoneAttachments/PenisTipAttachment/PenisCumParticles2
 
 func startCumPenis(intensity:float, howoften:float = 3.0, isChastity=false):
+	if(!OPTIONS.isVisibleCumShotsEnabled()):
+		return
+	intensity *= OPTIONS.getCumShotsIntensityMult()
 	if(isChastity):
 		chastity_cum_particles.scale = Vector3(1.0/rememberedPenisScale, 1.0/rememberedPenisScale, 1.0/rememberedPenisScale)
 		setupCumParticles(chastity_cum_particles, intensity, howoften, 3.0, 0.3)
@@ -621,7 +624,7 @@ func stopCumPenis():
 	penis_cum_particles.emitting = false
 	penis_cum_particles_2.emitting = false
 
-func setupCumParticlesInside(particlesNode:CPUParticles, intensity:float, howoften:float = 3.0, velocityMod:float = 1.0, velocityRandom:float = 1.0):
+func setupCumParticlesInside(particlesNode:CPUParticles, intensity:float, howoften:float = 3.0, velocityMod:float = 1.0, velocityRandom:float = 0.5):
 	howoften *= 1.0
 	var newAmount = Util.maxi(5, int(intensity * 10.0))
 	if(newAmount != particlesNode.amount):
@@ -629,13 +632,17 @@ func setupCumParticlesInside(particlesNode:CPUParticles, intensity:float, howoft
 	particlesNode.scale_amount = clamp(0.5 + intensity / 2.0, 0.5, 2.5)
 	particlesNode.lifetime = howoften
 	particlesNode.tangential_accel = clamp(intensity / 4.0, 0.0, 1.5)
-	particlesNode.initial_velocity = clamp(intensity*1.1*velocityMod, 0.5, 3.0*velocityMod)
+	particlesNode.initial_velocity = clamp(intensity*1.1*velocityMod, 0.5, 2.0*velocityMod)
 	particlesNode.initial_velocity_random = velocityRandom
 	particlesNode.explosiveness = clamp(0.4 + howoften / 20.0, 0.0, 0.8)
 	particlesNode.preprocess = howoften - RNG.randf_range(0.0, 0.3)
 	particlesNode.speed_scale = 1.0
+	particlesNode.spread = 15.0
 
 func startCumInside(intensity:float, howoften:float = 3.0):
+	if(!OPTIONS.isVisibleCumShotsEnabled()):
+		return
+	intensity *= OPTIONS.getCumShotsIntensityMult()
 	#intensity = 1.0
 	#print(intensity)
 	cummedInside = intensity

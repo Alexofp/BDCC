@@ -266,7 +266,7 @@ func _run():
 		addButton("Inside", "Cum inside Rahi's ass", "yard1_anal_cuminside")
 		addButton("Outside", "Cum on Rahi's ass", "yard1_anal_cumoutside")
 	if(state == "yard1_anal_cuminside"):
-		playAnimation(StageScene.PuppySexAllFours, "inside", {npc="rahi", npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.PuppySexAllFours, "inside", {npc="rahi", pcCum=true, npcCum=true, npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
 		saynn("There is no danger in cumming inside Rahi's ass so might as well do that.")
 
 		saynn("[say=pc]Gonna..[/say]")
@@ -287,7 +287,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "returntocell")
 	if(state == "yard1_anal_cumoutside"):
-		playAnimation(StageScene.PuppySexAllFours, "tease", {npc="rahi", npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.PuppySexAllFours, "tease", {npc="rahi", pcCum=true, npcCum=true, npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
 		saynn("As you feel your orgasm building up, you decide not to stuff Rahi's bowels full of your seed. Instead, just when you go past the point of no return, you pull your member out, leaving your pup feeling empty while your throbbing cock shoots ropes of hot thick {pc.cum} all over Rahi's back and her ass, coating her fur in a sticky layer of your seed. You groan as the last strings of your jizz land on her, marking your pup as your own.")
 
 		saynn("Feeling spent, you collapse onto the ground next to Rahi, admiring her fit messy body and her anal ring struggling to close up. Rahi pants just as heavily, looking back at you with a mix of desire and embarrassment.")
@@ -388,7 +388,7 @@ func _run():
 		addButton("Cum inside", "Breed your pup", "yard1_breed_cum")
 		addButton("Outside", "Cum on Rahi's ass", "yard1_breed_cumoutside")
 	if(state == "yard1_breed_cum"):
-		playAnimation(StageScene.PuppySexAllFours, "inside", {npc="rahi", npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.PuppySexAllFours, "inside", {npc="rahi", pcCum=true, npcCum=true, npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
 		saynn("You continue to thrust into Rahi as she rides the ecstatic waves. Finally, with one last hard hip motion, you ram your {pc.penis} deep inside her until the tip of your member kisses her womb. You groan as the tight inner walls bring you over the edge, forcing you to empty your balls directly inside Rahi's womb, filling her up with your hot seed.")
 
 		saynn("[say=pc]Ngh-h..[/say]")
@@ -405,7 +405,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "returntocell")
 	if(state == "yard1_breed_cumoutside"):
-		playAnimation(StageScene.PuppySexAllFours, "tease", {npc="rahi", npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.PuppySexAllFours, "tease", {npc="rahi", pcCum=true, npcCum=true, npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
 		saynn("You continue to thrust into Rahi as she rides the ecstatic waves. But when you feel like you can't hold back anymore, you pull your member out, leaving Rahi's pussy empty and instead cumming all over her back.")
 
 		saynn("The more your {pc.penis} throbs, the more thick sprouts of {pc.cum} land on Rahi's fur, messing up her back, tail, ass, thighs..")
@@ -1048,7 +1048,7 @@ func _run():
 		else:
 			addButton("Continue", "See what happens next", "ev5_cumoutside")
 	if(state == "ev5_cumoutside"):
-		playAnimation(StageScene.PuppySexAllFours, "tease", {pc=npc_id, npc="rahi", npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.PuppySexAllFours, "tease", {pc=npc_id, npc="rahi", pcCum=true, npcCum=true, npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
 		saynn("As the inmate approaches {npc.his} orgasm, {npc.he} pulls out {npc.his} {npc.penis} from Rahi's pussy and strokes it furiously, pushing {npc.himself} over the edge and releasing {npc.his} load all over Rahi's ass and back.")
 
 		saynn("Rahi whimpers while strings of {npc.cum} are landing in thick white streaks all over her fur.")
@@ -1063,7 +1063,7 @@ func _run():
 
 		addButton("Continue", "Continue on your way", "do_continue")
 	if(state == "ev5_cuminside"):
-		playAnimation(StageScene.PuppySexAllFours, "inside", {pc=npc_id, npc="rahi", npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.PuppySexAllFours, "inside", {pc=npc_id, npc="rahi", pcCum=true, npcCum=true, npcBodyState={naked=true}, bodyState={exposedCrotch=true, hard=true}})
 		saynn("You fetch the 10 credits chip, silently allowing {npc.him} to do what {npc.he} wants.")
 
 		saynn("After a few powerful thrusts, the inmate grunts and then eagerly slams into Rahi once final time before releasing {npc.his} seed inside her. Rahi can feel {npc.his} {npc.cum} flooding her womb and dripping down her thighs.")

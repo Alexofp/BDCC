@@ -198,7 +198,7 @@ func _run():
 		addButton("Cum", "Might as well..", "cum")
 
 	if(state == "cum"):
-		playAnimation(StageScene.HangingSex, "tease", {npc="eliza", bodyState={naked=true}, npcBodyState={underwear=true}})
+		playAnimation(StageScene.HangingSex, "tease", {npc="eliza", pcCum=true, bodyState={naked=true}, npcBodyState={underwear=true}})
 		
 		saynn("You keep your mouth open as you produce long passionate noises of love, your whole body starts trying to squirm around the doctor's fake cock as it milks your prostate. Your dick starts leaking {pc.cum} each time she thrusts her hips. And the more she does it, the bigger the flow. Cumming hands free is always so strange, it goes against nature in every way. But it also feels so right, why would we have a spot that makes us feel good and not use it for our pleasure.")
 

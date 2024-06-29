@@ -69,14 +69,14 @@ func _run():
 		addButton("Obey", "", "sex_3")
 		
 	if(state == "sex_3"):
-		playAnimation(StageScene.SexMissionary, "sex", {npc="pc", pc="vion", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexMissionary, "sex", {npc="pc", pc="vion", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("Your body experiences pure, distilled pleasure and bliss.")
 		saynn("You mind drifts in a hazy, mindless, submissive trance, your thoughts silent, your will subdued.")
 		
 		addButton("Serve", "", "sex_4")
 
 	if(state == "sex_4"):
-		playAnimation(StageScene.SexAllFours, "fastflop", {npc="pc", pc="vion", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexAllFours, "fastflop", {npc="pc", pc="vion", npcCum=true, pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("Details are lost to time, your focus too dedicated to pleasure to remember anything else.")
 		saynn("The one thought you do manage to think is... [i]Totally[/i] worth it.")	
 		

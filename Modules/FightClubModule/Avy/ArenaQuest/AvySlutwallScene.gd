@@ -197,7 +197,7 @@ func _run():
 		addButton("Faster", "Strapon Avy harder and let her cum", "strapon_anus_faster")
 		addButton("Deny Avy", "Don't let Avy cum", "strapon_anus_deny")
 	if(state == "strapon_anus_faster"):
-		playAnimation(StageScene.SlutwallSex, "fast", {pc="avy", bodyState={naked=true, hard=true, caged=isCaged}, npcBodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.SlutwallSex, "fast", {pc="avy", pcCum=true, bodyState={naked=true, hard=true, caged=isCaged}, npcBodyState={exposedCrotch=true, hard=true}})
 		saynn("Your hands land on her hips and squeeze them tightly while you start pounding her ass relentlessly. Very soon you begin to hear moans coming from that whore, her "+str("soft cock shooting little bursts of precum through the chastity cage." if isCaged else "hard cock shooting little bursts of precum.")+"")
 
 		if (howBroken < 0.5):
@@ -279,7 +279,7 @@ func _run():
 
 		addButton("Faster", "Fuck Avy harder and cum inside", "use_anus_faster")
 	if(state == "use_anus_faster"):
-		playAnimation(StageScene.SlutwallSex, "fast", {pc="avy", bodyState={naked=true, hard=true, caged=isCaged}, npcBodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.SlutwallSex, "fast", {pc="avy", pcCum=true, npcCum=true, bodyState={naked=true, hard=true, caged=isCaged}, npcBodyState={exposedCrotch=true, hard=true}})
 		saynn("Your hands land on her hips and squeeze them tightly while you start pounding her ass relentlessly. Very soon you begin to hear moans coming from that whore, her "+str("soft cock shooting little bursts of precum through the chastity cage." if isCaged else "hard cock shooting little bursts of precum.")+"")
 
 		if (howBroken < 0.5):
@@ -365,6 +365,7 @@ func _run():
 			addButtonWithChecks("Condom", "Collect Avy's cum into a condom while fingering her", "finger_condom_cum", [], [ButtonChecks.HasCondoms])
 		addButton("Rim Avy", "Make Avy cum with your tongue up her butt", "finger_rim_cum")
 	if(state == "finger_finger_cum"):
+		playAnimation(StageScene.SlutwallSexOral, "tease", {pc="avy", pcCum=true, bodyState={naked=true, hard=true, caged=isCaged}})
 		saynn("You recognize the signs of her climax that is about to happen but only increase the intensity, fingering that needy clenching asshole harder. Your fingers don't press too deep but you're relentless about it.")
 
 		saynn("And soon, Avy's body starts convulsing with pleasure.. well, trying to, the chains rattle but keep her mostly still for you. Her muffled moans are followed by her "+str("caged up cock throbbing inside its contains and pushing a steady flow of cum through the little hole in the cage. All of it ends up marking her own fur." if isCaged else "canine cock throbbing and pulsating before a steady flow of cum spawns from the tip and drips down the shaft, marking her own fur.")+" A completely hands-free orgasm.")
@@ -381,7 +382,7 @@ func _run():
 
 		addButton("Continue", "That was fun", "main")
 	if(state == "finger_rim_cum"):
-		playAnimation(StageScene.SlutwallSexOral, "lick", {pc="avy", bodyState={naked=true, hard=true, caged=isCaged}})
+		playAnimation(StageScene.SlutwallSexOral, "lick", {pc="avy", pcCum=true, bodyState={naked=true, hard=true, caged=isCaged}})
 		saynn("You recognize the signs of her climax that is about to happen and decide to do a little twist. Avy starts whining when you suddenly withdraw your fingers, leaving her prostate craving for your touch. But, instead of using your fingers again, you get on your knees fully, your gaze admiring that tight asshole.")
 
 		saynn("Without hesitation, you bury your face between Avy's spread buttcheeks, your tongue eagerly exploring the sensitive skin around her little star. The sudden shift from fingering to rimming sends shockwaves of pleasure through Avy, her muffled moans fill the air.")
@@ -533,7 +534,7 @@ func _run():
 
 		addButton("Get knotted", "Force that orb inside you", "do_ride_vaginal_knot")
 	if(state == "do_ride_vaginal_knot"):
-		playAnimation(StageScene.SlutwallRide, "inside", {pc="avy", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.SlutwallRide, "inside", {pc="avy", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
 		saynn("Time to do this. With forceful motions, you begin trying to fit Avy's whole dick inside your needy cunt, gradually applying more and more pressure. You can feel your pussy lips slowly stretching after every slap of the knot but it's still not enough.. And that cock is.. throbbing inside you already, the bitch is about to cum..")
 
 		saynn("So you do the only thing you can and raise yourself more before bringing your cunt onto that knot as hard as you can, your slit stretching extremely wide and even painful.. until the knot suddenly slips inside, locking you two together!")
@@ -598,7 +599,7 @@ func _run():
 
 		addButton("Get knotted", "Force that orb inside you", "do_ride_anal_knot")
 	if(state == "do_ride_anal_knot"):
-		playAnimation(StageScene.SlutwallRide, "inside", {pc="avy", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.SlutwallRide, "inside", {pc="avy", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
 		saynn("Time to do this. With forceful motions, you begin trying to fit Avy's whole dick inside your needy ass, gradually applying more and more pressure. You can feel your anal ring slowly stretching after every slap of the knot but it's still not enough.. And that cock is.. throbbing inside you already, the bitch is about to cum..")
 
 		saynn("So you do the only thing you can and raise yourself more before bringing your tailhole onto that knot as hard as you can, your flesh stretching extremely wide and even painful.. until the knot suddenly slips inside, locking you two together!")

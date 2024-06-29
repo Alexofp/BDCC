@@ -69,6 +69,7 @@ func _run():
 	if(state == "continue"):
 		playAnimation(StageScene.SexFisting, "sex", {
 			pc="rebel", npc="pc",
+			npcCum=true,
 			npcBodyState={exposedCrotch=true,hard=true}
 		})
 		

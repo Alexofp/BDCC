@@ -188,6 +188,7 @@ func _run():
 	if(state == "inside"):
 		playAnimation(StageScene.SexStanding, "fast", {
 			pc="pc", npc="kait", 
+			pcCum=true, npcCum=true,
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true},
 		})
@@ -217,6 +218,7 @@ func _run():
 	if(state == "pull_out"):
 		playAnimation(StageScene.SexStanding, "tease", {
 			pc="pc", npc="kait", 
+			pcCum=true,
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true},
 		})

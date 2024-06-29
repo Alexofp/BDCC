@@ -227,7 +227,7 @@ func _run():
 
 		addButton("Cum inside", "Breed Tavi", "rough_cum")
 	if(state == "rough_cum"):
-		playAnimation(StageScene.Choking, "inside", {npc="tavi", bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.Choking, "inside", {npc="tavi", pcCum=true, npcCum=true, bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
 		saynn("You ram your cock balls deep into Tavi's stretched cunt, breaking into her womb and causing her to orgasm again. Her pussy clenches around your shaft so hard, you can't hold back anymore.")
 
 		saynn("Your {pc.penis} throbs as it starts shooting thick spurts of {pc.cum} directly into her babymaker, filling it to the brim. Your hand around her hand loosens as your own climax makes you feel weaker.")
@@ -242,7 +242,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "rough_otherfuck")
 	if(state == "rough_otherfuck"):
-		playAnimation(StageScene.SexMissionary, "fast", {npc="tavi", bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexMissionary, "fast", {npc="tavi", pcCum=true, npcCum=true, bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
 		saynn("You spend the next hour fucking Tavi in various positions.. Pounding her pussy raw, making up for all the missed opportunities.")
 
 		saynn("Obviously you orgasm inside, your balls struggling to produce enough of your seed before you stuff it into Tavi's pulsing lovehole.")
@@ -251,7 +251,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "rough_otherfuck2")
 	if(state == "rough_otherfuck2"):
-		playAnimation(StageScene.SexReverseCowgirl, "fast", {npc="tavi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexReverseCowgirl, "fast", {npc="tavi", pcCum=true, npcCum=true, pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
 		saynn("Even when you are too exhausted to continue fucking her, Tavi finds a way to make you hard and then starts riding you with her slick dripping pussy, moaning passionately in the process.")
 
 		saynn("And your orgasms keep coming and coming, your balls getting drained by that insatiable kitty as she only seems to be getting more eager from this.")
@@ -353,7 +353,7 @@ func _run():
 
 		addButton("Cum inside", "Try to breed Tavi", "vir_cum")
 	if(state == "vir_cum"):
-		playAnimation(StageScene.SexMissionary, "inside", {npc="tavi", bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexMissionary, "inside", {npc="tavi", pcCum=true, npcCum=true, bodyState={naked=true,hard=true}, npcBodyState={naked=true}})
 		saynn("You chase your orgasm.. until you realize that Tavi is close too. A passionate moan escapes her lips before she clings onto your body again and lets the pleasure numb her other senses.")
 
 		saynn("[say=tavi]Ah-h..[/say]")

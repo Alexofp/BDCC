@@ -90,6 +90,7 @@ func _run():
 	if(state == "cum!"):
 		playAnimation(StageScene.SexStanding, "fast", {
 			pc="bulldog", npc="pc",
+			pcCum=true, npcCum=true,
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})

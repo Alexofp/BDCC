@@ -175,7 +175,7 @@ func _run():
 		addButton("Continue", "See what happens next", "continue3")
 
 	if(state == "continue3"):
-		playAnimation(StageScene.HangingSex, "fast", {npc="risha", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.HangingSex, "fast", {npc="risha", pcCum=true, npcCum=true, bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
 		
 		saynn("The more she pounds your ass the more you clench your little star around her shaft, slowly getting used to the sensations that her barbs bring while raking against your soft inner walls. The discomfort goes away, replaced by a strange feeling of pressure inside your dick, like something is about to start overflowing out of it.")
 

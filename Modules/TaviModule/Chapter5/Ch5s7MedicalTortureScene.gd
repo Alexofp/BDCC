@@ -58,7 +58,7 @@ func _run():
 		else:
 			addButton("Continue", "See what happens next", "pc_punishment_anal")
 	if(state == "pc_punishment_vag"):
-		playAnimation(StageScene.HangingSexFuckmachine, "sex", {bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.HangingSexFuckmachine, "sex", {pcCum=true, bodyState={naked=true, hard=true}})
 		saynn("One second everything is fine and the next your pussy suddenly gets penetrated by some rubber dildo! Without mercy, some kind of machine starts thrusting that toy in and out of your slit, each one sending unexpected shockwaves of pleasure mixed with a tingle of pain through your body.")
 
 		saynn("Gasps and muffled moans escape from your lips, harmonizing with Tavi's.")
@@ -99,7 +99,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "pc_punishment_vag_more")
 	if(state == "pc_punishment_vag_more"):
-		playAnimation(StageScene.HangingSexFuckmachine, "fast", {bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.HangingSexFuckmachine, "fast", {pcCum=true, bodyState={naked=true, hard=true}})
 		saynn("You reached your peak.. but the machine didn't. It suddenly began pounding you even harder, forceful thrusts drove you further, overstimulating you to the point of your pussy suddenly squirting, spawning a rush of fluids that makes the floor wet.")
 
 		saynn("[say=eliza]Will it be a good change? Hard to predict. That's why I love experimenting~. It's so exciting.[/say]")
@@ -141,7 +141,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "skip_to_next_day")
 	if(state == "pc_punishment_anal"):
-		playAnimation(StageScene.HangingSexFuckmachine, "sex", {bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.HangingSexFuckmachine, "sex", {pcCum=true, bodyState={naked=true, hard=true}})
 		saynn("One second everything is fine and the next your ass suddenly gets penetrated by some rubber dildo! Without mercy, some kind of machine starts thrusting that toy in and out of your star, each one sending unexpected shockwaves of pleasure mixed with a tingle of pain through your body.")
 
 		saynn("Gasps and muffled moans escape from your lips, harmonizing with Tavi's.")
@@ -182,7 +182,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "pc_punishment_anal_more")
 	if(state == "pc_punishment_anal_more"):
-		playAnimation(StageScene.HangingSexFuckmachine, "fast", {bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.HangingSexFuckmachine, "fast", {pcCum=true, bodyState={naked=true, hard=true}})
 		saynn("You reached your peak.. but the machine didn't. It suddenly began pounding you even harder, forceful thrusts drove you further, overstimulating you.")
 
 		saynn("[say=eliza]Will it be a good change? Hard to predict. That's why I love experimenting~. It's so exciting.[/say]")

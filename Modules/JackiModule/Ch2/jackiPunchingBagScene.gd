@@ -458,7 +458,7 @@ func _run():
 
 		addButton("Cum inside", "Stuff her ass", "do_betray_fuck_cuminside")
 	if(state == "do_betray_fuck_cuminside"):
-		playAnimation(StageScene.HangingSex, "inside", {npc="pc", pc="jacki", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.HangingSex, "inside", {npc="pc", pc="jacki", pcCum=true, npcCum=true, bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
 		saynn("You shove your cock deep inside, creating a visible bump on Jacki's fit belly.. only for that bump to start becoming bigger as you cum inside her, your {pc.cum} filling her guts up and painting them white.")
 
 		saynn("[say=jacki]Ah-h.. f-fuck.. my ass.. huff..[/say]")

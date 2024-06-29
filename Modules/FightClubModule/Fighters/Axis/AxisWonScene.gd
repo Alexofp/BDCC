@@ -200,6 +200,7 @@ func _run():
 	if(state == "cum"):
 		playAnimation(StageScene.SexStanding, "fast", {
 			pc="pc", npc="axis", 
+			npcCum=true, pcCum=true,
 				bodyState={exposedCrotch=true,hard=true},
 				npcBodyState={exposedCrotch=true,caged=true},
 		})
@@ -259,6 +260,13 @@ func _run():
 		addButton("Cum", "Cum all over the guy", "cum1")
 
 	if(state == "cum1"):
+		playAnimation(StageScene.SexFaceSitting, "grind", {
+			pc="pc", npc="axis", 
+			npcCum=true, pcCum=true,
+				bodyState={exposedCrotch=true,hard=true},
+				npcBodyState={exposedCrotch=true,caged=true},
+		})
+		
 		saynn("You grind the wolf’s face until you feel like you can’t take it anymore. Then you raise slightly and shove two fingers inside your slit. Your big thumb rubs the clit while the other two finger yourself at a crazy pace, causing your wet snatch to make wet noises. It only takes a few seconds before you push past the point of no return, you let out some loud moans and cum hard, your pussy squirting juices all over the alpha’s muzzle and into his opened maw. Your shaky legs give up and you fall onto his face again, squirming from all the orgasmic feelings.")
 
 		saynn("The wolf swiftly swallows all of your juices and keeps asking for more, he drags his tongue over your pulsating folds and then penetrates them, quickly tongue-fucking you until your slit squirts again. You arch your back and look behind you, noticing that the wolf came too, his caged cock is shooting weak strings of cum that land on his belly, all without any stimulation.")
