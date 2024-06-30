@@ -114,7 +114,7 @@ func _run():
 		else:
 			saynn("Rahi protects her children from the doctor's hands, her eyes getting watery. The nurse sees that and sighs.")
 
-			saynn("[say=nurse]Alright.. Alright, fine. Let us at least do some basic procedures with the childs and then she can spend some time together.[/say]")
+			saynn("[say=nurse]Alright.. Alright, fine. Let us at least do some basic procedures with the children and then she can spend some time together.[/say]")
 
 			saynn("Rahi reluctantly hands the doctors her babies..")
 

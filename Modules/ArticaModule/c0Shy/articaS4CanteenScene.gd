@@ -24,7 +24,7 @@ func _run():
 
 		saynn("You sit on the bench on the other side of the table and put the metal tray onto it.")
 
-		saynn("[say=pc]How is?[/say]")
+		saynn("[say=pc]How goes it?[/say]")
 
 		saynn("Artica tugs on her collar a bit.")
 
@@ -44,7 +44,7 @@ func _run():
 
 		addButton("Average", "Not great but also not terrible", "say_average")
 		addButton("Horny as fuck", "Tell her that you're quite horny", "say_horny")
-		addButton("Contented", "Tell her that's a nice company makes any day better", "say_contented")
+		addButton("Contented", "Tell her that a nice company makes any day better", "say_contented")
 	if(state == "say_average"):
 		saynn("[say=pc]You know, just average. Not great, not terrible.[/say]")
 

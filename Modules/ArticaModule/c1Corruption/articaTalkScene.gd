@@ -396,7 +396,7 @@ func _run():
 		if (corruption >= 0.8):
 			addButtonWithChecks("Hypnovisor fun..", "Mess with Artica's mind a little.. You will need a hypnovisor for this", "sex_hypnovisorfun", [], [[ButtonChecks.HasItemWithTag, ItemTag.Hypnovisor]])
 		else:
-			addDisabledButton("Mutual pawjob", "Artica's corruption needs to be above 80% for her to be kinky enough to do this.. also don't forget to bring a hypnovisor!")
+			addDisabledButton("Hypnovisor fun..", "Artica's corruption needs to be above 80% for her to be kinky enough to do this.. also don't forget to bring a hypnovisor!")
 		if (getFlag("ArticaModule.LQArticaGotDreamCatcher")):
 			addButton("Invite Rahi..", "Let Rahi and Artica do some kinky stuff together..", "do_invite_rahi")
 		addButton("Back", "Never mind", "")

@@ -211,7 +211,7 @@ func getAssDescriptionAfterImpact(_isHard=false):
 func doDomAction(_id, _actionInfo):
 	if(_id == "stop"):
 		var text = ""
-		text += "{dom.You} {dom.youVerb('stop')} making {sub.you} rim you."
+		text += "{dom.You} {dom.youVerb('stop')} the spanking session with {sub.you}."
 		endActivity()
 		return {
 			text = text,

@@ -109,9 +109,9 @@ func _run():
 			var _ok = textBox.connect("text_entered", self, "onFillMLEnterPressed")
 			addButton("Confirm", "pick this amount", "confirmtextfill")
 			
-			addButton("Back", "Go back a menu", "transferFluids")
+			addButton("Back", "Go back a menu", "fillWithFluids")
 		else:
-			addButton("Back", "Go back a menu", "transferFluids")
+			addButton("Back", "Go back a menu", "fillWithFluids")
 			var variants = [0.1, 0.25, 0.5, 0.75, 1.0]
 			var fluids = item2.getFluids()
 			var howMuch = fluids.getFluidAmount()

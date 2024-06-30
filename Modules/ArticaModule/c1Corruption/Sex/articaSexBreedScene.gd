@@ -250,7 +250,7 @@ func _run():
 
 					saynn("[say=artica]W-wha-?..[/say]")
 
-					saynn("[say=pc]Who's cum do you I loaded the strapon with~?[/say]")
+					saynn("[say=pc]Whose cum do you think I loaded the strapon with~?[/say]")
 
 					saynn("[say=artica]C-c-cum?.. ahh-h..[/say]")
 

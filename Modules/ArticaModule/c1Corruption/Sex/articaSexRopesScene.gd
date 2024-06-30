@@ -110,7 +110,7 @@ func _run():
 
 		addButton("Toys", "Attach a few vibrating toys to her bits..", "do_toys")
 		addButtonWithChecks("Vaginal", "Breed the fluff", "do_vag", [], [[ButtonChecks.HasReachablePenis]])
-		addButtonWithChecks("Anal", "Be a little mean and fuck Artica's other hole this time", "do_anal", [], [[ButtonChecks.HasReachablePenis]])
+		addButtonWithChecks("Anal", "Be a little mean and fuck Artica's other hole", "do_anal", [], [[ButtonChecks.HasReachablePenis]])
 		addButtonWithChecks("Oral", "Stretch Artica's throat a bit", "do_deepthroat", [], [[ButtonChecks.HasReachablePenis]])
 		addButtonWithChecks("Grind face", "Grind your pussy against her face", "do_grind", [], [[ButtonChecks.HasReachableVagina]])
 	if(state == "do_grind"):

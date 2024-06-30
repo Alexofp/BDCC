@@ -136,7 +136,7 @@ func _run():
 		addButton("Continue", "See what happens next", "artica_fucks_herself_faster")
 	if(state == "artica_fucks_herself_faster"):
 		playAnimation(StageScene.FleshlightSit, "fast", {pc="artica", bodyState={naked=true, hard=true}})
-		saynn("With each thrust, she increases the pace without even realizing it, the fleshlight becoming slick with her juices. The dual stimulation of fucking adn being fucked drives her wild, her moans growing louder.")
+		saynn("With each thrust, she increases the pace without even realizing it, the fleshlight becoming slick with her juices. The dual stimulation of fucking and being fucked drives her wild, her moans growing louder.")
 
 		saynn("[say=artica]Y-yes.. ah.. hah..[/say]")
 

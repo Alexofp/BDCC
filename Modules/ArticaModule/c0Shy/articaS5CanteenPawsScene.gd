@@ -13,7 +13,7 @@ func _run():
 
 		s4Outcome = getFlag("ArticaModule.s4Outcome", "left")
 		if (s4Outcome == "left" || s4Outcome == "won"):
-			saynn("[say=pc]Hey Artica. How was it.. the mines.[/say]")
+			saynn("[say=pc]Hey Artica. How was it. The mines.[/say]")
 
 			saynn("[say=artica]It was.. f-fine?..[/say]")
 
@@ -24,13 +24,13 @@ func _run():
 			saynn("[say=artica]It was painful.. still is.. oww-w..[/say]")
 
 		else:
-			saynn("[say=pc]Hey Artica. How do you feel? After yesterday?[/say]")
+			saynn("[say=pc]Hey Artica. You're alright?[/say]")
 
 			saynn("[say=artica]I'm.. okay..[/say]")
 
 			saynn("Judging from how she looks, there is no way that's true.")
 
-			saynn("[say=pc]But how do you feel actually?[/say]")
+			saynn("[say=pc]But how are you actually?[/say]")
 
 			saynn("[say=artica]Not that good.. oww-w..[/say]")
 

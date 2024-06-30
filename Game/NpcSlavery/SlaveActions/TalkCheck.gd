@@ -87,7 +87,7 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 				# Obedience
 				if(obedience <= 0.4):
 					slaveWords.append(RNG.pick([
-						"I should listen you more, I guess.",
+						"I should listen to you more, I guess.",
 						]))
 				elif(obedience <= 0.6):
 					slaveWords.append(RNG.pick([

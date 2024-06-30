@@ -83,7 +83,7 @@ func _run():
 		playAnimation(StageScene.Solo, "stand", {pc="artica", bodyState={naked=true,hard=true}})
 		saynn("You follow the fluff as she masterfully avoids the guard patrols on her way to the sacred spot..")
 
-		saynn("Artica steps into the greenhouse, her heart is probably racing right now. She had returned to this place that had given her such intense pleasure before.."+str(" With a deep breath, she began to undress, completely willingly, her shirt and shorts falling to the floor, rendering her completely naked.." if isNaked else "")+"")
+		saynn("Artica steps into the greenhouse, her heart is probably racing right now. She had returned to this place that had given her such intense pleasure before.."+str(" With a deep breath, she began to undress, completely willingly, her shirt and shorts falling to the floor, rendering her completely naked.." if !isNaked else "")+"")
 
 		saynn("[say=artica]C-can't believe I'm a-about to d-do this..[/say]")
 

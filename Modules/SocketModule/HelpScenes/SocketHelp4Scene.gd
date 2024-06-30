@@ -292,7 +292,7 @@ func _run():
 
 		saynn("He shrugs and spreads his arms wide.")
 
-		saynn("[say=announcer]Somehow you got here. And so, you're welcome to stay in my little paradice. What I don't want is.. other eyes and mouths. And stun batons.[/say]")
+		saynn("[say=announcer]Somehow you got here. And so, you're welcome to stay in my little paradise. What I don't want is.. other eyes and mouths. And stun batons.[/say]")
 
 		saynn("What a kind guy.")
 

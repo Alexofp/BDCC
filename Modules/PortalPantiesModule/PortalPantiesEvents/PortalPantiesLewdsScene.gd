@@ -407,7 +407,7 @@ func _run():
 	if(state == "cockStrokingCum"):
 		playAnimation(StageScene.SexPortalOral, RNG.pick(["hold"]), {pc=npcID, npc="pc", npcBodyState={hard=true}})
 		
-		saynn("You the feeling of pressure rising, you don’t care that you’re not fucking someone, one hand is enough to make you feel very good. Your {pc.cock} starts twitching more and more before suddenly shooting a strong thick string of {pc.cum} into the air followed by a few smaller ones after. You moan and squirm slightly while the hand milks your balls dry.")
+		saynn("You get the feeling of the pressure rising, you don’t care that you’re not fucking someone, one hand is enough to make you feel very good. Your {pc.cock} starts twitching more and more before suddenly shooting a strong thick string of {pc.cum} into the air followed by a few smaller ones after. You moan and squirm slightly while the hand milks your balls dry.")
 		
 		addButton("Continue", "Fun times", "endthescene")
 		

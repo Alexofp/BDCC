@@ -342,7 +342,7 @@ func _run():
 
 			saynn("The gang watched with an expression of twisted satisfaction on their faces as you were forced to pleasure yourself. Your body began betraying you, responding involuntarily, your arousal building.. And so you suck harder, your mouth moving rhythmically along your own chastity cage, tongue licking it more..")
 
-		saynn("[say=gymbully3. Haha. Look at you, getting into it. Such a good little slut~.][/say]")
+		saynn("[say=gymbully3]Haha. Look at you, getting into it. Such a good little slut~.[/say]")
 
 		saynn("Your body is reacting more and more, your {pc.penis} throbbing in your mouth as you feel your orgasm building..")
 

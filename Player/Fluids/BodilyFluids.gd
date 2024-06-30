@@ -40,6 +40,6 @@ static func getOutsideMessinessMessage(messLevel, fluids: Array):
 	if(messLevel == MessinessLevel.VeryMessy):
 		return "Almost your whole body and face are covered with "+humanReadableString+". Hair, ears, arms, legs, everything, you're a complete mess"
 	if(messLevel == MessinessLevel.CumRag):
-		return "There is no empty spot, you are coated with " + humanReadableString+". It all dripping from you while you walk!"
+		return "There is no empty spot, you are coated with " + humanReadableString+". It's all dripping from you while you walk!"
 	if(messLevel >= MessinessLevel.CumDump):
 		return "Your body is covered with multiple levels of "+ humanReadableString+", little strings hang from your ears and chin, the hair is completely soaked. You can taste it all as the fluids drip down your face and lips and into your mouth"

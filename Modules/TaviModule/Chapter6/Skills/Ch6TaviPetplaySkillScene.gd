@@ -877,7 +877,7 @@ func _run():
 		saynn("[say=nova]I don't know.. Are you sure? I'd need a condom at least.. I won't go in raw.[/say]")
 
 		addButtonWithChecks("Best condom", "Give Nova your best condom", "walkies_meetnova_givebestcondom", [], [ButtonChecks.HasCondoms])
-		addButton("Worst condom", "Give Nova your worst condom", "walkies_meetnova_giveworstcondom")
+		addButtonWithChecks("Worst condom", "Give Nova your worst condom", "walkies_meetnova_giveworstcondom", [], [ButtonChecks.HasCondoms])
 		addButton("Never mind", "It's fine", "walkies_meetnova_nofuck")
 	if(state == "walkies_meetnova_nofuck"):
 		saynn("[say=pc]Well. It's okay then, don't worry about it.[/say]")

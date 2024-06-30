@@ -115,7 +115,7 @@ func _run():
 
 		saynn("He presents Artica.. a fancy visor.. with wires sticking out everywhere..")
 
-		saynn("[say=alexrynard]What? Changed your mind? I won't judge if you want to go hit rocks with a pick axe.[/say]")
+		saynn("[say=alexrynard]What? Changed your mind? I won't judge if you want to go hit rocks with a pickaxe.[/say]")
 
 		saynn("Artica shakes her head and grabs the prototype..")
 

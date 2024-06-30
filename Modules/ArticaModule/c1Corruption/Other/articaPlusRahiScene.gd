@@ -329,7 +329,7 @@ func _run():
 		addButton("Faster", "Really hump that cock", "front_faster")
 	if(state == "front_faster"):
 		playAnimation(StageScene.SexTrain, "fast", {pc="artica", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2="rahi", npc2BodyState={naked=true,hard=true}})
-		saynn("Your moans grow louder, your "+str("pussy" if pcVag else "tailhole")+" hugging that cock tightly.."+str(" You feel the knot near the base of her shaft growing fast and juicy.. and so you keep trying to fit it in.." if isStrapon else " You feel the knot near the base of her rubber shaft.. and so you keep trying to fit it in..")+"")
+		saynn("Your moans grow louder, your "+str("pussy" if pcVag else "tailhole")+" hugging that cock tightly.."+str(" You feel the knot near the base of her shaft growing fast and juicy.. and so you keep trying to fit it in.." if !isStrapon else " You feel the knot near the base of her rubber shaft.. and so you keep trying to fit it in..")+"")
 
 		saynn("[say=pc]Knot me, Artica. I want to feel your knot inside me.. ah..[/say]")
 

@@ -3,7 +3,7 @@ extends "res://Player/Bodyparts/Breasts/HumanBreasts.gd"
 func _init():
 	visibleName = "male breasts"
 	id = "malebreasts"
-	size = BreastsSize.FOREVER_FLAT
+	size = BreastsSize.FLAT
 
 func getLewdAdjective():
 	return RNG.pick(["firm", "strong"])

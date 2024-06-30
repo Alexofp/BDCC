@@ -37,7 +37,7 @@ func _run():
 			playAnimation(StageScene.Grope, "watchrub", {pc=npcID, npc="pc", bodyState={exposedCrotch=true, hard=true}})
 			saynn("You walk up to your slave.. and notice that {npc.he} {npc.isAre} rubbing {npc.his} {npc.pussyStretch} pussy. Quite eagerly too.")
 
-		saynn("Encouraging might {npc.him} like you more.. but it also might spoil {npc.him}. If you don't want your slave to masturbate, maybe you can try cuffing {npc.his} hands.."+str(" Or putting a chastity cage on {npc.his} cock." if (masType == "penis") else "")+"")
+		saynn("Encouraging might make {npc.him} like you more.. but it also might spoil {npc.him}. If you don't want your slave to masturbate, maybe you can try cuffing {npc.his} hands.."+str(" Or putting a chastity cage on {npc.his} cock." if (masType == "penis") else "")+"")
 
 		addButton("Encourage", "Let them orgasm", "do_encourage_check")
 		addButton("Order to stop", "Order them to stop", "do_orderstop_check")
