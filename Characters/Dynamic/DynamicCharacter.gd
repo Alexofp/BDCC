@@ -490,6 +490,8 @@ func loadFromDatapackCharacter(_datapack:Datapack, _datapackChar:DatapackCharact
 		npcChatColorOverride = "#"+_datapackChar.chatColor.to_html(false)
 	
 	npcSpecies = _datapackChar.species
+	if(npcSpecies.size() <= 0):
+		npcSpecies = [Species.Unknown]
 	npcCustomSpeciesName = _datapackChar.customSpeciesName
 	
 	pickedSkin = _datapackChar.pickedSkin

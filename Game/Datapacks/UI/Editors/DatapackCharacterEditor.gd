@@ -9,6 +9,7 @@ onready var doll = $VBoxContainer/HBoxContainer/DollWrapper/Viewport/Doll3D
 func _ready():
 	dynamicCharacter = DynamicCharacter.new()
 	add_child(dynamicCharacter)
+	dynamicCharacter.addArousal(1.0)
 	
 func setCharacter(theCharacter):
 	character = theCharacter
@@ -16,9 +17,9 @@ func setCharacter(theCharacter):
 
 func updateCharacter():
 	pack_variables.setVariables(character.getEditVars())
+	#doll.setTemporaryState("cock", "")
 	dynamicCharacter.loadFromDatapackCharacter(null, character)
-	doll.loadCharacter(dynamicCharacter)
-	doll.setTemporaryState("cock", "")
+	doll.prepareCharacter(dynamicCharacter)
 	
 func getMenu():
 	var toCheck = self
@@ -34,8 +35,8 @@ func _on_SaveButton_pressed():
 
 func _on_PackVariables_onVariableChange(id, value):
 	if(character.applyEditVar(id, value)):
+		#doll.setTemporaryState("cock", "")
 		dynamicCharacter.loadFromDatapackCharacter(null, character)
-		doll.setTemporaryState("cock", "")
 
 func onMenuPopped():
 	updateCharacter()

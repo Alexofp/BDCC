@@ -17,9 +17,9 @@ func setSkin(theSkin):
 func updateCharacter():
 	pack_variables.setVariables(skin.getEditVars())
 	#dynamicCharacter.loadFromDatapackCharacter(null, character)
+	#doll.setTemporaryState("cock", "")
 	if(dynamicCharacter != null):
-		doll.loadCharacter(dynamicCharacter)
-	doll.setTemporaryState("cock", "")
+		doll.prepareCharacter(dynamicCharacter)
 	
 func getMenu():
 	var toCheck = self
@@ -39,7 +39,7 @@ func _on_PackVariables_onVariableChange(id, value):
 		#doll.loadCharacter(dynamicCharacter)
 		if(dynamicCharacter != null && is_instance_valid(dynamicCharacter)):
 			dynamicCharacter.updateAppearance()
-			doll.setTemporaryState("cock", "")
+			#doll.setTemporaryState("cock", "")
 
 func onMenuPopped():
 	updateCharacter()
@@ -59,6 +59,7 @@ func _on_RandomCharButton_pressed():
 	#add_child(dynamicCharacter)
 	
 	dynamicCharacter.pickedSkin = datapack.id+":"+skin.id
+	dynamicCharacter.addArousal(1.0)
 	
 	doll.loadCharacter(dynamicCharacter)
-	doll.setTemporaryState("cock", "")
+	#doll.setTemporaryState("cock", "")
