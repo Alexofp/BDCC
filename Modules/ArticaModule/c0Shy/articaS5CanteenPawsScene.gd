@@ -34,7 +34,7 @@ func _run():
 
 			saynn("[say=artica]Not that good.. oww-w..[/say]")
 
-		saynn("For some reason, the girl winces each time tries to move her legs.. and, since she does that a lot, the girl is wincing constantly.")
+		saynn("For some reason, the girl winces each time tries to move her legs.. and since she does that a lot, the girl is wincing constantly.")
 
 		saynn("[say=artica]I think I stepped on a rock.. wrong.. still hurts a bit..[/say]")
 

@@ -40,7 +40,7 @@ func _run():
 
 		saynn("[say=risha]If you want my advice.. Don't waste your time, start learning how to throw a good punch. You will need that skill here. It's your life though, I couldn't care less.[/say]")
 
-		saynn("And just like that, the lynx guard turns around the steps out of the cell. Her pointy ears instantly locate you, snooping around.")
+		saynn("And just like that, the lynx guard turns around and steps out of the cell. Her pointy ears instantly locate you, snooping around.")
 
 		saynn("[say=risha]What? Go mine some rocks too, slut. I need you tired and desperate for my cock. Haha.[/say]")
 

@@ -200,9 +200,8 @@ func _run():
 			saynn("[say=pc]More. I want you to get some of that cock's odor.[/say]")
 
 			saynn("Artica's snout is stuck into the area under your shaft and above your balls. Each time she breathes in, your strong scent fills her lungs..")
-
-			saynn("?elif")
-
+		
+		elif (GM.pc.hasVagina()):
 			saynn("[say=pc]More. I want you to get some of that pussy's odor.[/say]")
 
 			saynn("Artica's snout is directly brushing against your needy pussy. Each time she breathes in, your strong horny scent fills her lungs..")
@@ -840,7 +839,7 @@ func _run():
 
 		saynn("[say=artica]Uh.. ah..[/say]")
 
-		saynn("[say=pc]You're okay, fluff?[/say]")
+		saynn("[say=pc]Are you okay, fluff?[/say]")
 
 		saynn("She keeps her eyes low.")
 
@@ -1095,7 +1094,7 @@ func _run():
 
 		saynn("Artica watches the waterfall.. standing completely still. No usual fidgeting.. no swaying to the sides.")
 
-		saynn("[say=artica]I come from a water tribe.. But there are also 7 others: fire, air, earth, shadow, light, metal and wood.[/say]")
+		saynn("[say=artica]I come from a water tribe.. But there are also 7 others: fire, air, earth, shadow, light, metal, and wood.[/say]")
 
 		saynn("Some of these seem to be opposites.. but at same time.. Some of them also compliment each other.")
 
@@ -1354,7 +1353,7 @@ func _run():
 
 		saynn("[say=artica]Nh-hh-h..h.n.n.nnH!..[/say]")
 
-		saynn("You can't ride the girl anymore as you are knotted.. but the sensations alone enough to bring both of you over the edge. You throw your head back and let out a passionate noise as Artica's cock starts pumping your pussy full of her hot, potent seed, filling your womb up completely.")
+		saynn("You can't ride the girl anymore as you are knotted.. but the sensations alone are enough to bring both of you over the edge. You throw your head back and let out a passionate noise as Artica's cock starts pumping your pussy full of her hot, potent seed, filling your womb up completely.")
 
 		if (GM.pc.isWearingChastityCage()):
 			saynn("Your locked cock is throbbing inside its cage as well.. before releasing a few strings of seed onto Artica's belly, marking her fur.")

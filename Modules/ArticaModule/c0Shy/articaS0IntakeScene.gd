@@ -11,7 +11,7 @@ func _run():
 
 		saynn("You stop and look around. Indeed, you notice that the guard checkpoint is indeed looking more.. lively.. than usual.")
 
-		saynn("[sayMale]Fresh meat! Hah. Always tastes better than leftovers! Just gotta tender it first, let's go see what future-bitches they brought.[/sayMale]")
+		saynn("[sayMale]Fresh meat! Hah. Always tastes better than leftovers! Just gotta tenderize it first, let's go see what future-bitches they brought.[/sayMale]")
 
 		saynn("Might as well take a look yourself. After all, you were fresh meat at some point too..")
 
@@ -30,7 +30,7 @@ func _run():
 
 		saynn("The guards push the most eager inmates away from the checkpoint and form a wall of sorts, a corridor.. before the lift finally arrives.")
 
-		saynn("The lift's doors open with a screech, revealing a dozen new inmates.. wearing collars, cuffs and their shiny fresh inmate uniforms, some orange, some red, some purple.. Each new inmate is accompanied by a staff member that holds their leash.")
+		saynn("A metal screech reveals a dozen new inmates.. wearing collars, cuffs and their shiny fresh inmate uniforms, some orange, some red, some purple.. Each new inmate is accompanied by a staff member that holds their leash.")
 
 		saynn("The crowd around you cheers loudly as the 'fresh meat' is being paraded out. You see some faces full of fear and anger.. and some that are surprised.")
 
@@ -46,11 +46,11 @@ func _run():
 
 		saynn("[say=risha]Oh yeah? Try me, fucker. You won't even need to remove your ribs after my personal treatment. I will break you in half![/say]")
 
-		saynn("The fur behind is being quiet, avoiding any eye contacts. She awkwardly puts one hindpaw forward after another, trying to keep up.")
+		saynn("The fur behind is being quiet, avoiding any eye contact. She awkwardly puts one hindpaw forward after another, trying to keep up.")
 
 		saynn("[say=risha]C'mon, let us pass, let us pass. You will get a good look at them later, the softies are tired after a long flight, can't you see.[/say]")
 
-		saynn("The crowd is still cheering, giving the new inmates the proper intake experience. The things begin to quiet down only after all the inmates get pulled down to the cellblock.")
+		saynn("The crowd is still cheering, giving the new inmates the proper intake experience. Things begin to quiet down only after all the inmates get pulled down to the cellblock.")
 
 		saynn("Since that white-furred inmate is wearing a lilac uniform.. might be worth it to look for her in the lilac cellblock sometime later..")
 

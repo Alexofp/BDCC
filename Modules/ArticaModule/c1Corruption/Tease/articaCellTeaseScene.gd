@@ -211,7 +211,7 @@ func _run():
 
 		saynn("[say=pc]So sensitive you've gotten..[/say]")
 
-		saynn("She is squirming in your hands.. while you're just pretending to stroke her.. the mental connection alone enough to trigger her knot to start inflating with blood..")
+		saynn("She is squirming in your hands.. while you're just pretending to stroke her.. the mental connection alone is enough to trigger her knot to start inflating with blood..")
 
 		saynn("[say=artica]I'm.. ahh-h.. g-gonna.. ah.. t-too much.. g-gods.. ah.. nn-yaahh-h..[/say]")
 

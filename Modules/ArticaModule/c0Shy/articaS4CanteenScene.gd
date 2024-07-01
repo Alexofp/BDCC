@@ -193,9 +193,7 @@ func _run():
 
 		saynn("She quickly reaches for her stun baton.")
 
-		saynn("[say=risha]I will never get tired of this, you know. Showing sluts like you their place is my favorite[/say]")
-
-		saynn("activity.")
+		saynn("[say=risha]I will never get tired of this, you know. Showing sluts like you their place is my favorite activity.[/say]")
 
 		saynn("Looks like it's a fight.")
 

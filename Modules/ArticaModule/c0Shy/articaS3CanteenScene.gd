@@ -32,7 +32,7 @@ func _run():
 
 		saynn("Your sudden words really startled her, it seems.")
 
-		saynn("[say=pc]Relax. Just wondering if I can eat behind this table.[/say]")
+		saynn("[say=pc]Relax. Just wondering if I can eat at this table.[/say]")
 
 		saynn("[say=artica]Oh.. s-sure..[/say]")
 
@@ -130,7 +130,7 @@ func _run():
 	if(state == "do_give_apple"):
 		saynn("Your hand produces a little treat and quickly rubs it squeaky-clean against your wrist before offering it to the girl.")
 
-		saynn("[say=pc]Nom this. It's not exactly a lot of proteins.. but at least it has a taste.[/say]")
+		saynn("[say=pc]Nom this. It's not exactly a lot of protein.. but at least it has a taste.[/say]")
 
 		saynn("The fluff is reluctant.. so you basically put the apple into her paw.")
 

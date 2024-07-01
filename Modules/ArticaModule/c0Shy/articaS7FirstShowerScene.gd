@@ -90,7 +90,7 @@ func _run():
 
 		saynn("[say=artica]..[/say]")
 
-		saynn("[say=risha]Here is your answer. Obviously it is. You whores deserve anything that happens with you.[/say]")
+		saynn("[say=risha]Here is your answer. Obviously it is. You whores deserve anything that happens to you.[/say]")
 
 		saynn("She laughs while the white fluff is struggling to find a place for herself, fidgeting in place, her tail twitches.")
 
@@ -155,9 +155,9 @@ func _run():
 
 		saynn("You follow, taking your time, to not spook the fluff any more than you already did.")
 
-		saynn("The bathroom itself seems to empty.. so you step in further, into the dressing room.")
+		saynn("The bathroom itself seems to be empty.. so you step in further, into the dressing room.")
 
-		saynn("You only catch the view of Artica's butt as quickly stuffs her uniform into one of the lockers.. forgets to close it in a hurry.. and then heads out into the showers room.")
+		saynn("You only catch the view of Artica's butt as she quickly stuffs her uniform into one of the lockers.. forgets to close it in a hurry.. and then heads out into the showers room.")
 
 		addButton("Showers", "See what she will be doing there", "artica_in_showers")
 	if(state == "artica_in_showers"):
