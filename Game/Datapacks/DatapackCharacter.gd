@@ -11,6 +11,9 @@ var chatColor:Color = Color.white
 var species:Array = []
 var customSpeciesName:String = ""
 
+var femininity:int = 50
+var thickness:int = 50
+
 var level:int = 0
 var basePain:int = 100
 var baseLust:int = 100
@@ -127,6 +130,18 @@ func getEditVars():
 				[Gender.Other, "Other"],
 			],
 			#noseparator=true,
+		},
+		"femininity": {
+			name = "Femininity",
+			type = "number",
+			int=true,
+			value = femininity,
+		},
+		"thickness": {
+			name = "Thickness",
+			type = "number",
+			int=true,
+			value = thickness,
 		},
 		"hasChatColor": {
 			name = "Enable custom chat color",
@@ -276,6 +291,12 @@ func applyEditVar(varid, value):
 		gender = value
 	if(varid == "pronounsGender"):
 		pronounsGender = value
+	if(varid == "femininity"):
+		femininity = value
+		return true
+	if(varid == "thickness"):
+		thickness = value
+		return true
 	if(varid == "hasChatColor"):
 		hasChatColor = value
 	if(varid == "chatColor"):
@@ -340,6 +361,8 @@ func saveData():
 		"description": description,
 		"gender": gender,
 		"pronounsGender": pronounsGender,
+		"femininity": femininity,
+		"thickness": thickness,
 		"hasChatColor": hasChatColor,
 		"chatColor": chatColor.to_html(),
 		"species": species,
@@ -375,6 +398,8 @@ func loadData(data):
 	description = loadVar(data, "description", "No description provided")
 	gender = loadVar(data, "gender", Gender.Male)
 	pronounsGender = loadVar(data, "pronounsGender", null)
+	femininity = loadVar(data, "femininity", 50)
+	thickness = loadVar(data, "thickness", 50)
 	hasChatColor = loadVar(data, "hasChatColor", false)
 	chatColor = Color(loadVar(data, "chatColor", "ffffff"))
 	species = loadVar(data, "species", [])

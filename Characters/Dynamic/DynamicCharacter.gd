@@ -486,6 +486,9 @@ func loadFromDatapackCharacter(_datapack:Datapack, _datapackChar:DatapackCharact
 	npcGeneratedGender = _datapackChar.name
 	npcGender = _datapackChar.gender
 	npcPronounsGender = _datapackChar.pronounsGender
+	npcFeminity = _datapackChar.femininity
+	npcThickness = _datapackChar.thickness
+	
 	if(_datapackChar.hasChatColor):
 		npcChatColorOverride = "#"+_datapackChar.chatColor.to_html(false)
 	
