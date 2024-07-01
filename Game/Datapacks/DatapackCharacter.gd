@@ -361,8 +361,8 @@ func saveData():
 		"basePain": basePain,
 		"baseLust": baseLust,
 		"baseStamina": baseStamina,
-		"portrait": portrait,
-		"portraitNaked": portraitNaked,
+		"portrait": (portrait.save_png_to_buffer() if portrait else PoolByteArray()),
+		"portraitNaked": (portraitNaked.save_png_to_buffer() if portraitNaked else PoolByteArray()),
 		"lootTableID": lootTableID,
 		"lootCreditsChance": lootCreditsChance,
 		"lootCreditsMin": lootCreditsMin,
@@ -396,8 +396,8 @@ func loadData(data):
 	basePain = loadVar(data, "basePain", 100)
 	baseLust = loadVar(data, "baseLust", 100)
 	baseStamina = loadVar(data, "baseStamina", 100)
-	portrait = loadVar(data, "portrait", null)
-	portraitNaked = loadVar(data, "portraitNaked", null)
+	portrait = loadImageVar(data, "portrait")
+	portraitNaked = loadImageVar(data, "portraitNaked")
 	portraitTexture = null
 	portraitNakedTexture = null
 	lootTableID = loadVar(data, "lootTableID", "base")
@@ -410,3 +410,23 @@ func loadVar(_data, thekey, defaultValue = null):
 	if(_data.has(thekey)):
 		return _data[thekey]
 	return defaultValue
+
+func loadImageVar(_data, thekey):
+	var imageData = loadVar(_data, thekey, PoolByteArray())
+	if(imageData != null):
+		if(imageData is Image):
+			return imageData
+		elif(imageData is PoolByteArray):
+			if(imageData.empty()):
+				return null
+			else:
+				var newIm = Image.new()
+				var _ok = newIm.load_png_from_buffer(imageData)
+				if(_ok == OK):
+					return newIm
+				else:
+					return null
+		else:
+			return null
+	else:
+		return null

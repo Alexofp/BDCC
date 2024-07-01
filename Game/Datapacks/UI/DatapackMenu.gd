@@ -54,6 +54,11 @@ func _on_NewPackConfirmationDialog_confirmed():
 	
 	var newDatapack:Datapack = Datapack.new()
 	newDatapack.id = newPackID
+	var _ok = newDatapack.saveToDisk()
+	if(!_ok):
+		showAlert("Couldn't save the datapack, sorry")
+		return
+	GlobalRegistry.datapacks[newDatapack.id] = newDatapack
 	startEditingDatapack(newDatapack)
 
 func startEditingDatapack(datapack:Datapack):
