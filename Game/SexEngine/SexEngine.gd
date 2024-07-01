@@ -504,6 +504,10 @@ func processAIActions(isDom = true, playerIsHypnotized = false):
 	if(sexEnded):
 		return
 	
+	if(sexShouldEnd()):
+		endSex()
+		return
+	
 	var peopleToCheck = [
 	]
 	if(isDom):
@@ -670,8 +674,8 @@ func processAIActions(isDom = true, playerIsHypnotized = false):
 
 	removeEndedActivities()
 	
-	if(sexShouldEnd()):
-		endSex()
+	#if(sexShouldEnd()):
+	#	endSex()
 
 func doDomAction(activity, action):
 	var actionResult = processData(activity.doDomAction(action["id"], action), activity.domID, activity.subID)
@@ -1075,6 +1079,7 @@ func hasSexEnded():
 func getBestAnimation():
 	var foundPriority = -999
 	var foundAnimInfo = null
+	var foundActivity = null
 	
 	var hasPlayer = false
 	if(isSub("pc") || isDom("pc")):
@@ -1092,14 +1097,32 @@ func getBestAnimation():
 				if(activity.getAnimationPriority() > foundPriority || foundAnimInfo == null):
 					foundAnimInfo = animInfo
 					foundPriority = activity.getAnimationPriority()
+					foundActivity = activity
 		else:
 			if(activity.getAnimationPriority() > foundPriority || foundAnimInfo == null):
 				foundAnimInfo = animInfo
 				foundPriority = activity.getAnimationPriority()
+				foundActivity = activity
 	
 	if(foundAnimInfo != null):
+		if(foundAnimInfo.size() > 2):
+			var extraInfoDict:Dictionary = foundAnimInfo[2]
+			if(extraInfoDict.has("pc") && extraInfoDict["pc"] == foundActivity.subID):
+				extraInfoDict["pcCum"] = foundActivity.subInfo.didJustCame()
+			elif(extraInfoDict.has("pc") && extraInfoDict["pc"] == foundActivity.domID):
+				extraInfoDict["pcCum"] = foundActivity.domInfo.didJustCame()
+			if(extraInfoDict.has("npc") && extraInfoDict["npc"] == foundActivity.subID):
+				extraInfoDict["npcCum"] = foundActivity.subInfo.didJustCame()
+			elif(extraInfoDict.has("npc") && extraInfoDict["npc"] == foundActivity.domID):
+				extraInfoDict["npcCum"] = foundActivity.domInfo.didJustCame()
 		return foundAnimInfo
 	return sexType.getDefaultAnimation()
+
+func resetJustCame():
+	for subID in subs:
+		subs[subID].resetJustCame()
+	for domID in doms:
+		doms[domID].resetJustCame()
 
 func playAnimation():
 	var animInfo = getBestAnimation()
@@ -1111,6 +1134,7 @@ func playAnimation():
 		GM.main.playAnimation(animInfo[0], animInfo[1], animInfo[2])
 	else:
 		GM.main.playAnimation(animInfo[0], animInfo[1])
+	resetJustCame()
 
 func getStartActivityScore(activityID, domInfo, subInfo):
 	var newSexActivityRef = GlobalRegistry.getSexActivityReference(activityID)

@@ -185,7 +185,7 @@ func _run():
 
 		addButton("Cum inside", "Give Tavi some of your cream", "do_fuck_tavi_cum")
 	if(state == "do_fuck_tavi_cum"):
-		playAnimation(StageScene.ButtStackSex, "insideup", {pc="rahi", npc="tavi", bodyState={naked=true}, npcBodyState={naked=true}, npc2="pc", npc2BodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.ButtStackSex, "insideup", {pc="rahi", npc="tavi", pcCum=true, npcCum=true, bodyState={naked=true}, npcBodyState={naked=true}, npc2="pc", npc2BodyState={exposedCrotch=true, hard=true}})
 		saynn("And so you ram your cock as deep as that pussy allows.. breaking into Tavi's womb. She moans passionately while you grunt, your throbbing dick stuffing a huge load of your thick {pc.cum} inside her, one pulsating motion at a time.."+str(" From virgin to a cum dumpster.. So quick.." if tookVirginity else "")+"")
 
 		saynn("[say=tavi]Hh-h..[/say]")
@@ -293,7 +293,7 @@ func _run():
 
 		addButton("Cum inside", "Breed Rahi", "do_fuck_rahi_cum")
 	if(state == "do_fuck_rahi_cum"):
-		playAnimation(StageScene.ButtStackSex, "insidedown", {pc="rahi", npc="tavi", bodyState={naked=true}, npcBodyState={naked=true}, npc2="pc", npc2BodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.ButtStackSex, "insidedown", {pc="rahi", npc="tavi", pcCum=true, npcCum=true, bodyState={naked=true}, npcBodyState={naked=true}, npc2="pc", npc2BodyState={exposedCrotch=true, hard=true}})
 		saynn("Rahi's pussy shoves you over the edge.. and you welcome it.. moaning softly while your {pc.penis} is pulsating inside her.. seconds before releasing a load of thick sticky {pc.cum}, flooding her womb to the brim.")
 
 		saynn("[say=rahi]Nya-a-a..[/say]")

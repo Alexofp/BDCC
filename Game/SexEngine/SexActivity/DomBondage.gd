@@ -93,7 +93,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 			continue
 		elif(!sub.invCanEquipSlot(itemSlot)):
 			continue
-		elif(sub.getInventory().hasSlotEquipped(itemSlot) && sub.getInventory().getEquippedItem(itemSlot)!=null && !sub.getInventory().getEquippedItem(itemSlot).isRemoved()):
+		elif(sub.getInventory().hasSlotEquipped(itemSlot) && sub.getInventory().getEquippedItem(itemSlot)!=null && !sub.getInventory().getEquippedItem(itemSlot).isRemoved() && !sub.getInventory().getEquippedItem(itemSlot).isDamaged()):
 			continue
 		else:
 			var restraintData:RestraintData = item.getRestraintData()

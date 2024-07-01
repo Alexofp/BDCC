@@ -32,6 +32,12 @@ func playAnimation(animID, _args = {}):
 	
 	#doll.forceSlotToBeVisible(BodypartSlot.Penis)
 	
+	if(_args.has("cum") && _args["cum"] && !(animID in ["tease"])):
+		#startCumInsideSolo(doll, getCumIntensity(doll2) + getCumIntensity(doll3))
+		startCumInsideSolo(doll, 1.0)
+	if(_args.has("pcCum") && _args["pcCum"]):
+		startCumPenis(doll)
+	
 	if(_args.has("bodyState")):
 		doll.applyBodyState(_args["bodyState"])
 	else:

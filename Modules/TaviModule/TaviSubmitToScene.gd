@@ -101,7 +101,7 @@ func _run():
 
 	if(state == "i_want_more"):
 		playAnimation(StageScene.SexFeetPlay, "crotch", {
-			pc="tavi", npc="pc", 
+			pc="tavi", npc="pc", npcCum=true,
 			bodyState={},
 			npcBodyState={exposedCrotch=true,hard=true,},
 		})

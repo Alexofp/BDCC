@@ -35,6 +35,7 @@ func _run():
 	if(state == "finger_him"):
 		playAnimation(StageScene.SexStanding, "tease", {
 			npc="rubi", pc="pc", 
+			npcCum=true,
 			bodyState={},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})
@@ -67,6 +68,7 @@ func _run():
 		# (needs cock)
 		playAnimation(StageScene.SexAllFours, "sex", {
 			npc="rubi", pc="pc", 
+			npcCum=true, pcCum=true,
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})

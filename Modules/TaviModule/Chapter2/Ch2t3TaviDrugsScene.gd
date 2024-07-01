@@ -418,7 +418,7 @@ func _run():
 		
 		saynn("A few moments later Tavi steps out of the green fire. New Tavi..")
 
-		saynn("The first thing that you notice.. she is much taller, taller than any person that you have seen. Two demonic horns are sticking out of her head. Her differently-colored eyes produce a powerful glow. Her tail is that of some demonic creature, her digigrade feet are now powerful hoofs that leave a burning trail behind.")
+		saynn("The first thing that you notice.. she is much taller, taller than any person that you have seen. Two demonic horns are sticking out of her head. Her differently-colored eyes produce a powerful glow. Her tail is that of some demonic creature, her digitigrade feet are now powerful hoofs that leave a burning trail behind.")
 
 		saynn("She is naked and clearly not ashamed of it. Her tits are so much bigger, they are at least F-cup with green perky nipples. Her hips are wider too to accomodate for that fact. All the glowing spots on her fur are now shining even brighter, giving her a more intimidating look.")
 
@@ -630,7 +630,7 @@ func _run():
 
 	if(state == "continue9"):
 		playAnimation(StageScene.SexMissionary, "fast", {
-			npc="pc", pc="taviDemonFuta",
+			npc="pc", pc="taviDemonFuta", pcCum=true, npcCum=true,
 			bodyState={hard=true},
 			npcBodyState={naked=true,caged=true},
 		})
@@ -892,7 +892,7 @@ func _run():
 
 	if(state == "cum_inside"):
 		playAnimation(StageScene.SexCowgirl, "fast", {
-			pc="pc", npc="taviDemon",
+			pc="pc", npc="taviDemon", pcCum=true, npcCum=true,
 			bodyState={naked=true,hard=true},
 			npcBodyState={hard=true},
 		})
@@ -1043,6 +1043,12 @@ func _run():
 		addButton("Continue", "See what happens next", "continue15")
 
 	if(state == "continue15"):
+		playAnimation(StageScene.SexFaceSitting, "grind", {
+			npc="pc", pc="taviDemon", npcCum=true,
+			bodyState={hard=true},
+			npcBodyState={naked=true,caged=true},
+		})
+		
 		# (if has pussy)
 		if(GM.pc.hasVagina()):
 			saynn("The tail quickly brings you over the line, you try to arch your back and moan but Tavi has you pinned into the floor. Not being able to squirm only makes you cum harder, your slit clenches around the flexible demon tail and squirts from overstimulation.")

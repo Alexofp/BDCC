@@ -604,7 +604,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "milk_firstcum")
 	if(state == "milk_firstcum"):
-		playAnimation(StageScene.BDSMMachineFuck, "fast", {bodyState={naked=true,chains=[["hose", "penisPump", "scene", "milkIntake"],["hose", "breastpump", "scene", "milkIntake"]]}})
+		playAnimation(StageScene.BDSMMachineFuck, "fast", {pcCum=true, bodyState={naked=true,chains=[["hose", "penisPump", "scene", "milkIntake"],["hose", "breastpump", "scene", "milkIntake"]]}})
 		saynn("It hits you hard, a powerful orgasm rocks through your entire body.. You squirm and arch your back as much as the mechanical grips allow while the pumps start doing the suctions with increased frequency.")
 
 		if (hasPenisPump):
@@ -651,7 +651,7 @@ func _run():
 
 		addButton("Milking..", "A lot milking..", "milk_afterhours")
 	if(state == "milk_afterhours"):
-		playAnimation(StageScene.BDSMMachineFuck, "fastdouble", {bodyState={naked=true,chains=[["hose", "penisPump", "scene", "milkIntake"],["hose", "breastpump", "scene", "milkIntake"]]}})
+		playAnimation(StageScene.BDSMMachineFuck, "fastdouble", {pcCum=true, bodyState={naked=true,chains=[["hose", "penisPump", "scene", "milkIntake"],["hose", "breastpump", "scene", "milkIntake"]]}})
 		saynn("What follows are hours of non-stop orgasms.. one after one.. each one causing your breasts to release some more milk.. all of it collected by the machine.")
 
 		if (hasPenisPump):
@@ -962,7 +962,7 @@ func _run():
 		addButton("Sure", "Cuddle with Alex for some time", "3_red_cuddle")
 		addButton("Nah", "Just leave", "3_red_just_leave")
 	if(state == "8"):
-		playAnimation(StageScene.BDSMMachineAltFuck, "inside", {bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.BDSMMachineAltFuck, "inside", {pcCum=true, cum=true, bodyState={naked=true, hard=true}})
 		saynn("With the lack of your important sense.. you are forced to focus on that silicon dildo.. it's mechanical motions brings you over the edge with ease.")
 
 		saynn("[say=pc]Nh-h-hh-h!..[/say]")
@@ -1040,7 +1040,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "9")
 	if(state == "9"):
-		playAnimation(StageScene.BDSMMachineAltFuck, "sexdouble", {bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.BDSMMachineAltFuck, "sexdouble", {pcCum=true, bodyState={naked=true, hard=true}})
 		if (GM.pc.hasReachableVagina()):
 			saynn("You gasp when the same dildo finds your pussy again and brushes itself against your sensitive lips.. but at the same time.. a second one aligns itself with your {pc.analStretch} ass, prodding it!")
 
@@ -1083,7 +1083,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "9_fast")
 	if(state == "9_fast"):
-		playAnimation(StageScene.BDSMMachineAltFuck, "fastdouble", {bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.BDSMMachineAltFuck, "fastdouble", {pcCum=true, cum=true, bodyState={naked=true, hard=true}})
 		if (GM.pc.hasReachableVagina()):
 			saynn("They didn't stop after your orgasm, no, the two dildos only began to fuck your holes faster, their relentless rhythm is quickly overstimulating your pussy to start gushing fluids all over the table again, your anus clenching around the second one at the same time.")
 

@@ -360,7 +360,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "4_pussyfuck_fuck_cum")
 	if(state == "4_pussyfuck_fuck_cum"):
-		playAnimation(StageScene.SexFreeStanding, "inside", {pc="alexrynard", npc="pc", bodyState={naked=true,hard=true,condom=usedCondom}, npcBodyState={naked=true,hard=true,leashedBy="alexrynard"}})
+		playAnimation(StageScene.SexFreeStanding, "inside", {pc="alexrynard", npc="pc", pcCum=true, npcCum=true, bodyState={naked=true,hard=true,condom=usedCondom}, npcBodyState={naked=true,hard=true,leashedBy="alexrynard"}})
 		saynn("Your own mind is forcing your body to cum.. Waves of sudden extra pleasure rocking through you, causing you to throw your head back and moan like a slut while your pussy is sucking that cock deeper and kneading it with every muscle..")
 
 		saynn("[say=pc]NHHh-hH!.. AH!..[/say]")
@@ -480,7 +480,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "4_analfuck_fuck_cum")
 	if(state == "4_analfuck_fuck_cum"):
-		playAnimation(StageScene.SexFreeStanding, "inside", {pc="alexrynard", npc="pc", bodyState={naked=true,hard=true,condom=usedCondom}, npcBodyState={naked=true,hard=true,leashedBy="alexrynard"}})
+		playAnimation(StageScene.SexFreeStanding, "inside", {pc="alexrynard", npc="pc", pcCum=true, npcCum=true, bodyState={naked=true,hard=true,condom=usedCondom}, npcBodyState={naked=true,hard=true,leashedBy="alexrynard"}})
 		saynn("Your own mind is forcing your body to cum.. Waves of sudden extra pleasure rocking through you, causing you to throw your head back and moan like a slut while your asshole is sucking that cock deeper and kneading it with every muscle..")
 
 		saynn("[say=pc]NHHh-hH!.. AH!..[/say]")
@@ -1171,7 +1171,7 @@ func _run():
 
 		addButton("Cum", "Breed that foxy raw", "hyp_ride_fuck_cum")
 	if(state == "hyp_ride_fuck_cum"):
-		playAnimation(StageScene.SexCowgirlAlt, "inside", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
+		playAnimation(StageScene.SexCowgirlAlt, "inside", {pc="pc", npc="alexrynard", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
 		saynn("Alex brings himself down onto your cock with one last big motion.. before arching his back and letting out a passionate moan, his cock starts throbbing and filling the condom with its load, making the tip sag lower and lower.. but luckily the condom seems to hold.")
 
 		saynn("[say=alexrynard]Ah-h-h!.. ah.. h-hh..[/say]")
@@ -1210,7 +1210,7 @@ func _run():
 
 		addButton("Cum inside", "Breed the foxy again", "hyp_ride_fuck_pin_cum")
 	if(state == "hyp_ride_fuck_pin_cum"):
-		playAnimation(StageScene.SexMissionary, "inside", {pc="pc", npc="alexrynard", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
+		playAnimation(StageScene.SexMissionary, "inside", {pc="pc", npc="alexrynard", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, condom=true}})
 		saynn("His used clenching tailhole feels so great that you can only endure this pleasure for so long.")
 
 		saynn("You pull back a little.. just to shove your {pc.penis} as deep as that hungry ass can handle.")

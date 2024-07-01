@@ -27,6 +27,9 @@ var charactersToUpdate = {}
 var dynamicCharacters = {}
 var dynamicCharactersPools = {}
 
+var loadedDatapacks = {}
+var datapackCharacters = {}
+
 signal time_passed(_secondsPassed)
 signal saveLoadingFinished
 
@@ -96,6 +99,8 @@ func updateStaticCharacters():
 		staticCharacters[charID].updateBodyparts()
 	
 func getCharacter(charID):
+	if(charID == "pc"):
+		return GM.pc
 	if(staticCharacters.has(charID)):
 		return staticCharacters[charID]
 	if(dynamicCharacters.has(charID)):
@@ -413,6 +418,8 @@ func saveData():
 	data["dynamicCharactersPools"] = dynamicCharactersPools
 	data["encounterSettings"] = encounterSettings.saveData()
 	data["gameExtenders"] = GM.GES.saveData()
+	data["loadedDatapacks"] = loadedDatapacks
+	data["datapackCharacters"] = datapackCharacters
 	
 	data["scenes"] = []
 	for scene in sceneStack:
@@ -441,6 +448,8 @@ func loadData(data):
 	dynamicCharactersPools = SAVE.loadVar(data, "dynamicCharactersPools", {})
 	encounterSettings.loadData(SAVE.loadVar(data, "encounterSettings", {}))
 	GM.GES.loadData(SAVE.loadVar(data, "gameExtenders", {}))
+	loadedDatapacks = SAVE.loadVar(data, "loadedDatapacks", {})
+	datapackCharacters = SAVE.loadVar(data, "datapackCharacters", {})
 	
 	var scenes = SAVE.loadVar(data, "scenes", [])
 	
@@ -1382,5 +1391,73 @@ func playerHasCompanion(charID):
 	for scene in sceneStack:
 		var sceneComps = scene.getSceneCompanions()
 		if(sceneComps != null && sceneComps.has(charID)):
+			return true
+	return false
+
+func loadDatapack(datapackID):
+	var theDatapack:Datapack = GlobalRegistry.getDatapack(datapackID)
+	
+	if(theDatapack == null):
+		Log.printerr("Trying to load a datapack that doesn't exist in the global registry: "+str(datapackID))
+		return false
+	
+	if(loadedDatapacks.has(datapackID)):
+		Log.printerr("Trying to load a datapack that was already loaded: "+str(datapackID))
+		return false
+	
+	loadedDatapacks[datapackID] = true
+	datapackCharacters[datapackID] = {}
+	
+	var newCharacters = theDatapack.characters
+	
+	for charID in newCharacters:
+		var finalID = theDatapack.getFinalCharacterID(charID)#theDatapack.id+":"+charID
+		
+		datapackCharacters[datapackID][finalID] = true
+		
+		var dynamicCharacter = DynamicCharacter.new()
+		dynamicCharacter.id = finalID
+		
+		addDynamicCharacter(dynamicCharacter)
+		
+		dynamicCharacter.loadFromDatapackCharacter(theDatapack, newCharacters[charID])
+		
+		var theCharType = dynamicCharacter.getCharacterType()
+		if(theCharType == CharacterType.Inmate):
+			addDynamicCharacterToPool(finalID, CharacterPool.Inmates)
+		elif(theCharType == CharacterType.Guard):
+			addDynamicCharacterToPool(finalID, CharacterPool.Guards)
+		elif(theCharType == CharacterType.Nurse):
+			addDynamicCharacterToPool(finalID, CharacterPool.Guards)
+		elif(theCharType == CharacterType.Engineer):
+			addDynamicCharacterToPool(finalID, CharacterPool.Guards)
+	
+	return true
+
+func unloadDatapack(datapackID):
+	if(!loadedDatapacks.has(datapackID)):
+		Log.printerr("Trying to unload a datapack that was never loaded: "+str(datapackID))
+		return false
+	
+	if(datapackCharacters.has(datapackID)):
+		var charsToRemove = datapackCharacters[datapackID].keys()
+		
+		for idToRemove in charsToRemove:
+			removeDynamicCharacter(idToRemove)
+	
+		datapackCharacters.erase(datapackID)
+	
+	loadedDatapacks.erase(datapackID)
+	return true
+
+func isDatapackLoaded(datapackID):
+	return loadedDatapacks.has(datapackID)
+
+func getLoadedDatapacks():
+	return loadedDatapacks
+
+func isDatapackCharacter(charID):
+	for datapackID in datapackCharacters:
+		if(datapackCharacters[datapackID].has(charID)):
 			return true
 	return false

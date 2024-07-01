@@ -49,8 +49,7 @@ func canCombine():
 func tryCombine(_otherItem):
 	if(isLegal != _otherItem.isLegal):
 		return false
-	amount += _otherItem.amount
-	return true
+	return .tryCombine(_otherItem)
 
 func getTags():
 	if(isLegal):

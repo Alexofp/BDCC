@@ -31,7 +31,7 @@ size_flags_vertical = 3
 
 [node name="ScrollVBox" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 margin_right = 1268.0
-margin_bottom = 676.0
+margin_bottom = 760.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -57,13 +57,13 @@ margin_bottom = 53.0
 [node name="ContentContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
 margin_top = 57.0
 margin_right = 1268.0
-margin_bottom = 676.0
+margin_bottom = 760.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer"]
 margin_right = 1268.0
-margin_bottom = 588.0
+margin_bottom = 672.0
 custom_fonts/bold_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[center]This game is very early in its development. If you are reading this - thank you!
@@ -76,6 +76,7 @@ Thanks to [color=#D375FF]Mekyro[/color] for creating [color=red]RRDC[/color], th
 Thanks to [url=https://www.furaffinity.net/user/bl4ckw0lf/][color=#E24646]Jacki Northstar[/color][/url] for letting me use her character
 Thanks to [color=#90A9F4]Nova Dawfort[/color] for letting me use her character ^^
 Thanks to [url=https://www.furaffinity.net/user/sompurr/][color=#AE6ED8]Sompurr[/color][/url] for letting me use [color=#FFC700]Socket[/color] and her art
+Thanks to [url=https://www.furaffinity.net/user/Artica/][color=#15eff2]Artica[/color][/url] for letting me use her character
 
 Thanks to [color=#0059FF]Godot team[/color] for creating the engine that this game is running on
 
@@ -84,11 +85,14 @@ Max-Maxou (chastity cage sprites, android suit, engineer uniform, damaged unifor
 Firi (code, [url=https://github.com/Alexofp/BDCC/pull/10]#1[/url] [url=https://github.com/Alexofp/BDCC/pull/11]#2[/url] [url=https://github.com/Alexofp/BDCC/pull/12]#3[/url] [url=https://github.com/Alexofp/BDCC/pull/13]#4[/url] [url=https://github.com/Alexofp/BDCC/pull/14]#5[/url])
 Niel (code, [url=https://github.com/Alexofp/BDCC/pull/17]#1[/url])
 PeteTimesSix (visible chains, [url=https://github.com/Alexofp/BDCC/pull/25]#1[/url] [url=https://github.com/Alexofp/BDCC/pull/26]#2[/url] [url=https://github.com/Alexofp/BDCC/pull/27]#3[/url] [url=https://github.com/Alexofp/BDCC/pull/29]#4[/url] [url=https://github.com/Alexofp/BDCC/pull/30]#5[/url] [url=https://github.com/Alexofp/BDCC/pull/31]#6[/url] [url=https://github.com/Alexofp/BDCC/pull/33]#7[/url] [url=https://github.com/Alexofp/BDCC/pull/35]#8[/url] [url=https://github.com/Alexofp/BDCC/pull/36]#9[/url] [url=https://github.com/Alexofp/BDCC/pull/41]#10[/url] [url=https://github.com/Alexofp/BDCC/pull/55]#11[/url])
-Rayforward ([url=https://github.com/Alexofp/BDCC/pull/34]#1[/url] [url=https://github.com/Alexofp/BDCC/pull/37]#2[/url] [url=https://github.com/Alexofp/BDCC/pull/40]#3[/url])
-CanInBad ([url=https://github.com/Alexofp/BDCC/pull/39]#1[/url])
+Rayforward ([url=https://github.com/Alexofp/BDCC/pull/34]#1[/url] [url=https://github.com/Alexofp/BDCC/pull/37]#2[/url] [url=https://github.com/Alexofp/BDCC/pull/40]#3[/url] [url=https://github.com/Alexofp/BDCC/pull/73]#4[/url] [url=https://github.com/Alexofp/BDCC/pull/74]#5[/url] [url=https://github.com/Alexofp/BDCC/pull/75]#6[/url] [url=https://github.com/Alexofp/BDCC/pull/76]#7[/url] [url=https://github.com/Alexofp/BDCC/pull/77]#8[/url])
+CanInBad ([url=https://github.com/Alexofp/BDCC/pull/39]#1[/url] [url=https://github.com/Alexofp/BDCC/pull/79]#2[/url], helping me with the mods browser)
 Ranchar ([url=https://github.com/Alexofp/BDCC/pull/42]#1[/url])
 AverageAce (lots of skins)
-Dalt ([url=https://github.com/Alexofp/BDCC/pull/43]#1[/url], [url=https://github.com/Alexofp/BDCC/pull/56]#2[/url])
+Dalt ([url=https://github.com/Alexofp/BDCC/pull/43]#1[/url] [url=https://github.com/Alexofp/BDCC/pull/56]#2[/url])
+Disillusioned-Gazer ([url=https://github.com/Alexofp/BDCC/pull/89]#1[/url])
+Sayonix (lots of reported typos)
+Johnvic76 (lots of reported typos)
 
 The game uses some icons from [url=https://game-icons.net/]game-icons.net[/url] and [url=https://www.flaticon.com/]flaticon.com[/url]
 
@@ -104,6 +108,7 @@ Thanks to Mekyro for creating RRDC, the inspiration of this game
 Thanks to Jacki Northstar for letting me use her character
 Thanks to Nova Dawfort for letting me use her character ^^
 Thanks to Sompurr for letting me use Socket and her art
+Thanks to Artica for letting me use her character
 
 Thanks to Godot team for creating the engine that this game is running on
 
@@ -112,11 +117,14 @@ Max-Maxou (chastity cage sprites, android suit, engineer uniform, damaged unifor
 Firi (code, #1 #2 #3 #4 #5)
 Niel (code, #1)
 PeteTimesSix (visible chains, #1 #2 #3 #4 #5 #6 #7 #8 #9 #10 #11)
-Rayforward (#1 #2 #3)
-CanInBad (#1)
+Rayforward (#1 #2 #3 #4 #5 #6 #7 #8)
+CanInBad (#1 #2, helping me with the mods browser)
 Ranchar (#1)
 AverageAce (lots of skins)
-Dalt (#1, #2)
+Dalt (#1 #2)
+Disillusioned-Gazer (#1)
+Sayonix (lots of reported typos)
+Johnvic76 (lots of reported typos)
 
 The game uses some icons from game-icons.net and flaticon.com
 
@@ -125,9 +133,9 @@ Thanks to everyone else who I probably forgot..
 fit_content_height = true
 
 [node name="DonationsLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer"]
-margin_top = 598.0
+margin_top = 682.0
 margin_right = 1268.0
-margin_bottom = 619.0
+margin_bottom = 703.0
 custom_fonts/bold_font = SubResource( 1 )
 bbcode_enabled = true
 fit_content_height = true

@@ -37,7 +37,7 @@ func _run():
 			playAnimation(StageScene.Grope, "watchrub", {pc=npcID, npc="pc", bodyState={exposedCrotch=true, hard=true}})
 			saynn("You walk up to your slave.. and notice that {npc.he} {npc.isAre} rubbing {npc.his} {npc.pussyStretch} pussy. Quite eagerly too.")
 
-		saynn("Encouraging might {npc.him} like you more.. but it also might spoil {npc.him}. If you don't want your slave to masturbate, maybe you can try cuffing {npc.his} hands.."+str(" Or putting a chastity cage on {npc.his} cock." if (masType == "penis") else "")+"")
+		saynn("Encouraging might make {npc.him} like you more.. but it also might spoil {npc.him}. If you don't want your slave to masturbate, maybe you can try cuffing {npc.his} hands.."+str(" Or putting a chastity cage on {npc.his} cock." if (masType == "penis") else "")+"")
 
 		addButton("Encourage", "Let them orgasm", "do_encourage_check")
 		addButton("Order to stop", "Order them to stop", "do_orderstop_check")
@@ -56,7 +56,7 @@ func _run():
 		addButton("Fight", "Start the fight", "do_fight_slave")
 	if(state == "lost_slavecums"):
 		if (masType == "penis"):
-			playAnimation(StageScene.Grope, "watchstroke", {pc=npcID, npc="pc", bodyState={exposedCrotch=true, hard=true}})
+			playAnimation(StageScene.Grope, "watchstroke", {pc=npcID, npc="pc", pcCum=true, bodyState={exposedCrotch=true, hard=true}})
 			saynn("{npc.name} won.. meaning {npc.he} gets to do what {npc.he} wants.")
 
 			saynn("[say=npc]Screw you..[/say]")
@@ -66,7 +66,7 @@ func _run():
 			saynn("{npc.name} grunts and arches {npc.his} back as {npc.his} throbbing {npc.penis} shoots thick lines of {npc.cum}, making the floor all messy and sticky. Your slave is left panting and satisfied.")
 
 		elif (masType == "vag"):
-			playAnimation(StageScene.Grope, "watchrub", {pc=npcID, npc="pc", bodyState={exposedCrotch=true, hard=true}})
+			playAnimation(StageScene.Grope, "watchrub", {pc=npcID, npc="pc", pcCum=true, bodyState={exposedCrotch=true, hard=true}})
 			saynn("{npc.name} won.. meaning {npc.he} gets to do what {npc.he} wants.")
 
 			saynn("[say=npc]Screw you..[/say]")
@@ -132,6 +132,13 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "do_orderstop_fail"):
+		if (masType == "penis"):
+			playAnimation(StageScene.Grope, "watchstroke", {pc=npcID, npc="pc", pcCum=true, bodyState={exposedCrotch=true, hard=true}})
+
+		elif (masType == "vag"):
+			playAnimation(StageScene.Grope, "watchrub", {pc=npcID, npc="pc", pcCum=true, bodyState={exposedCrotch=true, hard=true}})
+
+		
 		saynn("Your slave seems to be close.. but that won't stop you from denying {npc.him}.")
 
 		saynn("[say=pc]Stop, right now. Or you're gonna regret it.[/say]")
@@ -176,7 +183,7 @@ func _run():
 		addButtonWithChecks("Help them", "Offer them a hand", "do_encourage_help", [], [[ButtonChecks.NotHandsBlocked], [ButtonChecks.NotArmsRestrained]])
 	if(state == "do_encourage_help"):
 		if (masType == "penis"):
-			playAnimation(StageScene.Grope, "strokefast", {pc=npcID, npc="pc", bodyState={exposedCrotch=true, hard=true}})
+			playAnimation(StageScene.Grope, "strokefast", {pc=npcID, npc="pc", pcCum=true, bodyState={exposedCrotch=true, hard=true}})
 			saynn("It looked so fun that you decided to join in and help your slave! Your hand displaces {npc.his} as you start stroking {npc.his} cock instead. Any protests are silenced with a quiet..")
 
 			saynn("[say=pc]Tshh-h.. Just enjoy it.[/say]")
@@ -196,7 +203,7 @@ func _run():
 				saynn("Looks like your slave received a good discharge. {npc.He} seems happy about it too, you notice a little smile."+str(" Hopefully that will help against {npc.his} depression a bit." if npc.getNpcSlavery().getDespair() > 0.6 else "")+"")
 
 		elif (masType == "vag"):
-			playAnimation(StageScene.Grope, "gropefast", {pc=npcID, npc="pc", bodyState={exposedCrotch=true, hard=true}})
+			playAnimation(StageScene.Grope, "gropefast", {pc=npcID, npc="pc", pcCum=true, bodyState={exposedCrotch=true, hard=true}})
 			saynn("It looked so fun that you decided to join in and help your slave! Your hand displaces {npc.his} as you start playing with {npc.his} pussy instead. Any protests are silenced with a quiet..")
 
 			saynn("[say=pc]Tshh-h.. Just enjoy it.[/say]")
@@ -218,7 +225,7 @@ func _run():
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "do_encourage_cum"):
 		if (masType == "penis"):
-			playAnimation(StageScene.Grope, "watchstroke", {pc=npcID, npc="pc", bodyState={exposedCrotch=true, hard=true}})
+			playAnimation(StageScene.Grope, "watchstroke", {pc=npcID, npc="pc", pcCum=true, bodyState={exposedCrotch=true, hard=true}})
 			saynn("You watch how your slave starts grunting and moaning, {npc.his} balls tensing up, the cock in {npc.his} hands throbbing.. until a number of thick strings of seed bursts out of it!")
 
 			if (didABrat):
@@ -234,7 +241,7 @@ func _run():
 				saynn("Looks like your slave received a good discharge. {npc.He} seems happy about it too, you notice a little smile."+str(" Hopefully that will help against {npc.his} depression a bit." if npc.getNpcSlavery().getDespair() > 0.6 else "")+"")
 
 		elif (masType == "vag"):
-			playAnimation(StageScene.Grope, "watchrub", {pc=npcID, npc="pc", bodyState={exposedCrotch=true, hard=true}})
+			playAnimation(StageScene.Grope, "watchrub", {pc=npcID, npc="pc", pcCum=true, bodyState={exposedCrotch=true, hard=true}})
 			saynn("You watch how your slave starts to squirm a bit and let out cute moans, {npc.his} hand motions become all shaky and stuttery, {npc.his} pussy slit clenching.. until an entire fountain of juices bursts out of it!")
 
 			if (didABrat):

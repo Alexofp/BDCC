@@ -281,7 +281,7 @@ func _run():
 				"Gag on it, bitch.",
 				"Take it deep, slut.",
 				"Fits like a glove. Am I right, pet?",
-				"You´re my personal fuckhole now."
+				"You're my personal fuckhole now."
 				])+"[/say]")
 			saynn("You feel {npc.his} "+dickWord+" sliding in and out of your mouth, strands of saliva dripping out onto the ground. Your mind succumbs to the pleasure as you... ")
 				

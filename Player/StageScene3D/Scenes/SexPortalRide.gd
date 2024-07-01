@@ -55,6 +55,12 @@ func playAnimation(animID, _args = {}):
 		thirdDoll = _args["npc2"]
 	doll3.prepareCharacter(thirdDoll)
 	
+	if(_args.has("cum") && _args["cum"] && !(animID in ["tease"])):
+		#startCumInsideSolo(doll, getCumIntensity(doll2) + getCumIntensity(doll3))
+		startCumInside(doll, doll3)
+	if(_args.has("pcCum") && _args["pcCum"]):
+		startCumPenis(doll)
+	
 	#doll.forceSlotToBeVisible(BodypartSlot.Penis)
 	
 	if(_args.has("bodyState")):

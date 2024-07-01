@@ -431,7 +431,7 @@ func _run():
 		addButton("Cum inside", "Breed that kitty mew", "cum_inside")
 
 	if(state == "cum_inside"):
-		playAnimation(StageScene.HangingSex, "fast", {pc="eliza", npc="pc", npcBodyState={naked=true, hard=true}, bodyState={underwear=true}})
+		playAnimation(StageScene.HangingSex, "fast", {pc="eliza", npc="pc", pcCum=true, npcCum=true, npcBodyState={naked=true, hard=true}, bodyState={underwear=true}})
 		
 		saynn("And you don’t plan on stopping too, thrusting faster and faster until your hips begin slapping against the girl’s butt. Your hands squeeze her {eliza.breasts}, your mouth is gently biting her neck to make the kitty feel more at home.")
 

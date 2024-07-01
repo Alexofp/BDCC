@@ -44,7 +44,7 @@ func _run():
 		if(menstrualCycle != null && menstrualCycle.hasAnyWomb()):
 			sayn("Menstruation cycle: "+str(CycleStage.getVisibleActionName(menstrualCycle.getCurrentStage())))
 			sayn("Cycle length: "+str(Util.roundF(menstrualCycle.getCycleLength()/60.0/60.0/24.0, 1))+" days")
-			sayn("Visible pregnant: "+str(menstrualCycle.isVisiblyPregnant()))
+			sayn("Visibly pregnant: "+str(menstrualCycle.isVisiblyPregnant()))
 			sayn("Is in heat: "+str(menstrualCycle.isInHeat()))
 			sayn("Estimate chance of becoming pregnant after sex: "+str(Util.roundF(menstrualCycle.getRoughChanceOfBecomingPregnant(), 1))+"%")
 			sayn("Fertility: "+str(Util.roundF(GM.pc.getFertility()*100.0, 1))+"%")

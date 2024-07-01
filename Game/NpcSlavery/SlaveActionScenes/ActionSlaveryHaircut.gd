@@ -39,10 +39,34 @@ func _run():
 		saynn("What do you want to change?")
 		
 		addButton("Haircut", "Change your slave's haircut", "changehaircutmenu")
+		var bodypart = npc.getBodypart(BodypartSlot.Hair)
+		if(!bodypart.hasCustomSkinPattern()):
+			addButton("Skin", "Change the hair's skin", "changepartskinmenu")
+		else:
+			if(!GlobalRegistry.getPartSkins(bodypart.id).empty() || bodypart.pickedSkin != null):
+				addButton("Skin", "Change the hair's skin", "changepartskinmenu")
 		addButton("Primary color", "Change your slave's hair color", "changecolor", [0])
 		addButton("Secondary color", "Change your slave's hair color", "changecolor", [1])
 		addButton("Tertiary color", "Change your slave's hair color", "changecolor", [2])
 		addButton("Done", "Enough tinkering", "endthescene")
+
+	if(state == "changepartskinmenu"):
+		var bodypart = npc.getBodypart(BodypartSlot.Hair)
+		addButton("Back", "Go back", "")
+		
+		if(bodypart.hasCustomSkinPattern()):
+			addButton("Default", "Use the default skin pattern", "changepartskinmenu_select", [null])
+			for skinID in GlobalRegistry.getPartSkins(bodypart.id):
+				var theSkin = GlobalRegistry.getPartSkin(bodypart.id, skinID)
+				var skinAuthor = theSkin.getAuthor()
+				addButton(theSkin.getName(), "Pick this skin"+(("\n[i]Created by:[/i] "+str(skinAuthor)) if (skinAuthor != null && skinAuthor != "") else ""), "changepartskinmenu_select", [skinID])
+		else:
+			addButton("Same as base", "Inherit the skin from the base", "changepartskinmenu_select", [null])
+			for skinID in GlobalRegistry.getSkinsAllKeys():
+				var theSkin = GlobalRegistry.getSkin(skinID)
+				var skinAuthor = theSkin.getAuthor()
+				addButton(theSkin.getName(), "Pick this skin"+(("\n[i]Created by:[/i] "+str(skinAuthor)) if (skinAuthor != null && skinAuthor != "") else ""), "changepartskinmenu_select", [skinID])
+
 
 	if(state == "changehaircutmenu"):
 		saynn("Pick the haircut that you want to see on your slave")
@@ -101,6 +125,16 @@ func changepartcolormenu_colorchanged(_theColor):
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
+		return
+		
+	if(_action == "changepartskinmenu_select"):
+		var bodypart = npc.getBodypart(BodypartSlot.Hair)
+		if(_args.size() > 0 && _args[0] == null):
+			bodypart.pickedSkin = null
+		else:
+			bodypart.pickedSkin = _args[0]
+		setState("")
+		npc.updateAppearance()
 		return
 		
 	if(_action == "resetcolor_bodypartmenu"):

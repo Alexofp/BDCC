@@ -585,7 +585,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "play2_cum")
 	if(state == "play2_cum"):
-		playAnimation(StageScene.Sybian, "ride", {nosybian=true, bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.Sybian, "ride", {pcCum=true,nosybian=true, bodyState={naked=true, hard=true}})
 		saynn("Rahi retrieves a little pink vibro bullet and returns. You can already guess what she will do to you.")
 
 		saynn("[say=rahi]Stay like that.[/say]")
@@ -834,7 +834,7 @@ func _run():
 
 		addButton("Cum inside", "Breed the kitty", "sex1_cum")
 	if(state == "sex1_cum"):
-		playAnimation(StageScene.SexCowgirl, "inside", {npc="rahi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexCowgirl, "inside", {npc="rahi", pc="pc", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
 		saynn("With the final motion, Rahi brings herself down onto your {pc.penis} hard until the tip kisses her cervix. She only has time to produce a feral growl before cumming hard, her muscles clenching around your member, sending you over the peak in an instant.")
 
 		saynn("Your member throbbing and pulsating inside Rahi as it starts shooting strings of thick {pc.cum} directly inside her inviting womb.")
@@ -847,7 +847,7 @@ func _run():
 		if (getModule("RahiModule").isSkillLearned("rahiSkillSex")):
 			addButton("Sloppy seconds", "(Sex) Rahi wants more!", "sex1_more")
 	if(state == "sex1_more"):
-		playAnimation(StageScene.SexCowgirl, "fast", {npc="rahi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexCowgirl, "fast", {npc="rahi", pc="pc", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
 		saynn("As Rahi lays on top of you, she can't help but to feel.. excitement run through her body.. As she thought about something. By this she has mostly recovered her breathing.")
 
 		saynn("[say=rahi]Are you ready to breed her again, pet?[/say]")
@@ -1031,7 +1031,7 @@ func _run():
 
 		addButton("Get knotted", "See what happens next", "sex3_cum")
 	if(state == "sex3_cum"):
-		playAnimation(StageScene.SexStanding, "inside", {npc="pc", pc="rahi", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexStanding, "inside", {npc="pc", pc="rahi", pcCum=true, npcCum=true, bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
 		saynn("The rubber knot puts an immense amount of pressure on your {pc.pussyStretch} pussy, stretching your slit to the limit.. until the orb just slips in, tying you and Rahi together.. With one swift motion Rahi drives the knot even deeper, breaking into your womb.")
 
 		saynn("You cry out in pleasure and pain as Rahi has her whole strapon inside you. Squeezing the knot so much caused the toy to suddenly start filling you with some thick, creamy fluid.. seems like the strapon had some cum lube stored just for this occasion..")
@@ -1056,7 +1056,7 @@ func _run():
 		if (getModule("RahiModule").isSkillLearned("rahiSkillMasochist")):
 			addButton("Knot-fucking", "(Masochist) Knot goes in and out..", "sex3_knotfuck")
 	if(state == "sex3_knotfuck"):
-		playAnimation(StageScene.SexStanding, "fast", {npc="pc", pc="rahi", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexStanding, "fast", {npc="pc", pc="rahi", pcCum=true, npcCum=true, bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
 		saynn("After the knot got pulled out, it left a lot of empty space inside you.. Empty space that you so eagerly want to be filled.. again..")
 
 		saynn("[say=pc]More, Miss Rahi, please!..[/say]")
@@ -1113,7 +1113,7 @@ func _run():
 
 		addButton("Faster", "You wanna cum!", "sex4_cum")
 	if(state == "sex4_cum"):
-		playAnimation(StageScene.SexTribadism, "fast", {pc="rahi", npc="pc", bodyState={naked=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexTribadism, "fast", {pc="rahi", npc="pc", pcCum=true, npcCum=true, bodyState={naked=true}, npcBodyState={naked=true}})
 		saynn("You can't stop rubbing pussies with Rahi, your clit already receiving a slight red tint of irritation but you don't give a damn, you just keep holding her paw while furiously grinding against Rahi.")
 
 		saynn("Finally, with a cry of pleasure, you both cum! Your bodies shake and squirm, causing more torturous overstimulation, your juices blend into a wet, sticky mess. Rahi throws her head back and produces some passionate noises, riding her pleasure waves, just like you. And after that, she just collapses onto the floor, panting heavily.")
@@ -1219,7 +1219,7 @@ func _run():
 
 		addButton("Get knotted", "See what happens next", "peg1_cum")
 	if(state == "peg1_cum"):
-		playAnimation(StageScene.SexStanding, "inside", {npc="pc", pc="rahi", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexStanding, "inside", {npc="pc", pc="rahi", pcCum=true, npcCum=true, bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
 		saynn("The rubber knot puts an immense amount of pressure on your {pc.analStretch} anal ring, stretching it to the limit.. until the orb just slips in, tying you and Rahi together.. With one swift motion Rahi drives the knot even deeper inside your bowels.")
 
 		saynn("You cry out in pleasure and pain as Rahi has her whole strapon in you. Squeezing the knot so much caused the toy to suddenly start filling you with some thick, creamy fluid.. seems like the strapon had some cum lube stored just for this occasion..")
@@ -1247,7 +1247,7 @@ func _run():
 		if (getModule("RahiModule").isSkillLearned("rahiSkillMasochist")):
 			addButton("Knot-fucking", "(Masochist) Knot goes in and out..", "peg1_knotfuck")
 	if(state == "peg1_knotfuck"):
-		playAnimation(StageScene.SexStanding, "fast", {npc="pc", pc="rahi", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexStanding, "fast", {npc="pc", pc="rahi", pcCum=true, npcCum=true, bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
 		saynn("After the knot got pulled out, it left a lot of empty space inside you.. Empty space that you so eagerly want to be filled.. again..")
 
 		saynn("[say=pc]More, Miss Rahi, please!..[/say]")
@@ -1366,7 +1366,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "peg2_cum")
 	if(state == "peg2_cum"):
-		playAnimation(StageScene.SexAllFours, "inside", {pc="rahi", npc="pc", npcBodyState={naked=true, hard=true}, bodyState={naked=true}})
+		playAnimation(StageScene.SexAllFours, "inside", {pc="rahi", npc="pc", pcCum=true, npcCum=true, npcBodyState={naked=true, hard=true}, bodyState={naked=true}})
 		if (GM.pc.isWearingChastityCage()):
 			saynn("One of the thrusts hits your prostate just right, sending your body to convulse as you cum. Your stretched tailhole is clenching hard around Rahi's rubber member while your caged up member throbs desperately and leaks {pc.cum} through the little hole, messing up the kitty's bed.")
 
@@ -1437,7 +1437,7 @@ func _run():
 		if (getModule("RahiModule").isSkillLearned("rahiSkillMasochist")):
 			addButton("CBT", "(Masochist) Maybe Rahi can reward you by torturing your genitals..", "peg2_cbt")
 	if(state == "peg2_cbt"):
-		playAnimation(StageScene.SexFeetPlay, "crotch", {pc="rahi", npc="pc", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexFeetPlay, "crotch", {pc="rahi", npc="pc", npcCum=true, bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
 		saynn("You stare at Rahi with very subby begging eyes. And that awakens something in Rahi. She suddenly pushes you down to the floor with her leg before putting her feet on your crotch.")
 
 		if (GM.pc.isWearingChastityCage()):

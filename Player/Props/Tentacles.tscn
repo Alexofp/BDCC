@@ -1,36 +1,24 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Player/Props/Tentacles.glb" type="PackedScene" id=1]
-[ext_resource path="res://Player/Props/latexmatcap.png" type="Texture" id=2]
-
-[sub_resource type="Shader" id=1]
-code = "/*
-	MatCap Shader by Firerabbit
-	
-	MIT License
-*/
-
-shader_type spatial;
-render_mode async_visible,blend_mix,depth_draw_opaque,diffuse_burley,specular_schlick_ggx,unshaded;
-uniform sampler2D matcap : hint_black_albedo;
-uniform float metalness : hint_range(0.0,1.0) = 1.0;
-uniform vec4 color : hint_color = vec4(1.0);
-
-void fragment() {
-	vec2 matcap_uv = (NORMAL.xy * vec2(0.5, -0.5) + vec2(0.5, 0.5));
-	ALBEDO = color.rgb;
-	ALBEDO *= mix(vec3(1.0), texture(matcap, matcap_uv).rgb, metalness);
-}"
-
-[sub_resource type="ShaderMaterial" id=2]
-resource_name = "TentacleMaterial.001"
-shader = SubResource( 1 )
-shader_param/metalness = 1.0
-shader_param/color = Color( 1, 1, 1, 1 )
-shader_param/matcap = ExtResource( 2 )
+[ext_resource path="res://Player/Props/LatexTentacles.tres" type="Material" id=2]
+[ext_resource path="res://Player/Props/Tentacles.gd" type="Script" id=3]
 
 [node name="Tentacles" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
 
 [node name="Tentacle" parent="TentaclesArmature/Skeleton" index="0"]
 software_skinning_transform_normals = false
-material/0 = SubResource( 2 )
+material/0 = ExtResource( 2 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="." index="2"]
+transform = Transform( 1, 0, 0, 0, 0.279611, -0.960113, 0, 0.960113, 0.279611, -5.65823, 2.77926, 0 )
+visible = false
+light_color = Color( 0.419608, 0.439216, 1, 1 )
+light_energy = 3.0
+
+[node name="DirectionalLight2" type="DirectionalLight" parent="." index="3"]
+transform = Transform( -0.999544, 0.00844135, -0.0289854, -0.0301896, -0.279484, 0.959676, 0, 0.960113, 0.279611, -5.65823, 6.16915, 0 )
+visible = false
+light_color = Color( 1, 0.964706, 0.784314, 1 )
+light_energy = 3.0

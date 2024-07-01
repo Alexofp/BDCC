@@ -104,6 +104,7 @@ func _run():
 		playAnimation(StageScene.SexMissionary, "fast", {
 			pc = "avy",
 			npc="kait",
+			pcCum=true, npcCum=true,
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})

@@ -1,0 +1,118 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Game/Datapacks/UI/PackVarUIs/EditorVarUI.gd" type="Script" id=2]
+
+[node name="EditorVarUI" type="MarginContainer"]
+anchor_right = 1.0
+script = ExtResource( 2 )
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+margin_right = 1280.0
+margin_bottom = 118.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer2"]
+margin_right = 1280.0
+margin_bottom = 14.0
+text = "Editor"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
+margin_top = 18.0
+margin_right = 1280.0
+margin_bottom = 118.0
+
+[node name="ItemList" type="ItemList" parent="VBoxContainer2/HBoxContainer"]
+margin_right = 957.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer"]
+margin_left = 961.0
+margin_right = 1280.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NewButton" type="Button" parent="VBoxContainer2/HBoxContainer/VBoxContainer"]
+margin_right = 319.0
+margin_bottom = 20.0
+text = "New"
+
+[node name="EditButton" type="Button" parent="VBoxContainer2/HBoxContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 319.0
+margin_bottom = 44.0
+text = "Edit"
+
+[node name="DeleteButton" type="Button" parent="VBoxContainer2/HBoxContainer/VBoxContainer"]
+margin_top = 48.0
+margin_right = 319.0
+margin_bottom = 68.0
+text = "Delete"
+
+[node name="Control" type="Control" parent="."]
+margin_right = 1280.0
+margin_bottom = 118.0
+mouse_filter = 2
+
+[node name="AddNewDialog" type="ConfirmationDialog" parent="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -230.0
+margin_top = -75.0
+margin_right = 230.0
+margin_bottom = 75.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/AddNewDialog"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 452.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Control/AddNewDialog/VBoxContainer"]
+margin_right = 444.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Lala"
+
+[node name="NewThingIDLineEdit" type="LineEdit" parent="Control/AddNewDialog/VBoxContainer"]
+margin_top = 18.0
+margin_right = 444.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="ConfirmDeleteDialog" type="ConfirmationDialog" parent="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -236.0
+margin_top = -43.0
+margin_right = 236.0
+margin_bottom = 43.0
+
+[node name="Label2" type="Label" parent="Control/ConfirmDeleteDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+text = "Are you sure you want to delete this object?"
+autowrap = true
+
+[connection signal="pressed" from="VBoxContainer2/HBoxContainer/VBoxContainer/NewButton" to="." method="_on_NewButton_pressed"]
+[connection signal="pressed" from="VBoxContainer2/HBoxContainer/VBoxContainer/EditButton" to="." method="_on_EditButton_pressed"]
+[connection signal="pressed" from="VBoxContainer2/HBoxContainer/VBoxContainer/DeleteButton" to="." method="_on_DeleteButton_pressed"]
+[connection signal="confirmed" from="Control/AddNewDialog" to="." method="_on_AddNewDialog_confirmed"]
+[connection signal="confirmed" from="Control/ConfirmDeleteDialog" to="." method="_on_ConfirmDeleteDialog_confirmed"]

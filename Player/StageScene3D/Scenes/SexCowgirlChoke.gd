@@ -57,6 +57,15 @@ func playAnimation(animID, _args = {}):
 	var isUncon = (_args.has("uncon") && _args["uncon"])
 	updateSubAnims()
 	
+	if(_args.has("pcCum") && _args["pcCum"]):
+		#startCumInsideSolo(doll, getCumIntensity(doll2) + getCumIntensity(doll3))
+		if(!(animID in ["tease", "teaseuncon"])):
+			startCumInside(doll2, doll)
+		else:
+			startCumPenis(doll)
+	if(_args.has("npcCum") && _args["npcCum"]):
+		startCumPenis(doll2)
+	
 	var state_machine = animationTree["parameters/StateMachine/playback"]
 	var state_machine2 = animationTree2["parameters/StateMachine/playback"]
 
@@ -73,19 +82,18 @@ func playAnimation(animID, _args = {}):
 		if(animID == "fast"):
 			state_machine.travel("Sex_CowgirlChokeFast_1-loop")
 			state_machine2.travel("Sex_CowgirlChokeFast_2-loop")
-	else:
-		if(animID == "teaseuncon" || (isUncon && animID == "tease")):
-			state_machine.travel("Sex_CowgirlChokeTeaseUncon_1-loop")
-			state_machine2.travel("Sex_CowgirlChokeTease_2-loop 2")
-		if(animID == "insideuncon" || (isUncon && animID == "inside")):
-			state_machine.travel("Sex_CowgirlChokeInsideUncon_1-loop")
-			state_machine2.travel("Sex_CowgirlChokeInside_2-loop 2")
-		if(animID == "sexuncon" || (isUncon && animID == "sex")):
-			state_machine.travel("Sex_CowgirlChokeUncon_1-loop")
-			state_machine2.travel("Sex_CowgirlChoke_2-loop 2")
-		if(animID == "fastuncon" || (isUncon && animID == "fast")):
-			state_machine.travel("Sex_CowgirlChokeFastUncon_1-loop")
-			state_machine2.travel("Sex_CowgirlChokeFast_2-loop 2")
+	if(animID == "teaseuncon" || (isUncon && animID == "tease")):
+		state_machine.travel("Sex_CowgirlChokeTeaseUncon_1-loop")
+		state_machine2.travel("Sex_CowgirlChokeTease_2-loop 2")
+	if(animID == "insideuncon" || (isUncon && animID == "inside")):
+		state_machine.travel("Sex_CowgirlChokeInsideUncon_1-loop")
+		state_machine2.travel("Sex_CowgirlChokeInside_2-loop 2")
+	if(animID == "sexuncon" || (isUncon && animID == "sex")):
+		state_machine.travel("Sex_CowgirlChokeUncon_1-loop")
+		state_machine2.travel("Sex_CowgirlChoke_2-loop 2")
+	if(animID == "fastuncon" || (isUncon && animID == "fast")):
+		state_machine.travel("Sex_CowgirlChokeFastUncon_1-loop")
+		state_machine2.travel("Sex_CowgirlChokeFast_2-loop 2")
 
 func canTransitionTo(_actionID, _args = []):
 	var firstDoll = "pc"

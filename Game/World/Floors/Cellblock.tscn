@@ -9,14 +9,14 @@ script = ExtResource( 3 )
 
 [node name="CellblockRoom" parent="." index="0" instance=ExtResource( 2 )]
 roomName = "Corridor"
-roomDescription = "You see two set of a stairs and a corridor leading to the cellblocks"
+roomDescription = "You see two set of a stairs and a corridor leading to the cellblocks."
 population = 1
 
 [node name="CBStairs1" parent="." index="1" instance=ExtResource( 2 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( -64, 0 )
 roomName = "Stairs"
-roomDescription = "A staircase that will lead you to the main hall"
+roomDescription = "A staircase that will lead you to the main hall."
 roomSprite = 3
 roomColor = 7
 population = 1
@@ -26,7 +26,7 @@ astarConnectedTo = PoolStringArray( "MainStairs1" )
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 64, 0 )
 roomName = "Stairs"
-roomDescription = "A staircase that will lead you to the main hall"
+roomDescription = "A staircase that will lead you to the main hall."
 roomSprite = 3
 roomColor = 7
 population = 1
@@ -36,7 +36,7 @@ self_modulate = Color( 1, 0.6, 0.8, 1 )
 position = Vector2( 0, 192 )
 roomName = "Lilac cellblock"
 roomID = "cellblock_lilac_nearcell"
-roomDescription = "You enter a prisoner cellblock, it's a huge spacious room with many prisoner cells. All the walls are painted with white and purple color, there are a bunch of comfy-looking sofas and chairs around. Each cell looks cozy and even has a soft carpet. This block is for inmates that are sexual deviants"
+roomDescription = "You enter a prisoner cellblock, it's a huge spacious room with many prisoner cells. All the walls are painted with white and purple color, there are a bunch of comfy-looking sofas and chairs around. Each cell looks cozy and even has a soft carpet. This block is for inmates that are sexual deviants."
 roomColor = 4
 population = 1
 
@@ -44,7 +44,7 @@ population = 1
 position = Vector2( 0, 64 )
 roomName = "Corridor"
 roomID = "cellblock_corridor_middle"
-roomDescription = "A wide corridor that connects all the cellblocks with the stairs"
+roomDescription = "A wide corridor that connects all the cellblocks with the stairs."
 population = 1
 
 [node name="CellblockRoom6" parent="." index="5" instance=ExtResource( 2 )]
@@ -59,7 +59,7 @@ roomColor = 4
 position = Vector2( 0, 128 )
 roomName = "Corridor"
 roomID = "cellblock_nearcells"
-roomDescription = "From here you see three cellblocks, orange, lilac and red"
+roomDescription = "From here you see three cellblocks, orange, lilac and red."
 population = 1
 
 [node name="CellblockRoom8" parent="." index="7" instance=ExtResource( 2 )]
@@ -67,7 +67,7 @@ self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( 512, 128 )
 roomName = "Solitary"
 roomID = "solitary_cell"
-roomDescription = "A tiny cell for very unruly inmates"
+roomDescription = "A tiny cell for very unruly inmates."
 roomColor = 2
 gridColor = 2
 
@@ -76,7 +76,7 @@ self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( 64, 128 )
 roomName = "High-security cellblock"
 roomID = "cellblock_red_nearcell"
-roomDescription = "This block has very little lights and the ones that are here are dimmed down, creating a dark atmosphere. Red colors show that this is a cellblock for violent inmates"
+roomDescription = "This block has very little lights and the ones that are here are dimmed down, creating a dark atmosphere. Red colors show that this is a cellblock for violent inmates."
 roomColor = 2
 population = 1
 
@@ -93,7 +93,7 @@ self_modulate = Color( 1, 0.8, 0.6, 1 )
 position = Vector2( -64, 128 )
 roomName = "General-security cellblock"
 roomID = "cellblock_orange_nearcell"
-roomDescription = "You see a long open space with many inmate cells, each one has a transparent armored window and an automatic door. Everything has an orange trim to it, it's clearly a cellblock for general inmates"
+roomDescription = "You see a long open space with many inmate cells, each one has a transparent armored window and an automatic door. Everything has an orange trim to it, it's clearly a cellblock for general inmates."
 roomColor = 5
 population = 1
 

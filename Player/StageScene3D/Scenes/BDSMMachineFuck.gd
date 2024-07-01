@@ -43,6 +43,15 @@ func playAnimation(animID, _args = {}):
 	
 	if(_args.has("noDildos") && _args["noDildos"]):
 		$BDSMMachine.setDildosVisible(false)
+	else:
+		$BDSMMachine.setDildosVisible(true)
+	
+	if(_args.has("cum") && _args["cum"] && !(animID in ["tease", "wand"])):
+		startCumInsideSolo(doll, 1.0)
+		#startCumInside(doll2, doll)
+		#startCumInside(doll, doll3)
+	if(_args.has("pcCum") && _args["pcCum"]):
+		startCumPenis(doll)
 	
 	var state_machine = animationTree["parameters/StateMachine/playback"]
 	var state_machine2 = animationTree2["parameters/StateMachine/playback"]

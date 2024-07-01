@@ -3,12 +3,16 @@ class_name CharacterGeneratorBase
 
 func makeBase(idprefix = "dynamicnpc", _args = {}):
 	var dynamicCharacter = DynamicCharacter.new()
-	dynamicCharacter.id = GM.main.generateCharacterID(idprefix)
+	if(is_instance_valid(GM.main)):
+		dynamicCharacter.id = GM.main.generateCharacterID(idprefix)
 	
 	if(_args.has(NpcGen.Temporary) && _args[NpcGen.Temporary]):
 		dynamicCharacter.temporaryCharacter = true
 	
-	GM.main.addDynamicCharacter(dynamicCharacter)
+	if(is_instance_valid(GM.main)):
+		GM.main.addDynamicCharacter(dynamicCharacter)
+	elif(_args.has("addtonode") && _args["addtonode"]):
+		_args["addtonode"].add_child(dynamicCharacter)
 	return dynamicCharacter
 
 func pickGender(character:DynamicCharacter, _args = {}):
@@ -33,7 +37,10 @@ func pickName(character:DynamicCharacter, _args = {}):
 			character.npcName = RNG.randomFemaleName()
 
 func pickEquipment(character:DynamicCharacter, _args = {}):
-	character.npcDefaultEquipment = ["CasualClothes", "LaceBra", "LacePanties"]
+	if(_args.has("editor_noequip") && _args["editor_noequip"]):
+		character.npcDefaultEquipment = []
+	else:
+		character.npcDefaultEquipment = ["CasualClothes", "LaceBra", "LacePanties"]
 
 func pickNonStaticEquipment(_character:DynamicCharacter, _args = {}):
 	pass
@@ -247,7 +254,7 @@ func pickLevel(character:DynamicCharacter, _args = {}):
 	if(_args.has(NpcGen.Level)):
 		character.npcLevel = _args[NpcGen.Level]
 	else:
-		if(GM.pc == null):
+		if(GM.pc == null || !is_instance_valid(GM.pc)):
 			character.npcLevel = 1
 		else:
 			character.npcLevel = Util.maxi(GM.pc.getLevel() + RNG.randi_range(-3,3), 0)# Just some random lvl

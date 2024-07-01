@@ -86,9 +86,9 @@ func _run():
 
 	if(state == "continue"):
 		if(GM.pc.hasReachableVagina()):
-			playAnimation(StageScene.BDSMMachineFuck, "insidedouble", {bodyState={naked=true, hard=true}})
+			playAnimation(StageScene.BDSMMachineFuck, "insidedouble", {cum=true, bodyState={naked=true, hard=true}})
 		else:
-			playAnimation(StageScene.BDSMMachineFuck, "inside", {bodyState={naked=true, hard=true}})
+			playAnimation(StageScene.BDSMMachineFuck, "inside", {cum=true, bodyState={naked=true, hard=true}})
 		
 		saynn("You hear hydraulic motors working as the table brings some kind of tool out. You look down and see a sturdy metal arm with.. some kind of phallic object attached to it. Looks like a blue dildo that has a transparent tube running through it. And the tip of that tube is leaking something.. The arm is hovering between your legs.")
 

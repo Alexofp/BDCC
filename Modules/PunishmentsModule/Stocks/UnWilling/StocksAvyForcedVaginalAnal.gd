@@ -100,7 +100,7 @@ func _run():
 		addButton("Continue", "See what happens next", "fucking")
 
 	if(state == "fucking"):
-		playAnimation(StageScene.StocksSex, "sex", {npc="avy", bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true, condom=usedCondom}})
+		playAnimation(StageScene.StocksSex, "sex", {npc="avy", pcCum=true, npcCum=true, bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true, condom=usedCondom}})
 		
 		saynn("You can’t look behind you with the stocks blocking your head but you can feel it for sure. Avy places her hands on your {pc.thick} butt and presses her cock against your cunt. She starts rubbing her shaft against your sensitive pussy lips, your body betrays you and gets aroused quickly.")
 
@@ -171,7 +171,7 @@ func _run():
 			addButton("Continue", "There is more??", "analSex")
 
 	if(state == "analSex"):
-		playAnimation(StageScene.StocksSex, "fast", {npc="avy", bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true, condom=usedCondom}})
+		playAnimation(StageScene.StocksSex, "fast", {npc="avy", pcCum=true, npcCum=true, bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true, condom=usedCondom}})
 		
 		saynn("But that’s not all of it, Avy’s cock is still as hard as it was and she is still horny. She spreads your {pc.masc} buttcheeks and starts prodding at your anal ring! You wiggle, squirm and try to voice your opinion but she calms you down with another smack.")
 

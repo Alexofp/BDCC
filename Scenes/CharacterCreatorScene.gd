@@ -108,7 +108,7 @@ func _run():
 		addButton("Body attributes", "Change your femininity, thickness and so", "bodyAttributes")
 			
 		# DEBUG testing stuff, feel free to remove
-		if(true):
+		if(false):
 			sayn("\nEXAMPLE DESCRIPTION:")
 			if(GM.pc.hasPenis()):
 				sayn("your dick is {pc.cockSize} and also {pc.cockDesc}")

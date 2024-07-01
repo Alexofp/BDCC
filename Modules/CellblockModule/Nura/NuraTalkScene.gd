@@ -145,7 +145,7 @@ func _run():
 
 		addButton("Rub", "Do the thing", "start_fake_pussyrubbing")
 	if(state == "start_fake_pussyrubbing"):
-		playAnimation(StageScene.SexTribadism, "sex", {npc="nura", pc="pc"})
+		playAnimation(StageScene.SexTribadism, "sex", {npc="nura", pc="pc", pcCum=true})
 		saynn("You begin rubbing pussies with her. Well, with her imaginary pussy. Nur-A supports her with her hands while looking at you before proceeding to help you, moving her hips in the opposite way.")
 
 		saynn("It feels.. strange. The flat metal panel that she has there is quite cold and rigid. But still, there is some pleasurable friction in there. Your {pc.pussyStretch} slowly gets wet, you spread your juices all over her crotch, making it shine.")
@@ -183,7 +183,7 @@ func _run():
 
 		addButton("Fuck her thighs", "Start moving your hips", "do_fake_humps")
 	if(state == "do_fake_humps"):
-		playAnimation(StageScene.SexStanding, "sex", {npc="nura", pc="pc", bodyState={exposedCrotch=true,hard=true}})
+		playAnimation(StageScene.SexStanding, "sex", {npc="nura", pc="pc", pcCum=true, bodyState={exposedCrotch=true,hard=true}})
 		saynn("You begin moving your hips back and forth, letting your {pc.cock} rub against the android's thighs while you gradually pick up the pace. Even though there is nothing there on her crotch, the friction is enough to make your shaft start leaking precum.")
 
 		saynn("Your hand slips down from her shoulder onto her breasts. They're very firm and not jiggly at all. But they're enough to hold onto while you thrust your dick between her legs.")

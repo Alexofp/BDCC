@@ -65,6 +65,11 @@ func playAnimation(animID, _args = {}):
 	
 	updateSubAnims()
 	
+	if(_args.has("pcCum") && _args["pcCum"]):
+		startCumPenis(doll)
+	if(_args.has("npcCum") && _args["npcCum"]):
+		startCumPenis(doll2)
+		
 	#var state_machine = animationTree["parameters/AnimationNodeStateMachine/playback"]
 	#if(!stateMachineTravel(doll, state_machine, fullAnimID)):
 	#	Log.printerr("Action "+str(animID)+" is not found for stage "+str(id))

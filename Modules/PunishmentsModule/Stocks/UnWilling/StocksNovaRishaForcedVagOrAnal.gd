@@ -61,7 +61,7 @@ func _run():
 			addButton("Open mouth", "Accept your faith, maybe you will like it", "anal")
 
 	if(state == "vaginal"):
-		playAnimation(StageScene.StocksSpitroast, "sex", {npc="risha", npc2="nova", bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true}, npc2BodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.StocksSpitroast, "sex", {npc="risha", npc2="nova", npcCum=true, pcCum=true, bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true}, npc2BodyState={exposedCrotch=true, hard=true}})
 		# (vaginal version)
 
 		saynn("You open your mouth a bit, enough to stick your tongue out to lap at the base of her member. Nova smirks and positions herself so the tip of her cock is brushing against your lips. You take it in and start to teasingly lick it, catching her precum. Her husky tail wiggles happily.")
@@ -105,7 +105,7 @@ func _run():
 		addButton("Continue", "Wow..", "continue")
 
 	if(state == "anal"):
-		playAnimation(StageScene.StocksSpitroast, "sex", {npc="risha", npc2="nova", bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true}, npc2BodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.StocksSpitroast, "sex", {npc="risha", npc2="nova", pcCum=true, npcCum=true, bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true}, npc2BodyState={exposedCrotch=true, hard=true}})
 		# (anal version)
 
 		saynn("You open your mouth a bit, enough to stick your tongue out to lap at the base of her member. Nova smirks and positions herself so the tip of her cock is brushing against your lips. You take it in and start to teasingly lick it, catching her precum. Her husky tail wiggles happily.")

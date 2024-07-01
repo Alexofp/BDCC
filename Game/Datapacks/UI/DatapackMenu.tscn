@@ -1,0 +1,191 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
+[ext_resource path="res://Game/Datapacks/UI/DatapackMenu.gd" type="Script" id=2]
+
+[node name="DatapackMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="DatapackViewer" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DatapackViewer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="DatapackViewer/VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 20.0
+text = "You can enable or disable  datapacks from inside the in-game menu (Pause menu -> Datapacks)"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DatapackViewer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 1280.0
+margin_bottom = 616.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DatapackItemList" type="ItemList" parent="DatapackViewer/VBoxContainer/HBoxContainer"]
+margin_right = 850.0
+margin_bottom = 592.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DatapackViewer/VBoxContainer/HBoxContainer"]
+margin_left = 854.0
+margin_right = 1280.0
+margin_bottom = 592.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NewDatapackButton" type="Button" parent="DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 426.0
+margin_bottom = 26.0
+text = "New datapack"
+
+[node name="EditDatapackButton" type="Button" parent="DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 30.0
+margin_right = 426.0
+margin_bottom = 56.0
+text = "Edit datapack"
+
+[node name="DeleteDatapackButton" type="Button" parent="DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 60.0
+margin_right = 426.0
+margin_bottom = 86.0
+text = "Delete datapack"
+
+[node name="DatapackDescLabel" type="RichTextLabel" parent="DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 90.0
+margin_right = 426.0
+margin_bottom = 592.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+
+[node name="GridContainer" type="GridContainer" parent="DatapackViewer/VBoxContainer"]
+margin_top = 620.0
+margin_right = 1280.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 0, 100 )
+columns = 5
+
+[node name="CloseButton" type="Button" parent="DatapackViewer/VBoxContainer/GridContainer"]
+margin_right = 253.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "Close"
+
+[node name="UpdateButton" type="Button" parent="DatapackViewer/VBoxContainer/GridContainer"]
+margin_left = 257.0
+margin_right = 510.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "Reload packs"
+
+[node name="DatapackBrowserButton" type="Button" parent="DatapackViewer/VBoxContainer/GridContainer"]
+margin_left = 514.0
+margin_right = 767.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "DATAPACK BROWSER"
+
+[node name="DatapackFolderButton" type="Button" parent="DatapackViewer/VBoxContainer/GridContainer"]
+margin_left = 771.0
+margin_right = 1024.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "Datapacks folder"
+
+[node name="DatapackWikiButton" type="Button" parent="DatapackViewer/VBoxContainer/GridContainer"]
+margin_left = 1028.0
+margin_right = 1280.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "Datapacks wiki"
+
+[node name="NewPackConfirmationDialog" type="ConfirmationDialog" parent="DatapackViewer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -272.5
+margin_top = -107.5
+margin_right = 272.5
+margin_bottom = 107.5
+window_title = "Datapack ID"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DatapackViewer/NewPackConfirmationDialog"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 537.0
+margin_bottom = 173.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="DatapackViewer/NewPackConfirmationDialog/VBoxContainer"]
+margin_right = 529.0
+margin_bottom = 66.0
+text = "Enter an id for your new datapack
+Make sure that it's unique, id colissions will lead to only one pack being loaded"
+autowrap = true
+
+[node name="NewPackIDLineEdit" type="LineEdit" parent="DatapackViewer/NewPackConfirmationDialog/VBoxContainer"]
+margin_top = 70.0
+margin_right = 529.0
+margin_bottom = 100.0
+
+[node name="AlertDialog" type="AcceptDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -312.0
+margin_top = -91.5
+margin_right = 312.0
+margin_bottom = 91.5
+
+[node name="AlertLabel" type="Label" parent="AlertDialog"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 616.0
+margin_bottom = 141.0
+autowrap = true
+
+[node name="ConfirmDeleteDatapack" type="ConfirmationDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -213.5
+margin_top = -68.5
+margin_right = 213.5
+margin_bottom = 68.5
+
+[node name="Label2" type="Label" parent="ConfirmDeleteDatapack"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 419.0
+margin_bottom = 95.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+text = "Are you sure?"
+autowrap = true
+
+[connection signal="item_selected" from="DatapackViewer/VBoxContainer/HBoxContainer/DatapackItemList" to="." method="_on_DatapackItemList_item_selected"]
+[connection signal="pressed" from="DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer/NewDatapackButton" to="." method="_on_NewDatapackButton_pressed"]
+[connection signal="pressed" from="DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer/EditDatapackButton" to="." method="_on_EditDatapackButton_pressed"]
+[connection signal="pressed" from="DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer/DeleteDatapackButton" to="." method="_on_DeleteDatapackButton_pressed"]
+[connection signal="meta_clicked" from="DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer/DatapackDescLabel" to="." method="_on_DatapackDescLabel_meta_clicked"]
+[connection signal="pressed" from="DatapackViewer/VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
+[connection signal="pressed" from="DatapackViewer/VBoxContainer/GridContainer/UpdateButton" to="." method="_on_UpdateButton_pressed"]
+[connection signal="pressed" from="DatapackViewer/VBoxContainer/GridContainer/DatapackBrowserButton" to="." method="_on_DatapackBrowserButton_pressed"]
+[connection signal="pressed" from="DatapackViewer/VBoxContainer/GridContainer/DatapackFolderButton" to="." method="_on_DatapackFolderButton_pressed"]
+[connection signal="pressed" from="DatapackViewer/VBoxContainer/GridContainer/DatapackWikiButton" to="." method="_on_DatapackWikiButton_pressed"]
+[connection signal="confirmed" from="DatapackViewer/NewPackConfirmationDialog" to="." method="_on_NewPackConfirmationDialog_confirmed"]
+[connection signal="confirmed" from="ConfirmDeleteDatapack" to="." method="_on_ConfirmDeleteDatapack_confirmed"]

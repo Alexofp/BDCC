@@ -127,6 +127,7 @@ func _init():
 		"res://Modules/MedicalModule/MentalWard/LatexParasite.gd",
 		"res://Modules/MedicalModule/MentalWard/GhostHands.gd",
 		"res://Modules/MedicalModule/NurseFeline.gd",
+		"res://Modules/MedicalModule/MentalWard/PlantTentacles.gd",
 	]
 	items = []
 	events = [

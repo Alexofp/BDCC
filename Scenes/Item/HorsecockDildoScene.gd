@@ -51,7 +51,7 @@ func _run():
 
 		addButton("Cum!", "Ride it until you make it", "do_cum")
 	if(state == "do_cum"):
-		playAnimation(StageScene.HorsecockDildoSex, "fast", {bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.HorsecockDildoSex, "fast", {pcCum=true, bodyState={naked=true, hard=true}})
 		saynn("You proceed to ride the fuck out of that horsecock, raising your lower part of the body before bringing it down along the fat shaft with full force, letting the flared tip as deep as your body allows and then some.")
 
 		if (!isPussy && GM.pc.hasPenis()):

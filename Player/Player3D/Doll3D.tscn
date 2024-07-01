@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Player/Player3D/DollSkeleton.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Doll3D.gd" type="Script" id=2]
@@ -7,6 +7,18 @@
 [ext_resource path="res://Player/Player3D/Doll3DTooltip.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Player/Player3D/JiggleBone.gd" type="Script" id=6]
 [ext_resource path="res://Player/Player3D/DollSkeleton2.glb" type="PackedScene" id=7]
+[ext_resource path="res://Player/Player3D/Particles/cumsingle_lq.png" type="Texture" id=8]
+
+[sub_resource type="SpatialMaterial" id=6]
+flags_transparent = true
+flags_unshaded = true
+params_cull_mode = 2
+albedo_texture = ExtResource( 8 )
+
+[sub_resource type="QuadMesh" id=5]
+
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0, 0 ), 0.0, -0.0950416, 0, 0, Vector2( 0.0456853, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.765217, 0.990909 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="SpatialMaterial" id=4]
 flags_transparent = true
@@ -18,10 +30,8 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 albedo_texture = ExtResource( 3 )
 
-[sub_resource type="QuadMesh" id=5]
-
 [sub_resource type="Curve" id=3]
-_data = [ Vector2( 0, 0 ), 0.0, -0.0950416, 0, 0, Vector2( 0.191304, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.765217, 0.990909 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, -0.0950416, 0, 0, Vector2( 0.192893, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.765217, 0.990909 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Doll3D" type="Spatial"]
 script = ExtResource( 2 )
@@ -87,6 +97,92 @@ boneId = "Penis"
 [node name="Doll3DTooltip" parent="BoneAttachments/PenisBoneAttachment" instance=ExtResource( 5 )]
 bodypartID = "penis"
 
+[node name="ChastityCumParticles" type="CPUParticles" parent="BoneAttachments/PenisBoneAttachment"]
+transform = Transform( 0.870253, -0.492606, 0, 0.492606, 0.870253, 0, 0, 0, 1, 0.744795, -0.12412, 0 )
+material_override = SubResource( 6 )
+emitting = false
+amount = 16
+lifetime = 3.0
+explosiveness = 0.4
+randomness = 1.0
+local_coords = false
+mesh = SubResource( 5 )
+emission_shape = 1
+emission_sphere_radius = 0.02
+flag_align_y = true
+flag_rotate_y = true
+direction = Vector3( -1, 0, 0 )
+spread = 5.0
+gravity = Vector3( 0, -3, 0 )
+initial_velocity = 3.0
+initial_velocity_random = 0.95
+linear_accel = 1.89
+linear_accel_random = 1.0
+tangential_accel = 1.0
+tangential_accel_random = 0.92
+scale_amount = 0.5
+scale_amount_random = 0.83
+scale_amount_curve = SubResource( 7 )
+
+[node name="PenisTipAttachment" parent="BoneAttachments" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.44485, 3.85235, 0 )
+skeleton = NodePath("../../DollSkeleton/Doll3D/Skeleton")
+boneId = "Penis3"
+
+[node name="PenisCumParticles" type="CPUParticles" parent="BoneAttachments/PenisTipAttachment"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.059 )
+material_override = SubResource( 6 )
+emitting = false
+amount = 16
+lifetime = 3.0
+explosiveness = 0.4
+randomness = 1.0
+local_coords = false
+mesh = SubResource( 5 )
+emission_shape = 1
+emission_sphere_radius = 0.04
+flag_align_y = true
+flag_rotate_y = true
+direction = Vector3( -1, 0, 0 )
+spread = 5.0
+gravity = Vector3( 0, -3, 0 )
+initial_velocity = 3.0
+initial_velocity_random = 0.95
+linear_accel = 1.89
+linear_accel_random = 1.0
+tangential_accel = 1.0
+tangential_accel_random = 0.92
+scale_amount = 2.0
+scale_amount_random = 0.83
+scale_amount_curve = SubResource( 7 )
+
+[node name="PenisCumParticles2" type="CPUParticles" parent="BoneAttachments/PenisTipAttachment"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.059 )
+material_override = SubResource( 6 )
+emitting = false
+amount = 16
+lifetime = 3.0
+explosiveness = 0.4
+randomness = 1.0
+local_coords = false
+mesh = SubResource( 5 )
+emission_shape = 1
+emission_sphere_radius = 0.04
+flag_align_y = true
+flag_rotate_y = true
+direction = Vector3( -1, 0, 0 )
+spread = 5.0
+gravity = Vector3( 0, -3, 0 )
+initial_velocity = 3.0
+initial_velocity_random = 0.95
+linear_accel = 1.89
+linear_accel_random = 1.0
+tangential_accel = 1.0
+tangential_accel_random = 0.92
+scale_amount = 2.0
+scale_amount_random = 0.83
+scale_amount_curve = SubResource( 7 )
+
 [node name="VaginaBoneAttachment" parent="BoneAttachments" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.177234, 3.98406, 0 )
 skeleton = NodePath("../../DollSkeleton/Doll3D/Skeleton")
@@ -120,6 +216,32 @@ scale_amount_random = 0.15
 scale_amount_curve = SubResource( 3 )
 anim_offset = 1.0
 anim_offset_random = 1.0
+
+[node name="PussyCumInsideParticles" type="CPUParticles" parent="BoneAttachments/VaginaBoneAttachment"]
+transform = Transform( -0.0286021, -7.97858e-08, 0.999591, 0.999591, 1.48775e-07, 0.0286021, -1.50996e-07, 1, 7.54979e-08, 0.335, -0.222, 0 )
+material_override = SubResource( 6 )
+emitting = false
+amount = 16
+lifetime = 3.0
+explosiveness = 0.4
+randomness = 1.0
+local_coords = false
+mesh = SubResource( 5 )
+emission_shape = 2
+emission_box_extents = Vector3( 0.1, 0.1, 0.1 )
+flag_align_y = true
+flag_rotate_y = true
+direction = Vector3( -1, 0, 0 )
+gravity = Vector3( 0, -3, 0 )
+initial_velocity = 3.0
+initial_velocity_random = 0.95
+linear_accel = 1.89
+linear_accel_random = 1.0
+tangential_accel = 1.0
+tangential_accel_random = 0.92
+scale_amount = 2.0
+scale_amount_random = 0.83
+scale_amount_curve = SubResource( 3 )
 
 [node name="AnusParticles" type="CPUParticles" parent="BoneAttachments/VaginaBoneAttachment"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.567, -0.047, 0 )

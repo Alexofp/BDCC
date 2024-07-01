@@ -199,7 +199,7 @@ func _run():
 
 		addButton("Cum inside", "Breed your slutty kitty", "forget_sex_cuminside")
 	if(state == "forget_sex_cuminside"):
-		playAnimation(StageScene.SexAllFours, "insideflop", {npc="rahi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexAllFours, "insideflop", {npc="rahi", pc="pc", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
 		saynn("With a low growl, you thrust hard inside Rahi one last time, your {pc.penis} pulsing and shooting strings of {pc.cum} deep into her womb. Rahi's body twitches involuntarily a few times as you cum but not much else, your kitty remains completely unresponsive to your touch.")
 
 		saynn("It felt great though.. After you've done stuffing her, you pull out and watch your seed leaking out of her used and abused pussy. What you've done.. was probably wrong.. but the thrill of taking her body without her consent was too much to resist.")

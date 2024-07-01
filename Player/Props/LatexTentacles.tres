@@ -1,0 +1,29 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://Player/Props/latexmatcap.png" type="Texture" id=1]
+
+[sub_resource type="Shader" id=1]
+code = "/*
+	MatCap Shader by Firerabbit
+	
+	MIT License
+*/
+
+shader_type spatial;
+render_mode async_visible,blend_mix,depth_draw_opaque,diffuse_burley,specular_schlick_ggx,unshaded;
+uniform sampler2D matcap : hint_black_albedo;
+uniform float metalness : hint_range(0.0,1.0) = 1.0;
+uniform vec4 color : hint_color = vec4(1.0);
+
+void fragment() {
+	vec2 matcap_uv = (NORMAL.xy * vec2(0.5, -0.5) + vec2(0.5, 0.5));
+	ALBEDO = color.rgb;
+	ALBEDO *= mix(vec3(1.0), texture(matcap, matcap_uv).rgb, metalness);
+}"
+
+[resource]
+resource_name = "TentacleMaterial.001"
+shader = SubResource( 1 )
+shader_param/metalness = 1.0
+shader_param/color = Color( 1, 1, 1, 1 )
+shader_param/matcap = ExtResource( 1 )

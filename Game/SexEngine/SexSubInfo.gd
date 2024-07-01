@@ -113,7 +113,6 @@ func getComplyScore():
 
 func processTurn():
 	arousalNaturalFade()
-	
 #	var character = getChar()
 #	var personality:Personality = character.getPersonality()
 #

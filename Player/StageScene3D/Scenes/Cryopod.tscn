@@ -102,3 +102,4 @@ sag_from_length = 1.0
 
 [editable path="Doll3D"]
 [editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]

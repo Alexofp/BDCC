@@ -877,7 +877,7 @@ func _run():
 		saynn("[say=nova]I don't know.. Are you sure? I'd need a condom at least.. I won't go in raw.[/say]")
 
 		addButtonWithChecks("Best condom", "Give Nova your best condom", "walkies_meetnova_givebestcondom", [], [ButtonChecks.HasCondoms])
-		addButton("Worst condom", "Give Nova your worst condom", "walkies_meetnova_giveworstcondom")
+		addButtonWithChecks("Worst condom", "Give Nova your worst condom", "walkies_meetnova_giveworstcondom", [], [ButtonChecks.HasCondoms])
 		addButton("Never mind", "It's fine", "walkies_meetnova_nofuck")
 	if(state == "walkies_meetnova_nofuck"):
 		saynn("[say=pc]Well. It's okay then, don't worry about it.[/say]")
@@ -988,7 +988,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "walkies_meetnova_knot")
 	if(state == "walkies_meetnova_knot"):
-		playAnimation(StageScene.PuppySexAllFours, "inside", {pc="nova", npc="tavi", npcBodyState={naked=true}, bodyState={naked=true, hard=true, condom=true}})
+		playAnimation(StageScene.PuppySexAllFours, "inside", {pc="nova", npc="tavi", pcCum=true, npcCum=true, npcBodyState={naked=true}, bodyState={naked=true, hard=true, condom=true}})
 		if (condomBroke):
 			saynn("Nova grunts as she manages to shove her full length inside Tavi, breaking into her womb. The extreme tightness of the puppy's inner walls shoots husky over the edge instantly. She arches her back as cock starts stuffing the condom inside Tavi's womb.. until something snaps.. Oops.. Seems, [b]the condom has broke, spilling all of its contents inside![/b]")
 

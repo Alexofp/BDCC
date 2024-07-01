@@ -132,7 +132,12 @@ func processTurn():
 				getSub().cummedOnBy(subID, FluidSource.Vagina, 0.3)
 			subInfo.cum()
 			state = ""
-			text += " {sub.Your} cock is shooting {sub.cum} all over {sub.yourHis} belly as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!"
+			var howCumText = "is shooting {sub.cum} all over {sub.yourHis} belly"
+			if(getSub().isWearingCondom()):
+				howCumText = "is filling {sub.yourHis} condom full"
+			if(getSub().getWornPenisPump() != null):
+				howCumText = "is filling {sub.yourHis} penis pump full"
+			text += " {sub.Your} cock "+howCumText+" as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!"
 			sendSexEvent(SexEvent.UniqueOrgasm, domID, subID, {orgasmType="feet"})
 		return {
 			text = text,
@@ -494,7 +499,12 @@ func doSubAction(_id, _actionInfo):
 			getSub().cummedOnBy(subID, FluidSource.Vagina, 0.3)
 		subInfo.cum()
 		state = ""
-		text += "{sub.Your} cock is shooting {sub.cum} all over {sub.yourHis} belly as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!"
+		var howCumText = "is shooting {sub.cum} all over {sub.yourHis} belly"
+		if(getSub().isWearingCondom()):
+			howCumText = "is filling {sub.yourHis} condom full"
+		if(getSub().getWornPenisPump() != null):
+			howCumText = "is filling {sub.yourHis} penis pump full"
+		text += "{sub.Your} cock "+howCumText+" as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!"
 		sendSexEvent(SexEvent.UniqueOrgasm, domID, subID, {orgasmType="feet"})
 		return {
 			text = text,

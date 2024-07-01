@@ -76,6 +76,15 @@ func hasFluidType(fluidType):
 			return true
 	return false
 
+func hasFluidTypeWithCharID(fluidType, charID):
+	for fluidData in contents:
+		if(fluidData["fluidType"] == fluidType):
+			if(fluidData["fluidDNA"] != null):
+				var theFluidDna:FluidDNA = fluidData["fluidDNA"]
+				if(theFluidDna.getCharacterID() == charID):
+					return true
+	return false
+
 func clear():
 	contents.clear()
 	cachedFluidsAmount = 0.0

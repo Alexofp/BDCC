@@ -428,6 +428,9 @@ func getItemsWithTag(tag):
 			result.append(item)
 	return result
 		
+func hasItemsWithTag(tag):
+	return getItemsWithTag(tag).size() > 0
+		
 func getEquippedItemsWithTag(tag):
 	var result = []
 	for itemSlot in equippedItems.keys():
@@ -573,7 +576,7 @@ func findAndEquipInmateUniform():
 	elif(hasItemID("inmateuniformSexDeviant")):
 		forceEquipStoreOtherUnlessRestraint(getFirstOf("inmateuniformSexDeviant"))
 
-func removeBrokenDublicatedItems():
+func removeBrokenDuplicatedItems():
 	var itemsToRemove = []
 	var equippedItemsToRemove = []
 	

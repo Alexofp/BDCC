@@ -319,9 +319,9 @@ func _run():
 	if(state == "obey"):
 		addCharacter("tavi", ["naked"])
 		playAnimation(StageScene.SexFaceSitting, "sit", {
-			pc="tavi", npc="pc", 
+			pc="tavi", npc="pc", pcCum=true, npcCum=true,
 			bodyState={exposedCrotch=true,},
-			npcBodyState={},
+			npcBodyState={hard=true},
 		})
 		
 		saynn("You do as she says. Your eyes are shut, arms are behind the back. You are kneeling before a tall feline that has a grab on your hair. Suddenly she starts tugging you closer, closer to herself. And you give in, leaning forward for your new Miss, until meeting with her covered crotch. She is still wearing the shorts but you still feel the warmness of her body, get her nice female scent.")

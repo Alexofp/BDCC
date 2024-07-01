@@ -282,9 +282,9 @@ func _run():
 		saynn("[say=pc]I wanna be a good pet for my Miss..[/say]")
 
 		if(GM.pc.getGender() == Gender.Male):
-			saynn("[say=tavi]Good boy~. Keep the apple[/say]")
+			saynn("[say=tavi]Good boy~. Keep the apple.[/say]")
 		else:
-			saynn("[say=tavi]Good girl~. Keep the apple[/say]")
+			saynn("[say=tavi]Good girl~. Keep the apple.[/say]")
 
 		saynn("[say=pc]Thank you, Miss..[/say]")
 

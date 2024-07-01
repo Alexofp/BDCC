@@ -16,6 +16,11 @@ var enslaveQuest = null
 var npcSlavery = null
 var npcChatColorOverride = ""
 var npcMimicArtworkID = ""
+var npcCustomSpeciesName = ""
+var npcGender = null
+var npcPronounsGender = null
+var datapackID = null
+var npcLootOverride = null
 
 func _init():
 	npcHasMenstrualCycle = true
@@ -29,10 +34,14 @@ func getChatColor():
 	return .getChatColor()
 
 func getGender():
+	if(npcGender != null):
+		return npcGender
 	return NpcGender.toNormalGender(npcGeneratedGender)
 	
 func getPronounGender():
-	if(getGender() == Gender.Androgynous):
+	if(npcPronounsGender != null):
+		return npcPronounsGender
+	if(npcGeneratedGender in [NpcGender.Herm, NpcGender.Shemale]):
 		return Gender.Female
 	return getGender()
 	
@@ -41,6 +50,11 @@ func getSmallDescription() -> String:
 
 func getSpecies():
 	return npcSpecies
+	
+func getSpeciesFullName():
+	if(npcCustomSpeciesName != ""):
+		return npcCustomSpeciesName
+	return .getSpeciesFullName()
 	
 func getThickness() -> int:
 	return npcThickness
@@ -90,6 +104,30 @@ func isDynamicCharacter():
 func getLootTable(_battleName):
 	if(isSlaveToPlayer()):
 		return .getLootTable(_battleName)
+	
+	if(npcLootOverride != null):
+		if(npcLootOverride.has("baseTableID")):
+			var baseTable = GlobalRegistry.createLootTable(npcLootOverride["baseTableID"])
+			if(baseTable == null):
+				return .getLootTable(_battleName)
+			if(npcLootOverride.has("creditsDropChance")):
+				baseTable.creditsChance = npcLootOverride["creditsDropChance"]
+			if(npcLootOverride.has("creditsMin")):
+				baseTable.minCredits = npcLootOverride["creditsMin"]
+			if(npcLootOverride.has("creditsMax")):
+				baseTable.maxCredits = npcLootOverride["creditsMax"]
+			if(npcLootOverride.has("customLoot")):
+				var customLoot = npcLootOverride["customLoot"]
+				if(customLoot != null && customLoot is Array):
+					for lootLine in customLoot:
+						if(lootLine.has("item") && lootLine.has("chance")):
+							if(lootLine.has("min") && lootLine.has("max")):
+								baseTable.addLoot(lootLine["chance"], [[lootLine["item"], lootLine["min"], lootLine["max"]]])
+							else:
+								baseTable.addLoot(lootLine["chance"], [lootLine["item"]])
+			return baseTable
+			
+			
 	if(npcCharacterType == CharacterType.Engineer):
 		return EngineerLoot.new()
 	if(npcCharacterType == CharacterType.Guard):
@@ -136,8 +174,14 @@ func onSexEvent(_event : SexEvent):
 	if(npcSlavery != null):
 		npcSlavery.handleSexEvent(_event)
 	
+func adjustArtworkVariant(_variant:Array):
+	if(isFullyNaked() && !_variant.has("naked")):
+		_variant.append("naked")
+	
 # The whole thing is hack, never expect it to work or be supported
 func copyEverythingFrom(otherCharacter): #:BaseCharacter
+	var isPc = otherCharacter.isPlayer()
+	
 	npcName = otherCharacter.getName()
 	npcSpecies = otherCharacter.getSpecies()
 	if(otherCharacter.isDynamicCharacter()):
@@ -159,34 +203,52 @@ func copyEverythingFrom(otherCharacter): #:BaseCharacter
 	npcSmallDescription = otherCharacter.getSmallDescription()
 	npcThickness = otherCharacter.getThickness()
 	npcFeminity = otherCharacter.getFemininity()
-	npcDefaultEquipment = otherCharacter.getDefaultEquipment()
-	npcMimicArtworkID = otherCharacter.getID()
+	if(!isPc):
+		npcDefaultEquipment = otherCharacter.getDefaultEquipment()
+	else:
+		if(otherCharacter.inmateType == InmateType.General):
+			npcDefaultEquipment = ["inmatecollar", "inmateuniform"]
+		if(otherCharacter.inmateType == InmateType.HighSec):
+			npcDefaultEquipment = ["inmatecollar", "inmateuniformHighsec"]
+		if(otherCharacter.inmateType == InmateType.SexDeviant):
+			npcDefaultEquipment = ["inmatecollar", "inmateuniformSexDeviant"]
+	if(!isPc):
+		npcMimicArtworkID = otherCharacter.getID()
 	if(otherCharacter.isDynamicCharacter()):
 		npcArchetypes = otherCharacter.npcArchetypes
 	else:
 		npcArchetypes = []
-	npcAttacks = otherCharacter._getAttacks()
+	if(!isPc):
+		npcAttacks = otherCharacter._getAttacks()
+	else:
+		npcAttacks = ["biteattack", "simplekickattack", "shoveattack", "NpcScratch"]
 	if(otherCharacter.isDynamicCharacter()):
 		flags = otherCharacter.flags.duplicate(true)
 	else:
 		flags = {}
 	npcChatColorOverride = otherCharacter.getChatColor()
-	npcStats = otherCharacter.npcStats.duplicate(true)
-	npcLevel = otherCharacter.npcLevel
-	npcLustInterests = otherCharacter.npcLustInterests.duplicate(true)
-	npcPersonality = otherCharacter.npcPersonality.duplicate(true)
-	npcFetishes = otherCharacter.npcFetishes.duplicate(true)
-	npcDefaultFetishInterest = otherCharacter.npcDefaultFetishInterest
-	npcArmor = otherCharacter.npcArmor.duplicate(true)
-	npcBasePain = otherCharacter.npcBasePain
-	npcBaseLust = otherCharacter.npcBaseLust
-	npcBaseStamina = otherCharacter.npcBaseStamina
-	npcBaseRestraintDodgeChanceMult = otherCharacter.npcBaseRestraintDodgeChanceMult
-	npcRestraintStrugglePower = otherCharacter.npcRestraintStrugglePower
-	npcRestraintMinigameResultMin = otherCharacter.npcRestraintMinigameResultMin
-	npcRestraintMinigameResultMax = otherCharacter.npcRestraintMinigameResultMax
-	npcCharacterType = otherCharacter.npcCharacterType
-	npcSkinData = otherCharacter.npcSkinData.duplicate(true)
+	if(!isPc):
+		npcStats = otherCharacter.npcStats.duplicate(true)
+		npcLevel = otherCharacter.npcLevel
+		npcLustInterests = otherCharacter.npcLustInterests.duplicate(true)
+		npcPersonality = otherCharacter.npcPersonality.duplicate(true)
+		npcFetishes = otherCharacter.npcFetishes.duplicate(true)
+		npcDefaultFetishInterest = otherCharacter.npcDefaultFetishInterest
+		npcArmor = otherCharacter.npcArmor.duplicate(true)
+		npcBasePain = otherCharacter.npcBasePain
+		npcBaseLust = otherCharacter.npcBaseLust
+		npcBaseStamina = otherCharacter.npcBaseStamina
+		npcBaseRestraintDodgeChanceMult = otherCharacter.npcBaseRestraintDodgeChanceMult
+		npcRestraintStrugglePower = otherCharacter.npcRestraintStrugglePower
+		npcRestraintMinigameResultMin = otherCharacter.npcRestraintMinigameResultMin
+		npcRestraintMinigameResultMax = otherCharacter.npcRestraintMinigameResultMax
+		npcCharacterType = otherCharacter.npcCharacterType
+		npcSkinData = otherCharacter.npcSkinData.duplicate(true)
+	else:
+		npcCharacterType = CharacterType.Inmate
+		npcBasePain = otherCharacter.getBasePainThreshold()
+		npcBaseLust = otherCharacter.getBaseLustThreshold()
+		npcBaseStamina = otherCharacter.getBaseMaxStamina()
 	
 	pickedSkin = otherCharacter.pickedSkin
 	pickedSkinRColor = otherCharacter.pickedSkinRColor
@@ -210,10 +272,10 @@ func copyEverythingFrom(otherCharacter): #:BaseCharacter
 		var item = inventory.getEquippedItem(itemSlot)
 		item.uniqueID = GlobalRegistry.generateUniqueID()
 	
-	skillsHolder.loadData(skillsHolder.saveData().duplicate(true))
-	lustInterests.loadData(lustInterests.saveData().duplicate(true))
-	personality.loadData(personality.saveData().duplicate(true))
-	fetishHolder.loadData(fetishHolder.saveData().duplicate(true))
+	skillsHolder.loadData(otherCharacter.skillsHolder.saveData().duplicate(true))
+	lustInterests.loadData(otherCharacter.lustInterests.saveData().duplicate(true))
+	personality.loadData(otherCharacter.personality.saveData().duplicate(true))
+	fetishHolder.loadData(otherCharacter.fetishHolder.saveData().duplicate(true))
 
 func saveData():
 	var data = {
@@ -244,7 +306,16 @@ func saveData():
 		"pickedSkinBColor": pickedSkinBColor.to_html(),
 		"npcChatColorOverride": npcChatColorOverride,
 		"npcMimicArtworkID": npcMimicArtworkID,
+		"npcCustomSpeciesName": npcCustomSpeciesName,
 	}
+	if(npcGender != null):
+		data["npcGender"] = npcGender
+	if(npcPronounsGender != null):
+		data["npcPronounsGender"] = npcPronounsGender
+	if(datapackID != null && datapackID != ""):
+		data["datapackID"] = datapackID
+	if(npcLootOverride != null):
+		data["npcLootOverride"] = npcLootOverride
 	
 	data["bodyparts"] = {}
 	for slot in bodyparts:
@@ -301,6 +372,11 @@ func loadData(data):
 	else:
 		npcGeneratedGender = SAVE.loadVar(data, "npcGeneratedGender", NpcGender.Male)
 	
+	if(data.has("npcGender")):
+		npcGender = SAVE.loadVar(data, "npcGender", Gender.Male)
+	if(data.has("npcPronounsGender")):
+		npcPronounsGender = SAVE.loadVar(data, "npcPronounsGender", null)
+	
 	npcLevel = SAVE.loadVar(data, "npcLevel", 0)
 	npcBasePain = SAVE.loadVar(data, "npcBasePain", 50)
 	pain = SAVE.loadVar(data, "pain", 0)
@@ -312,6 +388,10 @@ func loadData(data):
 	consciousness = SAVE.loadVar(data, "consciousness", 1.0)
 	npcName = SAVE.loadVar(data, "npcName", "Error")
 	npcSpecies = SAVE.loadVar(data, "npcSpecies", ["canine"])
+	if(data.has("npcCustomSpeciesName")):
+		npcCustomSpeciesName = SAVE.loadVar(data, "npcCustomSpeciesName", "")
+	else:
+		npcCustomSpeciesName = ""
 	npcSmallDescription = SAVE.loadVar(data, "npcSmallDescription", "No description")
 	npcThickness = SAVE.loadVar(data, "npcThickness", 50)
 	npcFeminity = SAVE.loadVar(data, "npcFeminity", 50)
@@ -325,6 +405,10 @@ func loadData(data):
 		npcChatColorOverride = SAVE.loadVar(data, "npcChatColorOverride", "")
 	if(data.has("npcMimicArtworkID")):
 		npcMimicArtworkID = SAVE.loadVar(data, "npcMimicArtworkID", "")
+	if(data.has("datapackID")):
+		datapackID = SAVE.loadVar(data, "datapackID", "")
+	if(data.has("npcLootOverride")):
+		npcLootOverride = SAVE.loadVar(data, "npcLootOverride", {})
 		
 	if(!data.has("pickedSkin")):
 		applyRandomSkinAndColorsAndParts()
@@ -392,4 +476,136 @@ func loadData(data):
 	else:
 		npcSlavery = null
 
+	updateAppearance()
+
+func loadFromDatapackCharacter(_datapack:Datapack, _datapackChar:DatapackCharacter):
+	if(_datapack != null):
+		datapackID = _datapack.id
+	npcName = _datapackChar.name
+	npcSmallDescription = _datapackChar.description
+	npcGeneratedGender = _datapackChar.name
+	npcGender = _datapackChar.gender
+	npcPronounsGender = _datapackChar.pronounsGender
+	if(_datapackChar.hasChatColor):
+		npcChatColorOverride = "#"+_datapackChar.chatColor.to_html(false)
+	
+	npcSpecies = _datapackChar.species
+	if(npcSpecies.size() <= 0):
+		npcSpecies = [Species.Unknown]
+	npcCustomSpeciesName = _datapackChar.customSpeciesName
+	
+	pickedSkin = _datapackChar.pickedSkin
+	pickedSkinRColor = _datapackChar.pickedSkinRColor
+	pickedSkinGColor = _datapackChar.pickedSkinGColor
+	pickedSkinBColor = _datapackChar.pickedSkinBColor
+	
+	npcCharacterType = _datapackChar.characterType
+	
+	npcAttacks = _datapackChar.attacks.duplicate()
+	
+	skillsHolder.resetPickedPerks()
+	skillsHolder.resetStats()
+	
+	skillsHolder.setLevel(_datapackChar.level)
+	npcBasePain = _datapackChar.basePain
+	npcBaseLust = _datapackChar.baseLust
+	npcBaseStamina = _datapackChar.baseStamina
+	
+	npcStats = _datapackChar.stats.duplicate()
+	for statID in npcStats:
+		if(GlobalRegistry.getStat(statID) != null):
+			skillsHolder.setStat(statID, npcStats[statID])
+	
+	for perkID in _datapackChar.perks:
+		if(GlobalRegistry.getPerk(perkID) != null):
+			skillsHolder.addPerk(perkID)
+	
+	npcPersonality = _datapackChar.personality.duplicate()
+	personality.clear()
+	for statID in npcPersonality:
+		personality.setStat(statID, npcPersonality[statID])
+	
+	npcFetishes = _datapackChar.fetishes.duplicate()
+	fetishHolder.clear()
+	for fetishID in npcFetishes:
+		if(npcFetishes[fetishID] != FetishInterest.Neutral):
+			fetishHolder.setFetish(fetishID, npcFetishes[fetishID])
+	
+	npcLustInterests = _datapackChar.lustInterests.duplicate()
+	lustInterests.clear()
+	for topicID in npcLustInterests:
+		if(npcLustInterests[topicID] != Interest.Neutral):
+			lustInterests.addInterest(topicID, npcLustInterests[topicID])
+	
+	resetSlots()
+	var loadedBodyparts = _datapackChar.bodyparts
+	for slot in loadedBodyparts:
+		if(loadedBodyparts[slot] == null || loadedBodyparts[slot]["id"] == "" || loadedBodyparts[slot]["id"] == null):
+			bodyparts[slot] = null
+			continue
+		var id = SAVE.loadVar(loadedBodyparts[slot], "id", "errorbad")
+		var bodypart = GlobalRegistry.createBodypart(id)
+		if(bodypart == null):
+			var replacementID = BodypartSlot.findReplacement(slot, id)
+			if(replacementID == null || replacementID == ""):
+				Log.printerr("Couldn't find an replacement bodypart for slot "+str(slot))
+				continue
+			bodypart = GlobalRegistry.createBodypart(replacementID)
+			
+		#bodypart.loadData(SAVE.loadVar(loadedBodyparts[slot], "data", {}))
+		var bodypartAttribs = SAVE.loadVar(loadedBodyparts[slot], "data", {})
+		for attribID in bodypartAttribs:
+			bodypart.applyAttribute(attribID, bodypartAttribs[attribID])
+		if(loadedBodyparts[slot].has("pickedSkin")):
+			bodypart.pickedSkin = loadedBodyparts[slot]["pickedSkin"]
+			if(bodypart.pickedSkin == ""):
+				bodypart.pickedSkin = null
+		if(loadedBodyparts[slot].has("pickedR")):
+			bodypart.pickedRColor = loadedBodyparts[slot]["pickedR"]
+		if(loadedBodyparts[slot].has("pickedG")):
+			bodypart.pickedGColor = loadedBodyparts[slot]["pickedG"]
+		if(loadedBodyparts[slot].has("pickedB")):
+			bodypart.pickedBColor = loadedBodyparts[slot]["pickedB"]
+		giveBodypart(bodypart, false)
+	checkSkins(true)
+	
+	npcDefaultEquipment = []
+	inventory.clearEquippedItems()
+	
+	var datacharEquippedInv = _datapackChar.equippedItems
+	for inventorySlot in datacharEquippedInv:
+		var equipItemData = datacharEquippedInv[inventorySlot]
+		
+		if(equipItemData["id"] != null):
+			var itemRef = GlobalRegistry.getItemRef(equipItemData["id"])
+			if(itemRef == null):
+				continue
+			
+			var newItem = GlobalRegistry.createItem(equipItemData["id"])
+			
+			var foundData = null
+			if(equipItemData.has("data")):
+				foundData = equipItemData["data"]
+			
+			if(inventory.equipItem(newItem)):
+				if(equipItemData.has("autoEquip") && equipItemData["autoEquip"]):
+					if(foundData != null):
+						npcDefaultEquipment.append({id=equipItemData["id"], datapackdata=foundData})
+					else:
+						npcDefaultEquipment.append(equipItemData["id"]) # Gets requipped if the character loses it after a while
+				
+				if(foundData != null):
+					for dataID in foundData:
+						newItem.applyDatapackEditVar(dataID, foundData[dataID])
+
+	npcLootOverride = {
+		baseTableID = _datapackChar.lootTableID,
+		creditsDropChance = _datapackChar.lootCreditsChance,
+		creditsMin = _datapackChar.lootCreditsMin,
+		creditsMax = _datapackChar.lootCreditsMax,
+		customLoot = _datapackChar.lootExtra.duplicate(),
+	}
+
+	updateNonBattleEffects()
+	stamina = getMaxStamina()
 	updateAppearance()

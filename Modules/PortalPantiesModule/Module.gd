@@ -48,6 +48,7 @@ func _init():
 	items = [
 		"res://Modules/PortalPantiesModule/PortalPanties/PortalPanties.gd",
 		"res://Modules/PortalPantiesModule/PortalPanties/PortalPantiesFleshlight.gd",
+		"res://Modules/PortalPantiesModule/PortalPanties/PortalPantiesUnlocked.gd",
 	]
 	events = [
 		"res://Modules/PortalPantiesModule/AlexRynard/AlexRynardFirstTalkEvent.gd",

@@ -524,7 +524,7 @@ func _run():
 	if(state == "startsybian"):
 		# (restores some pain maybe so you don’t get softlocked out of struggling)
 
-		saynn("You can’t see anything. And you can’t escape. Your private bits are super sensitive again after you came. You feel like you won’t be able to resist anymore after the next orgasm so you gotta do something now, while you still!")
+		saynn("You can’t see anything. And you can’t escape. Your private bits are super sensitive again after you came. You feel like you won’t be able to resist anymore after the next orgasm so you gotta do something now, while you still can!")
 
 		# (Options are Endure, Struggle and Escape if there are no restraints anymore)
 
@@ -632,6 +632,7 @@ func _run():
 		addButton("Leave", "Time to go", "endthescene")
 
 	if(state == "give_up"):
+		playAnimation(StageScene.Sybian, "intense", {pcCum=true, bodyState={exposedCrotch=true,hard=true}})
 		# (if has pussy)
 		if(GM.pc.hasVagina()):
 			saynn("It’s just too much, you succumb to the constant source of pleasure and quit resisting completely. Very soon after a third orgasm overwhelms you, making your pussy squirt out all the femcum that it had. You moan like a desperate slut and let yourself enjoy this one fully.")

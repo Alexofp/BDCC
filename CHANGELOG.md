@@ -5,6 +5,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.1.4] - 2024-07-01
+### Added
+- [Artica Sparkle](https://github.com/Alexofp/BDCC/assets/14040378/0e38161d-02a3-4e77-b82a-8be539b56149) arrives to BDCC! She is the star of this update, an extremely shy fluff.. but you know what they say about the shy ones.. You can find Artica going through her intake process by hanging around near the checkpoint (player level required 10+). Help her adjust to her new prison life and find out about how such a shy girl managed to ended up in such a dark place.
+- Artica's content is focussed on these kinks: Corruption, breeding, pawplay (a lot of pawplay). But there are also scenes that include: forced nudity, chastity, tentacles, portals, hypnosis.. and much more that I won't spoil x3. Artica has so much written scenes that I had to split it into 3 google docs, it was just getting too laggy, hah. Total word count is 116k words/463 pages of text! It's not just lewd though, her content has so much more: casual stuff, wholesomeness, drama, roughness, everything! Her content has 2 endings too, a happy and.. a different one
+- Artica's content has a loooot of new animations, make sure to check her scenes out.
+- Datapacks! Datapacks allow you to easily create and share custom characters and also skins! Skins are loaded automatically but for the new characters to appear in your save you gotta 'load' the datapacks from inside the 'in-game menu -> Datapacks' menu.
+- Datapacks editor. Fully built-in into the game, no coding knowledge or godot editor required. Create new characters and skins (and, maybe in the next updates, new scenes too)
+- Datapack browser. Allows you to easily download other people's datapacks from inside the game (The list is handled by me, submit your datapacks in the #datapacks channel!)
+- Options to adjust the size of pregnant bellies. Keep it realistic-ish or make it silly big! Also an option to scale the size depending on the litter size.
+- Penises now have particles when cumming/cumming-inside! Don't expect fluid physics but it's better than nothing x3. Can disable them in the settings or increase the intensity and make them look silly!
+- 3 new ear types for Canines. 1 new haircut. 1 new skin
+- Lots of new alternative skins for existing hair by AverageAce
+
+### Changed
+- Slave haircut changing scene now supports changing the skin of the hair.
+
+### Fixed
+- Typpots (thanks to Rayfoward, Disillusioned-Gazer, Sayonix and Johnvic76)
+- Some crashes (thanks to CanInBad)
+- The debug command to duplicate npcs should work with the player now
+- Crash that happens when you try to use a penis pump.. without a penis
+
 ## [0.1.3] - 2024-03-28
 ### Added
 - Introducing [Socket](https://github.com/Alexofp/BDCC/assets/14040378/d78eaff7-f107-4512-89aa-87963cc775f5)! A new easy-going fennec enginner that needs help settling in. Help her do some little tasks around the station while getting into some lewd situations. Her content is focussed around casual sex and free use. To start her content visit the workshop after completing (or skipping) the portal panties quest. Socket's content comes with a lot of custom assets, animations, scene art, unique clothing. The production value for her content is very high ^^
@@ -392,7 +414,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.3...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.4...main
+[0.1.4]: https://github.com/Alexofp/BDCC/compare/0.1.3...0.1.4
 [0.1.3]: https://github.com/Alexofp/BDCC/compare/0.1.2...0.1.3
 [0.1.2]: https://github.com/Alexofp/BDCC/compare/0.1.1...0.1.2
 [0.1.1]: https://github.com/Alexofp/BDCC/compare/0.1.0...0.1.1

@@ -110,7 +110,7 @@ func _run():
 		addButton("Continue", "See what happens next", "continue1")
 
 	if(state == "continue1"):
-		playAnimation(StageScene.HangingSexFuckmachine, "fast", {bodyState={naked=true}})
+		playAnimation(StageScene.HangingSexFuckmachine, "fast", {pcCum=true, bodyState={naked=true}})
 		
 		saynn("Eliza brings her maw to your ear and purrs into it, her voice becomes very intimate.")
 

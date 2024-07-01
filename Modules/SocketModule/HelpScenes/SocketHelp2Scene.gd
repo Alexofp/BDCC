@@ -304,7 +304,7 @@ func _run():
 
 		addButton("Cum inside", "Breed the fennec", "socket_rough_pussy_cuminside")
 	if(state == "socket_rough_pussy_cuminside"):
-		playAnimation(StageScene.SexVent, "inside", {pc="socket", npc="pc", npcBodyState={exposedCrotch=true,hard=true}})
+		playAnimation(StageScene.SexVent, "inside", {pc="socket", npc="pc", pcCum=true, npcCum=true, npcBodyState={exposedCrotch=true,hard=true}})
 		var removedImplant = getFlag("SocketModule.removedWombImplant", false)
 		if (!removedImplant):
 			saynn("She can't get pregnant anyway so you just push yourself over the edge with the last slow but rough thrusts, shoving your cock as deep as that pussy allows.")
@@ -386,7 +386,7 @@ func _run():
 
 		addButton("Cum inside", "Stuff her ass", "socket_rough_ass_cum")
 	if(state == "socket_rough_ass_cum"):
-		playAnimation(StageScene.SexVent, "inside", {pc="socket", npc="pc", npcBodyState={exposedCrotch=true,hard=true}})
+		playAnimation(StageScene.SexVent, "inside", {pc="socket", npc="pc", pcCum=true, npcCum=true, npcBodyState={exposedCrotch=true,hard=true}})
 		saynn("With one last powerful thrust of your hips, you grunt as your cock starts throbbing and pumping Socket's ass full of your {pc.cum}, its wall milking your balls for each last drop.")
 
 		saynn("[say=socket]Huf-f-f.. You're gonna regret it..[/say]")
@@ -443,7 +443,7 @@ func _run():
 
 		addButton("Cum inside", "Stuff that pussy!", "socket_rouch_ass_pussy_cum")
 	if(state == "socket_rouch_ass_pussy_cum"):
-		playAnimation(StageScene.SexVent, "inside", {pc="socket", npc="pc", npcBodyState={exposedCrotch=true,hard=true}})
+		playAnimation(StageScene.SexVent, "inside", {pc="socket", npc="pc", pcCum=true, npcCum=true, npcBodyState={exposedCrotch=true,hard=true}})
 		saynn("While Socket is still experiencing the orgasmic bliss, you ram your dick deep inside and let her pussy bring you over the edge.")
 
 		saynn("More grunting.. followed by your balls tensing up.. your cock releasing its load inside her needy slit in waves, during each throb.")
@@ -631,7 +631,7 @@ func _run():
 
 		addButton("Cum inside", "Breed that fennec", "help_lewd_pussy_cum")
 	if(state == "help_lewd_pussy_cum"):
-		playAnimation(StageScene.SexVent, "inside", {pc="socket", npc="pc", npcBodyState={exposedCrotch=true,hard=true}})
+		playAnimation(StageScene.SexVent, "inside", {pc="socket", npc="pc", pcCum=true, npcCum=true, npcBodyState={exposedCrotch=true,hard=true}})
 		saynn("..and rather than pulling out, you decide to commit to it and thrust deep inside! You hear cute moans and feel a girl squirming before you, her pussy quivering and kneading your cock tightly as you start pumping her full of your {pc.cum}!")
 
 		saynn("[say=socket]Ah..[/say]")

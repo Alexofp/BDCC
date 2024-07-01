@@ -114,7 +114,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "avy_pitty_breed_pussy_cum")
 	if(state == "avy_pitty_breed_pussy_cum"):
-		playAnimation(StageScene.SexMissionary, "inside", {pc = "avy", npc="pc", bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true,hard=true}})
+		playAnimation(StageScene.SexMissionary, "inside", {pc = "avy", npc="pc", pcCum=true, npcCum=true, bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true,hard=true}})
 		saynn("Avy's cock begins throbbing and spilling its seed deep inside you, marking your womb as hers.. She grunts and shows you her fangs while holding you still and just cumming inside you..")
 
 		saynn("[say=avy]That's what you deserve.. Breeding stock.[/say]")
@@ -217,7 +217,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "avy_pitty_breed_anus_cum")
 	if(state == "avy_pitty_breed_anus_cum"):
-		playAnimation(StageScene.SexMissionary, "inside", {pc = "avy", npc="pc", bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true,hard=true}})
+		playAnimation(StageScene.SexMissionary, "inside", {pc = "avy", npc="pc", pcCum=true, npcCum=true, bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true,hard=true}})
 		saynn("Avy's cock begins throbbing and spilling its seed deep inside you, marking you as hers.. She grunts and shows you her fangs while holding you still and just cumming inside you..")
 
 		saynn("[say=avy]That's what you deserve.. Breeding stock.[/say]")

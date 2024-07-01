@@ -51,7 +51,9 @@ func getPickableAttributes():
 			[2.0, "200%", "Pick this scale"],
 			[2.5, "250%", "Pick this scale"],
 			[3.0, "300%", "Pick this scale"],
-		]
+		],
+		"default": 1.0,
+		"floatinput": true,
 	}
 	return result
 	

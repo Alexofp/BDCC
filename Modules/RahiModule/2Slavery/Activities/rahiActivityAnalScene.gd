@@ -401,7 +401,7 @@ func _run():
 
 		addButton("Cum inside", "Stuff that ass full of your seed", "sex1_cum")
 	if(state == "sex1_cum"):
-		playAnimation(StageScene.SexStanding, "inside", {npc="rahi", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexStanding, "inside", {npc="rahi", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
 		var analLevel = getModule("RahiModule").getSkillScore("rahiSkillAnal")
 		if (analLevel <= 8):
 			saynn("Rahi has worked so hard to get to this point. She doesn't have the most experience and her ass isn't as trained as it could be which leads to her feeling some pain. But you keep pounding her ass, your {pc.penis} rubbing her g-spot through the inner wall that separates her pussy and anus to the point of you forcing her climax to happen.")

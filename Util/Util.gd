@@ -235,6 +235,18 @@ static func stripBadFilenameCharacters(path: String) -> String:
 		path = path.replace(ch, "")
 	return path
 
+const letters_chars = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+const numbers_chars = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+static func stripBadCharactersFromID(path: String) -> String:
+	var newPath = ""
+	for character in path:
+		var c:String = character.to_lower()
+		if(letters_chars.has(c) || numbers_chars.has(c) || ["_"].has(c)):
+			newPath += c
+	
+	return newPath
+
+
 static func sayMale(text):
 	return "[color=#3E84E0]\""+text+"\"[/color]"
 	
@@ -560,6 +572,10 @@ static func removeDirectory(path):
 		directory.remove(path)
 	else:
 		print("Error removing " + path)
+
+static func removeFile(path):
+	var directory = Directory.new()
+	return directory.remove(path)
 
 # input splitOnFirst("Test.Meow.Woof", ".")
 # output ["Test", "Meow.Woof"]

@@ -190,7 +190,7 @@ func _run():
 		addButton("Continue", "See what happens next", "continue4")
 
 	if(state == "continue4"):
-		playAnimation(StageScene.HangingSex, "fast", {npc="rahi", bodyState={naked=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.HangingSex, "fast", {npc="rahi", pcCum=true, bodyState={naked=true}, npcBodyState={naked=true}})
 		
 		saynn("But your clenching only makes the brown kitty more eager. She starts fucking you even harder, her hips slapping against your ass as she sends you forward a bit just to catch you on the way back with another thrust. Her fake knot slaps against your sensitive ring and tries to stretch beyond its limit. All the while moaning herself from the increased friction between her pussy and the other side of the strapon.")
 

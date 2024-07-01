@@ -289,6 +289,9 @@ func isReadyToGiveBirth() -> bool:
 	else:
 		return false
 
+func getLitterSize() -> int:
+	return impregnatedEggCells.size()
+
 func getRoughLitterEstimateString(veryAccurate = false):
 	var trueValue = impregnatedEggCells.size()
 	

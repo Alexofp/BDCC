@@ -1,0 +1,235 @@
+[gd_scene load_steps=52 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/Props/chair.png" type="Texture" id=4]
+[ext_resource path="res://Player/StageScene3D/Scenes2/FleshlightSit.gd" type="Script" id=5]
+[ext_resource path="res://Player/Player3D/Parts/MyBoneAttachment.gd" type="Script" id=6]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=461]
+animation = "FleshlightSit-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=462]
+animation = "FleshlightSitCum-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=463]
+animation = "FleshlightSitFast-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=464]
+animation = "FleshlightSitInside-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=465]
+animation = "FleshlightSitStand-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=466]
+animation = "FleshlightSitStandFast-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=472]
+animation = "FleshlightSitStandInside-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=467]
+animation = "FleshlightSitTease-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=468]
+animation = "FleshlightSitToStand"
+
+[sub_resource type="AnimationNodeAnimation" id=469]
+animation = "FleshlightStandToSit"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=473]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=474]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=475]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=476]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=477]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=478]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=479]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=480]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=481]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=482]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=483]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=484]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=485]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=486]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=487]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=488]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=489]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=490]
+switch_mode = 2
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=491]
+switch_mode = 2
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=492]
+switch_mode = 2
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=493]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=494]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=495]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=496]
+switch_mode = 2
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=497]
+switch_mode = 2
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=498]
+switch_mode = 2
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=499]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=500]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=501]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=502]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=470]
+states/FleshlightSit-loop/node = SubResource( 461 )
+states/FleshlightSit-loop/position = Vector2( 225, 262 )
+states/FleshlightSitCum-loop/node = SubResource( 462 )
+states/FleshlightSitCum-loop/position = Vector2( -76, 202 )
+states/FleshlightSitFast-loop/node = SubResource( 463 )
+states/FleshlightSitFast-loop/position = Vector2( 225, 350 )
+states/FleshlightSitInside-loop/node = SubResource( 464 )
+states/FleshlightSitInside-loop/position = Vector2( 231, 157 )
+states/FleshlightSitStand-loop/node = SubResource( 465 )
+states/FleshlightSitStand-loop/position = Vector2( 826, 229 )
+states/FleshlightSitStandFast-loop/node = SubResource( 466 )
+states/FleshlightSitStandFast-loop/position = Vector2( 817, 350 )
+states/FleshlightSitStandInside-loop/node = SubResource( 472 )
+states/FleshlightSitStandInside-loop/position = Vector2( 817, 99 )
+states/FleshlightSitTease-loop/node = SubResource( 467 )
+states/FleshlightSitTease-loop/position = Vector2( 298, 59 )
+states/FleshlightSitToStand/node = SubResource( 468 )
+states/FleshlightSitToStand/position = Vector2( 536, 195 )
+states/FleshlightStandToSit/node = SubResource( 469 )
+states/FleshlightStandToSit/position = Vector2( 515, 298 )
+transitions = [ "FleshlightSitTease-loop", "FleshlightSitInside-loop", SubResource( 473 ), "FleshlightSitInside-loop", "FleshlightSitTease-loop", SubResource( 474 ), "FleshlightSitInside-loop", "FleshlightSit-loop", SubResource( 475 ), "FleshlightSit-loop", "FleshlightSitInside-loop", SubResource( 476 ), "FleshlightSit-loop", "FleshlightSitFast-loop", SubResource( 477 ), "FleshlightSitFast-loop", "FleshlightSit-loop", SubResource( 478 ), "FleshlightSitCum-loop", "FleshlightSit-loop", SubResource( 479 ), "FleshlightSit-loop", "FleshlightSitCum-loop", SubResource( 480 ), "FleshlightSitCum-loop", "FleshlightSitFast-loop", SubResource( 481 ), "FleshlightSitFast-loop", "FleshlightSitCum-loop", SubResource( 482 ), "FleshlightSitInside-loop", "FleshlightSitCum-loop", SubResource( 483 ), "FleshlightSitCum-loop", "FleshlightSitInside-loop", SubResource( 484 ), "FleshlightSitCum-loop", "FleshlightSitTease-loop", SubResource( 485 ), "FleshlightSitTease-loop", "FleshlightSitCum-loop", SubResource( 486 ), "FleshlightSitInside-loop", "FleshlightSitToStand", SubResource( 487 ), "FleshlightSit-loop", "FleshlightSitToStand", SubResource( 488 ), "FleshlightSitFast-loop", "FleshlightSitToStand", SubResource( 489 ), "FleshlightSitToStand", "FleshlightSitStandInside-loop", SubResource( 490 ), "FleshlightSitToStand", "FleshlightSitStand-loop", SubResource( 491 ), "FleshlightSitToStand", "FleshlightSitStandFast-loop", SubResource( 492 ), "FleshlightSitStandFast-loop", "FleshlightStandToSit", SubResource( 493 ), "FleshlightSitStand-loop", "FleshlightStandToSit", SubResource( 494 ), "FleshlightSitStandInside-loop", "FleshlightStandToSit", SubResource( 495 ), "FleshlightStandToSit", "FleshlightSitFast-loop", SubResource( 496 ), "FleshlightStandToSit", "FleshlightSit-loop", SubResource( 497 ), "FleshlightStandToSit", "FleshlightSitInside-loop", SubResource( 498 ), "FleshlightSitStand-loop", "FleshlightSitStandFast-loop", SubResource( 499 ), "FleshlightSitStandFast-loop", "FleshlightSitStand-loop", SubResource( 500 ), "FleshlightSitStandInside-loop", "FleshlightSitStand-loop", SubResource( 501 ), "FleshlightSitStand-loop", "FleshlightSitStandInside-loop", SubResource( 502 ) ]
+start_node = "FleshlightSitTease-loop"
+graph_offset = Vector2( -195, -16 )
+
+[sub_resource type="AnimationNodeBlendTree" id=471]
+graph_offset = Vector2( -268.114, -7.70406 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 470 )
+nodes/StateMachine/position = Vector2( 180, 80 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=460]
+
+[node name="FleshlightSit" instance=ExtResource( 2 )]
+script = ExtResource( 5 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.317465, -0.553263 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47607, -0.041567, 0 )
+
+[node name="HandR" type="Position3D" parent="Doll3D" index="6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13183, 4.18655, -0.234508 )
+script = ExtResource( 6 )
+skeleton = NodePath("../DollSkeleton/Doll3D/Skeleton")
+boneId = "ForeArm.R"
+
+[node name="HandL" type="Position3D" parent="Doll3D" index="7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0197369, 4.18655, 0.446691 )
+script = ExtResource( 6 )
+skeleton = NodePath("../DollSkeleton/Doll3D/Skeleton")
+boneId = "ForeArm.L"
+
+[node name="Neck" type="Position3D" parent="Doll3D" index="8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.327019, 6.76119, 0.0919827 )
+script = ExtResource( 6 )
+skeleton = NodePath("../DollSkeleton/Doll3D/Skeleton")
+boneId = "Neck"
+
+[node name="AnkleR" type="Position3D" parent="Doll3D" index="9"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.398759, 0.82918, -0.234508 )
+script = ExtResource( 6 )
+skeleton = NodePath("../DollSkeleton/Doll3D/Skeleton")
+boneId = "LegDown.R"
+
+[node name="AnkleL" type="Position3D" parent="Doll3D" index="10"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.435559, 0.82918, 0.443335 )
+script = ExtResource( 6 )
+skeleton = NodePath("../DollSkeleton/Doll3D/Skeleton")
+boneId = "LegDown.L"
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource( 471 )
+anim_player = NodePath("../Doll3D/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 460 )
+
+[node name="Chair" type="Sprite3D" parent="." index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.503214, 1.85534, 0.069 )
+texture = ExtResource( 4 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]

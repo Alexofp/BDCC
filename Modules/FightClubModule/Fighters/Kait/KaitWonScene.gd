@@ -72,7 +72,7 @@ func _run():
 
 		saynn("Kait slowly gets up and gets into a fighting stance. She looks tired and is still very much cornered between two fences with her shirt being casually spread open. You take your time to recover after her last trick and then begin to slowly creep towards her again.")
 
-		saynn("You decide to give her the initiative and react to what she will do, you’re very much aware of her strong legs. As you close up the distance you notice her preparing a kick and as she goes forward with it, you mastefully avoid her and get a firm grasp on her digigrade leg. Kait snarls as she tries to free it but is unable to due to her weak state.")
+		saynn("You decide to give her the initiative and react to what she will do, you’re very much aware of her strong legs. As you close up the distance you notice her preparing a kick and as she goes forward with it, you mastefully avoid her and get a firm grasp on her digitigrade leg. Kait snarls as she tries to free it but is unable to due to her weak state.")
 
 		saynn("[say=pc]Would be a shame to lose one, wouldn’t it?[/say]")
 
@@ -188,6 +188,7 @@ func _run():
 	if(state == "inside"):
 		playAnimation(StageScene.SexStanding, "fast", {
 			pc="pc", npc="kait", 
+			pcCum=true, npcCum=true,
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true},
 		})
@@ -217,6 +218,7 @@ func _run():
 	if(state == "pull_out"):
 		playAnimation(StageScene.SexStanding, "tease", {
 			pc="pc", npc="kait", 
+			pcCum=true,
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true},
 		})

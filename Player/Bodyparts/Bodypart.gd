@@ -103,7 +103,7 @@ func getPickableAttributes():
 #		}
 #		if(!hasCustomSkinPattern()):
 #			var skinsOptions = [[null, "Same as body", "Reset the skin to the same as what the whole body uses"]]
-#			for skinID in GlobalRegistry.getSkins():
+#			for skinID in GlobalRegistry.getSkinsAllKeys():
 #				var theSkin = GlobalRegistry.getSkin(skinID)
 #				skinsOptions.append([skinID, theSkin.getName(), "Pick this skin"])
 #			result["skin"] = {

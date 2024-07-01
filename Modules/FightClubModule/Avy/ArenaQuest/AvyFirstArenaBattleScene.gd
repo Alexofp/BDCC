@@ -300,7 +300,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "fukd_pussy_faster")
 	if(state == "fukd_pussy_faster"):
-		playAnimation(StageScene.SexFullNelson, "fast", {pc="avy", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexFullNelson, "fast", {pc="avy", npc="pc", npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("Your wet bruised inner walls are kneading that intruding length and Avy feels it. She takes a better position and fastens her pace, increasing the onslaught on your poor stretched pussy.")
 
 		saynn("[say=avy]Cum, bitch.[/say]")
@@ -331,7 +331,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "fukd_pussy_cuminside")
 	if(state == "fukd_pussy_cuminside"):
-		playAnimation(StageScene.SexFullNelson, "inside", {pc="avy", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexFullNelson, "inside", {pc="avy", npc="pc", pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("Your inner walls clench around Avy's knotted cock so much that she can't hold back anymore. She establishes complete dominance over you by shoving the knot inside you for the last time and finally letting the orgasm take over, the pointy tip breaking into your womb before releasing Avy's seed directly into it.")
 
 		saynn("The power of Avy's climax echoes through you, her tight grip makes your grip on her shaft even harder. Screams of ecstasy can be heard from you while Avy just casually grunts, emptying her balls inside you and making your belly receive a cute bump.")
@@ -383,7 +383,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "fukd_anus_faster")
 	if(state == "fukd_anus_faster"):
-		playAnimation(StageScene.SexFullNelson, "fast", {pc="avy", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexFullNelson, "fast", {pc="avy", npc="pc", npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("Your wet bruised inner walls are kneading that intruding length and Avy feels it. She takes a better position and fastens her pace, increasing the onslaught on your poor stretched anal ring.")
 
 		saynn("[say=avy]Cum, bitch.[/say]")
@@ -414,7 +414,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "fukd_anus_cuminside")
 	if(state == "fukd_anus_cuminside"):
-		playAnimation(StageScene.SexFullNelson, "inside", {pc="avy", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexFullNelson, "inside", {pc="avy", npc="pc", pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("Your inner walls clench around Avy's knotted cock so much that she can't hold back anymore. She establishes complete dominance over you by shoving the knot inside you for the last time and finally letting the orgasm take over, the pointy tip reaching deep inside you before releasing Avy's seed, waves upon waves of it..")
 
 		saynn("The power of Avy's climax echoes through you, her tight grip makes your grip on her shaft even harder. Screams of ecstasy can be heard from you while Avy just casually grunts, emptying her balls inside you and making your belly receive a cute bump.")

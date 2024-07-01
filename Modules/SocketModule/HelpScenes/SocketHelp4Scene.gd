@@ -176,7 +176,7 @@ func _run():
 
 		saynn("She winks to him.")
 
-		saynn("[say=bulldog]Fuck off while you still have all the bones in tact.[/say]")
+		saynn("[say=bulldog]Fuck off while you still have all the bones intact.[/say]")
 
 		saynn("[say=socket]That wasn't nice![/say]")
 
@@ -292,7 +292,7 @@ func _run():
 
 		saynn("He shrugs and spreads his arms wide.")
 
-		saynn("[say=announcer]Somehow you got here. And so, you're welcome to stay in my little paradice. What I don't want is.. other eyes and mouths. And stun batons.[/say]")
+		saynn("[say=announcer]Somehow you got here. And so, you're welcome to stay in my little paradise. What I don't want is.. other eyes and mouths. And stun batons.[/say]")
 
 		saynn("What a kind guy.")
 
@@ -549,7 +549,7 @@ func _run():
 
 		addButton("Cum inside", "Shove a full load into Socket", "do_sex_pussy1_cum")
 	if(state == "do_sex_pussy1_cum"):
-		playAnimation(StageScene.SexCowgirl, "inside", {pc="pc", npc="socket", bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexCowgirl, "inside", {pc="pc", npc="socket", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}})
 		saynn("Socket's slit is good at making your cock throb even while her mind is paused, your balls are tensing up as you unload inside her, your thick {pc.cum} flooding her pussy, waves of waves of it.")
 
 		saynn("You make sure to pull her as low as possible, your cock creating a small bump on her belly as you're both orgasming.")
@@ -572,7 +572,7 @@ func _run():
 
 		addButton("Cum inside", "Stuff Socket's holes full!", "do_sex_pussy1_dp_cum")
 	if(state == "do_sex_pussy1_dp_cum"):
-		playAnimation(StageScene.SexDP, "inside", {npc="pc", pc="socket", npc2=npcID, npc2BodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexDP, "inside", {npc="pc", pc="socket", pcCum=true, npcCum=true, npc2=npcID, npc2BodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("You and a random inmate grunt as you shove your cocks deep inside Socket pretty much at the same time, both of you throbbing inside you, stuffing her holes full of thick seed! Not a single drop goes wasted.")
 
 		saynn("After double-penetrating Socket, you carefully pull out, making sure all the {pc.cum} stays inside.")
@@ -598,7 +598,7 @@ func _run():
 
 		addButton("Cum inside", "Stuff Socket's pussy full of cum", "do_sex_pussy2_cum")
 	if(state == "do_sex_pussy2_cum"):
-		playAnimation(StageScene.SexFreeStanding, "inside", {pc="pc", npc="socket", bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexFreeStanding, "inside", {pc="pc", npc="socket", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}})
 		saynn("You let the ecstatic wave take over, shoving your cock as deep as Socket's pussy allows and letting it throb and shoot strings of {pc.cum} inside, stuffing the fennec full!")
 
 		saynn("Feels so good, her used pussy is providing so much warmth to you.. but eventually you pull out.")
@@ -621,7 +621,7 @@ func _run():
 
 		addButton("Cum inside", "Stuff Socket full of seed", "do_sex_pussy2_spitroast_cum")
 	if(state == "do_sex_pussy2_spitroast_cum"):
-		playAnimation(StageScene.SexSpitroast, "inside", {npc="pc", pc="socket", npc2=npcID, npc2BodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexSpitroast, "inside", {npc="pc", pc="socket", pcCum=true, npcCum=true, npc2=npcID, npc2BodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("You ram your throbbing cocks as deep as Socket's holes allow.. before proceeding to pump her full of your {pc.cum}! That pussy is clenching around your length so hard that you feel your balls tensing up as they get milked dry.")
 
 		saynn("Socket is holding her breath no problem, her throat blocked by a {npc.penis}. And yet, it's probably best to let her breathe. You pull out and carefully set her back on her feet, the inmate giving her a small pat on the head before going away.")
@@ -648,7 +648,7 @@ func _run():
 
 		addButton("Cum", "The orgasm draws near", "do_sex_trib_cum")
 	if(state == "do_sex_trib_cum"):
-		playAnimation(StageScene.SexTribadism, "tease", {pc="pc", npc="socket", bodyState={naked=true}})
+		playAnimation(StageScene.SexTribadism, "tease", {pc="pc", npc="socket", pcCum=true, npcCum=true, bodyState={naked=true}})
 		saynn("The orgasm finally catches up with you and Socket, your pussies are twitching and dripping transparent juices while you throw your head back and moan passionately. The fennec is quiet but you just.. feel.. that her orgasm is just as strong, her body is shivering ever so slightly.")
 
 		saynn("You rest like that together, warming each other's slits.. before you pull away and help her to get up again.")
@@ -743,7 +743,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "npc_fuck_cum")
 	if(state == "npc_fuck_cum"):
-		playAnimation(npcFuckAnim, "inside", {pc=npcID, npc="socket", bodyState={naked=true, hard=true}})
+		playAnimation(npcFuckAnim, "inside", {pc=npcID, npc="socket", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}})
 		if (RNG.chance(50)):
 			saynn("The inmate grunts as {npc.he} stuffs Socket's pussy full of {npc.his} thick {npc.cum}! The engineer's legs are only shaking a little while she is being pumped full of spunk.")
 
@@ -781,7 +781,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "npc_dp_cum")
 	if(state == "npc_dp_cum"):
-		playAnimation(npcFuckAnim, "inside", {pc="socket", npc=npcID, npc2=npc2ID, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
+		playAnimation(npcFuckAnim, "inside", {pc="socket", npc=npcID, npc2=npc2ID, pcCum=true, npcCum=true, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
 		if (npcFuckAnim == StageScene.SexDP):
 			saynn("It doesn't take long for Socket to cum, the two cocks fucking her holes make her start clenching, her stretched cunt pulsing, her legs shivering. In turn, the extreme tightness makes the inmates grunt, they shove their cocks deep inside and stuff her ass and pussy full of thick spunk.")
 
@@ -801,7 +801,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "npc_trib_cum")
 	if(state == "npc_trib_cum"):
-		playAnimation(StageScene.SexTribadism, "tease", {pc=npcID, npc="socket", bodyState={naked=true}})
+		playAnimation(StageScene.SexTribadism, "tease", {pc=npcID, npc="socket", pcCum=true, npcCum=true, bodyState={naked=true}})
 		saynn("Soon, the dual orgasm overwhelmes them both. Socket's and inmate's pussies are pulsing and rubbing against each other hard, their bodies shivering, passionate moans escaping the inmate's mouth while the fennec is being emotionless about it.")
 
 		saynn("After that, the inmate makes Socket stand up again, the fur on her inner thighs looking quite wet.")
@@ -1021,7 +1021,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "avy_fucks_socket_cum")
 	if(state == "avy_fucks_socket_cum"):
-		playAnimation(StageScene.SexFullNelson, "inside", {pc="avy", npc="socket", bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexFullNelson, "inside", {pc="avy", npc="socket", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}})
 		saynn("Avy shoves her full length inside again and lets it stay there, her cock starts to throb inside and stuff Socket's pulsing pussy with waves of seed, gradually making her belly bigger with each throb, Avy's balls tensing up.")
 
 		saynn("[sayOther]Warning, overstimulation reached "+str(overstim)+"%! Short-term memory is corrupted.[/sayOther]")

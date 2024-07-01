@@ -169,3 +169,66 @@ func getDolls():
 
 func getChainPoint(_pointID):
 	return null
+
+func getCumIntensity(theDoll:Doll3D, notCaged = false, noStrapon = true):
+	var whoID = theDoll.savedCharacterID
+	var character
+	if(whoID is String):
+		character = GlobalRegistry.getCharacter(whoID)
+	else:
+		character = whoID
+
+	if(character != null && is_instance_valid(character) && (character is BaseCharacter)):
+		if(character.hasPenis()):
+			if(character.isWearingCondom()):
+				return 0.0
+			if(notCaged && character.isWearingChastityCage()):
+				return 0.0
+			if(noStrapon && character.isWearingStrapon()):
+				return 0.0
+			if(!OPTIONS.getCumShotsDependOnBallsVolume()):
+				return 1.0
+				
+			var penis = character.getBodypart(BodypartSlot.Penis)
+			var cumAmount = penis.getFluidProduction().getCapacity()
+			
+			var intensity = sqrt(cumAmount) / 20.0
+			return intensity
+	return 0.0
+
+func isDollCaged(theDoll:Doll3D):
+	var whoID = theDoll.savedCharacterID
+	var character
+	if(whoID is String):
+		character = GlobalRegistry.getCharacter(whoID)
+	else:
+		character = whoID
+
+	if(character != null && is_instance_valid(character) && (character is BaseCharacter)):
+		if(character.isWearingChastityCage()):
+			return true
+		if(character.getWornPenisPump() != null):
+			return true
+	return false
+
+func startCumInside(bottomDoll:Doll3D, topDoll:Doll3D, howOften:float = 2.5):
+	startCumInsideSolo(bottomDoll, getCumIntensity(topDoll), howOften)
+
+func startCumInsideSolo(bottomDoll:Doll3D, intensity:float = 1.0, howOften:float = 2.5):
+	if(!OPTIONS.isVisibleCumShotsEnabled()):
+		return
+	if(intensity > 0.0):
+		bottomDoll.startCumInside(intensity, howOften)
+
+func startCumPenis(theDoll:Doll3D, howOften:float = 2.5, forceChastity=false):
+	if(!OPTIONS.isVisibleCumShotsEnabled()):
+		return
+	var intensity = getCumIntensity(theDoll, false)
+	if(intensity > 0.0):
+		var isDollCaged = isDollCaged(theDoll)
+		var isDollHard = (theDoll.getFinalState("cock") == "")
+		if(isDollCaged || forceChastity):
+			theDoll.startCumPenis(0.5, howOften, true)
+		else:
+			if(isDollHard && !theDoll.hiddenPartZones.has(BodypartSlot.Penis)):
+				theDoll.startCumPenis(intensity, howOften, false)

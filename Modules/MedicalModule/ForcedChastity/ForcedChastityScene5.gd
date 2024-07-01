@@ -150,7 +150,7 @@ func _run():
 		addButton("Continue", "See what happens next", "continue2")
 
 	if(state == "continue2"):
-		playAnimation(StageScene.HorsecockDildoSex, "fast", {bodyState={naked=true}})
+		playAnimation(StageScene.HorsecockDildoSex, "fast", {pcCum=true, bodyState={naked=true}})
 		
 		saynn("You proceed to ride the fuck out of that horsecock, rising your lower part of the body before bringing it down along the fat shaft. You’re going so deep that you feel the cock’s bumpy ring that is roughly in the middle of it, your belly shows an outline of the shaft while you’re at the lowest point.")
 
@@ -165,7 +165,7 @@ func _run():
 		addButton("Continue", "Well, this is awkward", "continue3")
 
 	if(state == "continue3"):
-		playAnimation(StageScene.HorsecockDildoSex, "inside", {bodyState={naked=true}})
+		playAnimation(StageScene.HorsecockDildoSex, "inside", {pcCum=true, bodyState={naked=true}})
 		
 		saynn("She of course instantly spots you riding that dildo.")
 

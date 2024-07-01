@@ -187,6 +187,7 @@ func _run():
 	if(state == "get_bred"):
 		playAnimation(StageScene.SexAllFours, "fastflop", {
 			npc="pc", pc="jack", 
+			pcCum=true, npcCum=true,
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true,},
 		})

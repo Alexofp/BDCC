@@ -1,0 +1,261 @@
+[gd_scene load_steps=63 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes2/SelfSuck.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=522]
+animation = "SelfSuckFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=550]
+animation = "SelfSuckFuckFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=551]
+animation = "SelfSuckFuckInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=552]
+animation = "SelfSuckFuck_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=523]
+animation = "SelfSuckInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=524]
+animation = "SelfSuckTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=525]
+animation = "SelfSuck_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=526]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=527]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=528]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=529]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=530]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=531]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=532]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=533]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=553]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=554]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=555]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=556]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=557]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=558]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=559]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=560]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=572]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=573]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=534]
+states/SelfSuckFast_1-loop/node = SubResource( 522 )
+states/SelfSuckFast_1-loop/position = Vector2( 540, 238 )
+states/SelfSuckFuckFast_1-loop/node = SubResource( 550 )
+states/SelfSuckFuckFast_1-loop/position = Vector2( 1246, -117 )
+states/SelfSuckFuckInside_1-loop/node = SubResource( 551 )
+states/SelfSuckFuckInside_1-loop/position = Vector2( 1106, 73 )
+states/SelfSuckFuck_1-loop/node = SubResource( 552 )
+states/SelfSuckFuck_1-loop/position = Vector2( 1221, -24 )
+states/SelfSuckInside_1-loop/node = SubResource( 523 )
+states/SelfSuckInside_1-loop/position = Vector2( 827, 138 )
+states/SelfSuckTease_1-loop/node = SubResource( 524 )
+states/SelfSuckTease_1-loop/position = Vector2( 540, 60 )
+states/SelfSuck_1-loop/node = SubResource( 525 )
+states/SelfSuck_1-loop/position = Vector2( 540, 150 )
+transitions = [ "SelfSuckTease_1-loop", "SelfSuck_1-loop", SubResource( 526 ), "SelfSuck_1-loop", "SelfSuckTease_1-loop", SubResource( 527 ), "SelfSuck_1-loop", "SelfSuckFast_1-loop", SubResource( 528 ), "SelfSuckFast_1-loop", "SelfSuck_1-loop", SubResource( 529 ), "SelfSuckTease_1-loop", "SelfSuckInside_1-loop", SubResource( 530 ), "SelfSuckInside_1-loop", "SelfSuckTease_1-loop", SubResource( 531 ), "SelfSuckFast_1-loop", "SelfSuckInside_1-loop", SubResource( 532 ), "SelfSuckInside_1-loop", "SelfSuckFast_1-loop", SubResource( 533 ), "SelfSuckTease_1-loop", "SelfSuckFuckInside_1-loop", SubResource( 553 ), "SelfSuckFuckInside_1-loop", "SelfSuckTease_1-loop", SubResource( 554 ), "SelfSuckFuckInside_1-loop", "SelfSuckFuck_1-loop", SubResource( 555 ), "SelfSuckFuck_1-loop", "SelfSuckFuckInside_1-loop", SubResource( 556 ), "SelfSuckFuck_1-loop", "SelfSuckFuckFast_1-loop", SubResource( 557 ), "SelfSuckFuckFast_1-loop", "SelfSuckFuck_1-loop", SubResource( 558 ), "SelfSuckInside_1-loop", "SelfSuckFuckInside_1-loop", SubResource( 559 ), "SelfSuckFuckInside_1-loop", "SelfSuckInside_1-loop", SubResource( 560 ), "SelfSuckTease_1-loop", "SelfSuckFuck_1-loop", SubResource( 572 ), "SelfSuckFuck_1-loop", "SelfSuckTease_1-loop", SubResource( 573 ) ]
+start_node = "SelfSuckTease_1-loop"
+graph_offset = Vector2( 363, -163 )
+
+[sub_resource type="AnimationNodeBlendTree" id=535]
+graph_offset = Vector2( -348.69, 38.9555 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 534 )
+nodes/StateMachine/position = Vector2( 180, 100 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=460]
+
+[sub_resource type="AnimationNodeAnimation" id=537]
+animation = "SelfSuckFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=561]
+animation = "SelfSuckFuckFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=562]
+animation = "SelfSuckFuckInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=563]
+animation = "SelfSuckFuck_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=538]
+animation = "SelfSuckInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=539]
+animation = "SelfSuckTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=540]
+animation = "SelfSuck_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=541]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=542]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=543]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=544]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=545]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=546]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=547]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=548]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=564]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=565]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=566]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=567]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=568]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=569]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=570]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=571]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=574]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=575]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=549]
+states/SelfSuckFast_2-loop/node = SubResource( 537 )
+states/SelfSuckFast_2-loop/position = Vector2( 535, 265 )
+states/SelfSuckFuckFast_2-loop/node = SubResource( 561 )
+states/SelfSuckFuckFast_2-loop/position = Vector2( 1483, -13 )
+states/SelfSuckFuckInside_2-loop/node = SubResource( 562 )
+states/SelfSuckFuckInside_2-loop/position = Vector2( 1116, 92 )
+states/SelfSuckFuck_2-loop/node = SubResource( 563 )
+states/SelfSuckFuck_2-loop/position = Vector2( 1175, -13 )
+states/SelfSuckInside_2-loop/node = SubResource( 538 )
+states/SelfSuckInside_2-loop/position = Vector2( 801, 163 )
+states/SelfSuckTease_2-loop/node = SubResource( 539 )
+states/SelfSuckTease_2-loop/position = Vector2( 535, 73 )
+states/SelfSuck_2-loop/node = SubResource( 540 )
+states/SelfSuck_2-loop/position = Vector2( 535, 163 )
+transitions = [ "SelfSuckTease_2-loop", "SelfSuckInside_2-loop", SubResource( 541 ), "SelfSuckInside_2-loop", "SelfSuckTease_2-loop", SubResource( 542 ), "SelfSuckTease_2-loop", "SelfSuck_2-loop", SubResource( 543 ), "SelfSuck_2-loop", "SelfSuckTease_2-loop", SubResource( 544 ), "SelfSuck_2-loop", "SelfSuckFast_2-loop", SubResource( 545 ), "SelfSuckFast_2-loop", "SelfSuck_2-loop", SubResource( 546 ), "SelfSuckFast_2-loop", "SelfSuckInside_2-loop", SubResource( 547 ), "SelfSuckInside_2-loop", "SelfSuckFast_2-loop", SubResource( 548 ), "SelfSuckTease_2-loop", "SelfSuckFuckInside_2-loop", SubResource( 564 ), "SelfSuckFuckInside_2-loop", "SelfSuckTease_2-loop", SubResource( 565 ), "SelfSuckInside_2-loop", "SelfSuckFuckInside_2-loop", SubResource( 566 ), "SelfSuckFuckInside_2-loop", "SelfSuckInside_2-loop", SubResource( 567 ), "SelfSuckFuckInside_2-loop", "SelfSuckFuck_2-loop", SubResource( 568 ), "SelfSuckFuck_2-loop", "SelfSuckFuckInside_2-loop", SubResource( 569 ), "SelfSuckFuck_2-loop", "SelfSuckFuckFast_2-loop", SubResource( 570 ), "SelfSuckFuckFast_2-loop", "SelfSuckFuck_2-loop", SubResource( 571 ), "SelfSuckFuck_2-loop", "SelfSuckTease_2-loop", SubResource( 574 ), "SelfSuckTease_2-loop", "SelfSuckFuck_2-loop", SubResource( 575 ) ]
+start_node = "SelfSuckTease_2-loop"
+graph_offset = Vector2( 320, -102 )
+
+[sub_resource type="AnimationNodeBlendTree" id=536]
+graph_offset = Vector2( -322.532, 74.6842 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 549 )
+nodes/StateMachine/position = Vector2( 160, 140 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=473]
+
+[node name="SelfSuck" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.317465, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.454804, -0.120824, 0 )
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0.454804, -0.120824, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 535 )
+anim_player = NodePath("../Doll3D/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 460 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 536 )
+anim_player = NodePath("../Doll3D2/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 473 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]
+[editable path="Doll3D2"]
+[editable path="Doll3D2/DollSkeleton"]
+[editable path="Doll3D2/DollSkeleton2"]

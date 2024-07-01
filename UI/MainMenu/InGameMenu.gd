@@ -4,6 +4,7 @@ onready var loadGameScreen = $LoadGameScreen
 onready var mainMenuScreen = $MainMenu
 onready var saveMenuScreen = $SaveGameScreen
 signal onResumeButtonPressed
+onready var datapack_ingame_menu = $DatapackIngameMenu
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,6 +18,7 @@ func hideAllMenus():
 	mainMenuScreen.visible = false
 	loadGameScreen.visible = false
 	saveMenuScreen.visible = false
+	datapack_ingame_menu.visible = false
 
 func _on_LoadGameButton_pressed():
 	hideAllMenus()
@@ -41,5 +43,15 @@ func _on_SaveGameButton2_pressed():
 
 
 func _on_SaveGameScreen_onClosePressed():
+	hideAllMenus()
+	mainMenuScreen.visible = true
+
+
+func _on_DatapacksButton_pressed():
+	hideAllMenus()
+	
+	datapack_ingame_menu.visible = true
+
+func _on_DatapackIngameMenu_onClosePressed():
 	hideAllMenus()
 	mainMenuScreen.visible = true

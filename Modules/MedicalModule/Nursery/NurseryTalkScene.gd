@@ -203,7 +203,7 @@ func _run():
 	if(state == "startbirth"):
 		playAnimation(StageScene.GivingBirth, "birth", {bodyState={naked=true}})
 		
-		saynn("You enter the birthing room. It’s spacious and has a special bed in the middle, the one that is designed to keep your legs spread. You lay down and await your faith.")
+		saynn("You enter the birthing room. It’s spacious and has a special bed in the middle, the one that is designed to keep your legs spread. You lay down and await your fate.")
 
 		saynn("The nurse prepares herself, puts on all the equipment and then walks up to you. You follow all the procedures that she is giving to you.")
 

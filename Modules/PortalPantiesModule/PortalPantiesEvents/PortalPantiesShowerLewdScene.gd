@@ -46,7 +46,7 @@ func _run():
 
 		# (if has cock)
 		if(GM.pc.hasPenis()):
-			saynn("Whenever your cock is, you hope it didn’t attract much attention because the climax made you waste a load and probably make a mess around.")
+			saynn("Wherever your cock is, you hope it didn’t attract much attention because the climax made you waste a load and probably make a mess around.")
 
 		saynn("The fingers push you through the orgasm and then just leave you alone, letting you catch your breath and finish showering.")
 

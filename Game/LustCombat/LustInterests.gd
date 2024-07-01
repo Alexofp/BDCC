@@ -10,6 +10,10 @@ func _init():
 #	addInterest(InterestTopic.AverageMassBody, Interest.Loves)
 	pass
 
+func clear():
+	interests = {}
+	playerKnows = {}
+
 func learnRandomInterest():
 	var possible = []
 	

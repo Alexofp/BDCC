@@ -11,7 +11,7 @@ func _run():
 	if(state == ""):
 		saynn("You walk up to the machine's terminal, it has a black-and-green screen and a few buttons. You press one of them and the machine beeps.")
 		
-		saynn("The screen displays:\n\nDetected inmate number {pc.inmateNumber}.\nInmate category: {pc.inmateType}\nInmate Uniform Replacement cost: 10 credits.\nUniform Repair cost: 5 credits.\nDying a clothing item cost: 5 credits.")
+		saynn("The screen displays:\n\nDetected inmate number {pc.inmateNumber}.\nInmate category: {pc.inmateType}\nInmate Uniform Replacement cost: 10 credits.\nUniform Repair cost: 5 credits.\nDyeing a clothing item cost: 5 credits.")
 
 		saynn("What do you wanna do?")
 
@@ -26,7 +26,7 @@ func _run():
 	
 	if(state == "dye_clothes_menu"):
 		playAnimation(StageScene.Solo, "stand")
-		saynn("The machine waits for the clothing that it can dye. The screen reminds you that dying your inmate uniform is against the law and would lead to substantial increase of your sentence.")
+		saynn("The machine waits for the clothing that it can dye. The screen reminds you that dyeing your inmate uniform is against the law and would lead to substantial increase of your sentence.")
 		
 		saynn("Cost: 5 credits")
 		

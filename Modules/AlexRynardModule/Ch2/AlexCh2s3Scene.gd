@@ -487,7 +487,7 @@ func _run():
 		addButton("Get knotted", "Try to force his knot inside you", "time3_lap_ridepussy_knotcum")
 		addButton("Pull out", "Stop riding him at the last possible second", "time3_lap_ridepussy_pullout")
 	if(state == "time3_lap_ridepussy_knotcum"):
-		playAnimation(StageScene.SexCowgirl, "inside", {npc="pc", pc="alexrynard", bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexCowgirl, "inside", {npc="pc", pc="alexrynard", pcCum=true, npcCum=true, bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
 		saynn("Yep, his knot is a challenge alright.. but you keep trying to force it inside, bringing yourself down onto his cock hard. The tip keeps pushing on your cervix while the knot stretches your pussy wider and wider.. until finally slipping inside!")
 
 		saynn("[say=alexrynard]Oh fuck..[/say]")
@@ -573,7 +573,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene_removecuffs")
 	if(state == "time3_lap_ridepussy_pullout"):
-		playAnimation(StageScene.SexCowgirl, "tease", {npc="pc", pc="alexrynard", bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexCowgirl, "tease", {npc="pc", pc="alexrynard", pcCum=true, npcCum=true, bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
 		if (usedCondom):
 			saynn("Nope, you will go against that challenge on purpose! You wait for when the point of no return happens for Alex.. before raising your body, letting his cock to slip out.")
 
@@ -678,7 +678,7 @@ func _run():
 		addButton("Get knotted", "Try to force his knot inside you", "time3_lap_rideanal_knotcum")
 		addButton("Pull out", "Stop riding him at the last possible second", "time3_lap_rideanal_pullout")
 	if(state == "time3_lap_rideanal_knotcum"):
-		playAnimation(StageScene.SexCowgirl, "inside", {npc="pc", pc="alexrynard", bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexCowgirl, "inside", {npc="pc", pc="alexrynard", pcCum=true, npcCum=true, bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
 		saynn("Yep, his knot is a challenge alright.. but you keep trying to force it inside, bringing yourself down onto his cock hard. The tip keeps pushing on your pleasure spot while the knot stretches your tailhole wider and wider.. until finally slipping inside!")
 
 		saynn("[say=alexrynard]Oh fuck..[/say]")
@@ -764,7 +764,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene_removecuffs")
 	if(state == "time3_lap_rideanal_pullout"):
-		playAnimation(StageScene.SexCowgirl, "tease", {npc="pc", pc="alexrynard", bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexCowgirl, "tease", {npc="pc", pc="alexrynard", pcCum=true, npcCum=true, bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true, hard=true}})
 		if (usedCondom):
 			saynn("Nope, you will go against that challenge on purpose! You wait for when the point of no return happens for Alex.. before raising your body, letting his cock to slip out.")
 

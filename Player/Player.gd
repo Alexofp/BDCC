@@ -486,7 +486,7 @@ func loadData(data):
 	for skillID in allSkills:
 		if(allSkills[skillID].alwaysVisible()):
 			skillsHolder.ensureSkillExists(skillID)
-	getInventory().removeBrokenDublicatedItems()
+	getInventory().removeBrokenDuplicatedItems()
 
 func checkLocation():
 	var _roomInfo = GM.world.getRoomByID(getLocation())
@@ -606,7 +606,7 @@ func getThickness() -> int:
 
 func getPickableAttributes():
 #	var skinsOptions = []
-#	for skinID in GlobalRegistry.getSkins():
+#	for skinID in GlobalRegistry.getSkinsAllKeys():
 #		var theSkin = GlobalRegistry.getSkin(skinID)
 #		skinsOptions.append([skinID, theSkin.getName(), "Pick this skin"])
 #

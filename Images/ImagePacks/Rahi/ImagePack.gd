@@ -46,6 +46,20 @@ func _init():
 	addCharacter("socket", [], "res://Images/ImagePacks/Rahi/Characters/socket/socket.png")
 	addCharacter("socket", ["naked"], "res://Images/ImagePacks/Rahi/Characters/socket/socket-naked.png")
 	
+	addCharacter("artica", [], "res://Images/ImagePacks/Rahi/Characters/artica/artica.png")
+	addCharacter("artica", ["naked"], "res://Images/ImagePacks/Rahi/Characters/artica/artica-naked.png")
+	addCharacter("artica", ["hypno"], "res://Images/ImagePacks/Rahi/Characters/artica/artica-hypno.png")
+	addCharacter("artica", ["naked", "hypno"], "res://Images/ImagePacks/Rahi/Characters/artica/artica-naked-hypno.png")
+	addCharacter("artica", ["sad"], "res://Images/ImagePacks/Rahi/Characters/artica/artica-sad.png")
+	addCharacter("artica", ["naked", "sad"], "res://Images/ImagePacks/Rahi/Characters/artica/artica-naked-sad.png")
+	addCharacter("artica", ["sad", "hypno"], "res://Images/ImagePacks/Rahi/Characters/artica/artica-nocatcher-hypno.png")
+	addCharacter("artica", ["naked", "sad", "hypno"], "res://Images/ImagePacks/Rahi/Characters/artica/artica-nocatcher-hypno-naked.png")
+	addCharacter("artica", ["nocatcher", "hypno"], "res://Images/ImagePacks/Rahi/Characters/artica/artica-nocatcher-hypno.png")
+	addCharacter("artica", ["naked", "nocatcher", "hypno"], "res://Images/ImagePacks/Rahi/Characters/artica/artica-nocatcher-hypno-naked.png")
+	addCharacter("artica", ["nocatcher"], "res://Images/ImagePacks/Rahi/Characters/artica/artica-nocatcher.png")
+	addCharacter("artica", ["naked", "nocatcher"], "res://Images/ImagePacks/Rahi/Characters/artica/artica-nocatcher-naked.png")
+	
+	
 	addSceneImageCustomArtist("SocketTalkScene", "look_poster", "res://Images/ImagePacks/Rahi/Scenes/socket.webp", 500, "Sompurr and Rahi")
 	#addSceneImageCustomArtist("SocketIntroScene", "naked_engineer", "res://Images/ImagePacks/Rahi/Scenes/socket_nobackground.webp", 500, "Sompurr and Rahi")
 	addSceneImageCustomArtist("SocketHelp2Scene", "socket_gets_stuck", "res://Images/ImagePacks/Rahi/Scenes/socket_stuck.webp", 400, "Sompurr")

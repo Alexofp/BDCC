@@ -339,7 +339,7 @@ func _run():
 
 		addButton("Cum inside", "Might as well", "vaginal_cum_inside")
 	if(state == "vaginal_cum_inside"):
-		playAnimation(StageScene.SexMissionary, "inside", {npc="rahi", bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexMissionary, "inside", {npc="rahi", pcCum=true, npcCum=true, bodyState={naked=true, hard=true, condom=usedCondom}, npcBodyState={naked=true}})
 		saynn("Her pussy tries to milk your cock so well that your own peak draws close too. And instead of fighting with Rahi's leglock, you decide to lean into it and ram your throbbing dick inside her twitching squirting slit, breaking into her womb before "+str("stuffing the condom full of seed inside her" if (usedCondom && !condomBroke) else "stuffing it full of your seed")+"."+str(" Oops, you didn't even realize that the [b]condom broke[/b] a long time ago and you've been going raw on her all this time." if condomBroke else "")+" You let go of her throat, letting kitty moan loudly while your body shivers and shakes, your balls tensing up while Rahi's slit keeps draining them.")
 
 		saynn("[say=rahi]Ngh-ah-h..[/say]")
@@ -433,7 +433,7 @@ func _run():
 
 		addButton("Cum", "The pleasure is too strong", "trib_cum_together")
 	if(state == "trib_cum_together"):
-		playAnimation(StageScene.SexTribadism, "fast", {npc="rahi", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexTribadism, "fast", {npc="rahi", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
 		saynn("Your motions get more fast and shaky, your pussies grinding quickly bring you and Rahi over the edge, sending both of you into an uncontrollable spiral. Your kitty's body is shivering while she is letting out long passionate noises, her slit is pulsating around yours until it suddenly gushes with a strong stream of girlcum.")
 
 		saynn("Your body and mind joins very soon too, you can't help but to squirm around Rahi's pussy while yours is squirting all over hers too. This sure isn't dry humping, the ecstatic sensations make your mind go blank for a few seconds, you catch yourself drooling at some point.")

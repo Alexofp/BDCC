@@ -1,0 +1,181 @@
+[gd_scene load_steps=34 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes2/PawJobUnderTable.gd" type="Script" id=4]
+[ext_resource path="res://Player/Props/chair.png" type="Texture" id=5]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=474]
+animation = "UnderTableRubFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=475]
+animation = "UnderTableRubTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=476]
+animation = "UnderTableRubTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=477]
+animation = "UnderTableRub_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=478]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=479]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=480]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=481]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=482]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=483]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=484]
+states/UnderTableRubFast_1-loop/node = SubResource( 474 )
+states/UnderTableRubFast_1-loop/position = Vector2( 469, 283 )
+states/UnderTableRubTease_1-loop/node = SubResource( 476 )
+states/UnderTableRubTease_1-loop/position = Vector2( 399, 11 )
+"states/UnderTableRubTease_1-loop 2/node" = SubResource( 475 )
+"states/UnderTableRubTease_1-loop 2/position" = Vector2( 416, 104 )
+states/UnderTableRub_1-loop/node = SubResource( 477 )
+states/UnderTableRub_1-loop/position = Vector2( 408, 182 )
+transitions = [ "UnderTableRubTease_1-loop", "UnderTableRubTease_1-loop 2", SubResource( 478 ), "UnderTableRubTease_1-loop 2", "UnderTableRubTease_1-loop", SubResource( 479 ), "UnderTableRubTease_1-loop 2", "UnderTableRub_1-loop", SubResource( 480 ), "UnderTableRub_1-loop", "UnderTableRubTease_1-loop 2", SubResource( 481 ), "UnderTableRub_1-loop", "UnderTableRubFast_1-loop", SubResource( 482 ), "UnderTableRubFast_1-loop", "UnderTableRub_1-loop", SubResource( 483 ) ]
+start_node = "UnderTableRubTease_1-loop"
+graph_offset = Vector2( -11, -35 )
+
+[sub_resource type="AnimationNodeBlendTree" id=485]
+graph_offset = Vector2( -348.69, 38.9555 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 484 )
+nodes/StateMachine/position = Vector2( 0, 100 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=460]
+
+[sub_resource type="AnimationNodeAnimation" id=486]
+animation = "UnderTableRubFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=487]
+animation = "UnderTableRubTeaseStart_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=488]
+animation = "UnderTableRubTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=489]
+animation = "UnderTableRub_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=490]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=491]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=492]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=493]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=494]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=495]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=496]
+states/UnderTableRubFast_2-loop/node = SubResource( 486 )
+states/UnderTableRubFast_2-loop/position = Vector2( 512, 324 )
+states/UnderTableRubTeaseStart_2-loop/node = SubResource( 487 )
+states/UnderTableRubTeaseStart_2-loop/position = Vector2( 512, 54 )
+states/UnderTableRubTease_2-loop/node = SubResource( 488 )
+states/UnderTableRubTease_2-loop/position = Vector2( 512, 146 )
+states/UnderTableRub_2-loop/node = SubResource( 489 )
+states/UnderTableRub_2-loop/position = Vector2( 512, 237 )
+transitions = [ "UnderTableRubTeaseStart_2-loop", "UnderTableRubTease_2-loop", SubResource( 490 ), "UnderTableRubTease_2-loop", "UnderTableRubTeaseStart_2-loop", SubResource( 491 ), "UnderTableRubTease_2-loop", "UnderTableRub_2-loop", SubResource( 492 ), "UnderTableRub_2-loop", "UnderTableRubTease_2-loop", SubResource( 493 ), "UnderTableRub_2-loop", "UnderTableRubFast_2-loop", SubResource( 494 ), "UnderTableRubFast_2-loop", "UnderTableRub_2-loop", SubResource( 495 ) ]
+start_node = "UnderTableRubTeaseStart_2-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=497]
+graph_offset = Vector2( -322.532, 74.6842 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 496 )
+nodes/StateMachine/position = Vector2( 120, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=473]
+
+[node name="PawJobUnderTable" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.183601, -0.317465, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Sprite3D2" type="Sprite3D" parent="." index="1"]
+transform = Transform( 0.322, 0, 0, 0, 1, 0, 0, 0, 1, 0.183601, 3.25633, 1.76575 )
+modulate = Color( 0.34902, 0.34902, 0.34902, 1 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Sprite3D3" type="Sprite3D" parent="." index="2"]
+transform = Transform( 0.049, 0, 0, 0, 8.518, 0, 0, 0, 1, 0.183601, 0.639277, -3.26151 )
+modulate = Color( 0.34902, 0.34902, 0.34902, 1 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="3" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.187603, -0.121, 0 )
+
+[node name="Doll3D2" parent="." index="4" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0.187603, -0.121, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="5"]
+tree_root = SubResource( 485 )
+anim_player = NodePath("../Doll3D/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 460 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="6"]
+tree_root = SubResource( 497 )
+anim_player = NodePath("../Doll3D2/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 473 )
+
+[node name="Chair" type="Sprite3D" parent="." index="7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7416, 1.74155, 0.169288 )
+texture = ExtResource( 5 )
+
+[node name="Chair2" type="Sprite3D" parent="." index="8"]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3744, 1.74155, 0.169288 )
+texture = ExtResource( 5 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]
+[editable path="Doll3D2"]
+[editable path="Doll3D2/DollSkeleton"]
+[editable path="Doll3D2/DollSkeleton2"]

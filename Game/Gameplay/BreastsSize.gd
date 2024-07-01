@@ -44,7 +44,7 @@ static func breastSizeToCupString(bsize:int):
 	return cupName+"-cup"
 
 static func breastSizeToMilkAmount(bsize:int):
-	var amounts = {FOREVER_FLAT: 0.0, FLAT: 0.0, A: 1.0, B: 1.5, C: 3.0, D: 5.0, DD: 8.0, DDD: 10.0, G: 12.0, H: 15.0, I: 20.0, J: 25.0, K: 32.0, L: 40.0, M: 50.0, N: 65.0, O: 80.0}
+	var amounts = {FOREVER_FLAT: 0.0, FLAT: 0.5, A: 1.0, B: 1.5, C: 3.0, D: 5.0, DD: 8.0, DDD: 10.0, G: 12.0, H: 15.0, I: 20.0, J: 25.0, K: 32.0, L: 40.0, M: 50.0, N: 65.0, O: 80.0}
 	
 	if(amounts.has(bsize)):
 		return amounts[bsize]

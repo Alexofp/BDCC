@@ -249,7 +249,12 @@ func equipDefaultEquipmentEntrySafely(equipEntry):
 		theItem = GlobalRegistry.createItemNoID(itemID)
 	
 	if(equipEntry is Dictionary):
-		theItem.loadData(equipEntry["data"])
+		if(equipEntry.has("data")):
+			theItem.loadData(equipEntry["data"])
+		elif(equipEntry.has("datapackdata")):
+			var foundData = equipEntry["datapackdata"]
+			for dataID in foundData:
+				theItem.applyDatapackEditVar(dataID, foundData[dataID])
 	
 	return getInventory().equipItem(theItem)
 
@@ -286,9 +291,11 @@ func getWrongEquippedItems(includeDamaged=true):
 	
 	return result
 
-func resetEquipment(keepPersistent = true, keepImportant = true):
+func resetEquipment(keepPersistent = true, keepImportant = true, keepRestraints=false):
 	var badItems = getWrongEquippedItems()
 	for item in badItems:
+		if(keepRestraints && item.isRestraint()):
+			continue
 		if(keepPersistent && item.isPersistent()):
 			continue
 		if(keepImportant && item.isImportant()):
@@ -380,6 +387,9 @@ func hoursPassed(_howmuch):
 					var chanceModifier = 1.0
 					var restraintData:RestraintData = restraint.getRestraintData()
 					if(restraintData != null):
+						if(restraintData.aiWontResist):
+							restraintAmount -= 1
+							continue
 						chanceModifier /= restraintData.getLevel()
 					
 					if(RNG.chance(removedRestraintsChance * chanceModifier)):

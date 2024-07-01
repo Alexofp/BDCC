@@ -165,10 +165,10 @@ func _run():
 
 		addButton("Cum inside", "Do it", "first_stealth_sex_cum")
 	if(state == "first_stealth_sex_cum"):
-		playAnimation(StageScene.SexStealth, "insidebusy", {npc="socket", bodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.SexStealth, "insidebusy", {npc="socket", pcCum=true, npcCum=true, bodyState={exposedCrotch=true, hard=true}})
 		saynn("Socket lets out a long quiet moan, her pulsing pussy releases a shower of fluids onto the table below, her shaky legs trying to give up.. but you don't let them, supporting Socket with your hands while keeping your cock inside, letting her tight love tunnel push you over the edge.")
 
-		saynn("There is no fucking anymore, you and Socket stand still while you pump her slit full your {pc.cum}, your {pc.penis} throbbing inside you, filling her up more and more.")
+		saynn("There is no fucking anymore, you and Socket stand still while you pump her slit full your {pc.cum}, your {pc.penis} throbbing inside her, filling her up more and more.")
 
 		saynn("[say=pc]Something is wrong?[/say]")
 
@@ -361,7 +361,7 @@ func _run():
 
 		addButton("Orgasm", "See what happens next", "second_sex_cum")
 	if(state == "second_sex_cum"):
-		playAnimation(StageScene.SexStandRide, "inside", {pc="pc", npc="socket", bodyState={exposedCrotch=true,hard=true}})
+		playAnimation(StageScene.SexStandRide, "inside", {pc="pc", npc="socket", pcCum=true, npcCum=true, bodyState={exposedCrotch=true,hard=true}})
 		saynn("You grunt as she brings you over the edge. Socket feels your orgasm and lowers herself fully onto your throbbing cock, moaning softly as you start pumping her needy cunt full of {pc.cum}.")
 
 		saynn("Her legs are shaking a little, Socket throws her head back and lets her own orgasm wash over her body.")
@@ -480,7 +480,7 @@ func _run():
 		addButton("Continue", "See what happens next", "third_repair")
 	if(state == "third_repair"):
 		playAnimation(StageScene.Duo, "stand", {npc="socket", flipNPC=true})
-		saynn("Socket takes off her backpack and puts it on one of the benches.. she grabs a screwdriver and strats disassembling the camera's dented frame.")
+		saynn("Socket takes off her backpack and puts it on one of the benches.. she grabs a screwdriver and starts disassembling the camera's dented frame.")
 
 		saynn("All the while, you just watch her work. She doesn't seem to need your help with her current task.")
 
@@ -547,7 +547,7 @@ func _run():
 	if(state == "third_risha"):
 		addCharacter("risha")
 		playAnimation(StageScene.Duo, "stand", {npc="risha"})
-		saynn("Right on que, a guard steps into the room.")
+		saynn("Right on cue, a guard steps into the room.")
 
 		saynn("[say=risha]Hey there~.[/say]")
 
@@ -773,7 +773,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "submit_sex_vag_cum")
 	if(state == "submit_sex_vag_cum"):
-		playAnimation(StageScene.SexSpitroast, "inside", {pc="pc", npc="risha", npc2="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexSpitroast, "inside", {pc="pc", npc="risha", pcCum=true, npcCum=true, npc2="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
 		saynn("The rough double pounding shoots you over the edge with ease, your body squirming and shivering in their hands while your throat and pussy clench around the intruding cocks, trying to milk them dry.")
 
 		saynn("[say=pc]Nh-h-h!..[/say]")
@@ -873,7 +873,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "submit_sex_anal_cum")
 	if(state == "submit_sex_anal_cum"):
-		playAnimation(StageScene.SexSpitroast, "inside", {pc="pc", npc="risha", npc2="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexSpitroast, "inside", {pc="pc", npc="risha", npc2="avy", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
 		saynn("The rough double pounding shoots you over the edge with ease, your body squirming and shivering in their hands while your throat and ass clench around the intruding cocks, trying to milk them dry.")
 
 		saynn("[say=pc]Nh-h-h!..[/say]")
@@ -1181,7 +1181,7 @@ func _run():
 
 		addButton("Cum inside", "Breed the sleeping fennec", "do_sleepfuck_cum")
 	if(state == "do_sleepfuck_cum"):
-		playAnimation(StageScene.SexBehind, "inside", {npc="socket", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexBehind, "inside", {npc="socket", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("Rather than pulling out, you just let the orgasm flow through you, your cock fully inside the girl, throbbing.. pumping that pussy to the brim..")
 
 		saynn("You grunt, using her as nothing but a cum dumpster, your balls tensing up as her inner walls milk you dry.")

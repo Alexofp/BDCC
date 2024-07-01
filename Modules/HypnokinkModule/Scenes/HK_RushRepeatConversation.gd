@@ -77,7 +77,7 @@ func _run():
 		
 		saynn("[say=rush]Time for th' main event. Ya ready, pipsqueak?[/say]")
 		
-		saynn("Continuing with his unexpectedly careful approach, he positions his {rush.cockDesc}"+RNG.pick(["cock", "dick", "member"])+" at the opening of your needy tailhole, it’s flared head prodding against your {pc.analStretch} entrance. Then, slowly but firmly, he begins to push against it.")
+		saynn("Continuing with his unexpectedly careful approach, he positions his {rush.cockDesc} "+RNG.pick(["cock", "dick", "member"])+" at the opening of your needy tailhole, it’s flared head prodding against your {pc.analStretch} entrance. Then, slowly but firmly, he begins to push against it.")
 
 		addButton("Take it", "This is gonna be a stretch", "get_fucked_check")
 			
@@ -121,6 +121,7 @@ func _run():
 	if(state == "get_fucked_orgasm"):
 		playAnimation(StageScene.SexStanding, "inside", {
 			pc="rush", npc="pc",
+			pcCum=true, npcCum=true,
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})
@@ -132,7 +133,7 @@ func _run():
 		if(GM.pc.hasVagina()):
 			saynn("Your neglected pussy squirts your juices onto the wall and down your thighs!")
 		
-		saynn("As your ring clenches and pulses around his "+RNG.pick(["cock", "dick", "member"])+", he groans and finally cums too, slamming you against the wall and your own mess, filling you up to the brim! You feel your insides strech and expand to accomodate, and distantly wonder if it's going to end up spraying out of your mouth. Even while he cums, your own orgasm still continues as you shiver and squirm, helplessly impaled and held in place against the wall.")
+		saynn("As your ring clenches and pulses around his "+RNG.pick(["cock", "dick", "member"])+", he groans and finally cums too, slamming you against the wall and your own mess, filling you up to the brim! You feel your insides stretch and expand to accomodate, and distantly wonder if it's going to end up spraying out of your mouth. Even while he cums, your own orgasm still continues as you shiver and squirm, helplessly impaled and held in place against the wall.")
 		
 		saynn("After a few breathless moments, Rush pulls back, allowing you to stand back on your shaking legs.")
 		

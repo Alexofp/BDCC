@@ -7,7 +7,7 @@ var dollAttachmentZones = {}
 var hiddenPartZones = {}
 var hiddenAttachmentZones = {}
 var overridenPartHidden = {}
-var savedCharacterID: String
+var savedCharacterID
 var temporaryState = {}
 var exposedBodyparts = []
 var skinData = {}
@@ -21,6 +21,7 @@ var pussyLeaking = false
 var anusLeaking = false
 var cumAmount = 0
 var cumColor = Color.white
+var cummedInside = 0.0
 
 var temporaryRiggedParts = {}
 
@@ -44,6 +45,8 @@ var dollAttachmentZoneScene = preload("res://Player/Player3D/Parts/DollAttachmen
 onready var nipplesParticles = $BoneAttachments/NipplesBoneAttachment/NipplesParticles
 onready var pussyParticles = $BoneAttachments/VaginaBoneAttachment/PussyParticles
 onready var anusParticles = $BoneAttachments/VaginaBoneAttachment/AnusParticles
+onready var pussy_cum_inside_particles = $BoneAttachments/VaginaBoneAttachment/PussyCumInsideParticles
+
 onready var breastsJiggleBone = $DollSkeleton/BreastsJiggleBone
 onready var bellyJiggleBone = $DollSkeleton/BellyJiggleBone
 onready var buttJiggleBone = $DollSkeleton/ButtJiggleBone
@@ -83,7 +86,7 @@ func testBody():
 	#addPartObject("breasts", load("res://Player/Player3D/Parts/Breasts/BreastsSmall/BreastsSmall.tscn").instance())
 	#addPartObject("breasts", load("res://Player/Player3D/Parts/Breasts/BreastsMedium/BreastsMedium.tscn").instance())
 	#addPartObject("breasts", load("res://Player/Player3D/Parts/Breasts/BreastsCurvy/BreastsCurvy.tscn").instance())
-	addPartObject("breasts", load("res://Player/Player3D/Parts/Breasts/BreastsBig/BreastsBig.tscn").instance())
+	#addPartObject("breasts", load("res://Player/Player3D/Parts/Breasts/BreastsBig/BreastsBig.tscn").instance())
 	addPartObject("hands", load("res://Player/Player3D/Parts/Arms/HumanArms/HumanArms.tscn").instance())
 	#addPartObject("ears", load("res://Player/Player3D/Parts/Ears/HumanEars/HumanEars.tscn").instance())
 	#addPartObject("ears", load("res://Player/Player3D/Parts/Ears/DragonEars/DragonEars.tscn").instance())
@@ -261,15 +264,20 @@ func reconnect():
 	loadCharacter(cashedCharID)
 
 func disconnectFromOld():
-	if(savedCharacterID != null && savedCharacterID != ""):
-		var ch = GlobalRegistry.getCharacter(savedCharacterID)
+	if(savedCharacterID != null && (savedCharacterID is String && savedCharacterID != "")):
+		var ch = getCharFromID(savedCharacterID)
 		if(ch == null || !is_instance_valid(ch)):
 			return
 		if(ch.is_connected("bodypart_changed", self, "onCharacterBodypartChanged")):
 			ch.disconnect("bodypart_changed", self, "onCharacterBodypartChanged")
 
+func getCharFromID(charID):
+	if(!(charID is String)):
+		return charID
+	return GlobalRegistry.getCharacter(charID)
+
 func loadCharacter(charID):
-	var ch = GlobalRegistry.getCharacter(charID)
+	var ch = getCharFromID(charID)
 	if(ch == null || !is_instance_valid(ch)):
 		return
 	
@@ -285,6 +293,8 @@ func loadCharacter(charID):
 		var _ok = ch.connect("bodypart_changed", self, "onCharacterBodypartChanged")
 		
 func prepareCharacter(charID):
+	stopCumInside()
+	stopCumPenis()
 	clearTemporaryState()
 	loadCharacter(charID)
 	clearOverrideAlpha()
@@ -293,7 +303,7 @@ func prepareCharacter(charID):
 			attachment.clearTemporaryScenes()
 		
 func onCharacterBodypartChanged():
-	var ch = GlobalRegistry.getCharacter(savedCharacterID)
+	var ch = getCharFromID(savedCharacterID)
 	if(ch == null || !is_instance_valid(ch)):
 		return
 	if(ch.has_method("updateDoll")):
@@ -342,6 +352,17 @@ func setBoneScaleAndOffset(boneName: String, boneScale: float, offset: Vector3):
 	
 	skeleton.set_bone_custom_pose(boneId, newTransform)
 
+func setBoneScale3AndOffset(boneName: String, boneScale: Vector3, offset: Vector3):
+	var skeleton:Skeleton = getDollSkeleton().getSkeleton()
+	var boneId = skeleton.find_bone(boneName)
+	if(boneId < 0):
+		return
+	var newTransform:Transform = Transform.IDENTITY
+	newTransform = newTransform.scaled(boneScale)
+	newTransform = newTransform.translated(offset)
+	
+	skeleton.set_bone_custom_pose(boneId, newTransform)
+
 func setBoneOffset(boneName: String, offset: Vector3):
 	var skeleton:Skeleton = getDollSkeleton().getSkeleton()
 	var boneId = skeleton.find_bone(boneName)
@@ -365,7 +386,12 @@ func setBreastsScale(breastsScale: float):
 	breastsJiggleBone.stiffness = min(1.0, 0.16 / max(0.1, breastsScale))
 
 func setPregnancy(progress: float):
-	setBoneOffset("DeformBelly", Vector3(-0.03244, 0.706324, 0.0)*progress)
+	progress = min(5.0, progress) # 5.0 is a hard limit. It already looks weird at 5 and only gets worse
+	var horisontalBellyScale = 1.0+max(0.0, progress-1.0)
+	var verticalBellyScale = clamp(1.0+max(0.0, progress-1.0), 0.0, 2.0)
+	
+	#setBoneOffset("DeformBelly", Vector3(-0.03244, 0.706324, 0.0)*progress)
+	setBoneScale3AndOffset("DeformBelly", Vector3(verticalBellyScale, horisontalBellyScale, horisontalBellyScale), Vector3(-0.03244*0.0, 0.706324, 0.0)*clamp(progress, -0.1, 1.0))
 	bellyJiggleBone.stiffness = 0.1 / ((clamp(progress, 0.0, 1.0) + 0.2) / 1.2)
 
 func setThighThickness(progress: float):
@@ -393,8 +419,8 @@ func setBallsScale(newScale: float):
 
 
 func _on_Doll3DTooltip_mouseEntered(bodypartID):
-	if(savedCharacterID != "" && bodypartID != "" && is_visible_in_tree() && !isOnlyPenis):
-		var character = GlobalRegistry.getCharacter(savedCharacterID)
+	if(savedCharacterID is String && savedCharacterID != "" && bodypartID != "" && is_visible_in_tree() && !isOnlyPenis):
+		var character = getCharFromID(savedCharacterID)
 		if(character == null):
 			return
 		
@@ -406,8 +432,8 @@ func _on_Doll3DTooltip_mouseEntered(bodypartID):
 		
 
 func _on_Doll3DTooltip_mouseExited(bodypartID):
-	if(savedCharacterID != "" && bodypartID != ""):
-		var character = GlobalRegistry.getCharacter(savedCharacterID)
+	if(savedCharacterID is String && savedCharacterID != "" && bodypartID != ""):
+		var character = getCharFromID(savedCharacterID)
 		if(character == null):
 			return
 		
@@ -560,6 +586,74 @@ func setPussyLeaking(newPussyLeaking):
 func setAnusLeaking(newAnusLeaking):
 	anusLeaking = newAnusLeaking
 
+func setupCumParticles(particlesNode:CPUParticles, intensity:float, howoften:float = 3.0, velocityMod:float = 1.0, velocityRandom:float = 1.0):
+	howoften *= 2.0
+	var newAmount = Util.maxi(5, int(intensity * 10.0))
+	if(newAmount != particlesNode.amount):
+		particlesNode.amount = newAmount
+	particlesNode.scale_amount = clamp(0.5 + intensity / 2.0, 0.5, 2.5)
+	particlesNode.lifetime = howoften
+	particlesNode.tangential_accel = clamp(intensity / 4.0, 0.0, 1.5)
+	particlesNode.initial_velocity = clamp(intensity*1.1*velocityMod, 0.5, 1.2*velocityMod)
+	particlesNode.initial_velocity_random = velocityRandom
+	particlesNode.explosiveness = clamp(0.7 + howoften / 30.0, 0.0, 0.92)
+	particlesNode.preprocess = howoften - RNG.randf_range(0.0, 1.0)
+	particlesNode.speed_scale = 2.0
+
+onready var penis_cum_particles = $BoneAttachments/PenisTipAttachment/PenisCumParticles
+onready var chastity_cum_particles = $BoneAttachments/PenisBoneAttachment/ChastityCumParticles
+onready var penis_cum_particles_2 = $BoneAttachments/PenisTipAttachment/PenisCumParticles2
+
+func startCumPenis(intensity:float, howoften:float = 3.0, isChastity=false):
+	if(!OPTIONS.isVisibleCumShotsEnabled()):
+		return
+	intensity *= OPTIONS.getCumShotsIntensityMult()
+	if(isChastity):
+		chastity_cum_particles.scale = Vector3(1.0/rememberedPenisScale, 1.0/rememberedPenisScale, 1.0/rememberedPenisScale)
+		setupCumParticles(chastity_cum_particles, intensity, howoften, 3.0, 0.3)
+		chastity_cum_particles.emitting = true
+	else:
+		penis_cum_particles.scale = Vector3(1.0/rememberedPenisScale, 1.0/rememberedPenisScale, 1.0/rememberedPenisScale)
+		setupCumParticles(penis_cum_particles, intensity, howoften, 3.0, 0.1)
+		setupCumParticles(penis_cum_particles_2, intensity*0.3, howoften * 1.7, 7.0, 0.2)
+		penis_cum_particles.emitting = true
+		penis_cum_particles_2.emitting = true
+
+func stopCumPenis():
+	chastity_cum_particles.emitting = false
+	penis_cum_particles.emitting = false
+	penis_cum_particles_2.emitting = false
+
+func setupCumParticlesInside(particlesNode:CPUParticles, intensity:float, howoften:float = 3.0, velocityMod:float = 1.0, velocityRandom:float = 0.5):
+	howoften *= 1.0
+	var newAmount = Util.maxi(5, int(intensity * 10.0))
+	if(newAmount != particlesNode.amount):
+		particlesNode.amount = newAmount
+	particlesNode.scale_amount = clamp(0.5 + intensity / 2.0, 0.5, 2.5)
+	particlesNode.lifetime = howoften
+	particlesNode.tangential_accel = clamp(intensity / 4.0, 0.0, 1.5)
+	particlesNode.initial_velocity = clamp(intensity*1.1*velocityMod, 0.5, 2.0*velocityMod)
+	particlesNode.initial_velocity_random = velocityRandom
+	particlesNode.explosiveness = clamp(0.4 + howoften / 20.0, 0.0, 0.8)
+	particlesNode.preprocess = howoften - RNG.randf_range(0.0, 0.3)
+	particlesNode.speed_scale = 1.0
+	particlesNode.spread = 15.0
+
+func startCumInside(intensity:float, howoften:float = 3.0):
+	if(!OPTIONS.isVisibleCumShotsEnabled()):
+		return
+	intensity *= OPTIONS.getCumShotsIntensityMult()
+	#intensity = 1.0
+	#print(intensity)
+	cummedInside = intensity
+	setupCumParticlesInside(pussy_cum_inside_particles, intensity, howoften)
+	if(!pussy_cum_inside_particles.emitting):
+		pussy_cum_inside_particles.emitting = true
+
+func stopCumInside():
+	cummedInside = 0.0
+	pussy_cum_inside_particles.emitting = false
+
 func setCumAmount(theisOnCum):
 	cumAmount = theisOnCum
 
@@ -708,7 +802,8 @@ func createChainScene(chainType:String):
 
 func updateChains():
 	for chainObject in chainObjects:
-		chainObject.queue_free()
+		if(chainObject != null && is_instance_valid(chainObject)):
+			chainObject.queue_free()
 	chainObjects.clear()
 
 	if(!OPTIONS.shouldSpawnChains()):

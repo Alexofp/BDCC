@@ -1239,6 +1239,11 @@ func getPregnancyProgress():
 		return menstrualCycle.getPregnancyProgress()
 	return 0.0
 
+func getPregnancyLitterSize():
+	if(menstrualCycle != null):
+		return menstrualCycle.getLitterSize()
+	return 0
+
 func isInHeat():
 	if(menstrualCycle != null):
 		return menstrualCycle.isInHeat()
@@ -1413,10 +1418,10 @@ func stimulateLactation():
 	var production: Lactation = breasts.getFluidProduction()
 	if(production == null):
 		return false
+	if(isPlayer()):
+		addSkillExperience(Skill.Milking, 5)
 	if(production.has_method("stimulate")):
 		return production.stimulate()
-	if(isPlayer()):
-		addSkillExperience(Skill.Milking, 10)
 	return false
 
 func canBeSeedMilked():
@@ -1460,7 +1465,7 @@ func getCumInflationLevel():
 	var threshold = 3000.0
 	var tooMuch = max(totalAmount - threshold, 0.0)
 	
-	return max(tooMuch / 2000.0, 0.0)
+	return clamp(tooMuch / 2000.0, 0.0, 1.0)
 # Doll stuff
 
 func getDollParts() -> Dictionary:
@@ -1583,7 +1588,18 @@ func softUpdateDoll(doll: Doll3D):
 	else:
 		doll.setState("breasts", "flat")
 
-	var pregnancyValue = getPregnancyProgress()
+	var pregnancyValue = clamp(getPregnancyProgress(), 0.0, 1.0)
+	
+	var pregnancyKidAmount = getPregnancyLitterSize()
+	var extraKidsMult = 1.0
+	if(OPTIONS.getBellyMaxSizeDependsOnLitterSize() && pregnancyKidAmount > 1):
+		# Rough values
+		# Kid amount 1   2   3   4   5   6   7   8   9   10   11   12   13   14   15   16
+		# Belly size 1.0 1.2 1.3 1.4 1.5 1.6 1.6 1.7 1.7 1.78 1.82 1.86 1.89 1.93 1.96 2.0
+		extraKidsMult = pow(pregnancyKidAmount, 0.25)
+		
+	pregnancyValue *= extraKidsMult
+	pregnancyValue *= OPTIONS.getBellyMaxSizeModifier()
 	
 	var thicknessNorm = getThickness() / 100.0
 	var femNorm = getFemininity() / 100.0
@@ -1595,8 +1611,14 @@ func softUpdateDoll(doll: Doll3D):
 	
 	var cumInflationLevel = getCumInflationLevel()
 	pregnancyValue += clamp(cumInflationLevel / 2.0, 0.0, 1.0)
+	pregnancyValue += getCustomAttribute(BuffAttribute.InflatedBelly)
 	
-	doll.setPregnancy(clamp(pregnancyValue, -0.5, 1.1))
+	pregnancyValue *= (1.0 + getCustomAttribute(BuffAttribute.BellySizeModifier))
+	
+	if(pregnancyValue < -0.5):
+		pregnancyValue = -0.5
+	
+	doll.setPregnancy(pregnancyValue)
 	
 	var theTailScale = 1.0
 	if(hasBodypart(BodypartSlot.Tail)):
@@ -1995,6 +2017,13 @@ func addConsciousness(newc:float):
 func isReadyToPenetrate() -> bool:
 	return getLustLevel() >= 0.5 || getLust() >= 50 || getArousal() >= 0.4 || isWearingStrapon()
 
+func getWornChastityCage():
+	if(getInventory().hasSlotEquipped(InventorySlot.Penis)):
+		var item = getInventory().getEquippedItem(InventorySlot.Penis)
+		if(item.hasTag(ItemTag.ChastityCage)):
+			return item
+	return null
+
 func isWearingChastityCage() -> bool:
 	# Having a chastity cage also means that you have a penis
 	if(!hasBodypart(BodypartSlot.Penis)):
@@ -2176,6 +2205,9 @@ func hasWombIn(bodypartSlot):
 func getDefaultArtwork(_variant = []):
 	return "res://Images/UI/GenericFace.png"
 
+func adjustArtworkVariant(_variant:Array):
+	pass
+
 func hasIllegalItems():
 	return getInventory().hasIllegalItems()
 
@@ -2233,6 +2265,9 @@ func hasStrapons():
 
 func hasChastityCages():
 	return getInventory().getItemsWithTag(ItemTag.ChastityCage).size() > 0
+
+func getChastityCages():
+	return getInventory().getItemsWithTag(ItemTag.ChastityCage)
 
 func getStrapons():
 	return getInventory().getItemsWithTag(ItemTag.Strapon)
@@ -2432,7 +2467,7 @@ func applyRandomSkin():
 		var theSpecies = GlobalRegistry.getSpecies(speciesOne)
 		var skinType = theSpecies.getSkinType()
 		
-		for skinID in GlobalRegistry.getSkins():
+		for skinID in GlobalRegistry.getSkinsAllKeys():
 			var theSkin = GlobalRegistry.getSkin(skinID)
 			var fittingSkinTypes = theSkin.getFittingSkinTypes()
 			if(fittingSkinTypes is Dictionary && fittingSkinTypes.has(skinType)):
@@ -2752,3 +2787,10 @@ func hasTightHoles():
 		return true
 	else:
 		return false
+
+func getRopeHarnessColor(defaultColor=Color.red):
+	var theHarness = inventory.getEquippedItemByID("ropeharness")
+	if(theHarness != null):
+		return theHarness.clothesColor
+	
+	return defaultColor

@@ -46,7 +46,7 @@ population = 3
 [node name="MainElevator" parent="." index="4" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( 0, -64 )
-roomName = "Main elevator"
+roomName = "Elevator"
 roomID = "hall_elevator"
 roomDescription = "Spacious elevator that can move people or a huge amount of cargo between floors. Walls are made out of black painted metal, you notice a control panel that has a few buttons."
 roomSprite = 3
@@ -153,6 +153,7 @@ population = 3
 
 [node name="MainHallRoom48" parent="." index="16" instance=ExtResource( 2 )]
 position = Vector2( 128, 448 )
+roomName = "Stairs"
 roomDescription = "A set of stairs that lead to the greenhouses level. Markings on the floor remind the inmates that the greenhouses are [color=red]off-limits[/color] for them"
 gridColor = 2
 population = 2
@@ -160,6 +161,7 @@ population = 2
 [node name="MainHallRoom37" parent="." index="17" instance=ExtResource( 2 )]
 position = Vector2( -128, 576 )
 roomName = "Gym area"
+roomID = "gym_entrance"
 roomDescription = "You can see yoga carpets, treadmills and a few benches for weight lifting"
 population = 1
 
@@ -297,6 +299,7 @@ population = 1
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 64, 448 )
 roomName = "Prison Yard"
+roomID = "yard_nearstairs"
 roomDescription = "A huge open area with lots of bushes, trees and other types of greenery. Ocasionally there is a bench to sit and relax.
 
 The ground is covered with grass, there are visible pathways made out of stone"
@@ -393,6 +396,7 @@ lootCredits = 3
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 512 )
 roomName = "Greenhouses"
+roomID = "green_chokepoint"
 roomDescription = "You see some greenhouses. This is where all the apples, eggplants and other vegetables and fruits are grown.
 
 The greenhouses are marked as [color=red]off-limits[/color] for inmates"
@@ -514,6 +518,7 @@ population = 1
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( -64, 576 )
 roomName = "Prison Yard"
+roomID = "yard_neargym"
 roomDescription = "A huge open area with lots of bushes, trees and other types of greenery. Ocasionally there is a bench to sit and relax.
 
 The ground is covered with grass, there are visible pathways made out of stone"

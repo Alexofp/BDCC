@@ -120,7 +120,7 @@ func _run():
 		addButton("Cum inside", "Breed the kitty", "pegging_haspenis_cuminside")
 		addButton("Pull out", "Rather be safe", "pegging_haspenis_pullout")
 	if(state == "pegging_haspenis_cuminside"):
-		playAnimation(StageScene.SexAllFours, "inside", {npc="rahi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexAllFours, "inside", {npc="rahi", pc="pc", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
 		saynn("Rahi's pussy is clenching around your {pc.penis} so well that you get really eager to stuff her up. With a few final rough trusts, you shove your member deep before letting that slit bring you over the edge. You groan as your dick pumps your hot stick {pc.cum} directly inside Rahi's womb, flooding it with your seed. Her body tenses as she feels the warmth of your {pc.cum} inside her, making her let out a long, shuddering moan of pleasure.")
 
 		saynn("After both orgasms are over, you just lay there for a few moments, panting and recovering from this intense breeding attempt.")
@@ -135,7 +135,7 @@ func _run():
 
 		addButton("Continue", "That was lewd", "endthescene")
 	if(state == "pegging_haspenis_pullout"):
-		playAnimation(StageScene.SexAllFours, "tease", {npc="rahi", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexAllFours, "tease", {npc="rahi", pc="pc", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true}})
 		saynn("Rahi's pussy is clenching around your {pc.penis} so well that you feel like you're about to cum. And that turned out to be a good call! As you pull your twitching throbbing member out, it instantly shoots out its first string of {pc.cum}, followed by another.. and another.. all of them landing on Rahi's ass and her back, marking her fur. All the while Rahi is left with some empty space inside her pulsing pussy, moaning softly as her folds slowly tighten up around the stretched hole.")
 
 		saynn("After both orgasms are over, you just lay there for a few moments, panting and recovering from this intense sex session.")
@@ -179,7 +179,7 @@ func _run():
 
 		addButton("Continue", "That was lewd", "removestraponandleave")
 	if(state == "pegging_doit"):
-		playAnimation(StageScene.SexAllFours, "sexflop", {pc="rahi", npc="pc", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexAllFours, "sexflop", {pc="rahi", npc="pc", pcCum=true, npcCum=true, bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
 		saynn("You decide not to deny this.. opportunity.. and just keep pretending that you're in a deep state of sleep.")
 
 		saynn("Slowly, Rahi presses her rubber toy between your buttcheeks and slowly grinds them, her paws reach down to caress your {pc.masc} thighs. Your kitty whispers to you, trying to sound authoritative..")

@@ -235,7 +235,7 @@ func _run():
 
 		addButton("Cum", "She forgot to use a condom.. Sounds like it's her problem", "cowgirl_cum")
 	if(state == "cowgirl_cum"):
-		playAnimation(StageScene.SexCowgirl, "inside", {npc="eliza", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexCowgirl, "inside", {npc="eliza", pc="pc", pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("As Eliza's body trembles from the release that is about to happen, your hands roam over her, caressing her fluffy thighs, hips, cupping breasts under that bra. Her breath hitches from your touches, her nails dig into your chest. And with a lusty cry, Eliza succumbs to the overwhelming pleasure and brings herself down with full force, letting your dick as deep as her pussy allows.")
 
 		saynn("[say=eliza]Yes-s-s..[/say]")
@@ -341,7 +341,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "trib_cum")
 	if(state == "trib_cum"):
-		playAnimation(StageScene.SexTribadism, "fast", {pc="eliza", npc="pc", bodyState={exposedCrotch=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexTribadism, "fast", {pc="eliza", npc="pc", pcCum=true, npcCum=true, bodyState={exposedCrotch=true}, npcBodyState={naked=true}})
 		saynn("Feeling lusty and needy, Eliza rubs pussies with you faster, your clits constantly bumping against each other. Each grinding motion sends a surge of ecstasy through both of you, bringing you closer to the edge.")
 
 		saynn("[say=eliza]You thought you could control my desires..[/say]")

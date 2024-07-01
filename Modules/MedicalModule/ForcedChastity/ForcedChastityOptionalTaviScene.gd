@@ -230,7 +230,7 @@ func _run():
 
 
 	if(state == "beg"):
-		playAnimation(StageScene.HangingSex, "fast", {npc="tavi", bodyState={naked=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.HangingSex, "fast", {npc="tavi", pcCum=true, bodyState={naked=true}, npcBodyState={naked=true}})
 		
 		saynn("You’re getting close and at this point you really wanna cum. You part your lips and begin begging Tavi in between all your other noises.")
 
@@ -265,7 +265,7 @@ func _run():
 		addButton("Continue", "See what happens next", "continue4")
 
 	if(state == "just_cum"):
-		playAnimation(StageScene.HangingSex, "tease", {npc="tavi", bodyState={naked=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.HangingSex, "tease", {npc="tavi", pcCum=true, bodyState={naked=true}, npcBodyState={naked=true}})
 		
 		saynn("She humiliated you enough so you go against what she orders you and keep quiet. Well, as quiet as you can with a giant horsecock strapon up your butt.")
 

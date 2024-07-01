@@ -218,3 +218,17 @@ func _on_SexActivityCreator_pressed():
 	
 	var scene = load("res://Util/SexActivityCreator/SexActivityCreator.tscn")
 	devSubScreen.add_child(scene.instance())
+
+var datapackMenu
+func _on_DatapackButton_pressed():
+	#hideAllMenus()
+	$HBoxContainer.visible = false
+	datapackMenu = load("res://Game/Datapacks/UI/DatapackMenu.tscn").instance()
+	datapackMenu.connect("onClosePressed", self, "onDatapackMenuClosedPressed")
+	add_child(datapackMenu)
+
+func onDatapackMenuClosedPressed():
+	if(datapackMenu != null):
+		datapackMenu.queue_free()
+		datapackMenu = true
+		$HBoxContainer.visible = true

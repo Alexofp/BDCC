@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Game/Datapacks/UI/PackVarUIs/DropTableEntryUI.gd" type="Script" id=1]
+
+[node name="DropTableEntryUI" type="HBoxContainer"]
+margin_right = 1266.0
+margin_bottom = 20.0
+script = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_top = 3.0
+margin_right = 216.0
+margin_bottom = 17.0
+text = "Chance: 50% Item: 2-5x Painkiller"
+
+[node name="DeleteButton" type="Button" parent="."]
+margin_left = 220.0
+margin_right = 275.0
+margin_bottom = 20.0
+text = "Delete"
+
+[connection signal="pressed" from="DeleteButton" to="." method="_on_DeleteButton_pressed"]

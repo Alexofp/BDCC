@@ -31,7 +31,7 @@ nodes/Animation/position = Vector2( -40, 60 )
 nodes/Blend2/node = SubResource( 35 )
 nodes/Blend2/position = Vector2( 220, 100 )
 nodes/output/position = Vector2( 420, 140 )
-node_connections = [ "output", 0, "Blend2", "Blend2", 0, "Animation", "Blend2", 1, "Animation 2" ]
+node_connections = [ "Blend2", 0, "Animation", "Blend2", 1, "Animation 2", "output", 0, "Blend2" ]
 
 [sub_resource type="AnimationNodeAnimation" id=48]
 animation = "Sex_OralGrind_1-loop"
@@ -64,7 +64,7 @@ nodes/Animation/position = Vector2( 140, 60 )
 nodes/Blend2/node = SubResource( 26 )
 nodes/Blend2/position = Vector2( 460, 80 )
 nodes/output/position = Vector2( 700, 120 )
-node_connections = [ "output", 0, "Blend2", "Blend2", 0, "Animation", "Blend2", 1, "Animation 2" ]
+node_connections = [ "Blend2", 0, "Animation", "Blend2", 1, "Animation 2", "output", 0, "Blend2" ]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=38]
 xfade_time = 0.5
@@ -128,7 +128,7 @@ nodes/CuffsBlend/position = Vector2( 440, 160 )
 nodes/StateMachine/node = SubResource( 28 )
 nodes/StateMachine/position = Vector2( 160, 120 )
 nodes/output/position = Vector2( 680, 180 )
-node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=22]
 
@@ -212,7 +212,7 @@ nodes/CuffsBlend/position = Vector2( 440, 160 )
 nodes/StateMachine/node = SubResource( 31 )
 nodes/StateMachine/position = Vector2( 140, 120 )
 nodes/output/position = Vector2( 680, 180 )
-node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=23]
 
@@ -246,5 +246,7 @@ parameters/StateMachine/playback = SubResource( 23 )
 
 [editable path="Doll3D"]
 [editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]
 [editable path="Doll3D2"]
 [editable path="Doll3D2/DollSkeleton"]
+[editable path="Doll3D2/DollSkeleton2"]

@@ -237,7 +237,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "cock_leave_vag_cum")
 	if(state == "cock_leave_vag_cum"):
-		playAnimation(StageScene.Choking, "inside", {pc="tavi", npc="pc", bodyState={naked=true,hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.Choking, "inside", {pc="tavi", npc="pc", pcCum=true, npcCum=true, bodyState={naked=true,hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("And so, Tavi rams her cock deep inside you, breaking into your womb and scratching at its walls as her length starts throbbing hard.")
 
 		saynn("[say=tavi]Enjoy the kittens..[/say]")
@@ -342,7 +342,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "cock_leave_anal_cum")
 	if(state == "cock_leave_anal_cum"):
-		playAnimation(StageScene.Choking, "inside", {pc="tavi", npc="pc", bodyState={naked=true,hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.Choking, "inside", {pc="tavi", npc="pc", pcCum=true, npcCum=true, bodyState={naked=true,hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("And so, Tavi rams her cock deep inside you, scratching at your guts as her length starts throbbing hard.")
 
 		saynn("[say=tavi]Enjoy..[/say]")
@@ -495,7 +495,7 @@ func _run():
 
 		addButton("Continue", "See what Tavi will do to her ass next", "chastity_dildo_fast")
 	if(state == "chastity_dildo_fast"):
-		playAnimation(StageScene.HorsecockDildoSex, "fast", {pc="tavi", bodyState={naked=true, caged=true}})
+		playAnimation(StageScene.HorsecockDildoSex, "fast", {pc="tavi", pcCum=true, bodyState={naked=true, caged=true}})
 		saynn("Tavi rides the toy faster and harder, pretty much destroying her tight pucker. But she loves it, lots of cute moans escape from her, each thrust putting so much pressure on her prostate that her burning eyes start to roll up, her tongue out and drooling. The poor cock behind her cage keeps twitching and leaking.")
 
 		saynn("[say=tavi]I wanna cum-m.. w-wanna.. p-please-please.. I wann-n-naa..[/say]")
@@ -569,7 +569,7 @@ func _run():
 
 		addButton("Cum inside", "Breed her ass", "chastity_anal_cum")
 	if(state == "chastity_anal_cum"):
-		playAnimation(StageScene.SexFreeStanding, "inside", {npc="tavi", pc="pc", npcBodyState={naked=true, caged=true}, bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexFreeStanding, "inside", {npc="tavi", pc="pc", pcCum=true, npcCum=true, npcBodyState={naked=true, caged=true}, bodyState={naked=true, hard=true}})
 		saynn("Instead of pulling out, you ram your dick deeper and just let Tavi push you over the edge.")
 
 		saynn("You grunt more as your throbbing member stuffs that cat's ass full of your thick {pc.cum}, so much that some already starts leaking out.")
@@ -630,7 +630,7 @@ func _run():
 
 		addButton("Continue", "See how you will orgasm", "submit_vag_cum")
 	if(state == "submit_vag_cum"):
-		playAnimation(StageScene.SexFullNelson, "inside", {pc="tavi", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexFullNelson, "inside", {pc="tavi", npc="pc", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("And just before you do, Tavi gets a better grip on your limbs before doing a last powerful thrust, shoving her cock so deep, the barbed tip breaks into your womb and begins scratching at its wall, trying to cause a reaction.")
 
 		if (GM.pc.isWearingChastityCage()):
@@ -708,7 +708,7 @@ func _run():
 
 		addButton("Continue", "See how you will orgasm", "submit_anal_cum")
 	if(state == "submit_anal_cum"):
-		playAnimation(StageScene.SexFullNelson, "inside", {pc="tavi", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexFullNelson, "inside", {pc="tavi", npc="pc", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("And just before you do, Tavi gets a better grip on your limbs before doing a last powerful thrust, shoving her cock so deep, the barbed tip begins scratching at your guts.")
 
 		if (GM.pc.isWearingChastityCage()):
@@ -773,7 +773,7 @@ func _run():
 
 		addButton("Shove inside", "Breed her ass", "chastity_strapon_anal_cum")
 	if(state == "chastity_strapon_anal_cum"):
-		playAnimation(StageScene.SexFreeStanding, "inside", {npc="tavi", pc="pc", npcBodyState={naked=true, caged=true}, bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexFreeStanding, "inside", {npc="tavi", pc="pc", pcCum=true, npcCum=true, npcBodyState={naked=true, caged=true}, bodyState={naked=true, hard=true}})
 		saynn("Both of you are panting heavily after that.")
 
 		saynn("[say=tavi]If that's how it's always gonna feel.. F-fine, I'm a buttslut..[/say]")

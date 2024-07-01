@@ -66,7 +66,7 @@ func _run():
 		
 		saynn("Suddenly everything goes completely silent. No Nova, no crowd, no room ambience. You shake your head but no, your blindfold and earplugs sit very tight. Oh no, you’re in complete isolation! All you feel is the floor underneath and your deep breathing.")
 
-		saynn("That’s not right, it feels weird, you try to get up but can’t, your cuffed legs only allow you to get to a kneeling position. And with no support from your arms, all you can do is drop onto the floor again and begin crawling forward, hoping that you will hit the fence. You crawl like a warm, wiggling your whole body and using arms and legs to push yourself forward.")
+		saynn("That’s not right, it feels weird, you try to get up but can’t, your cuffed legs only allow you to get to a kneeling position. And with no support from your arms, all you can do is drop onto the floor again and begin crawling forward, hoping that you will hit the fence. You crawl like a worm, wiggling your whole body and using arms and legs to push yourself forward.")
 
 		saynn("Suddenly you feel your naked {pc.masc} butt smacked firmly! Ow! And again! You let out a noise that you can’t even hear, the plugs block any vibrations of your skull too. You quit wiggling, hoping that it would make Nova stop. But it doesn’t, your butt is spanked again and again until it’s red. Desperate, you begin to crawl faster. Gotta get to the fence!")
 
@@ -103,6 +103,7 @@ func _run():
 	if(state == "getused"):
 		playAnimation(StageScene.SexStanding, "sex", {
 			pc="nova", npc="pc", 
+			pcCum=true, npcCum=true,
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={naked=true,hard=true,},
 		})

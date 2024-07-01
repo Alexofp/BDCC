@@ -29,6 +29,7 @@ func _run():
 	if(state == "get_fucked"):
 		playAnimation(StageScene.SexStanding, "sex", {
 			npc="pc", pc="axis", 
+			pcCum=true, npcCum=true,
 				bodyState={exposedCrotch=true,hard=true},
 				npcBodyState={exposedCrotch=true,caged=true},
 		})

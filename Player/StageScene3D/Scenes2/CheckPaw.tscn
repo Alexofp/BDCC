@@ -1,0 +1,222 @@
+[gd_scene load_steps=52 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes2/CheckPaw.gd" type="Script" id=4]
+[ext_resource path="res://Player/Props/chair.png" type="Texture" id=5]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=522]
+animation = "CheckFootBeans_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=523]
+animation = "CheckFootLick_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=524]
+animation = "CheckFootRubCrotch_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=525]
+animation = "CheckFootTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=526]
+animation = "CheckFoot_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=527]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=528]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=529]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=530]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=531]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=532]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=533]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=534]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=552]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=553]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=556]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=557]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=560]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=561]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=535]
+states/CheckFootBeans_1-loop/node = SubResource( 522 )
+states/CheckFootBeans_1-loop/position = Vector2( 315, 149 )
+states/CheckFootLick_1-loop/node = SubResource( 523 )
+states/CheckFootLick_1-loop/position = Vector2( 486, -112 )
+states/CheckFootRubCrotch_1-loop/node = SubResource( 524 )
+states/CheckFootRubCrotch_1-loop/position = Vector2( 1035, 27 )
+states/CheckFootTease_1-loop/node = SubResource( 525 )
+states/CheckFootTease_1-loop/position = Vector2( 473, 51 )
+states/CheckFoot_1-loop/node = SubResource( 526 )
+states/CheckFoot_1-loop/position = Vector2( 796, 149 )
+transitions = [ "CheckFootTease_1-loop", "CheckFootBeans_1-loop", SubResource( 527 ), "CheckFootBeans_1-loop", "CheckFootTease_1-loop", SubResource( 528 ), "CheckFootTease_1-loop", "CheckFootLick_1-loop", SubResource( 529 ), "CheckFootLick_1-loop", "CheckFootTease_1-loop", SubResource( 530 ), "CheckFootTease_1-loop", "CheckFoot_1-loop", SubResource( 531 ), "CheckFoot_1-loop", "CheckFootTease_1-loop", SubResource( 532 ), "CheckFootTease_1-loop", "CheckFootRubCrotch_1-loop", SubResource( 533 ), "CheckFootRubCrotch_1-loop", "CheckFootTease_1-loop", SubResource( 534 ), "CheckFootBeans_1-loop", "CheckFoot_1-loop", SubResource( 552 ), "CheckFoot_1-loop", "CheckFootBeans_1-loop", SubResource( 553 ), "CheckFootBeans_1-loop", "CheckFootLick_1-loop", SubResource( 556 ), "CheckFootLick_1-loop", "CheckFootBeans_1-loop", SubResource( 557 ), "CheckFoot_1-loop", "CheckFootLick_1-loop", SubResource( 560 ), "CheckFootLick_1-loop", "CheckFoot_1-loop", SubResource( 561 ) ]
+start_node = "CheckFootTease_1-loop"
+graph_offset = Vector2( 19, -127 )
+
+[sub_resource type="AnimationNodeBlendTree" id=536]
+graph_offset = Vector2( -348.69, 38.9555 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 535 )
+nodes/StateMachine/position = Vector2( 28.31, 104.956 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=460]
+
+[sub_resource type="AnimationNodeAnimation" id=537]
+animation = "CheckFootBeans_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=538]
+animation = "CheckFootLick_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=539]
+animation = "CheckFootRubCrotch_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=540]
+animation = "CheckFootTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=541]
+animation = "CheckFoot_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=542]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=543]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=544]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=545]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=546]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=547]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=548]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=549]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=554]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=555]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=558]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=559]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=562]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=563]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=550]
+states/CheckFootBeans_2-loop/node = SubResource( 537 )
+states/CheckFootBeans_2-loop/position = Vector2( 245, 159 )
+states/CheckFootLick_2-loop/node = SubResource( 538 )
+states/CheckFootLick_2-loop/position = Vector2( 532, -156 )
+states/CheckFootRubCrotch_2-loop/node = SubResource( 539 )
+states/CheckFootRubCrotch_2-loop/position = Vector2( 853, 84 )
+states/CheckFootTease_2-loop/node = SubResource( 540 )
+states/CheckFootTease_2-loop/position = Vector2( 519, 63 )
+states/CheckFoot_2-loop/node = SubResource( 541 )
+states/CheckFoot_2-loop/position = Vector2( 735, 195 )
+transitions = [ "CheckFootTease_2-loop", "CheckFootBeans_2-loop", SubResource( 542 ), "CheckFootBeans_2-loop", "CheckFootTease_2-loop", SubResource( 543 ), "CheckFootTease_2-loop", "CheckFootLick_2-loop", SubResource( 544 ), "CheckFootLick_2-loop", "CheckFootTease_2-loop", SubResource( 545 ), "CheckFootTease_2-loop", "CheckFoot_2-loop", SubResource( 546 ), "CheckFoot_2-loop", "CheckFootTease_2-loop", SubResource( 547 ), "CheckFootTease_2-loop", "CheckFootRubCrotch_2-loop", SubResource( 548 ), "CheckFootRubCrotch_2-loop", "CheckFootTease_2-loop", SubResource( 549 ), "CheckFootBeans_2-loop", "CheckFoot_2-loop", SubResource( 554 ), "CheckFoot_2-loop", "CheckFootBeans_2-loop", SubResource( 555 ), "CheckFootLick_2-loop", "CheckFootBeans_2-loop", SubResource( 558 ), "CheckFootBeans_2-loop", "CheckFootLick_2-loop", SubResource( 559 ), "CheckFoot_2-loop", "CheckFootLick_2-loop", SubResource( 562 ), "CheckFootLick_2-loop", "CheckFoot_2-loop", SubResource( 563 ) ]
+start_node = "CheckFootTease_2-loop"
+graph_offset = Vector2( -14, -150 )
+
+[sub_resource type="AnimationNodeBlendTree" id=551]
+graph_offset = Vector2( -322.532, 74.6842 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 550 )
+nodes/StateMachine/position = Vector2( 182.468, 140.684 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=473]
+
+[node name="CheckPaw" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.317465, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -0.121, 0 )
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, -0.121, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 536 )
+anim_player = NodePath("../Doll3D/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 460 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 551 )
+anim_player = NodePath("../Doll3D2/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 473 )
+
+[node name="Chair" type="Sprite3D" parent="." index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.558, 1.928, 0.069 )
+texture = ExtResource( 5 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]
+[editable path="Doll3D2"]
+[editable path="Doll3D2/DollSkeleton"]
+[editable path="Doll3D2/DollSkeleton2"]

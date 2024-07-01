@@ -587,7 +587,7 @@ func _run():
 		addButton("Let him cum", "Might as well", "make_skar_cum")
 		addButton("Deny him", "Be very mean with him", "deny_skar_cum")
 	if(state == "make_skar_cum"):
-		playAnimation(StageScene.WoodenHorseSolo, "lightstruggle", {pc="skar", bodyState={naked=true,hard=true}})
+		playAnimation(StageScene.WoodenHorseSolo, "lightstruggle", {pc="skar", pcCum=true, bodyState={naked=true,hard=true}})
 		saynn("You feel his rocket throbbing more and more. But you don't stop, you keep jacking him off until moans start escaping out of his mouth. The guy arches his back again while his canine dick bursts with thick ropes of seed, painting the wooden horse that's underneath him with white.")
 
 		saynn("But each pleasure wave also brings more pain with it as the guy's body struggles to contain the sensations, his perineum area is not particularly happy about it all.")

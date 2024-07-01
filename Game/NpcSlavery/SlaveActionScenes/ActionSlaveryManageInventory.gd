@@ -238,7 +238,7 @@ func onInventoryItemInteracted(item: ItemBase):
 		#	var credsItem = GlobalRegistry.createItem("WorkCredit")
 		#	credsItem.setAmount(GM.pc.getCredits())
 		#	theItems.append(credsItem)
-		inv.setItems(theItems, "stash")
+		inv.setItems(theItems, "give")
 	if(state == "takeitemmenu"):
 		if(item.getClothingSlot() != null):
 			var theResult = tryToggleWornItem(item)

@@ -54,6 +54,13 @@ func playAnimation(animID, _args = {}):
 	
 	updateSubAnims()
 	
+	$Sybian/ChainRenderer.visible = (_args.has("chained") && _args["chained"])
+	
+	if(_args.has("pcCum") && _args["pcCum"]):
+		startCumPenis(doll)
+	if(_args.has("npcCum") && _args["npcCum"]):
+		startCumPenis(doll2)
+	
 	var state_machine = animationTree["parameters/StateMachine/playback"]
 	var state_machine2 = animationTree2["parameters/StateMachine/playback"]
 

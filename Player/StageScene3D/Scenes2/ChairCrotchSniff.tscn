@@ -1,0 +1,161 @@
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes2/ChairCrotchSniff.gd" type="Script" id=4]
+[ext_resource path="res://Player/Props/chair.png" type="Texture" id=5]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=474]
+animation = "CrotchSniffChairFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=475]
+animation = "CrotchSniffChairPrepare_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=476]
+animation = "CrotchSniffChair_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=477]
+animation = "CrotchSniffStandToChair_1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=478]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=479]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=480]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=481]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=482]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=483]
+states/CrotchSniffChairFast_1-loop/node = SubResource( 474 )
+states/CrotchSniffChairFast_1-loop/position = Vector2( 406, 395 )
+states/CrotchSniffChairPrepare_1-loop/node = SubResource( 475 )
+states/CrotchSniffChairPrepare_1-loop/position = Vector2( 452, 73 )
+states/CrotchSniffChair_1-loop/node = SubResource( 476 )
+states/CrotchSniffChair_1-loop/position = Vector2( 406, 296 )
+states/CrotchSniffStandToChair_1/node = SubResource( 477 )
+states/CrotchSniffStandToChair_1/position = Vector2( 556, 185 )
+transitions = [ "CrotchSniffChairPrepare_1-loop", "CrotchSniffStandToChair_1", SubResource( 478 ), "CrotchSniffStandToChair_1", "CrotchSniffChair_1-loop", SubResource( 479 ), "CrotchSniffChair_1-loop", "CrotchSniffChairPrepare_1-loop", SubResource( 480 ), "CrotchSniffChair_1-loop", "CrotchSniffChairFast_1-loop", SubResource( 481 ), "CrotchSniffChairFast_1-loop", "CrotchSniffChair_1-loop", SubResource( 482 ) ]
+start_node = "CrotchSniffChairPrepare_1-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=484]
+graph_offset = Vector2( -348.69, 38.9555 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 483 )
+nodes/StateMachine/position = Vector2( 125.31, 126.956 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=460]
+
+[sub_resource type="AnimationNodeAnimation" id=485]
+animation = "CrotchSniffChairFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=486]
+animation = "CrotchSniffChairPrepare_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=487]
+animation = "CrotchSniffChair_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=488]
+animation = "CrotchSniffStandToChair_2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=489]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=490]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=491]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=492]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=493]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=494]
+states/CrotchSniffChairFast_2-loop/node = SubResource( 485 )
+states/CrotchSniffChairFast_2-loop/position = Vector2( 541, 280 )
+states/CrotchSniffChairPrepare_2-loop/node = SubResource( 486 )
+states/CrotchSniffChairPrepare_2-loop/position = Vector2( 547, 43 )
+states/CrotchSniffChair_2-loop/node = SubResource( 487 )
+states/CrotchSniffChair_2-loop/position = Vector2( 527, 188 )
+states/CrotchSniffStandToChair_2/node = SubResource( 488 )
+states/CrotchSniffStandToChair_2/position = Vector2( 714, 129 )
+transitions = [ "CrotchSniffChairPrepare_2-loop", "CrotchSniffStandToChair_2", SubResource( 489 ), "CrotchSniffStandToChair_2", "CrotchSniffChair_2-loop", SubResource( 490 ), "CrotchSniffChair_2-loop", "CrotchSniffChairPrepare_2-loop", SubResource( 491 ), "CrotchSniffChair_2-loop", "CrotchSniffChairFast_2-loop", SubResource( 492 ), "CrotchSniffChairFast_2-loop", "CrotchSniffChair_2-loop", SubResource( 493 ) ]
+start_node = "CrotchSniffChairPrepare_2-loop"
+graph_offset = Vector2( 10, -47 )
+
+[sub_resource type="AnimationNodeBlendTree" id=495]
+graph_offset = Vector2( -322.532, 74.6842 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 494 )
+nodes/StateMachine/position = Vector2( 193.468, 138.684 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=473]
+
+[node name="ChairCrotchSniff" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.317465, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.910454, -0.0533649, 0 )
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0.910454, -0.0533649, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 484 )
+anim_player = NodePath("../Doll3D/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 460 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 495 )
+anim_player = NodePath("../Doll3D2/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 473 )
+
+[node name="Chair" type="Sprite3D" parent="." index="5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.96845, 1.69609, 0.069 )
+texture = ExtResource( 5 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]
+[editable path="Doll3D2"]
+[editable path="Doll3D2/DollSkeleton"]
+[editable path="Doll3D2/DollSkeleton2"]

@@ -54,6 +54,15 @@ func playAnimation(animID, _args = {}):
 	else:
 		doll2.applyBodyState({})
 	
+	if(_args.has("pcCum") && _args["pcCum"]):
+		#startCumInsideSolo(doll, getCumIntensity(doll2) + getCumIntensity(doll3))
+		if(!(animID in ["tease", "teasebusy"])):
+			startCumInside(doll2, doll)
+		else:
+			startCumPenis(doll)
+	if(_args.has("npcCum") && _args["npcCum"]):
+		startCumPenis(doll2)
+	
 	updateSubAnims()
 	
 	var state_machine = animationTree["parameters/StateMachine/playback"]

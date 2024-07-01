@@ -259,7 +259,7 @@ func _run():
 
 		addButton("Cum inside", "There is no other choice", "stripping_rail_cuminside")
 	if(state == "stripping_rail_cuminside"):
-		playAnimation(StageScene.SexStanding, "inside", {npc="rahi", pc="pc", bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.SexStanding, "inside", {npc="rahi", pc="pc", pcCum=true, npcCum=true, bodyState={exposedCrotch=true,hard=true}, npcBodyState={naked=true}})
 		saynn("Rahi's cunt is pulsating around your dick so hard that it doesn't take long for you to reach your peak too. With one last thrust, you ram your {pc.penis} deep inside Rahi before cumming hard, warm sticky {pc.cum} begins to flood your pet's insides. She lets out a hot moan of pleasure as she feels your seed filling her womb up. The inmates cheer and step closer, watching the action through the window but not daring to step inside.")
 
 		saynn("After Rahi's pussy milks your balls for every last drop, you slowly withdraw from her, a mix of juices and your jizz begins dripping down her thighs.")
@@ -1166,7 +1166,7 @@ func _run():
 
 		addButton("Cum inside", "Breed the kitty", "pstocks_breed_cuminside")
 	if(state == "pstocks_breed_cuminside"):
-		playAnimation(StageScene.StocksSex, "inside", {pc="rahi", npc="pc", bodyState={naked=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.StocksSex, "inside", {pc="rahi", npc="pc", pcCum=true, npcCum=true, bodyState={naked=true}, npcBodyState={exposedCrotch=true, hard=true}})
 		saynn("As you thrust deep into Rahi's soft slick depths, your shaft starts to pulsate with an insatiable need. Rahi's pussy clenches tightly around it, her inner walls eager to receive the impending load..")
 
 		saynn("At some point it becomes too much, another Rahi's orgasm causes her slutty holes to get tighter, causing you to go over the edge too..")

@@ -14,6 +14,7 @@ func getClothingSlot():
 
 func getBuffs():
 	return [
+		buff(Buff.PregnantBellySizeModifierBuff, [-50.0])
 		]
 
 func getTags():

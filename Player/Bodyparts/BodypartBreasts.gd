@@ -93,6 +93,7 @@ func getPickableAttributes():
 		"textButton": "Breast size",
 		"buttonDesc": "Pick the breast size",
 		"options": breastVariants,
+		"default": BreastsSize.C,
 	}
 	return result
 	

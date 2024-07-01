@@ -1,6 +1,7 @@
 extends ItemBase
 
 var coversPenis = true
+var unlocked = false
 
 func _init():
 	id = "PortalPanties"
@@ -49,11 +50,8 @@ func isRestraint():
 	return true
 
 func isImportant():
-	if(isWornByWearer()):
-		var wearer = getWearer()
-		# Static characters are always wearing 'unlocked' portal panties
-		if(!wearer.isPlayer() && !wearer.isDynamicCharacter()):
-			return false
+	if(unlocked):
+		return false
 	return true
 
 func canForceOntoNpc():
@@ -109,11 +107,8 @@ func coversBodyparts():
 		}
 
 func alwaysVisible():
-	if(isWornByWearer()):
-		var wearer = getWearer()
-		# Static characters are always wearing 'unlocked' portal panties
-		if(!wearer.isPlayer() && !wearer.isDynamicCharacter()):
-			return false
+	if(unlocked):
+		return false
 	return true
 
 func getInventoryImage():
@@ -123,6 +118,7 @@ func saveData():
 	var data = .saveData()
 	
 	data["coversPenis"] = coversPenis
+	data["unlocked"] = unlocked
 	
 	return data
 	
@@ -130,3 +126,4 @@ func loadData(data):
 	.loadData(data)
 	
 	coversPenis = SAVE.loadVar(data, "coversPenis", true)
+	unlocked = SAVE.loadVar(data, "unlocked", false)

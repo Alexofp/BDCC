@@ -1,0 +1,209 @@
+[gd_scene load_steps=45 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes2/SexPinnedBehind.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=474]
+animation = "SexPinnedBehindFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=475]
+animation = "SexPinnedBehindInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=476]
+animation = "SexPinnedBehindLick_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=477]
+animation = "SexPinnedBehindStroke_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=478]
+animation = "SexPinnedBehindTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=479]
+animation = "SexPinnedBehind_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=480]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=481]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=482]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=483]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=484]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=485]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=486]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=487]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=488]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=489]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=490]
+states/SexPinnedBehindFast_1-loop/node = SubResource( 474 )
+states/SexPinnedBehindFast_1-loop/position = Vector2( 525, 331 )
+states/SexPinnedBehindInside_1-loop/node = SubResource( 475 )
+states/SexPinnedBehindInside_1-loop/position = Vector2( 525, 147 )
+states/SexPinnedBehindLick_1-loop/node = SubResource( 476 )
+states/SexPinnedBehindLick_1-loop/position = Vector2( 182, 92 )
+states/SexPinnedBehindStroke_1-loop/node = SubResource( 477 )
+states/SexPinnedBehindStroke_1-loop/position = Vector2( 878, 62 )
+states/SexPinnedBehindTease_1-loop/node = SubResource( 478 )
+states/SexPinnedBehindTease_1-loop/position = Vector2( 525, 45 )
+states/SexPinnedBehind_1-loop/node = SubResource( 479 )
+states/SexPinnedBehind_1-loop/position = Vector2( 525, 240 )
+transitions = [ "SexPinnedBehindTease_1-loop", "SexPinnedBehindLick_1-loop", SubResource( 480 ), "SexPinnedBehindLick_1-loop", "SexPinnedBehindTease_1-loop", SubResource( 481 ), "SexPinnedBehindTease_1-loop", "SexPinnedBehindInside_1-loop", SubResource( 482 ), "SexPinnedBehindInside_1-loop", "SexPinnedBehindTease_1-loop", SubResource( 483 ), "SexPinnedBehindTease_1-loop", "SexPinnedBehindStroke_1-loop", SubResource( 484 ), "SexPinnedBehindStroke_1-loop", "SexPinnedBehindTease_1-loop", SubResource( 485 ), "SexPinnedBehindInside_1-loop", "SexPinnedBehind_1-loop", SubResource( 486 ), "SexPinnedBehind_1-loop", "SexPinnedBehindInside_1-loop", SubResource( 487 ), "SexPinnedBehind_1-loop", "SexPinnedBehindFast_1-loop", SubResource( 488 ), "SexPinnedBehindFast_1-loop", "SexPinnedBehind_1-loop", SubResource( 489 ) ]
+start_node = "SexPinnedBehindTease_1-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=491]
+graph_offset = Vector2( -348.69, 38.9555 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 490 )
+nodes/StateMachine/position = Vector2( 120, 80 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=460]
+
+[sub_resource type="AnimationNodeAnimation" id=492]
+animation = "SexPinnedBehindFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=493]
+animation = "SexPinnedBehindInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=494]
+animation = "SexPinnedBehindLick_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=495]
+animation = "SexPinnedBehindStroke_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=496]
+animation = "SexPinnedBehindTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=497]
+animation = "SexPinnedBehind_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=498]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=499]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=500]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=501]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=502]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=503]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=504]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=505]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=506]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=507]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=508]
+states/SexPinnedBehindFast_2-loop/node = SubResource( 492 )
+states/SexPinnedBehindFast_2-loop/position = Vector2( 530, 331 )
+states/SexPinnedBehindInside_2-loop/node = SubResource( 493 )
+states/SexPinnedBehindInside_2-loop/position = Vector2( 530, 156 )
+states/SexPinnedBehindLick_2-loop/node = SubResource( 494 )
+states/SexPinnedBehindLick_2-loop/position = Vector2( 195, 111 )
+states/SexPinnedBehindStroke_2-loop/node = SubResource( 495 )
+states/SexPinnedBehindStroke_2-loop/position = Vector2( 871, 111 )
+states/SexPinnedBehindTease_2-loop/node = SubResource( 496 )
+states/SexPinnedBehindTease_2-loop/position = Vector2( 530, 63 )
+states/SexPinnedBehind_2-loop/node = SubResource( 497 )
+states/SexPinnedBehind_2-loop/position = Vector2( 530, 242 )
+transitions = [ "SexPinnedBehindTease_2-loop", "SexPinnedBehindInside_2-loop", SubResource( 498 ), "SexPinnedBehindInside_2-loop", "SexPinnedBehindTease_2-loop", SubResource( 499 ), "SexPinnedBehindTease_2-loop", "SexPinnedBehindStroke_2-loop", SubResource( 500 ), "SexPinnedBehindStroke_2-loop", "SexPinnedBehindTease_2-loop", SubResource( 501 ), "SexPinnedBehindLick_2-loop", "SexPinnedBehindTease_2-loop", SubResource( 502 ), "SexPinnedBehindTease_2-loop", "SexPinnedBehindLick_2-loop", SubResource( 503 ), "SexPinnedBehindInside_2-loop", "SexPinnedBehind_2-loop", SubResource( 504 ), "SexPinnedBehind_2-loop", "SexPinnedBehindInside_2-loop", SubResource( 505 ), "SexPinnedBehind_2-loop", "SexPinnedBehindFast_2-loop", SubResource( 506 ), "SexPinnedBehindFast_2-loop", "SexPinnedBehind_2-loop", SubResource( 507 ) ]
+start_node = "SexPinnedBehindTease_2-loop"
+graph_offset = Vector2( -131, -28 )
+
+[sub_resource type="AnimationNodeBlendTree" id=509]
+graph_offset = Vector2( -322.532, 74.6842 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 508 )
+nodes/StateMachine/position = Vector2( 160, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=473]
+
+[node name="SexPinnedBehind" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.317465, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Sprite3D2" type="Sprite3D" parent="." index="1"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -2.51906, 4.50998, -2.01436 )
+modulate = Color( 0.572549, 0.572549, 0.572549, 1 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375275, -0.041567, 0 )
+
+[node name="Doll3D2" parent="." index="3" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.375275, -0.041567, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 491 )
+anim_player = NodePath("../Doll3D/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 460 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="5"]
+tree_root = SubResource( 509 )
+anim_player = NodePath("../Doll3D2/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 473 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]
+[editable path="Doll3D2"]
+[editable path="Doll3D2/DollSkeleton"]
+[editable path="Doll3D2/DollSkeleton2"]

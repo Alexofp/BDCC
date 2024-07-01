@@ -26,6 +26,7 @@ enum {
 	ContentEnabled,
 	CanWearStrapon,
 	HasStraponAndCanWear,
+	HasStrapons,
 	IsWearingChastityCage,
 	HasChastityCageInInventory,
 	HasItemID,
@@ -34,6 +35,8 @@ enum {
 	HasPenisPump,
 	NotWearingItem,
 	CanStartSex,
+	HasReachableOrCagedPenisOrReachableVagina,
+	HasItemWithTag,
 }
 
 static func getReasonText(reason):
@@ -85,6 +88,8 @@ static func getReasonText(reason):
 		return "You can't wear strapons"
 	if(reason == HasStraponAndCanWear):
 		return "You don't have any strapons or can't put on one"
+	if(reason == HasStrapons):
+		return "You need a strapon in your inventory to do this"
 	if(reason == IsWearingChastityCage):
 		return "You're not wearing a chastity cage"
 	if(reason == NotCollapsed):
@@ -103,6 +108,10 @@ static func getReasonText(reason):
 		return "You need to get rid of "+GlobalRegistry.getItemRef(args[1]).getVisibleName()
 	if(reason == CanStartSex):
 		return "You can't start sex while you are wearing restraints"
+	if(reason == HasReachableOrCagedPenisOrReachableVagina):
+		return "You need to have a penis or a reachable vagina"
+	if(reason == HasItemWithTag):
+		return "You don't have the required kind of item"
 	return "Error?"
 
 static func check(checks: Array):
@@ -183,6 +192,9 @@ static func check(checks: Array):
 				return args
 			if(!GM.pc.hasStrapons()):
 				return args
+		if(reason == HasStrapons):
+			if(!GM.pc.hasStrapons()):
+				return args
 		if(reason == IsWearingChastityCage):
 			if(!GM.pc.isWearingChastityCage()):
 				return args
@@ -216,6 +228,12 @@ static func check(checks: Array):
 				return NotLegsRestrained
 			if(GM.pc.isOralBlocked()):
 				return NotOralBlocked
+		if(reason == HasReachableOrCagedPenisOrReachableVagina):
+			if(!GM.pc.hasReachablePenis() && !GM.pc.isWearingChastityCage() && !GM.pc.hasReachableVagina()):
+				return reason
+		if(reason == HasItemWithTag):
+			if(GM.pc.getInventory().getItemsWithTag(args[1]).size() <= 0):
+				return args
 			
 	return null
 

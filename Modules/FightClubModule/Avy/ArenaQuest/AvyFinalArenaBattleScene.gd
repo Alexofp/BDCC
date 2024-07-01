@@ -286,7 +286,7 @@ func _run():
 
 		addButton("Harder", "Let that slut feel it", "do_anal_faster")
 	if(state == "do_anal_faster"):
-		playAnimation(StageScene.SexFullNelson, "fast", {pc="pc", npc="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, caged=isCaged}})
+		playAnimation(StageScene.SexFullNelson, "fast", {pc="pc", npc="avy", npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, caged=isCaged}})
 		saynn("That asshole feels incredibly tight, gripping your cock in all the right ways. And you stuffed enough precum into Avy already, meaning you can freely abuse that little fuckhole for your pleasure without holding back.")
 
 		saynn("[say=avy]Ah.. T-this is too much.. S-slow down?.. Nghh-h..[/say]")
@@ -313,7 +313,7 @@ func _run():
 
 		addButton("Cum inside", "There is no other choice", "do_anal_cum")
 	if(state == "do_anal_cum"):
-		playAnimation(StageScene.SexAllFours, "teaseflop", {npc="avy", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, caged=isCaged}})
+		playAnimation(StageScene.SexAllFours, "insideflop", {npc="avy", pc="pc", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, caged=isCaged}})
 		saynn("With a final thrust, you shove your member deep down that hungry hole before the orgasm overwhelms you as well. Your {pc.penis} starts throbbing and coating those soft sensitive walls with a layer of your sticky hot seed.")
 
 		saynn("Avy lets out another moan of pleasure, her toes curl while her dick wastes another load, the buttslut is clenching so hard, your legs are shaking. The crowd loves it though, everyone is cheering for you.")
@@ -397,7 +397,7 @@ func _run():
 
 		addButton("Harder", "Let that slut feel it", "do_anal_strapon_faster")
 	if(state == "do_anal_strapon_faster"):
-		playAnimation(StageScene.SexFullNelson, "fast", {pc="pc", npc="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, caged=isCaged}})
+		playAnimation(StageScene.SexFullNelson, "fast", {pc="pc", npc="avy", npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, caged=isCaged}})
 		saynn("That asshole feels incredibly tight, gripping your fake rubber cock in all the right ways. And Avy's inner walls seem to be quite slick now, meaning you can freely abuse that little fuckhole for your enjoyment without holding back.")
 
 		saynn("[say=avy]Ah.. T-this is too much.. S-slow down?.. Nghh-h..[/say]")
@@ -424,7 +424,7 @@ func _run():
 
 		addButton("Drop her", "Be a little rough with her", "do_anal_strapon_cum")
 	if(state == "do_anal_strapon_cum"):
-		playAnimation(StageScene.SexAllFours, "teaseflop", {npc="avy", pc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, caged=isCaged}})
+		playAnimation(StageScene.SexAllFours, "teaseflop", {npc="avy", pc="pc", npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, caged=isCaged}})
 		saynn("With a final thrust, you shove your strapon deep down that hungry hole for the last time, massaging Avy's prostate. And sure enough, she lets out another moan of pleasure, her toes curl while her dick wastes another load, the buttslut is clenching so hard, her legs are shaking. The crowd loves it though, everyone is cheering for you.")
 
 		saynn("[say=pc]Just a breeding toy..[/say]")
@@ -507,7 +507,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "rim_even_better")
 	if(state == "rim_even_better"):
-		playAnimation(StageScene.SexRimming, "sex", {npc="avy", npcBodyState={naked=true, hard=true, caged=isCaged}, bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexRimming, "sex", {npc="avy", pcCum=true, npcBodyState={naked=true, hard=true, caged=isCaged}, bodyState={naked=true, hard=true}})
 		saynn("Avy hears your command and slows down, instead using her lips to form a tight seal around your sensitive anus flesh and applying suction and pressure to make you feel good. Her tongue is still delving deep inside you, probing the walls of your anal star, teasing and stimulating with careful motions. This mix of sensations makes you tremble with desire, who knew this foxy could be this good at rimming.")
 
 		saynn("[say=pc]F-faster..[/say]")
