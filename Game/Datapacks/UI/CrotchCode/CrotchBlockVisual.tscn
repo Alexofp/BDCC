@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/CrotchBlockVisual.gd" type="Script" id=1]
+
+[node name="CrotchBlock" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 20, 20 )
+size_flags_horizontal = 0
+script = ExtResource( 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1273.0
+margin_bottom = 713.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DragLabel" type="Label" parent="HBoxContainer"]
+margin_right = 15.0
+margin_bottom = 706.0
+size_flags_vertical = 7
+text = "///"
+valign = 1
+
+[node name="TemplateVerticalList" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 19.0
+margin_right = 1266.0
+margin_bottom = 706.0
+size_flags_horizontal = 3
