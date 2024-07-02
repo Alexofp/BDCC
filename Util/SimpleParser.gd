@@ -114,7 +114,7 @@ func getLexems(text: String):
 			pos += 1
 			
 			while pos < textLen:
-				if(Util.asciiletters.has(text[pos]) || Util.digits.has(text[pos]) || text[pos] == "_"):
+				if(Util.asciiletters.has(text[pos]) || Util.digits.has(text[pos]) || text[pos] == "_" || text[pos] == ":"):
 					word += text[pos]
 					pos += 1
 				else:
