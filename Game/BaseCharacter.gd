@@ -1465,7 +1465,7 @@ func getCumInflationLevel():
 	var threshold = 3000.0
 	var tooMuch = max(totalAmount - threshold, 0.0)
 	
-	return clamp(tooMuch / 2000.0, 0.0, 1.0)
+	return clamp(tooMuch / 2000.0, 0.0, 10.0)
 # Doll stuff
 
 func getDollParts() -> Dictionary:
