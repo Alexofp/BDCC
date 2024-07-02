@@ -478,12 +478,27 @@ func loadData(data):
 
 	updateAppearance()
 
+func calculateNpcGeneratedGender():
+	var otherHasPenis = hasPenis()
+	var otherHasVag = hasVagina()
+	var otherHasTits = hasNonFlatBreasts()
+	
+	if(otherHasPenis && otherHasVag):
+		npcGeneratedGender = NpcGender.Herm
+	elif(otherHasPenis && otherHasTits):
+		npcGeneratedGender = NpcGender.Shemale
+	elif(otherHasPenis):
+		npcGeneratedGender = NpcGender.Male
+	elif(otherHasVag && !otherHasTits):
+		npcGeneratedGender = NpcGender.Peachboy
+	else:
+		npcGeneratedGender = NpcGender.Female
+
 func loadFromDatapackCharacter(_datapack:Datapack, _datapackChar:DatapackCharacter):
 	if(_datapack != null):
 		datapackID = _datapack.id
 	npcName = _datapackChar.name
 	npcSmallDescription = _datapackChar.description
-	npcGeneratedGender = _datapackChar.name
 	npcGender = _datapackChar.gender
 	npcPronounsGender = _datapackChar.pronounsGender
 	npcFeminity = _datapackChar.femininity
@@ -608,7 +623,13 @@ func loadFromDatapackCharacter(_datapack:Datapack, _datapackChar:DatapackCharact
 		creditsMax = _datapackChar.lootCreditsMax,
 		customLoot = _datapackChar.lootExtra.duplicate(),
 	}
-
+	
+	if(npcGender == Gender.Male):
+		npcGeneratedGender = NpcGender.Male
+	elif(npcGender == Gender.Female):
+		npcGeneratedGender = NpcGender.Female
+	else:
+		calculateNpcGeneratedGender()
 	updateNonBattleEffects()
 	stamina = getMaxStamina()
 	updateAppearance()
