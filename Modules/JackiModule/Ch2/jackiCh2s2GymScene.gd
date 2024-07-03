@@ -1,4 +1,4 @@
-extends SceneBase
+	extends SceneBase
 
 var anger = 0.0
 var corruption = 0.0
@@ -290,7 +290,7 @@ func _run():
 
 		addButton("Cum", "Feels too good", "perv_makehersuckass_cum")
 	if(state == "perv_makehersuckass_cum"):
-		playAnimation(StageScene.SexRimming, "sex", {npc="jacki", pc="pc", pcCum=true, bodyState={exposedCrotch=true,hard=true}})
+		playAnimation(StageScene.SexRimming, "sex", {npc="jacki", pc="pc", bodyState={exposedCrotch=true,hard=true}})
 		saynn("You don't even have to encourage her anymore, Jacki is treating your ass so well.. that you can't hold back anymore..")
 
 		if (GM.pc.isWearingChastityCage()):
@@ -432,7 +432,8 @@ func _run():
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "gift_apple"):
 		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
-		saynn("You offer Jacki an apple as a gesture of good will.")
+#lol. - ace
+		saynn("You offer Jacki an apple in this trying time.")
 
 		if (anger > 0.0):
 			saynn("[say=jacki]What is this?[/say]")
@@ -459,6 +460,9 @@ func _run():
 			saynn("[say=pc]Yeah. Vitamins for a sporty wolfie.[/say]")
 
 			saynn("You hand her the apple and watch her rub it against the cloth before taking a bite with her sharp claws. And then another. Some juices flowing down her maw.")
+#behold, the most tiny little change ever - ace
+			if (getCharacter("jacki").isVisiblyPregnant()):
+				saynn("[say=jacki]I've been so hungry lately.[/say]")
 
 			saynn("[say=jacki]Thankies![/say]")
 
@@ -658,7 +662,7 @@ func _run():
 		addButtonWithChecks("Double creds", "Give her twice as much credits and see what she will do", "gift_creds_hj_double", [], [[ButtonChecks.HasCredits, 10]])
 		addButton("Just cum", "Five creds is enough", "gift_creds_hj_cum")
 	if(state == "gift_creds_hj_cum"):
-		playAnimation(StageScene.SexHandjob, "tease", {pc="pc", npc="jacki", pcCum=true, bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexHandjob, "tease", {pc="pc", npc="jacki", bodyState={naked=true, hard=true}})
 		saynn("You decide not to sweeten the deal, the girl is receiving enough already. But you also decide not to warn her.")
 
 		saynn("And so, suddenly, strings of thick {pc.cum} get pushed out of your {pc.penis} as your orgasm takes over. Jacki gasps as she fails to dodge the first few, causing her to receive some onto her muzzle and hair.")
@@ -693,7 +697,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "gift_creds_hj_double"):
-		playAnimation(StageScene.SexHandjob, "tease", {pc="pc", npc="jacki", pcCum=true, bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexHandjob, "tease", {pc="pc", npc="jacki", bodyState={naked=true, hard=true}})
 		saynn("Everything has a price. You flash Jacki the second chip of the same value. And she seems to understand everything without you saying anything.")
 
 		saynn("Why? Because she positions herself right in front of your cock and raises her chin high while closing her eyes. All the while her paw keeps stroking you more and more.. Until the orgasm takes over.")
@@ -793,6 +797,11 @@ func _run():
 			saynn("Not yet she isn't.")
 
 			addButton("Continue", "See what happens next", "endthescene")
+#ACEPREGEXPAC - Jacki has preg descriptors
+#good lord there's a buncha stuff in here, Jacki's stuff might take a minute
+#at least it makes packing the mod together more simple
+#for the "look at Jacki do yoga" scenes watch/perv, you can only see 2 scenes in perv, and watch allows for all of them, so I pick this one to preg-ify
+#
 	if(state == "kind_watch"):
 		saynn("You ask Jacki if you can just watch her do yoga.")
 
@@ -803,11 +812,11 @@ func _run():
 
 			if (RNG.chance(50)):
 				playAnimation(StageScene.Yoga, "camel", {pc="jacki"})
-				saynn("The last one interests you the most. Her lithe body gracefully arches backwards, her paws reaching for her legs. The way she stretches is quite captivating.")
+				saynn("The last one interests you the most. Her lithe body gracefully arches backwards, her paws reaching for her legs. The way she stretches is quite captivating."+str(" This pose must be quite hard having to carry around a pregnancy but Jacki seems to be fine with it." if getCharacter("jacki").isVisiblyPregnant() else "")+"")
 
 			else:
 				playAnimation(StageScene.Yoga, "warrior", {pc="jacki", bodyState={underwear=hasUnderwear}})
-				saynn("The last one interests you the most. Her lithe body gracefully arches backwards, her paws reaching high up. The way she stretches is quite captivating.")
+				saynn("The last one interests you the most. Her lithe body gracefully arches backwards, her paws reaching high up"+str(" stumbling a bit from trying to keep balance with her pregnancy." if getCharacter("jacki").isVisiblyPregnant() else "")+"The way she stretches is quite captivating.")
 
 			saynn("[say=pc]Oh, I think you're pretty good.[/say]")
 
@@ -828,7 +837,7 @@ func _run():
 
 			if (RNG.chance(50)):
 				playAnimation(StageScene.Yoga, "dog", {pc="jacki"})
-				saynn("This time she decides to put the most focus on the pose called 'downward-facing dog'. Her hips rise high into the air while her hands are pressed firmly into the mat. She maintains this pose, the curves of her fit butt full on display, while gazing towards the ground.")
+				saynn("This time she decides to put the most focus on the pose called 'downward-facing dog'. Her hips rise high into the air"+str(", rounded belly tucked between her legs," if getCharacter("jacki").isVisiblyPregnant() else "")+" while her hands are pressed firmly into the mat. She maintains this pose, the curves of her fit butt full on display, while gazing towards the ground.")
 
 				saynn("[say=pc]Very nice.[/say]")
 
@@ -840,6 +849,9 @@ func _run():
 				playAnimation(StageScene.Yoga, "cobra", {pc="jacki"})
 				saynn("This time she decides to put the most focus on the pose called cobra. She is lying on the floor, her paws are pressed firmly into the mat as she proceeds to arch her back as much as she can. She maintains this pose, the curves of her fit butt and modest breasts are all on display.")
 
+				if(getCharacter("jacki").isVisiblyPregnant()):
+					saynn("Jacki has to squish her rounded out belly into the mat in order to reach the pose and giving her a bit of trouble. Softly moaning as she tries to arch her back a bit more than usual.")
+				
 				saynn("[say=pc]Very nice.[/say]")
 
 				saynn("[say=jacki]Thanks.. ah..[/say]")
@@ -864,10 +876,15 @@ func _run():
 				saynn("Jacki stands on all fours and then bends her back low while sticking her butt provocatively, emphasizing the curves of her rear. Even her fluffy tail moves out of the way to let you see her pinched clothing hugging her crotch tightly.")
 
 				saynn("After that she bends her back in the other direction, arching it instead, completing the cat-cow pose. Little moans occasionally escape from her as she moves from one pose to another.")
+				
+				if(getCharacter("jacki").isVisiblyPregnant()):
+					saynn("As she stretches and flexes her back Jacki puts one of her paws on her belly, holding it as she continues through her routine. Unsure how that helps but looks like it makes Jacki happy.")
 
 			else:
 				playAnimation(StageScene.Yoga, "bridge", {pc="jacki", bodyState={underwear=hasUnderwear}})
 				saynn("Jacki lies on her back before using her hind paws to raise her butt provocatively high. She arches her back as much as she can, her pose emphasizing the curves of her rear. Little moans occasionally escape from her as she tries to hold it.")
+				if(getCharacter("jacki").isVisiblyPregnant()):
+					saynn("As you watch you notice that this post quite prominently displays that Jacki is carrying a litter. Not sure if she knows but she continues regardless.")
 
 			saynn("[say=jacki]Always makes me feel like I'm in heat..[/say]")
 
@@ -965,7 +982,26 @@ func _run():
 			saynn("[say=pc]You mounting me helped, thank you~.[/say]")
 
 			saynn("That's when Jacki's face goes fully red.")
+		#PREGEXPACNOTE - minor changes to 'i need help with yoga' scene, probably could add more differences
+		elif (getCharacter("jacki").isVisiblyPregnant()):
+			saynn("Jacki huffs as she guides your movement, her form pushing against yours as she helps you get into the 'cow' pose. The friction of your bodies rubbing against each other creates a little intimate feeling.. A feeling that both of you seem to welcome.")
 
+			saynn("[say=jacki]Very good.. wruff..[/say]")
+
+			saynn("Even though this is probably looking quite.. kinky.. and pretty heavy actually.. from the side.. Jacki continues to guide you into the right pose with her own body. Pressing down into your back with her belly.")
+
+			saynn("[say=jacki]Sometimes a good mounting can fix everything..[/say]")
+
+			saynn("She isn't even trying to hide it, is she. You can feel her subtly humping you, her pregnant body grinding against your back and her crotch spreading the lewd scent coming from her constrained desperate flower to you.")
+
+			saynn("[say=jacki]There we go..[/say]")
+
+			saynn("Both of you pant softly while remaining intertwined in this.. weird kind of embrace.. for a while longer.")
+
+			saynn("[say=pc]Thank you, wolfie.[/say]")
+
+			saynn("She licks your ear and gets off you.")
+			
 		else:
 			saynn("Jacki guides your movement, her form brushing against yours as she helps you get into the 'cow' pose. The friction of your bodies rubbing against each other creates a little intimate feeling.. A feeling that both of you seem to welcome.")
 
@@ -994,7 +1030,7 @@ func _run():
 
 		saynn("[say=jacki]Oh.. That actually sounds kinda nice.[/say]")
 
-		saynn("There aren't really any spots for that.. so you just help her lie down on the mat. Then you kneel nearby and put your hands on her back.")
+		saynn("There aren't really any spots for that.. so you just help her lie down on the mat."+str(" It's a bit awkward with Jacki's pregnancy but you manage to help get her in a good position." if getCharacter("jacki").isVisiblyPregnant() else "")+" Then you kneel nearby and put your hands on her back.")
 
 		saynn("You begin simple, kneading the tension away from her shoulders and then doing the same to her shoulder plates and the back muscles.")
 
@@ -1019,10 +1055,12 @@ func _run():
 		saynn("[say=pc]Did you like it, wolfie?[/say]")
 
 		saynn("[say=jacki]Yeah.. that feels really good..[/say]")
-
 		addButton("Continue", "That was lewd", "endthescene")
 		addButtonWithChecks("Forced anal fuck", "Betray Jacki and have have rough sex with her right there", "kind_massage_forcedfuck", [], [ButtonChecks.HasReachablePenis])
 		addButton("Forced fisting", "Betray Jacki and fist her ass right there", "kind_massage_forcedfisting")
+#PREGEXPACNOTE - Jacki preg fuck in massage
+		if (getFlag("JackiModule.Jacki_ch2GotPussyFreed")) && (getCharacter("jacki").isVisiblyPregnant()):
+			addDisabledButton("Pregnant Sex", "[Ace Preg Expac] Soon. -Ace")
 	if(state == "kind_massage_forcedfuck"):
 		playAnimation(StageScene.SexBehind, "fast", {npc="jacki", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("Since the wolfie is not suspecting anything.. Now is the perfect time to strike.")
@@ -1059,7 +1097,7 @@ func _run():
 
 		addButton("Cum inside", "Give that slut what she deserves", "kind_massage_forcedfuck_cum")
 	if(state == "kind_massage_forcedfuck_cum"):
-		playAnimation(StageScene.SexBehind, "inside", {npc="jacki", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexBehind, "inside", {npc="jacki", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("After a few last rough thrusts, that clenching ass easily pushes you over the edge. Jacki's body quivers under you as you shove your throbbing {pc.penis} deep inside and start flooding her guts full of your sticky {pc.cum}.")
 
 		saynn("When the orgasm is over, you pull out and stop pinning the wolfie. And she is just.. sobbing.. while her used {jackiButt} asshole is leaking your seed. All the accumulated trust.. shattered.. her body bruised.")
@@ -1111,7 +1149,7 @@ func _run():
 
 		addButton("Forced orgasm", "See what happens next", "kind_massage_forcedfisting_cum")
 	if(state == "kind_massage_forcedfisting_cum"):
-		playAnimation(StageScene.SexFisting, "tease", {npc="jacki", npcCum=true, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexFisting, "tease", {npc="jacki", npcBodyState={exposedCrotch=true}})
 		saynn("Suddenly, Jacki starts arching her back and crying out loudly as her stretched asshole is pulsing around your hand. You're not sure if this is an orgasm.. or something caused by you overstimulating her.. but it's sure a welcomed addition.")
 
 		saynn("When that is over, you pull your fist out and stop pinning the wolfie. While she is just.. sobbing.. her {jackiButt} asshole is struggling to close completely. All the accumulated trust.. shattered.. her body bruised.")
@@ -1141,7 +1179,10 @@ func _run():
 		playAnimation(StageScene.Duo, "jog", {npc="jacki", npcAction="jog", flipNPC=true})
 		saynn("And so you two begin jogging around the only green area of the prison. The air here is nice and fresh.")
 
-		saynn("Jacki leads the way so you just jog behind her. You run past some rocks and even trees.")
+		if(getCharacter("jacki").isVisiblyPregnant()):
+			saynn("Jacki is a bit slower than her regular self. The both of you jogging next to each other as the repetitive scenery of the yard passes around the two of you.")
+		else:
+			saynn("Jacki leads the way so you just jog behind her. You run past some rocks and even trees.")
 
 		saynn("The more the wolfie jogs, the more you begin to notice something. She is panting way more than you would expect her to do. The fabric of her clothes rubbing against her sensitive spots might be the reason..")
 
@@ -1518,6 +1559,9 @@ func _run():
 
 		addButton("Nod", "Enough is enough", "jog_afterchat_nod")
 		addButton("Shower", "Offer her to go take a refreshing shower", "jog_afterchat_shower")
+#ACEPREGEXPAC - remember to write shower sex
+		if (getFlag("JackiModule.Jacki_ch2GotPussyFreed")):
+			addDisabledButton("Shower Breeding", "[Ace Preg Expac] Soon. -Ace")
 		addButton("Ask to jog more", "Ask to jog even more together", "jog_afterchat_askmore")
 		if (lust >= 0.4):
 			addButton("Lick her", "Try to make Jacki cum by licking and rubbing her stiched up pussy", "jog_try_piercings")
@@ -1669,7 +1713,8 @@ func _run():
 			saynn("[say=jacki]Well, either way, thank you! That helped a lot! I'm gonna go now though.[/say]")
 
 			saynn("You nod and let Jacki jog away.")
-
+#PREGEXPACNOTE - Yknow, I thought adding pregnancy to a character whose owner isnt really into it would be bad, but after reading the watersports scenes, I realized nothing I could add would be worse.
+#I know watersports mainly gets it's kick from humiliation, but I still really dont get why. -ace
 		elif (plasticBottleFluidID == "Piss"):
 			if (waterLevel <= 2):
 				saynn("You decided to be very naughty today and gave Jacki a bottle of piss..")
@@ -1735,16 +1780,6 @@ func _run():
 
 			saynn("You nod and let Jacki jog away.")
 
-		elif (plasticBottleFluidID == "Water"):
-			saynn("Jacki empties half the bottle and pours the rest on her face.")
-
-			saynn("[say=jacki]Ah.. that feels good..[/say]")
-
-			saynn("You smile and grab the bottle back.")
-
-			saynn("[say=jacki]Thank you! That helped a lot! I'm gonna go now though.[/say]")
-
-			saynn("You nod and let Jacki jog away.")
 		elif (plasticBottleFluidID == "Cum"):
 			saynn("Thick sticky cum starts flowing down Jacki's tongue as she gulps it all up.. She understands what it is way too late..")
 
@@ -1949,7 +1984,7 @@ func _run():
 		addButton("Cum inside", "Breed Jacki", "jog_breed_fuck_cuminside")
 		addButton("Pull out", "Pull your cock out just before you cum", "jog_breed_fuck_pullout")
 	if(state == "jog_breed_fuck_cuminside"):
-		playAnimation(StageScene.SexAllFours, "inside", {npc="jacki", pcCum=true, npcCum=true, bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexAllFours, "inside", {npc="jacki", bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("You commit to it, shoving your cock as deep as that wolfie's pussy allows, breaking into her womb before cumming inside, your {pc.cum} stuffing her full to the brim. Your hands keep tugging on her hair and tail, making Jacki feel pain too as you breed her.")
 
 		saynn("[say=jacki]Ngh-h-h! I'm such a whore![/say]")
@@ -1960,7 +1995,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "jog_breed_fuck_pullout"):
-		playAnimation(StageScene.SexAllFours, "tease", {npc="jacki", pcCum=true, bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexAllFours, "tease", {npc="jacki", bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("You decide against breeding that wolfie and pull out just before your cock starts throbbing and covering that ass with strings of your thick {pc.cum}. One of your hands keep tugging on her hair, making Jacki feel pain too as you mark her.")
 
 		saynn("[say=jacki]Ngh-h-h! I'm such a cum whore![/say]")
@@ -2056,7 +2091,7 @@ func _run():
 		addButton("Cum inside", "Stuff that asshole", "jog_anal_fuck_cuminside")
 		addButton("Pull out", "Make a mess on Jacki's back", "jog_anal_fuck_pullout")
 	if(state == "jog_anal_fuck_cuminside"):
-		playAnimation(StageScene.SexStanding, "inside", {npc="jacki", pcCum=true, npcCum=true, bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexStanding, "inside", {npc="jacki", bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("No reason to pull gives you a good reason to do the opposite. As your powerful thrusts continue, Jacki's body starts to tremble with overwhelming pleasure. She cums just from having her ass railed.. while you cum from her inner walls stimulating your shaft to the point of no return..")
 
 		saynn("[say=jacki]Yes-s!.. Cum inside that whore's ass![/say]")
@@ -2077,7 +2112,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "jog_anal_fuck_pullout"):
-		playAnimation(StageScene.SexStanding, "tease", {npc="jacki", pcCum=true, npcCum=true, bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexStanding, "tease", {npc="jacki", bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("No reason to pull out.. but you don't need a good reason. As your powerful thrusts continue, Jacki's body starts to tremble with overwhelming pleasure. She cums just from having her ass railed.. while you pull your cock out just before her clenching tailhole brings you over the edge.")
 
 		saynn("[say=jacki]Oh fuck-k..[/say]")
@@ -2186,7 +2221,7 @@ func _run():
 
 		addButton("Make her cum", "Stuff that asshole", "jog_anal_strapon_cum")
 	if(state == "jog_anal_strapon_cum"):
-		playAnimation(StageScene.SexStanding, "inside", {npc="jacki", pcCum=true, npcCum=true, bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexStanding, "inside", {npc="jacki", bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("No reason to pull gives you a good reason to do the opposite. As your powerful thrusts continue, Jacki's body starts to tremble with overwhelming pleasure. She cums just from having her ass railed.. while you cum from her inner walls stimulating your shaft to the point of no return..")
 
 		saynn("[say=jacki]Yes-s!.. Cum inside that whore's ass![/say]")
@@ -2912,7 +2947,7 @@ func _run():
 		addButton("Cum inside", "Stuff that ass", "do_grab_anal_cuminside")
 		addButton("Pull out", "Rather not stuff that ass", "do_grab_anal_pullout")
 	if(state == "do_grab_anal_cuminside"):
-		playAnimation(StageScene.SexBehind, "inside", {npc="jacki", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexBehind, "inside", {npc="jacki", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("Fuck it. You ram your cock deep into that ass and let her clenching anal ring push you over the hill. Grunts and growls escape from you.. as you stuff your thick load into Jacki's ass, painting her guts white.")
 
 		saynn("She is still whining and sobbing softly.. You give her rear a loud smack, making her clench more.")
@@ -2937,7 +2972,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "do_grab_anal_pullout"):
-		playAnimation(StageScene.SexBehind, "tease", {npc="jacki", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexBehind, "tease", {npc="jacki", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("You pull your cock out at the last possible moment before your shaft starts throbbing and unleashing its load all over Jacki's fluffy ass.")
 
 		saynn("She is still whining and sobbing softly.. You give her rear a loud smack, making her clench more.")
@@ -3258,7 +3293,7 @@ func _run():
 
 		addButton("Cum inside", "Breed Jacki's pisshole", "do_grab_urethra_fuck_cum")
 	if(state == "do_grab_urethra_fuck_cum"):
-		playAnimation(StageScene.Choking, "inside", {npc="jacki", pcCum=true, npcCum=true, bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.Choking, "inside", {npc="jacki", bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("You welcome that orgasm and shove your cock as deep as that pisshole allows. Moans leave your mouth as your throbbing member starts stuffing Jacki's bladder full of your thick virile {pc.cum}..")
 
 		saynn("[say=jacki]Nh-h-h!.. M-my.. p-pisshole..[/say]")
@@ -3696,7 +3731,7 @@ func _run():
 		addButton("Inside", "Cum inside Jacki's womb", "do_enslave_fuck_cuminside")
 		addButton("Pull out", "Cum all over her butt instead", "do_enslave_fuck_pullout")
 	if(state == "do_enslave_fuck_cuminside"):
-		playAnimation(StageScene.HangingSex, "inside", {pc="jacki", npc="pc", pcCum=true, npcCum=true, npcBodyState={naked=true, hard=true}, bodyState={naked=true}})
+		playAnimation(StageScene.HangingSex, "inside", {pc="jacki", npc="pc", npcBodyState={naked=true, hard=true}, bodyState={naked=true}})
 		saynn("Why hold back now? Jacki is yours.")
 
 		saynn("Her pussy is basically milking your cock already anyway, pushing you over the edge. You welcome that, shoving your dick deep inside, breaking into Jacki's womb.")
@@ -3717,7 +3752,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "do_enslave_fuck_afterfuck")
 	if(state == "do_enslave_fuck_pullout"):
-		playAnimation(StageScene.HangingSex, "tease", {pc="jacki", npc="pc", pcCum=true, npcCum=true, npcBodyState={naked=true, hard=true}, bodyState={naked=true}})
+		playAnimation(StageScene.HangingSex, "tease", {pc="jacki", npc="pc", npcBodyState={naked=true, hard=true}, bodyState={naked=true}})
 		saynn("There is no need to breed her. A big belly will only ruin her slim curves.")
 
 		saynn("Her pussy is basically milking your cock already anyway, pushing you over the edge. You catch that moment and pull moments before your member starts to throb and shoot thick {pc.cum} all over that fluffy ass!")
