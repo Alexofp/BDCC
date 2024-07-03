@@ -110,7 +110,12 @@ func _run():
 		
 
 	if(state == "be_watched"):
-		saynn("You step under the shower head and proceed to wash yourself. Hair, face, shoulders, {pc.breasts}, your {pc.masc} body. You can’t cover yourself forever so Eliza catches a few glimpses of your privates.")
+#ACEOREGEXPAC - Experiments Shower has a few lines for being heavily pregnant
+		if(GM.pc.isHeavilyPregnant()):
+			saynn("You step under the shower head and proceed to wash yourself. Hair, face, shoulders, {pc.breasts}, your {pc.masc} body. You can’t cover yourself forever so Eliza catches a few glimpses of your privates.")
+			saynn("With how heavy and burdensome your pregnancy is, you have to really give yourself a stretch and rub down over your belly. It's fine, It's not like you can't do it, just takes longer, but Eliza's gaze does remain firmly on your strained midriff as you work.")
+		else:
+			saynn("You step under the shower head and proceed to wash yourself. Hair, face, shoulders, {pc.breasts}, your {pc.masc} body. You can’t cover yourself forever so Eliza catches a few glimpses of your privates.")
 
 		addButton("Clean inside", "Wash out anything you have inside your holes", "clean_inside1")
 		addButton("Done", "You’re finished showering", "done1")
@@ -132,25 +137,25 @@ func _run():
 		# (scene end)
 		addButton("Continue", "You feel fresh", "endthescene")
 		
-
+#ACEPREGEXPAC - experiments shower lines for being heavily pregnant
 	if(state == "show"):
 		saynn("You notice Eliza staring and decide to do a little performance for her, you get under the shower head and start with slowly swaying your {pc.masc} hips to the sides. Your palms capture some water and then slide along your {pc.thick} body, going over your {pc.breasts} and then giving your butt a little smack. You notice Eliza raising her brow.")
 
 		# (if has pussy and cock)
 		if(GM.pc.hasVagina() && GM.pc.hasPenis()):
-			saynn("You do a bold move and bend forward, spreading your legs and offering Eliza a good view on your {pc.analStretch} anal ring, {pc.pussyStretch} pussy and a {pc.cock}, the full package!")
+			saynn("You do a bold move and bend forward, spreading your legs "+str("showing the underside of your heavy pregnancy between your legs" if GM.pc.isHeavilyPregnant() else "")+"and offering Eliza a good view on your {pc.analStretch} anal ring, {pc.pussyStretch} pussy and a {pc.cock}, the full package!")
 
 		# (if has just pussy)
 		elif(GM.pc.hasVagina()):
-			saynn("You do a bold move and bend forward, spreading your legs and offering Eliza a good view on your {pc.analStretch} anal ring and {pc.pussyStretch} pussy, all your girly bits!")
+			saynn("You do a bold move and bend forward, spreading your legs "+str("showing the underside of your heavy pregnancy between your legs" if GM.pc.isHeavilyPregnant() else "")+"and offering Eliza a good view on your {pc.analStretch} anal ring and {pc.pussyStretch} pussy, all your girly bits!")
 
 		# (if just cock)
 		elif(GM.pc.hasPenis()):
-			saynn("You do a bold move and bend forward, spreading your legs and offering Eliza a good view on your {pc.analStretch} anal ring and a {pc.cock}, all your bits!")
+			saynn("You do a bold move and bend forward, spreading your legs "+str("showing the underside of your heavy pregnancy between your legs" if GM.pc.isHeavilyPregnant() else "")+"and offering Eliza a good view on your {pc.analStretch} anal ring and a {pc.cock}, all your bits!")
 
 		# (else)
 		else:
-			saynn("You do a bold move and bend forward, spreading your legs and offering Eliza a good view on your {pc.analStretch} anal ring, all your privates!")
+			saynn("You do a bold move and bend forward, spreading your legs"+str("showing the underside of your heavy pregnancy between your legs" if GM.pc.isHeavilyPregnant() else "")+" and offering Eliza a good view on your {pc.analStretch} anal ring, all your privates!")
 
 		saynn("Eliza seems to be quite shocked, you look behind and see her blushing. You let out a soft chuckle and sway your {pc.thick} butt more for her while you pretend to clean yourself, water drips down your back.")
 
