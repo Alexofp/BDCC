@@ -2006,7 +2006,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "jog_breed_fuck_pullout"):
-		playAnimation(StageScene.SexAllFours, "tease", {npc="jacki", bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.SexAllFours, "tease", {npc="jacki", pcCum=true, bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("You decide against breeding that wolfie and pull out just before your cock starts throbbing and covering that ass with strings of your thick {pc.cum}. One of your hands keep tugging on her hair, making Jacki feel pain too as you mark her.")
 
 		saynn("[say=jacki]Ngh-h-h! I'm such a cum whore![/say]")
