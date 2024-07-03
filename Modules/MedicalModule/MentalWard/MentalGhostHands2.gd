@@ -129,7 +129,7 @@ func _run():
 		addButton("Mouth", "Take the strapon down your throat", "mouth")
 		addButtonWithChecks("Pussy", "Take the strapon down your sex", "pussy", [], [ButtonChecks.HasReachableVagina])
 		addButton("Ass", "Take the strapon down your butt", "ass")
-
+#ACEPREGEXPAC - Eliza ghost hands 2nd scene gets additional lines
 
 	if(state == "mouth"):
 		saynn("[say=pc]Uh.. In my mouth?[/say]")
@@ -166,11 +166,21 @@ func _run():
 
 		saynn("[say=eliza]Oh yeah? You wanna be fucked by a ghost so much~?[/say]")
 
-		saynn("You look down between your legs and see the tip of the transparent canine cock grinding against your slit. But you don’t get to do that for very long, a ghost paw grabs your hair and pulls back on it while the second one directs the cock directly towards your {pc.pussyStretch} pussy hole followed by a sudden thrust. Your petals get forced spread, your pussy gets penetrated by the cock as you let out a loud moan and spread your legs more for that cock instinctively.")
+		if(GM.pc.isHeavilyPregnant()):
+			saynn("You look down only to be greeted with the top of your own gravid midsection, the knot of a transparent canine cock felt between your thighs right against your vagina. You see one of the ghost paws pat the side of your strained tummy rubbing it's way across and around it and getting a grip to push you back onto the tip of the canine cock while the other goes for your hair.") 
+			
+			saynn("Your {pc.pussyStretch} petals gets penetrated by a sudden thrust as you let out a loud moan and spread your legs more for that cock instinctively.")
+
+		elif(GM.pc.isVisiblyPregnant()):
+			saynn("You look down between your legs and see the tip of the transparent canine cock stick out from just above the round curve of your belly as it presses.")
+			saynn("But you don’t get to do that for very long, a ghost paw grabs your hair and pulls back on it while the second one directs the cock directly towards your {pc.pussyStretch} pussy hole followed by a sudden thrust. Your petals get forced spread, your pussy gets penetrated by the cock as you let out a loud moan and spread your legs more for that cock instinctively.")
+
+		else:
+			saynn("You look down between your legs and see the tip of the transparent canine cock grinding against your slit. But you don’t get to do that for very long, a ghost paw grabs your hair and pulls back on it while the second one directs the cock directly towards your {pc.pussyStretch} pussy hole followed by a sudden thrust. Your petals get forced spread, your pussy gets penetrated by the cock as you let out a loud moan and spread your legs more for that cock instinctively.")
 
 		saynn("[say=eliza]Yeah, your body tells me everything~[/say]")
 
-		saynn("The paws let go of the hair and instead land on your {pc.breasts}, giving them a slight massage while the cock starts exploring and stretching your insides. You rest your face against the cold wall while the cock hammers at your pleasure point and tries to break into the womb. Your slit leaks juices all over it, coating the shaft like lube. But very quickly, your inner walls begin to clench around it, showing that you are close and also making Eliza moan from pleasure too as the other end of her strapon shifts inside her.")
+		saynn("The paws let go of the hair and instead land on your {pc.breasts}, giving them a slight massage "+str("giving little streams of milk from your nipples" if GM.pc.canBeMilked() else "")+" while the cock starts exploring and stretching your insides. You rest your face against the cold wall while the cock hammers at your pleasure point and tries to break into the womb. Your slit leaks juices all over it, coating the shaft like lube. But very quickly, your inner walls begin to clench around it, showing that you are close and also making Eliza moan from pleasure too as the other end of her strapon shifts inside her.")
 
 		addButton("Cum!", "You gonna cum", "cum!")
 
@@ -203,11 +213,21 @@ func _run():
 
 		saynn("[say=eliza]Oh yeah? You wanna be fucked by a ghost so much~?[/say]")
 
-		saynn("You look down between your legs and see the tip of the transparent canine cock sliding between your thighs. But you don’t get to do that for very long, a ghost paw grabs your hair and pulls back on it while the second one directs the cock directly towards your tailhole followed by a sudden thrust. Your {pc.analStretch} anus gets penetrated by the cock as you let out a loud moan and spread your legs more for that cock instinctively.")
+		if(GM.pc.isHeavilyPregnant()):
+			saynn("You look down only to be greeted with the top of your own gravid midsection, the knot of a transparent canine cock felt between your thighs.")
+			saynn("You see one of the ghost paws pat the side of your strained tummy, rubbing it's way across and around it and getting a grip to push you back onto the canine cock, while the other goes for your hair.")
+			saynn("Your {pc.analStretch} anus gets penetrated by a sudden thrust as you let out a loud moan and spread your legs more for that cock instinctively.")
+
+		elif(GM.pc.isVisiblyPregnant()):
+			saynn("You look down between your legs and see the tip of the transparent canine cock stick out from just above the round curve of your belly as it slides between your thighs.")
+			saynn("But you don’t get to do that for very long, a ghost paw grabs your hair and pulls back on it while the second one directs the cock directly towards your tailhole followed by a sudden thrust. Your {pc.analStretch} anus gets penetrated by the cock as you let out a loud moan and spread your legs more for that cock instinctively.")
+
+		else:
+			saynn("You look down between your legs and see the tip of the transparent canine cock sliding between your thighs. But you don’t get to do that for very long, a ghost paw grabs your hair and pulls back on it while the second one directs the cock directly towards your tailhole followed by a sudden thrust. Your {pc.analStretch} anus gets penetrated by the cock as you let out a loud moan and spread your legs more for that cock instinctively.")
 
 		saynn("[say=eliza]Yeah, your body tells me everything~[/say]")
 
-		saynn("The paws let go of the hair and instead land on your {pc.breasts}, giving them a slight massage while the cock starts exploring and stretching your insides. You rest your face against the cold wall while the cock hammers at your pleasure point and tries to slide deeper each time. The shaft is prelubed which allows it to fuck you nice and fast. But very quickly, your inner walls begin to clench around it, showing that you are close and also making Eliza moan from pleasure too as the other end of her strapon shifts inside her.")
+		saynn("The paws let go of the hair and instead land on your {pc.breasts}, giving them a slight massage "+str("giving little streams of milk from your nipples" if GM.pc.canBeMilked() else "")+"while the cock starts exploring and stretching your insides. You rest your face against the cold wall while the cock hammers at your pleasure point and tries to slide deeper each time. The shaft is prelubed which allows it to fuck you nice and fast. But very quickly, your inner walls begin to clench around it, showing that you are close and also making Eliza moan from pleasure too as the other end of her strapon shifts inside her.")
 
 		addButton("Cum!", "You gonna cum", "cum!1")
 
