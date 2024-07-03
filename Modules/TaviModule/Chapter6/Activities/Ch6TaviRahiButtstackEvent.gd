@@ -11,8 +11,9 @@ func react(_triggerID, _args):
 		return false
 	if(getModule("TaviModule").getSkillScore("taviSkillPetplay") < 7 || getModule("RahiModule").getSkillScore("rahiSkillPetplay") < 15):
 		return false
-	if(getCharacter("tavi").isVisiblyPregnant() || getCharacter("rahi").isVisiblyPregnant()):
-		return false
+	#ACEPREGEXPAC = Tavi/Rahi Buttstack scene can happen if either characters are pregnant
+#	if(getCharacter("tavi").isVisiblyPregnant() || getCharacter("rahi").isVisiblyPregnant()):
+#		return false
 	if(GM.pc.hasBoundArms() || GM.pc.hasBoundLegs() || GM.pc.hasBlockedHands() || GM.pc.isBlindfolded() || GM.pc.isGagged()):
 		return false
 	
