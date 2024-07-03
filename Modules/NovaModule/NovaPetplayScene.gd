@@ -402,6 +402,7 @@ func _run():
 	if(state == "outside"):
 		playAnimation(StageScene.SexOral, "tease", {
 			pc="nova",npc="pc",
+			pcCum=true,
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={naked=true,hard=true, leashedBy="nova"},
 		})
@@ -502,7 +503,8 @@ func _run():
 
 	if(state == "vaginalcum"):
 		playAnimation(StageScene.SexAllFours, "fast", {
-			pc="nova", npc="pc", 
+			pc="nova", npc="pc",
+			pcCum=true, npcCum=true,
 			bodyState={exposedCrotch=true,hard=true,condom=usedCondom},
 			npcBodyState={naked=true,hard=true, leashedBy="nova"},
 		})
@@ -719,6 +721,7 @@ func _run():
 	if(state == "anal_get_knotted"):
 		playAnimation(StageScene.SexAllFours, "fast", {
 			pc="nova", npc="pc", 
+			pcCum=true, npcCum=true,
 			bodyState={exposedCrotch=true,hard=true,},
 			npcBodyState={naked=true,hard=true, leashedBy="nova"},
 		})
