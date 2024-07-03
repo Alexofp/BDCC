@@ -5,11 +5,14 @@ var printSlot := CrotchSlotVar.new()
 func _init():
 	id = "PrintBlock"
 
+func getType():
+	return CrotchBlocks.CALL
+
 func setBlock(theBlock):
 	printSlot.setBlock(theBlock)
 
-func execute():
-	print(str(printSlot.getValue()))
+func execute(_contex:CodeContex):
+	_contex.doPrint(str(printSlot.getValue(_contex)))
 
 func getTemplate():
 	return [
@@ -21,6 +24,7 @@ func getTemplate():
 			type = "slot",
 			id = "printSlot",
 			slot = printSlot,
+			slotType = CrotchBlocks.VALUE,
 		},
 	]
 

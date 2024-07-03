@@ -18,14 +18,21 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="DragLabel" type="Label" parent="HBoxContainer"]
-margin_right = 15.0
+margin_right = 7.0
 margin_bottom = 706.0
 size_flags_vertical = 7
-text = "///"
+text = "v"
 valign = 1
 
 [node name="TemplateVerticalList" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 19.0
-margin_right = 1266.0
+margin_left = 11.0
+margin_right = 1262.0
 margin_bottom = 706.0
 size_flags_horizontal = 3
+
+[node name="DragLabel2" type="Label" parent="HBoxContainer"]
+margin_left = 1266.0
+margin_right = 1266.0
+margin_bottom = 706.0
+size_flags_vertical = 7
+valign = 1

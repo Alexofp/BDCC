@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/VisualSlots/BlockCatcherPanel.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+resource_local_to_scene = true
+bg_color = Color( 0.0862745, 0.0862745, 0.0862745, 1 )
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="BlockCatcherPanel" type="PanelContainer"]
+margin_top = 4.0
+margin_right = 1280.0
+margin_bottom = 32.0
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_top = 7.0
+margin_right = 1280.0
+margin_bottom = 21.0
+text = "<"
+
+[node name="Label2" type="Label" parent="."]
+margin_top = 7.0
+margin_right = 1280.0
+margin_bottom = 21.0
+text = ">"
+align = 2

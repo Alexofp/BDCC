@@ -1,0 +1,89 @@
+extends VBoxContainer
+onready var blocks_list = $BlocksList
+
+var smallCatchPanel = preload("res://Game/Datapacks/UI/CrotchCode/VisualSlots/BlockCatcherPanelSmall.tscn")
+
+var littleAdders = []
+var slotCalls
+var blockToVisualBlock = {}
+
+func _ready():
+	$BlockCatcherPanel.setSideLabelsType(CrotchBlocks.CALL)
+
+func setSlotCalls(theSlotCalls):
+	slotCalls = theSlotCalls
+	updateBlocksFully()
+	slotCalls.connect("onBlockAdded", self, "onNewBlockAdded")
+	slotCalls.connect("onBlockRemoved", self, "onBlockRemoved")
+
+func onBlockRemoved(oldBlock):
+	blockToVisualBlock[oldBlock].queue_free()
+	blockToVisualBlock.erase(oldBlock)
+	updateLittleAdders()
+
+func onNewBlockAdded(newBlock, index):
+	print("ADD BLOCK AT INDEX ", index)
+	addVisBlockToList(newBlock, index)
+	updateLittleAdders()
+
+func updateLittleAdders():
+	for littleAdder in littleAdders:
+		littleAdder.queue_free()
+	littleAdders = []
+	
+	var _i = 0
+	for block in slotCalls.getBlocks():
+		var blockVisualNode = blockToVisualBlock[block]
+		
+		var newSmallAdder = smallCatchPanel.instance()
+		blocks_list.add_child(newSmallAdder)
+		blocks_list.move_child(newSmallAdder, blockVisualNode.get_index())
+		newSmallAdder.dropIndex = _i
+		newSmallAdder.connect("onBlockDraggedOnto", self, "_on_BlockCatcherPanel_onBlockDraggedOnto")
+		littleAdders.append(newSmallAdder)
+		_i += 1
+
+func addVisBlockToList(theCodeBlock, index):
+	var newVisualBlock = preload("res://Game/Datapacks/UI/CrotchCode/CrotchBlockVisual.tscn").instance()
+	var _cm = blocks_list.get_child_count()
+	blocks_list.add_child(newVisualBlock)
+	if(index >= 0):
+		if(index == 0):
+			blocks_list.move_child(newVisualBlock, 0)
+		elif(index >= (slotCalls.getBlocks().size()-1)):
+			pass
+		else:
+			var newIndex = blockToVisualBlock[slotCalls.getBlocks()[index+1]].get_index()
+			blocks_list.move_child(newVisualBlock, newIndex)
+	blockToVisualBlock[theCodeBlock] = newVisualBlock
+	newVisualBlock.setCodeBlock(theCodeBlock)
+	newVisualBlock.setParentVisSlot(self)
+	
+
+func updateBlocksFully():
+	Util.delete_children(blocks_list)
+	if(slotCalls == null):
+		updateLittleAdders()
+		return
+	
+	for block in slotCalls.getBlocks():
+		addVisBlockToList(block, -1)
+	updateLittleAdders()
+	
+
+func _on_BlockCatcherPanel_onBlockDraggedOnto(_data, _index):
+	print("INDEX: ",_index)
+	#print(_data)
+	if(slotCalls != null):
+		var theBlock = _data["block"]
+		_data["ref"].doSelfdelete()
+		if(_index >= 0):
+			slotCalls.addBlockAt(theBlock, _index)
+		else:
+			slotCalls.addBlock(theBlock)
+		#updateBlocks()
+
+func removeBlock(theblock):
+	if(slotCalls != null):
+		slotCalls.removeBlock(theblock)
+		#updateBlocks()

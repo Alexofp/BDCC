@@ -4,10 +4,10 @@ var leftOpSlot := CrotchSlotVar.new()
 var rightOpSlot := CrotchSlotVar.new()
 
 func _init():
-	id = "PlusBlock"
+	id = "AndBlock"
 
 func getType():
-	return CrotchBlocks.VALUE
+	return CrotchBlocks.LOGIC
 
 func setLeftBlock(theBlock):
 	leftOpSlot.setBlock(theBlock)
@@ -16,7 +16,7 @@ func setRightBlock(theBlock):
 	rightOpSlot.setBlock(theBlock)
 
 func execute(_contex:CodeContex):
-	return leftOpSlot.getValue(_contex) + rightOpSlot.getValue(_contex)
+	return leftOpSlot.getValue(_contex) && rightOpSlot.getValue(_contex)
 
 func getTemplate():
 	return [
@@ -24,17 +24,17 @@ func getTemplate():
 			type = "slot",
 			id = "left",
 			slot = leftOpSlot,
-			slotType = CrotchBlocks.VALUE,
+			slotType = CrotchBlocks.LOGIC,
 		},
 		{
 			type = "label",
-			text = "PLUS",
+			text = "AND",
 		},
 		{
 			type = "slot",
 			id = "right",
 			slot = rightOpSlot,
-			slotType = CrotchBlocks.VALUE,
+			slotType = CrotchBlocks.LOGIC,
 		},
 	]
 

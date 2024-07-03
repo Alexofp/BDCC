@@ -224,6 +224,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Pregnancy/ChildSystem.gd"
 }, {
+"base": "Reference",
+"class": "CodeBlockBase",
+"language": "GDScript",
+"path": "res://Game/Datapacks/UI/CrotchCode/CodeBlockBase.gd"
+}, {
+"base": "Reference",
+"class": "CodeContex",
+"language": "GDScript",
+"path": "res://Game/Datapacks/UI/CrotchCode/CodeContex.gd"
+}, {
 "base": "Object",
 "class": "ColorUtils",
 "language": "GDScript",
@@ -1318,6 +1328,8 @@ _global_script_class_icons={
 "CharacterType": "",
 "Child": "",
 "ChildSystem": "",
+"CodeBlockBase": "",
+"CodeContex": "",
 "ColorUtils": "",
 "ComputerBase": "",
 "ContentType": "",
@@ -1550,6 +1562,7 @@ GM="*res://Game/GM.gd"
 SAVE="*res://Game/SaveManager.gd"
 GlobalTooltip="*res://UI/GlobalTooltipSystem.gd"
 AutoTranslation="*res://Util/AutoTranslation/AutoTranslation.gd"
+GlobalSignals="*res://Game/Datapacks/UI/CrotchCode/GlobalDragListener.gd"
 
 [debug]
 

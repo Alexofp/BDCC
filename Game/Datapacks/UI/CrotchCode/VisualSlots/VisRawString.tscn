@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/VisualSlots/VisRawString.gd" type="Script" id=1]
+
+[node name="VisRawString" type="LineEdit"]
+margin_right = 58.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 30, 0 )
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+
+[connection signal="text_changed" from="." to="." method="_on_VisRawString_text_changed"]

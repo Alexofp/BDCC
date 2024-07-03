@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Game/Datapacks/UI/CrotchCode/CrotchCodeEditor.gd" type="Script" id=1]
-[ext_resource path="res://Game/Datapacks/UI/CrotchCode/CurrentCodeList.gd" type="Script" id=3]
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/VisualSlots/VisSlotCalls.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Game/Datapacks/UI/CrotchCode/PossibleCodeBlocksList.gd" type="Script" id=4]
 
 [node name="CrotchCodeEditor" type="HBoxContainer"]
@@ -22,16 +22,43 @@ text = "Code"
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 margin_top = 18.0
 margin_right = 638.0
-margin_bottom = 720.0
+margin_bottom = 355.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="CurrentCodeList" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/ScrollContainer"]
+margin_right = 44.0
+margin_bottom = 32.0
+
+[node name="VisSlotCalls" parent="VBoxContainer/ScrollContainer/PanelContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 37.0
+margin_bottom = 25.0
+
+[node name="ExecuteButton" type="Button" parent="VBoxContainer"]
+margin_top = 359.0
 margin_right = 638.0
-margin_bottom = 702.0
-size_flags_horizontal = 3
+margin_bottom = 379.0
+text = "Execute"
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+margin_top = 383.0
+margin_right = 638.0
+margin_bottom = 720.0
 size_flags_vertical = 3
-script = ExtResource( 3 )
+
+[node name="OutputLabel" type="RichTextLabel" parent="VBoxContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 631.0
+margin_bottom = 330.0
+focus_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+selection_enabled = true
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]
 margin_left = 642.0
@@ -57,3 +84,5 @@ margin_bottom = 702.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 4 )
+
+[connection signal="pressed" from="VBoxContainer/ExecuteButton" to="." method="_on_ExecuteButton_pressed"]

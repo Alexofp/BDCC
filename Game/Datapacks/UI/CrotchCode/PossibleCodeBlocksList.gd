@@ -11,4 +11,5 @@ func drop_data(_position, _data):
 	var theRef = _data["ref"]
 	
 	if(!theRef.isPickVersion):
-		crotch_code_editor.findAndDeleteCodeBlock(theRef.codeBlock)
+		theRef.doSelfdelete()
+		#crotch_code_editor.findAndDeleteCodeBlock(theRef.codeBlock)

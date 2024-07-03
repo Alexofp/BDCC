@@ -6,15 +6,18 @@ var thenSlot := CrotchSlotCalls.new()
 func _init():
 	id = "IfCodeBlock"
 
+func getType():
+	return CrotchBlocks.CALL
+
 func setConditionBlock(theBlock):
 	conditionSlot.setBlock(theBlock)
 
 func addThenBlock(theBlock):
 	thenSlot.addBlock(theBlock)
 
-func execute():
-	if(conditionSlot.getValue()):
-		return thenSlot.execute()
+func execute(_contex:CodeContex):
+	if(conditionSlot.getValue(_contex)):
+		return thenSlot.execute(_contex)
 	return false
 
 func getTemplate():
@@ -27,13 +30,14 @@ func getTemplate():
 			type = "slot",
 			id = "conditionSlot",
 			slot = conditionSlot,
+			slotType = CrotchBlocks.LOGIC,
 		},
 		{
 			type = "label",
 			text = "THEN",
 		},
 		{
-			type = "slot",
+			type = "slot_list",
 			id = "thenSlot",
 			slot = thenSlot,
 		},
