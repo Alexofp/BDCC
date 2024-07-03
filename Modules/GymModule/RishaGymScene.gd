@@ -13,6 +13,7 @@ func _run():
 			bodyState={},
 			npcBodyState={naked=true,hard=true},
 		})
+
 #ACEPREGEXPAC - Risha in the Gym has a few line variants
 #I dont know for sure if Risha can actually be knocked up by someone other than the player, maybe I'll add a special line later but for now I can leave it ambiguious
 	if(state == ""):
@@ -176,11 +177,12 @@ func _run():
 	if(state == "cumAnal"):
 		playAnimation(StageScene.SexAllFours, "fast", {
 			pc="risha", npc="pc", 
+			pcCum=true, npcCum=true,
 			bodyState={naked=true,hard=true},
 			npcBodyState={exposedCrotch=true,hard=true},
 		})
 		
-		saynn("You begin to trash against the restraints and make loud pleasure noises, your whole body squirms and shivers as you struggle to stay still. Though Risha’s hands hold your ass nice and tight, she keeps shoving her cock in and out even through your climax.")
+		saynn("You begin to thrash against the restraints and make loud pleasure noises, your whole body squirms and shivers as you struggle to stay still. Though Risha’s hands hold your ass nice and tight, she keeps shoving her cock in and out even through your climax.")
 
 		# (if has cock)
 		if(GM.pc.isWearingChastityCage()):
@@ -284,6 +286,7 @@ func _run():
 		# (cum in mouth, stretches mouth, covers in cum)
 		playAnimation(StageScene.SexHandjob, "fast", {
 			pc="risha", npc="pc", 
+			pcCum=true,
 			bodyState={naked=true,hard=true},
 			npcBodyState={},
 		})
