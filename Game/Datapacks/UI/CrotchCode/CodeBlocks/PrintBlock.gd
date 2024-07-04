@@ -3,7 +3,8 @@ extends "res://Game/Datapacks/UI/CrotchCode/CodeBlockBase.gd"
 var printSlot := CrotchSlotVar.new()
 
 func _init():
-	id = "PrintBlock"
+	printSlot.setRawType(CrotchVarType.STRING)
+	printSlot.setRawValue("")
 
 func getType():
 	return CrotchBlocks.CALL

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Game/Datapacks/UI/CrotchCode/VisualSlots/BlockCatcherPanel.gd" type="Script" id=1]
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/VisualSlots/BlockCatcherPanelSmall.gd" type="Script" id=1]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 0.0823529 )

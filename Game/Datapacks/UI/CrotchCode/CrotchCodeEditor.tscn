@@ -27,16 +27,18 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/ScrollContainer"]
-margin_right = 44.0
-margin_bottom = 32.0
+margin_right = 638.0
+margin_bottom = 337.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="VisSlotCalls" parent="VBoxContainer/ScrollContainer/PanelContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 37.0
-margin_bottom = 25.0
+margin_right = 631.0
+margin_bottom = 330.0
 
 [node name="ExecuteButton" type="Button" parent="VBoxContainer"]
 margin_top = 359.0

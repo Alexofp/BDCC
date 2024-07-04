@@ -7,24 +7,33 @@ var littleAdders = []
 var slotCalls
 var blockToVisualBlock = {}
 
+var editor
+
 func _ready():
 	$BlockCatcherPanel.setSideLabelsType(CrotchBlocks.CALL)
 
 func setSlotCalls(theSlotCalls):
 	slotCalls = theSlotCalls
-	updateBlocksFully()
 	slotCalls.connect("onBlockAdded", self, "onNewBlockAdded")
 	slotCalls.connect("onBlockRemoved", self, "onBlockRemoved")
+	requestFullUpdate()
 
-func onBlockRemoved(oldBlock):
-	blockToVisualBlock[oldBlock].queue_free()
-	blockToVisualBlock.erase(oldBlock)
-	updateLittleAdders()
 
-func onNewBlockAdded(newBlock, index):
-	print("ADD BLOCK AT INDEX ", index)
-	addVisBlockToList(newBlock, index)
-	updateLittleAdders()
+func onBlockRemoved(_oldBlock):
+	if(!is_inside_tree()):
+		return
+	#blockToVisualBlock[oldBlock].queue_free()
+	#blockToVisualBlock.erase(oldBlock)
+	#updateLittleAdders()
+	requestFullUpdate()
+
+func onNewBlockAdded(_newBlock, _index):
+	if(!is_inside_tree()):
+		return
+	print("ADD BLOCK AT INDEX ", _index)
+	#addVisBlockToList(newBlock, index)
+	#updateLittleAdders()
+	requestFullUpdate()
 
 func updateLittleAdders():
 	for littleAdder in littleAdders:
@@ -45,6 +54,7 @@ func updateLittleAdders():
 
 func addVisBlockToList(theCodeBlock, index):
 	var newVisualBlock = preload("res://Game/Datapacks/UI/CrotchCode/CrotchBlockVisual.tscn").instance()
+	newVisualBlock.editor = editor
 	var _cm = blocks_list.get_child_count()
 	blocks_list.add_child(newVisualBlock)
 	if(index >= 0):
@@ -60,7 +70,24 @@ func addVisBlockToList(theCodeBlock, index):
 	newVisualBlock.setParentVisSlot(self)
 	
 
+func requestFullUpdate():
+	if(!needsUpdating):
+		needsUpdating = true
+		#yield(get_tree(), "idle_frame")
+		#yield(get_tree(), "idle_frame")
+		#yield(get_tree(), "idle_frame")
+		#yield(get_tree(), "idle_frame")
+		#yield(get_tree(), "idle_frame")
+		#call_deferred("updateBlocksFully")
+		updateBlocksFully()
+	
+var needsUpdating = false
 func updateBlocksFully():
+	#if(!is_inside_tree()):
+	#	return
+	if(!needsUpdating):
+		return
+	needsUpdating = false
 	Util.delete_children(blocks_list)
 	if(slotCalls == null):
 		updateLittleAdders()

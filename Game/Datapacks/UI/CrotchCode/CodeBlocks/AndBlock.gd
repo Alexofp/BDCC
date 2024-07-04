@@ -3,9 +3,6 @@ extends "res://Game/Datapacks/UI/CrotchCode/CodeBlockBase.gd"
 var leftOpSlot := CrotchSlotVar.new()
 var rightOpSlot := CrotchSlotVar.new()
 
-func _init():
-	id = "AndBlock"
-
 func getType():
 	return CrotchBlocks.LOGIC
 

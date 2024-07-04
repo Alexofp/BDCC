@@ -24,3 +24,8 @@ func getBlocks():
 func addBlockAt(newBlock, index):
 	blocks.insert(index, newBlock)
 	emit_signal("onBlockAdded", newBlock, index)
+
+func calcLineNums(_contex:CodeContex):
+	for block in blocks:
+		_contex.curLine += 1
+		block.calcLineNums(_contex)

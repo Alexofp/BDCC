@@ -2,9 +2,6 @@ extends "res://Game/Datapacks/UI/CrotchCode/CodeBlockBase.gd"
 
 var rawValue:int = 0
 
-func _init():
-	id = "RawIntBlock"
-
 func getType():
 	return CrotchBlocks.VALUE
 

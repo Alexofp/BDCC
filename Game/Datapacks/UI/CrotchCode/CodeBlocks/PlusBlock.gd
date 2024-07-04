@@ -4,7 +4,8 @@ var leftOpSlot := CrotchSlotVar.new()
 var rightOpSlot := CrotchSlotVar.new()
 
 func _init():
-	id = "PlusBlock"
+	leftOpSlot.setRawType(CrotchVarType.INT)
+	rightOpSlot.setRawType(CrotchVarType.INT)
 
 func getType():
 	return CrotchBlocks.VALUE
@@ -16,7 +17,20 @@ func setRightBlock(theBlock):
 	rightOpSlot.setBlock(theBlock)
 
 func execute(_contex:CodeContex):
-	return leftOpSlot.getValue(_contex) + rightOpSlot.getValue(_contex)
+	var leftValue = leftOpSlot.getValue(_contex)
+	var rightValue = rightOpSlot.getValue(_contex)
+	if(isString(leftValue)):
+		if(!isString(rightValue)):
+			throwError(_contex, "Left value is a string ("+str(leftValue)+") but the right value isn't: "+str(rightValue))
+			return false
+		return leftValue + rightValue
+	if(!isNumber(leftValue)):
+		throwError(_contex, "Left value is not a number: "+str(leftValue))
+		return false
+	if(!isNumber(rightValue)):
+		throwError(_contex, "Right value is not a number: "+str(rightValue))
+		return false
+	return leftValue + rightValue
 
 func getTemplate():
 	return [

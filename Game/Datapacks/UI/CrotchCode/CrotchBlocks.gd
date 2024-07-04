@@ -24,11 +24,23 @@ static func getRightBracket(theType):
 	return ""
 
 static func getAll():
-	return ["AlwaysTrueBlock", "IfCodeBlock", "PlusBlock", "PrintBlock", "RawStringBlock", "AndBlock", "RawIntBlock", "BiggerThanBlock"]
+	return [
+		"AlwaysTrueBlock",
+		"IfCodeBlock",
+		"PlusBlock",
+		"PrintBlock",
+		"RawStringBlock",
+		"AndBlock",
+		"RawIntBlock",
+		"BiggerThanBlock",
+		"TestList",
+		]
 
 static func createBlock(theID):
 	var newBlock = load("res://Game/Datapacks/UI/CrotchCode/CodeBlocks/"+theID+".gd").new()
 		
-	#if(newBlock != null):
+	if(newBlock != null):
+		newBlock.id = theID
 	#	newBlock.initWithDefaultData()
 	return newBlock
+

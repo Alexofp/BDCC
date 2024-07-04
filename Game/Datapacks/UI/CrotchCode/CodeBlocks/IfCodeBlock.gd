@@ -3,9 +3,6 @@ extends "res://Game/Datapacks/UI/CrotchCode/CodeBlockBase.gd"
 var conditionSlot := CrotchSlotVar.new()
 var thenSlot := CrotchSlotCalls.new()
 
-func _init():
-	id = "IfCodeBlock"
-
 func getType():
 	return CrotchBlocks.CALL
 
@@ -16,9 +13,16 @@ func addThenBlock(theBlock):
 	thenSlot.addBlock(theBlock)
 
 func execute(_contex:CodeContex):
+	if(conditionSlot.isEmpty()):
+		throwError(_contex, "Condition can't be empty")
+		return false
+	
 	if(conditionSlot.getValue(_contex)):
 		return thenSlot.execute(_contex)
 	return false
+
+func shouldExpandTemplate():
+	return true
 
 func getTemplate():
 	return [
@@ -48,3 +52,4 @@ func getSlot(_id):
 		return conditionSlot
 	if(_id == "thenSlot"):
 		return thenSlot
+

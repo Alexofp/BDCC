@@ -10,8 +10,10 @@ var codeContex = CodeContex.new()
 
 func _ready():
 	codeContex.connect("onPrint", self, "doOutput")
+	codeContex.connect("onError", self, "doOutputError")
 	
 	vis_slot_calls.setSlotCalls(mainSlotCalls)
+	vis_slot_calls.editor = self
 	
 	
 	for blockID in CrotchBlocks.getAll():
@@ -19,6 +21,7 @@ func _ready():
 		var visualScene = load("res://Game/Datapacks/UI/CrotchCode/CrotchBlockVisual.tscn").instance()
 		if(visualScene == null):
 			continue
+		visualScene.editor = self
 		visualScene.id = blockID
 		visualScene.setIsPickedVersion()
 		possible_code_blocks_list.add_child(visualScene)
@@ -48,6 +51,12 @@ func doOutput(theText):
 		output_label.bbcode_text = theText
 	output_label.scroll_to_line(output_label.get_line_count()-1)
 
+func doOutputError(_codeBlock, errorText):
+	doOutput("[color=red]Line "+str(_codeBlock.lineNum)+": "+errorText+"[/color]")
+
 func _on_ExecuteButton_pressed():
 	print(mainSlotCalls.getBlocks())
-	mainSlotCalls.execute(codeContex)
+	codeContex.execute(mainSlotCalls)
+
+func getPossiblePrintStrings():
+	return ["Meow", "MEOW?", "RAHI???"]

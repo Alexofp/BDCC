@@ -6,6 +6,8 @@ var codeBlock
 onready var template_vertical_list = $HBoxContainer/TemplateVerticalList
 var parentSlot
 
+var editor
+
 func get_drag_data(_position):
 	#if(!isPickVersion):
 	#	return null
@@ -16,13 +18,15 @@ func get_drag_data(_position):
 	if(isPickVersion):
 		mydata["block"] = CrotchBlocks.createBlock(id)
 		codeBlock = mydata["block"]
+		codeBlock.updateEditor(editor)
 	else:
 		mydata["block"] = codeBlock
 	#set_drag_preview(make_preview(mydata))
 	var thePreview = duplicate(0)
 	thePreview.set_script(null)
+	thePreview.modulate = Color(1.0, 1.0, 1.0, 0.5)
 	set_drag_preview(thePreview)
-	print("BEGAN DRAG!")
+	#print("BEGAN DRAG!")
 	GlobalSignals.emitOnDragStarted()
 	return mydata
 
@@ -38,6 +42,9 @@ func setCodeBlock(newCodeBlock):
 
 func constructTemplate():
 	Util.delete_children(template_vertical_list)
+	
+	if(codeBlock.shouldExpandTemplate()):
+		makeExpand()
 	
 	var theType = codeBlock.getType()
 	$HBoxContainer/DragLabel.text = CrotchBlocks.getLeftBracket(theType)
@@ -71,17 +78,22 @@ func constructTemplate():
 			#currentHBox = HBoxContainer.new()
 			#template_vertical_list.add_child(currentHBox)
 			var newSlotVis = load("res://Game/Datapacks/UI/CrotchCode/VisualSlots/VisSlotVar.tscn").instance()
+			newSlotVis.editor = editor
 			currentHBox.add_child(newSlotVis)
 			if(templateLine.has("slotType")):
 				newSlotVis.setSideLabelsType(templateLine["slotType"])
 			newSlotVis.setSlotVar(codeBlock.getSlot(slotID))
+			codeBlock.updateVisualSlot(editor, slotID, newSlotVis)
 		if(templateType == "slot_list"):
 			var slotID = templateLine["id"]
 			currentHBox = HBoxContainer.new()
 			template_vertical_list.add_child(currentHBox)
 			var newSlotVis = load("res://Game/Datapacks/UI/CrotchCode/VisualSlots/VisSlotCalls.tscn").instance()
+			newSlotVis.editor = editor
 			currentHBox.add_child(newSlotVis)
 			newSlotVis.setSlotCalls(codeBlock.getSlot(slotID))
+			currentHBox = HBoxContainer.new()
+			template_vertical_list.add_child(currentHBox)
 			
 			#var curVal = codeBlock.data[templateLine[1]]
 			#if(curVal is CrotchBlock):
@@ -96,7 +108,17 @@ func constructTemplate():
 func doSelfdelete():
 	print("SELF DELETE PLS")
 	if(parentSlot != null):
+		print(" PLS PLS PLS PLS PLS")
 		parentSlot.removeBlock(codeBlock)
 
 func setParentVisSlot(theParentSlot):
 	parentSlot = theParentSlot
+
+func setErrored():
+	self_modulate = Color.red
+
+func resetErrored():
+	self_modulate = Color.white
+
+func makeExpand():
+	size_flags_horizontal = SIZE_EXPAND_FILL
