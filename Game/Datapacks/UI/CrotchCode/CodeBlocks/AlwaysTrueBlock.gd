@@ -1,5 +1,8 @@
 extends "res://Game/Datapacks/UI/CrotchCode/CodeBlockBase.gd"
 
+func getCategories():
+	return ["Logic"]
+
 func getType():
 	return CrotchBlocks.LOGIC
 

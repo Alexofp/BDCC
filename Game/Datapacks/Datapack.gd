@@ -54,6 +54,13 @@ func getEditVars():
 			editorKind = "skin",
 			datapack = self,
 		},
+		"scenes": {
+			type = "editor",
+			value = scenes,
+			name = "Scenes",
+			editorKind = "scene",
+			datapack = self,
+		},
 	}
 
 func applyEditVar(varid, value):
@@ -79,6 +86,10 @@ func saveData():
 	for skinID in skins:
 		skinData[skinID] = skins[skinID].saveData()
 	
+	var sceneData = {}
+	for sceneID in scenes:
+		sceneData[sceneID] = scenes[sceneID].saveData()
+	
 	return {
 		#"id": id,
 		"name": name,
@@ -87,6 +98,7 @@ func saveData():
 		"description": description,
 		"characters": charData,
 		"skins": skinData,
+		"scenes": sceneData,
 	}
 
 func loadVar(_data, thekey, defaultValue = null):
@@ -116,6 +128,14 @@ func loadData(_data):
 		newSkin.id = skinID
 		newSkin.loadData(loadVar(skinData, skinID, {}))
 		skins[skinID] = newSkin
+	
+	var sceneData = loadVar(_data, "scenes", {})
+	scenes.clear()
+	for sceneID in sceneData:
+		var newScene:DatapackScene = DatapackScene.new()
+		newScene.id = sceneID
+		newScene.loadData(loadVar(sceneData, sceneID, {}))
+		scenes[sceneID] = newScene
 	
 func getEditVarsOnlyValues():
 	var result = {}

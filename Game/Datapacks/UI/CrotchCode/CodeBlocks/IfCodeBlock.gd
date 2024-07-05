@@ -3,6 +3,9 @@ extends "res://Game/Datapacks/UI/CrotchCode/CodeBlockBase.gd"
 var conditionSlot := CrotchSlotVar.new()
 var thenSlot := CrotchSlotCalls.new()
 
+func getCategories():
+	return ["Logic"]
+
 func getType():
 	return CrotchBlocks.CALL
 

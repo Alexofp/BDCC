@@ -104,6 +104,19 @@ func _on_AddNewDialog_confirmed():
 		pushMenu(skinEditor)
 		skinEditor.setSkin(newSkin)
 
+	if(editorKind == "scene"):
+		var newScene:DatapackScene = DatapackScene.new()
+		newScene.id = theNewId
+		
+		savedThings[theNewId] = newScene
+		updateThings()
+		#showAlert("Adding new character, "+theNewId)
+		#print("ADDING NEW CHARACTER, "+theNewId)
+		var sceneEditor = load("res://Game/Datapacks/UI/Editors/DatapackSceneEditor.tscn").instance()
+		sceneEditor.datapack = datapack
+		pushMenu(sceneEditor)
+		sceneEditor.setScene(newScene)
+
 func _on_EditButton_pressed():
 	var selectedIDToEdit = getSelectedID()
 	if(selectedIDToEdit == null):
@@ -120,4 +133,8 @@ func _on_EditButton_pressed():
 		skinEditor.datapack = datapack
 		pushMenu(skinEditor)
 		skinEditor.setSkin(savedThings[selectedIDToEdit])
-		
+	if(editorKind == "scene"):
+		var sceneEditor = load("res://Game/Datapacks/UI/Editors/DatapackSceneEditor.tscn").instance()
+		sceneEditor.datapack = datapack
+		pushMenu(sceneEditor)
+		sceneEditor.setScene(savedThings[selectedIDToEdit])

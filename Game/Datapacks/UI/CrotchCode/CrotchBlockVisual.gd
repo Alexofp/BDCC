@@ -82,6 +82,10 @@ func constructTemplate():
 			currentHBox.add_child(newSlotVis)
 			if(templateLine.has("slotType")):
 				newSlotVis.setSideLabelsType(templateLine["slotType"])
+			if(templateLine.has("extraType")):
+				newSlotVis.setExtraMode(templateLine["extraType"])
+			if(templateLine.has("expand") && templateLine["expand"]):
+				newSlotVis.makeExpand()
 			newSlotVis.setSlotVar(codeBlock.getSlot(slotID))
 			codeBlock.updateVisualSlot(editor, slotID, newSlotVis)
 		if(templateType == "slot_list"):
@@ -106,9 +110,9 @@ func constructTemplate():
 			pass
 
 func doSelfdelete():
-	print("SELF DELETE PLS")
+	if(isPickVersion):
+		return
 	if(parentSlot != null):
-		print(" PLS PLS PLS PLS PLS")
 		parentSlot.removeBlock(codeBlock)
 
 func setParentVisSlot(theParentSlot):
@@ -122,3 +126,17 @@ func resetErrored():
 
 func makeExpand():
 	size_flags_horizontal = SIZE_EXPAND_FILL
+
+
+func _on_PopupMenu_index_pressed(index):
+	if(index == 0):
+		doSelfdelete()
+
+var lastRightClick = 0
+func _on_CrotchBlock_gui_input(event):
+	if event is InputEventMouseButton:
+		if event.pressed and event.button_index == BUTTON_RIGHT:
+			if((Time.get_ticks_msec() - lastRightClick) < 400.0):
+				doSelfdelete()
+			else:
+				lastRightClick = Time.get_ticks_msec()

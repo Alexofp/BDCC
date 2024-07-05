@@ -2,6 +2,9 @@ extends "res://Game/Datapacks/UI/CrotchCode/CodeBlockBase.gd"
 
 var printSlot := CrotchSlotVar.new()
 
+func getCategories():
+	return ["Output"]
+
 func _init():
 	printSlot.setRawType(CrotchVarType.STRING)
 	printSlot.setRawValue("")

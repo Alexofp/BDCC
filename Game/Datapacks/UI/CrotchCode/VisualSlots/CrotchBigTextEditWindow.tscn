@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/VisualSlots/CrotchBigTextEditWindow.gd" type="Script" id=1]
+
+[node name="CrotchBigTextEditWindow" type="WindowDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 29.0
+margin_top = 24.0
+margin_right = -29.0
+margin_bottom = -24.0
+window_title = "Editing text"
+script = ExtResource( 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1212.0
+margin_bottom = 662.0
+
+[node name="TextEdit" type="TextEdit" parent="MarginContainer/VBoxContainer"]
+margin_right = 1202.0
+margin_bottom = 628.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 632.0
+margin_right = 1202.0
+margin_bottom = 652.0
+
+[node name="SaveButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 1144.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Save"
+
+[node name="CancelButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 1148.0
+margin_right = 1202.0
+margin_bottom = 20.0
+text = "Cancel"
+
+[connection signal="popup_hide" from="." to="." method="_on_CrotchBigTextEditWindow_popup_hide"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/SaveButton" to="." method="_on_SaveButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_CancelButton_pressed"]

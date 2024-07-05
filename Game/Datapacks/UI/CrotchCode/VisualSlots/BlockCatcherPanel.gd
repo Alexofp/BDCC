@@ -7,6 +7,10 @@ signal onRawValueChanged(newRaw)
 var rawMode = 0
 var rawValue = null
 var rawPossibleValues = []
+var extraMode = 0
+
+var bigTextEditWindowScene = preload("res://Game/Datapacks/UI/CrotchCode/VisualSlots/CrotchBigTextEditWindow.tscn")
+var currentBigWindow
 
 var dropIndex = -1
 
@@ -52,8 +56,9 @@ func setSideLabelsType(theType):
 	$Label.text = CrotchBlocks.getLeftBracket(theType)
 	$Label2.text = CrotchBlocks.getRightBracket(theType)
 
-func setRawMode(theMode):
+func setRawMode(theMode, newExtra=0):
 	rawMode = theMode
+	extraMode = newExtra
 	updateRawVis()
 
 func setRawPossibleValues(posVals:Array):
@@ -67,6 +72,7 @@ func updateRawVis():
 	$MarginContainer/SpinBox.visible = false
 	$MarginContainer/LineEdit.visible = false
 	$MarginContainer/OptionButton.visible = false
+	$MarginContainer/BigTextEdit.visible = false
 	if(containedNode != null):
 		$MarginContainer.visible = false
 		return
@@ -91,8 +97,12 @@ func updateRawVis():
 			$MarginContainer/SpinBox.value = 0
 	elif(rawMode == CrotchVarType.STRING):
 		$MarginContainer.visible = true
-		$MarginContainer/LineEdit.visible = true
-		$MarginContainer/LineEdit.text = str(rawValue)
+		if(extraMode == 0):
+			$MarginContainer/LineEdit.visible = true
+			$MarginContainer/LineEdit.text = str(rawValue)
+		elif(extraMode == 1):
+			$MarginContainer/BigTextEdit.visible = true
+			$MarginContainer/BigTextEdit/TextEdit.text = str(rawValue)
 
 func getRawValue():
 	return rawValue
@@ -111,6 +121,7 @@ func setRawValue(newVal):
 		$MarginContainer/SpinBox.value = newVal
 	if(rawMode == CrotchVarType.STRING):
 		$MarginContainer/LineEdit.text = newVal
+		$MarginContainer/BigTextEdit/TextEdit.text = newVal
 	return null
 
 func _on_SpinBox_value_changed(_value):
@@ -127,3 +138,36 @@ func _on_OptionButton_item_selected(index):
 	if(rawPossibleValues.size() > 0):
 		rawValue = rawPossibleValues[index]
 		emit_signal("onRawValueChanged", rawPossibleValues[index])
+
+func _on_TextEdit_text_changed():
+	if(rawMode == CrotchVarType.STRING):
+		rawValue = $MarginContainer/BigTextEdit/TextEdit.text
+		emit_signal("onRawValueChanged", rawValue)
+
+
+func _on_OpenFullButton_pressed():
+	if(currentBigWindow != null):
+		currentBigWindow.queue_free()
+		currentBigWindow = null
+	
+	currentBigWindow = bigTextEditWindowScene.instance()
+	add_child(currentBigWindow)
+	
+	currentBigWindow.setText($MarginContainer/BigTextEdit/TextEdit.text)
+	currentBigWindow.connect("onCancel", self, "deleteBigWindow")
+	currentBigWindow.connect("onSave", self, "replaceTextWithBigText")
+	currentBigWindow.popup_centered()
+
+func replaceTextWithBigText(_window, text):
+	if(currentBigWindow != null):
+		currentBigWindow.queue_free()
+		currentBigWindow = null
+	
+	$MarginContainer/BigTextEdit/TextEdit.text = text
+	rawValue = text
+	emit_signal("onRawValueChanged", rawValue)
+
+func deleteBigWindow(_window):
+	if(currentBigWindow != null):
+		currentBigWindow.queue_free()
+		currentBigWindow = null

@@ -309,6 +309,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Datapacks/DatapackResource.gd"
 }, {
+"base": "Reference",
+"class": "DatapackScene",
+"language": "GDScript",
+"path": "res://Game/Datapacks/DatapackScene.gd"
+}, {
+"base": "Reference",
+"class": "DatapackSceneState",
+"language": "GDScript",
+"path": "res://Game/Datapacks/DatapackScene/DatapackSceneState.gd"
+}, {
 "base": "SkinBase",
 "class": "DatapackSkin",
 "language": "GDScript",
@@ -1350,6 +1360,8 @@ _global_script_class_icons={
 "Datapack": "",
 "DatapackCharacter": "",
 "DatapackResource": "",
+"DatapackScene": "",
+"DatapackSceneState": "",
 "DatapackSkin": "",
 "DeepLTranslator": "",
 "Direction": "",

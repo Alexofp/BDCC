@@ -2,6 +2,9 @@ extends "res://Game/Datapacks/UI/CrotchCode/CodeBlockBase.gd"
 
 var rawValue:String = "String"
 
+func getCategories():
+	return ["Variables"]
+
 func getType():
 	return CrotchBlocks.VALUE
 

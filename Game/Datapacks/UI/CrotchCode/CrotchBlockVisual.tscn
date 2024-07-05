@@ -7,6 +7,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 20, 20 )
 size_flags_horizontal = 0
+size_flags_vertical = 0
 script = ExtResource( 1 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -36,3 +37,5 @@ margin_right = 1266.0
 margin_bottom = 706.0
 size_flags_vertical = 7
 valign = 1
+
+[connection signal="gui_input" from="." to="." method="_on_CrotchBlock_gui_input"]

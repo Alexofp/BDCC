@@ -2,8 +2,12 @@ extends VBoxContainer
 onready var block_catcher_panel = $BlockCatcherPanel
 
 var slotVar
+var extraMode = 0
 
 var editor
+
+func setExtraMode(newExtraMode):
+	extraMode = newExtraMode
 
 func setSlotVar(theSlotVar):
 	slotVar = theSlotVar
@@ -11,9 +15,9 @@ func setSlotVar(theSlotVar):
 	#updateBlocksFully()
 	#slotCalls.connect("onBlockAdded", self, "onNewBlockAdded")
 	slotVar.connect("onBlockChanged", self, "onBlockChanged")
-	block_catcher_panel.setRawMode(slotVar.getRawType())
+	block_catcher_panel.setRawMode(slotVar.getRawType(), extraMode)
 	block_catcher_panel.setRawValue(slotVar.getRawValue())
-	print("SET BLOCK")
+	#print("SET BLOCK")
 
 func setPossibleValues(newVals:Array):
 	block_catcher_panel.setRawPossibleValues(newVals)
@@ -54,3 +58,6 @@ func setSideLabelsType(theType):
 func _on_BlockCatcherPanel_onRawValueChanged(newRaw):
 	if(slotVar != null):
 		slotVar.setRawValue(newRaw)
+
+func makeExpand():
+	size_flags_horizontal = SIZE_EXPAND_FILL

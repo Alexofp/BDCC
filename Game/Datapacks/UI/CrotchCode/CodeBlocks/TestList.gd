@@ -2,6 +2,9 @@ extends "res://Game/Datapacks/UI/CrotchCode/CodeBlockBase.gd"
 
 var listSlot := CrotchSlotVar.new()
 
+func getCategories():
+	return ["Variables"]
+
 func _init():
 	listSlot.setRawType(CrotchVarType.STRING)
 
@@ -10,7 +13,7 @@ func updateEditor(_editor):
 		listSlot.setRawValue(_editor.getPossiblePrintStrings()[0])
 
 func getType():
-	return CrotchBlocks.CALL
+	return CrotchBlocks.VALUE
 
 func setBlock(theBlock):
 	listSlot.setBlock(theBlock)

@@ -4,6 +4,9 @@ class_name CodeBlockBase
 var id = "error"
 var lineNum:int = -1
 
+func getCategories():
+	return [""]
+
 func updateEditor(_editor):
 	pass
 

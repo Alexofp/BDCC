@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Game/Datapacks/UI/CrotchCode/CrotchCodeEditor.gd" type="Script" id=1]
 [ext_resource path="res://Game/Datapacks/UI/CrotchCode/VisualSlots/VisSlotCalls.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Game/Datapacks/UI/CrotchCode/PossibleCodeBlocksList.gd" type="Script" id=4]
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/PossibleCodeBlocksList.tscn" type="PackedScene" id=3]
 
 [node name="CrotchCodeEditor" type="HBoxContainer"]
 anchor_right = 1.0
@@ -80,11 +80,10 @@ margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PossibleCodeBlocksList" type="VBoxContainer" parent="VBoxContainer2/ScrollContainer2"]
+[node name="PossibleCodeBlocksList" parent="VBoxContainer2/ScrollContainer2" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 638.0
 margin_bottom = 702.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-script = ExtResource( 4 )
 
 [connection signal="pressed" from="VBoxContainer/ExecuteButton" to="." method="_on_ExecuteButton_pressed"]

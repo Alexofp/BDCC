@@ -34,6 +34,9 @@ static func getAll():
 		"RawIntBlock",
 		"BiggerThanBlock",
 		"TestList",
+		"OutputBigBlock",
+		"SetVarBlock",
+		"GetVarBlock",
 		]
 
 static func createBlock(theID):
