@@ -15,8 +15,14 @@ func setLeftBlock(theBlock):
 func setRightBlock(theBlock):
 	rightOpSlot.setBlock(theBlock)
 
-func execute(_contex:CodeContex):
-	return leftOpSlot.getValue(_contex) && rightOpSlot.getValue(_contex)
+func execute(_contex:CodeContex):	
+	return checkThing(leftOpSlot.getValue(_contex), rightOpSlot.getValue(_contex))
+
+func checkThing(a,b):
+	return a && b
+
+func getThingLabel():
+	return "AND"
 
 func getTemplate():
 	return [
@@ -28,7 +34,7 @@ func getTemplate():
 		},
 		{
 			type = "label",
-			text = "AND",
+			text = getThingLabel(),
 		},
 		{
 			type = "slot",

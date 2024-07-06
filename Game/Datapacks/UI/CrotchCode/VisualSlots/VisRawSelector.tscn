@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/VisualSlots/VisRawSelector.gd" type="Script" id=1]
+
+[node name="VisRawSelector" type="OptionButton"]
+margin_right = 58.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 30, 0 )
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+
+[connection signal="item_selected" from="." to="." method="_on_VisRawSelector_item_selected"]

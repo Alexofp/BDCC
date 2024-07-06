@@ -38,3 +38,33 @@ func isEmpty():
 func calcLineNums(_contex:CodeContex):
 	if(block != null):
 		block.calcLineNums(_contex)
+
+func saveData():
+	var data = {}
+	
+	data["rawValue"] = rawValue
+	if(block != null):
+		data["block"] = {
+			id = block.id,
+			data = block.saveData(),
+		}
+	
+	return data
+
+func loadData(_data):
+	rawValue = loadVar(_data, "rawValue", null)
+	
+	var blockData = loadVar(_data, "block", null)
+	if(blockData == null):
+		setBlock(null)
+	else:
+		var theID = loadVar(blockData, "id", "")
+		var theBlock = CrotchBlocks.createBlock(theID)
+		if(theBlock != null):
+			theBlock.loadData(loadVar(blockData, "data", {}))
+			setBlock(theBlock)
+	
+func loadVar(_data, thekey, defaultValue = null):
+	if(_data.has(thekey)):
+		return _data[thekey]
+	return defaultValue

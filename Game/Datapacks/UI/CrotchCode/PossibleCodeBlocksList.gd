@@ -10,6 +10,7 @@ func drop_data(_position, _data):
 		var theRef = _data["ref"]
 		
 		if(!theRef.isPickVersion):
+			editor.onUserChangeMade()
 			theRef.doSelfdelete()
 
 func setEditor(newEd):
@@ -39,6 +40,7 @@ func populate():
 					nodeToAddTo = collapsables[category]
 				else:
 					var newCollapse = collapseScene.instance()
+					newCollapse.editor = editor
 					categories_list.add_child(newCollapse)
 					newCollapse.makeCodeBlockMode()
 					newCollapse.setText(category)

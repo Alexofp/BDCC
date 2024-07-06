@@ -88,7 +88,7 @@ func updateRawVis():
 			_i += 1
 	elif(rawMode == CrotchVarType.ANY):
 		$MarginContainer.visible = false
-	elif(rawMode == CrotchVarType.INT):
+	elif(rawMode == CrotchVarType.NUMBER):
 		$MarginContainer.visible = true
 		$MarginContainer/SpinBox.visible = true
 		if(rawValue != null):
@@ -117,7 +117,7 @@ func setRawValue(newVal):
 			_i += 1
 	if(rawMode == CrotchVarType.ANY):
 		return
-	if(rawMode == CrotchVarType.INT):
+	if(rawMode == CrotchVarType.NUMBER):
 		$MarginContainer/SpinBox.value = newVal
 	if(rawMode == CrotchVarType.STRING):
 		$MarginContainer/LineEdit.text = newVal
@@ -125,7 +125,7 @@ func setRawValue(newVal):
 	return null
 
 func _on_SpinBox_value_changed(_value):
-	if(rawMode == CrotchVarType.INT):
+	if(rawMode == CrotchVarType.NUMBER):
 		rawValue = _value
 		emit_signal("onRawValueChanged", _value)
 

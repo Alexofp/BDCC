@@ -3,13 +3,15 @@ class_name DatapackSceneState
 
 var id = "Error"
 
-var code
+var code = preload("res://Game/Datapacks/UI/CrotchCode/SlotCalls.gd").new()
 
 func saveData():
-	return {}
+	return {
+		"code": code.saveData(),
+	}
 
 func loadData(_data):
-	pass
+	code.loadData(loadVar(_data, "code", {}))
 
 func loadVar(_data, thekey, defaultValue = null):
 	if(_data.has(thekey)):

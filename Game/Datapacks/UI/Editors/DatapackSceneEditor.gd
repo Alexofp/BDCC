@@ -1,30 +1,47 @@
 extends Control
 
 onready var pack_variables = $VBoxContainer/TabContainer/Info/ScrollContainer/PackVariables
-onready var vis_slot_calls = $VBoxContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/PanelContainer/VisSlotCalls
 onready var states_list = $VBoxContainer/TabContainer/States/HBoxContainer/StatesList/StatesList
 onready var new_state_line_edit = $VBoxContainer/TabContainer/States/HBoxContainer/StatesList/HBoxContainer/NewStateLineEdit
 onready var possible_code_blocks_list = $VBoxContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/PossibleCodeBlocksList
+onready var datapack_scene_code_wrapper = $VBoxContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/DatapackSceneCodeWrapper
+onready var output_label = $VBoxContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/OutputTextLabel
 
 var datapack:Datapack
 var scene:DatapackScene
 
-var mainSlotCalls = preload("res://Game/Datapacks/UI/CrotchCode/SlotCalls.gd").new()
 var codeContex = CodeContex.new()
 
 var selectedStateID:String = ""
 var statesListArray = []
 
 func _ready():
-	#codeContex.connect("onPrint", self, "doOutput")
-	#codeContex.connect("onError", self, "doOutputError")
-	
-	vis_slot_calls.setSlotCalls(mainSlotCalls)
-	vis_slot_calls.editor = self
+	codeContex.connect("onPrint", self, "doOutput")
+	codeContex.connect("onError", self, "doOutputError")
+	datapack_scene_code_wrapper.setEditor(self)
 	
 	possible_code_blocks_list.setEditor(self)
 	possible_code_blocks_list.populate()
 	
+var outputLines = []
+func doOutput(theText):
+	while(outputLines.size() > 500):
+		outputLines.pop_front()
+	
+	outputLines.append(theText)
+	
+	output_label.bbcode_text = Util.join(outputLines, "\n")
+	output_label.scroll_to_line(output_label.get_line_count()-1)
+
+func clearOutput():
+	outputLines = []
+	output_label.bbcode_text = ""
+
+func doOutputError(_codeBlock, errorText):
+	doOutput("[color=red]Line "+str(_codeBlock.lineNum)+": "+errorText+"[/color]")
+	
+func onUserChangeMade():
+	datapack_scene_code_wrapper.makeSnapshot()
 
 func setScene(theScene):
 	scene = theScene
@@ -64,8 +81,8 @@ func onMenuPopped():
 
 
 func _on_TestButton_pressed():
-	print(mainSlotCalls.getBlocks())
-	codeContex.execute(mainSlotCalls)
+	print(datapack_scene_code_wrapper.getSlotCalls().getBlocks())
+	codeContex.execute(datapack_scene_code_wrapper.getSlotCalls())
 	
 #func doOutput(theText):
 #	if(!output_label.bbcode_text.empty()):
@@ -133,3 +150,7 @@ func _on_RemoveStateButton_pressed():
 
 func updateSelectedState():
 	$VBoxContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Label.text = "Code for the '"+(selectedStateID if selectedStateID != "" else "Initial")+"' state"
+	
+	var theState = scene.states[selectedStateID]
+	
+	datapack_scene_code_wrapper.setSlotCalls(theState.code)

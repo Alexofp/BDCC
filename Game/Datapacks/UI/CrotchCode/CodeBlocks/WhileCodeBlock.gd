@@ -1,7 +1,7 @@
 extends "res://Game/Datapacks/UI/CrotchCode/CodeBlockBase.gd"
 
 var conditionSlot := CrotchSlotVar.new()
-var thenSlot := CrotchSlotCalls.new()
+var bodySlot := CrotchSlotCalls.new()
 
 func getCategories():
 	return ["Logic"]
@@ -9,20 +9,19 @@ func getCategories():
 func getType():
 	return CrotchBlocks.CALL
 
-func setConditionBlock(theBlock):
-	conditionSlot.setBlock(theBlock)
-
-func addThenBlock(theBlock):
-	thenSlot.addBlock(theBlock)
-
 func execute(_contex:CodeContex):
 	if(conditionSlot.isEmpty()):
 		throwError(_contex, "Condition can't be empty")
 		return false
 	
-	if(conditionSlot.getValue(_contex)):
-		return thenSlot.execute(_contex)
-	return false
+	var failsafe = 0
+	while(conditionSlot.getValue(_contex)):
+		bodySlot.execute(_contex)
+		failsafe += 1
+		if(failsafe > 1000000):
+			throwError(_contex, "Infinite While loop detected")
+			return false
+	return true
 
 func shouldExpandTemplate():
 	return true
@@ -31,7 +30,7 @@ func getTemplate():
 	return [
 		{
 			type = "label",
-			text = "IF",
+			text = "WHILE",
 		},
 		{
 			type = "slot",
@@ -41,20 +40,20 @@ func getTemplate():
 		},
 		{
 			type = "label",
-			text = "THEN",
+			text = "DO",
 		},
 		{
 			type = "slot_list",
-			id = "thenSlot",
-			slot = thenSlot,
+			id = "bodySlot",
+			slot = bodySlot,
 		},
 	]
 
 func getSlot(_id):
 	if(_id == "conditionSlot"):
 		return conditionSlot
-	if(_id == "thenSlot"):
-		return thenSlot
+	if(_id == "bodySlot"):
+		return bodySlot
 
 func getVisualBlockTheme():
 	return themeControl

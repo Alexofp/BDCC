@@ -1,6 +1,6 @@
 extends "res://Game/Datapacks/UI/CrotchCode/CodeBlockBase.gd"
 
-var rawValue:int = 0
+var rawValue = 0
 
 func getCategories():
 	return ["Variables"]
@@ -30,3 +30,16 @@ func getTemplate():
 func applyRawValue(_id, _value):
 	if(_id == "rawValue"):
 		rawValue = _value
+
+func saveData():
+	var data = .saveData()
+	
+	data["rawValue"] = rawValue
+	
+	return data
+
+func loadData(_data):
+	.loadData(_data)
+	
+	rawValue = loadVar(_data, "rawValue", 0)
+	

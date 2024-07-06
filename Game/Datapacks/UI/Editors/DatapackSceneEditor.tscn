@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Game/Datapacks/UI/PackVariables.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Datapacks/UI/Editors/DatapackSceneEditor.gd" type="Script" id=2]
-[ext_resource path="res://Game/Datapacks/UI/CrotchCode/VisualSlots/VisSlotCalls.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/DatapackSceneCodeWrapper.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Game/Datapacks/UI/CrotchCode/PossibleCodeBlocksList.tscn" type="PackedScene" id=4]
 
 [node name="DatapackSceneEditor" type="Control"]
@@ -51,54 +51,53 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/States"]
+[node name="HBoxContainer" type="HSplitContainer" parent="VBoxContainer/TabContainer/States"]
 margin_right = 1272.0
 margin_bottom = 580.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="StatesList" type="VBoxContainer" parent="VBoxContainer/TabContainer/States/HBoxContainer"]
-margin_right = 211.0
+margin_right = 206.0
 margin_bottom = 580.0
-rect_min_size = Vector2( 200, 0 )
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="VBoxContainer/TabContainer/States/HBoxContainer/StatesList"]
-margin_right = 211.0
+margin_right = 206.0
 margin_bottom = 14.0
 text = "States"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/States/HBoxContainer/StatesList"]
 margin_top = 18.0
-margin_right = 211.0
+margin_right = 206.0
 margin_bottom = 42.0
 
 [node name="NewStateLineEdit" type="LineEdit" parent="VBoxContainer/TabContainer/States/HBoxContainer/StatesList/HBoxContainer"]
-margin_right = 170.0
+margin_right = 165.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 
 [node name="AddNewStateButton" type="Button" parent="VBoxContainer/TabContainer/States/HBoxContainer/StatesList/HBoxContainer"]
-margin_left = 174.0
-margin_right = 211.0
+margin_left = 169.0
+margin_right = 206.0
 margin_bottom = 24.0
 text = "Add"
 
 [node name="StatesList" type="ItemList" parent="VBoxContainer/TabContainer/States/HBoxContainer/StatesList"]
 margin_top = 46.0
-margin_right = 211.0
+margin_right = 206.0
 margin_bottom = 556.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="RemoveStateButton" type="Button" parent="VBoxContainer/TabContainer/States/HBoxContainer/StatesList"]
 margin_top = 560.0
-margin_right = 211.0
+margin_right = 206.0
 margin_bottom = 580.0
 text = "Delete state"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/States/HBoxContainer"]
-margin_left = 215.0
+margin_left = 218.0
 margin_right = 1272.0
 margin_bottom = 580.0
 size_flags_horizontal = 3
@@ -106,75 +105,70 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
 
 [node name="Label" type="Label" parent="VBoxContainer/TabContainer/States/HBoxContainer/VBoxContainer"]
-margin_right = 1057.0
+margin_right = 1054.0
 margin_bottom = 14.0
 text = "State"
 align = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/States/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HSplitContainer" parent="VBoxContainer/TabContainer/States/HBoxContainer/VBoxContainer"]
 margin_top = 18.0
-margin_right = 1057.0
+margin_right = 1054.0
 margin_bottom = 580.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_right = 752.0
+margin_right = 746.0
 margin_bottom = 562.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="VBoxContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_right = 752.0
+margin_right = 746.0
 margin_bottom = 14.0
 text = "Code for the current state"
 align = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 18.0
-margin_right = 752.0
-margin_bottom = 538.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer"]
-margin_right = 752.0
-margin_bottom = 520.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="VisSlotCalls" parent="VBoxContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/ScrollContainer/PanelContainer" instance=ExtResource( 3 )]
+[node name="DatapackSceneCodeWrapper" parent="VBoxContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 745.0
-margin_bottom = 513.0
+margin_top = 18.0
+margin_right = 746.0
+margin_bottom = 447.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="TestButton" type="Button" parent="VBoxContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 542.0
-margin_right = 752.0
-margin_bottom = 562.0
+margin_top = 451.0
+margin_right = 746.0
+margin_bottom = 471.0
 text = "Test"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 756.0
-margin_right = 1057.0
+[node name="OutputTextLabel" type="RichTextLabel" parent="VBoxContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 475.0
+margin_right = 746.0
 margin_bottom = 562.0
-rect_min_size = Vector2( 250, 0 )
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+bbcode_enabled = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 758.0
+margin_right = 1054.0
+margin_bottom = 562.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.4
 
 [node name="Label" type="Label" parent="VBoxContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
-margin_right = 301.0
+margin_right = 296.0
 margin_bottom = 14.0
 text = "Code blocks"
 align = 1
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_top = 18.0
-margin_right = 301.0
+margin_right = 296.0
 margin_bottom = 562.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -182,7 +176,7 @@ size_flags_vertical = 3
 [node name="PossibleCodeBlocksList" parent="VBoxContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 301.0
+margin_right = 296.0
 margin_bottom = 544.0
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer"]

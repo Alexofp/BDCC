@@ -3,6 +3,7 @@ extends PanelContainer
 var prefix = "Test"
 
 var codeBlockMode = false
+var editor
 
 func makeCodeBlockMode():
 	codeBlockMode = true
@@ -37,4 +38,5 @@ func drop_data(_position, _data):
 		var theRef = _data["ref"]
 		
 		if(!theRef.isPickVersion):
+			editor.onUserChangeMade()
 			theRef.doSelfdelete()

@@ -8,6 +8,10 @@ var parentSlot
 
 var editor
 
+
+func setBlockTheme(newTheme):
+	add_stylebox_override("panel", newTheme)
+
 func get_drag_data(_position):
 	#if(!isPickVersion):
 	#	return null
@@ -46,6 +50,8 @@ func constructTemplate():
 	if(codeBlock.shouldExpandTemplate()):
 		makeExpand()
 	
+	setBlockTheme(codeBlock.getVisualBlockTheme())
+	
 	var theType = codeBlock.getType()
 	$HBoxContainer/DragLabel.text = CrotchBlocks.getLeftBracket(theType)
 	$HBoxContainer/DragLabel2.text = CrotchBlocks.getRightBracket(theType)
@@ -71,6 +77,12 @@ func constructTemplate():
 			var newRawString = preload("res://Game/Datapacks/UI/CrotchCode/VisualSlots/VisRawInt.tscn").instance()
 			currentHBox.add_child(newRawString)
 			newRawString.setValue(templateLine["value"])
+			newRawString.id = templateLine["id"]
+			newRawString.connect("onValueChanged", codeBlock, "applyRawValue")
+		if(templateType == "rawselector"):
+			var newRawString = preload("res://Game/Datapacks/UI/CrotchCode/VisualSlots/VisRawSelector.tscn").instance()
+			currentHBox.add_child(newRawString)
+			newRawString.setValueAndValues(templateLine["value"], templateLine["values"])
 			newRawString.id = templateLine["id"]
 			newRawString.connect("onValueChanged", codeBlock, "applyRawValue")
 		if(templateType == "slot"):
@@ -137,6 +149,7 @@ func _on_CrotchBlock_gui_input(event):
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == BUTTON_RIGHT:
 			if((Time.get_ticks_msec() - lastRightClick) < 400.0):
+				editor.onUserChangeMade()
 				doSelfdelete()
 			else:
 				lastRightClick = Time.get_ticks_msec()

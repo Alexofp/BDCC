@@ -7,6 +7,12 @@ var lineNum:int = -1
 func getCategories():
 	return [""]
 
+func getMainCategory():
+	var theCats = getCategories()
+	if(theCats.size() > 0):
+		return theCats[0]
+	return ""
+
 func updateEditor(_editor):
 	pass
 
@@ -32,6 +38,30 @@ func shouldExpandTemplate():
 
 func getSlot(_id):
 	return null
+
+func saveData():
+	var data = {}
+	
+	var slotData = {}
+	for templateLine in getTemplate():
+		if(templateLine["type"] in ["slot", "slot_list"]):
+			slotData[templateLine["id"]] = getSlot(templateLine["id"]).saveData()
+	data["slots"] = slotData
+	
+	return data
+
+func loadData(_data):
+	var slotData = loadVar(_data, "slots", {})
+	
+	for templateLine in getTemplate():
+		if(templateLine["type"] in ["slot", "slot_list"]):
+			var theSlot = getSlot(templateLine["id"])
+			theSlot.loadData(loadVar(slotData, templateLine["id"], {}))
+
+func loadVar(_data, thekey, defaultValue = null):
+	if(_data.has(thekey)):
+		return _data[thekey]
+	return defaultValue
 
 func updateVisualSlot(_editor, _id, _visSlot):
 	pass
@@ -61,3 +91,22 @@ func isString(val):
 	if(val is String):
 		return true
 	return false
+
+const themeVars = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockVariables.tres")
+const themeOutput = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockOutput.tres")
+const themeMath = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockMath.tres")
+const themeLogic = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockLogic.tres")
+const themeControl = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockControl.tres")
+
+func getVisualBlockTheme():
+	var mainCategory = getMainCategory()
+	if(mainCategory in ["Output"]):
+		return themeOutput
+	if(mainCategory in ["Logic"]):
+		return themeLogic
+	if(mainCategory in ["Variables"]):
+		return themeVars
+	if(mainCategory in ["Math"]):
+		return themeMath
+	
+	return themeOutput

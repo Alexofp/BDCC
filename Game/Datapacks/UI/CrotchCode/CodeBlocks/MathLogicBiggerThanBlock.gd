@@ -4,11 +4,11 @@ var leftOpSlot := CrotchSlotVar.new()
 var rightOpSlot := CrotchSlotVar.new()
 
 func getCategories():
-	return ["Logic"]
+	return ["Math"]
 
 func _init():
-	leftOpSlot.setRawType(CrotchVarType.INT)
-	rightOpSlot.setRawType(CrotchVarType.INT)
+	leftOpSlot.setRawType(CrotchVarType.NUMBER)
+	rightOpSlot.setRawType(CrotchVarType.NUMBER)
 
 func getType():
 	return CrotchBlocks.LOGIC
@@ -20,15 +20,26 @@ func setRightBlock(theBlock):
 	rightOpSlot.setBlock(theBlock)
 
 func execute(_contex:CodeContex):
+	var onlyNumbers = thingOnlyNumbers()
+	
 	var leftValue = leftOpSlot.getValue(_contex)
-	if(!isNumber(leftValue)):
+	if(onlyNumbers && !isNumber(leftValue)):
 		throwError(_contex, "Left value is not a number: "+str(leftValue))
 		return false
 	var rightValue = rightOpSlot.getValue(_contex)
-	if(!isNumber(rightValue)):
+	if(onlyNumbers && !isNumber(rightValue)):
 		throwError(_contex, "Right value is not a number: "+str(rightValue))
 		return false
-	return leftValue > rightValue
+	return checkThing(leftValue, rightValue)
+
+func thingOnlyNumbers():
+	return true
+
+func checkThing(a, b):
+	return a > b
+
+func getThingLabel():
+	return ">"
 
 func getTemplate():
 	return [
@@ -40,7 +51,7 @@ func getTemplate():
 		},
 		{
 			type = "label",
-			text = ">",
+			text = getThingLabel(),
 		},
 		{
 			type = "slot",

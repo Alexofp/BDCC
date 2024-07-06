@@ -42,11 +42,12 @@ func onBlockChanged(_newBlock):
 
 func removeBlock(_theblock):
 	if(slotVar != null):
-		print("REMOVED BLOCK")
+		#print("REMOVED BLOCK")
 		slotVar.setBlock(null)
 
 func _on_BlockCatcherPanel_onBlockDraggedOnto(_data, _index):
 	if(slotVar != null):
+		editor.onUserChangeMade()
 		var theBlock = _data["block"]
 		_data["ref"].doSelfdelete()
 		slotVar.setBlock(theBlock)

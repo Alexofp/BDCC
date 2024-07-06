@@ -7,8 +7,8 @@ func getCategories():
 	return ["Math"]
 
 func _init():
-	leftOpSlot.setRawType(CrotchVarType.INT)
-	rightOpSlot.setRawType(CrotchVarType.INT)
+	leftOpSlot.setRawType(CrotchVarType.NUMBER)
+	rightOpSlot.setRawType(CrotchVarType.NUMBER)
 
 func getType():
 	return CrotchBlocks.VALUE
@@ -22,7 +22,7 @@ func setRightBlock(theBlock):
 func execute(_contex:CodeContex):
 	var leftValue = leftOpSlot.getValue(_contex)
 	var rightValue = rightOpSlot.getValue(_contex)
-	if(isString(leftValue)):
+	if(thingSupportsStrings() && isString(leftValue)):
 		if(!isString(rightValue)):
 			throwError(_contex, "Left value is a string ("+str(leftValue)+") but the right value isn't: "+str(rightValue))
 			return false
@@ -33,7 +33,16 @@ func execute(_contex:CodeContex):
 	if(!isNumber(rightValue)):
 		throwError(_contex, "Right value is not a number: "+str(rightValue))
 		return false
-	return leftValue + rightValue
+	return doThing(leftValue, rightValue)
+
+func thingSupportsStrings():
+	return true
+
+func doThing(a, b):
+	return a + b
+
+func getThingLabel():
+	return "+"
 
 func getTemplate():
 	return [
@@ -45,7 +54,7 @@ func getTemplate():
 		},
 		{
 			type = "label",
-			text = "PLUS",
+			text = getThingLabel(),
 		},
 		{
 			type = "slot",

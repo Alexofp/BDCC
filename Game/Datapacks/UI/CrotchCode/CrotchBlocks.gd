@@ -26,17 +26,44 @@ static func getRightBracket(theType):
 static func getAll():
 	return [
 		"AlwaysTrueBlock",
+		"AlwaysFalseBlock",
 		"IfCodeBlock",
-		"PlusBlock",
+		"WhileCodeBlock",
+		
+		"MathPlusBlock",
+		"MathMinusBlock",
+		"MathMultBlock",
+		"MathDivideBlock",
+		"MathFModBlock",
+		"MathModBlock",
+		"MathPowBlock",
+		"MathOpBlock",
+		
 		"PrintBlock",
-		"RawStringBlock",
-		"AndBlock",
-		"RawIntBlock",
-		"BiggerThanBlock",
-		"TestList",
 		"OutputBigBlock",
-		"SetVarBlock",
-		"GetVarBlock",
+		
+		"RawStringBlock",
+		"RawIntBlock",
+		
+		"LogicAndBlock",
+		"LogicOrBlock",
+		"LogicNotBlock",
+		
+		"MathLogicEqualsBlock",
+		"MathLogicNotEqualsBlock",
+		"MathLogicBiggerThanBlock",
+		"MathLogicLessThanBlock",
+		"MathLogicBiggerThanOrEqBlock",
+		"MathLogicLessThanOrEqBlock",
+		
+		"TestList",
+		"VarSetBlock",
+		"VarGetBlock",
+		"VarIncBlock",
+		
+		"ToStringBlock",
+		"ToIntBlock",
+		"ToFloatBlock",
 		]
 
 static func createBlock(theID):

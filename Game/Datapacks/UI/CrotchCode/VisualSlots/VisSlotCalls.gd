@@ -13,6 +13,9 @@ func _ready():
 	$BlockCatcherPanel.setSideLabelsType(CrotchBlocks.CALL)
 
 func setSlotCalls(theSlotCalls):
+	if(slotCalls != null):
+		slotCalls.disconnect("onBlockAdded", self, "onNewBlockAdded")
+		slotCalls.disconnect("onBlockRemoved", self, "onBlockRemoved")
 	slotCalls = theSlotCalls
 	slotCalls.connect("onBlockAdded", self, "onNewBlockAdded")
 	slotCalls.connect("onBlockRemoved", self, "onBlockRemoved")
@@ -30,7 +33,7 @@ func onBlockRemoved(_oldBlock):
 func onNewBlockAdded(_newBlock, _index):
 	if(!is_inside_tree()):
 		return
-	print("ADD BLOCK AT INDEX ", _index)
+	#print("ADD BLOCK AT INDEX ", _index)
 	#addVisBlockToList(newBlock, index)
 	#updateLittleAdders()
 	requestFullUpdate()
@@ -78,8 +81,8 @@ func requestFullUpdate():
 		#yield(get_tree(), "idle_frame")
 		#yield(get_tree(), "idle_frame")
 		#yield(get_tree(), "idle_frame")
-		#call_deferred("updateBlocksFully")
-		updateBlocksFully()
+		call_deferred("updateBlocksFully")
+		#updateBlocksFully()
 	
 var needsUpdating = false
 func updateBlocksFully():
@@ -99,9 +102,10 @@ func updateBlocksFully():
 	
 
 func _on_BlockCatcherPanel_onBlockDraggedOnto(_data, _index):
-	print("INDEX: ",_index)
+	#print("INDEX: ",_index)
 	#print(_data)
 	if(slotCalls != null):
+		editor.onUserChangeMade()
 		var theBlock = _data["block"]
 		_data["ref"].doSelfdelete()
 		if(_index >= 0):
