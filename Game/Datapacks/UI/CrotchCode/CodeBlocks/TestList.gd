@@ -8,10 +8,6 @@ func getCategories():
 func _init():
 	listSlot.setRawType(CrotchVarType.STRING)
 
-func updateEditor(_editor):
-	if(_editor != null):
-		listSlot.setRawValue(_editor.getPossiblePrintStrings()[0])
-
 func getType():
 	return CrotchBlocks.VALUE
 
@@ -34,6 +30,10 @@ func getTemplate():
 func getSlot(_id):
 	if(_id == "listSlot"):
 		return listSlot
+
+func updateEditor(_editor):
+	if(_editor != null):
+		listSlot.setRawValue(_editor.getPossiblePrintStrings()[0])
 
 func updateVisualSlot(_editor, _id, _visSlot):
 	if(_editor != null):

@@ -17,3 +17,6 @@ func loadVar(_data, thekey, defaultValue = null):
 	if(_data.has(thekey)):
 		return _data[thekey]
 	return defaultValue
+
+func getCode():
+	return code

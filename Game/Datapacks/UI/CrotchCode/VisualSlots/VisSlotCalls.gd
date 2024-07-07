@@ -107,7 +107,12 @@ func _on_BlockCatcherPanel_onBlockDraggedOnto(_data, _index):
 	if(slotCalls != null):
 		editor.onUserChangeMade()
 		var theBlock = _data["block"]
-		_data["ref"].doSelfdelete()
+		if(Input.is_action_pressed("editor_duplicate_mod")):
+			var newBlock = CrotchBlocks.createBlock(theBlock.id)
+			newBlock.loadData(theBlock.saveData().duplicate(true))
+			theBlock = newBlock
+		else:
+			_data["ref"].doSelfdelete()
 		if(_index >= 0):
 			slotCalls.addBlockAt(theBlock, _index)
 		else:

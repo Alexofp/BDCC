@@ -53,6 +53,11 @@ func saveData():
 
 func loadData(_data):
 	rawValue = loadVar(_data, "rawValue", null)
+	if(rawValue == null):
+		if(rawType == CrotchVarType.NUMBER):
+			rawValue = 0
+		if(rawType == CrotchVarType.STRING):
+			rawValue = ""
 	
 	var blockData = loadVar(_data, "block", null)
 	if(blockData == null):

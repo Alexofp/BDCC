@@ -25,49 +25,56 @@ static func getRightBracket(theType):
 
 static func getAll():
 	return [
-		"AlwaysTrueBlock",
-		"AlwaysFalseBlock",
-		"IfCodeBlock",
-		"WhileCodeBlock",
+		"AlwaysTrue",
+		"AlwaysFalse",
+		"FlowIf",
+		"FlowWhile",
 		
-		"MathPlusBlock",
-		"MathMinusBlock",
-		"MathMultBlock",
-		"MathDivideBlock",
-		"MathFModBlock",
-		"MathModBlock",
-		"MathPowBlock",
-		"MathOpBlock",
+		"MathPlus",
+		"MathMinus",
+		"MathMult",
+		"MathDivide",
+		"MathFMod",
+		"MathMod",
+		"MathPow",
+		"MathOp",
 		
-		"PrintBlock",
-		"OutputBigBlock",
+		"Print",
 		
-		"RawStringBlock",
-		"RawIntBlock",
+		"SceneOutput",
+		"SceneButton",
+		"SceneButtonDisabled",
 		
-		"LogicAndBlock",
-		"LogicOrBlock",
-		"LogicNotBlock",
+		"RawString",
+		"RawInt",
 		
-		"MathLogicEqualsBlock",
-		"MathLogicNotEqualsBlock",
-		"MathLogicBiggerThanBlock",
-		"MathLogicLessThanBlock",
-		"MathLogicBiggerThanOrEqBlock",
-		"MathLogicLessThanOrEqBlock",
+		"LogicAnd",
+		"LogicOr",
+		"LogicNot",
+		
+		"MathLogicEquals",
+		"MathLogicNotEquals",
+		"MathLogicBiggerThan",
+		"MathLogicLessThan",
+		"MathLogicBiggerThanOrEq",
+		"MathLogicLessThanOrEq",
 		
 		"TestList",
-		"VarSetBlock",
-		"VarGetBlock",
-		"VarIncBlock",
+		"VarSet",
+		"VarGet",
+		"VarInc",
 		
-		"ToStringBlock",
-		"ToIntBlock",
-		"ToFloatBlock",
+		"ToString",
+		"ToInt",
+		"ToFloat",
 		]
 
 static func createBlock(theID):
-	var newBlock = load("res://Game/Datapacks/UI/CrotchCode/CodeBlocks/"+theID+".gd").new()
+	var resourcePath = "res://Game/Datapacks/UI/CrotchCode/CodeBlocks/"+theID+".gd"
+	var newBlockScene = load(resourcePath)
+	if(newBlockScene == null):
+		return null
+	var newBlock = newBlockScene.new()
 		
 	if(newBlock != null):
 		newBlock.id = theID

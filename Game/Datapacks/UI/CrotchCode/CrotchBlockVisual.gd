@@ -45,6 +45,8 @@ func setCodeBlock(newCodeBlock):
 	constructTemplate()
 
 func constructTemplate():
+	if(!is_inside_tree()):
+		return
 	Util.delete_children(template_vertical_list)
 	
 	if(codeBlock.shouldExpandTemplate()):
@@ -98,6 +100,8 @@ func constructTemplate():
 				newSlotVis.setExtraMode(templateLine["extraType"])
 			if(templateLine.has("expand") && templateLine["expand"]):
 				newSlotVis.makeExpand()
+			if(templateLine.has("placeholder")):
+				newSlotVis.setPlaceholder(templateLine["placeholder"])
 			newSlotVis.setSlotVar(codeBlock.getSlot(slotID))
 			codeBlock.updateVisualSlot(editor, slotID, newSlotVis)
 		if(templateType == "slot_list"):

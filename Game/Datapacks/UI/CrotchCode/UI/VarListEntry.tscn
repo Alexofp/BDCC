@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Game/Datapacks/UI/PackVarUIs/SelectorVarUI.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Datapacks/UI/PackVarUIs/StringVarUI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/UI/VarListEntry.gd" type="Script" id=3]
+
+[node name="VarListEntry" type="HBoxContainer"]
+margin_right = 1272.0
+margin_bottom = 20.0
+script = ExtResource( 3 )
+
+[node name="StringVarUI" parent="." instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 393.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="SelectorVarUI" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 397.0
+margin_right = 790.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="."]
+margin_left = 794.0
+margin_right = 1188.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="DeleteButton" type="Button" parent="."]
+margin_left = 1192.0
+margin_right = 1272.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 80, 0 )
+text = "Delete"
+
+[connection signal="onValueChange" from="StringVarUI" to="." method="_on_StringVarUI_onValueChange"]
+[connection signal="onValueChange" from="SelectorVarUI" to="." method="_on_SelectorVarUI_onValueChange"]
+[connection signal="pressed" from="DeleteButton" to="." method="_on_DeleteButton_pressed"]

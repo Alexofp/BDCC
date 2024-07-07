@@ -5,6 +5,7 @@ var id:String = "error"
 var name:String = "New scene"
 
 var states:Dictionary = {}
+var vars:Dictionary = {}
 
 func initStartingData():
 	states[""] = DatapackSceneState.new()
@@ -41,6 +42,7 @@ func saveData():
 	return {
 		"name": name,
 		"states": stateData,
+		"vars": vars,
 	}
 
 func loadData(data):
@@ -53,6 +55,19 @@ func loadData(data):
 		newState.id = stateID
 		newState.loadData(loadVar(stateData, stateID, {}))
 		states[stateID] = newState
+	
+	var varsData = loadVar(data, "vars", {})
+	vars = {}
+	for varName in varsData:
+		var varData = varsData[varName]
+		
+		if(!varData.has("type") || !varData.has("default")):
+			continue
+			
+		vars[varName] = {
+			type = varData["type"],
+			default = varData["default"],
+		}
 
 func loadVar(_data, thekey, defaultValue = null):
 	if(_data.has(thekey)):

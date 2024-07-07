@@ -246,6 +246,14 @@ static func stripBadCharactersFromID(path: String) -> String:
 	
 	return newPath
 
+static func stripAllBadCharactersFromVarName(path: String) -> String:
+	var newPath = ""
+	for character in path:
+		var c:String = character.to_lower()
+		if(letters_chars.has(c) || numbers_chars.has(c) || ["_"].has(c)):
+			newPath += character
+	
+	return newPath
 
 static func sayMale(text):
 	return "[color=#3E84E0]\""+text+"\"[/color]"

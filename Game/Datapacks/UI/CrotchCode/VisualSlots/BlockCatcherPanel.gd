@@ -56,6 +56,11 @@ func setSideLabelsType(theType):
 	$Label.text = CrotchBlocks.getLeftBracket(theType)
 	$Label2.text = CrotchBlocks.getRightBracket(theType)
 
+func setPlaceholder(thePlace):
+	$MarginContainer/LineEdit.placeholder_text = thePlace
+	$MarginContainer/SpinBox.hint_tooltip = thePlace
+	$MarginContainer/OptionButton.hint_tooltip = thePlace
+
 func setRawMode(theMode, newExtra=0):
 	rawMode = theMode
 	extraMode = newExtra
@@ -80,12 +85,17 @@ func updateRawVis():
 		$MarginContainer.visible = true
 		$MarginContainer/OptionButton.visible = true
 		$MarginContainer/OptionButton.clear()
+		var foundValue = false
 		var _i = 0
 		for value in rawPossibleValues:
 			$MarginContainer/OptionButton.add_item(str(value))
 			if(value == rawValue):
 				$MarginContainer/OptionButton.select(_i)
+				foundValue = true
 			_i += 1
+		if(!foundValue):
+			$MarginContainer/OptionButton.add_item(str(rawValue))
+			$MarginContainer/OptionButton.select(_i)
 	elif(rawMode == CrotchVarType.ANY):
 		$MarginContainer.visible = false
 	elif(rawMode == CrotchVarType.NUMBER):
@@ -118,8 +128,14 @@ func setRawValue(newVal):
 	if(rawMode == CrotchVarType.ANY):
 		return
 	if(rawMode == CrotchVarType.NUMBER):
+		if(newVal == null):
+			newVal = 0
+			rawValue = 0
 		$MarginContainer/SpinBox.value = newVal
 	if(rawMode == CrotchVarType.STRING):
+		if(newVal == null):
+			newVal = ""
+			rawValue = ""
 		$MarginContainer/LineEdit.text = newVal
 		$MarginContainer/BigTextEdit/TextEdit.text = newVal
 	return null

@@ -1,4 +1,4 @@
-extends "res://Game/Datapacks/UI/CrotchCode/CodeBlocks/ToStringBlock.gd"
+extends "res://Game/Datapacks/UI/CrotchCode/CodeBlocks/ToString.gd"
 
 func doThing(val):
 	return int(val)

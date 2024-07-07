@@ -216,3 +216,8 @@ func getName():
 
 func getFancyName():
 	return name + " (by "+author+")"
+
+func getScene(theID):
+	if(!scenes.has(theID)):
+		return null
+	return scenes[theID]

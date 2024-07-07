@@ -49,7 +49,12 @@ func _on_BlockCatcherPanel_onBlockDraggedOnto(_data, _index):
 	if(slotVar != null):
 		editor.onUserChangeMade()
 		var theBlock = _data["block"]
-		_data["ref"].doSelfdelete()
+		if(Input.is_action_pressed("editor_duplicate_mod")):
+			var newBlock = CrotchBlocks.createBlock(theBlock.id)
+			newBlock.loadData(theBlock.saveData().duplicate(true))
+			theBlock = newBlock
+		else:
+			_data["ref"].doSelfdelete()
 		slotVar.setBlock(theBlock)
 
 func setSideLabelsType(theType):
@@ -62,3 +67,6 @@ func _on_BlockCatcherPanel_onRawValueChanged(newRaw):
 
 func makeExpand():
 	size_flags_horizontal = SIZE_EXPAND_FILL
+
+func setPlaceholder(thePlace):
+	block_catcher_panel.setPlaceholder(thePlace)

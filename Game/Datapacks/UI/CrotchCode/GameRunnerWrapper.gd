@@ -1,0 +1,22 @@
+extends Control
+onready var game = $Game
+
+signal onStopButtonPressed
+
+var theGame
+
+func run(datapackID, datapackScene, pickedSavePath = null):
+	theGame = preload("res://Game/MainScene.tscn").instance()
+	game.add_child(theGame)
+	theGame.setIsTestingScene(true)
+	if(pickedSavePath != null):
+		SAVE.loadGame(pickedSavePath)
+	#theGame.clearSceneStack()
+	#theGame.runScene(newSceneID)
+	if(!theGame.isDatapackLoaded(datapackID)):
+		theGame.loadDatapack(datapackID)
+	theGame.runScene("DatapackScene", [datapackID, datapackScene])
+	theGame.runCurrentScene()
+
+func _on_StopButton_pressed():
+	emit_signal("onStopButtonPressed")

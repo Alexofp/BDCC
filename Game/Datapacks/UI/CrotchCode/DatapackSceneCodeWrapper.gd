@@ -5,6 +5,7 @@ onready var vis_slot_calls = $ScrollContainer/PanelContainer/VisSlotCalls
 var mainSlotCalls = preload("res://Game/Datapacks/UI/CrotchCode/SlotCalls.gd").new()
 onready var undo_button = $HBoxContainer/UndoButton
 onready var redo_button = $HBoxContainer/RedoButton
+onready var scroll_container = $ScrollContainer
 
 var editor = null
 
@@ -79,3 +80,7 @@ func _on_UndoButton_pressed():
 
 func _on_RedoButton_pressed():
 	doRedo()
+
+func resetScroll():
+	scroll_container.get_v_scrollbar().value = 0
+	scroll_container.get_h_scrollbar().value = 0

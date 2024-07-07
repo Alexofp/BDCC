@@ -17,7 +17,7 @@ func getType():
 
 func execute(_contex:CodeContex):
 	var varName = str(varNameSlot.getValue(_contex))
-	
+	print("VAR NAME IS: "+str(varName))
 	_contex.setVar(varName, _contex.getVar(varName, 0) + varValueSlot.getValue(_contex))
 
 func getTemplate():
@@ -28,7 +28,7 @@ func getTemplate():
 		},
 		{
 			type = "slot",
-			id = "varNameSlot",
+			id = "var",
 			slot = varNameSlot,
 			slotType = CrotchBlocks.VALUE,
 		},
@@ -38,14 +38,23 @@ func getTemplate():
 		},
 		{
 			type = "slot",
-			id = "varValueSlot",
+			id = "value",
 			slot = varValueSlot,
 			slotType = CrotchBlocks.VALUE,
 		},
 	]
 
 func getSlot(_id):
-	if(_id == "varNameSlot"):
+	if(_id == "var"):
 		return varNameSlot
-	if(_id == "varValueSlot"):
+	if(_id == "value"):
 		return varValueSlot
+
+func updateEditor(_editor):
+	if(_editor != null && _editor.has_method("getAllVarNames")):
+		varNameSlot.setRawValue(_editor.getAllVarNames()[0])
+
+func updateVisualSlot(_editor, _id, _visSlot):
+	if(_id == "var"):
+		if(_editor != null && _editor.has_method("getAllVarNames")):
+			_visSlot.setPossibleValues(_editor.getAllVarNames())

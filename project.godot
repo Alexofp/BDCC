@@ -314,10 +314,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Datapacks/DatapackScene.gd"
 }, {
+"base": "CodeContex",
+"class": "DatapackSceneCodeContext",
+"language": "GDScript",
+"path": "res://Game/Datapacks/DatapackScene/DatapackSceneCodeContext.gd"
+}, {
 "base": "Reference",
 "class": "DatapackSceneState",
 "language": "GDScript",
 "path": "res://Game/Datapacks/DatapackScene/DatapackSceneState.gd"
+}, {
+"base": "Object",
+"class": "DatapackSceneVarType",
+"language": "GDScript",
+"path": "res://Game/Datapacks/DatapackScene/DatapackSceneVarType.gd"
 }, {
 "base": "SkinBase",
 "class": "DatapackSkin",
@@ -1361,7 +1371,9 @@ _global_script_class_icons={
 "DatapackCharacter": "",
 "DatapackResource": "",
 "DatapackScene": "",
+"DatapackSceneCodeContext": "",
 "DatapackSceneState": "",
+"DatapackSceneVarType": "",
 "DatapackSkin": "",
 "DeepLTranslator": "",
 "Direction": "",
@@ -1662,6 +1674,11 @@ gameui_skills={
 gameui_menu={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":67,"unicode":0,"echo":false,"script":null)
+ ]
+}
+editor_duplicate_mod={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777240,"unicode":0,"echo":false,"script":null)
  ]
 }
 
