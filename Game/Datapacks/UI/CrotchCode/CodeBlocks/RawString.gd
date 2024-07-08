@@ -16,10 +16,10 @@ func setRawValue(theValue):
 
 func getTemplate():
 	return [
-#		{
-#			type = "label",
-#			text = "RAW VALUE=",
-#		},
+		{
+			type = "label",
+			text = "Raw",
+		},
 		{
 			id = "rawValue",
 			type = "rawstring", # Some text input here

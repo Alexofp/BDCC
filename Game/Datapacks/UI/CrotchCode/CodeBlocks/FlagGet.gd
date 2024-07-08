@@ -3,7 +3,7 @@ extends "res://Game/Datapacks/UI/CrotchCode/CodeBlockBase.gd"
 var varNameSlot := CrotchSlotVar.new()
 
 func getCategories():
-	return ["Variables"]
+	return ["Flags"]
 
 func _init():
 	varNameSlot.setRawType(CrotchVarType.STRING)
@@ -13,7 +13,7 @@ func getType():
 	return CrotchBlocks.VALUE
 
 func execute(_contex:CodeContex):
-	return _contex.getVar(str(varNameSlot.getValue(_contex)))
+	return _contex.getFlag(str(varNameSlot.getValue(_contex)))
 
 func getTemplate():
 	return [
@@ -34,10 +34,10 @@ func getSlot(_id):
 		return varNameSlot
 
 func updateEditor(_editor):
-	if(_editor != null && _editor.has_method("getAllVarNames")):
-		varNameSlot.setRawValue(_editor.getAllVarNames()[0])
+	if(_editor != null && _editor.has_method("getAllFlagNames")):
+		varNameSlot.setRawValue(_editor.getAllFlagNames()[0])
 
 func updateVisualSlot(_editor, _id, _visSlot):
 	if(_id == "var"):
-		if(_editor != null && _editor.has_method("getAllVarNames")):
-			_visSlot.setPossibleValues(_editor.getAllVarNames())
+		if(_editor != null && _editor.has_method("getAllFlagNames")):
+			_visSlot.setPossibleValues(_editor.getAllFlagNames())

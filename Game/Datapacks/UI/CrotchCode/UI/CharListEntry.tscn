@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/Datapacks/UI/PackVarUIs/StringVarUI.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/UI/CharListEntry.gd" type="Script" id=2]
+
+[node name="CharListEntry" type="HBoxContainer"]
+margin_right = 1272.0
+margin_bottom = 24.0
+script = ExtResource( 2 )
+
+[node name="AliasVarUI" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 300.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="NameLabel" type="Label" parent="."]
+margin_left = 304.0
+margin_top = 5.0
+margin_right = 604.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "rahi = Rahi"
+
+[node name="StartsCheckBox" type="CheckBox" parent="."]
+margin_left = 608.0
+margin_right = 908.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "Added on start"
+
+[node name="VariantVarUI" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 912.0
+margin_right = 1213.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="DeleteButton" type="Button" parent="."]
+margin_left = 1217.0
+margin_right = 1272.0
+margin_bottom = 24.0
+text = "Delete"
+
+[connection signal="onValueChange" from="AliasVarUI" to="." method="_on_AliasVarUI_onValueChange"]
+[connection signal="toggled" from="StartsCheckBox" to="." method="_on_StartsCheckBox_toggled"]
+[connection signal="onValueChange" from="VariantVarUI" to="." method="_on_VariantVarUI_onValueChange"]
+[connection signal="pressed" from="DeleteButton" to="." method="_on_DeleteButton_pressed"]

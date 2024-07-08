@@ -97,6 +97,8 @@ const themeOutput = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockTheme
 const themeMath = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockMath.tres")
 const themeLogic = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockLogic.tres")
 const themeControl = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockControl.tres")
+const themeFlags = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockFlags.tres")
+const themeGame = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockGame.tres")
 
 func getVisualBlockTheme():
 	var mainCategory = getMainCategory()
@@ -108,5 +110,9 @@ func getVisualBlockTheme():
 		return themeVars
 	if(mainCategory in ["Math"]):
 		return themeMath
+	if(mainCategory in ["Flags"]):
+		return themeFlags
+	if(mainCategory in ["Game"]):
+		return themeGame
 	
 	return themeOutput

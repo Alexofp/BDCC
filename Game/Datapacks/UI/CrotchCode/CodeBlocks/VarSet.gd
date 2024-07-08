@@ -16,7 +16,7 @@ func getType():
 	return CrotchBlocks.CALL
 
 func execute(_contex:CodeContex):
-	_contex.setVar(str(varNameSlot.getValue(_contex)), varValueSlot.getValue(_contex))
+	_contex.setVar(str(varNameSlot.getValue(_contex)), varValueSlot.getValue(_contex), self)
 
 func getTemplate():
 	return [

@@ -11,8 +11,16 @@ onready var state_label = $VBoxContainer/MarginContainer/TabContainer/States/HBo
 onready var states = $VBoxContainer/MarginContainer/TabContainer/States
 
 onready var new_var_line_edit = $VBoxContainer/MarginContainer/TabContainer/Variables/HBoxContainer/NewVarLineEdit
-onready var var_list = $VBoxContainer/MarginContainer/TabContainer/Variables/VarList
+onready var var_list = $VBoxContainer/MarginContainer/TabContainer/Variables/ScrollContainer/VarList
+onready var new_flag_line_edit = $VBoxContainer/MarginContainer/TabContainer/Variables/HBoxContainer3/NewFlagLineEdit
+onready var flag_list = $VBoxContainer/MarginContainer/TabContainer/Variables/ScrollContainer2/FlagList
+
+onready var possible_char_list = $VBoxContainer/MarginContainer/TabContainer/Characters/HBoxContainer/VBoxContainer/PossibleCharList
+onready var char_list = $VBoxContainer/MarginContainer/TabContainer/Characters/ScrollContainer/CharList
+onready var filter_possible_char_list_edit = $VBoxContainer/MarginContainer/TabContainer/Characters/HBoxContainer/VBoxContainer/FilterPossibleCharListEdit
+
 var varListEntryScene = preload("res://Game/Datapacks/UI/CrotchCode/UI/VarListEntry.tscn")
+var charListEntryScene = preload("res://Game/Datapacks/UI/CrotchCode/UI/CharListEntry.tscn")
 
 var gameWrapperScene = preload("res://Game/Datapacks/UI/CrotchCode/GameRunnerWrapper.tscn")
 var savePickerScene = preload("res://Game/Datapacks/UI/CrotchCode/DatapackSavePicker.tscn")
@@ -27,6 +35,9 @@ var statesListArray = []
 
 var selectedSavePath = null
 
+var allPossibleChars = []
+var possibleChars = []
+
 func _ready():
 	codeContex.connect("onPrint", self, "doOutput")
 	codeContex.connect("onError", self, "doOutputError")
@@ -34,6 +45,26 @@ func _ready():
 	
 	possible_code_blocks_list.setEditor(self)
 	
+	for otherdatapackID in GlobalRegistry.getDatapacks():
+		var otherdatapack:Datapack = GlobalRegistry.getDatapack(otherdatapackID)
+		for charID in otherdatapack.characters:
+			var finalCharID = otherdatapack.getFinalCharacterID(charID)
+			allPossibleChars.append(finalCharID)
+	for charID in GlobalRegistry.getCharacterClasses():
+		allPossibleChars.append(charID)
+	updatePossibleCharList()
+	
+func updatePossibleCharList():
+	possible_char_list.clear()
+	possibleChars = []
+	var filterText = filter_possible_char_list_edit.text.to_lower()
+	var hasFilter = (filterText != "")
+	for charID in allPossibleChars:
+		if(hasFilter && !(filterText in charID.to_lower())):
+			continue
+		
+		possibleChars.append(charID)
+		possible_char_list.add_item(charID)
 	
 var outputLines = []
 func doOutput(theText):
@@ -61,6 +92,8 @@ func setScene(theScene):
 	updateStatesList()
 	updateSelectedState()
 	updateVarList()
+	updateFlagList()
+	updateCharList()
 	
 	possible_code_blocks_list.populate()
 
@@ -97,9 +130,10 @@ func onMenuPopped():
 
 
 func _on_TestButton_pressed():
-	print(datapack_scene_code_wrapper.getSlotCalls().getBlocks())
+	#print(datapack_scene_code_wrapper.getSlotCalls().getBlocks())
 	codeContex.clearVars()
 	codeContex.varsDefinition = scene.vars
+	codeContex.flagsDefinition = datapack.flags
 	codeContex.execute(datapack_scene_code_wrapper.getSlotCalls())
 	
 #func doOutput(theText):
@@ -218,6 +252,29 @@ func updateVarList():
 		newVarEntry.connect("onDeletePressed", self, "onDeleteVarPressed")
 		newVarEntry.connect("onVarEdit", self, "onVarEdit")
 
+func updateFlagList():
+	Util.delete_children(flag_list)
+	
+	for varName in datapack.flags:
+		var varData = datapack.flags[varName]
+		
+		var newVarEntry = varListEntryScene.instance()
+		flag_list.add_child(newVarEntry)
+		
+		newVarEntry.setEntry(varName, varData)
+		newVarEntry.connect("onDeletePressed", self, "onDeleteFlagPressed")
+		newVarEntry.connect("onVarEdit", self, "onFlagEdit")
+
+func onDeleteFlagPressed(varName):
+	if(!datapack.flags.has(varName)):
+		return
+	var _ok = datapack.flags.erase(varName)
+	
+	updateFlagList()
+
+func onFlagEdit(varName, newVar):
+	datapack.flags[varName] = newVar
+
 func onDeleteVarPressed(varName):
 	if(!scene.vars.has(varName)):
 		return
@@ -227,7 +284,6 @@ func onDeleteVarPressed(varName):
 
 func onVarEdit(varName, newVar):
 	scene.vars[varName] = newVar
-	updateVarList()
 
 
 func _on_States_visibility_changed():
@@ -253,3 +309,78 @@ func _on_AddVarButton_pressed():
 
 func getAllVarNames():
 	return scene.vars.keys()
+func getAllFlagNames():
+	return datapack.flags.keys()
+func getAllInvolvedCharIDs():
+	return ["pc"]+scene.chars.keys()
+
+func _on_AddFlagButton_pressed():
+	var newVarName = new_flag_line_edit.text
+	newVarName = Util.stripAllBadCharactersFromVarName(newVarName)
+	if(newVarName == ""):
+		showAlert("Flag name can not be empty")
+		return
+	if(datapack.flags.has(newVarName)):
+		showAlert("Flag with this name already exists")
+		return
+	
+	datapack.flags[newVarName] = {
+		type = DatapackSceneVarType.BOOL,
+		default = false,
+	}
+	updateFlagList()
+
+
+func _on_AddCharButton_pressed():
+	if(possible_char_list.get_selected_items().size() <= 0):
+		return
+	var charIndex = possible_char_list.get_selected_items()[0]
+	if(charIndex < 0 || charIndex >= possibleChars.size()):
+		return
+	
+	var charID:String = possibleChars[charIndex]
+	var alias:String = charID
+	
+	if(":" in charID):
+		alias = Util.splitOnFirst(alias, ":")[1]
+	
+	var newChar = {
+		realid = charID,
+		start = true,
+		variant = "",
+	}
+	scene.chars[alias] = newChar
+	updateCharList()
+
+func updateCharList():
+	Util.delete_children(char_list)
+	
+	for alias in scene.chars:
+		var charEntry = scene.chars[alias]
+		
+		var newCharEntry = charListEntryScene.instance()
+		char_list.add_child(newCharEntry)
+		
+		newCharEntry.setEntry(alias, charEntry)
+		newCharEntry.connect("onDeletePressed", self, "onDeleteCharPressed")
+		newCharEntry.connect("onCharEdit", self, "onCharEdit")
+		newCharEntry.connect("onAliasChange", self, "onCharAliasChange")
+
+func onDeleteCharPressed(alias):
+	if(!scene.chars.has(alias)):
+		return
+	var _ok = scene.chars.erase(alias)
+	
+	updateCharList()
+
+func onCharEdit(alias, entry):
+	scene.chars[alias] = entry
+
+func onCharAliasChange(oldAlias, newAlias):
+	var theEntry = scene.chars[oldAlias]
+	var _ok = scene.chars.erase(oldAlias)
+	scene.chars[newAlias] = theEntry
+	updateCharList()
+
+func _on_FilterPossibleCharListEdit_text_changed(_new_text):
+	updatePossibleCharList()

@@ -9,21 +9,20 @@ func getCategories():
 func _init():
 	varNameSlot.setRawType(CrotchVarType.STRING)
 	varNameSlot.setRawValue("")
-	varValueSlot.setRawType(CrotchVarType.NUMBER)
-	varValueSlot.setRawValue(1)
+	varValueSlot.setRawType(CrotchVarType.STRING)
+	varValueSlot.setRawValue("")
 
 func getType():
 	return CrotchBlocks.CALL
 
 func execute(_contex:CodeContex):
-	var varName = str(varNameSlot.getValue(_contex))
-	_contex.setVar(varName, _contex.getVar(varName, 0) + varValueSlot.getValue(_contex), self)
+	_contex.setVar(str(varNameSlot.getValue(_contex)), varValueSlot.getValue(_contex), self)
 
 func getTemplate():
 	return [
 		{
 			type = "label",
-			text = "Inc",
+			text = "Set",
 		},
 		{
 			type = "slot",
@@ -33,13 +32,14 @@ func getTemplate():
 		},
 		{
 			type = "label",
-			text = "by",
+			text = "to",
 		},
 		{
 			type = "slot",
 			id = "value",
 			slot = varValueSlot,
 			slotType = CrotchBlocks.VALUE,
+			placeholder = "text",
 		},
 	]
 

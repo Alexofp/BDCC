@@ -11,6 +11,7 @@ var description:String = "No description provided"
 var characters:Dictionary = {}
 var skins:Dictionary = {}
 var scenes:Dictionary = {}
+var flags:Dictionary = {}
 
 func getEditVars():
 	return {
@@ -99,6 +100,7 @@ func saveData():
 		"characters": charData,
 		"skins": skinData,
 		"scenes": sceneData,
+		"flags": flags,
 	}
 
 func loadVar(_data, thekey, defaultValue = null):
@@ -136,6 +138,19 @@ func loadData(_data):
 		newScene.id = sceneID
 		newScene.loadData(loadVar(sceneData, sceneID, {}))
 		scenes[sceneID] = newScene
+	
+	var flagsData = loadVar(_data, "flags", {})
+	flags = {}
+	for flagName in flagsData:
+		var flagData = flagsData[flagName]
+		
+		if(!flagData.has("type") || !flagData.has("default")):
+			continue
+			
+		flags[flagName] = {
+			type = flagData["type"],
+			default = flagData["default"],
+		}
 	
 func getEditVarsOnlyValues():
 	var result = {}

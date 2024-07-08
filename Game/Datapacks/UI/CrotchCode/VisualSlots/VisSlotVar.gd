@@ -17,6 +17,8 @@ func setSlotVar(theSlotVar):
 	slotVar.connect("onBlockChanged", self, "onBlockChanged")
 	block_catcher_panel.setRawMode(slotVar.getRawType(), extraMode)
 	block_catcher_panel.setRawValue(slotVar.getRawValue())
+	if(slotVar.getRawType() == CrotchVarType.BOOL):
+		block_catcher_panel.setRawPossibleValues([true, false])
 	#print("SET BLOCK")
 
 func setPossibleValues(newVals:Array):

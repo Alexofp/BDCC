@@ -27,6 +27,7 @@ static func getAll():
 	return [
 		"AlwaysTrue",
 		"AlwaysFalse",
+		"AlwaysNull",
 		"FlowIf",
 		"FlowWhile",
 		
@@ -45,9 +46,6 @@ static func getAll():
 		"SceneButton",
 		"SceneButtonDisabled",
 		
-		"RawString",
-		"RawInt",
-		
 		"LogicAnd",
 		"LogicOr",
 		"LogicNot",
@@ -59,10 +57,28 @@ static func getAll():
 		"MathLogicBiggerThanOrEq",
 		"MathLogicLessThanOrEq",
 		
-		"TestList",
-		"VarSet",
+		"GameCharAdd",
+		"GameCharRem",
+		
+		#"TestList",
 		"VarGet",
+		"VarSet",
+		"VarSetStr",
+		"VarSetBool",
 		"VarInc",
+		"VarIsNull",
+		"VarIsBool",
+		"VarIsNumber",
+		"VarIsString",
+		
+		"RawString",
+		"RawInt",
+		
+		"FlagGet",
+		"FlagSet",
+		"FlagSetStr",
+		"FlagSetBool",
+		"FlagInc",
 		
 		"ToString",
 		"ToInt",

@@ -151,6 +151,8 @@ func _on_LineEdit_text_changed(new_text):
 		emit_signal("onRawValueChanged", new_text)
 
 func _on_OptionButton_item_selected(index):
+	if(index < 0 || index >= rawPossibleValues.size()):
+		return
 	if(rawPossibleValues.size() > 0):
 		rawValue = rawPossibleValues[index]
 		emit_signal("onRawValueChanged", rawPossibleValues[index])

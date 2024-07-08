@@ -12,6 +12,7 @@ var timeOfDay = 6*60*60 # seconds since 00:00
 var flags = {}
 var flagsCache = null
 var moduleFlags = {}
+var datapackFlags = {}
 var playerScene = preload("res://Player/Player.gd")
 var overriddenPlayerScene = preload("res://Player/OverriddenPlayer.gd")
 var overridenPC
@@ -409,6 +410,7 @@ func saveData():
 	data["currentDay"] = currentDay
 	data["flags"] = flags
 	data["moduleFlags"] = moduleFlags
+	data["datapackFlags"] = datapackFlags
 	data["EventSystem"] = GM.ES.saveData()
 	data["ChildSystem"] = GM.CS.saveData()
 	data["logMessages"] = logMessages
@@ -440,6 +442,7 @@ func loadData(data):
 	GM.ui.onTimePassed(0)
 	flags = SAVE.loadVar(data, "flags", {})
 	moduleFlags = SAVE.loadVar(data, "moduleFlags", {})
+	datapackFlags = SAVE.loadVar(data, "datapackFlags", {})
 	GM.ES.loadData(SAVE.loadVar(data, "EventSystem", {}))
 	GM.CS.loadData(SAVE.loadVar(data, "ChildSystem", {}))
 	logMessages = SAVE.loadVar(data, "logMessages", [])
@@ -654,6 +657,12 @@ func setFlag(flagID, value):
 		setModuleFlag(splitData[0], splitData[1], value)
 		return
 	
+	# Handling "DatapackID:FlagID" here
+	var splitData2 = Util.splitOnFirst(flagID, ":")
+	if(splitData2.size() > 1):
+		setDatapackFlag(splitData2[0], splitData2[1], value)
+		return
+	
 	if(!flagsCache.has(flagID)):
 		Log.printerr("setFlag(): Detected the usage of an unknown flag: "+str(flagID)+" "+Util.getStackFunction())
 		return
@@ -666,10 +675,70 @@ func setFlag(flagID, value):
 			
 	flags[flagID] = value
 
+func setDatapackFlag(datapackID, flagID, value):
+	if(loadedDatapacks.has(datapackID)):
+		Log.printerr("setDatapackFlag(): Trying to set a flag "+str(flagID)+" of a datapack that wasn't loaded: "+str(datapackID))
+		return
+	
+	# Check if value is the right type
+	var datapack:Datapack = GlobalRegistry.getDatapack(datapackID)
+	if(datapack == null):
+		Log.printerr("setDatapackFlag(): Datapack "+str(datapackID)+" isn't found "+Util.getStackFunction())
+		return
+		
+	if(!datapack.flags.has(flagID)):
+		Log.printerr("setDatapackFlag(): Datapack is "+str(datapackID)+". Detected the usage of an unknown flag: "+str(flagID)+" "+Util.getStackFunction())
+		return
+	
+	var flagType = datapack.flags[flagID]["type"]
+	if(flagType == DatapackSceneVarType.BOOL && !(value is bool)):
+		Log.printerr("setDatapackFlag(): Trying to assign a '"+str(value)+"' value to a BOOLEAN flag "+str(flagID))
+		return
+	if(flagType == DatapackSceneVarType.STRING && !(value is String)):
+		Log.printerr("setDatapackFlag(): Trying to assign a '"+str(value)+"' value to a STRING flag "+str(flagID))
+		return
+	if(flagType == DatapackSceneVarType.NUMBER && !(value is int) && !(value is float)):
+		Log.printerr("setDatapackFlag(): Trying to assign a '"+str(value)+"' value to a NUMBER flag "+str(flagID))
+		return
+		
+	if(!datapackFlags.has(datapackID)):
+		datapackFlags[datapackID] = {}
+	datapackFlags[datapackID][flagID] = value
+
+func clearDatapackFlag(datapackID, flagID):
+	if(!datapackFlags.has(datapackID) || !datapackFlags[datapackID].has(flagID)):
+		return
+	datapackFlags[datapackID].clear(flagID)
+
+func getDatapackFlag(datapackID, flagID, defaultValue = null):
+	if(!loadedDatapacks.has(datapackID)):
+		Log.printerr("getDatapackFlag(): Datapack "+str(datapackID)+" wasn't loaded "+Util.getStackFunction())
+		return defaultValue
+	
+	var datapack:Datapack = GlobalRegistry.getDatapack(datapackID)
+	if(datapack == null):
+		Log.printerr("getDatapackFlag(): Datapack "+str(datapackID)+" isn't found "+Util.getStackFunction())
+		return defaultValue
+	
+	if(!datapack.flags.has(flagID)):
+		Log.printerr("getDatapackFlag(): Datapack is "+str(datapackID)+". Detected the usage of an unknown flag: "+str(flagID)+" "+Util.getStackFunction())
+		return defaultValue
+	
+	if(!datapackFlags.has(datapackID) || !datapackFlags[datapackID].has(flagID)):
+		return datapack.flags[flagID]["default"]
+		#return defaultValue
+	
+	return datapackFlags[datapackID][flagID]
+
 func clearFlag(flagID):
 	var splitData = Util.splitOnFirst(flagID, ".")
 	if(splitData.size() > 1):
 		clearModuleFlag(splitData[0], splitData[1])
+		return
+	
+	var splitData2 = Util.splitOnFirst(flagID, ":")
+	if(splitData2.size() > 1):
+		clearDatapackFlag(splitData2[0], splitData2[1])
 		return
 	
 	flags.erase(flagID)
@@ -681,6 +750,10 @@ func getFlag(flagID, defaultValue = null):
 	var splitData = Util.splitOnFirst(flagID, ".")
 	if(splitData.size() > 1):
 		return getModuleFlag(splitData[0], splitData[1], defaultValue)
+	
+	var splitData2 = Util.splitOnFirst(flagID, ":")
+	if(splitData2.size() > 1):
+		return getDatapackFlag(splitData2[0], splitData2[1], defaultValue)
 	
 	if(!flagsCache.has(flagID)):
 		Log.printerr("getFlag(): Detected the usage of an unknown flag: "+str(flagID)+" "+Util.getStackFunction())

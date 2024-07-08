@@ -4,7 +4,7 @@ var varNameSlot := CrotchSlotVar.new()
 var varValueSlot := CrotchSlotVar.new()
 
 func getCategories():
-	return ["Variables"]
+	return ["Flags"]
 
 func _init():
 	varNameSlot.setRawType(CrotchVarType.STRING)
@@ -17,7 +17,7 @@ func getType():
 
 func execute(_contex:CodeContex):
 	var varName = str(varNameSlot.getValue(_contex))
-	_contex.setVar(varName, _contex.getVar(varName, 0) + varValueSlot.getValue(_contex), self)
+	_contex.setFlag(varName, _contex.getFlag(varName, 0) + varValueSlot.getValue(_contex), self)
 
 func getTemplate():
 	return [
@@ -50,10 +50,10 @@ func getSlot(_id):
 		return varValueSlot
 
 func updateEditor(_editor):
-	if(_editor != null && _editor.has_method("getAllVarNames")):
-		varNameSlot.setRawValue(_editor.getAllVarNames()[0])
+	if(_editor != null && _editor.has_method("getAllFlagNames")):
+		varNameSlot.setRawValue(_editor.getAllFlagNames()[0])
 
 func updateVisualSlot(_editor, _id, _visSlot):
 	if(_id == "var"):
-		if(_editor != null && _editor.has_method("getAllVarNames")):
-			_visSlot.setPossibleValues(_editor.getAllVarNames())
+		if(_editor != null && _editor.has_method("getAllFlagNames")):
+			_visSlot.setPossibleValues(_editor.getAllFlagNames())

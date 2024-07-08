@@ -21,6 +21,20 @@ func _initScene(_args = []):
 	codeContex.setDatapack(datapack)
 	codeContex.setDatapackScene(datapackScene)
 
+func _reactInit():
+	if(datapackScene == null):
+		return
+	for charAlias in datapackScene.chars:
+		var charEntry = datapackScene.chars[charAlias]
+		
+		if(charEntry["start"]):
+			addCharacter(charEntry["realid"], charEntry["variant"].split("-", false))
+
+func resolveCustomCharacterName(_charID):
+	if(datapackScene != null && datapackScene.chars.has(_charID)):
+		return datapackScene.chars[_charID]["realid"]
+	return null
+
 func _run():
 	if(datapack == null || datapackScene == null):
 		saynn("[color=red]Error[/color] Sorry, datapack or scene from this datapack no longer exists")
@@ -38,6 +52,16 @@ func _react(_action: String, _args):
 		return
 
 	setState(_action)
+
+func getSceneCreator():
+	if(datapack == null):
+		return .getSceneCreator()
+	return datapack.author
+
+func getDevCommentary():
+	if(datapackScene == null):
+		return .getDevCommentary()
+	return datapackScene.devcomment
 
 func saveData():
 	var data = .saveData()

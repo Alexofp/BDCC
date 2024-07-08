@@ -3,9 +3,11 @@ class_name DatapackScene
 
 var id:String = "error"
 var name:String = "New scene"
+var devcomment:String = ""
 
 var states:Dictionary = {}
 var vars:Dictionary = {}
+var chars:Dictionary = {}
 
 func initStartingData():
 	states[""] = DatapackSceneState.new()
@@ -26,11 +28,18 @@ func getEditVars():
 			type = "string",
 			value = name,
 		},
+		"devcomment": {
+			name = "Dev commentary",
+			type = "bigString",
+			value = devcomment,
+		},
 	}
 
 func applyEditVar(varid, value):
 	if(varid == "name"):
 		name = value
+	if(varid == "devcomment"):
+		devcomment = value
 	
 	return false
 
@@ -43,6 +52,7 @@ func saveData():
 		"name": name,
 		"states": stateData,
 		"vars": vars,
+		"chars": chars,
 	}
 
 func loadData(data):
@@ -67,6 +77,20 @@ func loadData(data):
 		vars[varName] = {
 			type = varData["type"],
 			default = varData["default"],
+		}
+	
+	var charsData = loadVar(data, "chars", {})
+	chars = {}
+	for charID in charsData:
+		var charData = charsData[charID]
+		
+		if(!charData.has("realid") || !charData.has("start") || !charData.has("variant")):
+			continue
+			
+		chars[charID] = {
+			realid = charData["realid"],
+			start = charData["start"],
+			variant = charData["variant"],
 		}
 
 func loadVar(_data, thekey, defaultValue = null):
