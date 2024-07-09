@@ -70,5 +70,7 @@ visible = false
 [connection signal="visibility_changed" from="." to="." method="_on_FlagsPanel_visibility_changed"]
 [connection signal="text_entered" from="ScrollContainer/VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_LineEdit_text_entered"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer/HBoxContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="clearDatapackFlag" from="FlagEditWindow" to="." method="_on_FlagEditWindow_clearDatapackFlag"]
 [connection signal="clearFlag" from="FlagEditWindow" to="." method="_on_FlagEditWindow_clearFlag"]
+[connection signal="setDatapackFlagValue" from="FlagEditWindow" to="." method="_on_FlagEditWindow_setDatapackFlagValue"]
 [connection signal="setFlagValue" from="FlagEditWindow" to="." method="_on_FlagEditWindow_setFlagValue"]

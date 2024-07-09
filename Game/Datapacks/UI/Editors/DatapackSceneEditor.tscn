@@ -29,7 +29,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Info" type="HBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -321,6 +320,7 @@ size_flags_horizontal = 3
 [node name="VarListEntry" parent="VBoxContainer/MarginContainer/TabContainer/Variables/ScrollContainer2/FlagList" instance=ExtResource( 5 )]
 
 [node name="Characters" type="VBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -390,19 +390,25 @@ size_flags_horizontal = 3
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -291.0
-margin_top = 13.0
-margin_right = -138.0
-margin_bottom = 39.0
+margin_left = -319.0
+margin_top = 15.0
+margin_right = -102.0
+margin_bottom = 41.0
+
+[node name="SaveAllButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+margin_right = 60.0
+margin_bottom = 26.0
+text = "Save all"
 
 [node name="RunButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_right = 78.0
+margin_left = 64.0
+margin_right = 142.0
 margin_bottom = 26.0
 text = "Run scene"
 
 [node name="PickSaveButton" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 82.0
-margin_right = 153.0
+margin_left = 146.0
+margin_right = 217.0
 margin_bottom = 26.0
 text = "Pick save"
 
@@ -428,6 +434,7 @@ text = "Save"
 [connection signal="pressed" from="VBoxContainer/MarginContainer/TabContainer/Variables/HBoxContainer3/AddFlagButton" to="." method="_on_AddFlagButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/TabContainer/Characters/HBoxContainer/AddCharButton" to="." method="_on_AddCharButton_pressed"]
 [connection signal="text_changed" from="VBoxContainer/MarginContainer/TabContainer/Characters/HBoxContainer/VBoxContainer/FilterPossibleCharListEdit" to="." method="_on_FilterPossibleCharListEdit_text_changed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/SaveAllButton" to="." method="_on_SaveAllButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/RunButton" to="." method="_on_RunButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/PickSaveButton" to="." method="_on_PickSaveButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/SaveButton" to="." method="_on_SaveButton_pressed"]

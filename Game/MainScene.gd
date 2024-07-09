@@ -676,7 +676,7 @@ func setFlag(flagID, value):
 	flags[flagID] = value
 
 func setDatapackFlag(datapackID, flagID, value):
-	if(loadedDatapacks.has(datapackID)):
+	if(!loadedDatapacks.has(datapackID)):
 		Log.printerr("setDatapackFlag(): Trying to set a flag "+str(flagID)+" of a datapack that wasn't loaded: "+str(datapackID))
 		return
 	
@@ -708,7 +708,7 @@ func setDatapackFlag(datapackID, flagID, value):
 func clearDatapackFlag(datapackID, flagID):
 	if(!datapackFlags.has(datapackID) || !datapackFlags[datapackID].has(flagID)):
 		return
-	datapackFlags[datapackID].clear(flagID)
+	datapackFlags[datapackID].erase(flagID)
 
 func getDatapackFlag(datapackID, flagID, defaultValue = null):
 	if(!loadedDatapacks.has(datapackID)):

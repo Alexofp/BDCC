@@ -20,13 +20,13 @@ func setScene(theScene):
 	scene = theScene
 
 func say(text):
-	scene.say(text)
+	scene.say(processOutputString(text))
 
 func sayn(text):
-	scene.sayn(text)
+	scene.sayn(processOutputString(text))
 
 func saynn(text):
-	scene.saynn(text)
+	scene.saynn(processOutputString(text))
 
 func getFlag(theVar:String, defaultValue = null, _codeblock = null):
 	if(GM.main == null):
@@ -101,6 +101,9 @@ func getVar(theVar:String, defaultValue = null):
 			return datapackScene.vars[theVar]["default"]
 	return .getVar(theVar, defaultValue)
 
+func hasVar(theVar:String):
+	return vars.has(theVar) || datapackScene.vars.has(theVar)
+
 func loadVar(_data, thekey, defaultValue = null):
 	if(_data.has(thekey)):
 		return _data[thekey]
@@ -134,3 +137,32 @@ func removeCharacter(charAlias):
 		scene.removeCharacter(datapackScene.chars[charAlias]["realid"])
 	else:
 		scene.removeCharacter(charAlias)
+
+# Replaces =charID: at the start of the lines with [say=charID] tags
+func processSayStatements(text:String):
+	var lines = text.split("\n", true)
+	var result:Array = []
+	for linea in lines:
+		var line:String = linea
+		
+		if(line.begins_with("=")):
+			var splitData = Util.splitOnFirst(line.substr(1), ": ")
+			if(splitData.size() < 2):
+				result.append(line)
+			else:
+				result.append("[say="+str(splitData[0]).strip_edges()+"]"+str(splitData[1]).strip_edges()+"[/say]")
+		else:
+			result.append(line)
+	return Util.join(result, "\n")
+
+var simpleStringInterpolator:SimpleStringInterpolator = SimpleStringInterpolator.new()
+
+# Handles things like {{varName}} and {{"meow" if varName else "mow"}}
+func processOutputVars(text:String):
+	return simpleStringInterpolator.process(text, self)
+
+func processOutputString(text:String):
+	return processOutputVars(processSayStatements(text))
+
+func aimCameraAndSetLocName(newLoc):
+	scene.aimCameraAndSetLocName(str(newLoc))

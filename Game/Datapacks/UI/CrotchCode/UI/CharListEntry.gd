@@ -26,7 +26,7 @@ func setEntry(theCharName, theEntry):
 	name_label.text = "Full id: "+entry["realid"]
 	
 	alias_var_ui.setData({
-		name = "Character alias",
+		name = "Alias",
 		value = charAlias,
 	})
 	

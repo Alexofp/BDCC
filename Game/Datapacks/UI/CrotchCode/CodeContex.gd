@@ -86,13 +86,15 @@ func calcLineNums(slotCalls):
 	slotCalls.calcLineNums(self)
 
 func say(text):
+	if(text.length() > 80):
+		text = text.substr(0, 78)+"..."
 	doPrint(text)
 
 func sayn(text):
-	doPrint(text)
+	say(text)
 
 func saynn(text):
-	doPrint(text)
+	say(text)
 
 func addButton(_nameText, _descText, _state, _codeSlot):
 	doPrint("BUTTON ADDED: "+str(_nameText))
@@ -105,3 +107,6 @@ func addCharacter(charAlias, _variant):
 
 func removeCharacter(charAlias):
 	doPrint("REMOVED CHAR: "+str(charAlias))
+
+func aimCameraAndSetLocName(newLoc):
+	doPrint("AIMING CAMERA AT "+str(newLoc))

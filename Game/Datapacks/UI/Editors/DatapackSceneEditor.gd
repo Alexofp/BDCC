@@ -131,6 +131,7 @@ func onMenuPopped():
 
 func _on_TestButton_pressed():
 	#print(datapack_scene_code_wrapper.getSlotCalls().getBlocks())
+	clearOutput()
 	codeContex.clearVars()
 	codeContex.varsDefinition = scene.vars
 	codeContex.flagsDefinition = datapack.flags
@@ -251,6 +252,12 @@ func updateVarList():
 		newVarEntry.setEntry(varName, varData)
 		newVarEntry.connect("onDeletePressed", self, "onDeleteVarPressed")
 		newVarEntry.connect("onVarEdit", self, "onVarEdit")
+		newVarEntry.connect("onVarRename", self, "onVarRename")
+
+func onVarRename(oldName, newName):
+	var varInfo = scene.vars[oldName]
+	var _ok = scene.vars.erase(oldName)
+	scene.vars[newName] = varInfo
 
 func updateFlagList():
 	Util.delete_children(flag_list)
@@ -264,6 +271,12 @@ func updateFlagList():
 		newVarEntry.setEntry(varName, varData)
 		newVarEntry.connect("onDeletePressed", self, "onDeleteFlagPressed")
 		newVarEntry.connect("onVarEdit", self, "onFlagEdit")
+		newVarEntry.connect("onVarRename", self, "onFlagRename")
+
+func onFlagRename(oldName, newName):
+	var varInfo = datapack.flags[oldName]
+	var _ok = datapack.flags.erase(oldName)
+	datapack.flags[newName] = varInfo
 
 func onDeleteFlagPressed(varName):
 	if(!datapack.flags.has(varName)):
@@ -384,3 +397,9 @@ func onCharAliasChange(oldAlias, newAlias):
 
 func _on_FilterPossibleCharListEdit_text_changed(_new_text):
 	updatePossibleCharList()
+
+func _on_SaveAllButton_pressed():
+	if(!datapack.saveToDisk()):
+		showAlert("Save failed. Sorry")
+	else:
+		doOutput("Saved")

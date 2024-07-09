@@ -45,6 +45,7 @@ static func getAll():
 		"SceneOutput",
 		"SceneButton",
 		"SceneButtonDisabled",
+		"SceneAimCamera",
 		
 		"LogicAnd",
 		"LogicOr",

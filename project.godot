@@ -1134,6 +1134,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Util/SimpleParser.gd"
 }, {
+"base": "Reference",
+"class": "SimpleStringInterpolator",
+"language": "GDScript",
+"path": "res://Game/Datapacks/UI/CrotchCode/SimpleStringInterpolator/SimpleStringInterpolator.gd"
+}, {
 "base": "Object",
 "class": "Skill",
 "language": "GDScript",
@@ -1535,6 +1540,7 @@ _global_script_class_icons={
 "SexVoice": "",
 "ShirtAndShortsState": "",
 "SimpleParser": "",
+"SimpleStringInterpolator": "",
 "Skill": "",
 "SkillBase": "",
 "SkillsHolder": "",

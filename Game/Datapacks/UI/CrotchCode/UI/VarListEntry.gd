@@ -7,6 +7,7 @@ onready var selector_type = $SelectorType
 
 signal onVarEdit(varName, entry)
 signal onDeletePressed(varName)
+signal onVarRename(oldName, newName)
 
 var varName = "asd"
 var entry = {
@@ -53,9 +54,10 @@ func updateDefaultValue():
 		text_edit.text = str(entry["default"])
 
 func _on_StringVarUI_onValueChange(_id, newValue):
+	var oldName = varName
 	varName = newValue
 	
-	emit_signal("onVarEdit", varName, entry.duplicate())
+	emit_signal("onVarRename", oldName, varName)
 
 func _on_DeleteButton_pressed():
 	emit_signal("onDeletePressed", varName)

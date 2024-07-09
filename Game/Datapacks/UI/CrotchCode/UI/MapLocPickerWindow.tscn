@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/UI/MapLocPickerWidget.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/UI/MapLocPickerWindow.gd" type="Script" id=2]
+
+[node name="MapLocPickerWindow" type="WindowDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 54.0
+margin_top = 45.0
+margin_right = -54.0
+margin_bottom = -45.0
+script = ExtResource( 2 )
+
+[node name="MapLocPickerWidget" parent="." instance=ExtResource( 1 )]
+
+[connection signal="popup_hide" from="." to="." method="_on_MapLocPickerWindow_popup_hide"]
+[connection signal="onCancelPressed" from="MapLocPickerWidget" to="." method="_on_MapLocPickerWidget_onCancelPressed"]
+[connection signal="onCellSelected" from="MapLocPickerWidget" to="." method="_on_MapLocPickerWidget_onCellSelected"]

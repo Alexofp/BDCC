@@ -11,6 +11,7 @@ var extraMode = 0
 
 var bigTextEditWindowScene = preload("res://Game/Datapacks/UI/CrotchCode/VisualSlots/CrotchBigTextEditWindow.tscn")
 var currentBigWindow
+onready var map_button = $MarginContainer/MapButton
 
 var dropIndex = -1
 
@@ -78,6 +79,7 @@ func updateRawVis():
 	$MarginContainer/LineEdit.visible = false
 	$MarginContainer/OptionButton.visible = false
 	$MarginContainer/BigTextEdit.visible = false
+	map_button.visible = false
 	if(containedNode != null):
 		$MarginContainer.visible = false
 		return
@@ -113,6 +115,9 @@ func updateRawVis():
 		elif(extraMode == 1):
 			$MarginContainer/BigTextEdit.visible = true
 			$MarginContainer/BigTextEdit/TextEdit.text = str(rawValue)
+		elif(extraMode == 2):
+			map_button.visible = true
+			map_button.text = "ROOM="+str(rawValue)
 
 func getRawValue():
 	return rawValue
@@ -138,6 +143,7 @@ func setRawValue(newVal):
 			rawValue = ""
 		$MarginContainer/LineEdit.text = newVal
 		$MarginContainer/BigTextEdit/TextEdit.text = newVal
+		map_button.text = "ROOM="+str(newVal)
 	return null
 
 func _on_SpinBox_value_changed(_value):
@@ -189,3 +195,22 @@ func deleteBigWindow(_window):
 	if(currentBigWindow != null):
 		currentBigWindow.queue_free()
 		currentBigWindow = null
+
+var mapLockerPickerWindowScene = preload("res://Game/Datapacks/UI/CrotchCode/UI/MapLocPickerWindow.tscn")
+func _on_MapButton_pressed():
+	var newWindow = mapLockerPickerWindowScene.instance()
+	add_child(newWindow)
+	newWindow.setSelectedCell(str(rawValue))
+	newWindow.connect("onCancelPressed", self, "onMapButtonClosed")
+	newWindow.connect("onCellSelected", self, "onMapButtonCellSelected")
+	
+	newWindow.popup_centered()
+
+func onMapButtonClosed(window):
+	window.queue_free()
+
+func onMapButtonCellSelected(window, cell):
+	window.queue_free()
+	rawValue = cell
+	map_button.text = "ROOM="+str(rawValue)
+	emit_signal("onRawValueChanged", rawValue)
