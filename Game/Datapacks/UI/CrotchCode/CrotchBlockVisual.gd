@@ -124,6 +124,17 @@ func constructTemplate():
 			#currentHBox.add_child(newEdit)
 			#newEdit.text = templateLine[3]
 			pass
+		if(templateType == "anim"):
+			var slotID = templateLine["id"]
+			#currentHBox = HBoxContainer.new()
+			#template_vertical_list.add_child(currentHBox)
+			var newSlotVis = load("res://Game/Datapacks/UI/CrotchCode/VisualSlots/VisSlotAnim.tscn").instance()
+			newSlotVis.editor = editor
+			currentHBox.add_child(newSlotVis)
+			if(templateLine.has("expand") && templateLine["expand"]):
+				newSlotVis.makeExpand()
+			newSlotVis.setSlotAnim(codeBlock.getSlot(slotID))
+			codeBlock.updateVisualSlot(editor, slotID, newSlotVis)
 
 func doSelfdelete():
 	if(isPickVersion):

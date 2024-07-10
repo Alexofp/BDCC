@@ -255,6 +255,11 @@ _global_script_classes=[ {
 "path": "res://Game/Datapacks/UI/CrotchCode/CrotchBlocks.gd"
 }, {
 "base": "Reference",
+"class": "CrotchSlotAnim",
+"language": "GDScript",
+"path": "res://Game/Datapacks/UI/CrotchCode/SlotAnim.gd"
+}, {
+"base": "Reference",
 "class": "CrotchSlotCalls",
 "language": "GDScript",
 "path": "res://Game/Datapacks/UI/CrotchCode/SlotCalls.gd"
@@ -1364,6 +1369,7 @@ _global_script_class_icons={
 "ComputerBase": "",
 "ContentType": "",
 "CrotchBlocks": "",
+"CrotchSlotAnim": "",
 "CrotchSlotCalls": "",
 "CrotchSlotVar": "",
 "CrotchUtil": "",

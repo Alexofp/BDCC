@@ -659,6 +659,29 @@ func getCharacters():
 func getCharacterClasses():
 	return characterClasses
 
+func createCharacter(charID:String):
+	if(":" in charID):
+		var splitData = Util.splitOnFirst(charID, ":")
+		var datapackID = splitData[0]
+		var datapackCharID = splitData[1]
+		
+		var datapack = getDatapack(datapackID)
+		if(datapack == null):
+			return null
+		
+		if(!datapack.characters.has(datapackCharID)):
+			return null
+		var dynChar = DynamicCharacter.new()
+		add_child(dynChar)
+		dynChar.loadFromDatapackCharacter(datapack, datapack.characters[datapackCharID])
+		remove_child(dynChar)
+		return dynChar
+	
+	if(!characterClasses.has(charID)):
+		Log.printerr("ERROR: character class with the id "+charID+" wasn't found ")
+		return null
+	return characterClasses[charID].new()
+
 func registerAttack(path: String):
 	var attack = load(path)
 	var attackObject = attack.new()
@@ -1148,6 +1171,9 @@ func createStageScene(id: String):
 
 func getStageScenesCachedStates():
 	return stageScenesCachedStates
+
+func getStageScenesClasses():
+	return stageScenes
 
 func instanceCached(scenePath):
 	if(sceneCache.has(scenePath)):

@@ -166,3 +166,32 @@ func processOutputString(text:String):
 
 func aimCameraAndSetLocName(newLoc):
 	scene.aimCameraAndSetLocName(str(newLoc))
+
+func playAnim(animID, animData):
+	var finalState = animData["state"]["value"]
+	
+	var finalAnimData = {}
+	if(animData.has("data")):
+		for entryID in animData["data"]:
+			var theEntry = animData["data"][entryID]
+			
+			if("." in entryID):
+				var splitData = Util.splitOnFirst(entryID, ".")
+				var firstThing = splitData[0]
+				var secondThing = splitData[1]
+				if(!finalAnimData.has(firstThing)):
+					finalAnimData[firstThing] = {}
+				finalAnimData[firstThing][secondThing] = theEntry["value"]
+			else:
+				if(entryID in ["pc", "npc", "npc2", "npc3", "npc4"]):
+					var theCharID = theEntry["value"]
+					
+					var resolvedID = scene.resolveCustomCharacterName(theCharID)
+					if(resolvedID != null):
+						theCharID = resolvedID
+					
+					finalAnimData[entryID] = theCharID
+				else:
+					finalAnimData[entryID] = theEntry["value"]
+	
+	scene.playAnimation(animID, finalState, finalAnimData)

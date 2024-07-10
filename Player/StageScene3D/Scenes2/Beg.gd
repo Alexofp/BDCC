@@ -86,3 +86,29 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["beg", "pat"]
+
+func getVarOptions():
+	return {
+		"pc": {
+			type = "character",
+		},
+		"npc": {
+			type = "character",
+		},
+		"bodyState": {
+			type = "bodystate",
+		},
+		"npcBodyState": {
+			type = "bodystate",
+		},
+		"pcCum": {
+			type = "bool",
+		},
+		"npcCum": {
+			type = "bool",
+		},
+		"npcAction": {
+			type = "action",
+			actions = getSupportedStatesSolo(),
+		}
+	}

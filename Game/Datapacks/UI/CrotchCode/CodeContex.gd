@@ -110,3 +110,6 @@ func removeCharacter(charAlias):
 
 func aimCameraAndSetLocName(newLoc):
 	doPrint("AIMING CAMERA AT "+str(newLoc))
+
+func playAnim(animID, _animData):
+	doPrint("PLAYING ANIMATION: "+str(animID))
