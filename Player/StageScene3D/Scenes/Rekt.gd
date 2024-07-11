@@ -80,3 +80,6 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["idle", "kill", "end"]
+
+func getVarNpcs():
+	return ["pc", "npc"]

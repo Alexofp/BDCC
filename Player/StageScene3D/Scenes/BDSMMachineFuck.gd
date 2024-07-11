@@ -97,3 +97,18 @@ func getChainPoint(_pointID):
 	if(_pointID == "milkIntake"):
 		return $MilkIntake
 	return .getChainPoint(_pointID)
+
+func getVarNpcs():
+	return ["pc"]
+
+func getVarOptions():
+	var options = .getVarOptions()
+	
+	options["cum"] = {
+		type = "bool",
+	}
+	options["noDildos"] = {
+		type = "bool",
+	}
+	
+	return options

@@ -18,4 +18,4 @@ nodes/AnimationNodeStateMachine/position = Vector2( 100, 100 )
 nodes/CuffsBlend/node = SubResource( 4 )
 nodes/CuffsBlend/position = Vector2( 440, 160 )
 nodes/output/position = Vector2( 680, 180 )
-node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "AnimationNodeStateMachine", "CuffsBlend", 1, "Animation" ]
+node_connections = [ "CuffsBlend", 0, "AnimationNodeStateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]

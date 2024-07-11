@@ -112,3 +112,22 @@ func getChainPoint(_pointID):
 	if(_pointID == "farright"):
 		return $FarRight
 	return .getChainPoint(_pointID)
+
+func getVarNpcs():
+	return ["pc", "npc"]
+
+func getVarOptions():
+	var options = .getVarOptions()
+	
+	options["flipNPC"] = {
+		type = "bool",
+	}
+	options["further"] = {
+		type = "bool",
+	}
+	options["npcAction"] = {
+		type = "action",
+		actions = getSupportedStatesSolo(),
+	}
+	
+	return options

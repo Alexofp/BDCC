@@ -75,3 +75,15 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["tease", "inside"]
+
+func getVarNpcs():
+	return ["pc"]
+
+func getVarOptions():
+	var options = .getVarOptions()
+	
+	options["plant"] = {
+		type = "bool",
+	}
+	
+	return options

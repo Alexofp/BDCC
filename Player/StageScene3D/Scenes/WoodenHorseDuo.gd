@@ -84,3 +84,16 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["idle", "lightstruggle", "struggle"]
+
+func getVarNpcs():
+	return ["pc", "npc"]
+
+func getVarOptions():
+	var options = .getVarOptions()
+	
+	options["npcAction"] = {
+		type = "action",
+		actions = ["idle", "lightstruggle", "struggle"],
+	}
+	
+	return options

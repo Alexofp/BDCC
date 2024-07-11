@@ -233,28 +233,46 @@ func startCumPenis(theDoll:Doll3D, howOften:float = 2.5, forceChastity=false):
 			if(isDollHard && !theDoll.hiddenPartZones.has(BodypartSlot.Penis)):
 				theDoll.startCumPenis(intensity, howOften, false)
 
+func getVarNpcs():
+	return ["pc"]
+
 func getVarOptions():
-	return {
-		"pc": {
+	var result = {}
+	for npcID in getVarNpcs():
+		result[npcID] = {
 			type = "character",
-		},
-		"npc": {
-			type = "character",
-		},
-		"bodyState": {
-			type = "bodystate",
-		},
-		"npcBodyState": {
-			type = "bodystate",
-		},
-		"pcCum": {
-			type = "bool",
-		},
-		"npcCum": {
-			type = "bool",
-		},
-		"npcAction": {
-			type = "action",
-			actions = getSupportedStatesSolo(),
 		}
-	}
+	for npcID in getVarNpcs():
+		result[("bodyState" if (npcID == "pc") else (npcID+"BodyState"))] = {
+			type = "bodystate",
+		}
+		result[npcID+"Cum"] = {
+			type = "bool",
+		}
+	
+	return result
+#
+#	return {
+#		"pc": {
+#			type = "character",
+#		},
+#		"npc": {
+#			type = "character",
+#		},
+#		"bodyState": {
+#			type = "bodystate",
+#		},
+#		"npcBodyState": {
+#			type = "bodystate",
+#		},
+#		"pcCum": {
+#			type = "bool",
+#		},
+#		"npcCum": {
+#			type = "bool",
+#		},
+#		"npcAction": {
+#			type = "action",
+#			actions = getSupportedStatesSolo(),
+#		}
+#	}

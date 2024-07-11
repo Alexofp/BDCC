@@ -82,8 +82,8 @@ func run():
 	
 func react(_id, _args):
 	if(buttons.has(_id)):
-		execute(buttons[_id]["code"])
 		scene.setState(buttons[_id]["state"])
+		execute(buttons[_id]["code"])
 		return true
 	return false
 	
@@ -168,8 +168,25 @@ func aimCameraAndSetLocName(newLoc):
 	scene.aimCameraAndSetLocName(str(newLoc))
 
 func playAnim(animID, animData):
-	var finalState = animData["state"]["value"]
-	
+	if(animID == null || animID == "" || animData == null || !GlobalRegistry.getStageScenesClasses().has(animID)):
+		throwError(null, "Animation not found! AnimID: "+str(animID))
+		return
+	if(!animData.has("state") && !animData["state"].has("value")):
+		throwError(null, "Animation state not specified, can't play! AnimID: "+str(animID))
+		return
+	var animStateData = animData["state"]
+	var finalState = animStateData["value"]
+	if(animStateData.has("isVar") && animStateData["isVar"] && animStateData.has("varName")):
+		var newValue = getVar(animStateData["varName"])
+		if(newValue == null):
+			throwError(null, "Variable for the animation state not found or contains a null, can't play an animation! AnimID: "+str(animID)+" VarName: "+str(animStateData["varName"]))
+		else:
+			finalState = str(newValue)
+			
+	if(!GlobalRegistry.getStageScenesCachedStates()[animID].has(finalState)):
+		throwError(null, "Animation doesn't support this state! Can't play! AnimID: "+str(animID)+" State: "+str(finalState))
+		return
+			
 	var finalAnimData = {}
 	if(animData.has("data")):
 		for entryID in animData["data"]:
@@ -181,10 +198,20 @@ func playAnim(animID, animData):
 				var secondThing = splitData[1]
 				if(!finalAnimData.has(firstThing)):
 					finalAnimData[firstThing] = {}
-				finalAnimData[firstThing][secondThing] = theEntry["value"]
+					
+				if(secondThing in ["leashedBy"]):
+					var theCharID = getVarOrValueFromAnimEntryString(theEntry, entryID)
+					
+					var resolvedID = scene.resolveCustomCharacterName(theCharID)
+					if(resolvedID != null):
+						theCharID = resolvedID
+					
+					finalAnimData[firstThing][secondThing] = theCharID
+				else:
+					finalAnimData[firstThing][secondThing] = getVarOrValueFromAnimEntry(theEntry, entryID)
 			else:
 				if(entryID in ["pc", "npc", "npc2", "npc3", "npc4"]):
-					var theCharID = theEntry["value"]
+					var theCharID = getVarOrValueFromAnimEntryString(theEntry, entryID)
 					
 					var resolvedID = scene.resolveCustomCharacterName(theCharID)
 					if(resolvedID != null):
@@ -192,6 +219,32 @@ func playAnim(animID, animData):
 					
 					finalAnimData[entryID] = theCharID
 				else:
-					finalAnimData[entryID] = theEntry["value"]
+					finalAnimData[entryID] = getVarOrValueFromAnimEntry(theEntry, entryID)
 	
 	scene.playAnimation(animID, finalState, finalAnimData)
+
+func getVarOrValueFromAnimEntryString(animStateData, entryID):
+	if(!animStateData.has("value")):
+		throwError(null, "Wrong anim entry detected. Entry: "+str(entryID))
+		return "" # something is wrong
+	var finalValue = animStateData["value"]
+	if(animStateData.has("isVar") && animStateData["isVar"] && animStateData.has("varName")):
+		var newValue = getVar(animStateData["varName"])
+		if(newValue == null):
+			throwError(null, "Variable for the anim entry not found or contains a null! Entry: "+str(entryID)+", variable name: "+str(animStateData["varName"]))
+		else:
+			finalValue = str(newValue)
+	return finalValue
+
+func getVarOrValueFromAnimEntry(animStateData, entryID):
+	if(!animStateData.has("value")):
+		throwError(null, "Wrong anim entry detected. Entry: "+str(entryID))
+		return false # something is wrong
+	var finalValue = animStateData["value"]
+	if(animStateData.has("isVar") && animStateData["isVar"] && animStateData.has("varName")):
+		var newValue = getVar(animStateData["varName"])
+		if(newValue == null):
+			throwError(null, "Variable for the anim entry not found or contains a null! Entry: "+str(entryID)+", variable name: "+str(animStateData["varName"]))
+		else:
+			finalValue = (newValue)
+	return finalValue

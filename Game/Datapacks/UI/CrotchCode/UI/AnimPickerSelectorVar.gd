@@ -3,7 +3,7 @@ extends HBoxContainer
 var selectedValue
 var values = []
 
-var selectedVar
+var selectedVar = ""
 var vars = []
 var isVar = false
 
@@ -37,8 +37,6 @@ func setData(_data:Dictionary):
 					option_button.select(_i)
 
 			_i += 1
-	if(_data.has("isVar")):
-		setIsVar(_data["isVar"])
 	if(_data.has("varName")):
 		selectedVar = _data["varName"]
 	if(_data.has("vars")):
@@ -52,14 +50,38 @@ func setData(_data:Dictionary):
 				var_option_list.select(_i)
 
 			_i += 1
+	if(_data.has("isVar")):
+		setIsVar(_data["isVar"])
+	
+	if(vars.size() <= 0 && !isVar):
+		selectedVar = ""
+		var_enabled_box.visible = false
+	else:
+		var_enabled_box.visible = true
+	
+	if(vars.size() > 0 && isVar):
+		if(!vars.has(selectedVar)):
+			selectedVar = vars[0]
 
 func setIsVar(newIsVar):
 	isVar = newIsVar
 	var_enabled_box.set_pressed_no_signal(newIsVar)
 	var_option_list.visible = newIsVar
 	option_button.visible = !newIsVar
-		
+	if(!isVar):
+		selectedVar = ""
+	elif(vars.size() > 0):
+		if(!vars.has(selectedVar)):
+			selectedVar = vars[0]
+			updateSelectedVarOption()
 
+func updateSelectedVarOption():
+	var _i = 0
+	for varvar in vars:
+		if(selectedVar == varvar):
+			var_option_list.select(_i)
+			return
+		_i += 1
 
 func _on_OptionButton_item_selected(index):
 	if(index < 0 || index >= values.size()):

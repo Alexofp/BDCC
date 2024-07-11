@@ -20,6 +20,7 @@ func _on_OpenEditorButton_pressed():
 	newWindow.connect("onAnimSelected", self, "doSaveAnimData")
 	newWindow.getPicker().allPossibleChars = ["pc"] + editor.scene.chars.keys()
 	newWindow.getPicker().charAliases = finalCharAliases
+	newWindow.getPicker().vars = editor.scene.vars.keys()
 	newWindow.setAnimAndData(slotAnim.animID, slotAnim.animData)
 	newWindow.popup_centered()
 

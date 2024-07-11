@@ -767,7 +767,7 @@ func applyBodyState(bodystate):
 	var newChains = []
 	if(bodystate.has("chains")):
 		newChains = bodystate["chains"]
-	if(bodystate.has("leashedBy")):
+	if(bodystate.has("leashedBy") && bodystate["leashedBy"] != null && bodystate["leashedBy"] != ""):
 		newChains.append(["normal", "neck", "npc", bodystate["leashedBy"], "hand.L"])
 	sceneChains = newChains
 	
@@ -825,7 +825,10 @@ func updateChains():
 			var otherDolls = get_parent().getDolls()
 			
 			for otherDoll in otherDolls:
-				if(otherDoll.savedCharacterID == chainInfo[3]):
+				var otherDollID = otherDoll.savedCharacterID
+				if(!(otherDollID is String)):
+					otherDollID = otherDollID.getID()
+				if(otherDollID == chainInfo[3]):
 					var otherZoneID = chainInfo[4]
 					if(otherDoll.dollAttachmentZones.has(otherZoneID)):
 						targetObjects = otherDoll.dollAttachmentZones[otherZoneID]

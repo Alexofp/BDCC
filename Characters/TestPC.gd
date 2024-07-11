@@ -50,4 +50,4 @@ func createBodyparts():
 	giveBodypartUnlessSame(penis)
 
 func getDefaultEquipment():
-	return ["inmatecollar", "inmateuniform"]
+	return ["inmatecollar", "inmateuniform", "LaceBra", "LacePanties"]

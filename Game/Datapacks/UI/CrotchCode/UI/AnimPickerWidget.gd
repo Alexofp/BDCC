@@ -48,10 +48,12 @@ func updateLoadedChars():
 			var actualID = requestID
 			if(charAliases.has(actualID)):
 				actualID = charAliases[actualID]
+			var theirID = actualID
 			if(actualID == "pc"):
 				actualID = "TestPC"
 			var newChar = GlobalRegistry.createCharacter(actualID)
 			add_child(newChar)
+			newChar.id = theirID
 			loadedChars[requestID] = newChar
 
 func updateAnimSettings():
@@ -163,6 +165,18 @@ func resetAnimData():
 				varName = "",
 			}
 			valuesForID[optionEntryID+".naked"] = [false, true]
+			extraData[optionEntryID+".exposedChest"] = {
+				value = false,
+				isVar = false,
+				varName = "",
+			}
+			valuesForID[optionEntryID+".exposedChest"] = [false, true]
+			extraData[optionEntryID+".exposedCrotch"] = {
+				value = false,
+				isVar = false,
+				varName = "",
+			}
+			valuesForID[optionEntryID+".exposedCrotch"] = [false, true]
 			extraData[optionEntryID+".hard"] = {
 				value = false,
 				isVar = false,
@@ -187,6 +201,12 @@ func resetAnimData():
 				varName = "",
 			}
 			valuesForID[optionEntryID+".caged"] = [false, true]
+			extraData[optionEntryID+".leashedBy"] = {
+				value = "",
+				isVar = false,
+				varName = "",
+			}
+			valuesForID[optionEntryID+".leashedBy"] = [""] + allPossibleChars
 	animData["data"] = extraData
 
 func _on_AnimList_item_selected(index):
@@ -207,6 +227,11 @@ func setSelectedAnim(newA, andData = null):
 		animStage.queue_free()
 		animStage = null
 	animStage = GlobalRegistry.createStageScene(selectedAnim)
+	if(animStage == null):
+		selectedAnim = StageScene.Solo
+		andData = null
+		animStage = GlobalRegistry.createStageScene(selectedAnim)
+	
 	if(andData != null):
 		resetAnimData()
 		var newAnimData = andData.duplicate(true)
@@ -237,7 +262,14 @@ func playAnim():
 				var secondThing = splitData[1]
 				if(!finalAnimData.has(firstThing)):
 					finalAnimData[firstThing] = {}
-				finalAnimData[firstThing][secondThing] = theEntry["value"]
+				
+				if(secondThing in ["leashedBy"]):
+					var theCharID = theEntry["value"]
+					if(charAliases.has(theCharID)):
+						theCharID = charAliases[theCharID]
+					finalAnimData[firstThing][secondThing] = theCharID
+				else:
+					finalAnimData[firstThing][secondThing] = theEntry["value"]
 			else:
 				if(entryID in ["pc", "npc", "npc2", "npc3", "npc4"]):
 					var theCharID = theEntry["value"]

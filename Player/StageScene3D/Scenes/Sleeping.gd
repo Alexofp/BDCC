@@ -37,7 +37,7 @@ func playAnimation(animID, _args = {}):
 		firstDoll = _args["pc"]
 	doll.prepareCharacter(firstDoll)
 	var secondDoll = "pc"
-	if(_args.has("npc")):
+	if(_args.has("npc") && !(_args.has("hideNPC") && _args["hideNPC"])):
 		secondDoll = _args["npc"]
 		doll2.prepareCharacter(secondDoll)
 		doll2.visible = true
@@ -88,3 +88,15 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["sleep", "rub"]
+
+func getVarNpcs():
+	return ["pc", "npc"]
+
+func getVarOptions():
+	var options = .getVarOptions()
+	
+	options["hideNPC"] = {
+		type = "bool",
+	}
+	
+	return options

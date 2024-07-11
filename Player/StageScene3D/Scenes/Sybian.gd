@@ -30,6 +30,9 @@ func playAnimation(animID, _args = {}):
 	if(_args.has("nosybian") && _args["nosybian"]):
 		$Sybian.visible = false
 		$Sprite3D.transform.origin.y = -0.276
+	else:
+		$Sybian.visible = true
+		$Sprite3D.transform.origin.y = -0.324
 	
 	updateSubAnims()
 	
@@ -54,3 +57,18 @@ func playAnimation(animID, _args = {}):
 
 func getSupportedStates():
 	return ["idle", "ride", "intense", "hump", "humpfast"]
+
+func getVarNpcs():
+	return ["pc"]
+
+func getVarOptions():
+	var options = .getVarOptions()
+	
+	options["chained"] = {
+		type = "bool",
+	}
+	options["nosybian"] = {
+		type = "bool",
+	}
+	
+	return options

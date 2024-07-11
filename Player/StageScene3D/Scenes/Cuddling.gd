@@ -89,3 +89,6 @@ func getChainPoint(_pointID):
 	if(_pointID == "farleft"):
 		return $FarLeft
 	return .getChainPoint(_pointID)
+
+func getVarNpcs():
+	return ["pc", "npc"]

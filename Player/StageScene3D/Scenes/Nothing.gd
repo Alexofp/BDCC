@@ -5,3 +5,9 @@ func _init():
 
 func playAnimation(_animID, _args = {}):
 	print("PLAYING NOTHING")
+
+func getVarNpcs():
+	return []
+
+func getSupportedStates():
+	return ["nothing"]
