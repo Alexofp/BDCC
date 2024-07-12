@@ -8,8 +8,11 @@ func getCategories():
 func getType():
 	return CrotchBlocks.LOGIC
 
-func execute(_contex:CodeContex):	
-	return checkThing(opSlot.getValue(_contex))
+func execute(_contex:CodeContex):
+	var theValue = opSlot.getValue(_contex)
+	if(_contex.hadAnError()):
+		return false
+	return checkThing(theValue)
 
 func checkThing(a):
 	return !a

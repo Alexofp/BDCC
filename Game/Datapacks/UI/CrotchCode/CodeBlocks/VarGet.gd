@@ -13,7 +13,14 @@ func getType():
 	return CrotchBlocks.VALUE
 
 func execute(_contex:CodeContex):
-	return _contex.getVar(str(varNameSlot.getValue(_contex)))
+	var varID = str(varNameSlot.getValue(_contex))
+	
+	if(_contex.hadAnError()):
+		return null
+	if(!isString(varID)):
+		throwError(_contex, "Variable name must be a string got "+str(varID)+" instead")
+		return null
+	return _contex.getVar(varID)
 
 func getTemplate():
 	return [
@@ -35,7 +42,7 @@ func getSlot(_id):
 
 func updateEditor(_editor):
 	if(_editor != null && _editor.has_method("getAllVarNames")):
-		varNameSlot.setRawValue(_editor.getAllVarNames()[0])
+		varNameSlot.setRawValue(_editor.getAllVarNames()[0] if _editor.getAllVarNames().size() > 0 else "var")
 
 func updateVisualSlot(_editor, _id, _visSlot):
 	if(_id == "var"):

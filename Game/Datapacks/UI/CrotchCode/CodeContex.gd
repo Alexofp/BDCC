@@ -6,6 +6,7 @@ signal onError(codeBlock, text)
 signal onGenericError(text)
 
 var curLine:int = -1
+var errored = false
 
 var vars = {}
 var varsDefinition = {}
@@ -37,6 +38,11 @@ func setVar(theVar:String, newValue, _codeblock):
 func clearVars():
 	vars = {}
 
+func hasFlag(theVar:String, _codeblock = null):
+	if(!flagsDefinition.has(theVar)):
+		return false
+	return true
+
 func getFlag(theVar:String, defaultValue = null, _codeblock = null):
 	if(!flags.has(theVar)):
 		if(flagsDefinition.has(theVar)):
@@ -63,7 +69,25 @@ func doPrint(text):
 	emit_signal("onPrint", text)
 	Log.print(str(text))
 
+
+func hadAnError() -> bool:
+	return errored
+
+func resetErrored():
+	errored = false
+
+func shouldReturn() -> bool:
+	return false
+
+func shouldBreak() -> bool:
+	return false
+
+func shouldContinue() -> bool:
+	return false
+
 func throwError(_codeblock, _errorText):
+	errored = true
+	
 	if(_codeblock == null):
 		emit_signal("onGenericError", str(_errorText))
 		Log.printerr("[CrotchScript Error] "+str(_errorText))
@@ -103,6 +127,9 @@ func addDisabledButton(_nameText, _descText):
 	doPrint("DISABLED BUTTON ADDED: "+str(_nameText))
 
 func addCharacter(charAlias, _variant):
+	if(charAlias == "pc"):
+		throwError(null, "Trying to add the player character (pc) into the scene. There is no need to do that")
+		return
 	doPrint("ADDED CHAR: "+str(charAlias))
 
 func removeCharacter(charAlias):

@@ -3,7 +3,7 @@ extends "res://Game/Datapacks/UI/CrotchCode/CodeBlockBase.gd"
 var nameSlot := CrotchSlotVar.new()
 
 func getCategories():
-	return ["Game"]
+	return ["Scene"]
 
 func _init():
 	nameSlot.setRawType(CrotchVarType.STRING)
@@ -13,7 +13,14 @@ func getType():
 	return CrotchBlocks.VALUE
 
 func execute(_contex:CodeContex):
-	_contex.removeCharacter(str(nameSlot.getValue(_contex)))
+	var charName = nameSlot.getValue(_contex)
+	if(_contex.hadAnError()):
+		return
+	if(!isString(charName)):
+		throwError(_contex, "Character name must a string, got "+str(charName)+" instead")
+		return
+		
+	_contex.removeCharacter(charName)
 
 func getTemplate():
 	return [
@@ -36,7 +43,7 @@ func getSlot(_id):
 
 func updateEditor(_editor):
 	if(_editor != null && _editor.has_method("getAllInvolvedCharIDs")):
-		nameSlot.setRawValue(_editor.getAllInvolvedCharIDs()[0])
+		nameSlot.setRawValue(_editor.getAllInvolvedCharIDs()[0] if _editor.getAllInvolvedCharIDs().size() > 0 else "")
 
 func updateVisualSlot(_editor, _id, _visSlot):
 	if(_id == "name"):

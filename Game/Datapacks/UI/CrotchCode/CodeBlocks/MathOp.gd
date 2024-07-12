@@ -15,10 +15,13 @@ func getType():
 
 func execute(_contex:CodeContex):
 	var theNumber = numSlot.getValue(_contex)
-
+	
+	if(_contex.hadAnError()):
+		return 0.0
+	
 	if(!isNumber(theNumber)):
 		throwError(_contex, "Value is not a number: "+str(theNumber))
-		return false
+		return 0.0
 
 	if(op == "round"):
 		return round(theNumber)

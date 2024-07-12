@@ -15,11 +15,32 @@ func execute(_contex:CodeContex):
 		return false
 	
 	var failsafe = 0
-	while(conditionSlot.getValue(_contex)):
-		bodySlot.execute(_contex)
+	
+	var whileValue = conditionSlot.getValue(_contex)
+	if(_contex.hadAnError()):
+		_contex.resetErrored()
+		return false
+	if(_contex.shouldReturn()):
+		return true
+	
+	while(whileValue):
+		for block in bodySlot.getBlocks():
+			block.execute(_contex)
+			if(_contex.hadAnError()):
+				_contex.resetErrored()
+			if(_contex.shouldReturn()):
+				return true
+			if(_contex.shouldBreak()):
+				return true
+			if(_contex.shouldContinue()):
+				break
+		
 		failsafe += 1
 		if(failsafe > 1000000):
 			throwError(_contex, "Infinite While loop detected")
+			return false
+		whileValue = conditionSlot.getValue(_contex)
+		if(_contex.hadAnError()):
 			return false
 	return true
 

@@ -17,7 +17,17 @@ func getType():
 
 func execute(_contex:CodeContex):
 	var nameText = nameSlot.getValue(_contex)
+	if(_contex.hadAnError()):
+		return
+	if(!isString(nameText)):
+		throwError(_contex, "Button name must be a string, got "+str(nameText)+" instead")
+		return
 	var descText = descSlot.getValue(_contex)
+	if(_contex.hadAnError()):
+		return
+	if(!isString(descText)):
+		throwError(_contex, "Button description must be a string, got "+str(descText)+" instead")
+		return
 	
 	_contex.addDisabledButton(nameText, descText)
 

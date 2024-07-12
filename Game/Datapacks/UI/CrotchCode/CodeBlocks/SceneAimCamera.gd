@@ -20,6 +20,8 @@ func execute(_contex:CodeContex):
 #	if(conditionSlot.getValue(_contex)):
 #		return thenSlot.execute(_contex)
 	var nameText = nameSlot.getValue(_contex)
+	if(_contex.hadAnError()):
+		return
 
 	_contex.aimCameraAndSetLocName(nameText)
 	#_contex.addButton(nameText, descText, nextState, codeSlot)

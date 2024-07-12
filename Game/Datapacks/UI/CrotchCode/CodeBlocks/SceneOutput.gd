@@ -17,6 +17,8 @@ func setBlock(theBlock):
 
 func execute(_contex:CodeContex):
 	var theText = str(outputSlot.getValue(_contex))
+	if(_contex.hadAnError()):
+		return ""
 	_contex.saynn(theText)
 	return theText
 

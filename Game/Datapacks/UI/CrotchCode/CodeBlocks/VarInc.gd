@@ -17,7 +17,28 @@ func getType():
 
 func execute(_contex:CodeContex):
 	var varName = str(varNameSlot.getValue(_contex))
-	_contex.setVar(varName, _contex.getVar(varName, 0) + varValueSlot.getValue(_contex), self)
+	if(_contex.hadAnError()):
+		return
+		
+	var addValue = varValueSlot.getValue(_contex)
+	if(_contex.hadAnError()):
+		return
+	
+	if(!isNumber(addValue)):
+		throwError(_contex, "Increase value should be a number, got: "+str(addValue)+" instead")
+		return
+		
+	if(!isString(varName)):
+		throwError(_contex, "Variable name must be a string, got "+str(varName)+" instead")
+		return
+		
+	var varValue = _contex.getVar(varName, 0)
+	if(_contex.hadAnError()):
+		return
+	if(!isNumber(varValue)):
+		throwError(_contex, "Variable must contain a number value, got "+str(varValue)+" instead")
+		return
+	_contex.setVar(varName, varValue + addValue, self)
 
 func getTemplate():
 	return [
@@ -51,7 +72,7 @@ func getSlot(_id):
 
 func updateEditor(_editor):
 	if(_editor != null && _editor.has_method("getAllVarNames")):
-		varNameSlot.setRawValue(_editor.getAllVarNames()[0])
+		varNameSlot.setRawValue(_editor.getAllVarNames()[0] if _editor.getAllVarNames().size() > 0 else "var")
 
 func updateVisualSlot(_editor, _id, _visSlot):
 	if(_id == "var"):

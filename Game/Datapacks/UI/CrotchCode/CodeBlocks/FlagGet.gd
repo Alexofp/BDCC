@@ -13,7 +13,14 @@ func getType():
 	return CrotchBlocks.VALUE
 
 func execute(_contex:CodeContex):
-	return _contex.getFlag(str(varNameSlot.getValue(_contex)))
+	var flagID = str(varNameSlot.getValue(_contex))
+	
+	if(_contex.hadAnError()):
+		return null
+	if(!_contex.hasFlag(flagID)):
+		throwError(_contex, "Flag not found "+str(flagID))
+		return null
+	return _contex.getFlag(flagID)
 
 func getTemplate():
 	return [
@@ -35,7 +42,7 @@ func getSlot(_id):
 
 func updateEditor(_editor):
 	if(_editor != null && _editor.has_method("getAllFlagNames")):
-		varNameSlot.setRawValue(_editor.getAllFlagNames()[0])
+		varNameSlot.setRawValue(_editor.getAllFlagNames()[0] if _editor.getAllFlagNames().size() > 0 else "")
 
 func updateVisualSlot(_editor, _id, _visSlot):
 	if(_id == "var"):

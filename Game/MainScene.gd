@@ -675,6 +675,19 @@ func setFlag(flagID, value):
 			
 	flags[flagID] = value
 
+func hasDatapackFlag(datapackID, flagID):
+	if(!loadedDatapacks.has(datapackID)):
+		Log.printerr("hasDatapackFlag(): Trying to check a flag "+str(flagID)+" of a datapack that wasn't loaded: "+str(datapackID))
+		return
+	var datapack:Datapack = GlobalRegistry.getDatapack(datapackID)
+	if(datapack == null):
+		Log.printerr("hasDatapackFlag(): Datapack "+str(datapackID)+" isn't found "+Util.getStackFunction())
+		return
+		
+	if(!datapack.flags.has(flagID)):
+		return false
+	return true
+
 func setDatapackFlag(datapackID, flagID, value):
 	if(!loadedDatapacks.has(datapackID)):
 		Log.printerr("setDatapackFlag(): Trying to set a flag "+str(flagID)+" of a datapack that wasn't loaded: "+str(datapackID))

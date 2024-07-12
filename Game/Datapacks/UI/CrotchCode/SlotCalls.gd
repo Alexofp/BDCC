@@ -22,6 +22,10 @@ func removeBlock(theBlock):
 func execute(_contex:CodeContex):
 	for block in blocks:
 		block.execute(_contex)
+		if(_contex.hadAnError()):
+			_contex.resetErrored()
+		if(_contex.shouldReturn()):
+			return
 
 func getBlocks():
 	return blocks

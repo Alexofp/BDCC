@@ -21,7 +21,11 @@ func setRightBlock(theBlock):
 
 func execute(_contex:CodeContex):
 	var leftValue = leftOpSlot.getValue(_contex)
+	if(_contex.hadAnError()):
+		return 0.0
 	var rightValue = rightOpSlot.getValue(_contex)
+	if(_contex.hadAnError()):
+		return 0.0
 	if(thingSupportsStrings() && isString(leftValue)):
 		if(!isString(rightValue)):
 			throwError(_contex, "Left value is a string ("+str(leftValue)+") but the right value isn't: "+str(rightValue))

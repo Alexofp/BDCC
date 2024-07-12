@@ -20,7 +20,14 @@ func execute(_contex:CodeContex):
 		throwError(_contex, "Condition can't be empty")
 		return false
 	
-	if(conditionSlot.getValue(_contex)):
+	var ifValue = conditionSlot.getValue(_contex)
+	if(_contex.hadAnError()):
+		_contex.resetErrored()
+		return false
+	if(_contex.shouldReturn()):
+		return true
+	
+	if(ifValue):
 		return thenSlot.execute(_contex)
 	return false
 

@@ -27,8 +27,23 @@ func execute(_contex:CodeContex):
 #	if(conditionSlot.getValue(_contex)):
 #		return thenSlot.execute(_contex)
 	var nameText = nameSlot.getValue(_contex)
+	if(_contex.hadAnError()):
+		return
+	if(!isString(nameText)):
+		throwError(_contex, "Button name must be a string, got "+str(nameText)+" instead")
+		return
 	var descText = descSlot.getValue(_contex)
+	if(_contex.hadAnError()):
+		return
+	if(!isString(descText)):
+		throwError(_contex, "Button description must be a string, got "+str(descText)+" instead")
+		return
 	var nextState = stateSlot.getValue(_contex)
+	if(_contex.hadAnError()):
+		return
+	if(!isString(nextState)):
+		throwError(_contex, "Button state must be a string, got "+str(nextState)+" instead")
+		return
 	
 	_contex.addButton(nameText, descText, nextState, codeSlot)
 

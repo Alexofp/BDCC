@@ -9,7 +9,10 @@ func getType():
 	return CrotchBlocks.VALUE
 
 func execute(_contex:CodeContex):
-	return doThing(opSlot.getValue(_contex))
+	var theValue = opSlot.getValue(_contex)
+	if(_contex.hadAnError()):
+		return ""
+	return doThing(theValue)
 
 func doThing(val):
 	return str(val)

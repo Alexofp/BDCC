@@ -23,10 +23,14 @@ func execute(_contex:CodeContex):
 	var onlyNumbers = thingOnlyNumbers()
 	
 	var leftValue = leftOpSlot.getValue(_contex)
+	if(_contex.hadAnError()):
+		return false
 	if(onlyNumbers && !isNumber(leftValue)):
 		throwError(_contex, "Left value is not a number: "+str(leftValue))
 		return false
 	var rightValue = rightOpSlot.getValue(_contex)
+	if(_contex.hadAnError()):
+		return false
 	if(onlyNumbers && !isNumber(rightValue)):
 		throwError(_contex, "Right value is not a number: "+str(rightValue))
 		return false

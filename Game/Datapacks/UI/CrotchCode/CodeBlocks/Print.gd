@@ -16,7 +16,10 @@ func setBlock(theBlock):
 	printSlot.setBlock(theBlock)
 
 func execute(_contex:CodeContex):
-	_contex.doPrint(str(printSlot.getValue(_contex)))
+	var theValue = str(printSlot.getValue(_contex))
+	if(_contex.hadAnError()):
+		return
+	_contex.doPrint(theValue)
 
 func getTemplate():
 	return [

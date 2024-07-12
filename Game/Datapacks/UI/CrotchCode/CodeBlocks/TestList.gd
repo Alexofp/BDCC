@@ -15,7 +15,8 @@ func setBlock(theBlock):
 	listSlot.setBlock(theBlock)
 
 func execute(_contex:CodeContex):
-	return listSlot.getValue(_contex)
+	var theValue = listSlot.getValue(_contex)
+	return theValue
 
 func getTemplate():
 	return [

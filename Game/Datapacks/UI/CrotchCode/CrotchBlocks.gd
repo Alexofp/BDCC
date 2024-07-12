@@ -47,6 +47,8 @@ static func getAll():
 		"SceneButtonDisabled",
 		"SceneAimCamera",
 		"ScenePlayAnim",
+		"SceneCharAdd",
+		"SceneCharRem",
 		
 		"LogicAnd",
 		"LogicOr",
@@ -58,9 +60,6 @@ static func getAll():
 		"MathLogicLessThan",
 		"MathLogicBiggerThanOrEq",
 		"MathLogicLessThanOrEq",
-		
-		"GameCharAdd",
-		"GameCharRem",
 		
 		#"TestList",
 		"VarGet",

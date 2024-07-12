@@ -28,6 +28,14 @@ func sayn(text):
 func saynn(text):
 	scene.saynn(processOutputString(text))
 
+func hasFlag(theVar:String, _codeblock = null):
+	if(GM.main == null):
+		return .hasFlag(theVar, _codeblock)
+	
+	if(!datapack.flags.has(theVar)):
+		return false
+	return true
+
 func getFlag(theVar:String, defaultValue = null, _codeblock = null):
 	if(GM.main == null):
 		return .getFlag(theVar, defaultValue, _codeblock)
@@ -127,6 +135,10 @@ func addDisabledButton(_nameText, _descText):
 	scene.addDisabledButton(_nameText, _descText)
 
 func addCharacter(charAlias, _variant):
+	if(charAlias == "pc"):
+		throwError(null, "Trying to add the player character (pc) into the scene. There is no need to do that")
+		return
+	
 	if(datapackScene.chars.has(charAlias)):
 		scene.addCharacter(datapackScene.chars[charAlias]["realid"], _variant.split("-", false))
 	else:
