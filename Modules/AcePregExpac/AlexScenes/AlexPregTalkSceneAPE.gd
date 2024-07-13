@@ -12,33 +12,36 @@ func _run():
 		
 		saynn("What do you want to tell Alex?")
 		
-		
 		if(GM.pc.isVisiblyPregnant() && (getModuleFlag("AcePregExpac", "Alex_ToldIsFather", 1))):
 			addButton("Gonna Be Father", "Tell Alex he is gonna be a father", "alexfatherreveal")
 		elif(!GM.pc.isVisiblyPregnant()):
 			addDisabledButton("Tell him", "You aren't pregnant")
 #less clutter on the button screen
-#		elif(!getModuleFlag("AcePregExpac", "Alex_ToldIsFather", 0)):
-#			addDisabledButton("Tell him", "You told him already") 
 		
 		if(GM.pc.isVisiblyPregnant() && (!getModuleFlag("AcePregExpac", "Alex_ToldIsFather", 1))):
 			addButton("Cuddle", "Get some emotional support from Alex", "alexpregcuddle")
 		elif(!GM.pc.isVisiblyPregnant()):
 			addDisabledButton("Tell him", "You aren't pregnant")
 		
-		#none of these are done
 		if((!getModuleFlag("AcePregExpac", "Alex_ToldIsFather", 1))):
 			addButton("Snacks?", "Alex is staff, surely he has something you can eat. However Small it may be.", "AlexSnackStart")
-		elif(getModuleFlag("AcePregExpac", "Alex_ToldIsFather", 1)):
-			addDisabledButton("Snacks", "You haven't told Alex he is a father yet.")
-			
-		addDisabledButton("Bondage", "Soon, Maybe. -Ace")
-		addDisabledButton("Milk", "Soon.")
-		addDisabledButton("Birth", "Soon. -Ace")
 		
-		#RNG.pick(["AlexSnack1", "AlexSnack2", "AlexSnack3, AlexSnack4"]
-		addButton("Leave", "You didn't have anything", "endthescene")
+		if(GM.pc.isLactating() && (!getModuleFlag("AcePregExpac", "Alex_ToldIsFather", 0)) && !GM.pc.hasEffect(StatusEffect.SoreNipplesAfterMilking)):
+			addButton("Milk", "See if Alex can help milk your chest.", "AlexPCMilking")
+		elif(GM.pc.hasEffect(StatusEffect.SoreNipplesAfterMilking)) && (!getModuleFlag("AcePregExpac", "Alex_ToldIsFather", 1)):
+			addDisabledButton("Milk", "Your nipples are sore, give them some rest.")
+		elif(!GM.pc.isLactating()) && (!getModuleFlag("AcePregExpac", "Alex_ToldIsFather", 1)):
+			addDisabledButton("Milk", "You can't be milked")
+#
+#		if(GM.pc.isReadyToGiveBirth() && (!getModuleFlag("AcePregExpac", "Alex_ToldIsFather", 1))):
+#			addButton("Birth", "Take Alex to help you give birth", "StartBirthAlex")
+#		elif(!GM.pc.isReadyToGiveBirth() && (getModuleFlag("AcePregExpac", "Alex_ToldIsFather", 1))):
+#			addDisabledButton("Birth", "You're not ready to give birth.")
+#		else:
+#			addDisabledButton("mod broke", "scripting broke")
+#		addButton("Leave", "You didn't have anything", "endthescene")
 
+		addButton("Nevermind", "Back to the main talk menu", "returntonormal")
 #ACEPREGEXPAC
 #if someone has breedable Alex mod I added a little thing
 #maybe like 7 people will find it but if it gets them by surprise then it was worth it.
@@ -226,31 +229,210 @@ func _run():
 			saynn("He is getting too used to you...")
 			saynn("You didn't even have to make something up...")
 		else:
-			saynn("[say=alexrynard]I think I can do that. Come on.[/say]")
+			saynn("[say=alexrynard]I think I can do something like that. Come on.[/say]")
 			saynn("The door to the familiar break room opens and you and follow with a smile just a bit too big for something so simple.")
 			
-		addButton("Continue", "Finally, some good food.", "AlexSnacks")
+		addButton("Continue", "Finally, some good fucking food.", "AlexSnacks")
 	
 	if(state == "AlexSnacks"):
-		RNG.pick([saynn("1"),
-		saynn("2"), 
-		saynn("3")
+		aimCameraAndSetLocName("eng_breakroom")
+		playAnimation(StageScene.Duo, "sit", {pc="pc", npc="alexrynard",})
+		saynn("It's the familar breakroom, again, you find a seat at one of the tables in a kitchen area while Alex walks over to snacks vending machine tucked into the corner.")
 		
-		])
+		saynn("[say=alexrynard]Anything specific you want?[/say]")
 		
-		addButton("Continue", "That was good.", "endthescene")
+		saynn("Strange, since you've been in this isolated and glorifed tin can, you've wanted actual food instead of grey slime. But now that you are here, you don't know. There's just so many options...")
+		
+		saynn("[say=pc]Surprise me.[/say]")
+		
+		saynn("Alex nods and picks something for you, swiping his ID card against the machine.")
+		
+		saynn("[say=pc]Doesn't that machine take actual money and not prison credits?[/say]")
+		
+		saynn("[say=alexrynard]Oh it does, but we've hacked this thing ages ago. Now it just takes an ID.[/say]")
+		
+		saynn("Snack now in hand he walks over to you and gives it to you.")
+		
+		saynn("It's kinda sad how ecstatic you are at simple snack... Whatever. Free food.")
+		
+		addButton("Continue", "See what you got", "snacks_random")
+		
+	if(state == "snacks_random"):
+		if(RNG.chance(25)):
+			saynn("It's a candy bar. You don't believe it when you see it but it's true. It's there in front of you.")
+			
+			saynn("You look up at Alex if this is some kind of trick, but an awkward stare back confirms he is in fact giving it to you.")
+			
+			saynn("Taking the candy bar you start opening it without really caring for what type of candy it actually is. At this point in your life, you'll be fine if there some extra nuts in it.")
+			
+			saynn("To your status as a prisoner, the taste is divine. You try to take your time to savor it but your body moves on it's own to work through too fast for your liking.")
+			
+			saynn("Before you know it, it's gone. Despite the absolutely crushing sadness you rest your head on the table, smile beaming as the taste of sugar is such a rare luxury here.")
+			
+			saynn("[say=alexrynard]I see you enjoyed yourself.[/say]")
+			
+			saynn("[say=pc]That was the best thing I had all week.[/say]")
+			
+			saynn("Alex reaches over and pats your back a few times.")
+			
+			saynn("[say=alexrynard]Well, I gotta head back. You know the exit and where to find me.[/say]")
+			
+			saynn("The fox heads back out into the hallway while you kinda just lean back in your chair"+str(" holding your pregnant belly" if GM.pc.isVisiblyPregnant() else "")+" with an admittedly dumb smile on your face, the phantom taste of sugar still on your tongue.")
+			
+			saynn("You gotta do something good for that fox when you get the chance...")
+			
+		#I had an idea and then I lost it so fuck it this one sucks i guess
+		elif(RNG.chance(50)):
+			saynn("It's a bag of chips, not a brand you have seen before but you're sure its the same as all the others.")
+			
+			saynn("Alex sits beside you as you open the bag and take a bite.")
+			
+			saynn("Kinda tasty actually, you start on the next three as Alex sips a water.")
+			
+			saynn("[say=alexrynard]I take it you like it?[/say]")
+			
+			saynn("[say=pc]More than you know.[/say]")
+			
+			saynn("The fox scoots up against you while you work through the bag.")
+			
+			saynn("[say=alexrynard]We gotta have another movie night like this.[/say]")
+			
+			saynn("[say=pc]Agreed.[/say]")
+			
+			saynn("You finish off the bag of chips cuddled up against Alex.")
+			
+			saynn("Alex eventually heads back to his workshop, and you decide not to follow.")
+			
+		else:
+			saynn("It's a simple nutrient bar. The kind someone would actually buy rather than the mass-produced bricks kept in a dusty box on ships if they run out of food.") 
+			
+			saynn("Fuck it you'll take it.")
+			
+			saynn("The fox sits beside you as you work at the packaging and take a bite.")
+			
+			saynn("The taste is bland but still miles better than the paste in the cafeteria. It's enough to stir memories from before your detainment")
+			
+			saynn("Most of it is the slow and mundane periods when you weren't doing anything.")
+			
+			saynn("They aren't much, but you were [b]free[/b].")
+			
+			saynn("So lost in your thoughts that you finish the little snack bar without realizing.")
+			
+			saynn("You feel Alex's arm on your back.")
+			
+			saynn("[say=alexrynard]You doing alright? I didnt think you'd space out from an energy bar...[/say]")
+			
+			saynn("[say=pc]Yeah... Just the things I miss being free. I guess.[/say]")
+			
+			saynn("[say=alexrynard]Simple pleasures... Anyway, I gotta get back to work. I'll leave you to reminisce. You know where the exit is.[/say]")
+			
+			saynn("The fox does as he says and steps through the open door back out to his workshop.")
+		
+		addButton("Continue", "That was good.", "snacks_ending")
+	
+#debating adding a partial stamina recharge like eating in the cafeteria
+#I cant figure it out without the player just repeating it infinitely for free stamina
+#Im a lazy programmer if I even program at all
+	if(state == "snacks_ending"):
+		removeCharacter("alexrynard")
+		saynn("You are left to sit alone in the breakroom for a minute to collect yourself.")
+		
+		saynn("When you're ready you stand up from your place at breakroom table and stretch.")
+		
+		if(GM.pc.isHeavilyPregnant()):
+			saynn("Something shifts inside your pregnant belly. And continues to move around as you work through stretching you back.")
+			
+			saynn("Holding your hands to your stomach you try to get your gravid self into a comfortable position as everything settles back down.")
+			
+			saynn("[say=pc]At least you enjoyed the snack...[/say]")
+			
+			saynn("Right then, back to the daily grind.")
+		
+		elif(GM.pc.isVisiblyPregnant()):
+			saynn("Your hands drift to your rounded out midsection, adjusting it to a more comfortable position.")
+			
+			saynn("It looks like it didn't do much but you feel better at least")
+			
+			saynn("Right then, back to the daily grind.")
+		
+		else:
+			saynn("A good back stretch sets your mind back to reality")
+			
+			saynn("Right then, back to the daily grind.")
+	
+		addButton("Continue", "Back to it.", "leavebreakroom")
 	
 	
-	
+	if(state == "AlexPCMilking"):
+		if(getModuleFlag("AcePregExpac", "Alex_TimesMilkingPlayer", "0")):
+			saynn("This one is gonna be tricky, Alex doesn't seem to like lactation all too much.")
+			
+			saynn("You're unsure how to approach him about this...")
+			
+			saynn("[say=pc]Hey Alex, do you think you could try and help me out?[/say]")
+			
+			saynn("The fox barely looks up from whatever he is working on.")
+			
+			saynn("[say=alexrynard]Uh... Sure what is it?[/say]")
+			
+			if(GM.pc.isVisiblyPregnant()):
+				saynn("[say=pc]I've started lactating from this pregnancy, and my chest is rather sore from it. Do you think you could help me with it?[/say]")
+			else:
+				saynn("[say=pc]I've started lactating and I could use some help dealing with it.[/say]")
+			
+			saynn("This question catches the fox off guard, a screwdiver slips off its screw as the fox fumbles and drops it.")
+			
+			saynn("[say=alexrynard]OH, I uh...[/say]")
+			
+			saynn("Alex makes sure nothing broke and then turns to face you.")
+			
+			saynn("[say=alexrynard]Look, You'd be better off asking Eliza to do something like that for you.[/say]")
+			
+			saynn("[say=alexrynard]I'm not into lactation, so I'd have no idea what to do.[/say]")
+			
+			saynn("The look he gives tells you are not going to convince him, at least not yet.")
+			
+			addMessage("This content isn't done. Sorry about that -Ace")
+			
+			increaseModuleFlag("AcePregExpac", "Alex_TimesMilkingPlayer", 1)
+			
+			addButton("Aw man.", "Time to go", "endthescene")
+#
+# ACEPREGEXPAC - I want a slow build for this scene, but dont have the time to code it all down before I release the patch
+# kinda like how you have to bother Alex to build a relationship with him, you have to bother Alex to get him to try lactation stuff
+# once the flag hits 20 or something, you get the tiddy suck scene.
+#
+#		addButton("Hands", "have Alex use his hands to milk you", "AlexHandMilk")
+#
+#		if(getModuleFlag("AcePregExpac", "Alex_FirstTimeMilkingPlayer", true)):
+#			addButton("Mouth", "have Alex suck your tits", "AlexTitSuck")
+#		else:
+#			addDisabledButton("Mouth", "Alex isnt sure about this, maybe do something else first.")
+#		addButtonWithChecks("Pumps", "Use a breast pump.", "AlexPumpMilk", [], [ButtonChecks.HasBreastPump])
+
+#	if(state == "AlexHandMilk"):
+#		saynn("placeholder")
+#
+#		addButton("Debug","endthescene")
 func _react(_action: String, _args):
 	
 	if(_action == "endthescene"):
 		endScene()
-#		processTime(60*5)
+		return
+
+	if(_action == "returntonormal"):
+		endScene()
+		runScene("AlexRynardTalkScene")
 		return
 
 	if(_action == "endcuddle"):
 		processTime(60*60*4)
+		endScene()
+		return
+		
+	if(_action == "leavebreakroom"):
+		processTime(60*30)
+		GM.pc.setLocation("eng_bay_nearbreakroom")
 		endScene()
 		return
 		
