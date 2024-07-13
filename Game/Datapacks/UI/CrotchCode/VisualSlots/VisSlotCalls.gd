@@ -1,5 +1,6 @@
 extends VBoxContainer
 onready var blocks_list = $BlocksList
+onready var block_catcher_panel = $BlockCatcherPanel
 
 var smallCatchPanel = preload("res://Game/Datapacks/UI/CrotchCode/VisualSlots/BlockCatcherPanelSmall.tscn")
 
@@ -10,7 +11,7 @@ var blockToVisualBlock = {}
 var editor
 
 func _ready():
-	$BlockCatcherPanel.setSideLabelsType(CrotchBlocks.CALL)
+	block_catcher_panel.setSideLabelsType(CrotchBlocks.CALL)
 
 func setSlotCalls(theSlotCalls):
 	if(slotCalls != null):
@@ -99,6 +100,11 @@ func updateBlocksFully():
 	for block in slotCalls.getBlocks():
 		addVisBlockToList(block, -1)
 	updateLittleAdders()
+	
+	var shouldHideLastAdder = false
+	if(slotCalls.getBlocks().size() > 0 && slotCalls.getBlocks().back().hidesNextBlockAdder()):
+		shouldHideLastAdder = true
+	block_catcher_panel.visible = !shouldHideLastAdder
 	
 
 func _on_BlockCatcherPanel_onBlockDraggedOnto(_data, _index):

@@ -39,6 +39,9 @@ func shouldExpandTemplate():
 func getSlot(_id):
 	return null
 
+func hidesNextBlockAdder():
+	return getType() == CrotchBlocks.RETURNCALL
+
 func saveData():
 	var data = {}
 	
@@ -99,6 +102,7 @@ const themeLogic = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes
 const themeControl = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockControl.tres")
 const themeFlags = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockFlags.tres")
 const themeGame = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockGame.tres")
+const themeEvent = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockEvent.tres")
 
 func getVisualBlockTheme():
 	var mainCategory = getMainCategory()
@@ -114,5 +118,7 @@ func getVisualBlockTheme():
 		return themeFlags
 	if(mainCategory in ["Game"]):
 		return themeGame
+	if(mainCategory in ["Event"]):
+		return themeEvent
 	
 	return themeOutput

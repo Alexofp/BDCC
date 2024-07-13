@@ -329,6 +329,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Datapacks/DatapackScene/DatapackSceneState.gd"
 }, {
+"base": "Reference",
+"class": "DatapackSceneTrigger",
+"language": "GDScript",
+"path": "res://Game/Datapacks/DatapackScene/DatapackSceneTrigger.gd"
+}, {
+"base": "Object",
+"class": "DatapackSceneTriggerType",
+"language": "GDScript",
+"path": "res://Game/Datapacks/DatapackScene/DatapackSceneTriggerType.gd"
+}, {
 "base": "Object",
 "class": "DatapackSceneVarType",
 "language": "GDScript",
@@ -1384,6 +1394,8 @@ _global_script_class_icons={
 "DatapackScene": "",
 "DatapackSceneCodeContext": "",
 "DatapackSceneState": "",
+"DatapackSceneTrigger": "",
+"DatapackSceneTriggerType": "",
 "DatapackSceneVarType": "",
 "DatapackSkin": "",
 "DeepLTranslator": "",

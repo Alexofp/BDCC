@@ -4,6 +4,7 @@ class_name CrotchBlocks
 const CALL = 0
 const VALUE = 1
 const LOGIC = 2
+const RETURNCALL = 3
 
 static func getLeftBracket(theType):
 	if(theType == CALL):
@@ -12,6 +13,8 @@ static func getLeftBracket(theType):
 		return "("
 	if(theType == LOGIC):
 		return "<"
+	if(theType == RETURNCALL):
+		return "x"
 	return ""
 	
 static func getRightBracket(theType):
@@ -21,6 +24,8 @@ static func getRightBracket(theType):
 		return ")"
 	if(theType == LOGIC):
 		return ">"
+	if(theType == RETURNCALL):
+		return ""
 	return ""
 
 static func getAll():
@@ -60,6 +65,8 @@ static func getAll():
 		"MathLogicLessThan",
 		"MathLogicBiggerThanOrEq",
 		"MathLogicLessThanOrEq",
+		
+		"EventRun",
 		
 		#"TestList",
 		"VarGet",

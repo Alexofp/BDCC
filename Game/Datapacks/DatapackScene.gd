@@ -8,6 +8,7 @@ var devcomment:String = ""
 var states:Dictionary = {}
 var vars:Dictionary = {}
 var chars:Dictionary = {}
+var triggers:Array = []
 
 func initStartingData():
 	states[""] = DatapackSceneState.new()
@@ -48,11 +49,16 @@ func saveData():
 	for stateID in states:
 		stateData[stateID] = states[stateID].saveData()
 	
+	var triggerData = []
+	for trigger in triggers:
+		triggerData.append(trigger.saveData())
+	
 	return {
 		"name": name,
 		"states": stateData,
 		"vars": vars,
 		"chars": chars,
+		"triggers": triggerData,
 	}
 
 func loadData(data):
@@ -92,6 +98,15 @@ func loadData(data):
 			start = charData["start"],
 			variant = charData["variant"],
 		}
+	
+	var triggerData = loadVar(data, "triggers", [])
+	triggers = []
+	for triggerEntry in triggerData:
+		if(!(triggerEntry is Dictionary)):
+			continue
+		var newTrigger = DatapackSceneTrigger.new()
+		newTrigger.loadData(triggerData)
+		triggers.append(newTrigger)
 
 func loadVar(_data, thekey, defaultValue = null):
 	if(_data.has(thekey)):

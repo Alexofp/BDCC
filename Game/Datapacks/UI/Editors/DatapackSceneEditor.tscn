@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Game/Datapacks/UI/PackVariables.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Datapacks/UI/Editors/DatapackSceneEditor.gd" type="Script" id=2]
@@ -6,6 +6,10 @@
 [ext_resource path="res://Game/Datapacks/UI/CrotchCode/PossibleCodeBlocksList.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Game/Datapacks/UI/CrotchCode/UI/VarListEntry.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Game/Datapacks/UI/CrotchCode/UI/CharListEntry.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Game/Datapacks/UI/PackVarUIs/SelectorVarUI.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Game/Datapacks/UI/PackVarUIs/StringVarUI.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Game/Datapacks/UI/PackVarUIs/BigStringVarUI.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Game/Datapacks/UI/PackVarUIs/NumberVarUI.tscn" type="PackedScene" id=10]
 
 [node name="DatapackSceneEditor" type="Control"]
 anchor_right = 1.0
@@ -29,6 +33,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Info" type="HBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -387,6 +392,182 @@ size_flags_horizontal = 3
 
 [node name="CharListEntry" parent="VBoxContainer/MarginContainer/TabContainer/Characters/ScrollContainer/CharList" instance=ExtResource( 6 )]
 
+[node name="Triggers" type="VBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="HBoxContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/TabContainer/Triggers"]
+margin_right = 1272.0
+margin_bottom = 660.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer"]
+margin_right = 205.0
+margin_bottom = 660.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="AddTriggerButton" type="Button" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/VBoxContainer"]
+margin_right = 205.0
+margin_bottom = 20.0
+text = "Add trigger"
+
+[node name="TriggerItemList" type="ItemList" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 205.0
+margin_bottom = 636.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RemoveTriggerButton" type="Button" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/VBoxContainer"]
+margin_top = 640.0
+margin_right = 205.0
+margin_bottom = 660.0
+custom_colors/font_color = Color( 1, 0.6, 0.6, 1 )
+text = "Detele trigger"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer"]
+margin_left = 217.0
+margin_right = 1272.0
+margin_bottom = 660.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer"]
+margin_right = 830.0
+margin_bottom = 660.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.83
+
+[node name="TriggerSettingsFullList" type="VBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer"]
+margin_right = 830.0
+margin_bottom = 660.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TriggerTypeSelector" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList" instance=ExtResource( 7 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 830.0
+margin_bottom = 20.0
+
+[node name="TriggerSettings" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 24.0
+margin_right = 830.0
+margin_bottom = 44.0
+addSeparators = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList"]
+margin_top = 48.0
+margin_right = 830.0
+margin_bottom = 68.0
+
+[node name="TriggerExecuteType" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/HBoxContainer" instance=ExtResource( 7 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 66.0
+margin_bottom = 20.0
+
+[node name="TriggerExecuteTypeLabel" type="Label" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/HBoxContainer"]
+margin_left = 70.0
+margin_top = 3.0
+margin_right = 830.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+text = "Meow meow meow"
+autowrap = true
+
+[node name="TriggerButtonInfoList" type="VBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList"]
+margin_top = 72.0
+margin_right = 830.0
+margin_bottom = 116.0
+
+[node name="TriggerButtonName" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/TriggerButtonInfoList" instance=ExtResource( 8 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 830.0
+margin_bottom = 20.0
+
+[node name="TriggerButtonDesc" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/TriggerButtonInfoList" instance=ExtResource( 9 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 24.0
+margin_right = 830.0
+margin_bottom = 44.0
+
+[node name="TriggerPriority" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList" instance=ExtResource( 10 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 120.0
+margin_right = 830.0
+margin_bottom = 140.0
+
+[node name="StateLabel" type="Label" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList"]
+margin_top = 144.0
+margin_right = 830.0
+margin_bottom = 158.0
+text = "Condition code"
+align = 1
+
+[node name="DatapackTriggerCodeWrapper" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 162.0
+margin_right = 830.0
+margin_bottom = 553.0
+rect_min_size = Vector2( 0, 300 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TriggerTestButton" type="Button" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList"]
+margin_top = 557.0
+margin_right = 830.0
+margin_bottom = 577.0
+text = "Test"
+
+[node name="TriggerOutputLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList"]
+margin_top = 581.0
+margin_right = 830.0
+margin_bottom = 660.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+bbcode_enabled = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer"]
+margin_left = 842.0
+margin_right = 1055.0
+margin_bottom = 660.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/VBoxContainer2"]
+margin_right = 213.0
+margin_bottom = 31.0
+text = "
+Code blocks"
+align = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/VBoxContainer2"]
+margin_top = 35.0
+margin_right = 213.0
+margin_bottom = 660.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PossibleTriggerCodeBlocksList" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/VBoxContainer2/ScrollContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 213.0
+margin_bottom = 625.0
+
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
 anchor_left = 1.0
 anchor_right = 1.0
@@ -434,6 +615,16 @@ text = "Save"
 [connection signal="pressed" from="VBoxContainer/MarginContainer/TabContainer/Variables/HBoxContainer3/AddFlagButton" to="." method="_on_AddFlagButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/TabContainer/Characters/HBoxContainer/AddCharButton" to="." method="_on_AddCharButton_pressed"]
 [connection signal="text_changed" from="VBoxContainer/MarginContainer/TabContainer/Characters/HBoxContainer/VBoxContainer/FilterPossibleCharListEdit" to="." method="_on_FilterPossibleCharListEdit_text_changed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/VBoxContainer/AddTriggerButton" to="." method="_on_AddTriggerButton_pressed"]
+[connection signal="item_selected" from="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/VBoxContainer/TriggerItemList" to="." method="_on_TriggerItemList_item_selected"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/VBoxContainer/RemoveTriggerButton" to="." method="_on_RemoveTriggerButton_pressed"]
+[connection signal="onValueChange" from="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/TriggerTypeSelector" to="." method="_on_TriggerTypeSelector_onValueChange"]
+[connection signal="onVariableChange" from="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/TriggerSettings" to="." method="_on_TriggerSettings_onVariableChange"]
+[connection signal="onValueChange" from="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/HBoxContainer/TriggerExecuteType" to="." method="_on_TriggerExecuteType_onValueChange"]
+[connection signal="onValueChange" from="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/TriggerButtonInfoList/TriggerButtonName" to="." method="_on_TriggerButtonName_onValueChange"]
+[connection signal="onValueChange" from="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/TriggerButtonInfoList/TriggerButtonDesc" to="." method="_on_TriggerButtonDesc_onValueChange"]
+[connection signal="onValueChange" from="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/TriggerPriority" to="." method="_on_TriggerPriority_onValueChange"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/TriggerTestButton" to="." method="_on_TriggerTestButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/SaveAllButton" to="." method="_on_SaveAllButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/RunButton" to="." method="_on_RunButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/PickSaveButton" to="." method="_on_PickSaveButton_pressed"]
