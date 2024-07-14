@@ -67,6 +67,9 @@ static func getAll():
 		"MathLogicLessThanOrEq",
 		
 		"EventRun",
+		"EventButton",
+		"EventButtonDisabled",
+		"EventOutput",
 		
 		#"TestList",
 		"VarGet",

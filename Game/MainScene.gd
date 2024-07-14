@@ -222,6 +222,7 @@ func _ready():
 	applyAllWorldEdits()
 	
 func startNewGame():
+	GM.ES.registerDatapackEvents(loadedDatapacks.keys())
 	for scene in sceneStack:
 		scene.queue_free()
 	sceneStack = []
@@ -360,6 +361,8 @@ func loadingSavefileFinished():
 		character.checkOldWayOfUpdating(currentDay, timeOfDay)
 		if(character.shouldBeUpdated()):
 			startUpdatingCharacter(charID)
+	
+	GM.ES.registerDatapackEvents(loadedDatapacks.keys())
 	
 	emit_signal("saveLoadingFinished")
 	#if(GM.ui != null):
@@ -1518,6 +1521,8 @@ func loadDatapack(datapackID):
 		elif(theCharType == CharacterType.Engineer):
 			addDynamicCharacterToPool(finalID, CharacterPool.Engineers)
 	
+	GM.ES.registerDatapackEvents(loadedDatapacks.keys())
+	
 	return true
 
 func unloadDatapack(datapackID):
@@ -1534,6 +1539,7 @@ func unloadDatapack(datapackID):
 		datapackCharacters.erase(datapackID)
 	
 	loadedDatapacks.erase(datapackID)
+	GM.ES.registerDatapackEvents(loadedDatapacks.keys())
 	return true
 
 func isDatapackLoaded(datapackID):

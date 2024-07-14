@@ -105,7 +105,7 @@ func loadData(data):
 		if(!(triggerEntry is Dictionary)):
 			continue
 		var newTrigger = DatapackSceneTrigger.new()
-		newTrigger.loadData(triggerData)
+		newTrigger.loadData(triggerEntry)
 		triggers.append(newTrigger)
 
 func loadVar(_data, thekey, defaultValue = null):

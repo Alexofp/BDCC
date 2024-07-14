@@ -7,7 +7,8 @@ func getType():
 	return CrotchBlocks.RETURNCALL
 
 func execute(_contex:CodeContex):
-	return false
+	_contex.doRunEvent()
+	return true
 
 func getTemplate():
 	return [

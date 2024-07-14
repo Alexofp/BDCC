@@ -1,5 +1,7 @@
 extends VBoxContainer
 
+export(int, FLAGS, "SCENE", "EVENT") var filter:int = CrotchBlockEditorType.ALL
+
 var editor
 
 func can_drop_data(_position, _data):
@@ -28,6 +30,10 @@ func populate():
 	
 	for blockID in CrotchBlocks.getAll():
 		var testCodeblock = CrotchBlocks.createBlock(blockID)
+		
+		var supportedEditors:int = testCodeblock.getSupportedEditors()
+		if(!(filter & supportedEditors)):
+			continue
 		
 		var categories = testCodeblock.getCategories()
 		

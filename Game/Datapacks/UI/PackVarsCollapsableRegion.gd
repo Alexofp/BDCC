@@ -1,9 +1,14 @@
 extends PanelContainer
 
 var prefix = "Test"
+export var collapseName:String = ""
 
 var codeBlockMode = false
 var editor
+
+func _ready():
+	if(collapseName != null):
+		setText(collapseName)
 
 func makeCodeBlockMode():
 	codeBlockMode = true

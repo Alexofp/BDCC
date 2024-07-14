@@ -479,17 +479,16 @@ func _on_TriggerItemList_item_selected(index):
 	selectedTrigger = scene.triggers[index]
 	updateSelectedTrigger()
 
-onready var trigger_type_selector = $VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/TriggerTypeSelector
-onready var trigger_settings = $VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/TriggerSettings
+onready var trigger_type_selector = $VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/HBoxContainer2/TriggerTypeSelector
+onready var trigger_type_desc_label = $VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/HBoxContainer2/TriggerTypeDescLabel
+onready var trigger_settings = $VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/PackVarsCollapsableRegion/VBoxContainer/VBoxContainer/TriggerSettings
 onready var trigger_execute_type = $VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/HBoxContainer/TriggerExecuteType
 onready var trigger_execute_type_label = $VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/HBoxContainer/TriggerExecuteTypeLabel
-onready var trigger_button_info_list = $VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/TriggerButtonInfoList
-onready var trigger_button_name = $VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/TriggerButtonInfoList/TriggerButtonName
-onready var trigger_button_desc = $VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/TriggerButtonInfoList/TriggerButtonDesc
 onready var trigger_priority = $VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/TriggerPriority
 onready var datapack_trigger_code_wrapper = $VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/DatapackTriggerCodeWrapper
 onready var trigger_output_label = $VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/TriggerOutputLabel
 onready var possible_trigger_code_blocks_list = $VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/VBoxContainer2/ScrollContainer/PossibleTriggerCodeBlocksList
+onready var pack_vars_collapsable_region = $VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/PackVarsCollapsableRegion
 
 
 func updateSelectedTrigger():
@@ -517,15 +516,6 @@ func updateSelectedTrigger():
 	})
 	updateSelectedExecuteType()
 	
-	trigger_button_name.setData({
-		name = "Button name",
-		value = selectedTrigger.buttonName,
-	})
-	trigger_button_desc.setData({
-		name = "Button description",
-		value = selectedTrigger.buttonDesc,
-	})
-	
 	trigger_priority.setData({
 		name = "Trigger priority",
 		value = selectedTrigger.priority,
@@ -539,15 +529,19 @@ func updateSelectedTriggerType():
 		if(theTriggerVars.has(varID)):
 			theTriggerVars[varID]["value"] = selectedTrigger.triggerSettings[varID]
 	
+	trigger_type_desc_label.text = "("+DatapackSceneTriggerType.getDescription(selectedTrigger.triggerType)+")"
+	
 	trigger_settings.setVariables(theTriggerVars)
+	if(theTriggerVars.empty()):
+		pack_vars_collapsable_region.visible = false
+	else:
+		pack_vars_collapsable_region.visible = true
 
 func updateSelectedExecuteType():
 	if(selectedTrigger.executeType == DatapackSceneTrigger.TRIGGER_REACT):
 		trigger_execute_type_label.text = " (Scene will run instantly if all conditions are satisfied)"
-		trigger_button_info_list.visible = false
 	else:
-		trigger_execute_type_label.text = " (A button to run the scene will appear if all conditions are satisfied)"
-		trigger_button_info_list.visible = true
+		trigger_execute_type_label.text = " (Scene execution is delayed, must add a button with a Run Event block inside)"
 
 func _on_TriggerTypeSelector_onValueChange(_id, newValue):
 	selectedTrigger.triggerType = newValue

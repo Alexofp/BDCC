@@ -12,11 +12,16 @@ var priority:float = 1.0
 
 var code = preload("res://Game/Datapacks/UI/CrotchCode/SlotCalls.gd").new()
 
-var buttonName:String = "Button name"
-var buttonDesc:String = "This button will do something"
-
 func getName():
 	return DatapackSceneTriggerType.getName(triggerType)
+
+func getSetting(settingID, defaultValue = null):
+	if(triggerSettings.has(settingID)):
+		return triggerSettings[settingID]
+	var editVars = DatapackSceneTriggerType.getEditVars(triggerType)
+	if(editVars.has(settingID)):
+		return editVars[settingID]["value"]
+	return defaultValue
 
 func saveData():
 	return {
@@ -24,8 +29,6 @@ func saveData():
 		"triggerSettings": triggerSettings,
 		"executeType": executeType,
 		"priority": priority,
-		"buttonName": buttonName,
-		"buttonDesc": buttonDesc,
 		"code": code.saveData(),
 	}
 
@@ -34,8 +37,6 @@ func loadData(_data):
 	triggerSettings = loadVar(_data, "triggerSettings", {})
 	executeType = loadVar(_data, "executeType", TRIGGER_REACT)
 	priority = loadVar(_data, "priority", 1.0)
-	buttonName = loadVar(_data, "buttonName", "Button name")
-	buttonDesc = loadVar(_data, "buttonDesc", "This button will do something")
 	code.loadData(loadVar(_data, "code", {}))
 
 func loadVar(_data, thekey, defaultValue = null):

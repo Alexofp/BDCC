@@ -3,7 +3,7 @@ extends "res://Game/Datapacks/UI/CrotchCode/CodeBlockBase.gd"
 var printSlot := CrotchSlotVar.new()
 
 func getCategories():
-	return ["Output"]
+	return ["Variables"]
 
 func _init():
 	printSlot.setRawType(CrotchVarType.STRING)
@@ -19,22 +19,29 @@ func execute(_contex:CodeContex):
 	var theValue = str(printSlot.getValue(_contex))
 	if(_contex.hadAnError()):
 		return
-	_contex.doPrint(theValue)
+	_contex.doDebugPrint(theValue)
 
 func getTemplate():
 	return [
 		{
 			type = "label",
-			text = "Print",
+			text = "Console Print",
 		},
 		{
 			type = "slot",
 			id = "printSlot",
 			slot = printSlot,
 			slotType = CrotchBlocks.VALUE,
+			expand=true,
 		},
 	]
 
 func getSlot(_id):
 	if(_id == "printSlot"):
 		return printSlot
+
+func shouldExpandTemplate():
+	return true
+
+func getVisualBlockTheme():
+	return themeOutput

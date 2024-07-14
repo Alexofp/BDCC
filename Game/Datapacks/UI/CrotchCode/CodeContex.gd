@@ -7,11 +7,17 @@ signal onGenericError(text)
 
 var curLine:int = -1
 var errored = false
+var returning = false
 
 var vars = {}
 var varsDefinition = {}
 var flags = {}
 var flagsDefinition = {}
+
+func hasVar(theVar:String):
+	if(!vars.has(theVar)):
+		return false
+	return true
 
 func getVar(theVar:String, defaultValue = null):
 	if(!vars.has(theVar)):
@@ -69,6 +75,8 @@ func doPrint(text):
 	emit_signal("onPrint", text)
 	Log.print(str(text))
 
+func doDebugPrint(text):
+	doPrint(text)
 
 func hadAnError() -> bool:
 	return errored
@@ -77,7 +85,7 @@ func resetErrored():
 	errored = false
 
 func shouldReturn() -> bool:
-	return false
+	return returning
 
 func shouldBreak() -> bool:
 	return false
@@ -97,6 +105,8 @@ func throwError(_codeblock, _errorText):
 
 func execute(slotCalls):
 	#clearVars()
+	returning = false
+	errored = false
 	calcLineNums(slotCalls)
 	slotCalls.execute(self)
 
@@ -140,3 +150,10 @@ func aimCameraAndSetLocName(newLoc):
 
 func playAnim(animID, _animData):
 	doPrint("PLAYING ANIMATION: "+str(animID))
+
+func doRunEvent():
+	doPrint("EVENT WILL HAPPEN")
+	setIsReturning()
+
+func setIsReturning():
+	returning = true

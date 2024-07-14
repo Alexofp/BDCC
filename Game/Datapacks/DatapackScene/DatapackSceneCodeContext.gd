@@ -176,6 +176,9 @@ func processOutputVars(text:String):
 func processOutputString(text:String):
 	return processOutputVars(processSayStatements(text))
 
+func doDebugPrint(text):
+	doPrint(processOutputVars(text))
+
 func aimCameraAndSetLocName(newLoc):
 	scene.aimCameraAndSetLocName(str(newLoc))
 

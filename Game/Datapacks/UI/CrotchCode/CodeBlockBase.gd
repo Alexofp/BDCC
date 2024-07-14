@@ -95,6 +95,14 @@ func isString(val):
 		return true
 	return false
 
+func getSupportedEditors():
+	var mainCategory = getMainCategory()
+	if(mainCategory in ["Scene"]):
+		return CrotchBlockEditorType.SCENE
+	if(mainCategory in ["Event"]):
+		return CrotchBlockEditorType.EVENT
+	return CrotchBlockEditorType.ALL
+
 const themeVars = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockVariables.tres")
 const themeOutput = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockOutput.tres")
 const themeMath = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockMath.tres")

@@ -250,6 +250,11 @@ _global_script_classes=[ {
 "path": "res://Game/Options/ContentType.gd"
 }, {
 "base": "Object",
+"class": "CrotchBlockEditorType",
+"language": "GDScript",
+"path": "res://Game/Datapacks/UI/CrotchCode/Util/CrotchBlockEditorType.gd"
+}, {
+"base": "Object",
 "class": "CrotchBlocks",
 "language": "GDScript",
 "path": "res://Game/Datapacks/UI/CrotchCode/CrotchBlocks.gd"
@@ -348,6 +353,11 @@ _global_script_classes=[ {
 "class": "DatapackSkin",
 "language": "GDScript",
 "path": "res://Game/Datapacks/DatapackSkin.gd"
+}, {
+"base": "CodeContex",
+"class": "DatapackTriggerCodeContext",
+"language": "GDScript",
+"path": "res://Game/Datapacks/DatapackScene/DatapackTriggerCodeContext.gd"
 }, {
 "base": "TranslatorBase",
 "class": "DeepLTranslator",
@@ -1378,6 +1388,7 @@ _global_script_class_icons={
 "ColorUtils": "",
 "ComputerBase": "",
 "ContentType": "",
+"CrotchBlockEditorType": "",
 "CrotchBlocks": "",
 "CrotchSlotAnim": "",
 "CrotchSlotCalls": "",
@@ -1398,6 +1409,7 @@ _global_script_class_icons={
 "DatapackSceneTriggerType": "",
 "DatapackSceneVarType": "",
 "DatapackSkin": "",
+"DatapackTriggerCodeContext": "",
 "DeepLTranslator": "",
 "Direction": "",
 "Doll3D": "",
