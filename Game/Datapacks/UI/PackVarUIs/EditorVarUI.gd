@@ -66,6 +66,8 @@ func _on_NewButton_pressed():
 		$Control/AddNewDialog/VBoxContainer/Label.text = "Enter an id for a new scene. It must be unique"
 	if(editorKind == "skin"):
 		$Control/AddNewDialog/VBoxContainer/Label.text = "Enter an id for a new skin. It must be unique"
+	if(editorKind == "quest"):
+		$Control/AddNewDialog/VBoxContainer/Label.text = "Enter an id for a new quest. It must be unique"
 	
 	new_thing_id_line_edit.text = ""
 	
@@ -117,6 +119,19 @@ func _on_AddNewDialog_confirmed():
 		pushMenu(sceneEditor)
 		sceneEditor.setScene(newScene)
 
+	if(editorKind == "quest"):
+		var newQuest:DatapackQuest = DatapackQuest.new()
+		newQuest.id = theNewId
+		
+		savedThings[theNewId] = newQuest
+		updateThings()
+		#showAlert("Adding new character, "+theNewId)
+		#print("ADDING NEW CHARACTER, "+theNewId)
+		var questEditor = load("res://Game/Datapacks/UI/Editors/DatapackQuestEditor.tscn").instance()
+		questEditor.datapack = datapack
+		pushMenu(questEditor)
+		questEditor.setQuest(newQuest)
+
 func _on_EditButton_pressed():
 	var selectedIDToEdit = getSelectedID()
 	if(selectedIDToEdit == null):
@@ -138,3 +153,8 @@ func _on_EditButton_pressed():
 		sceneEditor.datapack = datapack
 		pushMenu(sceneEditor)
 		sceneEditor.setScene(savedThings[selectedIDToEdit])
+	if(editorKind == "quest"):
+		var questEditor = load("res://Game/Datapacks/UI/Editors/DatapackQuestEditor.tscn").instance()
+		questEditor.datapack = datapack
+		pushMenu(questEditor)
+		questEditor.setQuest(savedThings[selectedIDToEdit])

@@ -528,6 +528,20 @@ func updateSelectedTriggerType():
 	for varID in selectedTrigger.triggerSettings:
 		if(theTriggerVars.has(varID)):
 			theTriggerVars[varID]["value"] = selectedTrigger.triggerSettings[varID]
+		
+	for varID in theTriggerVars:
+		var varEntry = theTriggerVars[varID]
+		if(varEntry.has("involvedDatapackNPCs") && varEntry["involvedDatapackNPCs"]):
+			var datapackNpcs = []
+			for npcID in scene.chars:
+				var realID = scene.chars[npcID]["realid"]
+				if(":" in realID):
+					datapackNpcs.append(realID)
+			
+			varEntry["values"] = datapackNpcs
+			if(varEntry["value"] == "" && datapackNpcs.size() > 0):
+				varEntry["value"] = datapackNpcs[0]
+				selectedTrigger.triggerSettings[varID] = datapackNpcs[0]
 	
 	trigger_type_desc_label.text = "("+DatapackSceneTriggerType.getDescription(selectedTrigger.triggerType)+")"
 	

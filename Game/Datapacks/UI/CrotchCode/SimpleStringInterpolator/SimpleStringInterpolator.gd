@@ -80,8 +80,8 @@ func process(_text:String, variablesObject) -> String:
 					result += firstVarLex[1]
 				elif(firstVarLex[0] == LEX_VAR):
 					var varName = firstVarLex[1]
-					if(variablesObject.hasVar(varName)):
-						result += str(variablesObject.getVar(varName))
+					if(variablesObject.hasInterpolatorVar(varName)):
+						result += str(variablesObject.getInterpolatorVar(varName))
 					else:
 						result += insertError("VARIABLE NOT DEFINED: "+str(varName))
 						while(_lexems.size() > 0 && _lexems[0][0] != LEX_TEXT && _lexems[0][0] != LEX_EOF): # Skip all garbage
@@ -107,15 +107,15 @@ func process(_text:String, variablesObject) -> String:
 		elif(state == STATE_GOT_IF_VAR):
 			if(curLex == LEX_END):
 				var varName = secondVarLex[1]
-				if(variablesObject.hasVar(varName)):
-					if(variablesObject.getVar(varName)): # if var is truthy
+				if(variablesObject.hasInterpolatorVar(varName)):
+					if(variablesObject.getInterpolatorVar(varName)): # if var is truthy
 						if(firstVarLex[0] == LEX_STRING):
 							result += firstVarLex[1]
 						elif(firstVarLex[0] == LEX_VAR):
 							var varNameFirst = firstVarLex[1]
 							
-							if(variablesObject.hasVar(varNameFirst)):
-								result += str(variablesObject.getVar(varNameFirst))
+							if(variablesObject.hasInterpolatorVar(varNameFirst)):
+								result += str(variablesObject.getInterpolatorVar(varNameFirst))
 							else:
 								result += insertError("VARIABLE NOT DEFINED: "+str(varNameFirst))
 								while(_lexems.size() > 0 && _lexems[0][0] != LEX_TEXT && _lexems[0][0] != LEX_EOF): # Skip all garbage
@@ -147,15 +147,15 @@ func process(_text:String, variablesObject) -> String:
 			if(curLex == LEX_END):
 				var varName = secondVarLex[1]
 				
-				if(variablesObject.hasVar(varName)):
-					if(variablesObject.getVar(varName)):
+				if(variablesObject.hasInterpolatorVar(varName)):
+					if(variablesObject.getInterpolatorVar(varName)):
 						if(firstVarLex[0] == LEX_STRING):
 							result += firstVarLex[1]
 						elif(firstVarLex[0] == LEX_VAR):
 							var varNameFirst = firstVarLex[1]
 							
-							if(variablesObject.hasVar(varNameFirst)):
-								result += str(variablesObject.getVar(varNameFirst))
+							if(variablesObject.hasInterpolatorVar(varNameFirst)):
+								result += str(variablesObject.getInterpolatorVar(varNameFirst))
 							else:
 								result += insertError("VARIABLE NOT DEFINED: "+str(varNameFirst))
 								while(_lexems.size() > 0 && _lexems[0][0] != LEX_TEXT && _lexems[0][0] != LEX_EOF): # Skip all garbage
@@ -167,8 +167,8 @@ func process(_text:String, variablesObject) -> String:
 						elif(thirdVarLex[0] == LEX_VAR):
 							var varNameThird = thirdVarLex[1]
 							
-							if(variablesObject.hasVar(varNameThird)):
-								result += str(variablesObject.getVar(varNameThird))
+							if(variablesObject.hasInterpolatorVar(varNameThird)):
+								result += str(variablesObject.getInterpolatorVar(varNameThird))
 							else:
 								result += insertError("VARIABLE NOT DEFINED: "+str(varNameThird))
 								while(_lexems.size() > 0 && _lexems[0][0] != LEX_TEXT && _lexems[0][0] != LEX_EOF): # Skip all garbage

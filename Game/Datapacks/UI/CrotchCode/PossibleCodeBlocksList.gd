@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-export(int, FLAGS, "SCENE", "EVENT") var filter:int = CrotchBlockEditorType.ALL
+export(int, FLAGS, "SCENE", "EVENT", "QUEST") var filter:int = CrotchBlockEditorType.ALL
 
 var editor
 

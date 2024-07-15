@@ -71,6 +71,10 @@ static func getAll():
 		"EventButtonDisabled",
 		"EventOutput",
 		
+		"QuestStage",
+		"QuestMarkAsVisible",
+		"QuestMarkAsCompleted",
+		
 		#"TestList",
 		"VarGet",
 		"VarSet",

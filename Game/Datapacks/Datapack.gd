@@ -12,6 +12,7 @@ var characters:Dictionary = {}
 var skins:Dictionary = {}
 var scenes:Dictionary = {}
 var flags:Dictionary = {}
+var quests:Dictionary = {}
 
 func getEditVars():
 	return {
@@ -62,6 +63,13 @@ func getEditVars():
 			editorKind = "scene",
 			datapack = self,
 		},
+		"quests": {
+			type = "editor",
+			value = quests,
+			name = "Quests",
+			editorKind = "quest",
+			datapack = self,
+		},
 	}
 
 func applyEditVar(varid, value):
@@ -91,6 +99,10 @@ func saveData():
 	for sceneID in scenes:
 		sceneData[sceneID] = scenes[sceneID].saveData()
 	
+	var questData = {}
+	for questID in quests:
+		questData[questID] = quests[questID].saveData()
+	
 	return {
 		#"id": id,
 		"name": name,
@@ -101,6 +113,7 @@ func saveData():
 		"skins": skinData,
 		"scenes": sceneData,
 		"flags": flags,
+		"quests": questData,
 	}
 
 func loadVar(_data, thekey, defaultValue = null):
@@ -151,6 +164,14 @@ func loadData(_data):
 			type = flagData["type"],
 			default = flagData["default"],
 		}
+		
+	var questData = loadVar(_data, "quests", {})
+	quests.clear()
+	for questID in questData:
+		var newQuest:DatapackQuest = DatapackQuest.new()
+		newQuest.id = questID
+		newQuest.loadData(loadVar(questData, questID, {}))
+		quests[questID] = newQuest
 	
 func getEditVarsOnlyValues():
 	var result = {}
@@ -169,6 +190,8 @@ func getContainsString() -> String:
 		resultDat.append(str(skins.size())+" skin"+("s" if skins.size() != 1 else ""))
 	if(!scenes.empty()):
 		resultDat.append(str(scenes.size())+" scene"+("s" if scenes.size() != 1 else ""))
+	if(!quests.empty()):
+		resultDat.append(str(quests.size())+" quest"+("s" if quests.size() != 1 else ""))
 	if(resultDat.size() <= 0):
 		return "Contains: Nothing"
 	else:

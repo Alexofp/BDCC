@@ -157,3 +157,21 @@ func doRunEvent():
 
 func setIsReturning():
 	returning = true
+
+func markQuestAsVisible():
+	pass
+
+func markQuestAsCompleted():
+	pass
+
+func hasInterpolatorVar(varID):
+	if(hasVar(varID) || hasFlag(varID)):
+		return true
+	return false
+
+func getInterpolatorVar(varID):
+	if(hasVar(varID)):
+		return getVar(varID)
+	if(hasFlag(varID)):
+		return getFlag(varID)
+	return null

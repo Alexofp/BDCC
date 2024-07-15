@@ -101,6 +101,8 @@ func getSupportedEditors():
 		return CrotchBlockEditorType.SCENE
 	if(mainCategory in ["Event"]):
 		return CrotchBlockEditorType.EVENT
+	if(mainCategory in ["Quest"]):
+		return CrotchBlockEditorType.QUEST
 	return CrotchBlockEditorType.ALL
 
 const themeVars = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockVariables.tres")
@@ -111,6 +113,7 @@ const themeControl = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThem
 const themeFlags = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockFlags.tres")
 const themeGame = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockGame.tres")
 const themeEvent = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockEvent.tres")
+const themeQuest = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockQuest.tres")
 
 func getVisualBlockTheme():
 	var mainCategory = getMainCategory()
@@ -128,5 +131,7 @@ func getVisualBlockTheme():
 		return themeGame
 	if(mainCategory in ["Event"]):
 		return themeEvent
+	if(mainCategory in ["Quest"]):
+		return themeQuest
 	
 	return themeOutput

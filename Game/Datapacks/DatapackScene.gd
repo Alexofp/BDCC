@@ -55,6 +55,7 @@ func saveData():
 	
 	return {
 		"name": name,
+		"devcomment": devcomment,
 		"states": stateData,
 		"vars": vars,
 		"chars": chars,
@@ -63,6 +64,7 @@ func saveData():
 
 func loadData(data):
 	name = loadVar(data, "name", "No name")
+	devcomment = loadVar(data, "devcomment", "")
 	
 	states = {}
 	var stateData = loadVar(data, "states", {})
