@@ -1,16 +1,16 @@
 extends "res://Game/Datapacks/UI/CrotchCode/CodeBlockBase.gd"
 
 var nameSlot := CrotchSlotVar.new()
-var varSlot := CrotchSlotVar.new()
+var valSlot := CrotchSlotVar.new()
 
 func getCategories():
-	return ["Scene"]
+	return ["Game"]
 
 func _init():
 	nameSlot.setRawType(CrotchVarType.STRING)
 	nameSlot.setRawValue("")
-	varSlot.setRawType(CrotchVarType.STRING)
-	varSlot.setRawValue("")
+	valSlot.setRawType(CrotchVarType.STRING)
+	valSlot.setRawValue(Perk.StartInfertile)
 
 func getType():
 	return CrotchBlocks.CALL
@@ -22,21 +22,28 @@ func execute(_contex:CodeContex):
 	if(!isString(charName)):
 		throwError(_contex, "Character name must a string, got "+str(charName)+" instead")
 		return
-
-	var variantName = varSlot.getValue(_contex)
+	
+	var statName = valSlot.getValue(_contex)
 	if(_contex.hadAnError()):
 		return
-	if(!isString(variantName)):
-		throwError(_contex, "Character variant must a string, got "+str(variantName)+" instead")
-		return
-	
-	_contex.addCharacter(charName, variantName)
+	if(!isString(statName)):
+		throwError(_contex, "Perk name must a string, got "+str(statName)+" instead")
+		return	
+
+	return _contex.charMethod(charName, "hasPerk", [statName])
+
 
 func getTemplate():
 	return [
 		{
 			type = "label",
-			text = "Add character",
+			text = "Has perk",
+		},
+		{
+			type = "slot",
+			id = "val",
+			slot = valSlot,
+			slotType = CrotchBlocks.VALUE,
 		},
 		{
 			type = "slot",
@@ -45,19 +52,13 @@ func getTemplate():
 			slotType = CrotchBlocks.VALUE,
 			expand=true,
 		},
-		{
-			type = "slot",
-			id = "var",
-			slot = varSlot,
-			slotType = CrotchBlocks.VALUE,
-		},
 	]
 
 func getSlot(_id):
 	if(_id == "name"):
 		return nameSlot
-	if(_id == "var"):
-		return varSlot
+	if(_id == "val"):
+		return valSlot
 
 func updateEditor(_editor):
 	if(_editor != null && _editor.has_method("getAllInvolvedCharIDs")):
@@ -67,5 +68,5 @@ func updateVisualSlot(_editor, _id, _visSlot):
 	if(_id == "name"):
 		if(_editor != null && _editor.has_method("getAllInvolvedCharIDs")):
 			_visSlot.setPossibleValues(_editor.getAllInvolvedCharIDs())
-	if(_id == "var"):
-		_visSlot.setPossibleValues(["", "naked"])
+	if(_id == "val"):
+		_visSlot.setPossibleValues(GlobalRegistry.getPerks().keys())

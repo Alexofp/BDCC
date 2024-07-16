@@ -1,16 +1,20 @@
 extends "res://Game/Datapacks/UI/CrotchCode/CodeBlockBase.gd"
 
+var op = "pain"
 var nameSlot := CrotchSlotVar.new()
 var varSlot := CrotchSlotVar.new()
 
 func getCategories():
-	return ["Scene"]
+	return ["Game"]
 
 func _init():
 	nameSlot.setRawType(CrotchVarType.STRING)
 	nameSlot.setRawValue("")
-	varSlot.setRawType(CrotchVarType.STRING)
-	varSlot.setRawValue("")
+	setUpArgument()
+
+func setUpArgument():
+	varSlot.setRawType(CrotchVarType.NUMBER)
+	varSlot.setRawValue(10)
 
 func getType():
 	return CrotchBlocks.CALL
@@ -23,20 +27,39 @@ func execute(_contex:CodeContex):
 		throwError(_contex, "Character name must a string, got "+str(charName)+" instead")
 		return
 
-	var variantName = varSlot.getValue(_contex)
+	var amValue = varSlot.getValue(_contex)
 	if(_contex.hadAnError()):
 		return
-	if(!isString(variantName)):
-		throwError(_contex, "Character variant must a string, got "+str(variantName)+" instead")
+
+	if(!isNumber(amValue)):
+		throwError(_contex, "Second argument must be a number, got "+str(amValue)+" instead")
 		return
 	
-	_contex.addCharacter(charName, variantName)
+	if(op == "pain"):
+		_contex.addPain(charName, amValue)
+	elif(op == "lust"):
+		_contex.addLust(charName, amValue)
+	elif(op == "stamina"):
+		_contex.addStamina(charName, amValue)
+	elif(op == "arousal"):
+		_contex.charMethod(charName, "addArousal", [amValue])
 
 func getTemplate():
 	return [
 		{
 			type = "label",
-			text = "Add character",
+			text = "Add",
+		},
+		{
+			type = "rawselector",
+			id = "op",
+			value = op,
+			values = [
+				"pain",
+				"lust",
+				"stamina",
+				"arousal",
+			],
 		},
 		{
 			type = "slot",
@@ -67,5 +90,19 @@ func updateVisualSlot(_editor, _id, _visSlot):
 	if(_id == "name"):
 		if(_editor != null && _editor.has_method("getAllInvolvedCharIDs")):
 			_visSlot.setPossibleValues(_editor.getAllInvolvedCharIDs())
-	if(_id == "var"):
-		_visSlot.setPossibleValues(["", "naked"])
+
+func applyRawValue(_id, _value):
+	if(_id == "op"):
+		op = _value
+
+func saveData():
+	var data = .saveData()
+	
+	data["op"] = op
+	
+	return data
+
+func loadData(_data):
+	.loadData(_data)
+	
+	op = loadVar(_data, "op", "pain")

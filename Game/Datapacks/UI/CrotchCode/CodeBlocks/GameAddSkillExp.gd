@@ -1,16 +1,19 @@
 extends "res://Game/Datapacks/UI/CrotchCode/CodeBlockBase.gd"
 
 var nameSlot := CrotchSlotVar.new()
-var varSlot := CrotchSlotVar.new()
+var valSlot := CrotchSlotVar.new()
+var numSlot := CrotchSlotVar.new()
 
 func getCategories():
-	return ["Scene"]
+	return ["Game"]
 
 func _init():
 	nameSlot.setRawType(CrotchVarType.STRING)
 	nameSlot.setRawValue("")
-	varSlot.setRawType(CrotchVarType.STRING)
-	varSlot.setRawValue("")
+	valSlot.setRawType(CrotchVarType.STRING)
+	valSlot.setRawValue(Skill.BDSM)
+	numSlot.setRawType(CrotchVarType.NUMBER)
+	numSlot.setRawValue(50)
 
 func getType():
 	return CrotchBlocks.CALL
@@ -22,21 +25,41 @@ func execute(_contex:CodeContex):
 	if(!isString(charName)):
 		throwError(_contex, "Character name must a string, got "+str(charName)+" instead")
 		return
-
-	var variantName = varSlot.getValue(_contex)
+	
+	var statName = valSlot.getValue(_contex)
 	if(_contex.hadAnError()):
 		return
-	if(!isString(variantName)):
-		throwError(_contex, "Character variant must a string, got "+str(variantName)+" instead")
+	if(!isString(statName)):
+		throwError(_contex, "Skill name must a string, got "+str(statName)+" instead")
+		return	
+
+	var expAm = numSlot.getValue(_contex)
+	if(_contex.hadAnError()):
 		return
+	if(!isNumber(expAm)):
+		throwError(_contex, "Skill amount must be a number, got "+str(expAm)+" instead")
+		return	
 	
-	_contex.addCharacter(charName, variantName)
+	return _contex.charMethod(charName, "addSkillExperience", [statName, int(expAm)])
+
 
 func getTemplate():
 	return [
 		{
 			type = "label",
-			text = "Add character",
+			text = "Add skill exp",
+		},
+		{
+			type = "slot",
+			id = "val",
+			slot = valSlot,
+			slotType = CrotchBlocks.VALUE,
+		},
+		{
+			type = "slot",
+			id = "num",
+			slot = numSlot,
+			slotType = CrotchBlocks.VALUE,
 		},
 		{
 			type = "slot",
@@ -45,19 +68,15 @@ func getTemplate():
 			slotType = CrotchBlocks.VALUE,
 			expand=true,
 		},
-		{
-			type = "slot",
-			id = "var",
-			slot = varSlot,
-			slotType = CrotchBlocks.VALUE,
-		},
 	]
 
 func getSlot(_id):
 	if(_id == "name"):
 		return nameSlot
-	if(_id == "var"):
-		return varSlot
+	if(_id == "val"):
+		return valSlot
+	if(_id == "num"):
+		return numSlot
 
 func updateEditor(_editor):
 	if(_editor != null && _editor.has_method("getAllInvolvedCharIDs")):
@@ -67,5 +86,5 @@ func updateVisualSlot(_editor, _id, _visSlot):
 	if(_id == "name"):
 		if(_editor != null && _editor.has_method("getAllInvolvedCharIDs")):
 			_visSlot.setPossibleValues(_editor.getAllInvolvedCharIDs())
-	if(_id == "var"):
-		_visSlot.setPossibleValues(["", "naked"])
+	if(_id == "val"):
+		_visSlot.setPossibleValues(GlobalRegistry.getSkills().keys())

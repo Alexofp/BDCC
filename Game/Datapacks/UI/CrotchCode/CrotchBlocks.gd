@@ -34,6 +34,7 @@ static func getAll():
 		"AlwaysFalse",
 		"AlwaysNull",
 		"FlowIf",
+		"FlowIfElse",
 		"FlowWhile",
 		
 		"MathPlus",
@@ -44,16 +45,6 @@ static func getAll():
 		"MathMod",
 		"MathPow",
 		"MathOp",
-		
-		"Print",
-		
-		"SceneOutput",
-		"SceneButton",
-		"SceneButtonDisabled",
-		"SceneAimCamera",
-		"ScenePlayAnim",
-		"SceneCharAdd",
-		"SceneCharRem",
 		
 		"LogicAnd",
 		"LogicOr",
@@ -66,6 +57,14 @@ static func getAll():
 		"MathLogicBiggerThanOrEq",
 		"MathLogicLessThanOrEq",
 		
+		"SceneOutput",
+		"SceneButton",
+		"SceneButtonDisabled",
+		"SceneAimCamera",
+		"ScenePlayAnim",
+		"SceneCharAdd",
+		"SceneCharRem",
+		
 		"EventRun",
 		"EventButton",
 		"EventButtonDisabled",
@@ -75,6 +74,18 @@ static func getAll():
 		"QuestMarkAsVisible",
 		"QuestMarkAsCompleted",
 		
+		"GameAddAtr",
+		"GameGetAtr",
+		"GameGetStat",
+		"GameHasPerk",
+		"GameHasEffect",
+		"GameAddEffect",
+		"GameGetSkillLevel",
+		"GameAddSkillExp",
+		"GameAddPCAtr",
+		"GameGetPCAtr",
+		
+		"Print",
 		#"TestList",
 		"VarGet",
 		"VarSet",
@@ -98,6 +109,10 @@ static func getAll():
 		"ToString",
 		"ToInt",
 		"ToFloat",
+		
+		"RNGChance",
+		"RNGFloat",
+		"RNGInt",
 		]
 
 static func createBlock(theID):

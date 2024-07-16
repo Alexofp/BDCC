@@ -14,7 +14,8 @@ func execute(_contex:CodeContex):
 		throwError(_contex, "Condition can't be empty")
 		return false
 	
-	var failsafe = 0
+	var failsafe:int = 0
+	var failsafeTimer:int = Time.get_ticks_msec()
 	
 	var whileValue = conditionSlot.getValue(_contex)
 	if(_contex.hadAnError()):
@@ -36,9 +37,10 @@ func execute(_contex:CodeContex):
 				break
 		
 		failsafe += 1
-		if(failsafe > 1000000):
+		if(failsafe > 10 && Time.get_ticks_msec() > (failsafeTimer + 10000)): # 10 seconds timeout, must do at least 10 cycles
 			throwError(_contex, "Infinite While loop detected")
 			return false
+		
 		whileValue = conditionSlot.getValue(_contex)
 		if(_contex.hadAnError()):
 			return false

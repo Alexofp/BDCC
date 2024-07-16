@@ -494,7 +494,7 @@ func calculateNpcGeneratedGender():
 	else:
 		npcGeneratedGender = NpcGender.Female
 
-func loadFromDatapackCharacter(_datapack:Datapack, _datapackChar:DatapackCharacter):
+func loadFromDatapackCharacter(_datapack:Datapack, _datapackChar:DatapackCharacter, _isUpdating = false):
 	if(_datapack != null):
 		datapackID = _datapack.id
 	npcName = _datapackChar.name

@@ -10,7 +10,7 @@ func _init():
 	nameSlot.setRawValue("")
 
 func getType():
-	return CrotchBlocks.VALUE
+	return CrotchBlocks.CALL
 
 func execute(_contex:CodeContex):
 	var charName = nameSlot.getValue(_contex)

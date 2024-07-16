@@ -28,6 +28,8 @@ func registerEventTriggers():
 	registerEventTrigger(Trigger.SceneAndStateHook, EventTriggerSceneHook.new())
 	registerEventTrigger(Trigger.SlaverySlutLookAtEvent, EventTriggerWeighted.new())
 	registerEventTrigger(Trigger.SlaverySlutImportantEvent, EventTriggerWeighted.new())
+	registerEventTrigger(Trigger.TalkingToDynamicNPC, EventTriggerWeighted.new())
+	registerEventTrigger(Trigger.MeetDynamicNPC, EventTriggerWeighted.new())
 	
 	var modules = GlobalRegistry.getModules()
 	for moduleID in modules:

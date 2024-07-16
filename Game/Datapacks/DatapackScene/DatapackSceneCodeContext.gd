@@ -19,6 +19,11 @@ func setDatapack(theDatapack):
 func setScene(theScene):
 	scene = theScene
 
+func getCharacterActualID(charID:String):
+	if(datapackScene.chars.has(charID)):
+		return datapackScene.chars[charID]["realid"]
+	return charID
+
 func say(text):
 	scene.say(processOutputString(text))
 

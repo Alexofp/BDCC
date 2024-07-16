@@ -1500,30 +1500,37 @@ func loadDatapack(datapackID):
 	var newCharacters = theDatapack.characters
 	
 	for charID in newCharacters:
-		var finalID = theDatapack.getFinalCharacterID(charID)#theDatapack.id+":"+charID
-		
-		datapackCharacters[datapackID][finalID] = true
-		
-		var dynamicCharacter = DynamicCharacter.new()
-		dynamicCharacter.id = finalID
-		
-		addDynamicCharacter(dynamicCharacter)
-		
-		dynamicCharacter.loadFromDatapackCharacter(theDatapack, newCharacters[charID])
-		
-		var theCharType = dynamicCharacter.getCharacterType()
-		if(theCharType == CharacterType.Inmate):
-			addDynamicCharacterToPool(finalID, CharacterPool.Inmates)
-		elif(theCharType == CharacterType.Guard):
-			addDynamicCharacterToPool(finalID, CharacterPool.Guards)
-		elif(theCharType == CharacterType.Nurse):
-			addDynamicCharacterToPool(finalID, CharacterPool.Nurses)
-		elif(theCharType == CharacterType.Engineer):
-			addDynamicCharacterToPool(finalID, CharacterPool.Engineers)
+		addDatapackCharacter(theDatapack, newCharacters[charID])
 	
 	GM.ES.registerDatapackEvents(loadedDatapacks.keys())
 	
 	return true
+
+func addDatapackCharacter(theDatapack:Datapack, datapackChar:DatapackCharacter):
+	var charID = datapackChar.id
+	var datapackID = theDatapack.id
+	var finalID = theDatapack.getFinalCharacterID(charID)#theDatapack.id+":"+charID
+	
+	if(!datapackCharacters.has(datapackID)):
+		datapackCharacters[datapackID] = {}
+	datapackCharacters[datapackID][finalID] = true
+	
+	var dynamicCharacter = DynamicCharacter.new()
+	dynamicCharacter.id = finalID
+	
+	addDynamicCharacter(dynamicCharacter)
+	
+	dynamicCharacter.loadFromDatapackCharacter(theDatapack, datapackChar)
+	
+	var theCharType = dynamicCharacter.getCharacterType()
+	if(theCharType == CharacterType.Inmate):
+		addDynamicCharacterToPool(finalID, CharacterPool.Inmates)
+	elif(theCharType == CharacterType.Guard):
+		addDynamicCharacterToPool(finalID, CharacterPool.Guards)
+	elif(theCharType == CharacterType.Nurse):
+		addDynamicCharacterToPool(finalID, CharacterPool.Nurses)
+	elif(theCharType == CharacterType.Engineer):
+		addDynamicCharacterToPool(finalID, CharacterPool.Engineers)
 
 func unloadDatapack(datapackID):
 	if(!loadedDatapacks.has(datapackID)):
@@ -1541,6 +1548,31 @@ func unloadDatapack(datapackID):
 	loadedDatapacks.erase(datapackID)
 	GM.ES.registerDatapackEvents(loadedDatapacks.keys())
 	return true
+
+func reloadDatapack(datapackID):
+	if(!loadedDatapacks.has(datapackID)):
+		Log.printerr("Trying to reload a datapack that was never loaded: "+str(datapackID))
+		return false
+	
+	var theDatapack:Datapack = GlobalRegistry.getDatapack(datapackID)
+	if(theDatapack == null):
+		Log.printerr("Trying to reload a datapack that doesn't exist in the global registry: "+str(datapackID))
+		return false
+	
+	for charID in theDatapack.characters:
+		var finalID = theDatapack.getFinalCharacterID(charID)
+		
+		if(dynamicCharacters.has(finalID)):
+			dynamicCharacters[finalID].loadFromDatapackCharacter(theDatapack, theDatapack.characters[charID], true)
+		else:
+			addDatapackCharacter(theDatapack, theDatapack.characters[charID])
+	
+	return true
+			
+
+func clearDatapackFlags(datapackID):
+	if(datapackFlags.has(datapackID)):
+		datapackFlags.erase(datapackID)
 
 func isDatapackLoaded(datapackID):
 	return loadedDatapacks.has(datapackID)

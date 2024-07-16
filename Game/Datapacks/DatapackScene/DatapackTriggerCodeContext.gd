@@ -25,6 +25,11 @@ func setEvent(theEvent):
 func setSceneTrigger(theTrigger):
 	datapackSceneTrigger = theTrigger
 
+func getCharacterActualID(charID:String):
+	if(datapackScene.chars.has(charID)):
+		return datapackScene.chars[charID]["realid"]
+	return charID
+
 func say(text):
 	event.say(processOutputString(text))
 

@@ -762,6 +762,9 @@ func getStatusEffectRef(id: String):
 		return null
 	return statusEffectsRefs[id]
 
+func getStatusEffectsRefs():
+	return statusEffectsRefs
+
 func getStatusEffectsAlwaysCheckedForPC():
 	return statusEffectsCheckedForPC
 

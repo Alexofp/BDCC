@@ -175,3 +175,103 @@ func getInterpolatorVar(varID):
 	if(hasFlag(varID)):
 		return getFlag(varID)
 	return null
+
+func isNumber(val):
+	if((val is float || val is int)):
+		return true
+	return false
+
+func isString(val):
+	if(val is String):
+		return true
+	return false
+
+func getCharacterActualID(charID:String):
+	return charID
+
+func getCharacter(charID:String):
+	var result = GlobalRegistry.getCharacter(getCharacterActualID(charID))
+	if(result == null):
+		throwError(null, "No character found: "+str(charID))
+		return null
+	return result
+
+func isInGame():
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return false
+	return true
+
+func addPain(charID:String, amValue:int):
+	if(!isInGame()):
+		return
+	
+	var theChar = getCharacter(charID)
+	if(theChar == null):
+		return
+	theChar.addPain(amValue)
+
+func addLust(charID:String, amValue:int):
+	if(!isInGame()):
+		return
+	
+	var theChar = getCharacter(charID)
+	if(theChar == null):
+		return
+	theChar.addLust(amValue)
+
+func addStamina(charID:String, amValue:int):
+	if(!isInGame()):
+		return
+	
+	var theChar = getCharacter(charID)
+	if(theChar == null):
+		return
+	theChar.addStamina(amValue)
+
+func getPain(charID:String) -> int:
+	if(!isInGame()):
+		return 0
+	
+	var theChar = getCharacter(charID)
+	if(theChar == null):
+		return 0
+	return theChar.getPain()
+
+func getLust(charID:String) -> int:
+	if(!isInGame()):
+		return 0
+	
+	var theChar = getCharacter(charID)
+	if(theChar == null):
+		return 0
+	return theChar.getLust()
+
+func getStamina(charID:String) -> int:
+	if(!isInGame()):
+		return 0
+	
+	var theChar = getCharacter(charID)
+	if(theChar == null):
+		return 0
+	return theChar.getStamina()
+
+func charMethod(charID:String, themethod:String, args:Array = [], defaultValue = null):
+	if(!isInGame()):
+		return defaultValue
+	
+	var theChar = getCharacter(charID)
+	if(theChar == null):
+		return defaultValue
+	if(!theChar.has_method(themethod)):
+		throwError(null, "No method found: "+str(themethod)+" for the character: "+str(charID))
+		return defaultValue
+	return theChar.callv(themethod, args)
+
+func getStat(charID:String, statName) -> int:
+	if(!isInGame()):
+		return 0
+	
+	var theChar = getCharacter(charID)
+	if(theChar == null):
+		return 0
+	return theChar.getStat(statName)

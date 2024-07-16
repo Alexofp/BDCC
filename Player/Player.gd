@@ -728,6 +728,9 @@ func setInmateType(newtype):
 func getInmateType():
 	return inmateType
 
+func getInmateTypeString():
+	return InmateType.getOfficialName(getInmateType())
+
 func getInmateColorString():
 	return InmateType.getColorName(getInmateType())
 
