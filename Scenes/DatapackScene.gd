@@ -1,4 +1,5 @@
 extends "res://Scenes/SceneBase.gd"
+class_name DatapackSceneBase
 
 var datapackID = ""
 var datapackSceneID = ""
@@ -9,9 +10,9 @@ var codeContex:DatapackSceneCodeContext
 func _init():
 	sceneID = "DatapackScene"
 
-func _initScene(_args = []):
-	datapackID = _args[0]
-	datapackSceneID = _args[1]
+func setDatapackAndSceneIDs(newDatapackID, newSceneID):
+	datapackID = newDatapackID
+	datapackSceneID = newSceneID
 	
 	datapack = GlobalRegistry.getDatapack(datapackID)
 	datapackScene = datapack.getScene(datapackSceneID)
@@ -20,6 +21,9 @@ func _initScene(_args = []):
 	codeContex.setScene(self)
 	codeContex.setDatapack(datapack)
 	codeContex.setDatapackScene(datapackScene)
+
+func _initScene(_args = []):
+	pass
 
 func _reactInit():
 	if(datapackScene == null):
@@ -52,6 +56,9 @@ func _react(_action: String, _args):
 		return
 
 	setState(_action)
+
+func _react_scene_end(_tag, _result):
+	codeContex.reactSceneEnd(_tag, _result)
 
 func getSceneCreator():
 	if(datapack == null):

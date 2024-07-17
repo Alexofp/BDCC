@@ -13,7 +13,7 @@ func _init():
 	valSlot.setRawValue(Perk.StartInfertile)
 
 func getType():
-	return CrotchBlocks.CALL
+	return CrotchBlocks.LOGIC
 
 func execute(_contex:CodeContex):
 	var charName = nameSlot.getValue(_contex)

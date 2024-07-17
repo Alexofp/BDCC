@@ -175,6 +175,7 @@ func endScene(result = []):
 func runScene(id: String, args = [], tag = ""):
 	var scene = GM.main.runScene(id, args, uniqueSceneID)
 	scene.sceneTag = tag
+	return scene
 
 func react_scene_end(_tag, _result):
 	print(name+": My parent scene has ended")

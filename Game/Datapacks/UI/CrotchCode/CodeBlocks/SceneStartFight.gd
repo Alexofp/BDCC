@@ -1,19 +1,18 @@
 extends "res://Game/Datapacks/UI/CrotchCode/CodeBlockBase.gd"
 
 var nameSlot := CrotchSlotVar.new()
-var valSlot := CrotchSlotVar.new()
+var winSlot := CrotchSlotCalls.new()
+var lostSlot := CrotchSlotCalls.new()
 
 func getCategories():
-	return ["Game"]
+	return ["Scene"]
 
 func _init():
 	nameSlot.setRawType(CrotchVarType.STRING)
 	nameSlot.setRawValue("")
-	valSlot.setRawType(CrotchVarType.STRING)
-	valSlot.setRawValue(Skill.BDSM)
 
 func getType():
-	return CrotchBlocks.VALUE
+	return CrotchBlocks.CALL
 
 func execute(_contex:CodeContex):
 	var charName = nameSlot.getValue(_contex)
@@ -22,28 +21,17 @@ func execute(_contex:CodeContex):
 	if(!isString(charName)):
 		throwError(_contex, "Character name must a string, got "+str(charName)+" instead")
 		return
-	
-	var statName = valSlot.getValue(_contex)
-	if(_contex.hadAnError()):
+	if(charName == "pc"):
+		throwError(_contex, "Can not fight the player")
 		return
-	if(!isString(statName)):
-		throwError(_contex, "Skill name must a string, got "+str(statName)+" instead")
-		return	
-
-	return _contex.charMethod(charName, "getSkillLevel", [statName])
-
+		
+	_contex.runFightScene(charName, winSlot, lostSlot)
 
 func getTemplate():
 	return [
 		{
 			type = "label",
-			text = "Get skill level",
-		},
-		{
-			type = "slot",
-			id = "val",
-			slot = valSlot,
-			slotType = CrotchBlocks.VALUE,
+			text = "Start fight",
 		},
 		{
 			type = "slot",
@@ -52,13 +40,33 @@ func getTemplate():
 			slotType = CrotchBlocks.VALUE,
 			expand=true,
 		},
+		{
+			type = "label",
+			text = "IF WON:",
+		},
+		{
+			type = "slot_list",
+			id = "winSlot",
+			slot = winSlot,
+		},
+		{
+			type = "label",
+			text = "IF LOST:",
+		},
+		{
+			type = "slot_list",
+			id = "lostSlot",
+			slot = lostSlot,
+		},
 	]
 
 func getSlot(_id):
 	if(_id == "name"):
 		return nameSlot
-	if(_id == "val"):
-		return valSlot
+	if(_id == "winSlot"):
+		return winSlot
+	if(_id == "lostSlot"):
+		return lostSlot
 
 func updateEditor(_editor):
 	if(_editor != null && _editor.has_method("getAllInvolvedCharIDs")):
@@ -68,5 +76,3 @@ func updateVisualSlot(_editor, _id, _visSlot):
 	if(_id == "name"):
 		if(_editor != null && _editor.has_method("getAllInvolvedCharIDs")):
 			_visSlot.setPossibleValues(_editor.getAllInvolvedCharIDs())
-	if(_id == "val"):
-		_visSlot.setPossibleValues(GlobalRegistry.getSkills().keys())

@@ -7,8 +7,11 @@ var datapack:Datapack
 
 var buttons = {}
 var curButtonIndex = 0
+var usind = 0 #Unique scene index
 
 var storedErrors = []
+
+var sceneReactEndCode = {}
 
 func setDatapackScene(theScene):
 	datapackScene = theScene
@@ -83,12 +86,16 @@ func run():
 	
 	var currentStateID = scene.getState()
 	
-	var currentState:DatapackSceneState = datapackScene.states[currentStateID]
-	
-	var code = currentState.getCode()
-	
-	execute(code)
-	
+	if(datapackScene.states.has(currentStateID)):
+		var currentState:DatapackSceneState = datapackScene.states[currentStateID]
+		
+		var code = currentState.getCode()
+		
+		execute(code)
+	else:
+		saynn("[color=red]State '"+str(currentStateID)+"' is not defined in this scene, bug the creator![/color]")
+		scene.addButton("End scene", "Force-end this scene", "endthescene")
+		
 	if(storedErrors.size() > 0):
 		saynn("[color=red]"+Util.join(storedErrors, "\n")+"[/color]")
 		storedErrors = []
@@ -101,12 +108,26 @@ func react(_id, _args):
 	return false
 	
 func saveData():
+	var reactEndCodeData = {}
+	for sceneTag in sceneReactEndCode:
+		reactEndCodeData[sceneTag] = sceneReactEndCode[sceneTag].saveData()
+	
 	return {
 		"vars": vars,
+		"usind": usind,
+		"sceneEnds": reactEndCodeData,
 	}
 
 func loadData(_data):
 	vars = loadVar(_data, "vars", {})
+	usind = loadVar(_data, "usind", 0)
+	
+	sceneReactEndCode = {}
+	var reactEndCodeData = loadVar(_data, "sceneEnds", {})
+	for sceneTag in reactEndCodeData:
+		var newSlot:CrotchSlotCalls = CrotchSlotCalls.new()
+		newSlot.loadData(reactEndCodeData[sceneTag])
+		sceneReactEndCode[sceneTag] = newSlot
 
 func getVar(theVar:String, defaultValue = null):
 	if(!vars.has(theVar)):
@@ -268,3 +289,48 @@ func getVarOrValueFromAnimEntry(animStateData, entryID):
 		else:
 			finalValue = (newValue)
 	return finalValue
+
+func setState(newState:String):
+	if(!datapackScene.states.has(newState)):
+		throwError(null, "Scene state not found: "+str(newState))
+	scene.setState(newState)
+
+func endScene():
+	scene.endScene()
+
+func runScene(sceneID:String, args = [], _codeSlot = null):
+	var uniqueTag = getUniqueSceneTag()
+	if(_codeSlot != null): # Do this first in case the scene ends instantly
+		sceneReactEndCode[uniqueTag] = _codeSlot
+	scene.runScene(sceneID, args, uniqueTag)
+
+func runFightScene(charID:String, _codeWin, _codeLose):
+	var uniqueTag = "fight_"+getUniqueSceneTag()
+	sceneReactEndCode[uniqueTag+"_w"] = _codeWin
+	sceneReactEndCode[uniqueTag+"_l"] = _codeLose
+	scene.runScene("FightScene", [charID], uniqueTag)
+
+func runGenericSexScene(domID:String, subID:String, sexType:String, _codeSlot = null):
+	runScene("GenericSexScene", [domID, subID, sexType], _codeSlot)
+
+func getUniqueSceneTag():
+	usind += 1
+	return "scene"+str(usind)
+
+func reactSceneEnd(sceneTag, _args):
+	if(sceneTag.begins_with("fight_")):
+		var battlestate = _args[0]
+		
+		if(battlestate == "win"):
+			execute(sceneReactEndCode[sceneTag+"_w"])
+		else:
+			execute(sceneReactEndCode[sceneTag+"_l"])
+		sceneReactEndCode.erase(sceneTag+"_w")
+		sceneReactEndCode.erase(sceneTag+"_l")
+		return true
+	
+	if(sceneReactEndCode.has(sceneTag)):
+		execute(sceneReactEndCode[sceneTag])
+		sceneReactEndCode.erase(sceneTag)
+		return true
+	return false

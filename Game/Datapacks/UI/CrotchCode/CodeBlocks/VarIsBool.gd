@@ -5,3 +5,6 @@ func doThing(val):
 
 func getThingLabel():
 	return "isBool"
+
+func getType():
+	return CrotchBlocks.LOGIC

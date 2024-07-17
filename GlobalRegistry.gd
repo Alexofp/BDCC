@@ -527,6 +527,18 @@ func getSceneCreator(id: String):
 	return sceneCreators[id]
 
 func createScene(id: String):
+	if(":" in id):
+		var splitData = Util.splitOnFirst(id, ":")
+		var datapackID = splitData[0]
+		var sceneID = splitData[1]
+		
+		if(GM.main != null && is_instance_valid(GM.main) && GM.main.loadedDatapacks.has(datapackID)):
+			var newscene = DatapackSceneBase.new()
+			newscene.name = id
+			newscene.sceneID = id
+			newscene.setDatapackAndSceneIDs(datapackID, sceneID)
+			return newscene
+	
 	if(!scenes.has(id) && !temporaryScenes.has(id)):
 		Log.printerr("ERROR: scene with the id "+id+" wasn't found")
 		return null

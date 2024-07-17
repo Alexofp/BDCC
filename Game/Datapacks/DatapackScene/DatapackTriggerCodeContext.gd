@@ -204,3 +204,10 @@ func doDebugPrint(text):
 func doRunEvent():
 	setIsReturning()
 	eventHappened = true
+
+func endScene():
+	if(GM.main != null && is_instance_valid(GM.main)):
+		GM.main.endCurrentScene()
+
+func runScene(sceneID:String, args = [], _codeSlot = null):
+	event.runScene(sceneID, args)

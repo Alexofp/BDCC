@@ -6,7 +6,7 @@ func getCategories():
 	return ["Scene"]
 
 func getType():
-	return CrotchBlocks.VALUE
+	return CrotchBlocks.CALL
 
 func execute(_contex:CodeContex):
 	_contex.playAnim(anim.animID, anim.animData)

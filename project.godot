@@ -339,6 +339,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Datapacks/DatapackScene.gd"
 }, {
+"base": "Node",
+"class": "DatapackSceneBase",
+"language": "GDScript",
+"path": "res://Scenes/DatapackScene.gd"
+}, {
 "base": "CodeContex",
 "class": "DatapackSceneCodeContext",
 "language": "GDScript",
@@ -1421,6 +1426,7 @@ _global_script_class_icons={
 "DatapackQuestCodeContext": "",
 "DatapackResource": "",
 "DatapackScene": "",
+"DatapackSceneBase": "",
 "DatapackSceneCodeContext": "",
 "DatapackSceneState": "",
 "DatapackSceneTrigger": "",

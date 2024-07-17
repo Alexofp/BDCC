@@ -64,11 +64,19 @@ static func getAll():
 		"ScenePlayAnim",
 		"SceneCharAdd",
 		"SceneCharRem",
+		"SceneSetState",
+		"SceneEndScene",
+		"SceneRunScene",
+		"SceneStartFight",
+		"SceneStartSex",
 		
 		"EventRun",
 		"EventButton",
 		"EventButtonDisabled",
 		"EventOutput",
+		"EventEndScene",
+		"EventRunScene",
+		
 		
 		"QuestStage",
 		"QuestMarkAsVisible",
@@ -84,6 +92,7 @@ static func getAll():
 		"GameAddSkillExp",
 		"GameAddPCAtr",
 		"GameGetPCAtr",
+		"GameSetPCLocation",
 		
 		"Print",
 		#"TestList",
@@ -99,6 +108,7 @@ static func getAll():
 		
 		"RawString",
 		"RawInt",
+		"VarLocationName",
 		
 		"FlagGet",
 		"FlagSet",

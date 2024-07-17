@@ -11,7 +11,7 @@ func _init():
 	nameSlot.setRawValue("")
 
 func getType():
-	return CrotchBlocks.CALL
+	return CrotchBlocks.VALUE
 
 func execute(_contex:CodeContex):
 	var charName = nameSlot.getValue(_contex)

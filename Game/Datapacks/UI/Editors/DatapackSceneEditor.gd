@@ -271,9 +271,6 @@ func onPickerSavePicked(_savePath):
 	
 	pick_save_button.text = "(Picked)"
 
-func getAllStateIDs():
-	return scene.states.keys()
-
 func updateVarList():
 	Util.delete_children(var_list)
 	
@@ -360,6 +357,13 @@ func getAllFlagNames():
 	return datapack.flags.keys()
 func getAllInvolvedCharIDs():
 	return ["pc"]+scene.chars.keys()
+func getAllStateIDs():
+	return scene.states.keys()
+func getAllSceneIDs():
+	var result = []
+	for sceneID in datapack.scenes.keys():
+		result.append(datapack.id+":"+sceneID)
+	return result
 
 func _on_AddFlagButton_pressed():
 	var newVarName = new_flag_line_edit.text

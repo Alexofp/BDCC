@@ -275,3 +275,18 @@ func getStat(charID:String, statName) -> int:
 	if(theChar == null):
 		return 0
 	return theChar.getStat(statName)
+
+func setState(newState:String):
+	doPrint("Setting state to "+str(newState))
+
+func endScene():
+	doPrint("Ending the scene..")
+
+func runScene(sceneID:String, _args = [], _codeSlot = null):
+	doPrint("Gonna run scene: "+sceneID)
+
+func runFightScene(charID:String, _codeWin, _codeLose):
+	doPrint("Gonna start a fight with: "+charID)
+
+func runGenericSexScene(domID:String, subID:String, _sexType:String, _codeSlot = null):
+	doPrint("Gonna start a sex between "+domID+" and"+subID)

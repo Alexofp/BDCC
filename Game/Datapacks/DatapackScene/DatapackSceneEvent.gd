@@ -39,7 +39,7 @@ func react(_triggerID, _args):
 	var result = triggerCodeContext.react(_triggerID, _args)
 	
 	if(result):
-		runScene("DatapackScene", [datapack.id, datapackScene.id])
+		runScene(datapack.id+":"+datapackScene.id)
 	
 	return result
 	
@@ -53,7 +53,7 @@ func getPriority():
 
 func onButton(_method, _args):
 	if(triggerCodeContext.onButton(_method, _args)):
-		runScene("DatapackScene", [datapack.id, datapackScene.id])
+		runScene(datapack.id+":"+datapackScene.id)
 
 func customTriggerCheck(_triggerID, _args):
 	var triggerType = datapackSceneTrigger.triggerType

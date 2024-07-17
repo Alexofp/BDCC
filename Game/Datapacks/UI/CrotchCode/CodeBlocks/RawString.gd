@@ -24,12 +24,16 @@ func getTemplate():
 			id = "rawValue",
 			type = "rawstring", # Some text input here
 			value = rawValue,
+			expand = true,
 		},
 	]
 	
 func applyRawValue(_id, _value):
 	if(_id == "rawValue"):
 		rawValue = _value
+
+func shouldExpandTemplate():
+	return true
 
 func saveData():
 	var data = .saveData()

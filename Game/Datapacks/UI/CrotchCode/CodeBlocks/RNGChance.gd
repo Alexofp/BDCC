@@ -10,7 +10,7 @@ func _init():
 	numSlot.setRawValue(50)
 
 func getType():
-	return CrotchBlocks.VALUE
+	return CrotchBlocks.LOGIC
 
 func execute(_contex:CodeContex):
 	var theNumber = numSlot.getValue(_contex)

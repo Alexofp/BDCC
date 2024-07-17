@@ -15,7 +15,7 @@ func run(datapackID, datapackScene, pickedSavePath = null):
 	#theGame.runScene(newSceneID)
 	if(!theGame.isDatapackLoaded(datapackID)):
 		theGame.loadDatapack(datapackID)
-	theGame.runScene("DatapackScene", [datapackID, datapackScene])
+	theGame.runScene(datapackID+":"+datapackScene)
 	theGame.runCurrentScene()
 
 func _on_StopButton_pressed():

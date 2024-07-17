@@ -6,7 +6,7 @@ func getCategories():
 	return ["Game"]
 
 func getType():
-	return CrotchBlocks.CALL
+	return CrotchBlocks.VALUE
 
 func execute(_contex:CodeContex):
 	if(op == "credits"):
@@ -17,7 +17,9 @@ func execute(_contex:CodeContex):
 		return _contex.charMethod("pc", "getInmateType", [])
 	elif(op == "inmate type name"):
 		return _contex.charMethod("pc", "getInmateTypeString", [])
-
+	elif(op == "location"):
+		return _contex.charMethod("pc", "getLocation", [])
+	
 func getTemplate():
 	return [
 		{
@@ -33,6 +35,7 @@ func getTemplate():
 				"intoxication",
 				"inmate type index",
 				"inmate type name",
+				"location",
 			],
 		},
 	]

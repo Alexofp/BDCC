@@ -1,18 +1,18 @@
 extends "res://Game/Datapacks/UI/CrotchCode/CodeBlockBase.gd"
 
 func getCategories():
-	return ["Logic"]
+	return ["Scene"]
 
 func getType():
-	return CrotchBlocks.VALUE
+	return CrotchBlocks.CALL
 
 func execute(_contex:CodeContex):
-	return null
+	_contex.endScene()
 
 func getTemplate():
 	return [
 		{
 			type = "label",
-			text = "NULL",
+			text = "End Scene",
 		},
 	]
