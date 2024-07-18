@@ -146,7 +146,7 @@ func loadVar(_data, thekey, defaultValue = null):
 		return _data[thekey]
 	return defaultValue
 
-func addButton(_nameText, _descText, _state, _codeSlot):
+func addButton(_nameText, _descText, _state, _codeSlot, _buttonChecks):
 	var newButtonID = "button"+str(curButtonIndex)
 	
 	buttons[newButtonID] = {
@@ -156,7 +156,10 @@ func addButton(_nameText, _descText, _state, _codeSlot):
 		#state = _state,
 	}
 	
-	event.addButton(_nameText, _descText, newButtonID)
+	if(_buttonChecks is Array && _buttonChecks.size() > 0):
+		event.addButtonWithChecks(_nameText, _descText, newButtonID, [], _buttonChecks)
+	else:
+		event.addButton(_nameText, _descText, newButtonID)
 	
 	curButtonIndex += 1
 
@@ -211,3 +214,6 @@ func endScene():
 
 func runScene(sceneID:String, args = [], _codeSlot = null):
 	event.runScene(sceneID, args)
+
+func addMessage(text):
+	event.addMessage(text)

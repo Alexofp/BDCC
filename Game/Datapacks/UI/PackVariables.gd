@@ -70,6 +70,8 @@ func setVariables(_data:Dictionary):
 			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/DropTableVarUI.tscn").instance()
 		elif(type == "location"):
 			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/LocationVarUI.tscn").instance()
+		elif(type == "advancedSelector"):
+			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/AdvancedSelectorVarUI.tscn").instance()
 		else:
 			Log.printerr("Unknown var type found: "+str(type))
 

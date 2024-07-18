@@ -3,6 +3,7 @@ extends "res://Game/Datapacks/UI/CrotchCode/CodeBlockBase.gd"
 var nameSlot := CrotchSlotVar.new()
 var descSlot := CrotchSlotVar.new()
 var codeSlot := CrotchSlotCalls.new()
+var checksSlot := CrotchSlotButtonChecks.new()
 
 func _init():
 	nameSlot.setRawType(CrotchVarType.STRING)
@@ -36,7 +37,7 @@ func execute(_contex:CodeContex):
 		throwError(_contex, "Button description must be a string, got "+str(descText)+" instead")
 		return
 	
-	_contex.addButton(nameText, descText, "", codeSlot)
+	_contex.addButton(nameText, descText, "", codeSlot, checksSlot.getFinalChecks())
 
 func shouldExpandTemplate():
 	return true
@@ -59,8 +60,13 @@ func getTemplate():
 			id = "descSlot",
 			slot = descSlot,
 			slotType = CrotchBlocks.VALUE,
-			placeholder = "Decription",
+			placeholder = "Description",
 			expand=true,
+		},
+		{
+			type = "button_checks",
+			id = "checksSlot",
+			slot = checksSlot,
 		},
 		{
 			type = "slot_list",
@@ -76,6 +82,8 @@ func getSlot(_id):
 		return descSlot
 	if(_id == "codeSlot"):
 		return codeSlot
+	if(_id == "checksSlot"):
+		return checksSlot
 
 #func getVisualBlockTheme():
 #	return themeControl

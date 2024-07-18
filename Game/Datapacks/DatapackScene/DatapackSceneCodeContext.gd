@@ -143,7 +143,7 @@ func loadVar(_data, thekey, defaultValue = null):
 		return _data[thekey]
 	return defaultValue
 
-func addButton(_nameText, _descText, _state, _codeSlot):
+func addButton(_nameText, _descText, _state, _codeSlot, _buttonChecks):
 	var newButtonID = "button"+str(curButtonIndex)
 	
 	buttons[newButtonID] = {
@@ -153,7 +153,10 @@ func addButton(_nameText, _descText, _state, _codeSlot):
 		state = _state,
 	}
 	
-	scene.addButton(_nameText, _descText, newButtonID)
+	if(_buttonChecks is Array && _buttonChecks.size() > 0):
+		scene.addButtonWithChecks(_nameText, _descText, newButtonID, [], _buttonChecks)
+	else:
+		scene.addButton(_nameText, _descText, newButtonID)
 	
 	curButtonIndex += 1
 
@@ -334,3 +337,6 @@ func reactSceneEnd(sceneTag, _args):
 		sceneReactEndCode.erase(sceneTag)
 		return true
 	return false
+
+func addMessage(text):
+	scene.addMessage(text)

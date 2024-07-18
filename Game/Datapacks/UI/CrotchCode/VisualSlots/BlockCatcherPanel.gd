@@ -12,6 +12,7 @@ var extraMode = 0
 var bigTextEditWindowScene = preload("res://Game/Datapacks/UI/CrotchCode/VisualSlots/CrotchBigTextEditWindow.tscn")
 var currentBigWindow
 onready var map_button = $MarginContainer/MapButton
+onready var advanced_picker_button = $MarginContainer/AdvancedPickerButton
 
 var dropIndex = -1
 
@@ -80,24 +81,30 @@ func updateRawVis():
 	$MarginContainer/OptionButton.visible = false
 	$MarginContainer/BigTextEdit.visible = false
 	map_button.visible = false
+	advanced_picker_button.visible = false
 	if(containedNode != null):
 		$MarginContainer.visible = false
 		return
 	if(rawPossibleValues.size() > 0):
-		$MarginContainer.visible = true
-		$MarginContainer/OptionButton.visible = true
-		$MarginContainer/OptionButton.clear()
-		var foundValue = false
-		var _i = 0
-		for value in rawPossibleValues:
-			$MarginContainer/OptionButton.add_item(str(value))
-			if(value == rawValue):
+		if(extraMode == 3 || rawPossibleValues.size() > 20):
+			$MarginContainer.visible = true
+			advanced_picker_button.visible = true
+			advanced_picker_button.text = str(rawValue)
+		else:
+			$MarginContainer.visible = true
+			$MarginContainer/OptionButton.visible = true
+			$MarginContainer/OptionButton.clear()
+			var foundValue = false
+			var _i = 0
+			for value in rawPossibleValues:
+				$MarginContainer/OptionButton.add_item(str(value))
+				if(value == rawValue):
+					$MarginContainer/OptionButton.select(_i)
+					foundValue = true
+				_i += 1
+			if(!foundValue):
+				$MarginContainer/OptionButton.add_item(str(rawValue))
 				$MarginContainer/OptionButton.select(_i)
-				foundValue = true
-			_i += 1
-		if(!foundValue):
-			$MarginContainer/OptionButton.add_item(str(rawValue))
-			$MarginContainer/OptionButton.select(_i)
 	elif(rawMode == CrotchVarType.ANY):
 		$MarginContainer.visible = false
 	elif(rawMode == CrotchVarType.NUMBER):
@@ -109,7 +116,7 @@ func updateRawVis():
 			$MarginContainer/SpinBox.value = 0
 	elif(rawMode == CrotchVarType.STRING):
 		$MarginContainer.visible = true
-		if(extraMode == 0):
+		if(extraMode in [0, 3]):
 			$MarginContainer/LineEdit.visible = true
 			$MarginContainer/LineEdit.text = str(rawValue)
 		elif(extraMode == 1):
@@ -144,6 +151,7 @@ func setRawValue(newVal):
 		$MarginContainer/LineEdit.text = newVal
 		$MarginContainer/BigTextEdit/TextEdit.text = newVal
 		map_button.text = "ROOM="+str(newVal)
+		advanced_picker_button.text = str(newVal)
 	return null
 
 func _on_SpinBox_value_changed(_value):
@@ -213,4 +221,22 @@ func onMapButtonCellSelected(window, cell):
 	window.queue_free()
 	rawValue = cell
 	map_button.text = "ROOM="+str(rawValue)
+	emit_signal("onRawValueChanged", rawValue)
+
+var advPickerScene = preload("res://Game/Datapacks/UI/CrotchCode/UI/AdvancedPickingWindow.tscn")
+func _on_AdvancedPickerButton_pressed():
+	var newWindow = advPickerScene.instance()
+	add_child(newWindow)
+	newWindow.setData({
+		value = rawValue,
+		values = rawPossibleValues,
+	})
+	newWindow.connect("onCancel", self, "onMapButtonClosed")
+	newWindow.connect("onConfirm", self, "onAdvPickerConfirmPressed")
+	newWindow.popup_centered()
+
+func onAdvPickerConfirmPressed(window, value):
+	window.queue_free()
+	rawValue = value
+	advanced_picker_button.text = str(rawValue)
 	emit_signal("onRawValueChanged", rawValue)

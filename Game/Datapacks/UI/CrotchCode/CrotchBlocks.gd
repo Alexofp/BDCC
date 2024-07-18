@@ -69,6 +69,7 @@ static func getAll():
 		"SceneRunScene",
 		"SceneStartFight",
 		"SceneStartSex",
+		"SceneAddMessage",
 		
 		"EventRun",
 		"EventButton",
@@ -76,12 +77,14 @@ static func getAll():
 		"EventOutput",
 		"EventEndScene",
 		"EventRunScene",
+		"EventAddMessage",
 		
 		
 		"QuestStage",
 		"QuestMarkAsVisible",
 		"QuestMarkAsCompleted",
 		
+		"GameProcessTime",
 		"GameAddAtr",
 		"GameGetAtr",
 		"GameGetStat",
@@ -93,6 +96,10 @@ static func getAll():
 		"GameAddPCAtr",
 		"GameGetPCAtr",
 		"GameSetPCLocation",
+		"GameGetDays",
+		"GameGetTime",
+		"GameStartNextDay",
+		
 		
 		"Print",
 		#"TestList",

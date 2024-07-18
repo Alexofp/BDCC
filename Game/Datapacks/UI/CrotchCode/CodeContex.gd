@@ -130,7 +130,10 @@ func sayn(text):
 func saynn(text):
 	say(text)
 
-func addButton(_nameText, _descText, _state, _codeSlot):
+func addMessage(text):
+	doPrint("Adding message: "+str(text))
+
+func addButton(_nameText, _descText, _state, _codeSlot, _buttonChecks):
 	doPrint("BUTTON ADDED: "+str(_nameText))
 
 func addDisabledButton(_nameText, _descText):

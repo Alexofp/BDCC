@@ -1,0 +1,104 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Game/Datapacks/UI/PackVarUIs/AdvancedSelectorVarUI.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Datapacks/UI/PackVariables.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/UI/ButtonChecksEditorWindow.gd" type="Script" id=3]
+
+[node name="ButtonChecksEditorWindow" type="WindowDialog"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -335.0
+margin_top = -207.0
+margin_right = 335.0
+margin_bottom = 207.0
+window_title = "Button checks"
+script = ExtResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 670.0
+margin_bottom = 390.0
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_right = 222.0
+margin_bottom = 390.0
+size_flags_horizontal = 3
+
+[node name="AddButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 222.0
+margin_bottom = 20.0
+text = "Add check"
+
+[node name="CheckList" type="ItemList" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 222.0
+margin_bottom = 366.0
+size_flags_vertical = 3
+
+[node name="RemoveButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 370.0
+margin_right = 222.0
+margin_bottom = 390.0
+text = "Remove check"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 226.0
+margin_right = 670.0
+margin_bottom = 390.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_right = 444.0
+margin_bottom = 390.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer"]
+margin_right = 444.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+
+[node name="TypeSelector" parent="VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 444.0
+margin_bottom = 20.0
+
+[node name="PackVariables" parent="VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 24.0
+margin_right = 444.0
+margin_bottom = 44.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 394.0
+margin_right = 670.0
+margin_bottom = 414.0
+
+[node name="ConfirmButton" type="Button" parent="VBoxContainer/HBoxContainer2"]
+margin_right = 612.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Confirm"
+
+[node name="CancelButton" type="Button" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 616.0
+margin_right = 670.0
+margin_bottom = 20.0
+text = "Cancel"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/AddButton" to="." method="_on_AddButton_pressed"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/VBoxContainer/CheckList" to="." method="_on_CheckList_item_selected"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/RemoveButton" to="." method="_on_RemoveButton_pressed"]
+[connection signal="onValueChange" from="VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer/TypeSelector" to="." method="_on_TypeSelector_onValueChange"]
+[connection signal="onVariableChange" from="VBoxContainer/HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer/PackVariables" to="." method="_on_PackVariables_onVariableChange"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/ConfirmButton" to="." method="_on_ConfirmButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/CancelButton" to="." method="_on_CancelButton_pressed"]

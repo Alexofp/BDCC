@@ -13,18 +13,11 @@ func getType():
 	return CrotchBlocks.CALL
 
 func execute(_contex:CodeContex):
-#	if(conditionSlot.isEmpty()):
-#		throwError(_contex, "Condition can't be empty")
-#		return false
-#
-#	if(conditionSlot.getValue(_contex)):
-#		return thenSlot.execute(_contex)
 	var nameText = nameSlot.getValue(_contex)
 	if(_contex.hadAnError()):
 		return
 
 	_contex.aimCameraAndSetLocName(nameText)
-	#_contex.addButton(nameText, descText, nextState, codeSlot)
 	
 func shouldExpandTemplate():
 	return true

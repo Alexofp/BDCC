@@ -44,6 +44,7 @@ func getTemplate():
 			id = "val",
 			slot = valSlot,
 			slotType = CrotchBlocks.VALUE,
+			extraType = 3,
 		},
 		{
 			type = "slot",

@@ -52,7 +52,7 @@ func getTemplate():
 			id = "descSlot",
 			slot = descSlot,
 			slotType = CrotchBlocks.VALUE,
-			placeholder = "Decription",
+			placeholder = "Description",
 			expand=true,
 		},
 	]
