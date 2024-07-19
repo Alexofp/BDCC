@@ -81,6 +81,9 @@ const tagNames = [
 	"RopeHarness",
 ]
 
+static func nameToTag(tagName):
+	return tagNames.find(tagName)
+
 static func getName(tag):
 	if(tag == Illegal):
 		return "Illegal"

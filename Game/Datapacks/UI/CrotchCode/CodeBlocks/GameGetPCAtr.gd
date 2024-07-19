@@ -19,6 +19,8 @@ func execute(_contex:CodeContex):
 		return _contex.charMethod("pc", "getInmateTypeString", [])
 	elif(op == "location"):
 		return _contex.charMethod("pc", "getLocation", [])
+	elif(op == "exposure"):
+		return _contex.charMethod("pc", "getExposure", [])
 	
 func getTemplate():
 	return [
@@ -36,6 +38,7 @@ func getTemplate():
 				"inmate type index",
 				"inmate type name",
 				"location",
+				"exposure",
 			],
 		},
 	]

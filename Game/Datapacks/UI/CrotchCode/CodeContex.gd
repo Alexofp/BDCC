@@ -130,6 +130,9 @@ func sayn(text):
 func saynn(text):
 	say(text)
 
+func sayAsCharacter(charID:String, sayText:String):
+	saynn("[say="+charID+"]"+sayText+"[/say]")
+
 func addMessage(text):
 	doPrint("Adding message: "+str(text))
 
@@ -270,6 +273,18 @@ func charMethod(charID:String, themethod:String, args:Array = [], defaultValue =
 		return defaultValue
 	return theChar.callv(themethod, args)
 
+func charInventoryMethod(charID:String, themethod:String, args:Array = [], defaultValue = null):
+	if(!isInGame()):
+		return defaultValue
+	
+	var theChar = getCharacter(charID)
+	if(theChar == null):
+		return defaultValue
+	if(!theChar.getInventory().has_method(themethod)):
+		throwError(null, "No method found: "+str(themethod)+" for the character's inventory: "+str(charID))
+		return defaultValue
+	return theChar.getInventory().callv(themethod, args)
+
 func getStat(charID:String, statName) -> int:
 	if(!isInGame()):
 		return 0
@@ -293,3 +308,12 @@ func runFightScene(charID:String, _codeWin, _codeLose):
 
 func runGenericSexScene(domID:String, subID:String, _sexType:String, _codeSlot = null):
 	doPrint("Gonna start a sex between "+domID+" and"+subID)
+
+func addStraponButtonsFor(_charName, _nextState, _codeSlot):
+	pass
+
+func returnStraponToPcFrom(_charName):
+	return true
+
+func addFilledCondomToLootIfPerk(_charName):
+	return

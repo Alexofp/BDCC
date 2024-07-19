@@ -58,6 +58,7 @@ static func getAll():
 		"MathLogicLessThanOrEq",
 		
 		"SceneOutput",
+		"SceneSay",
 		"SceneButton",
 		"SceneButtonDisabled",
 		"SceneAimCamera",
@@ -84,6 +85,12 @@ static func getAll():
 		"QuestMarkAsVisible",
 		"QuestMarkAsCompleted",
 		
+		"LewdStraponButtons",
+		"LewdReturnStrapon",
+		"LewdIsWearingStrapon",
+		"LewdHasStrapons",
+		"LewdAddFilledCondom",
+		
 		"GameProcessTime",
 		"GameAddAtr",
 		"GameGetAtr",
@@ -99,6 +106,22 @@ static func getAll():
 		"GameGetDays",
 		"GameGetTime",
 		"GameStartNextDay",
+		
+		"InvAddItemID",
+		"InvAddXOfItemID",
+		"InvClearSlot",
+		"InvForceEquipItemID",
+		"InvGetItemIDCount",
+		"InvGetItemsWithTagCount",
+		"InvHasItemID",
+		"InvHasItemIDEquipped",
+		"InvHasItemsWithTag",
+		"InvHasSlotEquipped",
+		"InvHasXOfItemID",
+		"InvRemoveItemID",
+		"InvRemoveItemsWithTag",
+		"InvRemoveXOfItemID",
+		"InvResetInventory",
 		
 		
 		"Print",

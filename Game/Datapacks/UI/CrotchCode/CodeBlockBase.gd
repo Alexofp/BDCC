@@ -97,7 +97,7 @@ func isString(val):
 
 func getSupportedEditors():
 	var mainCategory = getMainCategory()
-	if(mainCategory in ["Scene"]):
+	if(mainCategory in ["Scene", "Lewd"]):
 		return CrotchBlockEditorType.SCENE
 	if(mainCategory in ["Event"]):
 		return CrotchBlockEditorType.EVENT
@@ -115,6 +115,8 @@ const themeGame = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/
 const themeEvent = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockEvent.tres")
 const themeQuest = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockQuest.tres")
 const themeRNG = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockRNG.tres")
+const themeLewd = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockLewd.tres")
+const themeInventory = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockInventory.tres")
 
 func getVisualBlockTheme():
 	var mainCategory = getMainCategory()
@@ -136,5 +138,9 @@ func getVisualBlockTheme():
 		return themeQuest
 	if(mainCategory in ["RNG"]):
 		return themeRNG
+	if(mainCategory in ["Lewd"]):
+		return themeLewd
+	if(mainCategory in ["Inventory"]):
+		return themeInventory
 	
 	return themeOutput

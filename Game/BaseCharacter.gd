@@ -2209,7 +2209,21 @@ func adjustArtworkVariant(_variant:Array):
 	pass
 
 func hasIllegalItems():
-	return getInventory().hasIllegalItems()
+	if(inventory.getItemsWithTag(ItemTag.Illegal).size() > 0):
+		return true
+	if(inventory.getEquippedItemsWithTag(ItemTag.Illegal).size() > 0):
+		return true
+	return false
+
+func hasIllegalItemsInInventory():
+	if(inventory.getItemsWithTag(ItemTag.Illegal).size() > 0):
+		return true
+	return false
+
+func hasIllegalItemsEquipped():
+	if(inventory.getEquippedItemsWithTag(ItemTag.Illegal).size() > 0):
+		return true
+	return false
 
 func personalityChangesAfterSex():
 	return false

@@ -102,8 +102,18 @@ func run():
 	
 func react(_id, _args):
 	if(buttons.has(_id)):
-		scene.setState(buttons[_id]["state"])
-		execute(buttons[_id]["code"])
+		var buttonData:Dictionary = buttons[_id]
+		
+		if(buttonData.has("wearstraponon")):
+			var strapon = buttonData["wearstraponon"][0]
+			var theChar = getCharacter(buttonData["wearstraponon"][1])
+			
+			if(theChar != null):
+				strapon.destroyMe()
+				theChar.getInventory().forceEquipStoreOtherUnlessRestraint(strapon)
+		
+		scene.setState(buttonData["state"])
+		execute(buttonData["code"])
 		return true
 	return false
 	
@@ -159,6 +169,27 @@ func addButton(_nameText, _descText, _state, _codeSlot, _buttonChecks):
 		scene.addButton(_nameText, _descText, newButtonID)
 	
 	curButtonIndex += 1
+	return newButtonID
+
+func addStraponButtonsFor(_charName, _nextState, _codeSlot):
+	var strapons = GM.pc.getStrapons()
+	for strapon in strapons:
+		var buttonID = addButton(strapon.getVisibleName(), strapon.getVisibleDescription(), _nextState, _codeSlot, [])
+		buttons[buttonID]["wearstraponon"] = [strapon, _charName]
+
+func returnStraponToPcFrom(_charName):
+	var character = getCharacter(_charName)
+	if(character != null && character.isWearingStrapon()):
+		var strapon = character.getWornStrapon()
+		character.getInventory().removeEquippedItem(strapon)
+		GM.pc.getInventory().addItem(strapon)
+		return true
+	return false
+
+func addFilledCondomToLootIfPerk(_charName):
+	var character = getCharacter(_charName)
+	if(character != null):
+		scene.addFilledCondomToLootIfPerk(character.createFilledCondom())
 
 func addDisabledButton(_nameText, _descText):
 	scene.addDisabledButton(_nameText, _descText)

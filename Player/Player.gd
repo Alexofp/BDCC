@@ -715,13 +715,6 @@ func canUndress():
 			return true
 	return false
 
-func hasIllegalItems():
-	if(inventory.getItemsWithTag(ItemTag.Illegal).size() > 0):
-		return true
-	if(inventory.getEquippedItemsWithTag(ItemTag.Illegal).size() > 0):
-		return true
-	return false
-
 func setInmateType(newtype):
 	inmateType = newtype
 
