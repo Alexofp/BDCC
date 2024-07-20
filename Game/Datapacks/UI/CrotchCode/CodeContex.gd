@@ -154,6 +154,9 @@ func removeCharacter(charAlias):
 func aimCameraAndSetLocName(newLoc):
 	doPrint("AIMING CAMERA AT "+str(newLoc))
 
+func setLocName(newText):
+	doPrint("Setting loc name to "+str(newText))
+
 func playAnim(animID, _animData):
 	doPrint("PLAYING ANIMATION: "+str(animID))
 
@@ -297,6 +300,9 @@ func getStat(charID:String, statName) -> int:
 func setState(newState:String):
 	doPrint("Setting state to "+str(newState))
 
+func getState():
+	return ""
+
 func endScene():
 	doPrint("Ending the scene..")
 
@@ -307,7 +313,10 @@ func runFightScene(charID:String, _codeWin, _codeLose):
 	doPrint("Gonna start a fight with: "+charID)
 
 func runGenericSexScene(domID:String, subID:String, _sexType:String, _codeSlot = null):
-	doPrint("Gonna start a sex between "+domID+" and"+subID)
+	doPrint("Gonna start a sex between "+domID+" and "+subID)
+
+func runLeashParadeScene(domID:String, finalLoc:String, _codeSlot = null):
+	doPrint("Gonna start a leashing scene with dom "+domID+" and target location being "+finalLoc)
 
 func addStraponButtonsFor(_charName, _nextState, _codeSlot):
 	pass
@@ -317,3 +326,9 @@ func returnStraponToPcFrom(_charName):
 
 func addFilledCondomToLootIfPerk(_charName):
 	return
+
+func isInRunMode():
+	return true
+
+func isInReactMode():
+	return true

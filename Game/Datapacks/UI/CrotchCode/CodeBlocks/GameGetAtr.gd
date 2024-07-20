@@ -45,6 +45,14 @@ func execute(_contex:CodeContex):
 		return _contex.charMethod(charName, "getName")
 	elif(op == "arousal"):
 		return _contex.charMethod(charName, "getArousal")
+	elif(op == "femininity"):
+		return _contex.charMethod(charName, "getFemininity")
+	elif(op == "thickness"):
+		return _contex.charMethod(charName, "getThickness")
+	elif(op == "fertility"):
+		return _contex.charMethod(charName, "getFertility")
+	elif(op == "virility"):
+		return _contex.charMethod(charName, "getVirility")
 	else:
 		return 0
 
@@ -72,6 +80,10 @@ func getTemplate():
 				"level",
 				"name",
 				"arousal",
+				"femininity",
+				"thickness",
+				"fertility",
+				"virility",
 			],
 		},
 		{

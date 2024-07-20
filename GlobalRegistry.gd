@@ -930,6 +930,8 @@ func createBuff(id: String):
 		return null
 	return buffs[id].new()
 
+func getBuffClasses():
+	return buffs
 
 
 func registerEvent(path: String):

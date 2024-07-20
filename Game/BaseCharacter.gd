@@ -1444,6 +1444,15 @@ func milkSeed(howmuch = 1.0):
 	production.afterMilked()
 	return howMuchSeed
 
+func hasBallsFullOfSeed():
+	if(!hasBodypart(BodypartSlot.Penis)):
+		return false
+	var penis: BodypartPenis = getBodypart(BodypartSlot.Penis)
+	var production: FluidProduction = penis.getFluidProduction()
+	if(production == null):
+		return false
+	return production.getFluidLevel() >= 1.0
+
 func getCumInflationLevel():
 	if(!OPTIONS.isContentEnabled(ContentType.CumInflation)):
 		return 0.0
@@ -1772,6 +1781,11 @@ func addTallymarkButt():
 func hasTallymarks():
 	return hasEffect(StatusEffect.HasTallyMarks)
 
+func getTallymarkCount():
+	if(!hasTallymarks()):
+		return 0
+	return getEffect(StatusEffect.HasTallyMarks).totalAmount
+
 func clearTallymarks():
 	removeEffect(StatusEffect.HasTallyMarks)
 
@@ -1784,6 +1798,11 @@ func addBodywritingRandom():
 
 func hasBodywritings():
 	return hasEffect(StatusEffect.HasBodyWritings)
+
+func getBodywritingsCount():
+	if(!hasBodywritings()):
+		return 0
+	return getEffect(StatusEffect.HasBodyWritings).getAmount()
 
 func clearBodywritings():
 	removeEffect(StatusEffect.HasBodyWritings)
@@ -1811,6 +1830,9 @@ func isOralBlocked():
 
 func isMuzzled():
 	return buffsHolder.hasBuff(Buff.MuzzleBuff)
+
+func hasBuff(buffID):
+	return buffsHolder.hasBuff(buffID)
 
 func invCanEquipSlot(slot):
 	if(slot == InventorySlot.Penis && !hasPenis()):
@@ -2408,6 +2430,15 @@ func isCoveredInFluids():
 	if(bodyFluids.isEmpty()):
 		return false
 	return true
+
+func isCoveredInCum():
+	return bodyFluids.hasFluidType("Cum")
+
+func isCoveredInGirlCum():
+	return bodyFluids.hasFluidType("GirlCum")
+
+func isCoveredInPiss():
+	return bodyFluids.hasFluidType("Piss")
 
 func afterTakingAShower():
 	#addStamina(30)

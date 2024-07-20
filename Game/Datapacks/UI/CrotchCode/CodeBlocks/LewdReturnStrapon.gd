@@ -41,6 +41,9 @@ func getSlot(_id):
 	if(_id == "name"):
 		return nameSlot
 
+func getSupportedEditors():
+	return CrotchBlockEditorType.SCENE
+
 func updateEditor(_editor):
 	if(_editor != null && _editor.has_method("getAllInvolvedCharIDs")):
 		nameSlot.setRawValue(_editor.getAllInvolvedCharIDs()[0] if _editor.getAllInvolvedCharIDs().size() > 0 else "")

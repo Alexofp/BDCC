@@ -4,7 +4,7 @@ var nameSlot := CrotchSlotVar.new()
 
 func _init():
 	nameSlot.setRawType(CrotchVarType.STRING)
-	nameSlot.setRawValue("main_punishment_spot")
+	nameSlot.setRawValue("")
 
 func getCategories():
 	return ["Scene"]
@@ -17,10 +17,10 @@ func execute(_contex:CodeContex):
 	if(_contex.hadAnError()):
 		return
 	if(!isString(nameText)):
-		throwError(_contex, "Location must be a string, got "+str(nameText)+" instead")
+		throwError(_contex, "Location name must be a string, got "+str(nameText)+" instead")
 		return
 
-	_contex.aimCameraAndSetLocName(nameText)
+	_contex.setLocName(nameText)
 	
 func shouldExpandTemplate():
 	return true
@@ -29,15 +29,15 @@ func getTemplate():
 	return [
 		{
 			type = "label",
-			text = "Aim camera",
+			text = "Set loc name",
 		},
 		{
 			type = "slot",
 			id = "nameSlot",
 			slot = nameSlot,
 			slotType = CrotchBlocks.VALUE,
-			extraType = 2,
 			expand = true,
+			placeholder = "Custom name",
 		},
 	]
 

@@ -13,6 +13,9 @@ var storedErrors = []
 
 var sceneReactEndCode = {}
 
+var runMode = false
+var reactMode = false
+
 func setDatapackScene(theScene):
 	datapackScene = theScene
 
@@ -82,6 +85,7 @@ func throwError(_codeBlock, _errorText):
 		storedErrors.append("[CrotchScript Error at line "+str(_codeBlock.lineNum)+", block: "+str(_codeBlock.id)+"] "+str(_errorText))
 
 func run():
+	runMode = true
 	buttons.clear()
 	
 	var currentStateID = scene.getState()
@@ -99,8 +103,10 @@ func run():
 	if(storedErrors.size() > 0):
 		saynn("[color=red]"+Util.join(storedErrors, "\n")+"[/color]")
 		storedErrors = []
+	runMode = false
 	
 func react(_id, _args):
+	reactMode = true
 	if(buttons.has(_id)):
 		var buttonData:Dictionary = buttons[_id]
 		
@@ -114,7 +120,9 @@ func react(_id, _args):
 		
 		scene.setState(buttonData["state"])
 		execute(buttonData["code"])
+		reactMode = false
 		return true
+	reactMode = false
 	return false
 	
 func saveData():
@@ -242,6 +250,9 @@ func doDebugPrint(text):
 func aimCameraAndSetLocName(newLoc):
 	scene.aimCameraAndSetLocName(str(newLoc))
 
+func setLocName(newText):
+	scene.setLocationName(newText)
+
 func playAnim(animID, animData):
 	if(animID == null || animID == "" || animData == null || !GlobalRegistry.getStageScenesClasses().has(animID)):
 		throwError(null, "Animation not found! AnimID: "+str(animID))
@@ -329,6 +340,9 @@ func setState(newState:String):
 		throwError(null, "Scene state not found: "+str(newState))
 	scene.setState(newState)
 
+func getState():
+	return scene.getState()
+
 func endScene():
 	scene.endScene()
 
@@ -347,12 +361,16 @@ func runFightScene(charID:String, _codeWin, _codeLose):
 func runGenericSexScene(domID:String, subID:String, sexType:String, _codeSlot = null):
 	runScene("GenericSexScene", [domID, subID, sexType], _codeSlot)
 
+func runLeashParadeScene(domID:String, finalLoc:String, _codeSlot = null):
+	runScene("ParadedOnALeashScene", [domID, GM.pc.getLocation(), finalLoc], _codeSlot)
+
 func getUniqueSceneTag():
 	usind += 1
 	return "scene"+str(usind)
 
 func reactSceneEnd(sceneTag, _args):
-	if(sceneTag.begins_with("fight_")):
+	reactMode = true
+	if(sceneTag.begins_with("fight_") && sceneReactEndCode.has(sceneTag+"_w") && sceneReactEndCode.has(sceneTag+"_l")):
 		var battlestate = _args[0]
 		
 		if(battlestate == "win"):
@@ -361,13 +379,22 @@ func reactSceneEnd(sceneTag, _args):
 			execute(sceneReactEndCode[sceneTag+"_l"])
 		sceneReactEndCode.erase(sceneTag+"_w")
 		sceneReactEndCode.erase(sceneTag+"_l")
+		reactMode = false
 		return true
 	
 	if(sceneReactEndCode.has(sceneTag)):
 		execute(sceneReactEndCode[sceneTag])
 		sceneReactEndCode.erase(sceneTag)
+		reactMode = false
 		return true
+	reactMode = false
 	return false
 
 func addMessage(text):
 	scene.addMessage(text)
+
+func isInRunMode():
+	return runMode
+
+func isInReactMode():
+	return reactMode

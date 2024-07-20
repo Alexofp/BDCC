@@ -97,7 +97,7 @@ func isString(val):
 
 func getSupportedEditors():
 	var mainCategory = getMainCategory()
-	if(mainCategory in ["Scene", "Lewd"]):
+	if(mainCategory in ["Scene"]):
 		return CrotchBlockEditorType.SCENE
 	if(mainCategory in ["Event"]):
 		return CrotchBlockEditorType.EVENT
@@ -144,3 +144,15 @@ func getVisualBlockTheme():
 		return themeInventory
 	
 	return themeOutput
+
+func makeSureRunMode(_contex:CodeContex):
+	if(!_contex.isInRunMode()):
+		throwError(_contex, "This code block only supports getting executed in the 'Run' mode (OUTSIDE of addButton/runScene calls)")
+		return false
+	return true
+
+func makeSureReactMode(_contex:CodeContex):
+	if(!_contex.isInReactMode()):
+		throwError(_contex, "This code block only supports getting executed in the 'React' mode (INSIDE of addButton/runScene calls)")
+		return false
+	return true

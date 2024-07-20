@@ -1,17 +1,17 @@
 extends "res://Game/Datapacks/UI/CrotchCode/CodeBlockBase.gd"
 
 var nameSlot := CrotchSlotVar.new()
-var stateSlot := CrotchSlotVar.new()
-var codeSlot := CrotchSlotCalls.new()
+var whoSlot := CrotchSlotVar.new()
 
 func getCategories():
-	return ["Lewd"]
+	return ["Game"]
 
 func _init():
 	nameSlot.setRawType(CrotchVarType.STRING)
 	nameSlot.setRawValue("")
-	stateSlot.setRawType(CrotchVarType.STRING)
-	stateSlot.setRawValue("")
+	whoSlot.setRawType(CrotchVarType.STRING)
+	whoSlot.setRawValue("")
+
 
 func getType():
 	return CrotchBlocks.CALL
@@ -24,65 +24,56 @@ func execute(_contex:CodeContex):
 		throwError(_contex, "Character name must a string, got "+str(charName)+" instead")
 		return
 
-	var nextState = stateSlot.getValue(_contex)
+	var whoName = whoSlot.getValue(_contex)
 	if(_contex.hadAnError()):
 		return
-	if(!isString(nextState)):
-		throwError(_contex, "Button state must be a string, got "+str(nextState)+" instead")
+	if(!isString(whoName)):
+		throwError(_contex, "Character name must a string, got "+str(whoName)+" instead")
 		return
 	
-	_contex.addStraponButtonsFor(charName, nextState, codeSlot)
-
-func shouldExpandTemplate():
-	return true
+	_contex.charMethod(charName, "doWound", [whoName])
 
 func getTemplate():
 	return [
 		{
 			type = "label",
-			text = "Add strapon buttons. Wearer=",
+			text = "Wound",
 		},
 		{
 			type = "slot",
 			id = "name",
 			slot = nameSlot,
 			slotType = CrotchBlocks.VALUE,
+			expand=true,
+		},
+		{
+			type = "label",
+			text = "by",
 		},
 		{
 			type = "slot",
-			id = "stateSlot",
-			slot = stateSlot,
+			id = "who",
+			slot = whoSlot,
 			slotType = CrotchBlocks.VALUE,
-			placeholder = "State",
-		},
-		{
-			type = "slot_list",
-			id = "codeSlot",
-			slot = codeSlot,
+			expand=true,
 		},
 	]
 
 func getSlot(_id):
 	if(_id == "name"):
 		return nameSlot
-	if(_id == "stateSlot"):
-		return stateSlot
-	if(_id == "codeSlot"):
-		return codeSlot
-
-func getSupportedEditors():
-	return CrotchBlockEditorType.SCENE
+	if(_id == "who"):
+		return whoSlot
 
 func updateEditor(_editor):
 	if(_editor != null && _editor.has_method("getAllInvolvedCharIDs")):
 		nameSlot.setRawValue(_editor.getAllInvolvedCharIDs()[0] if _editor.getAllInvolvedCharIDs().size() > 0 else "")
-	if(_editor != null && _editor.has_method("getAllStateIDs")):
-		stateSlot.setRawValue(_editor.getAllStateIDs()[0])
+		whoSlot.setRawValue(_editor.getAllInvolvedCharIDs()[0] if _editor.getAllInvolvedCharIDs().size() > 0 else "")
 
 func updateVisualSlot(_editor, _id, _visSlot):
 	if(_id == "name"):
 		if(_editor != null && _editor.has_method("getAllInvolvedCharIDs")):
 			_visSlot.setPossibleValues(_editor.getAllInvolvedCharIDs())
-	if(_id == "stateSlot"):
-		if(_editor != null && _editor.has_method("getAllStateIDs")):
-			_visSlot.setPossibleValues(_editor.getAllStateIDs())
+	if(_id == "who"):
+		if(_editor != null && _editor.has_method("getAllInvolvedCharIDs")):
+			_visSlot.setPossibleValues(_editor.getAllInvolvedCharIDs())

@@ -13,6 +13,9 @@ var curButtonIndex = 0
 
 var eventHappened:bool = false
 
+var runMode = false
+var reactMode = false
+
 func setDatapackScene(theScene):
 	datapackScene = theScene
 
@@ -87,6 +90,7 @@ func throwError(_codeBlock, _errorText):
 func react(_triggerID, _args):
 	if(datapackSceneTrigger.executeType != DatapackSceneTrigger.TRIGGER_REACT):
 		return
+	reactMode = true
 	eventHappened = false
 	
 	clearVars()
@@ -98,12 +102,14 @@ func react(_triggerID, _args):
 			event.addMessage("[color=red](Trigger for scene: "+str(datapack.id)+":"+str(datapackScene.id)+") "+errorText+"[/color]")
 		storedErrors = []
 	
+	reactMode = false
 	return eventHappened
 	
 func run(_triggerID, _args):
 	if(datapackSceneTrigger.executeType != DatapackSceneTrigger.TRIGGER_RUN):
 		return
 	
+	runMode = true
 	buttons.clear()
 	clearVars()
 	var code = datapackSceneTrigger.getCode()
@@ -114,6 +120,7 @@ func run(_triggerID, _args):
 		storedErrors = []
 
 	#execute(code)
+	runMode = false
 	
 
 	
@@ -171,8 +178,10 @@ func onButton(_method, _args):
 		Log.printerr("Was unable to find code for the "+str(_method)+" button")
 		return
 	
+	reactMode = true
 	eventHappened = false
 	execute(buttons[_method]["code"])
+	reactMode = false
 	return eventHappened
 
 # Replaces =charID: at the start of the lines with [say=charID] tags
@@ -217,3 +226,9 @@ func runScene(sceneID:String, args = [], _codeSlot = null):
 
 func addMessage(text):
 	event.addMessage(text)
+
+func isInRunMode():
+	return runMode
+
+func isInReactMode():
+	return reactMode

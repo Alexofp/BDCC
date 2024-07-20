@@ -18,6 +18,8 @@ func getType():
 	return CrotchBlocks.CALL
 
 func execute(_contex:CodeContex):
+	if(!makeSureRunMode(_contex)):
+		return
 #	if(conditionSlot.isEmpty()):
 #		throwError(_contex, "Condition can't be empty")
 #		return false

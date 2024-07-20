@@ -18,6 +18,9 @@ func getType():
 	return CrotchBlocks.CALL
 
 func execute(_contex:CodeContex):
+	if(!makeSureReactMode(_contex)):
+		return
+	
 	var charName = domSlot.getValue(_contex)
 	if(_contex.hadAnError()):
 		return
@@ -107,3 +110,6 @@ func loadData(_data):
 	.loadData(_data)
 	
 	sexType = loadVar(_data, "sexType", SexType.DefaultSex)
+
+func shouldExpandTemplate():
+	return true

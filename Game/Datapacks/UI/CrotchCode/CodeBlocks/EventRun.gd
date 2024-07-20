@@ -7,6 +7,8 @@ func getType():
 	return CrotchBlocks.RETURNCALL
 
 func execute(_contex:CodeContex):
+	if(!makeSureReactMode(_contex)):
+		return
 	_contex.doRunEvent()
 	return true
 

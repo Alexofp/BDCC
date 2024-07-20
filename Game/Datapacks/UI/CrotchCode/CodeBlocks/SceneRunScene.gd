@@ -14,13 +14,16 @@ func getType():
 	return CrotchBlocks.CALL
 
 func execute(_contex:CodeContex):
+	if(!makeSureReactMode(_contex)):
+		return
+	
 	var charName = nameSlot.getValue(_contex)
 	if(_contex.hadAnError()):
 		return
 	if(!isString(charName)):
 		throwError(_contex, "Scene id must a string, got "+str(charName)+" instead")
 		return
-		
+	
 	_contex.runScene(charName, [], afterSlot)
 
 func getTemplate():
@@ -57,3 +60,6 @@ func updateVisualSlot(_editor, _id, _visSlot):
 	if(_id == "name"):
 		if(_editor != null && _editor.has_method("getAllSceneIDs")):
 			_visSlot.setPossibleValues(_editor.getAllSceneIDs())
+
+func shouldExpandTemplate():
+	return true

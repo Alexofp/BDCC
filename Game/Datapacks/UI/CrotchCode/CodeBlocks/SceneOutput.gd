@@ -16,6 +16,8 @@ func setBlock(theBlock):
 	outputSlot.setBlock(theBlock)
 
 func execute(_contex:CodeContex):
+	if(!makeSureRunMode(_contex)):
+		return ""
 	var theText = str(outputSlot.getValue(_contex))
 	if(_contex.hadAnError()):
 		return ""

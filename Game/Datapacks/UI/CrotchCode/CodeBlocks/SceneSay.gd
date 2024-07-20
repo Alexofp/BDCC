@@ -16,6 +16,9 @@ func getType():
 	return CrotchBlocks.CALL
 
 func execute(_contex:CodeContex):
+	if(!makeSureRunMode(_contex)):
+		return
+	
 	var charName = nameSlot.getValue(_contex)
 	if(_contex.hadAnError()):
 		return

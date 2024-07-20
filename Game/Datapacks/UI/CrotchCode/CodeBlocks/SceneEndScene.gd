@@ -7,6 +7,8 @@ func getType():
 	return CrotchBlocks.CALL
 
 func execute(_contex:CodeContex):
+	if(!makeSureReactMode(_contex)):
+		return
 	_contex.endScene()
 
 func getTemplate():
