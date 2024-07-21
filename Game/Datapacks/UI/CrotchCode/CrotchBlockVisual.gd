@@ -104,6 +104,9 @@ func constructTemplate():
 				newSlotVis.setPlaceholder(templateLine["placeholder"])
 			newSlotVis.setSlotVar(codeBlock.getSlot(slotID))
 			codeBlock.updateVisualSlot(editor, slotID, newSlotVis)
+		if(templateType == "new_line"):
+			currentHBox = HBoxContainer.new()
+			template_vertical_list.add_child(currentHBox)
 		if(templateType == "slot_list"):
 			var slotID = templateLine["id"]
 			currentHBox = HBoxContainer.new()

@@ -1,8 +1,8 @@
 extends "res://Game/Datapacks/UI/CrotchCode/CodeBlockBase.gd"
 
 var nameSlot := CrotchSlotVar.new()
+var secondSlot := CrotchSlotVar.new()
 var valSlot := CrotchSlotVar.new()
-var traitSlot := CrotchSlotVar.new()
 
 func getCategories():
 	return ["Lewd"]
@@ -10,10 +10,11 @@ func getCategories():
 func _init():
 	nameSlot.setRawType(CrotchVarType.STRING)
 	nameSlot.setRawValue("")
-	valSlot.setRawType(CrotchVarType.STRING)
-	valSlot.setRawValue(BodypartSlot.Penis)
-	traitSlot.setRawType(CrotchVarType.STRING)
-	traitSlot.setRawValue(PartTrait.traitNames[0])
+	secondSlot.setRawType(CrotchVarType.STRING)
+	secondSlot.setRawValue("")
+	valSlot.setRawType(CrotchVarType.NUMBER)
+	valSlot.setRawValue(20.0)
+
 
 func getType():
 	return CrotchBlocks.LOGIC
@@ -23,29 +24,31 @@ func execute(_contex:CodeContex):
 	if(_contex.hadAnError()):
 		return
 	if(!isString(charName)):
-		throwError(_contex, "Character name must a string, got "+str(charName)+" instead")
+		throwError(_contex, "Character name must be a string, got "+str(charName)+" instead")
+		return
+
+	var secondName = secondSlot.getValue(_contex)
+	if(_contex.hadAnError()):
+		return
+	if(!isString(secondName)):
+		throwError(_contex, "Character name must be a string, got "+str(secondName)+" instead")
+		return
+
+	var amValue = valSlot.getValue(_contex)
+	if(_contex.hadAnError()):
+		return
+	if(!isNumber(amValue)):
+		throwError(_contex, "Break chance must be a number, got "+str(amValue)+" instead")
 		return
 	
-	var statName = valSlot.getValue(_contex)
-	if(_contex.hadAnError()):
-		return
-	if(!isString(statName)):
-		throwError(_contex, "Bodypart name must a string, got "+str(statName)+" instead")
-		return	
-		
-	var traitName = traitSlot.getValue(_contex)
-	if(_contex.hadAnError()):
-		return
-	if(!isString(traitName)):
-		throwError(_contex, "Bodypart trait must a string, got "+str(traitName)+" instead")
-		return	
-		
-	var traitActual = PartTrait.textToTrait(traitName)
-	return _contex.charMethod(charName, "bodypartHasTrait", [statName, traitActual])
-
+	return _contex.charMethod(charName, "shouldCondomBreakWhenFucking", [secondName, amValue])
 
 func getTemplate():
 	return [
+		{
+			type = "label",
+			text = "Check condom broke",
+		},
 		{
 			type = "slot",
 			id = "name",
@@ -54,19 +57,24 @@ func getTemplate():
 			expand=true,
 		},
 		{
+			type = "label",
+			text = "fucked",
+		},
+		{
 			type = "slot",
-			id = "val",
-			slot = valSlot,
+			id = "second",
+			slot = secondSlot,
 			slotType = CrotchBlocks.VALUE,
+			expand=true,
 		},
 		{
 			type = "label",
-			text = "has trait",
+			text = "Chance:",
 		},
 		{
 			type = "slot",
-			id = "trait",
-			slot = traitSlot,
+			id = "val",
+			slot = valSlot,
 			slotType = CrotchBlocks.VALUE,
 		},
 	]
@@ -74,20 +82,20 @@ func getTemplate():
 func getSlot(_id):
 	if(_id == "name"):
 		return nameSlot
+	if(_id == "second"):
+		return secondSlot
 	if(_id == "val"):
 		return valSlot
-	if(_id == "trait"):
-		return traitSlot
 
 func updateEditor(_editor):
 	if(_editor != null && _editor.has_method("getAllInvolvedCharIDs")):
 		nameSlot.setRawValue(_editor.getAllInvolvedCharIDs()[0] if _editor.getAllInvolvedCharIDs().size() > 0 else "")
+		secondSlot.setRawValue(_editor.getAllInvolvedCharIDs()[0] if _editor.getAllInvolvedCharIDs().size() > 0 else "")
 
 func updateVisualSlot(_editor, _id, _visSlot):
 	if(_id == "name"):
 		if(_editor != null && _editor.has_method("getAllInvolvedCharIDs")):
 			_visSlot.setPossibleValues(_editor.getAllInvolvedCharIDs())
-	if(_id == "val"):
-		_visSlot.setPossibleValues(BodypartSlot.getAll())
-	if(_id == "trait"):
-		_visSlot.setPossibleValues(PartTrait.traitNames)
+	if(_id == "second"):
+		if(_editor != null && _editor.has_method("getAllInvolvedCharIDs")):
+			_visSlot.setPossibleValues(_editor.getAllInvolvedCharIDs())

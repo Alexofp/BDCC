@@ -398,3 +398,19 @@ func isInRunMode():
 
 func isInReactMode():
 	return reactMode
+
+func giveBirth(charName):
+	var theChar = getCharacter(charName)
+	if(theChar == null):
+		return false
+	
+	var bornChilds = theChar.giveBirth()
+	var bornChildAmount = bornChilds.size()
+	var bornString = GM.CS.getChildBirthInfoString(bornChilds)
+	
+	if(bornChildAmount > 0):
+		GM.main.addLogMessage("New life", ""+theChar.getName()+" gave birth to "+str(bornChildAmount)+" kid"+("s" if bornChildAmount != 1 else "")+":\n\n"+bornString)
+		GM.main.showLog()
+		
+		return true
+	return false

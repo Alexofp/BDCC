@@ -88,6 +88,11 @@ static func getAll():
 		"QuestMarkAsVisible",
 		"QuestMarkAsCompleted",
 		
+		"LewdFuck",
+		"LewdOrgasmFrom",
+		"LewdCummedOnBy",
+		"LewdCumInside",
+		"LewdRubVaginas",
 		"LewdHasX",
 		"LewdGetX",
 		"LewdIsLactating",
@@ -102,10 +107,16 @@ static func getAll():
 		"LewdIsBodypartCovered",
 		"LewdClearFluids",
 		"LewdDamageClothes",
+		"LewdDoStretchHole",
 		"LewdDoStretchPain",
 		"LewdStraponButtons",
 		"LewdReturnStrapon",
 		"LewdAddFilledCondom",
+		"LewdGiveBirth",
+		"LewdBreastFeed",
+		"LewdForceImpregnate",
+		"LewdShouldCondomBreak",
+		"LewdUseCondom",
 		
 		"GameProcessTime",
 		"GameAddAtr",
@@ -126,6 +137,8 @@ static func getAll():
 		"GameGetDays",
 		"GameGetTime",
 		"GameStartNextDay",
+		"GameAddLog",
+		"GameShowLog",
 		
 		"InvAddItemID",
 		"InvAddXOfItemID",
@@ -142,6 +155,12 @@ static func getAll():
 		"InvRemoveItemsWithTag",
 		"InvRemoveXOfItemID",
 		"InvResetInventory",
+		
+		"NpcGetPersStat",
+		"NpcSetPersStat",
+		"NpcAddPersStat",
+		"NpcGetFetish",
+		"NpcSetFetish",
 		
 		
 		"Print",

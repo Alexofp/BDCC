@@ -288,6 +288,30 @@ func charInventoryMethod(charID:String, themethod:String, args:Array = [], defau
 		return defaultValue
 	return theChar.getInventory().callv(themethod, args)
 
+func charPersonalityMethod(charID:String, themethod:String, args:Array = [], defaultValue = null):
+	if(!isInGame()):
+		return defaultValue
+	
+	var theChar = getCharacter(charID)
+	if(theChar == null):
+		return defaultValue
+	if(!theChar.getPersonality().has_method(themethod)):
+		throwError(null, "No method found: "+str(themethod)+" for the character's personality: "+str(charID))
+		return defaultValue
+	return theChar.getPersonality().callv(themethod, args)
+
+func charFetishHolderMethod(charID:String, themethod:String, args:Array = [], defaultValue = null):
+	if(!isInGame()):
+		return defaultValue
+	
+	var theChar = getCharacter(charID)
+	if(theChar == null):
+		return defaultValue
+	if(!theChar.getFetishHolder().has_method(themethod)):
+		throwError(null, "No method found: "+str(themethod)+" for the character's personality: "+str(charID))
+		return defaultValue
+	return theChar.getFetishHolder().callv(themethod, args)
+
 func getStat(charID:String, statName) -> int:
 	if(!isInGame()):
 		return 0
@@ -332,3 +356,17 @@ func isInRunMode():
 
 func isInReactMode():
 	return true
+
+func giveBirth(charName):
+	doPrint("Gonna make "+str(charName)+" give birth!")
+	return true
+
+func addLog(_logName, _logText):
+	if(GM.main != null && is_instance_valid(GM.main)):
+		GM.main.addLogMessage(_logName, _logText)
+	else:
+		doPrint("Adding log with title: "+str(_logName))
+
+func showLog():
+	if(GM.main != null && is_instance_valid(GM.main)):
+		GM.main.showLog()
