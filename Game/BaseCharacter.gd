@@ -2839,3 +2839,15 @@ func getRopeHarnessColor(defaultColor=Color.red):
 		return theHarness.clothesColor
 	
 	return defaultColor
+
+func shouldBeExcludedFromEncounters() -> bool:
+	return false
+
+func canForgetCharacter() -> bool:
+	return true
+
+func supportsDefaultGiveBirthScene() -> bool:
+	return true
+
+func canMeetCharacter() -> bool:
+	return true

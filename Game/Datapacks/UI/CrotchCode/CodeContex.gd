@@ -358,8 +358,20 @@ func isInReactMode():
 	return true
 
 func giveBirth(charName):
-	doPrint("Gonna make "+str(charName)+" give birth!")
-	return true
+	var theChar = getCharacter(charName)
+	if(theChar == null):
+		return false
+	
+	var bornChilds = theChar.giveBirth()
+	var bornChildAmount = bornChilds.size()
+	var bornString = GM.CS.getChildBirthInfoString(bornChilds)
+	
+	if(bornChildAmount > 0 && GM.main != null && is_instance_valid(GM.main)):
+		GM.main.addLogMessage("New life", ""+theChar.getName()+" gave birth to "+str(bornChildAmount)+" kid"+("s" if bornChildAmount != 1 else "")+":\n\n"+bornString)
+		GM.main.showLog()
+		
+		return true
+	return false
 
 func addLog(_logName, _logText):
 	if(GM.main != null && is_instance_valid(GM.main)):
@@ -370,3 +382,27 @@ func addLog(_logName, _logText):
 func showLog():
 	if(GM.main != null && is_instance_valid(GM.main)):
 		GM.main.showLog()
+
+func characterExists(charID:String):
+	return GlobalRegistry.characterExists(getCharacterActualID(charID))
+
+func getChildAmount(charID:String):
+	if(GM.CS != null && is_instance_valid(GM.CS)):
+		return GM.CS.getChildrenAmountOf(getCharacterActualID(charID))
+	
+	return 0
+func getChildAmountOnlyMother(charID:String):
+	if(GM.CS != null && is_instance_valid(GM.CS)):
+		return GM.CS.getChildrenAmountOfOnlyMother(getCharacterActualID(charID))
+	
+	return 0
+func getChildAmountOnlyFather(charID:String):
+	if(GM.CS != null && is_instance_valid(GM.CS)):
+		return GM.CS.getChildrenAmountOfOnlyFather(getCharacterActualID(charID))
+	
+	return 0
+func getChildAmountFatherMother(charID:String, charID2:String):
+	if(GM.CS != null && is_instance_valid(GM.CS)):
+		return GM.CS.getSharedChildrenAmountFatherMother(getCharacterActualID(charID), getCharacterActualID(charID2))
+	
+	return 0

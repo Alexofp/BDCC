@@ -229,7 +229,7 @@ func _run():
 			var subbyStat = dynamicCharacter.getPersonality().getStat(PersonalityStat.Subby)
 			var sharedKidsAmount = GM.CS.getSharedChildrenAmount("pc", characterID)
 
-			npclist.addRow(NPCname, gender, subbyStat, characterID, pickedPoolToShow, sharedKidsAmount)
+			npclist.addRow(NPCname, gender, subbyStat, characterID, pickedPoolToShow, sharedKidsAmount, dynamicCharacter.canForgetCharacter(), dynamicCharacter.canMeetCharacter())
 	
 		addButton("Back", "Go back a level", "closenpclist")
 		

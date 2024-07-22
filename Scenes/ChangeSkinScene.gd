@@ -88,8 +88,7 @@ func _run():
 		addButton("Back", "Go back", "basemenu")
 		for skinID in GlobalRegistry.getSkinsAllKeys():
 			var theSkin = GlobalRegistry.getSkin(skinID)
-			var skinAuthor = theSkin.getAuthor()
-			addButton(theSkin.getName(), "Pick this skin"+(("\n[i]Created by:[/i] "+str(skinAuthor)) if (skinAuthor != null && skinAuthor != "") else ""), "changebaseskinmenu_select", [skinID])
+			addButton(theSkin.getName(), "Pick this skin"+theSkin.getExtraDesc(), "changebaseskinmenu_select", [skinID])
 
 	if(state == "changebasecolormenu"):
 		var colorPicker = colorPickerScene.instance()
@@ -130,14 +129,12 @@ func _run():
 			addButton("Default", "Use the default skin pattern", "changepartskinmenu_select", [null])
 			for skinID in GlobalRegistry.getPartSkins(bodypart.id):
 				var theSkin = GlobalRegistry.getPartSkin(bodypart.id, skinID)
-				var skinAuthor = theSkin.getAuthor()
-				addButton(theSkin.getName(), "Pick this skin"+(("\n[i]Created by:[/i] "+str(skinAuthor)) if (skinAuthor != null && skinAuthor != "") else ""), "changepartskinmenu_select", [skinID])
+				addButton(theSkin.getName(), "Pick this skin"+theSkin.getExtraDesc(), "changepartskinmenu_select", [skinID])
 		else:
 			addButton("Same as base", "Inherit the skin from the base", "changepartskinmenu_select", [null])
 			for skinID in GlobalRegistry.getSkinsAllKeys():
 				var theSkin = GlobalRegistry.getSkin(skinID)
-				var skinAuthor = theSkin.getAuthor()
-				addButton(theSkin.getName(), "Pick this skin"+(("\n[i]Created by:[/i] "+str(skinAuthor)) if (skinAuthor != null && skinAuthor != "") else ""), "changepartskinmenu_select", [skinID])
+				addButton(theSkin.getName(), "Pick this skin"+theSkin.getExtraDesc(), "changepartskinmenu_select", [skinID])
 
 	if(state == "changepartcolormenu"):
 		var bodypart = thePC.getBodypart(pickedBodypartSlot)

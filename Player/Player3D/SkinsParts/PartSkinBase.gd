@@ -13,3 +13,13 @@ func getPatternTexture():
 
 func getAuthor():
 	return author
+
+func getExtraDesc():
+	var result = []
+	if(has_method("saveData")):
+		result.append("[i]Datapack skin[/i] "+str(author))
+	if(author != null && author != ""):
+		result.append("[i]Created by:[/i] "+str(author))
+	if(result.empty()):
+		return ""
+	return "\n"+Util.join(result, "\n")

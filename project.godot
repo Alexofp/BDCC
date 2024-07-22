@@ -320,6 +320,11 @@ _global_script_classes=[ {
 "path": "res://Game/Datapacks/DatapackCharacter.gd"
 }, {
 "base": "Reference",
+"class": "DatapackImage",
+"language": "GDScript",
+"path": "res://Game/Datapacks/Util/DatapackImage.gd"
+}, {
+"base": "Reference",
 "class": "DatapackQuest",
 "language": "GDScript",
 "path": "res://Game/Datapacks/DatapackQuest.gd"
@@ -408,6 +413,11 @@ _global_script_classes=[ {
 "class": "DollSkeleton",
 "language": "GDScript",
 "path": "res://Player/Player3D/DollSkeleton.gd"
+}, {
+"base": "Reference",
+"class": "DynCharExtraSettings",
+"language": "GDScript",
+"path": "res://Characters/Dynamic/DynCharExtraSettings.gd"
 }, {
 "base": "Character",
 "class": "DynamicCharacter",
@@ -1427,6 +1437,7 @@ _global_script_class_icons={
 "DamageType": "",
 "Datapack": "",
 "DatapackCharacter": "",
+"DatapackImage": "",
 "DatapackQuest": "",
 "DatapackQuestBase": "",
 "DatapackQuestCodeContext": "",
@@ -1445,6 +1456,7 @@ _global_script_class_icons={
 "Doll3D": "",
 "DollAttachmentZone": "",
 "DollSkeleton": "",
+"DynCharExtraSettings": "",
 "DynamicCharacter": "",
 "EggCell": "",
 "EncounterSettings": "",

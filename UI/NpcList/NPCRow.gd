@@ -15,7 +15,7 @@ var _npcSubbyStatRaw: float
 var _amountOfChildrenRaw: int
 
 
-func initData(name, gender, subbyStat, ID, occupation, children):
+func initData(name, gender, subbyStat, ID, occupation, children, canForget=true, canMeet=true):
 	_npcNameLabel.text = name
 	_npcGenderLabel.text  = gender
 	_npcPersonalityLabel.text  = PersonalityStat.getVisibleDesc(PersonalityStat.Subby, subbyStat)
@@ -24,6 +24,8 @@ func initData(name, gender, subbyStat, ID, occupation, children):
 	_npcOccupation = occupation
 	_amountOfChildrenRaw = children
 	_amountOfChildrenLabel.text  = str(children)
+	forgetButton.disabled = !canForget
+	meetButton.disabled = !canMeet
 
 
 func setNpcID(ID: String):

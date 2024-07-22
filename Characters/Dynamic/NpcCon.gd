@@ -23,4 +23,5 @@ enum {
 	HasReachableVagina,
 	HasReachablePenis,
 	HasReachableAnus,
+	IgnoreDisabledEncountersSetting,
 }

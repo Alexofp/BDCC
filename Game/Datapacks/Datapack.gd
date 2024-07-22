@@ -14,7 +14,17 @@ var scenes:Dictionary = {}
 var flags:Dictionary = {}
 var quests:Dictionary = {}
 
+var requiredDatapacks:Array = []
+var reqDatapackToName:Dictionary = {}
+var requiredMods:Array = []
+
 func getEditVars():
+	var datapacksFancy = []
+	for datapackID in GlobalRegistry.getDatapacks().keys():
+		if(datapackID == id):
+			continue
+		datapacksFancy.append([datapackID, GlobalRegistry.getDatapack(datapackID).name])
+	
 	return {
 		"id": {
 			name = "ID",
@@ -41,6 +51,21 @@ func getEditVars():
 			name = "Description",
 			type = "bigString",
 			value = description,
+		},
+		"requiredMods": {
+			type = "addRemoveList",
+			value = requiredMods,
+			name = "Required Mods",
+			values = GlobalRegistry.getLoadedMods(),
+			collapsable = true,
+		},
+		"requiredDatapacks": {
+			type = "addRemoveList",
+			value = requiredDatapacks,
+			name = "Required Datapacks",
+			values = datapacksFancy,
+			addtoprev=true,
+			noseparator=true,
 		},
 		"characters": {
 			type = "editor",
@@ -83,6 +108,15 @@ func applyEditVar(varid, value):
 		version = value
 	if(varid == "description"):
 		description = value
+	if(varid == "requiredDatapacks"):
+		requiredDatapacks = value
+		reqDatapackToName = {}
+		for datapackID in requiredDatapacks:
+			var datapack = GlobalRegistry.getDatapack(datapackID)
+			if(datapack != null):
+				reqDatapackToName[datapackID] = datapack.name
+	if(varid == "requiredMods"):
+		requiredMods = value
 	
 	return false
 
@@ -114,6 +148,9 @@ func saveData():
 		"scenes": sceneData,
 		"flags": flags,
 		"quests": questData,
+		"requiredDatapacks": requiredDatapacks,
+		"requiredMods": requiredMods,
+		"reqDatapackToName": reqDatapackToName,
 	}
 
 func loadVar(_data, thekey, defaultValue = null):
@@ -127,6 +164,9 @@ func loadData(_data):
 	author = loadVar(_data, "author", "No author")
 	version = loadVar(_data, "version", "1.0")
 	description = loadVar(_data, "description", "No description found")
+	requiredDatapacks = loadVar(_data, "requiredDatapacks", [])
+	requiredMods = loadVar(_data, "requiredMods", [])
+	reqDatapackToName = loadVar(_data, "reqDatapackToName", {})
 	
 	var charData = loadVar(_data, "characters", {})
 	characters.clear()
@@ -141,6 +181,8 @@ func loadData(_data):
 	for skinID in skinData:
 		var newSkin:DatapackSkin = DatapackSkin.new()
 		newSkin.id = skinID
+		newSkin.author = author
+		newSkin.datapackID = id
 		newSkin.loadData(loadVar(skinData, skinID, {}))
 		skins[skinID] = newSkin
 	
@@ -196,6 +238,38 @@ func getContainsString() -> String:
 		return "Contains: Nothing"
 	else:
 		return "Contains: "+(Util.join(resultDat, ", "))
+
+func getRequiredModsString() -> String:
+	return getRequiredModsStringStatic(requiredMods, requiredDatapacks, reqDatapackToName)
+
+static func getRequiredModsStringStatic(_requiredMods, _requiredDatapacks, _reqDatapackToName, _datapacklinks = {}):
+	var resultMods = []
+	for mod in _requiredMods:
+		if(!(mod in GlobalRegistry.getLoadedMods())):
+			resultMods.append("[color=red]"+str(mod)+"[/color]")
+		else:
+			resultMods.append("[color=#4FFF4F]"+str(mod)+"[/color]")
+	var resultDatapacks = []
+	for datapackID in _requiredDatapacks:
+		var datapackName = datapackID+".res"
+		if(_reqDatapackToName.has(datapackID)):
+			datapackName = _reqDatapackToName[datapackID]
+		
+		if(!GlobalRegistry.datapacks.has(datapackID)):
+			var theText = "[color=red]"+str(datapackName)+"[/color]"
+			
+			if(_datapacklinks.has(datapackID)):
+				theText += "[url=SELECT:"+str(datapackID)+"](Select)[/url]"
+			resultDatapacks.append(theText)
+		else:
+			resultDatapacks.append("[color=#4FFF4F]"+str(datapackName)+"[/color]")
+	var res = []
+	if(resultMods.size() > 0):
+		res.append("Required mods: "+Util.join(resultMods, ", "))
+	if(resultDatapacks.size() > 0):
+		res.append("Required datapacks: "+Util.join(resultDatapacks, ", "))
+	
+	return Util.join(res, "\n")
 
 func saveToResource() -> DatapackResource:
 	var newDatapackResource:DatapackResource = DatapackResource.new()

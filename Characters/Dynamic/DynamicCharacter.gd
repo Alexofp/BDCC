@@ -21,6 +21,7 @@ var npcGender = null
 var npcPronounsGender = null
 var datapackID = null
 var npcLootOverride = null
+var extraSettings:DynCharExtraSettings = null
 
 func _init():
 	npcHasMenstrualCycle = true
@@ -177,6 +178,36 @@ func onSexEvent(_event : SexEvent):
 func adjustArtworkVariant(_variant:Array):
 	if(isFullyNaked() && !_variant.has("naked")):
 		_variant.append("naked")
+	
+func shouldBeExcludedFromEncounters() -> bool:
+	if(extraSettings != null && extraSettings.excludeEncounters):
+		return true
+	
+	return .shouldBeExcludedFromEncounters()
+
+func canForgetCharacter() -> bool:
+	if(extraSettings != null && extraSettings.disableForget):
+		return false
+	
+	return .canForgetCharacter()
+	
+func shouldGiveBirth():
+	if(extraSettings != null && extraSettings.disableBirth):
+		return false
+		
+	return .shouldGiveBirth()
+	
+func supportsDefaultGiveBirthScene() -> bool:
+	if(extraSettings != null && extraSettings.disableBirth):
+		return false
+		
+	return .supportsDefaultGiveBirthScene()
+	
+func canMeetCharacter() -> bool:
+	if(extraSettings != null && extraSettings.disableMeet):
+		return false
+		
+	return .canMeetCharacter()
 	
 # The whole thing is hack, never expect it to work or be supported
 func copyEverythingFrom(otherCharacter): #:BaseCharacter
@@ -360,6 +391,9 @@ func saveData():
 	else:
 		data["npcSlavery"] = npcSlavery.saveData()
 	
+	if(extraSettings != null):
+		data["extraSettings"] = extraSettings.saveData()
+	
 	return data
 
 func loadData(data):
@@ -409,6 +443,11 @@ func loadData(data):
 		datapackID = SAVE.loadVar(data, "datapackID", "")
 	if(data.has("npcLootOverride")):
 		npcLootOverride = SAVE.loadVar(data, "npcLootOverride", {})
+	if(data.has("extraSettings")):
+		extraSettings = DynCharExtraSettings.new()
+		extraSettings.loadData(SAVE.loadVar(data, "extraSettings", {}))
+	else:
+		extraSettings = null
 		
 	if(!data.has("pickedSkin")):
 		applyRandomSkinAndColorsAndParts()
@@ -630,6 +669,13 @@ func loadFromDatapackCharacter(_datapack:Datapack, _datapackChar:DatapackCharact
 		npcGeneratedGender = NpcGender.Female
 	else:
 		calculateNpcGeneratedGender()
+	
+	extraSettings = DynCharExtraSettings.new()
+	extraSettings.excludeEncounters = _datapackChar.excludeEncounters
+	extraSettings.disableForget = _datapackChar.disableForget
+	extraSettings.disableBirth = _datapackChar.disableBirth
+	extraSettings.disableMeet = _datapackChar.disableMeet
+	
 	updateNonBattleEffects()
 	stamina = getMaxStamina()
 	updateAppearance()

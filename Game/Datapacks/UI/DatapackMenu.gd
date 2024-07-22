@@ -30,6 +30,8 @@ func updateDatapackDesc(theDatapack:Datapack):
 	finalText += "id="+theDatapack.id
 	finalText += "\n"+theDatapack.name
 	finalText += "\nAuthor: "+theDatapack.author
+	if(!theDatapack.requiredMods.empty() || !theDatapack.requiredDatapacks.empty()):
+		finalText += "\n"+theDatapack.getRequiredModsString()
 	finalText += "\n\n"+theDatapack.description
 	finalText += "\n\n"+theDatapack.getContainsString()
 	

@@ -67,6 +67,18 @@ static func npcSatisfiesCondition(character:BaseCharacter, conInfo):
 			return false
 	return true
 
+static func npcCanBeUsedAtAll(character:BaseCharacter, allConditions):
+	if(character.shouldBeExcludedFromEncounters()):
+		if(!hasCond(allConditions, NpcCon.IgnoreDisabledEncountersSetting)):
+			return false
+	return true
+
+static func hasCond(allConditions, conditionID):
+	for condInfo in allConditions:
+		if(condInfo[0] == conditionID):
+			return true
+	return false
+
 static func grabNpcIDFromPool(poolID, _conditions = []):
 	if(!(_conditions is Array) || _conditions == null):
 		_conditions = []
@@ -81,6 +93,9 @@ static func grabNpcIDFromPool(poolID, _conditions = []):
 		for characterID in characters:
 			var character:BaseCharacter = GlobalRegistry.getCharacter(characterID)
 			if(character == null || !character.isDynamicCharacter()):
+				continue
+			
+			if(!npcCanBeUsedAtAll(character, _conditions)):
 				continue
 			
 			var goodNpc = true
