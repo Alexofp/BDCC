@@ -15,6 +15,7 @@ const UnderwearBottom = "underwearBottom"
 const Penis = "penis"
 const Vagina = "vagina"
 const Anal = "anal"
+const Unique = "unique"
 #Invisible ones
 const Strapon = "strapon"
 # For things like stocks
@@ -23,7 +24,7 @@ const Static2 = "static2"
 const Static3 = "static3"
 
 static func getAll():
-	return [Eyes, Mouth, Neck, Torso, Body, UnderwearTop, UnderwearBottom, Penis, Vagina, Anal, Wrists, Hands, Ring, Ankles, Strapon]
+	return [Eyes, Mouth, Neck, Torso, Body, UnderwearTop, UnderwearBottom, Penis, Vagina, Anal, Wrists, Hands, Ring, Ankles, Strapon, Unique]
 
 static func getStatic():
 	return [Static1, Static2, Static3]

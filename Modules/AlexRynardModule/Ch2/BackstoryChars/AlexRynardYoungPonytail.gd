@@ -1,7 +1,7 @@
 extends Character
 
 func _init():
-	id = "alexrynardy"
+	id = "alexrynardyp"
 	
 	npcCharacterType = CharacterType.Generic
 	
@@ -10,7 +10,7 @@ func _init():
 	pickedSkinGColor=Color("ffe7e7e7")
 	pickedSkinBColor=Color("ff512c13")
 	npcSkinData={
-	"hair": {"r": Color("ff1f1f1f"),"g": Color("ff090909"),"b": Color("ff090909"),},
+	"hair": {"r": Color("ff1f1f1f"),"g": Color("ff090909"),"b": Color("ffb8542d"),},
 	"ears": {"b": Color("ffffffff"),},
 	"arms": {"g": Color("ff070707"),},
 	"penis": {"g": Color("ffd2160c"),"b": Color("ff8b0000"),},
@@ -42,7 +42,7 @@ func getFemininity() -> int:
 
 func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("foxhead"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("messyhair"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("ponytailhair"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("canineears"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthrobody"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthroarms"))
