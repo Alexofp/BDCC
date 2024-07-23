@@ -12,7 +12,7 @@ func _on_MedElevator_onReact(room, key):
 
 
 func _on_MedRoom2_onEnter(room):
-	room.saynn("You see a working vendomat nearby")
+	room.saynn("The Medical Vendomat is tucked into this corner, offering all sorts of drugs and medicine.")
 	
 	room.addButton("Vendomat", "Approach it", "vendomat")
 
