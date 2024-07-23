@@ -156,12 +156,14 @@ population = 3
 [node name="MainHallRoom27" parent="." index="15" instance=ExtResource( 2 )]
 position = Vector2( 0, 384 )
 roomName = "Corridor"
+roomID = "main_yard_connector"
 roomDescription = "A corridor connecting the main hall and the prison yard. Two large cargo bulkheads are permanently locked open on both ends, with a large dirty metal ramp leading down and out into the yard."
 population = 3
 
 [node name="MainHallRoom48" parent="." index="16" instance=ExtResource( 2 )]
 position = Vector2( 128, 448 )
 roomName = "Stairs"
+roomID = "yard_stars_green"
 roomDescription = "A set of stairs lead up to the greenhouses with markings on the floor remind inmates that the greenhouses are [color=red]off-limits[/color] for them. "
 gridColor = 2
 population = 2
@@ -207,6 +209,7 @@ astarConnectedTo = PoolStringArray( "fight_entrance" )
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 64, 576 )
 roomName = "Prison Yard"
+roomID = "yard_corridor2"
 roomDescription = "A large open area with all sorts of trees, bushes, and other greenery. Stone pathways show the way around, circling a large rocky outcrop in the center. Covered and beat up lanterns light the area and a large skylight is installed high above, showing the stars above.
 
 Here the paths branch back around the main yard, and the side yard off the east."
@@ -217,6 +220,7 @@ population = 1
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 128, 576 )
 roomName = "Prison Yard"
+roomID = "yard_corridor3"
 roomDescription = "This side area swings down and around the greenhouse above, a few courtyards sit unused. A few benches are scattered around, overlooking a bit of a rocky, fenced off trench and another sealed skylight far, far to the south, letting you look out at the stars rather than up. A good place for a bit of quiet, if not much privacy."
 roomColor = 1
 population = 1
@@ -234,6 +238,7 @@ population = 1
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 192, 576 )
 roomName = "Prison Yard"
+roomID = "yard_corridor4"
 roomDescription = "This side area swings down and around the greenhouse above, a few courtyards sit unused. A few benches are scattered around, overlooking a bit of a rocky, fenced off trench and another sealed skylight far, far to the south, letting you look out at the stars rather than up. A good place for a bit of quiet, if not much privacy."
 roomColor = 1
 population = 1
@@ -313,6 +318,7 @@ population = 1
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 192, 448 )
 roomName = "Greenhouses"
+roomID = "main_green_corridor1"
 roomDescription = "This entrance area of the greenhouses look largely unused with windows looking out over the side yard. All sorts of hydroponics equipment are stored up in boxes, with discarded boxes and crates off to the sides. More crates and unfinished construction materials lead around this first building. A few guards are wandering around actively looking over this… Construction area? Decommissioned zone?"
 roomColor = 1
 gridColor = 2
@@ -323,6 +329,7 @@ population = 2
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 256, 448 )
 roomName = "Greenhouses"
+roomID = "main_green_corridor3"
 roomDescription = "This entrance area of the greenhouses look largely unused with windows looking out over the side yard. All sorts of hydroponics equipment are stored up in boxes, with discarded boxes and crates off to the sides. More crates and unfinished construction materials lead around this first building. A few guards are wandering around actively looking over this… Construction area? Decommissioned zone?"
 roomColor = 1
 gridColor = 2
@@ -333,6 +340,7 @@ population = 2
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 192, 384 )
 roomName = "Greenhouses"
+roomID = "main_green_corridor2"
 roomDescription = "This half of the Greenhouse is built into the cavern and looks notably more set up than the entrance hall. Crates are still stacked around but all the hydroponics and grow beds are all set up. Clipboards on the walls sit blank, including the staff roster. Whiteboards, notebooks, science equipment are all sitting on the tables and bags or dirt are stacked up on pallets.
 
 An Elevator sits off in the corner, watched by a camera and requires ID and a meeting over an intercom to use. Wherever it goes, Guards can be seen coming and going from it, with a few hanging around the spot.
@@ -346,6 +354,7 @@ population = 2
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 256, 384 )
 roomName = "Greenhouses"
+roomID = "main_green_corridor4"
 roomDescription = "This half of the Greenhouse is built into the cavern and looks notably more set up than the entrance hall. Crates are still stacked around but all the hydroponics and grow beds are all set up. Clipboards on the walls sit blank, including the staff roster. Whiteboards, notebooks, science equipment are all sitting on the tables and bags or dirt are stacked up on pallets.
 
 Another Elevator is north of here, but it lies completely unfinished, with a permanently unpowered closed glass door showing a dark and empty elevator shaft."
@@ -358,6 +367,7 @@ population = 2
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 384 )
 roomName = "Greenhouses"
+roomID = "main_green_corridor5"
 roomDescription = "This half of the Greenhouse is built into the cavern and looks notably more set up than the entrance hall. Crates are still stacked around but all the hydroponics and grow beds are all set up. Clipboards on the walls sit blank, including the staff roster. Whiteboards, notebooks, science equipment are all sitting on the tables and bags or dirt are stacked up on pallets."
 roomColor = 1
 gridColor = 2
@@ -368,6 +378,7 @@ population = 2
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 320 )
 roomName = "Greenhouses"
+roomID = "main_green_secret"
 roomDescription = "A bunch of crates are stacked up in this little closet. Some kind of storeroom."
 roomColor = 1
 gridColor = 2
@@ -394,6 +405,7 @@ population = 2
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 576 )
 roomName = "Greenhouses"
+roomID = "main_green_corridor7"
 roomDescription = "This balcony is open to the cavern and yard below and connects the two main buildings of the Greenhouses.
 
 The side yard is below, and looking over the railing, the drop doesn’t look too high to just vault over if you need to.
@@ -409,6 +421,7 @@ population = 2
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 704 )
 roomName = "Greenhouses"
+roomID = "main_green_corridor11"
 roomDescription = "This second greenhouse is actually far more active than the first. Growbeds are full of plant life and research notes are written up on whiteboards. The whole thing still seems largely automated, and most of the notes are shown to just be production quotas for guard and staff food stocks. Some guards are still hanging around but no staff, strangely.
 
 A maze of crates here are stored along the far wall. Some are tabbed with import and export labels with a number of places listed. “RRDC”, “Better Solutions Production Center”, “Nanotrasen CentComm”, and “Union Aerospace Colonial Division” are the most common, with a few name brands from outside the prison sprinkled in."
@@ -421,6 +434,7 @@ population = 2
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 384, 640 )
 roomName = "Greenhouses"
+roomID = "main_green_corridor10"
 roomDescription = "A number of small trees are being grown in this sector, all in neat rows in a sunken down area with a tall glass ceiling showing the cavern above and a number of additional grow lamps and sprinklers hung above on the support beams."
 roomColor = 1
 gridColor = 2
@@ -431,6 +445,7 @@ population = 2
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 384, 576 )
 roomName = "Greenhouses"
+roomID = "main_green_corridor8"
 roomDescription = "This second greenhouse is actually far more active than the first. Growbeds are full of plant life and research notes are written up on whiteboards. The whole thing still seems largely automated, and most of the notes are shown to just be production quotas for guard and staff food stocks. Some guards are still hanging around but no staff, strangely."
 roomColor = 1
 gridColor = 2
@@ -441,6 +456,7 @@ population = 2
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 640 )
 roomName = "Greenhouses"
+roomID = "main_green_corridor9"
 roomDescription = "This second greenhouse is actually far more active than the first. Growbeds are full of plant life and research notes are written up on whiteboards. The whole thing still seems largely automated, and most of the notes are shown to just be production quotas for guard and staff food stocks. Some guards are still hanging around but no staff, strangely."
 roomColor = 1
 gridColor = 2
@@ -464,6 +480,7 @@ population = 2
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 448 )
 roomName = "Greenhouses"
+roomID = "main_green_corridor6"
 roomDescription = "This entrance area of the greenhouses look largely unused with windows looking out over the side yard. All sorts of hydroponics equipment are stored up in boxes, with discarded boxes and crates off to the sides. More crates and unfinished construction materials lead around this first building. A few guards are wandering around actively looking over this… Construction area? Decommissioned zone?
 
 To the south the building opens up to a small balcony and another greenhouse building. "
@@ -476,6 +493,7 @@ population = 2
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( -64, 448 )
 roomName = "Prison Yard"
+roomID = "yard_corridor1"
 roomDescription = "A large open area with all sorts of trees, bushes, and other greenery. Stone pathways show the way around, circling a large rocky outcrop in the center. Covered and beat up lanterns light the area and a large skylight is installed high above, showing the stars above."
 roomColor = 1
 population = 1

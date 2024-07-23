@@ -9,6 +9,7 @@ script = ExtResource( 3 )
 
 [node name="CellblockRoom" parent="." index="0" instance=ExtResource( 2 )]
 roomName = "Corridor"
+roomID = "cellblock_corridor_nearstairs"
 roomDescription = "Two sets of stairs split off in either direction, leading up up to the main hall."
 population = 1
 
@@ -16,6 +17,7 @@ population = 1
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( -64, 0 )
 roomName = "Stairs"
+roomID = "cellblock_corridor_stairs1"
 roomDescription = "These are the Stairs that lead up to the main hall above."
 roomSprite = 3
 roomColor = 7
@@ -26,6 +28,7 @@ astarConnectedTo = PoolStringArray( "MainStairs1" )
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 64, 0 )
 roomName = "Stairs"
+roomID = "cellblock_corridor_stairs2"
 roomDescription = "These are the Stairs that lead up to the main hall above."
 roomSprite = 3
 roomColor = 7

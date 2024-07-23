@@ -21,6 +21,7 @@ population = 3
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -64, 0 )
 roomName = "Mineshafts"
+roomID = "mining_near_eng"
 roomDescription = "Wall lights and power cables stretch off to the west towards engineering. The heavy steel wall dividing here and the mineshaft terminals grows more rocky further down, with the noise of the mineshafts clanking away behind you. An attempt at a security fence was made, but it looks closer to a flimsy chainlink with a bit of razor wire shoved off to the sides. It looks like the whole thing had to be taken down to fit something large through and was just neglected to sit covered in dust.
 The former gate lays knocked over against the wall with a \"No Inmates Beyond This Point\" sign, failing to do it's job."
 roomColor = 8
@@ -81,6 +82,7 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -320, 0 )
 roomName = "Engineering bay"
+roomID = "eng_corridor1"
 roomDescription = "The corridor here has a big fortified window looking north into the area where the minecarts come in and are offloaded and sorted with a mess of tracks, catwalks, scanners, conveyor belts, mechanical arms, and scanners with minecarts and rocks rolling across it all in a great big system leading in all sorts of directions. You cant see all of it, with bits and conveyor lines leading up high above as well as below and under where you can see. Seeing the all the parts working at once is almost kind of mesmerizing to watch actually.
 The bulkhead door that would lead out into the area is bolted down with a warning label preventing all access while the machinery is running, which it always is.
 
@@ -94,6 +96,7 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -448, 0 )
 roomName = "Engineering bay"
+roomID = "eng_corridor2"
 roomDescription = "To the north there is a big empty space that looks like the ceiling has been sealed over. On the chainlink fence that blocks it off there is a note saying: \"Freight Elevator sealed off from this floor by order of Captain Wright. Use the one in the Main Hall.\".
 
 Your gaze flicks into the empty Elevator shaft and see all sorts of vandalism from inmates that might've snuck in.
@@ -108,6 +111,7 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -512, 0 )
 roomName = "Engineering bay"
+roomID = "eng_corridor3"
 roomDescription = "The hallways of Engineering veer off to the south here. A sign at the junction notes a few places around.
 
 Bluespace Communitcations Transmitter to the North.
@@ -123,6 +127,7 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -576, 0 )
 roomName = "Engineering bay"
+roomID = "eng_near_lab"
 roomDescription = "This section of Engineering is much quieter than the everywhere else. It'd be nice if it wasnt a short, empty hallway with a thin layer of dust and a strip of yellow paint.
 
 Both of the doors here are tucked away and look equally uninteresting, but they are some of the only unlocked doors in this entire department, which makes them perfect in your eyes."
@@ -135,6 +140,7 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -512, 64 )
 roomName = "Engineering bay"
+roomID = "eng_corridor4"
 roomDescription = "Here, just off the junction of hallways there is a staff only elevator with a fancy biometric scanner to deny you access to it.
 A sign on the wall says this is Engineering Floor B1.
 
@@ -174,6 +180,7 @@ lootCredits = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -512, 320 )
 roomName = "Engineering bay"
+roomID = "eng_corridor7"
 roomDescription = "The halls of engineering are nice and wide, if rather bland with industrial plating and support beams. Scattered on either side of the hallway are all sorts of construction equipment, materials, and the odd cargo loader or forklift. Whatever purpose it all has, it means you get to have plenty of things to sneak behind.
 
 The southern hall ends here with one of those large air vent fans up in the wall."
@@ -186,6 +193,7 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -448, 320 )
 roomName = "Engineering bay"
+roomID = "eng_corridor8"
 roomDescription = "The normal wide halls of engineering divert off into regular looking backroom maintenance corridors.
 Wires and cables hung up on walls and support struts lead further east to somewhere."
 roomColor = 6
@@ -219,6 +227,7 @@ gridColor = 5
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -512, 128 )
 roomName = "Engineering bay"
+roomID = "eng_corridor5"
 roomDescription = "The halls of engineering are nice and wide, if rather bland with industrial plating and support beams. Scattered on either side of the hallway are all sorts of construction equipment, materials, and the odd cargo loader or forklift. Whatever purpose it all has, it means you get to have plenty of things to sneak behind."
 roomColor = 6
 gridColor = 5
@@ -229,6 +238,7 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -576, 128 )
 roomName = "Engineering bay"
+roomID = "eng_near_storage"
 roomDescription = "This side hall is more of a smaller warehouse packed floor to ceiling with building materials, Panels, Pipes, Glass, sadly empty lockers. There’s even a pallet of spare toilets.
 Still not large enough for a warehouse, more like a furniture store showcase, actually.
 
@@ -258,6 +268,7 @@ lootEveryXDays = 7
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -512, 192 )
 roomName = "Engineering bay"
+roomID = "eng_corridor6"
 roomDescription = "The halls of engineering are nice and wide, if rather bland with industrial plating and support beams. Scattered on either side of the hallway are all sorts of construction equipment, materials, and the odd cargo loader or forklift. Whatever purpose it all has, it means you get to have plenty of things to sneak behind."
 roomColor = 6
 gridColor = 5
@@ -303,6 +314,7 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -384, -64 )
 roomName = "Engineering bay"
+roomID = "eng_corridor_blue1"
 roomDescription = "This hallway leads back out into the usual cavern walls of the prison. Metal floors stretch out over top of the cleared out tunnels leading to a series of grated catwalks and stilted platforms. A series of light poles follow the path into the darkness."
 roomColor = 6
 gridColor = 5
@@ -313,6 +325,7 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -384, -128 )
 roomName = "Engineering bay"
+roomID = "eng_corridor_blue2"
 roomDescription = "The size of this cave shrinks down to a narrow tunnel as you continue down it. This tunnel is really only able to fit you and the catwalk you're standing on. The slight rattling sounds of your footsteps on the catwalks and the light poles are the only thing to accompany you."
 roomColor = 6
 gridColor = 5
@@ -322,6 +335,7 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -384, -192 )
 roomName = "Engineering bay"
+roomID = "eng_corridor_blue3"
 roomDescription = "The claustrophobic tunnel continues further down to a bend off to the west. Despite the size, the sounds of heavy machinery reverb through the tunnels’ walls here."
 roomColor = 6
 gridColor = 5

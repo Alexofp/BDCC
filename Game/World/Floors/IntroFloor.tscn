@@ -6,19 +6,28 @@
 [node name="IntroFloor" instance=ExtResource( 2 )]
 
 [node name="Corridor" parent="." index="0" instance=ExtResource( 1 )]
+roomName = "Corridor"
+roomID = "intro_ibs_corridor1"
 
 [node name="Corridor2" parent="." index="1" instance=ExtResource( 1 )]
 position = Vector2( 0, -64 )
+roomName = "Corridor"
 roomID = "intro_corridor"
 
 [node name="Corridor3" parent="." index="2" instance=ExtResource( 1 )]
 position = Vector2( 0, -128 )
+roomName = "Corridor"
+roomID = "intro_ibs_corridor3"
 
 [node name="Corridor4" parent="." index="3" instance=ExtResource( 1 )]
 position = Vector2( 0, -192 )
+roomName = "Corridor"
+roomID = "intro_ibs_corridor4"
 
 [node name="Corridor5" parent="." index="4" instance=ExtResource( 1 )]
 position = Vector2( 64, 0 )
+roomName = "Corridor"
+roomID = "intro_ibs_corridor2"
 
 [node name="Corridor6" parent="." index="5" instance=ExtResource( 1 )]
 position = Vector2( -64, -64 )
@@ -27,15 +36,22 @@ roomID = "intro_interogation"
 
 [node name="Corridor9" parent="." index="6" instance=ExtResource( 1 )]
 position = Vector2( 384, -64 )
+roomName = "Spaceship"
 roomID = "intro_ship"
 
 [node name="Corridor10" parent="." index="7" instance=ExtResource( 1 )]
 position = Vector2( 384, -128 )
+roomName = "Spaceship cockpit"
+roomID = "intro_ship_cockpit"
 roomSprite = 1
 
 [node name="Corridor7" parent="." index="8" instance=ExtResource( 1 )]
 position = Vector2( -64, -128 )
+roomName = "Office"
+roomID = "intro_office2"
 canSouth = false
 
 [node name="Corridor8" parent="." index="9" instance=ExtResource( 1 )]
 position = Vector2( 64, -128 )
+roomName = "Office"
+roomID = "intro_office1"
