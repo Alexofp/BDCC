@@ -21,7 +21,10 @@ func getTakeOffScene():
 	return "CuffTuggingScene"
 
 func getPrice():
-	return 0
+	return 4
+
+func getSellPrice():
+	return 1
 
 func canSell():
 	return true

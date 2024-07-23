@@ -23,6 +23,12 @@ func getTakeOffScene():
 func getTags():
 	return [ItemTag.BDSMRestraint, ItemTag.CanBeForcedByGuards, ItemTag.CanBeForcedInStocks]
 
+func getPrice():
+	return 6
+
+func getSellPrice():
+	return 1
+
 func isRestraint():
 	return true
 
