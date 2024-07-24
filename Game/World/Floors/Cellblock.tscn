@@ -10,7 +10,7 @@ script = ExtResource( 3 )
 [node name="CellblockRoom" parent="." index="0" instance=ExtResource( 2 )]
 roomName = "Corridor"
 roomID = "cellblock_corridor_nearstairs"
-roomDescription = "Two sets of stairs split off in either direction, leading up up to the main hall."
+roomDescription = "Two sets of stairs split off in either direction, leading up to the main hall."
 population = 1
 
 [node name="CBStairs1" parent="." index="1" instance=ExtResource( 2 )]
