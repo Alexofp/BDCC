@@ -58,8 +58,8 @@ func getLevelDamage():
 func getStatDamageMult(_pc):
 	return 1.0 + _pc.getStat(Stat.Strength) / 20.0
 
-func calcDamage(_pc, mult = 1.0):
-	return mult * getLevelDamage() * getStatDamageMult(_pc) * RNG.randf_range(0.8, 1.0)
+func calcDamage(_pc, _minigame:MinigameResult, mult = 1.0):
+	return mult * getLevelDamage() * getStatDamageMult(_pc) * RNG.randf_range(0.8, 1.0) * _minigame.score
 
 func takeDamage(howMuch):
 	tightness -= howMuch
@@ -78,7 +78,25 @@ func canStruggle():
 func failChance(_pc, chance):
 	return RNG.chance(chance)
 
+func failChanceLowScore(_pc, chance, _minigame:MinigameResult):
+	if(_minigame.failedHard):
+		return true
+	if(_minigame.score <= 0.2):
+		
+		chance *= sqrt(max(1.0, float(level)))
+		
+		if(chance > 95):
+			chance = 95
+		
+		return RNG.chance(chance)
+	return false
+
 func luckChance(_pc, chance):
+	return RNG.chance(chance)
+
+func luckChanceHighScore(_pc, chance, _minigame:MinigameResult):
+	if(_minigame.score < 0.9):
+		chance *= _minigame.score * 0.5
 	return RNG.chance(chance)
 
 func fatalFail(_minigame):
@@ -104,8 +122,7 @@ func calculateAIScore(_pc):
 	
 	return result * npcDodgeDifficultyMod
 
-#Advanced negavive values for more fun in case of fatal fail
-func doFailingStruggle(_pc, _minigame):
+func doStruggle(_pc, _minigame:MinigameResult):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()
@@ -118,26 +135,8 @@ func doFailingStruggle(_pc, _minigame):
 	var damage = 0
 	var stamina = 0
 	
-	text = "You fail while trying to make "+getItem().getVisibleName()+" slip off"
-	stamina = 20
-	
-	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
-
-func doStruggle(_pc, _minigame):
-	var _handsFree = !_pc.hasBlockedHands()
-	var _armsFree = !_pc.hasBoundArms()
-	var _legsFree = !_pc.hasBoundLegs()
-	var _canSee = !_pc.isBlindfolded()
-	var _canBite = !_pc.isBitingBlocked()
-	
-	var text = "error?"
-	var lust = 0
-	var pain = 0
-	var damage = 0
-	var stamina = 0
-	
-	text = "You struggle, trying to make the "+getItem().getVisibleName()+" slip off"
-	damage = calcDamage(_pc)
+	text = "{user.name} struggles, trying to make the "+getItem().getVisibleName()+" slip off"
+	damage = calcDamage(_pc, _minigame)
 	stamina = 10
 	
 	#damage = calcDamage()

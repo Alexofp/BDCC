@@ -653,9 +653,13 @@ func aiTurn():
 		var item:ItemBase = actionData["item"]
 		var restraintData = item.getRestraintData()
 		
-		var minigameStatus = 1.0
+		var minigameResult:MinigameResult
+		
 		if(restraintData.shouldDoStruggleMinigame(enemyCharacter)):
-			minigameStatus = clamp(enemyCharacter.getRestraintStrugglingMinigameResult(), 0.0, 1.0) * 2.0 * enemyCharacter.getRestraintStrugglePower()
+			minigameResult = enemyCharacter.getRestraintStrugglingMinigameResult()
+		else:
+			minigameResult = MinigameResult.new()
+			minigameResult.score = 1.0
 		
 		var animToPlay = restraintData.getResistAnimation()
 		if(animToPlay != null && animToPlay != ""):
@@ -666,9 +670,10 @@ func aiTurn():
 		var addPain = 0
 		var addStamina = 0
 		
-		var struggleData = restraintData.doStruggle(enemyCharacter, minigameStatus)
+		var struggleData = restraintData.doStruggle(enemyCharacter, minigameResult)
+		
 		if(struggleData.has("damage")):
-			damage = struggleData["damage"] * minigameStatus
+			damage = struggleData["damage"]
 		if(struggleData.has("lust") && struggleData["lust"] > 0):
 			addLust = struggleData["lust"]
 		if(struggleData.has("pain") && struggleData["pain"] > 0):
@@ -679,9 +684,15 @@ func aiTurn():
 		var struggleText = GM.ui.processString(struggleData["text"], {"user":"attacker"})
 		enemyText += struggleText + "\n\n"
 		
-		if(damage != 0.0):
+		if(damage > 0.0):
 			restraintData.takeDamage(damage)
 			enemyText += ("{attacker.name} made "+str(Util.roundF(damage*100.0, 1))+"% of progress\n")
+		elif(damage < 0.0):
+			restraintData.takeDamage(damage)
+			enemyText += ("{attacker.name} lost "+str(Util.roundF(abs(damage)*100.0, 1))+"% of progress\n")
+		else:
+			enemyText += ("{attacker.name} made no progress!\n")
+		
 		if(addLust != 0):
 			addLust = enemyCharacter.receiveDamage(DamageType.Lust, addLust)
 			enemyText += ("{attacker.name} received "+str(addLust)+" lust\n")

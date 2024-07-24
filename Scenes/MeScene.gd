@@ -153,7 +153,10 @@ func _run():
 		
 		addButton("Continue", "Oh well", "")
 
-func onMinigameTest(_score):
+func onMinigameTest(_score:MinigameResult):
+	Log.print("SCORE: "+str(_score.score))
+	Log.print("INSTANT UNLOCK: "+str(_score.instantUnlock))
+	Log.print("FAILED HARD: "+str(_score.failedHard))
 	GM.main.pickOption("", [])
 
 func _react(_action: String, _args):

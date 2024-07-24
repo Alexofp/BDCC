@@ -4,7 +4,7 @@ class_name RestraintMuzzle
 func _init():
 	restraintType = RestraintType.Muzzle
 
-func doStruggle(_pc, _minigame):
+func doStruggle(_pc, _minigame:MinigameResult):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()
@@ -17,13 +17,16 @@ func doStruggle(_pc, _minigame):
 	var damage = 0
 	var stamina = 0
 	
-	if(_handsFree && _armsFree):
+	if(failChanceLowScore(_pc, 20, _minigame)):
+		text = "{user.name} strains against the basket muzzle, trying to shake it off. Instead, {user.his} movements cause it to [b]press harder[/b] against {user.his} face, the straps squeezing {user.his} cheeks and jaw even more firmly."
+		damage = -0.5
+	elif(_handsFree && _armsFree):
 		text = "{user.name} tugs on the straps of {user.his} head harness, trying to take it off."
-		damage = calcDamage(_pc)
+		damage = calcDamage(_pc, _minigame)
 		stamina = 10
 	else:
 		text = "{user.name} desperately tries to wiggle the harness off {user.his} head."
-		damage = calcDamage(_pc, 0.1)
+		damage = calcDamage(_pc, _minigame, 0.1)
 		stamina = 5
 	
 		if(failChance(_pc, 40)):

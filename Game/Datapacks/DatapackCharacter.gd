@@ -57,6 +57,9 @@ var disableForget:bool = false
 var disableBirth:bool = false
 var disableMeet:bool = false
 
+var restraintDodgeChanceMult:float = 0.9
+var restraintStrugglePower:float = 1.0
+
 func getPortrait(kind:Array):
 	if(portrait.isEmpty() && portraitNaked.isEmpty()):
 		return null
@@ -221,6 +224,20 @@ func getEditVars():
 			int=true,
 			addtoprev = true,
 		},
+		"restraintDodgeChanceMult": {
+			name = "Restraint dodge chance (0.9 = default, <0.9 = harder to tie up, >0.9 = easier to tie up)",
+			type = "number",
+			value = restraintDodgeChanceMult,
+			addtoprev = true,
+			step = 0.01,
+		},
+		"restraintStrugglePower": {
+			name = "Struggle power mult (1 = default, <1 = worse at struggling, >1 = better at struggling)",
+			type = "number",
+			value = restraintStrugglePower,
+			addtoprev = true,
+			step = 0.01,
+		},
 		"perks": {
 			name = "Perks",
 			type = "addRemoveList",
@@ -373,6 +390,10 @@ func applyEditVar(varid, value):
 		disableBirth = value
 	if(varid == "disableMeet"):
 		disableMeet = value
+	if(varid == "restraintDodgeChanceMult"):
+		restraintDodgeChanceMult = value
+	if(varid == "restraintStrugglePower"):
+		restraintStrugglePower = value
 	
 	return false
 
@@ -416,6 +437,8 @@ func saveData():
 		"disableForget": disableForget,
 		"disableBirth": disableBirth,
 		"disableMeet": disableMeet,
+		"restraintDodgeChanceMult": restraintDodgeChanceMult,
+		"restraintStrugglePower": restraintStrugglePower,
 	}
 
 func loadData(data):
@@ -457,6 +480,8 @@ func loadData(data):
 	disableForget = loadVar(data, "disableForget", false)
 	disableBirth = loadVar(data, "disableBirth", false)
 	disableMeet = loadVar(data, "disableMeet", false)
+	restraintDodgeChanceMult = loadVar(data, "restraintDodgeChanceMult", 0.9)
+	restraintStrugglePower = loadVar(data, "restraintStrugglePower", 1.0)
 
 func loadVar(_data, thekey, defaultValue = null):
 	if(_data.has(thekey)):

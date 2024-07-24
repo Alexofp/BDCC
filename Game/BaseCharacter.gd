@@ -1849,7 +1849,24 @@ func getRestraintStrugglePower():
 	return 1.0
 
 func getRestraintStrugglingMinigameResult():
-	return RNG.randf_range(0.8, 1.1)
+	var minigameResult:MinigameResult = MinigameResult.new()
+	
+	var strugglePower:float = getRestraintStrugglePower()
+	
+	# Creates a normal distribution of sorts
+	var howMany = 5 # The bigger this number is, the closer the score will be to 1.0 on average
+	var result:float = 0.0
+	for _i in range(howMany):
+		result += RNG.randf_range(0.0, 2.0)
+	result /= howMany
+	minigameResult.score = clamp(result, 0.0, 1.0) * strugglePower
+
+	var epicFailChance = 5.0 - clamp(strugglePower-1.0, -1.0, 1.0) * 5.0
+	if(RNG.chance(epicFailChance)):
+		minigameResult.score = 0.0
+		minigameResult.failedHard = true
+
+	return minigameResult
 
 func processStruggleTurn(isActivelyStruggling = false):
 	var texts = []

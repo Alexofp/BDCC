@@ -11,7 +11,7 @@ var amountOfTiles:int = 0
 var hitTiles: int = 0
 var fullScore:float = 0.0
 
-signal minigameCompleted(finalScore)
+signal minigameCompleted(result)
 
 var shouldFlipV = false
 var shouldFlipH = false
@@ -189,4 +189,6 @@ func _on_ContinueButton_pressed():
 	if(hitTiles != 0):
 		accuracy = fullScore / hitTiles
 	
-	emit_signal("minigameCompleted", accuracy)
+	var result = MinigameResult.new()
+	result.score = accuracy
+	emit_signal("minigameCompleted", result)

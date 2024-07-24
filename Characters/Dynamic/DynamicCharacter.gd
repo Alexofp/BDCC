@@ -271,8 +271,6 @@ func copyEverythingFrom(otherCharacter): #:BaseCharacter
 		npcBaseStamina = otherCharacter.npcBaseStamina
 		npcBaseRestraintDodgeChanceMult = otherCharacter.npcBaseRestraintDodgeChanceMult
 		npcRestraintStrugglePower = otherCharacter.npcRestraintStrugglePower
-		npcRestraintMinigameResultMin = otherCharacter.npcRestraintMinigameResultMin
-		npcRestraintMinigameResultMax = otherCharacter.npcRestraintMinigameResultMax
 		npcCharacterType = otherCharacter.npcCharacterType
 		npcSkinData = otherCharacter.npcSkinData.duplicate(true)
 	else:
@@ -347,6 +345,10 @@ func saveData():
 		data["datapackID"] = datapackID
 	if(npcLootOverride != null):
 		data["npcLootOverride"] = npcLootOverride
+	if(npcBaseRestraintDodgeChanceMult != null && npcBaseRestraintDodgeChanceMult != 0.9):
+		data["restraintDodgeChanceMult"] = npcBaseRestraintDodgeChanceMult
+	if(npcRestraintStrugglePower != null && npcRestraintStrugglePower != 1.0):
+		data["restraintStrugglePower"] = npcRestraintStrugglePower
 	
 	data["bodyparts"] = {}
 	for slot in bodyparts:
@@ -448,6 +450,10 @@ func loadData(data):
 		extraSettings.loadData(SAVE.loadVar(data, "extraSettings", {}))
 	else:
 		extraSettings = null
+	if(data.has("restraintDodgeChanceMult")):
+		npcBaseRestraintDodgeChanceMult = SAVE.loadVar(data, "restraintDodgeChanceMult", 0.9)
+	if(data.has("restraintStrugglePower")):
+		npcRestraintStrugglePower = SAVE.loadVar(data, "restraintStrugglePower", 1.0)
 		
 	if(!data.has("pickedSkin")):
 		applyRandomSkinAndColorsAndParts()
@@ -567,6 +573,9 @@ func loadFromDatapackCharacter(_datapack:Datapack, _datapackChar:DatapackCharact
 	npcBasePain = _datapackChar.basePain
 	npcBaseLust = _datapackChar.baseLust
 	npcBaseStamina = _datapackChar.baseStamina
+	
+	npcBaseRestraintDodgeChanceMult = _datapackChar.restraintDodgeChanceMult
+	npcRestraintStrugglePower = _datapackChar.restraintStrugglePower
 	
 	npcStats = _datapackChar.stats.duplicate()
 	for statID in npcStats:

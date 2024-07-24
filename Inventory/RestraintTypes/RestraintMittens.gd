@@ -5,7 +5,7 @@ func _init():
 	npcDodgeDifficultyMod = 1.2
 	restraintType = RestraintType.Mittens
 
-func doStruggle(_pc, _minigame):
+func doStruggle(_pc, _minigame:MinigameResult):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()
@@ -18,9 +18,12 @@ func doStruggle(_pc, _minigame):
 	var damage = 0
 	var stamina = 0
 	
-	if(_legsFree):
+	if(failChanceLowScore(_pc, 15, _minigame)):
+		text = "{user.name} struggles to slip {user.his} hands out of the bondage mittens, but {user.his} frantic attempts only make the mittens [b]tighten around {user.his} palms more[/b], rendering {user.his} fingers completely useless."
+		damage = -0.5
+	elif(_legsFree):
 		text = "{user.name} steps on the mittens and tries to pull {user.his} arms out of them."
-		damage = calcDamage(_pc)
+		damage = calcDamage(_pc, _minigame)
 		stamina = 10
 		
 		if(failChance(_pc, 10)):
@@ -28,7 +31,7 @@ func doStruggle(_pc, _minigame):
 			pain = scaleDamage(5)
 	elif(_canBite && _armsFree):
 		text = "{user.name} bites on one of the mittens and tries to free {user.his} arm. Not very effective but better than nothing."
-		damage = calcDamage(_pc, 0.6)
+		damage = calcDamage(_pc, _minigame, 0.6)
 		stamina = 10
 
 		if(failChance(_pc, 10)):
@@ -36,7 +39,7 @@ func doStruggle(_pc, _minigame):
 			pain = scaleDamage(5)
 	else:
 		text = "{user.name} tries to helplessly wiggle the mittens off."
-		damage = calcDamage(_pc, 0.4)
+		damage = calcDamage(_pc, _minigame, 0.4)
 		stamina = RNG.randi_range(10, 20)
 		
 		if(failChance(_pc, 20)):

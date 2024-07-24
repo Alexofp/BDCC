@@ -163,7 +163,7 @@ func _run():
 		
 		addButton("Continue", "Good", "checkifokay")
 
-func onMinigameCompleted(result):
+func onMinigameCompleted(result:MinigameResult):
 	GM.main.pickOption("struggleAgainst", [restraintID, result])
 		
 func _react(_action: String, _args):
@@ -193,39 +193,30 @@ func _react(_action: String, _args):
 	if(_action == "struggleAgainst"):
 		var item = GM.pc.getInventory().getItemByUniqueID(_args[0])
 		var restraintData: RestraintData = item.getRestraintData()
-		var minigameStatus = 1.0
-		var finalMinigameStatus = 1.0
 		
-		var instantUnlock = false
-		var fatallFail = false
+		var minigameResult:MinigameResult
 		if(_args.size() > 1):
-			finalMinigameStatus = float(_args[1])
+			minigameResult = _args[1]
 			
-			if(float(_args[1]) >= 100.0):
-				instantUnlock = true
-				finalMinigameStatus = 1.0
-			var minigameResult = float(_args[1])
-			minigameStatus = pow(minigameResult, 1.5) * 2.0
-			if(minigameResult >= 1.0 && GM.pc.hasPerk(Perk.BDSMBetterStruggling)):
-				minigameStatus *= 2.0
-			if float(_args[1]) < 0.0:
-				fatallFail = true
-				minigameStatus = -pow(-minigameResult, 1.5) * 2.0
-				finalMinigameStatus = 0.0
+			if(minigameResult.score >= 1.0 && GM.pc.hasPerk(Perk.BDSMBetterStruggling)):
+				minigameResult.score *= 2.0
+		else:
+			minigameResult = MinigameResult.new()
+			minigameResult.score = 1.0
+		
+		var minigameScore:float = minigameResult.score
+		var instantUnlock:bool = minigameResult.instantUnlock
+		var fatallFail:bool = minigameResult.failedHard
 		
 		var damage = 0.0
 		var addLust = 0
 		var addPain = 0
 		var addStamina = 0
 
-		var struggleData
-		if fatallFail:
-			struggleData = restraintData.doFailingStruggle(GM.pc, minigameStatus)
-		else:
-			struggleData = restraintData.doStruggle(GM.pc, minigameStatus)
+		var struggleData = restraintData.doStruggle(GM.pc, minigameResult)
 		
 		if(struggleData.has("damage")):
-			damage = struggleData["damage"] * abs(minigameStatus)
+			damage = struggleData["damage"]
 			if(damage > 0.0 && instantUnlock):
 				damage = 1.0
 		if(struggleData.has("lust") && struggleData["lust"] > 0):
@@ -259,7 +250,7 @@ func _react(_action: String, _args):
 			addMessage("You lost "+str(Util.roundF(-damage*100.0, 1))+"% of progress")
 		if(damage > 0.0):
 			restraintData.takeDamage(damage)
-			addMessage("You made "+str(Util.roundF(damage*100.0, 1))+"% of progress ("+str(Util.roundF(finalMinigameStatus*100.0, 1))+"% efficiency)")
+			addMessage("You made "+str(Util.roundF(damage*100.0, 1))+"% of progress ("+str(Util.roundF(minigameScore*100.0, 1))+"% efficiency)")
 		if(addLust != 0):
 			addLust = GM.pc.receiveDamage(DamageType.Lust, addLust)
 			addMessage("You received "+str(addLust)+" lust")

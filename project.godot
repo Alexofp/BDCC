@@ -815,6 +815,11 @@ _global_script_classes=[ {
 "path": "res://Player/Player3D/Parts/MeshWithPattern.gd"
 }, {
 "base": "Reference",
+"class": "MinigameResult",
+"language": "GDScript",
+"path": "res://Game/Minigames/MinigameResult.gd"
+}, {
+"base": "Reference",
 "class": "ModEntry",
 "language": "GDScript",
 "path": "res://UI/ModBrowser/ModEntry.gd"
@@ -1536,6 +1541,7 @@ _global_script_class_icons={
 "MedicalModule": "",
 "MenstrualCycle": "",
 "MeshInstanceWithPattern": "",
+"MinigameResult": "",
 "ModEntry": "",
 "Module": "",
 "MyBoneAttachment": "",
