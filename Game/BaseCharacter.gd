@@ -2868,3 +2868,19 @@ func supportsDefaultGiveBirthScene() -> bool:
 
 func canMeetCharacter() -> bool:
 	return true
+
+func fillBalls(howMuch:float=1.0):
+	if(!hasBodypart(BodypartSlot.Penis)):
+		return
+		
+	var penis = getBodypart(BodypartSlot.Penis)
+	if(penis != null && penis.getFluidProduction() != null):
+		penis.getFluidProduction().fillPercent(howMuch)
+
+func fillBreasts(howMuch:float=1.0):
+	if(!hasBodypart(BodypartSlot.Breasts)):
+		return
+		
+	var breasts = getBodypart(BodypartSlot.Breasts)
+	if(breasts != null && breasts.getFluidProduction() != null):
+		breasts.getFluidProduction().fillPercent(howMuch)

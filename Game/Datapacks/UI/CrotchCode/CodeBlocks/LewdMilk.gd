@@ -50,6 +50,8 @@ func getTemplate():
 			values = [
 				"milk",
 				"milkSeed",
+				"fillBreasts",
+				"fillBalls",
 			],
 		},
 		{

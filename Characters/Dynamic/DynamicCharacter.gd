@@ -686,5 +686,11 @@ func loadFromDatapackCharacter(_datapack:Datapack, _datapackChar:DatapackCharact
 	extraSettings.disableMeet = _datapackChar.disableMeet
 	
 	updateNonBattleEffects()
+	
+	if(hasPenis()):
+		fillBalls()
+	if(isLactating()):
+		fillBreasts()
+	
 	stamina = getMaxStamina()
 	updateAppearance()
