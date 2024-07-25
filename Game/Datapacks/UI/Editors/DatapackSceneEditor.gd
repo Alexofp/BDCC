@@ -19,11 +19,17 @@ onready var possible_char_list = $VBoxContainer/MarginContainer/TabContainer/Cha
 onready var char_list = $VBoxContainer/MarginContainer/TabContainer/Characters/ScrollContainer/CharList
 onready var filter_possible_char_list_edit = $VBoxContainer/MarginContainer/TabContainer/Characters/HBoxContainer/VBoxContainer/FilterPossibleCharListEdit
 
+onready var scene_images_list = $VBoxContainer/MarginContainer/TabContainer/Images/ScrollContainer/PanelContainer/SceneImagesList
+onready var scene_image_id_edit = $VBoxContainer/MarginContainer/TabContainer/Images/HBoxContainer/SceneImageIDEdit
+
+
 var varListEntryScene = preload("res://Game/Datapacks/UI/CrotchCode/UI/VarListEntry.tscn")
 var charListEntryScene = preload("res://Game/Datapacks/UI/CrotchCode/UI/CharListEntry.tscn")
 
 var gameWrapperScene = preload("res://Game/Datapacks/UI/CrotchCode/GameRunnerWrapper.tscn")
 var savePickerScene = preload("res://Game/Datapacks/UI/CrotchCode/DatapackSavePicker.tscn")
+
+var imageListEntryScene = preload("res://Game/Datapacks/UI/CrotchCode/UI/ImageListEntry.tscn")
 
 var datapack:Datapack
 var scene:DatapackScene
@@ -127,6 +133,7 @@ func setScene(theScene):
 	updateCharList()
 	updateTriggerList()
 	updateSelectedTrigger()
+	updateImagesSceneList()
 	
 	possible_code_blocks_list.populate()
 	possible_trigger_code_blocks_list.populate()
@@ -364,6 +371,8 @@ func getAllSceneIDs():
 	for sceneID in datapack.scenes.keys():
 		result.append(datapack.id+":"+sceneID)
 	return result
+func getAllImageIDs():
+	return scene.images.keys()
 
 func _on_AddFlagButton_pressed():
 	var newVarName = new_flag_line_edit.text
@@ -590,3 +599,44 @@ func _on_TriggerTestButton_pressed():
 	#triggerCodeContex.varsDefinition = scene.vars
 	triggerCodeContex.flagsDefinition = datapack.flags
 	triggerCodeContex.execute(datapack_trigger_code_wrapper.getSlotCalls())
+
+func updateImagesSceneList():
+	Util.delete_children(scene_images_list)
+	
+	for imageID in scene.images:
+		var imageEntry:DatapackSceneImage = scene.images[imageID]
+		
+		var newEntry = imageListEntryScene.instance()
+		
+		scene_images_list.add_child(newEntry)
+		newEntry.setEntry(imageEntry)
+		newEntry.connect("onIDChanged", self, "onImageEntryIDChanged")
+		newEntry.connect("onDeletePressed", self, "onImageEntryDeletePressed")
+		
+func onImageEntryIDChanged(oldID, newID):
+	var theEntry = scene.images[oldID]
+	var _ok = scene.images.erase(oldID)
+	scene.images[newID] = theEntry
+	
+	updateImagesSceneList()
+
+func onImageEntryDeletePressed(theID):
+	if(!scene.images.has(theID)):
+		return
+	var _ok = scene.images.erase(theID)
+	updateImagesSceneList()
+
+func _on_AddImageButton_pressed():
+	var newID = scene_image_id_edit.text
+	newID = Util.stripAllBadCharactersFromVarName(newID)
+	if(newID == ""):
+		showAlert("Image id can not be empty")
+		return
+	if(scene.images.has(newID)):
+		showAlert("Image with this ID already exist")
+		return
+	
+	var newEntry = DatapackSceneImage.new()
+	newEntry.id = newID
+	scene.images[newID] = newEntry
+	updateImagesSceneList()

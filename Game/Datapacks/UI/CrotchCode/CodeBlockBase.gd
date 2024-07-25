@@ -42,12 +42,14 @@ func getSlot(_id):
 func hidesNextBlockAdder():
 	return getType() == CrotchBlocks.RETURNCALL
 
+const savedSlotTypes = ["slot", "slot_list", "anim", "button_checks", "image"]
+
 func saveData():
 	var data = {}
 	
 	var slotData = {}
 	for templateLine in getTemplate():
-		if(templateLine["type"] in ["slot", "slot_list", "anim", "button_checks"]):
+		if(templateLine["type"] in savedSlotTypes):
 			slotData[templateLine["id"]] = getSlot(templateLine["id"]).saveData()
 	data["slots"] = slotData
 	
@@ -57,7 +59,7 @@ func loadData(_data):
 	var slotData = loadVar(_data, "slots", {})
 	
 	for templateLine in getTemplate():
-		if(templateLine["type"] in ["slot", "slot_list", "anim", "button_checks"]):
+		if(templateLine["type"] in savedSlotTypes):
 			var theSlot = getSlot(templateLine["id"])
 			theSlot.loadData(loadVar(slotData, templateLine["id"], {}))
 

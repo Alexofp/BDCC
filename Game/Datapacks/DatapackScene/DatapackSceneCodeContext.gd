@@ -399,4 +399,15 @@ func isInRunMode():
 func isInReactMode():
 	return reactMode
 
-
+func addImageByID(_imageID:String):
+	if(!datapackScene.images.has(_imageID)):
+		throwError(null, "Scene image with id "+str(_imageID)+" wasn't found")
+		return
+	
+	var entry:DatapackSceneImage = datapackScene.images[_imageID]
+	if(GM.ui != null && is_instance_valid(GM.ui)):
+		GM.ui.setSceneArtWork({
+			artist = entry.artist,
+			imagePath = entry.image.getTexture(),
+			imageScale = entry.imageScale,
+		})

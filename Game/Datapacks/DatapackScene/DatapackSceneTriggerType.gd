@@ -55,7 +55,7 @@ static func getDescription(triggerType):
 	if(triggerType == None):
 		return "This trigger type will never happen, could be used to disable the trigger"
 	if(triggerType == EnterRoom):
-		return "If set to React, will execute code as soon as you enter the room. If set to Run, allows you to add buttons and output text"
+		return "If set to React, will execute code as soon as you enter a specific room. If set to Run, allows you to add buttons and output text"
 	if(triggerType == EnterAnyRoom):
 		return "If set to React, will execute code as soon as you enter any room. If set to Run, allows you to add buttons and output text"
 	if(triggerType == EnterPlayerCell):

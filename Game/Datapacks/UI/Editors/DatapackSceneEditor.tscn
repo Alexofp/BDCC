@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Game/Datapacks/UI/PackVariables.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Datapacks/UI/Editors/DatapackSceneEditor.gd" type="Script" id=2]
@@ -8,7 +8,11 @@
 [ext_resource path="res://Game/Datapacks/UI/CrotchCode/UI/CharListEntry.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Game/Datapacks/UI/PackVarUIs/SelectorVarUI.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Game/Datapacks/UI/PackVarsCollapsableRegion.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/UI/ImageListEntry.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Game/Datapacks/UI/PackVarUIs/NumberVarUI.tscn" type="PackedScene" id=10]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0901961, 0.0901961, 0.0901961, 1 )
 
 [node name="DatapackSceneEditor" type="Control"]
 anchor_right = 1.0
@@ -32,6 +36,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Info" type="HBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -580,6 +585,62 @@ margin_right = 213.0
 margin_bottom = 625.0
 filter = 2
 
+[node name="Images" type="VBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/TabContainer/Images"]
+margin_right = 1272.0
+margin_bottom = 14.0
+text = "Here you can upload images that you can later show inside the scene with the 'Show scene image' block"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer/Images"]
+margin_top = 18.0
+margin_right = 1272.0
+margin_bottom = 42.0
+
+[node name="AddImageButton" type="Button" parent="VBoxContainer/MarginContainer/TabContainer/Images/HBoxContainer"]
+margin_right = 37.0
+margin_bottom = 24.0
+text = "Add"
+
+[node name="SceneImageIDEdit" type="LineEdit" parent="VBoxContainer/MarginContainer/TabContainer/Images/HBoxContainer"]
+margin_left = 41.0
+margin_right = 1272.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+placeholder_text = "new image id"
+
+[node name="Label2" type="Label" parent="VBoxContainer/MarginContainer/TabContainer/Images"]
+margin_top = 46.0
+margin_right = 1272.0
+margin_bottom = 60.0
+text = "Images:"
+align = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer/TabContainer/Images"]
+margin_top = 64.0
+margin_right = 1272.0
+margin_bottom = 660.0
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer/TabContainer/Images/ScrollContainer"]
+margin_right = 1272.0
+margin_bottom = 128.0
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 1 )
+
+[node name="SceneImagesList" type="VBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer/Images/ScrollContainer/PanelContainer"]
+margin_right = 1272.0
+margin_bottom = 128.0
+size_flags_horizontal = 3
+
+[node name="ImageListEntry" parent="VBoxContainer/MarginContainer/TabContainer/Images/ScrollContainer/PanelContainer/SceneImagesList" instance=ExtResource( 9 )]
+
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
 anchor_left = 1.0
 anchor_right = 1.0
@@ -635,6 +696,7 @@ text = "Save"
 [connection signal="onValueChange" from="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/HBoxContainer/TriggerExecuteType" to="." method="_on_TriggerExecuteType_onValueChange"]
 [connection signal="onValueChange" from="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/TriggerPriority" to="." method="_on_TriggerPriority_onValueChange"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer/HSplitContainer/ScrollContainer/TriggerSettingsFullList/TriggerTestButton" to="." method="_on_TriggerTestButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/TabContainer/Images/HBoxContainer/AddImageButton" to="." method="_on_AddImageButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/SaveAllButton" to="." method="_on_SaveAllButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/RunButton" to="." method="_on_RunButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/HBoxContainer/PickSaveButton" to="." method="_on_PickSaveButton_pressed"]

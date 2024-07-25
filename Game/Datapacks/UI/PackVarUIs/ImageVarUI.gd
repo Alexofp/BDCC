@@ -52,9 +52,12 @@ func setData(_dataLine:Dictionary):
 	if(_dataLine.has("value")):
 		theImage = _dataLine["value"]
 		if(theImage != null):
-			var newTexture = ImageTexture.new()
-			newTexture.create_from_image(theImage, 4)
-			$TextureRect.texture = newTexture
+			if(_dataLine.has("texture")):
+				$TextureRect.texture = _dataLine["texture"]
+			else:
+				var newTexture = ImageTexture.new()
+				newTexture.create_from_image(theImage, 4)
+				$TextureRect.texture = newTexture
 		else:
 			$TextureRect.texture = null
 

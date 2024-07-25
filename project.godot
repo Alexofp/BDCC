@@ -275,6 +275,11 @@ _global_script_classes=[ {
 "path": "res://Game/Datapacks/UI/CrotchCode/SlotCalls.gd"
 }, {
 "base": "Reference",
+"class": "CrotchSlotImage",
+"language": "GDScript",
+"path": "res://Game/Datapacks/UI/CrotchCode/SlotImage.gd"
+}, {
+"base": "Reference",
 "class": "CrotchSlotVar",
 "language": "GDScript",
 "path": "res://Game/Datapacks/UI/CrotchCode/SlotVar.gd"
@@ -358,6 +363,11 @@ _global_script_classes=[ {
 "class": "DatapackSceneCodeContext",
 "language": "GDScript",
 "path": "res://Game/Datapacks/DatapackScene/DatapackSceneCodeContext.gd"
+}, {
+"base": "Reference",
+"class": "DatapackSceneImage",
+"language": "GDScript",
+"path": "res://Game/Datapacks/DatapackScene/DatapackSceneImage.gd"
 }, {
 "base": "Reference",
 "class": "DatapackSceneState",
@@ -1433,6 +1443,7 @@ _global_script_class_icons={
 "CrotchSlotAnim": "",
 "CrotchSlotButtonChecks": "",
 "CrotchSlotCalls": "",
+"CrotchSlotImage": "",
 "CrotchSlotVar": "",
 "CrotchUtil": "",
 "CrotchVarType": "",
@@ -1450,6 +1461,7 @@ _global_script_class_icons={
 "DatapackScene": "",
 "DatapackSceneBase": "",
 "DatapackSceneCodeContext": "",
+"DatapackSceneImage": "",
 "DatapackSceneState": "",
 "DatapackSceneTrigger": "",
 "DatapackSceneTriggerType": "",

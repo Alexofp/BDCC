@@ -57,3 +57,14 @@ func updateSprites():
 			newTextureRect.anchor_bottom = 1.0
 			add_child(newTextureRect)
 			spriteObjects.append(newTextureRect)
+
+func hydrateSize(sizeMult:float = 1.0):
+	if(texture == null):
+		return
+	var wantSizeW = rect_size.x * sizeMult
+	var aspect = float(texture.get_size().x) / float(texture.get_size().y)
+	if(aspect <= 0.0):
+		return
+	var wantSizeH = wantSizeW / aspect
+	
+	rect_min_size.y = wantSizeH

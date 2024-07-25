@@ -9,6 +9,7 @@ var states:Dictionary = {}
 var vars:Dictionary = {}
 var chars:Dictionary = {}
 var triggers:Array = []
+var images:Dictionary = {}
 
 func initStartingData():
 	states[""] = DatapackSceneState.new()
@@ -53,6 +54,14 @@ func saveData():
 	for trigger in triggers:
 		triggerData.append(trigger.saveData())
 	
+	var imagesData = []
+	for imageID in images:
+		var imageEntry = images[imageID]
+		imagesData.append({
+			id = imageEntry.id,
+			data = imageEntry.saveData(),
+		})
+	
 	return {
 		"name": name,
 		"devcomment": devcomment,
@@ -60,6 +69,7 @@ func saveData():
 		"vars": vars,
 		"chars": chars,
 		"triggers": triggerData,
+		"images": imagesData,
 	}
 
 func loadData(data):
@@ -109,7 +119,18 @@ func loadData(data):
 		var newTrigger = DatapackSceneTrigger.new()
 		newTrigger.loadData(triggerEntry)
 		triggers.append(newTrigger)
-
+	
+	var imagesData = loadVar(data, "images", [])
+	images = {}
+	for imagesEntry in imagesData:
+		if(!(imagesEntry is Dictionary)):
+			continue
+		var newImage:DatapackSceneImage = DatapackSceneImage.new()
+		newImage.id = loadVar(imagesEntry, "id", "image")
+		newImage.loadData(loadVar(imagesEntry, "data", {}))
+		images[newImage.id] = newImage
+		
+		
 func loadVar(_data, thekey, defaultValue = null):
 	if(_data.has(thekey)):
 		return _data[thekey]

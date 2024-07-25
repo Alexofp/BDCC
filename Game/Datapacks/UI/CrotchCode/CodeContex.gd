@@ -406,3 +406,6 @@ func getChildAmountFatherMother(charID:String, charID2:String):
 		return GM.CS.getSharedChildrenAmountFatherMother(getCharacterActualID(charID), getCharacterActualID(charID2))
 	
 	return 0
+
+func addImageByID(_imageID:String):
+	pass

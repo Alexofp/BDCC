@@ -74,6 +74,7 @@ static func getAll():
 		"SceneStartLeashParade",
 		"SceneAddMessage",
 		"SceneSetLocName",
+		"SceneImage",
 		
 		"EventRun",
 		"EventButton",

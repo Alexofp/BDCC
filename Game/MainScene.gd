@@ -289,7 +289,7 @@ func removeScene(scene, args = []):
 			sceneStack.erase(scene)
 	
 	if(sceneStack.size() == 0):
-		print("Error: no more scenes in the scenestack")
+		Log.print("Error: no more scenes in the scenestack")
 		gameUI.clearText()
 		gameUI.clearButtons()
 		gameUI.say("Error: no more scenes in the scenestack. Please let the developer know")
@@ -342,12 +342,7 @@ func runCurrentScene():
 		
 		if(messages.size() > 0):
 			GM.ui.trimLineEndings()
-			GM.ui.say("\n\n")
-			GM.ui.say("[center][i]")
-			for message in messages:
-				GM.ui.say(message)
-				GM.ui.say("\n")
-			GM.ui.say("[/i][/center]\n")
+			GM.ui.say("\n\n[center][i]"+Util.join(messages, "\n")+"[/i][/center]\n")
 		GM.ui.translateText()
 	updateStuff()
 

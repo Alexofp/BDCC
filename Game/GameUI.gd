@@ -94,7 +94,14 @@ func _ready():
 	hornyMessage.visible = true
 		
 func say(text: String):
+	#textOutput.append_bbcode(gameParser.executeString(sayParser.processString(text)))
 	textOutput.bbcode_text += gameParser.executeString(sayParser.processString(text))
+
+func addImage(_image:Image):
+	#var _ok = image.save_png("user://temp_image.png")
+	#say("[img=300]"+"user://temp_image.png"+"[/img]\n\n")
+	#textOutput.add_image(image, textOutput.rect_size.x-50.0, 0.0)
+	pass
 
 func clearText():
 	#textOutput.scroll_to_line(1)
@@ -537,17 +544,27 @@ func _on_DevComLabel_meta_clicked(meta):
 func isShowingDevCommentary():
 	return devCommentaryPanel.visible
 
+func clearSceneArtwork():
+	sceneArtWorkRect.textures = null
+	sceneArtWorkRect.visible = false
+	fullArtWorkRect.textures = null
+	$FullArtworkRect/Label.text = ""
+
 func setSceneArtWork(imageData):
 	if(imageData == null || !(imageData is Dictionary) || !OPTIONS.shouldShowSceneArt()):
-		sceneArtWorkRect.textures = null
-		sceneArtWorkRect.visible = false
-		fullArtWorkRect.textures = null
-		$FullArtworkRect/Label.text = ""
+		pass
 	else:
-		$FullArtworkRect/Label.text = "Art by "+str(imageData["artist"])
+		if(imageData.has("artist") && imageData["artist"] != ""):
+			$FullArtworkRect/Label.text = "Art by "+str(imageData["artist"])
+		else:
+			$FullArtworkRect/Label.text = ""
 		fullArtWorkRect.textures = imageData["imagePath"]
 		sceneArtWorkRect.textures = imageData["imagePath"]
-		sceneArtWorkRect.rect_min_size.y = imageData["imageHeight"]
+		if(imageData.has("imageHeight")):
+			sceneArtWorkRect.rect_min_size.y = imageData["imageHeight"]
+		else:
+			sceneArtWorkRect.rect_min_size.y = 0
+			sceneArtWorkRect.hydrateSize(imageData["imageScale"] if imageData.has("imageScale") else 1.0)
 		sceneArtWorkRect.visible = true
 
 func _on_OpenFullArtWorkButton_pressed():

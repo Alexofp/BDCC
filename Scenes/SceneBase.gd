@@ -60,6 +60,7 @@ func run():
 			continue
 		character.updateNonBattleEffects()
 	
+	GM.ui.clearSceneArtwork()
 	GM.ui.clearText()
 	GM.ui.clearButtons()
 	GM.ui.clearUItextboxes()
@@ -131,6 +132,10 @@ func sayn(_text: String):
 
 func saynn(_text: String):
 	say(_text+"\n\n")
+
+func addImage(image:Image):
+	if(GM.ui):
+		GM.ui.addImage(image)
 
 func addCharacter(id: String, variant: Array = []):
 	if(id == ""):
