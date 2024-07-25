@@ -242,7 +242,7 @@ func _on_RemoveStateButton_pressed():
 	index -= 1
 	if(index < 0):
 		index = 0
-	selectedStateID = statesListArray[index]
+	selectedStateID = scene.states.keys()[index]
 	
 	updateStatesList()
 	updateSelectedState()
@@ -640,3 +640,72 @@ func _on_AddImageButton_pressed():
 	newEntry.id = newID
 	scene.images[newID] = newEntry
 	updateImagesSceneList()
+
+
+func _on_MoveStateDownButton_pressed():
+	if(states_list.get_selected_items().size() <= 0):
+		return
+	Util.moveKeyDown(scene.states, selectedStateID)
+
+	updateStatesList()
+	#updateSelectedState()
+
+
+func _on_MoveStateUpButton_pressed():
+	if(states_list.get_selected_items().size() <= 0):
+		return
+	Util.moveKeyUp(scene.states, selectedStateID)
+
+	updateStatesList()
+	#updateSelectedState()
+
+onready var new_name_window = $VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList/HBoxContainer2/RenameStateButton/NewNameWindow
+onready var new_name_state_edit = $VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList/HBoxContainer2/RenameStateButton/NewNameWindow/VBoxContainer/NewNameStateEdit
+
+func _on_RenameStateButton_pressed():
+	if(selectedStateID == ""):
+		showAlert("Unable to rename the initial state")
+		return
+	
+	new_name_window.popup_centered()
+	new_name_state_edit.text = selectedStateID
+
+func _on_NewNameWindow_confirmed():
+	var newName:String = Util.stripAllBadCharactersFromVarName(new_name_state_edit.text)
+	
+	if(newName == selectedStateID):
+		return
+	
+	if(scene.states.has(newName)):
+		showAlert("State with this name already exists. Unable to rename")
+		return
+	
+	if(!scene.states.has(selectedStateID)):
+		return
+	var theState:DatapackSceneState = scene.states[selectedStateID]
+	var _ok = scene.states.erase(selectedStateID)
+	theState.id = newName
+	scene.states[newName] = theState
+	selectedStateID = newName
+	updateStatesList()
+	updateSelectedState()
+
+func _on_Duplicate_pressed():
+	if(states_list.get_selected_items().size() <= 0):
+		return
+	if(!scene.states.has(selectedStateID)):
+		return
+	
+	var curI = 2
+	var newName = selectedStateID+"_2"
+	
+	while(scene.states.has(newName)):
+		curI += 1
+		newName = selectedStateID+"_"+str(curI)
+	
+	var theState:DatapackSceneState = scene.states[selectedStateID]
+	var newState:DatapackSceneState = DatapackSceneState.new()
+	newState.loadData(theState.saveData().duplicate(true))
+	newState.id = newName
+	scene.states[newName] = newState
+	updateStatesList()

@@ -641,6 +641,28 @@ static func moveValueDown(theArray, theIndex):
 		theIndex = theArray.size()
 	theArray.insert(theIndex, thingie)
 
+static func moveKeyDown(theDict:Dictionary, theKey):
+	var newDic = theDict.duplicate()
+	theDict.clear()
+	
+	var theKeys = newDic.keys()
+	var keyIndex = theKeys.find(theKey)
+	moveValueDown(theKeys, keyIndex)
+	
+	for key in theKeys:
+		theDict[key] = newDic[key]
+
+static func moveKeyUp(theDict:Dictionary, theKey):
+	var newDic = theDict.duplicate()
+	theDict.clear()
+	
+	var theKeys = newDic.keys()
+	var keyIndex = theKeys.find(theKey)
+	moveValueUp(theKeys, keyIndex)
+	
+	for key in theKeys:
+		theDict[key] = newDic[key]
+
 # https://github.com/ShatReal/Search-Bar-Demo/blob/main/main.gd
 static func _levenshtein_distance(str1:String, str2:String)->int:
 	str1 = str1.to_lower()

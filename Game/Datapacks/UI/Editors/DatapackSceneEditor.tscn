@@ -59,7 +59,6 @@ margin_right = 1272.0
 margin_bottom = 20.0
 
 [node name="States" type="VBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -99,8 +98,66 @@ margin_right = 206.0
 margin_bottom = 24.0
 text = "Add"
 
-[node name="StatesList" type="ItemList" parent="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList"]
 margin_top = 46.0
+margin_right = 206.0
+margin_bottom = 66.0
+
+[node name="MoveStateDownButton" type="Button" parent="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList/HBoxContainer2"]
+margin_right = 19.0
+margin_bottom = 20.0
+text = "v"
+
+[node name="MoveStateUpButton" type="Button" parent="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList/HBoxContainer2"]
+margin_left = 23.0
+margin_right = 42.0
+margin_bottom = 20.0
+text = "^"
+
+[node name="RenameStateButton" type="Button" parent="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList/HBoxContainer2"]
+margin_left = 46.0
+margin_right = 124.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Rename"
+clip_text = true
+
+[node name="NewNameWindow" type="ConfirmationDialog" parent="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList/HBoxContainer2/RenameStateButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -195.0
+margin_top = -57.0
+margin_right = 195.0
+margin_bottom = 57.0
+window_title = "New name.."
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList/HBoxContainer2/RenameStateButton/NewNameWindow"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList/HBoxContainer2/RenameStateButton/NewNameWindow/VBoxContainer"]
+margin_right = 390.0
+margin_bottom = 14.0
+text = "Pick new name for this state"
+align = 1
+
+[node name="NewNameStateEdit" type="LineEdit" parent="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList/HBoxContainer2/RenameStateButton/NewNameWindow/VBoxContainer"]
+margin_top = 18.0
+margin_right = 390.0
+margin_bottom = 42.0
+
+[node name="Duplicate" type="Button" parent="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList/HBoxContainer2"]
+margin_left = 128.0
+margin_right = 206.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Duplicate"
+clip_text = true
+
+[node name="StatesList" type="ItemList" parent="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList"]
+margin_top = 70.0
 margin_right = 206.0
 margin_bottom = 636.0
 size_flags_horizontal = 3
@@ -586,6 +643,7 @@ margin_bottom = 625.0
 filter = 2
 
 [node name="Images" type="VBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -630,7 +688,6 @@ size_flags_vertical = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer/TabContainer/Images/ScrollContainer"]
 margin_right = 1272.0
-margin_bottom = 128.0
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 1 )
 
@@ -681,6 +738,11 @@ text = "Save"
 [connection signal="onVariableChange" from="VBoxContainer/MarginContainer/TabContainer/Info/ScrollContainer/PackVariables" to="." method="_on_PackVariables_onVariableChange"]
 [connection signal="visibility_changed" from="VBoxContainer/MarginContainer/TabContainer/States" to="." method="_on_States_visibility_changed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList/HBoxContainer/AddNewStateButton" to="." method="_on_AddNewStateButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList/HBoxContainer2/MoveStateDownButton" to="." method="_on_MoveStateDownButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList/HBoxContainer2/MoveStateUpButton" to="." method="_on_MoveStateUpButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList/HBoxContainer2/RenameStateButton" to="." method="_on_RenameStateButton_pressed"]
+[connection signal="confirmed" from="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList/HBoxContainer2/RenameStateButton/NewNameWindow" to="." method="_on_NewNameWindow_confirmed"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList/HBoxContainer2/Duplicate" to="." method="_on_Duplicate_pressed"]
 [connection signal="item_selected" from="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList/StatesList" to="." method="_on_StatesList_item_selected"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList/RemoveStateButton" to="." method="_on_RemoveStateButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/TestButton" to="." method="_on_TestButton_pressed"]
