@@ -41,7 +41,7 @@ func execute(_contex:CodeContex):
 		throwError(_contex, "Last argument must be a number, got "+str(amValue)+" instead")
 		return
 	
-	return _contex.charMethod(charName, "breastFedBy", [breastName, amValue])
+	return _contex.charMethod(charName, "breastFedBy", [_contex.getCharacterActualID(breastName), amValue])
 
 func getTemplate():
 	return [

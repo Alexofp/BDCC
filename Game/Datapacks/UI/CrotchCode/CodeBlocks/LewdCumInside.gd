@@ -62,7 +62,7 @@ func execute(_contex:CodeContex):
 		throwError(_contex, "Amount must be a number, got "+str(amValue)+" instead")
 		return
 	
-	return _contex.charMethod(secondName, "cummedInBodypartBy", [partName, charName, actualSource, amValue])
+	return _contex.charMethod(secondName, "cummedInBodypartBy", [partName, _contex.getCharacterActualID(charName), actualSource, amValue])
 
 func getTemplate():
 	return [

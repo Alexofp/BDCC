@@ -41,7 +41,7 @@ func execute(_contex:CodeContex):
 		throwError(_contex, "Amount must be a number, got "+str(amValue)+" instead")
 		return
 	
-	return _contex.charMethod(charName, "rubsVaginasWith", [secondName, amValue])
+	return _contex.charMethod(charName, "rubsVaginasWith", [_contex.getCharacterActualID(secondName), amValue])
 
 func getTemplate():
 	return [

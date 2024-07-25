@@ -356,13 +356,13 @@ func runFightScene(charID:String, _codeWin, _codeLose):
 	var uniqueTag = "fight_"+getUniqueSceneTag()
 	sceneReactEndCode[uniqueTag+"_w"] = _codeWin
 	sceneReactEndCode[uniqueTag+"_l"] = _codeLose
-	scene.runScene("FightScene", [charID], uniqueTag)
+	scene.runScene("FightScene", [getCharacterActualID(charID)], uniqueTag)
 
 func runGenericSexScene(domID:String, subID:String, sexType:String, _codeSlot = null):
-	runScene("GenericSexScene", [domID, subID, sexType], _codeSlot)
+	runScene("GenericSexScene", [getCharacterActualID(domID), getCharacterActualID(subID), sexType], _codeSlot)
 
 func runLeashParadeScene(domID:String, finalLoc:String, _codeSlot = null):
-	runScene("ParadedOnALeashScene", [domID, GM.pc.getLocation(), finalLoc], _codeSlot)
+	runScene("ParadedOnALeashScene", [getCharacterActualID(domID), GM.pc.getLocation(), finalLoc], _codeSlot)
 
 func getUniqueSceneTag():
 	usind += 1

@@ -31,7 +31,7 @@ func execute(_contex:CodeContex):
 		throwError(_contex, "Character name must a string, got "+str(whoName)+" instead")
 		return
 	
-	_contex.charMethod(charName, "doWound", [whoName])
+	_contex.charMethod(charName, "doWound", [_contex.getCharacterActualID(whoName)])
 
 func getTemplate():
 	return [

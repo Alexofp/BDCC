@@ -41,7 +41,7 @@ func execute(_contex:CodeContex):
 		throwError(_contex, "Break chance must be a number, got "+str(amValue)+" instead")
 		return
 	
-	return _contex.charMethod(charName, "shouldCondomBreakWhenFucking", [secondName, amValue])
+	return _contex.charMethod(charName, "shouldCondomBreakWhenFucking", [_contex.getCharacterActualID(secondName), amValue])
 
 func getTemplate():
 	return [

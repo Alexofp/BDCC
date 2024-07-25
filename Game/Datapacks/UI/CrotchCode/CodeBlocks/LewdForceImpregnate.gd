@@ -31,7 +31,7 @@ func execute(_contex:CodeContex):
 		throwError(_contex, "Character name must be a string, got "+str(secondName)+" instead")
 		return
 
-	return _contex.charMethod(charName, "forceImpregnateBy", [secondName])
+	return _contex.charMethod(charName, "forceImpregnateBy", [_contex.getCharacterActualID(secondName)])
 
 func getTemplate():
 	return [

@@ -41,7 +41,7 @@ func execute(_contex:CodeContex):
 		throwError(_contex, "Bodypart slot must a string, got "+str(partName)+" instead")
 		return
 	
-	return _contex.charMethod(charName, "doPainfullyStretchHole", [partName, whoName])
+	return _contex.charMethod(charName, "doPainfullyStretchHole", [partName, _contex.getCharacterActualID(whoName)])
 
 func getTemplate():
 	return [

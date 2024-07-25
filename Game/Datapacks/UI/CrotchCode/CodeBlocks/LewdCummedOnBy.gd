@@ -53,9 +53,9 @@ func execute(_contex:CodeContex):
 		return
 	
 	if(actualSource == FluidSource.Pissing):
-		return _contex.charMethod(charName, "pissedOnBy", [secondName, amValue])
+		return _contex.charMethod(charName, "pissedOnBy", [_contex.getCharacterActualID(secondName), amValue])
 	else:
-		return _contex.charMethod(charName, "cummedOnBy", [secondName, actualSource, amValue])
+		return _contex.charMethod(charName, "cummedOnBy", [_contex.getCharacterActualID(secondName), actualSource, amValue])
 
 func getTemplate():
 	return [
