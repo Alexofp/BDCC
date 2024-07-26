@@ -2007,6 +2007,7 @@ func loadDatapacksFromFolder(folder: String):
 			
 			if(newPackResource is DatapackResource):
 				var newDatapack:Datapack = Datapack.new()
+				newDatapack.loadedPath = possiblePackPath
 				newDatapack.loadFromResource(newPackResource)
 				
 				if(datapacks.has(newDatapack.id)):
@@ -2024,7 +2025,7 @@ func reloadPacks():
 
 func deleteDatapack(id:String):
 	if(datapacks.has(id)):
-		var path = getDatapacksFolder().plus_file(datapacks[id].getDatapackFileName())
+		var path = datapacks[id].getLoadedPath()#getDatapacksFolder().plus_file(datapacks[id].getDatapackFileName())
 		
 		if(Util.removeFile(path) == OK):
 			#reloadPacks()

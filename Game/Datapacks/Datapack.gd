@@ -8,6 +8,8 @@ var version:String = "1.0"
 
 var description:String = "No description provided"
 
+var loadedPath:String = ""
+
 var characters:Dictionary = {}
 var skins:Dictionary = {}
 var scenes:Dictionary = {}
@@ -301,11 +303,16 @@ func loadFromResource(datapack:DatapackResource):
 func saveToDisk() -> bool:
 	var theResource:DatapackResource = saveToResource()
 	
-	var result = ResourceSaver.save(GlobalRegistry.getDatapacksFolder().plus_file(getDatapackFileName()), theResource)
+	var result = ResourceSaver.save(getLoadedPath(), theResource)
 	if(result == OK):
 		return true
 	return false
-	
+
+func getLoadedPath() -> String:
+	if(loadedPath != ""):
+		return loadedPath
+	return GlobalRegistry.getDatapacksFolder().plus_file(getDatapackFileName())
+
 func getDatapackFileName() -> String:
 	return id+".res"
 
