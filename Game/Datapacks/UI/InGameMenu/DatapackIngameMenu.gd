@@ -37,7 +37,7 @@ func updateList():
 				newEntry.setCanUpdate(false)
 
 func onDatapackLoadPressed(datapackID):
-	GM.main.loadDatapack(datapackID)
+	GM.main.loadDatapackAndDependencies(datapackID)
 	updateList()
 
 var datapackIDToUse = null

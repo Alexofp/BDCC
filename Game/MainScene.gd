@@ -1501,6 +1501,29 @@ func loadDatapack(datapackID):
 	
 	return true
 
+func loadDatapackAndDependencies(datapackID, checked={}):
+	if(checked.has(datapackID)): # Recursion protection
+		return
+	checked[datapackID] = true
+	
+	var theDatapack:Datapack = GlobalRegistry.getDatapack(datapackID)
+	
+	if(theDatapack == null):
+		Log.printerr("Trying to load a datapack that doesn't exist in the global registry: "+str(datapackID))
+		return
+	
+	var requiredDatapacks = theDatapack.requiredDatapacks
+	for otherDatapackID in requiredDatapacks:
+		loadDatapackAndDependencies(otherDatapackID, checked)
+		
+	if(loadedDatapacks.has(datapackID)):
+		return
+		
+	if(!theDatapack.needsTogglingOn()):
+		return
+		
+	loadDatapack(datapackID)
+
 func addDatapackCharacter(theDatapack:Datapack, datapackChar:DatapackCharacter):
 	var charID = datapackChar.id
 	var datapackID = theDatapack.id

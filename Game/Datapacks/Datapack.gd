@@ -310,7 +310,7 @@ func getDatapackFileName() -> String:
 	return id+".res"
 
 func needsTogglingOn():
-	return !characters.empty() || !scenes.empty()
+	return !characters.empty() || !scenes.empty() || !quests.empty()
 
 func getFinalCharacterID(charID):
 	return id + ":" + charID

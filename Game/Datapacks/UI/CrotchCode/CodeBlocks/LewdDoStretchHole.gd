@@ -34,7 +34,7 @@ func execute(_contex:CodeContex):
 		throwError(_contex, "Bodypart slot must a string, got "+str(partName)+" instead")
 		return
 	
-	var amValue = partSlot.getValue(_contex)
+	var amValue = amSlot.getValue(_contex)
 	if(_contex.hadAnError()):
 		return
 	if(!isNumber(amValue)):

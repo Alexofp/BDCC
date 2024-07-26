@@ -13,8 +13,8 @@ func run(datapackID, datapackScene, pickedSavePath = null):
 		SAVE.loadGame(pickedSavePath)
 	#theGame.clearSceneStack()
 	#theGame.runScene(newSceneID)
-	if(!theGame.isDatapackLoaded(datapackID)):
-		theGame.loadDatapack(datapackID)
+	theGame.loadDatapackAndDependencies(datapackID)
+		
 	theGame.runScene(datapackID+":"+datapackScene)
 	theGame.runCurrentScene()
 
