@@ -62,6 +62,11 @@ margin_right = 213.0
 margin_bottom = 20.0
 text = "if var"
 
+[node name="TagFastPicker" type="OptionButton" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 217.0
+margin_right = 246.0
+margin_bottom = 20.0
+
 [node name="TextEdit" type="TextEdit" parent="MarginContainer/VBoxContainer"]
 margin_top = 24.0
 margin_right = 1244.0
@@ -100,6 +105,7 @@ text = "Cancel"
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/SayButton" to="." method="_on_SayButton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/VarButton" to="." method="_on_VarButton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/IfVarButton" to="." method="_on_IfVarButton_pressed"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/HBoxContainer2/TagFastPicker" to="." method="_on_TagFastPicker_item_selected"]
 [connection signal="cursor_changed" from="MarginContainer/VBoxContainer/TextEdit" to="." method="_on_TextEdit_cursor_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/SaveButton" to="." method="_on_SaveButton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/SpellCheckerButton" to="." method="_on_SpellCheckerButton_pressed"]

@@ -3,6 +3,31 @@ extends WindowDialog
 signal onCancel(window)
 signal onSave(window, text)
 onready var text_edit = $MarginContainer/VBoxContainer/TextEdit
+onready var tag_fast_picker = $MarginContainer/VBoxContainer/HBoxContainer2/TagFastPicker
+
+const tags = [
+	"Add tag..",
+	"{pc.name}",
+	"{pc.heShe}",
+	"{pc.hisHer}",
+	"{pc.himHer}",
+	"{pc.isAre}",
+	"{pc.has}",
+	"{pc.himself}",
+	"{pc.verb('take')}",
+	"{pc.penis}",
+	"{pc.breasts}",
+	"{pc.thick}",
+	"{pc.masc}",
+	"{pc.analStretch}",
+	"{pc.pussyStretch}",
+	"{pc.throatStretch}",
+]
+
+func _ready():
+	tag_fast_picker.clear()
+	for theTag in tags:
+		tag_fast_picker.add_item(theTag)
 
 func setText(theText):
 	text_edit.text = theText
@@ -107,4 +132,19 @@ func _on_IfVarButton_pressed():
 	text_edit.insert_text_at_cursor("var else \"text 2\"}}")
 	text_edit.cursor_set_column(column)
 	text_edit.select(text_edit.cursor_get_line(), column, text_edit.cursor_get_line(), column+3)
+	text_edit.grab_focus()
+
+
+func _on_TagFastPicker_item_selected(index):
+	tag_fast_picker.select(0)
+	
+	if(index <= 0 || index >= tags.size()):
+		return
+	
+	var theText:String = tags[index]
+	yield(get_tree(), "idle_frame")
+	#var column = text_edit.cursor_get_column()
+	text_edit.insert_text_at_cursor(theText)
+	#text_edit.cursor_set_column(column + 1)
+	#text_edit.select(text_edit.cursor_get_line(), column + 1, text_edit.cursor_get_line(), column+3)
 	text_edit.grab_focus()

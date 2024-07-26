@@ -259,6 +259,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Datapacks/UI/CrotchCode/CrotchBlocks.gd"
 }, {
+"base": "Resource",
+"class": "CrotchFavBlocksResource",
+"language": "GDScript",
+"path": "res://Game/Datapacks/UI/CrotchCode/Util/CrotchFavBlocksResource.gd"
+}, {
 "base": "Reference",
 "class": "CrotchSlotAnim",
 "language": "GDScript",
@@ -1440,6 +1445,7 @@ _global_script_class_icons={
 "ContentType": "",
 "CrotchBlockEditorType": "",
 "CrotchBlocks": "",
+"CrotchFavBlocksResource": "",
 "CrotchSlotAnim": "",
 "CrotchSlotButtonChecks": "",
 "CrotchSlotCalls": "",
@@ -1688,7 +1694,7 @@ GM="*res://Game/GM.gd"
 SAVE="*res://Game/SaveManager.gd"
 GlobalTooltip="*res://UI/GlobalTooltipSystem.gd"
 AutoTranslation="*res://Util/AutoTranslation/AutoTranslation.gd"
-GlobalSignals="*res://Game/Datapacks/UI/CrotchCode/GlobalDragListener.gd"
+CrotchFavBlocks="*res://Game/Datapacks/UI/CrotchCode/Util/CrotchFavBlocks.gd"
 
 [debug]
 

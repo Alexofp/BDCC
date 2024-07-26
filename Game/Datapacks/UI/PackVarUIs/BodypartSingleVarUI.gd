@@ -67,7 +67,7 @@ func getSelectedPartID():
 	return optionIDs[index]
 
 var numberVarUIScene = preload("res://Game/Datapacks/UI/PackVarUIs/NumberVarUI.tscn")
-var selectorVarUIScene = preload("res://Game/Datapacks/UI/PackVarUIs/SelectorVarUI.tscn")
+var selectorVarUIScene = preload("res://Game/Datapacks/UI/PackVarUIs/AdvancedSelectorVarUI.tscn")
 var skinUIScene = preload("res://Game/Datapacks/UI/PackVarUIs/SkinVarUI.tscn")
 
 func updateSettings():
@@ -126,6 +126,8 @@ func updateSettings():
 			"value": theValue,
 			"name": attribData["textButton"],
 			"values": attribData["options"],
+			"noexpand": true,
+			"isAltText": true,
 		})
 		newSelectorVar.connect("onValueChange", self, "onBodypartSettingChange")
 

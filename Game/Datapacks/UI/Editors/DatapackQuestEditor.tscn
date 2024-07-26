@@ -120,6 +120,7 @@ anchor_bottom = 0.0
 margin_right = 358.0
 margin_bottom = 544.0
 filter = 4
+favKind = "quest"
 
 [node name="Flags" type="VBoxContainer" parent="VBoxContainer/Control/TabContainer"]
 visible = false

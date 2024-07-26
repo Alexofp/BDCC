@@ -1,6 +1,8 @@
 extends Control
 
 var isPickVersion = false
+var isFavVersion = false
+var favKind:String = ""
 var id = "base"
 var codeBlock
 onready var template_vertical_list = $HBoxContainer/TemplateVerticalList
@@ -23,6 +25,9 @@ func get_drag_data(_position):
 		mydata["block"] = CrotchBlocks.createBlock(id)
 		codeBlock = mydata["block"]
 		codeBlock.updateEditor(editor)
+	elif(isFavVersion):
+		mydata["block"] = CrotchBlocks.createBlock(codeBlock.id)
+		mydata["block"].loadData(codeBlock.saveData().duplicate(true))
 	else:
 		mydata["block"] = codeBlock
 	#set_drag_preview(make_preview(mydata))
@@ -31,14 +36,18 @@ func get_drag_data(_position):
 	thePreview.modulate = Color(1.0, 1.0, 1.0, 0.5)
 	set_drag_preview(thePreview)
 	#print("BEGAN DRAG!")
-	GlobalSignals.emitOnDragStarted()
 	return mydata
 
 func setIsSpawned():
 	isPickVersion = false
+	isFavVersion = false
 
 func setIsPickedVersion():
 	isPickVersion = true
+
+func setIsFavVersion(thekind):
+	isFavVersion = true
+	favKind = thekind
 
 func setCodeBlock(newCodeBlock):
 	codeBlock = newCodeBlock
@@ -161,8 +170,14 @@ func constructTemplate():
 			newSlotVis.setSlotImage(codeBlock.getSlot(slotID))
 			codeBlock.updateVisualSlot(editor, slotID, newSlotVis)
 
-func doSelfdelete():
+func doSelfdelete(forceDelete=false):
 	if(isPickVersion):
+		return
+	if(isFavVersion):
+		if(!forceDelete):
+			return
+		CrotchFavBlocks.removeBlock(favKind, codeBlock)
+		CrotchFavBlocks.emitBlocksChanged()
 		return
 	if(parentSlot != null):
 		parentSlot.removeBlock(codeBlock)
@@ -190,6 +205,6 @@ func _on_CrotchBlock_gui_input(event):
 		if event.pressed and event.button_index == BUTTON_RIGHT:
 			if((Time.get_ticks_msec() - lastRightClick) < 400.0):
 				editor.onUserChangeMade()
-				doSelfdelete()
+				doSelfdelete(true)
 			else:
 				lastRightClick = Time.get_ticks_msec()

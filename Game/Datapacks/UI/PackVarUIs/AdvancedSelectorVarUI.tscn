@@ -15,9 +15,17 @@ valign = 1
 
 [node name="Button" type="Button" parent="." index="1"]
 margin_left = 30.0
-margin_right = 1280.0
+margin_right = 1250.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
 text = "Pick"
+
+[node name="Label2" type="Label" parent="." index="2"]
+margin_left = 1254.0
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_vertical = 7
+text = "asdf"
+valign = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
