@@ -754,6 +754,12 @@ func getFemininity() -> int:
 func getThickness() -> int:
 	return 50
 
+func setThickness(_newT:int):
+	pass
+
+func setFemininity(_newF:int):
+	pass
+
 func getFeminityAdjective():
 	var fem = getFemininity()
 	
@@ -2884,3 +2890,32 @@ func fillBreasts(howMuch:float=1.0):
 	var breasts = getBodypart(BodypartSlot.Breasts)
 	if(breasts != null && breasts.getFluidProduction() != null):
 		breasts.getFluidProduction().fillPercent(howMuch)
+
+func switchBodypartSimple(bodypartID:String):
+	var bodypart:Bodypart = GlobalRegistry.getBodypartRef(bodypartID)
+	
+	if(bodypart == null):
+		return false
+	
+	var bodypartSlot = bodypart.getSlot()
+	
+	if(hasBodypart(bodypartSlot)):
+		var currentPart:Bodypart = getBodypart(bodypartSlot)
+		if(currentPart.id == bodypartID):
+			return false
+		
+		var newBodypart:Bodypart = GlobalRegistry.createBodypart(bodypartID)
+		newBodypart.pickedRColor = currentPart.pickedRColor
+		newBodypart.pickedGColor = currentPart.pickedGColor
+		newBodypart.pickedBColor = currentPart.pickedBColor
+		removeBodypart(bodypartSlot)
+		giveBodypart(newBodypart)
+		return true
+	else:
+		giveBodypart(GlobalRegistry.createBodypart(bodypartID))
+		return true
+
+func getBodypartID(slot):
+	if(!bodyparts.has(slot) || bodyparts[slot] == null):
+		return ""
+	return bodyparts[slot].id

@@ -111,6 +111,8 @@ func constructTemplate():
 				newSlotVis.makeExpand()
 			if(templateLine.has("placeholder")):
 				newSlotVis.setPlaceholder(templateLine["placeholder"])
+			if(templateLine.has("minsize")):
+				newSlotVis.setMinSize(templateLine["minsize"])
 			newSlotVis.setSlotVar(codeBlock.getSlot(slotID))
 			codeBlock.updateVisualSlot(editor, slotID, newSlotVis)
 		if(templateType == "new_line"):

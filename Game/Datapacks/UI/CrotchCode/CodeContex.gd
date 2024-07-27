@@ -409,3 +409,84 @@ func getChildAmountFatherMother(charID:String, charID2:String):
 
 func addImageByID(_imageID:String):
 	pass
+
+func shouldExecuteCodeOnce() -> bool:
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return true
+	return GM.main.shouldExecuteOnceCodeblocksRun()
+
+func setBreastSize(charID:String, breastSize):
+	var character:BaseCharacter = getCharacter(charID)
+	
+	if(character == null):
+		return false
+	if(!character.hasBodypart(BodypartSlot.Breasts)):
+		return false
+	var breasts = character.getBodypart(BodypartSlot.Breasts)
+	breasts.setBreastSizeSafe(breastSize)
+	character.updateAppearance()
+
+func setPenisAndBallsSize(charID:String, penisLen:float, ballsSize:float = 1.0):
+	var character = getCharacter(charID)
+	
+	if(character == null):
+		return false
+	if(!character.hasBodypart(BodypartSlot.Penis)):
+		return false
+	var penis = character.getBodypart(BodypartSlot.Penis)
+	penis.lengthCM = penisLen
+	penis.ballsScale = ballsSize
+	character.updateAppearance()
+
+func getBreastSize(charID:String):
+	var character:BaseCharacter = getCharacter(charID)
+	
+	if(character == null):
+		return 0
+	if(!character.hasBodypart(BodypartSlot.Breasts)):
+		return 0
+	return character.getBodypart(BodypartSlot.Breasts).getSize()
+
+func getOriginalBreastSize(charID:String):
+	var character:BaseCharacter = getCharacter(charID)
+	
+	if(character == null):
+		return 0
+	if(!character.hasBodypart(BodypartSlot.Breasts)):
+		return 0
+	return character.getBodypart(BodypartSlot.Breasts).size
+
+func getPenisLen(charID:String):
+	var character:BaseCharacter = getCharacter(charID)
+	
+	if(character == null):
+		return 0
+	if(!character.hasBodypart(BodypartSlot.Penis)):
+		return 0
+	return character.getBodypart(BodypartSlot.Penis).getLength()
+
+func getPenisBallsScale(charID:String):
+	var character:BaseCharacter = getCharacter(charID)
+	
+	if(character == null):
+		return 0
+	if(!character.hasBodypart(BodypartSlot.Penis)):
+		return 0
+	return character.getBodypart(BodypartSlot.Penis).getBallsScale()
+
+func setExcludeNpcFromEncounters(charID:String, newVal:bool):
+	var character:BaseCharacter = getCharacter(charID)
+	
+	if(character == null):
+		throwError(null, "No character found with id "+str(charID))
+		return
+	
+	if(!(character.isDynamicCharacter())):
+		throwError(null, "Character with id "+str(charID)+" is not a dynamic character. Unable to exclude (or include) them from encounters")
+		return
+	
+	if(character.extraSettings == null):
+		character.extraSettings = DynCharExtraSettings.new()
+	
+	character.extraSettings.excludeEncounters = newVal
+	

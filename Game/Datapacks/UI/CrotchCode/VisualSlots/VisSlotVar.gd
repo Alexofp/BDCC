@@ -72,3 +72,6 @@ func makeExpand():
 
 func setPlaceholder(thePlace):
 	block_catcher_panel.setPlaceholder(thePlace)
+
+func setMinSize(theMinSize:float):
+	rect_min_size.x = theMinSize

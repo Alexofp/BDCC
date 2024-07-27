@@ -97,6 +97,9 @@ func getPickableAttributes():
 	}
 	return result
 	
+func setBreastSizeSafe(newValue):
+	size = newValue
+	
 func applyAttribute(_attrID: String, _attrValue):
 	.applyAttribute(_attrID, _attrValue)
 	if(_attrID == "breastsize"):

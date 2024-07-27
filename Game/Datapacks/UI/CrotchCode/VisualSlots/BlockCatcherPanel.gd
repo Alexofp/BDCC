@@ -90,6 +90,9 @@ func updateRawVis():
 			$MarginContainer.visible = true
 			advanced_picker_button.visible = true
 			advanced_picker_button.text = str(rawValue)
+			for value in rawPossibleValues:
+				if(value is Array && value[0] == rawValue && value.size() > 1):
+					advanced_picker_button.text = str(value[1])
 		else:
 			$MarginContainer.visible = true
 			$MarginContainer/OptionButton.visible = true
@@ -97,8 +100,11 @@ func updateRawVis():
 			var foundValue = false
 			var _i = 0
 			for value in rawPossibleValues:
-				$MarginContainer/OptionButton.add_item(str(value))
-				if(value == rawValue):
+				if(value is Array && value.size() > 1):
+					$MarginContainer/OptionButton.add_item(str(value[1]))
+				else:
+					$MarginContainer/OptionButton.add_item(str(value))
+				if((value is Array && value[0] == rawValue) || (!(value is Array) && value == rawValue)):
 					$MarginContainer/OptionButton.select(_i)
 					foundValue = true
 				_i += 1
@@ -134,8 +140,13 @@ func setRawValue(newVal):
 	if(rawPossibleValues.size() > 0):
 		var _i = 0
 		for value in rawPossibleValues:
-			if(value == newVal):
+			if((value is Array && value[0] == newVal) || (!(value is Array) && value == newVal)):
 				$MarginContainer/OptionButton.select(_i)
+				if(value is Array):
+					if(value.size() > 1):
+						advanced_picker_button.text = str(value[1])
+					else:
+						advanced_picker_button.text = str(newVal)
 			_i += 1
 	if(rawMode == CrotchVarType.ANY):
 		return
@@ -239,4 +250,7 @@ func onAdvPickerConfirmPressed(window, value):
 	window.queue_free()
 	rawValue = value
 	advanced_picker_button.text = str(rawValue)
+	for value in rawPossibleValues:
+		if(value is Array && value[0] == rawValue && value.size() > 1):
+			advanced_picker_button.text = str(value[1])
 	emit_signal("onRawValueChanged", rawValue)

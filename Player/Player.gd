@@ -881,4 +881,10 @@ func giveBirth():
 	
 	return bornChildren
 
+func setThickness(_newT:int):
+	pickedThickness = _newT
+	updateAppearance()
 
+func setFemininity(_newF:int):
+	pickedFemininity = _newF
+	updateAppearance()

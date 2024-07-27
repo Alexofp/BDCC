@@ -4,6 +4,7 @@ signal onCancel(window)
 signal onSave(window, text)
 onready var text_edit = $MarginContainer/VBoxContainer/TextEdit
 onready var tag_fast_picker = $MarginContainer/VBoxContainer/HBoxContainer2/TagFastPicker
+onready var color_picker_button = $MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/HBoxContainer/ColorPickerButton
 
 const tags = [
 	"Add tag..",
@@ -148,3 +149,8 @@ func _on_TagFastPicker_item_selected(index):
 	#text_edit.cursor_set_column(column + 1)
 	#text_edit.select(text_edit.cursor_get_line(), column + 1, text_edit.cursor_get_line(), column+3)
 	text_edit.grab_focus()
+
+
+func _on_AddColorButton_pressed():
+	var color:Color = color_picker_button.color
+	addTagsAroundText("[color=#"+color.to_html(false)+"]", "[/color]")

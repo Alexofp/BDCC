@@ -65,6 +65,7 @@ func getTemplate():
 			slot = nameSlot,
 			slotType = CrotchBlocks.VALUE,
 			placeholder = "Name",
+			minsize = 100,
 		},
 		{
 			type = "slot",

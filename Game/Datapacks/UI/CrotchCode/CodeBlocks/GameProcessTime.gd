@@ -36,6 +36,10 @@ func getTemplate():
 			slot = varSlot,
 			slotType = CrotchBlocks.VALUE,
 		},
+		{
+			type = "label",
+			text = "s",
+		},
 	]
 
 func getSlot(_id):

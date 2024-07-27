@@ -63,6 +63,14 @@ func getThickness() -> int:
 func getFemininity() -> int:
 	return npcFeminity
 
+func setThickness(_newT:int):
+	npcThickness = _newT
+	updateAppearance()
+
+func setFemininity(_newF:int):
+	npcFeminity = _newF
+	updateAppearance()
+
 func createBodyparts():
 	pass
 

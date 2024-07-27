@@ -587,6 +587,9 @@ func getBodypartRef(id: String):
 		return null
 	return bodyparts[id]
 
+func getBodypartRefs():
+	return bodyparts
+
 func getBodypartsIdsBySlot(_slot):
 	var result = []
 	for bodypartID in bodyparts:

@@ -22,6 +22,7 @@ var lootedRooms = {}
 var rollbacker:Rollbacker
 var encounterSettings:EncounterSettings
 var currentlyTestingScene = false
+var allowExecuteOnce:bool = false
 
 var staticCharacters = {}
 var charactersToUpdate = {}
@@ -260,6 +261,7 @@ func runScene(id, _args = [], parentSceneUniqueID = -1):
 	sceneStack.append(scene)
 	print("Starting scene "+id)
 	
+	allowExecuteOnce = true
 	scene.initScene(_args)
 	#scene.run()
 	return scene
@@ -334,6 +336,7 @@ func pickOption(method, args):
 		#if(sceneStack.back().react(method, args)):
 		#	return
 
+	allowExecuteOnce = true # For 'run code once' code block
 	runCurrentScene()
 	
 func runCurrentScene():
@@ -345,6 +348,7 @@ func runCurrentScene():
 			GM.ui.say("\n\n[center][i]"+Util.join(messages, "\n")+"[/i][/center]\n")
 		GM.ui.translateText()
 	updateStuff()
+	allowExecuteOnce = false
 
 func reRun():
 	runCurrentScene()
@@ -638,6 +642,9 @@ func getVisibleTime():
 	
 	text += ", day " + str(currentDay)
 	return text
+
+func getFormattedTimeFromSeconds(howManySeconds:int):
+	return Util.getTimeStringHHMM(howManySeconds)
 
 func getTime():
 	return timeOfDay
@@ -1603,3 +1610,6 @@ func isDatapackCharacter(charID):
 		if(datapackCharacters[datapackID].has(charID)):
 			return true
 	return false
+
+func shouldExecuteOnceCodeblocksRun() -> bool:
+	return allowExecuteOnce
