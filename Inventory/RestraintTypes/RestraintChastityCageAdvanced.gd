@@ -22,7 +22,7 @@ func doStruggle(_pc, _minigame:MinigameResult):
 	var damage = 0
 	var stamina = 0
 	
-	if(_minigame.score < 0.7 || failChance(_pc, 10)):
+	if((_minigame.score < 0.7 || failChance(_pc, 10)) && !_minigame.instantUnlock):
 		text = "{user.name}'s chastity cage BEEPS.. And then suddenly [b]shocks[/b] {user.his} {user.penis}!"
 		stamina = 0
 		pain = RNG.randi_range(10, 20)

@@ -8,6 +8,9 @@ func getSlaveTypeWeights(_isSlaveLevelup):
 		SlaveType.All : 0.5,
 	}
 
+func getSlutlockWeight() -> float:
+	return 0.5
+
 func isPossibleFor(_npc, _isSlaveLevelup):
 	if(_npc.getFetishHolder().getFetishValue(Fetish.Masochism) <= 0.0):
 		return false
@@ -27,7 +30,7 @@ func onSexEvent(_npc, _event:SexEvent):
 	return false
 
 func getTaskString():
-	return "Inflict pain during sex: "+getProgressString("pain")
+	return "Receive pain during sex: "+getProgressString("pain")
 
 func getTaskHint(_isSlaveLevelup):
 	return "Make them receive pain during sex"

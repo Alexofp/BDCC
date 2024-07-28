@@ -9,6 +9,8 @@ var npcAiScoreMod: float = 1.0
 var restraintType = RestraintType.Generic
 var aiWontResist:bool = false
 
+var smartLock:SmartLockBase
+
 func getItem():
 	return item.get_ref()
 
@@ -21,6 +23,8 @@ func resetOnNewTry():
 
 func onStruggleRemoval():
 	tightness = 1.0
+	if(smartLock != null):
+		smartLock = null
 
 func getTightness():
 	return tightness
@@ -74,6 +78,22 @@ func getRemoveMessage():
 
 func canStruggle():
 	return true
+
+func canStruggleFinal():
+	if(smartLock != null):
+		if(!smartLock.canStruggle()):
+			return false
+	return canStruggle()
+
+func hasSmartLock() -> bool:
+	return smartLock != null
+
+func getSmartLock() -> SmartLockBase:
+	return smartLock
+
+func setSmartLock(theLock:SmartLockBase):
+	smartLock = theLock
+	smartLock.setRestraintData(self)
 
 func failChance(_pc, chance):
 	return RNG.chance(chance)
@@ -185,12 +205,26 @@ func getRestraintType():
 func getResistAnimation():
 	return "struggle"
 
+func handleSexEvent(sexEvent:SexEvent):
+	if(smartLock != null):
+		smartLock.handleSexEvent(sexEvent)
+
+func onSexEnded(_contex = {}):
+	if(smartLock != null):
+		smartLock.onSexEnded(_contex)
+
 func saveData():
 	var data = {}
 	
 	data["level"] = level
 	data["tightness"] = tightness
 	data["aiWontResist"] = aiWontResist
+	
+	if(smartLock != null):
+		data["smartLock"] = {
+			id = smartLock.id,
+			data = smartLock.saveData(),
+		}
 
 	return data
 	
@@ -199,3 +233,16 @@ func loadData(_data):
 	tightness = SAVE.loadVar(_data, "tightness", 1.0)
 	if(_data.has("aiWontResist")):
 		aiWontResist = SAVE.loadVar(_data, "aiWontResist", false)
+	loadSmartLock(_data)
+
+func loadSmartLock(_data):
+	smartLock = null
+	if(_data.has("smartLock")):
+		var smartLockData = SAVE.loadVar(_data, "smartLock", {})
+		var smartLockID = SAVE.loadVar(smartLockData, "id", "")
+		
+		var theLock = SmartLock.create(smartLockID)
+		if(theLock != null):
+			smartLock = theLock
+			smartLock.setRestraintData(self)
+			smartLock.loadData(SAVE.loadVar(smartLockData, "data", {}))

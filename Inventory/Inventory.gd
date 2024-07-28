@@ -357,20 +357,34 @@ func equipItemBy(item, equipper):
 	if(success):
 		item.onEquippedBy(equipper, false)
 
-func forceEquipByRemoveOther(item, forcer):
+func forceEquipByRemoveOther(item, forcer, canSmartLock=true):
 	var success = forceEquipRemoveOther(item)
 	if(success):
 		item.onEquippedBy(forcer, true)
+		if(canSmartLock):
+			item.tryAddSmartLock(forcer)
 		
-func forceEquipByStoreOther(item, forcer):
+func forceEquipByStoreOther(item, forcer, canSmartLock=true):
 	var success = forceEquipStoreOther(item)
 	if(success):
 		item.onEquippedBy(forcer, true)
+		if(canSmartLock):
+			item.tryAddSmartLock(forcer)
 		
-func forceEquipByStoreOtherUnlessRestraint(item, forcer):
+func forceEquipByStoreOtherUnlessRestraint(item, forcer, canSmartLock=true):
 	var success = forceEquipStoreOtherUnlessRestraint(item)
 	if(success):
 		item.onEquippedBy(forcer, true)
+		if(canSmartLock):
+			item.tryAddSmartLock(forcer)
+
+func getSmartLockedItemsAmount() -> int:
+	var result:int = 0
+	for slot in equippedItems:
+		var item = equippedItems[slot]
+		if(item.restraintData != null && item.restraintData.hasSmartLock()):
+			result += 1
+	return result
 
 func hasItemIDEquipped(itemID: String):
 	for slot in equippedItems:

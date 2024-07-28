@@ -1185,11 +1185,31 @@ func getDebugActions():
 			"id": "repairClothes",
 			"name": "Repair pc clothes",
 		},
+		{
+			"id": "forceSmartlock",
+			"name": "Force smart lock",
+		},
 	]
 
 func doDebugAction(id, args = {}):
 	print(id, " ", args)
 	
+	if(id == "forceSmartlock"):
+		if(GM.main.dynamicCharacters.size() == 0):
+			return
+		var tryAmount = 100
+		while(tryAmount > 0):
+			var itemID = RNG.pick(GlobalRegistry.getItemIDsByTag(ItemTag.BDSMRestraint))
+			var anItem:ItemBase = GlobalRegistry.createItem(itemID)
+			if(anItem.getClothingSlot() == null || anItem.getClothingSlot() in [InventorySlot.Static1, InventorySlot.Static2, InventorySlot.Static3] || anItem.hasTag(ItemTag.AllowsEnslaving) || anItem.hasTag(ItemTag.PortalPanties) || (anItem.restraintData != null && (anItem.restraintData is RestraintUnremovable))):
+				tryAmount -= 1
+				continue
+			
+			GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(anItem)
+			anItem.addRandomSmartLock(RNG.pick(GM.main.dynamicCharacters))
+			break
+			
+		
 	if(id == "damageClothes"):
 		GM.pc.damageClothes()
 	if(id == "repairClothes"):

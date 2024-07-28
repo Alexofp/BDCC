@@ -10,6 +10,9 @@ func getSlaveTypeWeights(_isSlaveLevelup):
 		SlaveType.All : 0.2,
 	}
 
+func getSlutlockWeight() -> float:
+	return 0.2
+
 func isPossibleFor(_npc, _isSlaveLevelup):
 	return true
 

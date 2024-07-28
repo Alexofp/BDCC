@@ -8,6 +8,9 @@ func getSlaveTypeWeights(_isSlaveLevelup):
 		SlaveType.All : 0.2,
 	}
 
+func getSlutlockWeight() -> float:
+	return 0.2
+
 func isPossibleFor(_npc, _isSlaveLevelup):
 	if(!_npc.hasNonFlatBreasts()):
 		return false
@@ -31,6 +34,9 @@ func onSexEvent(_npc, _event:SexEvent):
 
 func getTaskString():
 	return "Force to lactate"
+
+func getTaskStringSlutLock():
+	return "Begin lactating"
 
 func getTaskHint(_isSlaveLevelup):
 	return "Squeeze their breasts until the milk starts coming out"

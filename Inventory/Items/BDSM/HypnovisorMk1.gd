@@ -79,11 +79,12 @@ func maxHypnosisStacks() -> int:
 	return 125
 	
 func saveData():
-	return {
-		"programmedToSuppressPerkId": programmedToSuppressPerkId,
-	}
+	var data = .saveData()
+	data["programmedToSuppressPerkId"] = programmedToSuppressPerkId
+	return data
 	
 func loadData(_data):
+	.loadData(_data)
 	programmedToSuppressPerkId = SAVE.loadVar(_data, "programmedToSuppressPerkId", "")
 
 func getUnriggedParts(_character):

@@ -8,6 +8,9 @@ func getSlaveTypeWeights(_isSlaveLevelup):
 		SlaveType.All : 0.25,
 	}
 
+func getSlutlockWeight() -> float:
+	return 0.2
+
 func isPossibleFor(_npc, _isSlaveLevelup):
 	if(_npc.getFetishHolder().getFetishValue(Fetish.AnalSexReceiving) < 0.0):
 		return false

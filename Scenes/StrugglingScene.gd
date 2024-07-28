@@ -47,11 +47,24 @@ func _run():
 		for item in GM.pc.getInventory().getEquppedRestraints():
 			var restraintData: RestraintData = item.getRestraintData()
 			
-			sayn(item.getVisibleName()+", restraint level: "+restraintData.getVisibleLevel(isBlind))
-			#sayn("- Durability: "+restraintData.getVisibleDurability())
-			saynn("- Tightness: "+restraintData.getVisibleTightness()+" ("+restraintData.getTightnessPercentString()+")")
 			
-			if(!restraintData.canStruggle()):
+			#sayn("- Durability: "+restraintData.getVisibleDurability())
+			if(!restraintData.hasSmartLock()):
+				sayn(item.getVisibleName()+", restraint level: "+restraintData.getVisibleLevel(isBlind))
+				saynn("- Tightness: "+restraintData.getVisibleTightness()+" ("+restraintData.getTightnessPercentString()+")")
+			else:
+				sayn(item.getVisibleName()+", SMART-LOCKED")
+				var smartLock:SmartLockBase = restraintData.getSmartLock()
+				var canBeSimplyRemoved = smartLock.canBeSimpleRemoved()
+				saynn("- "+smartLock.getName()+": "+smartLock.getUnlockDescription()+(("\nUNLOCKED. Can be removed") if canBeSimplyRemoved else ""))
+				if(canBeSimplyRemoved):
+					var minigameResult = MinigameResult.new()
+					minigameResult.score = 1.0
+					minigameResult.instantUnlock = true
+					addButton(item.getVisibleName(), "Take off this restraint", "struggleAgainst", [item.getUniqueID(), minigameResult])
+				continue
+			
+			if(!restraintData.canStruggleFinal()):
 				continue
 			
 			if(GM.pc.getStamina() > 0):
@@ -69,6 +82,20 @@ func _run():
 
 		for item in GM.pc.getInventory().getEquppedRestraints():
 			var restraintData: RestraintData = item.getRestraintData()
+			if(restraintData.hasSmartLock()):
+				var smartLock:SmartLockBase = restraintData.getSmartLock()
+				
+				if(!smartLock.canBeUnlockedWithKeys()):
+					addDisabledButton(item.getVisibleName(), "The SmartLock on this restraint can not be unlocked with restraint keys..")
+					continue
+				
+				var howManyKeysToUnlock = smartLock.getKeysAmountToUnlock()
+				if(keyAmount >= howManyKeysToUnlock):
+					addButton(item.getVisibleName(), item.getVisisbleDescription(), "dounlock", [item.getUniqueID()])
+				else:
+					addDisabledButton(item.getVisibleName(), "Restraint keys required to unlock: "+str(howManyKeysToUnlock))
+				continue
+			
 			if(!restraintData.canUnlockWithKey()):
 				addDisabledButton(item.getVisibleName(), "This restraint doesn't seem to have a keyhole")
 				continue
@@ -309,7 +336,11 @@ func _react(_action: String, _args):
 		var item = GM.pc.getInventory().getItemByUniqueID(unlockedRestraintID)
 		var restraintData: RestraintData = item.getRestraintData()
 		
-		GM.pc.getInventory().removeXOfOrDestroy("restraintkey", 1)
+		var howManyKeysToRemove:int = 1
+		if(restraintData.hasSmartLock()):
+			howManyKeysToRemove = restraintData.getSmartLock().getKeysAmountToUnlock()
+		
+		GM.pc.getInventory().removeXOfOrDestroy("restraintkey", howManyKeysToRemove)
 		if(!GM.pc.hasBlockedHands() && !GM.pc.hasBoundArms()):
 			if(restraintData == null || restraintData.alwaysBreaksWhenStruggledOutOf()):
 				GM.pc.getInventory().removeEquippedItem(item)

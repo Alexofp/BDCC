@@ -12,6 +12,9 @@ func getSlaveTypeWeights(_isSlaveLevelup):
 		SlaveType.All : 0.3,
 	}
 
+func getSlutlockWeight() -> float:
+	return 0.3
+
 func isPossibleFor(_npc, _isSlaveLevelup):
 	return true
 
@@ -48,6 +51,9 @@ func onSexEvent(_npc, _event:SexEvent):
 
 func getTaskString():
 	return "Penetrate every hole once: "+getProgressString("holes")
+
+func getTaskStringSlutLock():
+	return "Get every hole fucked: "+getProgressString("holes")
 
 func getTaskHint(_isSlaveLevelup):
 	return "Fuck all their orifices at least once using your cock or with a strapon"

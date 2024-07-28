@@ -2618,6 +2618,11 @@ func onSexEvent(_event : SexEvent):
 			continue
 		var effect = statusEffects[effectID]
 		effect.onSexEvent(_event)
+		
+	var items = getInventory().getAllEquippedItems()
+	for itemSlot in items:
+		var item = items[itemSlot]
+		item.onSexEvent(_event)
 
 func onFightStart(_contex = {}):
 	beforeFightStarted() # Legacy
@@ -2678,6 +2683,10 @@ func onSexEnded(_contex = {}):
 		getEnslaveQuest().onSexEnded(_contex)
 	if(isSlaveToPlayer()):
 		getNpcSlavery().onSexEnded(_contex)
+	var items = getInventory().getAllEquippedItems()
+	for itemSlot in items:
+		var item = items[itemSlot]
+		item.onSexEnded(_contex)
 		
 func getForcedObedienceLevel() -> float:
 	return buffsHolder.getCustom(BuffAttribute.ForcedObedience)

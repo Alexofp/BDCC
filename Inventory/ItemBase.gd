@@ -414,6 +414,46 @@ func canBeEasilyRemovedByDom():
 func onEquippedBy(_otherCharacter, _forced = false):
 	pass
 
+func tryAddSmartLock(_forcer, _addMessage = true):
+	if(!isRestraint() || _forcer == null):
+		return false
+	
+	var amountOfSmartLockedItems = 0
+	var wearer = getWearer()
+	if(wearer != null):
+		amountOfSmartLockedItems = wearer.getInventory().getSmartLockedItemsAmount()
+	
+	var chanceLock = 8.0 - 2.0*amountOfSmartLockedItems
+	if(OPTIONS.isHardStruggleEnabled()):
+		chanceLock = 20.0 - 5.0*amountOfSmartLockedItems
+		if(chanceLock < 5):
+			chanceLock = 5
+		
+	if(!RNG.chance(chanceLock)):
+		return false
+
+	return addRandomSmartLock(_forcer, _addMessage)
+
+func addRandomSmartLock(_forcer, _addMessage = true):
+	var locks = SmartLock.getAll()
+	var randomLock = RNG.pick(locks)
+	
+	return addSmartLock(randomLock, _forcer, _addMessage)
+
+func addSmartLock(_lockID, _forcer, _addMessage = true):
+	if(!isRestraint() || _forcer == null):
+		return false
+	
+	var theLock = SmartLock.create(_lockID)
+	
+	restraintData.setSmartLock(theLock)
+	theLock.onLocked({forcer = _forcer})
+	
+	if(_addMessage && getWearer() == GM.pc):
+		if(GM.main != null):
+			GM.main.addMessage("A smartlocked restraint got forced onto you.")
+	return true
+
 func getUnriggedParts(_character):
 	return null
 
@@ -495,6 +535,14 @@ func alwaysVisible():
 
 func shouldBeVisibleOnDoll(_character, _doll):
 	return true
+
+func onSexEvent(_event):
+	if(restraintData != null):
+		restraintData.handleSexEvent(_event)
+
+func onSexEnded(_contex = {}):
+	if(restraintData != null):
+		restraintData.onSexEnded(_contex)
 
 func onSexEnd():
 	pass

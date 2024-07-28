@@ -1269,6 +1269,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/NpcSlavery/SlaveTypeBase.gd"
 }, {
+"base": "Object",
+"class": "SmartLock",
+"language": "GDScript",
+"path": "res://Inventory/SmartLocks/SmartLock.gd"
+}, {
+"base": "Reference",
+"class": "SmartLockBase",
+"language": "GDScript",
+"path": "res://Inventory/SmartLocks/SmartLockBase.gd"
+}, {
 "base": "Reference",
 "class": "Species",
 "language": "GDScript",
@@ -1647,6 +1657,8 @@ _global_script_class_icons={
 "SlaveEventBase": "",
 "SlaveType": "",
 "SlaveTypeBase": "",
+"SmartLock": "",
+"SmartLockBase": "",
 "Species": "",
 "SpeciesCompatibility": "",
 "SpeechModifierBase": "",
