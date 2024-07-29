@@ -498,6 +498,14 @@ func _react(_action: String, _args):
 			battleEndedHow = "pain"
 		if(battleState == "win"):
 			var loot = enemyCharacter.getLoot(battleName)
+			
+			if(GM.pc.hasKeyholderLocksFrom(enemyID)):
+				if(!loot.has("items")):
+					loot["items"] = []
+				var theKey = GlobalRegistry.createItem("KeyholderKeyUnlock")
+				theKey.npcID = enemyID
+				loot["items"].append(theKey)
+			
 			if((loot.has("credits") && loot["credits"] > 0) || (loot.has("items") && loot["items"].size() > 0)):
 				runScene("LootingScene", [loot], "lootingscene")
 			else:

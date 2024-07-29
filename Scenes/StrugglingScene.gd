@@ -42,7 +42,7 @@ func _run():
 			addButtonAt(13, "Use key", "Use one of your restraint keys to unlock something", "usekey")
 		else:
 			addDisabledButtonAt(13, "Use key", "You don't have any restraint keys")
-		addButtonAt(14, "Give up", "Stop struggling", "endthescenedidnothing")
+		addButtonAt(14, "Back", "Stop struggling", "endthescenedidnothing")
 		
 		for item in GM.pc.getInventory().getEquppedRestraints():
 			var restraintData: RestraintData = item.getRestraintData()
@@ -77,7 +77,7 @@ func _run():
 		
 	if(state == "usekey"):
 		var keyAmount = GM.pc.getInventory().getAmountOf("restraintkey")
-		saynn("You have "+str(keyAmount)+" "+Util.multipleOrSingularEnding(keyAmount, "key")+". Each one can unlock one piece of gear.")
+		saynn("You have "+str(keyAmount)+" "+Util.multipleOrSingularEnding(keyAmount, "key")+". Each one can unlock one piece of gear (Unless it has a smart-lock attached to it).")
 		saynn("Which restraint do you wanna unlock.")
 
 		for item in GM.pc.getInventory().getEquppedRestraints():
@@ -91,7 +91,7 @@ func _run():
 				
 				var howManyKeysToUnlock = smartLock.getKeysAmountToUnlock()
 				if(keyAmount >= howManyKeysToUnlock):
-					addButton(item.getVisibleName(), item.getVisisbleDescription(), "dounlock", [item.getUniqueID()])
+					addButton(item.getVisibleName(), "Restraint keys required to unlock: "+str(howManyKeysToUnlock), "dounlock", [item.getUniqueID()])
 				else:
 					addDisabledButton(item.getVisibleName(), "Restraint keys required to unlock: "+str(howManyKeysToUnlock))
 				continue

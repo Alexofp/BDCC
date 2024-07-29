@@ -32,7 +32,7 @@ func generateFor(_npc, _isSlaveLevelup, _difficulty = 1.0):
 
 func onSexEvent(_npc, _event:SexEvent):
 	if(_event.getType() == SexEvent.HolePenetrated):
-		if(_event.getTargetChar() == _npc && _event.targetIsSub()):
+		if(_event.getTargetChar() == _npc):
 			var whichPart = _event.getField("hole", BodypartSlot.Vagina)
 			
 			if(whichPart == BodypartSlot.Vagina && !fuckedVag):

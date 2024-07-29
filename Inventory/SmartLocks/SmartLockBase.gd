@@ -26,6 +26,9 @@ func getKeysAmountToUnlock() -> int:
 func canStruggle() -> bool:
 	return false
 
+func isKeyholder(_charID:String):
+	return false
+
 func handleSexEvent(_sexEvent:SexEvent):
 	pass
 

@@ -11,7 +11,10 @@ func getDescription():
 	return "An universal one-time use key that can unlock any piece of bondage gear. You feel like you should keep some of these just in case."
 
 func getPrice():
-	return 5
+	return 15
+
+func getSellPrice():
+	return 2
 
 func canSell():
 	return true
@@ -21,7 +24,6 @@ func canCombine():
 
 func getTags():
 	return [
-		ItemTag.SoldByGeneralVendomat,
 		ItemTag.SoldByTheAnnouncer,
 		]
 

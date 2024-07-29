@@ -24,7 +24,7 @@ func generateFor(_npc, _isSlaveLevelup, _difficulty = 1.0):
 
 func onSexEvent(_npc, _event:SexEvent):
 	if(_event.getType() == SexEvent.PainInflicted):
-		if(_event.getTargetChar() == _npc && _event.targetIsSub()):
+		if(_event.getTargetChar() == _npc):
 			advanceTask(_event.getField("pain", 0))
 			return true
 	return false

@@ -28,7 +28,7 @@ func generateFor(_npc, _isSlaveLevelup, _difficulty = 1.0):
 
 func onSexEvent(_npc, _event:SexEvent):
 	if(_npc.isWearingChastityCage() && _event.getType() == SexEvent.Orgasmed):
-		if(_event.getTargetChar() == _npc && _event.targetIsSub()):
+		if(_event.getTargetChar() == _npc):
 			advanceTask()
 			return true
 	return false

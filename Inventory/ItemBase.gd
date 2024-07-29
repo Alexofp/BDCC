@@ -417,17 +417,36 @@ func onEquippedBy(_otherCharacter, _forced = false):
 func tryAddSmartLock(_forcer, _addMessage = true):
 	if(!isRestraint() || _forcer == null):
 		return false
+	if(_forcer is String):
+		_forcer = GlobalRegistry.getCharacter(_forcer)
 	
 	var amountOfSmartLockedItems = 0
 	var wearer = getWearer()
 	if(wearer != null):
 		amountOfSmartLockedItems = wearer.getInventory().getSmartLockedItemsAmount()
 	
+	# never veryrare rare normal often veryoften bdsmslut
+	var rarityString = OPTIONS.getSmartLockRarity()
+	
 	var chanceLock = 8.0 - 2.0*amountOfSmartLockedItems
-	if(OPTIONS.isHardStruggleEnabled()):
-		chanceLock = 20.0 - 5.0*amountOfSmartLockedItems
-		if(chanceLock < 5):
-			chanceLock = 5
+	
+	if(rarityString == "veryrare"):
+		chanceLock = 4.0 - 1.0*amountOfSmartLockedItems
+	elif(rarityString == "rare"):
+		chanceLock = 8.0 - 2.0*amountOfSmartLockedItems
+	elif(rarityString == "normal"):
+		chanceLock = 16.0 - 4.0*amountOfSmartLockedItems
+	elif(rarityString == "often"):
+		chanceLock = 24.0 - 6.0*amountOfSmartLockedItems
+	elif(rarityString == "veryoften"):
+		chanceLock = 32.0 - 8.0*amountOfSmartLockedItems
+	elif(rarityString == "bdsmslut"):
+		chanceLock = 60.0 - 10.0*amountOfSmartLockedItems
+	elif(rarityString == "never"):
+		return false
+	
+	if(chanceLock < 1.0):
+		chanceLock = 1.0
 		
 	if(!RNG.chance(chanceLock)):
 		return false
@@ -435,14 +454,18 @@ func tryAddSmartLock(_forcer, _addMessage = true):
 	return addRandomSmartLock(_forcer, _addMessage)
 
 func addRandomSmartLock(_forcer, _addMessage = true):
-	var locks = SmartLock.getAll()
-	var randomLock = RNG.pick(locks)
-	
+	var randomLock = SmartLock.getRandomSmartLock()
+	if(_forcer is String):
+		_forcer = GlobalRegistry.getCharacter(_forcer)
+	if(_forcer != null && _forcer.shouldBeExcludedFromEncounters() && randomLock == SmartLock.KeyholderLock):
+		randomLock = SmartLock.TightLock # If we can't encouncter this npc, we can't our key back from them
 	return addSmartLock(randomLock, _forcer, _addMessage)
 
 func addSmartLock(_lockID, _forcer, _addMessage = true):
 	if(!isRestraint() || _forcer == null):
 		return false
+	if(_forcer is String):
+		_forcer = GlobalRegistry.getCharacter(_forcer)
 	
 	var theLock = SmartLock.create(_lockID)
 	

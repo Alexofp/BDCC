@@ -678,6 +678,30 @@ func getLoot(_battleName):
 	
 	return {"credits": resultCredits, "items": resultItems}
 
+func hasKeyholderLocksFrom(otherCharID:String):
+	for invSlot in getInventory().getEquippedItems():
+		var item = getInventory().getEquippedItem(invSlot)
+		if(item.isRestraint()):
+			var restraintData = item.getRestraintData()
+			if(restraintData.hasSmartLock()):
+				var smartLock = restraintData.getSmartLock()
+				if(smartLock.isKeyholder(otherCharID)):
+					return true
+	return false
+
+func unlockAllKeyholderLocksFrom(otherCharID:String) -> int:
+	var howMany:int = 0
+	for invSlot in getInventory().getEquippedItems().keys():
+		var item = getInventory().getEquippedItem(invSlot)
+		if(item.isRestraint()):
+			var restraintData = item.getRestraintData()
+			if(restraintData.hasSmartLock()):
+				var smartLock = restraintData.getSmartLock()
+				if(smartLock.isKeyholder(otherCharID)):
+					getInventory().clearSlot(invSlot)
+					howMany += 1
+	return howMany
+
 func getBodypartTooltipName(_bodypartSlot):
 	return "error"
 

@@ -20,14 +20,16 @@ func getKeysAmountToUnlock() -> int:
 	return keyAmount
 
 func onLocked(_contex):
-	keyAmount = 3
+	keyAmount = RNG.randi_range(2, 3)
 	if(OPTIONS.isHardStruggleEnabled()):
-		keyAmount = 5
+		keyAmount = RNG.randi_range(2, 5)
 	
-	if(RNG.chance(1)): #EVIL
+	if(RNG.chance(3)): #EVIL
 		generateTasks(5)
+	elif(RNG.chance(10)):
+		generateTasks(3)
 	else:
-		generateTasks(RNG.randi_range(1, 3))
+		generateTasks(RNG.randi_range(1, 2))
 
 func saveData():
 	var tasksData = []
