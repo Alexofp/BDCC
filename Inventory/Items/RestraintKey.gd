@@ -25,6 +25,7 @@ func canCombine():
 func getTags():
 	return [
 		ItemTag.SoldByTheAnnouncer,
+		ItemTag.Illegal,
 		]
 
 func getInventoryImage():
