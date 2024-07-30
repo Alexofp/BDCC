@@ -709,3 +709,7 @@ func _on_Duplicate_pressed():
 	newState.id = newName
 	scene.states[newName] = newState
 	updateStatesList()
+
+
+func _on_TutorialButton_pressed():
+	var _ok = OS.shell_open("https://github.com/Alexofp/BDCC/wiki/Datapack-scene-creator-tutorial")

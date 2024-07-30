@@ -35,8 +35,7 @@ anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Info" type="HBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer"]
-visible = false
+[node name="Info" type="VBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -48,7 +47,7 @@ size_flags_vertical = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer/TabContainer/Info"]
 margin_right = 1272.0
-margin_bottom = 660.0
+margin_bottom = 636.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -57,6 +56,16 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 1272.0
 margin_bottom = 20.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer/Info"]
+margin_top = 640.0
+margin_right = 1272.0
+margin_bottom = 660.0
+
+[node name="TutorialButton" type="Button" parent="VBoxContainer/MarginContainer/TabContainer/Info/HBoxContainer"]
+margin_right = 285.0
+margin_bottom = 20.0
+text = "Scene creator tutorial (Opens in a browser)"
 
 [node name="States" type="VBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer"]
 visible = false
@@ -459,6 +468,7 @@ size_flags_horizontal = 3
 [node name="CharListEntry" parent="VBoxContainer/MarginContainer/TabContainer/Characters/ScrollContainer/CharList" instance=ExtResource( 6 )]
 
 [node name="Triggers" type="VBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -741,6 +751,7 @@ size_flags_horizontal = 3
 text = "Save"
 
 [connection signal="onVariableChange" from="VBoxContainer/MarginContainer/TabContainer/Info/ScrollContainer/PackVariables" to="." method="_on_PackVariables_onVariableChange"]
+[connection signal="pressed" from="VBoxContainer/MarginContainer/TabContainer/Info/HBoxContainer/TutorialButton" to="." method="_on_TutorialButton_pressed"]
 [connection signal="visibility_changed" from="VBoxContainer/MarginContainer/TabContainer/States" to="." method="_on_States_visibility_changed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList/HBoxContainer/AddNewStateButton" to="." method="_on_AddNewStateButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList/HBoxContainer2/MoveStateDownButton" to="." method="_on_MoveStateDownButton_pressed"]
