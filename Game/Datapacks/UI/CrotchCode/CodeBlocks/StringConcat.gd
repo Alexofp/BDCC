@@ -31,6 +31,7 @@ func getTemplate():
 			slot = leftOpSlot,
 			slotType = CrotchBlocks.VALUE,
 			placeholder = "what",
+			expand=true,
 		},
 		{
 			type = "label",
@@ -42,6 +43,7 @@ func getTemplate():
 			slot = rightOpSlot,
 			slotType = CrotchBlocks.VALUE,
 			placeholder = "with",
+			expand=true,
 		},
 	]
 
@@ -50,3 +52,6 @@ func getSlot(_id):
 		return leftOpSlot
 	if(_id == "right"):
 		return rightOpSlot
+
+func shouldExpandTemplate():
+	return true

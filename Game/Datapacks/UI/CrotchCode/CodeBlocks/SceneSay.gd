@@ -26,7 +26,7 @@ func execute(_contex:CodeContex):
 		throwError(_contex, "Character name must a string, got "+str(charName)+" instead")
 		return
 
-	var variantName = varSlot.getValue(_contex)
+	var variantName = str(varSlot.getValue(_contex))
 	if(_contex.hadAnError()):
 		return
 	if(!isString(variantName)):
