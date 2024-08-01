@@ -73,6 +73,7 @@ var datapacks: Dictionary = {}
 var bodypartStorageNode
 
 var sceneCache: Dictionary = {}
+var codeblocksCache: Dictionary = {}
 
 var cachedDonationData = null
 var cachedLocalDonationData = null

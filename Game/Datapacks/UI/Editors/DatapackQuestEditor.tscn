@@ -26,7 +26,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Info" type="VBoxContainer" parent="VBoxContainer/Control/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -52,6 +51,7 @@ margin_right = 1272.0
 margin_bottom = 20.0
 
 [node name="Stages" type="VBoxContainer" parent="VBoxContainer/Control/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0

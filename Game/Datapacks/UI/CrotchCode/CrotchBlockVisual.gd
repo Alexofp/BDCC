@@ -100,7 +100,7 @@ func constructTemplate():
 			var slotID = templateLine["id"]
 			#currentHBox = HBoxContainer.new()
 			#template_vertical_list.add_child(currentHBox)
-			var newSlotVis = load("res://Game/Datapacks/UI/CrotchCode/VisualSlots/VisSlotVar.tscn").instance()
+			var newSlotVis = GlobalRegistry.instanceCached("res://Game/Datapacks/UI/CrotchCode/VisualSlots/VisSlotVar.tscn")
 			newSlotVis.editor = editor
 			currentHBox.add_child(newSlotVis)
 			if(templateLine.has("slotType")):
@@ -122,7 +122,7 @@ func constructTemplate():
 			var slotID = templateLine["id"]
 			currentHBox = HBoxContainer.new()
 			template_vertical_list.add_child(currentHBox)
-			var newSlotVis = load("res://Game/Datapacks/UI/CrotchCode/VisualSlots/VisSlotCalls.tscn").instance()
+			var newSlotVis = GlobalRegistry.instanceCached("res://Game/Datapacks/UI/CrotchCode/VisualSlots/VisSlotCalls.tscn")
 			newSlotVis.editor = editor
 			currentHBox.add_child(newSlotVis)
 			newSlotVis.setSlotCalls(codeBlock.getSlot(slotID))
@@ -142,7 +142,7 @@ func constructTemplate():
 			var slotID = templateLine["id"]
 			#currentHBox = HBoxContainer.new()
 			#template_vertical_list.add_child(currentHBox)
-			var newSlotVis = load("res://Game/Datapacks/UI/CrotchCode/VisualSlots/VisSlotAnim.tscn").instance()
+			var newSlotVis = GlobalRegistry.instanceCached("res://Game/Datapacks/UI/CrotchCode/VisualSlots/VisSlotAnim.tscn")
 			newSlotVis.editor = editor
 			currentHBox.add_child(newSlotVis)
 			if(templateLine.has("expand") && templateLine["expand"]):
@@ -153,7 +153,7 @@ func constructTemplate():
 			var slotID = templateLine["id"]
 			#currentHBox = HBoxContainer.new()
 			#template_vertical_list.add_child(currentHBox)
-			var newSlotVis = load("res://Game/Datapacks/UI/CrotchCode/VisualSlots/VisSlotButtonChecks.tscn").instance()
+			var newSlotVis = GlobalRegistry.instanceCached("res://Game/Datapacks/UI/CrotchCode/VisualSlots/VisSlotButtonChecks.tscn")
 			newSlotVis.editor = editor
 			currentHBox.add_child(newSlotVis)
 			if(templateLine.has("expand") && templateLine["expand"]):
@@ -164,7 +164,7 @@ func constructTemplate():
 			var slotID = templateLine["id"]
 			#currentHBox = HBoxContainer.new()
 			#template_vertical_list.add_child(currentHBox)
-			var newSlotVis = load("res://Game/Datapacks/UI/CrotchCode/VisualSlots/VisSlotImage.tscn").instance()
+			var newSlotVis = GlobalRegistry.instanceCached("res://Game/Datapacks/UI/CrotchCode/VisualSlots/VisSlotImage.tscn")
 			newSlotVis.editor = editor
 			currentHBox.add_child(newSlotVis)
 			if(templateLine.has("expand") && templateLine["expand"]):

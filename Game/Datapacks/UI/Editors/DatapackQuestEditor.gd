@@ -21,6 +21,7 @@ func setQuest(theQuest):
 	datapack_quest_code_wrapper.setSlotCalls(quest.code)
 	
 	updateQuest()
+	updateFlagList()
 	
 	possible_code_blocks_list.populate()
 

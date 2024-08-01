@@ -140,10 +140,12 @@ static func getAll():
 		"GameLocName",
 		"GameDoWound",
 		"GameCharExists",
+		"GameIsContentEnabled",
 		"GameGetDays",
 		"GameGetTime",
 		"GameGetTimeStr",
 		"GameGetTimeStrCustom",
+		"GameProcessTimeUntil",
 		"GameStartNextDay",
 		"GameAddLog",
 		"GameShowLog",
@@ -220,7 +222,8 @@ static func getAll():
 		"RNGInt",
 		]
 
-static func createBlock(theID):
+
+static func createBlockRaw(theID):
 	var resourcePath = "res://Game/Datapacks/UI/CrotchCode/CodeBlocks/"+theID+".gd"
 	var newBlockScene = load(resourcePath)
 	if(newBlockScene == null):
@@ -232,3 +235,21 @@ static func createBlock(theID):
 	#	newBlock.initWithDefaultData()
 	return newBlock
 
+static func createBlock(theID):
+	var newBlockScene
+	if(GlobalRegistry.codeblocksCache.has(theID)):
+		newBlockScene = GlobalRegistry.codeblocksCache[theID]
+	else:
+		var resourcePath = "res://Game/Datapacks/UI/CrotchCode/CodeBlocks/"+theID+".gd"
+		newBlockScene = load(resourcePath)
+		if(newBlockScene != null):
+			GlobalRegistry.codeblocksCache[theID] = newBlockScene
+			
+	if(newBlockScene == null):
+		return null
+	var newBlock = newBlockScene.new()
+		
+	if(newBlock != null):
+		newBlock.id = theID
+	#	newBlock.initWithDefaultData()
+	return newBlock

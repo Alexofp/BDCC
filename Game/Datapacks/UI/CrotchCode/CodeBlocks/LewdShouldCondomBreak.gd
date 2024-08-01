@@ -68,6 +68,9 @@ func getTemplate():
 			expand=true,
 		},
 		{
+			type = "new_line",
+		},
+		{
 			type = "label",
 			text = "Chance:",
 		},
