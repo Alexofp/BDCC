@@ -60,7 +60,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 					#chance = getApologySuccessChance(_domInfo, _subInfo),
 				})
 	
-	if(sub.getInventory().hasRemovableRestraints() && sub.getStamina() > 0):
+	if(sub.getInventory().hasRemovableRestraintsNoLockedSmartlocks() && sub.getStamina() > 0):
 		actions.append({
 			name = "Restraints",
 			desc = "Struggle against your restraints",

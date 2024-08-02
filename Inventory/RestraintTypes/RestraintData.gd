@@ -57,13 +57,16 @@ func getFinalChanceToForceARestraint(_pc):
 	return finalSuccessChance
 
 func getLevelDamage():
-	return 0.5 / pow(max(1.0, level), 0.8)
+	return 1.0 / pow(max(1.0, level), 0.8)
 
 func getStatDamageMult(_pc):
 	return 1.0 + _pc.getStat(Stat.Strength) / 20.0
 
 func calcDamage(_pc, _minigame:MinigameResult, mult = 1.0):
-	return mult * getLevelDamage() * getStatDamageMult(_pc) * RNG.randf_range(0.8, 1.0) * _minigame.score
+	var levelDamage:float = getLevelDamage()
+	var statDamageMult:float = getStatDamageMult(_pc)
+	
+	return mult * levelDamage * statDamageMult * RNG.randf_range(0.8, 1.0) * _minigame.score
 
 func takeDamage(howMuch):
 	tightness -= howMuch

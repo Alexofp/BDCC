@@ -94,3 +94,9 @@ func getUnriggedParts(_character):
 
 func getInventoryImage():
 	return "res://Images/Items/bdsm/hypnovisor.png"
+
+func getAIForceItemWeight(_whoForcesNpc, _targetNpc):
+	if(_whoForcesNpc == null):
+		return 0.0
+	var hypnosisValue = _whoForcesNpc.getFetishHolder().getFetishValue(Fetish.HypnosisHypnotist)
+	return hypnosisValue * 1.0

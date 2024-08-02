@@ -91,7 +91,7 @@ func _run():
 
 		saynn("You can hear a subtle growling coming from him. But that's about it. At some points he starts walking away though.")
 
-		saynn("[say=pc]You realize how many more Skars are there gonna be in the world? Broken lives? I think you do. And I think you just don't care anymore.[/say]")
+		saynn("[say=pc]You realize how many more Skars there are gonna be in the world? Broken lives? I think you do. And I think you just don't care anymore.[/say]")
 
 		saynn("Skar stops and looks away for a second.. before leaving you alone.")
 

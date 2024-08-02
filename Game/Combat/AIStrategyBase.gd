@@ -55,7 +55,7 @@ func getNextAttackFinal(_enemy):
 
 func shouldStruggleOutOfRestraints():
 	var character = getCharacter()
-	if(!character.getInventory().hasRemovableRestraints()):
+	if(!character.getInventory().hasRemovableRestraintsNoLockedSmartlocks()):
 		return false
 	
 	return true

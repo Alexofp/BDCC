@@ -553,6 +553,15 @@ func hasRemovableRestraints():
 				return true
 	return false
 
+func hasRemovableRestraintsNoLockedSmartlocks():
+	for itemSlot in equippedItems:
+		var item = equippedItems[itemSlot]
+		if(item.isRestraint()):
+			var restraintData = item.getRestraintData()
+			if(restraintData.canStruggleFinal()):
+				return true
+	return false
+
 func getEquppedRemovableRestraints():
 	var result = []
 	
@@ -561,6 +570,17 @@ func getEquppedRemovableRestraints():
 		if(item.isRestraint()):
 			var restraintData = item.getRestraintData()
 			if(restraintData.canStruggle()):
+				result.append(item)
+	return result
+
+func getEquppedRemovableRestraintsNoLockedSmartlocks():
+	var result = []
+	
+	for itemSlot in equippedItems:
+		var item = equippedItems[itemSlot]
+		if(item.isRestraint()):
+			var restraintData = item.getRestraintData()
+			if(restraintData.canStruggleFinal()):
 				result.append(item)
 	return result
 
