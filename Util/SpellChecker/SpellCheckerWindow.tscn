@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Util/SpellChecker/SpellCheckerTest.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Util/SpellChecker/SpellCheckerWindow.gd" type="Script" id=2]
+
+[node name="SpellCheckerWindow" type="WindowDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 22.0
+margin_top = 27.0
+margin_right = -22.0
+margin_bottom = -27.0
+window_title = "Spell checker"
+script = ExtResource( 2 )
+
+[node name="SpellCheckerTest" parent="." instance=ExtResource( 1 )]
+
+[connection signal="popup_hide" from="." to="." method="_on_SpellCheckerWindow_popup_hide"]
+[connection signal="onCancel" from="SpellCheckerTest" to="." method="_on_SpellCheckerTest_onCancel"]
+[connection signal="onTextSubmit" from="SpellCheckerTest" to="." method="_on_SpellCheckerTest_onTextSubmit"]

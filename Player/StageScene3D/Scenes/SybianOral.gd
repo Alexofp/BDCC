@@ -118,3 +118,15 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["idle", "ride", "intense", "hump", "humpfast", "hold", "stroke", "blowjob", "blowjobfast", "lick", "lickfast"]
+
+func getVarNpcs():
+	return ["pc", "npc"]
+
+func getVarOptions():
+	var options = .getVarOptions()
+	
+	options["chained"] = {
+		type = "bool",
+	}
+	
+	return options

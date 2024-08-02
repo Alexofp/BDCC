@@ -55,7 +55,7 @@ func getNextAttackFinal(_enemy):
 
 func shouldStruggleOutOfRestraints():
 	var character = getCharacter()
-	if(!character.getInventory().hasRemovableRestraints()):
+	if(!character.getInventory().hasRemovableRestraintsNoLockedSmartlocks()):
 		return false
 	
 	return true
@@ -66,7 +66,7 @@ func calculateStrugglingActions():
 	for item in character.getInventory().getEquppedRestraints():
 		var restraintData: RestraintData = item.getRestraintData()
 		
-		if(restraintData == null || !restraintData.canStruggle()):
+		if(restraintData == null || !restraintData.canStruggleFinal()):
 			continue
 		
 		#print(item.getVisibleName(), " ", restraintData.calculateAIScore(character))

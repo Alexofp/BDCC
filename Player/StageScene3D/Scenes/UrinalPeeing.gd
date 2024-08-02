@@ -90,3 +90,18 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["idle", "stroke", "pee", "peefemale"]
+
+func getVarNpcs():
+	return ["pc", "npc"]
+
+func getVarOptions():
+	var options = .getVarOptions()
+	
+	options["pcAction"] = {
+		type = "action",
+		actions = ["idle2", "idle"],
+	}
+	
+	return options
+
+

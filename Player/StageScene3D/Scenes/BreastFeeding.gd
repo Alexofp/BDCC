@@ -100,3 +100,6 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["tease", "feed", "teasealt", "feedalt"]
+
+func getVarNpcs():
+	return ["pc", "npc"]

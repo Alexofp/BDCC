@@ -13,6 +13,9 @@ func getSlaveTypeWeights(_isSlaveLevelup):
 		SlaveType.All : 1.0,
 	}
 
+func getSlutlockWeight() -> float:
+	return 0.0
+
 func isPossibleForPC(_pc, _npc, _isSlaveLevelup):
 	return true
 
@@ -46,6 +49,9 @@ func onSexEnded(_npc, _contex = {}):
 
 func getTaskString():
 	return "Do a backflip!"
+
+func getTaskStringSlutLock():
+	return getTaskString()
 
 func getTaskHint(_isSlaveLevelup):
 	return ""

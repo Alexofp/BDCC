@@ -94,3 +94,6 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["tease", "lick", "blowjob", "handjob"]
+
+func getVarNpcs():
+	return ["pc", "npc"]

@@ -26,7 +26,7 @@ func generateFor(_npc, _isSlaveLevelup, _difficulty = 1.0):
 
 func onSexEvent(_npc, _event:SexEvent):
 	if(_event.getType() == SexEvent.BondageGearForced):
-		if(_event.getTargetChar() == _npc && _event.targetIsSub()):
+		if(_event.getTargetChar() == _npc):
 			var itemID = _event.getField("itemID", "someitem")
 			if(!didForce.has(itemID)): # Protection against putting the same restraints on the same npc
 				didForce.append(itemID)

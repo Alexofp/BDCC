@@ -11,9 +11,9 @@ script = ExtResource( 3 )
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 roomName = "Mineshafts"
 roomID = "mining_nearentrance"
-roomDescription = "A huge open space that was clearly carved out from a huge rock.
+roomDescription = "A large open area noticeably more \"industrial\" than the Main Hall. Also everything down here is covered in a fine layer of dirt. Lovely.
 
-A few catwalks lead into different directions, one of them being the mineshafts."
+Catwalks and grated metal mats over bare stone lead into different directions, one of them being the mineshafts ahead."
 roomColor = 8
 population = 3
 
@@ -21,7 +21,9 @@ population = 3
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -64, 0 )
 roomName = "Mineshafts"
-roomDescription = "More catwalks that go over the raw stone. Connects the lift and the engineering bay."
+roomID = "mining_near_eng"
+roomDescription = "Wall lights and power cables stretch off to the west towards engineering. The heavy steel wall dividing here and the mineshaft terminals grows more rocky further down, with the noise of the mineshafts clanking away behind you. An attempt at a security fence was made, but it looks closer to a flimsy chainlink with a bit of razor wire shoved off to the sides. It looks like the whole thing had to be taken down to fit something large through and was just neglected to sit covered in dust.
+The former gate lays knocked over against the wall with a \"No Inmates Beyond This Point\" sign, failing to do it's job."
 roomColor = 8
 population = 3
 
@@ -30,7 +32,9 @@ self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -128, 0 )
 roomName = "Engineering lobby"
 roomID = "eng_lobby"
-roomDescription = "Entrance to the engineering bay."
+roomDescription = "This cave looks the same as all the others except the strapped together grated and carved rock floors of the mines become a much more established looking industrial steel plating on the ground. All the wall lights bored into the rock make this place a fair bit brighter than the rest of the minshafts, with wires and pipes in the trailing the ceiling above. If you squint, you can even see the tether hooks for a zero-gravity environment.
+
+In the reletive silence, you can hear the low rumble of heavy machinery through the rock walls."
 roomColor = 6
 population = 2
 
@@ -39,7 +43,9 @@ self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -192, 0 )
 roomName = "Engineering bay"
 roomID = "eng_bay_corridor"
-roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering."
+roomDescription = "This area pushes up against the bulky walls of the Engineering sector. The cavernous walls spread open into a small chamber and the barren metal floors become a platform on stilts leading into Engineering proper.
+
+A thick metal pneumatic door blocks your way further inside, with a keypad awaiting a code to pass."
 roomColor = 6
 population = 2
 
@@ -48,7 +54,9 @@ self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -256, 0 )
 roomName = "Engineering bay"
 roomID = "eng_bay_nearbreakroom"
-roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering."
+roomDescription = "The halls of engineering are nice and wide, if rather bland with industrial plating and support beams. Scattered on either side of the hallway are all sorts of construction equipment, materials, and the odd cargo loader or forklift. Whatever purpose it all has, it means you get to have plenty of things to sneak behind.
+
+On this side of engineering, the Hall ends with the pneumatic door leading back out into the mineshafts. The keypad awaiting the code that got you in here."
 canEast = false
 roomColor = 6
 gridColor = 5
@@ -60,7 +68,9 @@ self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -384, 0 )
 roomName = "Engineering bay"
 roomID = "eng_firstjunction"
-roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering.
+roomDescription = "The halls of engineering are nice and wide, if rather bland with industrial plating and support beams. Scattered on either side of the hallway are all sorts of construction equipment, materials, and the odd cargo loader or forklift. Whatever purpose it all has, it means you get to have plenty of things to sneak behind.
+
+The Comms Relay is labeled to the north, with the path leading back out into the cave.
 
 You also notice an air vent here that you can't quite reach. Maybe you can search for the other end."
 roomColor = 6
@@ -72,7 +82,11 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -320, 0 )
 roomName = "Engineering bay"
-roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering."
+roomID = "eng_corridor1"
+roomDescription = "The corridor here has a big fortified window looking north into the area where the minecarts come in and are offloaded and sorted with a mess of tracks, catwalks, scanners, conveyor belts, mechanical arms, and scanners with minecarts and rocks rolling across it all in a great big system leading in all sorts of directions. You cant see all of it, with bits and conveyor lines leading up high above as well as below and under where you can see. Seeing the all the parts working at once is almost kind of mesmerizing to watch actually.
+The bulkhead door that would lead out into the area is bolted down with a warning label preventing all access while the machinery is running, which it always is.
+
+The hall reaches further to the west towards the rest of engineering and east back out into in the mines."
 roomColor = 6
 gridColor = 5
 loctag_EngineersEncounter = true
@@ -82,7 +96,12 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -448, 0 )
 roomName = "Engineering bay"
-roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering."
+roomID = "eng_corridor2"
+roomDescription = "To the north there is a big empty space that looks like the ceiling has been sealed over. On the chainlink fence that blocks it off there is a note saying: \"Freight Elevator sealed off from this floor by order of Captain Wright. Use the one in the Main Hall.\".
+
+Your gaze flicks into the empty Elevator shaft and see all sorts of vandalism from inmates that might've snuck in.
+
+You understand why the captain would do such a thing, but you cant help but agree with one particular message scrawled in bright orange in the dark elevator shaft: \"Captain Wright is a worthless cunt.\"."
 roomColor = 6
 gridColor = 5
 loctag_EngineersEncounter = true
@@ -92,7 +111,13 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -512, 0 )
 roomName = "Engineering bay"
-roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering."
+roomID = "eng_corridor3"
+roomDescription = "The hallways of Engineering veer off to the south here. A sign at the junction notes a few places around.
+
+Bluespace Communitcations Transmitter to the North.
+Mineshafts, Ore Distribution Overlook D, and Staff Breakroom to the East
+Office and Repair Bay C are off to the West.
+Storage Room F, Electronics Salvage, and Secondary Control Center to the South."
 roomColor = 6
 gridColor = 5
 loctag_EngineersEncounter = true
@@ -102,7 +127,10 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -576, 0 )
 roomName = "Engineering bay"
-roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering."
+roomID = "eng_near_lab"
+roomDescription = "This section of Engineering is much quieter than the everywhere else. It'd be nice if it wasnt a short, empty hallway with a thin layer of dust and a strip of yellow paint.
+
+Both of the doors here are tucked away and look equally uninteresting, but they are some of the only unlocked doors in this entire department, which makes them perfect in your eyes."
 roomColor = 6
 gridColor = 5
 loctag_EngineersEncounter = true
@@ -112,7 +140,11 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -512, 64 )
 roomName = "Engineering bay"
-roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering."
+roomID = "eng_corridor4"
+roomDescription = "Here, just off the junction of hallways there is a staff only elevator with a fancy biometric scanner to deny you access to it.
+A sign on the wall says this is Engineering Floor B1.
+
+The yellow trims of engineering stretch down the halls further south, and north back to the corridor junction."
 roomColor = 6
 gridColor = 5
 loctag_EngineersEncounter = true
@@ -123,7 +155,9 @@ self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -640, 0 )
 roomName = "Office"
 roomID = "eng_lorecomputerroom"
-roomDescription = "You enter some kind of office. A pretty cramped one, with metal walls and floor, dimly lit and equipped with a computer on a cluttered desk, a swiveling chair, a monitor displaying system updates, a small window into the space, a cooling unit and a little green plant."
+roomDescription = "You enter some kind of office. A pretty cramped one, surrounded with metal panels, dimly lit and equipped with a computer on a cluttered desk, a swiveling chair, a cooling unit and a little green plant. The computer monitor is full of neglected notices and messages. Pushed up against the desk is a porthole style window angled down-ish out into space. It doesn't give much of a view without direct light, there’s the underside of the asteroid with a bit of paneling, maybe, visible inside a crater, and a field of scattered asteroids.
+
+At least the stars are kinda nice."
 roomSprite = 5
 roomColor = 6
 gridColor = 5
@@ -146,7 +180,10 @@ lootCredits = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -512, 320 )
 roomName = "Engineering bay"
-roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering."
+roomID = "eng_corridor7"
+roomDescription = "The halls of engineering are nice and wide, if rather bland with industrial plating and support beams. Scattered on either side of the hallway are all sorts of construction equipment, materials, and the odd cargo loader or forklift. Whatever purpose it all has, it means you get to have plenty of things to sneak behind.
+
+The southern hall ends here with one of those large air vent fans up in the wall."
 roomColor = 6
 gridColor = 5
 loctag_EngineersEncounter = true
@@ -156,7 +193,9 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -448, 320 )
 roomName = "Engineering bay"
-roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering."
+roomID = "eng_corridor8"
+roomDescription = "The normal wide halls of engineering divert off into regular looking backroom maintenance corridors.
+Wires and cables hung up on walls and support struts lead further east to somewhere."
 roomColor = 6
 gridColor = 5
 loctag_EngineersEncounter = true
@@ -167,9 +206,10 @@ self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -384, 320 )
 roomName = "Engineering bay"
 roomID = "eng_airventskip"
-roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering.
+roomDescription = "The normal wide halls of engineering divert off into regular looking backroom maintenance corridors.
+Wires and cables hung up on walls and support struts lead further east to somewhere.
 
-You also notice an air vent here that is just big enough to fit you. You can probably use it to skip back to the entrance."
+There is a warmth in the air coming from the south, the door it’s coming from locked open with an air vent absorbing what it can. Seems like you can both reach and fit into the air vent. From your guess, it leads back to the entrance."
 roomColor = 6
 gridColor = 5
 population = 2
@@ -179,7 +219,7 @@ self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -384, 384 )
 roomName = "Control room"
 roomID = "eng_controlroom"
-roomDescription = "A room with many consoles and server racks."
+roomDescription = "This tiny little room is full of all sorts of cables and server equipment. The warmth gets hotter as you enter and the only real light in here is coming from a computer monitor on the far end of the room."
 roomColor = 6
 gridColor = 5
 
@@ -187,7 +227,8 @@ gridColor = 5
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -512, 128 )
 roomName = "Engineering bay"
-roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering."
+roomID = "eng_corridor5"
+roomDescription = "The halls of engineering are nice and wide, if rather bland with industrial plating and support beams. Scattered on either side of the hallway are all sorts of construction equipment, materials, and the odd cargo loader or forklift. Whatever purpose it all has, it means you get to have plenty of things to sneak behind."
 roomColor = 6
 gridColor = 5
 loctag_EngineersEncounter = true
@@ -197,7 +238,11 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -576, 128 )
 roomName = "Engineering bay"
-roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering."
+roomID = "eng_near_storage"
+roomDescription = "This side hall is more of a smaller warehouse packed floor to ceiling with building materials, Panels, Pipes, Glass, sadly empty lockers. There’s even a pallet of spare toilets.
+Still not large enough for a warehouse, more like a furniture store showcase, actually.
+
+A door is unmarked yet unlocked and vulnerable to the west."
 roomColor = 6
 gridColor = 5
 loctag_EngineersEncounter = true
@@ -223,7 +268,8 @@ lootEveryXDays = 7
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -512, 192 )
 roomName = "Engineering bay"
-roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering."
+roomID = "eng_corridor6"
+roomDescription = "The halls of engineering are nice and wide, if rather bland with industrial plating and support beams. Scattered on either side of the hallway are all sorts of construction equipment, materials, and the odd cargo loader or forklift. Whatever purpose it all has, it means you get to have plenty of things to sneak behind."
 roomColor = 6
 gridColor = 5
 loctag_EngineersEncounter = true
@@ -234,7 +280,7 @@ self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -512, 256 )
 roomName = "Engineering bay"
 roomID = "eng_nearnura"
-roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering."
+roomDescription = "The halls of engineering are nice and wide, if rather bland with industrial plating and support beams. Scattered on either side of the hallway are all sorts of construction equipment, materials, and the odd cargo loader or forklift. Whatever purpose it all has, it means you get to have plenty of things to sneak behind."
 roomColor = 6
 gridColor = 5
 loctag_EngineersEncounter = true
@@ -245,7 +291,7 @@ self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -576, 256 )
 roomName = "Robotics lab"
 roomID = "eng_robotics"
-roomDescription = "An abandoned robotics lab."
+roomDescription = "An abandoned robotics lab"
 roomSprite = 4
 roomColor = 6
 gridColor = 5
@@ -256,7 +302,9 @@ self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -256, 64 )
 roomName = "Break room"
 roomID = "eng_breakroom"
-roomDescription = "This is clearly the room where engineers go when they take a break. It features a board with some notes, a few sofas and some other furniture."
+roomDescription = "This is where the engineers come in to take a break. It’s a bit cramped, but there are some sofas, a lunch table and bulletin board with pins for all sorts of social events, work orders, reminders to buy more coffee and snacks, and the staff’s BattleGalaxy 55,000 competition.
+
+The vending machines won’t take your worthless Inmate Work Credits, sadly."
 canEast = false
 roomColor = 6
 gridColor = 5
@@ -266,7 +314,8 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -384, -64 )
 roomName = "Engineering bay"
-roomDescription = "Just a corridor that leads to many other rooms. Walls feature a yellow trim, showing that you are in engineering."
+roomID = "eng_corridor_blue1"
+roomDescription = "This hallway leads back out into the usual cavern walls of the prison. Metal floors stretch out over top of the cleared out tunnels leading to a series of grated catwalks and stilted platforms. A series of light poles follow the path into the darkness."
 roomColor = 6
 gridColor = 5
 loctag_EngineersEncounter = true
@@ -276,7 +325,8 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -384, -128 )
 roomName = "Engineering bay"
-roomDescription = "A corridor that consist out of a catwalk going through a rocky cave. This cave seems to be isolated from space, letting you breathe."
+roomID = "eng_corridor_blue2"
+roomDescription = "The size of this cave shrinks down to a narrow tunnel as you continue down it. This tunnel is really only able to fit you and the catwalk you're standing on. The slight rattling sounds of your footsteps on the catwalks and the light poles are the only thing to accompany you."
 roomColor = 6
 gridColor = 5
 population = 2
@@ -285,7 +335,8 @@ population = 2
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -384, -192 )
 roomName = "Engineering bay"
-roomDescription = "A corridor that consist out of a catwalk going through a rocky cave. This cave seems to be isolated from space, letting you breathe."
+roomID = "eng_corridor_blue3"
+roomDescription = "The claustrophobic tunnel continues further down to a bend off to the west. Despite the size, the sounds of heavy machinery reverb through the tunnels’ walls here."
 roomColor = 6
 gridColor = 5
 population = 2
@@ -295,9 +346,8 @@ self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -448, -192 )
 roomName = "Engineering bay"
 roomID = "eng_neartransmitter"
-roomDescription = "A corridor that consist out of a catwalk going through a rocky cave. This cave seems to be isolated from space, letting you breathe.
-
-This is where the corridor ends. Before you is a giant old metal door that you can't seem to open no matter how you try. Near the door there are a few signs that tell you that there is a dangerous structure behind."
+roomDescription = "This is where the tunnel ends. Before you is the outside of a thick cylindrical wall with a bulky metal door that you can't seem to open no matter how you try. The entire entrance is marked with warning labels and signs saying there are a lot of dangerous things with all sorts of interesting ways to kill you. 
+A number of safety and maintenance check-up clipboards hang on the railing of the catwalk, with the one labeled \"Emergency Singularity Ejector\" being the one stamped the most out of the rest."
 roomColor = 6
 gridColor = 5
 
@@ -306,7 +356,7 @@ self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( -512, -192 )
 roomName = "Bluespace transmitter"
 roomID = "eng_bluespacetransmitter"
-roomDescription = "A huge round room with the bluespace transmitter. In the middle of the room there is a big bluespace crystal shining."
+roomDescription = "A huge cylindrical room with the bluespace transmitter. This transmission center is covered in all sorts of terminals, communication servers, and fancy looking computer stuff. Looking out through the glass of the control center, the middle of the room is a large bluespace crystal installed on the top of an antenna tower with wires from around the room all snaking up to the central tower. A good sized radar dish looks like it has been embedded into the ceiling, pointing down at the crystal."
 canEast = false
 roomSprite = 4
 roomColor = 2
@@ -318,9 +368,12 @@ self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -192, 64 )
 roomName = "Workshop"
 roomID = "eng_workshop"
-roomDescription = "A place where engineers work. Features lots of machinery.
+roomDescription = "This workshop has been bored into a nook in the enterance to Engineering. There are a bunch of bins, crates, canisters and trash cans all scattered around. Rather lacking in loose tools too. 
 
-Heavily monitored by security cameras."
+You have no idea what it's all for, maybe its all just the work no one wants to do. 
+That or it all wont fit in the door.
+
+Your best actual guess is either a repair depot or some kind of salvage yard."
 roomColor = 6
 population = 2
 
@@ -329,7 +382,7 @@ self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 64, 0 )
 roomName = "Mineshafts"
 roomID = "mining_taviroom"
-roomDescription = "A maintenance area that has some old equipment, most of it is broken."
+roomDescription = "A decrepit storage room of all sorts of dusty crates, scrap electronics, and broken mining equipment. Everywhere you look, it all seems somehow beyond worthless."
 roomColor = 8
 
 [node name="MiningShafts" parent="." index="31" instance=ExtResource( 2 )]
@@ -337,9 +390,9 @@ self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 0, -64 )
 roomName = "Mineshafts"
 roomID = "mining_shafts_entering"
-roomDescription = "You see a little area where the mining equipment is stored.
+roomDescription = "Pushed up against the steel wall of the prison is a large area with all sorts of holographic screens, showing statistics, ore prices, inmate status... a whole bunch of data for a mineshaft. Under them, a large terminal and reception desk is where inmates clock in and recieve their mining gear. The opposite side has the same but for returning inmates to turn in their gear and get their credits.
 
-Behind it are the caves where the inmates work."
+Off into the distance are the mines proper, the concrete and metal give way to the natural caves and tunnels of the mines."
 roomSprite = 4
 roomColor = 7
 population = 3

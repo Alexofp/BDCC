@@ -16,6 +16,7 @@ var bellyMaxSizeModifier: float = 1.0
 
 # Difficulty options
 var hardStruggleEnabled: bool = false
+var smartLockRarity: String = "normal" # never veryrare rare normal often veryoften bdsmslut
 
 var shouldScaleUI: bool = true
 var uiScaleMultiplier = 1.0
@@ -69,6 +70,7 @@ func resetToDefaults():
 	impregnationChanceModifier = 100
 	bellyMaxSizeModifier = 1.0
 	hardStruggleEnabled = false
+	smartLockRarity = "normal"
 	shouldScaleUI = true
 	uiScaleMultiplier = 1.0
 	showSpeakerName = true
@@ -151,6 +153,9 @@ func getBellyMaxSizeModifier() -> float:
 
 func isHardStruggleEnabled():
 	return hardStruggleEnabled
+
+func getSmartLockRarity():
+	return smartLockRarity
 
 func shouldShowSpeakerName():
 	return showSpeakerName
@@ -333,6 +338,22 @@ func getChangeableOptions():
 					"id": "hardStruggleEnabled",
 					"type": "checkbox",
 					"value": hardStruggleEnabled
+				},
+				{
+					"name": "Smart Lock rarity",
+					"description": "How often will NPCs add special smart-locked BDSM gear on the player.",
+					"id": "smartLockRarity",
+					"type": "list",
+					"value": smartLockRarity,
+					"values": [
+						["never", "Never"],
+						["veryrare", "Very rare"],
+						["rare", "Rare"],
+						["normal", "Normal"],
+						["often", "Often"],
+						["veryoften", "Very often"],
+						["bdsmslut", "BDSM SLUT"],
+					]
 				},
 			]
 		},
@@ -767,6 +788,8 @@ func applyOption(categoryID, optionID, value):
 	if categoryID == "difficulty":
 		if optionID == "hardStruggleEnabled":
 			hardStruggleEnabled = value
+		if optionID == "smartLockRarity":
+			smartLockRarity = value
 	
 	if(categoryID == "other"):
 		if(optionID == "fetchLatestRelease"):
@@ -851,6 +874,7 @@ func saveData():
 		"bellySizeDependsOnLitterSize": bellySizeDependsOnLitterSize,
 		"bellyMaxSizeModifier": bellyMaxSizeModifier,
 		"hardStruggleEnabled": hardStruggleEnabled,
+		"smartLockRarity": smartLockRarity,
 		"shouldScaleUI": shouldScaleUI,
 		"uiScaleMultiplier": uiScaleMultiplier,
 		"uiButtonSize": uiButtonSize,
@@ -897,6 +921,7 @@ func loadData(data):
 	bellySizeDependsOnLitterSize = loadVar(data, "bellySizeDependsOnLitterSize", false)
 	bellyMaxSizeModifier = loadVar(data, "bellyMaxSizeModifier", 1.0)
 	hardStruggleEnabled = loadVar(data, "hardStruggleEnabled", false)
+	smartLockRarity = loadVar(data, "smartLockRarity", "normal")
 	shouldScaleUI = loadVar(data, "shouldScaleUI", true)
 	uiScaleMultiplier = loadVar(data, "uiScaleMultiplier", 1.0)
 	uiButtonSize = loadVar(data, "uiButtonSize", 0)

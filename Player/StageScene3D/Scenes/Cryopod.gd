@@ -27,6 +27,12 @@ func playAnimation(animID, _args = {}):
 		$CPUParticles.visible = false
 		$Sprite3D.visible = false
 		$Hose.visible = false
+	else:
+		$MeshInstance.visible = true
+		$MeshInstance2.visible = true
+		$CPUParticles.visible = true
+		$Sprite3D.visible = true
+		$Hose.visible = true
 	
 	
 	if(animID == "idle"):
@@ -36,3 +42,15 @@ func playAnimation(animID, _args = {}):
 
 func getSupportedStates():
 	return ["idle"]
+
+func getVarNpcs():
+	return ["pc"]
+
+func getVarOptions():
+	var options = .getVarOptions()
+	
+	options["nopod"] = {
+		type = "bool",
+	}
+
+	return options

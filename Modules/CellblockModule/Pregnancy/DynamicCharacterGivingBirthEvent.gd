@@ -9,7 +9,7 @@ func registerTriggers(es):
 func react(_triggerID, _args):
 	var npcID = _args[0]
 	var character = getCharacter(npcID)
-	if(character == null || !character.isReadyToGiveBirth()):
+	if(character == null || !character.isReadyToGiveBirth() || !character.supportsDefaultGiveBirthScene()):
 		return false
 	
 	runScene("DynamicCharacterGivingBirthScene", [npcID])

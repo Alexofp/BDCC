@@ -310,7 +310,7 @@ func _run():
 
 		saynn("That was easy.")
 
-		saynn("[say=risha]The shy sofite will work one shift.[/say]")
+		saynn("[say=risha]The shy softie will work one shift.[/say]")
 
 		saynn("She points at you.")
 

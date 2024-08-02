@@ -42,16 +42,29 @@ func _run():
 			addButtonAt(13, "Use key", "Use one of your restraint keys to unlock something", "usekey")
 		else:
 			addDisabledButtonAt(13, "Use key", "You don't have any restraint keys")
-		addButtonAt(14, "Give up", "Stop struggling", "endthescenedidnothing")
+		addButtonAt(14, "Back", "Stop struggling", "endthescenedidnothing")
 		
 		for item in GM.pc.getInventory().getEquppedRestraints():
 			var restraintData: RestraintData = item.getRestraintData()
 			
-			sayn(item.getVisibleName()+", restraint level: "+restraintData.getVisibleLevel(isBlind))
-			#sayn("- Durability: "+restraintData.getVisibleDurability())
-			saynn("- Tightness: "+restraintData.getVisibleTightness()+" ("+restraintData.getTightnessPercentString()+")")
 			
-			if(!restraintData.canStruggle()):
+			#sayn("- Durability: "+restraintData.getVisibleDurability())
+			if(!restraintData.hasSmartLock()):
+				sayn(item.getVisibleName()+", restraint level: "+restraintData.getVisibleLevel(isBlind))
+				saynn("- Tightness: "+restraintData.getVisibleTightness()+" ("+restraintData.getTightnessPercentString()+")")
+			else:
+				sayn(item.getVisibleName()+", SMART-LOCKED")
+				var smartLock:SmartLockBase = restraintData.getSmartLock()
+				var canBeSimplyRemoved = smartLock.canBeSimpleRemoved()
+				saynn("- "+smartLock.getName()+": "+smartLock.getUnlockDescription()+(("\nUNLOCKED. Can be removed") if canBeSimplyRemoved else ""))
+				if(canBeSimplyRemoved):
+					var minigameResult = MinigameResult.new()
+					minigameResult.score = 1.0
+					minigameResult.instantUnlock = true
+					addButton(item.getVisibleName(), "Take off this restraint", "struggleAgainst", [item.getUniqueID(), minigameResult])
+				continue
+			
+			if(!restraintData.canStruggleFinal()):
 				continue
 			
 			if(GM.pc.getStamina() > 0):
@@ -64,11 +77,25 @@ func _run():
 		
 	if(state == "usekey"):
 		var keyAmount = GM.pc.getInventory().getAmountOf("restraintkey")
-		saynn("You have "+str(keyAmount)+" "+Util.multipleOrSingularEnding(keyAmount, "key")+". Each one can unlock one piece of gear.")
+		saynn("You have "+str(keyAmount)+" "+Util.multipleOrSingularEnding(keyAmount, "key")+". Each one can unlock one piece of gear (Unless it has a smart-lock attached to it).")
 		saynn("Which restraint do you wanna unlock.")
 
 		for item in GM.pc.getInventory().getEquppedRestraints():
 			var restraintData: RestraintData = item.getRestraintData()
+			if(restraintData.hasSmartLock()):
+				var smartLock:SmartLockBase = restraintData.getSmartLock()
+				
+				if(!smartLock.canBeUnlockedWithKeys()):
+					addDisabledButton(item.getVisibleName(), "The SmartLock on this restraint can not be unlocked with restraint keys..")
+					continue
+				
+				var howManyKeysToUnlock = smartLock.getKeysAmountToUnlock()
+				if(keyAmount >= howManyKeysToUnlock):
+					addButton(item.getVisibleName(), "Restraint keys required to unlock: "+str(howManyKeysToUnlock), "dounlock", [item.getUniqueID()])
+				else:
+					addDisabledButton(item.getVisibleName(), "Restraint keys required to unlock: "+str(howManyKeysToUnlock))
+				continue
+			
 			if(!restraintData.canUnlockWithKey()):
 				addDisabledButton(item.getVisibleName(), "This restraint doesn't seem to have a keyhole")
 				continue
@@ -163,7 +190,7 @@ func _run():
 		
 		addButton("Continue", "Good", "checkifokay")
 
-func onMinigameCompleted(result):
+func onMinigameCompleted(result:MinigameResult):
 	GM.main.pickOption("struggleAgainst", [restraintID, result])
 		
 func _react(_action: String, _args):
@@ -193,39 +220,30 @@ func _react(_action: String, _args):
 	if(_action == "struggleAgainst"):
 		var item = GM.pc.getInventory().getItemByUniqueID(_args[0])
 		var restraintData: RestraintData = item.getRestraintData()
-		var minigameStatus = 1.0
-		var finalMinigameStatus = 1.0
 		
-		var instantUnlock = false
-		var fatallFail = false
+		var minigameResult:MinigameResult
 		if(_args.size() > 1):
-			finalMinigameStatus = float(_args[1])
+			minigameResult = _args[1]
 			
-			if(float(_args[1]) >= 100.0):
-				instantUnlock = true
-				finalMinigameStatus = 1.0
-			var minigameResult = float(_args[1])
-			minigameStatus = pow(minigameResult, 1.5) * 2.0
-			if(minigameResult >= 1.0 && GM.pc.hasPerk(Perk.BDSMBetterStruggling)):
-				minigameStatus *= 2.0
-			if float(_args[1]) < 0.0:
-				fatallFail = true
-				minigameStatus = -pow(-minigameResult, 1.5) * 2.0
-				finalMinigameStatus = 0.0
+			if(minigameResult.score >= 1.0 && GM.pc.hasPerk(Perk.BDSMBetterStruggling)):
+				minigameResult.score *= 2.0
+		else:
+			minigameResult = MinigameResult.new()
+			minigameResult.score = 1.0
+		
+		var minigameScore:float = minigameResult.score
+		var instantUnlock:bool = minigameResult.instantUnlock
+		var fatallFail:bool = minigameResult.failedHard
 		
 		var damage = 0.0
 		var addLust = 0
 		var addPain = 0
 		var addStamina = 0
 
-		var struggleData
-		if fatallFail:
-			struggleData = restraintData.doFailingStruggle(GM.pc, minigameStatus)
-		else:
-			struggleData = restraintData.doStruggle(GM.pc, minigameStatus)
+		var struggleData = restraintData.doStruggle(GM.pc, minigameResult)
 		
 		if(struggleData.has("damage")):
-			damage = struggleData["damage"] * abs(minigameStatus)
+			damage = struggleData["damage"]
 			if(damage > 0.0 && instantUnlock):
 				damage = 1.0
 		if(struggleData.has("lust") && struggleData["lust"] > 0):
@@ -259,7 +277,7 @@ func _react(_action: String, _args):
 			addMessage("You lost "+str(Util.roundF(-damage*100.0, 1))+"% of progress")
 		if(damage > 0.0):
 			restraintData.takeDamage(damage)
-			addMessage("You made "+str(Util.roundF(damage*100.0, 1))+"% of progress ("+str(Util.roundF(finalMinigameStatus*100.0, 1))+"% efficiency)")
+			addMessage("You made "+str(Util.roundF(damage*100.0, 1))+"% of progress ("+str(Util.roundF(minigameScore*100.0, 1))+"% efficiency)")
 		if(addLust != 0):
 			addLust = GM.pc.receiveDamage(DamageType.Lust, addLust)
 			addMessage("You received "+str(addLust)+" lust")
@@ -318,7 +336,11 @@ func _react(_action: String, _args):
 		var item = GM.pc.getInventory().getItemByUniqueID(unlockedRestraintID)
 		var restraintData: RestraintData = item.getRestraintData()
 		
-		GM.pc.getInventory().removeXOfOrDestroy("restraintkey", 1)
+		var howManyKeysToRemove:int = 1
+		if(restraintData.hasSmartLock()):
+			howManyKeysToRemove = restraintData.getSmartLock().getKeysAmountToUnlock()
+		
+		GM.pc.getInventory().removeXOfOrDestroy("restraintkey", howManyKeysToRemove)
 		if(!GM.pc.hasBlockedHands() && !GM.pc.hasBoundArms()):
 			if(restraintData == null || restraintData.alwaysBreaksWhenStruggledOutOf()):
 				GM.pc.getInventory().removeEquippedItem(item)

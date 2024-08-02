@@ -137,3 +137,18 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["tease", "inside", "sex", "fast"]
+
+func getVarNpcs():
+	return ["pc", "npc", "npc2"]
+
+func getVarOptions():
+	var options = .getVarOptions()
+	
+	options["onlyLeft"] = {
+		type = "bool",
+	}
+	options["onlyRight"] = {
+		type = "bool",
+	}
+	
+	return options

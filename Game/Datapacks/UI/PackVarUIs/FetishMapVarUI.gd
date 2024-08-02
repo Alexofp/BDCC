@@ -29,5 +29,7 @@ func setFetishMapValue(_value):
 	updateMap()
 
 func setData(_dataLine:Dictionary):
+	if(_dataLine.has("name")):
+		$Label.text = (_dataLine["name"])
 	if(_dataLine.has("value")):
 		setFetishMapValue(_dataLine["value"])

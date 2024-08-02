@@ -11,7 +11,7 @@ func _init():
 
 func _run():
 	if(state == ""):
-		var quests = GM.QS.getQuests()
+		var quests = GM.QS.getAllQuests()
 		
 		var mainQuests = []
 		var sideQuests = []

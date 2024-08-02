@@ -34,7 +34,7 @@ func alwaysBreaksWhenStruggledOutOf():
 func getLevelDamage():
 	return 0.05
 
-func doStruggle(_pc, _minigame):
+func doStruggle(_pc, _minigame:MinigameResult):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()
@@ -47,16 +47,20 @@ func doStruggle(_pc, _minigame):
 	var damage = 0
 	var stamina = 0
 	
-	if(_legsFree):
+	if(failChanceLowScore(_pc, 10, _minigame)):
+		text = "{user.name} tries to wiggle {user.his} whole body but one wrong move makes you [b]lose a lot of progress[/b]!"
+		damage = -0.3
+		stamina = 70
+	elif(_legsFree):
 		text = "{user.name} wiggles {user.his} whole body to try to escape."
-		damage = calcDamage(_pc)
+		damage = calcDamage(_pc, _minigame)
 		stamina = 70
 	else:
 		text = "{user.name} helplessly wiggles {user.his} body, having {user.his} legs restrained makes this pretty much uselss."
-		damage = calcDamage(_pc, 0.5)
+		damage = calcDamage(_pc, _minigame, 0.5)
 		stamina = RNG.randi_range(70, 90)
 		
-	if(luckChance(_pc, 1)):
+	if(luckChance(_pc, 1) && damage > 0.0):
 		text += " {user.name} managed to free one of {user.his} hands!"
 		damage = max(0.5, damage)
 	elif(failChance(_pc, 10)):

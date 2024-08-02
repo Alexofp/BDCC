@@ -22,6 +22,12 @@ func getBuffs():
 func getTags():
 	return [ItemTag.BDSMRestraint]
 
+func getPrice():
+	return 30
+
+func getSellPrice():
+	return 25
+
 func isRestraint():
 	return true
 

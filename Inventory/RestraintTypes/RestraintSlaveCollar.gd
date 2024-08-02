@@ -30,8 +30,16 @@ func canBeEasilyRemovedByDom():
 
 func saveData():
 	var data = {}
-
+	data["aiWontResist"] = aiWontResist
+	
+	if(smartLock != null):
+		data["smartLock"] = {
+			id = smartLock.id,
+			data = smartLock.saveData(),
+		}
 	return data
 	
 func loadData(_data):
-	pass
+	if(_data.has("aiWontResist")):
+		aiWontResist = SAVE.loadVar(_data, "aiWontResist", false)
+	loadSmartLock(_data)

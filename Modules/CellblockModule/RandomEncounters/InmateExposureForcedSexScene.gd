@@ -94,6 +94,7 @@ func _run():
 			
 			addButton("Agree", "Let them have it their way with you", "startsexsubby")
 			addButton("Decline", "You’d rather not get fucked", "decline")
+			addButton("Attack", "Show them that it was a bad idea", "attack")
 
 		# (mean version)
 		if(npcVariation == "mean"):

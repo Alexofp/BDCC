@@ -159,7 +159,7 @@ func getSupportedStatesPuppy():
 	return ["stand", "walk", "sit", "paw", "back", "sad"]
 
 func getSupportedStatesSolo():
-	return ["walk", "jog", "stand", "kneel", "defeat", "sit", "bite", "block", "dodge", "hurt", "kick", "punch", "allfours", "crawl", "stunbaton", "throw", "holdpistol", "aimpistol", "firepistol", "shiv", "shove", "struggle", "struggle_gag", "struggle_legs"]
+	return ["stand", "walk", "jog", "kneel", "defeat", "sit", "bite", "block", "dodge", "hurt", "kick", "punch", "allfours", "crawl", "stunbaton", "throw", "holdpistol", "aimpistol", "firepistol", "shiv", "shove", "struggle", "struggle_gag", "struggle_legs"]
 
 func addDoll(newdoll):
 	dolls.append(newdoll)
@@ -232,3 +232,47 @@ func startCumPenis(theDoll:Doll3D, howOften:float = 2.5, forceChastity=false):
 		else:
 			if(isDollHard && !theDoll.hiddenPartZones.has(BodypartSlot.Penis)):
 				theDoll.startCumPenis(intensity, howOften, false)
+
+func getVarNpcs():
+	return ["pc"]
+
+func getVarOptions():
+	var result = {}
+	for npcID in getVarNpcs():
+		result[npcID] = {
+			type = "character",
+		}
+	for npcID in getVarNpcs():
+		result[("bodyState" if (npcID == "pc") else (npcID+"BodyState"))] = {
+			type = "bodystate",
+		}
+		result[npcID+"Cum"] = {
+			type = "bool",
+		}
+	
+	return result
+#
+#	return {
+#		"pc": {
+#			type = "character",
+#		},
+#		"npc": {
+#			type = "character",
+#		},
+#		"bodyState": {
+#			type = "bodystate",
+#		},
+#		"npcBodyState": {
+#			type = "bodystate",
+#		},
+#		"pcCum": {
+#			type = "bool",
+#		},
+#		"npcCum": {
+#			type = "bool",
+#		},
+#		"npcAction": {
+#			type = "action",
+#			actions = getSupportedStatesSolo(),
+#		}
+#	}

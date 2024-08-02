@@ -1,0 +1,61 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/UI/AdvancedPickingWindow.gd" type="Script" id=1]
+
+[node name="AdvancedPickingWindow" type="WindowDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 264.0
+margin_top = 144.0
+margin_right = -264.0
+margin_bottom = -144.0
+window_title = "Picking.."
+script = ExtResource( 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 12
+custom_constants/margin_top = 12
+custom_constants/margin_left = 12
+custom_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 740.0
+margin_bottom = 420.0
+
+[node name="FilterEdit" type="LineEdit" parent="MarginContainer/VBoxContainer"]
+margin_right = 728.0
+margin_bottom = 24.0
+placeholder_text = "Filter"
+
+[node name="ItemList" type="ItemList" parent="MarginContainer/VBoxContainer"]
+margin_top = 28.0
+margin_right = 728.0
+margin_bottom = 384.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 388.0
+margin_right = 728.0
+margin_bottom = 408.0
+
+[node name="ConfirmButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 670.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Confirm"
+
+[node name="CancelButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 674.0
+margin_right = 728.0
+margin_bottom = 20.0
+text = "Cancel"
+
+[connection signal="popup_hide" from="." to="." method="_on_AdvancedPickingWindow_popup_hide"]
+[connection signal="text_changed" from="MarginContainer/VBoxContainer/FilterEdit" to="." method="_on_FilterEdit_text_changed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ConfirmButton" to="." method="_on_ConfirmButton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_CancelButton_pressed"]

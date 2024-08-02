@@ -1,0 +1,198 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Game/Datapacks/UI/PackVariables.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Datapacks/UI/Editors/DatapackQuestEditor.gd" type="Script" id=2]
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/UI/VarListEntry.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/DatapackSceneCodeWrapper.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/PossibleCodeBlocksList.tscn" type="PackedScene" id=5]
+
+[node name="DatapackQuestEditor" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 616.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Info" type="VBoxContainer" parent="VBoxContainer/Control/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Control/TabContainer/Info"]
+margin_right = 1272.0
+margin_bottom = 580.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Control/TabContainer/Info/ScrollContainer"]
+margin_right = 1272.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="PackVariables" parent="VBoxContainer/Control/TabContainer/Info/ScrollContainer/VBoxContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1272.0
+margin_bottom = 20.0
+
+[node name="Stages" type="VBoxContainer" parent="VBoxContainer/Control/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Label" type="Label" parent="VBoxContainer/Control/TabContainer/Stages"]
+margin_right = 1272.0
+margin_bottom = 14.0
+text = "Quest stages code"
+align = 1
+
+[node name="HBoxContainer" type="HSplitContainer" parent="VBoxContainer/Control/TabContainer/Stages"]
+margin_top = 18.0
+margin_right = 1272.0
+margin_bottom = 580.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Control/TabContainer/Stages/HBoxContainer"]
+margin_right = 902.0
+margin_bottom = 562.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StateLabel" type="Label" parent="VBoxContainer/Control/TabContainer/Stages/HBoxContainer/VBoxContainer"]
+margin_right = 902.0
+margin_bottom = 14.0
+text = "Code"
+align = 1
+
+[node name="DatapackQuestCodeWrapper" parent="VBoxContainer/Control/TabContainer/Stages/HBoxContainer/VBoxContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 18.0
+margin_right = 902.0
+margin_bottom = 562.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/Control/TabContainer/Stages/HBoxContainer"]
+margin_left = 914.0
+margin_right = 1272.0
+margin_bottom = 562.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="Label" type="Label" parent="VBoxContainer/Control/TabContainer/Stages/HBoxContainer/VBoxContainer2"]
+margin_right = 358.0
+margin_bottom = 14.0
+text = "Code blocks"
+align = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Control/TabContainer/Stages/HBoxContainer/VBoxContainer2"]
+margin_top = 18.0
+margin_right = 358.0
+margin_bottom = 562.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PossibleCodeBlocksList" parent="VBoxContainer/Control/TabContainer/Stages/HBoxContainer/VBoxContainer2/ScrollContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 358.0
+margin_bottom = 544.0
+filter = 4
+favKind = "quest"
+
+[node name="Flags" type="VBoxContainer" parent="VBoxContainer/Control/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Label3" type="Label" parent="VBoxContainer/Control/TabContainer/Flags"]
+margin_right = 1272.0
+margin_bottom = 14.0
+text = "Datapack Flags (global variables):"
+align = 1
+
+[node name="Label4" type="Label" parent="VBoxContainer/Control/TabContainer/Flags"]
+margin_top = 18.0
+margin_right = 1272.0
+margin_bottom = 32.0
+text = "Add new datapack flag"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/Control/TabContainer/Flags"]
+margin_top = 36.0
+margin_right = 1272.0
+margin_bottom = 60.0
+
+[node name="AddFlagButton" type="Button" parent="VBoxContainer/Control/TabContainer/Flags/HBoxContainer3"]
+margin_right = 37.0
+margin_bottom = 24.0
+text = "Add"
+
+[node name="NewFlagLineEdit" type="LineEdit" parent="VBoxContainer/Control/TabContainer/Flags/HBoxContainer3"]
+margin_left = 41.0
+margin_right = 1272.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+placeholder_text = "name"
+
+[node name="Label5" type="Label" parent="VBoxContainer/Control/TabContainer/Flags"]
+margin_top = 64.0
+margin_right = 1272.0
+margin_bottom = 78.0
+text = "Flags:"
+
+[node name="ScrollContainer2" type="ScrollContainer" parent="VBoxContainer/Control/TabContainer/Flags"]
+margin_top = 82.0
+margin_right = 1272.0
+margin_bottom = 580.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="FlagList" type="VBoxContainer" parent="VBoxContainer/Control/TabContainer/Flags/ScrollContainer2"]
+margin_right = 1272.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="VarListEntry" parent="VBoxContainer/Control/TabContainer/Flags/ScrollContainer2/FlagList" instance=ExtResource( 3 )]
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+margin_top = 620.0
+margin_right = 1280.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 0, 100 )
+columns = 5
+
+[node name="SaveButton" type="Button" parent="VBoxContainer/GridContainer"]
+margin_right = 256.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Save"
+
+[connection signal="onVariableChange" from="VBoxContainer/Control/TabContainer/Info/ScrollContainer/VBoxContainer/PackVariables" to="." method="_on_PackVariables_onVariableChange"]
+[connection signal="pressed" from="VBoxContainer/Control/TabContainer/Flags/HBoxContainer3/AddFlagButton" to="." method="_on_AddFlagButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/GridContainer/SaveButton" to="." method="_on_SaveButton_pressed"]

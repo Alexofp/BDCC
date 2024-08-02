@@ -38,16 +38,17 @@ func playAnimation(animID, _args = {}):
 		firstDoll = _args["pc"]
 	doll.prepareCharacter(firstDoll)
 	
-	var theChar = GlobalRegistry.getCharacter(firstDoll)
-	if(theChar != null):
-		var ropeColor:Color = theChar.getRopeHarnessColor()
-		var ropes = [$Ropes/CurveRenderer,$Ropes/CurveRenderer2,$Ropes/CurveRenderer3,$Ropes/CurveRenderer4,$Ropes/CurveRenderer5]
-		var ropeMat = preload("res://Player/Player3D/Chains/RopeMaterial.tres")
-		ropeMat = ropeMat.duplicate()
-		ropeMat.albedo_color = ropeColor
-		for rope in ropes:
-			var theRope:CurveRenderer = rope
-			theRope.material_override = ropeMat
+	if(firstDoll is String):
+		var theChar = GlobalRegistry.getCharacter(firstDoll)
+		if(theChar != null):
+			var ropeColor:Color = theChar.getRopeHarnessColor()
+			var ropes = [$Ropes/CurveRenderer,$Ropes/CurveRenderer2,$Ropes/CurveRenderer3,$Ropes/CurveRenderer4,$Ropes/CurveRenderer5]
+			var ropeMat = preload("res://Player/Player3D/Chains/RopeMaterial.tres")
+			ropeMat = ropeMat.duplicate()
+			ropeMat.albedo_color = ropeColor
+			for rope in ropes:
+				var theRope:CurveRenderer = rope
+				theRope.material_override = ropeMat
 	
 	#var secondDoll = "pc"
 	#if(_args.has("npc")):
@@ -92,3 +93,6 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["idle", "struggle"]
+
+func getVarNpcs():
+	return ["pc"]

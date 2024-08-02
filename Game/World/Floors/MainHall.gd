@@ -67,7 +67,7 @@ func _on_MainElevator_onReact(room, key):
 
 
 func _on_MainVendomatRoom_onEnter(room):
-	room.saynn("You see a working vendomat nearby")
+	room.saynn("This corner has a working Vendo-Mat here. It has been battered to hell, but it looks like it will work fine.")
 	
 	room.addButton("Vendomat", "Approach it", "vendomat")
 

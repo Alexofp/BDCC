@@ -105,3 +105,15 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["idle"]
+
+func getVarNpcs():
+	return ["pc", "npc"]
+
+func getVarOptions():
+	var options = .getVarOptions()
+	
+	options["flipNPC"] = {
+		type = "bool",
+	}
+	
+	return options

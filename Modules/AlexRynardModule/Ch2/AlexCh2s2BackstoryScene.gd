@@ -1131,7 +1131,7 @@ func _run():
 
 		addButton("Continue", "See how it looks", "alex_gets_ponytail")
 	if(state == "alex_gets_ponytail"):
-		playAnimation(StageScene.Hug, "hug", {pc="alexrynard", npc="lin_alex"})
+		playAnimation(StageScene.Hug, "hug", {pc="alexrynardyp", npc="lin_alex"})
 		saynn("Her touch still feels so nice.. makes you feel calmer.. the noise in your head clearing up just from her being near.")
 
 		saynn("[say=alexrynard]Thanks. I can actually see how pretty you are now.[/say]")
@@ -1162,7 +1162,7 @@ func _run():
 
 		addButton("Make her", "Sounds like an invitation", "alex_makes_lin")
 	if(state == "alex_makes_lin"):
-		playAnimation(StageScene.Duo, "stand", {pc="alexrynard", npc="lin_alex", npcBodyState={underwear=true}})
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynardyp", npc="lin_alex", npcBodyState={underwear=true}})
 		saynn("Lin raises her chin high as you get a grasp on her neck, her bratty eyes follow your other hand as you begin to strip her uniform.")
 
 		saynn("[say=lin_alex]I could stop you at any point..[/say]")
@@ -1181,7 +1181,7 @@ func _run():
 
 		addButton("Spank", "Punish her for disobeying", "spank_lin_for_brat")
 	if(state == "spank_lin_for_brat"):
-		playAnimation(StageScene.Duo, "stand", {pc="alexrynard", npcAction="hurt", npc="lin_alex", npcBodyState={underwear=true}})
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynardyp", npcAction="hurt", npc="lin_alex", npcBodyState={underwear=true}})
 		saynn("You wait a solid five seconds to give the brat enough time to consider her actions.. But after that.. all bets are off.")
 
 		saynn("Lin gasps softly as your hand finds her neck again before the second one delivers a smack on her cute butt, causing the foxy to stifle out a moan.")
@@ -1209,7 +1209,7 @@ func _run():
 		addButton("Hurt her", "Be rough with Lin", "do_be_rough_with_lin")
 		addButton("Cuddle her", "Be very soft with Lin", "do_be_soft_with_lin")
 	if(state == "do_be_soft_with_lin"):
-		playAnimation(StageScene.Cuddling, "idle", {pc="alexrynard", npc="lin_alex", bodyState={underwear=true}, npcBodyState={underwear=true}})
+		playAnimation(StageScene.Cuddling, "idle", {pc="alexrynardyp", npc="lin_alex", bodyState={underwear=true}, npcBodyState={underwear=true}})
 		saynn("[say=alexrynard]I'm not gonna hurt you, silly.[/say]")
 
 		saynn("Lin lowers her gaze.")
@@ -1244,7 +1244,7 @@ func _run():
 
 		addButton("Sleep", "Sleep while embracing Lin", "do_sleep_with_lin")
 	if(state == "do_be_rough_with_lin"):
-		playAnimation(StageScene.Choking, "tease", {pc="alexrynard", npc="lin_alex", bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.Choking, "tease", {pc="alexrynardyp", npc="lin_alex", bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("[say=alexrynard]Alright, little slut. You asked for it.[/say]")
 
 		saynn("Suddenly, you pin Lin against one of the walls of your apartment, making her gasp. You steal that gasp by increasing pressure on her throat, your other hand quickly stripping your uniform and exposing your cock that is already peeking out of its sheath.")
@@ -1269,7 +1269,7 @@ func _run():
 
 		addButton("Fuck her", "Time for some action", "do_fuck_lin_rough")
 	if(state == "do_fuck_lin_rough"):
-		playAnimation(StageScene.Choking, "sex", {pc="alexrynard", npc="lin_alex", bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.Choking, "sex", {pc="alexrynardyp", npc="lin_alex", bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("One rough motion of your hips causes your cock to spread that pussy wide. The slut instantly clenches as you ram your whole length inside.. So tight. Lin tries to moan.. but that's when your hand starts choking her for real.")
 
 		saynn("[say=lin_alex]Nh-h..[/say]")
@@ -1292,7 +1292,7 @@ func _run():
 
 		addButton("Knot Lin", "Breed that slut", "do_knot_lin_rough")
 	if(state == "do_knot_lin_rough"):
-		playAnimation(StageScene.Choking, "inside", {pc="alexrynard", npc="lin_alex", bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.Choking, "inside", {pc="alexrynardyp", npc="lin_alex", bodyState={exposedCrotch=true,hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("Just when Lin begins to get weaker from the lack of air, you wake her up by suddenly shoving your whole length down her cunt, your member breaking into her needy womb, creating a visible bump on her belly.")
 
 		saynn("[say=lin_alex]F-fu-uck-k~..[/say]")
@@ -1319,7 +1319,7 @@ func _run():
 
 		addButton("Floor", "Lie down on the floor", "do_lay_down_after_breed")
 	if(state == "do_lay_down_after_breed"):
-		playAnimation(StageScene.Sleeping, "sleep", {pc="alexrynard", npc="lin_alex", bodyState={underwear=true}, npcBodyState={exposedCrotch=true}})
+		playAnimation(StageScene.Sleeping, "sleep", {pc="alexrynardyp", npc="lin_alex", bodyState={underwear=true}, npcBodyState={exposedCrotch=true}})
 		saynn("You wait for the knot to deflate enough and then yank it out, causing Lin's used pussy to start dripping your cum onto the floor. Who cares, the whole apartment is a mess anyway.")
 
 		saynn("[say=lin_alex]Ah..[/say]")
@@ -1330,7 +1330,7 @@ func _run():
 
 		addButton("Sleep", "Sleep while embracing Lin", "do_sleep_with_lin")
 	if(state == "do_sleep_with_lin"):
-		playAnimation(StageScene.Sleeping, "sleep", {pc="alexrynard", bodyState={underwear=true}})
+		playAnimation(StageScene.Sleeping, "sleep", {pc="alexrynardyp", bodyState={underwear=true}})
 		removeCharacter("lin_alex")
 		saynn("[say=sen_alex]Beep beep beep beep.[/say]")
 
@@ -1342,7 +1342,7 @@ func _run():
 
 		addButton("Shower", "Take a quick shower", "alex_prepares_before_expo")
 	if(state == "alex_prepares_before_expo"):
-		playAnimation(StageScene.Solo, "stand", {pc="alexrynard"})
+		playAnimation(StageScene.Solo, "stand", {pc="alexrynardyp"})
 		saynn("You take a quick shower and put on your usual uniform. It looks unusually clean, did Lin do that?")
 
 		saynn("You walk up to the bench and start preparing the prototype too.")
@@ -1380,7 +1380,7 @@ func _run():
 		addCharacter("boss_alex")
 		addCharacter("lin_alex")
 		addCharacter("captain")
-		playAnimation(StageScene.Duo, "stand", {pc="alexrynard", npc="boss_alex"})
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynardyp", npc="boss_alex"})
 		saynn("The Expo is happening in a big hangar. Not the one that you used to work in, a much bigger one, giving all the participants plenty of space to showcase their contraption.")
 
 		saynn("And wow, it's getting very crowded already. People all around the galaxy seem to be interested in seeing what the young minds of this generation came up with this time.")
@@ -1504,7 +1504,7 @@ func _run():
 
 		addButton("Showcase", "Present the judges your project", "alex_showcases_project")
 	if(state == "alex_showcases_project"):
-		playAnimation(StageScene.Solo, "stand", {pc="alexrynard"})
+		playAnimation(StageScene.Solo, "stand", {pc="alexrynardyp"})
 		saynn("All the pieces of the exoskeleton are still on the table. You didn't really prepare any speeches. Time to wing it.")
 
 		saynn("[say=alexrynard]Um.. welcome everyone. Gonna be honest, my project is not as big as that fancy spaceship. But I'm pretty sure mine is more useful. Hopefully by the end of my little presentation, you will see why.[/say]")
@@ -1525,7 +1525,7 @@ func _run():
 
 		addButton("Wear it", "Wear your exoskeleton", "alex_wears_exosuit")
 	if(state == "alex_wears_exosuit"):
-		playAnimation(StageScene.Solo, "stand", {pc="alexrynard"})
+		playAnimation(StageScene.Solo, "stand", {pc="alexrynardyp"})
 		saynn("You grab one of the pieces off the table and then just press it against your wrist. And, seconds later, it just latches onto it, using motors and pistons to expand itself onto your whole arm before fastening itself tight.")
 
 		saynn("Some of the public is already kinda impressed.")
@@ -1583,7 +1583,7 @@ func _run():
 		addButton("Continue", "See what happens next", "alex_impresses_judges")
 	if(state == "alex_impresses_judges"):
 		addCharacter("sen_alex")
-		playAnimation(StageScene.Duo, "stand", {pc="alexrynard", npc="sen_alex"})
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynardyp", npc="sen_alex"})
 		saynn("You whisper something to the exoskeleton.. and it just kinda.. opens up, allowing you to step out of it while the frame itself continues to stand on its own.")
 
 		saynn("[sayMale]It just uses motors to freeze itself, right? Nice trick.[/sayMale]")
@@ -1644,7 +1644,7 @@ func _run():
 
 		addButton("Armwrestling", "Time to teach your ex-boss a lesson", "alex_armwrestles_boss")
 	if(state == "alex_armwrestles_boss"):
-		playAnimation(StageScene.Duo, "stand", {pc="alexrynard", npc="boss_alex"})
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynardyp", npc="boss_alex"})
 		saynn("And so you take the opposite spots around the table. Boss glares at you, clearly mad.")
 
 		saynn("You and him place your elbows on the solid surface.. and grab each other's hands. The public is watching with anticipation, your eyes do manage to find Mister Wright in the crowd too, looks like he is interested in this match. Only Lin is standing a fair distance away.")
@@ -1673,7 +1673,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "bad_stuff_starts")
 	if(state == "bad_stuff_starts"):
-		playAnimation(StageScene.Solo, "stand", {pc="alexrynard"})
+		playAnimation(StageScene.Solo, "stand", {pc="alexrynardyp"})
 		saynn("You take one step back and flex your exoskeleton's muscles again, making the motors whirl louder. The public seems to be amazed.")
 
 		saynn("[say=sen_alex]Um.. something is wrong, Sir..[/say]")
@@ -1733,7 +1733,7 @@ func _run():
 	if(state == "sentinel_kills_lin"):
 		removeCharacter("lin_alex")
 		removeCharacter("sen_alex")
-		playAnimation(StageScene.GivingBirth, "idle", {pc="alexrynard"})
+		playAnimation(StageScene.GivingBirth, "idle", {pc="alexrynardyp"})
 		saynn("Fuck.. it's aiming at Lin.. She is in shock.. You try to yell something.. anything.. but the bone fragments of your spine have shredded your lungs.. stealing your breath and voice.")
 
 		saynn("[say=alexrynard]N-n..h-hh..[/say]")
@@ -1753,7 +1753,7 @@ func _run():
 		removeCharacter("captain")
 		removeCharacter("boss_alex")
 		aimCameraAndSetLocName("alexf_medical")
-		playAnimation(StageScene.Sleeping, "sleep", {pc="alexrynard", bodyState={naked=true}})
+		playAnimation(StageScene.Sleeping, "sleep", {pc="alexrynardyp", bodyState={naked=true}})
 		saynn("It hurts so much.. everything but the body. You hear beeping.. so familiar..")
 
 		saynn("You slowly open your eyes.. the bright sterile light hits your eyes. You're in a medical bed, connected to some equipment, including a pulse monitor.. beep.. beep..")
@@ -1992,15 +1992,15 @@ func _react(_action: String, _args):
 		getCharacter("lin_alex").removeAllRestraints()
 
 	if(_action == "alex_wears_exosuit"):
-		getCharacter("alexrynard").getInventory().equipItem(GlobalRegistry.createItem("AlexExoskeleton"))
+		getCharacter("alexrynardyp").getInventory().equipItem(GlobalRegistry.createItem("AlexExoskeleton"))
 
 	if(_action == "alex_impresses_judges"):
-		getCharacter("alexrynard").resetEquipment()
+		getCharacter("alexrynardyp").resetEquipment()
 
 	if(_action == "alex_armwrestles_boss"):
-		getCharacter("alexrynard").getInventory().equipItem(GlobalRegistry.createItem("AlexExoskeleton"))
+		getCharacter("alexrynardyp").getInventory().equipItem(GlobalRegistry.createItem("AlexExoskeleton"))
 
 	if(_action == "sentinel_kills_lin"):
-		getCharacter("alexrynard").resetEquipment()
+		getCharacter("alexrynardyp").resetEquipment()
 
 	setState(_action)

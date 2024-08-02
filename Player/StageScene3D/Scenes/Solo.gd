@@ -73,3 +73,6 @@ func getChainPoint(_pointID):
 	if(_pointID == "floor"):
 		return $Floor
 	return .getChainPoint(_pointID)
+
+func getVarNpcs():
+	return ["pc"]

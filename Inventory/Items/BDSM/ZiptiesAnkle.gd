@@ -16,7 +16,13 @@ func getTakeOffScene():
 	return "CuffTuggingScene"
 
 func getTags():
-	return [ItemTag.BDSMRestraint]
+	return [ItemTag.BDSMRestraint, ItemTag.SoldByTheAnnouncer]
+
+func getPrice():
+	return 4
+
+func getSellPrice():
+	return 1
 
 func getUnriggedParts(_character):
 	return {

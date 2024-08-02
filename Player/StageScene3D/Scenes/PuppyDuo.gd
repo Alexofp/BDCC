@@ -106,3 +106,19 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return getSupportedStatesSolo()
+
+func getVarNpcs():
+	return ["pc", "npc"]
+
+func getVarOptions():
+	var options = .getVarOptions()
+	
+	options["flipNPC"] = {
+		type = "bool",
+	}
+	options["npcAction"] = {
+		type = "action",
+		actions = getSupportedStatesPuppy(),
+	}
+	
+	return options

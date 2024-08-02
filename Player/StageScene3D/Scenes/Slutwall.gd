@@ -40,3 +40,6 @@ func playAnimation(animID, _args = {}):
 
 func getSupportedStates():
 	return ["idle"]
+
+func getVarNpcs():
+	return ["pc"]

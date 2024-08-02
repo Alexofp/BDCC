@@ -79,3 +79,6 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["crotch"]
+
+func getVarNpcs():
+	return ["pc", "npc"]

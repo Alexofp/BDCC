@@ -43,11 +43,8 @@ var personality:Dictionary = {}
 var fetishes:Dictionary = {}
 var lustInterests:Dictionary = {}
 
-var portrait:Image
-var portraitTexture:ImageTexture
-
-var portraitNaked:Image
-var portraitNakedTexture:ImageTexture
+var portrait:DatapackImage = DatapackImage.new()
+var portraitNaked:DatapackImage = DatapackImage.new()
 
 var lootTableID = "base"
 var lootCreditsChance:float = 50
@@ -55,30 +52,24 @@ var lootCreditsMin:int = 1
 var lootCreditsMax:int = 5
 var lootExtra:Array = []
 
-func createTextures():
-	if(portrait != null):
-		portraitTexture = ImageTexture.new()
-		portraitTexture.create_from_image(portrait, 4)
-	else:
-		portraitTexture = null
-	
-	if(portraitNaked != null):
-		portraitNakedTexture = ImageTexture.new()
-		portraitNakedTexture.create_from_image(portraitNaked, 4)
-	else:
-		portraitNakedTexture = null
+var excludeEncounters:bool = false
+var disableForget:bool = false
+var disableBirth:bool = false
+var disableMeet:bool = false
+
+var restraintDodgeChanceMult:float = 0.9
+var restraintStrugglePower:float = 1.0
 
 func getPortrait(kind:Array):
-	if(portrait == null && portraitNaked == null):
+	if(portrait.isEmpty() && portraitNaked.isEmpty()):
 		return null
 	
 	if(kind.has("naked") && portraitNaked != null):
-		if(portraitNakedTexture == null && portraitNaked != null):
-			createTextures()
-			return portraitNakedTexture
-	if(portraitTexture == null && portrait != null):
-		createTextures()
-	return portraitTexture
+		if(!portraitNaked.isEmpty()):
+			return portraitNaked.getTexture()
+	if(!portrait.isEmpty()):
+		return portrait.getTexture()
+	return null
 
 func getEditorName():
 	return "id="+id+" name="+name
@@ -233,6 +224,20 @@ func getEditVars():
 			int=true,
 			addtoprev = true,
 		},
+		"restraintDodgeChanceMult": {
+			name = "Restraint dodge chance (0.9 = default, <0.9 = harder to tie up, >0.9 = easier to tie up)",
+			type = "number",
+			value = restraintDodgeChanceMult,
+			addtoprev = true,
+			step = 0.01,
+		},
+		"restraintStrugglePower": {
+			name = "Struggle power mult (1 = default, <1 = worse at struggling, >1 = better at struggling)",
+			type = "number",
+			value = restraintStrugglePower,
+			addtoprev = true,
+			step = 0.01,
+		},
 		"perks": {
 			name = "Perks",
 			type = "addRemoveList",
@@ -273,12 +278,39 @@ func getEditVars():
 		"portrait": {
 			name = "Portrait (normal)",
 			type = "image",
-			value = portrait,
+			value = portrait.getImage(),
 		},
 		"portraitNaked": {
 			name = "Portrait (naked)",
 			type = "image",
-			value = portraitNaked,
+			value = portraitNaked.getImage(),
+		},
+		"excludeEncounters": {
+			name = "Exclude from encounters",
+			type = "checkbox",
+			value = excludeEncounters,
+			collapsable = true,
+		},
+		"disableForget": {
+			name = "Disable ability to forget this character",
+			type = "checkbox",
+			value = disableForget,
+			addtoprev = true,
+			noseparator=true,
+		},
+		"disableMeet": {
+			name = "Disable ability to meet this character",
+			type = "checkbox",
+			value = disableMeet,
+			addtoprev = true,
+			noseparator=true,
+		},
+		"disableBirth": {
+			name = "Disable automatic child birth for this character",
+			type = "checkbox",
+			value = disableBirth,
+			addtoprev = true,
+			noseparator=true,
 		},
 	}
 
@@ -341,17 +373,27 @@ func applyEditVar(varid, value):
 	if(varid == "baseStamina"):
 		baseStamina = value
 	if(varid == "portrait"):
-		portrait = value
-		portraitTexture = null
+		portrait.setImage(value)
 	if(varid == "portraitNaked"):
-		portraitNaked = value
-		portraitNakedTexture = null
+		portraitNaked.setImage(value)
 	if(varid == "lootTable"):
 		lootTableID = value["baseTableID"]
 		lootCreditsChance = value["creditsDropChance"]
 		lootCreditsMin = value["creditsMin"]
 		lootCreditsMax = value["creditsMax"]
 		lootExtra = value["customLoot"].duplicate()
+	if(varid == "excludeEncounters"):
+		excludeEncounters = value
+	if(varid == "disableForget"):
+		disableForget = value
+	if(varid == "disableBirth"):
+		disableBirth = value
+	if(varid == "disableMeet"):
+		disableMeet = value
+	if(varid == "restraintDodgeChanceMult"):
+		restraintDodgeChanceMult = value
+	if(varid == "restraintStrugglePower"):
+		restraintStrugglePower = value
 	
 	return false
 
@@ -384,13 +426,19 @@ func saveData():
 		"basePain": basePain,
 		"baseLust": baseLust,
 		"baseStamina": baseStamina,
-		"portrait": (portrait.save_png_to_buffer() if portrait else PoolByteArray()),
-		"portraitNaked": (portraitNaked.save_png_to_buffer() if portraitNaked else PoolByteArray()),
+		"portrait": portrait.saveData(),
+		"portraitNaked": portraitNaked.saveData(),
 		"lootTableID": lootTableID,
 		"lootCreditsChance": lootCreditsChance,
 		"lootCreditsMin": lootCreditsMin,
 		"lootCreditsMax": lootCreditsMax,
 		"lootExtra": lootExtra,
+		"excludeEncounters": excludeEncounters,
+		"disableForget": disableForget,
+		"disableBirth": disableBirth,
+		"disableMeet": disableMeet,
+		"restraintDodgeChanceMult": restraintDodgeChanceMult,
+		"restraintStrugglePower": restraintStrugglePower,
 	}
 
 func loadData(data):
@@ -421,37 +469,22 @@ func loadData(data):
 	basePain = loadVar(data, "basePain", 100)
 	baseLust = loadVar(data, "baseLust", 100)
 	baseStamina = loadVar(data, "baseStamina", 100)
-	portrait = loadImageVar(data, "portrait")
-	portraitNaked = loadImageVar(data, "portraitNaked")
-	portraitTexture = null
-	portraitNakedTexture = null
+	portrait.loadData(loadVar(data, "portrait", PoolByteArray()))
+	portraitNaked.loadData(loadVar(data, "portraitNaked", PoolByteArray()))
 	lootTableID = loadVar(data, "lootTableID", "base")
 	lootCreditsChance = loadVar(data, "lootCreditsChance", 50)
 	lootCreditsMin = loadVar(data, "lootCreditsMin", 1)
 	lootCreditsMax = loadVar(data, "lootCreditsMax", 5)
 	lootExtra = loadVar(data, "lootExtra", [])
+	excludeEncounters = loadVar(data, "excludeEncounters", false)
+	disableForget = loadVar(data, "disableForget", false)
+	disableBirth = loadVar(data, "disableBirth", false)
+	disableMeet = loadVar(data, "disableMeet", false)
+	restraintDodgeChanceMult = loadVar(data, "restraintDodgeChanceMult", 0.9)
+	restraintStrugglePower = loadVar(data, "restraintStrugglePower", 1.0)
 
 func loadVar(_data, thekey, defaultValue = null):
 	if(_data.has(thekey)):
 		return _data[thekey]
 	return defaultValue
 
-func loadImageVar(_data, thekey):
-	var imageData = loadVar(_data, thekey, PoolByteArray())
-	if(imageData != null):
-		if(imageData is Image):
-			return imageData
-		elif(imageData is PoolByteArray):
-			if(imageData.empty()):
-				return null
-			else:
-				var newIm = Image.new()
-				var _ok = newIm.load_png_from_buffer(imageData)
-				if(_ok == OK):
-					return newIm
-				else:
-					return null
-		else:
-			return null
-	else:
-		return null

@@ -2,6 +2,7 @@ extends "res://Game/Datapacks/UI/PackVarUIs/PackVarUIBase.gd"
 
 var isEditing = false
 var thePrefix = ""
+var instantSet = false
 
 var values = []
 var selectedValue = null
@@ -36,6 +37,8 @@ func setSelectedValue(_value):
 func setData(_dataLine:Dictionary):
 	if(_dataLine.has("name")):
 		thePrefix = _dataLine["name"]
+	if(_dataLine.has("instantSet")):
+		instantSet = _dataLine["instantSet"]
 	if(_dataLine.has("values")):
 		values = _dataLine["values"]
 	if(_dataLine.has("value")):
@@ -76,3 +79,17 @@ func _on_Button_pressed():
 func onEditorClose():
 	if(isEditing):
 		_on_Button_pressed()
+
+
+func _on_OptionButton_item_selected(index):
+	if(!instantSet):
+		return
+	if(index < 0 || index >= values.size()):
+		return
+	
+	var selVal = values[index]
+	if(selVal is Array):
+		selVal = selVal[0]
+	
+	selectedValue = selVal
+	triggerChange(selVal)

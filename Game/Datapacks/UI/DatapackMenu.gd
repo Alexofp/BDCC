@@ -2,6 +2,8 @@ extends Control
 onready var datapack_item_list = $DatapackViewer/VBoxContainer/HBoxContainer/DatapackItemList
 onready var datapack_desc_label = $DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer/DatapackDescLabel
 onready var new_pack_confirmation_dialog = $DatapackViewer/NewPackConfirmationDialog
+onready var export_datapack_button = $DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer/ExportDatapackButton
+onready var import_pack_button = $DatapackViewer/VBoxContainer/GridContainer/ImportPackButton
 
 signal onClosePressed
 
@@ -10,6 +12,10 @@ var datapacksList = []
 func _ready():
 	#updateDatapackList()
 	reloadAndUpdatePacks()
+	
+	if(OS.get_name() != "HTML5"):
+		export_datapack_button.visible = false
+		import_pack_button.visible = false
 
 func _on_CloseButton_pressed():
 	emit_signal("onClosePressed")
@@ -30,6 +36,8 @@ func updateDatapackDesc(theDatapack:Datapack):
 	finalText += "id="+theDatapack.id
 	finalText += "\n"+theDatapack.name
 	finalText += "\nAuthor: "+theDatapack.author
+	if(!theDatapack.requiredMods.empty() || !theDatapack.requiredDatapacks.empty()):
+		finalText += "\n"+theDatapack.getRequiredModsString()
 	finalText += "\n\n"+theDatapack.description
 	finalText += "\n\n"+theDatapack.getContainsString()
 	
@@ -187,3 +195,33 @@ func _on_DatapackDescLabel_meta_clicked(meta):
 
 func _on_DatapackWikiButton_pressed():
 	var _ok = OS.shell_open("https://github.com/Alexofp/BDCC/wiki/Datapacks")
+
+
+func _on_ExportDatapackButton_pressed():
+	var selectedIDs = $DatapackViewer/VBoxContainer/HBoxContainer/DatapackItemList.get_selected_items()
+	if(selectedIDs.size() <= 0):
+		return
+	
+	var datapackToExport:Datapack = datapacksList[selectedIDs[0]]
+	
+	if(OS.get_name() == "HTML5"):
+		var datapackPath = datapackToExport.getLoadedPath()
+		var save_game = File.new()
+		if not save_game.file_exists(datapackPath):
+			return # Error! We don't have a save to load.
+		
+		save_game.open(datapackPath, File.READ)
+		#var saveData = parse_json(save_game.get_as_text())
+		
+		JavaScript.download_buffer(save_game.get_buffer(save_game.get_len()), datapackPath.get_file())
+		save_game.close()
+		return
+
+
+#func _on_ImportPackButton_pressed():
+#	if OS.get_name() == "HTML5":
+#		var saveDataAndFileName = yield(readSaveFileHTML5(), "completed")
+#		if(saveDataAndFileName == null || saveDataAndFileName.size() != 2):
+#			return
+#		SAVE.saveGameFromText(saveDataAndFileName[0], saveDataAndFileName[1])
+#		updateSaves()

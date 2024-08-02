@@ -23,13 +23,16 @@ func getBuffs():
 		]
 
 func getPrice():
-	return 0
+	return 8
+
+func getSellPrice():
+	return 2
 
 func canSell():
 	return true
 
 func getTags():
-	return [ItemTag.BDSMRestraint, ItemTag.CanBeForcedByGuards, ItemTag.CanBeForcedInStocks, ItemTag.RopeHarness]
+	return [ItemTag.BDSMRestraint, ItemTag.CanBeForcedByGuards, ItemTag.CanBeForcedInStocks, ItemTag.SoldByTheAnnouncer, ItemTag.RopeHarness]
 
 func isRestraint():
 	return true

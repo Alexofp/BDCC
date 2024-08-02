@@ -23,6 +23,43 @@ func addItem(item: Reference):
 	items.append(item)
 	item.currentInventory = self
 
+func addItemID(itemID:String):
+	var newItem = GlobalRegistry.createItem(itemID)
+	if(newItem == null):
+		return false
+	addItem(newItem)
+	return true
+
+func forceEquipItemID(itemID:String):
+	var newItem = GlobalRegistry.createItem(itemID)
+	if(newItem == null):
+		return false
+	if(newItem.getClothingSlot() == null):
+		return false
+	return forceEquipStoreOtherUnlessRestraint(newItem)
+
+func addXOfItemID(itemID:String, amount:int):
+	var theRef = GlobalRegistry.getItemRef(itemID)
+	if(theRef == null):
+		return false
+	
+	var canStack = theRef.canCombine()
+	
+	if(canStack):
+		var newItem = GlobalRegistry.createItem(itemID)
+		newItem.setAmount(Util.maxi(0, amount))
+		if(newItem == null):
+			return false
+		addItem(newItem)
+		return true
+	else:
+		for _i in range(amount):
+			var newItem = GlobalRegistry.createItem(itemID)
+			if(newItem == null):
+				return false
+			addItem(newItem)
+		return true
+
 func hasItem(item):
 	return items.has(item)
 
@@ -137,7 +174,14 @@ func removeItem(item):
 		return item
 	return null
 
-func removeXFromItemOrDelete(item, amount):
+func removeFirstOf(itemID):
+	var theItem = getFirstOf(itemID)
+	if(theItem != null):
+		removeItem(theItem)
+		return true
+	return false
+
+func removeXFromItemOrDelete(item, amount:int):
 	assert(items.has(item))
 	
 	item.removeXOrDestroy(amount)
@@ -163,6 +207,20 @@ func hasXOf(itemID, amount):
 		return true
 	else:
 		return false
+
+func getXOfTotal(itemID):
+	var result = 0
+	for item in items:
+		if(item.id == itemID):
+			result += item.amount
+	return result
+
+func hasXOfTotal(itemID, amount):
+	var itemTotal = getXOfTotal(itemID)
+	
+	if(itemTotal >= amount):
+		return true
+	return false
 
 func removeXOfOrDestroy(itemID, amount):
 	var item = getFirstOf(itemID)
@@ -299,20 +357,34 @@ func equipItemBy(item, equipper):
 	if(success):
 		item.onEquippedBy(equipper, false)
 
-func forceEquipByRemoveOther(item, forcer):
+func forceEquipByRemoveOther(item, forcer, canSmartLock=true):
 	var success = forceEquipRemoveOther(item)
 	if(success):
 		item.onEquippedBy(forcer, true)
+		if(canSmartLock):
+			item.tryAddSmartLock(forcer)
 		
-func forceEquipByStoreOther(item, forcer):
+func forceEquipByStoreOther(item, forcer, canSmartLock=true):
 	var success = forceEquipStoreOther(item)
 	if(success):
 		item.onEquippedBy(forcer, true)
+		if(canSmartLock):
+			item.tryAddSmartLock(forcer)
 		
-func forceEquipByStoreOtherUnlessRestraint(item, forcer):
+func forceEquipByStoreOtherUnlessRestraint(item, forcer, canSmartLock=true):
 	var success = forceEquipStoreOtherUnlessRestraint(item)
 	if(success):
 		item.onEquippedBy(forcer, true)
+		if(canSmartLock):
+			item.tryAddSmartLock(forcer)
+
+func getSmartLockedItemsAmount() -> int:
+	var result:int = 0
+	for slot in equippedItems:
+		var item = equippedItems[slot]
+		if(item.restraintData != null && item.restraintData.hasSmartLock()):
+			result += 1
+	return result
 
 func hasItemIDEquipped(itemID: String):
 	for slot in equippedItems:
@@ -430,7 +502,13 @@ func getItemsWithTag(tag):
 		
 func hasItemsWithTag(tag):
 	return getItemsWithTag(tag).size() > 0
-		
+
+func getItemsWithTagCount(tag):
+	return getItemsWithTag(tag).size()
+
+func removeItemsWithTag(tag):
+	removeItemsList(getItemsWithTag(tag))
+
 func getEquippedItemsWithTag(tag):
 	var result = []
 	for itemSlot in equippedItems.keys():
@@ -447,6 +525,12 @@ func hasEquippedItemWithTag(tag):
 		if(item.hasTag(tag)):
 			return true
 	return false
+	
+func getEquippedItemsWithTagCount(tag):
+	return getEquippedItemsWithTag(tag).size()
+	
+func removeEquippedItemsWithTag(tag):
+	removeEquippedItemsList(getEquippedItemsWithTag(tag))
 	
 func getEquppedRestraints():
 	var result = []
@@ -469,6 +553,15 @@ func hasRemovableRestraints():
 				return true
 	return false
 
+func hasRemovableRestraintsNoLockedSmartlocks():
+	for itemSlot in equippedItems:
+		var item = equippedItems[itemSlot]
+		if(item.isRestraint()):
+			var restraintData = item.getRestraintData()
+			if(restraintData.canStruggleFinal()):
+				return true
+	return false
+
 func getEquppedRemovableRestraints():
 	var result = []
 	
@@ -477,6 +570,17 @@ func getEquppedRemovableRestraints():
 		if(item.isRestraint()):
 			var restraintData = item.getRestraintData()
 			if(restraintData.canStruggle()):
+				result.append(item)
+	return result
+
+func getEquppedRemovableRestraintsNoLockedSmartlocks():
+	var result = []
+	
+	for itemSlot in equippedItems:
+		var item = equippedItems[itemSlot]
+		if(item.isRestraint()):
+			var restraintData = item.getRestraintData()
+			if(restraintData.canStruggleFinal()):
 				result.append(item)
 	return result
 

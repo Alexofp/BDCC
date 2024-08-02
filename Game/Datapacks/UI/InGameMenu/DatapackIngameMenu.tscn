@@ -18,6 +18,74 @@ margin_bottom = 14.0
 text = "You can load or unload datapacks here. Loading a datapack will add its characters and scenes into your save. Unloading a datapack will remove them and erase any progress!"
 autowrap = true
 
+[node name="KeepFlagsWindowDialog" type="WindowDialog" parent="VBoxContainer/Label"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -288.0
+margin_top = -52.0
+margin_right = 288.0
+margin_bottom = 52.0
+window_title = "Unloading the datapack.."
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Label/KeepFlagsWindowDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="VBoxContainer/Label/KeepFlagsWindowDialog/VBoxContainer"]
+margin_right = 576.0
+margin_bottom = 80.0
+size_flags_vertical = 7
+text = "Do you want to clear the flags of this datapack? (Scene progress)"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Label/KeepFlagsWindowDialog/VBoxContainer"]
+margin_top = 84.0
+margin_right = 576.0
+margin_bottom = 104.0
+
+[node name="ClearFlagsButton" type="Button" parent="VBoxContainer/Label/KeepFlagsWindowDialog/VBoxContainer/HBoxContainer"]
+margin_right = 137.0
+margin_bottom = 20.0
+text = "Clear datapack flags"
+
+[node name="KeepFlagsButton" type="Button" parent="VBoxContainer/Label/KeepFlagsWindowDialog/VBoxContainer/HBoxContainer"]
+margin_left = 141.0
+margin_right = 278.0
+margin_bottom = 20.0
+text = "Keep datapack flags"
+
+[node name="UpdateWindowDialog" type="ConfirmationDialog" parent="VBoxContainer/Label"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -190.0
+margin_top = -94.0
+margin_right = 190.0
+margin_bottom = 94.0
+window_title = "Reloading the datapack.."
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Label/UpdateWindowDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+
+[node name="Label" type="Label" parent="VBoxContainer/Label/UpdateWindowDialog/VBoxContainer"]
+margin_right = 364.0
+margin_bottom = 144.0
+size_flags_vertical = 7
+text = "Reloading the datapack will reset all of its characters to their default datapack state (scene flags are kept). Only press OK if you want that to happen."
+align = 1
+valign = 1
+autowrap = true
+
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 margin_top = 18.0
 margin_right = 1280.0
@@ -51,4 +119,7 @@ size_flags_horizontal = 3
 text = "Close"
 
 [connection signal="visibility_changed" from="." to="." method="_on_DatapackIngameMenu_visibility_changed"]
+[connection signal="pressed" from="VBoxContainer/Label/KeepFlagsWindowDialog/VBoxContainer/HBoxContainer/ClearFlagsButton" to="." method="_on_ClearFlagsButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/Label/KeepFlagsWindowDialog/VBoxContainer/HBoxContainer/KeepFlagsButton" to="." method="_on_KeepFlagsButton_pressed"]
+[connection signal="confirmed" from="VBoxContainer/Label/UpdateWindowDialog" to="." method="_on_UpdateWindowDialog_confirmed"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]

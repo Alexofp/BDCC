@@ -1,0 +1,149 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/VisualSlots/BlockCatcherPanel.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+resource_local_to_scene = true
+bg_color = Color( 0.0862745, 0.0862745, 0.0862745, 1 )
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends SpinBox
+
+func can_drop_data(_position, _data):
+	return true
+
+func drop_data(_position, _data):
+	$\"../..\".drop_data(_position, _data)
+"
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends LineEdit
+
+func can_drop_data(_position, _data):
+	return true
+
+func drop_data(_position, _data):
+	$\"../..\".drop_data(_position, _data)
+"
+
+[sub_resource type="GDScript" id=4]
+script/source = "extends OptionButton
+
+func can_drop_data(_position, _data):
+	return true
+
+func drop_data(_position, _data):
+	$\"../..\".drop_data(_position, _data)
+"
+
+[sub_resource type="GDScript" id=5]
+script/source = "extends Button
+
+func can_drop_data(_position, _data):
+	return true
+
+func drop_data(_position, _data):
+	$\"../..\".drop_data(_position, _data)
+"
+
+[node name="BlockCatcherPanel" type="PanelContainer"]
+margin_top = 4.0
+margin_right = 1280.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_top = 7.0
+margin_right = 1280.0
+margin_bottom = 21.0
+custom_colors/font_color = Color( 0.54902, 0.54902, 0.54902, 1 )
+text = "<"
+
+[node name="Label2" type="Label" parent="."]
+margin_top = 7.0
+margin_right = 1280.0
+margin_bottom = 21.0
+custom_colors/font_color = Color( 0.54902, 0.54902, 0.54902, 1 )
+text = ">"
+align = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 1280.0
+margin_bottom = 28.0
+mouse_filter = 2
+size_flags_horizontal = 3
+custom_constants/margin_right = 10
+custom_constants/margin_left = 10
+
+[node name="SpinBox" type="SpinBox" parent="MarginContainer"]
+visible = false
+margin_left = 10.0
+margin_right = 1270.0
+margin_bottom = 28.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+script = SubResource( 2 )
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer"]
+visible = false
+margin_left = 10.0
+margin_right = 1270.0
+margin_bottom = 28.0
+script = SubResource( 3 )
+
+[node name="OptionButton" type="OptionButton" parent="MarginContainer"]
+visible = false
+margin_left = 10.0
+margin_right = 1270.0
+margin_bottom = 28.0
+script = SubResource( 4 )
+
+[node name="BigTextEdit" type="HBoxContainer" parent="MarginContainer"]
+visible = false
+margin_left = 10.0
+margin_right = 1270.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextEdit" type="TextEdit" parent="MarginContainer/BigTextEdit"]
+margin_right = 1178.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
+size_flags_horizontal = 3
+
+[node name="OpenFullButton" type="Button" parent="MarginContainer/BigTextEdit"]
+margin_left = 1182.0
+margin_right = 1260.0
+margin_bottom = 100.0
+text = "Fullscreen"
+
+[node name="MapButton" type="Button" parent="MarginContainer"]
+margin_left = 10.0
+margin_right = 1270.0
+margin_bottom = 28.0
+text = "Map"
+script = SubResource( 5 )
+
+[node name="AdvancedPickerButton" type="Button" parent="MarginContainer"]
+margin_left = 10.0
+margin_right = 1270.0
+margin_bottom = 28.0
+text = "Pick.."
+script = SubResource( 5 )
+
+[connection signal="value_changed" from="MarginContainer/SpinBox" to="." method="_on_SpinBox_value_changed"]
+[connection signal="text_changed" from="MarginContainer/LineEdit" to="." method="_on_LineEdit_text_changed"]
+[connection signal="item_selected" from="MarginContainer/OptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="text_changed" from="MarginContainer/BigTextEdit/TextEdit" to="." method="_on_TextEdit_text_changed"]
+[connection signal="pressed" from="MarginContainer/BigTextEdit/OpenFullButton" to="." method="_on_OpenFullButton_pressed"]
+[connection signal="pressed" from="MarginContainer/MapButton" to="." method="_on_MapButton_pressed"]
+[connection signal="pressed" from="MarginContainer/AdvancedPickerButton" to="." method="_on_AdvancedPickerButton_pressed"]

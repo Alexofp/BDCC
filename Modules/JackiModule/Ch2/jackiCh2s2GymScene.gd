@@ -2187,17 +2187,17 @@ func _run():
 		addButton("Make her cum", "Stuff that asshole", "jog_anal_strapon_cum")
 	if(state == "jog_anal_strapon_cum"):
 		playAnimation(StageScene.SexStanding, "inside", {npc="jacki", pcCum=true, npcCum=true, bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true}})
-		saynn("No reason to pull gives you a good reason to do the opposite. As your powerful thrusts continue, Jacki's body starts to tremble with overwhelming pleasure. She cums just from having her ass railed.. while you cum from her inner walls stimulating your shaft to the point of no return..")
+		saynn("No reason to pull gives you a good reason to do the opposite. As your powerful thrusts continue, Jacki's body starts to tremble with overwhelming pleasure. She cums just from having her ass railed..")
 
 		saynn("[say=jacki]Yes-s!.. Cum inside that whore's ass![/say]")
 
-		saynn("Your cock throbs as it stuffs her butt full of your sticky seed. Her legs are shaking, just like her tail and arms.")
+		saynn("All the buttfucking seems to be messing with her mind. Her legs are shaking, just like her tail and arms.")
 
 		saynn("[say=jacki]Nghh-h!..[/say]")
 
-		saynn("As your orgasm ends, you pull out, leaving her wrecked ass to gape and leak your {pc.cum} proudly.")
+		saynn("As her orgasm ends, you pull out, leaving her wrecked ass to gape..")
 
-		saynn("But luckily her ass is not gonna stay like that forever. Jacki moans as her pulsing star eventually closes up, trapping all your jizz inside.")
+		saynn("But luckily her ass is not gonna stay like that forever. Jacki moans as her pulsing star eventually closes up.")
 
 		saynn("[say=pc]You're welcome.[/say]")
 

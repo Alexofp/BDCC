@@ -14,3 +14,4 @@ func onGlobalRegistryUpdate(percent, whatnext):
 
 func onGlobalRegistryFinishedUpdate():
 	var _ok = get_tree().change_scene("res://UI/MainMenu/MainMenu.tscn")
+	#var _ok = get_tree().change_scene("res://Game/Datapacks/UI/CrotchCode/UI/AnimPickerWidget.tscn")

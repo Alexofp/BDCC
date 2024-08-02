@@ -188,7 +188,7 @@ func _run():
 
 		saynn("The weird sensation of being used as some kind of egg storage is so strong that she came once more, her holes clenching tight around the tendrils, milking them for every drop of that fluid..")
 
-		saynn("As the final waves of pleasure start to fade, Artica was left hanging in the air, her body limb and thoroughly used..")
+		saynn("As the final waves of pleasure start to fade, Artica was left hanging in the air, her body limp and thoroughly used..")
 
 		saynn("The plant, after seemingly serving purpose, begins to slowly wither away, its molecular structure probably got damaged too much by all the mutagen..")
 

@@ -73,6 +73,12 @@ func _react(_action: String, _args):
 		var items = inv.getItems()
 		for i in range(items.size()-1, -1, -1):
 			var item = items[i]
+			
+			if(item.id == "KeyholderKeyUnlock"):
+				var npcID = item.npcID
+				var _howMany = GM.pc.unlockAllKeyholderLocksFrom(npcID)
+				continue
+			
 			inv.removeItem(item)
 			GM.pc.getInventory().addItem(item)
 			addMessage("You looted "+item.getAStackName())
@@ -106,11 +112,25 @@ func _react(_action: String, _args):
 			endScene()
 		return
 	
+	if(_action == "unlockAllRestraintsKey"):
+		var key = _args[0]
+		
+		var npcID = key.npcID
+		
+		var _howMany = GM.pc.unlockAllKeyholderLocksFrom(npcID)
+		
+		inv.removeItem(key)
+		if(savedCredits == 0 && inv.isEmpty()):
+			endScene()
+		return
+	
 	setState(_action)
 
 func onInventoryItemInteracted(item: ItemBase):
 	if(item.id == "WorkCredit"):
 		GM.main.pickOption("grabCredits", [item.getUniqueID()])
+	elif(item.id == "KeyholderKeyUnlock"):
+		GM.main.pickOption("unlockAllRestraintsKey", [item])
 	else:
 		GM.main.pickOption("grabItem", [item.getUniqueID()])
 
