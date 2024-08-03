@@ -204,6 +204,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Characters/Dynamic/Generator/CharacterGeneratorBase.gd"
 }, {
+"base": "Reference",
+"class": "CharacterPawn",
+"language": "GDScript",
+"path": "res://Game/InteractionSystem/CharacterPawn.gd"
+}, {
 "base": "Object",
 "class": "CharacterPool",
 "language": "GDScript",
@@ -699,6 +704,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Gameplay/InmateType.gd"
 }, {
+"base": "Reference",
+"class": "InteractionSystem",
+"language": "GDScript",
+"path": "res://Game/InteractionSystem/InteractionSystem.gd"
+}, {
 "base": "Object",
 "class": "Interest",
 "language": "GDScript",
@@ -948,6 +958,11 @@ _global_script_classes=[ {
 "class": "PartTrait",
 "language": "GDScript",
 "path": "res://Player/Bodyparts/PartTrait.gd"
+}, {
+"base": "Reference",
+"class": "PawnInteractionBase",
+"language": "GDScript",
+"path": "res://Game/InteractionSystem/PawnInteractionBase.gd"
 }, {
 "base": "Object",
 "class": "Perk",
@@ -1444,6 +1459,7 @@ _global_script_class_icons={
 "CharacterArchetype": "",
 "CharacterFlag": "",
 "CharacterGeneratorBase": "",
+"CharacterPawn": "",
 "CharacterPool": "",
 "CharacterType": "",
 "Child": "",
@@ -1543,6 +1559,7 @@ _global_script_class_icons={
 "InmateGenerator": "",
 "InmateLoot": "",
 "InmateType": "",
+"InteractionSystem": "",
 "Interest": "",
 "InterestTopic": "",
 "Inventory": "",
@@ -1593,6 +1610,7 @@ _global_script_class_icons={
 "PartState": "",
 "PartStatePicker": "",
 "PartTrait": "",
+"PawnInteractionBase": "",
 "Perk": "",
 "PerkBase": "",
 "Personality": "",

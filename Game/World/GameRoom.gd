@@ -127,6 +127,12 @@ func getFloorID():
 		myParent = myParent.get_parent()
 	return myParent.id
 	
+func getFloor():
+	var myParent = get_parent()
+	while(!myParent.has_method("getRooms")):
+		myParent = myParent.get_parent()
+	return myParent
+	
 func getCell():
 	return Vector2(round(global_position.x / GameWorld.gridsize), round(global_position.y / GameWorld.gridsize))
 

@@ -3,6 +3,9 @@ class_name GameWorld
 
 enum Direction {WEST, NORTH, EAST, SOUTH}
 
+static func getAllDirections():
+	return [Direction.WEST, Direction.NORTH, Direction.EAST, Direction.SOUTH]
+
 var cells: Dictionary = {}
 var roomDict: Dictionary = {}
 var floorDict: Dictionary = {}
@@ -11,8 +14,11 @@ onready var camera = $Camera2D
 var highlightedRoom: Node2D
 var lastAimedRoomID = null
 
+var pawns:Dictionary = {}
+
 var roomConnectionScene = preload("res://Game/World/RoomConnection.tscn")
 onready var worldFloorScene = load("res://Game/World/WorldFloor.tscn")
+var worldPawnScene = preload("res://Game/World/WorldPawn.tscn")
 
 var astar:AStar2D
 var astarIDToRoomIDMap: Dictionary = {}
@@ -276,6 +282,59 @@ func setDarknessSize(darknessSize):
 	$CanvasLayer/DarknessControl/DBottom.margin_top = darknessSize - 0.5
 	$CanvasLayer/DarknessControl/DLeft.margin_right = -darknessSize + 0.5
 	$CanvasLayer/DarknessControl/DRight.margin_left = darknessSize - 0.5
+
+func clearPawns():
+	for pawnID in pawns:
+		pawns[pawnID].queue_free()
+	pawns.clear()
+
+func updatePawns(IS):
+	#var visiblePawns = {}
+	var checkedPawns = pawns.duplicate()
+	
+	for charID in IS.getPawns():
+		var pawn = IS.getPawn(charID)
+		var loc:String = pawn.getLocation()
+		
+		var room = getRoomByID(loc)
+		if(room == null):
+			continue
+		
+		if(!pawns.has(charID)):
+			createWorldPawn(charID, pawn, loc)
+		else:
+			checkedPawns.erase(charID)
+			var worldPawn = pawns[charID]
+			
+			if(worldPawn.loc == loc):
+				continue
+			
+			if(room.getFloorID() == worldPawn.floorid):
+				worldPawn.moveToPos(room.global_position)
+				worldPawn.loc = loc
+			else:
+				createWorldPawn(charID, pawn, loc)
+		
+	for removedPawn in checkedPawns.keys():
+		pawns[removedPawn].queue_free()
+		var _ok = pawns.erase(removedPawn)
+		
+func createWorldPawn(charID, pawn, loc):
+	if(pawns.has(charID)):
+		pawns[charID].queue_free()
+		var _ok = pawns.erase(charID)
+	var room = getRoomByID(loc)
+	var roomFloor = room.getFloor()
+	
+	var newWorldPawn = worldPawnScene.instance()
+	#room.add_child(newWorldPawn)
+	roomFloor.add_child(newWorldPawn)
+	newWorldPawn.pawn = pawn
+	newWorldPawn.loc = loc
+	newWorldPawn.id = charID
+	newWorldPawn.floorid = roomFloor.id
+	newWorldPawn.global_position = getRoomByID(loc).global_position
+	pawns[charID] = newWorldPawn
 
 func saveData():
 	var data = {}

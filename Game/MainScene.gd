@@ -24,6 +24,8 @@ var encounterSettings:EncounterSettings
 var currentlyTestingScene = false
 var allowExecuteOnce:bool = false
 
+var IS:InteractionSystem = InteractionSystem.new()
+
 var staticCharacters = {}
 var charactersToUpdate = {}
 var dynamicCharacters = {}
@@ -370,6 +372,8 @@ func loadingSavefileFinished():
 	
 	applyAllWorldEdits()
 	
+	IS.TEST_DELETE_ME()
+	
 func applyAllWorldEdits():
 	var worldEdits = GlobalRegistry.getWorldEdits()
 	for worldEditID in worldEdits:
@@ -558,6 +562,8 @@ func doTimeProcess(_seconds):
 	# This splits long sleeping times into 1 hour chunks
 	var copySeconds = _seconds
 	while(copySeconds > 0):
+		IS.processTime(_seconds)
+		
 		var clippedSeconds = min(60*60, copySeconds)
 		GM.pc.processTime(clippedSeconds)
 		
@@ -851,6 +857,8 @@ func updateStuff():
 			
 	for worldEdit in GlobalRegistry.getRegularWorldEdits():
 		worldEdit.apply(GM.world)
+	
+	GM.world.updatePawns(IS)
 
 
 func _on_Player_levelChanged():
