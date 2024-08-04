@@ -480,7 +480,8 @@ func loadData(data):
 		if(scene.uniqueSceneID < 0):
 			scene.uniqueSceneID = getNewUniqueSceneID()
 			scene.parentSceneUniqueID = scene.uniqueSceneID - 1 # Preserves compatability with old saves
-		
+	
+	IS.clearAll()
 	GM.ui.recreateWorld()
 	GM.world.loadData(SAVE.loadVar(data, "world", {}))
 
@@ -1197,6 +1198,10 @@ func getDebugActions():
 			"id": "forceSmartlock",
 			"name": "Force smart lock",
 		},
+		{
+			"id": "spyRandom",
+			"name": "Spy on random pawn",
+		},
 	]
 
 func doDebugAction(id, args = {}):
@@ -1304,6 +1309,9 @@ func doDebugAction(id, args = {}):
 		GlobalRegistry.getModule("NpcSlaveryModule").makeSurePCHasSlaveSpace()
 		runScene("KidnapDynamicNpcScene", [npcID])
 		# runScene("EnslaveDynamicNpcScene", [npcID])
+		
+	if(id == "spyRandom"):
+		runScene("SpyOnPawnScene", [RNG.pick(GM.main.IS.pawns)])
 		
 	if(id == "duplicateAndEnslave"):
 		var theNpcID = args["npcID"]

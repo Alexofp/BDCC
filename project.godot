@@ -704,6 +704,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Gameplay/InmateType.gd"
 }, {
+"base": "Object",
+"class": "InteractionGoal",
+"language": "GDScript",
+"path": "res://Game/InteractionSystem/InteractionGoal.gd"
+}, {
+"base": "Reference",
+"class": "InteractionGoalBase",
+"language": "GDScript",
+"path": "res://Game/InteractionSystem/InteractionGoalBase.gd"
+}, {
 "base": "Reference",
 "class": "InteractionSystem",
 "language": "GDScript",
@@ -1559,6 +1569,8 @@ _global_script_class_icons={
 "InmateGenerator": "",
 "InmateLoot": "",
 "InmateType": "",
+"InteractionGoal": "",
+"InteractionGoalBase": "",
 "InteractionSystem": "",
 "Interest": "",
 "InterestTopic": "",

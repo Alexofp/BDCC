@@ -1,0 +1,63 @@
+extends Reference
+class_name InteractionGoalBase
+
+var id:String = ""
+var pawnID:String = ""
+var interaction
+
+func getScore(_pawn:CharacterPawn) -> float:
+	return 0.0
+
+func getText():
+	return "They be doing something!"
+
+func getActions() -> Array:
+	return [
+#		{
+#			id = "test",
+#			name = "Test",
+#			desc = "Do something",
+#			score = 1.0,
+#			args = {},
+#			time = 60,
+#		},
+	]
+
+func doAction(_id:String, _args:Dictionary):
+	pass
+
+func getKeepScore() -> float:
+	return getScore(getPawn()) + 0.1
+
+
+
+
+
+func getPawn() -> CharacterPawn:
+	return GM.main.IS.getPawn(pawnID)
+
+func getInteraction():
+	return interaction
+
+
+
+func getLocation() -> String:
+	return getInteraction().getLocation()
+
+func setLocation(newLoc:String):
+	getInteraction().setLocation(newLoc)
+
+func goTowards(theTarget:String):
+	return getInteraction().goTowards(theTarget)
+
+func doWander() -> bool:
+	return getInteraction().doWander()
+
+func doWanderGurantee() -> bool:
+	return getInteraction().doWanderGurantee()
+
+func completeGoal():
+	getInteraction().completeGoal()
+
+func getCurrentAction() -> String:
+	return getInteraction().getCurrentAction()

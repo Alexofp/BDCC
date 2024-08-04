@@ -6,6 +6,17 @@ enum Direction {WEST, NORTH, EAST, SOUTH}
 static func getAllDirections():
 	return [Direction.WEST, Direction.NORTH, Direction.EAST, Direction.SOUTH]
 
+static func getOppositeDir(theDir):
+	if(theDir == Direction.WEST):
+		return Direction.EAST
+	if(theDir == Direction.NORTH):
+		return Direction.SOUTH
+	if(theDir == Direction.EAST):
+		return Direction.WEST
+	if(theDir == Direction.SOUTH):
+		return Direction.NORTH
+	return -1
+
 var cells: Dictionary = {}
 var roomDict: Dictionary = {}
 var floorDict: Dictionary = {}

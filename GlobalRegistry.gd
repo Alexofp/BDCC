@@ -74,6 +74,8 @@ var bodypartStorageNode
 
 var sceneCache: Dictionary = {}
 var codeblocksCache: Dictionary = {}
+var interactionGoalCache: Dictionary = {}
+var interactionGoalRefCache: Dictionary = {}
 
 var cachedDonationData = null
 var cachedLocalDonationData = null
