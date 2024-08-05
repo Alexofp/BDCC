@@ -561,10 +561,10 @@ func processTime(_seconds):
 
 func doTimeProcess(_seconds):
 	# This splits long sleeping times into 1 hour chunks
+	IS.processTime(_seconds)
+	
 	var copySeconds = _seconds
 	while(copySeconds > 0):
-		IS.processTime(_seconds)
-		
 		var clippedSeconds = min(60*60, copySeconds)
 		GM.pc.processTime(clippedSeconds)
 		

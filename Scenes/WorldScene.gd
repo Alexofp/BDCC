@@ -4,6 +4,9 @@ func _init():
 	sceneID = "WorldScene"
 
 func _run():
+	if(runInteraction()):
+		return
+	
 	var roomID = GM.pc.location
 	var _roomInfo = GM.world.getRoomByID(roomID)
 	
@@ -144,3 +147,42 @@ func _react(_action: String, _args):
 		runScene("PCOverrideExample")
 	if(_action == "masochismminigame"):
 		runScene("TaviMasochismScene")
+	if(_action == "progress_interaction"):
+		var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
+		var interaction:PawnInteractionBase = pawn.getInteraction()
+		if(interaction.busyActionSeconds > 0):
+			processTime(interaction.busyActionSeconds)
+		else:
+			processTime(30)
+	if(_action == "pick_interaction_action"):
+		#var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
+		var interaction:PawnInteractionBase = _args[0]#pawn.getInteraction()
+		interaction.setPickedAction(_args[1])
+		if(interaction.busyActionSeconds > 0):
+			processTime(interaction.busyActionSeconds)
+		else:
+			processTime(30)
+
+
+
+func runInteraction():
+	var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
+	if(pawn == null || pawn.currentInteraction == null):
+		return false
+	
+	var interaction:PawnInteractionBase = pawn.getInteraction()
+	aimCameraAndSetLocName(interaction.getLocation())
+	saynn(interaction.getOutputText())
+	
+	if(true):
+		sayn("[b]Debug info[/b]:")
+		saynn(Util.join(pawn.getDebugInfo(), "\n"))
+	
+	if(interaction.getCurrentPawn() == pawn):
+		for action in interaction.getActions():
+			addButton(action["name"], action["desc"], "pick_interaction_action", [interaction, action])
+	else:
+		addButton("Continue", "See what happens next", "progress_interaction")
+	
+	return true
+	

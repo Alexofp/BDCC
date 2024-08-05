@@ -6,13 +6,13 @@ var id:String = "error"
 
 var location:String = "main_punishment_spot"
 
-var involvedPawns:Dictionary = {}
-var currentPawn:String = ""
+var involvedPawns:Dictionary = {} # Role = ID
+var currentPawn:String = "" # Role
 
 var currentActionID:String = ""
 var currentActionArgs:Dictionary = {}
 
-var nextInteractionAt:int = 0
+var busyActionSeconds:int = 0
 
 var cachedTarget:String = ""
 var cachedPath:Array = []
@@ -50,13 +50,10 @@ func setPickedAction(_actionEntry):
 	currentActionID = _actionEntry["id"]
 	currentActionArgs = (_actionEntry["args"] if _actionEntry.has("args") else {})
 
-	# Probably will have to be changed to something different
-	var currentTime:int = GM.main.getTime()
-
 	var theTime:int = 0
 	if(_actionEntry.has("time")):
 		theTime = _actionEntry["time"]
-	nextInteractionAt = currentTime + theTime
+	busyActionSeconds = theTime
 
 
 
@@ -67,12 +64,19 @@ func doCurrentAction():
 	doAction(currentActionID, currentActionArgs)
 	currentActionID = ""
 	currentActionArgs = {}
+	busyActionSeconds = 0
 
 #func getNextInteractionTime() -> int:
 #	return 30
 
 func getLocation() -> String:
 	return location
+
+func isPlayerInvolved() -> bool:
+	for role in involvedPawns:
+		if(involvedPawns[role] == "pc"):
+			return true
+	return false
 
 #func markAsUpdated():
 #	lastUpdatedSeconds = GM.main.getTime()
@@ -150,12 +154,15 @@ func getCurrentAction() -> String:
 func processTime(_howMuch:int):
 	pass
 
+func stopMe():
+	GM.main.IS.stopInteraction(self)
+
 func getDebugInfo():
 	return [
 		#"ID: "+str(id),
 		#"Location: "+str(location),
 		#"currentPawn: "+str(currentPawn),
 		"currentActionID: "+str(currentActionID),
-		"nextInteractionAt: "+str(nextInteractionAt),
+		"busyActionSeconds: "+str(busyActionSeconds),
 		#"involvedPawns: "+str(involvedPawns),
 	]

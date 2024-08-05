@@ -11,6 +11,9 @@ func getScore(_pawn:CharacterPawn) -> float:
 func getText():
 	return "They be doing something!"
 
+func onGoalStart():
+	pass
+
 func getActions() -> Array:
 	return [
 #		{
@@ -50,10 +53,10 @@ func setLocation(newLoc:String):
 func goTowards(theTarget:String):
 	return getInteraction().goTowards(theTarget)
 
-func doWander() -> bool:
+func doWander():
 	return getInteraction().doWander()
 
-func doWanderGurantee() -> bool:
+func doWanderGurantee():
 	return getInteraction().doWanderGurantee()
 
 func completeGoal():

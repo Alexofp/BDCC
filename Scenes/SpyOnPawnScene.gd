@@ -42,8 +42,8 @@ func _react(_action: String, _args):
 	if(_action == "progress_interaction"):
 		var pawn:CharacterPawn = GM.main.IS.getPawn(pawnID)
 		var interaction:PawnInteractionBase = pawn.getInteraction()
-		if(GM.main.getTime() < interaction.nextInteractionAt):
-			GM.main.processTimeUntil(interaction.nextInteractionAt)
+		if(interaction.busyActionSeconds > 0):
+			processTime(interaction.busyActionSeconds)
 		else:
 			processTime(30)
 		return

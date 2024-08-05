@@ -3,9 +3,11 @@ class_name InteractionGoal
 
 const Wander = "Wander"
 const Eat = "Eat"
+const Hangout = "Hangout"
+const WorkMine = "WorkMine"
 
 static func getAll():
-	return [Wander, Eat]
+	return [Wander, Eat, Hangout, WorkMine]
 
 static func getAllAlone():
 	return getAll()

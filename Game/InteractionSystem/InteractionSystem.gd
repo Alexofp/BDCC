@@ -6,8 +6,10 @@ var pawnsByLoc:Dictionary = {}
 var interactions:Array = []
 
 func TEST_DELETE_ME():
+	spawnPawn("pc")
 	spawnPawn(RNG.pick(GM.main.dynamicCharacters))
 	spawnPawn(RNG.pick(GM.main.dynamicCharacters))
+
 
 func processTime(_howMuch:int):
 #	var toUpdate:Array = getInteractionsThatNeedToProcessed()
@@ -16,33 +18,62 @@ func processTime(_howMuch:int):
 #			pass
 #
 #		toUpdate = getInteractionsThatNeedToProcessed()
-	var currentTime:int = GM.main.getTime()
+	#var currentTime:int = GM.main.getTime()
 
 	#print(pawns)
+	var maxProcesses:int = 50
 	
-	for pawnID in pawns:
-		var pawn = pawns[pawnID]
-		pawn.processTime(_howMuch)
+	var interaction:PawnInteractionBase = getClosestInteraction()
+	while(interaction != null && _howMuch > 0):
+		var interactionBusySecs:int = interaction.busyActionSeconds
+		if(_howMuch < interactionBusySecs):
+			processBusyAllInteractions(_howMuch)
+			break
 		
-		var interaction = pawn.getInteraction()
-		if(interactions.has(interaction)):
-			continue
-		interaction.processTime(_howMuch)
+		if(interactionBusySecs > 0):
+			processBusyAllInteractions(interactionBusySecs)
+			_howMuch -= interactionBusySecs
+		interaction.doCurrentAction()
 		
-		if(currentTime >= interaction.nextInteractionAt):
-			interaction.doCurrentAction()
-			
+		if(!interaction.getCurrentPawn().isPlayer()):
 			var actions = interaction.getActions()
 			var selectedAction = actions[0]
 			interaction.setPickedAction(selectedAction)
-		else:
-			# still doing the current thing
-			pass
 		
+		maxProcesses -= 1
+		if(maxProcesses <= 0):
+			print("[Interaction System] HIT THE MAX PROCESS LIMIT")
+			break
+		interaction = getClosestInteraction()
 		
 		#pawn.processTime(_howMuch)
 	print(pawnsByLoc)
 	pass
+
+func processBusyAllInteractions(howManySeconds:int):
+	for pawnID in pawns:
+		var pawn = pawns[pawnID]
+		pawn.processTime(howManySeconds)
+		var interaction = pawn.getInteraction()
+		if(interaction == null || interactions.has(interaction)):
+			continue
+		interaction.busyActionSeconds -= howManySeconds
+	for interaction in interactions:
+		interaction.busyActionSeconds -= howManySeconds
+
+func getClosestInteraction() -> PawnInteractionBase:
+	var result = null
+	for pawnID in pawns:
+		var pawn = pawns[pawnID]
+		var interaction = pawn.getInteraction()
+		if(result == null || interaction.busyActionSeconds < result.busyActionSeconds):
+			#if(!interaction.isPlayerInvolved()):
+			result = interaction
+	for interaction in interactions:
+		if(result == null || interaction.busyActionSeconds < result.busyActionSeconds):
+			#if(!interaction.isPlayerInvolved()):
+			result = interaction
+	return result
 
 func spawnPawn(charID):
 	if(charID == null):
@@ -58,6 +89,8 @@ func spawnPawn(charID):
 	if(!pawnsByLoc.has(loc)):
 		pawnsByLoc[loc] = {}
 	pawnsByLoc[loc][charID] = true
+	
+	newPawn.onSpawn()
 
 func deletePawn(charID):
 	if(charID == null):
@@ -137,3 +170,28 @@ func clearAll():
 		deletePawn(charID)
 	pawns.clear()
 	interactions.clear()
+
+func startInteraction(interaction, involvedPawns:Dictionary):
+	interactions.append(interaction)
+	
+	for pawnRole in involvedPawns:
+		var pawn = getPawn(involvedPawns[pawnRole])
+		stopInteractionsForPawnID(involvedPawns[pawnRole])
+		pawn.setInteraction(interaction)
+	
+	interaction.start(involvedPawns)
+
+func stopInteraction(interaction:PawnInteractionBase):
+	interactions.erase(interaction)
+	
+	for pawnRole in interaction.involvedPawns:
+		var pawn = getPawn(interaction.involvedPawns[pawnRole])
+		if(pawn != null):
+			pawn.setInteraction(null)
+
+func stopInteractionsForPawnID(charID:String):
+	for interaction in interactions.duplicate():
+		for pawnRole in interaction.involvedPawns:
+			if(interaction.involvedPawns[pawnRole] == charID):
+				stopInteraction(interaction)
+				break

@@ -8,10 +8,12 @@ var isDeleted:bool = false
 var currentInteraction
 
 var hunger:float = 0.0
+var timeSinceLastWork:int = 0.0
 
 
 func onSpawn():
 	hunger = RNG.randf_range(0.0, 1.0)
+	timeSinceLastWork = RNG.randi_range(0, 6000)
 
 func getChar() -> BaseCharacter:
 	if(charID == ""):
@@ -19,15 +21,25 @@ func getChar() -> BaseCharacter:
 	return GlobalRegistry.getCharacter(charID)
 
 func getLocation() -> String:
+	#if(isPlayer()):
+	#	return GM.pc.getLocation()
 	return location
 
 func setLocation(newLoc:String):
 	var oldLoc = getLocation()
 	location = newLoc
+	if(isPlayer()):
+		GM.pc.setLocation(newLoc)
 	GM.main.IS.onPawnMoved(charID, oldLoc, getLocation())
+	print(charID+" set lock: "+newLoc)
 
 func processTime(_howMuch:int):
-	hunger += 0.02
+	if(isPlayer()):
+		var oldLoc = location
+		location = GM.pc.getLocation()
+		GM.main.IS.onPawnMoved(charID, oldLoc, getLocation())
+	hunger += float(_howMuch) / 60.0 * 0.02
+	timeSinceLastWork += _howMuch
 
 func setInteraction(newInt):
 	currentInteraction = newInt
@@ -36,9 +48,10 @@ func getInteraction():
 	if(currentInteraction != null):
 		return currentInteraction
 	
-	var aloneInteraction = load("res://Game/InteractionSystem/Interactions/AloneInteraction.gd").new()
-	setInteraction(aloneInteraction)
-	aloneInteraction.start({main = charID})
+	if(!isPlayer()):
+		var aloneInteraction = load("res://Game/InteractionSystem/Interactions/AloneInteraction.gd").new()
+		setInteraction(aloneInteraction)
+		aloneInteraction.start({main = charID})
 	return currentInteraction
 
 func getHunger() -> float:
@@ -53,7 +66,7 @@ func deleteMe():
 func getDebugInfo():
 	var res = [
 		"ID: "+str(charID),
-		"Location: "+str(location),
+		"Location: "+str(getLocation()),
 		"Hunger: "+str(Util.roundF(hunger, 2)),
 		"currentInteraction: "+str(currentInteraction.id if currentInteraction != null else "null"),
 	]
@@ -61,3 +74,6 @@ func getDebugInfo():
 		res.append_array(currentInteraction.getDebugInfo())
 
 	return res
+
+func isPlayer() -> bool:
+	return charID == "pc"

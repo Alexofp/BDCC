@@ -57,12 +57,14 @@ func switchGoalTo(goalID:String):
 	newGoal.pawnID = getRolePawn("main").charID
 	newGoal.interaction = self
 	goal = newGoal
+	goal.onGoalStart()
 	print("NEW GOAL FOR PAWN "+str(newGoal.pawnID)+": "+str(goalID))
 	return true
 
 func start(_pawns:Dictionary):
 	involvedPawns = {main = _pawns["main"]}
 	currentPawn = "main"
+	setLocation(getRolePawn("main").getLocation())
 
 func getOutputText() -> String:
 	var theGoal = getGoal()
