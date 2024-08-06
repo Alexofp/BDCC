@@ -8,11 +8,15 @@ var location:String = "main_punishment_spot"
 
 var involvedPawns:Dictionary = {} # Role = ID
 var currentPawn:String = "" # Role
+var state:String = ""
 
 var currentActionID:String = ""
 var currentActionArgs:Dictionary = {}
 
 var busyActionSeconds:int = 0
+var isNew:bool = false
+var isWaitingScene:bool = false
+var isWaitingAction:String = ""
 
 var cachedTarget:String = ""
 var cachedPath:Array = []
@@ -24,6 +28,12 @@ func start(_pawns:Dictionary):
 
 func getOutputText() -> String:
 	return "Something something"
+
+func getOutputTextFinal() -> String:
+	var methodName:String = (state if state != "" else "init")+"_text"
+	if(has_method(methodName)):
+		return call(methodName)
+	return getOutputText()
 
 func getActions() -> Array:
 	return [
@@ -37,8 +47,27 @@ func getActions() -> Array:
 		},
 	]
 
-func doAction(_id:String, _args:Dictionary):
+func getActionsFinal() -> Array:
+	var methodName:String = (state if state != "" else "init")+"_actions"
+	if(has_method(methodName)):
+		return call(methodName)
+	return getActions()
+
+func doAction(_id:String, _args:Dictionary, _context:Dictionary):
 	pass
+
+func doActionFinal(_id:String, _args:Dictionary, _context:Dictionary = {}):
+	var methodName:String = (state if state != "" else "init")+"_do"
+	if(has_method(methodName)):
+		return call(methodName, _id, _args, _context)
+	return doAction(_id, _args, _context)
+
+func setState(newState:String, newRole:String):
+	setCurrentPawn(newRole)
+	state = newState
+
+func getState() -> String:
+	return state
 
 func setCurrentPawn(therole:String):
 	currentPawn = therole
@@ -46,7 +75,7 @@ func setCurrentPawn(therole:String):
 func getCurrentPawn() -> CharacterPawn:
 	return getRolePawn(currentPawn)
 
-func setPickedAction(_actionEntry):
+func setPickedAction(_actionEntry, _context:Dictionary = {}):
 	currentActionID = _actionEntry["id"]
 	currentActionArgs = (_actionEntry["args"] if _actionEntry.has("args") else {})
 
@@ -54,14 +83,32 @@ func setPickedAction(_actionEntry):
 	if(_actionEntry.has("time")):
 		theTime = _actionEntry["time"]
 	busyActionSeconds = theTime
+	
+	
+	if(_actionEntry.has("start_fight")):
+		var fightersData = _actionEntry["start_fight"]
+		currentActionArgs["fight"] = _actionEntry["start_fight"]
+		
+		var whoID:String = involvedPawns[fightersData[0]]
+		var withWhomID:String = involvedPawns[fightersData[1]]
+		
+		if((whoID == "pc" || withWhomID == "pc") && _context.has("scene")):
+			isWaitingScene = true
+			_context["scene"].startInteractionFight(whoID, withWhomID)
+
+func getFightResult(_args:Dictionary):
+	if(_args.has("scene_result")):
+		return _args["scene_result"]
+	
+	var _fightersData = currentActionArgs["fight"]
+	return {won=RNG.chance(50)}
 
 
-
-func doCurrentAction():
+func doCurrentAction(_context:Dictionary = {}):
 	if(currentActionID == ""):
 		return
 	
-	doAction(currentActionID, currentActionArgs)
+	doActionFinal(currentActionID, currentActionArgs, _context)
 	currentActionID = ""
 	currentActionArgs = {}
 	busyActionSeconds = 0
@@ -163,6 +210,26 @@ func getDebugInfo():
 		#"Location: "+str(location),
 		#"currentPawn: "+str(currentPawn),
 		"currentActionID: "+str(currentActionID),
+		"state: "+str(getState()),
 		"busyActionSeconds: "+str(busyActionSeconds),
 		#"involvedPawns: "+str(involvedPawns),
 	]
+
+func receiveSceneStatusFinal(_result:Dictionary):
+	isWaitingScene = false
+	
+	currentActionArgs["scene_result"] = _result
+	doCurrentAction()
+
+func isWaitingForScene() -> bool:
+	return isWaitingScene
+
+
+
+#	currentActionID = _actionEntry["id"]
+#	currentActionArgs = (_actionEntry["args"] if _actionEntry.has("args") else {})
+#
+#	var theTime:int = 0
+#	if(_actionEntry.has("time")):
+#		theTime = _actionEntry["time"]
+#	busyActionSeconds = theTime

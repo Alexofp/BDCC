@@ -27,7 +27,6 @@ func processTime(_howMuch:int):
 	while(interaction != null && _howMuch > 0):
 		var interactionBusySecs:int = interaction.busyActionSeconds
 		if(_howMuch < interactionBusySecs):
-			processBusyAllInteractions(_howMuch)
 			break
 		
 		if(interactionBusySecs > 0):
@@ -36,9 +35,7 @@ func processTime(_howMuch:int):
 		interaction.doCurrentAction()
 		
 		if(!interaction.getCurrentPawn().isPlayer()):
-			var actions = interaction.getActions()
-			var selectedAction = actions[0]
-			interaction.setPickedAction(selectedAction)
+			decideNextAction(interaction)
 		
 		maxProcesses -= 1
 		if(maxProcesses <= 0):
@@ -46,33 +43,36 @@ func processTime(_howMuch:int):
 			break
 		interaction = getClosestInteraction()
 		
-		#pawn.processTime(_howMuch)
+	processBusyAllInteractions(_howMuch)
+		
+	for theinteraction in interactions:
+		theinteraction.isNew = false
 	print(pawnsByLoc)
+	print(interactions)
 	pass
 
+func decideNextAction(interaction):
+	var actions = interaction.getActionsFinal()
+	var selectedAction = actions[0]
+	interaction.setPickedAction(selectedAction)
+
 func processBusyAllInteractions(howManySeconds:int):
+	if(howManySeconds <= 0):
+		return
 	for pawnID in pawns:
 		var pawn = pawns[pawnID]
 		pawn.processTime(howManySeconds)
-		var interaction = pawn.getInteraction()
-		if(interaction == null || interactions.has(interaction)):
-			continue
-		interaction.busyActionSeconds -= howManySeconds
 	for interaction in interactions:
 		interaction.busyActionSeconds -= howManySeconds
 
 func getClosestInteraction() -> PawnInteractionBase:
 	var result = null
-	for pawnID in pawns:
-		var pawn = pawns[pawnID]
-		var interaction = pawn.getInteraction()
-		if(result == null || interaction.busyActionSeconds < result.busyActionSeconds):
-			#if(!interaction.isPlayerInvolved()):
-			result = interaction
 	for interaction in interactions:
+		if(interaction == null):# || interaction.isNew):
+			continue
 		if(result == null || interaction.busyActionSeconds < result.busyActionSeconds):
-			#if(!interaction.isPlayerInvolved()):
-			result = interaction
+			if(!interaction.isPlayerInvolved() && !interaction.isWaitingForScene()):
+				result = interaction
 	return result
 
 func spawnPawn(charID):
@@ -171,14 +171,18 @@ func clearAll():
 	pawns.clear()
 	interactions.clear()
 
-func startInteraction(interaction, involvedPawns:Dictionary):
+func startInteraction(interaction, involvedPawns:Dictionary, waitUntilNextProcess:bool = true):
 	interactions.append(interaction)
 	
 	for pawnRole in involvedPawns:
-		var pawn = getPawn(involvedPawns[pawnRole])
+		#var pawn = getPawn(involvedPawns[pawnRole])
 		stopInteractionsForPawnID(involvedPawns[pawnRole])
+		
+	for pawnRole in involvedPawns:
+		var pawn = getPawn(involvedPawns[pawnRole])
 		pawn.setInteraction(interaction)
 	
+	interaction.isNew = waitUntilNextProcess
 	interaction.start(involvedPawns)
 
 func stopInteraction(interaction:PawnInteractionBase):

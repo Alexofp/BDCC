@@ -40,6 +40,7 @@ func processTime(_howMuch:int):
 		GM.main.IS.onPawnMoved(charID, oldLoc, getLocation())
 	hunger += float(_howMuch) / 60.0 * 0.02
 	timeSinceLastWork += _howMuch
+	checkAloneInteraction()
 
 func setInteraction(newInt):
 	currentInteraction = newInt
@@ -48,11 +49,13 @@ func getInteraction():
 	if(currentInteraction != null):
 		return currentInteraction
 	
-	if(!isPlayer()):
-		var aloneInteraction = load("res://Game/InteractionSystem/Interactions/AloneInteraction.gd").new()
-		setInteraction(aloneInteraction)
-		aloneInteraction.start({main = charID})
+	checkAloneInteraction()
 	return currentInteraction
+
+func checkAloneInteraction():
+	if(currentInteraction == null && !isPlayer()):
+		var aloneInteraction = load("res://Game/InteractionSystem/Interactions/AloneInteraction.gd").new()
+		GM.main.IS.startInteraction(aloneInteraction, {main = charID}, false)
 
 func getHunger() -> float:
 	return hunger

@@ -25,7 +25,7 @@ func _run():
 		
 		aimCameraAndSetLocName(interaction.getLocation())
 		playAnimation(StageScene.Solo, "stand", {pc=pawnID})
-		saynn(interaction.getOutputText())
+		saynn(interaction.getOutputTextFinal())
 		
 		if(true):
 			sayn("[b]Debug info[/b]:")

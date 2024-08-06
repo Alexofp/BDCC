@@ -150,18 +150,22 @@ func _react(_action: String, _args):
 	if(_action == "progress_interaction"):
 		var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
 		var interaction:PawnInteractionBase = pawn.getInteraction()
+		GM.main.IS.decideNextAction(interaction)
 		if(interaction.busyActionSeconds > 0):
 			processTime(interaction.busyActionSeconds)
 		else:
 			processTime(30)
+		interaction.doCurrentAction({scene=self})
 	if(_action == "pick_interaction_action"):
 		#var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
 		var interaction:PawnInteractionBase = _args[0]#pawn.getInteraction()
-		interaction.setPickedAction(_args[1])
-		if(interaction.busyActionSeconds > 0):
-			processTime(interaction.busyActionSeconds)
-		else:
-			processTime(30)
+		interaction.setPickedAction(_args[1], {scene=self})
+		if(!interaction.isWaitingForScene()):
+			if(interaction.busyActionSeconds > 0):
+				processTime(interaction.busyActionSeconds)
+			else:
+				processTime(30)
+			interaction.doCurrentAction({scene=self})
 
 
 
@@ -172,17 +176,56 @@ func runInteraction():
 	
 	var interaction:PawnInteractionBase = pawn.getInteraction()
 	aimCameraAndSetLocName(interaction.getLocation())
-	saynn(interaction.getOutputText())
+	saynn(interaction.getOutputTextFinal())
 	
 	if(true):
 		sayn("[b]Debug info[/b]:")
 		saynn(Util.join(pawn.getDebugInfo(), "\n"))
 	
 	if(interaction.getCurrentPawn() == pawn):
-		for action in interaction.getActions():
+		for action in interaction.getActionsFinal():
 			addButton(action["name"], action["desc"], "pick_interaction_action", [interaction, action])
 	else:
 		addButton("Continue", "See what happens next", "progress_interaction")
 	
 	return true
 	
+func startInteractionFight(who:String, withWho:String):
+	if(who == "pc"):
+		runScene("FightScene", [withWho], "interaction_fight_pcstarted")
+	else:
+		runScene("FightScene", [who], "interaction_fight_pcdef")
+
+func _react_scene_end(_tag, _result):
+	if(_tag == "interaction_fight_pcstarted"):
+		#processTime(10 * 60)
+		var battlestate = _result[0]
+		#var wonHow = _result[1]
+		
+		var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
+		if(pawn == null):
+			return
+		var interaction:PawnInteractionBase = pawn.getInteraction()
+		if(interaction == null):
+			return
+		
+		if(battlestate == "win"):
+			interaction.receiveSceneStatusFinal({"won":true})
+		else:
+			interaction.receiveSceneStatusFinal({"won":false})
+	if(_tag == "interaction_fight_pcdef"):
+		#processTime(10 * 60)
+		var battlestate = _result[0]
+		#var wonHow = _result[1]
+		
+		var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
+		if(pawn == null):
+			return
+		var interaction:PawnInteractionBase = pawn.getInteraction()
+		if(interaction == null):
+			return
+		
+		if(battlestate == "win"):
+			interaction.receiveSceneStatusFinal({"won":false})
+		else:
+			interaction.receiveSceneStatusFinal({"won":true})

@@ -8,40 +8,77 @@ func processTime(_howMuch:int):
 
 func start(_pawns:Dictionary):
 	involvedPawns = {started = _pawns["started"], target = _pawns["target"]}
-	currentPawn = "started"
+	setState("", "started")
 	setLocation(getRolePawn("started").getLocation())
 
-func getOutputText() -> String:
-	return "TEST INTERACTION!"
+func init_text():
+	return "Person approaches!"
 
-func getActions() -> Array:
+func init_actions():
 	return [
 		{
-			id = "Test",
+			id = "test",
 			name = "TESSTTTT!",
 			desc = "Do something",
 			score = 1.0,
 			args = {},
 			time = 30,
 		},
+	]
+
+func init_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "test"):
+		setState("test", "target")
+
+func test_text():
+	return "Test state!"
+
+func test_actions():
+	return [
+#		{
+#			id = "Test",
+#			name = "TESSTTTT!",
+#			desc = "Do something",
+#			score = 1.0,
+#			args = {},
+#			time = 30,
+#		},
+#		{
+#			id = "end",
+#			name = "ENDDD!",
+#			desc = "Do something",
+#			score = 0.0,
+#			args = {},
+#			time = 30,
+#		},
 		{
-			id = "end",
-			name = "ENDDD!",
+			id = "fight",
+			name = "Start fight!",
 			desc = "Do something",
 			score = 0.0,
 			args = {},
 			time = 30,
+			start_fight = ["target", "started"],
 		},
 	]
 
-func doAction(_id:String, _args:Dictionary):
-	if(currentPawn == "started"):
-		currentPawn = "target"
-	else:
-		currentPawn = "started"
+func test_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "Test"):
+		setState("", "started")
+		if(RNG.chance(10)):
+			stopMe()
 		
-	if(RNG.chance(10) || _id == "end"):
+	if(_id == "end"):
 		stopMe()
+
+	if(_id == "fight"):
+		var fightResult = getFightResult(_args)
+		print(fightResult)
+		#startFight("target", "started", _context)
+		setState("", "started")
+		
+		if(fightResult["won"]):
+			stopMe()
 
 func getDebugInfo():
 	var res:Array = .getDebugInfo()

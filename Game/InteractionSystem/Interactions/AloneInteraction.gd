@@ -78,7 +78,7 @@ func getActions() -> Array:
 		return theGoal.getActions()
 	return []
 
-func doAction(_id:String, _args:Dictionary):
+func doAction(_id:String, _args:Dictionary, _context:Dictionary):
 	var theGoal = getGoal()
 	if(theGoal != null):
 		return theGoal.doAction(_id, _args)
