@@ -51,10 +51,31 @@ func processTime(_howMuch:int):
 	print(interactions)
 	pass
 
-func decideNextAction(interaction):
+func decideNextAction(interaction, _context:Dictionary = {}):
 	var actions = interaction.getActionsFinal()
-	var selectedAction = actions[0]
-	interaction.setPickedAction(selectedAction)
+	
+	if(actions == null || !(actions is Array) || actions.size() <= 0):
+		Log.printerr("No actions found for interaction: "+str(interaction.id))
+		return
+	
+	var maxScore:float = 0.0
+	for action in actions:
+		if(maxScore > action["score"]):
+			maxScore = action["score"]
+	
+	var minScore:float = maxScore * 0.1 # Filtering out unlikely actions
+	var possibleActions := []
+	for action in actions:
+		if(action["score"] >= minScore):
+			possibleActions.append([action, action["score"]])
+	
+	if(possibleActions.size() <= 0):
+		Log.printerr("No possible actions found for interaction: "+str(interaction.id))
+		interaction.setPickedAction(RNG.pick(actions), _context)
+		return
+	
+	var selectedAction = RNG.pickWeightedPairs(possibleActions)#actions[0]
+	interaction.setPickedAction(selectedAction, _context)
 
 func processBusyAllInteractions(howManySeconds:int):
 	if(howManySeconds <= 0):
@@ -71,7 +92,7 @@ func getClosestInteraction() -> PawnInteractionBase:
 		if(interaction == null):# || interaction.isNew):
 			continue
 		if(result == null || interaction.busyActionSeconds < result.busyActionSeconds):
-			if(!interaction.isPlayerInvolved() && !interaction.isWaitingForScene()):
+			if(!interaction.isBeingSpied() && !interaction.isWaitingForScene()):
 				result = interaction
 	return result
 
@@ -111,6 +132,9 @@ func onPawnMoved(charID, oldLoc:String, newLoc:String):
 		return
 	if(oldLoc == newLoc):
 		return
+	var pawn = getPawn(charID)
+	if(pawn == null):
+		return
 	if(pawnsByLoc.has(oldLoc)):
 		var _ok2 = pawnsByLoc[oldLoc].erase(charID)
 		if(pawnsByLoc[oldLoc].empty()):
@@ -118,6 +142,16 @@ func onPawnMoved(charID, oldLoc:String, newLoc:String):
 	if(!pawnsByLoc.has(newLoc)):
 		pawnsByLoc[newLoc] = {}
 	pawnsByLoc[newLoc][charID] = true
+	
+	var allNewPawns:Array = getPawnsAt(newLoc)
+	for otherpawn in allNewPawns:
+		if(otherpawn.charID == pawn.charID):
+			continue
+		
+		if(otherpawn.onMeetWith(pawn, true)):
+			break
+		if(pawn.onMeetWith(otherpawn, false)):
+			break
 
 func getPawns() -> Dictionary:
 	return pawns
@@ -171,7 +205,9 @@ func clearAll():
 	pawns.clear()
 	interactions.clear()
 
-func startInteraction(interaction, involvedPawns:Dictionary, waitUntilNextProcess:bool = true):
+func startInteraction(interactionID:String, involvedPawns:Dictionary, args:Dictionary = {}, waitUntilNextProcess:bool = true):
+	var interaction = GlobalRegistry.createInteraction(interactionID)
+	assert(interaction != null)
 	interactions.append(interaction)
 	
 	for pawnRole in involvedPawns:
@@ -183,10 +219,11 @@ func startInteraction(interaction, involvedPawns:Dictionary, waitUntilNextProces
 		pawn.setInteraction(interaction)
 	
 	interaction.isNew = waitUntilNextProcess
-	interaction.start(involvedPawns)
+	interaction.start(involvedPawns, args)
 
 func stopInteraction(interaction:PawnInteractionBase):
 	interactions.erase(interaction)
+	interaction.wasDeleted = true
 	
 	for pawnRole in interaction.involvedPawns:
 		var pawn = getPawn(interaction.involvedPawns[pawnRole])

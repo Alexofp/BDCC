@@ -14,8 +14,8 @@ func getText():
 	var action = getCurrentAction()
 	
 	if(action == "work"):
-		return "They be hitting rocks!"
-	return "They are going to work!"
+		return "{main.name} {main.is} hitting rocks!"
+	return "{main.name} {main.is} going to work!"
 
 func getActions() -> Array:
 	if(getLocation() != "mining_shafts_entering"):
@@ -37,7 +37,7 @@ func getActions() -> Array:
 			desc = "Do something",
 			score = 1.0,
 			args = {},
-			time = 60*60*2,
+			time = 5*60,#60*60*2,
 		},
 	]
 

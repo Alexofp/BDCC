@@ -54,8 +54,19 @@ func getInteraction():
 
 func checkAloneInteraction():
 	if(currentInteraction == null && !isPlayer()):
-		var aloneInteraction = load("res://Game/InteractionSystem/Interactions/AloneInteraction.gd").new()
-		GM.main.IS.startInteraction(aloneInteraction, {main = charID}, false)
+		GM.main.IS.startInteraction("AloneInteraction", {main = charID}, {}, false)
+
+func canBeInterrupted() -> bool:
+	# Make it an interaction function?
+	if(currentInteraction == null || currentInteraction.id == "AloneInteraction"):
+		return true
+	return false
+
+func onMeetWith(_otherPawn, _otherPawnMoved:bool) -> bool:
+	if(canBeInterrupted() && _otherPawn.canBeInterrupted()):
+		GM.main.IS.startInteraction("TestInteraction", {started=charID, target=_otherPawn.charID})
+		return true
+	return false
 
 func getHunger() -> float:
 	return hunger

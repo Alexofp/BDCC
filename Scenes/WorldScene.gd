@@ -150,7 +150,7 @@ func _react(_action: String, _args):
 	if(_action == "progress_interaction"):
 		var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
 		var interaction:PawnInteractionBase = pawn.getInteraction()
-		GM.main.IS.decideNextAction(interaction)
+		GM.main.IS.decideNextAction(interaction, {scene=self})
 		if(interaction.busyActionSeconds > 0):
 			processTime(interaction.busyActionSeconds)
 		else:
@@ -176,6 +176,10 @@ func runInteraction():
 	
 	var interaction:PawnInteractionBase = pawn.getInteraction()
 	aimCameraAndSetLocName(interaction.getLocation())
+	
+	if(interaction.getCurrentActionText() != ""):
+		saynn(interaction.getCurrentActionText())
+	
 	saynn(interaction.getOutputTextFinal())
 	
 	if(true):
@@ -196,36 +200,51 @@ func startInteractionFight(who:String, withWho:String):
 	else:
 		runScene("FightScene", [who], "interaction_fight_pcdef")
 
+func startInteractionSex(domID:String, subID:String, sexType = SexType.DefaultSex):
+	runScene("GenericSexScene", [domID, subID, sexType], "interaction_sex")
+
+func sendStatusToInteraction(_result):
+	var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
+	if(pawn == null):
+		return
+	var interaction:PawnInteractionBase = pawn.getInteraction()
+	if(interaction == null):
+		return
+	
+	interaction.receiveSceneStatusFinal(_result)
+
 func _react_scene_end(_tag, _result):
+	if(_tag == "interaction_sex"):
+		sendStatusToInteraction(_result[0])
+	
 	if(_tag == "interaction_fight_pcstarted"):
-		#processTime(10 * 60)
 		var battlestate = _result[0]
-		#var wonHow = _result[1]
-		
-		var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
-		if(pawn == null):
-			return
-		var interaction:PawnInteractionBase = pawn.getInteraction()
-		if(interaction == null):
-			return
-		
+
 		if(battlestate == "win"):
-			interaction.receiveSceneStatusFinal({"won":true})
+			sendStatusToInteraction({"won":true})
 		else:
-			interaction.receiveSceneStatusFinal({"won":false})
+			sendStatusToInteraction({"won":false})
 	if(_tag == "interaction_fight_pcdef"):
-		#processTime(10 * 60)
 		var battlestate = _result[0]
-		#var wonHow = _result[1]
-		
-		var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
-		if(pawn == null):
-			return
-		var interaction:PawnInteractionBase = pawn.getInteraction()
-		if(interaction == null):
-			return
-		
+
 		if(battlestate == "win"):
-			interaction.receiveSceneStatusFinal({"won":false})
+			sendStatusToInteraction({"won":false})
 		else:
-			interaction.receiveSceneStatusFinal({"won":true})
+			sendStatusToInteraction({"won":true})
+
+func isSpyingOnInteractionsWith(_charID:String):
+	if(_charID == "pc"):
+		return true
+	return false
+
+func resolveCustomCharacterName(_charID):
+	var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
+	if(pawn == null):
+		return
+	var interaction:PawnInteractionBase = pawn.getInteraction()
+	if(interaction == null):
+		return
+	
+	if(interaction.involvedPawns.has(_charID)):
+		return interaction.involvedPawns[_charID]
+	return .resolveCustomCharacterName(_charID)

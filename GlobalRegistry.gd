@@ -69,6 +69,8 @@ var slaveActions: Dictionary = {}
 var slaveEvents: Dictionary = {}
 var slaveActivities: Dictionary = {}
 var datapacks: Dictionary = {}
+var interactions: Dictionary = {}
+var interactionRefs: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -401,6 +403,8 @@ func registerEverything():
 	registerSlaveActionFolder("res://Game/NpcSlavery/SlaveActions/")
 	registerSlaveEventFolder("res://Game/NpcSlavery/SlaveEvents/")
 	registerSlaveActivitiesFolder("res://Game/NpcSlavery/SlaveActivities/")
+	
+	registerInteractionFolder("res://Game/InteractionSystem/Interactions/")
 	
 	emit_signal("loadingUpdate", 8.0/totalStages, "Sex scenes")
 	yield(get_tree(), "idle_frame")
@@ -2037,3 +2041,34 @@ func deleteDatapack(id:String):
 			#reloadPacks()
 			return true
 	return false
+
+
+
+func registerInteraction(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	interactions[object.id] = loadedClass
+	interactionRefs[object.id] = object
+
+func registerInteractionFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerInteraction(scriptPath)
+
+func createInteraction(id: String):
+	if(interactions.has(id)):
+		return interactions[id].new()
+	else:
+		Log.printerr("ERROR: interaction with the id "+id+" wasn't found")
+		return null
+
+func getInteractionRef(id: String):
+	if(interactionRefs.has(id)):
+		return interactionRefs[id]
+	else:
+		Log.printerr("ERROR: interaction with the id "+id+" wasn't found")
+		return null
+
+func getInteractions():
+	return interactionRefs

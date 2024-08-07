@@ -6,7 +6,7 @@ func getScore(_pawn:CharacterPawn) -> float:
 	return 0.1
 
 func getText():
-	return "They be hanging around!"
+	return "{main.name} {main.is} hanging around!"
 
 func onGoalStart():
 	stepsAmount = RNG.randi_range(2, 5)

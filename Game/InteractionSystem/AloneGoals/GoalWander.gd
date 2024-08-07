@@ -6,7 +6,7 @@ func getScore(_pawn:CharacterPawn) -> float:
 	return 0.1
 
 func getText():
-	return "They be wandering!"
+	return "{main.name} {main.is} wandering!"
 
 func onGoalStart():
 	stepsAmount = RNG.randi_range(3, 6)
@@ -37,9 +37,9 @@ func doAction(_id:String, _args:Dictionary):
 	for pawn in pawns:
 		if(pawn == getPawn()):
 			continue
-		if(true):
-			GM.main.IS.startInteraction(load("res://Game/InteractionSystem/Interactions/TestInteraction.gd").new(), {started=getPawn().charID, target=pawn.charID})
-			return
+		#if(true):
+		#	GM.main.IS.startInteraction("TestInteraction", {started=getPawn().charID, target=pawn.charID})
+		#	return
 			
 	stepsAmount -= 1
 	if(stepsAmount <= 0):

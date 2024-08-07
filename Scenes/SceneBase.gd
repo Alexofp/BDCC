@@ -354,6 +354,9 @@ func shouldDisplayBigButtons():
 func getSceneCompanions():
 	return []
 
+func isSpyingOnInteractionsWith(_charID:String):
+	return false
+
 func saveData():
 	var data = {}
 	data["state"] = state

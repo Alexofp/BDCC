@@ -6,13 +6,13 @@ func _init():
 func processTime(_howMuch:int):
 	pass
 
-func start(_pawns:Dictionary):
+func start(_pawns:Dictionary, _args:Dictionary):
 	involvedPawns = {started = _pawns["started"], target = _pawns["target"]}
 	setState("", "started")
 	setLocation(getRolePawn("started").getLocation())
 
 func init_text():
-	return "Person approaches!"
+	return "{started.name} approaches!"
 
 func init_actions():
 	return [
@@ -47,7 +47,7 @@ func test_actions():
 #			id = "end",
 #			name = "ENDDD!",
 #			desc = "Do something",
-#			score = 0.0,
+#			score = 1.0,
 #			args = {},
 #			time = 30,
 #		},
@@ -55,18 +55,29 @@ func test_actions():
 			id = "fight",
 			name = "Start fight!",
 			desc = "Do something",
-			score = 0.0,
+			score = 1.0,
 			args = {},
 			time = 30,
 			start_fight = ["target", "started"],
 		},
+		{
+			id = "punish",
+			name = "Start punish!",
+			desc = "Do something",
+			score = 1000.0,
+			args = {},
+			time = 30,
+		},
 	]
+
 
 func test_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "Test"):
 		setState("", "started")
 		if(RNG.chance(10)):
 			stopMe()
+	if(_id == "punish"):
+		startInteraction("PunishInteraction", {punisher=getRoleID("target"), target=getRoleID("started")})
 		
 	if(_id == "end"):
 		stopMe()
@@ -80,9 +91,3 @@ func test_do(_id:String, _args:Dictionary, _context:Dictionary):
 		if(fightResult["won"]):
 			stopMe()
 
-func getDebugInfo():
-	var res:Array = .getDebugInfo()
-
-	res.append("currentPawn: "+currentPawn)
-	
-	return res

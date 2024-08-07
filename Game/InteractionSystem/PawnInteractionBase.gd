@@ -14,6 +14,7 @@ var currentActionID:String = ""
 var currentActionArgs:Dictionary = {}
 
 var busyActionSeconds:int = 0
+var currentActionText:String = ""
 var isNew:bool = false
 var isWaitingScene:bool = false
 var isWaitingAction:String = ""
@@ -23,7 +24,9 @@ var cachedPath:Array = []
 
 var cachedLastDir:int = -1
 
-func start(_pawns:Dictionary):
+var wasDeleted:bool = false
+
+func start(_pawns:Dictionary, _args:Dictionary):
 	pass
 
 func getOutputText() -> String:
@@ -84,6 +87,10 @@ func setPickedAction(_actionEntry, _context:Dictionary = {}):
 		theTime = _actionEntry["time"]
 	busyActionSeconds = theTime
 	
+	if(_actionEntry.has("actionText")):
+		currentActionText = _actionEntry["actionText"]
+	else:
+		currentActionText = ""
 	
 	if(_actionEntry.has("start_fight")):
 		var fightersData = _actionEntry["start_fight"]
@@ -93,19 +100,51 @@ func setPickedAction(_actionEntry, _context:Dictionary = {}):
 		var withWhomID:String = involvedPawns[fightersData[1]]
 		
 		if((whoID == "pc" || withWhomID == "pc") && _context.has("scene")):
-			isWaitingScene = true
-			_context["scene"].startInteractionFight(whoID, withWhomID)
+			if(_context["scene"].has_method("startInteractionFight")):
+				isWaitingScene = true
+				_context["scene"].startInteractionFight(whoID, withWhomID)
+
+	if(_actionEntry.has("start_sex")):
+		var fightersData = _actionEntry["start_sex"]
+		currentActionArgs["sex"] = _actionEntry["start_sex"]
+		
+		var whoID:String = involvedPawns[fightersData[0]]
+		var withWhomID:String = involvedPawns[fightersData[1]]
+		var sexType = SexType.DefaultSex
+		if(fightersData.size() > 2):
+			sexType = fightersData[2]
+		
+		if(_context.has("scene")):
+			if(_context["scene"].has_method("startInteractionSex")):
+				isWaitingScene = true
+				_context["scene"].startInteractionSex(whoID, withWhomID, sexType)
+
+func getSexResult(_args:Dictionary):
+	if(_args.has("scene_result")):
+		return _args["scene_result"]
+	
+	var _fightersData = currentActionArgs["sex"]
+	
+	print("SEEEEEEEEEEEX")
+	# Do sex stuff here
+	var newResult:Dictionary = {}
+	_args["scene_result"] = newResult
+	return newResult
 
 func getFightResult(_args:Dictionary):
 	if(_args.has("scene_result")):
 		return _args["scene_result"]
 	
 	var _fightersData = currentActionArgs["fight"]
-	return {won=RNG.chance(50)}
+	
+	# Simulate fight here
+	var newResult:Dictionary = {won=RNG.chance(50)}
+	_args["scene_result"] = newResult
+	return newResult
 
 
 func doCurrentAction(_context:Dictionary = {}):
-	if(currentActionID == ""):
+	if(currentActionID == "" || wasDeleted):
 		return
 	
 	doActionFinal(currentActionID, currentActionArgs, _context)
@@ -135,6 +174,11 @@ func getRolePawn(role:String) -> CharacterPawn:
 	if(involvedPawns.has(role)):
 		return getPawn(involvedPawns[role])
 	return null
+
+func getRoleID(role:String) -> String:
+	if(involvedPawns.has(role)):
+		return (involvedPawns[role])
+	return ""
 
 func setLocation(newLoc:String):
 	location = newLoc
@@ -212,6 +256,7 @@ func getDebugInfo():
 		"currentActionID: "+str(currentActionID),
 		"state: "+str(getState()),
 		"busyActionSeconds: "+str(busyActionSeconds),
+		"currentPawn: "+str(currentPawn),
 		#"involvedPawns: "+str(involvedPawns),
 	]
 
@@ -224,7 +269,17 @@ func receiveSceneStatusFinal(_result:Dictionary):
 func isWaitingForScene() -> bool:
 	return isWaitingScene
 
+func startInteraction(interactionID:String, _involvedPawns:Dictionary, args:Dictionary = {}):
+	GM.main.IS.startInteraction(interactionID, _involvedPawns, args)
 
+func getCurrentActionText() -> String:
+	return currentActionText
+
+func isBeingSpied() -> bool:
+	for role in involvedPawns:
+		if(GM.main.isPawnIDBeingSpied(involvedPawns[role])):
+			return true
+	return false
 
 #	currentActionID = _actionEntry["id"]
 #	currentActionArgs = (_actionEntry["args"] if _actionEntry.has("args") else {})

@@ -17,8 +17,8 @@ func getText():
 	var action = getCurrentAction()
 	
 	if(action == "eat"):
-		return "They be eating!"
-	return "They be hungry! Heading to canteen!"
+		return "{main.name} {main.is} eating!"
+	return "{main.name} {main.is} hungry! Heading to canteen!"
 
 func getActions() -> Array:
 	if(getLocation() != "hall_canteen"):

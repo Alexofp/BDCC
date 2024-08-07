@@ -1649,3 +1649,9 @@ func isDatapackCharacter(charID):
 
 func shouldExecuteOnceCodeblocksRun() -> bool:
 	return allowExecuteOnce
+
+func isPawnIDBeingSpied(_charID:String):
+	for scene in sceneStack:
+		if(scene.isSpyingOnInteractionsWith(_charID)):
+			return true
+	return false

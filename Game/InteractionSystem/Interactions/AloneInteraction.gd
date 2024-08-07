@@ -61,7 +61,7 @@ func switchGoalTo(goalID:String):
 	print("NEW GOAL FOR PAWN "+str(newGoal.pawnID)+": "+str(goalID))
 	return true
 
-func start(_pawns:Dictionary):
+func start(_pawns:Dictionary, _args:Dictionary):
 	involvedPawns = {main = _pawns["main"]}
 	currentPawn = "main"
 	setLocation(getRolePawn("main").getLocation())
