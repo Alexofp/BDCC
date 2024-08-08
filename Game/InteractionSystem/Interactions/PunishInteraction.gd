@@ -115,3 +115,10 @@ func instocks_actions():
 func instocks_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "leave"):
 		stopMe()
+
+func getAnimData() -> Array:
+	if(getState() == "stocks"):
+		if(getLocation() != "main_punishment_spot"):
+			return [StageScene.Duo, "walk", {pc="target", npc="punisher", npcAction="walk", flipNPC=true, bodyState={leashedBy="punisher"}}]
+	
+	return [StageScene.Duo, "stand", {pc="target", npc="punisher"}]

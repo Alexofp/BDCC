@@ -36,6 +36,12 @@ func _run():
 		addDisabledButtonAt(12, "East", "Can't go east")
 	#addDisabledButton("bark", "no awo")
 	
+	if(GM.main.IS.hasPawnsAtIgnorePC(roomID)):
+		addButtonAt(7, "Look around", "See what's happening around you", "look_around")
+		setCharactersEasyList(GM.main.IS.getPawnIDsAt(roomID))
+	else:
+		clearCharacter()
+	
 	if(GM.pc.getInventory().hasRemovableRestraints()):
 		addButtonAt(8, "Struggle", "Struggle against your restraints", "struggle")
 	addButtonAt(9, "Me", "Shows actions related to you and also your personal information", "me")
@@ -147,6 +153,8 @@ func _react(_action: String, _args):
 		runScene("PCOverrideExample")
 	if(_action == "masochismminigame"):
 		runScene("TaviMasochismScene")
+	if(_action == "look_around"):
+		runScene("LookingAroundScene")
 	if(_action == "progress_interaction"):
 		var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
 		var interaction:PawnInteractionBase = pawn.getInteraction()
@@ -171,10 +179,12 @@ func _react(_action: String, _args):
 
 func runInteraction():
 	var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
-	if(pawn == null || pawn.currentInteraction == null):
+	if(pawn == null || pawn.currentInteraction == null || !pawn.currentInteraction.doesStealControlFromPC()):
 		return false
 	
 	var interaction:PawnInteractionBase = pawn.getInteraction()
+	setCharactersEasyList(interaction.getAllInvolvedCharIDs())
+	interaction.playAnimation()
 	aimCameraAndSetLocName(interaction.getLocation())
 	
 	if(interaction.getCurrentActionText() != ""):

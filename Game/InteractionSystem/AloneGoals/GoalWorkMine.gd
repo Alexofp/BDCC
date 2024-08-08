@@ -47,3 +47,8 @@ func doAction(_id:String, _args:Dictionary):
 		completeGoal()
 	if(_id == "go"):
 		goTowards("mining_shafts_entering")
+
+func getAnimData() -> Array:
+	if(getLocation() != "mining_shafts_entering"):
+		return [StageScene.Solo, "walk", {pc="main"}]
+	return [StageScene.Solo, "stand", {pc="main"}]

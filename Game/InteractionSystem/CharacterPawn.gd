@@ -20,6 +20,9 @@ func getChar() -> BaseCharacter:
 		return null
 	return GlobalRegistry.getCharacter(charID)
 
+func getCharacter() -> BaseCharacter:
+	return getChar()
+
 func getLocation() -> String:
 	#if(isPlayer()):
 	#	return GM.pc.getLocation()
@@ -53,20 +56,19 @@ func getInteraction():
 	return currentInteraction
 
 func checkAloneInteraction():
-	if(currentInteraction == null && !isPlayer()):
+	if(currentInteraction == null):
 		GM.main.IS.startInteraction("AloneInteraction", {main = charID}, {}, false)
 
 func canBeInterrupted() -> bool:
 	# Make it an interaction function?
-	if(currentInteraction == null || currentInteraction.id == "AloneInteraction"):
-		return true
-	return false
+	if(isPlayer() && !GM.main.playerCanBeInterrupted()):
+		return false
+	if(currentInteraction != null && currentInteraction.id != "AloneInteraction"):
+		return false
+	return true
 
 func onMeetWith(_otherPawn, _otherPawnMoved:bool) -> bool:
-	if(canBeInterrupted() && _otherPawn.canBeInterrupted()):
-		GM.main.IS.startInteraction("TestInteraction", {started=charID, target=_otherPawn.charID})
-		return true
-	return false
+	return GM.main.IS.checkOnMeetInteractions(self, _otherPawn, _otherPawnMoved)
 
 func getHunger() -> float:
 	return hunger

@@ -29,6 +29,9 @@ var wasDeleted:bool = false
 func start(_pawns:Dictionary, _args:Dictionary):
 	pass
 
+func shouldRunOnMeet(_pawn1, _pawn2, _pawn2Moved:bool):
+	return [false]
+
 func getOutputText() -> String:
 	return "Something something"
 
@@ -37,6 +40,38 @@ func getOutputTextFinal() -> String:
 	if(has_method(methodName)):
 		return call(methodName)
 	return getOutputText()
+
+func getAnimData() -> Array:
+	return []
+
+func getAnimDataFinal() -> Array:
+	var methodName:String = (state if state != "" else "init")+"_anim"
+	if(has_method(methodName)):
+		return call(methodName)
+	return getAnimData()
+
+func getCharIDByRole(role:String) -> String:
+	if(involvedPawns.has(role)):
+		return involvedPawns[role]
+	return ""
+
+func playAnimation():
+	var animData = getAnimDataFinal()
+	
+	if(animData.size() <= 2):
+		return
+	
+	if(animData.size() > 2):
+		var extraData:Dictionary = animData[2]
+		for theID in ["pc", "npc", "npc2", "npc3"]:
+			if(extraData.has(theID)):
+				extraData[theID] = getCharIDByRole(extraData[theID])
+		for theID in ["bodyState", "npcBodyState", "npc2BodyState", "npc3BodyState"]:
+			if(extraData.has(theID)):
+				if(extraData[theID].has("leashedBy")):
+					extraData[theID]["leashedBy"] = getCharIDByRole(extraData[theID]["leashedBy"])
+	
+	GM.main.playAnimation(animData[0], animData[1], animData[2] if animData.size() > 2 else {})
 
 func getActions() -> Array:
 	return [
@@ -65,6 +100,60 @@ func doActionFinal(_id:String, _args:Dictionary, _context:Dictionary = {}):
 		return call(methodName, _id, _args, _context)
 	return doAction(_id, _args, _context)
 
+func getInterruptActions(_pawn:CharacterPawn) -> Array:
+	return [
+		{
+			id = "test",
+			name = "INTERRUPT!",
+			desc = "Do something",
+			score = 1.0,
+			args = {},
+		},
+	]
+
+func getInterruptActionsFinal(_pawn:CharacterPawn) -> Array:
+	var methodName:String = (state if state != "" else "init")+"_interruptActions"
+	if(has_method(methodName)):
+		return call(methodName, _pawn)
+	return getInterruptActions(_pawn)
+
+func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _context:Dictionary):
+	pass
+
+func doInterruptActionFinal(_pawn:CharacterPawn, _id:String, _args:Dictionary, _context:Dictionary = {}):
+	var methodName:String = (state if state != "" else "init")+"_doInterrupt"
+	if(has_method(methodName)):
+		return call(methodName, _pawn, _id, _args, _context)
+	return doInterruptAction(_pawn, _id, _args, _context)
+
+func isPawnInvolved(pawn) -> bool:
+	if(pawn is String):
+		pawn = getPawn(pawn)
+	for role in involvedPawns:
+		if(getRolePawn(role) == pawn):
+			return true
+	return false
+
+func doRemoveRole(role:String):
+	if(!involvedPawns.has(role)):
+		return false
+	var pawn = getRolePawn(role)
+	var _ok = involvedPawns.erase(role)
+	if(!isPawnInvolved(pawn)):
+		pawn.setInteraction(null)
+
+func doInvolvePawn(role:String, pawn):
+	if(pawn is String):
+		pawn = getPawn(pawn)
+	if(involvedPawns.has(role)):
+		doRemoveRole(role)
+	assert(!isPawnInvolved(pawn))
+	
+	if(!isPawnInvolved(pawn)):
+		GM.main.IS.stopInteractionsForPawnID(pawn.charID)
+	involvedPawns[role] = pawn.charID
+	pawn.setInteraction(self)
+
 func setState(newState:String, newRole:String):
 	setCurrentPawn(newRole)
 	state = newState
@@ -74,6 +163,9 @@ func getState() -> String:
 
 func setCurrentPawn(therole:String):
 	currentPawn = therole
+
+func setCurrentRole(therole:String):
+	setCurrentPawn(therole)
 
 func getCurrentPawn() -> CharacterPawn:
 	return getRolePawn(currentPawn)
@@ -137,6 +229,7 @@ func getFightResult(_args:Dictionary):
 	
 	var _fightersData = currentActionArgs["fight"]
 	
+	print("FIIIIIIIIIIGHT")
 	# Simulate fight here
 	var newResult:Dictionary = {won=RNG.chance(50)}
 	_args["scene_result"] = newResult
@@ -288,3 +381,50 @@ func isBeingSpied() -> bool:
 #	if(_actionEntry.has("time")):
 #		theTime = _actionEntry["time"]
 #	busyActionSeconds = theTime
+
+func getKeepInteractionScoreFor(_role:String):
+	return 1.0
+
+func doLookAround(role:String, keepScoreMult:float = 1.0):
+	if(wasDeleted):
+		return false
+	var pawn = getRolePawn(role)
+	var loc:String = pawn.getLocation()
+	
+	var allPawns:Array = GM.main.IS.getPawnsAt(loc)
+	
+	var allPossible:Array = []
+	allPossible.append([null, getKeepInteractionScoreFor(role)*keepScoreMult])
+	
+	for otherPawn in allPawns:
+		if(otherPawn == pawn):
+			continue
+		
+		var interaction:PawnInteractionBase = otherPawn.getInteraction()
+		if(interaction == null):
+			continue
+		
+		for action in interaction.getInterruptActionsFinal(pawn):
+			if(action["score"] > 0):
+				allPossible.append([[interaction, action], action["score"]])
+	
+	var pickedEntry = RNG.pickWeightedPairs(allPossible)
+	
+	if(pickedEntry != null):
+		pickedEntry[0].doInterruptActionFinal(pawn, pickedEntry[1]["id"], pickedEntry[1]["args"])
+		return true
+	
+	return false
+
+func doesStealControlFromPC() -> bool:
+	return true
+
+func getAllInvolvedCharIDs() -> Array:
+	var result := []
+	
+	for role in involvedPawns:
+		var pawn = getRolePawn(role)
+		if(pawn != null):
+			if(!result.has(pawn.charID)):
+				result.append(pawn.charID)
+	return result

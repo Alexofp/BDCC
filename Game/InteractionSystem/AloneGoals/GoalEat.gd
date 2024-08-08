@@ -50,3 +50,8 @@ func doAction(_id:String, _args:Dictionary):
 		completeGoal()
 	if(_id == "go"):
 		goTowards("hall_canteen")
+
+func getAnimData() -> Array:
+	if(getLocation() != "hall_canteen"):
+		return [StageScene.Solo, "walk", {pc="main"}]
+	return [StageScene.Solo, "stand", {pc="main"}]

@@ -165,9 +165,23 @@ func updateCharacter():
 			GM.ui.addCharacterToPanel(id, currentCharactersVariants[id])
 
 func clearCharacter():
+	if(currentCharactersVariants.empty()):
+		return
 	currentCharactersVariants.clear()
 	if(GM.main.getCurrentScene() == self):
 		GM.ui.clearCharactersPanel()
+
+func setCharactersEasyList(newChars:Array):
+	for charID in currentCharactersVariants.keys():
+		if(charID == "pc"):
+			continue
+		if(!newChars.has(charID)):
+			removeCharacter(charID)
+	for charID in newChars:
+		if(charID == "pc"):
+			continue
+		if(!currentCharactersVariants.has(charID)):
+			addCharacter(charID)
 
 func _onSceneEnd():
 	pass

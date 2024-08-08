@@ -7,9 +7,15 @@ func processTime(_howMuch:int):
 	pass
 
 func start(_pawns:Dictionary, _args:Dictionary):
-	involvedPawns = {started = _pawns["started"], target = _pawns["target"]}
+	doInvolvePawn("started", _pawns["started"])
+	doInvolvePawn("target", _pawns["target"])
 	setState("", "started")
 	setLocation(getRolePawn("started").getLocation())
+
+func shouldRunOnMeet(_pawn1, _pawn2, _pawn2Moved:bool):
+	if(_pawn1.canBeInterrupted() && _pawn2.canBeInterrupted() && RNG.chance(25)):
+		return [true, {started=_pawn1.charID, target=_pawn2.charID}, {}]
+	return [false]
 
 func init_text():
 	return "{started.name} approaches!"
@@ -91,3 +97,7 @@ func test_do(_id:String, _args:Dictionary, _context:Dictionary):
 		if(fightResult["won"]):
 			stopMe()
 
+func getAnimData() -> Array:
+	if(getCurrentAction() == "fight"):
+		return [StageScene.Duo, "shove", {pc="started", npc="target", npcAction="hurt"}]
+	return [StageScene.Duo, "stand", {pc="started", npc="target"}]

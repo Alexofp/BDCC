@@ -64,3 +64,9 @@ func completeGoal():
 
 func getCurrentAction() -> String:
 	return getInteraction().getCurrentAction()
+
+func doLookAround(keepScoreMult:float = 1.0):
+	return getInteraction().doLookAround("main", keepScoreMult)
+
+func getAnimData() -> Array:
+	return [StageScene.Solo, "stand", {pc="main"}]

@@ -1655,3 +1655,6 @@ func isPawnIDBeingSpied(_charID:String):
 		if(scene.isSpyingOnInteractionsWith(_charID)):
 			return true
 	return false
+
+func playerCanBeInterrupted() -> bool:
+	return sceneStack.size() == 1

@@ -25,6 +25,7 @@ func getActions() -> Array:
 
 func doAction(_id:String, _args:Dictionary):
 	#doWanderGurantee()
+	doLookAround()
 
 	stepsAmount -= 1
 	if(stepsAmount <= 0):

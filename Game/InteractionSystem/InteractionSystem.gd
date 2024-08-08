@@ -176,6 +176,30 @@ func getPawnsAt(loc:String) -> Array:
 	
 	return result
 
+func getPawnIDsAt(loc:String) -> Array:
+	if(!pawnsByLoc.has(loc)):
+		return []
+	var result := []
+	
+	for pawnID in pawnsByLoc[loc]:
+		result.append(pawnID)
+	return result
+
+func hasPawnsAt(loc:String) -> bool:
+	if(!pawnsByLoc.has(loc)):
+		return false
+	if(pawnsByLoc[loc].size() > 0):
+		return true
+	return false
+
+func hasPawnsAtIgnorePC(loc:String) -> bool:
+	if(!pawnsByLoc.has(loc)):
+		return false
+	for pawnID in pawnsByLoc[loc]:
+		if(pawnID != "pc"):
+			return true
+	return false
+
 func getInteractionsAt(loc:String) -> Array:
 	var result := []
 	
@@ -236,3 +260,17 @@ func stopInteractionsForPawnID(charID:String):
 			if(interaction.involvedPawns[pawnRole] == charID):
 				stopInteraction(interaction)
 				break
+
+func stopInteractionsForPawn(pawn):
+	stopInteractionsForPawnID(pawn.charID)
+
+func checkOnMeetInteractions(pawn1, pawn2, pawn2Moved:bool):
+	for interacitonID in GlobalRegistry.getInteractions():
+		var interaction:PawnInteractionBase = GlobalRegistry.getInteractionRef(interacitonID)
+		
+		var shouldRunData = interaction.shouldRunOnMeet(pawn1, pawn2, pawn2Moved)
+		
+		if(shouldRunData[0]):
+			startInteraction(interaction.id, shouldRunData[1], shouldRunData[2] if shouldRunData.size() > 2 else {})
+			return true
+	return false

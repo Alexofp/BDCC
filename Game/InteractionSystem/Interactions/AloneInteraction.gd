@@ -62,8 +62,8 @@ func switchGoalTo(goalID:String):
 	return true
 
 func start(_pawns:Dictionary, _args:Dictionary):
-	involvedPawns = {main = _pawns["main"]}
-	currentPawn = "main"
+	doInvolvePawn("main", _pawns["main"])
+	setCurrentRole("main")
 	setLocation(getRolePawn("main").getLocation())
 
 func getOutputText() -> String:
@@ -96,6 +96,9 @@ func doAction(_id:String, _args:Dictionary, _context:Dictionary):
 #		return {time = 0}
 #	return {time = 60}
 
+func doesStealControlFromPC() -> bool:
+	return false
+
 func getDebugInfo():
 	var res:Array = .getDebugInfo()
 	
@@ -116,3 +119,8 @@ func getDebugInfo():
 		res.append(newGoalRef.id+" score: "+str(Util.roundF(newScore, 2)))
 	
 	return res
+
+func getAnimData() -> Array:
+	if(goal == null):
+		return []
+	return goal.getAnimData()

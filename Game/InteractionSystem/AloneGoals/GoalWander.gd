@@ -32,15 +32,11 @@ func doAction(_id:String, _args:Dictionary):
 	#var pawn = getPawn()
 	
 	doWanderGurantee()
+	doLookAround()
 
-	var pawns = GM.main.IS.getPawnsAt(getLocation())
-	for pawn in pawns:
-		if(pawn == getPawn()):
-			continue
-		#if(true):
-		#	GM.main.IS.startInteraction("TestInteraction", {started=getPawn().charID, target=pawn.charID})
-		#	return
-			
 	stepsAmount -= 1
 	if(stepsAmount <= 0):
 		completeGoal()
+
+func getAnimData() -> Array:
+	return [StageScene.Solo, "walk", {pc="main"}]

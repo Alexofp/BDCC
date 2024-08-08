@@ -23,8 +23,9 @@ func _run():
 			addButton("Close scene", "Enough spying", "endthescene")
 			return
 		
+		setCharactersEasyList(interaction.getAllInvolvedCharIDs())
+		interaction.playAnimation()
 		aimCameraAndSetLocName(interaction.getLocation())
-		playAnimation(StageScene.Solo, "stand", {pc=pawnID})
 		
 		if(interaction.getCurrentActionText() != ""):
 			saynn(interaction.getCurrentActionText())
