@@ -47,12 +47,15 @@ func _react(_action: String, _args):
 	if(_action == "progress_interaction"):
 		var pawn:CharacterPawn = GM.main.IS.getPawn(pawnID)
 		var interaction:PawnInteractionBase = pawn.getInteraction()
-		GM.main.IS.decideNextAction(interaction, {scene=self})
+		if(interaction.currentActionID == ""):
+			GM.main.IS.decideNextAction(interaction, {scene=self})
+		
 		if(interaction.busyActionSeconds > 0):
 			processTime(interaction.busyActionSeconds)
 		else:
 			processTime(30)
 		interaction.doCurrentAction({scene=self})
+		GM.main.IS.decideNextAction(pawn.getInteraction(), {scene=self})
 		return
 
 	setState(_action)

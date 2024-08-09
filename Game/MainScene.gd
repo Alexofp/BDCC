@@ -25,6 +25,7 @@ var currentlyTestingScene = false
 var allowExecuteOnce:bool = false
 
 var IS:InteractionSystem = InteractionSystem.new()
+var RS:RelationshipSystem = RelationshipSystem.new()
 
 var staticCharacters = {}
 var charactersToUpdate = {}
@@ -141,6 +142,7 @@ func removeDynamicCharacter(characterID, printDebug = true):
 		if(printDebug):
 			Log.print("removeDynamicCharacter(): Removing "+str(characterID)+" character")
 		removeDynamicCharacterFromAllPools(characterID)
+		RS.removeAllEntriesOf(characterID)
 		
 		dynamicCharacters[characterID].queue_free()
 		dynamicCharacters.erase(characterID)
@@ -599,6 +601,8 @@ func hoursPassed(howMuch):
 			var character = getCharacter(characterID)
 			if(character != null && character.isSlaveToPlayer()):
 				character.getNpcSlavery().hoursPassed(howMuch)
+	
+	RS.decayRelationships(howMuch)
 
 func processTimeUntil(newseconds):
 	if(timeOfDay >= newseconds):

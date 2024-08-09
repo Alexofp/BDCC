@@ -1034,6 +1034,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Modules/RahiModule/Module.gd"
 }, {
+"base": "Reference",
+"class": "RelationshipEntry",
+"language": "GDScript",
+"path": "res://Game/InteractionSystem/Relationship/RelationshipEntry.gd"
+}, {
+"base": "Reference",
+"class": "RelationshipSystem",
+"language": "GDScript",
+"path": "res://Game/InteractionSystem/Relationship/RelationshipSystem.gd"
+}, {
 "base": "RestraintData",
 "class": "RestraintBallGag",
 "language": "GDScript",
@@ -1428,6 +1438,11 @@ _global_script_classes=[ {
 "class": "WorldPopulation",
 "language": "GDScript",
 "path": "res://Game/World/WorldPopulation.gd"
+}, {
+"base": "Object",
+"class": "WorldZone",
+"language": "GDScript",
+"path": "res://Game/World/Util/WorldZone.gd"
 } ]
 _global_script_class_icons={
 "AIStrategyBase": "",
@@ -1635,6 +1650,8 @@ _global_script_class_icons={
 "RNG": "",
 "RNGData": "",
 "RahiModule": "",
+"RelationshipEntry": "",
+"RelationshipSystem": "",
 "RestraintBallGag": "",
 "RestraintBlindfold": "",
 "RestraintButtplug": "",
@@ -1713,7 +1730,8 @@ _global_script_class_icons={
 "VaginaOrifice": "",
 "WorldEditBase": "",
 "WorldFloor": "",
-"WorldPopulation": ""
+"WorldPopulation": "",
+"WorldZone": ""
 }
 
 [application]

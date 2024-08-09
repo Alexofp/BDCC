@@ -95,6 +95,7 @@ func stocks_do(_id:String, _args:Dictionary, _context:Dictionary):
 		
 	if(_id == "lockstocks"):
 		#stopMe()
+		affectAffection("target", "punisher", -0.1)
 		setState("instocks", "punisher")
 
 func instocks_text():

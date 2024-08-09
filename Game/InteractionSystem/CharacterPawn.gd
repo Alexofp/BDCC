@@ -93,3 +93,59 @@ func getDebugInfo():
 
 func isPlayer() -> bool:
 	return charID == "pc"
+
+func isPawn() -> bool:
+	return true
+
+func scoreFetish(fetishes:Dictionary, onlyPositive:bool = false) -> float:
+	var fetishHolder: FetishHolder = getChar().getFetishHolder()
+	return fetishHolder.scoreFetish(fetishes, onlyPositive)
+
+func scoreFetishMax(fetishes:Dictionary, minValue:float = -999.9) -> float:
+	var fetishHolder: FetishHolder = getChar().getFetishHolder()
+	return fetishHolder.scoreFetishMax(fetishes, minValue)
+
+func scorePersonality(personalityStats:Dictionary, onlyPositive:bool = false) -> float:
+	var personality: Personality = getChar().getPersonality()
+	return personality.personalityScore(personalityStats, onlyPositive)
+
+func scorePersonalityMax(personalityStats:Dictionary, minValue:float = -999.9) -> float:
+	var personality: Personality = getChar().getPersonality()
+	return personality.personalityScoreMax(personalityStats, minValue)
+
+func scoreExposed() -> float:
+	var value:float = getChar().getExposure()
+	return value
+
+func scoreLike(otherCharID) -> float:
+	if(!(otherCharID is String)):
+		otherCharID = otherCharID.charID
+	
+	var affectionValue:float = GM.main.RS.getAffection(charID, otherCharID)
+	return max(0.0, affectionValue)
+
+func scoreHate(otherCharID) -> float:
+	if(!(otherCharID is String)):
+		otherCharID = otherCharID.charID
+	
+	var affectionValue:float = GM.main.RS.getAffection(charID, otherCharID)
+	return max(0.0, -affectionValue)
+
+func scoreLust(otherCharID) -> float:
+	if(!(otherCharID is String)):
+		otherCharID = otherCharID.charID
+	
+	var lustValue:float = GM.main.RS.getLust(charID, otherCharID)
+	return max(0.0, lustValue)
+
+func affectAffection(otherCharID, howMuch:float):
+	if(!(otherCharID is String)):
+		otherCharID = otherCharID.charID
+	
+	GM.main.RS.addAffection(charID, otherCharID, howMuch)
+
+func affectLust(otherCharID, howMuch:float):
+	if(!(otherCharID is String)):
+		otherCharID = otherCharID.charID
+	
+	GM.main.RS.addLust(charID, otherCharID, howMuch)

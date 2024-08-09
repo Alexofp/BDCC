@@ -347,6 +347,35 @@ func createWorldPawn(charID, pawn, loc):
 	newWorldPawn.global_position = getRoomByID(loc).global_position
 	pawns[charID] = newWorldPawn
 
+func getZoneRooms(zoneID:String) -> Array:
+	var finalZoneID:String = "zone_"+zoneID
+	
+	if(!get_tree().has_group(finalZoneID)):
+		Log.printerr("Trying to find rooms for zone that doesn't exist: "+zoneID)
+		return []
+	var result := []
+	
+	var rooms = get_tree().get_nodes_in_group(finalZoneID)
+	for room in rooms:
+		if(!room.has_method("getFloorID")):
+			continue
+		result.append(room.roomID)
+	return result
+
+func getRandomZoneRoom(zoneID:String, defaultValue:String = ""):
+	var rooms = getZoneRooms(zoneID)
+	
+	if(rooms.size() <= 0):
+		return defaultValue
+	return RNG.pick(rooms)
+
+func isRoomInZone(roomID:String, zoneID:String) -> bool:
+	var theRoom = getRoomByID(roomID)
+	if(theRoom == null):
+		return false
+	var finalZoneID:String = "zone_"+zoneID
+	return theRoom.is_in_group(finalZoneID)
+
 func saveData():
 	var data = {}
 	data["lastAimedRoomID"] = lastAimedRoomID

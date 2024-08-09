@@ -5,9 +5,10 @@ const Wander = "Wander"
 const Eat = "Eat"
 const Hangout = "Hangout"
 const WorkMine = "WorkMine"
+const Patrol = "Patrol"
 
 static func getAll():
-	return [Wander, Eat, Hangout, WorkMine]
+	return [Wander, Eat, Hangout, WorkMine, Patrol]
 
 static func getAllAlone():
 	return getAll()

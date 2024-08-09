@@ -13,7 +13,7 @@ func start(_pawns:Dictionary, _args:Dictionary):
 	setLocation(getRolePawn("started").getLocation())
 
 func shouldRunOnMeet(_pawn1, _pawn2, _pawn2Moved:bool):
-	if(_pawn1.canBeInterrupted() && _pawn2.canBeInterrupted() && RNG.chance(25)):
+	if(_pawn1.canBeInterrupted() && _pawn2.canBeInterrupted() && RNG.chance(5)):
 		return [true, {started=_pawn1.charID, target=_pawn2.charID}, {}]
 	return [false]
 
@@ -93,6 +93,8 @@ func test_do(_id:String, _args:Dictionary, _context:Dictionary):
 		print(fightResult)
 		#startFight("target", "started", _context)
 		setState("", "started")
+		
+		affectAffection("target", "started", -0.1)
 		
 		if(fightResult["won"]):
 			stopMe()

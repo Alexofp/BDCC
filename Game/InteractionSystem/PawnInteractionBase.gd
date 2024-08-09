@@ -428,3 +428,66 @@ func getAllInvolvedCharIDs() -> Array:
 			if(!result.has(pawn.charID)):
 				result.append(pawn.charID)
 	return result
+
+
+
+
+func scoreFetish(role:String, fetishes:Dictionary, onlyPositive:bool = false) -> float:
+	if(!involvedPawns.has(role)):
+		Log.printerr("Bad role found: "+role)
+		return 0.0
+	return getRolePawn(role).scoreFetish(fetishes, onlyPositive)
+
+func scoreFetishMax(role:String, fetishes:Dictionary, minValue:float = -999.9) -> float:
+	if(!involvedPawns.has(role)):
+		Log.printerr("Bad role found: "+role)
+		return 0.0
+	return getRolePawn(role).scoreFetishMax(fetishes, minValue)
+
+func scorePersonality(role:String, personalityStats:Dictionary, onlyPositive:bool = false) -> float:
+	if(!involvedPawns.has(role)):
+		Log.printerr("Bad role found: "+role)
+		return 0.0
+	return getRolePawn(role).scorePersonality(personalityStats, onlyPositive)
+
+func scorePersonalityMax(role:String, personalityStats:Dictionary, minValue:float = -999.9) -> float:
+	if(!involvedPawns.has(role)):
+		Log.printerr("Bad role found: "+role)
+		return 0.0
+	return getRolePawn(role).scorePersonalityMax(personalityStats, minValue)
+
+func scoreExposed(role:String) -> float:
+	if(!involvedPawns.has(role)):
+		Log.printerr("Bad role found: "+role)
+		return 0.0
+	return getRolePawn(role).scoreExposed()
+
+func scoreLike(role1:String, role2:String) -> float:
+	if(!involvedPawns.has(role1) || !involvedPawns.has(role2)):
+		Log.printerr("Bad roles found")
+		return 0.0
+	return getRolePawn(role1).scoreLike(getRoleID(role2))
+
+func scoreHate(role1:String, role2:String) -> float:
+	if(!involvedPawns.has(role1) || !involvedPawns.has(role2)):
+		Log.printerr("Bad roles found")
+		return 0.0
+	return getRolePawn(role1).scoreHate(getRoleID(role2))
+
+func scoreLust(role1:String, role2:String) -> float:
+	if(!involvedPawns.has(role1) || !involvedPawns.has(role2)):
+		Log.printerr("Bad roles found")
+		return 0.0
+	return getRolePawn(role1).scoreLust(getRoleID(role2))
+
+func affectAffection(role1:String, role2:String, howMuch:float):
+	if(!involvedPawns.has(role1) || !involvedPawns.has(role2)):
+		Log.printerr("Bad roles found")
+		return
+	getRolePawn(role1).affectAffection(getRoleID(role2), howMuch)
+
+func affectLust(role1:String, role2:String, howMuch:float):
+	if(!involvedPawns.has(role1) || !involvedPawns.has(role2)):
+		Log.printerr("Bad roles found")
+		return
+	getRolePawn(role1).affectLust(getRoleID(role2), howMuch)

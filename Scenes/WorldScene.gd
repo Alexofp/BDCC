@@ -158,12 +158,15 @@ func _react(_action: String, _args):
 	if(_action == "progress_interaction"):
 		var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
 		var interaction:PawnInteractionBase = pawn.getInteraction()
-		GM.main.IS.decideNextAction(interaction, {scene=self})
+		if(interaction.currentActionID == ""):
+			GM.main.IS.decideNextAction(interaction, {scene=self})
+		
 		if(interaction.busyActionSeconds > 0):
 			processTime(interaction.busyActionSeconds)
 		else:
 			processTime(30)
 		interaction.doCurrentAction({scene=self})
+		GM.main.IS.decideNextAction(pawn.getInteraction(), {scene=self})
 	if(_action == "pick_interaction_action"):
 		#var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
 		var interaction:PawnInteractionBase = _args[0]#pawn.getInteraction()

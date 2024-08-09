@@ -104,6 +104,37 @@ func removeImpossibleFetishes():
 		if(!fetish.isPossibleFor(thecharacter)):
 			var _ok = fetishMap.erase(fetishID)
 
+func scoreFetish(fetishes:Dictionary, onlyPositive:bool = false) -> float:
+	var maxPossibleValue = 0.0
+	var result = 0.0
+	for fetishID in fetishes:
+		var fetishValue = getFetishValue(fetishID)
+		var addValue = fetishValue * fetishes[fetishID]
+		if(!onlyPositive || (onlyPositive && addValue > 0.0)):
+			result += addValue
+		maxPossibleValue += 1.0
+	
+	var forcedObedience = clamp(getCharacter().getForcedObedienceLevel(), 0.0, 1.0)
+	if(forcedObedience > 0.0):
+		result = result * (1.0 - forcedObedience) + maxPossibleValue * forcedObedience
+	
+	return result
+
+func scoreFetishMax(fetishes:Dictionary, minValue:float = -999.9) -> float:
+	var result = minValue
+	for fetishID in fetishes:
+		var fetishValue = getFetishValue(fetishID)
+		
+		var newValue = fetishValue * fetishes[fetishID]
+		if(newValue > result):
+			result = newValue
+	
+	var forcedObedience = clamp(getCharacter().getForcedObedienceLevel(), 0.0, 1.0)
+	if(forcedObedience > 0.0):
+		result = result * (1.0 - forcedObedience) + forcedObedience
+	
+	return result
+
 func saveData():
 	var data = {
 		"fetishMap": fetishMap,

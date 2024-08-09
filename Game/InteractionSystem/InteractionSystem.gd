@@ -52,6 +52,11 @@ func processTime(_howMuch:int):
 	pass
 
 func decideNextAction(interaction, _context:Dictionary = {}):
+	if(interaction == null):
+		assert(false, "Interation is null!")
+		return
+	if(interaction.wasDeleted):
+		return
 	var actions = interaction.getActionsFinal()
 	
 	if(actions == null || !(actions is Array) || actions.size() <= 0):
@@ -85,6 +90,7 @@ func processBusyAllInteractions(howManySeconds:int):
 		pawn.processTime(howManySeconds)
 	for interaction in interactions:
 		interaction.busyActionSeconds -= howManySeconds
+		interaction.processTime(howManySeconds)
 
 func getClosestInteraction() -> PawnInteractionBase:
 	var result = null
@@ -274,3 +280,6 @@ func checkOnMeetInteractions(pawn1, pawn2, pawn2Moved:bool):
 			startInteraction(interaction.id, shouldRunData[1], shouldRunData[2] if shouldRunData.size() > 2 else {})
 			return true
 	return false
+
+
+
