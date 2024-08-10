@@ -98,6 +98,10 @@ func addAffection(char1:String, char2:String, howMuch:float, showMessage:bool = 
 		var affStr:String = str(Util.roundF(theEntry.affection*100.0, 1))
 		
 		var isPC:bool = ((char1 == "pc") || (char2 == "pc"))
+		var isSpied:bool = (GM.main.isPawnIDBeingSpied(char1) || GM.main.isPawnIDBeingSpied(char2))
+		if(isSpied && showPCMessage):
+			showMessage = true
+		
 		if(diff > 0.0):
 			if(isPC):
 				if(showPCMessage):

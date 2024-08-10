@@ -71,6 +71,7 @@ var slaveActivities: Dictionary = {}
 var datapacks: Dictionary = {}
 var interactions: Dictionary = {}
 var interactionRefs: Dictionary = {}
+var globalTasks: Dictionary = {}
 
 var bodypartStorageNode
 
@@ -405,6 +406,7 @@ func registerEverything():
 	registerSlaveActivitiesFolder("res://Game/NpcSlavery/SlaveActivities/")
 	
 	registerInteractionFolder("res://Game/InteractionSystem/Interactions/")
+	registerGlobalTaskFolder("res://Game/InteractionSystem/GlobalTasks/")
 	
 	emit_signal("loadingUpdate", 8.0/totalStages, "Sex scenes")
 	yield(get_tree(), "idle_frame")
@@ -2072,3 +2074,27 @@ func getInteractionRef(id: String):
 
 func getInteractions():
 	return interactionRefs
+
+
+
+
+func registerGlobalTask(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	globalTasks[object.id] = loadedClass
+
+func registerGlobalTaskFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerGlobalTask(scriptPath)
+
+func createGlobalTask(id: String):
+	if(globalTasks.has(id)):
+		return globalTasks[id].new()
+	else:
+		Log.printerr("ERROR: global task with the id "+id+" wasn't found")
+		return null
+		
+func getGlobalTasks():
+	return globalTasks

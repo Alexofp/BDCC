@@ -1,6 +1,7 @@
 extends InteractionGoalBase
 
 var nextTarget:String = ""
+var zone:String = WorldZone.Greenhouses
 
 func getScore(_pawn:CharacterPawn) -> float:
 	return 0.2
@@ -40,12 +41,12 @@ func getActions() -> Array:
 func doAction(_id:String, _args:Dictionary):
 	if(_id == "go"):
 		if(nextTarget == ""):
-			nextTarget = GM.world.getRandomZoneRoom(WorldZone.Greenhouses)
+			nextTarget = GM.world.getRandomZoneRoom(zone)
 		
 		if(nextTarget != ""):
 			goTowards(nextTarget)
 	if(_id == "rest"):
-		nextTarget = GM.world.getRandomZoneRoom(WorldZone.Greenhouses)
+		nextTarget = GM.world.getRandomZoneRoom(zone)
 
 func getAnimData() -> Array:
 	if(getCurrentAction() == "go"):

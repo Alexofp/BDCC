@@ -11,7 +11,7 @@ static func getAll():
 	return [Wander, Eat, Hangout, WorkMine, Patrol]
 
 static func getAllAlone():
-	return getAll()
+	return [Wander, Eat, Hangout, WorkMine]
 
 static func create(theID:String):
 	var newGoal

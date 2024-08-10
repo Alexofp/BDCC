@@ -5,11 +5,17 @@ var pawns:Dictionary = {}
 var pawnsByLoc:Dictionary = {}
 var interactions:Array = []
 
+var globalTasks:Dictionary = {}
+
 func TEST_DELETE_ME():
 	spawnPawn("pc")
 	spawnPawn(RNG.pick(GM.main.dynamicCharacters))
 	spawnPawn(RNG.pick(GM.main.dynamicCharacters))
 
+func _init():
+	for taskID in GlobalRegistry.getGlobalTasks():
+		var newTask = GlobalRegistry.createGlobalTask(taskID)
+		globalTasks[newTask.id] = newTask
 
 func processTime(_howMuch:int):
 #	var toUpdate:Array = getInteractionsThatNeedToProcessed()
@@ -125,6 +131,7 @@ func deletePawn(charID):
 	
 	if(!pawns.has(charID)):
 		return
+	stopInteractionsForPawnID(charID)
 	
 	var pawn = pawns[charID]
 	pawn.isDeleted = true
@@ -281,5 +288,10 @@ func checkOnMeetInteractions(pawn1, pawn2, pawn2Moved:bool):
 			return true
 	return false
 
+func getGlobalTasks() -> Dictionary:
+	return globalTasks
 
-
+func getGlobalTask(id:String) -> GlobalTask:
+	if(!globalTasks.has(id)):
+		return null
+	return globalTasks[id]

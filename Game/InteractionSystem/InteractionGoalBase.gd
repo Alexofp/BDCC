@@ -4,6 +4,7 @@ class_name InteractionGoalBase
 var id:String = ""
 var pawnID:String = ""
 var interaction
+var globalTask:String = ""
 
 func getScore(_pawn:CharacterPawn) -> float:
 	return 0.0

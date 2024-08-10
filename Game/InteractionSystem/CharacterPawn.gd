@@ -149,3 +149,8 @@ func affectLust(otherCharID, howMuch:float):
 		otherCharID = otherCharID.charID
 	
 	GM.main.RS.addLust(charID, otherCharID, howMuch)
+
+func isDoingTask(_taskID:String) -> bool:
+	if(currentInteraction == null):
+		return false
+	return currentInteraction.isDoingTask(_taskID)

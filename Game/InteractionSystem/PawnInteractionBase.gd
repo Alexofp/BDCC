@@ -491,3 +491,6 @@ func affectLust(role1:String, role2:String, howMuch:float):
 		Log.printerr("Bad roles found")
 		return
 	getRolePawn(role1).affectLust(getRoleID(role2), howMuch)
+
+func isDoingTask(_taskID:String) -> bool:
+	return false
