@@ -1,7 +1,7 @@
 extends HBoxContainer
 
 var statID
-signal onPlusButton(statID)
+signal onPlusButton(statID, amount)
 
 func setStatName(statName: String):
 	$Label.text = statName
@@ -9,11 +9,12 @@ func setStatName(statName: String):
 func setCanPressPlus(can):
 	if(can):
 		$PlusButton.disabled = false
+		$PlusFiveButton.disabled = false
+		$PlusTenButton.disabled = false
 	else:
 		$PlusButton.disabled = true
-
-func _on_PlusButton_pressed():
-	emit_signal("onPlusButton", statID)
+		$PlusFiveButton.disabled = true
+		$PlusTenButton.disabled = true
 
 
 func _on_SkillStatLine_mouse_entered():
@@ -24,3 +25,15 @@ func _on_SkillStatLine_mouse_entered():
 
 func _on_SkillStatLine_mouse_exited():
 	GlobalTooltip.hideTooltip()
+
+
+func _on_PlusButton_pressed():
+	emit_signal("onPlusButton", statID, 1)
+
+
+func _on_PlusFiveButton_pressed():
+	emit_signal("onPlusButton", statID, 5)
+
+
+func _on_PlusTenButton_pressed():
+	emit_signal("onPlusButton", statID, 10)
