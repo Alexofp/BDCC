@@ -16,6 +16,9 @@ func react(_triggerID, _args):
 		GM.main.increaseFlag("Trigger_CaughtOffLimitsCD", -1)
 		return
 	
+	if(true):
+		return
+	
 	if(GM.world.getRoomByID(GM.pc.getLocation()).loctag_Greenhouses):
 		if(RNG.chance(baseChance) || isLookingForTrouble):
 			GM.main.setFlag("Trigger_CaughtOffLimitsCD", 3)

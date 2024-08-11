@@ -615,6 +615,8 @@ func processTimeUntil(newseconds):
 	return timeDiff
 	
 func startNewDay():
+	IS.beforeNewDay()
+	
 	# We assume that you always go to sleep at 23:00
 	if(timeOfDay > getTimeCap()):
 		timeOfDay = getTimeCap()
@@ -630,6 +632,8 @@ func startNewDay():
 	npcSlaveryOnNewDay()
 	
 	doTimeProcess(timediff)
+	
+	IS.afterNewDay()
 	
 	SAVE.triggerAutosave()
 	

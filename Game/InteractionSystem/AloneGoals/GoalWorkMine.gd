@@ -1,6 +1,8 @@
 extends InteractionGoalBase
 
 func getScore(_pawn:CharacterPawn) -> float:
+	if(!_pawn.isInmate()):
+		return 0.0
 	var hunger:int = _pawn.timeSinceLastWork
 	if(hunger < 60*100): # 100 minutes
 		return 0.0

@@ -7,6 +7,18 @@ var interactions:Array = []
 
 var globalTasks:Dictionary = {}
 
+# Unsaved
+var interactionsDisabled:bool = false
+var pawnDistribution = {
+		CharacterType.Inmate: 3,
+		CharacterType.Guard: 2,
+		CharacterType.Nurse: 1,
+		CharacterType.Engineer: 1,
+	}
+
+func getMaxPawnCount() -> int:
+	return 20
+
 func TEST_DELETE_ME():
 	spawnPawn("pc")
 	spawnPawn(RNG.pick(GM.main.dynamicCharacters))
@@ -25,6 +37,9 @@ func processTime(_howMuch:int):
 #
 #		toUpdate = getInteractionsThatNeedToProcessed()
 	#var currentTime:int = GM.main.getTime()
+	for pawnID in pawns:
+		var pawn:CharacterPawn = pawns[pawnID]
+		pawn.checkAloneInteraction()
 
 	#print(pawns)
 	var maxProcesses:int = 50
@@ -50,11 +65,12 @@ func processTime(_howMuch:int):
 		interaction = getClosestInteraction()
 		
 	processBusyAllInteractions(_howMuch)
-		
-	for theinteraction in interactions:
-		theinteraction.isNew = false
-	print(pawnsByLoc)
-	print(interactions)
+	
+	checkAddNewPawns()
+	#for theinteraction in interactions:
+	#	theinteraction.isNew = false
+	#print(pawnsByLoc)
+	#print(interactions)
 	pass
 
 func decideNextAction(interaction, _context:Dictionary = {}):
@@ -118,6 +134,9 @@ func spawnPawn(charID):
 		deletePawn(charID)
 	pawns[charID] = newPawn
 	
+	if(charID == "pc"):
+		newPawn.setLocation(GM.pc.getLocation())
+	
 	var loc = newPawn.getLocation()
 	if(!pawnsByLoc.has(loc)):
 		pawnsByLoc[loc] = {}
@@ -156,6 +175,9 @@ func onPawnMoved(charID, oldLoc:String, newLoc:String):
 		pawnsByLoc[newLoc] = {}
 	pawnsByLoc[newLoc][charID] = true
 	
+	if(areInteractionsDisabled()):
+		return
+	
 	var allNewPawns:Array = getPawnsAt(newLoc)
 	for otherpawn in allNewPawns:
 		if(otherpawn.charID == pawn.charID):
@@ -168,6 +190,9 @@ func onPawnMoved(charID, oldLoc:String, newLoc:String):
 
 func getPawns() -> Dictionary:
 	return pawns
+
+func hasPawn(charID:String) -> bool:
+	return pawns.has(charID)
 
 func getPawn(charID:String) -> CharacterPawn:
 	if(!pawns.has(charID)):
@@ -242,10 +267,34 @@ func clearAll():
 	pawns.clear()
 	interactions.clear()
 
-func startInteraction(interactionID:String, involvedPawns:Dictionary, args:Dictionary = {}, waitUntilNextProcess:bool = true):
+func beforeNewDay():
+#	for charID in pawns.keys():
+#		if(charID == "pc"):
+#			continue
+#		deletePawn(charID)
+	#pawns.clear()
+	#interactions.clear()
+	for interaction in interactions.duplicate():
+		if(interaction.isPlayerInvolved()):
+			continue
+		
+		var involvedPawns = interaction.getInvolvedPawnIDs()
+		stopInteraction(interaction)
+		for thePawnID in involvedPawns:
+			deletePawn(thePawnID)
+
+func afterNewDay():
+	spawnMorningWave()
+
+func startInteraction(interactionID:String, involvedPawns:Dictionary, args:Dictionary = {}):
 	var interaction = GlobalRegistry.createInteraction(interactionID)
 	assert(interaction != null)
 	interactions.append(interaction)
+	
+	if(!involvedPawns.empty()):
+		var firstPawn = getPawn(involvedPawns[involvedPawns.keys()[0]])
+		if(firstPawn != null):
+			interaction.setLocation(firstPawn.getLocation())
 	
 	for pawnRole in involvedPawns:
 		#var pawn = getPawn(involvedPawns[pawnRole])
@@ -255,7 +304,7 @@ func startInteraction(interactionID:String, involvedPawns:Dictionary, args:Dicti
 		var pawn = getPawn(involvedPawns[pawnRole])
 		pawn.setInteraction(interaction)
 	
-	interaction.isNew = waitUntilNextProcess
+	#interaction.isNew = waitUntilNextProcess
 	interaction.start(involvedPawns, args)
 
 func stopInteraction(interaction:PawnInteractionBase):
@@ -295,3 +344,118 @@ func getGlobalTask(id:String) -> GlobalTask:
 	if(!globalTasks.has(id)):
 		return null
 	return globalTasks[id]
+
+func areInteractionsDisabled() -> bool:
+	return interactionsDisabled
+
+func getPawnCount() -> int:
+	return pawns.size()
+
+func getPawnDistribution() -> Dictionary:
+	return pawnDistribution
+
+func trySpawnPawn():
+	var randomCharType = RNG.pickWeightedDict(pawnDistribution)
+	
+	var pool := ""
+	if(randomCharType == CharacterType.Inmate):
+		pool = CharacterPool.Inmates
+	if(randomCharType == CharacterType.Guard):
+		pool = CharacterPool.Guards
+	if(randomCharType == CharacterType.Nurse):
+		pool = CharacterPool.Nurses
+	if(randomCharType == CharacterType.Engineer):
+		pool = CharacterPool.Engineers
+		
+	if(pool == ""):
+		return false
+	
+	var possibleCharIds:Array = GM.main.getDynamicCharacterIDsFromPool(pool)
+	if(possibleCharIds.size() <= 0):
+		return false
+	
+	var chanceMeetOld = NpcFinder.chanceToMeetOldNPC(pool)
+	
+	var tryCount:int = 10
+	if(RNG.chance(chanceMeetOld)):
+		tryCount = 0
+	while(tryCount > 0):
+		tryCount -= 1
+		
+		var randomCharID = RNG.pick(possibleCharIds)
+		
+		if(hasPawn(randomCharID)):
+			continue
+		var character = GlobalRegistry.getCharacter(randomCharID)
+		if(character.shouldBeExcludedFromEncounters()):
+			continue
+		
+		spawnPawn(randomCharID)
+		return true
+	
+	if(GM.main.getEncounterSettings().doesPreferKnownEncounters()):
+		return false
+	# Generating a new npc
+	var genID:String = ""
+	var generator = null
+	
+	if(pool == CharacterType.Inmate):
+		generator = InmateGenerator.new()
+	elif(pool == CharacterType.Guard):
+		generator = GuardGenerator.new()
+	elif(pool == CharacterType.Nurse):
+		generator = NurseGenerator.new()
+	elif(pool == CharacterType.Engineer):
+		generator = EngineerGenerator.new()
+	
+	if(generator != null):
+		genID = NpcFinder.generateNpcForPool(pool, generator)
+		
+	if(genID != ""):
+		spawnPawn(genID)
+		return true
+	
+	return false
+	
+func processAllPawnsNoInteractions(howManySeconds:int):
+	interactionsDisabled = true
+	processTime(howManySeconds)
+	interactionsDisabled = false
+
+func spawnMorningWave():
+	var howManyToSpawnF:float = getMaxPawnCount()
+	howManyToSpawnF *= RNG.randf_range(0.7, 0.9)
+	var howManyToSpawn:int = int(howManyToSpawnF)
+	
+	for _i in range(howManyToSpawn):
+		trySpawnPawn()
+	
+	#print("THERE ARE NOW "+str(getPawnCount())+" PAWNS")
+	processAllPawnsNoInteractions(60*RNG.randi_range(150,170))
+
+func checkAddNewPawns():
+	var maxPawns:int = getMaxPawnCount()
+	var curPawns:int = getPawnCount()
+	
+	if(curPawns >= maxPawns || maxPawns <= 0):
+		return
+	
+	var fullNess:float = float(curPawns) / float(maxPawns)
+	
+	var chanceToAddNew:float = (1.0 - fullNess) * 10.0
+	
+	if(!RNG.chance(chanceToAddNew)):
+		return
+	
+	trySpawnPawn()
+
+func updatePCLocation():
+	if(!pawns.has("pc")):
+		spawnPawn("pc")
+	
+	var pawn:CharacterPawn = getPawn("pc")
+	if(pawn == null):
+		return
+	
+	var latestPCLoc:String = GM.pc.getLocation()
+	pawn.setLocation(latestPCLoc)

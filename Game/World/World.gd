@@ -345,6 +345,8 @@ func createWorldPawn(charID, pawn, loc):
 	newWorldPawn.id = charID
 	newWorldPawn.floorid = roomFloor.id
 	newWorldPawn.global_position = getRoomByID(loc).global_position
+	newWorldPawn.setPawnTexture(pawn.getPawnTexture())
+	newWorldPawn.setPawnColor(pawn.getPawnColor())
 	pawns[charID] = newWorldPawn
 
 func getZoneRooms(zoneID:String) -> Array:

@@ -81,11 +81,15 @@ func getID():
 	return "pc"
 
 func setLocation(newRoomID:String):
+	if(newRoomID == location):
+		return
 	location = newRoomID
 	#var roomInfo = GM.world.getRoomByID(location)
 	#if(roomInfo):
 	#	var roomName = roomInfo.getName()
 	#	GM.ui.setLocationName(roomName)
+	if(GM.main != null && is_instance_valid(GM.main) && GM.main.IS != null):
+		GM.main.IS.updatePCLocation()
 	emit_signal("location_changed", newRoomID)
 	
 func getLocation():

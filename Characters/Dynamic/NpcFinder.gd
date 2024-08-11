@@ -114,11 +114,15 @@ static func generateNpcForPool(poolID, generator, _args = {}):
 	GM.main.addDynamicCharacterToPool(newCharacter.id, poolID)
 	return newCharacter.id
 
-static func grabNpcIDFromPoolOrGenerate(poolID, _conditions, generator, _args = {}, preferOld = false):
+static func chanceToMeetOldNPC(poolID, preferOld = false):
 	var poolSize = GM.main.getDynamicCharactersPoolSize(poolID)
 	var chanceToMeetOld = sqrt(float(poolSize)) * 10.0
 	if(GM.main.getEncounterSettings().doesPreferKnownEncounters() || preferOld):
 		chanceToMeetOld = 100
+	return chanceToMeetOld
+
+static func grabNpcIDFromPoolOrGenerate(poolID, _conditions, generator, _args = {}, preferOld = false):
+	var chanceToMeetOld = chanceToMeetOldNPC(poolID, preferOld)
 	
 	if(RNG.chance(chanceToMeetOld)):
 		var characterID = grabNpcIDFromPool(poolID, _conditions)

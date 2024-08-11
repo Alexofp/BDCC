@@ -2952,3 +2952,6 @@ func getBodypartID(slot):
 	if(!bodyparts.has(slot) || bodyparts[slot] == null):
 		return ""
 	return bodyparts[slot].id
+
+func getInmateType():
+	return InmateType.Unknown

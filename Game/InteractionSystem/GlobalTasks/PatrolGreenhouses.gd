@@ -7,7 +7,10 @@ func _init():
 	goalID = InteractionGoal.Patrol
 
 func getMaxAssigned() -> int:
-	return 1
+	return 3
+
+func canDoTask(_pawn:CharacterPawn) -> bool:
+	return _pawn.isGuard()
 
 func configureGoal(_pawn:CharacterPawn, _goal):
 	_goal.zone = patrolZone

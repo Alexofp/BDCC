@@ -13,6 +13,8 @@ func start(_pawns:Dictionary, _args:Dictionary):
 	setLocation(getRolePawn("started").getLocation())
 
 func shouldRunOnMeet(_pawn1, _pawn2, _pawn2Moved:bool):
+	if(true):
+		return [false]
 	if(_pawn1.canBeInterrupted() && _pawn2.canBeInterrupted() && RNG.chance(5)):
 		return [true, {started=_pawn1.charID, target=_pawn2.charID}, {}]
 	return [false]

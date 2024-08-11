@@ -9,10 +9,12 @@ var currentInteraction
 
 var hunger:float = 0.0
 var timeSinceLastWork:int = 0.0
+var fightExhaustion:float = 0.0
 
+const hungerPerHour:float = 0.2
 
 func onSpawn():
-	hunger = RNG.randf_range(0.0, 1.0)
+	hunger = RNG.randf_range(0.0, 0.3)
 	timeSinceLastWork = RNG.randi_range(0, 6000)
 
 func getChar() -> BaseCharacter:
@@ -24,24 +26,20 @@ func getCharacter() -> BaseCharacter:
 	return getChar()
 
 func getLocation() -> String:
-	#if(isPlayer()):
-	#	return GM.pc.getLocation()
+	if(isPlayer()):
+		return GM.pc.getLocation()
 	return location
 
 func setLocation(newLoc:String):
-	var oldLoc = getLocation()
+	var oldLoc = location
 	location = newLoc
-	if(isPlayer()):
+	if(isPlayer() && newLoc != GM.pc.getLocation()):
 		GM.pc.setLocation(newLoc)
 	GM.main.IS.onPawnMoved(charID, oldLoc, getLocation())
 	print(charID+" set lock: "+newLoc)
 
 func processTime(_howMuch:int):
-	if(isPlayer()):
-		var oldLoc = location
-		location = GM.pc.getLocation()
-		GM.main.IS.onPawnMoved(charID, oldLoc, getLocation())
-	hunger += float(_howMuch) / 60.0 * 0.02
+	hunger += float(_howMuch) * hungerPerHour / 3600.0
 	timeSinceLastWork += _howMuch
 	checkAloneInteraction()
 
@@ -57,7 +55,11 @@ func getInteraction():
 
 func checkAloneInteraction():
 	if(currentInteraction == null):
-		GM.main.IS.startInteraction("AloneInteraction", {main = charID}, {}, false)
+		if(getExhaustion() > 0.0):
+			GM.main.IS.startInteraction("FightExhaustion", {main = charID}, {})
+			return
+		
+		GM.main.IS.startInteraction("AloneInteraction", {main = charID}, {})
 
 func canBeInterrupted() -> bool:
 	# Make it an interaction function?
@@ -154,3 +156,79 @@ func isDoingTask(_taskID:String) -> bool:
 	if(currentInteraction == null):
 		return false
 	return currentInteraction.isDoingTask(_taskID)
+
+func getCharType() -> String:
+	var thechar = getChar()
+	if(thechar == null):
+		return CharacterType.Generic
+	return thechar.getCharacterType()
+
+func isInmate() -> bool:
+	return getCharType() == CharacterType.Inmate
+
+func isGuard() -> bool:
+	return getCharType() == CharacterType.Guard
+
+func isNurse() -> bool:
+	return getCharType() == CharacterType.Nurse
+
+func isEngineer() -> bool:
+	return getCharType() == CharacterType.Engineer
+
+func isLilac() -> bool:
+	return isInmate() && getChar().getInmateType() == InmateType.SexDeviant
+
+func isGeneralInmate() -> bool:
+	return isInmate() && getChar().getInmateType() == InmateType.General
+
+func isHighSecInmate() -> bool:
+	return isInmate() && getChar().getInmateType() == InmateType.HighSec
+
+func getPawnTexture():
+	var theChar = getChar()
+	if(theChar == null):
+		return RoomStuff.PawnTexture.Masc
+	var femi = theChar.getFemininity()
+	
+	if(femi >= 50):
+		return RoomStuff.PawnTexture.Fem
+	return RoomStuff.PawnTexture.Masc
+
+func getPawnColor() -> Color:
+	if(isLilac()):
+		return Color.purple
+	if(isGeneralInmate()):
+		return Color.orange
+	if(isHighSecInmate()):
+		return Color.red
+	if(isGuard()):
+		return Color.blue
+	if(isNurse()):
+		return Color.yellowgreen
+	if(isEngineer()):
+		return Color.orangered
+	
+	return Color.pink
+
+func afterLostFight():
+	if(isPlayer()):
+		return
+	#fightExhaustion = 1.0
+
+func afterWonFight():
+	pass
+
+func getExhaustion() -> float:
+	return fightExhaustion
+
+func recoverExhaustion(howMuch:float = 0.1):
+	fightExhaustion -= howMuch
+	if(fightExhaustion < 0.0):
+		fightExhaustion = 0.0
+
+func makeExhausted():
+	if(isPlayer()):
+		return
+	fightExhaustion = 1.0
+	if(canBeInterrupted()):
+		GM.main.IS.startInteraction("FightExhaustion", {main = charID}, {})

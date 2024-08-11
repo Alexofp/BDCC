@@ -4,6 +4,8 @@ var nextTarget:String = ""
 var zone:String = WorldZone.Greenhouses
 
 func getScore(_pawn:CharacterPawn) -> float:
+	if(globalTask != ""):
+		return 0.7
 	return 0.2
 
 func getKeepScore() -> float:
@@ -20,7 +22,7 @@ func getActions() -> Array:
 			{
 				id = "rest",
 				name = "Rest",
-				desc = "Do something",
+				desc = "Take a short rest",
 				score = 1.0,
 				args = {},
 				time = 90,
@@ -29,8 +31,8 @@ func getActions() -> Array:
 	return [
 		{
 			id = "go",
-			name = "Go to shaft!",
-			desc = "Do something",
+			name = "Patrol!",
+			desc = "Patrol the station",
 			score = 1.0,
 			args = {},
 			time = 60,

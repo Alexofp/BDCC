@@ -15,7 +15,6 @@ var currentActionArgs:Dictionary = {}
 
 var busyActionSeconds:int = 0
 var currentActionText:String = ""
-var isNew:bool = false
 var isWaitingScene:bool = false
 var isWaitingAction:String = ""
 
@@ -233,8 +232,18 @@ func getFightResult(_args:Dictionary):
 	# Simulate fight here
 	var newResult:Dictionary = {won=RNG.chance(50)}
 	_args["scene_result"] = newResult
+	
+	doFightAftermath(_fightersData, newResult)
+	
 	return newResult
 
+func doFightAftermath(_fightersData, newResult):
+	var wonPawn = getRolePawn(_fightersData[0 if newResult["won"] else 1])
+	var lostPawn = getRolePawn(_fightersData[1 if newResult["won"] else 0])
+	if(wonPawn != null):
+		wonPawn.afterWonFight()
+	if(lostPawn != null):
+		lostPawn.afterLostFight()
 
 func doCurrentAction(_context:Dictionary = {}):
 	if(currentActionID == "" || wasDeleted):
@@ -357,6 +366,10 @@ func receiveSceneStatusFinal(_result:Dictionary):
 	isWaitingScene = false
 	
 	currentActionArgs["scene_result"] = _result
+	
+	if(currentActionArgs.has("fight")):
+		doFightAftermath(currentActionArgs["fight"], currentActionArgs["scene_result"])
+	
 	doCurrentAction()
 
 func isWaitingForScene() -> bool:
@@ -387,6 +400,8 @@ func getKeepInteractionScoreFor(_role:String):
 
 func doLookAround(role:String, keepScoreMult:float = 1.0):
 	if(wasDeleted):
+		return false
+	if(GM.main.IS.areInteractionsDisabled()):
 		return false
 	var pawn = getRolePawn(role)
 	var loc:String = pawn.getLocation()
@@ -494,3 +509,17 @@ func affectLust(role1:String, role2:String, howMuch:float):
 
 func isDoingTask(_taskID:String) -> bool:
 	return false
+
+func getInvolvedPawnIDs() -> Array:
+	var result := []
+	
+	for role in involvedPawns:
+		result.append(involvedPawns[role])
+	
+	return result
+
+func makeRoleExhausted(role:String):
+	var pawn = getRolePawn(role)
+	if(pawn == null):
+		return
+	pawn.makeExhausted()
