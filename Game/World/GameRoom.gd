@@ -133,7 +133,7 @@ func getFloor():
 		myParent = myParent.get_parent()
 	return myParent
 	
-func getCell():
+func getCell() -> Vector2:
 	return Vector2(round(global_position.x / GameWorld.gridsize), round(global_position.y / GameWorld.gridsize))
 
 func getDescription() -> String:
@@ -236,6 +236,14 @@ func onGridChangeColor(newvalue):
 
 func getCachedFloorID():
 	return floorID
+
+func isOfflimitsForInmates() -> bool:
+	if(loctag_GuardsEncounter || loctag_Greenhouses):
+		return true
+	if(loctag_EngineersEncounter || loctag_MentalWard):
+		return true
+	
+	return false
 
 # https://github.com/godotengine/godot/issues/43491
 # This function should just start working after the issue is fixed

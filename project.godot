@@ -254,6 +254,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Options/ContentType.gd"
 }, {
+"base": "Reference",
+"class": "CreatedInteraction",
+"language": "GDScript",
+"path": "res://Util/InteractionCreator/CreatedInteraction.gd"
+}, {
+"base": "Reference",
+"class": "CreatedInteractionState",
+"language": "GDScript",
+"path": "res://Util/InteractionCreator/CreatedInteractionState.gd"
+}, {
 "base": "Object",
 "class": "CrotchBlockEditorType",
 "language": "GDScript",
@@ -1499,6 +1509,8 @@ _global_script_class_icons={
 "ColorUtils": "",
 "ComputerBase": "",
 "ContentType": "",
+"CreatedInteraction": "",
+"CreatedInteractionState": "",
 "CrotchBlockEditorType": "",
 "CrotchBlocks": "",
 "CrotchFavBlocksResource": "",

@@ -25,6 +25,8 @@ var cachedLastDir:int = -1
 
 var wasDeleted:bool = false
 
+var textBuffer:Array = []
+
 func start(_pawns:Dictionary, _args:Dictionary):
 	pass
 
@@ -35,10 +37,21 @@ func getOutputText() -> String:
 	return "Something something"
 
 func getOutputTextFinal() -> String:
+	textBuffer.clear()
 	var methodName:String = (state if state != "" else "init")+"_text"
 	if(has_method(methodName)):
-		return call(methodName)
-	return getOutputText()
+		var theText = call(methodName)
+		if(textBuffer.size() > 0):
+			return Util.join(textBuffer, "\n\n")
+		return str(theText)
+	
+	var theText = getOutputText()
+	if(textBuffer.size() > 0):
+		return Util.join(textBuffer, "\n\n")
+	return str(theText)
+
+func saynn(theText:String):
+	textBuffer.append(theText)
 
 func getAnimData() -> Array:
 	return []
@@ -523,3 +536,6 @@ func makeRoleExhausted(role:String):
 	if(pawn == null):
 		return
 	pawn.makeExhausted()
+
+func addMessage(text: String):
+	GM.main.addMessage(text)

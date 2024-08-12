@@ -378,6 +378,66 @@ func isRoomInZone(roomID:String, zoneID:String) -> bool:
 	var finalZoneID:String = "zone_"+zoneID
 	return theRoom.is_in_group(finalZoneID)
 
+func simpleDistance(room1name:String, room2name:String) -> float:
+	var room1 = getRoomByID(room1name)
+	var room2 = getRoomByID(room2name)
+	
+	if(room1 == null || room2 == null):
+		return 999999.9
+	if(room1.getFloorID() != room2.getFloorID()):
+		return 999999.9
+	
+	var room1cell:Vector2 = room1.getCell()
+	var room2cell:Vector2 = room2.getCell()
+	
+	var diff:Vector2 = room2cell - room1cell
+	var dumbDistance:float = abs(diff.x) + abs(diff.y) # Manhatten distance since we're can't move diagonally
+	
+	return dumbDistance
+
+func getSafeFromPCRandomRoom(possibleRooms:Array, pcLoc:String) -> String:
+	var filtered:Array = []
+	
+	for roomID in possibleRooms:
+		var dist:float = simpleDistance(roomID, pcLoc)
+		if(dist >= 4.0):
+			filtered.append(roomID)
+	
+	if(filtered.size() > 0):
+		return RNG.pick(filtered)
+	else:
+		return RNG.pick(possibleRooms)
+
+func isLocSafe(theLoc:String) -> bool:
+	var room = getRoomByID(theLoc)
+	if(room == null):
+		return false
+	return !room.isOfflimitsForInmates()
+
+func getSafeLoc(theLoc:String) -> String:
+	var toTest:Array = [theLoc]
+	var checked:Dictionary = {}
+	
+	var dirs = getAllDirections()
+	
+	while(!toTest.empty()):
+		var nextLoc:String = toTest.pop_front()
+		var room = getRoomByID(nextLoc)
+		
+		if(room == null):
+			continue
+		if(!room.isOfflimitsForInmates()):
+			return nextLoc
+		
+		for dir in dirs:
+			if(canGoID(nextLoc, dir)):
+				var nextNewLoc:String = applyDirectionID(nextLoc, dir)
+				if(checked.has(nextNewLoc)):
+					continue
+				checked[nextNewLoc] = true
+				toTest.append(nextNewLoc)
+	return ""
+
 func saveData():
 	var data = {}
 	data["lastAimedRoomID"] = lastAimedRoomID

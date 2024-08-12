@@ -127,6 +127,9 @@ func getClosestInteraction() -> PawnInteractionBase:
 func spawnPawn(charID):
 	if(charID == null):
 		return
+	var character:BaseCharacter = GlobalRegistry.getCharacter(charID)
+	if(character == null):
+		return
 	var newPawn: CharacterPawn = CharacterPawn.new()
 	newPawn.charID = charID
 	
@@ -136,6 +139,27 @@ func spawnPawn(charID):
 	
 	if(charID == "pc"):
 		newPawn.setLocation(GM.pc.getLocation())
+	else:
+		var newLoc:String = "main_punishment_spot"
+		var charType = character.getCharacterType()
+		
+		if(charType == CharacterType.Inmate):
+			var inmateType = character.getInmateType()
+			
+			if(inmateType == InmateType.SexDeviant):
+				newLoc = GM.world.getSafeFromPCRandomRoom(["main_stairs1", "main_stairs2", "cellblock_lilac_nearcell"], GM.pc.getLocation())
+			elif(inmateType == InmateType.HighSec):
+				newLoc = GM.world.getSafeFromPCRandomRoom(["main_stairs1", "main_stairs2", "cellblock_red_nearcell"], GM.pc.getLocation())
+			else:
+				newLoc = GM.world.getSafeFromPCRandomRoom(["main_stairs1", "main_stairs2", "cellblock_orange_nearcell"], GM.pc.getLocation())
+		elif(charType == CharacterType.Guard):
+			newLoc = GM.world.getSafeFromPCRandomRoom(["hall_elevator", "main_greenhouses"], GM.pc.getLocation())
+		elif(charType == CharacterType.Nurse):
+			newLoc = "med_elevator"
+		elif(charType == CharacterType.Engineer):
+			newLoc = "mining_elevator"
+		
+		newPawn.setLocation(newLoc)
 	
 	var loc = newPawn.getLocation()
 	if(!pawnsByLoc.has(loc)):
@@ -143,6 +167,7 @@ func spawnPawn(charID):
 	pawnsByLoc[loc][charID] = true
 	
 	newPawn.onSpawn()
+	return newPawn
 
 func deletePawn(charID):
 	if(charID == null):
@@ -434,6 +459,9 @@ func spawnMorningWave():
 	processAllPawnsNoInteractions(60*RNG.randi_range(150,170))
 
 func checkAddNewPawns():
+	if(GM.main.getTime() >= 19*60*60): # No new pawns in the evening
+		return
+	
 	var maxPawns:int = getMaxPawnCount()
 	var curPawns:int = getPawnCount()
 	
