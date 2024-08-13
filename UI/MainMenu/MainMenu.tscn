@@ -444,6 +444,14 @@ hint_tooltip = "Provides an easier way to code sex activities"
 size_flags_horizontal = 3
 text = "Sex Activity Creator"
 
+[node name="InteractionCreator" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
+margin_top = 30.0
+margin_right = 188.0
+margin_bottom = 56.0
+hint_tooltip = "Provides an easier way to code sex activities"
+size_flags_horizontal = 3
+text = "Interaction Creator"
+
 [node name="LoadGameScreen" parent="HBoxContainer" instance=ExtResource( 4 )]
 visible = false
 anchor_right = 0.0
@@ -563,6 +571,7 @@ fit_content_height = true
 [connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevModCreator" to="." method="_on_DevModCreator_pressed"]
 [connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevSceneConverter" to="." method="_on_DevSceneConverter_pressed"]
 [connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/SexActivityCreator" to="." method="_on_SexActivityCreator_pressed"]
+[connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/InteractionCreator" to="." method="_on_InteractionCreator_pressed"]
 [connection signal="onClosePressed" from="HBoxContainer/LoadGameScreen" to="." method="switchToMainMenu"]
 [connection signal="onClosePressed" from="HBoxContainer/OptionsScreen" to="." method="switchToMainMenu"]
 [connection signal="onClosePressed" from="HBoxContainer/CreditsScreen" to="." method="switchToMainMenu"]

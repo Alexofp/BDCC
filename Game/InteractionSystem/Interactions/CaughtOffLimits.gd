@@ -6,9 +6,6 @@ var throwOutLoc:String = ""
 func _init():
 	id = "CaughtOffLimits"
 
-func processTime(_howMuch:int):
-	pass
-
 func start(_pawns:Dictionary, _args:Dictionary):
 	doInvolvePawn("guard", _pawns["guard"])
 	doInvolvePawn("inmate", _pawns["inmate"])

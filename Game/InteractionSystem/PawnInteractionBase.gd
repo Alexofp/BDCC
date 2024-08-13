@@ -26,6 +26,7 @@ var cachedLastDir:int = -1
 var wasDeleted:bool = false
 
 var textBuffer:Array = []
+var actionBuffer:Array = []
 
 func start(_pawns:Dictionary, _args:Dictionary):
 	pass
@@ -85,6 +86,20 @@ func playAnimation():
 	
 	GM.main.playAnimation(animData[0], animData[1], animData[2] if animData.size() > 2 else {})
 
+func addAction(theid:String, name:String, desc:String, score:float, time:int, extraFields:Dictionary = {}):
+	var finalDic:Dictionary = {
+		id = theid,
+		name = name,
+		desc = desc,
+		score = score,
+		time = time,
+	}
+	for extraKey in extraFields:
+		finalDic[extraKey] = extraFields[extraKey]
+	if(!finalDic.has("args")):
+		finalDic["args"] = {}
+	actionBuffer.append(finalDic)
+
 func getActions() -> Array:
 	return [
 		{
@@ -98,10 +113,19 @@ func getActions() -> Array:
 	]
 
 func getActionsFinal() -> Array:
+	return getTextAndActions()[1]
+
+func getTextAndActions() -> Array:
+	actionBuffer = []
+	var resultText:String = getOutputTextFinal()
+	
 	var methodName:String = (state if state != "" else "init")+"_actions"
 	if(has_method(methodName)):
-		return call(methodName)
-	return getActions()
+		actionBuffer.append_array(call(methodName))
+	else:
+		actionBuffer.append_array(getActions())
+	
+	return [resultText, actionBuffer]
 
 func doAction(_id:String, _args:Dictionary, _context:Dictionary):
 	pass

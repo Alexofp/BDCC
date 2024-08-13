@@ -195,14 +195,15 @@ func runInteraction():
 	if(interaction.getCurrentActionText() != ""):
 		saynn(interaction.getCurrentActionText())
 	
-	saynn(interaction.getOutputTextFinal())
+	var textAndActions:Array = interaction.getTextAndActions()
+	saynn(textAndActions[0])
 	
 	if(true):
 		sayn("[b]Debug info[/b]:")
 		saynn(Util.join(pawn.getDebugInfo(), "\n"))
 	
 	if(interaction.getCurrentPawn() == pawn):
-		for action in interaction.getActionsFinal():
+		for action in textAndActions[1]:
 			addButton(action["name"], action["desc"], "pick_interaction_action", [interaction, action])
 	else:
 		addButton("Continue", "See what happens next", "progress_interaction")
