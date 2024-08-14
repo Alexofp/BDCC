@@ -6,6 +6,7 @@ var id:String = ""
 var name:String = ""
 var desc:String = ""
 var score:String = "1.0"
+var scoreType:String = "default"
 var args:String = ""
 var time:String = "60"
 var start_sex:String = ""
@@ -25,8 +26,25 @@ func getEditVars():
 			type = "bigString",
 			value = desc,
 		},
+		"scoreType": {
+			name = "Score type",
+			type = "selector",
+			value = scoreType,
+			values = [
+				"default",
+				"fight",
+				"surrender",
+				"punish",
+				"punishMean",
+				"sexDom",
+				"sexSub",
+				"shy",
+				"slut",
+				"hatefuck",
+			],
+		},
 		"score": {
-			name = "Score",
+			name = "Score [def,like,hate,lust]",
 			type = "string",
 			value = score,
 		},
@@ -59,6 +77,7 @@ func getEditVars():
 			name = "Code",
 			type = "bigString",
 			value = code,
+			minsize = 300,
 		},
 	}
 
@@ -81,6 +100,8 @@ func applyEditVar(varid, value):
 		cond = value
 	if(varid == "code"):
 		code = value
+	if(varid == "scoreType"):
+		scoreType = value
 	
 	return false
 
@@ -90,6 +111,7 @@ func saveData():
 		"name": name,
 		"desc": desc,
 		"score": score,
+		"scoreType": scoreType,
 		"args": args,
 		"time": time,
 		"start_sex": start_sex,
@@ -101,7 +123,8 @@ func saveData():
 func loadData(data):
 	name = loadVar(data, "name", "No name")
 	desc = loadVar(data, "desc", "No desc")
-	score = loadVar(data, "score", "")
+	score = loadVar(data, "score", "1.0")
+	scoreType = loadVar(data, "scoreType", "default")
 	args = loadVar(data, "args", "")
 	time = loadVar(data, "time", "")
 	start_sex = loadVar(data, "start_sex", "")

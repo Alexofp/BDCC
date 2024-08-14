@@ -54,7 +54,12 @@ func _on_AddStateButton_pressed():
 	var newState:CreatedInteractionState = CreatedInteractionState.new()
 	newState.id = actionName
 	interaction.states[actionName] = newState
+	
+	if(interaction.states.size() == 1):
+		selectedState = newState.id
+	
 	updateStatesList()
+	updateSelectedState()
 
 func updateStatesList():
 	states_list.clear()
@@ -141,13 +146,15 @@ func _on_RemoveActionButton_pressed():
 		return
 	var theState:CreatedInteractionState = interaction.states[selectedState]
 	
-	if(!theState.has(selectedAction)):
+	if(!theState.actions.has(selectedAction)):
 		return
 	
 	var _ok = theState.actions.erase(selectedAction)
+	updateSelectedState()
 	updateSelectedAction()
 
 func _on_AddActionButton_pressed():
+	state_pack_variables.checkWidgetsFinished()
 	if(!interaction.states.has(selectedState)):
 		return
 	var theState:CreatedInteractionState = interaction.states[selectedState]
@@ -156,9 +163,13 @@ func _on_AddActionButton_pressed():
 	if(newActionName == "" && theState.actions.has(newActionName)):
 		return
 	
+	var newID:String = newActionName
+	newID = newID.to_lower().replace(" ", "_")
+	
 	var newAction:CreatedInteractionAction = CreatedInteractionAction.new()
-	newAction.id = newActionName
-	theState.actions[newActionName] = newAction
+	newAction.id = newID
+	newAction.name = newActionName
+	theState.actions[newID] = newAction
 	updateSelectedState()
 	updateSelectedAction()
 

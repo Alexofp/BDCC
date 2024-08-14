@@ -71,3 +71,9 @@ func doLookAround(keepScoreMult:float = 1.0):
 
 func getAnimData() -> Array:
 	return [StageScene.Solo, "stand", {pc="main"}]
+
+func saveData():
+	return {}
+
+func loadData(_data):
+	pass

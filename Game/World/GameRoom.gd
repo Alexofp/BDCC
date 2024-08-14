@@ -52,6 +52,7 @@ export(bool) var loctag_Greenhouses = false
 export(bool) var loctag_MentalWard = false
 export(bool) var loctag_GuardsEncounter = false
 export(bool) var loctag_EngineersEncounter = false
+export(bool) var loctag_Offlimits = false
 
 export(int, FLAGS, "Inmates", "Guards") var population = 0
 
@@ -241,6 +242,8 @@ func isOfflimitsForInmates() -> bool:
 	if(loctag_GuardsEncounter || loctag_Greenhouses):
 		return true
 	if(loctag_EngineersEncounter || loctag_MentalWard):
+		return true
+	if(loctag_Offlimits):
 		return true
 	
 	return false

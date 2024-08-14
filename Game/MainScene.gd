@@ -314,7 +314,9 @@ func getCurrentScene():
 		return sceneStack.back()
 	return null
 
-func endCurrentScene():
+func endCurrentScene(keepWorld:bool=true):
+	if(sceneStack.size() == 1 && keepWorld):
+		return
 	var currentScene = getCurrentScene()
 	if(currentScene != null):
 		currentScene.endScene()

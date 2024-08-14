@@ -166,6 +166,7 @@ roomName = "Stairs"
 roomID = "yard_stars_green"
 roomDescription = "A set of stairs lead up to the greenhouses with markings on the floor remind inmates that the greenhouses are [color=red]off-limits[/color] for them. "
 gridColor = 2
+loctag_Offlimits = true
 population = 2
 
 [node name="MainHallRoom37" parent="." index="17" instance=ExtResource( 2 )]
@@ -474,6 +475,7 @@ You see a few crates with fruits and vegetables here, open and vulnerable."
 roomSprite = 4
 roomColor = 1
 gridColor = 2
+loctag_Offlimits = true
 population = 2
 
 [node name="MainGreenhouses6" parent="." index="46" groups=["zone_greenhouses"] instance=ExtResource( 2 )]

@@ -8,6 +8,7 @@ var location:String = "main_punishment_spot"
 
 var involvedPawns:Dictionary = {} # Role = ID
 var currentPawn:String = "" # Role
+var directedToPawn:String = "" # Role
 var state:String = ""
 
 var currentActionID:String = ""
@@ -86,12 +87,12 @@ func playAnimation():
 	
 	GM.main.playAnimation(animData[0], animData[1], animData[2] if animData.size() > 2 else {})
 
-func addAction(theid:String, name:String, desc:String, score:float, time:int, extraFields:Dictionary = {}):
+func addAction(theid:String, name:String, desc:String, _scoreType:String, score, time:int, extraFields:Dictionary = {}):
 	var finalDic:Dictionary = {
 		id = theid,
 		name = name,
 		desc = desc,
-		score = score,
+		score = smartScore(_scoreType,score[0],score[1],score[2],score[3]) if(score is Array) else score*getScoreTypeValue(_scoreType),
 		time = time,
 	}
 	for extraKey in extraFields:
@@ -101,19 +102,59 @@ func addAction(theid:String, name:String, desc:String, score:float, time:int, ex
 	actionBuffer.append(finalDic)
 
 func getActions() -> Array:
-	return [
-		{
-			id = "test",
-			name = "Test",
-			desc = "Do something",
-			score = 1.0,
-			args = {},
-			time = 60,
-		},
-	]
+	return []
 
 func getActionsFinal() -> Array:
 	return getTextAndActions()[1]
+
+func getScoreTypeValueGeneric(_scoreType:String, _role1:String, _role2:String):
+	var curPawn = getRolePawn(_role1)
+	var dirToPawn = getRolePawn(_role2)
+	if(curPawn == null || dirToPawn == null):
+		return 1.0
+	
+	if(_scoreType == "surrender"):
+		var ourPowerLevel:float = curPawn.calculatePowerScore()
+		var theirPowerLevel:float = dirToPawn.calculatePowerScore()
+		
+		var diff:float = ourPowerLevel - theirPowerLevel
+		print("POWER DIFF: ",diff)
+		diff = clamp(diff, -5.0, 5.0)
+		if(diff > 0.0):
+			var cowardness = scorePersonalityMax(_role1, {PersonalityStat.Coward: 1.0}, true)
+			
+			return max(0.5 - diff, cowardness*0.3)
+		else:
+			var braveness = scorePersonalityMax(_role1, {PersonalityStat.Coward: -1.0}, true)
+			
+			return max(abs(diff)*0.2, 0.3 * (1.0-braveness))
+			
+	return 1.0
+
+func getScoreTypeValue(_scoreType:String):
+	return getScoreTypeValueGeneric(_scoreType, currentPawn, directedToPawn)
+
+func smartScore(_scoreType:String, defScore:float, likeScore:float, hateScore:float, lustScore:float):
+	#var curPawn = getCurrentPawn()
+	var curPawnRole = currentPawn
+	var dirToPawn = getDirectedToPawn()
+	var dirToRole = directedToPawn
+	
+	var finalScore:float = defScore * getScoreTypeValue(_scoreType)
+	
+	finalScore += likeScore * scorePersonalityMax(curPawnRole, {PersonalityStat.Mean:-0.5}, 0.0)
+	finalScore += hateScore * scorePersonalityMax(curPawnRole, {PersonalityStat.Mean:0.5}, 0.0)
+	finalScore += lustScore * scorePersonalityMax(curPawnRole, {PersonalityStat.Subby:0.5, PersonalityStat.Subby:-0.5}, 0.0)
+	
+	if(dirToPawn != null):
+		if(likeScore != 0.0):
+			finalScore += scoreLike(curPawnRole, dirToRole) * likeScore
+		if(hateScore != 0.0):
+			finalScore += scoreHate(curPawnRole, dirToRole) * hateScore
+		if(lustScore != 0.0):
+			finalScore += scoreLust(curPawnRole, dirToRole) * lustScore
+	
+	return finalScore
 
 func getTextAndActions() -> Array:
 	actionBuffer = []
@@ -190,8 +231,9 @@ func doInvolvePawn(role:String, pawn):
 	involvedPawns[role] = pawn.charID
 	pawn.setInteraction(self)
 
-func setState(newState:String, newRole:String):
+func setState(newState:String, newRole:String, dirToRole:String = ""):
 	setCurrentPawn(newRole)
+	setDirectedToPawn(dirToRole)
 	state = newState
 
 func getState() -> String:
@@ -199,6 +241,22 @@ func getState() -> String:
 
 func setCurrentPawn(therole:String):
 	currentPawn = therole
+
+func setDirectedToPawn(theRole:String):
+	if(theRole == ""):
+		for role in involvedPawns:
+			if(role == currentPawn):
+				continue
+			directedToPawn = role
+			return
+		directedToPawn = ""
+		return
+	directedToPawn = theRole
+
+func getDirectedToPawn() -> CharacterPawn:
+	if(!involvedPawns.has(directedToPawn)):
+		return null
+	return getRolePawn(directedToPawn)
 
 func setCurrentRole(therole:String):
 	setCurrentPawn(therole)
@@ -563,3 +621,7 @@ func makeRoleExhausted(role:String):
 
 func addMessage(text: String):
 	GM.main.addMessage(text)
+
+func runScene(sceneid: String, args = [], tag = ""):
+	var scene = GM.main.runScene(sceneid, args)
+	scene.sceneTag = tag

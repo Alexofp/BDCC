@@ -9,6 +9,11 @@ var actions:Dictionary = {}
 
 func getEditVars():
 	return {
+		"id": {
+			name = "ID",
+			type = "string",
+			value = id,
+		},
 		"output": {
 			name = "output",
 			type = "bigString",

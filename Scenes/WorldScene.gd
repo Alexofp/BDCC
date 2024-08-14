@@ -167,7 +167,8 @@ func _react(_action: String, _args):
 			else:
 				processTime(30)
 			interaction.doCurrentAction({scene=self})
-			GM.main.IS.decideNextAction(pawn.getInteraction(), {scene=self})
+			if(!pawn.getInteraction().isWaitingForScene()):
+				GM.main.IS.decideNextAction(pawn.getInteraction(), {scene=self})
 	if(_action == "pick_interaction_action"):
 		#var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
 		var interaction:PawnInteractionBase = _args[0]#pawn.getInteraction()
@@ -204,7 +205,10 @@ func runInteraction():
 	
 	if(interaction.getCurrentPawn() == pawn):
 		for action in textAndActions[1]:
-			addButton(action["name"], action["desc"], "pick_interaction_action", [interaction, action])
+			if(action.has("start_sex") && action["start_sex"].size() > 0 && action["start_sex"][0] == "pc"):
+				addButtonWithChecks(action["name"], action["desc"], "pick_interaction_action", [interaction, action], [[ButtonChecks.CanStartSex]])
+			else:
+				addButton(action["name"], action["desc"], "pick_interaction_action", [interaction, action])
 	else:
 		addButton("Continue", "See what happens next", "progress_interaction")
 	
@@ -217,6 +221,9 @@ func startInteractionFight(who:String, withWho:String):
 		runScene("FightScene", [who], "interaction_fight_pcdef")
 
 func startInteractionSex(domID:String, subID:String, sexType = SexType.DefaultSex):
+	if(domID != "pc"):
+		getCharacter(domID).prepareForSexAsDom()
+		GlobalRegistry.getCharacter(domID).addPain(-50)
 	runScene("GenericSexScene", [domID, subID, sexType], "interaction_sex")
 
 func sendStatusToInteraction(_result):

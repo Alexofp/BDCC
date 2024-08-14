@@ -27,6 +27,8 @@ func setData(_dataLine:Dictionary):
 		thePrefix = _dataLine["name"]
 	if(_dataLine.has("value")):
 		setVarText(_dataLine["value"])
+	if(_dataLine.has("minsize")):
+		rect_min_size.y = _dataLine["minsize"]
 
 func _on_Button_pressed():
 	if(isEditing):

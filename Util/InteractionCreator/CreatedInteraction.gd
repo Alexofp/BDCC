@@ -143,10 +143,17 @@ func generateCode() -> String:
 		for line in state.output.split("\n"):
 			if(line == ""):
 				continue
+			var lineData = getTabsAndText(line)
+			line = lineData[1]
+			var tabsText = lineData[0] + "\t"
+			
 			if(line.begins_with("!")):
-				textCodeLines.append("\t"+line.substr(1))
+				textCodeLines.append(tabsText+line.substr(1))
+			elif(line.begins_with("=")):
+				var sayData = Util.splitOnFirst(line.substr(1), ":")
+				textCodeLines.append(tabsText+"saynn(\"[say="+sayData[0]+"]"+sayData[1].strip_edges()+"[/say]\")")
 			else:
-				textCodeLines.append("\tsaynn(\""+line+"\")")
+				textCodeLines.append(tabsText+"saynn(\""+line+"\")")
 		if(textCodeLines.size() <= 0):
 			text += "\tsaynn(\"\")"
 		else:
@@ -164,7 +171,7 @@ func generateCode() -> String:
 			
 			if(action.cond != ""):
 				text += '\tif('+action.cond+'):\n\t'
-			text += '\taddAction("'+actionID+'", "'+action.name+'", "'+action.desc.replace("\n", "\\n")+'", '+str(action.score)+', '+str(action.time)+', {'+extraFields+'})\n'   #")\n'
+			text += '\taddAction("'+actionID+'", "'+action.name+'", "'+action.desc.replace("\n", "\\n")+'", \"'+action.scoreType+'\", '+str(action.score)+', '+str(action.time)+', {'+extraFields+'})\n'   #")\n'
 			#text += "\t\t{\n"
 			#text += "\t\t\tid = \""+actionID+"\",\n"
 			#text += "\t\t\tname = \""+action.name+"\",\n"
@@ -213,3 +220,12 @@ func generateCode() -> String:
 		text += '\n\n'
 		
 	return text
+
+func getTabsAndText(theLine:String):
+	var tabs:String = ""
+	
+	while(theLine.length() > 0 && theLine[0] == "\t"):
+		tabs += "\t"
+		theLine = theLine.substr(1)
+	
+	return [tabs, theLine]

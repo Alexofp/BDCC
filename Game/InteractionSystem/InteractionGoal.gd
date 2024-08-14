@@ -6,12 +6,13 @@ const Eat = "Eat"
 const Hangout = "Hangout"
 const WorkMine = "WorkMine"
 const Patrol = "Patrol"
+const POI = "POI" # Point of interest
 
 static func getAll():
-	return [Wander, Eat, Hangout, WorkMine, Patrol]
+	return [Wander, Eat, Hangout, WorkMine, Patrol, POI]
 
 static func getAllAlone():
-	return [Wander, Eat, Hangout, WorkMine]
+	return [Wander, Eat, Hangout, WorkMine, POI]
 
 static func create(theID:String):
 	var newGoal
