@@ -7,6 +7,8 @@ func _run():
 	if(runInteraction()):
 		return
 	
+	#saynn(ModularDialogue.generate("GuardCaughtOffLimits", {guard=GM.pc,inmate=GM.pc}))
+	
 	var roomID = GM.pc.location
 	var _roomInfo = GM.world.getRoomByID(roomID)
 	

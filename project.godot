@@ -429,6 +429,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Util/AutoTranslation/Translators/DeepLTranslator.gd"
 }, {
+"base": "Reference",
+"class": "DialogueFiller",
+"language": "GDScript",
+"path": "res://Game/ModularDialogue/DialogueFiller.gd"
+}, {
+"base": "Reference",
+"class": "DialogueForm",
+"language": "GDScript",
+"path": "res://Game/ModularDialogue/DialogueForm.gd"
+}, {
+"base": "Reference",
+"class": "DialogueFormBank",
+"language": "GDScript",
+"path": "res://Game/ModularDialogue/DialogueFormBank.gd"
+}, {
 "base": "Object",
 "class": "Direction",
 "language": "GDScript",
@@ -1549,6 +1564,9 @@ _global_script_class_icons={
 "DatapackSkin": "",
 "DatapackTriggerCodeContext": "",
 "DeepLTranslator": "",
+"DialogueFiller": "",
+"DialogueForm": "",
+"DialogueFormBank": "",
 "Direction": "",
 "Doll3D": "",
 "DollAttachmentZone": "",
@@ -1779,6 +1797,7 @@ SAVE="*res://Game/SaveManager.gd"
 GlobalTooltip="*res://UI/GlobalTooltipSystem.gd"
 AutoTranslation="*res://Util/AutoTranslation/AutoTranslation.gd"
 CrotchFavBlocks="*res://Game/Datapacks/UI/CrotchCode/Util/CrotchFavBlocks.gd"
+ModularDialogue="*res://Game/ModularDialogue/ModularDialogue.gd"
 
 [debug]
 
