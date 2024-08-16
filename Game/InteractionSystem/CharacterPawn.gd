@@ -13,6 +13,25 @@ var fightExhaustion:float = 0.0
 
 const hungerPerHour:float = 0.2
 
+func saveData():
+	var data = {
+		"loc": location,
+		"charID": charID,
+		"isD": isDeleted,
+		"hunger": hunger,
+		"tslw": timeSinceLastWork,
+		"fe": fightExhaustion,
+	}
+	return data
+
+func loadData(_data):
+	location = SAVE.loadVar(_data, "loc", "main_punishment_spot")
+	charID = SAVE.loadVar(_data, "charID", "")
+	isDeleted = SAVE.loadVar(_data, "isD", false)
+	hunger = SAVE.loadVar(_data, "hunger", 0.0)
+	timeSinceLastWork = SAVE.loadVar(_data, "tslw", 0)
+	fightExhaustion = SAVE.loadVar(_data, "fe", 0.0)
+
 func onSpawn():
 	hunger = RNG.randf_range(0.0, 0.3)
 	timeSinceLastWork = RNG.randi_range(0, 6000)

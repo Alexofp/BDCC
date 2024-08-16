@@ -435,6 +435,11 @@ _global_script_classes=[ {
 "path": "res://Game/ModularDialogue/DialogueFiller.gd"
 }, {
 "base": "Reference",
+"class": "DialogueFillerAdder",
+"language": "GDScript",
+"path": "res://Game/ModularDialogue/DialogueFillerAdder.gd"
+}, {
+"base": "Reference",
 "class": "DialogueForm",
 "language": "GDScript",
 "path": "res://Game/ModularDialogue/DialogueForm.gd"
@@ -1565,6 +1570,7 @@ _global_script_class_icons={
 "DatapackTriggerCodeContext": "",
 "DeepLTranslator": "",
 "DialogueFiller": "",
+"DialogueFillerAdder": "",
 "DialogueForm": "",
 "DialogueFormBank": "",
 "Direction": "",

@@ -38,9 +38,9 @@ func getEditVars():
 				"punishMean",
 				"sexDom",
 				"sexSub",
-				"shy",
 				"slut",
 				"hatefuck",
+				"resist",
 			],
 		},
 		"score": {

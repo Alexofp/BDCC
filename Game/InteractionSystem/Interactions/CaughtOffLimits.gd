@@ -34,7 +34,7 @@ func shouldRunOnMeet(_pawn1, _pawn2, _pawn2Moved:bool):
 
 func init_text():
 	saynn("{guard.name} notices {inmate.name} in an off-limits area!")
-	saynn("[say=guard]Hey, what are you doing in there?[/say]")
+	sayLine("guard", "GuardCaughtOffLimits", {guard="guard", inmate="inmate"})
 
 	addAction("fight", "Fight!", "Protect yourself!", "fight", [1.0,-1.0,0.5,0.0], 60, {})
 	addAction("surrender", "Surrender", "Maybe they won't be mean", "surrender", [0.1,0.5,0.0,0.0], 60, {})
@@ -48,7 +48,7 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func about_to_fight_text():
 	saynn("{inmate.name} prepares for a fight.")
-	saynn("[say=guard]Alright, you asked for this.[/say]")
+	sayLine("guard", "GuardCaughtOffLimitsFight", {guard="guard", inmate="inmate"})
 
 	addAction("fight", "Fight", "Begin the fight", "fight", 1.0, 600, {start_fight=["inmate", "guard"],})
 	addAction("surrender", "Surrender", "You changed your mind", "surrender", 1.0, 30, {})
@@ -68,7 +68,7 @@ func about_to_fight_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func surrendered_text():
 	saynn("{inmate.name} raises {inmate.his} hands and gives up.")
-	saynn("[say=guard]Smart choice.[/say]")
+	sayLine("guard", "GuardInmateSurrender", {guard="guard", inmate="inmate"})
 	saynn("{guard.name} approaches {inmate.you}.")
 
 	addAction("punish", "Punish", "They gotta serve a punishment!", "punishMean", 1.0, 60, {})
@@ -78,12 +78,13 @@ func surrendered_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "punish"):
 		startInteraction("PunishInteraction", {punisher=getRoleID("guard"), target=getRoleID("inmate")})
 	if(_id == "frisk"):
-		setState("about_to_frisk", "guard")
+		setState("about_to_frisk", "inmate")
 
 
 func inmate_won_text():
 	if(!guardSurrender):
 		saynn("{guard.name} hits the floor. {inmate.name} won!")
+		sayLine("guard", "FightLostGeneric", {winner="inmate", loser="guard"})
 	else:
 		saynn("{guard.name} changes {guard.his} mind at the last second and decides to surrender!")
 
@@ -135,6 +136,7 @@ func about_to_leave_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func guard_won_text():
 	saynn("{inmate.name} hits the floor. {guard.name} won!")
+	sayLine("guard", "FightWonGeneric", {winner="guard", loser="inmate"})
 
 	addAction("punish", "Punish", "They gotta serve a punishment!", "punishMean", 1.0, 60, {})
 	addAction("frisk", "Frisk", "Search them and let them go", "punish", 1.0, 30, {})
@@ -143,14 +145,15 @@ func guard_won_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "punish"):
 		startInteraction("PunishInteraction", {punisher=getRoleID("guard"), target=getRoleID("inmate")})
 	if(_id == "frisk"):
-		setState("about_to_frisk", "guard")
+		setState("about_to_frisk", "inmate")
 
 
 func about_to_frisk_text():
 	saynn("{guard.name} is about to frisk {inmate.name}.")
-	saynn("[say=guard]Don't move now.[/say]")
+	sayLine("guard", "GuardFrisk", {guard="guard", inmate="inmate"})
 
-	addAction("frisk", "Frisk", "Take away any contraband", "default", 1.0, 120, {})
+	addAction("frisk", "Stay still", "Stay still and let them frisk you", "default", 1.0, 120, {})
+	addAction("resist", "Resist", "Try to avoid being frisked", "resist", 1.0, 120, {})
 
 func about_to_frisk_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "frisk"):
@@ -158,22 +161,32 @@ func about_to_frisk_do(_id:String, _args:Dictionary, _context:Dictionary):
 		foundIllegalItems = false
 		
 		if(theChar.isPlayer()):
-			theChar.addCredits(-5)
-			addMessage("5 credits were taken from you")
 			if(theChar.hasIllegalItems()):
+				theChar.addCredits(-5)
+				addMessage("5 credits were taken from you")
 				foundIllegalItems = true
 				theChar.getInventory().removeItemsList(theChar.getInventory().getItemsWithTag(ItemTag.Illegal))
 				theChar.getInventory().removeEquippedItemsList(theChar.getInventory().getEquippedItemsWithTag(ItemTag.Illegal))
 		else:
 			foundIllegalItems = RNG.chance(50)
 		setState("frisked", "guard")
+	if(_id == "resist"):
+		if(doDexterityCheck("inmate", "guard")):
+			foundIllegalItems = false
+			setState("frisked", "guard")
+			if(getRolePawn("inmate").isPlayer()):
+				addMessage("You managed to avoid the search!")
+		else:
+			setState("frisk_failed_resist", "guard")
 
 
 func frisked_text():
 	if(foundIllegalItems):
 		saynn("{guard.name} takes away all contraband from {inmate.name} and also 5 credits on top!")
+		sayLine("guard", "GuardFriskFound", {guard="guard", inmate="inmate"})
 	else:
-		saynn("{guard.name} doesn't find any contraband but takes away 5 credits anyway.")
+		saynn("{guard.name} doesn't find any contraband.")
+		sayLine("guard", "GuardFriskNoFound", {guard="guard", inmate="inmate"})
 
 	addAction("escort_out", "Escort out", "Time to make them go", "default", 1.0, 30, {})
 
@@ -189,6 +202,8 @@ func frisked_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func escorting_out_text():
 	saynn("{guard.name} is escorting {inmate.name} out of the off-limits zone.")
+	if(RNG.chance(20)):
+		sayLine("guard", "GuardKeepMoving", {guard="guard", inmate="inmate"})
 
 	addAction("escort_out", "Escort out", "Go to the spot", "default", 1.0, 60, {})
 
@@ -201,13 +216,25 @@ func escorting_out_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func escorted_out_text():
 	saynn("{guard.name} shoves {inmate.name} away.")
-	saynn("[say=guard]Now go away.[/say]")
+	sayLine("guard", "GuardGoAway", {guard="guard", inmate="inmate"})
 
 	addAction("leave", "Leave", "Time to go", "default", 1.0, 30, {})
 
 func escorted_out_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "leave"):
 		stopMe()
+
+
+func frisk_failed_resist_text():
+	saynn("{inmate.name} manages to avoid getting searched!")
+	sayLine("guard", "GuardFriskFailResist", {guard="guard", inmate="inmate"})
+	saynn("Looks like the guard is not happy.")
+
+	addAction("punish", "Punish", "Punish them!", "default", 1.0, 60, {})
+
+func frisk_failed_resist_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "punish"):
+		startInteraction("PunishInteraction", {punisher=getRoleID("guard"), target=getRoleID("inmate")})
 
 
 func getAnimData() -> Array:

@@ -141,7 +141,7 @@ func generateCode() -> String:
 		
 		var textCodeLines = []
 		for line in state.output.split("\n"):
-			if(line == ""):
+			if(line.strip_edges() == ""):
 				continue
 			var lineData = getTabsAndText(line)
 			line = lineData[1]

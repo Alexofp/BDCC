@@ -1,9 +1,10 @@
 extends Reference
-class_name DialogueFiller
+class_name DialogueFillerAdder
 
 var forID:String = ""
 var priority:int = 0
-var weight:float = 1.0
+var prefix:bool = false
+var chance:float = 100.0
 
 func getFormIDs() -> Array:
 	return [forID]
@@ -11,8 +12,8 @@ func getFormIDs() -> Array:
 func getPriority(_id:String) -> int:
 	return priority
 
-func getWeight(_id:String) -> float:
-	return weight
+func getChance(_id:String) -> float:
+	return chance
 
 func canBeUsed(_id:String, _args:Dictionary) -> bool:
 	return true
@@ -33,3 +34,6 @@ func getChar(_args:Dictionary, argID:String) -> BaseCharacter:
 	if(!_args.has(argID)):
 		return null
 	return _args[argID]
+
+func isPrefix(_id:String):
+	return prefix

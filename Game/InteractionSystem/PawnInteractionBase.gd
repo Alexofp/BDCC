@@ -17,7 +17,6 @@ var currentActionArgs:Dictionary = {}
 var busyActionSeconds:int = 0
 var currentActionText:String = ""
 var isWaitingScene:bool = false
-var isWaitingAction:String = ""
 
 var cachedTarget:String = ""
 var cachedPath:Array = []
@@ -625,3 +624,50 @@ func addMessage(text: String):
 func runScene(sceneid: String, args = [], tag = ""):
 	var scene = GM.main.runScene(sceneid, args)
 	scene.sceneTag = tag
+
+func sayLine(role:String, lineID:String, args:Dictionary):
+	var processedArgs = {}
+	for argID in args: # Assumes all the args are characters
+		processedArgs[argID] = getRoleID(args[argID])
+	
+	saynn("[say="+role+"]"+ModularDialogue.generate(lineID, processedArgs)+"[/say]")
+
+func doDexterityCheck(_roleActs:String, _roleReacts:String) -> bool:
+	return RNG.chance(50)
+
+func saveData():
+	var data = {
+		"loc": location,
+		"iPawns": involvedPawns,
+		"cPawn": currentPawn,
+		"dTPawn": directedToPawn,
+		"state": state,
+		"cAID": currentActionID,
+		"cAArgs": currentActionArgs,
+		"busySecs": busyActionSeconds,
+		"cAText": currentActionText,
+		"ws": isWaitingScene,
+		"cLD": cachedLastDir,
+		"wD": wasDeleted,
+		
+	}
+	return data
+
+func loadData(_data):
+	cachedTarget = ""
+	cachedPath = []
+	textBuffer = []
+	actionBuffer = []
+
+	location = SAVE.loadVar(_data, "loc", "main_punishment_spot")
+	involvedPawns = SAVE.loadVar(_data, "iPawns", {})
+	currentPawn = SAVE.loadVar(_data, "cPawn", "")
+	directedToPawn = SAVE.loadVar(_data, "dTPawn", "")
+	state = SAVE.loadVar(_data, "state", "")
+	currentActionID = SAVE.loadVar(_data, "cAID", "")
+	currentActionArgs = SAVE.loadVar(_data, "cAArgs", {})
+	busyActionSeconds = SAVE.loadVar(_data, "busySecs", 0)
+	currentActionText = SAVE.loadVar(_data, "cAText", "")
+	isWaitingScene = SAVE.loadVar(_data, "ws", false)
+	cachedLastDir = SAVE.loadVar(_data, "cLD", -1)
+	wasDeleted = SAVE.loadVar(_data, "wD", false)
