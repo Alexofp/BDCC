@@ -14,4 +14,10 @@ func getForms() -> Dictionary:
 		"GuardFriskFailResist": form("Argh. Fuck it.", {inmate=CHAR, guard=CHAR}),
 		"GuardGoAway": form("Now go away.", {inmate=CHAR, guard=CHAR}),
 		"GuardKeepMoving": form("Keep moving, inmate.", {inmate=CHAR, guard=CHAR}),
+		
+		"PunishDecide": form("What should I do with you..", {punisher=CHAR, target=CHAR}),
+		"PunishDecideStocks": form("Stocks will do nicely.", {punisher=CHAR, target=CHAR}),
+		"PunishAboutToStocks": form("Bend over.", {punisher=CHAR, target=CHAR}),
+		"PunishLockIntoStocks": form("Have fun.", {punisher=CHAR, target=CHAR}),
+		"PunishSex": form("Let's have some fun.", {punisher=CHAR, target=CHAR}),
 	}

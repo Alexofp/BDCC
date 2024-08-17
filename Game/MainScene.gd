@@ -316,6 +316,7 @@ func getCurrentScene():
 
 func endCurrentScene(keepWorld:bool=true):
 	if(sceneStack.size() == 1 && keepWorld):
+		IS.stopInteractionsForPawnID("pc")
 		return
 	var currentScene = getCurrentScene()
 	if(currentScene != null):

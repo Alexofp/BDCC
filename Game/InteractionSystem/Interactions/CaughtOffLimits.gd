@@ -91,10 +91,9 @@ func inmate_won_text():
 	addAction("leave", "Leave", "Just leave while you can", "default", 0.2, 30, {})
 	addAction("sex", "Sex!", "Fuck them first", "sexDom", 1.0, 600, {start_sex=["inmate", "guard"],})
 	addAction("sexSub", "Submit to", "Let them fuck you", "sexSub", 0.3, 600, {start_sex=["guard", "inmate"],})
-	if(getRolePawn("inmate").isPlayer()):
-		addAction("inv", "Inventory", "Open the inventory", "default", 0.0, 0, {})
-	if(getRolePawn("inmate").isPlayer() && GM.pc.getInventory().hasRemovableRestraints()):
-		addAction("struggle", "Struggle", "Try to remove some of your restraints", "default", 0.0, 0, {})
+	addAction("punish", "Punish", "Find a way to punish them", "punishMean", 0.3, 30, {})
+
+	addDefeatButtons("inmate", "guard")
 
 func inmate_won_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "leave"):
@@ -106,10 +105,8 @@ func inmate_won_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "sexSub"):
 		var _sexResult = getSexResult(_args)
 		setState("after_sub_sex", "inmate")
-	if(_id == "inv"):
-		runScene("InventoryScene")
-	if(_id == "struggle"):
-		runScene("StrugglingScene")
+	if(_id == "punish"):
+		startInteraction("PunishInteraction", {punisher=getRoleID("inmate"), target=getRoleID("guard")})
 
 
 func after_sub_sex_text():
@@ -140,6 +137,8 @@ func guard_won_text():
 
 	addAction("punish", "Punish", "They gotta serve a punishment!", "punishMean", 1.0, 60, {})
 	addAction("frisk", "Frisk", "Search them and let them go", "punish", 1.0, 30, {})
+
+	addDefeatButtons("guard", "inmate")
 
 func guard_won_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "punish"):

@@ -126,6 +126,8 @@ func generateCode() -> String:
 			
 			text += "\nvar "+varName+" = "+varValue
 		text += '\n\n'
+	else:
+		text += "\n"
 	text += 'func _init():'
 	text += '\n\tid = "'+id+'"'
 	text += '\n\n'
@@ -139,7 +141,8 @@ func generateCode() -> String:
 		
 		text += 'func '+actualID+'_text():\n'
 		
-		var textCodeLines = []
+		var textCodeLines := []
+		var afterButtonLines := []
 		for line in state.output.split("\n"):
 			if(line.strip_edges() == ""):
 				continue
@@ -148,7 +151,11 @@ func generateCode() -> String:
 			var tabsText = lineData[0] + "\t"
 			
 			if(line.begins_with("!")):
-				textCodeLines.append(tabsText+line.substr(1))
+				line = line.substr(1)
+				if(line.begins_with("!")):
+					afterButtonLines.append(tabsText+line.substr(1))
+				else:
+					textCodeLines.append(tabsText+line)
 			elif(line.begins_with("=")):
 				var sayData = Util.splitOnFirst(line.substr(1), ":")
 				textCodeLines.append(tabsText+"saynn(\"[say="+sayData[0]+"]"+sayData[1].strip_edges()+"[/say]\")")
@@ -177,6 +184,10 @@ func generateCode() -> String:
 			#text += "\t\t\tname = \""+action.name+"\",\n"
 			#text += "\t\t},\n"
 		text += "\n"
+		
+		if(afterButtonLines.size() > 0):
+			text += Util.join(afterButtonLines, "\n")
+			text += "\n\n"
 		
 		if(!state.actions.empty()):
 			text += 'func '+actualID+'_do(_id:String, _args:Dictionary, _context:Dictionary):\n'

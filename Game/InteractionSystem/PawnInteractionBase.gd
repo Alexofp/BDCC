@@ -68,6 +68,9 @@ func getCharIDByRole(role:String) -> String:
 		return involvedPawns[role]
 	return ""
 
+func getCharByRole(role:String):
+	return GlobalRegistry.getCharacter(getCharIDByRole(role))
+
 func playAnimation():
 	var animData = getAnimDataFinal()
 	
@@ -171,6 +174,13 @@ func doAction(_id:String, _args:Dictionary, _context:Dictionary):
 	pass
 
 func doActionFinal(_id:String, _args:Dictionary, _context:Dictionary = {}):
+	if(_id == "builtin_inv"):
+		runScene("InventoryScene")
+		return
+	elif(_id == "builtin_struggle"):
+		runScene("StrugglingScene")
+		return
+	
 	var methodName:String = (state if state != "" else "init")+"_do"
 	if(has_method(methodName)):
 		return call(methodName, _id, _args, _context)
@@ -634,6 +644,15 @@ func sayLine(role:String, lineID:String, args:Dictionary):
 
 func doDexterityCheck(_roleActs:String, _roleReacts:String) -> bool:
 	return RNG.chance(50)
+
+func addDefeatButtons(rolePC:String, _roleNPC:String):
+	if(involvedPawns.has(rolePC) && getRolePawn(rolePC).isPlayer()):
+		addAction("builtin_inv", "Inventory", "Open the inventory", "default", 0.0, 0, {})
+		if(GM.pc.getInventory().hasRemovableRestraints()):
+			addAction("builtin_struggle", "Struggle", "Try to remove some of your restraints", "default", 0.0, 0, {})
+		
+		if(involvedPawns.has(_roleNPC)):
+			GM.ES.triggerRun(Trigger.DefeatedDynamicNPC, [getRoleID(_roleNPC)])
 
 func saveData():
 	var data = {
