@@ -2955,3 +2955,72 @@ func getBodypartID(slot):
 
 func getInmateType():
 	return InmateType.Unknown
+
+func doStruggleOutOfRestraints(isScared:bool = false, addStats:bool = true) -> Dictionary:
+	var possible = []
+	var trivial = []
+	
+	for item in getInventory().getEquppedRestraints():
+		var restraintData: RestraintData = item.getRestraintData()
+		
+		if(restraintData == null || !restraintData.canStruggleFinal()):
+			continue
+		
+		if(!restraintData.shouldDoStruggleMinigame(self)):
+			trivial.append(item)
+		else:
+			possible.append(item)
+	
+	var pickedItem
+	var minigameResult
+	if(trivial.size() > 0):
+		pickedItem = RNG.pick(trivial)
+		minigameResult = MinigameResult.new()
+		minigameResult.score = 1.0
+	elif(possible.size() > 0):
+		pickedItem = RNG.pick(possible)
+		minigameResult = self.getRestraintStrugglingMinigameResult()
+		
+		if(isScared):
+			minigameResult.score = min(minigameResult.score, min(1.0, RNG.randf_range(0.6, 1.1)))
+	else:
+		return {}
+	
+	var text = ""
+	var restraintData: RestraintData = pickedItem.getRestraintData()
+	var struggleData = restraintData.doStruggle(self, minigameResult)
+	
+	
+	text += struggleData["text"]
+	
+	if(struggleData.has("damage")):
+		var damage = struggleData["damage"]
+		restraintData.takeDamage(damage)
+		if(damage > 0.0):
+			text += ("\n{user.You} made "+str(Util.roundF(damage*100.0, 1))+"% of progress, "+str(Util.roundF(max(0.0, restraintData.getTightness()*100.0), 1))+"% left.")
+		elif(damage < 0.0):
+			text += ("\n{user.You} lost "+str(Util.roundF(abs(damage)*100.0, 1))+"% of progress, "+str(Util.roundF(max(0.0, restraintData.getTightness()*100.0), 1))+"% left.")
+		else:
+			text += ("\n{user.You} made no progress, "+str(Util.roundF(max(0.0, restraintData.getTightness()*100.0), 1))+"% left.")
+	
+	if(addStats):
+		if(struggleData.has("lust") && struggleData["lust"] > 0):
+			addLust(struggleData["lust"])
+		if(struggleData.has("pain") && struggleData["pain"] > 0):
+			addPain(struggleData["pain"])
+		if(struggleData.has("stamina") && struggleData["stamina"] != 0):
+			addStamina(-struggleData["stamina"])
+	
+	if(restraintData.shouldBeRemoved()):
+		text += "\n[b]"+restraintData.getRemoveMessage()+"[/b]"
+		restraintData.onStruggleRemoval()
+		getInventory().removeEquippedItem(pickedItem)
+		
+	text = GM.ui.processString(text, {"user":getID()})
+	
+	return {
+		text=text,
+		lust=(struggleData["lust"] if struggleData.has("lust") else 0),
+		pain=(struggleData["pain"] if struggleData.has("pain") else 0),
+		stamina=(struggleData["stamina"] if struggleData.has("stamina") else 0),
+	}

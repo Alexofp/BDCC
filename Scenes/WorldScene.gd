@@ -8,6 +8,7 @@ func _run():
 		return
 	
 	#saynn(ModularDialogue.generate("GuardCaughtOffLimits", {guard=GM.pc,inmate=GM.pc}))
+	#print(GM.main.IS.getPawnIDsNear(GM.pc.location, 2, 1))
 	
 	var roomID = GM.pc.location
 	var _roomInfo = GM.world.getRoomByID(roomID)
@@ -208,7 +209,9 @@ func runInteraction():
 	
 	if(interaction.getCurrentPawn() == pawn):
 		for action in textAndActions[1]:
-			if(action.has("start_sex") && action["start_sex"].size() > 0 && action["start_sex"][0] == "pc"):
+			if(action.has("disabled") && action["disabled"]):
+				addDisabledButton(action["name"], action["desc"])
+			elif(action.has("start_sex") && action["start_sex"].size() > 0 && action["start_sex"][0] == "pc"):
 				addButtonWithChecks(action["name"], action["desc"], "pick_interaction_action", [interaction, action], [[ButtonChecks.CanStartSex]])
 			else:
 				addButton(action["name"], action["desc"], "pick_interaction_action", [interaction, action])

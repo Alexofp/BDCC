@@ -231,12 +231,18 @@ func getPawnsAt(loc:String) -> Array:
 	
 	for pawnID in pawnsByLoc[loc]:
 		result.append(getPawn(pawnID))
-#	for charID in pawns:
-#		var pawn = pawns[charID]
-#
-#		if(pawn.getLocation() == loc):
-#			result.append(pawn)
+	return result
+
+func getPawnsNear(loc:String, maxDepth:int, maxDist:float=-1.0) -> Array:
+	var result:Array = []
+	var allRooms:Array
+	if(maxDist >= 0.0):
+		allRooms = GM.world.getConnectedRoomsNearLimitDistance(loc, maxDepth, maxDist)
+	else:
+		allRooms = GM.world.getConnectedRoomsNear(loc, maxDepth)
 	
+	for roomID in allRooms:
+		result.append_array(getPawnsAt(roomID))
 	return result
 
 func getPawnIDsAt(loc:String) -> Array:
@@ -246,6 +252,18 @@ func getPawnIDsAt(loc:String) -> Array:
 	
 	for pawnID in pawnsByLoc[loc]:
 		result.append(pawnID)
+	return result
+
+func getPawnIDsNear(loc:String, maxDepth:int, maxDist:float=-1.0) -> Array:
+	var result:Array = []
+	var allRooms:Array
+	if(maxDist >= 0.0):
+		allRooms = GM.world.getConnectedRoomsNearLimitDistance(loc, maxDepth, maxDist)
+	else:
+		allRooms = GM.world.getConnectedRoomsNear(loc, maxDepth)
+	
+	for roomID in allRooms:
+		result.append_array(getPawnIDsAt(roomID))
 	return result
 
 func hasPawnsAt(loc:String) -> bool:

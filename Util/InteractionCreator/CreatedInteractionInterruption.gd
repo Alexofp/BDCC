@@ -1,34 +1,27 @@
 extends Reference
-class_name CreatedInteractionAction
+class_name CreatedInteractionInterruption
 
 var id:String = ""
 
 var name:String = ""
 var desc:String = ""
-var disabledDesc:String = ""
+#var disabledDesc:String = ""
 var score:String = "1.0"
 var scoreType:String = "default"
+var scoreRole:String = "inmate"
 var args:String = ""
-var time:String = "60"
-var start_sex:String = ""
-var start_fight:String = ""
+var states:Array = []
 var cond:String = ""
 var code:String = "setState(\"meow\", \"inmate\")"
 
-const allScoreTypes = [
-		"default",
-		"fight",
-		"surrender",
-		"punish",
-		"punishMean",
-		"sexDom",
-		"sexSub",
-		"slut",
-		"hatefuck",
-		"resist",
-	]
-
-func getEditVars():
+func getEditVars(allStates:Array):
+	var allStatesFancy:Array = []
+	for stateID in allStates:
+		if(stateID == ""):
+			allStatesFancy.append([stateID, "--init--"])
+		else:
+			allStatesFancy.append([stateID, stateID])
+	
 	return {
 		"name": {
 			name = "Name",
@@ -40,16 +33,21 @@ func getEditVars():
 			type = "bigString",
 			value = desc,
 		},
-		"disabledDesc": {
-			name = "Disabled desc",
-			type = "bigString",
-			value = disabledDesc,
-		},
+#		"disabledDesc": {
+#			name = "Disabled desc",
+#			type = "bigString",
+#			value = disabledDesc,
+#		},
 		"scoreType": {
 			name = "Score type",
 			type = "selector",
 			value = scoreType,
-			values = allScoreTypes,
+			values = CreatedInteractionAction.allScoreTypes,
+		},
+		"scoreRole": {
+			name = "Score type role check",
+			type = "string",
+			value = scoreRole,
 		},
 		"score": {
 			name = "Score [def,like,hate,lust]",
@@ -61,20 +59,11 @@ func getEditVars():
 			type = "string",
 			value = args,
 		},
-		"time": {
-			name = "Time",
-			type = "string",
-			value = time,
-		},
-		"start_sex": {
-			name = "start_sex",
-			type = "string",
-			value = start_sex,
-		},
-		"start_fight": {
-			name = "start_fight",
-			type = "string",
-			value = start_fight,
+		"states": {
+			name = "States",
+			type = "addRemoveList",
+			value = states,
+			values = allStatesFancy,
 		},
 		"cond": {
 			name = "Condition",
@@ -94,24 +83,20 @@ func applyEditVar(varid, value):
 		name = value
 	if(varid == "desc"):
 		desc = value
-	if(varid == "disabledDesc"):
-		disabledDesc = value
 	if(varid == "score"):
 		score = value
 	if(varid == "args"):
 		args = value
-	if(varid == "time"):
-		time = value
-	if(varid == "start_sex"):
-		start_sex = value
-	if(varid == "start_fight"):
-		start_fight = value
 	if(varid == "cond"):
 		cond = value
 	if(varid == "code"):
 		code = value
 	if(varid == "scoreType"):
 		scoreType = value
+	if(varid == "states"):
+		states = value
+	if(varid == "scoreRole"):
+		scoreRole = value
 	
 	return false
 
@@ -120,29 +105,25 @@ func saveData():
 	return {
 		"name": name,
 		"desc": desc,
-		"disabledDesc": disabledDesc,
 		"score": score,
 		"scoreType": scoreType,
+		"scoreRole": scoreRole,
 		"args": args,
-		"time": time,
-		"start_sex": start_sex,
-		"start_fight": start_fight,
 		"cond": cond,
 		"code": code,
+		"states": states,
 	}
 
 func loadData(data):
 	name = loadVar(data, "name", "No name")
 	desc = loadVar(data, "desc", "No desc")
-	disabledDesc = loadVar(data, "disabledDesc", "")
 	score = loadVar(data, "score", "1.0")
 	scoreType = loadVar(data, "scoreType", "default")
+	scoreRole = loadVar(data, "scoreRole", "inmate")
 	args = loadVar(data, "args", "")
-	time = loadVar(data, "time", "")
-	start_sex = loadVar(data, "start_sex", "")
-	start_fight = loadVar(data, "start_fight", "")
 	cond = loadVar(data, "cond", "")
 	code = loadVar(data, "code", "")
+	states = loadVar(data, "states", [])
 		
 		
 func loadVar(_data, thekey, defaultValue = null):

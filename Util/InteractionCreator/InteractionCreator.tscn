@@ -38,6 +38,7 @@ margin_right = 1272.0
 margin_bottom = 20.0
 
 [node name="States" type="VBoxContainer" parent="VBoxContainer/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -172,6 +173,88 @@ margin_top = 204.0
 margin_right = 1015.0
 margin_bottom = 224.0
 
+[node name="Interruptions" type="VBoxContainer" parent="VBoxContainer/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Interruptions"]
+margin_right = 1272.0
+margin_bottom = 660.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Interruptions/HBoxContainer"]
+margin_right = 253.0
+margin_bottom = 660.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/Interruptions/HBoxContainer/VBoxContainer"]
+margin_right = 253.0
+margin_bottom = 24.0
+
+[node name="AddIntButton" type="Button" parent="VBoxContainer/TabContainer/Interruptions/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_right = 37.0
+margin_bottom = 24.0
+text = "Add"
+
+[node name="IntNameEdit" type="LineEdit" parent="VBoxContainer/TabContainer/Interruptions/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 41.0
+margin_right = 253.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/TabContainer/Interruptions/HBoxContainer/VBoxContainer"]
+margin_top = 28.0
+margin_right = 253.0
+margin_bottom = 48.0
+
+[node name="DownIntButton" type="Button" parent="VBoxContainer/TabContainer/Interruptions/HBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_right = 19.0
+margin_bottom = 20.0
+text = "v"
+
+[node name="UpIntButton" type="Button" parent="VBoxContainer/TabContainer/Interruptions/HBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 23.0
+margin_right = 42.0
+margin_bottom = 20.0
+text = "^"
+
+[node name="InterruptionsList" type="ItemList" parent="VBoxContainer/TabContainer/Interruptions/HBoxContainer/VBoxContainer"]
+margin_top = 52.0
+margin_right = 253.0
+margin_bottom = 636.0
+rect_min_size = Vector2( 0, 100 )
+size_flags_vertical = 3
+
+[node name="RemoveIntButton" type="Button" parent="VBoxContainer/TabContainer/Interruptions/HBoxContainer/VBoxContainer"]
+margin_top = 640.0
+margin_right = 253.0
+margin_bottom = 660.0
+text = "Remove"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/Interruptions/HBoxContainer"]
+margin_left = 257.0
+margin_right = 1272.0
+margin_bottom = 660.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Interruptions/HBoxContainer/ScrollContainer"]
+margin_right = 1015.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="IntPackVariables" parent="VBoxContainer/TabContainer/Interruptions/HBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1015.0
+margin_bottom = 20.0
+
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 700.0
 margin_right = 1280.0
@@ -257,6 +340,12 @@ size_flags_vertical = 3
 [connection signal="item_selected" from="VBoxContainer/TabContainer/States/HBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer/ActionsList" to="." method="_on_ActionsList_item_selected"]
 [connection signal="pressed" from="VBoxContainer/TabContainer/States/HBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer/RemoveActionButton" to="." method="_on_RemoveActionButton_pressed"]
 [connection signal="onVariableChange" from="VBoxContainer/TabContainer/States/HBoxContainer/ScrollContainer/VBoxContainer/ActionPackVariables" to="." method="_on_ActionPackVariables_onVariableChange"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Interruptions/HBoxContainer/VBoxContainer/HBoxContainer/AddIntButton" to="." method="_on_AddIntButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Interruptions/HBoxContainer/VBoxContainer/HBoxContainer2/DownIntButton" to="." method="_on_DownIntButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Interruptions/HBoxContainer/VBoxContainer/HBoxContainer2/UpIntButton" to="." method="_on_UpIntButton_pressed"]
+[connection signal="item_selected" from="VBoxContainer/TabContainer/Interruptions/HBoxContainer/VBoxContainer/InterruptionsList" to="." method="_on_InterruptionsList_item_selected"]
+[connection signal="pressed" from="VBoxContainer/TabContainer/Interruptions/HBoxContainer/VBoxContainer/RemoveIntButton" to="." method="_on_RemoveIntButton_pressed"]
+[connection signal="onVariableChange" from="VBoxContainer/TabContainer/Interruptions/HBoxContainer/ScrollContainer/VBoxContainer/IntPackVariables" to="." method="_on_IntPackVariables_onVariableChange"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/SaveButton" to="." method="_on_SaveButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/LoadButton" to="." method="_on_LoadButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/GenerateButton" to="." method="_on_GenerateButton_pressed"]

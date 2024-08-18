@@ -395,6 +395,23 @@ func simpleDistance(room1name:String, room2name:String) -> float:
 	
 	return dumbDistance
 
+func simpleRingDistance(room1name:String, room2name:String) -> float:
+	var room1 = getRoomByID(room1name)
+	var room2 = getRoomByID(room2name)
+	
+	if(room1 == null || room2 == null):
+		return 999999.9
+	if(room1.getFloorID() != room2.getFloorID()):
+		return 999999.9
+	
+	var room1cell:Vector2 = room1.getCell()
+	var room2cell:Vector2 = room2.getCell()
+	
+	var diff:Vector2 = room2cell - room1cell
+	var dumbDistance:float = max(abs(diff.x), abs(diff.y))
+	
+	return dumbDistance
+
 func getSafeFromPCRandomRoom(possibleRooms:Array, pcLoc:String) -> String:
 	var filtered:Array = []
 	
@@ -437,6 +454,82 @@ func getSafeLoc(theLoc:String) -> String:
 				checked[nextNewLoc] = true
 				toTest.append(nextNewLoc)
 	return ""
+
+func getConnectedRoomsNear(theLoc:String, maxDepth:int) -> Array:
+	var origRoom = getRoomByID(theLoc)
+	if(origRoom == null):
+		return []
+	
+	var dirs = getAllDirections()
+	
+	var result:Array = []
+	var checked:Dictionary = {theLoc:true}
+	var toTest:Array = [theLoc]
+	var toDepth:Array = [0]
+	
+	while(!toTest.empty()):
+		var nextLoc:String = toTest.pop_front()
+		var nextDepth:int = toDepth.pop_front()
+		var room = getRoomByID(nextLoc)
+		if(room == null):
+			continue
+		
+		result.append(nextLoc)
+		
+		if(nextDepth >= maxDepth):
+			continue
+		
+		for dir in dirs:
+			if(canGoID(nextLoc, dir)):
+				var nextNewLoc:String = applyDirectionID(nextLoc, dir)
+				if(checked.has(nextNewLoc)):
+					continue
+				checked[nextNewLoc] = true
+				
+				#var dist:float = simpleDistance()
+				
+				toTest.append(nextNewLoc)
+				toDepth.append(nextDepth+1)
+	return result
+
+func getConnectedRoomsNearLimitDistance(theLoc:String, maxDepth:int, maxDistance:float) -> Array:
+	var origRoom = getRoomByID(theLoc)
+	if(origRoom == null):
+		return []
+	
+	var dirs = getAllDirections()
+	
+	var result:Array = []
+	var checked:Dictionary = {theLoc:true}
+	var toTest:Array = [theLoc]
+	var toDepth:Array = [0]
+	
+	while(!toTest.empty()):
+		var nextLoc:String = toTest.pop_front()
+		var nextDepth:int = toDepth.pop_front()
+		var room = getRoomByID(nextLoc)
+		if(room == null):
+			continue
+		
+		result.append(nextLoc)
+		
+		if(nextDepth >= maxDepth):
+			continue
+		
+		for dir in dirs:
+			if(canGoID(nextLoc, dir)):
+				var nextNewLoc:String = applyDirectionID(nextLoc, dir)
+				if(checked.has(nextNewLoc)):
+					continue
+				checked[nextNewLoc] = true
+				
+				var dist:float = simpleRingDistance(theLoc, nextNewLoc)
+				if(dist > maxDistance):
+					continue
+				
+				toTest.append(nextNewLoc)
+				toDepth.append(nextDepth+1)
+	return result
 
 func saveData():
 	var data = {}

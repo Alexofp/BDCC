@@ -11,11 +11,15 @@ onready var actions_list = $VBoxContainer/TabContainer/States/HBoxContainer/Scro
 onready var action_name_edit = $VBoxContainer/TabContainer/States/HBoxContainer/ScrollContainer/VBoxContainer/VBoxContainer/HBoxContainer/ActionNameEdit
 onready var pick_load_dialog = $PickLoadDialog
 onready var saved_interaction_list = $PickLoadDialog/VBoxContainer/SavedInteractionList
+onready var int_pack_variables = $VBoxContainer/TabContainer/Interruptions/HBoxContainer/ScrollContainer/VBoxContainer/IntPackVariables
+onready var interruptions_list = $VBoxContainer/TabContainer/Interruptions/HBoxContainer/VBoxContainer/InterruptionsList
+onready var int_name_edit = $VBoxContainer/TabContainer/Interruptions/HBoxContainer/VBoxContainer/HBoxContainer/IntNameEdit
 
 
 var interaction:CreatedInteraction = CreatedInteraction.new()
 var selectedState:String = ""
 var selectedAction:String = ""
+var selectedInt:String = ""
 
 signal onClosePressed
 
@@ -24,6 +28,8 @@ func _ready():
 	
 	updateStatesList()
 	updateSelectedState()
+	updateInterruptionList()
+	updateSelectedInterruption()
 
 func updateInteraction():
 	pack_variables.setVariables(interaction.getEditVars())
@@ -197,6 +203,8 @@ func _on_PickLoadDialog_confirmed():
 	updateInteraction()
 	updateStatesList()
 	updateSelectedState()
+	updateInterruptionList()
+	updateSelectedInterruption()
 
 var filesToLoad:Array = []
 var selectedFile:String = ""
@@ -253,3 +261,76 @@ func _on_UpStateButton_pressed():
 		return
 	Util.moveKeyUp(interaction.states, selectedState)
 	updateStatesList()
+
+
+func updateInterruptionList():
+	interruptions_list.clear()
+	
+	var _i = 0
+	for intID in interaction.interruptions:
+		#var interruption:CreatedInteractionInterruption = interaction.interruptions[intID]
+		interruptions_list.add_item(intID)
+		if(intID == selectedInt):
+			interruptions_list.select(_i)
+		
+		_i += 1
+
+func updateSelectedInterruption():
+	int_pack_variables.visible = true
+	if(!interaction.interruptions.has(selectedInt)):
+		int_pack_variables.visible = false
+		return
+	
+	var curInterruption:CreatedInteractionInterruption = interaction.interruptions[selectedInt]
+	int_pack_variables.setVariables(curInterruption.getEditVars(interaction.states.keys()))
+	
+func _on_InterruptionsList_item_selected(index):
+	if(index < 0 || index >= interaction.interruptions.size()):
+		return
+	selectedInt = interaction.interruptions.keys()[index]
+	updateSelectedInterruption()
+
+func _on_DownIntButton_pressed():
+	if(!interaction.interruptions.has(selectedInt)):
+		return
+	Util.moveKeyDown(interaction.interruptions, selectedInt)
+	updateInterruptionList()
+
+func _on_UpIntButton_pressed():
+	if(!interaction.interruptions.has(selectedInt)):
+		return
+	Util.moveKeyUp(interaction.interruptions, selectedInt)
+	updateInterruptionList()
+
+func _on_RemoveIntButton_pressed():
+	if(!interaction.interruptions.has(selectedInt)):
+		return
+	var _ok = interaction.interruptions.erase(selectedInt)
+	selectedInt = ""
+	updateSelectedInterruption()
+	updateInterruptionList()
+
+func _on_AddIntButton_pressed():
+	var interruptionName:String = int_name_edit.text
+	if(interruptionName == ""):
+		return
+	
+	var newID:String = interruptionName
+	newID = newID.to_lower().replace(" ", "_")
+	if(interaction.interruptions.has(newID)):
+		return
+	
+	var newAction:CreatedInteractionInterruption = CreatedInteractionInterruption.new()
+	newAction.id = newID
+	newAction.name = interruptionName
+	interaction.interruptions[newID] = newAction
+	if(selectedInt == ""):
+		selectedInt = newID
+	updateSelectedInterruption()
+	updateInterruptionList()
+
+func _on_IntPackVariables_onVariableChange(id, value):
+	if(!interaction.interruptions.has(selectedInt)):
+		return
+	var selInt:CreatedInteractionInterruption = interaction.interruptions[selectedInt]
+	selInt.applyEditVar(id, value)

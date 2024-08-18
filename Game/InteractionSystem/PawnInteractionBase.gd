@@ -71,6 +71,9 @@ func getCharIDByRole(role:String) -> String:
 func getCharByRole(role:String):
 	return GlobalRegistry.getCharacter(getCharIDByRole(role))
 
+func getRoleChar(role:String):
+	return getCharByRole(role)
+
 func playAnimation():
 	var animData = getAnimDataFinal()
 	
@@ -101,6 +104,18 @@ func addAction(theid:String, name:String, desc:String, _scoreType:String, score,
 		finalDic[extraKey] = extraFields[extraKey]
 	if(!finalDic.has("args")):
 		finalDic["args"] = {}
+	actionBuffer.append(finalDic)
+
+func addDisabledAction(name:String, desc:String):
+	var finalDic:Dictionary = {
+		id = "",
+		name = name,
+		desc = desc,
+		score = 0,
+		time = 0,
+		args = {},
+		disabled=true,
+	}
 	actionBuffer.append(finalDic)
 
 func getActions() -> Array:

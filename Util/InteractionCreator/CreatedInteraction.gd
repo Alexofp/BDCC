@@ -7,6 +7,7 @@ var endCode:String = "func getAnimData() -> Array:\n\treturn [StageScene.Duo, \"
 var vars:String = ""
 
 var states: Dictionary = {}
+var interruptions: Dictionary = {}
 
 func getEditVars():
 	return {
@@ -56,12 +57,21 @@ func saveData():
 			data = state.saveData(),
 		})
 	
+	var intData = []
+	for intID in interruptions:
+		var interruption = interruptions[intID]
+		intData.append({
+			id = intID,
+			data = interruption.saveData(),
+		})
+	
 	return {
 		"id": id,
 		"states": stateData,
 		"startCode": startCode,
 		"endCode": endCode,
 		"vars": vars,
+		"interruptions": intData,
 	}
 
 func loadData(data):
@@ -77,6 +87,14 @@ func loadData(data):
 		newAc.id = stateInfo["id"]
 		newAc.loadData(stateInfo["data"])
 		states[newAc.id] = newAc
+	
+	var intData = loadVar(data, "interruptions", [])
+	interruptions.clear()
+	for intInfo in intData:
+		var newAc = CreatedInteractionInterruption.new()
+		newAc.id = intInfo["id"]
+		newAc.loadData(intInfo["data"])
+		interruptions[newAc.id] = newAc
 		
 		
 func loadVar(_data, thekey, defaultValue = null):
@@ -179,6 +197,8 @@ func generateCode() -> String:
 			if(action.cond != ""):
 				text += '\tif('+action.cond+'):\n\t'
 			text += '\taddAction("'+actionID+'", "'+action.name+'", "'+action.desc.replace("\n", "\\n")+'", \"'+action.scoreType+'\", '+str(action.score)+', '+str(action.time)+', {'+extraFields+'})\n'   #")\n'
+			if(action.cond != "" && action.disabledDesc != ""):
+				text += '\telse:\n\t\taddDisabledAction("'+action.name+'", "'+action.disabledDesc.replace("\n", "\\n")+'")\n'
 			#text += "\t\t{\n"
 			#text += "\t\t\tid = \""+actionID+"\",\n"
 			#text += "\t\t\tname = \""+action.name+"\",\n"
@@ -204,6 +224,44 @@ func generateCode() -> String:
 
 		#text += '\t]'
 		#text += "\n\n"
+	
+	if(!interruptions.empty()):
+		text += 'func getInterruptActions(_pawn:CharacterPawn) -> Array:\n'
+		text += '\tvar result:Array = []\n'
+		for intID in interruptions:
+			var interruption:CreatedInteractionInterruption = interruptions[intID]
+			var tt := "\t"
+			if(!interruption.states.empty()):
+				text += tt+"if(getState() in ["+Util.joinWithBorders(interruption.states, ", ", '"')+"]):\n"
+				tt += "\t"
+			if(interruption.cond != ""):
+				text += tt+"if("+interruption.cond+"):\n"
+				tt += "\t"
+			text += tt+"result.append({\n"
+			text += tt+'\tid = "'+intID+'",\n'
+			text += tt+'\tname = "'+interruption.name+'",\n'
+			text += tt+'\tdesc = "'+interruption.desc.replace("\n", "\\n")+'",\n'
+			text += tt+'\tscore = '+interruption.score+',\n'
+			text += tt+'\tscoreType = "'+interruption.scoreType+'",\n'
+			text += tt+'\tscoreRole = "'+interruption.scoreRole+'",\n'
+			text += tt+'\targs = {'+interruption.args+'},\n'
+			text += tt+'})\n'
+		text += '\treturn result'
+		text += '\n\n'
+		
+		text += "func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _context:Dictionary):\n"
+		for intID in interruptions:
+			var interruption:CreatedInteractionInterruption = interruptions[intID]
+			text += '\tif(_id == "'+intID+'"):\n'
+			if(interruption.code == ""):
+				text += "\t\tpass\n"
+			else:
+				for line in interruption.code.split("\n"):
+					text += "\t\t"+line+"\n"
+		text += '\n\n'
+	
+#func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _context:Dictionary):
+#	pass
 	
 	if(endCode != ""):
 		text += endCode

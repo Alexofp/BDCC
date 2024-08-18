@@ -265,6 +265,11 @@ _global_script_classes=[ {
 "path": "res://Util/InteractionCreator/CreatedInteractionAction.gd"
 }, {
 "base": "Reference",
+"class": "CreatedInteractionInterruption",
+"language": "GDScript",
+"path": "res://Util/InteractionCreator/CreatedInteractionInterruption.gd"
+}, {
+"base": "Reference",
 "class": "CreatedInteractionState",
 "language": "GDScript",
 "path": "res://Util/InteractionCreator/CreatedInteractionState.gd"
@@ -1536,6 +1541,7 @@ _global_script_class_icons={
 "ContentType": "",
 "CreatedInteraction": "",
 "CreatedInteractionAction": "",
+"CreatedInteractionInterruption": "",
 "CreatedInteractionState": "",
 "CrotchBlockEditorType": "",
 "CrotchBlocks": "",

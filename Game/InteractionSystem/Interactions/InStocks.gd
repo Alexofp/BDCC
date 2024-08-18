@@ -1,5 +1,7 @@
 extends PawnInteractionBase
 
+var struggleText = ""
+
 func _init():
 	id = "InStocks"
 
@@ -10,11 +12,18 @@ func start(_pawns:Dictionary, _args:Dictionary):
 
 func init_text():
 	saynn("{inmate.You} {inmate.youAre} stuck in stocks, there is very little {inmate.youHe} can do, the movement of {inmate.yourHis} head and arms is blocked by a giant metal frame with 3 holes, its angle is forcing {inmate.youHe} to constantly stay bent forward, exposing {inmate.yourHis} butt, your ankles are chained so {inmate.youHe} can’t really move them too. {inmate.YouHe} {inmate.youAre} completely helpless.")
+	if(!getRolePawn("inmate").isPlayer()):
+		saynn("{inmate.name} has "+str(getRoleChar("inmate").getStamina())+" stamina left.")
 
-	addAction("rest", "Rest", "Stay quiet and try to get some rest", "default", 1.0, 1800, {})
-	addAction("struggle", "Struggle", "Maybe you can escape somehow", "default", 1.0, 300, {})
+	addAction("rest", "Rest", "Stay quiet and try to get some rest", "default", 0.1, 1800, {})
+	if(getRoleChar("inmate").getStamina() > 0):
+		addAction("struggle", "Struggle", "Maybe you can escape somehow", "default", 10.0, 300, {})
+	else:
+		addDisabledAction("Struggle", "You are completely out of stamina and can't struggle")
 	if(!getCharByRole("inmate").getInventory().hasLockedStaticRestraints()):
-		addAction("escape", "Escape", "Sweet freedom!", "default", 100.0, 0, {})
+		addAction("escape", "Escape", "Sweet freedom!", "default", 1000.0, 0, {})
+	else:
+		addDisabledAction("Escape", "You can't escape while the stocks are still locked..")
 
 func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "rest"):
@@ -24,7 +33,7 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 		if(getRolePawn("inmate").isPlayer()):
 			runScene("StrugglingScene", [false, false])
 		else:
-			print("TRYING TO REMOVE A RANDOM RESTRAINT")
+			setState("about_to_struggle", "inmate")
 	if(_id == "escape"):
 		stopMe()
 
@@ -39,6 +48,42 @@ func after_rest_do(_id:String, _args:Dictionary, _context:Dictionary):
 		setState("", "inmate")
 
 
+func about_to_struggle_text():
+	saynn("{inmate.name} is trying to struggle!")
+
+	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
+
+func about_to_struggle_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		var inmate = getRoleChar("inmate")
+		var struggleData:Dictionary = inmate.doStruggleOutOfRestraints()
+		if(struggleData.empty()):
+			return
+		struggleText = struggleData["text"]
+		setState("after_struggle", "inmate")
+
+
+func after_struggle_text():
+	saynn(struggleText)
+
+	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
+
+func after_struggle_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		setState("", "inmate")
+
+
 func getAnimData() -> Array:
 	return [StageScene.Stocks, "idle", {pc="inmate"}]
+
+func saveData():
+	var data = .saveData()
+
+	data["struggleText"] = struggleText
+	return data
+
+func loadData(_data):
+	.loadData(_data)
+
+	struggleText = SAVE.loadVar(_data, "struggleText", "")
 
