@@ -73,7 +73,51 @@ func after_struggle_do(_id:String, _args:Dictionary, _context:Dictionary):
 		setState("", "inmate")
 
 
+func about_to_use_text():
+	saynn("{user.name} approaches the stocks, about to use {inmate.you}..")
+
+	addAction("continue", "Continue", "Start the sex!", "default", 1.0, 600, {start_sex=["user", "inmate", SexType.StocksSex],})
+
+func about_to_use_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		var _sexResult = getSexResult(_args)
+		setState("after_use", "user")
+
+
+func after_use_text():
+	saynn("{user.name} has finished using {inmate.you}..")
+
+	addAction("leave", "Leave", "Time to go", "default", 1.0, 60, {})
+
+func after_use_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "leave"):
+		doRemoveRole("user")
+		setState("", "inmate")
+
+
+func getInterruptActions(_pawn:CharacterPawn) -> Array:
+	var result:Array = []
+	if(getPawnAmount() == 1):
+		result.append({
+			id = "use",
+			name = "Use",
+			desc = "Use them while they are stuck in stocks",
+			score = 1.0,
+			scoreType = "default",
+			scoreRole = "inmate",
+			args = {},
+		})
+	return result
+
+func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "use"):
+		doInvolvePawn("user", _pawn)
+		setState("about_to_use", "user")
+
+
 func getAnimData() -> Array:
+	if(getState() in ["about_to_use", "after_use"]):
+		return [StageScene.StocksSexOral, "tease", {pc="inmate", npc="user"}]
 	return [StageScene.Stocks, "idle", {pc="inmate"}]
 
 func saveData():

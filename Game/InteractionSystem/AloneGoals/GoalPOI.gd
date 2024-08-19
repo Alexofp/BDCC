@@ -43,6 +43,8 @@ func doAction(_id:String, _args:Dictionary):
 			])
 		
 		goTowards(targetLoc)
+		if(doLookAround()):
+			return
 		if(getLocation() == targetLoc):
 			completeGoal()
 

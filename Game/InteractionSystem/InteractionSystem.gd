@@ -79,6 +79,8 @@ func decideNextAction(interaction, _context:Dictionary = {}):
 		return
 	if(interaction.wasDeleted):
 		return
+	if(interaction.isPlayersTurn()):
+		return
 	var actions = interaction.getActionsFinal()
 	
 	if(actions == null || !(actions is Array) || actions.size() <= 0):

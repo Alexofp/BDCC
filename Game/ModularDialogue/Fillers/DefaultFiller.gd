@@ -18,16 +18,16 @@ func getFormIDs() -> Array:
 func getText(_id:String, _args:Dictionary):
 	if(_id == "FightLostGeneric"):
 		return [
-			getPainNoise()+".. I can't..",
-			getPainNoise()+".. you win this round..",
-			getPainNoise()+" I.. I.. fuck..",
-			getPainNoise()+", I guess you got me..",
-			getPainNoise()+".. I thought I had you..",
-			getPainNoise()+".. you really got me there..",
+			"[[C_UGH]].. I can't..",
+			"[[C_UGH]].. you win this round..",
+			"[[C_UGH]] I.. I.. fuck..",
+			"[[C_UGH]], I guess you got me..",
+			"[[C_UGH]].. I thought I had you..",
+			"[[C_UGH]].. you really got me there..",
 		]
 	if(_id == "FightWonGeneric"):
 		return [
-			"That was easy.",
+			"That was[[kind= kinda]] easy.",
 			"Not even a challenge.",
 			"Is that all you've got?",
 			"I barely broke a sweat.",
@@ -117,12 +117,3 @@ func getText(_id:String, _args:Dictionary):
 			"Why can't you just stand still?",
 		]
 	
-func getPainNoise():
-	return RNG.pick([
-		"Argh",
-		"Ugh",
-		"Ghh",
-		"Ahhh!",
-		"Gah",
-		"Fuck",
-	])

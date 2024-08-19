@@ -3024,3 +3024,31 @@ func doStruggleOutOfRestraints(isScared:bool = false, addStats:bool = true) -> D
 		pain=(struggleData["pain"] if struggleData.has("pain") else 0),
 		stamina=(struggleData["stamina"] if struggleData.has("stamina") else 0),
 	}
+
+func getModularDialogueTags(_againstChar) -> Dictionary:
+	var result:Dictionary = {}
+	
+	var pers:Personality = getPersonality()
+	var possible:Array = []
+	
+	var mean = pers.getStat(PersonalityStat.Mean)
+	var subby = pers.getStat(PersonalityStat.Subby)
+	
+	if(mean >= 0.5):
+		possible.append(["mean", mean])
+	if(mean <= -0.3):
+		possible.append(["kind", -mean])
+	if(subby >= 0.4):
+		possible.append(["subby", subby])
+	if(subby <= -0.4):
+		possible.append(["dommy", -subby])
+	possible.sort_custom(self, "sortDialogueTagsDescending")
+	for pEntry in possible:
+		result[pEntry[0]] = true
+		
+	return result
+	
+static func sortDialogueTagsDescending(a, b):
+	if a[1] > b[1]:
+		return true
+	return false

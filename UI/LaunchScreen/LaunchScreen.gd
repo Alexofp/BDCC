@@ -16,6 +16,12 @@ var foundBDCC = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#randomize()
+	#var diag:DialogueParser = DialogueParser.new()
+	#print(diag.getLexems("Hello world. How;are|you. Hey, [[mean=fucker|bitch;kind=bro;person]]. Meow."))
+	#print(diag.processString("Hello,_[[asd]]meow", {kind=true,mean=true}, {BITCH=["bitch", "stupid-bitch", "stupid-stupid-bitch"]}))
+
+	
 	if(GlobalTheme != null):
 		if(OS.has_touchscreen_ui_hint()):
 			GlobalTheme.rename_stylebox("scrollTouch", "scroll", "VScrollBar")

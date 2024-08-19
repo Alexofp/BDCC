@@ -203,13 +203,13 @@ func doActionFinal(_id:String, _args:Dictionary, _context:Dictionary = {}):
 
 func getInterruptActions(_pawn:CharacterPawn) -> Array:
 	return [
-		{
-			id = "test",
-			name = "INTERRUPT!",
-			desc = "Do something",
-			score = 1.0,
-			args = {},
-		},
+#		{
+#			id = "test",
+#			name = "INTERRUPT!",
+#			desc = "Do something",
+#			score = 1.0,
+#			args = {},
+#		},
 	]
 
 func getInterruptActionsFinal(_pawn:CharacterPawn) -> Array:
@@ -259,6 +259,8 @@ func setState(newState:String, newRole:String, dirToRole:String = ""):
 	setCurrentPawn(newRole)
 	setDirectedToPawn(dirToRole)
 	state = newState
+	currentActionID = ""
+	currentActionArgs = {}
 
 func getState() -> String:
 	return state
@@ -287,6 +289,12 @@ func setCurrentRole(therole:String):
 
 func getCurrentPawn() -> CharacterPawn:
 	return getRolePawn(currentPawn)
+
+func isPlayersTurn() -> bool:
+	var curPawn := getCurrentPawn()
+	if(curPawn == null):
+		return false
+	return curPawn.isPlayer()
 
 func setPickedAction(_actionEntry, _context:Dictionary = {}):
 	currentActionID = _actionEntry["id"]
@@ -668,6 +676,9 @@ func addDefeatButtons(rolePC:String, _roleNPC:String):
 		
 		if(involvedPawns.has(_roleNPC)):
 			GM.ES.triggerRun(Trigger.DefeatedDynamicNPC, [getRoleID(_roleNPC)])
+
+func getPawnAmount() -> int:
+	return involvedPawns.size()
 
 func saveData():
 	var data = {

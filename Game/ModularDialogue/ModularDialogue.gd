@@ -7,6 +7,32 @@ var adders:Dictionary = {}
 var addersCooldown:Dictionary = {}
 
 var gameParser:GameParser = GameParser.new()
+var dialogueParser:DialogueParser = DialogueParser.new()
+
+const WORDS_SLUT = [
+	"slut",
+	"cunt",
+	"whore",
+	"fucktoy",
+	"bitch",
+	"idiot",
+]
+const WORDS_SLUTS = [
+	"sluts",
+	"cunts",
+	"whores",
+	"fucktoys",
+	"bitches",
+	"idiots",
+]
+const WORDS_UGH = [
+	"argh",
+	"ugh",
+	"ghh",
+	"ahhh!",
+	"gah",
+	"fuck",
+]
 
 func registerFiller(theFiller:DialogueFiller):
 	for formID in theFiller.getFormIDs():
@@ -111,6 +137,18 @@ func generate(ID:String, _args:Dictionary, _defaultText:String = "") -> String:
 		if(_args[argID] is BaseCharacter):
 			overrides[argID] = _args[argID].getID()
 	
+	var mainRole:String = theForm.mainRole
+	var dirToRole:String = theForm.dirToRole
+	
+	var finalTags:Dictionary = {}
+	if(mainRole != "" && _args.has(mainRole)):
+		finalTags = _args[mainRole].getModularDialogueTags(_args[dirToRole] if (dirToRole != "" && _args.has(dirToRole)) else null)
+	
+	resultLine = dialogueParser.processString(resultLine, finalTags, {
+		SLUT = WORDS_SLUT,
+		SLUTS = WORDS_SLUTS,
+		UGH = WORDS_UGH,
+	})
 	resultLine = gameParser.executeString(resultLine, overrides)
 	
 	return resultLine
@@ -131,6 +169,8 @@ func registerFormBank(theFormBank:DialogueFormBank):
 		newForm.id = formID
 		newForm.defaultLine = formData["text"]
 		newForm.requiredArgs = formData["args"] if formData.has("args") else {}
+		newForm.mainRole = formData["main"]
+		newForm.dirToRole = formData["dirTo"]
 		registerForm(newForm)
 
 func registerAllFormBanks():

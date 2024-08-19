@@ -56,7 +56,7 @@ func _react(_action: String, _args):
 			else:
 				processTime(30)
 			interaction.doCurrentAction({scene=self})
-			GM.main.IS.decideNextAction(pawn.getInteraction(), {scene=self})
+			#GM.main.IS.decideNextAction(pawn.getInteraction(), {scene=self})
 		return
 
 	setState(_action)

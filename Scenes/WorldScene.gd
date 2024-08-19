@@ -171,8 +171,8 @@ func _react(_action: String, _args):
 				else:
 					processTime(30)
 				interaction.doCurrentAction({scene=self})
-				if(!pawn.getInteraction().isWaitingForScene()):
-					GM.main.IS.decideNextAction(pawn.getInteraction(), {scene=self})
+				#if(!pawn.getInteraction().isWaitingForScene()):
+				#	GM.main.IS.decideNextAction(pawn.getInteraction(), {scene=self})
 	if(_action == "pick_interaction_action"):
 		#var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
 		var interaction:PawnInteractionBase = _args[0]#pawn.getInteraction()

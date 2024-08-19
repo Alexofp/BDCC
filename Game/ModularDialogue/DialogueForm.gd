@@ -6,6 +6,8 @@ const CHAR = "CHAR"
 var id:String = "error"
 var defaultLine:String = ""
 var requiredArgs:Dictionary = {}
+var mainRole:String = ""
+var dirToRole:String = ""
 
 func getDefaultText(_args:Dictionary):
 	return defaultLine
