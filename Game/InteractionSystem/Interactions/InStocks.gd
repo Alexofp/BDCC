@@ -1,6 +1,7 @@
 extends PawnInteractionBase
 
 var struggleText = ""
+var savedHow = ""
 
 func _init():
 	id = "InStocks"
@@ -95,6 +96,77 @@ func after_use_do(_id:String, _args:Dictionary, _context:Dictionary):
 		setState("", "inmate")
 
 
+func about_to_save_text():
+	saynn("{saver.name} approaches {inmate.you}!")
+	saynn("{saver.YouHe} can either spend some of {saver.yourHis} stamina and help {inmate.you} to struggle out of stocks.. or use a restraint key to unlock it.")
+
+	if(getRoleChar("saver").getStamina() > 0):
+		addAction("help", "Help", "Spend some stamina and help them", "default", 1.0, 180, {})
+	else:
+		addDisabledAction("Help", "You don't have any stamina left..")
+	if(getRoleChar("saver").getInventory().hasItemID("restraintkey")):
+		addAction("key", "Restraint key", "Use a restraint key to unlock the stocks", "help", 0.2, 60, {})
+	addAction("leave", "Leave", "", "justleave", 1.0, 30, {})
+
+func about_to_save_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "help"):
+		var inmate = getRoleChar("inmate")
+		var struggleData:Dictionary = inmate.doStruggleOutOfRestraints(false, true, getRoleChar("saver"), 2.0)
+		if(struggleData.empty()):
+			struggleText = "Something happened.."
+		else:
+			struggleText = struggleData["text"]
+		
+		if(inmate.getInventory().hasItemIDEquipped("StocksStatic")):
+			setState("save_after_help", "saver")
+		else:
+			savedHow = "help"
+			setState("save_saved", "inmate")
+			affectAffection("inmate", "saver", 0.05)
+	if(_id == "key"):
+		savedHow = "key"
+		setState("save_saved", "inmate")
+		affectAffection("inmate", "saver", 0.05)
+		getRoleChar("saver").getInventory().removeXOfOrDestroy("restraintkey", 1)
+		getRoleChar("inmate").getInventory().clearStaticRestraints()
+	if(_id == "leave"):
+		setState("canceled_save", "saver")
+
+
+func canceled_save_text():
+	saynn("{saver.name} decided against saving {inmate.you}..")
+
+	addAction("leave", "Leave", "Time to go", "default", 1.0, 60, {})
+
+func canceled_save_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "leave"):
+		doRemoveRole("saver")
+		setState("", "inmate")
+
+
+func save_saved_text():
+	if(savedHow=="help"):
+		saynn("{saver.name} manages to unlock the stocks by using {saver.his} raw strength.")
+	else:
+		saynn("{saver.name} unlocks the stocks with a restraint key!")
+
+	addAction("leave", "Free!", "You're free!", "default", 1.0, 60, {})
+
+func save_saved_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "leave"):
+		stopMe()
+
+
+func save_after_help_text():
+	saynn(struggleText)
+
+	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 30, {})
+
+func save_after_help_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		setState("about_to_save", "saver")
+
+
 func getInterruptActions(_pawn:CharacterPawn) -> Array:
 	var result:Array = []
 	if(getPawnAmount() == 1):
@@ -102,8 +174,18 @@ func getInterruptActions(_pawn:CharacterPawn) -> Array:
 			id = "use",
 			name = "Use",
 			desc = "Use them while they are stuck in stocks",
-			score = 1.0,
-			scoreType = "default",
+			score = 0.5,
+			scoreType = "sexDom",
+			scoreRole = "inmate",
+			args = {},
+		})
+	if(getPawnAmount() == 1):
+		result.append({
+			id = "free",
+			name = "Free",
+			desc = "Try to free them!",
+			score = 0.25,
+			scoreType = "help",
 			scoreRole = "inmate",
 			args = {},
 		})
@@ -113,9 +195,16 @@ func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _conte
 	if(_id == "use"):
 		doInvolvePawn("user", _pawn)
 		setState("about_to_use", "user")
+	if(_id == "free"):
+		doInvolvePawn("saver", _pawn)
+		setState("about_to_save", "saver")
 
 
 func getAnimData() -> Array:
+	if(getState() in ["save_saved"]):
+		return [StageScene.Duo, "stand", {pc="inmate", npc="saver"}]
+	if(getState() in ["about_to_save", "save_after_help"]):
+		return [StageScene.StocksSexOral, "tease", {pc="inmate", npc="saver"}]
 	if(getState() in ["about_to_use", "after_use"]):
 		return [StageScene.StocksSexOral, "tease", {pc="inmate", npc="user"}]
 	return [StageScene.Stocks, "idle", {pc="inmate"}]
@@ -124,10 +213,12 @@ func saveData():
 	var data = .saveData()
 
 	data["struggleText"] = struggleText
+	data["savedHow"] = savedHow
 	return data
 
 func loadData(_data):
 	.loadData(_data)
 
 	struggleText = SAVE.loadVar(_data, "struggleText", "")
+	savedHow = SAVE.loadVar(_data, "savedHow", "")
 

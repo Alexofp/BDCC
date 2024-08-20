@@ -89,14 +89,16 @@ func decideNextAction(interaction, _context:Dictionary = {}):
 	
 	var maxScore:float = 0.0
 	for action in actions:
-		if(maxScore > action["score"]):
-			maxScore = action["score"]
+		var newScore:float = interaction.calcFinalActionScore(action)
+		action["finalScore"] = newScore
+		if(maxScore > newScore):
+			maxScore = newScore
 	
 	var minScore:float = maxScore * 0.1 # Filtering out unlikely actions
 	var possibleActions := []
 	for action in actions:
-		if(action["score"] >= minScore):
-			possibleActions.append([action, action["score"]])
+		if(action["finalScore"] >= minScore):
+			possibleActions.append([action, action["finalScore"]])
 	
 	if(possibleActions.size() <= 0):
 		Log.printerr("No possible actions found for interaction: "+str(interaction.id))

@@ -50,7 +50,7 @@ func getEditVars(allStates:Array):
 			value = scoreRole,
 		},
 		"score": {
-			name = "Score [def,like,hate,lust]",
+			name = "Score",
 			type = "string",
 			value = score,
 		},

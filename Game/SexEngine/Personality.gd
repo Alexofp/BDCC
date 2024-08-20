@@ -61,7 +61,7 @@ func personalityScoreMax(personalityStats = {}, minValue:float = -999.9) -> floa
 		var personalityValue = getStat(personalityStatID)
 		var addValue = personalityValue * personalityStats[personalityStatID]
 		if(addValue > result):
-			addValue = addValue
+			result = addValue
 	return result
 
 func saveData():

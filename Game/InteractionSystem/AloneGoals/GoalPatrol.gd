@@ -12,9 +12,7 @@ func getKeepScore() -> float:
 	return 0.6
 
 func getText():
-	if(getCurrentAction() != "go"):
-		return "{main.name} {main.is} resting!"
-	return "{main.name} {main.is} patroling!"
+	return "{main.name} {main.is} patroling the prison!"
 
 func getActions() -> Array:
 	if(getLocation() == nextTarget):

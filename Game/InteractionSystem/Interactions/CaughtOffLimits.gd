@@ -36,8 +36,8 @@ func init_text():
 	saynn("{guard.name} notices {inmate.name} in an off-limits area!")
 	sayLine("guard", "GuardCaughtOffLimits", {guard="guard", inmate="inmate"})
 
-	addAction("fight", "Fight!", "Protect yourself!", "fight", [1.0,-1.0,0.5,0.0], 60, {})
-	addAction("surrender", "Surrender", "Maybe they won't be mean", "surrender", [0.1,0.5,0.0,0.0], 60, {})
+	addAction("fight", "Fight!", "Protect yourself!", "fight", 1.0, 60, {})
+	addAction("surrender", "Surrender", "Maybe they won't be mean", "surrender", 1.0, 60, {})
 
 func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "fight"):
@@ -88,10 +88,10 @@ func inmate_won_text():
 	else:
 		saynn("{guard.name} changes {guard.his} mind at the last second and decides to surrender!")
 
-	addAction("leave", "Leave", "Just leave while you can", "default", 0.2, 30, {})
+	addAction("leave", "Leave", "Just leave while you can", "justleave", 1.0, 30, {})
 	addAction("sex", "Sex!", "Fuck them first", "sexDom", 1.0, 600, {start_sex=["inmate", "guard"],})
-	addAction("sexSub", "Submit to", "Let them fuck you", "sexSub", 0.3, 600, {start_sex=["guard", "inmate"],})
-	addAction("punish", "Punish", "Find a way to punish them", "punishMean", 0.3, 30, {})
+	addAction("sexSub", "Submit to", "Let them fuck you", "sexSub", 1.0, 600, {start_sex=["guard", "inmate"],})
+	addAction("punish", "Punish", "Find a way to punish them", "punishMean", 0.5, 30, {})
 
 	addDefeatButtons("inmate", "guard")
 

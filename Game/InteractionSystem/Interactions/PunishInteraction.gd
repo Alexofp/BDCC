@@ -12,12 +12,12 @@ func init_text():
 	saynn("{punisher.name} looms over {target.you}.")
 	sayLine("punisher", "PunishDecide", {punisher="punisher", target="target"})
 
-	if(getRoleChar("target").getInventory().hasEquippedItemWithTag(ItemTag.AllowsEnslaving) || true):
+	if(true || getRoleChar("target").getInventory().hasEquippedItemWithTag(ItemTag.AllowsEnslaving)):
 		addAction("stocks", "Stocks", "Lock them up in stocks!", "punishMean", 1.0, 60, {})
 	else:
 		addDisabledAction("Stocks", "They need to be wearing a collar for this!")
 	addAction("sex", "Sex", "Just have some fun with them!", "punish", 1.0, 60, {})
-	addAction("leave", "Leave", "Just leave", "default", 0.01, 30, {})
+	addAction("leave", "Leave", "Just leave", "justleave", 1.0, 30, {})
 
 func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "stocks"):

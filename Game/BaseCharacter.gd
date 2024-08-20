@@ -2956,9 +2956,13 @@ func getBodypartID(slot):
 func getInmateType():
 	return InmateType.Unknown
 
-func doStruggleOutOfRestraints(isScared:bool = false, addStats:bool = true) -> Dictionary:
+func doStruggleOutOfRestraints(isScared:bool = false, addStats:bool = true, customActor=null, damageMult:float = 1.0) -> Dictionary:
 	var possible = []
 	var trivial = []
+	
+	var whoStruggles = self
+	if(customActor != null):
+		whoStruggles = customActor
 	
 	for item in getInventory().getEquppedRestraints():
 		var restraintData: RestraintData = item.getRestraintData()
@@ -2979,7 +2983,7 @@ func doStruggleOutOfRestraints(isScared:bool = false, addStats:bool = true) -> D
 		minigameResult.score = 1.0
 	elif(possible.size() > 0):
 		pickedItem = RNG.pick(possible)
-		minigameResult = self.getRestraintStrugglingMinigameResult()
+		minigameResult = whoStruggles.getRestraintStrugglingMinigameResult()
 		
 		if(isScared):
 			minigameResult.score = min(minigameResult.score, min(1.0, RNG.randf_range(0.6, 1.1)))
@@ -2994,29 +2998,29 @@ func doStruggleOutOfRestraints(isScared:bool = false, addStats:bool = true) -> D
 	text += struggleData["text"]
 	
 	if(struggleData.has("damage")):
-		var damage = struggleData["damage"]
+		var damage = struggleData["damage"] * damageMult
 		restraintData.takeDamage(damage)
 		if(damage > 0.0):
-			text += ("\n{user.You} made "+str(Util.roundF(damage*100.0, 1))+"% of progress, "+str(Util.roundF(max(0.0, restraintData.getTightness()*100.0), 1))+"% left.")
+			text += ("\n{actor.You} "+("made" if customActor == null else "helped to make")+" "+str(Util.roundF(damage*100.0, 1))+"% of progress, "+str(Util.roundF(max(0.0, restraintData.getTightness()*100.0), 1))+"% left.")
 		elif(damage < 0.0):
 			text += ("\n{user.You} lost "+str(Util.roundF(abs(damage)*100.0, 1))+"% of progress, "+str(Util.roundF(max(0.0, restraintData.getTightness()*100.0), 1))+"% left.")
 		else:
-			text += ("\n{user.You} made no progress, "+str(Util.roundF(max(0.0, restraintData.getTightness()*100.0), 1))+"% left.")
+			text += ("\n{actor.You} made no progress, "+str(Util.roundF(max(0.0, restraintData.getTightness()*100.0), 1))+"% left.")
 	
 	if(addStats):
 		if(struggleData.has("lust") && struggleData["lust"] > 0):
-			addLust(struggleData["lust"])
+			whoStruggles.addLust(struggleData["lust"])
 		if(struggleData.has("pain") && struggleData["pain"] > 0):
-			addPain(struggleData["pain"])
+			whoStruggles.addPain(struggleData["pain"])
 		if(struggleData.has("stamina") && struggleData["stamina"] != 0):
-			addStamina(-struggleData["stamina"])
+			whoStruggles.addStamina(-struggleData["stamina"])
 	
 	if(restraintData.shouldBeRemoved()):
 		text += "\n[b]"+restraintData.getRemoveMessage()+"[/b]"
 		restraintData.onStruggleRemoval()
 		getInventory().removeEquippedItem(pickedItem)
 		
-	text = GM.ui.processString(text, {"user":getID()})
+	text = GM.ui.processString(text, {"user":getID(), "actor":whoStruggles.getID()})
 	
 	return {
 		text=text,

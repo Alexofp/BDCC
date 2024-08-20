@@ -23,9 +23,10 @@ const allScoreTypes = [
 		"punishMean",
 		"sexDom",
 		"sexSub",
-		"slut",
 		"hatefuck",
 		"resist",
+		"help",
+		"justleave",
 	]
 
 func getEditVars():
@@ -52,7 +53,7 @@ func getEditVars():
 			values = allScoreTypes,
 		},
 		"score": {
-			name = "Score [def,like,hate,lust]",
+			name = "Score",
 			type = "string",
 			value = score,
 		},
