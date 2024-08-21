@@ -162,3 +162,20 @@ func isDoingTask(_taskID:String) -> bool:
 	if(goal == null):
 		return false
 	return (goal.globalTask == _taskID)
+
+func getInterruptActions(_pawn:CharacterPawn) -> Array:
+	var result:Array = []
+	result.append({
+		id = "talk",
+		name = "Talk",
+		desc = "Talk with them",
+		score = 0.0,
+		scoreType = "default", # Change to talk or something
+		scoreRole = "main",
+		args = {},
+	})
+	return result
+
+func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "talk"):
+		startInteraction("Talking", {starter=_pawn.charID, reacter=getRoleID("main")})

@@ -41,3 +41,12 @@ static func constantIfAbove(myvalue: float, aboveValue: float, constantValue: fl
 		return constantValue
 	else:
 		return otherwise
+
+func shouldUseAre(_topicID) -> bool:
+	return getChatName(_topicID).ends_with("s")
+
+func getChatName(_topicID) -> String:
+	return getVisibleName(_topicID)
+
+func canUseInChat(_topicID) -> bool:
+	return true

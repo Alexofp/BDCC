@@ -67,3 +67,21 @@ func getVisibleName(_topicID):
 		return "total cumdumpsters"
 	
 	return "error:"+str(_topicID)
+
+func getChatName(_topicID) -> String:
+	if(_topicID == InterestTopic.StuffedPussy):
+		return "creamed pussies"
+	if(_topicID == InterestTopic.StuffedAss):
+		return "cream-stuffed butts"
+	if(_topicID == InterestTopic.StuffedPussyOrAss):
+		return "creampies"
+	if(_topicID == InterestTopic.Pregnant):
+		return "breeding"
+	if(_topicID == InterestTopic.StuffedThroat):
+		return "cum eaters"
+	if(_topicID == InterestTopic.CoveredInCum):
+		return "cum facials"
+	if(_topicID == InterestTopic.CoveredInLotsOfCum):
+		return "cumdumpsters"
+	
+	return .getChatName(_topicID)

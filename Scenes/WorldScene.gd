@@ -261,6 +261,15 @@ func _react_scene_end(_tag, _result):
 		else:
 			sendStatusToInteraction({"won":true})
 
+func shouldDisplayBigButtons():
+	var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
+	if(pawn == null):
+		return false
+	var interaction:PawnInteractionBase = pawn.getInteraction()
+	if(interaction == null):
+		return false
+	return interaction.shouldShowBigButtons()
+
 func isSpyingOnInteractionsWith(_charID:String):
 	if(_charID == "pc"):
 		return true

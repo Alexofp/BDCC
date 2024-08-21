@@ -39,3 +39,19 @@ func getVisibleName(_topicID):
 		return "a slim butt"
 	
 	return "error:"+str(_topicID)
+
+func getChatName(_topicID) -> String:
+	if(_topicID == InterestTopic.ThickBody):
+		return "thickness"
+	if(_topicID == InterestTopic.AverageMassBody):
+		return "average bodies"
+	if(_topicID == InterestTopic.SlimBody):
+		return "thin bodies"
+	if(_topicID == InterestTopic.ThickButt):
+		return "thick butts"
+	if(_topicID == InterestTopic.AverageButt):
+		return "average butts"
+	if(_topicID == InterestTopic.SlimButt):
+		return "slim butts"
+	
+	return .getChatName(_topicID)

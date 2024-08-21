@@ -830,6 +830,155 @@ func addDefeatButtons(rolePC:String, _roleNPC:String):
 func getPawnAmount() -> int:
 	return involvedPawns.size()
 
+func addChatTopics(startRole:String, reactRole:String, actionID:String, topicsAmount:int = 7):
+	#var startPawn = getRolePawn(startRole)
+	#var reactPawn = getRolePawn(reactRole)
+	
+	var picked:Array = []
+	var tryCount:int = 0
+	while(picked.size() < topicsAmount):
+		tryCount += 1
+		if(tryCount >= 1000):
+			break
+		var randomTopicObj:TopicBase = RNG.pick(GlobalRegistry.getLustTopicObjects())
+		var randomTopicID:String = RNG.pick(randomTopicObj.handles_ids)
+		
+		if(!randomTopicObj.canUseInChat(randomTopicID)):
+			continue
+		if(picked.has(randomTopicID)):
+			continue
+		picked.append(randomTopicID)
+	
+	var possibleEnds:Array = [
+		["nice", 1.0],
+		["cool", 1.0],
+		["hot", 1.0],
+		["awful", -1.0],
+		["meh", -1.0],
+		["yikes", -1.0],
+	]
+	
+	for pickedID in picked:
+		var topic: TopicBase = GlobalRegistry.getLustTopic(pickedID)
+		
+		var chatName:String = topic.getChatName(pickedID)
+		var shouldUseAre:bool = topic.shouldUseAre(pickedID)
+		var randomEndInfo:Array = RNG.pick(possibleEnds)
+		
+		var buttonName:String = Util.capitalizeFirstLetter(chatName)
+		if(shouldUseAre):
+			buttonName += " are "
+		else:
+			buttonName += " is "
+		buttonName += randomEndInfo[0]
+		
+		addAction(actionID, buttonName, "Say this: "+buttonName, "default", 1.0, 60, {
+			args = {
+				chat = {
+					startRole = startRole,
+					reactRole = reactRole,
+					topicID = pickedID,
+					topicEndName = randomEndInfo[0],
+					topicFull = buttonName,
+					topicEndValue = randomEndInfo[1],
+				},
+			}
+		})
+
+func addReactToChatButtons(chatEntry:Dictionary, actionID:String):
+	#var startRole:String = chatEntry["startRole"]
+	var reactRole:String = chatEntry["reactRole"]
+	var topicID:String = chatEntry["topicID"]
+	var topicEndValue:float = chatEntry["topicEndValue"]
+	
+	var reactChar:BaseCharacter = getRoleChar(reactRole)
+	var lust:LustInterests = reactChar.getLustInterests()
+
+	var interestValue:float = lust.getInterestValue(topicID)
+	
+	var agreeScore:float = 0.0
+	var disagreeScore:float = 0.0
+	var whateverScore:float = 0.0
+	
+	if(abs(interestValue) < 0.01):
+		whateverScore = 1.0
+	elif(sign(interestValue) == sign(topicEndValue)):
+		agreeScore = 1.0
+	else:
+		disagreeScore = 1.0
+	
+	addAction(actionID, "Agree", "Agree with what they said", "default", agreeScore, 60,{
+		args = {answer="agree",chat=chatEntry,},
+	})
+	addAction(actionID, "Disagree", "Disagree with what they said", "default", disagreeScore, 60,{
+		args = {answer="disagree",chat=chatEntry,},
+	})
+	addAction(actionID, "Whatever", "You don't know how you feel about their words", "default", whateverScore, 60,{
+		args = {answer="whatever",chat=chatEntry,},
+	})
+
+func doReactToChat(_args:Dictionary, skipPcCheck:bool = true):
+	var answer:String = _args["answer"]
+	var chatEntry:Dictionary = _args["chat"]
+	
+	var startRole:String = chatEntry["startRole"]
+	var reactRole:String = chatEntry["reactRole"]
+	var topicID:String = chatEntry["topicID"]
+	
+	var reactChar:BaseCharacter = getRoleChar(reactRole)
+	var lust:LustInterests = reactChar.getLustInterests()
+	var interestValue:float = lust.getInterestValue(topicID)
+	
+	if(answer == "agree"):
+		affectAffection(reactRole, startRole, abs(interestValue) * 0.07)
+	if(answer == "whatever"):
+		affectAffection(reactRole, startRole, 0.01)
+	if(answer == "disagree"):
+		affectAffection(reactRole, startRole, -abs(interestValue) * 0.05)
+	
+	if(skipPcCheck || getRoleChar(startRole).isPlayer()):
+		if(reactChar.isPlayer()):
+			return
+		if(lust.learnRandomInterestFromList([topicID])):
+			addMessage("You learned something new about "+reactChar.getName()+"'s likes and dislikes..")
+	
+func showKnownLikesDislikesFor(role:String):
+	var npc = getRoleChar(role)
+	var npcName = npc.getName()
+	var likesTexts = []
+	likesTexts.append("Here is what you know about "+npcName+"'s likes/dislikes:")
+	var enemyLustInterests = npc.getLustInterests()
+	if(!enemyLustInterests.hasAnyInterests()):
+		likesTexts.append("- None")
+	else:
+		var whatPlayerKnows = enemyLustInterests.getPlayerKnowledge()
+		
+		if(whatPlayerKnows.size() > 0):
+			for topicID in whatPlayerKnows:
+				var topic = GlobalRegistry.getLustTopic(topicID)
+				likesTexts.append(npcName+" [color="+Interest.getColorString(whatPlayerKnows[topicID])+"]" + Interest.getVisibleName(whatPlayerKnows[topicID])+"[/color] seeing "+str(topic.getVisibleName(topicID)))
+		else:
+			likesTexts.append("- Nothing yet")
+	var finalText = (Util.join(likesTexts, "\n"))
+	saynn(finalText)
+	
+func getAffectionString(role1:String, role2:String) -> String:
+	var id1:String = getRoleID(role1)
+	var id2:String = getRoleID(role2)
+	var affection:float = GM.main.RS.getAffection(id1, id2)
+	
+	return str(Util.roundF(affection*100.0, 1))+"%"
+	
+func getLustString(role1:String, role2:String) -> String:
+	var id1:String = getRoleID(role1)
+	var id2:String = getRoleID(role2)
+	var affection:float = GM.main.RS.getLust(id1, id2)
+	
+	return str(Util.roundF(affection*100.0, 1))+"%"
+	
+func shouldShowBigButtons() -> bool:
+	return false
+	
 func saveData():
 	var data = {
 		"loc": location,

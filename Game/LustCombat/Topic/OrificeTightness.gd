@@ -54,3 +54,14 @@ func getVisibleName(_topicID):
 	
 	return "error:"+str(_topicID)
 
+func getChatName(_topicID) -> String:
+	if(_topicID == InterestTopic.LooseAnus):
+		return "stretched assholes"
+	if(_topicID == InterestTopic.LoosePussy):
+		return "stretched pussies"
+	if(_topicID == InterestTopic.TightAnus):
+		return "tight assholes"
+	if(_topicID == InterestTopic.TightPussy):
+		return "tight pussies"
+	
+	return .getChatName(_topicID)

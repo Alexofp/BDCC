@@ -57,4 +57,3 @@ func getVisibleName(_topicID):
 
 	
 	return "error:"+str(_topicID)
-

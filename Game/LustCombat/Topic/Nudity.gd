@@ -54,3 +54,21 @@ func getVisibleName(_topicID):
 
 	
 	return "error:"+str(_topicID)
+
+func getChatName(_topicID) -> String:
+	if(_topicID == InterestTopic.FullyNaked):
+		return "nudity"
+	if(_topicID == InterestTopic.ExposedPussy):
+		return "pussies"
+	if(_topicID == InterestTopic.ExposedAnus):
+		return "asses"
+	if(_topicID == InterestTopic.ExposedBreasts):
+		return "tits"
+	if(_topicID == InterestTopic.ExposedCock):
+		return "cocks"
+	if(_topicID == InterestTopic.ExposedPanties):
+		return "panties"
+	if(_topicID == InterestTopic.ExposedBra):
+		return "bras"
+	
+	return .getChatName(_topicID)
