@@ -2083,8 +2083,11 @@ func addConsciousness(newc:float):
 	consciousness += newc
 	consciousness = clamp(consciousness, 0.0, 1.0)
 
+func isLewdHorny() -> bool:
+	return getLustLevel() >= 0.5 || getLust() >= 50 || getArousal() >= 0.4
+
 func isReadyToPenetrate() -> bool:
-	return getLustLevel() >= 0.5 || getLust() >= 50 || getArousal() >= 0.4 || isWearingStrapon()
+	return isLewdHorny() || isWearingStrapon()
 
 func getWornChastityCage():
 	if(getInventory().hasSlotEquipped(InventorySlot.Penis)):

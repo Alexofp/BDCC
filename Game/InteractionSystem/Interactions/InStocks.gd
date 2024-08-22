@@ -2,6 +2,7 @@ extends PawnInteractionBase
 
 var struggleText = ""
 var savedHow = ""
+var saveTryCount = 0
 
 func _init():
 	id = "InStocks"
@@ -17,6 +18,7 @@ func init_text():
 		saynn("{inmate.name} has "+str(getRoleChar("inmate").getStamina())+" stamina left.")
 
 	addAction("rest", "Rest", "Stay quiet and try to get some rest", "default", 0.1, 1800, {})
+	addAction("shout", "Shout", "Try to get some attetion to you..", "default", (0.1 + scorePersonality("inmate", {PersonalityStat.Naive:0.1})), 30, {})
 	if(getRoleChar("inmate").getStamina() > 0):
 		addAction("struggle", "Struggle", "Maybe you can escape somehow", "default", 10.0, 300, {})
 	else:
@@ -30,6 +32,8 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "rest"):
 		setState("after_rest", "inmate")
 		getCharByRole("inmate").addStamina(50)
+	if(_id == "shout"):
+		setState("about_to_shout", "inmate")
 	if(_id == "struggle"):
 		if(getRolePawn("inmate").isPlayer()):
 			runScene("StrugglingScene", [false, false])
@@ -106,10 +110,11 @@ func about_to_save_text():
 		addDisabledAction("Help", "You don't have any stamina left..")
 	if(getRoleChar("saver").getInventory().hasItemID("restraintkey")):
 		addAction("key", "Restraint key", "Use a restraint key to unlock the stocks", "help", 0.2, 60, {})
-	addAction("leave", "Leave", "", "justleave", 1.0, 30, {})
+	addAction("leave", "Leave", "", "justleave", 1.0 + (saveTryCount*saveTryCount*0.1), 30, {})
 
 func about_to_save_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "help"):
+		saveTryCount += 1
 		var inmate = getRoleChar("inmate")
 		var struggleData:Dictionary = inmate.doStruggleOutOfRestraints(false, true, getRoleChar("saver"), 2.0)
 		if(struggleData.empty()):
@@ -167,6 +172,31 @@ func save_after_help_do(_id:String, _args:Dictionary, _context:Dictionary):
 		setState("about_to_save", "saver")
 
 
+func about_to_shout_text():
+	if(getRoleChar("inmate").isGagged()):
+		saynn("{inmate.You} {inmate.youAre} gagged but {inmate.youHe} still {inmate.youVerb('try', 'tries')} to get some attention by wiggling {inmate.yourHis} body..")
+	else:
+		saynn("{inmate.You} {inmate.youVerb('try', 'tries')} to shout to get someone's attention..")
+
+	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 180, {})
+
+func about_to_shout_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		getCharByRole("inmate").addStamina(20)
+		if(!shoutForInterruptions("inmate", 3, 2, 0.5, "You hear begging coming from "+getCharByRole("inmate").getName()+" who is stuck in stocks at the punishment platform..")):
+			setState("after_shout", "inmate")
+
+
+func after_shout_text():
+	saynn("No one came after {inmate.your} attempts.. At least {inmate.youHe} got a small rest..")
+
+	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 30, {})
+
+func after_shout_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		setState("", "inmate")
+
+
 func getInterruptActions(_pawn:CharacterPawn) -> Array:
 	var result:Array = []
 	if(getPawnAmount() == 1):
@@ -198,6 +228,7 @@ func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _conte
 	if(_id == "free"):
 		doInvolvePawn("saver", _pawn)
 		setState("about_to_save", "saver")
+		saveTryCount = 0
 
 
 func getAnimData() -> Array:
@@ -214,6 +245,7 @@ func saveData():
 
 	data["struggleText"] = struggleText
 	data["savedHow"] = savedHow
+	data["saveTryCount"] = saveTryCount
 	return data
 
 func loadData(_data):
@@ -221,4 +253,5 @@ func loadData(_data):
 
 	struggleText = SAVE.loadVar(_data, "struggleText", "")
 	savedHow = SAVE.loadVar(_data, "savedHow", "")
+	saveTryCount = SAVE.loadVar(_data, "saveTryCount", 0)
 

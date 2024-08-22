@@ -366,17 +366,32 @@ func hasGoalScore(thedominfo, goal, thesubinfo):
 			
 	return 0.0
 
-func satisfyGoal(thedominfo, goalid, thesubinfo):
+func removeGoal(thedominfo, goalid, thesubinfo):
 	for _i in range(0, thedominfo.goals.size()):
 		var goalInfo = thedominfo.goals[_i]
 		
 		if(goalInfo[0] == goalid && goalInfo[1] == thesubinfo.charID):
 			thedominfo.goals.remove(_i)
-			print(str(thedominfo.charID)+"'s goal to "+str(goalInfo[0])+" "+str(goalInfo[1])+" was satisfied")
 			return true
 	return false
 
-func progressGoal(thedominfo, goalid, thesubinfo, args = []):
+func satisfyGoal(thedominfo, goalid, thesubinfo):
+	if(removeGoal(thedominfo, goalid, thesubinfo)):
+		print(str(thedominfo.charID)+"'s goal to "+str(goalid)+" "+str(thesubinfo.charID)+" was satisfied")
+		thedominfo.onGoalSatisfied(thedominfo, goalid, thesubinfo)
+		thesubinfo.onGoalSatisfied(thedominfo, goalid, thesubinfo)
+		return true
+	return false
+
+func failGoal(thedominfo, goalid, thesubinfo):
+	if(removeGoal(thedominfo, goalid, thesubinfo)):
+		print(str(thedominfo.charID)+"'s goal to "+str(goalid)+" "+str(thesubinfo.charID)+" was failed")
+		thedominfo.onGoalFailed(thedominfo, goalid, thesubinfo)
+		thesubinfo.onGoalFailed(thedominfo, goalid, thesubinfo)
+		return true
+	return false
+
+func progressGoalGeneric(thedominfo, goalid, thesubinfo, args = []):
 	for _i in range(0, thedominfo.goals.size()):
 		var goalInfo = thedominfo.goals[_i]
 		
@@ -386,12 +401,25 @@ func progressGoal(thedominfo, goalid, thesubinfo, args = []):
 			return true
 	return false
 
+func progressGoal(thedominfo, goalid, thesubinfo, args = []):
+	if(progressGoalGeneric(thedominfo, goalid, thesubinfo, args)):
+		thedominfo.onGoalSatisfied(thedominfo, goalid, thesubinfo, 0.5)
+		thesubinfo.onGoalSatisfied(thedominfo, goalid, thesubinfo, 0.5)
+		return true
+	return false
+
+func progressGoalFailed(thedominfo, goalid, thesubinfo, args = []):
+	if(progressGoalGeneric(thedominfo, goalid, thesubinfo, args)):
+		thedominfo.onGoalFailed(thedominfo, goalid, thesubinfo, 0.5)
+		thesubinfo.onGoalFailed(thedominfo, goalid, thesubinfo, 0.5)
+		return true
+	return false
+
 func replaceGoal(thedominfo, goalid, thesubinfo, newgoalid, replaceAll = true):
 	var atLeastOneReplaced = false
 	for goalInfo in thedominfo.goals:
 		if(goalInfo[0] == goalid && goalInfo[1] == thesubinfo.charID):
 			goalInfo[0] = newgoalid
-			print("Replaced goal")
 			if(!replaceAll):
 				return true
 			atLeastOneReplaced = true
@@ -955,14 +983,20 @@ func sexShouldEnd():
 	if(isDom("pc") && getDomInfo("pc").canDoActions()):
 		return false
 		
+	var hasAnyHealthyDoms:bool = false
 	for domID in doms:
 		var domInfo = doms[domID]
+		
+		if(domInfo.canDoActions()):
+			hasAnyHealthyDoms = true
 		
 		if(domInfo.canDoActions() && domInfo.hasGoals()):
 			return false
 	
-	return true
-	#return false
+	if(activities.size() <= 0 || !hasAnyHealthyDoms):
+		return true
+	else:
+		return false
 
 func getRecovarableItemsAfterSex():
 	var result = []
@@ -1014,6 +1048,7 @@ func endSex():
 		sexResult["doms"][domID] = {
 			"timesCame": domInfo.timesCame,
 			"averageLust": domInfo.getAverageLust(),
+			"satisfaction": domInfo.calculateFinalSatisfaction(),
 		}
 	for subID in subs:
 		var subInfo = subs[subID]
@@ -1022,6 +1057,7 @@ func endSex():
 			"averageLust": subInfo.getAverageLust(),
 			"averageResistance": subInfo.getAverageResistance(),
 			"averageFear": subInfo.getAverageFear(),
+			"satisfaction": subInfo.calculateFinalSatisfaction(),
 		}
 	
 	sexEnded = true

@@ -387,7 +387,7 @@ func doRemoveRole(role:String):
 	if(!isPawnInvolved(pawn)):
 		pawn.setInteraction(null)
 
-func doInvolvePawn(role:String, pawn):
+func doInvolvePawn(role:String, pawn, tpPawn:bool = true):
 	if(pawn is String):
 		pawn = getPawn(pawn)
 	if(involvedPawns.has(role)):
@@ -398,6 +398,8 @@ func doInvolvePawn(role:String, pawn):
 		GM.main.IS.stopInteractionsForPawnID(pawn.charID)
 	involvedPawns[role] = pawn.charID
 	pawn.setInteraction(self)
+	if(tpPawn):
+		pawn.setLocation(getLocation())
 
 func setState(newState:String, newRole:String, dirToRole:String = ""):
 	setCurrentPawn(newRole)
@@ -490,7 +492,27 @@ func getSexResult(_args:Dictionary):
 	print("SEEEEEEEEEEEX")
 	# Do sex stuff here
 	var newResult:Dictionary = {}
+	
+	newResult["doms"] = {}
+	newResult["subs"] = {}
+	
+	newResult["doms"][getRoleID(_fightersData[0])] = {
+		"timesCame": RNG.randi_range(0, 3),
+		"averageLust": RNG.randf_rangeX2(0.0, 1.0),
+		"satisfaction": RNG.randf_rangeX2(0.0, 1.0),
+	}
+	newResult["subs"][getRoleID(_fightersData[1])] = {
+		"timesCame": RNG.randi_range(0, 3),
+		"averageLust": RNG.randf_rangeX2(0.0, 1.0),
+		"averageResistance": RNG.randf_rangeX2(0.0, 1.0),
+		"averageFear": RNG.randf_rangeX2(0.0, 1.0),
+		"satisfaction": RNG.randf_rangeX2(0.0, 1.0),
+	}
+	
 	_args["scene_result"] = newResult
+	
+	doSexAftermath(_fightersData, newResult)
+	
 	return newResult
 
 func getFightResult(_args:Dictionary):
@@ -515,6 +537,29 @@ func doFightAftermath(_fightersData, newResult):
 		wonPawn.afterWonFight()
 	if(lostPawn != null):
 		lostPawn.afterLostFight()
+
+func doSexAftermath(_sexData, _newResult):
+	var domPawn = getRolePawn(_sexData[0])
+	var subPawn = getRolePawn(_sexData[1])
+	
+	var domSatisfaction:float = 0.0
+	var subSatisfaction:float = 0.0
+	if(_newResult.has("doms")):
+		for domID in _newResult["doms"]:
+			domSatisfaction += _newResult["doms"][domID]["satisfaction"]
+		domSatisfaction /= _newResult["doms"].size()
+	if(_newResult.has("subs")):
+		for subID in _newResult["subs"]:
+			subSatisfaction += _newResult["subs"][subID]["satisfaction"]
+		subSatisfaction /= _newResult["subs"].size()
+	_newResult["domSatisfaction"] = domSatisfaction
+	_newResult["subSatisfaction"] = subSatisfaction
+	var averageSatisfaction:float = (subSatisfaction + domSatisfaction) / 2.0
+	_newResult["averageSatisfaction"] = averageSatisfaction
+	
+	if(domPawn != null && subPawn != null):
+		affectAffection(_sexData[0], _sexData[1], (min(domSatisfaction, subSatisfaction) - 0.5)*0.4)
+		affectLust(_sexData[0], _sexData[1], (averageSatisfaction - 0.5)*0.5)
 
 func doCurrentAction(_context:Dictionary = {}):
 	if(currentActionID == "" || wasDeleted):
@@ -640,6 +685,8 @@ func receiveSceneStatusFinal(_result:Dictionary):
 	
 	if(currentActionArgs.has("fight")):
 		doFightAftermath(currentActionArgs["fight"], currentActionArgs["scene_result"])
+	if(currentActionArgs.has("sex")):
+		doSexAftermath(currentActionArgs["sex"], currentActionArgs["scene_result"])
 	
 	doCurrentAction()
 
@@ -669,43 +716,44 @@ func isBeingSpied() -> bool:
 func getKeepInteractionScoreFor(_role:String):
 	return 1.0
 
+func getKeepInteractionScoreForCharID(_charID:String):
+	for role in involvedPawns:
+		if(involvedPawns[role] == _charID):
+			return getKeepInteractionScoreFor(role)
+	return 0.0
+
 func doLookAround(role:String, keepScoreMult:float = 1.0):
 	if(wasDeleted):
 		return false
 	if(GM.main.IS.areInteractionsDisabled()):
 		return false
 	var pawn = getRolePawn(role)
+	if(!pawn.canInterrupt()):
+		return false
 	var loc:String = pawn.getLocation()
 	
 	var allPawns:Array = GM.main.IS.getPawnsAt(loc)
 	
-	var allPossible:Array = []
-	allPossible.append([null, getKeepInteractionScoreFor(role)*keepScoreMult])
-	
-	for otherPawn in allPawns:
-		if(otherPawn == pawn):
+	return pawn.tryInterruptPawns(allPawns, keepScoreMult)
+
+func shoutForInterruptions(role:String, searchDepth:int, maxDist:float = -1.0, keepScoreMult:float = 1.0, pcMessage:String = ""):
+	var pawn = getRolePawn(role)
+	var allPawnIDs = GM.main.IS.getPawnIDsNear(pawn.getLocation(), searchDepth, maxDist)
+	allPawnIDs.shuffle()
+	for otherPawnID in allPawnIDs:
+		var otherPawn = getPawn(otherPawnID)
+		if(otherPawn == self):
+			continue
+		if(otherPawn.isPlayer()):
+			if(pcMessage != ""):
+				addMessage(pcMessage)
+			continue
+
+		if(!otherPawn.canInterrupt()):
 			continue
 		
-		var interaction:PawnInteractionBase = otherPawn.getInteraction()
-		if(interaction == null):
-			continue
-		
-		for action in interaction.getInterruptActionsFinal(pawn):
-			var score:float = action["score"]
-			var scoreType = action["scoreType"] if action.has("scoreType") else "default"
-			var scoreRole = action["scoreRole"] if action.has("scoreRole") else involvedPawns.keys()[0]
-			
-			var finalScore:float = score * interaction.getScoreTypeValueGeneric(scoreType, pawn, interaction.getRolePawn(scoreRole))
-			
-			if(finalScore > 0):
-				allPossible.append([[interaction, action], finalScore])
-	
-	var pickedEntry = RNG.pickWeightedPairs(allPossible)
-	
-	if(pickedEntry != null):
-		pickedEntry[0].doInterruptActionFinal(pawn, pickedEntry[1]["id"], pickedEntry[1]["args"])
-		return true
-	
+		if(otherPawn.tryInterruptPawns([pawn], keepScoreMult)):
+			return true
 	return false
 
 func doesStealControlFromPC() -> bool:

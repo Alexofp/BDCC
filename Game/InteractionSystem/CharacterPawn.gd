@@ -88,6 +88,40 @@ func canBeInterrupted() -> bool:
 		return false
 	return true
 
+func canInterrupt() -> bool:
+	return canBeInterrupted()
+
+func tryInterruptPawns(allPawns:Array, keepScoreMult:float = 1.0):
+	var allPossible:Array = []
+	var keepScore = getInteraction().getKeepInteractionScoreForCharID(charID) if getInteraction() != null else 0.0
+	allPossible.append([null, keepScore*keepScoreMult])
+	
+	for otherPawn in allPawns:
+		if(otherPawn == self):
+			continue
+		
+		var interaction = otherPawn.getInteraction()
+		if(interaction == null):
+			continue
+		
+		for action in interaction.getInterruptActionsFinal(self):
+			var score:float = action["score"]
+			var scoreType = action["scoreType"] if action.has("scoreType") else "default"
+			var scoreRole = action["scoreRole"] if action.has("scoreRole") else interaction.involvedPawns.keys()[0]
+			
+			var finalScore:float = score * interaction.getScoreTypeValueGeneric(scoreType, self, interaction.getRolePawn(scoreRole))
+			
+			if(finalScore > 0):
+				allPossible.append([[interaction, action], finalScore])
+	
+	var pickedEntry = RNG.pickWeightedPairs(allPossible)
+	
+	if(pickedEntry != null):
+		pickedEntry[0].doInterruptActionFinal(self, pickedEntry[1]["id"], pickedEntry[1]["args"])
+		return true
+	
+	return false
+
 func onMeetWith(_otherPawn, _otherPawnMoved:bool) -> bool:
 	return GM.main.IS.checkOnMeetInteractions(self, _otherPawn, _otherPawnMoved)
 

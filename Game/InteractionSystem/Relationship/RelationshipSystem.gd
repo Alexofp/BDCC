@@ -96,6 +96,7 @@ func addAffection(char1:String, char2:String, howMuch:float, showMessage:bool = 
 		var char2Name = GlobalRegistry.getCharacter(char2).getName()
 		var char1Name = GlobalRegistry.getCharacter(char1).getName()
 		var affStr:String = str(Util.roundF(theEntry.affection*100.0, 1))
+		var oldStr:String = str(Util.roundF(oldAff*100.0, 1))
 		
 		var isPC:bool = ((char1 == "pc") || (char2 == "pc"))
 		var isSpied:bool = (GM.main.isPawnIDBeingSpied(char1) || GM.main.isPawnIDBeingSpied(char2))
@@ -105,17 +106,17 @@ func addAffection(char1:String, char2:String, howMuch:float, showMessage:bool = 
 		if(diff > 0.0):
 			if(isPC):
 				if(showPCMessage):
-					GM.main.addMessage(char2Name+"'s affection towards you has increased to "+affStr+"%")
+					GM.main.addMessage(char2Name+"'s affection towards you has increased from "+oldStr+"% to "+affStr+"%")
 			else:
 				if(showMessage):
-					GM.main.addMessage("Affection between "+char1Name+" and "+char2Name+" has increased to "+affStr+"%")
+					GM.main.addMessage("Affection between "+char1Name+" and "+char2Name+" has increased from "+oldStr+"% to "+affStr+"%")
 		if(diff < 0.0):
 			if(isPC):
 				if(showPCMessage):
-					GM.main.addMessage(char2Name+"'s affection towards you has decreased to "+affStr+"%")
+					GM.main.addMessage(char2Name+"'s affection towards you has decreased from "+oldStr+"% to "+affStr+"%")
 			else:
 				if(showMessage):
-					GM.main.addMessage("Affection between "+char1Name+" and "+char2Name+" has decreased to "+affStr+"%")
+					GM.main.addMessage("Affection between "+char1Name+" and "+char2Name+" has decreased from "+oldStr+"% to "+affStr+"%")
 	checkRemoveEntry(char1, char2)
 
 func addLust(char1:String, char2:String, howMuch:float, showMessage:bool = false, showPCMessage:bool = true):
@@ -134,22 +135,26 @@ func addLust(char1:String, char2:String, howMuch:float, showMessage:bool = false
 		var char2Name = GlobalRegistry.getCharacter(char2).getName()
 		var char1Name = GlobalRegistry.getCharacter(char1).getName()
 		var affStr:String = str(Util.roundF(theEntry.lust*100.0, 1))
+		var oldStr:String = str(Util.roundF(oldAff*100.0, 1))
 		
 		var isPC:bool = ((char1 == "pc") || (char2 == "pc"))
+		var isSpied:bool = (GM.main.isPawnIDBeingSpied(char1) || GM.main.isPawnIDBeingSpied(char2))
+		if(isSpied && showPCMessage):
+			showMessage = true
 		if(diff > 0.0):
 			if(isPC):
 				if(showPCMessage):
-					GM.main.addMessage(char2Name+"'s lust towards you has increased to "+affStr+"%")
+					GM.main.addMessage(char2Name+"'s lust towards you has increased from "+oldStr+"% to "+affStr+"%")
 			else:
 				if(showMessage):
-					GM.main.addMessage("Lust between "+char1Name+" and "+char2Name+" has increased to "+affStr+"%")
+					GM.main.addMessage("Lust between "+char1Name+" and "+char2Name+" has increased from "+oldStr+"% to "+affStr+"%")
 		if(diff < 0.0):
 			if(isPC):
 				if(showPCMessage):
-					GM.main.addMessage(char2Name+"'s lust towards you has decreased to "+affStr+"%")
+					GM.main.addMessage(char2Name+"'s lust towards you has decreased from "+oldStr+"% to "+affStr+"%")
 			else:
 				if(showMessage):
-					GM.main.addMessage("Lust between "+char1Name+" and "+char2Name+" has decreased to "+affStr+"%")
+					GM.main.addMessage("Lust between "+char1Name+" and "+char2Name+" has decreased from "+oldStr+"% to "+affStr+"%")
 	checkRemoveEntry(char1, char2)
 
 func removeAllEntriesOf(char1:String):
