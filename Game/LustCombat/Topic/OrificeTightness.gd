@@ -65,3 +65,19 @@ func getChatName(_topicID) -> String:
 		return "tight pussies"
 	
 	return .getChatName(_topicID)
+
+func getAddsToFocus(_topicID, _focus) -> float:
+	if(_topicID == InterestTopic.LooseAnus):
+		if(_focus == LustFocus.Butt):
+			return 1.0
+	if(_topicID == InterestTopic.LoosePussy):
+		if(_focus == LustFocus.Crotch):
+			return 1.0
+	if(_topicID == InterestTopic.TightAnus):
+		if(_focus == LustFocus.Butt):
+			return 1.0
+	if(_topicID == InterestTopic.TightPussy):
+		if(_focus == LustFocus.Crotch):
+			return 1.0
+	
+	return 0.0

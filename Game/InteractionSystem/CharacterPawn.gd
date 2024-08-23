@@ -7,11 +7,17 @@ var isDeleted:bool = false
 
 var currentInteraction
 
+# Needs
 var hunger:float = 0.0
+var social:float = 0.0
+var anger:float = 0.0
+
 var timeSinceLastWork:int = 0.0
 var fightExhaustion:float = 0.0
 
 const hungerPerHour:float = 0.2
+const socialPerHour:float = 0.5
+const angerPerHour:float = 0.1
 
 func saveData():
 	var data = {
@@ -19,6 +25,8 @@ func saveData():
 		"charID": charID,
 		"isD": isDeleted,
 		"hunger": hunger,
+		"social": social,
+		"anger": anger,
 		"tslw": timeSinceLastWork,
 		"fe": fightExhaustion,
 	}
@@ -29,12 +37,15 @@ func loadData(_data):
 	charID = SAVE.loadVar(_data, "charID", "")
 	isDeleted = SAVE.loadVar(_data, "isD", false)
 	hunger = SAVE.loadVar(_data, "hunger", 0.0)
+	social = SAVE.loadVar(_data, "social", 0.0)
+	anger = SAVE.loadVar(_data, "anger", 0.0)
 	timeSinceLastWork = SAVE.loadVar(_data, "tslw", 0)
 	fightExhaustion = SAVE.loadVar(_data, "fe", 0.0)
 
 func onSpawn():
 	hunger = RNG.randf_range(0.0, 0.3)
 	timeSinceLastWork = RNG.randi_range(0, 6000)
+	social = RNG.randf_rangeX2(0.0, 0.6)
 
 func getChar() -> BaseCharacter:
 	if(charID == ""):
@@ -55,10 +66,19 @@ func setLocation(newLoc:String):
 	if(isPlayer() && newLoc != GM.pc.getLocation()):
 		GM.pc.setLocation(newLoc)
 	GM.main.IS.onPawnMoved(charID, oldLoc, getLocation())
-	print(charID+" set lock: "+newLoc)
 
 func processTime(_howMuch:int):
 	hunger += float(_howMuch) * hungerPerHour / 3600.0
+	social += float(_howMuch) * socialPerHour / 3600.0
+	
+	# anger
+	var meanness:float = scorePersonality({PersonalityStat.Mean: 1.0})
+	if(meanness > 0.0):
+		anger += float(_howMuch) * angerPerHour / 3600.0 * meanness
+	else:
+		anger -= float(_howMuch) * angerPerHour / 3600.0 * max(abs(meanness), 0.1)
+		anger = max(anger, 0.0)
+	
 	timeSinceLastWork += _howMuch
 	checkAloneInteraction()
 
@@ -81,11 +101,10 @@ func checkAloneInteraction():
 		GM.main.IS.startInteraction("AloneInteraction", {main = charID}, {})
 
 func canBeInterrupted() -> bool:
-	# Make it an interaction function?
 	if(isPlayer() && !GM.main.playerCanBeInterrupted()):
 		return false
-	if(currentInteraction != null && currentInteraction.id != "AloneInteraction"):
-		return false
+	if(currentInteraction != null):
+		return currentInteraction.canCharIDBeInterrupted(charID)
 	return true
 
 func canInterrupt() -> bool:
@@ -128,6 +147,29 @@ func onMeetWith(_otherPawn, _otherPawnMoved:bool) -> bool:
 func getHunger() -> float:
 	return hunger
 
+func getSocial() -> float:
+	return social
+
+func getSocialClamped() -> float:
+	return clamp(social, 0.0, 1.0)
+
+func satisfySocial():
+	social = 0.0
+
+func getAnger() -> float:
+	return anger
+
+func getAngerClamped() -> float:
+	return clamp(anger, 0.0, 1.0)
+
+func addAnger(newAng:float):
+	anger += newAng
+	if(anger < 0.0):
+		anger = 0.0
+
+func satisfyAnger():
+	anger = 0.0
+
 func wasDeleted() -> bool:
 	return isDeleted
 
@@ -138,7 +180,7 @@ func getDebugInfo():
 	var res = [
 		"ID: "+str(charID),
 		"Location: "+str(getLocation()),
-		"Hunger: "+str(Util.roundF(hunger, 2)),
+		"Hunger: "+str(Util.roundF(hunger, 2))+" Social: "+str(Util.roundF(social, 2))+" Anger: "+str(Util.roundF(anger, 2)),
 		"currentInteraction: "+str(currentInteraction.id if currentInteraction != null else "null"),
 	]
 	if(currentInteraction != null):
@@ -264,12 +306,16 @@ func getPawnColor() -> Color:
 	return Color.pink
 
 func afterLostFight():
+	satisfyAnger()
 	if(isPlayer()):
 		return
 	#fightExhaustion = 1.0
 
 func afterWonFight():
-	pass
+	satisfyAnger()
+
+func afterSex(_isDom:bool):
+	satisfySocial()
 
 func getExhaustion() -> float:
 	return fightExhaustion
@@ -306,3 +352,11 @@ func calculatePowerScore(ignoreCurrentState:bool = false) -> float:
 		finalScore *= (1.0 - theChar.getStaminaLevel()*0.5)
 	
 	return finalScore
+
+func getHowMuchLikesPawn(otherPawn, isClamped:bool = false) -> float:
+	var theChar:BaseCharacter = getChar()
+	if(theChar == null || otherPawn == null):
+		return 0.0
+	var lust:LustInterests = theChar.getLustInterests()
+	
+	return lust.getOverallLikeness(otherPawn.getChar(), isClamped)

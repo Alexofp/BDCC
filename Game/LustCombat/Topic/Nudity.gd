@@ -72,3 +72,30 @@ func getChatName(_topicID) -> String:
 		return "bras"
 	
 	return .getChatName(_topicID)
+
+func getAddsToFocus(_topicID, _focus) -> float:
+	if(_topicID == InterestTopic.FullyNaked):
+		if(_focus == LustFocus.Body):
+			return 1.0
+	if(_topicID == InterestTopic.ExposedPussy):
+		if(_focus == LustFocus.Crotch):
+			return 1.0
+	if(_topicID == InterestTopic.ExposedAnus):
+		if(_focus == LustFocus.Butt):
+			return 1.0
+	if(_topicID == InterestTopic.ExposedBreasts):
+		if(_focus == LustFocus.Breasts):
+			return 1.0
+	if(_topicID == InterestTopic.ExposedCock):
+		if(_focus == LustFocus.Crotch):
+			return 1.0
+	if(_topicID == InterestTopic.ExposedPanties):
+		if(_focus == LustFocus.Crotch):
+			return 1.0
+		if(_focus == LustFocus.Butt):
+			return 1.0
+	if(_topicID == InterestTopic.ExposedBra):
+		if(_focus == LustFocus.Breasts):
+			return 1.0
+	
+	return 0.0

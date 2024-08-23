@@ -191,6 +191,7 @@ func getScoreTypeValueGeneric(_scoreType:String, curPawn:CharacterPawn, dirToPaw
 		finalScore = clamp(finalScore, 0.3, 2.0)
 		return finalScore
 	if(_scoreType == "punishMean"):
+		var anger:float = curPawn.getAnger()
 		var affection:float = GM.main.RS.getAffection(curID, dirToID)
 		var meanness = curPawn.scorePersonalityMax({PersonalityStat.Mean: 1.0})
 		#meanness = clamp(meanness, -0.5, 0.5)
@@ -208,6 +209,7 @@ func getScoreTypeValueGeneric(_scoreType:String, curPawn:CharacterPawn, dirToPaw
 			finalScore += 0.3
 		if(RNG.chance(meanness*100.0)):
 			finalScore += 1.0
+		finalScore += anger
 		finalScore -= subbyness * 0.1
 		
 		finalScore = clamp(finalScore, 0.1, 2.0)
@@ -261,6 +263,8 @@ func getScoreTypeValueGeneric(_scoreType:String, curPawn:CharacterPawn, dirToPaw
 		finalScore = clamp(finalScore, 0.05, 2.0)
 		return finalScore
 	if(_scoreType == "hatefuck"):
+		#var social:float = curPawn.getSocialClamped()
+		var anger:float = curPawn.getAngerClamped()
 		var affection:float = GM.main.RS.getAffection(curID, dirToID)
 		var lust:float = GM.main.RS.getLust(curID, dirToID)
 		var meanness = curPawn.scorePersonalityMax({PersonalityStat.Mean: 1.0})
@@ -273,6 +277,7 @@ func getScoreTypeValueGeneric(_scoreType:String, curPawn:CharacterPawn, dirToPaw
 		finalScore += lust
 		finalScore -= affection
 		finalScore += meanness * 0.2
+		finalScore += anger
 		if(RNG.chance(meanness*lust*100.0*(1.0-max(affection, 0.0)))):
 			finalScore += 1.0
 
@@ -296,6 +301,8 @@ func getScoreTypeValueGeneric(_scoreType:String, curPawn:CharacterPawn, dirToPaw
 		finalScore = clamp(finalScore, 0.05, 2.0)
 		return finalScore
 	if(_scoreType == "help"):
+		var social:float = curPawn.getSocialClamped()
+		var anger:float = curPawn.getAngerClamped()
 		var affection:float = GM.main.RS.getAffection(curID, dirToID)
 		var kindness = curPawn.scorePersonalityMax({PersonalityStat.Mean: -1.0})
 		
@@ -304,6 +311,9 @@ func getScoreTypeValueGeneric(_scoreType:String, curPawn:CharacterPawn, dirToPaw
 			finalScore += kindness * 0.5
 		finalScore += affection
 		
+		finalScore -= anger
+		finalScore += social / 2.0
+		
 		if(RNG.chance(kindness*30.0)):
 			finalScore += 1.0
 
@@ -311,6 +321,93 @@ func getScoreTypeValueGeneric(_scoreType:String, curPawn:CharacterPawn, dirToPaw
 		return finalScore
 	if(_scoreType == "justleave"):
 		return 0.01
+	if(_scoreType == "talk"):
+		var affection:float = GM.main.RS.getAffection(curID, dirToID)
+		var kindness = curPawn.scorePersonalityMax({PersonalityStat.Mean: -1.0})
+		
+		var mult:float = 1.0
+		if(affection > 0.95):
+			mult = 0.1
+		elif(affection > 0.8):
+			mult = 0.4
+		elif(affection < -0.2):
+			mult = 0.1
+		
+		return (0.1 + max(kindness, 0.0)) * mult
+	if(_scoreType == "approach"):
+		var social:float = curPawn.getSocialClamped()
+		var anger:float = curPawn.getAngerClamped()
+		
+		if(social < 0.2 || anger < 0.2):
+			return 0.0
+		return max(social, anger)
+	if(_scoreType == "flirt"):
+		var likeness:float = curPawn.getHowMuchLikesPawn(dirToPawn, true)
+		var anger:float = curPawn.getAngerClamped()
+		var angerTheir:float = dirToPawn.getAngerClamped()
+		var bratiness = curPawn.scorePersonalityMax({PersonalityStat.Brat: 1.0})
+		var braveness = curPawn.scorePersonalityMax({PersonalityStat.Coward: -1.0})
+		var naiveness = curPawn.scorePersonalityMax({PersonalityStat.Naive: 1.0})
+		
+		var finalScore:float = 0.1 + likeness + bratiness * 0.1 + naiveness * 0.1 + braveness * 0.1
+		finalScore *= (1.0 - anger)
+		finalScore *= (1.0 - angerTheir)
+		
+		return clamp(finalScore, 0.02, 2.0)
+	if(_scoreType == "acceptFlirt"):
+		var likeness:float = curPawn.getHowMuchLikesPawn(dirToPawn, true)
+		var affection:float = GM.main.RS.getAffection(curID, dirToID)
+		var lust:float = GM.main.RS.getLust(curID, dirToID)
+		var naiveness = curPawn.scorePersonalityMax({PersonalityStat.Naive: 1.0})
+		var subbyness = curPawn.scorePersonalityMax({PersonalityStat.Subby: 1.0})
+		
+		var finalScore:float = 0.1
+		
+		finalScore += likeness
+		finalScore += affection
+		finalScore += lust
+		finalScore += max(naiveness, 0.0) * 0.5
+		finalScore += max(subbyness, 0.0) * 0.5
+		
+		
+		return clamp(finalScore, 0.02, 2.0)
+	if(_scoreType == "sexUse"):
+		var likeness:float = curPawn.getHowMuchLikesPawn(dirToPawn, true)
+		var social:float = curPawn.getSocialClamped()
+		var anger:float = curPawn.getAnger()
+		
+		var affection:float = GM.main.RS.getAffection(curID, dirToID)
+		var lust:float = GM.main.RS.getLust(curID, dirToID)
+		var dommyness:float = curPawn.scorePersonalityMax({PersonalityStat.Subby: -1.0})
+		var meanness = curPawn.scorePersonalityMax({PersonalityStat.Mean: 1.0})
+		
+		var finalScore:float = 0.1
+		
+		finalScore += likeness
+		finalScore += anger
+		
+		finalScore += lust
+		finalScore += max(dommyness, 0.0)
+		
+		finalScore *= (max(dommyness, 0.0) + 0.7)
+		if(RNG.chance(dommyness*100.0)):
+			finalScore += 0.5
+		
+		if(meanness > 0.7):
+			finalScore += meanness
+		else:
+			if(affection > 0.0):
+				finalScore *= (1.0 - affection)
+			else:
+				finalScore += max(abs(affection), 0.1)
+		
+		if(social < 0.2):
+			finalScore *= 0.05
+		else:
+			finalScore *= social
+		
+		finalScore = clamp(finalScore, 0.01, 2.0)
+		return finalScore
 		
 	return 1.0
 
@@ -541,6 +638,11 @@ func doFightAftermath(_fightersData, newResult):
 func doSexAftermath(_sexData, _newResult):
 	var domPawn = getRolePawn(_sexData[0])
 	var subPawn = getRolePawn(_sexData[1])
+	
+	if(domPawn != null):
+		domPawn.afterSex(true)
+	if(subPawn != null):
+		subPawn.afterSex(false)
 	
 	var domSatisfaction:float = 0.0
 	var subSatisfaction:float = 0.0
@@ -1025,6 +1127,15 @@ func getLustString(role1:String, role2:String) -> String:
 	return str(Util.roundF(affection*100.0, 1))+"%"
 	
 func shouldShowBigButtons() -> bool:
+	return false
+	
+func canRoleBeInterrupted(_role:String) -> bool:
+	return false
+	
+func canCharIDBeInterrupted(_charID:String) -> bool:
+	for roleID in involvedPawns:
+		if(involvedPawns[roleID] == _charID):
+			return canRoleBeInterrupted(roleID)
 	return false
 	
 func saveData():

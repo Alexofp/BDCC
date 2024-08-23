@@ -27,6 +27,11 @@ const allScoreTypes = [
 		"resist",
 		"help",
 		"justleave",
+		"talk",
+		"flirt",
+		"acceptFlirt",
+		"sexUse",
+		"approach",
 	]
 
 func getEditVars():

@@ -169,8 +169,8 @@ func getInterruptActions(_pawn:CharacterPawn) -> Array:
 		id = "talk",
 		name = "Talk",
 		desc = "Talk with them",
-		score = 0.0,
-		scoreType = "default", # Change to talk or something
+		score = 1.0,
+		scoreType = "approach",
 		scoreRole = "main",
 		args = {},
 	})
@@ -179,3 +179,9 @@ func getInterruptActions(_pawn:CharacterPawn) -> Array:
 func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "talk"):
 		startInteraction("Talking", {starter=_pawn.charID, reacter=getRoleID("main")})
+
+func canRoleBeInterrupted(_role:String) -> bool:
+	return true
+	
+func canCharIDBeInterrupted(_charID:String) -> bool:
+	return true

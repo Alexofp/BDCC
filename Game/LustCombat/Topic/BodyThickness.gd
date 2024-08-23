@@ -55,3 +55,12 @@ func getChatName(_topicID) -> String:
 		return "slim butts"
 	
 	return .getChatName(_topicID)
+
+func getAddsToFocus(_topicID, _focus) -> float:
+	if(_topicID in [InterestTopic.ThickBody, InterestTopic.AverageMassBody, InterestTopic.SlimBody]):
+		if(_focus == LustFocus.Body):
+			return 1.0
+	if(_topicID in [InterestTopic.ThickButt, InterestTopic.AverageButt, InterestTopic.SlimButt]):
+		if(_focus == LustFocus.Body):
+			return 1.0
+	return 0.0

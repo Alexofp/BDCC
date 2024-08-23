@@ -127,11 +127,11 @@ func about_to_save_do(_id:String, _args:Dictionary, _context:Dictionary):
 		else:
 			savedHow = "help"
 			setState("save_saved", "inmate")
-			affectAffection("inmate", "saver", 0.05)
+			affectAffection("inmate", "saver", 0.1)
 	if(_id == "key"):
 		savedHow = "key"
 		setState("save_saved", "inmate")
-		affectAffection("inmate", "saver", 0.05)
+		affectAffection("inmate", "saver", 0.1)
 		getRoleChar("saver").getInventory().removeXOfOrDestroy("restraintkey", 1)
 		getRoleChar("inmate").getInventory().clearStaticRestraints()
 	if(_id == "leave"):
@@ -139,7 +139,7 @@ func about_to_save_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func canceled_save_text():
-	saynn("{saver.name} decided against saving {inmate.you}..")
+	saynn("{saver.name} is leaving, no longer trying to save {inmate.you}..")
 
 	addAction("leave", "Leave", "Time to go", "default", 1.0, 60, {})
 
@@ -204,8 +204,8 @@ func getInterruptActions(_pawn:CharacterPawn) -> Array:
 			id = "use",
 			name = "Use",
 			desc = "Use them while they are stuck in stocks",
-			score = 0.5,
-			scoreType = "sexDom",
+			score = 1.0,
+			scoreType = "sexUse",
 			scoreRole = "inmate",
 			args = {},
 		})

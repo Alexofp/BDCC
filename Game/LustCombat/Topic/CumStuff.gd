@@ -85,3 +85,36 @@ func getChatName(_topicID) -> String:
 		return "cumdumpsters"
 	
 	return .getChatName(_topicID)
+
+func getAddsToFocus(_topicID, _focus) -> float:
+	if(_topicID == InterestTopic.StuffedPussy):
+		if(_focus == LustFocus.Crotch):
+			return 1.0
+	if(_topicID == InterestTopic.StuffedAss):
+		if(_focus == LustFocus.Butt):
+			return 1.0
+	if(_topicID == InterestTopic.StuffedPussyOrAss):
+		if(_focus == LustFocus.Crotch):
+			return 1.0
+		if(_focus == LustFocus.Butt):
+			return 1.0
+	if(_topicID == InterestTopic.Pregnant):
+		if(_focus == LustFocus.Body):
+			return 1.0
+		if(_focus == LustFocus.Breasts):
+			return 0.25
+	if(_topicID == InterestTopic.StuffedThroat):
+		if(_focus == LustFocus.Body):
+			return 0.25
+	if(_topicID == InterestTopic.CoveredInCum):
+		if(_focus == LustFocus.Body):
+			return 1.0
+		if(_focus == LustFocus.Breasts):
+			return 0.5
+	if(_topicID == InterestTopic.CoveredInLotsOfCum):
+		if(_focus == LustFocus.Body):
+			return 1.0
+		if(_focus == LustFocus.Breasts):
+			return 0.5
+	
+	return 0.0

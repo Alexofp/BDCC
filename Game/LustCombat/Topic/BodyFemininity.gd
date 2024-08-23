@@ -40,3 +40,8 @@ func getChatName(_topicID) -> String:
 		return "masculinity"
 	
 	return .getChatName(_topicID)
+
+func getAddsToFocus(_topicID, _focus) -> float:
+	if(_focus == LustFocus.Body):
+		return 1.0
+	return 0.0

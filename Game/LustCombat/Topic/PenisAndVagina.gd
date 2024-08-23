@@ -95,3 +95,9 @@ func canUseInChat(_topicID) -> bool:
 	if(_topicID in [InterestTopic.NoVagina, InterestTopic.HasVaginaOnly, InterestTopic.NoCock, InterestTopic.HasCockOnly]):
 		return false
 	return .canUseInChat(_topicID)
+
+func getAddsToFocus(_topicID, _focus) -> float:
+	if(_focus == LustFocus.Crotch):
+		return 1.0
+	
+	return 0.0

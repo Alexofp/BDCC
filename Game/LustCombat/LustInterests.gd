@@ -65,6 +65,47 @@ func getTopicValue(topicID, _pc):
 	var playerValue = topicGroup.getTopicValue(topicID, _pc)
 	return loveValue * playerValue
 
+func getOverallLikeness(_pc, isClamped:bool = false) -> float:
+	var resultValue:float = 0.0
+	var maxPossble:float = 0.0
+	
+	for topicID in interests:
+		var topicGroup: TopicBase = GlobalRegistry.getLustTopic(topicID)
+		var loveValue:float = Interest.getValue(interests[topicID])
+		
+		var playerValue:float = topicGroup.getTopicValue(topicID, _pc)
+		
+		var addValue:float = loveValue * topicGroup.getHowMuchAddsToLikeness(topicID)
+		
+		maxPossble += abs(addValue)
+		resultValue += addValue * playerValue
+	if(isClamped):
+		if(maxPossble <= 0.0):
+			return 0.0
+		return clamp(resultValue / maxPossble, 0.0, 1.0)
+	return resultValue
+
+func getFocussedLikeness(_pc, _focus, isClamped:bool = false) -> float:
+	var resultValue:float = 0.0
+	var maxPossble:float = 0.0
+	
+	for topicID in interests:
+		var topicGroup: TopicBase = GlobalRegistry.getLustTopic(topicID)
+		var loveValue:float = Interest.getValue(interests[topicID])
+		
+		var playerValue:float = topicGroup.getTopicValue(topicID, _pc)
+		
+		var addValue:float = loveValue * topicGroup.getAddsToFocus(topicID, _focus)
+		
+		maxPossble += abs(addValue)
+		resultValue += addValue * playerValue
+	
+	if(isClamped):
+		if(maxPossble <= 0.0):
+			return 0.0
+		return clamp(resultValue / maxPossble, 0.0, 1.0)
+	return resultValue
+
 func reactLustAction(_pc, _actionInterests, _maxUnlocks = 1):
 	var resultValue = 0.0
 	var positiveValue = 0.0
