@@ -317,6 +317,8 @@ func updatePawns(IS):
 			checkedPawns.erase(charID)
 			var worldPawn = pawns[charID]
 			
+			worldPawn.setPawnActivityIcon(pawn.getActivityIcon())
+			
 			if(worldPawn.loc == loc):
 				continue
 			
@@ -347,6 +349,7 @@ func createWorldPawn(charID, pawn, loc):
 	newWorldPawn.global_position = getRoomByID(loc).global_position
 	newWorldPawn.setPawnTexture(pawn.getPawnTexture())
 	newWorldPawn.setPawnColor(pawn.getPawnColor())
+	newWorldPawn.setPawnActivityIcon(pawn.getActivityIcon())
 	pawns[charID] = newWorldPawn
 
 func getZoneRooms(zoneID:String) -> Array:

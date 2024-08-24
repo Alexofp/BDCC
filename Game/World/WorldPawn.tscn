@@ -11,4 +11,10 @@ script = ExtResource( 2 )
 scale = Vector2( 0.282, 0.282 )
 texture = ExtResource( 1 )
 
+[node name="Icon2" type="Sprite" parent="."]
+position = Vector2( 0, -15 )
+scale = Vector2( 0.282, 0.282 )
+z_index = 5
+texture = ExtResource( 1 )
+
 [node name="MoveTween" type="Tween" parent="."]

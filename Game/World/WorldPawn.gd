@@ -7,6 +7,7 @@ var floorid
 
 onready var move_tween = $MoveTween
 onready var icon = $Icon
+onready var icon_2 = $Icon2
 
 func moveToPos(thePos:Vector2):
 	move_tween.interpolate_property(self, "position",
@@ -21,6 +22,16 @@ func setPawnTexture(theText):
 		icon.texture = preload("res://Images/WorldPawns/masc.png")
 	else:
 		icon.texture = null
+
+func setPawnActivityIcon(theIcon):
+	if(theIcon == RoomStuff.PawnActivity.Chat):
+		icon_2.texture = preload("res://Images/WorldPawnActivity/chat.png")
+	elif(theIcon == RoomStuff.PawnActivity.Fight):
+		icon_2.texture = preload("res://Images/WorldPawnActivity/fight.png")
+	elif(theIcon == RoomStuff.PawnActivity.Sex):
+		icon_2.texture = preload("res://Images/WorldPawnActivity/sex.png")
+	else:
+		icon_2.texture = null
 
 func setPawnColor(theColor:Color):
 	icon.self_modulate = theColor

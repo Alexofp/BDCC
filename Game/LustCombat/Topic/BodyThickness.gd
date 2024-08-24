@@ -42,7 +42,7 @@ func getVisibleName(_topicID):
 
 func getChatName(_topicID) -> String:
 	if(_topicID == InterestTopic.ThickBody):
-		return "thickness"
+		return "thick bodies"
 	if(_topicID == InterestTopic.AverageMassBody):
 		return "average bodies"
 	if(_topicID == InterestTopic.SlimBody):

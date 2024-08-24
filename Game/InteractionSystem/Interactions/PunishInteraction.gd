@@ -12,7 +12,7 @@ func init_text():
 	saynn("{punisher.name} looms over {target.you}.")
 	sayLine("punisher", "PunishDecide", {punisher="punisher", target="target"})
 
-	if(true || getRoleChar("target").getInventory().hasEquippedItemWithTag(ItemTag.AllowsEnslaving)):
+	if(getRoleChar("target").getInventory().hasEquippedItemWithTag(ItemTag.AllowsEnslaving)):
 		addAction("stocks", "Stocks", "Lock them up in stocks!", "punishMean", 1.0, 60, {})
 	else:
 		addDisabledAction("Stocks", "They need to be wearing a collar for this!")
@@ -118,4 +118,7 @@ func getAnimData() -> Array:
 			return [StageScene.Duo, "walk", {pc="target", npc="punisher", npcAction="walk", flipNPC=true, bodyState={leashedBy="punisher"}}]
 	
 	return [StageScene.Duo, "stand", {pc="target", npc="punisher"}]
+
+func getActivityIconForRole(_role:String):
+	return RoomStuff.PawnActivity.Chat
 

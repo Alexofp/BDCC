@@ -32,6 +32,9 @@ func shouldRunOnMeet(_pawn1, _pawn2, _pawn2Moved:bool):
 
 	return [false]
 
+func getActivityIconForRole(_role:String):
+	return RoomStuff.PawnActivity.Chat
+
 func init_text():
 	saynn("{guard.name} notices {inmate.name} in an off-limits area!")
 	sayLine("guard", "GuardCaughtOffLimits", {guard="guard", inmate="inmate"})

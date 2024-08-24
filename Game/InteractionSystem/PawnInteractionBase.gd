@@ -720,7 +720,7 @@ func goTowards(theTarget:String):
 		cachedPath = GM.world.calculatePath(getLocation(), cachedTarget)
 		if(cachedPath.size() > 0):
 			cachedPath.remove(0)
-		print(getLocation(), " ", cachedTarget, " ", cachedPath)
+		#print(getLocation(), " ", cachedTarget, " ", cachedPath)
 		if(cachedPath.size() <= 0):
 			cachedTarget = ""
 			return false
@@ -916,6 +916,12 @@ func scoreHate(role1:String, role2:String) -> float:
 		return 0.0
 	return getRolePawn(role1).scoreHate(getRoleID(role2))
 
+func scoreAffection(role1:String, role2:String) -> float:
+	if(!involvedPawns.has(role1) || !involvedPawns.has(role2)):
+		Log.printerr("Bad roles found")
+		return 0.0
+	return getRolePawn(role1).scoreAffection(getRoleID(role2))
+
 func scoreLust(role1:String, role2:String) -> float:
 	if(!involvedPawns.has(role1) || !involvedPawns.has(role2)):
 		Log.printerr("Bad roles found")
@@ -978,6 +984,8 @@ func addDefeatButtons(rolePC:String, _roleNPC:String):
 			GM.ES.triggerRun(Trigger.DefeatedDynamicNPC, [getRoleID(_roleNPC)])
 
 func getPawnAmount() -> int:
+	return involvedPawns.size()
+func getPawnCount() -> int:
 	return involvedPawns.size()
 
 func addChatTopics(startRole:String, reactRole:String, actionID:String, topicsAmount:int = 7):
@@ -1078,6 +1086,8 @@ func doReactToChat(_args:Dictionary, skipPcCheck:bool = true):
 	var reactChar:BaseCharacter = getRoleChar(reactRole)
 	var lust:LustInterests = reactChar.getLustInterests()
 	var interestValue:float = lust.getInterestValue(topicID)
+	if(reactChar.isPlayer()):
+		interestValue = 1.0
 	
 	if(answer == "agree"):
 		affectAffection(reactRole, startRole, abs(interestValue) * 0.07)
@@ -1085,6 +1095,11 @@ func doReactToChat(_args:Dictionary, skipPcCheck:bool = true):
 		affectAffection(reactRole, startRole, 0.01)
 	if(answer == "disagree"):
 		affectAffection(reactRole, startRole, -abs(interestValue) * 0.05)
+	
+	var startPawn = getRolePawn(startRole)
+	var reactPawn = getRolePawn(reactRole)
+	startPawn.afterSocialInteraction()
+	reactPawn.afterSocialInteraction()
 	
 	if(skipPcCheck || getRoleChar(startRole).isPlayer()):
 		if(reactChar.isPlayer()):
@@ -1138,6 +1153,108 @@ func canCharIDBeInterrupted(_charID:String) -> bool:
 			return canRoleBeInterrupted(roleID)
 	return false
 	
+func addLustFocusButtons(actionID:String, _role1:String, _role2:String):
+	for focus in LustFocus.getAll():
+		var buttonName:String = LustFocus.getButtonName(focus)
+		var buttonDesc:String = LustFocus.getButtonDesc(focus)
+		
+		addAction(actionID, buttonName, buttonDesc, "default", 1.0, 120, {
+			args = {
+				lust = {
+					focus = focus,
+					role1 = _role1,
+					role2 = _role2,
+				},
+			}
+		})
+		
+func addReactToLustFocusButtons(actionID:String, lustEntry:Dictionary):
+	var focus = lustEntry["focus"]
+	var _role1:String = lustEntry["role1"]
+	var _role2:String = lustEntry["role2"]
+	
+	var role1pawn = getRolePawn(_role1)
+	var role2pawn = getRolePawn(_role2)
+	
+	var likeness:float = role2pawn.getFocussedLikeness(role1pawn, focus, true)
+	
+	var affection:float = scoreAffection(_role2, _role1)
+	var lust:float = scoreLust(_role2, _role1)
+	var naive:float = scorePersonality(_role2, {PersonalityStat.Naive: 1.0})
+	if(affection < (0.5 - 0.45 * naive)):
+		likeness *= max(affection, lust)
+		lustEntry["reason"] = " (affection is too low)"
+	else:
+		if(likeness <= 0.6):
+			lustEntry["reason"] = " (didn't like the sight)"
+		else:
+			lustEntry["reason"] = ""
+	
+	if(role2pawn.isPlayer()):
+		likeness = 1.0
+		lustEntry["reason"] = ""
+	
+	print("LIKENESS: ",likeness)
+	
+	addAction(actionID, "Accept", "Accept the flirt", "default", likeness*likeness, 60, {
+		args = {
+			lust = lustEntry,
+			answer = "accept",
+			likeness = likeness,
+		},
+	})
+	addAction(actionID, "Deny", "Deny their flirt", "default", 1.0 - likeness*likeness, 60, {
+		args = {
+			lust = lustEntry,
+			answer = "deny",
+			likeness = likeness,
+		},
+	})
+
+func reactToLustFocus(args:Dictionary):
+	var lustEntry:Dictionary = args["lust"]
+	var answer:String = args["answer"]
+	var likeness:float = args["likeness"]
+	lustEntry["answer"] = answer
+	lustEntry["likeness"] = likeness
+
+	#var focus = lustEntry["focus"]
+	var _role1:String = lustEntry["role1"]
+	var _role2:String = lustEntry["role2"]
+	
+	var role1pawn = getRolePawn(_role1)
+	var role2pawn = getRolePawn(_role2)
+	role1pawn.afterSocialInteraction()
+	role2pawn.afterSocialInteraction()
+	
+	if(answer == "accept"):
+		affectLust(_role2, _role1, max(likeness, 0.1) * 0.3)
+	elif(answer == "deny"):
+		affectLust(_role2, _role1, -max(1.0-likeness, 0.2) * 0.2)
+		affectAffection(_role1, _role2, -max(1.0-likeness, 0.1) * 0.05)
+	
+	return likeness
+
+func getActivityIconForRole(_role:String):
+	if(getPawnCount() > 1):
+		return RoomStuff.PawnActivity.Chat
+	return RoomStuff.PawnActivity.None
+
+func getActivityIconForRoleFinal(_role:String):
+	if(currentActionArgs.has("fight")):
+		return RoomStuff.PawnActivity.Fight
+	if(currentActionArgs.has("sex")):
+		return RoomStuff.PawnActivity.Sex
+	return getActivityIconForRole(_role)
+
+func getActivityIconForPawn(pawn):
+	if(pawn == null):
+		return RoomStuff.PawnActivity.None
+	for role in involvedPawns:
+		if(involvedPawns[role] == pawn.charID):
+			return getActivityIconForRoleFinal(role)
+	return RoomStuff.PawnActivity.None
+
 func saveData():
 	var data = {
 		"loc": location,

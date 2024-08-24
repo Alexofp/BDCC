@@ -156,6 +156,18 @@ func getSocialClamped() -> float:
 func satisfySocial():
 	social = 0.0
 
+func addSocial(howMuch:float):
+	social += howMuch
+	social = max(0.0, social)
+
+func afterSocialInteraction():
+	if(social <= 1.0):
+		social -= RNG.randf_rangeX2(0.2, 0.4)
+		if(social < 0.0):
+			social = 0.0
+	else:
+		social *= 0.5
+
 func getAnger() -> float:
 	return anger
 
@@ -166,6 +178,9 @@ func addAnger(newAng:float):
 	anger += newAng
 	if(anger < 0.0):
 		anger = 0.0
+
+func affectAnger(howMuch:float):
+	addAnger(howMuch * (1.0 + 0.5 * scorePersonality({PersonalityStat.Mean:1.0})))
 
 func satisfyAnger():
 	anger = 0.0
@@ -227,6 +242,13 @@ func scoreHate(otherCharID) -> float:
 	
 	var affectionValue:float = GM.main.RS.getAffection(charID, otherCharID)
 	return max(0.0, -affectionValue)
+
+func scoreAffection(otherCharID) -> float:
+	if(!(otherCharID is String)):
+		otherCharID = otherCharID.charID
+	
+	var affectionValue:float = GM.main.RS.getAffection(charID, otherCharID)
+	return affectionValue
 
 func scoreLust(otherCharID) -> float:
 	if(!(otherCharID is String)):
@@ -360,3 +382,19 @@ func getHowMuchLikesPawn(otherPawn, isClamped:bool = false) -> float:
 	var lust:LustInterests = theChar.getLustInterests()
 	
 	return lust.getOverallLikeness(otherPawn.getChar(), isClamped)
+
+func getFocussedLikeness(otherPawn, _focus, isClamped:bool = false) -> float:
+	var theChar:BaseCharacter = getChar()
+	if(theChar == null || otherPawn == null):
+		return 0.0
+	var lust:LustInterests = theChar.getLustInterests()
+	
+	return lust.getFocussedLikeness(otherPawn.getChar(), _focus, isClamped)
+	
+func canSocial() -> bool:
+	return social >= 0.1 || isPlayer()
+
+func getActivityIcon():
+	if(currentInteraction != null):
+		return currentInteraction.getActivityIconForPawn(self)
+	return RoomStuff.PawnActivity.None
