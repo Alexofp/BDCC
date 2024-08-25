@@ -37,7 +37,7 @@ func getActions() -> Array:
 
 func doAction(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "rest"):
-		getCurrentPawn().recoverExhaustion()
+		getCurrentPawn().recoverExhaustion(0.08)
 	if(_id == "getup"):
 		stopMe()
 

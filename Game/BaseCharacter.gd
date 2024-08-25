@@ -1864,6 +1864,9 @@ func isMuzzled():
 func hasBuff(buffID):
 	return buffsHolder.hasBuff(buffID)
 
+func canStartSex() -> bool:
+	return true
+
 func invCanEquipSlot(slot):
 	if(slot == InventorySlot.Penis && !hasPenis()):
 		return false

@@ -36,8 +36,9 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "getCaptured"):
-		runScene("StocksPunishmentScene")
+		#runScene("StocksPunishmentScene")
 		endScene()
+		GM.main.IS.startInteraction("InStocks", {inmate="pc"})
 		return
 	
 	setState(_action)

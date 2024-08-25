@@ -408,6 +408,61 @@ func getScoreTypeValueGeneric(_scoreType:String, curPawn:CharacterPawn, dirToPaw
 		
 		finalScore = clamp(finalScore, 0.01, 2.0)
 		return finalScore
+	if(_scoreType == "attack"):
+		var meanness = curPawn.scorePersonalityMax({PersonalityStat.Mean: 1.0})
+		var affection:float = GM.main.RS.getAffection(curID, dirToID)
+		var anger:float = curPawn.getAnger()
+		
+		var finalScore:float = 0.0
+		finalScore -= affection
+		finalScore += meanness
+		finalScore = max(anger, finalScore)
+		return finalScore
+	if(_scoreType == "agreeSexAsSub"):
+		var affection:float = GM.main.RS.getAffection(curID, dirToID)
+		var lust:float = GM.main.RS.getLust(curID, dirToID)
+		var subbyness:float = curPawn.scorePersonalityMax({PersonalityStat.Subby: 1.0})
+		var naiveness = curPawn.scorePersonalityMax({PersonalityStat.Naive: 1.0})
+		var meanness = curPawn.scorePersonalityMax({PersonalityStat.Mean: 1.0})
+		var isInHeat = GlobalRegistry.getCharacter(curID).isInHeat()
+		var anger:float = curPawn.getAnger()
+		
+		var finalScore:float = 0.0
+		if(lust >= 0.4):
+			finalScore += lust
+		if(isInHeat):
+			finalScore += 1.0
+		if(affection <= -0.5 && anger >= 0.5): # Hatefuck simulation
+			finalScore += anger * (1.0 + meanness)
+		if(affection >= 0.9 && naiveness >= 0.6): # Naive sub simulation
+			finalScore += affection * (1.0 + naiveness) * 2.0
+			
+		finalScore *= (1.0+subbyness)
+		finalScore *= (1.0 + naiveness * 0.3)
+		
+		return finalScore
+	if(_scoreType == "agreeSexAsDom"):
+		var affection:float = GM.main.RS.getAffection(curID, dirToID)
+		var lust:float = GM.main.RS.getLust(curID, dirToID)
+		var dommyness:float = curPawn.scorePersonalityMax({PersonalityStat.Subby: -1.0})
+		#var naiveness = curPawn.scorePersonalityMax({PersonalityStat.Naive: 1.0})
+		var meanness = curPawn.scorePersonalityMax({PersonalityStat.Mean: 1.0})
+		var isInHeat = GlobalRegistry.getCharacter(curID).isInHeat()
+		var anger:float = curPawn.getAnger()
+		
+		var finalScore:float = 0.0
+		if(lust >= 0.4):
+			finalScore += lust
+		if(isInHeat):
+			finalScore += 1.0
+		if(affection <= -0.5 && anger >= 0.5): # Hatefuck simulation
+			finalScore += anger * (1.0 + meanness)
+		if(dommyness >= 0.5 && affection >= -meanness): # Eager dom simulation
+			finalScore += dommyness
+		finalScore *= (1.0+dommyness)
+		finalScore *= (1.0+meanness*0.2)
+		
+		return finalScore
 		
 	return 1.0
 
@@ -846,7 +901,7 @@ func shoutForInterruptions(role:String, searchDepth:int, maxDist:float = -1.0, k
 		var otherPawn = getPawn(otherPawnID)
 		if(otherPawn == self):
 			continue
-		if(otherPawn.isPlayer()):
+		if(otherPawn.isPlayer() && !pawn.isPlayer()):
 			if(pcMessage != ""):
 				addMessage(pcMessage)
 			continue
@@ -982,6 +1037,10 @@ func addDefeatButtons(rolePC:String, _roleNPC:String):
 		
 		if(involvedPawns.has(_roleNPC)):
 			GM.ES.triggerRun(Trigger.DefeatedDynamicNPC, [getRoleID(_roleNPC)])
+
+func triggerTalkRunEvents(role:String):
+	if(isPlayersTurn()):
+		GM.ES.triggerRun(Trigger.TalkingToDynamicNPC, [getRoleID(role)])
 
 func getPawnAmount() -> int:
 	return involvedPawns.size()
@@ -1254,6 +1313,31 @@ func getActivityIconForPawn(pawn):
 		if(involvedPawns[role] == pawn.charID):
 			return getActivityIconForRoleFinal(role)
 	return RoomStuff.PawnActivity.None
+
+func triggerRandomStocksEvent(_lewdChance, _willingSexChance, _unWillingSexChance, _nothingChance):
+	if(!isPlayersTurn()):
+		return false
+	var eventType = RNG.pickWeighted(["StocksEvent", "StocksWillingSex", "StocksUnWillingSex", ""], [_lewdChance, _willingSexChance, _unWillingSexChance, _nothingChance])
+	
+	if(eventType == "StocksEvent"):
+		if(GM.ES.triggerReact("StocksEvent")):
+			return true
+
+	if(eventType == "StocksWillingSex"):
+		if(GM.ES.triggerReact("StocksWillingSex")):
+			return true
+			
+	if(eventType == "StocksUnWillingSex"):
+		if(GM.ES.triggerReact("StocksUnWillingSex")):
+			return true
+	
+	return false
+
+func roleCanStartSex(role:String) -> bool:
+	var character = getRoleChar(role)
+	if(character == null):
+		return false
+	return character.canStartSex()
 
 func saveData():
 	var data = {

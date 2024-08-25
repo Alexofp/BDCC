@@ -30,10 +30,16 @@ func init_text():
 
 func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "rest"):
-		setState("after_rest", "inmate")
+		if(triggerRandomStocksEvent(4, 4, 0, 100)):
+			setState("", "inmate")
+		else:
+			setState("after_rest", "inmate")
 		getCharByRole("inmate").addStamina(50)
 	if(_id == "shout"):
-		setState("about_to_shout", "inmate")
+		if(triggerRandomStocksEvent(2, 2, 2, 100)):
+			setState("", "inmate")
+		else:
+			setState("about_to_shout", "inmate")
 	if(_id == "struggle"):
 		if(getRolePawn("inmate").isPlayer()):
 			runScene("StrugglingScene", [false, false])
@@ -239,6 +245,11 @@ func getAnimData() -> Array:
 	if(getState() in ["about_to_use", "after_use"]):
 		return [StageScene.StocksSexOral, "tease", {pc="inmate", npc="user"}]
 	return [StageScene.Stocks, "idle", {pc="inmate"}]
+
+func getActivityIconForRole(_role:String):
+	if(getPawnCount() > 1):
+		return RoomStuff.PawnActivity.Chat
+	return .getActivityIconForRole(_role)
 
 func saveData():
 	var data = .saveData()

@@ -16,14 +16,25 @@ func init_text():
 		addAction("stocks", "Stocks", "Lock them up in stocks!", "punishMean", 1.0, 60, {})
 	else:
 		addDisabledAction("Stocks", "They need to be wearing a collar for this!")
-	addAction("sex", "Sex", "Just have some fun with them!", "punish", 1.0, 60, {})
+	if(roleCanStartSex("punisher")):
+		addAction("sex", "Sex", "Just have some fun with them!", "sexDom", 1.0, 60, {})
+	else:
+		addDisabledAction("Sex", "You can't fuck them with your restraints..")
+	if(roleCanStartSex("target")):
+		addAction("sexsub", "Submit to", "Let them fuck you", "sexSub", 1.0, 60, {})
+	else:
+		addDisabledAction("Submit to", "They can't fuck you with their restraints..")
 	addAction("leave", "Leave", "Just leave", "justleave", 1.0, 30, {})
+
+	addDefeatButtons("punisher", "target")
 
 func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "stocks"):
 		setState("about_to_stocks", "punisher")
 	if(_id == "sex"):
 		setState("about_to_sex", "punisher")
+	if(_id == "sexsub"):
+		setState("about_to_subsex", "punisher")
 	if(_id == "leave"):
 		setState("just_leaving", "punisher")
 
@@ -47,6 +58,18 @@ func about_to_sex_text():
 	addAction("sex", "Sex", "Start the sex", "default", 1.0, 300, {start_sex=["punisher", "target"],})
 
 func about_to_sex_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "sex"):
+		var _result = getSexResult(_args)
+		setState("after_sex", "punisher")
+
+
+func about_to_subsex_text():
+	saynn("{punisher.name} submits to {target.you}..")
+	saynn("[say=punisher]DO WHATEVER YOU WANT WITH ME.[/say]")
+
+	addAction("sex", "Sex", "Start the sex", "default", 1.0, 300, {start_sex=["target", "punisher"],})
+
+func about_to_subsex_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "sex"):
 		var _result = getSexResult(_args)
 		setState("after_sex", "punisher")

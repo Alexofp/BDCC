@@ -3,6 +3,7 @@ extends PawnInteractionBase
 var chat = {}
 var lust = {}
 var chatAnswer = ""
+var surrendered = false
 
 func _init():
 	id = "Talking"
@@ -24,13 +25,25 @@ func init_text():
 		addAction("flirt", "Flirt", "Try to flirt with them", "flirt", 1.0, 30, {})
 	else:
 		addDisabledAction("Flirt", "They don't seem to be in a flirty mood..")
+	addAction("attack", "Attack", "Make them regret it!", "attack", 1.0, 30, {})
+	addAction("offersex", "Offer sex", "Offer to fuck them", "sexDom", 0.2, 60, {})
+	addAction("offerself", "Offer self", "Offer them to fuck you", "sexSub", 0.2, 60, {})
 	addAction("leave", "Leave", "Enough chatting around.", "justleave", 1.0, 30, {})
+
+	triggerTalkRunEvents("reacter")
 
 func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "chat"):
 		setState("chat_started", "starter")
 	if(_id == "flirt"):
 		setState("about_to_flirt", "starter")
+	if(_id == "attack"):
+		setState("about_to_fight", "reacter")
+		affectAffection("reacter", "starter", -0.5)
+	if(_id == "offersex"):
+		setState("offered_sex", "reacter")
+	if(_id == "offerself"):
+		setState("offered_self", "reacter")
 	if(_id == "leave"):
 		setState("about_to_leave", "starter")
 
@@ -163,6 +176,8 @@ func flirt_accepted_text():
 func flirt_accepted_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "continue"):
 		setState("", "starter")
+		getRolePawn("reacter").afterSocialInteraction()
+		getRolePawn("starter").afterSocialInteraction()
 
 
 func flirt_denied_text():
@@ -174,6 +189,8 @@ func flirt_denied_text():
 func flirt_denied_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "continue"):
 		setState("", "starter")
+		getRolePawn("reacter").afterSocialInteraction()
+		getRolePawn("starter").afterSocialInteraction()
 
 
 func flirt_flirted_text():
@@ -223,6 +240,162 @@ func flirt_reacted_do(_id:String, _args:Dictionary, _context:Dictionary):
 		setState("", "starter")
 
 
+func about_to_fight_text():
+	saynn("{starter.You} {starter.youVerb('attack')} {reacter.you}!")
+
+	addAction("fight", "Fight", "Fight back", "fight", 1.0, 300, {start_fight=["starter", "reacter"],})
+	addAction("surrender", "Surrender", "It's not worth it!", "surrender", 1.0, 60, {})
+
+func about_to_fight_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "fight"):
+		surrendered = false
+		var fightResult = getFightResult(_args)
+		
+		if(fightResult["won"]):
+			setState("starter_won", "starter")
+		else:
+			setState("reacter_won", "reacter")
+	if(_id == "surrender"):
+		surrendered = true
+		setState("starter_won", "starter")
+
+
+func starter_won_text():
+	if(!surrendered):
+		saynn("{starter.name} won the fight! {reacter.name} hits the floor, unable to continue fighting..")
+	else:
+		saynn("{reacter.name} decides to surrender instantly..")
+
+	addAction("punish", "Punish", "Have some fun!", "default", 1.0, 60, {})
+	addAction("leave", "Leave", "Just leave", "justleave", 1.0, 60, {})
+
+func starter_won_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "punish"):
+		startInteraction("PunishInteraction", {punisher=getRoleID("starter"), target=getRoleID("reacter")})
+	if(_id == "leave"):
+		setState("starter_won_leave", "starter")
+
+
+func starter_won_leave_text():
+	saynn("{starter.name} decides to leave {reacter.you} alone..")
+
+	addAction("leave", "Leave", "Time to go..", "default", 1.0, 60, {})
+
+func starter_won_leave_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "leave"):
+		stopMe()
+
+
+func reacter_won_text():
+	saynn("{reacter.name} won the fight! {starter.name} hits the floor, unable to continue fighting..")
+
+	addAction("punish", "Punish", "Punish them for attacking you!", "punish", 1.0, 60, {})
+	addAction("leave", "Leave", "Just leave", "surrender", 1.0, 60, {})
+
+func reacter_won_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "punish"):
+		startInteraction("PunishInteraction", {punisher=getRoleID("reacter"), target=getRoleID("starter")})
+	if(_id == "leave"):
+		setState("reacter_won_leave", "reacter")
+		affectAffection("starter", "reacter", 0.15)
+
+
+func reacter_won_leave_text():
+	saynn("{reacter.name} decides to leave {starter.you} alone..")
+
+	addAction("leave", "Leave", "Time to go..", "default", 1.0, 60, {})
+
+func reacter_won_leave_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "leave"):
+		stopMe()
+
+
+func offered_sex_text():
+	saynn("{starter.name} offers to fuck {reacter.you}..")
+	saynn("[say=starter]HEY, LETS FUCK![/say]")
+
+	addAction("agree", "Agree", "Let them fuck you!", "agreeSexAsSub", 1.0, 60, {})
+	addAction("deny", "Deny", "You'd rather not..", "default", 0.2, 60, {})
+
+func offered_sex_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "agree"):
+		setState("offered_sex_agreed", "starter")
+	if(_id == "deny"):
+		setState("offered_sex_deny", "starter")
+		affectAffection("starter", "reacter", -0.1)
+		getRolePawn("reacter").afterSocialInteraction()
+		getRolePawn("starter").afterSocialInteraction()
+
+
+func offered_sex_agreed_text():
+	saynn("[say=reacter]SURE, YOU CAN FUCK ME.[/say]")
+
+	addAction("sex", "Sex", "Time to fuck!", "default", 1.0, 600, {start_sex=["starter", "reacter"],})
+
+func offered_sex_agreed_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "sex"):
+		var _result = getSexResult(_args)
+		setState("after_sex", "starter")
+
+
+func offered_sex_deny_text():
+	saynn("[say=reacter]I'D RATHER NOT.[/say]")
+
+	addAction("continue", "Continue", "Oh well..", "default", 1.0, 60, {})
+
+func offered_sex_deny_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		setState("", "starter")
+
+
+func offered_self_text():
+	saynn("{starter.name} offers {reacter.you} to fuck {starter.him}.")
+	saynn("[say=starter]WANNA FUCK ME MAYBE?[/say]")
+
+	addAction("agree", "Agree", "Agree to fuck them", "agreeSexAsDom", 1.0, 60, {})
+	addAction("deny", "Deny", "You'd rather not..", "default", 0.2, 60, {})
+
+func offered_self_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "agree"):
+		setState("offered_self_agreed", "starter")
+	if(_id == "deny"):
+		setState("offered_self_deny", "starter")
+		affectAffection("starter", "reacter", -0.1)
+		getRolePawn("reacter").afterSocialInteraction()
+		getRolePawn("starter").afterSocialInteraction()
+
+
+func offered_self_agreed_text():
+	saynn("[say=reacter]SURE, I CAN FUCK YOU.[/say]")
+
+	addAction("sex", "Sex", "Time to fuck!", "default", 1.0, 600, {start_sex=["reacter", "starter"],})
+
+func offered_self_agreed_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "sex"):
+		var _result = getSexResult(_args)
+		setState("after_sex", "starter")
+
+
+func offered_self_deny_text():
+	saynn("[say=reacter]I'D RATHER NOT.[/say]")
+
+	addAction("continue", "Continue", "Oh well..", "default", 1.0, 60, {})
+
+func offered_self_deny_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		setState("", "starter")
+
+
+func after_sex_text():
+	saynn("After that sex, it was time to go your separate ways..")
+
+	addAction("continue", "Continue", "", "default", 1.0, 60, {})
+
+func after_sex_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		stopMe()
+
+
 func shouldShowBigButtons() -> bool:
 	if((getState() in ["chat_started"]) && isPlayersTurn()):
 		return true
@@ -240,6 +413,7 @@ func saveData():
 	data["chat"] = chat
 	data["lust"] = lust
 	data["chatAnswer"] = chatAnswer
+	data["surrendered"] = surrendered
 	return data
 
 func loadData(_data):
@@ -248,4 +422,5 @@ func loadData(_data):
 	chat = SAVE.loadVar(_data, "chat", {})
 	lust = SAVE.loadVar(_data, "lust", {})
 	chatAnswer = SAVE.loadVar(_data, "chatAnswer", "")
+	surrendered = SAVE.loadVar(_data, "surrendered", false)
 

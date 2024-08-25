@@ -18,6 +18,7 @@ var fightExhaustion:float = 0.0
 const hungerPerHour:float = 0.2
 const socialPerHour:float = 0.5
 const angerPerHour:float = 0.1
+const fightExhaustionPerHour:float = 2.0
 
 func saveData():
 	var data = {
@@ -70,6 +71,7 @@ func setLocation(newLoc:String):
 func processTime(_howMuch:int):
 	hunger += float(_howMuch) * hungerPerHour / 3600.0
 	social += float(_howMuch) * socialPerHour / 3600.0
+	recoverExhaustion(float(_howMuch) * fightExhaustionPerHour / 3600.0)
 	
 	# anger
 	var meanness:float = scorePersonality({PersonalityStat.Mean: 1.0})
@@ -328,10 +330,13 @@ func getPawnColor() -> Color:
 	return Color.pink
 
 func afterLostFight():
-	satisfyAnger()
+	if(anger > 0.5):
+		satisfyAnger()
+	else:
+		addAnger(1.0)
 	if(isPlayer()):
 		return
-	#fightExhaustion = 1.0
+	fightExhaustion = 1.0
 
 func afterWonFight():
 	satisfyAnger()

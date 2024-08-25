@@ -92,35 +92,15 @@ func inmate_won_text():
 		saynn("{guard.name} changes {guard.his} mind at the last second and decides to surrender!")
 
 	addAction("leave", "Leave", "Just leave while you can", "justleave", 1.0, 30, {})
-	addAction("sex", "Sex!", "Fuck them first", "sexDom", 1.0, 600, {start_sex=["inmate", "guard"],})
-	addAction("sexSub", "Submit to", "Let them fuck you", "sexSub", 1.0, 600, {start_sex=["guard", "inmate"],})
-	addAction("punish", "Punish", "Find a way to punish them", "punishMean", 0.5, 30, {})
+	addAction("punish", "Punish", "Find a way to punish them", "punishMean", 1.0, 30, {})
 
 	addDefeatButtons("inmate", "guard")
 
 func inmate_won_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "leave"):
 		setState("about_to_leave", "inmate")
-	if(_id == "sex"):
-		var _sexResult = getSexResult(_args)
-		makeRoleExhausted("guard")
-		stopMe()
-	if(_id == "sexSub"):
-		var _sexResult = getSexResult(_args)
-		setState("after_sub_sex", "inmate")
 	if(_id == "punish"):
 		startInteraction("PunishInteraction", {punisher=getRoleID("inmate"), target=getRoleID("guard")})
-
-
-func after_sub_sex_text():
-	saynn("The sex has ended..")
-
-	addAction("leave", "Leave", "Time to go..", "default", 1.0, 30, {})
-
-func after_sub_sex_do(_id:String, _args:Dictionary, _context:Dictionary):
-	if(_id == "leave"):
-		makeRoleExhausted("guard")
-		stopMe()
 
 
 func about_to_leave_text():

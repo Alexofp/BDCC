@@ -780,8 +780,9 @@ func _react(_action: String, _args):
 
 	if(_action == "startStocks"):
 		GM.pc.removeAllRestraints()
-		runScene("StocksPunishmentScene")
+		#runScene("StocksPunishmentScene")
 		endScene()
+		GM.main.IS.startInteraction("InStocks", {inmate="pc"})
 		return
 		
 	if(_action in ["surrender", "after_seduced"]):

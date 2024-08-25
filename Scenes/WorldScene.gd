@@ -211,8 +211,8 @@ func runInteraction():
 		for action in textAndActions[1]:
 			if(action.has("disabled") && action["disabled"]):
 				addDisabledButton(action["name"], action["desc"])
-			elif(action.has("start_sex") && action["start_sex"].size() > 0 && action["start_sex"][0] == "pc"):
-				addButtonWithChecks(action["name"], action["desc"], "pick_interaction_action", [interaction, action], [[ButtonChecks.CanStartSex]])
+			#elif(action.has("start_sex") && action["start_sex"].size() > 0 && action["start_sex"][0] == "pc"):
+			#	addButtonWithChecks(action["name"], action["desc"], "pick_interaction_action", [interaction, action], [[ButtonChecks.CanStartSex]])
 			else:
 				addButton(action["name"], action["desc"], "pick_interaction_action", [interaction, action])
 	else:

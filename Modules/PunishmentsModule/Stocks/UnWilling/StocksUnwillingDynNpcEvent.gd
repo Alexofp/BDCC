@@ -28,4 +28,4 @@ func react(_triggerID, _args):
 	return true
 
 func getPriority():
-	return 50
+	return 0 # disabled
