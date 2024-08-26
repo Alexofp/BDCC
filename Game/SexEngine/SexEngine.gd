@@ -17,13 +17,17 @@ var sexResult = {}
 
 var sexType:SexTypeBase
 
-func initSexType(theSexType, args = {}):
+func initSexType(theSexType, args:Dictionary = {}):
 	if(theSexType is String):
 		theSexType = GlobalRegistry.createSexType(theSexType)
 	if(theSexType == null):
 		sexType = GlobalRegistry.createSexType(SexType.DefaultSex)
 	else:
 		sexType = theSexType
+		
+	if(args.has("unconscious") && args["unconscious"]):
+		for subID in subs:
+			getSubInfo(subID).getChar().addConsciousness(-1.0)
 		
 	if(sexType != null):
 		sexType.setSexEngine(self)
@@ -1058,6 +1062,7 @@ func endSex():
 			"averageResistance": subInfo.getAverageResistance(),
 			"averageFear": subInfo.getAverageFear(),
 			"satisfaction": subInfo.calculateFinalSatisfaction(),
+			"isUnconscious": subInfo.isUnconscious(),
 		}
 	
 	sexEnded = true

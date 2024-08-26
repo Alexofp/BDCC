@@ -99,7 +99,7 @@ func _run():
 		addButton("Gender", "Pick your gender", "pickgender")
 		addButton("Pronouns", "Pick your pronouns", "pickpronouns")
 		addButton("Encounters", "Info about your previous encounters", "encountersMenu")
-		addButton("Look for trouble", "Try to find an encounter", "lookfortrouble")
+		#addButton("Look for trouble", "Try to find an encounter", "lookfortrouble")
 		if(!getFlag("Game_PickedStartingPerks", false)):
 			addButton("Pick Perks!", "Pick your starting perks. You can only do this once", "pickstartingperks")
 		#addButton("[debug] Struggle", "Test the struggle minigame", "teststruggle")

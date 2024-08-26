@@ -226,11 +226,11 @@ func startInteractionFight(who:String, withWho:String):
 	else:
 		runScene("FightScene", [who], "interaction_fight_pcdef")
 
-func startInteractionSex(domID:String, subID:String, sexType = SexType.DefaultSex):
+func startInteractionSex(domID:String, subID:String, sexType = SexType.DefaultSex, extraParams:Dictionary = {}):
 	if(domID != "pc"):
 		getCharacter(domID).prepareForSexAsDom()
 		GlobalRegistry.getCharacter(domID).addPain(-50)
-	runScene("GenericSexScene", [domID, subID, sexType], "interaction_sex")
+	runScene("GenericSexScene", [domID, subID, sexType, extraParams], "interaction_sex")
 
 func sendStatusToInteraction(_result):
 	var pawn:CharacterPawn = GM.main.IS.getPawn("pc")

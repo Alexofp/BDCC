@@ -160,7 +160,7 @@ roomID = "main_yard_connector"
 roomDescription = "A corridor connecting the main hall and the prison yard. Two large cargo bulkheads are permanently locked open on both ends, with a large dirty metal ramp leading down and out into the yard."
 population = 3
 
-[node name="MainHallRoom48" parent="." index="16" instance=ExtResource( 2 )]
+[node name="MainHallRoom48" parent="." index="16" groups=["zone_yardpatrol"] instance=ExtResource( 2 )]
 position = Vector2( 128, 448 )
 roomName = "Stairs"
 roomID = "yard_stars_green"
@@ -226,7 +226,7 @@ roomDescription = "This side area swings down and around the greenhouse above, a
 roomColor = 1
 population = 1
 
-[node name="MainHallRoom42" parent="." index="24" instance=ExtResource( 2 )]
+[node name="MainHallRoom42" parent="." index="24" groups=["zone_yardpatrol"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 64, 640 )
 roomName = "Prison Yard"
@@ -255,7 +255,7 @@ A spot like this is particularly nice, it sits the farest out from the main yard
 roomColor = 1
 population = 1
 
-[node name="MainHallRoom45" parent="." index="27" instance=ExtResource( 2 )]
+[node name="MainHallRoom45" parent="." index="27" groups=["zone_yardpatrol"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( -64, 640 )
 roomName = "Prison Yard"
@@ -265,7 +265,7 @@ canWest = false
 roomColor = 1
 population = 1
 
-[node name="MainHallRoom46" parent="." index="28" instance=ExtResource( 2 )]
+[node name="MainHallRoom46" parent="." index="28" groups=["zone_yardpatrol"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 256, 576 )
 roomName = "Prison Yard"
@@ -276,7 +276,7 @@ This is where the side yard ends, pushed up against the greenhouse above."
 roomColor = 1
 population = 1
 
-[node name="MainHallRoom47" parent="." index="29" instance=ExtResource( 2 )]
+[node name="MainHallRoom47" parent="." index="29" groups=["zone_yardpatrol"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( -128, 448 )
 roomName = "Prison Yard"
@@ -536,7 +536,7 @@ roomID = "main_stairs_e"
 roomDescription = "The platform here has tall railings on the sides and benches facing inwards to watch whatever inmates are being punished."
 population = 3
 
-[node name="MainVendomatRoom" parent="." index="52" instance=ExtResource( 2 )]
+[node name="MainVendomatRoom" parent="." index="52" groups=["zone_mainpatrol"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -128, 64 )
 roomName = "Main hall"
@@ -584,7 +584,7 @@ roomDescription = "A very spacious hall with a huge raised platform in the middl
 roomColor = 8
 population = 3
 
-[node name="MainHallRoom50" parent="." index="57" instance=ExtResource( 2 )]
+[node name="MainHallRoom50" parent="." index="57" groups=["zone_mainpatrol"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -128, 320 )
 roomName = "Main hall"
@@ -593,7 +593,7 @@ roomDescription = "The corners of the main hall contain an open and barebones co
 roomColor = 8
 population = 3
 
-[node name="MainHallRoom51" parent="." index="58" instance=ExtResource( 2 )]
+[node name="MainHallRoom51" parent="." index="58" groups=["zone_mainpatrol"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, 320 )
 roomName = "Main hall"
@@ -624,7 +624,7 @@ The cafeteria has been carved out to the west of here."
 roomColor = 8
 population = 3
 
-[node name="MainHallRoom17" parent="." index="61" instance=ExtResource( 2 )]
+[node name="MainHallRoom17" parent="." index="61" groups=["zone_mainpatrol"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, 64 )
 roomName = "Main hall"

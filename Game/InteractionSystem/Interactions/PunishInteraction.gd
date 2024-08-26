@@ -12,10 +12,10 @@ func init_text():
 	saynn("{punisher.name} looms over {target.you}.")
 	sayLine("punisher", "PunishDecide", {punisher="punisher", target="target"})
 
-	if(getRoleChar("target").getInventory().hasEquippedItemWithTag(ItemTag.AllowsEnslaving)):
-		addAction("stocks", "Stocks", "Lock them up in stocks!", "punishMean", 1.0, 60, {})
+	if(getRoleChar("target").getInventory().hasEquippedItemWithTag(ItemTag.AllowsEnslaving) && canGetToStocks()):
+		addAction("stocks", "Stocks", "Lock them up in stocks!", "punishMean", 1.0 * getStocksScoreMult(), 60, {})
 	else:
-		addDisabledAction("Stocks", "They need to be wearing a collar for this!")
+		addDisabledAction("Stocks", ""+("They need to be wearing a collar for this!" if canGetToStocks() else "Stocks are too far..")+"")
 	if(roleCanStartSex("punisher")):
 		addAction("sex", "Sex", "Just have some fun with them!", "sexDom", 1.0, 60, {})
 	else:
@@ -59,7 +59,7 @@ func about_to_sex_text():
 
 func about_to_sex_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "sex"):
-		var _result = getSexResult(_args)
+		var _result = getSexResult(_args, true)
 		setState("after_sex", "punisher")
 
 
@@ -71,7 +71,7 @@ func about_to_subsex_text():
 
 func about_to_subsex_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "sex"):
-		var _result = getSexResult(_args)
+		var _result = getSexResult(_args, true)
 		setState("after_sex", "punisher")
 
 

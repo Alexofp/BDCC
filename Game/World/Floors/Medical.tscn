@@ -16,7 +16,7 @@ Either side of the lobby, there are two very secure airlocks that you’re not o
 "
 population = 3
 
-[node name="MedRoom2" parent="." index="1" instance=ExtResource( 2 )]
+[node name="MedRoom2" parent="." index="1" groups=["zone_medlobby"] instance=ExtResource( 2 )]
 position = Vector2( -64, 0 )
 roomName = "Med Lobby"
 roomID = "MedRoom2"
@@ -27,7 +27,7 @@ Either side of the lobby, there are two very secure airlocks that you’re not o
 roomSprite = 6
 population = 3
 
-[node name="MedRoom3" parent="." index="2" instance=ExtResource( 2 )]
+[node name="MedRoom3" parent="." index="2" groups=["zone_medlobby"] instance=ExtResource( 2 )]
 position = Vector2( 64, 0 )
 roomName = "Med Lobby"
 roomID = "med_lobbyse"
@@ -53,7 +53,7 @@ Eliza Quinn’s usual spot is here, marked with a little name placard.
 roomSprite = 1
 population = 3
 
-[node name="MedRoom5" parent="." index="4" instance=ExtResource( 2 )]
+[node name="MedRoom5" parent="." index="4" groups=["zone_medlobby"] instance=ExtResource( 2 )]
 position = Vector2( 64, -64 )
 roomName = "Med Lobby"
 roomID = "med_lobbyne"
@@ -66,7 +66,7 @@ The lobby reception counters are here if you need something, the few nurses here
 canEast = false
 population = 3
 
-[node name="MedRoom6" parent="." index="5" instance=ExtResource( 2 )]
+[node name="MedRoom6" parent="." index="5" groups=["zone_medlobby"] instance=ExtResource( 2 )]
 position = Vector2( -64, -64 )
 roomName = "Med Lobby"
 roomID = "med_lobbynw"
@@ -78,7 +78,7 @@ The lobby reception counters are here if you need something, the few nurses here
 canWest = false
 population = 3
 
-[node name="MedNursery" parent="." index="6" instance=ExtResource( 2 )]
+[node name="MedNursery" parent="." index="6" groups=["zone_medlobby"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 128, 0 )
 roomName = "Nursery"
@@ -137,7 +137,7 @@ roomDescription = "You stand in a wide white corridor, it looks pretty long, eve
 Going further into medical will draw suspicion from here, away from the more popular or dedicated prisoner rooms."
 population = 2
 
-[node name="MedRoom11" parent="." index="12" instance=ExtResource( 2 )]
+[node name="MedRoom11" parent="." index="12" groups=["zone_medpatrol"] instance=ExtResource( 2 )]
 position = Vector2( 128, -256 )
 roomName = "Med Floor Corridor"
 roomID = "med_corridor1"
@@ -224,7 +224,7 @@ gridColor = 2
 loctag_MentalWard = true
 population = 2
 
-[node name="MedRoom25" parent="." index="20" instance=ExtResource( 2 )]
+[node name="MedRoom25" parent="." index="20" groups=["zone_medpatrol"] instance=ExtResource( 2 )]
 position = Vector2( 128, -448 )
 roomName = "Med Floor Corridor"
 roomID = "med_corridor16"
@@ -244,7 +244,7 @@ gridColor = 2
 loctag_MentalWard = true
 population = 2
 
-[node name="MedRoom27" parent="." index="22" instance=ExtResource( 2 )]
+[node name="MedRoom27" parent="." index="22" groups=["zone_medpatrol"] instance=ExtResource( 2 )]
 position = Vector2( 128, -576 )
 roomName = "Med Floor Corridor"
 roomID = "med_corridor14"
@@ -260,9 +260,10 @@ roomID = "medical_hospitalwards"
 roomDescription = "This is one of the hospital rooms. The rows of medical beds currently sits empty, free of any patients. With it empty, the lights are dimmed and all the equipment is missing or turned off, but clean and ready to be used. Seems rather boring though, with a lone decorative plant the only thing of interest. 
 
 If you or anyone you know ends up really bad, they’ll probably end up here."
+loctag_Offlimits = true
 population = 2
 
-[node name="MedRoom28" parent="." index="24" instance=ExtResource( 2 )]
+[node name="MedRoom28" parent="." index="24" groups=["zone_medpatrol"] instance=ExtResource( 2 )]
 position = Vector2( -128, -448 )
 roomName = "Med Floor Corridor"
 roomID = "med_corridor10"
@@ -282,16 +283,17 @@ gridColor = 2
 loctag_MentalWard = true
 population = 2
 
-[node name="MedRoom45" parent="." index="26" instance=ExtResource( 2 )]
+[node name="MedRoom45" parent="." index="26" groups=["zone_medpatrol"] instance=ExtResource( 2 )]
 position = Vector2( -192, -512 )
 roomName = "Medical Storage"
 roomID = "medical_storage"
 roomDescription = "You enter a room with a lot of storage cabinets and special types of freezers. It seems this is the room where they keep their equipment and drugs"
 roomSprite = 4
 gridColor = 2
+loctag_Offlimits = true
 population = 2
 
-[node name="MedRoom30" parent="." index="27" instance=ExtResource( 2 )]
+[node name="MedRoom30" parent="." index="27" groups=["zone_medpatrol"] instance=ExtResource( 2 )]
 position = Vector2( -128, -576 )
 roomName = "Med Floor Corridor"
 roomID = "med_corridor11"
@@ -380,6 +382,7 @@ roomName = "Med Shower"
 roomID = "medical_shower2"
 roomDescription = "You enter the medical wing shower room. It’s pretty spacious here, the bleak gray design and fixed shower heads show that it’s clearly made for patients rather than staff. There’s hooks in the walls and floors to restrain the rather more violent inmates."
 roomSprite = 7
+loctag_Offlimits = true
 
 [node name="MedRoom51" parent="." index="37" instance=ExtResource( 2 )]
 position = Vector2( -320, -320 )
@@ -387,6 +390,7 @@ roomName = "Med Shower"
 roomID = "medical_shower"
 roomDescription = "You enter the medical wing shower room. It’s pretty spacious here, the bleak gray design and fixed shower heads show that it’s clearly made for patients rather than staff. There’s hooks in the walls and floors to restrain the rather more violent inmates."
 roomSprite = 7
+loctag_Offlimits = true
 
 [node name="MedRoom52" parent="." index="38" instance=ExtResource( 2 )]
 position = Vector2( -320, -256 )
@@ -394,8 +398,9 @@ roomName = "Med Shower"
 roomID = "medical_shower3"
 roomDescription = "You enter the medical wing shower room. It’s pretty spacious here, the bleak gray design and fixed shower heads show that it’s clearly made for patients rather than staff. There’s hooks in the walls and floors to restrain the rather more violent inmates."
 roomSprite = 7
+loctag_Offlimits = true
 
-[node name="MedRoom48" parent="." index="39" instance=ExtResource( 2 )]
+[node name="MedRoom48" parent="." index="39" groups=["zone_medpatrol"] instance=ExtResource( 2 )]
 position = Vector2( -256, -320 )
 roomName = "Med Floor Corridor"
 roomID = "med_nearshower"
@@ -423,8 +428,9 @@ blindRoomDescription = "You have no idea where you are but the walls and the flo
 canWest = false
 canNorth = false
 canSouth = false
+loctag_Offlimits = true
 
-[node name="MedRoom35" parent="." index="42" instance=ExtResource( 2 )]
+[node name="MedRoom35" parent="." index="42" groups=["zone_medpatrol"] instance=ExtResource( 2 )]
 position = Vector2( 320, -384 )
 roomName = "Mental Ward"
 roomID = "med_mental2"
@@ -460,7 +466,7 @@ gridColor = 2
 loctag_MentalWard = true
 population = 2
 
-[node name="MedRoom37" parent="." index="46" instance=ExtResource( 2 )]
+[node name="MedRoom37" parent="." index="46" groups=["zone_medpatrol"] instance=ExtResource( 2 )]
 position = Vector2( 320, -256 )
 roomName = "Mental Ward"
 roomID = "med_mental1"
@@ -478,6 +484,7 @@ blindRoomDescription = "You have no idea where you are but the walls and the flo
 canWest = false
 canNorth = false
 canSouth = false
+loctag_Offlimits = true
 
 [node name="MedRoom39" parent="." index="48" instance=ExtResource( 2 )]
 position = Vector2( 256, -256 )
@@ -488,6 +495,7 @@ blindRoomDescription = "You have no idea where you are but the walls and the flo
 canWest = false
 canNorth = false
 canSouth = false
+loctag_Offlimits = true
 
 [node name="MedRoom15" parent="." index="49" instance=ExtResource( 2 )]
 position = Vector2( -64, -320 )
@@ -508,7 +516,7 @@ gridColor = 2
 loctag_MentalWard = true
 population = 2
 
-[node name="MedRoom17" parent="." index="51" instance=ExtResource( 2 )]
+[node name="MedRoom17" parent="." index="51" groups=["zone_medpatrol"] instance=ExtResource( 2 )]
 position = Vector2( -128, -256 )
 roomName = "Med Floor Corridor"
 roomID = "med_corridor6"

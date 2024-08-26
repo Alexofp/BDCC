@@ -17,12 +17,13 @@ var pawnDistribution = {
 	}
 
 func getMaxPawnCount() -> int:
-	return 20
+	return 30
 
 func TEST_DELETE_ME():
-	spawnPawn("pc")
-	spawnPawn(RNG.pick(GM.main.dynamicCharacters))
-	spawnPawn(RNG.pick(GM.main.dynamicCharacters))
+	#spawnPawn("pc")
+	#spawnPawn(RNG.pick(GM.main.dynamicCharacters))
+	#spawnPawn(RNG.pick(GM.main.dynamicCharacters))
+	pass
 
 func _init():
 	for taskID in GlobalRegistry.getGlobalTasks():
@@ -294,8 +295,14 @@ func getInteractionsAt(loc:String) -> Array:
 	
 	return result
 
-func getInteractionsThatNeedToProcessed() -> Array:
-	return []
+func getInteractionsOfTypeAmount(id:String) -> int:
+	var result:int = 0
+	for interaction in interactions:
+		if(interaction.wasDeleted):
+			continue
+		if(interaction.id == id):
+			result += 1
+	return result
 
 # slow
 func rebuildPawnsByLoc():
@@ -401,8 +408,11 @@ func getPawnCount() -> int:
 func getPawnDistribution() -> Dictionary:
 	return pawnDistribution
 
-func trySpawnPawn():
-	var randomCharType = RNG.pickWeightedDict(pawnDistribution)
+func trySpawnPawn(specificCharType = null):
+	var randomCharType = specificCharType
+	if(randomCharType == null):
+		randomCharType = RNG.pickWeightedDict(pawnDistribution)
+		
 	
 	var pool := ""
 	if(randomCharType == CharacterType.Inmate):
@@ -418,13 +428,11 @@ func trySpawnPawn():
 		return false
 	
 	var possibleCharIds:Array = GM.main.getDynamicCharacterIDsFromPool(pool)
-	if(possibleCharIds.size() <= 0):
-		return false
 	
 	var chanceMeetOld = NpcFinder.chanceToMeetOldNPC(pool)
 	
 	var tryCount:int = 10
-	if(RNG.chance(chanceMeetOld)):
+	if(RNG.chance(chanceMeetOld) || possibleCharIds.size() <= 0):
 		tryCount = 0
 	while(tryCount > 0):
 		tryCount -= 1
@@ -446,13 +454,13 @@ func trySpawnPawn():
 	var genID:String = ""
 	var generator = null
 	
-	if(pool == CharacterType.Inmate):
+	if(randomCharType == CharacterType.Inmate):
 		generator = InmateGenerator.new()
-	elif(pool == CharacterType.Guard):
+	elif(randomCharType == CharacterType.Guard):
 		generator = GuardGenerator.new()
-	elif(pool == CharacterType.Nurse):
+	elif(randomCharType == CharacterType.Nurse):
 		generator = NurseGenerator.new()
-	elif(pool == CharacterType.Engineer):
+	elif(randomCharType == CharacterType.Engineer):
 		generator = EngineerGenerator.new()
 	
 	if(generator != null):
@@ -474,8 +482,16 @@ func spawnMorningWave():
 	howManyToSpawnF *= RNG.randf_range(0.7, 0.9)
 	var howManyToSpawn:int = int(howManyToSpawnF)
 	
-	for _i in range(howManyToSpawn):
-		trySpawnPawn()
+	var totalDistAm:float = 0
+	for charType in pawnDistribution:
+		totalDistAm += pawnDistribution[charType]
+	
+	for charType in pawnDistribution:
+		var share:float = float(pawnDistribution[charType]) / totalDistAm
+		var am:int = int(round(share * howManyToSpawn))
+		
+		for _i in range(am):
+			trySpawnPawn(charType)
 	
 	#print("THERE ARE NOW "+str(getPawnCount())+" PAWNS")
 	processAllPawnsNoInteractions(60*RNG.randi_range(150,170))

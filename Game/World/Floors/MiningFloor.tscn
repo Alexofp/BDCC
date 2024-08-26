@@ -7,7 +7,7 @@
 [node name="MiningFloor" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 
-[node name="MiningRoom" parent="." index="0" instance=ExtResource( 2 )]
+[node name="MiningRoom" parent="." index="0" groups=["zone_engpatrol"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 roomName = "Mineshafts"
 roomID = "mining_nearentrance"
@@ -49,7 +49,7 @@ A thick metal pneumatic door blocks your way further inside, with a keypad await
 roomColor = 6
 population = 2
 
-[node name="MiningRoom6" parent="." index="4" instance=ExtResource( 2 )]
+[node name="MiningRoom6" parent="." index="4" groups=["zone_engpatrol"] instance=ExtResource( 2 )]
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -256, 0 )
 roomName = "Engineering bay"
@@ -123,7 +123,7 @@ gridColor = 5
 loctag_EngineersEncounter = true
 population = 2
 
-[node name="MiningRoom17" parent="." index="9" instance=ExtResource( 2 )]
+[node name="MiningRoom17" parent="." index="9" groups=["zone_engpatrol"] instance=ExtResource( 2 )]
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -576, 0 )
 roomName = "Engineering bay"
@@ -161,6 +161,7 @@ At least the stars are kinda nice."
 roomSprite = 5
 roomColor = 6
 gridColor = 5
+loctag_Offlimits = true
 
 [node name="MiningRoom20" parent="." index="12" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 1, 0.7, 1 )
@@ -172,6 +173,7 @@ roomDescription = "This room seems to be some kind of assembly lab. The first th
 You take a closer look at the projects that they are developing here. Some kind of androids? Hard to tell but you see remains of unfinished bodies, legs, heads of different species."
 roomColor = 6
 gridColor = 5
+loctag_Offlimits = true
 population = 2
 lootable = true
 lootCredits = 2
@@ -201,7 +203,7 @@ gridColor = 5
 loctag_EngineersEncounter = true
 population = 2
 
-[node name="MiningRoom29" parent="." index="15" instance=ExtResource( 2 )]
+[node name="MiningRoom29" parent="." index="15" groups=["zone_engpatrol"] instance=ExtResource( 2 )]
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -384, 320 )
 roomName = "Engineering bay"
@@ -212,6 +214,7 @@ Wires and cables hung up on walls and support struts lead further east to somewh
 There is a warmth in the air coming from the south, the door it’s coming from locked open with an air vent absorbing what it can. Seems like you can both reach and fit into the air vent. From your guess, it leads back to the entrance."
 roomColor = 6
 gridColor = 5
+loctag_Offlimits = true
 population = 2
 
 [node name="MiningRoom30" parent="." index="16" instance=ExtResource( 2 )]
@@ -222,6 +225,7 @@ roomID = "eng_controlroom"
 roomDescription = "This tiny little room is full of all sorts of cables and server equipment. The warmth gets hotter as you enter and the only real light in here is coming from a computer monitor on the far end of the room."
 roomColor = 6
 gridColor = 5
+loctag_Offlimits = true
 
 [node name="MiningRoom21" parent="." index="17" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 1, 0.7, 1 )
@@ -248,7 +252,7 @@ gridColor = 5
 loctag_EngineersEncounter = true
 population = 2
 
-[node name="MiningRoom23" parent="." index="19" instance=ExtResource( 2 )]
+[node name="MiningRoom23" parent="." index="19" groups=["zone_engpatrol"] instance=ExtResource( 2 )]
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -640, 128 )
 roomName = "Engineering Bay Storage"
@@ -257,6 +261,7 @@ roomDescription = "You notice rows of metallic shelves stacked with tools and eq
 roomSprite = 4
 roomColor = 6
 gridColor = 5
+loctag_Offlimits = true
 population = 2
 lootable = true
 lootTableId = "engineer"
@@ -295,6 +300,7 @@ roomDescription = "An abandoned robotics lab"
 roomSprite = 4
 roomColor = 6
 gridColor = 5
+loctag_Offlimits = true
 population = 2
 
 [node name="MiningRoom8" parent="." index="23" instance=ExtResource( 2 )]
@@ -308,6 +314,7 @@ The vending machines won’t take your worthless Inmate Work Credits, sadly."
 canEast = false
 roomColor = 6
 gridColor = 5
+loctag_Offlimits = true
 population = 2
 
 [node name="MiningRoom9" parent="." index="24" instance=ExtResource( 2 )]
@@ -321,7 +328,7 @@ gridColor = 5
 loctag_EngineersEncounter = true
 population = 2
 
-[node name="MiningRoom10" parent="." index="25" instance=ExtResource( 2 )]
+[node name="MiningRoom10" parent="." index="25" groups=["zone_engpatrol"] instance=ExtResource( 2 )]
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -384, -128 )
 roomName = "Engineering bay"
@@ -329,6 +336,7 @@ roomID = "eng_corridor_blue2"
 roomDescription = "The size of this cave shrinks down to a narrow tunnel as you continue down it. This tunnel is really only able to fit you and the catwalk you're standing on. The slight rattling sounds of your footsteps on the catwalks and the light poles are the only thing to accompany you."
 roomColor = 6
 gridColor = 5
+loctag_Offlimits = true
 population = 2
 
 [node name="MiningRoom11" parent="." index="26" instance=ExtResource( 2 )]
@@ -339,6 +347,7 @@ roomID = "eng_corridor_blue3"
 roomDescription = "The claustrophobic tunnel continues further down to a bend off to the west. Despite the size, the sounds of heavy machinery reverb through the tunnels’ walls here."
 roomColor = 6
 gridColor = 5
+loctag_Offlimits = true
 population = 2
 
 [node name="MiningRoom14" parent="." index="27" instance=ExtResource( 2 )]
@@ -350,6 +359,7 @@ roomDescription = "This is where the tunnel ends. Before you is the outside of a
 A number of safety and maintenance check-up clipboards hang on the railing of the catwalk, with the one labeled \"Emergency Singularity Ejector\" being the one stamped the most out of the rest."
 roomColor = 6
 gridColor = 5
+loctag_Offlimits = true
 
 [node name="MiningRoom15" parent="." index="28" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 0.6, 0.6, 1 )
@@ -361,9 +371,10 @@ canEast = false
 roomSprite = 4
 roomColor = 2
 gridColor = 5
+loctag_Offlimits = true
 population = 2
 
-[node name="MiningRoom5" parent="." index="29" instance=ExtResource( 2 )]
+[node name="MiningRoom5" parent="." index="29" groups=["zone_engpatrol"] instance=ExtResource( 2 )]
 self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -192, 64 )
 roomName = "Workshop"
@@ -385,7 +396,7 @@ roomID = "mining_taviroom"
 roomDescription = "A decrepit storage room of all sorts of dusty crates, scrap electronics, and broken mining equipment. Everywhere you look, it all seems somehow beyond worthless."
 roomColor = 8
 
-[node name="MiningShafts" parent="." index="31" instance=ExtResource( 2 )]
+[node name="MiningShafts" parent="." index="31" groups=["zone_engpatrol"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 0, -64 )
 roomName = "Mineshafts"

@@ -170,6 +170,10 @@ func afterSocialInteraction():
 	else:
 		social *= 0.5
 
+func afterFailedSocialInteraction():
+	afterSocialInteraction()
+	addAnger(RNG.randf_rangeX2(0.2, 0.4))
+
 func getAnger() -> float:
 	return anger
 
@@ -294,6 +298,9 @@ func isNurse() -> bool:
 func isEngineer() -> bool:
 	return getCharType() == CharacterType.Engineer
 
+func isStaff() -> bool:
+	return isGuard() || isNurse() || isEngineer()
+
 func isLilac() -> bool:
 	return isInmate() && getChar().getInmateType() == InmateType.SexDeviant
 
@@ -325,7 +332,7 @@ func getPawnColor() -> Color:
 	if(isNurse()):
 		return Color.yellowgreen
 	if(isEngineer()):
-		return Color.orangered
+		return Color.yellow
 	
 	return Color.pink
 

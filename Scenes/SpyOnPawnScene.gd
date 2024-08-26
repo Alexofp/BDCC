@@ -66,8 +66,8 @@ func isSpyingOnInteractionsWith(_charID:String):
 		return true
 	return false
 
-func startInteractionSex(domID:String, subID:String, sexType = SexType.DefaultSex):
-	runScene("GenericSexScene", [domID, subID, sexType], "interaction_sex")
+func startInteractionSex(domID:String, subID:String, sexType = SexType.DefaultSex, extraParams:Dictionary = {}):
+	runScene("GenericSexScene", [domID, subID, sexType, extraParams], "interaction_sex")
 
 func sendStatusToInteraction(_result):
 	var pawn:CharacterPawn = GM.main.IS.getPawn(pawnID)

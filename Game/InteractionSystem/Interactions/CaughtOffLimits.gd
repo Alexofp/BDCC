@@ -16,16 +16,16 @@ func shouldRunOnMeet(_pawn1, _pawn2, _pawn2Moved:bool):
 	if(!_pawn1.canBeInterrupted() || !_pawn2.canBeInterrupted()):
 		return [false]
 		
-	if(_pawn2.isGuard() && _pawn1.isInmate()):
+	if(_pawn2.isStaff() && _pawn1.isInmate()):
 		var pawnTemp = _pawn1
 		_pawn1 = _pawn2
 		_pawn2 = pawnTemp
 	
-	if(_pawn1.isGuard() && _pawn2.isInmate()):
+	if(_pawn1.isStaff() && _pawn2.isInmate()):
 		var pawnLoc = _pawn2.getLocation()
 		var pawnRoom = GM.world.getRoomByID(pawnLoc)
 		
-		var isBadLoc = (pawnRoom.loctag_Greenhouses || pawnRoom.loctag_GuardsEncounter)
+		var isBadLoc = pawnRoom.isLocToCatchOfflimits()
 		
 		if(isBadLoc):
 			return [true, {guard=_pawn1.charID, inmate=_pawn2.charID}, {}]
@@ -81,7 +81,10 @@ func surrendered_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "punish"):
 		startInteraction("PunishInteraction", {punisher=getRoleID("guard"), target=getRoleID("inmate")})
 	if(_id == "frisk"):
-		setState("about_to_frisk", "inmate")
+		if(getRolePawn("guard").isGuard()):
+			setState("about_to_frisk", "inmate")
+		else:
+			startEscortOut()
 
 
 func inmate_won_text():
@@ -127,7 +130,10 @@ func guard_won_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "punish"):
 		startInteraction("PunishInteraction", {punisher=getRoleID("guard"), target=getRoleID("inmate")})
 	if(_id == "frisk"):
-		setState("about_to_frisk", "inmate")
+		if(getRolePawn("guard").isGuard()):
+			setState("about_to_frisk", "inmate")
+		else:
+			startEscortOut()
 
 
 func about_to_frisk_text():
@@ -174,12 +180,7 @@ func frisked_text():
 
 func frisked_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "escort_out"):
-		if(GM.world.isLocSafe(getLocation())):
-			setState("escorted_out", "guard")
-			return
-		throwOutLoc = GM.world.getSafeLoc(getLocation())
-		goTowards(throwOutLoc)
-		setState("escorting_out", "guard")
+		startEscortOut()
 
 
 func escorting_out_text():
@@ -225,6 +226,14 @@ func getAnimData() -> Array:
 	if(getState() == "escorted_out"):
 		return [StageScene.Duo, "hurt", {pc="inmate", npc="guard", npcAction="shove"}]
 	return [StageScene.Duo, "stand", {pc="inmate", npc="guard"}]
+
+func startEscortOut():
+	if(GM.world.isLocSafe(getLocation())):
+		setState("escorted_out", "guard")
+		return
+	throwOutLoc = GM.world.getSafeLoc(getLocation())
+	goTowards(throwOutLoc)
+	setState("escorting_out", "guard")
 
 func saveData():
 	var data = .saveData()

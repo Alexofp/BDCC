@@ -337,10 +337,11 @@ func getScoreTypeValueGeneric(_scoreType:String, curPawn:CharacterPawn, dirToPaw
 	if(_scoreType == "approach"):
 		var social:float = curPawn.getSocialClamped()
 		var anger:float = curPawn.getAngerClamped()
+		var exposure:float = dirToPawn.scoreExposed()
 		
 		if(social < 0.2 || anger < 0.2):
-			return 0.0
-		return max(social, anger)
+			return min(exposure, 0.05)
+		return max(social, anger) * (1.0 + exposure)
 	if(_scoreType == "flirt"):
 		var likeness:float = curPawn.getHowMuchLikesPawn(dirToPawn, true)
 		var anger:float = curPawn.getAngerClamped()
@@ -436,6 +437,8 @@ func getScoreTypeValueGeneric(_scoreType:String, curPawn:CharacterPawn, dirToPaw
 			finalScore += anger * (1.0 + meanness)
 		if(affection >= 0.9 && naiveness >= 0.6): # Naive sub simulation
 			finalScore += affection * (1.0 + naiveness) * 2.0
+		if(subbyness >= 0.6): # Subby sub simulation
+			finalScore += subbyness
 			
 		finalScore *= (1.0+subbyness)
 		finalScore *= (1.0 + naiveness * 0.3)
@@ -627,16 +630,21 @@ func setPickedAction(_actionEntry, _context:Dictionary = {}):
 		var whoID:String = involvedPawns[fightersData[0]]
 		var withWhomID:String = involvedPawns[fightersData[1]]
 		var sexType = SexType.DefaultSex
+		var extraParams:Dictionary = {}
 		if(fightersData.size() > 2):
 			sexType = fightersData[2]
+		if(fightersData.size() > 3):
+			extraParams = fightersData[3]
 		
 		if(_context.has("scene")):
 			if(_context["scene"].has_method("startInteractionSex")):
 				isWaitingScene = true
-				_context["scene"].startInteractionSex(whoID, withWhomID, sexType)
+				_context["scene"].startInteractionSex(whoID, withWhomID, sexType, extraParams)
 
-func getSexResult(_args:Dictionary):
+func getSexResult(_args:Dictionary, checkForUncon=false):
 	if(_args.has("scene_result")):
+		if(checkForUncon):
+			checkUncon(_args["scene_result"])
 		return _args["scene_result"]
 	
 	var _fightersData = currentActionArgs["sex"]
@@ -659,11 +667,14 @@ func getSexResult(_args:Dictionary):
 		"averageResistance": RNG.randf_rangeX2(0.0, 1.0),
 		"averageFear": RNG.randf_rangeX2(0.0, 1.0),
 		"satisfaction": RNG.randf_rangeX2(0.0, 1.0),
+		"isUnconscious": RNG.chance(5),
 	}
-	
 	_args["scene_result"] = newResult
-	
+
 	doSexAftermath(_fightersData, newResult)
+
+	if(checkForUncon):
+		checkUncon(newResult)
 	
 	return newResult
 
@@ -1338,6 +1349,55 @@ func roleCanStartSex(role:String) -> bool:
 	if(character == null):
 		return false
 	return character.canStartSex()
+
+func getStocksScoreMult() -> float:
+	if(isPlayerInvolved()):
+		return 1.0
+	var stocksAmount:int = GM.main.IS.getInteractionsOfTypeAmount("InStocks")
+	
+	if(stocksAmount >= 4):
+		return 0.01
+	if(stocksAmount >= 3):
+		return 0.5
+	return 1.0
+
+func canGetToStocks() -> bool:
+	var room = GM.world.getRoomByID(getLocation())
+	if(room == null):
+		return false
+	var floorID:String = room.getFloorID()
+	
+	return (floorID in ["Cellblock", "MainHall"])
+
+func canGetToSlutwall() -> bool:
+	var room = GM.world.getRoomByID(getLocation())
+	if(room == null):
+		return false
+	var floorID:String = room.getFloorID()
+	
+	return (floorID in ["FightClubFloor"])
+
+func getSlutwallScoreMult() -> float:
+	if(isPlayerInvolved()):
+		return 1.0
+	var stocksAmount:int = GM.main.IS.getInteractionsOfTypeAmount("inSlutwall")
+	
+	if(stocksAmount >= 4):
+		return 0.01
+	if(stocksAmount >= 3):
+		return 0.5
+	return 1.0
+
+func checkUncon(sexResult):
+	if(sexResult == null):
+		return
+	
+	if(sexResult.has("subs")):
+		for subID in sexResult["subs"]:
+			var info = sexResult["subs"][subID]
+			
+			if(info.has("isUnconscious") && info["isUnconscious"]):
+				startInteraction("Unconscious", {main=subID})
 
 func saveData():
 	var data = {

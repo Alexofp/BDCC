@@ -39,7 +39,8 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 		setState("about_to_flirt", "starter")
 	if(_id == "attack"):
 		setState("about_to_fight", "reacter")
-		affectAffection("reacter", "starter", -0.5)
+		if(!getRolePawn("reacter").isPlayer()):
+			affectAffection("reacter", "starter", -0.5)
 	if(_id == "offersex"):
 		setState("offered_sex", "reacter")
 	if(_id == "offerself"):
@@ -190,7 +191,7 @@ func flirt_denied_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "continue"):
 		setState("", "starter")
 		getRolePawn("reacter").afterSocialInteraction()
-		getRolePawn("starter").afterSocialInteraction()
+		getRolePawn("starter").afterFailedSocialInteraction()
 
 
 func flirt_flirted_text():
@@ -242,6 +243,7 @@ func flirt_reacted_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func about_to_fight_text():
 	saynn("{starter.You} {starter.youVerb('attack')} {reacter.you}!")
+	saynn("[say=starter]I WILL FUCK YOU UP![/say]")
 
 	addAction("fight", "Fight", "Fight back", "fight", 1.0, 300, {start_fight=["starter", "reacter"],})
 	addAction("surrender", "Surrender", "It's not worth it!", "surrender", 1.0, 60, {})
@@ -324,7 +326,7 @@ func offered_sex_do(_id:String, _args:Dictionary, _context:Dictionary):
 		setState("offered_sex_deny", "starter")
 		affectAffection("starter", "reacter", -0.1)
 		getRolePawn("reacter").afterSocialInteraction()
-		getRolePawn("starter").afterSocialInteraction()
+		getRolePawn("starter").afterFailedSocialInteraction()
 
 
 func offered_sex_agreed_text():
@@ -334,7 +336,7 @@ func offered_sex_agreed_text():
 
 func offered_sex_agreed_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "sex"):
-		var _result = getSexResult(_args)
+		var _result = getSexResult(_args, true)
 		setState("after_sex", "starter")
 
 
@@ -362,7 +364,7 @@ func offered_self_do(_id:String, _args:Dictionary, _context:Dictionary):
 		setState("offered_self_deny", "starter")
 		affectAffection("starter", "reacter", -0.1)
 		getRolePawn("reacter").afterSocialInteraction()
-		getRolePawn("starter").afterSocialInteraction()
+		getRolePawn("starter").afterFailedSocialInteraction()
 
 
 func offered_self_agreed_text():
@@ -372,7 +374,7 @@ func offered_self_agreed_text():
 
 func offered_self_agreed_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "sex"):
-		var _result = getSexResult(_args)
+		var _result = getSexResult(_args, true)
 		setState("after_sex", "starter")
 
 
