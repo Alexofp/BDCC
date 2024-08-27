@@ -195,7 +195,7 @@ func wasDeleted() -> bool:
 	return isDeleted
 
 func deleteMe():
-	GM.main.IS.deletePawn(self)
+	GM.main.IS.deletePawn(charID)
 
 func getDebugInfo():
 	var res = [

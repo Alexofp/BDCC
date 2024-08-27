@@ -112,6 +112,9 @@ func decideNextAction(interaction, _context:Dictionary = {}):
 func processBusyAllInteractions(howManySeconds:int):
 	if(howManySeconds <= 0):
 		return
+	for taskID in globalTasks:
+		var task = globalTasks[taskID]
+		task.processTime(howManySeconds)
 	for pawnID in pawns:
 		var pawn = pawns[pawnID]
 		pawn.processTime(howManySeconds)
@@ -302,6 +305,15 @@ func getInteractionsOfTypeAmount(id:String) -> int:
 			continue
 		if(interaction.id == id):
 			result += 1
+	return result
+
+func getInteractionsOfType(id:String) -> Array:
+	var result:Array = []
+	for interaction in interactions:
+		if(interaction.wasDeleted):
+			continue
+		if(interaction.id == id):
+			result.append(interaction)
 	return result
 
 # slow
@@ -525,3 +537,13 @@ func updatePCLocation():
 	
 	var latestPCLoc:String = GM.pc.getLocation()
 	pawn.setLocation(latestPCLoc)
+
+func getAllUnconsciousPawns() -> Array:
+	var allUnconInteractions:Array = getInteractionsOfType("Unconscious")
+	
+	var result:Array = []
+	for interaction in allUnconInteractions:
+		if(interaction.getPawnCount() != 1):
+			continue
+		result.append(interaction.getRolePawn("main"))
+	return result

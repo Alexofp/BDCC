@@ -44,3 +44,6 @@ func configureGoalFinal(_pawn:CharacterPawn, _goal):
 
 func configureGoal(_pawn:CharacterPawn, _goal):
 	pass
+
+func processTime(_howMuch:int):
+	pass

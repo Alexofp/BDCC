@@ -6,10 +6,10 @@ var zone:String = WorldZone.Greenhouses
 func getScore(_pawn:CharacterPawn) -> float:
 	if(globalTask != ""):
 		return 0.7
-	return 0.2
+	return 0.0
 
 func getKeepScore() -> float:
-	return 0.6
+	return 0.8
 
 func getText():
 	return "{main.name} {main.is} patroling the prison!"
