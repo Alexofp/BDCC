@@ -410,3 +410,30 @@ func getActivityIcon():
 	if(currentInteraction != null):
 		return currentInteraction.getActivityIconForPawn(self)
 	return RoomStuff.PawnActivity.None
+
+func calculateSlutScore() -> float: # from 0.0 to 1.0
+	var result:float = 0.0
+	
+	if(!isInmate()):
+		return 0.0
+	
+	var subbyness:float = scorePersonality({PersonalityStat.Subby:1.0})
+	if(subbyness <= -0.25):
+		return 0.0
+	
+	var sexFetish:float = scoreFetishMax({Fetish.AnalSexReceiving:1.0, Fetish.VaginalSexReceiving:1.0, Fetish.Tribadism: 1.0})
+	if(sexFetish > 0.0):
+		result += sexFetish
+	
+	var oralFetish:float = scoreFetishMax({Fetish.OralSexGiving:1.0, Fetish.RimmingGiving:1.0})
+	if(oralFetish > 0.0):
+		result += oralFetish * 0.5
+	
+	result *= (1.0 + max(subbyness, 0.0)/2.9)
+	
+	if(isLilac()):
+		result *= 1.5
+	
+	result /= 2.0
+	
+	return clamp(result, 0.0, 1.0)

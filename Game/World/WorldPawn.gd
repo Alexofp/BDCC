@@ -30,6 +30,20 @@ func setPawnActivityIcon(theIcon):
 		icon_2.texture = preload("res://Images/WorldPawnActivity/fight.png")
 	elif(theIcon == RoomStuff.PawnActivity.Sex):
 		icon_2.texture = preload("res://Images/WorldPawnActivity/sex.png")
+	elif(theIcon == RoomStuff.PawnActivity.Eat):
+		icon_2.texture = preload("res://Images/WorldPawnActivity/eating.png")
+	elif(theIcon == RoomStuff.PawnActivity.Shower):
+		icon_2.texture = preload("res://Images/WorldPawnActivity/showering.png")
+	elif(theIcon == RoomStuff.PawnActivity.Stocks):
+		icon_2.texture = preload("res://Images/WorldPawnActivity/stocks.png")
+	elif(theIcon == RoomStuff.PawnActivity.Unconscious):
+		icon_2.texture = preload("res://Images/WorldPawnActivity/unconscious.png")
+	elif(theIcon == RoomStuff.PawnActivity.Work):
+		icon_2.texture = preload("res://Images/WorldPawnActivity/working.png")
+	elif(theIcon == RoomStuff.PawnActivity.Help):
+		icon_2.texture = preload("res://Images/WorldPawnActivity/help.png")
+	elif(theIcon == RoomStuff.PawnActivity.Down):
+		icon_2.texture = preload("res://Images/WorldPawnActivity/down.png")
 	else:
 		icon_2.texture = null
 

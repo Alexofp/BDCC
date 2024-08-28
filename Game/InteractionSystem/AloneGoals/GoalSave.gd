@@ -11,7 +11,7 @@ func getKeepScore() -> float:
 	return 2.1
 
 func getText():
-	return "{main.name} {main.is} trying to save someone!"
+	return "{main.name} is trying to save someone!"
 
 func getActions() -> Array:
 #	if(getLocation() == nextTarget):
@@ -32,7 +32,7 @@ func getActions() -> Array:
 			desc = "Save the person",
 			score = 1.0,
 			args = {},
-			time = 30,
+			time = 60,
 		},
 	]
 	
@@ -54,3 +54,6 @@ func doAction(_id:String, _args:Dictionary):
 		
 func getAnimData() -> Array:
 	return [StageScene.Solo, "jog", {pc="main"}]
+
+func getActivityIcon():
+	return RoomStuff.PawnActivity.Help

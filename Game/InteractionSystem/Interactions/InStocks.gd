@@ -247,9 +247,24 @@ func getAnimData() -> Array:
 	return [StageScene.Stocks, "idle", {pc="inmate"}]
 
 func getActivityIconForRole(_role:String):
-	if(getPawnCount() > 1):
+	if(_role == "inmate"):
+		return RoomStuff.PawnActivity.Stocks
+	else:
 		return RoomStuff.PawnActivity.Chat
-	return .getActivityIconForRole(_role)
+	#return .getActivityIconForRole(_role)
+
+func getPreviewLineForRole(_role:String) -> String:
+	if(_role == "inmate"):
+		if(getState() in ["about_to_use", "after_use"]):
+			return "{inmate.name} is being used by {user.name}.."
+		if(getState() in ["about_to_save", "save_after_help"]):
+			return "{inmate.name} is being saved by {saver.name}.."
+		return "{inmate.name} is stuck in stocks.."
+	if(_role == "user"):
+		return "{user.name} is using {inmate.name}."
+	if(_role == "saver"):
+		return "{saver.name} is trying to free {inmate.name} from stocks."
+	return .getPreviewLineForRole(_role)
 
 func saveData():
 	var data = .saveData()

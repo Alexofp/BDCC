@@ -16,8 +16,8 @@ func getText():
 	var action = getCurrentAction()
 	
 	if(action == "work"):
-		return "{main.name} {main.is} hitting rocks!"
-	return "{main.name} {main.is} going to work!"
+		return "{main.name} is hitting rocks!"
+	return "{main.name} is going to work!"
 
 func getActions() -> Array:
 	if(getLocation() != "mining_shafts_entering"):
@@ -54,3 +54,6 @@ func getAnimData() -> Array:
 	if(getLocation() != "mining_shafts_entering"):
 		return [StageScene.Solo, "walk", {pc="main"}]
 	return [StageScene.Solo, "stand", {pc="main"}]
+
+func getActivityIcon():
+	return RoomStuff.PawnActivity.Work

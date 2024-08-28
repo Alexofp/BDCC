@@ -33,6 +33,9 @@ func _init():
 		
 		"res://Modules/PunishmentsModule/Stocks/UnWilling/StocksUnwillingDynNpcScene.gd",
 		"res://Modules/PunishmentsModule/Stocks/Willing/StocksWillingDynNpcScene.gd",
+		
+		"res://Modules/PunishmentsModule/Unconscious/UnconRandomSpotScene.gd",
+		"res://Modules/PunishmentsModule/Unconscious/UnconToStocksScene.gd",
 		]
 	characters = [
 		
@@ -57,6 +60,8 @@ func _init():
 		"res://Modules/PunishmentsModule/Stocks/Willing/StocksWillingDynNpcEvent.gd",
 		
 		"res://Modules/PunishmentsModule/Stocks/TryStocksEvent.gd",
+		
+		"res://Modules/PunishmentsModule/Unconscious/UnconRandomSpotEvent.gd",
 	]
 
 func registerEventTriggers():

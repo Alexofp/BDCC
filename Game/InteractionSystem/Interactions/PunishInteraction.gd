@@ -145,3 +145,10 @@ func getAnimData() -> Array:
 func getActivityIconForRole(_role:String):
 	return RoomStuff.PawnActivity.Chat
 
+func getPreviewLineForRole(_role:String) -> String:
+	if(_role == "target"):
+		return "{target.name} is being punished by {punisher.name}."
+	if(_role == "punisher"):
+		return "{punisher.name} is punishing {target.name}."
+	return .getPreviewLineForRole(_role)
+

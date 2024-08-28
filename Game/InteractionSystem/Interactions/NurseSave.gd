@@ -90,4 +90,17 @@ func getAnimData() -> Array:
 	if(getState() == ""):
 		return [StageScene.SexStart, "defeated", {pc="nurse", npc="inmate"}]
 	return [StageScene.Solo, "jog", {pc="nurse"}]
+	
+func getPreviewLineForRole(_role:String) -> String:
+	if(_role == "inmate"):
+		return "{inmate.name} is unconscious and being transported to medical by {nurse.name}.."
+	if(_role == "nurse"):
+		return "{nurse.name} is pushing a stretcher with {inmate.name} to medical."
+	return .getPreviewLineForRole(_role)
+
+func getActivityIconForRole(_role:String):
+	if(_role == "nurse"):
+		return RoomStuff.PawnActivity.Chat
+	else:
+		return RoomStuff.PawnActivity.Unconscious
 

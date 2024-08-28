@@ -50,14 +50,40 @@ func getInterruptActions(_pawn:CharacterPawn) -> Array:
 			scoreRole = "main",
 			args = {},
 		})
+	if(getPawnAmount() == 1 && !_pawn.isPlayer() && getRolePawn("main").isPlayer()):
+		result.append({
+			id = "grab",
+			name = "Grab",
+			desc = "Do something interesting with them..",
+			score = 0.5,
+			scoreType = "punishMean",
+			scoreRole = "main",
+			args = {},
+		})
 	return result
 
 func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "fuck"):
 		doInvolvePawn("user", _pawn)
 		setState("about_to_fuck", "user")
+	if(_id == "grab"):
+		if(triggerUnconsciousPCGrabEvent(_pawn)):
+			stopMe()
 
 func getAnimData() -> Array:
 	if(getState() in ["about_to_fuck", "after_sex"]):
 		return [StageScene.SexStart, "defeated", {pc="user", npc="main"}]
 	return [StageScene.Sleeping, "sleep", {pc="main"}]
+
+func getPreviewLineForRole(_role:String) -> String:
+	if(_role == "main"):
+		return "{main.name} is unconscious.."
+	if(_role == "user"):
+		return "{nurse.name} is doing something with {main.name}."
+	return .getPreviewLineForRole(_role)
+
+func getActivityIconForRole(_role:String):
+	if(_role == "main"):
+		return RoomStuff.PawnActivity.Unconscious
+	else:
+		return RoomStuff.PawnActivity.Chat

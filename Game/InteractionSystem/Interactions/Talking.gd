@@ -409,6 +409,13 @@ func getAnimData() -> Array:
 func getActivityIconForRole(_role:String):
 	return RoomStuff.PawnActivity.Chat
 
+func getPreviewLineForRole(_role:String) -> String:
+	if(_role == "starter"):
+		return "{starter.name} is chatting with {reacter.name}."
+	if(_role == "reacter"):
+		return "{reacter.name} is chatting with {starter.name}."
+	return .getPreviewLineForRole(_role)
+
 func saveData():
 	var data = .saveData()
 

@@ -235,6 +235,13 @@ func startEscortOut():
 	goTowards(throwOutLoc)
 	setState("escorting_out", "guard")
 
+func getPreviewLineForRole(_role:String) -> String:
+	if(_role == "guard"):
+		return "{guard.name} has caught {inmate.name} off-limits and is dealing with {inmate.him}."
+	if(_role == "inmate"):
+		return "{inmate.name} was found by {guard.name}."
+	return .getPreviewLineForRole(_role)
+
 func saveData():
 	var data = .saveData()
 

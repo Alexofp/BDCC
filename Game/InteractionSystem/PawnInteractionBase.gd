@@ -1399,6 +1399,41 @@ func checkUncon(sexResult):
 			if(info.has("isUnconscious") && info["isUnconscious"]):
 				startInteraction("Unconscious", {main=subID})
 
+func triggerUnconsciousPCGrabEvent(_pawn):
+	if(_pawn == null):
+		return false
+	if(GM.ES.triggerReact(Trigger.UnconsciousPCGrabbed, [_pawn.charID])):
+		return true
+	
+	return false
+
+func getPreviewLineForPawn(_pawn) -> String:
+	for role in involvedPawns:
+		if(involvedPawns[role] == _pawn.charID):
+			return getPreviewLineForRoleFinal(role)
+	return ""
+
+func getPreviewLineForRoleFinal(_role:String) -> String:
+	if(currentActionArgs.has("sex")):
+		var sexData = currentActionArgs["sex"]
+		if(sexData.size() >= 2):
+			if(sexData[0] == _role):
+				return "{pawn.name} is fucking {"+sexData[1]+".name}"
+			if(sexData[1] == _role):
+				return "{pawn.name} is being fucked by {"+sexData[0]+".name}"
+	if(currentActionArgs.has("fight")):
+		var fightData = currentActionArgs["fight"]
+		if(fightData.size() >= 2):
+			if(fightData[0] == _role):
+				return "{pawn.name} is fighting with {"+fightData[1]+".name}"
+			if(fightData[1] == _role):
+				return "{pawn.name} is fighting back from {"+fightData[0]+".name}"
+	
+	return getPreviewLineForRole(_role)
+
+func getPreviewLineForRole(_role:String) -> String:
+	return "{pawn.name} is in a "+id+" interaction"
+
 func saveData():
 	var data = {
 		"loc": location,

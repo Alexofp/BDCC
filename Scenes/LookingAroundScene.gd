@@ -25,7 +25,7 @@ func _run():
 			if(interaction == null):
 				sayn("{pawn.name} is not doing anything.")
 			else:
-				sayn("{pawn.name} is in a "+interaction.id+" interaction")
+				sayn(interaction.getPreviewLineForPawn(pawn))
 			
 			addButton(character.getName(), "Focus your attention on this person", "focus", [pawn])
 		

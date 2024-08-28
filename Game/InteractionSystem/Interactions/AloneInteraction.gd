@@ -185,3 +185,17 @@ func canRoleBeInterrupted(_role:String) -> bool:
 	
 func canCharIDBeInterrupted(_charID:String) -> bool:
 	return true
+
+func getPreviewLineForRole(_role:String) -> String:
+	if(_role == "main"):
+		if(goal != null):
+			return goal.getText().split("\n")[0]
+	return .getPreviewLineForRole(_role)
+
+func getActivityIconForRole(_role:String):
+	if(isPlayerInvolved()):
+		return RoomStuff.PawnActivity.None
+	if(goal == null):
+		return .getActivityIconForRole(_role)
+	
+	return goal.getActivityIcon()

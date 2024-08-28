@@ -25,11 +25,13 @@ func getEditVars():
 			name = "startCode",
 			type = "bigString",
 			value = startCode,
+			minsize = 200.0,
 		},
 		"endCode": {
 			name = "endCode",
 			type = "bigString",
 			value = endCode,
+			minsize = 200.0,
 		},
 	}
 

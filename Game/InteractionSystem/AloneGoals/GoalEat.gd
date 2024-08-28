@@ -20,8 +20,8 @@ func getText():
 	var action = getCurrentAction()
 	
 	if(action == "eat"):
-		return "{main.name} {main.is} eating!"
-	return "{main.name} {main.is} hungry! Heading to canteen!"
+		return "{main.name} is eating!"
+	return "{main.name} is hungry! Heading to canteen!"
 
 func getActions() -> Array:
 	if(getLocation() != "hall_canteen"):
@@ -58,3 +58,6 @@ func getAnimData() -> Array:
 	if(getLocation() != "hall_canteen"):
 		return [StageScene.Solo, "walk", {pc="main"}]
 	return [StageScene.Solo, "stand", {pc="main"}]
+
+func getActivityIcon():
+	return RoomStuff.PawnActivity.Eat
