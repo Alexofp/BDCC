@@ -1,0 +1,344 @@
+extends PawnInteractionBase
+
+var jobTime = 0
+var askCreds = 0
+var askType = ""
+var slutDom = false
+var clientSatisfaction = 0.0
+var lastClientID = ""
+
+func _init():
+	id = "Prostitution"
+
+func start(_pawns:Dictionary, _args:Dictionary):
+	doInvolvePawn("main", _pawns["main"])
+	setState("", "main")
+
+func init_text():
+	saynn("{main.You} {main.youAre} standing near a wall, your leg pressed up against it..")
+
+	addAction("search", "Find clients", "Actively seek out clients", "default", 0.5, 60, {})
+	addAction("wait", "Just wait", "Just wait until someone decides to approache you", "default", 1.0, 180, {})
+	addAction("stop", "Stop", "Enough whooring..", "default", 1.0, 0, {})
+
+func init_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "search"):
+		var pawnIDs = findProstitutionTargetsNearby([lastClientID])
+		if(!pawnIDs.empty()):
+			var pawnID = RNG.pick(pawnIDs)
+			lastClientID = pawnID
+			doInvolvePawn("client", pawnID)
+			setState("found_client", "main")
+			return
+		setState("", "main")
+	if(_id == "wait"):
+		setState("", "main")
+	if(_id == "stop"):
+		stopMe()
+
+
+func found_client_text():
+	saynn("{main.name} calls {client.you} to get closer..")
+	saynn("[say=main]WANNA HAVE A GOOD TIME?[/say]")
+	saynn("[say=client]WHAT'S THE OFFER?[/say]")
+
+	addAction("usual", "Usual", "Let them fuck you any way they want for relatively cheap..", "default", 1.0, 60, {})
+	if(roleCanStartSex("main")):
+		addAction("service", "Service Dom", "You will be in charge. It takes more effort.. so you will be taking more credits", "default", 1.0, 60, {})
+	else:
+		addDisabledAction("Service Dom", "You can't be a service dom with your restraints..")
+	addAction("pricy_slut", "Pricy slut", "Ask for a lot of credits to let them fuck you.. You will have to really satisfy them though..", "default", 1.0, 60, {})
+
+func found_client_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "usual"):
+		askType="usual"
+		askCreds = 5
+		slutDom = false
+		setState("giving_offer", "client")
+	if(_id == "service"):
+		askType="service"
+		askCreds = 10
+		slutDom = true
+		setState("giving_offer", "client")
+	if(_id == "pricy_slut"):
+		askType="pricy"
+		askCreds = 20
+		slutDom = false
+		setState("giving_offer", "client")
+
+
+func giving_offer_text():
+	if(askType=="usual"):
+		saynn("[say=main]THE USUAL. "+str(askCreds)+" credits.[/say]")
+	elif(askType=="service"):
+		saynn("[say=main]I CAN BE IN CHARGE AND MAKE YOU FEEL REAL GOOD. "+str(askCreds)+" credits.[/say]")
+	elif(askType=="pricy"):
+		saynn("[say=main]I'M EXPENSIVE. BUT I'M WORHT IT. "+str(askCreds)+" credits.[/say]")
+
+	if(!getRolePawn("client").isPlayer() || GM.pc.getCredits() >= askCreds):
+		addAction("agree", "Agree", "Give them the credits and do the thing", "default", 1.0, 60, {})
+	else:
+		addDisabledAction("Agree", "You don't have enough credits..")
+	addAction("deny", "Deny", "You'd rather not..", "default", 1.0, 60, {})
+	if(false):
+		addAction("haggle", "Haggle", "The slut clearly doesn't deserve that much.. Try to haggle", "default", 1.0, 60, {})
+
+func giving_offer_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "agree"):
+		if(getRolePawn("client").isPlayer()):
+			GM.pc.addCredits(-askCreds)
+		if(getRolePawn("main").isPlayer()):
+			GM.pc.addCredits(askCreds)
+		setState("offer_accepted", "main")
+	if(_id == "deny"):
+		setState("offer_denied", "main")
+	if(_id == "haggle"):
+		setState("meow", "inmate")
+
+
+func offer_denied_text():
+	saynn("[say=client]I'D RATHER NOT.[/say]")
+	saynn("[say=main]WHATEVER THEN.[/say]")
+
+	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
+
+func offer_denied_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		getRolePawn("main").afterFailedSocialInteraction()
+		getRolePawn("client").afterSocialInteraction()
+		doRemoveRole("client")
+		setState("", "main")
+
+
+func offer_accepted_text():
+	saynn("{client.name} hands {main.you} the creds.")
+	saynn("[say=client]ALRIGHT.[/say]")
+	saynn("Time for the fun part..")
+
+	addAction("sex", "Sex", "Prepare to do this..", "default", 1.0, 60, {})
+	addAction("scam", "Scam", "Suddenly demand more creds", "default", 1.0, 60, {})
+
+func offer_accepted_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "sex"):
+		setState("about_to_sex", "main")
+	if(_id == "scam"):
+		setState("slut_scam", "client")
+		affectAffection("client", "main", -0.15)
+
+
+func about_to_sex_text():
+	saynn("SEX IS ABOUT TO HAPPEN.")
+
+	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {start_sex=["main" if slutDom else "client", "client" if slutDom else "main"],})
+
+func about_to_sex_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		var _result = getSexResult(_args, true)
+		if(slutDom):
+			clientSatisfaction = _result["subs"][getRoleID("client")]["satisfaction"]
+		else:
+			clientSatisfaction = _result["doms"][getRoleID("client")]["satisfaction"]
+		setState("after_sex", "client")
+
+
+func after_sex_text():
+	saynn("The sex has ended..")
+	saynn("Client's satisfaction is.. "+str(Util.roundF(clientSatisfaction*100.0, 1))+"%")
+
+	addAction("leave", "Leave", "That was alright", "default", 1.0, 60, {})
+	addAction("demand_creds_back", "Demand creds back", "That sucked, the slut should give you the credits back", "default", 1.0, 60, {})
+
+func after_sex_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "leave"):
+		setState("client_leaving", "client")
+	if(_id == "demand_creds_back"):
+		setState("client_demands_credits", "main")
+
+
+func client_leaving_text():
+	saynn("{client.name} is leaving, satisfied.")
+
+	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
+
+func client_leaving_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		doRemoveRole("client")
+		setState("", "main")
+
+
+func client_demands_credits_text():
+	saynn("[say=client]THAT SUCKED. GIVE ME CREDITS BACK.[/say]")
+
+	addAction("return_creds", "Return creds", "You won't be missing them anyway", "default", 1.0, 60, {})
+	addAction("refuse", "Refuse", "", "default", 1.0, 60, {})
+
+func client_demands_credits_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "return_creds"):
+		if(getRolePawn("client").isPlayer()):
+			GM.pc.addCredits(askCreds)
+		if(getRolePawn("main").isPlayer()):
+			GM.pc.addCredits(-askCreds)
+		setState("client_got_credits_back", "client")
+		affectAffection("client", "main", 0.1)
+	if(_id == "refuse"):
+		setState("slut_refused_creds_back", "client")
+		affectAffection("client", "main", -0.5)
+
+
+func client_got_credits_back_text():
+	saynn("{main.name} huffs but hands {client.you} the credits back.")
+	saynn("The client nods and leaves.")
+
+	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
+
+func client_got_credits_back_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		doRemoveRole("client")
+		setState("", "main")
+
+
+func slut_refused_creds_back_text():
+	saynn("[say=main]I'M NOT GIVING YOU THE CREDS, FUCK OFF.[/say]")
+
+	addAction("whatever", "Whatever", "Let them keep the creds", "default", 1.0, 60, {})
+	addAction("attack", "Attack", "Try to get them back forcefully..", "default", 1.0, 60, {})
+
+func slut_refused_creds_back_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "whatever"):
+		setState("client_leaving_grumbly", "client")
+	if(_id == "attack"):
+		setState("client_attacked_slut", "main")
+
+
+func client_leaving_grumbly_text():
+	saynn("{client.name} grumbles.. but leaves eventually.")
+
+	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
+
+func client_leaving_grumbly_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		doRemoveRole("client")
+		setState("", "main")
+
+
+func client_attacked_slut_text():
+	saynn("{client.name} decides to attack {main.you}!")
+
+	addAction("fight", "Fight", "Time to fight back..", "default", 1.0, 600, {start_fight=["client", "main"],})
+
+func client_attacked_slut_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "fight"):
+		var fightResult = getFightResult(_args)
+		
+		if(fightResult["won"]):
+			if(getRolePawn("client").isPlayer()):
+				GM.pc.addCredits(askCreds)
+			if(getRolePawn("main").isPlayer()):
+				GM.pc.addCredits(-askCreds)
+		
+			setState("client_won", "client")
+		else:
+			setState("slut_won", "main")
+
+
+func client_won_text():
+	saynn("{client.You} won! {main.Name} is on the floor, unable to continue fighting..")
+	saynn("{client.You} {client.youVerb('take')} the credits back from the slut..")
+
+	addAction("leave", "Leave", "Time to go..", "default", 1.0, 60, {})
+	addAction("punish", "Punish", "Make them regret what they did.", "punishMean", 1.0, 60, {})
+
+func client_won_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "leave"):
+		setState("client_won_leave", "client")
+	if(_id == "punish"):
+		startInteraction("PunishInteraction", {punisher=getRoleID("client"), target=getRoleID("main")})
+
+
+func client_won_leave_text():
+	saynn("After taking the credits back, {client.name} just leaves..")
+
+	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
+
+func client_won_leave_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		stopMe()
+
+
+func slut_won_text():
+	saynn("{main.You} won! {client.Name} is on the floor, unable to continue fighting..")
+
+	addAction("kick_them_away", "Kick them away", "Kick the trash away", "default", 1.0, 60, {})
+	addAction("punish", "Punish", "Make them regret it", "punishMean", 1.0, 60, {})
+
+func slut_won_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "kick_them_away"):
+		setState("slut_won_kick", "main")
+	if(_id == "punish"):
+		startInteraction("PunishInteraction", {punisher=getRoleID("main"), target=getRoleID("client")})
+
+
+func slut_won_kick_text():
+	saynn("{main.name} decides to just kick {client.name} away from {main.his} working spot..")
+
+	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
+
+func slut_won_kick_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		var theLoc:String = getLocation()
+		var _ok = doWanderGurantee()
+		doRemoveRole("client")
+		setLocation(theLoc)
+		setState("", "main")
+
+
+func slut_scam_text():
+	saynn("[say=main]YOU KNOW WHAT.. I DECIDED TO RAISE THE PRICE. 5 MORE CREDS PLEASE.[/say]")
+	saynn("[say=client]ARE YOU SERIOUS?[/say]")
+	saynn("[say=main]Pay up or leave.[/say]")
+
+	if(!getRolePawn("client").isPlayer() || GM.pc.getCredits() >= 5):
+		addAction("pay", "Pay", "Add 5 more credits on top", "default", 1.0, 60, {})
+	addAction("leave", "Leave", "Whatever..", "default", 1.0, 60, {})
+	addAction("demand_creds_back", "Demand creds back", "That's enough. You just want your credits back now.", "default", 1.0, 60, {})
+
+func slut_scam_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "pay"):
+		askCreds += 5
+		if(getRolePawn("client").isPlayer()):
+			GM.pc.addCredits(-5)
+		if(getRolePawn("main").isPlayer()):
+			GM.pc.addCredits(5)
+		setState("offer_accepted", "main")
+	if(_id == "leave"):
+		setState("client_leaving_grumbly", "client")
+	if(_id == "demand_creds_back"):
+		setState("client_demands_credits", "main")
+
+
+func getAnimData() -> Array:
+	if(getPawnCount() > 1):
+		return [StageScene.Duo, "stand", {pc="main", npc="client"}]
+	return [StageScene.Solo, "stand", {pc="main"}]
+
+func saveData():
+	var data = .saveData()
+
+	data["jobTime"] = jobTime
+	data["askCreds"] = askCreds
+	data["askType"] = askType
+	data["slutDom"] = slutDom
+	data["clientSatisfaction"] = clientSatisfaction
+	data["lastClientID"] = lastClientID
+	return data
+
+func loadData(_data):
+	.loadData(_data)
+
+	jobTime = SAVE.loadVar(_data, "jobTime", 0)
+	askCreds = SAVE.loadVar(_data, "askCreds", 0)
+	askType = SAVE.loadVar(_data, "askType", "")
+	slutDom = SAVE.loadVar(_data, "slutDom", false)
+	clientSatisfaction = SAVE.loadVar(_data, "clientSatisfaction", 0.0)
+	lastClientID = SAVE.loadVar(_data, "lastClientID", "")
+

@@ -1434,6 +1434,19 @@ func getPreviewLineForRoleFinal(_role:String) -> String:
 func getPreviewLineForRole(_role:String) -> String:
 	return "{pawn.name} is in a "+id+" interaction"
 
+func findProstitutionTargetsNearby(_ignoreList:Array = []) -> Array:
+	var result:Array = []
+	
+	var pawnIDs = GM.main.IS.getPawnIDsNear(getLocation(), 1)
+	for pawnID in pawnIDs:
+		if(isPawnInvolved(pawnID)):
+			continue
+		var thePawn = getPawn(pawnID)
+		if(!thePawn.canBeInterrupted() || thePawn.getSocial() <= 0.4 || _ignoreList.has(pawnID)):
+			continue
+		result.append(pawnID)
+	return result
+
 func saveData():
 	var data = {
 		"loc": location,

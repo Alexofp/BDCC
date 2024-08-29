@@ -29,7 +29,7 @@ roomName = "Main corridor"
 roomID = "cd_near_office1"
 roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
-loctag_GuardsEncounter = true
+loctag_OldGuardsEncounter = true
 population = 2
 
 [node name="CDRoom3" parent="." index="3" instance=ExtResource( 2 )]
@@ -38,7 +38,7 @@ roomName = "Main corridor"
 roomID = "cd_near_split"
 roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
-loctag_GuardsEncounter = true
+loctag_OldGuardsEncounter = true
 population = 2
 
 [node name="CDRoom4" parent="." index="4" instance=ExtResource( 2 )]
@@ -47,7 +47,7 @@ roomName = "Main corridor"
 roomID = "cd_first_split"
 roomDescription = "Here the corridor splits into two. "
 gridColor = 2
-loctag_GuardsEncounter = true
+loctag_OldGuardsEncounter = true
 population = 2
 
 [node name="CDRoom5" parent="." index="5" instance=ExtResource( 2 )]
@@ -56,7 +56,7 @@ roomName = "Main corridor"
 roomID = "cd_corridor1"
 roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
-loctag_GuardsEncounter = true
+loctag_OldGuardsEncounter = true
 population = 2
 
 [node name="CDRoom6" parent="." index="6" instance=ExtResource( 2 )]
@@ -65,7 +65,7 @@ roomName = "Main corridor"
 roomID = "cd_near_office2"
 roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
-loctag_GuardsEncounter = true
+loctag_OldGuardsEncounter = true
 population = 2
 
 [node name="CDRoom7" parent="." index="7" instance=ExtResource( 2 )]
@@ -74,7 +74,7 @@ roomName = "Main corridor"
 roomID = "cd_corridor5"
 roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
-loctag_GuardsEncounter = true
+loctag_OldGuardsEncounter = true
 population = 2
 
 [node name="CDRoom8" parent="." index="8" instance=ExtResource( 2 )]
@@ -83,7 +83,7 @@ roomName = "Main corridor"
 roomID = "cd_near_office3"
 roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
-loctag_GuardsEncounter = true
+loctag_OldGuardsEncounter = true
 population = 2
 
 [node name="CDRoom9" parent="." index="9" instance=ExtResource( 2 )]
@@ -92,7 +92,7 @@ roomName = "Main corridor"
 roomID = "cd_corridor6"
 roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
-loctag_GuardsEncounter = true
+loctag_OldGuardsEncounter = true
 population = 2
 
 [node name="CDRoom10" parent="." index="10" instance=ExtResource( 2 )]
@@ -101,7 +101,7 @@ roomName = "Main corridor"
 roomID = "cd_corridor2"
 roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
-loctag_GuardsEncounter = true
+loctag_OldGuardsEncounter = true
 population = 2
 
 [node name="CDRoom11" parent="." index="11" instance=ExtResource( 2 )]
@@ -110,7 +110,7 @@ roomName = "Main corridor"
 roomID = "cd_corridor3"
 roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
-loctag_GuardsEncounter = true
+loctag_OldGuardsEncounter = true
 population = 2
 
 [node name="CDRoom12" parent="." index="12" instance=ExtResource( 2 )]
@@ -119,7 +119,7 @@ roomName = "Main corridor"
 roomID = "cd_near_office4"
 roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
-loctag_GuardsEncounter = true
+loctag_OldGuardsEncounter = true
 population = 2
 
 [node name="CDRoom13" parent="." index="13" instance=ExtResource( 2 )]
@@ -128,7 +128,7 @@ roomName = "Main corridor"
 roomID = "cd_corridor7"
 roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
-loctag_GuardsEncounter = true
+loctag_OldGuardsEncounter = true
 population = 2
 
 [node name="CDRoom14" parent="." index="14" instance=ExtResource( 2 )]
@@ -137,7 +137,7 @@ roomName = "Main corridor"
 roomID = "cd_last_intersection"
 roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
-loctag_GuardsEncounter = true
+loctag_OldGuardsEncounter = true
 population = 2
 
 [node name="SyndiShip" parent="." index="15" instance=ExtResource( 2 )]
@@ -155,7 +155,7 @@ roomName = "Main corridor"
 roomID = "cd_corridor4"
 roomDescription = "Long corridor that looks very rich. There is a carpet on the floor, walls are decorated with many paintings. Sometimes you notice doors that lead to some offices"
 gridColor = 2
-loctag_GuardsEncounter = true
+loctag_OldGuardsEncounter = true
 population = 2
 
 [node name="CDRoom16" parent="." index="17" instance=ExtResource( 2 )]

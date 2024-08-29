@@ -18,6 +18,7 @@ func getEditVars():
 			name = "output",
 			type = "bigString",
 			value = output,
+			minsize = 200,
 		},
 	}
 

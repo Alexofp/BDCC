@@ -280,6 +280,15 @@ func aimCamera(roomID, instantly = false):
 	if(instantly):
 		camera.reset_smoothing()
 
+func zoomIn(mult:float = 1.0):
+	camera.zoom *= 1.1 * mult
+
+func zoomOut(mult:float = 1.0):
+	camera.zoom *= 0.9 / mult
+
+func zoomReset():
+	camera.zoom = Vector2(1.0, 1.0)
+
 func setDarknessVisible(vis):
 	$CanvasLayer/DarknessControl.visible = vis
 
