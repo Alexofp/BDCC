@@ -50,6 +50,7 @@ func getActions() -> Array:
 func doAction(_id:String, _args:Dictionary):
 	if(_id == "eat"):
 		getPawn().hunger = 0.0
+		getPawn().getChar().addStamina(getPawn().getChar().getMaxStamina())
 		completeGoal()
 	if(_id == "go"):
 		goTowards("hall_canteen")

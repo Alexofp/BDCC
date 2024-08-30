@@ -52,3 +52,16 @@ func getAnimData() -> Array:
 	if(getCurrentAction() == "go"):
 		return [StageScene.Solo, "walk", {pc="main"}]
 	return [StageScene.Solo, "stand", {pc="main"}]
+
+func saveData():
+	var data = .saveData()
+	
+	data["nt"] = nextTarget
+	data["z"] = zone
+	return data
+
+func loadData(_data):
+	.loadData(_data)
+	
+	nextTarget = SAVE.loadVar(_data, "nt", "")
+	zone = SAVE.loadVar(_data, "z", WorldZone.Greenhouses)

@@ -466,6 +466,38 @@ func getScoreTypeValueGeneric(_scoreType:String, curPawn:CharacterPawn, dirToPaw
 		finalScore *= (1.0+meanness*0.2)
 		
 		return finalScore
+	if(_scoreType == "agreeSexWithSlut"):
+		var affection:float = GM.main.RS.getAffection(curID, dirToID)
+		var lust:float = GM.main.RS.getLust(curID, dirToID)
+		var dommyness:float = curPawn.scorePersonalityMax({PersonalityStat.Subby: -1.0})
+		var theirDommyness:float = dirToPawn.scorePersonalityMax({PersonalityStat.Subby: -1.0})
+		#var naiveness = curPawn.scorePersonalityMax({PersonalityStat.Naive: 1.0})
+		var meanness = curPawn.scorePersonalityMax({PersonalityStat.Mean: 1.0})
+		var isInHeat = GlobalRegistry.getCharacter(curID).isInHeat()
+		var anger:float = curPawn.getAngerClamped()
+		var theirSlutScore:float = dirToPawn.calculateSlutScore()
+		#var slutScore:float = curPawn.calculateSlutScore()
+		var isDomSlut:bool = (call("isSlutDom") if has_method("isSlutDom") else false)
+		
+		var finalScore:float = 0.0
+		
+		finalScore += theirSlutScore
+		
+		if(isDomSlut):
+			finalScore *= (1.0 + theirDommyness)
+			finalScore *= (1.0 - anger*0.5)
+		else:
+			finalScore *= (1.0 + dommyness)
+			finalScore *= (1.0 + meanness*0.2)
+			finalScore *= (1.0 + anger*0.3)
+		
+		finalScore *= (1.0 + lust*lust*0.5)
+		finalScore *= (1.0 + affection*affection*0.3)
+		
+		if(isInHeat):
+			finalScore *= 1.5
+		
+		return finalScore
 		
 	return 1.0
 
@@ -555,6 +587,9 @@ func doInvolvePawn(role:String, pawn, tpPawn:bool = true):
 	pawn.setInteraction(self)
 	if(tpPawn):
 		pawn.setLocation(getLocation())
+
+func doInvolveRole(role:String, pawn, tpPawn:bool = true):
+	return doInvolvePawn(role, pawn, tpPawn)
 
 func setState(newState:String, newRole:String, dirToRole:String = ""):
 	setCurrentPawn(newRole)

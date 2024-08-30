@@ -3,6 +3,36 @@ extends PawnInteractionBase
 var goal:InteractionGoalBase
 var nextGoalTestIn:int = 200
 
+func saveData():
+	var data = .saveData()
+
+	data["ngti"] = nextGoalTestIn
+	if(goal != null):
+		data["goal"] = {
+			id = goal.id,
+			data = goal.saveData(),
+		}
+	else:
+		data["goal"] = {
+			id = "",
+		}
+	return data
+
+func loadData(_data):
+	.loadData(_data)
+
+	nextGoalTestIn = SAVE.loadVar(_data, "ngti", 200)
+	goal = null
+	var goalData = SAVE.loadVar(_data, "goal", {})
+	var goalID = SAVE.loadVar(goalData, "id", "")
+	if(goalID != ""):
+		var newGoal:InteractionGoalBase = InteractionGoal.create(goalID)
+		if(newGoal != null):
+			newGoal.pawnID = getRoleID("main")
+			newGoal.interaction = self
+			goal = newGoal
+			goal.loadData(SAVE.loadVar(goalData, "data", {}))
+
 func _init():
 	id = "AloneInteraction"
 

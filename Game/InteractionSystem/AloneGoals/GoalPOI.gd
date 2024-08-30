@@ -50,3 +50,14 @@ func doAction(_id:String, _args:Dictionary):
 
 func getAnimData() -> Array:
 	return [StageScene.Solo, "walk", {pc="main"}]
+
+func saveData():
+	var data = .saveData()
+	
+	data["tl"] = targetLoc
+	return data
+
+func loadData(_data):
+	.loadData(_data)
+	
+	targetLoc = SAVE.loadVar(_data, "tl", "")

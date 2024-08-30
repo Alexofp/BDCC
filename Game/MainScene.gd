@@ -433,6 +433,8 @@ func saveData():
 	data["gameExtenders"] = GM.GES.saveData()
 	data["loadedDatapacks"] = loadedDatapacks
 	data["datapackCharacters"] = datapackCharacters
+	data["interactionSystem"] = IS.saveData()
+	data["relationshipSystem"] = RS.saveData()
 	
 	data["scenes"] = []
 	for scene in sceneStack:
@@ -464,6 +466,8 @@ func loadData(data):
 	GM.GES.loadData(SAVE.loadVar(data, "gameExtenders", {}))
 	loadedDatapacks = SAVE.loadVar(data, "loadedDatapacks", {})
 	datapackCharacters = SAVE.loadVar(data, "datapackCharacters", {})
+	IS.loadData(SAVE.loadVar(data, "interactionSystem", {}))
+	RS.loadData(SAVE.loadVar(data, "relationshipSystem", {}))
 	
 	var scenes = SAVE.loadVar(data, "scenes", [])
 	
@@ -486,9 +490,9 @@ func loadData(data):
 			scene.uniqueSceneID = getNewUniqueSceneID()
 			scene.parentSceneUniqueID = scene.uniqueSceneID - 1 # Preserves compatability with old saves
 	
-	IS.clearAll()
 	GM.ui.recreateWorld()
 	GM.world.loadData(SAVE.loadVar(data, "world", {}))
+	GM.world.updatePawns(IS)
 
 func saveCharactersData():
 	var data = {}

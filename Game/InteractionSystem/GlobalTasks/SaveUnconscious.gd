@@ -6,9 +6,7 @@ var pawnIDHasSavior:Dictionary = {}
 func _init():
 	id = "SaveUnconscious"
 	goalID = InteractionGoal.Save
-
-func getMaxAssigned() -> int:
-	return 4#allUnconPawns.size()
+	maxAssignedUnscaled = 4
 
 func canDoTask(_pawn:CharacterPawn) -> bool:
 	if(!_pawn.isNurse()):
@@ -44,3 +42,7 @@ func processTime(_howMuch:int):
 		if(goal.pawnIDTarget == ""):
 			continue
 		pawnIDHasSavior[goal.pawnIDTarget] = true
+
+func resetTask():
+	allUnconPawns.clear()
+	pawnIDHasSavior.clear()

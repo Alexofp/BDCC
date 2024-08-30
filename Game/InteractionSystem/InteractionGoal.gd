@@ -8,9 +8,10 @@ const WorkMine = "WorkMine"
 const Patrol = "Patrol"
 const POI = "POI" # Point of interest
 const Save = "Save"
+const Prostitute = "Prostitute"
 
 static func getAll():
-	return [Wander, Eat, Hangout, WorkMine, Patrol, POI, Save]
+	return [Wander, Eat, Hangout, WorkMine, Patrol, POI, Save, Prostitute]
 
 static func getAllAlone():
 	return [Wander, Eat, Hangout, WorkMine, POI]

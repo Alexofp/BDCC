@@ -413,6 +413,8 @@ func getActivityIcon():
 
 func calculateSlutScore() -> float: # from 0.0 to 1.0
 	var result:float = 0.0
+	if(isPlayer()):
+		return 1.0
 	
 	if(!isInmate()):
 		return 0.0
@@ -437,3 +439,43 @@ func calculateSlutScore() -> float: # from 0.0 to 1.0
 	result /= 2.0
 	
 	return clamp(result, 0.0, 1.0)
+
+func getProstitutionCreditsCost(_otherPawn, mult:float = 1.0, isDom:bool = false):
+	var amountRequested:float = 2.0
+	if(isPlayer()):
+		var level:int = getChar().getLevel() # Replace with Slut Fame?
+		if(level < 10):
+			amountRequested = 2.0
+		elif(level < 20):
+			amountRequested = 4.0
+		else:
+			amountRequested = 5.0
+	var personality:Personality = getCharacter().getPersonality()
+	var cowardStat = personality.getStat(PersonalityStat.Coward)
+	var naiveStat = personality.getStat(PersonalityStat.Naive)
+	var subbyStat = personality.getStat(PersonalityStat.Subby)
+	
+	var affection:float = GM.main.RS.getAffection(charID, _otherPawn.charID)
+	var lust:float = GM.main.RS.getLust(charID, _otherPawn.charID)
+	var likeness:float = getHowMuchLikesPawn(_otherPawn, true)
+	var slutScore:float = calculateSlutScore()
+	
+	amountRequested *= mult
+	
+	if(!isPlayer()):
+		amountRequested += (-3 * cowardStat)
+		amountRequested += (-3 * naiveStat)
+		amountRequested *= (2.0 - likeness)
+		amountRequested *= (0.5 + slutScore)
+		
+	if(affection < -0.1):
+		amountRequested *= (1.0 + abs(affection)*max((-cowardStat+1.0)/2.0, 0.0))
+	if(lust > 0.3):
+		amountRequested *= (1.0 + abs(lust*lust)*max((-naiveStat+1.0)/2.0, 0.0))
+	if(isDom && subbyStat < -0.1):
+		amountRequested *= (1.0 + abs(subbyStat))
+	if(isDom && subbyStat > 0.5):
+		amountRequested *= (1.0 + abs(subbyStat))
+		
+	var finalCost:int = Util.maxi(2, int(round(amountRequested)))
+	return finalCost

@@ -57,3 +57,14 @@ func getAnimData() -> Array:
 
 func getActivityIcon():
 	return RoomStuff.PawnActivity.Help
+
+func saveData():
+	var data = .saveData()
+	
+	data["p"] = pawnIDTarget
+	return data
+
+func loadData(_data):
+	.loadData(_data)
+	
+	pawnIDTarget = SAVE.loadVar(_data, "p", "")

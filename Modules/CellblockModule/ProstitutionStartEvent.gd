@@ -6,6 +6,7 @@ func _init():
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "main_hallroom5")
 	es.addTrigger(self, Trigger.EnteringRoom, "main_hallroom4")
+	es.addTrigger(self, Trigger.EnteringRoom, "fight_wall_east")
 
 func run(_triggerID, _args):
 	saynn("This seems like a spot where all the sluts hang out..")

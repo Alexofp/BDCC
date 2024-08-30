@@ -13,7 +13,7 @@ func init_text():
 	sayLine("punisher", "PunishDecide", {punisher="punisher", target="target"})
 
 	if(getRoleChar("target").getInventory().hasEquippedItemWithTag(ItemTag.AllowsEnslaving) && canGetToStocks()):
-		addAction("stocks", "Stocks", "Lock them up in stocks!", "punishMean", 1.0 * getStocksScoreMult(), 60, {})
+		addAction("stocks", "Stocks", "Lock them up in stocks!", "punishMean", 0.5 * getStocksScoreMult(), 60, {})
 	else:
 		addDisabledAction("Stocks", ""+("They need to be wearing a collar for this!" if canGetToStocks() else "Stocks are too far..")+"")
 	if(roleCanStartSex("punisher")):

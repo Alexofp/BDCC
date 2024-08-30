@@ -55,7 +55,7 @@ func getInterruptActions(_pawn:CharacterPawn) -> Array:
 			id = "grab",
 			name = "Grab",
 			desc = "Do something interesting with them..",
-			score = 0.5,
+			score = (0.5 if _pawn.getSocial() > 0.4 else 0.0),
 			scoreType = "punishMean",
 			scoreRole = "main",
 			args = {},

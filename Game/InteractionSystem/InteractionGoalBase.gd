@@ -6,6 +6,14 @@ var pawnID:String = ""
 var interaction
 var globalTask:String = ""
 
+func saveData():
+	return {
+		"gt": globalTask,
+	}
+
+func loadData(_data):
+	globalTask = SAVE.loadVar(_data, "gt", "")
+
 func getScore(_pawn:CharacterPawn) -> float:
 	return 0.0
 
@@ -74,9 +82,3 @@ func getAnimData() -> Array:
 
 func getActivityIcon():
 	return RoomStuff.PawnActivity.None
-
-func saveData():
-	return {}
-
-func loadData(_data):
-	pass

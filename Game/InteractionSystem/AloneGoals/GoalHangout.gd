@@ -30,3 +30,14 @@ func doAction(_id:String, _args:Dictionary):
 	stepsAmount -= 1
 	if(stepsAmount <= 0):
 		completeGoal()
+
+func saveData():
+	var data = .saveData()
+	
+	data["sa"] = stepsAmount
+	return data
+
+func loadData(_data):
+	.loadData(_data)
+	
+	stepsAmount = SAVE.loadVar(_data, "sa", 1)

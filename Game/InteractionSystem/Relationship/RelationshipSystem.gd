@@ -167,3 +167,44 @@ func removeAllEntriesOf(char1:String):
 	
 	for otherCharID in toRemove:
 		removeEntry(char1, otherCharID)
+
+func saveData():
+	var entriesData:Array = []
+	var checkedEntries:Dictionary = {}
+	
+	for charID in entries:
+		for char2ID in entries[charID]:
+			var entry:RelationshipEntry = entries[charID][char2ID]
+			if(checkedEntries.has(entry)):
+				continue
+			checkedEntries[entry] = true
+			
+			entriesData.append({
+				c1 = charID,
+				c2 = char2ID,
+				data = entry.saveData(),
+			})
+	
+	return {
+		"entries": entriesData,
+	}
+
+func loadData(_data):
+	entries.clear()
+	
+	var entriesData = SAVE.loadVar(_data, "entries", [])
+	for dataEntry in entriesData:
+		if(!dataEntry.has("c1") || !dataEntry.has("c2")):
+			continue
+		var c1 = SAVE.loadVar(dataEntry, "c1", "")
+		var c2 = SAVE.loadVar(dataEntry, "c2", "")
+		
+		var entry:RelationshipEntry = RelationshipEntry.new()
+		entry.loadData(SAVE.loadVar(dataEntry, "data", {}))
+		
+		if(!entries.has(c1)):
+			entries[c1] = {}
+		if(!entries.has(c2)):
+			entries[c2] = {}
+		entries[c1][c2] = entry
+		entries[c2][c1] = entry

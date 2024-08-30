@@ -27,7 +27,7 @@ To the north is the Central Elevator and it's guard checkpoint, and to the south
 roomColor = 8
 population = 3
 
-[node name="MainHallRoom3" parent="." index="2" instance=ExtResource( 2 )]
+[node name="MainHallRoom3" parent="." index="2" groups=["zone_prostitution"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -64, 320 )
 roomName = "Main hall"
@@ -584,7 +584,7 @@ roomDescription = "A very spacious hall with a huge raised platform in the middl
 roomColor = 8
 population = 3
 
-[node name="MainHallRoom50" parent="." index="57" groups=["zone_mainpatrol"] instance=ExtResource( 2 )]
+[node name="MainHallRoom50" parent="." index="57" groups=["zone_mainpatrol", "zone_prostitution"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -128, 320 )
 roomName = "Main hall"

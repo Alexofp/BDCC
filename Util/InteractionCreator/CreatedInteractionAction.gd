@@ -35,6 +35,7 @@ const allScoreTypes = [
 		"attack",
 		"agreeSexAsSub",
 		"agreeSexAsDom",
+		"agreeSexWithSlut",
 	]
 
 func getEditVars():

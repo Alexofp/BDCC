@@ -16,6 +16,59 @@ var pawnDistribution = {
 		CharacterType.Engineer: 1,
 	}
 
+func saveData():
+	var pawnData := {}
+	for pawnID in pawns:
+		pawnData[pawnID] = getPawn(pawnID).saveData()
+	
+	var interactionData := []
+	for interaction in interactions:
+		interactionData.append({
+			id = interaction.id,
+			data = interaction.saveData(),
+		})
+	
+	return {
+		"pawns": pawnData,
+		"interactions": interactionData,
+	}
+
+func loadData(_data):
+	pawns.clear()
+	pawnsByLoc.clear()
+	var pawnData = SAVE.loadVar(_data, "pawns", {})
+	for charID in pawnData:
+		var pawnEntry = pawnData[charID]
+		
+		var newPawn: CharacterPawn = CharacterPawn.new()
+		newPawn.charID = charID
+		newPawn.loadData(pawnEntry)
+		pawns[charID] = newPawn
+		
+		var loc = newPawn.getLocation()
+		if(!pawnsByLoc.has(loc)):
+			pawnsByLoc[loc] = {}
+		pawnsByLoc[loc][charID] = true
+	
+	interactions.clear()
+	var interactionsData = SAVE.loadVar(_data, "interactions", [])
+	for interactionEntry in interactionsData:
+		var interactionID = SAVE.loadVar(interactionEntry, "id", "")
+		
+		var interaction = GlobalRegistry.createInteraction(interactionID)
+		if(interaction == null):
+			continue
+		interactions.append(interaction)
+		interaction.loadData(SAVE.loadVar(interactionEntry, "data", {}))
+
+		for pawnRole in interaction.involvedPawns:
+			var pawn = getPawn(interaction.involvedPawns[pawnRole])
+			if(pawn != null):
+				pawn.setInteraction(interaction)
+	
+	for taskID in globalTasks:
+		globalTasks[taskID].resetTask()
+
 func getMaxPawnCount() -> int:
 	return 30
 
