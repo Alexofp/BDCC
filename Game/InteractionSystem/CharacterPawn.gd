@@ -11,6 +11,7 @@ var currentInteraction
 var hunger:float = 0.0
 var social:float = 0.0
 var anger:float = 0.0
+var tiredness:float = 0.0
 
 var timeSinceLastWork:int = 0.0
 var fightExhaustion:float = 0.0
@@ -19,6 +20,7 @@ const hungerPerHour:float = 0.2
 const socialPerHour:float = 0.5
 const angerPerHour:float = 0.1
 const fightExhaustionPerHour:float = 2.0
+const tirednessPerHour:float = 0.05
 
 func saveData():
 	var data = {
@@ -30,6 +32,7 @@ func saveData():
 		"anger": anger,
 		"tslw": timeSinceLastWork,
 		"fe": fightExhaustion,
+		"t": tiredness,
 	}
 	return data
 
@@ -42,11 +45,13 @@ func loadData(_data):
 	anger = SAVE.loadVar(_data, "anger", 0.0)
 	timeSinceLastWork = SAVE.loadVar(_data, "tslw", 0)
 	fightExhaustion = SAVE.loadVar(_data, "fe", 0.0)
+	tiredness = SAVE.loadVar(_data, "t", 0.0)
 
 func onSpawn():
 	hunger = RNG.randf_range(0.0, 0.3)
 	timeSinceLastWork = RNG.randi_range(0, 6000)
 	social = RNG.randf_rangeX2(0.0, 0.6)
+	tiredness = RNG.randf_range(0.0, 0.7)
 
 func getChar() -> BaseCharacter:
 	if(charID == ""):
@@ -72,6 +77,7 @@ func processTime(_howMuch:int):
 	hunger += float(_howMuch) * hungerPerHour / 3600.0
 	social += float(_howMuch) * socialPerHour / 3600.0
 	recoverExhaustion(float(_howMuch) * fightExhaustionPerHour / 3600.0)
+	tiredness += float(_howMuch) * tirednessPerHour / 3600.0
 	
 	# anger
 	var meanness:float = scorePersonality({PersonalityStat.Mean: 1.0})
@@ -201,7 +207,7 @@ func getDebugInfo():
 	var res = [
 		"ID: "+str(charID),
 		"Location: "+str(getLocation()),
-		"Hunger: "+str(Util.roundF(hunger, 2))+" Social: "+str(Util.roundF(social, 2))+" Anger: "+str(Util.roundF(anger, 2)),
+		"Hunger: "+str(Util.roundF(hunger, 2))+" Social: "+str(Util.roundF(social, 2))+" Anger: "+str(Util.roundF(anger, 2))+" Tired: "+str(Util.roundF(tiredness, 2))+" Stamina: "+str(Util.roundF(getChar().getStamina(), 2)),
 		"currentInteraction: "+str(currentInteraction.id if currentInteraction != null else "null"),
 	]
 	if(currentInteraction != null):
@@ -267,7 +273,17 @@ func affectAffection(otherCharID, howMuch:float):
 	if(!(otherCharID is String)):
 		otherCharID = otherCharID.charID
 	
-	GM.main.RS.addAffection(charID, otherCharID, howMuch)
+	var mult:float = 1.0
+	if(howMuch > 0.0):
+		mult -= scorePersonality({PersonalityStat.Mean:1.0})*0.5
+	elif(howMuch < 0.0):
+		mult += scorePersonality({PersonalityStat.Mean:1.0})*0.5
+	
+	var currentAffection:float = GM.main.RS.getAffection(charID, otherCharID)
+	if((currentAffection > 0.1 && howMuch < 0.0) || (currentAffection < -0.1 && howMuch > 0.0)):
+		GM.main.RS.addAffection(charID, otherCharID, howMuch*mult*2.0)
+	else:
+		GM.main.RS.addAffection(charID, otherCharID, howMuch*mult)
 
 func affectLust(otherCharID, howMuch:float):
 	if(!(otherCharID is String)):
@@ -435,6 +451,9 @@ func calculateSlutScore() -> float: # from 0.0 to 1.0
 	
 	if(isLilac()):
 		result *= 1.5
+	if(isHighSecInmate()):
+		result -= 0.25
+		result *= 0.5
 	
 	result /= 2.0
 	
@@ -479,3 +498,13 @@ func getProstitutionCreditsCost(_otherPawn, mult:float = 1.0, isDom:bool = false
 		
 	var finalCost:int = Util.maxi(2, int(round(amountRequested)))
 	return finalCost
+
+# Needs blocked arms/hands + blocked legs + gagged/muzzled OR blindfolded
+func canGrabAndFuck() -> bool:
+	var character = getCharacter()
+	if(!(character.hasBoundArms() || character.hasBlockedHands()) || !character.hasBoundLegs()):
+		return false
+	if(!(character.isGagged() || character.isMuzzled()) && !character.isBlindfolded()):
+		return false
+	
+	return true

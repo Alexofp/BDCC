@@ -2962,6 +2962,16 @@ func getBodypartID(slot):
 func getInmateType():
 	return InmateType.Unknown
 
+func hasSomethingToStruggleOutOf() -> bool:
+	for item in getInventory().getEquppedRestraints():
+		var restraintData: RestraintData = item.getRestraintData()
+		
+		if(restraintData == null || !restraintData.canStruggleFinal() || !restraintData.shouldStruggle()):
+			continue
+		
+		return true
+	return false
+
 func doStruggleOutOfRestraints(isScared:bool = false, addStats:bool = true, customActor=null, damageMult:float = 1.0) -> Dictionary:
 	var possible = []
 	var trivial = []
@@ -2973,7 +2983,7 @@ func doStruggleOutOfRestraints(isScared:bool = false, addStats:bool = true, cust
 	for item in getInventory().getEquppedRestraints():
 		var restraintData: RestraintData = item.getRestraintData()
 		
-		if(restraintData == null || !restraintData.canStruggleFinal()):
+		if(restraintData == null || !restraintData.canStruggleFinal() || !restraintData.shouldStruggle()):
 			continue
 		
 		if(!restraintData.shouldDoStruggleMinigame(self)):
@@ -3033,6 +3043,7 @@ func doStruggleOutOfRestraints(isScared:bool = false, addStats:bool = true, cust
 		lust=(struggleData["lust"] if struggleData.has("lust") else 0),
 		pain=(struggleData["pain"] if struggleData.has("pain") else 0),
 		stamina=(struggleData["stamina"] if struggleData.has("stamina") else 0),
+		animation = restraintData.getResistAnimation(),
 	}
 
 func getModularDialogueTags(_againstChar) -> Dictionary:

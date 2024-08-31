@@ -7,6 +7,8 @@ var interactions:Array = []
 
 var globalTasks:Dictionary = {}
 
+var usedCharIDsToday:Dictionary = {}
+
 # Unsaved
 var interactionsDisabled:bool = false
 var pawnDistribution = {
@@ -31,9 +33,12 @@ func saveData():
 	return {
 		"pawns": pawnData,
 		"interactions": interactionData,
+		"usedIDs": usedCharIDsToday,
 	}
 
 func loadData(_data):
+	usedCharIDsToday = SAVE.loadVar(_data, "usedIDs", {})
+	
 	pawns.clear()
 	pawnsByLoc.clear()
 	var pawnData = SAVE.loadVar(_data, "pawns", {})
@@ -109,7 +114,7 @@ func processTime(_howMuch:int):
 			_howMuch -= interactionBusySecs
 		interaction.doCurrentAction()
 		
-		if(!interaction.getCurrentPawn().isPlayer()):
+		if(!interaction.wasDeleted && !interaction.getCurrentPawn().isPlayer()):
 			decideNextAction(interaction)
 		
 		maxProcesses -= 1
@@ -226,6 +231,8 @@ func spawnPawn(charID):
 	if(!pawnsByLoc.has(loc)):
 		pawnsByLoc[loc] = {}
 	pawnsByLoc[loc][charID] = true
+	
+	usedCharIDsToday[charID] = true
 	
 	newPawn.onSpawn()
 	return newPawn
@@ -403,6 +410,7 @@ func beforeNewDay():
 			deletePawn(thePawnID)
 
 func afterNewDay():
+	usedCharIDsToday.clear()
 	spawnMorningWave()
 
 func startInteraction(interactionID:String, involvedPawns:Dictionary, args:Dictionary = {}):
@@ -504,6 +512,8 @@ func trySpawnPawn(specificCharType = null):
 		
 		var randomCharID = RNG.pick(possibleCharIds)
 		
+		if(usedCharIDsToday.has(randomCharID)):
+			continue
 		if(hasPawn(randomCharID)):
 			continue
 		var character = GlobalRegistry.getCharacter(randomCharID)

@@ -166,7 +166,8 @@ func getDebugInfo():
 		res.append("")
 	
 	res.append("All goal weights:")
-	for goalEntry in getGoalsWithScores(false):
+	var goalEntries = getGoalsWithScores(false)
+	for goalEntry in goalEntries:
 		var goalID = goalEntry[0]
 		if(!(goalID is String)):
 			goalID = goalID.id

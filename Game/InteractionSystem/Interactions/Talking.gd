@@ -25,8 +25,13 @@ func init_text():
 		addAction("flirt", "Flirt", "Try to flirt with them", "flirt", 1.0, 30, {})
 	else:
 		addDisabledAction("Flirt", "They don't seem to be in a flirty mood..")
+	if(getRolePawn("reacter").canGrabAndFuck() && roleCanStartSex("starter")):
+		addAction("grab_and_fuck", "Grab&Fuck", "They have so many restraints that you can just fuck them..", "sexUse", 5.0, 60, {})
 	addAction("attack", "Attack", "Make them regret it!", "attack", 1.0, 30, {})
-	addAction("offersex", "Offer sex", "Offer to fuck them", "sexDom", 0.2, 60, {})
+	if(roleCanStartSex("starter")):
+		addAction("offersex", "Offer sex", "Offer to fuck them", "sexDom", 0.2, 60, {})
+	else:
+		addDisabledAction("Offer sex", "You can't start sex like this..")
 	addAction("offerself", "Offer self", "Offer them to fuck you", "sexSub", 0.2, 60, {})
 	addAction("leave", "Leave", "Enough chatting around.", "justleave", 1.0, 30, {})
 
@@ -37,10 +42,12 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 		setState("chat_started", "starter")
 	if(_id == "flirt"):
 		setState("about_to_flirt", "starter")
+	if(_id == "grab_and_fuck"):
+		setState("grabbed_about_to_fuck", "reacter")
 	if(_id == "attack"):
 		setState("about_to_fight", "reacter")
 		if(!getRolePawn("reacter").isPlayer()):
-			affectAffection("reacter", "starter", -0.5)
+			affectAffection("reacter", "starter", -0.25)
 	if(_id == "offersex"):
 		setState("offered_sex", "reacter")
 	if(_id == "offerself"):
@@ -394,6 +401,28 @@ func after_sex_text():
 	addAction("continue", "Continue", "", "default", 1.0, 60, {})
 
 func after_sex_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		stopMe()
+
+
+func grabbed_about_to_fuck_text():
+	saynn("{starter.You} {starter.youVerb('grab')} {reacter.you}..")
+	saynn("{reacter.You} quickly {reacter.youVerb('realize')} that {reacter.yourHis} restraints prevent {reacter.youHim} from escaping..")
+
+	addAction("sex", "Sex", "You're so fucked..", "default", 1.0, 600, {start_sex=["starter", "reacter"],})
+
+func grabbed_about_to_fuck_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "sex"):
+		var _result = getSexResult(_args, true)
+		setState("after_grab_and_fuck", "reacter")
+
+
+func after_grab_and_fuck_text():
+	saynn("{starter.name} leaves after messing with {reacter.you}..")
+
+	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
+
+func after_grab_and_fuck_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "continue"):
 		stopMe()
 

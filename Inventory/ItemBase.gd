@@ -462,7 +462,7 @@ func addRandomSmartLock(_forcer, _addMessage = true):
 	return addSmartLock(randomLock, _forcer, _addMessage)
 
 func addSmartLock(_lockID, _forcer, _addMessage = true):
-	if(!isRestraint() || _forcer == null):
+	if(!isRestraint() || _forcer == null || (isWornByWearer() && getWearer().isPlayer())):
 		return false
 	if(_forcer is String):
 		_forcer = GlobalRegistry.getCharacter(_forcer)

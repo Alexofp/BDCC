@@ -9,12 +9,16 @@ const Patrol = "Patrol"
 const POI = "POI" # Point of interest
 const Save = "Save"
 const Prostitute = "Prostitute"
+const Shower = "Shower"
+const RepairClothes = "RepairClothes"
+const Leave = "Leave"
+const Struggle = "Struggle"
 
 static func getAll():
-	return [Wander, Eat, Hangout, WorkMine, Patrol, POI, Save, Prostitute]
+	return [Wander, Eat, Hangout, WorkMine, Patrol, POI, Save, Prostitute, Shower, RepairClothes, Leave, Struggle]
 
 static func getAllAlone():
-	return [Wander, Eat, Hangout, WorkMine, POI]
+	return [Wander, Eat, Hangout, WorkMine, POI, Shower, RepairClothes, Leave, Struggle]
 
 static func create(theID:String):
 	var newGoal

@@ -338,7 +338,14 @@ func getScoreTypeValueGeneric(_scoreType:String, curPawn:CharacterPawn, dirToPaw
 		var social:float = curPawn.getSocialClamped()
 		var anger:float = curPawn.getAngerClamped()
 		var exposure:float = dirToPawn.scoreExposed()
+		var canGrabAndFuck:bool = dirToPawn.canGrabAndFuck()
+		var ourCanGrabAndFuck:bool = curPawn.canGrabAndFuck()
+		if(ourCanGrabAndFuck):
+			return 0.0
 		
+		if(canGrabAndFuck):
+			return 3.0*getScoreTypeValueGeneric("sexUse", curPawn, dirToPawn) * (1.0 + exposure) * (1.0 if max(social, anger) > 0.2 else 0.0)
+			
 		if(social < 0.2 || anger < 0.2):
 			return min(exposure, 0.05)
 		return max(social, anger) * (1.0 + exposure)
@@ -479,7 +486,7 @@ func getScoreTypeValueGeneric(_scoreType:String, curPawn:CharacterPawn, dirToPaw
 		#var slutScore:float = curPawn.calculateSlutScore()
 		var isDomSlut:bool = (call("isSlutDom") if has_method("isSlutDom") else false)
 		
-		var finalScore:float = 0.0
+		var finalScore:float = 0.2
 		
 		finalScore += theirSlutScore
 		
@@ -488,7 +495,7 @@ func getScoreTypeValueGeneric(_scoreType:String, curPawn:CharacterPawn, dirToPaw
 			finalScore *= (1.0 - anger*0.5)
 		else:
 			finalScore *= (1.0 + dommyness)
-			finalScore *= (1.0 + meanness*0.2)
+			finalScore *= (1.0 + abs(meanness)*0.2)
 			finalScore *= (1.0 + anger*0.3)
 		
 		finalScore *= (1.0 + lust*lust*0.5)
@@ -719,9 +726,20 @@ func getFightResult(_args:Dictionary):
 	
 	var _fightersData = currentActionArgs["fight"]
 	
-	print("FIIIIIIIIIIGHT")
+	#print("FIIIIIIIIIIGHT")
 	# Simulate fight here
-	var newResult:Dictionary = {won=RNG.chance(50)}
+	var pawn1 = getRolePawn(_fightersData[0])
+	var pawn2 = getRolePawn(_fightersData[1])
+	var pawn1FightScore = pawn1.calculatePowerScore()
+	var pawn2FightScore = pawn2.calculatePowerScore()
+	
+	var randTable:Array = [
+		[true, pawn1FightScore*pawn1FightScore],
+		[false, pawn2FightScore*pawn2FightScore],
+	]
+	var didWin:bool = RNG.pickWeightedPairs(randTable)
+	
+	var newResult:Dictionary = {won=didWin}
 	_args["scene_result"] = newResult
 	
 	doFightAftermath(_fightersData, newResult)

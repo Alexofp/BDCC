@@ -16,7 +16,7 @@ func start(_pawns:Dictionary, _args:Dictionary):
 	setState("", "main")
 
 func init_text():
-	saynn("{main.You} {main.youAre} standing near a wall, your leg pressed up against it..")
+	saynn("{main.You} {main.youAre} standing near a wall, {main.yourHis} leg pressed up against it..")
 
 	addAction("search", "Find clients", "Actively seek out clients", "default", 0.5, 60, {})
 	addAction("wait", "Just wait", "Just wait until someone decides to approache you", "default", 1.0, 180, {})
@@ -188,7 +188,7 @@ func client_demands_credits_do(_id:String, _args:Dictionary, _context:Dictionary
 		affectAffection("client", "main", 0.1)
 	if(_id == "refuse"):
 		setState("slut_refused_creds_back", "client")
-		affectAffection("client", "main", -0.5)
+		affectAffection("client", "main", -0.2)
 
 
 func client_got_credits_back_text():
@@ -360,6 +360,13 @@ func getActivityIconForRole(_role:String):
 		return RoomStuff.PawnActivity.Prostitution
 	else:
 		return .getActivityIconForRole(_role)
+
+func getPreviewLineForRole(_role:String) -> String:
+	if(_role == "main"):
+		return "{main.name} is whoring {main.himself} out.."
+	if(_role == "client"):
+		return "{client.name} is being {main.name}'s client."
+	return .getPreviewLineForRole(_role)
 
 func saveData():
 	var data = .saveData()

@@ -133,11 +133,11 @@ func about_to_save_do(_id:String, _args:Dictionary, _context:Dictionary):
 		else:
 			savedHow = "help"
 			setState("save_saved", "inmate")
-			affectAffection("inmate", "saver", 0.1)
+			affectAffection("inmate", "saver", 0.2)
 	if(_id == "key"):
 		savedHow = "key"
 		setState("save_saved", "inmate")
-		affectAffection("inmate", "saver", 0.1)
+		affectAffection("inmate", "saver", 0.2)
 		getRoleChar("saver").getInventory().removeXOfOrDestroy("restraintkey", 1)
 		getRoleChar("inmate").getInventory().clearStaticRestraints()
 	if(_id == "leave"):

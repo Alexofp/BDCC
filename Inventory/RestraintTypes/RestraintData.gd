@@ -79,6 +79,9 @@ func shouldBeRemoved():
 func getRemoveMessage():
 	return getItem().getVisibleName()+" slips off!"
 
+func shouldStruggle() -> bool:
+	return !aiWontResist
+
 func canStruggle():
 	return true
 
