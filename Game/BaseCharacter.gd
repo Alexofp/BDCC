@@ -1250,6 +1250,9 @@ func giveBirth():
 	
 	return bornChildren
 
+func giveBirthWithNotification():
+	return giveBirth()
+
 func forceOvulate():
 	if(menstrualCycle != null):
 		return menstrualCycle.forceOvulate()

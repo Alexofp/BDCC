@@ -83,3 +83,6 @@ func _react(_action: String, _args):
 
 func _react_scene_end(_tag, _result):
 	setState("")
+
+func supportsShowingPawns() -> bool:
+	return true

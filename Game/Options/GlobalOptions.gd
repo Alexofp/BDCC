@@ -14,6 +14,9 @@ var impregnationChanceModifier: int
 var bellySizeDependsOnLitterSize: bool = false
 var bellyMaxSizeModifier: float = 1.0
 
+# Sandbox options
+var sandboxPawnCount:int = 30
+
 # Difficulty options
 var hardStruggleEnabled: bool = false
 var smartLockRarity: String = "normal" # never veryrare rare normal often veryoften bdsmslut
@@ -99,6 +102,7 @@ func resetToDefaults():
 	autosaveEnabled = true
 	inventoryIconsSize = "small"
 	genderNamesOverrides = {}
+	sandboxPawnCount = 30
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
@@ -235,6 +239,9 @@ func getCumShotsDependOnBallsVolume():
 func getCumShotsIntensityMult():
 	return cumIntensityMult
 
+func getSandboxPawnCount() -> int:
+	return sandboxPawnCount
+
 func getInventoryIconSize():
 	if(inventoryIconsSize == "small"):
 		return 32
@@ -256,6 +263,19 @@ func getChangeableOptions():
 					"id": "showModdedLauncher",
 					"type": "checkbox",
 					"value": showModdedLauncher,
+				},
+			],
+		},
+		{
+			"name": "Sandbox",
+			"id": "sandbox",
+			"options": [
+				{
+					"name": "Pawn amount",
+					"description": "How many pawns should be running around the prison normally..",
+					"id": "sandboxPawnCount",
+					"type": "int",
+					"value": sandboxPawnCount,
 				},
 			],
 		},
@@ -741,6 +761,12 @@ func applyOption(categoryID, optionID, value):
 		if(value != ""):
 			genderNamesOverrides[optionID] = value
 	
+	if(categoryID == "sandbox"):
+		if(optionID == "sandboxPawnCount"):
+			sandboxPawnCount = value
+			if(sandboxPawnCount < 0):
+				sandboxPawnCount = 0
+	
 	if(categoryID == "jigglephysics"):
 		if(optionID == "jigglePhysicsBreastsEnabled"):
 			jigglePhysicsBreastsEnabled = value
@@ -906,6 +932,7 @@ func saveData():
 		"cumEnabled": cumEnabled,
 		"cumDependsOnBallsSize": cumDependsOnBallsSize,
 		"cumIntensityMult": cumIntensityMult,
+		"sandboxPawnCount": sandboxPawnCount,
 	}
 	
 	return data
@@ -953,6 +980,7 @@ func loadData(data):
 	cumEnabled = loadVar(data, "cumEnabled", true)
 	cumDependsOnBallsSize = loadVar(data, "cumDependsOnBallsSize", true)
 	cumIntensityMult = loadVar(data, "cumIntensityMult", 1.0)
+	sandboxPawnCount = loadVar(data, "sandboxPawnCount", 30)
 
 func saveToFile():
 	var saveData = saveData()

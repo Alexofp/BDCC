@@ -54,3 +54,6 @@ func loadData(data):
 	.loadData(data)
 	
 	canEscape = SAVE.loadVar(data, "canEscape", false)
+
+func supportsShowingPawns() -> bool:
+	return true

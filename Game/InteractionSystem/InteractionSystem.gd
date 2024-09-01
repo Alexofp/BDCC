@@ -75,7 +75,14 @@ func loadData(_data):
 		globalTasks[taskID].resetTask()
 
 func getMaxPawnCount() -> int:
-	return 30
+	var settingsValue:int = OPTIONS.getSandboxPawnCount()
+	if(GM.main.getDays() <= 1):
+		return Util.mini(10, settingsValue)
+	elif(GM.main.getDays() <= 2):
+		return Util.mini(15, settingsValue)
+	elif(GM.main.getDays() <= 5): # First 5 days have reduced amount of pawns
+		return Util.mini(20, settingsValue)
+	return settingsValue
 
 func TEST_DELETE_ME():
 	#spawnPawn("pc")
@@ -101,7 +108,7 @@ func processTime(_howMuch:int):
 		pawn.checkAloneInteraction()
 
 	#print(pawns)
-	var maxProcesses:int = 50
+	var maxProcesses:int = 100
 	
 	var interaction:PawnInteractionBase = getClosestInteraction()
 	while(interaction != null && _howMuch > 0):

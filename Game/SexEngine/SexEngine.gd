@@ -1096,6 +1096,11 @@ func endSex():
 	for subID in subs:
 		var subInfo = subs[subID]
 		
+		var sexEndInfo = subInfo.getSexEndInfo()
+		if(sexEndInfo.size() > 0):
+			texts.append(subInfo.getChar().getName()+":")
+			texts.append(Util.join(sexEndInfo, "\n"))
+		
 		# Lets us loot used condoms
 		var theCondom = subInfo.getChar().getWornCondom()
 		if(theCondom != null):
@@ -1106,11 +1111,6 @@ func endSex():
 		
 		subInfo.getChar().afterSexEnded(subInfo)
 		subInfo.getChar().onSexEnded({sexEngine=self,isDom=false,sexFullResult=sexResult,sexResult=sexResult["subs"][subID]})
-
-		var sexEndInfo = subInfo.getSexEndInfo()
-		if(sexEndInfo.size() > 0):
-			texts.append(subInfo.getChar().getName()+":")
-			texts.append(Util.join(sexEndInfo, "\n"))
 
 	messages.append(Util.join(texts, "\n"))
 

@@ -4,6 +4,7 @@ var chat = {}
 var lust = {}
 var chatAnswer = ""
 var surrendered = false
+var notFirst = false
 
 func _init():
 	id = "Talking"
@@ -14,7 +15,11 @@ func start(_pawns:Dictionary, _args:Dictionary):
 	setState("", "starter")
 
 func init_text():
-	saynn("{starter.name} approaches {reacter.you}.")
+	if(!notFirst):
+		saynn("{starter.name} approaches {reacter.you}.")
+		notFirst=true
+	else:
+		saynn("{starter.name} is standing near {reacter.you}.")
 	saynn("{reacter.Your} affection with {starter.you} is "+getAffectionString("starter", "reacter")+".\nLust is "+getLustString("starter", "reacter")+".")
 
 	if(!getRoleChar("starter").isGagged() && getRolePawn("reacter").canSocial()):
@@ -452,6 +457,7 @@ func saveData():
 	data["lust"] = lust
 	data["chatAnswer"] = chatAnswer
 	data["surrendered"] = surrendered
+	data["notFirst"] = notFirst
 	return data
 
 func loadData(_data):
@@ -461,4 +467,5 @@ func loadData(_data):
 	lust = SAVE.loadVar(_data, "lust", {})
 	chatAnswer = SAVE.loadVar(_data, "chatAnswer", "")
 	surrendered = SAVE.loadVar(_data, "surrendered", false)
+	notFirst = SAVE.loadVar(_data, "notFirst", false)
 

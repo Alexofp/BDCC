@@ -209,6 +209,10 @@ func getInterruptActions(_pawn:CharacterPawn) -> Array:
 
 func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "talk"):
+		if(_pawn.isPlayer()):
+			if(triggerTalkReactEvents("main")):
+				return
+		
 		startInteraction("Talking", {starter=_pawn.charID, reacter=getRoleID("main")})
 
 func canRoleBeInterrupted(_role:String) -> bool:

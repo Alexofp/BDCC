@@ -1106,6 +1106,11 @@ func triggerTalkRunEvents(role:String):
 	if(isPlayersTurn()):
 		GM.ES.triggerRun(Trigger.TalkingToDynamicNPC, [getRoleID(role)])
 
+func triggerTalkReactEvents(role:String):
+	if(GM.ES.triggerReact(Trigger.TalkingToDynamicNPC, [getRoleID(role)])):
+		return true
+	return false
+
 func getPawnAmount() -> int:
 	return involvedPawns.size()
 func getPawnCount() -> int:
@@ -1212,16 +1217,18 @@ func doReactToChat(_args:Dictionary, skipPcCheck:bool = true):
 	if(reactChar.isPlayer()):
 		interestValue = 1.0
 	
-	if(answer == "agree"):
-		affectAffection(reactRole, startRole, abs(interestValue) * 0.07)
-	if(answer == "whatever"):
-		affectAffection(reactRole, startRole, 0.01)
-	if(answer == "disagree"):
-		affectAffection(reactRole, startRole, -abs(interestValue) * 0.05)
-	
 	var startPawn = getRolePawn(startRole)
 	var reactPawn = getRolePawn(reactRole)
-	startPawn.afterSocialInteraction()
+	
+	if(answer == "agree"):
+		affectAffection(reactRole, startRole, abs(interestValue) * 0.15)
+		startPawn.afterSocialInteraction()
+	if(answer == "whatever"):
+		affectAffection(reactRole, startRole, 0.03)
+		startPawn.afterSocialInteraction()
+	if(answer == "disagree"):
+		affectAffection(reactRole, startRole, -abs(interestValue) * 0.05)
+		startPawn.afterFailedSocialInteraction()
 	reactPawn.afterSocialInteraction()
 	
 	if(skipPcCheck || getRoleChar(startRole).isPlayer()):
@@ -1428,17 +1435,20 @@ func canGetToSlutwall() -> bool:
 		return false
 	var floorID:String = room.getFloorID()
 	
-	return (floorID in ["FightClubFloor"])
+	if(!GM.main.getFlag("FightClubModule.BulldogBypassed")):
+		return false
+	
+	return (floorID in ["FightClubFloor", "MainHall"])
 
 func getSlutwallScoreMult() -> float:
 	if(isPlayerInvolved()):
 		return 1.0
-	var stocksAmount:int = GM.main.IS.getInteractionsOfTypeAmount("inSlutwall")
+	var stocksAmount:int = GM.main.IS.getInteractionsOfTypeAmount("InSlutwall")
 	
-	if(stocksAmount >= 4):
-		return 0.01
 	if(stocksAmount >= 3):
-		return 0.5
+		return 0.01
+	if(stocksAmount >= 2):
+		return 0.2
 	return 1.0
 
 func checkUncon(sexResult):

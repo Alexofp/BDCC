@@ -543,6 +543,11 @@ func getConnectedRoomsNearLimitDistance(theLoc:String, maxDepth:int, maxDistance
 				toDepth.append(nextDepth+1)
 	return result
 
+func setPawnsShowed(newS:bool):
+	for pawnID in pawns:
+		var worldPawn:Node2D = pawns[pawnID]
+		worldPawn.visible = newS
+
 func saveData():
 	var data = {}
 	data["lastAimedRoomID"] = lastAimedRoomID

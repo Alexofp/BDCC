@@ -218,3 +218,5 @@ func _react_scene_end(_tag, _result):
 		if(_result is Array && _result.size() > 0 && _result[0]):
 			endScene()
 		
+func supportsShowingPawns() -> bool:
+	return true

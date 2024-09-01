@@ -93,3 +93,6 @@ func loadData(data):
 	codeContex.setDatapack(datapack)
 	codeContex.setDatapackScene(datapackScene)
 	codeContex.loadData(SAVE.loadVar(data, "codeContex", {}))
+
+func supportsShowingPawns() -> bool:
+	return true

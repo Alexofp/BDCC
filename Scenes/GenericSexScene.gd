@@ -205,3 +205,6 @@ func loadData(data):
 	sexEngine.setInventoryToUse(sceneSavedItemsInv)
 	currentCategory = SAVE.loadVar(data, "currentCategory", [])
 	sexEngine.loadData(SAVE.loadVar(data, "sexEngine", {}))
+
+func supportsShowingPawns() -> bool:
+	return true

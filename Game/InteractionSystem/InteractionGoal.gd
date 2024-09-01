@@ -13,12 +13,14 @@ const Shower = "Shower"
 const RepairClothes = "RepairClothes"
 const Leave = "Leave"
 const Struggle = "Struggle"
+const GiveBirth = "GiveBirth"
+const HangoutAt = "HangoutAt"
 
 static func getAll():
-	return [Wander, Eat, Hangout, WorkMine, Patrol, POI, Save, Prostitute, Shower, RepairClothes, Leave, Struggle]
+	return [Wander, Eat, Hangout, WorkMine, Patrol, POI, Save, Prostitute, Shower, RepairClothes, Leave, Struggle, GiveBirth, HangoutAt]
 
 static func getAllAlone():
-	return [Wander, Eat, Hangout, WorkMine, POI, Shower, RepairClothes, Leave, Struggle]
+	return [Wander, Eat, Hangout, WorkMine, POI, Shower, RepairClothes, Leave, Struggle, GiveBirth]
 
 static func create(theID:String):
 	var newGoal

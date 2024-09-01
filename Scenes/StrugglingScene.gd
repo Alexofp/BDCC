@@ -445,3 +445,6 @@ func loadData(data):
 	fightMode = SAVE.loadVar(data, "fightMode", false)
 	restraintID = SAVE.loadVar(data, "restraintID", "")
 	shouldPlayAnimations = SAVE.loadVar(data, "shouldPlayAnimations", true)
+
+func supportsShowingPawns() -> bool:
+	return true

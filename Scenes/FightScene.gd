@@ -1050,3 +1050,6 @@ func doDebugAction(_id, _args = {}):
 	if(_id == "healEnemy"):
 		enemyCharacter.addPain(-enemyCharacter.painThreshold())
 		enemyCharacter.addLust(-enemyCharacter.lustThreshold())
+
+func supportsShowingPawns() -> bool:
+	return true

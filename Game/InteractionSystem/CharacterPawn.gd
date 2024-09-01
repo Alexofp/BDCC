@@ -366,6 +366,7 @@ func afterWonFight():
 
 func afterSex(_isDom:bool):
 	satisfySocial()
+	satisfyAnger()
 
 func getExhaustion() -> float:
 	return fightExhaustion

@@ -165,11 +165,12 @@ func updateCharacter():
 			GM.ui.addCharacterToPanel(id, currentCharactersVariants[id])
 
 func clearCharacter():
+	if(GM.main.getCurrentScene() == self):
+		GM.ui.clearCharactersPanel()
 	if(currentCharactersVariants.empty()):
 		return
 	currentCharactersVariants.clear()
-	if(GM.main.getCurrentScene() == self):
-		GM.ui.clearCharactersPanel()
+
 
 func setCharactersEasyList(newChars:Array):
 	for charID in currentCharactersVariants.keys():
@@ -369,6 +370,9 @@ func getSceneCompanions():
 	return []
 
 func isSpyingOnInteractionsWith(_charID:String):
+	return false
+
+func supportsShowingPawns() -> bool:
 	return false
 
 func saveData():

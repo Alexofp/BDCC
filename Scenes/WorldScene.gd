@@ -286,3 +286,6 @@ func resolveCustomCharacterName(_charID):
 	if(interaction.involvedPawns.has(_charID)):
 		return interaction.involvedPawns[_charID]
 	return .resolveCustomCharacterName(_charID)
+
+func supportsShowingPawns() -> bool:
+	return true

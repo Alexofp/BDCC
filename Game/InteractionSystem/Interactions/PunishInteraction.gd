@@ -16,6 +16,10 @@ func init_text():
 		addAction("stocks", "Stocks", "Lock them up in stocks!", "punishMean", 0.2 * getStocksScoreMult(), 60, {})
 	else:
 		addDisabledAction("Stocks", ""+("They need to be wearing a collar for this!" if canGetToStocks() else "Stocks are too far..")+"")
+	if(getRolePawn("punisher").isInmate() && getRoleChar("target").getInventory().hasEquippedItemWithTag(ItemTag.AllowsEnslaving) && canGetToSlutwall() && getRolePawn("target").isInmate()):
+		addAction("slutwall", "Slutwall", "Force them into a slutwall!", "punishMean", 0.2 * getSlutwallScoreMult(), 60, {})
+	else:
+		addDisabledAction("Slutwall", ""+(("They need to be wearing a collar for this!" if !getRoleChar("target").getInventory().hasEquippedItemWithTag(ItemTag.AllowsEnslaving) else "They are not one of the inmates..") if canGetToSlutwall() else "Can't get to the slutwall..")+"")
 	if(roleCanStartSex("punisher")):
 		addAction("sex", "Sex", "Just have some fun with them!", "sexDom", 1.0, 60, {})
 	else:
@@ -31,6 +35,8 @@ func init_text():
 func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "stocks"):
 		setState("about_to_stocks", "punisher")
+	if(_id == "slutwall"):
+		setState("about_to_slutwall", "punisher")
 	if(_id == "sex"):
 		setState("about_to_sex", "punisher")
 	if(_id == "sexsub"):
@@ -131,13 +137,62 @@ func just_leaving_do(_id:String, _args:Dictionary, _context:Dictionary):
 		stopMe()
 
 
+func about_to_slutwall_text():
+	saynn("{punisher.name} clips a leash to {target.your} collar.")
+	saynn("[say=punisher]SLUTWALL. SLUT. WALL.[/say]")
+
+	addAction("escort", "Escort", "Escort them towards the slutwall", "default", 1.0, 60, {})
+
+func about_to_slutwall_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "escort"):
+		setState("pulling_to_slutwall", "punisher")
+		goTowards("fight_slutwall")
+
+
+func pulling_to_slutwall_text():
+	saynn("{punisher.name} is pulling {target.name} towards the slutwall!")
+
+	addAction("escort", "Escort", "Pull them towards the slutwall", "default", 1.0, 60, {})
+
+func pulling_to_slutwall_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "escort"):
+		goTowards("fight_slutwall")
+		if(getLocation() == "fight_slutwall"):
+			setState("about_to_lock_slutwall", "punisher")
+
+
+func about_to_lock_slutwall_text():
+	saynn("{punisher.name} is locking {target.name} in the slutwall.")
+
+	addAction("lock_them", "Lock them", "Force them into the slutwall", "default", 1.0, 120, {})
+
+func about_to_lock_slutwall_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "lock_them"):
+		affectAffection("target", "punisher", -0.1)
+		setState("in_slutwall", "punisher")
+
+
+func in_slutwall_text():
+	saynn("{punisher.name} locks {target.name} into the slutwall!")
+	saynn("[say=punisher]ENJOY![/say]")
+
+	addAction("leave", "Leave", "Leave them be", "default", 1.0, 30, {})
+
+func in_slutwall_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "leave"):
+		stopMe()
+		startInteraction("InSlutwall", {inmate=getRoleID("target")})
+
+
 func getAnimData() -> Array:
 	if(getState() == "about_to_sex"):
 		return [StageScene.SexStart, "start", {pc="punisher", npc="target"}]
+	if(getState() == "in_slutwall"):
+		return [StageScene.SlutwallSex, "tease", {pc="inmate", npc="punisher"}]
 	if(getState() == "in_stocks"):
 		return [StageScene.StocksSexOral, "tease", {npc="punisher", pc="target"}]
-	if(getState() == "pulling_to_stocks"):
-		if(getLocation() != "main_punishment_spot"):
+	if(getState() in ["pulling_to_stocks", "pulling_to_slutwall"]):
+		if(getLocation() != "main_punishment_spot" && getLocation() != "fight_slutwall"):
 			return [StageScene.Duo, "walk", {pc="target", npc="punisher", npcAction="walk", flipNPC=true, bodyState={leashedBy="punisher"}}]
 	
 	return [StageScene.Duo, "stand", {pc="target", npc="punisher"}]

@@ -143,6 +143,7 @@ func removeDynamicCharacter(characterID, printDebug = true):
 			Log.print("removeDynamicCharacter(): Removing "+str(characterID)+" character")
 		removeDynamicCharacterFromAllPools(characterID)
 		RS.removeAllEntriesOf(characterID)
+		IS.deletePawn(characterID)
 		
 		dynamicCharacters[characterID].queue_free()
 		dynamicCharacters.erase(characterID)
@@ -493,6 +494,7 @@ func loadData(data):
 	GM.ui.recreateWorld()
 	GM.world.loadData(SAVE.loadVar(data, "world", {}))
 	GM.world.updatePawns(IS)
+	GM.world.setPawnsShowed(canShowPawns())
 
 func saveCharactersData():
 	var data = {}
@@ -875,6 +877,7 @@ func updateStuff():
 		worldEdit.apply(GM.world)
 	
 	GM.world.updatePawns(IS)
+	GM.world.setPawnsShowed(canShowPawns())
 
 
 func _on_Player_levelChanged():
@@ -1673,3 +1676,9 @@ func isPawnIDBeingSpied(_charID:String):
 
 func playerCanBeInterrupted() -> bool:
 	return sceneStack.size() == 1
+
+func canShowPawns() -> bool:
+	for scene in sceneStack:
+		if(!scene.supportsShowingPawns()):
+			return false
+	return true

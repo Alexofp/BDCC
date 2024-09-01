@@ -1,6 +1,8 @@
 extends InteractionGoalBase
 
 func getScore(_pawn:CharacterPawn) -> float:
+	if(_pawn.getCharacter().hasBoundArms() || _pawn.getCharacter().hasBlockedHands()):
+		return 0.0
 	if(_pawn.getCharacter().canRepairClothes()):
 		return 0.05
 	return 0.0

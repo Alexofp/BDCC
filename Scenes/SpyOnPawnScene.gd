@@ -106,3 +106,6 @@ func loadData(data):
 	.loadData(data)
 	
 	pawnID = SAVE.loadVar(data, "pawnID", "")
+
+func supportsShowingPawns() -> bool:
+	return true

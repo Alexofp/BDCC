@@ -250,8 +250,8 @@ func calculateFinalSatisfaction() -> float:
 		var patience:float = personalityScore({PersonalityStat.Impatient:-1.0})
 		total *= clamp(0.8 + patience * 0.35, 0.0, 1.0)
 	
-	if(getArousal() >= 0.5):
-		var arousalMod:float = 1.0 - getArousal()
+	if(getArousal() >= 0.9):
+		var arousalMod:float = 1.0 - getArousal() / 2.0
 		var patience:float = personalityScore({PersonalityStat.Impatient:-1.0})
 		total *= clamp(arousalMod + (patience * getArousal()), 0.0, 1.0)
 	

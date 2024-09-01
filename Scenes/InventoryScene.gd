@@ -246,3 +246,6 @@ func loadData(data):
 	
 	savedItemUniqueID = SAVE.loadVar(data, "savedItemUniqueID", "")
 	fightMode = SAVE.loadVar(data, "fightMode", false)
+
+func supportsShowingPawns() -> bool:
+	return true
