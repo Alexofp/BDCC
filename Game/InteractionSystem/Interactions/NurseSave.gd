@@ -100,7 +100,7 @@ func getPreviewLineForRole(_role:String) -> String:
 
 func getActivityIconForRole(_role:String):
 	if(_role == "nurse"):
-		return RoomStuff.PawnActivity.Chat
+		return RoomStuff.PawnActivity.Help
 	else:
 		return RoomStuff.PawnActivity.Unconscious
 

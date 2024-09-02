@@ -126,7 +126,7 @@ static func getRequiredExperience(_level) -> int:
 	return 100 + _level * 10 + int(sqrt(max(0,_level))) * 10
 
 func addExperience(addexp: int):
-	if(npc == null || !npc.isPlayer()):
+	if(npc == null || (!npc.isPlayer() && !npc.canAutoLevelUpFromFights())):
 		return
 	experience += addexp
 	
@@ -151,6 +151,9 @@ func checkNewLevel():
 		experience -= getRequiredExperienceNextLevel()
 		level += 1
 		addedAnyLevels = true
+		
+		if(npc != null && npc.canAutoLevelUpFromFights()):
+			npc.onAutoLevelUp()
 	
 	if(addedAnyLevels):
 		emit_signal("levelChanged")

@@ -693,24 +693,17 @@ func getSexResult(_args:Dictionary, checkForUncon=false):
 	
 	print("SEEEEEEEEEEEX")
 	# Do sex stuff here
-	var newResult:Dictionary = {}
+	var domID:String = getRoleID(_fightersData[0])
+	var subID:String = getRoleID(_fightersData[1])
+	var sexType = (_fightersData[2] if _fightersData.size() > 2 else SexType.DefaultSex)
 	
-	newResult["doms"] = {}
-	newResult["subs"] = {}
+	var sexEngine = SexEngine.new()
+	sexEngine.initPeople([domID], [subID])
+	sexEngine.initSexType(sexType)
+	sexEngine.generateGoals()
 	
-	newResult["doms"][getRoleID(_fightersData[0])] = {
-		"timesCame": RNG.randi_range(0, 3),
-		"averageLust": RNG.randf_rangeX2(0.0, 1.0),
-		"satisfaction": RNG.randf_rangeX2(0.0, 1.0),
-	}
-	newResult["subs"][getRoleID(_fightersData[1])] = {
-		"timesCame": RNG.randi_range(0, 3),
-		"averageLust": RNG.randf_rangeX2(0.0, 1.0),
-		"averageResistance": RNG.randf_rangeX2(0.0, 1.0),
-		"averageFear": RNG.randf_rangeX2(0.0, 1.0),
-		"satisfaction": RNG.randf_rangeX2(0.0, 1.0),
-		"isUnconscious": RNG.chance(5),
-	}
+	var newResult:Dictionary = sexEngine.doFastSex()
+	
 	_args["scene_result"] = newResult
 
 	doSexAftermath(_fightersData, newResult)
@@ -738,6 +731,9 @@ func getFightResult(_args:Dictionary):
 		[false, pawn2FightScore*pawn2FightScore],
 	]
 	var didWin:bool = RNG.pickWeightedPairs(randTable)
+	
+	pawn1.getChar().addFightExperienceAuto(pawn2.charID, didWin)
+	pawn2.getChar().addFightExperienceAuto(pawn1.charID, !didWin)
 	
 	var newResult:Dictionary = {won=didWin}
 	_args["scene_result"] = newResult

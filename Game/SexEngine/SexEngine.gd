@@ -318,6 +318,51 @@ func generateGoals():
 		
 	#domInfo.goals.append([SexGoal.Fuck, subID])
 
+func doFastSex():
+	var newResult:Dictionary = {}
+	
+	
+	newResult["doms"] = {}
+	newResult["subs"] = {}
+	
+	for subID in subs:
+		GM.main.updateCharacterUntilNow(subID)
+		GM.main.startUpdatingCharacter(subID)
+	
+	for domID in doms:
+		GM.main.updateCharacterUntilNow(domID)
+		GM.main.startUpdatingCharacter(domID)
+		
+		#var dom = personDomInfo.getChar()
+		var domInfo = doms[domID]
+		
+		for goalInfo in domInfo.goals:
+			var goalID = goalInfo[0]
+			var goalSubID = goalInfo[1]
+			var goalData = goalInfo[2]
+			
+			var sexGoal:SexGoalBase = GlobalRegistry.getSexGoal(goalID)
+			if(sexGoal != null):
+				sexGoal.doFastSex(self, domInfo, getSubInfo(goalSubID), goalData)
+				
+	for domID in doms:
+		newResult["doms"][domID] = {
+			"timesCame": RNG.randi_range(0, 3),
+			"averageLust": RNG.randf_rangeX2(0.0, 1.0),
+			"satisfaction": RNG.randf_rangeX2(0.0, 1.0),
+		}
+	for subID in subs:
+		newResult["subs"][subID] = {
+			"timesCame": RNG.randi_range(0, 3),
+			"averageLust": RNG.randf_rangeX2(0.0, 1.0),
+			"averageResistance": RNG.randf_rangeX2(0.0, 1.0),
+			"averageFear": RNG.randf_rangeX2(0.0, 1.0),
+			"satisfaction": RNG.randf_rangeX2(0.0, 1.0),
+			"isUnconscious": RNG.chance(5),
+		}
+	
+	return newResult
+
 func checkIfThereAreAnyActivitiesThatSupportGoal(goalID):
 	var allactivities = GlobalRegistry.getSexActivityReferences()
 	

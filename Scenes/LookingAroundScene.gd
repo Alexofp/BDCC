@@ -7,6 +7,8 @@ func _init():
 
 func _run():
 	if(state == ""):
+		setCharactersEasyList(GM.main.IS.getPawnIDsAt(GM.pc.getLocation()))
+		
 		saynn("Here is what's happening around you:")
 		addButtonAt(14, "Back", "Enough looking around", "endthescene")
 		

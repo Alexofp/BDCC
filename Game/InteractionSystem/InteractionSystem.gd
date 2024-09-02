@@ -512,7 +512,7 @@ func trySpawnPawn(specificCharType = null):
 	var chanceMeetOld = NpcFinder.chanceToMeetOldNPC(pool)
 	
 	var tryCount:int = 10
-	if(RNG.chance(chanceMeetOld) || possibleCharIds.size() <= 0):
+	if(!RNG.chance(chanceMeetOld) || possibleCharIds.size() <= 0):
 		tryCount = 0
 	while(tryCount > 0):
 		tryCount -= 1

@@ -16,6 +16,7 @@ var bellyMaxSizeModifier: float = 1.0
 
 # Sandbox options
 var sandboxPawnCount:int = 30
+var sandboxBreeding:String = "rare" # normal reduced rare veryrare never
 
 # Difficulty options
 var hardStruggleEnabled: bool = false
@@ -103,6 +104,7 @@ func resetToDefaults():
 	inventoryIconsSize = "small"
 	genderNamesOverrides = {}
 	sandboxPawnCount = 30
+	sandboxBreeding = "rare"
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
@@ -242,6 +244,20 @@ func getCumShotsIntensityMult():
 func getSandboxPawnCount() -> int:
 	return sandboxPawnCount
 
+func getSandboxOffscreenBreedingMult() -> float:
+	if(sandboxBreeding == "normal"):
+		return 1.0
+	if(sandboxBreeding == "reduced"):
+		return 0.5
+	if(sandboxBreeding == "rare"):
+		return 0.2
+	if(sandboxBreeding == "veryrare"):
+		return 0.05
+	if(sandboxBreeding == "never"):
+		return 0.0
+	
+	return 1.0
+
 func getInventoryIconSize():
 	if(inventoryIconsSize == "small"):
 		return 32
@@ -276,6 +292,20 @@ func getChangeableOptions():
 					"id": "sandboxPawnCount",
 					"type": "int",
 					"value": sandboxPawnCount,
+				},
+				{
+					"name": "Off-screen breeding",
+					"description": "How often should the pawns be able to breed each other while you're not looking",
+					"id": "sandboxBreeding",
+					"type": "list",
+					"value": sandboxBreeding,
+					"values": [
+						["normal", "Normal (100%)"],
+						["reduced", "Reduced (50%)"],
+						["rare", "Rare (20%)"],
+						["veryrare", "Very rare (5%)"],
+						["never", "Never (0%)"],
+					],
 				},
 			],
 		},
@@ -766,6 +796,8 @@ func applyOption(categoryID, optionID, value):
 			sandboxPawnCount = value
 			if(sandboxPawnCount < 0):
 				sandboxPawnCount = 0
+		if(optionID == "sandboxBreeding"):
+			sandboxBreeding = value
 	
 	if(categoryID == "jigglephysics"):
 		if(optionID == "jigglePhysicsBreastsEnabled"):
@@ -933,6 +965,7 @@ func saveData():
 		"cumDependsOnBallsSize": cumDependsOnBallsSize,
 		"cumIntensityMult": cumIntensityMult,
 		"sandboxPawnCount": sandboxPawnCount,
+		"sandboxBreeding": sandboxBreeding,
 	}
 	
 	return data
@@ -981,6 +1014,7 @@ func loadData(data):
 	cumDependsOnBallsSize = loadVar(data, "cumDependsOnBallsSize", true)
 	cumIntensityMult = loadVar(data, "cumIntensityMult", 1.0)
 	sandboxPawnCount = loadVar(data, "sandboxPawnCount", 30)
+	sandboxBreeding = loadVar(data, "sandboxBreeding", "rare")
 
 func saveToFile():
 	var saveData = saveData()

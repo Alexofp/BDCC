@@ -554,6 +554,8 @@ func isVeryLate():
 func stopProcessingUnusedCharacters():
 	for charID in charactersToUpdate.keys():
 		var character = getCharacter(charID)
+		if(character != null):
+			character.updateNonBattleEffects()
 		if(character == null || !character.shouldBeUpdated()):
 			print("STOPPED PROCESSING: "+str(charID))
 			charactersToUpdate.erase(charID)

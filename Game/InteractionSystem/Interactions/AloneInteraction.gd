@@ -115,7 +115,7 @@ func switchGoalToObject(newGoal):
 	newGoal.interaction = self
 	goal = newGoal
 	goal.onGoalStart()
-	print("NEW GOAL FOR PAWN "+str(newGoal.pawnID)+": "+str(newGoal.id))
+	#print("NEW GOAL FOR PAWN "+str(newGoal.pawnID)+": "+str(newGoal.id))
 	return true
 
 func start(_pawns:Dictionary, _args:Dictionary):

@@ -51,7 +51,7 @@ func onSpawn():
 	hunger = RNG.randf_range(0.0, 0.3)
 	timeSinceLastWork = RNG.randi_range(0, 6000)
 	social = RNG.randf_rangeX2(0.0, 0.6)
-	tiredness = RNG.randf_range(0.0, 0.7)
+	tiredness = RNG.randf_range(0.0, 0.1)
 
 func getChar() -> BaseCharacter:
 	if(charID == ""):
