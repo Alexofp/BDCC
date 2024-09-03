@@ -1137,6 +1137,24 @@ func onSexEnded(_context = {}):
 	for task in levelupTasks:
 		task.onSexEnded(theChar, _context)
 
+func onPawnDeleted(_pawn):
+	var theActivity = getActivity()
+	if(theActivity != null):
+		theActivity.onPawnDeleted(_pawn)
+
+func onInteractionChanged(_newInteraction):
+	var theActivity = getActivity()
+	if(theActivity != null):
+		theActivity.onInteractionChanged(_newInteraction)
+
+func onInteractionEvent(_eventID:String, _args:Dictionary):
+	var theActivity = getActivity()
+	if(theActivity != null):
+		theActivity.onInteractionEvent(_eventID, _args)
+
+func pawnExist() -> bool:
+	return GM.main.IS.hasPawn(getChar().getID())
+
 func saveData():
 	var data = {
 		"slaveType": slaveType,

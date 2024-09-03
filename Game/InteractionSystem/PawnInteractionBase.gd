@@ -504,6 +504,8 @@ func getScoreTypeValueGeneric(_scoreType:String, curPawn:CharacterPawn, dirToPaw
 		if(isInHeat):
 			finalScore *= 1.5
 		
+		finalScore *= dirToPawn.getSlutSkillMod()
+		
 		return finalScore
 		
 	return 1.0
@@ -1505,6 +1507,19 @@ func findProstitutionTargetsNearby(_ignoreList:Array = []) -> Array:
 			continue
 		result.append(pawnID)
 	return result
+
+func sendSlaveryActivityEvent(_role:String, _eventID:String, _args:Dictionary):
+	var thePawn = getRolePawn(_role)
+	if(thePawn != null):
+		thePawn.sendSlaveryActivityEvent(_eventID, _args)
+
+func shouldBeStoppedOnNewDay() -> bool:
+	for role in involvedPawns:
+		var thePawn = getRolePawn(role)
+		
+		if(thePawn.isPlayer() || thePawn.isSlaveToPlayer()):
+			return false
+	return true
 
 func saveData():
 	var data = {

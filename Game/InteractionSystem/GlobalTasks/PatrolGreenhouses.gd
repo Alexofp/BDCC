@@ -8,7 +8,7 @@ func _init():
 	maxAssignedUnscaled = 3
 
 func canDoTask(_pawn:CharacterPawn) -> bool:
-	return _pawn.isGuard()
+	return _pawn.isGuard() && !_pawn.isSlaveToPlayer()
 
 func configureGoal(_pawn:CharacterPawn, _goal):
 	_goal.zone = patrolZone

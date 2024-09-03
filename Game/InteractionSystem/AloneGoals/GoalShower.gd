@@ -3,8 +3,8 @@ extends InteractionGoalBase
 var sstate:String = "" # undress, shower
 
 func getScore(_pawn:CharacterPawn) -> float:
-	if(_pawn.getCharacter().hasBoundArms() || _pawn.getCharacter().hasBlockedHands()):
-		return 0.0
+	#if(_pawn.getCharacter().hasBoundArms() || _pawn.getCharacter().hasBlockedHands()):
+	#	return 0.0
 	if(_pawn.getCharacter().hasEffect(StatusEffect.CoveredInCum) || _pawn.getCharacter().hasEffect(StatusEffect.HasBodyWritings) || _pawn.getCharacter().hasEffect(StatusEffect.HasTallyMarks)):
 		return 0.05
 	if(_pawn.getCharacter().getStamina() <= 0.01):

@@ -92,6 +92,8 @@ func processTime(_howMuch:int):
 
 func setInteraction(newInt):
 	currentInteraction = newInt
+	if(isSlaveToPlayer()):
+		getNpcSlavery().onInteractionChanged(newInt)
 
 func getInteraction():
 	if(currentInteraction != null):
@@ -326,6 +328,26 @@ func isGeneralInmate() -> bool:
 func isHighSecInmate() -> bool:
 	return isInmate() && getChar().getInmateType() == InmateType.HighSec
 
+func isSlaveToPlayer():
+	return getChar().isSlaveToPlayer()
+
+func getNpcSlavery() -> NpcSlave:
+	return getChar().getNpcSlavery()
+
+func sendSlaveryActivityEvent(_eventID:String, _args:Dictionary):
+	if(isSlaveToPlayer()):
+		getNpcSlavery().onInteractionEvent(_eventID, _args)
+
+func getSlutSkillMod() -> float:
+	if(!isSlaveToPlayer()):
+		return 1.0
+	var npcSlavery:NpcSlave = getNpcSlavery()
+	var slutSkill:int = npcSlavery.getSlaveSkill(SlaveType.Slut)
+	
+	var finalValue:float = 1.0
+	finalValue += sqrt(float(slutSkill + 1))
+	return finalValue
+
 func getPawnTexture():
 	var theChar = getChar()
 	if(theChar == null):
@@ -496,6 +518,8 @@ func getProstitutionCreditsCost(_otherPawn, mult:float = 1.0, isDom:bool = false
 		amountRequested *= (1.0 + abs(subbyStat))
 	if(isDom && subbyStat > 0.5):
 		amountRequested *= (1.0 + abs(subbyStat))
+	
+	amountRequested *= sqrt(getSlutSkillMod())
 		
 	var finalCost:int = Util.maxi(2, int(round(amountRequested)))
 	return finalCost

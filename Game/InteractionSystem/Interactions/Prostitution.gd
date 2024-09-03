@@ -1,6 +1,7 @@
 extends PawnInteractionBase
 
 var jobTime = 0
+var minTime = 0
 var askCreds = 0
 var askType = ""
 var slutDom = false
@@ -14,13 +15,15 @@ func _init():
 func start(_pawns:Dictionary, _args:Dictionary):
 	doInvolvePawn("main", _pawns["main"])
 	setState("", "main")
+	if(_args.has("minTime")):
+		minTime = _args["minTime"]
 
 func init_text():
 	saynn("{main.You} {main.youAre} standing near a wall, {main.yourHis} leg pressed up against it..")
 
 	addAction("search", "Find clients", "Actively seek out clients", "default", 0.5, 60, {})
 	addAction("wait", "Just wait", "Just wait until someone decides to approache you", "default", 1.0, 180, {})
-	addAction("stop", "Stop", "Enough whooring..", "default", 0.2 if (jobTime > (60*30)) else 0.01, 0, {})
+	addAction("stop", "Stop", "Enough whooring..", "default", (0.2 if (jobTime > (60*30)) else 0.01) if minTime <= 0 else (0.2 if (jobTime > minTime) else 0.0), 0, {})
 
 func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "search"):
@@ -95,6 +98,7 @@ func giving_offer_do(_id:String, _args:Dictionary, _context:Dictionary):
 		if(getRolePawn("main").isPlayer()):
 			GM.pc.addCredits(askCreds)
 		setState("offer_accepted", "main")
+		sendSlaveryActivityEvent("main", "slutPaid", {credits=askCreds})
 	if(_id == "deny"):
 		setState("offer_denied", "main")
 	if(_id == "haggle"):
@@ -186,6 +190,7 @@ func client_demands_credits_do(_id:String, _args:Dictionary, _context:Dictionary
 			GM.pc.addCredits(-askCreds)
 		setState("client_got_credits_back", "client")
 		affectAffection("client", "main", 0.1)
+		sendSlaveryActivityEvent("main", "slutReturnedCredits", {credits=askCreds})
 	if(_id == "refuse"):
 		setState("slut_refused_creds_back", "client")
 		affectAffection("client", "main", -0.2)
@@ -244,6 +249,7 @@ func client_attacked_slut_do(_id:String, _args:Dictionary, _context:Dictionary):
 				GM.pc.addCredits(-askCreds)
 		
 			setState("client_won", "client")
+			sendSlaveryActivityEvent("main", "slutReturnedCredits", {credits=askCreds})
 		else:
 			setState("slut_won", "main")
 
@@ -317,6 +323,8 @@ func slut_scam_do(_id:String, _args:Dictionary, _context:Dictionary):
 		if(getRolePawn("main").isPlayer()):
 			GM.pc.addCredits(5)
 		setState("offer_accepted", "main")
+		
+		sendSlaveryActivityEvent("main", "slutPaid", {credits=5})
 	if(_id == "leave"):
 		setState("client_leaving_grumbly", "client")
 	if(_id == "demand_creds_back"):
@@ -372,6 +380,7 @@ func saveData():
 	var data = .saveData()
 
 	data["jobTime"] = jobTime
+	data["minTime"] = minTime
 	data["askCreds"] = askCreds
 	data["askType"] = askType
 	data["slutDom"] = slutDom
@@ -384,6 +393,7 @@ func loadData(_data):
 	.loadData(_data)
 
 	jobTime = SAVE.loadVar(_data, "jobTime", 0)
+	minTime = SAVE.loadVar(_data, "minTime", 0)
 	askCreds = SAVE.loadVar(_data, "askCreds", 0)
 	askType = SAVE.loadVar(_data, "askType", "")
 	slutDom = SAVE.loadVar(_data, "slutDom", false)

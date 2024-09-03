@@ -42,5 +42,5 @@ func doFastSex(_sexEngine, _domInfo, _subInfo, _data):
 		sub.addBodywriting(zone, writingID)
 		sendSexEvent(_sexEngine, SexEvent.BodyWritingAdded, _domInfo, _subInfo, {zone=zone,writingID=writingID})
 	
-	if(RNG.chance(20) || sub.hasTallymarks()):
+	if(RNG.chance(20) || sub.hasTallymarks() || (_sexEngine.getSexTypeID() in [SexType.StocksSex, SexType.SlutwallSex])):
 		sub.addTallymarkCrotch()

@@ -53,6 +53,12 @@ func _run():
 				
 				addActivityButtons()
 				return
+		elif(GM.main.IS.hasPawn(npc.getID())):
+			playAnimation(StageScene.Solo, "stand")
+			
+			saynn("{npc.name} is wandering around the prison somewhere.. Wait until {npc.he} {npc.verb('return')}.")
+			addButtonAt(14, "Back", "Enough interactions", "endthescene")
+			return
 		else:
 			playAnimation(StageScene.Duo, "stand", {npc=npcID, npcBodyState={chains=[["normal", "neck", "scene", "floor"]]} })
 		

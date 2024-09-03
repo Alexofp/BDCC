@@ -14,8 +14,33 @@ func start(_pawns:Dictionary, _args:Dictionary):
 
 func init_text():
 	saynn("{inmate.You} {inmate.youAre} stuck in stocks, there is very little {inmate.youHe} can do, the movement of {inmate.yourHis} head and arms is blocked by a giant metal frame with 3 holes, its angle is forcing {inmate.youHe} to constantly stay bent forward, exposing {inmate.yourHis} butt, your ankles are chained so {inmate.youHe} can’t really move them too. {inmate.YouHe} {inmate.youAre} completely helpless.")
-	if(!getRolePawn("inmate").isPlayer()):
+	var thePawn = getRolePawn("inmate")
+	if(!thePawn.isPlayer()):
 		saynn("{inmate.name} has "+str(getRoleChar("inmate").getStamina())+" stamina left.")
+	var npc = getRoleChar("inmate")
+	if(npc.hasEffect(StatusEffect.HasTallyMarks)):
+		var tallyMarks = npc.getEffect(StatusEffect.HasTallyMarks)
+		var tallyAmount = tallyMarks.totalAmount
+		if(tallyAmount > 0):
+			saynn("{inmate.YourHis} body has "+str(tallyAmount)+" tallymark"+("s" if tallyAmount != 1 else "")+" on it which means that {inmate.youHe} got used roughly that many times.")
+	if(thePawn.isSlaveToPlayer()):
+		var npcSlave:NpcSlave = thePawn.getNpcSlavery()
+		if(npcSlave.getWorkEfficiency() <= 0.1):
+			saynn("Your slave is very tired. Using {inmate.him} now will make {inmate.him} more depressed.")
+		if(npcSlave.getDespair() >= 0.8):
+			saynn("{inmate.He} looks very depressed, {inmate.his} mind might snap at any moment.")
+		elif(npcSlave.getDespair() >= 0.5):
+			if(npcSlave.getBrokenSpirit() >= 0.9):
+				saynn("{inmate.He} looks supressed. But {inmate.he} also doesn't resist at all, {inmate.his} spirit must be broken by now!")
+			elif(npcSlave.getBrokenSpirit() > 0.5):
+				saynn("{inmate.He} looks supressed. But {inmate.he} also doesn't resist much, a sign of {inmate.his} spirit breaking.")
+			else:
+				saynn("{inmate.He} looks supressed. But {inmate.he} keeps trying to break out occasionally, {inmate.his} spirit is clearly very high.")
+		else:
+			if(npcSlave.getBrokenSpirit() >= 0.9):
+				saynn("{inmate.He} doesn't resist at all, {inmate.his} spirit must be broken by now!")
+			elif(npcSlave.getBrokenSpirit() > 0.5):
+				saynn("{inmate.He} doesn't resist much, a sign of {inmate.his} spirit breaking.")
 
 	addAction("rest", "Rest", "Stay quiet and try to get some rest", "default", 0.1, 1800, {})
 	addAction("shout", "Shout", "Try to get some attetion to you..", "default", (0.1 + scorePersonality("inmate", {PersonalityStat.Naive:0.1})), 30, {})
@@ -87,6 +112,7 @@ func about_to_use_text():
 func about_to_use_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "continue"):
 		var _sexResult = getSexResult(_args)
+		sendSlaveryActivityEvent("inmate", "stocksUsed", {sex=_sexResult})
 		setState("after_use", "user")
 
 
@@ -224,6 +250,16 @@ func after_sleep_do(_id:String, _args:Dictionary, _context:Dictionary):
 		setState("", "inmate")
 
 
+func free_slave_text():
+	saynn("Enough stocks, you free {inmate.name} up and then order {inmate.him} to return back to your cell.")
+
+	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
+
+func free_slave_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		stopMe()
+
+
 func getInterruptActions(_pawn:CharacterPawn) -> Array:
 	var result:Array = []
 	if(getPawnAmount() == 1):
@@ -246,6 +282,16 @@ func getInterruptActions(_pawn:CharacterPawn) -> Array:
 			scoreRole = "inmate",
 			args = {},
 		})
+	if(getPawnAmount() == 1 && getRolePawn("inmate").isSlaveToPlayer()):
+		result.append({
+			id = "free_slave",
+			name = "Unlock stocks",
+			desc = "Let your slave return back to your cell..",
+			score = 0.0,
+			scoreType = "default",
+			scoreRole = "inmate",
+			args = {},
+		})
 	return result
 
 func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _context:Dictionary):
@@ -256,10 +302,13 @@ func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _conte
 		doInvolvePawn("saver", _pawn)
 		setState("about_to_save", "saver")
 		saveTryCount = 0
+	if(_id == "free_slave"):
+		doInvolvePawn("saver", _pawn)
+		setState("free_slave", "inmate")
 
 
 func getAnimData() -> Array:
-	if(getState() in ["save_saved"]):
+	if(getState() in ["save_saved", "free_slave"]):
 		return [StageScene.Duo, "stand", {pc="inmate", npc="saver"}]
 	if(getState() in ["about_to_save", "save_after_help"]):
 		return [StageScene.StocksSexOral, "tease", {pc="inmate", npc="saver"}]

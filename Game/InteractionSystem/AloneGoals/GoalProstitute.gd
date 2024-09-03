@@ -3,6 +3,11 @@ extends InteractionGoalBase
 var nextTarget:String = ""
 
 func getScore(_pawn:CharacterPawn) -> float:
+	if(_pawn.isSlaveToPlayer() && globalTask == ""):
+		var npcSlave:NpcSlave = _pawn.getNpcSlavery()
+		if(npcSlave.getActivityID() in ["Prostitution"]):
+			if(npcSlave.getActivity().shouldWork()):
+				return 0.7
 	if(globalTask != "" && _pawn.timeSinceLastWork > 3600):
 		return _pawn.calculateSlutScore()*0.2
 	return 0.0

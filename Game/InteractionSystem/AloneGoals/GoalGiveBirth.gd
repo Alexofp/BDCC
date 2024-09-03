@@ -2,6 +2,8 @@ extends InteractionGoalBase
 
 func getScore(_pawn:CharacterPawn) -> float:
 	if(_pawn.getChar().isReadyToGiveBirth()):
+		if(_pawn.isSlaveToPlayer()):
+			return 0.0
 		return 1.0
 	return 0.0
 

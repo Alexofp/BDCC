@@ -24,7 +24,15 @@ func onStart(_args = []):
 	if(slutSkill >= 15):
 		workHoursLeft += RNG.randi_range(4,6)
 	workHoursRemember = workHoursLeft
-
+	
+	var pawn = GM.main.IS.spawnPawnIfNeeded(getCharID())
+	pawn.setLocation(GM.pc.getCellLocation())
+	
+func pawnShouldReturnHome() -> bool:
+	#if(workHoursLeft <= 0):
+	#	return true
+	return false
+	
 func onNewDay():
 	pass
 
@@ -37,27 +45,41 @@ func preventsNormalInteractions():
 func getActivityText():
 	return "{npc.name} is currently out of there, whoring {npc.himself} out.\n\n{npc.He} will find you after {npc.he} finishes working.\n\nYou can cancel this but then you won't receive your slut's earned credits."
 
+func onPawnDeleted(_pawn):
+	stopActivity()
+	if(getChar() != null):
+		GM.main.addMessage("Your slave "+getChar().getName()+" is no longer doing prostitution..")
+
+func onInteractionChanged(_newInteraction):
+	if(_newInteraction != null && _newInteraction.id == "Unconscious" && _newInteraction.getRoleCharID("main") == getCharID()):
+		stopActivity()
+		GM.main.addMessage("Your slave "+getChar().getName()+" got beaten up unconscious and is no longer doing prostitution..")
+
 func hoursPassed(_howMuch):
+	if(!pawnExist()):
+		stopActivity()
+		return
 	if(workHoursLeft <= 0):
 		return
 	for _i in range(_howMuch):
 		if(workHoursLeft > 0):
 			workHoursLeft -= 1
-			processOneWorkHour()
 
-func processOneWorkHour():
-	var npcSlave:NpcSlave = getSlave()
-	# Probably could use some fancy formulas here
-	var chanceEarned = 15 + slutSkill * 3
-	var chanceMod = Util.remapValue(npcSlave.getObedience(), 0.0, 1.0, 0.5, 1.0) * Util.remapValue(npcSlave.getLove(), 0.0, 1.0, 0.5, 1.0) * Util.remapValue(npcSlave.getBrokenSpirit(), 0.0, 1.0, 0.5, 1.0)
-	
-	if(RNG.chance(chanceEarned * chanceMod)):
-		var potentialPayout:int = RNG.randi_range(1, Util.maxi(1, int(round(sqrt(slutSkill+1)))))
-		earnedCreds += potentialPayout
+func onInteractionEvent(_eventID:String, _args:Dictionary):
+	if(_eventID == "slutPaid"):
+		var howMuch:int = _args["credits"] if _args.has("credits") else 1
+		earnedCreds += howMuch
 		getSlave().addExperience(2)
+	if(_eventID == "slutReturnedCredits"):
+		var howMuch:int = _args["credits"] if _args.has("credits") else 1
+		earnedCreds -= howMuch
+		#getSlave().addExperience(2)
 
 func canReceiveCredits():
 	return workHoursLeft <= 0
+
+func shouldWork() -> bool:
+	return workHoursLeft > 0
 
 func getEarnedCredits():
 	return earnedCreds

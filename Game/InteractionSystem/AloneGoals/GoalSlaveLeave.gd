@@ -2,16 +2,17 @@ extends InteractionGoalBase
 
 func getScore(_pawn:CharacterPawn) -> float:
 	if(_pawn.isSlaveToPlayer()):
-		return 0.0
-	if(_pawn.tiredness >= 1.0):
-		return _pawn.tiredness - 0.2
+		var npcSlave:NpcSlave = _pawn.getNpcSlavery()
+		var activity = npcSlave.getActivity()
+		if(activity == null || activity.pawnShouldReturnHome()):
+			return 0.7
 	return 0.0
 
 func getKeepScore() -> float:
-	return 1.0
+	return 10.0
 
 func getText():
-	return "{main.name} is leaving.."
+	return "{main.name} is heading back to your cell.."
 
 func getActions() -> Array:
 	return [
@@ -27,22 +28,8 @@ func getActions() -> Array:
 
 func doAction(_id:String, _args:Dictionary):
 	if(_id == "go"):
-		var leaveTarget:String = "hall_elevator"
-		var pawn = getPawn()
-		if(pawn.isInmate()):
-			if(pawn.isLilac()):
-				leaveTarget = "cellblock_lilac_nearcell"
-			elif(pawn.isHighSecInmate()):
-				leaveTarget = "cellblock_red_nearcell"
-			else:
-				leaveTarget = "cellblock_orange_nearcell"
-		elif(pawn.isGuard()):
-			leaveTarget = "hall_elevator"
-		elif(pawn.isEngineer()):
-			leaveTarget = "mining_elevator"
-		elif(pawn.isNurse()):
-			leaveTarget = "med_elevator"
-		
+		var leaveTarget:String = GM.pc.getCellLocation()
+
 		if(getLocation() == leaveTarget):
 			completeGoal()
 			getPawn().deleteMe()

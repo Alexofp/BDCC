@@ -244,6 +244,11 @@ func spawnPawn(charID):
 	newPawn.onSpawn()
 	return newPawn
 
+func spawnPawnIfNeeded(charID):
+	if(hasPawn(charID)):
+		return getPawn(charID)
+	return spawnPawn(charID)
+
 func deletePawn(charID):
 	if(charID == null):
 		return
@@ -253,6 +258,9 @@ func deletePawn(charID):
 	stopInteractionsForPawnID(charID)
 	
 	var pawn = pawns[charID]
+	if(pawn.isSlaveToPlayer()):
+		pawn.getNpcSlavery().onPawnDeleted(pawn)
+	
 	pawn.isDeleted = true
 	var loc = pawn.getLocation()
 	var _ok = pawns.erase(charID)
@@ -401,14 +409,8 @@ func clearAll():
 	interactions.clear()
 
 func beforeNewDay():
-#	for charID in pawns.keys():
-#		if(charID == "pc"):
-#			continue
-#		deletePawn(charID)
-	#pawns.clear()
-	#interactions.clear()
 	for interaction in interactions.duplicate():
-		if(interaction.isPlayerInvolved()):
+		if(!interaction.shouldBeStoppedOnNewDay()):
 			continue
 		
 		var involvedPawns = interaction.getInvolvedPawnIDs()
