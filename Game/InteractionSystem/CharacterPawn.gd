@@ -450,6 +450,9 @@ func getActivityIcon():
 		return currentInteraction.getActivityIconForPawn(self)
 	return RoomStuff.PawnActivity.None
 
+func getShouldShowCollarOnSprite() -> bool:
+	return isSlaveToPlayer()
+
 func calculateSlutScore() -> float: # from 0.0 to 1.0
 	var result:float = 0.0
 	if(isPlayer()):

@@ -1521,6 +1521,33 @@ func shouldBeStoppedOnNewDay() -> bool:
 			return false
 	return true
 
+func getPawnRep(_role:String):
+	var thePawn = getRolePawn(_role)
+	if(thePawn == null):
+		return null
+	return thePawn.getCharacter().getReputation()
+
+# Maybe a generic version?
+func doReactOnLeash(_leasherRole:String, _leashedRole:String):
+	if(!GM.main.shouldExecuteOnceCodeblocksRun()):
+		return
+	# Only for player because optimization
+	if(!getRolePawn(_leashedRole).isPlayer()):
+		return
+	
+	var pawns:Array = GM.main.IS.getPawnsAt(getLocation())
+	
+	var rep:ReputationPlaceholder = getPawnRep(_leashedRole)
+	
+	for pawn in pawns:
+		if(isPawnInvolved(pawn)):
+			continue
+		if(!pawn.canInterrupt()):
+			continue
+		saynn("{"+pawn.charID+".name} walks by and notices {"+_leashedRole+".you} on a leash..")
+		saynn("[say="+pawn.charID+"]WHAT A SLUT![/say]")
+		rep.addRep(RepStat.Whore, 0.05)
+
 func saveData():
 	var data = {
 		"loc": location,

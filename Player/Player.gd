@@ -27,6 +27,7 @@ var intoxicationTolerance: float = 0.0
 
 # lust combat stuff
 var lustCombatState
+var reputation:Reputation
 
 var dynamicPersonality: bool = false
 
@@ -42,6 +43,9 @@ func _ready():
 	
 	lustCombatState = LustCombatState.new()
 	lustCombatState.setCharacter(self)
+	
+	reputation = Reputation.new()
+	reputation.setCharacter(self)
 	
 	var _ok = menstrualCycle.connect("readyToGiveBirthOnce", self, "onPlayerReadyToGiveBirth")
 	var _ok2 = menstrualCycle.connect("visiblyPregnant", self, "onPlayerVisiblyPregnant")
@@ -420,6 +424,7 @@ func saveData():
 	
 	data["fetishHolder"] = fetishHolder.saveData()
 	data["personality"] = personality.saveData()
+	data["reputation"] = reputation.saveData()
 	
 	return data
 
@@ -479,6 +484,7 @@ func loadData(data):
 	
 	fetishHolder.loadData(SAVE.loadVar(data, "fetishHolder", {}))
 	personality.loadData(SAVE.loadVar(data, "personality", {}))
+	reputation.loadData(SAVE.loadVar(data, "reputation", {}))
 	
 	checkLocation()
 		
@@ -903,3 +909,6 @@ func canStartSex() -> bool:
 	if(isOralBlocked()):
 		return false
 	return true
+
+func getReputation():
+	return reputation

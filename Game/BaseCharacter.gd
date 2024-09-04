@@ -3132,3 +3132,6 @@ func addFightExperienceAuto(_otherCharID:String, didWin:bool):
 		mult *= 0.6
 	
 	addExperience(int(round(100.0 * mult)))
+
+func getReputation() -> ReputationPlaceholder:
+	return ReputationPlaceholder.new()

@@ -358,6 +358,7 @@ func createWorldPawn(charID, pawn, loc):
 	newWorldPawn.global_position = getRoomByID(loc).global_position
 	newWorldPawn.setPawnTexture(pawn.getPawnTexture())
 	newWorldPawn.setPawnColor(pawn.getPawnColor())
+	newWorldPawn.setShowCollar(pawn.getShouldShowCollarOnSprite())
 	newWorldPawn.setPawnActivityIcon(pawn.getActivityIcon())
 	pawns[charID] = newWorldPawn
 

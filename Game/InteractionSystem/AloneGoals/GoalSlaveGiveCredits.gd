@@ -40,7 +40,9 @@ func doAction(_id:String, _args:Dictionary):
 				#	getPawn().getNpcSlavery().stopActivity()
 				#getPawn().deleteMe()
 				GM.main.runScene("SlutProstitutionReceiveCredits", [getPawn().charID])
-		goTowards(leaveTarget)
+		var room = GM.world.getRoomByID(leaveTarget)
+		if(room != null && !room.isOfflimitsForInmates()):
+			goTowards(leaveTarget)
 		
 
 func getAnimData() -> Array:

@@ -8,6 +8,7 @@ var floorid
 onready var move_tween = $MoveTween
 onready var icon = $Icon
 onready var icon_2 = $Icon2
+onready var icon_3 = $Icon/Icon3
 
 func moveToPos(thePos:Vector2):
 	move_tween.interpolate_property(self, "position",
@@ -55,3 +56,7 @@ func setPawnActivityIcon(theIcon):
 
 func setPawnColor(theColor:Color):
 	icon.self_modulate = theColor
+
+func setShowCollar(isShow:bool):
+	icon_3.visible = isShow
+		

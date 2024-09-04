@@ -72,6 +72,7 @@ var datapacks: Dictionary = {}
 var interactions: Dictionary = {}
 var interactionRefs: Dictionary = {}
 var globalTasks: Dictionary = {}
+var repStats:Dictionary = {}
 
 var bodypartStorageNode
 
@@ -327,6 +328,8 @@ func registerEverything():
 	emit_signal("loadingUpdate", 2.0/totalStages, "Skills")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
+	
+	registerRepStatFolder("res://Game/Reputation/RepStats/")
 	
 	registerStat("res://Skills/Stat/AgilityStat.gd")
 	registerStat("res://Skills/Stat/StrengthStat.gd")
@@ -2098,3 +2101,26 @@ func createGlobalTask(id: String):
 		
 func getGlobalTasks():
 	return globalTasks
+
+
+
+func registerRepStat(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	repStats[object.id] = object
+
+func registerRepStatFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerRepStat(scriptPath)
+
+func getRepStat(id: String):
+	if(repStats.has(id)):
+		return repStats[id]
+	else:
+		Log.printerr("ERROR: reputation stat with the id "+id+" wasn't found")
+		return null
+		
+func getRepStats():
+	return repStats

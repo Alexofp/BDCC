@@ -83,6 +83,7 @@ func about_to_subsex_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func pulling_to_stocks_text():
 	saynn("{punisher.name} is pulling {target.name} towards the punishment platform!")
+	doReactOnLeash("punisher", "target")
 
 	addAction("stocks", "Escort", "Pull them towards the stocks", "default", 1.0, 60, {})
 
@@ -151,6 +152,7 @@ func about_to_slutwall_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func pulling_to_slutwall_text():
 	saynn("{punisher.name} is pulling {target.name} towards the slutwall!")
+	doReactOnLeash("punisher", "target")
 
 	addAction("escort", "Escort", "Pull them towards the slutwall", "default", 1.0, 60, {})
 

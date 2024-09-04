@@ -91,7 +91,11 @@ func _run():
 		for skillID in skills:
 			var skill: SkillBase = skills[skillID]
 			sayn(skill.getVisibleName()+": level "+str(skill.getLevel()))
-				
+		
+		sayn("")
+		sayn("[b]Reputation:[/b]")
+		for line in GM.pc.getReputation().getInfoLines():
+			sayn(line)
 				
 		addButton("Close", "Continue on your way", "endthescene")
 		addButtonUnlessLate("Wait here", "Spend some time idling", "wait")
