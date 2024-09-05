@@ -189,12 +189,18 @@ static func getSpeciesName(species: Array):
 	
 	if(species.size() == 1):
 		var specie = GlobalRegistry.getSpecies(species[0])
-		return specie.getVisibleName()
+		if specie == null:
+			return "Unknown species"
+		else:
+			return specie.getVisibleName()
 	
 	var names = []
 	for specieID in species:
 		var specie = GlobalRegistry.getSpecies(specieID)
-		names.append(specie.getVisibleName())
+		if specie == null:
+			names.append("Unknown species")
+		else:
+			names.append(specie.getVisibleName())
 	
 	return join(names, "-") + " hybrid"
 
