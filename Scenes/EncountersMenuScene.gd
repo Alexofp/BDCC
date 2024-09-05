@@ -15,10 +15,10 @@ func _run():
 	if(state == ""):
 		var encounterSettings:EncounterSettings = GM.main.getEncounterSettings()
 		
-		saynn("This is a menu that contains info about your previous encounters.")
+		saynn("This is a menu that contains info about characters that you have met or might meet.")
 		
 		var hasSomeoneToForget = false
-		sayn("You remember:")
+		sayn("You remember that prison has:")
 		var encounterPools = GM.main.getDynamicCharactersPools()
 		if(encounterPools.size() == 0):
 			sayn(" - Nothing, explore to find more characters")

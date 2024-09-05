@@ -536,3 +536,22 @@ func canGrabAndFuck() -> bool:
 		return false
 	
 	return true
+
+func isOnALeash() -> bool:
+	if(currentInteraction == null):
+		return false
+	if(currentInteraction.isRoleOnALeash(currentInteraction.getRoleForPawn(self))):
+		return true
+	return false
+
+func isLeashingSomeone() -> bool:
+	if(currentInteraction == null):
+		return false
+	if(currentInteraction.isRoleLeashing(currentInteraction.getRoleForPawn(self))):
+		return true
+	return false
+
+func isBeingFucked() -> bool:
+	if(currentInteraction == null):
+		return false
+	return currentInteraction.isPawnBeingFucked(self)

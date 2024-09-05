@@ -3,7 +3,10 @@ extends "res://Scenes/SceneBase.gd"
 var pawnID:String = ""
 
 func _initScene(_args = []):
-	pawnID = _args[0]
+	if(_args.size() <= 0):
+		setState("pick_pawn")
+	else:
+		pawnID = _args[0]
 
 func _init():
 	sceneID = "SpyOnPawnScene"
@@ -39,6 +42,15 @@ func _run():
 		addButtonAt(14, "End", "Enough spying", "endthescene")
 		
 		addButton("Continue", "See what happens next", "progress_interaction")
+	
+	if(state == "pick_pawn"):
+		saynn("Pick which pawn you want to spy on")
+		
+		addButton("CANCEL", "Enough spying", "endthescene")
+		for thepawnID in GM.main.IS.getPawns():
+			var pawn:CharacterPawn = GM.main.IS.getPawn(thepawnID)
+			
+			addButton(pawn.getChar().getName(), pawn.getChar().getSmallDescription(), "choose_to_spy", [thepawnID])
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -57,6 +69,10 @@ func _react(_action: String, _args):
 				processTime(30)
 			interaction.doCurrentAction({scene=self})
 			#GM.main.IS.decideNextAction(pawn.getInteraction(), {scene=self})
+		return
+	if(_action == "choose_to_spy"):
+		pawnID = _args[0]
+		setState("")
 		return
 
 	setState(_action)

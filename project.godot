@@ -1030,6 +1030,11 @@ _global_script_classes=[ {
 "path": "res://Game/InteractionSystem/PawnInteractionBase.gd"
 }, {
 "base": "Object",
+"class": "PawnReactions",
+"language": "GDScript",
+"path": "res://Game/InteractionSystem/PawnReactions.gd"
+}, {
+"base": "Object",
 "class": "Perk",
 "language": "GDScript",
 "path": "res://Skills/Perk.gd"
@@ -1724,6 +1729,7 @@ _global_script_class_icons={
 "PartStatePicker": "",
 "PartTrait": "",
 "PawnInteractionBase": "",
+"PawnReactions": "",
 "Perk": "",
 "PerkBase": "",
 "Personality": "",

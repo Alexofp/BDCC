@@ -83,7 +83,6 @@ func about_to_subsex_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func pulling_to_stocks_text():
 	saynn("{punisher.name} is pulling {target.name} towards the punishment platform!")
-	doReactOnLeash("punisher", "target")
 
 	addAction("stocks", "Escort", "Pull them towards the stocks", "default", 1.0, 60, {})
 
@@ -152,7 +151,6 @@ func about_to_slutwall_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func pulling_to_slutwall_text():
 	saynn("{punisher.name} is pulling {target.name} towards the slutwall!")
-	doReactOnLeash("punisher", "target")
 
 	addAction("escort", "Escort", "Pull them towards the slutwall", "default", 1.0, 60, {})
 
@@ -190,7 +188,7 @@ func getAnimData() -> Array:
 	if(getState() == "about_to_sex"):
 		return [StageScene.SexStart, "start", {pc="punisher", npc="target"}]
 	if(getState() == "in_slutwall"):
-		return [StageScene.SlutwallSex, "tease", {pc="inmate", npc="punisher"}]
+		return [StageScene.SlutwallSex, "tease", {pc="target", npc="punisher"}]
 	if(getState() == "in_stocks"):
 		return [StageScene.StocksSexOral, "tease", {npc="punisher", pc="target"}]
 	if(getState() in ["pulling_to_stocks", "pulling_to_slutwall"]):
@@ -208,4 +206,14 @@ func getPreviewLineForRole(_role:String) -> String:
 	if(_role == "punisher"):
 		return "{punisher.name} is punishing {target.name}."
 	return .getPreviewLineForRole(_role)
+
+func isRoleOnALeash(_role:String) -> bool:
+	if(_role == "target" && getState() in ["pulling_to_stocks", "pulling_to_slutwall"]):
+		return true
+	return false
+	
+func isRoleLeashing(_role:String) -> bool:
+	if(_role == "punisher" && getState() in ["pulling_to_stocks", "pulling_to_slutwall"]):
+		return true
+	return false
 

@@ -333,6 +333,7 @@ func _on_GameUI_on_option_button(method, args):
 	
 func pickOption(method, args):
 	rollbacker.pushRollbackState()
+	IS.resetExtraText()
 	GM.main.clearMessages()
 	GlobalTooltip.resetTooltips()
 	
@@ -350,6 +351,9 @@ func pickOption(method, args):
 func runCurrentScene():
 	if(sceneStack.size() > 0):
 		sceneStack.back().run()
+		
+		if(IS.hasExtraText()):
+			GM.ui.say(IS.getExtraText())
 		
 		if(messages.size() > 0):
 			GM.ui.trimLineEndings()
@@ -491,6 +495,7 @@ func loadData(data):
 			scene.uniqueSceneID = getNewUniqueSceneID()
 			scene.parentSceneUniqueID = scene.uniqueSceneID - 1 # Preserves compatability with old saves
 	
+	IS.resetExtraText()
 	GM.ui.recreateWorld()
 	GM.world.loadData(SAVE.loadVar(data, "world", {}))
 	GM.world.updatePawns(IS)
@@ -1354,7 +1359,7 @@ func doDebugAction(id, args = {}):
 		# runScene("EnslaveDynamicNpcScene", [npcID])
 		
 	if(id == "spyRandom"):
-		runScene("SpyOnPawnScene", [RNG.pick(GM.main.IS.pawns)])
+		runScene("SpyOnPawnScene")
 		
 	if(id == "duplicateAndEnslave"):
 		var theNpcID = args["npcID"]

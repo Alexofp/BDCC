@@ -11,6 +11,8 @@ var currentPawn:String = "" # Role
 var directedToPawn:String = "" # Role
 var state:String = ""
 
+var charIDToRole:Dictionary = {} # ID = Role
+
 var currentActionID:String = ""
 var currentActionArgs:Dictionary = {}
 
@@ -570,9 +572,11 @@ func doInterruptActionFinal(_pawn:CharacterPawn, _id:String, _args:Dictionary, _
 func isPawnInvolved(pawn) -> bool:
 	if(pawn is String):
 		pawn = getPawn(pawn)
-	for role in involvedPawns:
-		if(getRolePawn(role) == pawn):
-			return true
+	if(charIDToRole.has(pawn.charID)):
+		return true
+	#for role in involvedPawns:
+	#	if(getRolePawn(role) == pawn):
+	#		return true
 	return false
 
 func doRemoveRole(role:String):
@@ -580,6 +584,7 @@ func doRemoveRole(role:String):
 		return false
 	var pawn = getRolePawn(role)
 	var _ok = involvedPawns.erase(role)
+	var _ok2 = charIDToRole.erase(pawn.charID)
 	if(!isPawnInvolved(pawn)):
 		pawn.setInteraction(null)
 
@@ -593,12 +598,18 @@ func doInvolvePawn(role:String, pawn, tpPawn:bool = true):
 	if(!isPawnInvolved(pawn)):
 		GM.main.IS.stopInteractionsForPawnID(pawn.charID)
 	involvedPawns[role] = pawn.charID
+	charIDToRole[pawn.charID] = role
 	pawn.setInteraction(self)
 	if(tpPawn):
 		pawn.setLocation(getLocation())
 
 func doInvolveRole(role:String, pawn, tpPawn:bool = true):
 	return doInvolvePawn(role, pawn, tpPawn)
+
+func rebuildCharIDToRole():
+	charIDToRole.clear()
+	for role in involvedPawns:
+		charIDToRole[involvedPawns[role]] = role
 
 func setState(newState:String, newRole:String, dirToRole:String = ""):
 	setCurrentPawn(newRole)
@@ -796,9 +807,11 @@ func getLocation() -> String:
 	return location
 
 func isPlayerInvolved() -> bool:
-	for role in involvedPawns:
-		if(involvedPawns[role] == "pc"):
-			return true
+	if(charIDToRole.has("pc")):
+		return true
+	#for role in involvedPawns:
+	#	if(involvedPawns[role] == "pc"):
+	#		return true
 	return false
 
 #func markAsUpdated():
@@ -936,9 +949,11 @@ func getKeepInteractionScoreFor(_role:String):
 	return 1.0
 
 func getKeepInteractionScoreForCharID(_charID:String):
-	for role in involvedPawns:
-		if(involvedPawns[role] == _charID):
-			return getKeepInteractionScoreFor(role)
+	if(charIDToRole.has(_charID)):
+		return getKeepInteractionScoreFor(charIDToRole[_charID])
+	#for role in involvedPawns:
+	#	if(involvedPawns[role] == _charID):
+	#		return getKeepInteractionScoreFor(role)
 	return 0.0
 
 func doLookAround(role:String, keepScoreMult:float = 1.0):
@@ -1276,9 +1291,11 @@ func canRoleBeInterrupted(_role:String) -> bool:
 	return false
 	
 func canCharIDBeInterrupted(_charID:String) -> bool:
-	for roleID in involvedPawns:
-		if(involvedPawns[roleID] == _charID):
-			return canRoleBeInterrupted(roleID)
+	if(charIDToRole.has(_charID)):
+		return canRoleBeInterrupted(charIDToRole[_charID])
+	#for roleID in involvedPawns:
+	#	if(involvedPawns[roleID] == _charID):
+	#		return canRoleBeInterrupted(roleID)
 	return false
 	
 func addLustFocusButtons(actionID:String, _role1:String, _role2:String):
@@ -1378,10 +1395,19 @@ func getActivityIconForRoleFinal(_role:String):
 func getActivityIconForPawn(pawn):
 	if(pawn == null):
 		return RoomStuff.PawnActivity.None
-	for role in involvedPawns:
-		if(involvedPawns[role] == pawn.charID):
-			return getActivityIconForRoleFinal(role)
+	if(charIDToRole.has(pawn.charID)):
+		return getActivityIconForRoleFinal(charIDToRole[pawn.charID])
+	#for role in involvedPawns:
+	#	if(involvedPawns[role] == pawn.charID):
+	#		return getActivityIconForRoleFinal(role)
 	return RoomStuff.PawnActivity.None
+
+func isPawnBeingFucked(pawn) -> bool:
+	if(!currentActionArgs.has("sex")):
+		return false
+	if(currentActionArgs["sex"][1] == getRoleForPawn(pawn)):
+		return true
+	return false
 
 func triggerRandomStocksEvent(_lewdChance, _willingSexChance, _unWillingSexChance, _nothingChance):
 	if(!isPlayersTurn()):
@@ -1469,9 +1495,11 @@ func triggerUnconsciousPCGrabEvent(_pawn):
 	return false
 
 func getPreviewLineForPawn(_pawn) -> String:
-	for role in involvedPawns:
-		if(involvedPawns[role] == _pawn.charID):
-			return getPreviewLineForRoleFinal(role)
+	if(charIDToRole.has(_pawn.charID)):
+		return getPreviewLineForRoleFinal(charIDToRole[_pawn.charID])
+	#for role in involvedPawns:
+	#	if(involvedPawns[role] == _pawn.charID):
+	#		return getPreviewLineForRoleFinal(role)
 	return ""
 
 func getPreviewLineForRoleFinal(_role:String) -> String:
@@ -1548,6 +1576,20 @@ func doReactOnLeash(_leasherRole:String, _leashedRole:String):
 		saynn("[say="+pawn.charID+"]WHAT A SLUT![/say]")
 		rep.addRep(RepStat.Whore, 0.05)
 
+func getRoleForCharID(_charID:String) -> String:
+	if(charIDToRole.has(_charID)):
+		return charIDToRole[_charID]
+	return ""
+
+func getRoleForPawn(_pawn) -> String:
+	return getRoleForCharID(_pawn.charID)
+
+func isRoleOnALeash(_role:String) -> bool:
+	return false
+
+func isRoleLeashing(_role:String) -> bool:
+	return false
+
 func saveData():
 	var data = {
 		"loc": location,
@@ -1584,3 +1626,4 @@ func loadData(_data):
 	isWaitingScene = SAVE.loadVar(_data, "ws", false)
 	cachedLastDir = SAVE.loadVar(_data, "cLD", -1)
 	wasDeleted = SAVE.loadVar(_data, "wD", false)
+	rebuildCharIDToRole()

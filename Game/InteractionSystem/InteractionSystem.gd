@@ -9,6 +9,9 @@ var globalTasks:Dictionary = {}
 
 var usedCharIDsToday:Dictionary = {}
 
+var extraText:String = ""
+var reactCooldowns:Dictionary = {}
+
 # Unsaved
 var interactionsDisabled:bool = false
 var pawnDistribution = {
@@ -34,10 +37,12 @@ func saveData():
 		"pawns": pawnData,
 		"interactions": interactionData,
 		"usedIDs": usedCharIDsToday,
+		"reactCooldowns": reactCooldowns,
 	}
 
 func loadData(_data):
 	usedCharIDsToday = SAVE.loadVar(_data, "usedIDs", {})
+	reactCooldowns = SAVE.loadVar(_data, "reactCooldowns", {})
 	
 	pawns.clear()
 	pawnsByLoc.clear()
@@ -106,6 +111,10 @@ func processTime(_howMuch:int):
 	for pawnID in pawns:
 		var pawn:CharacterPawn = pawns[pawnID]
 		pawn.checkAloneInteraction()
+	for pawnID in reactCooldowns.keys():
+		reactCooldowns[pawnID] -= _howMuch
+		if(reactCooldowns[pawnID] <= 0):
+			var _ok = reactCooldowns.erase(pawnID)
 
 	#print(pawns)
 	var maxProcesses:int = 100
@@ -471,6 +480,20 @@ func checkOnMeetInteractions(pawn1, pawn2, pawn2Moved:bool):
 		if(shouldRunData[0]):
 			startInteraction(interaction.id, shouldRunData[1], shouldRunData[2] if shouldRunData.size() > 2 else {})
 			return true
+			
+	# Reacts here?
+	if(pawn2.isPlayer() && GM.main.canShowPawns()):
+		var pcPawn = pawn2
+		var otherPawn = pawn1
+		#if(pawn2.isPlayer()):
+		#	pcPawn = pawn2
+		#	otherPawn = pawn1
+		
+		if(otherPawn.canInterrupt()):
+			if(!reactCooldowns.has(otherPawn.charID)):
+				if(PawnReactions.doReact(pcPawn, otherPawn)):
+					reactCooldowns[otherPawn.charID] = 120
+			
 	return false
 
 func getGlobalTasks() -> Dictionary:
@@ -619,3 +642,15 @@ func getAllUnconsciousPawns() -> Array:
 			continue
 		result.append(interaction.getRolePawn("main"))
 	return result
+
+func getExtraText() -> String:
+	return extraText
+
+func hasExtraText() -> bool:
+	return !extraText.empty()
+
+func resetExtraText():
+	extraText = ""
+
+func saynnExtra(newT:String):
+	extraText += newT + "\n\n"

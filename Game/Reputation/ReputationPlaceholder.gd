@@ -12,3 +12,6 @@ func getRepScore(_stat:String) -> float:
 
 func addRep(_stat:String, _howMuch:float, _showMessage:bool = true):
 	pass
+
+func addRepBelowLevel(_stat:String, _howMuch:float, _level:int, _showMessage:bool = true):
+	pass

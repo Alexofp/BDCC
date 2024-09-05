@@ -103,6 +103,7 @@ func _run():
 		addButton("Gender", "Pick your gender", "pickgender")
 		addButton("Pronouns", "Pick your pronouns", "pickpronouns")
 		addButton("Encounters", "Info about your previous encounters", "encountersMenu")
+		addButton("Reputation", "Look at your reputation", "reputationMenu")
 		addButton("Look for trouble", "Try to find an encounter", "lookfortrouble")
 		if(!getFlag("Game_PickedStartingPerks", false)):
 			addButton("Pick Perks!", "Pick your starting perks. You can only do this once", "pickstartingperks")
@@ -156,6 +157,45 @@ func _run():
 		saynn("Try some other area.")
 		
 		addButton("Continue", "Oh well", "")
+	
+	if(state == "reputationMenu"):
+		var reputation:Reputation = GM.pc.getReputation()
+		
+		saynn("Your current prison reputation:")
+		for repID in GlobalRegistry.getRepStats():
+			var repStat:RepStatBase = GlobalRegistry.getRepStat(repID)
+			
+			var repLevel:int = reputation.getRepLevel(repID)
+			var repScore:float = reputation.getRepScore(repID)
+			var nextScore:float = repStat.getNeededScoreForLevel(repLevel+1)
+			var prevScore:float = -repStat.getNeededScoreForLevel(repLevel-1)
+			
+			var normScore:float = (repScore - prevScore) / (nextScore - prevScore)
+			
+			sayn("[b]"+repStat.getVisibleName()+"[/b]")
+			sayn("Your current level is '"+repStat.getTextForLevel(repLevel, reputation)+"' (level "+str(repLevel)+"/"+(str(repStat.getMaxLevel()) if repLevel >= 0 else str(repStat.getMinLevel()))+")")
+			sayn("PREV [font=res://Fonts/smallconsolefont.tres]"+Util.textProgressBar(normScore, 40)+"[/font] NEXT")
+			var specialReq = repStat.getSpecialRequirementToReachLevel(repLevel+1, reputation)
+			if(specialReq != null && repScore>=nextScore):
+				sayn("LEVEL UP REQUIREMENT: "+str(specialReq[1]))
+			
+			sayn("Current effects:")
+			var repEffects:Array = repStat.getEffectsInfoForLevel(repLevel, reputation)
+			if(repEffects.size() <= 0):
+				sayn("- NONE")
+			else:
+				for line in repEffects:
+					sayn("- "+line)
+			
+			var maxLevel:int = repStat.getMaxLevel()
+			var minLevel:int = repStat.getMinLevel()
+			if(repLevel >= maxLevel):
+				sayn("(You have reached the highest reputation level possible)")
+			if(repLevel <= minLevel):
+				sayn("(You have reached the lowest reputation level possible)")
+			sayn("")
+		
+		addButton("Back", "Go back to the previous menu", "")
 
 func onMinigameTest(_score:MinigameResult):
 	Log.print("SCORE: "+str(_score.score))
