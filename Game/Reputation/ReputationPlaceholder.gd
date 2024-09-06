@@ -15,3 +15,9 @@ func addRep(_stat:String, _howMuch:float, _showMessage:bool = true):
 
 func addRepBelowLevel(_stat:String, _howMuch:float, _level:int, _showMessage:bool = true):
 	pass
+
+func isEventRequired(_eventID:String) -> bool:
+	return false
+
+func handleSpecialEvent(_eventID:String):
+	pass

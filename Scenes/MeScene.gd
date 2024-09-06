@@ -167,14 +167,15 @@ func _run():
 			
 			var repLevel:int = reputation.getRepLevel(repID)
 			var repScore:float = reputation.getRepScore(repID)
-			var nextScore:float = repStat.getNeededScoreForLevel(repLevel+1)
-			var prevScore:float = -repStat.getNeededScoreForLevel(repLevel-1)
+			var nextScore:float = repStat.getNeededScoreForLevel(repLevel+1, repLevel)
+			var prevScore:float = -repStat.getNeededScoreForLevel(repLevel-1, repLevel)
 			
 			var normScore:float = (repScore - prevScore) / (nextScore - prevScore)
 			
 			sayn("[b]"+repStat.getVisibleName()+"[/b]")
 			sayn("Your current level is '"+repStat.getTextForLevel(repLevel, reputation)+"' (level "+str(repLevel)+"/"+(str(repStat.getMaxLevel()) if repLevel >= 0 else str(repStat.getMinLevel()))+")")
 			sayn("PREV [font=res://Fonts/smallconsolefont.tres]"+Util.textProgressBar(normScore, 40)+"[/font] NEXT")
+			#sayn("PREV = "+str(prevScore)+" NEXT = "+str(nextScore))
 			var specialReq = repStat.getSpecialRequirementToReachLevel(repLevel+1, reputation)
 			if(specialReq != null && repScore>=nextScore):
 				sayn("LEVEL UP REQUIREMENT: "+str(specialReq[1]))

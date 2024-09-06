@@ -379,6 +379,8 @@ func getScoreTypeValueGeneric(_scoreType:String, curPawn:CharacterPawn, dirToPaw
 		finalScore += max(naiveness, 0.0) * 0.5
 		finalScore += max(subbyness, 0.0) * 0.5
 		
+		finalScore *= dirToPawn.getWhoreRepMult()
+		finalScore *= dirToPawn.getAlphaRepMult()
 		
 		return clamp(finalScore, 0.02, 2.0)
 	if(_scoreType == "sexUse"):
@@ -416,6 +418,8 @@ func getScoreTypeValueGeneric(_scoreType:String, curPawn:CharacterPawn, dirToPaw
 		else:
 			finalScore *= social
 		
+		finalScore *= dirToPawn.getWhoreRepMult()
+		
 		finalScore = clamp(finalScore, 0.01, 2.0)
 		return finalScore
 	if(_scoreType == "attack"):
@@ -446,11 +450,13 @@ func getScoreTypeValueGeneric(_scoreType:String, curPawn:CharacterPawn, dirToPaw
 			finalScore += anger * (1.0 + meanness)
 		if(affection >= 0.9 && naiveness >= 0.6): # Naive sub simulation
 			finalScore += affection * (1.0 + naiveness) * 2.0
-		if(subbyness >= 0.6): # Subby sub simulation
+		if(subbyness >= 0.3): # Subby sub simulation
 			finalScore += subbyness
 			
 		finalScore *= (1.0+subbyness)
 		finalScore *= (1.0 + naiveness * 0.3)
+		
+		finalScore *= dirToPawn.getAlphaRepMult()
 		
 		return finalScore
 	if(_scoreType == "agreeSexAsDom"):
@@ -473,6 +479,8 @@ func getScoreTypeValueGeneric(_scoreType:String, curPawn:CharacterPawn, dirToPaw
 			finalScore += dommyness
 		finalScore *= (1.0+dommyness)
 		finalScore *= (1.0+meanness*0.2)
+		
+		finalScore *= dirToPawn.getWhoreRepMult()
 		
 		return finalScore
 	if(_scoreType == "agreeSexWithSlut"):
@@ -507,6 +515,10 @@ func getScoreTypeValueGeneric(_scoreType:String, curPawn:CharacterPawn, dirToPaw
 			finalScore *= 1.5
 		
 		finalScore *= dirToPawn.getSlutSkillMod()
+		if(!isDomSlut):
+			finalScore *= dirToPawn.getWhoreRepMult()
+		else:
+			finalScore *= dirToPawn.getAlphaRepMult()
 		
 		return finalScore
 		
@@ -704,7 +716,7 @@ func getSexResult(_args:Dictionary, checkForUncon=false):
 	
 	var _fightersData = currentActionArgs["sex"]
 	
-	print("SEEEEEEEEEEEX")
+	#print("SEEEEEEEEEEEX")
 	# Do sex stuff here
 	var domID:String = getRoleID(_fightersData[0])
 	var subID:String = getRoleID(_fightersData[1])
@@ -766,6 +778,7 @@ func doFightAftermath(_fightersData, newResult):
 func doSexAftermath(_sexData, _newResult):
 	var domPawn = getRolePawn(_sexData[0])
 	var subPawn = getRolePawn(_sexData[1])
+	var sexType = (_sexData[2] if _sexData.size() > 2 else SexType.DefaultSex)
 	
 	if(domPawn != null):
 		domPawn.afterSex(true)
@@ -790,6 +803,17 @@ func doSexAftermath(_sexData, _newResult):
 	if(domPawn != null && subPawn != null):
 		affectAffection(_sexData[0], _sexData[1], (min(domSatisfaction, subSatisfaction) - 0.5)*0.4)
 		affectLust(_sexData[0], _sexData[1], (averageSatisfaction - 0.5)*0.5)
+		
+		if(sexType in [SexType.StocksSex, SexType.SlutwallSex]):
+			subPawn.addRepScore(RepStat.Alpha, -domSatisfaction * 0.5)
+		
+		if(domSatisfaction > 0.7 || (sexType != SexType.DefaultSex)):
+			subPawn.addRepScore(RepStat.Whore, domSatisfaction * 0.3)
+		elif(domSatisfaction < 0.4):
+			subPawn.addRepScore(RepStat.Whore, -(1.0-domSatisfaction) * 0.3)
+		
+		if(subSatisfaction > 0.8):
+			domPawn.addRepScore(RepStat.Alpha, subSatisfaction * 0.4)
 
 func doCurrentAction(_context:Dictionary = {}):
 	if(currentActionID == "" || wasDeleted):
@@ -1409,6 +1433,13 @@ func isPawnBeingFucked(pawn) -> bool:
 		return true
 	return false
 
+func isPawnFuckingSomeone(pawn) -> bool:
+	if(!currentActionArgs.has("sex")):
+		return false
+	if(currentActionArgs["sex"][0] == getRoleForPawn(pawn)):
+		return true
+	return false
+
 func triggerRandomStocksEvent(_lewdChance, _willingSexChance, _unWillingSexChance, _nothingChance):
 	if(!isPlayersTurn()):
 		return false
@@ -1589,6 +1620,29 @@ func isRoleOnALeash(_role:String) -> bool:
 
 func isRoleLeashing(_role:String) -> bool:
 	return false
+
+func doRepEvent(_role:String, _eventID:String):
+	var character = getRoleChar(_role)
+	if(character != null):
+		var rep:ReputationPlaceholder = character.getReputation()
+		rep.handleSpecialEvent(_eventID)
+
+func addRepScore(_role:String, _repID:String, _howMuch:float):
+	var pawn = getRolePawn(_role)
+	if(pawn != null):
+		pawn.addRepScore(_repID, _howMuch)
+
+func getRepLevel(_role:String, _repID:String) -> int:
+	var pawn = getRolePawn(_role)
+	if(pawn != null):
+		return pawn.getRepLevel(_repID)
+	return 0
+
+func hasRepLevelPC(_role:String, _repID:String, _reqLevel:int) -> bool:
+	var pawn = getRolePawn(_role)
+	if(pawn != null && pawn.isPlayer()):
+		return (pawn.getRepLevel(_repID) >= _reqLevel)
+	return true
 
 func saveData():
 	var data = {

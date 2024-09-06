@@ -201,6 +201,7 @@ func hasSubmittedToPC():
 	return submitted
 func doSubmitToPC():
 	submitted = true
+	GM.pc.getReputation().handleSpecialEvent("makeobey")
 
 # Has the slave snapped
 # If broken, slaves becomes a doll
@@ -209,6 +210,7 @@ func isMindBroken():
 	return broken
 func doMindBreak():
 	broken = true
+	GM.pc.getReputation().handleSpecialEvent("makeobey")
 func unMindBreak():
 	broken = false
 var brokenWarnings = 0 # Might use this as a warning?
@@ -840,6 +842,8 @@ func doLevelup():
 		var howMuchExp = int(slaveLevel * 5)
 		GM.main.addMessage("You received "+str(howMuchExp)+" experience")
 		GM.pc.addExperience(howMuchExp)
+		
+		GM.pc.getReputation().addRep(RepStat.Alpha, 0.2*sqrt(slaveLevel))
 		
 	emit_signal("onSlaveLevelup", self)
 

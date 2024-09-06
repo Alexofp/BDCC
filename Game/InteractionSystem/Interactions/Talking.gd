@@ -39,6 +39,8 @@ func init_text():
 		addDisabledAction("Offer sex", "You can't start sex like this..")
 	addAction("offerself", "Offer self", "Offer them to fuck you", "sexSub", 0.2, 60, {})
 	addAction("leave", "Leave", "Enough chatting around.", "justleave", 1.0, 30, {})
+	if(getRolePawn("starter").canEnslaveForFree(getRolePawn("reacter"))):
+		addAction("enslave_free", "Enslave!", "They are subby enough.. and you are Alpha enough too..", "default", 0.0, 60, {})
 
 	triggerTalkRunEvents("reacter")
 
@@ -59,6 +61,9 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 		setState("offered_self", "reacter")
 	if(_id == "leave"):
 		setState("about_to_leave", "starter")
+	if(_id == "enslave_free"):
+		stopMe()
+		runScene("KidnapDynamicNpcScene", [getRoleID("reacter")])
 
 
 func about_to_leave_text():

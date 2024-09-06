@@ -39,7 +39,7 @@ func isEventRequired(_eventID:String) -> bool:
 		var curLevel:int = getRepLevel(repID)
 		var curScore:float = getRepScore(repID)
 		var nextLevel:int = curLevel + 1
-		var neededScore:float = repStat.getNeededScoreForLevel(nextLevel)
+		var neededScore:float = repStat.getNeededScoreForLevel(nextLevel, curLevel)
 		if(curScore >= neededScore):
 			var specialReq = repStat.getSpecialRequirementToReachLevel(nextLevel, self)
 			if(specialReq != null && specialReq[0] == _eventID):
@@ -56,7 +56,7 @@ func handleSpecialEvent(_eventID:String):
 		if(curLevel >= maxLevel):
 			continue
 		
-		var neededScore:float = repStat.getNeededScoreForLevel(nextLevel)
+		var neededScore:float = repStat.getNeededScoreForLevel(nextLevel, curLevel)
 		var specialReq = repStat.getSpecialRequirementToReachLevel(nextLevel, self)
 		
 		if(curScore >= neededScore && specialReq != null):
@@ -81,7 +81,7 @@ func addRep(_stat:String, _howMuch:float, _showMessage:bool = true):
 	if(_howMuch > 0.0):
 		var nextLevel:int = curLevel + 1
 		var maxLevel:int = repStat.getMaxLevel()
-		var neededScore:float = repStat.getNeededScoreForLevel(nextLevel)
+		var neededScore:float = repStat.getNeededScoreForLevel(nextLevel, curLevel)
 		
 		if(!scores.has(_stat)):
 			scores[_stat] = 0.0
@@ -110,7 +110,7 @@ func addRep(_stat:String, _howMuch:float, _showMessage:bool = true):
 	elif(_howMuch < 0.0):
 		var nextLevel:int = curLevel - 1
 		var minLevel:int = repStat.getMinLevel()
-		var neededScore:float = -repStat.getNeededScoreForLevel(nextLevel)
+		var neededScore:float = -repStat.getNeededScoreForLevel(nextLevel, curLevel)
 		
 		if(!scores.has(_stat)):
 			scores[_stat] = 0.0
@@ -134,9 +134,9 @@ func onRepLevelChanged(_stat:String, _newLevel:int, _wentUp:bool, _showMessage:b
 		if(repStat == null):
 			return
 		if(_wentUp):
-			addMessage("Your '"+str(repStat.getVisibleName())+"' went up a level. You are now known as '"+repStat.getTextForLevel(_newLevel, self)+"'!")
+			addMessage("Your '"+str(repStat.getVisibleName())+"' went up a level. You are now known as '[b]"+repStat.getTextForLevel(_newLevel, self)+"[/b]'!")
 		else:
-			addMessage("Your '"+str(repStat.getVisibleName())+"' went down a level. You are now known as '"+repStat.getTextForLevel(_newLevel, self)+"'!")
+			addMessage("Your '"+str(repStat.getVisibleName())+"' went down a level. You are now known as '[b]"+repStat.getTextForLevel(_newLevel, self)+"[/b]'!")
 
 func onRepScoreChanged(_stat:String, _newScore:float, _wentUp:bool, _showMessage:bool=true):
 	if(isPlayer()):

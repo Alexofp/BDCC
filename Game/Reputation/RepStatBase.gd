@@ -18,7 +18,12 @@ func getMaxLevel() -> int:
 func getMinLevel() -> int:
 	return -1
 
-func getNeededScoreForLevel(_level:int) -> float:
+func getNeededScoreForLevel(_level:int, _curLevel:int) -> float:
+	if(_curLevel > 0 && _level < _curLevel):
+		return 1.0
+	if(_curLevel < 0 && _level > _curLevel):
+		return 1.0
+	
 	var absLevel:int = _level
 	if(absLevel < 0):
 		absLevel = -absLevel

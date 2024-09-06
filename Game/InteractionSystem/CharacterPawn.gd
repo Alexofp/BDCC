@@ -523,6 +523,11 @@ func getProstitutionCreditsCost(_otherPawn, mult:float = 1.0, isDom:bool = false
 		amountRequested *= (1.0 + abs(subbyStat))
 	
 	amountRequested *= sqrt(getSlutSkillMod())
+	if(!isDom):
+		amountRequested *= sqrt(getWhoreRepMult())
+	else:
+		amountRequested *= sqrt(getAlphaRepMult())
+	amountRequested *= RNG.randf_rangeX2(0.8, 1.2)
 		
 	var finalCost:int = Util.maxi(2, int(round(amountRequested)))
 	return finalCost
@@ -555,3 +560,52 @@ func isBeingFucked() -> bool:
 	if(currentInteraction == null):
 		return false
 	return currentInteraction.isPawnBeingFucked(self)
+
+func isFuckingSomeone() -> bool:
+	if(currentInteraction == null):
+		return false
+	return currentInteraction.isPawnFuckingSomeone(self)
+
+func getRepLevel(_repID:String) -> int:
+	var rep:ReputationPlaceholder = getCharacter().getReputation()
+	if(rep == null):
+		return 0
+	return rep.getRepLevel(_repID)
+
+func addRepScore(_repID:String, _howMuch:float):
+	var rep:ReputationPlaceholder = getCharacter().getReputation()
+	if(rep == null):
+		return
+	rep.addRep(_repID, _howMuch)
+
+func getWhoreRepMult() -> float:
+	var whoreLevel:int = getRepLevel(RepStat.Whore)
+	if(whoreLevel <= 1):
+		return 1.0
+	
+	var finalValue:float = 1.0
+	finalValue += sqrt(float(whoreLevel * 2))
+	return finalValue
+
+func getAlphaRepMult() -> float:
+	var whoreLevel:int = getRepLevel(RepStat.Alpha)
+	if(whoreLevel <= 1):
+		return 1.0
+	
+	var finalValue:float = 1.0
+	finalValue += sqrt(float(whoreLevel * 2))
+	return finalValue
+
+func canEnslaveForFree(otherPawn) -> bool:
+	if(otherPawn == null):
+		return false
+	if(otherPawn.isSlaveToPlayer()):
+		return false
+		
+	if(otherPawn.scorePersonality({PersonalityStat.Subby:1.0}) < 0.2):
+		return false
+		
+	var whoreLevel:int = getRepLevel(RepStat.Alpha)
+	if(whoreLevel >= 6 && isPlayer()):
+		return true
+	return false

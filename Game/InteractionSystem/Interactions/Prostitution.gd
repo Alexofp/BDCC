@@ -51,11 +51,14 @@ func found_client_text():
 	saynn("[say=client]WHAT'S THE OFFER?[/say]")
 
 	addAction("usual", "Usual", "Let them fuck you any way they want for relatively cheap..", "sexSub", 1.0, 60, {})
-	if(roleCanStartSex("main")):
+	if(roleCanStartSex("main") && hasRepLevelPC("main", RepStat.Whore, 4)):
 		addAction("service", "Service Dom", "You will be in charge. It takes more effort.. so you will be taking more credits", "sexDom", 1.0, 60, {})
 	else:
-		addDisabledAction("Service Dom", "You can't be a service dom with your restraints..")
-	addAction("pricy_slut", "Pricy slut", "Ask for a lot of credits to let them fuck you.. You will have to really satisfy them though..", "resist", 1.0, 60, {})
+		addDisabledAction("Service Dom", "You can't be a service dom with your restraints.." if !roleCanStartSex("main") else "Your whore reputation is not high enough for this..")
+	if(hasRepLevelPC("main", RepStat.Whore, 8)):
+		addAction("pricy_slut", "Pricy slut", "Ask for a lot of credits to let them fuck you.. You will have to really satisfy them though..", "resist", 1.0, 60, {})
+	else:
+		addDisabledAction("Pricy slut", "Your whore reputation is not high enough for this..")
 
 func found_client_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "usual"):
@@ -70,7 +73,7 @@ func found_client_do(_id:String, _args:Dictionary, _context:Dictionary):
 		setState("giving_offer", "client")
 	if(_id == "pricy_slut"):
 		askType="pricy"
-		askCreds = getRolePawn("main").getProstitutionCreditsCost(getRolePawn("client"), 4.0)
+		askCreds = getRolePawn("main").getProstitutionCreditsCost(getRolePawn("client"), 3.0)
 		slutDom = false
 		setState("giving_offer", "client")
 
@@ -159,6 +162,10 @@ func after_sex_text():
 
 func after_sex_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "leave"):
+		addRepScore("main", RepStat.Whore, float(askCreds)/50.0)
+		doRepEvent("main", "whoreany")
+		if(askCreds >= 30):
+			doRepEvent("main", "whorelot")
 		setState("client_leaving", "client")
 	if(_id == "demand_creds_back"):
 		setState("client_demands_credits", "main")

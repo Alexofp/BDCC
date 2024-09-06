@@ -492,7 +492,7 @@ func checkOnMeetInteractions(pawn1, pawn2, pawn2Moved:bool):
 		if(otherPawn.canInterrupt()):
 			if(!reactCooldowns.has(otherPawn.charID)):
 				if(PawnReactions.doReact(pcPawn, otherPawn)):
-					reactCooldowns[otherPawn.charID] = 120
+					reactCooldowns[otherPawn.charID] = 1200
 			
 	return false
 
