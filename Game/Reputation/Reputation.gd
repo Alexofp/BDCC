@@ -70,6 +70,24 @@ func handleSpecialEvent(_eventID:String):
 				onRepLevelChanged(repID, levels[repID], true, true)
 		
 
+func setLevel(_stat:String, _newLevel:int, _showMessage:bool = true):
+	var repStat:RepStatBase = GlobalRegistry.getRepStat(_stat)
+	if(repStat == null):
+		return
+	if(_newLevel > repStat.getMaxLevel()):
+		_newLevel = repStat.getMaxLevel()
+	if(_newLevel < repStat.getMinLevel()):
+		_newLevel = repStat.getMinLevel()
+	
+	var curLevel:int = getRepLevel(_stat)
+	if(curLevel == _newLevel):
+		return
+	levels[_stat] = _newLevel
+	scores[_stat] = 0.0
+	
+	if(curLevel != _newLevel):
+		onRepLevelChanged(_stat, _newLevel, (_newLevel > curLevel), _showMessage)
+
 func addRep(_stat:String, _howMuch:float, _showMessage:bool = true):
 	var repStat:RepStatBase = GlobalRegistry.getRepStat(_stat)
 	if(repStat == null):
@@ -129,14 +147,14 @@ func addRep(_stat:String, _howMuch:float, _showMessage:bool = true):
 			onRepScoreChanged(_stat, scores[_stat], false, _showMessage)
 			
 func onRepLevelChanged(_stat:String, _newLevel:int, _wentUp:bool, _showMessage:bool=true):
-	if(isPlayer()):
+	if(isPlayer() && _showMessage):
 		var repStat:RepStatBase = GlobalRegistry.getRepStat(_stat)
 		if(repStat == null):
 			return
 		if(_wentUp):
-			addMessage("Your '"+str(repStat.getVisibleName())+"' went up a level. You are now known as '[b]"+repStat.getTextForLevel(_newLevel, self)+"[/b]'!")
+			addMessage("Your '"+str(repStat.getVisibleName())+"' went up a level. You are now known as [b]"+repStat.getTextForLevel(_newLevel, self)+"[/b]!")
 		else:
-			addMessage("Your '"+str(repStat.getVisibleName())+"' went down a level. You are now known as '[b]"+repStat.getTextForLevel(_newLevel, self)+"[/b]'!")
+			addMessage("Your '"+str(repStat.getVisibleName())+"' went down a level. You are now known as [b]"+repStat.getTextForLevel(_newLevel, self)+"[/b]!")
 
 func onRepScoreChanged(_stat:String, _newScore:float, _wentUp:bool, _showMessage:bool=true):
 	if(isPlayer()):
@@ -173,6 +191,15 @@ func getInfoLines() -> Array:
 		result.append(repName+": "+repTitle+extraText)
 		
 	return result
+
+func getGenericRepMult(_repID:String, _mult:float = 2.0) -> float:
+	var whoreLevel:int = getRepLevel(_repID)
+	if(whoreLevel <= 1):
+		return 1.0
+	
+	var finalValue:float = 1.0
+	finalValue += sqrt(float(whoreLevel * _mult))
+	return finalValue
 
 func saveData():
 	return {

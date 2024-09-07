@@ -277,6 +277,9 @@ func affectAffection(otherCharID, howMuch:float):
 	
 	var mult:float = 1.0
 	if(howMuch > 0.0):
+		mult = getCharsRepMult(charID, otherCharID)
+		
+	if(howMuch > 0.0):
 		mult -= scorePersonality({PersonalityStat.Mean:1.0})*0.5
 	elif(howMuch < 0.0):
 		mult += scorePersonality({PersonalityStat.Mean:1.0})*0.5
@@ -286,6 +289,31 @@ func affectAffection(otherCharID, howMuch:float):
 		GM.main.RS.addAffection(charID, otherCharID, howMuch*mult*2.0)
 	else:
 		GM.main.RS.addAffection(charID, otherCharID, howMuch*mult)
+
+func getCharsRepMult(char1ID:String, char2ID:String) -> float:
+	var character1 = GlobalRegistry.getCharacter(char1ID)
+	var character2 = GlobalRegistry.getCharacter(char2ID)
+
+	if(character1 == null || character2 == null):
+		return 1.0
+	
+	if(!character1.isPlayer() && !character2.isPlayer()):
+		return 1.0
+	
+	if(character1.isPlayer()):
+		var rep1:ReputationPlaceholder = character1.getReputation()
+		
+		if(character2.isInmate()):
+			return rep1.getGenericRepMult(RepStat.Inmates, 1.0)
+		else:
+			return rep1.getGenericRepMult(RepStat.Staff, 1.0)
+	else:
+		var rep2:ReputationPlaceholder = character2.getReputation()
+		
+		if(character1.isInmate()):
+			return rep2.getGenericRepMult(RepStat.Inmates, 1.0)
+		else:
+			return rep2.getGenericRepMult(RepStat.Staff, 1.0)
 
 func affectLust(otherCharID, howMuch:float):
 	if(!(otherCharID is String)):

@@ -174,7 +174,7 @@ func _run():
 			
 			sayn("[b]"+repStat.getVisibleName()+"[/b]")
 			sayn("Your current level is '"+repStat.getTextForLevel(repLevel, reputation)+"' (level "+str(repLevel)+"/"+(str(repStat.getMaxLevel()) if repLevel >= 0 else str(repStat.getMinLevel()))+")")
-			sayn("PREV [font=res://Fonts/smallconsolefont.tres]"+Util.textProgressBar(normScore, 40)+"[/font] NEXT")
+			sayn("Progress: [font=res://Fonts/smallconsolefont.tres]"+Util.textProgressBar(normScore, 40)+"[/font]")
 			#sayn("PREV = "+str(prevScore)+" NEXT = "+str(nextScore))
 			var specialReq = repStat.getSpecialRequirementToReachLevel(repLevel+1, reputation)
 			if(specialReq != null && repScore>=nextScore):

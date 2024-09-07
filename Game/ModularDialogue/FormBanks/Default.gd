@@ -20,4 +20,16 @@ func getForms() -> Dictionary:
 		"PunishAboutToStocks": form("Bend over.", {punisher=CHAR, target=CHAR}, "punisher", "target"),
 		"PunishLockIntoStocks": form("Have fun.", {punisher=CHAR, target=CHAR}, "punisher", "target"),
 		"PunishSex": form("Let's have some fun.", {punisher=CHAR, target=CHAR}, "punisher", "target"),
+		
+		"ReactBODYWRITINGS": form("Nice bodywritings, slut!", {main=CHAR, target=CHAR}, "main", "target"),
+		"ReactTALLYMARKS": form("Nice tallymarks, slut!", {main=CHAR, target=CHAR}, "main", "target"),
+		"ReactCOVERED_IN_CUM": form("So messy. What a slut!", {main=CHAR, target=CHAR}, "main", "target"),
+		"ReactCOVERED_IN_PISS": form("Ew, gross!", {main=CHAR, target=CHAR}, "main", "target"),
+		"ReactNAKED": form("Ha, cover up, slut!", {main=CHAR, target=CHAR}, "main", "target"),
+		"ReactCAN_GRAB_AND_FUCK": form("Wow, someone should fuck you, slut!", {main=CHAR, target=CHAR}, "main", "target"),
+		"ReactON_A_LEASH": form("Haha, you love being paraded around, slut?", {main=CHAR, target=CHAR}, "main", "target"),
+		"ReactGETTING_FUCKED": form("Nice, a whore is getting fucked!", {main=CHAR, target=CHAR}, "main", "target"),
+		
+		"ReactLEASHING_SOMEONE": form("Nice catch!", {main=CHAR, target=CHAR}, "main", "target"),
+		"ReactFUCKING_SOMEONE": form("Yeah, fuck that slut!", {main=CHAR, target=CHAR}, "main", "target"),
 	}

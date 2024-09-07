@@ -2309,6 +2309,9 @@ func personalityChangesAfterSex():
 func getCharacterType():
 	return CharacterType.Generic
 
+func getCharType():
+	return getCharacterType()
+
 func getBodypartLewdSizeAdjective(bodypartSlot):
 	if(!hasBodypart(bodypartSlot)):
 		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
@@ -3135,3 +3138,27 @@ func addFightExperienceAuto(_otherCharID:String, didWin:bool):
 
 func getReputation() -> ReputationPlaceholder:
 	return ReputationPlaceholder.new()
+
+func isInmate() -> bool:
+	return getCharType() == CharacterType.Inmate
+
+func isGuard() -> bool:
+	return getCharType() == CharacterType.Guard
+
+func isNurse() -> bool:
+	return getCharType() == CharacterType.Nurse
+
+func isEngineer() -> bool:
+	return getCharType() == CharacterType.Engineer
+
+func isStaff() -> bool:
+	return isGuard() || isNurse() || isEngineer()
+
+func isLilac() -> bool:
+	return isInmate() && getInmateType() == InmateType.SexDeviant
+
+func isGeneralInmate() -> bool:
+	return isInmate() && getInmateType() == InmateType.General
+
+func isHighSecInmate() -> bool:
+	return isInmate() && getInmateType() == InmateType.HighSec

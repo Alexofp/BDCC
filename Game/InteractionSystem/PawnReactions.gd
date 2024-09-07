@@ -20,6 +20,9 @@ static func saynn(theText:String):
 static func sayPawn(_thePawn, theText:String):
 	saynn("[say="+_thePawn.charID+"]"+theText+"[/say]")
 
+static func sayModular(_pawnReacts, _pawnTarget, _id):
+	sayPawn(_pawnReacts, ModularDialogue.generate(_id, {main=_pawnReacts.getChar(),target=_pawnTarget.getChar()}))
+
 static func doReact(_pawnTarget, _pawnReacts):
 	var _pc:BaseCharacter = _pawnTarget.getChar()
 	var _npc:BaseCharacter = _pawnReacts.getChar()
@@ -43,7 +46,7 @@ static func doReact(_pawnTarget, _pawnReacts):
 	if(_pc.isCoveredInPiss()):
 		possible.append(COVERED_IN_PISS)
 	
-	if(_pc.isFullyNaked()):
+	if(_pc.getExposedPrivates().size() > 0):#_pc.isFullyNaked()):
 		possible.append(NAKED)
 	
 	if(_pawnTarget.canGrabAndFuck()):
@@ -71,44 +74,44 @@ static func doReact(_pawnTarget, _pawnReacts):
 		
 		if(pickedReact == LEASHING_SOMEONE):
 			saynn(_npc.getName()+" walks by and notices you leashing someone.")
-			sayPawn(_pawnReacts, "HAHA! NICE CATCH!!")
+			sayModular(_pawnReacts, _pawnTarget, "ReactLEASHING_SOMEONE")
 		
 		if(pickedReact == FUCKING_SOMEONE):
 			saynn(_npc.getName()+" walks by and notices you fucking someone.")
-			sayPawn(_pawnReacts, "YEAH, FUCK THAT SLUT!!")
+			sayModular(_pawnReacts, _pawnTarget, "ReactFUCKING_SOMEONE")
 	else:
 		_rep.addRep(RepStat.Whore, 0.05)
 		
 		if(pickedReact == BODYWRITINGS):
-			saynn(_npc.getName()+" notices your bodywritings.")
-			sayPawn(_pawnReacts, "SLUTTT!")
+			saynn(_npc.getName()+" walks by and notices your bodywritings.")
+			sayModular(_pawnReacts, _pawnTarget, "ReactBODYWRITINGS")
 		
 		if(pickedReact == TALLYMARKS):
-			saynn(_npc.getName()+" notices your tallymarks.")
-			sayPawn(_pawnReacts, "HOW MANY TIMES DID YOU GET FUCKED, SLUT!")
+			saynn(_npc.getName()+" walks by and notices your tallymarks.")
+			sayModular(_pawnReacts, _pawnTarget, "ReactTALLYMARKS")
 		
 		if(pickedReact == COVERED_IN_CUM):
-			saynn(_npc.getName()+" notices your messy appearance.")
-			sayPawn(_pawnReacts, "SO MUCH CUM, WHAT A SLUT!")
+			saynn(_npc.getName()+" walks by and notices your messy appearance.")
+			sayModular(_pawnReacts, _pawnTarget, "ReactCOVERED_IN_CUM")
 		
 		if(pickedReact == COVERED_IN_PISS):
-			saynn(_npc.getName()+" notices your.. very.. messy appearance.")
-			sayPawn(_pawnReacts, "EW, GO WASH YOURSELF, PISS-SLUT!")
+			saynn(_npc.getName()+" walks by and notices your.. very.. messy appearance.")
+			sayModular(_pawnReacts, _pawnTarget, "ReactCOVERED_IN_PISS")
 		
 		if(pickedReact == NAKED):
-			saynn(_npc.getName()+" walks by and sees you naked.")
-			sayPawn(_pawnReacts, "WHAT A WHORE!")
+			saynn(_npc.getName()+" walks by and takes note of your private bits.")
+			sayModular(_pawnReacts, _pawnTarget, "ReactNAKED")
 		
 		if(pickedReact == CAN_GRAB_AND_FUCK):
-			saynn(_npc.getName()+" notices you.")
-			sayPawn(_pawnReacts, "WOW, SOMEONE SHOULD TAKE ADVANTAGE OF THAT ASS!")
+			saynn(_npc.getName()+" walks by and notices you.")
+			sayModular(_pawnReacts, _pawnTarget, "ReactCAN_GRAB_AND_FUCK")
 		
 		if(pickedReact == ON_A_LEASH):
 			saynn(_npc.getName()+" sees you getting dragged off somewhere.")
-			sayPawn(_pawnReacts, "HAHA! YOU LOVE BEING PARADED AROUND, SLUT?")
+			sayModular(_pawnReacts, _pawnTarget, "ReactON_A_LEASH")
 		
 		if(pickedReact == GETTING_FUCKED):
-			saynn(_npc.getName()+" sees you getting fucked.")
-			sayPawn(_pawnReacts, "YEAH, A SLUT IS GETTING FUCKED!")
+			saynn(_npc.getName()+" walks by and sees you getting fucked.")
+			sayModular(_pawnReacts, _pawnTarget, "ReactGETTING_FUCKED")
 		
 	return true

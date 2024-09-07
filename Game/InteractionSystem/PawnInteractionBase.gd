@@ -772,8 +772,26 @@ func doFightAftermath(_fightersData, newResult):
 	var lostPawn = getRolePawn(_fightersData[1 if newResult["won"] else 0])
 	if(wonPawn != null):
 		wonPawn.afterWonFight()
+		
+		if(wonPawn.isPlayer() && lostPawn != null):
+			var pawnWonPower:float = wonPawn.calculatePowerScore()
+			var pawnLostPower:float = lostPawn.calculatePowerScore()
+			var powerScale:float = sqrt(pawnLostPower / max(0.1, pawnWonPower + pawnLostPower))
+			if(lostPawn.isInmate()):
+				wonPawn.addRepScore(RepStat.Inmates, powerScale)
+			else:
+				wonPawn.addRepScore(RepStat.Staff, powerScale)
 	if(lostPawn != null):
 		lostPawn.afterLostFight()
+		
+		if(lostPawn.isPlayer() && wonPawn != null):
+			var pawnWonPower:float = wonPawn.calculatePowerScore()
+			var pawnLostPower:float = lostPawn.calculatePowerScore()
+			var powerScale:float = sqrt(pawnWonPower / max(0.1, pawnWonPower + pawnLostPower))
+			if(wonPawn.isInmate()):
+				lostPawn.addRepScore(RepStat.Inmates, -powerScale)
+			else:
+				lostPawn.addRepScore(RepStat.Staff, -powerScale)
 
 func doSexAftermath(_sexData, _newResult):
 	var domPawn = getRolePawn(_sexData[0])
@@ -804,13 +822,13 @@ func doSexAftermath(_sexData, _newResult):
 		affectAffection(_sexData[0], _sexData[1], (min(domSatisfaction, subSatisfaction) - 0.5)*0.4)
 		affectLust(_sexData[0], _sexData[1], (averageSatisfaction - 0.5)*0.5)
 		
-		if(sexType in [SexType.StocksSex, SexType.SlutwallSex]):
-			subPawn.addRepScore(RepStat.Alpha, -domSatisfaction * 0.5)
+		#if(sexType in [SexType.StocksSex, SexType.SlutwallSex]):
+		#	subPawn.addRepScore(RepStat.Alpha, -domSatisfaction * 0.5)
 		
 		if(domSatisfaction > 0.7 || (sexType != SexType.DefaultSex)):
 			subPawn.addRepScore(RepStat.Whore, domSatisfaction * 0.3)
 		elif(domSatisfaction < 0.4):
-			subPawn.addRepScore(RepStat.Whore, -(1.0-domSatisfaction) * 0.3)
+			subPawn.addRepScore(RepStat.Whore, -(1.0-domSatisfaction) * 3.0)
 		
 		if(subSatisfaction > 0.8):
 			domPawn.addRepScore(RepStat.Alpha, subSatisfaction * 0.4)

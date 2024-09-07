@@ -62,8 +62,7 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "leave"):
 		setState("about_to_leave", "starter")
 	if(_id == "enslave_free"):
-		stopMe()
-		runScene("KidnapDynamicNpcScene", [getRoleID("reacter")])
+		setState("about_to_kidnap", "starter")
 
 
 func about_to_leave_text():
@@ -242,8 +241,8 @@ func flirt_flirted_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func flirt_reacted_text():
-	var answer = lust["answer"]
-	var likeness = lust["likeness"]
+	var answer = lust["answer"] if lust.has("answer") else "accept"
+	var likeness = lust["likeness"] if lust.has("likeness") else 1.0
 	if(answer == "accept"):
 		saynn("[say=reacter]CUTE.[/say]")
 	else:
@@ -437,12 +436,28 @@ func after_grab_and_fuck_do(_id:String, _args:Dictionary, _context:Dictionary):
 		stopMe()
 
 
+func about_to_kidnap_text():
+	saynn("{starter.You} {starter.youVerb('grab')} {reacter.yourHis} throat and {starter.youVerb('look')} {reacter.youHim} deep into the eyes..")
+	saynn("{starter.YourHis} dominant aura alone is making {reacter.youHim} shiver..")
+	saynn("[say=starter]YOU ARE MINE NOW. UNDERSTAND?[/say]")
+	saynn("[say=reacter]O.. O-OKAY..[/say]")
+
+	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
+
+func about_to_kidnap_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		stopMe()
+		runScene("KidnapDynamicNpcScene", [getRoleID("reacter")])
+
+
 func shouldShowBigButtons() -> bool:
 	if((getState() in ["chat_started"]) && isPlayersTurn()):
 		return true
 	return false
 
 func getAnimData() -> Array:
+	if(getState() in ["about_to_kidnap"]):
+		return [StageScene.Choking, "idle", {pc="starter", npc="reacter"}]
 	return [StageScene.Duo, "stand", {pc="starter", npc="reacter"}]
 
 func getActivityIconForRole(_role:String):

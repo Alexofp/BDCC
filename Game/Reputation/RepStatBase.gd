@@ -36,7 +36,7 @@ func getNeededScoreForLevel(_level:int, _curLevel:int) -> float:
 	return neededScore
 
 func getSpecialRequirementToReachLevel(_level:int, _rep):
-	if(_level == 3):
-		return ["somekey", "DO SOMETHING SILLY"]
+	#if(_level == 3):
+	#	return ["somekey", "DO SOMETHING SILLY"]
 	
 	return null

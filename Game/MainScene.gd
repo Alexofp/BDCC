@@ -1225,7 +1225,7 @@ func getDebugActions():
 		},
 		{
 			"id": "spyRandom",
-			"name": "Spy on random pawn",
+			"name": "Spy on pawn",
 		},
 		{
 			"id": "addRep",
@@ -1240,10 +1240,29 @@ func getDebugActions():
 				},
 				{
 					"id": "amount",
-					"name": "How much",
+					"name": "How much (rep score)",
 					"type": "number",
 					"value": 1.0,
 					"float": true,
+				},
+			],
+		},
+		{
+			"id": "setRep",
+			"name": "Set reputation",
+			"args": [
+				{
+					"id": "rep",
+					"name": "Rep",
+					"type": "list",
+					"value": RepStat.Whore,
+					"values": RepStat.getAllWithNames(),
+				},
+				{
+					"id": "level",
+					"name": "Level",
+					"type": "number",
+					"value": 0,
 				},
 			],
 		},
@@ -1254,6 +1273,9 @@ func doDebugAction(id, args = {}):
 	
 	if(id == "addRep"):
 		GM.pc.getReputation().addRep(args["rep"], args["amount"])
+	
+	if(id == "setRep"):
+		GM.pc.getReputation().setLevel(args["rep"], args["level"])
 	
 	if(id == "forceSmartlock"):
 		if(GM.main.dynamicCharacters.size() == 0):

@@ -102,6 +102,7 @@ func about_to_lock_stocks_text():
 func about_to_lock_stocks_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "lock_them"):
 		affectAffection("target", "punisher", -0.1)
+		addRepScore("target", RepStat.Alpha, -3.0)
 		setState("in_stocks", "punisher")
 
 
@@ -169,6 +170,7 @@ func about_to_lock_slutwall_text():
 func about_to_lock_slutwall_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "lock_them"):
 		affectAffection("target", "punisher", -0.1)
+		addRepScore("target", RepStat.Alpha, -3.0)
 		setState("in_slutwall", "punisher")
 
 
