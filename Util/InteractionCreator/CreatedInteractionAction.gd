@@ -13,6 +13,7 @@ var time:String = "60"
 var start_sex:String = ""
 var start_fight:String = ""
 var cond:String = ""
+var condSee:String = ""
 var code:String = "setState(\"meow\", \"inmate\")"
 
 const allScoreTypes = [
@@ -91,6 +92,11 @@ func getEditVars():
 			type = "string",
 			value = cond,
 		},
+		"condSee": {
+			name = "See condition",
+			type = "string",
+			value = condSee,
+		},
 		"code": {
 			name = "Code",
 			type = "bigString",
@@ -118,6 +124,8 @@ func applyEditVar(varid, value):
 		start_fight = value
 	if(varid == "cond"):
 		cond = value
+	if(varid == "condSee"):
+		condSee = value
 	if(varid == "code"):
 		code = value
 	if(varid == "scoreType"):
@@ -138,6 +146,7 @@ func saveData():
 		"start_sex": start_sex,
 		"start_fight": start_fight,
 		"cond": cond,
+		"condSee": condSee,
 		"code": code,
 	}
 
@@ -152,6 +161,7 @@ func loadData(data):
 	start_sex = loadVar(data, "start_sex", "")
 	start_fight = loadVar(data, "start_fight", "")
 	cond = loadVar(data, "cond", "")
+	condSee = loadVar(data, "condSee", "")
 	code = loadVar(data, "code", "")
 		
 		

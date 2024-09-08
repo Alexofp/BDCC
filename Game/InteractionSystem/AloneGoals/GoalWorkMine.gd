@@ -39,7 +39,7 @@ func getActions() -> Array:
 			desc = "Do something",
 			score = 1.0,
 			args = {},
-			time = 5*60,#60*60*2,
+			time = 30*60,#60*60*2,
 		},
 	]
 

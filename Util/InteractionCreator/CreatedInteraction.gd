@@ -196,11 +196,16 @@ func generateCode() -> String:
 			if(action.start_sex != ""):
 				extraFields += "start_sex=["+action.start_sex+"],"
 			
+			var extraT:String = ""
+			if(action.condSee != ""):
+				text += '\tif('+action.condSee+'):\n'
+				extraT = "\t"
+			
 			if(action.cond != ""):
-				text += '\tif('+action.cond+'):\n\t'
-			text += '\taddAction("'+actionID+'", "'+action.name+'", "'+action.desc.replace("\n", "\\n")+'", \"'+action.scoreType+'\", '+str(action.score)+', '+str(action.time)+', {'+extraFields+'})\n'   #")\n'
+				text += extraT+'\tif('+action.cond+'):\n\t'
+			text += extraT+'\taddAction("'+actionID+'", "'+action.name+'", "'+action.desc.replace("\n", "\\n")+'", \"'+action.scoreType+'\", '+str(action.score)+', '+str(action.time)+', {'+extraFields+'})\n'   #")\n'
 			if(action.cond != "" && action.disabledDesc != ""):
-				text += '\telse:\n\t\taddDisabledAction("'+action.name+'", "'+action.disabledDesc.replace("\n", "\\n")+'")\n'
+				text += extraT+'\telse:\n'+extraT+'\t\taddDisabledAction("'+action.name+'", "'+action.disabledDesc.replace("\n", "\\n")+'")\n'
 			#text += "\t\t{\n"
 			#text += "\t\t\tid = \""+actionID+"\",\n"
 			#text += "\t\t\tname = \""+action.name+"\",\n"

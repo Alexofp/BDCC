@@ -205,6 +205,16 @@ func getInterruptActions(_pawn:CharacterPawn) -> Array:
 		scoreRole = "main",
 		args = {},
 	})
+	if(getRolePawn("main").canGrabAndFuck() && _pawn.getChar().canStartSex()):
+		result.append({
+			id = "grab_and_fuck",
+			name = "Grab&Fuck",
+			desc = "They have so many restraints that you can just fuck them..",
+			score = 1.0,
+			scoreType = "sexUse",
+			scoreRole = "main",
+			args = {},
+		})
 	return result
 
 func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _context:Dictionary):
@@ -214,6 +224,8 @@ func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _conte
 				return
 		
 		startInteraction("Talking", {starter=_pawn.charID, reacter=getRoleID("main")})
+	if(_id == "grab_and_fuck"):
+		startInteraction("Talking", {starter=_pawn.charID, reacter=getRoleID("main")}, {grab_and_fuck=true})
 
 func canRoleBeInterrupted(_role:String) -> bool:
 	return true

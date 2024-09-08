@@ -1381,25 +1381,25 @@ func addReactToLustFocusButtons(actionID:String, lustEntry:Dictionary):
 		likeness = 1.0
 		lustEntry["reason"] = ""
 	
-	print("LIKENESS: ",likeness)
+	#print("LIKENESS: ",likeness)
 	
 	addAction(actionID, "Accept", "Accept the flirt", "default", likeness*likeness, 60, {
 		args = {
-			lust = lustEntry,
+			#lust = lustEntry,
 			answer = "accept",
 			likeness = likeness,
 		},
 	})
 	addAction(actionID, "Deny", "Deny their flirt", "default", 1.0 - likeness*likeness, 60, {
 		args = {
-			lust = lustEntry,
+			#lust = lustEntry,
 			answer = "deny",
 			likeness = likeness,
 		},
 	})
 
-func reactToLustFocus(args:Dictionary):
-	var lustEntry:Dictionary = args["lust"]
+func reactToLustFocus(args:Dictionary, lustEntry:Dictionary):
+	#var lustEntry:Dictionary = args["lust"]
 	var answer:String = args["answer"]
 	var likeness:float = args["likeness"]
 	lustEntry["answer"] = answer

@@ -264,7 +264,21 @@ func scoreAffection(otherCharID) -> float:
 	var affectionValue:float = GM.main.RS.getAffection(charID, otherCharID)
 	return affectionValue
 
+func getAffection(otherCharID) -> float:
+	if(!(otherCharID is String)):
+		otherCharID = otherCharID.charID
+	
+	var affectionValue:float = GM.main.RS.getAffection(charID, otherCharID)
+	return affectionValue
+
 func scoreLust(otherCharID) -> float:
+	if(!(otherCharID is String)):
+		otherCharID = otherCharID.charID
+	
+	var lustValue:float = GM.main.RS.getLust(charID, otherCharID)
+	return max(0.0, lustValue)
+
+func getLust(otherCharID) -> float:
 	if(!(otherCharID is String)):
 		otherCharID = otherCharID.charID
 	

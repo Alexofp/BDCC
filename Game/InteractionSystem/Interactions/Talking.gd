@@ -5,6 +5,9 @@ var lust = {}
 var chatAnswer = ""
 var surrendered = false
 var notFirst = false
+var struggleText = ""
+var tryCount = 0
+var askCredits = 0
 
 func _init():
 	id = "Talking"
@@ -12,7 +15,10 @@ func _init():
 func start(_pawns:Dictionary, _args:Dictionary):
 	doInvolvePawn("starter", _pawns["starter"])
 	doInvolvePawn("reacter", _pawns["reacter"])
-	setState("", "starter")
+	if(_args.has("grab_and_fuck") && _args["grab_and_fuck"]):
+		setState("grabbed_about_to_fuck", "reacter")
+	else:
+		setState("", "starter")
 
 func init_text():
 	if(!notFirst):
@@ -38,6 +44,16 @@ func init_text():
 	else:
 		addDisabledAction("Offer sex", "You can't start sex like this..")
 	addAction("offerself", "Offer self", "Offer them to fuck you", "sexSub", 0.2, 60, {})
+	if(getRoleChar("starter").getInventory().hasRemovableRestraintsNoLockedSmartlocks()):
+		if(getRolePawn("starter").getAffection(getRolePawn("reacter")) >= 0.5 && getRolePawn("reacter").canSocial()):
+			addAction("ask_help_restraints", "Ask for help", "Ask for help with your restraints..", "help", 0.0, 60, {})
+		else:
+			addDisabledAction("Ask for help", "Affection must be above 50% before asking for help with restraints.." if getRolePawn("reacter").canSocial() else "They are clearly not in a mood to help you..")
+	if(getRoleChar("reacter").getInventory().hasRemovableRestraintsNoLockedSmartlocks()):
+		if(getRoleChar("starter").getStamina() > 0 && !getRoleChar("starter").hasBlockedHands() && !getRoleChar("starter").hasBoundArms()):
+			addAction("help_with_restraints", "Help with restraints", "Help them with restraints!", "help", 0.5, 60, {})
+		else:
+			addDisabledAction("Help with restraints", "You can't help them with restraints in your current state..")
 	addAction("leave", "Leave", "Enough chatting around.", "justleave", 1.0, 30, {})
 	if(getRolePawn("starter").canEnslaveForFree(getRolePawn("reacter"))):
 		addAction("enslave_free", "Enslave!", "They are subby enough.. and you are Alpha enough too..", "default", 0.0, 60, {})
@@ -59,6 +75,11 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 		setState("offered_sex", "reacter")
 	if(_id == "offerself"):
 		setState("offered_self", "reacter")
+	if(_id == "ask_help_restraints"):
+		#setState("asking_help_restraints", "reacter")
+		startInteraction("HelpingWithRestraints", {reacter=getRoleID("reacter"), starter=getRoleID("starter")})
+	if(_id == "help_with_restraints"):
+		startInteraction("HelpingWithRestraints", {reacter=getRoleID("starter"), starter=getRoleID("reacter")}, {reacterStarted=true})
 	if(_id == "leave"):
 		setState("about_to_leave", "starter")
 	if(_id == "enslave_free"):
@@ -236,7 +257,7 @@ func flirt_flirted_text():
 
 func flirt_flirted_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "flirt_react"):
-		reactToLustFocus(_args)
+		reactToLustFocus(_args, lust)
 		setState("flirt_reacted", "starter")
 
 
@@ -305,7 +326,10 @@ func starter_won_leave_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func reacter_won_text():
-	saynn("{reacter.name} won the fight! {starter.name} hits the floor, unable to continue fighting..")
+	if(!surrendered):
+		saynn("{reacter.name} won the fight! {starter.name} hits the floor, unable to continue fighting..")
+	else:
+		saynn("{starter.name} decides to surrender instantly..")
 
 	addAction("punish", "Punish", "Punish them for attacking you!", "punish", 1.0, 60, {})
 	addAction("leave", "Leave", "Just leave", "surrender", 1.0, 60, {})
@@ -470,6 +494,14 @@ func getPreviewLineForRole(_role:String) -> String:
 		return "{reacter.name} is chatting with {starter.name}."
 	return .getPreviewLineForRole(_role)
 
+func doHelpStruggleForStarter():
+	var theStarter = getRoleChar("starter")
+	var struggleData:Dictionary = theStarter.doStruggleOutOfRestraints(false, true, getRoleChar("reacter"), 2.0)
+	if(struggleData.empty()):
+		struggleText = "Something happened.."
+	else:
+		struggleText = struggleData["text"]
+
 func saveData():
 	var data = .saveData()
 
@@ -478,6 +510,9 @@ func saveData():
 	data["chatAnswer"] = chatAnswer
 	data["surrendered"] = surrendered
 	data["notFirst"] = notFirst
+	data["struggleText"] = struggleText
+	data["tryCount"] = tryCount
+	data["askCredits"] = askCredits
 	return data
 
 func loadData(_data):
@@ -488,4 +523,7 @@ func loadData(_data):
 	chatAnswer = SAVE.loadVar(_data, "chatAnswer", "")
 	surrendered = SAVE.loadVar(_data, "surrendered", false)
 	notFirst = SAVE.loadVar(_data, "notFirst", false)
+	struggleText = SAVE.loadVar(_data, "struggleText", "")
+	tryCount = SAVE.loadVar(_data, "tryCount", 0)
+	askCredits = SAVE.loadVar(_data, "askCredits", 0)
 

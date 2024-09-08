@@ -118,6 +118,8 @@ func processTime(_howMuch:int):
 
 	#print(pawns)
 	var maxProcesses:int = 100
+	if(maxProcesses < pawns.size()*2):
+		maxProcesses = pawns.size() * 2
 	
 	var interaction:PawnInteractionBase = getClosestInteraction()
 	while(interaction != null && _howMuch > 0):
