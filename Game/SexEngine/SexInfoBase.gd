@@ -56,7 +56,7 @@ func addArousal(howmuch: float):
 		turnsLastStim = 0
 		addSatisfaction(howmuch * 0.1)
 	if(howmuch < 0.0 && getChar().isLewdHorny()):
-		addFrustration(abs(howmuch) * 0.1)
+		addFrustration(abs(howmuch) * 0.2)
 
 func getArousal()->float:
 	return getChar().getArousal()
@@ -71,9 +71,9 @@ func addPain(newpain):
 		var masochistScore = fetishScore({Fetish.Masochism: 1.0})
 		if(masochistScore > 0.0):
 			addLust(round(newpain * masochistScore * 0.5))
-			addSatisfaction(newpain * 0.005)
+			addSatisfaction(newpain * 0.01)
 		else:
-			addFrustration(newpain * 0.005)
+			addFrustration(newpain * 0.01)
 
 func addLust(newlust):
 	getChar().addLust(newlust)
@@ -234,6 +234,9 @@ func onGoalFailed(_thedominfo, _goalid, _thesubinfo, _mult:float = 1.0):
 func checkIsDown():
 	return false
 
+func hasGoalToCum() -> bool:
+	return true
+
 func getTotalSatisfaction() -> float:
 	if((satisfaction + frustration) == 0.0):
 		return 0.0
@@ -244,13 +247,13 @@ func calculateFinalSatisfaction() -> float:
 	
 	if(checkIsDown()):
 		var maso:float = fetishScore({Fetish.Masochism: 1.0})
-		total *= 0.5 + maso * 0.5
+		total *= max(0.4 + maso * 0.6, 0.0)
 	
-	if(timesCame <= 1):
+	if(timesCame < 1 && hasGoalToCum()):
 		var patience:float = personalityScore({PersonalityStat.Impatient:-1.0})
-		total *= clamp(0.8 + patience * 0.35, 0.0, 1.0)
+		total *= clamp(0.7 + patience * 0.45, 0.0, 1.0)
 	
-	if(getArousal() >= 0.9):
+	if(getArousal() >= 0.9 && hasGoalToCum()):
 		var arousalMod:float = 1.0 - getArousal() / 2.0
 		var patience:float = personalityScore({PersonalityStat.Impatient:-1.0})
 		total *= clamp(arousalMod + (patience * getArousal()), 0.0, 1.0)

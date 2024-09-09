@@ -382,7 +382,9 @@ func loadingSavefileFinished():
 	
 	applyAllWorldEdits()
 	
-	IS.TEST_DELETE_ME()
+	IS.updatePCLocation()
+	GM.world.updatePawns(IS)
+	GM.world.setPawnsShowed(canShowPawns())
 	
 func applyAllWorldEdits():
 	var worldEdits = GlobalRegistry.getWorldEdits()
@@ -498,8 +500,8 @@ func loadData(data):
 	IS.resetExtraText()
 	GM.ui.recreateWorld()
 	GM.world.loadData(SAVE.loadVar(data, "world", {}))
-	GM.world.updatePawns(IS)
-	GM.world.setPawnsShowed(canShowPawns())
+	#GM.world.updatePawns(IS)
+	#GM.world.setPawnsShowed(canShowPawns())
 
 func saveCharactersData():
 	var data = {}

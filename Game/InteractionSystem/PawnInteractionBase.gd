@@ -827,8 +827,10 @@ func doSexAftermath(_sexData, _newResult):
 		
 		if(domSatisfaction > 0.7 || (sexType != SexType.DefaultSex)):
 			subPawn.addRepScore(RepStat.Whore, domSatisfaction * 0.3)
-		elif(domSatisfaction < 0.4):
+		elif(domSatisfaction < 0.2):
 			subPawn.addRepScore(RepStat.Whore, -(1.0-domSatisfaction) * 3.0)
+		elif(domSatisfaction < 0.4):
+			subPawn.addRepScore(RepStat.Whore, -(1.0-domSatisfaction) * 1.0)
 		
 		if(subSatisfaction > 0.8):
 			domPawn.addRepScore(RepStat.Alpha, subSatisfaction * 0.4)

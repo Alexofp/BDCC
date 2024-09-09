@@ -54,6 +54,11 @@ func init_text():
 			addAction("help_with_restraints", "Help with restraints", "Help them with restraints!", "help", 0.5, 60, {})
 		else:
 			addDisabledAction("Help with restraints", "You can't help them with restraints in your current state..")
+	if(getRoleChar("starter").hasKeyholderLocksFrom(getRoleID("reacter"))):
+		if(getRolePawn("reacter").canSocial()):
+			addAction("ask_for_key", "Ask for a key..", "They have locked a smart-locked restraint onto you. Might as well ask for a key..", "help", 1.0, 60, {})
+		else:
+			addDisabledAction("Ask for a key..", "They don't seem to be in a chatty mood..")
 	addAction("leave", "Leave", "Enough chatting around.", "justleave", 1.0, 30, {})
 	if(getRolePawn("starter").canEnslaveForFree(getRolePawn("reacter"))):
 		addAction("enslave_free", "Enslave!", "They are subby enough.. and you are Alpha enough too..", "default", 0.0, 60, {})
@@ -68,7 +73,7 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "grab_and_fuck"):
 		setState("grabbed_about_to_fuck", "reacter")
 	if(_id == "attack"):
-		setState("about_to_fight", "reacter")
+		startInteraction("GenericAttack", {starter=getRoleID("starter"), reacter=getRoleID("reacter")})
 		if(!getRolePawn("reacter").isPlayer()):
 			affectAffection("reacter", "starter", -0.25)
 	if(_id == "offersex"):
@@ -80,6 +85,8 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 		startInteraction("HelpingWithRestraints", {reacter=getRoleID("reacter"), starter=getRoleID("starter")})
 	if(_id == "help_with_restraints"):
 		startInteraction("HelpingWithRestraints", {reacter=getRoleID("starter"), starter=getRoleID("reacter")}, {reacterStarted=true})
+	if(_id == "ask_for_key"):
+		startInteraction("AskingForKey", {starter=getRoleID("starter"), reacter=getRoleID("reacter")})
 	if(_id == "leave"):
 		setState("about_to_leave", "starter")
 	if(_id == "enslave_free"):
@@ -276,80 +283,6 @@ func flirt_reacted_text():
 func flirt_reacted_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "continue"):
 		setState("", "starter")
-
-
-func about_to_fight_text():
-	saynn("{starter.You} {starter.youVerb('attack')} {reacter.you}!")
-	saynn("[say=starter]I WILL FUCK YOU UP![/say]")
-
-	addAction("fight", "Fight", "Fight back", "fight", 1.0, 300, {start_fight=["starter", "reacter"],})
-	addAction("surrender", "Surrender", "It's not worth it!", "surrender", 1.0, 60, {})
-
-func about_to_fight_do(_id:String, _args:Dictionary, _context:Dictionary):
-	if(_id == "fight"):
-		surrendered = false
-		var fightResult = getFightResult(_args)
-		
-		if(fightResult["won"]):
-			setState("starter_won", "starter")
-		else:
-			setState("reacter_won", "reacter")
-	if(_id == "surrender"):
-		surrendered = true
-		setState("starter_won", "starter")
-
-
-func starter_won_text():
-	if(!surrendered):
-		saynn("{starter.name} won the fight! {reacter.name} hits the floor, unable to continue fighting..")
-	else:
-		saynn("{reacter.name} decides to surrender instantly..")
-
-	addAction("punish", "Punish", "Have some fun!", "default", 1.0, 60, {})
-	addAction("leave", "Leave", "Just leave", "justleave", 1.0, 60, {})
-
-func starter_won_do(_id:String, _args:Dictionary, _context:Dictionary):
-	if(_id == "punish"):
-		startInteraction("PunishInteraction", {punisher=getRoleID("starter"), target=getRoleID("reacter")})
-	if(_id == "leave"):
-		setState("starter_won_leave", "starter")
-
-
-func starter_won_leave_text():
-	saynn("{starter.name} decides to leave {reacter.you} alone..")
-
-	addAction("leave", "Leave", "Time to go..", "default", 1.0, 60, {})
-
-func starter_won_leave_do(_id:String, _args:Dictionary, _context:Dictionary):
-	if(_id == "leave"):
-		stopMe()
-
-
-func reacter_won_text():
-	if(!surrendered):
-		saynn("{reacter.name} won the fight! {starter.name} hits the floor, unable to continue fighting..")
-	else:
-		saynn("{starter.name} decides to surrender instantly..")
-
-	addAction("punish", "Punish", "Punish them for attacking you!", "punish", 1.0, 60, {})
-	addAction("leave", "Leave", "Just leave", "surrender", 1.0, 60, {})
-
-func reacter_won_do(_id:String, _args:Dictionary, _context:Dictionary):
-	if(_id == "punish"):
-		startInteraction("PunishInteraction", {punisher=getRoleID("reacter"), target=getRoleID("starter")})
-	if(_id == "leave"):
-		setState("reacter_won_leave", "reacter")
-		affectAffection("starter", "reacter", 0.15)
-
-
-func reacter_won_leave_text():
-	saynn("{reacter.name} decides to leave {starter.you} alone..")
-
-	addAction("leave", "Leave", "Time to go..", "default", 1.0, 60, {})
-
-func reacter_won_leave_do(_id:String, _args:Dictionary, _context:Dictionary):
-	if(_id == "leave"):
-		stopMe()
 
 
 func offered_sex_text():

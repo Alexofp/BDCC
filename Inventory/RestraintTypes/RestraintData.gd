@@ -86,7 +86,8 @@ func canStruggle():
 	return true
 
 func canStruggleFinal():
-	if(smartLock != null):
+	# Change this line when npcs would support the smart locks!
+	if(smartLock != null && getItem() != null && getItem().isWornByWearer() && getItem().getWearer().isPlayer()):
 		if(!smartLock.canStruggle()):
 			return false
 	return canStruggle()

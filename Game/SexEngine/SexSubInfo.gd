@@ -79,10 +79,16 @@ func getConsciousness() -> float:
 func addConsciousness(newcon):
 	getChar().addConsciousness(newcon)
 	if(newcon < 0.0):
-		if(fetishScore({Fetish.UnconsciousSex:1.0}) < 0.3):
-			addFrustration(abs(newcon))
-		else:
-			addSatisfaction(abs(newcon))
+		if(getConsciousness() < 0.5):
+			if(fetishScore({Fetish.UnconsciousSex:1.0}) < 0.3):
+				addFrustration(abs(newcon)*3.0)
+			else:
+				addSatisfaction(abs(newcon)*3.0)
+		if(getConsciousness() >= 0.5):
+			if(fetishScore({Fetish.Choking:1.0}) < 0.3):
+				addFrustration(abs(newcon))
+			else:
+				addSatisfaction(abs(newcon))
 	
 func addFear(addfear):
 	if(getConsciousness() <= 1.0 && addfear > 0.0):
@@ -241,7 +247,7 @@ func getOpponentInfo():
 
 func onGoalSatisfied(_thedominfo, _goalid, _thesubinfo, _mult:float = 1.0):
 	if(isResistingSlightly()):
-		addFrustration(0.5*_mult)
+		addFrustration(1.0*_mult)
 	else:
 		addSatisfaction(0.5*_mult)
 
@@ -249,7 +255,7 @@ func onGoalFailed(_thedominfo, _goalid, _thesubinfo, _mult:float = 1.0):
 	if(isResistingSlightly()):
 		addSatisfaction(0.5*_mult)
 	else:
-		addFrustration(0.5*_mult)
+		addFrustration(1.0*_mult)
 
 func saveData():
 	var data = .saveData()

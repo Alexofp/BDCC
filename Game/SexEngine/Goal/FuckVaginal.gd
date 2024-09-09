@@ -22,6 +22,9 @@ func getSubGoals(_sexEngine, _domInfo, _subInfo, _data):
 func canLeadToSubsPregnancy(_sexEngine, _domInfo, _subInfo, _data):
 	return true
 
+func domWantsToCum():
+	return true
+
 func doFastSex(_sexEngine, _domInfo, _subInfo, _data):
 	var sub = _subInfo.getChar()
 	var dom = _domInfo.getChar()

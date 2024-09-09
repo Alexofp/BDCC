@@ -30,6 +30,9 @@ func canLeadToSubsPregnancy(_sexEngine, _domInfo, _subInfo, _data):
 func getGoalDefaultWeight():
 	return 0.5
 
+func domWantsToCum():
+	return true
+
 func doFastSex(_sexEngine, _domInfo, _subInfo, _data):
 	for _i in range(RNG.randi_range(0, 3)):
 		sendSexEvent(_sexEngine, SexEvent.Choking, _domInfo, _subInfo, {strongChoke=RNG.chance(20)})

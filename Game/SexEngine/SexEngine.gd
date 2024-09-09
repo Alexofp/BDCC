@@ -17,6 +17,9 @@ var sexResult = {}
 
 var sexType:SexTypeBase
 
+var disabledGoals:Dictionary = {}
+var bondageDisabled:bool = false
+
 func initSexType(theSexType, args:Dictionary = {}):
 	if(theSexType is String):
 		theSexType = GlobalRegistry.createSexType(theSexType)
@@ -28,6 +31,12 @@ func initSexType(theSexType, args:Dictionary = {}):
 	if(args.has("unconscious") && args["unconscious"]):
 		for subID in subs:
 			getSubInfo(subID).getChar().addConsciousness(-1.0)
+		
+	if(args.has("disabledGoals")):
+		disabledGoals = args["disabledGoals"]
+		
+	if(args.has("bondageDisabled")):
+		bondageDisabled = args["bondageDisabled"]
 		
 	if(sexType != null):
 		sexType.setSexEngine(self)
@@ -279,6 +288,8 @@ func generateGoals():
 			var goalsToAdd = dom.getFetishHolder().getGoals(self, sub)
 			if(goalsToAdd != null):
 				for goal in goalsToAdd:
+					if(disabledGoals.has(goal[0])):
+						continue
 					if(subID == "pc"):
 						if(GM.main.getEncounterSettings().isGoalDisabledForSubPC(goal[0])):
 							continue
@@ -310,6 +321,7 @@ func generateGoals():
 				personDomInfo.goals.append(randomGoalInfo.duplicate(true))
 			
 		print("Goals added to NPC: ", personDomInfo.goals)
+		personDomInfo.afterGoalsAssigned()
 	
 	if(!isDom("pc") && !generatedAnyGoals):
 		messages.append("Dom couldn't decide what to do with the sub, none of their fetishes apply.")
@@ -1308,6 +1320,9 @@ func saveItemToLoot(theItem):
 func getSexResult():
 	return sexResult
 
+func isBondageDisabled() -> bool:
+	return bondageDisabled
+
 func saveData():
 	var data = {
 		"revealedBodyparts": revealedBodyparts,
@@ -1316,6 +1331,7 @@ func saveData():
 		"currentLastActivityID": currentLastActivityID,
 		"sexEnded": sexEnded,
 		"sexResult": sexResult,
+		"bondageDisabled": bondageDisabled,
 	}
 	if(sexType != null):
 		data["sexTypeID"] = sexType.id
@@ -1348,6 +1364,7 @@ func loadData(data):
 	currentLastActivityID = SAVE.loadVar(data, "currentLastActivityID", 0)
 	sexEnded = SAVE.loadVar(data, "sexEnded", false)
 	sexResult = SAVE.loadVar(data, "sexResult", {})
+	bondageDisabled = SAVE.loadVar(data, "bondageDisabled", false)
 	
 	var sexTypeID = SAVE.loadVar(data, "sexTypeID", SexType.DefaultSex)
 	var theSexType = GlobalRegistry.createSexType(sexTypeID)

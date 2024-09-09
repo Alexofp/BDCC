@@ -54,6 +54,9 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 		else:
 			usableItems = dom.getInventory().getAllCombatUsableRestraintsForStaticNpc()
 	else:
+		if(_sexEngine.isBondageDisabled()):
+			return []
+		
 		var itemTagToUse = ItemTag.CanBeForcedByGuards
 		if(_sexEngine.getSexTypeID() == SexType.StocksSex):#(isStocksSex()):
 			itemTagToUse = ItemTag.CanBeForcedInStocks

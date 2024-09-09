@@ -154,7 +154,8 @@ func restraints_refusedpay_do(_id:String, _args:Dictionary, _context:Dictionary)
 	if(_id == "whatever"):
 		setState("restraints_refusedwhatever", "reacter")
 	if(_id == "attack"):
-		setState("restraints_refuse_attack", "starter")
+		#setState("restraints_refuse_attack", "starter")
+		startInteraction("GenericAttack", {starter=getRoleID("reacter"), reacter=getRoleID("starter")}, {askCredits=askCredits})
 
 
 func restraints_refusedwhatever_text():
@@ -166,96 +167,6 @@ func restraints_refusedwhatever_text():
 func restraints_refusedwhatever_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "continue"):
 		getRolePawn("reacter").satisfySocial()
-		stopMe()
-
-
-func restraints_refuse_attack_text():
-	saynn("{reacter.You} suddenly {reacter.youVerb('attack')} {starter.you}!")
-	saynn("[say=reacter]I WILL FUCK YOU UP![/say]")
-
-	addAction("fight", "Fight", "Fight back", "fight", 1.0, 300, {start_fight=["reacter", "starter"],})
-	addAction("surrender", "Surrender", "Just surrender, it's not worth it..", "surrender", 1.0, 60, {})
-
-func restraints_refuse_attack_do(_id:String, _args:Dictionary, _context:Dictionary):
-	if(_id == "fight"):
-		surrendered = false
-		var fightResult = getFightResult(_args)
-		
-		if(fightResult["won"]):
-			setState("reacter_won", "reacter")
-			
-			if(getRolePawn("starter").isPlayer()):
-				GM.pc.addCredits(-askCredits)
-				addMessage("You lost credits!")
-			if(getRolePawn("reacter").isPlayer()):
-				GM.pc.addCredits(askCredits)
-				addMessage("You got credits!")
-		else:
-			setState("starter_won", "starter")
-	if(_id == "surrender"):
-		surrendered = true
-		setState("reacter_won", "reacter")
-		
-		if(getRolePawn("starter").isPlayer()):
-			GM.pc.addCredits(-askCredits)
-			addMessage("You lost credits!")
-		if(getRolePawn("reacter").isPlayer()):
-			GM.pc.addCredits(askCredits)
-			addMessage("You got credits!")
-
-
-func reacter_won_text():
-	if(!surrendered):
-		saynn("{reacter.name} won the fight! {starter.name} hits the floor, unable to continue fighting..")
-	else:
-		saynn("{starter.name} decides to surrender instantly..")
-	saynn("{reacter.You} {reacter.youVerb('fetch', 'fetches')} "+str(askCredits)+" credits from {starter.you}..")
-
-	addAction("punish", "Punish", "Punish them more!", "punish", 1.0, 60, {})
-	addAction("leave", "Leave", "Just leave", "surrender", 0.2, 60, {})
-
-func reacter_won_do(_id:String, _args:Dictionary, _context:Dictionary):
-	if(_id == "punish"):
-		startInteraction("PunishInteraction", {punisher=getRoleID("reacter"), target=getRoleID("starter")})
-	if(_id == "leave"):
-		setState("reacter_won_leave", "reacter")
-		#affectAffection("starter", "reacter", 0.05)
-
-
-func reacter_won_leave_text():
-	saynn("{reacter.name} decides to leave {starter.you} alone..")
-
-	addAction("leave", "Leave", "Time to go..", "default", 1.0, 60, {})
-
-func reacter_won_leave_do(_id:String, _args:Dictionary, _context:Dictionary):
-	if(_id == "leave"):
-		stopMe()
-
-
-func starter_won_text():
-	if(!surrendered):
-		saynn("{starter.name} won the fight! {reacter.name} hits the floor, unable to continue fighting..")
-	else:
-		saynn("{reacter.name} decides to surrender instantly..")
-
-	addAction("punish", "Punish", "Have some fun!", "punish", 1.0, 60, {})
-	addAction("leave", "Leave", "Just leave", "surrender", 0.2, 60, {})
-
-func starter_won_do(_id:String, _args:Dictionary, _context:Dictionary):
-	if(_id == "punish"):
-		startInteraction("PunishInteraction", {punisher=getRoleID("starter"), target=getRoleID("reacter")})
-	if(_id == "leave"):
-		setState("starter_won_leave", "starter")
-		affectAffection("reacter", "starter", 0.05)
-
-
-func starter_won_leave_text():
-	saynn("{starter.name} decides to leave {reacter.you} alone..")
-
-	addAction("leave", "Leave", "Time to go..", "default", 1.0, 60, {})
-
-func starter_won_leave_do(_id:String, _args:Dictionary, _context:Dictionary):
-	if(_id == "leave"):
 		stopMe()
 
 
