@@ -2,7 +2,7 @@ extends Node
 
 var game_version_major = 0
 var game_version_minor = 1
-var game_version_revision = 4
+var game_version_revision = 5
 var game_version_suffix = ""
 
 var currentUniqueID = 0
@@ -73,6 +73,7 @@ var datapacks: Dictionary = {}
 var bodypartStorageNode
 
 var sceneCache: Dictionary = {}
+var codeblocksCache: Dictionary = {}
 
 var cachedDonationData = null
 var cachedLocalDonationData = null
@@ -311,6 +312,7 @@ func registerEverything():
 	registerItemFolder("res://Inventory/Items/StaticBDSM/")
 	registerItemFolder("res://Inventory/Items/Weapons/")
 	registerItemFolder("res://Inventory/Items/Clothes/")
+	registerItemFolder("res://Inventory/Items/Unique/")
 	
 	registerBuffFolder("res://Inventory/Buffs/")
 	
@@ -527,6 +529,18 @@ func getSceneCreator(id: String):
 	return sceneCreators[id]
 
 func createScene(id: String):
+	if(":" in id):
+		var splitData = Util.splitOnFirst(id, ":")
+		var datapackID = splitData[0]
+		var sceneID = splitData[1]
+		
+		if(GM.main != null && is_instance_valid(GM.main) && GM.main.loadedDatapacks.has(datapackID)):
+			var newscene = DatapackSceneBase.new()
+			newscene.name = id
+			newscene.sceneID = id
+			newscene.setDatapackAndSceneIDs(datapackID, sceneID)
+			return newscene
+	
 	if(!scenes.has(id) && !temporaryScenes.has(id)):
 		Log.printerr("ERROR: scene with the id "+id+" wasn't found")
 		return null
@@ -573,6 +587,9 @@ func getBodypartRef(id: String):
 		Log.printerr("ERROR: bodypart with the id "+id+" wasn't found")
 		return null
 	return bodyparts[id]
+
+func getBodypartRefs():
+	return bodyparts
 
 func getBodypartsIdsBySlot(_slot):
 	var result = []
@@ -659,6 +676,29 @@ func getCharacters():
 func getCharacterClasses():
 	return characterClasses
 
+func createCharacter(charID:String):
+	if(":" in charID):
+		var splitData = Util.splitOnFirst(charID, ":")
+		var datapackID = splitData[0]
+		var datapackCharID = splitData[1]
+		
+		var datapack = getDatapack(datapackID)
+		if(datapack == null):
+			return null
+		
+		if(!datapack.characters.has(datapackCharID)):
+			return null
+		var dynChar = DynamicCharacter.new()
+		add_child(dynChar)
+		dynChar.loadFromDatapackCharacter(datapack, datapack.characters[datapackCharID])
+		remove_child(dynChar)
+		return dynChar
+	
+	if(!characterClasses.has(charID)):
+		Log.printerr("ERROR: character class with the id "+charID+" wasn't found ")
+		return null
+	return characterClasses[charID].new()
+
 func registerAttack(path: String):
 	var attack = load(path)
 	var attackObject = attack.new()
@@ -738,6 +778,9 @@ func getStatusEffectRef(id: String):
 		Log.printerr("ERROR: status effect with the id "+id+" wasn't found")
 		return null
 	return statusEffectsRefs[id]
+
+func getStatusEffectsRefs():
+	return statusEffectsRefs
 
 func getStatusEffectsAlwaysCheckedForPC():
 	return statusEffectsCheckedForPC
@@ -892,6 +935,8 @@ func createBuff(id: String):
 		return null
 	return buffs[id].new()
 
+func getBuffClasses():
+	return buffs
 
 
 func registerEvent(path: String):
@@ -1148,6 +1193,9 @@ func createStageScene(id: String):
 
 func getStageScenesCachedStates():
 	return stageScenesCachedStates
+
+func getStageScenesClasses():
+	return stageScenes
 
 func instanceCached(scenePath):
 	if(sceneCache.has(scenePath)):
@@ -1963,6 +2011,7 @@ func loadDatapacksFromFolder(folder: String):
 			
 			if(newPackResource is DatapackResource):
 				var newDatapack:Datapack = Datapack.new()
+				newDatapack.loadedPath = possiblePackPath
 				newDatapack.loadFromResource(newPackResource)
 				
 				if(datapacks.has(newDatapack.id)):
@@ -1980,7 +2029,7 @@ func reloadPacks():
 
 func deleteDatapack(id:String):
 	if(datapacks.has(id)):
-		var path = getDatapacksFolder().plus_file(datapacks[id].getDatapackFileName())
+		var path = datapacks[id].getLoadedPath()#getDatapacksFolder().plus_file(datapacks[id].getDatapackFileName())
 		
 		if(Util.removeFile(path) == OK):
 			#reloadPacks()

@@ -23,6 +23,8 @@ func clear():
 	updateVisibility()
 
 func addCharacter(charID:String, variant:Array = []):
+	if(charID == "pc" || GlobalRegistry.getCharacter(charID) == null):
+		return
 	characters[charID] = variant
 	artworkPanel.addCharacter(charID, variant)
 	charactersPanel.addCharacter(charID)

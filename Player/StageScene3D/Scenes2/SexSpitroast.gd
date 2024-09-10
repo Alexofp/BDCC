@@ -68,7 +68,7 @@ func playAnimation(animID, _args = {}):
 	
 	updateSubAnims()
 	
-	if(_args.has("pcCum") && _args["pcCum"]):
+	if(_args.has("npcCum") && _args["npcCum"]):
 		#startCumInsideSolo(doll, getCumIntensity(doll2) + getCumIntensity(doll3))
 		if(!(animID in ["tease"])):
 			startCumInside(doll2, doll)
@@ -126,3 +126,6 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["tease", "inside", "sex", "fast"]
+
+func getVarNpcs():
+	return ["pc", "npc", "npc2"]

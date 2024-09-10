@@ -11,6 +11,7 @@ onready var http_request_preview = $HTTPRequestPreview
 onready var preview_texture_rect = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PreviewTextureRect
 onready var preview_downloading_image = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/PreviewDownloadingImage
 
+var datapackLinks = {}
 var allDatapacks = []
 var selectedDatapackIndex:int = -1
 var visualModEntries = []
@@ -53,12 +54,14 @@ func resetMods():
 	allDatapacks.clear()
 
 func updateModList():
+	datapackLinks = {}
 	visualModEntries.clear()
 	Util.delete_children(modList)
 	for modEntry in allDatapacks:
 		var newBrowserEntry = datapackEntryScene.instance()
 		modList.add_child(newBrowserEntry)
 		newBrowserEntry.id = modEntry["id"]
+		datapackLinks[modEntry["id"]] = true
 		newBrowserEntry.index = modEntry["index"]
 		newBrowserEntry.setEntry(modEntry)
 		var _ok = newBrowserEntry.connect("onSelected", self, "onModEntrySelected")
@@ -113,6 +116,18 @@ func _on_HTTPRequest_request_completed(result, _response_code, _headers, body):
 			newDatapackEntry["preview"] = theModEntry["preview"]
 		else:
 			newDatapackEntry["preview"] = null
+		if(theModEntry.has("requiredMods")):
+			newDatapackEntry["requiredMods"] = theModEntry["requiredMods"]
+		else:
+			newDatapackEntry["requiredMods"] = []
+		if(theModEntry.has("requiredDatapacks")):
+			newDatapackEntry["requiredDatapacks"] = theModEntry["requiredDatapacks"]
+		else:
+			newDatapackEntry["requiredDatapacks"] = []
+		if(theModEntry.has("reqDatapackToName")):
+			newDatapackEntry["reqDatapackToName"] = theModEntry["reqDatapackToName"]
+		else:
+			newDatapackEntry["reqDatapackToName"] = {}
 		newDatapackEntry["index"] = _i
 		_i += 1
 		
@@ -147,6 +162,8 @@ func updatePickedModEntry():
 		text += "Author: "+str(pickedModEntry["author"])+"\n"
 		text += "Version: "+str(pickedModEntry["version"])+"\n"
 		text += "Filesize: "+ String.humanize_size(pickedModEntry["filesize"])+"\n"
+		if(!pickedModEntry["requiredMods"].empty() || !pickedModEntry["requiredDatapacks"].empty()):
+			text += Datapack.getRequiredModsStringStatic(pickedModEntry["requiredMods"], pickedModEntry["requiredDatapacks"], pickedModEntry["reqDatapackToName"], datapackLinks) + "\n"
 		text += ""+str(pickedModEntry["contains"])+"\n"
 		#text += "Mod version: "+str(pickedModEntry.modversion)+"\n"
 		#if(!GlobalRegistry.isVersionListHasCompatible(str(pickedModEntry.gameversion))):
@@ -254,6 +271,13 @@ func _on_CloseButton_pressed():
 
 
 func _on_RichTextLabel_meta_clicked(meta):
+	if(meta.begins_with("SELECT:")):
+		var datapackID = Util.splitOnFirst(meta, "SELECT:")[1]
+		for datapackEntry in allDatapacks:
+			if(datapackEntry["id"] == datapackID):
+				onModEntrySelected(datapackEntry)
+				return
+		return
 	var _ok = OS.shell_open(meta)
 
 

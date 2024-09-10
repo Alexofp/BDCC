@@ -715,18 +715,14 @@ func canUndress():
 			return true
 	return false
 
-func hasIllegalItems():
-	if(inventory.getItemsWithTag(ItemTag.Illegal).size() > 0):
-		return true
-	if(inventory.getEquippedItemsWithTag(ItemTag.Illegal).size() > 0):
-		return true
-	return false
-
 func setInmateType(newtype):
 	inmateType = newtype
 
 func getInmateType():
 	return inmateType
+
+func getInmateTypeString():
+	return InmateType.getOfficialName(getInmateType())
 
 func getInmateColorString():
 	return InmateType.getColorName(getInmateType())
@@ -885,4 +881,10 @@ func giveBirth():
 	
 	return bornChildren
 
+func setThickness(_newT:int):
+	pickedThickness = _newT
+	updateAppearance()
 
+func setFemininity(_newF:int):
+	pickedFemininity = _newF
+	updateAppearance()

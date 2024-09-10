@@ -20,7 +20,7 @@ func shouldDoStruggleMinigame(_pc):
 		return false
 	return .shouldDoStruggleMinigame(_pc)
 	
-func doStruggle(_pc, _minigame):
+func doStruggle(_pc, _minigame:MinigameResult):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()
@@ -33,7 +33,10 @@ func doStruggle(_pc, _minigame):
 	var damage = 0
 	var stamina = 0
 	
-	if(_handsFree && _armsFree):
+	if(failChanceLowScore(_pc, 15, _minigame)):
+		text = "{user.name} struggles to shake the blindfold off but careless motions cause it to [b]get tigther[/b] around {user.his} head!"
+		damage = -0.5
+	elif(_handsFree && _armsFree):
 		text = "Because {user.name}'s hands are free {user.he} manages to just untie {user.his} blindfold."
 		damage = 1.0
 	elif(_handsFree):
@@ -42,7 +45,7 @@ func doStruggle(_pc, _minigame):
 		stamina = 5
 	else:
 		text = "{user.name} shakes {user.his} head, trying to make the blindfold slip off."
-		damage = calcDamage(_pc)
+		damage = calcDamage(_pc, _minigame)
 		stamina = 10
 	
 	#damage = calcDamage()

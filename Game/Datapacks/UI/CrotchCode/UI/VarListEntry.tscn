@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/Datapacks/UI/PackVarUIs/StringVarUI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/UI/VarListEntry.gd" type="Script" id=3]
+
+[node name="VarListEntry" type="HBoxContainer"]
+margin_right = 1272.0
+margin_bottom = 20.0
+script = ExtResource( 3 )
+
+[node name="StringVarUI" parent="." instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 393.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="SelectorType" type="OptionButton" parent="."]
+margin_left = 397.0
+margin_right = 790.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="Control" type="MarginContainer" parent="."]
+margin_left = 794.0
+margin_right = 1188.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="SpinBox" type="SpinBox" parent="Control"]
+visible = false
+margin_right = 394.0
+margin_bottom = 24.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+
+[node name="TextEdit" type="TextEdit" parent="Control"]
+visible = false
+margin_right = 394.0
+margin_bottom = 20.0
+
+[node name="CheckBox" type="CheckBox" parent="Control"]
+visible = false
+margin_right = 394.0
+margin_bottom = 24.0
+
+[node name="DeleteButton" type="Button" parent="."]
+margin_left = 1192.0
+margin_right = 1272.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 80, 0 )
+text = "Delete"
+
+[connection signal="onValueChange" from="StringVarUI" to="." method="_on_StringVarUI_onValueChange"]
+[connection signal="item_selected" from="SelectorType" to="." method="_on_SelectorType_item_selected"]
+[connection signal="value_changed" from="Control/SpinBox" to="." method="_on_SpinBox_value_changed"]
+[connection signal="text_changed" from="Control/TextEdit" to="." method="_on_TextEdit_text_changed"]
+[connection signal="toggled" from="Control/CheckBox" to="." method="_on_CheckBox_toggled"]
+[connection signal="pressed" from="DeleteButton" to="." method="_on_DeleteButton_pressed"]

@@ -25,5 +25,10 @@ margin_bottom = -4.0
 [node name="Game Flags" parent="TabContainer" instance=ExtResource( 1 )]
 visible = false
 
+[node name="Datapack Flags" parent="TabContainer" instance=ExtResource( 1 )]
+visible = false
+addGameFlags = false
+addDatapackFlags = true
+
 [node name="Scenes Info" parent="TabContainer" instance=ExtResource( 3 )]
 visible = false

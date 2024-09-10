@@ -52,3 +52,6 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["plow"]
+
+func getVarNpcs():
+	return ["pc"]

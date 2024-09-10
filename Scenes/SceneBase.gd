@@ -60,6 +60,7 @@ func run():
 			continue
 		character.updateNonBattleEffects()
 	
+	GM.ui.clearSceneArtwork()
 	GM.ui.clearText()
 	GM.ui.clearButtons()
 	GM.ui.clearUItextboxes()
@@ -132,6 +133,10 @@ func sayn(_text: String):
 func saynn(_text: String):
 	say(_text+"\n\n")
 
+func addImage(image:Image):
+	if(GM.ui):
+		GM.ui.addImage(image)
+
 func addCharacter(id: String, variant: Array = []):
 	if(id == ""):
 		return
@@ -175,6 +180,7 @@ func endScene(result = []):
 func runScene(id: String, args = [], tag = ""):
 	var scene = GM.main.runScene(id, args, uniqueSceneID)
 	scene.sceneTag = tag
+	return scene
 
 func react_scene_end(_tag, _result):
 	print(name+": My parent scene has ended")

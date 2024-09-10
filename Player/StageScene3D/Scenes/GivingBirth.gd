@@ -42,3 +42,6 @@ func playAnimation(animID, _args = {}):
 
 func getSupportedStates():
 	return ["idle", "birth"]
+
+func getVarNpcs():
+	return ["pc"]

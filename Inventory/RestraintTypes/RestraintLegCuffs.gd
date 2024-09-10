@@ -5,7 +5,7 @@ func _init():
 	npcDodgeDifficultyMod = 1.1
 	restraintType = RestraintType.AnkleCuffs
 
-func doStruggle(_pc, _minigame):
+func doStruggle(_pc, _minigame:MinigameResult):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()
@@ -18,13 +18,16 @@ func doStruggle(_pc, _minigame):
 	var damage = 0
 	var stamina = 0
 	
-	if(_handsFree && _armsFree):
+	if(failChanceLowScore(_pc, 15, _minigame)):
+		text = "{user.name} kicks and twists {user.his} legs, attempting to free {user.his} ankles from the cuffs. The more {user.he} struggles, the [b]tighter the cuffs clamp down[/b]."
+		damage = -0.5
+	elif(_handsFree && _armsFree):
 		text = "{user.name} uses {user.his} hands to try and take off the leg cuffs."
-		damage = calcDamage(_pc)
+		damage = calcDamage(_pc, _minigame)
 		stamina = 10
 	else:
 		text = "{user.name} rolls around and tries to helplessly wiggle {user.his} leg cuffs off."
-		damage = calcDamage(_pc, 0.5)
+		damage = calcDamage(_pc, _minigame, 0.5)
 		stamina = 10
 		
 		if(failChance(_pc, 10)):

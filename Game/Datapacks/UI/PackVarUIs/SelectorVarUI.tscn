@@ -27,3 +27,4 @@ margin_right = 1280.0
 margin_bottom = 720.0
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[connection signal="item_selected" from="OptionButton" to="." method="_on_OptionButton_item_selected"]

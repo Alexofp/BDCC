@@ -10,22 +10,20 @@ script = ExtResource( 3 )
 [node name="MedRoom" parent="." index="0" instance=ExtResource( 2 )]
 roomName = "Med Lobby"
 roomID = "med_lobby_start"
-roomDescription = "You stand in the medical lobby, it’s very sterile here, the omnipresent smell of antiseptic follows you any way you go. The walls and floors are white, many lights make this floor look quite bright. A few benches are placed along the walls where inmates can wait or have a rest.
+roomDescription = "This is the Medical lobby, and the whole place feels very sterile with the omnipresent smell of antiseptic in the air. Coming off the dark elevator is a little blinding with all the white and incredibly strong lights in here. The waiting room is also here, with a number of benches lined up for inmates to sit.
 
-You notice two airlocks that lead to the staff-only rooms, you can’t even open them without having access or being brought in by someone.
-
-Behind the counter you notice a few nurses busy with their stuff."
+Either side of the lobby, there are two very secure airlocks that you’re not opening as an inmate. You’ll need someone to bring you into the back if you want to go there.
+"
 population = 3
 
 [node name="MedRoom2" parent="." index="1" instance=ExtResource( 2 )]
 position = Vector2( -64, 0 )
 roomName = "Med Lobby"
 roomID = "MedRoom2"
-roomDescription = "You stand in the medical lobby, it’s very sterile here, the omnipresent smell of antiseptic follows you any way you go. The walls and floors are white, many lights make this floor look quite bright. A few benches are placed along the walls where inmates can wait or have a rest.
+roomDescription = "This is the Medical lobby, and the whole place feels very sterile with the omnipresent smell of antiseptic in the air. Coming off the dark elevator is a little blinding with all the white and incredibly strong lights in here. The waiting room is also here, with a number of benches lined up for inmates to sit.
 
-You notice two airlocks that lead to the staff-only rooms, you can’t even open them without having access or being brought in by someone.
-
-Behind the counter you notice a few nurses busy with their stuff."
+Either side of the lobby, there are two very secure airlocks that you’re not opening as an inmate. You’ll need someone to bring you into the back if you want to go there.
+"
 roomSprite = 6
 population = 3
 
@@ -33,22 +31,25 @@ population = 3
 position = Vector2( 64, 0 )
 roomName = "Med Lobby"
 roomID = "med_lobbyse"
-roomDescription = "You stand in the medical lobby, it’s very sterile here, the omnipresent smell of antiseptic follows you any way you go. The walls and floors are white, many lights make this floor look quite bright. A few benches are placed along the walls where inmates can wait or have a rest.
+roomDescription = "This is the Medical lobby, and the whole place feels very sterile with the omnipresent smell of antiseptic in the air. Coming off the dark elevator is a little blinding with all the white and incredibly strong lights in here. The waiting room is also here, with a number of benches lined up for inmates to sit.
 
-You notice two airlocks that lead to the staff-only rooms, you can’t even open them without having access or being brought in by someone.
+Either side of the lobby, there are two very secure airlocks that you’re not opening as an inmate. You’ll need someone to bring you into the back if you want to go there.
 
-Behind the counter you notice a few nurses busy with their stuff."
+This side of the lobby has a reinforced window, looking out over a large drop down. Looks like the same chasm that stretches up above the main hall. From the weird angle you can only really see the punishment platform somewhat normally from here."
 population = 3
 
 [node name="MedRoom4" parent="." index="3" instance=ExtResource( 2 )]
 position = Vector2( 0, -64 )
 roomName = "Med Lobby"
 roomID = "med_lobbymain"
-roomDescription = "You stand in the medical lobby, it’s very sterile here, the omnipresent smell of antiseptic follows you any way you go. The walls and floors are white, many lights make this floor look quite bright. A few benches are placed along the walls where inmates can wait or have a rest.
+roomDescription = "This is the Medical lobby, and the whole place feels very sterile with the omnipresent smell of antiseptic in the air. Coming off the dark elevator is a little blinding with all the white and incredibly strong lights in here. The waiting room is also here, with a number of benches lined up for inmates to sit.
 
-You notice two airlocks that lead to the staff-only rooms, you can’t even open them without having access or being brought in by someone.
+Either side of the lobby, there are two very secure airlocks that you’re not opening as an inmate. You’ll need someone to bring you in to the back if you want to go back there.
 
-Behind the counter you notice a few nurses busy with their stuff."
+The lobby reception counters are here if you need something, the few nurses here are busy with their stuff or vacant doing something else.
+
+Eliza Quinn’s usual spot is here, marked with a little name placard.
+"
 roomSprite = 1
 population = 3
 
@@ -56,11 +57,12 @@ population = 3
 position = Vector2( 64, -64 )
 roomName = "Med Lobby"
 roomID = "med_lobbyne"
-roomDescription = "You stand in the medical lobby, it’s very sterile here, the omnipresent smell of antiseptic follows you any way you go. The walls and floors are white, many lights make this floor look quite bright. A few benches are placed along the walls where inmates can wait or have a rest.
+roomDescription = "This is the Medical lobby, and the whole place feels very sterile with the omnipresent smell of antiseptic in the air. Coming off the dark elevator is a little blinding with all the white and incredibly strong lights in here. The waiting room is also here, with a number of benches lined up for inmates to sit.
 
-You notice two airlocks that lead to the staff-only rooms, you can’t even open them without having access or being brought in by someone.
+One of those airlocks is east of here. You’ll need someone to bring you into the back if you want to go there.
 
-Behind the counter you notice a few nurses busy with their stuff."
+The lobby reception counters are here if you need something, the few nurses here are busy with their stuff or vacant doing something else.
+"
 canEast = false
 population = 3
 
@@ -68,11 +70,11 @@ population = 3
 position = Vector2( -64, -64 )
 roomName = "Med Lobby"
 roomID = "med_lobbynw"
-roomDescription = "You stand in the medical lobby, it’s very sterile here, the omnipresent smell of antiseptic follows you any way you go. The walls and floors are white, many lights make this floor look quite bright. A few benches are placed along the walls where inmates can wait or have a rest.
+roomDescription = "This is the Medical lobby, and the whole place feels very sterile with the omnipresent smell of antiseptic in the air. Coming off the dark elevator is a little blinding with all the white and incredibly strong lights in here. The waiting room is also here, with a number of benches lined up for inmates to sit.
 
-You notice two airlocks that lead to the staff-only rooms, you can’t even open them without having access or being brought in by someone.
+One of those airlocks is west of here. You’ll need someone to bring you into the back if you want to go there.
 
-Behind the counter you notice a few nurses busy with their stuff."
+The lobby reception counters are here if you need something, the few nurses here are busy with their stuff or vacant doing something else."
 canWest = false
 population = 3
 
@@ -81,7 +83,9 @@ self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 128, 0 )
 roomName = "Nursery"
 roomID = "medical_nursery"
-roomDescription = "You enter the daycare lobby. Not much is here, just a nurse that's staring at a computer screen behind the table. You do see a closed door that leads into some other room but you have no access to it as an inmate."
+roomDescription = "The sign on the wall says nursery but this is clearly a maternity ward. The whole room is rather barren, save for a lone nurse behind a dual-screened computer terminal and the ever present light green trim. Behind the nurse is a thick set of overly-armored dual glass doors leading to the delivery rooms. From what little you see through darkened glass, more intensely armored windows to who knows where, a number of doors, and more out of place reinforcements in the walls. Strangely clean too…
+
+For what this place is, it’s definitely strange..."
 canNorth = false
 canSouth = false
 roomSprite = 5
@@ -91,6 +95,7 @@ population = 3
 [node name="MedRoom7" parent="." index="7" instance=ExtResource( 2 )]
 position = Vector2( -128, -64 )
 roomName = "Med Floor Corridor"
+roomID = "med_staffonly_door1"
 roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the corridor seems to be safe for inmates to walk through but you better not go too far or the staff will start asking questions."
 gridColor = 3
 population = 2
@@ -99,6 +104,7 @@ astarConnectedTo = PoolStringArray( "med_lobbynw" )
 [node name="MedRoom8" parent="." index="8" instance=ExtResource( 2 )]
 position = Vector2( 128, -64 )
 roomName = "Med Floor Corridor"
+roomID = "med_staffonly_door2"
 roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the corridor seems to be safe for inmates to walk through but you better not go too far or the staff will start asking questions."
 gridColor = 3
 population = 2
@@ -125,13 +131,18 @@ population = 2
 [node name="MedRoom10" parent="." index="11" instance=ExtResource( 2 )]
 position = Vector2( 128, -192 )
 roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the corridor seems to be safe for inmates to walk through but you better not go too far or the staff will start asking questions."
+roomID = "med_near_staffonly_corridor"
+roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the corridor seems to be safe for inmates to walk through but you better not go too far or the staff will start asking questions.
+
+Going further into medical will draw suspicion from here, away from the more popular or dedicated prisoner rooms."
 population = 2
 
 [node name="MedRoom11" parent="." index="12" instance=ExtResource( 2 )]
 position = Vector2( 128, -256 )
 roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomID = "med_corridor1"
+roomDescription = "You stand in a wide white corridor, it looks pretty long, and most of the doors you can reach are locked. Other than the white paneling, there isn't much to speak of. Or sneak around.
+This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -139,7 +150,11 @@ population = 2
 [node name="MedRoom12" parent="." index="13" instance=ExtResource( 2 )]
 position = Vector2( 128, -320 )
 roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomID = "med_corridor2"
+roomDescription = "You stand in a wide white corridor, it looks pretty long, and most of the doors you can reach are locked. Other than the white paneling, there isn't much to speak of. Or sneak around.
+This part of the medical wing is marked as [color=red]off-limits[/color] for inmates.
+
+The path through the halls veers off to the left to loop back in around itself."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -147,7 +162,9 @@ population = 2
 [node name="MedRoom13" parent="." index="14" instance=ExtResource( 2 )]
 position = Vector2( 64, -320 )
 roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomID = "med_corridor3"
+roomDescription = "You stand in a wide white corridor, it looks pretty long, and most of the doors you can reach are locked. Other than the white paneling, there isn't much to speak of. Or sneak around.
+This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -156,7 +173,10 @@ population = 2
 position = Vector2( 0, -320 )
 roomName = "Med Floor Corridor"
 roomID = "medical_firstcorridorcross"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomDescription = "You stand in a wide white corridor, it looks pretty long, and most of the doors you can reach are locked. Other than the white paneling, there isn't much to speak of. Or sneak around.
+This part of the medical wing is marked as [color=red]off-limits[/color] for inmates.
+
+A set of dual glass doors lead further into the medical ward. Otherwise, the path loops around on itself."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -164,7 +184,10 @@ population = 2
 [node name="MedRoom21" parent="." index="16" instance=ExtResource( 2 )]
 position = Vector2( 0, -384 )
 roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomID = "med_corridor8"
+roomDescription = "Two sets of glass double doors separate the two loops of Medical. A rather useless window on either side of the hall looks out at the interior rockface about and arms length away.
+
+Going north of here leads to the more serious medical rooms, with signs saying \"Hospital\", \"ICU\", \"Surgery\". All the delicate stuff that requires a good amount of calm and care."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -172,7 +195,11 @@ population = 2
 [node name="MedRoom22" parent="." index="17" instance=ExtResource( 2 )]
 position = Vector2( 0, -448 )
 roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomID = "med_corridor_split2"
+roomDescription = "You stand in a wide white corridor, it looks pretty long, and most of the doors you can reach are locked. Other than the white paneling, there isn't much to speak of. Or sneak around.
+This part of the medical wing is marked as [color=red]off-limits[/color] for inmates.
+
+A set of dual glass doors lead further into the medical ward. Otherwise, the path loops around on itself."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -180,7 +207,9 @@ population = 2
 [node name="MedRoom23" parent="." index="18" instance=ExtResource( 2 )]
 position = Vector2( -64, -448 )
 roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomID = "med_corridor9"
+roomDescription = "You stand in a wide white corridor, it looks pretty long, and most of the doors you can reach are locked. Other than the white paneling, there isn't much to speak of. Or sneak around.
+This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -188,7 +217,9 @@ population = 2
 [node name="MedRoom24" parent="." index="19" instance=ExtResource( 2 )]
 position = Vector2( 64, -448 )
 roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomID = "med_corridor17"
+roomDescription = "You stand in a wide white corridor, it looks pretty long, and most of the doors you can reach are locked. Other than the white paneling, there isn't much to speak of. Or sneak around.
+This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -196,7 +227,9 @@ population = 2
 [node name="MedRoom25" parent="." index="20" instance=ExtResource( 2 )]
 position = Vector2( 128, -448 )
 roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomID = "med_corridor16"
+roomDescription = "You stand in a wide white corridor, it looks pretty long, and most of the doors you can reach are locked. Other than the white paneling, there isn't much to speak of. Or sneak around.
+This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -204,7 +237,9 @@ population = 2
 [node name="MedRoom26" parent="." index="21" instance=ExtResource( 2 )]
 position = Vector2( 128, -512 )
 roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomID = "med_corridor15"
+roomDescription = "You stand in a wide white corridor, it looks pretty long, and most of the doors you can reach are locked. Other than the white paneling, there isn't much to speak of. Or sneak around.
+This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -212,7 +247,8 @@ population = 2
 [node name="MedRoom27" parent="." index="22" instance=ExtResource( 2 )]
 position = Vector2( 128, -576 )
 roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomID = "med_corridor14"
+roomDescription = "This is the Hospital corridor, where all the really bad cases and injuries are mended. Kept far away from anyone who wants to finish the job. As such, the vast majority of the doors here are locked with keypads with a monitor displaying patient information hung above the door."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -221,15 +257,17 @@ population = 2
 position = Vector2( 64, -640 )
 roomName = "Hospital wards"
 roomID = "medical_hospitalwards"
-roomDescription = "Before you is a a dimly lit space, designed to let treated inmates rest. Cold, sterile walls. Decorative plants.
+roomDescription = "This is one of the hospital rooms. The rows of medical beds currently sits empty, free of any patients. With it empty, the lights are dimmed and all the equipment is missing or turned off, but clean and ready to be used. Seems rather boring though, with a lone decorative plant the only thing of interest. 
 
-You notice a row of medical beds, equipped with monitoring and life support systems. Not very comfy but they seem to get the job done."
+If you or anyone you know ends up really bad, they’ll probably end up here."
 population = 2
 
 [node name="MedRoom28" parent="." index="24" instance=ExtResource( 2 )]
 position = Vector2( -128, -448 )
 roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomID = "med_corridor10"
+roomDescription = "You stand in a wide white corridor, it looks pretty long, and most of the doors you can reach are locked. Other than the white paneling, there isn't much to speak of. Or sneak around.
+This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -237,7 +275,9 @@ population = 2
 [node name="MedRoom29" parent="." index="25" instance=ExtResource( 2 )]
 position = Vector2( -128, -512 )
 roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomID = "med_near_storage"
+roomDescription = "You stand in a wide white corridor, it looks pretty long, and most of the doors you can reach are locked. Other than the white paneling, there isn't much to speak of. Or sneak around.
+This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -254,7 +294,8 @@ population = 2
 [node name="MedRoom30" parent="." index="27" instance=ExtResource( 2 )]
 position = Vector2( -128, -576 )
 roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomID = "med_corridor11"
+roomDescription = "This is the Hospital corridor, where all the really bad cases and injuries are mended. Kept far away from anyone who wants to finish the job. As such, the vast majority of the doors here are locked with keypads with a monitor displaying patient information hung above the door."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -262,7 +303,8 @@ population = 2
 [node name="MedRoom42" parent="." index="28" instance=ExtResource( 2 )]
 position = Vector2( -64, -576 )
 roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomID = "med_corridor12"
+roomDescription = "This is the Hospital corridor, where all the really bad cases and injuries are mended. Kept far away from anyone who wants to finish the job. As such, the vast majority of the doors here are locked with keypads with a monitor displaying patient information hung above the door."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -270,7 +312,8 @@ population = 2
 [node name="MedRoom43" parent="." index="29" instance=ExtResource( 2 )]
 position = Vector2( 0, -576 )
 roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomID = "med_corridor13"
+roomDescription = "This is the Hospital corridor, where all the really bad cases and injuries are mended. Kept far away from anyone who wants to finish the job. As such, the vast majority of the doors here are locked with keypads with a monitor displaying patient information hung above the door."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -278,7 +321,10 @@ population = 2
 [node name="MedRoom44" parent="." index="30" instance=ExtResource( 2 )]
 position = Vector2( 64, -576 )
 roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomID = "med_near_wards"
+roomDescription = "This is the Hospital corridor, where all the really bad cases and injuries are mended. Kept far away from anyone who wants to finish the job. As such, the vast majority of the doors here are locked with keypads with a monitor displaying patient information hung above the door.
+
+To the north there is a vacant hospital room. It looks unlocked and open."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -286,7 +332,8 @@ population = 2
 [node name="MedRoom31" parent="." index="31" instance=ExtResource( 2 )]
 position = Vector2( 192, -512 )
 roomName = "Mental Ward"
-roomDescription = "You are walking through the mental ward, a place where doctors treat inmates with severe mental health problems. You notice that there are many padded cells around."
+roomID = "med_mental_entrance"
+roomDescription = "This hallway connects the mental wards and the back halls of the medical ward. A number of data readouts here show the status of all the various padded cells. Most are occupied or just locked down. "
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -294,7 +341,8 @@ population = 2
 [node name="MedRoom32" parent="." index="32" instance=ExtResource( 2 )]
 position = Vector2( 256, -512 )
 roomName = "Mental Ward"
-roomDescription = "You are walking through the mental ward, a place where doctors treat inmates with severe mental health problems. You notice that there are many padded cells around."
+roomID = "med_mental6"
+roomDescription = "This place is definitely more cramped than the rest of the medical ward. The walls, railings, doors, most of everything is painted a dark gray, with dimmer lighting, making the whole area look darker and more neutral than it actually is. It’s a weird effect on your eyes with how… simple it is."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -302,7 +350,8 @@ population = 2
 [node name="MedRoom33" parent="." index="33" instance=ExtResource( 2 )]
 position = Vector2( 320, -512 )
 roomName = "Mental Ward"
-roomDescription = "You are walking through the mental ward, a place where doctors treat inmates with severe mental health problems. You notice that there are many padded cells around."
+roomID = "med_mental5"
+roomDescription = "This place is definitely more cramped than the rest of the medical ward. The walls, railings, doors, most of everything is painted a dark gray, with dimmer lighting, making the whole area look darker and more neutral than it actually is. It’s a weird effect on your eyes with how… simple it is."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -310,7 +359,8 @@ population = 2
 [node name="MedRoom46" parent="." index="34" instance=ExtResource( 2 )]
 position = Vector2( -256, -256 )
 roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomID = "med_nearshower3"
+roomDescription = "This area is pressed up against the patient showers. A wide space used for whatever sorts of things, with a number of storage lockers, benches, and laundry bins. It’s like a regular public shower but with more infrastructure for the injured or disabled. There’s even a rack to hang prosthetics on."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -318,7 +368,8 @@ population = 2
 [node name="MedRoom47" parent="." index="35" instance=ExtResource( 2 )]
 position = Vector2( -256, -384 )
 roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomID = "med_nearshower2"
+roomDescription = "This area is pressed up against the patient showers. A wide space used for whatever sorts of things, with a number of storage lockers, benches, and laundry bins. It’s like a regular public shower but with more infrastructure for the injured or disabled. There’s even a rack to hang prosthetics on."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -326,26 +377,29 @@ population = 2
 [node name="MedRoom50" parent="." index="36" instance=ExtResource( 2 )]
 position = Vector2( -320, -384 )
 roomName = "Med Shower"
-roomDescription = "You enter the medical wing shower room. It’s pretty spacious here, the bleak gray design and fixed shower heads show that it’s clearly made for patients rather than staff."
+roomID = "medical_shower2"
+roomDescription = "You enter the medical wing shower room. It’s pretty spacious here, the bleak gray design and fixed shower heads show that it’s clearly made for patients rather than staff. There’s hooks in the walls and floors to restrain the rather more violent inmates."
 roomSprite = 7
 
 [node name="MedRoom51" parent="." index="37" instance=ExtResource( 2 )]
 position = Vector2( -320, -320 )
 roomName = "Med Shower"
 roomID = "medical_shower"
-roomDescription = "You enter the medical wing shower room. It’s pretty spacious here, the bleak gray design and fixed shower heads show that it’s clearly made for patients rather than staff."
+roomDescription = "You enter the medical wing shower room. It’s pretty spacious here, the bleak gray design and fixed shower heads show that it’s clearly made for patients rather than staff. There’s hooks in the walls and floors to restrain the rather more violent inmates."
 roomSprite = 7
 
 [node name="MedRoom52" parent="." index="38" instance=ExtResource( 2 )]
 position = Vector2( -320, -256 )
 roomName = "Med Shower"
-roomDescription = "You enter the medical wing shower room. It’s pretty spacious here, the bleak gray design and fixed shower heads show that it’s clearly made for patients rather than staff."
+roomID = "medical_shower3"
+roomDescription = "You enter the medical wing shower room. It’s pretty spacious here, the bleak gray design and fixed shower heads show that it’s clearly made for patients rather than staff. There’s hooks in the walls and floors to restrain the rather more violent inmates."
 roomSprite = 7
 
 [node name="MedRoom48" parent="." index="39" instance=ExtResource( 2 )]
 position = Vector2( -256, -320 )
 roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomID = "med_nearshower"
+roomDescription = "This area is pressed up against the patient showers. A wide space used for whatever sorts of things, with a number of storage lockers, benches, and laundry bins. It’s like a regular public shower but with more infrastructure for the injured or disabled. There’s even a rack to hang prosthetics on."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -353,7 +407,9 @@ population = 2
 [node name="MedRoom49" parent="." index="40" instance=ExtResource( 2 )]
 position = Vector2( -192, -320 )
 roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomID = "med_corridor7"
+roomDescription = "You stand in a wide white corridor, it looks pretty long, and most of the doors you can reach are locked. Other than the white paneling, there isn't much to speak of. Or sneak around.
+This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -361,7 +417,8 @@ population = 2
 [node name="MedRoom34" parent="." index="41" instance=ExtResource( 2 )]
 position = Vector2( 256, -384 )
 roomName = "Padded cell"
-roomDescription = "You are in a mental ward cell. All of the walls are made out of a soft padded material so you can’t hurt yourself here even if you really wanted to."
+roomID = "medical_paddedcell3"
+roomDescription = "This is one of the padded cells of the mental ward. Everything is made with some weird beige padded material you don’t recognise, with a fluorescent light in the ceiling."
 blindRoomDescription = "You have no idea where you are but the walls and the floor feel soft to the touch"
 canWest = false
 canNorth = false
@@ -370,7 +427,8 @@ canSouth = false
 [node name="MedRoom35" parent="." index="42" instance=ExtResource( 2 )]
 position = Vector2( 320, -384 )
 roomName = "Mental Ward"
-roomDescription = "You are walking through the mental ward, a place where doctors treat inmates with severe mental health problems. You notice that there are many padded cells around."
+roomID = "med_mental2"
+roomDescription = "This place is definitely more cramped than the rest of the medical ward. The walls, railings, doors, most of everything is painted a dark gray, with dimmer lighting, making the whole area look darker and more neutral than it actually is. It’s a weird effect on your eyes with how… simple it is."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -378,7 +436,8 @@ population = 2
 [node name="MedRoom40" parent="." index="43" instance=ExtResource( 2 )]
 position = Vector2( 256, -448 )
 roomName = "Mental Ward"
-roomDescription = "You are walking through the mental ward, a place where doctors treat inmates with severe mental health problems. You notice that there are many padded cells around."
+roomID = "med_mental4"
+roomDescription = "This place is definitely more cramped than the rest of the medical ward. The walls, railings, doors, most of everything is painted a dark gray, with dimmer lighting, making the whole area look darker and more neutral than it actually is. It’s a weird effect on your eyes with how… simple it is."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -386,7 +445,8 @@ population = 2
 [node name="MedRoom41" parent="." index="44" instance=ExtResource( 2 )]
 position = Vector2( 320, -448 )
 roomName = "Mental Ward"
-roomDescription = "You are walking through the mental ward, a place where doctors treat inmates with severe mental health problems. You notice that there are many padded cells around."
+roomID = "med_mental3"
+roomDescription = "This place is definitely more cramped than the rest of the medical ward. The walls, railings, doors, most of everything is painted a dark gray, with dimmer lighting, making the whole area look darker and more neutral than it actually is. It’s a weird effect on your eyes with how… simple it is."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -395,7 +455,7 @@ population = 2
 position = Vector2( 320, -320 )
 roomName = "Mental Ward"
 roomID = "medical_near_pccell"
-roomDescription = "You are walking through the mental ward, a place where doctors treat inmates with severe mental health problems. You notice that there are many padded cells around."
+roomDescription = "This place is definitely more cramped than the rest of the medical ward. The walls, railings, doors, most of everything is painted a dark gray, with dimmer lighting, making the whole area look darker and more neutral than it actually is. It’s a weird effect on your eyes with how… simple it is."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -403,7 +463,8 @@ population = 2
 [node name="MedRoom37" parent="." index="46" instance=ExtResource( 2 )]
 position = Vector2( 320, -256 )
 roomName = "Mental Ward"
-roomDescription = "You are walking through the mental ward, a place where doctors treat inmates with severe mental health problems. You notice that there are many padded cells around."
+roomID = "med_mental1"
+roomDescription = "This place is definitely more cramped than the rest of the medical ward. The walls, railings, doors, most of everything is painted a dark gray, with dimmer lighting, making the whole area look darker and more neutral than it actually is. It’s a weird effect on your eyes with how… simple it is."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -412,7 +473,7 @@ population = 2
 position = Vector2( 256, -320 )
 roomName = "Padded cell"
 roomID = "medical_paddedcell_player"
-roomDescription = "You are in a mental ward cell. All of the walls are made out of a soft padded material so you can’t hurt yourself here even if you really wanted to."
+roomDescription = "This is one of the padded cells of the mental ward. Everything is made with some weird beige padded material you don’t recognise, with a fluorescent light in the ceiling."
 blindRoomDescription = "You have no idea where you are but the walls and the floor feel soft to the touch"
 canWest = false
 canNorth = false
@@ -421,7 +482,8 @@ canSouth = false
 [node name="MedRoom39" parent="." index="48" instance=ExtResource( 2 )]
 position = Vector2( 256, -256 )
 roomName = "Padded cell"
-roomDescription = "You are in a mental ward cell. All of the walls are made out of a soft padded material so you can’t hurt yourself here even if you really wanted to."
+roomID = "medical_paddedcell2"
+roomDescription = "This is one of the padded cells of the mental ward. Everything is made with some weird beige padded material you don’t recognise, with a fluorescent light in the ceiling."
 blindRoomDescription = "You have no idea where you are but the walls and the floor feel soft to the touch"
 canWest = false
 canNorth = false
@@ -430,7 +492,9 @@ canSouth = false
 [node name="MedRoom15" parent="." index="49" instance=ExtResource( 2 )]
 position = Vector2( -64, -320 )
 roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomID = "med_corridor4"
+roomDescription = "You stand in a wide white corridor, it looks pretty long, and most of the doors you can reach are locked. Other than the white paneling, there isn't much to speak of. Or sneak around.
+This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -438,7 +502,8 @@ population = 2
 [node name="MedRoom16" parent="." index="50" instance=ExtResource( 2 )]
 position = Vector2( -128, -320 )
 roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomID = "med_corridor5"
+roomDescription = "The long, wide and empty hallways make it very hard to sneak around back here. Looking around corners and behind your back is a life saver. Even if this place is far less populated with staff than something like the cell blocks, the lack of places to hide makes you feel uneasy. You arent even close enough to anything to convincingly lie about."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -446,7 +511,9 @@ population = 2
 [node name="MedRoom17" parent="." index="51" instance=ExtResource( 2 )]
 position = Vector2( -128, -256 )
 roomName = "Med Floor Corridor"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
+roomID = "med_corridor6"
+roomDescription = "You stand in a wide white corridor, it looks pretty long, and most of the doors you can reach are locked. Other than the white paneling, there isn't much to speak of. Or sneak around.
+This part of the medical wing is marked as [color=red]off-limits[/color] for inmates."
 gridColor = 2
 loctag_MentalWard = true
 population = 2
@@ -455,7 +522,9 @@ population = 2
 position = Vector2( -128, -192 )
 roomName = "Med Floor Corridor"
 roomID = "med_nearmilking"
-roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the corridor seems to be safe for inmates to walk through but you better not go too far or the staff will start asking questions."
+roomDescription = "You stand in a wide white corridor, it looks pretty long, every so often you see airlocks that lead to laboratories and other rooms. This part of the corridor seems to be safe for inmates to walk through but you better not go too far or the staff will start asking questions.
+
+Going further into medical will draw suspicion from here, away from the more popular or dedicated prisoner rooms."
 population = 2
 
 [node name="MedRoom19" parent="." index="53" instance=ExtResource( 2 )]

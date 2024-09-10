@@ -58,4 +58,4 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
 
 func getDefaultEquipment():
-	return ["EngineerClothesAlex", "plainBriefs"]
+	return ["EngineerClothes", "plainBriefs"]

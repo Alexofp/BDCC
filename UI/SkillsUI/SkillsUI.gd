@@ -33,10 +33,10 @@ func getAddedStatsAmount():
 		res += addedPoints[statID]
 	return res
 
-func addPoint(statID):
+func addPoints(statID, amount):
 	if(!addedPoints.has(statID)):
 		addedPoints[statID] = 0
-	addedPoints[statID] += 1
+	addedPoints[statID] += amount
 
 func _on_CloseButton_pressed():
 	emit_signal("onClosePressed")
@@ -117,12 +117,15 @@ func _on_SkillsUI_visibility_changed():
 		addedPoints.clear()
 		updateData()
 
-func onStatPlusButton(statID):
+func onStatPlusButton(statID, amount):
 	var freeStatPoints = GM.pc.getSkillsHolder().getFreeStatPoints() - getAddedStatsAmount()
 	if(freeStatPoints <= 0):
 		return
 	#GM.pc.getSkillsHolder().increaseStatIfCan(statID)
-	addPoint(statID)
+	if amount < freeStatPoints:
+		addPoints(statID, amount)
+	else:
+		addPoints(statID, freeStatPoints)
 	updateAttribList()
 
 

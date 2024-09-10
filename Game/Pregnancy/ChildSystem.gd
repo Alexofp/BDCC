@@ -27,6 +27,20 @@ func getChildrenAmountOf(charID):
 			result += 1
 	return result
 
+func getChildrenAmountOfOnlyMother(charID):
+	var result = 0
+	for child in children:
+		if(child.getMotherID() == charID):
+			result += 1
+	return result
+
+func getChildrenAmountOfOnlyFather(charID):
+	var result = 0
+	for child in children:
+		if(child.getFatherID() == charID):
+			result += 1
+	return result
+
 func getSharedChildren(firstCharID, secondCharID):
 	var result = []
 	for child in children:
@@ -38,6 +52,13 @@ func getSharedChildrenAmount(firstCharID, secondCharID):
 	var result = 0
 	for child in children:
 		if(((child.getMotherID() == firstCharID) && (child.getFatherID() == secondCharID)) || ((child.getFatherID() == firstCharID) && (child.getMotherID() == secondCharID))):
+			result += 1
+	return result
+
+func getSharedChildrenAmountFatherMother(firstCharID, secondCharID):
+	var result = 0
+	for child in children:
+		if((child.getFatherID() == firstCharID) || (child.getMotherID() == secondCharID)):
 			result += 1
 	return result
 

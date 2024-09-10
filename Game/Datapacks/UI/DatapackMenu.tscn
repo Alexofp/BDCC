@@ -60,8 +60,14 @@ margin_right = 426.0
 margin_bottom = 86.0
 text = "Delete datapack"
 
-[node name="DatapackDescLabel" type="RichTextLabel" parent="DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="ExportDatapackButton" type="Button" parent="DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer"]
 margin_top = 90.0
+margin_right = 426.0
+margin_bottom = 116.0
+text = "Export datapack"
+
+[node name="DatapackDescLabel" type="RichTextLabel" parent="DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 120.0
 margin_right = 426.0
 margin_bottom = 592.0
 size_flags_horizontal = 3
@@ -108,6 +114,14 @@ margin_right = 1280.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 text = "Datapacks wiki"
+
+[node name="ImportPackButton" type="Button" parent="DatapackViewer/VBoxContainer/GridContainer"]
+visible = false
+margin_top = 30.0
+margin_right = 253.0
+margin_bottom = 56.0
+size_flags_horizontal = 3
+text = "Import datapack"
 
 [node name="NewPackConfirmationDialog" type="ConfirmationDialog" parent="DatapackViewer"]
 anchor_left = 0.5
@@ -181,6 +195,7 @@ autowrap = true
 [connection signal="pressed" from="DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer/NewDatapackButton" to="." method="_on_NewDatapackButton_pressed"]
 [connection signal="pressed" from="DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer/EditDatapackButton" to="." method="_on_EditDatapackButton_pressed"]
 [connection signal="pressed" from="DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer/DeleteDatapackButton" to="." method="_on_DeleteDatapackButton_pressed"]
+[connection signal="pressed" from="DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer/ExportDatapackButton" to="." method="_on_ExportDatapackButton_pressed"]
 [connection signal="meta_clicked" from="DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer/DatapackDescLabel" to="." method="_on_DatapackDescLabel_meta_clicked"]
 [connection signal="pressed" from="DatapackViewer/VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
 [connection signal="pressed" from="DatapackViewer/VBoxContainer/GridContainer/UpdateButton" to="." method="_on_UpdateButton_pressed"]

@@ -12,6 +12,7 @@ var timeOfDay = 6*60*60 # seconds since 00:00
 var flags = {}
 var flagsCache = null
 var moduleFlags = {}
+var datapackFlags = {}
 var playerScene = preload("res://Player/Player.gd")
 var overriddenPlayerScene = preload("res://Player/OverriddenPlayer.gd")
 var overridenPC
@@ -21,6 +22,7 @@ var lootedRooms = {}
 var rollbacker:Rollbacker
 var encounterSettings:EncounterSettings
 var currentlyTestingScene = false
+var allowExecuteOnce:bool = false
 
 var staticCharacters = {}
 var charactersToUpdate = {}
@@ -217,10 +219,11 @@ func _ready():
 	Console.addCommand("clearflag", self, "consoleClearFlag", ["flagID"], "Resets the game flag, be very careful")
 	Console.addCommand("setmoduleflag", self, "consoleSetModuleFlagBool", ["moduleID", "flagID", "trueOrFalse"], "Changes the game flag, be very careful")
 	Console.addCommand("clearmoduleflag", self, "consoleClearModuleFlag", ["moduleID", "flagID"], "Resets the game flag, be very careful")
-	Console.addCommand("ae", self, "consoleAnimationEditor", [], "Animation editor")
+	#Console.addCommand("ae", self, "consoleAnimationEditor", [], "Animation editor")
 	applyAllWorldEdits()
 	
 func startNewGame():
+	GM.ES.registerDatapackEvents(loadedDatapacks.keys())
 	for scene in sceneStack:
 		scene.queue_free()
 	sceneStack = []
@@ -258,6 +261,7 @@ func runScene(id, _args = [], parentSceneUniqueID = -1):
 	sceneStack.append(scene)
 	print("Starting scene "+id)
 	
+	allowExecuteOnce = true
 	scene.initScene(_args)
 	#scene.run()
 	return scene
@@ -287,7 +291,7 @@ func removeScene(scene, args = []):
 			sceneStack.erase(scene)
 	
 	if(sceneStack.size() == 0):
-		print("Error: no more scenes in the scenestack")
+		Log.print("Error: no more scenes in the scenestack")
 		gameUI.clearText()
 		gameUI.clearButtons()
 		gameUI.say("Error: no more scenes in the scenestack. Please let the developer know")
@@ -332,6 +336,7 @@ func pickOption(method, args):
 		#if(sceneStack.back().react(method, args)):
 		#	return
 
+	allowExecuteOnce = true # For 'run code once' code block
 	runCurrentScene()
 	
 func runCurrentScene():
@@ -340,14 +345,10 @@ func runCurrentScene():
 		
 		if(messages.size() > 0):
 			GM.ui.trimLineEndings()
-			GM.ui.say("\n\n")
-			GM.ui.say("[center][i]")
-			for message in messages:
-				GM.ui.say(message)
-				GM.ui.say("\n")
-			GM.ui.say("[/i][/center]\n")
+			GM.ui.say("\n\n[center][i]"+Util.join(messages, "\n")+"[/i][/center]\n")
 		GM.ui.translateText()
 	updateStuff()
+	allowExecuteOnce = false
 
 func reRun():
 	runCurrentScene()
@@ -359,6 +360,8 @@ func loadingSavefileFinished():
 		character.checkOldWayOfUpdating(currentDay, timeOfDay)
 		if(character.shouldBeUpdated()):
 			startUpdatingCharacter(charID)
+	
+	GM.ES.registerDatapackEvents(loadedDatapacks.keys())
 	
 	emit_signal("saveLoadingFinished")
 	#if(GM.ui != null):
@@ -409,6 +412,7 @@ func saveData():
 	data["currentDay"] = currentDay
 	data["flags"] = flags
 	data["moduleFlags"] = moduleFlags
+	data["datapackFlags"] = datapackFlags
 	data["EventSystem"] = GM.ES.saveData()
 	data["ChildSystem"] = GM.CS.saveData()
 	data["logMessages"] = logMessages
@@ -440,6 +444,7 @@ func loadData(data):
 	GM.ui.onTimePassed(0)
 	flags = SAVE.loadVar(data, "flags", {})
 	moduleFlags = SAVE.loadVar(data, "moduleFlags", {})
+	datapackFlags = SAVE.loadVar(data, "datapackFlags", {})
 	GM.ES.loadData(SAVE.loadVar(data, "EventSystem", {}))
 	GM.CS.loadData(SAVE.loadVar(data, "ChildSystem", {}))
 	logMessages = SAVE.loadVar(data, "logMessages", [])
@@ -638,6 +643,9 @@ func getVisibleTime():
 	text += ", day " + str(currentDay)
 	return text
 
+func getFormattedTimeFromSeconds(howManySeconds:int):
+	return Util.getTimeStringHHMM(howManySeconds)
+
 func getTime():
 	return timeOfDay
 
@@ -654,6 +662,12 @@ func setFlag(flagID, value):
 		setModuleFlag(splitData[0], splitData[1], value)
 		return
 	
+	# Handling "DatapackID:FlagID" here
+	var splitData2 = Util.splitOnFirst(flagID, ":")
+	if(splitData2.size() > 1):
+		setDatapackFlag(splitData2[0], splitData2[1], value)
+		return
+	
 	if(!flagsCache.has(flagID)):
 		Log.printerr("setFlag(): Detected the usage of an unknown flag: "+str(flagID)+" "+Util.getStackFunction())
 		return
@@ -666,10 +680,83 @@ func setFlag(flagID, value):
 			
 	flags[flagID] = value
 
+func hasDatapackFlag(datapackID, flagID):
+	if(!loadedDatapacks.has(datapackID)):
+		Log.printerr("hasDatapackFlag(): Trying to check a flag "+str(flagID)+" of a datapack that wasn't loaded: "+str(datapackID))
+		return
+	var datapack:Datapack = GlobalRegistry.getDatapack(datapackID)
+	if(datapack == null):
+		Log.printerr("hasDatapackFlag(): Datapack "+str(datapackID)+" isn't found "+Util.getStackFunction())
+		return
+		
+	if(!datapack.flags.has(flagID)):
+		return false
+	return true
+
+func setDatapackFlag(datapackID, flagID, value):
+	if(!loadedDatapacks.has(datapackID)):
+		Log.printerr("setDatapackFlag(): Trying to set a flag "+str(flagID)+" of a datapack that wasn't loaded: "+str(datapackID))
+		return
+	
+	# Check if value is the right type
+	var datapack:Datapack = GlobalRegistry.getDatapack(datapackID)
+	if(datapack == null):
+		Log.printerr("setDatapackFlag(): Datapack "+str(datapackID)+" isn't found "+Util.getStackFunction())
+		return
+		
+	if(!datapack.flags.has(flagID)):
+		Log.printerr("setDatapackFlag(): Datapack is "+str(datapackID)+". Detected the usage of an unknown flag: "+str(flagID)+" "+Util.getStackFunction())
+		return
+	
+	var flagType = datapack.flags[flagID]["type"]
+	if(flagType == DatapackSceneVarType.BOOL && !(value is bool)):
+		Log.printerr("setDatapackFlag(): Trying to assign a '"+str(value)+"' value to a BOOLEAN flag "+str(flagID))
+		return
+	if(flagType == DatapackSceneVarType.STRING && !(value is String)):
+		Log.printerr("setDatapackFlag(): Trying to assign a '"+str(value)+"' value to a STRING flag "+str(flagID))
+		return
+	if(flagType == DatapackSceneVarType.NUMBER && !(value is int) && !(value is float)):
+		Log.printerr("setDatapackFlag(): Trying to assign a '"+str(value)+"' value to a NUMBER flag "+str(flagID))
+		return
+		
+	if(!datapackFlags.has(datapackID)):
+		datapackFlags[datapackID] = {}
+	datapackFlags[datapackID][flagID] = value
+
+func clearDatapackFlag(datapackID, flagID):
+	if(!datapackFlags.has(datapackID) || !datapackFlags[datapackID].has(flagID)):
+		return
+	datapackFlags[datapackID].erase(flagID)
+
+func getDatapackFlag(datapackID, flagID, defaultValue = null):
+	if(!loadedDatapacks.has(datapackID)):
+		Log.printerr("getDatapackFlag(): Datapack "+str(datapackID)+" wasn't loaded "+Util.getStackFunction())
+		return defaultValue
+	
+	var datapack:Datapack = GlobalRegistry.getDatapack(datapackID)
+	if(datapack == null):
+		Log.printerr("getDatapackFlag(): Datapack "+str(datapackID)+" isn't found "+Util.getStackFunction())
+		return defaultValue
+	
+	if(!datapack.flags.has(flagID)):
+		Log.printerr("getDatapackFlag(): Datapack is "+str(datapackID)+". Detected the usage of an unknown flag: "+str(flagID)+" "+Util.getStackFunction())
+		return defaultValue
+	
+	if(!datapackFlags.has(datapackID) || !datapackFlags[datapackID].has(flagID)):
+		return datapack.flags[flagID]["default"]
+		#return defaultValue
+	
+	return datapackFlags[datapackID][flagID]
+
 func clearFlag(flagID):
 	var splitData = Util.splitOnFirst(flagID, ".")
 	if(splitData.size() > 1):
 		clearModuleFlag(splitData[0], splitData[1])
+		return
+	
+	var splitData2 = Util.splitOnFirst(flagID, ":")
+	if(splitData2.size() > 1):
+		clearDatapackFlag(splitData2[0], splitData2[1])
 		return
 	
 	flags.erase(flagID)
@@ -681,6 +768,10 @@ func getFlag(flagID, defaultValue = null):
 	var splitData = Util.splitOnFirst(flagID, ".")
 	if(splitData.size() > 1):
 		return getModuleFlag(splitData[0], splitData[1], defaultValue)
+	
+	var splitData2 = Util.splitOnFirst(flagID, ":")
+	if(splitData2.size() > 1):
+		return getDatapackFlag(splitData2[0], splitData2[1], defaultValue)
 	
 	if(!flagsCache.has(flagID)):
 		Log.printerr("getFlag(): Detected the usage of an unknown flag: "+str(flagID)+" "+Util.getStackFunction())
@@ -1094,11 +1185,31 @@ func getDebugActions():
 			"id": "repairClothes",
 			"name": "Repair pc clothes",
 		},
+		{
+			"id": "forceSmartlock",
+			"name": "Force smart lock",
+		},
 	]
 
 func doDebugAction(id, args = {}):
 	print(id, " ", args)
 	
+	if(id == "forceSmartlock"):
+		if(GM.main.dynamicCharacters.size() == 0):
+			return
+		var tryAmount = 100
+		while(tryAmount > 0):
+			var itemID = RNG.pick(GlobalRegistry.getItemIDsByTag(ItemTag.BDSMRestraint))
+			var anItem:ItemBase = GlobalRegistry.createItem(itemID)
+			if(anItem.getClothingSlot() == null || anItem.getClothingSlot() in [InventorySlot.Static1, InventorySlot.Static2, InventorySlot.Static3] || anItem.hasTag(ItemTag.AllowsEnslaving) || anItem.hasTag(ItemTag.PortalPanties) || (anItem.restraintData != null && (anItem.restraintData is RestraintUnremovable))):
+				tryAmount -= 1
+				continue
+			
+			GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(anItem)
+			anItem.addRandomSmartLock(RNG.pick(GM.main.dynamicCharacters))
+			break
+			
+		
 	if(id == "damageClothes"):
 		GM.pc.damageClothes()
 	if(id == "repairClothes"):
@@ -1340,8 +1451,8 @@ func isRoomLooted(roomID):
 		return true
 	return false
 
-func consoleAnimationEditor():
-	playAnimation(StageScene.SoloEditable, "stand")
+#func consoleAnimationEditor():
+#	playAnimation(StageScene.SoloEditable, "stand")
 
 func setIsTestingScene(newtest):
 	currentlyTestingScene = newtest
@@ -1411,28 +1522,60 @@ func loadDatapack(datapackID):
 	var newCharacters = theDatapack.characters
 	
 	for charID in newCharacters:
-		var finalID = theDatapack.getFinalCharacterID(charID)#theDatapack.id+":"+charID
-		
-		datapackCharacters[datapackID][finalID] = true
-		
-		var dynamicCharacter = DynamicCharacter.new()
-		dynamicCharacter.id = finalID
-		
-		addDynamicCharacter(dynamicCharacter)
-		
-		dynamicCharacter.loadFromDatapackCharacter(theDatapack, newCharacters[charID])
-		
-		var theCharType = dynamicCharacter.getCharacterType()
-		if(theCharType == CharacterType.Inmate):
-			addDynamicCharacterToPool(finalID, CharacterPool.Inmates)
-		elif(theCharType == CharacterType.Guard):
-			addDynamicCharacterToPool(finalID, CharacterPool.Guards)
-		elif(theCharType == CharacterType.Nurse):
-			addDynamicCharacterToPool(finalID, CharacterPool.Nurses)
-		elif(theCharType == CharacterType.Engineer):
-			addDynamicCharacterToPool(finalID, CharacterPool.Engineers)
+		addDatapackCharacter(theDatapack, newCharacters[charID])
+	
+	GM.ES.registerDatapackEvents(loadedDatapacks.keys())
 	
 	return true
+
+func loadDatapackAndDependencies(datapackID, checked={}):
+	if(checked.has(datapackID)): # Recursion protection
+		return
+	checked[datapackID] = true
+	
+	var theDatapack:Datapack = GlobalRegistry.getDatapack(datapackID)
+	
+	if(theDatapack == null):
+		Log.printerr("Trying to load a datapack that doesn't exist in the global registry: "+str(datapackID))
+		return
+	
+	var requiredDatapacks = theDatapack.requiredDatapacks
+	for otherDatapackID in requiredDatapacks:
+		loadDatapackAndDependencies(otherDatapackID, checked)
+		
+	if(loadedDatapacks.has(datapackID)):
+		return
+		
+	if(!theDatapack.needsTogglingOn()):
+		return
+		
+	loadDatapack(datapackID)
+
+func addDatapackCharacter(theDatapack:Datapack, datapackChar:DatapackCharacter):
+	var charID = datapackChar.id
+	var datapackID = theDatapack.id
+	var finalID = theDatapack.getFinalCharacterID(charID)#theDatapack.id+":"+charID
+	
+	if(!datapackCharacters.has(datapackID)):
+		datapackCharacters[datapackID] = {}
+	datapackCharacters[datapackID][finalID] = true
+	
+	var dynamicCharacter = DynamicCharacter.new()
+	dynamicCharacter.id = finalID
+	
+	addDynamicCharacter(dynamicCharacter)
+	
+	dynamicCharacter.loadFromDatapackCharacter(theDatapack, datapackChar)
+	
+	var theCharType = dynamicCharacter.getCharacterType()
+	if(theCharType == CharacterType.Inmate):
+		addDynamicCharacterToPool(finalID, CharacterPool.Inmates)
+	elif(theCharType == CharacterType.Guard):
+		addDynamicCharacterToPool(finalID, CharacterPool.Guards)
+	elif(theCharType == CharacterType.Nurse):
+		addDynamicCharacterToPool(finalID, CharacterPool.Nurses)
+	elif(theCharType == CharacterType.Engineer):
+		addDynamicCharacterToPool(finalID, CharacterPool.Engineers)
 
 func unloadDatapack(datapackID):
 	if(!loadedDatapacks.has(datapackID)):
@@ -1448,7 +1591,33 @@ func unloadDatapack(datapackID):
 		datapackCharacters.erase(datapackID)
 	
 	loadedDatapacks.erase(datapackID)
+	GM.ES.registerDatapackEvents(loadedDatapacks.keys())
 	return true
+
+func reloadDatapack(datapackID):
+	if(!loadedDatapacks.has(datapackID)):
+		Log.printerr("Trying to reload a datapack that was never loaded: "+str(datapackID))
+		return false
+	
+	var theDatapack:Datapack = GlobalRegistry.getDatapack(datapackID)
+	if(theDatapack == null):
+		Log.printerr("Trying to reload a datapack that doesn't exist in the global registry: "+str(datapackID))
+		return false
+	
+	for charID in theDatapack.characters:
+		var finalID = theDatapack.getFinalCharacterID(charID)
+		
+		if(dynamicCharacters.has(finalID)):
+			dynamicCharacters[finalID].loadFromDatapackCharacter(theDatapack, theDatapack.characters[charID], true)
+		else:
+			addDatapackCharacter(theDatapack, theDatapack.characters[charID])
+	
+	return true
+			
+
+func clearDatapackFlags(datapackID):
+	if(datapackFlags.has(datapackID)):
+		datapackFlags.erase(datapackID)
 
 func isDatapackLoaded(datapackID):
 	return loadedDatapacks.has(datapackID)
@@ -1461,3 +1630,6 @@ func isDatapackCharacter(charID):
 		if(datapackCharacters[datapackID].has(charID)):
 			return true
 	return false
+
+func shouldExecuteOnceCodeblocksRun() -> bool:
+	return allowExecuteOnce

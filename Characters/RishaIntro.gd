@@ -66,4 +66,4 @@ func getParentCharacterID():
 	return "risha"
 
 func getDefaultEquipment():
-	return ["GuardArmor"]
+	return ["GuardArmor", "RishaPiercings"]

@@ -144,4 +144,4 @@ nodes/PuppyLegs/position = Vector2( 440, 80 )
 nodes/StateMachine/node = SubResource( 222 )
 nodes/StateMachine/position = Vector2( 20, 40 )
 nodes/output/position = Vector2( 660, 120 )
-node_connections = [ "PuppyLegs", 0, "PuppyArms", "PuppyLegs", 1, "Animation 2", "PuppyArms", 0, "StateMachine", "PuppyArms", 1, "Animation", "output", 0, "PuppyLegs" ]
+node_connections = [ "PuppyArms", 0, "StateMachine", "PuppyArms", 1, "Animation", "PuppyLegs", 0, "PuppyArms", "PuppyLegs", 1, "Animation 2", "output", 0, "PuppyLegs" ]

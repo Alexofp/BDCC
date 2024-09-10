@@ -24,7 +24,7 @@ func shouldDoStruggleMinigame(_pc):
 		
 	return false
 	
-func doStruggle(_pc, _minigame):
+func doStruggle(_pc, _minigame:MinigameResult):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()
@@ -49,17 +49,20 @@ func doStruggle(_pc, _minigame):
 	if(not hypnotized):
 		damageMult = 5
 	
-	if(_handsFree and _armsFree):
+	if(failChanceLowScore(_pc, 15, _minigame)):
+		text = "{user.name} tries to shake off the hypnovisor, but {user.his} panicked movements cause it to [b]lock even more securely[/b] onto {user.his} head. The flashing lights and swirling patterns intensify, deepening {user.his} trance."
+		damage = -0.5
+	elif(_handsFree and _armsFree):
 		text = "{user.name} reaches up, trying to focus on removing {user.his} " + getItem().getVisibleName() + "."
-		damage = calcDamage(_pc, damageMult)
+		damage = calcDamage(_pc, _minigame, damageMult)
 		stamina = 2
 	elif(_handsFree):
 		text = "{user.name}'s hands are free but they are bound together so {user.name} has to awkwardly bend to reach {user.his} " + getItem().getVisibleName() + "."
-		damage = calcDamage(_pc, damageMult * 0.3)
+		damage = calcDamage(_pc, _minigame, damageMult * 0.3)
 		stamina = 5
 	else:
 		text = "{user.name} shakes {user.his} head, trying to dislodge {user.his} " + getItem().getVisibleName() + "."
-		damage = calcDamage(_pc, damageMult * 0.1)
+		damage = calcDamage(_pc, _minigame, damageMult * 0.1)
 		stamina = 10
 	
 	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}

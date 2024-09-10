@@ -70,7 +70,8 @@ func _run():
 			addButtonWithChecks("Cock", "Flash your dick", "cock", [], [ButtonChecks.HasPenis, [ButtonChecks.SkillCheck, Skill.Exhibitionism, 5], ButtonChecks.NotArmsRestrained, ButtonChecks.NotHandsBlocked])
 		if(ehibit >= 5):
 			addButtonWithChecks("Show yourself off", "Don’t hide anything", "show_yourself_off", [], [[ButtonChecks.SkillCheck, Skill.Exhibitionism, 7], ButtonChecks.NotArmsRestrained, ButtonChecks.NotHandsBlocked])
-
+		addButton("Attack", "What is their problem", "attack")
+		
 	if(state == "avoid"):
 		saynn("You hide your face and escape the area as quickly as possible while trying to avoid any eyes.")
 

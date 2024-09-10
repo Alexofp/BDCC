@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/VisualSlots/VisSlotCalls.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/DatapackSceneCodeWrapper.gd" type="Script" id=2]
+
+[node name="DatapackSceneCodeWrapper" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_right = 1280.0
+margin_bottom = 696.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="ScrollContainer"]
+margin_right = 1280.0
+margin_bottom = 696.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VisSlotCalls" parent="ScrollContainer/PanelContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1273.0
+margin_bottom = 689.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_top = 700.0
+margin_right = 1280.0
+margin_bottom = 720.0
+
+[node name="UndoButton" type="Button" parent="HBoxContainer"]
+margin_right = 46.0
+margin_bottom = 20.0
+text = "Undo"
+
+[node name="RedoButton" type="Button" parent="HBoxContainer"]
+margin_left = 50.0
+margin_right = 94.0
+margin_bottom = 20.0
+text = "Redo"
+
+[connection signal="pressed" from="HBoxContainer/UndoButton" to="." method="_on_UndoButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/RedoButton" to="." method="_on_RedoButton_pressed"]

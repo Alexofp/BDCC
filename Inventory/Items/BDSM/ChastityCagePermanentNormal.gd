@@ -24,7 +24,7 @@ func getTakeOffScene():
 	return "RestraintTakeOffNopeScene"
 
 func getPrice():
-	return 0
+	return 20
 
 func canSell():
 	return true

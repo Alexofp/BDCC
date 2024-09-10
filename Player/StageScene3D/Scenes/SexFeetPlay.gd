@@ -90,3 +90,6 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["pin", "head", "crotch"]
+
+func getVarNpcs():
+	return ["pc", "npc"]

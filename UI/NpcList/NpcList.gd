@@ -19,10 +19,10 @@ var _IDtoForget
 var nodeToFree
 signal onMeetNpcButton(ID, occupation)
 
-func addRow(name: String, gender: String, subbyStat: float, ID: String, occupation: String, children: int = 0):
+func addRow(name: String, gender: String, subbyStat: float, ID: String, occupation: String, children: int = 0, canForget: bool = true, canMeet: bool = true):
 	var newRow = npcRow.instance()
 	container.add_child(newRow)
-	newRow.initData(name, gender, subbyStat, ID, occupation, children)
+	newRow.initData(name, gender, subbyStat, ID, occupation, children, canForget, canMeet)
 	newRow.connect("onForgetButtonPressed", self, "forgetNPC")
 	newRow.connect("onMeetButtonPressed", self, "meetNPC")
 	

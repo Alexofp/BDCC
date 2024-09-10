@@ -8,6 +8,9 @@ func getSlaveTypeWeights(_isSlaveLevelup):
 		SlaveType.All : 1.0,
 	}
 
+func getSlutlockWeight() -> float:
+	return 1.0
+
 func isPossibleFor(_npc, _isSlaveLevelup):
 	return true
 
@@ -28,7 +31,7 @@ func generateFor(_npc, _isSlaveLevelup, _difficulty = 1.0):
 
 func onSexEvent(_npc, _event:SexEvent):
 	if(_event.getType() == SexEvent.ReceivedFluidsOnBody):
-		if(_event.getTargetChar() == _npc && _event.targetIsSub()):
+		if(_event.getTargetChar() == _npc):
 			currentAmount += _event.getField("loadSize", 0)
 			if(currentAmount > needAmount):
 				completeSelf()

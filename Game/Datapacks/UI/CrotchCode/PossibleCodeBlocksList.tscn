@@ -1,0 +1,89 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/PossibleCodeBlocksList.gd" type="Script" id=1]
+[ext_resource path="res://Game/Datapacks/UI/PackVarsCollapsableRegion.tscn" type="PackedScene" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.109804, 0.109804, 0.109804, 1 )
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends PanelContainer
+onready var possible_code_blocks_list = $\"../../../..\"
+
+func can_drop_data(_position, _data):
+	return true
+
+func drop_data(_position, _data):
+	possible_code_blocks_list.drop_fav(_data)
+"
+
+[node name="PossibleCodeBlocksList" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_right = 1280.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 1 )
+
+[node name="Label" type="Label" parent="PanelContainer"]
+margin_top = 9.0
+margin_right = 1280.0
+margin_bottom = 40.0
+mouse_filter = 1
+text = " Drag blocks here to delete them
+ (or double right-click)"
+autowrap = true
+
+[node name="PackVarsCollapsableRegion" parent="." instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 54.0
+margin_right = 1280.0
+margin_bottom = 82.0
+collapseName = "Saved blocks"
+keepText = true
+
+[node name="VBoxContainer" parent="PackVarsCollapsableRegion" index="0"]
+margin_bottom = 21.0
+
+[node name="VBoxContainer" parent="PackVarsCollapsableRegion/VBoxContainer" index="1"]
+margin_bottom = 72.0
+
+[node name="PanelContainer2" type="PanelContainer" parent="PackVarsCollapsableRegion/VBoxContainer/VBoxContainer" index="0"]
+margin_right = 1266.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+mouse_filter = 1
+custom_styles/panel = SubResource( 1 )
+script = SubResource( 2 )
+
+[node name="Label" type="Label" parent="PackVarsCollapsableRegion/VBoxContainer/VBoxContainer/PanelContainer2"]
+margin_top = 18.0
+margin_right = 1266.0
+margin_bottom = 32.0
+mouse_filter = 1
+text = "Drag blocks here to save them"
+autowrap = true
+
+[node name="FavList" type="VBoxContainer" parent="PackVarsCollapsableRegion/VBoxContainer/VBoxContainer" index="1"]
+margin_top = 54.0
+margin_right = 1266.0
+margin_bottom = 54.0
+
+[node name="NoCategoryList" type="VBoxContainer" parent="."]
+margin_top = 86.0
+margin_right = 1280.0
+margin_bottom = 86.0
+
+[node name="CategoriesList" type="VBoxContainer" parent="."]
+margin_top = 90.0
+margin_right = 1280.0
+margin_bottom = 90.0
+
+[editable path="PackVarsCollapsableRegion"]

@@ -9,7 +9,7 @@ func alwaysSavedWhenStruggledOutOf():
 #func getLevelDamage():
 #	return .getLevelDamage() * 0.2
 
-func doStruggle(_pc, _minigame):
+func doStruggle(_pc, _minigame:MinigameResult):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()
@@ -22,18 +22,19 @@ func doStruggle(_pc, _minigame):
 	var damage = 0
 	var stamina = 0
 	
-	if(failChance(_pc, 10) || (_minigame < 0.7)):
+	if((_minigame.score < 0.7 || failChance(_pc, 10)) && !_minigame.instantUnlock):
 		text = "{user.name}'s chastity cage BEEPS.. And then suddenly [b]shocks[/b] {user.his} {user.penis}!"
 		stamina = 0
 		pain = RNG.randi_range(10, 20)
+		damage = -0.3
 	else:
 		if(_handsFree && _armsFree):
 			text = "{user.name} tugs on {user.his} chastity cage, trying to take it off."
-			damage = calcDamage(_pc)
+			damage = calcDamage(_pc, _minigame)
 			stamina = 10
 		else:
 			text = "{user.name} desperately tries to wiggle {user.his} chastity cage off but makes almost no progress."
-			damage = calcDamage(_pc, 0.1)
+			damage = calcDamage(_pc, _minigame, 0.1)
 			stamina = 5
 		
 		if(_handsFree && _armsFree && failChance(_pc, 20)):

@@ -90,3 +90,6 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["tease", "inside", "sex", "fast", "cum", "standinside", "standsex", "standfast"]
+
+func getVarNpcs():
+	return ["pc"]

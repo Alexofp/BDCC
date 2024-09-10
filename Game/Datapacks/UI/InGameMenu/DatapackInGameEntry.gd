@@ -2,6 +2,7 @@ extends HBoxContainer
 
 signal onLoadPressed(id)
 signal onUnloadPressed(id)
+signal onUpdatePressed(id)
 
 var id = ""
 
@@ -15,6 +16,9 @@ func setNothingToLoad():
 	$UnloadButton.visible = false
 	$NothingToLoadButton.visible = true
 
+func setCanUpdate(isC):
+	$UpdateButton.visible = isC
+
 func setNameLabel(theT):
 	$NameLabel.text = theT
 
@@ -26,3 +30,6 @@ func _on_LoadButton_pressed():
 
 func _on_UnloadButton_pressed():
 	emit_signal("onUnloadPressed", id)
+
+func _on_UpdateButton_pressed():
+	emit_signal("onUpdatePressed", id)

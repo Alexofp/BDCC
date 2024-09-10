@@ -193,4 +193,4 @@ func reactRestraint(restraintType, restraintAmount, isGettingForced):
 	return null
 
 func getDefaultEquipment():
-	return ["NurseClothes", "LaceBra", "LacePanties"]
+	return ["NurseClothes", "LaceBra", "LacePanties", "ElizaNecklace"]

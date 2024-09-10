@@ -37,7 +37,137 @@ enum {
 	CanStartSex,
 	HasReachableOrCagedPenisOrReachableVagina,
 	HasItemWithTag,
+	
+	CHECKSAMMOUNT,
 }
+
+const ChecksTexts = [
+	"NotLate",
+	"NotGagged",
+	"NotOralBlocked",
+	"NotHandsBlocked",
+	"NotArmsRestrained",
+	"NotLegsRestrained",
+	"NotBlindfolded",
+	"NotCollapsed",
+	"SkillCheck",
+	"StatCheck",
+	"PerkCheck",
+	"HasCondoms",
+	"HasReachablePenis",
+	"HasReachableVagina",
+	"HasReachableAnus",
+	"HasReachableVaginaOrAnus",
+	"HasPenis",
+	"HasVagina",
+	"NotStunned",
+	"HasStamina",
+	"HasCredits",
+	"ContentEnabled",
+	"CanWearStrapon",
+	"HasStraponAndCanWear",
+	"HasStrapons",
+	"IsWearingChastityCage",
+	"HasChastityCageInInventory",
+	"HasItemID",
+	"HasReachablePenisOrVaginaOrHasStrapon",
+	"HasBreastPump",
+	"HasPenisPump",
+	"NotWearingItem",
+	"CanStartSex",
+	"HasReachableOrCagedPenisOrReachableVagina",
+	"HasItemWithTag",
+]
+
+static func getAllWithNames():
+	var result = []
+	for _i in range(CHECKSAMMOUNT):
+		result.append([_i, getName(_i)])
+	return result
+
+static func getName(thecheck:int):
+	if(thecheck < 0 || thecheck >= ChecksTexts.size()):
+		return "Error?"
+	return ChecksTexts[thecheck]
+
+static func getEditVars(thecheck:int):
+	if(thecheck == PerkCheck):
+		return {
+			"1": {
+				name = "Perk name",
+				type = "advancedSelector",
+				value = Perk.StartInfertile,
+				values = GlobalRegistry.getPerks().keys(),
+			},
+		}
+	if(thecheck == StatCheck):
+		return {
+			"1": {
+				name = "Stat name",
+				type = "advancedSelector",
+				value = Stat.Agility,
+				values = GlobalRegistry.getStats().keys(),
+			},
+			"2": {
+				name = "Min stat",
+				type = "number",
+				value = 5,
+				int = true,
+			},
+		}
+	if(thecheck == SkillCheck):
+		return {
+			"1": {
+				name = "Skill name",
+				type = "advancedSelector",
+				value = Skill.BDSM,
+				values = GlobalRegistry.getSkills().keys(),
+			},
+			"2": {
+				name = "Min level",
+				type = "number",
+				value = 5,
+				int = true,
+			},
+		}
+	if(thecheck == HasCredits):
+		return {
+			"1": {
+				name = "Min credits",
+				type = "number",
+				value = 5,
+				int = true,
+			},
+		}
+	if(thecheck == ContentEnabled):
+		return {
+			"1": {
+				name = "Content",
+				type = "advancedSelector",
+				value = ContentType.Watersports,
+				values = ContentType.getAll(),
+			},
+		}
+	if(thecheck in [HasItemID, NotWearingItem]):
+		return {
+			"1": {
+				name = "Item id",
+				type = "advancedSelector",
+				value = "appleitem",
+				values = GlobalRegistry.getItemRefs().keys(),
+			},
+		}
+	if(thecheck == HasItemWithTag):
+		return {
+			"1": {
+				name = "Item tag",
+				type = "advancedSelector",
+				value = ItemTag.BDSMRestraint,
+				values = ItemTag.getNamesAndValues(),
+			},
+		}
+	
+	return {}
 
 static func getReasonText(reason):
 	var args = reason

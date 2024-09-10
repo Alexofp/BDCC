@@ -8,6 +8,9 @@ func getSlaveTypeWeights(_isSlaveLevelup):
 		SlaveType.All : 0.3,
 	}
 
+func getSlutlockWeight() -> float:
+	return 0.2
+
 func isPossibleFor(_npc, _isSlaveLevelup):
 	return true
 
@@ -26,6 +29,9 @@ func onSexEvent(_npc, _event:SexEvent):
 
 func getTaskString():
 	return "Swallow drugs: "+getProgressString()
+
+func getTaskStringSlutLock():
+	return "Get forced to swallow drugs: "+getProgressString()
 
 func getTaskHint(_isSlaveLevelup):
 	return "Make them take any kind of drug during sex!"

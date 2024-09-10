@@ -21,6 +21,7 @@ var npcGender = null
 var npcPronounsGender = null
 var datapackID = null
 var npcLootOverride = null
+var extraSettings:DynCharExtraSettings = null
 
 func _init():
 	npcHasMenstrualCycle = true
@@ -61,6 +62,14 @@ func getThickness() -> int:
 
 func getFemininity() -> int:
 	return npcFeminity
+
+func setThickness(_newT:int):
+	npcThickness = _newT
+	updateAppearance()
+
+func setFemininity(_newF:int):
+	npcFeminity = _newF
+	updateAppearance()
 
 func createBodyparts():
 	pass
@@ -178,6 +187,36 @@ func adjustArtworkVariant(_variant:Array):
 	if(isFullyNaked() && !_variant.has("naked")):
 		_variant.append("naked")
 	
+func shouldBeExcludedFromEncounters() -> bool:
+	if(extraSettings != null && extraSettings.excludeEncounters):
+		return true
+	
+	return .shouldBeExcludedFromEncounters()
+
+func canForgetCharacter() -> bool:
+	if(extraSettings != null && extraSettings.disableForget):
+		return false
+	
+	return .canForgetCharacter()
+	
+func shouldGiveBirth():
+	if(extraSettings != null && extraSettings.disableBirth):
+		return false
+		
+	return .shouldGiveBirth()
+	
+func supportsDefaultGiveBirthScene() -> bool:
+	if(extraSettings != null && extraSettings.disableBirth):
+		return false
+		
+	return .supportsDefaultGiveBirthScene()
+	
+func canMeetCharacter() -> bool:
+	if(extraSettings != null && extraSettings.disableMeet):
+		return false
+		
+	return .canMeetCharacter()
+	
 # The whole thing is hack, never expect it to work or be supported
 func copyEverythingFrom(otherCharacter): #:BaseCharacter
 	var isPc = otherCharacter.isPlayer()
@@ -240,8 +279,6 @@ func copyEverythingFrom(otherCharacter): #:BaseCharacter
 		npcBaseStamina = otherCharacter.npcBaseStamina
 		npcBaseRestraintDodgeChanceMult = otherCharacter.npcBaseRestraintDodgeChanceMult
 		npcRestraintStrugglePower = otherCharacter.npcRestraintStrugglePower
-		npcRestraintMinigameResultMin = otherCharacter.npcRestraintMinigameResultMin
-		npcRestraintMinigameResultMax = otherCharacter.npcRestraintMinigameResultMax
 		npcCharacterType = otherCharacter.npcCharacterType
 		npcSkinData = otherCharacter.npcSkinData.duplicate(true)
 	else:
@@ -316,6 +353,10 @@ func saveData():
 		data["datapackID"] = datapackID
 	if(npcLootOverride != null):
 		data["npcLootOverride"] = npcLootOverride
+	if(npcBaseRestraintDodgeChanceMult != null && npcBaseRestraintDodgeChanceMult != 0.9):
+		data["restraintDodgeChanceMult"] = npcBaseRestraintDodgeChanceMult
+	if(npcRestraintStrugglePower != null && npcRestraintStrugglePower != 1.0):
+		data["restraintStrugglePower"] = npcRestraintStrugglePower
 	
 	data["bodyparts"] = {}
 	for slot in bodyparts:
@@ -359,6 +400,9 @@ func saveData():
 		data["npcSlavery"] = null
 	else:
 		data["npcSlavery"] = npcSlavery.saveData()
+	
+	if(extraSettings != null):
+		data["extraSettings"] = extraSettings.saveData()
 	
 	return data
 
@@ -409,6 +453,15 @@ func loadData(data):
 		datapackID = SAVE.loadVar(data, "datapackID", "")
 	if(data.has("npcLootOverride")):
 		npcLootOverride = SAVE.loadVar(data, "npcLootOverride", {})
+	if(data.has("extraSettings")):
+		extraSettings = DynCharExtraSettings.new()
+		extraSettings.loadData(SAVE.loadVar(data, "extraSettings", {}))
+	else:
+		extraSettings = null
+	if(data.has("restraintDodgeChanceMult")):
+		npcBaseRestraintDodgeChanceMult = SAVE.loadVar(data, "restraintDodgeChanceMult", 0.9)
+	if(data.has("restraintStrugglePower")):
+		npcRestraintStrugglePower = SAVE.loadVar(data, "restraintStrugglePower", 1.0)
 		
 	if(!data.has("pickedSkin")):
 		applyRandomSkinAndColorsAndParts()
@@ -494,7 +547,7 @@ func calculateNpcGeneratedGender():
 	else:
 		npcGeneratedGender = NpcGender.Female
 
-func loadFromDatapackCharacter(_datapack:Datapack, _datapackChar:DatapackCharacter):
+func loadFromDatapackCharacter(_datapack:Datapack, _datapackChar:DatapackCharacter, _isUpdating = false):
 	if(_datapack != null):
 		datapackID = _datapack.id
 	npcName = _datapackChar.name
@@ -528,6 +581,9 @@ func loadFromDatapackCharacter(_datapack:Datapack, _datapackChar:DatapackCharact
 	npcBasePain = _datapackChar.basePain
 	npcBaseLust = _datapackChar.baseLust
 	npcBaseStamina = _datapackChar.baseStamina
+	
+	npcBaseRestraintDodgeChanceMult = _datapackChar.restraintDodgeChanceMult
+	npcRestraintStrugglePower = _datapackChar.restraintStrugglePower
 	
 	npcStats = _datapackChar.stats.duplicate()
 	for statID in npcStats:
@@ -630,6 +686,19 @@ func loadFromDatapackCharacter(_datapack:Datapack, _datapackChar:DatapackCharact
 		npcGeneratedGender = NpcGender.Female
 	else:
 		calculateNpcGeneratedGender()
+	
+	extraSettings = DynCharExtraSettings.new()
+	extraSettings.excludeEncounters = _datapackChar.excludeEncounters
+	extraSettings.disableForget = _datapackChar.disableForget
+	extraSettings.disableBirth = _datapackChar.disableBirth
+	extraSettings.disableMeet = _datapackChar.disableMeet
+	
 	updateNonBattleEffects()
+	
+	if(hasPenis()):
+		fillBalls()
+	if(isLactating()):
+		fillBreasts()
+	
 	stamina = getMaxStamina()
 	updateAppearance()

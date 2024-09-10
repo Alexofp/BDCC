@@ -40,7 +40,7 @@ func playAnimation(animID, _args = {}):
 		firstDoll = _args["pc"]
 	doll.prepareCharacter(firstDoll)
 	var secondDoll = "pc"
-	if(_args.has("npc")):
+	if(_args.has("npc") && !(_args.has("hideNPC") && _args["hideNPC"])):
 		doll2.visible = true
 		secondDoll = _args["npc"]
 	else:
@@ -111,3 +111,15 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["tease", "inside", "sex", "fast", "fuckinside", "fuck", "fuckfast"]
+
+func getVarNpcs():
+	return ["pc", "npc"]
+
+func getVarOptions():
+	var options = .getVarOptions()
+	
+	options["hideNPC"] = {
+		type = "bool",
+	}
+	
+	return options

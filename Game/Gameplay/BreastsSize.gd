@@ -35,6 +35,12 @@ static func breastSizeToString(bsize:int):
 		return "Forever flat"
 	return "O+"
 
+static func getAllSizesWithNames():
+	var result = []
+	for size in getAll():
+		result.append([size, breastSizeToString(size)])
+	return result
+
 static func breastSizeToCupString(bsize:int):
 	var cupName = breastSizeToString(bsize)
 	if(bsize <= 0):

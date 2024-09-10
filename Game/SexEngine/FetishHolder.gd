@@ -67,6 +67,12 @@ func getFetishValue(fetishID):
 		return 0.0
 	return FetishInterest.getScore(fetishMap[fetishID])
 
+func setFetishValue(fetishID, newVal:float):
+	newVal = clamp(newVal, -1.0, 1.0)
+	newVal *= 4.0
+	
+	setFetish(fetishID, FetishInterest.numberToInterest(int(newVal)))
+
 func getFetishes():
 	return fetishMap
 

@@ -42,16 +42,17 @@ func playAnimation(animID, _args = {}):
 		secondDoll = _args["npc"]
 	doll2.prepareCharacter(secondDoll)
 	
-	var theChar = GlobalRegistry.getCharacter(firstDoll)
-	if(theChar != null):
-		var ropeColor:Color = theChar.getRopeHarnessColor()
-		var ropes = [$Ropes/CurveRenderer,$Ropes/CurveRenderer2,$Ropes/CurveRenderer3,$Ropes/CurveRenderer4,$Ropes/CurveRenderer5]
-		var ropeMat = preload("res://Player/Player3D/Chains/RopeMaterial.tres")
-		ropeMat = ropeMat.duplicate()
-		ropeMat.albedo_color = ropeColor
-		for rope in ropes:
-			var theRope:CurveRenderer = rope
-			theRope.material_override = ropeMat
+	if(firstDoll is String):
+		var theChar = GlobalRegistry.getCharacter(firstDoll)
+		if(theChar != null):
+			var ropeColor:Color = theChar.getRopeHarnessColor()
+			var ropes = [$Ropes/CurveRenderer,$Ropes/CurveRenderer2,$Ropes/CurveRenderer3,$Ropes/CurveRenderer4,$Ropes/CurveRenderer5]
+			var ropeMat = preload("res://Player/Player3D/Chains/RopeMaterial.tres")
+			ropeMat = ropeMat.duplicate()
+			ropeMat.albedo_color = ropeColor
+			for rope in ropes:
+				var theRope:CurveRenderer = rope
+				theRope.material_override = ropeMat
 	
 	#doll.forceSlotToBeVisible(BodypartSlot.Penis)
 	
@@ -116,3 +117,6 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["tease", "inside", "sex", "fast", "lick", "lickstroke"]
+
+func getVarNpcs():
+	return ["pc", "npc"]

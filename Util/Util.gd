@@ -246,6 +246,14 @@ static func stripBadCharactersFromID(path: String) -> String:
 	
 	return newPath
 
+static func stripAllBadCharactersFromVarName(path: String) -> String:
+	var newPath = ""
+	for character in path:
+		var c:String = character.to_lower()
+		if(letters_chars.has(c) || numbers_chars.has(c) || ["_"].has(c)):
+			newPath += character
+	
+	return newPath
 
 static func sayMale(text):
 	return "[color=#3E84E0]\""+text+"\"[/color]"
@@ -632,6 +640,28 @@ static func moveValueDown(theArray, theIndex):
 	if(theIndex > theArray.size()):
 		theIndex = theArray.size()
 	theArray.insert(theIndex, thingie)
+
+static func moveKeyDown(theDict:Dictionary, theKey):
+	var newDic = theDict.duplicate()
+	theDict.clear()
+	
+	var theKeys = newDic.keys()
+	var keyIndex = theKeys.find(theKey)
+	moveValueDown(theKeys, keyIndex)
+	
+	for key in theKeys:
+		theDict[key] = newDic[key]
+
+static func moveKeyUp(theDict:Dictionary, theKey):
+	var newDic = theDict.duplicate()
+	theDict.clear()
+	
+	var theKeys = newDic.keys()
+	var keyIndex = theKeys.find(theKey)
+	moveValueUp(theKeys, keyIndex)
+	
+	for key in theKeys:
+		theDict[key] = newDic[key]
 
 # https://github.com/ShatReal/Search-Bar-Demo/blob/main/main.gd
 static func _levenshtein_distance(str1:String, str2:String)->int:

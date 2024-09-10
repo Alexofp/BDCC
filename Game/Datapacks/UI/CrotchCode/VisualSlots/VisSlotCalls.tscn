@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/VisualSlots/BlockCatcherPanel.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/VisualSlots/VisSlotCalls.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+resource_local_to_scene = true
+bg_color = Color( 0.0862745, 0.0862745, 0.0862745, 1 )
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="VisSlotCalls" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 100, 0 )
+size_flags_horizontal = 3
+script = ExtResource( 2 )
+
+[node name="BlocksList" type="VBoxContainer" parent="."]
+margin_right = 1280.0
+custom_constants/separation = 0
+
+[node name="BlockCatcherPanel" parent="." instance=ExtResource( 1 )]
+margin_bottom = 24.0
+custom_styles/panel = SubResource( 1 )
+
+[connection signal="onBlockDraggedOnto" from="BlockCatcherPanel" to="." method="_on_BlockCatcherPanel_onBlockDraggedOnto"]

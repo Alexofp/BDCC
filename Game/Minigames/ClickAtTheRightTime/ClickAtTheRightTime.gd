@@ -35,7 +35,7 @@ func setDifficulty(level):
 
 var ingame = false
 
-signal minigameCompleted(finalScore)
+signal minigameCompleted(result)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -242,18 +242,29 @@ func setIngame(newingame):
 		$StartMenu.visible = true
 		$GameScreen.visible = false
 
-func calcFinalScore(isLost = false):
-	var theScore = getScore()
+func calcFinalScore():
+	var result = MinigameResult.new()
+	
+	var theScore:float = getScore()
+		
+	if theScore < 0.0:
+		result.score = 0.0
+		result.failedHard = true
+		return result
+	if theScore >= 1000.0:
+		result.score = 1.0
+		result.instantUnlock = true
+		return result
+
 	if(theScore > 0.0 && theScore < 1.0 && hardStruggleEnabled):
 		theScore /= 2.0
-	if theScore < 0.0:
-		return theScore
-	if(isLost):
-		theScore = 0.0
+	#theScore = pow(theScore, 1.5) * 2.0
+
 	if(hasAdvancedPerk && perfectStreak > 0):
-		var finalScore = 1.0 + howMuchForPerfect * (perfectStreak - 1) + theScore * howMuchForPerfect
-		return finalScore
-	return theScore
+		theScore = 1.0 + howMuchForPerfect * (perfectStreak - 1) + theScore * howMuchForPerfect
+	
+	result.score = theScore
+	return result
 
 func setStreakColor(theColor):
 	streakLabel.add_color_override("font_color", theColor)
@@ -286,6 +297,6 @@ func _on_ClickAtTheRightTime_gui_input(event):
 			freeze = false
 			#generateZone(RNG.randf_range(1.0, 10.0))
 			#setDifficulty(5)
-			var finalScore = calcFinalScore()
 			#print(finalScore)
-			emit_signal("minigameCompleted", finalScore)
+
+			emit_signal("minigameCompleted", calcFinalScore())

@@ -62,3 +62,6 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["catcow", "dog", "camel", "warrior", "cobra", "bridge"]
+
+func getVarNpcs():
+	return ["pc"]

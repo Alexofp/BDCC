@@ -11,7 +11,7 @@ script = ExtResource( 3 )
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 roomName = "Entrance"
 roomID = "fight_entrance"
-roomDescription = "Dark narrow corridor that was previously used for maintenance, judging from many tubes sprawling around the walls. "
+roomDescription = "This dark narrow corridor that was previously used for maintenance, judging from many tubes and wires sprawling around the walls. It leads down to a dark area, with what's clearly a ladder for Zero-Gravity environments on the ceiling."
 roomSprite = 3
 roomColor = 8
 population = 1
@@ -21,7 +21,7 @@ self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 0, -64 )
 roomName = "The Underground"
 roomID = "fight_nearentrance"
-roomDescription = "Abandoned maintenance space that is now made into an arena."
+roomDescription = "This abandoned maintenance space has had a fence built up around the lower center and used as a fight club arena. Standing here gives you the best view of it."
 roomColor = 8
 population = 1
 
@@ -29,7 +29,8 @@ population = 1
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -64, -64 )
 roomName = "The Underground"
-roomDescription = "Abandoned maintenance space that is now made into an arena."
+roomID = "fight_corner_sw"
+roomDescription = "This whole side of the Underground is covered in all sorts of colorful graffiti, crude art, insults, adverts from lonely inmates looking for love, and of course, slurs. The dim lighting makes further details fade into the darkness."
 roomColor = 8
 population = 1
 
@@ -37,7 +38,9 @@ population = 1
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -64, -128 )
 roomName = "The Underground"
-roomDescription = "Abandoned maintenance space that is now made into an arena."
+roomID = "fight_wall_west"
+roomDescription = "This area borders the fence of the arena. On the opposite wall the usual graffiti changes to one’s referencing other former arena fighters. Some describe their fates, others just mentioning their fights, or just plainly admitting they want to knock up or be knocked up by them. Strangely, Whoever was the champion before Avy had their name erased off the wall. A few others stand out too. Nova, obviously, for being a guard. One fighter apparently turned himself in to keep this place a secret. Another would just masturbate every fight. One former champion was known for getting herself pregnant from everyone who lost to her. Another two would keep taking the title of champion from each other for a few years.
+Avy herself is written up here, although from the various surrounding insults, nobody seems to like her more than necessary."
 roomColor = 8
 population = 1
 
@@ -60,7 +63,8 @@ population = 1
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -64, -192 )
 roomName = "The Underground"
-roomDescription = "Abandoned maintenance space that is now made into an arena."
+roomID = "fight_corner_nw"
+roomDescription = "This whole side of the Underground is covered in all sorts of colorful graffiti, crude art, insults, adverts from lonely inmates looking for love, and of course, slurs. The dim lighting makes further details fade into the darkness."
 roomColor = 8
 population = 1
 
@@ -69,7 +73,7 @@ self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 0, -192 )
 roomName = "Announcer's Balcony"
 roomID = "fight_announcer"
-roomDescription = "Abandoned maintenance space that is now made into an arena."
+roomDescription = "This area of the Underground is raised far above the rest, overlooking the arena fence and the surrounding viewing areas."
 roomSprite = 1
 roomColor = 7
 population = 1
@@ -78,7 +82,8 @@ population = 1
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 64, -192 )
 roomName = "The Underground"
-roomDescription = "Abandoned maintenance space that is now made into an arena."
+roomID = "fight_corner_ne"
+roomDescription = "This corner here is a bit barren, pipes and paint have been stripped from the walls. A few rusted over oxygen canisters are hooked up to the walls and pipes. An old and faded sign says “E.V.A. Lockers” and points to the right."
 roomColor = 8
 population = 1
 
@@ -87,7 +92,7 @@ self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 64, -128 )
 roomName = "The Underground"
 roomID = "fight_neararena"
-roomDescription = "Abandoned maintenance space that is now made into an arena."
+roomDescription = "This abandoned maintenance space has had a fence built up around the lower center and used as a fight club arena. Standing here gives you the best view of it. Off to the side is the place where Avy keeps track of the active arena fighters with drawings on the wall. "
 roomSprite = 1
 roomColor = 8
 population = 1
@@ -96,7 +101,8 @@ population = 1
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 64, -64 )
 roomName = "The Underground"
-roomDescription = "Abandoned maintenance space that is now made into an arena."
+roomID = "fight_corner_se"
+roomDescription = "This abandoned maintenance space has had a fence built up around the lower center and used as a fight club arena. Standing here gives you the best view of it, with the most room for inmates to pile in around it."
 roomColor = 8
 population = 1
 
@@ -104,7 +110,8 @@ population = 1
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, -128 )
 roomName = "The Underground"
-roomDescription = "Abandoned maintenance space that is now made into an arena."
+roomID = "fight_wall_east"
+roomDescription = "This old maintence area ends here and the open stone of the yard above is visible here."
 roomColor = 8
 population = 1
 
@@ -113,7 +120,7 @@ self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, -192 )
 roomName = "Slutwall"
 roomID = "fight_slutwall"
-roomDescription = "Abandoned maintenance space that is now made into an arena.
+roomDescription = "This little side area of the arena is so beat up or scrapped it is hard to tell whatever it used to be.
 
 One of the walls here has a row of big round holes in them roughly at your waist level. There are also a few smaller holes near each big one and many chains dangling, ready to be used. Your best guess is.. pretty lewd."
 roomColor = 8

@@ -7,10 +7,7 @@ func _init():
 func canUnlockWithKey():
 	return false
 
-func doFailingStruggle(_pc, _minigame):
-	return doStruggle(_pc, _minigame)
-
-func doStruggle(_pc, _minigame):
+func doStruggle(_pc, _minigame:MinigameResult):
 	var _handsFree = !_pc.hasBlockedHands()
 	var _armsFree = !_pc.hasBoundArms()
 	var _legsFree = !_pc.hasBoundLegs()
@@ -23,19 +20,21 @@ func doStruggle(_pc, _minigame):
 	var damage = 0
 	var stamina = 0
 	
-	if(_armsFree && _handsFree):
+	if(failChanceLowScore(_pc, 20, _minigame)):
+		text = "{user.name} writhes and tugs at the ropes, but {user.his} efforts only make the [b]knots tighten further[/b]. The coarse rope is biting into {user.his} skin, leaving bruises."
+		damage = -0.5
+		pain = scaleDamage(5)
+	elif(_armsFree && _handsFree):
 		text = "{user.name} tries to blindly find the knot to tug on"
-		damage = calcDamage(_pc)
+		damage = calcDamage(_pc, _minigame)
 		stamina = 10
 		lust = scaleDamage(5)
 	else:
 		text = "{user.name} tries to wiggle the rope harness off"
-		damage = calcDamage(_pc, 0.5)
+		damage = calcDamage(_pc, _minigame, 0.5)
 		stamina = 10
 		lust = scaleDamage(5)
-	if fatalFail(_minigame):
-		text += " but it seems like {user.youHe} just tightened it up more"
-		damage = -damage/2
+
 	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
 
 func processStruggleTurn(_pc, _isActivelyStruggling):

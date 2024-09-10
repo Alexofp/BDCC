@@ -6,9 +6,6 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="."]
 margin_top = 353.0
@@ -18,10 +15,24 @@ text = "Strength: 10"
 
 [node name="PlusButton" type="Button" parent="."]
 margin_left = 81.0
-margin_right = 101.0
+margin_right = 109.0
 margin_bottom = 720.0
-text = "+"
+text = "+1"
+
+[node name="PlusFiveButton" type="Button" parent="."]
+margin_left = 113.0
+margin_right = 141.0
+margin_bottom = 720.0
+text = "+5"
+
+[node name="PlusTenButton" type="Button" parent="."]
+margin_left = 145.0
+margin_right = 181.0
+margin_bottom = 720.0
+text = "+10"
 
 [connection signal="mouse_entered" from="." to="." method="_on_SkillStatLine_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_SkillStatLine_mouse_exited"]
 [connection signal="pressed" from="PlusButton" to="." method="_on_PlusButton_pressed"]
+[connection signal="pressed" from="PlusFiveButton" to="." method="_on_PlusFiveButton_pressed"]
+[connection signal="pressed" from="PlusTenButton" to="." method="_on_PlusTenButton_pressed"]

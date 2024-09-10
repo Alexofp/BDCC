@@ -678,6 +678,30 @@ func getLoot(_battleName):
 	
 	return {"credits": resultCredits, "items": resultItems}
 
+func hasKeyholderLocksFrom(otherCharID:String):
+	for invSlot in getInventory().getEquippedItems():
+		var item = getInventory().getEquippedItem(invSlot)
+		if(item.isRestraint()):
+			var restraintData = item.getRestraintData()
+			if(restraintData.hasSmartLock()):
+				var smartLock = restraintData.getSmartLock()
+				if(smartLock.isKeyholder(otherCharID)):
+					return true
+	return false
+
+func unlockAllKeyholderLocksFrom(otherCharID:String) -> int:
+	var howMany:int = 0
+	for invSlot in getInventory().getEquippedItems().keys():
+		var item = getInventory().getEquippedItem(invSlot)
+		if(item.isRestraint()):
+			var restraintData = item.getRestraintData()
+			if(restraintData.hasSmartLock()):
+				var smartLock = restraintData.getSmartLock()
+				if(smartLock.isKeyholder(otherCharID)):
+					getInventory().clearSlot(invSlot)
+					howMany += 1
+	return howMany
+
 func getBodypartTooltipName(_bodypartSlot):
 	return "error"
 
@@ -753,6 +777,12 @@ func getFemininity() -> int:
 
 func getThickness() -> int:
 	return 50
+
+func setThickness(_newT:int):
+	pass
+
+func setFemininity(_newF:int):
+	pass
 
 func getFeminityAdjective():
 	var fem = getFemininity()
@@ -1444,6 +1474,15 @@ func milkSeed(howmuch = 1.0):
 	production.afterMilked()
 	return howMuchSeed
 
+func hasBallsFullOfSeed():
+	if(!hasBodypart(BodypartSlot.Penis)):
+		return false
+	var penis: BodypartPenis = getBodypart(BodypartSlot.Penis)
+	var production: FluidProduction = penis.getFluidProduction()
+	if(production == null):
+		return false
+	return production.getFluidLevel() >= 1.0
+
 func getCumInflationLevel():
 	if(!OPTIONS.isContentEnabled(ContentType.CumInflation)):
 		return 0.0
@@ -1465,7 +1504,7 @@ func getCumInflationLevel():
 	var threshold = 3000.0
 	var tooMuch = max(totalAmount - threshold, 0.0)
 	
-	return clamp(tooMuch / 2000.0, 0.0, 1.0)
+	return clamp(tooMuch / 2000.0, 0.0, 10.0)
 # Doll stuff
 
 func getDollParts() -> Dictionary:
@@ -1772,6 +1811,11 @@ func addTallymarkButt():
 func hasTallymarks():
 	return hasEffect(StatusEffect.HasTallyMarks)
 
+func getTallymarkCount():
+	if(!hasTallymarks()):
+		return 0
+	return getEffect(StatusEffect.HasTallyMarks).totalAmount
+
 func clearTallymarks():
 	removeEffect(StatusEffect.HasTallyMarks)
 
@@ -1784,6 +1828,11 @@ func addBodywritingRandom():
 
 func hasBodywritings():
 	return hasEffect(StatusEffect.HasBodyWritings)
+
+func getBodywritingsCount():
+	if(!hasBodywritings()):
+		return 0
+	return getEffect(StatusEffect.HasBodyWritings).getAmount()
 
 func clearBodywritings():
 	removeEffect(StatusEffect.HasBodyWritings)
@@ -1812,6 +1861,9 @@ func isOralBlocked():
 func isMuzzled():
 	return buffsHolder.hasBuff(Buff.MuzzleBuff)
 
+func hasBuff(buffID):
+	return buffsHolder.hasBuff(buffID)
+
 func invCanEquipSlot(slot):
 	if(slot == InventorySlot.Penis && !hasPenis()):
 		return false
@@ -1827,7 +1879,24 @@ func getRestraintStrugglePower():
 	return 1.0
 
 func getRestraintStrugglingMinigameResult():
-	return RNG.randf_range(0.8, 1.1)
+	var minigameResult:MinigameResult = MinigameResult.new()
+	
+	var strugglePower:float = getRestraintStrugglePower()
+	
+	# Creates a normal distribution of sorts
+	var howMany = 5 # The bigger this number is, the closer the score will be to 1.0 on average
+	var result:float = 0.0
+	for _i in range(howMany):
+		result += RNG.randf_range(0.0, 2.0)
+	result /= howMany
+	minigameResult.score = clamp(result, 0.0, 1.0) * strugglePower
+
+	var epicFailChance = 5.0 - clamp(strugglePower-1.0, -1.0, 1.0) * 5.0
+	if(RNG.chance(epicFailChance)):
+		minigameResult.score = 0.0
+		minigameResult.failedHard = true
+
+	return minigameResult
 
 func processStruggleTurn(isActivelyStruggling = false):
 	var texts = []
@@ -2209,7 +2278,21 @@ func adjustArtworkVariant(_variant:Array):
 	pass
 
 func hasIllegalItems():
-	return getInventory().hasIllegalItems()
+	if(inventory.getItemsWithTag(ItemTag.Illegal).size() > 0):
+		return true
+	if(inventory.getEquippedItemsWithTag(ItemTag.Illegal).size() > 0):
+		return true
+	return false
+
+func hasIllegalItemsInInventory():
+	if(inventory.getItemsWithTag(ItemTag.Illegal).size() > 0):
+		return true
+	return false
+
+func hasIllegalItemsEquipped():
+	if(inventory.getEquippedItemsWithTag(ItemTag.Illegal).size() > 0):
+		return true
+	return false
 
 func personalityChangesAfterSex():
 	return false
@@ -2395,6 +2478,15 @@ func isCoveredInFluids():
 		return false
 	return true
 
+func isCoveredInCum():
+	return bodyFluids.hasFluidType("Cum")
+
+func isCoveredInGirlCum():
+	return bodyFluids.hasFluidType("GirlCum")
+
+func isCoveredInPiss():
+	return bodyFluids.hasFluidType("Piss")
+
 func afterTakingAShower():
 	#addStamina(30)
 	clearBodyFluids()
@@ -2550,6 +2642,11 @@ func onSexEvent(_event : SexEvent):
 			continue
 		var effect = statusEffects[effectID]
 		effect.onSexEvent(_event)
+		
+	var items = getInventory().getAllEquippedItems()
+	for itemSlot in items:
+		var item = items[itemSlot]
+		item.onSexEvent(_event)
 
 func onFightStart(_contex = {}):
 	beforeFightStarted() # Legacy
@@ -2610,6 +2707,10 @@ func onSexEnded(_contex = {}):
 		getEnslaveQuest().onSexEnded(_contex)
 	if(isSlaveToPlayer()):
 		getNpcSlavery().onSexEnded(_contex)
+	var items = getInventory().getAllEquippedItems()
+	for itemSlot in items:
+		var item = items[itemSlot]
+		item.onSexEnded(_contex)
 		
 func getForcedObedienceLevel() -> float:
 	return buffsHolder.getCustom(BuffAttribute.ForcedObedience)
@@ -2794,3 +2895,60 @@ func getRopeHarnessColor(defaultColor=Color.red):
 		return theHarness.clothesColor
 	
 	return defaultColor
+
+func shouldBeExcludedFromEncounters() -> bool:
+	return false
+
+func canForgetCharacter() -> bool:
+	return true
+
+func supportsDefaultGiveBirthScene() -> bool:
+	return true
+
+func canMeetCharacter() -> bool:
+	return true
+
+func fillBalls(howMuch:float=1.0):
+	if(!hasBodypart(BodypartSlot.Penis)):
+		return
+		
+	var penis = getBodypart(BodypartSlot.Penis)
+	if(penis != null && penis.getFluidProduction() != null):
+		penis.getFluidProduction().fillPercent(howMuch)
+
+func fillBreasts(howMuch:float=1.0):
+	if(!hasBodypart(BodypartSlot.Breasts)):
+		return
+		
+	var breasts = getBodypart(BodypartSlot.Breasts)
+	if(breasts != null && breasts.getFluidProduction() != null):
+		breasts.getFluidProduction().fillPercent(howMuch)
+
+func switchBodypartSimple(bodypartID:String):
+	var bodypart:Bodypart = GlobalRegistry.getBodypartRef(bodypartID)
+	
+	if(bodypart == null):
+		return false
+	
+	var bodypartSlot = bodypart.getSlot()
+	
+	if(hasBodypart(bodypartSlot)):
+		var currentPart:Bodypart = getBodypart(bodypartSlot)
+		if(currentPart.id == bodypartID):
+			return false
+		
+		var newBodypart:Bodypart = GlobalRegistry.createBodypart(bodypartID)
+		newBodypart.pickedRColor = currentPart.pickedRColor
+		newBodypart.pickedGColor = currentPart.pickedGColor
+		newBodypart.pickedBColor = currentPart.pickedBColor
+		removeBodypart(bodypartSlot)
+		giveBodypart(newBodypart)
+		return true
+	else:
+		giveBodypart(GlobalRegistry.createBodypart(bodypartID))
+		return true
+
+func getBodypartID(slot):
+	if(!bodyparts.has(slot) || bodyparts[slot] == null):
+		return ""
+	return bodyparts[slot].id

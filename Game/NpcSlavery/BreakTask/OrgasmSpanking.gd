@@ -23,7 +23,7 @@ func generateFor(_npc, _isSlaveLevelup, _difficulty = 1.0):
 
 func onSexEvent(_npc, _event:SexEvent):
 	if(_event.getType() == SexEvent.UniqueOrgasm):
-		if(_event.getTargetChar() == _npc && _event.targetIsSub()):
+		if(_event.getTargetChar() == _npc):
 			if(_event.getField("orgasmType", "") == "spank"):
 				advanceTask()
 				return true

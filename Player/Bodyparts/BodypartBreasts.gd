@@ -93,9 +93,12 @@ func getPickableAttributes():
 		"textButton": "Breast size",
 		"buttonDesc": "Pick the breast size",
 		"options": breastVariants,
-		"default": BreastsSize.C,
+		"default": size,
 	}
 	return result
+	
+func setBreastSizeSafe(newValue):
+	size = newValue
 	
 func applyAttribute(_attrID: String, _attrValue):
 	.applyAttribute(_attrID, _attrValue)

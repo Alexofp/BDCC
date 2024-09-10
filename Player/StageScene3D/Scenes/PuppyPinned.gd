@@ -79,3 +79,6 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["pinned"]
+
+func getVarNpcs():
+	return ["pc", "npc"]

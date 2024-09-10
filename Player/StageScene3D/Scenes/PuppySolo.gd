@@ -43,3 +43,6 @@ func playAnimation(animID, _args = {}):
 
 func getSupportedStates():
 	return getSupportedStatesPuppy()
+
+func getVarNpcs():
+	return ["pc"]

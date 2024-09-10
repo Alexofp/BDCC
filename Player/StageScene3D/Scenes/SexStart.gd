@@ -88,3 +88,6 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["start", "defeated"]
+
+func getVarNpcs():
+	return ["pc", "npc"]

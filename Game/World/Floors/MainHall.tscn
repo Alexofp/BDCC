@@ -11,7 +11,7 @@ script = ExtResource( 3 )
 self_modulate = Color( 1, 0.6, 0.6, 1 )
 roomName = "Security checkpoint"
 roomID = "hall_checkpoint"
-roomDescription = "A short corridor that connects the cellblock and the elevator. A guard checkpoint is placed here."
+roomDescription = "A short, wider corridor connects the main hall and central elevator. A tall fence stretches across the way forward. The only way through is a closely watched guard chokepoint. Two elevators stretch up on either side of the guard outpost, used excluvisely by guards. Theres no way for you to reach them, unfortunately."
 roomSprite = 1
 roomColor = 2
 population = 2
@@ -21,7 +21,9 @@ self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 0, 64 )
 roomName = "Main hall"
 roomID = "hall_mainentrance"
-roomDescription = "A very spacious hall with a huge raised platform in the middle"
+roomDescription = "The main hall is an incredibly huge room, circling a large raised platform hanging down in the middle. The towering walls of smoothed over rock keep you contained, although you can barely spot places where staff and guards go about their business far above. Railings keep you from the edge of the cavern leading down, and down the central hole below there are foundation supports, electrical cables, netting, other structural equipment and the lights of the cell blocks below. The ceiling stretches past it all and into the darkness above.
+
+To the north is the Central Elevator and it's guard checkpoint, and to the south there are a set of stairs lead up to the large raised platform in the center of the Main Hall."
 roomColor = 8
 population = 3
 
@@ -30,7 +32,7 @@ self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -64, 320 )
 roomName = "Main hall"
 roomID = "main_hallroom5"
-roomDescription = "A very spacious hall with a huge raised platform in the middle"
+roomDescription = "The main hall is an incredibly huge room, circling a large raised platform hanging down in the middle. The towering walls of smoothed over rock keep you contained, although you can barely spot places where staff and guards go about their business far above. Railings keep you from the edge of the cavern leading down, and down the central hole below there are foundation supports, electrical cables, netting, other structural equipment and the lights of the cell blocks below. The ceiling stretches past it all and into the darkness above."
 roomColor = 8
 population = 3
 
@@ -39,16 +41,18 @@ self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 64, 320 )
 roomName = "Main hall"
 roomID = "main_hallroom7"
-roomDescription = "A very spacious hall with a huge raised platform in the middle"
+roomDescription = "The main hall is an incredibly huge room, circling a large raised platform hanging down in the middle. The towering walls of smoothed over rock keep you contained, although you can barely spot places where staff and guards go about their business far above. Railings keep you from the edge of the cavern leading down, and down the central hole below there are foundation supports, electrical cables, netting, other structural equipment and the lights of the cell blocks below. The ceiling stretches past it all and into the darkness above."
 roomColor = 8
 population = 3
 
 [node name="MainElevator" parent="." index="4" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( 0, -64 )
-roomName = "Elevator"
+roomName = "Main elevator"
 roomID = "hall_elevator"
-roomDescription = "Spacious elevator that can move people or a huge amount of cargo between floors. Walls are made out of black painted metal, you notice a control panel that has a few buttons."
+roomDescription = "This spacious cargo elevator is your only way throughout the rest of the correctional center. The walls here are painted black rather than the bare gray metallics of everywhere else. Off to the side there sits the control panel with a few buttons.
+
+Annoyingly, there is only a single elevator, probably to limit the movement of inmates."
 roomSprite = 3
 roomColor = 2
 population = 2
@@ -59,7 +63,7 @@ self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( -64, 64 )
 roomName = "Stairs"
 roomID = "main_stairs1"
-roomDescription = "Stairs that will lead you to the lower level"
+roomDescription = "These stairs will take you down to the extensive cellblocks below."
 canNorth = false
 canSouth = false
 roomSprite = 3
@@ -71,7 +75,7 @@ astarConnectedTo = PoolStringArray( "CBStairs1" )
 position = Vector2( 0, 128 )
 roomName = "Stairs"
 roomID = "main_stairs_n"
-roomDescription = "You stand on the stairs that lead up to the main platform"
+roomDescription = "The platform here has tall railings on the sides and benches facing inwards to watch whatever inmates are being punished."
 population = 3
 
 [node name="MainStairs2" parent="." index="7" instance=ExtResource( 2 )]
@@ -79,7 +83,7 @@ self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 64, 64 )
 roomName = "Stairs"
 roomID = "main_stairs2"
-roomDescription = "Stairs that will lead you to the lower level"
+roomDescription = "These stairs will take you down to the extensive cellblocks below."
 canNorth = false
 canSouth = false
 roomSprite = 3
@@ -90,7 +94,11 @@ population = 3
 position = Vector2( 0, 192 )
 roomName = "Main platform"
 roomID = "main_punishment_spot"
-roomDescription = "This is clearly the public punishment area. You see a few pillories, one-bar prisons and chain posts"
+roomDescription = "In the center of this platform, a number of punishment devices are laid out. Pillories, one bar prisons, chain posts. A number of hooks line the floors for easy attachment of chains. You spot a few crates of restraints that, naturally, have had their original contents all stolen besides what is already locked to the floor. With how long those crates have been sitting there, it must be some kinda of meet up spot for prisoners to trade BDSM gear.  The only things left are leg spreaders, spare sets of stocks, all stuff that clearly goes with the larger punishment equipment.
+For all this stuff, though, you can’t shake the feeling all of this was set up because the prison staff did not know what else to put here.
+
+Off to the side there is a very depressed looking inmate in a special uniform with \"Janitorial Worker\" written across the back. 
+They do not look ready for a conversation, so you decide its best to ignore them."
 roomSprite = 4
 population = 3
 
@@ -98,14 +106,14 @@ population = 3
 position = Vector2( -64, 192 )
 roomName = "Stairs"
 roomID = "main_stairs_w"
-roomDescription = "You stand on the stairs that lead up to the main platform"
+roomDescription = "The platform here has tall railings on the sides and benches facing inwards to watch whatever inmates are being punished."
 population = 3
 
 [node name="MainHallRoom52" parent="." index="10" instance=ExtResource( 2 )]
 position = Vector2( -64, 256 )
 roomName = "Main platform"
 roomID = "main_bench3"
-roomDescription = "Has some benches to relax and watch the inmates being punished"
+roomDescription = "The platform here has tall railings on the sides and benches facing inwards to watch whatever inmates are being punished."
 canWest = false
 canSouth = false
 population = 3
@@ -114,14 +122,14 @@ population = 3
 position = Vector2( 0, 256 )
 roomName = "Stairs"
 roomID = "main_stairs_s"
-roomDescription = "You stand on the stairs that lead up to the main platform"
+roomDescription = "The platform here has tall railings on the sides and benches facing inwards to watch whatever inmates are being punished."
 population = 3
 
 [node name="MainHallRoom54" parent="." index="12" instance=ExtResource( 2 )]
 position = Vector2( 64, 256 )
 roomName = "Main platform"
 roomID = "main_bench4"
-roomDescription = "Has some benches to relax and watch the inmates being punished"
+roomDescription = "The platform here has tall railings on the sides and benches facing inwards to watch whatever inmates are being punished."
 canEast = false
 canSouth = false
 population = 3
@@ -130,7 +138,7 @@ population = 3
 position = Vector2( -64, 128 )
 roomName = "Main platform"
 roomID = "main_bench1"
-roomDescription = "Has some benches to relax and watch the inmates being punished"
+roomDescription = "The platform here has tall railings on the sides and benches facing inwards to watch whatever inmates are being punished."
 canWest = false
 canNorth = false
 population = 3
@@ -139,7 +147,7 @@ population = 3
 position = Vector2( 64, 128 )
 roomName = "Main platform"
 roomID = "main_bench2"
-roomDescription = "Has some benches to relax and watch the inmates being punished"
+roomDescription = "The platform here has tall railings on the sides and benches facing inwards to watch whatever inmates are being punished."
 canNorth = false
 canEast = false
 roomSprite = 1
@@ -148,13 +156,15 @@ population = 3
 [node name="MainHallRoom27" parent="." index="15" instance=ExtResource( 2 )]
 position = Vector2( 0, 384 )
 roomName = "Corridor"
-roomDescription = "A little corridor connecting the main hall and the garden"
+roomID = "main_yard_connector"
+roomDescription = "A corridor connecting the main hall and the prison yard. Two large cargo bulkheads are permanently locked open on both ends, with a large dirty metal ramp leading down and out into the yard."
 population = 3
 
 [node name="MainHallRoom48" parent="." index="16" instance=ExtResource( 2 )]
 position = Vector2( 128, 448 )
 roomName = "Stairs"
-roomDescription = "A set of stairs that lead to the greenhouses level. Markings on the floor remind the inmates that the greenhouses are [color=red]off-limits[/color] for them"
+roomID = "yard_stars_green"
+roomDescription = "A set of stairs lead up to the greenhouses with markings on the floor remind inmates that the greenhouses are [color=red]off-limits[/color] for them. "
 gridColor = 2
 population = 2
 
@@ -162,35 +172,35 @@ population = 2
 position = Vector2( -128, 576 )
 roomName = "Gym area"
 roomID = "gym_entrance"
-roomDescription = "You can see yoga carpets, treadmills and a few benches for weight lifting"
+roomDescription = "The gym here looks a few years newer than the rest of the prison. A bit of space for workouts and some spare mirrors on the walls over by the yoga mats with a few windows looking out into the yard. This small entrance area has a few signs, decorative plants, water coolers, and other cheap decor. A locker room is marked on the far side of the entrance, the weights ahead and yoga to the side."
 population = 1
 
 [node name="MainHallRoom55" parent="." index="18" instance=ExtResource( 2 )]
 position = Vector2( -192, 576 )
 roomName = "Gym area"
 roomID = "gym_weights"
-roomDescription = "You can see yoga carpets, treadmills and a few benches for weight lifting"
+roomDescription = "All of the weight lifting equipment is chained to the floor. A basic radio switches between a few old classics and terribly bland production line sounds that probably are being reused from an old advertisement. A few posters reminding you how not to hurt yourself on the weights and proper posturing and such."
 population = 1
 
 [node name="MainHallRoom56" parent="." index="19" instance=ExtResource( 2 )]
 position = Vector2( -192, 640 )
 roomName = "Gym area"
 roomID = "gym_nearbathroom"
-roomDescription = "You can see yoga carpets, treadmills and a few benches for weight lifting"
+roomDescription = "Leading to the locker rooms is a bit of a rest area, a few benches scattered around with more water coolers and corkboard with a few outdated adverts on it for events in the prison. The generic radio from the weights section bleeds in and a news bulletin shows a few major events of the outside universe. Most of it is either old news or only covers the broad strokes of the outside world. You remember some from before you got taken into custody."
 population = 1
 
 [node name="MainHallRoom57" parent="." index="20" instance=ExtResource( 2 )]
 position = Vector2( -128, 640 )
 roomName = "Gym area"
 roomID = "gym_yoga"
-roomDescription = "You can see yoga carpets, treadmills and a few benches for weight lifting"
+roomDescription = "Here the space is taken up by a number of yoga mats, and mirrors made out of reinforced glass. A number of booklets teaching poses are filed away in little bookshelves. There are also a number of corporate propaganda or motivational ads scattered about, if mostly vandalized."
 population = 1
 
 [node name="MainHallRoom58" parent="." index="21" instance=ExtResource( 2 )]
 position = Vector2( -128, 704 )
 roomName = "Secluded place"
 roomID = "gym_secret"
-roomDescription = "You find that behind one of the tall bushes there is actually a little secluded spot. It’s not too interesting, there is no pathway here even. But you notice someone leaning against the wall near some kind of maintenance hatch."
+roomDescription = "This area behind the yoga mats is covered by a number of decorative plants, all overgrown. This small area looks like it was lazily blocked off by the staff and forgotten about. An inmate leans against the wall, waiting for something, where a wall panel looks mis-aligned."
 roomSprite = 1
 population = 1
 astarConnectedTo = PoolStringArray( "fight_entrance" )
@@ -199,9 +209,10 @@ astarConnectedTo = PoolStringArray( "fight_entrance" )
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 64, 576 )
 roomName = "Prison Yard"
-roomDescription = "A huge open area with lots of bushes, trees and other types of greenery. Ocasionally there is a bench to sit and relax.
+roomID = "yard_corridor2"
+roomDescription = "A large open area with all sorts of trees, bushes, and other greenery. Stone pathways show the way around, circling a large rocky outcrop in the center. Covered and beat up lanterns light the area and a large skylight is installed high above, showing the stars above.
 
-The ground is covered with grass, there are visible pathways made out of stone"
+Here the paths branch back around the main yard, and the side yard off the east."
 roomColor = 1
 population = 1
 
@@ -209,9 +220,8 @@ population = 1
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 128, 576 )
 roomName = "Prison Yard"
-roomDescription = "A huge open area with lots of bushes, trees and other types of greenery. Ocasionally there is a bench to sit and relax.
-
-The ground is covered with grass, there are visible pathways made out of stone"
+roomID = "yard_corridor3"
+roomDescription = "This side area swings down and around the greenhouse above, a few courtyards sit unused. A few benches are scattered around, overlooking a bit of a rocky, fenced off trench and another sealed skylight far, far to the south, letting you look out at the stars rather than up. A good place for a bit of quiet, if not much privacy."
 roomColor = 1
 population = 1
 
@@ -220,9 +230,7 @@ self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 64, 640 )
 roomName = "Prison Yard"
 roomID = "yard_deadend2"
-roomDescription = "A huge open area with lots of bushes, trees and other types of greenery. Ocasionally there is a bench to sit and relax.
-
-The ground is covered with grass, there are visible pathways made out of stone"
+roomDescription = "The stony path leads here but dead ends in a small area with a bench. From here it is really obvious that the yard was made out of some kind of cave in the giant asteroid the prison was built in."
 roomColor = 1
 population = 1
 
@@ -230,9 +238,8 @@ population = 1
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 192, 576 )
 roomName = "Prison Yard"
-roomDescription = "A huge open area with lots of bushes, trees and other types of greenery. Ocasionally there is a bench to sit and relax.
-
-The ground is covered with grass, there are visible pathways made out of stone"
+roomID = "yard_corridor4"
+roomDescription = "This side area swings down and around the greenhouse above, a few courtyards sit unused. A few benches are scattered around, overlooking a bit of a rocky, fenced off trench and another sealed skylight far, far to the south, letting you look out at the stars rather than up. A good place for a bit of quiet, if not much privacy."
 roomColor = 1
 population = 1
 
@@ -241,11 +248,9 @@ self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 192, 640 )
 roomName = "Prison Yard"
 roomID = "yard_waterfall"
-roomDescription = "A huge open area with lots of bushes, trees and other types of greenery. Ocasionally there is a bench to sit and relax.
+roomDescription = "This side area swings down and around the greenhouse above, a few courtyards sit unused. A few benches are scattered around overlooking a bit of a rocky, fenced off trench and another sealed skylight far, far to the south, letting you look out at the stars rather than up. A good place for a bit of quiet, if not much privacy.
 
-The ground is covered with grass, there are visible pathways made out of stone.
-
-This spot is particularly nice. The path ends here with a fancy little pond. Above it is a small waterfall, perfect for meditating."
+A spot like this is particularly nice, it sits the farest out from the main yard. There is even a small pond complete with a short waterfall. The large southern skylight is still visible and gives a nice view of outer space. Overall it’s a really good spot for meditation."
 roomColor = 1
 population = 1
 
@@ -254,9 +259,7 @@ self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( -64, 640 )
 roomName = "Prison Yard"
 roomID = "yard_deadend1"
-roomDescription = "A huge open area with lots of bushes, trees and other types of greenery. Ocasionally there is a bench to sit and relax.
-
-The ground is covered with grass, there are visible pathways made out of stone"
+roomDescription = "The stony path leads here but dead ends in a small area with a bench. From here it is really obvious that the yard was made out of some kind of cave in the giant asteroid the prison was built in."
 canWest = false
 roomColor = 1
 population = 1
@@ -266,9 +269,9 @@ self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 256, 576 )
 roomName = "Prison Yard"
 roomID = "yard_vaulthere"
-roomDescription = "A huge open area with lots of bushes, trees and other types of greenery. Ocasionally there is a bench to sit and relax.
+roomDescription = "This side area swings down and around the greenhouse above, a few courtyards sit unused. A few benches are scattered around, overlooking a bit of a rocky, fenced off trench and another sealed skylight far, far to the south, letting you look out at the stars rather than up. A good place for a bit of quiet, if not much privacy.
 
-The ground is covered with grass, there are visible pathways made out of stone"
+This is where the side yard ends, pushed up against the greenhouse above."
 roomColor = 1
 population = 1
 
@@ -277,9 +280,7 @@ self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( -128, 448 )
 roomName = "Prison Yard"
 roomID = "yard_novaspot"
-roomDescription = "A huge open area with lots of bushes, trees and other types of greenery. Ocasionally there is a bench to sit and relax.
-
-The ground is covered with grass, there are visible pathways made out of stone"
+roomDescription = "The stony path leads here but dead ends in a small area with a bench. From here it is really obvious that the yard was made out of some kind of cave in the giant asteroid the prison was built in."
 roomSprite = 1
 roomColor = 1
 population = 1
@@ -289,9 +290,7 @@ self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 64, 512 )
 roomName = "Prison Yard"
 roomID = "yard_eastCorridor"
-roomDescription = "A huge open area with lots of bushes, trees and other types of greenery. Ocasionally there is a bench to sit and relax.
-
-The ground is covered with grass, there are visible pathways made out of stone"
+roomDescription = "A large open area with all sorts of trees, bushes, and other greenery. Stone pathways show the way around, circling a large rocky outcrop in the center. Covered and beat up lanterns light the area and a large skylight is installed high above, showing the stars above."
 roomColor = 1
 population = 1
 
@@ -300,9 +299,7 @@ self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 64, 448 )
 roomName = "Prison Yard"
 roomID = "yard_nearstairs"
-roomDescription = "A huge open area with lots of bushes, trees and other types of greenery. Ocasionally there is a bench to sit and relax.
-
-The ground is covered with grass, there are visible pathways made out of stone"
+roomDescription = "A large open area with all sorts of trees, bushes, and other greenery. Stone pathways show the way around, circling a large rocky outcrop in the center. Covered and beat up lanterns light the area and a large skylight is installed high above, showing the stars above."
 roomColor = 1
 population = 1
 
@@ -311,7 +308,7 @@ self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 0, 448 )
 roomName = "Prison Yard"
 roomID = "yard_firstroom"
-roomDescription = "A huge open area with lots of bushes, trees and other types of greenery. Ocasionally there is a bench to sit and relax.
+roomDescription = "A large open area with all sorts of trees, bushes, and other greenery. Stone pathways show the way around, circling a large rocky outcrop in the center. Covered and beat up lanterns light the area and a large skylight is installed high above, showing the stars above.
 
 The ground is covered with grass, there are visible pathways made out of stone"
 roomColor = 1
@@ -321,9 +318,8 @@ population = 1
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 192, 448 )
 roomName = "Greenhouses"
-roomDescription = "You see some greenhouses. This is where all the apples, eggplants and other vegetables and fruits are grown.
-
-The greenhouses are marked as [color=red]off-limits[/color] for inmates"
+roomID = "main_green_corridor1"
+roomDescription = "This entrance area of the greenhouses look largely unused with windows looking out over the side yard. All sorts of hydroponics equipment are stored up in boxes, with discarded boxes and crates off to the sides. More crates and unfinished construction materials lead around this first building. A few guards are wandering around actively looking over this… Construction area? Decommissioned zone?"
 roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
@@ -333,9 +329,8 @@ population = 2
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 256, 448 )
 roomName = "Greenhouses"
-roomDescription = "You see some greenhouses. This is where all the apples, eggplants and other vegetables and fruits are grown.
-
-The greenhouses are marked as [color=red]off-limits[/color] for inmates"
+roomID = "main_green_corridor3"
+roomDescription = "This entrance area of the greenhouses look largely unused with windows looking out over the side yard. All sorts of hydroponics equipment are stored up in boxes, with discarded boxes and crates off to the sides. More crates and unfinished construction materials lead around this first building. A few guards are wandering around actively looking over this… Construction area? Decommissioned zone?"
 roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
@@ -345,9 +340,11 @@ population = 2
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 192, 384 )
 roomName = "Greenhouses"
-roomDescription = "You see some greenhouses. This is where all the apples, eggplants and other vegetables and fruits are grown.
+roomID = "main_green_corridor2"
+roomDescription = "This half of the Greenhouse is built into the cavern and looks notably more set up than the entrance hall. Crates are still stacked around but all the hydroponics and grow beds are all set up. Clipboards on the walls sit blank, including the staff roster. Whiteboards, notebooks, science equipment are all sitting on the tables and bags or dirt are stacked up on pallets.
 
-The greenhouses are marked as [color=red]off-limits[/color] for inmates"
+An Elevator sits off in the corner, watched by a camera and requires ID and a meeting over an intercom to use. Wherever it goes, Guards can be seen coming and going from it, with a few hanging around the spot.
+Best not go near it."
 roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
@@ -357,9 +354,10 @@ population = 2
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 256, 384 )
 roomName = "Greenhouses"
-roomDescription = "You see some greenhouses. This is where all the apples, eggplants and other vegetables and fruits are grown.
+roomID = "main_green_corridor4"
+roomDescription = "This half of the Greenhouse is built into the cavern and looks notably more set up than the entrance hall. Crates are still stacked around but all the hydroponics and grow beds are all set up. Clipboards on the walls sit blank, including the staff roster. Whiteboards, notebooks, science equipment are all sitting on the tables and bags or dirt are stacked up on pallets.
 
-The greenhouses are marked as [color=red]off-limits[/color] for inmates"
+Another Elevator is north of here, but it lies completely unfinished, with a permanently unpowered closed glass door showing a dark and empty elevator shaft."
 roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
@@ -369,9 +367,8 @@ population = 2
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 384 )
 roomName = "Greenhouses"
-roomDescription = "You see some greenhouses. This is where all the apples, eggplants and other vegetables and fruits are grown.
-
-The greenhouses are marked as [color=red]off-limits[/color] for inmates"
+roomID = "main_green_corridor5"
+roomDescription = "This half of the Greenhouse is built into the cavern and looks notably more set up than the entrance hall. Crates are still stacked around but all the hydroponics and grow beds are all set up. Clipboards on the walls sit blank, including the staff roster. Whiteboards, notebooks, science equipment are all sitting on the tables and bags or dirt are stacked up on pallets."
 roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
@@ -381,9 +378,8 @@ population = 2
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 320 )
 roomName = "Greenhouses"
-roomDescription = "You see some greenhouses. This is where all the apples, eggplants and other vegetables and fruits are grown.
-
-The greenhouses are marked as [color=red]off-limits[/color] for inmates"
+roomID = "main_green_secret"
+roomDescription = "A bunch of crates are stacked up in this little closet. Some kind of storeroom."
 roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
@@ -397,9 +393,9 @@ self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 512 )
 roomName = "Greenhouses"
 roomID = "green_chokepoint"
-roomDescription = "You see some greenhouses. This is where all the apples, eggplants and other vegetables and fruits are grown.
+roomDescription = "This balcony is open to the cavern and yard below and connects the two main buildings of the Greenhouses.
 
-The greenhouses are marked as [color=red]off-limits[/color] for inmates"
+North is a door that leads back into the northern building."
 roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
@@ -409,9 +405,12 @@ population = 2
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 576 )
 roomName = "Greenhouses"
-roomDescription = "You see some greenhouses. This is where all the apples, eggplants and other vegetables and fruits are grown.
+roomID = "main_green_corridor7"
+roomDescription = "This balcony is open to the cavern and yard below and connects the two main buildings of the Greenhouses.
 
-The greenhouses are marked as [color=red]off-limits[/color] for inmates"
+The side yard is below, and looking over the railing, the drop doesn’t look too high to just vault over if you need to.
+
+To the south and east, there are doors leading into the second building of the greenhouses."
 canWest = false
 roomColor = 1
 gridColor = 2
@@ -422,9 +421,10 @@ population = 2
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 704 )
 roomName = "Greenhouses"
-roomDescription = "You see some greenhouses. This is where all the apples, eggplants and other vegetables and fruits are grown.
+roomID = "main_green_corridor11"
+roomDescription = "This second greenhouse is actually far more active than the first. Growbeds are full of plant life and research notes are written up on whiteboards. The whole thing still seems largely automated, and most of the notes are shown to just be production quotas for guard and staff food stocks. Some guards are still hanging around but no staff, strangely.
 
-The greenhouses are marked as [color=red]off-limits[/color] for inmates"
+A maze of crates here are stored along the far wall. Some are tabbed with import and export labels with a number of places listed. “RRDC”, “Better Solutions Production Center”, “Nanotrasen CentComm”, and “Union Aerospace Colonial Division” are the most common, with a few name brands from outside the prison sprinkled in."
 roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
@@ -434,9 +434,8 @@ population = 2
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 384, 640 )
 roomName = "Greenhouses"
-roomDescription = "You see some greenhouses. This is where all the apples, eggplants and other vegetables and fruits are grown.
-
-The greenhouses are marked as [color=red]off-limits[/color] for inmates"
+roomID = "main_green_corridor10"
+roomDescription = "A number of small trees are being grown in this sector, all in neat rows in a sunken down area with a tall glass ceiling showing the cavern above and a number of additional grow lamps and sprinklers hung above on the support beams."
 roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
@@ -446,9 +445,8 @@ population = 2
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 384, 576 )
 roomName = "Greenhouses"
-roomDescription = "You see some greenhouses. This is where all the apples, eggplants and other vegetables and fruits are grown.
-
-The greenhouses are marked as [color=red]off-limits[/color] for inmates"
+roomID = "main_green_corridor8"
+roomDescription = "This second greenhouse is actually far more active than the first. Growbeds are full of plant life and research notes are written up on whiteboards. The whole thing still seems largely automated, and most of the notes are shown to just be production quotas for guard and staff food stocks. Some guards are still hanging around but no staff, strangely."
 roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
@@ -458,9 +456,8 @@ population = 2
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 640 )
 roomName = "Greenhouses"
-roomDescription = "You see some greenhouses. This is where all the apples, eggplants and other vegetables and fruits are grown.
-
-The greenhouses are marked as [color=red]off-limits[/color] for inmates"
+roomID = "main_green_corridor9"
+roomDescription = "This second greenhouse is actually far more active than the first. Growbeds are full of plant life and research notes are written up on whiteboards. The whole thing still seems largely automated, and most of the notes are shown to just be production quotas for guard and staff food stocks. Some guards are still hanging around but no staff, strangely."
 roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
@@ -471,11 +468,9 @@ self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 384, 704 )
 roomName = "Greenhouses"
 roomID = "main_greenhouses"
-roomDescription = "You see some greenhouses. This is where all the apples, eggplants and other vegetables and fruits are grown.
+roomDescription = "A maze of crates here are stored along the far wall. Some are tabbed with import and export labels with a number of places listed. “RRDC”, “Better Solutions Production Center”, “Nanotrasen CentComm”, and “Union Aerospace Colonial Division” are the most common, with a few name brands from outside the prison sprinkled in.
 
-The greenhouses are marked as [color=red]off-limits[/color] for inmates
-
-You see a few crates with fruits and vegetables here"
+You see a few crates with fruits and vegetables here, open and vulnerable."
 roomSprite = 4
 roomColor = 1
 gridColor = 2
@@ -485,9 +480,10 @@ population = 2
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 448 )
 roomName = "Greenhouses"
-roomDescription = "You see some greenhouses. This is where all the apples, eggplants and other vegetables and fruits are grown.
+roomID = "main_green_corridor6"
+roomDescription = "This entrance area of the greenhouses look largely unused with windows looking out over the side yard. All sorts of hydroponics equipment are stored up in boxes, with discarded boxes and crates off to the sides. More crates and unfinished construction materials lead around this first building. A few guards are wandering around actively looking over this… Construction area? Decommissioned zone?
 
-The greenhouses are marked as [color=red]off-limits[/color] for inmates"
+To the south the building opens up to a small balcony and another greenhouse building. "
 roomColor = 1
 gridColor = 2
 loctag_Greenhouses = true
@@ -497,9 +493,8 @@ population = 2
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( -64, 448 )
 roomName = "Prison Yard"
-roomDescription = "A huge open area with lots of bushes, trees and other types of greenery. Ocasionally there is a bench to sit and relax.
-
-The ground is covered with grass, there are visible pathways made out of stone"
+roomID = "yard_corridor1"
+roomDescription = "A large open area with all sorts of trees, bushes, and other greenery. Stone pathways show the way around, circling a large rocky outcrop in the center. Covered and beat up lanterns light the area and a large skylight is installed high above, showing the stars above."
 roomColor = 1
 population = 1
 
@@ -508,9 +503,7 @@ self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( -64, 512 )
 roomName = "Prison Yard"
 roomID = "yard_westCorridor"
-roomDescription = "A huge open area with lots of bushes, trees and other types of greenery. Ocasionally there is a bench to sit and relax.
-
-The ground is covered with grass, there are visible pathways made out of stone"
+roomDescription = "A large open area with all sorts of trees, bushes, and other greenery. Stone pathways show the way around, circling a large rocky outcrop in the center. Covered and beat up lanterns light the area and a large skylight is installed high above, showing the stars above."
 roomColor = 1
 population = 1
 
@@ -519,9 +512,9 @@ self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( -64, 576 )
 roomName = "Prison Yard"
 roomID = "yard_neargym"
-roomDescription = "A huge open area with lots of bushes, trees and other types of greenery. Ocasionally there is a bench to sit and relax.
+roomDescription = "A large open area with all sorts of trees, bushes, and other greenery. Stone pathways show the way around, circling a large rocky outcrop in the center. Covered and beat up lanterns light the area and a large skylight is installed high above, showing the stars above.
 
-The ground is covered with grass, there are visible pathways made out of stone"
+To the west sits the entrance to the gym, bored into the cavernous walls."
 roomColor = 1
 population = 1
 
@@ -530,9 +523,7 @@ self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 0, 576 )
 roomName = "Prison Yard"
 roomID = "yard_northCorridor"
-roomDescription = "A huge open area with lots of bushes, trees and other types of greenery. Ocasionally there is a bench to sit and relax.
-
-The ground is covered with grass, there are visible pathways made out of stone"
+roomDescription = "A large open area with all sorts of trees, bushes, and other greenery. Stone pathways show the way around, circling a large rocky outcrop in the center. Covered and beat up lanterns light the area and a large skylight is installed high above, showing the stars above."
 roomColor = 1
 population = 1
 
@@ -540,7 +531,7 @@ population = 1
 position = Vector2( 64, 192 )
 roomName = "Stairs"
 roomID = "main_stairs_e"
-roomDescription = "You stand on the stairs that lead up to the main platform"
+roomDescription = "The platform here has tall railings on the sides and benches facing inwards to watch whatever inmates are being punished."
 population = 3
 
 [node name="MainVendomatRoom" parent="." index="52" instance=ExtResource( 2 )]
@@ -548,7 +539,7 @@ self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -128, 64 )
 roomName = "Main hall"
 roomID = "main_hallroom1"
-roomDescription = "A very spacious hall with a huge raised platform in the middle"
+roomDescription = "The corners of the main hall contain an open and barebones common area, along with a large angled pillar supporting the raised platform in the center of this hangar-sized room."
 roomSprite = 6
 roomColor = 8
 population = 3
@@ -558,7 +549,7 @@ self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, 128 )
 roomName = "Main hall"
 roomID = "main_hallroom11"
-roomDescription = "A very spacious hall with a huge raised platform in the middle"
+roomDescription = "The main hall is an incredibly huge room, circling a large raised platform hanging down in the middle. The towering walls of smoothed over rock keep you contained, although you can barely spot places where staff and guards go about their business far above. Railings keep you from the edge of the cavern leading down, and down the central hole below there are foundation supports, electrical cables, netting, other structural equipment and the lights of the cell blocks below. The ceiling stretches past it all and into the darkness above."
 roomColor = 8
 population = 3
 
@@ -576,7 +567,9 @@ self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -128, 192 )
 roomName = "Main hall"
 roomID = "main_hall_west"
-roomDescription = "A very spacious hall with a huge raised platform in the middle"
+roomDescription = "The main hall is an incredibly huge room, circling a large raised platform hanging down in the middle. The towering walls of smoothed over rock keep you contained, although you can barely spot places where staff and guards go about their business far above. Railings keep you from the edge of the cavern leading down, and down the central hole below there are foundation supports, electrical cables, netting, other structural equipment and the lights of the cell blocks below. The ceiling stretches past it all and into the darkness above.
+
+There are a set of stairs lead up to the large raised platform in the center of the starship hanger called a main hall."
 roomColor = 8
 population = 3
 
@@ -594,7 +587,7 @@ self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -128, 320 )
 roomName = "Main hall"
 roomID = "main_hallroom4"
-roomDescription = "A very spacious hall with a huge raised platform in the middle"
+roomDescription = "The corners of the main hall contain an open and barebones common area, along with a large angled pillar supporting the raised platform in the center of this hangar-sized room."
 roomColor = 8
 population = 3
 
@@ -603,7 +596,7 @@ self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, 320 )
 roomName = "Main hall"
 roomID = "main_hallroom8"
-roomDescription = "A very spacious hall with a huge raised platform in the middle"
+roomDescription = "The corners of the main hall contain an open and barebones common area, along with a large angled pillar supporting the raised platform in the center of this hangar-sized room."
 roomColor = 8
 population = 3
 
@@ -612,7 +605,9 @@ self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, 256 )
 roomName = "Main hall"
 roomID = "main_hallroom9"
-roomDescription = "A very spacious hall with a huge raised platform in the middle"
+roomDescription = "The main hall is an incredibly huge room, circling a large raised platform hanging down in the middle. The towering walls of smoothed over rock keep you contained, although you can barely spot places where staff and guards go about their business far above. Railings keep you from the edge of the cavern leading down, and down the central hole below there are foundation supports, electrical cables, netting, other structural equipment and the lights of the cell blocks below. The ceiling stretches past it all and into the darkness above.
+
+The Laundry room is off to the east here."
 roomColor = 8
 population = 3
 
@@ -621,7 +616,9 @@ self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -128, 128 )
 roomName = "Main hall"
 roomID = "main_hallroom2"
-roomDescription = "A very spacious hall with a huge raised platform in the middle"
+roomDescription = "The main hall is an incredibly huge room, circling a large raised platform hanging down in the middle. The towering walls of smoothed over rock keep you contained, although you can barely spot places where staff and guards go about their business far above. Railings keep you from the edge of the cavern leading down, and down the central hole below there are foundation supports, electrical cables, netting, other structural equipment and the lights of the cell blocks below. The ceiling stretches past it all and into the darkness above. 
+
+The cafeteria has been carved out to the west of here."
 roomColor = 8
 population = 3
 
@@ -630,7 +627,7 @@ self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, 64 )
 roomName = "Main hall"
 roomID = "hall_ne_corner"
-roomDescription = "A very spacious hall with a huge raised platform in the middle"
+roomDescription = "The corners of the main hall contain an open and barebones common area, along with a large angled pillar supporting the raised platform in the center of this hangar-sized room."
 roomColor = 8
 population = 3
 
@@ -639,9 +636,11 @@ self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 0, 320 )
 roomName = "Main hall"
 roomID = "main_hallroom6"
-roomDescription = "A very spacious hall with a huge raised platform in the middle
+roomDescription = "The main hall is an incredibly huge room, circling a large raised platform hanging down in the middle. The towering walls of smoothed over rock keep you contained, although you can barely spot places where staff and guards go about their business far above. Railings keep you from the edge of the cavern leading down, and down the central hole below there are foundation supports, electrical cables, netting, other structural equipment and the lights of the cell blocks below. The ceiling stretches past it all and into the darkness above.
 
-There is a wide corridor here that leads out into the yard area."
+A wide corridor leads south into the yard area, with a large, inviting cargo bulkhead locked open giving you a small view outside.
+
+There are also a set of stairs that lead up to the large raised platform in the center of the starship hanger called a main hall."
 roomColor = 8
 population = 3
 
@@ -650,7 +649,7 @@ self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -192, 256 )
 roomName = "Bathroom"
 roomID = "main_bathroom1"
-roomDescription = "A bunch of sinks in a row with a long mirror above. On the opposite side from them are the toilet stalls and a few urinals"
+roomDescription = "A bunch of sinks line the walls with a long mirror covered by the thick protective plastic barrier covering it from any destructive inmate. Stalls of toilets line the opposite wall. From here the Locker Rooms and Showers lie further in."
 roomSprite = 8
 roomColor = 3
 
@@ -659,7 +658,9 @@ self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -256, 640 )
 roomName = "Bathroom"
 roomID = "main_bathroom2"
-roomDescription = "A bunch of sinks in a row with a long mirror above. On the opposite side from them are the toilet stalls and a few urinals"
+roomDescription = "A bunch of sinks line the walls with a long mirror covered by the thick protective plastic barrier covering it from any destructive inmate. Stalls of toilets line the opposite wall. 
+
+From here the Locker Rooms and Showers lie further in."
 roomSprite = 8
 roomColor = 3
 
@@ -668,7 +669,7 @@ self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -256, 256 )
 roomName = "Dressing room"
 roomID = "main_dressing1"
-roomDescription = "You enter the dressing room. There are many color-coded lockers around and a few bins with fresh towels"
+roomDescription = "A large number of color-coded lockers border the walls with large bins for fresh and dirty towels."
 roomColor = 3
 
 [node name="MainShowerRoom" parent="." index="66" instance=ExtResource( 2 )]
@@ -676,7 +677,7 @@ self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -256, 320 )
 roomName = "Shower"
 roomID = "main_shower1"
-roomDescription = "A room with that has a bunch of shower heads on the walls. Soap doesn't seem to be included"
+roomDescription = "The Showers are rather expansive for what they are, a sequence of walls adorned with shower heads line the tiled room. Soap doesn't seem to be included."
 roomSprite = 7
 roomColor = 3
 
@@ -685,7 +686,7 @@ self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -320, 704 )
 roomName = "Shower"
 roomID = "main_shower2"
-roomDescription = "A room with that has a bunch of shower heads on the walls. Soap doesn't seem to be included"
+roomDescription = "The Showers are rather expansive for what they are, a sequence of walls adorned with shower heads line the tiled room. Soap doesn't seem to be included."
 roomSprite = 7
 roomColor = 3
 
@@ -694,7 +695,7 @@ self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -256, 704 )
 roomName = "Dressing room"
 roomID = "main_dressing2"
-roomDescription = "You enter the dressing room. There are many color-coded lockers around and a few bins with fresh towels"
+roomDescription = "A large number of color-coded lockers border the walls with large bins for fresh and dirty towels."
 roomColor = 3
 
 [node name="MainCanteen" parent="." index="69" instance=ExtResource( 2 )]
@@ -702,7 +703,7 @@ self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -192, 128 )
 roomName = "Canteen"
 roomID = "hall_canteen"
-roomDescription = "You see lots of tables around and a counter where inmates get their food"
+roomDescription = "The Canteen is lined with a large number of tables for inmates to eat at. On the far wall there clearly used to be an actual kitchen, instead the serving counter and a section of the wall have been cut away to make room for a giant nutrient paste machine. What parts of the kitchen remain are filled with vats, pipes, and tubes all connected to the Nutrient Paste machine. "
 canWest = false
 canSouth = false
 roomSprite = 2
@@ -714,7 +715,7 @@ self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 192, 256 )
 roomName = "Laundry"
 roomID = "main_laundry"
-roomDescription = "Half of the room is taken by a row of bulky industrial-looking washing machines. Then your eye spots a few bins with inmate uniforms and a uniform vendor, similliar to the one that you saw during the intake"
+roomDescription = "Half of the room is taken by a row of bulky industrial-looking washing machines. Then your eye spots a few bins with inmate uniforms and a uniform vendor, similliar to the one that you saw during the intake."
 roomSprite = 9
 roomColor = 3
 

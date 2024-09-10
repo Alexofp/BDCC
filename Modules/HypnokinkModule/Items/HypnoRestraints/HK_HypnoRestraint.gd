@@ -36,7 +36,7 @@ func canStruggle():
 func shouldDoStruggleMinigame(_pc):
 	return false
 	
-func doStruggle(_pc, _minigame):
+func doStruggle(_pc, _minigame:MinigameResult):
 	var text = "error?"
 	var lust = 0
 	var pain = 0

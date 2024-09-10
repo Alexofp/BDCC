@@ -52,7 +52,7 @@ func generateTasks():
 	difficultyMin -= max(0.0, naiveStat) * 0.3
 	difficultyMax -= max(0.0, naiveStat) * 0.6
 
-	print("TASK AMOUNT: "+str(tasksAmountFloat)+", Min diff: "+str(Util.roundF(difficultyMin, 2))+", Max diff: "+str(Util.roundF(difficultyMax, 2)))
+	#print("TASK AMOUNT: "+str(tasksAmountFloat)+", Min diff: "+str(Util.roundF(difficultyMin, 2))+", Max diff: "+str(Util.roundF(difficultyMax, 2)))
 	
 	tasks = NpcBreakTaskBase.generateTasksFor(theChar, slaveType, false, tasksAmount, difficultyMin, difficultyMax)
 	for task in tasks:

@@ -111,3 +111,15 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["tease", "hover", "inside", "sex", "fast", "knotinside", "knot", "knotfast"]
+
+func getVarNpcs():
+	return ["pc"]
+
+func getVarOptions():
+	var options = .getVarOptions()
+	
+	options["skipToHover"] = {
+		type = "bool",
+	}
+	
+	return options

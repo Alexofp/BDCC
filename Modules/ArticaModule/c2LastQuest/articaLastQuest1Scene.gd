@@ -150,7 +150,7 @@ func _run():
 
 		saynn("Risha smiles and puts the cracked datapad away.")
 
-		saynn("[say=risha]See~. I'm not a lier. Unlike some. I guess you have some questions for her now, I won't distract you any more~.[/say]")
+		saynn("[say=risha]See~. I'm not a liar. Unlike some. I guess you have some questions for her now, I won't distract you any more~.[/say]")
 
 		saynn("Risha smooches the air, doing a loud lip-smack.. and then walks away, leaving you and Artica alone.")
 

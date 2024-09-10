@@ -60,7 +60,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 					#chance = getApologySuccessChance(_domInfo, _subInfo),
 				})
 	
-	if(sub.getInventory().hasRemovableRestraints() && sub.getStamina() > 0):
+	if(sub.getInventory().hasRemovableRestraintsNoLockedSmartlocks() && sub.getStamina() > 0):
 		actions.append({
 			name = "Restraints",
 			desc = "Struggle against your restraints",
@@ -114,7 +114,7 @@ func startActivity(_args):
 		for item in getSub().getInventory().getEquppedRestraints():
 			var restraintData: RestraintData = item.getRestraintData()
 			
-			if(restraintData == null || !restraintData.canStruggle()):
+			if(restraintData == null || !restraintData.canStruggleFinal()):
 				continue
 			
 			if(!restraintData.shouldDoStruggleMinigame(sub)):
@@ -123,29 +123,36 @@ func startActivity(_args):
 				possible.append(item)
 		
 		var pickedItem
-		var minigameStatus
+		var minigameResult
 		if(trivial.size() > 0):
 			pickedItem = RNG.pick(trivial)
-			minigameStatus = 1.0
+			minigameResult = MinigameResult.new()
+			minigameResult.score = 1.0
 		elif(possible.size() > 0):
 			pickedItem = RNG.pick(possible)
-			minigameStatus = min(RNG.randf_range(0.6, 1.1), 1.0)
+			minigameResult = getSub().getRestraintStrugglingMinigameResult()
+			
 			if(subInfo.isScared()): # The subs fuck up more if scared
-				minigameStatus = min(minigameStatus, min(1.0, RNG.randf_range(0.6, 1.1)))
+				minigameResult.score = min(minigameResult.score, min(1.0, RNG.randf_range(0.6, 1.1)))
 		else:
 			return
 		
 		var text = ""
 		var restraintData: RestraintData = pickedItem.getRestraintData()
-		var struggleData = restraintData.doStruggle(sub, minigameStatus)
+		var struggleData = restraintData.doStruggle(sub, minigameResult)
 		
 		var struggleText = GM.ui.processString(struggleData["text"], {"user":subID})
 		text += struggleText
 		
 		if(struggleData.has("damage")):
-			var damage = struggleData["damage"] * minigameStatus
+			var damage = struggleData["damage"]
 			restraintData.takeDamage(damage)
-			text += ("\n{sub.You} made "+str(Util.roundF(damage*100.0, 1))+"% of progress, "+str(Util.roundF(max(0.0, restraintData.getTightness()*100.0), 1))+"% left.")
+			if(damage > 0.0):
+				text += ("\n{sub.You} made "+str(Util.roundF(damage*100.0, 1))+"% of progress, "+str(Util.roundF(max(0.0, restraintData.getTightness()*100.0), 1))+"% left.")
+			elif(damage < 0.0):
+				text += ("\n{sub.You} lost "+str(Util.roundF(abs(damage)*100.0, 1))+"% of progress, "+str(Util.roundF(max(0.0, restraintData.getTightness()*100.0), 1))+"% left.")
+			else:
+				text += ("\n{sub.You} made no progress, "+str(Util.roundF(max(0.0, restraintData.getTightness()*100.0), 1))+"% left.")
 		if(struggleData.has("lust") && struggleData["lust"] > 0):
 			subInfo.addLust(struggleData["lust"])
 		if(struggleData.has("pain") && struggleData["pain"] > 0):

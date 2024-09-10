@@ -5,6 +5,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.1.5] - 2024-08-02
+### Added
+- Added ability to create scenes and quests with datapacks! Give your characters whole storylines or just a unique encounter or two, the new system is very flexible. No need to pull your hair out with the godot editor, new scenes/quests could be created entirely from inside the game. No need to learn complicated scripting languages, I coded a simple (but powerful) visual system where you create scenes by assembling them out of blocks (Scratch-like system).
+- [Scene/quest editor](https://github.com/user-attachments/assets/9d08c8fc-e7b6-4357-97d5-09a1678673f4). Packed full of little features that should save you, the creators, your time and nerves. See your scene running in-game with just one button press. Built-in spell checker. Ability to save and reuse whole blocks of.. blocks. Simple undo-redo system. Lots of little sub-windows that will help you add bbcodes into your text, choose animations and locations. If you want to learn how to use this editor to create scenes, I wrote a [tutorial](https://github.com/Alexofp/BDCC/wiki/Datapack-scene-creator-tutorial) that will hopefully help you get started. There is also a page that contains some [advanced topics](https://github.com/Alexofp/BDCC/wiki/Datapack-scene-creator.-Advanced-stuff) like how to start fights or do hand-written sex scenes.
+- Ability to reload datapacks. This will reset the characters to their initial datapack state while keeping some stuff like their slavery status. Useful if datapack got updated.
+- You can now choose which mods and datapacks your datapack depends on. Missing dependencies will be seen as red for the users. (If you have submitted any datapacks that use mods, it would be great if you'd re-submit them with the required mods specified)
+- Skins added by the datapacks now display their author and datapack id.
+- Datapack characters got more settings. Can make them feel more scripted by excluding them from encounters. Can make them struggle out of restraints better or worse.
+- (All contributed by AverageAce) Better room descriptions, Announcer sells more bdsm restraints, Alex/Risha/Eliza got unique features shown on their dolls (Alex's spine, Risha's piercings, Eliza's necklace), better sheath sprite.
+- (Sprites by MaxMaxouCat) Alternative nurse uniform with crocs. Nurses will spawn with one or the other.
+- Added critical failures to the struggling minigame that make the gear sit more tightly on you.
+- [Smart locks](https://github.com/user-attachments/assets/3fdbe411-fb85-4b46-b766-7afbb7c28570)! When tying you up, NPC's now might add one of 3 possible smart locks onto the locked gear, making struggling out of them impossible. The frequency of this can be changed in the settings. The 3 types of smart locks are:
+- Tight lock. Can only be unlocked by using multiple restraint keys.
+- SlutLock (tm). The most frequent smart-lock. Can only be unlocked by completing a task (or tasks) that the lock gave you. As you can guess, it gives you some very slutty tasks..
+- Keyholder lock. You must beat-up the person who locked you to get the unique key required to open the smart-lock.
+- Restraint keys are now illegal and are only sold by Announcer at a 3x price. But you will also loot more restraint keys if you have any smart locks on you.
+
+### Changed
+- Images (skins/portraits) stored inside datapacks will be loaded only when needed, hopefully speeding up datapack loading.
+- Code for the struggling minigame/system got refactored and cleaned up.
+- Can now export datapacks from the web version.
+
+### Fixed
+- Datapack characters should now spawn with full balls.
+- Datapacks that have ID that's different from the filename should now work better and be delete-able.
+- Taypo down. 69+ more to go.
+
 ## [0.1.4] - 2024-07-01
 ### Added
 - [Artica Sparkle](https://github.com/Alexofp/BDCC/assets/14040378/0e38161d-02a3-4e77-b82a-8be539b56149) arrives to BDCC! She is the star of this update, an extremely shy fluff.. but you know what they say about the shy ones.. You can find Artica going through her intake process by hanging around near the checkpoint (player level required 10+). Help her adjust to her new prison life and find out about how such a shy girl managed to ended up in such a dark place.
@@ -414,7 +441,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.4...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.5...main
+[0.1.5]: https://github.com/Alexofp/BDCC/compare/0.1.4...0.1.5
 [0.1.4]: https://github.com/Alexofp/BDCC/compare/0.1.3...0.1.4
 [0.1.3]: https://github.com/Alexofp/BDCC/compare/0.1.2...0.1.3
 [0.1.2]: https://github.com/Alexofp/BDCC/compare/0.1.1...0.1.2

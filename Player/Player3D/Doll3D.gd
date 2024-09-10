@@ -382,7 +382,10 @@ func setBreastsScale(breastsScale: float):
 	var mul = 0.0
 	if(breastsScale <= 1.2):
 		mul = max(1.2 - breastsScale, 0.0)
-	setBoneScaleAndOffset("DeformBreasts", breastsScale, Vector3(0.18713, 0.199727, 0.0)*mul)
+	if(mul < 1.0):
+		setBoneScaleAndOffset("DeformBreasts", breastsScale, Vector3(0.18713, 0.399727, 0.0)*mul)
+	else:
+		setBoneScaleAndOffset("DeformBreasts", breastsScale, Vector3(0.18713, 0.199727, 0.0)*mul)
 	breastsJiggleBone.stiffness = min(1.0, 0.16 / max(0.1, breastsScale))
 
 func setPregnancy(progress: float):
@@ -767,7 +770,7 @@ func applyBodyState(bodystate):
 	var newChains = []
 	if(bodystate.has("chains")):
 		newChains = bodystate["chains"]
-	if(bodystate.has("leashedBy")):
+	if(bodystate.has("leashedBy") && bodystate["leashedBy"] != null && bodystate["leashedBy"] != ""):
 		newChains.append(["normal", "neck", "npc", bodystate["leashedBy"], "hand.L"])
 	sceneChains = newChains
 	
@@ -825,7 +828,10 @@ func updateChains():
 			var otherDolls = get_parent().getDolls()
 			
 			for otherDoll in otherDolls:
-				if(otherDoll.savedCharacterID == chainInfo[3]):
+				var otherDollID = otherDoll.savedCharacterID
+				if(!(otherDollID is String)):
+					otherDollID = otherDollID.getID()
+				if(otherDollID == chainInfo[3]):
 					var otherZoneID = chainInfo[4]
 					if(otherDoll.dollAttachmentZones.has(otherZoneID)):
 						targetObjects = otherDoll.dollAttachmentZones[otherZoneID]

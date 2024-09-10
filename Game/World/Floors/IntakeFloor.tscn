@@ -7,6 +7,8 @@
 
 [node name="IntakeFloorRoom" parent="." index="0" instance=ExtResource( 1 )]
 position = Vector2( -64, -64 )
+roomName = "Hangar"
+roomID = "intro_hangar1"
 
 [node name="IntakeFloorRoom2" parent="." index="1" instance=ExtResource( 1 )]
 position = Vector2( 0, -64 )
@@ -15,10 +17,14 @@ roomID = "intro_arrive"
 
 [node name="IntakeFloorRoom3" parent="." index="2" instance=ExtResource( 1 )]
 position = Vector2( 64, -64 )
+roomName = "Hangar"
+roomID = "intro_hangar2"
 
 [node name="IntakeFloorRoom4" parent="." index="3" instance=ExtResource( 1 )]
 self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( 64, 0 )
+roomName = "Hangar"
+roomID = "intro_hangar4"
 roomColor = 2
 
 [node name="IntakeFloorRoom5" parent="." index="4" instance=ExtResource( 1 )]
@@ -31,30 +37,41 @@ roomColor = 2
 [node name="IntakeFloorRoom6" parent="." index="5" instance=ExtResource( 1 )]
 self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( -64, 0 )
+roomName = "Hangar"
+roomID = "intro_hangar3"
 roomColor = 2
 
 [node name="IntakeFloorRoom7" parent="." index="6" instance=ExtResource( 1 )]
 position = Vector2( 0, 64 )
+roomName = "Corridor"
+roomID = "intro_corridor1"
 
 [node name="IntakeFloorRoom8" parent="." index="7" instance=ExtResource( 1 )]
 position = Vector2( 0, 128 )
+roomName = "Corridor"
+roomID = "intro_corridor2"
 
 [node name="IntakeFloorRoom9" parent="." index="8" instance=ExtResource( 1 )]
 position = Vector2( 64, 128 )
+roomName = "Corridor"
+roomID = "intro_corridor3"
 
 [node name="IntakeFloorRoom10" parent="." index="9" instance=ExtResource( 1 )]
 position = Vector2( 128, 128 )
+roomName = "Corridor"
 roomID = "intro_intakearea"
 
 [node name="IntakeFloorRoom11" parent="." index="10" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 128, 192 )
+roomName = "Corridor"
 roomID = "intro_nearshower"
 roomColor = 3
 
 [node name="IntakeFloorRoom12" parent="." index="11" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 192, 192 )
+roomName = "Shower corridor"
 roomID = "intro_shower"
 canNorth = false
 canSouth = false
@@ -62,27 +79,35 @@ roomColor = 3
 
 [node name="IntakeFloorRoom13" parent="." index="12" instance=ExtResource( 1 )]
 position = Vector2( 192, 128 )
+roomName = "Corridor"
+roomID = "intro_corridor4"
 
 [node name="IntakeFloorRoom14" parent="." index="13" instance=ExtResource( 1 )]
 position = Vector2( 256, 128 )
+roomName = "Corridor"
+roomID = "intro_corridor5"
 
 [node name="IntakeFloorRoom15" parent="." index="14" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 256, 192 )
+roomName = "Corridor"
 roomID = "intro_aftershower"
 roomColor = 3
 
 [node name="IntakeFloorRoom16" parent="." index="15" instance=ExtResource( 1 )]
 position = Vector2( 320, 128 )
-roomName = "intro_beforemedical"
+roomName = "Corridor"
+roomID = "intro_beforemedical"
 
 [node name="IntakeFloorRoom17" parent="." index="16" instance=ExtResource( 1 )]
 position = Vector2( 384, 128 )
+roomName = "Corridor"
 roomID = "intro_beforeelevator"
 
 [node name="IntakeFloorRoom18" parent="." index="17" instance=ExtResource( 1 )]
 self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( 384, 64 )
+roomName = "Elevator"
 roomID = "intro_elevator"
 roomSprite = 3
 roomColor = 2

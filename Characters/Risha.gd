@@ -202,4 +202,4 @@ func reactRestraint(restraintType, restraintAmount, isGettingForced):
 	return null
 
 func getDefaultEquipment():
-	return ["GuardArmor"]
+	return ["GuardArmor", "RishaPiercings"]
