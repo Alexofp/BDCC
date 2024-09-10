@@ -301,6 +301,7 @@ func after_sleep_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func after_tip_text():
 	saynn("Just before leaving, {user.name} decides to add to the tipbox..")
+	sayLine("user", "SlutwallAddTip", {main="user", target="inmate"})
 	saynn("The tipbox now has.. "+str(tips)+" credits in it. {inmate.name} will be able to get to them.. after freeing {inmate.himself}..")
 
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
@@ -313,7 +314,7 @@ func after_tip_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func after_steal_tips_text():
 	saynn("{user.name} decides to break into the tipbox and take all of it!")
-	saynn("[say=user]A WHORE LIKE YOU DOESN'T DESERVE THIS.[/say]")
+	sayLine("user", "SlutwallStealCredits", {main="user", target="inmate"})
 	saynn("Wow..")
 
 	addAction("continue", "Continue", "Wow.. Here go your creds..", "default", 1.0, 60, {})

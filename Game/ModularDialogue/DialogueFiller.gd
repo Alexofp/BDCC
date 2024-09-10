@@ -33,3 +33,13 @@ func getChar(_args:Dictionary, argID:String) -> BaseCharacter:
 	if(!_args.has(argID)):
 		return null
 	return _args[argID]
+
+func getCharID(_args:Dictionary, argID:String) -> String:
+	if(!_args.has(argID)):
+		return ""
+	return _args[argID].getID()
+
+func getVar(_args:Dictionary, argID:String, _defaultValue = null):
+	if(!_args.has(argID)):
+		return _defaultValue
+	return _args[argID]

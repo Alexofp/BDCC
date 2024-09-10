@@ -12,7 +12,7 @@ func start(_pawns:Dictionary, _args:Dictionary):
 
 func init_text():
 	saynn("{starter.name} sways uncomfortably.")
-	saynn("[say=starter]HEY, CAN YOU UNLOCK ME?[/say]")
+	sayLine("starter", "AskKeyCanYouUnlock", {main="starter", target="reacter"})
 
 	addAction("give_key", "Give key", "Just give them the key..", "help", 0.5, 60, {})
 	addAction("sex_challenge", "Sex challenge", "Give them they key.. but only if they become your sex toy and satisfy you", "sexDom", 3.0, 60, {})
@@ -35,7 +35,7 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func denied_request_text():
 	saynn("{reacter.name} thinks about it for a second.. and then shakes {reacter.his} head.")
-	saynn("[say=reacter]MAYBE LATER.[/say]")
+	sayLine("reacter", "AskKeyDeny", {main="reacter", target="starter"})
 	saynn("Looks like {starter.you} {starter.youAre}n't getting that key from {reacter.him}.. willingly.")
 
 	addAction("leave", "Leave", "Oh well.. whatever..", "surrender", 1.0, 60, {})
@@ -61,7 +61,7 @@ func denied_leave_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func gave_key_text():
 	saynn("{reacter.name} thinks about it for a second..")
-	saynn("[say=reacter]FINE.[/say]")
+	sayLine("reacter", "AskKeyGive", {main="reacter", target="starter"})
 	saynn("{reacter.YouHe} {reacter.youVerb('approach', 'aproaches')} {starter.you} and unlocks the smart-locked gear with {reacter.yourHis} unique key..")
 	saynn("Freedom..")
 
@@ -74,7 +74,7 @@ func gave_key_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func sex_challenge_start_text():
 	saynn("{reacter.name} thinks about it for a second..")
-	saynn("[say=reacter]TELL YOU WHAT.. I'M GONNA FUCK YOU. AND IF YOU'RE GONNA BE A GOOD FUCKTOY.. I MIGHT GIVE YOU THE KEY.[/say]")
+	sayLine("reacter", "AskKeyChallenge", {main="reacter", target="starter"})
 	saynn("Looks like {starter.you} {starter.youAre}n't getting that key unless {starter.youHe} {starter.youVerb('let')} {reacter.you} fuck {starter.youHim}..")
 
 	addAction("submit", "Submit", "Let it happen..", "sexSub", 1.0, 300, {start_sex=["reacter", "starter", SexType.DefaultSex, {bondageDisabled=true}],})
@@ -93,7 +93,7 @@ func sex_challenge_after_sex_text():
 	saynn("{reacter.name}'s satisfaction was.. "+str(Util.roundF(domSatisfaction*100.0, 1))+"%")
 
 	addAction("unlock_them", "Unlock them", "They served you well.", "default", max(domSatisfaction, 0.01), 60, {})
-	addAction("deny", "Deny", "That wasn't good enough.", "punishMean", 0.1 if domSatisfaction >= 0.69 else (1.0 - domSatisfaction), 60, {})
+	addAction("deny", "Deny", "That wasn't good enough.", "punishMean", 0.1 if domSatisfaction >= 0.89 else (1.0 - min(domSatisfaction, 0.6)), 60, {})
 
 func sex_challenge_after_sex_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "unlock_them"):
@@ -110,7 +110,7 @@ func sex_challenge_after_sex_do(_id:String, _args:Dictionary, _context:Dictionar
 
 func sex_challenge_unlock_text():
 	saynn("{reacter.name} decides to unlock {starter.your} smart-locked restraints with {reacter.his} unique key..")
-	saynn("[say=reacter]GOOD SLUT, I LIKED THAT.[/say]")
+	sayLine("reacter", "AskKeyChallengeUnlock", {main="reacter", target="starter"})
 	saynn("Freedom, yay.")
 
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
@@ -122,7 +122,7 @@ func sex_challenge_unlock_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func sex_challenge_denied_text():
 	saynn("{reacter.name} shakes {reacter.his} head.")
-	saynn("[say=reacter]THAT SUCKED. YOU STAY LOCKED, WHORE.[/say]")
+	sayLine("reacter", "AskKeyChallengeFail", {main="reacter", target="starter"})
 	saynn("Looks like {starter.you} {starter.youAre}n't getting unlocked..")
 
 	addAction("leave", "Leave", "Oh well..", "default", 1.0, 60, {})
@@ -138,9 +138,9 @@ func sex_challenge_denied_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func sex_challenge_refused_text():
 	saynn("{starter.You} {starter.youVerb('shake')} {starter.yourHis} head.")
-	saynn("[say=starter]I REFUSE.[/say]")
+	sayLine("starter", "AskKeyChallengeRefuse", {main="starter", target="reacter"})
 	saynn("{reacter.name} shrugs.")
-	saynn("[say=reacter]Stay locked then, like I care.[/say]")
+	sayLine("reacter", "AskKeyChallengeRefuseStay", {main="reacter", target="starter"})
 
 	addAction("leave", "Leave", "Oh well..", "default", 1.0, 60, {})
 	addAction("attack", "Attack", "You're getting that key!", "fight", 1.0, 60, {})

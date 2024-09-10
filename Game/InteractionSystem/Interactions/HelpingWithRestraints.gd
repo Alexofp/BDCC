@@ -21,6 +21,7 @@ func start(_pawns:Dictionary, _args:Dictionary):
 
 func init_text():
 	saynn("{starter.You} {starter.youAre} asking for help, wiggling {starter.yourHis} restraints..")
+	sayLine("starter", "HelpRestraintsAsk", {main="starter", target="reacter"})
 
 	if(getRoleChar("reacter").getStamina() > 0 && !getRoleChar("reacter").hasBlockedHands() && !getRoleChar("reacter").hasBoundArms()):
 		addAction("agree", "Agree", "Agree to help them with their restraints", "help", 1.0, 60, {})
@@ -40,11 +41,11 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func restraints_agree_text():
 	if(!reacterStarted):
-		saynn("{reacter.name} nods.")
-		saynn("[say=reacter]LET'S SEE..[/say]")
+		saynn("{reacter.name} nods and starts tugging on {starter.your} restraints.")
+		sayLine("reacter", "HelpRestraintsAgree", {main="reacter", target="starter"})
 	else:
 		saynn("{reacter.name} looks at {starter.your} restraints.")
-		saynn("[say=reacter]LET ME HELP.[/say]")
+		sayLine("reacter", "HelpRestraintsAltStart", {main="reacter", target="starter"})
 
 	addAction("help", "Help", "Start helping..", "default", 1.0, 60, {})
 
@@ -59,7 +60,7 @@ func restraints_agree_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func restraints_deny_text():
 	saynn("{reacter.name} shakes {reacter.his} head.")
-	saynn("[say=reacter]NO, CAN'T DO.[/say]")
+	sayLine("reacter", "HelpRestraintsDeny", {main="reacter", target="starter"})
 
 	addAction("continue", "Continue", "Oh well..", "default", 1.0, 60, {})
 
@@ -95,7 +96,7 @@ func restraints_helping_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func restraints_enough_text():
 	saynn("{reacter.name} stops helping {starter.you}.")
-	saynn("[say=reacter]That's all that I can do.[/say]")
+	sayLine("reacter", "HelpRestraintsFinished", {main="reacter", target="starter"})
 	saynn("And just like that, {reacter.youHe} {reacter.youVerb('leave')} {starter.youHim} alone..")
 
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
@@ -108,7 +109,7 @@ func restraints_enough_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func restraints_ask_credits_text():
 	saynn("{reacter.name} stops helping {starter.you}.")
-	saynn("[say=reacter]That's all that I can do.[/say]")
+	sayLine("reacter", "HelpRestraintsFinished", {main="reacter", target="starter"})
 	saynn("But before {reacter.youHe} {reacter.youVerb('leave')}..")
 	saynn("[say=reacter]That will be.. "+str(askCredits)+" credits.[/say]")
 	saynn("Wow, looks like {reacter.yourHis} help wasn't free after all..")
@@ -133,7 +134,7 @@ func restraints_ask_credits_do(_id:String, _args:Dictionary, _context:Dictionary
 
 func restraints_paid_text():
 	saynn("{starter.You} {starter.youVerb('decide')} to just pay the credits..")
-	saynn("[say=reacter]THANKS. I WILL GO NOW.[/say]")
+	sayLine("reacter", "HelpRestraintsPaid", {main="reacter", target="starter"})
 
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
 
@@ -145,7 +146,7 @@ func restraints_paid_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func restraints_refusedpay_text():
 	saynn("{starter.name} refuses to pay!")
-	saynn("[say=starter]YOU DIDN'T EVEN DO THAT MUCH.[/say]")
+	sayLine("starter", "HelpRestraintsRefusePay", {main="starter", target="reacter"})
 
 	addAction("whatever", "Whatever", "Just leave", "surrender", 1.0, 60, {})
 	addAction("attack", "Attack", "Make them pay", "fight", 1.0, 60, {})
@@ -160,7 +161,7 @@ func restraints_refusedpay_do(_id:String, _args:Dictionary, _context:Dictionary)
 
 func restraints_refusedwhatever_text():
 	saynn("{reacter.name} huffs.")
-	saynn("[say=reacter]WHATEVER THEN.[/say]")
+	sayLine("reacter", "HelpRestraintsRefusePayWhatever", {main="reacter", target="starter"})
 
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
 

@@ -47,8 +47,8 @@ func found_client_text():
 		saynn("{main.name} calls {client.you} to get closer..")
 	else:
 		saynn("{client.name} approaches {main.you}..")
-	saynn("[say=main]WANNA HAVE A GOOD TIME?[/say]")
-	saynn("[say=client]WHAT'S THE OFFER?[/say]")
+	sayLine("main", "ProstitutionStart", {main="main", target="client"})
+	sayLine("client", "ProstitutionOffer", {main="client", target="main"})
 
 	addAction("usual", "Usual", "Let them fuck you any way they want for relatively cheap..", "sexSub", 1.0, 60, {})
 	if(roleCanStartSex("main") && hasRepLevelPC("main", RepStat.Whore, 4)):
@@ -59,6 +59,7 @@ func found_client_text():
 		addAction("pricy_slut", "Pricy slut", "Ask for a lot of credits to let them fuck you.. You will have to really satisfy them though..", "resist", 1.0, 60, {})
 	else:
 		addDisabledAction("Pricy slut", "Your whore reputation is not high enough for this..")
+	addAction("cancel", "Cancel", "You changed your mind, you don't wanna service them", "default", 0.0, 60, {})
 
 func found_client_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "usual"):
@@ -76,15 +77,20 @@ func found_client_do(_id:String, _args:Dictionary, _context:Dictionary):
 		askCreds = getRolePawn("main").getProstitutionCreditsCost(getRolePawn("client"), 3.0)
 		slutDom = false
 		setState("giving_offer", "client")
+	if(_id == "cancel"):
+		setState("cancelled_service", "main")
+		affectAffection("client", "main", -0.05)
 
 
 func giving_offer_text():
+	saynn("{main.name} winks.")
 	if(askType=="usual"):
-		saynn("[say=main]THE USUAL. "+str(askCreds)+" credits.[/say]")
+		sayLine("main", "ProstitutionUsual", {main="main", target="client"}, {credits=askCreds})
 	elif(askType=="service"):
-		saynn("[say=main]I CAN BE IN CHARGE AND MAKE YOU FEEL REAL GOOD. "+str(askCreds)+" credits.[/say]")
+		sayLine("main", "ProstitutionServiceDom", {main="main", target="client"}, {credits=askCreds})
+		saynn("Looks like {main.name} is offering to be a dom..")
 	elif(askType=="pricy"):
-		saynn("[say=main]I'M EXPENSIVE. BUT I'M WORHT IT. "+str(askCreds)+" credits.[/say]")
+		sayLine("main", "ProstitutionPricySlut", {main="main", target="client"}, {credits=askCreds})
 
 	if(!getRolePawn("client").isPlayer() || GM.pc.getCredits() >= askCreds):
 		addAction("agree", "Agree", "Give them the credits and do the thing", "agreeSexWithSlut", 1.0, 60, {})
@@ -109,8 +115,8 @@ func giving_offer_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func offer_denied_text():
-	saynn("[say=client]I'D RATHER NOT.[/say]")
-	saynn("[say=main]WHATEVER THEN.[/say]")
+	sayLine("client", "ProstitutionDenied", {main="client", target="main"})
+	sayLine("main", "ProstitutionDeniedWhatever", {main="main", target="client"})
 
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
 
@@ -124,7 +130,7 @@ func offer_denied_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func offer_accepted_text():
 	saynn("{client.name} hands {main.you} the creds.")
-	saynn("[say=client]ALRIGHT.[/say]")
+	sayLine("client", "ProstitutionAccept", {main="client", target="main"})
 	saynn("Time for the fun part..")
 
 	addAction("sex", "Sex", "Prepare to do this..", "default", 1.0, 60, {})
@@ -139,7 +145,8 @@ func offer_accepted_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func about_to_sex_text():
-	saynn("SEX IS ABOUT TO HAPPEN.")
+	saynn("The pair gets out of the way of others..")
+	saynn("{main.name} pulls {client.you} closer for some sexy time..")
 
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {start_sex=["main" if slutDom else "client", "client" if slutDom else "main"],})
 
@@ -183,7 +190,8 @@ func client_leaving_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func client_demands_credits_text():
-	saynn("[say=client]THAT SUCKED. GIVE ME CREDITS BACK.[/say]")
+	sayLine("client", "ProstitutionDemandCreds", {main="client", target="main"})
+	saynn("The client is clearly angry..")
 
 	addAction("return_creds", "Return creds", "You won't be missing them anyway", "surrender", 1.0, 60, {})
 	addAction("refuse", "Refuse", "", "fight", 1.0, 60, {})
@@ -216,7 +224,8 @@ func client_got_credits_back_do(_id:String, _args:Dictionary, _context:Dictionar
 
 
 func slut_refused_creds_back_text():
-	saynn("[say=main]I'M NOT GIVING YOU THE CREDS, FUCK OFF.[/say]")
+	sayLine("main", "ProstitutionRefuseReturnCreds", {main="main", target="client"})
+	saynn("The situation is quickly getting heated..")
 
 	addAction("whatever", "Whatever", "Let them keep the creds", "surrender", 1.0, 60, {})
 	addAction("attack", "Attack", "Try to get them back forcefully..", "fight", 1.0, 60, {})
@@ -241,6 +250,7 @@ func client_leaving_grumbly_do(_id:String, _args:Dictionary, _context:Dictionary
 
 func client_attacked_slut_text():
 	saynn("{client.name} decides to attack {main.you}!")
+	sayLine("client", "AttackStart", {main="client", target="main"})
 
 	addAction("fight", "Fight", "Time to fight back..", "default", 1.0, 600, {start_fight=["client", "main"],})
 
@@ -313,9 +323,10 @@ func slut_won_kick_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func slut_scam_text():
-	saynn("[say=main]YOU KNOW WHAT.. I DECIDED TO RAISE THE PRICE. 5 MORE CREDS PLEASE.[/say]")
-	saynn("[say=client]ARE YOU SERIOUS?[/say]")
+	sayLine("main", "ProstitutionScam", {main="main", target="client"})
+	saynn("[say=client]Are you serious?[/say]")
 	saynn("[say=main]Pay up or leave.[/say]")
+	saynn("Looks like {main.your} services have just gotten more expensive..")
 
 	if(!getRolePawn("client").isPlayer() || GM.pc.getCredits() >= 5):
 		addAction("pay", "Pay", "Add 5 more credits on top", "surrender", 1.0, 60, {})
@@ -336,6 +347,20 @@ func slut_scam_do(_id:String, _args:Dictionary, _context:Dictionary):
 		setState("client_leaving_grumbly", "client")
 	if(_id == "demand_creds_back"):
 		setState("client_demands_credits", "main")
+
+
+func cancelled_service_text():
+	saynn("{main.You} {main.youVerb('decide')} to change {main.yourHis} mind at the last second.")
+	saynn("[say=main]Sorry, I changed my mind.[/say]")
+	saynn("[say=client]Alright, whatever.[/say]")
+
+	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
+
+func cancelled_service_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		getRolePawn("client").afterFailedSocialInteraction()
+		doRemoveRole("client")
+		setState("", "main")
 
 
 func getInterruptActions(_pawn:CharacterPawn) -> Array:

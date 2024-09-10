@@ -32,5 +32,5 @@ func checkArgs(_args:Dictionary):
 			
 			if(!(argVal is BaseCharacter)):
 				return [false, "Wrong argument type for "+str(argID)+", character required, got "+str(argVal)]
-	
+		
 	return [true]

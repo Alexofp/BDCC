@@ -205,6 +205,7 @@ func about_to_shout_text():
 		saynn("{inmate.You} {inmate.youAre} gagged but {inmate.youHe} still {inmate.youVerb('try', 'tries')} to get some attention by wiggling {inmate.yourHis} body..")
 	else:
 		saynn("{inmate.You} {inmate.youVerb('try', 'tries')} to shout to get someone's attention..")
+		sayLine("inmate", "StocksShout", {main="inmate"})
 
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 180, {})
 

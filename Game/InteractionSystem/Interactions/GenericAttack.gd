@@ -15,7 +15,9 @@ func start(_pawns:Dictionary, _args:Dictionary):
 
 func init_text():
 	saynn("{starter.You} {starter.youVerb('attack')} {reacter.you}!")
-	saynn("[say=starter]I WILL FUCK YOU UP![/say]")
+	sayLine("starter", "AttackStart", {main="starter", target="reacter"})
+	if(RNG.chance(50)):
+		sayLine("reacter", "AttackReact", {main="reacter", target="starter"})
 
 	addAction("fight", "Fight", "Fight back", "fight", 1.0, 300, {start_fight=["starter", "reacter"],})
 	addAction("surrender", "Surrender", "It's not worth it!", "surrender", 1.0, 60, {})
@@ -39,8 +41,13 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 func starter_won_text():
 	if(!surrendered):
 		saynn("{starter.name} won the fight! {reacter.name} hits the floor, unable to continue fighting..")
+		if(RNG.chance(50)):
+			sayLine("reacter", "FightLostGeneric", {loser="reacter", winner="starter"})
+		else:
+			sayLine("starter", "FightWonGeneric", {winner="starter", loser="reacter"})
 	else:
 		saynn("{reacter.name} decides to surrender instantly..")
+		sayLine("reacter", "FightSurrender", {loser="reacter", winner="starter"})
 	if(askCredits > 0):
 		saynn("{starter.You} {starter.youVerb('fetch', 'fetches')} "+str(askCredits)+" credits from {reacter.you}..")
 
@@ -67,8 +74,13 @@ func starter_won_leave_do(_id:String, _args:Dictionary, _context:Dictionary):
 func reacter_won_text():
 	if(!surrendered):
 		saynn("{reacter.name} won the fight! {starter.name} hits the floor, unable to continue fighting..")
+		if(RNG.chance(50)):
+			sayLine("starter", "FightLostGeneric", {loser="starter", winner="reacter"})
+		else:
+			sayLine("reacter", "FightWonGeneric", {winner="reacter", loser="starter"})
 	else:
 		saynn("{starter.name} decides to surrender instantly..")
+		sayLine("starter", "FightSurrender", {loser="starter", winner="reacter"})
 
 	addAction("punish", "Punish", "Punish them for attacking you!", "punish", 1.0, 60, {})
 	addAction("leave", "Leave", "Just leave", "surrender", 1.0, 60, {})

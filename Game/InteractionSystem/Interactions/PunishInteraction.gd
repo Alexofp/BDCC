@@ -71,7 +71,7 @@ func about_to_sex_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func about_to_subsex_text():
 	saynn("{punisher.name} submits to {target.you}..")
-	saynn("[say=punisher]DO WHATEVER YOU WANT WITH ME.[/say]")
+	sayLine("punisher", "PunishSubSex", {punisher="punisher", target="target"})
 
 	addAction("sex", "Sex", "Start the sex", "default", 1.0, 300, {start_sex=["target", "punisher"],})
 
@@ -140,7 +140,7 @@ func just_leaving_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func about_to_slutwall_text():
 	saynn("{punisher.name} clips a leash to {target.your} collar.")
-	saynn("[say=punisher]SLUTWALL. SLUT. WALL.[/say]")
+	sayLine("punisher", "PunishDecidedSlutwall", {punisher="punisher", target="target"})
 
 	addAction("escort", "Escort", "Escort them towards the slutwall", "default", 1.0, 60, {})
 
@@ -176,7 +176,7 @@ func about_to_lock_slutwall_do(_id:String, _args:Dictionary, _context:Dictionary
 
 func in_slutwall_text():
 	saynn("{punisher.name} locks {target.name} into the slutwall!")
-	saynn("[say=punisher]ENJOY![/say]")
+	sayLine("punisher", "PunishLockIntoSlutwall", {punisher="punisher", target="target"})
 
 	addAction("leave", "Leave", "Leave them be", "default", 1.0, 30, {})
 

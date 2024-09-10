@@ -1140,10 +1140,13 @@ func runScene(sceneid: String, args = [], tag = ""):
 	var scene = GM.main.runScene(sceneid, args)
 	scene.sceneTag = tag
 
-func sayLine(role:String, lineID:String, args:Dictionary):
+func sayLine(role:String, lineID:String, args:Dictionary, actualArgs:Dictionary = {}):
 	var processedArgs = {}
 	for argID in args: # Assumes all the args are characters
 		processedArgs[argID] = getRoleID(args[argID])
+	if(!actualArgs.empty()):
+		for argID in actualArgs:
+			processedArgs[argID] = actualArgs[argID]
 	
 	saynn("[say="+role+"]"+ModularDialogue.generate(lineID, processedArgs)+"[/say]")
 
