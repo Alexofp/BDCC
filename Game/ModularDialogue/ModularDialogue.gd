@@ -80,7 +80,8 @@ func generate(ID:String, _args:Dictionary, _defaultText:String = "") -> String:
 			var priority:int = filler.getPriority(ID)
 			if(priority < curPrio):
 				continue
-			if(!filler.canBeUsed(ID, _args)):
+			
+			if(!filler.canBeUsed(ID, _args, theForm)):
 				continue
 			var newLines:Array = filler.getTextsFinal(ID, _args)
 			if(newLines.size() <= 0):
@@ -114,7 +115,7 @@ func generate(ID:String, _args:Dictionary, _defaultText:String = "") -> String:
 			var priority:int = adder.getPriority(ID)
 			if(priority < curPrio):
 				continue
-			if(!adder.canBeUsed(ID, _args)):
+			if(!adder.canBeUsed(ID, _args, theForm)):
 				continue
 			possibleAdders.append(adder)
 		

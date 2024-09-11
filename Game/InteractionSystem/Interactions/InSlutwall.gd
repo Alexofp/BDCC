@@ -16,7 +16,7 @@ func start(_pawns:Dictionary, _args:Dictionary):
 
 func init_text():
 	saynn("{inmate.You} {inmate.youAre} stuck in the slutwall. {inmate.YouHe} {inmate.youAre} completely helpless with {inmate.yourHis} {inmate.thick} {butt} sticking out, free for anyone to fuck..")
-	saynn("The tipbox has "+str(tips)+" credits.. There is an automatic mechanism that would unlock {inmate.youHim} automatically at 5 credits..")
+	saynn("The tipbox has "+str(tips)+" credits.. There is an automatic mechanism that would unlock {inmate.youHim} automatically at 10 credits..")
 	var thePawn = getRolePawn("inmate")
 	if(!thePawn.isPlayer()):
 		saynn("{inmate.name} has "+str(getRoleChar("inmate").getStamina())+" stamina left.")
@@ -51,7 +51,7 @@ func init_text():
 		addAction("struggle", "Struggle", "Maybe you can escape somehow", "default", 10.0, 300, {})
 	else:
 		addDisabledAction("Struggle", "You are completely out of stamina and can't struggle")
-	if(!getCharByRole("inmate").getInventory().hasLockedStaticRestraints() || (tips >= 5)):
+	if(!getCharByRole("inmate").getInventory().hasLockedStaticRestraints() || (tips >= 10)):
 		addAction("escape", "Escape", "Sweet freedom!", "default", 1000.0, 0, {})
 	else:
 		addDisabledAction("Escape", "You can't escape while the slutwall is still locked..")
@@ -136,15 +136,15 @@ func about_to_use_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func after_use_text():
 	saynn("{user.name} has finished using {inmate.you}..")
-	saynn("The tipbox currently has.. "+str(tips)+" credits in it. {inmate.name} will be able to escape at 5 credits..")
+	saynn("The tipbox currently has.. "+str(tips)+" credits in it. {inmate.name} will be able to escape at 10 credits..")
 
 	addAction("leave", "Leave", "Time to go", "default", 1.0, 60, {})
 	if(!getRolePawn("user").isPlayer() || GM.pc.getCredits() > 0):
-		addAction("leave_a_tip", "Leave a tip", "Leave a single credit as a tip", "help", 1.0, 60, {})
+		addAction("leave_a_tip", "Leave a tip", "Leave a single credit as a tip", "help", 2.0, 60, {})
 	if(!getRolePawn("user").isPlayer() || GM.pc.getCredits() >= 5):
 		addAction("leave_a_big_tip", "Leave a Big Tip", "Leave whole 5 credits!", "help", 0.4, 60, {})
 	if(tips > 0):
-		addAction("steal_tips", "Steal tips", "Take all the credits for yourself! They won't be happy about it..", "punishMean", (0.1+(0.1*(tips-4)) if tips >= 4 else 0.05), 60, {})
+		addAction("steal_tips", "Steal tips", "Take all the credits for yourself! They won't be happy about it..", "punishMean", (0.1+(0.1*(tips-9)) if tips >= 9 else 0.05), 60, {})
 
 func after_use_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "leave"):

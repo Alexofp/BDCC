@@ -72,6 +72,25 @@ func getFormIDs() -> Array:
 		"PunishDecidedSlutwall",
 		"PunishLockIntoSlutwall",
 		
+		"TalkChatWhat",
+		"TalkChatCancel",
+		"TalkChatLeaving",
+		"TalkChatAgree",
+		"TalkChatDisagree",
+		"TalkChatWhatever",
+		"TalkChatPickupLine",
+		"TalkChatPickupLineFail",
+		"TalkFlirtAccept",
+		"TalkFlirtDeny",
+		"TalkSexOffer",
+		"TalkSexOfferAccept",
+		"TalkSexOfferDeny",
+		"TalkSexOfferSelf",
+		"TalkSexOfferSelfAccept",
+		"TalkSexOfferSelfDeny",
+		"TalkGrabAndFuck",
+		"TalkAboutToKidnap",
+		"TalkAboutToKidnapReact",
 		]
 
 func getText(_id:String, _args:Dictionary):
@@ -764,4 +783,187 @@ func getText(_id:String, _args:Dictionary):
 			"Have fun, whore.",
 			"You’re all set for them.",
 		]
-
+	if(_id == "TalkChatWhat"):
+		return [
+			"What's on your mind?",
+			"What do you wanna talk about?",
+			"Huh? What's up?",
+			"Got something to say?",
+			"What do you wanna chat about?",
+			"What’s up? Spill it.",
+		]
+	if(_id == "TalkChatCancel"):
+		return [
+			"Never mind, forget it.",
+			"Actually, forget it.",
+			"You know what, never mind.",
+			"Changed my mind, not worth it.",
+			"Eh, whatever. I don’t wanna chat anymore.",
+			"On second thought, never mind.",
+			"Forget I said anything.",
+		]
+	if(_id == "TalkChatLeaving"):
+		return [
+			"Fine, I’m out.",
+			"Whatever, I’m leaving.",
+			"I’m done here. See ya.",
+			"Screw this, I’m out.",
+			"I’m outta here.",
+		]
+	if(_id == "TalkChatAgree"):
+		return [
+			"Yeah, I agree.",
+			"Totally.",
+			"Right, I agree.",
+			"You’re right.",
+			"Agreed.",
+			"Absolutely.",
+			"I’m with you on that.",
+			"Yep, I agree.",
+			"Couldn’t agree more.",
+			"I’m on the same page.",
+		]
+	if(_id == "TalkChatDisagree"):
+		return [
+			"Nah, I don’t agree. Fuck you.",
+			"I disagree. Go fuck yourself.",
+			"Nope, you’re wrong.",
+			"Nope, you’re wrong. Very wrong.",
+			"Not at all, fuck that.",
+			"You’re full of shit.",
+			"I disagree, fuck off.",
+			"Fuck that, I don’t agree.",
+			"You’re wrong, end of story.",
+		]
+	if(_id == "TalkChatWhatever"):
+		return [
+			"Whatever, I don’t care.",
+			"It’s whatever, honestly.",
+			"Eh, doesn’t matter to me.",
+			"Whatever, I’m over it.",
+			"Meh, whatever.",
+			"I’m indifferent, whatever.",
+			"Whatever, doesn’t bother me.",
+			"It’s all the same to me.",
+			"Whatever, who cares.",
+		]
+	if(_id == "TalkChatPickupLine"):
+		return [
+			"You must be out of stamina, because you’ve been running through my mind all day.",
+			"Do you have a map? I keep getting lost in your eyes.",
+			"You make me feel like trash. Maybe you should pick me up.",
+			"Are you a donut? Because you look like a snack with a hole.",
+			"If beauty were a crime, you’d be serving a life sentence.",
+			"Are you a thief? Because you just stole my heart.",
+			"Are you a guard? Because you’ve caught my attention.",
+			"Are you a cell door? Because you’re always on my mind, and I can’t wait to be behind you.",
+			"Are you serving time for stealing hearts? Because you’ve definitely stolen mine.",
+			"Are you a magician? Because whenever I look at you, everyone else disappears",
+			"If you were an elevator, what button would I have to push to make you go down?",
+			"I think we've met before. Actually, never mind — I think it was just in my dreams.",
+			"Would you mind giving me a pinch? You're so cute, I must be dreaming.",
+			"No pen, no paper but you still draw my attention.",
+		]
+	if(_id == "TalkChatPickupLineFail"):
+		return [
+			"That was awful!",
+			"Seriously? That’s your best?",
+			"That was terrible!",
+			"Wow, that was bad.",
+			"That was so lame!",
+			"You’ve gotta do better than that.",
+			"That was painful.",
+			"I think I need to go to the medical. That was painful.",
+			"Yikes, that was bad.",
+		]
+	if(_id == "TalkFlirtAccept"):
+		return [
+			"You’ve got something special.",
+			"You’re not so bad yourself.",
+			"You’re cute.",
+			"You’re pretty charming.",
+			"You’re definitely my type.",
+			"I'm liking this actually.",
+		]
+	if(_id == "TalkFlirtDeny"):
+		return [
+			"Not my type.",
+			"I’m not really feeling it.",
+			"Sorry, not interested.",
+		]
+	if(_id == "TalkSexOffer"):
+		return [
+			"Let’s have some fun, right now.",
+			"How about we get dirty?",
+			"I wanna fuck, right now.",
+			"Let’s fuck, no time to waste.",
+			"How about we skip the talk and fuck?",
+			"Wanna get fucked right here?",
+		]
+	if(_id == "TalkSexOfferAccept"):
+		return [
+			"I’m down, let’s do it.",
+			"Hell yes.",
+			"Sure thing, you can fuck me.",
+			"I’m down for that.",
+			"You know what.. I’m down for that.",
+		]
+	if(_id == "TalkSexOfferDeny"):
+		return [
+			"I’d rather not.",
+			"I’m good, thanks.",
+			"I’ll pass, thanks.",
+			"I’m gonna pass on that.",
+		]
+	if(_id == "TalkSexOfferSelf"):
+		return [
+			"Wanna take me right now?",
+			"How about you fuck me? Right here, right now.",
+			"I’m all yours if you want.",
+			"Wanna fuck me?",
+			"Take me, right now.",
+			"How about you fuck me good?",
+			"You can fuck me if you want.",
+			"Wanna have some fun with me?",
+		]
+	if(_id == "TalkSexOfferSelfAccept"):
+		return [
+			"You bet, I’ll fuck you real good.",
+			"You’re getting fucked right now.",
+			"I’ll fuck you real good.",
+			"Sure, I can fuck you.",
+		]
+	if(_id == "TalkSexOfferSelfDeny"):
+		return [
+			"I’d rather not right now.",
+			"I’m gonna pass on that.",
+			"I’m not up for it.",
+			"I’m good, thanks.",
+		]
+	if(_id == "TalkGrabAndFuck"):
+		return [
+			"Who do we have here.. What a slut..",
+			"You’re not going anywhere until I’m finished with you.",
+			"Stay put, I’m gonna fuck you hard.",
+			"I’m gonna have my way with you, slut.",
+			"You’re staying right here until I’m satisfied.",
+			"Can't resist, huh? What a shame.",
+			"What? Your restraints prevent you from escaping? What a poor little fucktoy.",
+			"You’re not going anywhere, slut.",
+		]
+	if(_id == "TalkAboutToKidnap"):
+		return [
+			"You belong to me now. Understand?",
+			"You’re mine now, understand?",
+			"You’re mine now, got it?",
+			"I own you now, you understand?",
+			"You belong to me from now on. Understand?",
+			"I’m taking you with me, got it?",
+		]
+	if(_id == "TalkAboutToKidnapReact"):
+		return [
+			"O-Okay..",
+			"Y-Yes.. w-whatever you say..",
+			"F-fine.. O-okay..",
+			"A-Alright.. I u-understand..",
+		]

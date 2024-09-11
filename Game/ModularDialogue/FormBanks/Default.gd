@@ -73,6 +73,23 @@ func getForms() -> Dictionary:
 		"ProstitutionRefuseReturnCreds": form("I'm not giving you anything back, fuck off!", {main=CHAR, target=CHAR}, "main", "target"), # Whore refuses to return the credits
 		"ProstitutionScam": form("You know what.. I decided to raise the price. 5 more credits please.", {main=CHAR, target=CHAR}, "main", "target"), # Whore is trying to scam the client and get more credits
 		
-		
-		
+		"TalkChatWhat": form("What do you wanna chat about?", {main=CHAR, target=CHAR}, "main", "target"),
+		"TalkChatCancel": form("Never mind, I don't wanna chat anymore.", {main=CHAR, target=CHAR}, "main", "target"),
+		"TalkChatLeaving": form("Whatever then, I'm leaving.", {main=CHAR, target=CHAR}, "main", "target"),
+		"TalkChatAgree": form("I agree.", {main=CHAR, target=CHAR}, "main", "target"),
+		"TalkChatDisagree": form("I disagree. Fuck you.", {main=CHAR, target=CHAR}, "main", "target"),
+		"TalkChatWhatever": form("It's whatever, honestly.", {main=CHAR, target=CHAR}, "main", "target"),
+		"TalkChatPickupLine": form("If you were a triangle you'd be acute one.", {main=CHAR, target=CHAR}, "main", "target"),
+		"TalkChatPickupLineFail": form("That was so bad!", {main=CHAR, target=CHAR}, "main", "target"),
+		"TalkFlirtAccept": form("You are cute.", {main=CHAR, target=CHAR}, "main", "target"),
+		"TalkFlirtDeny": form("I don't think I'm into what you are offering.", {main=CHAR, target=CHAR}, "main", "target"),
+		"TalkSexOffer": form("Hey, let's fuck!", {main=CHAR, target=CHAR}, "main", "target"),
+		"TalkSexOfferAccept": form("Sure, you can fuck me.", {main=CHAR, target=CHAR}, "main", "target"),
+		"TalkSexOfferDeny": form("I'd rather not.", {main=CHAR, target=CHAR}, "main", "target"),
+		"TalkSexOfferSelf": form("Hey, wanna fuck me maybe?", {main=CHAR, target=CHAR}, "main", "target"),
+		"TalkSexOfferSelfAccept": form("Sure, I can fuck you real good.", {main=CHAR, target=CHAR}, "main", "target"),
+		"TalkSexOfferSelfDeny": form("I'd rather not.", {main=CHAR, target=CHAR}, "main", "target"),
+		"TalkGrabAndFuck": form("You're not going anywhere until I have some fun with you, bdsm slut.", {main=CHAR, target=CHAR}, "main", "target"),
+		"TalkAboutToKidnap": form("You are mine now. Understand?", {main=CHAR, target=CHAR}, "main", "target"),
+		"TalkAboutToKidnapReact": form("O.. O-Okay..", {main=CHAR, target=CHAR}, "main", "target"),
 	}

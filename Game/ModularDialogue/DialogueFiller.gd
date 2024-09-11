@@ -14,7 +14,7 @@ func getPriority(_id:String) -> int:
 func getWeight(_id:String) -> float:
 	return weight
 
-func canBeUsed(_id:String, _args:Dictionary) -> bool:
+func canBeUsed(_id:String, _args:Dictionary, _form) -> bool:
 	return true
 
 func getText(_id:String, _args:Dictionary):

@@ -9,8 +9,8 @@ func getFormIDs() -> Array:
 		"GuardCaughtOffLimits",
 		]
 
-func canBeUsed(_id:String, _args:Dictionary) -> bool:
-	var inmate = getChar(_args, "inmate")
+func canBeUsed(_id:String, _args:Dictionary, _form) -> bool:
+	var inmate = getChar(_args, _form.dirToRole)
 	if(inmate == null):
 		return false
 	var hasCumIn:bool = inmate.hasEffect(StatusEffect.HasCumInsideAnus) || inmate.hasEffect(StatusEffect.HasCumInsideVagina)

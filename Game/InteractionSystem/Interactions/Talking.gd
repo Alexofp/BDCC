@@ -8,6 +8,7 @@ var notFirst = false
 var struggleText = ""
 var tryCount = 0
 var askCredits = 0
+var didAmount = 0
 
 func _init():
 	id = "Talking"
@@ -38,7 +39,7 @@ func init_text():
 		addDisabledAction("Flirt", "They don't seem to be in a flirty mood..")
 	if(getRolePawn("reacter").canGrabAndFuck() && roleCanStartSex("starter")):
 		addAction("grab_and_fuck", "Grab&Fuck", "They have so many restraints that you can just fuck them..", "sexUse", 5.0, 60, {})
-	addAction("attack", "Attack", "Make them regret it!", "attack", 1.0, 30, {})
+	addAction("attack", "Attack", "Make them regret it!", "attack", 1.0 if didAmount <= 0 else 0.1, 30, {})
 	if(roleCanStartSex("starter")):
 		addAction("offersex", "Offer sex", "Offer to fuck them", "sexDom", 0.2, 60, {})
 	else:
@@ -59,7 +60,7 @@ func init_text():
 			addAction("ask_for_key", "Ask for a key..", "They have locked a smart-locked restraint onto you. Might as well ask for a key..", "help", 1.0, 60, {})
 		else:
 			addDisabledAction("Ask for a key..", "They don't seem to be in a chatty mood..")
-	addAction("leave", "Leave", "Enough chatting around.", "justleave", 1.0, 30, {})
+	addAction("leave", "Leave", "Enough chatting around.", "default", 0.01 if didAmount <= 0 else 0.5*sqrt(float(didAmount)), 30, {})
 	if(getRolePawn("starter").canEnslaveForFree(getRolePawn("reacter"))):
 		addAction("enslave_free", "Enslave!", "They are subby enough.. and you are Alpha enough too..", "default", 0.0, 60, {})
 
@@ -67,8 +68,10 @@ func init_text():
 
 func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "chat"):
+		didAmount += 1
 		setState("chat_started", "starter")
 	if(_id == "flirt"):
+		didAmount += 1
 		setState("about_to_flirt", "starter")
 	if(_id == "grab_and_fuck"):
 		setState("grabbed_about_to_fuck", "reacter")
@@ -77,8 +80,10 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 		if(!getRolePawn("reacter").isPlayer()):
 			affectAffection("reacter", "starter", -0.25)
 	if(_id == "offersex"):
+		didAmount += 1
 		setState("offered_sex", "reacter")
 	if(_id == "offerself"):
+		didAmount += 1
 		setState("offered_self", "reacter")
 	if(_id == "ask_help_restraints"):
 		#setState("asking_help_restraints", "reacter")
@@ -94,7 +99,7 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func about_to_leave_text():
-	saynn("{starter.name} is leaving..")
+	saynn("{starter.name} decides to leave..")
 
 	addAction("leave", "Continue", "See what happens next..", "default", 1.0, 30, {})
 
@@ -104,8 +109,8 @@ func about_to_leave_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func chat_started_text():
-	saynn("Talkie talk talk.")
-	saynn("[say=reacter]SURE WHAT DO YOU WANT TO CHAT ABOUT?[/say]")
+	saynn("{starter.name} wonders if {reacter.you} {reacter.youVerb('want')} to chat.")
+	sayLine("reacter", "TalkChatWhat", {main="reacter", target="starter"})
 	addChatTopics("starter", "reacter", "ask")
 	if(getRoleChar("starter").isPlayer()):
 		showKnownLikesDislikesFor("reacter")
@@ -124,7 +129,7 @@ func chat_started_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func chat_cancelled_text():
-	saynn("[say=starter]NEVER MIND I DON'T WANNA CHAT[/say]")
+	sayLine("starter", "TalkChatCancel", {main="starter", target="reacter"})
 
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
 	addAction("leave", "Leave", "Why chat then?!", "fight", 0.5, 30, {})
@@ -138,12 +143,14 @@ func chat_cancelled_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func chat_leaving_text():
-	saynn("[say=reacter]WHATEVER, I'M LEAVING[/say]")
+	sayLine("reacter", "TalkChatLeaving", {main="reacter", target="starter"})
+	saynn("Looks like that annoyed {reacter.him} a bit too much..")
 
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
 
 func chat_leaving_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "continue"):
+		getRolePawn("reacter").satisfySocial()
 		stopMe()
 
 
@@ -163,11 +170,13 @@ func chat_asked_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func chat_reacted_text():
 	if(chatAnswer=="agree"):
-		saynn("[say=reacter]I AGREE.[/say]")
+		sayLine("reacter", "TalkChatAgree", {main="reacter", target="starter"})
+		saynn("Looks like {reacter.you} {reacter.youVerb('share')} a common interest with {starter.you}.")
 	elif(chatAnswer=="disagree"):
-		saynn("[say=reacter]I DISAGREE. FUCK YOU.[/say]")
+		sayLine("reacter", "TalkChatDisagree", {main="reacter", target="starter"})
+		saynn("Looks like {reacter.youHe} didn't like {starter.your} statement.")
 	else:
-		saynn("[say=reacter]WHATEVER.[/say]")
+		sayLine("reacter", "TalkChatWhatever", {main="reacter", target="starter"})
 
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
 
@@ -199,7 +208,7 @@ func about_to_flirt_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func flirt_pickupline_text():
-	saynn("[say=starter]If you were a triangle you'd be acute one.[/say]")
+	sayLine("starter", "TalkChatPickupLine", {main="starter", target="reacter"})
 
 	addAction("accept", "Accept it", "Wasn't too bad of a line..", "acceptFlirt", 1.0, 60, {})
 	addAction("deny", "Deny", "That was so bad..", "default", 1.0, 60, {})
@@ -214,7 +223,7 @@ func flirt_pickupline_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func flirt_accepted_text():
-	saynn("{reacter.name} smiles.")
+	saynn("{reacter.name} smiles. Looks like the pickup line has worked..")
 
 	addAction("continue", "Continue", "See what happens next", "default", 1.0, 60, {})
 
@@ -226,7 +235,7 @@ func flirt_accepted_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func flirt_denied_text():
-	saynn("[say=reacter]THAT WAS SO BAD![/say]")
+	sayLine("reacter", "TalkChatPickupLineFail", {main="reacter", target="starter"})
 	saynn("Oh well, was worth a try..")
 
 	addAction("continue", "Continue", "See what happens next", "default", 1.0, 60, {})
@@ -272,9 +281,9 @@ func flirt_reacted_text():
 	var answer = lust["answer"] if lust.has("answer") else "accept"
 	var likeness = lust["likeness"] if lust.has("likeness") else 1.0
 	if(answer == "accept"):
-		saynn("[say=reacter]CUTE.[/say]")
+		sayLine("reacter", "TalkFlirtAccept", {main="reacter", target="starter"})
 	else:
-		saynn("[say=reacter]FUCK OFF.[/say]")
+		sayLine("reacter", "TalkFlirtDeny", {main="reacter", target="starter"})
 	if(getRolePawn("starter").isPlayer()):
 		saynn("You get a feeling that your flirt was "+str(Util.roundF(likeness*100.0, 1))+"% successful.."+lust["reason"]+"")
 
@@ -287,7 +296,7 @@ func flirt_reacted_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func offered_sex_text():
 	saynn("{starter.name} offers to fuck {reacter.you}..")
-	saynn("[say=starter]HEY, LETS FUCK![/say]")
+	sayLine("starter", "TalkSexOffer", {main="starter", target="reacter"})
 
 	addAction("agree", "Agree", "Let them fuck you!", "agreeSexAsSub", 1.0, 60, {})
 	addAction("deny", "Deny", "You'd rather not..", "default", 0.2, 60, {})
@@ -303,7 +312,7 @@ func offered_sex_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func offered_sex_agreed_text():
-	saynn("[say=reacter]SURE, YOU CAN FUCK ME.[/say]")
+	sayLine("reacter", "TalkSexOfferAccept", {main="reacter", target="starter"})
 
 	addAction("sex", "Sex", "Time to fuck!", "default", 1.0, 600, {start_sex=["starter", "reacter"],})
 
@@ -314,7 +323,8 @@ func offered_sex_agreed_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func offered_sex_deny_text():
-	saynn("[say=reacter]I'D RATHER NOT.[/say]")
+	sayLine("reacter", "TalkSexOfferDeny", {main="reacter", target="starter"})
+	saynn("Looks like {starter.you} got denied..")
 
 	addAction("continue", "Continue", "Oh well..", "default", 1.0, 60, {})
 
@@ -325,7 +335,7 @@ func offered_sex_deny_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func offered_self_text():
 	saynn("{starter.name} offers {reacter.you} to fuck {starter.him}.")
-	saynn("[say=starter]WANNA FUCK ME MAYBE?[/say]")
+	sayLine("starter", "TalkSexOfferSelf", {main="starter", target="reacter"})
 
 	addAction("agree", "Agree", "Agree to fuck them", "agreeSexAsDom", 1.0, 60, {})
 	addAction("deny", "Deny", "You'd rather not..", "default", 0.2, 60, {})
@@ -341,7 +351,7 @@ func offered_self_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func offered_self_agreed_text():
-	saynn("[say=reacter]SURE, I CAN FUCK YOU.[/say]")
+	sayLine("reacter", "TalkSexOfferSelfAccept", {main="reacter", target="starter"})
 
 	addAction("sex", "Sex", "Time to fuck!", "default", 1.0, 600, {start_sex=["reacter", "starter"],})
 
@@ -352,7 +362,7 @@ func offered_self_agreed_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func offered_self_deny_text():
-	saynn("[say=reacter]I'D RATHER NOT.[/say]")
+	sayLine("reacter", "TalkSexOfferSelfDeny", {main="reacter", target="starter"})
 
 	addAction("continue", "Continue", "Oh well..", "default", 1.0, 60, {})
 
@@ -374,6 +384,7 @@ func after_sex_do(_id:String, _args:Dictionary, _context:Dictionary):
 func grabbed_about_to_fuck_text():
 	saynn("{starter.You} {starter.youVerb('grab')} {reacter.you}..")
 	saynn("{reacter.You} quickly {reacter.youVerb('realize')} that {reacter.yourHis} restraints prevent {reacter.youHim} from escaping..")
+	sayLine("starter", "TalkGrabAndFuck", {main="starter", target="reacter"})
 
 	addAction("sex", "Sex", "You're so fucked..", "default", 1.0, 600, {start_sex=["starter", "reacter"],})
 
@@ -396,8 +407,8 @@ func after_grab_and_fuck_do(_id:String, _args:Dictionary, _context:Dictionary):
 func about_to_kidnap_text():
 	saynn("{starter.You} {starter.youVerb('grab')} {reacter.yourHis} throat and {starter.youVerb('look')} {reacter.youHim} deep into the eyes..")
 	saynn("{starter.YourHis} dominant aura alone is making {reacter.youHim} shiver..")
-	saynn("[say=starter]YOU ARE MINE NOW. UNDERSTAND?[/say]")
-	saynn("[say=reacter]O.. O-OKAY..[/say]")
+	sayLine("starter", "TalkAboutToKidnap", {main="starter", target="reacter"})
+	sayLine("reacter", "TalkAboutToKidnapReact", {main="reacter", target="starter"})
 
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
 
@@ -446,6 +457,7 @@ func saveData():
 	data["struggleText"] = struggleText
 	data["tryCount"] = tryCount
 	data["askCredits"] = askCredits
+	data["didAmount"] = didAmount
 	return data
 
 func loadData(_data):
@@ -459,4 +471,5 @@ func loadData(_data):
 	struggleText = SAVE.loadVar(_data, "struggleText", "")
 	tryCount = SAVE.loadVar(_data, "tryCount", 0)
 	askCredits = SAVE.loadVar(_data, "askCredits", 0)
+	didAmount = SAVE.loadVar(_data, "didAmount", 0)
 

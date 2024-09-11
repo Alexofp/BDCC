@@ -1141,6 +1141,8 @@ func runScene(sceneid: String, args = [], tag = ""):
 	scene.sceneTag = tag
 
 func sayLine(role:String, lineID:String, args:Dictionary, actualArgs:Dictionary = {}):
+	if(!isBeingSpied() && !isPlayerInvolved()): # Optimisation
+		return ""
 	var processedArgs = {}
 	for argID in args: # Assumes all the args are characters
 		processedArgs[argID] = getRoleID(args[argID])

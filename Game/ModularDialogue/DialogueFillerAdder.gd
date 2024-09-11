@@ -15,7 +15,7 @@ func getPriority(_id:String) -> int:
 func getChance(_id:String) -> float:
 	return chance
 
-func canBeUsed(_id:String, _args:Dictionary) -> bool:
+func canBeUsed(_id:String, _args:Dictionary, _form) -> bool:
 	return true
 
 func getText(_id:String, _args:Dictionary):
