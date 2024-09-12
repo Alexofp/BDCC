@@ -16,8 +16,7 @@ func start(_pawns:Dictionary, _args:Dictionary):
 func init_text():
 	saynn("{starter.You} {starter.youVerb('attack')} {reacter.you}!")
 	sayLine("starter", "AttackStart", {main="starter", target="reacter"})
-	if(RNG.chance(50)):
-		sayLine("reacter", "AttackReact", {main="reacter", target="starter"})
+	sayLine("reacter", "AttackReact", {main="reacter", target="starter"})
 
 	addAction("fight", "Fight", "Fight back", "fight", 1.0, 300, {start_fight=["starter", "reacter"],})
 	addAction("surrender", "Surrender", "It's not worth it!", "surrender", 1.0, 60, {})

@@ -1504,6 +1504,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Orifice/VaginaOrifice.gd"
 }, {
+"base": "Object",
+"class": "WHCond",
+"language": "GDScript",
+"path": "res://Game/WorldHistory/WHCond.gd"
+}, {
+"base": "Object",
+"class": "WHEvent",
+"language": "GDScript",
+"path": "res://Game/WorldHistory/WHEvent.gd"
+}, {
 "base": "Reference",
 "class": "WorldEditBase",
 "language": "GDScript",
@@ -1513,6 +1523,16 @@ _global_script_classes=[ {
 "class": "WorldFloor",
 "language": "GDScript",
 "path": "res://Game/World/WorldFloor.gd"
+}, {
+"base": "Reference",
+"class": "WorldHistory",
+"language": "GDScript",
+"path": "res://Game/WorldHistory/WorldHistory.gd"
+}, {
+"base": "Reference",
+"class": "WorldHistoryEvent",
+"language": "GDScript",
+"path": "res://Game/WorldHistory/WorldHistoryEvent.gd"
 }, {
 "base": "Object",
 "class": "WorldPopulation",
@@ -1824,8 +1844,12 @@ _global_script_class_icons={
 "Trigger": "",
 "Util": "",
 "VaginaOrifice": "",
+"WHCond": "",
+"WHEvent": "",
 "WorldEditBase": "",
 "WorldFloor": "",
+"WorldHistory": "",
+"WorldHistoryEvent": "",
 "WorldPopulation": "",
 "WorldZone": ""
 }

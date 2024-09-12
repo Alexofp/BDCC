@@ -26,6 +26,7 @@ var allowExecuteOnce:bool = false
 
 var IS:InteractionSystem = InteractionSystem.new()
 var RS:RelationshipSystem = RelationshipSystem.new()
+var WHS:WorldHistory = WorldHistory.new()
 
 var staticCharacters = {}
 var charactersToUpdate = {}
@@ -215,6 +216,7 @@ func _ready():
 	
 	randomize()
 	
+	WHS.clearHistory()
 	startNewGame()
 	
 	runCurrentScene()
@@ -382,6 +384,8 @@ func loadingSavefileFinished():
 	
 	applyAllWorldEdits()
 	
+	if(!rollbacker.rollbacking):
+		WHS.clearHistory()
 	IS.updatePCLocation()
 	GM.world.updatePawns(IS)
 	GM.world.setPawnsShowed(canShowPawns())
@@ -651,6 +655,7 @@ func startNewDay():
 	
 	doTimeProcess(timediff)
 	
+	WHS.onNewDay()
 	IS.afterNewDay()
 	
 	SAVE.triggerAutosave()

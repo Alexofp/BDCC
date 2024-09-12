@@ -773,6 +773,8 @@ func doFightAftermath(_fightersData, newResult):
 	if(wonPawn != null):
 		wonPawn.afterWonFight()
 		
+		GM.main.WHS.addEvent(WHEvent.WonFight, wonPawn.charID, lostPawn.charID)
+		
 		if(wonPawn.isPlayer() && lostPawn != null):
 			var pawnWonPower:float = wonPawn.calculatePowerScore()
 			var pawnLostPower:float = lostPawn.calculatePowerScore()
@@ -783,6 +785,8 @@ func doFightAftermath(_fightersData, newResult):
 				wonPawn.addRepScore(RepStat.Staff, powerScale)
 	if(lostPawn != null):
 		lostPawn.afterLostFight()
+		
+		#GM.main.WHS.addEvent(WHEvent.LostFight, lostPawn.charID, wonPawn.charID)
 		
 		if(lostPawn.isPlayer() && wonPawn != null):
 			var pawnWonPower:float = wonPawn.calculatePowerScore()
@@ -800,8 +804,12 @@ func doSexAftermath(_sexData, _newResult):
 	
 	if(domPawn != null):
 		domPawn.afterSex(true)
+		
+		GM.main.WHS.addEvent(WHEvent.Fucked, domPawn.charID, subPawn.charID)
 	if(subPawn != null):
 		subPawn.afterSex(false)
+		
+		#GM.main.WHS.addEvent(WHEvent.GotFucked, subPawn.charID, domPawn.charID)
 	
 	var domSatisfaction:float = 0.0
 	var subSatisfaction:float = 0.0
@@ -1668,6 +1676,9 @@ func hasRepLevelPC(_role:String, _repID:String, _reqLevel:int) -> bool:
 	if(pawn != null && pawn.isPlayer()):
 		return (pawn.getRepLevel(_repID) >= _reqLevel)
 	return true
+
+func addWHSEvent(_eventID:String, whoRole:String, byRole:String, args:Dictionary = {}):
+	GM.main.WHS.addEvent(_eventID, getRoleID(whoRole), getRoleID(byRole), args)
 
 func saveData():
 	var data = {
