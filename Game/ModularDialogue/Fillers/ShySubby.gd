@@ -12,6 +12,7 @@ func getFormIDs() -> Array:
 		"AttackReact",
 		
 		"GuardCaughtOffLimits",
+		"GuardCaughtOffLimitsFight",
 		"GuardInmateSurrender",
 		"GuardFrisk",
 		"GuardFriskFound",
@@ -196,6 +197,13 @@ func getText(_id:String, _args:Dictionary):
 			"You c-can't be in this area.. It’s off-limits..",
 			"This is a restricted area.. Y-You know that, right?..",
 			"I don’t want you to get in trouble.. But you can't be here..",
+		]
+	if(_id == "GuardCaughtOffLimitsFight"):
+		return [
+			"Hey.. oh.. are we doing this?..",
+			"Oh.. Don't make me hurt you..",
+			"Why do you resist.. I wouldn't hurt you..",
+			"Resisting?.. I guess I.. Um.. I guess we fight..",
 		]
 	if(_id == "GuardInmateSurrender"):
 		return [

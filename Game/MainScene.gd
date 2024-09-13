@@ -638,6 +638,7 @@ func processTimeUntil(newseconds):
 	
 func startNewDay():
 	IS.beforeNewDay()
+	GM.CS.optimize()
 	
 	# We assume that you always go to sleep at 23:00
 	if(timeOfDay > getTimeCap()):

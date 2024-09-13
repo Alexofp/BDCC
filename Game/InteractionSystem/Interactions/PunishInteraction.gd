@@ -196,6 +196,8 @@ func getAnimData() -> Array:
 	if(getState() in ["pulling_to_stocks", "pulling_to_slutwall"]):
 		if(getLocation() != "main_punishment_spot" && getLocation() != "fight_slutwall"):
 			return [StageScene.Duo, "walk", {pc="target", npc="punisher", npcAction="walk", flipNPC=true, bodyState={leashedBy="punisher"}}]
+	if(getState() in [""]):
+		return [StageScene.SexStart, "start", {pc="punisher", npc="target"}]
 	
 	return [StageScene.Duo, "stand", {pc="target", npc="punisher"}]
 

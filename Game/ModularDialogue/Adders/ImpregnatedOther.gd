@@ -26,7 +26,7 @@ func canBeUsed(_id:String, _args:Dictionary, _form) -> bool:
 	if(GM.main.WHS.queryHappened(WHEvent.Impregnated, [
 		[WHCond.Who, mainCharID],
 		[WHCond.Target, dirToCharID],
-	])):
+	]) && getChar(_args, _form.dirToRole).isVisiblyPregnant()):
 		return true
 	return false
 

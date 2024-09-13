@@ -103,6 +103,16 @@ func reacter_won_leave_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func getAnimData() -> Array:
+	if(getState() == "starter_won"):
+		if(surrendered):
+			return [StageScene.Duo, "stand", {pc="starter", npc="reacter", npcAction="kneel"}]
+		else:
+			return [StageScene.Duo, "stand", {pc="starter", npc="reacter", npcAction="defeat"}]
+	if(getState() == "reacter_won"):
+		if(surrendered):
+			return [StageScene.Duo, "kneel", {pc="starter", npc="reacter"}]
+		else:
+			return [StageScene.Duo, "defeat", {pc="starter", npc="reacter"}]
 	return [StageScene.Duo, "stand", {pc="starter", npc="reacter"}]
 
 func onStarterWin(_isSurrender=false):
