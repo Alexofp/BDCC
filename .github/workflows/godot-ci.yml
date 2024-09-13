@@ -13,7 +13,7 @@ jobs:
       image: barichello/godot-ci:3.5.2
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           lfs: true
       - name: Setup
@@ -44,7 +44,7 @@ jobs:
       image: barichello/godot-ci:3.5.2
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           lfs: true
       - name: Setup
@@ -68,7 +68,7 @@ jobs:
       image: barichello/godot-ci:3.5.2
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           lfs: true
       - name: Setup
@@ -100,7 +100,7 @@ jobs:
       image: barichello/godot-ci:3.5.2
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           lfs: true
       - name: Setup
