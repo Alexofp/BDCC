@@ -23,6 +23,7 @@ var rollbacker:Rollbacker
 var encounterSettings:EncounterSettings
 var currentlyTestingScene = false
 var allowExecuteOnce:bool = false
+var isDebuggingIS:bool = false
 
 var IS:InteractionSystem = InteractionSystem.new()
 var RS:RelationshipSystem = RelationshipSystem.new()
@@ -1274,10 +1275,21 @@ func getDebugActions():
 				},
 			],
 		},
+		{
+			"id": "toggleISDebug",
+			"name": "Toggle IS debug",
+		},
 	]
 
 func doDebugAction(id, args = {}):
 	print(id, " ", args)
+	
+	if(id == "toggleISDebug"):
+		isDebuggingIS = !isDebuggingIS
+		if(isDebuggingIS):
+			addMessage("Interaction System debug info is now Enabled")
+		else:
+			addMessage("Interaction System debug info is now Disabled")
 	
 	if(id == "addRep"):
 		GM.pc.getReputation().addRep(args["rep"], args["amount"])

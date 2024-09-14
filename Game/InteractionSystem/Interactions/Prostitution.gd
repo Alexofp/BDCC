@@ -148,7 +148,7 @@ func about_to_sex_text():
 	saynn("The pair gets out of the way of others..")
 	saynn("{main.name} pulls {client.you} closer for some sexy time..")
 
-	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {start_sex=["main" if slutDom else "client", "client" if slutDom else "main"],})
+	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {start_sex=["main" if slutDom else "client", "client" if slutDom else "main", SexType.DefaultSex, {bondageDisabled=!slutDom}],})
 
 func about_to_sex_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "continue"):

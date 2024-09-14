@@ -35,7 +35,7 @@ func _run():
 		
 		saynn(interaction.getOutputTextFinal())
 		
-		if(true):
+		if(GM.main.isDebuggingIS):
 			sayn("[b]Debug info[/b]:")
 			saynn(Util.join(pawn.getDebugInfo(), "\n"))
 		

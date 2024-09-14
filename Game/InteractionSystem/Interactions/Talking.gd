@@ -9,6 +9,7 @@ var struggleText = ""
 var tryCount = 0
 var askCredits = 0
 var didAmount = 0
+var gotDenied = false
 
 func _init():
 	id = "Talking"
@@ -39,7 +40,7 @@ func init_text():
 		addDisabledAction("Flirt", "They don't seem to be in a flirty mood..")
 	if(getRolePawn("reacter").canGrabAndFuck() && roleCanStartSex("starter")):
 		addAction("grab_and_fuck", "Grab&Fuck", "They have so many restraints that you can just fuck them..", "sexUse", 5.0, 60, {})
-	addAction("attack", "Attack", "Make them regret it!", "attack", 1.0 if didAmount <= 0 else 0.1, 30, {})
+	addAction("attack", "Attack", "Make them regret it!", "attack", 1.0 if (didAmount <= 0 || gotDenied) else 0.1, 30, {})
 	if(roleCanStartSex("starter")):
 		addAction("offersex", "Offer sex", "Offer to fuck them", "sexDom", 0.2, 60, {})
 	else:
@@ -69,9 +70,11 @@ func init_text():
 func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "chat"):
 		didAmount += 1
+		gotDenied = false
 		setState("chat_started", "starter")
 	if(_id == "flirt"):
 		didAmount += 1
+		gotDenied = false
 		setState("about_to_flirt", "starter")
 	if(_id == "grab_and_fuck"):
 		setState("grabbed_about_to_fuck", "reacter")
@@ -81,9 +84,11 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 			affectAffection("reacter", "starter", -0.25)
 	if(_id == "offersex"):
 		didAmount += 1
+		gotDenied = false
 		setState("offered_sex", "reacter")
 	if(_id == "offerself"):
 		didAmount += 1
+		gotDenied = false
 		setState("offered_self", "reacter")
 	if(_id == "ask_help_restraints"):
 		#setState("asking_help_restraints", "reacter")
@@ -166,6 +171,8 @@ func chat_asked_do(_id:String, _args:Dictionary, _context:Dictionary):
 		doReactToChat(_args, isBeingSpied())
 		chatAnswer = _args["answer"]
 		setState("chat_reacted", "starter")
+		if(chatAnswer != "agree"):
+			gotDenied = true
 
 
 func chat_reacted_text():
@@ -220,6 +227,7 @@ func flirt_pickupline_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "deny"):
 		affectLust("reacter", "starter", -0.07)
 		setState("flirt_denied", "starter")
+		gotDenied = true
 
 
 func flirt_accepted_text():
@@ -283,6 +291,7 @@ func flirt_reacted_text():
 	if(answer == "accept"):
 		sayLine("reacter", "TalkFlirtAccept", {main="reacter", target="starter"})
 	else:
+		gotDenied = true
 		sayLine("reacter", "TalkFlirtDeny", {main="reacter", target="starter"})
 	if(getRolePawn("starter").isPlayer()):
 		saynn("You get a feeling that your flirt was "+str(Util.roundF(likeness*100.0, 1))+"% successful.."+lust["reason"]+"")
@@ -309,6 +318,7 @@ func offered_sex_do(_id:String, _args:Dictionary, _context:Dictionary):
 		affectAffection("starter", "reacter", -0.1)
 		getRolePawn("reacter").afterSocialInteraction()
 		getRolePawn("starter").afterFailedSocialInteraction()
+		gotDenied = true
 
 
 func offered_sex_agreed_text():
@@ -348,6 +358,7 @@ func offered_self_do(_id:String, _args:Dictionary, _context:Dictionary):
 		affectAffection("starter", "reacter", -0.1)
 		getRolePawn("reacter").afterSocialInteraction()
 		getRolePawn("starter").afterFailedSocialInteraction()
+		gotDenied = true
 
 
 func offered_self_agreed_text():
@@ -458,6 +469,7 @@ func saveData():
 	data["tryCount"] = tryCount
 	data["askCredits"] = askCredits
 	data["didAmount"] = didAmount
+	data["gotDenied"] = gotDenied
 	return data
 
 func loadData(_data):
@@ -472,4 +484,5 @@ func loadData(_data):
 	tryCount = SAVE.loadVar(_data, "tryCount", 0)
 	askCredits = SAVE.loadVar(_data, "askCredits", 0)
 	didAmount = SAVE.loadVar(_data, "didAmount", 0)
+	gotDenied = SAVE.loadVar(_data, "gotDenied", false)
 
