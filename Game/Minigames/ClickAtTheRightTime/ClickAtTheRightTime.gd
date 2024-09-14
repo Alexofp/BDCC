@@ -5,6 +5,8 @@ onready var cursor = $GameScreen/Panel/Cursor
 onready var redZone = $GameScreen/Panel/Panel
 onready var orangeZone = $GameScreen/Panel/Panel2
 onready var goldenZone = $GameScreen/Panel/Panel3
+onready var button = $StartMenu/CenterContainer/VBoxContainer/Button
+
 var time = 0.0
 var cursorSpeed = 1.0
 var timer = 10.0
@@ -44,6 +46,7 @@ func _ready():
 	setHardStruggleEnabled(false)
 	setDifficulty(2)
 	setIsBlindfolded(false)
+	button.grab_focus()
 
 func generateFatalZone(_difficulty = 1.0):
 	if !hardStruggleEnabled || isBlindFoldedVersion:
@@ -152,7 +155,11 @@ func _process(delta):
 			flatStyle.bg_color = Color.black
 	
 	if(Input.is_action_just_pressed("minigame_commit")):
-		doCommitClick()
+		if(!ingame):
+			pass
+			#_on_Button_pressed()
+		else:
+			doCommitClick()
 	
 func getCursorPosition():
 	return (sin(pow(time * cursorSpeed, 1.2)) + 1.0) / 2.0
