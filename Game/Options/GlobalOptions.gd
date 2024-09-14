@@ -13,6 +13,9 @@ var npcPregnancyTimeDays: int
 var impregnationChanceModifier: int
 var bellySizeDependsOnLitterSize: bool = false
 var bellyMaxSizeModifier: float = 1.0
+var optimizeChilds:bool = true
+var maxKeepPCKids:int = 50
+var maxKeepNPCKids:int = 30
 
 # Sandbox options
 var sandboxPawnCount:int = 30
@@ -20,7 +23,7 @@ var sandboxBreeding:String = "rare" # normal reduced rare veryrare never
 
 # Difficulty options
 var hardStruggleEnabled: bool = false
-var smartLockRarity: String = "normal" # never veryrare rare normal often veryoften bdsmslut
+var smartLockRarity: String = "normal" # never veryrare rare normal often veryoften bdsmslut always
 
 var shouldScaleUI: bool = true
 var uiScaleMultiplier = 1.0
@@ -73,6 +76,9 @@ func resetToDefaults():
 	bellySizeDependsOnLitterSize = false
 	impregnationChanceModifier = 100
 	bellyMaxSizeModifier = 1.0
+	optimizeChilds = true
+	maxKeepPCKids = 50
+	maxKeepNPCKids = 30
 	hardStruggleEnabled = false
 	smartLockRarity = "normal"
 	shouldScaleUI = true
@@ -156,6 +162,15 @@ func getBellyMaxSizeDependsOnLitterSize() -> bool:
 
 func getBellyMaxSizeModifier() -> float:
 	return bellyMaxSizeModifier
+
+func shouldOptimizeKids() -> bool:
+	return optimizeChilds
+
+func getMaxKeepPCKids() -> int:
+	return maxKeepPCKids
+
+func getMaxKeepNPCKids() -> int:
+	return maxKeepNPCKids
 
 func isHardStruggleEnabled():
 	return hardStruggleEnabled
@@ -376,6 +391,27 @@ func getChangeableOptions():
 						[2.0, "200%"],
 					],
 				},
+				{
+					"name": "Auto child record optimizer",
+					"description": "If enabled, will automatically 'archive' old child records when their count goes above the specified amount each day. All the extra child info like name/species/gender is lost but the amount of kids you had with any npc is preserved. Useful as an automatic protection against save bloating.",
+					"id": "optimizeChilds",
+					"type": "checkbox",
+					"value": optimizeChilds,
+				},
+				{
+					"name": "Max player-related children records",
+					"description": "The game will keep this many newest records of player's kids if 'Auto child record optimizer' is enabled. The oldest records will be 'archived'.",
+					"id": "maxKeepPCKids",
+					"type": "int",
+					"value": maxKeepPCKids,
+				},
+				{
+					"name": "Max non-player-related children records",
+					"description": "The game will keep this many newest records of kids that don't belong to the player if 'Auto child record optimizer' is enabled. The oldest records will be 'archived'.",
+					"id": "maxKeepNPCKids",
+					"type": "int",
+					"value": maxKeepNPCKids,
+				},
 			]
 		},
 		{
@@ -403,6 +439,7 @@ func getChangeableOptions():
 						["often", "Often"],
 						["veryoften", "Very often"],
 						["bdsmslut", "BDSM SLUT"],
+						["always", "Always"],
 					]
 				},
 			]
@@ -842,6 +879,12 @@ func applyOption(categoryID, optionID, value):
 			bellySizeDependsOnLitterSize = value
 		if(optionID == "bellyMaxSizeModifier"):
 			bellyMaxSizeModifier = value
+		if(optionID == "optimizeChilds"):
+			optimizeChilds = value
+		if(optionID == "maxKeepPCKids"):
+			maxKeepPCKids = value
+		if(optionID == "maxKeepNPCKids"):
+			maxKeepNPCKids = value
 	
 	if categoryID == "difficulty":
 		if optionID == "hardStruggleEnabled":
@@ -931,6 +974,9 @@ func saveData():
 		"impregnationChanceModifier": impregnationChanceModifier,
 		"bellySizeDependsOnLitterSize": bellySizeDependsOnLitterSize,
 		"bellyMaxSizeModifier": bellyMaxSizeModifier,
+		"optimizeChilds": optimizeChilds,
+		"maxKeepPCKids": maxKeepPCKids,
+		"maxKeepNPCKids": maxKeepNPCKids,
 		"hardStruggleEnabled": hardStruggleEnabled,
 		"smartLockRarity": smartLockRarity,
 		"shouldScaleUI": shouldScaleUI,
@@ -980,6 +1026,9 @@ func loadData(data):
 	impregnationChanceModifier = loadVar(data, "impregnationChanceModifier", 100)
 	bellySizeDependsOnLitterSize = loadVar(data, "bellySizeDependsOnLitterSize", false)
 	bellyMaxSizeModifier = loadVar(data, "bellyMaxSizeModifier", 1.0)
+	optimizeChilds = loadVar(data, "optimizeChilds", false)
+	maxKeepPCKids = loadVar(data, "maxKeepPCKids", 50)
+	maxKeepNPCKids = loadVar(data, "maxKeepNPCKids", 30)
 	hardStruggleEnabled = loadVar(data, "hardStruggleEnabled", false)
 	smartLockRarity = loadVar(data, "smartLockRarity", "normal")
 	shouldScaleUI = loadVar(data, "shouldScaleUI", true)

@@ -442,6 +442,8 @@ func tryAddSmartLock(_forcer, _addMessage = true):
 		chanceLock = 32.0 - 8.0*amountOfSmartLockedItems
 	elif(rarityString == "bdsmslut"):
 		chanceLock = 60.0 - 10.0*amountOfSmartLockedItems
+	elif(rarityString == "always"):
+		chanceLock = 100.0
 	elif(rarityString == "never"):
 		return false
 	

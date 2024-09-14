@@ -90,13 +90,13 @@ func getChildBirthInfoString(childs):
 	return bornChildString
 
 func shouldOptimize() -> bool:
-	return false
+	return OPTIONS.shouldOptimizeKids()
 
 func getMaxStoredRecordsForPC() -> int:
-	return 50
+	return OPTIONS.getMaxKeepPCKids()
 
 func getMaxStoredRecordsForNPC() -> int:
-	return 50
+	return OPTIONS.getMaxKeepNPCKids()
 
 func optimize():
 	if(!shouldOptimize()):
@@ -147,7 +147,7 @@ func addArchiveChild(motherID:String, fatherID:String):
 	if(!archive.has(theID)):
 		archive[theID] = 1
 	else:
-		archive[theID] = 0
+		archive[theID] += 1
 
 func getArchiveChildCount(motherID:String, fatherID:String) -> int:
 	var theID:String = getArchiveID(motherID, fatherID)
@@ -170,7 +170,7 @@ func getArchiveChildCountMotherID(motherID:String) -> int:
 	for theID in archive:
 		var splitData:Array = theID.split(";")
 		if(splitData[0] == motherID):
-			result += 1
+			result += archive[theID]
 	return result
 
 func getArchiveChildCountFatherID(fatherID:String) -> int:
@@ -178,7 +178,7 @@ func getArchiveChildCountFatherID(fatherID:String) -> int:
 	for theID in archive:
 		var splitData:Array = theID.split(";")
 		if(splitData.size() > 1 && splitData[1] == fatherID):
-			result += 1
+			result += archive[theID]
 	return result
 
 func getArchiveChildCountMotherOrFather(charID:String) -> int:
@@ -186,7 +186,15 @@ func getArchiveChildCountMotherOrFather(charID:String) -> int:
 	for theID in archive:
 		var splitData:Array = theID.split(";")
 		if(splitData[0] == charID || (splitData.size() > 1 && splitData[1] == charID)):
-			result += 1
+			result += archive[theID]
+	return result
+
+func getArchiveChildCountNonPC() -> int:
+	var result:int = 0
+	for theID in archive:
+		var splitData:Array = theID.split(";")
+		if(splitData[0] != "pc" && (splitData.size() > 1 && splitData[1] != "pc")):
+			result += archive[theID]
 	return result
 
 func saveData():
