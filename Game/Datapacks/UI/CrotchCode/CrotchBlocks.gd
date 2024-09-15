@@ -205,6 +205,8 @@ static func getAll():
 		"FlagSetBool",
 		"FlagInc",
 		
+		"FlagGlobGet",
+		
 		"ToString",
 		"ToInt",
 		"ToFloat",

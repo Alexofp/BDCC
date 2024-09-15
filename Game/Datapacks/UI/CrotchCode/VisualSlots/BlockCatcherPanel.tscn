@@ -140,6 +140,13 @@ margin_bottom = 28.0
 text = "Pick.."
 script = SubResource( 5 )
 
+[node name="FlagPickerButton" type="Button" parent="MarginContainer"]
+margin_left = 10.0
+margin_right = 1270.0
+margin_bottom = 28.0
+text = "Pick.."
+script = SubResource( 5 )
+
 [connection signal="value_changed" from="MarginContainer/SpinBox" to="." method="_on_SpinBox_value_changed"]
 [connection signal="text_changed" from="MarginContainer/LineEdit" to="." method="_on_LineEdit_text_changed"]
 [connection signal="item_selected" from="MarginContainer/OptionButton" to="." method="_on_OptionButton_item_selected"]
@@ -147,3 +154,4 @@ script = SubResource( 5 )
 [connection signal="pressed" from="MarginContainer/BigTextEdit/OpenFullButton" to="." method="_on_OpenFullButton_pressed"]
 [connection signal="pressed" from="MarginContainer/MapButton" to="." method="_on_MapButton_pressed"]
 [connection signal="pressed" from="MarginContainer/AdvancedPickerButton" to="." method="_on_AdvancedPickerButton_pressed"]
+[connection signal="pressed" from="MarginContainer/FlagPickerButton" to="." method="_on_FlagPickerButton_pressed"]
