@@ -103,17 +103,23 @@ func updatePossibleFlags():
 func updateFlagList():
 	flag_list.clear()
 	
-	var theFlags:Array = []
+	var theFlags = {}
 	if(sourceIsGlobal):
-		theFlags = Flag.getFlags().keys()
+		theFlags = Flag.getFlags()
 	elif(sourceIsModule):
-		theFlags = GlobalRegistry.getModule(flagSource).getFlagsCache().keys()
+		theFlags = GlobalRegistry.getModule(flagSource).getFlagsCache()
 	elif(sourceIsDatapack):
-		theFlags = GlobalRegistry.getDatapack(flagSource).flags.keys()
+		theFlags = GlobalRegistry.getDatapack(flagSource).flags
 	
 	var _i:int = 0
 	for flag in theFlags:
-		flag_list.add_item(flag)
+		var flagTypeStr:String = "Unknown"
+		if(sourceIsDatapack):
+			flagTypeStr = DatapackSceneVarType.getName(theFlags[flag]["type"])
+		else:
+			flagTypeStr = FlagType.getVisibleName(theFlags[flag]["type"])
+		
+		flag_list.add_item(flag+" ("+flagTypeStr+")")
 		
 		if(flagSource == flagSource && flagID == flag):
 			flag_list.select(_i)

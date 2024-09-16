@@ -17,8 +17,8 @@ func execute(_contex:CodeContex):
 	
 	if(_contex.hadAnError()):
 		return false
-	if(!isString(contentSlot)):
-		throwError(_contex, "Content type must be a string, got "+str(contentSlot)+" instead")
+	if(!isString(contentType)):
+		throwError(_contex, "Content type must be a string, got "+str(contentType)+" instead")
 		return false
 	
 	return OPTIONS.isContentEnabled(contentType)

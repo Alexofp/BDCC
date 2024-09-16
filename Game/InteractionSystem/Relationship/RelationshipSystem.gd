@@ -80,6 +80,22 @@ func getLust(char1:String, char2:String) -> float:
 		return 0.0
 	return getEntry(char1, char2).lust
 
+func setAffection(char1:String, char2:String, newValue:float, showMessage:bool = false, showPCMessage:bool = true):
+	newValue = clamp(newValue, -1.0, 1.0)
+	var currentVal:float = getAffection(char1, char2)
+	
+	var diff:float = newValue - currentVal
+	
+	addAffection(char1, char2, diff, showMessage, showPCMessage)
+
+func setLust(char1:String, char2:String, newValue:float, showMessage:bool = false, showPCMessage:bool = true):
+	newValue = clamp(newValue, 0.0, 1.0)
+	var currentVal:float = getLust(char1, char2)
+	
+	var diff:float = newValue - currentVal
+	
+	addLust(char1, char2, diff, showMessage, showPCMessage)
+
 func addAffection(char1:String, char2:String, howMuch:float, showMessage:bool = false, showPCMessage:bool = true):
 	var theEntry := getEntry(char1, char2)
 	

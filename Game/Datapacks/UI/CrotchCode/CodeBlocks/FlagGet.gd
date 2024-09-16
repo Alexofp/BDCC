@@ -17,10 +17,11 @@ func execute(_contex:CodeContex):
 	
 	if(_contex.hadAnError()):
 		return null
-	if(!_contex.hasFlag(flagID)):
-		throwError(_contex, "Flag not found "+str(flagID))
+	if(!isString(flagID)):
+		throwError(_contex, "Flag id must a string, got "+str(flagID)+" instead")
 		return null
-	return _contex.getFlag(flagID)
+	
+	return _contex.getFlag(flagID, null, self)
 
 func getTemplate():
 	return [

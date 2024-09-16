@@ -24,3 +24,6 @@ static func getAllWithNames():
 		result.append([statID, repStat.getVisibleName()])
 	
 	return result
+
+static func getAll():
+	return GlobalRegistry.getRepStats().keys()

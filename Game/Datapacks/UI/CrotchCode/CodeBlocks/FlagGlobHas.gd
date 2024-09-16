@@ -1,5 +1,8 @@
 extends "res://Game/Datapacks/UI/CrotchCode/CodeBlocks/FlagGet.gd"
 
+func getType():
+	return CrotchBlocks.LOGIC
+
 func execute(_contex:CodeContex):
 	var flagID = str(varNameSlot.getValue(_contex))
 	
@@ -9,13 +12,13 @@ func execute(_contex:CodeContex):
 		throwError(_contex, "Flag id must a string, got "+str(flagID)+" instead")
 		return null
 	
-	return _contex.getFlagRaw(flagID)
+	return _contex.hasFlagRaw(flagID)
 
 func getTemplate():
 	return [
 		{
 			type = "label",
-			text = "Get",
+			text = "Flag exists",
 		},
 		{
 			type = "slot",

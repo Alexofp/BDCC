@@ -165,3 +165,20 @@ func makeSureReactMode(_contex:CodeContex):
 		throwError(_contex, "This code block only supports getting executed in the 'React' mode (INSIDE of addButton/runScene calls)")
 		return false
 	return true
+
+func hasSlotObject(theSlot) -> bool:
+	for entry in getTemplate():
+		if(entry["type"] in ["slot", "slot_list"]):
+			var anSlot = getSlot(entry["id"])
+			
+			if(theSlot == anSlot):
+				return true
+			
+			if(entry["type"] == "slot"):
+				if(anSlot.block != null && anSlot.block.hasSlotObject(theSlot)):
+					return true
+			elif(entry["type"] == "slot_list"):
+				for theBlock in anSlot.blocks:
+					if(theBlock.hasSlotObject(theSlot)):
+						return true
+	return false

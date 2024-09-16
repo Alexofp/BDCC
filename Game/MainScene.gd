@@ -804,6 +804,37 @@ func clearFlag(flagID):
 func increaseFlag(flagID, addvalue = 1):
 	setFlag(flagID, getFlag(flagID, 0) + addvalue)
 
+func hasFlag(flagID:String) -> bool:
+	var splitData = Util.splitOnFirst(flagID, ".")
+	if(splitData.size() > 1):
+		var modules = GlobalRegistry.getModules()
+		var moduleID:String = splitData[0]
+		if(!modules.has(moduleID)):
+			return false
+		var module:Module = modules[moduleID]
+		var moduleFlagsCache:Dictionary = module.getFlagsCache()
+		if(moduleFlagsCache.has(splitData[1])):
+			return true
+		return false
+	
+	var splitData2 = Util.splitOnFirst(flagID, ":")
+	if(splitData2.size() > 1):
+		#return getDatapackFlag(splitData2[0], splitData2[1], defaultValue)
+		var datapackID:String = splitData2[0]
+		if(!loadedDatapacks.has(datapackID)):
+			return false
+		
+		var datapack:Datapack = GlobalRegistry.getDatapack(datapackID)
+		if(datapack == null):
+			return false
+		if(!datapack.flags.has(splitData2[1])):
+			return false
+		return true
+	
+	if(flagsCache.has(flagID)):
+		return true
+	return false
+
 func getFlag(flagID, defaultValue = null):
 	var splitData = Util.splitOnFirst(flagID, ".")
 	if(splitData.size() > 1):

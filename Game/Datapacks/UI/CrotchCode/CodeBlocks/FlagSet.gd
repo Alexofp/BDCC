@@ -22,6 +22,9 @@ func execute(_contex:CodeContex):
 	var flagID = str(varNameSlot.getValue(_contex))
 	if(_contex.hadAnError()):
 		return
+	if(!isString(flagID)):
+		throwError(_contex, "Flag id must a string, got "+str(flagID)+" instead")
+		return
 		
 	var setValue = varValueSlot.getValue(_contex)
 	if(_contex.hadAnError()):
