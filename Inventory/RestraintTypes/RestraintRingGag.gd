@@ -39,3 +39,9 @@ func doStruggle(_pc, _minigame:MinigameResult):
 	#damage = calcDamage()
 	
 	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
+
+func getTightLockRequiredItemID() -> String:
+	return "Shiv"
+
+func getTightLockUnlockMessage() -> String:
+	return "The lock is impossible to remove so you just cut through the leather straps of the head harness with a shiv, being careful as to not hurt yourself in the process."

@@ -9,7 +9,15 @@ func getName():
 	return "Tight lock"
 
 func getUnlockDescription():
-	return "Unable to struggle off. Has "+str(keyAmount)+" keyholes, requiring that many restraint keys to unlock."
+	var restData:RestraintData = getRestraintData()
+	if(restData == null):
+		return "ERROR, SOMETHING WENT WRONG"
+	var requiredItemID:String = restData.getTightLockRequiredItemID()
+	var reqItem:ItemBase = GlobalRegistry.getItemRef(requiredItemID)
+	if(reqItem == null):
+		return "ERROR, SOMETHING WENT WRONG"
+	
+	return "Unable to struggle off, requires a special item to unlock! Alternatively, has "+str(keyAmount)+" keyholes, requiring that many restraint keys to unlock.\nRequired item to unlock: "+reqItem.getVisibleName()
 
 func getKeysAmountToUnlock() -> int:
 	return keyAmount
