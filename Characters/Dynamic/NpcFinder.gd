@@ -87,7 +87,13 @@ static func grabNpcIDFromPool(poolID, _conditions = []):
 	
 	if(characters.size() > 0):
 		if(_conditions.size() == 0):
-			return RNG.pick(characters)
+			var tryCount:int = 10
+			for _i in range(tryCount):
+				var randCharID:String = RNG.pick(characters)
+				var character:BaseCharacter = GlobalRegistry.getCharacter(randCharID)
+				if(!npcCanBeUsedAtAll(character, _conditions)):
+					continue
+				return randCharID
 		
 		characters.shuffle()
 		for characterID in characters:
