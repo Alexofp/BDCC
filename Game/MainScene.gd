@@ -1335,8 +1335,11 @@ func doDebugAction(id, args = {}):
 		while(tryAmount > 0):
 			var itemID = RNG.pick(GlobalRegistry.getItemIDsByTag(ItemTag.BDSMRestraint))
 			var anItem:ItemBase = GlobalRegistry.createItem(itemID)
-			if(anItem.getClothingSlot() == null || anItem.getClothingSlot() in [InventorySlot.Static1, InventorySlot.Static2, InventorySlot.Static3] || anItem.hasTag(ItemTag.AllowsEnslaving) || anItem.hasTag(ItemTag.PortalPanties) || (anItem.restraintData != null && (anItem.restraintData is RestraintUnremovable))):
+			if(anItem.hasTag(ItemTag.ImaginaryRestraint) || anItem.getClothingSlot() == null || anItem.getClothingSlot() in [InventorySlot.Static1, InventorySlot.Static2, InventorySlot.Static3] || anItem.hasTag(ItemTag.AllowsEnslaving) || anItem.hasTag(ItemTag.PortalPanties) || (anItem.restraintData != null && (anItem.restraintData is RestraintUnremovable))):
 				tryAmount -= 1
+				continue
+			if(GM.pc.getInventory().hasSlotEquipped(anItem.getClothingSlot())):
+				tryAmount -= 5
 				continue
 			
 			GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(anItem)
