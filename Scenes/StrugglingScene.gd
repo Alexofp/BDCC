@@ -134,7 +134,7 @@ func _run():
 	if(state == "keyminigame"):
 		saynn("Since you can't use your fingers you have to carefully balance the key between your palms and guide it towards the lock.")
 		
-		saynn("To succsessfully unlock the restraint you have to guess a number between 1 and 15. You have "+str(keyGameTries)+" "+Util.multipleOrSingularEnding(keyGameTries, "try", "tries")+" left")
+		saynn("To successfully unlock the restraint you have to guess a number between 1 and 15. You have "+str(keyGameTries)+" "+Util.multipleOrSingularEnding(keyGameTries, "try", "tries")+" left")
 
 		if(keyText != ""):
 			saynn(keyText)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Game/Datapacks/UI/PackVariables.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Datapacks/UI/Editors/DatapackSceneEditor.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Game/Datapacks/UI/PackVarsCollapsableRegion.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Game/Datapacks/UI/CrotchCode/UI/ImageListEntry.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Game/Datapacks/UI/PackVarUIs/NumberVarUI.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/UI/QuickUIScaleOverrider.tscn" type="PackedScene" id=11]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0901961, 0.0901961, 0.0901961, 1 )
@@ -78,13 +79,13 @@ margin_bottom = -4.0
 
 [node name="HBoxContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/TabContainer/States"]
 margin_right = 1272.0
-margin_bottom = 660.0
+margin_bottom = 646.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="StatesList" type="VBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer"]
 margin_right = 206.0
-margin_bottom = 660.0
+margin_bottom = 646.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList"]
@@ -173,20 +174,20 @@ clip_text = true
 [node name="StatesList" type="ItemList" parent="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList"]
 margin_top = 70.0
 margin_right = 206.0
-margin_bottom = 636.0
+margin_bottom = 622.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="RemoveStateButton" type="Button" parent="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/StatesList"]
-margin_top = 640.0
+margin_top = 626.0
 margin_right = 206.0
-margin_bottom = 660.0
+margin_bottom = 646.0
 text = "Delete state"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer"]
 margin_left = 218.0
 margin_right = 1272.0
-margin_bottom = 660.0
+margin_bottom = 646.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 5.0
@@ -200,19 +201,19 @@ align = 1
 [node name="HBoxContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/VBoxContainer"]
 margin_top = 18.0
 margin_right = 1054.0
-margin_bottom = 660.0
+margin_bottom = 646.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VSplitContainer" parent="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer"]
 margin_right = 746.0
-margin_bottom = 642.0
+margin_bottom = 628.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 margin_right = 746.0
-margin_bottom = 529.0
+margin_bottom = 517.0
 size_flags_vertical = 3
 
 [node name="StateLabel" type="Label" parent="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
@@ -226,14 +227,14 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 18.0
 margin_right = 746.0
-margin_bottom = 529.0
+margin_bottom = 517.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 541.0
+margin_top = 529.0
 margin_right = 746.0
-margin_bottom = 642.0
+margin_bottom = 628.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 
@@ -245,7 +246,7 @@ text = "Test"
 [node name="OutputTextLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/VBoxContainer2"]
 margin_top = 24.0
 margin_right = 746.0
-margin_bottom = 101.0
+margin_bottom = 99.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 bbcode_enabled = true
@@ -253,7 +254,7 @@ bbcode_enabled = true
 [node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer"]
 margin_left = 758.0
 margin_right = 1054.0
-margin_bottom = 642.0
+margin_bottom = 628.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.4
@@ -267,7 +268,7 @@ align = 1
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer/TabContainer/States/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_top = 18.0
 margin_right = 296.0
-margin_bottom = 642.0
+margin_bottom = 628.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -275,7 +276,7 @@ size_flags_vertical = 3
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 296.0
-margin_bottom = 624.0
+margin_bottom = 610.0
 filter = 1
 
 [node name="Variables" type="VBoxContainer" parent="VBoxContainer/MarginContainer/TabContainer"]
@@ -516,7 +517,7 @@ margin_top = 640.0
 margin_right = 205.0
 margin_bottom = 660.0
 custom_colors/font_color = Color( 1, 0.6, 0.6, 1 )
-text = "Detele trigger"
+text = "Delete trigger"
 
 [node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/MarginContainer/TabContainer/Triggers/HBoxContainer"]
 margin_left = 217.0
@@ -756,10 +757,17 @@ margin_bottom = 720.0
 columns = 5
 
 [node name="SaveButton" type="Button" parent="VBoxContainer/GridContainer"]
-margin_right = 256.0
+margin_right = 298.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 text = "Save"
+
+[node name="QuickUIScaleOverrider" parent="VBoxContainer/GridContainer" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 302.0
+margin_right = 387.0
+margin_bottom = 20.0
 
 [connection signal="onVariableChange" from="VBoxContainer/MarginContainer/TabContainer/Info/ScrollContainer/PackVariables" to="." method="_on_PackVariables_onVariableChange"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/TabContainer/Info/HBoxContainer/TutorialButton" to="." method="_on_TutorialButton_pressed"]

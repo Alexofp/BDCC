@@ -957,6 +957,9 @@ func applyOption(categoryID, optionID, value):
 	print("SETTING "+categoryID+":"+optionID+" TO "+str(value))
 
 func applySettingsEffect():
+	applyUIScale()
+	
+func applyUIScale():
 	if(shouldScaleUI):
 		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D,SceneTree.STRETCH_ASPECT_EXPAND,Vector2(1280,720), uiScaleMultiplier)
 	else:

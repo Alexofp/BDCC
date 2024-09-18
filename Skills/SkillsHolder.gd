@@ -259,8 +259,9 @@ func addPerk(perkID):
 		return
 	
 	var newperk = GlobalRegistry.createPerk(perkID)
-	newperk.setCharacter(npc)
-	perks[perkID] = newperk
+	if(newperk != null):
+		newperk.setCharacter(npc)
+		perks[perkID] = newperk
 
 func removePerk(perkID):
 	if(!hasPerk(perkID)):
@@ -365,7 +366,11 @@ func getBuffs():
 		if(isPerkDisabled(perkID)):
 			continue
 		var perk = perks[perkID]
-		result.append_array(perk.getBuffs())
+		if(perk == null):
+			continue
+		var buffsToAdd = perk.getBuffs()
+		if(buffsToAdd != null && (buffsToAdd is Array)):
+			result.append_array(buffsToAdd)
 	
 	return result
 

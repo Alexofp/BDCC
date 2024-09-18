@@ -30,7 +30,7 @@ func _run():
 		saynn("[say=avy]I will make it easy for you. I’m fucking you either way. Your next words will decide if I will use this or not.[/say]")
 
 		addButton("Breed me!", "You crave for a good fucking, who needs condoms", "breed_me!")
-		addButton("Beg", "Beg her not to use a condom. Avy might listen or she might not", "beg")
+		addButton("Beg", "Beg her to use a condom. Avy might listen or she might not", "beg")
 		addButton("Fuck off", "Tell her that she can go screw herself instead", "fuck_off")
 
 
