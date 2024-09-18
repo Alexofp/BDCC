@@ -5,6 +5,41 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.1.6] - 2024-09-18
+### Added
+- A brand new Interaction System that makes the prison feel truly alive. All the dynamic characters are now simulated as little 'pawns' that you can see on the map. They go about their business, work, eat, shower, wander around, get themselves into trouble and more. And the player is now one of those pawns too! Stuff can be happening around the prison with you present or not, player can take any role in any interaction or be completely absent, the prison life carries on no matter what! By default, the game will simulate 30 pawns but that number can be changed in the options.
+- Pawns might have sex with each other and occasionally breed each other.. if you don't want that, there is now an 'off-screen breeding chance'. You can either completely disable the breeding or lower the chances by a lot.
+- Stocks/slutwall got converted into an interaction. Find and use inmates who were unfortunate enough to end up in them or be put into them yourself.
+- Prostitution interaction. Whore yourself out for some credits if you want. If the client isn't satisfied, they can ask for their credits back.. but you can also scam them out of their credits if you dare! Npcs can do all of this too, thanks to the interaction system.
+- If you get beaten up unconscious during sex, you stay unconscious.. One of the brave nurses will try to save you.. unless someone else puts their hands on you first.
+- Talk, flirt, offer sex and attack any pawn. There is a generic 'talk' interaction in place now that allows for this.
+- Ask others to help you with restraints. Or help other unfortunate folks and make friends that way.. or ask for credits instead. If you have any 'keyholder' smart-locks on your gear, you can ask to get the key back.. and see what happens.
+- Npc slavery supports the interaction system now. If you put your slave into stocks, they will be simulated like any other pawn. Prositution works like this too, your slave now actually has to earn credits from clients, I don't cheat this part anymore.
+- Dynamic (randomly-generated or datapack ones) characters can now earn experience from fights and level up! You won't be stuck with a whole prison of level 4 inmates anymore ^^. Npcs will randomly spend their stat points on level ups.
+- A simple reputation system. There are 4 reputations now: Whore, Alpha, Inmates respect, Staff respect. They all have multiple levels and come with some benefits. For example, the whore reputation will make people agree to fuck you more.. which helps a lot with prostitution. Sometimes you will need to do a special challenge to go to the next reputation level.
+- Pawns around you will occasionally comment on your state and actions, increasing certain reputations.
+- A (very) simple relationship system. Any pair of characters now has a lust and affection values shared between them. Earn affection by chatting or helping.. lose it by attacking. Earn lust by satisfying them in sex or flirting. Some actions become available at certain affection and lust levels.
+- Child records auto-optimizer. Enabled by default for new players but disabled for old saves. What it does is 'archive' the oldest kid entries once their amount goes over the specified limit. Archived records are stripped of most information like name/species, they only retain the father and mother ids and the amount of kids. This should help against save bloating for very breed-eager folks. Kids will obviously never play a huge part in BDCC's gameplay so you're not losing much. The nursery scene is edited to support the archived records.
+- TightLock smart-lock got overhauled. It now has an alternative unlock method that doesn't require restraint keys. Metal tight-locked restraints can now be unlocked with a stun baton (by frying the lock off) and leather/rope restraints can be unlocked with a shiv (by cutting through them). The item gets consumed and the restraint gets destroyed in the process.
+- Minimap supports zooming now
+- Added 7 skins made by AverageAce!
+- Added shower masturbation scenes writted by AverageAce.
+- New code blocks for the scene editor. Global flag editing, relationship and reputation related ones.
+- Can now quickly change the UI scale inside the scene editor, allowing to fit more blocks on screen.
+- +5 and +10 buttons for quickly upping the stats (by PoisonFox).
+
+### Changed
+- Sex doesn't end instantly when dom's goals are satisfied now. It will end once the latest sex activity has ended instead.
+- Can use the Space key in the struggling minigame now as an alternative to clicking.
+- Datapack editors should work a little better on androids, all the drop-down lists were replaced with smart ones that don't break with a huge amount of entries (there was no scrollbar)
+
+### Fixed
+- Crash that was happening when you were putting the same codeblock into itself.
+- Fixed ability to just take off smart-locked blindfolds, plugs and harnesses.
+- Fixed SlutLock giving you impossible tasks (like swallowing cum on a ballgag)
+- 'Excluded from encounters' checkbox should now work properly for the datapack characters.
+- Your ability to see the typos that the game has is now removed.
+
 ## [0.1.5] - 2024-08-02
 ### Added
 - Added ability to create scenes and quests with datapacks! Give your characters whole storylines or just a unique encounter or two, the new system is very flexible. No need to pull your hair out with the godot editor, new scenes/quests could be created entirely from inside the game. No need to learn complicated scripting languages, I coded a simple (but powerful) visual system where you create scenes by assembling them out of blocks (Scratch-like system).
@@ -441,7 +476,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.5...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.6...main
+[0.1.6]: https://github.com/Alexofp/BDCC/compare/0.1.5...0.1.6
 [0.1.5]: https://github.com/Alexofp/BDCC/compare/0.1.4...0.1.5
 [0.1.4]: https://github.com/Alexofp/BDCC/compare/0.1.3...0.1.4
 [0.1.3]: https://github.com/Alexofp/BDCC/compare/0.1.2...0.1.3
