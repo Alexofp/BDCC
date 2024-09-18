@@ -54,3 +54,48 @@ func getVisibleName(_topicID):
 
 	
 	return "error:"+str(_topicID)
+
+func getChatName(_topicID) -> String:
+	if(_topicID == InterestTopic.FullyNaked):
+		return "nudity"
+	if(_topicID == InterestTopic.ExposedPussy):
+		return "pussies"
+	if(_topicID == InterestTopic.ExposedAnus):
+		return "asses"
+	if(_topicID == InterestTopic.ExposedBreasts):
+		return "tits"
+	if(_topicID == InterestTopic.ExposedCock):
+		return "cocks"
+	if(_topicID == InterestTopic.ExposedPanties):
+		return "panties"
+	if(_topicID == InterestTopic.ExposedBra):
+		return "bras"
+	
+	return .getChatName(_topicID)
+
+func getAddsToFocus(_topicID, _focus) -> float:
+	if(_topicID == InterestTopic.FullyNaked):
+		if(_focus == LustFocus.Body):
+			return 1.0
+	if(_topicID == InterestTopic.ExposedPussy):
+		if(_focus == LustFocus.Crotch):
+			return 1.0
+	if(_topicID == InterestTopic.ExposedAnus):
+		if(_focus == LustFocus.Butt):
+			return 1.0
+	if(_topicID == InterestTopic.ExposedBreasts):
+		if(_focus == LustFocus.Breasts):
+			return 1.0
+	if(_topicID == InterestTopic.ExposedCock):
+		if(_focus == LustFocus.Crotch):
+			return 1.0
+	if(_topicID == InterestTopic.ExposedPanties):
+		if(_focus == LustFocus.Crotch):
+			return 1.0
+		if(_focus == LustFocus.Butt):
+			return 1.0
+	if(_topicID == InterestTopic.ExposedBra):
+		if(_focus == LustFocus.Breasts):
+			return 1.0
+	
+	return 0.0

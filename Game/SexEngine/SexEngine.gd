@@ -17,13 +17,26 @@ var sexResult = {}
 
 var sexType:SexTypeBase
 
-func initSexType(theSexType, args = {}):
+var disabledGoals:Dictionary = {}
+var bondageDisabled:bool = false
+
+func initSexType(theSexType, args:Dictionary = {}):
 	if(theSexType is String):
 		theSexType = GlobalRegistry.createSexType(theSexType)
 	if(theSexType == null):
 		sexType = GlobalRegistry.createSexType(SexType.DefaultSex)
 	else:
 		sexType = theSexType
+		
+	if(args.has("unconscious") && args["unconscious"]):
+		for subID in subs:
+			getSubInfo(subID).getChar().addConsciousness(-1.0)
+		
+	if(args.has("disabledGoals")):
+		disabledGoals = args["disabledGoals"]
+		
+	if(args.has("bondageDisabled")):
+		bondageDisabled = args["bondageDisabled"]
 		
 	if(sexType != null):
 		sexType.setSexEngine(self)
@@ -275,6 +288,8 @@ func generateGoals():
 			var goalsToAdd = dom.getFetishHolder().getGoals(self, sub)
 			if(goalsToAdd != null):
 				for goal in goalsToAdd:
+					if(disabledGoals.has(goal[0])):
+						continue
 					if(subID == "pc"):
 						if(GM.main.getEncounterSettings().isGoalDisabledForSubPC(goal[0])):
 							continue
@@ -306,6 +321,7 @@ func generateGoals():
 				personDomInfo.goals.append(randomGoalInfo.duplicate(true))
 			
 		print("Goals added to NPC: ", personDomInfo.goals)
+		personDomInfo.afterGoalsAssigned()
 	
 	if(!isDom("pc") && !generatedAnyGoals):
 		messages.append("Dom couldn't decide what to do with the sub, none of their fetishes apply.")
@@ -313,6 +329,51 @@ func generateGoals():
 		messages.append("[say="+str(RNG.pick(doms))+"]You are a lucky slut.[/say]")
 		
 	#domInfo.goals.append([SexGoal.Fuck, subID])
+
+func doFastSex():
+	var newResult:Dictionary = {}
+	
+	
+	newResult["doms"] = {}
+	newResult["subs"] = {}
+	
+	for subID in subs:
+		GM.main.updateCharacterUntilNow(subID)
+		GM.main.startUpdatingCharacter(subID)
+	
+	for domID in doms:
+		GM.main.updateCharacterUntilNow(domID)
+		GM.main.startUpdatingCharacter(domID)
+		
+		#var dom = personDomInfo.getChar()
+		var domInfo = doms[domID]
+		
+		for goalInfo in domInfo.goals:
+			var goalID = goalInfo[0]
+			var goalSubID = goalInfo[1]
+			var goalData = goalInfo[2]
+			
+			var sexGoal:SexGoalBase = GlobalRegistry.getSexGoal(goalID)
+			if(sexGoal != null):
+				sexGoal.doFastSex(self, domInfo, getSubInfo(goalSubID), goalData)
+				
+	for domID in doms:
+		newResult["doms"][domID] = {
+			"timesCame": RNG.randi_range(0, 3),
+			"averageLust": RNG.randf_rangeX2(0.0, 1.0),
+			"satisfaction": RNG.randf_rangeX2(0.0, 1.0),
+		}
+	for subID in subs:
+		newResult["subs"][subID] = {
+			"timesCame": RNG.randi_range(0, 3),
+			"averageLust": RNG.randf_rangeX2(0.0, 1.0),
+			"averageResistance": RNG.randf_rangeX2(0.0, 1.0),
+			"averageFear": RNG.randf_rangeX2(0.0, 1.0),
+			"satisfaction": RNG.randf_rangeX2(0.0, 1.0),
+			"isUnconscious": RNG.chance(5),
+		}
+	
+	return newResult
 
 func checkIfThereAreAnyActivitiesThatSupportGoal(goalID):
 	var allactivities = GlobalRegistry.getSexActivityReferences()
@@ -366,17 +427,32 @@ func hasGoalScore(thedominfo, goal, thesubinfo):
 			
 	return 0.0
 
-func satisfyGoal(thedominfo, goalid, thesubinfo):
+func removeGoal(thedominfo, goalid, thesubinfo):
 	for _i in range(0, thedominfo.goals.size()):
 		var goalInfo = thedominfo.goals[_i]
 		
 		if(goalInfo[0] == goalid && goalInfo[1] == thesubinfo.charID):
 			thedominfo.goals.remove(_i)
-			print(str(thedominfo.charID)+"'s goal to "+str(goalInfo[0])+" "+str(goalInfo[1])+" was satisfied")
 			return true
 	return false
 
-func progressGoal(thedominfo, goalid, thesubinfo, args = []):
+func satisfyGoal(thedominfo, goalid, thesubinfo):
+	if(removeGoal(thedominfo, goalid, thesubinfo)):
+		print(str(thedominfo.charID)+"'s goal to "+str(goalid)+" "+str(thesubinfo.charID)+" was satisfied")
+		thedominfo.onGoalSatisfied(thedominfo, goalid, thesubinfo)
+		thesubinfo.onGoalSatisfied(thedominfo, goalid, thesubinfo)
+		return true
+	return false
+
+func failGoal(thedominfo, goalid, thesubinfo):
+	if(removeGoal(thedominfo, goalid, thesubinfo)):
+		print(str(thedominfo.charID)+"'s goal to "+str(goalid)+" "+str(thesubinfo.charID)+" was failed")
+		thedominfo.onGoalFailed(thedominfo, goalid, thesubinfo)
+		thesubinfo.onGoalFailed(thedominfo, goalid, thesubinfo)
+		return true
+	return false
+
+func progressGoalGeneric(thedominfo, goalid, thesubinfo, args = []):
 	for _i in range(0, thedominfo.goals.size()):
 		var goalInfo = thedominfo.goals[_i]
 		
@@ -386,12 +462,25 @@ func progressGoal(thedominfo, goalid, thesubinfo, args = []):
 			return true
 	return false
 
+func progressGoal(thedominfo, goalid, thesubinfo, args = []):
+	if(progressGoalGeneric(thedominfo, goalid, thesubinfo, args)):
+		thedominfo.onGoalSatisfied(thedominfo, goalid, thesubinfo, 0.5)
+		thesubinfo.onGoalSatisfied(thedominfo, goalid, thesubinfo, 0.5)
+		return true
+	return false
+
+func progressGoalFailed(thedominfo, goalid, thesubinfo, args = []):
+	if(progressGoalGeneric(thedominfo, goalid, thesubinfo, args)):
+		thedominfo.onGoalFailed(thedominfo, goalid, thesubinfo, 0.5)
+		thesubinfo.onGoalFailed(thedominfo, goalid, thesubinfo, 0.5)
+		return true
+	return false
+
 func replaceGoal(thedominfo, goalid, thesubinfo, newgoalid, replaceAll = true):
 	var atLeastOneReplaced = false
 	for goalInfo in thedominfo.goals:
 		if(goalInfo[0] == goalid && goalInfo[1] == thesubinfo.charID):
 			goalInfo[0] = newgoalid
-			print("Replaced goal")
 			if(!replaceAll):
 				return true
 			atLeastOneReplaced = true
@@ -955,14 +1044,20 @@ func sexShouldEnd():
 	if(isDom("pc") && getDomInfo("pc").canDoActions()):
 		return false
 		
+	var hasAnyHealthyDoms:bool = false
 	for domID in doms:
 		var domInfo = doms[domID]
+		
+		if(domInfo.canDoActions()):
+			hasAnyHealthyDoms = true
 		
 		if(domInfo.canDoActions() && domInfo.hasGoals()):
 			return false
 	
-	return true
-	#return false
+	if(activities.size() <= 0 || !hasAnyHealthyDoms):
+		return true
+	else:
+		return false
 
 func getRecovarableItemsAfterSex():
 	var result = []
@@ -1014,6 +1109,7 @@ func endSex():
 		sexResult["doms"][domID] = {
 			"timesCame": domInfo.timesCame,
 			"averageLust": domInfo.getAverageLust(),
+			"satisfaction": domInfo.calculateFinalSatisfaction(),
 		}
 	for subID in subs:
 		var subInfo = subs[subID]
@@ -1022,6 +1118,8 @@ func endSex():
 			"averageLust": subInfo.getAverageLust(),
 			"averageResistance": subInfo.getAverageResistance(),
 			"averageFear": subInfo.getAverageFear(),
+			"satisfaction": subInfo.calculateFinalSatisfaction(),
+			"isUnconscious": subInfo.isUnconscious(),
 		}
 	
 	sexEnded = true
@@ -1055,6 +1153,11 @@ func endSex():
 	for subID in subs:
 		var subInfo = subs[subID]
 		
+		var sexEndInfo = subInfo.getSexEndInfo()
+		if(sexEndInfo.size() > 0):
+			texts.append(subInfo.getChar().getName()+":")
+			texts.append(Util.join(sexEndInfo, "\n"))
+		
 		# Lets us loot used condoms
 		var theCondom = subInfo.getChar().getWornCondom()
 		if(theCondom != null):
@@ -1065,11 +1168,6 @@ func endSex():
 		
 		subInfo.getChar().afterSexEnded(subInfo)
 		subInfo.getChar().onSexEnded({sexEngine=self,isDom=false,sexFullResult=sexResult,sexResult=sexResult["subs"][subID]})
-
-		var sexEndInfo = subInfo.getSexEndInfo()
-		if(sexEndInfo.size() > 0):
-			texts.append(subInfo.getChar().getName()+":")
-			texts.append(Util.join(sexEndInfo, "\n"))
 
 	messages.append(Util.join(texts, "\n"))
 
@@ -1222,6 +1320,9 @@ func saveItemToLoot(theItem):
 func getSexResult():
 	return sexResult
 
+func isBondageDisabled() -> bool:
+	return bondageDisabled
+
 func saveData():
 	var data = {
 		"revealedBodyparts": revealedBodyparts,
@@ -1230,6 +1331,7 @@ func saveData():
 		"currentLastActivityID": currentLastActivityID,
 		"sexEnded": sexEnded,
 		"sexResult": sexResult,
+		"bondageDisabled": bondageDisabled,
 	}
 	if(sexType != null):
 		data["sexTypeID"] = sexType.id
@@ -1262,6 +1364,7 @@ func loadData(data):
 	currentLastActivityID = SAVE.loadVar(data, "currentLastActivityID", 0)
 	sexEnded = SAVE.loadVar(data, "sexEnded", false)
 	sexResult = SAVE.loadVar(data, "sexResult", {})
+	bondageDisabled = SAVE.loadVar(data, "bondageDisabled", false)
 	
 	var sexTypeID = SAVE.loadVar(data, "sexTypeID", SexType.DefaultSex)
 	var theSexType = GlobalRegistry.createSexType(sexTypeID)

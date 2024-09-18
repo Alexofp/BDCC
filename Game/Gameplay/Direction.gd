@@ -7,3 +7,6 @@ enum {
 	West,
 	East,
 }
+
+static func getAll():
+	return [North, South, West, East]

@@ -8,6 +8,8 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.PCLookingForTrouble)
 
 func react(_triggerID, _args):
+	if(true): # Disabled because of interactions
+		return
 	var isLookingForTrouble = (_triggerID == Trigger.PCLookingForTrouble)
 	var baseChance = 30 + 10.0*GM.pc.getExposure()
 	baseChance *= GM.pc.getEncounterChanceModifierStaff()

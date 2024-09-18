@@ -204,6 +204,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Characters/Dynamic/Generator/CharacterGeneratorBase.gd"
 }, {
+"base": "Reference",
+"class": "CharacterPawn",
+"language": "GDScript",
+"path": "res://Game/InteractionSystem/CharacterPawn.gd"
+}, {
 "base": "Object",
 "class": "CharacterPool",
 "language": "GDScript",
@@ -248,6 +253,26 @@ _global_script_classes=[ {
 "class": "ContentType",
 "language": "GDScript",
 "path": "res://Game/Options/ContentType.gd"
+}, {
+"base": "Reference",
+"class": "CreatedInteraction",
+"language": "GDScript",
+"path": "res://Util/InteractionCreator/CreatedInteraction.gd"
+}, {
+"base": "Reference",
+"class": "CreatedInteractionAction",
+"language": "GDScript",
+"path": "res://Util/InteractionCreator/CreatedInteractionAction.gd"
+}, {
+"base": "Reference",
+"class": "CreatedInteractionInterruption",
+"language": "GDScript",
+"path": "res://Util/InteractionCreator/CreatedInteractionInterruption.gd"
+}, {
+"base": "Reference",
+"class": "CreatedInteractionState",
+"language": "GDScript",
+"path": "res://Util/InteractionCreator/CreatedInteractionState.gd"
 }, {
 "base": "Object",
 "class": "CrotchBlockEditorType",
@@ -408,6 +433,31 @@ _global_script_classes=[ {
 "class": "DeepLTranslator",
 "language": "GDScript",
 "path": "res://Util/AutoTranslation/Translators/DeepLTranslator.gd"
+}, {
+"base": "Reference",
+"class": "DialogueFiller",
+"language": "GDScript",
+"path": "res://Game/ModularDialogue/DialogueFiller.gd"
+}, {
+"base": "Reference",
+"class": "DialogueFillerAdder",
+"language": "GDScript",
+"path": "res://Game/ModularDialogue/DialogueFillerAdder.gd"
+}, {
+"base": "Reference",
+"class": "DialogueForm",
+"language": "GDScript",
+"path": "res://Game/ModularDialogue/DialogueForm.gd"
+}, {
+"base": "Reference",
+"class": "DialogueFormBank",
+"language": "GDScript",
+"path": "res://Game/ModularDialogue/DialogueFormBank.gd"
+}, {
+"base": "Reference",
+"class": "DialogueParser",
+"language": "GDScript",
+"path": "res://Game/ModularDialogue/Parser/DialogueParser.gd"
 }, {
 "base": "Object",
 "class": "Direction",
@@ -619,6 +669,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Gameplay/Gender.gd"
 }, {
+"base": "Reference",
+"class": "GlobalTask",
+"language": "GDScript",
+"path": "res://Game/InteractionSystem/GlobalTask.gd"
+}, {
 "base": "TranslatorBase",
 "class": "GoogleBatchTranslator",
 "language": "GDScript",
@@ -698,6 +753,21 @@ _global_script_classes=[ {
 "class": "InmateType",
 "language": "GDScript",
 "path": "res://Game/Gameplay/InmateType.gd"
+}, {
+"base": "Object",
+"class": "InteractionGoal",
+"language": "GDScript",
+"path": "res://Game/InteractionSystem/InteractionGoal.gd"
+}, {
+"base": "Reference",
+"class": "InteractionGoalBase",
+"language": "GDScript",
+"path": "res://Game/InteractionSystem/InteractionGoalBase.gd"
+}, {
+"base": "Reference",
+"class": "InteractionSystem",
+"language": "GDScript",
+"path": "res://Game/InteractionSystem/InteractionSystem.gd"
 }, {
 "base": "Object",
 "class": "Interest",
@@ -793,6 +863,11 @@ _global_script_classes=[ {
 "class": "LustCombatState",
 "language": "GDScript",
 "path": "res://Game/LustCombat/LustCombatState.gd"
+}, {
+"base": "Object",
+"class": "LustFocus",
+"language": "GDScript",
+"path": "res://Game/LustCombat/LustFocus.gd"
 }, {
 "base": "Reference",
 "class": "LustInterests",
@@ -949,6 +1024,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Bodyparts/PartTrait.gd"
 }, {
+"base": "Reference",
+"class": "PawnInteractionBase",
+"language": "GDScript",
+"path": "res://Game/InteractionSystem/PawnInteractionBase.gd"
+}, {
+"base": "Object",
+"class": "PawnReactions",
+"language": "GDScript",
+"path": "res://Game/InteractionSystem/PawnReactions.gd"
+}, {
 "base": "Object",
 "class": "Perk",
 "language": "GDScript",
@@ -1008,6 +1093,36 @@ _global_script_classes=[ {
 "class": "RahiModule",
 "language": "GDScript",
 "path": "res://Modules/RahiModule/Module.gd"
+}, {
+"base": "Reference",
+"class": "RelationshipEntry",
+"language": "GDScript",
+"path": "res://Game/InteractionSystem/Relationship/RelationshipEntry.gd"
+}, {
+"base": "Reference",
+"class": "RelationshipSystem",
+"language": "GDScript",
+"path": "res://Game/InteractionSystem/Relationship/RelationshipSystem.gd"
+}, {
+"base": "Object",
+"class": "RepStat",
+"language": "GDScript",
+"path": "res://Game/Reputation/RepStat.gd"
+}, {
+"base": "Reference",
+"class": "RepStatBase",
+"language": "GDScript",
+"path": "res://Game/Reputation/RepStatBase.gd"
+}, {
+"base": "ReputationPlaceholder",
+"class": "Reputation",
+"language": "GDScript",
+"path": "res://Game/Reputation/Reputation.gd"
+}, {
+"base": "Reference",
+"class": "ReputationPlaceholder",
+"language": "GDScript",
+"path": "res://Game/Reputation/ReputationPlaceholder.gd"
 }, {
 "base": "RestraintData",
 "class": "RestraintBallGag",
@@ -1389,6 +1504,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Orifice/VaginaOrifice.gd"
 }, {
+"base": "Object",
+"class": "WHCond",
+"language": "GDScript",
+"path": "res://Game/WorldHistory/WHCond.gd"
+}, {
+"base": "Object",
+"class": "WHEvent",
+"language": "GDScript",
+"path": "res://Game/WorldHistory/WHEvent.gd"
+}, {
 "base": "Reference",
 "class": "WorldEditBase",
 "language": "GDScript",
@@ -1399,10 +1524,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/World/WorldFloor.gd"
 }, {
+"base": "Reference",
+"class": "WorldHistory",
+"language": "GDScript",
+"path": "res://Game/WorldHistory/WorldHistory.gd"
+}, {
+"base": "Reference",
+"class": "WorldHistoryEvent",
+"language": "GDScript",
+"path": "res://Game/WorldHistory/WorldHistoryEvent.gd"
+}, {
 "base": "Object",
 "class": "WorldPopulation",
 "language": "GDScript",
 "path": "res://Game/World/WorldPopulation.gd"
+}, {
+"base": "Object",
+"class": "WorldZone",
+"language": "GDScript",
+"path": "res://Game/World/Util/WorldZone.gd"
 } ]
 _global_script_class_icons={
 "AIStrategyBase": "",
@@ -1444,6 +1584,7 @@ _global_script_class_icons={
 "CharacterArchetype": "",
 "CharacterFlag": "",
 "CharacterGeneratorBase": "",
+"CharacterPawn": "",
 "CharacterPool": "",
 "CharacterType": "",
 "Child": "",
@@ -1453,6 +1594,10 @@ _global_script_class_icons={
 "ColorUtils": "",
 "ComputerBase": "",
 "ContentType": "",
+"CreatedInteraction": "",
+"CreatedInteractionAction": "",
+"CreatedInteractionInterruption": "",
+"CreatedInteractionState": "",
 "CrotchBlockEditorType": "",
 "CrotchBlocks": "",
 "CrotchFavBlocksResource": "",
@@ -1485,6 +1630,11 @@ _global_script_class_icons={
 "DatapackSkin": "",
 "DatapackTriggerCodeContext": "",
 "DeepLTranslator": "",
+"DialogueFiller": "",
+"DialogueFillerAdder": "",
+"DialogueForm": "",
+"DialogueFormBank": "",
+"DialogueParser": "",
 "Direction": "",
 "Doll3D": "",
 "DollAttachmentZone": "",
@@ -1527,6 +1677,7 @@ _global_script_class_icons={
 "GameUI": "",
 "GameWorld": "",
 "Gender": "",
+"GlobalTask": "",
 "GoogleBatchTranslator": "",
 "GoogleTranslator": "",
 "GuardGenerator": "",
@@ -1543,6 +1694,9 @@ _global_script_class_icons={
 "InmateGenerator": "",
 "InmateLoot": "",
 "InmateType": "",
+"InteractionGoal": "",
+"InteractionGoalBase": "",
+"InteractionSystem": "",
 "Interest": "",
 "InterestTopic": "",
 "Inventory": "",
@@ -1562,6 +1716,7 @@ _global_script_class_icons={
 "LustAction": "",
 "LustActivity": "",
 "LustCombatState": "",
+"LustFocus": "",
 "LustInterests": "",
 "MainScene": "",
 "MapDecoration": "",
@@ -1593,6 +1748,8 @@ _global_script_class_icons={
 "PartState": "",
 "PartStatePicker": "",
 "PartTrait": "",
+"PawnInteractionBase": "",
+"PawnReactions": "",
 "Perk": "",
 "PerkBase": "",
 "Personality": "",
@@ -1605,6 +1762,12 @@ _global_script_class_icons={
 "RNG": "",
 "RNGData": "",
 "RahiModule": "",
+"RelationshipEntry": "",
+"RelationshipSystem": "",
+"RepStat": "",
+"RepStatBase": "",
+"Reputation": "",
+"ReputationPlaceholder": "",
 "RestraintBallGag": "",
 "RestraintBlindfold": "",
 "RestraintButtplug": "",
@@ -1681,9 +1844,14 @@ _global_script_class_icons={
 "Trigger": "",
 "Util": "",
 "VaginaOrifice": "",
+"WHCond": "",
+"WHEvent": "",
 "WorldEditBase": "",
 "WorldFloor": "",
-"WorldPopulation": ""
+"WorldHistory": "",
+"WorldHistoryEvent": "",
+"WorldPopulation": "",
+"WorldZone": ""
 }
 
 [application]
@@ -1707,6 +1875,7 @@ SAVE="*res://Game/SaveManager.gd"
 GlobalTooltip="*res://UI/GlobalTooltipSystem.gd"
 AutoTranslation="*res://Util/AutoTranslation/AutoTranslation.gd"
 CrotchFavBlocks="*res://Game/Datapacks/UI/CrotchCode/Util/CrotchFavBlocks.gd"
+ModularDialogue="*res://Game/ModularDialogue/ModularDialogue.gd"
 
 [debug]
 
@@ -1793,6 +1962,12 @@ gameui_menu={
 editor_duplicate_mod={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777240,"unicode":0,"echo":false,"script":null)
+ ]
+}
+minigame_commit={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":32,"unicode":0,"echo":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777221,"unicode":0,"echo":false,"script":null)
  ]
 }
 

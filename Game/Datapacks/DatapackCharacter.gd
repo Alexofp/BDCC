@@ -29,6 +29,7 @@ var perks:Array = []
 var bodyparts:Dictionary = {}
 
 var characterType:String = CharacterType.Inmate
+var inmateType:int = InmateType.Unknown
 
 var pickedSkin:String = "EmptySkin"
 var pickedSkinRColor:Color = Color.white
@@ -150,6 +151,12 @@ func getEditVars():
 			type = "selector",
 			values = CharacterType.getAllForDatapackCharacter(),
 			value = characterType,
+		},
+		"inmateType": {
+			name = "Inmate type (or unknown)",
+			type = "selector",
+			values = InmateType.getAllWithNames(),
+			value = inmateType,
 		},
 		"species": {
 			name = "Species",
@@ -349,6 +356,9 @@ func applyEditVar(varid, value):
 	if(varid == "characterType"):
 		characterType = value
 		#return true
+	if(varid == "inmateType"):
+		inmateType = value
+		#return true
 	if(varid == "equippedItems"):
 		equippedItems = value
 		return true
@@ -415,6 +425,7 @@ func saveData():
 		"pickedSkinGColor": pickedSkinGColor.to_html(),
 		"pickedSkinBColor": pickedSkinBColor.to_html(),
 		"characterType": characterType,
+		"inmateType": inmateType,
 		"equippedItems": equippedItems,
 		"attacks": attacks,
 		"personality": personality,
@@ -458,6 +469,7 @@ func loadData(data):
 	pickedSkinGColor = Color(SAVE.loadVar(data, "pickedSkinGColor", "cccccc"))
 	pickedSkinBColor = Color(SAVE.loadVar(data, "pickedSkinBColor", "999999"))
 	characterType = loadVar(data, "characterType", CharacterType.Inmate)
+	inmateType = loadVar(data, "inmateType", InmateType.Unknown)
 	equippedItems = loadVar(data, "equippedItems", {})
 	attacks = loadVar(data, "attacks", [])
 	personality = loadVar(data, "personality", {})

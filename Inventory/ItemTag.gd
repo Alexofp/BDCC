@@ -38,6 +38,7 @@ enum {
 	ReturnsToPCIfSlaveReleased,
 	
 	RopeHarness,
+	ImaginaryRestraint,
 	
 	ITEMTAGCOUNT,
 }
@@ -79,6 +80,7 @@ const tagNames = [
 	"ReturnsToPCIfSlaveReleased",
 	
 	"RopeHarness",
+	"ImaginaryRestraint",
 ]
 
 static func nameToTag(tagName):

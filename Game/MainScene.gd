@@ -23,6 +23,11 @@ var rollbacker:Rollbacker
 var encounterSettings:EncounterSettings
 var currentlyTestingScene = false
 var allowExecuteOnce:bool = false
+var isDebuggingIS:bool = false
+
+var IS:InteractionSystem = InteractionSystem.new()
+var RS:RelationshipSystem = RelationshipSystem.new()
+var WHS:WorldHistory = WorldHistory.new()
 
 var staticCharacters = {}
 var charactersToUpdate = {}
@@ -139,6 +144,8 @@ func removeDynamicCharacter(characterID, printDebug = true):
 		if(printDebug):
 			Log.print("removeDynamicCharacter(): Removing "+str(characterID)+" character")
 		removeDynamicCharacterFromAllPools(characterID)
+		RS.removeAllEntriesOf(characterID)
+		IS.deletePawn(characterID)
 		
 		dynamicCharacters[characterID].queue_free()
 		dynamicCharacters.erase(characterID)
@@ -210,6 +217,7 @@ func _ready():
 	
 	randomize()
 	
+	WHS.clearHistory()
 	startNewGame()
 	
 	runCurrentScene()
@@ -310,7 +318,10 @@ func getCurrentScene():
 		return sceneStack.back()
 	return null
 
-func endCurrentScene():
+func endCurrentScene(keepWorld:bool=true):
+	if(sceneStack.size() == 1 && keepWorld):
+		IS.stopInteractionsForPawnID("pc")
+		return
 	var currentScene = getCurrentScene()
 	if(currentScene != null):
 		currentScene.endScene()
@@ -325,6 +336,7 @@ func _on_GameUI_on_option_button(method, args):
 	
 func pickOption(method, args):
 	rollbacker.pushRollbackState()
+	IS.resetExtraText()
 	GM.main.clearMessages()
 	GlobalTooltip.resetTooltips()
 	
@@ -342,6 +354,9 @@ func pickOption(method, args):
 func runCurrentScene():
 	if(sceneStack.size() > 0):
 		sceneStack.back().run()
+		
+		if(IS.hasExtraText()):
+			GM.ui.say(IS.getExtraText())
 		
 		if(messages.size() > 0):
 			GM.ui.trimLineEndings()
@@ -369,6 +384,12 @@ func loadingSavefileFinished():
 	reRun()
 	
 	applyAllWorldEdits()
+	
+	if(!rollbacker.rollbacking):
+		WHS.clearHistory()
+	IS.updatePCLocation()
+	GM.world.updatePawns(IS)
+	GM.world.setPawnsShowed(canShowPawns())
 	
 func applyAllWorldEdits():
 	var worldEdits = GlobalRegistry.getWorldEdits()
@@ -424,6 +445,8 @@ func saveData():
 	data["gameExtenders"] = GM.GES.saveData()
 	data["loadedDatapacks"] = loadedDatapacks
 	data["datapackCharacters"] = datapackCharacters
+	data["interactionSystem"] = IS.saveData()
+	data["relationshipSystem"] = RS.saveData()
 	
 	data["scenes"] = []
 	for scene in sceneStack:
@@ -455,6 +478,8 @@ func loadData(data):
 	GM.GES.loadData(SAVE.loadVar(data, "gameExtenders", {}))
 	loadedDatapacks = SAVE.loadVar(data, "loadedDatapacks", {})
 	datapackCharacters = SAVE.loadVar(data, "datapackCharacters", {})
+	IS.loadData(SAVE.loadVar(data, "interactionSystem", {}))
+	RS.loadData(SAVE.loadVar(data, "relationshipSystem", {}))
 	
 	var scenes = SAVE.loadVar(data, "scenes", [])
 	
@@ -476,9 +501,12 @@ func loadData(data):
 		if(scene.uniqueSceneID < 0):
 			scene.uniqueSceneID = getNewUniqueSceneID()
 			scene.parentSceneUniqueID = scene.uniqueSceneID - 1 # Preserves compatability with old saves
-		
+	
+	IS.resetExtraText()
 	GM.ui.recreateWorld()
 	GM.world.loadData(SAVE.loadVar(data, "world", {}))
+	#GM.world.updatePawns(IS)
+	#GM.world.setPawnsShowed(canShowPawns())
 
 func saveCharactersData():
 	var data = {}
@@ -538,6 +566,8 @@ func isVeryLate():
 func stopProcessingUnusedCharacters():
 	for charID in charactersToUpdate.keys():
 		var character = getCharacter(charID)
+		if(character != null):
+			character.updateNonBattleEffects()
 		if(character == null || !character.shouldBeUpdated()):
 			print("STOPPED PROCESSING: "+str(charID))
 			charactersToUpdate.erase(charID)
@@ -556,6 +586,8 @@ func processTime(_seconds):
 
 func doTimeProcess(_seconds):
 	# This splits long sleeping times into 1 hour chunks
+	IS.processTime(_seconds)
+	
 	var copySeconds = _seconds
 	while(copySeconds > 0):
 		var clippedSeconds = min(60*60, copySeconds)
@@ -592,6 +624,8 @@ func hoursPassed(howMuch):
 			var character = getCharacter(characterID)
 			if(character != null && character.isSlaveToPlayer()):
 				character.getNpcSlavery().hoursPassed(howMuch)
+	
+	RS.decayRelationships(howMuch)
 
 func processTimeUntil(newseconds):
 	if(timeOfDay >= newseconds):
@@ -604,6 +638,9 @@ func processTimeUntil(newseconds):
 	return timeDiff
 	
 func startNewDay():
+	IS.beforeNewDay()
+	GM.CS.optimize()
+	
 	# We assume that you always go to sleep at 23:00
 	if(timeOfDay > getTimeCap()):
 		timeOfDay = getTimeCap()
@@ -619,6 +656,9 @@ func startNewDay():
 	npcSlaveryOnNewDay()
 	
 	doTimeProcess(timediff)
+	
+	WHS.onNewDay()
+	IS.afterNewDay()
 	
 	SAVE.triggerAutosave()
 	
@@ -764,6 +804,37 @@ func clearFlag(flagID):
 func increaseFlag(flagID, addvalue = 1):
 	setFlag(flagID, getFlag(flagID, 0) + addvalue)
 
+func hasFlag(flagID:String) -> bool:
+	var splitData = Util.splitOnFirst(flagID, ".")
+	if(splitData.size() > 1):
+		var modules = GlobalRegistry.getModules()
+		var moduleID:String = splitData[0]
+		if(!modules.has(moduleID)):
+			return false
+		var module:Module = modules[moduleID]
+		var moduleFlagsCache:Dictionary = module.getFlagsCache()
+		if(moduleFlagsCache.has(splitData[1])):
+			return true
+		return false
+	
+	var splitData2 = Util.splitOnFirst(flagID, ":")
+	if(splitData2.size() > 1):
+		#return getDatapackFlag(splitData2[0], splitData2[1], defaultValue)
+		var datapackID:String = splitData2[0]
+		if(!loadedDatapacks.has(datapackID)):
+			return false
+		
+		var datapack:Datapack = GlobalRegistry.getDatapack(datapackID)
+		if(datapack == null):
+			return false
+		if(!datapack.flags.has(splitData2[1])):
+			return false
+		return true
+	
+	if(flagsCache.has(flagID)):
+		return true
+	return false
+
 func getFlag(flagID, defaultValue = null):
 	var splitData = Util.splitOnFirst(flagID, ".")
 	if(splitData.size() > 1):
@@ -851,6 +922,9 @@ func updateStuff():
 			
 	for worldEdit in GlobalRegistry.getRegularWorldEdits():
 		worldEdit.apply(GM.world)
+	
+	GM.world.updatePawns(IS)
+	GM.world.setPawnsShowed(canShowPawns())
 
 
 func _on_Player_levelChanged():
@@ -1189,10 +1263,70 @@ func getDebugActions():
 			"id": "forceSmartlock",
 			"name": "Force smart lock",
 		},
+		{
+			"id": "spyRandom",
+			"name": "Spy on pawn",
+		},
+		{
+			"id": "addRep",
+			"name": "Add reputation",
+			"args": [
+				{
+					"id": "rep",
+					"name": "Rep",
+					"type": "list",
+					"value": RepStat.Whore,
+					"values": RepStat.getAllWithNames(),
+				},
+				{
+					"id": "amount",
+					"name": "How much (rep score)",
+					"type": "number",
+					"value": 1.0,
+					"float": true,
+				},
+			],
+		},
+		{
+			"id": "setRep",
+			"name": "Set reputation",
+			"args": [
+				{
+					"id": "rep",
+					"name": "Rep",
+					"type": "list",
+					"value": RepStat.Whore,
+					"values": RepStat.getAllWithNames(),
+				},
+				{
+					"id": "level",
+					"name": "Level",
+					"type": "number",
+					"value": 0,
+				},
+			],
+		},
+		{
+			"id": "toggleISDebug",
+			"name": "Toggle IS debug",
+		},
 	]
 
 func doDebugAction(id, args = {}):
 	print(id, " ", args)
+	
+	if(id == "toggleISDebug"):
+		isDebuggingIS = !isDebuggingIS
+		if(isDebuggingIS):
+			addMessage("Interaction System debug info is now Enabled")
+		else:
+			addMessage("Interaction System debug info is now Disabled")
+	
+	if(id == "addRep"):
+		GM.pc.getReputation().addRep(args["rep"], args["amount"])
+	
+	if(id == "setRep"):
+		GM.pc.getReputation().setLevel(args["rep"], args["level"])
 	
 	if(id == "forceSmartlock"):
 		if(GM.main.dynamicCharacters.size() == 0):
@@ -1201,8 +1335,11 @@ func doDebugAction(id, args = {}):
 		while(tryAmount > 0):
 			var itemID = RNG.pick(GlobalRegistry.getItemIDsByTag(ItemTag.BDSMRestraint))
 			var anItem:ItemBase = GlobalRegistry.createItem(itemID)
-			if(anItem.getClothingSlot() == null || anItem.getClothingSlot() in [InventorySlot.Static1, InventorySlot.Static2, InventorySlot.Static3] || anItem.hasTag(ItemTag.AllowsEnslaving) || anItem.hasTag(ItemTag.PortalPanties) || (anItem.restraintData != null && (anItem.restraintData is RestraintUnremovable))):
+			if(anItem.hasTag(ItemTag.ImaginaryRestraint) || anItem.getClothingSlot() == null || anItem.getClothingSlot() in [InventorySlot.Static1, InventorySlot.Static2, InventorySlot.Static3] || anItem.hasTag(ItemTag.AllowsEnslaving) || anItem.hasTag(ItemTag.PortalPanties) || (anItem.restraintData != null && (anItem.restraintData is RestraintUnremovable))):
 				tryAmount -= 1
+				continue
+			if(GM.pc.getInventory().hasSlotEquipped(anItem.getClothingSlot())):
+				tryAmount -= 5
 				continue
 			
 			GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(anItem)
@@ -1296,6 +1433,9 @@ func doDebugAction(id, args = {}):
 		GlobalRegistry.getModule("NpcSlaveryModule").makeSurePCHasSlaveSpace()
 		runScene("KidnapDynamicNpcScene", [npcID])
 		# runScene("EnslaveDynamicNpcScene", [npcID])
+		
+	if(id == "spyRandom"):
+		runScene("SpyOnPawnScene")
 		
 	if(id == "duplicateAndEnslave"):
 		var theNpcID = args["npcID"]
@@ -1633,3 +1773,18 @@ func isDatapackCharacter(charID):
 
 func shouldExecuteOnceCodeblocksRun() -> bool:
 	return allowExecuteOnce
+
+func isPawnIDBeingSpied(_charID:String):
+	for scene in sceneStack:
+		if(scene.isSpyingOnInteractionsWith(_charID)):
+			return true
+	return false
+
+func playerCanBeInterrupted() -> bool:
+	return sceneStack.size() == 1
+
+func canShowPawns() -> bool:
+	for scene in sceneStack:
+		if(!scene.supportsShowingPawns()):
+			return false
+	return true

@@ -165,9 +165,24 @@ func updateCharacter():
 			GM.ui.addCharacterToPanel(id, currentCharactersVariants[id])
 
 func clearCharacter():
-	currentCharactersVariants.clear()
 	if(GM.main.getCurrentScene() == self):
 		GM.ui.clearCharactersPanel()
+	if(currentCharactersVariants.empty()):
+		return
+	currentCharactersVariants.clear()
+
+
+func setCharactersEasyList(newChars:Array):
+	for charID in currentCharactersVariants.keys():
+		if(charID == "pc"):
+			continue
+		if(!newChars.has(charID)):
+			removeCharacter(charID)
+	for charID in newChars:
+		if(charID == "pc"):
+			continue
+		if(!currentCharactersVariants.has(charID)):
+			addCharacter(charID)
 
 func _onSceneEnd():
 	pass
@@ -353,6 +368,12 @@ func shouldDisplayBigButtons():
 
 func getSceneCompanions():
 	return []
+
+func isSpyingOnInteractionsWith(_charID:String):
+	return false
+
+func supportsShowingPawns() -> bool:
+	return false
 
 func saveData():
 	var data = {}

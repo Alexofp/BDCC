@@ -25,3 +25,6 @@ func getRiggedParts(_character):
 	return {
 		"headpiercings": "res://Inventory/RiggedModels/RishaPiercings/RishaPiercings.tscn",
 	}
+
+func canDye():
+	return true

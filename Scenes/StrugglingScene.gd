@@ -62,6 +62,8 @@ func _run():
 					minigameResult.score = 1.0
 					minigameResult.instantUnlock = true
 					addButton(item.getVisibleName(), "Take off this restraint", "struggleAgainst", [item.getUniqueID(), minigameResult])
+				elif(smartLock.id == SmartLock.TightLock):
+					addButton(item.getVisibleName(), "See what item you can use to unlock the tight-lock", "tightlock", [item.getUniqueID()])
 				continue
 			
 			if(!restraintData.canStruggleFinal()):
@@ -74,6 +76,33 @@ func _run():
 
 		
 		#generateActions()
+		
+	if(state == "tightlock"):
+		var item:ItemBase = GM.pc.getInventory().getItemByUniqueID(restraintID)
+		var restraintData: RestraintData = item.getRestraintData()
+		var requiredItemID:String = restraintData.getTightLockRequiredItemID()
+		var reqItem:ItemBase = GlobalRegistry.getItemRef(requiredItemID)
+		if(reqItem == null):
+			saynn("Something went wrong :(")
+			addButton("Continue", "Oh well", "endthescene")
+		
+		saynn("The "+item.getVisibleName()+" that you are wearing has a tight-lock attached to it.")
+		
+		saynn("To unlock it, you must use this item: "+reqItem.getVisibleName())
+		
+		saynn("The item will be consumed in the process, the restraint will be destroyed.")
+		
+		saynn("Which item do you want to use?")
+		
+		addButton("Cancel", "You changed your mind", "")
+		for invitem in GM.pc.getInventory().getItems():
+			if(invitem.id == requiredItemID):
+				addButton(invitem.getVisibleName(), invitem.getVisibleDescription(), "tightlock_unlockwith", [invitem])
+	
+	if(state == "tightlock_unlocked"):
+		saynn(actionText)
+		
+		addButton("Continue", "See what happens next", "checkifokay")
 		
 	if(state == "usekey"):
 		var keyAmount = GM.pc.getInventory().getAmountOf("restraintkey")
@@ -105,7 +134,7 @@ func _run():
 	if(state == "keyminigame"):
 		saynn("Since you can't use your fingers you have to carefully balance the key between your palms and guide it towards the lock.")
 		
-		saynn("To succsessfully unlock the restraint you have to guess a number between 1 and 15. You have "+str(keyGameTries)+" "+Util.multipleOrSingularEnding(keyGameTries, "try", "tries")+" left")
+		saynn("To successfully unlock the restraint you have to guess a number between 1 and 15. You have "+str(keyGameTries)+" "+Util.multipleOrSingularEnding(keyGameTries, "try", "tries")+" left")
 
 		if(keyText != ""):
 			saynn(keyText)
@@ -207,6 +236,9 @@ func _react(_action: String, _args):
 		restraintID = ""
 		setState("")
 		return
+		
+	if(_action == "tightlock"):
+		restraintID = _args[0]
 		
 	if(_action == "startStruggleAgainst"):
 		var item = GM.pc.getInventory().getItemByUniqueID(_args[0])
@@ -355,7 +387,16 @@ func _react(_action: String, _args):
 			keyText = ""
 			setState("keyminigame")
 		return
-		
+	
+	if(_action == "tightlock_unlockwith"):
+		var item = GM.pc.getInventory().getItemByUniqueID(restraintID)
+		var restraintData: RestraintData = item.getRestraintData()
+		GM.pc.getInventory().removeEquippedItem(item)
+		GM.pc.getInventory().removeItem(_args[0])
+		actionText = restraintData.getTightLockUnlockMessage()
+		setState("tightlock_unlocked")
+		return
+	
 	if(_action == "key_guess"):
 		
 #		var textboxText = getTextboxData("key_number")
@@ -445,3 +486,6 @@ func loadData(data):
 	fightMode = SAVE.loadVar(data, "fightMode", false)
 	restraintID = SAVE.loadVar(data, "restraintID", "")
 	shouldPlayAnimations = SAVE.loadVar(data, "shouldPlayAnimations", true)
+
+func supportsShowingPawns() -> bool:
+	return true

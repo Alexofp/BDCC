@@ -13,7 +13,7 @@ jobs:
       image: barichello/godot-ci:3.5.2
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           lfs: true
       - name: Setup
@@ -25,7 +25,7 @@ jobs:
           mkdir -v -p build/windows
           godot -v --export "Windows Desktop" ./build/windows/$EXPORT_NAME.exe
       - name: Upload Artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: bdcc-windows
           path: ./build/windows/
@@ -44,7 +44,7 @@ jobs:
       image: barichello/godot-ci:3.5.2
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           lfs: true
       - name: Setup
@@ -56,7 +56,7 @@ jobs:
           mkdir -v -p build/linux
           godot -v --export "Linux/X11" ./build/linux/$EXPORT_NAME.x86_64
       - name: Upload Artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: bdcc-linux
           path: ./build/linux/
@@ -68,7 +68,7 @@ jobs:
       image: barichello/godot-ci:3.5.2
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           lfs: true
       - name: Setup
@@ -80,7 +80,7 @@ jobs:
           mkdir -v -p build/web
           godot -v --export "HTML5" ./build/web/index.html
       - name: Upload Artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: bdcc-web
           path: build/web
@@ -100,7 +100,7 @@ jobs:
       image: barichello/godot-ci:3.5.2
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           lfs: true
       - name: Setup
@@ -112,7 +112,7 @@ jobs:
           mkdir -v -p build/mac
           godot -v --export "Mac OSX" ./build/mac/$EXPORT_NAME.zip
       - name: Upload Artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: bdcc-mac
           path: ./build/mac/

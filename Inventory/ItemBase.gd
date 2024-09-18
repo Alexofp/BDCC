@@ -442,6 +442,8 @@ func tryAddSmartLock(_forcer, _addMessage = true):
 		chanceLock = 32.0 - 8.0*amountOfSmartLockedItems
 	elif(rarityString == "bdsmslut"):
 		chanceLock = 60.0 - 10.0*amountOfSmartLockedItems
+	elif(rarityString == "always"):
+		chanceLock = 100.0
 	elif(rarityString == "never"):
 		return false
 	
@@ -462,7 +464,7 @@ func addRandomSmartLock(_forcer, _addMessage = true):
 	return addSmartLock(randomLock, _forcer, _addMessage)
 
 func addSmartLock(_lockID, _forcer, _addMessage = true):
-	if(!isRestraint() || _forcer == null):
+	if(!isRestraint() || _forcer == null || (isWornByWearer() && !getWearer().isPlayer())):
 		return false
 	if(_forcer is String):
 		_forcer = GlobalRegistry.getCharacter(_forcer)

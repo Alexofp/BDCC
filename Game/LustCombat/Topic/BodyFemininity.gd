@@ -30,3 +30,18 @@ func getVisibleName(_topicID):
 		return "a masculine body"
 	
 	return "error:"+str(_topicID)
+
+func getChatName(_topicID) -> String:
+	if(_topicID == InterestTopic.FeminineBody):
+		return "femininity"
+	if(_topicID == InterestTopic.AndroBody):
+		return "androgyny"
+	if(_topicID == InterestTopic.MasculineBody):
+		return "masculinity"
+	
+	return .getChatName(_topicID)
+
+func getAddsToFocus(_topicID, _focus) -> float:
+	if(_focus == LustFocus.Body):
+		return 1.0
+	return 0.0

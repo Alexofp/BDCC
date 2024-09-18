@@ -337,7 +337,7 @@ func doSubAction(_id, _actionInfo):
 			if(state != ""):
 				state = ""
 			else:
-				satisfyGoals()
+				failGoals()
 				endActivity()
 			return {text = text}
 		else:

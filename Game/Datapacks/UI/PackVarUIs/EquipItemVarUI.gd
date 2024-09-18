@@ -1,4 +1,5 @@
 extends "res://Game/Datapacks/UI/PackVarUIs/PackVarUIBase.gd"
+onready var auto_selector_var_ui = $HBoxContainer/AutoSelectorVarUI
 
 var thePrefix = ""
 
@@ -30,12 +31,13 @@ func setSelectedValue(_value):
 	#updateValues()
 	#$SpinBox.value = _value
 	
-	var _i = 0
-	for value in values:
-		if(value == selectedValue):
-			$HBoxContainer/OptionButton.select(_i)
-		
-		_i += 1
+	#var _i = 0
+	#for value in values:
+	#	if(value == selectedValue):
+	#		$HBoxContainer/OptionButton.select(_i)
+	#	
+	#	_i += 1
+	updateValues()
 	updateDataVars()
 
 func setData(_dataLine:Dictionary):
@@ -51,12 +53,15 @@ func setData(_dataLine:Dictionary):
 		updateDataVars()
 
 func updateValues():
-	$HBoxContainer/OptionButton.clear()
+	#$HBoxContainer/OptionButton.clear()
 	values.clear()
 	var _i = 1
-	$HBoxContainer/OptionButton.add_item("- Nothing -")
+	#$HBoxContainer/OptionButton.add_item("- Nothing -")
+	var theItemIDs:Array = [
+		["", "- Nothing -"]
+	]
 	values.append("")
-	$HBoxContainer/OptionButton.select(0)
+	#$HBoxContainer/OptionButton.select(0)
 	
 	var allItems = GlobalRegistry.getItemRefs()
 	for itemID in allItems:
@@ -66,12 +71,22 @@ func updateValues():
 		
 		if(invSlot != null && invSlot == inventorySlot):
 			values.append(itemID)
-			$HBoxContainer/OptionButton.add_item(itemID)
+			#$HBoxContainer/OptionButton.add_item(itemID)
 			
-			if(itemID == selectedValue):
-				$HBoxContainer/OptionButton.select(_i)
+			#if(itemID == selectedValue):
+			#	$HBoxContainer/OptionButton.select(_i)
+			theItemIDs.append([
+				itemID, theItem.getVisibleName() + " (id=" + itemID+")",
+			])
 			
 			_i += 1
+	auto_selector_var_ui.setData({
+		name = "",
+		values = theItemIDs,
+		value = selectedValue,
+		expand=true,
+		alwaysEdit=true,
+	})
 
 func updateDataVars():
 	if(selectedValue == ""):
@@ -107,4 +122,11 @@ func doTriggerChangeFinal():
 
 func _on_PackVariables_onVariableChange(_id, _value):
 	data[_id] = _value
+	doTriggerChangeFinal()
+
+
+func _on_AutoSelectorVarUI_onValueChange(_id, newValue):
+	selectedValue = newValue
+	data = {}
+	updateDataVars()
 	doTriggerChangeFinal()

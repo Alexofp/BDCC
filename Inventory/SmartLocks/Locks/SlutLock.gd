@@ -74,7 +74,7 @@ func generateTasks(howManyTasks = 2):
 	for taskID in GlobalRegistry.getSlaveBreakTaskRefs():
 		var taskRef:NpcBreakTaskBase = GlobalRegistry.getSlaveBreakTaskRef(taskID)
 		
-		if(!taskRef.isPossibleFor(theChar, _isSlaveLevelup)):
+		if(!taskRef.isPossibleForSlutlock(theChar)):
 			continue
 		#if(!taskRef.isPossibleForPC(GM.pc, theChar, _isSlaveLevelup)):
 		#	continue

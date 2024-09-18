@@ -8,6 +8,8 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.PCLookingForTrouble)
 
 func react(_triggerID, _args):
+	if(true): #Disabled because interactions
+		return
 	var isLookingForTrouble = (_triggerID == Trigger.PCLookingForTrouble)
 	
 	if(GM.main.getFlag("ExposureEventCD", 0) > 0 && !isLookingForTrouble):

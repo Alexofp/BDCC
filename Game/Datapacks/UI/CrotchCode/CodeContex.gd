@@ -71,6 +71,21 @@ func setFlag(theVar:String, newValue, _codeblock):
 			return
 	flags[theVar] = newValue
 
+func getFlagRaw(theVar:String, defaultValue = null, _codeblock = null):
+	if(GM.main == null):
+		return getFlag(theVar, defaultValue, _codeblock)
+	return GM.main.getFlag(theVar, defaultValue)
+
+func setFlagRaw(theVar:String, newValue, _codeblock = null):
+	if(GM.main == null):
+		return setFlag(theVar, newValue, _codeblock)
+	return GM.main.setFlag(theVar, newValue)
+
+func hasFlagRaw(theVar:String, _codeblock = null):
+	if(GM.main == null):
+		return hasFlag(theVar, _codeblock)
+	return GM.main.hasFlag(theVar)
+
 func doPrint(text):
 	emit_signal("onPrint", text)
 	Log.print(str(text))
@@ -490,3 +505,72 @@ func setExcludeNpcFromEncounters(charID:String, newVal:bool):
 	
 	character.extraSettings.excludeEncounters = newVal
 	
+func isDatapackLoaded(_datapackID:String):
+	if(GM.main == null):
+		return true
+	
+	return GM.main.loadedDatapacks.has(_datapackID)
+
+func addPCRep(_repID:String, howMuch:float):
+	if(GM.pc == null || !is_instance_valid(GM.pc)):
+		return
+	
+	var reputation:ReputationPlaceholder = GM.pc.getReputation()
+	reputation.addRep(_repID, howMuch)
+	
+func setPCRepLevel(_repID:String, newLevel:int):
+	if(GM.pc == null || !is_instance_valid(GM.pc)):
+		return
+	
+	var reputation:ReputationPlaceholder = GM.pc.getReputation()
+	reputation.setLevel(_repID, newLevel)
+	
+func getPCRepLevel(_repID:String):
+	if(GM.pc == null || !is_instance_valid(GM.pc)):
+		return
+	
+	var reputation:ReputationPlaceholder = GM.pc.getReputation()
+	return reputation.getRepLevel(_repID)
+	
+func getPCRepScore(_repID:String):
+	if(GM.pc == null || !is_instance_valid(GM.pc)):
+		return
+	
+	var reputation:ReputationPlaceholder = GM.pc.getReputation()
+	return reputation.getRepScore(_repID)
+	
+func addAffection(char1ID:String, char2ID:String, howMuch:float):
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return
+	
+	GM.main.RS.addAffection(char1ID, char2ID, howMuch)
+	
+func setAffection(char1ID:String, char2ID:String, howMuch:float):
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return
+	
+	GM.main.RS.setAffection(char1ID, char2ID, howMuch)
+
+func getAffection(char1ID:String, char2ID:String) -> float:
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return 0.0
+	
+	return GM.main.RS.getAffection(char1ID, char2ID)
+
+func addRelationshipLust(char1ID:String, char2ID:String, howMuch:float):
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return
+	
+	GM.main.RS.addLust(char1ID, char2ID, howMuch)
+	
+func setRelationshipLust(char1ID:String, char2ID:String, howMuch:float):
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return
+	
+	GM.main.RS.setLust(char1ID, char2ID, howMuch)
+
+func getRelationshipLust(char1ID:String, char2ID:String) -> float:
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return 0.0
+	
+	return GM.main.RS.getLust(char1ID, char2ID)

@@ -108,7 +108,7 @@ rect_min_size = Vector2( 0, 60 )
 custom_constants/separation = 0
 
 [node name="Name" type="Button" parent="PanelContainer/VBoxC/UpperPanel/HBoxContainer"]
-margin_right = 209.0
+margin_right = 192.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 110, 50 )
 rect_clip_content = true
@@ -121,18 +121,18 @@ toggle_mode = true
 text = "Name:"
 
 [node name="VSeparator" type="VSeparator" parent="PanelContainer/VBoxC/UpperPanel/HBoxContainer"]
-margin_left = 209.0
-margin_right = 217.0
+margin_left = 192.0
+margin_right = 200.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 2, 0 )
 custom_constants/separation = 8
 custom_styles/separator = SubResource( 8 )
 
 [node name="Gender" type="Button" parent="PanelContainer/VBoxC/UpperPanel/HBoxContainer"]
-margin_left = 217.0
-margin_right = 426.0
+margin_left = 200.0
+margin_right = 392.0
 margin_bottom = 60.0
-rect_min_size = Vector2( 75, 50 )
+rect_min_size = Vector2( 120, 50 )
 rect_clip_content = true
 size_flags_horizontal = 11
 custom_styles/hover = SubResource( 7 )
@@ -143,18 +143,18 @@ toggle_mode = true
 text = "Gender:"
 
 [node name="VSeparator2" type="VSeparator" parent="PanelContainer/VBoxC/UpperPanel/HBoxContainer"]
-margin_left = 426.0
-margin_right = 434.0
+margin_left = 392.0
+margin_right = 400.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 2, 0 )
 custom_constants/separation = 8
 custom_styles/separator = SubResource( 9 )
 
 [node name="Personality" type="Button" parent="PanelContainer/VBoxC/UpperPanel/HBoxContainer"]
-margin_left = 434.0
-margin_right = 643.0
+margin_left = 400.0
+margin_right = 592.0
 margin_bottom = 60.0
-rect_min_size = Vector2( 185, 50 )
+rect_min_size = Vector2( 50, 50 )
 rect_clip_content = true
 size_flags_horizontal = 11
 custom_styles/hover = SubResource( 7 )
@@ -165,18 +165,18 @@ toggle_mode = true
 text = "Personality:"
 
 [node name="VSeparator3" type="VSeparator" parent="PanelContainer/VBoxC/UpperPanel/HBoxContainer"]
-margin_left = 643.0
-margin_right = 651.0
+margin_left = 592.0
+margin_right = 600.0
 margin_bottom = 60.0
 rect_min_size = Vector2( 2, 0 )
 custom_constants/separation = 8
 custom_styles/separator = SubResource( 10 )
 
 [node name="ChildrenAmount" type="Button" parent="PanelContainer/VBoxC/UpperPanel/HBoxContainer"]
-margin_left = 651.0
-margin_right = 861.0
+margin_left = 600.0
+margin_right = 792.0
 margin_bottom = 60.0
-rect_min_size = Vector2( 160, 50 )
+rect_min_size = Vector2( 50, 50 )
 rect_clip_content = true
 size_flags_horizontal = 11
 custom_styles/hover = SubResource( 7 )
@@ -184,20 +184,43 @@ custom_styles/pressed = SubResource( 5 )
 custom_styles/focus = SubResource( 6 )
 custom_styles/normal = ExtResource( 5 )
 toggle_mode = true
-text = "Children with you:"
+text = "Childs:"
+
+[node name="VSeparator4" type="VSeparator" parent="PanelContainer/VBoxC/UpperPanel/HBoxContainer"]
+margin_left = 792.0
+margin_right = 800.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 2, 0 )
+custom_constants/separation = 8
+custom_styles/separator = SubResource( 10 )
+
+[node name="Relationship" type="Button" parent="PanelContainer/VBoxC/UpperPanel/HBoxContainer"]
+margin_left = 800.0
+margin_right = 992.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 140, 50 )
+rect_clip_content = true
+size_flags_horizontal = 11
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 6 )
+custom_styles/normal = ExtResource( 5 )
+toggle_mode = true
+text = "Relationship:"
 
 [node name="dummy" type="Label" parent="PanelContainer/VBoxC/UpperPanel/HBoxContainer"]
-margin_left = 861.0
+margin_left = 992.0
 margin_top = 5.0
-margin_right = 1070.0
+margin_right = 1088.0
 margin_bottom = 55.0
-rect_min_size = Vector2( 65, 50 )
+rect_min_size = Vector2( 50, 50 )
 size_flags_horizontal = 11
+size_flags_stretch_ratio = 0.5
 align = 1
 valign = 1
 
 [node name="dummy2" type="Label" parent="PanelContainer/VBoxC/UpperPanel/HBoxContainer"]
-margin_left = 1070.0
+margin_left = 1088.0
 margin_top = 5.0
 margin_right = 1280.0
 margin_bottom = 55.0
@@ -306,6 +329,7 @@ autowrap = true
 [connection signal="pressed" from="PanelContainer/VBoxC/UpperPanel/HBoxContainer/Gender" to="." method="_on_Gender_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxC/UpperPanel/HBoxContainer/Personality" to="." method="_on_Personality_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxC/UpperPanel/HBoxContainer/ChildrenAmount" to="." method="_on_ChildrenAmount_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxC/UpperPanel/HBoxContainer/Relationship" to="." method="_on_Relationship_pressed"]
 [connection signal="pressed" from="CenterContainer/Notification/HBoxC/Forget" to="." method="_on_Forget_pressed"]
 [connection signal="pressed" from="CenterContainer/Notification/HBoxC/Ok" to="." method="_on_Ok_pressed"]
 [connection signal="pressed" from="CenterContainer/Notification/HBoxC/Cancel" to="." method="_on_Cancel_pressed"]

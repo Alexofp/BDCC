@@ -18,6 +18,11 @@ func getSlutlockWeight() -> float:
 func isPossibleFor(_npc, _isSlaveLevelup):
 	return true
 
+func isPossibleForSlutlock(_npc):
+	if(_npc.isOralBlocked()):
+		return false
+	return .isPossibleForSlutlock(_npc)
+
 func isPossibleForPC(_pc, _npc, _isSlaveLevelup):
 	if(_pc.hasReachablePenis()):
 		return true

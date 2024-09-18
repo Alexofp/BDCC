@@ -58,7 +58,7 @@ roomID = "cellblock_pink_playercell"
 roomDescription = "((This will be your potential cell))"
 roomColor = 4
 
-[node name="CellblockRoom7" parent="." index="6" instance=ExtResource( 2 )]
+[node name="CellblockRoom7" parent="." index="6" groups=["zone_mainpatrol"] instance=ExtResource( 2 )]
 position = Vector2( 0, 128 )
 roomName = "Corridor"
 roomID = "cellblock_nearcells"

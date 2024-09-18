@@ -12,3 +12,15 @@ func getActivityText():
 func getInteractActions():
 	return [
 	]
+
+func onStart(_args = []):
+	var pawn = GM.main.IS.spawnPawnIfNeeded(getCharID())
+	pawn.setLocation("fight_slutwall")
+	GM.main.IS.startInteraction("InSlutwall", {inmate=getCharID()})
+
+func onInteractionChanged(_newInteraction):
+	if(_newInteraction == null || _newInteraction.id != "InSlutwall"):
+		stopActivity()
+
+func getSexEventID():
+	return "slutwallUsed"

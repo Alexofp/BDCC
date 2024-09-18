@@ -201,6 +201,7 @@ func hasSubmittedToPC():
 	return submitted
 func doSubmitToPC():
 	submitted = true
+	GM.pc.getReputation().handleSpecialEvent("makeobey")
 
 # Has the slave snapped
 # If broken, slaves becomes a doll
@@ -209,6 +210,7 @@ func isMindBroken():
 	return broken
 func doMindBreak():
 	broken = true
+	GM.pc.getReputation().handleSpecialEvent("makeobey")
 func unMindBreak():
 	broken = false
 var brokenWarnings = 0 # Might use this as a warning?
@@ -841,6 +843,8 @@ func doLevelup():
 		GM.main.addMessage("You received "+str(howMuchExp)+" experience")
 		GM.pc.addExperience(howMuchExp)
 		
+		GM.pc.getReputation().addRep(RepStat.Alpha, 0.2*sqrt(slaveLevel))
+		
 	emit_signal("onSlaveLevelup", self)
 
 func getLevelupTaskProgressText():
@@ -1136,6 +1140,24 @@ func onSexEnded(_context = {}):
 	var theChar = getChar()
 	for task in levelupTasks:
 		task.onSexEnded(theChar, _context)
+
+func onPawnDeleted(_pawn):
+	var theActivity = getActivity()
+	if(theActivity != null):
+		theActivity.onPawnDeleted(_pawn)
+
+func onInteractionChanged(_newInteraction):
+	var theActivity = getActivity()
+	if(theActivity != null):
+		theActivity.onInteractionChanged(_newInteraction)
+
+func onInteractionEvent(_eventID:String, _args:Dictionary):
+	var theActivity = getActivity()
+	if(theActivity != null):
+		theActivity.onInteractionEvent(_eventID, _args)
+
+func pawnExist() -> bool:
+	return GM.main.IS.hasPawn(getChar().getID())
 
 func saveData():
 	var data = {

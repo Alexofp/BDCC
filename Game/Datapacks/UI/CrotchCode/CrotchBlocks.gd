@@ -149,6 +149,7 @@ static func getAll():
 		"GameStartNextDay",
 		"GameAddLog",
 		"GameShowLog",
+		"GameIsDatapackLoaded",
 		
 		"InvAddItemID",
 		"InvAddXOfItemID",
@@ -181,6 +182,11 @@ static func getAll():
 		"NpcGetBodypatrAtr",
 		"NpcEncountersExclude",
 		"NpcEncountersInclude",
+		"NpcAddPCRep",
+		"NpcSetPCRepLvl",
+		"NpcGetPCRep",
+		"NpcAffectRelationship",
+		"NpcGetRelationship",
 		
 		
 		"Print",
@@ -204,6 +210,13 @@ static func getAll():
 		"FlagSetStr",
 		"FlagSetBool",
 		"FlagInc",
+		
+		"FlagGlobGet",
+		"FlagGlobSet",
+		"FlagGlobSetStr",
+		"FlagGlobSetBool",
+		"FlagGlobInc",
+		"FlagGlobHas",
 		
 		"ToString",
 		"ToInt",

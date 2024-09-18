@@ -126,7 +126,7 @@ static func getRequiredExperience(_level) -> int:
 	return 100 + _level * 10 + int(sqrt(max(0,_level))) * 10
 
 func addExperience(addexp: int):
-	if(npc == null || !npc.isPlayer()):
+	if(npc == null || (!npc.isPlayer() && !npc.canAutoLevelUpFromFights())):
 		return
 	experience += addexp
 	
@@ -151,6 +151,9 @@ func checkNewLevel():
 		experience -= getRequiredExperienceNextLevel()
 		level += 1
 		addedAnyLevels = true
+		
+		if(npc != null && npc.canAutoLevelUpFromFights()):
+			npc.onAutoLevelUp()
 	
 	if(addedAnyLevels):
 		emit_signal("levelChanged")
@@ -256,8 +259,9 @@ func addPerk(perkID):
 		return
 	
 	var newperk = GlobalRegistry.createPerk(perkID)
-	newperk.setCharacter(npc)
-	perks[perkID] = newperk
+	if(newperk != null):
+		newperk.setCharacter(npc)
+		perks[perkID] = newperk
 
 func removePerk(perkID):
 	if(!hasPerk(perkID)):
@@ -362,7 +366,11 @@ func getBuffs():
 		if(isPerkDisabled(perkID)):
 			continue
 		var perk = perks[perkID]
-		result.append_array(perk.getBuffs())
+		if(perk == null):
+			continue
+		var buffsToAdd = perk.getBuffs()
+		if(buffsToAdd != null && (buffsToAdd is Array)):
+			result.append_array(buffsToAdd)
 	
 	return result
 

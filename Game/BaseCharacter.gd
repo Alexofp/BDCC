@@ -1250,6 +1250,9 @@ func giveBirth():
 	
 	return bornChildren
 
+func giveBirthWithNotification():
+	return giveBirth()
+
 func forceOvulate():
 	if(menstrualCycle != null):
 		return menstrualCycle.forceOvulate()
@@ -1864,6 +1867,9 @@ func isMuzzled():
 func hasBuff(buffID):
 	return buffsHolder.hasBuff(buffID)
 
+func canStartSex() -> bool:
+	return true
+
 func invCanEquipSlot(slot):
 	if(slot == InventorySlot.Penis && !hasPenis()):
 		return false
@@ -2083,8 +2089,11 @@ func addConsciousness(newc:float):
 	consciousness += newc
 	consciousness = clamp(consciousness, 0.0, 1.0)
 
+func isLewdHorny() -> bool:
+	return getLustLevel() >= 0.5 || getLust() >= 50 || getArousal() >= 0.4
+
 func isReadyToPenetrate() -> bool:
-	return getLustLevel() >= 0.5 || getLust() >= 50 || getArousal() >= 0.4 || isWearingStrapon()
+	return isLewdHorny() || isWearingStrapon()
 
 func getWornChastityCage():
 	if(getInventory().hasSlotEquipped(InventorySlot.Penis)):
@@ -2299,6 +2308,9 @@ func personalityChangesAfterSex():
 
 func getCharacterType():
 	return CharacterType.Generic
+
+func getCharType():
+	return getCharacterType()
 
 func getBodypartLewdSizeAdjective(bodypartSlot):
 	if(!hasBodypart(bodypartSlot)):
@@ -2952,3 +2964,201 @@ func getBodypartID(slot):
 	if(!bodyparts.has(slot) || bodyparts[slot] == null):
 		return ""
 	return bodyparts[slot].id
+
+func getInmateType():
+	return InmateType.Unknown
+
+func hasSomethingToStruggleOutOf() -> bool:
+	for item in getInventory().getEquppedRestraints():
+		var restraintData: RestraintData = item.getRestraintData()
+		
+		if(restraintData == null || !restraintData.canStruggleFinal() || !restraintData.shouldStruggle()):
+			continue
+		
+		return true
+	return false
+
+func doStruggleOutOfRestraints(isScared:bool = false, addStats:bool = true, customActor=null, damageMult:float = 1.0) -> Dictionary:
+	var possible = []
+	var trivial = []
+	
+	var whoStruggles = self
+	if(customActor != null):
+		whoStruggles = customActor
+	
+	for item in getInventory().getEquppedRestraints():
+		var restraintData: RestraintData = item.getRestraintData()
+		
+		if(restraintData == null || !restraintData.canStruggleFinal() || !restraintData.shouldStruggle()):
+			continue
+		
+		if(!restraintData.shouldDoStruggleMinigame(self)):
+			trivial.append(item)
+		else:
+			possible.append(item)
+	
+	var pickedItem
+	var minigameResult
+	if(trivial.size() > 0):
+		pickedItem = RNG.pick(trivial)
+		minigameResult = MinigameResult.new()
+		minigameResult.score = 1.0
+	elif(possible.size() > 0):
+		pickedItem = RNG.pick(possible)
+		minigameResult = whoStruggles.getRestraintStrugglingMinigameResult()
+		
+		if(isScared):
+			minigameResult.score = min(minigameResult.score, min(1.0, RNG.randf_range(0.6, 1.1)))
+	else:
+		return {}
+	
+	var text = ""
+	var restraintData: RestraintData = pickedItem.getRestraintData()
+	var struggleData = restraintData.doStruggle(self, minigameResult)
+	
+	
+	text += struggleData["text"]
+	
+	if(struggleData.has("damage")):
+		var damage = struggleData["damage"] * damageMult
+		restraintData.takeDamage(damage)
+		if(damage > 0.0):
+			text += ("\n{actor.You} "+("made" if customActor == null else "helped to make")+" "+str(Util.roundF(damage*100.0, 1))+"% of progress, "+str(Util.roundF(max(0.0, restraintData.getTightness()*100.0), 1))+"% left.")
+		elif(damage < 0.0):
+			text += ("\n{user.You} lost "+str(Util.roundF(abs(damage)*100.0, 1))+"% of progress, "+str(Util.roundF(max(0.0, restraintData.getTightness()*100.0), 1))+"% left.")
+		else:
+			text += ("\n{actor.You} made no progress, "+str(Util.roundF(max(0.0, restraintData.getTightness()*100.0), 1))+"% left.")
+	
+	if(addStats):
+		if(struggleData.has("lust") && struggleData["lust"] > 0):
+			whoStruggles.addLust(struggleData["lust"])
+		if(struggleData.has("pain") && struggleData["pain"] > 0):
+			whoStruggles.addPain(struggleData["pain"])
+		if(struggleData.has("stamina") && struggleData["stamina"] != 0):
+			whoStruggles.addStamina(-struggleData["stamina"])
+	
+	if(restraintData.shouldBeRemoved()):
+		text += "\n[b]"+restraintData.getRemoveMessage()+"[/b]"
+		restraintData.onStruggleRemoval()
+		getInventory().removeEquippedItem(pickedItem)
+		
+	text = GM.ui.processString(text, {"user":getID(), "actor":whoStruggles.getID()})
+	
+	return {
+		text=text,
+		lust=(struggleData["lust"] if struggleData.has("lust") else 0),
+		pain=(struggleData["pain"] if struggleData.has("pain") else 0),
+		stamina=(struggleData["stamina"] if struggleData.has("stamina") else 0),
+		animation = restraintData.getResistAnimation(),
+	}
+
+func getModularDialogueTags(_againstChar) -> Dictionary:
+	var result:Dictionary = {}
+	
+	var pers:Personality = getPersonality()
+	var possible:Array = []
+	
+	var mean = pers.getStat(PersonalityStat.Mean)
+	var subby = pers.getStat(PersonalityStat.Subby)
+	
+	if(mean >= 0.5):
+		possible.append(["mean", mean])
+	if(mean <= -0.3):
+		possible.append(["kind", -mean])
+	if(subby >= 0.4):
+		possible.append(["subby", subby])
+	if(subby <= -0.4):
+		possible.append(["dommy", -subby])
+	possible.sort_custom(self, "sortDialogueTagsDescending")
+	for pEntry in possible:
+		result[pEntry[0]] = true
+		
+	return result
+	
+static func sortDialogueTagsDescending(a, b):
+	if a[1] > b[1]:
+		return true
+	return false
+
+func canAutoLevelUpFromFights() -> bool:
+	if(!isDynamicCharacter()):
+		return false
+	if(shouldBeExcludedFromEncounters()):
+		return false
+	
+	return true
+
+func onAutoLevelUp():
+	if(GM.main != null && GM.main.characterIsVisible(getID())):
+		GM.main.addMessage(getName()+" has reached level "+str(getLevel()))
+	
+	var statWeightMap:Dictionary = {}
+	for stat in Stat.getAll():
+		var statValue:int = skillsHolder.getStat(stat)
+		
+		var statWeight:float = float(statValue)
+		if(statWeight < 1.0):
+			statWeight = 1.0
+		statWeight = sqrt(statWeight)
+		statWeightMap[stat] = statWeight
+	
+	while(skillsHolder.getFreeStatPoints() > 0):
+		var stat = RNG.pickWeightedDict(statWeightMap)
+		skillsHolder.increaseStatIfCan(stat)
+
+func addFightExperienceAuto(_otherCharID:String, didWin:bool):
+	if(!canAutoLevelUpFromFights()):
+		return
+	var otherLevel:int = 0
+	var otherChar = GlobalRegistry.getCharacter(_otherCharID)
+	if(otherChar != null):
+		otherLevel = otherChar.getLevel()
+	var pcLevel:int = 0
+	if(GM.pc != null):
+		pcLevel = GM.pc.getLevel()
+	
+	var ourLevel:int = getLevel()
+	
+	var mult:float = 1.0
+	
+	if(ourLevel > pcLevel):
+		mult = 1.0/((ourLevel - pcLevel) + 3.0)
+	elif(ourLevel == pcLevel):
+		mult = 0.5
+	else:
+		mult = 1.0 + (pcLevel - ourLevel)*0.5
+	
+	if(ourLevel < otherLevel):
+		mult += (otherLevel - ourLevel) * 0.2
+	
+	if(!didWin):
+		mult *= 0.6
+	
+	addExperience(int(round(100.0 * mult)))
+
+func getReputation() -> ReputationPlaceholder:
+	return ReputationPlaceholder.new()
+
+func isInmate() -> bool:
+	return getCharType() == CharacterType.Inmate
+
+func isGuard() -> bool:
+	return getCharType() == CharacterType.Guard
+
+func isNurse() -> bool:
+	return getCharType() == CharacterType.Nurse
+
+func isEngineer() -> bool:
+	return getCharType() == CharacterType.Engineer
+
+func isStaff() -> bool:
+	return isGuard() || isNurse() || isEngineer()
+
+func isLilac() -> bool:
+	return isInmate() && getInmateType() == InmateType.SexDeviant
+
+func isGeneralInmate() -> bool:
+	return isInmate() && getInmateType() == InmateType.General
+
+func isHighSecInmate() -> bool:
+	return isInmate() && getInmateType() == InmateType.HighSec

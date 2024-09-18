@@ -319,7 +319,7 @@ func doSubAction(_id, _actionInfo):
 		if(RNG.chance(getSubResistChance())):
 			if(state == ""):
 				endActivity()
-				satisfyGoal(SexGoal.Choke)
+				failGoal(SexGoal.Choke)
 			elif(state == "choking"):
 				state = ""
 			elif(state == "hardchoking"):

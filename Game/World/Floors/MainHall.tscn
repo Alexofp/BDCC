@@ -27,7 +27,7 @@ To the north is the Central Elevator and it's guard checkpoint, and to the south
 roomColor = 8
 population = 3
 
-[node name="MainHallRoom3" parent="." index="2" instance=ExtResource( 2 )]
+[node name="MainHallRoom3" parent="." index="2" groups=["zone_prostitution"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -64, 320 )
 roomName = "Main hall"
@@ -160,12 +160,13 @@ roomID = "main_yard_connector"
 roomDescription = "A corridor connecting the main hall and the prison yard. Two large cargo bulkheads are permanently locked open on both ends, with a large dirty metal ramp leading down and out into the yard."
 population = 3
 
-[node name="MainHallRoom48" parent="." index="16" instance=ExtResource( 2 )]
+[node name="MainHallRoom48" parent="." index="16" groups=["zone_yardpatrol"] instance=ExtResource( 2 )]
 position = Vector2( 128, 448 )
 roomName = "Stairs"
 roomID = "yard_stars_green"
 roomDescription = "A set of stairs lead up to the greenhouses with markings on the floor remind inmates that the greenhouses are [color=red]off-limits[/color] for them. "
 gridColor = 2
+loctag_Offlimits = true
 population = 2
 
 [node name="MainHallRoom37" parent="." index="17" instance=ExtResource( 2 )]
@@ -225,7 +226,7 @@ roomDescription = "This side area swings down and around the greenhouse above, a
 roomColor = 1
 population = 1
 
-[node name="MainHallRoom42" parent="." index="24" instance=ExtResource( 2 )]
+[node name="MainHallRoom42" parent="." index="24" groups=["zone_yardpatrol"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 64, 640 )
 roomName = "Prison Yard"
@@ -254,7 +255,7 @@ A spot like this is particularly nice, it sits the farest out from the main yard
 roomColor = 1
 population = 1
 
-[node name="MainHallRoom45" parent="." index="27" instance=ExtResource( 2 )]
+[node name="MainHallRoom45" parent="." index="27" groups=["zone_yardpatrol"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( -64, 640 )
 roomName = "Prison Yard"
@@ -264,7 +265,7 @@ canWest = false
 roomColor = 1
 population = 1
 
-[node name="MainHallRoom46" parent="." index="28" instance=ExtResource( 2 )]
+[node name="MainHallRoom46" parent="." index="28" groups=["zone_yardpatrol"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 256, 576 )
 roomName = "Prison Yard"
@@ -275,7 +276,7 @@ This is where the side yard ends, pushed up against the greenhouse above."
 roomColor = 1
 population = 1
 
-[node name="MainHallRoom47" parent="." index="29" instance=ExtResource( 2 )]
+[node name="MainHallRoom47" parent="." index="29" groups=["zone_yardpatrol"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( -128, 448 )
 roomName = "Prison Yard"
@@ -314,7 +315,7 @@ The ground is covered with grass, there are visible pathways made out of stone"
 roomColor = 1
 population = 1
 
-[node name="MainGreenhouses" parent="." index="33" instance=ExtResource( 2 )]
+[node name="MainGreenhouses" parent="." index="33" groups=["zone_greenhouses"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 192, 448 )
 roomName = "Greenhouses"
@@ -325,7 +326,7 @@ gridColor = 2
 loctag_Greenhouses = true
 population = 2
 
-[node name="MainGreenhouses2" parent="." index="34" instance=ExtResource( 2 )]
+[node name="MainGreenhouses2" parent="." index="34" groups=["zone_greenhouses"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 256, 448 )
 roomName = "Greenhouses"
@@ -336,7 +337,7 @@ gridColor = 2
 loctag_Greenhouses = true
 population = 2
 
-[node name="MainGreenhouses3" parent="." index="35" instance=ExtResource( 2 )]
+[node name="MainGreenhouses3" parent="." index="35" groups=["zone_greenhouses"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 192, 384 )
 roomName = "Greenhouses"
@@ -350,7 +351,7 @@ gridColor = 2
 loctag_Greenhouses = true
 population = 2
 
-[node name="MainGreenhouses4" parent="." index="36" instance=ExtResource( 2 )]
+[node name="MainGreenhouses4" parent="." index="36" groups=["zone_greenhouses"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 256, 384 )
 roomName = "Greenhouses"
@@ -363,7 +364,7 @@ gridColor = 2
 loctag_Greenhouses = true
 population = 2
 
-[node name="MainGreenhouses7" parent="." index="37" instance=ExtResource( 2 )]
+[node name="MainGreenhouses7" parent="." index="37" groups=["zone_greenhouses"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 384 )
 roomName = "Greenhouses"
@@ -374,7 +375,7 @@ gridColor = 2
 loctag_Greenhouses = true
 population = 2
 
-[node name="MainGreenhouses9" parent="." index="38" instance=ExtResource( 2 )]
+[node name="MainGreenhouses9" parent="." index="38" groups=["zone_greenhouses"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 320 )
 roomName = "Greenhouses"
@@ -388,7 +389,7 @@ lootable = true
 lootAroundMessage = "You notice a credit chip under one of the crates, huh."
 lootCredits = 3
 
-[node name="MainGreenhouses8" parent="." index="39" instance=ExtResource( 2 )]
+[node name="MainGreenhouses8" parent="." index="39" groups=["zone_greenhouses"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 512 )
 roomName = "Greenhouses"
@@ -401,7 +402,7 @@ gridColor = 2
 loctag_Greenhouses = true
 population = 2
 
-[node name="MainGreenhousesJumpable" parent="." index="40" instance=ExtResource( 2 )]
+[node name="MainGreenhousesJumpable" parent="." index="40" groups=["zone_greenhouses"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 576 )
 roomName = "Greenhouses"
@@ -417,7 +418,7 @@ gridColor = 2
 loctag_Greenhouses = true
 population = 2
 
-[node name="MainGreenhouses10" parent="." index="41" instance=ExtResource( 2 )]
+[node name="MainGreenhouses10" parent="." index="41" groups=["zone_greenhouses"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 704 )
 roomName = "Greenhouses"
@@ -430,7 +431,7 @@ gridColor = 2
 loctag_Greenhouses = true
 population = 2
 
-[node name="MainGreenhouses11" parent="." index="42" instance=ExtResource( 2 )]
+[node name="MainGreenhouses11" parent="." index="42" groups=["zone_greenhouses"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 384, 640 )
 roomName = "Greenhouses"
@@ -441,7 +442,7 @@ gridColor = 2
 loctag_Greenhouses = true
 population = 2
 
-[node name="MainGreenhouses12" parent="." index="43" instance=ExtResource( 2 )]
+[node name="MainGreenhouses12" parent="." index="43" groups=["zone_greenhouses"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 384, 576 )
 roomName = "Greenhouses"
@@ -452,7 +453,7 @@ gridColor = 2
 loctag_Greenhouses = true
 population = 2
 
-[node name="MainGreenhouses13" parent="." index="44" instance=ExtResource( 2 )]
+[node name="MainGreenhouses13" parent="." index="44" groups=["zone_greenhouses"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 640 )
 roomName = "Greenhouses"
@@ -463,7 +464,7 @@ gridColor = 2
 loctag_Greenhouses = true
 population = 2
 
-[node name="MainGreenhouses5" parent="." index="45" instance=ExtResource( 2 )]
+[node name="MainGreenhouses5" parent="." index="45" groups=["zone_greenhouses"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 384, 704 )
 roomName = "Greenhouses"
@@ -474,9 +475,10 @@ You see a few crates with fruits and vegetables here, open and vulnerable."
 roomSprite = 4
 roomColor = 1
 gridColor = 2
+loctag_Offlimits = true
 population = 2
 
-[node name="MainGreenhouses6" parent="." index="46" instance=ExtResource( 2 )]
+[node name="MainGreenhouses6" parent="." index="46" groups=["zone_greenhouses"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 320, 448 )
 roomName = "Greenhouses"
@@ -534,7 +536,7 @@ roomID = "main_stairs_e"
 roomDescription = "The platform here has tall railings on the sides and benches facing inwards to watch whatever inmates are being punished."
 population = 3
 
-[node name="MainVendomatRoom" parent="." index="52" instance=ExtResource( 2 )]
+[node name="MainVendomatRoom" parent="." index="52" groups=["zone_mainpatrol"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -128, 64 )
 roomName = "Main hall"
@@ -582,7 +584,7 @@ roomDescription = "A very spacious hall with a huge raised platform in the middl
 roomColor = 8
 population = 3
 
-[node name="MainHallRoom50" parent="." index="57" instance=ExtResource( 2 )]
+[node name="MainHallRoom50" parent="." index="57" groups=["zone_mainpatrol", "zone_prostitution"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -128, 320 )
 roomName = "Main hall"
@@ -591,7 +593,7 @@ roomDescription = "The corners of the main hall contain an open and barebones co
 roomColor = 8
 population = 3
 
-[node name="MainHallRoom51" parent="." index="58" instance=ExtResource( 2 )]
+[node name="MainHallRoom51" parent="." index="58" groups=["zone_mainpatrol"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, 320 )
 roomName = "Main hall"
@@ -622,7 +624,7 @@ The cafeteria has been carved out to the west of here."
 roomColor = 8
 population = 3
 
-[node name="MainHallRoom17" parent="." index="61" instance=ExtResource( 2 )]
+[node name="MainHallRoom17" parent="." index="61" groups=["zone_mainpatrol"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, 64 )
 roomName = "Main hall"

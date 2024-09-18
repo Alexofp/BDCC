@@ -54,3 +54,9 @@ func doStruggle(_pc, _minigame:MinigameResult):
 
 func getResistAnimation():
 	return "struggle_gag"
+
+func getTightLockRequiredItemID() -> String:
+	return "Shiv"
+
+func getTightLockUnlockMessage() -> String:
+	return "The lock is impossible to remove so you just cut through the thick cloth of the blindfold with a shiv until it falls apart."

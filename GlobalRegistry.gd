@@ -2,7 +2,7 @@ extends Node
 
 var game_version_major = 0
 var game_version_minor = 1
-var game_version_revision = 5
+var game_version_revision = 6
 var game_version_suffix = ""
 
 var currentUniqueID = 0
@@ -69,11 +69,17 @@ var slaveActions: Dictionary = {}
 var slaveEvents: Dictionary = {}
 var slaveActivities: Dictionary = {}
 var datapacks: Dictionary = {}
+var interactions: Dictionary = {}
+var interactionRefs: Dictionary = {}
+var globalTasks: Dictionary = {}
+var repStats:Dictionary = {}
 
 var bodypartStorageNode
 
 var sceneCache: Dictionary = {}
 var codeblocksCache: Dictionary = {}
+var interactionGoalCache: Dictionary = {}
+var interactionGoalRefCache: Dictionary = {}
 
 var cachedDonationData = null
 var cachedLocalDonationData = null
@@ -323,6 +329,8 @@ func registerEverything():
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
+	registerRepStatFolder("res://Game/Reputation/RepStats/")
+	
 	registerStat("res://Skills/Stat/AgilityStat.gd")
 	registerStat("res://Skills/Stat/StrengthStat.gd")
 	registerStat("res://Skills/Stat/VitalityStat.gd")
@@ -399,6 +407,9 @@ func registerEverything():
 	registerSlaveActionFolder("res://Game/NpcSlavery/SlaveActions/")
 	registerSlaveEventFolder("res://Game/NpcSlavery/SlaveEvents/")
 	registerSlaveActivitiesFolder("res://Game/NpcSlavery/SlaveActivities/")
+	
+	registerInteractionFolder("res://Game/InteractionSystem/Interactions/")
+	registerGlobalTaskFolder("res://Game/InteractionSystem/GlobalTasks/")
 	
 	emit_signal("loadingUpdate", 8.0/totalStages, "Sex scenes")
 	yield(get_tree(), "idle_frame")
@@ -2035,3 +2046,81 @@ func deleteDatapack(id:String):
 			#reloadPacks()
 			return true
 	return false
+
+
+
+func registerInteraction(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	interactions[object.id] = loadedClass
+	interactionRefs[object.id] = object
+
+func registerInteractionFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerInteraction(scriptPath)
+
+func createInteraction(id: String):
+	if(interactions.has(id)):
+		return interactions[id].new()
+	else:
+		Log.printerr("ERROR: interaction with the id "+id+" wasn't found")
+		return null
+
+func getInteractionRef(id: String):
+	if(interactionRefs.has(id)):
+		return interactionRefs[id]
+	else:
+		Log.printerr("ERROR: interaction with the id "+id+" wasn't found")
+		return null
+
+func getInteractions():
+	return interactionRefs
+
+
+
+
+func registerGlobalTask(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	globalTasks[object.id] = loadedClass
+
+func registerGlobalTaskFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerGlobalTask(scriptPath)
+
+func createGlobalTask(id: String):
+	if(globalTasks.has(id)):
+		return globalTasks[id].new()
+	else:
+		Log.printerr("ERROR: global task with the id "+id+" wasn't found")
+		return null
+		
+func getGlobalTasks():
+	return globalTasks
+
+
+
+func registerRepStat(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	repStats[object.id] = object
+
+func registerRepStatFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerRepStat(scriptPath)
+
+func getRepStat(id: String):
+	if(repStats.has(id)):
+		return repStats[id]
+	else:
+		Log.printerr("ERROR: reputation stat with the id "+id+" wasn't found")
+		return null
+		
+func getRepStats():
+	return repStats

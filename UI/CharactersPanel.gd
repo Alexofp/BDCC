@@ -2,7 +2,7 @@ extends VBoxContainer
 
 var characterPanelScane = preload("res://UI/CharacterPanelSmall.tscn")
 var addedCharacters: Dictionary = {}
-onready var charactersBox = $CharactersBox
+onready var charactersBox = $ScrollContainer/CharactersBox
 onready var optionTooltip = $CanvasLayer/TooltipDisplay
 
 func _ready():

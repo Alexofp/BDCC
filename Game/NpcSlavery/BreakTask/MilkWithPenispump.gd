@@ -43,4 +43,4 @@ func getTaskString():
 	return "Milk with penis pump: "+getProgressStringFluids()
 
 func getTaskHint(_isSlaveLevelup):
-	return "Put a penis pupm on them and collect this much seed!"
+	return "Put a penis pump on them and collect this much seed!"

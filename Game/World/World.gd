@@ -3,6 +3,20 @@ class_name GameWorld
 
 enum Direction {WEST, NORTH, EAST, SOUTH}
 
+static func getAllDirections():
+	return [Direction.WEST, Direction.NORTH, Direction.EAST, Direction.SOUTH]
+
+static func getOppositeDir(theDir):
+	if(theDir == Direction.WEST):
+		return Direction.EAST
+	if(theDir == Direction.NORTH):
+		return Direction.SOUTH
+	if(theDir == Direction.EAST):
+		return Direction.WEST
+	if(theDir == Direction.SOUTH):
+		return Direction.NORTH
+	return -1
+
 var cells: Dictionary = {}
 var roomDict: Dictionary = {}
 var floorDict: Dictionary = {}
@@ -11,8 +25,11 @@ onready var camera = $Camera2D
 var highlightedRoom: Node2D
 var lastAimedRoomID = null
 
+var pawns:Dictionary = {}
+
 var roomConnectionScene = preload("res://Game/World/RoomConnection.tscn")
 onready var worldFloorScene = load("res://Game/World/WorldFloor.tscn")
+var worldPawnScene = preload("res://Game/World/WorldPawn.tscn")
 
 var astar:AStar2D
 var astarIDToRoomIDMap: Dictionary = {}
@@ -263,6 +280,15 @@ func aimCamera(roomID, instantly = false):
 	if(instantly):
 		camera.reset_smoothing()
 
+func zoomIn(mult:float = 1.0):
+	camera.zoom *= 1.1 * mult
+
+func zoomOut(mult:float = 1.0):
+	camera.zoom *= 0.9 / mult
+
+func zoomReset():
+	camera.zoom = Vector2(1.0, 1.0)
+
 func setDarknessVisible(vis):
 	$CanvasLayer/DarknessControl.visible = vis
 
@@ -276,6 +302,252 @@ func setDarknessSize(darknessSize):
 	$CanvasLayer/DarknessControl/DBottom.margin_top = darknessSize - 0.5
 	$CanvasLayer/DarknessControl/DLeft.margin_right = -darknessSize + 0.5
 	$CanvasLayer/DarknessControl/DRight.margin_left = darknessSize - 0.5
+
+func clearPawns():
+	for pawnID in pawns:
+		pawns[pawnID].queue_free()
+	pawns.clear()
+
+func updatePawns(IS):
+	#var visiblePawns = {}
+	var checkedPawns = pawns.duplicate()
+	
+	for charID in IS.getPawns():
+		var pawn = IS.getPawn(charID)
+		var loc:String = pawn.getLocation()
+		
+		var room = getRoomByID(loc)
+		if(room == null):
+			continue
+		
+		if(!pawns.has(charID)):
+			createWorldPawn(charID, pawn, loc)
+		else:
+			checkedPawns.erase(charID)
+			var worldPawn = pawns[charID]
+			
+			worldPawn.setPawnActivityIcon(pawn.getActivityIcon())
+			
+			if(worldPawn.loc == loc):
+				continue
+			
+			if(room.getFloorID() == worldPawn.floorid):
+				worldPawn.moveToPos(room.global_position)
+				worldPawn.loc = loc
+			else:
+				createWorldPawn(charID, pawn, loc)
+		
+	for removedPawn in checkedPawns.keys():
+		pawns[removedPawn].queue_free()
+		var _ok = pawns.erase(removedPawn)
+		
+func createWorldPawn(charID, pawn, loc):
+	if(pawns.has(charID)):
+		pawns[charID].queue_free()
+		var _ok = pawns.erase(charID)
+	var room = getRoomByID(loc)
+	var roomFloor = room.getFloor()
+	
+	var newWorldPawn = worldPawnScene.instance()
+	#room.add_child(newWorldPawn)
+	roomFloor.add_child(newWorldPawn)
+	newWorldPawn.pawn = pawn
+	newWorldPawn.loc = loc
+	newWorldPawn.id = charID
+	newWorldPawn.floorid = roomFloor.id
+	newWorldPawn.global_position = getRoomByID(loc).global_position
+	newWorldPawn.setPawnTexture(pawn.getPawnTexture())
+	newWorldPawn.setPawnColor(pawn.getPawnColor())
+	newWorldPawn.setShowCollar(pawn.getShouldShowCollarOnSprite())
+	newWorldPawn.setPawnActivityIcon(pawn.getActivityIcon())
+	pawns[charID] = newWorldPawn
+
+func getZoneRooms(zoneID:String) -> Array:
+	var finalZoneID:String = "zone_"+zoneID
+	
+	if(!get_tree().has_group(finalZoneID)):
+		Log.printerr("Trying to find rooms for zone that doesn't exist: "+zoneID)
+		return []
+	var result := []
+	
+	var rooms = get_tree().get_nodes_in_group(finalZoneID)
+	for room in rooms:
+		if(!room.has_method("getFloorID")):
+			continue
+		result.append(room.roomID)
+	return result
+
+func getRandomZoneRoom(zoneID:String, defaultValue:String = ""):
+	var rooms = getZoneRooms(zoneID)
+	
+	if(rooms.size() <= 0):
+		return defaultValue
+	return RNG.pick(rooms)
+
+func isRoomInZone(roomID:String, zoneID:String) -> bool:
+	var theRoom = getRoomByID(roomID)
+	if(theRoom == null):
+		return false
+	var finalZoneID:String = "zone_"+zoneID
+	return theRoom.is_in_group(finalZoneID)
+
+func simpleDistance(room1name:String, room2name:String) -> float:
+	var room1 = getRoomByID(room1name)
+	var room2 = getRoomByID(room2name)
+	
+	if(room1 == null || room2 == null):
+		return 999999.9
+	if(room1.getFloorID() != room2.getFloorID()):
+		return 999999.9
+	
+	var room1cell:Vector2 = room1.getCell()
+	var room2cell:Vector2 = room2.getCell()
+	
+	var diff:Vector2 = room2cell - room1cell
+	var dumbDistance:float = abs(diff.x) + abs(diff.y) # Manhatten distance since we're can't move diagonally
+	
+	return dumbDistance
+
+func simpleRingDistance(room1name:String, room2name:String) -> float:
+	var room1 = getRoomByID(room1name)
+	var room2 = getRoomByID(room2name)
+	
+	if(room1 == null || room2 == null):
+		return 999999.9
+	if(room1.getFloorID() != room2.getFloorID()):
+		return 999999.9
+	
+	var room1cell:Vector2 = room1.getCell()
+	var room2cell:Vector2 = room2.getCell()
+	
+	var diff:Vector2 = room2cell - room1cell
+	var dumbDistance:float = max(abs(diff.x), abs(diff.y))
+	
+	return dumbDistance
+
+func getSafeFromPCRandomRoom(possibleRooms:Array, pcLoc:String) -> String:
+	var filtered:Array = []
+	
+	for roomID in possibleRooms:
+		var dist:float = simpleDistance(roomID, pcLoc)
+		if(dist >= 4.0):
+			filtered.append(roomID)
+	
+	if(filtered.size() > 0):
+		return RNG.pick(filtered)
+	else:
+		return RNG.pick(possibleRooms)
+
+func isLocSafe(theLoc:String) -> bool:
+	var room = getRoomByID(theLoc)
+	if(room == null):
+		return false
+	return !room.isOfflimitsForInmates()
+
+func getSafeLoc(theLoc:String) -> String:
+	var toTest:Array = [theLoc]
+	var checked:Dictionary = {}
+	
+	var dirs = getAllDirections()
+	
+	while(!toTest.empty()):
+		var nextLoc:String = toTest.pop_front()
+		var room = getRoomByID(nextLoc)
+		
+		if(room == null):
+			continue
+		if(!room.isOfflimitsForInmates()):
+			return nextLoc
+		
+		for dir in dirs:
+			if(canGoID(nextLoc, dir)):
+				var nextNewLoc:String = applyDirectionID(nextLoc, dir)
+				if(checked.has(nextNewLoc)):
+					continue
+				checked[nextNewLoc] = true
+				toTest.append(nextNewLoc)
+	return ""
+
+func getConnectedRoomsNear(theLoc:String, maxDepth:int) -> Array:
+	var origRoom = getRoomByID(theLoc)
+	if(origRoom == null):
+		return []
+	
+	var dirs = getAllDirections()
+	
+	var result:Array = []
+	var checked:Dictionary = {theLoc:true}
+	var toTest:Array = [theLoc]
+	var toDepth:Array = [0]
+	
+	while(!toTest.empty()):
+		var nextLoc:String = toTest.pop_front()
+		var nextDepth:int = toDepth.pop_front()
+		var room = getRoomByID(nextLoc)
+		if(room == null):
+			continue
+		
+		result.append(nextLoc)
+		
+		if(nextDepth >= maxDepth):
+			continue
+		
+		for dir in dirs:
+			if(canGoID(nextLoc, dir)):
+				var nextNewLoc:String = applyDirectionID(nextLoc, dir)
+				if(checked.has(nextNewLoc)):
+					continue
+				checked[nextNewLoc] = true
+				
+				#var dist:float = simpleDistance()
+				
+				toTest.append(nextNewLoc)
+				toDepth.append(nextDepth+1)
+	return result
+
+func getConnectedRoomsNearLimitDistance(theLoc:String, maxDepth:int, maxDistance:float) -> Array:
+	var origRoom = getRoomByID(theLoc)
+	if(origRoom == null):
+		return []
+	
+	var dirs = getAllDirections()
+	
+	var result:Array = []
+	var checked:Dictionary = {theLoc:true}
+	var toTest:Array = [theLoc]
+	var toDepth:Array = [0]
+	
+	while(!toTest.empty()):
+		var nextLoc:String = toTest.pop_front()
+		var nextDepth:int = toDepth.pop_front()
+		var room = getRoomByID(nextLoc)
+		if(room == null):
+			continue
+		
+		result.append(nextLoc)
+		
+		if(nextDepth >= maxDepth):
+			continue
+		
+		for dir in dirs:
+			if(canGoID(nextLoc, dir)):
+				var nextNewLoc:String = applyDirectionID(nextLoc, dir)
+				if(checked.has(nextNewLoc)):
+					continue
+				checked[nextNewLoc] = true
+				
+				var dist:float = simpleRingDistance(theLoc, nextNewLoc)
+				if(dist > maxDistance):
+					continue
+				
+				toTest.append(nextNewLoc)
+				toDepth.append(nextDepth+1)
+	return result
+
+func setPawnsShowed(newS:bool):
+	for pawnID in pawns:
+		var worldPawn:Node2D = pawns[pawnID]
+		worldPawn.visible = newS
 
 func saveData():
 	var data = {}

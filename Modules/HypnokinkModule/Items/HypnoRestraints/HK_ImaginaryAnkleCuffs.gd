@@ -18,7 +18,7 @@ func getBuffs():
 		]
 
 func getTags():
-	return [ItemTag.BDSMRestraint]
+	return [ItemTag.BDSMRestraint, ItemTag.ImaginaryRestraint]
 
 func getTakeOffScene():
 	return "HypnoCuffsScene"

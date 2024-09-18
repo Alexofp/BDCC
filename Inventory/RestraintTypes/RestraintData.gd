@@ -79,11 +79,15 @@ func shouldBeRemoved():
 func getRemoveMessage():
 	return getItem().getVisibleName()+" slips off!"
 
+func shouldStruggle() -> bool:
+	return !aiWontResist
+
 func canStruggle():
 	return true
 
 func canStruggleFinal():
-	if(smartLock != null):
+	# Change this line when npcs would support the smart locks!
+	if(smartLock != null && getItem() != null && getItem().isWornByWearer() && getItem().getWearer().isPlayer()):
 		if(!smartLock.canStruggle()):
 			return false
 	return canStruggle()
@@ -215,6 +219,12 @@ func handleSexEvent(sexEvent:SexEvent):
 func onSexEnded(_contex = {}):
 	if(smartLock != null):
 		smartLock.onSexEnded(_contex)
+
+func getTightLockRequiredItemID() -> String:
+	return "StunBaton"
+
+func getTightLockUnlockMessage() -> String:
+	return "You press the blunt tip of the stun baton against the tight lock and engage it.\n\nElectrical shock fries the electric board inside, causing the lock to disengage and just simple fall off."
 
 func saveData():
 	var data = {}

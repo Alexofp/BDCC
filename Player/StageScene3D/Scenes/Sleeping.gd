@@ -42,6 +42,7 @@ func playAnimation(animID, _args = {}):
 		doll2.prepareCharacter(secondDoll)
 		doll2.visible = true
 	else:
+		doll2.prepareCharacter(secondDoll)
 		doll2.visible = false
 	
 	#doll.forceSlotToBeVisible(BodypartSlot.Penis)

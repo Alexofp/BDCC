@@ -494,6 +494,12 @@ func _react(_action: String, _args):
 		
 		enemyCharacter.onFightEnd(getContexForEnemy())
 		GM.pc.onFightEnd(getContexForPC())
+		
+		if(battleState == "win"):
+			enemyCharacter.addFightExperienceAuto("pc", false)
+		else:
+			enemyCharacter.addFightExperienceAuto("pc", true)
+		
 		if(battleEndedHow == ""):
 			battleEndedHow = "pain"
 		if(battleState == "win"):
@@ -1050,3 +1056,6 @@ func doDebugAction(_id, _args = {}):
 	if(_id == "healEnemy"):
 		enemyCharacter.addPain(-enemyCharacter.painThreshold())
 		enemyCharacter.addLust(-enemyCharacter.lustThreshold())
+
+func supportsShowingPawns() -> bool:
+	return true

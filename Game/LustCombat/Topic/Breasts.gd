@@ -46,3 +46,8 @@ func getVisibleName(_topicID):
 		return "lactation"
 	
 	return "error:"+str(_topicID)
+
+func getAddsToFocus(_topicID, _focus) -> float:
+	if(_focus == LustFocus.Breasts):
+		return 1.0
+	return 0.0

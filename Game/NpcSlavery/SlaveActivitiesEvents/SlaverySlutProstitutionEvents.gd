@@ -3,10 +3,11 @@ extends EventBase
 func _init():
 	id = "SlaverySlutProstitutionEvents"
 
-func registerTriggers(es):
-	es.addTrigger(self, Trigger.EnteringRoom)
-	es.addTrigger(self, Trigger.EnteringRoomWithSlave)
-	es.addTrigger(self, Trigger.PCLookingForTrouble)
+func registerTriggers(_es):
+	#es.addTrigger(self, Trigger.EnteringRoom)
+	#es.addTrigger(self, Trigger.EnteringRoomWithSlave)
+	#es.addTrigger(self, Trigger.PCLookingForTrouble)
+	pass
 
 
 func run(_triggerID, _args):

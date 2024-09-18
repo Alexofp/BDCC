@@ -33,7 +33,7 @@ func _ready():
 func _http_request_completed_init_data(_result, _response_code, _headers, body):
 	#print(body.get_string_from_utf8())
 	var initData = body.get_string_from_utf8()
-	print("Got init data")
+	#print("Got init data")
 	fd = extract("FdrFJe", initData)
 	cf = extract("cfb2h", initData)
 

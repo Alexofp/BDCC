@@ -1,6 +1,8 @@
 extends "res://Game/Datapacks/UI/PackVarUIs/PackVarUIBase.gd"
-onready var option_button = $HBoxContainer/OptionButton
+#onready var option_button = $HBoxContainer/OptionButton
 onready var settings_list = $SettingsList
+onready var auto_selector_var_ui = $HBoxContainer/AutoSelectorVarUI
+
 
 var bodypartSlot = BodypartSlot.Head
 var data = {
@@ -26,20 +28,37 @@ func setData(_dataLine:Dictionary):
 func updateValue():
 	$HBoxContainer/Label.text = BodypartSlot.getVisibleName(bodypartSlot)
 	
-	option_button.clear()
+	#option_button.clear()
 	optionIDs.clear()
 	
-	option_button.add_item("-nothing-")
+	#option_button.add_item("-nothing-")
 	optionIDs.append("")
+	var optionValues:Array = [
+		[0, "-nothing-"],
+	]
 	
 	var possiblePartIDs = GlobalRegistry.getBodypartsIdsBySlot(bodypartSlot)
 	
+	var selInd:int = 0
+	var _i:int = 1
 	for partID in possiblePartIDs:
-		option_button.add_item(partID)
+		#option_button.add_item(partID)
+		optionValues.append([_i, partID])
 		optionIDs.append(partID)
 		
 		if(partID == data["id"]):
-			option_button.select(optionIDs.size() - 1)
+			selInd = _i
+			#option_button.select(optionIDs.size() - 1)
+		
+		_i += 1
+
+	auto_selector_var_ui.setData({
+		values = optionValues,
+		value = selInd,
+		alwaysEdit = true,
+		name = BodypartSlot.getVisibleName(bodypartSlot),
+		expand = true,
+	})
 	updateSettings()
 
 func _on_OptionButton_item_selected(index):
@@ -59,12 +78,13 @@ func _on_OptionButton_item_selected(index):
 	triggerChange(data.duplicate())
 
 func getSelectedPartID():
-	if(optionIDs.size() <= 0):
-		return ""
-	var index = option_button.selected
-	if(index < 0 && index >= optionIDs.size()):
-		return ""
-	return optionIDs[index]
+#	if(optionIDs.size() <= 0):
+#		return ""
+#	var index = option_button.selected
+#	if(index < 0 && index >= optionIDs.size()):
+#		return ""
+#	return optionIDs[index]
+	return data["id"]
 
 var numberVarUIScene = preload("res://Game/Datapacks/UI/PackVarUIs/NumberVarUI.tscn")
 var selectorVarUIScene = preload("res://Game/Datapacks/UI/PackVarUIs/AdvancedSelectorVarUI.tscn")
@@ -141,3 +161,7 @@ func onBodypartSkinChanged(_id, value):
 	data["pickedG"] = value["g"]
 	data["pickedB"] = value["b"]
 	triggerChange(data.duplicate())
+
+
+func _on_AutoSelectorVarUI_onValueChange(_id, newValue):
+	_on_OptionButton_item_selected(newValue)

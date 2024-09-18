@@ -9,6 +9,8 @@ var tick:int = 0
 var lustFull: float = 0.0
 var hadStim:bool = false # Did we have any stimulation this turn?
 var turnsLastStim:int = 0 # How many turns since last stimulation
+var satisfaction:float = 0.0
+var frustration:float = 0.0
 
 var justCame = false
 
@@ -52,6 +54,9 @@ func addArousal(howmuch: float):
 	if(howmuch > 0.0):
 		hadStim = true
 		turnsLastStim = 0
+		addSatisfaction(howmuch * 0.1)
+	if(howmuch < 0.0 && getChar().isLewdHorny()):
+		addFrustration(abs(howmuch) * 0.2)
 
 func getArousal()->float:
 	return getChar().getArousal()
@@ -66,6 +71,9 @@ func addPain(newpain):
 		var masochistScore = fetishScore({Fetish.Masochism: 1.0})
 		if(masochistScore > 0.0):
 			addLust(round(newpain * masochistScore * 0.5))
+			addSatisfaction(newpain * 0.01)
+		else:
+			addFrustration(newpain * 0.01)
 
 func addLust(newlust):
 	getChar().addLust(newlust)
@@ -120,6 +128,7 @@ func cum(infoCaused = null):
 	if(infoCaused == null):
 		infoCaused = self
 	
+	addSatisfaction(1.0)
 	justCame = true
 	setArousal(0.0)
 	getChar().addLust(-int(getChar().getLust()/2.0))
@@ -187,6 +196,7 @@ func increaseMemory(keyid):
 func getSexEndInfo():
 	var texts = []
 	
+	texts.append("Satisfaction: "+str(Util.roundF(calculateFinalSatisfaction()*100.0, 1))+"%") # +" Satis: "+str(satisfaction)+" Frust: "+str(frustration)
 	if(timesCame > 0):
 		texts.append("Times came: "+str(timesCame))
 	texts.append("Average lust: "+str(Util.roundF(getAverageLust()*100.0, 1))+"%")
@@ -199,6 +209,60 @@ func hasTag(thetag):
 func affectPersonality(_personality:Personality, _fetishHolder:FetishHolder):
 	return ""
 
+func isUnconscious():
+	return false
+
+func addSatisfaction(howMuch:float):
+	if(isUnconscious()):
+		return
+	satisfaction += howMuch
+
+func addFrustration(howMuch:float):
+	if(isUnconscious()):
+		return
+	var forcedObedience = clamp(getChar().getForcedObedienceLevel(), 0.0, 1.0)
+	if(howMuch > 0.0 && forcedObedience > 0.0):
+		howMuch *= (1.0 - forcedObedience)
+	frustration += howMuch
+
+func onGoalSatisfied(_thedominfo, _goalid, _thesubinfo, _mult:float = 1.0):
+	pass
+
+func onGoalFailed(_thedominfo, _goalid, _thesubinfo, _mult:float = 1.0):
+	pass
+
+func checkIsDown():
+	return false
+
+func hasGoalToCum() -> bool:
+	return true
+
+func getTotalSatisfaction() -> float:
+	if((satisfaction + frustration) == 0.0):
+		return 0.0
+	return clamp(satisfaction / (satisfaction + frustration), 0.0, 1.0)
+
+func calculateFinalSatisfaction() -> float:
+	var total:float = getTotalSatisfaction()
+	
+	if(checkIsDown()):
+		var maso:float = fetishScore({Fetish.Masochism: 1.0})
+		total *= max(0.4 + maso * 0.6, 0.0)
+	
+	if(timesCame < 1 && hasGoalToCum()):
+		var patience:float = personalityScore({PersonalityStat.Impatient:-1.0})
+		total *= clamp(0.7 + patience * 0.45, 0.0, 1.0)
+	
+	if(getArousal() >= 0.9 && hasGoalToCum()):
+		var arousalMod:float = 1.0 - getArousal() / 2.0
+		var patience:float = personalityScore({PersonalityStat.Impatient:-1.0})
+		total *= clamp(arousalMod + (patience * getArousal()), 0.0, 1.0)
+	
+	if((satisfaction + frustration) < 1.0):
+		total = 0.5 * (1.0 - (satisfaction + frustration)) + total * (satisfaction + frustration)
+	
+	return total
+
 func saveData():
 	var data = {
 		"charID": charID,
@@ -208,6 +272,8 @@ func saveData():
 		"lustFull": lustFull,
 		"hadStim": hadStim,
 		"turnsLastStim": turnsLastStim,
+		"satisfaction": satisfaction,
+		"frustration": frustration,
 	}
 
 	return data
@@ -220,3 +286,5 @@ func loadData(data):
 	lustFull = SAVE.loadVar(data, "lustFull", 0.0)
 	hadStim = SAVE.loadVar(data, "hadStim", false)
 	turnsLastStim = SAVE.loadVar(data, "turnsLastStim", 0)
+	satisfaction = SAVE.loadVar(data, "satisfaction", 0.0)
+	frustration = SAVE.loadVar(data, "frustration", 0.0)

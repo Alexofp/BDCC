@@ -1,6 +1,8 @@
 extends RestraintData
 class_name RestraintHandCuffs
 
+var tightlockShiv:bool = false
+
 func _init():
 	restraintType = RestraintType.WristCuffs
 
@@ -51,3 +53,13 @@ func doStruggle(_pc, _minigame:MinigameResult):
 			pain = scaleDamage(RNG.randi_range(5, 10))
 	
 	return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}
+
+func getTightLockRequiredItemID() -> String:
+	if(tightlockShiv):
+		return "Shiv"
+	return .getTightLockRequiredItemID()
+
+func getTightLockUnlockMessage() -> String:
+	if(tightlockShiv):
+		return "The lock is impossible to remove so you just use a shiv to cut through the restraint, slowly freeing your wrists."
+	return .getTightLockUnlockMessage()

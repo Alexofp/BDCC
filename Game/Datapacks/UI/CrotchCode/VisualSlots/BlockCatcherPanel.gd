@@ -13,6 +13,7 @@ var bigTextEditWindowScene = preload("res://Game/Datapacks/UI/CrotchCode/VisualS
 var currentBigWindow
 onready var map_button = $MarginContainer/MapButton
 onready var advanced_picker_button = $MarginContainer/AdvancedPickerButton
+onready var flag_picker_button = $MarginContainer/FlagPickerButton
 
 var dropIndex = -1
 
@@ -81,6 +82,7 @@ func updateRawVis():
 	$MarginContainer/OptionButton.visible = false
 	$MarginContainer/BigTextEdit.visible = false
 	map_button.visible = false
+	flag_picker_button.visible = false
 	advanced_picker_button.visible = false
 	if(containedNode != null):
 		$MarginContainer.visible = false
@@ -131,6 +133,9 @@ func updateRawVis():
 		elif(extraMode == 2):
 			map_button.visible = true
 			map_button.text = "ROOM="+str(rawValue)
+		elif(extraMode == 4):
+			flag_picker_button.visible = true
+			flag_picker_button.text = ""+str(rawValue)
 
 func getRawValue():
 	return rawValue
@@ -163,6 +168,7 @@ func setRawValue(newVal):
 		$MarginContainer/BigTextEdit/TextEdit.text = newVal
 		map_button.text = "ROOM="+str(newVal)
 		advanced_picker_button.text = str(newVal)
+		flag_picker_button.text = str(newVal)
 	return null
 
 func _on_SpinBox_value_changed(_value):
@@ -253,4 +259,21 @@ func onAdvPickerConfirmPressed(window, value):
 	for value in rawPossibleValues:
 		if(value is Array && value[0] == rawValue && value.size() > 1):
 			advanced_picker_button.text = str(value[1])
+	emit_signal("onRawValueChanged", rawValue)
+
+
+var flagPickerScene = preload("res://Game/Datapacks/UI/CrotchCode/UI/FlagPickerWindow.tscn")
+func _on_FlagPickerButton_pressed():
+	var newWindow = flagPickerScene.instance()
+	add_child(newWindow)
+	newWindow.setFlag(str(rawValue))
+	newWindow.connect("onCancelPressed", self, "onMapButtonClosed")
+	newWindow.connect("onFlagSelected", self, "onFlagSelected")
+	
+	newWindow.popup_centered()
+
+func onFlagSelected(window, newFlag):
+	window.queue_free()
+	rawValue = newFlag
+	flag_picker_button.text = ""+str(rawValue)
 	emit_signal("onRawValueChanged", rawValue)

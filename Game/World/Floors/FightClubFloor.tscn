@@ -16,7 +16,7 @@ roomSprite = 3
 roomColor = 8
 population = 1
 
-[node name="FightClubRoom2" parent="." index="1" instance=ExtResource( 2 )]
+[node name="FightClubRoom2" parent="." index="1" groups=["zone_fightclub"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 0, -64 )
 roomName = "The Underground"
@@ -25,7 +25,7 @@ roomDescription = "This abandoned maintenance space has had a fence built up aro
 roomColor = 8
 population = 1
 
-[node name="FightClubRoom3" parent="." index="2" instance=ExtResource( 2 )]
+[node name="FightClubRoom3" parent="." index="2" groups=["zone_fightclub"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -64, -64 )
 roomName = "The Underground"
@@ -34,7 +34,7 @@ roomDescription = "This whole side of the Underground is covered in all sorts of
 roomColor = 8
 population = 1
 
-[node name="FightClubRoom4" parent="." index="3" instance=ExtResource( 2 )]
+[node name="FightClubRoom4" parent="." index="3" groups=["zone_fightclub"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -64, -128 )
 roomName = "The Underground"
@@ -59,7 +59,7 @@ roomColor = 7
 gridColor = 2
 population = 1
 
-[node name="FightClubRoom6" parent="." index="5" instance=ExtResource( 2 )]
+[node name="FightClubRoom6" parent="." index="5" groups=["zone_fightclub"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -64, -192 )
 roomName = "The Underground"
@@ -68,7 +68,7 @@ roomDescription = "This whole side of the Underground is covered in all sorts of
 roomColor = 8
 population = 1
 
-[node name="FightClubRoom7" parent="." index="6" instance=ExtResource( 2 )]
+[node name="FightClubRoom7" parent="." index="6" groups=["zone_fightclub"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 0, -192 )
 roomName = "Announcer's Balcony"
@@ -78,7 +78,7 @@ roomSprite = 1
 roomColor = 7
 population = 1
 
-[node name="FightClubRoom8" parent="." index="7" instance=ExtResource( 2 )]
+[node name="FightClubRoom8" parent="." index="7" groups=["zone_fightclub"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 64, -192 )
 roomName = "The Underground"
@@ -87,7 +87,7 @@ roomDescription = "This corner here is a bit barren, pipes and paint have been s
 roomColor = 8
 population = 1
 
-[node name="FightClubRoom9" parent="." index="8" instance=ExtResource( 2 )]
+[node name="FightClubRoom9" parent="." index="8" groups=["zone_fightclub"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 64, -128 )
 roomName = "The Underground"
@@ -97,7 +97,7 @@ roomSprite = 1
 roomColor = 8
 population = 1
 
-[node name="FightClubRoom10" parent="." index="9" instance=ExtResource( 2 )]
+[node name="FightClubRoom10" parent="." index="9" groups=["zone_fightclub"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 64, -64 )
 roomName = "The Underground"
@@ -106,7 +106,7 @@ roomDescription = "This abandoned maintenance space has had a fence built up aro
 roomColor = 8
 population = 1
 
-[node name="FightClubRoom11" parent="." index="10" instance=ExtResource( 2 )]
+[node name="FightClubRoom11" parent="." index="10" groups=["zone_fightclub", "zone_prostitution"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, -128 )
 roomName = "The Underground"
@@ -115,7 +115,7 @@ roomDescription = "This old maintence area ends here and the open stone of the y
 roomColor = 8
 population = 1
 
-[node name="FightClubRoom12" parent="." index="11" instance=ExtResource( 2 )]
+[node name="FightClubRoom12" parent="." index="11" groups=["zone_fightclub"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, -192 )
 roomName = "Slutwall"

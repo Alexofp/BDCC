@@ -230,5 +230,12 @@ func _on_DatapackButton_pressed():
 func onDatapackMenuClosedPressed():
 	if(datapackMenu != null):
 		datapackMenu.queue_free()
-		datapackMenu = true
+		datapackMenu = null
 		$HBoxContainer.visible = true
+
+
+func _on_InteractionCreator_pressed():
+	$HBoxContainer.visible = false
+	datapackMenu = load("res://Util/InteractionCreator/InteractionCreator.tscn").instance()
+	datapackMenu.connect("onClosePressed", self, "onDatapackMenuClosedPressed")
+	add_child(datapackMenu)

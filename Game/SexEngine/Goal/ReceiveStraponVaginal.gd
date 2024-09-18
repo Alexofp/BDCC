@@ -14,6 +14,9 @@ func isPossible(_sexEngine, _domInfo, _subInfo, _data):
 	
 	return false
 
+func domWantsToCum():
+	return true
+
 func getSubGoals(_sexEngine, _domInfo, _subInfo, _data):
 	return {
 		SexGoal.SubUndressSub: 1.0,

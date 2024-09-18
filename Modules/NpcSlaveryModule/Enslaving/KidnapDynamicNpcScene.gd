@@ -147,6 +147,8 @@ func _react(_action: String, _args):
 		return
 	
 	if(_action == "do_kidnap"):
+		GM.pc.getReputation().addRep(RepStat.Alpha, 0.2)
+		GM.pc.getReputation().handleSpecialEvent("enslavesomeone")
 		if(_args.size() > 0):
 			getModule("NpcSlaveryModule").doEnslaveCharacter(npcID, _args[0])
 		else:

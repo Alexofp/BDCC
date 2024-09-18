@@ -49,8 +49,10 @@ func removeBlock(_theblock):
 
 func _on_BlockCatcherPanel_onBlockDraggedOnto(_data, _index):
 	if(slotVar != null):
-		editor.onUserChangeMade()
 		var theBlock = _data["block"]
+		if(theBlock.hasSlotObject(slotVar)): # To prevent dropping a block into itself
+			return
+		editor.onUserChangeMade()
 		if(Input.is_action_pressed("editor_duplicate_mod")):
 			var newBlock = CrotchBlocks.createBlock(theBlock.id)
 			newBlock.loadData(theBlock.saveData().duplicate(true))

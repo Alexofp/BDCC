@@ -58,3 +58,31 @@ func getVisibleName(_topicID):
 	
 	return "error:"+str(_topicID)
 
+func getAddsToFocus(_topicID, _focus) -> float:
+	if(_topicID == InterestTopic.TallyMarks):
+		if(_focus == LustFocus.Body):
+			return 0.5
+		if(_focus == LustFocus.Butt):
+			return 1.0
+	if(_topicID == InterestTopic.Bodywritings):
+		if(_focus == LustFocus.Body):
+			return 1.0
+		if(_focus == LustFocus.Butt):
+			return 0.5
+	if(_topicID == InterestTopic.Gags):
+		if(_focus == LustFocus.Body):
+			return 0.25
+	if(_topicID == InterestTopic.Blindfolds):
+		if(_focus == LustFocus.Body):
+			return 0.25
+	if(_topicID == InterestTopic.BDSMRestraints):
+		if(_focus == LustFocus.Body):
+			return 1.0
+	if(_topicID == InterestTopic.ButtPlugs):
+		if(_focus == LustFocus.Butt):
+			return 1.0
+	if(_topicID == InterestTopic.VaginalPlugs):
+		if(_focus == LustFocus.Crotch):
+			return 1.0
+	
+	return 0.0

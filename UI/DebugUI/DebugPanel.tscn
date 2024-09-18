@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://UI/DebugUI/FlagsPanel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/DebugUI/DebugActionsPanel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/DebugUI/SceneInfoPanel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/DebugUI/WHS.tscn" type="PackedScene" id=4]
 
 [node name="DebugPanel" type="VBoxContainer"]
 anchor_right = 1.0
@@ -24,11 +25,26 @@ margin_bottom = -4.0
 
 [node name="Game Flags" parent="TabContainer" instance=ExtResource( 1 )]
 visible = false
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
 
 [node name="Datapack Flags" parent="TabContainer" instance=ExtResource( 1 )]
 visible = false
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
 addGameFlags = false
 addDatapackFlags = true
 
 [node name="Scenes Info" parent="TabContainer" instance=ExtResource( 3 )]
+visible = false
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="WHS" parent="TabContainer" instance=ExtResource( 4 )]
 visible = false

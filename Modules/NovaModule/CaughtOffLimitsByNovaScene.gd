@@ -350,8 +350,9 @@ func _react(_action: String, _args):
 		]])
 	
 	if(_action == "startstocks"):
-		runScene("StocksPunishmentScene", ["nova"])
+		#runScene("StocksPunishmentScene", ["nova"])
 		endScene()
+		GM.main.IS.startInteraction("InStocks", {inmate="pc"})
 		return
 		
 	if(_action == "punishment"):

@@ -11,6 +11,8 @@ onready var popupWindowLabel = $CenterContainer/Notification/NotificationLabel
 onready var popupForgetButton = $CenterContainer/Notification/HBoxC/Forget
 onready var popupOkButton = $CenterContainer/Notification/HBoxC/Ok
 onready var popupCancelButton = $CenterContainer/Notification/HBoxC/Cancel
+onready var relationship = $PanelContainer/VBoxC/UpperPanel/HBoxContainer/Relationship
+
 var _nameBtnState: bool = true
 var _genderBtnState: bool = true
 var _personalityBtnState: bool = true
@@ -23,6 +25,7 @@ func addRow(name: String, gender: String, subbyStat: float, ID: String, occupati
 	var newRow = npcRow.instance()
 	container.add_child(newRow)
 	newRow.initData(name, gender, subbyStat, ID, occupation, children, canForget, canMeet)
+	newRow.setRelationShipData(GM.main.RS.getAffection("pc", ID), GM.main.RS.getLust("pc", ID))
 	newRow.connect("onForgetButtonPressed", self, "forgetNPC")
 	newRow.connect("onMeetButtonPressed", self, "meetNPC")
 	
@@ -181,3 +184,28 @@ func unpressAllButtons():
 	genderButton.pressed = false
 	personalityButton.pressed = false
 	childrenButton.pressed = false
+	relationship.pressed = false
+
+
+func _on_Relationship_pressed():
+	unpressAllButtons()
+	relationship.pressed = true
+	
+	var nodesSortedArr = container.get_children()
+	
+	if(_childrenBtnState):
+		nodesSortedArr.sort_custom(self, "sortRelationship")
+	else:
+		nodesSortedArr.sort_custom(self, "sortRelationshipDescending")
+		
+	for nodeNum in nodesSortedArr.size():
+		container.move_child(nodesSortedArr[nodeNum], nodeNum)
+	
+	_childrenBtnState = !_childrenBtnState
+
+func sortRelationship(a: Node, b: Node):
+	return a.affection < b.affection
+	
+	
+func sortRelationshipDescending(a: Node, b: Node):
+	return a.affection > b.affection

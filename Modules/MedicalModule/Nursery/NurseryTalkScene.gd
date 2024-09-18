@@ -135,19 +135,74 @@ func _run():
 	if(state == "database"):
 		saynn("You ask the nurse to show you the database records. She quickly punches some buttons and turns the screen towards you.")
 		
-		if(GM.CS.getChildren().size() == 0):
+		if(OPTIONS.getMaxKeepPCKids() > 0 || !OPTIONS.shouldOptimizeKids()):
+			if(GM.CS.getChildren().size() == 0):
+				sayn(" - Nothing found, get to breeding!")
+			else:
+				saynn("- Total records found "+str(calculateAmount(true))+":")
+				# (Your children here)
+				printChildren(true)
+			
+		var archivedAmount:int = GM.CS.getArchiveChildCountMotherOrFather("pc")
+		if(archivedAmount <= 0 && !(OPTIONS.getMaxKeepPCKids() > 0 || !OPTIONS.shouldOptimizeKids())):
 			sayn(" - Nothing found, get to breeding!")
-		else:
-			saynn("- Total records found "+str(calculateAmount(true))+":")
-			# (Your children here)
-			printChildren(true)
-		
+		elif(archivedAmount > 0):
+			sayn("")
+			sayn("Archived records ("+str(archivedAmount)+"):")
+			
+			var resultTable:String = "[font=res://Fonts/normalconsolefont.tres][table=3][cell]Mother[/cell][cell]Father[/cell][cell]Amount[/cell]"
+			
+			for recordKey in GM.CS.archive:
+				var splitData:Array = recordKey.split(";")
+				if(splitData.size() < 2):
+					continue
+				var motherID:String = splitData[0]
+				var fatherID:String = splitData[1]
+				
+				if(motherID == "pc" || fatherID == "pc"):
+					var motherChar = getCharacter(motherID)
+					var fatherChar = getCharacter(fatherID)
+					var motherName:String = motherChar.getName() if motherChar != null else "unknown"
+					var fatherName:String = fatherChar.getName() if fatherChar != null else "unknown"
+					var kidAmount:int = GM.CS.archive[recordKey]
+					
+					resultTable += "[cell]"+motherName+"[/cell][cell]"+fatherName+"[/cell][cell]"+str(kidAmount)+"[/cell]"
+					
+			resultTable += "[/table][/font]"
+			sayn(resultTable)
+					
 			var other = calculateAmount(false)
 			if(other > 0):
 				sayn("")
 				saynn("- Unrelated records found "+str(calculateAmount(false))+":")
 			
 				printChildren(false)
+			
+		var archivedNPCAmount:int = GM.CS.getArchiveChildCountNonPC()
+		if(archivedNPCAmount > 0):
+			sayn("")
+			sayn("Unrelated archived records ("+str(archivedNPCAmount)+"):")
+			
+			var resultTable:String = "[font=res://Fonts/normalconsolefont.tres][table=3][cell]Mother[/cell][cell]Father[/cell][cell]Amount[/cell]"
+			
+			for recordKey in GM.CS.archive:
+				var splitData:Array = recordKey.split(";")
+				if(splitData.size() < 2):
+					continue
+				var motherID:String = splitData[0]
+				var fatherID:String = splitData[1]
+				
+				if(motherID != "pc" && fatherID != "pc"):
+					var motherChar = getCharacter(motherID)
+					var fatherChar = getCharacter(fatherID)
+					var motherName:String = motherChar.getName() if motherChar != null else "unknown"
+					var fatherName:String = fatherChar.getName() if fatherChar != null else "unknown"
+					var kidAmount:int = GM.CS.archive[recordKey]
+					
+					resultTable += "[cell]"+motherName+"[/cell][cell]"+fatherName+"[/cell][cell]"+str(kidAmount)+"[/cell]"
+					
+			resultTable += "[/table][/font]"
+			sayn(resultTable)
 			
 		
 		addButton("Continue", "That's nice", "")
@@ -246,7 +301,7 @@ func calculateAmount(pcKids = true):
 	return amount
 
 func printChildren(pcKids = true):
-	var resultTable = "[table=7][cell]Name[/cell][cell]Gender[/cell][cell]Species[/cell][cell]Age[/cell][cell]Mother[/cell][cell]Father[/cell][cell]Additional[/cell]"
+	var resultTable = "[font=res://Fonts/normalconsolefont.tres][table=7][cell]Name[/cell][cell]Gender[/cell][cell]Species[/cell][cell]Age[/cell][cell]Mother[/cell][cell]Father[/cell][cell]Extra[/cell]"
 	
 	for ch in GM.CS.getChildren():
 		var child: Child = ch
@@ -278,8 +333,8 @@ func printChildren(pcKids = true):
 		resultTable += "[cell]"+child.getFatherName()+"[/cell]"
 		resultTable += "[cell]"+child.getMonozygotic()+"[/cell]"
 		
-	resultTable += "[/table]"
-	saynn(resultTable)
+	resultTable += "[/table][/font]"
+	sayn(resultTable)
 
 func _react(_action: String, _args):
 	if(_action == "sleep"):

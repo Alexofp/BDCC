@@ -74,12 +74,20 @@ func satisfyGoals():
 	for goalID in goalData:
 		sexEngine.satisfyGoal(domInfo, goalID, subInfo)
 
-func failGoals():
-	satisfyGoals()
-
 func satisfyGoal(goalID):
 	var sexEngine = getSexEngine()
 	sexEngine.satisfyGoal(domInfo, goalID, subInfo)
+
+func failGoals():
+	var goalData = getGoals()
+	var sexEngine = getSexEngine()
+	
+	for goalID in goalData:
+		sexEngine.failGoal(domInfo, goalID, subInfo)
+
+func failGoal(goalID):
+	var sexEngine = getSexEngine()
+	sexEngine.failGoal(domInfo, goalID, subInfo)
 
 func replaceGoalsTo(newgoalID, replaceAll = true):
 	var goalData = getGoals()
@@ -90,6 +98,9 @@ func replaceGoalsTo(newgoalID, replaceAll = true):
 
 func progressGoal(goalid, args = []):
 	return getSexEngine().progressGoal(domInfo, goalid, subInfo, args)
+
+func progressGoalFailed(goalid, args = []):
+	return getSexEngine().progressGoalFailed(domInfo, goalid, subInfo, args)
 
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	return tagsNotBusy(_sexEngine, _domInfo, _subInfo) && !hasActivity(_sexEngine, id, _domInfo, _subInfo)

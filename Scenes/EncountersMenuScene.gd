@@ -15,10 +15,10 @@ func _run():
 	if(state == ""):
 		var encounterSettings:EncounterSettings = GM.main.getEncounterSettings()
 		
-		saynn("This is a menu that contains info about your previous encounters.")
+		saynn("This is a menu that contains info about characters that you have met or might meet.")
 		
 		var hasSomeoneToForget = false
-		sayn("You remember:")
+		sayn("You remember that prison has:")
 		var encounterPools = GM.main.getDynamicCharactersPools()
 		if(encounterPools.size() == 0):
 			sayn(" - Nothing, explore to find more characters")
@@ -299,52 +299,47 @@ func _run():
 		
 func doMeetNpc(ID, occupation):
 	var room = GM.world.getRoomByID(GM.pc.getLocation())
-	match occupation:
-		"Inmates": 
-			if(WorldPopulation.Inmates in GM.pc.getLocationPopulation()):
-				if(GM.ES.triggerReact(Trigger.MeetDynamicNPC, [ID]) || GM.ES.triggerReact(Trigger.TalkingToDynamicNPC, [ID])):
-					pass
-				else:
-					GM.main.runScene("InmateExposureForcedSexScene", [ID])
-				endScene([true])
-				GM.main.runCurrentScene()
-			else:
-				GM.ui.getCustomControl("npclist").sendPopupMessage("There are no inmates in this location.\nTry looking elsewhere")
-		"Guards":
-			if(WorldPopulation.Guards in GM.pc.getLocationPopulation()):
-				if(GM.ES.triggerReact(Trigger.MeetDynamicNPC, [ID]) || GM.ES.triggerReact(Trigger.TalkingToDynamicNPC, [ID])):
-					pass
-				else:
-					GM.main.runScene("GuardCaughtOfflimitsScene", [ID])
-				endScene([true])
-				GM.main.runCurrentScene()
-			else:
-				GM.ui.getCustomControl("npclist").sendPopupMessage("There are no guards in this location.\nTry searching at the security checkpoint or near greenhouses")
-		"Engineers":
-			if(room.loctag_EngineersEncounter || room.getCachedFloorID() in ["MiningFloor"]):
-				if(GM.ES.triggerReact(Trigger.MeetDynamicNPC, [ID]) || GM.ES.triggerReact(Trigger.TalkingToDynamicNPC, [ID])):
-					pass
-				else:
-					GM.main.runScene("EngineerCaughtOfflimitsScene", [ID])
-				endScene([true])
-				GM.main.runCurrentScene()
-			else:
-				GM.ui.getCustomControl("npclist").sendPopupMessage("There are no engineers in this location.\nTry searching in the engineering bay")
-		"Nurses":
-			if(room.loctag_MentalWard || room.getCachedFloorID() in ["Medical"]):
-				if(GM.ES.triggerReact(Trigger.MeetDynamicNPC, [ID]) || GM.ES.triggerReact(Trigger.TalkingToDynamicNPC, [ID])):
-					pass
-				else:
-					GM.main.runScene("NurseCaughtOfflimitsScene", [ID])
-				endScene([true])
-				GM.main.runCurrentScene()
-			else:
-				GM.ui.getCustomControl("npclist").sendPopupMessage("There are no nurses in this location.\nTry searching in the restricted area of the medical ward")
-		_:
-			if(GM.ES.triggerReact(Trigger.MeetDynamicNPC, [ID])):
-				pass
-			else:
-				Log.error("Exception: unknown occupation detected, please update")
+	var floorID = room.getFloorID()
+	if(GM.main.IS.hasPawn(ID)):
+		GM.ui.getCustomControl("npclist").sendPopupMessage("This person is already somewhere in the prison\nYou can find them by exploring around")
+		return
+	
+	var canFind:bool = false
+	if(occupation == "Inmates" && (floorID in ["MainHall", "Cellblock", "FightClubFloor"])):
+		canFind = true
+	if(occupation == "Guards" && (floorID in ["MainHall", "Cellblock"])):
+		canFind = true
+	if(occupation == "Engineers" && (floorID in ["MiningFloor"])):
+		canFind = true
+	if(occupation == "Nurses" && (floorID in ["Medical"])):
+		canFind = true
+	
+	if(!canFind):
+		GM.ui.getCustomControl("npclist").sendPopupMessage("You look around but can't seem to find them here\nTry looking somewhere else..")
+		return
+	
+	if(occupation in ["Inmates", "Guards", "Engineers", "Nurses"]):
+		if(GM.ES.triggerReact(Trigger.MeetDynamicNPC, [ID]) || GM.ES.triggerReact(Trigger.TalkingToDynamicNPC, [ID])):
+			endScene([true])
+			GM.main.runCurrentScene()
+			return
+		if(getCharacter(ID).shouldBeExcludedFromEncounters()):
+			GM.ui.getCustomControl("npclist").sendPopupMessage("It feels like you will never find them..")
+			return
+		var pawn:CharacterPawn = GM.main.IS.spawnPawn(ID)
+		if(pawn == null):
+			return
+		pawn.setLocation(GM.pc.getLocation())
+		GM.main.IS.startInteraction("Talking", {starter="pc", reacter=ID})
+		endScene([true])
+		GM.main.runCurrentScene()
+		return
+	else:
+		if(GM.ES.triggerReact(Trigger.MeetDynamicNPC, [ID])):
+			endScene([true])
+			GM.main.runCurrentScene()
+			return
+
 		
 func _react(_action: String, _args):
 	if(_action == "endthescene"):

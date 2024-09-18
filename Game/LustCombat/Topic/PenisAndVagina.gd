@@ -72,3 +72,32 @@ func getVisibleName(_topicID):
 		return "just a cock"
 	
 	return "error:"+str(_topicID)
+
+func getChatName(_topicID) -> String:
+	if(_topicID == InterestTopic.NoVagina):
+		return "no pussies"
+	if(_topicID == InterestTopic.HasVaginaAndCock):
+		return "herms"
+	if(_topicID == InterestTopic.BigCock):
+		return "huge cocks"
+	if(_topicID == InterestTopic.AverageCock):
+		return "average cocks"
+	if(_topicID == InterestTopic.SmallCock):
+		return "small cocks"
+	if(_topicID == InterestTopic.NoCock):
+		return "no cocks"
+	if(_topicID == InterestTopic.HasCockOnly):
+		return "just cocks"
+	
+	return .getChatName(_topicID)
+
+func canUseInChat(_topicID) -> bool:
+	if(_topicID in [InterestTopic.NoVagina, InterestTopic.HasVaginaOnly, InterestTopic.NoCock, InterestTopic.HasCockOnly]):
+		return false
+	return .canUseInChat(_topicID)
+
+func getAddsToFocus(_topicID, _focus) -> float:
+	if(_focus == LustFocus.Crotch):
+		return 1.0
+	
+	return 0.0
