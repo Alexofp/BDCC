@@ -651,3 +651,10 @@ func canEnslaveForFree(otherPawn) -> bool:
 	if(whoreLevel >= 6 && isPlayer()):
 		return true
 	return false
+
+func addExperienceIfPlayer(ex: int, showMessage: bool = true):
+	if(!isPlayer()):
+		return
+	if(showMessage):
+		GM.main.addMessage("You received "+str(ex)+" experience")
+	getChar().addExperience(ex)

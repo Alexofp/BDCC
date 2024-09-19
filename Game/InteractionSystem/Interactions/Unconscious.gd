@@ -1,5 +1,7 @@
 extends PawnInteractionBase
 
+var timesWaited:int = 0
+
 func _init():
 	id = "Unconscious"
 
@@ -14,7 +16,25 @@ func init_text():
 
 func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "wait"):
+		timesWaited += 1
+		if(timesWaited >= 5 && getRolePawn("main").isPlayer()):
+			var nurseAmount:int = GM.main.IS.getAvailableNursesAmount()
+			if(nurseAmount <= 0):
+				setState("no_nurses", "main")
+				return
+			
 		setState("", "main")
+
+func no_nurses_text():
+	saynn("Your mind tingles..")
+	saynn("You feel like no one is coming to save you at this point..")
+	
+	addAction("giveup", "Give up?", "What else is there to do..", "default", 1.0, 60, {})
+
+func no_nurses_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "giveup"):
+		stopMe()
+		runScene("ElizaBackupPCSaveScene")
 
 func about_to_fuck_text():
 	saynn("{user.name} approaches {main.you}..")
@@ -87,3 +107,14 @@ func getActivityIconForRole(_role:String):
 		return RoomStuff.PawnActivity.Unconscious
 	else:
 		return RoomStuff.PawnActivity.Chat
+
+func saveData():
+	var data = .saveData()
+
+	data["timesWaited"] = timesWaited
+	return data
+
+func loadData(_data):
+	.loadData(_data)
+
+	timesWaited = SAVE.loadVar(_data, "timesWaited", 0)
