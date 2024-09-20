@@ -90,7 +90,7 @@ roomSprite = 3
 roomColor = 7
 population = 3
 
-[node name="MainHallRoom9" parent="." index="8" instance=ExtResource( 2 )]
+[node name="MainHallRoom9" parent="." index="8" groups=["zone_poi"] instance=ExtResource( 2 )]
 position = Vector2( 0, 192 )
 roomName = "Main platform"
 roomID = "main_punishment_spot"
@@ -169,7 +169,7 @@ gridColor = 2
 loctag_Offlimits = true
 population = 2
 
-[node name="MainHallRoom37" parent="." index="17" instance=ExtResource( 2 )]
+[node name="MainHallRoom37" parent="." index="17" groups=["zone_poi"] instance=ExtResource( 2 )]
 position = Vector2( -128, 576 )
 roomName = "Gym area"
 roomID = "gym_entrance"
@@ -226,7 +226,7 @@ roomDescription = "This side area swings down and around the greenhouse above, a
 roomColor = 1
 population = 1
 
-[node name="MainHallRoom42" parent="." index="24" groups=["zone_yardpatrol"] instance=ExtResource( 2 )]
+[node name="MainHallRoom42" parent="." index="24" groups=["zone_poi", "zone_yardpatrol"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 64, 640 )
 roomName = "Prison Yard"
@@ -646,7 +646,7 @@ There are also a set of stairs that lead up to the large raised platform in the 
 roomColor = 8
 population = 3
 
-[node name="MainHallRoom21" parent="." index="63" instance=ExtResource( 2 )]
+[node name="MainHallRoom21" parent="." index="63" groups=["zone_poi"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -192, 256 )
 roomName = "Bathroom"
@@ -655,7 +655,7 @@ roomDescription = "A bunch of sinks line the walls with a long mirror covered by
 roomSprite = 8
 roomColor = 3
 
-[node name="MainHallRoom38" parent="." index="64" instance=ExtResource( 2 )]
+[node name="MainHallRoom38" parent="." index="64" groups=["zone_poi"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -256, 640 )
 roomName = "Bathroom"
@@ -712,7 +712,7 @@ roomSprite = 2
 roomColor = 3
 population = 3
 
-[node name="MainLaundry" parent="." index="70" instance=ExtResource( 2 )]
+[node name="MainLaundry" parent="." index="70" groups=["zone_poi"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 192, 256 )
 roomName = "Laundry"

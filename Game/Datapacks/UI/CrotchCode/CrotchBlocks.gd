@@ -185,8 +185,8 @@ static func getAll():
 		"NpcAddPCRep",
 		"NpcSetPCRepLvl",
 		"NpcGetPCRep",
-		"NpcAffectRelationship",
-		"NpcGetRelationship",
+		"NpcAffectRelationship2",
+		"NpcGetRelationship2",
 		
 		
 		"Print",

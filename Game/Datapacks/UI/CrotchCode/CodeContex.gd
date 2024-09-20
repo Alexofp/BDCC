@@ -543,34 +543,34 @@ func addAffection(char1ID:String, char2ID:String, howMuch:float):
 	if(GM.main == null || !is_instance_valid(GM.main)):
 		return
 	
-	GM.main.RS.addAffection(char1ID, char2ID, howMuch)
+	GM.main.RS.addAffection(getCharacterActualID(char1ID), getCharacterActualID(char2ID), howMuch)
 	
 func setAffection(char1ID:String, char2ID:String, howMuch:float):
 	if(GM.main == null || !is_instance_valid(GM.main)):
 		return
 	
-	GM.main.RS.setAffection(char1ID, char2ID, howMuch)
+	GM.main.RS.setAffection(getCharacterActualID(char1ID), getCharacterActualID(char2ID), howMuch)
 
 func getAffection(char1ID:String, char2ID:String) -> float:
 	if(GM.main == null || !is_instance_valid(GM.main)):
 		return 0.0
 	
-	return GM.main.RS.getAffection(char1ID, char2ID)
+	return GM.main.RS.getAffection(getCharacterActualID(char1ID), getCharacterActualID(char2ID))
 
 func addRelationshipLust(char1ID:String, char2ID:String, howMuch:float):
 	if(GM.main == null || !is_instance_valid(GM.main)):
 		return
 	
-	GM.main.RS.addLust(char1ID, char2ID, howMuch)
+	GM.main.RS.addLust(getCharacterActualID(char1ID), getCharacterActualID(char2ID), howMuch)
 	
 func setRelationshipLust(char1ID:String, char2ID:String, howMuch:float):
 	if(GM.main == null || !is_instance_valid(GM.main)):
 		return
 	
-	GM.main.RS.setLust(char1ID, char2ID, howMuch)
+	GM.main.RS.setLust(getCharacterActualID(char1ID), getCharacterActualID(char2ID), howMuch)
 
 func getRelationshipLust(char1ID:String, char2ID:String) -> float:
 	if(GM.main == null || !is_instance_valid(GM.main)):
 		return 0.0
 	
-	return GM.main.RS.getLust(char1ID, char2ID)
+	return GM.main.RS.getLust(getCharacterActualID(char1ID), getCharacterActualID(char2ID))
