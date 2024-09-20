@@ -3,8 +3,6 @@ class_name PartOrientPicker
 
 export(bool) var invert = false
 
-var _callcount:int = 0
-
 func _ready():
 	var theNode = get_node("..")
 	var theDoll:Spatial
