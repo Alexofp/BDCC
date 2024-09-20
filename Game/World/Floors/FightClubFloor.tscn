@@ -87,7 +87,7 @@ roomDescription = "This corner here is a bit barren, pipes and paint have been s
 roomColor = 8
 population = 1
 
-[node name="FightClubRoom9" parent="." index="8" groups=["zone_fightclub"] instance=ExtResource( 2 )]
+[node name="FightClubRoom9" parent="." index="8" groups=["zone_fightclub", "zone_poi"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 64, -128 )
 roomName = "The Underground"
@@ -115,7 +115,7 @@ roomDescription = "This old maintence area ends here and the open stone of the y
 roomColor = 8
 population = 1
 
-[node name="FightClubRoom12" parent="." index="11" groups=["zone_fightclub"] instance=ExtResource( 2 )]
+[node name="FightClubRoom12" parent="." index="11" groups=["zone_fightclub", "zone_poi"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, -192 )
 roomName = "Slutwall"

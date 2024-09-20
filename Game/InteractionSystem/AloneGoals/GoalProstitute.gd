@@ -34,7 +34,7 @@ func getActions() -> Array:
 func doAction(_id:String, _args:Dictionary):
 	if(_id == "go"):
 		if(nextTarget == ""):
-			nextTarget = RNG.pick(GM.world.getZoneRooms("prostitution"))
+			nextTarget = RNG.pick(GM.world.getZoneRooms("prostitution", ["fight_wall_east", "main_hallroom5", "main_hallroom4"]))
 		
 		if(nextTarget != ""):
 			goTowards(nextTarget)

@@ -151,7 +151,7 @@ func about_to_save_do(_id:String, _args:Dictionary, _context:Dictionary):
 			struggleText = struggleData["text"]
 		
 		if(inmate.getInventory().hasItemIDEquipped("StocksStatic")):
-			setState("save_after_help", "saver")
+			setState("save_after_help", "inmate")
 		else:
 			savedHow = "help"
 			setState("save_saved", "inmate")
@@ -194,10 +194,13 @@ func save_after_help_text():
 	saynn(struggleText)
 
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 30, {})
+	addAction("stop", "Stop them", "Wiggle them off", "default", 0.0, 60, {})
 
 func save_after_help_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "continue"):
 		setState("about_to_save", "saver")
+	if(_id == "stop"):
+		setState("canceled_save", "saver")
 
 
 func about_to_shout_text():

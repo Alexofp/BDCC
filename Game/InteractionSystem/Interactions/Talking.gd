@@ -53,7 +53,7 @@ func init_text():
 			addDisabledAction("Ask for help", "Affection must be above 50% before asking for help with restraints.." if getRolePawn("reacter").canSocial() else "They are clearly not in a mood to help you..")
 	if(getRoleChar("reacter").getInventory().hasRemovableRestraintsNoLockedSmartlocks()):
 		if(getRoleChar("starter").getStamina() > 0 && !getRoleChar("starter").hasBlockedHands() && !getRoleChar("starter").hasBoundArms()):
-			addAction("help_with_restraints", "Help with restraints", "Help them with restraints!", "help", 0.5, 60, {})
+			addAction("help_with_restraints", "Help with restraints", "Help them with restraints!", "help", 0.2, 60, {})
 		else:
 			addDisabledAction("Help with restraints", "You can't help them with restraints in your current state..")
 	if(getRoleChar("starter").hasKeyholderLocksFrom(getRoleID("reacter"))):

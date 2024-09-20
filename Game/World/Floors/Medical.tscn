@@ -7,7 +7,7 @@
 [node name="Medical" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 
-[node name="MedRoom" parent="." index="0" instance=ExtResource( 2 )]
+[node name="MedRoom" parent="." index="0" groups=["zone_poi"] instance=ExtResource( 2 )]
 roomName = "Med Lobby"
 roomID = "med_lobby_start"
 roomDescription = "This is the Medical lobby, and the whole place feels very sterile with the omnipresent smell of antiseptic in the air. Coming off the dark elevator is a little blinding with all the white and incredibly strong lights in here. The waiting room is also here, with a number of benches lined up for inmates to sit.
