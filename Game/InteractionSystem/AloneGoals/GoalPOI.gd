@@ -28,7 +28,7 @@ func getActions() -> Array:
 func doAction(_id:String, _args:Dictionary):
 	if(_id == "go"):
 		if(targetLoc == ""):
-			targetLoc = RNG.pick([
+			targetLoc = RNG.pick(GM.world.getZoneRooms("poi", [
 				"cellblock_nearcells",
 				"main_punishment_spot",
 				"main_laundry",
@@ -40,7 +40,7 @@ func doAction(_id:String, _args:Dictionary):
 				"fight_slutwall",
 				"med_lobby_start",
 				"mining_nearentrance",
-			])
+			]))
 		
 		goTowards(targetLoc)
 		if(doLookAround()):

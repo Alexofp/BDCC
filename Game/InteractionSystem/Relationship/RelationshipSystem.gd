@@ -109,8 +109,10 @@ func addAffection(char1:String, char2:String, howMuch:float, showMessage:bool = 
 		if(char2 == "pc"): # Swap them out so PC is always first
 			char2 = char1
 			char1 = "pc"
-		var char2Name = GlobalRegistry.getCharacter(char2).getName()
-		var char1Name = GlobalRegistry.getCharacter(char1).getName()
+		var char2Obj = GlobalRegistry.getCharacter(char2)
+		var char1Obj = GlobalRegistry.getCharacter(char1)
+		var char2Name = char2Obj.getName() if char2Obj != null else "BAD_CHAR_ID"
+		var char1Name = char1Obj.getName() if char1Obj != null else "BAD_CHAR_ID"
 		var affStr:String = str(Util.roundF(theEntry.affection*100.0, 1))
 		var oldStr:String = str(Util.roundF(oldAff*100.0, 1))
 		
@@ -148,8 +150,10 @@ func addLust(char1:String, char2:String, howMuch:float, showMessage:bool = false
 		if(char2 == "pc"): # Swap them out so PC is always first
 			char2 = char1
 			char1 = "pc"
-		var char2Name = GlobalRegistry.getCharacter(char2).getName()
-		var char1Name = GlobalRegistry.getCharacter(char1).getName()
+		var char2Obj = GlobalRegistry.getCharacter(char2)
+		var char1Obj = GlobalRegistry.getCharacter(char1)
+		var char2Name = char2Obj.getName() if char2Obj != null else "BAD_CHAR_ID"
+		var char1Name = char1Obj.getName() if char1Obj != null else "BAD_CHAR_ID"
 		var affStr:String = str(Util.roundF(theEntry.lust*100.0, 1))
 		var oldStr:String = str(Util.roundF(oldAff*100.0, 1))
 		

@@ -1004,6 +1004,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Util/AutoTranslation/Translators/PapagoTranslate.gd"
 }, {
+"base": "Spatial",
+"class": "PartOrient",
+"language": "GDScript",
+"path": "res://Player/Player3D/Parts/PartOrient.gd"
+}, {
+"base": "Spatial",
+"class": "PartOrientPicker",
+"language": "GDScript",
+"path": "res://Player/Player3D/Parts/PartOrientPicker.gd"
+}, {
 "base": "Reference",
 "class": "PartSkinBase",
 "language": "GDScript",
@@ -1744,6 +1754,8 @@ _global_script_class_icons={
 "OverriddenPlayer": "",
 "PantiesState": "",
 "PapagoTranslate": "",
+"PartOrient": "",
+"PartOrientPicker": "",
 "PartSkinBase": "",
 "PartState": "",
 "PartStatePicker": "",

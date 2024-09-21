@@ -362,7 +362,7 @@ func createWorldPawn(charID, pawn, loc):
 	newWorldPawn.setPawnActivityIcon(pawn.getActivityIcon())
 	pawns[charID] = newWorldPawn
 
-func getZoneRooms(zoneID:String) -> Array:
+func getZoneRooms(zoneID:String, fallbackRooms:Array = []) -> Array:
 	var finalZoneID:String = "zone_"+zoneID
 	
 	if(!get_tree().has_group(finalZoneID)):
@@ -372,9 +372,13 @@ func getZoneRooms(zoneID:String) -> Array:
 	
 	var rooms = get_tree().get_nodes_in_group(finalZoneID)
 	for room in rooms:
+		if(!is_instance_valid(room)):
+			continue
 		if(!room.has_method("getFloorID")):
 			continue
 		result.append(room.roomID)
+	if(result.size() <= 0):
+		return fallbackRooms
 	return result
 
 func getRandomZoneRoom(zoneID:String, defaultValue:String = ""):

@@ -656,3 +656,13 @@ func resetExtraText():
 
 func saynnExtra(newT:String):
 	extraText += newT + "\n\n"
+
+func getAvailableNursesAmount() -> int:
+	var result:int = 0
+	
+	for pawnID in pawns:
+		var pawn:CharacterPawn = pawns[pawnID]
+		if(pawn.isNurse() && pawn.canBeInterrupted()):
+			result += 1
+	
+	return result
