@@ -76,6 +76,12 @@ func getCharByRole(role:String):
 func getRoleChar(role:String):
 	return getCharByRole(role)
 
+func hasRole(role:String) -> bool:
+	return involvedPawns.has(role)
+
+func hasRoleChar(role:String) -> bool:
+	return hasRole(role) && (getRoleChar(role) != null)
+
 func playAnimation():
 	var animData = getAnimDataFinal()
 	
@@ -954,6 +960,9 @@ func processTime(_howMuch:int):
 
 func stopMe():
 	GM.main.IS.stopInteraction(self)
+
+func onStopped():
+	pass
 
 func getDebugInfo():
 	return [

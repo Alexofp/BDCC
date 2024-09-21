@@ -78,7 +78,7 @@ func _run():
 		saynn("How should you masturbate?")
 
 		addButtonWithChecks("Penis", "Jerk off with your cock", "masturbate_penis", [], [ButtonChecks.HasReachablePenis])
-		addButtonWithChecks("PenisMilk", "Use your cockmilker in the public showers", "masturbate_penismilk", [], [ButtonChecks.HasPenisPump])
+		addButtonWithChecks("Penis Milker", "Use your cockmilker in the public showers", "masturbate_penismilk", [], [ButtonChecks.HasPenisPump, ButtonChecks.HasReachablePenis])
 		addButtonWithChecks("Vaginal", "Finger your vagina", "masturbate_vaginal", [], [ButtonChecks.HasReachableVagina])
 		addButtonWithChecks("Anal", "Try and get off using you ass", "masturbate_anal", [], [ButtonChecks.HasReachableAnus])
 		if(GM.pc.isLactating()):
