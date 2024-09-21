@@ -3,44 +3,32 @@ class_name PartOrientPicker
 
 export(bool) var invert = false
 
+var _theDoll:Spatial
+# stores the doll itself by sarching in loop
+
 func _ready():
-	var theNode = get_node("..")
-	var theDoll:Spatial
-
-	while !(theNode is BaseStageScene3D):
+	var Part3D = load("res://Player/Player3D/Parts/Part3D.gd")
+	var theNode:Node = self # I really hope this works
+	while !(theNode is Part3D):
 		var previousNode = theNode.get_node("..")
-		if (previousNode == null || previousNode is Stage3D):
-			break # just in case it got lower than Stage3D, the null check is here
-		else:
-			if theNode is Doll3D:
-				theDoll = theNode
-			theNode = previousNode
+		if (previousNode == null || previousNode is Doll3D ):
+			break
+		if previousNode is Part3D:
+			_theDoll = previousNode.getDoll()
+		theNode = previousNode
 
-	if theDoll == null:
-		if (invert):
-			setValue(false)
-		else:
-			setValue(true)
-		return
-
-	var flipped = (theDoll.get_scale().x == -1)
-
-	if theNode is BaseStageScene3D:
-		if theNode.getVarOptions().has("flipNPC"):
-			yield(get_tree(), "idle_frame") # I sure hope no one notices this and this is a bad code. At the same time if I were to make ALL BaseStageScene3D store playAnimation() aruguments, it would take more space. Atleast that's what I think. - CanInBad
-			flipped = theDoll.get_scale().x == -1
-
-	if (invert):
-		setValue(!flipped)
+func _process(_delta):
+	if _theDoll == null:
+		return # i sure hope running this code every single frame doesn't add up.
+	if invert:
+		setValue(_theDoll.get_scale().x == -1)
 	else:
-		setValue(flipped)
+		setValue(!(_theDoll.get_scale().x == -1))
 
 func setValue(value):
-
 	for child in get_children():
 		if child is PartOrient:
 			if child.getOrient() == value:
 				child.visible = true
-
 			else:
 				child.visible = false
