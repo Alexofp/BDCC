@@ -412,6 +412,10 @@ func checkSleep():
 	if(GM.main.isVeryLate() && getRolePawn("inmate").isPlayer()):
 		setState("about_to_sleep", "inmate")
 
+func onStopped():
+	if(hasRoleChar("inmate")):
+		getRoleChar("inmate").getInventory().clearStaticRestraints()
+
 func saveData():
 	var data = .saveData()
 

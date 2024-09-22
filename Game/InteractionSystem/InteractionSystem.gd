@@ -455,6 +455,9 @@ func startInteraction(interactionID:String, involvedPawns:Dictionary, args:Dicti
 	interaction.start(involvedPawns, args)
 
 func stopInteraction(interaction:PawnInteractionBase):
+	if(interaction == null || !interactions.has(interaction) || interaction.wasDeleted):
+		return
+	interaction.onStopped()
 	interactions.erase(interaction)
 	interaction.wasDeleted = true
 	

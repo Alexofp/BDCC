@@ -78,7 +78,7 @@ func _run():
 		saynn("How should you masturbate?")
 
 		addButtonWithChecks("Penis", "Jerk off with your cock", "masturbate_penis", [], [ButtonChecks.HasReachablePenis])
-		addButtonWithChecks("PenisMilk", "Use your cockmilker in the public showers", "masturbate_penismilk", [], [ButtonChecks.HasPenisPump])
+		addButtonWithChecks("Penis Milker", "Use your cockmilker in the public showers", "masturbate_penismilk", [], [ButtonChecks.HasPenisPump, ButtonChecks.HasReachablePenis])
 		addButtonWithChecks("Vaginal", "Finger your vagina", "masturbate_vaginal", [], [ButtonChecks.HasReachableVagina])
 		addButtonWithChecks("Anal", "Try and get off using you ass", "masturbate_anal", [], [ButtonChecks.HasReachableAnus])
 		if(GM.pc.isLactating()):
@@ -92,7 +92,7 @@ func _run():
 	if(state == "masturbate_penis"):
 		playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		if(GM.pc.hasPerk(Perk.NakedNoShame)):
-			saynn("Without so much as a thought for anyone who could be in here you with you, your hands reach down your hips and start to tease your cock to get hard enough, feeling it over in your hands.")
+			saynn("Without so much as a thought for anyone who could be in here with you, your hands reach down your hips and start to tease your cock to get hard enough, feeling it over in your hands.")
 			if(GM.pc.isVisiblyPregnant()):
 				saynn("Its a fair bit awkward to reach around your gravid stomach with your advancing pregnancy but you manage just fine as you give your firm stomach a quick rub with your other hand.")
 			if(GM.pc.hasVagina()):
@@ -139,7 +139,7 @@ func _run():
 			saynn("As your orgasm passes you finally give up hiding anything, putting your arm and head against the wall and panting heavily and dripping your own cum down your legs.")
 			saynn("You dart your head up as if you were spotted and sigh in relief as you got away with it.")
 			if(GM.pc.isVisiblyPregnant()):
-				saynn("Righting youself back on your feet, you try your best adjusting your pregnant stomach into a more comfortable position.")
+				saynn("Righting yourself back on your feet, you try your best adjusting your pregnant stomach into a more comfortable position.")
 			saynn("Quickly washing any excess cum or sweat off you manage to calm yourself back down.")
 			saynn("You take your time heading back to the locker rooms, toweling off as you go.")
 		
@@ -149,7 +149,7 @@ func _run():
 	if(state == "masturbate_penismilk"):
 		playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		if(GM.pc.hasPerk(Perk.NakedNoShame)):
-			saynn("You casually walk back to the locker rooms still naked and never grabbing a towel. Opening the locker you picked out you grab a cock milker and start heading back to your spot.")
+			saynn("You casually walk back to the locker rooms still naked and never grabbing a towel. Opening the locker you grab a cock milker and start heading back to your spot.")
 			saynn("Passing a few inmates on your way back, they're all focused on scrubbing themselves but if one notices you give them a quick flash of your body.")
 			saynn("Back in your spot you waste no time getting your cock hard and strapped into your penis pump.")
 			if(GM.pc.isVisiblyPregnant()):
@@ -158,7 +158,7 @@ func _run():
 			saynn("Not wanting to waste the opportunity you turn the water back on and just relax in the bliss of having your {pc.cock} pumped while in the shower.")
 			if(GM.pc.hasVagina()):
 				saynn("Not wanting to leave your {pc.vagina} behind you reach under your balls and begin to just idly thumb over your clitorus and finger your sex.")
-			saynn("You let the pump do it's work as your cock twitches an throbs against the masturbation ring, loadly moaning it each time it runs over your dick.")
+			saynn("You let the pump do it's work as your cock twitches an throbs against the masturbation ring, loudly moaning it each time it runs over your dick.")
 			saynn("The shower definitely helps you relax as you have a dumb smile on your face with your back against the wall.")
 			saynn("Eventually you feel your orgasm well up within you...")
 		else:
@@ -185,7 +185,7 @@ func _run():
 				saynn("Putting an arm around your pregnant belly as you get back into proper order.")
 			saynn("You switch the penis pump off and pull it off your softening cock with a really wet, lewd sounding plap.")
 			saynn("Giving the pump a look, you probably cant use any of the cum inside it because of the running water, but you have a better idea...")
-			saynn("Holding the end of the pump up to the still runnign shower head you give a good clean out, like a responsible cum slut.")
+			saynn("Holding the end of the pump up to the still running shower head you give a good clean out, like a responsible cum slut.")
 			saynn("Finishing up, you put the pump under your arm and grab two towels to dry you and the pump and get back to whatever you were doing.")
 		else:
 			saynn("You cover your mouth to mask a sultry groan as your throbbing {pc.cock} starts filling the pump with fresh cum.")
@@ -203,7 +203,7 @@ func _run():
 		playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		
 		if(GM.pc.hasPerk(Perk.NakedNoShame)):
-			saynn("Without so much as a thought for anyone who could be in here you with you, your hands reach down your hips and start to tease your {pc.vaginaStretch} pussy as the water flows down your body.")
+			saynn("Without so much as a thought for anyone who could be in here with you, your hands reach down your hips and start to tease your {pc.vaginaStretch} pussy as the water flows down your body.")
 			if(GM.pc.isVisiblyPregnant()):
 				saynn("Its a fair bit awkward to reach around your gravid stomach with your advancing pregnancy but you manage just fine as you give your firm stomach a quick rub with your other hand.")
 			if(GM.pc.isWearingChastityCage()):
