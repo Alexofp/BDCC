@@ -59,6 +59,9 @@ func _init():
 	addCharacter("artica", ["nocatcher"], "res://Images/ImagePacks/Rahi/Characters/artica/artica-nocatcher.png")
 	addCharacter("artica", ["naked", "nocatcher"], "res://Images/ImagePacks/Rahi/Characters/artica/artica-nocatcher-naked.png")
 	
+	addCharacter("mirri", [], "res://Images/ImagePacks/Rahi/Characters/mirri/mirri.png")
+	addCharacter("mirri", ["naked"], "res://Images/ImagePacks/Rahi/Characters/mirri/mirri-naked.png")
+	
 	
 	addSceneImageCustomArtist("SocketTalkScene", "look_poster", "res://Images/ImagePacks/Rahi/Scenes/socket.webp", 500, "Sompurr and Rahi")
 	#addSceneImageCustomArtist("SocketIntroScene", "naked_engineer", "res://Images/ImagePacks/Rahi/Scenes/socket_nobackground.webp", 500, "Sompurr and Rahi")
