@@ -12,6 +12,7 @@ func _init():
 	scenes = [
 		]
 	characters = [
+		"res://Modules/SlaveAuctionModule/Mirri.gd",
 	]
 	items = []
 	events = [
