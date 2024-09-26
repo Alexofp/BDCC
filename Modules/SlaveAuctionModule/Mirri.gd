@@ -64,7 +64,7 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("humanhead"))
 
 func getLootTable(_battleName):
-	return InmateLoot.new()
+	return GuardLoot.new()
 
 func getDefaultEquipment():
 	return ["MirriArmor", "MirriPanties"]

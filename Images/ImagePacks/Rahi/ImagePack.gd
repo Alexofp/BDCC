@@ -62,6 +62,7 @@ func _init():
 	addCharacter("mirri", [], "res://Images/ImagePacks/Rahi/Characters/mirri/mirri.png")
 	addCharacter("mirri", ["naked"], "res://Images/ImagePacks/Rahi/Characters/mirri/mirri-naked.png")
 	
+	addCharacter("luxe", [], "res://Images/ImagePacks/Rahi/Characters/luxe/luxe.png")
 	
 	addSceneImageCustomArtist("SocketTalkScene", "look_poster", "res://Images/ImagePacks/Rahi/Scenes/socket.webp", 500, "Sompurr and Rahi")
 	#addSceneImageCustomArtist("SocketIntroScene", "naked_engineer", "res://Images/ImagePacks/Rahi/Scenes/socket_nobackground.webp", 500, "Sompurr and Rahi")

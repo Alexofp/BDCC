@@ -13,6 +13,7 @@ func _init():
 		]
 	characters = [
 		"res://Modules/SlaveAuctionModule/Mirri.gd",
+		"res://Modules/SlaveAuctionModule/Luxe.gd",
 	]
 	items = []
 	events = [
