@@ -8,13 +8,13 @@ func _init():
 	pickedSkinGColor=Color("ff353535")
 	pickedSkinBColor=Color("fff8c610")
 	npcSkinData={
-	"hair": {"r": Color("ff94a310"),"g": Color("ff74800c"),"b": Color("ffb2bf3d"),},
-	"penis": {"g": Color("ff403500"),"b": Color("ffe8a700"),},
+	"hair": {"r": Color("ff171717"),"g": Color("ff353535"),"b": Color("fff8c610"),},
+	"penis": {"skin": "Weiny","g": Color("ff1e1900"),"b": Color("ffffb800"),},
 	}
 	
-	npcLevel = 40
-	npcBasePain = 400
-	npcBaseLust = 400
+	npcLevel = 50
+	npcBasePain = 500
+	npcBaseLust = 500
 	npcCharacterType = CharacterType.Generic
 	
 	npcLustInterests = {
@@ -47,7 +47,7 @@ func getFemininity() -> int:
 
 func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("wolfhead"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("baldhair"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("manehair"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("wolfears"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthrobody"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("buffarms"))
@@ -64,5 +64,5 @@ func createBodyparts():
 	giveBodypartUnlessSame(tail)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
 
-#func getDefaultEquipment():
-#	return ["MirriArmor", "MirriPanties"]
+func getDefaultEquipment():
+	return ["OfficialClothesRed", "plainBriefs"]

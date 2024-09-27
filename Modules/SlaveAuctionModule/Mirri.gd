@@ -58,8 +58,8 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthroarms"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felineears"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("ponytailhair3"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felineears2"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("ponytailhair4"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinetail"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("humanhead"))
 
