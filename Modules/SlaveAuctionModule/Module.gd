@@ -10,6 +10,8 @@ func _init():
 	author = "Rahi"
 	
 	scenes = [
+		"res://Modules/SlaveAuctionModule/Chapter0/MirriS0TeaseScene.gd",
+		"res://Modules/SlaveAuctionModule/Chapter0/MirriS1IntroScene.gd",
 		]
 	characters = [
 		"res://Modules/SlaveAuctionModule/Mirri.gd",
