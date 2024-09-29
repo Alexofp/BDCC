@@ -73,6 +73,8 @@ var interactions: Dictionary = {}
 var interactionRefs: Dictionary = {}
 var globalTasks: Dictionary = {}
 var repStats:Dictionary = {}
+var auctionTraits:Dictionary = {}
+var auctionTraitsRefs:Dictionary = {}
 
 var bodypartStorageNode
 
@@ -384,6 +386,8 @@ func registerEverything():
 	registerLustActionFolder("res://Game/LustCombat/LustActions/Perk/")
 	
 	registerLustTopicFolder("res://Game/LustCombat/Topic/")
+	
+	registerAuctionTraitFolder("res://Game/SlaveAuction/Traits/")
 	
 	emit_signal("loadingUpdate", 7.0/totalStages, "Sex")
 	yield(get_tree(), "idle_frame")
@@ -2124,3 +2128,35 @@ func getRepStat(id: String):
 		
 func getRepStats():
 	return repStats
+
+
+
+
+func registerAuctionTrait(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	auctionTraits[object.id] = loadedClass
+	auctionTraitsRefs[object.id] = object
+
+func registerAuctionTraitFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerAuctionTrait(scriptPath)
+
+func getAuctionTrait(id: String):
+	if(auctionTraitsRefs.has(id)):
+		return auctionTraitsRefs[id]
+	else:
+		Log.printerr("ERROR: auction trait with the id "+id+" wasn't found")
+		return null
+
+func createAuctionTrait(id: String):
+	if(auctionTraits.has(id)):
+		return auctionTraits[id].new()
+	else:
+		Log.printerr("ERROR: auction trait with the id "+id+" wasn't found")
+		return null
+		
+func getAuctionTraits():
+	return auctionTraitsRefs
