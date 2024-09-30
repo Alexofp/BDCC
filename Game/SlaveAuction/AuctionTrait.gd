@@ -49,4 +49,4 @@ func calculateScore(_char:BaseCharacter) -> float:
 	return clamp(result / totalChecks * 3.0, -1.0, 1.0)
 
 func getBidderChance() -> float:
-	return 33.34
+	return 100.0#33.34

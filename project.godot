@@ -35,6 +35,16 @@ _global_script_classes=[ {
 "path": "res://Game/Combat/AttackRequirement.gd"
 }, {
 "base": "Reference",
+"class": "AuctionAction",
+"language": "GDScript",
+"path": "res://Game/SlaveAuction/AuctionAction.gd"
+}, {
+"base": "Object",
+"class": "AuctionActionType",
+"language": "GDScript",
+"path": "res://Game/SlaveAuction/AuctionActionType.gd"
+}, {
+"base": "Reference",
 "class": "AuctionBidder",
 "language": "GDScript",
 "path": "res://Game/SlaveAuction/AuctionBidder.gd"
@@ -1580,6 +1590,8 @@ _global_script_class_icons={
 "AttachmentProxy": "",
 "Attack": "",
 "AttackRequirement": "",
+"AuctionAction": "",
+"AuctionActionType": "",
 "AuctionBidder": "",
 "AuctionTrait": "",
 "AuctionTraitType": "",
