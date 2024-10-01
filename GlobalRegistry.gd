@@ -2138,8 +2138,9 @@ func registerAuctionTrait(path: String):
 	var loadedClass = load(path)
 	var object = loadedClass.new()
 	
-	auctionTraits[object.id] = loadedClass
-	auctionTraitsRefs[object.id] = object
+	for _id in object.ids:
+		auctionTraits[_id] = loadedClass
+		auctionTraitsRefs[_id] = object
 
 func registerAuctionTraitFolder(folder: String):
 	var scripts = getScriptsInFolder(folder)

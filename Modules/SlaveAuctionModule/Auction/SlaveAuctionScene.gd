@@ -26,6 +26,7 @@ func _run():
 			if(currentActionType != AuctionActionType.NoType):
 				addButton("Back", "Go back to the previous menu", "setActionType", [AuctionActionType.NoType])
 			else:
+				addButton("Body", "Focus on showcasing the slave's body", "setActionType", [AuctionActionType.Body])
 				addButton("Fetish", "Pick which fetish of your slave you want to showcase", "setActionType", [AuctionActionType.Fetish])
 			
 		var actions:Array = slaveAuction.getActions()

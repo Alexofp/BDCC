@@ -3,10 +3,10 @@ class_name AuctionActionType
 
 enum {
 	NoType,
+	Body,
+	Mind,
 	Fetish,
 	Personality,
-	HiddenInfo,
-	Appearance,
-	Misc,
+	Emphasize,
 	Continue,
 }

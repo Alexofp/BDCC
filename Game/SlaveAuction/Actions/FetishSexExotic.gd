@@ -1,20 +1,23 @@
 extends AuctionAction
 
 func _init():
-	id = "TestAction2"
+	id = "FetishSexExotic"
+
+func getActionType():
+	return AuctionActionType.Fetish
 
 func getName() -> String:
-	return "SEX (TOP)"
+	return "SEX (EXOTIC)"
 
 func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 	return {
-		text = "VERY GOOD AT FUCKING YOU",
+		text = "LOVES WEIRD FUCKING",
 	}
 
 func getTraits() -> Dictionary:
 	return {
-		"FetishSexTop": 1.0,
+		"FetishSexExotic": 1.0,
 	}
 
 func getPositiveReaction(_char:BaseCharacter) -> String:
-	return "NICE, I COULD USE A SERVICE TOP."
+	return "INTERESTING FOR SURE."

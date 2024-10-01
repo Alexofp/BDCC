@@ -15,17 +15,23 @@ func getButtonDesc() -> String:
 func getActionType():
 	return AuctionActionType.Fetish
 
-func onAct(_char:BaseCharacter, _auction):
+func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 	return {
-		text = "TEST TEST MEOW",
+		text = "LOVES GETTING FUCKED",
 		traits = getTraits(),
 		desire = getPassiveDesireGain(),
 		instantDesire = getPassiveInstantDesireGain(),
 	}
 
+func getPositiveReaction(_char:BaseCharacter) -> String:
+	return "NICE, I COULD USE A BREEDING BITCH."
+
+func getNegativeReaction(_char:BaseCharacter) -> String:
+	return "I'M NOT REALLY LOOKING FOR THAT."
+
 func getTraits() -> Dictionary:
 	return {
-		"SexBottom": 1.0,
+		"FetishSexBottom": 1.0,
 	}
 
 func getPassiveDesireGain() -> float:

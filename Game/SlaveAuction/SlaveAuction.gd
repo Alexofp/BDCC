@@ -37,7 +37,7 @@ func calculateSlaveTraits():
 	for traitID in GlobalRegistry.getAuctionTraits():
 		var trait:AuctionTrait = GlobalRegistry.getAuctionTrait(traitID)
 		
-		var score:float = trait.calculateScore(theChar)
+		var score:float = trait.calculateScore(traitID, theChar)
 		slaveTraits[traitID] = score
 
 func generateBidders():
@@ -50,11 +50,11 @@ func generateBidders():
 		
 		for traitID in GlobalRegistry.getAuctionTraits():
 			var trait:AuctionTrait = GlobalRegistry.getAuctionTrait(traitID)
-			if(RNG.chance(trait.getBidderChance())):
+			if(RNG.chance(trait.getBidderChance(traitID))):
 				if(RNG.chance(70)):
-					newBidder.likes[traitID] = false
+					newBidder.likes[traitID] = AuctionBidder.TRAIT_UNDISCOVERED
 				else:
-					newBidder.dislikes[traitID] = false
+					newBidder.dislikes[traitID] = AuctionBidder.TRAIT_UNDISCOVERED
 		
 		bidders.append(newBidder)
 
@@ -67,12 +67,15 @@ func getText() -> String:
 	theTexts.append("ROUND = "+str(roundNumber)+((" SOFT END = "+str(bettingBeginsRound)) if roundNumber < bettingBeginsRound else ""))
 	theTexts.append("STATE = "+str(state))
 	
+	var slavesTraitsTexts:Array = []
 	for traitID in slaveTraits:
 		var score:float = slaveTraits[traitID]
 		var trait:AuctionTrait = GlobalRegistry.getAuctionTrait(traitID)
 		
-		theTexts.append(trait.getName()+": "+str(score))
-		
+		#theTexts.append(trait.getName(traitID)+": "+str(score))
+		if(score > 0.0):
+			slavesTraitsTexts.append(trait.getName(traitID)+" ("+str(score)+")")
+	theTexts.append("Slave's traits: "+Util.join(slavesTraitsTexts, ", "))
 	
 	theTexts.append("")
 	theTexts.append(getBidderInfo())
@@ -126,7 +129,7 @@ func doAction(_auctionAction:AuctionAction):
 		return
 	
 	state = "react"
-	var theResult:Dictionary = _auctionAction.onAct(getChar(), self)
+	var theResult:Dictionary = _auctionAction.onAct(getChar(), self, slaveTraits)
 	if(!theResult.has("text")):
 		theResult["text"] = "NO ACTION TEXT PROVIDED, FIX ME"
 	actionText = theResult["text"]
@@ -144,17 +147,28 @@ func doAction(_auctionAction:AuctionAction):
 		for traitID in traits:
 			usedTraits[traitID] = true
 		
-			for bidderA in bidders:
-				var bidder:AuctionBidder = bidderA
-				bidder.onAction(_auctionAction, theResult)
-				
-				if(bidder.likes.has(traitID)):
-					bidder.likes[traitID] = true
+	for bidderA in bidders:
+		var bidder:AuctionBidder = bidderA
+		bidder.onAction(self, _auctionAction, theResult)
+		
+	for traitID in traits:
+		for bidderA in bidders:
+			var bidder:AuctionBidder = bidderA
+			if(bidder.likes.has(traitID)):
+				if(bidder.likes[traitID] == AuctionBidder.TRAIT_UNDISCOVERED):
 					extraTexts.append("LEARNED THAT "+bidder.name+" PREFERS SLAVES WITH TRAIT "+str(traitID))
-				if(bidder.dislikes.has(traitID)):
-					bidder.dislikes[traitID] = true
+				if(slaveTraits[traitID] <= 0.0):
+					bidder.likes[traitID] = AuctionBidder.TRAIT_DISCOVERED
+				else:
+					bidder.likes[traitID] = AuctionBidder.TRAIT_HIT
+			if(bidder.dislikes.has(traitID)):
+				if(bidder.dislikes[traitID] == AuctionBidder.TRAIT_UNDISCOVERED):
 					extraTexts.append("LEARNED THAT "+bidder.name+" DISLIKES SLAVES WITH TRAIT "+str(traitID))
-	
+				if(slaveTraits[traitID] <= 0.0):
+					bidder.dislikes[traitID] = AuctionBidder.TRAIT_DISCOVERED
+				else:
+					bidder.dislikes[traitID] = AuctionBidder.TRAIT_HIT
+
 	var biddingTexts:Array = doRoundOfBidding()
 	if(!biddingTexts.empty()):
 		extraTexts.append("")
@@ -166,10 +180,12 @@ func doAction(_auctionAction:AuctionAction):
 func doRoundOfBidding() -> Array:
 	var result:Array = []
 	
+	var biddingRoundAmount:int = 3
+	
 	var biddersCopy:Array = []
 	biddersCopy.append_array(bidders)
 	biddersCopy.shuffle()
-	for _i in range(3):
+	for _i in range(biddingRoundAmount):
 		for bidderA in biddersCopy:
 			var bidder:AuctionBidder = bidderA
 			if(lastBidderIndex == bidder.index):
@@ -182,6 +198,7 @@ func doRoundOfBidding() -> Array:
 				totalBidTimes += 1
 				bidder.currentBid = currentBid
 				lastBidderIndex = bidder.index
+				bidder.onBid(totalBidTimes)
 				
 				result.append(bidder.name+" placed a "+str(currentBid)+" credits bid.")
 		
@@ -192,12 +209,18 @@ func getBidderInfo() -> String:
 	var resultAr:Array = []
 	
 	for bidder in bidders:
-		resultAr.append_array(bidder.getBidderInfo())
+		resultAr.append(Util.join(bidder.getBidderInfo(), "\n"))
 	
-	return Util.join(resultAr, "\n")
+	return Util.join(resultAr, "\n\n")
 
 func getBidderBeginsRound() -> int:
 	return 3
 
 func getTotalBidTimes() -> int:
 	return totalBidTimes
+
+func getBiddersRandomOrder() -> Array:
+	var result:Array = []
+	result.append_array(bidders)
+	result.shuffle()
+	return result
