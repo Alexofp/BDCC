@@ -18,6 +18,7 @@ func getActionType():
 func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 	return {
 		text = "LOVES GETTING FUCKED",
+		slaveReaction = getSlaveReaction(_char),
 		traits = getTraits(),
 		desire = getPassiveDesireGain(),
 		instantDesire = getPassiveInstantDesireGain(),
@@ -28,6 +29,9 @@ func getPositiveReaction(_char:BaseCharacter) -> String:
 
 func getNegativeReaction(_char:BaseCharacter) -> String:
 	return "I'M NOT REALLY LOOKING FOR THAT."
+
+func getSlaveReaction(_char:BaseCharacter) -> String:
+	return "{slave.name} blushes deeply."
 
 func getTraits() -> Dictionary:
 	return {

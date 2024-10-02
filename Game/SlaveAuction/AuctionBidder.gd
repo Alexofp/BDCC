@@ -7,6 +7,7 @@ const TRAIT_HIT = 2
 
 var index:int = 0
 var name:String = ""
+var bidderID:String = ""
 var desire:float = 0.0
 var instantDesire:float = 0.0
 var likes:Dictionary = {}
@@ -14,6 +15,9 @@ var dislikes:Dictionary = {}
 var currentBid:int = 0
 
 var auctionRef:WeakRef
+
+var discoveredLikes:Array = []
+var discoveredDislikes:Array = []
 
 func setAuction(theAuction):
 	auctionRef = weakref(theAuction)
@@ -29,32 +33,100 @@ func getFinalDesire() -> float:
 func onNewRound():
 	instantDesire = 0.0
 
+func clearDiscovered():
+	discoveredLikes.clear()
+	discoveredDislikes.clear()
+
+func discoverTrait(_auction, _traitID:String) -> bool:
+	var result:bool = false
+	
+	if(likes.has(_traitID) && likes[_traitID] == TRAIT_UNDISCOVERED):
+		likes[_traitID] = TRAIT_DISCOVERED
+		discoveredLikes.append(_traitID)
+		result = true
+	if(dislikes.has(_traitID) && dislikes[_traitID] == TRAIT_UNDISCOVERED):
+		dislikes[_traitID] = TRAIT_DISCOVERED
+		discoveredDislikes.append(_traitID)
+		result = true
+	return result
+
+func discoverRandomTrait(_auction) -> bool:
+	var possible:Array = []
+	for traitID in likes:
+		if(likes[traitID] == TRAIT_UNDISCOVERED):
+			possible.append(traitID)
+	for traitID in dislikes:
+		if(dislikes[traitID] == TRAIT_UNDISCOVERED):
+			possible.append(traitID)
+	if(possible.empty()):
+		return false
+	return discoverTrait(_auction, RNG.pick(possible))
+
+func hitTrait(_auction, _traitID:String) -> bool:
+	var result:bool = false
+	var slaveHasTrait:bool = (_auction.slaveTraits.has(_traitID) && _auction.slaveTraits[_traitID] > 0.0)
+	
+	var _ok = discoverTrait(_auction, _traitID)
+	#if(discoverTrait(_auction, _traitID)):
+	#	result = true
+	if(likes.has(_traitID)):
+		if(slaveHasTrait && likes[_traitID] != TRAIT_HIT):
+			likes[_traitID] = TRAIT_HIT
+			result = true
+	if(dislikes.has(_traitID)):
+		if(slaveHasTrait && dislikes[_traitID] != TRAIT_HIT):
+			dislikes[_traitID] = TRAIT_HIT
+			result = true
+	return result
+
 func onAction(_auction, _action:AuctionAction, _result:Dictionary):
 	var traits:Dictionary = _result["traits"]
 	var passiveDesire:float = _result["desire"]
-	var passiveInstantDesire:float = _result["instantDesire"]
+	#var passiveInstantDesire:float = _result["instantDesire"]
 
 	var hitAnyDislikes:bool = false
 	var hitAnyLikes:bool = false
+	var desireDelta:float = 0.0
 	for traitID in traits:
 		if(!_auction.slaveTraits.has(traitID) || _auction.slaveTraits[traitID] <= 0.0):
 			continue
 		
 		var mult:float = traits[traitID] * (clamp(_auction.slaveTraits[traitID] * RNG.randf_range(0.9, 1.1), 0.4, 1.0) if _auction.slaveTraits.has(traitID) else 1.0)
 		if(likes.has(traitID)):
-			desire += 1.0 * mult
+			desireDelta += 1.0 * mult
 			#desire += 0.5 * mult
 			#instantDesire += 0.5 * mult
 			hitAnyLikes = true
 		if(dislikes.has(traitID)):
-			desire -= 0.5 * mult
+			desireDelta -= 0.5 * mult
 			#instantDesire -= 0.5 * mult
 			hitAnyDislikes = true
 	
 	if(!hitAnyDislikes && !hitAnyLikes):
-			desire += passiveDesire
-			instantDesire += passiveInstantDesire
+		desireDelta += passiveDesire
+		#instantDesire += passiveInstantDesire
+	
+	desire += desireDelta
+	return {
+		hitAnyLikes = hitAnyLikes,
+		hitAnyDislikes = hitAnyDislikes,
+		desireDelta = desireDelta,
+	}
 		
+func say(theText:String):
+	var theAuction = getAuction()
+	if(theAuction != null):
+		theAuction.saynn("[say="+bidderID+"]"+theText+"[/say]")
+
+func sayn(theText:String):
+	var theAuction = getAuction()
+	if(theAuction != null):
+		theAuction.sayn(theText)
+
+func saynn(theText:String):
+	var theAuction = getAuction()
+	if(theAuction != null):
+		theAuction.saynn(theText)
 
 func getHitPreferencesAmount() -> int:
 	var result:int = 0
@@ -74,9 +146,9 @@ func calculateChanceToBid() -> float:
 	
 	var mult:float = 1.0
 	
-	if(roundNumber <= 1):
+	if(roundNumber <= 2):
 		mult *= 0.1
-	if(getHitPreferencesAmount() <= 2):
+	if(getHitPreferencesAmount() <= 1):
 		mult *= 0.1
 		
 	#if(roundNumber >= 5):
@@ -104,22 +176,14 @@ func getBidderInfo() -> Array:
 		else:
 			var theTrait:AuctionTrait = GlobalRegistry.getAuctionTrait(traitID)
 			if(theTrait != null):
-				var theColor:Color = Color("#FFBAF8")
-				if(likes[traitID] >= TRAIT_HIT):
-					theColor = Color("#FF63E7")
-				
-				knownLikes.append("[color=#"+theColor.to_html(false)+"]"+theTrait.getName(traitID)+"[/color]")
+				knownLikes.append("[color=#"+getTraitColor(traitID).to_html(false)+"]"+theTrait.getName(traitID)+"[/color]")
 	for traitID in dislikes:
 		if(!dislikes[traitID]):
 			hiddenDislikesAmount += 1
 		else:
 			var theTrait:AuctionTrait = GlobalRegistry.getAuctionTrait(traitID)
 			if(theTrait != null):
-				var theColor:Color = Color("#FFB0A0")
-				if(dislikes[traitID] >= TRAIT_HIT):
-					theColor = Color("#FF554C")
-				
-				knownDislikes.append("[color=#"+theColor.to_html(false)+"]"+theTrait.getName(traitID)+"[/color]")
+				knownDislikes.append("[color=#"+getTraitColor(traitID).to_html(false)+"]"+theTrait.getName(traitID)+"[/color]")
 	
 	resultAr.append(name+". "+ "Desire to bid: " + str(Util.roundF(getFinalDesire()*100.0, 1))+"% "+"Current bid: " + str(currentBid)+" credits")
 	if(likes.empty()):
@@ -132,3 +196,18 @@ func getBidderInfo() -> Array:
 		resultAr.append("- Dislikes: "+str(Util.join(knownDislikes, ", "))+(", " if !knownDislikes.empty() && hiddenDislikesAmount > 0 else "")+((str(hiddenDislikesAmount)+" undiscovered") if hiddenDislikesAmount > 0 else "")) # + "   ("+str(Util.join(dislikes.keys(), ", "))+")"
 	
 	return resultAr
+
+func getTraitColor(_traitID:String) -> Color:
+	var theAuction = getAuction()
+	if(!theAuction.slaveTraits.has(_traitID) || theAuction.slaveTraits[_traitID] <= 0.0):
+		return Color.darkgray
+	
+	if(likes.has(_traitID)):
+		if(likes[_traitID] == TRAIT_HIT):
+			return Color("#FF63E7")
+		return Color("#FFBAF8")
+	if(dislikes.has(_traitID)):
+		if(dislikes[_traitID] == TRAIT_HIT):
+			return Color("#FF554C")
+		return Color("#FFB0A0")
+	return Color.red
