@@ -34,7 +34,7 @@ func _run():
 		for actionA in actions:
 			var action:AuctionAction = actionA
 			var theActionType = action.getActionType()
-			if(theActionType == currentActionType || theActionType == AuctionActionType.Continue):
+			if((theActionType == currentActionType && slaveAuction.getState() == "act") || (slaveAuction.getState() != "act") || theActionType == AuctionActionType.Continue):
 				var canDoData:Array = slaveAuction.canDoAction(action)
 				if(canDoData[0]):
 					addButton(action.getButtonName(), action.getButtonDesc(), "doAction", [action])
@@ -53,6 +53,8 @@ func _react(_action: String, _args):
 	if(_action == "doAction"):
 		currentActionType = AuctionActionType.NoType
 		slaveAuction.doAction(_args[0])
+		if(slaveAuction.hasEnded()):
+			endScene() # Result here
 		return
 	if(_action == "setActionType"):
 		currentActionType = _args[0]
@@ -64,6 +66,8 @@ func _react(_action: String, _args):
 func resolveCustomCharacterName(_charID):
 	if(_charID == "slave"):
 		return charID
+	if(_charID == "presenter"):
+		return slaveAuction.getPresenterID()
 	return .resolveCustomCharacterName(_charID)
 
 func saveData():

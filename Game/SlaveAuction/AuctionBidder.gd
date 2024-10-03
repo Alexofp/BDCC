@@ -33,6 +33,20 @@ func getFinalDesire() -> float:
 func onNewRound():
 	instantDesire = 0.0
 
+func getPercentageOfDiscoveredTraits() -> float:
+	var totalTraits:int = likes.size() + dislikes.size()
+	var totalUnlocked:int = 0
+	for traitID in likes:
+		if(likes[traitID] != TRAIT_UNDISCOVERED):
+			totalUnlocked += 1
+	for traitID in dislikes:
+		if(dislikes[traitID] != TRAIT_UNDISCOVERED):
+			totalUnlocked += 1
+	if(totalTraits == 0 || totalTraits == totalUnlocked):
+		return 1.0
+	
+	return float(totalUnlocked) / float(totalTraits)
+
 func clearDiscovered():
 	discoveredLikes.clear()
 	discoveredDislikes.clear()
@@ -56,6 +70,30 @@ func discoverRandomTrait(_auction) -> bool:
 		if(likes[traitID] == TRAIT_UNDISCOVERED):
 			possible.append(traitID)
 	for traitID in dislikes:
+		if(dislikes[traitID] == TRAIT_UNDISCOVERED):
+			possible.append(traitID)
+	if(possible.empty()):
+		return false
+	return discoverTrait(_auction, RNG.pick(possible))
+
+func discoverRandomTraitOfType(_auction, _traitType) -> bool:
+	var possible:Array = []
+	for traitID in likes:
+		var theTraitObj:AuctionTrait = GlobalRegistry.getAuctionTrait(traitID)
+		if(theTraitObj == null):
+			continue
+		if(theTraitObj.getTraitType(traitID) != _traitType):
+			continue
+		
+		if(likes[traitID] == TRAIT_UNDISCOVERED):
+			possible.append(traitID)
+	for traitID in dislikes:
+		var theTraitObj:AuctionTrait = GlobalRegistry.getAuctionTrait(traitID)
+		if(theTraitObj == null):
+			continue
+		if(theTraitObj.getTraitType(traitID) != _traitType):
+			continue
+		
 		if(dislikes[traitID] == TRAIT_UNDISCOVERED):
 			possible.append(traitID)
 	if(possible.empty()):

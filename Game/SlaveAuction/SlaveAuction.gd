@@ -3,11 +3,11 @@ class_name SlaveAuction
 
 var charID:String = ""
 
-var roundNumber:int = 1
+var roundNumber:int = 0
 var totalBidTimes:int = 0
 var currentBid:int = 0
 var lastBidderIndex:int = -1
-var state:String = "act" # act react
+var state:String = "start" # act react start ended
 var canPresent:bool = true
 var bidLastChances:int = 0
 
@@ -17,10 +17,14 @@ var extraActionTexts:Array = []
 var slaveTraits:Dictionary = {}
 var usedTraits:Dictionary = {}
 
+var slaveReactionType = AuctionSlaveReaction.Confused
+
 var bidders:Array = []
+var shouldEnd:bool = false
 
 func setCharID(newCharID:String):
 	charID = newCharID
+	slaveReactionType = calculateSlaveReactionType()
 
 func getChar() -> BaseCharacter:
 	return GlobalRegistry.getCharacter(charID)
@@ -99,10 +103,18 @@ func getActions() -> Array:
 	
 	if(state == "react"):
 		result.append(GlobalRegistry.getAuctionAction("Continue"))
+	elif(state == "ended"):
+		result.append(GlobalRegistry.getAuctionAction("Continue"))
+	elif(state == "start"):
+		for actionID in GlobalRegistry.getAuctionActions():
+			var theAction:AuctionAction = GlobalRegistry.getAuctionAction(actionID)
+			if(theAction == null || theAction.getActionType() != AuctionActionType.Intro):
+				continue
+			result.append(theAction)
 	else:
 		for actionID in GlobalRegistry.getAuctionActions():
 			var theAction:AuctionAction = GlobalRegistry.getAuctionAction(actionID)
-			if(theAction.id == "Continue"):
+			if(theAction == null || theAction.id == "Continue"):
 				continue
 			result.append(theAction)
 	
@@ -139,8 +151,13 @@ func doAction(_auctionAction:AuctionAction):
 		bidder.clearDiscovered()
 	extraActionTexts = []
 	
+	if(state == "ended"):
+		shouldEnd = true
+		return
+	
 	if(state == "react"):
-		onNewRound()
+		if(canPresent):
+			onNewRound()
 		
 		if(!canPresent):
 			bidLastChances += 1
@@ -157,21 +174,20 @@ func doAction(_auctionAction:AuctionAction):
 			
 			doRoundOfBiddingWithChecks()
 			actionText = Util.join(extraActionTexts, "")
-			if(!canPresent):
-				state = "react"
-			else:
-				state = "act"
-			return
-		
+			state = "react"
+			#if(!canPresent):
+			#	state = "react"
+			#else:
+			#	state = "act"
 		return
 	
 	state = "react"
 	
-	var theResult:Dictionary = _auctionAction.onAct(getChar(), self, slaveTraits)
+	var theResult:Dictionary = _auctionAction.onActFinal(getChar(), self, slaveTraits)
 	if(!theResult.has("text")):
 		theResult["text"] = "NO ACTION TEXT PROVIDED, FIX ME"
 	
-	saynnPresenter(theResult["text"])
+	saynn(theResult["text"])
 	#actionText = theResult["text"]
 	
 	if(!theResult.has("traits")):
@@ -181,7 +197,7 @@ func doAction(_auctionAction:AuctionAction):
 	if(!theResult.has("instantDesire")):
 		theResult["instantDesire"] = _auctionAction.getPassiveInstantDesireGain()
 	if(!theResult.has("slaveReaction")):
-		theResult["slaveReaction"] = _auctionAction.getSlaveReaction(getChar())
+		theResult["slaveReaction"] = _auctionAction.getSlaveReaction(getChar(), getSlaveReactionType())
 	
 	#var extraTexts:Array = []
 	saynn(theResult["slaveReaction"])
@@ -203,7 +219,7 @@ func doAction(_auctionAction:AuctionAction):
 		if(reactResult["hitAnyDislikes"] && reactResult["desireDelta"] < 0.0 && !didNegativeReact):
 			didNegativeReact = true
 			bidder.say(_auctionAction.getNegativeReaction(getChar()))
-	if(!didPositiveReact && !didNegativeReact):
+	if(!didPositiveReact && !didNegativeReact && _auctionAction.getActionType() != AuctionActionType.Intro):
 		RNG.pick(bidders).say(RNG.pick([
 			"Your slave is kinda boring.",
 		]))
@@ -271,6 +287,7 @@ func doRoundOfBiddingWithChecks():
 	var bidAmount:int = doRoundOfBidding()
 	if(roundNumber >= getSoftEndRound()):
 		if(bidAmount >= 2):
+			print("YAY. BID AMOUNT: "+str(bidAmount))
 			saynn("Since you got at least 2 new bids, you can present your slave more!")
 			canPresent = true
 			bidLastChances = 0
@@ -278,18 +295,28 @@ func doRoundOfBiddingWithChecks():
 			canPresent = false
 			saynn("Since you got less than 2 new bids after the soft end, you can’t present your slave anymore.")
 	else:
-		saynn("Since it’s round "+str(roundNumber)+" and the soft end hasn’t happened yet, you can present your slave more.")
+		if(roundNumber == 0):
+			saynn("The auction has started! Learn as many bidders preferences as possible before the soft end.")
+		else:
+			saynn("Since it’s round "+str(roundNumber)+" and the soft end hasn’t happened yet, you can present your slave more.")
 		canPresent = true
 		bidLastChances = 0
 
 func doRoundOfBidding() -> int:
 	var resultBidAmount:int = 0
 	
-	var biddingRoundAmount:int = 3
+	var biddingRoundAmount:int = 1#3
 	
 	var biddersCopy:Array = []
-	biddersCopy.append_array(bidders)
+	for bidder in bidders:
+		if(lastBidderIndex != bidder.index):
+			biddersCopy.append(bidder)
 	biddersCopy.shuffle()
+	for bidder in bidders:
+		if(lastBidderIndex == bidder.index): # Current bidder is always last so they can bid back
+			biddersCopy.append(bidder)
+	
+	
 	for _i in range(biddingRoundAmount):
 		for bidderA in biddersCopy:
 			var bidder:AuctionBidder = bidderA
@@ -335,4 +362,69 @@ func getPresenterID() -> String:
 	return "mirri"
 
 func saynnPresenter(theText:String):
-	saynn("[say="+getPresenterID()+"]"+theText+"[/say]")
+	saynn("[say=presenter]"+theText+"[/say]")
+
+func unlockRandomTraitEachBidder():
+	for bidder in bidders:
+		bidder.discoverRandomTrait(self)
+
+func unlockRandomTraitOfTypeEachBidder(_traitType):
+	for bidder in bidders:
+		bidder.discoverRandomTraitOfType(self, _traitType)
+
+func unlockPercentageOfTraitsRandomBidder(howMuch:float):
+	var theBidder:AuctionBidder = RNG.pick(bidders)
+	
+	var unlockedPerc:float = theBidder.getPercentageOfDiscoveredTraits()
+	while(unlockedPerc < howMuch):
+		var _ok = theBidder.discoverRandomTrait(self)
+		
+		unlockedPerc = theBidder.getPercentageOfDiscoveredTraits()
+
+func calculateSlaveReactionType():
+	var theCharacter:BaseCharacter = getCharacter()
+	var thePersonality:Personality = theCharacter.getPersonality()
+	var npcSlavery:NpcSlave
+	var obedience:float = 0.0
+	var trust:float = 0.0
+	var love:float = 0.0
+	var spoiling:float = 0.0
+	var isMindBroken:bool = false
+	if(theCharacter.isSlaveToPlayer()):
+		npcSlavery = theCharacter.getNpcSlavery()
+		obedience = npcSlavery.getObedience()
+		isMindBroken = npcSlavery.isMindBroken()
+		love = npcSlavery.getLove()
+		trust = npcSlavery.getTrust()
+		spoiling = npcSlavery.getSpoiling()
+	
+	if(isMindBroken):
+		return AuctionSlaveReaction.MindBroken
+	
+	var reactionScores:Dictionary = {}
+	reactionScores[AuctionSlaveReaction.Obedient] = obedience + thePersonality.getStat(PersonalityStat.Subby) * 0.5
+	reactionScores[AuctionSlaveReaction.Confused] = love*0.5 + trust*0.5 - thePersonality.getStat(PersonalityStat.Mean) * 0.5 + thePersonality.getStat(PersonalityStat.Naive) * 0.5 + thePersonality.getStat(PersonalityStat.Brat) * 0.2
+	reactionScores[AuctionSlaveReaction.Shy] = obedience*0.5 + love*0.5 - thePersonality.getStat(PersonalityStat.Mean) * 0.5 + thePersonality.getStat(PersonalityStat.Subby) * 0.5 + thePersonality.getStat(PersonalityStat.Coward) * 0.5
+	reactionScores[AuctionSlaveReaction.Desperate] = trust*0.5 + spoiling - thePersonality.getStat(PersonalityStat.Naive) * 0.5 - thePersonality.getStat(PersonalityStat.Subby) * 0.5 + thePersonality.getStat(PersonalityStat.Impatient) * 0.5
+	reactionScores[AuctionSlaveReaction.Angry] = trust + love*0.5 + thePersonality.getStat(PersonalityStat.Mean) - thePersonality.getStat(PersonalityStat.Subby) * 0.5 - thePersonality.getStat(PersonalityStat.Impatient) * 0.2 - thePersonality.getStat(PersonalityStat.Coward) * 0.3
+	
+	var maxScoreReaction = AuctionSlaveReaction.Confused
+	var maxScoreScore:float = -9999.9
+	
+	for theReaction in reactionScores:
+		if(reactionScores[theReaction] > maxScoreScore):
+			maxScoreScore = reactionScores[theReaction]
+			maxScoreReaction = theReaction
+	
+	
+	return maxScoreReaction
+
+func getSlaveReactionType():
+	return slaveReactionType
+
+func hasEnded() -> bool:
+	return shouldEnd
+
+func increaseBiddersDesire(howMuch:float):
+	for bidder in bidders:
+		bidder.desire += howMuch

@@ -3,8 +3,8 @@ class_name AuctionTrait
 
 var ids:Array = []
 
-#func getTraitType(_id:String):
-#	return AuctionTraitType.Fetish
+func getTraitType(_id:String):
+	return AuctionTraitType.Fetish
 
 func getName(_id:String) -> String:
 	return "ERROR? FILL ME"

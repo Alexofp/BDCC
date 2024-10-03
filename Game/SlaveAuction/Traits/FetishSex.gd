@@ -7,6 +7,9 @@ func _init():
 		"FetishSexExotic",
 	]
 
+func getTraitType(_id:String):
+	return AuctionTraitType.Fetish
+
 func getName(_id:String) -> String:
 	if(_id == "FetishSexBottom"):
 		return "SEX (BOTTOM)"

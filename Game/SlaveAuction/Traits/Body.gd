@@ -11,6 +11,9 @@ func _init():
 		"Feminine",
 	]
 
+func getTraitType(_id:String):
+	return AuctionTraitType.Body
+
 func getName(_id:String) -> String:
 	if(_id == "BodySlim"):
 		return "Slim body"
