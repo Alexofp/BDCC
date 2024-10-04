@@ -16,6 +16,7 @@ var extraActionTexts:Array = []
 
 var slaveTraits:Dictionary = {}
 var usedTraits:Dictionary = {}
+var usedActions:Dictionary = {}
 
 var slaveReactionType = AuctionSlaveReaction.Confused
 
@@ -48,23 +49,9 @@ func calculateSlaveTraits():
 		slaveTraits[traitID] = score
 
 func generateBidders():
-	bidders.clear()
-	for _i in range(3):
-		var newBidder:AuctionBidder = AuctionBidder.new()
-		newBidder.name = "Bidder "+str(_i + 1)
-		newBidder.bidderID = "bidder"+str(_i + 1)
-		newBidder.index = _i
-		newBidder.setAuction(self)
-		
-		for traitID in GlobalRegistry.getAuctionTraits():
-			var trait:AuctionTrait = GlobalRegistry.getAuctionTrait(traitID)
-			if(RNG.chance(trait.getBidderChance(traitID))):
-				if(RNG.chance(70)):
-					newBidder.likes[traitID] = AuctionBidder.TRAIT_UNDISCOVERED
-				else:
-					newBidder.dislikes[traitID] = AuctionBidder.TRAIT_UNDISCOVERED
-		
-		bidders.append(newBidder)
+	bidders = GM.main.SAB.grabBidders()
+	for bidder in bidders:
+		bidder.setAuction(self)
 
 func getText() -> String:
 	if(state == "ended"):
@@ -137,12 +124,29 @@ func canDoAction(_auctionAction:AuctionAction) -> Array:
 	if(_auctionAction.getActionType() == AuctionActionType.Continue):
 		return [true]
 	
-	var traitsToCheck:Dictionary = _auctionAction.getTraits()
-	if(!traitsToCheck.empty()):
-		for traitID in traitsToCheck:
-			if(usedTraits.has(traitID)):
-				return [false, "You already showed this trait"]
-				#return [true, "You already showed this trait"]
+	if(_auctionAction.canOnlyUseOnce()):
+		if(usedActions.has(_auctionAction.id)):
+			return [false, "You already used this action"]
+	
+	if(_auctionAction.requiresAtLeastOneTraitForSlave()):
+		var canUseAction:bool = false
+		var traitsToCheck:Dictionary = _auctionAction.getTraits()
+		if(!traitsToCheck.empty()):
+			for traitID in traitsToCheck:
+				if(slaveTraits.has(traitID) && slaveTraits[traitID] > 0.0):
+					canUseAction = true
+					break
+		else:
+			canUseAction = true
+		
+		if(!canUseAction):
+			return [false, "Your slave lacks the traits required for this action"]
+			
+#	var traitsToCheck:Dictionary = _auctionAction.getTraits()
+#	if(!traitsToCheck.empty()):
+#		for traitID in traitsToCheck:
+#			if(usedTraits.has(traitID)):
+#				return [false, "You already showed this trait"]
 	
 	return [true]
 
@@ -206,6 +210,7 @@ func doAction(_auctionAction:AuctionAction):
 	if(!traits.empty()):
 		for traitID in traits:
 			usedTraits[traitID] = true
+	usedActions[_auctionAction.id] = true
 		
 	var didPositiveReact:bool = false
 	var didNegativeReact:bool = false
@@ -215,10 +220,10 @@ func doAction(_auctionAction:AuctionAction):
 		
 		if(reactResult["hitAnyLikes"] && reactResult["desireDelta"] > 0.0 && !didPositiveReact):
 			didPositiveReact = true
-			bidder.say(_auctionAction.getPositiveReaction(getChar()))
+			bidder.say(_auctionAction.getPositiveReaction(getChar(), slaveTraits))
 		if(reactResult["hitAnyDislikes"] && reactResult["desireDelta"] < 0.0 && !didNegativeReact):
 			didNegativeReact = true
-			bidder.say(_auctionAction.getNegativeReaction(getChar()))
+			bidder.say(_auctionAction.getNegativeReaction(getChar(), slaveTraits))
 	if(!didPositiveReact && !didNegativeReact && _auctionAction.getActionType() != AuctionActionType.Intro):
 		RNG.pick(bidders).say(RNG.pick([
 			"Your slave is kinda boring.",
@@ -283,11 +288,22 @@ func saynn(theText:String):
 func sayn(theText:String):
 	extraActionTexts.append(theText+"\n")
 
+func triggerSlaveBiddingReaction():
+	var theReaction:String = getSlaveBiddingReactionText()
+	if(theReaction != ""):
+		saynn(theReaction)
+	
+	if(RNG.chance(40)):
+		var theDialogueLine:String = getSlaveBiddingReactionDialogue()
+		if(theDialogueLine != ""):
+			saynn("[say=slave]"+theDialogueLine+"[/say]")
+
 func doRoundOfBiddingWithChecks():
 	var bidAmount:int = doRoundOfBidding()
+	
 	if(roundNumber >= getSoftEndRound()):
 		if(bidAmount >= 2):
-			print("YAY. BID AMOUNT: "+str(bidAmount))
+			#print("YAY. BID AMOUNT: "+str(bidAmount))
 			saynn("Since you got at least 2 new bids, you can present your slave more!")
 			canPresent = true
 			bidLastChances = 0
@@ -326,15 +342,45 @@ func doRoundOfBidding() -> int:
 			var chanceToBid:float = bidder.calculateChanceToBid()
 			
 			if(RNG.chance(chanceToBid / (_i+1))):
+				var raiseChance:float = (bidder.desire - 1.0)*50.0
+				var willRaise:bool = RNG.chance(raiseChance) && (totalBidTimes != 0)
+				
 				currentBid += 10
-				totalBidTimes += 1
+				if(willRaise):
+					currentBid += RNG.randi_range(2, 5) * 10
+					for otherBidder in bidders:
+						if(otherBidder == bidder):
+							continue
+						if(otherBidder.desire > 0.0):
+							otherBidder.desire *= 0.5
+							
 				bidder.currentBid = currentBid
 				lastBidderIndex = bidder.index
 				bidder.onBid(totalBidTimes)
 				
-				sayn(bidder.name+" placed a "+str(currentBid)+" credits bid.")
+				if(totalBidTimes == 0):
+					saynn("[say="+bidder.bidderID+"]I will match "+str(currentBid)+" credits.[/say]")
+				else:
+					var theDot:String = "."
+					if(totalBidTimes > 10):
+						theDot = "!"
+					var prefix:String = ""
+					if(willRaise):
+						prefix = "I will raise it to "
+						
+					if(resultBidAmount == 0 || RNG.chance(80 - resultBidAmount*10 - totalBidTimes*3)):
+						saynn("[say="+bidder.bidderID+"]"+prefix+str(currentBid)+" credits"+theDot+"[/say]")
+					else:
+						saynn("[say="+bidder.bidderID+"]"+prefix+str(currentBid)+" credits"+theDot+" "+bidder.getOutbidReaction()+"[/say]")
+					
+					
+					#saynn(bidder.name+" placed a "+str(currentBid)+" credits bid.")
 				resultBidAmount += 1
 				bidLastChances = 0
+				totalBidTimes += 1
+				
+				if(resultBidAmount == 2):
+					triggerSlaveBiddingReaction()
 	
 	return resultBidAmount
 
@@ -428,3 +474,118 @@ func hasEnded() -> bool:
 func increaseBiddersDesire(howMuch:float):
 	for bidder in bidders:
 		bidder.desire += howMuch
+
+func getSlaveBiddingReactionText() -> String:
+	var _reactionType = getSlaveReactionType()
+	if(_reactionType == AuctionSlaveReaction.Obedient):
+		return RNG.pick([
+			"{slave.name} lowers {slave.his} head even further, accepting the frenzy of bids with silent submission.",
+			"{slave.name} glances up briefly, the rapid bidding only confirming {slave.his} place, {slave.he} waits patiently for it to end.",
+			"{slave.name}'s breathing remains steady, though {slave.his} fingers twitch subtly in response to the intense focus.",
+			"{slave.name} closes {slave.his} eyes momentarily, as if resigned to the outcome, allowing the chaos to continue.",
+			"A faint nod comes from {slave.name}'s head, as if silently acknowledging {slave.his} worth to the bidders.",
+			"{slave.name} stands perfectly still, offering no visible reaction as the bidding war rages on, fully accepting {slave.his} fate.",
+		])
+	if(_reactionType == AuctionSlaveReaction.Confused):
+		return RNG.pick([
+			"{slave.name}'s eyes widen slightly as the bids escalate, the confusion in {slave.his} gaze deepening.",
+			"{slave.name} looks around anxiously, the desperation in {slave.his} eyes growing with each new offer.",
+			"{slave.name} bites {slave.his} lip, a mix of sadness and uncertainty creeping into {slave.his} expression.",
+			"{slave.name} winces at every new bid, the rising numbers making {slave.him} feel more and more lost.",
+			"{slave.name} blinks rapidly, as if trying to understand why so much attention is on {slave.him}.",
+			"A small, quiet gasp escapes {slave.name}'s lips, overwhelmed by the growing intensity of the bid war.",
+		])
+	if(_reactionType == AuctionSlaveReaction.Shy):
+		return RNG.pick([
+			"{slave.name}'s cheeks flush deeper with every rising bid, clearly overwhelmed by the attention.",
+			"{slave.name} looks away, {slave.his} body trembling slightly as {slave.he} tries to hide {slave.his} embarrassment.",
+			"{slave.name} stifles a whimper, clearly unused to being fought over like this.",
+			"{slave.name}'s entire face burns crimson as the bids keep coming, {slave.his} shy nature causing {slave.him} to shift nervously.",
+			"{slave.name}'s breath quickens, the intensity of the bids making {slave.him} feel even more exposed.",
+			"{slave.name} squeezes {slave.his} eyes shut for a moment, trying to cope with the barrage of attention.",
+		])
+	if(_reactionType == AuctionSlaveReaction.MindBroken):
+		return RNG.pick([
+			"{slave.name} remains utterly still, the increasing bids seeming to have no impact on {slave.him}.",
+			"{slave.name} stares blankly into the distance, oblivious to the intense bid war erupting around {slave.him}.",
+			"{slave.name}'s body sways slightly, but there is no awareness in {slave.his} eyes as the numbers rise.",
+			"{slave.name} doesn’t blink or respond, the frantic bidding as meaningless to {slave.him} as anything else.",
+			"{slave.name}'s head hangs loosely, no sign of recognition in {slave.his} empty gaze.",
+			"{slave.name} stands in place like a lifeless doll, completely unaffected by the chaos around {slave.him}.",
+		])
+	if(_reactionType == AuctionSlaveReaction.Desperate):
+		return RNG.pick([
+			"{slave.name}'s breath quickens in panic as the bidding intensifies, {slave.his} eyes darting between the bidders.",
+			"{slave.name} pulls against the chains, the desperation building with every bid, a silent plea for it to stop.",
+			"A soft sob escapes {slave.name}'s lips, the rapidly rising bids only heightening {slave.his} confusion and fear.",
+			"{slave.name} gasps, shaking {slave.his} head as if trying to deny what’s happening, unable to make sense of the chaos.",
+			"{slave.name} twists in the restraints, visibly panicked, the rising offers making {slave.his} situation feel more hopeless.",
+			"{slave.name}'s entire body trembles as the bids soar higher, clearly feeling trapped with no way out.",
+		])
+	if(_reactionType == AuctionSlaveReaction.Angry):
+		return RNG.pick([
+			"{slave.name}'s jaw clenches tighter with every new bid, fury building in {slave.his} gaze.",
+			"{slave.name} glares at the crowd, hate-filled eyes daring the bidders to keep going, as if ready to fight them all.",
+			"{slave.name} growls under {slave.his} breath, the rising bids only fueling {slave.his} anger further.",
+			"{slave.name} spits on the ground, the aggressive bidding war enraging {slave.him} even more.",
+			"{slave.name}'s eyes burn with defiance as the numbers climb, clearly refusing to accept {slave.his} fate quietly.",
+			"{slave.name} jerks against {slave.his} restraints, every new bid making {slave.him} more determined to resist.",
+		])
+	return ""
+
+func getSlaveBiddingReactionDialogue() -> String:
+	var _reactionType = getSlaveReactionType()
+	if(_reactionType == AuctionSlaveReaction.Obedient):
+		return RNG.pick([
+			'I’ll serve.. whoever wins.. I will do my best.',
+			'I.. accept my fate. Whoever chooses me, I’m ready.',
+			'Please.. I only want to be useful.',
+			'I’ll obey.. I’ll obey anyone who wins.',
+			'I was trained for this.. I won’t disappoint.',
+			'I belong to whoever decides.. I’ll serve loyally.',
+		])
+	if(_reactionType == AuctionSlaveReaction.Confused):
+		return RNG.pick([
+			'Please.. stop this.. I don’t understand.',
+			'I don’t know why.. this is happening.. please..',
+			'I just want to go back.. please let me go.',
+			'Why are you doing this? I didn’t ask for any of this..',
+			'I don’t want to be sold.. Please, someone help me!',
+			'This.. can’t be happening.. I don’t belong here.',
+		])
+	if(_reactionType == AuctionSlaveReaction.Shy):
+		return RNG.pick([
+			'Wh-why are they bidding so much for me?',
+			'I.. I don’t know if I deserve this kind of attention.',
+			'Th-they’re fighting over me.. I can’t believe it.',
+			'I-I don’t understand.. why are they all looking at me?',
+			'This is too much.. I don’t want them staring at me like that.',
+			'They’re all watching me.. I-I don’t know what to do!',
+		])
+	if(_reactionType == AuctionSlaveReaction.MindBroken):
+		return RNG.pick([
+			"...",
+			"... ..",
+			"... . . . ...",
+			"..k.. h..",
+			"..kh..",
+		])
+	if(_reactionType == AuctionSlaveReaction.Desperate):
+		return RNG.pick([
+			'Why are you bidding on me?! Stop! I don’t want this!',
+			'Please, someone.. help me! Don’t leave me here!',
+			'Let me go! Stop fighting for me! I don’t belong here!',
+			'You can’t sell me! I’m not some object!',
+			'Someone.. anyone.. please get me out of here!',
+			'Stop bidding! I’m not for sale!',
+		])
+	if(_reactionType == AuctionSlaveReaction.Angry):
+		return RNG.pick([
+			'Keep bidding, you bastards. You won’t break me!',
+			'I’m not afraid of you! You’ll regret this!',
+			'You think you own me? I’ll tear you apart!',
+			'Go ahead, fight over me. You’ll never control me.',
+			'I’m not some prize! I’ll make you pay for this!',
+			'Bid all you want, I’ll escape the moment you turn your back!',
+		])
+	return ""

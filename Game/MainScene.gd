@@ -28,6 +28,7 @@ var isDebuggingIS:bool = false
 var IS:InteractionSystem = InteractionSystem.new()
 var RS:RelationshipSystem = RelationshipSystem.new()
 var WHS:WorldHistory = WorldHistory.new()
+var SAB:SlaveAuctionBidders = SlaveAuctionBidders.new()
 
 var staticCharacters = {}
 var charactersToUpdate = {}

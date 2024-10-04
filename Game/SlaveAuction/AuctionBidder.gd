@@ -249,3 +249,30 @@ func getTraitColor(_traitID:String) -> Color:
 			return Color("#FF554C")
 		return Color("#FFB0A0")
 	return Color.red
+
+func getOutbidReaction():
+	var possible:Array = [
+		"Fuck off.",
+		"Fuck you.",
+		"{slave.She} {slave.isAre} mine.",
+		"Give {slave.him} to me.",
+		'Back off, {slave.he} {slave.isAre} mine.',
+		'I’ll outbid you all for {slave.him}.',
+		'No one else deserves {slave.him}.',
+		'{slave.HeShe} belongs to me now.',
+		'Keep trying, but I’m winning this.',
+	]
+	
+	var auction = getAuction()
+	var slaveTraits:Dictionary = auction.slaveTraits
+	var theChar = auction.getChar()
+	
+	for traitID in likes:
+		if(slaveTraits.has(traitID) && slaveTraits[traitID] > 0.0):
+			var theTraitObj:AuctionTrait = GlobalRegistry.getAuctionTrait(traitID)
+			if(theTraitObj == null):
+				continue
+			
+			possible.append_array(theTraitObj.getBidderOutbidReactions(traitID, theChar))
+	
+	return RNG.pick(possible)

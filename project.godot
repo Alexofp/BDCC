@@ -1415,6 +1415,11 @@ _global_script_classes=[ {
 "path": "res://Game/SlaveAuction/SlaveAuction.gd"
 }, {
 "base": "Reference",
+"class": "SlaveAuctionBidders",
+"language": "GDScript",
+"path": "res://Game/SlaveAuction/SlaveAuctionBidders.gd"
+}, {
+"base": "Reference",
 "class": "SlaveEventBase",
 "language": "GDScript",
 "path": "res://Game/NpcSlavery/SlaveEventBase.gd"
@@ -1871,6 +1876,7 @@ _global_script_class_icons={
 "SlaveActionBase": "",
 "SlaveActivityBase": "",
 "SlaveAuction": "",
+"SlaveAuctionBidders": "",
 "SlaveEventBase": "",
 "SlaveType": "",
 "SlaveTypeBase": "",

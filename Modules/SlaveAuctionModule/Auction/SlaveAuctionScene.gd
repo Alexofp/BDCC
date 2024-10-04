@@ -24,10 +24,13 @@ func _run():
 		
 		if(slaveAuction.getState() == "act"):
 			if(currentActionType != AuctionActionType.NoType):
-				addButton("Back", "Go back to the previous menu", "setActionType", [AuctionActionType.NoType])
+				addButton("Back..", "Go back to the previous menu", "setActionType", [AuctionActionType.NoType])
 			else:
-				addButton("Body", "Focus on showcasing the slave's body", "setActionType", [AuctionActionType.Body])
-				addButton("Fetish", "Pick which fetish of your slave you want to showcase", "setActionType", [AuctionActionType.Fetish])
+				addButton("Body", "Show actions that showcase the slave's body", "setActionType", [AuctionActionType.Body])
+				addButton("Mind", "Reveal some of the slave's inner info", "setActionType", [AuctionActionType.Mind])
+				addButton("Fetishes", "Pick which fetish of your slave you want to showcase", "setActionType", [AuctionActionType.Fetish])
+				addButton("Personality", "Pick which personality side of your slave you want to showcase", "setActionType", [AuctionActionType.Personality])
+				addButton("Emphasize", "Put extra focus on some of the traits", "setActionType", [AuctionActionType.Emphasize])
 			
 		var actions:Array = slaveAuction.getActions()
 		var disabledActions:Array = []
