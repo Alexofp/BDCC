@@ -3,8 +3,8 @@ extends AuctionAction
 func _init():
 	id = "FetishSexTop"
 
-func getName() -> String:
-	return getNameFromTraits()
+func getButtonDesc() -> String:
+	return "Tell the bidder's about the slave's topping skills.\n\n[b]Might[/b] reveal 1 personality preference of each bidder."
 
 func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 	sayPresenter(RNG.pick([
@@ -13,6 +13,8 @@ func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 		"A predator in the sheets, this one lives for the hunt, eager to make {slave.his} owners cum in the most explosive ways.",
 		"This slave thrives on topping, and trust me, {slave.he} knows exactly how to make others surrender to pleasure.",
 	]))
+	
+	_auction.unlockRandomTraitOfTypeEachBidderWithChance(AuctionTraitType.Personality, mightChance())
 
 func getTraits() -> Dictionary:
 	return {

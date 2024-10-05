@@ -1,13 +1,16 @@
 extends AuctionAction
 
 func _init():
-	id = "Thickness"
+	id = "BodyThickness"
 
 func getActionType():
 	return AuctionActionType.Body
 
 func getName() -> String:
 	return "Thickness"
+
+func getButtonDesc() -> String:
+	return "Point out the slave's curves.\n\n[b]Might[/b] reveal 1 mind preference of each bidder."
 
 func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 	if(_slaveTraits.has("BodySlim") && _slaveTraits["BodySlim"] > 0.0):
@@ -37,6 +40,8 @@ func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 			"Thick thighs, full hips - {slave.he} was made to be enjoyed by those with appetites for more.",
 			"This one has a lot to offer, both to the eye and the touch. For those who like their toys thick, {slave.he} {slave.isAre} perfect.",
 		]))
+	
+	_auction.unlockRandomTraitOfTypeEachBidderWithChance(AuctionTraitType.Mind, mightChance())
 
 func getTraits() -> Dictionary:
 	return {

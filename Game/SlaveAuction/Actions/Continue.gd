@@ -6,6 +6,9 @@ func _init():
 func getName() -> String:
 	return "Continue"
 
+func getButtonDesc() -> String:
+	return "See what happens next.."
+
 func getActionType():
 	return AuctionActionType.Continue
 

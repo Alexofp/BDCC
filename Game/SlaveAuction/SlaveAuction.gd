@@ -418,6 +418,11 @@ func unlockRandomTraitOfTypeEachBidder(_traitType):
 	for bidder in bidders:
 		bidder.discoverRandomTraitOfType(self, _traitType)
 
+func unlockRandomTraitOfTypeEachBidderWithChance(_traitType, _chance:float):
+	for bidder in bidders:
+		if(RNG.chance(_chance)):
+			bidder.discoverRandomTraitOfType(self, _traitType)
+
 func unlockPercentageOfTraitsRandomBidder(howMuch:float):
 	var theBidder:AuctionBidder = RNG.pick(bidders)
 	

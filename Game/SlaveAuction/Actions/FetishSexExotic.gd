@@ -3,11 +3,11 @@ extends AuctionAction
 func _init():
 	id = "FetishSexExotic"
 
+func getButtonDesc() -> String:
+	return "Tell the bidder's about the slave's exotic fetishes like feetplay and rimming.\n\n[b]Might[/b] reveal 1 personality preference of each bidder."
+
 func getActionType():
 	return AuctionActionType.Fetish
-
-func getName() -> String:
-	return getNameFromTraits()
 
 func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 	sayPresenter(RNG.pick([
@@ -18,6 +18,8 @@ func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 		"From feetplay to rimming, {slave.he} is ready to explore every corner of your fantasies.",
 		"This one’s got a taste for the more.. experimental. If you want a sextoy with unique kinks, this is the one.",
 	]))
+	
+	_auction.unlockRandomTraitOfTypeEachBidderWithChance(AuctionTraitType.Personality, mightChance())
 
 func getTraits() -> Dictionary:
 	return {

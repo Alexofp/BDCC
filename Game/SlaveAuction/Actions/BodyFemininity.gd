@@ -1,13 +1,16 @@
 extends AuctionAction
 
 func _init():
-	id = "Femininity"
+	id = "BodyFemininity"
 
 func getActionType():
 	return AuctionActionType.Body
 
 func getName() -> String:
 	return "Femininity"
+
+func getButtonDesc() -> String:
+	return "Point out the slave's femininity/masculinity.\n\n[b]Might[/b] reveal 1 mind preference of each bidder."
 
 func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 	if(_slaveTraits.has("Masculine") && _slaveTraits["Masculine"] > 0.0):
@@ -37,6 +40,8 @@ func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 			"Gentle curves, soft skin, and an innocent face. You won’t find a more perfect feminine form.",
 			"Sweet, delicate, and oh-so-girly. Perfect for those seeking a softer touch in their collection.",
 		]))
+	
+	_auction.unlockRandomTraitOfTypeEachBidderWithChance(AuctionTraitType.Mind, mightChance())
 
 func getTraits() -> Dictionary:
 	return {

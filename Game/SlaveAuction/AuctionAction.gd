@@ -5,7 +5,7 @@ var id:String = "error"
 var savedTexts:Array = []
 
 func getName() -> String:
-	return "SEX (BOTTOM)"
+	return getNameFromTraits()
 
 func getButtonName() -> String:
 	return getName()
@@ -33,6 +33,12 @@ func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 		desire = getPassiveDesireGain(),
 		instantDesire = getPassiveInstantDesireGain(),
 	}
+
+func might() -> bool:
+	return RNG.chance(mightChance())
+
+func mightChance() -> float:
+	return 50.0
 
 func onActFinal(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 	savedTexts.clear()
