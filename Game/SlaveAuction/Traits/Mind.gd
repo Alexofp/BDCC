@@ -2,8 +2,8 @@ extends AuctionTrait
 
 func _init():
 	ids = [
-		"MindStaff",
-		"MindInmate",
+		"MindStaff",#
+		"MindInmate",#
 		
 		"SkillSlut",
 		"SkillPet",
@@ -14,13 +14,13 @@ func _init():
 	]
 
 func getTraitType(_id:String):
-	return AuctionTraitType.Body
+	return AuctionTraitType.Mind
 
 func getName(_id:String) -> String:
 	if(_id == "MindStaff"):
-		return "Staff members"
+		return "Staff member"
 	if(_id == "MindInmate"):
-		return "Inmates"
+		return "Inmate"
 	if(_id == "SkillSlut"):
 		return "Slut skill"
 	if(_id == "SkillPet"):

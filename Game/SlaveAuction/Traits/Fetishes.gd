@@ -2,14 +2,14 @@ extends AuctionTrait
 
 func _init():
 	ids = [
-		"FetishSexBottom",
-		"FetishSexTop",
-		"FetishSexExotic",
+		"FetishSexBottom",#
+		"FetishSexTop",#
+		"FetishSexExotic",#
 		
-		"FetishBDSM",
-		"FetishMilking",
-		"FetishExhibitionism",
-		"FetishDrugUse",
+		"FetishBDSM",#
+		"FetishMilking",#
+		"FetishExhibitionism",#
+		"FetishDrugUse",#
 	]
 
 func getTraitType(_id:String):

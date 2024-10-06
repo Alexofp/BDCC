@@ -141,6 +141,9 @@ func getPassiveDesireGain() -> float:
 func getPassiveInstantDesireGain() -> float:
 	return 0.0
 
+func canUse(_char:BaseCharacter, _slaveTraits:Dictionary) -> Array:
+	return [true]
+
 func canOnlyUseOnce() -> bool:
 	return true
 

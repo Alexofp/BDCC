@@ -2,29 +2,29 @@ extends AuctionTrait
 
 func _init():
 	ids = [
-		"BodySlim",
-		"BodyAverage",
-		"BodyThick",
+		"BodySlim",#
+		"BodyAverage",#
+		"BodyThick",#
 		
-		"Masculine",
-		"Androgynous",
-		"Feminine",
+		"Masculine",#
+		"Androgynous",#
+		"Feminine",#
 		
-		"BreastsSmall",
-		"BreastsAverage",
-		"BreastsHuge",
+		"BreastsSmall",#
+		"BreastsAverage",#
+		"BreastsHuge",#
 		
-		"PenisSmall",
-		"PenisAverage",
-		"PenisLong",
+		"PenisSmall",#
+		"PenisAverage",#
+		"PenisLong",#
 		
-		"VaginaTight",
-		"VaginaLoose",
+		"VaginaTight",#
+		"VaginaLoose",#
 		
-		"AnusTight",
-		"AnusLoose",
+		"AnusTight",#
+		"AnusLoose",#
 		
-		"Pregnant",
+		"Pregnant",#
 	]
 
 func getTraitType(_id:String):

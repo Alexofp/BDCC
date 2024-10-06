@@ -128,6 +128,10 @@ func canDoAction(_auctionAction:AuctionAction) -> Array:
 		if(usedActions.has(_auctionAction.id)):
 			return [false, "You already used this action"]
 	
+	var canUseInfo:Array = _auctionAction.canUse(getChar(), slaveTraits)
+	if(!canUseInfo[0]):
+		return canUseInfo
+	
 	if(_auctionAction.requiresAtLeastOneTraitForSlave()):
 		var canUseAction:bool = false
 		var traitsToCheck:Dictionary = _auctionAction.getTraits()
