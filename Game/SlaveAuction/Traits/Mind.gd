@@ -5,12 +5,12 @@ func _init():
 		"MindStaff",#
 		"MindInmate",#
 		
-		"SkillSlut",
-		"SkillPet",
-		"SkillSubmissive",
+		"SkillSlut",#
+		"SkillPet",#
+		"SkillSubmissive",#
 		
-		"MindBroken",
-		"MindSubmitted",
+		"MindBroken",#
+		"MindSubmitted",#
 	]
 
 func getTraitType(_id:String):
@@ -65,5 +65,10 @@ func calculateScore(_id:String, _char:BaseCharacter) -> float:
 
 func getBidderChance(_id:String) -> float:
 	if(_id == "MindBroken"):
-		return .getBidderChance(_id) / 5.0
+		return .getBidderChance(_id) / 2.0
 	return .getBidderChance(_id)
+
+func getBidderPositiveChance(_id:String) -> float:
+	if(_id == "MindBroken"):
+		return 40.0
+	return .getBidderPositiveChance(_id)

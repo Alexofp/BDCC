@@ -15,7 +15,7 @@ func generateBidders():
 		for traitID in GlobalRegistry.getAuctionTraits():
 			var trait:AuctionTrait = GlobalRegistry.getAuctionTrait(traitID)
 			if(RNG.chance(trait.getBidderChance(traitID))):
-				if(RNG.chance(70)):
+				if(RNG.chance(trait.getBidderPositiveChance(traitID))):
 					newBidder.likes[traitID] = AuctionBidder.TRAIT_UNDISCOVERED
 				else:
 					newBidder.dislikes[traitID] = AuctionBidder.TRAIT_UNDISCOVERED
