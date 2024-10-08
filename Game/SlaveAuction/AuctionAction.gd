@@ -150,6 +150,9 @@ func canOnlyUseOnce() -> bool:
 func requiresAtLeastOneTraitForSlave() -> bool:
 	return true
 
+func isEmphasizeAction() -> bool:
+	return false
+
 func getNameFromTraits() -> String:
 	var theTraits:Dictionary = getTraits()
 	

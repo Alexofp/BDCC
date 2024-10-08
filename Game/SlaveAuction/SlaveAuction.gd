@@ -230,15 +230,18 @@ func doAction(_auctionAction:AuctionAction):
 			bidder.say(_auctionAction.getNegativeReaction(getChar(), slaveTraits))
 	if(!didPositiveReact && !didNegativeReact && _auctionAction.getActionType() != AuctionActionType.Intro):
 		RNG.pick(bidders).say(RNG.pick([
-			"Your slave is kinda boring.",
+			"Hmm..",
+			"..hm.. anyone has any feedback?",
+			"Hm.. I don't know..",
 		]))
 		
-	for bidderA in getBiddersRandomOrder():
-		var bidder:AuctionBidder = bidderA
-		
-		for traitID in traits:
-			var _ok = bidder.hitTrait(self, traitID)
-		#var _ok2 = bidder.discoverRandomTrait(self)
+	if(!_auctionAction.isEmphasizeAction()):
+		for bidderA in getBiddersRandomOrder():
+			var bidder:AuctionBidder = bidderA
+			
+			for traitID in traits:
+				var _ok = bidder.hitTrait(self, traitID)
+			#var _ok2 = bidder.discoverRandomTrait(self)
 	
 	var hadAnyLearns:bool = false
 	for bidderA in bidders:
