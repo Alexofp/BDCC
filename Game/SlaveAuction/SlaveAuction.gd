@@ -228,7 +228,7 @@ func doAction(_auctionAction:AuctionAction):
 		if(reactResult["hitAnyDislikes"] && reactResult["desireDelta"] < 0.0 && !didNegativeReact):
 			didNegativeReact = true
 			bidder.say(_auctionAction.getNegativeReaction(getChar(), slaveTraits))
-	if(!didPositiveReact && !didNegativeReact && _auctionAction.getActionType() != AuctionActionType.Intro):
+	if(!didPositiveReact && !didNegativeReact && _auctionAction.getActionType() != AuctionActionType.Intro && _auctionAction.getActionType() != AuctionActionType.Ungrouped):
 		RNG.pick(bidders).say(RNG.pick([
 			"Hmm..",
 			"..hm.. anyone has any feedback?",
@@ -421,6 +421,10 @@ func unlockRandomTraitEachBidder():
 	for bidder in bidders:
 		bidder.discoverRandomTrait(self)
 
+func unlockRandomRelevantTraitEachBidder():
+	for bidder in bidders:
+		bidder.discoverRandomRelevantTrait(self)
+
 func unlockRandomTraitOfTypeEachBidder(_traitType):
 	for bidder in bidders:
 		bidder.discoverRandomTraitOfType(self, _traitType)
@@ -430,12 +434,15 @@ func unlockRandomTraitOfTypeEachBidderWithChance(_traitType, _chance:float):
 		if(RNG.chance(_chance)):
 			bidder.discoverRandomTraitOfType(self, _traitType)
 
-func unlockPercentageOfTraitsRandomBidder(howMuch:float):
+func unlockPercentageOfTraitsRandomBidder(howMuch:float, howMuchDesireToAdd:float = 0.0):
 	var theBidder:AuctionBidder = RNG.pick(bidders)
+	theBidder.desire += howMuchDesireToAdd
 	
 	var unlockedPerc:float = theBidder.getPercentageOfDiscoveredTraits()
 	while(unlockedPerc < howMuch):
 		var _ok = theBidder.discoverRandomTrait(self)
+		if(!_ok):
+			return
 		
 		unlockedPerc = theBidder.getPercentageOfDiscoveredTraits()
 

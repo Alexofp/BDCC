@@ -16,7 +16,7 @@ func _init():
 
 func _run():
 	if(state == ""):
-		playAnimation(StageScene.HangingDuo, "idle", {pc=charID})
+		playAnimation(StageScene.HangingDuo, "idle", {pc=charID, npc=slaveAuction.getPresenterID(), bodyState={naked=true, hard=true}})
 		
 		saynn(slaveAuction.getText())
 		
@@ -37,7 +37,7 @@ func _run():
 		for actionA in actions:
 			var action:AuctionAction = actionA
 			var theActionType = action.getActionType()
-			if((theActionType == currentActionType && slaveAuction.getState() == "act") || (slaveAuction.getState() != "act") || theActionType == AuctionActionType.Continue):
+			if((theActionType == currentActionType && slaveAuction.getState() == "act") || (slaveAuction.getState() != "act") || theActionType == AuctionActionType.Continue || (theActionType == AuctionActionType.Ungrouped && currentActionType == AuctionActionType.NoType)):
 				var canDoData:Array = slaveAuction.canDoAction(action)
 				if(canDoData[0]):
 					addButton(action.getButtonName(), action.getButtonDesc(), "doAction", [action])

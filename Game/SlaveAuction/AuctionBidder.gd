@@ -76,6 +76,20 @@ func discoverRandomTrait(_auction) -> bool:
 		return false
 	return discoverTrait(_auction, RNG.pick(possible))
 
+func discoverRandomRelevantTrait(_auction) -> bool:
+	var possible:Array = []
+	var slaveTraits:Dictionary = _auction.slaveTraits
+	
+	for traitID in likes:
+		if(likes[traitID] == TRAIT_UNDISCOVERED && slaveTraits.has(traitID) && slaveTraits[traitID] > 0.0):
+			possible.append(traitID)
+	for traitID in dislikes:
+		if(dislikes[traitID] == TRAIT_UNDISCOVERED && slaveTraits.has(traitID) && slaveTraits[traitID] > 0.0):
+			possible.append(traitID)
+	if(possible.empty()):
+		return false
+	return discoverTrait(_auction, RNG.pick(possible))
+
 func discoverRandomTraitOfType(_auction, _traitType) -> bool:
 	var possible:Array = []
 	for traitID in likes:
@@ -204,6 +218,7 @@ func onBid(_totalBidTimes:int):
 func getBidderInfo() -> Array:
 	var resultAr:Array = []
 	
+	var hasWinningBid:bool = (getAuction().lastBidderIndex == index)
 	var hiddenLikesAmount:int = 0
 	var knownLikes:Array = []
 	var knownDislikes:Array = []
@@ -223,7 +238,7 @@ func getBidderInfo() -> Array:
 			if(theTrait != null):
 				knownDislikes.append("[color=#"+getTraitColor(traitID).to_html(false)+"]"+theTrait.getName(traitID)+"[/color]")
 	
-	resultAr.append(name+". "+ "Desire to bid: " + str(Util.roundF(getFinalDesire()*100.0, 1))+"% "+"Current bid: " + str(currentBid)+" credits")
+	resultAr.append(name+". "+ "Desire to bid: " + str(Util.roundF(getFinalDesire()*100.0, 1))+"% "+"Current bid: " + ("[color=#FFD677][b]" if hasWinningBid else "") + str(currentBid)+" credits"+("[/b][/color]" if hasWinningBid else ""))
 	if(likes.empty()):
 		resultAr.append("- Prefers: Nothing")
 	else:

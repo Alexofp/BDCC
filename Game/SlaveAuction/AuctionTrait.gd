@@ -13,10 +13,10 @@ func calculateScore(_id:String, _char:BaseCharacter) -> float:
 	return 0.0
 
 func getBidderChance(_id:String) -> float:
-	return 65.0#33.34#100.0#
+	return 50.0#65.0#33.34#100.0#
 
 func getBidderPositiveChance(_id:String) -> float:
-	return 70.0
+	return 65.0
 
 func calculateFetishScore(_char:BaseCharacter, _fetishes:Dictionary, _difficultyScale:float = 1.0):
 	var theScore:float = _char.fetishHolder.scoreFetish(_fetishes)

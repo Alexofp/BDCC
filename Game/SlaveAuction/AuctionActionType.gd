@@ -10,4 +10,5 @@ enum {
 	Emphasize,
 	Continue,
 	Intro,
+	Ungrouped,
 }
