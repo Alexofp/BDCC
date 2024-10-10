@@ -6,18 +6,17 @@ const TRAIT_DISCOVERED = 1
 const TRAIT_HIT = 2
 
 var index:int = 0
-var name:String = ""
-var bidderID:String = ""
+var name:String = "" # no save
+var bidderID:String = "" # no save
 var desire:float = 0.0
-var instantDesire:float = 0.0
 var likes:Dictionary = {}
 var dislikes:Dictionary = {}
 var currentBid:int = 0
 
 var auctionRef:WeakRef
 
-var discoveredLikes:Array = []
-var discoveredDislikes:Array = []
+var discoveredLikes:Array = [] # no save
+var discoveredDislikes:Array = [] # no save
 
 func setAuction(theAuction):
 	auctionRef = weakref(theAuction)
@@ -28,10 +27,10 @@ func getAuction():
 	return auctionRef.get_ref()
 
 func getFinalDesire() -> float:
-	return desire + instantDesire
+	return desire
 
 func onNewRound():
-	instantDesire = 0.0
+	pass
 
 func getPercentageOfDiscoveredTraits() -> float:
 	var totalTraits:int = likes.size() + dislikes.size()
@@ -134,7 +133,6 @@ func hitTrait(_auction, _traitID:String) -> bool:
 func onAction(_auction, _action:AuctionAction, _result:Dictionary):
 	var traits:Dictionary = _result["traits"]
 	var passiveDesire:float = _result["desire"]
-	#var passiveInstantDesire:float = _result["instantDesire"]
 
 	var hitAnyDislikes:bool = false
 	var hitAnyLikes:bool = false
@@ -147,16 +145,13 @@ func onAction(_auction, _action:AuctionAction, _result:Dictionary):
 		if(likes.has(traitID)):
 			desireDelta += 1.0 * mult
 			#desire += 0.5 * mult
-			#instantDesire += 0.5 * mult
 			hitAnyLikes = true
 		if(dislikes.has(traitID)):
 			desireDelta -= 0.5 * mult
-			#instantDesire -= 0.5 * mult
 			hitAnyDislikes = true
 	
 	if(!hitAnyDislikes && !hitAnyLikes):
 		desireDelta += passiveDesire
-		#instantDesire += passiveInstantDesire
 	
 	desire += desireDelta
 	return {
@@ -291,3 +286,30 @@ func getOutbidReaction():
 			possible.append_array(theTraitObj.getBidderOutbidReactions(traitID, theChar))
 	
 	return RNG.pick(possible)
+
+func saveData():
+	return {
+		index = index,
+		desire = desire,
+		likes = likes,
+		dislikes = dislikes,
+		currentBid = currentBid,
+	}
+
+func loadData(_data):
+	index = SAVE.loadVar(_data, "index", 0)
+	name = "Bidder "+str(index + 1)
+	bidderID = "bidder"+str(index + 1)
+	desire = SAVE.loadVar(_data, "desire", 0.0)
+	var theLikes = SAVE.loadVar(_data, "likes", {})
+	var theDislikes = SAVE.loadVar(_data, "dislikes", {})
+	currentBid = SAVE.loadVar(_data, "currentBid", 0)
+	
+	likes = {}
+	dislikes = {}
+	for traitID in theLikes:
+		if(GlobalRegistry.getAuctionTrait(traitID) != null):
+			likes[traitID] = theLikes[traitID]
+	for traitID in theDislikes:
+		if(GlobalRegistry.getAuctionTrait(traitID) != null):
+			dislikes[traitID] = theDislikes[traitID]

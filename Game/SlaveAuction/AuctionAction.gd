@@ -31,7 +31,6 @@ func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 		slaveReaction = getSlaveReaction(_char, _auction.getSlaveReactionType()),
 		traits = getTraits(),
 		desire = getPassiveDesireGain(),
-		instantDesire = getPassiveInstantDesireGain(),
 	}
 
 func might() -> bool:
@@ -137,9 +136,6 @@ func getTraits() -> Dictionary:
 
 func getPassiveDesireGain() -> float:
 	return 0.2
-
-func getPassiveInstantDesireGain() -> float:
-	return 0.0
 
 func canUse(_char:BaseCharacter, _slaveTraits:Dictionary) -> Array:
 	return [true]

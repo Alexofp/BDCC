@@ -13,6 +13,7 @@ func getButtonDesc() -> String:
 	return "Start the auction while acting normally.\n\nThis action will reveal 3 random preferences of each bidder."
 
 func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
+	saynn("The curtains open, revealing {presenter.name}, who is standing on a little raised platform.")
 	
 	sayPresenter("Good evening, ladies and gentlemen. Welcome to Blacktail Market! Tonight, I present to you a unique and rare offering.")
 	

@@ -5,11 +5,11 @@ var charID:String = ""
 var currentActionType = AuctionActionType.NoType
 
 func _initScene(_args = []):
-	charID = RNG.pick(GM.main.dynamicCharacters)#_args[0]
+	charID = _args[0] if _args.size() > 0 else RNG.pick(GM.main.dynamicCharacters)
 	slaveAuction.setCharID(charID)
 	addCharacter(charID)
 	
-	slaveAuction.start()
+	slaveAuction.start(_args[1] if _args.size() > 1 else {})
 
 func _init():
 	sceneID = "SlaveAuctionScene"
@@ -20,7 +20,8 @@ func _run():
 		
 		saynn(slaveAuction.getText())
 		
-		addButtonAt(14, "End", "Enough spying", "endthescene")
+		if(false):
+			addButtonAt(14, "End", "REMOVE ME IN RELEASE", "endthescene")
 		
 		if(slaveAuction.getState() == "act"):
 			if(currentActionType != AuctionActionType.NoType):
@@ -57,7 +58,7 @@ func _react(_action: String, _args):
 		currentActionType = AuctionActionType.NoType
 		slaveAuction.doAction(_args[0])
 		if(slaveAuction.hasEnded()):
-			endScene() # Result here
+			endScene([slaveAuction.getAuctionResult()])
 		return
 	if(_action == "setActionType"):
 		currentActionType = _args[0]
@@ -77,6 +78,8 @@ func saveData():
 	var data = .saveData()
 	
 	data["charID"] = charID
+	data["currentActionType"] = currentActionType
+	data["slaveAuction"] = slaveAuction.saveData()
 
 	return data
 	
@@ -84,6 +87,10 @@ func loadData(data):
 	.loadData(data)
 	
 	charID = SAVE.loadVar(data, "charID", "")
+	currentActionType = SAVE.loadVar(data, "currentActionType", AuctionActionType.NoType)
+	
+	slaveAuction = SlaveAuction.new()
+	slaveAuction.loadData(SAVE.loadVar(data, "slaveAuction", {}))
 
 func supportsSexEngine():
 	return true

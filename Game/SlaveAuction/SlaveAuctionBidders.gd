@@ -37,3 +37,19 @@ func grabBidders() -> Array:
 	return theResult
 
 # Save load here
+func saveData():
+	var biddersData:Array = []
+	for bidder in bidders:
+		biddersData.append(bidder.saveData())
+	return {
+		bidders = biddersData,
+	}
+
+func loadData(_data):
+	bidders = []
+	
+	var biddersData = SAVE.loadVar(_data, "bidders", [])
+	for bidderInfo in biddersData:
+		var newBidder:AuctionBidder = AuctionBidder.new()
+		newBidder.loadData(bidderInfo)
+		bidders.append(newBidder)

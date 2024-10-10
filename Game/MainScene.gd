@@ -451,6 +451,7 @@ func saveData():
 	data["datapackCharacters"] = datapackCharacters
 	data["interactionSystem"] = IS.saveData()
 	data["relationshipSystem"] = RS.saveData()
+	data["auctionBidders"] = SAB.saveData()
 	
 	data["scenes"] = []
 	for scene in sceneStack:
@@ -484,6 +485,7 @@ func loadData(data):
 	datapackCharacters = SAVE.loadVar(data, "datapackCharacters", {})
 	IS.loadData(SAVE.loadVar(data, "interactionSystem", {}))
 	RS.loadData(SAVE.loadVar(data, "relationshipSystem", {}))
+	SAB.loadData(SAVE.loadVar(data, "auctionBidders", {}))
 	
 	var scenes = SAVE.loadVar(data, "scenes", [])
 	

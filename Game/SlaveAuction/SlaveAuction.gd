@@ -11,8 +11,11 @@ var state:String = "start" # act react start ended
 var canPresent:bool = true
 var bidLastChances:int = 0
 
+var startingBid:int = 10
+var bidIncrease:int = 10
+
 var actionText:String = ""
-var extraActionTexts:Array = []
+var extraActionTexts:Array = [] # no save
 
 var slaveTraits:Dictionary = {}
 var usedTraits:Dictionary = {}
@@ -33,20 +36,24 @@ func getChar() -> BaseCharacter:
 func getCharacter() -> BaseCharacter:
 	return GlobalRegistry.getCharacter(charID)
 
-func start():
+func start(_args:Dictionary = {}):
 	calculateSlaveTraits()
 	generateBidders()
+	startingBid = _args["startingBid"] if (_args.has("startingBid")) else calculateStartingBid(getChar())
+	bidIncrease = _args["bidIncrease"] if (_args.has("bidIncrease")) else calculateBidIncrease(getChar())
+	currentBid = startingBid
 
-func calculateSlaveTraits():
-	slaveTraits.clear()
-	
-	var theChar:BaseCharacter = getChar()
-	
+static func calculateSlaveTraitsStatic(theChar:BaseCharacter) -> Dictionary:
+	var theTraits:Dictionary = {}
 	for traitID in GlobalRegistry.getAuctionTraits():
 		var trait:AuctionTrait = GlobalRegistry.getAuctionTrait(traitID)
 		
 		var score:float = trait.calculateScore(traitID, theChar)
-		slaveTraits[traitID] = score
+		theTraits[traitID] = score
+	return theTraits
+
+func calculateSlaveTraits():
+	slaveTraits = calculateSlaveTraitsStatic(getChar())
 
 func generateBidders():
 	bidders = GM.main.SAB.grabBidders()
@@ -59,29 +66,41 @@ func getText() -> String:
 	if(state == "react"):
 		return actionText
 	
+	var isStart:bool = (state == "start")
 	var theTexts:Array = []
 	var bettingBeginsRound:int = getSoftEndRound()
-	theTexts.append("ROUND = "+str(roundNumber)+((". SOFT END = "+str(bettingBeginsRound)) if roundNumber < bettingBeginsRound else ". SOFT END REACHED. AUCTION WILL END IF LESS THAN 2 BIDS."))
-	theTexts.append("STATE = "+str(state))
 	
 	var slavesTraitsTexts:Array = []
 	for traitID in slaveTraits:
 		var score:float = slaveTraits[traitID]
 		var trait:AuctionTrait = GlobalRegistry.getAuctionTrait(traitID)
 		
-		#theTexts.append(trait.getName(traitID)+": "+str(score))
 		if(score > 0.0):
 			var theName:String = trait.getName(traitID)
 			if(usedTraits.has(traitID)):
 				theName = "[color=#FF63E7]"+theName+"[/color]"
 			
-			slavesTraitsTexts.append(theName+" ("+str(score)+")")
-	theTexts.append("{slave.name}'s traits: "+Util.join(slavesTraitsTexts, ", "))
-	
-	theTexts.append("")
-	theTexts.append(getBidderInfo())
-	theTexts.append("")
-	theTexts.append("How do you want to present your slave?")
+			#slavesTraitsTexts.append(theName+" ("+str(score)+")")
+			slavesTraitsTexts.append(theName)
+		
+	if(isStart):
+		theTexts.append("The auction is about to start. Your job is to sell your slave for as many credits as possible by making bidders outbid each other.")
+		theTexts.append("Bidders have different preferences that you can learn while presenting your slave. Try to avoid highlighting the traits that the bidders dislike and focus on the traits that they do like.")
+		theTexts.append("The auction will end in 3 rounds (soft end) unless you manage to keep the bid war going. If you get at least 2 new bids after an action, you get an ability to do another action.")
+		theTexts.append("")
+		theTexts.append("Starting Bid: "+str(getStartingBid())+" credits. Minimum Bid Increment: "+str(getBidIncrease())+" credits.")
+		theTexts.append("{slave.name}'s traits: "+Util.join(slavesTraitsTexts, ", "))
+		theTexts.append("")
+		theTexts.append(getBidderInfo())
+		theTexts.append("")
+		theTexts.append("How do you want to introduce your slave?")
+	else:
+		theTexts.append("Round №"+str(roundNumber)+((". Soft end at round "+str(bettingBeginsRound)+".") if roundNumber < bettingBeginsRound else ". Soft end is reached. Auction will end if you get less than 2 new bids."))
+		theTexts.append("{slave.name}'s traits: "+Util.join(slavesTraitsTexts, ", "))
+		theTexts.append("")
+		theTexts.append(getBidderInfo())
+		theTexts.append("")
+		theTexts.append("How do you want to present your slave?")
 	
 	return Util.join(theTexts, "\n")
 
@@ -170,13 +189,31 @@ func doAction(_auctionAction:AuctionAction):
 		if(!canPresent):
 			bidLastChances += 1
 			if(bidLastChances == 1):
-				saynnPresenter(str(currentBid)+" credits. Going once.")
+				if(hasAnyBids()):
+					saynnPresenter(str(currentBid)+" credits. Going once."+getGoingOnceText())
+				else:
+					saynnPresenter("No bids. Going once."+getGoingOnceTextNoBids())
 			elif(bidLastChances == 2):
-				saynnPresenter(str(currentBid)+" credits. Going twice. C'mon, it's your last chance to bid!")
+				if(hasAnyBids()):
+					saynnPresenter(str(currentBid)+" credits. Going twice."+getGoingTwiceText())
+				else:
+					saynnPresenter("No bids. Going twice."+getGoingTwiceTextNoBids())
 			elif(bidLastChances == 3):
 				state = "ended"
 				
-				saynnPresenter("SOLD!")
+				if(hasAnyBids()):
+					saynnPresenter("SOLD!")
+					
+					var soldBidder:AuctionBidder = bidders[lastBidderIndex]
+					
+					sayn("The slave was sold to "+soldBidder.name+" for "+str(currentBid)+" credits!")
+					sayn("Total amount of bids: "+str(totalBidTimes))
+					saynn("Round amount: "+str(roundNumber))
+				else:
+					saynnPresenter("That's it.. Time is up.")
+					
+					saynn("The slave wasn't sold to anyone..")
+				
 				actionText = Util.join(extraActionTexts, "")
 				return
 			
@@ -202,8 +239,6 @@ func doAction(_auctionAction:AuctionAction):
 		theResult["traits"] = _auctionAction.getTraits()
 	if(!theResult.has("desire")):
 		theResult["desire"] = _auctionAction.getPassiveDesireGain()
-	if(!theResult.has("instantDesire")):
-		theResult["instantDesire"] = _auctionAction.getPassiveInstantDesireGain()
 	if(!theResult.has("slaveReaction")):
 		theResult["slaveReaction"] = _auctionAction.getSlaveReaction(getChar(), getSlaveReactionType())
 	
@@ -349,12 +384,13 @@ func doRoundOfBidding() -> int:
 			var chanceToBid:float = bidder.calculateChanceToBid()
 			
 			if(RNG.chance(chanceToBid / (_i+1))):
-				var raiseChance:float = (bidder.desire - 1.0)*50.0
+				var raiseChance:float = (bidder.desire - 1.5)*50.0
 				var willRaise:bool = RNG.chance(raiseChance) && (totalBidTimes != 0)
 				
-				currentBid += 10
+				if(totalBidTimes != 0):
+					currentBid += getBidIncrease()
 				if(willRaise):
-					currentBid += RNG.randi_range(2, 5) * 10
+					currentBid += RNG.randi_range(2, 5) * getBidIncrease()
 					for otherBidder in bidders:
 						if(otherBidder == bidder):
 							continue
@@ -608,3 +644,138 @@ func getSlaveBiddingReactionDialogue() -> String:
 			'Bid all you want, I’ll escape the moment you turn your back!',
 		])
 	return ""
+
+func calculateStartingBid(_char:BaseCharacter) -> int:
+	return 50
+
+func calculateBidIncrease(_char:BaseCharacter) -> int:
+	return 10
+
+func getStartingBid() -> int:
+	return startingBid
+
+func getBidIncrease() -> int:
+	return bidIncrease
+
+func hasAnyBids() -> bool:
+	return (lastBidderIndex >= 0)
+
+func getAuctionResult() -> Dictionary:
+	return {
+		slaveID = charID,
+		wasSold = (lastBidderIndex >= 0),
+		winningBid = (currentBid if (currentBid >= 0) else 0),
+		totalBidTimes = totalBidTimes,
+		bidderIndex = lastBidderIndex,
+	}
+
+func getGoingOnceText() -> String:
+	if(RNG.chance(50)):
+		return ""
+	return " "+RNG.pick([
+		"Come on, don’t let this rare chance slip by!",
+		"This is your moment to steal the prize!",
+		"Any more offers maybe?",
+		"Don’t hesitate, or you’ll regret it!",
+		"Are we really going to stop here?",
+		"This is your last chance to outbid the competition!",
+		"You won’t find another slave like {slave.him}, I assure you.",
+		"A slave of this caliber deserves a little more enthusiasm!",
+		"Anyone willing to go higher?",
+		"Any more bids?",
+		"More bids?",
+		"Will you give me more?",
+		"Can you give me more?",
+	])
+
+func getGoingTwiceText() -> String:
+	return " "+RNG.pick([
+		"C'mon, it's your last chance to bid!",
+		"Last chance! Don’t say I didn’t warn you!",
+		"Speak now, or lose this fucktoy forever!",
+		"I can feel someone’s hesitation - make the call now!",
+		"Anyone daring enough?",
+		"This is your final moment to claim this gem!",
+		"Surely you won’t let them walk away this easily?",
+		"The clock’s ticking, any last-minute offers?",
+		"Is that truly your best? Show me a final bid!",
+		"Will you make it count, or let it go?"
+	])
+
+func getGoingOnceTextNoBids() -> String:
+	return " "+RNG.pick([
+		"This is such an opportunity, c'mon!",
+		"Not a single bid yet? You’re missing out!",
+		"This slave is worth far more than silence - who’ll start us off?",
+		"Don’t let this end without a single offer!",
+		"Are you really going to pass on such a fine specimen?",
+		"This is your moment to start the bidding - don’t hold back!",
+		"Surely, someone sees the potential here?",
+		"First bid wins the advantage - who’s going to take it?",
+		"Don’t be shy. A first bid can make all the difference!",
+		"I’m surprised.. no bids for such a rare find?",
+	])
+
+func getGoingTwiceTextNoBids() -> String:
+	return " "+RNG.pick([
+		"This is it! Someone start the bidding or lose this fucktoy for good!",
+		"Last chance! Are you all going to let this one go?",
+		"The auction’s about to end, who will place the first bid?",
+		"I can’t believe there’s no interest - prove me wrong!",
+		"This rare opportunity will slip away - don’t be the one to regret it!",
+		"I can feel hesitation in the room - just one bid to change everything!",
+		"This slave deserves better than silence - who will start the bidding?",
+		"Almost gone! You’ll kick yourselves for missing out!",
+		"No bids yet? Make one now before the auction ends!",
+	])
+
+func saveData():
+	var biddersData:Array = []
+	for bidder in bidders:
+		biddersData.append(bidder.saveData())
+	
+	return {
+		charID = charID,
+		roundNumber = roundNumber,
+		totalBidTimes = totalBidTimes,
+		currentBid = currentBid,
+		lastBidderIndex = lastBidderIndex,
+		state = state,
+		canPresent = canPresent,
+		bidLastChances = bidLastChances,
+		startingBid = startingBid,
+		bidIncrease = bidIncrease,
+		actionText = actionText,
+		slaveTraits = slaveTraits,
+		usedTraits = usedTraits,
+		usedActions = usedActions,
+		slaveReactionType = slaveReactionType,
+		shouldEnd = shouldEnd,
+		bidders = biddersData,
+	}
+
+func loadData(_data):
+	charID = SAVE.loadVar(_data, "charID", "rahi")
+	roundNumber = SAVE.loadVar(_data, "roundNumber", 0)
+	totalBidTimes = SAVE.loadVar(_data, "totalBidTimes", 0)
+	currentBid = SAVE.loadVar(_data, "currentBid", 0)
+	lastBidderIndex = SAVE.loadVar(_data, "lastBidderIndex", -1)
+	state = SAVE.loadVar(_data, "state", "start")
+	canPresent = SAVE.loadVar(_data, "canPresent", true)
+	bidLastChances = SAVE.loadVar(_data, "bidLastChances", 0)
+	startingBid = SAVE.loadVar(_data, "startingBid", 50)
+	bidIncrease = SAVE.loadVar(_data, "bidIncrease", 10)
+	actionText = SAVE.loadVar(_data, "actionText", "")
+	slaveTraits = SAVE.loadVar(_data, "slaveTraits", {})
+	usedTraits = SAVE.loadVar(_data, "usedTraits", {})
+	usedActions = SAVE.loadVar(_data, "usedActions", {})
+	slaveReactionType = SAVE.loadVar(_data, "slaveReactionType", AuctionSlaveReaction.Confused)
+	shouldEnd = SAVE.loadVar(_data, "shouldEnd", false)
+	
+	bidders = []
+	var biddersData = SAVE.loadVar(_data, "bidders", [])
+	for bidderInfo in biddersData:
+		var newBidder:AuctionBidder = AuctionBidder.new()
+		newBidder.loadData(bidderInfo)
+		newBidder.setAuction(self)
+		bidders.append(newBidder)
