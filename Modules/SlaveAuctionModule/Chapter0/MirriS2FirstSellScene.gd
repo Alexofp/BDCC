@@ -1,0 +1,251 @@
+extends SceneBase
+
+var slaveID = ""
+
+func _init():
+	sceneID = "MirriS2FirstSellScene"
+
+func resolveCustomCharacterName(_charID):
+	if(_charID == "slave"):
+		return slaveID
+
+func _run():
+	if(state == ""):
+		playAnimation(StageScene.Solo, "stand")
+		saynn("You stand in your cell and think about it.. maybe that crazy catgirl.. maybe there is an opportunity here.. of sorts. Yes.")
+
+		saynn("Which of your slaves do you want to sell? Keep in mind that you will never see them again. Any items that they have will be lost forever too.")
+
+		addButton("Cancel", "You changed your mind", "endthescene")
+		addSlaveButtons()
+		addButton("Nope", "You shouldn't see this ever", "pick_slave")
+	if(state == "confirm_pick_slave"):
+		addCharacter(slaveID)
+		playAnimation(StageScene.Duo, "stand", {npc=slaveID, npcBodyState={chains=[["normal", "neck", "scene", "floor"]]} })
+		saynn("Is {slave.name} the slave that you want to sell? Keep in mind that you will never see them again. Any items that they have will be lost forever too.")
+
+		addButton("Confirm", "Sell this slave!", "do_confirm_pick")
+		addButton("Cancel", "You changed your mind", "do_cancel_pick")
+	if(state == "do_confirm_pick"):
+		playAnimation(StageScene.Duo, "stand", {npc=slaveID, npcBodyState={leashedBy="pc"}})
+		saynn("You approach one of your slaves and clip a leash to {slave.his} collar. {slave.name} gives you a slightly confused look, clearly feeling that something is off.")
+
+		saynn("[say=pc]Well. What now?[/say]")
+
+		saynn("[say=mirri]Made your choice, finally?[/say]")
+
+		saynn("Your slave jumps from the sudden new voice.")
+
+		addButton("Continue", "See what happens next", "mirri_appears")
+	if(state == "mirri_appears"):
+		addCharacter("mirri")
+		playAnimation(StageScene.Duo, "stand", {npc="mirri"})
+		saynn("Mirri suddenly approaches you two, scaring your slave and giving you another feeling of deja vu.")
+
+		saynn("[say=mirri]You sure took your time.[/say]")
+
+		saynn("[say=pc]You sure know how to appear out of nowhere.[/say]")
+
+		saynn("She shrugs and leans against one of the walls, slightly tilting her head while watching you and your slave, a slightly bored expression contrasts well with that of pure confusion.")
+
+		saynn("[say=mirri]I'm always right on time. Unlike someone else.[/say]")
+
+		saynn("[say=pc]Oh yeah, that last.. show.. was so timely.[/say]")
+
+		saynn("[say=mirri]Pff, don't make me smash your beautiful jaw into the concrete.[/say]")
+
+		saynn("Her little sly smile makes you think that she might be serious.")
+
+		saynn("[say=mirri]You get paid when I get paid so you're coming with me. You're ready?[/say]")
+
+		saynn("You can't help but to notice that she is still flashing her striped panties to everyone around.")
+
+		saynn("[say=pc]I guess. You still haven't gotten pants?[/say]")
+
+		saynn("Mirri rolls her eyes.")
+
+		saynn("[say=mirri]Oh, come the fuck on.[/say]")
+
+		saynn("She pulls up her armored wrist piece and presses something. Moments later, a small blue rift begins to open, right in the middle of your cell. Your slave's eyes open wide.")
+
+		saynn("[say=pc]Someone will see it one day.[/say]")
+
+		saynn("[say=mirri]I'm just testing a prototype that your engineers made~. C'mon, the show is about to start.[/say]")
+
+		saynn("Someone is really bad at time management. Mirri winks at you.. before shoving you and your slave into the blue portal.")
+
+		addButton("Continue", "See what happens next", "after_tp")
+	if(state == "after_tp"):
+		playAnimation(StageScene.Duo, "stand", {pc="mirri", npc=slaveID, npcBodyState={leashedBy="mirri"}})
+		aimCameraAndSetLocName("market_intro")
+		GM.pc.setLocation("market_intro")
+		saynn("You're back at the familiar.. place. But this time you can take a better look around.")
+
+		saynn("A dimly lit room welcomes you. So dimly that your eyes struggle to adjust after the harsh prison lighting. It's so weird to not feel a cold touch of concrete under your {pc.feet}.. the floor seems to be made out of some kind of dark wood.")
+
+		saynn("Mirri grabs the leash. Your slave looks around, getting more and more concerned by the second.")
+
+		saynn("[say=mirri]Don't worry, the less resistance you show, the less times I will have to shoot your ankles.[/say]")
+
+		saynn("Catgirl pulls the slave out the room and into some corridor while you stay and sneak a peek at the furniture.")
+
+		saynn("A bed, a pretty soft looking one. A sofa, a little coffee table, a chair and a desk with a laptop. There is also a wooden wardrobe in the corner.. but rather than having clothes.. you notice a bunch of gags, crops and cuffs, all neatly presented in it. Everything is neat, in fact, this is probably the cleanest room you have seen in your life.. prison life.")
+
+		saynn("Behind you.. is a machine of sorts, currently spooling down.. you can only guess that this is what brought you here.")
+
+		saynn("[say=mirri]Hey, don't make me sell you too, fucking sloth.[/say]")
+
+		saynn("After her words.. you hear sounds of a battle coming from the same direction. Looks like your slave isn't happy about {slave.his} new future. Makes sense, all things considered.")
+
+		addButton("Follow", "Follow the sounds", "in_market")
+	if(state == "in_market"):
+		playAnimation(StageScene.HangingDuo, "idle", {npc="pc", pc=slaveID, bodyState={naked=true}})
+		aimCameraAndSetLocName("market_market")
+		saynn("You step out into the corridor through a reinforced door that automatically closes behind you. Most materials have the same dark color.. but at least they didn't cheap out on the lighting here.")
+
+		saynn("Not a single window anywhere.. The walls are covered with paintings of faces that you don't recognize. Seeing the dates.. you doubt that anyone does.")
+
+		saynn("You follow a few smaller rooms and corridors until you join Mirri in a.. preparation room of sorts, a big hall with a very high ceiling. Huh, one of the walls is just a big curtain.. and the raised platform in the corner. Yes, it's that room.")
+
+		saynn("[say=mirri]Stupid fucking bitch, how are you still resisting. Grrr. Fuck me-e-e, what are they putting into that shitty prison food.[/say]")
+
+		saynn("The catgirl is battling your slave's body, pulling on the chains that are pulling on {slave.name}'s wrists, forcing {slave.him} to raise them high.")
+
+		saynn("You realize that your slave is actually unconscious..")
+
+		saynn("[say=pc]What did you do already?[/say]")
+
+		saynn("[say=mirri]Shut up and help me get this whore to stand.[/say]")
+
+		saynn("Mirri is panting so you help her, tugging hard on the chains until the slave's {slave.toes} are the only things that are touching the ground.")
+
+		saynn("[say=mirri]Splendid. Phew. I almost feel like you weren't useless, wormy.[/say]")
+
+		saynn("[say=pc]Give me a break.[/say]")
+
+		saynn("[say=mirri]Your break is that you're not in {slave.his} place, about to be sold. Yo. The auction is starting, make yourself transparent.[/say]")
+
+		saynn("What a bitch, huh. But she is right, you already hear the chatter behind the curtains, people are taking their seats.")
+
+		saynn("You just position yourself in one of the corners of the stage, somewhere where the projectors will never reach.")
+
+		saynn("Mirri flys up the little raised platform and closes her eyes, her fists clenched.")
+
+		saynn("[say=mirri]Alright.. just like last time. Yeah, yeah, yeah, zero worries. Alright. Let's fucking go![/say]")
+
+		addButton("Watch", "See what happens..", "watch_first_auction")
+	if(state == "watch_first_auction"):
+		playAnimation(StageScene.HangingDuo, "idle", {npc="mirri", pc=slaveID, bodyState={naked=true}})
+		saynn("The heavy black curtains part with a faint swish. The stage projector flickers on, casting a warm beam of light over Mirri's girly figure as she spreads her arms wide.")
+
+		saynn("[say=mirri]WELCOME! To the Blacktail Market![/say]")
+
+		saynn("Mirri's voice booms across the room, her usual confidence on full display.")
+
+		saynn("[say=mirri]Tonight, I present to you a fresh AlphaCorp catch. One that.. resisted fiercely, showing the kind of spirit that.. certain owners just love to break![/say]")
+
+		saynn("The main projector turns off, illuminating the naked slave.. who is still unconscious, hanging by the chains. You look into the darkness and notice bidders' confused stares.")
+
+		saynn("[sayOther]Are they.. alive?[/sayOther]")
+
+		saynn("[say=mirri]Of course! Trust me, it's a very rare find. Strong, resilient, but.. adaptable. Blacktail Market sells only the best of the best.[/say]")
+
+		saynn("There is an edge to her voice, a slight tension in her motions.")
+
+		saynn("[say=mirri]Look at.. those {slave.breasts}. Aren't they nice? Just check those attractive curves out.[/say]")
+
+		saynn("Her words feel forced.. and so they find little reaction. Huh. Her gaze is flickering to the crowd, her feline eyes flashing brightly.")
+
+		saynn("[say=mirri]That {slave.masc} figure, those {slave.thick} hips.. I'm telling you, there is nothing quite like this one. The one who buys {slave.him} will be so-so lucky. So, place a bid while the price is still low![/say]")
+
+		saynn("Mirri is trying to keep control.. but you can tell her grip is slipping a bit. No wonder, she has to present and look presentable at the same time. The bidders begin to murmur between each other.")
+
+		saynn("[sayOther]{slave.He} looks half-dead. You expect us to pay for that?[/sayOther]")
+
+		saynn("[sayOther]Yeah, is the slave broken already? What's the point of buying a corpse?[/sayOther]")
+
+		saynn("Mirri shoots a sharp glare into the darkness, clearly irked by all the interruptions. But then her gaze meets that of a different caliber. Oh yeah, that wolf is sitting in the audience too, you can see him.. And Mirri sees him too..")
+
+		saynn("[say=mirri]Listen! This one is fresh, pristine. Perfect for those who enjoy molding their property into any state they want. This product will fit any owner![/say]")
+
+		saynn("[sayOther]How do we know it isn't damaged goods? I see signs of abuse even from here. Did you check for scars, injuries?[/sayOther]")
+
+		saynn("The questions pile on, each one making Mirri's irritation more obvious.")
+
+		saynn("[say=mirri]It's not! Do you know who I am?![/say]")
+
+		saynn("Her tone sharpens.. but it's clear that the buyers are unconvinced. More murmurs rise, some chuckles even. You notice the wolf standing up.. and just leaving. That makes Mirri's tail wag a lot.")
+
+		saynn("[sayOther]I do know. And to me, it looks like you're trying to sell us something you couldn't handle yourself.[/sayOther]")
+
+		saynn("The answer hits hard. Mirri stammers for a moment, her eyes darting to the unconscious slave.. then back to the bidders. The air feels thick with tension as the crowd waits for the response.")
+
+		saynn("[say=mirri]I.. uh..[/say]")
+
+		saynn("Her clenched fists are shaking. Is that growling you hear?")
+
+		saynn("[sayOther]This is a waste of time. Let's go.[/sayOther]")
+
+		saynn("[say=mirri]Yeah, fine, whatever.. The auction is over, go away now.. fuckers..[/say]")
+
+		saynn("Her last word was said with just the intonation.. incredible.")
+
+		saynn("The bidders are leaving. You counted.. exactly zero bids. Huh.")
+
+func addSlaveButtons():
+	var slaves = GM.main.getDynamicCharacterIDsFromPool(CharacterPool.Slaves)
+	for charID in slaves:
+		var character:DynamicCharacter = getCharacter(charID)
+		var npcSlavery:NpcSlave = character.getNpcSlavery()
+		if(npcSlavery == null):
+			continue
+		if(npcSlavery.isDoingActivity()):
+			addDisabledButton(character.getName(), "This slave is currently busy")
+			continue
+		addButton(character.getName(), character.getSmallDescription(), "pick_slave", [charID])
+
+
+func _react(_action: String, _args):
+	if(_action == "endthescene"):
+		endScene()
+		return
+
+	if(_action == "pick_slave"):
+		slaveID = _args[0]
+		setState("confirm_pick_slave")
+		return
+
+	if(_action == "do_confirm_pick"):
+		processTime(5*60)
+
+	if(_action == "do_cancel_pick"):
+		removeCharacter(slaveID)
+		slaveID = ""
+		setState("")
+		return
+
+	if(_action == "mirri_appears"):
+		processTime(3*60)
+
+	if(_action == "after_tp"):
+		processTime(5*60)
+
+	if(_action == "in_market"):
+		processTime(5*60)
+
+	if(_action == "watch_first_auction"):
+		processTime(10*60)
+
+	setState(_action)
+
+func saveData():
+	var data = .saveData()
+
+	data["slaveID"] = slaveID
+
+	return data
+
+func loadData(data):
+	.loadData(data)
+
+	slaveID = SAVE.loadVar(data, "slaveID", "")
