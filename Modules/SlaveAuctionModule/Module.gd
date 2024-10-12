@@ -32,3 +32,9 @@ func getSlaveStartingBid() -> int:
 
 func getSlaveBidIncrement() -> int:
 	return 10
+
+func getAuctionSettings():
+	return {}
+
+func sellToSlavery(theCharID:String):
+	GM.main.removeDynamicCharacter(theCharID)

@@ -55,6 +55,7 @@ func _react(_action: String, _args):
 		endScene()
 		return
 	if(_action == "doAction"):
+		processTime(60)
 		currentActionType = AuctionActionType.NoType
 		slaveAuction.doAction(_args[0])
 		if(slaveAuction.hasEnded()):
