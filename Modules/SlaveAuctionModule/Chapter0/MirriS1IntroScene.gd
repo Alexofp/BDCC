@@ -382,7 +382,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "pc_tpd")
 	if(state == "pc_tpd"):
-		aimCameraAndSetLocName("market_intro")
+		aimCameraAndSetLocName("market_market")
 		playAnimation(StageScene.Hogtied, "idle")
 		addCharacter("slave_guard")
 		saynn("Mirri drags you off somewhere and soon drops you..")

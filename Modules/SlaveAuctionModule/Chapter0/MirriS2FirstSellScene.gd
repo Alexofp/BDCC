@@ -1,6 +1,7 @@
 extends SceneBase
 
 var slaveID = ""
+var creditsToGive = 0
 
 func _init():
 	sceneID = "MirriS2FirstSellScene"
@@ -18,7 +19,8 @@ func _run():
 
 		addButton("Cancel", "You changed your mind", "endthescene")
 		addSlaveButtons()
-		addButton("Nope", "You shouldn't see this ever", "pick_slave")
+		if(false):
+			addButton("Nope", "You shouldn't see this ever", "pick_slave")
 	if(state == "confirm_pick_slave"):
 		addCharacter(slaveID)
 		playAnimation(StageScene.Duo, "stand", {npc=slaveID, npcBodyState={chains=[["normal", "neck", "scene", "floor"]]} })
@@ -339,6 +341,108 @@ func _run():
 		addButton("Slave auction", "Begin the minigame", "start_auction_minigame")
 	if(state == "after_sold"):
 		playAnimation(StageScene.Duo, "stand", {pc="mirri", npc=slaveID, npcBodyState={naked=true, leashedBy="mirri"}})
+		saynn("You let out a breath you didn't realize you were holding.")
+
+		saynn("Mirri clips a leash to your slave's collar and whispers a few words to {slave.him}.")
+
+		saynn("[say=mirri]I won't be missing you.[/say]")
+
+		saynn("Harsh. But it's probably true for you as well. She pulls the slave off of the stage and then hands {slave.him} to a few faceless attendants that pick up from there, bringing the toy to {slave.his} new happy owner.")
+
+		saynn("You get a few final glimpses of your slave.. ex-slave.. before {slave.he} vanishes from your sight forever..")
+
+		addButton("Continue", "See what happens next", "slave_sold_yay")
+	if(state == "slave_sold_yay"):
+		playAnimation(StageScene.Duo, "stand", {npc="mirri"})
+		saynn("Soon, the auction ends for the day. The curtains begin to close.. the projectors all turn off, putting the room back into its dimly-lit state.")
+
+		saynn("Mirri approaches you, a smile is tugging at her lips.")
+
+		saynn("[say=mirri]You impressed me, {pc.name}~. Keep it up and I might just spare you when it all ends.[/say]")
+
+		saynn("She giggles watching your concerned eyes.")
+
+		saynn("[say=mirri]Relax, I'm just teasing you~. I seriously love what you did here.. I might have came a little when I finally shouted SOLD.[/say]")
+
+		saynn("[say=pc]Listen, I don't think I need to know every detail of..[/say]")
+
+		saynn("Suddenly, she gets into your face, her hand is holding something.. probably a gun, knowing her.")
+
+		saynn("[say=mirri]I'm spilling out my soul to you and you're gonna reject me like that? Such a rude {pc.boy}. Maybe you don't need this too?[/say]")
+
+		saynn("She raises her hand.. and reveals that she is holding a credit chip.")
+
+		saynn("[say=pc]In fact, I do need this.[/say]")
+
+		saynn("The chip lands in your hands with an audible smack.")
+
+		saynn("[say=mirri]Well, here is your cut, big {pc.boy}. 10%, like we agreed.[/say]")
+
+		saynn("[say=pc]I didn't agree to any..[/say]")
+
+		saynn("Her digits cover your lips.. red claws poking your nose. Mirri tilts her head slightly, closing the distance between your faces.. Her blue eyes glow with excitement.")
+
+		saynn("[say=mirri]Shhh-h.. Sometimes words are unnecessary..[/say]")
+
+		saynn("She gets so close you can feel her warm breath on your neck.. before pulling away.")
+
+		saynn("[say=mirri]You did good today, really good. I knew there was something in you since the moment I saw you. You and I, we could do a lot of damage in this business, don't you think?[/say]")
+
+		saynn("Her clawed digits slide down your chin.. and follow the curves of your shoulder.")
+
+		saynn("[say=pc]Just don't do anything crazy.[/say]")
+
+		saynn("[say=mirri]Hah. Fuck you. I will do anything I want~. Now..[/say]")
+
+		saynn("She grabs your arm and pulls you off stage.")
+
+		addButton("Follow", "See where she brings you", "follow_back")
+	if(state == "follow_back"):
+		aimCameraAndSetLocName("market_intro")
+		GM.pc.setLocation("market_intro")
+		saynn("Mirri brings you into the other room with all the furniture.. and that teleporter machine.")
+
+		saynn("[say=mirri]Hold on, last thing.[/say]")
+
+		saynn("She rummages through her desk.. until she finds what she is looking for.")
+
+		saynn("Oh fuck, is that another gun.. this one looks way more.. hi-tech. You see the sparks in her feline eyes as you take a step back.")
+
+		saynn("[say=pc]Hey, hey![/say]")
+
+		saynn("Mirri is swaying her hips slightly, her legs slightly bent, her tail wagging..")
+
+		saynn("You take another step back..")
+
+		saynn("Pounce!")
+
+		saynn("The armored catgirl jumps on you and presses the device against your neck before pulling the trigger.. Thunk.. You feel it injecting something under your skin.")
+
+		saynn("[say=pc]Ow. What the fuck was that?[/say]")
+
+		saynn("[say=mirri]Subdermal a-organic bluespace relay-tag![/say]")
+
+		saynn("You rub your neck.. and don't feel anything apart from a small hole that the injector needle left.")
+
+		saynn("[say=pc]A what?[/say]")
+
+		saynn("[say=mirri]I'm too lazy to teleport you all the time. Press on it and the teleporter will spawn a rift in your cell. Untraceable by all that useless AlphaCorp tech.[/say]")
+
+		saynn("Huh.. looks like she just injected you with a 'order a taxi' button.")
+
+		saynn("[say=pc]Could have told me that earlier. Before you went.. all feral on me.[/say]")
+
+		saynn("[say=mirri]What, can't handle a little pussy cat? Sounds like a 'you' problem![/say]")
+
+		saynn("So this is it, huh. Collared by AlphaCorp and tagged by Syndicate. Great. Just perfect.")
+
+		saynn("[say=mirri]Tell me when you find another good slave to sell off! I'm watching you now, don't disappoint me.[/say]")
+
+		saynn("Her words linger in the air as she steps back, her cunning smile is making you feel weird.")
+
+		saynn("At least you got paid for your trouble. Even if it's not a lot..")
+
+		addButton("Continue", "See what happens next", "endthescene")
 func addSlaveButtons():
 	var slaves = GM.main.getDynamicCharacterIDsFromPool(CharacterPool.Slaves)
 	for charID in slaves:
@@ -393,6 +497,21 @@ func _react(_action: String, _args):
 		runScene("SlaveAuctionScene", [slaveID, getModule("SlaveAuctionModule").getAuctionSettings()], "slave_auction")
 		return
 
+	if(_action == "slave_sold_yay"):
+		processTime(10*60)
+		removeCharacter(slaveID)
+		addExperienceToPlayer(100)
+		
+		GM.pc.addCredits(int(creditsToGive))
+		addMessage("You got "+str(creditsToGive)+" credits!")
+		#GM.main.removeDynamicCharacter(slaveID)
+		getModule("SlaveAuctionModule").sellToSlavery(slaveID)
+
+	if(_action == "follow_back"):
+		processTime(3*60)
+		addMessage("Task updated")
+		addMessage("You can now teleport between the Blacktail Market and your prison cell")
+
 	setState(_action)
 
 func _react_scene_end(_tag, _result):
@@ -403,12 +522,10 @@ func _react_scene_end(_tag, _result):
 		if(wasSold):
 			var creditsAmount = _result[0]["winningBid"]
 			var pcNewCredits:int = int(round(float(creditsAmount) * 0.1))
-			addMessage("You got "+str(pcNewCredits)+" credits!")
-			setState("after_sold")
-			addExperienceToPlayer(50)
+			creditsToGive = pcNewCredits
 			
-			#GM.main.removeDynamicCharacter(slaveID)
-			#getModule("SlaveAuctionModule").sellToSlavery(slaveID)
+			setState("after_sold")
+		
 		else:
 			setState("failed_to_sell")
 
@@ -416,6 +533,7 @@ func saveData():
 	var data = .saveData()
 
 	data["slaveID"] = slaveID
+	data["creditsToGive"] = creditsToGive
 
 	return data
 
@@ -423,3 +541,4 @@ func loadData(data):
 	.loadData(data)
 
 	slaveID = SAVE.loadVar(data, "slaveID", "")
+	creditsToGive = SAVE.loadVar(data, "creditsToGive", 0)

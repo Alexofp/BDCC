@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/World/GameRoom.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/World/SubWorld.tscn" type="PackedScene" id=2]
+
+[node name="BlacktailMarket" instance=ExtResource( 2 )]
+
+[node name="MarketRoom" parent="." index="0" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 0, -64 )
+roomName = "Mirri's Room"
+roomID = "market_intro"
+roomSprite = 1
+roomColor = 7
+
+[node name="MarketRoom2" parent="." index="1" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.6, 1 )
+position = Vector2( 0, -128 )
+roomName = "Corridor"
+roomColor = 2
+
+[node name="MarketRoom3" parent="." index="2" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.6, 1 )
+position = Vector2( 64, -128 )
+roomName = "Corridor"
+roomColor = 2
+
+[node name="MarketRoom4" parent="." index="3" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.6, 1 )
+position = Vector2( 128, -128 )
+roomName = "Corridor"
+roomColor = 2
+
+[node name="MarketRoom5" parent="." index="4" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.6, 1 )
+position = Vector2( -64, -128 )
+roomName = "Corridor"
+roomColor = 2
+
+[node name="MarketRoom6" parent="." index="5" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.6, 1 )
+position = Vector2( -128, -128 )
+roomName = "Corridor"
+roomColor = 2
+
+[node name="MarketRoom7" parent="." index="6" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.6, 1 )
+position = Vector2( -192, -128 )
+roomName = "Corridor"
+roomColor = 2
+
+[node name="MarketRoom8" parent="." index="7" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -256, -128 )
+roomName = "Luxe's Office"
+roomID = "market_luxe"
+roomSprite = 1
+roomColor = 7
+
+[node name="MarketRoom9" parent="." index="8" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 128, -192 )
+roomName = "Blacktail Market"
+roomID = "market_market"
+roomSprite = 4
+roomColor = 7
