@@ -16,6 +16,9 @@ func _init():
 		"res://Modules/SlaveAuctionModule/Chapter0/MirriS1IntroScene.gd",
 		"res://Modules/SlaveAuctionModule/Chapter0/MirriS2FirstSellScene.gd",
 		
+		"res://Modules/SlaveAuctionModule/Mirri/MirriTalkScene.gd",
+		"res://Modules/SlaveAuctionModule/Luxe/LuxeIntroScene.gd",
+		
 		"res://Modules/SlaveAuctionModule/Auction/SlaveAuctionScene.gd",
 		]
 	characters = [
@@ -42,3 +45,7 @@ func getAuctionSettings():
 
 func sellToSlavery(theCharID:String):
 	GM.main.removeDynamicCharacter(theCharID)
+
+func getMirriGreeting() -> String:
+	return "What's up, AlphaCorp slave?"
+	
