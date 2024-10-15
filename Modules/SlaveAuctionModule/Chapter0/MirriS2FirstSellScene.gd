@@ -19,7 +19,7 @@ func _run():
 
 		addButton("Cancel", "You changed your mind", "endthescene")
 		addSlaveButtons()
-		if(false):
+		if (false):
 			addButton("Nope", "You shouldn't see this ever", "pick_slave")
 	if(state == "confirm_pick_slave"):
 		addCharacter(slaveID)
@@ -292,6 +292,12 @@ func _run():
 		saynn("Mirri holsters the gun and reaches for your headset. She presses a button that turns it on and then purrs into the microphone. The vibrations are making her ear flick in a cute way.")
 
 		saynn("[say=mirri]Five-by-five. Good. New bidders will arrive in a bit, prepare yourself.[/say]")
+
+		saynn("[say=pc]Next bidders will get here so soon already?[/say]")
+
+		saynn("[say=mirri]Who said that it's them who gets to us~.[/say]")
+
+		saynn("Confusing.. but okay.")
 
 		saynn("[say=pc]Shouldn't we practice or something?[/say]")
 

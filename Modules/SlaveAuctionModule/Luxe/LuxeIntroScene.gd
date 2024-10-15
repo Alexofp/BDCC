@@ -54,7 +54,7 @@ func _run():
 
 		saynn("Their conversation is getting heated.. But Mirri's sarcastic tone is unable to move the wolf's cold demeanor even by an inch. The wolf is dead calm..")
 
-		saynn("[say=luxe]Yes, I do, each time I have to solve the bullshit that you are causing. Mirri, I gave you so many chances. I just can't..[/say]")
+		saynn("[say=luxe]Yes, I do, each time I have to solve the bullshit that you are causing. It's not about me.. it's about everything. Mirri, I gave you so many chances. I just can't..[/say]")
 
 		saynn("You suddenly feel the whole room getting warmer.. The wolf grabs onto his heart, his glowing fur tips begin to dance like real fire.. but Mirri doesn't seem to be very concerned.")
 
@@ -76,7 +76,7 @@ func _run():
 
 		saynn("[say=luxe]You are starting at the bottom of the ocean. And you think you can drain it before drowning in it yourself.[/say]")
 
-		saynn("[say=mirri]You keep thinking that I'm dumb. I'm not dumb.[/say]")
+		saynn("[say=mirri]You keep thinking that I'm dumb. I'm not dumb. I'm doing this because it's what's best for Blacktail.[/say]")
 
 		saynn("[say=luxe]Then prove it. You can go.[/say]")
 
@@ -104,7 +104,7 @@ func _run():
 
 		saynn("You look around more.. but don't dare to sit. Dark.. is a good word to describe the room. Dark and gold. Huh, you notice that the space is actually updating in real time.. you notice little holograms of spaceships flying around, leaving trails of their routes.")
 
-		saynn("[say=luxe]If I didn't know who you are, I'd have you killed.[/say]")
+		saynn("[say=luxe]If I didn't know who you are, I'd have you killed. Goes without saying.[/say]")
 
 		saynn("That's.. one way to greet someone. He turns around and looks at you. His stare is making you feel uneasy inside.")
 
@@ -114,8 +114,112 @@ func _run():
 
 		saynn("[say=luxe]I'm not happy that an AlphaCorp slave is snooping around here now. Did I make myself clear?[/say]")
 
+		setFlag("SlaveAuctionModule.customMirriGreeting", "If you wanna comment on that - don't. Just bring me more slaves to sell.")
 		addButton("Yes", "Just say yes and get out of his way", "just_say_yes")
 		addButton("Question", "Try to ask some questions", "try_ask_questions")
+	if(state == "just_say_yes"):
+		saynn("[say=pc]Yes, you did.[/say]")
+
+		saynn("The wolf reaches into his desk and grabs a small wooden box. He opens it and takes an old-school looking cigar out of it. For some reason, he holds it near the tips of his mane.")
+
+		saynn("He frowns.. hard.. and the cigar butt lights up red.")
+
+		saynn("[say=luxe]Good. Now leave.[/say]")
+
+		saynn("Disturbing his smoking session sounds like a pretty bad idea.. so you decide to take his advice and step out of the office.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "try_ask_questions"):
+		saynn("[say=pc]I wanna ask a few questions.[/say]")
+
+		saynn("Wolf is silently looking at you. The whole room is silently looking at you.")
+
+		saynn("It's so quiet that you swear you hear your and his breathing.")
+
+		saynn("[say=luxe]You don't.[/say]")
+
+		saynn("The breeze is making you shiver. But you don't wanna give up that easily.")
+
+		saynn("[say=pc]In fact, I do. I like what you did here. And now I'm very curious about some things. So?[/say]")
+
+		saynn("The silent treatment feels like it will drag on forever. The wolf quietly leans against his desk.")
+
+		saynn("He doesn't answer.")
+
+		saynn("[say=pc]Hey. I helped sell an AlphaCorp slave.[/say]")
+
+		saynn("[say=luxe]You get one.[/say]")
+
+		saynn("That was.. a quick answer.")
+
+		saynn("[say=pc]I get one?..[/say]")
+
+		saynn("[say=luxe]I'm waiting.[/say]")
+
+		addButton("Who", "Ask him who he is", "ask_who")
+		addButton("Where", "Ask him where you are", "ask_where")
+		addButton("Mirri", "Ask him about Mirri", "ask_mirri")
+	if(state == "ask_who"):
+		setFlag("SlaveAuctionModule.knowsLuxeName", true)
+		saynn("[say=pc]Who exactly are you? I know that you are from Syndicate. Your second name is probably Blacktail. But you know.. a first name would be nice too.[/say]")
+
+		saynn("[say=luxe]Luxe.[/say]")
+
+		saynn("You feel like you're balancing on the knife's edge..")
+
+		saynn("[say=pc]Alright, Luxe Blacktail. Has a nice ring to it. What are you doing here exactly?[/say]")
+
+		saynn("He just silently looks you into the eyes. You notice.. fire.. in his stare.. while you are freezing more and more.")
+
+		saynn("[say=pc]I get it, okay. Not the chatty type. I will leave you to it.[/say]")
+
+		saynn("Luxe reaches into his desk and grabs a small wooden box. He opens it and takes an old-school looking cigar out of it. For some reason, he holds it near the tips of his mane.")
+
+		saynn("He frowns.. hard.. and the cigar butt lights up red.")
+
+		saynn("Passive smoking wasn't on your task list for today.. so you decide to leave the office.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "ask_where"):
+		saynn("[say=pc]Where are we? Is this a space station? Or are we on a planet?[/say]")
+
+		saynn("[say=luxe]Neither.[/say]")
+
+		saynn("Well.. that does narrow it a bit.")
+
+		saynn("[say=pc]Then.. that leaves.. a spaceship?[/say]")
+
+		saynn("He just silently looks you into the eyes. You notice.. fire.. in his stare.. while you are freezing more and more.")
+
+		saynn("[say=pc]I get it, okay. Not the chatty type. I will leave you to it.[/say]")
+
+		saynn("Luxe reaches into his desk and grabs a small wooden box. He opens it and takes an old-school looking cigar out of it. For some reason, he holds it near the tips of his mane.")
+
+		saynn("He frowns.. hard.. and the cigar butt lights up red.")
+
+		saynn("Passive smoking wasn't on your task list for today.. so you decide to leave the office.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "ask_mirri"):
+		saynn("[say=pc]Mirri and you.. Can I get some insight into your disagreement?[/say]")
+
+		saynn("[say=luxe]Thinks she can enslave your whole prison by herself.[/say]")
+
+		saynn("That's.. a big task. She is not alone anymore though.")
+
+		saynn("[say=pc]And you think she won't be able to do it?[/say]")
+
+		saynn("He just silently looks you into the eyes. You notice.. fire.. in his stare.. while you are freezing more and more.")
+
+		saynn("[say=pc]I get it, okay. Not the chatty type. I will leave you to it.[/say]")
+
+		saynn("Luxe reaches into his desk and grabs a small wooden box. He opens it and takes an old-school looking cigar out of it. For some reason, he holds it near the tips of his mane.")
+
+		saynn("He frowns.. hard.. and the cigar butt lights up red.")
+
+		saynn("Passive smoking wasn't on your task list for today.. so you decide to leave the office.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):

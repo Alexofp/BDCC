@@ -25,6 +25,7 @@ func _run():
 		addButton("Blacktail", "Ask her about her family", "ask_blacktail")
 		addButton("Slaves", "Ask her about why she enslaves people", "ask_slaves")
 		addButton("Collar", "Ask about them possible removing your collar", "ask_collar")
+		addButton("Catgirl", "Ask her about her species", "ask_catgirl")
 		addButton("Back", "Enough questions..", "")
 	if(state == "ask_luxe"):
 		saynn("[say=pc]That wolf.. with the black and gold fur. Who is he?[/say]")
@@ -182,6 +183,42 @@ func _run():
 		saynn("Necessity pushes the progress forward..")
 
 		saynn("[say=mirri]And if someone doesn't and AlphaCorp frees them.. that's their problem. I'm totally okay with enslaving and selling someone for the second time~.[/say]")
+
+		addButton("Continue", "See what happens next", "chat_menu")
+	if(state == "ask_catgirl"):
+		saynn("You focus your curious eyes on her black fur..")
+
+		saynn("[say=pc]Interesting.. pattern.. for a human.[/say]")
+
+		saynn("Mirri shrugs, her tail wagging a bit.")
+
+		saynn("[say=mirri]Yes, I know, I know, I'm a hybrid and everything.[/say]")
+
+		saynn("Her feline ears flick. Huh. That ponytail that she has is hiding something interesting.")
+
+		saynn("[say=mirri]Just call me what I am. A catgirl.[/say]")
+
+		saynn("A question lingers in your mind..")
+
+		saynn("[say=pc]I'm curious.. Do you..[/say]")
+
+		saynn("[say=mirri]..purr during sex? Only one way to find out~.[/say]")
+
+		saynn("[say=pc]That's.. alright. but I had a different question.[/say]")
+
+		saynn("Mirri giggles.")
+
+		saynn("[say=pc]Do you have two pairs of ears?[/say]")
+
+		saynn("She stops giggling and starts coughing instead.")
+
+		saynn("[say=mirri]..really? That's what you're curious about?[/say]")
+
+		saynn("You nod.")
+
+		saynn("[say=mirri]Curiosity.. murdered the cat.[/say]")
+
+		saynn("Looks like you're not gonna get the answer for that question..")
 
 		addButton("Continue", "See what happens next", "chat_menu")
 
