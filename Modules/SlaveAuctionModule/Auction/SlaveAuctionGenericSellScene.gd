@@ -32,9 +32,27 @@ func _run():
 		addButton("Cancel", "You changed your mind", "do_cancel_pick")
 	if(state == "do_confirm_pick"):
 		playAnimation(StageScene.Duo, "stand", {npc=slaveID, npcBodyState={leashedBy="pc"}})
-		saynn("You make your choice. Mirri nods and uses her teleporter to quickly bring you the slave.")
+		if (!getFlag("SlaveAuctionModule.beganAuctionOnce")):
+			saynn("You make your choice.")
 
-		saynn("[say=mirri]Let's do it![/say]")
+			saynn("[say=mirri]I will bring {slave.him}, don't worry.[/say]")
+
+			saynn("[say=pc]You're so nice.[/say]")
+
+			saynn("[say=mirri]Aww, thank you. I love it when you say that.[/say]")
+
+			saynn("Mirri disappears inside a blue rift.. before quickly jumping out again, her hand holding a leash connected to your slave's collar. She hands the leash to you.")
+
+			saynn("[say=mirri]The more credits I earn, the higher my slaver reputation will be. And that's what you and I want.[/say]")
+
+			saynn("Sell slaves, get more rep..")
+
+			saynn("[say=mirri]So let's do it![/say]")
+
+		else:
+			saynn("You make your choice. Mirri nods and uses her teleporter to quickly bring you the slave.")
+
+			saynn("[say=mirri]Let's do it![/say]")
 
 		addButton("Market", "Secure the slave on the stage", "go_market")
 	if(state == "go_market"):
@@ -50,7 +68,7 @@ func _run():
 
 		saynn("Mirri takes a spot on her presenter platform and gets ready too.")
 
-		saynn("[say=mirri]"+str(RNG.pick(["Alright. Time to shine.", "Let's get this bread.", "Time to do this.", "No one but us."]) )+"[/say]")
+		saynn("[say=mirri]"+str(RNG.pick(["Alright. Time to shine.", "Let's get this bread.", "Time to do this.", "No one but us.", "Teamwork makes the dream work."]) )+"[/say]")
 
 		saynn("The auction is about to begin..")
 
@@ -112,6 +130,22 @@ func _run():
 			saynn("As Mirri steps out the room.. you get the last glimpse of your slave.. before the wall obscures {slave.him}..")
 
 		addButton("Continue", "Goodbye slave..", "delete_slave")
+	if(state == "after_sold"):
+		playAnimation(StageScene.Duo, "stand", {pc="mirri", npc=slaveID, npcBodyState={leashedBy="mirri"}})
+		saynn("After a successful auction, Mirri unchains the slave's wrists and then hands the leash to a few faceless attendants who bring {slave.name} to {slave.his} new owner..")
+
+		saynn("As the curtains begin to close, you get a last glimpse of your slave.")
+
+		addButton("Continue", "Goodbye slave..", "do_sell_slave_succ")
+	if(state == "do_sell_slave_succ"):
+		playAnimation(StageScene.Duo, "stand", {npc="mirri"})
+		saynn("Mirri approaches you and hands you a credits chip.")
+
+		saynn("[say=mirri]"+str(RNG.pick(["Here is your cut, big {pc.girl}.", "Your cut, pretty {pc.girl}.", "Your 10%, tough {pc.girl}.", "Please doing business, big {pc.girl}."]))+"[/say]")
+
+		saynn("As you take it, the catgirl just walks back to her room.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 func addSlaveButtons():
 	var slaves = GM.main.getDynamicCharacterIDsFromPool(CharacterPool.Slaves)
 	for charID in slaves:
@@ -132,7 +166,7 @@ func printSlaveTraits():
 		var trait:AuctionTrait = GlobalRegistry.getAuctionTrait(traitID)
 		if(score > 0.0):
 			var theName:String = trait.getName(traitID)
-			sayn(theName+": "+str(Util.RoundF(score*100.0, 1))+"%")
+			sayn("- "+theName+": "+str(Util.roundF(score*100.0, 1))+"%")
 	sayn("")
 
 
@@ -157,6 +191,7 @@ func _react(_action: String, _args):
 
 	if(_action == "go_market"):
 		processTime(5*60)
+		setFlag("SlaveAuctionModule.beganAuctionOnce", true)
 
 	if(_action == "start_auction_minigame"):
 		runScene("SlaveAuctionScene", [slaveID, getModule("SlaveAuctionModule").getAuctionSettings()], "slave_auction")
@@ -170,6 +205,12 @@ func _react(_action: String, _args):
 		endScene()
 		return
 
+	if(_action == "do_sell_slave_succ"):
+		removeCharacter(slaveID)
+		getModule("SlaveAuctionModule").sellToSlavery(slaveID)
+		GM.pc.addCredits(creditsToGive)
+		addMessage("You received "+str(creditsToGive)+" credits.")
+
 	setState(_action)
 
 func _react_scene_end(_tag, _result):
@@ -182,6 +223,8 @@ func _react_scene_end(_tag, _result):
 			getModule("SlaveAuctionModule").addRepCredits(creditsAmount)
 			var pcNewCredits:int = int(round(float(creditsAmount) * 0.1))
 			creditsToGive = pcNewCredits
+			if(getModule("SlaveAuctionModule").isReadyToAdvanceRepLevel()):
+				addMessage("You are ready to advance your and Mirri's slaver reputation level. Talk with her when you are ready.")
 			
 			setState("after_sold")
 		

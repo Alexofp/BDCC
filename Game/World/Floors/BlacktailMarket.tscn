@@ -46,7 +46,9 @@ roomColor = 2
 [node name="MarketRoom7" parent="." index="6" instance=ExtResource( 1 )]
 self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( -192, -128 )
-roomName = "Corridor"
+roomName = "Corridor end"
+roomID = "market_near_luxe"
+canWest = false
 roomColor = 2
 
 [node name="MarketRoom8" parent="." index="7" instance=ExtResource( 1 )]
@@ -54,6 +56,7 @@ self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( -256, -128 )
 roomName = "Luxe's Office"
 roomID = "market_luxe"
+canEast = false
 roomSprite = 1
 roomColor = 7
 

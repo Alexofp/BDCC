@@ -11,6 +11,8 @@ func _run():
 
 		saynn("[say=mirri]"+str(getModule("SlaveAuctionModule").getMirriGreeting())+"[/say]")
 
+		saynn(""+str(getModule("SlaveAuctionModule").getRepInfoString())+"")
+
 		addButton("Sell Slave", "Sell one of your slaves on a slave auction", "sell_menu")
 		addButton("Talk", "Ask her a few things", "chat_menu")
 		addButton("Sex", "See if you can get a little kinky with her", "sex_menu_check")

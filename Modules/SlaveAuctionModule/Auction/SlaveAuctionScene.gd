@@ -3,6 +3,7 @@ extends "res://Scenes/SceneBase.gd"
 var slaveAuction:SlaveAuction = SlaveAuction.new()
 var charID:String = ""
 var currentActionType = AuctionActionType.NoType
+var savedAuctionArgs:Dictionary = {}
 
 func _initScene(_args = []):
 	charID = _args[0] if _args.size() > 0 else RNG.pick(GM.main.dynamicCharacters)
@@ -10,6 +11,7 @@ func _initScene(_args = []):
 	addCharacter(charID)
 	
 	slaveAuction.start(_args[1] if _args.size() > 1 else {})
+	savedAuctionArgs = (_args[1] if _args.size() > 1 else {})
 
 func _init():
 	sceneID = "SlaveAuctionScene"
@@ -49,10 +51,17 @@ func _run():
 			var action:AuctionAction = actionA[1]
 			addDisabledButton(action.getButtonName(), actionA[0])
 		
+		if(slaveAuction.getState() == "ended"):
+			addButton("(Try again)", "Restart the auction in case you don't like the outcome. New auction will have different bidders.", "restart_auction")
 	
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
+		return
+	if(_action == "restart_auction"):
+		slaveAuction = SlaveAuction.new()
+		slaveAuction.setCharID(charID)
+		slaveAuction.start(savedAuctionArgs)
 		return
 	if(_action == "doAction"):
 		processTime(60)
@@ -81,6 +90,7 @@ func saveData():
 	data["charID"] = charID
 	data["currentActionType"] = currentActionType
 	data["slaveAuction"] = slaveAuction.saveData()
+	data["savedAuctionArgs"] = savedAuctionArgs
 
 	return data
 	
@@ -89,6 +99,7 @@ func loadData(data):
 	
 	charID = SAVE.loadVar(data, "charID", "")
 	currentActionType = SAVE.loadVar(data, "currentActionType", AuctionActionType.NoType)
+	savedAuctionArgs = SAVE.loadVar(data, "savedAuctionArgs", {})
 	
 	slaveAuction = SlaveAuction.new()
 	slaveAuction.loadData(SAVE.loadVar(data, "slaveAuction", {}))

@@ -5,6 +5,8 @@ func _init():
 
 func _run():
 	if(state == ""):
+		aimCamera("market_luxe")
+		setLocationName("Office")
 		addCharacter("luxe")
 		addCharacter("mirri")
 		playAnimation(StageScene.Duo, "stand", {pc="luxe", npc="mirri", npcAction="sit"})

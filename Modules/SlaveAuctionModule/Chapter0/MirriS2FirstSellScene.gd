@@ -29,6 +29,7 @@ func _run():
 		addButton("Confirm", "Sell this slave!", "do_confirm_pick")
 		addButton("Cancel", "You changed your mind", "do_cancel_pick")
 	if(state == "do_confirm_pick"):
+		setFlag("SlaveAuctionModule.s2hap", true)
 		playAnimation(StageScene.Duo, "stand", {npc=slaveID, npcBodyState={leashedBy="pc"}})
 		saynn("You approach one of your slaves and clip a leash to {slave.his} collar. {slave.name} gives you a slightly confused look, clearly feeling that something is off.")
 
@@ -54,7 +55,7 @@ func _run():
 
 		saynn("[say=pc]Oh yeah, that last.. show.. was so timely.[/say]")
 
-		saynn("[say=mirri]Pff, don't make me smash your beautiful jaw into the concrete.[/say]")
+		saynn("[say=mirri]Pff, don't make me smash your beautiful jaw into the ugly concrete.[/say]")
 
 		saynn("Her little sly smile makes you think that she might be serious.")
 
