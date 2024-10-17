@@ -16,6 +16,8 @@ func getFlags():
 		
 		"knowsLuxeName": flag(FlagType.Bool),
 		
+		"pickedSexSub": flag(FlagType.Bool),
+		"sexSubbedToMirri": flag(FlagType.Bool),
 		"customMirriGreeting": flag(FlagType.Text),
 	}
 
@@ -129,3 +131,5 @@ func getCreditsForRepLevel(_level:int):
 		return 1500
 	return 2000
 
+func canDomMirri() -> bool:
+	return false
