@@ -48,6 +48,12 @@ func _run():
 		else:
 			addButton("Be her toy", "Agree to let Mirri have it her way with you. Will unlock submissive sex options", "agree_be_toy")
 		addButton("Back", "Back to the previous menu", "")
+	if(state == "sub_menu"):
+		saynn("How do you wanna sub to Mirri?")
+
+		addButton("Painplay", "See what that crazy bitch can do to your body..", "sub_painplay")
+		addButton("Pussy worship", "See what that crazy bitch will do to you with her pussy..", "sub_pussy")
+		addButton("Back", "Back to the previous menu", "sex_menu")
 	if(state == "chat_menu"):
 		saynn("What do you wanna ask Mirri?")
 
@@ -412,6 +418,200 @@ func _run():
 		saynn("Just like that, she leaves you there, on your knees..")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "sub_painplay"):
+		playAnimation(StageScene.Duo, "stand", {npc="mirri", bodyState={leashedBy="mirri"}})
+		saynn("[say=pc]Hey, uh..[/say]")
+
+		saynn("Before you can finish your sentence, a leash gets clipped to your collar, Mirri's predator eyes flashing brightly.")
+
+		saynn("[say=mirri]You are SO coming with me.[/say]")
+
+		saynn("[say=pc]Hey, chill![/say]")
+
+		saynn("Mirri rushes off somewhere, her paw yanking on the leash, forcing you to follow.")
+
+		addButton("Continue", "See what happens next", "sub_painplay_chains")
+	if(state == "sub_painplay_chains"):
+		playAnimation(StageScene.HangingDuo, "idle", {pc="pc", npc="mirri", bodyState={naked=true, hard=true}})
+		aimCameraAndSetLocName("market_market")
+		saynn("The next moments are a complete blur..")
+
+		saynn("Only the cold metal rattle of chains makes you snap out of it. They pull your wrists high above your head. You realize that you're standing on the auction stage, completely naked and exposed.. while Mirri is circling you, eyeing out your {pc.masc} body from every angle..")
+
+		saynn("Each step she takes feels like a countdown, echoing out in your head.")
+
+		saynn("[say=pc]Hey.. you're not planning to sell me, are you? Don't you fucking dare.[/say]")
+
+		saynn("She pauses her step and stays quiet, staring you down with a sadistic smirk. In her paw, she toys with a leather nine-tailed whip, letting the tails brush teasingly against her fingers.")
+
+		saynn("[say=mirri]I might. Scared, fucker~? You better be.[/say]")
+
+		saynn("[say=pc]I'm not..[/say]")
+
+		saynn("Snap! The first crack of the whip cuts through the air, landing square on your back, forcing you to lose your train of thought.")
+
+		saynn("[say=pc]Argh..[/say]")
+
+		saynn("[say=mirri]Shut up, little AlphaCorp slave. Right now you're nothing but my toy to play with. Mine to mark..[/say]")
+
+		saynn("The many whip tails strike your back again, leaving lots of little stinging lines all around. Your body jerks involuntarily..")
+
+		saynn("[say=mirri]Mine to hurt.[/say]")
+
+		saynn("..but there is no time to process the pain before another leash follows, hitting your chest now"+str(" and making your {pc.breasts} jiggle.." if GM.pc.hasBigBreasts() else "")+".. and then another.. and another.. You cry out in shock, your body squirming and making the chains rattle, your {pc.feet} barely touching the ground.")
+
+		saynn("[say=mirri]Mine to own.[/say]")
+
+		if (GM.pc.hasPenis()):
+			saynn("The last strike hits your {pc.thick} {pc.masc} thighs, forcing you to close your legs tightly. You feel the blood rushing down to your"+str(" locked" if GM.pc.isWearingChastityCage() else "")+" cock"+str(" and pussy slit" if GM.pc.hasVagina() else "")+"..")
+
+		elif (GM.pc.hasVagina()):
+			saynn("The last strike hits your {pc.thick} {pc.masc} thighs, forcing you to close your legs tightly. You feel the blood rushing down to your pussy slit..")
+
+		else:
+			saynn("The last strike hits your {pc.thick} {pc.masc} thighs, forcing you to close your legs tightly. You feel the blood rushing down to your crotch..")
+
+		saynn("Mirri steps back and admires the many little marks that the whip has left.")
+
+		saynn("[say=mirri]Work of art..[/say]")
+
+		saynn("[say=pc]Ghh.. Too bad the creator went crazy..[/say]")
+
+		saynn("She giggles.")
+
+		saynn("[say=mirri]Nah. Let me fix your sentence.[/say]")
+
+		saynn("Oh no.. Mirri visibly extends her claws and puts her paw on your neck. Her touch is deceptively light at first.. she trails her claws down your skin, over your shoulders, across your chest, just enough to make your skin tingle..")
+
+		saynn("You can feel her warm breath on your ear..")
+
+		saynn("[say=mirri]Too bad the creator didn't finish it yet..[/say]")
+
+		saynn("Without warning, her claws [color=red]DIG IN[/color] - leaving angry red lines along your back that are quick to begin bleeding. Shit, she isn't playing around.. You gasp, jerking in the chains.. but the metal holds you firmly in roughly one place.")
+
+		saynn("[say=mirri]Crazy is such a subjective word..[/say]")
+
+		saynn("She keeps tearing through your skin, leaving more and more shallow cuts with her claws.. each one adding to the pain..")
+
+		saynn("[say=pc]Ghh.h.. fu-uck.. agh.. C-crazy f-fucking bitch..[/say]")
+
+		saynn("She just keeps going.. her half-feline body brushing against yours, sharing heat.")
+
+		saynn("[say=mirri]To me you are the crazy one.. Thinking you can tame me.. The Legendary Syndicate Pussy Cat.[/say]")
+
+		saynn("Her claws, sharp and unforgiving, trace over the fresh whip marks, digging into your skin enough to make your head spin.")
+
+		saynn("[say=mirri]And you seem to like it just as much as me.[/say]")
+
+		saynn("Her other hand is dragging the tips of the whip between your legs.. dangerously close to your most sensitive areas.."+str(" Your pussy dripping like it's a small fountain by now.." if GM.pc.hasReachableVagina() else "")+""+str(" Your cock hard as a rock, swaying from the constant squirming.." if GM.pc.hasReachablePenis() else "")+""+str(" Your caged up toy is leaking in its little prison.." if GM.pc.isWearingChastityCage() else "")+"")
+
+		saynn("She forces eye contact with her claws and then grins.")
+
+		saynn("[say=mirri]You're pathetic.. but it's adorable how much you try to hold on.. Too bad I'm going to break you anyway.[/say]")
+
+		saynn("[say=pc]F-fuck you M-Mirri..[/say]")
+
+		saynn("Hearing your words.. Mirri suddenly stops and puts the whip away for a second.")
+
+		saynn("[say=pc]What are you..[/say]")
+
+		addButton("Continue", "See what happens next", "sub_painplay_panties")
+	if(state == "sub_painplay_panties"):
+		playAnimation(StageScene.HangingDuo, "idle", {pc="pc", npc="mirri", npcBodyState={exposedCrotch=true}, bodyState={naked=true, hard=true}})
+		saynn("She quickly pulls down her wet panties, exposing the moist pink folds to your eyes. The catgirl then takes her panties.. turns them into a ball of dripping cloth.. and forces it into your mouth.")
+
+		saynn("[say=mirri]I told you to shut up, bitch.[/say]")
+
+		saynn("Before you can even taste her juices, she suddenly sinks her fangs into your shoulder, biting down hard enough to draw a thin line of blood.. Her claws follow, raking across your back, leaving more stinging red marks everywhere.. So many that you arch your back and let out a muffled cry, the panties blocking your mouth..")
+
+		saynn("[say=pc]Arghh-h..[/say]")
+
+		saynn("Gasps keep escaping your lips as the pain overwhelms your senses.")
+
+		saynn("Mirri purrs, hearing and feeling your pain. She licks the blood off from your shoulder and then licks her lips..")
+
+		saynn("[say=mirri]Tasty. How can I sell such a tasty bitch?.. I have feelings for you, you know..[/say]")
+
+		saynn("She stands in front of you, her hand gripping the whip again before raising it high. You feel like you know what is coming next.. but you can't stop yourself, the anticipation building in your bruised chest..")
+
+		saynn("[say=mirri]Biggest one is.. love. I just love to hate you.[/say]")
+
+		saynn("She brings the whip down one final time, leather snapping against your most vulnerable spot..")
+
+		if (GM.pc.hasPenis()):
+			saynn("The crack of the whip lands square on your dangling balls, sending a shockwave of pain through your entire body. Your knees buckle and give up, making you dangle off of the chains, your mind blanking as a sudden orgasm rips through you, your {pc.penis} pulsing and spilling {pc.cum} helplessly under her control.")
+
+		elif (GM.pc.hasReachableVagina()):
+			saynn("The whip tails strike your pussy exactly, the sharp stings sending a jolt of pain through your entire body. Your knees buckle and give up, making you dangle off of the chains, your mind blanking as a sudden orgasm rips through you, your thighs quivering as your slit releases a torrent of slick wetness down onto the floor..")
+
+		else:
+			saynn("The whip tails strike your crotch exactly, the sharp stings sending a jolt of pain through your entire body. Your knees buckle and give up, making you dangle off of the chains, your mind blanking as a sudden orgasm rips through you, your thighs quivering, your body convulsing hard..")
+
+		saynn("You gasp into Mirri's panties, every muscle in your body tightening. The mixture of pain and pleasure blurs together, leaving you breathless in the end, just hanging limply from the chains..")
+
+		saynn("Mirri watches with a satisfied grin, her clawed paw groping her own breasts while she is admiring the mess that she's made of you.")
+
+		saynn("[say=mirri]F-fuck me.. now that's art worth masturbating over.. Not your limp-dick golden abstract shit.[/say]")
+
+		saynn("All the cuts, all the wounds.. they ache.. and bleed. The room is getting and darker.. or.. is that your mind saying goodbye?")
+
+		saynn("All you hear is..")
+
+		saynn("[say=mirri]H-hey.[/say]")
+
+		saynn("..before the dreamworld takes over.")
+
+		addButton("Continue", "See what happens next", "sub_painplay_wakeup")
+	if(state == "sub_painplay_wakeup"):
+		aimCameraAndSetLocName("market_intro")
+		playAnimation(StageScene.Sleeping, "sleep", {pc="pc", bodyState={naked=true}})
+		saynn("The world seemed to have.. rotated.. while you were taking a nice quiet nap.")
+
+		saynn("You feel a bed underneath you. One of the most comfiest beds that you have ever felt.. it's like a cloud compared to your usual prison ones..")
+
+		saynn("You open your eyes..  and see yourself.. your body is still bruised and cut.. The signs of the abuse are all there.. but not the blood.")
+
+		saynn("[say=mirri]Oh, you're up. Wanna continue?[/say]")
+
+		saynn("[say=pc]No?[/say]")
+
+		saynn("She chuckles.")
+
+		saynn("[say=mirri]How was it?[/say]")
+
+		saynn("[say=pc]..different.[/say]")
+
+		saynn("Your voice barely above a whisper.")
+
+		saynn("[say=mirri]I knew you would like it.[/say]")
+
+		saynn("Her feline eyes shine sharply.")
+
+		saynn("[say=mirri]Now get the fuck off my bed.[/say]")
+
+		saynn("Right..")
+
+		setFlag("SlaveAuctionModule.customMirriGreeting", "How are the bruises~?")
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "sub_pussy"):
+		saynn("[say=pc]Uhm..[/say]")
+
+		saynn("One noise from you is enough to make Mirri perk her ears.")
+
+		saynn("You see her feline eyes.. and take a step back.. while she takes two.. forward.")
+
+		saynn("[say=mirri]Don't make me pull out my gun.[/say]")
+
+		saynn("[say=pc]Hey, no. Bad Mirri.[/say]")
+
+		saynn("She tilts her head, her ass wiggles a bit like she is about to pounce..")
+
+		saynn("[say=mirri]Bad? Being bad is for tame pussies.[/say]")
+
+		saynn("Her tail is wagging. You notice her pulling out the chains..")
+
+		saynn("[say=mirri]I am the best.. at being the worst.[/say]")
+
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -439,6 +639,12 @@ func _react(_action: String, _args):
 	if(_action == "agree_be_toy"):
 		setFlag("SlaveAuctionModule.sexSubbedToMirri", true)
 
+	if(_action == "sub_painplay"):
+		processTime(5*60)
+
+	if(_action == "sub_pussy"):
+		processTime(5*60)
+
 	if(_action == "ask_luxe"):
 		processTime(5*60)
 
@@ -460,5 +666,20 @@ func _react(_action: String, _args):
 	if(_action == "subintro_teeth"):
 		processTime(5*60)
 		GM.pc.addLust(100)
+
+	if(_action == "sub_painplay_chains"):
+		processTime(5*60)
+		GM.pc.doWound("mirri")
+		GM.pc.addPain(50)
+
+	if(_action == "sub_painplay_panties"):
+		processTime(5*60)
+		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("ballgag"))
+		GM.pc.doWound("mirri")
+		GM.pc.addPain(50)
+
+	if(_action == "sub_painplay_wakeup"):
+		processTime(60*60)
+		GM.pc.getInventory().clearSlot(InventorySlot.Mouth)
 
 	setState(_action)
