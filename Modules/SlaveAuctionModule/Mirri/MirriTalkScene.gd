@@ -610,8 +610,210 @@ func _run():
 
 		saynn("Her tail is wagging. You notice her pulling out the chains..")
 
-		saynn("[say=mirri]I am the best.. at being the worst.[/say]")
+		saynn("[say=mirri]I am simply the best.. at being the worst. Get the fuck on the table.[/say]")
 
+		saynn("She swipes everything off her desk, including her laptop.. and then pounces at you!")
+
+		addButton("Continue", "See what happens next", "subpussy_table")
+	if(state == "subpussy_table"):
+		# (( New anim here (idle above)
+		saynn("In the next moment, you already feel the cold metal of the desk biting into your wrists and ankles as the chains lock you down to it. Only your head is sticking out slightly, hanging from its side, giving you some wiggle room but mostly forcing you to look up at the ceiling..")
+
+		saynn("Mirri paces around you, her armored boots clicking ominously against the wooden floor, her blue eyes shining with wicked delight as she watches you struggle. The more you try to escape.. the more you realize that the resistance is futile. Mirri is a slaver after all..")
+
+		saynn("[say=pc]You are one crazy girl.[/say]")
+
+		saynn("[say=mirri]Look at you. I thought you're tough, big and scary~. But now, you're nothing more than my personal furniture.[/say]")
+
+		saynn("She giggles softly, pacing in your view more, flashing her exposed butt and thighs, her paws tugging on her striped panties, causing the outline of her little slit to show more prominently.")
+
+		saynn("[say=mirri]You called this pussy bad, didn't you.. Such a rude fucker you are..[/say]")
+
+		saynn("[say=pc]Hey, listen.. I didn't say that..[/say]")
+
+		saynn("She presses a button on her fancy desk.. that makes it start to go down.. your head getting dangerously close to her inner thigh level with each second.")
+
+		saynn("When that's done, Mirri positions herself just above you, spreading her legs slightly, the fabric of her panties right above your face. You can smell her, the intoxicating scent of her flower is filling your lungs, and it takes everything in you to not squirm.")
+
+		saynn("[say=mirri]Do you like 'em~?[/say]")
+
+		saynn("Your throat tightens as you feel her clawed digits land on your neck, tracing along the skin.")
+
+		saynn("[say=mirri]I can't hear you..[/say]")
+
+		saynn("Your throat tightens even more as she squeezes it..")
+
+		saynn("[say=pc]I.. gh.. y-yes, sure. Great panties, girl.[/say]")
+
+		saynn("[say=mirri]Make love, not war, is that what they say? You know what happens when you combine them?[/say]")
+
+		saynn("She sways her butt teasingly, making the cloth shift around, creating folds around her natural folds.")
+
+		saynn("[say=pc]Uh.. I don't think I do.[/say]")
+
+		saynn("[say=mirri]Torture~. I'm gonna torture you, {pc.name}. I'm gonna torture you like no one else has ever done.[/say]")
+
+		saynn("Her digits sneak under your collar, eliminating the small amount of space that you had there. Looking at her pussy behind her panties without being able to touch it could be considered cruel.. but it's not exactly a torture, is it..")
+
+		saynn("[say=pc]You're.. gonna sit on my face? That's the torture?[/say]")
+
+		saynn("She gets a better grip.. You feel like something big is about to happen..")
+
+		saynn("[say=mirri]Ever heard of.. waterboarding?[/say]")
+
+		addButton("Continue", "See what happens next", "subpussy_start")
+	if(state == "subpussy_start"):
+		# (( New anim here (sit-rub)
+		saynn("You barely have time to react before Mirri suddenly grabs you by the collar and pulls on it while lowering herself and pressing her crotch hard against your face. Her heat is radiating through the fabric as she grinds her pussy against your face without warning.")
+
+		saynn("[say=mirri]This is pussyboarding! I will make your sorry ass drown in my cunt.[/say]")
+
+		saynn("She growls, her voice dark and intimidating. Her striped panties begin to get wet with arousal.. the scent of her juices is all that you can breathe in.. the air is in a very short supply now.")
+
+		saynn("[say=pc]Khh..[/say]")
+
+		saynn("[say=mirri]You're going to lap up every drop that comes off my pussy like a good puppy bitch.[/say]")
+
+		saynn("She doesn't give you a choice exactly, her hips moving in aggressive, tight circles as she rubs herself all over your face, smearing her wetness across your lips and chin. The slick fabric clings to your mouth, pressing against you as she grinds harder, her thighs trapping your head, forcing you into her heat. You feel yourself suffocating..")
+
+		saynn("[say=mirri]What? You're gonna drown? Or you're gonna open your fucking mouth already.[/say]")
+
+		saynn("Your body obeys before your mind can catch up, your lips parting as her soaked panties push into your mouth. The taste of her pussy juices spreads across your tongue, salty and strong. Mirror moans softly as she feels you struggling. Her hips are speeding up, grinding becoming rougher, more desperate, as she forces her dripping cunt onto your face.")
+
+		saynn("[say=mirri]That's right. Nothing but a pussy licker..[/say]")
+
+		saynn("Her words sting.. but her body presses harder, grinding her wet panties into your mouth, the fabric soaked through with her juices. Her hips are bucking as she loses herself in the sensations, her pussy practically leaking into your mouth.")
+
+		saynn("[say=mirri]Pathetic little bitch.. I love using you.. like a fucking rag.. drowning in my cunt.[/say]")
+
+		saynn("Your head spins from the lack of air.. her scent, her taste.. everything about her is overwhelming your senses. You feel yourself losing the last bits of control, submitting fully to her as she rides your face with reckless abandon..")
+
+		addButton("Continue", "See what happens next", "subpussy_breather")
+	if(state == "subpussy_breather"):
+		# (( New anim here (idle, no panties)
+		saynn("Just when you think you might pass out.. Mirri finally pulls back, gasping softly as she steps away, her breathing almost as heavy as yours. You're gasping for air, your face soaked with her juices, the taste of her still thick on your tongue.")
+
+		saynn("[say=mirri]Hah.. Think I'm done yet? I'm not one of those soft bitches.[/say]")
+
+		saynn("She hooks her clawed thumbs into the waistband of her striped panties and pulls them down, revealing her soaked pink blushing pussy. Her lips are shining, drenched with her juices.")
+
+		saynn("Mirri smirks down at you, her eyes have that sadistic light in them..")
+
+		saynn("[say=mirri]Look at this..[/say]")
+
+		saynn("She purrs, spreading her legs slightly, her wet pussy on full display with multiple slick ropes of juices hanging between the thighs.")
+
+		saynn("[say=mirri]I love you.. See how wet you made me, you filthy little slut?[/say]")
+
+		saynn("You can't tear your eyes away.. You feel like you will do anything for her by this point..")
+
+		addButton("Continue", "See what happens next..", "subpussy_masturbate")
+	if(state == "subpussy_masturbate"):
+		# (( New anim (sit + masturbate)
+		saynn("Mirri steps forward again, positioning herself over your face once more, her naked slit hovering inches above your mouth.")
+
+		saynn("[say=mirri]I want to feel you choke on my juices.. Drown in me, you fuck..[/say]")
+
+		saynn("And with that, she sits on your face, her wet hot pussy resting on your face, covering your mouth. As soon as that happens, you begin polishing her folds with your tongue, gathering all the juices that you can get to.. before swallowing them all.")
+
+		saynn("[say=mirri]Ah..[/say]")
+
+		saynn("She doesn't grind your face as much anymore.. just using your face as a nice firm seat, her slick folds spreading across your lips, the taste of her raw arousal flooding your taste sensors.")
+
+		saynn("[say=mirri]Faster, bitch, faster.. I love you, {pc.name}.. I love you so fucking much.. S-stupid sext-toy..[/say]")
+
+		saynn("While you're busy eating her out, her clawed digits find her clit and proceed to rub it fast. Passionate bright moans begin to fill the dark room, her hips bucking again, her thigh muscles tensing up..")
+
+		saynn("The more you lick her up.. the more she teases her clit.. the deeper her breathing becomes, her voice breaking as she loses herself in the moment, squirming above you like a woman possessed.")
+
+		saynn("[say=mirri]Swallow it all.. Every drop, you useless fuck.. I want to love you.. feel you.. choking on my cum.[/say]")
+
+		saynn("Suddenly, her thighs clamp around your head, squeezing your head tightly.")
+
+		saynn("[say=mirri]AHhh-h-![/say]")
+
+		saynn("Mirri throws her head back as her juices are gushing into your mouth in a hot, overwhelming flood. You lose your ability to breathe again, her wetness is coating your lips and chin as she pushes you deeper into her cunt.")
+
+		saynn("She growls, her voice breathless as she forces you to swallow every drop of her squirt. Her body is shaking the feral force of her release. You have no choice but to swallow, her hips moving in slow, trembling circles.")
+
+		addButton("Continue", "See what happens next", "subpussy_after")
+	if(state == "subpussy_after"):
+		# ((New anim idle
+		saynn("Finally, after what feels like an eternity, she pulls back, panting heavily as she stares down at you with a satisfied, wicked grin. Her pussy still drips juices onto her thighs..")
+
+		saynn("[say=mirri]Such a good little toy. Proving it again and again that it was worth it to keep you.[/say]")
+
+		saynn("She purrs, her voice soft but still dripping with that cruel satisfaction.")
+
+		saynn("[say=mirri]Let's get you off my fucking desk.[/say]")
+
+		setFlag("SlaveAuctionModule.customMirriGreeting", "You liked my desk, didn't you? It's a nice sturdy desk.")
+		addButton("Continue", "See what happens next", "endthescene")
+		addButtonWithChecks("Extra humiliation", "Ask her to pee on you..", "subpussy_pee", [], [[ButtonChecks.ContentEnabled, ContentType.Watersports]])
+	if(state == "subpussy_pee"):
+		# (( New anim sit no panties
+		saynn("You find yourself craving more.. craving extra humiliation.")
+
+		saynn("Before she unchains your wrists and ankles.. you decide to stop her.")
+
+		saynn("[say=pc]Mirri.. I want you..[/say]")
+
+		saynn("[say=mirri]I noticed~.[/say]")
+
+		saynn("[say=pc]No. I want you to.. pee on me.[/say]")
+
+		saynn("Her eyes narrow, sharp as blades, as she stares at you. For a moment, there is silence, just the sound of your ragged breathing and the distance hum of random machinery in the background. Then.. Mirri bursts into laughter, throwing her head back, her fangs shining in the dim light.")
+
+		saynn("[say=mirri]AHAHA. You.. what?[/say]")
+
+		saynn("She steps forward, her boots clacking against the floor as she looms over, her hips swaying provocatively. Her predator eyes lock onto yours. She leans in even lower.. down to your level, her lips bear your ear.. her breath hot against your skin as she whispers, her voice dripping with mockery.")
+
+		saynn("[say=mirri]You're.. that.. pathetic, huh? Really? You are lower than a worm.. You're filth.[/say]")
+
+		saynn("Her words cut deep.. and yet.. there is a twisted thrill in all of this.. Your face blushes red.. her juices are still there on your face.. and yet, you're asking for more. You nod.")
+
+		saynn("[say=pc]Yes. Please, Mirri..[/say]")
+
+		saynn("She stands up and stares at you for a moment, a mixture of disgust and delight swirling in her eyes. Slowly, a smile creeps back onto her lips, the corners of her lips curling up.")
+
+		saynn("[say=mirri]Fine. You want to be my toilet that badly? I could use one. But I ain't pissing on my desk, no fucking way. You understand what I am saying?[/say]")
+
+		saynn("You're going to have to.. drink it all.. Every. Last. Drop..")
+
+		saynn("You nod.. Without another word, she stands over your face again, her crotch hovering inches above your face, her legs spread wide as she positions herself just right.")
+
+		saynn("Mirri bites her lips while looking down at you, her digits teasing her clit a little more. Her juicy pink pussy is up in your face again in its full glory..")
+
+		saynn("[say=mirri]Get ready, pathetic little toy.[/say]")
+
+		saynn("Seconds feel like hours.. You can feel the muscles of her crotch tensing up.. again and again..")
+
+		saynn("You hear her soft grunt.. and then it happens. A sudden, warm stream of piss sprays down onto your face. But, before the mess gets too bad, you clamp your lips around her pisshole and let her start to flood your mouth with her golden juice.")
+
+		saynn("[say=mirri]Drink it. Swallow. Now![/say]")
+
+		saynn("The taste is awful. it's gross.. hot.. bitter.. acrid.. it's simply the worst tasting fluid you have ever tasted. And yet, you force yourself to swallow, gulping down her piss fast.. and then again and again.")
+
+		saynn("Mirri watches, her smirk shining brightly as she keeps the steady yellow stream flowing, the warm liquid going straight into your mouth..")
+
+		saynn("[say=mirri]Ah.. Feels nice~. This is what you wanted, isn't it? You're so pathetic, drinking up my piss like a thirsty little slut. Are you proud of yourself?.. Because I'm proud of you, love~.[/say]")
+
+		saynn("You choke on her piss, your body trembling.. and yet, you submit entirely to her cruel methods. You keep swallowing, drinking her piss, feeling it fill your mouth again and again. The humiliation.. is intoxicating.")
+
+		saynn("[say=mirri]My favorite little toy.[/say]")
+
+		saynn("Her golden stream finally begins to slow down.. making it able for you to catch a break. After she is done, Mirri just stands there, towering over you, her eyes shining brightly.")
+
+		saynn("[say=mirri]Swallowed every drop, huh? Of course you did. You're a good pussy licker and you're an even better toilet~. Did you like it?[/say]")
+
+		saynn("[say=pc]T-thank you, Mirri.. Y-yes.. This is great.. you are great.[/say]")
+
+		saynn("She smiles, a little blush tints her cheeks red.")
+
+		saynn("[say=mirri]Well thank you, kitty likes hearing nice words. I need my desk though. So let's get you the fuck down.[/say]")
+
+		setFlag("SlaveAuctionModule.customMirriGreeting", "I ain't gonna tongue with you for some time. Not after what you begged me to do last time.")
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -677,9 +879,31 @@ func _react(_action: String, _args):
 		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("ballgag"))
 		GM.pc.doWound("mirri")
 		GM.pc.addPain(50)
+		GM.pc.orgasmFrom("mirri")
 
 	if(_action == "sub_painplay_wakeup"):
 		processTime(60*60)
 		GM.pc.getInventory().clearSlot(InventorySlot.Mouth)
+
+	if(_action == "subpussy_table"):
+		processTime(5*60)
+
+	if(_action == "subpussy_start"):
+		processTime(5*60)
+
+	if(_action == "subpussy_breather"):
+		processTime(5*60)
+
+	if(_action == "subpussy_masturbate"):
+		processTime(10*60)
+		GM.pc.cummedOnBy("mirri", FluidSource.Vagina)
+		GM.pc.cummedInMouthBy("mirri", FluidSource.Vagina)
+
+	if(_action == "subpussy_after"):
+		processTime(5*60)
+
+	if(_action == "subpussy_pee"):
+		processTime(5*60)
+		GM.pc.cummedInMouthBy("mirri", FluidSource.Pissing)
 
 	setState(_action)
