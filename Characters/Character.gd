@@ -340,18 +340,25 @@ func processTime(_secondsPassed):
 	if(isReadyToGiveBirth()):
 		pregnancyWaitTimer += _secondsPassed
 		if(shouldGiveBirth()):
-			if(getMenstrualCycle() != null):
-				if(getMenstrualCycle().isPregnantFromPlayer()):
-					GM.main.addLogMessage("News", "You just received news that "+getName()+" gave birth to your children! You can check who in the nursery")
-				else:
-					GM.main.addLogMessage("News", "Rumors spread fast. You just received news that "+getName()+" gave birth to someone's children!")
-				
-				pregnancyWaitTimer = 0
-				giveBirth()
+			giveBirthWithNotification()
+
+func giveBirthWithNotification():
+	if(getMenstrualCycle() != null):
+		if(getMenstrualCycle().isPregnantFromPlayer()):
+			GM.main.addLogMessage("News", "You just received news that "+getName()+" gave birth to your children! You can check who in the nursery")
+		else:
+			GM.main.addLogMessage("News", "Rumors spread fast. You just received news that "+getName()+" gave birth to someone's children!")
 		
+		pregnancyWaitTimer = 0
+		return giveBirth()
+	return []
+
 func canDoSelfCare():
 	# If character is in a scene, don't touch them
 	if(GM.main != null && GM.main.characterIsVisible(getID())):
+		return false
+	# If we are out there, we can care for us through interactions
+	if(GM.main != null && GM.main.IS.hasPawn(getID())):
 		return false
 	# If they are a slave to the player, also don't touch them. They are chained to the floor 24/7
 	if(isSlaveToPlayer()):
@@ -366,38 +373,11 @@ func hoursPassed(_howmuch):
 	if(canDoSelfCare()):
 		var tookShowerChance = sqrt(_howmuch * 30.0)
 		if(RNG.chance(tookShowerChance)):
-			removeEffect(StatusEffect.DrenchedInPiss)
-			removeEffect(StatusEffect.HasTallyMarks)
-			removeEffect(StatusEffect.HasBodyWritings)
-			removeEffect(StatusEffect.CoveredInCum)
+			afterTakingAShower()
 			
 		var removedRestraintsChance = sqrt(_howmuch * 20.0)
-		if(RNG.chance(removedRestraintsChance)):
-			var restraints = getInventory().getEquppedRestraints()
-			var restraintAmount = restraints.size()
-			var removedAtLeastOne = false
-			if(restraints.size() > 0):
-				for restraint in restraints:
-					if(restraint.isImportant() || restraint.isPersistent()):
-						restraintAmount -= 1
-						continue
-					
-					var chanceModifier = 1.0
-					var restraintData:RestraintData = restraint.getRestraintData()
-					if(restraintData != null):
-						if(restraintData.aiWontResist):
-							restraintAmount -= 1
-							continue
-						chanceModifier /= restraintData.getLevel()
-					
-					if(RNG.chance(removedRestraintsChance * chanceModifier)):
-						getInventory().removeEquippedItem(restraint)
-						restraintAmount -= 1
-						removedAtLeastOne = true
-				
-				# We removed all our restraints, time to dress up!
-				if(restraintAmount == 0 && removedAtLeastOne):
-					restockEquipmentChance(100)
+		if(RNG.chance(removedRestraintsChance) && hasSomethingToStruggleOutOf()):
+			var _result = doStruggleOutOfRestraints()
 		else:
 			# Npcs occasionally check if they have all the items that they should have
 			var checkEquipmentRandomlyChance = sqrt(_howmuch * 10.0)
@@ -431,7 +411,9 @@ func onCharacterVisiblyPregnant():
 		if(getMenstrualCycle().isPregnantFromPlayer()):
 			GM.pc.addSkillExperience(Skill.Breeder, 50)
 			GM.main.addLogMessage("News", "You just received news that "+getName()+" is pregnant with your children.")
-		
+			if(isDynamicCharacter()):
+				GM.main.WHS.addEvent(WHEvent.Impregnated, "pc", getID())
+			
 func onCharacterHeavyIntoPregnancy():
 	#print(getName()+" is heavy into pregnancy")
 	pass
@@ -458,6 +440,8 @@ func shouldGiveBirth():
 	if(!isReadyToGiveBirth()):
 		return false
 	if(GM.main.characterIsVisible(getID())):
+		return false
+	if(GM.main.IS.hasPawn(getID())):
 		return false
 	if(isSlaveToPlayer()):
 		return false

@@ -52,7 +52,7 @@ func _run():
 				sayn(domInfo.getInfoString())
 			for subID in sexEngine.getSubIDs():
 				var subInfo = sexEngine.getSubInfo(subID)
-				sayn(subInfo.getInfoString())
+				saynn(subInfo.getInfoString())
 
 			var theActions = sexEngine.getActions()
 			for actionInfo in theActions:
@@ -205,3 +205,6 @@ func loadData(data):
 	sexEngine.setInventoryToUse(sceneSavedItemsInv)
 	currentCategory = SAVE.loadVar(data, "currentCategory", [])
 	sexEngine.loadData(SAVE.loadVar(data, "sexEngine", {}))
+
+func supportsShowingPawns() -> bool:
+	return true

@@ -158,8 +158,9 @@ func _react(_action: String, _args):
 		runScene("ParadedOnALeashScene", ["maleguard_canine", GM.pc.getLocation(), "main_punishment_spot"])
 
 	if(_action == "startstocks"):
-		runScene("StocksPunishmentScene", ["maleguard_canine"])
+		#runScene("StocksPunishmentScene", ["maleguard_canine"])
 		endScene()
+		GM.main.IS.startInteraction("InStocks", {inmate="pc"})
 		return
 
 	if(_action in ["cum"]):

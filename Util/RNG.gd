@@ -94,6 +94,22 @@ static func pickWeightedPairs(ar: Array):
 			
 	return ar[0][0]
 
+static func pickWeightedDict(ar: Dictionary):
+	if(ar.empty()):
+		return null
+		
+	var sum = 0.0
+	for value in ar:
+		sum += ar[value]
+		
+	var r:float = rand_range(0.0, sum)
+	for key in ar:
+		r -= ar[key]
+		if r <= 0.0:
+			return key
+			
+	return ar.keys()[0]
+	
 # Same as RNG.pickWeighted() but it also removes the picked entry from both arrays
 static func grabWeighted(ar, weights: Array):
 	if(ar is Dictionary):

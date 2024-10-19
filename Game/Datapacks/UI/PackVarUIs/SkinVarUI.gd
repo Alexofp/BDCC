@@ -1,4 +1,5 @@
 extends "res://Game/Datapacks/UI/PackVarUIs/PackVarUIBase.gd"
+onready var auto_selector_var_ui = $AutoSelectorVarUI
 
 var data = {
 	skin = "",
@@ -42,21 +43,39 @@ func updateEverything():
 	else:
 		$CheckBoxSkin.set_pressed_no_signal(false)
 	
-	$OptionButton.clear()
+	var theSkinIDs:Array = [
+		#[null, "-default"],
+	]
+	#$OptionButton.clear()
 	if(possibleSkins.size() <= 0 || data["skin"] == null):
-		$OptionButton.visible = false
+		#$OptionButton.visible = false
+		auto_selector_var_ui.visible = false
 	else:
-		$OptionButton.visible = true
-		var _i = 0
+		auto_selector_var_ui.visible = true
+		#$OptionButton.visible = true
+		#var _i = 0
 		for skinid in possibleSkins:
 			if(skinid == ""):
-				$OptionButton.add_item("-default-")
+				theSkinIDs.append([
+					null, "-default-",
+				])
+				#$OptionButton.add_item("-default-")
 			else:
-				$OptionButton.add_item(skinid)
+				theSkinIDs.append([
+					skinid, skinid,
+				])
+				#$OptionButton.add_item(skinid)
 			
-			if(skinid == data["skin"]):
-				$OptionButton.select(_i)
-			_i += 1
+			#if(skinid == data["skin"]):
+			#	$OptionButton.select(_i)
+			#_i += 1
+		auto_selector_var_ui.setData({
+			name = "",
+			values = theSkinIDs,
+			value = data["skin"],
+			expand=true,
+			alwaysEdit=true,
+		})
 	
 	if(noBase):
 		$CheckBoxR.visible = false
@@ -159,3 +178,8 @@ func _on_ColorPickerButtonB_color_changed(color):
 	yield(get_tree().create_timer(0.1), "timeout")
 	triggerChange(data.duplicate())
 	isDebouncing = false
+
+
+func _on_AutoSelectorVarUI_onValueChange(_id, newValue):
+	data["skin"] = newValue
+	triggerChange(data.duplicate())

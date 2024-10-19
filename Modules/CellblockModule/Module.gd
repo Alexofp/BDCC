@@ -53,6 +53,7 @@ func _init():
 		"res://Modules/CellblockModule/Nura/NuraTalkEvent.gd",
 		"res://Modules/CellblockModule/Nura/NuraFindToolEvent.gd",
 		"res://Modules/CellblockModule/Pregnancy/DynamicCharacterGivingBirthEvent.gd",
+		"res://Modules/CellblockModule/ProstitutionStartEvent.gd",
 	]
 
 func resetFlagsOnNewDay():

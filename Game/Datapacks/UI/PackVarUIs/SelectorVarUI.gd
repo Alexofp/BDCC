@@ -3,6 +3,7 @@ extends "res://Game/Datapacks/UI/PackVarUIs/PackVarUIBase.gd"
 var isEditing = false
 var thePrefix = ""
 var instantSet = false
+var alwaysEdit:bool = false
 
 var values = []
 var selectedValue = null
@@ -13,13 +14,23 @@ func _ready():
 func setIsEditing(newEdit):
 	isEditing = newEdit
 	
-	if(newEdit):
+	if(newEdit || alwaysEdit):
 		$OptionButton.visible = true
-		$Label.visible = false
 		$Button.text = "Save"
+		if(!alwaysEdit):
+			$Label.visible = false
+			$Label2.visible = false
+			$Button.visible = true
+			#$Label.size_flags_horizontal = SIZE_EXPAND_FILL
+		else:
+			$Label.visible = false
+			$Label2.visible = true
+			$Button.visible = false
+			#$Label.size_flags_horizontal = SIZE_FILL
 	else:
 		$OptionButton.visible = false
 		$Label.visible = true
+		$Label2.visible = false
 		$Button.text = "Edit"
 
 func setSelectedValue(_value):
@@ -37,10 +48,19 @@ func setSelectedValue(_value):
 func setData(_dataLine:Dictionary):
 	if(_dataLine.has("name")):
 		thePrefix = _dataLine["name"]
+		$Label2.text = thePrefix
 	if(_dataLine.has("instantSet")):
 		instantSet = _dataLine["instantSet"]
 	if(_dataLine.has("values")):
 		values = _dataLine["values"]
+	if(_dataLine.has("alwaysEdit")):
+		alwaysEdit = _dataLine["alwaysEdit"]
+		setIsEditing(isEditing)
+	if(_dataLine.has("expand")):
+		if(_dataLine["expand"]):
+			$OptionButton.size_flags_horizontal = SIZE_EXPAND_FILL
+		else:
+			$OptionButton.size_flags_horizontal = SIZE_FILL
 	if(_dataLine.has("value")):
 		setSelectedValue(_dataLine["value"])
 	else:
@@ -82,7 +102,7 @@ func onEditorClose():
 
 
 func _on_OptionButton_item_selected(index):
-	if(!instantSet):
+	if(!instantSet && !alwaysEdit):
 		return
 	if(index < 0 || index >= values.size()):
 		return

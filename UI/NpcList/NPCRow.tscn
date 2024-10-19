@@ -56,7 +56,7 @@ size_flags_vertical = 0
 custom_constants/separation = 0
 
 [node name="Name" type="Label" parent="HBoxContainer"]
-margin_right = 209.0
+margin_right = 248.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 110, 50 )
 size_flags_horizontal = 11
@@ -64,10 +64,11 @@ size_flags_vertical = 0
 custom_styles/normal = SubResource( 1 )
 text = "Name:"
 valign = 1
+autowrap = true
 
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
-margin_left = 209.0
-margin_right = 217.0
+margin_left = 248.0
+margin_right = 256.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 2, 0 )
 mouse_filter = 2
@@ -75,18 +76,19 @@ custom_constants/separation = 8
 custom_styles/separator = SubResource( 8 )
 
 [node name="Gender" type="Label" parent="HBoxContainer"]
-margin_left = 217.0
-margin_right = 426.0
+margin_left = 256.0
+margin_right = 504.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 75, 50 )
 size_flags_horizontal = 11
 size_flags_vertical = 0
 text = "Peachboy:"
 valign = 1
+clip_text = true
 
 [node name="VSeparator2" type="VSeparator" parent="HBoxContainer"]
-margin_left = 426.0
-margin_right = 434.0
+margin_left = 504.0
+margin_right = 512.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 2, 0 )
 mouse_filter = 2
@@ -94,18 +96,19 @@ custom_constants/separation = 8
 custom_styles/separator = SubResource( 8 )
 
 [node name="Personality" type="Label" parent="HBoxContainer"]
-margin_left = 434.0
-margin_right = 643.0
+margin_left = 512.0
+margin_right = 761.0
 margin_bottom = 50.0
-rect_min_size = Vector2( 185, 50 )
+rect_min_size = Vector2( 50, 50 )
 size_flags_horizontal = 11
 size_flags_vertical = 0
 text = "Somewhat dominant:"
 valign = 1
+autowrap = true
 
 [node name="VSeparator3" type="VSeparator" parent="HBoxContainer"]
-margin_left = 643.0
-margin_right = 651.0
+margin_left = 761.0
+margin_right = 769.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 2, 0 )
 mouse_filter = 2
@@ -113,27 +116,47 @@ custom_constants/separation = 8
 custom_styles/separator = SubResource( 8 )
 
 [node name="Children" type="Label" parent="HBoxContainer"]
-margin_left = 651.0
-margin_right = 861.0
+margin_left = 769.0
+margin_right = 893.0
 margin_bottom = 50.0
-rect_min_size = Vector2( 160, 50 )
+rect_min_size = Vector2( 30, 50 )
 size_flags_horizontal = 11
 size_flags_vertical = 0
+size_flags_stretch_ratio = 0.5
 text = "Children with you:"
 align = 1
 valign = 1
 
+[node name="VSeparator4" type="VSeparator" parent="HBoxContainer"]
+margin_left = 893.0
+margin_right = 901.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 2, 0 )
+mouse_filter = 2
+custom_constants/separation = 8
+custom_styles/separator = SubResource( 8 )
+
+[node name="Relationship" type="Label" parent="HBoxContainer"]
+margin_left = 901.0
+margin_right = 1149.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 140, 50 )
+size_flags_horizontal = 11
+size_flags_vertical = 0
+text = "Affection: 100%
+Lust: 0%"
+valign = 1
+clip_text = true
+
 [node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer"]
-margin_left = 861.0
-margin_right = 1070.0
+margin_left = 1149.0
+margin_right = 1214.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 65, 50 )
-size_flags_horizontal = 3
 
 [node name="Meet" type="Button" parent="HBoxContainer/CenterContainer2"]
-margin_left = 72.0
 margin_top = 5.0
-margin_right = 137.0
+margin_right = 65.0
 margin_bottom = 45.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -144,16 +167,14 @@ custom_styles/normal = SubResource( 13 )
 text = "Meet"
 
 [node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
-margin_left = 1070.0
-margin_right = 1280.0
+margin_left = 1214.0
+margin_right = 1279.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 65, 50 )
-size_flags_horizontal = 3
 
 [node name="Forget" type="Button" parent="HBoxContainer/CenterContainer"]
-margin_left = 72.0
 margin_top = 5.0
-margin_right = 137.0
+margin_right = 65.0
 margin_bottom = 45.0
 rect_min_size = Vector2( 65, 40 )
 size_flags_horizontal = 7

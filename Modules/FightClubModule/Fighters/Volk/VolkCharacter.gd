@@ -101,15 +101,18 @@ func _getAttacks():
 	return ["biteattack", "ShivAttack", "VolkTaunt", "trygetupattack"]
 
 func getFightIntro(_battleName):
-	var text = "Volk squats, lowering his profile even more. He then spits to the side. Kinda rude. His voice sounds very raspy, like he was smoking for 10 years straight."
-	text += "\n\n"
-	text += "[say=volk]What? Have a problem with that?[/say]"
-	text += "\n\n"
-	text += "He then stretches his neck and stands up before suddenly pulling out a shiv, a sharp-looking piece of glass that has a handle made out of cloth. No rules policy means he is free to use it."
-	text += "\n\n"
-	text += "[say=volk]Surprise. Come here, suka.[/say]"
-	
-	return text
+	if(_battleName == "arenafight"):
+		var text = "Volk squats, lowering his profile even more. He then spits to the side. Kinda rude. His voice sounds very raspy, like he was smoking for 10 years straight."
+		text += "\n\n"
+		text += "[say=volk]What? Have a problem with that?[/say]"
+		text += "\n\n"
+		text += "He then stretches his neck and stands up before suddenly pulling out a shiv, a sharp-looking piece of glass that has a handle made out of cloth. No rules policy means he is free to use it."
+		text += "\n\n"
+		text += "[say=volk]Surprise. Come here, suka.[/say]"
+		
+		return text
+	else:
+		return .getFightIntro(_battleName)
 
 func getThickness() -> int:
 	return 50

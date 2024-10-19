@@ -25,3 +25,6 @@ func getRiggedParts(_character):
 	return {
 		"spine": "res://Inventory/RiggedModels/AlexSpine/AlexSpine.tscn",
 	}
+
+func canDye():
+	return true

@@ -39,3 +39,28 @@ func getVisibleName(_topicID):
 		return "a slim butt"
 	
 	return "error:"+str(_topicID)
+
+func getChatName(_topicID) -> String:
+	if(_topicID == InterestTopic.ThickBody):
+		return "thick bodies"
+	if(_topicID == InterestTopic.AverageMassBody):
+		return "average bodies"
+	if(_topicID == InterestTopic.SlimBody):
+		return "thin bodies"
+	if(_topicID == InterestTopic.ThickButt):
+		return "thick butts"
+	if(_topicID == InterestTopic.AverageButt):
+		return "average butts"
+	if(_topicID == InterestTopic.SlimButt):
+		return "slim butts"
+	
+	return .getChatName(_topicID)
+
+func getAddsToFocus(_topicID, _focus) -> float:
+	if(_topicID in [InterestTopic.ThickBody, InterestTopic.AverageMassBody, InterestTopic.SlimBody]):
+		if(_focus == LustFocus.Body):
+			return 1.0
+	if(_topicID in [InterestTopic.ThickButt, InterestTopic.AverageButt, InterestTopic.SlimButt]):
+		if(_focus == LustFocus.Body):
+			return 1.0
+	return 0.0

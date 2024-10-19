@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Game/Datapacks/UI/PackVarUIs/PackVarUIBase.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Datapacks/UI/PackVarUIs/SkinVarUI.gd" type="Script" id=2]
+[ext_resource path="res://Game/Datapacks/UI/PackVarUIs/AutoSelectorVarUI.tscn" type="PackedScene" id=3]
 
 [node name="SkinVarUI" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -20,43 +21,53 @@ margin_bottom = 720.0
 text = "Same Skin"
 
 [node name="OptionButton" type="OptionButton" parent="." index="2"]
+visible = false
+margin_left = 127.0
+margin_right = 736.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 7.0
+
+[node name="AutoSelectorVarUI" parent="." index="3" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 127.0
 margin_right = 938.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 7.0
 
-[node name="CheckBoxR" type="CheckBox" parent="." index="3"]
+[node name="CheckBoxR" type="CheckBox" parent="." index="4"]
 margin_left = 942.0
 margin_right = 1017.0
 margin_bottom = 720.0
 text = "Same R"
 
-[node name="ColorPickerButtonR" type="ColorPickerButton" parent="." index="4"]
+[node name="ColorPickerButtonR" type="ColorPickerButton" parent="." index="5"]
 margin_left = 1021.0
 margin_right = 1051.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 30, 0 )
 
-[node name="CheckBoxG" type="CheckBox" parent="." index="5"]
+[node name="CheckBoxG" type="CheckBox" parent="." index="6"]
 margin_left = 1055.0
 margin_right = 1132.0
 margin_bottom = 720.0
 text = "Same G"
 
-[node name="ColorPickerButtonG" type="ColorPickerButton" parent="." index="6"]
+[node name="ColorPickerButtonG" type="ColorPickerButton" parent="." index="7"]
 margin_left = 1136.0
 margin_right = 1166.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 30, 0 )
 
-[node name="CheckBoxB" type="CheckBox" parent="." index="7"]
+[node name="CheckBoxB" type="CheckBox" parent="." index="8"]
 margin_left = 1170.0
 margin_right = 1246.0
 margin_bottom = 720.0
 text = "Same B"
 
-[node name="ColorPickerButtonB" type="ColorPickerButton" parent="." index="8"]
+[node name="ColorPickerButtonB" type="ColorPickerButton" parent="." index="9"]
 margin_left = 1250.0
 margin_right = 1280.0
 margin_bottom = 720.0
@@ -64,6 +75,7 @@ rect_min_size = Vector2( 30, 0 )
 
 [connection signal="toggled" from="CheckBoxSkin" to="." method="_on_CheckBoxSkin_toggled"]
 [connection signal="item_selected" from="OptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="onValueChange" from="AutoSelectorVarUI" to="." method="_on_AutoSelectorVarUI_onValueChange"]
 [connection signal="toggled" from="CheckBoxR" to="." method="_on_CheckBoxR_toggled"]
 [connection signal="color_changed" from="ColorPickerButtonR" to="." method="_on_ColorPickerButtonR_color_changed"]
 [connection signal="toggled" from="CheckBoxG" to="." method="_on_CheckBoxG_toggled"]

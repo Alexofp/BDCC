@@ -15,6 +15,11 @@ func getDescription():
 func getTakeOffScene():
 	return "CuffTuggingScene"
 
+func generateRestraintData():
+	restraintData = RestraintHandCuffs.new()
+	restraintData.setLevel(calculateBestRestraintLevel())
+	restraintData.tightlockShiv = true
+
 func getTags():
 	return [ItemTag.BDSMRestraint, ItemTag.SoldByTheAnnouncer]
 

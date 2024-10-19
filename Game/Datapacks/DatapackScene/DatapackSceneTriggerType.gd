@@ -89,7 +89,7 @@ static func getDescription(triggerType):
 	if(triggerType == InsideElevator):
 		return "Happens when the player is inside the elevator. ONLY supports RUN execute type"
 	if(triggerType == PCLookingForTrouble):
-		return "Happens when the player presses the 'look for trouble' button. ONLY supports REACT execute type"
+		return "(Disabled, pls no use) Happens when the player presses the 'look for trouble' button. ONLY supports REACT execute type"
 	if(triggerType == SceneAndStateHook):
 		return "Advanced trigger that lets you hook into any scene. Only use if you know what you are doing. ONLY supports RUN execute type"
 	

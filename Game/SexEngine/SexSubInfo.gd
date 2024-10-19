@@ -50,6 +50,9 @@ func isUnconscious():
 		return true
 	return false
 
+func isResistingSlightly():
+	return resistance >= (0.1 + personalityScore({PersonalityStat.Naive: 0.05}))
+
 func isResisting():
 	return resistance >= (0.3 + personalityScore({PersonalityStat.Naive: 0.2}))
 
@@ -75,6 +78,17 @@ func getConsciousness() -> float:
 	
 func addConsciousness(newcon):
 	getChar().addConsciousness(newcon)
+	if(newcon < 0.0):
+		if(getConsciousness() < 0.5):
+			if(fetishScore({Fetish.UnconsciousSex:1.0}) < 0.3):
+				addFrustration(abs(newcon)*3.0)
+			else:
+				addSatisfaction(abs(newcon)*3.0)
+		if(getConsciousness() >= 0.5):
+			if(fetishScore({Fetish.Choking:1.0}) < 0.3):
+				addFrustration(abs(newcon))
+			else:
+				addSatisfaction(abs(newcon))
 	
 func addFear(addfear):
 	if(getConsciousness() <= 1.0 && addfear > 0.0):
@@ -94,6 +108,8 @@ func addResistance(addres):
 	resistance = clamp(resistance, 0.0, 1.0)
 	var forcedObedience = clamp(getChar().getForcedObedienceLevel(), 0.0, 1.0)
 	resistance = clamp(resistance, 0.0, 1.0 - forcedObedience)
+	if(addres > 0.0):
+		addFrustration(addres * 0.2)
 
 func getResistScore():
 	if(isScared()):
@@ -228,6 +244,18 @@ func affectPersonality(_personality:Personality, _fetishHolder:FetishHolder):
 
 func getOpponentInfo():
 	return getSexEngine().doms[getSexEngine().doms.keys()[0]]
+
+func onGoalSatisfied(_thedominfo, _goalid, _thesubinfo, _mult:float = 1.0):
+	if(isResistingSlightly()):
+		addFrustration(1.0*_mult)
+	else:
+		addSatisfaction(0.5*_mult)
+
+func onGoalFailed(_thedominfo, _goalid, _thesubinfo, _mult:float = 1.0):
+	if(isResistingSlightly()):
+		addSatisfaction(0.5*_mult)
+	else:
+		addFrustration(1.0*_mult)
 
 func saveData():
 	var data = .saveData()

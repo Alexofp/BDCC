@@ -835,6 +835,7 @@ func doSubAction(_id, _actionInfo):
 			text += RNG.pick([
 				" {dom.You} {dom.youAre} furious!",
 			])
+			domInfo.addFrustration(1.0)
 		else:
 			domInfo.addAnger(0.3)
 		getDom().cummedInBodypartByAdvanced(usedBodypart, subID, {condomBroke=condomBroke})

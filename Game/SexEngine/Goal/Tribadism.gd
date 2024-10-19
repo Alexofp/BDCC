@@ -17,3 +17,18 @@ func getSubGoals(_sexEngine, _domInfo, _subInfo, _data):
 		SexGoal.SubUndressSub: 1.0,
 		SexGoal.SubUndressDom: 1.0,
 	}
+
+func domWantsToCum():
+	return true
+
+func doFastSex(_sexEngine, _domInfo, _subInfo, _data):
+	var sub = _subInfo.getChar()
+	var dom = _domInfo.getChar()
+	
+	if(sub.hasReachableVagina() && dom.hasReachableVagina()):
+		dom.rubsVaginasWith(sub.getID())
+		
+		if(RNG.chance(30)):
+			dom.cummedOnBy(sub.getID(), FluidSource.Vagina)
+		if(RNG.chance(30)):
+			sub.cummedOnBy(dom.getID(), FluidSource.Vagina)

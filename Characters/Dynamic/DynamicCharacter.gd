@@ -531,6 +531,25 @@ func loadData(data):
 
 	updateAppearance()
 
+func getInmateType():
+	calculateNpcInmateType()
+	return getFlag(CharacterFlag.InmateType, InmateType.Unknown)
+
+func calculateNpcInmateType():
+	if(getFlag(CharacterFlag.InmateType, InmateType.Unknown) != InmateType.Unknown):
+		return
+	
+	if(!inventory.hasSlotEquipped(InventorySlot.Body)):
+		return
+	
+	var uniform:ItemBase = inventory.getEquippedItem(InventorySlot.Body)
+	if(uniform.hasTag(ItemTag.GeneralInmateUniform)):
+		setFlag(CharacterFlag.InmateType, InmateType.General)
+	elif(uniform.hasTag(ItemTag.HighSecurityInmateUniform)):
+		setFlag(CharacterFlag.InmateType, InmateType.HighSec)
+	elif(uniform.hasTag(ItemTag.SexualDeviantInmateUniform)):
+		setFlag(CharacterFlag.InmateType, InmateType.SexDeviant)
+
 func calculateNpcGeneratedGender():
 	var otherHasPenis = hasPenis()
 	var otherHasVag = hasVagina()
@@ -571,6 +590,7 @@ func loadFromDatapackCharacter(_datapack:Datapack, _datapackChar:DatapackCharact
 	pickedSkinBColor = _datapackChar.pickedSkinBColor
 	
 	npcCharacterType = _datapackChar.characterType
+	setFlag(CharacterFlag.InmateType, _datapackChar.inmateType)
 	
 	npcAttacks = _datapackChar.attacks.duplicate()
 	

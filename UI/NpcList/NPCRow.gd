@@ -6,6 +6,7 @@ onready var _npcPersonalityLabel = $HBoxContainer/Personality
 onready var _amountOfChildrenLabel = $HBoxContainer/Children
 onready var meetButton = $HBoxContainer/CenterContainer2/Meet
 onready var forgetButton = $HBoxContainer/CenterContainer/Forget
+onready var relationship = $HBoxContainer/Relationship
 onready var showNpcButton = $ShowNPC
 signal onForgetButtonPressed(npcID, name, node)
 signal onMeetButtonPressed(npcID, occupation)
@@ -13,7 +14,8 @@ var _npcID setget setNpcID, getNpcID
 var _npcOccupation: String
 var _npcSubbyStatRaw: float
 var _amountOfChildrenRaw: int
-
+var affection:float = 0.0
+var lust:float = 0.0
 
 func initData(name, gender, subbyStat, ID, occupation, children, canForget=true, canMeet=true):
 	_npcNameLabel.text = name
@@ -27,6 +29,12 @@ func initData(name, gender, subbyStat, ID, occupation, children, canForget=true,
 	forgetButton.disabled = !canForget
 	meetButton.disabled = !canMeet
 
+func setRelationShipData(newAff:float, newLust:float):
+	affection = newAff
+	lust = newLust
+	
+	relationship.text = "Affection: "+str(Util.roundF(affection*100.0, 1))+"%\n"
+	relationship.text += "Lust: "+str(Util.roundF(lust*100.0, 1))+"%"
 
 func setNpcID(ID: String):
 	if(ID == ""):

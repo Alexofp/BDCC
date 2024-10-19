@@ -44,6 +44,26 @@ func addStat(statID, addvalue: float):
 		return false
 	return true
 
+func personalityScore(personalityStats = {}, onlyPositive:bool = false) -> float:
+	var result = 0.0
+	for personalityStatID in personalityStats:
+		var personalityValue = getStat(personalityStatID)
+		var addValue = personalityValue * personalityStats[personalityStatID]
+		if(onlyPositive && addValue <= 0.0):
+			continue
+		result += addValue
+	
+	return result
+
+func personalityScoreMax(personalityStats = {}, minValue:float = -999.9) -> float:
+	var result = minValue
+	for personalityStatID in personalityStats:
+		var personalityValue = getStat(personalityStatID)
+		var addValue = personalityValue * personalityStats[personalityStatID]
+		if(addValue > result):
+			result = addValue
+	return result
+
 func saveData():
 	var data = {
 		"stats": stats,

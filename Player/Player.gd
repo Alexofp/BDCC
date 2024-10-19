@@ -27,6 +27,7 @@ var intoxicationTolerance: float = 0.0
 
 # lust combat stuff
 var lustCombatState
+var reputation:Reputation
 
 var dynamicPersonality: bool = false
 
@@ -42,6 +43,9 @@ func _ready():
 	
 	lustCombatState = LustCombatState.new()
 	lustCombatState.setCharacter(self)
+	
+	reputation = Reputation.new()
+	reputation.setCharacter(self)
 	
 	var _ok = menstrualCycle.connect("readyToGiveBirthOnce", self, "onPlayerReadyToGiveBirth")
 	var _ok2 = menstrualCycle.connect("visiblyPregnant", self, "onPlayerVisiblyPregnant")
@@ -81,11 +85,15 @@ func getID():
 	return "pc"
 
 func setLocation(newRoomID:String):
+	if(newRoomID == location):
+		return
 	location = newRoomID
 	#var roomInfo = GM.world.getRoomByID(location)
 	#if(roomInfo):
 	#	var roomName = roomInfo.getName()
 	#	GM.ui.setLocationName(roomName)
+	if(GM.main != null && is_instance_valid(GM.main) && GM.main.IS != null):
+		GM.main.IS.updatePCLocation()
 	emit_signal("location_changed", newRoomID)
 	
 func getLocation():
@@ -416,6 +424,7 @@ func saveData():
 	
 	data["fetishHolder"] = fetishHolder.saveData()
 	data["personality"] = personality.saveData()
+	data["reputation"] = reputation.saveData()
 	
 	return data
 
@@ -475,6 +484,7 @@ func loadData(data):
 	
 	fetishHolder.loadData(SAVE.loadVar(data, "fetishHolder", {}))
 	personality.loadData(SAVE.loadVar(data, "personality", {}))
+	reputation.loadData(SAVE.loadVar(data, "reputation", {}))
 	
 	checkLocation()
 		
@@ -888,3 +898,17 @@ func setThickness(_newT:int):
 func setFemininity(_newF:int):
 	pickedFemininity = _newF
 	updateAppearance()
+
+func canStartSex() -> bool:
+	if(hasBoundArms()):
+		return false
+	if(hasBlockedHands()):
+		return false
+	if(hasBoundLegs()):
+		return false
+	if(isOralBlocked()):
+		return false
+	return true
+
+func getReputation():
+	return reputation

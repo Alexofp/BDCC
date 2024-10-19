@@ -22,6 +22,9 @@ func isPossibleForPC(_pc, _npc, _isSlaveLevelup):
 func isPossibleFor(_npc, _isSlaveLevelup):
 	return false
 
+func isPossibleForSlutlock(_npc):
+	return isPossibleFor(_npc, false)
+
 func generateFor(_npc, _isSlaveLevelup, _difficulty = 1.0):
 	pass
 

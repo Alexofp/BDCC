@@ -108,51 +108,12 @@ func startActivity(_args):
 	if(actionID in ["struggle"]):
 		endActivity()
 		var sub = getSub()
-		var possible = []
-		var trivial = []
-		
-		for item in getSub().getInventory().getEquppedRestraints():
-			var restraintData: RestraintData = item.getRestraintData()
-			
-			if(restraintData == null || !restraintData.canStruggleFinal()):
-				continue
-			
-			if(!restraintData.shouldDoStruggleMinigame(sub)):
-				trivial.append(item)
-			else:
-				possible.append(item)
-		
-		var pickedItem
-		var minigameResult
-		if(trivial.size() > 0):
-			pickedItem = RNG.pick(trivial)
-			minigameResult = MinigameResult.new()
-			minigameResult.score = 1.0
-		elif(possible.size() > 0):
-			pickedItem = RNG.pick(possible)
-			minigameResult = getSub().getRestraintStrugglingMinigameResult()
-			
-			if(subInfo.isScared()): # The subs fuck up more if scared
-				minigameResult.score = min(minigameResult.score, min(1.0, RNG.randf_range(0.6, 1.1)))
-		else:
+		var struggleData:Dictionary = sub.doStruggleOutOfRestraints(subInfo.isScared(), false)
+		if(struggleData.empty()):
 			return
 		
-		var text = ""
-		var restraintData: RestraintData = pickedItem.getRestraintData()
-		var struggleData = restraintData.doStruggle(sub, minigameResult)
+		var text = struggleData["text"] if struggleData.has("text") else "[color=red]ERROR? No struggle text provided[/color]"
 		
-		var struggleText = GM.ui.processString(struggleData["text"], {"user":subID})
-		text += struggleText
-		
-		if(struggleData.has("damage")):
-			var damage = struggleData["damage"]
-			restraintData.takeDamage(damage)
-			if(damage > 0.0):
-				text += ("\n{sub.You} made "+str(Util.roundF(damage*100.0, 1))+"% of progress, "+str(Util.roundF(max(0.0, restraintData.getTightness()*100.0), 1))+"% left.")
-			elif(damage < 0.0):
-				text += ("\n{sub.You} lost "+str(Util.roundF(abs(damage)*100.0, 1))+"% of progress, "+str(Util.roundF(max(0.0, restraintData.getTightness()*100.0), 1))+"% left.")
-			else:
-				text += ("\n{sub.You} made no progress, "+str(Util.roundF(max(0.0, restraintData.getTightness()*100.0), 1))+"% left.")
 		if(struggleData.has("lust") && struggleData["lust"] > 0):
 			subInfo.addLust(struggleData["lust"])
 		if(struggleData.has("pain") && struggleData["pain"] > 0):
@@ -160,11 +121,6 @@ func startActivity(_args):
 			subInfo.addFear(struggleData["pain"]/40.0)
 		if(struggleData.has("stamina") && struggleData["stamina"] != 0):
 			sub.addStamina(-struggleData["stamina"])
-		
-		if(restraintData.shouldBeRemoved()):
-			text += "\n[b]"+restraintData.getRemoveMessage()+"[/b]"
-			restraintData.onStruggleRemoval()
-			sub.getInventory().removeEquippedItem(pickedItem)
 		
 		return {text=text, subSay=subReaction(SexReaction.ResistingRestraints, 30)}
 	

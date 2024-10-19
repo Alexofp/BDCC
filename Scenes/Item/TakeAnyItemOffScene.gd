@@ -17,6 +17,12 @@ func _reactInit():
 	if(item == null):
 		return
 	
+	if(item.isRestraint()):
+		var restraintData = item.getRestraintData()
+		if(restraintData != null && restraintData.hasSmartLock()):
+			setState("smartlocked")
+			return
+	
 	if(!GM.pc.hasBlockedHands()):
 		if(GM.pc.hasBoundArms()):
 			setState("awkwardtakeoff")
@@ -42,6 +48,11 @@ func _run():
 			saynn("You "+item.getTakingOffStringLong(false))
 		
 		addButton("Continue", "You took off an item", "endthescene")
+
+	if(state == "smartlocked"):
+		saynn("This item is smartlocked.. so you can't remove it.")
+		
+		addButton("Continue", "Aww", "endthescene")
 
 	if(state == "awkwardtakeoff"):
 		if(uniqueItemID == null || uniqueItemID == ""):

@@ -7,6 +7,23 @@ var goals:Array = []
 var anger: float = 0.0
 var isDown:bool = false
 var angerFull: float = 0.0
+var hasAnyCumGoals:bool = false
+
+func hasGoalToCum() -> bool:
+	return hasAnyCumGoals
+
+func afterGoalsAssigned():
+	checkHasCumGoals()
+
+func checkHasCumGoals():
+	hasAnyCumGoals = false
+	for goalInfo in goals:
+		var goalID = goalInfo[0]
+		var sexGoal = GlobalRegistry.getSexGoal(goalID)
+		if(sexGoal == null):
+			continue
+		if(sexGoal.domWantsToCum()):
+			hasAnyCumGoals = true
 
 func checkIsDown():
 	if(!isDown && getChar().getPainLevel() >= 1.0):
@@ -29,6 +46,9 @@ func addAnger(howmuch = 0.2):
 			howmuch *= max(1.0 + meanness, 0.1)
 		else:
 			howmuch *= (1.0 - meanness)
+	
+	if(meanness < 0.5):
+		addFrustration(max(howmuch * (0.5 - meanness), 0.0))
 	
 	anger += howmuch
 	anger = clamp(anger, 0.0, 1.0)
@@ -174,6 +194,12 @@ func affectPersonality(_personality:Personality, _fetishHolder:FetishHolder):
 func getOpponentInfo():
 	return getSexEngine().subs[getSexEngine().subs.keys()[0]]
 
+func onGoalSatisfied(_thedominfo, _goalid, _thesubinfo, _mult:float = 1.0):
+	addSatisfaction(0.5*_mult)
+
+func onGoalFailed(_thedominfo, _goalid, _thesubinfo, _mult:float = 1.0):
+	addFrustration(1.0*_mult)
+
 func saveData():
 	var data = .saveData()
 	
@@ -181,6 +207,7 @@ func saveData():
 	data["anger"] = anger
 	data["isDown"] = isDown
 	data["angerFull"] = angerFull
+	data["hasAnyCumGoals"] = hasAnyCumGoals
 
 	return data
 	
@@ -191,3 +218,4 @@ func loadData(data):
 	anger = SAVE.loadVar(data, "anger", 0.0)
 	isDown = SAVE.loadVar(data, "isDown", false)
 	angerFull = SAVE.loadVar(data, "angerFull", 0.0)
+	hasAnyCumGoals = SAVE.loadVar(data, "hasAnyCumGoals", false)

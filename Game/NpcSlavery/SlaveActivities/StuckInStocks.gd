@@ -7,7 +7,9 @@ func getVisibleName():
 	return "Stuck in stocks"
 
 func onStart(_args = []):
-	pass
+	var pawn = GM.main.IS.spawnPawnIfNeeded(getCharID())
+	pawn.setLocation("main_punishment_spot")
+	GM.main.IS.startInteraction("InStocks", {inmate=getCharID()})
 
 func onNewDay():
 	pass
@@ -21,59 +23,33 @@ func preventsNormalInteractions():
 func getActivityText():
 	return "{npc.name} is currently stuck in stocks so {npc.he} {npc.isAre} not here."
 
-func hoursPassed(_howMuch):
-	if(RNG.chance(30*_howMuch)):
-		var theChar:DynamicCharacter = getChar()
-		if(GM.main.characterIsVisible(theChar.getID())):
-			return
-		
-		var possible = ["onto"]
-		if(theChar.hasReachableVagina()):
-			possible.append("pussy")
-		if(theChar.hasReachableAnus()):
-			possible.append("ass")
-		if(!theChar.isOralBlocked()):
-			possible.append("face")
-		
-		if(possible.size() == 0):
-			return
-		
-		GM.main.updateCharacterUntilNow(theChar.getID())
-		
-		for _i in range(RNG.randi_range(1, 4)):
-			var randomFuck = RNG.pick(possible)
-			
-			var idToUse = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true}, true)
-			if(idToUse == null):
-				return
-			GM.main.updateCharacterUntilNow(idToUse)
-			
-			if(randomFuck == "pussy"):
-				theChar.gotVaginaFuckedBy(idToUse)
-				theChar.cummedInVaginaBy(idToUse)
-				theChar.addTallymarkCrotch()
-			if(randomFuck == "face"):
-				theChar.gotThroatFuckedBy(idToUse)
-				theChar.cummedInMouthBy(idToUse)
-				theChar.addTallymarkFace()
-			if(randomFuck == "ass"):
-				theChar.gotAnusFuckedBy(idToUse)
-				theChar.cummedInAnusBy(idToUse)
-				theChar.addTallymarkButt()
-			if(randomFuck == "onto"):
-				theChar.cummedOnBy(idToUse)
-				theChar.addTallymarkButt()
-				
-			var npcSlave:NpcSlave = theChar.getNpcSlavery()
-			if(npcSlave != null):
-				npcSlave.addTired(1)
-				if(npcSlave.getTiredEffect() >= 0.9):
-					npcSlave.addDespair(0.06)
-				else:
-					npcSlave.addDespair(0.01)
-					npcSlave.addBrokenSpirit(0.05 * npcSlave.getWorkEfficiency())
-					npcSlave.addExperience(5)
+func onPawnDeleted(_pawn):
+	stopActivity()
 
+func onInteractionChanged(_newInteraction):
+	if(_newInteraction == null || _newInteraction.id != "InStocks"):
+		stopActivity()
+
+func getSexEventID():
+	return "stocksUsed"
+
+func onInteractionEvent(_eventID:String, _args:Dictionary):
+	if(_eventID == getSexEventID()):
+		var npcSlave:NpcSlave = getSlave()
+		if(npcSlave != null):
+			npcSlave.addTired(1)
+			if(npcSlave.getTiredEffect() >= 0.9):
+				npcSlave.addDespair(0.06)
+			else:
+				npcSlave.addDespair(0.01)
+				npcSlave.addBrokenSpirit(0.05 * npcSlave.getWorkEfficiency())
+				npcSlave.addExperience(5)
+
+func hoursPassed(_howMuch):
+	if(!pawnExist()):
+		stopActivity()
+		return
+	
 func getInteractActions():
 	return [
 		{

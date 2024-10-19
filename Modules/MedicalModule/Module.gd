@@ -122,6 +122,7 @@ func _init():
 		"res://Modules/MedicalModule/HealingScenes/MedicalHealCryopodFirstTime.gd",
 		"res://Modules/MedicalModule/HealingScenes/MedicalHealCryopodScene.gd",
 		"res://Modules/MedicalModule/HealingScenes/MedicalHealingGelScene.gd",
+		"res://Modules/MedicalModule/HealingScenes/ElizaBackupPCSaveScene.gd",
 		]
 	characters = [
 		"res://Modules/MedicalModule/MentalWard/LatexParasite.gd",

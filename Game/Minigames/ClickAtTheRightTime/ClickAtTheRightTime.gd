@@ -5,6 +5,8 @@ onready var cursor = $GameScreen/Panel/Cursor
 onready var redZone = $GameScreen/Panel/Panel
 onready var orangeZone = $GameScreen/Panel/Panel2
 onready var goldenZone = $GameScreen/Panel/Panel3
+onready var button = $StartMenu/CenterContainer/VBoxContainer/Button
+
 var time = 0.0
 var cursorSpeed = 1.0
 var timer = 10.0
@@ -44,6 +46,7 @@ func _ready():
 	setHardStruggleEnabled(false)
 	setDifficulty(2)
 	setIsBlindfolded(false)
+	button.grab_focus()
 
 func generateFatalZone(_difficulty = 1.0):
 	if !hardStruggleEnabled || isBlindFoldedVersion:
@@ -150,6 +153,13 @@ func _process(delta):
 				flatStyle.bg_color = Color.black
 		else:
 			flatStyle.bg_color = Color.black
+	
+	if(Input.is_action_just_pressed("minigame_commit")):
+		if(!ingame):
+			pass
+			#_on_Button_pressed()
+		else:
+			doCommitClick()
 	
 func getCursorPosition():
 	return (sin(pow(time * cursorSpeed, 1.2)) + 1.0) / 2.0
@@ -274,29 +284,35 @@ onready var streakLabel = $GameScreen/StreakLabel
 func _on_ClickAtTheRightTime_gui_input(event):
 	if(event is InputEventMouseButton):
 		if(event.pressed && !freeze):
-			if(hasAdvancedPerk):
-				var theScore = getScore()
-				if(theScore >= 1.0 && theScore <= 2.0):
-					perfectStreak += 1
-					timeLeft += 1.0
-					timeLeft = min(timer, timeLeft)
-					streakLabel.text = "Perfect Streak: "+str(perfectStreak)+" (+"+str(Util.roundF(howMuchForPerfect*perfectStreak*100.0, 1))+"%)"
-					
-					if tween:
-						tween.kill()
-					tween = create_tween()
-					#tween.tween_method(self, "setStreakColor", Color.white, Color.red, 0.1)
-					tween.tween_method(self, "setStreakColor", Color.red, Color.white, 0.2)
-					# reset pos
-					generateZone(difficulty)
-					return
-				
-			
-			freeze = true
-			yield(get_tree().create_timer(0.5), "timeout")
-			freeze = false
-			#generateZone(RNG.randf_range(1.0, 10.0))
-			#setDifficulty(5)
-			#print(finalScore)
+			doCommitClick()
 
-			emit_signal("minigameCompleted", calcFinalScore())
+func doCommitClick():
+	if(freeze):
+		return
+	
+	if(hasAdvancedPerk):
+		var theScore = getScore()
+		if(theScore >= 1.0 && theScore <= 2.0):
+			perfectStreak += 1
+			timeLeft += 1.0
+			timeLeft = min(timer, timeLeft)
+			streakLabel.text = "Perfect Streak: "+str(perfectStreak)+" (+"+str(Util.roundF(howMuchForPerfect*perfectStreak*100.0, 1))+"%)"
+			
+			if tween:
+				tween.kill()
+			tween = create_tween()
+			#tween.tween_method(self, "setStreakColor", Color.white, Color.red, 0.1)
+			tween.tween_method(self, "setStreakColor", Color.red, Color.white, 0.2)
+			# reset pos
+			generateZone(difficulty)
+			return
+		
+	
+	freeze = true
+	yield(get_tree().create_timer(0.5), "timeout")
+	freeze = false
+	#generateZone(RNG.randf_range(1.0, 10.0))
+	#setDifficulty(5)
+	#print(finalScore)
+
+	emit_signal("minigameCompleted", calcFinalScore())

@@ -72,6 +72,8 @@ func setVariables(_data:Dictionary):
 			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/LocationVarUI.tscn").instance()
 		elif(type == "advancedSelector"):
 			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/AdvancedSelectorVarUI.tscn").instance()
+		elif(type == "autoSelector"):
+			newWidget = preload("res://Game/Datapacks/UI/PackVarUIs/AutoSelectorVarUI.tscn").instance()
 		else:
 			Log.printerr("Unknown var type found: "+str(type))
 

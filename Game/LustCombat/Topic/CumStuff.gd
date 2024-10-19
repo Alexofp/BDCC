@@ -67,3 +67,54 @@ func getVisibleName(_topicID):
 		return "total cumdumpsters"
 	
 	return "error:"+str(_topicID)
+
+func getChatName(_topicID) -> String:
+	if(_topicID == InterestTopic.StuffedPussy):
+		return "creamed pussies"
+	if(_topicID == InterestTopic.StuffedAss):
+		return "cream-stuffed butts"
+	if(_topicID == InterestTopic.StuffedPussyOrAss):
+		return "creampies"
+	if(_topicID == InterestTopic.Pregnant):
+		return "breeding"
+	if(_topicID == InterestTopic.StuffedThroat):
+		return "cum eaters"
+	if(_topicID == InterestTopic.CoveredInCum):
+		return "cum facials"
+	if(_topicID == InterestTopic.CoveredInLotsOfCum):
+		return "cumdumpsters"
+	
+	return .getChatName(_topicID)
+
+func getAddsToFocus(_topicID, _focus) -> float:
+	if(_topicID == InterestTopic.StuffedPussy):
+		if(_focus == LustFocus.Crotch):
+			return 1.0
+	if(_topicID == InterestTopic.StuffedAss):
+		if(_focus == LustFocus.Butt):
+			return 1.0
+	if(_topicID == InterestTopic.StuffedPussyOrAss):
+		if(_focus == LustFocus.Crotch):
+			return 1.0
+		if(_focus == LustFocus.Butt):
+			return 1.0
+	if(_topicID == InterestTopic.Pregnant):
+		if(_focus == LustFocus.Body):
+			return 1.0
+		if(_focus == LustFocus.Breasts):
+			return 0.25
+	if(_topicID == InterestTopic.StuffedThroat):
+		if(_focus == LustFocus.Body):
+			return 0.25
+	if(_topicID == InterestTopic.CoveredInCum):
+		if(_focus == LustFocus.Body):
+			return 1.0
+		if(_focus == LustFocus.Breasts):
+			return 0.5
+	if(_topicID == InterestTopic.CoveredInLotsOfCum):
+		if(_focus == LustFocus.Body):
+			return 1.0
+		if(_focus == LustFocus.Breasts):
+			return 0.5
+	
+	return 0.0

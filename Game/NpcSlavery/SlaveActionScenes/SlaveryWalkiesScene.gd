@@ -170,3 +170,5 @@ func loadData(data):
 	npc = GlobalRegistry.getCharacter(npcID)
 	walkiesType = SAVE.loadVar(data, "walkiesType", "")
 	
+func supportsShowingPawns() -> bool:
+	return true

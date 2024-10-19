@@ -307,7 +307,13 @@ func getRoughLitterEstimateString(veryAccurate = false):
 		disp = disp / 2
 	var minValue = RNG.randi_range(trueValue - int(disp * (1.0 - averageProgress)), trueValue)
 	minValue = Util.maxi(0, minValue)
-	var maxValue = RNG.randi_range(trueValue + int(disp * (1.0 - averageProgress)), trueValue)
+	var maxValueMin = trueValue + int(disp * (1.0 - averageProgress))
+	var maxValue = 0
+	if (maxValueMin > trueValue):
+		maxValue = RNG.randi_range(trueValue, maxValueMin)
+	else:
+		maxValue = RNG.randi_range(maxValueMin, trueValue)
+		
 
 	if(minValue == maxValue):
 		if(maxValue == 1):

@@ -19,6 +19,9 @@ func execute(_contex:CodeContex):
 	var flagID = str(varNameSlot.getValue(_contex))
 	if(_contex.hadAnError()):
 		return
+	if(!isString(flagID)):
+		throwError(_contex, "Flag id must a string, got "+str(flagID)+" instead")
+		return
 		
 	var addValue = varValueSlot.getValue(_contex)
 	if(_contex.hadAnError()):
@@ -28,9 +31,6 @@ func execute(_contex:CodeContex):
 		throwError(_contex, "Increase value should be a number, got: "+str(addValue)+" instead")
 		return
 		
-	if(!_contex.hasFlag(flagID)):
-		throwError(_contex, "Flag not found "+str(flagID))
-		return
 	_contex.setFlag(flagID, _contex.getFlag(flagID, 0) + addValue, self)
 
 func getTemplate():

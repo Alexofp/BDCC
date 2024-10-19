@@ -1,6 +1,8 @@
 extends RestraintData
 class_name RestraintLegCuffs
 
+var tightlockShiv:bool = false
+
 func _init():
 	npcDodgeDifficultyMod = 1.1
 	restraintType = RestraintType.AnkleCuffs
@@ -40,3 +42,13 @@ func doStruggle(_pc, _minigame:MinigameResult):
 
 func getResistAnimation():
 	return "struggle_legs"
+
+func getTightLockRequiredItemID() -> String:
+	if(tightlockShiv):
+		return "Shiv"
+	return .getTightLockRequiredItemID()
+
+func getTightLockUnlockMessage() -> String:
+	if(tightlockShiv):
+		return "The lock is impossible to remove so you just use a shiv to cut through the restraint, slowly freeing your ankles."
+	return .getTightLockUnlockMessage()

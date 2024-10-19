@@ -3,6 +3,7 @@ class_name Rollbacker
 
 var rollbackStates:Array = []
 var currentChoice = 0
+var rollbacking:bool = false
 
 func pushRollbackState():
 	if(OPTIONS.isRollbackEnabled()):
@@ -29,6 +30,8 @@ func rollback():
 		return
 	
 	Log.print("ROLLBACK")
+	rollbacking = true
 	SAVE.loadData(rollbackStates.back())
 	rollbackStates.pop_back()
+	rollbacking = false
 	Log.print("ROLLBACK FINISHED")

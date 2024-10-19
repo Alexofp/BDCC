@@ -373,6 +373,8 @@ func getAllSceneIDs():
 	return result
 func getAllImageIDs():
 	return scene.images.keys()
+func getAllDatapackIDs():
+	return GlobalRegistry.getDatapacks().keys()
 
 func _on_AddFlagButton_pressed():
 	var newVarName = new_flag_line_edit.text

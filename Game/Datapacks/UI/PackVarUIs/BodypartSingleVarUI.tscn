@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Game/Datapacks/UI/PackVarUIs/BodypartSingleVarUI.gd" type="Script" id=1]
+[ext_resource path="res://Game/Datapacks/UI/PackVarUIs/AutoSelectorVarUI.tscn" type="PackedScene" id=2]
 
 [node name="BodypartSingleVarUI" type="VBoxContainer"]
 anchor_right = 1.0
@@ -12,13 +13,21 @@ margin_right = 1280.0
 margin_bottom = 20.0
 
 [node name="Label" type="Label" parent="HBoxContainer"]
+visible = false
 margin_top = 3.0
 margin_right = 33.0
 margin_bottom = 17.0
 text = "Head"
 
 [node name="OptionButton" type="OptionButton" parent="HBoxContainer"]
-margin_left = 37.0
+visible = false
+margin_right = 638.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="AutoSelectorVarUI" parent="HBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 1280.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
@@ -29,3 +38,4 @@ margin_right = 1280.0
 margin_bottom = 24.0
 
 [connection signal="item_selected" from="HBoxContainer/OptionButton" to="." method="_on_OptionButton_item_selected"]
+[connection signal="onValueChange" from="HBoxContainer/AutoSelectorVarUI" to="." method="_on_AutoSelectorVarUI_onValueChange"]

@@ -58,6 +58,29 @@ func getChar():
 		return null
 	return slavery.get_ref().getChar()
 
+func getCharID() -> String:
+	if(slavery == null):
+		return ""
+	return slavery.get_ref().getChar().getID()
+
+func stopActivity():
+	getSlave().stopActivity()
+
+func onPawnDeleted(_pawn):
+	pass
+
+func onInteractionChanged(_newInteraction):
+	pass
+
+func onInteractionEvent(_eventID:String, _args:Dictionary):
+	pass
+
+func pawnShouldReturnHome() -> bool:
+	return true
+
+func pawnExist() -> bool:
+	return GM.main.IS.hasPawn(getChar().getID())
+
 func saveData():
 	var data = {
 		#"slaveType": slaveType,

@@ -4,6 +4,12 @@ func _init():
 	sceneID = "WorldScene"
 
 func _run():
+	if(runInteraction()):
+		return
+	
+	#saynn(ModularDialogue.generate("GuardCaughtOffLimits", {guard=GM.pc,inmate=GM.pc}))
+	#print(GM.main.IS.getPawnIDsNear(GM.pc.location, 2, 1))
+	
 	var roomID = GM.pc.location
 	var _roomInfo = GM.world.getRoomByID(roomID)
 	
@@ -32,6 +38,12 @@ func _run():
 	else:
 		addDisabledButtonAt(12, "East", "Can't go east")
 	#addDisabledButton("bark", "no awo")
+	
+	if(GM.main.IS.hasPawnsAtIgnorePC(roomID)):
+		addButtonAt(7, "Look around", "See what's happening around you", "look_around")
+		setCharactersEasyList(GM.main.IS.getPawnIDsAt(roomID))
+	else:
+		clearCharacter()
 	
 	if(GM.pc.getInventory().hasRemovableRestraints()):
 		addButtonAt(8, "Struggle", "Struggle against your restraints", "struggle")
@@ -78,7 +90,7 @@ func _react(_action: String, _args):
 		#playAnimation(StageScene.PuppySolo, "walk")
 		#playAnimation(StageScene.Solo, "custom", {anim={"Arm.L":{"a":[-0,0,-3.02]},"Arm.R":{"a":[-0,0,2.87]},"Chest":{"a":[-0,0,0.26]},"Hips":{"a":[-0,0,2.84],"p":[0,0.52,0]},"LegDown.R":{"a":[-0,0,-1.33]},"LegUpper.L":{"a":[-0,0,0.1]},"LegUpper.R":{"a":[-0,0,0.96]},"Tail1":{"a":[-0,0,-0.33]},"Tail2":{"a":[-0,0,-0.38]},"Tail3":{"a":[-0,0,-0.39]},"Tail4":{"a":[-0,0,-0.28]},"Tail5":{"a":[-0,0,-0.34]}}  })
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, _args[0]))
-		processTime(30)
+		processTime((30 if !GM.pc.hasBoundLegs() else 60))
 		aimCamera(GM.pc.location)
 		GM.ES.triggerReact(Trigger.EnteringRoom, [GM.pc.location, _args[1]])
 		
@@ -144,3 +156,136 @@ func _react(_action: String, _args):
 		runScene("PCOverrideExample")
 	if(_action == "masochismminigame"):
 		runScene("TaviMasochismScene")
+	if(_action == "look_around"):
+		runScene("LookingAroundScene")
+	if(_action == "progress_interaction"):
+		var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
+		var interaction:PawnInteractionBase = pawn.getInteraction()
+		
+		if(!interaction.isWaitingForScene()):
+			if(interaction.currentActionID == ""):
+				GM.main.IS.decideNextAction(interaction, {scene=self})
+			if(!interaction.isWaitingForScene()):
+				if(interaction.busyActionSeconds > 0):
+					processTime(interaction.busyActionSeconds)
+				else:
+					processTime(30)
+				interaction.doCurrentAction({scene=self})
+				#if(!pawn.getInteraction().isWaitingForScene()):
+				#	GM.main.IS.decideNextAction(pawn.getInteraction(), {scene=self})
+	if(_action == "pick_interaction_action"):
+		#var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
+		var interaction:PawnInteractionBase = _args[0]#pawn.getInteraction()
+		interaction.setPickedAction(_args[1], {scene=self})
+		
+		if(!interaction.isWaitingForScene()):
+			if(interaction.busyActionSeconds > 0):
+				processTime(interaction.busyActionSeconds)
+			else:
+				processTime(30)
+			interaction.doCurrentAction({scene=self})
+
+
+
+func runInteraction():
+	var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
+	if(pawn == null || pawn.currentInteraction == null || !pawn.currentInteraction.doesStealControlFromPC()):
+		return false
+	
+	var interaction:PawnInteractionBase = pawn.getInteraction()
+	setCharactersEasyList(interaction.getAllInvolvedCharIDs())
+	interaction.playAnimation()
+	aimCameraAndSetLocName(interaction.getLocation())
+	
+	if(interaction.getCurrentActionText() != ""):
+		saynn(interaction.getCurrentActionText())
+	
+	var textAndActions:Array = interaction.getTextAndActions()
+	saynn(textAndActions[0])
+	
+	if(GM.main.isDebuggingIS):
+		sayn("[b]Debug info[/b]:")
+		saynn(Util.join(pawn.getDebugInfo(), "\n"))
+	
+	if(interaction.getCurrentPawn() == pawn):
+		for action in textAndActions[1]:
+			if(action.has("disabled") && action["disabled"]):
+				addDisabledButton(action["name"], action["desc"])
+			#elif(action.has("start_sex") && action["start_sex"].size() > 0 && action["start_sex"][0] == "pc"):
+			#	addButtonWithChecks(action["name"], action["desc"], "pick_interaction_action", [interaction, action], [[ButtonChecks.CanStartSex]])
+			else:
+				addButton(action["name"], action["desc"], "pick_interaction_action", [interaction, action])
+	else:
+		addButton("Continue", "See what happens next", "progress_interaction")
+	
+	return true
+	
+func startInteractionFight(who:String, withWho:String):
+	if(who == "pc"):
+		runScene("FightScene", [withWho], "interaction_fight_pcstarted")
+	else:
+		runScene("FightScene", [who], "interaction_fight_pcdef")
+
+func startInteractionSex(domID:String, subID:String, sexType = SexType.DefaultSex, extraParams:Dictionary = {}):
+	if(domID != "pc"):
+		getCharacter(domID).prepareForSexAsDom()
+		GlobalRegistry.getCharacter(domID).addPain(-50)
+	runScene("GenericSexScene", [domID, subID, sexType, extraParams], "interaction_sex")
+
+func sendStatusToInteraction(_result):
+	var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
+	if(pawn == null):
+		return
+	var interaction:PawnInteractionBase = pawn.getInteraction()
+	if(interaction == null):
+		return
+	
+	interaction.receiveSceneStatusFinal(_result)
+
+func _react_scene_end(_tag, _result):
+	if(_tag == "interaction_sex"):
+		sendStatusToInteraction(_result[0])
+	
+	if(_tag == "interaction_fight_pcstarted"):
+		var battlestate = _result[0]
+
+		if(battlestate == "win"):
+			sendStatusToInteraction({"won":true})
+		else:
+			sendStatusToInteraction({"won":false})
+	if(_tag == "interaction_fight_pcdef"):
+		var battlestate = _result[0]
+
+		if(battlestate == "win"):
+			sendStatusToInteraction({"won":false})
+		else:
+			sendStatusToInteraction({"won":true})
+
+func shouldDisplayBigButtons():
+	var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
+	if(pawn == null):
+		return false
+	var interaction:PawnInteractionBase = pawn.getInteraction()
+	if(interaction == null):
+		return false
+	return interaction.shouldShowBigButtons()
+
+func isSpyingOnInteractionsWith(_charID:String):
+	if(_charID == "pc"):
+		return true
+	return false
+
+func resolveCustomCharacterName(_charID):
+	var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
+	if(pawn == null):
+		return
+	var interaction:PawnInteractionBase = pawn.getInteraction()
+	if(interaction == null):
+		return
+	
+	if(interaction.involvedPawns.has(_charID)):
+		return interaction.involvedPawns[_charID]
+	return .resolveCustomCharacterName(_charID)
+
+func supportsShowingPawns() -> bool:
+	return true

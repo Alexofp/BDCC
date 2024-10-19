@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Game/Datapacks/UI/CrotchCode/UI/FlagPickerWindow.gd" type="Script" id=1]
+
+[node name="FlagPickerWindow" type="ConfirmationDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 212.0
+margin_top = 86.0
+margin_right = -212.0
+margin_bottom = -86.0
+window_title = "Pick a flag"
+script = ExtResource( 1 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+
+[node name="SourceList" type="ItemList" parent="HBoxContainer2"]
+margin_right = 238.0
+margin_bottom = 504.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="FlagList" type="ItemList" parent="HBoxContainer2"]
+margin_left = 242.0
+margin_right = 840.0
+margin_bottom = 504.0
+size_flags_horizontal = 3
+
+[connection signal="confirmed" from="." to="." method="_on_FlagPickerWindow_confirmed"]
+[connection signal="popup_hide" from="." to="." method="_on_FlagPickerWindow_popup_hide"]
+[connection signal="item_selected" from="HBoxContainer2/SourceList" to="." method="_on_SourceList_item_selected"]
+[connection signal="item_selected" from="HBoxContainer2/FlagList" to="." method="_on_FlagList_item_selected"]
