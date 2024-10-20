@@ -52,7 +52,10 @@ func _run():
 		saynn("How do you wanna sub to Mirri?")
 
 		addButton("Painplay", "See what that crazy bitch can do to your body..", "sub_painplay")
-		addButton("Pussy worship", "See what that crazy bitch will do to you with her pussy..", "sub_pussy")
+		if (true):
+			addButton("Pussy worship", "See what that crazy bitch will do to you with her pussy..", "sub_pussy")
+		if (true):
+			addButton("Puppy walkies", "See yourself become the bitch..", "sub_walkies")
 		addButton("Back", "Back to the previous menu", "sex_menu")
 	if(state == "chat_menu"):
 		saynn("What do you wanna ask Mirri?")
@@ -814,6 +817,317 @@ func _run():
 
 		setFlag("SlaveAuctionModule.customMirriGreeting", "I ain't gonna tongue with you for some time. Not after what you begged me to do last time.")
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "sub_walkies"):
+		saynn("You're feeling a bit.. subby.. but you make sure not to show it. You put on a stone-cold face expression and try to be as motionless as possible in front of Mirri.")
+
+		saynn("She looks at you.. and raises a brow. Fuck. Where do you look? At her! Right. You look her into the eyes.")
+
+		saynn("[say=mirri]Oh? My lovely little sextoy is feeling subby?[/say]")
+
+		saynn("You don't even know anymore.. Maybe it was the way you glanced at her.. or the way you hesitated, just a split second longer than usual.")
+
+		saynn("[say=pc]No![/say]")
+
+		saynn("Too late, Mirri's eyes have already lit up, a dangerous, predatory glint flashing through them as she tilts her head, her lips curving into a smirk.")
+
+		saynn("You step back, she steps forward. You hear purring.. dark purring.. purring that gradually crossfades into growling.")
+
+		saynn("[say=pc]Wait, Mirri, wait! Let's not rush to action and just talk about it![/say]")
+
+		saynn("[say=mirri]Do you love me?[/say]")
+
+		saynn("One heck of a question to ask in this situation.")
+
+		saynn("[say=pc]Of course, baby.[/say]")
+
+		saynn("[say=mirri]Shh.. Fine. I won't do anything.[/say]")
+
+		saynn("She suddenly stops dead in her tracks. You can only phew.. It feels like you have defused a bomb.")
+
+		saynn("[say=pc]..crazy..[/say]")
+
+		saynn("[say=mirri]But now I will![/say]")
+
+		saynn("Oh shit.")
+
+		addButton("Continue", "See what happens next", "subwalkies_suit")
+	if(state == "subwalkies_suit"):
+		playAnimation(StageScene.PuppyDuo, "stand", {pc="mirri", npcBodyState={naked=true, leashedBy="mirri", hard=true}})
+		saynn("Before you can react, Mirri tackles you and drags you off to the special wardrobe that she has. Your heart sinks when you see what kind of restraints she pulls out.")
+
+		saynn("[say=mirri]Hold still, you stupid mutt! Don't make me grab the buttplug tail![/say]")
+
+		saynn("She forces your knees and elbow into special leather caps that she then tightens using straps and locks with small padlocks, forcing your wrists to your shoulders and your ankles to your thighs.. making you stand on all fours.")
+
+		saynn("[say=mirri]PERFECT![/say]")
+
+		saynn("[say=pc]Mirri, fucking wait, I-..[/say]")
+
+		saynn("She snaps the leash onto your collar with a sharp click, cutting you off. Her eyes narrow.")
+
+		saynn("[say=mirri]Pups don't talk.[/say]")
+
+		saynn("She tugs on the leash, enough to make you jerk your head up.")
+
+		saynn("[say=mirri]A pup is not gonna say a word unless I let them. And you? You're nothing but a little bitch right now![/say]")
+
+		saynn("You open your mouth to argue.. to say something.. anything. But she is quick to crouch and grab you by the muzzles, forcing your lips shut. Her face is inches away from yours, her hot breath tickling your cheek.")
+
+		saynn("[say=mirri]I said.. Shut the fuck up. Do I really need to remind you how a real bitch behaves?[/say]")
+
+		saynn("She gets up and takes a few steps back, as much as the leash allows, her eyes never leaving you.")
+
+		saynn("[say=mirri]Puppy needs to learn.[/say]")
+
+		saynn("You try to speak up again but she just yanks the leash sharply, your throat getting extremely tight as the collar digs in.")
+
+		saynn("[say=mirri]Stop it, you fuck. Pups don't use words. They obey.[/say]")
+
+		saynn("Mirri leans down and gives the leash a soft tug, her voice softening up and becoming all sweet.")
+
+		saynn("[say=mirri]Now, be a good {pc.boy} and give Mirri your paw.[/say]")
+
+		addButton("Give paw", "Obey her words", "subwalkies_paw")
+		addButton("Refuse", "You don't have that many spare paws to just hand them to others!", "subwalkies_refusepaw")
+	if(state == "subwalkies_paw"):
+		playAnimation(StageScene.PuppyDuo, "stand", {pc="mirri", npcAction="paw", npcBodyState={naked=true, leashedBy="mirri", hard=true}})
+		saynn("You know how it's gonna end if you don't obey.. So might as well.")
+
+		saynn("You lower yourself.. before awkwardly pushing your top part of the body off the floor in order to sit down.")
+
+		saynn("Mirri is crouching near, her eyes judging you.")
+
+		saynn("[say=mirri]Mhm?[/say]")
+
+		saynn("With nothing better to do, you raise your.. paw.. and offer it to Mirri.")
+
+		saynn("[say=mirri]Yay![/say]")
+
+		saynn("She shakes it like crazy and then gives you lots of headpats.")
+
+		saynn("[say=mirri]Good {pc.boy}! Such a good fucking {pc.boy}! See, you can obey when you want to.[/say]")
+
+		saynn("Might as well commit..")
+
+		saynn("[say=pc]A-..woof.. awoof..[/say]")
+
+		saynn("More scritches and pats come your way, Mirri rubs your face and gives you a small kiss.")
+
+		saynn("[say=mirri]Lovely. Now let's go explore your stupid station. Walkies time![/say]")
+
+		saynn("Your heart sinks..")
+
+		saynn("[say=pc]Uh..[/say]")
+
+		saynn("Mirri raises a brow.")
+
+		saynn("[say=mirri]What was that? You don't want walkies?[/say]")
+
+		saynn("[say=pc]Uh.. um.. woof..[/say]")
+
+		saynn("[say=mirri]I knew you would![/say]")
+
+		saynn("She opens a blue glowing rift.. and steps through, her hand tugging on the leash.")
+
+		saynn("Welp..")
+
+		addButton("Continue", "See what happens next", "subwalkies_tp")
+	if(state == "subwalkies_refusepaw"):
+		playAnimation(StageScene.PuppyDuo, "stand", {pc="mirri", npcAction="sad", npcBodyState={naked=true, leashedBy="mirri", hard=true}})
+		saynn("You hesitate, still trying to maintain at least some shred of dignity. Your muscles are tensing, resisting the degrading command.")
+
+		saynn("Mirri sees that, her expression shifting from amusement to cold frustration. She steps closer, her armored boot finding your back and resting on it. Her fingers wrap around the stunbaton that is hanging from her leg.")
+
+		saynn("[say=mirri]You're going to be a stubborn little bitch?[/say]")
+
+		saynn("She growls.. but you don't budge.")
+
+		saynn("With a swift motion, she flicks the stunbaton to life, the crackling sound of electricity filling the air. She brings it closer and closer.. just inches away from your face now. Her eyes are locked on yours.")
+
+		saynn("[say=mirri]Last chance, whore. Give paw.[/say]")
+
+		saynn("You swallow hard, fear making all your insides shrink.. but you still can't bring yourself to comply.")
+
+		saynn("Mirri's eyes darken. She clicks her tongue in disapproval. Then, without warning, she presses the weapon against your arm.")
+
+		saynn("[say=pc]ARgh![/say]")
+
+		saynn("The jolts of electricity shoot through your body, sharp and painful, your muscles spasming uncontrollably for a brief moment, making you kiss and hug the wooden floor with all your paws.")
+
+		saynn("[say=mirri]Bad pup. But, you know.. there is a good side to this.[/say]")
+
+		saynn("She smiles, putting the baton away.")
+
+		saynn("[say=mirri]I can do this all day.[/say]")
+
+		saynn("She crouches down near you.")
+
+		if (GM.pc.hasPenis()):
+			saynn("[say=mirri]Maybe next time I will press it against something else.. Like your cock. Bet you'd be a real obedient little puppy then, won't you?[/say]")
+
+		elif (GM.pc.hasVagina()):
+			saynn("[say=mirri]Maybe next time I will press it against something else.. Like your cunt. Bet you'd be a real obedient little puppy then, won't you?[/say]")
+
+		else:
+			saynn("[say=mirri]Maybe next time I will press it against something else.. Like your ass. Bet you'd be a real obedient little puppy then, won't you?[/say]")
+
+		saynn("Your heart races.. the humiliation and fear mix in your stomach..")
+
+		saynn("Slowly, reluctantly, you raise your paw as best as you can.")
+
+		saynn("[say=mirri]Good {pc.boy}. But we're over that now. Let's go for some walkies, I know just the spot![/say]")
+
+		saynn("You get a strong feeling that you know exactly what she means by the.. spot.")
+
+		saynn("Mirri opens the blue glowing rift and invites you to crawl through.. you see your cell through it..")
+
+		saynn("[say=pc]Woo-oof..[/say]")
+
+		saynn("Somehow that noise that came out on its own..")
+
+		saynn("[say=mirri]What? It will be fun![/say]")
+
+		saynn("She yanks you through..")
+
+		addButton("Continue", "See what happens next", "subwalkies_tp")
+	if(state == "subwalkies_tp"):
+		aimCameraAndSetLocName("cellblock_corridor_middle")
+		playAnimation(StageScene.PuppyDuo, "walk", {pc="mirri", npcAction="walk", npcBodyState={naked=true, leashedBy="mirri", hard=true}, flipNPC=true})
+		saynn("Mirri tugs you through the corridors of the prison. She looks around a lot, checking out the architecture of this place.. the place that has become a new home for you.")
+
+		saynn("[say=mirri]I don't know what's more stupid, concrete and metal or wood and metal.[/say]")
+
+		saynn("The many inmates that you walk past stop just to check out the fancy leashed pup that is being led by a sexy pantsless catgirl. You two sure are standing out..")
+
+		saynn("[say=mirri]Yes, you all can pat. Just be careful, {pc.he} might bite.[/say]")
+
+		addButton("Continue", "See what happens next", "subwalkies_moreexplore")
+	if(state == "subwalkies_moreexplore"):
+		aimCameraAndSetLocName("main_punishment_spot")
+		playAnimation(StageScene.PuppyDuo, "walk", {pc="mirri", npcAction="walk", npcBodyState={naked=true, leashedBy="mirri", hard=true}, flipNPC=true})
+		saynn("Mirri's grin never goes away as she leads you through the prison corridors, her naked half-furry hips swaying confidently, her feline tail playfully flicking behind her as she tugs you along, her striped panties proudly presented to the eyes of others.")
+
+		saynn("You encounter stairs.. your true nemesis. You just about manage to pull your paws onto the first step.. but the next ones Mirri has to help you with, janking you up by the leash.")
+
+		saynn("[say=mirri]Such a clumsy animal, I love you.[/say]")
+
+		saynn("As you walk past the punishment area, Mirri takes note of the many pillories.. with some of them being used.")
+
+		saynn("[say=mirri]Oh wow. Maybe your stupid little prison has some flair to it. I'm sure the captain stole this idea from one of our prisons. You guys steal everything that isn't bolted down.[/say]")
+
+		saynn("She sees the yard.")
+
+		saynn("[say=mirri]Oh, perfect. Let's go play on some grass![/say]")
+
+		addButton("Continue", "See what happens next", "subwalkies_nova")
+	if(state == "subwalkies_nova"):
+		addCharacter("nova")
+		playAnimation(StageScene.Duo, "stand", {pc="mirri", npc="nova"})
+		aimCameraAndSetLocName("yard_northCorridor")
+		saynn("Mirri follows the stone pathways while you are touching the grass with your new puppy paws..")
+
+		saynn("But as you turn around a corner, you suddenly run into another guard.")
+
+		saynn("[say=nova]Huh. Oh wow, such an adorable pup~.[/say]")
+
+		saynn("[say=mirri]Takes one to know one.[/say]")
+
+		saynn("A husky blocks your path. Her attention was glued to you.. but then the naked butt stole it.")
+
+		saynn("[say=nova]Interesting armor.. configuration. You're one of the newbies? Don't remember seeing you around. What's your name?[/say]")
+
+		saynn("Nova is trying to make out the badge. The tension is slowly rising..")
+
+		saynn("[say=mirri]Hey, well, you're not running the default kit either, are you?[/say]")
+
+		saynn("Nova looks into her wrist computer that is built into her armor.")
+
+		saynn("[say=nova]You didn't answer my..[/say]")
+
+		saynn("Mirri blocks the screen with her paw, blocking it for Nova. Mirri goes full out, her tail wagging.")
+
+		saynn("[say=mirri]I recognize that. That is Syndicate tech. Should I file a report on your ass? Makes you look like some kind of spy, you know.[/say]")
+
+		saynn("Nova starts reaching for her stun baton.")
+
+		saynn("[say=nova]What is. Your. Name.[/say]")
+
+		saynn("The bluff clearly didn't work.")
+
+		saynn("[say=mirri]It's.. Kirri. Happy, stupid mutt?[/say]")
+
+		saynn("Nova squints and wraps her digits around the handle of her weapon.")
+
+		saynn("[say=nova]Your badge clearly says Officer Lyra.[/say]")
+
+		saynn("[say=mirri]That is my.. that's my other name. And yes, I'm new around here. Don't be stupid.[/say]")
+
+		saynn("Mirri's bullshit clearly isn't working. Her own paw begins to reach.. it begins to reach for her gun. You really don't like where this is going now..")
+
+		saynn("[say=mirri]You know, puppy.. I am just giving my personal little bitch a walk. I think we should just walk past each other and pretend that this little misunderstanding didn't happen.[/say]")
+
+		saynn("[say=nova]Oh yeah? Try me.[/say]")
+
+		saynn("Her paw reaches further..")
+
+		saynn("[say=mirri]I will. You are making a huge mistake. This mistake might just cost you.. everything.. you know?[/say]")
+
+		saynn("[say=nova]I think I'm fixing a mistake right now. You and I are gonna go pay the warden a visit and see what they have to say.[/say]")
+
+		saynn("An unstoppable force has met an immovable object.. This is not how you saw your walkies going.")
+
+		saynn("Mirri is giving you a sneaky stern look.")
+
+		addButton("Do nothing", "Just let it happen", "subwalkies_donothing")
+		addButton("Bark!", "Be a puppy", "subwalkies_puppy")
+	if(state == "subwalkies_donothing"):
+		playAnimation(StageScene.Solo, "defeat", {pc="nova"})
+		removeCharacter("mirri")
+		GM.pc.setLocation("yard_northCorridor")
+		saynn("You decide to see how this will play out.")
+
+		saynn("Mirri frowns at you.. really hard. But you just shrug with your shoulders.")
+
+		setFlag("SlaveAuctionModule.customMirriGreeting", "You fuck. You almost made me blow my cover, you stupid bitch. I would have easily made 6 new holes in that guard's face if I wanted to. Ugh, fuck you. I could destroy your whole stupid prison at any point, you know!? I need to calm down, bring me a slave to sell or something.")
+		saynn("[say=nova]So? What is it gonna.. AGH![/say]")
+
+		saynn("[say=mirri]Shut up.[/say]")
+
+		saynn("A bright flash blinds you.. Nova hits the floor in an instant.")
+
+		saynn("The last thing you see is Mirri taking off in a random direction.. before disappearing into thin air.. like a ghost.")
+
+		saynn("[say=nova]Fuck.. My eyes. What the fuck what that.[/say]")
+
+		saynn("As you recover, you notice Nova.. on her knees.. seemingly fine.")
+
+		saynn("Head is still buzzing like hell.")
+
+		saynn("[say=nova]Shit.. Where is that bitch? Did she go invisible or something?[/say]")
+
+		saynn("Nova looks at you.")
+
+		saynn("[say=nova]Who is that girl?[/say]")
+
+		saynn("Probably best to play it dumb. You crawl up to the husky and nuzzle her face.")
+
+		saynn("[say=pc]W-woof..[/say]")
+
+		saynn("[say=nova]Adorable. Oh well, newbies these days, holy shit, they seriously need to learn their place.[/say]")
+
+		saynn("Nova gives you scritches and pats.")
+
+		saynn("[say=nova]You want more walkies?[/say]")
+
+		saynn("You shake your head.")
+
+		saynn("[say=nova]Aww. If you do, just hit me up, I love adorable puppies~. Let's get you out.[/say]")
+
+		saynn("Nova helps you to remove the bitchsuit.")
+
+		saynn("[say=nova]Don't get into trouble now. Or do~.[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -845,6 +1159,9 @@ func _react(_action: String, _args):
 		processTime(5*60)
 
 	if(_action == "sub_pussy"):
+		processTime(5*60)
+
+	if(_action == "sub_walkies"):
 		processTime(5*60)
 
 	if(_action == "ask_luxe"):
@@ -905,5 +1222,29 @@ func _react(_action: String, _args):
 	if(_action == "subpussy_pee"):
 		processTime(5*60)
 		GM.pc.cummedInMouthBy("mirri", FluidSource.Pissing)
+
+	if(_action == "subwalkies_suit"):
+		processTime(10*60)
+
+	if(_action == "subwalkies_paw"):
+		processTime(5*60)
+
+	if(_action == "subwalkies_refusepaw"):
+		processTime(5*60)
+
+	if(_action == "subwalkies_tp"):
+		processTime(5*60)
+
+	if(_action == "subwalkies_moreexplore"):
+		processTime(5*60)
+
+	if(_action == "subwalkies_nova"):
+		processTime(5*60)
+
+	if(_action == "subwalkies_donothing"):
+		processTime(5*60)
+
+	if(_action == "subwalkies_puppy"):
+		processTime(5*60)
 
 	setState(_action)
