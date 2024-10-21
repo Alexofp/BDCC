@@ -1079,7 +1079,7 @@ func _run():
 		saynn("Mirri is giving you a sneaky stern look.")
 
 		addButton("Do nothing", "Just let it happen", "subwalkies_donothing")
-		addButton("Bark!", "Be a puppy", "subwalkies_puppy")
+		addButton("Bark!", "Be a puppy", "subwalkies_barksavepuppy")
 	if(state == "subwalkies_donothing"):
 		playAnimation(StageScene.Solo, "defeat", {pc="nova"})
 		removeCharacter("mirri")
@@ -1103,7 +1103,7 @@ func _run():
 
 		saynn("Head is still buzzing like hell.")
 
-		saynn("[say=nova]Shit.. Where is that bitch? Did she go invisible or something?[/say]")
+		saynn("[say=nova]Shit.. Where is that bitch? Did she disappear or something?[/say]")
 
 		saynn("Nova looks at you.")
 
@@ -1126,6 +1126,237 @@ func _run():
 		saynn("Nova helps you to remove the bitchsuit.")
 
 		saynn("[say=nova]Don't get into trouble now. Or do~.[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "subwalkies_barksavepuppy"):
+		playAnimation(StageScene.PuppySexOral, "tease", {pc="nova", npc="pc", npcBodyState={naked=true, hard=true}})
+		saynn("Before the things can escalate any further, you decide to get your paws in this conflict. Without thinking much, you let out a loud cute bark, breaking the tension.")
+
+		saynn("[say=pc]WOOF![/say]")
+
+		saynn("Second bark comes soon after.. and then a few more. You wiggle in your restraints like an excited puppy.")
+
+		saynn("Nova's expression softens, she stops gripping the handle of her weapon and pats you instead.")
+
+		saynn("[say=nova]Awww. This hecking pup is so adorable, I can't.[/say]")
+
+		saynn("Mirri raises a brow.. but stops reaching for her gun. Her smirk returns.")
+
+		saynn("[say=mirri]Yeah, {pc.he} needed some walkies.[/say]")
+
+		saynn("[say=nova]Make sure to treat {pc.him} well~.[/say]")
+
+		saynn("[say=mirri]Oh, of course. That bitch is gonna get my personal treatment~.[/say]")
+
+		saynn("You keep up the act.. nuzzling the hand that pats you and barking enthusiastically.")
+
+		saynn("[say=nova]But yeah. Make sure you report to the warden later, newbie.[/say]")
+
+		saynn("[say=mirri]Of course. I will be sure to do that. It's not like I can just disappear from this place.[/say]")
+
+		saynn("Nova nods softly.")
+
+		saynn("[say=nova]Yeah-h-h.. Stay cute, puppy.[/say]")
+
+		saynn("The guard gives you both one last glance before getting up.. and continuing her patrol.")
+
+		addButton("Continue", "See what happens next", "subwalkies_aftersave")
+	if(state == "subwalkies_aftersave"):
+		playAnimation(StageScene.PuppyDuo, "stand", {pc="mirri", npcBodyState={naked=true, leashedBy="mirri", hard=true}})
+		removeCharacter("nova")
+		saynn("As soon as Nova is gone, Mirri lets out a soft, relieved laugh.")
+
+		saynn("[say=mirri]Huh. That went better than expected.[/say]")
+
+		saynn("She leans down and boops you on the nose.")
+
+		saynn("[say=mirri]Love you, puppy, good idea to trick that bitch. I think my lovely bitch deserves something as a reward.. something big.[/say]")
+
+		saynn("Something big.. She tugs on the leash, inviting you to follow back to your cell..")
+
+		addButton("Follow", "See what she will do with you next..", "subpuppy_back")
+	if(state == "subpuppy_back"):
+		aimCameraAndSetLocName("market_intro")
+		saynn("As pushes you into the rift that her fancy toys have created.. you end back in her room.")
+
+		saynn("Mirri's smirk widens as she jogs to her special wardrobe, her eyes glowing in the dimly-lit space.. Her tail flicks excitedly as she rummages through her wide collection of toys.")
+
+		saynn("[say=mirri]You know, puppy..[/say]")
+
+		saynn("She purrs.. before pulling out a canine-shaped strapon dildo with a thick knot at the base.")
+
+		saynn("[say=mirri]I think it's time I breed my bitch~.[/say]")
+
+		addButton("Continue", "See what happens next", "subpuppy_putonstrapon")
+	if(state == "subpuppy_putonstrapon"):
+		playAnimation(StageScene.PuppySexOral, "tease", {pc="mirri", npc="pc", npcBodyState={naked=true, hard=true, leashedBy="mirri"}, bodyState={exposedCrotch=true}})
+		saynn("Your heart begins to pound as she straps the harness around her waist, the silicone length now swaying menacingly between her legs, covering up her kitty. Obviously it has that bulbous knot at the base.. what else would Mirri use..")
+
+		saynn("[say=pc]W-woof..[/say]")
+
+		saynn("She snaps her fingers and points to the floor in front of her.")
+
+		saynn("[say=mirri]Hah. I knew you would like it. Now come here like a good bitch.[/say]")
+
+		saynn("You crawl over, still wearing the pieces of that bitchsuit.. Mirri crouches and grabs a fistful of your hair, forcing your face toward the toy, rubbing the tip of the dildo against your closed lips.")
+
+		saynn("[say=mirri]I can always go in dry if you want.[/say]")
+
+		saynn("Looks like saying no now is not an option..")
+
+		addButton("Suck", "Get that toy wet", "subpuppy_suck")
+	if(state == "subpuppy_suck"):
+		playAnimation(StageScene.PuppySexOral, "sex", {pc="mirri", npc="pc", npcBodyState={naked=true, hard=true, leashedBy="mirri"}, bodyState={exposedCrotch=true}})
+		saynn("Slowly, you part your lips, feeling the cool silicone press against your tongue. Mirri isn't exactly the soft kind, instantly pushing more of her new length deeper into your mouth, grinning wickedly as the pointy tip triggers your gag reflex.")
+
+		saynn("[say=mirri]Good puppy. Such a lovely puppy.[/say]")
+
+		saynn("She keeps thrusting the dildo in and out of your mouth with no mercy, making you take every inch apart from the knot.. while your tongue works on polishing it, giving the silicone that wet shiny appearance.")
+
+		saynn("[say=mirri]Such a whore too, wow. Your chocking is making me so fucking wet.[/say]")
+
+		saynn("After a few degrading minutes of forcing you to suck and slurp on the dildo, she pulls out..")
+
+		addButton("Present ass", "Mirri will peg you", "subpuppy_ass")
+		addButtonWithChecks("Present pussy", "Mirri will fuck your pussy", "subpuppy_pussy", [], [[ButtonChecks.HasReachableVagina]])
+	if(state == "subpuppy_ass"):
+		playAnimation(StageScene.PuppySexAllFours, "sex", {pc="mirri", npc="pc", bodyState={exposedCrotch=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Mirri jumps behind you and grabs your hips, quickly aligning herself against your exposed {pc.analStretch} tailhole.")
+
+		saynn("Without warning, she pushes the dildo inside, making you groan as it stretches you open, your anal star opening wide.")
+
+		saynn("[say=mirri]You feel that? Gonna breed your ass.[/say]")
+
+		saynn("She purrs while your inner walls grip the wet toy, your fuckhole clenching around the sudden intruding object.")
+
+		saynn("[say=pc]W..woo-of..[/say]")
+
+		saynn("She giggles, enjoying your struggle, her hands gripping your ass tightly as she thrusts deeper, the knot already teasing your rim.")
+
+		saynn("[say=mirri]That's what a good bitch gets.[/say]")
+
+		if (GM.pc.hasPenis()):
+			saynn("Each thrust is rough and deliberate, the thick toy pressing against your prostate, sending waves of pleasure through your body. You try to stay quiet.. but the sensation is overwhelming, your {pc.penis} stiffens and throbs, leaking pre onto the floor as Mirri rails your ass, the knot teasing but never quite pushing in all the way.")
+
+		elif (GM.pc.hasVagina()):
+			saynn("Each thrust is rough and deliberate, the thick toy subtly massaging your pleasure spot through the inner wall, sending waves of pleasure through your body. You try to stay quiet.. but the sensation is overwhelming, your pussy dripping juices profusely as Mirri rails your ass, the knot teasing but never quite pushing in all the way.")
+
+		else:
+			saynn("Each thrust is rough and deliberate, the thick toy pressing against your pleasure spot, sending waves of pleasure through your body. You try to stay quiet.. but the sensation is overwhelming, various lewd noises escape you as Mirri rails your ass, the knot teasing but never quite pushing in all the way.")
+
+		addButton("Continue", "See what happens next", "subpuppy_ass_fast")
+	if(state == "subpuppy_ass_fast"):
+		playAnimation(StageScene.PuppySexAllFours, "fast", {pc="mirri", npc="pc", bodyState={exposedCrotch=true}, npcBodyState={naked=true, hard=true}, npcCum=true})
+		saynn("[say=mirri]You love this, don't you?[/say]")
+
+		saynn("Mirri purrs louder, her hips slamming against you harder, her breath hot against your back as you rock back and forth on your paws.")
+
+		saynn("[say=mirri]My little puppy, begging to get knotted.[/say]")
+
+		if (GM.pc.hasPenis()):
+			saynn("You're panting now, the intense pleasure building with every thrust. The way the dildo rubs against your prostate makes it impossible to hold back. Your cock pulses"+str(" in its little cage" if GM.pc.isWearingChastityCage() else "")+", and before you can stop it, you cum hard, ropes of thick {pc.cum} shooting out, splattering onto the cold wooden floor beneath you. Your whole body shudders as you're forced to ride the waves of your orgasm, every second is pure bliss, elevated by the relentless thrusting in your ass.")
+
+		elif (GM.pc.hasVagina()):
+			saynn("You're panting now, the intense pleasure building with every thrust. The way the fat dildo rubs your g-spot through the inner wall makes it impossible to hold back. Your {pc.vaginaStretch} pussy pulses, and before you can stop it, you cum hard, a shower of your girlcum shooting out, splattering onto the cold wooden floor beneath you. Your whole body shudders as you're forced to ride the waves of your orgasm, every second is pure bliss, elevated by the relentless thrusting in your ass.")
+
+		else:
+			saynn("You're panting now, the intense pleasure building with every thrust. The way the dildo rubs against your sensitive spots makes it impossible to hold back. Your tailhole pulses, and before you can stop it, you cum hard. Your whole body shudders as you're forced to ride the waves of your orgasm, every second is pure bliss, elevated by the relentless thrusting in your ass.")
+
+		saynn("Mirri's giggling echoes in your ears as she notices your peak.")
+
+		saynn("[say=mirri]Already, puppy? How pathetic. I'm not even..[/say]")
+
+		addButton("Continue", "See what happens next", "subpuppy_ass_knot")
+	if(state == "subpuppy_ass_knot"):
+		playAnimation(StageScene.PuppySexAllFours, "inside", {pc="mirri", npc="pc", bodyState={exposedCrotch=true}, npcBodyState={naked=true, hard=true}, npcCum=true})
+		if (GM.pc.hasPenis()):
+			saynn("With one final push, she forces the whole length of the toy deep into your ass, stretching you to your limits, the knot locking inside you. The pressure sends you over the edge once more, your cock pulsing as another dribble of your seed leaks from your overstimulated body, coupled with a passionate moan.")
+
+		elif (GM.pc.hasVagina()):
+			saynn("With one final push, she forces the whole length of the toy deep into your ass, stretching you to your limits, the knot locking inside you. The pressure sends you over the edge once more, your pussy clenching as another dribble of your girlcum leaks from your overstimulated body, coupled with a passionate moan.")
+
+		else:
+			saynn("With one final push, she forces the whole length of the toy deep into your ass, stretching you to your limits, the knot locking inside you. The pressure sends you over the edge once more, your ass clenching hard.")
+
+		saynn("[say=mirri]There we go. Bred like the good bitch that you are.[/say]")
+
+		saynn("She gives a few more slow, grinding thrusts, enjoying every second of your body trembling beneath her.")
+
+		saynn("[say=mirri]Now give me my toy back, slut~.[/say]")
+
+		saynn("Finally, after what feels like an eternity, she pulls out, the knot popping free with a wet noise.")
+
+		setFlag("SlaveAuctionModule.customMirriGreeting", "Hello, lovely pup. How is your ass, still sore I hope?")
+		addButton("Continue", "See what happens next", "subpuppy_after_sex")
+	if(state == "subpuppy_pussy"):
+		playAnimation(StageScene.PuppySexAllFours, "sex", {pc="mirri", npc="pc", bodyState={exposedCrotch=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Mirri jumps behind you and grabs your hips, quickly aligning herself against your exposed {pc.pussyStretch} pussy.")
+
+		saynn("Without warning, she pushes the dildo inside, making you groan as it stretches you open, your needy flower opening wide.")
+
+		saynn("[say=mirri]You feel that? Gonna breed you.[/say]")
+
+		saynn("She purrs while your inner walls grip the wet toy, your fuckhole clenching around the sudden intruding object.")
+
+		saynn("[say=pc]W..woo-of..[/say]")
+
+		saynn("She giggles, enjoying your struggle, her hands gripping your ass tightly as she thrusts deeper, the knot already teasing your slick folds.")
+
+		saynn("[say=mirri]That's what a good bitch gets.[/say]")
+
+		if (GM.pc.hasPenis()):
+			saynn("Each thrust is rough and deliberate, the thick toy pressing against your g-spot, sending waves of pleasure through your body. You try to stay quiet.. but the sensation is overwhelming, your {pc.penis} stiffens and throbs, leaking pre onto the floor as Mirri rails your cunt, the knot teasing but never quite pushing in all the way.")
+
+		else:
+			saynn("Each thrust is rough and deliberate, the thick toy massaging your pleasure spot hard, sending waves of pleasure through your body. You try to stay quiet.. but the sensation is overwhelming, your pussy dripping juices profusely as Mirri rails it, the knot teasing but never quite pushing in all the way.")
+
+		addButton("Continue", "See what happens next", "subpuppy_pussy_fast")
+	if(state == "subpuppy_pussy_fast"):
+		playAnimation(StageScene.PuppySexAllFours, "fast", {pc="mirri", npc="pc", bodyState={exposedCrotch=true}, npcBodyState={naked=true, hard=true}, npcCum=true})
+		saynn("[say=mirri]You love this, don't you?[/say]")
+
+		saynn("Mirri purrs louder, her hips slamming against you harder, her breath hot against your back as you rock back and forth on your paws.")
+
+		saynn("[say=mirri]My little puppy, begging to get knotted.[/say]")
+
+		if (GM.pc.hasPenis()):
+			saynn("You're panting now, the intense pleasure building with every thrust. The way the dildo rubs against your pleasure spot makes it impossible to hold back. Your cock pulses"+str(" in its little cage" if GM.pc.isWearingChastityCage() else "")+", and before you can stop it, you cum hard, ropes of thick {pc.cum} shooting out, splattering onto the cold wooden floor beneath you, your pussy clenching hard around the silicon shaft. Your whole body shudders as you're forced to ride the waves of your orgasm, every second is pure bliss, elevated by the relentless thrusting.")
+
+		else:
+			saynn("You're panting now, the intense pleasure building with every thrust. The way the fat dildo rubs your g-spot makes it impossible to hold back. Your {pc.vaginaStretch} pussy pulses, and before you can stop it, you cum hard, a shower of your girlcum shooting out, splattering onto the cold wooden floor beneath you, your inner walls clench. Your whole body shudders as you're forced to ride the waves of your orgasm, every second is pure bliss, elevated by the relentless thrusting.")
+
+		saynn("Mirri's giggling echoes in your ears as she notices your peak.")
+
+		saynn("[say=mirri]Already, puppy? How pathetic. I'm not even..[/say]")
+
+		addButton("Continue", "See what happens next", "subpuppy_pussy_knot")
+	if(state == "subpuppy_pussy_knot"):
+		playAnimation(StageScene.PuppySexAllFours, "inside", {pc="mirri", npc="pc", bodyState={exposedCrotch=true}, npcBodyState={naked=true, hard=true}, npcCum=true})
+		if (GM.pc.hasPenis()):
+			saynn("With one final push, she forces the whole length of the toy deep into your slit, stretching you to your limits, the knot locking inside you, the tip breaking into your womb. The pressure sends you over the edge once more, your cock pulsing as another dribble of your seed leaks from your overstimulated body, coupled with a passionate moan.")
+
+		else:
+			saynn("With one final push, she forces the whole length of the toy deep into your slit, stretching you to your limits, the knot locking inside you, the tip breaking into your womb. The pressure sends you over the edge once more, your pussy clenching hard as another dribble of your girlcum leaks from your overstimulated body, coupled with a passionate moan.")
+
+		saynn("[say=mirri]There we go. Bred like the good bitch that you are.[/say]")
+
+		saynn("She gives a few more slow, grinding thrusts, enjoying every second of your body trembling beneath her.")
+
+		saynn("[say=mirri]Now give me my toy back, slut~.[/say]")
+
+		saynn("Finally, after what feels like an eternity, she pulls out, the knot popping free with a wet noise.")
+
+		setFlag("SlaveAuctionModule.customMirriGreeting", "Hello, lovely pup. How is your pussy, still sore I hope?")
+		addButton("Continue", "See what happens next", "subpuppy_after_sex")
+	if(state == "subpuppy_after_sex"):
+		playAnimation(StageScene.PuppyDuo, "stand", {pc="mirri", npcAction="sad", npcBodyState={naked=true, leashedBy="mirri", hard=true}})
+		saynn("Mirri steps back, admiring her work.. while you just sprawl all over the floor. She gives your ass a sharp slap.")
+
+		saynn("[say=mirri]That's a good puppy. Kitties will always be above pups, you better remember that.[/say]")
+
+		saynn("You pant heavily.. until Mirri finally decides to start removing the puppy restraints.")
+
+		saynn("[say=mirri]Such a mess you left. Was fun though.[/say]")
 
 		addButton("Continue", "See what happens next", "endthescene")
 
@@ -1244,7 +1475,48 @@ func _react(_action: String, _args):
 	if(_action == "subwalkies_donothing"):
 		processTime(5*60)
 
-	if(_action == "subwalkies_puppy"):
+	if(_action == "subwalkies_barksavepuppy"):
 		processTime(5*60)
+
+	if(_action == "subwalkies_aftersave"):
+		processTime(5*60)
+
+	if(_action == "subpuppy_back"):
+		processTime(10*60)
+
+	if(_action == "subpuppy_putonstrapon"):
+		processTime(5*60)
+		getCharacter("mirri").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("StraponCanine"))
+
+	if(_action == "subpuppy_suck"):
+		processTime(5*60)
+
+	if(_action == "subpuppy_ass"):
+		processTime(5*60)
+		GM.pc.gotAnusFuckedBy("mirri")
+
+	if(_action == "subpuppy_pussy"):
+		processTime(5*60)
+		GM.pc.gotVaginaFuckedBy("mirri")
+
+	if(_action == "subpuppy_ass_fast"):
+		processTime(5*60)
+		GM.pc.orgasmFrom("mirri")
+
+	if(_action == "subpuppy_ass_knot"):
+		processTime(5*60)
+		GM.pc.gotAnusFuckedBy("mirri")
+
+	if(_action == "subpuppy_after_sex"):
+		processTime(5*60)
+		getCharacter("mirri").removeStrapon()
+
+	if(_action == "subpuppy_pussy_fast"):
+		processTime(5*60)
+		GM.pc.orgasmFrom("mirri")
+
+	if(_action == "subpuppy_pussy_knot"):
+		processTime(5*60)
+		GM.pc.gotVaginaFuckedBy("mirri")
 
 	setState(_action)
