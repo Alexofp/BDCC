@@ -32,11 +32,11 @@ func _run():
 				saynn("{npc.He} looks very depressed, {npc.his} mind might snap at any moment.")
 			elif(npcSlave.getDespair() >= 0.5):
 				if(npcSlave.getBrokenSpirit() >= 0.9):
-					saynn("{npc.He} looks supressed. But {npc.he} also doesn't resist at all, {npc.his} spirit must be broken by now!")
+					saynn("{npc.He} looks suppressed. But {npc.he} also doesn't resist at all, {npc.his} spirit must be broken by now!")
 				elif(npcSlave.getBrokenSpirit() > 0.5):
-					saynn("{npc.He} looks supressed. But {npc.he} also doesn't resist much, a sign of {npc.his} spirit breaking.")
+					saynn("{npc.He} looks suppressed. But {npc.he} also doesn't resist much, a sign of {npc.his} spirit breaking.")
 				else:
-					saynn("{npc.He} looks supressed. But {npc.he} keeps trying to break out occasionally, {npc.his} spirit is clearly very high.")
+					saynn("{npc.He} looks suppressed. But {npc.he} keeps trying to break out occasionally, {npc.his} spirit is clearly very high.")
 			else:
 				if(npcSlave.getBrokenSpirit() >= 0.9):
 					saynn("{npc.He} doesn't resist at all, {npc.his} spirit must be broken by now!")

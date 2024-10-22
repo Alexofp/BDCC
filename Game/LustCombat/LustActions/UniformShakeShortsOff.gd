@@ -23,7 +23,7 @@ func getVisibleName(_lustState: LustCombatState, _args):
 	return "Shake off shorts"
 
 func getVisibleDescription(_lustState: LustCombatState, _args):
-	return "You can't your hands so you have to shake your whole body to remote your shorts"
+	return "You can't use your hands so you have to shake your whole body to remote your shorts"
 
 func doAction(_lustState: LustCombatState, _args):
 	var _item:ItemBase = getItem(_lustState, _args)

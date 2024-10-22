@@ -60,7 +60,7 @@ func _run():
 		addButton("Intimidate", "Tell them you won’t leave or pay", "intimidate")
 
 	if(state == "pay"):
-		saynn("You hang them a chip with some credits. The main guy quickly checks it and puts it away before offering you a smile.")
+		saynn("You hand them a chip with some credits. The main guy quickly checks it and puts it away before offering you a smile.")
 
 		saynn("[say=gymbully]Pleasure doing business with you.[/say]")
 
