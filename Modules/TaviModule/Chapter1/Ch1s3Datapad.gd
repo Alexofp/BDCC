@@ -134,7 +134,7 @@ func _run():
 
 		saynn("Standing by.")
 
-		addButton("Continue", "Run the main main again", "mainmenu")
+		addButton("Continue", "Run the main manu again", "mainmenu")
 
 	if(state == "mainmenu"):
 		saynn("[sayMale]What would you like to do today, Risha?[/sayMale]")

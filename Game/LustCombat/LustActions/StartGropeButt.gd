@@ -30,7 +30,7 @@ func doAction(_lustState: LustCombatState, _args):
 		text += "You shift one of your hands down to your {pc.thick} butt and get a good grasp on it. Yeah, you have a good ass, the palm of your hand slides along the surface and explores it."
 		text += "\n\n"
 	else:
-		text += "You put your free hand on your rear and give it a little rub. Your {pc.thick} is on display."
+		text += "You put your free hand on your rear and give it a little rub. Your {pc.thick} ass is on display."
 		text += "\n\n"
 
 	if(RNG.chance(50) && pc.hasEffect(StatusEffect.HasCumInsideAnus)):

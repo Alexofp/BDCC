@@ -588,7 +588,7 @@ func _run():
 
 		saynn("[say=risha]Then I will bend you over and breed your slutty little slit. And you’re gonna take it like a good fucktoy.[/say]")
 
-		saynn("Tavi is smiling, her paws are still up in the air while Risha is reaching for her cuffs. But just when the lynx pulls her eyes away from the cat, she dashes forward and grabs the hand that holds the remote before experly wrenching it behind Risha’s back, causing a sudden spike of pain for her.")
+		saynn("Tavi is smiling, her paws are still up in the air while Risha is reaching for her cuffs. But just when the lynx pulls her eyes away from the cat, she dashes forward and grabs the hand that holds the remote before expertly wrenching it behind Risha’s back, causing a sudden spike of pain for her.")
 
 		saynn("[say=risha]Argh, bitch![/say]")
 
