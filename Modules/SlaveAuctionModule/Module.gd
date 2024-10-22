@@ -18,6 +18,7 @@ func getFlags():
 		
 		"pickedSexSub": flag(FlagType.Bool),
 		"sexSubbedToMirri": flag(FlagType.Bool),
+		"firstTimeDom": flag(FlagType.Bool),
 		"customMirriGreeting": flag(FlagType.Text),
 	}
 

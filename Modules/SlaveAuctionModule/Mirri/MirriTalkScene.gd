@@ -1,5 +1,7 @@
 extends SceneBase
 
+var usedCondom = false
+
 func _init():
 	sceneID = "MirriTalkScene"
 
@@ -1359,6 +1361,242 @@ func _run():
 		saynn("[say=mirri]Such a mess you left. Was fun though.[/say]")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "dom_about_to_fight"):
+		playAnimation(StageScene.Duo, "stand", {npc="mirri"})
+		if (!getFlag("SlaveAuctionModule.firstTimeDom")):
+			saynn("[say=pc]The more I think about it.. the more I realize. You are the sextoy here, Mirri.[/say]")
+
+			saynn("Mirri licks her lips, leaning to the side, the outline of her butt highlighted by the dark lights.")
+
+			saynn("[say=mirri]You can think? That's a new one.[/say]")
+
+			saynn("[say=pc]I'm the brains of this operation, you know. And you're just my puppet, saying what I want you to say.[/say]")
+
+			saynn("She hums and openly licks her teeth now.")
+
+			saynn("[say=mirri]And what should I say now?[/say]")
+
+			saynn("[say=pc]I submit.[/say]")
+
+			saynn("She giggles and takes an offensive stance.")
+
+			saynn("[say=mirri]Haha. I love how cute you are, {pc.name}.. Over my dead body, bitch.[/say]")
+
+		else:
+			saynn("You put on your dominant stare. Mirri puts on her mean one.")
+
+			saynn("[say=pc]Let's skip the foreplay, baby. You and I know how this will end.[/say]")
+
+			saynn("[say=mirri]Haha, fuck you. You don't understand, seeing them struggle is the best part.[/say]")
+
+			saynn("Both of you raise your fists.")
+
+			saynn("[say=pc]Let's see you struggle then.[/say]")
+
+		addButton("Fight", "Start the fight", "dom_start_fight")
+	if(state == "dom_fight_lost"):
+		playAnimation(StageScene.Duo, "defeat", {npc="mirri"})
+		saynn("You hit the floor, unable to continue fighting. Mirri giggles.")
+
+		saynn("[say=mirri]Wow, you seriously suck ass![/say]")
+
+		saynn("[say=pc]Fuck you..[/say]")
+
+		saynn("She stops smiling and puts on mean eyes, her paw reaches out to grab you by the collar.")
+
+		saynn("[say=mirri]You're saying that you don't suck ass?[/say]")
+
+		saynn("[say=pc]I don't, fuck off.[/say]")
+
+		saynn("[say=mirri]That's when I grab your hair.. and make your cute face love my thick ass.[/say]")
+
+		addButton("Pull away", "You'd rather not", "endthescene")
+	if(state == "dom_fight_won"):
+		playAnimation(StageScene.Duo, "stand", {npc="mirri", npcAction="defeat"})
+		saynn("Mirri hits the floor, unable to continue fighting.. she quickly begins reaching for her gun. That's why your hand yanks hard on her ponytail.")
+
+		saynn("[say=pc]Don't you dare.[/say]")
+
+		saynn("[say=mirri]Agh.. haha.. Afraid the kitty is gonna make a few new holes in you? Do you know who I am?[/say]")
+
+		saynn("Her paw keeps reaching.. Your second hand lands on her neck.")
+
+		saynn("[say=pc]You're a spoiled brat.[/say]")
+
+		saynn("She pouts and glares up at you with defiance. Her hand pulls out the gun.. but your leg just kicks it, making her send her gun sliding away across the floor.")
+
+		saynn("[say=mirri]Oops.. my toy is gone. I can still murder you with just my claws.[/say]")
+
+		saynn("She tilts her head a bit, causing your hand to pull out a few extra red hairs.")
+
+		saynn("[say=mirri]AlphaCorp slave~.[/say]")
+
+		saynn("Mirri starts trying to break out, her clawed paws scratching your hands.. but you don't let go.")
+
+		saynn("[say=mirri]Take your hands off me, you bitch..[/say]")
+
+		saynn("What do you wanna do with her?")
+
+		addButton("Nothing", "Just let her go", "dom_nothing")
+		addButtonWithChecks("Hatefuck", "Breed the bitch", "dom_hatefuck", [], [[ButtonChecks.HasReachablePenis]])
+	if(state == "dom_nothing"):
+		playAnimation(StageScene.Duo, "stand", {npc="mirri"})
+		saynn("You do what she tells you to do and pull your hands away from her hair and neck.")
+
+		saynn("[say=pc]Get up.[/say]")
+
+		saynn("Mirri tilts her head, her eyes confused.")
+
+		saynn("[say=pc]Get up, Mirri.[/say]")
+
+		saynn("[say=mirri]Is this a trick? I will get up and you will throw me?[/say]")
+
+		saynn("You sigh and pull her up.")
+
+		saynn("[say=pc]You are my bitch. But I changed my mind.[/say]")
+
+		saynn("She blinks a lot.")
+
+		saynn("[say=mirri]Oh. What a softie! I won then![/say]")
+
+		saynn("[say=pc]No you didn't.[/say]")
+
+		saynn("She points at the scratches on your wrists.")
+
+		saynn("[say=mirri]See, I did more damage! You're pathetic, {pc.name}![/say]")
+
+		saynn("The anger makes you bite her neck.")
+
+		saynn("[say=mirri]Ow..[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "dom_hatefuck"):
+		playAnimation(StageScene.SexMissionary, "tease", {pc="pc", npc="mirri", bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		saynn("Mirri tries to push herself up but is quickly forced back down by your weight as you pin her beneath you.")
+
+		saynn("[say=mirri]Get off me, you slave.[/say]")
+
+		saynn("You grab her wrists and force them above her head so she can't scratch you. Her legs are spread wide by your body, leaving her utterly exposed. She still struggles against you, her breath coming out in ragged gasps, her feline eyes flashing brightly.")
+
+		saynn("[say=pc]What else are you gonna say?[/say]")
+
+		saynn("Your hand pulls down her panties and grips her throat now instead, making her pull her chin high. Her sex got quite wet after the.. struggle cuddle.")
+
+		saynn("[say=mirri]Bitch.. At least put on a condom if you're going to..[/say]")
+
+		saynn("[say=pc]What if I don't.[/say]")
+
+		saynn("[say=mirri]I will cut your balls off then, I'm warning you! I ain't having your brats![/say]")
+
+		saynn("You notice a free wrapped condom in one of her pouches.")
+
+		addButton("Use it", "Use the offered condom and not anger Mirri too much", "dom_hatefuck_usecondom")
+		addButton("Ignore it", "Go in raw", "dom_hatefuck_nocondom")
+	if(state == "dom_hatefuck_fuck"):
+		playAnimation(StageScene.SexMissionary, "sex", {pc="pc", npc="mirri", bodyState={exposedCrotch=true, hard=true, condom=usedCondom}, npcBodyState={exposedCrotch=true, hard=true}})
+		if (usedCondom):
+			saynn("Well, you'd rather save your testicles. You grab her offered condom and quickly apply it to your cock. Then, your hand slides down her body and grips the folds of her slick cunt. She is wet, so much wetter than she is letting on, her body betraying her. Mirri tenses, her legs twitching beneath you, her tail wagging actively.")
+
+			saynn("[say=mirri]Good {pc.boy}.. An AlphaCorp slave is not filling me with {pc.his} seed..[/say]")
+
+			saynn("[say=pc]Shut up, fucktoy.[/say]")
+
+		else:
+			saynn("You don't bother with the rubber. Your hand slides down her body and grips the folds of her slick cunt. She is wet, so much wetter than she is letting on, her body betraying her. Mirri tenses, her legs twitching beneath you, her tail wagging actively.")
+
+			saynn("[say=mirri]I told you, condom, now! You're not filling me with your seed, I swear-.[/say]")
+
+			saynn("[say=pc]Shut up, fucktoy.[/say]")
+
+		saynn("Her words are cut short as you line yourself up with that drippy cunt and thrust deep into her without warning. Her back arches sharply and a shocked gasp escapes her lips. The wet heat of her pussy tightens around you, welcoming you in.")
+
+		saynn("[say=mirri]You.. fuc-cker!..[/say]")
+
+		saynn("At least this time she isn't wrong, you pound into her, hard and fast, your hands pressed against the cold wooden floor as you drive your {pc.penis} deeper with each thrust.")
+
+		saynn("[say=mirri]..is that all you've got? You're pathetic![/say]")
+
+		saynn("Wow, that's a change. She really likes the mating press it seems.")
+
+		addButton("Faster", "Rail her pussy harder", "dom_hatefuck_fuck_fast")
+	if(state == "dom_hatefuck_fuck_fast"):
+		playAnimation(StageScene.SexMissionary, "fast", {pc="pc", npc="mirri", bodyState={exposedCrotch=true, hard=true, condom=usedCondom}, npcBodyState={exposedCrotch=true, hard=true}})
+		saynn("Her words only fuel your aggression. You slam into her even harder, your cock ramming deep inside her, kissing her womb and stretching her out with each thrust. Mirri's body shakes beneath you, her breath hitching as you drive her towards the edge and even further, her inner walls suddenly clenching tightly around your shaft.")
+
+		saynn("[say=mirri]Fu-uck! I fucking hate you so much, fuck me harder![/say]")
+
+		saynn("[say=pc]What a slut.[/say]")
+
+		if (!usedCondom):
+			saynn("The wild pleasure is flickering in her eyes, the slut is cumming hard. Seems like a good moment to lean in and growl into her ear.")
+
+			saynn("[say=pc]I'm going to fill you.[/say]")
+
+			saynn("Her eyes widen, her body trembling beneath you, each your thrust pushing her further into the abyss of dark pleasure.")
+
+			saynn("[say=mirri]No, you fucking don't.. I.. will.. I will.. ahh..[/say]")
+
+			saynn("You pick up the pace and mate with her with a raw animalistic energy.. until your own orgasm begins to draw near..")
+
+		else:
+			saynn("The wild pleasure is flickering in her eyes, the slut is cumming hard. Seems like a good moment to lean in and growl into her ear.")
+
+			saynn("[say=pc]You're nothing but a slave to my cock.[/say]")
+
+			saynn("Her eyes widen, her body trembling beneath you, each your thrust pushing her further into the abyss of dark pleasure.")
+
+			saynn("[say=mirri]You're a slave, not me.. ah..[/say]")
+
+			saynn("You pick up the pace and mate with her with a raw animalistic energy.. until your own orgasm begins to draw near..")
+
+		addButton("Cum", "Time to do this", "dom_hatefuck_fuck_cum")
+	if(state == "dom_hatefuck_fuck_cum"):
+		playAnimation(StageScene.SexMissionary, "inside", {pc="pc", npc="mirri", bodyState={exposedCrotch=true, hard=true, condom=usedCondom}, npcBodyState={exposedCrotch=true, hard=true}})
+		saynn("The time comes to ram your cock deep inside her one last time. Mirri's body tightens again, her claws digging into your skin as her pussy clamps down around you.")
+
+		if (!usedCondom):
+			saynn("You bury yourself to the hilt, slamming your dick deep into her womb as you proceed to pump her full of your seed. Mirri's back arches violently, her breath hitching hard as her entire body convulses beneath you.")
+
+			saynn("[say=mirri]You.. F-fuck!.. I love your cock! S-shit!.. I'm f-fucking c-cumming!..[/say]")
+
+			saynn("She lets out a strangled moan, her pussy milking you for every last drop, her body still shaking for a while longer after her new orgasm.")
+
+			saynn("You hold her down as you finish inside her.. and then you just pull out, causing a flood of your {pc.cum} to start leaking out of her used pussy, dripping onto the wooden floor.")
+
+			saynn("Mean eyes are staring at you. Mirri's chest is rising and falling rapidly.")
+
+			saynn("[say=pc]What? AlphaCorp slave has just bred you.[/say]")
+
+			saynn("[say=mirri]..I hate you, stupid. And that was.. that was.. weak.. yeah.. hah..[/say]")
+
+		else:
+			saynn("You bury yourself to the hilt, slamming your dick deep into her womb as you proceed to pump the condom inside her babymaker full of your seed. Mirri's back arches violently, her breath hitching hard as her entire body convulses beneath you.")
+
+			saynn("[say=mirri]You.. F-fuck!.. I love your cock! S-shit!.. I'm f-fucking c-cumming!..[/say]")
+
+			saynn("She lets out a strangled moan, her pussy milking you for every last drop, her body still shaking for a while longer after her new orgasm.")
+
+			saynn("You hold her down as you finish inside that rubber.. then you carefully pull it out and tie it up before disposing of it")
+
+			saynn("Mean eyes are staring at you. Mirri's chest is rising and falling rapidly.")
+
+			saynn("[say=pc]What? You are impressed?[/say]")
+
+			saynn("[say=mirri]..You had the brains to use a condom but I hate you, stupid. And that was.. that was.. weak.. yeah.. hah..[/say]")
+
+		addButton("Enough", "Enough fucking", "dom_hatefuck_enough")
+	if(state == "dom_hatefuck_enough"):
+		saynn("[say=pc]That's what you get for being a bitch.[/say]")
+
+		saynn("Mirri hums.")
+
+		saynn("[say=mirri]I will keep that in mind..[/say]")
+
+		saynn("Of course she will. You give her ass a smack and get off her.")
+
+		saynn("[say=mirri]Ah.[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -1519,4 +1757,61 @@ func _react(_action: String, _args):
 		processTime(5*60)
 		GM.pc.gotVaginaFuckedBy("mirri")
 
+	if(_action == "dom_start_fight"):
+		runScene("FightScene", ["mirri", "domFight"], "mirriFight")
+		return
+
+	if(_action == "dom_nothing"):
+		processTime(5*60)
+
+	if(_action == "dom_hatefuck_usecondom"):
+		usedCondom=true
+		processTime(5*60)
+		setState("dom_hatefuck_fuck")
+		setFlag("SlaveAuctionModule.customMirriGreeting", "You know.. I changed my mind. That was pretty good. Doesn't mean I will submit to the AlphaCorp slave again.")
+		return
+
+	if(_action == "dom_hatefuck_nocondom"):
+		usedCondom=false
+		processTime(5*60)
+		setState("dom_hatefuck_fuck")
+		setFlag("SlaveAuctionModule.customMirriGreeting", "You tried your best to breed me.. But I forgot to tell you that I'm on a pill~. I ain't having kids from no AlphaCorp slaves, understand?")
+		return
+
+	if(_action == "dom_hatefuck_fuck_fast"):
+		processTime(5*60)
+
+	if(_action == "dom_hatefuck_fuck_cum"):
+		processTime(5*60)
+		if(!usedCondom):
+			getCharacter("mirri").cummedInVaginaBy("pc")
+		else:
+			addFilledCondomToLootIfPerk(getCharacter("pc").createFilledCondom())
+		GM.pc.orgasmFrom("mirri")
+
 	setState(_action)
+
+func _react_scene_end(_tag, _result):
+	if(_tag == "mirriFight"):
+		processTime(10 * 60)
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			setFlag("SlaveAuctionModule.firstTimeDom", true)
+			setState("dom_fight_won")
+			addExperienceToPlayer(50)
+		else:
+			setState("dom_fight_lost")
+			addExperienceToPlayer(5)
+
+func saveData():
+	var data = .saveData()
+
+	data["usedCondom"] = usedCondom
+
+	return data
+
+func loadData(data):
+	.loadData(data)
+
+	usedCondom = SAVE.loadVar(data, "usedCondom", false)
