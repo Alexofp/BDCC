@@ -20,6 +20,7 @@ func getFlags():
 		"sexSubbedToMirri": flag(FlagType.Bool),
 		"firstTimeDom": flag(FlagType.Bool),
 		"customMirriGreeting": flag(FlagType.Text),
+		"mirriNotOnPill": flag(FlagType.Text),
 	}
 
 func _init():
@@ -134,3 +135,6 @@ func getCreditsForRepLevel(_level:int):
 
 func canDomMirri() -> bool:
 	return false
+
+func isMirriOnPill() -> bool:
+	return !getFlag("SlaveAuctionModule.mirriNotOnPill", false)

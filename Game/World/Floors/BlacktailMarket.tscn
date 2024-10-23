@@ -17,6 +17,7 @@ roomColor = 7
 self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( 0, -128 )
 roomName = "Corridor"
+roomID = "market_nearmirri"
 roomColor = 2
 
 [node name="MarketRoom3" parent="." index="2" instance=ExtResource( 1 )]
