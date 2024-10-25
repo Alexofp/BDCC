@@ -4,6 +4,7 @@ var canBreed = false
 var usedCondom = false
 var straponHasCum = false
 var isStrapon = false
+var addedCollar = false
 
 func _init():
 	sceneID = "MirriTalkScene"
@@ -1445,6 +1446,7 @@ func _run():
 		addButtonWithChecks("Hatefuck", "Breed the bitch", "dom_hatefuck", [], [[ButtonChecks.HasReachablePenis]])
 		addButtonWithChecks("Strapon hatefuck", "Use a strapon against this bitch", "dom_straponfuck_pick", [], [[ButtonChecks.HasStraponAndCanWear]])
 		addButtonWithChecks("Rough anal", "Punish her ass with your cock", "dom_anal", [], [[ButtonChecks.HasReachablePenis]])
+		addButton("Auction roleplay", "Pretend to sell Mirri off at an auction", "dom_rp")
 	if(state == "dom_nothing"):
 		playAnimation(StageScene.Duo, "stand", {npc="mirri"})
 		saynn("You do what she tells you to do and pull your hands away from her hair and neck.")
@@ -2117,6 +2119,322 @@ func _run():
 		saynn("Oops.. Better make your escape now.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "dom_rp"):
+		playAnimation(StageScene.SexStart, "start", {npc="mirri"})
+		saynn("An idea comes to your mind.. a mean one.. but it might also be a good way to test Mirri's spirit.")
+
+		saynn("[say=pc]I know exactly what I will do with you.[/say]")
+
+		saynn("Mirri's eyes look fierce, fueled by her rage. And yet, she puts on a cunning smile.")
+
+		saynn("[say=mirri]Oh yeah? Give me a break, I don't wanna laugh too hard![/say]")
+
+		saynn("You crouch and lean close to her face. She tries to swipe her claws over your cheek but the fight has left her exhausted, you can easily avoid her paw.")
+
+		saynn("[say=pc]How hard should I go on you?[/say]")
+
+		saynn("[say=mirri]Go as hard as you can! Amuse me, AlphaCorp bitch.[/say]")
+
+		saynn("Well, you even got the permission..")
+
+		saynn("You nod and look around. You will need a few things.. and luckily, there is a wardrobe full of those things nearby.")
+
+		addButton("Restraints", "Grab some cuffs and a blindfold", "dom_rp_tie")
+	if(state == "dom_rp_tie"):
+		playAnimation(StageScene.SexStart, "start", {npc="mirri", npcBodyState={leashedBy="pc"}})
+		saynn("You rummage through her wardrobe.. Mirri's room looks so clean.. but you can't say the same about her wardrobe, all the restraints are just thrown together into one big pile.")
+
+		saynn("[say=pc]This could really use a cleanup, you know?[/say]")
+
+		saynn("[say=mirri]It's called.. controlled chaos.. you wouldn't understand! Hey, what are you doing?[/say]")
+
+		saynn("You barely find a blindfold and some cuffs that don't have any questionable red stains on them."+str(" You also find a collar.." if addedCollar else "")+"")
+
+		saynn("After that, you crouch before Mirri again.. and begin securing these toys on her.")
+
+		saynn("[say=pc]I will show you what happens to cocky girls like you.[/say]")
+
+		saynn("[say=mirri]You're gonna fuck me?! Don't be so boring![/say]")
+
+		saynn("You smile and grab her wrists before pushing them into the bulky metal cuffs, locking them together. Mirri looks up at you, her feline eyes narrowing, a smirk playing at the corners of her mouth.")
+
+		saynn("[say=pc]I'm curious how much they are gonna give for you.[/say]")
+
+		saynn("While her eyes turn confused, you wrap a blindfold around them, stealing her sense of sight completely. You know very well how tight that cloth is..")
+
+		saynn("[say=mirri]Huh? The heck are you talking about, soft {pc.boy}?[/say]")
+
+		saynn("With one swift motion and an incredibly satisfying click, you lock a collar around her neck.. Your hand holds the leash.")
+
+		saynn("[say=mirri]Kinky. Sadly for you, I can take it off with nothing but a condom wrapper. Can't keep me locked forever, no matter how hard you will try.[/say]")
+
+		saynn("[say=pc]That's gonna be a problem for you next owner.[/say]")
+
+		saynn("She tilts her head.")
+
+		saynn("[say=mirri]Are you gonna sell me off? No fucking way![/say]")
+
+		saynn("Mirri stays silent.. but then she bursts off laughing.")
+
+		saynn("[say=mirri]HAHA. You're bullshitting me, I can tell! No way an AlphaCorp slave is gonna stand on my spot and sell me, no one would allow that to happen![/say]")
+
+		saynn("She is not wrong. But maybe there is a way to convince her.. just enough to scare her off.. bring her ego down a little.")
+
+		saynn("[say=mirri]You know what? I will play along, just for you~. I was always curious how THEY felt.[/say]")
+
+		saynn("[say=pc]That's all that I need.[/say]")
+
+		saynn("You get up and look around..")
+
+		saynn("That teleporter machine.. hm..")
+
+		saynn("And a laptop.. maybe you can do something with that.")
+
+		addButton("Laptop", "Check it", "dom_tp_laptop")
+	if(state == "dom_tp_laptop"):
+		playAnimation(StageScene.Duo, "stand", {npc="mirri", npcBodyState={leashedBy="pc"}})
+		saynn("You check her laptop.. obviously it's locked.. with a fingerprint scanner.. huh.")
+
+		saynn("[say=pc]Give me your paw.[/say]")
+
+		saynn("[say=mirri]Say please?[/say]")
+
+		saynn("You grab her cuffed paws and press them against the scanner. That unlocks the laptop.")
+
+		saynn("[say=mirri]Ohh.. I know what you did. Smart. All the important stuff is locked with a password though. Get fucking wrekt, scrub.[/say]")
+
+		saynn("Someone has played too many online games..")
+
+		saynn("She is not wrong though, all the interesting files seem to be encrypted.. but you do find some old recordings of the slave auctions.. That might be something that you can use.. You grab the laptop and keep it for now.")
+
+		addButton("Teleport", "Make it seem like you have teleported Mirri somewhere", "dom_tp_tp")
+	if(state == "dom_tp_tp"):
+		saynn("You walk up to the teleport.. and spool it up. It opens the rift to your cell.")
+
+		saynn("[say=mirri]Huh? I see the light.[/say]")
+
+		saynn("You walk past it, holding the leash.. and then turn it off.")
+
+		saynn("[say=mirri]Did you just teleport us somewhere, you fuck? Where are we? Answer me, bitch! Now![/say]")
+
+		saynn("Yeah, you can just feel the fear flowing through.. but she begins to giggle.")
+
+		saynn("[say=mirri]You really thought I would buy that? Pfff, you are even more stupid than I thought. We are exactly where we were, I know that~.[/say]")
+
+		saynn("Shit. Maybe you can salvage it.")
+
+		saynn("[say=pc]Sure, you can think that, future slave.[/say]")
+
+		saynn("[say=mirri]Haha, you are trying so hard, it's adorable. Wait, I gotta get back into the role. Ple-e-ease, don't sell me!!! I will do anything![/say]")
+
+		saynn("You smack her bare ass.. and pull her towards the auction stage, Mirri's laptop is in your other hand..")
+
+		addButton("Auction stage", "Time for the auction!", "dom_tp_stage")
+	if(state == "dom_tp_stage"):
+		aimCameraAndSetLocName("market_market")
+		playAnimation(StageScene.HangingDuo, "idle", {pc="mirri", npc="pc", bodyState={exposedCrotch=true}})
+		saynn("You bring Mirri to the Blacktail Market auction stage while making sure to take some extra turns and loops, confusing her about the layout.")
+
+		saynn("Then, when you arrive on the stage, you position her in the middle.")
+
+		saynn("[say=pc]Hands up.[/say]")
+
+		saynn("Mirri sticks her tongue out.. so you just force her hands up and then attach chains to her cuffs, making her stand on her toes.")
+
+		saynn("[say=mirri]That's not a way to treat a lady.[/say]")
+
+		saynn("[say=pc]How does the collar feel, lady?[/say]")
+
+		saynn("[say=mirri]It's tight and heavy! You can take it off now already.[/say]")
+
+		saynn("[say=pc]I don't care.[/say]")
+
+		saynn("You can just feel her rolling her eyes.")
+
+		saynn("Hm.. time to create the right atmosphere. You place the laptop near the closed curtains.. and run the recording of the old auction. It starts with an empty room.. before any bidders have even arrived.. which is perfect.")
+
+		saynn("[say=mirri]What are you doing?[/say]")
+
+		saynn("[say=pc]Gathering the crowd. A little auction is about to take place.[/say]")
+
+		saynn("[say=mirri]Amusing.[/say]")
+
+		saynn("Bidders begin to arrive on that recording.. their boots stepping loudly.")
+
+		saynn("[say=mirri]Huh? Is that you? Hah, you almost got me. You don't have to slap the floor to fool me, silly.[/say]")
+
+		saynn("You begin circling Mirri.. Time to do this.")
+
+		saynn("[say=pc]WELCOME! Welcome to my little auction![/say]")
+
+		saynn("[say=mirri]Hi! I'm the future bitch-slave! Please treat me like the fucktoy that I am![/say]")
+
+		saynn("You chuckle at her confidence, your hand grabbing Mirri's chin.. while the laptop creates sounds far away.")
+
+		saynn("[say=mirri]Yeah, cool, you threw something to make that sound. Very smart. Is that what you did?[/say]")
+
+		saynn("You speak quietly into her ear.")
+
+		saynn("[say=pc]What do you think, Mirri? What am I doing?[/say]")
+
+		saynn("..and then switch back to your loud presenter voice.")
+
+		saynn("[say=pc]Look at this fine specimen, ladies and gentlemen! She is a mouthy one, that's for sure. But that just means it will be more fun to see her gradually break down![/say]")
+
+		saynn("She tries to shake the blindfold off.. but you yank on her ponytail to make her focus.")
+
+		saynn("[say=mirri]Argh.. Is there someone else here?[/say]")
+
+		saynn("[say=pc]She is a hybrid, as you can see! A very exotic one! Agility of a feline and the practicality of a human. You know, those are actually very valuable on some planets. But it's obviously an acquired taste.[/say]")
+
+		saynn("Enough bidders have arrived on the recording.. that they began quietly chatting with each other.")
+
+		saynn("[say=mirri]You're not.. fooling me.. I am one hundred percent sure that this isn't happening.[/say]")
+
+		saynn("[say=pc]Yes, Mirri, you have nothing to worry about.[/say]")
+
+		saynn("You position yourself behind her.. your hands land on her top.. and yank it down, exposing her {mirri.breasts} to the.. curtains. Your digits begin squeezing and groping her chest, forcing a little moan out of her.")
+
+		saynn("[say=mirri]Ah..[/say]")
+
+		saynn("[say=pc]Just look at those perfect tits.. Super squeezable. Some drugs and she can even become a hucow. I heard that catgirl milk is extremely sweet.[/say]")
+
+		saynn("[say=mirri]Hey.. easy..[/say]")
+
+		saynn("The chatter becomes louder and louder.. the speakers on that laptop aren't perfect.. but it seems to be enough..")
+
+		saynn("[say=pc]Yeah.. oh, did someone just bid? I didn't even announce the starting price yet.[/say]")
+
+		saynn("[say=mirri]'Cause you're a dummy..[/say]")
+
+		saynn("[say=pc]Let's say.. A thousand credits. Is someone gonna match that?[/say]")
+
+		saynn("You hold Mirri in suspense.")
+
+		saynn("[say=mirri]A thousand, really? I'm Mirri Blacktail! I'm the best Syndicate slaver, I cost millions at least![/say]")
+
+		saynn("Someone said something on the recording.. perfect timing.")
+
+		saynn("[say=pc]Oh, I see a hand. Interesting. Someone can give me eleven hundred now?[/say]")
+
+		saynn("[say=mirri]What? You're bullshitting me, there is no one there..[/say]")
+
+		saynn("One of your hands keeps groping her breasts firmly.. while the second one reaches down and pulls down her panties, exposing her cute pink pussy slit.. that looks dry.")
+
+		saynn("[say=pc]Who wouldn't want to take a chance on this tight little pussy? She's got zero wear and tear, see? Extremely fuckable.[/say]")
+
+		saynn("When you spread her folds.. you notice the strings of juices hanging between them.")
+
+		saynn("[say=pc]Oh, what's this? Seems like someone is enjoying the thought of being sold.[/say]")
+
+		saynn("[say=mirri]I don't![/say]")
+
+		saynn("You smack her ass, the sound echoing around.. together with Mirri's moan of pleasure.")
+
+		saynn("[say=mirri]Ah![/say]")
+
+		saynn("[say=pc]And just check out that ass. It's begging to be spanked![/say]")
+
+		saynn("Your digits spread her folds again and one slips inside, gently playing with the cocky slave's pussy.. making the girl squirm on the stage.. while the fake audience watches and makes a lot of noise. A second finger joins the first soon, stretching her tight needy entrance, curling to press against that sensitive spot that leaves her breathless.")
+
+		saynn("[say=pc]Oh, are you making a bid? Nice. Can someone give me twelve hundred now? This slave is worth it, trust me.[/say]")
+
+		saynn("[say=mirri]Mmhmm.. ah.. You are not selling me.. I'm pretty sure.. You know how?..[/say]")
+
+		saynn("Her hips buck slightly form the fingering.. but you keep her firmly in place, your fingers pumping in and out, keeping a steady rhythm.")
+
+		saynn("[say=pc]How?[/say]")
+
+		saynn("[say=mirri]You.. wouldn't be able to start the Blacktail Market without my password.. ah..[/say]")
+
+		saynn("You lean really close to her ear.. while your fingers fuck her soaking pussy faster, three of them now, thrusting in and out, causing her slit to produce wet noises. Her legs begin to weaken..")
+
+		saynn("[say=pc]Who said that we are at the Blacktail Market..[/say]")
+
+		saynn("Mirri shuts up and just moans and pants, her wet pussy suddenly getting all tight around your digits, the inner walls clenching hard.")
+
+		saynn("The stage, the lack of vision, the confusion, the sound of the audience, the presenter and the constant rough finger-fucking.. Mirri is so close, you can feel it.")
+
+		saynn("[say=pc]Another bid? Great. Thirteen hundred anyone? Thirteen hundred to the man in black, great choice! Anyone ready to give me fourteen hundred? Look at her squirm, this slave is loving every second! Your collection will get ten times better with this one![/say]")
+
+		saynn("Her moans suddenly become desperate. Her knees give ways as she sags in the cuffs.")
+
+		saynn("[say=mirri]I.. ah.. I'm not some pathetic slave! I'm slaver! You can't just.. ah.. fu-.. fuck, I'm about to.. You c-can't just sell.. ah-h!..[/say]")
+
+		saynn("You whisper into her ear.")
+
+		saynn("[say=pc]Are you scared, bitch?[/say]")
+
+		saynn("She shakes her head a lot.. before throwing it back.. With a sharp cry, she finally loses control. Her body begins to convulse eagerly around your fingers, her inner walls pulsing in rapid contractions as she cums.")
+
+		saynn("[say=mirri]F-fuck you.. ahh.. D-don't.. please.. Ahh!..[/say]")
+
+		saynn("[say=pc]THIRTEEN HUNDRED! SOLD![/say]")
+
+		saynn("Her body shudders violently as her tight pussy squirts, creating a shiny fountain of transparent juices that splashes over the stage floor.")
+
+		saynn("Mirri gasps, caught between shock and overwhelming pleasure, barely enduring the pleasure waves that flow through her as you continue to push your digits in and out, prolonging her climax until she is reduced to a trembling, helpless mess.")
+
+		saynn("Mirri is panting heavily as she dangles limply from her restraints.")
+
+		saynn("[say=pc]You can grab your new slave now.[/say]")
+
+		saynn("[say=mirri]D-don't.. I will f-fucking.. k-kill you.. you all.. ah.. f-fuckers.. ALL OF YOU!..[/say]")
+
+		addButton("Blindfold", "Take off her blindfold", "dom_rp_blindfold_off")
+	if(state == "dom_rp_blindfold_off"):
+		saynn("You untie the blindfold, letting it onto the wet floor.")
+
+		saynn("Mirri squints.. and then desperately looks around with her crazy blue eyes. The hall is empty, the curtains aren't even opened.. there is just that laptop playing some recording..")
+
+		saynn("[say=mirri]Wh.. there is.. you.. GRRR![/say]")
+
+		saynn("You put on your cheeky smile and stand in front of the girl.")
+
+		saynn("[say=pc]Huh? I thought I didn't fool you.[/say]")
+
+		saynn("[say=mirri]You fucking.. Of course you didn't.. I knew your plan.. I knew everything.[/say]")
+
+		saynn("You chuckle and pinch her hard nipples.")
+
+		saynn("[say=mirri]Ah![/say]")
+
+		saynn("[say=pc]Didn't know simple roleplay can get you so horny.[/say]")
+
+		saynn("She growls louder while you laugh.")
+
+		saynn("[say=mirri]Shut up. Get me down already..[/say]")
+
+		saynn("[say=pc]Can I keep the collar on you? Pretty please.[/say]")
+
+		saynn("[say=mirri]Very funny.. No. I am NOT a slave. Unlike you.[/say]")
+
+		saynn("You'd rather not anger the one who can actually sell you off into slavery at any point.")
+
+		addButton("Restraints", "Bring her down", "dom_rp_after")
+	if(state == "dom_rp_after"):
+		playAnimation(StageScene.Duo, "stand", {npc="mirri"})
+		saynn("You take off her cuffs and the collar.")
+
+		saynn("Mirri rubs her neck and hisses quietly.")
+
+		saynn("[say=pc]It was fun to see you scared.[/say]")
+
+		saynn("[say=mirri]I wasn't scared, you bitch.. hmpf.[/say]")
+
+		saynn("She grabs all the restraints and her laptop. But before the leaves, you give her ass a final smack.")
+
+		saynn("[say=mirri]Ah. I hate you.[/say]")
+
+		saynn("[say=pc]I thought you loved me.[/say]")
+
+		saynn("[say=mirri]I can not love a stupid {pc.boy}..[/say]")
+
+		saynn("You chuckle and watch her walk away.")
+
+		GM.pc.setLocation("market_market")
+		setFlag("SlaveAuctionModule.customMirriGreeting", "You did NOT trick me. I was on top of it! I just played along like I said!")
+		addButton("Continue", "See what happens next", "endthescene")
 func addStraponButtons():
 	var strapons = GM.pc.getStrapons()
 	for strapon in strapons:
@@ -2289,6 +2607,9 @@ func _react(_action: String, _args):
 	if(_action == "dom_nothing"):
 		processTime(5*60)
 
+	if(_action == "dom_rp"):
+		processTime(5*60)
+
 	if(_action == "dom_hatefuck_usecondom"):
 		usedCondom=true
 		processTime(5*60)
@@ -2408,6 +2729,33 @@ func _react(_action: String, _args):
 		getCharacter("mirri").cummedOnBy("pc")
 		GM.pc.orgasmFrom("mirri")
 
+	if(_action == "dom_rp_tie"):
+		processTime(5*60)
+		getCharacter("mirri").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("blindfold"))
+		getCharacter("mirri").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmatewristcuffs"))
+		if(getCharacter("mirri").getInventory().hasSlotEquipped(InventorySlot.Neck)):
+			getCharacter("mirri").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmatewristcuffs"))
+			addedCollar = true
+
+	if(_action == "dom_tp_laptop"):
+		processTime(5*60)
+
+	if(_action == "dom_tp_tp"):
+		processTime(5*60)
+
+	if(_action == "dom_tp_stage"):
+		processTime(5*60)
+
+	if(_action == "dom_rp_blindfold_off"):
+		processTime(10*60)
+		getCharacter("mirri").getInventory().clearSlot(InventorySlot.Eyes)
+
+	if(_action == "dom_rp_after"):
+		processTime(5*60)
+		if(addedCollar):
+			getCharacter("mirri").getInventory().clearSlot(InventorySlot.Neck)
+		getCharacter("mirri").getInventory().clearSlot(InventorySlot.Wrists)
+
 	setState(_action)
 
 func _react_scene_end(_tag, _result):
@@ -2430,6 +2778,7 @@ func saveData():
 	data["usedCondom"] = usedCondom
 	data["straponHasCum"] = straponHasCum
 	data["isStrapon"] = isStrapon
+	data["addedCollar"] = addedCollar
 
 	return data
 
@@ -2440,3 +2789,4 @@ func loadData(data):
 	usedCondom = SAVE.loadVar(data, "usedCondom", false)
 	straponHasCum = SAVE.loadVar(data, "straponHasCum", false)
 	isStrapon = SAVE.loadVar(data, "isStrapon", false)
+	addedCollar = SAVE.loadVar(data, "addedCollar", false)
