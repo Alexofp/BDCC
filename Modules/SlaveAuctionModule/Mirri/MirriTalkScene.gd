@@ -1446,6 +1446,7 @@ func _run():
 		addButtonWithChecks("Hatefuck", "Breed the bitch", "dom_hatefuck", [], [[ButtonChecks.HasReachablePenis]])
 		addButtonWithChecks("Strapon hatefuck", "Use a strapon against this bitch", "dom_straponfuck_pick", [], [[ButtonChecks.HasStraponAndCanWear]])
 		addButtonWithChecks("Rough anal", "Punish her ass with your cock", "dom_anal", [], [[ButtonChecks.HasReachablePenis]])
+		addButton("Spank her", "Punish her for being such a bad girl", "dom_spank")
 		addButton("Auction roleplay", "Pretend to sell Mirri off at an auction", "dom_rp")
 	if(state == "dom_nothing"):
 		playAnimation(StageScene.Duo, "stand", {npc="mirri"})
@@ -2435,6 +2436,279 @@ func _run():
 		GM.pc.setLocation("market_market")
 		setFlag("SlaveAuctionModule.customMirriGreeting", "You did NOT trick me. I was on top of it! I just played along like I said!")
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "dom_spank"):
+		playAnimation(StageScene.Spanking, "tease", {pc="pc", npc="mirri"})
+		saynn("A little spanking is what that spoiled brat needs.")
+
+		saynn("As you grab Mirri by the hips and pull her closer, her eyes flash with anger, her tail whipping furiously.")
+
+		saynn("[say=pc]Pull your ass up, Mirri.[/say]")
+
+		saynn("[say=mirri]Why would I?![/say]")
+
+		saynn("Yeah, you reckon. Rather than ordering, you just firmly plant your hand on your back and press her down into the floor, her arms sprawling out before her and her ass sticking up as a result. Mirri instantly starts to growl, a little blush spreading across her cheeks.")
+
+		saynn("[say=mirri]What are you doing?![/say]")
+
+		saynn("She tries to wiggle out of it.. but the fight left her breathless, causing her to fail. The catgirl is in a very exposed spot, her barely-covered ass on full display, the fabric of her striped panties clings tightly to her sensitive skin, outlining her slit.")
+
+		addButton("Spank!", "Make that booty red", "dom_spank_start")
+	if(state == "dom_spank_start"):
+		playAnimation(StageScene.Spanking, "spank", {pc="pc", npc="mirri"})
+		saynn("Without a word, you raise your free hand.. before bringing it down hard on her curvy ass, the sharp sound of skin meeting skin echoes around the room. Mirri yelps and hisses, her claws digging into the floor as she jerks forward.")
+
+		saynn("[say=mirri]Ow.. Did you just spank my ass?[/say]")
+
+		saynn("You help her understand it better by smacking her butt again, making it jiggle while her tail wags. This time she was ready for it so the effect wasn't as strong.")
+
+		saynn("[say=mirri]Is that all you've got?[/say]")
+
+		saynn("She chuckles and looks back at you, her lips curling into a teasing smirk.")
+
+		saynn("[say=mirri]Pathetic. You think a little spanking is going to-..[/say]")
+
+		saynn("You cut her off with another strike, much harder this time, feeling her flesh heat beneath your palm, her body recoiling forward again. She stifles a gasp, her tail moving to defend her rear, but you simply pin it down, forcing her ass to stay exposed.")
+
+		saynn("[say=pc]Bad girl.[/say]")
+
+		saynn("[say=mirri]BAD GIRL?! Do you even know who I am?! I am-.. AH![/say]")
+
+		saynn("Her worlds are swallowed by another powerful smack. Her body jolts forward, her butt now visible reddened, a little subtle print of your palm visible on it.")
+
+		saynn("[say=pc]You're a brat that needs to learn her place.[/say]")
+
+		addButton("More", "Spank the bitch out of her", "dom_spank_harder")
+	if(state == "dom_spank_harder"):
+		playAnimation(StageScene.Spanking, "fast", {pc="pc", npc="mirri"})
+		saynn("You don't stop, keeping up a steady rhythm of spanks that has her panting, her smut demeanor fading away, giving way to a frustrated snarl. She glares back at you when she can, her stare drilling through you.")
+
+		saynn("[say=mirri]I will.. gh.. kill you! Or worse! Sell you off to someone.. agh..[/say]")
+
+		saynn("You put more authority into each smack against that butt that has gotten quite red by now. You can feel how much it stings.. because it stings your palms too by now.")
+
+		saynn("[say=pc]Bad girl.[/say]")
+
+		saynn("[say=mirri]Shut up with this bad girl shit! Agh.. I'm a Syndicate agent, you're not allowed to.. ah.. fuck, my ass.. not allowed to spank me! You're just a.. FUCK.. grrr-r.. ah.. just an AlphaCorp slave..[/say]")
+
+		saynn("And yet, she is the one squirming under you, each spank making her let out a stifled noise.")
+
+		saynn("By the last strike, her disobedient glare is still present.. but her hips have a mind of their own, trembling slightly, legs rubbing against each other. Her tail hangs low, flicking angrily every few seconds.")
+
+		saynn("You pull her butt close and let your hands rest on her red skin, feeling the heat radiate from each mark.")
+
+		saynn("[say=pc]How was it?[/say]")
+
+		saynn("[say=mirri]That felt great, you fuck.. obviously..[/say]")
+
+		saynn("[say=pc]I'm glad.[/say]")
+
+		saynn("You finish it off by playing a drum solo on her flushed ass, making the poor catgirl throw her head back and let out a painful noise, several huge waves of sharp sensations rock through her body.")
+
+		saynn("[say=mirri]Grr.. I will repeat it, is this all you've got, soft {pc.boy}?..[/say]")
+
+		addButton("Enough", "She received enough spanks", "dom_spank_enough")
+		if (false):
+			addButton("Breasts", "Give her breasts some love too", "dom_spank_breasts")
+		addButton("Whip pussy", "Focus on her pussy specifically now", "dom_spank_pussy")
+	if(state == "dom_spank_enough"):
+		playAnimation(StageScene.Duo, "stand", {pc="pc", npc="mirri"})
+		saynn("You decide that she has earned a breather.")
+
+		saynn("[say=pc]You're barely keeping yourself from collapsing already, Mirri.[/say]")
+
+		saynn("[say=mirri]Hmpf.. talk for yourself, soft {pc.boy}.[/say]")
+
+		saynn("She slowly gets up to her legs.. shaky legs.")
+
+		saynn("[say=mirri]Good job. That was.. at least decent by my standards.[/say]")
+
+		saynn("[say=pc]Huh? And what is good by your standards.[/say]")
+
+		saynn("[say=mirri]Good is when they scream in agony, begging for you to stop! But you don't, slowly breaking them, one bone at a time.[/say]")
+
+		saynn("[say=pc]You are one crazy bitch, Mirri.[/say]")
+
+		saynn("She smiles.")
+
+		saynn("[say=mirri]Well thank you. I don't break everyone's bones, sometimes I make exceptions for certain people in my life~.[/say]")
+
+		saynn("That's.. good.")
+
+		setFlag("SlaveAuctionModule.customMirriGreeting", "I still can't sit on my ass because of you. I need something soft.. like your face!")
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "dom_spank_pussy"):
+		playAnimation(StageScene.GivingBirth, "idle", {pc="mirri"})
+		saynn("[say=pc]You asked for it, bitch.[/say]")
+
+		saynn("As you get up and head for her wardrobe of bdsm restraints, Mirri turns herself to her back, her feline eyes curious to see what you're up to.")
+
+		saynn("[say=mirri]Ow, my butt..[/say]")
+
+		saynn("Her eyes widen just a bit as you reach out for a small-looking nine-tailed whip.. Her body tenses as she realizes exactly where you're staring at.")
+
+		saynn("[say=mirri]Don't you dare..[/say]")
+
+		saynn("You close distance with her, the whip tails land on her thigh and gently brushes it.")
+
+		saynn("[say=pc]You're begging me to stop already?[/say]")
+
+		saynn("[say=mirri]No, obviously.. AH![/say]")
+
+		saynn("The first strike lands squarely on her covered up pussy, sharp and precise. Mirri gasps, her legs reflexively snapping shut as the sting radiates through her.")
+
+		saynn("[say=pc]Legs. Now.[/say]")
+
+		saynn("Her mean glare intensifies.. but she does obey, bravely spreading her legs.")
+
+		saynn("[say=mirri]Do your worst.. AGH![/say]")
+
+		saynn("Her breath hitches as you deliver another whip on her pussy, your strikes relentless. The thin fabric of her panties offers little protection, her tail curling in the air, creating interesting patterns as she is trying to endure the pain.")
+
+		saynn("[say=pc]Can't handle it? Just say that you're too soft for this, I won't judge.[/say]")
+
+		saynn("[say=mirri]Nhh-h.. Fuck you.. keep whipping..[/say]")
+
+		saynn("Her legs are twitching, instinctively trying to close when you raise the whip.")
+
+		saynn("[say=pc]Panties off.[/say]")
+
+		saynn("[say=mirri]Grr.. fine..[/say]")
+
+		saynn("She is getting a little obedient.")
+
+		addButton("Continue", "See what happens next", "dom_spank_pussy_naked")
+	if(state == "dom_spank_pussy_naked"):
+		playAnimation(StageScene.GivingBirth, "birth", {pc="mirri", bodyState={exposedCrotch=true}})
+		saynn("Mirri hooks her clawed digits under the waistband of her fancy panties and pulls them down, fully exposing her sensitive, reddened lips.. there are ever so slightly visible strings of transparent juices hanging between them and the cloth..")
+
+		saynn("[say=mirri]Here, whip me, you softie..[/say]")
+
+		saynn("Without hesitation, you raise the whip up.. before bringing it down again, this time directly on her bare skin.")
+
+		saynn("[say=mirri]AH..[/say]")
+
+		saynn("Mirri's breath catches, her entire body jerking and then stiffening, her paws clenching into fists against the floor, her pussy reflectively clenching from the sharp impact.")
+
+		saynn("[say=mirri]Nhh.. harder, you bitch..[/say]")
+
+		saynn("Another hit lands, and she bites down on her lip, her thighs quiver, her pussy muscles pulsing as multiple thin lines of red appear on her skin, her wet sensitive flower trembling under the relentless assault.")
+
+		saynn("[say=mirri]Ah.. F-fuck, that stings.. Nhh-h.. fu-uck..[/say]")
+
+		saynn("[say=pc]One more?[/say]")
+
+		saynn("She presents you her bruised pussy, the folds and the clit tingling every few seconds, her tailhole clenching too,")
+
+		saynn("[say=mirri]..what do you think?[/say]")
+
+		saynn("Knowing her, she clearly wants more. And so you give it to her by delivering one last whip on that tight slit, the sting of the many tails echoing around the whole room.")
+
+		saynn("[say=mirri]AHHhh..[/say]")
+
+		saynn("A gasp tears from her lips as her muscles spasm hard, her hips bucking involuntarily as she writhes under this weird kind of stimulation. Her bruised pussy releases a little stream of transparent juices before she closes her legs shut, too embarrassed to show her body's reaction.")
+
+		saynn("[say=mirri]Mmmmhhh.. s-shit.. t-that's enough.[/say]")
+
+		saynn("[say=pc]Did you just came a little?[/say]")
+
+		saynn("[say=mirri]NO? I'm not a painslut.. I'm a Syndicate agent, I am the biggest sadist in the world..[/say]")
+
+		saynn("You crouch and slide your hand between her closed legs, landing it on her bruised heated sex.. and instantly hear her hissing painfully.")
+
+		saynn("[say=pc]I'm beginning to think that this Syndicate agent might be living a secret double life.[/say]")
+
+		saynn("Mirri pouts.")
+
+		addButton("Enough", "You did enough damage", "dom_spank_whip_enough")
+		addButton("Vaginal fisting", "Suddenly switch to testing how much her pussy can swallow!", "dom_spank_fist")
+	if(state == "dom_spank_whip_enough"):
+		playAnimation(StageScene.Duo, "stand", {npc="mirri", npcBodyState={exposedCrotch=true}})
+		saynn("You throw the whip away and help her to get up.")
+
+		saynn("Mirri tries to pull her panties up over her whipped folds.. and grunts, her body trembling.")
+
+		saynn("[say=mirri]Ow.. ah.. fuck.. where is that fucking cream..[/say]")
+
+		saynn("[say=pc]Life is pain, huh.[/say]")
+
+		saynn("[say=mirri]Your life will be nothing but pain if I don't find that cream..[/say]")
+
+		saynn("Cute threats.")
+
+		setFlag("SlaveAuctionModule.customMirriGreeting", "I still can't sit on my ass because of you. I need something soft.. like your face!")
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "dom_spank_fist"):
+		playAnimation(StageScene.SexFisting, "tease", {pc="pc", npc="mirri", npcBodyState={exposedCrotch=true}})
+		saynn("Seeing that bruised pussy.. makes you want to test it even further.. and break down more of that stubborn pride of hers while you're at it.")
+
+		saynn("Without explaining anything, you turn Mirri onto all fours again, your fingers land on her dripping slit and begin to tease her, rubbing in slow, deliberate circles around her entrance.")
+
+		saynn("[say=mirri]Ahh.. hh.. What the fu.. ah.. f-fuck are you doing..[/say]")
+
+		saynn("[say=pc]Breaking you.[/say]")
+
+		saynn("You slide two digits inside her wet love tunnel, parting her red hot folds in the process which makes her arch her back and yelp.")
+
+		saynn("[say=mirri]You just fucking whipped me there, it hurts..[/say]")
+
+		saynn("She gasps as you push deeper, adding another finger, stretching her little by little. The sharp sting of the whip has left her extremely sensitive and vulnerable, each movement of your digits sends electric shivers through her body, her walls clenching around you.")
+
+		saynn("[say=mirri]Nhh..[/say]")
+
+		saynn("[say=pc]Ready to give up now?[/say]")
+
+		saynn("[say=mirri]Fuck you! I love you, keep abusing my cunt, you fuck..[/say]")
+
+		saynn("Looks like you have scrambled her brains a little with all the spanking and whipping, hah.")
+
+		saynn("[say=pc]Syndicate Agent.. more like Syndicate Slut.[/say]")
+
+		saynn("Slowly and teasingly, you work in the fourth finger too.. and begin to really feel her walls ripple around your fingers. Mirri is squirming around on the floor, her eyes full of bliss.. weird kind of bliss.")
+
+		saynn("[say=mirri]Nhh.. I hate you.. My cunt is burning.. ghh-h..[/say]")
+
+		saynn("She is wet inside.. extremely wet.. so much that you begin trying to force the whole palm in, stretching her red pussy with your digits as you slip them in and out.")
+
+		saynn("[say=mirri]Shi-it..[/say]")
+
+		saynn("Mirri is trembling hard, her claws leaving marks on the wooden floor. Cats do love pain after all..")
+
+		addButton("Fist", "Shove the whole fist in", "dom_spank_fist_shove")
+	if(state == "dom_spank_fist_shove"):
+		playAnimation(StageScene.SexFisting, "sex", {pc="pc", npc="mirri", npcBodyState={exposedCrotch=true}})
+		saynn("With each thrust, you push your fingers deeper.. until finally.. you slip your entire hand inside her, now feeling her slick warmness envelop you completely. Mirri's body instantly shudders around you, her loud cry filling the air while her pussy clenches hard, releasing a little short squirt of fluids.")
+
+		saynn("[say=pc]Look at you, taking it all.[/say]")
+
+		saynn("[say=mirri]Mhhhh.. fuuuuuck.. I w-wanna rip your head off.. s-snuggle you to death.. my cu-u-unt..[/say]")
+
+		saynn("Her tail wraps around your wrist as you begin to pump your fist in and out. Each movement sends her spiraling closer to.. some kind of edge. Her body arches against you, the tension in her bruised stretched pussy rising fast as it starts to make wet noises.")
+
+		saynn("[say=mirri]Agh-hh. Ahh.. ahhh.. PUMP THIS WHORE FULL.. AH.. SHIT, I'm CUMMING.. AH..[/say]")
+
+		saynn("With a final, powerful thrust, you drive your fist in deep.. and then it's like a dam breaking. Mirri cries out, a crazy combination of pain and pleasure flooding her senses.. Her clenching pussy squirts, sending a strong current of fluids onto the floor.. again and again.. until there is nothing left but dry convulsions.")
+
+		saynn("You feel her walls tighten.. and then release.. and then tighten again, pulsing at a slow rate while she is losing herself to these sensations that you're bringing her.")
+
+		saynn("Seeing her rolled up eyes.. yeah.. you know that you have pushed her to her limits now.")
+
+		addButton("Enough", "Let her rest now", "dom_spank_fist_shove_enough")
+	if(state == "dom_spank_fist_shove_enough"):
+		playAnimation(StageScene.Duo, "stand", {npc="mirri", npcBodyState={exposedCrotch=true}})
+		saynn("You yank your fist out.. causing her pussy to clench and pulse again for a bit. Then you just help her to get up onto her legs.")
+
+		saynn("Mirri is swaying a lot, her thighs are all wet, her bruised, abused pussy still dripping..")
+
+		saynn("[say=mirri]I think I'm in love with you, {pc.name}..[/say]")
+
+		saynn("[say=pc]Yeah, I heard it. You also wanted to rip my head off.[/say]")
+
+		saynn("[say=mirri]Pff, don't be a pussy cat. I only kill the ones I can't stand.. which is pretty much everyone.. but still! Shit, my ass hurts too still.. Where is that damn cream..[/say]")
+
+		setFlag("SlaveAuctionModule.customMirriGreeting", "I still can't sit on my ass because of you. I need something soft.. like your face!")
+		saynn("Mirri heads towards her wardrobe.. better to leave her to it now.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 func addStraponButtons():
 	var strapons = GM.pc.getStrapons()
 	for strapon in strapons:
@@ -2607,6 +2881,9 @@ func _react(_action: String, _args):
 	if(_action == "dom_nothing"):
 		processTime(5*60)
 
+	if(_action == "dom_spank"):
+		processTime(5*60)
+
 	if(_action == "dom_rp"):
 		processTime(5*60)
 
@@ -2755,6 +3032,30 @@ func _react(_action: String, _args):
 		if(addedCollar):
 			getCharacter("mirri").getInventory().clearSlot(InventorySlot.Neck)
 		getCharacter("mirri").getInventory().clearSlot(InventorySlot.Wrists)
+
+	if(_action == "dom_spank_start"):
+		processTime(5*60)
+
+	if(_action == "dom_spank_harder"):
+		processTime(5*60)
+
+	if(_action == "dom_spank_enough"):
+		processTime(5*60)
+
+	if(_action == "dom_spank_breasts"):
+		processTime(5*60)
+
+	if(_action == "dom_spank_pussy"):
+		processTime(5*60)
+
+	if(_action == "dom_spank_pussy_naked"):
+		processTime(5*60)
+
+	if(_action == "dom_spank_fist"):
+		processTime(5*60)
+
+	if(_action == "dom_spank_fist_shove"):
+		processTime(5*60)
 
 	setState(_action)
 
