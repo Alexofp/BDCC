@@ -113,7 +113,7 @@ func _run():
 
 		saynn("[say=directortau]They're scattered all over the galaxy now. The last escape pod left the station a long time ago.[/say]")
 
-		saynn("[say=pc]I will find them! Every single one! There won't be others like me. No more people borned to be soldiers. No more selective killing. No more DNA experiments. No more drugs. No more white rooms.[/say]")
+		saynn("[say=pc]I will find them! Every single one! There won't be others like me. No more people born to be soldiers. No more selective killing. No more DNA experiments. No more drugs. No more white rooms.[/say]")
 
 		saynn("[say=directortau]Too late. You're just gonna die here, with me, Tavi. A fate worthy of such a noble hero.[/say]")
 
