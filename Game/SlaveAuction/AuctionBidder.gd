@@ -32,6 +32,16 @@ func getFinalDesire() -> float:
 func onNewRound():
 	pass
 
+func getAmountOfDiscoveredTraits() -> int:
+	var result:int = 0
+	for traitID in likes:
+		if(likes[traitID] != TRAIT_UNDISCOVERED):
+			result += 1
+	for traitID in dislikes:
+		if(dislikes[traitID] != TRAIT_UNDISCOVERED):
+			result += 1
+	return result
+
 func getPercentageOfDiscoveredTraits() -> float:
 	var totalTraits:int = likes.size() + dislikes.size()
 	var totalUnlocked:int = 0
@@ -245,8 +255,44 @@ func getBidderInfo() -> Array:
 	
 	return resultAr
 
+func getBidderInfoNoAuction() -> Array:
+	var resultAr:Array = []
+	
+	var hiddenLikesAmount:int = 0
+	var knownLikes:Array = []
+	var knownDislikes:Array = []
+	var hiddenDislikesAmount:int = 0
+	for traitID in likes:
+		if(!likes[traitID]):
+			hiddenLikesAmount += 1
+		else:
+			var theTrait:AuctionTrait = GlobalRegistry.getAuctionTrait(traitID)
+			if(theTrait != null):
+				knownLikes.append("[color=#"+getTraitColor(traitID).to_html(false)+"]"+theTrait.getName(traitID)+"[/color]")
+	for traitID in dislikes:
+		if(!dislikes[traitID]):
+			hiddenDislikesAmount += 1
+		else:
+			var theTrait:AuctionTrait = GlobalRegistry.getAuctionTrait(traitID)
+			if(theTrait != null):
+				knownDislikes.append("[color=#"+getTraitColor(traitID).to_html(false)+"]"+theTrait.getName(traitID)+"[/color]")
+	
+	resultAr.append(name)
+	if(likes.empty()):
+		resultAr.append("- Prefers: Nothing")
+	else:
+		resultAr.append("- Prefers: "+str(Util.join(knownLikes, ", "))+(", " if !knownLikes.empty() && hiddenLikesAmount > 0 else "")+((str(hiddenLikesAmount)+" undiscovered") if hiddenLikesAmount > 0 else "")) # + "   ("+str(Util.join(likes.keys(), ", "))+")"
+	if(dislikes.empty()):
+		resultAr.append("- Dislikes: Nothing")
+	else:
+		resultAr.append("- Dislikes: "+str(Util.join(knownDislikes, ", "))+(", " if !knownDislikes.empty() && hiddenDislikesAmount > 0 else "")+((str(hiddenDislikesAmount)+" undiscovered") if hiddenDislikesAmount > 0 else "")) # + "   ("+str(Util.join(dislikes.keys(), ", "))+")"
+	
+	return resultAr
+
 func getTraitColor(_traitID:String) -> Color:
 	var theAuction = getAuction()
+	if(theAuction == null):
+		return Color.white
 	if(!theAuction.slaveTraits.has(_traitID) || theAuction.slaveTraits[_traitID] <= 0.0):
 		return Color.darkgray
 	

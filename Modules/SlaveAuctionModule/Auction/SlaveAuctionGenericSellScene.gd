@@ -28,6 +28,11 @@ func _run():
 		saynn("Is {slave.name} the slave that you want to sell? Keep in mind that you will never see them again. Any items that they have will be lost forever too.")
 
 		printSlaveTraits()
+		if (getFlag("SlaveAuctionModule.upgradeSeePrefs", 0) >= 1):
+			saynn("Bidders will have these preferences:")
+
+			saynn(""+str(getModule("SlaveAuctionModule").getBidderInfo())+"")
+
 		addButton("Confirm", "Sell this slave!", "do_confirm_pick")
 		addButton("Cancel", "You changed your mind", "do_cancel_pick")
 	if(state == "do_confirm_pick"):
@@ -225,7 +230,7 @@ func _react_scene_end(_tag, _result):
 			creditsToGive = pcNewCredits
 			if(getModule("SlaveAuctionModule").isReadyToAdvanceRepLevel()):
 				addMessage("You are ready to advance your and Mirri's slaver reputation level. Talk with her when you are ready.")
-			
+			getModule("SlaveAuctionModule").onSlaveSold(getCharacter(slaveID), creditsAmount)
 			setState("after_sold")
 		
 		else:

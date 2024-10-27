@@ -22,14 +22,25 @@ func generateBidders():
 		
 		bidders.append(newBidder)
 
+func applyUpgradeEffects():
+	var unlockAmount:int = GM.main.getFlag("SlaveAuctionModule.upgradeSeePrefs", 0)
+	
+	for bidder in bidders:
+		var totalAmountUnlocked:int = bidder.getAmountOfDiscoveredTraits()
+		while(totalAmountUnlocked < unlockAmount):
+			bidder.discoverRandomTrait(null)
+			totalAmountUnlocked += 1
+
 func peekBidders() -> Array:
 	if(bidders.empty()):
 		generateBidders()
+	applyUpgradeEffects()
 	return bidders
 
 func grabBidders() -> Array:
 	if(bidders.empty()):
 		generateBidders()
+	applyUpgradeEffects()
 	
 	var theResult:Array = bidders
 	

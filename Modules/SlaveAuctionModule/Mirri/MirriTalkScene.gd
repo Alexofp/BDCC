@@ -14,6 +14,8 @@ func _run():
 		canBreed = !getModule("SlaveAuctionModule").isMirriOnPill()
 		addCharacter("mirri")
 		playAnimation(StageScene.Duo, "stand", {npc="mirri"})
+		var mirriRank = getModule("SlaveAuctionModule").getRepLevel()
+		var canGoNextRank = getModule("SlaveAuctionModule").isReadyToAdvanceRepLevel()
 		saynn("You approach Mirri. The catgirl is eyeing you out.")
 
 		saynn("[say=mirri]"+str(getModule("SlaveAuctionModule").getMirriGreeting())+"[/say]")
@@ -21,11 +23,24 @@ func _run():
 		saynn(""+str(getModule("SlaveAuctionModule").getRepInfoString())+"")
 
 		addButton("Sell Slave", "Sell one of your slaves on a slave auction", "sell_menu")
+		if (getFlag("SlaveAuctionModule.upgradeSeePrefs", 0) >= 1):
+			addButton("Bidders info", "Check the preferences of the next bidders", "bidders_info")
 		addButton("Talk", "Ask her a few things", "chat_menu")
 		addButton("Sex", "See if you can get a little kinky with her", "sex_menu_check")
-		addDisabledButton("Upgrades", "You don't access to this yet")
+		if (mirriRank >= 1):
+			addButton("Upgrades", "Upgrade the Blacktail Market", "open_upgrades_menu")
+		else:
+			addDisabledButton("Upgrades", "You don't access to this yet")
+		if (canGoNextRank):
+			addButton("Next rank!", "Progress the story further", "do_next_rank")
 		addButton("Leave", "Enough talking", "endthescene")
 		GM.ES.triggerRun(Trigger.TalkingToNPC, ["mirri"])
+	if(state == "bidders_info"):
+		saynn("Next bidders will have these preferences:")
+
+		saynn(""+str(getModule("SlaveAuctionModule").getBidderInfo())+"")
+
+		addButton("Back", "Enough peeking", "")
 	if(state == "kinky_times_intro"):
 		saynn("Feeling horny, you close the distance with Mirri, your stare checking her girly curves.. that she decided to put out on display. Her striped panties are sitting a little tight, the cloth outlining her kitty, highlighting the thin slit.")
 
@@ -2709,6 +2724,26 @@ func _run():
 		saynn("Mirri heads towards her wardrobe.. better to leave her to it now.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+func getDebugActions():
+	return [
+	{
+		"id": "addCredits",
+		"name": "Add fake creds",
+		"args": [
+			{
+				"id": "creds",
+				"name": "Amount",
+				"type": "number",
+				"value": 100,
+			},
+		],
+	},
+	]
+
+func doDebugAction(_id, _args = {}):
+	if(_id == "addCredits"):
+		getModule("SlaveAuctionModule").addRepCredits(int(_args["creds"]))
+
 func addStraponButtons():
 	var strapons = GM.pc.getStrapons()
 	for strapon in strapons:
@@ -2732,6 +2767,21 @@ func _react(_action: String, _args):
 			return
 		
 		setState("sex_menu")
+		return
+
+	if(_action == "open_upgrades_menu"):
+		runScene("SlaveAuctionUpgradesScene")
+		endScene()
+		return
+
+	if(_action == "do_next_rank"):
+		var theNextScene = getModule("SlaveAuctionModule").getNextRankScene()
+		if(theNextScene  == ""):
+			return
+		
+		getModule("SlaveAuctionModule").advanceRepLevel()
+		runScene(theNextScene)
+		endScene()
 		return
 
 	if(_action == "try_dominate"):
