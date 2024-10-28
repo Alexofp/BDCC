@@ -76,14 +76,22 @@ func discoverTrait(_auction, _traitID:String) -> bool:
 func discoverRandomTrait(_auction) -> bool:
 	var possible:Array = []
 	for traitID in likes:
+		var weightBonus:float = 0.0
+		if(_auction != null && _auction.slaveTraits.has(traitID) && _auction.slaveTraits[traitID] > 0.0):
+			weightBonus += _auction.relevantTraitBonus
+		
 		if(likes[traitID] == TRAIT_UNDISCOVERED):
-			possible.append(traitID)
+			possible.append([traitID, 1.0 + weightBonus])
 	for traitID in dislikes:
+		var weightBonus:float = 0.0
+		if(_auction != null && _auction.slaveTraits.has(traitID) && _auction.slaveTraits[traitID] > 0.0):
+			weightBonus += _auction.relevantTraitBonus
+		
 		if(dislikes[traitID] == TRAIT_UNDISCOVERED):
-			possible.append(traitID)
+			possible.append([traitID, 1.0 + weightBonus])
 	if(possible.empty()):
 		return false
-	return discoverTrait(_auction, RNG.pick(possible))
+	return discoverTrait(_auction, RNG.pickWeightedPairs(possible))
 
 func discoverRandomRelevantTrait(_auction) -> bool:
 	var possible:Array = []

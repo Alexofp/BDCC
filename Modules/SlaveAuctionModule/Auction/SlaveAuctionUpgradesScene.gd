@@ -15,24 +15,29 @@ func _run():
 			var curLevel:int = getFlag("SlaveAuctionModule."+upgradeID, 0)
 			var canBuy = getModule("SlaveAuctionModule").canBuyUpgrade(upgradeID)
 			
+			
 			sayn("Upgrade: "+upgradeInfo["name"])
 			sayn("Description: "+upgradeInfo["desc"])
-			sayn("Current level: "+str(curLevel)+"/"+str(maxLevel))
+			sayn("Upgrade level: "+str(curLevel)+"/"+str(maxLevel))
+			if(curLevel >= 1):
+				sayn("Current level: "+upgradeInfo["descs"][curLevel-1])
 			if(curLevel < maxLevel):
-				sayn("Next level: "+upgradeInfo["descs"][curLevel+1])
-				sayn("Price: "+str(upgradeInfo["prices"][curLevel+1])+" credits")
+				var thePrice:int = upgradeInfo["prices"][curLevel]
+				sayn("Next level: "+upgradeInfo["descs"][curLevel])
+				sayn("Price: "+str(thePrice)+" credits")
 				if(curLevel > 0):
 					if(!canBuy):
-						sayn("Unlock requirement: "+upgradeInfo["conds"][curLevel])
+						sayn("[color=red]Unlock requirement[/color]: "+upgradeInfo["conds"][curLevel-1]+"")
 					else:
-						sayn("Unlock requirement (SATISFIED): "+upgradeInfo["conds"][curLevel])
+						sayn("[color=green]Unlock requirement (SATISFIED)[/color]: "+upgradeInfo["conds"][curLevel-1]+"")
+			
+				if(canBuy):
+					addButtonWithChecks(upgradeInfo["name"], "Buy this upgrade for "+str(thePrice)+" credits", "buy_upgrade", [upgradeID, upgradeInfo], [[ButtonChecks.HasCredits, thePrice]])
+				else:
+					addDisabledButton(upgradeInfo["name"], "Can't buy this upgrade")
 			
 			sayn("")
-			if(canBuy):
-				addButton(upgradeInfo["name"], "Buy this upgrade for X credits", "buy_upgrade", [upgradeID, upgradeInfo])
-			else:
-				addDisabledButton(upgradeInfo["name"], "Can't buy this upgrade")
-		
+
 		addButton("Close", "Enough upgrading", "endthescene")
 
 func _react(_action: String, _args):
@@ -44,7 +49,7 @@ func _react(_action: String, _args):
 		var upgradeID = _args[0]
 		var upgradeInfo = _args[1]
 		var curLevel:int = getFlag("SlaveAuctionModule."+upgradeID, 0)
-		var credsToRemove:int = upgradeInfo["prices"][curLevel+1]
+		var credsToRemove:int = upgradeInfo["prices"][curLevel]
 		GM.pc.addCredits(-credsToRemove)
 		
 		getModule("SlaveAuctionModule").doBuyUpgrade(upgradeID)
@@ -52,3 +57,19 @@ func _react(_action: String, _args):
 		return
 
 	setState(_action)
+
+func getDebugActions():
+	return [
+	{
+		"id": "unlockAll",
+		"name": "Satisfy requirements",
+		"args": [
+		],
+	},
+	]
+
+func doDebugAction(_id, _args = {}):
+	if(_id == "unlockAll"):
+		for upgradeID in getModule("SlaveAuctionModule").getUpgrades():
+			getModule("SlaveAuctionModule").unlockUpgrade(upgradeID)
+		

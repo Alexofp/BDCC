@@ -27,7 +27,7 @@ func saySlave(theText:String):
 
 func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 	return {
-		text = "LOVES GETTING FUCKED",
+		text = "FILL MEEEEE",
 		slaveReaction = getSlaveReaction(_char, _auction.getSlaveReactionType()),
 		traits = getTraits(),
 		desire = getPassiveDesireGain(),

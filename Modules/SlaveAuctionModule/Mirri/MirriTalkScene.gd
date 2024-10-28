@@ -2771,7 +2771,6 @@ func _react(_action: String, _args):
 
 	if(_action == "open_upgrades_menu"):
 		runScene("SlaveAuctionUpgradesScene")
-		endScene()
 		return
 
 	if(_action == "do_next_rank"):

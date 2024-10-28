@@ -62,7 +62,6 @@ func _run():
 		addButton("Market", "Secure the slave on the stage", "go_market")
 	if(state == "go_market"):
 		aimCameraAndSetLocName("market_market")
-		GM.pc.setLocation("market_market")
 		saynn("You bring {slave.name} to the market and secure {slave.him}, chaining {slave.his} wrists together and attaching chains that make your slave stand on {slave.his} {slave.toes}.")
 
 		saynn("The chatter begins to fill the void.. You put on the headset and get into the position.")

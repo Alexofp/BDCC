@@ -1159,6 +1159,15 @@ func onInteractionEvent(_eventID:String, _args:Dictionary):
 func pawnExist() -> bool:
 	return GM.main.IS.hasPawn(getChar().getID())
 
+func getSkillAmountFullyLearned() -> int:
+	var result:int = 0
+	
+	for skillID in slaveSpecializations:
+		if(slaveSpecializations[skillID] >= 15):
+			result += 1
+	
+	return result
+
 func saveData():
 	var data = {
 		"slaveType": slaveType,

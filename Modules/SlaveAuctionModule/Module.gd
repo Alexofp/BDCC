@@ -29,6 +29,8 @@ func getFlags():
 		"upgradeBidIncreaseCan": flag(FlagType.Bool),
 		"upgradeSeePrefs": flag(FlagType.Number),
 		"upgradeSeePrefsCan": flag(FlagType.Bool),
+		"upgradeBetterHearing": flag(FlagType.Number),
+		"upgradeBetterHearingCan": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -66,7 +68,7 @@ func resetFlagsOnNewDay():
 
 func getSlaveStartingBid() -> int:
 	var upgradeLevel:int = getFlag("SlaveAuctionModule.upgradeStartingBid", 0)
-	var upgradeNums:Array = [50, 60, 80, 100, 120, 150, 200]
+	var upgradeNums:Array = [50, 60, 80, 100, 150, 200, 300, 500]
 	if(upgradeLevel > (upgradeNums.size() - 1)):
 		upgradeLevel = (upgradeNums.size() - 1)
 	if(upgradeLevel < 0):
@@ -76,7 +78,7 @@ func getSlaveStartingBid() -> int:
 
 func getSlaveBidIncrement() -> int:
 	var upgradeLevel:int = getFlag("SlaveAuctionModule.upgradeBidIncrease", 0)
-	var upgradeNums:Array = [10, 15, 20, 25, 30, 40, 50]
+	var upgradeNums:Array = [10, 15, 20, 25, 30, 40, 50, 100]
 	if(upgradeLevel > (upgradeNums.size() - 1)):
 		upgradeLevel = (upgradeNums.size() - 1)
 	if(upgradeLevel < 0):
@@ -88,6 +90,7 @@ func getAuctionSettings():
 	return {
 		startingBid = getSlaveStartingBid(),
 		bidIncrease = getSlaveBidIncrement(),
+		relevantTraitBonus = float(getFlag("SlaveAuctionModule.upgradeBetterHearing", 0))*0.1,
 	}
 
 func sellToSlavery(theCharID:String):
@@ -187,9 +190,10 @@ func unlockUpgrade(_upgradeID:String):
 	if(getFlag("SlaveAuctionModule."+_upgradeID+"Can", false)):
 		return
 	setFlag("SlaveAuctionModule."+_upgradeID+"Can", true)
-	GM.main.addMessage("UPGRADE AVAIABLE YOO")
+	var upgradeName = getUpgrades()[_upgradeID]["name"]
+	GM.main.addMessage("Upgrade '"+upgradeName+"' level "+str(getFlag("SlaveAuctionModule."+_upgradeID, 0)+1)+" is unlocked for purchase!")
 
-func onSlaveSold(_theChar, _howMuchCreds:int):
+func onSlaveSold(_theChar:BaseCharacter, _howMuchCreds:int):
 	increaseFlag("SlaveAuctionModule.totalSlavesSold")
 
 	var bigIncUp = getFlag("SlaveAuctionModule.upgradeBidIncrease", 0)
@@ -201,14 +205,42 @@ func onSlaveSold(_theChar, _howMuchCreds:int):
 		unlockUpgrade("upgradeBidIncrease")
 	if(bigIncUp == 4 && _howMuchCreds >= 300):
 		unlockUpgrade("upgradeBidIncrease")
-	if(bigIncUp == 5 && _howMuchCreds >= 400):
+	if(bigIncUp == 5 && _howMuchCreds >= 500):
 		unlockUpgrade("upgradeBidIncrease")
-	#if(bigIncUp == 6 && _howMuchCreds >= 500):
-	#	unlockUpgrade("upgradeBidIncrease")
+	if(bigIncUp == 6 && _howMuchCreds >= 1000):
+		unlockUpgrade("upgradeBidIncrease")
+
+	var seePrefsUp = getFlag("SlaveAuctionModule.upgradeSeePrefs", 0)
+	var npcSlavery:NpcSlave = _theChar.getNpcSlavery()
+	if(seePrefsUp == 1 && _theChar.isInmate()):
+		unlockUpgrade("upgradeSeePrefs")
+	if(seePrefsUp == 2 && _theChar.getPersonality().personalityScoreMax({PersonalityStat.Mean:-1.0, PersonalityStat.Subby:1.0}) >= 0.5):
+		unlockUpgrade("upgradeSeePrefs")
+	if(seePrefsUp == 3 && npcSlavery != null && npcSlavery.getSkillAmountFullyLearned() >= 1):
+		unlockUpgrade("upgradeSeePrefs")
+	if(seePrefsUp == 4 && _theChar.isStaff()):
+		unlockUpgrade("upgradeSeePrefs")
+	if(seePrefsUp == 5 && _theChar.getPersonality().personalityScoreMax({PersonalityStat.Mean:1.0, PersonalityStat.Subby:-1.0}) >= 0.5):
+		unlockUpgrade("upgradeSeePrefs")
+	if(seePrefsUp == 6 && npcSlavery != null && npcSlavery.getSkillAmountFullyLearned() >= 3):
+		unlockUpgrade("upgradeSeePrefs")
+
+	var betterHearingUp = getFlag("SlaveAuctionModule.upgradeBetterHearing", 0)
+	if(betterHearingUp == 1 && npcSlavery != null && npcSlavery.getLevel() >= 5):
+		unlockUpgrade("upgradeBetterHearing")
+	if(betterHearingUp == 2 && _theChar.isVisiblyPregnant()):
+		unlockUpgrade("upgradeBetterHearing")
+	if(betterHearingUp == 3 && npcSlavery != null && npcSlavery.hasSubmittedToPC()):
+		unlockUpgrade("upgradeBetterHearing")
+	if(betterHearingUp == 4 && npcSlavery != null && npcSlavery.isMindBroken()):
+		unlockUpgrade("upgradeBetterHearing")
+	if(betterHearingUp == 5 && _theChar.getInventory().getEquippedRestraints().size() >= 5):
+		unlockUpgrade("upgradeBetterHearing")
+	if(betterHearingUp == 6 && npcSlavery != null && npcSlavery.getLevel() >= 15):
+		unlockUpgrade("upgradeBetterHearing")
 
 func getMaxUpgradeLevel(_upgradeID:String):
-	
-	return 6
+	return getUpgrades()[_upgradeID]["prices"].size()
 
 func canBuyUpgrade(_upgradeID:String):
 	var theLevel:int = getFlag("SlaveAuctionModule."+_upgradeID, 0)
@@ -216,6 +248,12 @@ func canBuyUpgrade(_upgradeID:String):
 		return true
 	if(theLevel >= getMaxUpgradeLevel(_upgradeID)):
 		return false
+		
+	#if(true):
+	#	return true
+		
+	if(getFlag("SlaveAuctionModule."+_upgradeID+"Can", false)):
+		return true
 		
 	if(_upgradeID == "upgradeStartingBid"):
 		var totalSold = getFlag("SlaveAuctionModule.totalSlavesSold", 0)
@@ -229,108 +267,136 @@ func canBuyUpgrade(_upgradeID:String):
 			return totalSold >= 10
 		if(theLevel == 5):
 			return totalSold >= 15
-		#if(theLevel == 6):
-		#	return totalSold >= 20
+		if(theLevel == 6):
+			return totalSold >= 20
 	
-	return getFlag("SlaveAuctionModule."+_upgradeID+"Can", false)
+	return false
 
 func doBuyUpgrade(_upgradeID:String):
 	increaseFlag("SlaveAuctionModule."+_upgradeID)
 	setFlag("SlaveAuctionModule."+_upgradeID+"Can", false)
 
 func getUpgrades():
+	var totalSlaves:int = getFlag("SlaveAuctionModule.totalSlavesSold", 0)
 	return {
 		"upgradeStartingBid": {
 			name = "Starting bid",
 			desc = "Install better seats for bidders. Increases the starting bid.",
 			conds = [
-				"", #0
-				"Sell 2 slaves total",#1
-				"Sell 4 slaves total",#2
-				"Sell 7 slaves total",#3
-				"Sell 10 slaves total ",#4
-				"Sell 15 slaves total",#5
-				"Sell 20 slaves total",#6
+				"Sell 2 slaves total. Currently: "+str(totalSlaves),#1
+				"Sell 4 slaves total. Currently: "+str(totalSlaves),#2
+				"Sell 7 slaves total. Currently: "+str(totalSlaves),#3
+				"Sell 10 slaves total. Currently: "+str(totalSlaves),#4
+				"Sell 15 slaves total. Currently: "+str(totalSlaves),#5
+				"Sell 20 slaves total. Currently: "+str(totalSlaves),#6
 			],
 			descs = [
-				"",#0
 				"Starting bid increased to 60",#1
 				"Starting bid increased to 80",#2
 				"Starting bid increased to 100",#3
-				"Starting bid increased to 120",#4
-				"Starting bid increased to 150",#5
-				"Starting bid increased to 200",#6
+				"Starting bid increased to 150",#4
+				"Starting bid increased to 200",#5
+				"Starting bid increased to 300",#6
+				"Starting bid increased to 500",#7
 			],
 			prices = [
-				0,#0
-				20,#1
-				40,#2
-				50,#3
-				75,#4
-				100,#5
-				200,#6
+				10,#1
+				20,#2
+				30,#3
+				40,#4
+				50,#5
+				75,#6
+				100,#7
 			],
 		},
 		"upgradeBidIncrease": {
 			name = "Bid increase",
 			desc = "Make the stage prettier. Increases the bid increase.",
 			conds = [
-				"", #0
 				"Sell a slave for at least 100 credits",#1
 				"Sell a slave for at least 150 credits",#2
 				"Sell a slave for at least 200 credits",#3
 				"Sell a slave for at least 300 credits",#4
-				"Sell a slave for at least 400 credits",#5
-				"Sell a slave for at least 500 credits",#6
+				"Sell a slave for at least 500 credits",#5
+				"Sell a slave for at least 1000 credits",#6
 			],
 			descs = [
-				"",#0
-				"Bid increase becomes 15",#1
-				"Bid increase becomes 20",#2
-				"Bid increase becomes 25",#3
-				"Bid increase becomes 30",#4
-				"Bid increase becomes 40",#5
-				"Bid increase becomes 50",#6
+				"Bid increase is 15 credits",#1
+				"Bid increase is 20 credits",#2
+				"Bid increase is 25 credits",#3
+				"Bid increase is 30 credits",#4
+				"Bid increase is 40 credits",#5
+				"Bid increase is 50 credits",#6
+				"Bid increase is 100 credits",#7
 			],
 			prices = [
-				0,#0
-				20,#1
-				40,#2
-				50,#3
-				75,#4
-				100,#5
-				200,#6
+				10,#1
+				20,#2
+				30,#3
+				50,#4
+				75,#5
+				100,#6
+				150,#7
 			],
 		},
 		"upgradeSeePrefs": {
 			name = "Reveal preferences",
 			desc = "Extra intel on the next bidders. Allows to see some preferences of the next bidders.",
 			conds = [
-				"", #0
 				"Sell an inmate",#1
-				"Sell a subby/kind slave",#2
-				"Sell a staff member",#3
-				"Sell a mean/dominant slave",#4
-				"Sell a slave with one of the skills maxed",#5
-				"",#6
+				"Sell a slave who is very kind or subby",#2
+				"Sell a slave with one of the skills fully learned",#3
+				"Sell a staff member",#4
+				"Sell a slave who is very mean or dominant",#5
+				"Sell a slave that has 3 skills fully learned",#6
 			],
 			descs = [
-				"",#0
 				"Reveals 1 preference ahead of time",#1
-				"Reveals 2 preference ahead of time",#2
-				"Reveals 3 preference ahead of time",#3
-				"Reveals 4 preference ahead of time",#4
-				"Reveals 5 preference ahead of time",#5
-				"",#6
+				"Reveals 2 preferences ahead of time",#2
+				"Reveals 3 preferences ahead of time",#3
+				"Reveals 4 preferences ahead of time",#4
+				"Reveals 5 preferences ahead of time",#5
+				"Reveals 6 preferences ahead of time",#6
+				"Reveals 7 preferences ahead of time",#7
 			],
 			prices = [
-				0,#0
-				20,#1
-				40,#2
-				50,#3
-				75,#4
-				100,#5
-				200,#6
+				5,#1
+				10,#2
+				15,#3
+				25,#4
+				40,#5
+				50,#6
+				100,#7
+			],
+		},
+		"upgradeBetterHearing": {
+			name = "Better hearing",
+			desc = "Install hidden microphones into bidders' seats. Increases the chances of relevant preferences being revealed.",
+			conds = [
+				"Sell a slave with slave level 5 or more",#1
+				"Sell a pregnant slave",#2
+				"Sell a slave that has submitted to you",#3
+				"Sell a completely mindbroken slave",#4
+				"Sell a slave with at least 5 pieces of bdsm equipment",#5
+				"Sell a slave with slave level 15 or more",#6
+			],
+			descs = [
+				"Increases the chance that relevant preferences will be revealed by 10%",#1
+				"Increases the chance that relevant preferences will be revealed by 20%",#2
+				"Increases the chance that relevant preferences will be revealed by 30%",#3
+				"Increases the chance that relevant preferences will be revealed by 40%",#4
+				"Increases the chance that relevant preferences will be revealed by 50%",#5
+				"Increases the chance that relevant preferences will be revealed by 60%",#6
+				"Increases the chance that relevant preferences will be revealed by 70%",#6
+			],
+			prices = [
+				15,#1
+				20,#2
+				25,#3
+				30,#4
+				35,#5
+				50,#6
+				75,#6
 			],
 		},
 	}

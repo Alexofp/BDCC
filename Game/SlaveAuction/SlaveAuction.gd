@@ -13,6 +13,7 @@ var bidLastChances:int = 0
 
 var startingBid:int = 10
 var bidIncrease:int = 10
+var relevantTraitBonus:float = 0.0
 
 var actionText:String = ""
 var extraActionTexts:Array = [] # no save
@@ -41,6 +42,7 @@ func start(_args:Dictionary = {}):
 	generateBidders()
 	startingBid = _args["startingBid"] if (_args.has("startingBid")) else calculateStartingBid(getChar())
 	bidIncrease = _args["bidIncrease"] if (_args.has("bidIncrease")) else calculateBidIncrease(getChar())
+	relevantTraitBonus = _args["relevantTraitBonus"] if (_args.has("relevantTraitBonus")) else 0.0
 	currentBid = startingBid
 
 static func calculateSlaveTraitsStatic(theChar:BaseCharacter) -> Dictionary:
@@ -467,7 +469,7 @@ func unlockRandomTraitOfTypeEachBidder(_traitType):
 
 func unlockRandomTraitOfTypeEachBidderWithChance(_traitType, _chance:float):
 	for bidder in bidders:
-		if(RNG.chance(_chance)):
+		if(RNG.chance(_chance + relevantTraitBonus*100.0)):
 			bidder.discoverRandomTraitOfType(self, _traitType)
 
 func unlockPercentageOfTraitsRandomBidder(howMuch:float, howMuchDesireToAdd:float = 0.0):
@@ -745,6 +747,7 @@ func saveData():
 		bidLastChances = bidLastChances,
 		startingBid = startingBid,
 		bidIncrease = bidIncrease,
+		relevantTraitBonus = relevantTraitBonus,
 		actionText = actionText,
 		slaveTraits = slaveTraits,
 		usedTraits = usedTraits,
@@ -765,6 +768,7 @@ func loadData(_data):
 	bidLastChances = SAVE.loadVar(_data, "bidLastChances", 0)
 	startingBid = SAVE.loadVar(_data, "startingBid", 50)
 	bidIncrease = SAVE.loadVar(_data, "bidIncrease", 10)
+	relevantTraitBonus = SAVE.loadVar(_data, "relevantTraitBonus", 0.0)
 	actionText = SAVE.loadVar(_data, "actionText", "")
 	slaveTraits = SAVE.loadVar(_data, "slaveTraits", {})
 	usedTraits = SAVE.loadVar(_data, "usedTraits", {})
