@@ -53,7 +53,10 @@ func getInventoryName():
 				theName += " ("+str(Util.roundF(fluids.getFluidAmount()))+" ml)"
 	elif(restraintData != null):
 		if(currentInventory != null):
-			theName += " (Level "+restraintData.getVisibleLevel(GM.pc.isBlindfolded() && !GM.pc.canHandleBlindness())+")"
+			if(!restraintData.hasSmartLock()):
+				theName += " (Level "+restraintData.getVisibleLevel(GM.pc.isBlindfolded() && !GM.pc.canHandleBlindness())+")"
+			else:
+				theName += " (SMART-LOCKED)"
 	return theName
 
 # Hacky but good enough for most things, can always just override just function with a proper one
@@ -125,6 +128,10 @@ func getVisisbleDescription():
 	if(buffs.size() > 0):
 		for buff in buffs:
 			text += "\n" + "[color=#"+buff.getBuffColor().to_html(false)+"]" + buff.getVisibleDescription() + "[/color]"
+
+	if(restraintData != null && restraintData.hasSmartLock()):
+		var smartLock:SmartLockBase = restraintData.getSmartLock()
+		text += "\n" + smartLock.getName()+": "+smartLock.getUnlockDescription()
 	return text
 
 func getCombatDescription():
