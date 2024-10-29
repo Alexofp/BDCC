@@ -13,7 +13,7 @@ func getName():
 func getUnlockDescription():
 	var theText = "Unable to struggle off. Little screen shows this:\n"
 	theText += getQuestProgressText()
-	theText += "\nAlternatively, there are "+str(keyAmount)+" keyholes.."
+	theText += "\nAlternatively, there are "+str(keyAmount)+" keyholes."
 	return theText
 
 func getKeysAmountToUnlock() -> int:
