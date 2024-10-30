@@ -7,6 +7,8 @@ func getFlags():
 		"s2hap": flag(FlagType.Bool),
 		"luxeIntroHap": flag(FlagType.Bool),
 		
+		"r2outcome": flag(FlagType.Text), # kiss nohate luxeisright silence
+		
 		"repLevel": flag(FlagType.Number),
 		"repCredits": flag(FlagType.Number),
 		"totalRepCredits": flag(FlagType.Number),
