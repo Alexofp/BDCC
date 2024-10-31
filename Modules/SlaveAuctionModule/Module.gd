@@ -25,6 +25,9 @@ func getFlags():
 		"customMirriGreeting": flag(FlagType.Text),
 		"mirriNotOnPill": flag(FlagType.Text),
 		
+		"luxeTalkIntro": flag(FlagType.Bool),
+		"customLuxeGreeting": flag(FlagType.Text),
+		
 		"upgradeStartingBid": flag(FlagType.Number),
 		"upgradeStartingBidCan": flag(FlagType.Bool),
 		"upgradeBidIncrease": flag(FlagType.Number),
@@ -46,6 +49,7 @@ func _init():
 		
 		"res://Modules/SlaveAuctionModule/Mirri/MirriTalkScene.gd",
 		"res://Modules/SlaveAuctionModule/Luxe/LuxeIntroScene.gd",
+		"res://Modules/SlaveAuctionModule/Luxe/LuxeTalkScene.gd",
 		
 		"res://Modules/SlaveAuctionModule/Auction/SlaveAuctionGenericSellScene.gd",
 		"res://Modules/SlaveAuctionModule/Auction/SlaveAuctionScene.gd",
@@ -109,6 +113,14 @@ func getMirriGreeting() -> String:
 		return customGreet
 	
 	return "What's up, AlphaCorp slave?"
+
+func getLuxeGreeting() -> String:
+	var customGreet:String = getFlag("SlaveAuctionModule.customLuxeGreeting", "")
+	if(customGreet != ""):
+		setFlag("SlaveAuctionModule.customLuxeGreeting", "")
+		return customGreet
+	
+	return "Hm."
 
 func getRepInfoString() -> String:
 	var theLines:Array = []
