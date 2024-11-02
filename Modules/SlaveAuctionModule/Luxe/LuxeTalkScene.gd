@@ -380,6 +380,116 @@ func _run():
 		saynn("Well.. at least now you can serve him.")
 
 		addButton("Continue", "See what happens next", "")
+	if(state == "sex_menu"):
+		saynn("How do you want to serve Luxe?")
+
+		addButton("Table service", "Service his cock while under his table", "under_start")
+		addButton("Back", "You changed your mind", "")
+	if(state == "under_start"):
+		saynn("Luxe, with his usual icy expression, finishes examining a document on his desk, his sharp eyes barely flickering in your direction as he points firmly to the space beneath his desk.")
+
+		saynn("He doesn't drop a word.. but you understand what he means.")
+
+		addButton("Table", "Get under his table", "under_table")
+	if(state == "under_table"):
+		# (( New anim table oral tease
+		saynn("Without any extra questions, you approach his broad, expensive desk and get under it, positioning yourself where his hand has pointed to.")
+
+		saynn("Now, hidden from view, you begin your work.. Your fingers brush along his strong thighs and reach for his zipper on his pants, already feeling the heat radiating from his crotch, the pressure rising behind the cloth.")
+
+		saynn("One smooth motion exposes his thick, knotted shaft that is partly exposed from its sheath already. While you're getting all horny breathing in his manly scent, Luxe just grabs another document from the pile and begins skimming through it with his eyes, his focus directed towards the work.")
+
+		addButton("Get it hard", "Make him fully hard with your hands", "under_table_stroke")
+	if(state == "under_table_stroke"):
+		# (( New anim table oral stroke
+		saynn("Both of your hands land on his member and begin following along its veiny surface, from its pointy tip to the base where the deflated knot is located. Quite quickly, his length begins to twitch and inflate further, his body pumping blood into his cock, making it nice and hard for you.")
+
+		saynn("Even though it's dark under his table, the glow of his veins is enough for you to see and admire the cock.. a small drop of pre already shining from its tip.")
+
+		saynn("Luxe is motionless save for the smallest tensing of his jaw as you take him into your mouth, your lips wrapping around the head of his member while his cold eyes continue to scan through various files.")
+
+		addButton("Suck him off", "Continue your obedient service", "under_table_suck")
+	if(state == "under_table_suck"):
+		# (( New anim table oral suck
+		saynn("Slowly, you begin trying to fit more than the head of his dick into your mouth, sliding your head along it, trying to go slightly deeper with each pass, finding your and his rhythm, his shaft growing harder in your mouth as he maintains his detached expression.")
+
+		saynn("The room is dead quiet.. with only the wet sounds of your mouth and lips occasionally breaking the complete silence, producing short slurps and lip smacks. Your hands don't sit around and rich into his pants before pulling out his rich ballsack, your digits carefully caressing his orbs as you struggle to fit his whole length in, the tip of his cock testing the back of your mouth, dripping pre down your throat.. salty and slightly sweet. Despite how cold he usually is, his length feels hot in your mouth..")
+
+		saynn("And the scent.. incredible.. musky and rich, it's filling your nostrils with a deep, intoxicating aroma that wakes something primal within you, making you eager to suck him faster, your pulse quickening..")
+
+		addButton("Faster", "Work faster under his table", "under_table_suck_fast")
+	if(state == "under_table_suck_fast"):
+		# (( New anim table oral fast suck
+		saynn("With a slight shift of his hips, Luxe pushes his cock just a bit deeper, his powerful hand meeting the back of your head.. and guiding you to engulf more of his length. Luxe's breathing becomes slightly more ragged.. while yours gets all sorts of messed up by his cock suddenly bending down your throat, your tight inner walls clenching around his dick, your lips kissing his knot that is inflating with more blood with each second..")
+
+		saynn("As you take him deeper, you let your hands fondle his heavy, full balls more, feeling their solid, warm weight in your palms. You knead them gently, feeling the tension building in his body.. while your mouth works in a steady rhythm, sliding up and down his length, testing your limits. The scent is still overwhelmingly masculine, making you crave him even more.")
+
+		saynn("It looks like he is close.. It feels like that too, his knot pulsing and radiating heat like crazy.. subtle shivers begin to spread throughout his body..")
+
+		addButton("Facials", "Let him cum on your face", "under_table_suck_facials")
+		addButton("Swallow it", "Let him cum down your throat and not waste a single drop", "under_table_suck_inside")
+	if(state == "under_table_suck_inside"):
+		# (( New anim table oral suck inside
+		saynn("When you feel his peak coming near, you forcibly impale yourself onto his cock as deep as your throat allows, taking the whole length except for the fat knot. You're sacrificing your ability to breathe for his pleasure.. but it's a worthy trade in your book.")
+
+		saynn("Even while incredibly close, Luxe remains cold-faced, only the tension coiling in his muscles gives up that something is about to happen. And it does, his jaw clenches subtly.. and then, without a moment's warning.. his thick juicy shaft starts pulsing in your mouth as his hot seed spills down your throat, filling your belly.")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("The aroma of his manliness in your lungs.. mixed with the taste of his cum.. creates an overwhelming sense of pleasure that drives you wild. You feel like your cock is gonna burst in your cage at any moment, the pressure that it is putting on its metal prison is insane..")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("The aroma of his manliness in your lungs.. mixed with the taste of his cum.. creates an overwhelming sense of pleasure that drives you wild. You feel like your cock is gonna burst at any moment, the pressure in your length is insane..")
+
+		elif (GM.pc.hasReachableVagina()):
+			saynn("The aroma of his manliness in your lungs.. mixed with the taste of his cum.. creates an overwhelming sense of pleasure that drives you wild. Your pussy gushes with transparent juices without any direct stimulation, the pressure is just that intense..")
+
+		else:
+			saynn("The aroma of his manliness in your lungs.. mixed with the taste of his cum.. creates an overwhelming sense of pleasure that drives you wild.")
+
+		saynn("Your throat works as fast as it can.. but his seed just keeps coming and coming, his balls tensing up as he just keeps reading the documents, seemingly unphased by all this.. only his hand is still on the back of your head, ensuring that you swallow every drop..")
+
+		saynn("Only once he is spent does he release his hold, letting you pull away and start coughing, your mouth greedily catching any air that it can.")
+
+		saynn("Feels fucking good..")
+
+		addButton("Get out", "Get out from under his desk", "under_table_suck_getout")
+	if(state == "under_table_suck_getout"):
+		playAnimation(StageScene.Duo, "stand")
+		saynn("You clean up after yourself, licking off the remaining cum from his cock and balls.. before crawling from under his desk. You use your hand to wipe the corners of your mouth and watch Luxey nodding.")
+
+		saynn("[say=luxe]Mhm.[/say]")
+
+		saynn("That's all you get.. but it's still so worth it.. and leaves you craving more..")
+
+		saynn("But for now, it's time to go.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "under_table_suck_facials"):
+		# (( New anim table oral suck tease
+		saynn("When you feel his peak coming near, you continue pushing him further and further, bringing him over the point of no return. That's when you sneak out from under his grip and pull your head back, your lips releasing his throbbing shaft..")
+
+		saynn("Luxe lets out nothing but a low, quiet growl as he erupts, his balls tensing up, his thick cum splattering across your face in hot, creamy waves. You close your eyes and welcome it, trying to catch his whole load, letting him mark you with his salty seed..")
+
+		saynn("As his orgasm begins to subside and his knotted cock stops showering you with cum.. you just sit there, feeling his seed dripping down your cheeks and chin. You can't even open your eyes, a few thick white strings went right over them..")
+
+		saynn("Feels fucking good..")
+
+		addButton("Get out", "Get out from under his desk", "under_table_suck_getout_facials")
+	if(state == "under_table_suck_getout_facials"):
+		playAnimation(StageScene.Duo, "stand")
+		saynn("Slowly and carefully, you get out from under his desk, careful as to not leave too much of a mess..")
+
+		saynn("You use your hands to clear the area around your eyes a little.. and finally open them again.")
+
+		saynn("You see Luxe, his eyes judging you silently for what you did. But he doesn't seem to be too mad.. so you probably did alright.")
+
+		saynn("[say=luxe]Hm.[/say]")
+
+		saynn("That's all you get.. but it's still so worth it.. and leaves you craving more..")
+
+		saynn("But for now, it's time to go.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -409,5 +519,35 @@ func _react(_action: String, _args):
 
 	if(_action == "sexintro_agree"):
 		setFlag("SlaveAuctionModule.luxeSexIntro", true)
+
+	if(_action == "under_start"):
+		processTime(5*60)
+
+	if(_action == "under_table"):
+		processTime(3*60)
+
+	if(_action == "under_table_stroke"):
+		processTime(5*60)
+
+	if(_action == "under_table_suck"):
+		processTime(3*60)
+
+	if(_action == "under_table_suck_fast"):
+		processTime(3*60)
+		GM.pc.gotMouthFuckedBy("luxe")
+
+	if(_action == "under_table_suck_facials"):
+		processTime(3*60)
+		GM.pc.cummedOnBy("luxe")
+
+	if(_action == "under_table_suck_inside"):
+		processTime(3*60)
+		GM.pc.cummedInMouthBy("luxe")
+
+	if(_action == "under_table_suck_getout"):
+		processTime(3*60)
+
+	if(_action == "under_table_suck_getout_facials"):
+		processTime(3*60)
 
 	setState(_action)
