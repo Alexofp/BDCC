@@ -28,6 +28,7 @@ func getFlags():
 		"luxeTalkIntro": flag(FlagType.Bool),
 		"customLuxeGreeting": flag(FlagType.Text),
 		"luxeSexIntro": flag(FlagType.Bool),
+		"luxeSexProgress": flag(FlagType.Number),
 		
 		"upgradeStartingBid": flag(FlagType.Number),
 		"upgradeStartingBidCan": flag(FlagType.Bool),
