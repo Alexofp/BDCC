@@ -2031,7 +2031,7 @@ func _run():
 
 		saynn("[say=pc]What, your toys and armor aren't helping you anymore? This isn't gonna be fun for you, bitch. Not in a slightest.[/say]")
 
-		saynn("[say=mirri]Oh yeah? Do your worst, you fucker, I ain't afraid of no AlphaCorp doormat.[/say]")
+		saynn("[say=mirri]Oh yeah? Do your worst, you fucker, I ain't afraid of no AlphaCorp doormat. Just make sure I can't move after.[/say]")
 
 		saynn("She craves some roughness.. but you want to actually punish her.. yeah, you know exactly what you are gonna do to her.")
 
