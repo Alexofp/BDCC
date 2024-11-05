@@ -791,6 +791,181 @@ func _run():
 
 		saynn("He leads you towards a door.. but not the exit of his office.. but rather his personal room..")
 
+		addButton("Follow", "See what happens next", "sexmar_room")
+	if(state == "sexmar_room"):
+		playAnimation(StageScene.HangingDuo, "idle", {npc="luxe", pc="pc", bodyState={naked=true,hard=true}})
+		saynn("Luxe's private quarters.. are quite spacious.. and just as rich as his office. Your sight is stolen by the big double bed that is placed against one of the walls, various golden patterns carved into its panels.. but that's not where he is leading you.")
+
+		saynn("The wolf pulls out some chains and attaches them to the special ceiling hooks. His usual cold gaze holds a different edge tonight.. something possessive.. something darker.")
+
+		saynn("Without a word extra, Luxe takes your wrists and snaps heavy cuffs around them before lifting them above your head, securing you to the chains. The steel pulls tightly, leaving you standing on your toes, completely vulnerable and at this mercy.")
+
+		saynn("[say=pc]Ah.. you have a nice room.[/say]")
+
+		saynn("[say=luxe]Mmh.[/say]")
+
+		addButton("Continue", "See what happens next", "sexmar_undress")
+	if(state == "sexmar_undress"):
+		playAnimation(StageScene.HangingDuo, "idle", {npc="luxe", pc="pc", bodyState={naked=true,hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("[say=pc]..and a nice cock..[/say]")
+
+		saynn("He takes off his usual uniform, revealing himself fully to you, his golden marks are all on display.. and his canine sheath with a hard glowing shaft housed in it.")
+
+		saynn("You feel his scent now.. thick and musky.. sharp and raw.. it's making your head spin. The room is clearly getting warmer..")
+
+		addButton("Continue", "See what happens next", "sexmar_circle")
+	if(state == "sexmar_circle"):
+		playAnimation(StageScene.HangingSex, "tease", {npc="luxe", pc="pc", bodyState={naked=true,hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("He circles you slowly, his powerful frame prowling with control.. dominance. He stops just behind you, so close you can feel the head radiating from his chest against your back. One large, clawed hand traces down your spine, sending shivers through your {pc.masc} body as he explores each exposed inch. His hot breath is on your neck.. you can feel his lips graze your ear as he rumbles a deep, low growl.. it makes your body tremble.. it makes you want him..")
+
+		saynn("[say=pc]When are gonna..[/say]")
+
+		saynn("[say=luxe]Soon.[/say]")
+
+		saynn("His other hand wraps around your throat, his claws dig in ever so slightly, asserting his total control over you.. and testing your limits. He makes you arch your back in just the way that he wants..")
+
+		addButton("Ass", "Luxe will fuck your ass", "sexmar_pick_ass")
+		addButtonWithChecks("Pussy", "Luxe will fuck your pussy with a condom", "sexmar_pick_pussy", [], [[ButtonChecks.HasReachableVagina]])
+	if(state == "sexmar_sex"):
+		playAnimation(StageScene.HangingSex, "sex", {npc="luxe", pc="pc", bodyState={naked=true,hard=true}, npcBodyState={naked=true, hard=true, condom=isVag}})
+		saynn("Without another sound, he aligns himself behind you, his knotted, throbbing length pressing against your butt, teasing your {pc.anusStretch} entrance. One powerful hand grips your {pc.thick} hip tightly, pulling you back toward him as he pushes forward, his thick cock pressing inside, stretching you to take him!")
+
+		saynn("[say=pc]Ah!..[/say]")
+
+		saynn("His grip on your waist increases, fingers digging into your flesh as he begins to move, his hips slamming against you, making you take his glowing gold length again and again, keeping your tailhole stretched wide open..")
+
+		saynn("Luxe sets a slow, punishing rhythm at first, each thrust is making you feel like you're about to break, the pressure inside you builds, your inner walls gripping his cock nice and tight..")
+
+		addButton("Continue", "See what happens next", "sexmar_fast")
+	if(state == "sexmar_fast"):
+		playAnimation(StageScene.HangingSex, "fast", {npc="luxe", pc="pc", bodyState={naked=true,hard=true}, npcBodyState={naked=true, hard=true, condom=isVag}})
+		saynn("And soon, Luxe begins to fuck you faster, driving his cock deeper, his knot swelling and stretching you.. but not fitting inside anymore, instead just making you writhe against him. Juicy moans escape your lips, combining with the sounds of bodies slapping against each other..")
+
+		saynn("[say=pc]I love your cock.. ah..[/say]")
+
+		saynn("His hand grabs your neck again, forcing you back against him as he pounds into you, his powerful body fully taking you. With each powerful thrust, his knot presses harder, straining, stretching..")
+
+		saynn("Yeah, he is not stopping now.. you can tell it by now..")
+
+		addButton("Continue", "See what happens next", "sexmar_cum1")
+	if(state == "sexmar_cum1"):
+		playAnimation(StageScene.HangingSex, "inside", {npc="luxe", pc="pc", bodyState={naked=true,hard=true}, npcBodyState={naked=true, hard=true, condom=isVag}})
+		saynn("With a final, forceful motion, he rams the whole length inside your ass, locking himself with you as his knot pushes past your anal ring, sealing the two of you together.")
+
+		saynn("A quiet growl escapes him as his cock starts throbbing inside you, stuffing its load deep inside, pulsing deep within.. You can feel each spasm, his thick cum flooding into you.. with nothing leaking out..")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your prostate gets smashed by the fat orb, causing your little locked cock to start wasting its load, shooting weak spurts of {pc.cum} onto the floor, your own orgasm is sending you shaking..")
+
+		elif (GM.pc.hasReachablePenis):
+			saynn("Your prostate gets smashed by the fat orb, causing your {pc.penis} to start wasting its load, shooting strong spurts of {pc.cum} onto the floor, your own orgasm is sending you shaking..")
+
+		elif (GM.pc.hasReachableVagina):
+			saynn("Your pussy is pulsing around empty air, this anal pounding is enough to make you cum, your own sudden orgasm sending you shaking..")
+
+		saynn("Bound, knotted and claimed.. The hot breath on your neck is adding to it.. making you squirm and clench around him..")
+
+		saynn("[say=pc]Nhh.. f-fuck..[/say]")
+
+		saynn("The wolf takes a small breather, his full length still inside you..")
+
+		saynn("[say=luxe]We're only getting started.[/say]")
+
+		saynn("Oh shit..")
+
+		addButton("Continue", "See what happens next", "sexmar_fullnelson")
+	if(state == "sexmar_fullnelson"):
+		playAnimation(StageScene.SexFullNelson, "sex", {pc="luxe", npc="pc", bodyState={naked=true,hard=true}, npcBodyState={naked=true, hard=true, condom=isVag}})
+		saynn("While his cock is still fully inside, Luxe uncuffs your hands and catches you, his hands snake under your knees and pin them up high against your shoulders before locking behind your head, grabbing into a full nelson hold.")
+
+		saynn("Just as before, you are completely helpless, your feet dangling high, your body fully locked by his powerful hands..")
+
+		saynn("With one swift motion, he yanks his knot out of your stuffed ass, making your asshole gape and start leaking cum.. but only for a few moments before he starts thrusting inside you with raw, unrestrained force, this new angle allowing him to hit your "+str("most sensitive spots" if !GM.pc.hasPenis() else "prostate")+" with greater force.")
+
+		saynn("[say=pc]Ah.. f-fuck!.. You're gonna break me!..[/say]")
+
+		saynn("[say=luxe]I do.[/say]")
+
+		addButton("Continue", "See what happens next", "sexmar_fullnelson_fast_cum")
+	if(state == "sexmar_fullnelson_fast_cum"):
+		playAnimation(StageScene.SexFullNelson, "fast", {pc="luxe", npc="pc", bodyState={naked=true,hard=true}, npcBodyState={naked=true, hard=true, condom=isVag}})
+		saynn("The pose is forcing to take him entirely, Luxe is fucking you faster and stronger, bringing you down onto his shaft with great strength, the heat making your heart beat insanely fast.")
+
+		saynn("[say=pc]I'm.. I'm gg-gonna.. Ahh![/say]")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Your orgasm catches up with you again, your poor prostate is begging for mercy as the fat shaft is massaging it relentlessly, milking it for all its fluids. Your locked away cock throbs in its little cage and starts dripping {pc.cum} eagerly, in rhythm with the rough pounding..")
+
+		elif (GM.pc.hasReachablePenis):
+			saynn("Your orgasm catches up with you again, your poor prostate is begging for mercy as the fat shaft is massaging it relentlessly, milking it for all its fluids. Your own dick throbs and starts dripping {pc.cum} eagerly, in rhythm with the rough pounding..")
+
+		elif (GM.pc.hasReachableVagina):
+			saynn("Your orgasm catches up with you again, your poor g-spot is begging for mercy as the fat shaft is massaging it relentlessly through the inner wall of your ass. Your pussy pulses and starts squirting, releasing girlcum in short bursts, in rhythm with the rough pounding..")
+
+		else:
+			saynn("Your orgasm catches up with you again, your pleasure spots are all begging for mercy as the fat shaft is massaging them relentlessly. You're cumming from the rough pounding..")
+
+		saynn("With every thrust, you can feel his knot swallowing again, the pressure building up until he pulls you down hard against his cock, forcing his fat orb inside you once more. The combination of your helplessness and his dominance drives you wild, his glowing member pumping your ass full of his virile seed again.")
+
+		saynn("[say=luxe]Nh..[/say]")
+
+		saynn("[say=pc]So much.. oh fu-uck.. oh fuck..[/say]")
+
+		saynn("Your belly is actually glowing a bit, the golden accents showing through.. and it's also growing too, the cum that is being pumped into it is making it look slightly bigger..")
+
+		saynn("He doesn't stop too, moving his hips, his cock is shifting inside you, stretching you out more and more..")
+
+		saynn("[say=pc]My ass.. you s-stuffed me..[/say]")
+
+		saynn("[say=luxe]I'm not done with you yet.[/say]")
+
+		saynn("[say=pc]Wha-a..[/say]")
+
+		saynn("Still in this full nelson pose, he brings you to his king-sized bed..")
+
+		addButton("Continue", "See what happens next", "sexmar_mating")
+	if(state == "sexmar_mating"):
+		# (( New anim mating press sex
+		saynn("He gives you just a moment to catch your breath.. before yanking his cock out and throwing you onto his bed.")
+
+		saynn("[say=pc]AH![/say]")
+
+		saynn("The landing is soft, luckily.. But that can not be said for what happens next. Luxe's hands raise your legs onto his shoulder and pin you into the sheets, your back pressed firmly against the surface.")
+
+		saynn("He's got you into a firm mating press.. and that gives him complete control, allowing him to thrust into you again, the angle is perfect to start pounding your ass, your gaping asshole eagerly stretching against to fit his length.")
+
+		saynn("[say=pc]I love your cock![/say]")
+
+		saynn("[say=luxe]Good. Take it all.[/say]")
+
+		addButton("Continue", "See what happens next", "sexmar_mating_fast")
+	if(state == "sexmar_mating_fast"):
+		# (( New anim mating press fast
+		saynn("As the heat between you builds, Luxe changes his rhythm, pulling out almost entirely before slamming his cock back in, the slaps echoing around the room. Your body arches against him, your needy asshole clenching, trying to milk his balls dry as you approach another peak..")
+
+		saynn("Luxe's thrusts are becoming more urgent.. he puts more strength into them.. until the knot gets forced into you again.. and then again and again, your tailhole got stretched enough for him to be able to yank his orb out and force it back inside before your ring closes up..")
+
+		saynn("[say=pc]Fuc-ck! You're knot-fucking me!..[/say]")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("It doesn't take long for your caged member to start leaking {pc.cum} again, your balls are pretty much drained by this point, your prostate smashed to bits..")
+
+		elif (GM.pc.hasReachablePenis):
+			saynn("It doesn't take long for your {pc.penis} to start leaking {pc.cum} again, your balls are pretty much drained by this point, your prostate smashed to bits..")
+
+		elif (GM.pc.hasReachableVagina):
+			saynn("It doesn't take long for your pussy to gush with fluids again.. just much less.. as that cock is leaving you drained by this point..")
+
+		else:
+			saynn("It doesn't take long for you to cum again, your ass desperately squeezing that cock..")
+
+		addButton("Continue", "See what happens next", "sexmar_mating_cum")
+	if(state == "sexmar_mating_cum"):
+		# (( New anim mating press inside
+		saynn("As Luxe reaches his limit, he lets out a primal animal growl and forces his whole length inside you again, the knot locking you both together! Feeling the immense pressure, you cry out in ecstasy, your orgasm keeps getting prolonged, your body squirming under him.")
+
+		saynn("Luxe leans down and stares you directly into the eyes as his cock starts throbbing inside you again, somehow stuffing even more of his potent cum inside your ass, your legs shaking wildly as his balls are tensing up.. again and again.. pushing his load inside..")
+
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -915,6 +1090,71 @@ func _react(_action: String, _args):
 
 	if(_action == "sexdesk_after"):
 		processTime(15*60)
+
+	if(_action == "sexmar_room"):
+		processTime(3*60)
+
+	if(_action == "sexmar_undress"):
+		processTime(3*60)
+
+	if(_action == "sexmar_circle"):
+		processTime(3*60)
+
+	if(_action == "sexmar_pick_ass"):
+		isVag = false
+		setState("sexmar_sex")
+		return
+
+	if(_action == "sexmar_pick_pussy"):
+		isVag = true
+		setState("sexmar_sex")
+		return
+
+	if(_action == "sexmar_fast"):
+		processTime(3*60)
+
+	if(_action == "sexmar_cum1"):
+		processTime(3*60)
+		
+		if(isVag):
+			GM.pc.gotVaginaFuckedBy("luxe")
+		else:
+			GM.pc.gotAnusFuckedBy("luxe")
+			GM.pc.cummedInAnusBy("luxe")
+		
+		GM.pc.orgasmFrom("luxe")
+
+	if(_action == "sexmar_fullnelson"):
+		processTime(3*60)
+
+	if(_action == "sexmar_fullnelson_fast_cum"):
+		processTime(13*60)
+		
+		if(isVag):
+			GM.pc.gotVaginaFuckedBy("luxe")
+		else:
+			GM.pc.gotAnusFuckedBy("luxe")
+			GM.pc.cummedInAnusBy("luxe")
+		
+		GM.pc.orgasmFrom("luxe")
+
+	if(_action == "sexmar_mating"):
+		processTime(5*60)
+
+	if(_action == "sexmar_mating_fast"):
+		processTime(5*60)
+
+	if(_action == "sexmar_mating_cum"):
+		processTime(13*60)
+		
+		if(isVag):
+			GM.pc.gotVaginaFuckedBy("luxe")
+			GM.pc.cummedInVaginaBy("luxe")
+		else:
+			GM.pc.gotAnusFuckedBy("luxe")
+			GM.pc.cummedInAnusBy("luxe")
+		
+		GM.pc.orgasmFrom("luxe")
 
 	setState(_action)
 
