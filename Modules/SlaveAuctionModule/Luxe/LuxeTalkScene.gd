@@ -781,7 +781,9 @@ func _run():
 
 		saynn("He leans forward, his hand raises your chin to make you look at him.")
 
-		saynn("[say=luxe]Today I won't stop until you drain me completely.[/say]")
+		saynn("[say=luxe]I won't stop until you drain me completely.[/say]")
+
+		saynn("Sounds intimidating.. and exciting..")
 
 		saynn("[say=pc]S-sounds g-good..[/say]")
 
@@ -828,11 +830,14 @@ func _run():
 		addButtonWithChecks("Pussy", "Luxe will fuck your pussy with a condom", "sexmar_pick_pussy", [], [[ButtonChecks.HasReachableVagina]])
 	if(state == "sexmar_sex"):
 		playAnimation(StageScene.HangingSex, "sex", {npc="luxe", pc="pc", bodyState={naked=true,hard=true}, npcBodyState={naked=true, hard=true, condom=isVag}})
-		saynn("Without another sound, he aligns himself behind you, his knotted, throbbing length pressing against your butt, teasing your {pc.anusStretch} entrance. One powerful hand grips your {pc.thick} hip tightly, pulling you back toward him as he pushes forward, his thick cock pressing inside, stretching you to take him!")
+		if (isVag):
+			saynn("Quickly, he fetches a condom and spreads it over his length.")
+
+		saynn("Without another sound, he aligns himself behind you, his knotted, throbbing length pressing against your "+str("butt, teasing your {pc.anusStretch} entrance" if !isVag else "slick folds, teasing your {pc.pussyStretch} pussy entrance")+". One powerful hand grips your {pc.thick} hip tightly, pulling you back toward him as he pushes forward, his thick cock pressing inside, stretching you to take him!")
 
 		saynn("[say=pc]Ah!..[/say]")
 
-		saynn("His grip on your waist increases, fingers digging into your flesh as he begins to move, his hips slamming against you, making you take his glowing gold length again and again, keeping your tailhole stretched wide open..")
+		saynn("His grip on your waist increases, fingers digging into your flesh as he begins to move, his hips slamming against you, making you take his glowing gold length again and again, keeping your "+str("tailhole" if !isVag else "folds")+" stretched wide open..")
 
 		saynn("Luxe sets a slow, punishing rhythm at first, each thrust is making you feel like you're about to break, the pressure inside you builds, your inner walls gripping his cock nice and tight..")
 
@@ -850,18 +855,18 @@ func _run():
 		addButton("Continue", "See what happens next", "sexmar_cum1")
 	if(state == "sexmar_cum1"):
 		playAnimation(StageScene.HangingSex, "inside", {npc="luxe", pc="pc", bodyState={naked=true,hard=true}, npcBodyState={naked=true, hard=true, condom=isVag}})
-		saynn("With a final, forceful motion, he rams the whole length inside your ass, locking himself with you as his knot pushes past your anal ring, sealing the two of you together.")
+		saynn("With a final, forceful motion, he rams the whole length inside your "+str("ass" if !isVag else "cunt")+", locking himself with you as his knot pushes past your "+str("anal ring" if !isVag else "pusy folds")+", sealing the two of you together.")
 
-		saynn("A quiet growl escapes him as his cock starts throbbing inside you, stuffing its load deep inside, pulsing deep within.. You can feel each spasm, his thick cum flooding into you.. with nothing leaking out..")
+		saynn("A quiet growl escapes him as his cock starts throbbing inside you, stuffing its load deep inside, pulsing deep within.. You can feel each spasm, his thick cum flooding into "+str("you" if !isVag else "the, seemingly unbreakable, condom inside your womb")+".. with nothing leaking out..")
 
 		if (GM.pc.isWearingChastityCage()):
-			saynn("Your prostate gets smashed by the fat orb, causing your little locked cock to start wasting its load, shooting weak spurts of {pc.cum} onto the floor, your own orgasm is sending you shaking..")
+			saynn("Your "+str("prostate" if !isVag else "g-spot")+" gets smashed by the fat orb, causing your little locked cock to start wasting its load, shooting weak spurts of {pc.cum} onto the floor, your own orgasm is sending you shaking..")
 
 		elif (GM.pc.hasReachablePenis):
-			saynn("Your prostate gets smashed by the fat orb, causing your {pc.penis} to start wasting its load, shooting strong spurts of {pc.cum} onto the floor, your own orgasm is sending you shaking..")
+			saynn("Your "+str("prostate" if !isVag else "g-spot")+" gets smashed by the fat orb, causing your {pc.penis} to start wasting its load, shooting strong spurts of {pc.cum} onto the floor, your own orgasm is sending you shaking..")
 
 		elif (GM.pc.hasReachableVagina):
-			saynn("Your pussy is pulsing around empty air, this anal pounding is enough to make you cum, your own sudden orgasm sending you shaking..")
+			saynn("Your pussy is pulsing around "+str("empty air, this anal pounding" if !isVag else "that shaft, the pounding")+" is enough to make you cum, your own sudden orgasm sending you shaking..")
 
 		saynn("Bound, knotted and claimed.. The hot breath on your neck is adding to it.. making you squirm and clench around him..")
 
@@ -880,7 +885,7 @@ func _run():
 
 		saynn("Just as before, you are completely helpless, your feet dangling high, your body fully locked by his powerful hands..")
 
-		saynn("With one swift motion, he yanks his knot out of your stuffed ass, making your asshole gape and start leaking cum.. but only for a few moments before he starts thrusting inside you with raw, unrestrained force, this new angle allowing him to hit your "+str("most sensitive spots" if !GM.pc.hasPenis() else "prostate")+" with greater force.")
+		saynn("With one swift motion, he yanks his knot out of your stuffed ass, making your asshole gape and start leaking cum.. but only for a few moments"+str(", while he switches condoms," if isVag else "")+" before he starts thrusting inside you with raw, unrestrained force, this new angle allowing him to hit your "+str("prostate" if (GM.pc.hasPenis() && !isVag) else "most sensitive spots")+" with greater force.")
 
 		saynn("[say=pc]Ah.. f-fuck!.. You're gonna break me!..[/say]")
 
@@ -894,28 +899,28 @@ func _run():
 		saynn("[say=pc]I'm.. I'm gg-gonna.. Ahh![/say]")
 
 		if (GM.pc.isWearingChastityCage()):
-			saynn("Your orgasm catches up with you again, your poor prostate is begging for mercy as the fat shaft is massaging it relentlessly, milking it for all its fluids. Your locked away cock throbs in its little cage and starts dripping {pc.cum} eagerly, in rhythm with the rough pounding..")
+			saynn("Your orgasm catches up with you again, your poor "+str("prostate is begging for mercy as the fat shaft is massaging it relentlessly, milking it for all its fluids" if !isVag else "g-spot is begging for mercy as the fat shaft is kneading it relentlessly during the rough pounding")+". Your locked away cock throbs in its little cage and starts dripping {pc.cum} eagerly, in rhythm with the rough pounding..")
 
 		elif (GM.pc.hasReachablePenis):
-			saynn("Your orgasm catches up with you again, your poor prostate is begging for mercy as the fat shaft is massaging it relentlessly, milking it for all its fluids. Your own dick throbs and starts dripping {pc.cum} eagerly, in rhythm with the rough pounding..")
+			saynn("Your orgasm catches up with you again, your "+str("prostate is begging for mercy as the fat shaft is massaging it relentlessly, milking it for all its fluids" if !isVag else "g-spot is begging for mercy as the fat shaft is kneading it relentlessly during the rough pounding")+". Your own dick throbs and starts dripping {pc.cum} eagerly, in rhythm with the rough pounding..")
 
 		elif (GM.pc.hasReachableVagina):
-			saynn("Your orgasm catches up with you again, your poor g-spot is begging for mercy as the fat shaft is massaging it relentlessly through the inner wall of your ass. Your pussy pulses and starts squirting, releasing girlcum in short bursts, in rhythm with the rough pounding..")
+			saynn("Your orgasm catches up with you again, your poor g-spot is begging for mercy as the fat shaft is massaging it relentlessly during this. Your pussy pulses and starts squirting, releasing girlcum in short bursts, in rhythm with the rough pounding..")
 
 		else:
 			saynn("Your orgasm catches up with you again, your pleasure spots are all begging for mercy as the fat shaft is massaging them relentlessly. You're cumming from the rough pounding..")
 
-		saynn("With every thrust, you can feel his knot swallowing again, the pressure building up until he pulls you down hard against his cock, forcing his fat orb inside you once more. The combination of your helplessness and his dominance drives you wild, his glowing member pumping your ass full of his virile seed again.")
+		saynn("With every thrust, you can feel his knot swallowing again, the pressure building up until he pulls you down hard against his cock, forcing his fat orb inside you once more. The combination of your helplessness and his dominance drives you wild, his glowing member pumping "+str("your ass full of his virile seed again" if !isVag else "the fresh condom in your pussy full of his virile seed again")+".")
 
 		saynn("[say=luxe]Nh..[/say]")
 
 		saynn("[say=pc]So much.. oh fu-uck.. oh fuck..[/say]")
 
-		saynn("Your belly is actually glowing a bit, the golden accents showing through.. and it's also growing too, the cum that is being pumped into it is making it look slightly bigger..")
+		saynn("Your belly is actually glowing a bit, the golden accents showing through.. and it's also growing too, the cum that is being pumped into it is making it look slightly bigger.."+str(" How is that condom still holding.." if isVag else "")+"")
 
 		saynn("He doesn't stop too, moving his hips, his cock is shifting inside you, stretching you out more and more..")
 
-		saynn("[say=pc]My ass.. you s-stuffed me..[/say]")
+		saynn("[say=pc]"+str("My ass" if !isVag else "My pussy")+".. you s-stuffed me..[/say]")
 
 		saynn("[say=luxe]I'm not done with you yet.[/say]")
 
@@ -930,9 +935,18 @@ func _run():
 
 		saynn("[say=pc]AH![/say]")
 
-		saynn("The landing is soft, luckily.. But that can not be said for what happens next. Luxe's hands raise your legs onto his shoulder and pin you into the sheets, your back pressed firmly against the surface.")
+		saynn("The landing is soft, luckily.. But that can not be said for what happens next."+str(" Luxe takes off the filled rubber.. ties it up.. and looks at you, a fresh condom in his hands." if isVag else "")+"")
 
-		saynn("He's got you into a firm mating press.. and that gives him complete control, allowing him to thrust into you again, the angle is perfect to start pounding your ass, your gaping asshole eagerly stretching against to fit his length.")
+		if (isVag):
+			saynn("[say=pc]Luxe?..[/say]")
+
+			saynn("He deliberates for a bit.. and then throws the condom to the side.")
+
+			saynn("[say=pc]Oh?..[/say]")
+
+		saynn("Luxe's hands raise your legs onto his shoulder and pin you into the sheets, your back pressed firmly against the surface.")
+
+		saynn("He's got you into a firm mating press.. and that gives him complete control, allowing him to thrust into you again, the angle is perfect to start pounding your "+str("ass, your gaping asshole eagerly stretching against to fit his length." if !isVag else "cunt, your gaping pussy eagerly stretching against to fit his length.. Feels so much better without a rubber..")+"")
 
 		saynn("[say=pc]I love your cock![/say]")
 
@@ -941,17 +955,17 @@ func _run():
 		addButton("Continue", "See what happens next", "sexmar_mating_fast")
 	if(state == "sexmar_mating_fast"):
 		# (( New anim mating press fast
-		saynn("As the heat between you builds, Luxe changes his rhythm, pulling out almost entirely before slamming his cock back in, the slaps echoing around the room. Your body arches against him, your needy asshole clenching, trying to milk his balls dry as you approach another peak..")
+		saynn("As the heat between you builds, Luxe changes his rhythm, pulling out almost entirely before slamming his cock back in, the slaps echoing around the room. Your body arches against him, your needy "+str("asshole" if !isVag else "flower")+" clenching, trying to milk his balls dry as you approach another peak..")
 
-		saynn("Luxe's thrusts are becoming more urgent.. he puts more strength into them.. until the knot gets forced into you again.. and then again and again, your tailhole got stretched enough for him to be able to yank his orb out and force it back inside before your ring closes up..")
+		saynn("Luxe's thrusts are becoming more urgent.. he puts more strength into them.. until the knot gets forced into you again.. and then again and again, your "+str("tailhole" if !isVag else "pussy")+" got stretched enough for him to be able to yank his orb out and force it back inside before your ring closes up..")
 
 		saynn("[say=pc]Fuc-ck! You're knot-fucking me!..[/say]")
 
 		if (GM.pc.isWearingChastityCage()):
-			saynn("It doesn't take long for your caged member to start leaking {pc.cum} again, your balls are pretty much drained by this point, your prostate smashed to bits..")
+			saynn("It doesn't take long for your caged member to start leaking {pc.cum} again, your balls are pretty much drained by this point, your "+str("prostate" if !isVag else "g-spot")+" smashed to bits..")
 
 		elif (GM.pc.hasReachablePenis):
-			saynn("It doesn't take long for your {pc.penis} to start leaking {pc.cum} again, your balls are pretty much drained by this point, your prostate smashed to bits..")
+			saynn("It doesn't take long for your {pc.penis} to start leaking {pc.cum} again, your balls are pretty much drained by this point, your "+str("prostate" if !isVag else "g-spot")+" smashed to bits..")
 
 		elif (GM.pc.hasReachableVagina):
 			saynn("It doesn't take long for your pussy to gush with fluids again.. just much less.. as that cock is leaving you drained by this point..")
@@ -964,8 +978,143 @@ func _run():
 		# (( New anim mating press inside
 		saynn("As Luxe reaches his limit, he lets out a primal animal growl and forces his whole length inside you again, the knot locking you both together! Feeling the immense pressure, you cry out in ecstasy, your orgasm keeps getting prolonged, your body squirming under him.")
 
-		saynn("Luxe leans down and stares you directly into the eyes as his cock starts throbbing inside you again, somehow stuffing even more of his potent cum inside your ass, your legs shaking wildly as his balls are tensing up.. again and again.. pushing his load inside..")
+		if (!isVag):
+			saynn("Luxe leans down and stares you directly into the eyes as his cock starts throbbing inside you again, somehow stuffing even more of his potent cum inside your ass, your legs shaking wildly as his balls are tensing up.. again and again.. pushing his load inside..")
 
+		else:
+			saynn("Luxe leans down and stares you directly into the eyes as his cock starts throbbing inside you.. Now that the condom is gone, his potent cum is getting pumped directly into your babymaker, filling it to the brim, your legs are shaking wildly as his balls are tensing up.. again and again.. pushing his load inside..")
+
+		saynn("You see the fire in his eyes.. that primal spark. It spreads waves of heat through you too.. a little too much perhaps..")
+
+		saynn("The wolf keeps grunting.. until your clenching, used fuckhole leaves him dry.")
+
+		saynn("[say=luxe]Nothing but prey.. my prey.[/say]")
+
+		saynn("Feels good to be his prey..")
+
+		addButton("Continue", "See what happens next", "sexmar_after_mating")
+	if(state == "sexmar_after_mating"):
+		playAnimation(StageScene.Solo, "stand", {bodyState={naked=true}})
+		saynn("Slowly, after you both begin to come down back to your senses after that crazy.. marathon.. of rough passion..")
+
+		saynn("Luxe is still panting, even after yanking his knotted cock out of you.. probably because it's so hot in here.. why is it so hot in here..")
+
+		saynn("[say=luxe]..h.. f-fuck.[/say]")
+
+		saynn("He suddenly puts his hand onto his chest.. the tips of his fur are shining.. no, they're burning! And soon, the wolf collapses by your side, onto the bed.")
+
+		saynn("[say=pc]Luxe? Hey, are you okay?![/say]")
+
+		saynn("[say=luxe]..p-pills..[/say]")
+
+		saynn("You see his eyes.. he is in huge pain.. all the while the room is getting hotter and hotter. Oh shit.")
+
+		saynn("[say=pc]Pills, yes, pills. Where are they?[/say]")
+
+		saynn("Luxe is not saying anything.. just grunting and gritting his teeth.")
+
+		saynn("[say=pc]Luxe, you have to tell me.[/say]")
+
+		saynn("[say=luxe]..d-desk.. c-code.. 52734..[/say]")
+
+		saynn("Right..")
+
+		addButton("Desk", "Go grab his pills", "sexmar_pills")
+	if(state == "sexmar_pills"):
+		playAnimation(StageScene.BreastFeeding, "tease", {pc="luxe", npc="pc", bodyState={naked=true}, npcBodyState={naked=true}})
+		saynn("You rush to his desk and enter the code.. opening the drawers. There are a lot of things there.. a gun, some documents, lots of little thumb drives.. and a pill bottle! You grab it and run back to Luxe.. who seems to be burning up from inside..")
+
+		saynn("A single pill later.. you hear a loud sigh of relief coming from him. The room temperature begins to calm down..")
+
+		saynn("[say=luxe]Hhh..[/say]")
+
+		saynn("[say=pc]Are you okay?..[/say]")
+
+		saynn("[say=luxe]About as good as I look.[/say]")
+
+		saynn("[say=pc]So, not okay?[/say]")
+
+		saynn("A single chuckle escapes his lungs.. before he leans back and lets his head fall onto a comfy pillow.")
+
+		saynn("[say=luxe]I need a rest.[/say]")
+
+		saynn("[say=pc]Yeah.. I will leave you to it.[/say]")
+
+		saynn("Suddenly, his hand grabs you by the collar and pulls you onto him.")
+
+		saynn("[say=luxe]No you don't.[/say]")
+
+		saynn("Snuggles, yay..")
+
+		addButton("Rest", "Rest with him", "sexmar_rest")
+	if(state == "sexmar_rest"):
+		playAnimation(StageScene.Sleeping, "sleep", {pc="luxe", npc="pc", bodyState={naked=true}, npcBodyState={naked=true}})
+		saynn("Luxe snores quietly, one of his hands wrapped around you, keeping you on his chest. It's getting kinda chilly actually.. but his fur helps.")
+
+		saynn("You take a little nap too.. but the wear and tear that his cock inflicted on you is making that a little problematic, your body keeps wanting to squirm..")
+
+		saynn("[say=luxe]My young days are long gone.[/say]")
+
+		saynn("He opens his eyes, his voice low and rumbly.")
+
+		saynn("[say=pc]What are you talking about, you're still amazing..[/say]")
+
+		saynn("He looks at you and hums.")
+
+		saynn("[say=luxe]Tell me that thirty minutes ago.[/say]")
+
+		saynn("[say=pc]That was just a.. I don't know what it is. Heart problems?[/say]")
+
+		saynn("He sighs.")
+
+		saynn("[say=luxe]Kinda like that.[/say]")
+
+		saynn("[say=pc]You don't have to tell me, I understand.[/say]")
+
+		saynn("A silence emerges. Only two souls breathing keep it from being complete..")
+
+		saynn("[say=luxe]DNA splicing. The experiment was a little too advanced for my times so it came with some.. complications.[/say]")
+
+		saynn("[say=pc]Syndicate is doing DNA experiments?[/say]")
+
+		saynn("AlphaCorp is probably not shy of doing it too.")
+
+		saynn("[say=luxe]Mhm. That's the idea of Syndicate. Free to do whatever you can. As long as it helps the cause.[/say]")
+
+		saynn("Free to enslave people..")
+
+		saynn("[say=pc]That's freedom.. in a way.[/say]")
+
+		saynn("[say=luxe]It is. I wouldn't have it any other way.[/say]")
+
+		saynn("[say=pc]It's nice to live a life of no regrets.[/say]")
+
+		saynn("Luxe doesn't say anything back.. so you just snug to him a little better.. and rest.")
+
+		addButton("Rest more", "Just cuddle the wolf", "sexmar_after_cuddlecuddle")
+	if(state == "sexmar_after_cuddlecuddle"):
+		playAnimation(StageScene.Duo, "stand", {npc="luxe"})
+		saynn("But at some point.. it was time to get up.")
+
+		saynn("[say=luxe]I gotta return to my work.[/say]")
+
+		saynn("[say=pc]Yeah.. of course.. uh.. thanks.[/say]")
+
+		saynn("He tilts his head.")
+
+		saynn("[say=luxe]Why?[/say]")
+
+		saynn("[say=pc]Uh.. for making me your cocksleeve.. I thought I'd say that..[/say]")
+
+		saynn("He lowers his stare.. and nods.")
+
+		saynn("[say=luxe]Mhm.[/say]")
+
+		saynn("Luxe rubs his eyes, his cold demeanor is seemingly back.")
+
+		saynn("And so, after that slightly awkward exchange, he brings you out of his room and office..")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -1155,6 +1304,18 @@ func _react(_action: String, _args):
 			GM.pc.cummedInAnusBy("luxe")
 		
 		GM.pc.orgasmFrom("luxe")
+
+	if(_action == "sexmar_after_mating"):
+		processTime(3*60)
+
+	if(_action == "sexmar_pills"):
+		processTime(3*60)
+
+	if(_action == "sexmar_rest"):
+		processTime(30*60)
+
+	if(_action == "sexmar_after_cuddlecuddle"):
+		processTime(10*60)
 
 	setState(_action)
 
