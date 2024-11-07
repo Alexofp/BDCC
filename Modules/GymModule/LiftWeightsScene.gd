@@ -11,7 +11,7 @@ func _reactInit():
 func _run():
 
 	if(state == ""):
-		saynn("You approach one of the free benches.Painted metal of the frame received some scratches over the years and the padding of the seat isn’t as soft but they look alright overall. The only strange thing you notice is that all the dumbbells and barbells are leashed to the floor with a thick chain each.")
+		saynn("You approach one of the free benches. Painted metal of the frame received some scratches over the years and the padding of the seat isn’t as soft but they look alright overall. The only strange thing you notice is that all the dumbbells and barbells are leashed to the floor with a thick chain each.")
 
 		saynn("You take a seat on the bench, deciding what you wanna do.")
 		
