@@ -59,6 +59,7 @@ func _init():
 		
 		"res://Modules/SlaveAuctionModule/Chapter1/MirriRank1Scene.gd",
 		"res://Modules/SlaveAuctionModule/Chapter1/MirriRank2Scene.gd",
+		"res://Modules/SlaveAuctionModule/Chapter1/MirriRank3Scene.gd",
 		]
 	characters = [
 		"res://Modules/SlaveAuctionModule/Mirri.gd",

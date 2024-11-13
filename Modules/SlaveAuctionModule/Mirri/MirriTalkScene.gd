@@ -641,7 +641,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "subpussy_table")
 	if(state == "subpussy_table"):
-		# (( New anim here (idle above)
+		playAnimation(StageScene.SexOralTable, "hover", {pc="mirri", npc="pc"})
 		saynn("In the next moment, you already feel the cold metal of the desk biting into your wrists and ankles as the chains lock you down to it. Only your head is sticking out slightly, hanging from its side, giving you some wiggle room but mostly forcing you to look up at the ceiling..")
 
 		saynn("Mirri paces around you, her armored boots clicking ominously against the wooden floor, her blue eyes shining with wicked delight as she watches you struggle. The more you try to escape.. the more you realize that the resistance is futile. Mirri is a slaver after all..")
@@ -688,7 +688,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "subpussy_start")
 	if(state == "subpussy_start"):
-		# (( New anim here (sit-rub)
+		playAnimation(StageScene.SexOralTable, "lick", {pc="mirri", npc="pc"})
 		saynn("You barely have time to react before Mirri suddenly grabs you by the collar and pulls on it while lowering herself and pressing her crotch hard against your face. Her heat is radiating through the fabric as she grinds her pussy against your face without warning.")
 
 		saynn("[say=mirri]This is pussyboarding! I will make your sorry ass drown in my cunt.[/say]")
@@ -715,7 +715,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "subpussy_breather")
 	if(state == "subpussy_breather"):
-		# (( New anim here (idle, no panties)
+		playAnimation(StageScene.SexOralTable, "hover", {pc="mirri", npc="pc", npcBodyState={hard=true}, bodyState={exposedCrotch=true}})
 		saynn("Just when you think you might pass out.. Mirri finally pulls back, gasping softly as she steps away, her breathing almost as heavy as yours. You're gasping for air, your face soaked with her juices, the taste of her still thick on your tongue.")
 
 		saynn("[say=mirri]Hah.. Think I'm done yet? I'm not one of those soft bitches.[/say]")
@@ -734,7 +734,7 @@ func _run():
 
 		addButton("Continue", "See what happens next..", "subpussy_masturbate")
 	if(state == "subpussy_masturbate"):
-		# (( New anim (sit + masturbate)
+		playAnimation(StageScene.SexOralTable, "grind", {pc="mirri", npc="pc", npcBodyState={hard=true}, bodyState={exposedCrotch=true}})
 		saynn("Mirri steps forward again, positioning herself over your face once more, her naked slit hovering inches above your mouth.")
 
 		saynn("[say=mirri]I want to feel you choke on my juices.. Drown in me, you fuck..[/say]")
@@ -753,6 +753,9 @@ func _run():
 
 		saynn("[say=mirri]Swallow it all.. Every drop, you useless fuck.. I want to love you.. feel you.. choking on my cum.[/say]")
 
+		addButton("Continue", "See what happens next", "subpussy_mirricum")
+	if(state == "subpussy_mirricum"):
+		playAnimation(StageScene.SexOralTable, "grindfast", {pc="mirri", npc="pc", npcBodyState={hard=true}, bodyState={exposedCrotch=true}})
 		saynn("Suddenly, her thighs clamp around your head, squeezing your head tightly.")
 
 		saynn("[say=mirri]AHhh-h-![/say]")
@@ -763,7 +766,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "subpussy_after")
 	if(state == "subpussy_after"):
-		# ((New anim idle
+		playAnimation(StageScene.SexOralTable, "tease", {pc="mirri", npc="pc", npcBodyState={hard=true}, bodyState={exposedCrotch=true}})
 		saynn("Finally, after what feels like an eternity, she pulls back, panting heavily as she stares down at you with a satisfied, wicked grin. Her pussy still drips juices onto her thighs..")
 
 		saynn("[say=mirri]Such a good little toy. Proving it again and again that it was worth it to keep you.[/say]")
@@ -776,7 +779,7 @@ func _run():
 		addButton("Continue", "See what happens next", "endthescene")
 		addButtonWithChecks("Extra humiliation", "Ask her to pee on you..", "subpussy_pee", [], [[ButtonChecks.ContentEnabled, ContentType.Watersports]])
 	if(state == "subpussy_pee"):
-		# (( New anim sit no panties
+		playAnimation(StageScene.SexOralTable, "rub", {pc="mirri", npc="pc", npcBodyState={hard=true}, bodyState={exposedCrotch=true}})
 		saynn("You find yourself craving more.. craving extra humiliation.")
 
 		saynn("Before she unchains your wrists and ankles.. you decide to stop her.")
@@ -811,6 +814,9 @@ func _run():
 
 		saynn("[say=mirri]Get ready, pathetic little toy.[/say]")
 
+		addButton("Continue", "See what filthy things will happen next..", "subpussy_peeactual")
+	if(state == "subpussy_peeactual"):
+		playAnimation(StageScene.SexOralTable, "peefem", {pc="mirri", npc="pc", npcBodyState={hard=true}, bodyState={exposedCrotch=true}})
 		saynn("Seconds feel like hours.. You can feel the muscles of her crotch tensing up.. again and again..")
 
 		saynn("You hear her soft grunt.. and then it happens. A sudden, warm stream of piss sprays down onto your face. But, before the mess gets too bad, you clamp your lips around her pisshole and let her start to flood your mouth with her golden juice.")
@@ -1495,7 +1501,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "dom_hatefuck"):
-		playAnimation(StageScene.SexMissionary, "tease", {pc="pc", npc="mirri", bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.SexMatingPress, "tease", {pc="pc", npc="mirri", bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
 		saynn("Mirri tries to push herself up but is quickly forced back down by your weight as you pin her beneath you.")
 
 		saynn("[say=mirri]Get off me, you slave.[/say]")
@@ -1517,7 +1523,7 @@ func _run():
 		addButton("Use it", "Use the offered condom and not anger Mirri too much", "dom_hatefuck_usecondom")
 		addButton("Ignore it", "Go in raw", "dom_hatefuck_nocondom")
 	if(state == "dom_hatefuck_fuck"):
-		playAnimation(StageScene.SexMissionary, "sex", {pc="pc", npc="mirri", bodyState={exposedCrotch=true, hard=true, condom=usedCondom}, npcBodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.SexMatingPress, "sex", {pc="pc", npc="mirri", bodyState={exposedCrotch=true, hard=true, condom=usedCondom}, npcBodyState={exposedCrotch=true, hard=true}})
 		if (usedCondom):
 			saynn("Well, you'd rather save your testicles. You grab her offered condom and quickly apply it to your cock. Then, your hand slides down her body and grips the folds of her slick cunt. She is wet, so much wetter than she is letting on, her body betraying her. Mirri tenses, her legs twitching beneath you, her tail wagging actively.")
 
@@ -1544,7 +1550,7 @@ func _run():
 
 		addButton("Faster", "Rail her pussy harder", "dom_hatefuck_fuck_fast")
 	if(state == "dom_hatefuck_fuck_fast"):
-		playAnimation(StageScene.SexMissionary, "fast", {pc="pc", npc="mirri", bodyState={exposedCrotch=true, hard=true, condom=usedCondom}, npcBodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.SexMatingPress, "fast", {pc="pc", npc="mirri", bodyState={exposedCrotch=true, hard=true, condom=usedCondom}, npcBodyState={exposedCrotch=true, hard=true}})
 		saynn("Her words only fuel your aggression. You slam into her even harder, your cock ramming deep inside her, kissing her womb and stretching her out with each thrust. Mirri's body shakes beneath you, her breath hitching as you drive her towards the edge and even further, her inner walls suddenly clenching tightly around your shaft.")
 
 		saynn("[say=mirri]Fu-uck! I fucking hate you so much![/say]")
@@ -1575,7 +1581,7 @@ func _run():
 
 		addButton("Cum", "Time to do this", "dom_hatefuck_fuck_cum")
 	if(state == "dom_hatefuck_fuck_cum"):
-		playAnimation(StageScene.SexMissionary, "inside", {pc="pc", npc="mirri", bodyState={exposedCrotch=true, hard=true, condom=usedCondom}, npcBodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.SexMatingPress, "inside", {pc="pc", npc="mirri", bodyState={exposedCrotch=true, hard=true, condom=usedCondom}, npcBodyState={exposedCrotch=true, hard=true}})
 		saynn("The time comes to ram your cock deep inside her one last time. Mirri's body tightens again, her claws digging into your skin as her pussy clamps down around you.")
 
 		if (!usedCondom):
@@ -1907,7 +1913,7 @@ func _run():
 		if (false):
 			addButton("Nope", "You shouldn't see this", "dom_straponfuck_puton")
 	if(state == "dom_straponfuck_start"):
-		playAnimation(StageScene.SexMissionary, "tease", {pc="pc", npc="mirri", bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.SexMatingPress, "tease", {pc="pc", npc="mirri", bodyState={exposedCrotch=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
 		saynn("Mirri tries to push herself up but is quickly forced back down by your weight as you pin her beneath you.")
 
 		saynn("[say=mirri]Get off me, you slave.[/say]")
@@ -1934,7 +1940,7 @@ func _run():
 
 		addButton("Fuck her", "Have some fun with that pussy", "dom_straponfuck_fuck")
 	if(state == "dom_straponfuck_fuck"):
-		playAnimation(StageScene.SexMissionary, "sex", {pc="pc", npc="mirri", bodyState={exposedCrotch=true, hard=true, condom=usedCondom}, npcBodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.SexMatingPress, "sex", {pc="pc", npc="mirri", bodyState={exposedCrotch=true, hard=true, condom=usedCondom}, npcBodyState={exposedCrotch=true, hard=true}})
 		saynn("Your hand slides down her body and grips the folds of her slick cunt. She is wet, so much wetter than she is letting on, her body betraying her. Mirri tenses, her legs twitching beneath you, her tail wagging actively.")
 
 		saynn("[say=mirri]Put a condom on that thing, I swear-..[/say]")
@@ -1953,7 +1959,7 @@ func _run():
 
 		addButton("Faster", "Rail her pussy harder", "dom_straponfuck_fuck_fast")
 	if(state == "dom_straponfuck_fuck_fast"):
-		playAnimation(StageScene.SexMissionary, "fast", {pc="pc", npc="mirri", bodyState={exposedCrotch=true, hard=true, condom=usedCondom}, npcBodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.SexMatingPress, "fast", {pc="pc", npc="mirri", bodyState={exposedCrotch=true, hard=true, condom=usedCondom}, npcBodyState={exposedCrotch=true, hard=true}})
 		saynn("Her words only fuel your aggression. You slam into her even harder, the strapon ramming deep inside her, kissing her womb and stretching her out with each thrust. Mirri's body shakes beneath you, her breath hitching as you drive her towards the edge and even further, her inner walls suddenly clenching tightly around your shaft.")
 
 		saynn("[say=mirri]Fu-uck! I fucking hate you so much![/say]")
@@ -1984,7 +1990,7 @@ func _run():
 
 		addButton("Orgasm", "Make her cum", "dom_straponfuck_fuck_cum")
 	if(state == "dom_straponfuck_fuck_cum"):
-		playAnimation(StageScene.SexMissionary, "inside", {pc="pc", npc="mirri", bodyState={exposedCrotch=true, hard=true, condom=usedCondom}, npcBodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.SexMatingPress, "inside", {pc="pc", npc="mirri", bodyState={exposedCrotch=true, hard=true, condom=usedCondom}, npcBodyState={exposedCrotch=true, hard=true}})
 		saynn("The time comes to ram your rubber shaft deep inside her one last time. Mirri's body tightens again, her claws digging into your skin as her pussy clamps down around you.")
 
 		if (straponHasCum):
@@ -2031,7 +2037,7 @@ func _run():
 
 		saynn("[say=pc]What, your toys and armor aren't helping you anymore? This isn't gonna be fun for you, bitch. Not in a slightest.[/say]")
 
-		saynn("[say=mirri]Oh yeah? Do your worst, you fucker, I ain't afraid of no AlphaCorp doormat. Just make sure I can't move after.[/say]")
+		saynn("[say=mirri]Oh yeah? Do your worst, you fucker, I ain't afraid of no AlphaCorp doormat.[/say]")
 
 		saynn("She craves some roughness.. but you want to actually punish her.. yeah, you know exactly what you are gonna do to her.")
 
@@ -2848,6 +2854,9 @@ func _react(_action: String, _args):
 
 	if(_action == "subpussy_masturbate"):
 		processTime(10*60)
+
+	if(_action == "subpussy_mirricum"):
+		processTime(3*60)
 		GM.pc.cummedOnBy("mirri", FluidSource.Vagina)
 		GM.pc.cummedInMouthBy("mirri", FluidSource.Vagina)
 
@@ -2856,6 +2865,9 @@ func _react(_action: String, _args):
 
 	if(_action == "subpussy_pee"):
 		processTime(5*60)
+
+	if(_action == "subpussy_peeactual"):
+		processTime(3*60)
 		GM.pc.cummedInMouthBy("mirri", FluidSource.Pissing)
 
 	if(_action == "subwalkies_suit"):

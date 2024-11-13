@@ -722,6 +722,7 @@ func applyBodyState(bodystate):
 	if(bodystate == null):
 		bodystate = {}
 	
+	var shouldForceShowPenis = bodystate.has("showPenis") && bodystate["showPenis"]
 	var shouldExposeChest = bodystate.has("exposedChest") && bodystate["exposedChest"]
 	var shouldExposeCrotch = bodystate.has("exposedCrotch") && bodystate["exposedCrotch"]
 	var shouldBeNaked = bodystate.has("naked") && bodystate["naked"]
@@ -766,6 +767,9 @@ func applyBodyState(bodystate):
 	
 	if(shouldBeCondom):
 		setCockTemporaryCondom()
+	
+	if(shouldForceShowPenis):
+		forceSlotToBeVisible(BodypartSlot.Penis)
 	
 	var newChains = []
 	if(bodystate.has("chains")):

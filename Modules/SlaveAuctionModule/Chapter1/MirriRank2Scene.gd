@@ -11,7 +11,7 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {npc="mirri"})
 		saynn("Mirri shoves the laptop into your face, a loud purr intersects her each word.")
 
-		saynn("[say=mirri]Mirri Blacktail is now officially slaver rank 2! I wanna kiss you! Wanna make out?[/say]")
+		saynn("[say=mirri]Mirri Blacktail is now officially slaver rank 2! I'm so happy, I wanna kiss you! Wanna make out?[/say]")
 
 		saynn("She shoves herself into your personal space and attempts to steal a kiss but you just keep her at a distance for now.")
 
@@ -21,11 +21,11 @@ func _run():
 
 		saynn("[say=pc]OW.[/say]")
 
-		saynn("[say=mirri]Objectively, I am. Don't forget that, you fuck.[/say]")
+		saynn("[say=mirri]I am, objectively.[/say]")
 
 		saynn("She throws the laptop back onto her desk and rolls her eyes.")
 
-		saynn("[say=mirri]This list is completely meaningless, it didn't count what I did before going solo, that's total bullshit and they all know it.[/say]")
+		saynn("[say=mirri]And subjectively.. this list is completely meaningless, it didn't count what I did before going solo, that's total bullshit and they all know it.[/say]")
 
 		saynn("[say=pc]You're not exactly doing everything solo now, do you?[/say]")
 
@@ -69,7 +69,7 @@ func _run():
 
 		saynn("Mirri sighs.. and then clenches her fists.")
 
-		saynn("[say=mirri]I ain't giving you the coords, dad! Especially now. Did you even see my rating?! Everything is going well, my plan is working![/say]")
+		saynn("[say=mirri]I ain't giving you the coords, dad! Especially now, when my plan is working.[/say]")
 
 		saynn("The wolf directs his attention to you, making you freeze in your spot. His amber eyes are judging you.")
 
@@ -81,13 +81,13 @@ func _run():
 
 		saynn("Mirri growls and just sits behind her desk, her eyes staring into the laptop.")
 
-		saynn("[say=mirri]Whatever, trying to prove you something is like trying to prove anything to a deaf person.[/say]")
+		saynn("[say=mirri]Whatever, I'm trying to prove something to a deaf person it seems..[/say]")
 
 		saynn("The silence insures. It's so quiet that you swear you went deaf yourself.")
 
 		saynn("[say=luxe]Come.[/say]")
 
-		saynn("[say=mirri]Why? I don't wanna say a lot of loud words into the abyss again. Let's just skip it, I'm tired and just want to take a nap.[/say]")
+		saynn("[say=mirri]Why? I'm tired of yapping into the abyss. Let's just skip it, I.. I just want to take a nap.[/say]")
 
 		saynn("[say=luxe]Not you.[/say]")
 
@@ -97,7 +97,7 @@ func _run():
 
 		saynn("The catgirl gets up and almost clips your shoulder as she walks past you.. before hitting the bed.")
 
-		saynn("The wolf steps out the room..")
+		saynn("The wolf steps out the room.. Mirri gives you one last look.. a sad one.")
 
 		addButton("Follow", "See what he has to say to you", "luxe_office")
 	if(state == "luxe_office"):
@@ -341,13 +341,13 @@ func _run():
 
 		saynn("Luxe doesn't seem like the type that would lie..")
 
-		saynn("[say=mirri]Once I hand him the coords on a silver platter, he will just get all the fame for destroying your fucking prison! That's what he wants![/say]")
+		saynn("[say=mirri]Once I hand him the coords on a silver platter, he will just relay them to other families and get all the fame for destroying your fucking prison! That's what he wants![/say]")
 
 		saynn("[say=pc]And you're mad because you won't get shit?[/say]")
 
 		saynn("[say=mirri]Yeah?! Wouldn't you be fucking furious if someone else took all the rewards for your efforts?[/say]")
 
-		saynn("You begin to feel something.. you get a feeling that you know exactly how Mirri feels.")
+		saynn("Somehow, you know exactly how Mirri feels.")
 
 		saynn("[say=pc]Yeah, I'd be mad.[/say]")
 
@@ -374,7 +374,7 @@ func _run():
 
 		saynn("[say=pc]What?[/say]")
 
-		saynn("[say=mirri]I'm not this dumb.[/say]")
+		saynn("[say=mirri]I'm dumb. But I'm not this dumb.[/say]")
 
 		saynn("[say=pc]What are you talking about?[/say]")
 
@@ -430,7 +430,7 @@ func _run():
 
 		saynn("She looks at you.")
 
-		saynn("[say=mirri]You hate me, don't you? I hate my dad. So it's okay if you hate me. My hate is more powerful anyway and I got plenty to spare.[/say]")
+		saynn("[say=mirri]You hate me, don't you? I hate my dad. So it's okay if you hate me. Be honest, I ain't gonna kill you.[/say]")
 
 		addButton("Kiss", "Kiss her out of hate", "mirri_kiss_hate")
 		addButton("No hate", "Tell her that you don't hate her", "mirri_nohate")

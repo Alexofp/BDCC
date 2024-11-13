@@ -427,7 +427,7 @@ func _run():
 
 		addButton("Table", "Get under his table", "under_table")
 	if(state == "under_table"):
-		# (( New anim table oral tease
+		playAnimation(StageScene.ChairOral, "tease", {pc="luxe", npc="pc", bodyState={showPenis=true, hard=true}, npcBodyState={hard=true}})
 		saynn("Without any extra questions, you approach his broad, expensive desk and get under it, positioning yourself where his hand has pointed to.")
 
 		saynn("Now, hidden from view, you begin your work.. Your fingers brush along his strong thighs and reach for his zipper on his pants, already feeling the heat radiating from his crotch, the pressure rising behind the cloth.")
@@ -436,7 +436,7 @@ func _run():
 
 		addButton("Get it hard", "Make him fully hard with your hands", "under_table_stroke")
 	if(state == "under_table_stroke"):
-		# (( New anim table oral stroke
+		playAnimation(StageScene.ChairOral, "stroke", {pc="luxe", npc="pc", bodyState={showPenis=true, hard=true}, npcBodyState={hard=true}})
 		saynn("Both of your hands land on his member and begin following along its veiny surface, from its pointy tip to the base where the deflated knot is located. Quite quickly, his length begins to twitch and inflate further, his body pumping blood into his cock, making it nice and hard for you.")
 
 		saynn("Even though it's dark under his table, the glow of his veins is enough for you to see and admire the cock.. a small drop of pre already shining from its tip.")
@@ -445,7 +445,7 @@ func _run():
 
 		addButton("Suck him off", "Continue your obedient service", "under_table_suck")
 	if(state == "under_table_suck"):
-		# (( New anim table oral suck
+		playAnimation(StageScene.ChairOral, "suck", {pc="luxe", npc="pc", bodyState={showPenis=true, hard=true}, npcBodyState={hard=true}})
 		saynn("Slowly, you begin trying to fit more than the head of his dick into your mouth, sliding your head along it, trying to go slightly deeper with each pass, finding your and his rhythm, his shaft growing harder in your mouth as he maintains his detached expression.")
 
 		saynn("The room is dead quiet.. with only the wet sounds of your mouth and lips occasionally breaking the complete silence, producing short slurps and lip smacks. Your hands don't sit around and rich into his pants before pulling out his rich ballsack, your digits carefully caressing his orbs as you struggle to fit his whole length in, the tip of his cock testing the back of your mouth, dripping pre down your throat.. salty and slightly sweet. Despite how cold he usually is, his length feels hot in your mouth..")
@@ -454,7 +454,7 @@ func _run():
 
 		addButton("Faster", "Work faster under his table", "under_table_suck_fast")
 	if(state == "under_table_suck_fast"):
-		# (( New anim table oral fast suck
+		playAnimation(StageScene.ChairOral, "suckfast", {pc="luxe", npc="pc", bodyState={showPenis=true, hard=true}, npcBodyState={hard=true}})
 		saynn("With a slight shift of his hips, Luxe pushes his cock just a bit deeper, his powerful hand meeting the back of your head.. and guiding you to engulf more of his length. Luxe's breathing becomes slightly more ragged.. while yours gets all sorts of messed up by his cock suddenly bending down your throat, your tight inner walls clenching around his dick, your lips kissing his knot that is inflating with more blood with each second..")
 
 		saynn("As you take him deeper, you let your hands fondle his heavy, full balls more, feeling their solid, warm weight in your palms. You knead them gently, feeling the tension building in his body.. while your mouth works in a steady rhythm, sliding up and down his length, testing your limits. The scent is still overwhelmingly masculine, making you crave him even more.")
@@ -464,7 +464,7 @@ func _run():
 		addButton("Facials", "Let him cum on your face", "under_table_suck_facials")
 		addButton("Swallow it", "Let him cum down your throat and not waste a single drop", "under_table_suck_inside")
 	if(state == "under_table_suck_inside"):
-		# (( New anim table oral suck inside
+		playAnimation(StageScene.ChairOral, "suckinside", {pc="luxe", npc="pc", npcCum=true, bodyState={showPenis=true, hard=true}, npcBodyState={hard=true}})
 		saynn("When you feel his peak coming near, you forcibly impale yourself onto his cock as deep as your throat allows, taking the whole length except for the fat knot. You're sacrificing your ability to breathe for his pleasure.. but it's a worthy trade in your book.")
 
 		saynn("Even while incredibly close, Luxe remains cold-faced, only the tension coiling in his muscles gives up that something is about to happen. And it does, his jaw clenches subtly.. and then, without a moment's warning.. his thick juicy shaft starts pulsing in your mouth as his hot seed spills down your throat, filling your belly.")
@@ -489,7 +489,7 @@ func _run():
 
 		addButton("Get out", "Get out from under his desk", "under_table_suck_getout")
 	if(state == "under_table_suck_getout"):
-		playAnimation(StageScene.Duo, "stand")
+		playAnimation(StageScene.Solo, "stand")
 		saynn("You clean up after yourself, licking off the remaining cum from his cock and balls.. before crawling from under his desk. You use your hand to wipe the corners of your mouth and watch Luxey nodding.")
 
 		saynn("[say=luxe]Mhm.[/say]")
@@ -500,7 +500,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "under_table_suck_facials"):
-		# (( New anim table oral suck tease
+		playAnimation(StageScene.ChairOral, "tease", {pc="luxe", npc="pc", pcCum=true, bodyState={showPenis=true, hard=true}, npcBodyState={hard=true}})
 		saynn("When you feel his peak coming near, you continue pushing him further and further, bringing him over the point of no return. That's when you sneak out from under his grip and pull your head back, your lips releasing his throbbing shaft..")
 
 		saynn("Luxe lets out nothing but a low, quiet growl as he erupts, his balls tensing up, his thick cum splattering across your face in hot, creamy waves. You close your eyes and welcome it, trying to catch his whole load, letting him mark you with his salty seed..")
@@ -541,7 +541,7 @@ func _run():
 
 		addButton("Desk", "Climb it", "sexdt_desk")
 	if(state == "sexdt_desk"):
-		# (( New anim oral table tease
+		playAnimation(StageScene.SexOralTable, "tease", {pc="luxe", npc="pc", bodyState={showPenis=true, hard=true, condom=true}, npcBodyState={hard=true}})
 		saynn("You do as told, getting onto his desk. Luxe wastes no time and secures your wrists and ankles to it with some chains and cuffs, leaving you utterly vulnerable and exposed, only your head is sticking out from the side a bit..")
 
 		saynn("Your heart races with anticipation as he leans over you, his cold breath washing over your face, carrying the unmistakable scent of masculinity with it that fills your senses.. You can't help but inhale deeply, the musky aroma igniting a fire deep within you..")
@@ -556,7 +556,7 @@ func _run():
 
 		addButton("Obey", "Open your mouth for him", "sexdt_fuck")
 	if(state == "sexdt_fuck"):
-		# (( New anim oral table suck
+		playAnimation(StageScene.SexOralTable, "suck", {pc="luxe", npc="pc", bodyState={showPenis=true, hard=true, condom=true}, npcBodyState={hard=true}})
 		saynn("As you part your lips, he pushes forward, his wrapped-up cock sliding past your lips and into your mouth. It goes smoothly until the tip finds the back of your mouth, making you gag slightly.. but Luxe doesn't relent.")
 
 		saynn("With slow thrusts, he begins to fuck your mouth, one of his hands landing on your neck and holding it firmly in place, his clawed fingers digging into your throat.")
@@ -567,7 +567,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "sexdt_faster")
 	if(state == "sexdt_faster"):
-		# (( New anim oral table faster suck
+		playAnimation(StageScene.SexOralTable, "suckfast", {pc="luxe", npc="pc", bodyState={showPenis=true, hard=true, condom=true}, npcBodyState={hard=true}})
 		saynn("Tears begin streaming down your cheeks a bit.. but you seem to be able to swallow most of his musky cock now, his knot is slapping against your lips while the shaft goes down your {pc.throatStretch} throat, making it bulge..")
 
 		saynn("Luxe's breathing becomes deeper.. you can feel the quiet growls of pleasure rumbling deep in his chest as he pushes you to your limits, fucking your throat at a faster pace. You do your best to suppress your gagging.. but it keeps happening, your inner walls clenching around his cock as you're making all sorts of humiliating wet slurps and gags..")
@@ -586,7 +586,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "sexdt_cum")
 	if(state == "sexdt_cum"):
-		# (( New anim oral table faster inside
+		playAnimation(StageScene.SexOralTable, "suckinside", {pc="luxe", npc="pc", bodyState={showPenis=true, hard=true, condom=true}, npcBodyState={hard=true}})
 		saynn("With one last deep and powerful thrust, he forces his entire length down your throat. Your jaw almost gets dislocated while the big, fat orb forces it wide open before slipping inside, locking his member in!")
 
 		if (GM.pc.isWearingChastityCage()):
@@ -608,7 +608,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "sexdt_after")
 	if(state == "sexdt_after"):
-		# (( New anim oral table faster tease no condom
+		playAnimation(StageScene.SexOralTable, "tease", {pc="luxe", npc="pc", bodyState={showPenis=true, hard=true}, npcBodyState={hard=true}})
 		saynn("The air is running out.. and make that clear, struggling and squirming.. And so Luxe finally pulls it out too, all his seed neatly contained in it..")
 
 		saynn("You cough and grab all the air that you can.")
@@ -643,7 +643,7 @@ func _run():
 		addButton("Obey (anal)", "Do as he says. Present your butt", "sexdesk_choose_anal")
 		addButtonWithChecks("Obey (vaginal)", "Do as he says. Present your pussy", "sexdesk_choose_vag", [], [[ButtonChecks.HasReachableVagina]])
 	if(state == "sexdesk_chose"):
-		# (( New anim desk sex tease
+		playAnimation(StageScene.SexOverTable, "tease", {pc="luxe", npc="pc", bodyState={showPenis=true, hard=true, condom=isVag}, npcBodyState={exposedCrotch=true, hard=true}})
 		saynn("You comply without hesitation, surrendering to his will. Your palms press against the cool surface of the desk, your butt"+str(" and pussy" if isVag else "")+" fully exposed, making you look vulnerable.")
 
 		saynn("Luxe steps behind you, his presence looming like a storm ready to break.")
@@ -663,7 +663,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "sexdesk_sex")
 	if(state == "sexdesk_sex"):
-		# (( New anim desk sex sex
+		playAnimation(StageScene.SexOverTable, "sex", {pc="luxe", npc="pc", bodyState={showPenis=true, hard=true, condom=isVag}, npcBodyState={exposedCrotch=true, hard=true}})
 		saynn(""+str("After putting a condom on, " if isVag else "")+"Luxe doesn't give you a moment to adjust.. he just pushes his cock in, stretching your "+str("tailhole" if !isVag else "sensitive folds")+" and filling you in one powerful thrust! You gasp, your body instinctively tightening around him, your inner walls gripping his glowing shaft as it leaks pre inside..")
 
 		saynn("The head of the Syndicate family begins to use you, each his thrust reaching deeper than the last. He grips your waist tightly, holding you in place as he drives into you, fucking your body as he please. The sharp sound of flesh meeting flesh echoes in the office, only broken by your moans and gasps. His manly scent envelops you, a heavy mix of dominant aura and raw masculinity, making your head spin with need..")
@@ -679,7 +679,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "sexdesk_fast")
 	if(state == "sexdesk_fast"):
-		# (( New anim desk sex fast
+		playAnimation(StageScene.SexOverTable, "fast", {pc="luxe", npc="pc", bodyState={showPenis=true, hard=true, condom=isVag}, npcBodyState={exposedCrotch=true, hard=true}})
 		saynn("As Luxe continues to ram into you, his inflating knot increases its pressure, pressing insistently against your entrance. It doesn't fit.. but Luxe doesn't stop, he pounds into you harder, the knot stretching you wider bit by bit, the sensation almost unbearable. You can feel yourself teetering on the edge, your moans echoing around the room.")
 
 		saynn("[say=luxe]Take it.[/say]")
@@ -692,7 +692,7 @@ func _run():
 
 		addButton("Cum", "See what happens next", "sexdesk_cum")
 	if(state == "sexdesk_cum"):
-		# (( New anim desk sex inside
+		playAnimation(StageScene.SexOverTable, "inside", {pc="luxe", npc="pc", pcCum=isVag, npcCum=true, bodyState={showPenis=true, hard=true, condom=isVag}, npcBodyState={exposedCrotch=true, hard=true}})
 		saynn("Until finally, with a last powerful thrust, the knot slips inside with a satisfying plop! The sensation is incredibly sharp, a rush of fullness and tightness that sends sudden shockwaves of pleasure through both of you. Luxe's breath hitches, and he growls deeply, the sound resonating through your body.")
 
 		if (GM.pc.isWearingChastityCage()):
@@ -719,7 +719,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "sexdesk_after")
 	if(state == "sexdesk_after"):
-		# (( New anim desk sex tease
+		playAnimation(StageScene.SexOverTable, "tease", {pc="luxe", npc="pc", bodyState={showPenis=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
 		saynn("Luxe tries to yank his knot out.. but it's stuck good, keeping any mess inside..")
 
 		saynn("[say=luxe]You will have to wait.[/say]")
@@ -862,10 +862,10 @@ func _run():
 		if (GM.pc.isWearingChastityCage()):
 			saynn("Your "+str("prostate" if !isVag else "g-spot")+" gets smashed by the fat orb, causing your little locked cock to start wasting its load, shooting weak spurts of {pc.cum} onto the floor, your own orgasm is sending you shaking..")
 
-		elif (GM.pc.hasReachablePenis):
+		elif (GM.pc.hasReachablePenis()):
 			saynn("Your "+str("prostate" if !isVag else "g-spot")+" gets smashed by the fat orb, causing your {pc.penis} to start wasting its load, shooting strong spurts of {pc.cum} onto the floor, your own orgasm is sending you shaking..")
 
-		elif (GM.pc.hasReachableVagina):
+		elif (GM.pc.hasReachableVagina()):
 			saynn("Your pussy is pulsing around "+str("empty air, this anal pounding" if !isVag else "that shaft, the pounding")+" is enough to make you cum, your own sudden orgasm sending you shaking..")
 
 		saynn("Bound, knotted and claimed.. The hot breath on your neck is adding to it.. making you squirm and clench around him..")
@@ -880,7 +880,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "sexmar_fullnelson")
 	if(state == "sexmar_fullnelson"):
-		playAnimation(StageScene.SexFullNelson, "sex", {pc="luxe", npc="pc", bodyState={naked=true,hard=true}, npcBodyState={naked=true, hard=true, condom=isVag}})
+		playAnimation(StageScene.SexFullNelson, "sex", {pc="luxe", npc="pc", bodyState={naked=true,hard=true, condom=isVag}, npcBodyState={naked=true, hard=true}})
 		saynn("While his cock is still fully inside, Luxe uncuffs your hands and catches you, his hands snake under your knees and pin them up high against your shoulders before locking behind your head, grabbing into a full nelson hold.")
 
 		saynn("Just as before, you are completely helpless, your feet dangling high, your body fully locked by his powerful hands..")
@@ -893,7 +893,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "sexmar_fullnelson_fast_cum")
 	if(state == "sexmar_fullnelson_fast_cum"):
-		playAnimation(StageScene.SexFullNelson, "fast", {pc="luxe", npc="pc", bodyState={naked=true,hard=true}, npcBodyState={naked=true, hard=true, condom=isVag}})
+		playAnimation(StageScene.SexFullNelson, "fast", {pc="luxe", npc="pc", bodyState={naked=true,hard=true, condom=isVag}, npcBodyState={naked=true, hard=true}})
 		saynn("The pose is forcing to take him entirely, Luxe is fucking you faster and stronger, bringing you down onto his shaft with great strength, the heat making your heart beat insanely fast.")
 
 		saynn("[say=pc]I'm.. I'm gg-gonna.. Ahh![/say]")
@@ -901,10 +901,10 @@ func _run():
 		if (GM.pc.isWearingChastityCage()):
 			saynn("Your orgasm catches up with you again, your poor "+str("prostate is begging for mercy as the fat shaft is massaging it relentlessly, milking it for all its fluids" if !isVag else "g-spot is begging for mercy as the fat shaft is kneading it relentlessly during the rough pounding")+". Your locked away cock throbs in its little cage and starts dripping {pc.cum} eagerly, in rhythm with the rough pounding..")
 
-		elif (GM.pc.hasReachablePenis):
+		elif (GM.pc.hasReachablePenis()):
 			saynn("Your orgasm catches up with you again, your "+str("prostate is begging for mercy as the fat shaft is massaging it relentlessly, milking it for all its fluids" if !isVag else "g-spot is begging for mercy as the fat shaft is kneading it relentlessly during the rough pounding")+". Your own dick throbs and starts dripping {pc.cum} eagerly, in rhythm with the rough pounding..")
 
-		elif (GM.pc.hasReachableVagina):
+		elif (GM.pc.hasReachableVagina()):
 			saynn("Your orgasm catches up with you again, your poor g-spot is begging for mercy as the fat shaft is massaging it relentlessly during this. Your pussy pulses and starts squirting, releasing girlcum in short bursts, in rhythm with the rough pounding..")
 
 		else:
@@ -930,7 +930,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "sexmar_mating")
 	if(state == "sexmar_mating"):
-		# (( New anim mating press sex
+		playAnimation(StageScene.SexMatingPress, "sex", {pc="luxe", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("He gives you just a moment to catch your breath.. before yanking his cock out and throwing you onto his bed.")
 
 		saynn("[say=pc]AH![/say]")
@@ -954,7 +954,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "sexmar_mating_fast")
 	if(state == "sexmar_mating_fast"):
-		# (( New anim mating press fast
+		playAnimation(StageScene.SexMatingPress, "fast", {pc="luxe", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("As the heat between you builds, Luxe changes his rhythm, pulling out almost entirely before slamming his cock back in, the slaps echoing around the room. Your body arches against him, your needy "+str("asshole" if !isVag else "flower")+" clenching, trying to milk his balls dry as you approach another peak..")
 
 		saynn("Luxe's thrusts are becoming more urgent.. he puts more strength into them.. until the knot gets forced into you again.. and then again and again, your "+str("tailhole" if !isVag else "pussy")+" got stretched enough for him to be able to yank his orb out and force it back inside before your ring closes up..")
@@ -964,10 +964,10 @@ func _run():
 		if (GM.pc.isWearingChastityCage()):
 			saynn("It doesn't take long for your caged member to start leaking {pc.cum} again, your balls are pretty much drained by this point, your "+str("prostate" if !isVag else "g-spot")+" smashed to bits..")
 
-		elif (GM.pc.hasReachablePenis):
+		elif (GM.pc.hasReachablePenis()):
 			saynn("It doesn't take long for your {pc.penis} to start leaking {pc.cum} again, your balls are pretty much drained by this point, your "+str("prostate" if !isVag else "g-spot")+" smashed to bits..")
 
-		elif (GM.pc.hasReachableVagina):
+		elif (GM.pc.hasReachableVagina()):
 			saynn("It doesn't take long for your pussy to gush with fluids again.. just much less.. as that cock is leaving you drained by this point..")
 
 		else:
@@ -975,7 +975,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "sexmar_mating_cum")
 	if(state == "sexmar_mating_cum"):
-		# (( New anim mating press inside
+		playAnimation(StageScene.SexMatingPress, "inside", {pc="luxe", npc="pc", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("As Luxe reaches his limit, he lets out a primal animal growl and forces his whole length inside you again, the knot locking you both together! Feeling the immense pressure, you cry out in ecstasy, your orgasm keeps getting prolonged, your body squirming under him.")
 
 		if (!isVag):

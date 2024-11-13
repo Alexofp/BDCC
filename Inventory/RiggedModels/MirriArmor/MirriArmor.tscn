@@ -1315,7 +1315,7 @@ skeleton = NodePath("../../..")
 material/0 = SubResource( 102 )
 
 [node name="breastsScalable002" type="MeshInstance" parent="PartStatePicker/PartState" index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.015 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.025 )
 mesh = SubResource( 104 )
 skin = SubResource( 105 )
 material/0 = SubResource( 106 )
