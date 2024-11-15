@@ -1,6 +1,7 @@
 extends SceneBase
 
 var lastChoice = ""
+var isStrapon = false
 
 func _init():
 	sceneID = "MirriRank3Scene"
@@ -350,8 +351,197 @@ func _run():
 
 		saynn("Mirri's fingers are tracing gentle patterns across your scalp as her body molds against yours during this moment of pure intimacy..")
 
-		saynn("You deepen the kiss.. and she responds eagerly, a pleased purr vibrating between you and her.Her hips shift in your lap, her tail wrapping around your leg as she snuggles closer, her body swaying rhythmically with every kiss..")
+		saynn("You deepen the kiss.. and she responds eagerly, a pleased purr vibrating between you and her. Catgirl's hips shift in your lap, her tail wrapping around your leg as she snuggles closer, her body swaying rhythmically with every kiss..")
 
+		if (!GM.pc.hasReachablePenis()):
+			saynn("She loses your kiss for a second to whisper something.")
+
+			saynn("[say=mirri]..I brought a strapon.. if you want..[/say]")
+
+			saynn("Looks like she wants you to wear it.")
+
+		else:
+			saynn("The way she rubs her clothed crotch against your erection.. makes it seem like she would rather not be clothed..")
+
+			saynn("[say=mirri]..I have a few condoms..[/say]")
+
+		addButton("Just kiss", "Sex will only ruin this moment", "no_sex")
+		addButton("Sex", "Let Mirri ride you..", "do_sex")
+	if(state == "no_sex"):
+		saynn("You just continue the long passionate kiss on Mirri's lips, enjoying the close moment with a crazy Syndicate undercover agent in an AlphaCorp space station prison..")
+
+		saynn("The more you whisper how much of a good girl Mirri is, the more she melts into you, her breath deep and warm, her purring growing louder.")
+
+		saynn("More little kisses land on her cheeks, chin, neck.. anywhere you can reach..")
+
+		saynn("[say=mirri]I bet you treat every girl like that..[/say]")
+
+		saynn("[say=pc]You deserve it. But what if I do?[/say]")
+
+		saynn("The corners of her lips twitch, almost forming a smirk, but that melts too under the onslaught of your continued little smooches. Her claws lightly graze your shoulders..")
+
+		saynn("[say=mirri]Then.. I might just have to kill them.. So I can be your only good girl..[/say]")
+
+		saynn("You're not sure if she is serious, her words are both chilling and affectionate, her paws drift down your arms, tracing the {pc.masc} curves with the claws..")
+
+		saynn("[say=pc]You don't have to do that.[/say]")
+
+		saynn("Her blue eyes shiny with mischief, her smirk fully forming this time.")
+
+		saynn("[say=mirri]Don't I? I guess I don't.. As long as I get you all to myself..[/say]")
+
+		saynn("Her purring returns as you scritch her under the chin. You place another kiss on her lips, a quick one this time.")
+
+		saynn("[say=pc]Hate to break it to ya.. I'm not from Syndicate.[/say]")
+
+		saynn("[say=mirri]Syndicate-Schmidicate..[/say]")
+
+		saynn("Her giggle is cute.. her eyes show a little vulnerability.")
+
+		saynn("[say=mirri]You really are something else, AlphaCorp slave..[/say]")
+
+		saynn("You don't answer, instead pressing another kiss to her forehead. Her arms wrap tightly around your neck, pulling you into an embrace that's almost suffocating, her tail curling around your waist like a makeshift leash.")
+
+		saynn("[say=mirri]Don't count this moment of weakness as me being weak..[/say]")
+
+		saynn("[say=pc]You're always been pretty soft, to be honest.[/say]")
+
+		saynn("Ow. You can feel her fangs on your neck.")
+
+		saynn("[say=mirri]..bitch..[/say]")
+
+		saynn("Your moment to laugh.")
+
+		saynn("[say=mirri]I need to show dad that he is wrong.. Will you help me?[/say]")
+
+		saynn("[say=pc]I will do my best.[/say]")
+
+		saynn("She nods subtly.")
+
+		saynn("[say=mirri]Once I will become the best slaver.. he will understand.. he will accept me..[/say]")
+
+		saynn("Station guards begin to give you strange looks while walking past during their patrols.")
+
+		saynn("[say=mirri]I love you, {pc.name}.. Please don't break my heart.. I really don't wanna kill you..[/say]")
+
+		saynn("An awkward silence settles after her words.")
+
+		saynn("[say=mirri]See you later..[/say]")
+
+		saynn("Mirri cats her way out of your embrace.. and then gets up.")
+
+		saynn("One last look back.. and she is gone.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_sex"):
+		playAnimation(StageScene.SexLotus, "inside", {pc="mirri", npc="pc", bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true, condom=!isStrapon}})
+		if (!isStrapon):
+			saynn("As she shows you the wrapped condom.. you take it.")
+
+			saynn("Her breath hitches as you do that, her warmth spreads over you through the thin fabric of her panties. Mirri leans forward, brushing her lips softly along your neck, lingering just a little longer each time.")
+
+			saynn("She helps you to put on the rubber, concealing your hard member behind a thin layer of latex. Then, with a teasing smirk, she slides her hand between you both, hooking her fingers around the edge of her panties.. and pulling them to the side. She meets your gaze, a playful, almost daring look in her eyes.. before she wraps her digits around your {pc.penis} and lowers herself slowly onto it.")
+
+		else:
+			saynn("Why not.. you let her secure her toy around your waist. A nice, hefty canine cock is now hanging between your legs.")
+
+			saynn("Her breath hitches just from seeing it, the thin fabric of her panties visibly getting wet. Mirri leans forward, brushing her lips softly along your neck, lingering just a little longer each time.")
+
+			saynn("Then, with a teasing smirk, she slides her hand between you both, hooking her fingers around the edge of her panties.. and pulling them to the side. She meets your gaze, a playful, almost daring look in her eyes.. before she wraps her digits around your new member.. and lowers herself slowly onto it.")
+
+		saynn("Her soft gasp and the way her body shudders as she takes you in make it impossible to look away..")
+
+		addButton("Continue", "See what happens next", "do_sex_sex")
+	if(state == "do_sex_sex"):
+		playAnimation(StageScene.SexLotus, "sex", {pc="mirri", npc="pc", bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true, condom=!isStrapon}})
+		saynn("Her hips begin to rock slowly, savoring each moment, her body pressed tightly against yours with every sway. Her arms wrap around your shoulders, holding onto you as she rides you in a slow, sensual rhythm. Mirri's inner walls are quite inviting, "+str("the slick tunnel kneads your shaft in all the right ways.." if !isStrapon else "the slick tunnel kneads your rubber shaft.. putting some pleasurable pressure on your crotch as well..")+"")
+
+		saynn("Her movements are intimate, almost hypnotic, each rise and fall of her hips drawing you deeper into her wet sex. No words are exchanged.. but her breathing grows heavier, mingling with your own, her purring filling the space between each breath as she rides you, her claws occasionally digging gently into your shoulders.")
+
+		addButton("Continue", "See what happens next", "do_sex_fast")
+	if(state == "do_sex_fast"):
+		playAnimation(StageScene.SexLotus, "fast", {pc="mirri", npc="pc", bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true, condom=!isStrapon}})
+		saynn("Gradually, her rhythm picks up, her body moving faster, making your "+str("cock" if !isStrapon else "strapon")+" brush up against the organic barrier inside her each time. Her tail sways erratically, her body trembling with building pleasure.")
+
+		saynn("She holds eye contact with you, her expression a mixture of pleasure and satisfaction, her breath hitching every time you meet her pace. Her hands hold your shoulders, her claws biting into your skin as she rides you faster, chasing the high. The way she gets tight around you again and again.. she is close..")
+
+		if (!isStrapon):
+			saynn("But so are you..")
+
+		addButton("Continue", "See what happens next..", "do_sex_cum")
+	if(state == "do_sex_cum"):
+		playAnimation(StageScene.SexLotus, "inside", {pc="mirri", npc="pc", bodyState={exposedCrotch=true}, npcBodyState={exposedCrotch=true, hard=true, condom=!isStrapon}})
+		saynn("Her hips stutter suddenly, her rhythm faltering as her orgasm overtakes her. Mirri throws her head back and lets out a quiet muffled moan, her entire body shaking in your arms. Her pussy clenches down hard around your"+str(" rubber" if isStrapon else "")+" cock, pulsing a lot, her inner muscles gripping you as if refusing to let go.")
+
+		saynn("Her tail flicks wildly, her ears flattening with her head as she loses herself in the moment..")
+
+		if (!isStrapon):
+			saynn("Her climax pulls you to the edge too.. and moments later, your own body succumbs to the pleasure. Your cock throbs inside her.. and the condom tightens as your {pc.cum} begins to fill it full. Each pulse of your orgasm makes you pump more seed into that rubber.. until your balls run dry. But even then, Mirri's pussy continues to clench and quiver around you, as if milking every last drop.")
+
+		else:
+			saynn("Your toy can't really cum inside her.. but you so wish that it could. You watch Mirri as her pussy continues to clench and quiver around you.. as if trying to milk your rubber shaft..")
+
+		saynn("Mirri leans forward, her forehead resting against yours, her breathing ragged and uneven.")
+
+		saynn("[say=mirri]I bet you treat every girl like that..[/say]")
+
+		saynn("[say=pc]You deserve it. But what if I do?[/say]")
+
+		saynn("The corners of her lips twitch, almost forming a smirk, but that melts when you give her some little smooches. Her claws lightly graze your shoulders..")
+
+		saynn("[say=mirri]Then.. I might just have to kill them.. So I can be your only good girl..[/say]")
+
+		saynn("You're not sure if she is serious, her words are both chilling and affectionate, her paws drift down your arms, tracing the {pc.masc} curves with the claws.. still with your "+str("cock" if !isStrapon else "rubber member")+" inside her..")
+
+		saynn("[say=pc]You don't have to do that.[/say]")
+
+		saynn("Her blue eyes shiny with mischief, her smirk fully forming this time.")
+
+		saynn("[say=mirri]Don't I? I guess I don't.. As long as I get you all to myself..[/say]")
+
+		saynn("Her purring returns as you scritch her under the chin. You place another kiss on her lips, a quick one.")
+
+		saynn("[say=pc]Hate to break it to ya.. I'm not from Syndicate.[/say]")
+
+		saynn("[say=mirri]Syndicate-Schmidicate..[/say]")
+
+		saynn("Her giggle is cute.. her eyes show a little vulnerability.")
+
+		saynn("[say=mirri]You really are something else, AlphaCorp slave..[/say]")
+
+		saynn("You don't answer, instead pressing another kiss to her forehead. Her arms wrap tightly around your neck, pulling you into an embrace that's almost suffocating, her tail curling around your waist like a makeshift leash.")
+
+		saynn("[say=mirri]Don't count this moment of weakness as me being weak..[/say]")
+
+		saynn("[say=pc]You're always been pretty soft, to be honest.[/say]")
+
+		saynn("Ow. You can feel her fangs on your neck.")
+
+		saynn("[say=mirri]..bitch..[/say]")
+
+		saynn("Your moment to laugh.")
+
+		saynn("[say=mirri]I need to show dad that he is wrong.. Will you help me?[/say]")
+
+		saynn("[say=pc]I will do my best.[/say]")
+
+		saynn("She nods subtly.")
+
+		saynn("[say=mirri]Once I will become the best slaver.. he will understand.. he will accept me..[/say]")
+
+		saynn("Station guards begin to give you strange looks while walking past during their patrols.")
+
+		saynn("[say=mirri]I love you, {pc.name}.. Please don't break my heart.. I really don't wanna kill you..[/say]")
+
+		saynn("An awkward silence settles after her words.")
+
+		saynn("[say=mirri]See you later..[/say]")
+
+		saynn("She gives a final, trembling roll of her hips.. before lifting herself off you. The slick, wet sound as you slip out of her is accompanied by her quiet gasp."+str(" She helps to take off the strapon harness.." if isStrapon else "")+"")
+
+		saynn("One last look back.. and she is gone.")
+
+		addButton("Continue", "See what happens next", "endthescene_removestrapon")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -373,12 +563,35 @@ func _react(_action: String, _args):
 	if(_action == "bad_pin"):
 		processTime(5*60)
 
+	if(_action == "do_sex"):
+		if(!GM.pc.hasReachablePenis()):
+			GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("StraponCanine"))
+			isStrapon = true
+
+	if(_action == "do_sex_sex"):
+		processTime(5*60)
+
+	if(_action == "do_sex_fast"):
+		processTime(3*60)
+
+	if(_action == "do_sex_cum"):
+		processTime(5*60)
+		if(!isStrapon):
+			addFilledCondomToLootIfPerk(getCharacter("pc").createFilledCondom())
+		GM.pc.orgasmFrom("mirri")
+
+	if(_action == "endthescene_removestrapon"):
+		GM.pc.removeStrapon()
+		endScene()
+		return
+
 	setState(_action)
 
 func saveData():
 	var data = .saveData()
 
 	data["lastChoice"] = lastChoice
+	data["isStrapon"] = isStrapon
 
 	return data
 
@@ -386,3 +599,4 @@ func loadData(data):
 	.loadData(data)
 
 	lastChoice = SAVE.loadVar(data, "lastChoice", "")
+	isStrapon = SAVE.loadVar(data, "isStrapon", false)
