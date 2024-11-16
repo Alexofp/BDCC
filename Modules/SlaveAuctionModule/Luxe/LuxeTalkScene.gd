@@ -1022,7 +1022,7 @@ func _run():
 		addButton("Desk", "Go grab his pills", "sexmar_pills")
 	if(state == "sexmar_pills"):
 		playAnimation(StageScene.BreastFeeding, "tease", {pc="luxe", npc="pc", bodyState={naked=true}, npcBodyState={naked=true}})
-		saynn("You rush to his desk and enter the code.. opening the drawers. There are a lot of things there.. a gun, some documents, lots of little thumb drives.. and a pill bottle! You grab it and run back to Luxe.. who seems to be burning up from inside..")
+		saynn("You rush to his desk and enter the code.. opening the drawers. There are a lot of things there.. a gun, some documents, lots of little thumb drives.. some kind of closed urn.. and a pill bottle! You grab it and run back to Luxe.. who seems to be burning up from inside..")
 
 		saynn("A single pill later.. you hear a loud sigh of relief coming from him. The room temperature begins to calm down..")
 

@@ -163,6 +163,10 @@ func _run():
 
 		saynn("Mirri catches herself getting loud again and just stays quiet for some time, her paw playing with the water.")
 
+		saynn("[say=mirri]..I always assumed that he is giving me such a hard time because he wants me to be the very best I can be. But why is he so rude about it..[/say]")
+
+		saynn("The Blacktail family does seem to have a fairly high bar.")
+
 		saynn("[say=mirri]..I think I know what's up with him and me.. I always knew, deep inside..[/say]")
 
 		saynn("[say=pc]And what is that?[/say]")
@@ -203,7 +207,7 @@ func _run():
 
 		saynn("[say=pc]Like you don't fit in?[/say]")
 
-		saynn("[say=mirri]I'm trying to. I'm simply doing my best, you know?[/say]")
+		saynn("[say=mirri]I'm trying to. I'm simply doing my best, you know? Clearly, it's not enough for my dad..[/say]")
 
 		saynn("Mirri's best is.. quite crazy. But right now she is so.. different.. from her usual self.")
 
