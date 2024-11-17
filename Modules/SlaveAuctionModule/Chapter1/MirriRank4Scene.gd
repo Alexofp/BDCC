@@ -190,9 +190,26 @@ func _run():
 
 		saynn("He looks at his hands and sighs..")
 
-		saynn("[say=luxe]I think I know why.[/say]")
+		saynn("[say=luxe]I think I know why. But it's a long story.[/say]")
 
-		addButton("Continue", "See what happens next", "hear_luxe_out")
+		addButton("Hear it", "(Heavy Sexual Abuse) Live it through his eyes", "about_to_start_flashback")
+		addButton("Short version", "Hear him out without getting too invested into it", "hear_luxe_out")
+	if(state == "about_to_start_flashback"):
+		saynn("Luxe grabs a standing picture frame from his desk.. and stares at it.")
+
+		saynn("[say=luxe]Many years ago..[/say]")
+
+		saynn("His words begin to paint a picture.. and you can't help yourself from getting drawn in..")
+
+		addButton("Continue", "See how it happened..", "start_flashback")
+	if(state == "after_flashback"):
+		playAnimation(StageScene.Duo, "sit", {pc="luxe", npcAction="stand"})
+		saynn("When Luxe ends his story.. you finally snap out of it..")
+
+		saynn("[say=luxe]When I look at Mirri.. I see everything. I see my mistakes.[/say]")
+
+		addButton("Be supportive", "Tell Luxe that he has to try to move on", "tell_moveon")
+		addButton("Be antagonistic", "Tell Luxe that he deserves it", "tell_antag")
 	if(state == "hear_luxe_out"):
 		saynn("Luxe grabs a standing picture frame from his desk.. and stares at it.")
 
@@ -272,5 +289,10 @@ func _react(_action: String, _args):
 
 	if(_action == "hear_luxe_out"):
 		processTime(5*60)
+
+	if(_action == "start_flashback"):
+		runScene("LuxeBackstoryScene")
+		setState("after_flashback")
+		return
 
 	setState(_action)
