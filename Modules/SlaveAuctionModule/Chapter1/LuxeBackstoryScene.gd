@@ -341,6 +341,214 @@ func _run():
 
 		saynn("[say=luxewife2]Please.. ah.. breed me, Luxe..[/say]")
 
+		saynn("Even though she is probably pregnant.. might as well make sure.")
+
+		addButton("Continue", "See what happens next", "sex1_sex")
+	if(state == "sex1_sex"):
+		playAnimation(StageScene.SexOverTable, "sex", {pc="luxe", npc="luxewife2", bodyState={naked=true, hard=true}, npcBodyState={naked=true, caged=true}})
+		saynn("That's all you needed to hear. With one powerful impulse, you bury your cock deep inside Aisha, stretching her tight walls and making her cry out. The wooden desk groans beneath you both as you pull back.. before ramming it in again, setting a punishing cycle.")
+
+		saynn("[say=luxewife2]Ah-h.. you're on fire today..[/say]")
+
+		saynn("The sound of fur slapping against fur fills the room, as well as the cat's gasps and moans. Your hands grip her waist tightly, your claws digging into her skin as you use your wife on the desk nice and harder, your cock pistoning into her needy pussy. Her glowing furs are like little fire tongues.. sending embers of golden hues that only make you want her more.")
+
+		saynn("Her tail wraps around your waist, seemingly pulling you in. One of your hands goes around her leg and returns to her caged cock, gripping it roughly. You can feel the pressure building in as her arousal surges, her cute feline shaft trying to swole inside, straining painfully against the unyielding metal.")
+
+		saynn("[say=luxe]You're mine.[/say]")
+
+		saynn("You growl as you squeeze her furry orbs, causing her body to tremble beneath you, her walls clenching hard around your cock.")
+
+		saynn("[say=luxewife2]Ah.. yes.. a-always yours..[/say]")
+
+		addButton("Continue", "See what happens next", "sex1_fast")
+	if(state == "sex1_fast"):
+		playAnimation(StageScene.SexOverTable, "fast", {pc="luxe", npc="luxewife2", bodyState={naked=true, hard=true}, npcBodyState={naked=true, caged=true}})
+		saynn("The moment you ramp up the pressure and start pounding her pussy harder, her orgasm hits her like a truck, her slit clamping down on your glowing shaft as her juices spill out, wetting your member and dripping onto the desk. At the same time, her caged cock jerks violently, desperate to release. The cage holds firm.. but thin jets of seed begin shooting through the tiny openings, splattering across the wooden surfaces.")
+
+		saynn("[say=luxewife2]Ahh-h-h.. Luxe!..[/say]")
+
+		saynn("Aisha cries out, her body shaking uncontrollably, her voice breaking as another gush of her juices coats your cock, her panting becomes more and more audible.")
+
+		saynn("You're not done yet though, your knot has only begun inflating with liquid gold. You grip her tighter and keep thrusting through her climax, determined to make her scream even louder.")
+
+		saynn("The room gets hotter and hotter.. probably from your and Aisha's fur looking almost like real fire by this point. Your hearts are beating like hell but the heat resistance makes you feel invulnerable.")
+
+		addButton("Continue", "See what happens next", "sex1_cum")
+	if(state == "sex1_cum"):
+		playAnimation(StageScene.SexOverTable, "inside", {pc="luxe", npc="luxewife2", bodyState={naked=true, hard=true}, npcBodyState={naked=true, caged=true}})
+		saynn("As soon as you feel your peak drawing near, you commit..")
+
+		saynn("With one final, powerful thrust, you bury your cock to the hilt, your swollen knot popping inside that tight pussy, locking you and your lover together. Aisha whimpers as the stretch sends her over the edge again, her golden pussy clenching around you hard. Her cage strains even more as her cock twitches inside, your shaft forcing another few bursts of seed out of her balls.")
+
+		saynn("You growl.. as your own cock begins to throb, spurting thick, hot ropes of cum deep inside her. The knot ensures not a drop is wasted while you pump her full of your virile seed, making Aisha's belly looking even more pregnant than it was.")
+
+		saynn("[say=luxe]Grr.. good girl.[/say]")
+
+		saynn("Aisha is panting heavily, squirming beneath you, her body completely spent and stuffed at the same time, your full length still buried inside her.")
+
+		saynn("[say=luxewife2]A-always your g-girl.. hahh-h.. t-this is intense.. my h-heart.. b-beating like crazy.[/say]")
+
+		saynn("[say=luxe]Mine's too. Time to rest.[/say]")
+
+		saynn("Carefully, you yank your knot out, causing a fountain of your seed to emerge from her stuff gaping pussy.")
+
+		addButton("Continue", "See what happens next", "after_sex1")
+	if(state == "after_sex1"):
+		playAnimation(StageScene.SexLotus, "tease", {pc="luxewife2", npc="luxe", bodyState={naked=true, caged=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You pull your wife onto the bed and start cuddling with her.")
+
+		saynn("[say=luxewife2]Now I'm p-pregnant for sure..[/say]")
+
+		saynn("[say=luxe]Good.[/say]")
+
+		saynn("The atmosphere in the room becomes hazy.. Lots of little steam clouds everywhere. You realize that it's coming from your heavy breaths. Aisha and you, you're both panting.. still.. Your golden fur tips dancing and swaying..")
+
+		saynn("[say=luxewife2]I'm n-not sure if we s-supposed to breathe out s-steam..[/say]")
+
+		saynn("It's concerning.. but probably nothing to worry about. You pull your wife closer.. and realize how crazy her heartbeat actually is.. now that's concerning.")
+
+		saynn("[say=luxe]Are you feeling okay, Aisha?[/say]")
+
+		saynn("[say=luxewife2]I'm not s-sure.. I think I n-need some fresh air..[/say]")
+
+		saynn("The golden glow of the room dims slightly as Aisha rolls off the bed, her legs shaky and her breath uneven. You just keep watching her, noticing the quiver in her steps.")
+
+		saynn("[say=luxe]Aisha?[/say]")
+
+		saynn("[say=luxewife2]I'm f-fine..[/say]")
+
+		saynn("She stammers, her hand reaching for the wall to steady herself.")
+
+		addButton("Continue", "See what happens next", "aisha_begins_to_die")
+	if(state == "aisha_begins_to_die"):
+		playAnimation(StageScene.SexStart, "start", {pc="luxe", npc="luxewife2", bodyState={naked=true}, npcBodyState={naked=true,caged=true}})
+		saynn("But before Aisha can make it another step, her legs buckle, and she collapses to the floor with a soft thud.")
+
+		saynn("[say=luxe]Aisha![/say]")
+
+		saynn("You yell while bolting from the bed and kneeling beside her. You cradle her trembling body in your hands, your glowing fur casting flickering light across her weakening features.")
+
+		saynn("Her breaths are ragged, her heartbeat erratic against your chest. Your voice becomes desperate.")
+
+		saynn("[say=luxe]What's happening? Stay with me, Aisha. Stay with me.[/say]")
+
+		saynn("Her amber eyes, dulled now, open to meet yours. She manages a weak smile.. but her trembling hand barely reaches your cheek before falling limply to her side.")
+
+		saynn("[say=luxewife2]I.. I think t-this.. t-this is it.. for m-me..[/say]")
+
+		saynn("Her voice is nothing but whisper now, her words faltering as a cough wracks her body. Her lips part.. and a faint wisp of golden steam escapes.")
+
+		saynn("Your chest begins to tighten as you feel a strange heat building in her, her glowing fur now almost too bright to look at.")
+
+		saynn("[say=luxe]No. No, no, NO-NO-NO![/say]")
+
+		saynn("Your voice is cracking. You lift her easily and dash towards the door, the golden embers on your fur flicker violently. You step out into the hall and begin shouting.")
+
+		saynn("[say=luxe]HELP! SOMEONE! SHE NEEDS HELP![/say]")
+
+		saynn("Aisha's body shudders harder in your arms, her glow intensifying like a fire.. burning out of control. The more you look at her.. the more you feel your own heart beginning to pound harder.. harder and harder..")
+
+		saynn("[say=luxewife2]L-Luxe..[/say]")
+
+		saynn("Her whisper is barely audible")
+
+		saynn("You keep looking down at her, your heart breaking as her once-strong body seems to crumble in your hands.")
+
+		saynn("[say=luxewife2]Don't.. talk.. Just h-hold on..[/say]")
+
+		saynn("Tears are streaming down her cheeks.. before evaporating from the immense heat.. She grips your arm weakly, her claws trembling against your fur.")
+
+		saynn("[say=luxewife2]Y-you.. you have to s-stay calm.. p-please..[/say]")
+
+		saynn("[say=luxe]W-what?..[/say]")
+
+		saynn("Your fur shines brightly.. just like Aisha's..")
+
+		saynn("[say=luxewife2]If.. if you lose it.. i-it will t-take you too..[/say]")
+
+		saynn("Her voice is fading as more steam escapes her lips, her fur now almost blinding. You can feel it.. she is burning up from the inside..")
+
+		saynn("[say=luxe]No.. I don't want to.. Aisha.. I'm not leaving you..[/say]")
+
+		saynn("You refuse to accept her words while her hand tightens slightly, her last ounce of strength focused on you.")
+
+		saynn("[say=luxewife2]I l-love y-you, L-Luxe.. D-don't let this b-break y-you..[/say]")
+
+		saynn("Your body trembles as you fight the urge to scream again, your instincts are begging you to let out your agony. You bite down hard on your own lip, drawing blood.. and trying desperately to stay composed..")
+
+		saynn("Aisha's body grows hotter, the glow now almost white. Her once-lush fur begins to disintegrate into shimmering golden embers that float into the air. Her eyes meet yours one last time.. filled with love and pain.")
+
+		saynn("[say=luxewife2]I.. l-love.. y-you..[/say]")
+
+		saynn("[say=luxe]No, Aisha.. Stay with me.. Stay..[/say]")
+
+		saynn("You lose the ability to speak as her body lights up in your hands.. before turning into ash, slipping through your fingers like sand..")
+
+		addButton("Continue", "See what happens next", "aisha_dead")
+	if(state == "aisha_dead"):
+		removeCharacter("luxewife2")
+		playAnimation(StageScene.Solo, "kneel", {pc="luxe", bodyState={naked=true}})
+		saynn("You stare down at the empty space where she was, your hands trembling, now streaked with golden dust. The glow of your fur flickers dangerously, the heat within you threatening to boil over.")
+
+		saynn("Don't let this break you..")
+
+		saynn("You clench your fists, breathing deeply through the burning in your chest. There is rising inferno in your chest, you can feel it..")
+
+		saynn("Don't let this break you..")
+
+		saynn("You force yourself to calm down, suppressing that inferno. You grind your teeth as the tears slide down your cheeks.. but you don't scream.. you don't let the grief consume you..")
+
+		saynn("Don't let this break you..")
+
+		saynn("Instead, you kneel there in silence, the ashes of your wife slipping through your fingers. The air is heavy, the faint smell of burning fur and a lingering golden glow the only reminder of her.")
+
+		saynn("You focus on your breathing.. your stare emotionless.. not a single word leaves your closed lips. The fire inside you begins to fade.. bit by bit.. but the pain remains strong..")
+
+		saynn("People begin to surround you.. their faces nothing but blur.. their voices nothing but noise..")
+
+		addButton("Continue", "See what happens next", "luxe_griefs")
+	if(state == "luxe_griefs"):
+		playAnimation(StageScene.Solo, "sit", {pc="luxe"})
+		saynn("The next few days blur together.")
+
+		saynn("You sit alone in your quarters in complete silence. The room feels like it has shrunk, closing in on you.")
+
+		saynn("Before you, on the desk, sits the urn.. A small, sealed container of polished obsidian with faint golden etchings. You can't take your eyes off of it..")
+
+		saynn("You haven't moved for hours.. Maybe weeks.. Time has no meaning.")
+
+		saynn("You want to scream. The urge claws at your throat, burns in your chest. It's the only sensation you truly feel.. the suffocating pressure of grief pushing against your ribcage. But you don't. You won't. You didn't have time to promise it to her.. but you promised yourself that you wouldn't..")
+
+		saynn("Your hands rest on your knees, steady, deliberate. Not a single tremor betrays the storm inside you. Your glowing fur tips have dimmer over the past days, now barely casting any light. Even the embers have abandoned you.. mirroring the void in your chest..")
+
+		saynn("Your breathing is shallow, measured, too even to be real. The rhythm is forced, a performance for no one. Not a single tear falls. You have trained yourself out of that luxury.")
+
+		saynn("Your jaw tightens. Your gaze hardens.")
+
+		saynn("The emptiness gnaws at you, relentless. It's as if the universe is hollow, stripped of meaning. And yet, you're still here, stuck in it, forced to exist when she doesn't.")
+
+		saynn("Your head tilts back, resting against the chair. You close your eyes, hoping for the bliss of nothingness. But it doesn't come. Her face is there, burned into the darkness behind your eyelids.")
+
+		saynn("It's unbearable.. but you have to endure it..")
+
+		addButton("Continue", "See what happens next", "dad_tries_help")
+	if(state == "dad_tries_help"):
+		addCharacter("luxedad")
+		playAnimation(StageScene.Solo, "sit", {pc="luxe", npc="luxedad"})
+		saynn("The door slides open. Your father steps into your room. He stands behind you, looking at the same urn.")
+
+		saynn("[say=luxedad]My condolences.[/say]")
+
+		saynn("A subtle nod is all you can force out of yourself.")
+
+		saynn("[say=luxedad]We weren't exactly on the best terms. But she had the heart of a good woman. Of a good mother.[/say]")
+
+		saynn("Silence settles again. You can't let it all out now.")
+
+		saynn("[say=luxedad]Just know that.. it gets worse before it gets better. You will find yourself a new girl in no time. There are more pressing matters at the moment. Hear me?[/say]")
+
+		saynn("You feel it again.. Something that you don't want to feel..")
+
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
