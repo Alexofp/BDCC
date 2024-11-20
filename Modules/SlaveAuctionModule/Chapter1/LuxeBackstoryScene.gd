@@ -535,7 +535,9 @@ func _run():
 	if(state == "dad_tries_help"):
 		addCharacter("luxedad")
 		playAnimation(StageScene.Solo, "sit", {pc="luxe", npc="luxedad"})
-		saynn("The door slides open. Your father steps into your room. He stands behind you, looking at the same urn.")
+		saynn("The door slides open. Your father steps into your room, his heavy boots clicking against the floor. He doesn't ask for permission to enter. He doesn't need to.")
+
+		saynn("He stands behind you, looking at the same urn.")
 
 		saynn("[say=luxedad]My condolences.[/say]")
 
@@ -543,12 +545,155 @@ func _run():
 
 		saynn("[say=luxedad]We weren't exactly on the best terms. But she had the heart of a good woman. Of a good mother.[/say]")
 
-		saynn("Silence settles again. You can't let it all out now.")
+		saynn("Silence settles again, heavy and suffocating. You feel it creeping up your spine, the urge.. eating at you.")
 
-		saynn("[say=luxedad]Just know that.. it gets worse before it gets better. You will find yourself a new girl in no time. There are more pressing matters at the moment. Hear me?[/say]")
+		saynn("[say=luxedad]Just know this.. It gets worse before it gets better. You will move on eventually.[/say]")
 
-		saynn("You feel it again.. Something that you don't want to feel..")
+		saynn("Move on? The words twist like a knife in your chest.. but you don't respond, feels like you are over it by now indeed.")
 
+		saynn("[say=luxedad]You're still young. There is no shortage of girls, especially for someone with your status.[/say]")
+
+		saynn("His words are so casual, so dismissive. It stings.. makes you feel something that you don't want to feel.")
+
+		saynn("[say=luxedad]There are more pressing matters than your personal grief. The mission doesn't stop. Hear me?[/say]")
+
+		saynn("You take your gaze off of the urn and look at him, your expression is completely blank.")
+
+		saynn("[say=luxe]I hear you.[/say]")
+
+		saynn("Your voice is calm, measured. Your father nods, satisfied with the answer. But his gaze lingers on you.")
+
+		saynn("[say=luxedad]Grief makes men soft. It's a weakness we can't afford.[/say]")
+
+		saynn("You just nod again.")
+
+		saynn("Your dad reaches into his pocket and pulls out a small pill bottle with an empty label. With a flick of his digits, he opens it, revealing its contents.. some kind of pills.")
+
+		saynn("[say=luxedad]These will help against that side-effect of your treatment. R&D did a lot of tests to make sure that these work.[/say]")
+
+		saynn("He sets the bottle on the desk, next to the urn.")
+
+		saynn("[say=luxedad]So you won't end up like her.[/say]")
+
+		saynn("It stings.. Your hand twitches.")
+
+		saynn("Your father steps closer, his voice dropping lower.")
+
+		saynn("[say=luxedad]You can only get over bad feelings if you actually feel them. But tomorrow, I want you in top shape. This has dragged on for long enough.[/say]")
+
+		saynn("His words linger in the air, heavy and uninvited.")
+
+		saynn("[say=luxedad]She saved you. Don't waste your second chance, son.[/say]")
+
+		saynn("Your father straightens his posture, his gaze softening for just a moment. Then, without another word, he turns and leaves the room.")
+
+		saynn("The door hisses shut behind him, leaving you alone again.")
+
+		saynn("Your eyes are focussed on that pill bottle..")
+
+		addButton("Continue", "See what happens next", "luxe_very_angry")
+	if(state == "luxe_very_angry"):
+		playAnimation(StageScene.Solo, "stand")
+		saynn("The silence feels like it's crushing you, growing heavier with every breath.")
+
+		saynn("This has dragged on for long enough..")
+
+		saynn("You open the bottle and grab a pill. It's small, unassuming. Without a second thought, you toss it into your mouth and swallow.")
+
+		saynn("Nothing happens.. for a moment..")
+
+		saynn("But then..")
+
+		saynn("A SCREAM rips from your throat, raw and primal, echoing off the walls.")
+
+		saynn("[say=luxe]AAAAAAAAAA-A-AH.[/say]")
+
+		saynn("You grab the edge of the desk and flip it over in a single, furious motion. The urn.. crashes to the floor.. before shattering into a hundred pieces, the ashes scattering like smoke in the wind.")
+
+		saynn("You don't stop, you can't stop. Your fists slam into the walls, leaving dents and cracks in the wood, the glowing tips of your fur blaze brighter with every punch, embers flickering and sparking around you.")
+
+		saynn("Your scream dies down, replaced by heavy, ragged breaths. Your body trembles, your mind nothing but a complete chaos.")
+
+		saynn("The chair is next, you grab it and smash it against the double bed.. Splinters fly everywhere, the bed's frame collapsing.")
+
+		saynn("No matter how much you thrash your room.. it doesn't get any easier to endure the pain.")
+
+		saynn("So you step out.. inferno shining brightly in your eyes.")
+
+		addButton("Continue", "See what happens next", "near_cells")
+	if(state == "near_cells"):
+		playAnimation(StageScene.Duo, "stand", {pc="luxe", npc="luxecatgirl", npcAction="kneel"})
+		addCharacter("luxecatgirl")
+		saynn("Luxe's boots are heavy against the metal floor, each step fast and deliberate.")
+
+		saynn("He follows the corridors until he finds the 'slave cells'.")
+
+		saynn("The door hisses open, revealing the dimly lit, sterile space. Rows of big metal cages line the walls, each one holding a different soul.. some defiant, others broken.")
+
+		saynn("Luxe's gaze sharpens as he makes his way down the row.. until he sees her.")
+
+		saynn("A cute-looking catgirl sits quietly in the corner of her cage-cell, her red fur catching the faint light. Her eyes lift to meet yours, wide and submissive, with a small flicker of curiosity in them. A bulky slave collar is weighting her neck down, a symbol of ownership. Her wrists are resting in her lap, spotting obvious cuffs marks.")
+
+		saynn("Her red hair cascades over her shoulders, her tail curling tightly around her legs as if trying to make herself seem smaller.")
+
+		saynn("The sight turns the fire inside Luxe into a raging firestorm, primal growl vibrating the hot air around him. None of this is gonna be pretty..")
+
+		addButton("Skip it", "You don't want him to explain it with full details", "skip_it")
+		addButton("Feel it", "(Sexual violence) See what happens next", "feel_it")
+	if(state == "skip_it"):
+		playAnimation(StageScene.SexStart, "defeated", {pc="luxe", npc="luxecatgirl"})
+		saynn("Blind rage fuels Luxe as he lashes out on that poor catgirl.")
+
+		saynn("Screams, begging, whining.. The sounds of this abuse make even the most bratty slaves shut their mouths and hope that their turn won't come.")
+
+		saynn("Luxe takes the girl against her will. And then leaves her bleeding unconscious frail frame on the floor.")
+
+		saynn("Blood finally extinguishes the uncontrollable fire inside him.")
+
+		addButton("Continue", "See what happens next", "after_catgirl")
+	if(state == "feel_it"):
+		playAnimation(StageScene.Choking, "tease", {pc="luxe", npc="luxecatgirl"})
+		saynn("Luxe's broad frame fills the cell entrance, his burning fur tips casting flickering light onto the catgirl's crimson fur. She shrinks back, her collar clinging against the cage as she presses herself against it, her wide eyes fixed on the towering beast before her.")
+
+		saynn("[say=luxecatgirl]P-Please, master.. I will do whatever you want.. Anything.. Just don't hurt me..[/say]")
+
+		saynn("Luxe doesn't answer. His silence is deafening, more terrifying than any growl or roar. He steps forward, his heavy steps echoing through the confined space. The catgirl yelps and presses herself into the corner.. but there is nowhere to run.. Luxe's clawed hand lashes out, grabbing her by the throat and hauling her up to her feet.")
+
+		saynn("The first strike comes without warning, his free hand collides with her cheek, leaving a bunch of nasty cuts in one swipe, barely avoiding the eyes. A sharp cry escapes her lips, her body convulsing in his grip. Luxe then throws her to the ground with a force that knocks the air from her lungs, her small frame skidding across the cold floor.")
+
+		saynn("Before she can recover, he's on her again, his claws digging into her arms as he drags her upright, pinning her against the wall of the cage. Her legs dangle helplessly, her arms desperately trying to free themselves. Luxe doesn't relent, drawing more blood from her by slashing her petite chest before slamming her back against the metal surface.")
+
+		saynn("The sobbing catgirl gasps for breath, her vision blurring as the force of each strike leaves her dazed. Each strike lands on her with calculated brutality. The last few hits force nasty crack noises out of some of her ribs.")
+
+		saynn("[say=luxecatgirl]M-Master.. P-Please.. I'll.. kh.. d-do anything.. a-anything..[/say]")
+
+		saynn("Her words fall on deaf ears, Luxe's glowing eyes are fixed on her, his expression cold and devoid of mercy.")
+
+		addButton("Continue", "See what happens next", "catgirl_collapses")
+	if(state == "catgirl_collapses"):
+		playAnimation(StageScene.SexStart, "defeated", {pc="luxe", npc="luxecatgirl"})
+		saynn("Finally, she collapses, her legs giving out beneath her. Luxe lets her fall, her hands barely breaking her fall as she crumples to the floor. Her body trembles uncontrollably, tears streaming down her crimson fur as she looks up at him with desperate, pleading eyes.")
+
+		saynn("[say=luxecatgirl]P-please..[/say]")
+
+		saynn("Her voice is trembling.")
+
+		saynn("Luxe crouches before her, grabbing her by the hips and flipping her onto her back with a single, strong motion. She yelps as her legs are forced apart, her bruised thighs shaking under his iron grip. The catgirl squirms beneath him.. but his weight and power make resistance futile.")
+
+		addButton("Continue", "See what happens next", "sex2_sex")
+	if(state == "sex2_sex"):
+		playAnimation(StageScene.SexMatingPress, "sex", {pc="luxe", npc="luxecatgirl", bodyState={showPenis=true, hard=true}, npcBodyState={naked=true}})
+		saynn("He doesn't waste time. His cock, already hard and leaking, presses against her entrance. Without warning or preparation, he drives into her with brutal force, his thick shaft stretching her far beyond her limits.")
+
+		saynn("She screams, her head tilting back as her claws scrape uselessly against his chest. The unbearable pain leaves her gasping, her body struggling to adjust to his size.")
+
+		saynn("Luxe begins thrusting, each motion hard and unrelenting. His silence is deafening, the only sounds in the room are the rhythmic slaps of his hips against her and her broken cries.")
+
+		saynn("[say=luxecatgirl]P-please.. khh.. hh.. m-master.. I c-can't.. ah-kh.. too m-much..[/say]")
+
+		saynn("She sobs, her voice cracking.")
+
+		addButton("Continue", "See what happens next", "sex2_fast")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
