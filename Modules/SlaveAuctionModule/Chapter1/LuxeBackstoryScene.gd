@@ -9,48 +9,60 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {pc="luxe", npc="luxewife", npcAction="sit"})
 		saynn("[say=luxewife]You look different, Luxe. New haircut?[/say]")
 
-		saynn("The sarcasm echoes around the spacious living quarters. Red trims and dark wood furniture make it obvious what kind of people this room belongs to. A huge ass double bed is its main feature, positioned proudly against one of the walls. Sitting on it is a cute-looking dark-furred kitty, her amber eyes are just as concerned as they are curious. Her tail wags with excitement and relief.")
+		saynn("Her sarcasm bounces off the spacious living quarters, a warm and familiar room to you. Red trims and dark wooden furniture dominate the space. The centerpiece, a massive bed pressed proudly against one of the walls.. a bed that looks like it belongs in a castle. But there are also less impressive exhibits here.. a desk.. a few chairs.. a wardrobe.. everything you need to live a good wealthy life.")
 
-		saynn("[say=luxe]Guess what, it worked.[/say]")
+		saynn("Sitting on the edge of the bed is Aisha, her dark fur sleek and soft. Her amber eyes, wide with curiosity and relief, track your every move. Her tail flicks behind her, betraying her excitement even as her voice carries a playful edge.")
 
-		saynn("The door slides closed behind Luxe with a faint hiss. The wolf approaches the only other occupant of this space, his imposing frame radiating an immense amount of confidence towards the cute girl.")
+		saynn("You let the door slide shut behind you with a faint hiss, stepping further into the room.")
 
-		saynn("[say=luxe]I'm different. But you look just as sexy, Aisha.[/say]")
+		saynn("[say=luxe]It worked, as you can see.[/say]")
 
-		saynn("He grins while his black fur shimmers faintly, tipped with golden hues that Aisha seems to be fascinated by.")
+		saynn("There is some obvious arrogance in your voice but you don't care. You stand still, your imposing frame radiating an amount of confidence that is impossible to ignore.")
 
-		saynn("[say=luxewife]What a showoff.[/say]")
+		saynn("[say=luxe]I'm different now. But you..[/say]")
 
-		saynn("[say=luxe]Nope.[/say]")
+		saynn("Your golden-tipped fur catches the light as you grin.")
 
-		saynn("With a smirk, Luxe reaches into his pocket and pulls out a cigar. He presses its tip against the ends of his fur.. before flexing his muscles hard. And moments later, he is already enjoying sending puffs of smoke everywhere.")
+		saynn("[say=luxe]You look just as sexy, Aisha.[/say]")
 
-		saynn("[say=luxe]But now, yes, a showoff.[/say]")
+		saynn("Her lips twitch into a small smile, her eyes linger on your fur that is glowing faintly as though kissed by fire.")
 
-		saynn("Aisha giggles but waves the smoke away from her face.")
+		saynn("[say=luxewife]What a showoff~.[/say]")
 
-		saynn("[say=luxewife]You never were much into cigars.[/say]")
+		saynn("[say=luxe]Not yet.[/say]")
 
-		saynn("[say=luxe]But now I will be. How can I not?[/say]")
+		saynn("You slip a cigar from your pocket, letting it rest between your fingers as you step closer. With a deliberate flex of your muscles, the golden tips of your fur ignite in a controlled burst of heat. You press the cigar's end against them.. and light it up.")
 
-		saynn("[say=luxewife]They're for old people, like your father.[/say]")
+		saynn("Moments later, you're already savoring the deep inhales, sending lazy plumes of smoke curling into the air.")
 
-		saynn("[say=luxe]I'm already a dad too, you know.[/say]")
+		saynn("[say=luxe]Now I'm a showoff.[/say]")
 
-		saynn("[say=luxewife]I know~. I know it too well.[/say]")
+		saynn("Aisha giggles, batting away the smoke wafting in her direction.")
 
-		saynn("Luxe smirks.")
+		saynn("[say=luxewife]You never used to be much of a cigar guy.[/say]")
+
+		saynn("[say=luxe]I wasn't. But now, how can I not?[/say]")
+
+		saynn("[say=luxewife]Cigars are for old people, Luxe. Like your father.[/say]")
+
+		saynn("You chuckle softly.")
+
+		saynn("[say=luxe]I'm a dad too, you know.[/say]")
+
+		saynn("[say=luxewife]Oh, I know~. Trust me, I know that very well.[/say]")
+
+		saynn("Her teasing lingers in the air.")
 
 		addButton("Continue", "See what happens next", "aisha_hugs")
 	if(state == "aisha_hugs"):
 		playAnimation(StageScene.Hugging, "hug", {pc="luxe", npc="luxewife"})
-		saynn("Aisha gets up and gives his young husband a tight hug, her paws exploring his strong back.")
+		saynn("Aisha gets up and gives you a tight hug, her paws exploring your strong back.")
 
 		saynn("[say=luxewife]So warm.. Sarcasm aside.. Glad you're okay, my love. It's a bit reckless to agree to such untested treatments, don't you think?[/say]")
 
 		saynn("[say=luxe]You should think about it too. Golden accents would suit you.[/say]")
 
-		saynn("Luxe smirks and hugs his wife with his free hand, the other one keeps holding the cigar.")
+		saynn("You smirk and hug your wife with your free hand, the other one keeps holding the cigar.")
 
 		saynn("[say=luxewife]You and your gold..[/say]")
 
@@ -60,19 +72,19 @@ func _run():
 
 		saynn("[say=luxewife]I don't know, Luxe.. I've heard stories. And besides, I think you got me pregnant again.[/say]")
 
-		saynn("Luxe's confident grin falters, just slightly. His ears flick backward in surprise, and he exhales a slow puff of smoke.")
+		saynn("Your confident grin falters, just slightly. Your ears flick backward in surprise, and you exhale a slow puff of smoke.")
 
 		saynn("[say=luxe]Another one? Hah. Woman, you are such an eager breeding bitch. Are we building an army, or are you just trying to make sure I'm outnumbered?[/say]")
 
-		saynn("Aisha grabs his hand and puts it over her belly and smiles, her voice cheeky but with a subtle hint of vulnerability..")
+		saynn("Aisha grabs your hand and puts it over her belly before smiling, her voice cheeky but with a subtle hint of vulnerability..")
 
 		saynn("[say=luxewife]Wo-o-ow. Did the first twenty one kids that I gave you made you lose interest in me? Maybe I should start pegging you instead. Since you seem to be over the whole 'breeding' thing.[/say]")
 
-		saynn("Luxe laughs, his hand sliding over that belly up to her chin, tilting her face up to meet his gaze.")
+		saynn("You laugh, your hand sliding over that belly up to her chin, tilting her face up to meet your gaze.")
 
 		saynn("[say=luxe]Don't forget who has your key~. And don't be silly, I will never lose interest in you.[/say]")
 
-		saynn("The cat blushes deeply while Luxe's voice drops, now low and intimate as he leans closer to Aisha's ear.")
+		saynn("The cat blushes deeply while your voice drops, now low and intimate as you lean closer to Aisha's ear.")
 
 		saynn("[say=luxe]If you're pregnant, it's because I can't get enough of you, and you know it.[/say]")
 
@@ -80,21 +92,21 @@ func _run():
 
 		saynn("[say=luxe]That's because I love you. And.. you don't need the treatment now if you're unsure. But I really-really want you to be safe.. you will see the benefits, trust me. You will feel indestructible.[/say]")
 
-		saynn("Aisha's laughter fills the room, easing the tension.. She gives Luxe a little kiss on the lips.")
+		saynn("Aisha's laughter fills the room, easing the tension.. She gives you a little kiss on the lips.")
 
 		saynn("[say=luxewife]Alright, Mr. Indestructible. But don't think I'm going to stop joking about pegging you. It's too much fun.[/say]")
 
 		saynn("[say=luxe]I'd expect nothing less from you. Speaking of various sexual activities.. You should see my cock, it changed too.[/say]")
 
-		saynn("Luxe's horny hands begin trying to strip his wife. Aisha moans softly, feeling the warm arms trace her girly curves.. but before the moment can deepen further, she pulls back slightly, her expression becoming more serious.")
+		saynn("Your horny hands begin trying to strip your wife. Aisha moans softly, feeling the warm arms trace her girly curves.. but before the moment can deepen further, she pulls back slightly, her expression becoming more serious.")
 
-		saynn("[say=luxewife]Speaking of dicks.. your father wanted to see you.[/say]")
+		saynn("[say=luxewife]I really want to.. But speaking of dicks.. your father wanted to see you.[/say]")
 
-		saynn("The wolf grumbles.. but stops.")
+		saynn("You grumble.. but stop.")
 
 		saynn("[say=luxe]Probably wants to criticize my 'reckless choices' as well. I will handle it.[/say]")
 
-		saynn("He leans down to kiss Aisha's forehead.")
+		saynn("You lean down to kiss Aisha's forehead.")
 
 		saynn("[say=luxewife]After that you can come back and handle me, hot guy~.[/say]")
 
@@ -105,7 +117,7 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {pc="luxe", npc="luxedad", npcAction="sit"})
 		saynn("The room hums with the faint sound of the holo-wall flickering in the background, maps of trade routes and starts shifting slowly in a dance of light.")
 
-		saynn("Luxe steps into the dimly lit office, his golden-tipped fur giving a faint glow, making him stand out more in the bland but rich environment.")
+		saynn("You step into the dimly lit office, your golden-tipped fur giving a faint glow, making you stand out more in the bland but rich environment.")
 
 		saynn("[say=luxe]Father?[/say]")
 
@@ -294,7 +306,7 @@ func _run():
 
 		saynn("Her paws reach into your pants and finds your glowing hard cock already peeking from its sheath. Her soft digits rub the leaky tip.")
 
-		saynn("[say=luxe]So you should listen like a good girl.[/say]")
+		saynn("[say=luxe]And this means that you should always obey me, like a good girl.[/say]")
 
 		saynn("She leans in close, her lips brushing against your ear, her voice teasing it.")
 
@@ -632,7 +644,7 @@ func _run():
 
 		saynn("Luxe's gaze sharpens as he makes his way down the row.. until he sees her.")
 
-		saynn("A cute-looking catgirl sits quietly in the corner of her cage-cell, her red fur catching the faint light. Her eyes lift to meet yours, wide and submissive, with a small flicker of curiosity in them. A bulky slave collar is weighting her neck down, a symbol of ownership. Her wrists are resting in her lap, spotting obvious cuffs marks.")
+		saynn("A cute-looking catgirl sits quietly in the corner of her cage-cell, her red fur catching the faint light. Her eyes lift to meet yours, wide and submissive, with a small flicker of curiosity in them. A bulky slave collar is weighting her neck down, a symbol of ownership. Her wrists are resting in her lap, spotting obvious cuff marks.")
 
 		saynn("Her red hair cascades over her shoulders, her tail curling tightly around her legs as if trying to make herself seem smaller.")
 
@@ -694,6 +706,134 @@ func _run():
 		saynn("She sobs, her voice cracking.")
 
 		addButton("Continue", "See what happens next", "sex2_fast")
+	if(state == "sex2_fast"):
+		playAnimation(StageScene.SexMatingPress, "fast", {pc="luxe", npc="luxecatgirl", bodyState={showPenis=true, hard=true}, npcBodyState={naked=true}})
+		saynn("But there is no mercy in Luxe, he moves like a beast possessed, his fur flickering erratically and leaving trails as his glowing cock slams into the poor catgirl over and over. Her body jolts with each thrust, her legs trembling as they remain pinned by the wolf.")
+
+		saynn("Her cries grow weaker as the abuse continues, her energy draining under his relentless assault. His claws dig into the skin of her shoulders, leaving more bleeding cuts and scratches.")
+
+		saynn("Soon, the girl's body begins to twitch uncontrollably, her pussy clenching around his cock as her orgasm is forced upon her weak body. The sudden climax makes her scream again, her voice echoing off the walls as her juices coat his shaft. But Luxe doesn't stop even thin, he thrusts through her climax, his motions rough and erratic, the veiny orb at the base of his shaft getting bigger.")
+
+		saynn("Her eyes roll back, her head turning to the side as her cries turn to faint gasps.. Her body still quivers beneath him, her legs struggling to stay in position as he keeps her pinned down.")
+
+		addButton("Continue", "See what happens next", "sex2_cum")
+	if(state == "sex2_cum"):
+		playAnimation(StageScene.SexMatingPress, "inside", {pc="luxe", npc="luxecatgirl", pcCum=true, bodyState={showPenis=true, hard=true}, npcBodyState={naked=true}})
+		saynn("Finally, with a deep, guttural growl, Luxe knots the girl, his whole length gets forced inside, the swollen knot locking them together. The tightness is enough to send him off cumming, his throbbing shaft sends thick, hot seed flooding her womb, each pulse pushing her further into overstimulation, making her belly bumpier. Her limp body jerks weakly with every spurt, her eyes slowly closing as the consciousness begins to leave her.")
+
+		saynn("Luxe stays inside her, his chest moving as he glares down at the unconscious girl. Her face is streaked with tears, her hair all sorts of messed up, her body littered with bruises, cuts and scratches.")
+
+		saynn("For a moment, he remains motionless, the rage in his eyes slowly giving way to something hollow.. The fire inside him starts to die down, leaving only ashes in its wake.")
+
+		saynn("Luxe pulls out finally, his cock slipping free as his seed spills from her used body. Her stands, towering over her limb form as she lies sprawled on the cold floor, her chest seemingly still..")
+
+		saynn("The wolf stumbles back from the girl and empties the contents of his stomach onto the floor.. before walking away, leaving the broken catgirl in the cage.")
+
+		addButton("Continue", "See what happens next", "after_catgirl")
+	if(state == "after_catgirl"):
+		removeCharacter("luxecatgirl")
+		playAnimation(StageScene.Solo, "stand", {pc="luxe", bodyState={naked=true}})
+		saynn("You open your eyes, greeted by the dim glow of your living quarters. A soft hum of machinery runs in the background. The air feels sterile, artificial.. much like the numbness settling in your chest.")
+
+		saynn("You sit up slowly, head pounding, the aftermath of yesterday's rage still coursing faintly through your veins.")
+
+		saynn("[say=luxe]What have you done, you stupid fuck.[/say]")
+
+		saynn("Feeling the heat beginning to eat you up from the inside.. you calm yourself down.. you're getting quite good at it.")
+
+		saynn("Rising to your feet, you stagger toward the adjacent bathroom. The reflective surface of the mirror greets you with an unwelcome sight: it's your face. Messy fur, bags under your glowing eyes.. and a faint streak of dried blood on your cheek.")
+
+		saynn("You grab a toothbrush and squeeze a line of toothpaste onto its bristles with more force than necessary. The minty smell hits your nostrils, sharp and clean.. in stark contrast to the mess swirling inside you.")
+
+		saynn("Brushing your teeth feels automatic, mechanical.. your muscle memory holding you together. The rhythmic scrubbing downs out the fading images of last night.. the girl's screams, her innocent eyes.. her limp body. You spit into the sink and watch the foamy mix swirl down the drain.")
+
+		saynn("Your eyes look at the mirror again. For a moment, you see her.. Aisha.. standing behind you, her glowing fur reflecting in the glass.")
+
+		saynn("[say=luxe]..Aisha![/say]")
+
+		saynn("You blink, and she is gone, leaving only your mean face staring back. You sigh and mutter to yourself.")
+
+		saynn("[say=luxe]Get a grip already.[/say]")
+
+		saynn("You rinse your mouth and splash cold water onto your face.")
+
+		saynn("Returning to the main room, you find your official attire laid out neatly on the desk. The staff had clearly been here while you slept, repairing the damage, sweeping away the shattered urn, scrubbing the walls clean of ash and soot. Even the faint scent of smoke is gone, replaced with the sterile sting of cleaning agents.")
+
+		saynn("You put on your clothes piece by piece, the familiar fabric going over your body like armor. Each buckle fastened, each clasp secured. The constant reminder of the role you're meant to play. Leader. Commander. The future head of the Blacktail family.")
+
+		addButton("Continue", "See what happens next", "dad_comes_back")
+	if(state == "dad_comes_back"):
+		addCharacter("luxedad")
+		playAnimation(StageScene.Duo, "stand", {pc="luxe", npc="luxedad"})
+		saynn("Before you gather enough strength to step beyond the suffocating walls of your once-shared sanctuary, the door slides open with its usual sterile hiss. Your father strides in uninvited, his presence filling the room like an unwelcome shadow.")
+
+		saynn("[say=luxedad]You're up. Good. We've got work to do. Time to start preparing you for your future role.[/say]")
+
+		saynn("His tone is businesslike, sharp, as if yesterday didn't even happen. You swallow hard, the weight of what you've done still pressing heavily on your chest.")
+
+		saynn("[say=luxe]That slave..[/say]")
+
+		saynn("[say=luxedad]Pregnant.[/say]")
+
+		saynn("His words hit like a sledgehammer.. but he doesn't stop.")
+
+		saynn("[say=luxedad]Broken ribs. Multiple concussions. Lost about half her blood. Torn vaginal canal. Did I mention the pregnancy? Congrats. We, Blacktail, always had quite the virile seed.[/say]")
+
+		saynn("The room tilts slightly. You grab the edge of the desk to steady yourself, the reality slamming into you with unrelenting force.")
+
+		saynn("Your eyes close instinctively.. but the darkness offers no salvation. Instead, it conjures flashes of your black-furred wife.. a soft face.. amber eyes staring at you.. Then the images of the poor abused catgirl show up instead, flashing fast, twisting your gut violently.")
+
+		saynn("[say=luxe]I.. I want her gone. Sell her off.[/say]")
+
+		saynn("Your voice comes out strained, barely above a whisper.")
+
+		saynn("[say=luxedad]Sell her off? Are you serious?[/say]")
+
+		saynn("You open your eyes to meet his piercing elderly gaze.")
+
+		saynn("[say=luxedad]She's carrying the next Blacktail family member inside her. We don't sell our legacy.[/say]")
+
+		saynn("Legacy.. The word tastes like ash in your mouth.")
+
+		saynn("[say=luxe]I fucked up. I don't want to see her ever again. Get rid of her.[/say]")
+
+		saynn("Your father steps closer, his looming presence filling your vision. His expression hardens, the faintest glimmer of disappointment flickering in his eyes.")
+
+		saynn("[say=luxedad]At least keep the child. They didn't ask for this.[/say]")
+
+		saynn("The truth stings, fueling your guilt. Your jaw tightens, your hands clenched into fists, your fur lighting up a bit.")
+
+		saynn("[say=luxe]You want the next Blacktail heir to be from a slave? From a whore?[/say]")
+
+		saynn("Your words spill out like venom.. leaving a bitter aftertaste.")
+
+		saynn("[say=luxedad]Is that the problem?[/say]")
+
+		saynn("You squeeze your eyes shut again, trying to block out his penetrating stare, but it's no use. The images are back.. broken, bleeding, begging.. burning.. dying.. What have you done, you dumb fuck..")
+
+		saynn("[say=luxe]Sell. Her. Off.[/say]")
+
+		saynn("You leave no room for negotiation in your voice.")
+
+		saynn("Your father doesn't respond immediately. He studies you in silence, his sharp gaze peeling back the layers you've tried to build around yourself. The pause stretches unbearably, heavy with unspoken judgment.")
+
+		saynn("[say=luxedad]Alright. I will see what I can do.[/say]")
+
+		saynn("He turns away slightly.. but decides to add to his words first.")
+
+		saynn("[say=luxedad]Before we go, my son..[/say]")
+
+		saynn("You glance up, feeling the weight in his tone.")
+
+		saynn("[say=luxedad]Tell me. Do you really think you weren't born by a whore?[/say]")
+
+		saynn("His words are a dagger to the gut, sharp and painful. He doesn't wait for your answer, his heavy footsteps follow him into the corridor before the door hisses shut behind him.")
+
+		saynn("The silence that follows is unbearable.")
+
+		saynn("You close your eyes again.. but there is no escape..")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
