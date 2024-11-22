@@ -304,10 +304,10 @@ func copyEverythingFrom(otherCharacter): #:BaseCharacter
 	
 	inventory.loadData(otherCharacter.getInventory().saveData().duplicate(true))
 	for item in inventory.getItems():
-		item.uniqueID = GlobalRegistry.generateUniqueID()
+		item.uniqueID = "item"+str(GlobalRegistry.generateUniqueID())
 	for itemSlot in inventory.getEquippedItems():
 		var item = inventory.getEquippedItem(itemSlot)
-		item.uniqueID = GlobalRegistry.generateUniqueID()
+		item.uniqueID = "item"+str(GlobalRegistry.generateUniqueID())
 	
 	skillsHolder.loadData(otherCharacter.skillsHolder.saveData().duplicate(true))
 	lustInterests.loadData(otherCharacter.lustInterests.saveData().duplicate(true))

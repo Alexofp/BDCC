@@ -55,7 +55,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "aisha_hugs")
 	if(state == "aisha_hugs"):
-		playAnimation(StageScene.Hugging, "hug", {pc="luxe", npc="luxewife"})
+		playAnimation(StageScene.Hug, "hug", {pc="luxe", npc="luxewife"})
 		saynn("Aisha gets up and gives you a tight hug, her paws exploring your strong back.")
 
 		saynn("[say=luxewife]So warm.. Sarcasm aside.. Glad you're okay, my love. It's a bit reckless to agree to such untested treatments, don't you think?[/say]")
@@ -272,7 +272,7 @@ func _run():
 
 		addButton("Embrace", "Hug your wife", "do_hug_new_wife")
 	if(state == "do_hug_new_wife"):
-		playAnimation(StageScene.Hugging, "kiss", {pc="luxe", npc="luxewife2"})
+		playAnimation(StageScene.Hug, "kiss", {pc="luxe", npc="luxewife2"})
 		saynn("You step closer, pulling her into a firm embrace. The glow of her body feels almost electric against yours. Your lips find hers, pressing into a slow, deep kiss.")
 
 		saynn("[say=luxe]It's not lava, Aisha. It's liquid gold. But I get why you'd think it's lava.[/say]")
@@ -605,7 +605,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "luxe_very_angry")
 	if(state == "luxe_very_angry"):
-		playAnimation(StageScene.Solo, "stand")
+		playAnimation(StageScene.Solo, "stand", {pc="luxe"})
 		saynn("The silence feels like it's crushing you, growing heavier with every breath.")
 
 		saynn("This has dragged on for long enough..")

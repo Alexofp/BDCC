@@ -33,6 +33,7 @@ func onButton(_method, _args):
 		GM.main.reRun()
 	if(_method == "mirri"):
 		if(!GM.ES.triggerReact(Trigger.TalkingToNPC, ["mirri"])):
+			getCharacter("mirri").updateBodyparts()
 			runScene("MirriTalkScene")
 	if(_method == "exitsecure"):
 		GM.pc.setLocation(GM.pc.getCellLocation())

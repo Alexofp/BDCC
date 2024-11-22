@@ -12,7 +12,7 @@ func _init():
 	}
 	
 	npcCharacterType = CharacterType.Generic
-	
+	disableSerialization = true
 	
 func _getName():
 	return "Uknown Guard"

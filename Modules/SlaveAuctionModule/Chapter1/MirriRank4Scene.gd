@@ -245,30 +245,124 @@ func _run():
 
 		saynn("He did something right at least.")
 
-		saynn("[say=luxe]When I look at Mirri.. I see everything. I see my mistakes.[/say]")
+		saynn("[say=luxe]When I look at Mirri.. I see everything. I see what I did.. I see my mistakes.[/say]")
 
 		addButton("Be supportive", "Tell Luxe that he has to try to move on", "tell_moveon")
 		addButton("Be antagonistic", "Tell Luxe that he deserves it", "tell_antag")
 	if(state == "tell_moveon"):
-		saynn("[say=pc]Luxe, you will have to accept it. What happened - it happened, you can not undo it. But you have to continue living. And Mirri is not to blame for anything, I hope you understand that.[/say]")
+		setFlag("SlaveAuctionModule.r4outcome", "support")
+		saynn("Everyone deserves a second chance.")
 
-		saynn("[say=luxe]I do.[/say]")
+		saynn("[say=pc]Luxe, you will have to accept it. What happened - happened, you can not undo it. But you have to continue living. Learn from your mistakes and continue living.[/say]")
+
+		saynn("[say=luxe]Hm.[/say]")
+
+		saynn("He averts his gaze, looking somewhere else. It's like he is still struggling internally.")
+
+		saynn("[say=pc]And Mirri is not to blame for anything, I hope you understand that.[/say]")
+
+		saynn("The wolf stays quiet for a worrying amount of time.")
+
+		saynn("[say=luxe]I do. I think I do. I know that she is not to blame.[/say]")
+
+		saynn("Maybe he is not a lost cause yet. Even though he did some very fucked-up shit..")
+
+		saynn("[say=luxe]But I have to stay strong.[/say]")
+
+		saynn("He is speaking like a true head of the family.")
+
+		saynn("[say=pc]Treating your daughter like she is your daughter isn't showing weakness, Luxe. And besides, there is strength in being weak sometimes.[/say]")
+
+		saynn("He deliberates it in his mind.. but then nods subtly.")
 
 		saynn("[say=luxe]I will try.[/say]")
 
+		saynn("[say=pc]You don't have to promise me anything. Who am I to you anyway, just a slave from an opposite faction. Promise yourself that you will be a good father, how about that?[/say]")
+
+		saynn("Giving advice to Syndicate's family's head.. You will be even more impressed about your abilities if he actually follows it.")
+
+		saynn("[say=luxe]Right. That will be it.[/say]")
+
+		saynn("You nod.. and prepare to leave.")
+
+		saynn("[say=luxe]I'm not gonna thank you.[/say]")
+
+		saynn("He stops you with his mean voice.")
+
+		saynn("[say=luxe]But I will say this. I don't regret letting you stay alive.[/say]")
+
+		saynn("That's.. a very weird kind of compliment. But you will take and run with it before he changes his mind.")
+
+		addButton("Leave", "Time to go", "some_hint")
 	if(state == "tell_antag"):
-		saynn("[say=pc]I think you deserve what happened to you. You paid the price for all the pain and suffering that you caused to other people.[/say]")
+		setFlag("SlaveAuctionModule.r4outcome", "antag")
+		saynn("What he told you.. it makes you sick just looking at him now.")
+
+		saynn("[say=pc]I think you deserve what happened to you. You just paid the price for all the pain and suffering that you caused to other people. And I think you still came up short.[/say]")
+
+		saynn("His eyes stare into your soul, it feels like.")
 
 		saynn("[say=luxe]Hm. I expected nothing more from someone like you.[/say]")
 
-		saynn("[say=pc]I have no empathy for slavers.[/say]")
+		saynn("Really? What kind of response did that fucker expect?")
+
+		saynn("[say=pc]I'm not gonna feel sorry for you. I have no empathy for such fucked-up slavers.[/say]")
 
 		saynn("[say=luxe]Look in the mirror first next time.[/say]")
 
-		saynn("[say=pc]Ugh.. Your family is a bunch of crazy fucks..[/say]")
+		saynn("What you did is nowhere close to his deeds. The guy is pure evil.")
+
+		saynn("[say=pc]Ugh.. You don't get it, yet? You and your family are a bunch of crazy fucks..[/say]")
 
 		saynn("[say=luxe]My family is the only thing that keeps me going.[/say]")
 
+		saynn("His cold stare is making your blood freeze.")
+
+		saynn("[say=luxe]And I'm trying to fix it.[/say]")
+
+		saynn("Trying? Is that what he is calling trying? Your anger is making your blood unfreeze.. it is making your blood boil instead.")
+
+		saynn("[say=pc]Well, prove it to me, fucker. Prove me that you can make things right. So far you've been only ignoring your problems, hoping they would go away. They never will on their own. So either handle them like a man or end your life like a pussy already. Maybe the world will be better without you.[/say]")
+
+		saynn("You realize that you said quite a bit.. and not all of it was entirely polite.. At least you'd die a somewhat honorable death.. after saying everything that you think about one of the Syndicate leaders to him..")
+
+		saynn("Luxe begins tapping his fingers on the desk. And, after a worrying amount of time, he nods.")
+
+		saynn("[say=luxe]You're right.[/say]")
+
+		saynn("You expected anything.. a punch to the gut.. a bullet to the head.. getting spaced.. but this is a bit of a surprise.")
+
+		saynn("[say=pc]Right? Of course I'm right. Everyone in the whole galaxy is more right than you.[/say]")
+
+		saynn("[say=luxe]I will try.[/say]")
+
+		saynn("[say=pc]Try? You don't have to promise me anything, you stupid fuck.[/say]")
+
+		saynn("[say=luxe]I know.[/say]")
+
+		saynn("Wow. You balanced on that thin, sharp edge like a pro. Somehow you're still alive.")
+
+		saynn("[say=luxe]I don't care about what you think of me. I'm not doing this for you.[/say]")
+
+		saynn("[say=pc]Good. I know which of my proposed solutions I would choose in your shoes.[/say]")
+
+		saynn("The silence is making your jaw tighten.")
+
+		saynn("[say=luxe]See you at the dinner.[/say]")
+
+		saynn("Right..")
+
+		saynn("After giving him that wake-up call.. It was time to go.. to run.")
+
+		addButton("Leave", "Time to go", "some_hint")
+	if(state == "some_hint"):
+		removeCharacter("luxe")
+		playAnimation(StageScene.Solo, "stand")
+		GM.pc.setLocation("market_near_luxe")
+		setFlag("SlaveAuctionModule.customMirriGreeting", "Welcome back. Excited for the family dinner? Help me sell more slaves and I will take you there!")
+		saynn("As the door opens to let you out, you feel that familiar breeze flowing past you. Might be because of the temperature difference. Things sure got heated in there..")
+
+		addButton("Continue", "Time to go", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):

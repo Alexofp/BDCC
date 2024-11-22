@@ -68,3 +68,15 @@ func getLootTable(_battleName):
 
 func getDefaultEquipment():
 	return ["MirriArmor", "MirriPanties"]
+
+func updateBodyparts():
+	var auctionModule = GlobalRegistry.getModule("SlaveAuctionModule")
+
+	if(auctionModule.isMirriOnPill()):
+		if(!hasPerk(Perk.StartNoHeat) || !hasPerk(Perk.StartInfertile)):
+			skillsHolder.addPerk(Perk.StartNoHeat)
+			skillsHolder.addPerk(Perk.StartInfertile)
+	else:
+		if(hasPerk(Perk.StartNoHeat) || hasPerk(Perk.StartInfertile)):
+			skillsHolder.removePerk(Perk.StartNoHeat)
+			skillsHolder.removePerk(Perk.StartInfertile)

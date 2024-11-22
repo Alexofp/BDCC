@@ -8,6 +8,7 @@ func getFlags():
 		"luxeIntroHap": flag(FlagType.Bool),
 		
 		"r2outcome": flag(FlagType.Text), # kiss nohate luxeisright silence
+		"r4outcome": flag(FlagType.Text), # support antag
 		
 		"repLevel": flag(FlagType.Number),
 		"repCredits": flag(FlagType.Number),
@@ -61,12 +62,17 @@ func _init():
 		"res://Modules/SlaveAuctionModule/Chapter1/MirriRank2Scene.gd",
 		"res://Modules/SlaveAuctionModule/Chapter1/MirriRank3Scene.gd",
 		"res://Modules/SlaveAuctionModule/Chapter1/MirriRank4Scene.gd",
+		"res://Modules/SlaveAuctionModule/Chapter1/MirriRank5Scene.gd",
 		"res://Modules/SlaveAuctionModule/Chapter1/LuxeBackstoryScene.gd",
 		]
 	characters = [
 		"res://Modules/SlaveAuctionModule/Mirri.gd",
 		"res://Modules/SlaveAuctionModule/Luxe.gd",
 		"res://Modules/SlaveAuctionModule/Chapter0/slave_guard.gd",
+		"res://Modules/SlaveAuctionModule/Chapter1/BackstoryChars/LuxeWife.gd",
+		"res://Modules/SlaveAuctionModule/Chapter1/BackstoryChars/LuxeWife2.gd",
+		"res://Modules/SlaveAuctionModule/Chapter1/BackstoryChars/LuxeDad.gd",
+		"res://Modules/SlaveAuctionModule/Chapter1/BackstoryChars/LuxeCatgirl.gd",
 	]
 	items = []
 	events = [

@@ -437,7 +437,7 @@ func _run():
 		addButton("Luxe is right", "Tell her that her father is right and she should just listen to him", "mirri_listendad")
 	if(state == "mirri_kiss_hate"):
 		setFlag("SlaveAuctionModule.r2outcome", "kiss")
-		playAnimation(StageScene.Hugging, "kiss", {npc="mirri"})
+		playAnimation(StageScene.Hug, "kiss", {npc="mirri"})
 		saynn("You close distance with Mirri, your noses almost collide..")
 
 		saynn("She admires your eyes, her lips slightly parted, her tongue licking her fangs.")
