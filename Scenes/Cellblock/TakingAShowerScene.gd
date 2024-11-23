@@ -98,10 +98,10 @@ func _run():
 			if(GM.pc.hasVagina()):
 				saynn("As you reach further downwards with your other hand, you begin to tease the outer lips of your wet snatch, giving it a rub over and a grazing with your fingers")
 			saynn("Your {pc.cock} hardens enough for you start stroking away at it.")
-			saynn("Even as you work on bringing yourself off there isnt a whole lot to do besides feel the slightly cold water dance down your body.")
+			saynn("Even as you work on bringing yourself off there isn't a whole lot to do besides feel the slightly cold water dance down your body.")
 			saynn("As such, you put no effort into hiding yourself or the noises you're making. Calmly huffing and panting as your feel and stroke your hand over the places you know arouse you the best, making drowned out wet schlicks as you go.")
-			saynn("Time passes but you dont really keep track, putting your hand against the wall in front of you and spreading your legs a bit to really start going at it. Not caring to suppress the new moans you make.")
-			saynn("A quick look up to see if youre gonna get caught and it seems like no one has bothered or just doesn't care.")
+			saynn("Time passes but you don't really keep track, putting your hand against the wall in front of you and spreading your legs a bit to really start going at it. Not caring to suppress the new moans you make.")
+			saynn("A quick look up to see if you're gonna get caught and it seems like no one has bothered or just doesn't care.")
 			saynn("Uneventful, Maybe you should head out into the main hall if you want some attention...")
 			saynn("The building feeling of an orgasm welling up inside you distracts from your idle thoughts, and you get a really lecherous idea in your head. Your {pc.cock} pulses in your hands and you have just enough time to turn around and put your back to wall to keep you from slipping...")
 		else:
@@ -111,7 +111,7 @@ func _run():
 			if(GM.pc.hasVagina()):
 				saynn("Even as you try and hide yourself away you spread your thighs a bit and give your {pc.vagina} a quick tease giving it a shallow graze with your other hand.")
 			saynn("As your {pc.cock} hardens and you start stroking it's length, you try and stifle the sounds you make as best as you can.")
-			saynn("You inadvertenly keep looking around as you try and spot any prying eyes and listen for the sounds of approaching people.")
+			saynn("You inadvertently keep looking around as you try and spot any prying eyes and listen for the sounds of approaching people.")
 			saynn("It feels like time passes slower as you stay alert, it takes forever to get up to a good pace. Seeing as your still in the clear. You simply just put your head down between your arms and try and focus on finishing as fast as possible.")
 			saynn("Getting closer to your release you become more paranoid someone is gonna spot you, you try and speed up the process by focusing on the spots you know your {pc.cock} has.")
 			saynn("You welcome the continuing build-up of an orgasm, you're going to cum soon enough...")
@@ -122,9 +122,9 @@ func _run():
 		
 		if(GM.pc.hasPerk(Perk.NakedNoShame)):
 			saynn("You shut your eyes as the shower water sprays the back of your head. Having turned around you aim your impending cumshot from your little shower area and out into the open.")
-			saynn("One more stroke along your cock and you feel yourself finally give, shooting a nice load in a vauge direction out into the open. But you just continue stroking away, milking as much as you can from your balls.")
+			saynn("One more stroke along your cock and you feel yourself finally give, shooting a nice load in a vague direction out into the open. But you just continue stroking away, milking as much as you can from your balls.")
 			if(GM.pc.hasVagina()):
-				saynn("Your negelected vagina follows in tandem, coating your inner thighs in girlcum as they squeeze against nothing.")
+				saynn("Your neglected vagina follows in tandem, coating your inner thighs in girlcum as they squeeze against nothing.")
 			saynn("As your orgasm passes you open your eyes once more. Bracing an arm against the wall as you peel yourself off it on weak legs.")
 			saynn("Looking down to find you left a good string of cum on the tile floor, and the echo of voices at the far end of the showers seeing something. It might be best to leave now.")
 			if(GM.pc.isVisiblyPregnant()):
@@ -157,7 +157,7 @@ func _run():
 			saynn("Flipping the switch the pump gets to work with a little hum.")
 			saynn("Not wanting to waste the opportunity you turn the water back on and just relax in the bliss of having your {pc.cock} pumped while in the shower.")
 			if(GM.pc.hasVagina()):
-				saynn("Not wanting to leave your {pc.vagina} behind you reach under your balls and begin to just idly thumb over your clitorus and finger your sex.")
+				saynn("Not wanting to leave your {pc.vagina} behind you reach under your balls and begin to just idly thumb over your clitoris and finger your sex.")
 			saynn("You let the pump do it's work as your cock twitches an throbs against the masturbation ring, loudly moaning it each time it runs over your dick.")
 			saynn("The shower definitely helps you relax as you have a dumb smile on your face with your back against the wall.")
 			saynn("Eventually you feel your orgasm well up within you...")
@@ -193,7 +193,7 @@ func _run():
 			if(GM.pc.hasVagina()):
 				saynn("Girlcum leaks onto your inner thighs as your unused vagina follows with it's own orgasm.")
 			saynn("You waste no time in getting the pump off your cock with a wet, lewd squelch. The last of your cum dripping from the tip of your dick in one long strand down your legs, and another still hanging from your tip to the pump.")
-			saynn("Hurridly, you clean all evidence from you and the pump. Wrapping it in a towel as you make your getaway.")
+			saynn("Hurriedly, you clean all evidence from you and the pump. Wrapping it in a towel as you make your getaway.")
 		
 		addButton("Finished", "Just finish up and leave.", "endthescene")
 
@@ -210,10 +210,10 @@ func _run():
 				saynn("Your offhand follows your other one down giving your locked away {pc.cock} a tease.")
 			elif(GM.pc.hasReachablePenis()):
 				saynn("Your offhand follows your other one down giving your growing {pc.cock} a tease.")
-			saynn("You dont waste effort hiding your huffing and moaning as you work. Getting your fingers deep as they will go and blindly feeling around.")
+			saynn("You don't waste effort hiding your huffing and moaning as you work. Getting your fingers deep as they will go and blindly feeling around.")
 			saynn("Satisfied with teasing you move onto rubbing the spots you know the best with your fingers while giving your clit a rub with the other hand.")
-			saynn("Even as you work on bringing yourself off there isnt a whole lot to do besides feel the slightly cold water dance down your body.")
-			saynn("Time passes but you dont really keep track, putting your hand against the wall in front of you and spreading your legs a bit to really start going at it. Not caring to suppress the new moans you make.")
+			saynn("Even as you work on bringing yourself off there isn't a whole lot to do besides feel the slightly cold water dance down your body.")
+			saynn("Time passes but you don't really keep track, putting your hand against the wall in front of you and spreading your legs a bit to really start going at it. Not caring to suppress the new moans you make.")
 			saynn("Everything continues uneventfully, maybe you should head out into the main hall if you want some attention...")
 			saynn("The building feeling of an orgasm welling up inside you distracts from your idle thoughts, and in preparation you turn your back and lean against the shower wall...")
 		else:
@@ -249,11 +249,11 @@ func _run():
 			elif(GM.pc.hasReachablePenis()):
 				saynn("Despite trying to hide yourself and control where you cum, Your {pc.cock} sprays a few cumshots against the floor and wall. Thankfully to get all get washed away from the falling water.")
 			if(GM.pc.isVisiblyPregnant()):
-				saynn("Your hand goes your heavy and pregnant belly to support your self as you recover from your ordeal, satitisfied.")
+				saynn("Your hand goes your heavy and pregnant belly to support your self as you recover from your ordeal, satisfied.")
 			saynn("You hurridly wash all the evidence from your body and calm down so you can act normal heading back to grab a towel and your stuff.")
 		addButton("Finished", "Time to go", "endthescene")
 
-#Is now a bad time to say im not into most of solo-anal or anal fingering and dont really know how write it?
+#Is now a bad time to say im not into most of solo-anal or anal fingering and don't really know how write it?
 
 	if(state == "masturbate_anal"):
 		playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
@@ -268,7 +268,7 @@ func _run():
 				saynn("Reaching deep, you always know a safe bet to get off. Trying to find where your prostate is you tease your other genitals, reaching your other hand into your vagina to see if you can find it from that hole as well...")
 				saynn("Eventually you do find your g-spot and you start fingering away at it, your {pc.cock} responding by instantly getting hard and drooling cum from it's tip as you continue.")
 				saynn("The added fingers in your {pc.vaginaStretch} pussy help you get off way sooner than maybe you were expecting...")
-				saynn("You dont care if anyone hears the noises you make.")
+				saynn("You don't care if anyone hears the noises you make.")
 			#Penis Only
 			if(!GM.pc.hasVagina() && GM.pc.hasPenis()):
 				saynn("One hand reaches down over your {pc.cock} giving it a tease while the other starts poking around your {pc.analStretch} ass. Giving it a good feel before starting to finger at some of the spots you know best...")
@@ -277,13 +277,13 @@ func _run():
 				saynn("Reaching deep, you always know a safe bet to get off. Trying to find where your prostate is you idly start to fondle your penis as well.")
 				saynn("Eventually you do find your g-spot and you start fingering away at it, your {pc.cock} responding by instantly getting hard and drooling cum from it's tip as you continue.")
 				saynn("Finding where your prostate is you add more fingers to the mix, trying to get off on anal alone.")
-				saynn("You dont care if anyone hears the noises you make.")
+				saynn("You don't care if anyone hears the noises you make.")
 				saynn("A few minutes of this you feel your cock throb in an approaching orgasm...")
 			#Vagina Only
 			if(GM.pc.hasVagina() && !GM.pc.hasPenis()):
 				saynn("As you reach behind to poke around your {pc.analStretch} ass, you use your other hand to idly thumb away at your clit to help get more into it.")
 				saynn("Reaching deep, you always know a safe bet to get off. Trying to find where your g-spot is, your {pc.vaginaStretch} starts leaking down your thighs. Closing your eyes while feeling the water hit your body while you toy with both of your holes")
-				saynn("You dont care if anyone hears the noises you make.")
+				saynn("You don't care if anyone hears the noises you make.")
 				saynn("Lying there for a few minutes, you feel your orgasm coming up...")
 			#Null
 			if(!GM.pc.hasVagina() && !GM.pc.hasPenis()):
@@ -450,7 +450,7 @@ func _run():
 				saynn("Riding out your prolonged orgasm, your {pc.cock} gives off a few shots of cum to land against the floor")
 			if(GM.pc.hasVagina()):
 				saynn("Your under-stimulated vagina finally reaches it's peak and it coats your inner thighs in girlcum")
-			saynn("By the time you finish with your climax your breasts have been milked throughly.")
+			saynn("By the time you finish with your climax your breasts have been milked thoroughly.")
 			saynn("Peeling yourself off the wall, you wash everything up once again and go to grab a towel and get your stuff.")
 		else:
 			saynn("In response you have to bite your tongue out a deep moan and squeeze your full breasts as hard as you can, letting strong projectile streams of milk spray from your {pc.breasts}")
@@ -460,7 +460,7 @@ func _run():
 				saynn("Riding out your prolonged orgasm, your {pc.cock} gives off a few shots of cum to land against the floor")
 			if(GM.pc.hasVagina()):
 				saynn("Your under-stimulated vagina finally reaches it's peak and it coats your inner thighs in girlcum")
-			saynn("By the time you finish with your climax your breasts have been milked throughly.")
+			saynn("By the time you finish with your climax your breasts have been milked thoroughly.")
 			saynn("Peeling yourself off the wall, you wash everything up once again and go to grab a towel and get your stuff.")
 		
 		addButton("Finish", "Time to go.", "endthescene")
