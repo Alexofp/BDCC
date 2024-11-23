@@ -175,7 +175,7 @@ func reactRestraint(restraintType, restraintAmount, isGettingForced):
 		if(restraintAmount > 2 && RNG.chance(30)):
 			return RNG.pick([
 				"This is a little too much",
-				"Quit ressisting and accept your fate",
+				"Quit resisting and accept your fate",
 				"Uh.. wanna talk it out?",
 			])
 		

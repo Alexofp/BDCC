@@ -23,7 +23,7 @@ func _run():
 			if(GM.main.getFlag("Player_Crime_Type") == Flag.Crime_Type.Murder):
 				badThingName = "was imprisoned for the crime of murder"
 			if(GM.main.getFlag("Player_Crime_Type") == Flag.Crime_Type.Prostitution):
-				badThingName = "was imprisoned for the crime of prositution"
+				badThingName = "was imprisoned for the crime of prostitution"
 			saynn(GM.pc.getName() +" is "+genderSTR+" "+GM.pc.getSpeciesFullName() + " that "+badThingName+". Sentence length is indefinite")
 		
 		sayn("[b]Personal information:[/b]")

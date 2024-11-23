@@ -132,7 +132,7 @@ func reactRestraint(restraintType, restraintAmount, isGettingForced):
 		if(restraintType == RestraintType.Gag):
 			return RNG.pick([
 				"Hah. So that's how it feels.",
-				"My ways of controling others goes beyond just words.",
+				"My ways of controlling others goes beyond just words.",
 			])
 		if(restraintType == RestraintType.Muzzle):
 			return RNG.pick([

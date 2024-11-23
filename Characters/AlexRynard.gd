@@ -81,7 +81,7 @@ func interestVerbalReaction(interest):
 	if(interest == InterestTopic.LoosePussy):
 		return "What makes you fuck so much. Go fix your libido."
 	if(interest == InterestTopic.LooseAnus):
-		return "I don't need to see your destoyed ass."
+		return "I don't need to see your destroyed ass."
 	if(interest == InterestTopic.BDSMRestraints):
 		return "Bondage rigging is my biggest pleasure. I will leave breeding to others."
 	if(interest == InterestTopic.AndroBody):
