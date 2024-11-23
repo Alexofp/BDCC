@@ -686,7 +686,7 @@ func loadFromDatapackCharacter(_datapack:Datapack, _datapackChar:DatapackCharact
 					if(foundData != null):
 						npcDefaultEquipment.append({id=equipItemData["id"], datapackdata=foundData})
 					else:
-						npcDefaultEquipment.append(equipItemData["id"]) # Gets requipped if the character loses it after a while
+						npcDefaultEquipment.append(equipItemData["id"]) # Gets reequipped if the character loses it after a while
 				
 				if(foundData != null):
 					for dataID in foundData:

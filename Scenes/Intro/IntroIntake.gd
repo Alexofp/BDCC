@@ -108,7 +108,7 @@ func _run():
 		
 		saynn("[say=captain]Get used to it[/say]")
 		
-		saynn("Seeing that there is no other choice, you approach the bin and begin undressing. You expose your chest and then your legs, of course covering yourself when you’re done. The guard in particular seems to be hungirly watching your body but the officer just mostly smirks at your blush. He then points at the airlock")
+		saynn("Seeing that there is no other choice, you approach the bin and begin undressing. You expose your chest and then your legs, of course covering yourself when you’re done. The guard in particular seems to be hungrily watching your body but the officer just mostly smirks at your blush. He then points at the airlock")
 		
 		saynn("[say=captain]Go inside, every inmate needs to be washed[/say]")
 		

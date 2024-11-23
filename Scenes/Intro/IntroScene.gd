@@ -27,7 +27,7 @@ func _run():
 
 	if(state == "take_a_sit"):
 		aimCamera("intro_interogation")
-		setLocationName("Interogation room")
+		setLocationName("Interrogation room")
 		playAnimation(StageScene.Solo, "sit")
 		
 		saynn("You sit on the second chair, the one that is further from the only exit. You take a better look at the guy. He is clearly a wolf, quite tall, in his forties, gray fur, black pants and a white t-shirt.")
@@ -40,7 +40,7 @@ func _run():
 
 		saynn("Jake grabs a tablet-looking device from his belt and starts interacting with the holo-screen, sending a few bright particles flying with each swipe that he does. You interlock your fingers, unsure how to react.")
 
-		saynn("[say=intro_detective]Strange, we couldn’t find your dna-print in the database. Tell me your name. I will also need your sex, race and a few more things, shouldn’t take too long.[/say]")
+		saynn("[say=intro_detective]Strange, we couldn’t find your DNA-print in the database. Tell me your name. I will also need your sex, race and a few more things, shouldn’t take too long.[/say]")
 
 		addButton("Continue", "Enter your name", "askforname")
 
@@ -79,7 +79,7 @@ func _run():
 
 		saynn("The guy shifts even closer to you, the room starts to feel even smaller than it was, you’re cornered. Jake’s tone shifts to a more intimidating one.")
 
-		saynn("[say=intro_detective]That’s what I was gonna ask you. You failed the procedure. Recently, you commited a crime, {pc.name}.[/say]")
+		saynn("[say=intro_detective]That’s what I was gonna ask you. You failed the procedure. Recently, you committed a crime, {pc.name}.[/say]")
 
 		saynn("[b]You’re being confronted[/b]")
 
@@ -262,7 +262,7 @@ func _run():
 		if(getFlag("Player_Crime_Type") == Flag.Crime_Type.Innocent):
 			saynn("[say=intro_detective]The lack of evidence was deemed not important enough to stop the hearings.[/say]")
 		elif(getFlag("Player_Crime_Type") == Flag.Crime_Type.Prostitution):
-			saynn("[say=intro_detective]Even though paid erotic or sexual services are allowed, by not properly disclosing that you commited tax fraud and put the lives of others in danger.[/say]")
+			saynn("[say=intro_detective]Even though paid erotic or sexual services are allowed, by not properly disclosing that you committed tax fraud and put the lives of others in danger.[/say]")
 		else:
 			saynn("[say=intro_detective]Your crimes were committed with malicious intent, your testimony showed you as a very tainted person.[/say]")
 
@@ -377,7 +377,7 @@ func _react_scene_end(_tag, _result):
 		setState("donecreating")
 
 func getDevCommentary():
-	return "Heya, today is the 16th of May, 2023, the day that I (Rahi) added support for developer commentary ^^\n\nThis might be the first one you read.. or not.. depends on if you started a new game after turning that option on. But I will try to make these readable out of order so no worries ^^.\n\nWhy did I add this? Isn't this a waste of my time? Isn't this a waste of your time? I dunno, I just felt like adding this.. I like to ramble sometimes and, since my game brings up lots of topics, dark or not, there is a lot to talk about ^^\n\nWill this waste my time and keep you from getting more content? Ideally it shouldn't. Here is a spoiler for you, I only work on my game for a few hours a day x3, usually about 3-4 hours. So like, finishing the work day and then just spilling my thoughts out into the commentary of some scene could be a nice way to.. stay balanced.. I dunno.\n\nI just wanna.. explain some of my choices in these, you know? So expect spoilers in these, lots of them x3\n\nBut yeah. Fun fact, this whole scene was actually rewritten just before I posted the first public version. It was worse before, trust me x3.\n\nI watched a lot of JCS - Criminal Psychology videos on youtube back then and I kinda wanted the game to start with you getting interogated by seemingly a kind/understanding cop that then suddenly turns into a 'bad cop'. I think it's a good way to introduce the players to this dark world.. get them immersed.. or something."
+	return "Heya, today is the 16th of May, 2023, the day that I (Rahi) added support for developer commentary ^^\n\nThis might be the first one you read.. or not.. depends on if you started a new game after turning that option on. But I will try to make these readable out of order so no worries ^^.\n\nWhy did I add this? Isn't this a waste of my time? Isn't this a waste of your time? I dunno, I just felt like adding this.. I like to ramble sometimes and, since my game brings up lots of topics, dark or not, there is a lot to talk about ^^\n\nWill this waste my time and keep you from getting more content? Ideally it shouldn't. Here is a spoiler for you, I only work on my game for a few hours a day x3, usually about 3-4 hours. So like, finishing the work day and then just spilling my thoughts out into the commentary of some scene could be a nice way to.. stay balanced.. I dunno.\n\nI just wanna.. explain some of my choices in these, you know? So expect spoilers in these, lots of them x3\n\nBut yeah. Fun fact, this whole scene was actually rewritten just before I posted the first public version. It was worse before, trust me x3.\n\nI watched a lot of JCS - Criminal Psychology videos on youtube back then and I kinda wanted the game to start with you getting interrogated by seemingly a kind/understanding cop that then suddenly turns into a 'bad cop'. I think it's a good way to introduce the players to this dark world.. get them immersed.. or something."
 
 func hasDevCommentary():
 	return true
