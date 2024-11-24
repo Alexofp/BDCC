@@ -9,6 +9,7 @@ func getFlags():
 		
 		"r2outcome": flag(FlagType.Text), # kiss nohate luxeisright silence
 		"r4outcome": flag(FlagType.Text), # support antag
+		"r5outcome": flag(FlagType.Text), # mirri luxe
 		
 		"repLevel": flag(FlagType.Number),
 		"repCredits": flag(FlagType.Number),

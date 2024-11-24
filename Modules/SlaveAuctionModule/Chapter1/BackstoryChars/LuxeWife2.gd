@@ -60,6 +60,7 @@ func getDefaultEquipment():
 	return [{
 		id = "Leotard",
 		data = {
-			clothesColor = Color(0.1, 0.1, 0.1),
+			clothesColor = "222222",
+			amount = 1,
 		},
 	}]

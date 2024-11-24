@@ -41,7 +41,7 @@ func _run():
 
 		saynn("[say=pc]So you'd be the first?[/say]")
 
-		saynn("[say=mirri]Well, not ever. Rank 6 slavers exist, but it's like.. impossible to maintain. The requirements are crazy, most people burn out trying.[/say]")
+		saynn("[say=mirri]Well, not ever. Rank 6 slavers have existed, but it's like.. impossible to maintain. The requirements are crazy, most people burn out trying.[/say]")
 
 		saynn("Sometimes you forget that you're talking about leaderboards for people traders.")
 
@@ -78,47 +78,72 @@ func _run():
 		addCharacter("luxe")
 		playAnimation(StageScene.Duo, "stand", {npc="luxe"})
 		aimCameraAndSetLocName("market_luxe")
-		saynn("You follow Mirri and Luxe back into his office.")
+		saynn("You trail behind Mirri and Luxe as they make their way to his office.")
 
-		saynn("Things have changed, for sure. The desk was pushed out of the way. In its place.. a long wooden table surrounded by Luxe's throne and a few chairs. On a table.. some actual food.. wow. Is that chicken? Meat stakes? Even the salads look so tasty after whatever you got used to eating. You can't stop yourself from drooling already.")
+		saynn("Things have definitely changed. Luxe's desk that once dominated the space has been pushed aside. In its place is a long wooden table, surrounded by Luxe's throne at one end and several modest chairs around. But the real surprise is what's on the table.")
 
-		saynn("[say=mirri]Wow, did you cook all of that?[/say]")
+		saynn("Food. Real food.")
 
-		saynn("[say=luxe]I.. uh.. I tried. Got a little heated and burned a few things.[/say]")
+		saynn("Your stomach growls at the sight: a juicy-looking roasted chicken.. thick stacks oozing with flavor.. fresh, vibrant salads that look more edible than anything you've seen in ages. You blink in disbelief, already salivating. Maybe being a Syndicate slaver isn't that bad..")
 
-		saynn("Now that the hunger stops clouding your vision.. you do notice quite a few burn marks.. but man.. you'd eat it all anyway.")
+		saynn("[say=mirri]Wow, did you actually cook all this?[/say]")
 
-		saynn("[say=mirri]I appreciate the efforts, dad![/say]")
+		saynn("Mirri's tone is skeptical but also intrigued. Luxe shifts slightly, almost looking sheepish, a rare sight.")
 
-		saynn("[say=luxe]Yeah.. you are welcome. Let's not let it all get cold and begin.[/say]")
+		saynn("[say=luxe]I.. uh.. I gave it a shot. Things got a little heated and I did burn a few things.[/say]")
+
+		saynn("Now that your initial hunger isn't clouding your vision, you notice the details.. burn marks on a couple of edges, a slightly bitter aroma hanging in the air. But, honestly, you'd still devour it all..")
+
+		saynn("[say=mirri]Well, I think it's sweet. Thanks for the effort, dad![/say]")
+
+		saynn("Mirri plops into a chair, grabbing a fork with the enthusiasm of someone who hasn't eaten anything decent in weeks. Luxe clears his throat, gesturing for you to sit as well.")
+
+		saynn("[say=luxe]Yeah.. you are welcome. Let's begin before it gets cold.[/say]")
 
 		addButton("Sit", "Begin feasting!", "begin_feast")
 	if(state == "begin_feast"):
-		saynn("[say=mirri]Why did you only invite us, dad?[/say]")
+		playAnimation(StageScene.PawJobUnderTable, "start", {pc="luxe", npc="mirri"})
+		saynn("You take a seat.. and waste no time, digging into that juicy-looking food, the aroma already making your head swim. And it all tastes even better than it looks.. just incredible.. marvelous..")
 
-		saynn("[say=luxe]Well, everyone is busy. Missions and such.[/say]")
+		saynn("[say=mirri]So.. why just us? Why not make it a proper gathering?[/say]")
+
+		saynn("[say=luxe]We wouldn't all fit in a single room, you know that.[/say]")
+
+		saynn("They do seem to be quite.. breeding-happy.. at least they used to be.")
+
+		saynn("[say=luxe]And, well, everyone is busy. Missions and such.[/say]")
+
+		saynn("You only catch their dialogue with a corner of your ear, pretty much your full attention is devoted to these treats of god.. You get horny just from biting into that juicy chicken.")
 
 		saynn("[say=mirri]Oh yeah? I feel like there is something else.[/say]")
 
-		saynn("[say=luxe]I just.. wanted to spend some time with you. Is that bad?[/say]")
+		saynn("Luxe's shoulders are stiffening slightly.")
+
+		saynn("[say=luxe]I just.. wanted to spend some time with you. Don't think that's a bad thing.[/say]")
 
 		saynn("[say=mirri]Of course not! You know, I say that I hate you sometimes. But I do like spending time with you. Wish we could do that more.[/say]")
 
-		saynn("[say=luxe]Let's enjoy this current moment then.[/say]")
+		saynn("[say=luxe]Let's enjoy this current moment then. And see where we will go from there.[/say]")
 
 		saynn("[say=mirri]Yeah, exactly. How are you doing, dad?[/say]")
 
 		saynn("[say=luxe]I'm.. okay.[/say]")
 
-		saynn("[say=mirri]Just okay? C'mon![/say]")
+		saynn("[say=mirri]Just okay? C'mon! I'm a curious cat, I'm allowed to pry a little.[/say]")
 
-		saynn("[say=luxe]Being a father is a lot of work. I have to be a father and a Syndicate leader. I'm okay, Mirri. You don't want to hear the ramblings of an old man.[/say]")
+		saynn("Luxe leans back in his chair, his gaze directed somewhere into the distance.. before settling on Mirri.")
+
+		saynn("[say=luxe]Being a father.. and one of the Syndicate's leaders.. It's a lot for an old man. That's all.[/say]")
 
 		saynn("[say=mirri]You're not that old.[/say]")
 
-		saynn("[say=luxe]I am pretty old, Mirri.[/say]")
+		saynn("The more they talk, the more food they will leave for you on the table! This was a perfect plan from the beginning.")
 
-		saynn("[say=mirri]Nu huh, you look great. I bet you'd find yourself a million new wifes if you wanted to. Why don't you?[/say]")
+		saynn("[say=luxe]I am pretty old, Mirri. And only getting older. Years weren't kind to me.[/say]")
+
+		saynn("[say=mirri]Nu huh, you look great. I bet you'd find yourself a million new wifes if you wanted to. By the way, why don't you?[/say]")
+
+		saynn("The air in the room shifts slightly, Luxe's expression tightens, his voice lowering.")
 
 		saynn("[say=luxe]I just.. don't want to.[/say]")
 
@@ -126,27 +151,41 @@ func _run():
 
 		saynn("[say=luxe]I have no desire to find another woman, Mirri.[/say]")
 
+		saynn("Mirri's eyes study him for a moment.. until she decides to push further.")
+
 		saynn("[say=mirri]But why not?[/say]")
 
-		saynn("[say=luxe]I guess I got.. burned on it.[/say]")
+		saynn("[say=luxe]Okay. I got.. burned on it.[/say]")
 
-		saynn("He realizes the awful pun that came out of his mouth way too late and just cringes, his eyes closed.")
+		saynn("The pun lands poorly, and Luxe visibly cringes at his own words, his eyes closing briefly.")
 
 		saynn("[say=mirri]Aw. Sorry.[/say]")
 
-		saynn("[say=luxe]Yeah. I'd rather not talk about it.[/say]")
+		saynn("[say=luxe]It's fine. I'd rather not talk about it.[/say]")
 
 		saynn("He had no problems telling you that story.. but.. at the same time.. it's not exactly the best family dinner story.")
 
-		saynn("[say=mirri]Do you want to ask me something, maybe?[/say]")
+		saynn("[say=mirri]Okay. Then how about me? Do you want to ask me something, maybe?[/say]")
+
+		saynn("Luxe hums softly.")
 
 		saynn("[say=luxe]Well.. how are you doing, Mirri?[/say]")
 
-		saynn("[say=mirri]Oh, I'm doing well! This puppy here has helped me so much with my mission. I'm really glad that I decided against selling {pc.him}! {pc.He} {pc.isAre} helping with my mood too![/say]")
+		saynn("Mirri brightens immediately.")
 
-		saynn("[say=luxe]I'm glad. Guess.. you still don't want to share the coords? Other Blacktail family members can help you.[/say]")
+		saynn("[say=mirri]Oh, I'm doing well! This puppy here..[/say]")
 
-		saynn("[say=mirri]Are you really still asking that? No.[/say]")
+		saynn("She gestures at you with a sly grin.. while your mouth is full of tasty as fuck servings.")
+
+		saynn("[say=mirri]..has helped me so much with my mission. I'm really glad that I decided against selling {pc.him}! {pc.He} {pc.isAre} helping with my mood too![/say]")
+
+		saynn("Luxe nods slowly, his gaze flickering to you, then back to Mirri.")
+
+		saynn("[say=luxe]I'm glad. Still.. you're not willing to share those coordinates, are you? Other family members could help with your mission.[/say]")
+
+		saynn("Mirri's smile fades, replaced by a stubborn frown.")
+
+		saynn("[say=mirri]Dad. We've been over this. The answer is no.[/say]")
 
 		saynn("[say=luxe]Just in case.[/say]")
 
@@ -154,51 +193,69 @@ func _run():
 
 		saynn("[say=luxe]Teamwork is a good thing.[/say]")
 
-		saynn("[say=mirri]Yeah, I know. But I wanna prove myself, you know? Others would just get in the way and steal the glory.[/say]")
+		saynn("[say=mirri]Yeah, I know. But I wanna prove myself, you know? Besides, others would just get in the way.. or worse, steal my glory.[/say]")
 
-		saynn("Luxe stares at you, his silent gaze lingering on your features for way too long.")
+		saynn("Luxe doesn't respond right away, his piercing gaze lingering on you longer than feels comfortable. Then, as if remembering something, he nods slightly.")
 
-		saynn("[say=mirri]I'm rank 5 slaver now, by the way![/say]")
+		saynn("[say=mirri]I'm rank 5 slaver now, by the way! Officially![/say]")
 
 		saynn("[say=luxe]That's.. an impressive feat. Good job. Reminds me of my youth.[/say]")
 
-		saynn("[say=mirri]Good job? Did you just say good job? Holy..[/say]")
+		saynn("Mirri blinks, momentarily stunned.")
+
+		saynn("[say=mirri]Did you just say.. good job? Holy..[/say]")
 
 		saynn("[say=luxe]Mirri..[/say]")
 
-		saynn("[say=mirri]Mirri? Am I just Mirri to you?[/say]")
+		saynn("[say=mirri]No, no, let me savor this moment. I fucking earned that good job.[/say]")
 
 		saynn("[say=luxe]Mirri.[/say]")
 
-		saynn("[say=mirri]My ba-a-ad. Syndicate wasn't built in a day.[/say]")
+		saynn("[say=mirri]My ba-a-ad. I will shut up..[/say]")
+
+		saynn("They both continue eating their meals, the nagging silence settling in.. until Luxe decides to break it.")
 
 		saynn("[say=luxe]Guess I have to.. prepare a gift for you. I'm afraid that I don't know you enough to pick a good one, Mirri.[/say]")
 
-		saynn("[say=mirri]Ohh.. I think I know something.. I doubt you will approve it though..[/say]")
+		saynn("Mirri's ears perk, her eyes shine brightly.")
+
+		saynn("[say=mirri]Oh, really? I think I know something.. I doubt you will approve it though..[/say]")
 
 		saynn("[say=luxe]Hm? Why not, shoot.[/say]")
 
-		saynn("[say=mirri]How about.. a promise that I will be the next head of Blacktail! You can start training me already about how I should handle things..[/say]")
+		saynn("[say=mirri]How about.. a promise? That I will be the next head of Blacktail. You can start training me now, get me ready for the role.[/say]")
+
+		saynn("Luxe leans forward and coughs, Mirri's words catching him off-guard.")
 
 		saynn("[say=luxe]Hh..[/say]")
 
 		saynn("[say=mirri]At rank 6.. I will be the best slaver in the galaxy.. so like.. you know.. I kinda deserve it, right?[/say]")
 
-		saynn("[say=luxe]I don't know, Mirri. It's a lot. A weak person would just crumble under the amount of responsibility and hard decisions.[/say]")
+		saynn("Luxe's expression darkens slightly.")
+
+		saynn("[say=luxe]That's a lot to ask, Mirri. A weak person would crumble under that responsibility.[/say]")
 
 		saynn("[say=mirri]I'm not weak! And.. wasn't that how your father chose you? Because you were the best?[/say]")
+
+		saynn("Luxe raises a brow, his gaze extremely serious and cold.")
 
 		saynn("[say=luxe]How do you know that?[/say]")
 
 		saynn("[say=mirri]Uh.. I have access to.. old records you know? My laptop is all the entertainment that I get..[/say]")
 
+		saynn("Luxe's expression hardens even more.")
+
 		saynn("[say=mirri]Used to get. I had a lot of time to browse through the history of all the slavers. It's very fascinating stuff, you know?[/say]")
 
-		saynn("[say=luxe]Mirri, I told you, it's too much for someone like you. And besides, this family doesn't need a new head and won't need it for a while.[/say]")
+		saynn("[say=luxe]You're not ready. And besides, this family doesn't need a new head anytime soon.[/say]")
 
 		saynn("[say=mirri]You said that you're old though! It's your words.[/say]")
 
+		saynn("Wolf's fur bristles slightly, his eyes narrowing.")
+
 		saynn("[say=luxe]My body is.[/say]")
+
+		saynn("Mirri squints, her tone shifting.")
 
 		saynn("[say=mirri]Be honest. Is that because of how I look?[/say]")
 
@@ -206,15 +263,25 @@ func _run():
 
 		saynn("[say=mirri]Well, look at me. I'm a weird hybrid. I dress like a slut, look like a slut, sometimes act like a slut.. I don't have a cock, bulging out muscles and my tail isn't even black. That's why I don't fit for that role?[/say]")
 
+		saynn("She is not wrong.")
+
 		saynn("[say=luxe]How you look doesn't have anything to do with it.[/say]")
 
-		saynn("[say=mirri]Well what is it then?! Tell me already, stop being vague with me. I'm not a dumb little girl, I can take it.[/say]")
+		saynn("Right.. Even you, a person who is still busy with biting, chewing and swallowing.. see that something fishy is going on here.")
+
+		saynn("[say=mirri]Well what is it then?! Stop being vague with me. I'm not a dumb little girl, I can take it.[/say]")
 
 		saynn("[say=luxe]No, Mirri, don't ruin this dinner.[/say]")
 
-		saynn("[say=mirri]I don't care about this dinner. I need you to recognize me, dad. I need you to accept me, please. I'm yours. I'm your daughter. Can you give me that at least?[/say]")
+		saynn("Things are getting heated..")
+
+		saynn("[say=mirri]I don't care about this dinner. I'm your daughter and you still refuse to call me so. I'm gonna be the best slaver and you ignored my accomplishments for so long. It hurts, you know..[/say]")
 
 		saynn("[say=luxe]It's not so easy, Mirri.[/say]")
+
+		saynn("Luxe is trying to stay calm and measured, you can see his hands slowly clenching into fists though..")
+
+		saynn("Mirri stands up and leans towards her father, her verbal onslaught only getting more intense.. almost makes you stop eating..")
 
 		saynn("[say=mirri]Mirri.. Mirri.. I fucking hate you, dad. I'm your daughter! I'm done playing games with you. I'm done trying to pretend that this is okay. I'm better than this. You're better than this.[/say]")
 
@@ -224,34 +291,107 @@ func _run():
 
 		saynn("[say=luxe]I'm fucking trying, okay? Stop being so fucking annoying.[/say]")
 
+		saynn("It gets warm in here.. but you still continue to eat as much delicious food as you can before they tear each other's throats.")
+
 		saynn("[say=mirri]Finally, I guess I'm getting to the real Luxe now. I'm just annoying, is that it? I should shut the fuck up, dad?[/say]")
 
 		saynn("[say=luxe]Right now, yes. Shut your mouth and listen. I'm trying to build trust between us and you're already destroying it.[/say]")
+
+		saynn("Luxe's fur lights up, the tips dancing and swaying. But Mirri just keeps going at it..")
 
 		saynn("[say=mirri]Oh, so it's all my fault, is it? Maybe you should recognize your daughter before wanting to build trust with her? Maybe you should stop being so fucking silent and vague all the time. Maybe you should acknowledge my successes rather than dismiss them?[/say]")
 
 		saynn("[say=luxe]I said good job. It will take time, Mirri..[/say]")
 
-		saynn("[say=mirri]A single good job is gonna to fix the years of ignoring me, yeah sure. Way to go, dad. Way to fucking go.[/say]")
+		saynn("[say=mirri]A single good job is gonna fix the years of ignoring me, yeah sure. Way to go, dad. Way to fucking go.[/say]")
 
-		saynn("[say=mirri]Do you need help with that, dad?[/say]")
+		addButton("Continue", "See what happens next", "luxe_feels_bad")
+	if(state == "luxe_feels_bad"):
+		playAnimation(StageScene.Duo, "stand", {pc="mirri", npc="luxe"})
+		saynn("Luxe growls.. until a painful groan escapes from his lips. His hand shoots to his chest, his body twisting from clear discomfort. Without a word, he pushes himself up and strides towards his desk, his movements stiff and slow. Mirri stands up as well, her eyes follow his figure.")
+
+		saynn("[say=mirri]Dad? Do you need help? I can help.[/say]")
+
+		saynn("Luxe doesn't look back. Crouching by his desk, he unlocks and pulls open a drawer, retrieving a small pill bottle. He twists the cap off with a practiced motion and pops one of the pills dry, his breath hitching before he finally exhales.")
 
 		saynn("[say=luxe]I got it..[/say]")
 
-		saynn("[say=mirri]Thank you, dad. It was a great dinner, I'm not even fucking being sarcastic. Too bad I fucking ruined everything again, I guess. Always my fault.[/say]")
+		saynn("Mirri lowers her gaze, her expression softens, her tail droops low, her ears go flat with her head, her shoulders sag.")
 
-		saynn("[say=mirri]I will reach rank 6 soon and become the best slaver in the whole galaxy. And if that is not enough to show it to you that I'm a worthy Blacktail member, I don't know what will anymore. GRRrrh..[/say]")
+		saynn("[say=mirri]Thanks for dinner, Dad. It was.. really nice. And I mean that, I'm not being sarcastic or anything.[/say]")
+
+		saynn("She sighs.")
+
+		saynn("[say=mirri]Too bad I ruined it. I'm really sorry.[/say]")
+
+		saynn("She sees Luxe's cold silent stare.. and clenches her fists.")
+
+		saynn("[say=mirri]I will reach rank 6 soon and become the best slaver in the whole galaxy. And if that is not enough to show it to you that I'm a worthy Blacktail member, I don't know what will anymore.. I wanna give up..[/say]")
+
+		saynn("And just like that, she runs off, her eyes looking incredibly sad.")
+
+		saynn("The heavy silence that follows is almost unbearable. The room feels hollow.. A lot of the food is left uneaten.. so much waste.. but it looks like you have to choose..")
 
 		addButton("Stay", "Stay with Luxe", "stay_with_luxe")
 		addButton("Follow Mirri", "Follow Mirri", "follow_mirri")
 	if(state == "stay_with_luxe"):
+		removeCharacter("mirri")
+		setFlag("SlaveAuctionModule.r5outcome", "luxe")
+		GM.pc.setLocation("market_near_luxe")
+		playAnimation(StageScene.Duo, "stand", {npc="luxe"})
+		saynn("You decide to stay with Luxe. He looks at the dinner table and sighs.")
+
 		saynn("[say=luxe]I guess I'm not ready yet.[/say]")
 
-		saynn("[say=pc]You have some time yet before she reaches rank 6. Time to think it all through.[/say]")
+		saynn("[say=pc]You have some time yet before she reaches rank 6. You have time to think it all through.[/say]")
 
 		saynn("[say=luxe]Mhm.[/say]")
 
+		saynn("Both of you are just letting the dark silence flow through you.")
+
+		saynn("[say=luxe]I'm not sure it will help though. I don't know what will help.[/say]")
+
+		saynn("[say=pc]You still can't accept her?[/say]")
+
+		saynn("He shakes his head.")
+
+		saynn("[say=pc]Why not?[/say]")
+
+		saynn("His silent gaze says a lot.")
+
+		saynn("[say=pc]Looks like you are battling your inner demons. If you don't like something about Mirri, you can try telling it to her. You can work it through together. I noticed that she is quite.. clingy. Is that the problem?[/say]")
+
+		saynn("Luxe shrugs.")
+
+		saynn("[say=luxe]Maybe.[/say]")
+
+		saynn("[say=pc]It's not actually her looks, is it?[/say]")
+
+		saynn("He throws his head back and closes his eyes.")
+
+		saynn("[say=luxe]I don't know anymore. Maybe there is an obvious truth somewhere in my head.. and I just don't want to accept it.[/say]")
+
+		saynn("[say=pc]Well, until you solve that mindfuck.. I doubt that you will stop fighting. It's either you, Mirri, or your perception of her, that are at fault.[/say]")
+
+		saynn("[say=luxe]It won't be easy, I know that much. But, I guess, Blacktail managed to get through worse things before.[/say]")
+
+		saynn("You nod subtly.")
+
+		saynn("[say=pc]Best of luck to you.[/say]")
+
+		saynn("[say=luxe]Mhm.[/say]")
+
+		saynn("You leave him with the task of cleaning up.. and just head out.")
+
+		saynn("Things could've gone better.. but they also could've gone a lot worse.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "follow_mirri"):
+		setFlag("SlaveAuctionModule.r5outcome", "mirri")
+		playAnimation(StageScene.Duo, "stand", {npc="mirri"})
+		aimCameraAndSetLocName("market_intro")
+		removeCharacter("luxe")
+		GM.pc.setLocation("market_intro")
 		saynn("[say=mirri]You know.. I overheard the whole story about how I was.. conceived.[/say]")
 
 		saynn("[say=pc]Really? How?[/say]")
@@ -288,5 +428,14 @@ func _react(_action: String, _args):
 
 	if(_action == "arrive_dinner"):
 		processTime(5*60)
+
+	if(_action == "begin_feast"):
+		processTime(10*60)
+		GM.pc.addPain(-500)
+		GM.pc.addStamina(500)
+		GM.pc.addLust(10)
+
+	if(_action == "luxe_feels_bad"):
+		processTime(20*60)
 
 	setState(_action)
