@@ -345,9 +345,9 @@ func _run():
 
 		saynn("[say=pc]You have some time yet before she reaches rank 6. You have time to think it all through.[/say]")
 
-		saynn("[say=luxe]Mhm.[/say]")
+		saynn("[say=luxe]Hm.[/say]")
 
-		saynn("Both of you are just letting the dark silence flow through you.")
+		saynn("Both of you are just letting the dark silence flow through you. It's so quiet here without Mirri.")
 
 		saynn("[say=luxe]I'm not sure it will help though. I don't know what will help.[/say]")
 
@@ -373,7 +373,7 @@ func _run():
 
 		saynn("[say=pc]Well, until you solve that mindfuck.. I doubt that you will stop fighting. It's either you, Mirri, or your perception of her, that are at fault.[/say]")
 
-		saynn("[say=luxe]It won't be easy, I know that much. But, I guess, Blacktail managed to get through worse things before.[/say]")
+		saynn("[say=luxe]It won't be easy, I know that much. But, I guess, Blacktail managed to get through worse times before. Like when the father died.[/say]")
 
 		saynn("You nod subtly.")
 
@@ -392,23 +392,111 @@ func _run():
 		aimCameraAndSetLocName("market_intro")
 		removeCharacter("luxe")
 		GM.pc.setLocation("market_intro")
+		saynn("Rather than staying with Luxe, you decide to follow Mirri, leaving the wolf alone with his thoughts.")
+
+		saynn("You find the catgirl leaning over her laptop, her paws pressed into her desk. Her feline ears pick up on the noise of your steps.")
+
+		saynn("[say=mirri]Didn't go so well, did it?[/say]")
+
+		saynn("[say=pc]I mean.. you didn't have to be so.. demanding?[/say]")
+
+		saynn("She lowers her gaze and shrugs.")
+
+		saynn("[say=mirri]Well.. sorry.. I'm just very tired. I know.. it's very pathetic of me.. But I just want my dad to see me as a good girl for once..[/say]")
+
+		saynn("[say=pc]Forcing him to say it doesn't seem like a good idea. It must come from his heart.[/say]")
+
+		saynn("[say=mirri]What are my choices then.. Be the best? That's exactly what I'm trying to do already.[/say]")
+
+		saynn("She is not wrong. Maybe her dad just doesn't have a heart.")
+
+		saynn("[say=mirri]I feel like I know what's happening.. but something in me doesn't want to accept it..[/say]")
+
+		saynn("Mirri pushes herself off of the desk and turns towards you.")
+
+		saynn("[say=mirri]What is worse, a never-ending pain.. or a painful end?[/say]")
+
+		addButton("Never-ending pain", "Suffering forever is obviously worse", "mirri_neverendpain")
+		addButton("Painful end", "A painful end is obviously worse", "mirri_painfulend")
+		addButton("Both", "They're both equally bad", "mirri_bothbad")
+	if(state == "mirri_neverendpain"):
+		saynn("[say=pc]Never-ending pain is obviously worse. You'd just rather die by that point.[/say]")
+
+		saynn("Mirri hums, her stare looking somewhere past you.")
+
+		saynn("[say=mirri]Maybe you're right, silly AlphaCorp slave..[/say]")
+
+		saynn("Her tail and ears droop.")
+
+		saynn("[say=mirri]But I still have hope that he will accept me.. I guess this last rank will be what decides it.[/say]")
+
+		saynn("All or nothing, huh.")
+
+		saynn("[say=pc]Not that much depends on you anymore.[/say]")
+
+		saynn("[say=mirri]Yeah. I did my best.[/say]")
+
+		saynn("She might have overdid her best by accident, wrapping around back to worst.")
+
+		addButton("Continue", "See what happens next", "mirri_lastbit")
+	if(state == "mirri_painfulend"):
+		saynn("[say=pc]A painful end is worse. Any kind of end is worse.[/say]")
+
+		saynn("[say=mirri]So you'd rather suffer forever?[/say]")
+
+		saynn("You shrug.")
+
+		saynn("[say=pc]I guess.[/say]")
+
+		saynn("Mirri hums and stays silent for some time, her eyes looking past you somewhere.")
+
+		saynn("[say=mirri]I thought so too. I thought I could get used to it.[/say]")
+
+		saynn("She closes her eyes and sighs.")
+
+		saynn("[say=mirri]Your opinion is valid though, silly AlphaCorp slave.[/say]")
+
+		addButton("Continue", "See what happens next", "mirri_lastbit")
+	if(state == "mirri_bothbad"):
+		saynn("[say=pc]They're both bad. Best you can do is not get yourself into a situation where you have to choose between the two.[/say]")
+
+		saynn("Mirri throws her head back and giggles.. her giggle slowly turning hysterical.")
+
+		saynn("[say=mirri]You are cute, silly AlphaCorp slave.. I wish it would be so easy. But it's hard to control something that you can't control.[/say]")
+
+		saynn("She is not wrong on that one.")
+
+		saynn("[say=mirri]I'm a slaver.. but sometimes I feel like I'm a slave too..[/say]")
+
+		saynn("Probably not a good feeling.")
+
+		addButton("Continue", "See what happens next", "mirri_lastbit")
+	if(state == "mirri_lastbit"):
 		saynn("[say=mirri]You know.. I overheard the whole story about how I was.. conceived.[/say]")
+
+		saynn("You raise a brow.")
 
 		saynn("[say=pc]Really? How?[/say]")
 
 		saynn("[say=mirri]I'm not just a slaver.. I'm also a spy, you know.[/say]")
 
+		saynn("Her and her fancy gadgets.")
+
 		saynn("[say=pc]You don't sound sad over it.[/say]")
 
 		saynn("[say=mirri]Why would I be sad? It made me kinda happy. I already had suspicions that my mother was a slave. I was looking for her in the old records. Couldn't find her.. maybe Luxe's laptop has more access.[/say]")
+
+		saynn("You don't remember Luxe saying that Mirri's mother is dead.. so she must still be alive.")
 
 		saynn("[say=pc]You want to find your mother?[/say]")
 
 		saynn("[say=mirri]Why not? But that's not why I'm happy. I'm happy.. because I'm Blacktail![/say]")
 
+		saynn("Your concern turns into confusion.")
+
 		saynn("[say=pc]Uhh. Didn't you already know that?[/say]")
 
-		saynn("[say=mirri]Dad would never tell me if I was some random fucking kid that he decided to pick up and raise. But his words confirm it, I'm actually Blacktail, through and through![/say]")
+		saynn("[say=mirri]Dad would never tell me if I was some random fucking kid that he decided to pick up and raise. But his words confirm it, I'm actually Blacktail, through and through.[/say]")
 
 		saynn("That's one of her anxieties removed.")
 
@@ -420,6 +508,157 @@ func _run():
 
 		saynn("[say=mirri]You're right~. Thank you.[/say]")
 
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Mirri walks up to you and purrs quietly into your ear.")
+
+			saynn("[say=mirri]It would be a waste not to drain your balls in my mouth too.. you know..[/say]")
+
+			saynn("That's very bold of her. One problem though.")
+
+			saynn("[say=pc]I'm kinda.. you know.. caged.[/say]")
+
+			saynn("She chuckles softly and licks your ear.")
+
+			saynn("[say=mirri]That's okay.. I'm half-feline, you know..[/say]")
+
+			saynn("You're not sure what she means by that.")
+
+			saynn("[say=mirri]I will only ask for a similar favor back..[/say]")
+
+			addButton("69", "Agree to some licking and sucking fun", "69_agree")
+			addButton("Deny", "You'd rather not", "deny_69")
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Mirri walks up to you and purrs quietly into your ear.")
+
+			saynn("[say=mirri]It would be a waste not to drain your balls in my mouth too.. you know..[/say]")
+
+			saynn("That's very bold of her. She lets her long feline tongue roll out.. the sight makes your heart pump the blood into your certain parts harder..")
+
+			saynn("[say=mirri]I will only ask for a similar favor back..[/say]")
+
+			saynn("Looks like someone is horny.")
+
+			addButton("69", "Agree to some licking and sucking fun", "69_agree")
+			addButton("Deny", "You'd rather not", "deny_69")
+		elif (GM.pc.hasReachableVagina()):
+			saynn("Mirri walks up to you and purrs quietly into your ear.")
+
+			saynn("[say=mirri]It would be a waste not to let me lick your cute pussy.. you know..[/say]")
+
+			saynn("That's very bold of her. She lets her long feline tongue roll out, making you feel warmth spreading throughout your body already..")
+
+			saynn("[say=mirri]I will only ask for a similar favor back..[/say]")
+
+			saynn("Looks like someone is horny.")
+
+			addButton("69", "Agree to some licking and sucking fun", "69_agree")
+			addButton("Deny", "You'd rather not", "deny_69")
+		else:
+			saynn("She nods and returns back to her laptop.")
+
+			saynn("[say=mirri]Guess we both should catch and sell some slaves now.[/say]")
+
+			addButton("Continue", "See what happens next", "endthescene")
+	if(state == "deny_69"):
+		saynn("[say=pc]I'm not in the mood.[/say]")
+
+		saynn("[say=mirri]Aw.. I won't force you. You're not my slave after all~.[/say]")
+
+		saynn("She nods and returns back to her laptop.")
+
+		saynn("[say=mirri]Guess we both should catch and sell some slaves now.[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "69_agree"):
+		playAnimation(StageScene.Sex69, "tease", {pc="pc", npc="mirri", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		saynn("You nod.. and before you know.. Mirri grabs you by the collar and yanks you onto her bed, her movements quick and snappy, fitting for a good slaver.")
+
+		saynn("Mirri positions herself above you, her feline tail swaying as she straddles your face, her stripped panties taking up your whole view. She pulls them aside, revealing her wet needy flower. Seeing it from so close makes your mouth water already..")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("She leans forward, her soft paws find your chastity cage and wrap around it. Her clawed digits trace it lightly, sending shivers through you.. before her lips press a teasing kiss against the tip. The warmth of her mouth sends a jolt of pleasure through your body.. even with the cage in the way.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("She leans forward, her soft paws wrapping around your length.. before her long feline tongue flicks out, teasing the tip.")
+
+		else:
+			saynn("She leans forward, her soft paws spreading your legs more.. before her long feline tongue flicks out, teasing your {pc.pussyStretch} slit.")
+
+		saynn("The moment your tongue meets her little cute clit, she lets out a low, satisfied purr that vibrates through her entire body.")
+
+		saynn("[say=mirri]Good {pc.boy}.. keep going..[/say]")
+
+		addButton("Continue", "See what happens next", "69_sex")
+	if(state == "69_sex"):
+		if (GM.pc.hasReachablePenis()):
+			playAnimation(StageScene.Sex69, "FM", {pc="pc", npc="mirri", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		else:
+			playAnimation(StageScene.Sex69, "FF", {pc="pc", npc="mirri", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Her praise is followed by taking your cage into her mouth, her lips wrapping around the metal. Even though the cage is in the way, her sharp feline tongue manages to slip under it and tease your poor locked drippy member.. the vibrations of her purring are making you squirm hard.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Her praise is followed by taking you deeper into her mouth, her lips sliding down your shaft with practiced ease. Her purring intensifies, sending delicious vibrations through you and making your cock ooze pre. She really knows how to work her magic..")
+
+		else:
+			saynn("Her praise is followed by slipping her tongue down your wet sex with practiced ease, its full length allows her to easily hit your hidden button. Her purring intensifies, sending delicious vibrations through you and making you squirm hard. She really knows how to work her magic..")
+
+		saynn("You focus on her in turn, your hands gripping her hips to pull her closer as your tongue delves into her folds, spreading and licking them. Her taste is nothing short of intoxicating.. every flick of your tongue earns you a breathless moan or a twitch of her tail.")
+
+		saynn("The room is filled with the wet, lewd sounds of both of your efforts, both of you strive to push the other closer to the edge.. almost like it's a race. Occasionally, she"+str(" releases your cock" if GM.pc.hasPenis() else " pulls away")+" just enough to gasp out some teasing remarks.")
+
+		saynn("[say=mirri]That's all you've got, puppy? You're gonna have to try harder than that if you wanna keep up with me.[/say]")
+
+		saynn("Her words only make you increase your onslaught. Mirri's moans quickly grow louder as you find the perfect spot, your tongue circling and stroking her sensitive clit with precision. She gasps, her hips grinding against your face as she loses herself in the sensation.")
+
+		if (GM.pc.isWearingChastityCage()):
+			saynn("Her pace on you quickens, her hands gripping your thighs for leverage as she keeps flicking her tongue under your cage and teasing your cock as best as she can, occasionally switching to your balls and giving them some nuzzles and little licks too. That and her weaponized purring are overwhelming.. both of you are already getting close..")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Her pace on you quickens, her hands gripping your thighs for leverage as she takes you as deep as she can, her tight throat enveloping your whole length as her nose lands onto your balls. The tightness of her throat walls combined with that weaponized purring is overwhelming.. both of you are already getting close..")
+
+		else:
+			saynn("Her pace on you quickens, her tongue lapping you up from the inside, swallowing any wetness while her lips play with your little bean. She is tongue-fucking your little need kitty and it feels amazing, how deep she reaches.. The skill of her tongue combined with that weaponized purring is overwhelming.. both of you are already getting close..")
+
+		addButton("Continue", "See what happens next", "69_cum")
+	if(state == "69_cum"):
+		playAnimation(StageScene.Sex69, "tease", {pc="pc", npc="mirri", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true, hard=true}})
+		if (GM.pc.isWearingChastityCage()):
+			saynn("And soon, Mirri lets out a muffled cry, her whole body shuddering as she reaches her climax. Her tongue pushes you over the edge as well, your {pc.penis} throbbing in her mouth while shooting weak ropes of {pc.cum}, one after another. She eagerly swallows every drop while you are busy swallowing her juices, the overstimulation made her pussy squirt all over your face..")
+
+			saynn("After both of your orgasms are over, Mirri pulls her mouth off of your cage and purrs contentedly while licking her lips.")
+
+			saynn("[say=mirri]Not bad for a soft {pc.boy}.[/say]")
+
+			saynn("She nuzzles your chastity and licks the last bits of your seed off before getting off.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("And soon, Mirri lets out a muffled cry, her whole body shuddering as she reaches her climax. Her tight throat pushes you over the edge as well, your {pc.penis} throbbing in her mouth while shooting thick ropes of {pc.cum}, one after another. She eagerly swallows every drop while you are busy swallowing her juices, the overstimulation made her pussy squirt all over your face..")
+
+			saynn("After both of your orgasms are over, Mirri pulls her mouth off of your cock and purrs contentedly while licking her lips.")
+
+			saynn("[say=mirri]Not bad for a soft {pc.boy}.[/say]")
+
+			saynn("She nuzzles your cock and licks the last bits of your seed off before getting off.")
+
+		else:
+			saynn("And soon, Mirri lets out a muffled cry, her whole body shuddering as she reaches her climax. Her rough tongue pushes you over the edge as well, your pussy pulsing all around her, your overstimulated g-spot makes you release a fountain of juices.. She eagerly swallows every drop while you are busy doing the same, your own tongue is making her sex gush all over your face..")
+
+			saynn("After both of your orgasms are over, Mirri pulls away and purrs contentedly while licking her lips.")
+
+			saynn("[say=mirri]Not bad for a soft {pc.boy}.[/say]")
+
+			saynn("She nuzzles your crotch and licks the clit a few teasing times before getting off.")
+
+		saynn("[say=mirri]Aw, my bed is wet now.[/say]")
+
+		saynn("That's not your problem, is it?")
+
+		saynn("[say=mirri]Catch me some more slaves or I will have to repurpose you as my pussy licker~.[/say]")
+
+		saynn("Not the worst fate.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -437,5 +676,19 @@ func _react(_action: String, _args):
 
 	if(_action == "luxe_feels_bad"):
 		processTime(20*60)
+
+	if(_action == "69_sex"):
+		processTime(5*60)
+
+	if(_action == "69_cum"):
+		processTime(3*60)
+		if(GM.pc.hasPenis()):
+			getCharacter("mirri").cummedInMouthBy("pc")
+		else:
+			getCharacter("mirri").cummedInMouthBy("pc", FluidSource.Vagina, 0.8)
+			getCharacter("mirri").cummedOnBy("pc", FluidSource.Vagina, 0.2)
+		GM.pc.cummedInMouthBy("mirri", FluidSource.Vagina, 0.8)
+		GM.pc.cummedOnBy("mirri", FluidSource.Vagina, 0.2)
+		GM.pc.orgasmFrom("mirri")
 
 	setState(_action)
