@@ -190,7 +190,7 @@ func _run():
 
 		saynn("Her sad expression turns mean as she pulls her gun out and aims it at her father. Something inside her clearly snapped..")
 
-		saynn("[say=mirri]Well.. no point in humiliating myself any longer. Time to grow up.[/say]")
+		saynn("[say=mirri]Well.. no point in humiliating myself any longer. Guess you made it easy for me, thanks for that.[/say]")
 
 		saynn("Even at a gunpoint, Luxe shows very little emotion.")
 
@@ -205,9 +205,190 @@ func _run():
 		addButton("Join Mirri", "Side with Mirri and go against Luxe together", "join_mirri")
 		addButton("Join Luxe", "Side with Luxe and go against Mirri together", "join_luxe")
 		if (true):
-			addButton("Middle", "Block the path for them both", "block_path")
+			addButton("Middle ground", "Block the path for them both", "block_path")
 		else:
 			addDisabledButton("Middle", "Either Mirri or Luxe don't trust you enough..")
+	if(state == "block_path"):
+		playAnimation(StageScene.Duo, "stand", {npc="mirri", npcAction=["holdpistol", "res://Inventory/UnriggedModels/Pistol/Pistol.tscn"]})
+		saynn("Rather than picking a side.. you decide to not do that.")
+
+		saynn("You know that they hate each other by this point.. but they don't hate you. You stand in the middle of them and raise your hands, blocking Mirri's ability to aim at her dad.")
+
+		saynn("[say=mirri]What the fuck are you doing?[/say]")
+
+		saynn("[say=pc]I want us to talk. Peacefully.[/say]")
+
+		saynn("[say=mirri]That time is long gone, soft {pc.boy}.. Things are never gonna be the same.[/say]")
+
+		saynn("Mirri takes a step to the side.. you do the same, still protecting Luxe from her and her from Luxe.")
+
+		saynn("[say=pc]You will have to kill me first, Mirri.[/say]")
+
+		saynn("[say=mirri]You.. I fucking hate you..[/say]")
+
+		saynn("She sounds.. annoyed.. for sure. Heartbroken even. She quickly swipes the old tears from her cheek, you notice her paws shaking a little. If she was gonna shoot, she would do it already.")
+
+		saynn("But you are still walking on an edge..")
+
+		saynn("[say=pc]I know you do. But hear me out.[/say]")
+
+		saynn("You turn towards Luxe.")
+
+		saynn("[say=pc]Luxe. You want Mirri gone. But does that involve killing her?[/say]")
+
+		saynn("He retracts into himself, his face still barely showing any emotion.")
+
+		saynn("The silence makes you get more and more nervous. Until he finally shakes his head.")
+
+		saynn("[say=luxe]No.[/say]")
+
+		saynn("Alright.. That is something.")
+
+		saynn("[say=luxe]Selling her to slavery would be fine by me.[/say]")
+
+		saynn("[say=mirri]REALLY?![/say]")
+
+		saynn("This family is a total mess.. Better to defuse the situation quickly.")
+
+		saynn("[say=pc]Wait. Wait. Alright, hold that thought, Luxe.[/say]")
+
+		saynn("You turn back towards Mirri, her feline eyes show little sparks of confusion in a huge sea of anger.")
+
+		saynn("[say=pc]Mirri. Do you want to kill your father?[/say]")
+
+		saynn("Her arms tremble. Her expression turns mean again after your last word.")
+
+		saynn("[say=mirri]Father? What kind of father is that, hating his own daughter so much he wants to sell her off.. Of course I wanna murder such a dick dad.. I'd rather have no dad than him..[/say]")
+
+		saynn("You get a feeling that there is something there that you can latch onto..")
+
+		saynn("[say=pc]Alright, scratch that. Do you want to kill Luxe?[/say]")
+
+		saynn("[say=mirri]What? How is that any different?[/say]")
+
+		saynn("[say=pc]Forget that he is your father for a second. Do you still want to murder him?[/say]")
+
+		saynn("Mirri stays quiet, thinking. Her lips tremble as she starts speaking again.")
+
+		saynn("[say=mirri]..He is a dick. Huge fucking dick. And I fucking hate him..[/say]")
+
+		saynn("You can see her eyes watering up again, she is barely keeping herself from becoming a total mess.")
+
+		saynn("[say=mirri]But if he wasn't my father.. I have no fucking idea.. I've killed for less..[/say]")
+
+		saynn("Nothing is gonna be the same, you learned that much. Time to work with what you're got.")
+
+		saynn("Mirri is still aiming her gun at you. Makes it a little hard to talk and think.")
+
+		saynn("[say=mirri]What are you implying anyway?[/say]")
+
+		saynn("[say=pc]Can you lower your gun first? For me?[/say]")
+
+		saynn("It takes her some time.. but she does lower her piece, letting you breathe easier.")
+
+		saynn("[say=pc]Thank you. Maybe there is space.. for a compromise?[/say]")
+
+		saynn("[say=mirri]Compromise? Why don't I just compromise his life and move on with mine. You heard what he said, he wants to turn me into a slave and sell me.[/say]")
+
+		saynn("[say=luxe]You will not walk out of here alive.[/say]")
+
+		saynn("Mirri looks past you.")
+
+		saynn("[say=mirri]Really? You think so?[/say]")
+
+		saynn("Things are getting heated again.")
+
+		saynn("[say=pc]Stop. Both of you. Mirri. I have another question.[/say]")
+
+		saynn("[say=mirri]Make it quick..[/say]")
+
+		saynn("[say=pc]Do you like being Blacktail?[/say]")
+
+		saynn("[say=mirri]What?[/say]")
+
+		saynn("[say=pc]You are Mirri Blacktail. But do you like being a part of this family?[/say]")
+
+		saynn("Mirri sighs.")
+
+		saynn("[say=mirri]Since we're sharing hurtful truths here.. I.. I fucking don't. I hate politics and this family is all about politics. I hate how everyone treats me.. I hate that I have to keep my room clean.. I hate my dad.. goes without saying..[/say]")
+
+		saynn("Wow. Alright. Honestly is exactly what you needed. You get a feeling that a subtle approach will work best here. But it will require you to commit..")
+
+		saynn("Time to commit.")
+
+		saynn("[say=pc]Mirri. Luxe. I think there is a solution here. But you both have to realize it yourself. I will step back and let you handle it yourself, okay? Like adults.[/say]")
+
+		saynn("This is scary. But you can't tell them what to do. They have to get to the solution on their own. The only problem that you notice.. is that Mirri keeps calling Luxe dad despite saying that she hates him.. this might screw everything..")
+
+		addButton("Step back", "See what happens..", "middle_back")
+	if(state == "middle_back"):
+		playAnimation(StageScene.Duo, "stand", {pc="mirri", npc="luxe"})
+		saynn("Slowly, you get out of their way, one little step at a time.")
+
+		saynn("Mirri and Luxe quickly establish eye contact with each other. Luxe is his usual self, spotting a cold stare. And Mirri is frowning, her paw still squeezing the handle of her twelve point seven semi-automatic.")
+
+		saynn("Wolf's eyes explore the catgirl's face features. The tension seems to be rising.. but no words are exchanged.")
+
+		saynn("[say=mirri]I k-know that I've been a bad daughter. I've been so annoying.[/say]")
+
+		saynn("[say=luxe]I understand why, Mirri. My behaviour played a role in that.[/say]")
+
+		saynn("[say=mirri]You hated me all this time.. but you were just hiding it.. for me, I guess..[/say]")
+
+		saynn("[say=luxe]I said that I hate you. And it's true. But there is nothing you could have done to change this.[/say]")
+
+		saynn("Mirri inhales and exhales, trying to keep herself composed.")
+
+		saynn("[say=mirri]It still hurts to hear that.. But I guess I understand.. I'm a mistake, like you said..[/say]")
+
+		saynn("[say=luxe]You are my mistake, Mirri. My weakness. And I'm not allowed to have weaknesses.[/say]")
+
+		saynn("Luxe says all of that with such a cold voice. Even you can't pick up on a single note of affection in his tone. Mirri lowers her gaze and nods subtly but understandably.")
+
+		saynn("[say=luxe]My soul is rotten to the core. But that's who I am.[/say]")
+
+		saynn("At least he understands it. Mirri's lips twitch, she blinks many times, struggling to keep her tough girl look.")
+
+		saynn("[say=mirri]Can you.. I mean.. do you.. d-do you want to.. disown me, dad?..[/say]")
+
+		saynn("She looks at him with her sad eyes. Luxe nods. Decision was made..")
+
+		saynn("[say=mirri]Well.. t-that's good.. that is.. I n-never liked b-being Blacktail anyway.. My tail isn't even black, haha.. I'm f-fine with being.. just Mirri..[/say]")
+
+		saynn("She closes her eyes and steadies her shaky breathing.")
+
+		saynn("[say=mirri]So t-that.. settles it.. Guess I g-gotta start.. packing things..[/say]")
+
+		saynn("[say=luxe]You can stay here until you find a good place. You can still sell slaves too if you need to earn credits.[/say]")
+
+		saynn("[say=mirri]Oh.. okay.. that makes things easier.. Thank you, da.. Luxe.[/say]")
+
+		saynn("So weird to hear her say his name. It's probably just as weird for her.")
+
+		saynn("[say=mirri]Guess I will go now..[/say]")
+
+		saynn("[say=luxe]I'm sorry I lashed out at you, Mirri. That was very rude of me.[/say]")
+
+		saynn("Mirri shrugs.")
+
+		saynn("[say=mirri]Well.. Sorry I almost shot you, Luxe.. Oh yeah.. I kinda.. stole your pills.[/say]")
+
+		saynn("She throws him the pill bottle.")
+
+		saynn("[say=mirri]I suggest you change the password on your drawer..[/say]")
+
+		saynn("Luxe stars at the pills.. and then at her.")
+
+		saynn("[say=luxe]Plan B, huh. You were always a smart girl, Mirri.[/say]")
+
+		saynn("Mirri is shaking a bit, her tears keep wanting to escape..")
+
+		saynn("[say=mirri]I knew that I would never bring myself to shoot you.. Take care, Luxe.. Stay a strong leader..[/say]")
+
+		saynn("[say=luxe]Follow your dreams, Mirri. You're free to go.[/say]")
+
+		saynn("She chuckles softly.. gives you and Luxe a last glance each.. and then steps out.")
+
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -221,6 +402,9 @@ func _react(_action: String, _args):
 		processTime(5*60)
 
 	if(_action == "mirri_mans_up"):
+		processTime(3*60)
+
+	if(_action == "middle_back"):
 		processTime(3*60)
 
 	setState(_action)
