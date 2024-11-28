@@ -25,7 +25,8 @@ func getFlags():
 		"sexSubbedToMirri": flag(FlagType.Bool),
 		"firstTimeDom": flag(FlagType.Bool),
 		"customMirriGreeting": flag(FlagType.Text),
-		"mirriNotOnPill": flag(FlagType.Text),
+		"mirriNotOnPill": flag(FlagType.Bool),
+		"mirriCanSkipCombat": flag(FlagType.Bool),
 		
 		"luxeTalkIntro": flag(FlagType.Bool),
 		"customLuxeGreeting": flag(FlagType.Text),
