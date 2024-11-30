@@ -603,6 +603,7 @@ func _run():
 		saynn("(( This is where this content ends. Thank you for playing <3 ))")
 		setFlag("SlaveAuctionModule.mirriNotOnPill", true)
 		setFlag("SlaveAuctionModule.mirriCanSkipCombat", true)
+		setFlag("SlaveAuctionModule.r6outcome", "middleground")
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "join_mirri"):
 		playAnimation(StageScene.Duo, "stand", {npc="luxe"})
@@ -679,36 +680,32 @@ func _run():
 		saynn("Looks like you better not lose this one.. or your little adventure will be over [b]forever[/b].")
 
 		addButton("Fight", "Start the fight", "start_fight_with_luxe")
-	if(state == "mirri_fight_lost"):
-		playAnimation(StageScene.Duo, "defeat", {npc="luxe"})
-		saynn("WRITE ME")
-
 	if(state == "mirri_fight_won"):
 		playAnimation(StageScene.Duo, "stand", {npc="luxe", npcAction="defeat"})
-		saynn("With a loud growl, Luxe hits the floor, the impact of his massive frame makes the whole room vibrate. He is holding onto his chest, a pained expression on his face.")
+		saynn("Luxe hits the floor with a mean growl, the impact of his massive frame makes the whole room vibrate. He is holding onto his chest, his fur glowing brighter with his heartbeat.")
 
-		saynn("[say=mirri]Good job.. great job even. I'd be screwed without you, {pc.name}.[/say]")
+		saynn("[say=mirri]Nice work.. Seriously. I'd be toast without you, {pc.name}.[/say]")
 
-		saynn("Mirri slowly gets herself up and heads towards her gun, the light that's coming from Luxe is still not enough to light the whole room up so she turns the hologram wall back on.")
+		saynn("Mirri isn't doing too well.. but she pushes herself up, stumbling towards her gun. On the way there, she flicks the hologram wall back on, flooding the room with its artificial glow.")
 
-		saynn("[say=luxe]Both of you.. I haven't seen people more stupid and pathetic.[/say]")
+		saynn("[say=luxe]You two.. I've never seen anyone more stupid or pathetic in my life.[/say]")
 
-		saynn("[say=mirri]Shut up, dad. You're the one on your knees.[/say]")
+		saynn("[say=mirri]Shut it, dad. You're the one on your knees.[/say]")
 
-		saynn("She picks up her gun and joins you, standing near Luxe.")
+		saynn("She picks up her gun and joins you, standing near Luxe. He raises his head just enough to glare at her, his lips curling into a sneer.")
 
-		saynn("[say=luxe]Do you understand what the rest of the family will do to you? You're dead meat.[/say]")
+		saynn("[say=luxe]You think this ends here? You think the family will just let you walk away? They will skin you alive, both of you.[/say]")
 
-		saynn("Mirri hits him with the handle, causing the wolf to snarl, his fur lighting up more. The tips begin sending off little embers. It gets warmer and warmer here..")
+		saynn("Mirri snarls, swinging the butt of her gun against his jaw with a sickening crack. Luxe growls, his golden fur flaring brighter, embers flying from the tips. The temperature in the room goes up a little..")
 
-		saynn("[say=mirri]That's not for you to worry about. Your plan didn't go exactly like you wanted, did it?[/say]")
+		saynn("[say=mirri]I'm not planning to run away. And that's not for you to worry about. Your plan didn't go exactly like you wanted, did it?[/say]")
 
-		saynn("She steps closer.. Better let her handle it from now on, it's her dad after all.")
+		saynn("She steps forward, looming over him.. Better let her handle it from now on, it's her dad after all.")
 
 		addButton("Continue", "See what happens next", "mirri_on_luxe")
 	if(state == "mirri_on_luxe"):
 		playAnimation(StageScene.SexFeetPlay, "pin", {pc="mirri", npc="luxe"})
-		saynn("Mirri puts her boot onto Luxe's burning chest, pinning him to the floor. She aims her gun directly at his head, her hand shaking subtly..")
+		saynn("Mirri plants her boot firmly against Luxe's burning chest, forcing him to stay down. She aims her gun directly at his head, her hand shaking subtly..")
 
 		saynn("[say=mirri]Any last words?[/say]")
 
@@ -716,58 +713,68 @@ func _run():
 
 		saynn("Mirri squeezes the gun's handle tightly, her mean eyes full of hate.. and yet.. her shaky clawed digit does not pull the trigger.")
 
-		saynn("[say=luxe]You were always weak, Mirri.. gh-h.. That's why you will never be the head of this family.[/say]")
+		saynn("[say=luxe]You were always weak, Mirri.. gh-h.. That's why you will never lead this family.[/say]")
 
-		saynn("Mirri growls and grinds her teeth while watching her dying dad grunt from pain. Her hand shakes like crazy.. but she can't seem to be able to do it.")
+		saynn("Her jaw tightens, her fangs bared as she growls. The gun trembles in her head, her finger brushing the trigger.. but she doesn't fire yet.")
 
-		saynn("In the end, she screams and finally does it.")
+		saynn("[say=mirri]Shut up.. Just shut up![/say]")
 
-		saynn("A gunshot rings in your ears.")
+		saynn("Her hands shake uncontrollably, her eyes narrowed into animal slits, showing her fury.")
+
+		saynn("[say=luxe]Weak.[/say]")
+
+		saynn("With a guttural scream, she finally pulls the trigger.")
+
+		saynn("[b]BANG[/b]. A gunshot rings in your ears.")
 
 		saynn("But the bullet hole appears a few inches away from Luxe's head, on the floor. The wolf flinches.. but looks like Mirri wasn't aiming for him in the first place.")
 
 		saynn("[say=mirri]Fuck. I can't do it.[/say]")
 
-		saynn("She lowers her hand.. while Luxe lets out a soft chuckle, coughing out some steam in the process.")
+		saynn("She lowers her hand.. while Luxe lets out a soft chuckle, coughing out some steam in the process. Even while dying, he is a prick.")
 
 		saynn("[say=pc]Want me to do it?[/say]")
 
 		saynn("[say=mirri]No..[/say]")
 
-		saynn("Luxe grunts more and more, the room quickly becoming hot. He puts his clawed hands around Mirri's boot.. and pulls it off.. without much trouble.")
+		saynn("Luxe growls through gritted teeth, his claws scraping against Mirri's boot. With a sudden burst of strength, he shoves it off his chest, making her stumble back.")
 
 		addButton("Continue", "See what happens next", "mirri_luxe_about_to_die")
 	if(state == "mirri_luxe_about_to_die"):
 		playAnimation(StageScene.GivingBirth, "idle", {pc="luxe"})
-		saynn("Catgirl looks.. disappointed.. in herself. She just watches as Luxe starts crawling towards his desk, breathing out more steam in the process.")
+		saynn("Catgirl looks.. disappointed.. in herself. She just watches as Luxe crawls towards his desk, breathing out more steam in the process.")
 
 		saynn("[say=pc]He is gonna get his pills. You can't just watch him do it.[/say]")
 
-		saynn("You head towards Luxe to stop him but Mirri stops you.")
+		saynn("You head towards Luxe to stop him but Mirri stretches an arm out, holding you back without even looking at you.")
 
 		saynn("[say=luxe]Told you.. S-she is a weak.. dumb.. useless.. stupid.. w-whore..[/say]")
 
-		saynn("Luxe just keeps crawling while the heat is slowly killing him, his fur sending off more fancy embers everywhere. Mirri's heart clearly hurts too as she is watching his dying dad struggle for his life.")
+		saynn("Luxe just keeps dragging himself inch by inch while the heat is slowly killing him, his fur sending off more fancy embers everywhere. Mirri's heart clearly hurts too as she is watching his dying dad struggle for his life.")
 
 		saynn("[say=mirri]Need my help, daddy?[/say]")
 
+		saynn("But maybe you're wrong. Her tone is laced with subtle mockery. Mockery that Luxe doesn't pick up on.")
+
 		saynn("[say=luxe]No. I don't need you at all, I never needed you.. I never wanted you.. I hate you. You're a mistake.[/say]")
 
-		saynn("Luxe reaches his desk and inputs a password that opens one of the drawers. He is reaching his shaking hands inside..")
+		saynn("The words stab deep.. but Mirri just has a small smirk on her face as Luxe reaches his desk, his claws fumbling at its surface. He inputs a code, opening one of the drawers. His shaking hands disappear inside, searching frantically.")
 
 		saynn("[say=mirri]Looking for this, daddy~?[/say]")
 
-		saynn("Luxe peeks his head out.. and sees Mirri holding a familiar pill bottle. In disbelief, he rummages through his drawer.. but it's not there.")
+		saynn("Luxe freezes.. and then twists his head towards her. His expression becomes enraged as he spots a pill bottle in Mirri's hand. His desperate claws tear through the drawer.. but he doesn't find his one.")
 
 		saynn("[say=luxe]Y-You..[/say]")
 
 		saynn("Mirri smiles cutely, her cunning eyes shining brightly.")
 
-		saynn("[say=mirri]I can't bring myself to kill you. But I don't have to save you.[/say]")
+		saynn("[say=mirri]I can't bring myself to kill you. But oh lucky me, I don't have to save you either.[/say]")
 
 		saynn("Luxe grabs his own gun from the drawer and quickly aims it at Mirri! You don't even have enough time to react before he pulls the trigger.")
 
 		saynn("Click. Click. Click.")
+
+		saynn("Silence.")
 
 		saynn("[say=mirri]Wow. You really thought that I'm dumb. That's so rude~. Or maybe you're just this desperate? Poor thing. Trying to take my life even while barely clinging to his.[/say]")
 
@@ -778,22 +785,235 @@ func _run():
 		addButton("Continue", "See what happens next", "mirri_gives_chance")
 	if(state == "mirri_gives_chance"):
 		playAnimation(StageScene.SexFeetPlay, "pin", {pc="mirri", npc="luxe"})
-		saynn("The catgirl pins her father to the floor with her leg again.")
+		saynn("Mirri presses her boot down harder on Luxe's chest, forcing a deep grunt from him. His claws scrape at her leg in vain, his golden fur flares violently, patches igniting into smoldering embers that begin to sear through his charred clothing. Each breath he exhales carries a wave of unbearable heat, the air around him shimmering.")
 
 		saynn("[say=mirri]You're gonna die, dad. There is nothing you can do.[/say]")
 
-		saynn("He grunts and huffs more steam out, his fur begins to burn through his clothes by this point. But he refuses to stop, his weak hands scratch the boot.")
+		saynn("He tries to calm his breathing.. tries to keep his cool appearance.. but this process he can not stop anymore.. he is burning up. Mirri tilts her head slightly, watching his agony with a cold detachment, her paw fidgets with the pill bottle.")
 
-		saynn("Mirri puts away the cunning tone for a second, her paw playing with the pill bottle.")
+		saynn("[say=mirri]Still.. I'm not heartless.[/say]")
 
-		saynn("[say=mirri]I can give you the pills. I'm completely serious. You will continue living your sorry life. But only.. only if you call me your daughter.. right now.[/say]")
+		saynn("She crouches slightly, meeting his fierce, hate-filled eyes.")
 
-		saynn("Luxe huffs fire, his fur is too bright to look at by this point.")
+		saynn("[say=mirri]I will give you the pills. I will let you keep living your miserable little life. But there is one condition.[/say]")
 
-		saynn("[say=luxe]You.. are.. a whore.[/say]")
+		saynn("She leans closer.")
 
-		saynn("She smiles and puts the pills away, sealing his faith. Mirri just silently watches as Luxe burns up from inside.")
+		saynn("[say=mirri]Say it. Call me your daughter.[/say]")
 
+		saynn("Luxe glares at her, his body trembling with rage, his voice little more than a crackling rasp as heat rises from his chest like smoke from a dying fire.")
+
+		saynn("[say=luxe]You..[/say]")
+
+		saynn("The embers intensify, creeping further across his form, his fur glowing like molten gold.")
+
+		saynn("[say=luxe]..are..[/say]")
+
+		saynn("His voice fails, but his glare does not. He shows off his sharp teeth as he spits his final venom.")
+
+		saynn("[say=luxe]..a whore.[/say]")
+
+		saynn("Mirri's eyes narrow. She lets out a soft laugh, her tail flicking behind her.")
+
+		saynn("[say=mirri]Good bye, dad. I will not miss you.[/say]")
+
+		saynn("With a small shrug, she slips the pill bottle into her pouch and rises. Luxe's body convulses under her, his skin glowing beneath the burning fur as the embers consume him. He huffs one last fiery breath, steam and smoke blowing from his mouth..")
+
+		saynn("Then.. the room grows brighter and hotter as his body becomes a living inferno. His claws scrape uselessly against the floor before curling into fists, his strength fading into nothingness.. his life..")
+
+		saynn("Mirri just quietly watches, her gaze lost in the roar of Luxe's burning body.")
+
+		addButton("Continue", "See what happens next", "mirri_luxe_dead")
+	if(state == "mirri_luxe_dead"):
+		removeCharacter("luxe")
+		playAnimation(StageScene.Duo, "stand", {npc="mirri", npcAction="sit"})
+		saynn("The inferno flares one final time, and then it collapses in on itself. Mirri's boot clangs against the floor as Luxe's body disintegrates into ash, a hollowed-out shell that crumbles with a faint hiss as the embers die. The glow fades, leaving the room in silence, illuminated only by the soft blue light of the hologram map on the wall.")
+
+		saynn("Mirri watches the pile of ash settle, her expression unreadable. She doesn't say a word as she steps over the remains of her father, her boots living faint prints in the gray dust.")
+
+		saynn("She approaches Luxe's desk, her movements calm and deliberate. Slowly, she lowers herself into his massive, imposing chair. The leather cracks faintly as she leans back, one leg crossed over the other, her claws tapping lightly against the armrest. Her eyes scan the room, sharp and calculating, before they settle on you.")
+
+		saynn("For a moment, neither of you speak. The silence is heavy, broken only by the faint hum of the hologram behind her. Her tail sways lazily, her mean face shows triumph.")
+
+		saynn("[say=mirri]We won..[/say]")
+
+		saynn("You glance at the pile of ash on the floor, the faint scorch marks on the wood floor still glowing softly.")
+
+		saynn("[say=pc]I guess we did. But what will you do about the rest of the family?[/say]")
+
+		saynn("She tilts her head to the side, her stare cold and calculated.")
+
+		saynn("[say=mirri]Dad had a terrible accident. And, since I'm the best slaver.. they all will serve me now.[/say]")
+
+		saynn("The corners of her lips raise slightly. Only now the weight of what just happened began to sink in.")
+
+		saynn("[say=pc]I guess you're right then. We won.[/say]")
+
+		saynn("The room feels different, heavier. The ashes of the old kind lie forgotten on the floor.. atop his throne sits the new queen. For better or worse, the Blacktail legacy is in her hands now.")
+
+		saynn("[say=mirri]You've been a great help, I won't forget it.[/say]")
+
+		saynn("[say=pc]You better not.[/say]")
+
+		saynn("She chuckles softly.")
+
+		saynn("[say=mirri]This chair was not made for my butt. Too big and too.. cold. I kinda prefer my current room, to be honest. Let's go. Oh, wait..[/say]")
+
+		saynn("She pushes herself out of the chair, her movements fluid as ever.. but something catches her eye.. a faint glint in the open drawer. She reaches in and pulls out an urn, it's surface all cracked and clearly glued back together. She turns it over in her hands, her sharp eyes studying it in the light.")
+
+		saynn("[say=mirri]Glued back together, just like his life was.[/say]")
+
+		saynn("[say=pc]Fitting to let his ashes rest with hers, don't you think?[/say]")
+
+		saynn("Mirri's ears flick back slightly, and for a moment, her expression softens. Then, just as quickly, the flicker of sentiment vanishes. Her lips twist into a sly smirk.")
+
+		saynn("[say=mirri]Nah. I've got a better idea.[/say]")
+
+		saynn("She steps away from the desk, the urn still in her hands. Her tail swishes behind her.")
+
+		saynn("[say=mirri]Step back.[/say]")
+
+		saynn("Before you can respond, she tosses the urn high into the air. Time seems to slow down as she draws her gun in one smooth motion, her eyes locking onto the fragile urn spinning against the faint blue glow.")
+
+		saynn("[b]Bang.[/b]")
+
+		saynn("The gunshot shatters the urn, making it explode midair in a burst of obsidian shards and a swirling cloud of grey ash.")
+
+		saynn("Mirri holsters her gun and brushes some stray ash off of her armor. She turns to you, her smirk now fully formed.")
+
+		saynn("[say=mirri]That's better. Let's go.[/say]")
+
+		addButton("Follow", "Follow Mirri back to her room", "mirri_after_all")
+	if(state == "mirri_after_all"):
+		aimCameraAndSetLocName("market_intro")
+		playAnimation(StageScene.Duo, "stand", {npc="mirri"})
+		saynn("You return to Mirri's room. She inhales and exhales audibly.")
+
+		saynn("[say=mirri]I feel so much better already..[/say]")
+
+		saynn("She looks around.")
+
+		saynn("[say=mirri]..Should I trash this place? I always wanted to.[/say]")
+
+		saynn("[say=pc]I don't think that's a good idea.[/say]")
+
+		saynn("[say=mirri]Aw.. Well.. this is it then.[/say]")
+
+		saynn("Mirri gives you a kiss on the cheek.")
+
+		saynn("[say=mirri]We still need slaves. So if you have any, I will be happy to help you sell them. I will even raise your cut to 20%..[/say]")
+
+		saynn("[say=pc]Just 20%?[/say]")
+
+		saynn("[say=mirri]Yes. Blacktail needs credits.[/say]")
+
+		saynn("Better than nothing.")
+
+		saynn("She does a polite bow in front of you.")
+
+		saynn("[say=mirri]See you around, soft {pc.boy}~. Go live your silly prison life.[/say]")
+
+		saynn("[say=pc]You're not gonna help me take off my collar?[/say]")
+
+		saynn("[say=mirri]And end your suffering? Nah, I'm not that cruel. You will have to do that yourself.[/say]")
+
+		saynn("So much for helping the Syndicate.")
+
+		saynn("[say=mirri]We can fuck though.[/say]")
+
+		saynn("She sends you an air kiss and smiles wide.")
+
+		saynn("(( This is where this content ends. Thank you for playing <3 ))")
+		setFlag("SlaveAuctionModule.mirriNotOnPill", true)
+		setFlag("SlaveAuctionModule.mirriCanSkipCombat", true)
+		setFlag("SlaveAuctionModule.r6outcome", "luxedead")
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "mirri_fight_lost"):
+		playAnimation(StageScene.Duo, "defeat", {npc="luxe"})
+		saynn("You hit the floor, unable to continue fighting. Your vision becomes blurry as the cold surface presses against your cheek, your body refuses to get up. Luxe looms above you, his golden glow casting jagged shadows across the office.")
+
+		saynn("You catch glimpses of Mirri.. crumpled on the floor, clutching her rips, her face palace with shock and pain.")
+
+		saynn("[say=luxe]Pathetic.[/say]")
+
+		saynn("His voice is ice, devoid of triumph. The outcome was never a question for him.")
+
+		saynn("[say=luxe]I gave you a chance. Both of you. But weakness..[/say]")
+
+		saynn("He steps closer, leaning down to meet your fading gaze.")
+
+		saynn("[say=luxe]..has no place in this family.[/say]")
+
+		saynn("His boot strikes your head. Darkness swallows you whole..")
+
+		addButton("Continue", "See what happens next", "mirri_lost_badend")
+	if(state == "mirri_lost_badend"):
+		addCharacter("mirri", ["naked"])
+		saynn("You wake up when a project light hits your face. Your eyes haven't adjusted yet.. but your ears pick up on a quiet hum of a crowd in front of you.")
+
+		saynn("Your wrists.. cuffed above your head. You are completely naked. Beside you.. is Mirri.. stripped of her armor. Her tail hangs limp, her ears flattened, a sleek black slave collar is locked snugly around her neck, connected with a chain leash to yours. Her defiance is gone.. replaced by a hollow stare.")
+
+		saynn("[say=mirri]..I'm sorry..[/say]")
+
+		saynn("Her whisper barely reaches your ears.")
+
+		saynn("Before you can respond, Luxe's booming voice silences the mysterious crowd.")
+
+		saynn("[say=luxe]Ladies and gentlemen. Esteemed buyers. Welcome to Blacktail Market. Today, I present to you two.. regular slaves.[/say]")
+
+		saynn("He is standing on the presenter platform, his golden fur shining under the harsh lights. Though he addresses the crowd, there is no performance in his voice. For him.. this is just a thing that has to be done..")
+
+		saynn("[say=luxe]First, we have Mirri. A promising young slaver who completely forgot her place. And now, she can be yours, to please or serve, as you see fit.[/say]")
+
+		saynn("Tears rush down Mirri's cheeks when she hears that.")
+
+		saynn("[say=mirri]He is selling me.. he is selling his own daughter..[/say]")
+
+		saynn("[say=luxe]Smart. Determined. But utterly useless without someone to leash her.[/say]")
+
+		saynn("The crowd murmurs with interest. Mirri flinches at that description, her chains rattling.. but that's all that she can do..")
+
+		saynn("[say=luxe]I will be honest. She is not our most.. quality.. product.. by any means. She is weak. So I will throw in a bonus, just for you, our dear customers.[/say]")
+
+		saynn("A few laughs ripple through the bidders. Luxe doesn't wait for them to settle. He presents you.")
+
+		saynn("[say=luxe]This one..[/say]")
+
+		saynn("The projector focuses on you alone.")
+
+		saynn("[say=luxe]Her little pet. Loyal, sure. But loyalty without power? Pointless.[/say]")
+
+		saynn("The crowd stirs again, some bidders murmuring bids under their breath.")
+
+		saynn("[say=luxe]Bidding starts at.. two hundred credits.[/say]")
+
+		saynn("[say=mirri]Two hundred?!..[/say]")
+
+		saynn("Mirri's outburst earns her a sharp impulse of electricity through her slave collar. She cries out from pain and collapses, her cheeks burning with humiliation while the shock makes her shake.")
+
+		saynn("Luxe directs his next words to you two, his voice quiet.")
+
+		saynn("[say=luxe]Be grateful I'm not paying someone to take you off my hands.[/say]")
+
+		saynn("His words crush whatever defiance Mirri had left. SHe lowers her head, her body trembling.")
+
+		saynn("The auction continues, Luxe's overall disinterest setting a grim tone. The bids come lazily, the crowd barely invested by the goods on display.")
+
+		saynn("[sayMale]250. Great price for two future sextoys.[/sayMale]")
+
+		saynn("[say=luxe]250 goes once. 250 goes twice. Sold.[/say]")
+
+		saynn("And just like that.. a helper grabs your leashes.. and drags you offstage into the darkness.. towards your new owner..")
+
+		saynn("[say=mirri]..he didn't even look at us..[/say]")
+
+		saynn("Her voice cracks, barely audible. You glance at her.. but there is nothing to say.")
+
+		saynn("Next moments are nothing but a blur. You're shoved into a transport pod.. the door closes behind you with a sharp hiss. The pod lurches forward, carrying you and Mirri toward an uncertain, likely grim future.")
+
+		saynn("[b]BAD END[/b]: You and Mirri became slaves.")
+
+		addButton("Restart", "Try again", "badend_restart")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -841,6 +1061,22 @@ func _react(_action: String, _args):
 
 	if(_action == "mirri_gives_chance"):
 		processTime(3*60)
+
+	if(_action == "mirri_luxe_dead"):
+		processTime(3*60)
+
+	if(_action == "mirri_after_all"):
+		processTime(3*60)
+
+	if(_action == "badend_restart"):
+		GM.pc.addPain(-GM.pc.getPain())
+		GM.pc.addLust(-GM.pc.getLust())
+		GM.pc.addStamina(GM.pc.getMaxStamina())
+		setState("mirri_mans_up")
+		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
+		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
+		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
+		return
 
 	setState(_action)
 
