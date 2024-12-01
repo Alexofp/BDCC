@@ -1,5 +1,7 @@
 extends SceneBase
 
+var lostAtLeastOnce = false
+
 func _init():
 	sceneID = "MirriRank6Scene"
 
@@ -221,7 +223,7 @@ func _run():
 		addButton("Join Mirri", "Side with Mirri and go against Luxe together", "join_mirri")
 		addButton("Join Luxe", "Side with Luxe and go against Mirri together", "join_luxe")
 		if (true):
-			addButton("Middle ground", "Block the path for them both", "block_path")
+			addButton("Middle ground", "(Full affection with Mirri and Luxe) Block the path for them both", "block_path")
 		else:
 			addDisabledButton("Third option", "Either Mirri or Luxe don't trust you enough..")
 	if(state == "block_path"):
@@ -948,6 +950,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "mirri_lost_badend")
 	if(state == "mirri_lost_badend"):
+		playAnimation(StageScene.HangingDuo, "idle", {pc="pc", npc="mirri", bodyState={naked=true}, npcBodyState={naked=true, chains=[["normal", "neck", "npc", "pc", "neck"]]}})
 		addCharacter("mirri", ["naked"])
 		saynn("You wake up when a project light hits your face. Your eyes haven't adjusted yet.. but your ears pick up on a quiet hum of a crowd in front of you.")
 
@@ -1014,6 +1017,181 @@ func _run():
 		saynn("[b]BAD END[/b]: You and Mirri became slaves.")
 
 		addButton("Restart", "Try again", "badend_restart")
+		if (lostAtLeastOnce):
+			addButton("Skip", "Skip to you winning the fight", "do_skip_luxe_fight")
+		else:
+			addDisabledButton("Skip", "Try at least once more")
+	if(state == "join_luxe"):
+		playAnimation(StageScene.Duo, "stand", {npc="mirri", npcAction=["holdpistol", "res://Inventory/UnriggedModels/Pistol/Pistol.tscn"]})
+		saynn("Mirri is a crazy bitch and there is no saving her. This choice was easy.")
+
+		saynn("You glance at Luxe, then at Mirri, whose trembling hands clutch the gun. Her wild eyes dart between you and her father.")
+
+		saynn("You step forward, moving deliberately to Luxe's side. Your expression hardens, meeting Mirri's shocked gaze.")
+
+		saynn("[say=pc]Put the gun down, Mirri. It's over.[/say]")
+
+		saynn("Her ears flick back sharply, her mouth quivering while she is trying to process what is happening.")
+
+		saynn("[say=mirri]..You? No.. No, no no-no.. you did not just do that.. You did not just betray me..[/say]")
+
+		saynn("Her voice cracks, disbelief is making her face muscles twitch.")
+
+		saynn("[say=pc]Who said that I ever was on your side?[/say]")
+
+		saynn("The catgirl slowly realizes.. that she is alone in this. Something in her shatters, her ears droop momentarily.. but her grip on the gun tightens, her only ally.")
+
+		saynn("[say=mirri]You are.. so stupid..[/say]")
+
+		saynn("[say=luxe]Whole world is against you, Mirri. Do the right thing for once.[/say]")
+
+		saynn("[say=mirri]SHUT UP![/say]")
+
+		saynn("Her arm jerks as she aims the gun back at Luxe. Her entire body shakes with barely contained fury.")
+
+		saynn("[say=mirri]I HATE YOU. I HATE YOUR STUPID FAMILY, ALL OF THEM. I WILL KILL EVERY LAST BLACKTAIL. I WILL MURDER THEM ALL.[/say]")
+
+		saynn("Luxe shows complete coldness, even at a gunpoint.")
+
+		saynn("[say=luxe]Looks like you have decided to start with yourself first.[/say]")
+
+		saynn("Mirri aims her gun at you next.")
+
+		saynn("[say=mirri]AND YOU.. YOU LITTLE MISERABLE BACKSTABBING PILE OF SHIT.. I HATE YOU.[/say]")
+
+		saynn("Her voice cracks more as fresh tears stream down her face, blending with the sheer rage.")
+
+		saynn("[say=mirri]I HATE YOU MORE THAN I HATE MYSELF FOR BEING THIS STUPID.[/say]")
+
+		saynn("[say=luxe]Then shoot.[/say]")
+
+		saynn("Her aim flicks and she pulls the trigger.")
+
+		saynn("[b]BANG.[/b]")
+
+		saynn("The shot tears through tension like a blade. Sparks shower from the flickering holographic wall behind you.")
+
+		saynn("[say=mirri]SHUT UP! SHUT UP! SHUT UP![/say]")
+
+		saynn("The wall starts flickering on and off, casting chaotic shadows everywhere.")
+
+		saynn("[say=mirri]SHUT UP! SHUT UP!  SHUT UP!![/say]")
+
+		saynn("Her screams are loud and annoying, more tears streaming down her cheeks as she points the gun back and forth between you and Luxe, fingers trembling. She is breaking down.. the cracks spreading too fast to contain.")
+
+		saynn("[say=luxe]You were always weak, Mirri. Your mind and your body.[/say]")
+
+		saynn("She is breathing heavily.")
+
+		saynn("[say=mirri]..fuck.. you..[/say]")
+
+		saynn("Looks like it's time to show Mirri her place. Gotta make sure not to lose this one.. or [b]bad things[/b] will surely happen to you.")
+
+		addButton("Fight", "Start the fight", "luxe_fight_mirri")
+	if(state == "luxe_fight_lost"):
+		saynn("WRITE ME")
+
+	if(state == "luxe_fight_won"):
+		playAnimation(StageScene.Duo, "stand", {npc="mirri", npcAction="defeat"})
+		saynn("Mirri hits the floor, unable to continue fighting. Her gun flies to the side as she drops it.")
+
+		saynn("[say=mirri]F-FUCK!.. gh..[/say]")
+
+		saynn("She is breathing heavily while slowly crawling towards her weapon. You step on her paw before she manages to reach it.")
+
+		saynn("[say=pc]Bad girl. Such a bad girl.[/say]")
+
+		saynn("You kick the gun away, stealing her last chance for revenge.")
+
+		saynn("[say=mirri]Fuck you.. hh.. let go..[/say]")
+
+		saynn("Luxe approaches and pats you on the back.")
+
+		saynn("[say=luxe]Great job.[/say]")
+
+		saynn("[say=mirri]GREAT JOB, YEAH. GREAT JOB FOR A SYNDICATE DOORMAT.[/say]")
+
+		saynn("Her raspy voice is getting annoying fast. Luxe hands you some ropes.")
+
+		saynn("[say=luxe]I will hold her. Tie her up, she doesn't need that armor anymore too.[/say]")
+
+		saynn("[say=pc]Sure.[/say]")
+
+		saynn("[say=mirri]What? I love this armor, hands off me, you fuckers..[/say]")
+
+		addButton("Strip her", "Tie Mirri up and strip her naked", "luxe_strip_mirri")
+	if(state == "luxe_strip_mirri"):
+		playAnimation(StageScene.Hogtied, "idle", {pc="mirri", bodyState={naked=true}})
+		addCharacter("mirri", ["naked"])
+		saynn("Luxe is holding her pinned to the floor while you begin pulling the pieces of her guard armor off, exposing more and more of her fur and skin.")
+
+		saynn("[say=luxe]That.. is the armor of our enemies. Which makes you.. who?[/say]")
+
+		saynn("[say=mirri]Fuck you.. hey-y..[/say]")
+
+		saynn("You pull her boots off and throw them away, exposing her hind paws, her toes curling as she is trying to break free.")
+
+		saynn("[say=luxe]You won't need any of that.[/say]")
+
+		saynn("[say=mirri]The fuck do you mean, quit it!.. Ghrrr-rh.. S-stupid..[/say]")
+
+		saynn("Her leather corset is next.. Followed by her blue top. Her cute perky tits are now out on display.")
+
+		saynn("[say=mirri]You.. f-fucking.. p-perverts.. w-why are you doing this..[/say]")
+
+		saynn("[say=luxe]Get used to being naked. Although, you were always a whore. So you will do just fine there.[/say]")
+
+		saynn("Mirri begins to have her suspicions..")
+
+		saynn("[say=mirri]Are you.. NO.. YOU ARE NOT. YOU'RE NOT GONNA DO THIS.[/say]")
+
+		saynn("She only has her striped panties on now.. Luxe nods you to do it so you pull them down too, exposing her dry little pussy and tight tailhole, her tail now furiously wagging behind her. You shove her crumpled up panties into her mouth.. but she is quick to spit them out. Rude.")
+
+		saynn("[say=luxe]What do you think I'm doing?[/say]")
+
+		saynn("[say=mirri]You are NOT selling me. I am still BLACKTAIL![/say]")
+
+		saynn("[say=luxe]Right. Consider yourself disowned. My family has no place for weak crazy sluts.[/say]")
+
+		saynn("She shakes her head and violently thrashes against Luxe's hands while he keeps holding her down. You quickly begin tying her up, ropes going around her ankles and wrists, following the curves of her girly body to connect them together, hogtying her.")
+
+		saynn("[say=mirri]What?.. No..[/say]")
+
+		saynn("[say=luxe]You are not Blacktail anymore. You're nothing.[/say]")
+
+		saynn("[say=mirri]No.. f-fuck you.. I'm s-still Blacktail..[/say]")
+
+		saynn("[say=luxe]You're nothing but a product. The auction is gonna start soon.[/say]")
+
+		saynn("She is crying again, the ropes now keep her completely helpless, sometimes rubbing against her exposed sensitive spots. You know that behind those teary eyes is a very cruel bitch, she is not gonna get any sympathy from you.")
+
+		addButton("Continue", "See what happens next", "luxe_gives_pc_collar")
+	if(state == "luxe_gives_pc_collar"):
+		playAnimation(StageScene.Duo, "stand", {npc="luxe"})
+		saynn("[say=pc]Who's gonna sell her? We're down a presenter.[/say]")
+
+		saynn("[say=luxe]Well.. you can.[/say]")
+
+		saynn("[say=pc]Me? But I'm not..[/say]")
+
+		saynn("[say=luxe]You know what to say. You know how to act. You know how to present.[/say]")
+
+		saynn("He hands you an unlocked slave collar and a chain leash.")
+
+		saynn("[say=luxe]I think you will do just fine.[/say]")
+
+		saynn("[say=pc]Do you really want me to sell your.. her?[/say]")
+
+		saynn("He nods.")
+
+		saynn("[say=luxe]Mirri is a mistake, always was. I'm not gonna kill her. But I'm not gonna let her stay.[/say]")
+
+		saynn("Mirri is quietly sobbing.")
+
+		saynn("[say=mirri]I hate you.. both of you.. you don't have to do this..[/say]")
+
+		saynn("[say=pc]You're a psycho, Mirri. From the first day that I saw you, I knew that I would have to deal with you.[/say]")
+
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -1068,6 +1246,11 @@ func _react(_action: String, _args):
 	if(_action == "mirri_after_all"):
 		processTime(3*60)
 
+	if(_action == "mirri_lost_badend"):
+		getCharacter("mirri").getInventory().forceEquipRemoveOther(GlobalRegistry.createItem("oldcollar"))
+		getCharacter("mirri").getInventory().forceEquipRemoveOther(GlobalRegistry.createItem("inmatewristcuffs"))
+		getCharacter("mirri").getInventory().forceEquipRemoveOther(GlobalRegistry.createItem("inmateanklecuffs"))
+
 	if(_action == "badend_restart"):
 		GM.pc.addPain(-GM.pc.getPain())
 		GM.pc.addLust(-GM.pc.getLust())
@@ -1076,7 +1259,33 @@ func _react(_action: String, _args):
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
+		getCharacter("mirri").getInventory().clearSlot(InventorySlot.Neck)
+		getCharacter("mirri").getInventory().clearSlot(InventorySlot.Wrists)
+		getCharacter("mirri").getInventory().clearSlot(InventorySlot.Ankles)
+		lostAtLeastOnce = true
 		return
+
+	if(_action == "do_skip_luxe_fight"):
+		GM.pc.addPain(-GM.pc.getPain())
+		GM.pc.addLust(-GM.pc.getLust())
+		GM.pc.addStamina(GM.pc.getMaxStamina())
+		getCharacter("mirri").getInventory().clearSlot(InventorySlot.Neck)
+		getCharacter("mirri").getInventory().clearSlot(InventorySlot.Wrists)
+		getCharacter("mirri").getInventory().clearSlot(InventorySlot.Ankles)
+		setState("mirri_fight_won")
+		return
+
+	if(_action == "luxe_fight_mirri"):
+		runScene("FightScene", ["mirri", "finalFight"], "mirriFight")
+		return
+
+	if(_action == "luxe_strip_mirri"):
+		processTime(3*60)
+		getCharacter("mirri").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("ropeharness"))
+		getCharacter("mirri").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("ZiptiesWrist"))
+
+	if(_action == "luxe_gives_pc_collar"):
+		processTime(3*60)
 
 	setState(_action)
 
@@ -1089,3 +1298,24 @@ func _react_scene_end(_tag, _result):
 			setState("mirri_fight_won")
 		else:
 			setState("mirri_fight_lost")
+
+	if(_tag == "mirriFight"):
+		processTime(10 * 60)
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			setState("luxe_fight_won")
+		else:
+			setState("luxe_fight_lost")
+
+func saveData():
+	var data = .saveData()
+
+	data["lostAtLeastOnce"] = lostAtLeastOnce
+
+	return data
+
+func loadData(data):
+	.loadData(data)
+
+	lostAtLeastOnce = SAVE.loadVar(data, "lostAtLeastOnce", false)
