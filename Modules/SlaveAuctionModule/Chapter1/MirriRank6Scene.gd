@@ -1,6 +1,7 @@
 extends SceneBase
 
 var lostAtLeastOnce = false
+var creditsToGive = 0
 
 func _init():
 	sceneID = "MirriRank6Scene"
@@ -1093,25 +1094,27 @@ func _run():
 
 	if(state == "luxe_fight_won"):
 		playAnimation(StageScene.Duo, "stand", {npc="mirri", npcAction="defeat"})
-		saynn("Mirri hits the floor, unable to continue fighting. Her gun flies to the side as she drops it.")
+		saynn("Mirri hits the floor, unable to continue fighting. The gun slips from her grasp, sliding across the floor.")
 
-		saynn("[say=mirri]F-FUCK!.. gh..[/say]")
+		saynn("[say=mirri]F-FUCK!.. ugh..[/say]")
 
-		saynn("She is breathing heavily while slowly crawling towards her weapon. You step on her paw before she manages to reach it.")
+		saynn("She gasps for air, her heavy chest moving fast as she starts crawling toward the weapon. You calmly step forward and plant your {pc.foot} on her paw before she can reach it.")
 
-		saynn("[say=pc]Bad girl. Such a bad girl.[/say]")
+		saynn("[say=pc]Bad girl. Such a bad, bad girl.[/say]")
 
-		saynn("You kick the gun away, stealing her last chance for revenge.")
+		saynn("You nudge the gun further out of her reach, the sound of metal scraping against the floor echoing in the room. Her last hope is gone.")
 
-		saynn("[say=mirri]Fuck you.. hh.. let go..[/say]")
+		saynn("[say=mirri]Hh.. let go.. and g-go to hell..[/say]")
 
-		saynn("Luxe approaches and pats you on the back.")
+		saynn("[say=luxe]We will all meet there one day, Mirri.[/say]")
 
-		saynn("[say=luxe]Great job.[/say]")
+		saynn("Luxe approaches, standing tall over her defeated form. He places a heavy hand on your shoulder.")
 
-		saynn("[say=mirri]GREAT JOB, YEAH. GREAT JOB FOR A SYNDICATE DOORMAT.[/say]")
+		saynn("[say=luxe]Good job.[/say]")
 
-		saynn("Her raspy voice is getting annoying fast. Luxe hands you some ropes.")
+		saynn("[say=mirri]GOOD JOB, YEAH. GOOD JOB FOR A SYNDICATE DOORMAT.[/say]")
+
+		saynn("Her voice is raspy, laced with bitterness. Luxe produces a set of ropes and hands them to you.")
 
 		saynn("[say=luxe]I will hold her. Tie her up, she doesn't need that armor anymore too.[/say]")
 
@@ -1119,47 +1122,59 @@ func _run():
 
 		saynn("[say=mirri]What? I love this armor, hands off me, you fuckers..[/say]")
 
+		saynn("Her voice cracks, desperation creeping in.. but there is no strength left in her to resist.")
+
+		saynn("She thought she could take on the world..")
+
 		addButton("Strip her", "Tie Mirri up and strip her naked", "luxe_strip_mirri")
 	if(state == "luxe_strip_mirri"):
 		playAnimation(StageScene.Hogtied, "idle", {pc="mirri", bodyState={naked=true}})
 		addCharacter("mirri", ["naked"])
-		saynn("Luxe is holding her pinned to the floor while you begin pulling the pieces of her guard armor off, exposing more and more of her fur and skin.")
+		saynn("Luxe is holding her pinned to the floor while you crouch down beside her, your hands brushing the edges of her armor.")
+
+		saynn("She jerks slightly, trying to pull away, but she is too slow. You slide off her forearm guards, exposing more of her black fur.")
 
 		saynn("[say=luxe]That.. is the armor of our enemies. Which makes you.. who?[/say]")
 
 		saynn("[say=mirri]Fuck you.. hey-y..[/say]")
 
-		saynn("You pull her boots off and throw them away, exposing her hind paws, her toes curling as she is trying to break free.")
+		saynn("Next.. her boots. You pull them off and toss them aside, exposing her hind paws, her toes curling as she is trying to break free.")
 
 		saynn("[say=luxe]You won't need any of that.[/say]")
 
 		saynn("[say=mirri]The fuck do you mean, quit it!.. Ghrrr-rh.. S-stupid..[/say]")
 
-		saynn("Her leather corset is next.. Followed by her blue top. Her cute perky tits are now out on display.")
+		saynn("Her leather corset is next.. which slides off as soon as you relax the lacing on its rear. Then you pull up her blue top, her cute perky tits are now out on display.")
 
 		saynn("[say=mirri]You.. f-fucking.. p-perverts.. w-why are you doing this..[/say]")
 
-		saynn("[say=luxe]Get used to being naked. Although, you were always a whore. So you will do just fine there.[/say]")
+		saynn("[say=luxe]Get used to it. Although, you were always a whore. So you will do just fine there.[/say]")
 
-		saynn("Mirri begins to have her suspicions..")
+		saynn("Mirri begins to have her suspicions.. Seeing the ropes only confirmed them.")
 
 		saynn("[say=mirri]Are you.. NO.. YOU ARE NOT. YOU'RE NOT GONNA DO THIS.[/say]")
 
-		saynn("She only has her striped panties on now.. Luxe nods you to do it so you pull them down too, exposing her dry little pussy and tight tailhole, her tail now furiously wagging behind her. You shove her crumpled up panties into her mouth.. but she is quick to spit them out. Rude.")
+		saynn("[say=luxe]I am. And I will.[/say]")
 
-		saynn("[say=luxe]What do you think I'm doing?[/say]")
+		saynn("The words hit her like a slap, her breath hitching.")
+
+		saynn("[say=mirri]You're lying.. this is a bluff..[/say]")
+
+		saynn("She only has her striped panties on now.. Luxe nods you to do it so you pull them down too, exposing her dry little pussy and tight tailhole, her tail now furiously wagging behind her. You shove her crumpled up panties into her mouth.. but she is quick to spit them out. Rude.")
 
 		saynn("[say=mirri]You are NOT selling me. I am still BLACKTAIL![/say]")
 
-		saynn("[say=luxe]Right. Consider yourself disowned. My family has no place for weak crazy sluts.[/say]")
+		saynn("[say=luxe]Consider yourself disowned. Blacktail has no place for weak crazy sluts.[/say]")
 
 		saynn("She shakes her head and violently thrashes against Luxe's hands while he keeps holding her down. You quickly begin tying her up, ropes going around her ankles and wrists, following the curves of her girly body to connect them together, hogtying her.")
 
 		saynn("[say=mirri]What?.. No..[/say]")
 
-		saynn("[say=luxe]You are not Blacktail anymore. You're nothing.[/say]")
+		saynn("Tears begin collecting on the corners of her eyes. She is swaying from depressed to hysterical and back in mere seconds.")
 
-		saynn("[say=mirri]No.. f-fuck you.. I'm s-still Blacktail..[/say]")
+		saynn("[say=luxe]You are not Blacktail anymore. You are nothing.[/say]")
+
+		saynn("[say=mirri]No.. f-fuck you.. I'm s-still Blacktail.. You will fucking regret this! I'm gonna fucking kill you![/say]")
 
 		saynn("[say=luxe]You're nothing but a product. The auction is gonna start soon.[/say]")
 
@@ -1168,17 +1183,19 @@ func _run():
 		addButton("Continue", "See what happens next", "luxe_gives_pc_collar")
 	if(state == "luxe_gives_pc_collar"):
 		playAnimation(StageScene.Duo, "stand", {npc="luxe"})
+		saynn("You realize that you have a small problem.")
+
 		saynn("[say=pc]Who's gonna sell her? We're down a presenter.[/say]")
 
-		saynn("[say=luxe]Well.. you can.[/say]")
+		saynn("[say=luxe]You.[/say]")
 
 		saynn("[say=pc]Me? But I'm not..[/say]")
 
-		saynn("[say=luxe]You know what to say. You know how to act. You know how to present.[/say]")
+		saynn("[say=luxe]You know what to do. You've seen how it's done.[/say]")
 
 		saynn("He hands you an unlocked slave collar and a chain leash.")
 
-		saynn("[say=luxe]I think you will do just fine.[/say]")
+		saynn("[say=luxe]Mirri couldn't do it without you. But you don't need her.[/say]")
 
 		saynn("[say=pc]Do you really want me to sell your.. her?[/say]")
 
@@ -1186,11 +1203,133 @@ func _run():
 
 		saynn("[say=luxe]Mirri is a mistake, always was. I'm not gonna kill her. But I'm not gonna let her stay.[/say]")
 
-		saynn("Mirri is quietly sobbing.")
+		saynn("Mirri is quietly sobbing, her body trembling against the ropes.")
 
 		saynn("[say=mirri]I hate you.. both of you.. you don't have to do this..[/say]")
 
-		saynn("[say=pc]You're a psycho, Mirri. From the first day that I saw you, I knew that I would have to deal with you.[/say]")
+		saynn("Really? She is begging now after trying to murder you?")
+
+		saynn("[say=pc]You're a psycho, Mirri. I wanted to do this from the day that I saw you.[/say]")
+
+		addButton("Collar her", "Lock the slave collar around Mirri's neck", "luxe_lock_collar")
+	if(state == "luxe_lock_collar"):
+		playAnimation(StageScene.Duo, "stand", {npc="mirri", npcBodyState={naked=true, leashedBy="pc"}})
+		aimCameraAndSetLocName("market_market")
+		removeCharacter("luxe")
+		saynn("Mirri looks up at you, her once mean glare now dimmed by the tears streaming down her cheeks. Despite her protests, she doesn't thrash anymore. She seems to be worn out.. physically, emotionally, and mentally.")
+
+		saynn("[say=pc]This is your doing. No one else's.[/say]")
+
+		saynn("Her ears flatten against her head as her lips tremble, but she doesn't speak.")
+
+		saynn("You lean closer.. and bring the unlocked slave collar around her neck.")
+
+		saynn("[say=mirri]Don't..[/say]")
+
+		saynn("[b]Click.[/b]")
+
+		saynn("The collar snaps closed, the harsh metal click echoing around the room. You don't respond to her words and clip a leash to the ring on the front of her collar instead before giving it a gentle tug, enough to make her sit upright. Luxe watches, arms crossed, his face unreadable.")
+
+		saynn("[say=luxe]You know what to do. Handle it cleanly and you will get every credit for her sale.[/say]")
+
+		saynn("Wow. 100% of the credits for selling Mirri? That's a great deal. Clearly her ex-father doesn't want to have anything hers.")
+
+		saynn("And with that, Luxe leaves his office, leaving you alone with Mirri. Her tone quickly changes.")
+
+		saynn("[say=mirri]I will murder you.. you know..[/say]")
+
+		saynn("Her voice is barely above a whisper.. but it is a very threatening whisper.")
+
+		saynn("[say=pc]No you won't.[/say]")
+
+		saynn("[say=mirri]You forgot that I'm a spy? I will find a way to escape.. and then I will come find you..[/say]")
+
+		saynn("You yank on her leash, making her stand.")
+
+		saynn("[say=pc]Let's go, slave.[/say]")
+
+		saynn("The two of you leave Luxe's office, Mirri stepping behind you, the ropes allowing only small humiliating hops for her.")
+
+		saynn("[say=mirri]I know the coordinates.. I know how to get to you.. it's all in my head..[/say]")
+
+		saynn("You follow the corridors, heading towards the auction platform. Mirri is slow so you have to occasionally yank on the leash again.")
+
+		saynn("[say=pc]Very scary.[/say]")
+
+		saynn("[say=mirri]You're screwed, {pc.name}.. You are so.. dead.. or worse..[/say]")
+
+		saynn("She sure barks a lot for a cat.")
+
+		saynn("[say=pc]You couldn't even kill your dad when you had the chance.[/say]")
+
+		saynn("[say=mirri]Oh, but he is not my dad now. Nothing holds me back anymore. Nothing can stop me.[/say]")
+
+		saynn("You bring her to the auction platform. But today she will be taking a different spot, playing a different role. The irony..")
+
+		saynn("[say=pc]Chains can, Mirri. And they will.[/say]")
+
+		addButton("Chains", "Chain her to the ceiling", "luxe_do_chain")
+	if(state == "luxe_do_chain"):
+		playAnimation(StageScene.HangingDuo, "idle", {pc="mirri", npc="pc", bodyState={naked=true}})
+		saynn("You position her in the right spot before taking her wrists and pulling them up above her head. She struggles faintly.. but her resistance is half-hearted at best.")
+
+		saynn("[say=mirri]Chains, pff.. Whoever buys me is gonna regret it big time. I will make their life a living hell.[/say]")
+
+		saynn("Somehow, you don't doubt this.")
+
+		saynn("You put the chained cuffs on her wrists and tug on the chains, forcing her arms to stretch upward. She is not fully exposed, her girly figure standing on her toes.")
+
+		saynn("[say=pc]Ready to be sold off?[/say]")
+
+		saynn("She rolls her watery eyes.")
+
+		saynn("[say=mirri]..do your worst, bitch.[/say]")
+
+		saynn("You stand on the presenter's platform. Behind the black curtains there is little quiet chatter, the bidders slowly arriving and taking their spots. Huh. So this is how it feels.")
+
+		saynn("[say=pc]Show time.[/say]")
+
+		addButton("Auction", "Time to do this", "luxe_start_auction")
+	if(state == "luxe_failed_to_sell"):
+		saynn("The bidders begin to leave, the black curtains close.")
+
+		saynn("You failed to sell Mirri.. Not a single bid was made.")
+
+		saynn("[say=mirri]Wait! Are you fucking serious! You couldn't even do THIS right![/say]")
+
+		saynn("You glance over at Mirri, still chained to the ceiling. Her ears are flat, her face burning, her tear-streaked cheeks are now flushed with anger, her claws scraping against the chains.")
+
+		saynn("[say=mirri]You did this on purpose, didn't you?! You FUCKER! You f-fucking..[/say]")
+
+		saynn("You shrug, refusing to meet her furious gaze. Before she can scream more, a pair of staff members approach her, their movements precise and practiced as they clip a leash to Mirri's collar and then uncuff her.")
+
+		saynn("[say=mirri]Do you even realize what they are gonna do to me?! YOU.. F-fucking..[/say]")
+
+		saynn("The staff yanks on her leash and she stumbles, her resistance weak but vocal.")
+
+		saynn("[say=mirri]NO! Get your filthy hands off me![/say]")
+
+		saynn("[sayMale]You know the rules. Unsold stock gets repurposed.[/sayMale]")
+
+		saynn("They pull her toward one of the side corridors, the dimly lit path leading somewhere that's unknown to you. Mirri digs her paws into the floor.. but it's no use, the staff is too strong.")
+
+		saynn("Mirri jerks her head toward you, her desperate eyes blazing.")
+
+		saynn("[say=mirri]HEY! I'm talking to you! Look at me, you fuck![/say]")
+
+		saynn("You watch the whole process.. but don't respond. Mirri tries to bite one of them.. but only gets dropped by her shock collar.")
+
+		saynn("[say=mirri]ARGH!..[/say]")
+
+		saynn("She is squirming around on the floor, the electricity making her thrash against the ropes, some of them digging into her sensitive spots harder.")
+
+		saynn("[say=mirri]YOU DID THIS TO ME! ON PURPOSE! You.. You FUCKING PIECE OF-..[/say]")
+
+		saynn("Her words dissolve into incoherent curses as they drag her away. You watch as her silhouette vanishes into the shadows, her voice echoing faintly.. until silence settles over the market again..")
+
+		saynn("Well.. That was that.")
+
+		saynn("You didn't get any credits for that.. but it was pretty fucking worth it anyway.")
 
 
 func _react(_action: String, _args):
@@ -1287,6 +1426,18 @@ func _react(_action: String, _args):
 	if(_action == "luxe_gives_pc_collar"):
 		processTime(3*60)
 
+	if(_action == "luxe_lock_collar"):
+		processTime(3*60)
+		getCharacter("mirri").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("oldcollar"))
+		getCharacter("mirri").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("ZiptiesWrist"))
+
+	if(_action == "luxe_do_chain"):
+		processTime(3*60)
+
+	if(_action == "luxe_start_auction"):
+		runScene("SlaveAuctionScene", ["mirri", getModule("SlaveAuctionModule").getAuctionSettings()], "slave_auction")
+		return
+
 	setState(_action)
 
 func _react_scene_end(_tag, _result):
@@ -1308,10 +1459,26 @@ func _react_scene_end(_tag, _result):
 		else:
 			setState("luxe_fight_lost")
 
+	if(_tag == "slave_auction"):
+		processTime(2 * 60)
+		var wasSold = _result[0]["wasSold"] if (_result.size() > 0 && _result[0].has("wasSold")) else true
+		
+		if(wasSold):
+			var creditsAmount = _result[0]["winningBid"]
+			var pcNewCredits:int = int(creditsAmount)
+			creditsToGive = pcNewCredits
+			GM.pc.addCredits(creditsToGive)
+			
+			setState("luxe_after_sold")
+		
+		else:
+			setState("luxe_failed_to_sell")
+
 func saveData():
 	var data = .saveData()
 
 	data["lostAtLeastOnce"] = lostAtLeastOnce
+	data["creditsToGive"] = creditsToGive
 
 	return data
 
@@ -1319,3 +1486,4 @@ func loadData(data):
 	.loadData(data)
 
 	lostAtLeastOnce = SAVE.loadVar(data, "lostAtLeastOnce", false)
+	creditsToGive = SAVE.loadVar(data, "creditsToGive", 0)
