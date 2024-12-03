@@ -22,6 +22,9 @@ func _init():
 	}
 	
 func _getName():
+	if(GM.main != null):
+		if(!GM.main.getFlag("SlaveAuctionModule.knowsLuxeName", false)):
+			return "Wolf"
 	return "Luxe Blacktail"
 
 func getGender():

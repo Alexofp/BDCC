@@ -23,6 +23,11 @@ func _init():
 	}
 	
 func _getName():
+	if(GM.main != null):
+		if(!GM.main.getFlag("SlaveAuctionModule.knowsMirriName", false) && !GM.main.getFlag("SlaveAuctionModule.s1hap", false)):
+			return "Catgirl Guard"
+		if(GM.main.getFlag("SlaveAuctionModule.mirriNotBlacktail", false)):
+			return "Mirri"
 	return "Mirri Blacktail"
 
 func getGender():

@@ -14,6 +14,7 @@ var bidLastChances:int = 0
 var startingBid:int = 10
 var bidIncrease:int = 10
 var relevantTraitBonus:float = 0.0
+var presenterID:String = "mirri"
 
 var actionText:String = ""
 var extraActionTexts:Array = [] # no save
@@ -40,6 +41,7 @@ func getCharacter() -> BaseCharacter:
 func start(_args:Dictionary = {}):
 	calculateSlaveTraits()
 	generateBidders()
+	presenterID = _args["presenterID"] if (_args.has("presenterID")) else "mirri"
 	startingBid = _args["startingBid"] if (_args.has("startingBid")) else calculateStartingBid(getChar())
 	bidIncrease = _args["bidIncrease"] if (_args.has("bidIncrease")) else calculateBidIncrease(getChar())
 	relevantTraitBonus = _args["relevantTraitBonus"] if (_args.has("relevantTraitBonus")) else 0.0
@@ -450,7 +452,7 @@ func getBiddersRandomOrder() -> Array:
 	return result
 
 func getPresenterID() -> String:
-	return "mirri"
+	return presenterID
 
 func saynnPresenter(theText:String):
 	saynn("[say=presenter]"+theText+"[/say]")
@@ -755,6 +757,7 @@ func saveData():
 		slaveReactionType = slaveReactionType,
 		shouldEnd = shouldEnd,
 		bidders = biddersData,
+		presenterID = presenterID,
 	}
 
 func loadData(_data):
@@ -775,6 +778,7 @@ func loadData(_data):
 	usedActions = SAVE.loadVar(_data, "usedActions", {})
 	slaveReactionType = SAVE.loadVar(_data, "slaveReactionType", AuctionSlaveReaction.Confused)
 	shouldEnd = SAVE.loadVar(_data, "shouldEnd", false)
+	presenterID = SAVE.loadVar(_data, "presenterID", "mirri")
 	
 	bidders = []
 	var biddersData = SAVE.loadVar(_data, "bidders", [])

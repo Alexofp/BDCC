@@ -305,6 +305,9 @@ func _run():
 
 		addButton("Continue", "See what happens next", "gun_showing_won")
 	if(state == "gun_showing"):
+		setFlag("", true)
+		removeCharacter("mirri")
+		addCharacter("mirri")
 		playAnimation(StageScene.Duo, "stand", {npc="mirri", npcAction=["holdpistol", "res://Inventory/UnriggedModels/Pistol/Pistol.tscn"]})
 		if (didWin):
 			saynn("You take your eyes off of hers and look down.. indeed.. her second paw is holding you at gunpoint, keeping the weapon out of sight from your slaves. Your grip on her neck relaxes instinctively..")

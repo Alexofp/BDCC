@@ -10,7 +10,7 @@ func getFlags():
 		"r2outcome": flag(FlagType.Text), # kiss nohate luxeisright silence
 		"r4outcome": flag(FlagType.Text), # support antag
 		"r5outcome": flag(FlagType.Text), # mirri luxe
-		"r6outcome": flag(FlagType.Text), # mirrislave luxedead middleground
+		"r6outcome": flag(FlagType.Text), # mirrislave mirrigone luxedead middleground
 		
 		"repLevel": flag(FlagType.Number),
 		"repCredits": flag(FlagType.Number),
@@ -21,6 +21,7 @@ func getFlags():
 		"beganAuctionOnce": flag(FlagType.Bool),
 		
 		"knowsLuxeName": flag(FlagType.Bool),
+		"knowsMirriName": flag(FlagType.Bool),
 		
 		"pickedSexSub": flag(FlagType.Bool),
 		"sexSubbedToMirri": flag(FlagType.Bool),
@@ -28,6 +29,7 @@ func getFlags():
 		"customMirriGreeting": flag(FlagType.Text),
 		"mirriNotOnPill": flag(FlagType.Bool),
 		"mirriCanSkipCombat": flag(FlagType.Bool),
+		"mirriNotBlacktail": flag(FlagType.Bool),
 		
 		"luxeTalkIntro": flag(FlagType.Bool),
 		"customLuxeGreeting": flag(FlagType.Text),
