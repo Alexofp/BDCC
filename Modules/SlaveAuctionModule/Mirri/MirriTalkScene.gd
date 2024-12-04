@@ -22,6 +22,8 @@ func _run():
 
 		saynn(""+str(getModule("SlaveAuctionModule").getRepInfoString())+"")
 
+		saynn("Affection towards you: "+str(Util.roundF(getModule("SlaveAuctionModule").getMirriAffection()*100.0, 1))+"%")
+
 		addButton("Sell Slave", "Sell one of your slaves on a slave auction", "sell_menu")
 		if (getFlag("SlaveAuctionModule.upgradeSeePrefs", 0) >= 1):
 			addButton("Bidders info", "Check the preferences of the next bidders", "bidders_info")
@@ -32,6 +34,9 @@ func _run():
 		else:
 			addDisabledButton("Upgrades", "You don't access to this yet")
 		if (canGoNextRank):
+			if (mirriRank == 5):
+				saynn("[b]Next rank will be the last. Make sure you are ready as you won't be able to go back.[/b]")
+
 			addButton("Next rank!", "Progress the story further", "do_next_rank")
 		addButton("Leave", "Enough talking", "endthescene")
 		GM.ES.triggerRun(Trigger.TalkingToNPC, ["mirri"])
@@ -1420,6 +1425,8 @@ func _run():
 			saynn("[say=pc]Let's see you struggle then.[/say]")
 
 		addButton("Fight", "Start the fight", "dom_start_fight")
+		if (getFlag("SlaveAuctionModule.mirriCanSkipCombat", false)):
+			addButton("(Skip fight)", "You know that you are stronger already!", "dom_fight_won")
 	if(state == "dom_fight_lost"):
 		playAnimation(StageScene.Duo, "defeat", {npc="mirri"})
 		saynn("You hit the floor, unable to continue fighting. Mirri giggles.")
@@ -2795,15 +2802,19 @@ func _react(_action: String, _args):
 
 	if(_action == "agree_be_toy"):
 		setFlag("SlaveAuctionModule.sexSubbedToMirri", true)
+		getModule("SlaveAuctionModule").addMirriAffection(0.1)
 
 	if(_action == "sub_painplay"):
 		processTime(5*60)
+		getModule("SlaveAuctionModule").addMirriAffection(0.1)
 
 	if(_action == "sub_pussy"):
 		processTime(5*60)
+		getModule("SlaveAuctionModule").addMirriAffection(0.15)
 
 	if(_action == "sub_walkies"):
 		processTime(5*60)
+		getModule("SlaveAuctionModule").addMirriAffection(0.2)
 
 	if(_action == "ask_luxe"):
 		processTime(5*60)
@@ -2941,12 +2952,24 @@ func _react(_action: String, _args):
 
 	if(_action == "dom_nothing"):
 		processTime(5*60)
+		getModule("SlaveAuctionModule").addMirriAffection(0.1)
+
+	if(_action == "dom_hatefuck"):
+		getModule("SlaveAuctionModule").addMirriAffection(0.1)
+
+	if(_action == "dom_straponfuck_pick"):
+		getModule("SlaveAuctionModule").addMirriAffection(0.1)
+
+	if(_action == "dom_anal"):
+		getModule("SlaveAuctionModule").addMirriAffection(0.1)
 
 	if(_action == "dom_spank"):
 		processTime(5*60)
+		getModule("SlaveAuctionModule").addMirriAffection(0.1)
 
 	if(_action == "dom_rp"):
 		processTime(5*60)
+		getModule("SlaveAuctionModule").addMirriAffection(0.1)
 
 	if(_action == "dom_hatefuck_usecondom"):
 		usedCondom=true

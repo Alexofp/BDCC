@@ -145,7 +145,7 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {npc="mirri"})
 		saynn("Mirri approaches you and hands you a credits chip.")
 
-		saynn("[say=mirri]"+str(RNG.pick(["Here is your cut, big {pc.girl}.", "Your cut, pretty {pc.girl}.", "Your 10%, tough {pc.girl}.", "Please doing business, big {pc.girl}."]))+"[/say]")
+		saynn("[say=mirri]"+str(RNG.pick(["Here is your cut, big {pc.girl}.", "Your cut, pretty {pc.girl}.", "Your "+str(getModule("SlaveAuctionModule").getPCCut()*10)+"%, tough {pc.girl}.", "Please doing business, big {pc.girl}."]))+"[/say]")
 
 		saynn("As you take it, the catgirl just walks back to her room.")
 
@@ -225,7 +225,7 @@ func _react_scene_end(_tag, _result):
 		if(wasSold):
 			var creditsAmount:int = _result[0]["winningBid"]
 			getModule("SlaveAuctionModule").addRepCredits(creditsAmount)
-			var pcNewCredits:int = int(round(float(creditsAmount) * 0.1))
+			var pcNewCredits:int = int(round(float(creditsAmount) * getModule("SlaveAuctionModule").getPCCut()))
 			creditsToGive = pcNewCredits
 			if(getModule("SlaveAuctionModule").isReadyToAdvanceRepLevel()):
 				addMessage("You are ready to advance your and Mirri's slaver reputation level. Talk with her when you are ready.")

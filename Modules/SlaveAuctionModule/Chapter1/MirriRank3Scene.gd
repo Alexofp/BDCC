@@ -557,6 +557,7 @@ func _react(_action: String, _args):
 
 	if(_action == "waterfall"):
 		processTime(3*60)
+		getModule("SlaveAuctionModule").addMirriAffection(0.1)
 
 	if(_action == "waterfall_tp"):
 		processTime(3*60)
@@ -564,10 +565,23 @@ func _react(_action: String, _args):
 	if(_action == "cuddle_mirri"):
 		processTime(5*60)
 
+	if(_action == "say_goodgirl"):
+		getModule("SlaveAuctionModule").addMirriAffection(0.2)
+
+	if(_action == "say_crazygirl"):
+		getModule("SlaveAuctionModule").addMirriAffection(-0.2)
+
 	if(_action == "bad_pin"):
 		processTime(5*60)
 
+	if(_action == "bad_shoveaway"):
+		getModule("SlaveAuctionModule").addMirriAffection(-0.5)
+
+	if(_action == "bad_panties"):
+		getModule("SlaveAuctionModule").addMirriAffection(0.2)
+
 	if(_action == "do_sex"):
+		getModule("SlaveAuctionModule").addMirriAffection(0.1)
 		if(!GM.pc.hasReachablePenis()):
 			GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("StraponCanine"))
 			isStrapon = true

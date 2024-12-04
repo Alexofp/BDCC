@@ -551,11 +551,19 @@ func _react(_action: String, _args):
 	if(_action == "mirri_wakesup"):
 		processTime(3*60)
 
-	if(_action == "mirri_silenttreatment"):
-		addMessage("You can now talk with Luxe at his office")
+	if(_action == "mirri_truth"):
+		getModule("SlaveAuctionModule").addMirriAffection(0.2)
+
+	if(_action == "mirri_coords"):
+		getModule("SlaveAuctionModule").addMirriAffection(-0.5)
 
 	if(_action == "mirri_kiss_hate"):
 		addMessage("You can now talk with Luxe at his office")
+		getModule("SlaveAuctionModule").addMirriAffection(0.2)
+
+	if(_action == "mirri_silenttreatment"):
+		addMessage("You can now talk with Luxe at his office")
+		getModule("SlaveAuctionModule").addMirriAffection(-0.5)
 
 	if(_action == "mirri_nohate"):
 		addMessage("You can now talk with Luxe at his office")

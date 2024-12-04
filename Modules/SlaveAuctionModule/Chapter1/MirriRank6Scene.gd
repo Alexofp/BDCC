@@ -12,7 +12,7 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {npc="mirri"})
 		saynn("The time has come. Mirri sits cross-legged on the edge of her desk, laptop placed in her lap. Her blue eyes are fixed on the screen, unblinking.. while her name blinks at the very top of the leaderboard:")
 
-		saynn("[b]Mirri Blacktail[/b]")
+		saynn("1. [b]Mirri Blacktail[/b]")
 
 		saynn("For a moment, she doesn't move. Doesn't react. She just stares at those glowing pixels as if expecting them to betray her and vanish at any second. Her ears twitch faintly, her tail curling behind her.")
 
@@ -226,7 +226,7 @@ func _run():
 
 		addButton("Join Mirri", "Side with Mirri and go against Luxe together", "join_mirri")
 		addButton("Join Luxe", "Side with Luxe and go against Mirri together", "join_luxe")
-		if (true):
+		if (getModule("SlaveAuctionModule").getMirriAffection() >= 1.0 && getModule("SlaveAuctionModule").getLuxeAffection() >= 1.0):
 			addButton("Middle ground", "(Full affection with Mirri and Luxe) Block the path for them both", "block_path")
 		else:
 			addDisabledButton("Third option", "Either Mirri or Luxe don't trust you enough..")
@@ -467,7 +467,7 @@ func _run():
 	if(state == "middle_meetmirriafter"):
 		removeCharacter("luxe")
 		addCharacter("mirri")
-		playAnimation(StageScene.Hugging, "hug", {npc="mirri"})
+		playAnimation(StageScene.Hug, "hug", {npc="mirri"})
 		aimCameraAndSetLocName("market_intro")
 		saynn("You step out of Luxe's office, a weight lifting from your shoulders.. but it's not relief. It's exhaustion. The echo of harsh words still hangs in your ears.")
 
@@ -610,6 +610,7 @@ func _run():
 		setFlag("SlaveAuctionModule.mirriNotOnPill", true)
 		setFlag("SlaveAuctionModule.mirriCanSkipCombat", true)
 		setFlag("SlaveAuctionModule.r6outcome", "middleground")
+		setFlag("SlaveAuctionModule.customMirriGreeting", "Mirri.. Mirri.. I'm just Mirri now.. Feels weird to not add the family name. But that family was just holding me back. And now I'm free, thanks to you! How much for another 'good girl'~?")
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "join_mirri"):
 		playAnimation(StageScene.Duo, "stand", {npc="luxe"})
@@ -933,6 +934,7 @@ func _run():
 		setFlag("SlaveAuctionModule.mirriNotOnPill", true)
 		setFlag("SlaveAuctionModule.mirriCanSkipCombat", true)
 		setFlag("SlaveAuctionModule.r6outcome", "luxedead")
+		setFlag("SlaveAuctionModule.customMirriGreeting", "We won! Holy shit! I destroyed that fucker, didn't I? With your help of course.. I'm a good girl, aren't I?")
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "mirri_fight_lost"):
 		playAnimation(StageScene.Duo, "defeat", {npc="luxe"})
@@ -1381,7 +1383,35 @@ func _run():
 
 		saynn("(( This is where this content ends. Thank you for playing <3 ))")
 		setFlag("SlaveAuctionModule.r6outcome", "mirrigone")
+		setFlag("SlaveAuctionModule.customLuxeGreeting", "Hey there.")
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "luxe_after_sold"):
+		saynn("You offer the bidders a polite bow, ending the auction.")
+
+		saynn("Mirri's lips and eyes twitch, a slaver that got sold herself. The irony is strong here.. but you're afraid that she won't appreciate it. Who cares though.")
+
+		saynn("A pair of staff members approach the freshly sold slave, their movements precise and practiced as they clip a leash to Mirri's collar and then uncuff her.")
+
+		saynn("[say=mirri]Yeah, yeah.. do your thing. Get it over with already.[/say]")
+
+		saynn("The staff yanks on her leash and she stumbles, growling in the process.")
+
+		saynn("[say=mirri]EASY! You fuckers.. Ow..[/say]")
+
+		saynn("She gives you a mean glare as she gets pulled by. Her cheeks are still tear-streaked from her previous tantrums. What a weird girl.")
+
+		saynn("[say=mirri]You broke my heart, soft {pc.boy}. I won't forget it.[/say]")
+
+		saynn("[say=pc]Good. Enjoy your new life.[/say]")
+
+		saynn("[say=mirri]Oh, I will.[/say]")
+
+		saynn("She gets pulled away into the darkness, to her new owner who gives her ass a firm smack.. and then quickly gets part of his ear bitten off by Mirri's sharp teeth. Ow. You get a feeling that she will do just fine.")
+
+		saynn("The curtains begin to close.. giving you the last glimpses of those crazy blue glowing eyes.. before she is gone forever from your life.")
+
+		addButton("Continue", "See what happens next", "luxe_mirrisold_good")
+	if(state == "luxe_mirrisold_good"):
 		GM.pc.setLocation("market_market")
 		removeCharacter("mirri")
 		addCharacter("luxe")
@@ -1431,32 +1461,6 @@ func _run():
 		saynn("(( This is where this content ends. Thank you for playing <3 ))")
 		setFlag("SlaveAuctionModule.r6outcome", "mirrislave")
 		addButton("Continue", "See what happens next", "endthescene")
-	if(state == "luxe_after_sold"):
-		saynn("You offer the bidders a polite bow, ending the auction.")
-
-		saynn("Mirri's lips and eyes twitch, a slaver that got sold herself. The irony is strong here.. but you're afraid that she won't appreciate it. Who cares though.")
-
-		saynn("A pair of staff members approach the freshly sold slave, their movements precise and practiced as they clip a leash to Mirri's collar and then uncuff her.")
-
-		saynn("[say=mirri]Yeah, yeah.. do your thing. Get it over with already.[/say]")
-
-		saynn("The staff yanks on her leash and she stumbles, growling in the process.")
-
-		saynn("[say=mirri]EASY! You fuckers.. Ow..[/say]")
-
-		saynn("She gives you a mean glare as she gets pulled by. Her cheeks are still tear-streaked from her previous tantrums. What a weird girl.")
-
-		saynn("[say=mirri]You broke my heart, soft {pc.boy}. I won't forget it.[/say]")
-
-		saynn("[say=pc]Good. Enjoy your new life.[/say]")
-
-		saynn("[say=mirri]Oh, I will.[/say]")
-
-		saynn("She gets pulled away into the darkness, to her new owner who gives her ass a firm smack.. and then quickly gets part of his ear bitten off by Mirri's sharp teeth. Ow. You get a feeling that she will do just fine.")
-
-		saynn("The curtains begin to close.. giving you the last glimpses of those crazy blue glowing eyes.. before she is gone forever from your life.")
-
-		addButton("Continue", "See what happens next", "luxe_mirrisold_good")
 	if(state == "luxe_fight_lost"):
 		playAnimation(StageScene.Duo, "defeat", {npc="mirri", npcAction=["holdpistol", "res://Inventory/UnriggedModels/Pistol/Pistol.tscn"]})
 		saynn("You hit the floor.. unable to continue fighting. Your breath is shallow, muscles are refusing to obey.. Which means.. you lost.")
@@ -1608,7 +1612,7 @@ func _run():
 
 		saynn("[b]BAD END[/b]: You got sold off at a Blacktail Market.")
 
-		addButton("Restart", "Try again", "badend_restart")
+		addButton("Restart", "Try again", "badend_restart_luxe")
 		if (lostAtLeastOnce):
 			addButton("Skip", "Skip to you winning the fight", "do_skip_mirri_fight")
 		else:
@@ -1681,6 +1685,9 @@ func _react(_action: String, _args):
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
+		getCharacter("mirri").getInventory().clearSlot(InventorySlot.Neck)
+		getCharacter("mirri").getInventory().clearSlot(InventorySlot.Wrists)
+		getCharacter("mirri").getInventory().clearSlot(InventorySlot.Ankles)
 		lostAtLeastOnce = true
 		return
 
@@ -1729,6 +1736,17 @@ func _react(_action: String, _args):
 		processTime(3*60)
 		GM.pc.addCredits(creditsToGive)
 		addMessage("You received "+str(creditsToGive)+" credits!")
+
+	if(_action == "badend_restart_luxe"):
+		GM.pc.addPain(-GM.pc.getPain())
+		GM.pc.addLust(-GM.pc.getLust())
+		GM.pc.addStamina(GM.pc.getMaxStamina())
+		setState("mirri_mans_up")
+		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
+		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
+		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
+		lostAtLeastOnce = true
+		return
 
 	if(_action == "do_skip_mirri_fight"):
 		GM.pc.addPain(-GM.pc.getPain())

@@ -677,6 +677,12 @@ func _react(_action: String, _args):
 	if(_action == "luxe_feels_bad"):
 		processTime(20*60)
 
+	if(_action == "stay_with_luxe"):
+		getModule("SlaveAuctionModule").addLuxeAffection(0.5)
+
+	if(_action == "follow_mirri"):
+		getModule("SlaveAuctionModule").addMirriAffection(0.3)
+
 	if(_action == "69_sex"):
 		processTime(5*60)
 

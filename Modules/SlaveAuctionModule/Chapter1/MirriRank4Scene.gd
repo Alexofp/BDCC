@@ -389,4 +389,7 @@ func _react(_action: String, _args):
 		setState("after_flashback")
 		return
 
+	if(_action == "tell_moveon"):
+		getModule("SlaveAuctionModule").addLuxeAffection(0.5)
+
 	setState(_action)

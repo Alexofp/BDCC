@@ -19,6 +19,8 @@ func _run():
 
 		saynn("[say=luxe]"+str(getModule("SlaveAuctionModule").getLuxeGreeting())+"[/say]")
 
+		saynn("Affection towards you: "+str(Util.roundF(getModule("SlaveAuctionModule").getLuxeAffection()*100.0, 1))+"%")
+
 		addButton("Talk", "Ask a few things", "talk_menu")
 		if (!getFlag("SlaveAuctionModule.luxeSexIntro")):
 			addButton("Sex?", "Check if the old wolf is up for some fun with you", "sex_intro")
@@ -1160,6 +1162,7 @@ func _react(_action: String, _args):
 	if(_action == "sexmar_start"):
 		processTime(5*60)
 		setFlag("SlaveAuctionModule.luxeSexProgress", Util.maxi(getFlag("SlaveAuctionModule.luxeSexProgress", 0), 4))
+		getModule("SlaveAuctionModule").addLuxeAffection(1.0)
 
 	if(_action == "under_table"):
 		processTime(3*60)

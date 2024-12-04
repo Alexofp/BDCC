@@ -36,6 +36,9 @@ func getFlags():
 		"luxeSexIntro": flag(FlagType.Bool),
 		"luxeSexProgress": flag(FlagType.Number),
 		
+		"mirriAffection": flag(FlagType.Number),
+		"luxeAffection": flag(FlagType.Number),
+		
 		"upgradeStartingBid": flag(FlagType.Number),
 		"upgradeStartingBidCan": flag(FlagType.Bool),
 		"upgradeBidIncrease": flag(FlagType.Number),
@@ -62,6 +65,8 @@ func _init():
 		"res://Modules/SlaveAuctionModule/Auction/SlaveAuctionGenericSellScene.gd",
 		"res://Modules/SlaveAuctionModule/Auction/SlaveAuctionScene.gd",
 		"res://Modules/SlaveAuctionModule/Auction/SlaveAuctionUpgradesScene.gd",
+		"res://Modules/SlaveAuctionModule/Auction/SlaveAuctionGenericSellNoMirriScene.gd",
+		"res://Modules/SlaveAuctionModule/Auction/SlaveAuctionBiddersScene.gd",
 		
 		"res://Modules/SlaveAuctionModule/Chapter1/MirriRank1Scene.gd",
 		"res://Modules/SlaveAuctionModule/Chapter1/MirriRank2Scene.gd",
@@ -129,6 +134,10 @@ func getMirriGreeting() -> String:
 		setFlag("SlaveAuctionModule.customMirriGreeting", "")
 		return customGreet
 	
+	if(getMirriAffection() >= 1.0):
+		return "Hey love~."
+	if(getMirriAffection() >= 0.5):
+		return "What's up, softie?"
 	return "What's up, AlphaCorp slave?"
 
 func getLuxeGreeting() -> String:
@@ -143,7 +152,8 @@ func getRepInfoString() -> String:
 	var theLines:Array = []
 	
 	theLines.append("Current reputation level: "+str(getRepLevel()))
-	theLines.append(" "+str(getRepCredits())+" / "+str(getCreditsForRepLevel(getRepLevel()+1))+" credits required for the next rank.")
+	if(getRepLevel() < 6):
+		theLines.append(" "+str(getRepCredits())+" / "+str(getCreditsForRepLevel(getRepLevel()+1))+" credits required for the next rank.")
 	theLines.append("Total amount of credits earned for Blacktail: "+str(getTotalRepCredits())+" credits.")
 	if(isReadyToAdvanceRepLevel()):
 		theLines.append("You are ready to advance the reputation level!")
@@ -212,6 +222,16 @@ func isMirriOnPill() -> bool:
 func getSceneForRank(_level:int):
 	if(_level == 1):
 		return "MirriRank1Scene"
+	if(_level == 2):
+		return "MirriRank2Scene"
+	if(_level == 3):
+		return "MirriRank3Scene"
+	if(_level == 4):
+		return "MirriRank4Scene"
+	if(_level == 5):
+		return "MirriRank5Scene"
+	if(_level == 6):
+		return "MirriRank6Scene"
 	
 	return ""
 
@@ -440,3 +460,39 @@ func getBidderInfo() -> String:
 		resultAr.append(Util.join(bidder.getBidderInfoNoAuction(), "\n"))
 	
 	return Util.join(resultAr, "\n\n")
+
+func addMirriAffection(howMuch:float, cap:float = 1.0):
+	var currentValue:float = getFlag("SlaveAuctionModule.mirriAffection", 0.0)
+	if(currentValue >= cap && howMuch > 0):
+		return
+	
+	currentValue += howMuch
+	
+	currentValue = clamp(currentValue, -0.5, cap)
+	setFlag("SlaveAuctionModule.mirriAffection", currentValue)
+
+func getMirriAffection():
+	return getFlag("SlaveAuctionModule.mirriAffection", 0.0)
+
+func addLuxeAffection(howMuch:float, cap:float = 1.0):
+	var currentValue:float = getFlag("SlaveAuctionModule.luxeAffection", 0.0)
+	if(currentValue >= cap && howMuch > 0):
+		return
+	
+	currentValue += howMuch
+	
+	currentValue = clamp(currentValue, -0.5, cap)
+	setFlag("SlaveAuctionModule.luxeAffection", currentValue)
+
+func getLuxeAffection():
+	return getFlag("SlaveAuctionModule.luxeAffection", 0.0)
+
+func getPCCut():
+	if(getRepLevel() >= 6):
+		return 0.2
+	return 0.1
+
+func noMirri():
+	if(getFlag("SlaveAuctionModule.r6outcome", "") in ["mirrislave", "mirrigone"]):
+		return true
+	return false
