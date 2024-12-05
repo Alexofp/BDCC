@@ -1640,6 +1640,7 @@ func _react(_action: String, _args):
 		GM.pc.addCredits(250)
 		addMessage("You received 250 credits!")
 		setFlag("SlaveAuctionModule.mirriNotBlacktail", true)
+		addExperienceToPlayer(250)
 
 	if(_action == "middle_meetmirriafter"):
 		processTime(3*60)
@@ -1764,6 +1765,7 @@ func _react_scene_end(_tag, _result):
 		
 		if(battlestate == "win"):
 			setState("mirri_fight_won")
+			addExperienceToPlayer(250)
 		else:
 			setState("mirri_fight_lost")
 
@@ -1773,6 +1775,7 @@ func _react_scene_end(_tag, _result):
 		
 		if(battlestate == "win"):
 			setState("luxe_fight_won")
+			addExperienceToPlayer(250)
 		else:
 			setState("luxe_fight_lost")
 

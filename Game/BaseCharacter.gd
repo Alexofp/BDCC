@@ -379,9 +379,13 @@ func receiveDamage(damageType, amount: int, armorScale: float = 1.0):
 	var newdamage = round(amount * (1.0 + mult))
 	
 	if(amount > 0):
-		var finalArmor = floor(getArmor(damageType) * armorScale)
+		var theArmor = getArmor(damageType)
+		var finalArmor = floor(theArmor * armorScale) if theArmor > 0.0 else floor(theArmor)
 		#newdamage -= finalArmor
-		newdamage = newdamage * (50.0/(50.0+finalArmor)) 
+		if(finalArmor < 0):
+			newdamage = newdamage * (-finalArmor/50.0)
+		else:
+			newdamage = newdamage * (50.0/(50.0+finalArmor)) 
 		newdamage = max(newdamage, 1)
 	
 	if(damageType == DamageType.Physical):

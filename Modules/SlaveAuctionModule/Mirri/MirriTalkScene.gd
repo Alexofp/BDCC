@@ -2791,8 +2791,10 @@ func _react(_action: String, _args):
 		if(theNextScene  == ""):
 			return
 		
+		var mirriRank = getModule("SlaveAuctionModule").getRepLevel()
 		getModule("SlaveAuctionModule").advanceRepLevel()
 		runScene(theNextScene)
+		addExperienceToPlayer(50 * mirriRank)
 		endScene()
 		return
 

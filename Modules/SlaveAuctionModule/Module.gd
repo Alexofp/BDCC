@@ -91,6 +91,9 @@ func _init():
 		"res://Modules/SlaveAuctionModule/Chapter0/C0MirriEvent.gd",
 		"res://Modules/SlaveAuctionModule/Luxe/LuxeIntroEvent.gd",
 	]
+	quests = [
+		"res://Modules/SlaveAuctionModule/Chapter0/BlacktailQuest.gd",
+	]
 
 func resetFlagsOnNewDay():
 	pass

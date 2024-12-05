@@ -12,9 +12,10 @@ func _init():
 	"penis": {"skin": "Weiny","g": Color("ff1e1900"),"b": Color("ffffb800"),},
 	}
 	
-	npcLevel = 50
+	npcLevel = 75
 	npcBasePain = 500
 	npcBaseLust = 500
+	npcBaseStamina = 200
 	npcCharacterType = CharacterType.Generic
 	
 	npcLustInterests = {
@@ -40,7 +41,7 @@ func getSpecies():
 	return ["canine"]
 
 func _getAttacks():
-	return ["biteattack", "simplekickattack", "shoveattack", "trygetupattack"]
+	return ["LuxeIronGrip", "LuxePredatorsRush", "LuxeTauntingSnarl", "LuxeSavageBackhand", "LuxeViciousLunge", "LuxeEnragedSlam", "LuxeBreatheInOut", "trygetupattack"]
 
 func getThickness() -> int:
 	return 60
@@ -69,3 +70,8 @@ func createBodyparts():
 
 func getDefaultEquipment():
 	return ["OfficialClothesRed", "plainBriefs"]
+
+func beforeFightStarted():
+	.beforeFightStarted()
+	
+	addEffect("LuxeRage")
