@@ -40,7 +40,12 @@ func _react(_action: String, _args):
 		if(!getFlag("SlaveAuctionModule.s2hap")):
 			runScene("MirriS2FirstSellScene")
 		else:
-			GM.pc.setLocation("market_intro")
+			var noMirri = getModule("SlaveAuctionModule").noMirri()
+			if(noMirri):
+				GM.pc.setLocation("market_market")
+			else:
+				GM.pc.setLocation("market_intro")
+			#GM.pc.setLocation("market_intro")
 			addMessage("You use your bluespace relay-tag to teleport to the Blacktail Market.")
 			
 		return

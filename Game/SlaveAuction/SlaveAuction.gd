@@ -512,7 +512,7 @@ func calculateSlaveReactionType():
 	reactionScores[AuctionSlaveReaction.Shy] = obedience*0.5 + love*0.5 - thePersonality.getStat(PersonalityStat.Mean) * 0.5 + thePersonality.getStat(PersonalityStat.Subby) * 0.5 + thePersonality.getStat(PersonalityStat.Coward) * 0.5
 	reactionScores[AuctionSlaveReaction.Desperate] = trust*0.5 + spoiling - thePersonality.getStat(PersonalityStat.Naive) * 0.5 - thePersonality.getStat(PersonalityStat.Subby) * 0.5 + thePersonality.getStat(PersonalityStat.Impatient) * 0.5
 	reactionScores[AuctionSlaveReaction.Angry] = trust + love*0.5 + thePersonality.getStat(PersonalityStat.Mean) - thePersonality.getStat(PersonalityStat.Subby) * 0.5 - thePersonality.getStat(PersonalityStat.Impatient) * 0.2 - thePersonality.getStat(PersonalityStat.Coward) * 0.3
-	
+
 	var maxScoreReaction = AuctionSlaveReaction.Confused
 	var maxScoreScore:float = -9999.9
 	

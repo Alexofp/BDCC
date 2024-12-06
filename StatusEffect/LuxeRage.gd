@@ -46,10 +46,14 @@ func getEffectDesc():
 	return theText
 
 func getEffectImage():
-	return "res://Images/StatusEffects/handcuffed.png"
+	if(rage >= 50):
+		return "res://Images/StatusEffects/wildfires.png"
+	return "res://Images/StatusEffects/fire-iris.png"
 
 func getIconColor():
-	return IconColorRed
+	if(rage >= 50):
+		return IconColorRed
+	return IconColorWhite
 
 func combine(_args = []):
 	pass
