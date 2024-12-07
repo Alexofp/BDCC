@@ -30,7 +30,7 @@ func getSpecies():
 	return ["feline", "human"]
 
 func getThickness() -> int:
-	return 100
+	return 50
 
 func getFemininity() -> int:
 	return 0

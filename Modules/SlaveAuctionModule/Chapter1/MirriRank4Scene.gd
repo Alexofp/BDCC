@@ -108,7 +108,7 @@ func _run():
 	if(state == "follow_luxe_office"):
 		removeCharacter("mirri")
 		aimCameraAndSetLocName("market_luxe")
-		playAnimation(StageScene.Duo, "stand", {pc="luxe", npcAction="sit"})
+		playAnimation(StageScene.Duo, "stand", {npc="luxe", npcAction="sit"})
 		saynn("Luxe enters his office.. you follow soon after, a slight breeze tickles your face. A familiar feeling.. but the unnatural warmth quickly comes back. You're almost sweating..")
 
 		saynn("Unsure of where to stand.. you just stand in the middle of his office again. Luxe quickly reaches into his desk to get something. You hear a few beeps.. before he produces a pill bottle. He pops one.. and the room begins to cool.")
@@ -137,7 +137,7 @@ func _run():
 
 		addButton("Sit", "Might as well get comfy", "do_sit_chair")
 	if(state == "do_sit_chair"):
-		playAnimation(StageScene.Duo, "sit", {pc="luxe", npcAction="stand"})
+		playAnimation(StageScene.Duo, "sit", {npc="luxe", npcAction="stand"})
 		saynn("You sit down.. while he gets up.")
 
 		saynn("Luxe turns his back towards you, staring at the fancy hologram map on his wall.")
@@ -203,7 +203,7 @@ func _run():
 
 		addButton("Continue", "See how it happened..", "start_flashback")
 	if(state == "after_flashback"):
-		playAnimation(StageScene.Duo, "sit", {pc="luxe", npcAction="stand"})
+		playAnimation(StageScene.Duo, "sit", {npc="luxe", npcAction="stand"})
 		saynn("When Luxe ends his story.. you finally snap out of it..")
 
 		saynn("[say=luxe]When I look at Mirri.. I see everything. I see my mistakes.[/say]")

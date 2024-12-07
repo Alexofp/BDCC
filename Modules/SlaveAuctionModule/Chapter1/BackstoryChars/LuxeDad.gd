@@ -24,7 +24,7 @@ func getSmallDescription() -> String:
 	return "Your father."
 
 func getChatColor():
-	return "#111111"
+	return "#999999"
 
 func getSpecies():
 	return ["canine"]

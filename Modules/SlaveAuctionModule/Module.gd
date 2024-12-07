@@ -90,6 +90,7 @@ func _init():
 		"res://Modules/SlaveAuctionModule/Auction/BlacktailMarketEvent.gd",
 		"res://Modules/SlaveAuctionModule/Chapter0/C0MirriEvent.gd",
 		"res://Modules/SlaveAuctionModule/Luxe/LuxeIntroEvent.gd",
+		"res://Modules/SlaveAuctionModule/Luxe/LuxeTalkEvent.gd",
 	]
 	quests = [
 		"res://Modules/SlaveAuctionModule/Chapter0/BlacktailQuest.gd",

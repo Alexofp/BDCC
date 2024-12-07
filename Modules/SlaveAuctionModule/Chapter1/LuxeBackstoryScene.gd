@@ -605,6 +605,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "luxe_very_angry")
 	if(state == "luxe_very_angry"):
+		removeCharacter("luxedad")
 		playAnimation(StageScene.Solo, "stand", {pc="luxe"})
 		saynn("The silence feels like it's crushing you, growing heavier with every breath.")
 
