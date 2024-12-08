@@ -59,6 +59,7 @@ func _init():
 		"res://Modules/SlaveAuctionModule/Chapter0/MirriS2FirstSellScene.gd",
 		
 		"res://Modules/SlaveAuctionModule/Mirri/MirriTalkScene.gd",
+		"res://Modules/SlaveAuctionModule/Mirri/MirriBuySellScene.gd",
 		"res://Modules/SlaveAuctionModule/Luxe/LuxeIntroScene.gd",
 		"res://Modules/SlaveAuctionModule/Luxe/LuxeTalkScene.gd",
 		

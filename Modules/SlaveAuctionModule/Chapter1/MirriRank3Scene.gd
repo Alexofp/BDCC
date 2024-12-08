@@ -90,6 +90,14 @@ func _run():
 		saynn("[say=mirri]You're very observant, slave. Just leave me alone, I need to think.[/say]")
 
 		saynn("Best to just let her stir in her own emotions for now.")
+		
+		saynn("[say=mirri]Oh yeah, here is a thought, I got access to some slave candies.[/say]")
+
+		saynn("[say=pc]Slave candies?[/say]")
+
+		saynn("[say=mirri]Perfect for a slave like you.[/say]")
+
+		saynn("Looks like she is not in the mood to explain what they are.")
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "waterfall"):
@@ -530,6 +538,10 @@ func _run():
 		saynn("[say=pc]I will do my best.[/say]")
 
 		saynn("She nods subtly.")
+		
+		saynn("[say=mirri]I got access to some Slave Candies on the black market, should make your work easier..[/say]")
+
+		saynn("Slave candies, huh.. Makes you wonder what they do.")
 
 		saynn("[say=mirri]Once I will become the best slaver.. he will understand.. he will accept me..[/say]")
 

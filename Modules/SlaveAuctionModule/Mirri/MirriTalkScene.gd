@@ -33,6 +33,8 @@ func _run():
 			addButton("Upgrades", "Upgrade the Blacktail Market", "open_upgrades_menu")
 		else:
 			addDisabledButton("Upgrades", "You don't access to this yet")
+		if (GlobalRegistry.getItemIDsByTagSlow(ItemTag.SoldByMirri).size() > 0):
+			addButton("Buy", "See what you can buy from Mirri", "buyscene")
 		if (canGoNextRank):
 			if (mirriRank == 5):
 				saynn("[b]Next rank will be the last. Make sure you are ready as you won't be able to go back.[/b]")
@@ -2784,6 +2786,10 @@ func _react(_action: String, _args):
 
 	if(_action == "open_upgrades_menu"):
 		runScene("SlaveAuctionUpgradesScene")
+		return
+
+	if(_action == "buyscene"):
+		runScene("MirriBuySellScene")
 		return
 
 	if(_action == "do_next_rank"):

@@ -21,6 +21,8 @@ func run(_triggerID, _args):
 	
 	if(GM.pc.getLocation() == "market_intro"):
 		addButton("Prison cell", "Teleport back to your prison cell", "exitsecure")
+		if(noMirri):
+			addButton("Laptop", "Use Mirri's laptop to order stuff", "mirrilaptop")
 	
 		if(!noMirri):
 			if(getFlag("SlaveAuctionModule.beganAuctionOnce") && !getFlag("SlaveAuctionModule.luxeIntroHap")):
@@ -39,6 +41,8 @@ func getPriority():
 	return 0
 
 func onButton(_method, _args):
+	if(_method == "mirrilaptop"):
+		runScene("MirriBuySellScene")
 	if(_method == "entersecure"):
 		var noMirri = getModule("SlaveAuctionModule").noMirri()
 		if(noMirri):

@@ -10,6 +10,10 @@ func initArgs(_args = []):
 func processBattleTurn():
 	pass
 	
+func processSexTurnContex(_contex = {}):
+	if(character.getCustomAttribute(BuffAttribute.ForcedObedience) > 0.0):
+		stop()
+	
 func processTime(_minutesPassed: int):
 	pass
 
