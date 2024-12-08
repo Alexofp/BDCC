@@ -116,6 +116,7 @@ roomID = "main_bench3"
 roomDescription = "The platform here has tall railings on the sides and benches facing inwards to watch whatever inmates are being punished."
 canWest = false
 canSouth = false
+loctag_NoWallsNear = true
 population = 3
 
 [node name="MainHallRoom53" parent="." index="11" instance=ExtResource( 2 )]
@@ -132,6 +133,7 @@ roomID = "main_bench4"
 roomDescription = "The platform here has tall railings on the sides and benches facing inwards to watch whatever inmates are being punished."
 canEast = false
 canSouth = false
+loctag_NoWallsNear = true
 population = 3
 
 [node name="MainHallRoom12" parent="." index="13" instance=ExtResource( 2 )]
@@ -141,6 +143,7 @@ roomID = "main_bench1"
 roomDescription = "The platform here has tall railings on the sides and benches facing inwards to watch whatever inmates are being punished."
 canWest = false
 canNorth = false
+loctag_NoWallsNear = true
 population = 3
 
 [node name="MainHallRoom49" parent="." index="14" instance=ExtResource( 2 )]
@@ -151,6 +154,7 @@ roomDescription = "The platform here has tall railings on the sides and benches 
 canNorth = false
 canEast = false
 roomSprite = 1
+loctag_NoWallsNear = true
 population = 3
 
 [node name="MainHallRoom27" parent="." index="15" instance=ExtResource( 2 )]

@@ -553,6 +553,19 @@ func setPawnsShowed(newS:bool):
 		var worldPawn:Node2D = pawns[pawnID]
 		worldPawn.visible = newS
 
+func hasWallsNearby(locID:String) -> bool:
+	var theRoom = getRoomByID(locID)
+	if(theRoom == null):
+		return false
+	
+	if(theRoom.loctag_NoWallsNear):
+		return false
+	
+	for dir in getAllDirections():
+		if(!canGo(theRoom.getFloorID(), theRoom.getCell(), dir)):
+			return true
+	return false
+
 func saveData():
 	var data = {}
 	data["lastAimedRoomID"] = lastAimedRoomID

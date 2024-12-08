@@ -1323,6 +1323,26 @@ func getSexResult():
 func isBondageDisabled() -> bool:
 	return bondageDisabled
 
+func hasWallsNearby() -> bool:
+	var locToCheck:String = ""
+	if(doms.has("pc") || subs.has("pc")):
+		locToCheck = GM.pc.getLocation()
+	elif(GM.main != null):
+		for domID in doms:
+			if(GM.main.IS.hasPawn(domID)):
+				locToCheck = GM.main.IS.getPawn(domID).getLocation()
+		if(locToCheck == ""):
+			for subID in subs:
+				if(GM.main.IS.hasPawn(subID)):
+					locToCheck = GM.main.IS.getPawn(subID).getLocation()
+	
+	if(locToCheck == ""):
+		return true
+	if(GM.world != null && GM.world.hasWallsNearby(locToCheck)):
+		return true
+	
+	return false
+
 func saveData():
 	var data = {
 		"revealedBodyparts": revealedBodyparts,

@@ -54,6 +54,7 @@ export(bool) var loctag_GuardsEncounter = false
 export(bool) var loctag_EngineersEncounter = false
 export(bool) var loctag_Offlimits = false
 export(bool) var loctag_OldGuardsEncounter = false
+export(bool) var loctag_NoWallsNear = false
 
 export(int, FLAGS, "Inmates", "Guards") var population = 0
 
