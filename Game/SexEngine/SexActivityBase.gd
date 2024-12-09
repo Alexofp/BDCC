@@ -192,6 +192,11 @@ func getDomTagsCheck():
 func getSubTagsCheck():
 	return getSubTags()
 
+func processTurnFinal():
+	if(has_method(state+"_processTurn")):
+		return call(state+"_processTurn")
+	return processTurn()
+
 func processTurn():
 	return {
 		text = str(id)+" IS STILL HAPPENING.",
@@ -200,16 +205,44 @@ func processTurn():
 func reactActivityEnd(_otheractivity):
 	return null
 
+func getDomActionsFinal():
+	var result:Array = getDomActions()
+	if(has_method(state+"_domActions")):
+		result.append_array(call(state+"_domActions"))
+	return result
+
 func getDomActions():
 	return []
+
+func doDomActionFinal(_id, _actionInfo):
+	var result
+	if(has_method(state+"_doDomAction")):
+		result = call(state+"_doDomAction", _id, _actionInfo)
+	if(result == null):
+		return doDomAction(_id, _actionInfo)
+	return result
 
 func doDomAction(_id, _actionInfo):
 	return {
 		"text": "Bad stuff happened",
 	}
 	
+func getSubActionsFinal():
+	var result:Array = getSubActions()
+	if(has_method(state+"_subActions")):
+		result.append_array(call(state+"_subActions"))
+	return result
+	
 func getSubActions():
 	return []
+
+func doSubActionFinal(_id, _actionInfo):
+	var result
+	if(has_method(state+"_doSubAction")):
+		result = call(state+"_doSubAction", _id, _actionInfo)
+	if(result == null):
+		return doSubAction(_id, _actionInfo)
+	return result
 
 func doSubAction(_id, _actionInfo):
 	return {
