@@ -96,12 +96,12 @@ func getCategory():
 
 func getDomTags():
 	var thetags = [usedTag, SexActivityTag.HavingSex]
-	if(state in ["fucking", "aftercumminginside", "knotting"]):
+	if(state in ["fucking", "aftercumminginside", "knotting", "inside"]):
 		thetags.append(usedTagInside)
 	return thetags
 
 func getSubTags():
-	if(state in ["fucking", "aftercumminginside", "knotting"]):
+	if(state in ["fucking", "aftercumminginside", "knotting", "inside"]):
 		return [SexActivityTag.PenisUsed, SexActivityTag.PenisInside, SexActivityTag.HavingSex, SexActivityTag.PreventsSubViolence, SexActivityTag.PreventsSubTeasing]
 	return [SexActivityTag.PenisUsed, SexActivityTag.HavingSex, SexActivityTag.PreventsSubViolence, SexActivityTag.PreventsSubTeasing]
 
@@ -228,12 +228,15 @@ func onSwitchFrom(_otherActivity, _args):
 		return
 	currentPose = RNG.pick(getAvaiablePoses())
 
-func processTurn():
+func processChoke():
 	if(currentPose == POSE_COWGIRLCHOKE):
 		subInfo.addConsciousness(-0.01)
 		sendSexEvent(SexEvent.Choking, domID, subID, {strongChoke=false})
+
+func processTurn():
+	processChoke()
 	
-	if(state == "knotting"):
+	if(state == "knotting" || state == "inside"):
 		var freeRoom = getDom().getPenetrationFreeRoomBy(usedBodypart, subID)
 		if(freeRoom > 0.0):
 			var text = RNG.pick([
@@ -334,14 +337,14 @@ func processTurn():
 
 func getDomActions():
 	var actions = []
-	if(state == ""):
+	if(state == "" || state == "inside"):
 		actions.append({
 				"id": "rub",
-				"score": 1.0,
+				"score": 1.0 - getStopScore(),
 				"name": "Rub",
 				"desc": "Rub your "+RNG.pick(usedBodypartNames)+" against their "+getDickName(),
 			})
-
+	if(state == ""):
 		if(getDom().getFirstItemThatCoversBodypart(usedBodypart) == null && getSub().getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null && subInfo.isReadyToPenetrate()):
 			actions.append({
 					"id": "envelop",
@@ -558,7 +561,7 @@ func doDomAction(_id, _actionInfo):
 				if(knotSuccess):
 					state = "knotting"
 				else:
-					state = ""
+					state = "inside"
 				
 				if(!knotSuccess):
 					condom.destroyMe()
@@ -576,7 +579,7 @@ func doDomAction(_id, _actionInfo):
 		if(knotSuccess):
 			state = "knotting"
 		else:
-			state = ""
+			state = "inside"
 
 		return {text=text}
 	if(_id == "makesubcumoutside"):
@@ -728,7 +731,7 @@ func getSubActions():
 				"desc": "Show how much you like it",
 			})
 		
-	if(state in ["fucking", ""]):
+	if(state in ["fucking", "", "inside"]):
 		actions.append({
 			"id": "throwoff",
 			"score": subInfo.getResistScore(),
@@ -782,7 +785,7 @@ func doSubAction(_id, _actionInfo):
 		return {text = text}
 	if(_id == "throwoff"):
 		if(getSubResistChance(30.0, 25.0)):
-			if(state == "fucking"):
+			if(state != ""):
 				state = ""
 			else:
 				endActivity()
@@ -872,6 +875,25 @@ func doSubAction(_id, _actionInfo):
 
 		return {text=text}
 
+func inside_domActions():
+	var actions = []
+	
+	if(getDom().getFirstItemThatCoversBodypart(usedBodypart) == null && getSub().getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null && subInfo.isReadyToPenetrate()):
+		actions.append({
+				"id": "ridemore",
+				"score": 1.0-getStopScore(),
+				"name": "Ride more",
+				"desc": "Continue riding this "+getDickName("cock")+".",
+			})
+	
+	return actions
+
+func inside_doDomAction(_id, _actionInfo):
+	if(_id == "ridemore"):
+		getDom().gotOrificeStretchedBy(usedBodypart, subID, 0.2)
+		#gonnaCumOutside = false
+		state = "fucking"
+		return {text = "{dom.You} {dom.youVerb('continue')} to ride {sub.youHis} "+getDickName()+" with {dom.yourHis} "+RNG.pick(usedBodypartNames)+"."}
 
 
 func getAnimation():
@@ -880,7 +902,7 @@ func getAnimation():
 	if(getSexType() == SexType.SlutwallSex):
 		if(state in [""]):
 			return [StageScene.SlutwallRide, "tease", {pc=subID, npc=domID}]
-		if(state in ["knotting"]):
+		if(state in ["knotting", "inside"]):
 			return [StageScene.SlutwallRide, "inside", {pc=subID, npc=domID}]
 		if(subInfo.isCloseToCumming() || (isStraponSex() && domInfo.isCloseToCumming())):
 			return [StageScene.SlutwallRide, "fast", {pc=subID, npc=domID}]
@@ -897,7 +919,7 @@ func getAnimation():
 	
 	if(state in [""]):
 		return [animToPlay, "tease", {pc=pcPoseID, npc=npcPoseID, uncon=shouldUncon}]
-	if(state in ["knotting"]):
+	if(state in ["knotting", "inside"]):
 		return [animToPlay, "inside", {pc=pcPoseID, npc=npcPoseID, uncon=shouldUncon}]
 	if(subInfo.isCloseToCumming() || (isStraponSex() && domInfo.isCloseToCumming())):
 		if(currentPose == POSE_REVERSECOWGIRL):
