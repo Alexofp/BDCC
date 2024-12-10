@@ -537,114 +537,19 @@ func doDomAction(_id, _actionInfo):
 			return {text = text}
 	
 	if(_id == "bjcuminside"):
-		var text = RNG.pick([
-			"{dom.You} {dom.youVerb('grunt')} while {dom.yourHis} "+RNG.pick(["cock", "dick", "member"])+" throbs and [b]shoots cum directly into {sub.your} mouth[/b].",
-		])
-		if(state == "deepthroat"):
-			text = RNG.pick([
-				"{dom.You} {dom.youVerb('ram')} {dom.yourHis} "+RNG.pick(["cock", "dick"])+" "+RNG.pick(["balls deep", "as deep as {sub.yourHis} throat allows", "deep down {sub.yourHis} throat"])+" before [b]stuffing {sub.yourHis} belly with lots of cum[/b]!",
-			])
-		
-		var condomBroke = false
-		var condom:ItemBase = getDom().getWornCondom()
-		if(condom != null):
-			var breakChance = condom.getCondomBreakChance()
-			condomBroke = getDom().shouldCondomBreakWhenFucking(getSub(), breakChance)
-			if(condomBroke):
-				text = "[b]The condom broke![/b] "+text
-				condom.destroyMe()
-			else:
-				text = RNG.pick([
-					"{dom.You} filled the condom inside {sub.your} "+RNG.pick(["mouth"])+"!",
-					"{dom.You} stuffed the condom in {sub.your} "+RNG.pick(["mouth"])+" full of {dom.yourHis} "+RNG.pick(["cum", "seed", "jizz", "semen"])+"!",
-				])
-				getDom().cumInItem(condom)
-				domInfo.cum()
-				satisfyGoals()
-				state = ""
-				condom.destroyMe()
-				getSexEngine().saveCondomToLootIfPerk(condom)
-				text += RNG.pick([
-					" {dom.You} {dom.youVerb('pull')} out and {dom.youVerb('dispose')} of the used condom.",
-				])
-				
-				return getSexEngine().combineData({text=text}, applyTallymarkIfNeededData(BodypartSlot.Head))
-		var beingBredScore = subInfo.fetishScore({Fetish.OralSexGiving: 1.0})
-		if(beingBredScore < 0.0):
-			subInfo.addResistance(1.0)
-			subInfo.addFear(0.1)
-		getSub().cummedInBodypartByAdvanced(BodypartSlot.Head, domID, {condomBroke=condomBroke})
-		domInfo.cum()
-		satisfyGoals()
 		state = ""
-		
-		if(condom != null):
-			condom.destroyMe()
-			text += RNG.pick([
-				" {dom.You} {dom.youVerb('pull')} out and {dom.youVerb('dispose')} of the used condom.",
-			])
-		
-		return getSexEngine().combineData({text=text}, applyTallymarkIfNeededData(BodypartSlot.Head))
+		satisfyGoals()
+		return getSexEngine().combineData(doCumBJDom(state == "deepthroat"), applyTallymarkIfNeededData(BodypartSlot.Head))
+	
 	if(_id == "bjpullout"):
-		var text = RNG.pick([
-			"{dom.You} {dom.youVerb('pull')} {dom.yourHis} cock out and [b]cums all over {sub.your} face[/b]!",
-			"{dom.You} {dom.youVerb('pull')} out, [b]cumming all over {sub.your} face[/b]!",
-		])
-		
-		var condom:ItemBase = getDom().getWornCondom()
-		if(condom != null):
-			var breakChance = condom.getCondomBreakChance()
-			
-			if(RNG.chance(breakChance)):
-				text = "[b]The condom broke![/b] "+text
-				condom.destroyMe()
-			else:
-				text = RNG.pick([
-					"{dom.You} {dom.youVerb('pull')} {dom.yourHis} cock out and {dom.youVerb('fill')} {dom.yourHis} condom! {dom.You} {dom.youVerb('dispose')} of it.",
-					"{dom.You} {dom.youVerb('pull')} out, stuffing {dom.yourHis} condom! {dom.You} {dom.youVerb('dispose')} of it.",
-				])
-				condom.destroyMe()
-				getDom().cumInItem(condom)
-				getSexEngine().saveCondomToLootIfPerk(condom)
-				domInfo.cum()
-				satisfyGoals()
-				state = ""
-				
-				return getSexEngine().combineData({text=text}, applyTallymarkIfNeededData(BodypartSlot.Head))
-		
-		getSub().cummedOnBy(domID, FluidSource.Penis)
-		getDom().cumOnFloor()
-		domInfo.cum()
 		satisfyGoals()
 		state = ""
+		return getSexEngine().combineData(doCumBJFacialsDom(), applyTallymarkIfNeededData(BodypartSlot.Head))
 
-		return getSexEngine().combineData({text=text}, applyTallymarkIfNeededData(BodypartSlot.Head))
 	if(_id == "pussycum"):
-		var text = RNG.pick([
-			"{dom.You} {dom.youVerb('shake')} and {dom.youVerb('shiver')} while {dom.yourHis} "+RNG.pick(["pulsating", "twitching"])+" "+RNG.pick(["pussy", "pussy", "slit", "kitty"])+" [b]"+RNG.pick(["cums", "squirts", "orgasms", "climaxes"])+" all over {sub.your} face[/b]!",
-		])
-		if(getDom().getFirstItemThatCoversBodypart(InventorySlot.Vagina) != null):
-			text = RNG.pick([
-				"{dom.You} {dom.youVerb('shake')} and {dom.youVerb('shiver')} while {dom.yourHis} "+RNG.pick(["pulsating", "twitching"])+" "+RNG.pick(["pussy", "pussy", "slit", "kitty"])+" [b]"+RNG.pick(["makes", "creates"])+" a wet spot on {dom.yourHis} clothing[/b]!",
-			])
-		else:
-			if(getSub().isOralBlocked()):
-				getSub().cummedOnBy(domID, FluidSource.Vagina)
-			else:
-				getSub().cummedInMouthBy(domID, FluidSource.Vagina, 0.5)
-				getSub().cummedOnBy(domID, FluidSource.Vagina, 0.5)
-		
-		if(getDom().hasReachablePenis()):
-			getDom().cumOnFloor()
-			text += RNG.pick([
-				" {dom.YourHis} "+RNG.pick(["cock", "dick"])+" throbs while shooting strings of "+RNG.pick(["cum", "seed", "semen"])+"!",
-			])
-		
-		domInfo.cum()
 		satisfyGoals()
 		state = ""
-
-		return {text=text}
+		return doCumPussyLickDom()
 	
 	if(_id == "forcedeepthroat"):
 		if(!RNG.chance(getSub().getPenetrateChanceBy(BodypartSlot.Head, domID))):

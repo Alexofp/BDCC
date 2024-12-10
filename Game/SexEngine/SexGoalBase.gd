@@ -45,3 +45,5 @@ func sendSexEvent(_sexEngine, type, _sourceInfo, _targetInfo, data = {}):
 	_sourceInfo.getChar().sendSexEvent(newSexEvent)
 	if(_sourceInfo.getChar() != _targetInfo.getChar()):
 		_targetInfo.getChar().sendSexEvent(newSexEvent)
+
+

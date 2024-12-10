@@ -4,6 +4,7 @@ class_name SexGoal
 const FuckVaginal = "FuckVaginal"
 const FuckAnal = "FuckAnal"
 const FuckOral = "FuckOral"
+const Fuck69 = "Fuck69"
 const ReceiveVaginal = "ReceiveVaginal"
 const ReceiveAnal = "ReceiveAnal"
 const DoOralOnSub = "DoOralOnSub"

@@ -120,6 +120,15 @@ func getResistScore():
 		return 1.0
 	return 0.0
 
+func getResistScoreSmooth():
+	if(isScared()):
+		return 0.0
+	if(isResisting()):
+		return 1.0
+	if(RNG.chance(personalityScore({PersonalityStat.Brat: 1.0}) * 5.0)):
+		return 1.0
+	return resistance
+
 func getComplyScore():
 	if(isScared()):
 		return 0.0

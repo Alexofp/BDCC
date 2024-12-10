@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
@@ -51,23 +51,59 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=585]
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=603]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=604]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=605]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=606]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=607]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=608]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=609]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=610]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=611]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=612]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=613]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=614]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=586]
 states/Sex69FF_1-loop/node = SubResource( 573 )
 states/Sex69FF_1-loop/position = Vector2( 310, 218 )
 states/Sex69MF_1-loop/node = SubResource( 574 )
-states/Sex69MF_1-loop/position = Vector2( 679, 218 )
+states/Sex69MF_1-loop/position = Vector2( 785, 404 )
 states/Sex69MM_1-loop/node = SubResource( 575 )
 states/Sex69MM_1-loop/position = Vector2( 872, 218 )
 states/Sex69Tease_1-loop/node = SubResource( 576 )
 states/Sex69Tease_1-loop/position = Vector2( 585, 98 )
 states/Sex69_1-loop/node = SubResource( 577 )
-states/Sex69_1-loop/position = Vector2( 497, 218 )
-transitions = [ "Sex69Tease_1-loop", "Sex69FF_1-loop", SubResource( 578 ), "Sex69FF_1-loop", "Sex69Tease_1-loop", SubResource( 579 ), "Sex69Tease_1-loop", "Sex69_1-loop", SubResource( 580 ), "Sex69_1-loop", "Sex69Tease_1-loop", SubResource( 581 ), "Sex69Tease_1-loop", "Sex69MF_1-loop", SubResource( 582 ), "Sex69MF_1-loop", "Sex69Tease_1-loop", SubResource( 583 ), "Sex69Tease_1-loop", "Sex69MM_1-loop", SubResource( 584 ), "Sex69MM_1-loop", "Sex69Tease_1-loop", SubResource( 585 ) ]
+states/Sex69_1-loop/position = Vector2( 436, 420 )
+transitions = [ "Sex69Tease_1-loop", "Sex69FF_1-loop", SubResource( 578 ), "Sex69FF_1-loop", "Sex69Tease_1-loop", SubResource( 579 ), "Sex69Tease_1-loop", "Sex69_1-loop", SubResource( 580 ), "Sex69_1-loop", "Sex69Tease_1-loop", SubResource( 581 ), "Sex69Tease_1-loop", "Sex69MF_1-loop", SubResource( 582 ), "Sex69MF_1-loop", "Sex69Tease_1-loop", SubResource( 583 ), "Sex69Tease_1-loop", "Sex69MM_1-loop", SubResource( 584 ), "Sex69MM_1-loop", "Sex69Tease_1-loop", SubResource( 585 ), "Sex69FF_1-loop", "Sex69_1-loop", SubResource( 603 ), "Sex69_1-loop", "Sex69FF_1-loop", SubResource( 604 ), "Sex69_1-loop", "Sex69MF_1-loop", SubResource( 605 ), "Sex69MF_1-loop", "Sex69_1-loop", SubResource( 606 ), "Sex69MF_1-loop", "Sex69MM_1-loop", SubResource( 607 ), "Sex69MM_1-loop", "Sex69MF_1-loop", SubResource( 608 ), "Sex69FF_1-loop", "Sex69MM_1-loop", SubResource( 609 ), "Sex69MM_1-loop", "Sex69FF_1-loop", SubResource( 610 ), "Sex69FF_1-loop", "Sex69MF_1-loop", SubResource( 611 ), "Sex69MF_1-loop", "Sex69FF_1-loop", SubResource( 612 ), "Sex69MM_1-loop", "Sex69_1-loop", SubResource( 613 ), "Sex69_1-loop", "Sex69MM_1-loop", SubResource( 614 ) ]
 start_node = "Sex69Tease_1-loop"
-graph_offset = Vector2( 20, -38 )
+graph_offset = Vector2( -11, -5 )
 
 [sub_resource type="AnimationNodeBlendTree" id=587]
-graph_offset = Vector2( -348.69, 38.9555 )
+graph_offset = Vector2( -427.809, -23.5278 )
 nodes/Animation/node = SubResource( 446 )
 nodes/Animation/position = Vector2( 140, 280 )
 nodes/CuffsBlend/node = SubResource( 447 )
@@ -75,7 +111,7 @@ nodes/CuffsBlend/position = Vector2( 440, 160 )
 nodes/StateMachine/node = SubResource( 586 )
 nodes/StateMachine/position = Vector2( 180, 100 )
 nodes/output/position = Vector2( 680, 180 )
-node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=460]
 
@@ -118,18 +154,54 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=601]
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=615]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=616]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=617]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=618]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=619]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=620]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=621]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=622]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=623]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=624]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=625]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=626]
+xfade_time = 0.5
+
 [sub_resource type="AnimationNodeStateMachine" id=602]
 states/Sex69FF_2-loop/node = SubResource( 589 )
 states/Sex69FF_2-loop/position = Vector2( 239, 195 )
 states/Sex69MF_2-loop/node = SubResource( 590 )
-states/Sex69MF_2-loop/position = Vector2( 630, 195 )
+states/Sex69MF_2-loop/position = Vector2( 656, 411 )
 states/Sex69MM_2-loop/node = SubResource( 591 )
 states/Sex69MM_2-loop/position = Vector2( 840, 195 )
 states/Sex69Tease_2-loop/node = SubResource( 592 )
 states/Sex69Tease_2-loop/position = Vector2( 533, 70 )
 states/Sex69_2-loop/node = SubResource( 593 )
-states/Sex69_2-loop/position = Vector2( 441, 195 )
-transitions = [ "Sex69Tease_2-loop", "Sex69FF_2-loop", SubResource( 594 ), "Sex69FF_2-loop", "Sex69Tease_2-loop", SubResource( 595 ), "Sex69Tease_2-loop", "Sex69_2-loop", SubResource( 596 ), "Sex69_2-loop", "Sex69Tease_2-loop", SubResource( 597 ), "Sex69Tease_2-loop", "Sex69MF_2-loop", SubResource( 598 ), "Sex69MF_2-loop", "Sex69Tease_2-loop", SubResource( 599 ), "Sex69Tease_2-loop", "Sex69MM_2-loop", SubResource( 600 ), "Sex69MM_2-loop", "Sex69Tease_2-loop", SubResource( 601 ) ]
+states/Sex69_2-loop/position = Vector2( 425, 419 )
+transitions = [ "Sex69Tease_2-loop", "Sex69FF_2-loop", SubResource( 594 ), "Sex69FF_2-loop", "Sex69Tease_2-loop", SubResource( 595 ), "Sex69Tease_2-loop", "Sex69_2-loop", SubResource( 596 ), "Sex69_2-loop", "Sex69Tease_2-loop", SubResource( 597 ), "Sex69Tease_2-loop", "Sex69MF_2-loop", SubResource( 598 ), "Sex69MF_2-loop", "Sex69Tease_2-loop", SubResource( 599 ), "Sex69Tease_2-loop", "Sex69MM_2-loop", SubResource( 600 ), "Sex69MM_2-loop", "Sex69Tease_2-loop", SubResource( 601 ), "Sex69FF_2-loop", "Sex69_2-loop", SubResource( 615 ), "Sex69_2-loop", "Sex69FF_2-loop", SubResource( 616 ), "Sex69_2-loop", "Sex69MF_2-loop", SubResource( 617 ), "Sex69MF_2-loop", "Sex69_2-loop", SubResource( 618 ), "Sex69MF_2-loop", "Sex69MM_2-loop", SubResource( 619 ), "Sex69MM_2-loop", "Sex69MF_2-loop", SubResource( 620 ), "Sex69_2-loop", "Sex69MM_2-loop", SubResource( 621 ), "Sex69MM_2-loop", "Sex69_2-loop", SubResource( 622 ), "Sex69MF_2-loop", "Sex69FF_2-loop", SubResource( 623 ), "Sex69FF_2-loop", "Sex69MF_2-loop", SubResource( 624 ), "Sex69FF_2-loop", "Sex69MM_2-loop", SubResource( 625 ), "Sex69MM_2-loop", "Sex69FF_2-loop", SubResource( 626 ) ]
 start_node = "Sex69Tease_2-loop"
 
 [sub_resource type="AnimationNodeBlendTree" id=588]
@@ -141,7 +213,7 @@ nodes/CuffsBlend/position = Vector2( 440, 160 )
 nodes/StateMachine/node = SubResource( 602 )
 nodes/StateMachine/position = Vector2( 183.468, 121.684 )
 nodes/output/position = Vector2( 680, 180 )
-node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=473]
 
