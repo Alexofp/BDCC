@@ -17,6 +17,7 @@ var otherHoleFetishReceiving = Fetish.AnalSexReceiving
 var otherGoal = SexGoal.ReceiveAnal
 var currentPose = ""
 var isVag = true
+var isMakingOut:bool = false
 
 func _init():
 	id = "DomRidingSubVaginal"
@@ -233,8 +234,42 @@ func processChoke():
 		subInfo.addConsciousness(-0.01)
 		sendSexEvent(SexEvent.Choking, domID, subID, {strongChoke=false})
 
+func processExtra():
+	if(!isMakingOut):
+		return null
+	
+	var hasPC:bool = (subID == "pc" || domID == "pc")
+	var text:String = ("You " if hasPC else "They ")+RNG.pick([
+		"are making out.",
+		"are still in a deep kiss.",
+		"are still kissing.",
+	])
+	
+	if(RNG.chance(30)):
+		text += RNG.pick([
+			" A faint moan escapes {sub.yourHis} throat.",
+			" {dom.YourHis} teeth graze {sub.yourHis} lower lip, drawing a soft gasp.",
+			" Tongues are exchanging saliva.",
+			" Tongues are dancing and swirling against each other.",
+			" Soft gasps and moans escape from both.",
+		])
+	
+	if(OPTIONS.isContentEnabled(ContentType.CumStealing)):
+		if(RNG.chance(20) && getDom().bodypartShareFluidsWith(BodypartSlot.Head, subID, BodypartSlot.Head, 0.2)):
+			text += RNG.pick([
+				" {dom.You} and {sub.you} [b]share some cum[/b] while "+RNG.pick(["making out", "kissing", "kissing deeply"])+"!",
+				" [b]Some cum gets shared[/b] between the two "+RNG.pick(["mouths", "tongues", "lovers"])+"!",
+				" [b]Snowballing is happening, some cum gets shared around[/b].",
+			])
+	sendSexEvent(SexEvent.Kissing, domID, subID, {})
+	
+	return {text=text}
+
 func processTurn():
 	processChoke()
+	
+	if(isMakingOut && currentPose != POSE_LOTUS):
+		isMakingOut = false
 	
 	if(state == "knotting" || state == "inside"):
 		var freeRoom = getDom().getPenetrationFreeRoomBy(usedBodypart, subID)
@@ -243,7 +278,7 @@ func processTurn():
 				"{dom.You} {dom.youAre} being a "+RNG.pick(["great", "good"])+" cock warmer for {sub.you}. There is enough room inside {dom.yourHis} "+RNG.pick(usedBodypartNames)+" for {dom.youHim} not to feel any pain.",
 			])
 			
-			return {text = text}
+			return combineData({text = text}, processExtra())
 		else:
 			var text = RNG.pick([
 				"{dom.You} {dom.youAre} trying to be a cock warmer for {sub.you} but {dom.yourHis} "+RNG.pick(usedBodypartNames)+" is too tight, it's very painful! But it sure feels good for {sub.you}.",
@@ -254,7 +289,7 @@ func processTurn():
 			subInfo.addLust(10)
 			subInfo.addArousalForeplay(0.1)
 			getDom().gotOrificeStretchedBy(usedBodypart, subID, 0.1)
-			return {text = text}
+			return combineData({text = text}, processExtra())
 	
 	if(state == "fucking"):
 		affectSub(subInfo.fetishScore({fetishGiving: 1.0})+0.5, 0.1 * subSensetivity(), -0.1, -0.01)
@@ -332,11 +367,27 @@ func processTurn():
 					" {sub.Your} "+RNG.pick(["cock", "dick", "member"])+" is twitching and leaking a lot."
 				])
 		
-		return {text=text}
+		return combineData({text = text}, processExtra())
 
 
 func getDomActions():
 	var actions = []
+	if(currentPose == POSE_LOTUS):
+		if(!isMakingOut && !getDom().isMuzzled() && !getSub().isMuzzled()):
+			actions.append({
+					"id": "makeout",
+					"score": domInfo.personalityScore({PersonalityStat.Mean:-0.1}),
+					"name": "Start kissing",
+					"desc": "Start making out at the same time since this sex pose allows it",
+				})
+		if(isMakingOut):
+			actions.append({
+					"id": "stopmakeout",
+					"score": 0.01,
+					"name": "Stop kissing",
+					"desc": "Enough sharing fluids!",
+				})
+	
 	if(state == "" || state == "inside"):
 		actions.append({
 				"id": "rub",
@@ -440,6 +491,30 @@ func getDomActions():
 
 
 func doDomAction(_id, _actionInfo):
+	if(_id == "makeout"):
+		isMakingOut = true
+		
+		var text:String = ""
+		if(!subInfo.isResistingSlightly()):
+			text += RNG.pick([
+				"{dom.You} {dom.youVerb('lean')} in closer, {dom.yourHis} lips locking with {sub.your} in a deep, heated kiss. Kiss that keeps going. {sub.YouHe} {sub.youVerb('respond')}, opening {sub.yourHis} mouth to meet {dom.yourHis} tongue.",
+			])
+		else:
+			text += RNG.pick([
+				"{dom.You} {dom.youVerb('lean')} in closer and {dom.youVerb('force')} a deep kiss despite {sub.your} muffled protests. {dom.YourHis} tongue pushes into that mouth, claiming it as {sub.youHe} {sub.youVerb('squirm')} beneath.",
+			])
+		
+		return {text = text}
+
+	if(_id == "stopmakeout"):
+		isMakingOut = false
+		
+		var text:String = RNG.pick([
+			"{dom.You} {dom.youVerb('decide')} to stop making out.",
+		])
+		
+		return {text = text}
+
 	if(_id == "switchpose"):
 		#switchedPoseOnce = true
 		var newPose = _actionInfo["args"][0]
@@ -787,6 +862,7 @@ func doSubAction(_id, _actionInfo):
 		if(getSubResistChance(30.0, 25.0)):
 			if(state != ""):
 				state = ""
+				isMakingOut = false
 			else:
 				endActivity()
 			
@@ -854,7 +930,7 @@ func doSubAction(_id, _actionInfo):
 				domInfo.addArousalSex(0.05)
 				sendSexEvent(SexEvent.FilledCondomInside, subID, domID, {hole=usedBodypart,loadSize=loadSize,knotted=false})
 				satisfyGoals()
-				state = ""
+				state = "inside"
 				
 				return {text=text}
 		
@@ -871,7 +947,7 @@ func doSubAction(_id, _actionInfo):
 		subInfo.cum()
 		domInfo.addArousalSex(0.05)
 		satisfyGoals()
-		state = ""
+		state = "inside"
 
 		return {text=text}
 
@@ -950,6 +1026,7 @@ func saveData():
 	
 	data["waitTimer"] = waitTimer
 	data["currentPose"] = currentPose
+	data["isMakingOut"] = isMakingOut
 
 	return data
 	
@@ -958,5 +1035,6 @@ func loadData(data):
 	
 	waitTimer = SAVE.loadVar(data, "waitTimer", 0)
 	currentPose = SAVE.loadVar(data, "currentPose", "")
+	isMakingOut = SAVE.loadVar(data, "isMakingOut", false)
 	if(currentPose == ""):
 		currentPose = RNG.pick(getAvaiablePoses())

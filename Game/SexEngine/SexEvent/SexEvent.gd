@@ -144,6 +144,12 @@ const Choking = "Choking"
 # pain = how much pain did the spank inflict
 const Spanked = "Spanked"
 
+# Only gets called in sex engine
+# Source = Who is kissing
+# Target = Who got kissed
+#data:
+const Kissing = "Kissing"
+
 const EmptyEvent = "EmptyEvent"
 
 
