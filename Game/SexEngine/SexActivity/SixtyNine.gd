@@ -38,10 +38,10 @@ func getSubTags():
 	return thetags
 
 func getDomTagsCheck():
-	return [SexActivityTag.HavingSex]
+	return [SexActivityTag.HavingSex, SexActivityTag.MouthUsed]
 
 func getSubTagsCheck():
-	return [SexActivityTag.HavingSex]
+	return [SexActivityTag.HavingSex, SexActivityTag.MouthUsed]
 
 func domCanSwitchFocus():
 	if(getSub().hasReachablePenis() && getSub().hasReachableVagina()):
@@ -55,11 +55,6 @@ func subCanSwitchFocus():
 
 func startActivity(_args):
 	state = ""
-	
-	#var clothingItem = getDom().getFirstItemThatCoversBodypart(BodypartSlot.Vagina)
-	#var throughTheClothing = ""
-	#if(clothingItem != null):
-	#	throughTheClothing = " through the "+clothingItem.getCasualName()
 	
 	var possibleDomFocus = []
 	if(getSub().hasReachablePenis()):
@@ -75,17 +70,23 @@ func startActivity(_args):
 		possibleSubFocus.append(BodypartSlot.Vagina)
 	subFocus = RNG.pick(possibleSubFocus)
 	
+	var domPartNameStr:String = "{dom.pussyStretch} pussy" if subFocus == BodypartSlot.Vagina else "{dom.penis}"
+	if(getDom().getFirstItemThatCoversBodypart(subFocus) != null):
+		domPartNameStr = "covered up "+domPartNameStr
+	
+	var subPartNameStr:String = "{sub.pussyStretch} pussy" if domFocus == BodypartSlot.Vagina else "{sub.penis}"
+	if(getSub().getFirstItemThatCoversBodypart(domFocus) != null):
+		subPartNameStr = "clothed "+subPartNameStr
+		
 	var text = RNG.pick([
-		#"{dom.You} {dom.youVerb('lie')} down and {dom.youVerb('interlock')} legs with {sub.you}, ready to start grinding "+RNG.pick(["pussies", "pussy slits", "kitties", "clits"])+" against each other"+throughTheClothing+"!",
-		"69 ABOUT TO HAPPEN. DOM WILL LICK: "+str(domFocus)+", SUB WILL LICK: "+str(subFocus),
+		"{dom.You} {dom.youVerb('position')} {dom.yourself} above {sub.you}, {dom.yourHis} "+domPartNameStr+" hovering tantalizingly close to {sub.yourHis} lips while {dom.yourHis} mouth lines up perfectly with a "+subPartNameStr+".",
 	])
 	
-	affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0}), 0.1, -0.1, -0.01)
+	affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0}), 0.1, -0.2, -0.01)
 	affectDom(domInfo.fetishScore({Fetish.OralSexGiving: 1.0}), 0.1, -0.03)
 	
 	return {
 		text = text,
-		#domSay = domReaction(SexReaction.AboutToRubPussiesTogether),
 	}
 
 func onSwitchFrom(_otherActivity, _args):
@@ -93,25 +94,32 @@ func onSwitchFrom(_otherActivity, _args):
 
 func processTurn():
 	if(state == "sex"):
-		var text = RNG.pick([
-			"FUN IS HAPPENING.",
-		])
-		
-		affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 0.75, Fetish.OralSexReceiving: 1.0}), 0.1, -0.1, -0.01)
-		affectDom(domInfo.fetishScore({Fetish.OralSexGiving: 0.75, Fetish.OralSexReceiving: 1.0}), 0.1, -0.03)
-		subInfo.addArousalSex(0.1)
-		domInfo.addArousalSex(0.1)
-		
 		if(domFocus == BodypartSlot.Vagina && !getSub().hasReachableVagina()):
 			state = ""
+			satisfyGoals()
+			return {text = "{sub.Your} pussy is not reachable anymore so {dom.you} {dom.youVerb('stop')} licking it."}
 		if(domFocus == BodypartSlot.Penis && !getSub().hasReachablePenis()):
 			state = ""
+			satisfyGoals()
+			return {text = "{sub.Your} cock is not reachable anymore so {dom.you} {dom.youVerb('stop')} sucking it."}
 		if(subFocus == BodypartSlot.Vagina && !getDom().hasReachableVagina()):
 			state = ""
+			satisfyGoals()
+			return {text = "{dom.Your} pussy is not reachable anymore so {sub.you} {sub.youAre} unable to continue licking it."}
 		if(subFocus == BodypartSlot.Penis && !getDom().hasReachablePenis()):
 			state = ""
+			satisfyGoals()
+			return {text = "{dom.Your} cock is not reachable anymore so {sub.you} {sub.youAre} unable to continue sucking it."}
 			
-		return {text = text}
+		if(RNG.chance(50)):
+			return combineData(
+				doBlowjobTurnDom() if subFocus == BodypartSlot.Penis else doPussyLickingTurnDom(),
+				doBlowjobTurnSub() if domFocus == BodypartSlot.Penis else doPussyLickingTurnSub()
+			)
+		return combineData(
+			doBlowjobTurnSub() if domFocus == BodypartSlot.Penis else doPussyLickingTurnSub(),
+			doBlowjobTurnDom() if subFocus == BodypartSlot.Penis else doPussyLickingTurnDom()
+		)
 	
 	return
 	
@@ -121,7 +129,7 @@ func getDomActions():
 	if(domCanSwitchFocus()):
 		actions.append({
 			"id": "switch",
-			"score": 0.0,
+			"score": 0.05,
 			"name": "Switch focus",
 			"desc": "Switch focus to their other bits",
 		})
@@ -204,18 +212,22 @@ func _doDomAction(_id, _actionInfo):
 		state = "order"
 		subFocus = BodypartSlot.Vagina
 		var text = RNG.pick([
-			"{dom.You} {dom.youVerb('order')} TO LICK.",
+			"{dom.You} {dom.youVerb('order')} {sub.youHim} to "+RNG.pick(["start licking {dom.yourHis} pussy", "stick {sub.yourHis} tongue out and start working on {dom.yourHis} pussy"])+".",
 		])
 		
-		return {text = text}
+		affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0}), 0.05, -0.4, 0.0)
+		
+		return {text=text, domSay=domReaction(SexReaction.OrderLickPussy)}
 	if(_id == "ordersuck"):
 		state = "order"
 		subFocus = BodypartSlot.Penis
 		var text = RNG.pick([
-			"{dom.You} {dom.youVerb('order')} TO SUCK.",
+			"{dom.You} {dom.youVerb('order')} {sub.youHim} to "+RNG.pick(["open {sub.yourHis} mouth", "part {sub.yourHis} lips"])+".",
 		])
 		
-		return {text = text}
+		affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0}), 0.05, -0.4, 0.0)
+		
+		return {text=text, domSay=domReaction(SexReaction.OrderBlowjob)}
 		
 	if(_id in ["forcelick", "forcesuck"]):
 		var succChance:float = getDomForceChance()
@@ -226,17 +238,41 @@ func _doDomAction(_id, _actionInfo):
 		
 		if(!RNG.chance(succChance)):
 			var text = RNG.pick([
-				"{dom.You} {dom.youVerb('try', 'tries')} TO FORCE.",
+				"{dom.You} {dom.youVerb('try', 'tries')} to force {sub.you} to "+("start licking {dom.yourHis} pussy" if subFocus == BodypartSlot.Vagina else "start sucking {dom.yourHis} cock")+" but {dom.youVerb('fail')}.",
 			])
-			domInfo.addAnger(-0.05)
+			
+			domInfo.addAnger(0.05)
+			affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0}), 0.05, -0.2, 0.0)
 			
 			return {text = text}
 		
 		state = "sex"
-		var text = RNG.pick([
-			"{dom.You} {dom.youVerb('force')} THE FUN.",
-		])
+		var text = ""
+		
+		if(domFocus == BodypartSlot.Penis):
+			text += RNG.pick([
+				"{dom.You} {dom.youVerb('take')} {sub.yourHis} {penis} into {dom.yourHis} mouth, {dom.yourHis} lips sliding down its length.",
+				"{dom.You} {dom.youVerb('wrap')} {dom.yourHis} lips around {sub.yourHis} {penis}, your tongue teasing along its sensitive tip as {dom.youHe} {dom.youVerb('bob')} {dom.yourHis} head up and down.",
+			])
+		else:
+			text += RNG.pick([
+				"{dom.You} {dom.youVerb('lean')} down, pressing {dom.yourHis} tongue against {sub.yourHis} {pussy} with slow, deliberate strokes.",
+				"{dom.You} {dom.youVerb('bury', 'buries')} {dom.yourHis} face between {sub.yourHis} legs, tongue exploring every inch of {sub.yourHis} pussy.",
+			])
+		
+		text += " "
+		if(subFocus == BodypartSlot.Penis):
+			text += RNG.pick([
+				"Without warning, {dom.you} {dom.youVerb('shift')} {dom.yourHis} hips, lining up {dom.yourHis} {dom.penis} with {sub.yourHis} lips. With a firm thrust, {dom.youHe} {dom.youVerb('part')} {sub.yourHis} mouth, forcing {sub.youHim} to return the favor by taking {dom.youHim}.",
+				"{dom.You} {dom.youVerb('move')} {dom.yourHis} hips forward, guiding {dom.yourHis} {dom.penis} to {sub.yourHis} lips. {dom.YouHe} {dom.youVerb('push', 'pushes')} insistently, leaving {sub.youHim} no choice but to take {dom.youHim} in return.",
+			])
+		else:
+			text += RNG.pick([
+				"Without hesitation, {dom.you} {dom.youVerb('shift')} {dom.yourHis} weight and {dom.youVerb('lower')} {dom.yourself} onto {sub.yourHis} face, muffling any protests with {dom.yourHis} {dom.pussyStretch} pussy, forcing {sub.youHim} to start licking.",
+				"At the same time, {dom.you} {dom.youVerb('lower')} {dom.yourself}, pressing {dom.yourHis} {dom.pussyStretch} pussy firmly against {sub.yourHis} mouth, forcing {sub.youHim} to start returning the favor.",
+			])
 		domInfo.addAnger(-0.1)
+		affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0}), 0.05, -0.2, 0.0)
 		
 		return {text = text}
 
@@ -272,9 +308,28 @@ func order_subActions():
 func order_doSubAction(_id, _info):
 	if(_id == "obey"):
 		state = "sex"
-		var text = RNG.pick([
-			"{sub.You} {sub.youVerb('begin', 'began')} OBEY AND BEGIN THE FUN.",
-		])
+		var text = ""
+		if(subFocus == BodypartSlot.Penis):
+			text += RNG.pick([
+				"Obediently, {sub.you} {sub.youVerb('part')} {sub.yourHis} lips and {sub.youVerb('take')} {dom.yourHis} {dom.penis} into {sub.yourHis} mouth, sucking eagerly.",
+				"{sub.You} {sub.youVerb('open')} {sub.yourHis} mouth wide, letting {dom.yourHis} {dom.penis} slide past {sub.yourHis} lips. With an eager tongue and slow, deliberate movements, {sub.youHe} {sub.youVerb('begin')} sucking {dom.youHim} off.",
+			])
+		else:
+			text += RNG.pick([
+				"Obediently, {sub.you} {sub.youVerb('extend')} {sub.yourHis} tongue and {sub.youVerb('begin')} licking {dom.yourHis} {dom.pussyStretch} pussy.",
+				"{sub.You} {sub.youVerb('press')} {sub.yourHis} tongue to {dom.yourHis} {dom.pussyStretch} pussy, lapping eagerly, obeying {dom.youHis} command without hesitation.",
+			])
+		text += " "
+		if(domFocus == BodypartSlot.Penis):
+			text += RNG.pick([
+				"In return, {dom.You} {dom.youVerb('take')} {sub.yourHis} {penis} into {dom.yourHis} mouth, {dom.yourHis} lips sliding down its length.",
+				"Feeling that, {dom.You} {dom.youVerb('wrap')} {dom.yourHis} lips around {sub.yourHis} {penis}, your tongue teasing along its sensitive tip as {dom.youHe} {dom.youVerb('bob')} {dom.yourHis} head up and down.",
+			])
+		else:
+			text += RNG.pick([
+				"In return, {dom.You} {dom.youVerb('lean')} down, pressing {dom.yourHis} tongue against {sub.yourHis} {pussy} with slow, deliberate strokes.",
+				"Feeling that, {dom.You} {dom.youVerb('bury', 'buries')} {dom.yourHis} face between {sub.yourHis} legs, tongue exploring every inch of {sub.yourHis} pussy.",
+			])
 		
 		return {text = text}
 	if(_id == "refuse"):
@@ -346,7 +401,7 @@ func sex_doDomAction(_id, _info):
 		subInfo.addArousalSex(0.05)
 		if(subInfo.isReadyToCum() && isHandlingSubOrgasms()):
 			satisfyGoals()
-			return combineData({text="Two orgasms happen at the same time!"}, combineData(
+			return combineData({text="[b]Double orgasm[/b]!"}, combineData(
 				doCumBJDom() if subFocus == BodypartSlot.Penis else doCumPussyLickDom(),
 				doCumBJSub(false) if domFocus == BodypartSlot.Penis else doCumPussyLickSub(false)
 				))
@@ -354,10 +409,6 @@ func sex_doDomAction(_id, _info):
 			cumAmount += 1
 			if(cumAmount >= 2):
 				satisfyGoals()
-		#sendSexEvent(SexEvent.UniqueOrgasm, subID, domID, {orgasmType="feet"})
-		#var text = RNG.pick([
-		#	"{dom.You} {dom.youVerb('cum')} hard!",
-		#])
 		return (doCumBJDom() if subFocus == BodypartSlot.Penis else doCumPussyLickDom())
 
 func sex_subActions():
@@ -376,16 +427,18 @@ func sex_subActions():
 
 func sex_doSubAction(_id, _info):
 	if(_id == "cum"):
-		cumAmount += 1
-		if(cumAmount >= 2):
-			satisfyGoals()
 		domInfo.addArousalSex(0.05)
-		#getSub().cumOnFloor()
-		#subInfo.cum()
-		#sendSexEvent(SexEvent.UniqueOrgasm, subID, domID, {orgasmType="feet"})
-		#var text = RNG.pick([
-		#	"{sub.You} {sub.youVerb('cum')} hard!",
-		#])
+		
+		if(subInfo.isReadyToCum() && isHandlingSubOrgasms()):
+			satisfyGoals()
+			return combineData({text="[b]Double orgasm[/b]!"}, combineData(
+				doCumBJDom() if subFocus == BodypartSlot.Penis else doCumPussyLickDom(),
+				doCumBJSub(false) if domFocus == BodypartSlot.Penis else doCumPussyLickSub(false)
+				))
+		else:
+			cumAmount += 1
+			if(cumAmount >= 2):
+				satisfyGoals()
 		return (doCumBJSub(false) if domFocus == BodypartSlot.Penis else doCumPussyLickSub(false))
 
 func getSubActions():
@@ -448,13 +501,15 @@ func getSubOrgasmHandlePriority():
 func getDomForceChance():
 	if(getSub().isBitingBlocked()):
 		return 100.0
-	var theChance:float= 100.0 - subInfo.getResistScoreSmooth()*80.0
+	if(subInfo.resistance <= 0.01):
+		return 100.0
+	var theChance:float= 50.0 - subInfo.getResistScoreSmooth()*30.0
 	if(getSub().hasBlockedHands()):
 		theChance *= 1.2
 	if(getSub().hasBoundArms()):
 		theChance *= 1.2
 	
-	return clamp(theChance, 0.0, 100.0)
+	return clamp(theChance, 5.0, 100.0)
 
 func getSubResistChance(baseChance, domAngerRemoval):
 	var theChance = baseChance - domInfo.getAngerScore()*domAngerRemoval

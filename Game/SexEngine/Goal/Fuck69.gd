@@ -71,4 +71,4 @@ func doFastSex(_sexEngine, _domInfo, _subInfo, _data):
 
 
 func getGoalDefaultWeight():
-	return 0.0
+	return 1.0
