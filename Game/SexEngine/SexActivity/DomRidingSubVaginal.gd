@@ -295,7 +295,7 @@ func processTurn():
 		affectSub(subInfo.fetishScore({fetishGiving: 1.0})+0.5, 0.1 * subSensetivity(), -0.1, -0.01)
 		affectDom(domInfo.fetishScore({fetishReceiving: 1.0})+0.3, 0.1, 0.0)
 		subInfo.addArousalSex(0.2 * subSensetivity())
-		domInfo.addArousalSex(0.2)
+		domInfo.addArousalZone(0.2, usedBodypart, 1.0)
 		
 		var text = RNG.pick([
 			"{dom.You} {dom.youAre} riding {sub.yourHis} "+getDickName(RNG.pick(["dick", "cock", "member"]))+".",

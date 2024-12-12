@@ -9,6 +9,8 @@ var bodypart: WeakRef = null
 var isGenital = true
 var orificeType = OrificeType.Vagina
 
+var sensitiveZone:SensitiveZone = SensitiveZone.new()
+
 func getCapacity() -> float:
 	return round(1000.0 + 500.0 * looseness)
 
@@ -102,6 +104,7 @@ func handleInsertion(size: float, stretchMult = 1.0):
 	looseness += add / 10.0 * stretchMult
 
 func hoursPassed(_howmuch):
+	sensitiveZone.hoursPassed(_howmuch)
 	var minLoose = getMinLooseness()
 	
 	if(abs(looseness - minLoose) <= 0.001):
@@ -182,6 +185,8 @@ func getStuffedLevel() -> float:
 	return fluidAmount / capacity
 
 func processTime(seconds: int):
+	sensitiveZone.processTime(seconds) # CHANGE ME PROBABLY
+	#sensitiveZone.processSexTurn() # CHANGE ME PROBABLY
 	if(isEmpty()):
 		return
 	
@@ -246,6 +251,8 @@ func getTooltipInfo():
 	if(!isEmpty()):
 		result.append("Contents:")
 		result.append_array(getContentsHumanReadableArray())
+	if(sensitiveZone != null):
+		result.append_array(sensitiveZone.getInfo())
 	return Util.join(result, "\n")
 
 func generateDataFor(_dynamicCharacter):
@@ -270,6 +277,9 @@ func generateDataFor(_dynamicCharacter):
 		var fetishValue = fetishHolder.getFetishValue(Fetish.OralSexGiving)
 		if(fetishValue > 0.0):
 			looseness = RNG.randf_range(0.0, fetishValue*5.0)
+
+func getSensitiveZone():
+	return sensitiveZone
 
 func saveData():
 	var data = {

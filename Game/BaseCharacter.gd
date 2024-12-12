@@ -1965,6 +1965,9 @@ func afterOrgasm(_isSexEngine = false):
 		if(production != null):
 			production.fillPercent(buffsHolder.getCustom(BuffAttribute.CumGenerationAfterOrgasm))
 
+	for zone in getSensitiveZones():
+		zone.onOrgasm()
+
 func cumOnFloor(_characterID: String = ""):
 	if(hasBodypart(BodypartSlot.Penis)):
 		var penis:BodypartPenis = getBodypart(BodypartSlot.Penis)
@@ -3166,3 +3169,13 @@ func isGeneralInmate() -> bool:
 
 func isHighSecInmate() -> bool:
 	return isInmate() && getInmateType() == InmateType.HighSec
+
+func getSensitiveZones():
+	var result := []
+	
+	if(hasVagina()):
+		result.append(getBodypart(BodypartSlot.Vagina).getOrifice().getSensitiveZone())
+	if(hasBodypart(BodypartSlot.Anus)):
+		result.append(getBodypart(BodypartSlot.Anus).getOrifice().getSensitiveZone())
+	return result
+

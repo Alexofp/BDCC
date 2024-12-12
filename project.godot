@@ -1285,6 +1285,11 @@ _global_script_classes=[ {
 "path": "res://Scenes/SceneBase.gd"
 }, {
 "base": "Reference",
+"class": "SensitiveZone",
+"language": "GDScript",
+"path": "res://Player/SensitiveZone/SensitiveZone.gd"
+}, {
+"base": "Reference",
 "class": "SexActivityBase",
 "language": "GDScript",
 "path": "res://Game/SexEngine/SexActivityBase.gd"
@@ -1850,6 +1855,7 @@ _global_script_class_icons={
 "SaveConversion": "",
 "SayParser": "",
 "SceneBase": "",
+"SensitiveZone": "",
 "SexActivityBase": "",
 "SexActivityTag": "",
 "SexDomInfo": "",

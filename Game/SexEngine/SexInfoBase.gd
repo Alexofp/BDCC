@@ -87,17 +87,22 @@ func canTalk():
 	return true
 
 func arousalNaturalFade():
-	if(!hadStim):
+	if(!hadStim && getArousal() > 0.0):
 		addArousal(-0.01)
 		turnsLastStim += 1
 		
 		if(turnsLastStim > 4):
 			addArousal(-0.02)
+			onDenyTick()
 		if(turnsLastStim > 8):
 			addArousal(-0.02)
 	#else:
 	#	turnsLastStim = 0
 	hadStim = false
+
+func onDenyTick():
+	for zone in getChar().getSensitiveZones():
+		zone.onDenyTick()
 
 func addArousalForeplay(howmuch: float):
 	#var lustLevel = getChar().getLustLevel()
@@ -112,6 +117,11 @@ func addArousalSex(howmuch: float):
 		addArousal(howmuch * max(lustLevel, 0.1))
 	else:
 		addArousal(howmuch)
+
+func addArousalZone(howmuch: float, bodypartSlot, stimulation:float = 1.0):
+	addArousalSex(howmuch)
+	
+	getChar().getBodypart(bodypartSlot).getOrifice().sensitiveZone.stimulate(stimulation)
 
 func isCloseToCumming() -> bool:
 	return getArousal() >= 0.7

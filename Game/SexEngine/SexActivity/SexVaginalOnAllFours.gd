@@ -339,7 +339,7 @@ func processTurn():
 		times += 1
 		affectSub(subInfo.fetishScore({fetishReceiving: 1.0})+0.5, 0.1, -0.1, -0.01)
 		affectDom(domInfo.fetishScore({fetishGiving: 1.0})+0.3, 0.1*domSensetivity(), 0.0)
-		subInfo.addArousalSex(0.2)
+		subInfo.addArousalZone(0.2, usedBodypart, 1.0)
 		domInfo.addArousalSex(0.2*domSensetivity())
 		
 		var text = RNG.pick([
