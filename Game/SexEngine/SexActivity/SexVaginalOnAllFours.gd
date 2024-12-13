@@ -68,7 +68,7 @@ func getPoseDescriptor():
 		return " in a mating press"
 	if(currentPose == POSE_LEGRAISED):
 		return " with one leg raised"
-	if(currentPose == POSE_STANDING):
+	if(currentPose == POSE_AGAINSTWALL):
 		return " agaisnt a wall"
 	if(currentPose == POSE_PINNEDWALL):
 		return " pinned agaisnt a wall"
@@ -339,8 +339,11 @@ func processTurn():
 		times += 1
 		affectSub(subInfo.fetishScore({fetishReceiving: 1.0})+0.5, 0.1, -0.1, -0.01)
 		affectDom(domInfo.fetishScore({fetishGiving: 1.0})+0.3, 0.1*domSensetivity(), 0.0)
-		subInfo.addArousalZone(0.2, usedBodypart, 1.0)
-		domInfo.addArousalSex(0.2*domSensetivity())
+		subInfo.stimulateArousalZone(0.2, usedBodypart, 1.0)
+		if(isStraponSex()):
+			domInfo.addArousalSex(0.2 * domSensetivity())
+		else:
+			domInfo.stimulateArousalZone(0.2, BodypartSlot.Penis, 1.0)
 		
 		var text = RNG.pick([
 			"{dom.You} {dom.youAre} fucking {sub.youHim}"+getPoseDescriptor()+".",
@@ -452,6 +455,12 @@ func getDomActions():
 			"desc": "Stop fucking",
 		})
 	if(state in ["fucking"]):
+		actions.append({
+				"id": "slowdown",
+				"score": 0.0,
+				"name": "Slow down",
+				"desc": "Stop fucking for a second..",
+			})
 		
 		if(domInfo.isReadyToCum() && isHandlingDomOrgasms() && isStraponSex()):
 			actions.append({
@@ -543,6 +552,14 @@ func getDomActions():
 	return actions
 
 func doDomAction(_id, _actionInfo):
+	if(_id == "slowdown"):
+		state = "aftercumminginside"
+		
+		var text = RNG.pick([
+			"{dom.You} {dom.youVerb('slow')} {dom.yourHis} pace down and just {dom.youVerb('let')} {dom.yourHis} "+getDickName()+" stay inside.",
+		])
+		return {text = text}
+	
 	if(_id == "switchpose"):
 		switchedPoseOnce = true
 		var newPose = _actionInfo["args"][0]

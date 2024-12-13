@@ -294,8 +294,11 @@ func processTurn():
 	if(state == "fucking"):
 		affectSub(subInfo.fetishScore({fetishGiving: 1.0})+0.5, 0.1 * subSensetivity(), -0.1, -0.01)
 		affectDom(domInfo.fetishScore({fetishReceiving: 1.0})+0.3, 0.1, 0.0)
-		subInfo.addArousalSex(0.2 * subSensetivity())
-		domInfo.addArousalZone(0.2, usedBodypart, 1.0)
+		if(isStraponSex()):
+			subInfo.addArousalSex(0.2 * subSensetivity())
+		else:
+			subInfo.stimulateArousalZone(0.2, BodypartSlot.Penis, 1.0)
+		domInfo.stimulateArousalZone(0.2, usedBodypart, 1.0)
 		
 		var text = RNG.pick([
 			"{dom.You} {dom.youAre} riding {sub.yourHis} "+getDickName(RNG.pick(["dick", "cock", "member"]))+".",
@@ -418,6 +421,13 @@ func getDomActions():
 				"score": max(0.1, domInfo.fetishScore({fetishReceiving: 1.0}) + domInfo.personalityScore({PersonalityStat.Subby: 1.0})),
 				"name": "Moan",
 				"desc": "Show how much you like it",
+			})
+
+		actions.append({
+				"id": "slowdown",
+				"score": 0.0,
+				"name": "Slow down",
+				"desc": "Stop fucking for a second..",
 			})
 
 		if(domInfo.isReadyToCum() && isHandlingDomOrgasms()):
@@ -743,6 +753,14 @@ func doDomAction(_id, _actionInfo):
 		#gonnaCumOutside = false
 		state = "fucking"
 		return {text = "{dom.You} {dom.youVerb('envelop')} {sub.youHis} "+getDickName()+", letting it penetrate {dom.yourHis} "+RNG.pick(usedBodypartNames)+"."}
+
+	if(_id == "slowdown"):
+		state = "inside"
+		
+		var text = RNG.pick([
+			"{dom.You} {dom.youVerb('stop')} riding that "+getDickName()+" and just {dom.youVerb('let')} it stay inside.",
+		])
+		return {text = text}
 
 	if(_id == "moan"):
 		var moanText = RNG.pick([

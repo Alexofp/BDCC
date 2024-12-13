@@ -5,6 +5,10 @@ func _init():
 	limbSlot = null
 	orifice = AnusOrifice.new()
 	orifice.bodypart = weakref(self)
+	sensitiveZone = SensitiveZone.new()
+	sensitiveZone.setBodypart(self)
+	sensitiveZone.arousalGainModifier = 0.3
+	sensitiveZone.zoneName = "Anus"
 	needsProcessing = true
 
 func getSlot():
@@ -17,6 +21,10 @@ func getTooltipInfo():
 	var text = ""
 	if(orifice != null):
 		text += orifice.getTooltipInfo()
+	if(sensitiveZone != null):
+		if(text != ""):
+			text += "\n"
+		text += sensitiveZone.getInfoString()
 	var theChar = getCharacter()
 	if(GM.pc != null && GM.pc.hasPerk(Perk.BreedExtraTooltipInfo) && theChar != null && theChar.hasWombIn(getSlot())):
 		var menstrualCycle = theChar.getMenstrualCycle()

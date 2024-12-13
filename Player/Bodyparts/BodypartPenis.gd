@@ -8,6 +8,14 @@ func _init():
 	limbSlot = LimbTypes.Penis
 	fluidProduction = CumProduction.new()
 	fluidProduction.bodypart = weakref(self)
+	sensitiveZone = SensitiveZone.new()
+	sensitiveZone.setBodypart(self)
+	sensitiveZone.zoneName = "Penis"
+	sensitiveZone.sensitivityGainModifier = 0.002
+	sensitiveZone.lowSensitivityRestoreRate = 0.7
+	sensitiveZone.stimulationGainModifier = 0.5
+	sensitiveZone.overstimSensLoseModifier = 3.0
+	sensitiveZone.extraSensGainModifier = 0.4
 	needsProcessing = true
 
 func getSlot():
@@ -22,6 +30,8 @@ func getTooltipInfo():
 	var theChar = getCharacter()
 	if(GM.pc != null && GM.pc.hasPerk(Perk.BreedExtraTooltipInfo) && theChar != null):
 		result.append("Virility: "+str(Util.roundF(theChar.getVirility()*100.0, 1))+"%")
+	if(sensitiveZone != null):
+		result.append_array(sensitiveZone.getInfo())
 	
 	return Util.join(result, "\n")
 

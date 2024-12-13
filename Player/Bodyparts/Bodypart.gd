@@ -8,6 +8,7 @@ var needsProcessing = false
 
 var orifice: Orifice = null
 var fluidProduction: FluidProduction = null
+var sensitiveZone: SensitiveZone = null
 var character: WeakRef = null
 
 var pickedSkin = null
@@ -176,16 +177,22 @@ func clearOrificeFluids():
 	assert(orifice != null)
 	orifice.clear()
 
+func getSensitiveZone():
+	return sensitiveZone
+
 func processTime(_seconds: int):
+	if(sensitiveZone != null):
+		sensitiveZone.processTime(_seconds)
 	if(orifice != null):
 		orifice.processTime(_seconds)
 	if(fluidProduction != null):
 		fluidProduction.processTime(_seconds)
 
 func hoursPassed(_howmuch):
-	if(orifice == null):
-		return
-	orifice.hoursPassed(_howmuch)
+	if(sensitiveZone != null):
+		sensitiveZone.hoursPassed(_howmuch)
+	if(orifice != null):
+		orifice.hoursPassed(_howmuch)
 
 func handleInsertion(size: float, stretchMult = 1.0):
 	if(orifice == null):

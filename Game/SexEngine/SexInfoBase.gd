@@ -104,6 +104,16 @@ func onDenyTick():
 	for zone in getChar().getSensitiveZones():
 		zone.onDenyTick()
 
+func isBeingDenied() -> bool:
+	if(!hadStim && getArousal() > 0.2 && turnsLastStim > 2):
+		return true
+	return false
+
+func isBeingDeniedHard() -> bool:
+	if(!hadStim && getArousal() > 0.7 && turnsLastStim > 1):
+		return true
+	return false
+
 func addArousalForeplay(howmuch: float):
 	#var lustLevel = getChar().getLustLevel()
 	# should be less efficient at high lust. or not
@@ -118,10 +128,19 @@ func addArousalSex(howmuch: float):
 	else:
 		addArousal(howmuch)
 
-func addArousalZone(howmuch: float, bodypartSlot, stimulation:float = 1.0):
-	addArousalSex(howmuch)
-	
-	getChar().getBodypart(bodypartSlot).getOrifice().sensitiveZone.stimulate(stimulation)
+func stimulateArousalZone(howmuch: float, bodypartSlot, stimulation:float = 1.0):
+	var sensitiveZone:SensitiveZone = getChar().getBodypart(bodypartSlot).getSensitiveZone()
+	if(sensitiveZone != null):
+		sensitiveZone.stimulate(stimulation)
+		
+		var howMuchActually:float = howmuch * sensitiveZone.getArousalGainModifier()
+		howMuchActually *= (1.0 - getArousal()*0.8)
+		if(howMuchActually <= 0.03 && RNG.chance(50)):
+			return
+		
+		addArousalSex(howMuchActually)
+	else:
+		addArousalSex(howmuch)
 
 func isCloseToCumming() -> bool:
 	return getArousal() >= 0.7

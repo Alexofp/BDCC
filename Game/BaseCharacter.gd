@@ -3174,8 +3174,15 @@ func getSensitiveZones():
 	var result := []
 	
 	if(hasVagina()):
-		result.append(getBodypart(BodypartSlot.Vagina).getOrifice().getSensitiveZone())
+		result.append(getBodypart(BodypartSlot.Vagina).getSensitiveZone())
 	if(hasBodypart(BodypartSlot.Anus)):
-		result.append(getBodypart(BodypartSlot.Anus).getOrifice().getSensitiveZone())
+		result.append(getBodypart(BodypartSlot.Anus).getSensitiveZone())
+	if(hasBodypart(BodypartSlot.Penis)):
+		result.append(getBodypart(BodypartSlot.Penis).getSensitiveZone())
 	return result
 
+func hasOverstimulatedSensitiveZone() -> bool:
+	for zone in getSensitiveZones():
+		if(zone.isOverstimulated()):
+			return true
+	return false
