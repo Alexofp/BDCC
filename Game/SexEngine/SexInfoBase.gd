@@ -122,19 +122,29 @@ func addArousalForeplay(howmuch: float):
 
 func addArousalSex(howmuch: float):
 	var lustLevel = getChar().getLustLevel()
-	if(lustLevel < 0.4):
+	if(lustLevel < 0.6):
 		# should be less efficient at low lust
-		addArousal(howmuch * max(lustLevel, 0.1))
+		addArousal(howmuch * max(lustLevel+0.3, 0.6))
 	else:
 		addArousal(howmuch)
 
 func stimulateArousalZone(howmuch: float, bodypartSlot, stimulation:float = 1.0):
+	if(bodypartSlot == BodypartSlot.Penis && getChar().isWearingStrapon()):
+		var strapon = getChar().getWornStrapon()
+		var pleasureMod = strapon.getStraponPleasureForDom()
+		
+		addArousalSex(howmuch * pleasureMod)
+		return
+	
 	var sensitiveZone:SensitiveZone = getChar().getBodypart(bodypartSlot).getSensitiveZone()
 	if(sensitiveZone != null):
 		sensitiveZone.stimulate(stimulation)
 		
 		var howMuchActually:float = howmuch * sensitiveZone.getArousalGainModifier()
-		howMuchActually *= (1.0 - getArousal()*0.8)
+		
+		var theArousal:float = getArousal()
+		
+		howMuchActually *= max((1.0 - min(theArousal, 0.7)*0.9 - theArousal*0.1), 0.01)
 		if(howMuchActually <= 0.03 && RNG.chance(50)):
 			return
 		

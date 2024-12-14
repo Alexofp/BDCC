@@ -64,7 +64,7 @@ func processTurn():
 		var text = ""
 		affectDom(domInfo.fetishScore({Fetish.RimmingReceiving: 1.0})+0.3, 0.1, 0.0)
 		affectSub(subInfo.fetishScore({Fetish.RimmingGiving: 1.0})+0.0, 0.1, -0.1, -0.01)
-		domInfo.addArousalSex(0.05)
+		
 		text += RNG.pick([
 			"{sub.You} {sub.youVerb('rim')} {dom.yourHis} "+str(getRandomAnusWord())+".",
 			"{sub.You} {sub.youVerb('drag')} {sub.yourHis} tongue over {dom.yourHis} "+str(getRandomAnusWord())+" in circular patterns.",
@@ -80,13 +80,15 @@ func processTurn():
 				" {sub.YourHis} tongue is reaching {dom.yourHis} prostate and prods it!",
 				" {sub.YourHis} tongue stimulates {dom.yourHis} prostate!"
 			])
-			domInfo.addArousalSex(0.1)
+			domInfo.stimulateArousalZone(0.1, BodypartSlot.Anus, 1.0)
+		else:
+			domInfo.stimulateArousalZone(0.05, BodypartSlot.Anus, 1.0)
+			
 		if(getDom().hasVagina() && RNG.chance(20)):
 			text += RNG.pick([
 				" {sub.YourHis} tongue manages to massage {dom.yourHis} g-spot through the inner wall!",
 				" {dom.YourHis} pussy becomes more wet, receiving some stimulation through the inner wall!"
 			])
-			domInfo.addArousalSex(0.05)
 		if(getDom().hasEffect(StatusEffect.HasCumInsideAnus) && OPTIONS.isContentEnabled(ContentType.CumStealing)):
 			if(RNG.chance(20)):
 				if(getDom().bodypartTransferFluidsTo(BodypartSlot.Anus, subID, BodypartSlot.Head, 0.1, 20.0)):
@@ -268,7 +270,7 @@ func doSubAction(_id, _actionInfo):
 		}
 	if(_id == "prod"):
 		var text = ""
-		domInfo.addArousalSex(0.04)
+		domInfo.stimulateArousalZone(0.04, BodypartSlot.Anus, 0.25)
 		domInfo.addAnger(-0.03)
 		text += RNG.pick([
 			"{sub.You} willingly {sub.youVerb('thrust')} {sub.yourHis} tongue deeper into {dom.yourHis} "+str(getRandomAnusWord())+".",

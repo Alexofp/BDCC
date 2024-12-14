@@ -825,7 +825,7 @@ func doBlowjobTurnDom():
 	affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0})+0.1, 0.1, -0.1, -0.01)
 	affectDom(domInfo.fetishScore({Fetish.OralSexReceiving: 0.5})+0.6, 0.1*getDomPenisSensetivity(), 0.0)
 	subInfo.addArousalForeplay(0.03)
-	domInfo.addArousalSex(0.2 * getDomPenisSensetivity())
+	domInfo.stimulateArousalZone(0.2, BodypartSlot.Penis, 1.0)
 	getSub().gotOrificeStretchedBy(BodypartSlot.Head, domID, 0.05)
 	
 	var text = RNG.pick([
@@ -835,7 +835,7 @@ func doBlowjobTurnDom():
 		"{sub.You} {sub.youAre} teasing the tip of {dom.your} "+getDomDickName(RNG.pick(["cock", "dick", "length", "shaft"]))+ " with {sub.yourHis} tongue.",  
 		"{sub.You} {sub.youVerb('bob')} {sub.yourHis} head along {dom.your} "+getDomDickName(RNG.pick(["dick", "cock", "shaft", "member"]))+", taking it deeper.",  
 		"{sub.You} {sub.youAre} running {sub.yourHis} tongue along the underside of {dom.your} "+getDomDickName(RNG.pick(["cock", "length", "member"]))+".",  
-		"{sub.You} {sub.youAre} sucking eagerly on {dom.your} "+getDomDickName(RNG.pick(["dick", "member", "shaft"]))+", drawing a moan from {dom.them}.",  
+		"{sub.You} {sub.youAre} sucking eagerly on {dom.your} "+getDomDickName(RNG.pick(["dick", "member", "shaft"]))+", drawing a moan from {dom.youHim}.",  
 		"{sub.You} {sub.youVerb('swirl')} {sub.yourHis} tongue around the head of {dom.your} "+getDomDickName(RNG.pick(["cock", "dick", "member"]))+".",  
 		"{sub.You} {sub.youVerb('take')} {dom.your} "+getDomDickName(RNG.pick(["length", "shaft", "cock"]))+ " further into {sub.yourHis} mouth, sucking hard.",  
 		"{sub.You} {sub.youVerb('press')} {sub.yourHis} tongue firmly against {dom.your} "+getDomDickName(RNG.pick(["cock", "dick", "member"]))+", sliding it slowly along its length.",  
@@ -894,8 +894,8 @@ func doDeepthroatTurnDom():
 	getSub().gotOrificeStretchedBy(BodypartSlot.Head, domID, 0.1)
 	affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0})-0.3, 0.1, -0.1, -0.01)
 	affectDom(domInfo.fetishScore({Fetish.OralSexReceiving: 0.5})+0.6, 0.1*getDomPenisSensetivity(), 0.0)
-	subInfo.addArousalSex(0.06)
-	domInfo.addArousalSex(0.25*getDomPenisSensetivity())
+	subInfo.addArousalForeplay(0.06)
+	domInfo.stimulateArousalZone(0.25, BodypartSlot.Penis, 1.0)
 	
 	var text = RNG.pick([
 		"{sub.You} {sub.youVerb('deepthroat')} that "+getDomDickName()+".",
@@ -975,7 +975,7 @@ func doDeepthroatTurnDom():
 func doPussyLickingTurnDom():
 	affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0})+0.1, 0.1, -0.1, -0.01)
 	affectDom(domInfo.fetishScore({Fetish.OralSexReceiving: 0.5})+0.6, 0.1, 0.0)
-	domInfo.addArousalSex(0.1)
+	domInfo.stimulateArousalZone(0.1, BodypartSlot.Vagina, 0.5)
 	
 	var clothingItem = getDom().getFirstItemThatCoversBodypart(BodypartSlot.Vagina)
 	var throughTheClothing = ""
@@ -1031,7 +1031,7 @@ func doPussyLickingTurnDom():
 func doPussyGrindingTurnDom():
 	affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0})-0.1, 0.1, -0.1, -0.01)
 	affectDom(domInfo.fetishScore({Fetish.OralSexReceiving: 0.5})+0.6, 0.1, 0.0)
-	domInfo.addArousalSex(0.1)
+	domInfo.stimulateArousalZone(0.1, BodypartSlot.Vagina, 0.5)
 	
 	var clothingItem = getDom().getFirstItemThatCoversBodypart(BodypartSlot.Vagina)
 	var throughTheClothing = ""
@@ -1069,7 +1069,7 @@ func doBlowjobTurnSub():
 	affectSub(subInfo.fetishScore({Fetish.OralSexReceiving: 1.0})+0.6, 0.1, -0.1, -0.01)
 	affectDom(domInfo.fetishScore({Fetish.OralSexGiving: 0.5})+0.1, 0.1, 0.0)
 	domInfo.addArousalForeplay(0.03)
-	subInfo.addArousalSex(0.2)
+	subInfo.stimulateArousalZone(0.2, BodypartSlot.Penis, 1.0)
 	getDom().gotOrificeStretchedBy(BodypartSlot.Head, subID, 0.05)
 	
 	var text = RNG.pick([
@@ -1079,7 +1079,7 @@ func doBlowjobTurnSub():
 		"{dom.You} {dom.youAre} teasing the tip of {sub.your} "+RNG.pick(["cock", "dick", "length", "shaft"])+ " with {dom.yourHis} tongue.",  
 		"{dom.You} {dom.youVerb('bob')} {dom.yourHis} head along {sub.your} "+RNG.pick(["dick", "cock", "shaft", "member"])+", taking it deeper.",  
 		"{dom.You} {dom.youAre} running {dom.yourHis} tongue along the underside of {sub.your} "+RNG.pick(["cock", "length", "member"])+".",  
-		"{dom.You} {dom.youAre} sucking eagerly on {sub.your} "+RNG.pick(["dick", "member", "shaft"])+", drawing a moan from {sub.them}.",  
+		"{dom.You} {dom.youAre} sucking eagerly on {sub.your} "+RNG.pick(["dick", "member", "shaft"])+", drawing a moan from {sub.youHim}.",  
 		"{dom.You} {dom.youVerb('swirl')} {dom.yourHis} tongue around the head of {sub.your} "+RNG.pick(["cock", "dick", "member"])+".",  
 		"{dom.You} {dom.youVerb('take')} {sub.your} "+RNG.pick(["length", "shaft", "cock"])+ " further into {dom.yourHis} mouth, sucking hard.",  
 		"{dom.You} {dom.youVerb('press')} {dom.yourHis} tongue firmly against {sub.your} "+RNG.pick(["cock", "dick", "member"])+", sliding it slowly along its length.",  
@@ -1111,7 +1111,7 @@ func doBlowjobTurnSub():
 func doPussyLickingTurnSub():
 	affectSub(subInfo.fetishScore({Fetish.OralSexReceiving: 1.0})+0.3, 0.1, -0.1, -0.01)
 	affectDom(domInfo.fetishScore({Fetish.OralSexGiving: 0.5})+0.6, 0.1, 0.0)
-	subInfo.addArousalSex(0.1)
+	subInfo.stimulateArousalZone(0.1, BodypartSlot.Vagina, 0.5)
 	
 	var clothingItem = getSub().getFirstItemThatCoversBodypart(BodypartSlot.Vagina)
 	var throughTheClothing = ""

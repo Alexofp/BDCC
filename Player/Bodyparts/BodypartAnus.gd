@@ -5,11 +5,12 @@ func _init():
 	limbSlot = null
 	orifice = AnusOrifice.new()
 	orifice.bodypart = weakref(self)
-	sensitiveZone = SensitiveZone.new()
-	sensitiveZone.setBodypart(self)
-	sensitiveZone.arousalGainModifier = 0.3
-	sensitiveZone.zoneName = "Anus"
+	setupSensitiveZone()
 	needsProcessing = true
+
+func setupSensitiveZone():
+	sensitiveZone = preload("res://Player/SensitiveZone/SensitiveAnus.gd").new()
+	sensitiveZone.setBodypart(self)
 
 func getSlot():
 	return BodypartSlot.Anus

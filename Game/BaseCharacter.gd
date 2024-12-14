@@ -3173,16 +3173,32 @@ func isHighSecInmate() -> bool:
 func getSensitiveZones():
 	var result := []
 	
-	if(hasVagina()):
-		result.append(getBodypart(BodypartSlot.Vagina).getSensitiveZone())
+	if(hasBodypart(BodypartSlot.Vagina)):
+		var theZone = getBodypart(BodypartSlot.Vagina).getSensitiveZone()
+		if(theZone != null):
+			result.append(theZone)
 	if(hasBodypart(BodypartSlot.Anus)):
-		result.append(getBodypart(BodypartSlot.Anus).getSensitiveZone())
+		var theZone = getBodypart(BodypartSlot.Anus).getSensitiveZone()
+		if(theZone != null):
+			result.append(theZone)
 	if(hasBodypart(BodypartSlot.Penis)):
-		result.append(getBodypart(BodypartSlot.Penis).getSensitiveZone())
+		var theZone = getBodypart(BodypartSlot.Penis).getSensitiveZone()
+		if(theZone != null):
+			result.append(theZone)
+	if(hasBodypart(BodypartSlot.Breasts)):
+		var theZone = getBodypart(BodypartSlot.Breasts).getSensitiveZone()
+		if(theZone != null):
+			result.append(theZone)
 	return result
 
 func hasOverstimulatedSensitiveZone() -> bool:
 	for zone in getSensitiveZones():
 		if(zone.isOverstimulated()):
+			return true
+	return false
+
+func hasVisiblyOverstimulatedSensitiveZone() -> bool:
+	for zone in getSensitiveZones():
+		if(zone.isVisiblyOverstimulated()):
 			return true
 	return false

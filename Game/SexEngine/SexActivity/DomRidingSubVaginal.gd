@@ -294,10 +294,7 @@ func processTurn():
 	if(state == "fucking"):
 		affectSub(subInfo.fetishScore({fetishGiving: 1.0})+0.5, 0.1 * subSensetivity(), -0.1, -0.01)
 		affectDom(domInfo.fetishScore({fetishReceiving: 1.0})+0.3, 0.1, 0.0)
-		if(isStraponSex()):
-			subInfo.addArousalSex(0.2 * subSensetivity())
-		else:
-			subInfo.stimulateArousalZone(0.2, BodypartSlot.Penis, 1.0)
+		subInfo.stimulateArousalZone(0.2, BodypartSlot.Penis, 1.0)
 		domInfo.stimulateArousalZone(0.2, usedBodypart, 1.0)
 		
 		var text = RNG.pick([
@@ -578,7 +575,9 @@ func doDomAction(_id, _actionInfo):
 				straponData = {
 					text = "{sub.Your} strapon gets squeezed by {dom.your} "+RNG.pick(usedBodypartNames)+" enough for it to suddenly [b]release its contents inside {dom.youHim}[/b]!"
 				}
-			
+		
+		subInfo.stimulateArousalZone(0.2, BodypartSlot.Penis, 1.0)
+		
 		return getSexEngine().combineData(getGenericDomOrgasmData(), straponData)
 	
 	if(_id in ["letsubcuminside", "letsubknotinside"]):
@@ -640,7 +639,7 @@ func doDomAction(_id, _actionInfo):
 				])
 				var loadSize = getSub().cumInItem(condom)
 				subInfo.cum()
-				domInfo.addArousalSex(0.05)
+				domInfo.addArousalSex(0.02)
 				sendSexEvent(SexEvent.FilledCondomInside, subID, domID, {hole=usedBodypart,loadSize=loadSize,knotted=knotSuccess,engulfed=true})
 				satisfyGoals()
 				if(knotSuccess):
@@ -659,12 +658,14 @@ func doDomAction(_id, _actionInfo):
 		
 		getDom().cummedInBodypartByAdvanced(usedBodypart, subID, {knotted=knotSuccess,condomBroke=condomBroke,engulfed=true})
 		subInfo.cum()
-		domInfo.addArousalSex(0.05)
+		
 		satisfyGoals()
 		if(knotSuccess):
 			state = "knotting"
+			domInfo.addArousalSex(0.05)
 		else:
 			state = "inside"
+			domInfo.addArousalSex(0.02)
 
 		return {text=text}
 	if(_id == "makesubcumoutside"):
@@ -745,8 +746,8 @@ func doDomAction(_id, _actionInfo):
 		sendSexEvent(SexEvent.HolePenetrated, subID, domID, {hole=usedBodypart,engulfed=true,strapon=isStraponSex()})
 		affectSub(subInfo.fetishScore({fetishGiving: 1.0}), 0.1 * subSensetivity(), 0.0, 0.0)
 		affectDom(domInfo.fetishScore({fetishReceiving: 1.0}), 0.1, -0.01)
-		subInfo.addArousalSex(0.1 * subSensetivity())
-		domInfo.addArousalSex(0.1)
+		subInfo.stimulateArousalZone(0.1, BodypartSlot.Penis, 0.5)
+		domInfo.stimulateArousalZone(0.1, usedBodypart, 0.5)
 		
 		#getSub().gotFuckedBy(usedBodypart, domID)
 		getDom().gotOrificeStretchedBy(usedBodypart, subID, 0.2)
@@ -945,7 +946,7 @@ func doSubAction(_id, _actionInfo):
 				])
 				var loadSize = getSub().cumInItem(condom)
 				subInfo.cum()
-				domInfo.addArousalSex(0.05)
+				domInfo.addArousalSex(0.02)
 				sendSexEvent(SexEvent.FilledCondomInside, subID, domID, {hole=usedBodypart,loadSize=loadSize,knotted=false})
 				satisfyGoals()
 				state = "inside"
@@ -963,7 +964,7 @@ func doSubAction(_id, _actionInfo):
 			domInfo.addAnger(0.3)
 		getDom().cummedInBodypartByAdvanced(usedBodypart, subID, {condomBroke=condomBroke})
 		subInfo.cum()
-		domInfo.addArousalSex(0.05)
+		domInfo.addArousalSex(0.02)
 		satisfyGoals()
 		state = "inside"
 

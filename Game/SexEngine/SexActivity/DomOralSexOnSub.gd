@@ -89,7 +89,7 @@ func processTurn():
 	if(state == "lickingcock"):
 		affectSub(subInfo.fetishScore({Fetish.OralSexReceiving: 1.0})+0.3, 0.1, -0.1, -0.01)
 		affectDom(domInfo.fetishScore({Fetish.OralSexGiving: 0.5})+0.6, 0.1, 0.0)
-		subInfo.addArousalSex(0.04)
+		subInfo.stimulateArousalZone(0.06, BodypartSlot.Penis, 0.25)
 		
 		var clothingItem = getSub().getFirstItemThatCoversBodypart(BodypartSlot.Penis)
 		var throughTheClothing = ""
@@ -122,7 +122,7 @@ func processTurn():
 	if(state == "tonguefucking"):
 		affectSub(subInfo.fetishScore({Fetish.OralSexReceiving: 1.0})+0.1, 0.1, -0.1, -0.01)
 		affectDom(domInfo.fetishScore({Fetish.OralSexGiving: 0.5})+0.6, 0.1, 0.0)
-		subInfo.addArousalSex(0.1)
+		subInfo.stimulateArousalZone(0.1, BodypartSlot.Vagina, 0.5)
 		
 		var text = RNG.pick([
 			"{dom.You} "+RNG.pick(["{dom.youVerb('push', 'pushes')}", "{dom.youVerb('slide')}"])+" {dom.yourHis} tongue in and out of {sub.your} "+RNG.pick(["pussy", "pussy slit", "flower", "slit", "kitty"])+".",
@@ -410,7 +410,7 @@ func doDomAction(_id, _actionInfo):
 		var text = RNG.pick([
 			"{dom.You} "+RNG.pick(["{dom.youVerb('rub')}", "{dom.youVerb('tease')}", "{dom.youVerb('play')} with"])+" {sub.yourHis} clit a bit, providing some extra stimulation.",
 		])
-		subInfo.addArousalSex(0.05)
+		subInfo.stimulateArousalZone(0.05, BodypartSlot.Vagina, 0.2)
 		affectSub(subInfo.fetishScore({Fetish.OralSexReceiving: 1.0}), 0.0, -0.05, -0.01)
 		
 		return {text = text}

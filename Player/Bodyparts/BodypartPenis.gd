@@ -8,15 +8,12 @@ func _init():
 	limbSlot = LimbTypes.Penis
 	fluidProduction = CumProduction.new()
 	fluidProduction.bodypart = weakref(self)
-	sensitiveZone = SensitiveZone.new()
-	sensitiveZone.setBodypart(self)
-	sensitiveZone.zoneName = "Penis"
-	sensitiveZone.sensitivityGainModifier = 0.002
-	sensitiveZone.lowSensitivityRestoreRate = 0.7
-	sensitiveZone.stimulationGainModifier = 0.5
-	sensitiveZone.overstimSensLoseModifier = 3.0
-	sensitiveZone.extraSensGainModifier = 0.4
+	setupSensitiveZone()
 	needsProcessing = true
+
+func setupSensitiveZone():
+	sensitiveZone = preload("res://Player/SensitiveZone/SensitivePenis.gd").new()
+	sensitiveZone.setBodypart(self)
 
 func getSlot():
 	return BodypartSlot.Penis

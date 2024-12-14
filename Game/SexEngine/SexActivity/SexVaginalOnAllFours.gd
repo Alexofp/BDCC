@@ -340,10 +340,7 @@ func processTurn():
 		affectSub(subInfo.fetishScore({fetishReceiving: 1.0})+0.5, 0.1, -0.1, -0.01)
 		affectDom(domInfo.fetishScore({fetishGiving: 1.0})+0.3, 0.1*domSensetivity(), 0.0)
 		subInfo.stimulateArousalZone(0.2, usedBodypart, 1.0)
-		if(isStraponSex()):
-			domInfo.addArousalSex(0.2 * domSensetivity())
-		else:
-			domInfo.stimulateArousalZone(0.2, BodypartSlot.Penis, 1.0)
+		domInfo.stimulateArousalZone(0.2, BodypartSlot.Penis, 1.0)
 		
 		var text = RNG.pick([
 			"{dom.You} {dom.youAre} fucking {sub.youHim}"+getPoseDescriptor()+".",
@@ -963,8 +960,8 @@ func doSubAction(_id, _actionInfo):
 		sendSexEvent(SexEvent.HolePenetrated, domID, subID, {hole=usedBodypart,engulfed=true,strapon=isStraponSex()})
 		affectSub(subInfo.fetishScore({fetishReceiving: 1.0}), 0.1, 0.0, 0.0)
 		affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.1*domSensetivity(), -0.01)
-		subInfo.addArousalSex(0.1)
-		domInfo.addArousalSex(0.1*domSensetivity())
+		subInfo.stimulateArousalZone(0.1, usedBodypart, 0.5)
+		domInfo.stimulateArousalZone(0.1, BodypartSlot.Penis, 0.5)
 		
 		#getSub().gotFuckedBy(usedBodypart, domID)
 		getSub().gotOrificeStretchedBy(usedBodypart, domID, 0.2)

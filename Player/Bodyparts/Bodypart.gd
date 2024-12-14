@@ -19,6 +19,9 @@ var pickedBColor = null
 func _init():
 	pass
 
+func setupSensitiveZone():
+	pass
+
 func getDoll3DScene():
 	return null
 

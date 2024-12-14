@@ -621,7 +621,7 @@ func doSubAction(_id, _actionInfo):
 						" {sub.YouHe} {sub.youVerb('get')} "+Util.capitalizeFirstLetter(getDom().getBodypartContentsStringList(BodypartSlot.Vagina))+" onto {sub.yourHis} tongue while eating {dom.yourHis} "+RNG.pick(["", "used ", "stuffed "])+RNG.pick(["pussy", "slit", "kitty"])+" out. [b]{sub.You} {sub.youVerb('swallow')} it all[/b].",
 					])
 		
-		domInfo.addArousalSex(0.05)
+		domInfo.stimulateArousalZone(0.05, BodypartSlot.Vagina, 0.25)
 		return {text = text}
 	if(_id == "grindtongue"):
 		var text = RNG.pick([
@@ -635,7 +635,7 @@ func doSubAction(_id, _actionInfo):
 						" "+Util.capitalizeFirstLetter(getDom().getBodypartContentsStringList(BodypartSlot.Vagina))+" "+RNG.pick(["leaks", "oozes"])+" onto {sub.yourHis} tongue out of {dom.yourHis} "+RNG.pick(["", "used ", "stuffed "])+RNG.pick(["pussy", "slit", "kitty"])+". [b]{sub.You} {sub.youVerb('swallow')} it all[/b].",
 					])
 		
-		domInfo.addArousalSex(0.05)
+		domInfo.stimulateArousalZone(0.05, BodypartSlot.Vagina, 0.25)
 		return {text = text}
 	if(_id == "bite"):
 		if(isStraponSex() && (state in ["blowjob", "deepthroat"])):

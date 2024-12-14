@@ -5,11 +5,12 @@ func _init():
 	limbSlot = null
 	orifice = VaginaOrifice.new()
 	orifice.bodypart = weakref(self)
-	sensitiveZone = SensitiveZone.new()
-	sensitiveZone.setBodypart(self)
-	sensitiveZone.zoneName = "Pussy"
-	sensitiveZone.lowSensitivityRestoreRate = 0.4
+	setupSensitiveZone()
 	needsProcessing = true
+
+func setupSensitiveZone():
+	sensitiveZone = preload("res://Player/SensitiveZone/SensitiveVagina.gd").new()
+	sensitiveZone.setBodypart(self)
 
 func getSlot():
 	return BodypartSlot.Vagina

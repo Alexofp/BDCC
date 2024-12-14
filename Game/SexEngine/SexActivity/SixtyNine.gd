@@ -406,7 +406,7 @@ func sex_doDomAction(_id, _info):
 		return doSpitCumIntoHoleDom(BodypartSlot.Vagina)
 		
 	if(_id == "cum"):
-		subInfo.addArousalSex(0.05)
+		subInfo.stimulateArousalZone(0.05, domFocus, 0.5)
 		if(subInfo.isReadyToCum() && isHandlingSubOrgasms()):
 			satisfyGoals()
 			return combineData({text="[b]Double orgasm[/b]!"}, combineData(
@@ -435,9 +435,9 @@ func sex_subActions():
 
 func sex_doSubAction(_id, _info):
 	if(_id == "cum"):
-		domInfo.addArousalSex(0.05)
+		domInfo.stimulateArousalZone(0.05, subFocus, 0.5)
 		
-		if(subInfo.isReadyToCum() && isHandlingSubOrgasms()):
+		if(domInfo.isReadyToCum() && isHandlingDomOrgasms()):
 			satisfyGoals()
 			return combineData({text="[b]Double orgasm[/b]!"}, combineData(
 				doCumBJDom() if subFocus == BodypartSlot.Penis else doCumPussyLickDom(),

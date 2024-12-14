@@ -12,7 +12,7 @@ func shouldApplyTo(_npc):
 	if(GM.main == null || !GM.main.supportsSexEngine()):
 		return false
 	
-	if(!_npc.hasOverstimulatedSensitiveZone()):
+	if(!_npc.hasVisiblyOverstimulatedSensitiveZone()):
 		return false
 	return true
 	
@@ -34,8 +34,8 @@ func getEffectDesc():
 	for zoneA in zones:
 		var zone:SensitiveZone = zoneA
 		
-		if(zone.isOverstimulated()):
-			texts.append(zone.getNameIs()+" overstimulated ("+str(Util.roundF(zone.overstimulation*100.0, 1))+"%)")
+		if(zone.isVisiblyOverstimulated()):
+			texts.append(zone.getNameIs()+" overstimulated ("+str(Util.roundF(zone.getOverstimulation()*100.0, 1))+"%)")
 	
 	return Util.join(texts, "\n")+"\n\nOverstimulated zones will lose sensitivity when stimulated further!"
 

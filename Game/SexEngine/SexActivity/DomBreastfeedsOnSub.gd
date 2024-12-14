@@ -1,6 +1,7 @@
 extends SexActivityBase
 var gropeAmount = 0
 var kneadBonus = 0
+var noticedSore:bool = false
 
 func _init():
 	id = "DomBreastfeedsOnSub"
@@ -44,6 +45,8 @@ func startActivity(_args):
 	
 	affectSub(subInfo.fetishScore({Fetish.Lactation: 1.0}), 0.1, -0.1, -0.01)
 	affectDom(domInfo.fetishScore({Fetish.Lactation: 1.0}), 0.1, -0.03)
+	
+	noticedSore = getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)
 	
 	return {
 		text = text,
@@ -128,11 +131,11 @@ func processTurn():
 			subInfo.addArousalForeplay(0.05)
 			domInfo.addArousalForeplay(0.05)
 			
-			if(gropeAmount > 20 && RNG.chance(5) && !getSub().hasPerk(Perk.MilkNoSoreNipples) && !getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)):
-				if(getSub().addEffect(StatusEffect.SoreNipplesAfterMilking)):
-					text += RNG.pick([
-						" {sub.Your} nipples started to feel [b]sore[/b] after {dom.yourHis} attempts.",
-					])
+			if(!noticedSore && getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)):
+				noticedSore = true
+				text += RNG.pick([
+					" {sub.Your} nipples started to feel [b]sore[/b] after {dom.yourHis} attempts.",
+				])
 			
 			sendSexEvent(SexEvent.BreastFeeding, domID, subID, {madeLactate=suddenlyLactating, loadSize=0.0, targetIsDom=false})
 			
@@ -187,7 +190,7 @@ func processTurn():
 			affectDom(domInfo.fetishScore({Fetish.Lactation: 1.0}), 0.1, -0.03)
 			subInfo.addArousalForeplay(0.1)
 			domInfo.addArousalForeplay(0.1)
-			subInfo.addArousalSex(0.06)
+			subInfo.stimulateArousalZone(0.1, BodypartSlot.Breasts, 1.0)
 			
 			if(gropeAmount > 20 && RNG.chance(2) && !getSub().hasPerk(Perk.MilkNoSoreNipples) && !getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)):
 				if(getSub().addEffect(StatusEffect.SoreNipplesAfterMilking)):
@@ -262,7 +265,7 @@ func doDomAction(_id, _actionInfo):
 				subInfo.addPain(3)
 				sendSexEvent(SexEvent.PainInflicted, domID, subID, {pain=3,isDefense=false,intentional=false})
 			
-			subInfo.addArousalSex(0.03)
+			subInfo.stimulateArousalZone(0.2, BodypartSlot.Breasts, 1.0)
 			affectSub(subInfo.fetishScore({Fetish.Lactation: 1.0}), 0.1, -0.1, -0.01)
 			affectDom(domInfo.fetishScore({Fetish.Lactation: 1.0}), 0.1, -0.03)
 			return {text = text}
@@ -272,7 +275,7 @@ func doDomAction(_id, _actionInfo):
 				"{dom.You} {dom.youVerb('massage')} {sub.yourHis} {sub.breasts}, stimulating them.",
 				"{dom.You} {dom.youVerb('knead')} {sub.yourHis} {sub.breasts} with {dom.yourHis} hands.",
 			])
-			subInfo.addArousalSex(0.01)
+			subInfo.stimulateArousalZone(0.2, BodypartSlot.Breasts, 1.0)
 			affectSub(subInfo.fetishScore({Fetish.Lactation: 1.0}), 0.02, -0.1, -0.01)
 			affectDom(domInfo.fetishScore({Fetish.Lactation: 1.0}), 0.02, -0.03)
 			
@@ -362,8 +365,7 @@ func doSubAction(_id, _actionInfo):
 		if(getSub().isLactating()):
 			extraText = ", {sub.yourHis} {sub.breasts} squirt {sub.milk} out from this nipple orgasm"
 		
-		if(RNG.chance(30) && !getSub().hasPerk(Perk.MilkNoSoreNipples) && !getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)):
-			getSub().addEffect(StatusEffect.SoreNipplesAfterMilking)
+		subInfo.stimulateArousalZone(0.0, BodypartSlot.Breasts, 2.0)
 		
 		sendSexEvent(SexEvent.UniqueOrgasm, domID, subID, {orgasmType="breasts"})
 		
@@ -406,7 +408,7 @@ func doSubAction(_id, _actionInfo):
 		])
 		domInfo.addAnger(-0.02)
 		domInfo.addLust(5)
-		subInfo.addArousalSex(0.02)
+		subInfo.addArousalForeplay(0.02)
 		return {text = text}
 
 	return
@@ -428,6 +430,7 @@ func saveData():
 	
 	data["gropeAmount"] = gropeAmount
 	data["kneadBonus"] = kneadBonus
+	data["noticedSore"] = noticedSore
 
 	return data
 	
@@ -436,3 +439,4 @@ func loadData(data):
 	
 	gropeAmount = SAVE.loadVar(data, "gropeAmount", 0)
 	kneadBonus = SAVE.loadVar(data, "kneadBonus", 0)
+	noticedSore = SAVE.loadVar(data, "noticedSore", false)

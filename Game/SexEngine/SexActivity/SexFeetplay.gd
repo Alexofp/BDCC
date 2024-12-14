@@ -76,7 +76,7 @@ func processTurn():
 			"{dom.You} {dom.youVerb('rub')} {dom.yourHis} foot against {sub.your} pussy.",
 			"{dom.You} {dom.youVerb('rub')} {sub.yourHis} pussy with {dom.yourHis} foot."
 		])
-		subInfo.addArousalSex(0.07)
+		subInfo.stimulateArousalZone(0.1, BodypartSlot.Vagina, 0.5)
 		affectSub(subInfo.fetishScore({Fetish.FeetplayReceiving: 1.0})+0.3, 0.1, -0.005, -0.002)
 		if(subInfo.isCloseToCumming() || RNG.chance(20)):
 			text += RNG.pick([
@@ -111,7 +111,7 @@ func processTurn():
 			"{dom.You} {dom.youVerb('pleasure')} {sub.yourHis} dick with {dom.yourHis} toes.",
 			"{dom.You} {dom.youVerb('stroke')} {sub.yourHis} member with {dom.yourHis} foot."
 		])
-		subInfo.addArousalSex(0.07)
+		subInfo.stimulateArousalZone(0.1, BodypartSlot.Penis, 0.5)
 		affectSub(subInfo.fetishScore({Fetish.FeetplayReceiving: 1.0})+0.3, 0.1, -0.005, -0.002)
 		if(subInfo.isCloseToCumming() || RNG.chance(20)):
 			text += RNG.pick([
@@ -285,7 +285,7 @@ func doDomAction(_id, _actionInfo):
 		var text = ""
 		state = "rubpussy"
 		text += "{dom.You} {dom.youVerb('move')} {dom.yourHis} foot to {sub.your} crotch and {dom.youVerb('begin')} rubbing {sub.yourHis} pussy!"
-		subInfo.addArousalSex(0.05)
+		subInfo.addArousalForeplay(0.05)
 		affectSub(subInfo.fetishScore({Fetish.FeetplayReceiving: 1.0})+0.3, 0.1, -0.02, -0.01)
 		return {
 			text = text,
@@ -294,7 +294,7 @@ func doDomAction(_id, _actionInfo):
 		var text = ""
 		state = "rubpenis"
 		text += "{dom.You} {dom.youVerb('move')} {dom.yourHis} foot down to {sub.your} crotch and {dom.youVerb('start')} rubbing {sub.yourHis} dick!"
-		subInfo.addArousalSex(0.05)
+		subInfo.addArousalForeplay(0.05)
 		affectSub(subInfo.fetishScore({Fetish.FeetplayReceiving: 1.0})+0.3, 0.1, -0.02, -0.01)
 		return {
 			text = text,
