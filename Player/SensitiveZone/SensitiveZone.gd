@@ -19,13 +19,13 @@ func getArousalGainModifier() -> float:
 	return getSensitivity()
 
 func getSensitivityGainModifier() -> float:
-	return 1.0
+	return 1.0 * (1.0 + max(-1.0, getCustomAttribute(BuffAttribute.SensitivityGainAll)))
 
 func getOverstimSensLoseModifier() -> float:
 	return 1.0
 
 func getStimulationGainModifier() -> float:
-	return 1.0
+	return 1.0 / (1.0 + max(-0.9, getCustomAttribute(BuffAttribute.OverstimulationThresholdAll)))
 
 func getExtraSensGainModifier() -> float:
 	return 1.0
@@ -33,8 +33,8 @@ func getExtraSensGainModifier() -> float:
 func getOverstimRecoverModifier() -> float:
 	return 1.0
 
-func getLowSensitivityRestoreRate() -> float:
-	return 0.4 # Per day
+func getLowSensitivityRestoreRate() -> float: # Per day
+	return 0.4 * (1.0 + max(-1.0, getCustomAttribute(BuffAttribute.SensitivityRestoreAll)))
 
 func getName() -> String:
 	return zoneName
@@ -66,7 +66,7 @@ func getSensitivity() -> float:
 	return sensitivity + extraSensitivity
 
 func canOrgasm() -> bool:
-	return getArousalGainModifier() >= 0.7
+	return getSensitivity() >= 0.4
 
 func getRawSensitivity() -> float:
 	return sensitivity
@@ -96,8 +96,12 @@ func stimulate(_howMuch:float = 1.0):
 		sensitivity -= _howMuch * 0.05 * sensitivity * getOverstimSensLoseModifier()
 		if(sensitivity < 0.1):
 			sensitivity = 0.1
-	elif(sensitivity > 0.9):
-		var toAdd:float = pow(_howMuch * getSensitivityGainModifier() * 0.01, min(0.8+sensitivity/20.0, 0.9)) #1.0/sensitivity
+	elif(sensitivity > 0.1):
+		var lastMod:float = 1.0
+		if(sensitivity <= 0.9):
+			lastMod = 0.2
+		
+		var toAdd:float = lastMod * pow(_howMuch * getSensitivityGainModifier() * 0.01, min(0.8+sensitivity/20.0, 0.9)) #1.0/sensitivity
 		#print("GAINED SENS: "+str(toAdd))
 		sensitivity += toAdd
 
@@ -111,25 +115,21 @@ func onOrgasm():
 func processTime(_seconds:int):
 	var partOfMinute:float = float(_seconds) / 60.0
 	
-	stimulation -= 0.02 * partOfMinute * getStimulationGainModifier()
-	if(stimulation < 0.0):
-		stimulation = 0.0
-	overstimulation -= 0.3 * partOfMinute * getOverstimRecoverModifier()
-	if(overstimulation < 0.0):
-		overstimulation = 0.0
+	if(stimulation > 0.0):
+		stimulation -= 0.02 * partOfMinute * getStimulationGainModifier()
+		if(stimulation < 0.0):
+			stimulation = 0.0
+			
+	if(overstimulation > 0.0):
+		overstimulation -= 0.3 * partOfMinute * getOverstimRecoverModifier()
+		if(overstimulation < 0.0):
+			overstimulation = 0.0
 	
 	if(orgasmModTimer > 0.0):
 		orgasmModTimer -= partOfMinute * 0.2
 		if(orgasmModTimer < 0.0):
 			orgasmModTimer = 0.0
 	
-#	if(sensitivity < 1.0):
-#		var partOfDay:float = float(_seconds) / 86400.0 # seconds in a day
-#
-#		sensitivity += partOfDay * getLowSensitivityRestoreRate()
-#		if(sensitivity > 1.0):
-#			sensitivity = 1.0
-	pass
 
 func hoursPassed(_hours:int):
 	if(sensitivity < 1.0):
@@ -157,3 +157,24 @@ func getInfo() -> Array:
 
 func getInfoString() -> String:
 	return Util.join(getInfo(), "\n")
+
+func generateDataFor(_dynamicCharacter):
+	pass
+
+func saveData():
+	var data = {
+		"sens": sensitivity,
+		"stim": stimulation,
+		"ostim": overstimulation,
+		"esens": extraSensitivity,
+		"orgtime": orgasmModTimer,
+	}
+	
+	return data
+
+func loadData(data):
+	sensitivity = SAVE.loadVar(data, "sens", 1.0)
+	stimulation = SAVE.loadVar(data, "stim", 0.0)
+	overstimulation = SAVE.loadVar(data, "ostim", 0.0)
+	extraSensitivity = SAVE.loadVar(data, "esens", 0.0)
+	orgasmModTimer = SAVE.loadVar(data, "orgtime", 0.0)

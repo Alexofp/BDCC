@@ -487,8 +487,8 @@ func loadData(data):
 				continue
 			bodypart = GlobalRegistry.createBodypart(replacementID)
 			
-		bodypart.loadData(SAVE.loadVar(loadedBodyparts[slot], "data", {}))
 		giveBodypart(bodypart, false)
+		bodypart.loadData(SAVE.loadVar(loadedBodyparts[slot], "data", {}))
 	checkSkins(true)
 	
 	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))

@@ -454,7 +454,7 @@ func getDomActions():
 	if(state in ["fucking"]):
 		actions.append({
 				"id": "slowdown",
-				"score": 0.0,
+				"score": (1.0 if getDom().isZoneOverstimulated(BodypartSlot.Penis) else 0.0),
 				"name": "Slow down",
 				"desc": "Stop fucking for a second..",
 			})
@@ -512,7 +512,7 @@ func getDomActions():
 	if(state in ["aftercumminginside"]):
 		actions.append({
 			"id": "continuefucking",
-			"score": 1.0,
+			"score": (0.0 if getDom().isZoneOverstimulated(BodypartSlot.Penis) else 0.25) - getStopScore(),
 			"name": "Continue fucking",
 			"desc": "Continue fucking their "+RNG.pick(usedBodypartNames),
 		})

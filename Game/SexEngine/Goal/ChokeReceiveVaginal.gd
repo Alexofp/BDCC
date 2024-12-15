@@ -11,6 +11,8 @@ func isPossible(_sexEngine, _domInfo, _subInfo, _data):
 		return false
 	if(_domInfo.getChar().hasBoundArms() || _domInfo.getChar().hasBlockedHands()):
 		return false
+	if(!_subInfo.getChar().canZoneOrgasm(BodypartSlot.Penis)):
+		return false
 	
 	return true
 

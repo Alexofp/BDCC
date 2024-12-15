@@ -422,7 +422,7 @@ func getDomActions():
 
 		actions.append({
 				"id": "slowdown",
-				"score": 0.0,
+				"score": (1.0 if getSub().isZoneOverstimulated(BodypartSlot.Penis) else 0.0),
 				"name": "Slow down",
 				"desc": "Stop fucking for a second..",
 			})
@@ -976,7 +976,7 @@ func inside_domActions():
 	if(getDom().getFirstItemThatCoversBodypart(usedBodypart) == null && getSub().getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null && subInfo.isReadyToPenetrate()):
 		actions.append({
 				"id": "ridemore",
-				"score": 1.0-getStopScore(),
+				"score": (0.0 if getSub().isZoneOverstimulated(BodypartSlot.Penis) else 0.25) - getStopScore(),
 				"name": "Ride more",
 				"desc": "Continue riding this "+getDickName("cock")+".",
 			})

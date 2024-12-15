@@ -62,9 +62,15 @@ func getBuffs():
 		return [
 			buff(Buff.AmbientPainBuff, [5]),
 			buff(Buff.NoRecoverVaginaBuff),
+			buff(Buff.SensitivityRestoreBuff, [BodypartSlot.Vagina, -100.0]),
+			buff(Buff.SensitivityGainBuff, [BodypartSlot.Vagina, -20.0 - (stacks-1)*30.0]),
+			buff(Buff.OverstimulationThresholdBuff, [BodypartSlot.Vagina, -10.0 - (stacks-1)*20.0]),
 		]
 	
 	return [
 		buff(Buff.AmbientPainBuff, [4+stacks*2]),
-		buff(Buff.NoRecoverVaginaBuff)
+		buff(Buff.NoRecoverVaginaBuff),
+		buff(Buff.SensitivityRestoreBuff, [BodypartSlot.Vagina, -100.0]),
+		buff(Buff.SensitivityGainBuff, [BodypartSlot.Vagina, -100.0]),
+		buff(Buff.OverstimulationThresholdBuff, [BodypartSlot.Vagina, -50.0]),
 	]

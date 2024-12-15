@@ -18,6 +18,9 @@ func isPossible(_sexEngine, _domInfo, _subInfo, _data):
 	if(!_subInfo.getChar().hasReachablePenis() && !_subInfo.getChar().hasReachableVagina()):
 		return false
 	
+	if((!_subInfo.getChar().canZoneOrgasm(BodypartSlot.Penis) && !_subInfo.getChar().canZoneOrgasm(BodypartSlot.Vagina)) && (!_domInfo.getChar().canZoneOrgasm(BodypartSlot.Penis) && !_domInfo.getChar().canZoneOrgasm(BodypartSlot.Vagina))):
+		return false
+	
 	return true
 
 func getSubGoals(_sexEngine, _domInfo, _subInfo, _data):

@@ -67,6 +67,8 @@ func getBuffs():
 		]
 	return [
 		buff(Buff.StatusEffectImmunityBuff, [StatusEffect.Collapsed, 100.0]),
+		buff(Buff.StatusEffectImmunityBuff, [StatusEffect.Stunned, 100.0]),
+		buff(Buff.StatusEffectImmunityBuff, [StatusEffect.Bleeding, 100.0]),
 	]
 
 func saveData():

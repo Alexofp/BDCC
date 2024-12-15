@@ -3202,3 +3202,25 @@ func hasVisiblyOverstimulatedSensitiveZone() -> bool:
 		if(zone.isVisiblyOverstimulated()):
 			return true
 	return false
+
+func isZoneOverstimulated(bodypartSlot) -> bool:
+	if(!hasBodypart(bodypartSlot)):
+		return false
+	
+	var thePart = getBodypart(bodypartSlot)
+	
+	if(thePart.getSensitiveZone() == null):
+		return false
+	
+	return thePart.getSensitiveZone().isOverstimulated()
+
+func canZoneOrgasm(bodypartSlot) -> bool:
+	if(!hasBodypart(bodypartSlot)):
+		return false
+	
+	var thePart = getBodypart(bodypartSlot)
+	
+	if(thePart.getSensitiveZone() == null):
+		return true
+	
+	return thePart.getSensitiveZone().canOrgasm()

@@ -10,9 +10,9 @@ func getArousalGainModifier() -> float:
 		return getSensitivity() * 0.25 # Easier if lactating
 	return getSensitivity() * 0.15 # Really hard to orgasm until trained
 
-func getLowSensitivityRestoreRate() -> float:
-	return 0.15 # Per day
-
+func getLowSensitivityRestoreRate() -> float: # 15% per day
+	return 0.15 * (1.0 + max(-1.0, getCustomAttribute(BuffAttribute.SensitivityRestoreAll) + getCustomAttribute(BuffAttribute.SensitivityRestoreNipples)))
+	
 #func getOverstimRecoverModifier() -> float:
 #	return (1.0/0.3)/300.0 # 5 Hours roughly
 
@@ -20,10 +20,10 @@ func getOverstimSensLoseModifier() -> float:
 	return 0.1
 
 func getSensitivityGainModifier() -> float:
-	return 0.2
+	return 0.2 * (1.0 + max(-1.0, getCustomAttribute(BuffAttribute.SensitivityGainAll) + getCustomAttribute(BuffAttribute.SensitivityGainNipples)))
 
 func getStimulationGainModifier() -> float:
-	return 0.3
+	return 0.3 / (1.0 + max(-0.9, getCustomAttribute(BuffAttribute.OverstimulationThresholdAll) + getCustomAttribute(BuffAttribute.OverstimulationThresholdNipples)))
 
 func isOverstimulated() -> bool:
 	var theChar = getCharacter()
@@ -46,3 +46,17 @@ func getOverstimulation() -> float:
 	if(isOverstimulated()):
 		return 1.0
 	return 0.0
+
+func generateDataFor(_dynamicCharacter):
+	var fetishHolder:FetishHolder = _dynamicCharacter.getFetishHolder()
+	if(fetishHolder == null):
+		return
+	
+	var fetishValue = fetishHolder.getFetishValue(Fetish.Lactation)
+	if(fetishValue > 0.0):
+		sensitivity = 1.0 + RNG.randf_range(fetishValue*0.1, fetishValue*3.0)
+	elif(RNG.chance(30)):
+		sensitivity = 0.5 + RNG.randf_range(0.0, 0.5)
+
+func canOrgasm() -> bool:
+	return getSensitivity() >= 2.2

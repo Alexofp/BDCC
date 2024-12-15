@@ -38,6 +38,10 @@ func getBuffs():
 	return [
 		buff(Buff.GenitalElasticityBuff, [300.0]),
 		buff(Buff.GenitalResistanceBuff, [300.0]),
+		buff(Buff.SensitivityRestoreBuff, [BodypartSlot.Vagina, 500.0]),
+		buff(Buff.SensitivityRestoreBuff, [BodypartSlot.Anus, 500.0]),
+		buff(Buff.OverstimulationThresholdBuff, [BodypartSlot.Vagina, 50.0]),
+		buff(Buff.OverstimulationThresholdBuff, [BodypartSlot.Anus, 50.0]),
 	]
 
 func saveData():

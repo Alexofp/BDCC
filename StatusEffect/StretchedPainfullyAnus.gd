@@ -22,9 +22,15 @@ func getBuffs():
 		return [
 			buff(Buff.AmbientPainBuff, [5]),
 			buff(Buff.NoRecoverAnusBuff),
+			buff(Buff.SensitivityRestoreBuff, [BodypartSlot.Anus, -100.0]),
+			buff(Buff.SensitivityGainBuff, [BodypartSlot.Anus, -20.0 - (stacks-1)*30.0]),
+			buff(Buff.OverstimulationThresholdBuff, [BodypartSlot.Anus, -10.0 - (stacks-1)*20.0]),
 		]
 	
 	return [
 		buff(Buff.AmbientPainBuff, [4+stacks*2]),
-		buff(Buff.NoRecoverAnusBuff)
+		buff(Buff.NoRecoverAnusBuff),
+		buff(Buff.SensitivityRestoreBuff, [BodypartSlot.Anus, -100.0]),
+		buff(Buff.SensitivityGainBuff, [BodypartSlot.Anus, -100.0]),
+		buff(Buff.OverstimulationThresholdBuff, [BodypartSlot.Anus, -50.0]),
 	]

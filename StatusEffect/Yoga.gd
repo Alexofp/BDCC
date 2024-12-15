@@ -39,7 +39,9 @@ func getBuffs():
 		buff(Buff.StatBuff, [Stat.Agility, 5]),
 		buff(Buff.StatBuff, [Stat.Sexiness, 2]),
 		buff(Buff.DodgeChanceBuff, [20.0]),
-		buff(Buff.SkillExperienceBuff, [Skill.Exhibitionism, 50.0])
+		buff(Buff.SkillExperienceBuff, [Skill.Exhibitionism, 50.0]),
+		buff(Buff.OverstimulationThresholdBuff, [50.0]),
+		buff(Buff.SensitivityGainBuff, [20.0]),
 	]
 
 func saveData():

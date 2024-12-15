@@ -212,6 +212,8 @@ func saveData():
 		result["orificeData"] = orifice.saveData()
 	if(fluidProduction != null):
 		result["fluidProductionData"] = fluidProduction.saveData()
+	if(sensitiveZone != null):
+		result["sensitiveZone"] = sensitiveZone.saveData()
 	if(supportsSkin()):
 		result["pickedSkin"] = pickedSkin
 		if(pickedRColor is Color):
@@ -233,6 +235,11 @@ func loadData(_data):
 		orifice.loadData(SAVE.loadVar(_data, "orificeData", {}))
 	if(fluidProduction != null):
 		fluidProduction.loadData(SAVE.loadVar(_data, "fluidProductionData", {}))
+	if(sensitiveZone != null):
+		if(!_data.has("sensitiveZone") && getCharacter() != null && !getCharacter().isPlayer()):
+			sensitiveZone.generateDataFor(getCharacter())
+		else:
+			sensitiveZone.loadData(SAVE.loadVar(_data, "sensitiveZone", {}))
 	if(supportsSkin()):
 		if(_data.has("pickedSkin")):
 			pickedSkin = SAVE.loadVar(_data, "pickedSkin", null)
@@ -256,6 +263,7 @@ func saveDataNPC():
 		result["orificeData"] = orifice.saveData()
 	if(fluidProduction != null):
 		result["fluidProductionData"] = fluidProduction.saveData()
+	# No reason to save sensitivity zone. Static npcs aren't usually participating in procedural sex
 	return result
 
 func loadDataNPC(_data):
@@ -263,6 +271,7 @@ func loadDataNPC(_data):
 		orifice.loadData(SAVE.loadVar(_data, "orificeData", {}))
 	if(fluidProduction != null):
 		fluidProduction.loadData(SAVE.loadVar(_data, "fluidProductionData", {}))
+	# No reason to load sensitivity zone
 
 func safeWhenExposed():
 	return true
@@ -305,6 +314,8 @@ func npcGenerationWeight(_dynamicCharacter):
 func generateDataFor(_dynamicCharacter):
 	if(orifice != null):
 		orifice.generateDataFor(_dynamicCharacter)
+	if(sensitiveZone != null):
+		sensitiveZone.generateDataFor(_dynamicCharacter)
 	generateRandomColors(_dynamicCharacter)
 	generateRandomSkinIfCan(_dynamicCharacter)
 
