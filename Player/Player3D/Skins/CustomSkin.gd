@@ -23,7 +23,7 @@ func setTexturePath(newPath):
 	if("_s" in customName):
 		calculatedFitting[SkinType.Scales] = 1.0
 	if("_h" in customName):
-		calculatedFitting[SkinType.Skin] = 1.0
+		calculatedFitting[SkinType.SkinHuman] = 1.0
 	if("_m" in customName):
 		calculatedFitting[SkinType.SkinAndFur] = 1.0
 

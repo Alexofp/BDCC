@@ -11,5 +11,5 @@ func getPatternTexture():
 
 func getFittingSkinTypes():
 	return {
-		SkinType.Skin: 1.0,
+		SkinType.SkinHuman: 1.0,
 	}

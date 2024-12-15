@@ -3,18 +3,18 @@ class_name SkinType
 
 enum {
 	Fur,
-	Skin,
+	SkinHuman,
 	SkinAndFur,
 	Scales,
 }
 
 static func getAll():
-	return [Fur, Skin, SkinAndFur, Scales]
+	return [Fur, SkinHuman, SkinAndFur, Scales]
 
 static func getName(theSkinType):
 	if(theSkinType == Fur):
 		return "Fur"
-	if(theSkinType == Skin):
+	if(theSkinType == SkinHuman):
 		return "Skin"
 	if(theSkinType == SkinAndFur):
 		return "Skin+Fur"
