@@ -41,6 +41,7 @@ func canCombine():
 func getTags():
 	return [
 		ItemTag.SoldByMedicalVendomat,
+		ItemTag.SexEngineCanApply,
 		]
 
 func getItemCategory():
@@ -48,3 +49,25 @@ func getItemCategory():
 
 func getInventoryImage():
 	return "res://Images/Items/medical/lubricant.png"
+
+func getSexEngineInfo(_sexEngine, _domInfo, _subInfo):
+	var sub:BaseCharacter = _subInfo.getChar()
+	var dom:BaseCharacter = _domInfo.getChar()
+	
+	return {
+		"name": "Lube",
+		"usedName": "lube",
+		"desc": "Makes your holes more sensitive.",
+		"scoreOnSub": _sexEngine.hasGoalScore(_domInfo, SexGoal.SubOptionalApplyLubeOnSub, _subInfo)*(0.5-_domInfo.fetishScore({Fetish.Sadism: 0.5})),
+		"scoreOnSelf": _sexEngine.hasGoalScore(_domInfo, SexGoal.SubOptionalApplyLubeOnDom, _subInfo)*(0.5-_domInfo.fetishScore({Fetish.Masochism: 0.5})),
+		"scoreSubScore": _subInfo.getComplyScore(),
+		"canUseOnDom": !dom.hasEffect(StatusEffect.LubedUp) && dom.getFirstItemThatCoversBodypart(BodypartSlot.Anus) == null,
+		"canUseOnSub": !sub.hasEffect(StatusEffect.LubedUp) && sub.getFirstItemThatCoversBodypart(BodypartSlot.Anus) == null,
+		"maxUsesByNPC": 2,
+	}
+
+func useInSex(_receiver):
+	_receiver.addEffect(StatusEffect.LubedUp)
+	return {
+		text = "{USER.You} {USER.youVerb('feel')} ready.".replace("USER", _receiver.getID()),
+	}

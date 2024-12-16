@@ -20,6 +20,7 @@ enum {
 	PenisPump,
 	PenisPumpUsableByNPC,
 	SexEngineDrug,
+	SexEngineCanApply,
 	Hypnovisor,
 	
 	GuardUniform,
@@ -63,6 +64,7 @@ const tagNames = [
 	"PenisPump",
 	"PenisPumpUsableByNPC",
 	"SexEngineDrug",
+	"SexEngineCanApply",
 	"Hypnovisor",
 	
 	"GuardUniform",
