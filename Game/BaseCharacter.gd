@@ -3126,22 +3126,26 @@ func addFightExperienceAuto(_otherCharID:String, didWin:bool):
 	
 	var ourLevel:int = getLevel()
 	
+	var autoLevelingSetting:float = OPTIONS.getSandboxNpcLeveling()
+	
 	var mult:float = 1.0
 	
-	if(ourLevel > pcLevel):
-		mult = 1.0/((ourLevel - pcLevel) + 3.0)
-	elif(ourLevel == pcLevel):
-		mult = 0.5
-	else:
-		mult = 1.0 + (pcLevel - ourLevel)*0.5
+	if(autoLevelingSetting > 0.0):
+		if(ourLevel > pcLevel):
+			mult = 1.0/((ourLevel - pcLevel)*autoLevelingSetting + 3.0*autoLevelingSetting)
+		elif(ourLevel == pcLevel):
+			mult = 0.5
+		else:
+			mult = 1.0 + (pcLevel - ourLevel)*0.5*autoLevelingSetting
+		
+		if(ourLevel < otherLevel):
+			mult += (otherLevel - ourLevel) * 0.2
 	
-	if(ourLevel < otherLevel):
-		mult += (otherLevel - ourLevel) * 0.2
-	
-	if(!didWin):
-		mult *= 0.6
-	
-	addExperience(int(round(100.0 * mult)))
+	if(autoLevelingSetting >= 0.0):
+		if(!didWin):
+			mult *= 0.6
+		
+		addExperience(int(round(100.0 * mult)))
 
 func getReputation() -> ReputationPlaceholder:
 	return ReputationPlaceholder.new()
