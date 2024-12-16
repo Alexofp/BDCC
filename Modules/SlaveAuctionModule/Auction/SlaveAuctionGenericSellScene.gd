@@ -145,7 +145,7 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {npc="mirri"})
 		saynn("Mirri approaches you and hands you a credits chip.")
 
-		saynn("[say=mirri]"+str(RNG.pick(["Here is your cut, big {pc.girl}.", "Your cut, pretty {pc.girl}.", "Your "+str(getModule("SlaveAuctionModule").getPCCut()*10)+"%, tough {pc.girl}.", "Please doing business, big {pc.girl}."]))+"[/say]")
+		saynn("[say=mirri]"+str(RNG.pick(["Here is your cut, big {pc.girl}.", "Your cut, pretty {pc.girl}.", "Your "+str(getModule("SlaveAuctionModule").getPCCut()*100)+"%, tough {pc.girl}.", "Please doing business, big {pc.girl}."]))+"[/say]")
 
 		saynn("As you take it, the catgirl just walks back to her room.")
 

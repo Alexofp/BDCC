@@ -213,6 +213,33 @@ func doAction(_auctionAction:AuctionAction):
 					sayn("The slave was sold to "+soldBidder.name+" for "+str(currentBid)+" credits!")
 					sayn("Total amount of bids: "+str(totalBidTimes))
 					saynn("Round amount: "+str(roundNumber))
+					
+					var totalTraitsPositive:int = 0
+					var totalTraitsNegative:int = 0
+					var totalRevealedTraitsPositive:int = 0
+					var totalRevealedTraitsNegative:int = 0
+					var totalHitTraitsPositive:int = 0
+					var totalHitTraitsNegative:int = 0
+					for bidderA in bidders:
+						var bidder:AuctionBidder = bidderA
+						totalTraitsPositive += bidder.likes.size()
+						totalTraitsNegative += bidder.dislikes.size()
+						for traitID in bidder.likes:
+							var traitT = bidder.likes[traitID]
+							if(traitT >= AuctionBidder.TRAIT_DISCOVERED):
+								totalRevealedTraitsPositive += 1
+							if(traitT >= AuctionBidder.TRAIT_HIT):
+								totalHitTraitsPositive += 1
+						for traitID in bidder.dislikes:
+							var traitT = bidder.dislikes[traitID]
+							if(traitT >= AuctionBidder.TRAIT_DISCOVERED):
+								totalRevealedTraitsNegative += 1
+							if(traitT >= AuctionBidder.TRAIT_HIT):
+								totalHitTraitsNegative += 1
+					if(totalTraitsPositive != 0 && totalTraitsNegative != 0):
+						sayn("Bidders total traits amount: "+str(totalTraitsPositive+totalTraitsNegative)+", Positive: "+str(totalTraitsPositive)+", Negative: "+str(totalTraitsNegative))
+						sayn("Revealed: "+str(totalRevealedTraitsPositive+totalRevealedTraitsNegative)+" ("+str(Util.roundF(float(totalRevealedTraitsPositive+totalRevealedTraitsNegative)/float(totalTraitsPositive+totalTraitsNegative)*100.0, 1))+"%), Positive: "+str(totalRevealedTraitsPositive)+" ("+str(Util.roundF(float(totalRevealedTraitsPositive)/float(totalTraitsPositive)*100.0, 1))+"%), Negative: "+str(totalRevealedTraitsNegative)+" ("+str(Util.roundF(float(totalRevealedTraitsNegative)/float(totalTraitsNegative)*100.0, 1))+"%)")
+						sayn("Hit: "+str(totalHitTraitsPositive+totalHitTraitsNegative)+" ("+str(Util.roundF(float(totalHitTraitsPositive+totalHitTraitsNegative)/float(totalTraitsPositive+totalTraitsNegative)*100.0, 1))+"%), Positive: "+str(totalHitTraitsPositive)+" ("+str(Util.roundF(float(totalHitTraitsPositive)/float(totalTraitsPositive)*100.0, 1))+"%), Negative: "+str(totalHitTraitsNegative)+" ("+str(Util.roundF(float(totalHitTraitsNegative)/float(totalTraitsNegative)*100.0, 1))+"%)")
 				else:
 					saynnPresenter("That's it.. Time is up.")
 					
