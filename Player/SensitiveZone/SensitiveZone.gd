@@ -155,6 +155,13 @@ func getInfo() -> Array:
 	
 	return result
 
+func getMeInfo() -> Array:
+	var result:= []
+	
+	result.append("Sensitivity: "+str(Util.roundF(getSensitivity()*100.0, 1))+"%")
+	
+	return result
+
 func getInfoString() -> String:
 	return Util.join(getInfo(), "\n")
 
