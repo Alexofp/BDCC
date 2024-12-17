@@ -200,6 +200,9 @@ func registerAllAdders():
 			registerAdder(theFiller)
 
 func _ready():
+	pass
+
+func registerEverything():
 	registerAllFormBanks()
 	registerAllFillers()
 	registerAllAdders()

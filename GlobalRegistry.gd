@@ -289,6 +289,8 @@ func registerEverything():
 	
 	startLoadingDonationData()
 	
+	ModularDialogue.registerEverything()
+	
 	emit_signal("loadingUpdate", 0.0/totalStages, "Bodyparts")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
