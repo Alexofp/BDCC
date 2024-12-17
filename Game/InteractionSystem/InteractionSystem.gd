@@ -553,6 +553,8 @@ func trySpawnPawn(specificCharType = null):
 			continue
 		if(hasPawn(randomCharID)):
 			continue
+		if(GM.main.characterIsVisible(randomCharID)):
+			continue
 		var character = GlobalRegistry.getCharacter(randomCharID)
 		if(character.shouldBeExcludedFromEncounters()):
 			continue

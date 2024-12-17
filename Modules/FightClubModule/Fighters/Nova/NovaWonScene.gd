@@ -169,13 +169,13 @@ func _run():
 
 	if(state == "offer_cock"):
 		# (needs cock)
-		playAnimation(StageScene.SexOral, "sex", {
-			pc="pc", npc="nova", 
-			bodyState={exposedCrotch=true,hard=true},
-			npcBodyState={},
-		})
-		
 		if(GM.pc.isWearingChastityCage()):
+			playAnimation(StageScene.SexOral, "tease", {
+				pc="pc", npc="nova", 
+				bodyState={exposedCrotch=true,hard=true},
+				npcBodyState={},
+			})
+			
 			saynn("Hmm. Yeah, using a desperate husky for your pleasure sounds kinda nice about now. You expose your {pc.cock} and kneel before Nova, offering her some work. The husky quickly realizes what she needs to do and starts eagerly nuzzling your chastity cage. She then sticks her tongue out and starts trying to reach your member through it, making it feel good in the process. All the while the suit is still denying the husky time after time, turning her more desperate and subby.")
 			
 			saynn("[say=pc]Such a good girl~. Don’t stop, do it properly.[/say]")
@@ -184,6 +184,12 @@ func _run():
 			
 			saynn("And it works, you start moaning, your body squirms around that mouth until the moment you are shoved over the edge. Your {pc.cock} starts shooting {pc.cum} deep down the girl’s mouth, your finger accidently hits the ‘allow to cum’ button on the PDA, causing Nova’s suit to keep vibrating no matter what. It only takes a few seconds before Nova starts moaning loudly too, her covered up cock is shooting cum inside the undersuit, creating quite a mess underneath. But she doesn’t care, she is arching her back and eagerly abusing her throat on your cock through the orgasm, milking your balls for every last drop of {pc.cum}.")
 		else:
+			playAnimation(StageScene.SexOral, "sex", {
+				pc="pc", npc="nova", 
+				bodyState={exposedCrotch=true,hard=true},
+				npcBodyState={},
+			})
+			
 			saynn("Hmm. Yeah, using a desperate husky for your pleasure sounds kinda nice about now. You expose your {pc.cock} and kneel before Nova, offering her your shaft. The husky quickly realizes what she needs to do and starts eagerly nuzzling your cock. She then sticks her tongue out and starts dragging it across the length of your member, making it feel good. All the while the suit is still denying the husky time after time, turning her more desperate and subby.")
 
 			saynn("[say=pc]Such a good girl~. Don’t stop, do it properly.[/say]")
