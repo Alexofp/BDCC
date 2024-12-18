@@ -290,9 +290,14 @@ func registerEverything():
 	
 	startLoadingDonationData()
 	
+	emit_signal("loadingUpdate", 0.0/totalStages, "Modules pre-init")
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
+	preinitModulesFolder("res://Modules/")
+	
 	ModularDialogue.registerEverything()
 	
-	emit_signal("loadingUpdate", 0.0/totalStages, "Bodyparts")
+	emit_signal("loadingUpdate", 1.0/totalStages, "Bodyparts")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
@@ -314,7 +319,7 @@ func registerEverything():
 		var worker_time2 = (end2-start2)/1000000.0
 		Log.print("BODYPARTS initialized in: %s seconds" % [worker_time2])
 	
-	emit_signal("loadingUpdate", 1.0/totalStages, "Inventory")
+	emit_signal("loadingUpdate", 2.0/totalStages, "Inventory")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
@@ -331,7 +336,7 @@ func registerEverything():
 	registerLootTableFolder("res://Inventory/LootTable/")
 	registerLootListFolder("res://Inventory/LootLists/")
 	
-	emit_signal("loadingUpdate", 2.0/totalStages, "Skills")
+	emit_signal("loadingUpdate", 3.0/totalStages, "Skills")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
@@ -346,14 +351,14 @@ func registerEverything():
 	
 	registerPerkFolder("res://Skills/Perk/")
 	
-	emit_signal("loadingUpdate", 3.0/totalStages, "Events")
+	emit_signal("loadingUpdate", 4.0/totalStages, "Events")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
 	registerEventFolder("res://Events/Event/")
 	registerEventFolder("res://Game/NpcSlavery/SlaveActivitiesEvents/")
 	
-	emit_signal("loadingUpdate", 4.0/totalStages, "Scenes")
+	emit_signal("loadingUpdate", 5.0/totalStages, "Scenes")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
@@ -373,14 +378,14 @@ func registerEverything():
 	
 	registerFluidsFolder("res://Player/Fluids/Fluids/")
 	
-	emit_signal("loadingUpdate", 5.0/totalStages, "Characters")
+	emit_signal("loadingUpdate", 6.0/totalStages, "Characters")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
 	registerCharacterFolder("res://Characters/")
 	registerCharacterFolder("res://Characters/Generic/")
 	
-	emit_signal("loadingUpdate", 6.0/totalStages, "Attacks")
+	emit_signal("loadingUpdate", 7.0/totalStages, "Attacks")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
@@ -394,7 +399,7 @@ func registerEverything():
 	registerAuctionTraitFolder("res://Game/SlaveAuction/Traits/")
 	registerAuctionActionFolder("res://Game/SlaveAuction/Actions/")
 	
-	emit_signal("loadingUpdate", 7.0/totalStages, "Sex")
+	emit_signal("loadingUpdate", 8.0/totalStages, "Sex")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
@@ -421,7 +426,7 @@ func registerEverything():
 	registerGlobalTaskFolder("res://Game/InteractionSystem/GlobalTasks/")
 	registerPawnTypesFolder("res://Game/InteractionSystem/PawnTypes/")
 	
-	emit_signal("loadingUpdate", 8.0/totalStages, "Sex scenes")
+	emit_signal("loadingUpdate", 9.0/totalStages, "Sex scenes")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
@@ -435,7 +440,7 @@ func registerEverything():
 		
 	registerMapFloorFolder("res://Game/World/Floors/")
 	
-	emit_signal("loadingUpdate", 9.0/totalStages, "Image packs")
+	emit_signal("loadingUpdate", 10.0/totalStages, "Image packs")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
@@ -446,7 +451,7 @@ func registerEverything():
 	
 	registerComputerFolder("res://Game/Computer/")
 	
-	emit_signal("loadingUpdate", 10.0/totalStages, "Skins")
+	emit_signal("loadingUpdate", 11.0/totalStages, "Skins")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
@@ -455,11 +460,12 @@ func registerEverything():
 	registerPartSkinsFolder("res://Player/Player3D/SkinsParts/")
 	registerPartSkinsFolder("res://Player/Player3D/SkinsPartsByAuthor/AverageAce/", "AverageAce")
 	
-	emit_signal("loadingUpdate", 11.0/totalStages, "Modules")
+	emit_signal("loadingUpdate", 12.0/totalStages, "Modules")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
-	yield(registerModulesFolder("res://Modules/"), "completed")
+	yield(registerModules(), "completed")
+	
 	findCustomSkins()
 	sortFightClubFighters()
 	sortRegisteredStatusEffectsByPriority()
@@ -468,10 +474,12 @@ func registerEverything():
 	
 	GM.GES.registerAll()
 	
-	emit_signal("loadingUpdate", 11.0/totalStages, "Datapacks")
+	emit_signal("loadingUpdate", 12.0/totalStages, "Datapacks")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	loadDatapacksFromFolder(getDatapacksFolder())
+	
+	postInitModules()
 	
 	var end = OS.get_ticks_usec()
 	var worker_time = (end-start)/1000000.0
@@ -992,13 +1000,27 @@ func getEvent(id: String):
 func getEvents():
 	return events
 
-func registerModule(path: String):
+func registerModules():
+	for moduleID in modules:
+		var moduleObject = modules[moduleID]
+		
+		moduleObject.register()
+		print("Module "+moduleObject.id+" by "+moduleObject.author+" was registered")
+		emit_signal("loadingUpdate", 12.0/12.0, moduleObject.getRegisterName())
+		yield(get_tree(), "idle_frame")
+		yield(get_tree(), "idle_frame")
+
+func postInitModules():
+	for moduleID in modules:
+		var moduleObject = modules[moduleID]
+		
+		moduleObject.postInit()
+
+func preinitModule(path: String):
 	var module = load(path)
 	var moduleObject = module.new()
-	moduleObject.register()
+	moduleObject.preInit()
 	modules[moduleObject.id] = moduleObject
-	
-	print("Module "+moduleObject.id+" by "+moduleObject.author+" was registered")
 
 func getModules():
 	return modules
@@ -1309,7 +1331,7 @@ func getLootListsByCharacter(charID: String):
 		return []
 	return lootListsByCharacter[charID]
 
-func registerModulesFolder(folder: String):
+func preinitModulesFolder(folder: String):
 	var start = OS.get_ticks_usec()
 	
 	var dir = Directory.new()
@@ -1324,11 +1346,11 @@ func registerModulesFolder(folder: String):
 				var modulePath:String = full_path.plus_file("Module.gd")
 				if(dir.file_exists(modulePath)):
 					#print("MODULE FILE: " +modulePath)
-					registerModule(modulePath)
+					preinitModule(modulePath)
 					
-					emit_signal("loadingUpdate", 11.0/12.0, file_name+" module")
-					yield(get_tree(), "idle_frame")
-					yield(get_tree(), "idle_frame")
+					#emit_signal("loadingUpdate", 0.0/12.0, file_name+" module")
+					#yield(get_tree(), "idle_frame")
+					#yield(get_tree(), "idle_frame")
 				pass
 			file_name = dir.get_next()
 	else:
@@ -1336,7 +1358,7 @@ func registerModulesFolder(folder: String):
 
 	var end = OS.get_ticks_usec()
 	var worker_time = (end-start)/1000000.0
-	Log.print("MODULES initialized in: %s seconds" % [worker_time])
+	Log.print("MODULES pre-initialized in: %s seconds" % [worker_time])
 
 func registerFightClubFighter(path: String):
 	var item = load(path)
