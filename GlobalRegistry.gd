@@ -76,6 +76,7 @@ var repStats:Dictionary = {}
 var auctionTraits:Dictionary = {}
 var auctionTraitsRefs:Dictionary = {}
 var auctionActions:Dictionary = {}
+var pawnTypes:Dictionary = {}
 
 var bodypartStorageNode
 
@@ -418,6 +419,7 @@ func registerEverything():
 	
 	registerInteractionFolder("res://Game/InteractionSystem/Interactions/")
 	registerGlobalTaskFolder("res://Game/InteractionSystem/GlobalTasks/")
+	registerPawnTypesFolder("res://Game/InteractionSystem/PawnTypes/")
 	
 	emit_signal("loadingUpdate", 8.0/totalStages, "Sex scenes")
 	yield(get_tree(), "idle_frame")
@@ -2190,3 +2192,26 @@ func getAuctionAction(id: String):
 		
 func getAuctionActions():
 	return auctionActions
+
+
+
+func registerPawnType(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	pawnTypes[object.id] = object
+
+func registerPawnTypesFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerPawnType(scriptPath)
+
+func getPawnType(id: String):
+	if(pawnTypes.has(id)):
+		return pawnTypes[id]
+	else:
+		Log.printerr("ERROR: pawn type with the id "+id+" wasn't found")
+		return null
+		
+func getPawnTypes():
+	return pawnTypes

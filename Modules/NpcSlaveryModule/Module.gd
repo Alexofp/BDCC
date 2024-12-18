@@ -135,7 +135,7 @@ func doFreeEnslavedCharacter(npcID):
 	theChar.setNpcSlavery(null)
 	
 	GM.main.removeDynamicCharacterFromAllPools(npcID)
-	var newPool = CharacterPool.characterTypeToPool(theChar.getCharacterType())
+	var newPool = theChar.getCharacterPool()
 	if(newPool != null):
 		GM.main.addDynamicCharacterToPool(npcID, newPool)
 	

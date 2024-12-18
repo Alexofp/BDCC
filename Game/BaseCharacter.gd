@@ -2319,6 +2319,20 @@ func getCharacterType():
 func getCharType():
 	return getCharacterType()
 
+func getCharacterPool():
+	var theCharType = getCharacterType()
+	if(theCharType == CharacterType.Guard):
+		return CharacterPool.Guards
+	if(theCharType == CharacterType.Nurse):
+		return CharacterPool.Nurses
+	if(theCharType == CharacterType.Inmate):
+		return CharacterPool.Inmates
+	if(theCharType == CharacterType.Engineer):
+		return CharacterPool.Engineers
+	if(theCharType == CharacterType.Generic):
+		return null
+	return theCharType
+
 func getBodypartLewdSizeAdjective(bodypartSlot):
 	if(!hasBodypart(bodypartSlot)):
 		return "ERROR:NO BODYPART IN SLOT " + str(bodypartSlot)
