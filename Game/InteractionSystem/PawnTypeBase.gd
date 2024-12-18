@@ -86,3 +86,6 @@ func shouldPawnInterruptOtherPawns(_pawn) -> bool:
 
 func customProcessTimeForPawn(_pawn, _seconds:int) -> bool:
 	return false
+
+func getCustomPawnColor(_pawn):
+	return null #Color.pink

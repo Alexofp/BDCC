@@ -431,6 +431,12 @@ func getPawnTexture():
 	return RoomStuff.PawnTexture.Masc
 
 func getPawnColor() -> Color:
+	var pawnType = getPawnType()
+	if(pawnType != null):
+		var customColor = pawnType.getCustomPawnColor(self)
+		if(customColor != null):
+			return customColor
+	
 	if(isLilac()):
 		return Color.purple
 	if(isGeneralInmate()):
