@@ -5,6 +5,37 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.1.7] - 2024-12-20
+### Added
+- Blacktail Market! A secret new place where you can sell your slaves for credits. Unlocked during the new storyline
+- New storyline! Meet [Luxe and Mirri](https://github.com/user-attachments/assets/62d0802f-9e8f-4fdf-8fe5-b3ea758766d1), a pair of very evil characters. And that's all that this changelog is gonna tell you ^^. But it's all obviously centered around the new slave auction. This content can trigger once you have at least one slave who has fully submitted to you, can't miss it. Contains 80k+ words, a hecking novel-sized addition (I dare you to complete it in one day). 3 possible endings (and 2 small bad-endings).
+- Blacktail Market can be upgraded to help you earn even more credits. Some upgrades have very interesting unlock requirements.
+- Slave auction minigame. You, the player, will take a role of a slave presenter. Emphasize good traits of your slaves, avoid hitting the bidders' dislikes, fuel the bidding wars for as long as possible! A lot of work went into it, it should be a very fun minigame.
+- New storyline has new unique sex animations.
+- New vag/anal sex poses for the sex engine: 2 new ones for riding (lotus, standing), 4 ones for fucking (Mating press, raised leg, standing against a wall, pinned against a wall). Some are only available if there is a logical wall nearby. Lotus pose supports making out.
+- 69 added to sex engine! Supports every combination of bits
+- Sensitivity system for the sex engine! Your private bits will now gradually get more or less sensitive from sexual acts. This simulates 2 things, a negative and a positive. Negative: long non-stop sex will be less and less stimulating until you just can't even cum anymore. Positive: If you avoid overstimulating the private bits, they will get more and more sensitive instead. This allows you to 'train' them. For example, you can train someone to orgasm easily from anal or nipple stimulation (their default sensitivity has been nerfed quite a lot to simulate reality). Letting someone's arousal fade (denying them) will temporary raise their sensitivity. To avoid overstimulating someone, you can use the new 'pause' actions during sex
+- Plugs/chastity cages/lube/some status effects all have sensitivty-related buffs/debuffs now.
+- Lube can be used in the sex engine, including by npcs.
+- 2 new skins (Fur-girl and Lux). 2 new hairs (ponytail-4 and a mane). New feline ears.
+- Many skins for existing ears (by AverageAce)
+- Support for asymmetrical bodyparts in mods (by CanInBad)
+- Setting to disable/alter the auto-leveling of the pawns.
+- Slave candy
+
+### Changed
+- Lust plays a lesser role in arousal gain (from 90% debuff to ~40%). For example, this means that it's possible to make someone cum from anal even if they hate anal sex (with the help of the new sensitivity system)
+- Engine updated to Godot Engine 3.6
+- Pawns code have been refactored, now allowing to define new pawn types through mods.
+- Game should auto-rotate with the phone (but always stay in landscape mode)
+
+### Fixed
+- Npc gave birth to 0 kids thing.
+- Walking around with a slave should no longer sometimes queue an interaction with random pawns.
+- SlutLocks shouldn't generate impossible tasks anymore for sure..
+- Some crashes like the game checking how stuffed the throat of a headless npc is.
+- Typos found by CKRainbow, ScottVictorHalley, Friskygote, whalekys, klorpa and more.
+
 ## [0.1.6] - 2024-09-18
 ### Added
 - A brand new Interaction System that makes the prison feel truly alive. All the dynamic characters are now simulated as little 'pawns' that you can see on the map. They go about their business, work, eat, shower, wander around, get themselves into trouble and more. And the player is now one of those pawns too! Stuff can be happening around the prison with you present or not, player can take any role in any interaction or be completely absent, the prison life carries on no matter what! By default, the game will simulate 30 pawns but that number can be changed in the options.
@@ -476,7 +507,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.6...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.7...main
+[0.1.7]: https://github.com/Alexofp/BDCC/compare/0.1.6...0.1.7
 [0.1.6]: https://github.com/Alexofp/BDCC/compare/0.1.5...0.1.6
 [0.1.5]: https://github.com/Alexofp/BDCC/compare/0.1.4...0.1.5
 [0.1.4]: https://github.com/Alexofp/BDCC/compare/0.1.3...0.1.4
