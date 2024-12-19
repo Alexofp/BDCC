@@ -468,6 +468,10 @@ func addRandomSmartLock(_forcer, _addMessage = true):
 		_forcer = GlobalRegistry.getCharacter(_forcer)
 	if(_forcer != null && _forcer.shouldBeExcludedFromEncounters() && randomLock == SmartLock.KeyholderLock):
 		randomLock = SmartLock.TightLock # If we can't encouncter this npc, we can't our key back from them
+	if(randomLock == SmartLock.SlutLock):
+		var wearer = getWearer()
+		if(wearer != null):
+			wearer.updateNonBattleEffects() # Makes sure the bdsm restraint has added the buffs so impossible sluttasks won't generate
 	return addSmartLock(randomLock, _forcer, _addMessage)
 
 func addSmartLock(_lockID, _forcer, _addMessage = true):

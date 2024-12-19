@@ -10,6 +10,8 @@ func _init():
 
 func getTopicValue(_topicID, _pc):
 	if(_topicID == InterestTopic.LooseAnus):
+		if(!_pc.hasBodypart(BodypartSlot.Anus)):
+			return 0.0
 		var anus:BodypartAnus = _pc.getBodypart(BodypartSlot.Anus)
 		var orifice:Orifice = anus.getOrifice()
 		var looseness = orifice.getLooseness()
@@ -25,6 +27,8 @@ func getTopicValue(_topicID, _pc):
 		return constantIfAbove(looseness, 15.0, 1.0, linearCloseness(looseness, 15.0, 14.5))
 	
 	if(_topicID == InterestTopic.TightAnus):
+		if(!_pc.hasBodypart(BodypartSlot.Anus)):
+			return 0.0
 		var anus:BodypartAnus = _pc.getBodypart(BodypartSlot.Anus)
 		var orifice:Orifice = anus.getOrifice()
 		var looseness = orifice.getLooseness()

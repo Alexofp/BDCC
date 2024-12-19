@@ -305,7 +305,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "gun_showing_won")
 	if(state == "gun_showing"):
-		setFlag("", true)
+		setFlag("SlaveAuctionModule.knowsMirriName", true)
 		removeCharacter("mirri")
 		addCharacter("mirri")
 		playAnimation(StageScene.Duo, "stand", {npc="mirri", npcAction=["holdpistol", "res://Inventory/UnriggedModels/Pistol/Pistol.tscn"]})

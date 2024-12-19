@@ -25,7 +25,7 @@ func onSexEvent(_event:SexEvent):
 		var hole = _event.getField("hole", BodypartSlot.Vagina)
 		var targetChar = _event.getTargetChar()
 		if(_event.getSourceChar() == npc && RNG.chance(30) && _event.getTargetChar().hasWombIn(hole)):
-			if(targetChar.hasEffect(StatusEffect.CumInflated)):
+			if(targetChar.hasEffect(StatusEffect.CumInflated) || targetChar.getCumInflationLevel(false) > 0.01):
 				var isOvul = false
 				if(targetChar.isInHeat() && RNG.chance(50) && targetChar.forceOvulate()):
 					isOvul = true

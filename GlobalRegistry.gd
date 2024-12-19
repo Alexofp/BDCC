@@ -1004,9 +1004,9 @@ func registerModules():
 	for moduleID in modules:
 		var moduleObject = modules[moduleID]
 		
+		emit_signal("loadingUpdate", 12.0/12.0, moduleObject.getRegisterName())
 		moduleObject.register()
 		print("Module "+moduleObject.id+" by "+moduleObject.author+" was registered")
-		emit_signal("loadingUpdate", 12.0/12.0, moduleObject.getRegisterName())
 		yield(get_tree(), "idle_frame")
 		yield(get_tree(), "idle_frame")
 

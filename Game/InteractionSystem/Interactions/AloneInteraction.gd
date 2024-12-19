@@ -195,7 +195,7 @@ func isDoingTask(_taskID:String) -> bool:
 	return (goal.globalTask == _taskID)
 
 func getInterruptActions(_pawn:CharacterPawn) -> Array:
-	if(_pawn.isPlayer() && !_pawn.canBeInterrupted()): # Fixes the problem where talking interactions were getting queued up while you were walking a leashed slave around
+	if(getRolePawn("main").isPlayer() && !getRolePawn("main").canBeInterrupted()): # Fixes the problem where talking interactions were getting queued up while you were walking a leashed slave around
 		return []
 	var result:Array = []
 	result.append({

@@ -1321,7 +1321,7 @@ func getSexResult():
 	return sexResult
 
 func isBondageDisabled() -> bool:
-	return bondageDisabled
+	return bondageDisabled || (GM.main.getEncounterSettings().getGoalWeight(SexGoal.TieUp) <= 0.0)
 
 func hasWallsNearby() -> bool:
 	var locToCheck:String = ""

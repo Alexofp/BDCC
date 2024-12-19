@@ -40,7 +40,7 @@ func doStruggle(_pc, _minigame:MinigameResult):
 	var inTrance = HypnokinkUtil.isInTrance(_pc)
 	var hypnotized = HypnokinkUtil.isHypnotized(_pc)
 	
-	if(inTrance && RNG.chance(75) && not _pc.hasPerk(Perk.HypnosisGoodAtVisors)):
+	if(inTrance && RNG.chance(75) && not _pc.hasPerk(Perk.HypnosisGoodAtVisors) && !_minigame.beingHelped):
 		text = "{user.name} tries to... to... \n\nDo what? Must have not been important."
 		damage = 0.0
 		return {"text": text, "damage": damage, "lust": lust, "pain": pain, "stamina": stamina}

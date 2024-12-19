@@ -1490,8 +1490,8 @@ func hasBallsFullOfSeed():
 		return false
 	return production.getFluidLevel() >= 1.0
 
-func getCumInflationLevel():
-	if(!OPTIONS.isContentEnabled(ContentType.CumInflation)):
+func getCumInflationLevel(checkContent:bool=true):
+	if(checkContent && !OPTIONS.isContentEnabled(ContentType.CumInflation)):
 		return 0.0
 	
 	var bodypartsToCalculate = [BodypartSlot.Head, BodypartSlot.Vagina, BodypartSlot.Anus]
@@ -3019,7 +3019,7 @@ func doStruggleOutOfRestraints(isScared:bool = false, addStats:bool = true, cust
 			possible.append(item)
 	
 	var pickedItem
-	var minigameResult
+	var minigameResult:MinigameResult
 	if(trivial.size() > 0):
 		pickedItem = RNG.pick(trivial)
 		minigameResult = MinigameResult.new()
@@ -3032,6 +3032,9 @@ func doStruggleOutOfRestraints(isScared:bool = false, addStats:bool = true, cust
 			minigameResult.score = min(minigameResult.score, min(1.0, RNG.randf_range(0.6, 1.1)))
 	else:
 		return {}
+	
+	if(customActor != null):
+		minigameResult.beingHelped = true
 	
 	var text = ""
 	var restraintData: RestraintData = pickedItem.getRestraintData()
