@@ -283,9 +283,9 @@ func getDonationDataString():
 	newText += "Thank you [color=red]<3[/color][/center]"
 	return newText
 
+const totalStages = 19.0
+
 func registerEverything():
-	var totalStages = 12.0
-	
 	var start = OS.get_ticks_usec()
 	
 	startLoadingDonationData()
@@ -293,11 +293,12 @@ func registerEverything():
 	emit_signal("loadingUpdate", 0.0/totalStages, "Modules pre-init")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
-	preinitModulesFolder("res://Modules/")
+	preinitModulesHooks("res://Modules/")
+	yield(preinitModulesFolder("res://Modules/"), "completed") # 1.0 & 2.0
 	
 	ModularDialogue.registerEverything()
 	
-	emit_signal("loadingUpdate", 1.0/totalStages, "Bodyparts")
+	emit_signal("loadingUpdate", 3.0/totalStages, "Bodyparts")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
@@ -319,7 +320,7 @@ func registerEverything():
 		var worker_time2 = (end2-start2)/1000000.0
 		Log.print("BODYPARTS initialized in: %s seconds" % [worker_time2])
 	
-	emit_signal("loadingUpdate", 2.0/totalStages, "Inventory")
+	emit_signal("loadingUpdate", 4.0/totalStages, "Inventory")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
@@ -336,7 +337,7 @@ func registerEverything():
 	registerLootTableFolder("res://Inventory/LootTable/")
 	registerLootListFolder("res://Inventory/LootLists/")
 	
-	emit_signal("loadingUpdate", 3.0/totalStages, "Skills")
+	emit_signal("loadingUpdate", 5.0/totalStages, "Skills")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
@@ -351,14 +352,14 @@ func registerEverything():
 	
 	registerPerkFolder("res://Skills/Perk/")
 	
-	emit_signal("loadingUpdate", 4.0/totalStages, "Events")
+	emit_signal("loadingUpdate", 6.0/totalStages, "Events")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
 	registerEventFolder("res://Events/Event/")
 	registerEventFolder("res://Game/NpcSlavery/SlaveActivitiesEvents/")
 	
-	emit_signal("loadingUpdate", 5.0/totalStages, "Scenes")
+	emit_signal("loadingUpdate", 7.0/totalStages, "Scenes")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
@@ -378,14 +379,14 @@ func registerEverything():
 	
 	registerFluidsFolder("res://Player/Fluids/Fluids/")
 	
-	emit_signal("loadingUpdate", 6.0/totalStages, "Characters")
+	emit_signal("loadingUpdate", 8.0/totalStages, "Characters")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
 	registerCharacterFolder("res://Characters/")
 	registerCharacterFolder("res://Characters/Generic/")
 	
-	emit_signal("loadingUpdate", 7.0/totalStages, "Attacks")
+	emit_signal("loadingUpdate", 9.0/totalStages, "Attacks")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
@@ -399,7 +400,7 @@ func registerEverything():
 	registerAuctionTraitFolder("res://Game/SlaveAuction/Traits/")
 	registerAuctionActionFolder("res://Game/SlaveAuction/Actions/")
 	
-	emit_signal("loadingUpdate", 8.0/totalStages, "Sex")
+	emit_signal("loadingUpdate", 10.0/totalStages, "Sex")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
@@ -426,7 +427,7 @@ func registerEverything():
 	registerGlobalTaskFolder("res://Game/InteractionSystem/GlobalTasks/")
 	registerPawnTypesFolder("res://Game/InteractionSystem/PawnTypes/")
 	
-	emit_signal("loadingUpdate", 9.0/totalStages, "Sex scenes")
+	emit_signal("loadingUpdate", 11.0/totalStages, "Sex scenes")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
@@ -440,7 +441,7 @@ func registerEverything():
 		
 	registerMapFloorFolder("res://Game/World/Floors/")
 	
-	emit_signal("loadingUpdate", 10.0/totalStages, "Image packs")
+	emit_signal("loadingUpdate", 12.0/totalStages, "Image packs")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
@@ -451,7 +452,7 @@ func registerEverything():
 	
 	registerComputerFolder("res://Game/Computer/")
 	
-	emit_signal("loadingUpdate", 11.0/totalStages, "Skins")
+	emit_signal("loadingUpdate", 13.0/totalStages, "Skins")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
@@ -460,11 +461,11 @@ func registerEverything():
 	registerPartSkinsFolder("res://Player/Player3D/SkinsParts/")
 	registerPartSkinsFolder("res://Player/Player3D/SkinsPartsByAuthor/AverageAce/", "AverageAce")
 	
-	emit_signal("loadingUpdate", 12.0/totalStages, "Modules")
+	emit_signal("loadingUpdate", 14.0/totalStages, "Modules")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
-	yield(registerModules(), "completed")
+	yield(registerModules(), "completed") # 15.0 & 16.0
 	
 	findCustomSkins()
 	sortFightClubFighters()
@@ -474,11 +475,14 @@ func registerEverything():
 	
 	GM.GES.registerAll()
 	
-	emit_signal("loadingUpdate", 12.0/totalStages, "Datapacks")
+	emit_signal("loadingUpdate", 17.0/totalStages, "Datapacks")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	loadDatapacksFromFolder(getDatapacksFolder())
 	
+	emit_signal("loadingUpdate", 18.0/totalStages, "Modules late initialization")
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
 	postInitModules()
 	
 	var end = OS.get_ticks_usec()
@@ -1001,14 +1005,20 @@ func getEvents():
 	return events
 
 func registerModules():
+	var progressBase = 15.0/totalStages
+	var progressStep = 2.0/totalStages
+	var moduleCount = modules.size()
+	var loadedModuleCount = 0
 	for moduleID in modules:
 		var moduleObject = modules[moduleID]
+		var progressValue = progressBase + (progressStep * loadedModuleCount / moduleCount)
+		emit_signal("loadingUpdate", progressValue, moduleObject.getRegisterName())
+		yield(get_tree(), "idle_frame")
+		yield(get_tree(), "idle_frame")
 		
-		emit_signal("loadingUpdate", 12.0/12.0, moduleObject.getRegisterName())
 		moduleObject.register()
 		print("Module "+moduleObject.id+" by "+moduleObject.author+" was registered")
-		yield(get_tree(), "idle_frame")
-		yield(get_tree(), "idle_frame")
+		loadedModuleCount += 1
 
 func postInitModules():
 	for moduleID in modules:
@@ -1331,7 +1341,7 @@ func getLootListsByCharacter(charID: String):
 		return []
 	return lootListsByCharacter[charID]
 
-func preinitModulesFolder(folder: String):
+func preinitModulesHooks(folder: String):
 	var start = OS.get_ticks_usec()
 	
 	var dir = Directory.new()
@@ -1343,16 +1353,47 @@ func preinitModulesFolder(folder: String):
 				var full_path = folder.plus_file(file_name)
 				#print("FOUND DIR: "+full_path)
 				
+				var preInitPath:String = full_path.plus_file("PreInit.gd")
+				if(dir.file_exists(preInitPath)):
+					#print("PRE-INIT FILE: " +preInitPath)
+					var preInitScript = load(preInitPath)
+					var _preInitObject = preInitScript.new()
+			file_name = dir.get_next()
+	else:
+		Log.printerr("An error occurred when trying to access the path "+folder)
+
+	var end = OS.get_ticks_usec()
+	var worker_time = (end-start)/1000000.0
+	Log.print("MODULES pre-initialion hooks run in: %s seconds" % [worker_time])
+
+func preinitModulesFolder(folder: String):
+	var progressBase = 1.0/totalStages
+	var progressStep = 2.0/totalStages
+	var start = OS.get_ticks_usec()
+	
+	var moduleFiles: Array = []
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin(true)
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				var full_path = folder.plus_file(file_name)
+				#print("FOUND DIR: "+full_path)
+				
 				var modulePath:String = full_path.plus_file("Module.gd")
 				if(dir.file_exists(modulePath)):
-					#print("MODULE FILE: " +modulePath)
-					preinitModule(modulePath)
-					
-					#emit_signal("loadingUpdate", 0.0/12.0, file_name+" module")
-					#yield(get_tree(), "idle_frame")
-					#yield(get_tree(), "idle_frame")
-				pass
+					moduleFiles.append([file_name, modulePath])
 			file_name = dir.get_next()
+		var moduleCount = moduleFiles.size()
+		var loadedModuleCount = 0
+		for moduleFile in moduleFiles:
+			var progressValue = progressBase + (progressStep * loadedModuleCount / moduleCount)
+			emit_signal("loadingUpdate", progressValue, "Loading " + moduleFile[0])
+			yield(get_tree(), "idle_frame")
+			yield(get_tree(), "idle_frame")
+			preinitModule(moduleFile[1])
+			loadedModuleCount += 1
 	else:
 		Log.printerr("An error occurred when trying to access the path "+folder)
 
