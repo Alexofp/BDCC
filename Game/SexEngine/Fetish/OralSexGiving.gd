@@ -8,5 +8,7 @@ func getVisibleName():
 
 func getGoals(_sexEngine, _domFetishHolder, _dom, _sub):
 	var possible = [SexGoal.DoOralOnSub]
+	if(_domFetishHolder.getFetishValue(Fetish.OralSexReceiving) >= 0.0):
+		possible.append(SexGoal.Fuck69)
 	
 	return possible

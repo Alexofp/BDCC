@@ -20,6 +20,7 @@ func getRequiredBodypart():
 func getBuffs():
 	return [
 		buff(Buff.ChastityPenisBuff),
+		buff(Buff.SensitivityGainBuff, [25.0]),
 		]
 
 func getTakeOffScene():

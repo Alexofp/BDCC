@@ -21,4 +21,5 @@ func getSubGoals(_sexEngine, _domInfo, _subInfo, _data):
 		SexGoal.SubUndressSub: 1.0,
 		SexGoal.SubUndressDom: 1.0,
 		SexGoal.SubWearStraponOnDom: 1.0,
+		SexGoal.SubOptionalApplyLubeOnSub: 0.5,
 	}

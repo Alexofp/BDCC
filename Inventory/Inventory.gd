@@ -766,6 +766,8 @@ func loadData(data):
 	for loadedItem in loadedItems:
 		var id = SAVE.loadVar(loadedItem, "id", "")
 		var uniqueID = SAVE.loadVar(loadedItem, "uniqueID", "")
+		if(uniqueID != null && (uniqueID is int)):
+			uniqueID = str(uniqueID)
 		var itemLoadedData = SAVE.loadVar(loadedItem, "data", {})
 		
 		var newItem: ItemBase = GlobalRegistry.createItem(id, false)
@@ -783,6 +785,8 @@ func loadData(data):
 		var loadedItem = loadedEquippedItems[loadedSlot]
 		var id = SAVE.loadVar(loadedItem, "id", "")
 		var uniqueID = SAVE.loadVar(loadedItem, "uniqueID", null)
+		if(uniqueID != null && (uniqueID is int)):
+			uniqueID = str(uniqueID)
 		var itemLoadedData = SAVE.loadVar(loadedItem, "data", {})
 		
 		var newItem: ItemBase = GlobalRegistry.createItem(id, false)

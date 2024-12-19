@@ -28,4 +28,5 @@ func getIconColor():
 func getBuffs():
 	return [
 		buff(Buff.AmbientLustBuff, [10]),
+		buff(Buff.SensitivityGainBuff, [BodypartSlot.Breasts, 20]),
 	]

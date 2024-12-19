@@ -15,7 +15,7 @@ func _ready():
 	animationTree2.active = true
 	
 func updateSubAnims():
-	if(doll.getArmsCuffed()):
+	if(doll.getArmsCuffed() && false):
 		animationTree["parameters/CuffsBlend/blend_amount"] = 1.0
 	else:
 		animationTree["parameters/CuffsBlend/blend_amount"] = 0.0

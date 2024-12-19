@@ -72,6 +72,9 @@ func _run():
 			if(bodypart.getFluidProduction() != null):
 				for attribData in bodypart.getFluidProduction().getAttributesText():
 					sayn(attribData[0]+": "+str(attribData[1]))
+			if(bodypart.getSensitiveZone() != null):
+				for infoLine in bodypart.getSensitiveZone().getMeInfo():
+					sayn(infoLine)
 		
 		sayn("")
 		

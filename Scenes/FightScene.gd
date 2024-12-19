@@ -115,9 +115,14 @@ func _run():
 			for item in enemyCharacter.getInventory().getEquppedRestraints():
 				var restraintData: RestraintData = item.getRestraintData()
 				
-				sayn(item.getVisibleName()+", restraint level: "+restraintData.getVisibleLevel(false))
-				#sayn("- Durability: "+restraintData.getVisibleDurability())
-				saynn("- Tightness: "+restraintData.getVisibleTightness()+" ("+restraintData.getTightnessPercentString()+")")
+				if(!restraintData.hasSmartLock()):
+					sayn(item.getVisibleName()+", restraint level: "+restraintData.getVisibleLevel(false))
+					#sayn("- Durability: "+restraintData.getVisibleDurability())
+					saynn("- Tightness: "+restraintData.getVisibleTightness()+" ("+restraintData.getTightnessPercentString()+")")
+				else:
+					sayn(item.getVisibleName()+", SMART-LOCKED")
+					var smartLock:SmartLockBase = restraintData.getSmartLock()
+					saynn("- "+smartLock.getName())
 
 		else:
 			saynn("You can't judge enemy's restraints while blind")

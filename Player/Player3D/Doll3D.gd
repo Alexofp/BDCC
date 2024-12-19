@@ -22,6 +22,7 @@ var anusLeaking = false
 var cumAmount = 0
 var cumColor = Color.white
 var cummedInside = 0.0
+var isFacingRight:bool = false
 
 var temporaryRiggedParts = {}
 
@@ -71,6 +72,7 @@ func _ready():
 	
 	if(GM.main != null && is_instance_valid(GM.main)):
 		var _ok = GM.main.connect("saveLoadingFinished", self, "reconnect")
+	setState("facing", ("right" if isFacingRight else "left"))
 
 func testBody():
 	addPartObject("body", load("res://Player/Player3D/Parts/Body/HumanBody/HumanBody.tscn").instance())
@@ -301,7 +303,16 @@ func prepareCharacter(charID):
 	for zone in dollAttachmentZones:
 		for attachment in dollAttachmentZones[zone]:
 			attachment.clearTemporaryScenes()
+	call_deferred("checkDirection") # Deferred because the character is usually flipped after this call
+
+func checkDirection():
+	var newIsFacingRight:bool = (get_scale().x < 0)
+	
+	if(newIsFacingRight != isFacingRight):
+		isFacingRight = newIsFacingRight
 		
+		setState("facing", ("right" if isFacingRight else "left"))
+
 func onCharacterBodypartChanged():
 	var ch = getCharFromID(savedCharacterID)
 	if(ch == null || !is_instance_valid(ch)):
@@ -722,6 +733,7 @@ func applyBodyState(bodystate):
 	if(bodystate == null):
 		bodystate = {}
 	
+	var shouldForceShowPenis = bodystate.has("showPenis") && bodystate["showPenis"]
 	var shouldExposeChest = bodystate.has("exposedChest") && bodystate["exposedChest"]
 	var shouldExposeCrotch = bodystate.has("exposedCrotch") && bodystate["exposedCrotch"]
 	var shouldBeNaked = bodystate.has("naked") && bodystate["naked"]
@@ -766,6 +778,9 @@ func applyBodyState(bodystate):
 	
 	if(shouldBeCondom):
 		setCockTemporaryCondom()
+	
+	if(shouldForceShowPenis):
+		forceSlotToBeVisible(BodypartSlot.Penis)
 	
 	var newChains = []
 	if(bodystate.has("chains")):

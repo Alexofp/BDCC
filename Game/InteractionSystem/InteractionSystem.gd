@@ -14,12 +14,7 @@ var reactCooldowns:Dictionary = {}
 
 # Unsaved
 var interactionsDisabled:bool = false
-var pawnDistribution = {
-		CharacterType.Inmate: 3,
-		CharacterType.Guard: 2,
-		CharacterType.Nurse: 1,
-		CharacterType.Engineer: 1,
-	}
+var pawnDistribution:Dictionary = {}
 
 func saveData():
 	var pawnData := {}
@@ -99,6 +94,7 @@ func _init():
 	for taskID in GlobalRegistry.getGlobalTasks():
 		var newTask = GlobalRegistry.createGlobalTask(taskID)
 		globalTasks[newTask.id] = newTask
+	pawnDistribution = calculatePawnDistribution()
 
 func processTime(_howMuch:int):
 #	var toUpdate:Array = getInteractionsThatNeedToProcessed()
@@ -208,12 +204,16 @@ func getClosestInteraction() -> PawnInteractionBase:
 				result = interaction
 	return result
 
-func spawnPawn(charID):
+func spawnPawn(charID, pawnTypeID:String=""):
 	if(charID == null):
 		return
 	var character:BaseCharacter = GlobalRegistry.getCharacter(charID)
 	if(character == null):
 		return
+	if(pawnTypeID == ""):
+		pawnTypeID = character.getCharType()
+	var pawnType:PawnTypeBase = GlobalRegistry.getPawnType(pawnTypeID)
+		
 	var newPawn: CharacterPawn = CharacterPawn.new()
 	newPawn.charID = charID
 	
@@ -225,23 +225,13 @@ func spawnPawn(charID):
 		newPawn.setLocation(GM.pc.getLocation())
 	else:
 		var newLoc:String = "main_punishment_spot"
-		var charType = character.getCharacterType()
 		
-		if(charType == CharacterType.Inmate):
-			var inmateType = character.getInmateType()
-			
-			if(inmateType == InmateType.SexDeviant):
-				newLoc = GM.world.getSafeFromPCRandomRoom(["main_stairs1", "main_stairs2", "cellblock_lilac_nearcell"], GM.pc.getLocation())
-			elif(inmateType == InmateType.HighSec):
-				newLoc = GM.world.getSafeFromPCRandomRoom(["main_stairs1", "main_stairs2", "cellblock_red_nearcell"], GM.pc.getLocation())
-			else:
-				newLoc = GM.world.getSafeFromPCRandomRoom(["main_stairs1", "main_stairs2", "cellblock_orange_nearcell"], GM.pc.getLocation())
-		elif(charType == CharacterType.Guard):
-			newLoc = GM.world.getSafeFromPCRandomRoom(["hall_elevator", "main_greenhouses"], GM.pc.getLocation())
-		elif(charType == CharacterType.Nurse):
-			newLoc = "med_elevator"
-		elif(charType == CharacterType.Engineer):
-			newLoc = "mining_elevator"
+		if(pawnType != null):
+			var possibleLocs:Array = pawnType.getSpawnLocations(character)
+			if(possibleLocs.size() == 1):
+				newLoc = possibleLocs[0]
+			elif(possibleLocs.size() > 1):
+				newLoc = GM.world.getSafeFromPCRandomRoom(possibleLocs, GM.pc.getLocation())
 		
 		newPawn.setLocation(newLoc)
 	
@@ -252,13 +242,14 @@ func spawnPawn(charID):
 	
 	usedCharIDsToday[charID] = true
 	
+	newPawn.pawnTypeID = pawnTypeID
 	newPawn.onSpawn()
 	return newPawn
 
-func spawnPawnIfNeeded(charID):
+func spawnPawnIfNeeded(charID, pawnTypeID:String=""):
 	if(hasPawn(charID)):
 		return getPawn(charID)
-	return spawnPawn(charID)
+	return spawnPawn(charID, pawnTypeID)
 
 func deletePawn(charID):
 	if(charID == null):
@@ -268,9 +259,8 @@ func deletePawn(charID):
 		return
 	stopInteractionsForPawnID(charID)
 	
-	var pawn = pawns[charID]
-	if(pawn.isSlaveToPlayer()):
-		pawn.getNpcSlavery().onPawnDeleted(pawn)
+	var pawn:CharacterPawn = pawns[charID]
+	pawn.onDelete()
 	
 	pawn.isDeleted = true
 	var loc = pawn.getLocation()
@@ -515,71 +505,36 @@ func areInteractionsDisabled() -> bool:
 func getPawnCount() -> int:
 	return pawns.size()
 
-func getPawnDistribution() -> Dictionary:
-	return pawnDistribution
-
-func trySpawnPawn(specificCharType = null):
-	var randomCharType = specificCharType
-	if(randomCharType == null):
-		randomCharType = RNG.pickWeightedDict(pawnDistribution)
-		
+func calculatePawnDistribution() -> Dictionary:
+	var result:Dictionary = {}
 	
-	var pool := ""
-	if(randomCharType == CharacterType.Inmate):
-		pool = CharacterPool.Inmates
-	if(randomCharType == CharacterType.Guard):
-		pool = CharacterPool.Guards
-	if(randomCharType == CharacterType.Nurse):
-		pool = CharacterPool.Nurses
-	if(randomCharType == CharacterType.Engineer):
-		pool = CharacterPool.Engineers
-		
-	if(pool == ""):
+	for pawnTypeID in GlobalRegistry.getPawnTypes():
+		var pawnType = GlobalRegistry.getPawnType(pawnTypeID)
+		result[pawnTypeID] = pawnType.getDistributionWeight()
+	
+	return result
+
+
+func trySpawnPawn(specificPawnType = null):
+	var randomPawnType = specificPawnType
+	if(randomPawnType == null):
+		randomPawnType = RNG.pickWeightedDict(pawnDistribution)
+		if(randomPawnType == null):
+			return false
+	
+	var pawnType:PawnTypeBase = GlobalRegistry.getPawnType(randomPawnType)
+	if(pawnType == null || !pawnType.shouldSpawnPawns()):
 		return false
 	
-	var possibleCharIds:Array = GM.main.getDynamicCharacterIDsFromPool(pool)
-	
-	var chanceMeetOld = NpcFinder.chanceToMeetOldNPC(pool)
-	
-	var tryCount:int = 10
-	if(!RNG.chance(chanceMeetOld) || possibleCharIds.size() <= 0):
-		tryCount = 0
-	while(tryCount > 0):
-		tryCount -= 1
-		
-		var randomCharID = RNG.pick(possibleCharIds)
-		
-		if(usedCharIDsToday.has(randomCharID)):
-			continue
-		if(hasPawn(randomCharID)):
-			continue
-		var character = GlobalRegistry.getCharacter(randomCharID)
-		if(character.shouldBeExcludedFromEncounters()):
-			continue
-		
-		spawnPawn(randomCharID)
+	var pickedRandomCharID:String = pawnType.tryPickCharacterID()
+	if(pickedRandomCharID != ""):
+		spawnPawn(pickedRandomCharID, randomPawnType)
 		return true
 	
-	if(GM.main.getEncounterSettings().doesPreferKnownEncounters()):
-		return false
 	# Generating a new npc
-	var genID:String = ""
-	var generator = null
-	
-	if(randomCharType == CharacterType.Inmate):
-		generator = InmateGenerator.new()
-	elif(randomCharType == CharacterType.Guard):
-		generator = GuardGenerator.new()
-	elif(randomCharType == CharacterType.Nurse):
-		generator = NurseGenerator.new()
-	elif(randomCharType == CharacterType.Engineer):
-		generator = EngineerGenerator.new()
-	
-	if(generator != null):
-		genID = NpcFinder.generateNpcForPool(pool, generator)
-		
-	if(genID != ""):
-		spawnPawn(genID)
+	var generatedRandomCharID:String = pawnType.generateCharacterID()
+	if(generatedRandomCharID != ""):
+		spawnPawn(generatedRandomCharID, randomPawnType)
 		return true
 	
 	return false
@@ -590,6 +545,8 @@ func processAllPawnsNoInteractions(howManySeconds:int):
 	interactionsDisabled = false
 
 func spawnMorningWave():
+	if(pawnDistribution.empty()):
+		return
 	var howManyToSpawnF:float = getMaxPawnCount()
 	howManyToSpawnF *= RNG.randf_range(0.7, 0.9)
 	var howManyToSpawn:int = int(howManyToSpawnF)
@@ -669,3 +626,8 @@ func getAvailableNursesAmount() -> int:
 			result += 1
 	
 	return result
+
+func wasCharIDUsedToday(charID:String) -> bool:
+	if(usedCharIDsToday.has(charID)):
+		return true
+	return false

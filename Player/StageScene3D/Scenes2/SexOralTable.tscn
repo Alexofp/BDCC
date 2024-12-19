@@ -1,0 +1,428 @@
+[gd_scene load_steps=106 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes2/SexOralTable.gd" type="Script" id=4]
+[ext_resource path="res://Player/Props/Chain.png" type="Texture" id=5]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=504]
+animation = "SexOralTableGrindFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=505]
+animation = "SexOralTableGrind_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=506]
+animation = "SexOralTableHover_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=507]
+animation = "SexOralTableLick_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=508]
+animation = "SexOralTablePeeFem_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=509]
+animation = "SexOralTablePeeMale_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=510]
+animation = "SexOralTableRub_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=511]
+animation = "SexOralTableStroke_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=512]
+animation = "SexOralTableSuckFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=513]
+animation = "SexOralTableSuckInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=514]
+animation = "SexOralTableSuck_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=515]
+animation = "SexOralTableTease_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=516]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=517]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=518]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=519]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=520]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=521]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=522]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=523]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=524]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=525]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=526]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=527]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=528]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=529]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=530]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=531]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=532]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=533]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=534]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=535]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=536]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=537]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=538]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=539]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=540]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=541]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=542]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=543]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=544]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=545]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=546]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=547]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=551]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=552]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=548]
+states/SexOralTableGrindFast_1-loop/node = SubResource( 504 )
+states/SexOralTableGrindFast_1-loop/position = Vector2( 1056, 403 )
+states/SexOralTableGrind_1-loop/node = SubResource( 505 )
+states/SexOralTableGrind_1-loop/position = Vector2( 1048, 311 )
+states/SexOralTableHover_1-loop/node = SubResource( 506 )
+states/SexOralTableHover_1-loop/position = Vector2( 876, 219 )
+states/SexOralTableLick_1-loop/node = SubResource( 507 )
+states/SexOralTableLick_1-loop/position = Vector2( 765, 311 )
+states/SexOralTablePeeFem_1-loop/node = SubResource( 508 )
+states/SexOralTablePeeFem_1-loop/position = Vector2( 869, 73 )
+states/SexOralTablePeeMale_1-loop/node = SubResource( 509 )
+states/SexOralTablePeeMale_1-loop/position = Vector2( 140, 85 )
+states/SexOralTableRub_1-loop/node = SubResource( 510 )
+states/SexOralTableRub_1-loop/position = Vector2( 869, 150 )
+states/SexOralTableStroke_1-loop/node = SubResource( 511 )
+states/SexOralTableStroke_1-loop/position = Vector2( 140, 165 )
+states/SexOralTableSuckFast_1-loop/node = SubResource( 512 )
+states/SexOralTableSuckFast_1-loop/position = Vector2( 445, 336 )
+states/SexOralTableSuckInside_1-loop/node = SubResource( 513 )
+states/SexOralTableSuckInside_1-loop/position = Vector2( 140, 241 )
+states/SexOralTableSuck_1-loop/node = SubResource( 514 )
+states/SexOralTableSuck_1-loop/position = Vector2( 445, 255 )
+states/SexOralTableTease_1-loop/node = SubResource( 515 )
+states/SexOralTableTease_1-loop/position = Vector2( 486, 95 )
+transitions = [ "SexOralTableTease_1-loop", "SexOralTablePeeMale_1-loop", SubResource( 516 ), "SexOralTablePeeMale_1-loop", "SexOralTableTease_1-loop", SubResource( 517 ), "SexOralTableStroke_1-loop", "SexOralTableTease_1-loop", SubResource( 518 ), "SexOralTableTease_1-loop", "SexOralTableStroke_1-loop", SubResource( 519 ), "SexOralTableTease_1-loop", "SexOralTableSuck_1-loop", SubResource( 520 ), "SexOralTableSuck_1-loop", "SexOralTableTease_1-loop", SubResource( 521 ), "SexOralTableSuck_1-loop", "SexOralTableSuckFast_1-loop", SubResource( 522 ), "SexOralTableSuckFast_1-loop", "SexOralTableSuck_1-loop", SubResource( 523 ), "SexOralTableSuckInside_1-loop", "SexOralTableSuck_1-loop", SubResource( 524 ), "SexOralTableSuck_1-loop", "SexOralTableSuckInside_1-loop", SubResource( 525 ), "SexOralTableSuckInside_1-loop", "SexOralTableSuckFast_1-loop", SubResource( 526 ), "SexOralTableSuckFast_1-loop", "SexOralTableSuckInside_1-loop", SubResource( 527 ), "SexOralTableSuckInside_1-loop", "SexOralTableTease_1-loop", SubResource( 528 ), "SexOralTableTease_1-loop", "SexOralTableSuckInside_1-loop", SubResource( 529 ), "SexOralTableTease_1-loop", "SexOralTablePeeFem_1-loop", SubResource( 530 ), "SexOralTablePeeFem_1-loop", "SexOralTableTease_1-loop", SubResource( 531 ), "SexOralTableTease_1-loop", "SexOralTableRub_1-loop", SubResource( 532 ), "SexOralTableRub_1-loop", "SexOralTableTease_1-loop", SubResource( 533 ), "SexOralTableTease_1-loop", "SexOralTableHover_1-loop", SubResource( 534 ), "SexOralTableHover_1-loop", "SexOralTableTease_1-loop", SubResource( 535 ), "SexOralTableHover_1-loop", "SexOralTableLick_1-loop", SubResource( 536 ), "SexOralTableLick_1-loop", "SexOralTableHover_1-loop", SubResource( 537 ), "SexOralTableHover_1-loop", "SexOralTableGrind_1-loop", SubResource( 538 ), "SexOralTableGrind_1-loop", "SexOralTableHover_1-loop", SubResource( 539 ), "SexOralTableGrind_1-loop", "SexOralTableGrindFast_1-loop", SubResource( 540 ), "SexOralTableGrindFast_1-loop", "SexOralTableGrind_1-loop", SubResource( 541 ), "SexOralTableLick_1-loop", "SexOralTableGrind_1-loop", SubResource( 542 ), "SexOralTableGrind_1-loop", "SexOralTableLick_1-loop", SubResource( 543 ), "SexOralTablePeeFem_1-loop", "SexOralTableRub_1-loop", SubResource( 544 ), "SexOralTableRub_1-loop", "SexOralTablePeeFem_1-loop", SubResource( 545 ), "SexOralTablePeeMale_1-loop", "SexOralTableStroke_1-loop", SubResource( 546 ), "SexOralTableStroke_1-loop", "SexOralTablePeeMale_1-loop", SubResource( 547 ), "SexOralTableRub_1-loop", "SexOralTableHover_1-loop", SubResource( 551 ), "SexOralTableHover_1-loop", "SexOralTableRub_1-loop", SubResource( 552 ) ]
+start_node = "SexOralTableTease_1-loop"
+graph_offset = Vector2( -2, -28 )
+
+[sub_resource type="AnimationNodeBlendTree" id=549]
+graph_offset = Vector2( -311.69, 13.9555 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 548 )
+nodes/StateMachine/position = Vector2( 249.31, 108.955 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=460]
+
+[sub_resource type="AnimationNodeAnimation" id=553]
+animation = "SexOralTableGrindFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=554]
+animation = "SexOralTableGrind_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=555]
+animation = "SexOralTableHover_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=556]
+animation = "SexOralTableLick_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=557]
+animation = "SexOralTablePeeFem_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=558]
+animation = "SexOralTablePeeMale_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=559]
+animation = "SexOralTableRub_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=560]
+animation = "SexOralTablePeeMale_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=561]
+animation = "SexOralTableSuckFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=562]
+animation = "SexOralTableSuckInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=563]
+animation = "SexOralTableSuck_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=564]
+animation = "SexOralTableTease_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=565]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=566]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=567]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=568]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=569]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=570]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=571]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=572]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=573]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=574]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=575]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=576]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=577]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=578]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=579]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=580]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=581]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=582]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=583]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=584]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=585]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=586]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=587]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=588]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=589]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=590]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=591]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=592]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=593]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=594]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=595]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=596]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=597]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=598]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=599]
+states/SexOralTableGrindFast_2-loop/node = SubResource( 553 )
+states/SexOralTableGrindFast_2-loop/position = Vector2( 978, 360 )
+states/SexOralTableGrind_2-loop/node = SubResource( 554 )
+states/SexOralTableGrind_2-loop/position = Vector2( 980, 288 )
+states/SexOralTableHover_2-loop/node = SubResource( 555 )
+states/SexOralTableHover_2-loop/position = Vector2( 816, 194 )
+states/SexOralTableLick_2-loop/node = SubResource( 556 )
+states/SexOralTableLick_2-loop/position = Vector2( 714, 294 )
+states/SexOralTablePeeFem_2-loop/node = SubResource( 557 )
+states/SexOralTablePeeFem_2-loop/position = Vector2( 902, 28 )
+states/SexOralTablePeeMale_2-loop/node = SubResource( 558 )
+states/SexOralTablePeeMale_2-loop/position = Vector2( 119, 41 )
+states/SexOralTableRub_2-loop/node = SubResource( 559 )
+states/SexOralTableRub_2-loop/position = Vector2( 902, 100 )
+states/SexOralTableStroke_2-loop/node = SubResource( 560 )
+states/SexOralTableStroke_2-loop/position = Vector2( 119, 129 )
+states/SexOralTableSuckFast_2-loop/node = SubResource( 561 )
+states/SexOralTableSuckFast_2-loop/position = Vector2( 388, 274 )
+states/SexOralTableSuckInside_2-loop/node = SubResource( 562 )
+states/SexOralTableSuckInside_2-loop/position = Vector2( 102, 194 )
+states/SexOralTableSuck_2-loop/node = SubResource( 563 )
+states/SexOralTableSuck_2-loop/position = Vector2( 406, 194 )
+states/SexOralTableTease_2-loop/node = SubResource( 564 )
+states/SexOralTableTease_2-loop/position = Vector2( 537, 36 )
+transitions = [ "SexOralTableTease_2-loop", "SexOralTablePeeMale_2-loop", SubResource( 565 ), "SexOralTablePeeMale_2-loop", "SexOralTableTease_2-loop", SubResource( 566 ), "SexOralTablePeeMale_2-loop", "SexOralTableStroke_2-loop", SubResource( 567 ), "SexOralTableStroke_2-loop", "SexOralTablePeeMale_2-loop", SubResource( 568 ), "SexOralTableStroke_2-loop", "SexOralTableTease_2-loop", SubResource( 569 ), "SexOralTableTease_2-loop", "SexOralTableStroke_2-loop", SubResource( 570 ), "SexOralTableSuckInside_2-loop", "SexOralTableTease_2-loop", SubResource( 571 ), "SexOralTableTease_2-loop", "SexOralTableSuckInside_2-loop", SubResource( 572 ), "SexOralTableTease_2-loop", "SexOralTableSuck_2-loop", SubResource( 573 ), "SexOralTableSuck_2-loop", "SexOralTableTease_2-loop", SubResource( 574 ), "SexOralTableSuck_2-loop", "SexOralTableSuckFast_2-loop", SubResource( 575 ), "SexOralTableSuckFast_2-loop", "SexOralTableSuck_2-loop", SubResource( 576 ), "SexOralTableSuckInside_2-loop", "SexOralTableSuck_2-loop", SubResource( 577 ), "SexOralTableSuck_2-loop", "SexOralTableSuckInside_2-loop", SubResource( 578 ), "SexOralTableSuckInside_2-loop", "SexOralTableSuckFast_2-loop", SubResource( 579 ), "SexOralTableSuckFast_2-loop", "SexOralTableSuckInside_2-loop", SubResource( 580 ), "SexOralTableTease_2-loop", "SexOralTablePeeFem_2-loop", SubResource( 581 ), "SexOralTablePeeFem_2-loop", "SexOralTableTease_2-loop", SubResource( 582 ), "SexOralTablePeeFem_2-loop", "SexOralTableRub_2-loop", SubResource( 583 ), "SexOralTableRub_2-loop", "SexOralTablePeeFem_2-loop", SubResource( 584 ), "SexOralTableTease_2-loop", "SexOralTableRub_2-loop", SubResource( 585 ), "SexOralTableRub_2-loop", "SexOralTableTease_2-loop", SubResource( 586 ), "SexOralTableHover_2-loop", "SexOralTableTease_2-loop", SubResource( 587 ), "SexOralTableTease_2-loop", "SexOralTableHover_2-loop", SubResource( 588 ), "SexOralTableHover_2-loop", "SexOralTableLick_2-loop", SubResource( 589 ), "SexOralTableLick_2-loop", "SexOralTableHover_2-loop", SubResource( 590 ), "SexOralTableHover_2-loop", "SexOralTableGrind_2-loop", SubResource( 591 ), "SexOralTableGrind_2-loop", "SexOralTableHover_2-loop", SubResource( 592 ), "SexOralTableGrind_2-loop", "SexOralTableGrindFast_2-loop", SubResource( 593 ), "SexOralTableGrindFast_2-loop", "SexOralTableGrind_2-loop", SubResource( 594 ), "SexOralTableLick_2-loop", "SexOralTableGrind_2-loop", SubResource( 595 ), "SexOralTableGrind_2-loop", "SexOralTableLick_2-loop", SubResource( 596 ), "SexOralTableRub_2-loop", "SexOralTableHover_2-loop", SubResource( 597 ), "SexOralTableHover_2-loop", "SexOralTableRub_2-loop", SubResource( 598 ) ]
+start_node = "SexOralTableTease_2-loop"
+graph_offset = Vector2( -66, -88 )
+
+[sub_resource type="AnimationNodeBlendTree" id=550]
+graph_offset = Vector2( -322.532, 74.6842 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 599 )
+nodes/StateMachine/position = Vector2( 160, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=473]
+
+[node name="SexOralTable" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.317465, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.708818, -0.041567, 0 )
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.709098, -0.042, 0.01 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 549 )
+anim_player = NodePath("../Doll3D/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 460 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 550 )
+anim_player = NodePath("../Doll3D2/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 473 )
+
+[node name="Sprite3D2" type="Sprite3D" parent="." index="5"]
+transform = Transform( 0.42, 0, 0, 0, 1, 0, 0, 0, 1, -1.54306, 2.53924, -0.435553 )
+modulate = Color( 0.34902, 0.34902, 0.34902, 1 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Sprite3D5" type="Sprite3D" parent="." index="6"]
+transform = Transform( 0.0182492, 1.49989, 0, -1.49989, 0.0182492, 0, 0, 0, 1.5, -1.36763, 1.00635, 0.541345 )
+texture = ExtResource( 5 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[node name="Sprite3D3" type="Sprite3D" parent="." index="7"]
+transform = Transform( 0.049, 0, 0, 0, 6.956, 0, 0, 0, 1, -1.46344, 0.383517, -3.26151 )
+modulate = Color( 0.34902, 0.34902, 0.34902, 1 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]
+[editable path="Doll3D2"]
+[editable path="Doll3D2/DollSkeleton"]
+[editable path="Doll3D2/DollSkeleton2"]

@@ -158,3 +158,7 @@ func onDynamicNpcCreation(_npc, _args):
 	#_npc.pickedSkinBColor = Color.pink
 	#_npc.pickedSkin = "EmptySkin"
 	pass
+
+# Disables ability to generate npcs of this species with a mane
+func supportsMane():
+	return false

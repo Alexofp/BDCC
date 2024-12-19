@@ -12,6 +12,7 @@ enum {
 	SoldByUnderwearVendomat,
 	SoldByTheAnnouncer,
 	SoldByAlexRynard,
+	SoldByMirri,
 	ChastityCage,
 	Strapon,
 	BreastPump,
@@ -19,6 +20,7 @@ enum {
 	PenisPump,
 	PenisPumpUsableByNPC,
 	SexEngineDrug,
+	SexEngineCanApply,
 	Hypnovisor,
 	
 	GuardUniform,
@@ -54,6 +56,7 @@ const tagNames = [
 	"SoldByUnderwearVendomat",
 	"SoldByTheAnnouncer",
 	"SoldByAlexRynard",
+	"SoldByMirri",
 	"ChastityCage",
 	"Strapon",
 	"BreastPump",
@@ -61,6 +64,7 @@ const tagNames = [
 	"PenisPump",
 	"PenisPumpUsableByNPC",
 	"SexEngineDrug",
+	"SexEngineCanApply",
 	"Hypnovisor",
 	
 	"GuardUniform",

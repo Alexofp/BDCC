@@ -11,6 +11,8 @@ func isPossible(_sexEngine, _domInfo, _subInfo, _data):
 		return false
 	if(_domInfo.getChar().hasBoundArms() || _domInfo.getChar().hasBlockedHands()):
 		return false
+	if(!_subInfo.getChar().canZoneOrgasm(BodypartSlot.Penis)):
+		return false
 	
 	return true
 
@@ -20,6 +22,7 @@ func getSubGoals(_sexEngine, _domInfo, _subInfo, _data):
 		SexGoal.SubUndressSub: 1.0,
 		SexGoal.SubUndressDom: 1.0,
 		SexGoal.SubOptionalCondomOnSub: 0.5,
+		SexGoal.SubOptionalApplyLubeOnDom: 0.1,
 	}
 
 func getGoalDefaultWeight():

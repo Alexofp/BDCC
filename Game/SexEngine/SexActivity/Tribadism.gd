@@ -67,8 +67,8 @@ func processTurn():
 		])
 		affectSub(subInfo.fetishScore({Fetish.Tribadism: 1.0}), 0.1, -0.1, -0.01)
 		affectDom(domInfo.fetishScore({Fetish.Tribadism: 1.0}), 0.1, -0.03)
-		subInfo.addArousalSex(0.1)
-		domInfo.addArousalSex(0.1)
+		subInfo.stimulateArousalZone(0.1, BodypartSlot.Vagina, 0.5)
+		domInfo.stimulateArousalZone(0.1, BodypartSlot.Vagina, 0.5)
 		
 		if(OPTIONS.isContentEnabled(ContentType.CumStealing) && getDom().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) == null && getSub().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) == null):
 			if(RNG.chance(20) && getDom().bodypartShareFluidsWith(BodypartSlot.Vagina, subID, BodypartSlot.Vagina, 0.2)):
@@ -139,12 +139,30 @@ func getDomActions():
 
 	return actions
 
+func doCheckDoubleOrgasm():
+	if(domInfo.isReadyToCum() && isHandlingDomOrgasms()):
+		if(subInfo.isReadyToCum() && isHandlingSubOrgasms()):
+			getDom().cumOnFloor()
+			domInfo.cum()
+			sendSexEvent(SexEvent.UniqueOrgasm, subID, domID, {orgasmType="feet"})
+			getSub().cumOnFloor(domID)
+			subInfo.cum()
+			sendSexEvent(SexEvent.UniqueOrgasm, domID, subID, {orgasmType="trib"})
+			return combineData({text="[b]Double orgasm![/b]"}, combineData(getGenericDomOrgasmData(), getGenericSubOrgasmData()))
+	return null
+	
 func doDomAction(_id, _actionInfo):
 	if(_id == "cum"):
+		subInfo.stimulateArousalZone(0.2, BodypartSlot.Vagina, 1.0)
+		var doubleOrgasm = doCheckDoubleOrgasm()
+		if(doubleOrgasm != null):
+			satisfyGoals()
+			return doubleOrgasm
+		
 		cumAmount += 1
 		if(cumAmount >= 2):
 			satisfyGoals()
-		subInfo.addArousalSex(0.2)
+		
 		getDom().cumOnFloor()
 		domInfo.cum()
 		sendSexEvent(SexEvent.UniqueOrgasm, subID, domID, {orgasmType="feet"})
@@ -232,10 +250,16 @@ func getSubResistChance(baseChance, domAngerRemoval):
 
 func doSubAction(_id, _actionInfo):
 	if(_id == "cum"):
+		domInfo.stimulateArousalZone(0.2, BodypartSlot.Vagina, 1.0)
+		var doubleOrgasm = doCheckDoubleOrgasm()
+		if(doubleOrgasm != null):
+			satisfyGoals()
+			return doubleOrgasm
+		
 		cumAmount += 1
 		if(cumAmount >= 2):
 			satisfyGoals()
-		domInfo.addArousalSex(0.2)
+		
 		getSub().cumOnFloor(domID)
 		subInfo.cum()
 		sendSexEvent(SexEvent.UniqueOrgasm, domID, subID, {orgasmType="trib"})

@@ -561,7 +561,7 @@ func processTurn():
 	for activity in activities:
 		if(activity.hasEnded):
 			continue
-		var processResult = processData(activity.processTurn(), activity.domID, activity.subID)
+		var processResult = processData(activity.processTurnFinal(), activity.domID, activity.subID)
 		if(processResult != null):
 			processedDatas.append(processResult)
 
@@ -690,7 +690,7 @@ func processAIActions(isDom = true, playerIsHypnotized = false):
 			if(activity.hasEnded):
 				continue
 			if(activity.domID == personID):
-				var domActions = activity.getDomActions()
+				var domActions = activity.getDomActionsFinal()
 				if(domActions != null):
 					for action in domActions:
 						var score = 1.0
@@ -707,7 +707,7 @@ func processAIActions(isDom = true, playerIsHypnotized = false):
 						actionsScores.append(score)
 				
 			if(activity.subID == personID):
-				var subActions = activity.getSubActions()
+				var subActions = activity.getSubActionsFinal()
 				if(subActions != null):
 					for action in subActions:
 						var score = 1.0
@@ -767,7 +767,7 @@ func processAIActions(isDom = true, playerIsHypnotized = false):
 	#	endSex()
 
 func doDomAction(activity, action):
-	var actionResult = processData(activity.doDomAction(action["id"], action), activity.domID, activity.subID)
+	var actionResult = processData(activity.doDomActionFinal(action["id"], action), activity.domID, activity.subID)
 	if(activity.hasEnded):
 		actionResult = combineData(actionResult, reactToActivityEnd(activity))
 	actionResult = combineData(actionResult, getExtraData())
@@ -776,7 +776,7 @@ func doDomAction(activity, action):
 
 
 func doSubAction(activity, action):
-	var actionResult = processData(activity.doSubAction(action["id"], action), activity.domID, activity.subID)
+	var actionResult = processData(activity.doSubActionFinal(action["id"], action), activity.domID, activity.subID)
 	if(activity.hasEnded):
 		actionResult = combineData(actionResult, reactToActivityEnd(activity))
 	actionResult = combineData(actionResult, getExtraData())
@@ -834,7 +834,7 @@ func getActions():
 		if(activity.hasEnded):
 			continue
 		if(activity.domID == "pc" && getDomInfo("pc").canDoActions()):
-			var domActions = activity.getDomActions()
+			var domActions = activity.getDomActionsFinal()
 			if(domActions != null):
 				for action in domActions:
 					result.append({
@@ -848,7 +848,7 @@ func getActions():
 						priority = getSafeValueFromDict(action, "priority", 0),
 					})
 		if(activity.subID == "pc" && getSubInfo("pc").canDoActions()):
-			var subActions = activity.getSubActions()
+			var subActions = activity.getSubActionsFinal()
 			if(subActions != null):
 				for action in subActions:
 					result.append({
@@ -1321,7 +1321,27 @@ func getSexResult():
 	return sexResult
 
 func isBondageDisabled() -> bool:
-	return bondageDisabled
+	return bondageDisabled || (GM.main.getEncounterSettings().getGoalWeight(SexGoal.TieUp) <= 0.0)
+
+func hasWallsNearby() -> bool:
+	var locToCheck:String = ""
+	if(doms.has("pc") || subs.has("pc")):
+		locToCheck = GM.pc.getLocation()
+	elif(GM.main != null):
+		for domID in doms:
+			if(GM.main.IS.hasPawn(domID)):
+				locToCheck = GM.main.IS.getPawn(domID).getLocation()
+		if(locToCheck == ""):
+			for subID in subs:
+				if(GM.main.IS.hasPawn(subID)):
+					locToCheck = GM.main.IS.getPawn(subID).getLocation()
+	
+	if(locToCheck == ""):
+		return true
+	if(GM.world != null && GM.world.hasWallsNearby(locToCheck)):
+		return true
+	
+	return false
 
 func saveData():
 	var data = {

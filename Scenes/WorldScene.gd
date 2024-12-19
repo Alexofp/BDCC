@@ -53,6 +53,7 @@ func _run():
 	#addButtonAt(5, "Sex Test", "Sex test", "sextest")
 	#addButtonAt(7, "Slave Test", "Slave test", "slavetest")
 	#addButtonAt(7, "Computer test", "Computer test", "comptest")
+	#addButtonAt(7, "Auction test", "test", "auctiontest")
 	#addButtonAt(8, "Hard Computer test", "Computer test", "comptest2")
 	#addButtonAt(8, "Pc override test", "Override test", "overridetest")
 	#addButtonAt(8, "Masochism minigame", "Test", "masochismminigame")
@@ -148,6 +149,8 @@ func _react(_action: String, _args):
 		#getModule("NpcSlaveryModule").doEnslaveCharacter(npcID)
 		runScene("KidnapDynamicNpcScene", [npcID])
 	
+	if(_action == "auctiontest"):
+		runScene("SlaveAuctionScene")
 	if(_action == "comptest"):
 		runScene("ComputerSimScene", ["TaviEngineeringComputer"])
 	if(_action == "comptest2"):

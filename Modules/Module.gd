@@ -41,6 +41,17 @@ var flagsCache = null
 func _init():
 	flagsCache = getFlags()
 
+func getRegisterName() -> String:
+	if(str(author) != "Rahi"):
+		return id+" module by "+str(author)
+	return id+" module"
+
+func preInit(): # Called before anything gets registered
+	pass
+
+func postInit(): # Called after everything is registered
+	pass
+
 func register():
 	for scene in scenes:
 		GlobalRegistry.registerScene(scene, author)

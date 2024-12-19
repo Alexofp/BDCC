@@ -1,0 +1,116 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/World/GameRoom.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/World/SubWorld.tscn" type="PackedScene" id=2]
+
+[node name="BlacktailMarket" instance=ExtResource( 2 )]
+
+[node name="MarketRoom" parent="." index="0" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 0, -64 )
+roomName = "Mirri's Room"
+roomID = "market_intro"
+roomDescription = "You're standing in Mirri's personal room. It's clean here but that might just be the dim lighting. The floor seems to be made out of some kind of dark wood, pleasant to walk on.
+
+A bed, a pretty soft looking one. A sofa, a little coffee table, a chair and a desk with a laptop. There is also a wooden wardrobe in the corner, filled with bondage equipment.
+
+One of the corners has a teleporter installed, a bulky machine with lots of moving parts."
+roomSprite = 1
+roomColor = 7
+
+[node name="MarketRoom2" parent="." index="1" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.6, 1 )
+position = Vector2( 0, -128 )
+roomName = "Corridor"
+roomID = "market_nearmirri"
+roomDescription = "You are following a dark corridor. Red trims follow the slick walls. The main materials are wood and metal with occasional golden accents catching your eye.
+
+Occasionally you meet a painting or two of people that you don't recognize. The thing that unites them is their fur color, all of them have a black or dark-gray fur pattern.
+
+There is a door that leads to Mirri's room here."
+roomColor = 2
+
+[node name="MarketRoom3" parent="." index="2" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.6, 1 )
+position = Vector2( 64, -128 )
+roomName = "Corridor"
+roomID = "market_corridor3"
+roomDescription = "You are following a dark corridor. Red trims follow the slick walls. The main materials are wood and metal with occasional golden accents catching your eye.
+
+Occasionally you meet a painting or two of people that you don't recognize. The thing that unites them is their fur color, all of them have a black or dark-gray fur pattern.
+
+There are doors on both sides of the corridor but all of them seem to be locked."
+roomColor = 2
+
+[node name="MarketRoom4" parent="." index="3" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.6, 1 )
+position = Vector2( 128, -128 )
+roomName = "Corridor"
+roomID = "market_corridor4"
+roomDescription = "You are following a dark corridor. Red trims follow the slick walls. The main materials are wood and metal with occasional golden accents catching your eye.
+
+Occasionally you meet a painting or two of people that you don't recognize. The thing that unites them is their fur color, all of them have a black or dark-gray fur pattern.
+
+The corridor turns here, leading into some kind of big space."
+roomColor = 2
+
+[node name="MarketRoom5" parent="." index="4" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.6, 1 )
+position = Vector2( -64, -128 )
+roomName = "Corridor"
+roomID = "market_corridor2"
+roomDescription = "You are following a dark corridor. Red trims follow the slick walls. The main materials are wood and metal with occasional golden accents catching your eye.
+
+Occasionally you meet a painting or two of people that you don't recognize. The thing that unites them is their fur color, all of them have a black or dark-gray fur pattern.
+
+There are doors on both sides of the corridor but all of them seem to be locked."
+roomColor = 2
+
+[node name="MarketRoom6" parent="." index="5" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.6, 1 )
+position = Vector2( -128, -128 )
+roomName = "Corridor"
+roomID = "market_corridor1"
+roomDescription = "You are following a dark corridor. Red trims follow the slick walls. The main materials are wood and metal with occasional golden accents catching your eye.
+
+Occasionally you meet a painting or two of people that you don't recognize. The thing that unites them is their fur color, all of them have a black or dark-gray fur pattern.
+
+There are doors on both sides of the corridor but all of them seem to be locked."
+roomColor = 2
+
+[node name="MarketRoom7" parent="." index="6" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.6, 1 )
+position = Vector2( -192, -128 )
+roomName = "Corridor end"
+roomID = "market_near_luxe"
+roomDescription = "You are following a dark corridor. Red trims follow the slick walls. The main materials are wood and metal with occasional golden accents catching your eye.
+
+Occasionally you meet a painting or two of people that you don't recognize. The thing that unites them is their fur color, all of them have a black or dark-gray fur pattern.
+
+There is a door at the end of the corridor, this one different from the rest, bigger and more expensive looking."
+canWest = false
+roomColor = 2
+
+[node name="MarketRoom8" parent="." index="7" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( -256, -128 )
+roomName = "Luxe's Office"
+roomID = "market_luxe"
+canEast = false
+roomSprite = 1
+roomColor = 7
+
+[node name="MarketRoom9" parent="." index="8" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 128, -192 )
+roomName = "Blacktail Market"
+roomID = "market_market"
+roomDescription = "What you're standing on looks like a theatrical stage, the black curtains make it obvious. There is a raised platform in one of the corners.
+
+Chains dangle from hooks embedded in the ceiling, clearly designed to hold something or someone.
+
+There is a rig with some powerful projectors above you. All of them are switched off, keeping the space dark.
+
+Feels like this theater can spring into life at any moment. All it needs is some actors."
+roomSprite = 4
+roomColor = 7

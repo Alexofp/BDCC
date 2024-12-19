@@ -42,3 +42,6 @@ func getEggCellOvulationAmount():
 		[6, 4.0],
 		[7, 1.0],
 	]
+
+func supportsMane():
+	return true

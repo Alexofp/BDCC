@@ -116,6 +116,7 @@ roomID = "main_bench3"
 roomDescription = "The platform here has tall railings on the sides and benches facing inwards to watch whatever inmates are being punished."
 canWest = false
 canSouth = false
+loctag_NoWallsNear = true
 population = 3
 
 [node name="MainHallRoom53" parent="." index="11" instance=ExtResource( 2 )]
@@ -132,6 +133,7 @@ roomID = "main_bench4"
 roomDescription = "The platform here has tall railings on the sides and benches facing inwards to watch whatever inmates are being punished."
 canEast = false
 canSouth = false
+loctag_NoWallsNear = true
 population = 3
 
 [node name="MainHallRoom12" parent="." index="13" instance=ExtResource( 2 )]
@@ -141,6 +143,7 @@ roomID = "main_bench1"
 roomDescription = "The platform here has tall railings on the sides and benches facing inwards to watch whatever inmates are being punished."
 canWest = false
 canNorth = false
+loctag_NoWallsNear = true
 population = 3
 
 [node name="MainHallRoom49" parent="." index="14" instance=ExtResource( 2 )]
@@ -151,6 +154,7 @@ roomDescription = "The platform here has tall railings on the sides and benches 
 canNorth = false
 canEast = false
 roomSprite = 1
+loctag_NoWallsNear = true
 population = 3
 
 [node name="MainHallRoom27" parent="." index="15" instance=ExtResource( 2 )]
@@ -560,7 +564,9 @@ self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, 192 )
 roomName = "Main hall"
 roomID = "main_hallroom10"
-roomDescription = "A very spacious hall with a huge raised platform in the middle"
+roomDescription = "The main hall is an incredibly huge room, circling a large raised platform hanging down in the middle. The towering walls of smoothed over rock keep you contained, although you can barely spot places where staff and guards go about their business far above. Railings keep you from the edge of the cavern leading down, and down the central hole below there are foundation supports, electrical cables, netting, other structural equipment and the lights of the cell blocks below. The ceiling stretches past it all and into the darkness above.
+
+There are a set of stairs lead up to the large raised platform in the center of the starship hanger called a main hall."
 roomColor = 8
 population = 3
 

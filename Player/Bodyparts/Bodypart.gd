@@ -8,6 +8,7 @@ var needsProcessing = false
 
 var orifice: Orifice = null
 var fluidProduction: FluidProduction = null
+var sensitiveZone: SensitiveZone = null
 var character: WeakRef = null
 
 var pickedSkin = null
@@ -16,6 +17,9 @@ var pickedGColor = null
 var pickedBColor = null
 
 func _init():
+	pass
+
+func setupSensitiveZone():
 	pass
 
 func getDoll3DScene():
@@ -176,16 +180,22 @@ func clearOrificeFluids():
 	assert(orifice != null)
 	orifice.clear()
 
+func getSensitiveZone():
+	return sensitiveZone
+
 func processTime(_seconds: int):
+	if(sensitiveZone != null):
+		sensitiveZone.processTime(_seconds)
 	if(orifice != null):
 		orifice.processTime(_seconds)
 	if(fluidProduction != null):
 		fluidProduction.processTime(_seconds)
 
 func hoursPassed(_howmuch):
-	if(orifice == null):
-		return
-	orifice.hoursPassed(_howmuch)
+	if(sensitiveZone != null):
+		sensitiveZone.hoursPassed(_howmuch)
+	if(orifice != null):
+		orifice.hoursPassed(_howmuch)
 
 func handleInsertion(size: float, stretchMult = 1.0):
 	if(orifice == null):
@@ -202,6 +212,8 @@ func saveData():
 		result["orificeData"] = orifice.saveData()
 	if(fluidProduction != null):
 		result["fluidProductionData"] = fluidProduction.saveData()
+	if(sensitiveZone != null):
+		result["sensitiveZone"] = sensitiveZone.saveData()
 	if(supportsSkin()):
 		result["pickedSkin"] = pickedSkin
 		if(pickedRColor is Color):
@@ -223,6 +235,11 @@ func loadData(_data):
 		orifice.loadData(SAVE.loadVar(_data, "orificeData", {}))
 	if(fluidProduction != null):
 		fluidProduction.loadData(SAVE.loadVar(_data, "fluidProductionData", {}))
+	if(sensitiveZone != null):
+		if(!_data.has("sensitiveZone") && getCharacter() != null && !getCharacter().isPlayer()):
+			sensitiveZone.generateDataFor(getCharacter())
+		else:
+			sensitiveZone.loadData(SAVE.loadVar(_data, "sensitiveZone", {}))
 	if(supportsSkin()):
 		if(_data.has("pickedSkin")):
 			pickedSkin = SAVE.loadVar(_data, "pickedSkin", null)
@@ -246,6 +263,7 @@ func saveDataNPC():
 		result["orificeData"] = orifice.saveData()
 	if(fluidProduction != null):
 		result["fluidProductionData"] = fluidProduction.saveData()
+	# No reason to save sensitivity zone. Static npcs aren't usually participating in procedural sex
 	return result
 
 func loadDataNPC(_data):
@@ -253,6 +271,7 @@ func loadDataNPC(_data):
 		orifice.loadData(SAVE.loadVar(_data, "orificeData", {}))
 	if(fluidProduction != null):
 		fluidProduction.loadData(SAVE.loadVar(_data, "fluidProductionData", {}))
+	# No reason to load sensitivity zone
 
 func safeWhenExposed():
 	return true
@@ -295,6 +314,8 @@ func npcGenerationWeight(_dynamicCharacter):
 func generateDataFor(_dynamicCharacter):
 	if(orifice != null):
 		orifice.generateDataFor(_dynamicCharacter)
+	if(sensitiveZone != null):
+		sensitiveZone.generateDataFor(_dynamicCharacter)
 	generateRandomColors(_dynamicCharacter)
 	generateRandomSkinIfCan(_dynamicCharacter)
 

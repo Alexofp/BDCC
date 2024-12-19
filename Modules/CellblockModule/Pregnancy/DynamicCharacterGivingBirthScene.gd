@@ -213,6 +213,10 @@ func _react(_action: String, _args):
 		if(GM.main.IS.hasPawn(npcID)):
 			GM.main.IS.stopInteractionsForPawnID(npcID)
 			GM.main.IS.getPawn(npcID).setLocation("medical_nursery")
+		else:
+			GM.main.IS.spawnPawn(npcID)
+			if(GM.main.IS.hasPawn(npcID)):
+				GM.main.IS.getPawn(npcID).setLocation("medical_nursery")
 
 	setState(_action)
 

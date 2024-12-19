@@ -4,6 +4,7 @@ class_name NpcEnslavementQuest
 var npc:WeakRef
 var slaveType = SlaveType.Slut
 var tasks = []
+var forceCompleted:bool = false
 
 # Util
 var canEnslaveReminded = false
@@ -70,7 +71,7 @@ func getQuestProgressText():
 	
 	for task in tasks:
 		var taskString = task.getTaskString()
-		if(task.isCompleted()):
+		if(task.isCompleted() || forceCompleted):
 			result.append("[color=green]"+str(taskString)+"[/color]")
 		else:
 			result.append("[color=red]"+str(taskString)+"[/color]")
@@ -91,6 +92,9 @@ func getQuestStartText():
 	return Util.join(result, "\n")
 
 func isEverythingCompleted():
+	if(forceCompleted):
+		return true
+	
 	for task in tasks:
 		if(!task.isCompleted()):
 			return false
@@ -115,10 +119,15 @@ func checkIfTasksGotCompleted():
 	for task in tasks:
 		task.checkIfCompletedFor(theChar)
 
+func forceComplete():
+	forceCompleted = true
+	onBreakTaskCompleted(null)
+
 func saveData():
 	var data = {
 		"slaveType": slaveType,
 		"canEnslaveReminded": canEnslaveReminded,
+		"forceCompleted": forceCompleted,
 	}
 	var tasksData = []
 	for task in tasks:
@@ -134,6 +143,7 @@ func saveData():
 func loadData(data):
 	slaveType = SAVE.loadVar(data, "slaveType", SlaveType.Slut)
 	canEnslaveReminded = SAVE.loadVar(data, "canEnslaveReminded", false)
+	forceCompleted = SAVE.loadVar(data, "forceCompleted", false)
 	
 	clearTasks()
 	var tasksData = SAVE.loadVar(data, "tasks", [])

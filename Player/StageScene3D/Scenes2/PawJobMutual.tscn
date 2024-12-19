@@ -169,7 +169,7 @@ node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine",
 [sub_resource type="AnimationNodeStateMachinePlayback" id=473]
 
 [node name="PawJobMutual" instance=ExtResource( 2 )]
-transform = Transform( 0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0 )
+transform = Transform( 0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 1.45611, 0 )
 script = ExtResource( 4 )
 
 [node name="Sprite3D" type="Sprite3D" parent="." index="0"]

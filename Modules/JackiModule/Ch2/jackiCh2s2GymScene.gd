@@ -458,7 +458,7 @@ func _run():
 
 			saynn("[say=pc]Yeah. Vitamins for a sporty wolfie.[/say]")
 
-			saynn("You hand her the apple and watch her rub it against the cloth before taking a bite with her sharp claws. And then another. Some juices flowing down her maw.")
+			saynn("You hand her the apple and watch her rub it against the cloth before taking a bite with her sharp teeth. And then another. Some juices flowing down her maw.")
 
 			saynn("[say=jacki]Thankies![/say]")
 

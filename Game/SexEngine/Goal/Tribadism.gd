@@ -9,6 +9,8 @@ func getVisibleName():
 func isPossible(_sexEngine, _domInfo, _subInfo, _data):
 	if(_domInfo.getChar().hasReachableVagina() && _subInfo.getChar().hasReachableVagina()):
 		return true
+	if(!_subInfo.getChar().canZoneOrgasm(BodypartSlot.Vagina) && !_domInfo.getChar().canZoneOrgasm(BodypartSlot.Vagina)):
+		return false
 	
 	return false
 

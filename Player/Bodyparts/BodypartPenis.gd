@@ -8,7 +8,12 @@ func _init():
 	limbSlot = LimbTypes.Penis
 	fluidProduction = CumProduction.new()
 	fluidProduction.bodypart = weakref(self)
+	setupSensitiveZone()
 	needsProcessing = true
+
+func setupSensitiveZone():
+	sensitiveZone = preload("res://Player/SensitiveZone/SensitivePenis.gd").new()
+	sensitiveZone.setBodypart(self)
 
 func getSlot():
 	return BodypartSlot.Penis
@@ -22,6 +27,8 @@ func getTooltipInfo():
 	var theChar = getCharacter()
 	if(GM.pc != null && GM.pc.hasPerk(Perk.BreedExtraTooltipInfo) && theChar != null):
 		result.append("Virility: "+str(Util.roundF(theChar.getVirility()*100.0, 1))+"%")
+	if(sensitiveZone != null):
+		result.append_array(sensitiveZone.getInfo())
 	
 	return Util.join(result, "\n")
 

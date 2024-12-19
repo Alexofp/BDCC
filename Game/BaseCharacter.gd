@@ -379,9 +379,13 @@ func receiveDamage(damageType, amount: int, armorScale: float = 1.0):
 	var newdamage = round(amount * (1.0 + mult))
 	
 	if(amount > 0):
-		var finalArmor = floor(getArmor(damageType) * armorScale)
+		var theArmor = getArmor(damageType)
+		var finalArmor = floor(theArmor * armorScale) if theArmor > 0.0 else floor(theArmor)
 		#newdamage -= finalArmor
-		newdamage = newdamage * (50.0/(50.0+finalArmor)) 
+		if(finalArmor < 0):
+			newdamage = newdamage * (-finalArmor/50.0)
+		else:
+			newdamage = newdamage * (50.0/(50.0+finalArmor)) 
 		newdamage = max(newdamage, 1)
 	
 	if(damageType == DamageType.Physical):
@@ -1486,8 +1490,8 @@ func hasBallsFullOfSeed():
 		return false
 	return production.getFluidLevel() >= 1.0
 
-func getCumInflationLevel():
-	if(!OPTIONS.isContentEnabled(ContentType.CumInflation)):
+func getCumInflationLevel(checkContent:bool=true):
+	if(checkContent && !OPTIONS.isContentEnabled(ContentType.CumInflation)):
 		return 0.0
 	
 	var bodypartsToCalculate = [BodypartSlot.Head, BodypartSlot.Vagina, BodypartSlot.Anus]
@@ -1961,6 +1965,9 @@ func afterOrgasm(_isSexEngine = false):
 		if(production != null):
 			production.fillPercent(buffsHolder.getCustom(BuffAttribute.CumGenerationAfterOrgasm))
 
+	for zone in getSensitiveZones():
+		zone.onOrgasm()
+
 func cumOnFloor(_characterID: String = ""):
 	if(hasBodypart(BodypartSlot.Penis)):
 		var penis:BodypartPenis = getBodypart(BodypartSlot.Penis)
@@ -2311,6 +2318,20 @@ func getCharacterType():
 
 func getCharType():
 	return getCharacterType()
+
+func getCharacterPool():
+	var theCharType = getCharacterType()
+	if(theCharType == CharacterType.Guard):
+		return CharacterPool.Guards
+	if(theCharType == CharacterType.Nurse):
+		return CharacterPool.Nurses
+	if(theCharType == CharacterType.Inmate):
+		return CharacterPool.Inmates
+	if(theCharType == CharacterType.Engineer):
+		return CharacterPool.Engineers
+	if(theCharType == CharacterType.Generic):
+		return null
+	return theCharType
 
 func getBodypartLewdSizeAdjective(bodypartSlot):
 	if(!hasBodypart(bodypartSlot)):
@@ -2998,7 +3019,7 @@ func doStruggleOutOfRestraints(isScared:bool = false, addStats:bool = true, cust
 			possible.append(item)
 	
 	var pickedItem
-	var minigameResult
+	var minigameResult:MinigameResult
 	if(trivial.size() > 0):
 		pickedItem = RNG.pick(trivial)
 		minigameResult = MinigameResult.new()
@@ -3011,6 +3032,9 @@ func doStruggleOutOfRestraints(isScared:bool = false, addStats:bool = true, cust
 			minigameResult.score = min(minigameResult.score, min(1.0, RNG.randf_range(0.6, 1.1)))
 	else:
 		return {}
+	
+	if(customActor != null):
+		minigameResult.beingHelped = true
 	
 	var text = ""
 	var restraintData: RestraintData = pickedItem.getRestraintData()
@@ -3119,22 +3143,26 @@ func addFightExperienceAuto(_otherCharID:String, didWin:bool):
 	
 	var ourLevel:int = getLevel()
 	
+	var autoLevelingSetting:float = OPTIONS.getSandboxNpcLeveling()
+	
 	var mult:float = 1.0
 	
-	if(ourLevel > pcLevel):
-		mult = 1.0/((ourLevel - pcLevel) + 3.0)
-	elif(ourLevel == pcLevel):
-		mult = 0.5
-	else:
-		mult = 1.0 + (pcLevel - ourLevel)*0.5
+	if(autoLevelingSetting > 0.0):
+		if(ourLevel > pcLevel):
+			mult = 1.0/((ourLevel - pcLevel)*autoLevelingSetting + 3.0*autoLevelingSetting)
+		elif(ourLevel == pcLevel):
+			mult = 0.5
+		else:
+			mult = 1.0 + (pcLevel - ourLevel)*0.5*autoLevelingSetting
+		
+		if(ourLevel < otherLevel):
+			mult += (otherLevel - ourLevel) * 0.2
 	
-	if(ourLevel < otherLevel):
-		mult += (otherLevel - ourLevel) * 0.2
-	
-	if(!didWin):
-		mult *= 0.6
-	
-	addExperience(int(round(100.0 * mult)))
+	if(autoLevelingSetting >= 0.0):
+		if(!didWin):
+			mult *= 0.6
+		
+		addExperience(int(round(100.0 * mult)))
 
 func getReputation() -> ReputationPlaceholder:
 	return ReputationPlaceholder.new()
@@ -3162,3 +3190,58 @@ func isGeneralInmate() -> bool:
 
 func isHighSecInmate() -> bool:
 	return isInmate() && getInmateType() == InmateType.HighSec
+
+func getSensitiveZones():
+	var result := []
+	
+	if(hasBodypart(BodypartSlot.Vagina)):
+		var theZone = getBodypart(BodypartSlot.Vagina).getSensitiveZone()
+		if(theZone != null):
+			result.append(theZone)
+	if(hasBodypart(BodypartSlot.Anus)):
+		var theZone = getBodypart(BodypartSlot.Anus).getSensitiveZone()
+		if(theZone != null):
+			result.append(theZone)
+	if(hasBodypart(BodypartSlot.Penis)):
+		var theZone = getBodypart(BodypartSlot.Penis).getSensitiveZone()
+		if(theZone != null):
+			result.append(theZone)
+	if(hasBodypart(BodypartSlot.Breasts)):
+		var theZone = getBodypart(BodypartSlot.Breasts).getSensitiveZone()
+		if(theZone != null):
+			result.append(theZone)
+	return result
+
+func hasOverstimulatedSensitiveZone() -> bool:
+	for zone in getSensitiveZones():
+		if(zone.isOverstimulated()):
+			return true
+	return false
+
+func hasVisiblyOverstimulatedSensitiveZone() -> bool:
+	for zone in getSensitiveZones():
+		if(zone.isVisiblyOverstimulated()):
+			return true
+	return false
+
+func isZoneOverstimulated(bodypartSlot) -> bool:
+	if(!hasBodypart(bodypartSlot)):
+		return false
+	
+	var thePart = getBodypart(bodypartSlot)
+	
+	if(thePart.getSensitiveZone() == null):
+		return false
+	
+	return thePart.getSensitiveZone().isOverstimulated()
+
+func canZoneOrgasm(bodypartSlot) -> bool:
+	if(!hasBodypart(bodypartSlot)):
+		return false
+	
+	var thePart = getBodypart(bodypartSlot)
+	
+	if(thePart.getSensitiveZone() == null):
+		return true
+	
+	return thePart.getSensitiveZone().canOrgasm()

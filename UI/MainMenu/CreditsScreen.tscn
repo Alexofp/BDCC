@@ -31,7 +31,7 @@ size_flags_vertical = 3
 
 [node name="ScrollVBox" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 margin_right = 1268.0
-margin_bottom = 781.0
+margin_bottom = 886.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -57,13 +57,13 @@ margin_bottom = 53.0
 [node name="ContentContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
 margin_top = 57.0
 margin_right = 1268.0
-margin_bottom = 781.0
+margin_bottom = 886.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer"]
 margin_right = 1268.0
-margin_bottom = 693.0
+margin_bottom = 798.0
 custom_fonts/bold_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[center]This game is very early in its development. If you are reading this - thank you!
@@ -86,7 +86,7 @@ Firi (code, [url=https://github.com/Alexofp/BDCC/pull/10]#1[/url] [url=https://g
 Niel (code, [url=https://github.com/Alexofp/BDCC/pull/17]#1[/url])
 PeteTimesSix (visible chains, [url=https://github.com/Alexofp/BDCC/pull/25]#1[/url] [url=https://github.com/Alexofp/BDCC/pull/26]#2[/url] [url=https://github.com/Alexofp/BDCC/pull/27]#3[/url] [url=https://github.com/Alexofp/BDCC/pull/29]#4[/url] [url=https://github.com/Alexofp/BDCC/pull/30]#5[/url] [url=https://github.com/Alexofp/BDCC/pull/31]#6[/url] [url=https://github.com/Alexofp/BDCC/pull/33]#7[/url] [url=https://github.com/Alexofp/BDCC/pull/35]#8[/url] [url=https://github.com/Alexofp/BDCC/pull/36]#9[/url] [url=https://github.com/Alexofp/BDCC/pull/41]#10[/url] [url=https://github.com/Alexofp/BDCC/pull/55]#11[/url])
 Rayforward ([url=https://github.com/Alexofp/BDCC/pull/34]#1[/url] [url=https://github.com/Alexofp/BDCC/pull/37]#2[/url] [url=https://github.com/Alexofp/BDCC/pull/40]#3[/url] [url=https://github.com/Alexofp/BDCC/pull/73]#4[/url] [url=https://github.com/Alexofp/BDCC/pull/74]#5[/url] [url=https://github.com/Alexofp/BDCC/pull/75]#6[/url] [url=https://github.com/Alexofp/BDCC/pull/76]#7[/url] [url=https://github.com/Alexofp/BDCC/pull/77]#8[/url])
-CanInBad ([url=https://github.com/Alexofp/BDCC/pull/39]#1[/url] [url=https://github.com/Alexofp/BDCC/pull/79]#2[/url] [url=https://github.com/Alexofp/BDCC/pull/106]#3[/url] [url=https://github.com/Alexofp/BDCC/pull/107]#4[/url], helping me with the mods browser)
+CanInBad ([url=https://github.com/Alexofp/BDCC/pull/39]#1[/url] [url=https://github.com/Alexofp/BDCC/pull/79]#2[/url] [url=https://github.com/Alexofp/BDCC/pull/106]#3[/url] [url=https://github.com/Alexofp/BDCC/pull/107]#4[/url] [url=https://github.com/Alexofp/BDCC/pull/111]#5[/url], helping me with the mods browser)
 Ranchar ([url=https://github.com/Alexofp/BDCC/pull/42]#1[/url])
 AverageAce (lots of skins, better room descriptions, sprite improvements)
 Dalt ([url=https://github.com/Alexofp/BDCC/pull/43]#1[/url] [url=https://github.com/Alexofp/BDCC/pull/56]#2[/url])
@@ -94,6 +94,11 @@ Disillusioned-Gazer ([url=https://github.com/Alexofp/BDCC/pull/89]#1[/url])
 Sayonix (lots of reported typos)
 Johnvic76 (lots of reported typos)
 PosionFox ([url=https://github.com/Alexofp/BDCC/pull/104]#1[/url])
+CKRainbow ([url=https://github.com/Alexofp/BDCC/pull/112]#1[/url] [url=https://github.com/Alexofp/BDCC/pull/119]#2[/url])
+Friskygote ([url=https://github.com/Alexofp/BDCC/pull/120]#1[/url])
+ScottVictorHalley ([url=https://github.com/Alexofp/BDCC/pull/121]#1[/url])
+whalekys ([url=https://github.com/Alexofp/BDCC/pull/123]#1[/url])
+klorpa ([url=https://github.com/Alexofp/BDCC/pull/125]#1[/url])
 
 The game uses some icons from [url=https://game-icons.net/]game-icons.net[/url] and [url=https://www.flaticon.com/]flaticon.com[/url]
 
@@ -119,7 +124,7 @@ Firi (code, #1 #2 #3 #4 #5)
 Niel (code, #1)
 PeteTimesSix (visible chains, #1 #2 #3 #4 #5 #6 #7 #8 #9 #10 #11)
 Rayforward (#1 #2 #3 #4 #5 #6 #7 #8)
-CanInBad (#1 #2 #3 #4, helping me with the mods browser)
+CanInBad (#1 #2 #3 #4 #5, helping me with the mods browser)
 Ranchar (#1)
 AverageAce (lots of skins, better room descriptions, sprite improvements)
 Dalt (#1 #2)
@@ -127,6 +132,11 @@ Disillusioned-Gazer (#1)
 Sayonix (lots of reported typos)
 Johnvic76 (lots of reported typos)
 PosionFox (#1)
+CKRainbow (#1 #2)
+Friskygote (#1)
+ScottVictorHalley (#1)
+whalekys (#1)
+klorpa (#1)
 
 The game uses some icons from game-icons.net and flaticon.com
 
@@ -135,9 +145,9 @@ Thanks to everyone else who I probably forgot..
 fit_content_height = true
 
 [node name="DonationsLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer"]
-margin_top = 703.0
+margin_top = 808.0
 margin_right = 1268.0
-margin_bottom = 724.0
+margin_bottom = 829.0
 custom_fonts/bold_font = SubResource( 1 )
 bbcode_enabled = true
 fit_content_height = true

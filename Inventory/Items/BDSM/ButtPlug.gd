@@ -19,6 +19,7 @@ func getBuffs():
 	return [
 		buff(Buff.AmbientLustBuff, [10]),
 		buff(Buff.MinLoosenessAnusBuff, [2.0]),
+		buff(Buff.SensitivityGainBuff, [25.0]),
 		buff(Buff.BlocksAnusLeakingBuff),
 		]
 

@@ -2,6 +2,7 @@ extends SexActivityBase
 
 var pumpID = ""
 var timesMilked = 0
+var noticedSore:bool = false
 
 func _init():
 	id = "DomPutBreastPumpOnSub"
@@ -93,6 +94,8 @@ func startActivity(_args):
 			"{dom.You} {dom.youVerb('put')} a "+pumpItem.getCasualName()+" on {sub.you}.",
 		])
 		
+		noticedSore = getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)
+		
 		return {
 			text = text,
 			domSay=domReaction(SexReaction.PutBreastPumpOnSub),
@@ -107,7 +110,8 @@ func processTurn():
 			return
 		
 		affectSub(subInfo.fetishScore({Fetish.Lactation: 1.0})+0.3, 0.1, -0.02, 0.0)
-		subInfo.addArousalForeplay(0.03 + max(0.0, subInfo.fetishScore({Fetish.Lactation: 0.07})))
+		#subInfo.addArousalForeplay(0.03 + max(0.0, subInfo.fetishScore({Fetish.Lactation: 0.07})))
+		subInfo.stimulateArousalZone(0.2, BodypartSlot.Breasts, 1.0)
 		
 		timesMilked += 1
 		var text = ""
@@ -147,10 +151,9 @@ func processTurn():
 				])
 			sendSexEvent(SexEvent.BreastsPumpMilked, domID, subID, {loadSize=0.0, madeLactate=suddenlyLactate})
 		
-		if(timesMilked > 5 && !getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)):
-			if(RNG.chance(10) && !getSub().hasPerk(Perk.MilkNoSoreNipples)):
-				if(getSub().addEffect(StatusEffect.SoreNipplesAfterMilking)):
-					text += " {sub.YourHis} nipples [b]got sore[/b] from so much milking!"
+		if(!noticedSore && getSub().hasPerk(Perk.MilkNoSoreNipples)):
+			noticedSore = true
+			text += " {sub.YourHis} nipples [b]got sore[/b] from so much milking!"
 		
 		if(getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)):
 			var howMuchPainAdd = RNG.randi_range(2, 5)
@@ -216,6 +219,14 @@ func getSubActions():
 		"desc": "Do the cute noise",
 		"priority" : 0,
 	})
+	if(subInfo.isReadyToCum() && isHandlingSubOrgasms()):
+		actions.append({
+			"id": "cum",
+			"score": 1.0,
+			"name": "Cum!",
+			"desc": "You gonna cum.",
+			"priority": 1001,
+		})
 	return actions
 
 func doSubAction(_id, _actionInfo):
@@ -239,6 +250,19 @@ func doSubAction(_id, _actionInfo):
 			subSay=subReaction(SexReaction.SubMoos),
 			
 		}
+	if(_id == "cum"):
+		getSub().cumOnFloor(domID)
+		subInfo.cum()
+		
+		var extraText = ""
+		if(getSub().isLactating()):
+			extraText = ", {sub.yourHis} {sub.breasts} squirt {sub.milk} out from this nipple orgasm"
+		
+		subInfo.stimulateArousalZone(0.0, BodypartSlot.Breasts, 2.0)
+		
+		sendSexEvent(SexEvent.UniqueOrgasm, domID, subID, {orgasmType="breasts"})
+		
+		return getGenericSubOrgasmData(extraText)
 
 func onActivityEnd():
 	var pumpItem = getSub().getInventory().getEquippedItemByUniqueID(pumpID)
@@ -260,6 +284,7 @@ func saveData():
 	
 	data["pumpID"] = pumpID
 	data["timesMilked"] = timesMilked
+	data["noticedSore"] = noticedSore
 
 	return data
 	
@@ -268,3 +293,4 @@ func loadData(data):
 	
 	pumpID = SAVE.loadVar(data, "pumpID", "")
 	timesMilked = SAVE.loadVar(data, "timesMilked", 0)
+	noticedSore = SAVE.loadVar(data, "noticedSore", false)

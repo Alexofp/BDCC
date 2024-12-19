@@ -34,6 +34,36 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Combat/AttackRequirement.gd"
 }, {
+"base": "Reference",
+"class": "AuctionAction",
+"language": "GDScript",
+"path": "res://Game/SlaveAuction/AuctionAction.gd"
+}, {
+"base": "Object",
+"class": "AuctionActionType",
+"language": "GDScript",
+"path": "res://Game/SlaveAuction/AuctionActionType.gd"
+}, {
+"base": "Reference",
+"class": "AuctionBidder",
+"language": "GDScript",
+"path": "res://Game/SlaveAuction/AuctionBidder.gd"
+}, {
+"base": "Object",
+"class": "AuctionSlaveReaction",
+"language": "GDScript",
+"path": "res://Game/SlaveAuction/AuctionSlaveReaction.gd"
+}, {
+"base": "Reference",
+"class": "AuctionTrait",
+"language": "GDScript",
+"path": "res://Game/SlaveAuction/AuctionTrait.gd"
+}, {
+"base": "Object",
+"class": "AuctionTraitType",
+"language": "GDScript",
+"path": "res://Game/SlaveAuction/AuctionTraitType.gd"
+}, {
 "base": "Node",
 "class": "BaseCharacter",
 "language": "GDScript",
@@ -1044,6 +1074,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/InteractionSystem/PawnReactions.gd"
 }, {
+"base": "Reference",
+"class": "PawnTypeBase",
+"language": "GDScript",
+"path": "res://Game/InteractionSystem/PawnTypeBase.gd"
+}, {
 "base": "Object",
 "class": "Perk",
 "language": "GDScript",
@@ -1255,6 +1290,11 @@ _global_script_classes=[ {
 "path": "res://Scenes/SceneBase.gd"
 }, {
 "base": "Reference",
+"class": "SensitiveZone",
+"language": "GDScript",
+"path": "res://Player/SensitiveZone/SensitiveZone.gd"
+}, {
+"base": "Reference",
 "class": "SexActivityBase",
 "language": "GDScript",
 "path": "res://Game/SexEngine/SexActivityBase.gd"
@@ -1378,6 +1418,16 @@ _global_script_classes=[ {
 "class": "SlaveActivityBase",
 "language": "GDScript",
 "path": "res://Game/NpcSlavery/NpcSlaveActivityBase.gd"
+}, {
+"base": "Reference",
+"class": "SlaveAuction",
+"language": "GDScript",
+"path": "res://Game/SlaveAuction/SlaveAuction.gd"
+}, {
+"base": "Reference",
+"class": "SlaveAuctionBidders",
+"language": "GDScript",
+"path": "res://Game/SlaveAuction/SlaveAuctionBidders.gd"
 }, {
 "base": "Reference",
 "class": "SlaveEventBase",
@@ -1560,6 +1610,12 @@ _global_script_class_icons={
 "AttachmentProxy": "",
 "Attack": "",
 "AttackRequirement": "",
+"AuctionAction": "",
+"AuctionActionType": "",
+"AuctionBidder": "",
+"AuctionSlaveReaction": "",
+"AuctionTrait": "",
+"AuctionTraitType": "",
 "BaseCharacter": "",
 "BaseStageScene3D": "",
 "BasicAI": "",
@@ -1762,6 +1818,7 @@ _global_script_class_icons={
 "PartTrait": "",
 "PawnInteractionBase": "",
 "PawnReactions": "",
+"PawnTypeBase": "",
 "Perk": "",
 "PerkBase": "",
 "Personality": "",
@@ -1804,6 +1861,7 @@ _global_script_class_icons={
 "SaveConversion": "",
 "SayParser": "",
 "SceneBase": "",
+"SensitiveZone": "",
 "SexActivityBase": "",
 "SexActivityTag": "",
 "SexDomInfo": "",
@@ -1829,6 +1887,8 @@ _global_script_class_icons={
 "SkinType": "",
 "SlaveActionBase": "",
 "SlaveActivityBase": "",
+"SlaveAuction": "",
+"SlaveAuctionBidders": "",
 "SlaveEventBase": "",
 "SlaveType": "",
 "SlaveTypeBase": "",
@@ -1899,6 +1959,7 @@ gdscript/warnings/unsafe_cast=true
 window/size/width=1280
 window/size/height=720
 window/dpi/allow_hidpi=true
+window/handheld/orientation="sensor_landscape"
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 
@@ -1938,7 +1999,7 @@ texture={
 
 touch={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 gameui_prevpage={

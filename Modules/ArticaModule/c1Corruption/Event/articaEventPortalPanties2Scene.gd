@@ -185,7 +185,7 @@ func _run():
 		addButton("Continue", "See what happens next", "artica_more_horny")
 	if(state == "artica_more_horny"):
 		playAnimation(StageScene.FleshlightSit, "standsex", {pc="artica", bodyState={naked=true, hard=true}})
-		saynn("She carefully pulls the fleshluight off her swollen knot.. gasping as it pops out, leaving her pussy gaping slightly and dripping her own cum. Then, without wasting another moment, Artica positions herself better on the bed, her paw lining up the fleshlight with her cock once more..")
+		saynn("She carefully pulls the fleshlight off her swollen knot.. gasping as it pops out, leaving her pussy gaping slightly and dripping her own cum. Then, without wasting another moment, Artica positions herself better on the bed, her paw lining up the fleshlight with her cock once more..")
 
 		saynn("This time, she thrusts into her pussy rather than stroking her shaft with it, her hips already moving at a steady pace, her tight, slick pussy enveloping her member nicely, all the seed making her love tunnel extra slick..")
 

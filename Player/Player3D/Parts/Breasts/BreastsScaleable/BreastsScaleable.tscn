@@ -114,7 +114,7 @@ bind/26/name = "DeformThigh.R"
 bind/26/bone = -1
 bind/26/pose = Transform( 1.08032e-07, 1, 7.54979e-08, 0.99999, -1.45657e-06, 1.11371e-08, -2.26253e-14, 1.13257e-07, -1, -3.61767, -0.264871, -0.209836 )
 
-[sub_resource type="SpatialMaterial" id=1]
+[sub_resource type="SpatialMaterial" id=103]
 resource_name = "breasts4.png"
 flags_transparent = true
 flags_unshaded = true
@@ -132,7 +132,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 2194903,
 "index_count": 504,
-"material": SubResource( 1 ),
+"material": SubResource( 103 ),
 "primitive": 4,
 "skeleton_aabb": [ AABB( -1.08592, 5.28653, 0.02001, 1.2243, 0.786266, 1.00005e-05 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -1.08592, 5.28653, 0.02001, 1.2243, 1.28, 1.00005e-05 ), AABB( -1.08592, 5.28653, 0.02001, 1.2243, 1.28, 1.00005e-05 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.698868, 6.09698, 0.02001, 0.837254, 0.469549, 1.00005e-05 ), AABB( -0.931098, 5.91258, 0.02001, 0.976349, 0.653948, 1.00005e-05 ) ],
 "vertex_count": 355
@@ -237,12 +237,12 @@ skin = SubResource( 9 )
 visible = false
 mesh = SubResource( 10 )
 skin = SubResource( 11 )
-material/0 = SubResource( 1 )
+material/0 = SubResource( 103 )
 
 [node name="breastsScalable002" type="MeshInstance" parent="." index="2"]
 mesh = SubResource( 10 )
 skin = SubResource( 11 )
-material/0 = SubResource( 1 )
+material/0 = SubResource( 103 )
 script = ExtResource( 4 )
 pattern_start = Vector2( 0, 2 )
 pattern_size = Vector2( 0.5, 0.5 )

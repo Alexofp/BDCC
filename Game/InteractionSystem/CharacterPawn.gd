@@ -3,6 +3,7 @@ class_name CharacterPawn
 
 var location:String = "main_punishment_spot"
 var charID:String = ""
+var pawnTypeID:String = ""
 var isDeleted:bool = false
 
 var currentInteraction
@@ -33,6 +34,7 @@ func saveData():
 		"tslw": timeSinceLastWork,
 		"fe": fightExhaustion,
 		"t": tiredness,
+		"pt": pawnTypeID,
 	}
 	return data
 
@@ -46,12 +48,25 @@ func loadData(_data):
 	timeSinceLastWork = SAVE.loadVar(_data, "tslw", 0)
 	fightExhaustion = SAVE.loadVar(_data, "fe", 0.0)
 	tiredness = SAVE.loadVar(_data, "t", 0.0)
+	pawnTypeID = SAVE.loadVar(_data, "pt", "")
 
 func onSpawn():
 	hunger = RNG.randf_range(0.0, 0.3)
 	timeSinceLastWork = RNG.randi_range(0, 6000)
 	social = RNG.randf_rangeX2(0.0, 0.6)
 	tiredness = RNG.randf_range(0.0, 0.1)
+	
+	var pawnType = getPawnType()
+	if(pawnType != null):
+		pawnType.onPawnSpawned(self)
+
+func onDelete():
+	if(isSlaveToPlayer()):
+		getNpcSlavery().onPawnDeleted(self)
+
+	var pawnType = getPawnType()
+	if(pawnType != null):
+		pawnType.onPawnDeleted(self)
 
 func getChar() -> BaseCharacter:
 	if(charID == ""):
@@ -74,6 +89,10 @@ func setLocation(newLoc:String):
 	GM.main.IS.onPawnMoved(charID, oldLoc, getLocation())
 
 func processTime(_howMuch:int):
+	var pawnType = getPawnType()
+	if(pawnType != null && pawnType.customProcessTimeForPawn(self, _howMuch)):
+		return
+	
 	hunger += float(_howMuch) * hungerPerHour / 3600.0
 	social += float(_howMuch) * socialPerHour / 3600.0
 	recoverExhaustion(float(_howMuch) * fightExhaustionPerHour / 3600.0)
@@ -103,6 +122,10 @@ func getInteraction():
 	return currentInteraction
 
 func checkAloneInteraction():
+	var pawnType = getPawnType()
+	if(pawnType != null && pawnType.customCheckAlonePawnInteraction(self)):
+		return
+	
 	if(currentInteraction == null):
 		if(getExhaustion() > 0.0):
 			GM.main.IS.startInteraction("FightExhaustion", {main = charID}, {})
@@ -121,6 +144,10 @@ func canInterrupt() -> bool:
 	return canBeInterrupted()
 
 func tryInterruptPawns(allPawns:Array, keepScoreMult:float = 1.0):
+	var pawnType = getPawnType()
+	if(pawnType != null && !pawnType.shouldPawnInterruptOtherPawns(self)):
+		return false
+	
 	var allPossible:Array = []
 	var keepScore = getInteraction().getKeepInteractionScoreForCharID(charID) if getInteraction() != null else 0.0
 	allPossible.append([null, keepScore*keepScoreMult])
@@ -152,6 +179,9 @@ func tryInterruptPawns(allPawns:Array, keepScoreMult:float = 1.0):
 	return false
 
 func onMeetWith(_otherPawn, _otherPawnMoved:bool) -> bool:
+	var pawnType = getPawnType()
+	if(pawnType != null):
+		return pawnType.onPawnMeetWith(self, _otherPawn, _otherPawnMoved)
 	return GM.main.IS.checkOnMeetInteractions(self, _otherPawn, _otherPawnMoved)
 
 func getHunger() -> float:
@@ -401,6 +431,12 @@ func getPawnTexture():
 	return RoomStuff.PawnTexture.Masc
 
 func getPawnColor() -> Color:
+	var pawnType = getPawnType()
+	if(pawnType != null):
+		var customColor = pawnType.getCustomPawnColor(self)
+		if(customColor != null):
+			return customColor
+	
 	if(isLilac()):
 		return Color.purple
 	if(isGeneralInmate()):
@@ -658,3 +694,11 @@ func addExperienceIfPlayer(ex: int, showMessage: bool = true):
 	if(showMessage):
 		GM.main.addMessage("You received "+str(ex)+" experience")
 	getChar().addExperience(ex)
+
+func getPawnTypeID() -> String:
+	if(pawnTypeID == "" && getChar() != null):
+		return getChar().getCharType()
+	return pawnTypeID
+
+func getPawnType():
+	return GlobalRegistry.getPawnType(getPawnTypeID())

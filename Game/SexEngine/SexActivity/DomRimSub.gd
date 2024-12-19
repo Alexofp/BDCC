@@ -59,7 +59,7 @@ func processTurn():
 		var text = ""
 		affectDom(domInfo.fetishScore({Fetish.RimmingGiving: 0.5})+0.1, 0.1, 0.0)
 		affectSub(subInfo.fetishScore({Fetish.RimmingReceiving: 1.0})+0.2, 0.1, -0.1, -0.01)
-		subInfo.addArousalSex(0.03)
+		subInfo.stimulateArousalZone(0.05, BodypartSlot.Anus, 0.5)
 		text += RNG.pick([
 			"{dom.You} {dom.youVerb('use')} {dom.yourHis} tongue to lap at {sub.yourHis} most intimate spot, delivering a mix of tantalizing licks and arousing kisses.",
 			"{dom.Your} tongue laps at {sub.yourHis} "+str(getRandomAnusWord())+", creating a steady rhythm of pleasure.",
@@ -155,20 +155,20 @@ func doDomAction(_id, _actionInfo):
 			"{dom.You} {dom.youVerb('thrust')} {dom.yourHis} tongue deeper into {sub.yourHis} "+str(getRandomAnusWord())+".",
 			"{dom.You} {dom.youVerb('use')} {dom.yourHis} tongue to penetrate {sub.yourHis} "+str(getRandomAnusWord())+"."
 		])
-		subInfo.addArousalSex(0.05)
 		if(getSub().hasPenis() && RNG.chance(50)):
 			text += RNG.pick([
 				" The tongue massages {sub.yourHis} prostate so well!",
 				" {dom.YourHis} tongue is reaching {sub.yourHis} prostate and prods it!",
 				" {dom.YourHis} tongue stimulates {sub.yourHis} prostate!"
 			])
-			subInfo.addArousalSex(0.1)
+			subInfo.stimulateArousalZone(0.15, BodypartSlot.Anus, 0.5)
+		else:
+			subInfo.stimulateArousalZone(0.1, BodypartSlot.Anus, 0.5)
 		if(getSub().hasVagina() && RNG.chance(20)):
 			text += RNG.pick([
 				" {dom.YourHis} tongue manages to massage {sub.yourHis} g-spot through the inner wall!",
 				" {sub.YourHis} pussy becomes more wet, receiving some stimulation through the inner wall!"
 			])
-			subInfo.addArousalSex(0.05)
 		if(getSub().hasEffect(StatusEffect.HasCumInsideAnus) && OPTIONS.isContentEnabled(ContentType.CumStealing)):
 			if(RNG.chance(20)):
 				if(getSub().bodypartTransferFluidsTo(BodypartSlot.Anus, domID, BodypartSlot.Head, 0.1, 20.0)):

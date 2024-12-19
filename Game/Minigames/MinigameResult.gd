@@ -5,3 +5,4 @@ var score:float = 0.0
 
 var instantUnlock:bool = false
 var failedHard:bool = false
+var beingHelped:bool = false

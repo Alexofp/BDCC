@@ -335,8 +335,9 @@ func processTime(_secondsPassed):
 		bodyFluids.drain(0.1 * _secondsPassed / 60.0)
 		
 	GM.GES.callGameExtenders(ExtendGame.npcProcessTime, [self, _secondsPassed])
-	lastUpdatedDay = GM.main.getDays()
-	lastUpdatedSecond = GM.main.getTime()
+	#lastUpdatedDay = GM.main.getDays()
+	#lastUpdatedSecond = GM.main.getTime()
+	lastUpdatedSecond += _secondsPassed
 	if(isReadyToGiveBirth()):
 		pregnancyWaitTimer += _secondsPassed
 		if(shouldGiveBirth()):
@@ -528,6 +529,8 @@ func processUntilTime(theday:int, theseconds:int):
 	else:
 		secondsDiff = 24*60*60*dayDiff - lastUpdatedSecond + theseconds
 		
+	var oldHours = int(float(lastUpdatedSecond) / 60 / 60) + lastUpdatedDay*24
+	
 	print("PROCESSED "+str(getID())+" FOR "+str(secondsDiff)+" SECONDS")
 	var oneWeekSeconds = 7*24*60*60
 	var oneDaySeconds = 24*60*60
@@ -549,7 +552,7 @@ func processUntilTime(theday:int, theseconds:int):
 		secondsToProcess -= oneHourSeconds
 	processTime(secondsToProcess)
 	
-	var oldHours = int(float(lastUpdatedSecond) / 60 / 60) + lastUpdatedDay*24
+	
 	var newHours = int(float(theseconds) / 60 / 60) + theday*24
 	var hoursPassed = newHours - oldHours
 	
