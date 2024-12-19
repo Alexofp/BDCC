@@ -134,13 +134,16 @@ func canBeSimpleRemoved() -> bool:
 	return isEverythingCompleted()
 
 func getQuestProgressText():
+	var theChar = getWearer()
 	var result = []
 	
 	for task in tasks:
 		var taskString = task.getTaskStringSlutLock()
 		if(task.isCompleted()):
 			result.append("[color=green]"+str(taskString)+"[/color]")
-		else:
+		elif(theChar == null || task.isPossibleForSlutlock(theChar)):
 			result.append("[color=red]"+str(taskString)+"[/color]")
+		else:
+			result.append("[color=red]"+str(taskString)+" (Impossible)[/color]")
 	
 	return Util.join(result, "\n")
