@@ -6,6 +6,7 @@ var path = []
 var whoLeashingID = ""
 var randomChat = []
 var teleportwhenskipped = true
+var pose = "walk"
 
 func _initScene(_args = []):
 	whoLeashingID = _args[0]
@@ -15,6 +16,8 @@ func _initScene(_args = []):
 		randomChat = _args[3]
 	if (_args.size() > 4):
 		teleportwhenskipped = _args[4]
+	if (_args.size() > 5):
+		pose = _args[5]
 	
 	path = GM.world.calculatePath(startLocation, endLocation)
 	if(path.size() <= 0):
@@ -29,7 +32,7 @@ func _run():
 		
 	if(state == "" || state == "leashed"):
 		if(state == "leashed"):
-			playAnimation(StageScene.Duo, "walk", {npc=whoLeashingID, npcAction="walk", flipNPC=true, bodyState={leashedBy=whoLeashingID}})
+			playAnimation(StageScene.Duo, pose, {npc=whoLeashingID, npcAction="walk", flipNPC=true, bodyState={leashedBy=whoLeashingID}})
 		if(path.size() > 0):
 			aimCameraAndSetLocName(path[0])
 		
@@ -97,6 +100,7 @@ func saveData():
 	data["whoLeashingID"] = whoLeashingID
 	data["randomChat"] = randomChat
 	data["teleportwhenskipped"] = teleportwhenskipped
+	data["pose"] = pose
 
 	return data
 	
@@ -109,6 +113,7 @@ func loadData(data):
 	whoLeashingID = SAVE.loadVar(data, "whoLeashingID", "")
 	randomChat = SAVE.loadVar(data, "randomChat", [])
 	teleportwhenskipped = SAVE.loadVar(data, "teleportwhenskipped", true)
+	pose = SAVE.loadVar(data, "pose", "walk")
 
 func resolveCustomCharacterName(_charID):
 	if(_charID == "leasher" && whoLeashingID != ""):
