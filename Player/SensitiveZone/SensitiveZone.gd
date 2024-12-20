@@ -36,6 +36,10 @@ func getOverstimRecoverModifier() -> float:
 func getLowSensitivityRestoreRate() -> float: # Per day
 	return 0.4 * (1.0 + max(-1.0, getCustomAttribute(BuffAttribute.SensitivityRestoreAll)))
 
+func getHighSensitivityLoseRate() -> float: # Per day
+	return 0.01 * getRawSensitivity() # 1% every day but scales with sensitivity
+
+
 func getName() -> String:
 	return zoneName
 
@@ -66,7 +70,7 @@ func getSensitivity() -> float:
 	return sensitivity + extraSensitivity
 
 func canOrgasm() -> bool:
-	return getSensitivity() >= 0.4
+	return getArousalGainModifier() >= 0.5
 
 func getRawSensitivity() -> float:
 	return sensitivity
@@ -85,15 +89,15 @@ func onOverstimulation():
 	stimulation = 0.0
 
 func stimulate(_howMuch:float = 1.0):
-	if(orgasmModTimer > 0.0): # High sensitivity right after orgasm
-		_howMuch *= (orgasmModTimer*3.0+1.0)
+	if(hasOrgasmEffect()): # High sensitivity right after orgasm
+		_howMuch *= getOrgasmEffect()
 	
-	stimulation += _howMuch / sqrt(1.0 + abs(0.5 - 0.5*sensitivity)) * 0.1 * getStimulationGainModifier()
+	stimulation += min(_howMuch / sqrt(1.0 + abs(0.5 - 0.5*sensitivity)) * 0.1 * getStimulationGainModifier(), 2.0)
 	if(stimulation > 1.0 && stimulation > overstimulation):
 		onOverstimulation()
 	
 	if(isOverstimulated()):
-		sensitivity -= _howMuch * 0.05 * sensitivity * getOverstimSensLoseModifier()
+		sensitivity -= _howMuch * 0.03 * sensitivity * getOverstimSensLoseModifier()
 		if(sensitivity < 0.1):
 			sensitivity = 0.1
 	elif(sensitivity > 0.1):
@@ -107,6 +111,11 @@ func stimulate(_howMuch:float = 1.0):
 
 func onDenyTick():
 	extraSensitivity += 0.01 / (1.0 + extraSensitivity) * getExtraSensGainModifier()
+	if(stimulation < 0.5):
+		stimulation = 0.0
+	else:
+		stimulation *= 0.7
+
 
 func onOrgasm():
 	extraSensitivity = 0.0
@@ -138,6 +147,12 @@ func hoursPassed(_hours:int):
 		sensitivity += partOfDay * getLowSensitivityRestoreRate()
 		if(sensitivity > 1.0):
 			sensitivity = 1.0
+	elif(sensitivity > 1.0):
+		var partOfDay:float = float(_hours) / 24.0
+	
+		sensitivity -= partOfDay * getHighSensitivityLoseRate()
+		if(sensitivity < 1.0):
+			sensitivity = 1.0
 	
 	if(extraSensitivity > 0.0):
 		extraSensitivity -= 0.004 * _hours
@@ -152,6 +167,8 @@ func getInfo() -> Array:
 	result.append("Sensitivity: "+str(Util.roundF(getSensitivity()*100.0, 1))+"%")
 	#result.append("Raw sensitivity: "+str(getRawSensitivity()))
 	result.append("Overstimulation: "+str(Util.roundF(stimulation*100.0 if !isOverstimulated() else getOverstimulation()*100.0, 1))+"%")
+	#result.append("canOrgasm(): "+str(canOrgasm()))
+	#result.append("Arousal mod(): "+str(getArousalGainModifier()))
 	
 	return result
 
@@ -164,6 +181,18 @@ func getMeInfo() -> Array:
 
 func getInfoString() -> String:
 	return Util.join(getInfo(), "\n")
+
+func getStimulation() -> float:
+	return stimulation
+
+func getStimulationOrOverstimulation() -> float:
+	return max(stimulation, getOverstimulation())
+
+func hasOrgasmEffect() -> bool:
+	return orgasmModTimer > 0.0
+	
+func getOrgasmEffect() -> float:
+	return (orgasmModTimer*3.0+1.0)
 
 func generateDataFor(_dynamicCharacter):
 	pass

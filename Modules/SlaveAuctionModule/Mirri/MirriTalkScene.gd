@@ -1686,7 +1686,7 @@ func _run():
 
 		saynn("[say=pc]You're still talking shit?[/say]")
 
-		saynn("Rather than pulling on her hair, you suddenly shove her head into her pillow, muffling her speech. Her claws are scratching the sheets as her body rocks with the force of your thrusts, her pussy squeezing your "+str("toy" if isStrapon else "сщсл")+" each time you ram it into her tight fuckhole."+str(" Going in raw feels so much better." if usedCondom else "")+"")
+		saynn("Rather than pulling on her hair, you suddenly shove her head into her pillow, muffling her speech. Her claws are scratching the sheets as her body rocks with the force of your thrusts, her pussy squeezing your "+str("toy" if isStrapon else "cock")+" each time you ram it into her tight fuckhole."+str(" Going in raw feels so much better." if usedCondom else "")+"")
 
 		addButton("Faster", "Increase the pressure. Increase the pleasure", "dom_hatefuck2_fast")
 	if(state == "dom_hatefuck2_fast"):

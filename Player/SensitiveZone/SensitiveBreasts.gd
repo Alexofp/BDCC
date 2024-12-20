@@ -57,6 +57,3 @@ func generateDataFor(_dynamicCharacter):
 		sensitivity = 1.0 + RNG.randf_range(fetishValue*0.1, fetishValue*3.0)
 	elif(RNG.chance(30)):
 		sensitivity = 0.5 + RNG.randf_range(0.0, 0.5)
-
-func canOrgasm() -> bool:
-	return getSensitivity() >= 2.2
