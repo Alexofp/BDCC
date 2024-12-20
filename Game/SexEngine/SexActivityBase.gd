@@ -756,7 +756,7 @@ func doCumBJFacialsSub(supposedToBeAngry = true):
 
 func doSpitCumIntoHoleDom(bodypartSlot = BodypartSlot.Vagina):
 	var mixtureText = getDom().getBodypartContentsStringList(BodypartSlot.Head)
-	var locationName:String = ("{dom.pussyStretch} "+RNG.pick(["pussy", "slit"]) if bodypartSlot == BodypartSlot.Vagina else ("{sub.anusStretch} "+RNG.pick(["anus"])))
+	var locationName:String = ("{sub.pussyStretch} "+RNG.pick(["pussy", "slit"]) if bodypartSlot == BodypartSlot.Vagina else ("{sub.anusStretch} "+RNG.pick(["anus"])))
 	var text = RNG.pick([
 		"{dom.You} {dom.youVerb('press')} {dom.yourHis} lips against {sub.yourHis} "+locationName+" and [b]{dom.youVerb('spit')} "+mixtureText+" into it[/b]!",
 	])
