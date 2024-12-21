@@ -31,7 +31,46 @@ func getChar() -> BaseCharacter:
 	return GlobalRegistry.getCharacter(charID)
 
 func getInfoString():
-	return ""
+	var character = getChar()
+	
+	var text:String = ""
+	if(character != null):
+		text += character.getName()
+	
+	return text
+
+func getInfoStringFinal() -> String:
+	var text:String = getInfoString()
+	
+	var extraInfo:Array = getExtraInfoLines()
+	if(!extraInfo.empty()):
+		for line in extraInfo:
+			text += "\n - "+str(line)
+	
+	return text
+
+func getExtraInfoLines() -> Array:
+	var result:Array = []
+	
+	var sensitiveZones:Array = getChar().getSensitiveZones()
+	for zone in sensitiveZones:
+		if(zone.shouldShowOverstimualtedTextInSexEngine(self)):
+			var zoneStimulation:float = zone.getStimulationOrOverstimulation()
+			var zoneName:String = zone.getName()
+			var isOrgasmEffect:bool = zone.hasOrgasmEffect()
+			var isBads:bool = (zoneStimulation >= 0.9) || zone.isOverstimulated()
+			var isVeryBads:bool = zone.isOverstimulated()
+			var colorString:String = ("red" if isVeryBads else "#FF9999")
+			var extraTexts:Array = []
+			if(isOrgasmEffect):
+				extraTexts.append("orgasm")
+			if(!zone.canOrgasm()):
+				extraTexts.append("not sensitive enough to cum")
+			
+			result.append(zoneName+" overstimulation: "+("[color="+colorString+"]" if isBads else "")+str(Util.roundF(zoneStimulation*100.0, 1))+"%"+("[/color]" if isBads else "")+(" ("+Util.join(extraTexts, ", ")+")" if extraTexts.size() > 0 else ""))
+	
+	
+	return result
 
 func initFromPersonality():
 	pass
@@ -91,9 +130,10 @@ func arousalNaturalFade():
 		addArousal(-0.01)
 		turnsLastStim += 1
 		
+		if(turnsLastStim > 1):
+			onDenyTick()
 		if(turnsLastStim > 4):
 			addArousal(-0.02)
-			onDenyTick()
 		if(turnsLastStim > 8):
 			addArousal(-0.02)
 	#else:
@@ -138,17 +178,25 @@ func stimulateArousalZone(howmuch: float, bodypartSlot, stimulation:float = 1.0)
 	
 	var sensitiveZone:SensitiveZone = getChar().getBodypart(bodypartSlot).getSensitiveZone()
 	if(sensitiveZone != null):
+		turnsLastStim = 0
+		hadStim = true
 		sensitiveZone.stimulate(stimulation)
 		
-		var howMuchActually:float = howmuch * sensitiveZone.getArousalGainModifier()
+		var howMuchActually:float = sensitiveZone.getArousalGainModifier()
 		
 		var theArousal:float = getArousal()
 		
-		howMuchActually *= max((1.0 - min(theArousal, 0.7)*0.9 - theArousal*0.1), 0.01)
-		if(howMuchActually <= 0.03 && RNG.chance(50)):
+		howMuchActually *= max((1.0 - min(theArousal, 0.5)*0.1 - theArousal*0.25), 0.01)
+		#if(howMuchActually <= 0.08 && RNG.chance(50)):
+		#	addArousalSex(-0.01)
+		#	return
+		if(howMuchActually*0.2 <= 0.07):
+			addArousalSex(-0.02)
 			return
+		#if(howMuchActually <= 0.09):
+		#	howMuchActually *= 0.2
 		
-		addArousalSex(howMuchActually)
+		addArousalSex(howmuch * howMuchActually)
 	else:
 		addArousalSex(howmuch)
 

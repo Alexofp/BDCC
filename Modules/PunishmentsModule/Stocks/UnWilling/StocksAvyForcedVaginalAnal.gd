@@ -17,7 +17,7 @@ func _run():
 
 		saynn("[say=avy]Your ass bounces so much.[/say]")
 
-		saynn("A dark foxy walks into your view. She spots a uniform with a red trim to it so you know she is not up for no good. She crosses her arms and scratches her chin while humming.")
+		saynn("A dark foxy walks into your view. She sports a uniform with a red trim to it so you know she is not up for no good. She crosses her arms and scratches her chin while humming.")
 
 		saynn("[say=avy]"+RNG.pick([
 			"Hey there, bondage slut. Want me to help you?",

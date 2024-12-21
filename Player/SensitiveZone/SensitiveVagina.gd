@@ -4,7 +4,7 @@ func _init():
 	zoneName = "Pussy"
 	
 func getSensitivityGainModifier() -> float:
-	return 1.0 * (1.0 + max(-1.0, getCustomAttribute(BuffAttribute.SensitivityGainAll) + getCustomAttribute(BuffAttribute.SensitivityGainVagina)))
+	return (1.0 if isOverstimulationEnabled() else 0.2) * (1.0 + max(-1.0, getCustomAttribute(BuffAttribute.SensitivityGainAll) + getCustomAttribute(BuffAttribute.SensitivityGainVagina)))
 
 func getStimulationGainModifier() -> float:
 	return 1.0 / (1.0 + max(-0.9, getCustomAttribute(BuffAttribute.OverstimulationThresholdAll) + getCustomAttribute(BuffAttribute.OverstimulationThresholdVagina)))

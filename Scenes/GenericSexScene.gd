@@ -49,10 +49,10 @@ func _run():
 			
 			for domID in sexEngine.getDomIDs():
 				var domInfo = sexEngine.getDomInfo(domID)
-				sayn(domInfo.getInfoString())
+				sayn(domInfo.getInfoStringFinal())
 			for subID in sexEngine.getSubIDs():
 				var subInfo = sexEngine.getSubInfo(subID)
-				saynn(subInfo.getInfoString())
+				saynn(subInfo.getInfoStringFinal())
 
 			var theActions = sexEngine.getActions()
 			for actionInfo in theActions:
