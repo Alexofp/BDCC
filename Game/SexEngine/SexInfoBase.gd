@@ -54,13 +54,20 @@ func getExtraInfoLines() -> Array:
 	
 	var sensitiveZones:Array = getChar().getSensitiveZones()
 	for zone in sensitiveZones:
-		var zoneStimulation:float = zone.getStimulationOrOverstimulation()
-		if(zoneStimulation >= 0.5 || zone.isOverstimulated()):
+		if(zone.shouldShowOverstimualtedTextInSexEngine(self)):
+			var zoneStimulation:float = zone.getStimulationOrOverstimulation()
 			var zoneName:String = zone.getName()
 			var isOrgasmEffect:bool = zone.hasOrgasmEffect()
 			var isBads:bool = (zoneStimulation >= 0.9) || zone.isOverstimulated()
+			var isVeryBads:bool = zone.isOverstimulated()
+			var colorString:String = ("red" if isVeryBads else "#FF9999")
+			var extraTexts:Array = []
+			if(isOrgasmEffect):
+				extraTexts.append("orgasm")
+			if(!zone.canOrgasm()):
+				extraTexts.append("not sensitive enough to cum")
 			
-			result.append(zoneName+" overstimulation: "+("[color=red]" if isBads else "")+str(Util.roundF(zoneStimulation*100.0, 1))+"%"+("[/color]" if isBads else "")+(" (orgasm)" if isOrgasmEffect else ""))
+			result.append(zoneName+" overstimulation: "+("[color="+colorString+"]" if isBads else "")+str(Util.roundF(zoneStimulation*100.0, 1))+"%"+("[/color]" if isBads else "")+(" ("+Util.join(extraTexts, ", ")+")" if extraTexts.size() > 0 else ""))
 	
 	
 	return result

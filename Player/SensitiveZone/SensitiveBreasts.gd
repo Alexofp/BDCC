@@ -17,13 +17,16 @@ func getLowSensitivityRestoreRate() -> float: # 15% per day
 #	return (1.0/0.3)/300.0 # 5 Hours roughly
 
 func getOverstimSensLoseModifier() -> float:
-	return 0.1
+	return 0.3
 
 func getSensitivityGainModifier() -> float:
 	return 0.2 * (1.0 + max(-1.0, getCustomAttribute(BuffAttribute.SensitivityGainAll) + getCustomAttribute(BuffAttribute.SensitivityGainNipples)))
 
 func getStimulationGainModifier() -> float:
 	return 0.3 / (1.0 + max(-0.9, getCustomAttribute(BuffAttribute.OverstimulationThresholdAll) + getCustomAttribute(BuffAttribute.OverstimulationThresholdNipples)))
+
+func getOverstimContinueGainModifier() -> float:
+	return 0.0
 
 func isOverstimulated() -> bool:
 	var theChar = getCharacter()
@@ -46,6 +49,15 @@ func getOverstimulation() -> float:
 	if(isOverstimulated()):
 		return 1.0
 	return 0.0
+
+func shouldShowOverstimualtedTextInSexEngine(_sexInfo) -> bool:
+	var zoneStimulation:float = getStimulation()
+	if(zoneStimulation >= 0.7 || (zoneStimulation >= 0.5 && !_sexInfo.hadStim) || (isOverstimulated() && lastStimulatedAgo < 180)):
+		return true
+	return false
+
+func isOverstimulationEnabled() -> bool:
+	return true
 
 func generateDataFor(_dynamicCharacter):
 	var fetishHolder:FetishHolder = _dynamicCharacter.getFetishHolder()

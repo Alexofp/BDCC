@@ -379,6 +379,11 @@ func loadingSavefileFinished():
 		character.checkOldWayOfUpdating(currentDay, timeOfDay)
 		if(character.shouldBeUpdated()):
 			startUpdatingCharacter(charID)
+	for charID in dynamicCharacters:
+		var character = getCharacter(charID)
+		character.checkOldWayOfUpdating(currentDay, timeOfDay)
+		if(character.shouldBeUpdated()):
+			startUpdatingCharacter(charID)
 	
 	GM.ES.registerDatapackEvents(loadedDatapacks.keys())
 	

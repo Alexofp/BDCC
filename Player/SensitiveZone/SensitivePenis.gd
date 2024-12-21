@@ -4,16 +4,16 @@ func _init():
 	zoneName = "Penis"
 	
 func getSensitivityGainModifier() -> float:
-	return 0.2 * (1.0 + max(-1.0, getCustomAttribute(BuffAttribute.SensitivityGainAll) + getCustomAttribute(BuffAttribute.SensitivityGainPenis)))
+	return (0.1 if isOverstimulationEnabled() else 0.02) * (1.0 + max(-1.0, getCustomAttribute(BuffAttribute.SensitivityGainAll) + getCustomAttribute(BuffAttribute.SensitivityGainPenis)))
 
 func getLowSensitivityRestoreRate() -> float:
-	return 0.7 * (1.0 + max(-1.0, getCustomAttribute(BuffAttribute.SensitivityRestoreAll) + getCustomAttribute(BuffAttribute.SensitivityRestorePenis)))
+	return 1.2 * (1.0 + max(-1.0, getCustomAttribute(BuffAttribute.SensitivityRestoreAll) + getCustomAttribute(BuffAttribute.SensitivityRestorePenis)))
 
 func getStimulationGainModifier() -> float:
-	return 0.5 / (1.0 + max(-0.9, getCustomAttribute(BuffAttribute.OverstimulationThresholdAll) + getCustomAttribute(BuffAttribute.OverstimulationThresholdPenis)))
+	return 0.4 / (1.0 + max(-0.9, getCustomAttribute(BuffAttribute.OverstimulationThresholdAll) + getCustomAttribute(BuffAttribute.OverstimulationThresholdPenis)))
 
 func getOverstimSensLoseModifier() -> float:
-	return 3.0
+	return 1.0
 
 func getExtraSensGainModifier() -> float:
 	return 0.4

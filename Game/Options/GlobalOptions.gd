@@ -25,6 +25,7 @@ var sandboxNpcLeveling:float = 1.0
 # Difficulty options
 var hardStruggleEnabled: bool = false
 var smartLockRarity: String = "normal" # never veryrare rare normal often veryoften bdsmslut always
+var overstimulationEnabled: bool = true
 
 var shouldScaleUI: bool = true
 var uiScaleMultiplier = 1.0
@@ -82,6 +83,7 @@ func resetToDefaults():
 	maxKeepNPCKids = 30
 	hardStruggleEnabled = false
 	smartLockRarity = "normal"
+	overstimulationEnabled = true
 	shouldScaleUI = true
 	uiScaleMultiplier = 1.0
 	showSpeakerName = true
@@ -179,6 +181,9 @@ func isHardStruggleEnabled():
 
 func getSmartLockRarity():
 	return smartLockRarity
+
+func isOverstimulationEnabled():
+	return overstimulationEnabled
 
 func shouldShowSpeakerName():
 	return showSpeakerName
@@ -465,6 +470,13 @@ func getChangeableOptions():
 						["bdsmslut", "BDSM SLUT"],
 						["always", "Always"],
 					]
+				},
+				{
+					"name": "Overstimulation mechanic",
+					"description": "Makes it so any erogenous zone can be overstimulated during sex. Overstimulated zones lose sensitivity when stimulated further. Nipples can be overstimulated even if this option is disabled.",
+					"id": "overstimulationEnabled",
+					"type": "checkbox",
+					"value": overstimulationEnabled
 				},
 			]
 		},
@@ -917,6 +929,8 @@ func applyOption(categoryID, optionID, value):
 			hardStruggleEnabled = value
 		if optionID == "smartLockRarity":
 			smartLockRarity = value
+		if optionID == "overstimulationEnabled":
+			overstimulationEnabled = value
 	
 	if(categoryID == "other"):
 		if(optionID == "fetchLatestRelease"):
@@ -1008,6 +1022,7 @@ func saveData():
 		"maxKeepNPCKids": maxKeepNPCKids,
 		"hardStruggleEnabled": hardStruggleEnabled,
 		"smartLockRarity": smartLockRarity,
+		"overstimulationEnabled": overstimulationEnabled,
 		"shouldScaleUI": shouldScaleUI,
 		"uiScaleMultiplier": uiScaleMultiplier,
 		"uiButtonSize": uiButtonSize,
@@ -1061,6 +1076,7 @@ func loadData(data):
 	maxKeepNPCKids = loadVar(data, "maxKeepNPCKids", 30)
 	hardStruggleEnabled = loadVar(data, "hardStruggleEnabled", false)
 	smartLockRarity = loadVar(data, "smartLockRarity", "normal")
+	overstimulationEnabled = loadVar(data, "overstimulationEnabled", true)
 	shouldScaleUI = loadVar(data, "shouldScaleUI", true)
 	uiScaleMultiplier = loadVar(data, "uiScaleMultiplier", 1.0)
 	uiButtonSize = loadVar(data, "uiButtonSize", 0)
