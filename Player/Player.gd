@@ -29,6 +29,8 @@ var intoxicationTolerance: float = 0.0
 var lustCombatState
 var reputation:Reputation
 
+var tfHolder:TFHolder
+
 var dynamicPersonality: bool = false
 
 func _init():
@@ -46,6 +48,9 @@ func _ready():
 	
 	reputation = Reputation.new()
 	reputation.setCharacter(self)
+	
+	tfHolder = TFHolder.new()
+	tfHolder.setCharacter(self)
 	
 	var _ok = menstrualCycle.connect("readyToGiveBirthOnce", self, "onPlayerReadyToGiveBirth")
 	var _ok2 = menstrualCycle.connect("visiblyPregnant", self, "onPlayerVisiblyPregnant")
@@ -258,6 +263,9 @@ func processTime(_secondsPassed):
 	
 	if(lustCombatState != null):
 		lustCombatState.processTime(_secondsPassed)
+	
+	if(tfHolder != null):
+		tfHolder.processTime(_secondsPassed)
 	
 	if(!bodyFluids.isEmpty()):
 		bodyFluids.drain(0.1 * _secondsPassed / 60.0)
@@ -912,3 +920,6 @@ func canStartSex() -> bool:
 
 func getReputation():
 	return reputation
+
+func getTFHolder():
+	return tfHolder

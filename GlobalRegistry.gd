@@ -77,6 +77,8 @@ var auctionTraits:Dictionary = {}
 var auctionTraitsRefs:Dictionary = {}
 var auctionActions:Dictionary = {}
 var pawnTypes:Dictionary = {}
+var transformations:Dictionary = {}
+var transformationRefs:Dictionary = {}
 
 var bodypartStorageNode
 
@@ -426,6 +428,8 @@ func registerEverything():
 	registerInteractionFolder("res://Game/InteractionSystem/Interactions/")
 	registerGlobalTaskFolder("res://Game/InteractionSystem/GlobalTasks/")
 	registerPawnTypesFolder("res://Game/InteractionSystem/PawnTypes/")
+	
+	registerTransformationsFolder("res://Game/Transformation/TFs/")
 	
 	emit_signal("loadingUpdate", 11.0/totalStages, "Sex scenes")
 	yield(get_tree(), "idle_frame")
@@ -2278,3 +2282,33 @@ func getPawnType(id: String):
 		
 func getPawnTypes():
 	return pawnTypes
+
+
+func registerTransformation(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	transformations[object.id] = loadedClass
+	transformationRefs[object.id] = object
+
+func registerTransformationsFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerTransformation(scriptPath)
+
+func getTransformationRef(id: String):
+	if(transformationRefs.has(id)):
+		return transformationRefs[id]
+	else:
+		Log.printerr("ERROR: transformation with the id "+id+" wasn't found")
+		return null
+		
+func createTransformation(id: String):
+	if(transformations.has(id)):
+		return transformations[id].new()
+	else:
+		Log.printerr("ERROR: transformation with the id "+id+" wasn't found")
+		return null
+		
+func getTransformationRefs():
+	return transformationRefs

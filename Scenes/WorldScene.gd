@@ -95,7 +95,9 @@ func _react(_action: String, _args):
 		aimCamera(GM.pc.location)
 		GM.ES.triggerReact(Trigger.EnteringRoom, [GM.pc.location, _args[1]])
 		
-		GM.main.showLog()
+		if(!GM.main.checkTFs()):
+			GM.main.showLog()
+			
 
 	if(_action == "inventory"):
 		runScene("InventoryScene")

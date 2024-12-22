@@ -999,6 +999,13 @@ func showLog():
 		return true
 	return false
 
+func checkTFs():
+	var tfHolder = GM.pc.getTFHolder()
+	if(tfHolder != null && tfHolder.hasPendingTransformations()):
+		runScene("PlayerTFScene")
+		return true
+	return false
+
 func getLogMessages():
 	return logMessages
 

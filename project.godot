@@ -1509,6 +1509,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/World/SubWorld.gd"
 }, {
+"base": "Reference",
+"class": "TFBase",
+"language": "GDScript",
+"path": "res://Game/Transformation/TFBase.gd"
+}, {
+"base": "Reference",
+"class": "TFHolder",
+"language": "GDScript",
+"path": "res://Game/Transformation/TFHolder.gd"
+}, {
 "base": "Module",
 "class": "TaviModule",
 "language": "GDScript",
@@ -1905,6 +1915,8 @@ _global_script_class_icons={
 "StatusEffectBase": "",
 "StatusEffectsPanel": "",
 "SubGameWorld": "",
+"TFBase": "",
+"TFHolder": "",
 "TaviModule": "",
 "TestQuest": "",
 "TestResource": "",
