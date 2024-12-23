@@ -32,6 +32,12 @@ func getTooltipInfo():
 	
 	return Util.join(result, "\n")
 
+func applyTFData(_data):
+	.applyTFData(_data)
+	
+	lengthCM = loadTFVar(_data, "lengthCM", lengthCM)
+	ballsScale = loadTFVar(_data, "ballsScale", ballsScale)
+
 func saveData():
 	var data = .saveData()
 	data["lengthCM"] = lengthCM

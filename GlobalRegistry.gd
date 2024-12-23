@@ -8,6 +8,7 @@ var game_version_suffix = "fix1"
 var currentUniqueID = 0
 var currentChildUniqueID = 0
 var currentNPCUniqueID = 0
+var currentTFID := 0
 
 var scenes: Dictionary = {}
 var temporaryScenes: Dictionary = {}
@@ -79,6 +80,7 @@ var auctionActions:Dictionary = {}
 var pawnTypes:Dictionary = {}
 var transformations:Dictionary = {}
 var transformationRefs:Dictionary = {}
+var transformationEffects:Dictionary = {}
 
 var bodypartStorageNode
 
@@ -430,6 +432,7 @@ func registerEverything():
 	registerPawnTypesFolder("res://Game/InteractionSystem/PawnTypes/")
 	
 	registerTransformationsFolder("res://Game/Transformation/TFs/")
+	registerTransformationEffectsFolder("res://Game/Transformation/Effects/")
 	
 	emit_signal("loadingUpdate", 11.0/totalStages, "Sex scenes")
 	yield(get_tree(), "idle_frame")
@@ -507,6 +510,10 @@ func generateChildUniqueID():
 func generateNPCUniqueID():
 	currentNPCUniqueID += 1
 	return currentNPCUniqueID - 1
+
+func generateTFID():
+	currentTFID += 1
+	return currentTFID - 1
 
 func getGameVersionString():
 	return str(game_version_major)+"."+str(game_version_minor)+"."+str(game_version_revision)+str(game_version_suffix)
@@ -2312,3 +2319,25 @@ func createTransformation(id: String):
 		
 func getTransformationRefs():
 	return transformationRefs
+
+
+func registerTransformationEffect(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	transformationEffects[object.id] = loadedClass
+
+func registerTransformationEffectsFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerTransformationEffect(scriptPath)
+
+func createTransformationEffect(id: String):
+	if(transformationEffects.has(id)):
+		return transformationEffects[id].new()
+	else:
+		Log.printerr("ERROR: transformation effect with the id "+id+" wasn't found")
+		return null
+		
+func getTransformationEffects():
+	return transformationEffects

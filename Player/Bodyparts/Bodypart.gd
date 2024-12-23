@@ -205,6 +205,37 @@ func handleInsertion(size: float, stretchMult = 1.0):
 func getOrificeName():
 	return "error"
 
+func saveOriginalTFData() -> Dictionary:
+	var result:Dictionary = saveData()
+	if(result.has("orificeData")):
+		var _ok = result.erase("orificeData")
+	if(result.has("fluidProductionData")):
+		var _ok = result.erase("fluidProductionData")
+	if(result.has("sensitiveZone")):
+		var _ok = result.erase("sensitiveZone")
+		
+	result["bodypartID"] = id
+	
+	return result
+
+func applyTFData(_data):
+	if(supportsSkin()):
+		pickedSkin = loadTFVar(_data, "pickedSkin", pickedSkin)
+		pickedRColor = loadTFVar(_data, "pickedRColor", pickedRColor)
+		pickedGColor = loadTFVar(_data, "pickedGColor", pickedGColor)
+		pickedBColor = loadTFVar(_data, "pickedBColor", pickedBColor)
+		if(pickedRColor is String):
+			pickedRColor = Color(pickedRColor)
+		if(pickedGColor is String):
+			pickedGColor = Color(pickedGColor)
+		if(pickedBColor is String):
+			pickedBColor = Color(pickedBColor)
+
+func loadTFVar(_data:Dictionary, _keyID:String, default):
+	if(!_data.has(_keyID)):
+		return default
+	return _data[_keyID]
+
 func saveData():
 	var result = {}
 	
@@ -255,6 +286,12 @@ func loadData(_data):
 			pickedBColor = SAVE.loadVar(_data, "pickedBColor", null)
 			if(pickedBColor is String):
 				pickedBColor = Color(pickedBColor)
+
+func saveDataForTF():
+	return saveData()
+
+func loadDataForTF(_data):
+	loadData(_data)
 
 func saveDataNPC():
 	var result = {}

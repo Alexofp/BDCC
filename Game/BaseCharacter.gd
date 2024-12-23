@@ -3245,3 +3245,28 @@ func canZoneOrgasm(bodypartSlot) -> bool:
 		return true
 	
 	return thePart.getSensitiveZone().canOrgasm()
+
+func applyTFBodypart(bodypartSlot, data:Dictionary):
+	if(!hasBodypart(bodypartSlot)):
+		if(!data.has("bodypartID") || data["bodypartID"] == null):
+			return
+		giveBodypart(GlobalRegistry.createBodypart(data["bodypartID"]), false)
+		getBodypart(bodypartSlot).applyTFData(data)
+		return
+	
+	if(!data.has("bodypartID")):
+		return
+	if(data["bodypartID"] == null):
+		removeBodypart(bodypartSlot, false)
+		return
+	
+	var currentPart = getBodypart(bodypartSlot)
+	if(currentPart.id == data["bodypartID"]):
+		currentPart.applyTFData(data)
+		return
+	
+	var savedData = currentPart.saveDataForTF()
+	giveBodypart(GlobalRegistry.createBodypart(data["bodypartID"]), false)
+	getBodypart(bodypartSlot).loadDataForTF(savedData)
+	getBodypart(bodypartSlot).applyTFData(data)
+	

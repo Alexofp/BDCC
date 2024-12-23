@@ -16,6 +16,12 @@ func setupSensitiveZone():
 	sensitiveZone = preload("res://Player/SensitiveZone/SensitiveBreasts.gd").new()
 	sensitiveZone.setBodypart(self)
 	
+func applyTFData(_data):
+	.applyTFData(_data)
+	
+	size = loadTFVar(_data, "size", size)
+	cached_size = getSize()
+	
 func saveData():
 	var data = .saveData()
 	data["size"] = size

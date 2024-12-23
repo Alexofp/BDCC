@@ -40,3 +40,15 @@ func doCancel(_context:Dictionary) -> Dictionary:
 
 func processTime(_seconds:int):
 	pass
+
+func addPartEffect(_bodypartSlot, _effect):
+	getHolder().addPartEffect(_bodypartSlot, _effect)
+
+func addCharEffect(_effect):
+	getHolder().addCharEffect(_effect)
+
+func effect(_effectID:String, _args:Array = []):
+	var theEffect:TFEffect = GlobalRegistry.createTransformationEffect(_effectID)
+	theEffect.tfID = uniqueID
+	theEffect.initArgs(_args)
+	return theEffect

@@ -18,6 +18,11 @@ func getLewdAdjective():
 func getLewdName():
 	return RNG.pick(["tail"])
 
+func applyTFData(_data):
+	.applyTFData(_data)
+	
+	tailScale = loadTFVar(_data, "tailScale", tailScale)
+
 func saveData():
 	var data = .saveData()
 	data["tailScale"] = tailScale

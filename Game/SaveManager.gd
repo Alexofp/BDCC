@@ -11,6 +11,7 @@ func saveData():
 		"currentUniqueID_DONT_TOUCH": GlobalRegistry.currentUniqueID,
 		"currentChildUniqueID_DONT_TOUCH": GlobalRegistry.currentChildUniqueID,
 		"currentNPCUniqueID_DONT_TOUCH": GlobalRegistry.currentNPCUniqueID,
+		"currentTFID_DONT_TOUCH": GlobalRegistry.currentTFID,
 	}
 	
 	data["player"] = GM.main.getOriginalPC().saveData()
@@ -37,6 +38,7 @@ func loadData(data: Dictionary):
 	GlobalRegistry.currentUniqueID = SAVE.loadVar(data, "currentUniqueID_DONT_TOUCH", 0)
 	GlobalRegistry.currentChildUniqueID = SAVE.loadVar(data, "currentChildUniqueID_DONT_TOUCH", 0)
 	GlobalRegistry.currentNPCUniqueID = SAVE.loadVar(data, "currentNPCUniqueID_DONT_TOUCH", 0)
+	GlobalRegistry.currentTFID = SAVE.loadVar(data, "currentTFID_DONT_TOUCH", 0)
 	
 	GM.main.getOriginalPC().loadData(data["player"])
 	

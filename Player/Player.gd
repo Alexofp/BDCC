@@ -923,3 +923,39 @@ func getReputation():
 
 func getTFHolder():
 	return tfHolder
+
+func undoAllTransformations():
+	tfHolder.undoAllTransformations()
+
+func makeAllTransformationsPermanent():
+	tfHolder.makeAllTransformationsPermanent()
+
+func saveOriginalTFData() -> Dictionary:
+	var result:Dictionary = {
+		"species": pickedSpecies,
+		"femininity": pickedFemininity,
+		"thickness": pickedThickness,
+		"pickedSkin": pickedSkin,
+		"pickedSkinRColor": pickedSkinRColor.to_html(),
+		"pickedSkinGColor": pickedSkinGColor.to_html(),
+		"pickedSkinBColor": pickedSkinBColor.to_html(),
+	}
+	
+	return result
+
+func applyTFData(_data):
+	pickedSpecies = loadTFVar(_data, "species", pickedSpecies)
+	pickedFemininity = loadTFVar(_data, "femininity", pickedFemininity)
+	pickedThickness = loadTFVar(_data, "thickness", pickedThickness)
+	pickedSkin = loadTFVar(_data, "pickedSkin", pickedSkin)
+	if(_data.has("pickedSkinRColor")):
+		pickedSkinRColor = Color(_data["pickedSkinRColor"])
+	if(_data.has("pickedSkinGColor")):
+		pickedSkinGColor = Color(_data["pickedSkinGColor"])
+	if(_data.has("pickedSkinBColor")):
+		pickedSkinBColor = Color(_data["pickedSkinBColor"])
+
+func loadTFVar(_data:Dictionary, _keyID:String, default):
+	if(!_data.has(_keyID)):
+		return default
+	return _data[_keyID]

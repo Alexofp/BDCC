@@ -15,9 +15,15 @@ func _run():
 	if(state == "afterTF"):
 		saynn(savedText)
 		addButton("Continue", "See what happens..", "endthescene")
+		addButton("UNDO ALL", "See what happens..", "undoall")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
+		endScene()
+		return
+	if(_action == "undoall"):
+		var tfHolder:TFHolder = GM.pc.getTFHolder()
+		tfHolder.undoAllTransformations()
 		endScene()
 		return
 	if(_action == "doTF"):

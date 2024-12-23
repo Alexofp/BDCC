@@ -14,11 +14,14 @@ func isReadyToProgress() -> bool:
 func doProgress(_context:Dictionary) -> Dictionary:
 	timer = 0
 	
-	var theChar := getChar()
+	#var theChar := getChar()
 	
-	var breasts:BodypartBreasts = theChar.getBodypart(BodypartSlot.Breasts)
-	if(breasts != null):
-		breasts.setBreastSizeSafe(Util.mini(breasts.size + 1, BreastsSize.O))
+	#var breasts:BodypartBreasts = theChar.getBodypart(BodypartSlot.Breasts)
+	#if(breasts != null):
+	#	breasts.setBreastSizeSafe(Util.mini(breasts.size + 1, BreastsSize.O))
+	addPartEffect(BodypartSlot.Breasts, effect("BreastSizeInc"))
+	addPartEffect(BodypartSlot.Legs, effect("SwitchPart", ["plantilegs"]))
+	addCharEffect(effect("AddThickness", [10]))
 	
 	return {
 		text = "BOOBA!",

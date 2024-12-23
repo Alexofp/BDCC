@@ -1328,11 +1328,23 @@ func getDebugActions():
 			"id": "toggleISDebug",
 			"name": "Toggle IS debug",
 		},
+		{
+			"id": "undoTFs",
+			"name": "Undo All TFs",
+		},
+		{
+			"id": "applyTFs",
+			"name": "Make TFs permanent",
+		},
 	]
 
 func doDebugAction(id, args = {}):
 	print(id, " ", args)
 	
+	if(id == "undoTFs"):
+		GM.pc.undoAllTransformations()
+	if(id == "applyTFs"):
+		GM.pc.makeAllTransformationsPermanent()
 	if(id == "toggleISDebug"):
 		isDebuggingIS = !isDebuggingIS
 		if(isDebuggingIS):
