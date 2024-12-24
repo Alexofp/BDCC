@@ -41,11 +41,14 @@ func doCancel(_context:Dictionary) -> Dictionary:
 func processTime(_seconds:int):
 	pass
 
+func addText(theText:String):
+	getHolder().addTextToReactQueue(theText)
+
 func addPartEffect(_bodypartSlot, _effect):
-	getHolder().addPartEffect(_bodypartSlot, _effect)
+	getHolder().addPartEffectToReactQueue(_bodypartSlot, _effect)
 
 func addCharEffect(_effect):
-	getHolder().addCharEffect(_effect)
+	getHolder().addCharEffectToReactQueue(_effect)
 
 func effect(_effectID:String, _args:Array = []):
 	var theEffect:TFEffect = GlobalRegistry.createTransformationEffect(_effectID)

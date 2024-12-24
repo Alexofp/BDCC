@@ -1,6 +1,7 @@
 extends "res://Scenes/SceneBase.gd"
 
 var savedText:String = ""
+var tfCount:int = 0
 
 func _init():
 	sceneID = "PlayerTFScene"
@@ -13,9 +14,21 @@ func _run():
 		addButton("Continue", "See what happens..", "doTF")
 		
 	if(state == "afterTF"):
+		#if(tfCount >= 2):
+		#	saynn("But that's not all..")
+		
 		saynn(savedText)
-		addButton("Continue", "See what happens..", "endthescene")
-		addButton("UNDO ALL", "See what happens..", "undoall")
+		
+		var tfHolder:TFHolder = GM.pc.getTFHolder()
+		if(tfHolder.hasPendingTransformations()):
+			saynn("You get a feeling that something else is about to happen to you..")
+			
+			addButton("More??", "See what happens to you next..", "doTF")
+		else:
+			addButton("Continue", "You changed..", "endthescene")
+		
+		if(true):
+			addButton("UNDO ALL", "See what happens..", "undoall")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -29,8 +42,10 @@ func _react(_action: String, _args):
 	if(_action == "doTF"):
 		var tfHolder:TFHolder = GM.pc.getTFHolder()
 		
-		var result = tfHolder.doPendingTransformations({})
+		var result = tfHolder.doFirstPendingTransformation({})
 		savedText = result["text"]
+		tfCount += 1
+		
 		setState("afterTF")
 		return
 		
@@ -40,6 +55,7 @@ func saveData():
 	var data = .saveData()
 	
 	data["savedText"] = savedText
+	data["tfCount"] = tfCount
 
 	return data
 	
@@ -47,3 +63,4 @@ func loadData(data):
 	.loadData(data)
 	
 	savedText = SAVE.loadVar(data, "savedText", "")
+	tfCount = SAVE.loadVar(data, "tfCount", 0)
