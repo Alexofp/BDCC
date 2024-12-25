@@ -3269,4 +3269,6 @@ func applyTFBodypart(bodypartSlot, data:Dictionary):
 	giveBodypart(GlobalRegistry.createBodypart(data["bodypartID"]), false)
 	getBodypart(bodypartSlot).loadDataForTF(savedData)
 	getBodypart(bodypartSlot).applyTFData(data)
-	
+
+func getTFHolder():
+	return null

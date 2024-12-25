@@ -12,9 +12,8 @@ var charEffects:Array = []
 
 var transformations:Array = []
 
-var reactQueue:Array = [] # no save
-var tfTexts:Array = [] # no save
-var transformInProgress:bool = false # no save
+const TFTYPE_CHAR = 0
+const TFTYPE_PART = 1
 
 func setCharacter(theChar):
 	charRef = weakref(theChar)
@@ -65,57 +64,91 @@ func hasPendingTransformations() -> bool:
 	
 	return false
 
-func doAllPendingTransformations(_context:Dictionary) -> Dictionary:
-	var texts:Array = []
-	
-	for tf in transformations:
-		if(tf.isReadyToProgress()):
-			var result:Dictionary = tf.doProgress(_context)
-			if(result.has("text")):
-				texts.append(result["text"])
-	
-	#getChar().updateAppearance()
-	applyAllTransformationEffects()
-	
-	return {
-		text = "Meow meow.\n\n"+Util.join(texts, "\n"),
-	}
+#func doAllPendingTransformations(_context:Dictionary) -> Dictionary:
+#	var texts:Array = []
+#
+#	for tf in transformations:
+#		if(tf.isReadyToProgress()):
+#			var result:Dictionary = tf.doProgress(_context)
+#			if(result.has("text")):
+#				texts.append(result["text"])
+#
+#	#getChar().updateAppearance()
+#	applyAllTransformationEffects()
+#
+#	return {
+#		text = "Meow meow.\n\n"+Util.join(texts, "\n"),
+#	}
 
-func doFirstPendingTransformation(_context:Dictionary) -> Dictionary:
-	reactQueue.clear()
-	tfTexts.clear()
+func doFirstPendingTransformation(_context:Dictionary, _isShort:bool = false) -> Dictionary:
 	#var texts:Array = []
+	
+	var foundTF = null
+	var foundResult:Dictionary
 	
 	for tf in transformations:
 		if(tf.isReadyToProgress()):
 			var _result:Dictionary = tf.doProgress(_context)
+			foundTF = tf
+			foundResult = _result
 			#if(result.has("text")):
 			#	texts.append(result["text"])
 			break
 	
-	#getChar().updateAppearance()
-	transformInProgress = true
-	applyAllTransformationEffects()
-	transformInProgress = false
+	if(foundTF == null):
+		return {
+			text = "COULDN'T TRANSFORM ANYTHING!",
+		}
 	
-	var finalTexts:Array = []
-	for queueElement in reactQueue:
-		var theType:String = queueElement["type"]
-		if(theType == "text"):
-			finalTexts.append(queueElement["text"])
-		elif(theType == "parteffect"):
-			var theText:String = queueElement["effect"].grabText()
-			if(theText != ""):
-				finalTexts.append(theText)
-		elif(theType == "chareffect"):
-			var theText:String = queueElement["effect"].grabText()
-			if(theText != ""):
-				finalTexts.append(theText)
+	var newEffects:Array = foundResult["effects"] if foundResult.has("effects") else []
+	var savedEffectObjs:Dictionary = {}
+	
+	for effectEntry in newEffects:
+		var effectType:int = effectEntry["type"]
+		
+		if(effectType == TFTYPE_CHAR):
+			addCharEffect(effectEntry["effect"])
+		elif(effectType == TFTYPE_PART):
+			addPartEffect(effectEntry["part"], effectEntry["effect"])
+		#savedEffectObjs[effectEntry["id"]] = effectEntry["effect"]
+		savedEffectObjs[effectEntry["effect"]] = effectEntry["id"]
+	
+	var applyResults:Dictionary = {}
+	
+	#getChar().updateAppearance()
+	applyAllTransformationEffects(savedEffectObjs, applyResults)
+	
+	var tfResult:TFResult = TFResult.new()
+	tfResult.setData(foundResult, applyResults)
+	
+	var reactResult:Dictionary
+	if(!_isShort):
+		reactResult = foundTF.reactProgressFinal(_context, tfResult)
+	else:
+		reactResult = foundTF.reactProgressShortFinal(_context, tfResult)
+	
+#	var finalTexts:Array = []
+#	for queueElement in reactQueue:
+#		var theType:String = queueElement["type"]
+#		if(theType == "text"):
+#			finalTexts.append(queueElement["text"])
+#		elif(theType == "parteffect"):
+#			var theText:String = queueElement["effect"].grabText()
+#			if(theText != ""):
+#				finalTexts.append(theText)
+#		elif(theType == "chareffect"):
+#			var theText:String = queueElement["effect"].grabText()
+#			if(theText != ""):
+#				finalTexts.append(theText)
 	
 	optimizeEffects()
 	
+	var gameParser:GameParser = GameParser.new()
+	var finalText:String = gameParser.executeString(reactResult["text"], {npc=getChar().getID()})
+	
 	return {
-		text = "Meow meow.\n\n"+Util.join(finalTexts, "\n\n"),
+		#text = "Meow meow.\n\n"+Util.join(finalTexts, "\n\n"),
+		text = finalText,
 	}
 
 func processTime(_seconds:int):
@@ -136,12 +169,6 @@ func grabBodypartOriginalData(bodypartSlot):
 	
 	return originalParts[bodypartSlot]
 
-func addTextToReactQueue(theText:String):
-	reactQueue.append({type="text", text=theText})
-
-func addPartEffectToReactQueue(bodypartSlot, effect):
-	addPartEffect(bodypartSlot, effect)
-	reactQueue.append({type="parteffect", slot=bodypartSlot, effect=effect})
 
 func addPartEffect(bodypartSlot, effect):
 	effect.setHolder(self)
@@ -159,10 +186,6 @@ func addPartEffect(bodypartSlot, effect):
 #			return
 	effect.needsToBeChecked = true
 	partEffects[bodypartSlot].append(effect)
-
-func addCharEffectToReactQueue(effect):
-	addCharEffect(effect)
-	reactQueue.append({type="chareffect", effect=effect})
 
 func addCharEffect(effect):
 	effect.setHolder(self)
@@ -185,25 +208,29 @@ func grabCharOriginalData():
 		originalCharData = theChar.saveOriginalTFData()
 	return originalCharData
 
-func applyAllTransformationEffects():
-	applyCharEffects()
-	applyPartEffects()
+func applyAllTransformationEffects(savedEffectObjs:Dictionary={}, applyResults:Dictionary={}):
+	applyCharEffects(savedEffectObjs, applyResults)
+	applyPartEffects(savedEffectObjs, applyResults)
 
-func applyCharEffects():
+func applyCharEffects(savedEffectObjs:Dictionary={}, applyResults:Dictionary={}):
 	var theChar = getChar()
 	var origData = grabCharOriginalData()
 	var modifiedData = origData.duplicate(true)
 	
 	for effect in charEffects:
 		effect.prepareToApply()
-		effect.applyEffect(modifiedData)
-	for effect in charEffects:
-		effect.afterAllEffects(modifiedData)
+		var effectResult = effect.applyEffect(modifiedData)
+		if(savedEffectObjs.has(effect)):
+			if(effectResult is Dictionary):
+				effectResult["effect"] = effect
+			applyResults[savedEffectObjs[effect]] = effectResult
+	#for effect in charEffects:
+	#	effect.afterAllEffects(modifiedData)
 			
 	
 	theChar.applyTFData(modifiedData)
 
-func applyPartEffects():
+func applyPartEffects(savedEffectObjs:Dictionary={}, applyResults:Dictionary={}):
 	var theChar = getChar()
 	
 	var newAffectedParts:Dictionary = {}
@@ -215,9 +242,13 @@ func applyPartEffects():
 	
 		for effect in thisPartEffects:
 			effect.prepareToApply()
-			effect.applyEffect(modifiedData)
-		for effect in thisPartEffects:
-			effect.afterAllEffects(modifiedData)
+			var effectResult = effect.applyEffect(modifiedData)
+			if(savedEffectObjs.has(effect)):
+				if(effectResult is Dictionary):
+					effectResult["effect"] = effect
+				applyResults[savedEffectObjs[effect]] = effectResult
+		#for effect in thisPartEffects:
+		#	effect.afterAllEffects(modifiedData)
 	
 		theChar.applyTFBodypart(bodypartSlot, modifiedData)
 	
@@ -230,9 +261,6 @@ func applyPartEffects():
 	affectedParts = newAffectedParts
 	
 	theChar.updateAppearance()
-
-func canAddText() -> bool:
-	return transformInProgress
 
 func tryCombineEffect(effect, theEffects:Array):
 	for _i in range(theEffects.size()):

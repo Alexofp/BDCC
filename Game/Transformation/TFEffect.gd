@@ -23,27 +23,29 @@ func initArgs(_args:Array):
 func prepareToApply():
 	tfTexts.clear()
 
-func applyEffect(_data:Dictionary):
-	pass
-
-func afterAllEffects(_data:Dictionary):
-	pass
-
-func shouldAddText() -> bool:
-	var theHolder = getHolder()
-	if(theHolder != null && theHolder.canAddText()):
-		return true
-	return false
+func applyEffect(_data:Dictionary) -> Dictionary:
+	return {
+		success = false,
+	}
 
 func addText(theText:String):
-	var theHolder = getHolder()
-	if(theHolder != null && theHolder.canAddText()):
-		tfTexts.append(theText)
+	tfTexts.append(theText)
 
-func grabText() -> String:
-	var result:String = Util.join(tfTexts, " ")
+func generateTransformText(_result:Dictionary):
+	pass
+
+func generateShortTransformText(_result:Dictionary):
+	return generateTransformText(_result)
+
+func generateTransformTextFinal(_result:Dictionary) -> String:
 	tfTexts.clear()
-	return result
+	generateTransformText(_result)
+	return Util.join(tfTexts, " ")
+
+func generateShortTransformTextFinal(_result:Dictionary) -> String:
+	tfTexts.clear()
+	generateShortTransformText(_result)
+	return Util.join(tfTexts, " ")
 
 func canReplace(otherEffect) -> bool:
 	if(id == otherEffect.id && tfID == otherEffect.tfID):

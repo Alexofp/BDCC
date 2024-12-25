@@ -9,9 +9,12 @@ func initArgs(_args:Array):
 	if(_args.size() > 0):
 		howMuch = _args[0]
 
-func applyEffect(_data:Dictionary):
+func applyEffect(_data:Dictionary) -> Dictionary:
 	if(_data.has("thickness")):
 		_data["thickness"] += howMuch
+	return {
+		success = true,
+	}
 	
 func onReplace(_otherEffect):
 	howMuch += _otherEffect.howMuch

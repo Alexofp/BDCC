@@ -8,6 +8,9 @@ func _init():
 func initArgs(_args:Array):
 	newPartID = _args[0]
 
-func applyEffect(_data:Dictionary):
+func applyEffect(_data:Dictionary) -> Dictionary:
 	_data["bodypartID"] = newPartID
 	
+	return {
+		success = true,
+	}

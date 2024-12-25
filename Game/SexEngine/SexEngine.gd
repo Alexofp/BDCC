@@ -148,6 +148,14 @@ func getExtraData():
 	result = combineData(result, getExposedBodypartsNewData())
 	return result
 
+func getExtraDataLessImportant():
+	var result = null
+	for domID in doms:
+		result = combineData(result, doms[domID].getExtraOutputData())
+	for subID in subs:
+		result = combineData(result, subs[subID].getExtraOutputData())
+	return result
+
 func makeActivity(id, theDomID, theSubID):
 	var activityObject = GlobalRegistry.createSexActivity(id)
 	if(activityObject == null):
@@ -570,6 +578,7 @@ func processTurn():
 		result = combineData(result, processedData)
 
 	result = combineData(result, (getExtraData()))
+	result = combineData(result, (getExtraDataLessImportant()))
 	
 	sendProcessedData(result)
 	

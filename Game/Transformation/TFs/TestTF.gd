@@ -9,23 +9,26 @@ func processTime(_seconds:int):
 	timer += _seconds
 	
 func isReadyToProgress() -> bool:
-	return timer >= 120
+	return timer >= 240
 
 func doProgress(_context:Dictionary) -> Dictionary:
 	timer = 0
 	
-	#var theChar := getChar()
-	
-	#var breasts:BodypartBreasts = theChar.getBodypart(BodypartSlot.Breasts)
-	#if(breasts != null):
-	#	breasts.setBreastSizeSafe(Util.mini(breasts.size + 1, BreastsSize.O))
-	addText("BREASTS ARE FIRST.")
-	addPartEffect(BodypartSlot.Breasts, effect("BreastSizeInc"))
-	addText("THEN WE SWITCH LEGS.")
-	addPartEffect(BodypartSlot.Legs, effect("SwitchPart", ["plantilegs"]))
-	addText("AND ALSO MAKE YOU MORE THICK.")
-	addCharEffect(effect("AddThickness", [10]))
-	
 	return {
-		#text = "BOOBA!",
+		#stage = 6969,
+		
+		effects = [
+			partEffect("breasts", BodypartSlot.Breasts, "BreastSizeInc"),
+			#partEffect("legs", BodypartSlot.Legs, "SwitchPart", ["plantilegs"]),
+			#charEffect("thick", "AddThickness", [10]),
+		]
 	}
+
+func reactProgress(_context:Dictionary, _result:TFResult):
+	#addText(str(_result.getField("stage", 0)))
+	addText("A sudden warmth envelops your chest, and you feel an electrifying tingling sensation that sends shivers down your spine.")
+	addText(_result.getTFText("breasts"))
+	#addText("THEN WE SWITCH LEGS.")
+	#addText(_result.getTFText("legs"))
+	#addText("AND ALSO MAKE YOU MORE THICK.")
+	#addText(_result.getTFText("thick"))

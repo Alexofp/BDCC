@@ -5,6 +5,11 @@ var id:String = "error"
 var holderRef:WeakRef
 var uniqueID:int = -1
 
+const TFTYPE_CHAR = 0
+const TFTYPE_PART = 1
+
+var tfTexts:Array = [] # no save
+
 func start(_args:Dictionary):
 	pass
 
@@ -30,8 +35,24 @@ func isReadyToProgress() -> bool:
 
 func doProgress(_context:Dictionary) -> Dictionary:
 	return {
-		text = "MEOW GOT MEOW'D!",
+		effects = [],
 	}
+
+func reactProgress(_context:Dictionary, _result:TFResult):
+	pass
+	
+func reactProgressFinal(_context:Dictionary, _result:TFResult):
+	tfTexts.clear()
+	reactProgress(_context, _result)
+	return {text=Util.join(tfTexts, "\n\n")}
+
+func reactProgressShort(_context:Dictionary, _result:TFResult):
+	addText(_result.getAllTFTexts(" "))
+
+func reactProgressShortFinal(_context:Dictionary, _result:TFResult):
+	tfTexts.clear()
+	reactProgressShort(_context, _result)
+	return {text=Util.join(tfTexts, " ")}
 
 func doCancel(_context:Dictionary) -> Dictionary:
 	return {
@@ -42,16 +63,28 @@ func processTime(_seconds:int):
 	pass
 
 func addText(theText:String):
-	getHolder().addTextToReactQueue(theText)
-
-func addPartEffect(_bodypartSlot, _effect):
-	getHolder().addPartEffectToReactQueue(_bodypartSlot, _effect)
-
-func addCharEffect(_effect):
-	getHolder().addCharEffectToReactQueue(_effect)
+	if(theText == ""):
+		return
+	#getHolder().addTextToReactQueue(theText)
+	tfTexts.append(theText)
 
 func effect(_effectID:String, _args:Array = []):
 	var theEffect:TFEffect = GlobalRegistry.createTransformationEffect(_effectID)
 	theEffect.tfID = uniqueID
 	theEffect.initArgs(_args)
 	return theEffect
+
+func partEffect(theid:String, part:String, effectID:String, args:Array = []) -> Dictionary:
+	return {
+		id = theid,
+		type = TFTYPE_PART,
+		part = part,
+		effect = effect(effectID, args),
+	}
+	
+func charEffect(theid:String, effectID:String, args:Array = []) -> Dictionary:
+	return {
+		id = theid,
+		type = TFTYPE_CHAR,
+		effect = effect(effectID, args),
+	}

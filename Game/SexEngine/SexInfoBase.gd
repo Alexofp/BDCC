@@ -350,6 +350,22 @@ func calculateFinalSatisfaction() -> float:
 	
 	return total
 
+func combineData(_data1, _data2):
+	return getSexEngine().combineData(_data1, _data2)
+
+func getExtraOutputData():
+	var result
+	
+	var tfHolder:TFHolder = getChar().getTFHolder()
+	if(tfHolder != null && tfHolder.hasPendingTransformations()):
+		var tfResult:Dictionary = tfHolder.doFirstPendingTransformation({}, true)
+		if(tfResult.has("text") && tfResult["text"] != ""):
+			result = combineData(result, {
+				text = getChar().getName()+"'s body is suddenly [b]changing[/b]! "+tfResult["text"]
+			})
+	
+	return result
+
 func saveData():
 	var data = {
 		"charID": charID,
