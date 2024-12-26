@@ -56,6 +56,7 @@ const BreastsFull = "BreastsFull"
 const CumInflated = "CumInflated"
 const Exposed = "Exposed"
 const SoreNipplesAfterMilking = "SoreNipplesAfterMilking"
+const HasTFs = "HasTFs"
 
 # Hypnosis effects
 const Suggestible = "Suggestible"

@@ -19,7 +19,7 @@ func setCharacter(theChar):
 	charRef = weakref(theChar)
 	
 	startTransformation("TestTF")
-	startTransformation("TestTF")
+	#startTransformation("TestTF")
 
 func getChar():
 	if(charRef == null):
@@ -33,11 +33,14 @@ func startTransformation(_tfID:String, _args:Dictionary={}):
 	transformations.append(newTF)
 	newTF.uniqueID = GlobalRegistry.generateTFID()
 	newTF.setHolder(self)
-	newTF.start(_args)
+	newTF.startFinal(_args)
 	return newTF
 
 func hasActiveTransformations() -> bool:
 	return !transformations.empty()
+
+func getActiveTransformationsCount() -> int:
+	return transformations.size()
 
 func undoAllTransformations():
 	partEffects.clear()
@@ -59,7 +62,7 @@ func makeAllTransformationsPermanent():
 
 func hasPendingTransformations() -> bool:
 	for tf in transformations:
-		if(tf.isReadyToProgress()):
+		if(tf.isReadyToProgressFinal()):
 			return true
 	
 	return false
@@ -87,8 +90,8 @@ func doFirstPendingTransformation(_context:Dictionary, _isShort:bool = false) ->
 	var foundResult:Dictionary
 	
 	for tf in transformations:
-		if(tf.isReadyToProgress()):
-			var _result:Dictionary = tf.doProgress(_context)
+		if(tf.isReadyToProgressFinal()):
+			var _result:Dictionary = tf.doProgressFinal(_context)
 			foundTF = tf
 			foundResult = _result
 			#if(result.has("text")):
@@ -149,6 +152,7 @@ func doFirstPendingTransformation(_context:Dictionary, _isShort:bool = false) ->
 	return {
 		#text = "Meow meow.\n\n"+Util.join(finalTexts, "\n\n"),
 		text = finalText,
+		anim = (reactResult["anim"] if reactResult.has("anim") else []),
 	}
 
 func processTime(_seconds:int):
@@ -298,3 +302,7 @@ func optimizeEffects():
 	
 	#print(charEffects)
 	#print(charEffects.duplicate())
+
+func onSexEvent(_event : SexEvent):
+	for tf in transformations:
+		tf.onSexEvent(_event)

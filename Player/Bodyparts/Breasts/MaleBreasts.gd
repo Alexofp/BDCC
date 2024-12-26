@@ -5,6 +5,11 @@ func _init():
 	id = "malebreasts"
 	size = BreastsSize.FLAT
 
+func getTraits():
+	return {
+		PartTrait.BreastsMale: true,
+	}
+
 func getLewdAdjective():
 	return RNG.pick(["firm", "strong"])
 

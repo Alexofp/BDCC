@@ -17,6 +17,12 @@ func getHolder():
 		return null
 	return holderRef.get_ref()
 
+func getChar():
+	var holder = getHolder()
+	if(holder == null):
+		return null
+	return holder.getChar()
+
 func initArgs(_args:Array):
 	pass
 
@@ -40,7 +46,7 @@ func generateShortTransformText(_result:Dictionary):
 func generateTransformTextFinal(_result:Dictionary) -> String:
 	tfTexts.clear()
 	generateTransformText(_result)
-	return Util.join(tfTexts, " ")
+	return Util.join(tfTexts, "\n\n")
 
 func generateShortTransformTextFinal(_result:Dictionary) -> String:
 	tfTexts.clear()

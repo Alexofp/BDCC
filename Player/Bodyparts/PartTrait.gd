@@ -26,6 +26,10 @@ enum {
 	HairShort,
 	HairLong,
 	
+	# Breasts
+	BreastsMale,
+	BreastsFemale,
+	
 	TRAITCOUNT,
 }
 
@@ -53,6 +57,10 @@ const traitNames = [
 	"HairOvereye",
 	"HairShort",
 	"HairLong",
+	
+	# Breasts
+	"BreastsMale",
+	"BreastsFemale",
 ]
 
 static func textToTrait(trait):

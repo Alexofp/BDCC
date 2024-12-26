@@ -14,3 +14,6 @@ func applyEffect(_data:Dictionary) -> Dictionary:
 	return {
 		success = true,
 	}
+
+func generateTransformText(_result:Dictionary):
+	addText("YOUR SOMETHING GOT SWITCHED")

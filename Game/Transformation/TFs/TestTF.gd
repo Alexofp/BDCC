@@ -1,34 +1,80 @@
 extends TFBase
 
-var timer:int = 0
+var didChangeBreasts:bool = false
+
+# Will increase your breasts 2 times
+# +1 size
+# +2 sizes
 
 func _init():
 	id = "TestTF"
 
-func processTime(_seconds:int):
-	timer += _seconds
-	
-func isReadyToProgress() -> bool:
-	return timer >= 240
+func getMaxStage() -> int:
+	if(didChangeBreasts):
+		return 3
+	return 2
 
-func doProgress(_context:Dictionary) -> Dictionary:
-	timer = 0
+func charHasMaleBreasts() -> bool:
+	var theChar = getChar()
+	if(theChar == null):
+		return false
+	return theChar.bodypartHasTrait(BodypartSlot.Breasts, PartTrait.BreastsMale)
+
+func canTransformFurther() -> bool:
+	if(!didChangeBreasts && charHasMaleBreasts()):
+		return true
+	return !isMaxStage()
 	
+func getTimerForStage(_theStage:int) -> int:
+	if(_theStage == 0):
+		return 120
+	return 240
+	
+func doProgress(_context:Dictionary) -> Dictionary:
+	if(isFirstTime()):
+		return {
+			effects = [
+				partEffect("breasts", BodypartSlot.Breasts, "BreastSizeInc"),
+				#partEffect("legs", BodypartSlot.Legs, "SwitchPart", ["plantilegs"]),
+				#charEffect("thick", "AddThickness", [10]),
+			]
+		}
+	if(charHasMaleBreasts() && !didChangeBreasts):
+		didChangeBreasts = true
+		return {
+			#noStageAdvance = true,
+			effects = [
+				partEffect("breasts", BodypartSlot.Breasts, "SwitchPart", ["humanbreasts"]),
+			]
+		}
 	return {
-		#stage = 6969,
-		
 		effects = [
-			partEffect("breasts", BodypartSlot.Breasts, "BreastSizeInc"),
-			#partEffect("legs", BodypartSlot.Legs, "SwitchPart", ["plantilegs"]),
-			#charEffect("thick", "AddThickness", [10]),
+			partEffect("breasts", BodypartSlot.Breasts, "BreastSizeInc", [2]),
 		]
 	}
 
 func reactProgress(_context:Dictionary, _result:TFResult):
-	#addText(str(_result.getField("stage", 0)))
-	addText("A sudden warmth envelops your chest, and you feel an electrifying tingling sensation that sends shivers down your spine.")
-	addText(_result.getTFText("breasts"))
+	if(isFirstTime()):
+		addText(("Something is happening to your chest.."))
+	else:
+		addText("A sudden warmth envelops your chest, and you feel an electrifying tingling sensation that sends shivers down your spine.")
+	
+	#addText(_result.getTFText("breasts"))
+	addText(_result.getAllTFTexts())
+	playAnim(StageScene.Solo, "struggle", {bodyState={exposedChest=true}})
+	
+	if(isFirstTime()):
+		addText("Wow.. You can't help but to grope your new chest a little, your nips more sensitive.. You now have {pc.breasts}.")
+	else:
+		addText("You cup your new tits and give your nips a few rubs.. You now have {pc.breasts}.")
+	
 	#addText("THEN WE SWITCH LEGS.")
 	#addText(_result.getTFText("legs"))
 	#addText("AND ALSO MAKE YOU MORE THICK.")
 	#addText(_result.getTFText("thick"))
+
+func onSexEvent(_event : SexEvent):
+	var _npc = getChar()
+	if(_event.getType() in [SexEvent.BreastFeeding, SexEvent.BreastsGroped, SexEvent.BreastsPumpMilked]):
+		if(_event.getTargetChar() == _npc):
+			accelerateTimer(0.5)

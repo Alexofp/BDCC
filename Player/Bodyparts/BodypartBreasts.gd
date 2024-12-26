@@ -38,6 +38,11 @@ func loadDataNPC(_data):
 	.loadDataNPC(_data)
 	cached_size = getSize()
 
+func getTraits():
+	return {
+		PartTrait.BreastsFemale: true,
+	}
+
 func getSlot():
 	return BodypartSlot.Breasts
 

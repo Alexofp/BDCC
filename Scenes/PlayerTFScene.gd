@@ -9,7 +9,9 @@ func _init():
 func _run():
 	if(state == ""):
 		playAnimation(StageScene.Solo, "stand")
-		saynn("SOMETHING IS ABOUT TO HAPPEN")
+		saynn("A strange sensation begins to wash over you..")
+		
+		saynn("Something is happening to your body.. you can feel it..")
 		
 		addButton("Continue", "See what happens..", "doTF")
 		
@@ -45,6 +47,10 @@ func _react(_action: String, _args):
 		var result = tfHolder.doFirstPendingTransformation({})
 		savedText = result["text"]
 		tfCount += 1
+		
+		if(result.has("anim") && result["anim"].size() > 2):
+			var animInfo:Array = result["anim"]
+			playAnimation(animInfo[0], animInfo[1], animInfo[2])
 		
 		setState("afterTF")
 		return

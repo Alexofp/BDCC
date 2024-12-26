@@ -29,10 +29,133 @@ func onReplace(_otherEffect):
 func generateTransformText(_result:Dictionary):
 	var origSize:int = _result["origSize"]
 	var size:int = _result["size"]
+	var breastsCovered:bool = (getChar().getFirstItemThatCoversBodypart(BodypartSlot.Breasts) != null)
 	
 	#addText("Increased breast size from "+str(origSize)+" up to "+str(size)+". {npc.YourHis} breasts are now {npc.breasts}.")
-	addText(describeBreastTransformation(origSize, size))
+	addText(describeBreastTransformation(origSize, size, breastsCovered))
+	addText(describeNewSize(origSize, size, breastsCovered))
 
+func generateShortTransformText(_result:Dictionary):
+	var origSize:int = _result["origSize"]
+	var size:int = _result["size"]
+	var breastsCovered:bool = (getChar().getFirstItemThatCoversBodypart(BodypartSlot.Breasts) != null)
+	
+	addText(describeBreastTransformation(origSize, size, breastsCovered))
+
+func describeNewSize(origSize:int, size:int, _breastsCovered:bool = false) -> String:
+	var nowOrStill := "now"
+	if(size <= origSize || ((origSize in [BreastsSize.FLAT, BreastsSize.FOREVER_FLAT]) && (size in [BreastsSize.FLAT, BreastsSize.FOREVER_FLAT]))):
+		nowOrStill = "still"
+	
+	if(size <= BreastsSize.FLAT):
+		return RNG.pick([
+			"{npc.YourHis} chest is "+nowOrStill+" completely flat, smooth and {npc.masc}. The absence of curves gives {npc.youHim} a sleek, streamlined appearance, emphasizing {npc.yourHis} other features. {npc.YouHe} {npc.youVerb('feel')} a sense of freedom, unencumbered by weight.",
+		])
+	if(size <= BreastsSize.A):
+		return RNG.pick([
+			"{npc.YourHis} breasts are "+nowOrStill+" modestly rounded and perky, sitting high on {npc.yourHis} chest. The gentle curve adds a hint of femininity, drawing attention to {npc.yourHis} collarbone and shoulders, enhancing {npc.yourHis} overall allure.",
+		])
+	if(size <= BreastsSize.B):
+		return RNG.pick([
+			"{npc.YourHis} breasts are " + nowOrStill + " quite obvious and soft, with a lovely shape that bounces ever so slightly with {npc.yourHis} movements. The gentle curves create a more pronounced silhouette, making {npc.youHim} feel both sexy and confident.",
+		])
+	if(size <= BreastsSize.C):
+		return RNG.pick([
+			"{npc.YourHis} breasts are " + nowOrStill + " voluptuous and full, swelling with a delightful weight that creates a captivating sight. The soft curves invite touch, and {npc.youHim} can feel the warmth radiating from {npc.yourHis} chest, enhancing {npc.yourHis} sensuality.",
+		])
+	if(size <= BreastsSize.D):
+		return RNG.pick([
+			"{npc.YourHis} breasts are " + nowOrStill + " generous and heavy, with a tantalizing fullness that pulls gently at {npc.yourHis} chest. The deep, inviting cleavage is accentuated by {npc.yourHis} more pronounced nipples, which are sensitive to the slightest touch.",
+		])
+	if(size <= BreastsSize.DD):
+		return RNG.pick([
+			"{npc.YourHis} breasts are " + nowOrStill + " impressively overflowing with softness and allure. They are undeniably eye-catching, with voluptuous shapes that demand attention. The weight and fullness create a seductive bounce, making every movement feel intoxicating.",
+		])
+	if(size <= BreastsSize.DDD):
+		return RNG.pick([
+			"{npc.YourHis} breasts are " + nowOrStill + " strikingly full and curvaceous, sitting proudly on {npc.yourHis} chest. The dramatic silhouette is both alluring and overwhelming, and the weight of them is intoxicating, with sensitive nipples eager for attention.",
+		])
+	if(size <= BreastsSize.G):
+		return RNG.pick([
+			"{npc.YourHis} breasts are " + nowOrStill + " stunningly large and captivating, heavy and full with a deep valley of cleavage that is both inviting and provocative. The sheer size draws all eyes to {npc.youHim}, and {npc.youHim} can feel the power of {npc.yourHis} curves.",
+		])
+	if(size <= BreastsSize.H):
+		return RNG.pick([
+			"{npc.YourHis} breasts are " + nowOrStill + " eye-poppingly voluptuous and commanding, swaying with every movement. The breathtaking curves and prominent nipples beg for attention, teasing with their sensitivity.",
+		])
+	if(size <= BreastsSize.I):
+		return RNG.pick([
+			"{npc.YourHis} breasts are " + nowOrStill + " astonishingly full, a marvel of softness and allure. They are heavy and round, creating a dramatic presence that is impossible to ignore, with sensitive nipples eager for touch.",
+		])
+	if(size <= BreastsSize.J):
+		return RNG.pick([
+			"{npc.YourHis} breasts are " + nowOrStill + " jaw-droppingly large and undeniably sexy, overflowing with softness and creating a deep, inviting cleavage. The sheer size and weight make {npc.youHim} feel powerful, radiating confidence.",
+		])
+	if(size <= BreastsSize.K):
+		return RNG.pick([
+			"{npc.YourHis} breasts are " + nowOrStill + " breathtakingly voluptuous, heavy and full with a stunning silhouette that captivates all who gaze upon {npc.youHim}. The weight is intoxicating, and {npc.yourHis} sensitive nipples crave attention.",
+		])
+	if(size <= BreastsSize.L):
+		return RNG.pick([
+			"{npc.YourHis} breasts are " + nowOrStill + " extraordinarily large, a marvel of curves and softness. They create a dramatic presence that is both alluring and overwhelming, making {npc.youHim} feel incredibly sexy and confident.",
+		])
+	if(size <= BreastsSize.M):
+		return RNG.pick([
+			"{npc.YourHis} breasts are " + nowOrStill + " magnificent, a true spectacle of voluptuousness. They are heavy and round, creating a deep valley of cleavage that is both inviting and provocative, drawing all eyes to {npc.youHim}.",
+		])
+	if(size <= BreastsSize.N):
+		return RNG.pick([
+			"{npc.YourHis} breasts are " + nowOrStill + " astonishingly full, a breathtaking display of softness and allure. They create a dramatic silhouette that captivates all who gaze upon {npc.youHim}, radiating confidence and power.",
+		])
+	if(size == BreastsSize.O || true):
+		return RNG.pick([
+			"{npc.YourHis} breasts are " + nowOrStill + " incredible, a true marvel of size and sensuality. They are heavy and full, creating a stunning presence that is impossible to ignore, making {npc.youHim} feel powerful and alluring.",
+		])
+	
+	return ""
+
+func describeBreastTransformation(origSize:int, size:int, breastsCovered:bool = false) -> String:
+	if(origSize == size):
+		return RNG.pick([
+			"There is a slight warm tingle in {npc.yourHis} breasts, a gentle pulse that radiates through {npc.yourHis} chest. As the sensation washes over, {npc.youHe} {npc.youVerb('expect')} something to happen, but nothing about them seems to be changing. The familiar weight remains.",
+			"A soft warmth envelops {npc.yourHis} breasts, and {npc.youHe} {npc.youVerb('sense')} a shift in energy, but the size remains unchanged. The tingling sensation lingers, teasing {npc.youHim} with the possibility of change, yet {npc.yourHis} breasts hold their familiar shape. {npc.YouHe} {npc.youAre} left feeling both relieved and oddly unsatisfied as the moment passes.",
+			"A gentle warmth spreads through {npc.yourHis} chest, and for a moment, {npc.youHe} {npc.youVerb('think')} something might happen. But as the sensation fades, {npc.youHe} {npc.youVerb('realize')} {npc.yourHis} breasts are just as they were. Same size and same volume.",
+			"A soft tingling sensation courses through {npc.yourHis} chest, and {npc.youHe} {npc.youVerb('brace')} for a change. But as the warmth fades, {npc.youHe} {npc.youVerb('realize')} that {npc.yourHis} breasts are still the same, their size and weight unchanged.",
+		])
+	var diff:int = size - origSize
+	if(diff == 1):
+		return RNG.pick([
+			"A warm sensation begins to spread through {npc.yourHis} breasts, a gentle pulse that hints at a change. {npc.youHe} {npc.youVerb('feel')} a slight pressure building, and as the warmth intensifies, {npc.youHe} {npc.youVerb('realize')} {npc.yourHis} breasts are swelling just a bit. {npc.yourHis} breasts now look and feel slightly heavier.",
+			"{npc.YouHe} {npc.youVerb('sense')} a soft warmth enveloping {npc.yourHis} chest, and a gentle tingling begins to take hold. As the sensation grows, {npc.youHe} {npc.youVerb('feel')} {npc.yourHis} breasts expanding slightly, the change subtle yet undeniable. The added weight settles in" + (", making {npc.yourHis} clothes feel a little tighter" if breastsCovered else "") + ".",
+			"A gentle warmth radiates through {npc.yourHis} breasts, and {npc.youHe} {npc.youVerb('feel')} a slight tug as they begin to swell. The transformation is gradual, but soon {npc.youHe} {npc.youVerb('realize')} they’ve grown just enough to feel a bit heavier.",
+			"{npc.YouHe} {npc.youVerb('feel')} a warm pulse coursing through {npc.yourHis} chest, and as it intensifies, {npc.yourHis} breasts begin to expand. The change is slight but noticeable, the added weight creating a new sensation that draws {npc.yourHis} attention.",
+			"A soft tingling sensation envelops {npc.yourHis} breasts, and {npc.youHe} {npc.youVerb('brace')} for the change. As the warmth spreads, {npc.youHe} {npc.youVerb('feel')} them swell slightly, the weight becoming more pronounced. {npc.yourHis} breasts are now fuller and more gropable than before.",
+		])
+	if(diff > 1):
+		return RNG.pick([
+			"A powerful surge of warmth engulfs {npc.yourHis} breasts, and {npc.youHe} {npc.youVerb('gasp')} as they begin to swell significantly. The sensation is intense, a deep pulsing that pulls at {npc.yourHis} " + ("clothing" if breastsCovered else "bare chest") + " as {npc.yourHis} breasts expand dramatically. The weight settles heavily on {npc.yourHis} chest, creating a new sexy silhouette.",
+			"{npc.YouHe} {npc.youVerb('feel')} an overwhelming warmth radiating through {npc.yourHis} breasts, and the change is immediate and striking. They swell with a force that leaves {npc.youHim} breathless, the weight becoming substantial as they grow larger.",
+			"A wave of heat washes over {npc.yourHis} body, and {npc.yourHis} breasts inflate with a powerful surge. The sensation is intoxicating as they grow noticeably larger, the weight shifting {npc.yourHis} balance.",
+			"{npc.YouHe} {npc.youVerb('sense')} a strong tingling as {npc.yourHis} breasts expand, the transformation unfolding rapidly. The weight becomes heavy and full, pulling at {npc.yourHis} " + ("clothing" if breastsCovered else "bare chest") + " and altering {npc.yourHis} posture. The change is significant, requiring {npc.youHim} to adjust to {npc.yourHis} new, much bigger size.",
+			"A deep warmth radiates through {npc.yourHis} chest, and {npc.youHe} {npc.youVerb('feel')} {npc.yourHis} breasts swell to an impressive size. The transformation is overwhelming, the weight settling heavily on {npc.yourHis} frame, leaving a very obvious change.",
+		])
+	if(diff == -1):
+		return RNG.pick([
+			"A cool sensation washes over {npc.yourHis} breasts, and {npc.youHe} {npc.youVerb('feel')} a gentle pull as they begin to shrink just a bit. The warmth that enveloped {npc.youHim} moments ago slowly fades, leaving a subtle lightness in its wake. {npc.youHe} {npc.youVerb('notice')} {npc.yourHis} breasts getting smaller, creating a more streamlined shape.",
+			"{npc.YouHe} {npc.youVerb('sense')} a soft chill enveloping {npc.yourHis} chest, and as the sensation deepens, {npc.yourHis} breasts begin to diminish slightly. The change is subtle, but {npc.youHe} can feel the weight easing, {npc.yourHis} breasts becoming a bit smaller.",
+			"A gentle tingling sensation courses through {npc.yourHis} breasts, and {npc.youHe} {npc.youVerb('brace')} for the change. As the warmth dissipates, {npc.youHe} {npc.youVerb('realize')} they’ve shrunk slightly, the weight reduced enough to notice.",
+			"{npc.YouHe} {npc.youVerb('feel')} a soft pulse in {npc.yourHis} chest, and as it intensifies, {npc.yourHis} breasts begin to shrink, gradually losing their weight and shape.",
+			"A light tingling sensation courses through {npc.yourHis} breasts, and {npc.youHe} {npc.youVerb('sense')} a shift as they become slightly smaller. The familiar weight is reduced, leaving {npc.youHim} with a more delicate shape."
+		])
+	if(diff < -1):
+		return RNG.pick([
+			"A sharp coolness spreads through {npc.yourHis} breasts, and {npc.youHe} {npc.youVerb('gasp')} as they shrink significantly. The sensation is jarring, a sudden lightness that leaves {npc.youHim} feeling unbalanced. As the weight vanishes, {npc.youHe} {npc.youAre} left with a strikingly different silhouette, {npc.yourHis} breasts losing a lot of their volume.",
+			"{npc.YouHe} {npc.youVerb('feel')} a wave of chill enveloping {npc.yourHis} chest, and {npc.yourHis} breasts begin to deflate dramatically. The transformation is swift, and {npc.youHe} can’t help but notice how much lighter they look and feel now.",
+			"A deep chill courses through {npc.yourHis} breasts, and {npc.youHe} {npc.youVerb('sense')} a significant reduction in size. The weight that once pulled at {npc.yourHis} " + ("clothing" if breastsCovered else "bare chest") + " is gone, leaving {npc.youHim} feeling almost weightless.",
+			"{npc.YouHe} {npc.youVerb('sense')} a strong tingling as {npc.yourHis} breasts shrink rapidly, the change leaving {npc.youHim} breathless. The volume of {npc.yourHis} breasts goes down a lot, creating a very different appearance.",
+			"A sudden chill washes over {npc.yourHis} chest, and {npc.youHe} {npc.youVerb('feel')} {npc.yourHis} breasts gradually getting smaller and smaller, shrinking to a size that feels almost foreign.",
+		])
+	return "something went wrong"
 
 func breastSizeToString(size:int) -> String:
 	if(size <= BreastsSize.FLAT):
@@ -45,12 +168,10 @@ func breastSizeToString(size:int) -> String:
 		return "big"
 	return "huge"
 
-func describeBreastTransformation(origSize:int, size:int) -> String:
-	# Define descriptive terms for breast sizes
+func describeBreastTransformationOld(origSize:int, size:int) -> String:
 	var initial_size:String = breastSizeToString(origSize)
 	var target_size:String = breastSizeToString(size)
 
-	# Handle cases where sizes are the same
 	if initial_size == target_size:
 		if(origSize == size):
 			return RNG.pick([
@@ -68,10 +189,8 @@ func describeBreastTransformation(origSize:int, size:int) -> String:
 				"A faint sensation of lightness spreads as {npc.yourHis} breasts reduce slightly in size."
 			])
 
-	# Build the transformation description
 	var transformation_desc = ""
 
-	# Enlargement transformations
 	if initial_size == "flat" and target_size == "small":
 		transformation_desc = RNG.pick([
 			"A faint tingling begins as {npc.yourHis} flat chest starts to swell into petite and modest breasts.",
@@ -183,3 +302,5 @@ func describeBreastTransformation(origSize:int, size:int) -> String:
 		])
 
 	return transformation_desc
+
+

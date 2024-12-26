@@ -2680,6 +2680,10 @@ func onSexEvent(_event : SexEvent):
 	for itemSlot in items:
 		var item = items[itemSlot]
 		item.onSexEvent(_event)
+	
+	var theTFHolder = getTFHolder()
+	if(theTFHolder != null):
+		theTFHolder.onSexEvent(_event)
 
 func onFightStart(_contex = {}):
 	beforeFightStarted() # Legacy
@@ -3272,3 +3276,9 @@ func applyTFBodypart(bodypartSlot, data:Dictionary):
 
 func getTFHolder():
 	return null
+
+func hasActiveTransformations() -> bool:
+	var theHolder = getTFHolder()
+	if(theHolder == null):
+		return false
+	return theHolder.hasActiveTransformations()
