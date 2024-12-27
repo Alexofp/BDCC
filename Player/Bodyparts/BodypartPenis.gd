@@ -202,3 +202,9 @@ func getCustomPumpScene(_isAdvanced = false):
 
 func shouldUseBigPump():
 	return false
+
+func getTransformAwayMessage(_context:Dictionary) -> String:
+	return "{npc.YouHe} suddenly {npc.youVerb('feel')} a rush of warmth enveloping {npc.yourHis} lower body, and a wave of energy courses through {npc.youHim}. {npc.YourHis} penis begins to dissolve, its flesh softening and retracting as if it were melting away. {npc.YouHe} can feel the skin pulling back, the sensation both exhilarating and unsettling. Inch by inch, {npc.youHe} {npc.youAre} losing {npc.yourHis} length.. until there is nothing left but a flat crotch."
+
+func getTransformGrowMessage(_context:Dictionary) -> String:
+	return "A weird, tingling sensation spreads through {npc.yourHis} groin, and {npc.youHe} {npc.youVerb('sense')} something new beginning to form within {npc.youHim}. The skin stretches and reshapes, as if something powerful is pushing outward from deep inside. The contours of {npc.yourHis} new anatomy begin to take shape, and {npc.youHe} can {npc.youVerb('feel')} the weight of testicles forming, settling into place beneath {npc.youHim}. A shaft begins to grow, thickening and lengthening, the skin stretching to accommodate its size. Finally, as the last remnants of the transformation settle, {npc.youHe} {npc.youVerb('realize')} that {npc.youHe} now {npc.youVerb('have', 'has')} a "+getVulgarName()+" hanging between {npc.yourHis} legs, pulsating with newfound virility and power."

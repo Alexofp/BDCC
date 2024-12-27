@@ -5,6 +5,7 @@ var holderRef:WeakRef
 
 var id:String = "error"
 var tfID:int = -1
+var slot:String = ""
 
 var tfTexts:Array = [] # no save
 var needsToBeChecked:bool = false # no save
@@ -60,3 +61,9 @@ func canReplace(otherEffect) -> bool:
 
 func onReplace(_otherEffect):
 	pass
+
+func getBodypartSlot() -> String:
+	return slot
+
+func setBodypartSlot(newSlot:String):
+	slot = newSlot

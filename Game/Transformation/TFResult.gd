@@ -37,6 +37,8 @@ func getTFText(effectID:String) -> String:
 func getAllTFTexts(connectorStr:String = "\n\n") -> String:
 	var results:Array = []
 	for effectID in effects:
+		if(getEffectField(effectID, "noOutput", false)):
+			continue
 		results.append(getTFText(effectID))
 	return Util.join(results, connectorStr)
 

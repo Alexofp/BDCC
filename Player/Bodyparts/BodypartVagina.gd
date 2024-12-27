@@ -54,3 +54,9 @@ func getRevealMessage():
 
 func supportsSkin():
 	return false
+
+func getTransformAwayMessage(_context:Dictionary) -> String:
+	return "A worrying warmth spreads through {npc.yourHis} lower abdomen, and {npc.youHe} {npc.youVerb('feel')} a soft pulsing sensation as {npc.yourHis} vagina begins to get smaller and smaller. The folds and curves are gradually flattening and receding, slick inner walls retracting back into {npc.yourHis} body. {npc.YouHe} {npc.youVerb('feel')} a rush of air against {npc.yourHis} skin as the last remnants of {npc.yourHis} pussy disappear, the hole closing up, leaving {npc.youHim} with a smooth, flat crotch."
+
+func getTransformGrowMessage(_context:Dictionary) -> String:
+	return "A tingling sensation spreads through {npc.yourHis} abdomen, and {npc.youHe} {npc.youVerb('sense)} something new beginning to form within {npc.youHim}. The delicate skin is stretching and reshaping, as if something is blossoming from deep inside. Each pulse sends waves of anticipation coursing through {npc.youHim}, heightening {npc.yourHis} awareness. The contours of {npc.yourHis} new anatomy begin to take shape until the last remnants of the transformation settle. {npc.YouHe} {npc.youVerb('feel')} the unmistakable opening of {npc.yourHis} new flower, the soft folds parting to reveal a slick, needy pussy."

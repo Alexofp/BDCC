@@ -79,3 +79,10 @@ func getCharCreatorData():
 
 func getTailScale():
 	return tailScale
+
+func getTransformAwayMessage(_context:Dictionary) -> String:
+	return "A tingling sensation spreads through {npc.yourHis} back. It's {npc.yourHis} tail! It begins to rapidly shrink and retract into {npc.yourHis} body, muscles and bones gradually dissolving.. until {npc.youHe} {npc.youVerb('lose')} it completely."
+
+func getTransformGrowMessage(_context:Dictionary) -> String:
+	var isFlexible:bool = hasTrait(PartTrait.TailFlexible)
+	return "{npc.YouHe} {npc.youVerb('feel')} a strange tugging sensation at the base of {npc.yourHis} spine, and suddenly, a new"+(", flexible" if isFlexible else "")+" tail begins to sprout. It unfurls behind {npc.youHim} and already begins to sway with every movement."

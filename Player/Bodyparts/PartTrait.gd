@@ -10,6 +10,7 @@ enum {
 	
 	# Horns
 	HornsGraspable,
+	HornsSingle,
 	
 	# Tail
 	TailFlexible,
@@ -42,6 +43,7 @@ const traitNames = [
 	
 	# Horns
 	"HornsGraspable",
+	"HornsSingle",
 	
 	# Tail
 	"TailFlexible",

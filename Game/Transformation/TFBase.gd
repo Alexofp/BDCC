@@ -135,9 +135,11 @@ func addText(theText:String):
 	#getHolder().addTextToReactQueue(theText)
 	tfTexts.append(theText)
 
-func effect(_effectID:String, _args:Array = []):
+func effect(_effectID:String, _args:Array = [], bodypartSlot:String = ""):
 	var theEffect:TFEffect = GlobalRegistry.createTransformationEffect(_effectID)
 	theEffect.tfID = uniqueID
+	if(bodypartSlot != ""):
+		theEffect.setBodypartSlot(bodypartSlot)
 	theEffect.initArgs(_args)
 	return theEffect
 
@@ -146,7 +148,7 @@ func partEffect(theid:String, part:String, effectID:String, args:Array = []) -> 
 		id = theid,
 		type = TFTYPE_PART,
 		part = part,
-		effect = effect(effectID, args),
+		effect = effect(effectID, args, part),
 	}
 	
 func charEffect(theid:String, effectID:String, args:Array = []) -> Dictionary:

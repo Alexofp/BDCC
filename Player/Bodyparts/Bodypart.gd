@@ -34,6 +34,9 @@ func getSlot():
 func getName():
 	return visibleName
 
+func getVulgarName() -> String:
+	return getName()
+
 func getCharacterCreatorName():
 	return getName().capitalize()
 
@@ -388,3 +391,16 @@ func generateRandomSkinIfCan(_dynamicCharacter):
 
 func generateRandomColors(_dynamicCharacter):
 	pass
+
+func getTransformAwayMessage(_context:Dictionary) -> String:
+	var slot = getSlot()
+	var slotName:String = BodypartSlot.getVisibleNameNoCap(slot)
+	var shouldHaveS:bool = !slotName.ends_with("s") || (slotName in ["penis", "anus"])
+	return "{npc.YouHe} {npc.youVerb('feel')} a tingling sensation on {npc.yourHis} scalp as {npc.yourHis} "+slotName+" begin"+("s" if shouldHaveS else "")+" to shift and change. Suddenly, {npc.YourHis} "+slotName+" morph"+("s" if shouldHaveS else "")+" away completely, leaving nothing in its place!"
+
+func getTransformGrowMessage(_context:Dictionary) -> String:
+	var slot = getSlot()
+	var slotName:String = BodypartSlot.getVisibleNameNoCap(slot)
+	var shouldHaveS:bool = !slotName.ends_with("s") || (slotName in ["penis", "anus"])
+	var slotChildName:String = BodypartSlot.getSlotChildName(slot)
+	return "A sudden warmth spreads through {npc.yourHis} body, and {npc.youHe} {npc.youVerb('feel')} a peculiar sensation as "+("a " if shouldHaveS else "")+"new "+slotName+" begin"+("s" if shouldHaveS else "")+" to form from {npc.yourHis} "+slotChildName+". "+("It gets" if shouldHaveS else "They get")+" more and more defined, the contours slowly taking shape. The process is quite.. uncomfortable.. to say the least.. but eventually "+("it finishes" if shouldHaveS else "they finish")+" growing, assuming "+("its" if shouldHaveS else "their")+" final form."

@@ -19,3 +19,6 @@ func getTraits():
 	return {
 		PartTrait.PenisBarbs: true,
 	}
+
+func getVulgarName() -> String:
+	return "barbed feline cock"

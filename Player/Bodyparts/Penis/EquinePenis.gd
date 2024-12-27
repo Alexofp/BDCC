@@ -63,3 +63,6 @@ func generateRandomColors(_dynamicCharacter):
 
 func shouldUseBigPump():
 	return true
+
+func getVulgarName() -> String:
+	return "horsecock"

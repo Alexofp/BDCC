@@ -37,6 +37,9 @@ func doProgress(_context:Dictionary) -> Dictionary:
 				partEffect("breasts", BodypartSlot.Breasts, "BreastSizeInc"),
 				#partEffect("legs", BodypartSlot.Legs, "SwitchPart", ["plantilegs"]),
 				#charEffect("thick", "AddThickness", [10]),
+				#partEffect("nohorns", BodypartSlot.Horns, "SwitchPart", [null]),
+				#partEffect("testpenis", BodypartSlot.Penis, "SwitchPart", [null]),
+				#partEffect("testvag", BodypartSlot.Vagina, "SwitchPart", ["vagina"]),
 			]
 		}
 	if(charHasMaleBreasts() && !didChangeBreasts):
@@ -50,6 +53,7 @@ func doProgress(_context:Dictionary) -> Dictionary:
 	return {
 		effects = [
 			partEffect("breasts", BodypartSlot.Breasts, "BreastSizeInc", [2]),
+			#partEffect("testpenis", BodypartSlot.Penis, "SwitchPart", ["felinepenis"]),
 		]
 	}
 
