@@ -94,7 +94,7 @@ func reactProgressFinal(_context:Dictionary, _result:TFResult):
 	return {text=Util.join(tfTexts, "\n\n"), anim=(reactResultData["anim"] if reactResultData.has("anim") else [])}
 
 func reactProgressShort(_context:Dictionary, _result:TFResult):
-	addText(_result.getAllTFTexts(" "))
+	addText(_result.getAllTFTexts(" ", false))
 
 func reactProgressShortFinal(_context:Dictionary, _result:TFResult):
 	tfTexts.clear()

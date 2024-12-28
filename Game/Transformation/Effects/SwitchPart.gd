@@ -67,7 +67,12 @@ func generateTransformText(_result:Dictionary):
 		if(bodypartRefNow != null):
 			addText(bodypartRefNow.getTransformGrowMessage({result=_result}))
 		else:
-			addText("A sudden warmth spreads through your body, and you feel a peculiar sensation as "+("a " if shouldHaveS else "")+"new "+slotName+" begin"+("s" if shouldHaveS else "")+" to form from your "+slotChildName+". "+("It gets" if shouldHaveS else "They get")+" more and more defined, the contours slowly taking shape. The process is quite.. uncomfortable.. to say the least.. but eventually "+("it finishes" if shouldHaveS else "they finish")+" growing, assuming "+("its" if shouldHaveS else "their")+" final form.")
-
-	else:
-		addText("YOUR SOMETHING GOT SWITCHED")
+			addText("A sudden warmth spreads through {npc.yourHis} body, and {npc.youHe} {npc.youVerb('feel')} a peculiar sensation as "+("a " if shouldHaveS else "")+"new "+slotName+" begin"+("s" if shouldHaveS else "")+" to form from {npc.yourHis} "+slotChildName+". "+("It gets" if shouldHaveS else "They get")+" more and more defined, the contours slowly taking shape. The process is quite.. uncomfortable.. to say the least.. but eventually "+("it finishes" if shouldHaveS else "they finish")+" growing, assuming "+("its" if shouldHaveS else "their")+" final form.")
+	# Part morphs into a different one
+	elif(hadPartBefore && hasPartNow):
+		if(bodypartRefNow != null):
+			addText(bodypartRefNow.getTransformMorphMessage({result=_result, oldTraits=(bodypartRefBefore.getTraits() if bodypartRefBefore != null else {})}))
+		else:
+			addText("An unusual sensation courses through {npc.yourHis} body as {npc.yourHis} "+slotName+" begin"+("s" if shouldHaveS else "")+" to shift and change! The familiar contours start to dissolve and reshape, morphing into something different. Gradually, the new "+slotName+" emerge"+("s" if shouldHaveS else "")+", taking on a more defined form. The process is quite painful and uncomfortable, but eventually "+("it settles" if shouldHaveS else "they settle")+" into "+("its" if shouldHaveS else "their")+" final appearance. {npc.YouHe} now {npc.youVerb('have', 'has')} "+bodypartRefNow.getAVulgarName()+".")
+	#else:
+	#	addText("This shouldn't happen")

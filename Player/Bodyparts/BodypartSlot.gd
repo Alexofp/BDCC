@@ -48,7 +48,7 @@ static func getSlotChildName(slot: String):
 		return "butt"
 	if(slot == Legs):
 		return "butt"
-	return "unknown"
+	return "body"
 
 static func isEssential(slot):
 	if(slot == Horns):

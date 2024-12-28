@@ -60,3 +60,6 @@ func getTransformAwayMessage(_context:Dictionary) -> String:
 
 func getTransformGrowMessage(_context:Dictionary) -> String:
 	return "A tingling sensation spreads through {npc.yourHis} abdomen, and {npc.youHe} {npc.youVerb('sense)} something new beginning to form within {npc.youHim}. The delicate skin is stretching and reshaping, as if something is blossoming from deep inside. Each pulse sends waves of anticipation coursing through {npc.youHim}, heightening {npc.yourHis} awareness. The contours of {npc.yourHis} new anatomy begin to take shape until the last remnants of the transformation settle. {npc.YouHe} {npc.youVerb('feel')} the unmistakable opening of {npc.yourHis} new flower, the soft folds parting to reveal a slick, needy pussy."
+
+func getTransformMorphMessage(_context:Dictionary) -> String:
+	return "{npc.YouHe} {npc.youVerb('feel')} a warm sensation in {npc.yourHis} lower body, and suddenly, {npc.yourHis} pussy begins to transform. The shape shifts, becoming more pronounced and adorned with new textures. The change is significant, yet it kept {npc.yourHis} current tightness. {npc.YouHe} now {npc.youVerb('have', 'has')} "+getAVulgarName()+"."

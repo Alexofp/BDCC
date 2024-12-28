@@ -43,3 +43,8 @@ func getTransformAwayMessage(_context:Dictionary) -> String:
 func getTransformGrowMessage(_context:Dictionary) -> String:
 	var isSingular:bool = hasTrait(PartTrait.HornsSingle)
 	return "{npc.YouHe} {npc.youVerb('feel')} a sudden pressure building at {npc.yourHis} forehead, and with a sharp pang, "+("two majestic horns begin" if !isSingular else "a magestic new horn begins")+" to push through {npc.yourHis} skin. "+("They curl" if !isSingular else "It curls")+" upwards with fierce elegance, the sensation a mix of pain and discomfort, {npc.yourHis} mouth letting various grunts and huffs during this long process. Only when "+("they finish" if !isSingular else "it finishes")+" growing, {npc.youHe} can finally breathe out."
+
+func getTransformMorphMessage(_context:Dictionary) -> String:
+	var oldTraits:Dictionary = _context["oldTraits"] if _context.has("oldTraits") else {}
+	var wasSingle:bool = (oldTraits.has(PartTrait.HornsSingle) && oldTraits[PartTrait.HornsSingle])
+	return "{npc.YourHis} horn"+("s begin to change their shape. They twist and curl" if !wasSingle else " begins to change its shape. It twists and curls")+", taking a new, different form. {npc.YouHe} now {npc.youVerb('have', 'has')} "+getAVulgarName()+"."
