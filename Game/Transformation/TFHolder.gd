@@ -18,7 +18,8 @@ const TFTYPE_PART = 1
 func setCharacter(theChar):
 	charRef = weakref(theChar)
 	
-	startTransformation("TestTF")
+	#startTransformation("TestTF")
+	startTransformation("SpeciesTF", {species=Species.Feline})
 	#startTransformation("TestTF")
 
 func getChar():
@@ -106,7 +107,9 @@ func doFirstPendingTransformation(_context:Dictionary, _isShort:bool = false) ->
 	var newEffects:Array = foundResult["effects"] if foundResult.has("effects") else []
 	var savedEffectObjs:Dictionary = {}
 	
+	var applyOrder:Array = []
 	for effectEntry in newEffects:
+		applyOrder.append(effectEntry["id"])
 		var effectType:int = effectEntry["type"]
 		
 		if(effectType == TFTYPE_CHAR):
@@ -118,11 +121,12 @@ func doFirstPendingTransformation(_context:Dictionary, _isShort:bool = false) ->
 	
 	var applyResults:Dictionary = {}
 	
+	
 	#getChar().updateAppearance()
 	applyAllTransformationEffects(savedEffectObjs, applyResults)
 	
 	var tfResult:TFResult = TFResult.new()
-	tfResult.setData(foundResult, applyResults)
+	tfResult.setData(foundResult, applyResults, applyOrder)
 	
 	var reactResult:Dictionary
 	if(!_isShort):

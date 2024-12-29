@@ -30,3 +30,11 @@ func getSkinType():
 
 func generateSkinColors():
 	return ColorUtils.generateGenericHumanSkinColors()
+
+func calculateScoreForSpeciesCalculations(_npc) -> float:
+	var result:float = 1.0
+	if(_npc.hasBodypart(BodypartSlot.Horns)):
+		result -= 0.25
+	if(_npc.hasBodypart(BodypartSlot.Tail)):
+		result -= 0.25
+	return result

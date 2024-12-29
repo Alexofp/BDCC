@@ -3282,3 +3282,83 @@ func hasActiveTransformations() -> bool:
 	if(theHolder == null):
 		return false
 	return theHolder.hasActiveTransformations()
+
+func calculateSpeciesBasedOnParts(_limit:int = 2) -> Array:
+	var result:Array = []
+	while(_limit > 0):
+		var newBucket:Array = calculateSpeciesBasedOnPartsReq(result, 0.99 if !result.empty() else -999.9)
+		if(newBucket.size() <= 0):
+			break
+		while(_limit > 0 && newBucket.size() > 0):
+			result.append(newBucket.pop_front())
+			_limit -= 1
+	return result
+
+func calculateSpeciesBasedOnPartsReq(_ignoreSpecies:Array = [], minVal:float = -9999.9) -> Array:
+	#var result:Array = []
+	
+	var speciesScores:Dictionary = {}
+	
+	for bodypartSlot in bodyparts:
+		var theBodypart:Bodypart = getBodypart(bodypartSlot)
+		if(theBodypart == null):
+			continue
+		var partScores:Dictionary = theBodypart.getSpeciesScores()
+		
+		var isInIgnore:bool = false
+		for partSpecies in partScores:
+			if(_ignoreSpecies.has(partSpecies)):
+				isInIgnore = true
+				break
+		if(isInIgnore):
+			continue
+		
+		for partSpecies in partScores:
+			if(partSpecies == Species.Any || partSpecies == Species.AnyNPC):
+				continue
+			if(!speciesScores.has(partSpecies)):
+				speciesScores[partSpecies] = 0.0
+			speciesScores[partSpecies] += partScores[partSpecies]
+	
+	if(speciesScores.empty()):
+		return []
+	
+	var scoreToSpecies:Dictionary = {}
+	for theSpecies in speciesScores:
+		var theSpeciesObj:Species = GlobalRegistry.getSpecies(theSpecies)
+		if(theSpeciesObj == null):
+			continue
+		
+		var theSpeciesScore:float = speciesScores[theSpecies] * theSpeciesObj.calculateScoreForSpeciesCalculations(self)
+		if(theSpeciesScore <= 0.0):
+			continue
+		if(!scoreToSpecies.has(theSpeciesScore)):
+			scoreToSpecies[theSpeciesScore] = []
+		scoreToSpecies[theSpeciesScore].append(theSpecies)
+		
+	#print(scoreToSpecies)
+	
+	var biggestSp:Array = []
+	var biggestScore:float = minVal
+	for someScore in scoreToSpecies:
+		if(someScore > biggestScore):
+			biggestScore = someScore
+			biggestSp = scoreToSpecies[someScore]
+	return biggestSp
+
+func calculateNpcGender():
+	var resultGender = NpcGender.Male
+	var otherHasPenis = hasPenis()
+	var otherHasVag = hasVagina()
+	var otherHasTits = hasNonFlatBreasts()
+	if(otherHasPenis && otherHasVag):
+		resultGender = NpcGender.Herm
+	elif(otherHasPenis && otherHasTits):
+		resultGender = NpcGender.Shemale
+	elif(otherHasPenis):
+		resultGender = NpcGender.Male
+	elif(otherHasVag && !otherHasTits):
+		resultGender = NpcGender.Peachboy
+	else:
+		resultGender = NpcGender.Female
+	return resultGender

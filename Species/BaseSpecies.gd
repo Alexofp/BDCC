@@ -162,3 +162,6 @@ func onDynamicNpcCreation(_npc, _args):
 # Disables ability to generate npcs of this species with a mane
 func supportsMane():
 	return false
+
+func calculateScoreForSpeciesCalculations(_npc) -> float:
+	return 1.0

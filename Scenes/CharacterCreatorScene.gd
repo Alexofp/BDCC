@@ -17,6 +17,8 @@ func _init():
 	sceneID = "CharacterCreatorScene"
 
 func _run():
+	#print(Bodypart.findPossibleBodypartIDs(BodypartSlot.Tail, GM.pc, [Species.Human]))
+	
 	if(state == "" || state == "pickgender"):
 		say("Pick your character's gender. This will affect the color of your speech and how others will treat you. This can be changed at any point")
 		

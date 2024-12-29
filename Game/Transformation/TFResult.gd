@@ -3,10 +3,12 @@ class_name TFResult
 
 var effects:Dictionary = {}
 var tfresult:Dictionary = {}
+var effectOrder:Array = []
 
-func setData(newtfresult:Dictionary, newEffects:Dictionary):
+func setData(newtfresult:Dictionary, newEffects:Dictionary, newOrder:Array):
 	tfresult = newtfresult
 	effects = newEffects
+	effectOrder = newOrder
 
 func isSuccessful(effectID:String) -> bool:
 	if(!effects.has(effectID)):
@@ -36,15 +38,24 @@ func getTFText(effectID:String) -> String:
 
 func getAllTFTexts(connectorStr:String = "\n\n", addMiddleParts:bool = true) -> String:
 	var results:Array = []
-	var effectAmount:int = effects.size()
-	for effectID in effects:
-		var isLast:bool = (effectAmount == 1)
+	for effectID in effectOrder:
 		if(getEffectField(effectID, "noOutput", false)):
-			effectAmount -= 1
 			continue
-		results.append(getTFText(effectID))
-		if(!isLast && addMiddleParts):
-			results.append(RNG.pick([
+		var theTFText:String = getTFText(effectID)
+		if(theTFText == ""):
+			continue
+		results.append(theTFText)
+	
+	if(!addMiddleParts):
+		return Util.join(results, connectorStr)
+	var actualResults:Array = []
+	var resLen:int = results.size()
+	for resultText in results:
+		var isLast:bool = (resLen == 1)
+		
+		actualResults.append(resultText)
+		if(!isLast):
+			actualResults.append(RNG.pick([
 				"But that's not all..",
 				"Something else is happening..",
 				"Just when {npc.youHe} {npc.youVerb('think')} that this is over..",
@@ -57,8 +68,9 @@ func getAllTFTexts(connectorStr:String = "\n\n", addMiddleParts:bool = true) -> 
 				"Was that it? No.",
 				"At the same time, something else is happening..",
 			]))
-		effectAmount -= 1
-	return Util.join(results, connectorStr)
+		resLen -=1
+	
+	return Util.join(actualResults, connectorStr)
 
 func getAllTFTextsArray() -> Array:
 	var results:Array = []

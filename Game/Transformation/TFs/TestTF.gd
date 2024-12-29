@@ -36,7 +36,9 @@ func doProgress(_context:Dictionary) -> Dictionary:
 			effects = [
 				partEffect("breasts", BodypartSlot.Breasts, "BreastSizeInc"),
 				#partEffect("legs", BodypartSlot.Legs, "SwitchPart", ["plantilegs"]),
+				#partEffect("hair", BodypartSlot.Hair, "SwitchPart", ["manehair"]),
 				#charEffect("thick", "AddThickness", [10]),
+				#charEffect("asd", "SpeciesReplace", [[Species.Human, Species.Feline, Species.Canine]]),
 				#partEffect("nohorns", BodypartSlot.Horns, "SwitchPart", [null]),
 				#partEffect("testpenis", BodypartSlot.Penis, "SwitchPart", [null]),
 				#partEffect("testvag", BodypartSlot.Vagina, "SwitchPart", ["vagina"]),

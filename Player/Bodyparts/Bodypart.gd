@@ -52,6 +52,27 @@ func getCharacterCreatorDesc():
 func getCompatibleSpecies():
 	return []
 
+func getSpeciesScores() -> Dictionary:
+	var result:Dictionary = {}
+	
+	var theLimbSlot = getLimbSlot()
+	var scoreToAdd:float = 1.0
+	if(theLimbSlot == BodypartSlot.Head):
+		scoreToAdd = 1.51 # Weird numbers on purpose to lessen the chance of getting a same score
+	elif(theLimbSlot in [BodypartSlot.Tail]):
+		scoreToAdd = 1.02
+	elif(theLimbSlot in [BodypartSlot.Horns]):
+		scoreToAdd = 0.79
+	elif(theLimbSlot in [BodypartSlot.Breasts, BodypartSlot.Body, BodypartSlot.Legs]):
+		scoreToAdd = 0.74
+	elif(theLimbSlot in [BodypartSlot.Hair]):
+		scoreToAdd = 0.23
+	
+	for theSpecies in getCompatibleSpecies():
+		result[theSpecies] = scoreToAdd
+	
+	return result
+
 func getFluids():
 	if(orifice != null):
 		return orifice.getFluids()
@@ -397,6 +418,75 @@ func generateRandomSkinIfCan(_dynamicCharacter):
 
 func generateRandomColors(_dynamicCharacter):
 	pass
+
+static func findPossibleBodypartIDs(bodypartSlot, acharacter, theSpecies:Array) -> Array:
+	var possible = []
+	#var fullWeight = 0.0
+	#if(!BodypartSlot.isEssential(bodypartSlot)):
+	#	possible.append([null, 1.0])
+	
+	var allbodypartsIDs = GlobalRegistry.getBodypartsIdsBySlot(bodypartSlot)
+	for bodypartID in allbodypartsIDs:
+		var bodypart = GlobalRegistry.getBodypartRef(bodypartID)
+		var supportedSpecies = bodypart.getCompatibleSpecies()
+		
+		var hasInSupported = false
+		var hasInAllowed = false
+		
+		for supported in supportedSpecies:
+			if((supported in theSpecies) || supported == Species.AnyNPC): # || supported == Species.Any
+				hasInSupported = true
+				break
+			
+		for playerSpecie in theSpecies:
+			var speciesObject = GlobalRegistry.getSpecies(playerSpecie)
+			if(bodypartID in speciesObject.getAllowedBodyparts()):
+				hasInAllowed = true
+				break
+		
+		if(hasInSupported || hasInAllowed):
+			var weight = bodypart.npcGenerationWeight(acharacter)
+			if(weight != null && weight > 0.0):
+				possible.append([bodypartID, weight])
+				#fullWeight += weight
+
+	# Adding the default bodypart of this species into the mix
+	for specie in theSpecies:
+		var speciesObject = GlobalRegistry.getSpecies(specie)
+		var bodypartID = speciesObject.getDefaultForSlotForNpcGender(bodypartSlot, acharacter.calculateNpcGender())
+		var alreadyHasInPossible = false
+		for possibleEntry in possible:
+			if(possibleEntry[0] == bodypartID):
+				alreadyHasInPossible = true
+				break
+		if(alreadyHasInPossible):
+			continue
+		if(bodypartID == null):
+			possible.append(["", 1.0])
+			#fullWeight += 1.0
+			continue
+		var bodypart = GlobalRegistry.getBodypartRef(bodypartID)
+		var weight = bodypart.npcGenerationWeight(acharacter)
+		if(weight != null && weight > 0.0):
+			possible.append([bodypartID, weight])
+			#fullWeight += weight
+	return possible
+
+static func findPossibleBodypartIDsDict(bodypartSlot, acharacter, theSpecies:Array) -> Dictionary:
+	var idsAr:Array = findPossibleBodypartIDs(bodypartSlot, acharacter, theSpecies)
+	var result:Dictionary = {}
+	
+	for idEntry in idsAr:
+		if(idEntry[1] <= 0.0):
+			continue
+		if(idEntry[0] == null):
+			idEntry[0] = ""
+		
+		if(!result.has(idEntry[0])):
+			result[idEntry[0]] = 0.0
+		result[idEntry[0]] += float(idEntry[1])
+	
+	return result
 
 func getTransformAwayMessage(_context:Dictionary) -> String:
 	var slot = getSlot()
