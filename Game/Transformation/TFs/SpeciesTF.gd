@@ -38,6 +38,15 @@ func hasAnySlotsLeftToTranform() -> bool:
 			return true
 	return false
 		
+func shouldCancelItself() -> bool:
+	if(newSpecies is Array):
+		for species in newSpecies:
+			if(GlobalRegistry.getSpecies(species) == null):
+				return true
+	elif(GlobalRegistry.getSpecies(newSpecies) == null):
+		return true
+	return .shouldCancelItself()
+		
 func canTransformFurther() -> bool:
 	if(!hasAnySlotsLeftToTranform()):
 		return false
@@ -97,15 +106,6 @@ func reactProgress(_context:Dictionary, _result:TFResult):
 	else:
 		playAnim(StageScene.Solo, "struggle", {bodyState={naked=true}})
 	
-#	if(isFirstTime()):
-#		addText("Wow.. You can't help but to grope your new chest a little, your nips more sensitive.. You now have {pc.breasts}.")
-#	else:
-#		addText("You cup your new tits and give your nips a few rubs.. You now have {pc.breasts}.")
-#
-	#addText("THEN WE SWITCH LEGS.")
-	#addText(_result.getTFText("legs"))
-	#addText("AND ALSO MAKE YOU MORE THICK.")
-	#addText(_result.getTFText("thick"))
 #
 #func onSexEvent(_event : SexEvent):
 #	var _npc = getChar()

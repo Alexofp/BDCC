@@ -2110,10 +2110,6 @@ func getWornChastityCage():
 	return null
 
 func isWearingChastityCage() -> bool:
-	# Having a chastity cage also means that you have a penis
-	if(!hasBodypart(BodypartSlot.Penis)):
-		return false
-	
 	if(!getInventory().hasSlotEquipped(InventorySlot.Penis)):
 		return false
 	

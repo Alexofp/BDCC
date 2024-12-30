@@ -11,6 +11,7 @@ func initArgs(_args:Array):
 	partArts = _args[1] if _args.size() > 1 else {}
 
 func applyEffect(_data:Dictionary) -> Dictionary:
+	var extras:Dictionary = {}
 	var oldPartID = _data["bodypartID"] if _data.has("bodypartID") else null
 	if(newPartID == ""):
 		_data["bodypartID"] = null
@@ -29,9 +30,22 @@ func applyEffect(_data:Dictionary) -> Dictionary:
 	for partArt in partArts:
 		_data[partArt] = partArts[partArt]
 	
+	if(oldPartID != "" && newPartID == ""):
+		if(getBodypartSlot() == BodypartSlot.Penis):
+			var theChar:BaseCharacter = getChar()
+			
+			if(theChar.isWearingChastityCage()):
+				extras["lostcage"] = true
+				
+				if(theChar.isPlayer() || theChar.isSlaveToPlayer()):
+					theChar.getInventory().unequipSlot(InventorySlot.Penis)
+				else:
+					theChar.getInventory().clearSlot(InventorySlot.Penis)
+	
 	return {
 		success = true,
 		oldPartID = oldPartID,
+		extras = extras,
 	}
 
 func generateTransformText(_result:Dictionary):
@@ -62,6 +76,11 @@ func generateTransformText(_result:Dictionary):
 			addText(bodypartRefBefore.getTransformAwayMessage({result=_result}))
 		else:
 			addText("{npc.YouHe} {npc.youVerb('feel')} a tingling sensation on {npc.yourHis} scalp as {npc.yourHis} "+slotName+" begin"+("s" if shouldHaveS else "")+" to shift and change. Suddenly, {npc.YourHis} "+slotName+" morph"+("s" if shouldHaveS else "")+" away completely, leaving nothing in its place!")
+		
+		if(_result.has("extras")):
+			if(_result["extras"].has("lostcage") && _result["extras"]["lostcage"]):
+				addText("{npc.YourHis} chastity cage hits the floor with a loud metal clang. There is nothing left to hold it in place anymore..")
+		
 	# Grew something new that you didn't have
 	elif(!hadPartBefore && hasPartNow):
 		if(bodypartRefNow != null):

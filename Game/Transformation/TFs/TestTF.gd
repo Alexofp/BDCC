@@ -35,6 +35,7 @@ func doProgress(_context:Dictionary) -> Dictionary:
 		return {
 			effects = [
 				partEffect("breasts", BodypartSlot.Breasts, "BreastSizeInc"),
+				#partEffect("nopenis", BodypartSlot.Penis, "SwitchPart", [""]),
 				#partEffect("legs", BodypartSlot.Legs, "SwitchPart", ["plantilegs"]),
 				#partEffect("hair", BodypartSlot.Hair, "SwitchPart", ["manehair"]),
 				#charEffect("thick", "AddThickness", [10]),
@@ -55,6 +56,7 @@ func doProgress(_context:Dictionary) -> Dictionary:
 	return {
 		effects = [
 			partEffect("breasts", BodypartSlot.Breasts, "BreastSizeInc", [2]),
+			#charEffect("thick", "AddThickness", [RNG.randi_range(-10, 10)]),
 			#partEffect("testpenis", BodypartSlot.Penis, "SwitchPart", ["felinepenis"]),
 		]
 	}

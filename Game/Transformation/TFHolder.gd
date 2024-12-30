@@ -4,11 +4,10 @@ class_name TFHolder
 var charRef:WeakRef
 
 var originalParts:Dictionary = {}
-var partEffects:Dictionary = {}
+var effects:Array = []
 var affectedParts:Dictionary = {}
 
 var originalCharData:Dictionary = {}
-var charEffects:Array = []
 
 var transformations:Array = []
 
@@ -18,8 +17,8 @@ const TFTYPE_PART = 1
 func setCharacter(theChar):
 	charRef = weakref(theChar)
 	
-	#startTransformation("TestTF")
-	startTransformation("SpeciesTF", {species=Species.Feline})
+	startTransformation("TestTF")
+	#startTransformation("SpeciesTF", {species=Species.Feline})
 	#startTransformation("TestTF")
 
 func getChar():
@@ -43,9 +42,25 @@ func hasActiveTransformations() -> bool:
 func getActiveTransformationsCount() -> int:
 	return transformations.size()
 
+func undoTransformation(tf):
+	if(!transformations.has(tf)):
+		return
+	var _tfID:int = tf.uniqueID
+	transformations.erase(tf)
+	
+	var effectsSize:int = effects.size()
+	for _i in range(effectsSize):
+		var effect = effects[effectsSize - _i - 1]
+		if(effect.tfID == _tfID):
+			effects.remove(effectsSize - _i - 1)
+			
+	applyAllTransformationEffects()
+	if(transformations.empty()):
+		originalParts.clear()
+		originalCharData.clear()
+
 func undoAllTransformations():
-	partEffects.clear()
-	charEffects.clear()
+	effects.clear()
 	transformations.clear()
 	
 	applyAllTransformationEffects()
@@ -55,11 +70,10 @@ func undoAllTransformations():
 
 func makeAllTransformationsPermanent():
 	applyAllTransformationEffects()
-	partEffects.clear()
+	effects.clear()
 	transformations.clear()
 	originalParts.clear()
 	originalCharData.clear()
-	charEffects.clear()
 
 func hasPendingTransformations() -> bool:
 	for tf in transformations:
@@ -67,22 +81,6 @@ func hasPendingTransformations() -> bool:
 			return true
 	
 	return false
-
-#func doAllPendingTransformations(_context:Dictionary) -> Dictionary:
-#	var texts:Array = []
-#
-#	for tf in transformations:
-#		if(tf.isReadyToProgress()):
-#			var result:Dictionary = tf.doProgress(_context)
-#			if(result.has("text")):
-#				texts.append(result["text"])
-#
-#	#getChar().updateAppearance()
-#	applyAllTransformationEffects()
-#
-#	return {
-#		text = "Meow meow.\n\n"+Util.join(texts, "\n"),
-#	}
 
 func doFirstPendingTransformation(_context:Dictionary, _isShort:bool = false) -> Dictionary:
 	#var texts:Array = []
@@ -95,8 +93,6 @@ func doFirstPendingTransformation(_context:Dictionary, _isShort:bool = false) ->
 			var _result:Dictionary = tf.doProgressFinal(_context)
 			foundTF = tf
 			foundResult = _result
-			#if(result.has("text")):
-			#	texts.append(result["text"])
 			break
 	
 	if(foundTF == null):
@@ -107,15 +103,11 @@ func doFirstPendingTransformation(_context:Dictionary, _isShort:bool = false) ->
 	var newEffects:Array = foundResult["effects"] if foundResult.has("effects") else []
 	var savedEffectObjs:Dictionary = {}
 	
-	var applyOrder:Array = []
 	for effectEntry in newEffects:
-		applyOrder.append(effectEntry["id"])
 		var effectType:int = effectEntry["type"]
 		
-		if(effectType == TFTYPE_CHAR):
-			addCharEffect(effectEntry["effect"])
-		elif(effectType == TFTYPE_PART):
-			addPartEffect(effectEntry["part"], effectEntry["effect"])
+		if(effectType == TFTYPE_CHAR || effectType == TFTYPE_PART):
+			addEffect(effectEntry["effect"])
 		#savedEffectObjs[effectEntry["id"]] = effectEntry["effect"]
 		savedEffectObjs[effectEntry["effect"]] = effectEntry["id"]
 	
@@ -126,7 +118,7 @@ func doFirstPendingTransformation(_context:Dictionary, _isShort:bool = false) ->
 	applyAllTransformationEffects(savedEffectObjs, applyResults)
 	
 	var tfResult:TFResult = TFResult.new()
-	tfResult.setData(foundResult, applyResults, applyOrder)
+	tfResult.setData(foundResult, applyResults)
 	
 	var reactResult:Dictionary
 	if(!_isShort):
@@ -134,32 +126,22 @@ func doFirstPendingTransformation(_context:Dictionary, _isShort:bool = false) ->
 	else:
 		reactResult = foundTF.reactProgressShortFinal(_context, tfResult)
 	
-#	var finalTexts:Array = []
-#	for queueElement in reactQueue:
-#		var theType:String = queueElement["type"]
-#		if(theType == "text"):
-#			finalTexts.append(queueElement["text"])
-#		elif(theType == "parteffect"):
-#			var theText:String = queueElement["effect"].grabText()
-#			if(theText != ""):
-#				finalTexts.append(theText)
-#		elif(theType == "chareffect"):
-#			var theText:String = queueElement["effect"].grabText()
-#			if(theText != ""):
-#				finalTexts.append(theText)
-	
 	optimizeEffects()
 	
 	var gameParser:GameParser = GameParser.new()
 	var finalText:String = gameParser.executeString(reactResult["text"], {npc=getChar().getID()})
 	
 	return {
-		#text = "Meow meow.\n\n"+Util.join(finalTexts, "\n\n"),
 		text = finalText,
 		anim = (reactResult["anim"] if reactResult.has("anim") else []),
 	}
 
 func processTime(_seconds:int):
+	var tfsSize:int = transformations.size()
+	for _i in range(tfsSize):
+		var tf = transformations[tfsSize - _i - 1]
+		if(tf.shouldCancelItself()):
+			undoTransformation(tf)
 	for tf in transformations:
 		tf.processTime(_seconds)
 
@@ -178,35 +160,11 @@ func grabBodypartOriginalData(bodypartSlot):
 	return originalParts[bodypartSlot]
 
 
-func addPartEffect(bodypartSlot, effect):
+func addEffect(effect):
 	effect.setHolder(self)
-	if(!partEffects.has(bodypartSlot)):
-		partEffects[bodypartSlot] = []
-	
-#	var theEffects:Array = partEffects[bodypartSlot]
-#	for _i in range(theEffects.size()):
-#		if(effect.canReplace(theEffects[_i])):
-#			var oldEffect = theEffects[_i]
-#			#theEffects[_i] = effect
-#			theEffects.remove(_i)
-#			theEffects.append(effect)
-#			effect.onReplace(oldEffect)
-#			return
-	effect.needsToBeChecked = true
-	partEffects[bodypartSlot].append(effect)
 
-func addCharEffect(effect):
-	effect.setHolder(self)
-#	for _i in range(charEffects.size()):
-#		if(effect.canReplace(charEffects[_i])):
-#			var oldEffect = charEffects[_i]
-#			#charEffects[_i] = effect
-#			charEffects.remove(_i)
-#			charEffects.append(effect)
-#			effect.onReplace(oldEffect)
-#			return
 	effect.needsToBeChecked = true
-	charEffects.append(effect)
+	effects.append(effect)
 
 func grabCharOriginalData():
 	if(originalCharData.empty()):
@@ -217,56 +175,48 @@ func grabCharOriginalData():
 	return originalCharData
 
 func applyAllTransformationEffects(savedEffectObjs:Dictionary={}, applyResults:Dictionary={}):
-	applyCharEffects(savedEffectObjs, applyResults)
-	applyPartEffects(savedEffectObjs, applyResults)
+	applyEffects(savedEffectObjs, applyResults)
 
-func applyCharEffects(savedEffectObjs:Dictionary={}, applyResults:Dictionary={}):
+func applyEffects(savedEffectObjs:Dictionary={}, applyResults:Dictionary={}):
 	var theChar = getChar()
-	var origData = grabCharOriginalData()
-	var modifiedData = origData.duplicate(true)
+	var charOrigData = grabCharOriginalData()
+	var charModifiedData = charOrigData.duplicate(true)
+	var bodypartModifiedData:Dictionary = {}
+	var newEffectedParts:Dictionary = {}
 	
-	for effect in charEffects:
-		effect.prepareToApply()
-		var effectResult = effect.applyEffect(modifiedData)
+	for effect in effects:
+		var effectResult
+		if(effect.isPartEffect()):
+			var bodypartSlot:String = effect.getBodypartSlot()
+			
+			newEffectedParts[bodypartSlot] = true
+			
+			if(!bodypartModifiedData.has(bodypartSlot)):
+				var origData = grabBodypartOriginalData(bodypartSlot)
+				bodypartModifiedData[bodypartSlot] = origData.duplicate(true)
+			
+			effectResult = effect.applyEffect(bodypartModifiedData[bodypartSlot])
+		else:
+			effectResult = effect.applyEffect(charModifiedData)
+			
 		if(savedEffectObjs.has(effect)):
 			if(effectResult is Dictionary):
 				effectResult["effect"] = effect
 			applyResults[savedEffectObjs[effect]] = effectResult
-	#for effect in charEffects:
-	#	effect.afterAllEffects(modifiedData)
-			
 	
-	theChar.applyTFData(modifiedData)
-
-func applyPartEffects(savedEffectObjs:Dictionary={}, applyResults:Dictionary={}):
-	var theChar = getChar()
+	theChar.applyTFData(charModifiedData)
+	for bodypartSlot in bodypartModifiedData:
+		theChar.applyTFBodypart(bodypartSlot, bodypartModifiedData[bodypartSlot])
 	
-	var newAffectedParts:Dictionary = {}
-	for bodypartSlot in partEffects:
-		newAffectedParts[bodypartSlot] = true
-		var thisPartEffects:Array = partEffects[bodypartSlot]
-		var origData = grabBodypartOriginalData(bodypartSlot)
-		var modifiedData = origData.duplicate(true)
-	
-		for effect in thisPartEffects:
-			effect.prepareToApply()
-			var effectResult = effect.applyEffect(modifiedData)
-			if(savedEffectObjs.has(effect)):
-				if(effectResult is Dictionary):
-					effectResult["effect"] = effect
-				applyResults[savedEffectObjs[effect]] = effectResult
-		#for effect in thisPartEffects:
-		#	effect.afterAllEffects(modifiedData)
-	
-		theChar.applyTFBodypart(bodypartSlot, modifiedData)
-	
+	 # Removes any effects from bodyparts that weren't touched by effects
 	for bodypartSlot in affectedParts:
-		if(newAffectedParts.has(bodypartSlot)):
+		if(newEffectedParts.has(bodypartSlot)):
 			continue
 		var origData = grabBodypartOriginalData(bodypartSlot)
 		theChar.applyTFBodypart(bodypartSlot, origData)
+		originalParts.erase(bodypartSlot)
+	affectedParts = newEffectedParts
 	
-	affectedParts = newAffectedParts
 	
 	theChar.updateAppearance()
 
@@ -276,33 +226,19 @@ func tryCombineEffect(effect, theEffects:Array):
 			continue
 		if(effect.canReplace(theEffects[_i])):
 			var oldEffect = theEffects[_i]
-			#theEffects[_i] = effect
 			theEffects.remove(_i)
-			#theEffects.append(effect)
 			effect.onReplace(oldEffect)
 			return
 
 func optimizeEffects():
 	var toCheck:Array = []
-	for effect in charEffects:
+	for effect in effects:
 		if(effect.needsToBeChecked):
 			toCheck.append(effect)
 	
 	for effect in toCheck:
-		tryCombineEffect(effect, charEffects)
+		tryCombineEffect(effect, effects)
 		effect.needsToBeChecked = false
-	
-	for slot in partEffects:
-		var theEffects:Array = partEffects[slot]
-		
-		var toCheck2:Array = []
-		for effect in theEffects:
-			if(effect.needsToBeChecked):
-				toCheck2.append(effect)
-		
-		for effect in toCheck2:
-			tryCombineEffect(effect, theEffects)
-			effect.needsToBeChecked = false
 	
 	#print(charEffects)
 	#print(charEffects.duplicate())

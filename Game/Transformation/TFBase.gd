@@ -12,7 +12,7 @@ const TFTYPE_CHAR = 0
 const TFTYPE_PART = 1
 
 var tfTexts:Array = [] # no save
-var reactResultData:Dictionary = {}
+var reactResultData:Dictionary = {} # no save
 
 func start(_args:Dictionary):
 	pass
@@ -37,6 +37,12 @@ func getChar() -> BaseCharacter:
 
 func getName() -> String:
 	return "FILL ME!"
+
+func isPossibleFor(_char) -> bool:
+	return true
+
+func shouldCancelItself() -> bool:
+	return !isPossibleFor(getChar())
 
 func canTransformFurther() -> bool:
 	return !isMaxStage()
@@ -114,11 +120,6 @@ func getMaxStage() -> int:
 
 func isMaxStage() -> bool:
 	return getStage() >= getMaxStage()
-
-func doCancel(_context:Dictionary) -> Dictionary:
-	return {
-		text = "MEOW GOT CANCELLED!",
-	}
 
 func processTime(_seconds:int):
 	timer -= _seconds

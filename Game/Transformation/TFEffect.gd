@@ -27,9 +27,6 @@ func getChar():
 func initArgs(_args:Array):
 	pass
 
-func prepareToApply():
-	tfTexts.clear()
-
 func applyEffect(_data:Dictionary) -> Dictionary:
 	return {
 		success = false,
@@ -55,7 +52,7 @@ func generateShortTransformTextFinal(_result:Dictionary) -> String:
 	return Util.join(tfTexts, " ")
 
 func canReplace(otherEffect) -> bool:
-	if(id == otherEffect.id && tfID == otherEffect.tfID):
+	if(id == otherEffect.id && tfID == otherEffect.tfID && slot == otherEffect.slot):
 		return true
 	return false
 
@@ -67,3 +64,6 @@ func getBodypartSlot() -> String:
 
 func setBodypartSlot(newSlot:String):
 	slot = newSlot
+
+func isPartEffect() -> bool:
+	return slot != ""

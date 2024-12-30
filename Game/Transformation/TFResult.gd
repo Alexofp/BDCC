@@ -3,12 +3,10 @@ class_name TFResult
 
 var effects:Dictionary = {}
 var tfresult:Dictionary = {}
-var effectOrder:Array = []
 
-func setData(newtfresult:Dictionary, newEffects:Dictionary, newOrder:Array):
+func setData(newtfresult:Dictionary, newEffects:Dictionary):
 	tfresult = newtfresult
 	effects = newEffects
-	effectOrder = newOrder
 
 func isSuccessful(effectID:String) -> bool:
 	if(!effects.has(effectID)):
@@ -38,7 +36,7 @@ func getTFText(effectID:String) -> String:
 
 func getAllTFTexts(connectorStr:String = "\n\n", addMiddleParts:bool = true) -> String:
 	var results:Array = []
-	for effectID in effectOrder:
+	for effectID in effects:
 		if(getEffectField(effectID, "noOutput", false)):
 			continue
 		var theTFText:String = getTFText(effectID)
