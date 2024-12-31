@@ -19,7 +19,7 @@ func getSpecies():
 func getPenisSize():
 	return 20.0
 
-func getFluidType(_fluidSource):
+func getCustomFluidType(_fluidSource) -> String:
 	return "IvyNectar"
 
 func getFluidAmount(_fluidSource):

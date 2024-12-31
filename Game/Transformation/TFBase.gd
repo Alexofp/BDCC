@@ -127,6 +127,14 @@ func processTime(_seconds:int):
 func onSexEvent(_event : SexEvent):
 	pass
 
+func getBuffs() -> Array:
+	return []
+
+func buff(buffid, args = []) -> BuffBase:
+	var buff: BuffBase = GlobalRegistry.createBuff(buffid)
+	buff.initBuff(args)
+	return buff
+
 func playAnim(anim:String, animState:String, args:Dictionary={}):
 	reactResultData["anim"] = [anim, animState, args]
 

@@ -1,8 +1,9 @@
 extends Bodypart
 class_name BodypartPenis
 
-var lengthCM = 15
+var lengthCM: float = 15
 var ballsScale: float = 1.0
+var fluidType:String = "Cum"
 
 func _init():
 	limbSlot = LimbTypes.Penis
@@ -37,17 +38,20 @@ func applyTFData(_data):
 	
 	lengthCM = loadTFVar(_data, "lengthCM", lengthCM)
 	ballsScale = loadTFVar(_data, "ballsScale", ballsScale)
+	fluidType = loadTFVar(_data, "fluidType", fluidType)
 
 func saveData():
 	var data = .saveData()
 	data["lengthCM"] = lengthCM
 	data["ballsScale"] = ballsScale
+	data["fluidType"] = fluidType
 	
 	return data
 
 func loadData(_data):
-	lengthCM = SAVE.loadVar(_data, "lengthCM", 15)
+	lengthCM = SAVE.loadVar(_data, "lengthCM", 15.0)
 	ballsScale = SAVE.loadVar(_data, "ballsScale", 1.0)
+	fluidType = SAVE.loadVar(_data, "fluidType", "Cum")
 	
 	.loadData(_data)
 
@@ -202,6 +206,9 @@ func getCustomPumpScene(_isAdvanced = false):
 
 func shouldUseBigPump():
 	return false
+
+func getFluidType(_fluidSource) -> String:
+	return fluidType
 
 func getTransformAwayMessage(_context:Dictionary) -> String:
 	return "{npc.YouHe} suddenly {npc.youVerb('feel')} a rush of warmth enveloping {npc.yourHis} lower body, and a wave of energy courses through {npc.youHim}. {npc.YourHis} penis begins to dissolve, its flesh softening and retracting as if it were melting away. {npc.YouHe} can feel the skin pulling back, the sensation both exhilarating and unsettling. Inch by inch, {npc.youHe} {npc.youAre} losing {npc.yourHis} length.. until there is nothing left but a flat crotch."

@@ -246,3 +246,9 @@ func optimizeEffects():
 func onSexEvent(_event : SexEvent):
 	for tf in transformations:
 		tf.onSexEvent(_event)
+
+func getBuffs() -> Array:
+	var result:Array = []
+	for tf in transformations:
+		result.append_array(tf.getBuffs())
+	return result

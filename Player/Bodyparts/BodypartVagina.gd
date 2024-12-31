@@ -1,6 +1,8 @@
 extends Bodypart
 class_name BodypartVagina
 
+var fluidType:String = "GirlCum"
+
 func _init():
 	limbSlot = null
 	orifice = VaginaOrifice.new()
@@ -54,6 +56,25 @@ func getRevealMessage():
 
 func supportsSkin():
 	return false
+
+func saveData():
+	var data = .saveData()
+	data["fluidType"] = fluidType
+	
+	return data
+
+func loadData(_data):
+	fluidType = SAVE.loadVar(_data, "fluidType", "GirlCum")
+	
+	.loadData(_data)
+
+func applyTFData(_data):
+	.applyTFData(_data)
+	
+	fluidType = loadTFVar(_data, "fluidType", fluidType)
+
+func getFluidType(_fluidSource) -> String:
+	return fluidType
 
 func getTransformAwayMessage(_context:Dictionary) -> String:
 	return "A worrying warmth spreads through {npc.yourHis} lower abdomen, and {npc.youHe} {npc.youVerb('feel')} a soft pulsing sensation as {npc.yourHis} vagina begins to get smaller and smaller. The folds and curves are gradually flattening and receding, slick inner walls retracting back into {npc.yourHis} body. {npc.YouHe} {npc.youVerb('feel')} a rush of air against {npc.yourHis} skin as the last remnants of {npc.yourHis} pussy disappear, the hole closing up, leaving {npc.youHim} with a smooth, flat crotch."

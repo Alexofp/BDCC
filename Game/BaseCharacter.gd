@@ -737,6 +737,9 @@ func getFluidType(fluidSource):
 		
 	return null
 
+func getCustomFluidType(_fluidSource) -> String:
+	return ""
+
 func getFluidAmount(fluidSource):
 	if(fluidSource == FluidSource.Penis):
 		if(hasBodypart(BodypartSlot.Penis)):

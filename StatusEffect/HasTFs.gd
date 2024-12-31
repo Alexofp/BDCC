@@ -21,7 +21,7 @@ func getEffectDesc():
 	if(tfHolder == null):
 		return "You shouldn't see this.."
 	var tfCount:int = tfHolder.getActiveTransformationsCount()
-	return "You are under the effect of "+str(tfCount)+" unknown transformation"+("s" if tfCount != 1 else "")+".."
+	return "You are under the effects of "+str(tfCount)+" unknown transformation"+("s" if tfCount != 1 else "")+".."
 
 func getEffectImage():
 	return "res://Images/StatusEffects/dna1.png"
@@ -30,5 +30,7 @@ func getIconColor():
 	return IconColorCyan
 
 func getBuffs():
-	return [
-	]
+	var tfHolder:TFHolder = character.getTFHolder()
+	if(tfHolder != null):
+		return tfHolder.getBuffs()
+	return []

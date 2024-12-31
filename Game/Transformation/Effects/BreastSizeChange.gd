@@ -3,7 +3,7 @@ extends TFEffect
 var howMuch:int = 1
 
 func _init():
-	id = "BreastSizeInc"
+	id = "BreastSizeChange"
 
 func initArgs(_args:Array):
 	if(_args.size() > 0):

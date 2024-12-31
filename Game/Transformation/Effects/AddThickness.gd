@@ -14,8 +14,11 @@ func applyEffect(_data:Dictionary) -> Dictionary:
 	if(_data.has("thickness")):
 		if(_data["thickness"] < 150):
 			_data["thickness"] += howMuch
+			
 			if(_data["thickness"] > 150):
 				_data["thickness"] = 150
+			if(_data["thickness"] < 0):
+				_data["thickness"] = 0
 	return {
 		success = true,
 		oldThickness = oldThickness,
@@ -48,7 +51,7 @@ func generateTransformText(_result:Dictionary):
 		else:
 			text += RNG.pick([
 				" {npc.yourHis} butt is becoming more full and round.",
-				" It looks like {npc.youHe} gained some weight",
+				" It looks like {npc.youHe} gained some weight.",
 				" {npc.YourHis} curves become more pronounced.",
 				" {npc.YouHe} {npc.youAre} getting thicker and thicker.",
 				" {npc.YourHis} thighs are starting to fill out nicely.",

@@ -34,11 +34,13 @@ func doProgress(_context:Dictionary) -> Dictionary:
 	if(isFirstTime()):
 		return {
 			effects = [
-				partEffect("breasts", BodypartSlot.Breasts, "BreastSizeInc"),
+				partEffect("breasts", BodypartSlot.Breasts, "BreastSizeChange"),
+				#partEffect("breastss", BodypartSlot.Breasts, "FluidTypeChange", ["Piss"]),
 				#partEffect("nopenis", BodypartSlot.Penis, "SwitchPart", [""]),
 				#partEffect("legs", BodypartSlot.Legs, "SwitchPart", ["plantilegs"]),
 				#partEffect("hair", BodypartSlot.Hair, "SwitchPart", ["manehair"]),
 				#charEffect("thick", "AddThickness", [10]),
+				#charEffect("fem", "AddFemininity", [10]),
 				#charEffect("asd", "SpeciesReplace", [[Species.Human, Species.Feline, Species.Canine]]),
 				#partEffect("nohorns", BodypartSlot.Horns, "SwitchPart", [null]),
 				#partEffect("testpenis", BodypartSlot.Penis, "SwitchPart", [null]),
@@ -55,9 +57,11 @@ func doProgress(_context:Dictionary) -> Dictionary:
 		}
 	return {
 		effects = [
-			partEffect("breasts", BodypartSlot.Breasts, "BreastSizeInc", [2]),
+			partEffect("breasts", BodypartSlot.Breasts, "BreastSizeChange", [2]),
 			#charEffect("thick", "AddThickness", [RNG.randi_range(-10, 10)]),
 			#partEffect("testpenis", BodypartSlot.Penis, "SwitchPart", ["felinepenis"]),
+			charEffect("fem", "AddFemininity", [10]),
+			partEffect("penLen", BodypartSlot.Penis, "PenisLengthChange", [10]),
 		]
 	}
 
@@ -86,3 +90,10 @@ func onSexEvent(_event : SexEvent):
 	if(_event.getType() in [SexEvent.BreastFeeding, SexEvent.BreastsGroped, SexEvent.BreastsPumpMilked]):
 		if(_event.getTargetChar() == _npc):
 			accelerateTimer(0.5)
+
+func getBuffs() -> Array:
+	if(getStage() >= 1):
+		return [
+			buff(Buff.BreastsMilkProductionBuff, [50])
+		]
+	return []
