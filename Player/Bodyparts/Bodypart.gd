@@ -236,30 +236,32 @@ func getOrificeName():
 	return "error"
 
 func saveOriginalTFData() -> Dictionary:
-	var result:Dictionary = saveData()
-	if(result.has("orificeData")):
-		var _ok = result.erase("orificeData")
-	if(result.has("fluidProductionData")):
-		var _ok = result.erase("fluidProductionData")
-	if(result.has("sensitiveZone")):
-		var _ok = result.erase("sensitiveZone")
+	var saveDataData:Dictionary = saveData()
+	
+	var result:Dictionary = {}#saveData()
+	
+	for field in saveDataData:
+		if(field in ["orificeData", "fluidProductionData", "sensitiveZone", "pickedSkin", "pickedRColor", "pickedGColor", "pickedBColor"]):
+			continue
+		result[field] = saveDataData[field]
 		
 	result["bodypartID"] = id
 	
 	return result
 
 func applyTFData(_data):
-	if(supportsSkin()):
-		pickedSkin = loadTFVar(_data, "pickedSkin", pickedSkin)
-		pickedRColor = loadTFVar(_data, "pickedRColor", pickedRColor)
-		pickedGColor = loadTFVar(_data, "pickedGColor", pickedGColor)
-		pickedBColor = loadTFVar(_data, "pickedBColor", pickedBColor)
-		if(pickedRColor is String):
-			pickedRColor = Color(pickedRColor)
-		if(pickedGColor is String):
-			pickedGColor = Color(pickedGColor)
-		if(pickedBColor is String):
-			pickedBColor = Color(pickedBColor)
+#	if(supportsSkin()):
+#		pickedSkin = loadTFVar(_data, "pickedSkin", pickedSkin)
+#		pickedRColor = loadTFVar(_data, "pickedRColor", pickedRColor)
+#		pickedGColor = loadTFVar(_data, "pickedGColor", pickedGColor)
+#		pickedBColor = loadTFVar(_data, "pickedBColor", pickedBColor)
+#		if(pickedRColor is String):
+#			pickedRColor = Color(pickedRColor)
+#		if(pickedGColor is String):
+#			pickedGColor = Color(pickedGColor)
+#		if(pickedBColor is String):
+#			pickedBColor = Color(pickedBColor)
+	pass
 
 func loadTFVar(_data:Dictionary, _keyID:String, default):
 	if(!_data.has(_keyID)):
@@ -410,6 +412,16 @@ func getSkinData():
 		"g": pickedGColor,
 		"b": pickedBColor,
 	}
+
+func applySkinData(_data:Dictionary):
+	if(hasCustomSkinPattern() && _data.has("partskin") && _data["partskin"] != null):
+		pickedSkin = loadTFVar(_data, "partskin", null)
+	else:
+		pickedSkin = loadTFVar(_data, "skin", null)
+	pickedRColor = loadTFVar(_data, "r", null)
+	pickedGColor = loadTFVar(_data, "g", null)
+	pickedBColor = loadTFVar(_data, "b", null)
+	
 
 func generateRandomSkinIfCan(_dynamicCharacter):
 	if(hasCustomSkinPattern()):

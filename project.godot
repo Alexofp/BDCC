@@ -1529,6 +1529,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Transformation/TFResult.gd"
 }, {
+"base": "Object",
+"class": "TFUtil",
+"language": "GDScript",
+"path": "res://Game/Transformation/TFUtil.gd"
+}, {
 "base": "Module",
 "class": "TaviModule",
 "language": "GDScript",
@@ -1929,6 +1934,7 @@ _global_script_class_icons={
 "TFEffect": "",
 "TFHolder": "",
 "TFResult": "",
+"TFUtil": "",
 "TaviModule": "",
 "TestQuest": "",
 "TestResource": "",

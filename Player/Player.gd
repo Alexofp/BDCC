@@ -931,6 +931,13 @@ func makeAllTransformationsPermanent():
 	tfHolder.makeAllTransformationsPermanent()
 
 func saveOriginalTFData() -> Dictionary:
+	var partSkinData:Dictionary = {}
+	for bodypartSlot in bodyparts:
+		var bodypart = getBodypart(bodypartSlot)
+		if(bodypart == null):
+			continue
+		partSkinData[bodypartSlot] = bodypart.getSkinData()
+	
 	var result:Dictionary = {
 		"species": pickedSpecies,
 		"femininity": pickedFemininity,
@@ -939,6 +946,9 @@ func saveOriginalTFData() -> Dictionary:
 		"pickedSkinRColor": pickedSkinRColor.to_html(),
 		"pickedSkinGColor": pickedSkinGColor.to_html(),
 		"pickedSkinBColor": pickedSkinBColor.to_html(),
+		"gender": pickedGender,
+		"pronounsGender": pronounsGender,
+		"partsSkins": partSkinData,
 	}
 	
 	return result
@@ -948,12 +958,20 @@ func applyTFData(_data):
 	pickedFemininity = loadTFVar(_data, "femininity", pickedFemininity)
 	pickedThickness = loadTFVar(_data, "thickness", pickedThickness)
 	pickedSkin = loadTFVar(_data, "pickedSkin", pickedSkin)
+	pickedGender = loadTFVar(_data, "gender", pickedGender)
+	pronounsGender = loadTFVar(_data, "pronounsGender", pronounsGender)
 	if(_data.has("pickedSkinRColor")):
 		pickedSkinRColor = Color(_data["pickedSkinRColor"])
 	if(_data.has("pickedSkinGColor")):
 		pickedSkinGColor = Color(_data["pickedSkinGColor"])
 	if(_data.has("pickedSkinBColor")):
 		pickedSkinBColor = Color(_data["pickedSkinBColor"])
+	var partSkinData:Dictionary = loadTFVar(_data, "partsSkins", {})
+	for bodypartSlot in bodyparts:
+		var bodypart = getBodypart(bodypartSlot)
+		if(bodypart == null):
+			continue
+		bodypart.applySkinData(partSkinData[bodypartSlot] if partSkinData.has(bodypartSlot) else {})
 
 func loadTFVar(_data:Dictionary, _keyID:String, default):
 	if(!_data.has(_keyID)):

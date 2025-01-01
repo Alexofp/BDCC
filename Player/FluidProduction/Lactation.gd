@@ -28,7 +28,13 @@ func stimulate():
 	return false
 
 func shouldProduce():
-	return lactationTimer > 0 # or isPregnant()
+	if(lactationTimer > 0):
+		return true
+	var theChar = getCharacter()
+	if(theChar != null && theChar.hasBuff(Buff.BreastsForcedLactationBuff)):
+		return true
+	
+	return false
 
 func getCapacity() -> float:
 	var breasts = getBodypart()
