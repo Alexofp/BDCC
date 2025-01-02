@@ -50,7 +50,7 @@ func generateCode():
 		genFetish.append(fetishID+": "+str(fetishes[fetishID]))
 	
 	var text = "affectDom(domInfo.fetishScore({"+Util.join(genFetish, ", ")+"})"+addScore+", "+lustMod+", "+angerMod+")"
-	# affectDom(domInfo.fetishScore({fetishGiving: 1.0})+0.3, 0.1*domSensetivity(), 0.0)
+	# affectDom(domInfo.fetishScore({fetishGiving: 1.0})+0.3, 0.1*domSensitivity(), 0.0)
 	return text
 
 func saveData():

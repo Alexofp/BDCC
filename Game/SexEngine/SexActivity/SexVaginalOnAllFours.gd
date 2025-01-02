@@ -167,7 +167,7 @@ func getSubTagsCheck():
 func isStraponSex():
 	return getDom().isWearingStrapon()
 
-func domSensetivity():
+func domSensitivity():
 	var strapon = getDom().getWornStrapon()
 	if(strapon == null):
 		return 1.0
@@ -338,7 +338,7 @@ func processTurn():
 	if(state == "fucking"):
 		times += 1
 		affectSub(subInfo.fetishScore({fetishReceiving: 1.0})+0.5, 0.1, -0.1, -0.01)
-		affectDom(domInfo.fetishScore({fetishGiving: 1.0})+0.3, 0.1*domSensetivity(), 0.0)
+		affectDom(domInfo.fetishScore({fetishGiving: 1.0})+0.3, 0.1*domSensitivity(), 0.0)
 		subInfo.stimulateArousalZone(0.2, usedBodypart, 1.0)
 		domInfo.stimulateArousalZone(0.2, BodypartSlot.Penis, 1.0)
 		
@@ -596,7 +596,7 @@ func doDomAction(_id, _actionInfo):
 	
 	if(_id == "rub"):
 		affectSub(subInfo.fetishScore({fetishReceiving: 1.0}), 0.05, -0.1, 0.0)
-		affectDom(max(0.1, domInfo.fetishScore({fetishGiving: 1.0})+1.0), 0.05*domSensetivity(), 0.0)
+		affectDom(max(0.1, domInfo.fetishScore({fetishGiving: 1.0})+1.0), 0.05*domSensitivity(), 0.0)
 		
 		var text = RNG.pick([
 			"{dom.You} {dom.youVerb('rub')} {dom.yourHis} "+getDickName()+" against {sub.your} "+RNG.pick(usedBodypartNames)+".",
@@ -605,7 +605,7 @@ func doDomAction(_id, _actionInfo):
 	if(_id == "insert"):
 		if(RNG.chance(20)):
 			affectSub(subInfo.fetishScore({fetishReceiving: 1.0}), 0.01, -0.1, 0.0)
-			affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.01*domSensetivity(), 0.01)
+			affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.01*domSensitivity(), 0.01)
 			
 			var text = RNG.pick([
 				"{dom.You} {dom.youVerb('attempt')} to sink {dom.yourHis} "+getDickName()+" into {sub.your} "+RNG.pick(usedBodypartNames)+".",
@@ -621,9 +621,9 @@ func doDomAction(_id, _actionInfo):
 					"{dom.Your} "+getDickName()+" stretches {sub.your} "+RNG.pick(usedBodypartNames)+" out while trying to fit inside.",
 				])
 				affectSub(subInfo.fetishScore({fetishReceiving: 1.0}), 0.05, -0.2, -0.01)
-				affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.05*domSensetivity(), -0.01)
+				affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.05*domSensitivity(), -0.01)
 				subInfo.addArousalForeplay(0.05)
-				domInfo.addArousalForeplay(0.05*domSensetivity())
+				domInfo.addArousalForeplay(0.05*domSensitivity())
 				
 				return {text = text}
 			else:
@@ -633,9 +633,9 @@ func doDomAction(_id, _actionInfo):
 				getSub().gotOrificeStretchedBy(usedBodypart, domID, 0.2)
 				state = "fucking"
 				affectSub(subInfo.fetishScore({fetishReceiving: 1.0}), 0.1, -0.3, 0.0)
-				affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.1*domSensetivity(), -0.05)
+				affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.1*domSensitivity(), -0.05)
 				subInfo.addArousalForeplay(0.1)
-				domInfo.addArousalForeplay(0.1*domSensetivity())
+				domInfo.addArousalForeplay(0.1*domSensitivity())
 				var text = RNG.pick([
 					"{dom.You} {dom.youVerb('manage','manages')} to penetrate {sub.your} "+RNG.pick(usedBodypartNames)+"!",
 					"{dom.You} {dom.youVerb('shove','shoves')} {dom.yourHis} "+getDickName()+" inside {sub.your} "+RNG.pick(usedBodypartNames)+"!",
@@ -945,9 +945,9 @@ func doSubAction(_id, _actionInfo):
 		#switchCurrentActivityTo("SexFuckTest2")
 		domInfo.addAnger(-0.05)
 		affectSub(subInfo.fetishScore({fetishReceiving: 1.0}), 0.1, 0.0, 0.0)
-		affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.1*domSensetivity(), -0.01)
+		affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.1*domSensitivity(), -0.01)
 		subInfo.addArousalForeplay(0.05)
-		domInfo.addArousalForeplay(0.05*domSensetivity())
+		domInfo.addArousalForeplay(0.05*domSensitivity())
 		
 		return {text = "{sub.You} {sub.youVerb('rub')} against {dom.youHim}.",}
 	if(_id == "envelop"):
@@ -959,7 +959,7 @@ func doSubAction(_id, _actionInfo):
 		
 		sendSexEvent(SexEvent.HolePenetrated, domID, subID, {hole=usedBodypart,engulfed=true,strapon=isStraponSex()})
 		affectSub(subInfo.fetishScore({fetishReceiving: 1.0}), 0.1, 0.0, 0.0)
-		affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.1*domSensetivity(), -0.01)
+		affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.1*domSensitivity(), -0.01)
 		subInfo.stimulateArousalZone(0.1, usedBodypart, 0.5)
 		domInfo.stimulateArousalZone(0.1, BodypartSlot.Penis, 0.5)
 		
