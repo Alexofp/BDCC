@@ -883,7 +883,7 @@ func getText(_id:String, _args:Dictionary):
 		return [
 			"I’m down. Let’s see what you can do.",
 			"Good. Get ready, because I want all of it.",
-			"I’ll fuck you me. Just this time~.",
+			"I’ll let fuck you me. Just this time~.",
 			"You’re gonna regret offering that. In the best way.",
 		]
 	if(_id == "TalkSexOfferDeny"):
