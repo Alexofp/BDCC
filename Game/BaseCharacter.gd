@@ -3251,15 +3251,17 @@ func canZoneOrgasm(bodypartSlot) -> bool:
 
 func applyTFBodypart(bodypartSlot, data:Dictionary):
 	if(!hasBodypart(bodypartSlot)):
-		if(!data.has("bodypartID") || data["bodypartID"] == null):
+		if(!data.has("bodypartID") || data["bodypartID"] == null || data["bodypartID"] == ""):
 			return
 		giveBodypart(GlobalRegistry.createBodypart(data["bodypartID"]), false)
+		getBodypart(bodypartSlot).generateRandomColors(self)
+		getBodypart(bodypartSlot).generateRandomSkinIfCan(self)
 		getBodypart(bodypartSlot).applyTFData(data)
 		return
 	
 	if(!data.has("bodypartID")):
 		return
-	if(data["bodypartID"] == null):
+	if(data["bodypartID"] == null || data["bodypartID"] == ""):
 		removeBodypart(bodypartSlot, false)
 		return
 	

@@ -17,7 +17,10 @@ const TFTYPE_PART = 1
 func setCharacter(theChar):
 	charRef = weakref(theChar)
 	
-	startTransformation("TestTF")
+	#call_deferred("startTransformation", "SpeciesTFMinor")
+	#startTransformation("SpeciesTFMinor", {species=Species.Feline})
+	#startTransformation("Demonification")
+	startTransformation("Feminization")
 	#startTransformation("SpeciesTF", {species=Species.Feline})
 	#startTransformation("TestTF")
 
@@ -140,7 +143,7 @@ func processTime(_seconds:int):
 	var tfsSize:int = transformations.size()
 	for _i in range(tfsSize):
 		var tf = transformations[tfsSize - _i - 1]
-		if(tf.shouldCancelItself()):
+		if(tf.shouldCancelItselfFinal()):
 			undoTransformation(tf)
 	for tf in transformations:
 		tf.processTime(_seconds)
@@ -153,7 +156,8 @@ func grabBodypartOriginalData(bodypartSlot):
 		
 		var bodypart = theChar.getBodypart(bodypartSlot)
 		if(bodypart == null):
-			return {bodypartID=null}
+			originalParts[bodypartSlot] = {bodypartID=null}
+			return originalParts[bodypartSlot]
 		
 		originalParts[bodypartSlot] = bodypart.saveOriginalTFData()
 	

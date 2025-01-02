@@ -969,7 +969,7 @@ func applyTFData(_data):
 	var partSkinData:Dictionary = loadTFVar(_data, "partsSkins", {})
 	for bodypartSlot in bodyparts:
 		var bodypart = getBodypart(bodypartSlot)
-		if(bodypart == null):
+		if(bodypart == null || !partSkinData.has(bodypartSlot)):
 			continue
 		bodypart.applySkinData(partSkinData[bodypartSlot] if partSkinData.has(bodypartSlot) else {})
 

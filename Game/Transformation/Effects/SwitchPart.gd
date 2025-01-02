@@ -13,6 +13,7 @@ func initArgs(_args:Array):
 func applyEffect(_data:Dictionary) -> Dictionary:
 	var extras:Dictionary = {}
 	var oldPartID = _data["bodypartID"] if _data.has("bodypartID") else null
+	#var noPartBefore:bool = (oldPartID == "")
 	if(newPartID == ""):
 		_data["bodypartID"] = null
 	else:
@@ -26,7 +27,24 @@ func applyEffect(_data:Dictionary) -> Dictionary:
 			for tfDataField in tfData:
 				if(!_data.has(tfDataField)):
 					_data[tfDataField] = tfData[tfDataField]
-	
+			
+#			if(noPartBefore):
+#				partRef.pickedSkin = null
+#				partRef.pickedRColor = null
+#				partRef.pickedGColor = null
+#				partRef.pickedBColor = null
+#				var theChar:BaseCharacter = getChar()
+#				partRef.generateRandomColors(theChar)
+#				partRef.generateRandomSkinIfCan(theChar)
+#				if(partRef.pickedSkin != null):
+#					_data["skin"] = partRef.pickedSkin
+#				if(partRef.pickedRColor != null):
+#					_data["r"] = partRef.pickedRColor
+#				if(partRef.pickedGColor != null):
+#					_data["g"] = partRef.pickedGColor
+#				if(partRef.pickedBColor != null):
+#					_data["b"] = partRef.pickedBColor
+
 	for partArt in partArts:
 		_data[partArt] = partArts[partArt]
 	

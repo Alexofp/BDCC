@@ -4,6 +4,7 @@ class_name TFBase
 var id:String = "error"
 var holderRef:WeakRef
 var uniqueID:int = -1
+var canceled:bool = false
 
 var stage:int = 0
 var timer:int = 0
@@ -42,7 +43,10 @@ func isPossibleFor(_char) -> bool:
 	return true
 
 func shouldCancelItself() -> bool:
-	return !isPossibleFor(getChar())
+	return false#!isPossibleFor(getChar())
+
+func shouldCancelItselfFinal() -> bool:
+	return canceled || shouldCancelItself()
 
 func canTransformFurther() -> bool:
 	return !isMaxStage()
@@ -137,6 +141,9 @@ func buff(buffid, args = []) -> BuffBase:
 
 func playAnim(anim:String, animState:String, args:Dictionary={}):
 	reactResultData["anim"] = [anim, animState, args]
+
+func doCancelDelayed():
+	canceled = true
 
 func addText(theText:String):
 	if(theText == ""):

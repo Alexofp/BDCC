@@ -1,21 +1,30 @@
 extends TFBase
 
-var newSpecies = Species.Canine
+var newSpecies:Array = [Species.Canine]
 var affectedSlots:Dictionary = {}
 
 func _init():
 	id = "SpeciesTF"
 
-func getMaxStage() -> int:
-	return 10
-
 func start(_args:Dictionary):
 	if(_args.has("species")):
-		newSpecies = _args["species"]
+		newSpecies = _args["species"] if (_args["species"] is Array) else [_args["species"]]
+	else:
+		var randomSpecies:String = GM.main.getEncounterSettings().generateSpeciesBlacklist(getChar().getSpecies())
+		if(randomSpecies == ""):
+			randomSpecies = Species.Canine
+			doCancelDelayed()
+		newSpecies = [randomSpecies]
+
+func getSlotsToTransform() -> Array:
+	return BodypartSlot.getAll()
+
+func allowsRemovingParts() -> bool:
+	return true
 
 func getSlotsLeft() -> Array:
 	var result:Array = []
-	for bodypartSlot in BodypartSlot.getAll():
+	for bodypartSlot in getSlotsToTransform():
 		if(bodypartSlot in [BodypartSlot.Hair, BodypartSlot.Vagina, BodypartSlot.Anus]):
 			continue
 		if(affectedSlots.has(bodypartSlot)):
@@ -25,9 +34,12 @@ func getSlotsLeft() -> Array:
 
 func hasAnySlotsLeftToTranform() -> bool:
 	var theChar:BaseCharacter = getChar()
+	var allowsRemoving:bool = allowsRemovingParts()
 	var slotsLeft:Array = getSlotsLeft()
 	for bodypartSlot in slotsLeft:
-		var possiblePartIDs:Dictionary = Bodypart.findPossibleBodypartIDsDict(bodypartSlot, theChar, newSpecies if newSpecies is Array else [newSpecies])
+		var possiblePartIDs:Dictionary = Bodypart.findPossibleBodypartIDsDict(bodypartSlot, theChar, newSpecies)
+		if(!allowsRemoving && possiblePartIDs.has("") && theChar.hasBodypart(bodypartSlot)):
+			possiblePartIDs.erase("")
 		if(possiblePartIDs.empty()):
 			continue
 		
@@ -39,13 +51,10 @@ func hasAnySlotsLeftToTranform() -> bool:
 	return false
 		
 func shouldCancelItself() -> bool:
-	if(newSpecies is Array):
-		for species in newSpecies:
-			if(GlobalRegistry.getSpecies(species) == null):
-				return true
-	elif(GlobalRegistry.getSpecies(newSpecies) == null):
-		return true
-	return .shouldCancelItself()
+	for species in newSpecies:
+		if(GlobalRegistry.getSpecies(species) == null):
+			return true
+	return false
 		
 func canTransformFurther() -> bool:
 	if(!hasAnySlotsLeftToTranform()):
@@ -58,13 +67,16 @@ func getTimerForStage(_theStage:int) -> int:
 	return 240
 	
 func doProgress(_context:Dictionary) -> Dictionary:
+	var allowsRemoving:bool = allowsRemovingParts()
 	var theSlots:Array = getSlotsLeft()
 	theSlots.shuffle()
+	var theChar:BaseCharacter = getChar()
 	while(theSlots.size() > 0):
 		var bodypartSlot = theSlots.pop_front()
-		var theChar:BaseCharacter = getChar()
 		
-		var possiblePartIDs:Dictionary = Bodypart.findPossibleBodypartIDsDict(bodypartSlot, theChar, newSpecies if newSpecies is Array else [newSpecies])
+		var possiblePartIDs:Dictionary = Bodypart.findPossibleBodypartIDsDict(bodypartSlot, theChar, newSpecies)
+		if(!allowsRemoving && possiblePartIDs.has("") && theChar.hasBodypart(bodypartSlot)):
+			possiblePartIDs.erase("")
 		if(possiblePartIDs.empty()):
 			continue
 		
@@ -88,6 +100,9 @@ func doProgress(_context:Dictionary) -> Dictionary:
 
 func reactProgress(_context:Dictionary, _result:TFResult):
 	var slot = _result.getField("slot", BodypartSlot.Body)
+	var showPenis:bool = _result.getField("showPenis", false)
+	if(showPenis):
+		slot = BodypartSlot.Penis
 	
 #	if(isFirstTime()):
 #		addText(("Something is happening to your chest.."))

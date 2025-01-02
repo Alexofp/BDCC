@@ -251,16 +251,20 @@ func saveOriginalTFData() -> Dictionary:
 
 func applyTFData(_data):
 #	if(supportsSkin()):
-#		pickedSkin = loadTFVar(_data, "pickedSkin", pickedSkin)
-#		pickedRColor = loadTFVar(_data, "pickedRColor", pickedRColor)
-#		pickedGColor = loadTFVar(_data, "pickedGColor", pickedGColor)
-#		pickedBColor = loadTFVar(_data, "pickedBColor", pickedBColor)
-#		if(pickedRColor is String):
-#			pickedRColor = Color(pickedRColor)
-#		if(pickedGColor is String):
-#			pickedGColor = Color(pickedGColor)
-#		if(pickedBColor is String):
-#			pickedBColor = Color(pickedBColor)
+#		if(_data.has("skin")):
+#			pickedSkin = loadTFVar(_data, "skin", pickedSkin)
+#		if(_data.has("r")):
+#			pickedRColor = loadTFVar(_data, "r", pickedRColor)
+#			if(pickedRColor is String):
+#				pickedRColor = Color(pickedRColor)
+#		if(_data.has("g")):
+#			pickedGColor = loadTFVar(_data, "g", pickedGColor)
+#			if(pickedGColor is String):
+#				pickedGColor = Color(pickedGColor)
+#		if(_data.has("b")):
+#			pickedBColor = loadTFVar(_data, "b", pickedBColor)
+#			if(pickedBColor is String):
+#				pickedBColor = Color(pickedBColor)
 	pass
 
 func loadTFVar(_data:Dictionary, _keyID:String, default):
@@ -431,7 +435,7 @@ func generateRandomSkinIfCan(_dynamicCharacter):
 func generateRandomColors(_dynamicCharacter):
 	pass
 
-static func findPossibleBodypartIDs(bodypartSlot, acharacter, theSpecies:Array) -> Array:
+static func findPossibleBodypartIDs(bodypartSlot, acharacter, theSpecies:Array, customNpcGender=null) -> Array:
 	var possible = []
 	#var fullWeight = 0.0
 	#if(!BodypartSlot.isEssential(bodypartSlot)):
@@ -465,7 +469,7 @@ static func findPossibleBodypartIDs(bodypartSlot, acharacter, theSpecies:Array) 
 	# Adding the default bodypart of this species into the mix
 	for specie in theSpecies:
 		var speciesObject = GlobalRegistry.getSpecies(specie)
-		var bodypartID = speciesObject.getDefaultForSlotForNpcGender(bodypartSlot, acharacter.calculateNpcGender())
+		var bodypartID = speciesObject.getDefaultForSlotForNpcGender(bodypartSlot, acharacter.calculateNpcGender() if customNpcGender==null else customNpcGender)
 		var alreadyHasInPossible = false
 		for possibleEntry in possible:
 			if(possibleEntry[0] == bodypartID):
@@ -484,8 +488,8 @@ static func findPossibleBodypartIDs(bodypartSlot, acharacter, theSpecies:Array) 
 			#fullWeight += weight
 	return possible
 
-static func findPossibleBodypartIDsDict(bodypartSlot, acharacter, theSpecies:Array) -> Dictionary:
-	var idsAr:Array = findPossibleBodypartIDs(bodypartSlot, acharacter, theSpecies)
+static func findPossibleBodypartIDsDict(bodypartSlot, acharacter, theSpecies:Array, customNpcGender=null) -> Dictionary:
+	var idsAr:Array = findPossibleBodypartIDs(bodypartSlot, acharacter, theSpecies, customNpcGender)
 	var result:Dictionary = {}
 	
 	for idEntry in idsAr:

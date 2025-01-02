@@ -49,7 +49,7 @@ func generateTransformText(_result:Dictionary):
 				" {npc.YourHis} brow smooths out, and {npc.yourHis} lips plump slightly, becoming fuller and sexier.",
 				" A new, subtle scent begins to emanate from {npc.yourHis} skin, sweet and floral.",
 			])
-			text += " {npc.YouHe} {npc.isAre} now "+str(Util.roundF(newFemininity*100.0, 0)+"% feminine.")
+			text += " {npc.YouHe} {npc.youAre} now "+str(Util.roundF(newFemininity, 0))+"% feminine."
 				
 			if(newFemininity >= 100):
 				text += " {npc.YourHis} femininity has hit its peak!"
@@ -81,7 +81,7 @@ func generateTransformText(_result:Dictionary):
 				" {npc.YourHis} brow furrows slightly, and {npc.yourHis} lips become thinner and more defined.",
 				" A new, subtle scent begins to emanate from {npc.yourHis} skin, musky and earthy.",
 			])
-			text += " {npc.YouHe} {npc.isAre} now " + str(Util.roundF(100.0 - newFemininity * 100.0, 0) + "% masculine.")
+			text += " {npc.YouHe} {npc.youAre} now " + str(Util.roundF(100.0 - newFemininity, 0)) + "% masculine."
 
 			if(newFemininity <= 0):
 				text += " {npc.YourHis} masculinity has hit its peak!"

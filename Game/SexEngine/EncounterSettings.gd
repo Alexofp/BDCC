@@ -88,6 +88,30 @@ func generateGenderFromAllowed(npcGenders):
 		return RNG.pick([NpcGender.Male, NpcGender.Female])
 	return pickedGender
 	
+func generateSpecies() -> String:
+	var allSpecies = GlobalRegistry.getAllSpecies()
+	var possible = []
+	for speciesID in allSpecies:
+		var weight = GM.main.getEncounterSettings().getSpeciesWeight(speciesID)
+		if(weight != null && weight > 0.0):
+			possible.append([speciesID, weight])
+	if(possible.empty()):
+		return ""
+	return RNG.pickWeightedPairs(possible)
+	
+func generateSpeciesBlacklist(blacklist:Array) -> String:
+	var allSpecies = GlobalRegistry.getAllSpecies()
+	var possible = []
+	for speciesID in allSpecies:
+		if(blacklist.has(speciesID)):
+			continue
+		var weight = GM.main.getEncounterSettings().getSpeciesWeight(speciesID)
+		if(weight != null && weight > 0.0):
+			possible.append([speciesID, weight])
+	if(possible.empty()):
+		return ""
+	return RNG.pickWeightedPairs(possible)
+	
 func saveData():
 	var data = {
 		"preferKnownEncounters": preferKnownEncounters,
