@@ -723,6 +723,11 @@ func getPenisSize():
 	var bodypart = getBodypart(BodypartSlot.Penis)
 	return bodypart.getLength()
 
+func getBreastsSize() -> int:
+	if(!hasBodypart(BodypartSlot.Breasts)):
+		return BreastsSize.FOREVER_FLAT
+	return getBodypart(BodypartSlot.Breasts).getSize()
+
 func getFluidType(fluidSource):
 	if(fluidSource == FluidSource.Penis):
 		return "Cum"

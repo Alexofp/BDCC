@@ -23,6 +23,7 @@ func applyEffect(_data:Dictionary) -> Dictionary:
 		# Adding missing fields
 		var partRef:Bodypart = GlobalRegistry.getBodypartRef(newPartID)
 		if(partRef != null):
+			assert(partRef.getSlot() == getBodypartSlot(), "WRONG BODYPART SLOT!")
 			var tfData:Dictionary = partRef.saveOriginalTFData()
 			for tfDataField in tfData:
 				if(!_data.has(tfDataField)):

@@ -20,7 +20,8 @@ func setCharacter(theChar):
 	#call_deferred("startTransformation", "SpeciesTFMinor")
 	#startTransformation("SpeciesTFMinor", {species=Species.Feline})
 	#startTransformation("Demonification")
-	startTransformation("Feminization")
+	#startTransformation("Feminization")
+	startTransformation("Masculinization")
 	#startTransformation("SpeciesTF", {species=Species.Feline})
 	#startTransformation("TestTF")
 
@@ -137,6 +138,7 @@ func doFirstPendingTransformation(_context:Dictionary, _isShort:bool = false) ->
 	return {
 		text = finalText,
 		anim = (reactResult["anim"] if reactResult.has("anim") else []),
+		say = (reactResult["say"] if reactResult.has("say") else ""),
 	}
 
 func processTime(_seconds:int):

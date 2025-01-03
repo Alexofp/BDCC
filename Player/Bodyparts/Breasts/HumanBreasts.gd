@@ -41,3 +41,9 @@ func generateDataFor(_dynamicCharacter):
 	size = RNG.pick([
 		BreastsSize.A, BreastsSize.B, BreastsSize.C, BreastsSize.D, BreastsSize.DD, BreastsSize.DDD,
 	])
+
+func getVulgarName() -> String:
+	return "female breasts"
+
+func getAVulgarName() -> String:
+	return getVulgarName()

@@ -2,6 +2,8 @@ extends TFBase
 
 var addedVag:bool = false
 var removedPenis:bool = false
+var switchedbreasts:bool = false
+var switchedhair:bool = false
 
 func _init():
 	id = "Feminization"
@@ -14,27 +16,56 @@ func isPossibleFor(_char) -> bool:
 func start(_args:Dictionary):
 	pass
 
+func charHasMaleBreasts(theChar) -> bool:
+	return theChar.bodypartHasTrait(BodypartSlot.Breasts, PartTrait.BreastsMale)
+
 func getPossibleSteps(_char:BaseCharacter) -> Array:
 	var result:Array = []
 	
-	if(_char.getFemininity() < 100):
-		result.append("feminc")
 	if(_char.getFemininity() > 70 && _char.getGender() != Gender.Female):
 		result.append("gender")
 		
-	if(_char.getFemininity() > 50):
+	if(_char.getFemininity() > 10):
 		if(_char.hasPenis() && !removedPenis):
 			var penisLen = _char.getPenisSize()
 			
 			if(penisLen > 8):
 				result.append("shrinkpenis")
-			elif(!addedVag):
+	
+	if(_char.getFemininity() > 40):
+		if(charHasMaleBreasts(_char) && !switchedbreasts):
+			result.append("switchbreasts")
+		var goodBreastSize:int = BreastsSize.B
+		if(_char.getThickness() >= 50):
+			goodBreastSize = BreastsSize.C
+		if(_char.getThickness() >= 80):
+			goodBreastSize = BreastsSize.D
+		var currentBreastSize:int = _char.getBreastsSize()
+		
+		if(currentBreastSize < goodBreastSize):
+			result.append("incbreasts")
+	
+	if(!switchedhair && _char.getFemininity() > 50):
+		var hairPart:Bodypart = _char.getBodypart(BodypartSlot.Hair)
+		if(hairPart != null && hairPart.femaleWeight < 0.6):
+			result.append("switchhair")
+	
+	if(_char.getFemininity() > 60):
+		if(_char.hasPenis() && !removedPenis):
+			var penisLen = _char.getPenisSize()
+			if(!addedVag && penisLen <= 8):
 				if(_char.hasVagina()):
 					result.append("rempenis")
 				else:
 					result.append("penistovag")
 		elif(!_char.hasVagina() && !addedVag):
 			result.append("growvag")
+	
+	if(result.empty() && _char.getFemininity() < 100):
+		if(_char.getFemininity() < 45):
+			result.append("femincmale")
+		else:
+			result.append("feminc")
 	
 	return result
 
@@ -56,16 +87,58 @@ func doProgress(_context:Dictionary) -> Dictionary:
 	
 	if(nextStep == "feminc"):
 		return {
+			step = nextStep,
 			effects = [
 				charEffect("fem", "AddFemininity", [10]),
+			]
+		}
+	
+	if(nextStep == "femincmale"):
+		return {
+			step = nextStep,
+			effects = [
+				charEffect("fem", "AddFemininity", [RNG.randi_range(15, 25)]),
 			]
 		}
 		
 	if(nextStep == "gender"):
 		return {
+			step = nextStep,
 			effects = [
 				charEffect("fem", "AddFemininity", [5]),
 				charEffect("gender", "GenderChange", [Gender.Female]),
+			]
+		}
+	if(nextStep == "switchbreasts"):
+		switchedbreasts = true
+		return {
+			step = nextStep,
+			effects = [
+				charEffect("fem", "AddFemininity", [5]),
+				partEffect("breasts", BodypartSlot.Breasts, "SwitchPart", ["humanbreasts"]),
+			]
+		}
+	if(nextStep == "incbreasts"):
+		return {
+			step = nextStep,
+			effects = [
+				charEffect("fem", "AddFemininity", [5]),
+				partEffect("breasts", BodypartSlot.Breasts, "BreastSizeChange", [1]),
+			]
+		}
+	if(nextStep == "switchhair"):
+		switchedhair = true
+		
+		var theChar = getChar()
+		var possiblePartIDs:Dictionary = Bodypart.findPossibleBodypartIDsDict(BodypartSlot.Hair, theChar, theChar.getSpecies(), NpcGender.Female)
+		if(possiblePartIDs.empty()):
+			return {}
+		var newPartID:String = RNG.pickWeightedDict(possiblePartIDs)
+		return {
+			step = nextStep,
+			effects = [
+				charEffect("fem", "AddFemininity", [5]),
+				partEffect("newpart", BodypartSlot.Hair, "SwitchPart", [newPartID]),
 			]
 		}
 	if(nextStep == "shrinkpenis"):
@@ -76,7 +149,9 @@ func doProgress(_context:Dictionary) -> Dictionary:
 		if(currentPenLen >= 30):
 			mod = 3.0
 		return {
+			step = nextStep,
 			effects = [
+				charEffect("fem", "AddFemininity", [10]),
 				partEffect("penLen", BodypartSlot.Penis, "PenisLengthChange", [-RNG.randi_range(2,4)*mod]),
 			]
 		}
@@ -84,7 +159,9 @@ func doProgress(_context:Dictionary) -> Dictionary:
 		addedVag = true
 		removedPenis = true
 		return {
+			step = nextStep,
 			effects = [
+				charEffect("fem", "AddFemininity", [10]),
 				partEffect("rempenis", BodypartSlot.Penis, "SwitchPart", [""]),
 			]
 		}
@@ -92,7 +169,9 @@ func doProgress(_context:Dictionary) -> Dictionary:
 		removedPenis = true
 		addedVag = true
 		return {
+			step = nextStep,
 			effects = [
+				charEffect("fem", "AddFemininity", [10]),
 				partEffect("rempenis", BodypartSlot.Penis, "SwitchPart", [""]),
 				partEffect("addvag", BodypartSlot.Vagina, "SwitchPart", ["vagina"]),
 			]
@@ -101,7 +180,9 @@ func doProgress(_context:Dictionary) -> Dictionary:
 		removedPenis = true
 		addedVag = true
 		return {
+			step = nextStep,
 			effects = [
+				charEffect("fem", "AddFemininity", [10]),
 				partEffect("addvag", BodypartSlot.Vagina, "SwitchPart", ["vagina"]),
 			]
 		}
@@ -111,7 +192,21 @@ func doProgress(_context:Dictionary) -> Dictionary:
 
 
 func reactProgress(_context:Dictionary, _result:TFResult):
+	var step:String = _result.getField("step", "")
+	
+	#var stage:int = getStage()
+	
+	if(isFirstTime()):
+		addText("Without warning, a jolt of energy surges through your body, leaving you breathless. Confusion and fear grip you as you realize something is happening against your will.")
+	
 	addText(_result.getAllTFTexts())
 	
-	playAnim(StageScene.GivingBirth, "birth", {bodyState={exposedCrotch=true, hard=true}})
+	if(isFirstTime()):
+		addText("What is happening with your body..")
+	
+	
+	if(step in ["feminc", "femincmale", "gender"]):
+		playAnim(StageScene.Solo, "stand")
+	else:
+		playAnim(StageScene.GivingBirth, "birth", {bodyState={exposedCrotch=true, hard=true}})
 	

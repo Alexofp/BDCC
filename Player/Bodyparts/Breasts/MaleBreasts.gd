@@ -27,3 +27,9 @@ func safeWhenExposed():
 
 func generateDataFor(_dynamicCharacter):
 	pass
+
+func getVulgarName() -> String:
+	return "male pecs"
+
+func getAVulgarName() -> String:
+	return getVulgarName()

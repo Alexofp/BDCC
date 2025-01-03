@@ -151,9 +151,9 @@ func getExtraData():
 func getExtraDataLessImportant():
 	var result = null
 	for domID in doms:
-		result = combineData(result, doms[domID].getExtraOutputData())
+		result = combineData(result, doms[domID].getExtraOutputData(true))
 	for subID in subs:
-		result = combineData(result, subs[subID].getExtraOutputData())
+		result = combineData(result, subs[subID].getExtraOutputData(false))
 	return result
 
 func makeActivity(id, theDomID, theSubID):
@@ -213,9 +213,9 @@ func combineData(firstData, secondData):
 	for data in [firstData, secondData]:
 		if(data.has("text") && data["text"] != null && data["text"] != ""):
 			texts.append(data["text"])
-		if(data.has("domSay") && data["domSay"] != null):
+		if(data.has("domSay") && data["domSay"] != null && data["domSay"] != ""):
 			domSays.append(data["domSay"])
-		if(data.has("subSay") && data["subSay"] != null):
+		if(data.has("subSay") && data["subSay"] != null && data["subSay"] != ""):
 			subSays.append(data["subSay"])
 		
 	var resultData = {}

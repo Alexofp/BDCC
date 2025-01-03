@@ -99,9 +99,10 @@ func reactProgressFinal(_context:Dictionary, _result:TFResult):
 	tfTexts.clear()
 	reactResultData.clear()
 	reactProgress(_context, _result)
+	var reactDialogue:String = getReactionDialogueLine(_context, _result)
 	if(!_result.getField("noStageAdvance", false)):
 		stage += 1
-	return {text=Util.join(tfTexts, "\n\n"), anim=(reactResultData["anim"] if reactResultData.has("anim") else [])}
+	return {text=Util.join(tfTexts, "\n\n"), anim=(reactResultData["anim"] if reactResultData.has("anim") else []), say=reactDialogue}
 
 func reactProgressShort(_context:Dictionary, _result:TFResult):
 	addText(_result.getAllTFTexts(" ", false))
@@ -110,8 +111,78 @@ func reactProgressShortFinal(_context:Dictionary, _result:TFResult):
 	tfTexts.clear()
 	reactResultData.clear()
 	reactProgressShort(_context, _result)
+	var reactDialogue:String = getReactionDialogueLine(_context, _result)
 	stage += 1
-	return {text=Util.join(tfTexts, " ")}
+	return {text=Util.join(tfTexts, " "),say=reactDialogue}
+
+func getReactionDialogueLine(_context:Dictionary, _result:TFResult) -> String:
+	if(isFirstTime() || RNG.chance(30)):
+		if(charLovesTF()):
+			return RNG.pick([
+				"Oh, sweet!",
+				"This is amazing!",
+				"I can't believe this is happening!",
+				"Yes! Finally!",
+				"This feels incredible!",
+				"This feels nice..",
+				"More! I want more of this.",
+				"I'm such a slut for transformations..",
+				"Yes, transform me, change my body until I can't recognize it..",
+				"I love how it feels..",
+				"I crave more..",
+				"I hope this will never end..",
+			])
+		elif(charLikesTF()):
+			return RNG.pick([
+				"Interesting..",
+				"Quite fascinating..",
+				"I didn’t expect this..",
+				"Hmm.. wow..",
+				"I changed..",
+				"Hah.. that feels funny.",
+				"Doesn't feel too bad..",
+				"Could I get used to this?",
+				"A bit odd.. but nothing I can't handle.",
+				"I'm curious to see what happens next.",
+				"I can see the appeal..",
+				"Not too bad.",
+			])
+		elif(charHatesTF()):
+			return RNG.pick([
+				"No, no no, fuck no!",
+				"What the fuck is happening?",
+				"No, no, no, I hate it!",
+				"Fuck.. Give me my old self back!",
+				"NO! What the fuck!?",
+				"Stop.. I hate how it feels..",
+				"Ugh, this makes me sick.",
+				"What the.. Undo this.. How do I undo this shit..",
+				"Really.. This is the worst.",
+			])
+		elif(charDislikesTF()):
+			return RNG.pick([
+				"I don't.. like this.",
+				"This.. doesn't feel good already..",
+				"Oh no, how do I stop this..",
+				"This isn't what I wanted..",
+				"I don't want to go through this..",
+				"How do I undo this.. I want my old body..",
+				"What is happening.. That's not what I signed up for.",
+				"Oh.. how do I.. become normal again..",
+				"What is happening.. Why.. ",
+			])
+		else:
+			return RNG.pick([
+				"What is happening..",
+				"I don't understand..",
+				"What? How did this happen?",
+				"This is so weird..",
+				"Feels so strange.. what is happening..",
+				"I feel like I'm losing my mind.",
+				"What kind of madness is this?",
+				"This is beyond strange..",
+			])
+	return ""
 
 func getStage() -> int:
 	return stage
@@ -144,6 +215,42 @@ func playAnim(anim:String, animState:String, args:Dictionary={}):
 
 func doCancelDelayed():
 	canceled = true
+
+func charDislikesTF() -> bool:
+	var theChar:BaseCharacter = getChar()
+	var fetishHolder:FetishHolder = theChar.getFetishHolder()
+	
+	if(fetishHolder == null):
+		return false
+	
+	return fetishHolder.getFetishValue(Fetish.TFReceiving) < 0.0
+
+func charLikesTF() -> bool:
+	var theChar:BaseCharacter = getChar()
+	var fetishHolder:FetishHolder = theChar.getFetishHolder()
+	
+	if(fetishHolder == null):
+		return false
+	
+	return fetishHolder.getFetishValue(Fetish.TFReceiving) > 0.0 || theChar.getForcedObedienceLevel() > 0.01
+
+func charLovesTF() -> bool:
+	var theChar:BaseCharacter = getChar()
+	var fetishHolder:FetishHolder = theChar.getFetishHolder()
+	
+	if(fetishHolder == null):
+		return false
+	
+	return fetishHolder.getFetishValue(Fetish.TFReceiving) > 0.5 || theChar.getForcedObedienceLevel() > 0.8
+
+func charHatesTF() -> bool:
+	var theChar:BaseCharacter = getChar()
+	var fetishHolder:FetishHolder = theChar.getFetishHolder()
+	
+	if(fetishHolder == null):
+		return false
+	
+	return fetishHolder.getFetishValue(Fetish.TFReceiving) < -0.5
 
 func addText(theText:String):
 	if(theText == ""):

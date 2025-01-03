@@ -75,7 +75,7 @@ func generateTransformText(_result:Dictionary):
 			" The skin tightens around it, becoming less pronounced.",
 			" {npc.YouHe} can see it diminishing before {npc.yourHis} very eyes.",
 		])
-		text += " {npc.YourHis} {npc.penis} is now " + Util.cmToString(newLen) + " long."
+		text += " {npc.YourHis} {npc.penis} is now only " + Util.cmToString(newLen) + " long."
 		if(newLen <= 5):
 			text += RNG.pick([
 				" It's so tiny now!",

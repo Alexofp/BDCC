@@ -44,8 +44,12 @@ func _react(_action: String, _args):
 	if(_action == "doTF"):
 		var tfHolder:TFHolder = GM.pc.getTFHolder()
 		
-		var result = tfHolder.doFirstPendingTransformation({})
+		var result:Dictionary = tfHolder.doFirstPendingTransformation({})
 		savedText = result["text"]
+		
+		if(result.has("say") && result["say"] != ""):
+			savedText += "\n\n[say=pc]"+result["say"]+"[/say]"
+		
 		tfCount += 1
 		
 		if(result.has("anim") && result["anim"].size() > 2):
