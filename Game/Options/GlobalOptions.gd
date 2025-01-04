@@ -28,7 +28,7 @@ var smartLockRarity: String = "normal" # never veryrare rare normal often veryof
 var overstimulationEnabled: bool = true
 
 # Datapack editor
-var blockCatcherPanelHeight: int = 16
+var blockCatcherPanelHeight: int = 8
 
 var shouldScaleUI: bool = true
 var uiScaleMultiplier = 1.0
@@ -118,7 +118,7 @@ func resetToDefaults():
 	sandboxPawnCount = 30
 	sandboxBreeding = "rare"
 	sandboxNpcLeveling = 1.0
-	blockCatcherPanelHeight = 16
+	blockCatcherPanelHeight = 8
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
