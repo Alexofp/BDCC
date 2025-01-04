@@ -94,9 +94,15 @@ func onOverstimulation():
 func isOverstimulationEnabled() -> bool:
 	return OPTIONS.isOverstimulationEnabled()
 
+func getOverstimulationScaling() -> float:
+	return OPTIONS.getOverstimulationScaling()
+
 func stimulate(_howMuch:float = 1.0):
 	if(hasOrgasmEffect()): # High sensitivity right after orgasm
 		_howMuch *= getOrgasmEffect()
+	
+	if (isOverstimulationEnabled()):
+		_howMuch *= getOverstimulationScaling()
 	
 	if(isOverstimulated()):
 		overstimulation += 0.2 * pow(getSensitivity(), 2.0) * getOverstimContinueGainModifier() * _howMuch

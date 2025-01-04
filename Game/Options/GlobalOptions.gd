@@ -26,6 +26,7 @@ var sandboxNpcLeveling:float = 1.0
 var hardStruggleEnabled: bool = false
 var smartLockRarity: String = "normal" # never veryrare rare normal often veryoften bdsmslut always
 var overstimulationEnabled: bool = true
+var overstimulationScaling: float = 1.0
 
 var shouldScaleUI: bool = true
 var uiScaleMultiplier = 1.0
@@ -84,6 +85,7 @@ func resetToDefaults():
 	hardStruggleEnabled = false
 	smartLockRarity = "normal"
 	overstimulationEnabled = true
+	overstimulationScaling = 1.0
 	shouldScaleUI = true
 	uiScaleMultiplier = 1.0
 	showSpeakerName = true
@@ -184,6 +186,9 @@ func getSmartLockRarity():
 
 func isOverstimulationEnabled():
 	return overstimulationEnabled
+
+func getOverstimulationScaling():
+	return overstimulationScaling
 
 func shouldShowSpeakerName():
 	return showSpeakerName
@@ -477,6 +482,23 @@ func getChangeableOptions():
 					"id": "overstimulationEnabled",
 					"type": "checkbox",
 					"value": overstimulationEnabled
+				},
+				{
+					"name": "Overstimulation scaling",
+					"description": "If overstimulation is enabled, scales stimulation in-game by this percentage value.",
+					"id": "overstimulationScaling",
+					"type": "list",
+					"value": overstimulationScaling,
+					"values": [
+						[0.25, "25%"],
+						[0.50, "50%"],
+						[0.75, "75%"],
+						[1.0, "100%"],
+						[1.25, "125%"],
+						[1.5, "150%"],
+						[1.75, "175%"],
+						[2.0, "200%"],
+					]
 				},
 			]
 		},
@@ -931,6 +953,8 @@ func applyOption(categoryID, optionID, value):
 			smartLockRarity = value
 		if optionID == "overstimulationEnabled":
 			overstimulationEnabled = value
+		if optionID == "overstimulationScaling":
+			overstimulationScaling = value
 	
 	if(categoryID == "other"):
 		if(optionID == "fetchLatestRelease"):
@@ -1023,6 +1047,7 @@ func saveData():
 		"hardStruggleEnabled": hardStruggleEnabled,
 		"smartLockRarity": smartLockRarity,
 		"overstimulationEnabled": overstimulationEnabled,
+		"overstimulationScaling": overstimulationScaling,
 		"shouldScaleUI": shouldScaleUI,
 		"uiScaleMultiplier": uiScaleMultiplier,
 		"uiButtonSize": uiButtonSize,
@@ -1077,6 +1102,7 @@ func loadData(data):
 	hardStruggleEnabled = loadVar(data, "hardStruggleEnabled", false)
 	smartLockRarity = loadVar(data, "smartLockRarity", "normal")
 	overstimulationEnabled = loadVar(data, "overstimulationEnabled", true)
+	overstimulationScaling = loadVar(data, "overstimulationScaling", 1.0)
 	shouldScaleUI = loadVar(data, "shouldScaleUI", true)
 	uiScaleMultiplier = loadVar(data, "uiScaleMultiplier", 1.0)
 	uiButtonSize = loadVar(data, "uiButtonSize", 0)
