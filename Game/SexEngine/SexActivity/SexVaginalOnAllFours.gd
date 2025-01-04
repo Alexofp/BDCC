@@ -1033,7 +1033,7 @@ func doSubAction(_id, _actionInfo):
 			
 			state = ""
 			var text = RNG.pick([
-				"{sub.You} {sub.youVerb('strugle')} enough for {dom.youHim} to pull out!",
+				"{sub.You} {sub.youVerb('struggle')} enough for {dom.youHim} to pull out!",
 			])
 			return {text = text}
 		else:
