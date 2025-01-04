@@ -13,7 +13,7 @@ anti_aliasing = false
 [node name="BlockCatcherPanelSmall" type="Panel"]
 anchor_right = 1.0
 margin_bottom = 1.0
-rect_min_size = Vector2( 0, 4 )
+rect_min_size = Vector2( 0, 16 )
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 1 )
