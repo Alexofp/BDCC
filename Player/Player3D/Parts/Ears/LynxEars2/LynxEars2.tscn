@@ -100,7 +100,7 @@ bind/21/bone = -1
 bind/21/pose = Transform( 0.486096, -0.873925, 4.58786e-07, -0.874017, -0.486062, -1.14923e-08, 2.21924e-07, -3.57599e-07, -1, 0.196343, 0.375003, -0.209835 )
 
 [node name="LynxEars2" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.035 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.045 )
 
 [node name="earsLynx2png" type="MeshInstance" parent="." index="0"]
 mesh = SubResource( 9 )

@@ -8,6 +8,9 @@ var switchedhair:bool = false
 func _init():
 	id = "Masculinization"
 
+func getName() -> String:
+	return "Masculinization"
+
 func isPossibleFor(_char) -> bool:
 	if(getPossibleSteps(_char).empty()):
 		return false
@@ -224,3 +227,20 @@ func reactProgress(_context:Dictionary, _result:TFResult):
 	else:
 		playAnim(StageScene.GivingBirth, "birth", {bodyState={exposedCrotch=true, hard=true}})
 	
+func saveData() -> Dictionary:
+	var data:Dictionary = .saveData()
+	
+	data["rv"] = removedVag
+	data["ap"] = addedPenis
+	data["sb"] = switchedbreasts
+	data["sh"] = switchedhair
+	
+	return data
+
+func loadData(_data:Dictionary):
+	.loadData(_data)
+	
+	removedVag = SAVE.loadVar(_data, "rv", false)
+	addedPenis = SAVE.loadVar(_data, "ap", false)
+	switchedbreasts = SAVE.loadVar(_data, "sb", false)
+	switchedhair = SAVE.loadVar(_data, "sh", false)

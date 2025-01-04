@@ -331,6 +331,10 @@ func processTime(_secondsPassed):
 	if(menstrualCycle != null):
 		menstrualCycle.processTime(_secondsPassed)
 		
+	var theTFHolder = getTFHolder()
+	if(theTFHolder != null):
+		theTFHolder.processTime(_secondsPassed)
+		
 	if(!bodyFluids.isEmpty()):
 		bodyFluids.drain(0.1 * _secondsPassed / 60.0)
 		

@@ -433,6 +433,7 @@ func saveData():
 	data["fetishHolder"] = fetishHolder.saveData()
 	data["personality"] = personality.saveData()
 	data["reputation"] = reputation.saveData()
+	data["tfHolder"] = tfHolder.saveData()
 	
 	return data
 
@@ -493,6 +494,7 @@ func loadData(data):
 	fetishHolder.loadData(SAVE.loadVar(data, "fetishHolder", {}))
 	personality.loadData(SAVE.loadVar(data, "personality", {}))
 	reputation.loadData(SAVE.loadVar(data, "reputation", {}))
+	tfHolder.loadData(SAVE.loadVar(data, "tfHolder", {}))
 	
 	checkLocation()
 		
@@ -924,12 +926,6 @@ func getReputation():
 func getTFHolder():
 	return tfHolder
 
-func undoAllTransformations():
-	tfHolder.undoAllTransformations()
-
-func makeAllTransformationsPermanent():
-	tfHolder.makeAllTransformationsPermanent()
-
 func saveOriginalTFData() -> Dictionary:
 	var partSkinData:Dictionary = {}
 	for bodypartSlot in bodyparts:
@@ -972,8 +968,3 @@ func applyTFData(_data):
 		if(bodypart == null || !partSkinData.has(bodypartSlot)):
 			continue
 		bodypart.applySkinData(partSkinData[bodypartSlot] if partSkinData.has(bodypartSlot) else {})
-
-func loadTFVar(_data:Dictionary, _keyID:String, default):
-	if(!_data.has(_keyID)):
-		return default
-	return _data[_keyID]

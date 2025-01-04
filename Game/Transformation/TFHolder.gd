@@ -21,7 +21,7 @@ func setCharacter(theChar):
 	#startTransformation("SpeciesTFMinor", {species=Species.Feline})
 	#startTransformation("Demonification")
 	#startTransformation("Feminization")
-	startTransformation("Masculinization")
+	#startTransformation("Masculinization")
 	#startTransformation("SpeciesTF", {species=Species.Feline})
 	#startTransformation("TestTF")
 
@@ -101,6 +101,7 @@ func doFirstPendingTransformation(_context:Dictionary, _isShort:bool = false) ->
 	
 	if(foundTF == null):
 		return {
+			success = false,
 			text = "COULDN'T TRANSFORM ANYTHING!",
 		}
 	
@@ -136,6 +137,7 @@ func doFirstPendingTransformation(_context:Dictionary, _isShort:bool = false) ->
 	var finalText:String = gameParser.executeString(reactResult["text"], {npc=getChar().getID()})
 	
 	return {
+		success = true,
 		text = finalText,
 		anim = (reactResult["anim"] if reactResult.has("anim") else []),
 		say = (reactResult["say"] if reactResult.has("say") else ""),
@@ -258,3 +260,72 @@ func getBuffs() -> Array:
 	for tf in transformations:
 		result.append_array(tf.getBuffs())
 	return result
+
+func forceProgressAll():
+	for tf in transformations:
+		tf.timer = 0
+	
+	while(true):
+		var result:Dictionary = doFirstPendingTransformation({})
+		if(!result.has("success") || !result["success"]):
+			break
+
+func accelerateAllFull():
+	for tf in transformations:
+		tf.timer = 0
+
+func saveData() -> Dictionary:
+	var effectsData:Array = []
+	for effect in effects:
+		effectsData.append({
+			id = effect.id,
+			data = effect.saveData(),
+		})
+	
+	var tfData:Array = []
+	for tf in transformations:
+		tfData.append({
+			id = tf.id,
+			data = tf.saveData(),
+		})
+	
+	var result:Dictionary = {
+		ogParts = originalParts,
+		ogChar = originalCharData,
+		affParts = affectedParts,
+		effects = effectsData,
+		tfs = tfData,
+	}
+	
+	return result
+
+func loadData(_data:Dictionary):
+	originalParts = SAVE.loadVar(_data, "ogParts", {})
+	originalCharData = SAVE.loadVar(_data, "ogChar", {})
+	affectedParts = SAVE.loadVar(_data, "affParts", {})
+	
+	effects.clear()
+	var effectsData:Array = SAVE.loadVar(_data, "effects", [])
+	for effectLine in effectsData:
+		var newEffectID:String = SAVE.loadVar(effectLine, "id", "")
+		if(newEffectID == ""):
+			continue
+		var newEffect:TFEffect = GlobalRegistry.createTransformationEffect(newEffectID)
+		if(newEffect == null):
+			continue
+		newEffect.setHolder(self)
+		effects.append(newEffect)
+		newEffect.loadData(SAVE.loadVar(effectLine, "data", {}))
+	
+	transformations.clear()
+	var tfData:Array = SAVE.loadVar(_data, "tfs", [])
+	for tfLine in tfData:
+		var newTFID:String = SAVE.loadVar(tfLine, "id", "")
+		if(newTFID == ""):
+			continue
+		var newTF:TFBase = GlobalRegistry.createTransformation(newTFID)
+		if(newTF == null):
+			continue
+		newTF.setHolder(self)
+		transformations.append(newTF)
+		newTF.loadData(SAVE.loadVar(tfLine, "data", {}))

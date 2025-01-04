@@ -114,3 +114,17 @@ func generateTransformText(_result:Dictionary):
 			addText("An unusual sensation courses through {npc.yourHis} body as {npc.yourHis} "+slotName+" begin"+("s" if shouldHaveS else "")+" to shift and change! The familiar contours start to dissolve and reshape, morphing into something different. Gradually, the new "+slotName+" emerge"+("s" if shouldHaveS else "")+", taking on a more defined form. The process is quite painful and uncomfortable, but eventually "+("it settles" if shouldHaveS else "they settle")+" into "+("its" if shouldHaveS else "their")+" final appearance. {npc.YouHe} now {npc.youVerb('have', 'has')} "+bodypartRefNow.getAVulgarName()+".")
 	#else:
 	#	addText("This shouldn't happen")
+
+func saveData() -> Dictionary:
+	var data:Dictionary = .saveData()
+	
+	data["newPartID"] = newPartID
+	data["partArts"] = partArts
+	
+	return data
+
+func loadData(_data:Dictionary):
+	.loadData(_data)
+	
+	newPartID = SAVE.loadVar(_data, "newPartID", "")
+	partArts = SAVE.loadVar(_data, "partArts", {})

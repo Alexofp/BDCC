@@ -10,6 +10,16 @@ var slot:String = ""
 var tfTexts:Array = [] # no save
 var needsToBeChecked:bool = false # no save
 
+func saveData() -> Dictionary:
+	return {
+		tfID = tfID,
+		slot = slot,
+	}
+
+func loadData(_data:Dictionary):
+	tfID = SAVE.loadVar(_data, "tfID", -1)
+	slot = SAVE.loadVar(_data, "slot", "")
+
 func setHolder(theHolder):
 	holderRef = weakref(theHolder)
 

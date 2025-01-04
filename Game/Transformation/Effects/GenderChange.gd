@@ -17,3 +17,14 @@ func applyEffect(_data:Dictionary) -> Dictionary:
 		success = true,
 	}
 	
+func saveData() -> Dictionary:
+	var data:Dictionary = .saveData()
+	
+	data["gender"] = newGender
+	
+	return data
+
+func loadData(_data:Dictionary):
+	.loadData(_data)
+	
+	newGender = SAVE.loadVar(_data, "gender", Gender.Male)

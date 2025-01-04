@@ -14,6 +14,24 @@ const TFTYPE_PART = 1
 
 var tfTexts:Array = [] # no save
 var reactResultData:Dictionary = {} # no save
+var pillGenWeight:float = 1.0 # no save
+
+func saveData() -> Dictionary:
+	return {
+		uID = uniqueID,
+		stage = stage,
+		timer = timer,
+		canceled = canceled,
+	}
+
+func loadData(_data:Dictionary):
+	uniqueID = SAVE.loadVar(_data, "uID", -1)
+	stage = SAVE.loadVar(_data, "stage", 0)
+	timer = SAVE.loadVar(_data, "timer", 0)
+	canceled = SAVE.loadVar(_data, "canceled", false)
+
+func canBeStartedFromDebugMenu() -> bool:
+	return true
 
 func start(_args:Dictionary):
 	pass
@@ -37,7 +55,7 @@ func getChar() -> BaseCharacter:
 	return theHolder.getChar()
 
 func getName() -> String:
-	return "FILL ME!"
+	return id
 
 func isPossibleFor(_char) -> bool:
 	return true
@@ -251,6 +269,12 @@ func charHatesTF() -> bool:
 		return false
 	
 	return fetishHolder.getFetishValue(Fetish.TFReceiving) < -0.5
+
+func getPillGenWeight() -> float:
+	return pillGenWeight
+
+func generatePillArgs() -> Dictionary:
+	return {}
 
 func addText(theText:String):
 	if(theText == ""):

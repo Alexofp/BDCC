@@ -6,6 +6,9 @@ var affectedSlots:Dictionary = {}
 func _init():
 	id = "SpeciesTF"
 
+func getName() -> String:
+	return "Change species"
+
 func start(_args:Dictionary):
 	if(_args.has("species")):
 		newSpecies = _args["species"] if (_args["species"] is Array) else [_args["species"]]
@@ -127,3 +130,17 @@ func reactProgress(_context:Dictionary, _result:TFResult):
 #	if(_event.getType() in [SexEvent.BreastFeeding, SexEvent.BreastsGroped, SexEvent.BreastsPumpMilked]):
 #		if(_event.getTargetChar() == _npc):
 #			accelerateTimer(0.5)
+
+func saveData() -> Dictionary:
+	var data:Dictionary = .saveData()
+	
+	data["ns"] = newSpecies
+	data["as"] = affectedSlots
+	
+	return data
+
+func loadData(_data:Dictionary):
+	.loadData(_data)
+	
+	newSpecies = SAVE.loadVar(_data, "ns", [])
+	affectedSlots = SAVE.loadVar(_data, "as", {})

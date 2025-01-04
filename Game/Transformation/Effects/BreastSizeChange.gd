@@ -303,4 +303,14 @@ func describeBreastTransformationOld(origSize:int, size:int) -> String:
 
 	return transformation_desc
 
+func saveData() -> Dictionary:
+	var data:Dictionary = .saveData()
+	
+	data["howMuch"] = howMuch
+	
+	return data
 
+func loadData(_data:Dictionary):
+	.loadData(_data)
+	
+	howMuch = SAVE.loadVar(_data, "howMuch", 1)

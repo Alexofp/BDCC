@@ -1336,11 +1336,39 @@ func getDebugActions():
 			"id": "applyTFs",
 			"name": "Make TFs permanent",
 		},
+		{
+			"id": "forceProgressTFs",
+			"name": "Force-progress TFs",
+		},
+		{
+			"id": "accelerateTFs",
+			"name": "Accelerate TFs",
+		},
+		{
+			"id": "startTF",
+			"name": "Start TF",
+			"args": [
+				{
+					"id": "tfid",
+					"name": "TF id",
+					"type": "list",
+					"value": "Feminization",
+					"values": TFUtil.getTFListCanStart(),
+				},
+			],
+		},
+		
 	]
 
 func doDebugAction(id, args = {}):
 	print(id, " ", args)
 	
+	if(id == "forceProgressTFs"):
+		GM.pc.getTFHolder().forceProgressAll()
+	if(id == "accelerateTFs"):
+		GM.pc.getTFHolder().accelerateAllFull()
+	if(id == "startTF"):
+		GM.pc.getTFHolder().startTransformation(args["tfid"])
 	if(id == "undoTFs"):
 		GM.pc.undoAllTransformations()
 	if(id == "applyTFs"):

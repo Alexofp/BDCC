@@ -5,6 +5,9 @@ var addedVag:bool = false
 func _init():
 	id = "GrowVaginaTF"
 
+func getName() -> String:
+	return "Grow a pussy"
+
 func isPossibleFor(_char) -> bool:
 	if(_char.hasVagina()):
 		return false
@@ -53,3 +56,14 @@ func reactProgress(_context:Dictionary, _result:TFResult):
 	
 	playAnim(StageScene.GivingBirth, "birth", {bodyState={exposedCrotch=true, hard=true}})
 	
+func saveData() -> Dictionary:
+	var data:Dictionary = .saveData()
+	
+	data["av"] = addedVag
+	
+	return data
+
+func loadData(_data:Dictionary):
+	.loadData(_data)
+	
+	addedVag = SAVE.loadVar(_data, "av", false)

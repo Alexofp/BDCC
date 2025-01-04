@@ -2,7 +2,6 @@ extends TFBase
 
 var didChangeBreasts:bool = false
 
-var pickedColors:Array = []
 var prog:float = 0
 
 # Will increase your breasts 2 times
@@ -13,7 +12,8 @@ func _init():
 	id = "TestTF"
 
 func start(_args:Dictionary):
-	pickedColors = TFUtil.getRandomColorsForSpecies([Species.Canine])
+	#pickedColors = TFUtil.getRandomColorsForSpecies([Species.Canine])
+	pass
 
 func getMaxStage() -> int:
 	if(didChangeBreasts):
@@ -45,7 +45,7 @@ func doProgress(_context:Dictionary) -> Dictionary:
 			effects = [
 				partEffect("breasts", BodypartSlot.Breasts, "BreastSizeChange"),
 				charEffect("gender", "GenderChange", [Gender.Male]),
-				charEffect("skin", "SkinSet", ["FerriSkin" if prog >= 0.5 else "", pickedColors, prog]),
+				#charEffect("skin", "SkinSet", ["FerriSkin" if prog >= 0.5 else "", pickedColors, prog]),
 				#partEffect("breastss", BodypartSlot.Breasts, "FluidTypeChange", ["Piss"]),
 				#partEffect("nopenis", BodypartSlot.Penis, "SwitchPart", [""]),
 				#partEffect("legs", BodypartSlot.Legs, "SwitchPart", ["plantilegs"]),
@@ -73,7 +73,7 @@ func doProgress(_context:Dictionary) -> Dictionary:
 			#partEffect("testpenis", BodypartSlot.Penis, "SwitchPart", ["felinepenis"]),
 			charEffect("fem", "AddFemininity", [10]),
 			partEffect("penLen", BodypartSlot.Penis, "PenisLengthChange", [10]),
-			charEffect("skin", "SkinSet", ["FerriSkin" if prog > 0.5 else "", pickedColors, prog]),
+			#charEffect("skin", "SkinSet", ["FerriSkin" if prog > 0.5 else "", pickedColors, prog]),
 		]
 	}
 
@@ -110,3 +110,17 @@ func getBuffs() -> Array:
 			buff(Buff.BreastsForcedLactationBuff),
 		]
 	return []
+
+func saveData() -> Dictionary:
+	var data:Dictionary = .saveData()
+	
+	data["sb"] = didChangeBreasts
+	data["prog"] = prog
+	
+	return data
+
+func loadData(_data:Dictionary):
+	.loadData(_data)
+	
+	didChangeBreasts = SAVE.loadVar(_data, "sb", false)
+	prog = SAVE.loadVar(_data, "prog", 0.0)

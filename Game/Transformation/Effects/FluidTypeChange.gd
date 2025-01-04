@@ -57,3 +57,15 @@ func getFluidName(theFluidType:String) -> String:
 	if(fluidObj == null):
 		return theFluidType
 	return fluidObj.getLewdName()
+
+func saveData() -> Dictionary:
+	var data:Dictionary = .saveData()
+	
+	data["fluidType"] = fluidType
+	
+	return data
+
+func loadData(_data:Dictionary):
+	.loadData(_data)
+	
+	fluidType = SAVE.loadVar(_data, "fluidType", "")

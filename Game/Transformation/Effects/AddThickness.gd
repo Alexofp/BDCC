@@ -80,3 +80,15 @@ func generateTransformText(_result:Dictionary):
 		if(newThickness <= 0):
 			text += " {npc.YourHis} thickness has hit the lowest possible point! {npc.YourHis} body is now extremely slim and sleek."
 		addText(text)
+
+func saveData() -> Dictionary:
+	var data:Dictionary = .saveData()
+	
+	data["howMuch"] = howMuch
+	
+	return data
+
+func loadData(_data:Dictionary):
+	.loadData(_data)
+	
+	howMuch = SAVE.loadVar(_data, "howMuch", 10)

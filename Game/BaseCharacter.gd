@@ -3280,8 +3280,29 @@ func applyTFBodypart(bodypartSlot, data:Dictionary):
 	getBodypart(bodypartSlot).loadDataForTF(savedData)
 	getBodypart(bodypartSlot).applyTFData(data)
 
+func saveOriginalTFData() -> Dictionary:
+	return {}
+
+func applyTFData(_data):
+	pass
+
+func loadTFVar(_data:Dictionary, _keyID:String, default):
+	if(!_data.has(_keyID)):
+		return default
+	return _data[_keyID]
+
 func getTFHolder():
 	return null
+
+func undoAllTransformations():
+	var theHolder = getTFHolder()
+	if(theHolder != null):
+		theHolder.undoAllTransformations()
+
+func makeAllTransformationsPermanent():
+	var theHolder = getTFHolder()
+	if(theHolder != null):
+		theHolder.makeAllTransformationsPermanent()
 
 func hasActiveTransformations() -> bool:
 	var theHolder = getTFHolder()

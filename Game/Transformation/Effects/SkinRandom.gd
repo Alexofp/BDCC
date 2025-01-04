@@ -41,3 +41,24 @@ func applyEffect(_data:Dictionary) -> Dictionary:
 		success = true,
 	}
 	
+func saveData() -> Dictionary:
+	var data:Dictionary = .saveData()
+	
+	data["species"] = species
+	data["pickedSkin"] = pickedSkin
+	var pickedColorsStrs:Array = []
+	for color in pickedColors:
+		pickedColorsStrs.append(color.to_html())
+	data["pickedColors"] = pickedColorsStrs
+	
+	return data
+
+func loadData(_data:Dictionary):
+	.loadData(_data)
+	
+	species = SAVE.loadVar(_data, "species", [])
+	pickedSkin = SAVE.loadVar(_data, "pickedSkin", "")
+	var pickedColorsStrs = SAVE.loadVar(_data, "pickedColors", [])
+	pickedColors = []
+	for colorStr in pickedColorsStrs:
+		pickedColors.append(Color(colorStr))

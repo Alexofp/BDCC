@@ -115,3 +115,15 @@ func generateTransformText(_result:Dictionary):
 #	var breastsCovered:bool = (getChar().getFirstItemThatCoversBodypart(BodypartSlot.Breasts) != null)
 #
 #	addText(describeBreastTransformation(origSize, size, breastsCovered))
+
+func saveData() -> Dictionary:
+	var data:Dictionary = .saveData()
+	
+	data["howMuch"] = howMuch
+	
+	return data
+
+func loadData(_data:Dictionary):
+	.loadData(_data)
+	
+	howMuch = SAVE.loadVar(_data, "howMuch", 1)

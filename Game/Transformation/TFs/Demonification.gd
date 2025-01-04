@@ -3,6 +3,9 @@ extends "res://Game/Transformation/TFs/SpeciesTF.gd"
 func _init():
 	id = "Demonification"
 
+func getName() -> String:
+	return "Demonification"
+
 func isPossibleFor(_char) -> bool:
 	if(Species.Demon in _char.getSpecies()):
 		return false

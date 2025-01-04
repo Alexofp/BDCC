@@ -41,3 +41,26 @@ static func colorInterpolateStr(col1, col2, weight:float) -> String:
 	
 	#return col1.linear_interpolate(col2, weight).to_html()
 	return Color.from_hsv(col1.h*(1.0-weight)+col2.h*weight, col1.s*(1.0-weight)+col2.s*weight, col1.v*(1.0-weight)+col2.v*weight).linear_interpolate(col1.linear_interpolate(col2, weight), 0.7).to_html()
+
+static func getTFListCanStart() -> Array:
+	var result:Array = []
+	
+	for tfID in GlobalRegistry.getTransformationRefs():
+		var tf = GlobalRegistry.getTransformationRef(tfID)
+		if(tf.canBeStartedFromDebugMenu()):
+			result.append([tf.id, tf.getName()])
+	return result
+
+static func generateTFIDForAPill() -> String:
+	var possible:Array = []
+	
+	for tfID in GlobalRegistry.getTransformationRefs():
+		var tf = GlobalRegistry.getTransformationRef(tfID)
+		
+		var tfWeight:float = tf.getPillGenWeight()
+		if(tfWeight > 0.0):
+			possible.append([tfID, tfWeight])
+	
+	if(possible.empty()):
+		return ""
+	return RNG.pickWeightedPairs(possible)
