@@ -27,6 +27,9 @@ var hardStruggleEnabled: bool = false
 var smartLockRarity: String = "normal" # never veryrare rare normal often veryoften bdsmslut always
 var overstimulationEnabled: bool = true
 
+# Datapack editor
+var blockCatcherPanelHeight: int = 16
+
 var shouldScaleUI: bool = true
 var uiScaleMultiplier = 1.0
 var requireDoubleTapOnMobile = false
@@ -115,6 +118,7 @@ func resetToDefaults():
 	sandboxPawnCount = 30
 	sandboxBreeding = "rare"
 	sandboxNpcLeveling = 1.0
+	blockCatcherPanelHeight = 16
 	
 	enabledContent.clear()
 	for contentType in ContentType.getAll():
@@ -263,6 +267,9 @@ func getCumShotsDependOnBallsVolume():
 func getCumShotsIntensityMult():
 	return cumIntensityMult
 
+func getBlockCatcherPanelHeight():
+	return blockCatcherPanelHeight
+
 func getSandboxPawnCount() -> int:
 	return sandboxPawnCount
 
@@ -306,6 +313,25 @@ func getChangeableOptions():
 					"value": showModdedLauncher,
 				},
 			],
+		},
+		{
+			"name": "Datapack",
+			"id": "datapack",
+			"options": [
+				{
+					"name": "Block catcher panel height",
+					"description": "Adjust the size(height) of the block catcher panel",
+					"id": "blockCatcherPanelHeight",
+					"type": "list",
+					"value": blockCatcherPanelHeight,
+					"values": [
+						[4, "4p"],
+						[8, "8p"],
+						[16, "16p"],
+						[32, "32p"],
+					]
+				}
+			]
 		},
 		{
 			"name": "Sandbox",
@@ -902,6 +928,10 @@ func applyOption(categoryID, optionID, value):
 			if(showModdedLauncher):
 				var _ok = OS.request_permissions()
 	
+	if(categoryID == "datapack"):
+		if(optionID == "blockCatcherPanelHeight"):
+			blockCatcherPanelHeight = value
+	
 	if(categoryID == "pregnancy"):
 		if(optionID == "menstrualCycleLengthDays"):
 			menstrualCycleLengthDays = value
@@ -1057,6 +1087,7 @@ func saveData():
 		"sandboxPawnCount": sandboxPawnCount,
 		"sandboxBreeding": sandboxBreeding,
 		"sandboxNpcLeveling": sandboxNpcLeveling,
+		"blockCatcherPanelHeight": blockCatcherPanelHeight,
 	}
 	
 	return data
@@ -1111,6 +1142,7 @@ func loadData(data):
 	sandboxPawnCount = loadVar(data, "sandboxPawnCount", 30)
 	sandboxBreeding = loadVar(data, "sandboxBreeding", "rare")
 	sandboxNpcLeveling = loadVar(data, "sandboxNpcLeveling", 1.0)
+	blockCatcherPanelHeight = loadVar(data, "blockCatcherPanelHeight", 16)
 
 func saveToFile():
 	var saveData = saveData()
