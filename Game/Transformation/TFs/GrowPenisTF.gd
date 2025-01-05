@@ -8,6 +8,9 @@ func _init():
 func getName() -> String:
 	return "Grow a penis"
 
+func getPillName() -> String:
+	return "DiRecto"
+
 func isPossibleFor(_char) -> bool:
 	if(_char.hasPenis()):
 		return false

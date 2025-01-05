@@ -10,6 +10,7 @@ func _init():
 
 func getGoals():
 	return {
+		SexGoal.UseTFDrug: 1.0,
 	}
 
 func getSupportedSexTypes():
@@ -93,8 +94,13 @@ func addDrugButtons(actions:Array, possibleDrugsInfo:Dictionary, _sexEngine: Sex
 		var desc = drugInfo["desc"]
 		if(dom.isPlayer()):
 			desc = "Amount left: "+ str(dom.getInventory().getAmountOf(itemID))+"\n"+desc
-
-		var drugFetishScore = clamp(_domInfo.fetishScore({Fetish.DrugUse: 1.0}) + 0.5, 0.0, 1.0) / 10.0
+		
+		var drugFetishScore:float = 0.0
+		
+		if(drugInfo.has("sexgoal")):
+			drugFetishScore = _domInfo.goalsScore({drugInfo["sexgoal"]: 1.0}, _subInfo.charID)
+		else:
+			drugFetishScore = clamp(_domInfo.fetishScore({Fetish.DrugUse: 1.0}) + 0.5, 0.0, 1.0) / 10.0
 
 		if((_isCanApply || !dom.isOralBlocked()) && (!drugInfo.has("canUseOnDom") || drugInfo["canUseOnDom"])):
 			actions.append({
@@ -242,6 +248,8 @@ func processTurn():
 				pillResultText = " "+result["text"]
 			
 			sendSexEvent(SexEvent.DrugSwallowed, domID, subID, {forced=true,itemID=usedItemID})
+			if(drugInfo.has("sexgoal")):
+				satisfyGoal(drugInfo["sexgoal"])
 			
 			var text = RNG.pick([
 				"{dom.You} {dom.youVerb('force')} {sub.you} to swallow "+pcCanSeeText(drugInfo["usedName"])+"!"+pillResultText,
@@ -372,6 +380,9 @@ func doSubAction(_id, _actionInfo):
 		if(RNG.chance(getSubSpitOutChance(100.0, 60.0))):
 			domInfo.addAnger(0.3)
 			endActivity()
+			var drugInfo = getDrugInfo(usedItemID)
+			if(drugInfo.has("sexgoal")):
+				failGoal(drugInfo["sexgoal"])
 			return {
 				text = "{sub.You} {sub.youVerb('manage', 'managed')} to spit the pill out!",
 				subSay=subReaction(SexReaction.Resisting, 50),
@@ -383,6 +394,10 @@ func doSubAction(_id, _actionInfo):
 	
 	if(_id == "noteatit"):
 		endActivity()
+		
+		var drugInfo = getDrugInfo(usedItemID)
+		if(drugInfo.has("sexgoal")):
+			failGoal(drugInfo["sexgoal"])
 		
 		var text = RNG.pick([
 			"{sub.You} {sub.youVerb('refuse')} to take the offered pill.",
@@ -397,6 +412,8 @@ func doSubAction(_id, _actionInfo):
 	if(_id in ["eatit", "swallowforced"]):
 		endActivity()
 		var drugInfo = getDrugInfo(usedItemID)
+		if(drugInfo.has("sexgoal")):
+			satisfyGoal(drugInfo["sexgoal"])
 		
 		if(getDom().isPlayer() && _id == "eatit"):
 			getDom().getInventory().removeXOfOrDestroy(usedItemID, 1)

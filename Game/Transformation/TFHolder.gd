@@ -144,6 +144,12 @@ func doFirstPendingTransformation(_context:Dictionary, _isShort:bool = false) ->
 	}
 
 func processTime(_seconds:int):
+	var theChar = getChar()
+	if(theChar != null):
+		GM.pc.getCustomAttribute(BuffAttribute.TransformationSpeed)
+		var mult:float = 1.0 + max(theChar.getCustomAttribute(BuffAttribute.TransformationSpeed), -1.0)
+		_seconds = int(round(float(_seconds)*mult))
+	
 	var tfsSize:int = transformations.size()
 	for _i in range(tfsSize):
 		var tf = transformations[tfsSize - _i - 1]

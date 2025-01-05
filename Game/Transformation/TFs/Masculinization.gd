@@ -11,6 +11,9 @@ func _init():
 func getName() -> String:
 	return "Masculinization"
 
+func getPillName() -> String:
+	return "TestosteGo"
+
 func isPossibleFor(_char) -> bool:
 	if(getPossibleSteps(_char).empty()):
 		return false

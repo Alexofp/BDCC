@@ -59,7 +59,7 @@ func canCombine():
 #	return false
 
 func addsIntoxication():
-	return 0.1
+	return 0.0
 
 func getTimedBuffs():
 	return [
@@ -92,12 +92,13 @@ func getSexEngineInfo(_sexEngine, _domInfo, _subInfo):
 		"name": "Strange Pill",
 		"usedName": "a strange pill",
 		"desc": getDescription(),
-		"scoreOnSub": 0.0,#_domInfo.goalsScoreMax({SexGoal.FuckVaginal: 1.0, SexGoal.FuckAnal: 0.5}, _subInfo.charID)*_domInfo.fetishScore({Fetish.Breeding: 1.0}),
+		"scoreOnSub": 0.2,#_domInfo.goalsScoreMax({SexGoal.FuckVaginal: 1.0, SexGoal.FuckAnal: 0.5}, _subInfo.charID)*_domInfo.fetishScore({Fetish.Breeding: 1.0}),
 		"scoreOnSelf": 0.0,
 		"scoreSubScore": _subInfo.fetishScore({Fetish.TFReceiving: 1.0}),
 		"canUseOnDom": true,
 		"canUseOnSub": true,
-		"maxUsesByNPC": 1,
+		"maxUsesByNPC": 99,
+		"sexgoal": SexGoal.UseTFDrug,
 	}
 
 func useInSex(_receiver):

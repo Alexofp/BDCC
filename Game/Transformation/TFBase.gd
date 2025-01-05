@@ -57,6 +57,9 @@ func getChar() -> BaseCharacter:
 func getName() -> String:
 	return id
 
+func getPillName() -> String:
+	return getName()
+
 func isPossibleFor(_char) -> bool:
 	return true
 
@@ -272,6 +275,9 @@ func charHatesTF() -> bool:
 
 func getPillGenWeight() -> float:
 	return pillGenWeight
+
+func canChangeWeight() -> bool:
+	return getPillGenWeight() > 0.0
 
 func generatePillArgs() -> Dictionary:
 	return {}

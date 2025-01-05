@@ -74,6 +74,7 @@ const PenisCumGenerationAfterOrgasmBuff = "PenisCumGenerationAfterOrgasmBuff"
 const SensitivityGainBuff = "SensitivityGainBuff"
 const SensitivityRestoreBuff = "SensitivityRestoreBuff"
 const OverstimulationThresholdBuff = "OverstimulationThresholdBuff"
+const TransformationSpeedBuff = "TransformationSpeedBuff"
 
 const EncounterChanceModifierStaffBuff = "EncounterChanceModifierStaffBuff"
 const EncounterChanceModifierInmatesBuff = "EncounterChanceModifierInmatesBuff"

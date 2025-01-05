@@ -9,6 +9,9 @@ func _init():
 func getName() -> String:
 	return "Change species"
 
+func getPillName() -> String:
+	return "WildShift"
+
 func start(_args:Dictionary):
 	if(_args.has("species")):
 		newSpecies = _args["species"] if (_args["species"] is Array) else [_args["species"]]

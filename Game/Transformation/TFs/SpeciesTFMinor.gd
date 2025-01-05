@@ -6,6 +6,9 @@ func _init():
 func getName() -> String:
 	return "Create a hybrid"
 
+func getPillName() -> String:
+	return "Hybridizer"
+
 func getSlotsToTransform() -> Array:
 	return [
 		BodypartSlot.Ears,

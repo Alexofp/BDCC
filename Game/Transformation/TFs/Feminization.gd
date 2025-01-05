@@ -11,6 +11,9 @@ func _init():
 func getName() -> String:
 	return "Feminization"
 
+func getPillName() -> String:
+	return "EstroGPlus"
+
 func isPossibleFor(_char) -> bool:
 	if(getPossibleSteps(_char).empty()):
 		return false

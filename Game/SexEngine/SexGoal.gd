@@ -32,6 +32,7 @@ const BreastFeedSub = "BreastFeedSub"
 const MilkWithPenisPump = "MilkWithPenisPump"
 
 const Hypnotize = "Hypnotize"
+const UseTFDrug = "UseTFDrug"
 
 # Subgoals, these don't need classes defined
 const SubUndressSub = "SubUndressSub"

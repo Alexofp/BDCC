@@ -6,6 +6,9 @@ func _init():
 func getName() -> String:
 	return "Demonification"
 
+func getPillName() -> String:
+	return "DemoniX"
+
 func isPossibleFor(_char) -> bool:
 	if(Species.Demon in _char.getSpecies()):
 		return false
