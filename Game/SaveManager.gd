@@ -5,6 +5,11 @@ var maxBackupQuicksaves = 3
 
 var loadedSavefileVersion = -1
 
+var saveInfoCache:Dictionary = {}
+
+func _ready():
+	loadSaveInfoCacheFromFile()
+
 func saveData():
 	var data = {
 		"savefile_version": currentSavefileVersion,
@@ -63,7 +68,7 @@ func canSave():
 	
 func saveGame(_path):
 	if(!canSave()):
-		print("Can't save because one of the scenes doesn't support saving")
+		Log.printerr("Can't save because one of the scenes doesn't support saving")
 		return
 	
 	var saveData = saveData()
@@ -74,6 +79,50 @@ func saveGame(_path):
 	
 	save_game.close()
 	
+	if(saveInfoCache.has(_path)):
+		saveInfoCache.erase(_path)
+	triggerSaveCacheSave()
+
+const saveInfoCachePath = "user://saveInfoCache.json"
+
+func loadSaveInfoCacheFromFile():
+	var save_game = File.new()
+	if !save_game.file_exists(saveInfoCachePath):
+		return
+	
+	save_game.open(saveInfoCachePath, File.READ)
+	var jsonResult = JSON.parse(save_game.get_as_text())
+	if(jsonResult.error != OK):
+		Log.printerr("Save info cache is not a valid json file")
+		return
+	
+	var saveData:Dictionary = jsonResult.result
+	if(!saveData.has("version") || !saveData.has("saves")):
+		Log.printerr("Save info cache is not valid")
+		return
+	if(saveData["version"] != 1):
+		Log.printerr("Unsupported save info cache version")
+		return
+	saveInfoCache = saveData["saves"]
+
+func saveInfoCacheToFile():
+	var save_game = File.new()
+	save_game.open(saveInfoCachePath, File.WRITE)
+	save_game.store_line(JSON.print({
+		version = 1,
+		saves = saveInfoCache,
+	}, "\t", true))
+	save_game.close()
+	isSavingCache = false
+	#print("SAVED CACHE!")
+
+var isSavingCache:bool = false
+func triggerSaveCacheSave():
+	if(isSavingCache):
+		return
+	isSavingCache = true # De-bouncing. Only save once at the end of the frame in case there are many requests
+	call_deferred("saveInfoCacheToFile")
+
 func saveGameFromText(filepath: String, savedatastring):
 	var save_game = File.new()
 	save_game.open("user://saves/"+filepath.get_file().get_basename()+".save", File.WRITE)
@@ -252,6 +301,17 @@ func getSavesSortedByDate():
 	return result
 
 func loadGameInformationFromSave(_path):
+	if(saveInfoCache.has(_path)):
+		return saveInfoCache[_path]
+	
+	var theInfo = loadGameInformationFromSaveRaw(_path)
+	if(theInfo != null):
+		saveInfoCache[_path] = theInfo
+		#Log.print("CREATED SAVE INFO CACHE FOR: "+str(_path))
+		triggerSaveCacheSave()
+	return theInfo
+
+func loadGameInformationFromSaveRaw(_path):
 	var save_game = File.new()
 	if not save_game.file_exists(_path):
 		assert(false, "Save file is not found in "+str(_path))
