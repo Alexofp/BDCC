@@ -310,6 +310,7 @@ func generateGoals():
 					
 					if(sexGoal.isPossible(self, personDomInfo, personSubInfo, goalData) && !sexGoal.isCompleted(self, personDomInfo, personSubInfo, goalData)):
 						var goalWeightModifier = GM.main.getEncounterSettings().getGoalWeight(sexGoal.id, sexGoal.getGoalDefaultWeight())
+						goalWeightModifier *= sub.getSexGoalSubWeightModifier(sexGoal.id, domID)
 						var goalObject = [[goal[0], sub.getID(), goalData], goal[1] * goalWeightModifier]
 						
 						possibleGoals.append(goalObject)

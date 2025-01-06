@@ -3294,6 +3294,20 @@ func loadTFVar(_data:Dictionary, _keyID:String, default):
 func getTFHolder():
 	return null
 
+func getTFTotalStagesSum() -> int:
+	var theHolder = getTFHolder()
+	if(theHolder == null):
+		return 0
+	return theHolder.getTotalStageSum()
+
+func getSexGoalSubWeightModifier(_sexGoalID:String, _domID:String) -> float:
+	var result:float = 1.0
+	var theTFHolder = getTFHolder()
+	if(theTFHolder != null):
+		result *= theTFHolder.getSexGoalWeightModifier(_sexGoalID)
+	
+	return result
+
 func undoAllTransformations():
 	var theHolder = getTFHolder()
 	if(theHolder != null):

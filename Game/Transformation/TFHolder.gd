@@ -30,7 +30,23 @@ func getChar():
 		return null
 	return charRef.get_ref()
 
+func canStartTransformation(_tfID:String) -> bool:
+	var newTF = GlobalRegistry.getTransformationRef(_tfID)
+	if(newTF == null || !newTF.isPossibleFor(getChar())):
+		return false
+	
+	var currentTags:Dictionary = getCurrentTFTags()
+	var newTfTags:Dictionary = newTF.getTFCheckTags()
+	for tag in newTfTags:
+		if(currentTags.has(tag)):
+			return false
+	
+	return true
+
 func startTransformation(_tfID:String, _args:Dictionary={}):
+	if(!canStartTransformation(_tfID)):
+		return null
+	
 	var newTF = GlobalRegistry.createTransformation(_tfID)
 	if(newTF == null):
 		return null
@@ -279,6 +295,31 @@ func forceProgressAll():
 func accelerateAllFull():
 	for tf in transformations:
 		tf.timer = 0
+
+func getTotalStageSum() -> int:
+	var result:int = 0
+	
+	for tf in transformations:
+		result += tf.getStage()
+	
+	return result
+
+func getCurrentTFTags() -> Dictionary:
+	var result:Dictionary = {}
+	
+	for tf in transformations:
+		var tags = tf.getTFCheckTags()
+		for tag in tags:
+			result[tag] = true
+	
+	return result
+
+func getSexGoalWeightModifier(_sexGoalID:String) -> float:
+	var result:float = 1.0
+	for tf in transformations:
+		result += tf.getSexGoalWeightModifier(_sexGoalID)
+	
+	return max(result, 0.0)
 
 func saveData() -> Dictionary:
 	var effectsData:Array = []

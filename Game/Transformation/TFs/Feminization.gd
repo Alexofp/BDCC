@@ -14,6 +14,18 @@ func getName() -> String:
 func getPillName() -> String:
 	return "EstroGPlus"
 
+func getTFCheckTags() -> Dictionary:
+	return {
+		"gender": true,
+	}
+
+func getSexGoalWeightModifier(_sexGoalID:String) -> float:
+	if(_sexGoalID == SexGoal.FuckAnal):
+		return 100000.0
+	if(_sexGoalID == SexGoal.StraponAnal):
+		return 100000.0
+	return 0.0
+
 func isPossibleFor(_char) -> bool:
 	if(getPossibleSteps(_char).empty()):
 		return false

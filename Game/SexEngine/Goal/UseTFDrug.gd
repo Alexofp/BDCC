@@ -4,7 +4,7 @@ func _init():
 	id = SexGoal.UseTFDrug
 
 func getVisibleName():
-	return "Use transformation drug"
+	return "Use transformative drug"
 
 func isPossible(_sexEngine, _domInfo, _subInfo, _data):
 	if(_subInfo.getChar().isOralBlocked()):

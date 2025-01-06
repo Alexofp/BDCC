@@ -10,6 +10,8 @@ func _init():
 		[10, [["QualityCondom", 1, 3]]],
 		[10, [["PregnancyTest", 1, 2]]],
 		[10, [["BirthControlPill", 1, 2]]],
+		[10, ["TFUndoPill"]],
+		
 		[5, ["HeatPill"]],
 		[5, ["lube"]],
 		[5, ["BreederPill"]],

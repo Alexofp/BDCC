@@ -2,6 +2,7 @@ extends SexActivityBase
 
 var usedItemID = ""
 var timePassed = 0
+var pillVariants:Array = []
 
 func _init():
 	id = "DomDrugUse"
@@ -168,6 +169,9 @@ func startActivity(_args):
 			text = RNG.pick([
 				"{dom.You} {dom.youVerb('produce')} "+pcCanSeeText(drugInfo["usedName"], "something")+" and {dom.youVerb('begin')} applying it on {sub.you}!",
 			])
+		
+		if(getSub().isPlayer() && itemID == "TFPill"):
+			text += " [color=#"+Color.cyan.to_html()+"]This pill might do something to your body[/color]"
 		return {text = text, domSay=domReaction(SexReaction.ForcingDrug)}
 	
 	if(_args[0] == "useonself"):
@@ -213,6 +217,8 @@ func startActivity(_args):
 			endActivity()
 			return
 		
+		var customDomSay:String = ""
+		
 		var text = RNG.pick([
 			"{dom.You} {dom.youVerb('produce')} "+pcCanSeeText(drugInfo["usedName"])+" and {dom.youVerb('offer')} it to {sub.you}.",
 		])
@@ -220,7 +226,27 @@ func startActivity(_args):
 			text += RNG.pick([
 				" {sub.YouHe} can only guess what drug that is.",
 			])
-		return {text = text, domSay=domReaction(SexReaction.OfferingDrug)}
+		elif(getSub().isPlayer() && itemID == "TFPill"):
+			text += " [color=#"+Color.cyan.to_html()+"]This pill might do something to your body[/color]"
+
+			generatePillVariants(itemID)
+			if(!pillVariants.empty()):
+				var tfNames:Array = []
+				for tfID in pillVariants:
+					var tf:TFBase = GlobalRegistry.getTransformationRef(tfID)
+					if(tf != null):
+						var pillName:String = tf.getPillName()
+						tfNames.append("a "+pillName)
+				customDomSay = "It's either "+Util.humanReadableList(tfNames, "or")+". "
+				customDomSay += RNG.pick([
+					"But I'm not gonna say which.",
+					"But I don't remember which.",
+					"Try your luck.",
+					"Just try it and see what happens.",
+					"C'mon, it will be fun.",
+				])
+
+		return {text = text, domSay=domReaction(SexReaction.OfferingDrug) if customDomSay == "" else customDomSay}
 	
 
 func processTurn():
@@ -241,6 +267,10 @@ func processTurn():
 			var itemRef = GlobalRegistry.getItemRef(usedItemID)
 			if(itemRef == null || drugInfo == null):
 				return
+			if(usedItemID == "TFPill" && pillVariants.size() > 0):
+				itemRef = GlobalRegistry.createItem(usedItemID)
+				var thePick:String = RNG.pick(pillVariants)
+				itemRef.setTFID(thePick)
 			
 			var pillResultText = ""
 			var result = itemRef.useInSex(getSub())
@@ -423,6 +453,10 @@ func doSubAction(_id, _actionInfo):
 		var itemRef = GlobalRegistry.getItemRef(usedItemID)
 		if(itemRef == null || drugInfo == null):
 			return
+		if(usedItemID == "TFPill" && pillVariants.size() > 0):
+			itemRef = GlobalRegistry.createItem(usedItemID)
+			var thePick:String = RNG.pick(pillVariants)
+			itemRef.setTFID(thePick)
 		
 		var pillResultText = ""
 		var result = itemRef.useInSex(getSub())
@@ -461,11 +495,21 @@ func doSubAction(_id, _actionInfo):
 		return {text = "{sub.You} {sub.youVerb('try', 'tries')} to stop {dom.youHim} but {sub.youVerb('fail')}.",
 		subSay=subReaction(SexReaction.Resisting, 50)}
 
+func generatePillVariants(theItemID:String):
+	pillVariants = []
+	
+	if(theItemID == "TFPill"):
+		for _i in range(3):
+			var newTFID:String = TFUtil.generateTFIDForAPill(pillVariants)
+			if(newTFID != ""):
+				pillVariants.append(newTFID)
+
 func saveData():
 	var data = .saveData()
 	
 	data["usedItemID"] = usedItemID
 	data["timePassed"] = timePassed
+	data["pillVariants"] = pillVariants
 
 	return data
 	
@@ -474,3 +518,4 @@ func loadData(data):
 	
 	usedItemID = SAVE.loadVar(data, "usedItemID", "")
 	timePassed = SAVE.loadVar(data, "timePassed", 0)
+	pillVariants = SAVE.loadVar(data, "pillVariants", [])

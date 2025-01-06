@@ -7,7 +7,7 @@ func getVisibleName():
 	return "QuickShift Pill"
 	
 func getDescription():
-	return "A pill that's claiming to be able to accelerate the progression of any transformation."
+	return "A pill that's claiming to be able to [color=#"+Color.cyan.to_html()+"]accelerate the progression of any transformation.[/color]"
 
 func canUseInCombat():
 	return true

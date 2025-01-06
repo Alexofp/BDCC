@@ -11,6 +11,11 @@ func getName() -> String:
 func getPillName() -> String:
 	return "P-Bloom"
 
+func getTFCheckTags() -> Dictionary:
+	return {
+		"growvag": true,
+	}
+
 func isPossibleFor(_char) -> bool:
 	if(_char.hasVagina()):
 		return false

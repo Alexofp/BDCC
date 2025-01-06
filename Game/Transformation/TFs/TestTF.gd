@@ -10,6 +10,7 @@ var prog:float = 0
 
 func _init():
 	id = "TestTF"
+	pillGenWeight = 0.0
 
 func start(_args:Dictionary):
 	#pickedColors = TFUtil.getRandomColorsForSpecies([Species.Canine])

@@ -9,6 +9,11 @@ func getName() -> String:
 func getPillName() -> String:
 	return "DemoniX"
 
+func getTFCheckTags() -> Dictionary:
+	return {
+		"species": true,
+	}
+
 func isPossibleFor(_char) -> bool:
 	if(Species.Demon in _char.getSpecies()):
 		return false

@@ -11,6 +11,11 @@ func getName() -> String:
 func getPillName() -> String:
 	return "DiRecto"
 
+func getTFCheckTags() -> Dictionary:
+	return {
+		"growpenis": true,
+	}
+
 func isPossibleFor(_char) -> bool:
 	if(_char.hasPenis()):
 		return false

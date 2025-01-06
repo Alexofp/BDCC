@@ -1368,7 +1368,10 @@ func doDebugAction(id, args = {}):
 	if(id == "accelerateTFs"):
 		GM.pc.getTFHolder().accelerateAllFull()
 	if(id == "startTF"):
-		GM.pc.getTFHolder().startTransformation(args["tfid"])
+		if(!GM.pc.getTFHolder().canStartTransformation(args["tfid"])):
+			addMessage(args["tfid"] +" transformation is currently not possible.")
+		else:
+			GM.pc.getTFHolder().startTransformation(args["tfid"])
 	if(id == "undoTFs"):
 		GM.pc.undoAllTransformations()
 	if(id == "applyTFs"):

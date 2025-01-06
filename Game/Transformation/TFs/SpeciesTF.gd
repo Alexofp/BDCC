@@ -12,6 +12,11 @@ func getName() -> String:
 func getPillName() -> String:
 	return "WildShift"
 
+func getTFCheckTags() -> Dictionary:
+	return {
+		"species": true,
+	}
+
 func start(_args:Dictionary):
 	if(_args.has("species")):
 		newSpecies = _args["species"] if (_args["species"] is Array) else [_args["species"]]

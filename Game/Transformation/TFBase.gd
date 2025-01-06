@@ -60,6 +60,10 @@ func getName() -> String:
 func getPillName() -> String:
 	return getName()
 
+# Can't start a tf if we already have one with at least one shared tag
+func getTFCheckTags() -> Dictionary:
+	return {}
+
 func isPossibleFor(_char) -> bool:
 	return true
 
@@ -281,6 +285,9 @@ func canChangeWeight() -> bool:
 
 func generatePillArgs() -> Dictionary:
 	return {}
+
+func getSexGoalWeightModifier(_sexGoalID:String) -> float:
+	return 0.0
 
 func addText(theText:String):
 	if(theText == ""):

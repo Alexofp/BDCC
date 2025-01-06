@@ -12,6 +12,7 @@ func _init():
 		[20, [["HeatPill", 1, 3]]],
 		[20, [["QualityCondom", 1, 5]]],
 		[20, [["PregnancyTest", 1, 3]]],
+		[100, [["TFUndoPill", 1, 2]]],
 	]
 	minCredits = 0
 	maxCredits = 0

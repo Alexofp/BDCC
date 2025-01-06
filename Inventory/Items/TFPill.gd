@@ -10,30 +10,42 @@ func getVisibleName():
 	return "Strange Pill"
 	
 func getDescription():
-	return "A pill that lacks any labels or instructions. Who knows what it will do..\n[color=cyan]This pill might have some kind of transformative effect on your body.[/color]"
+	return "A pill that lacks any labels or instructions. Who knows what it will do..\n[color=#"+Color.cyan.to_html()+"]This pill might have some kind of transformative effect on your body.[/color]"
 
 func canUseInCombat():
 	return true
 
-func pillStartTF(_user) -> String:
+func getTFID() -> String:
 	if(tfID == ""):
 		tfID = TFUtil.generateTFIDForAPill()
-		
 		if(tfID != ""):
 			var tf = GlobalRegistry.getTransformationRef(tfID)
 			if(tf != null):
 				tfArgs = tf.generatePillArgs()
+	return tfID
+
+func setTFID(newTFID:String):
+	tfID = newTFID
+	tfArgs.clear()
+	if(tfID != ""):
+		var tf = GlobalRegistry.getTransformationRef(tfID)
+		if(tf != null):
+			tfArgs = tf.generatePillArgs()
+
+func pillStartTF(_user) -> Array:
+	var _id:String = getTFID()
 	
+	var tfHolder = _user.getTFHolder()
 	
-	if(tfID == "" || GlobalRegistry.getTransformationRef(tfID) == null || !GlobalRegistry.getTransformationRef(tfID).isPossibleFor(_user) || _user.getTFHolder()==null):
-		return "{USER.You} {USER.youVerb('swallow')} the pill.. but nothing happens. Was that a fake one?".replace("USER", _user.getID())
+	if(tfID == "" || GlobalRegistry.getTransformationRef(tfID) == null || tfHolder == null || !tfHolder.canStartTransformation(tfID)):
+		return [false, "{USER.You} {USER.youVerb('swallow')} the pill.. but nothing happens. Looks like {USER.youHe} got lucky!".replace("USER", _user.getID())]
 	
 	_user.getTFHolder().startTransformation(tfID, tfArgs)
-	return "{USER.You} {USER.youVerb('swallow')} the weird pill..".replace("USER", _user.getID())
+	return [true, "{USER.You} {USER.youVerb('swallow')} the weird pill..".replace("USER", _user.getID())]
 
 func useInCombat(_attacker, _receiver):
 	removeXOrDestroy(1)
-	return pillStartTF(_attacker)
+	return pillStartTF(_attacker)[1]
 
 func getPossibleActions():
 	return [
@@ -102,9 +114,9 @@ func getSexEngineInfo(_sexEngine, _domInfo, _subInfo):
 	}
 
 func useInSex(_receiver):
-	var _theText:String = pillStartTF(_receiver)
+	var _success:bool = pillStartTF(_receiver)[0]
 	return {
-		text = "Nothing happens at first..",
+		text = "Nothing happens at first.." if _success else "The pill has no effect.",
 	}
 
 func getItemCategory():

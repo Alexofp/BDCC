@@ -9,6 +9,11 @@ func getName() -> String:
 func getPillName() -> String:
 	return "Hybridizer"
 
+func getTFCheckTags() -> Dictionary:
+	return {
+		"species": true,
+	}
+
 func getSlotsToTransform() -> Array:
 	return [
 		BodypartSlot.Ears,

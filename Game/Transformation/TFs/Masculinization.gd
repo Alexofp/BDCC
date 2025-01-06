@@ -14,6 +14,11 @@ func getName() -> String:
 func getPillName() -> String:
 	return "TestosteGo"
 
+func getTFCheckTags() -> Dictionary:
+	return {
+		"gender": true,
+	}
+
 func isPossibleFor(_char) -> bool:
 	if(getPossibleSteps(_char).empty()):
 		return false
