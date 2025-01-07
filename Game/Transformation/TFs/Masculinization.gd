@@ -17,6 +17,7 @@ func getPillName() -> String:
 func getTFCheckTags() -> Dictionary:
 	return {
 		"gender": true,
+		"breasts": true,
 	}
 
 func isPossibleFor(_char) -> bool:

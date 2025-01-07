@@ -3403,3 +3403,15 @@ func calculateNpcGender():
 	else:
 		resultGender = NpcGender.Female
 	return resultGender
+
+func increaseBodypartSensitivity(bodypartSlot:String, howMuch:float):
+	if(!hasBodypart(bodypartSlot)):
+		return
+	
+	var bodypart = getBodypart(bodypartSlot)
+	
+	var zone = bodypart.getSensitiveZone()
+	if(zone == null):
+		return
+	zone.addSensitivity(howMuch)
+	

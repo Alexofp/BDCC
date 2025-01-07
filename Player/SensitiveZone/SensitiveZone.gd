@@ -216,6 +216,11 @@ func shouldShowOverstimualtedTextInSexEngine(_sexInfo) -> bool:
 func generateDataFor(_dynamicCharacter):
 	pass
 
+func addSensitivity(howMuch:float):
+	sensitivity += howMuch
+	if(sensitivity < 0.1):
+		sensitivity = 0.1
+
 func saveData():
 	var data = {
 		"sens": sensitivity,
