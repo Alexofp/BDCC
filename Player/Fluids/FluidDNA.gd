@@ -2,6 +2,7 @@ extends Reference
 class_name FluidDNA
 
 var charID: String = ""
+var causerID: String = "" # If a strapon was used, this will hold the id of the person who was wearing it
 var virility: float = 0.0
 var species: Array = []
 
@@ -10,6 +11,9 @@ func canCombineWith(otherDNA):
 		return false
 	
 	if(charID != otherDNA.charID):
+		return false
+	
+	if(causerID != otherDNA.causerID):
 		return false
 	
 	if(abs(virility - otherDNA.virility) > 0.01):
@@ -28,6 +32,12 @@ func getCharacter():
 		return null
 	return GlobalRegistry.getCharacter(charID)
 
+func setCauserID(_charID:String):
+	causerID = _charID
+
+func getCauserID() -> String:
+	return causerID
+
 func getVirility():
 	return virility
 
@@ -40,11 +50,13 @@ func isBlank():
 func saveData():
 	return {
 		"charID": charID,
+		"causerID": causerID,
 		"virility": virility,
 		"species": species,
 	}
 
 func loadData(data):
 	charID = SAVE.loadVar(data, "charID", "")
+	causerID = SAVE.loadVar(data, "causerID", "")
 	virility = SAVE.loadVar(data, "virility", 0.0)
 	species = SAVE.loadVar(data, "species", [])

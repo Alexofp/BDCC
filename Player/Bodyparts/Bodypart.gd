@@ -522,3 +522,8 @@ func getTransformMorphMessage(_context:Dictionary) -> String:
 	var slotName:String = BodypartSlot.getVisibleNameNoCap(slot)
 	var shouldHaveS:bool = !slotName.ends_with("s") || (slotName in ["penis", "anus"])
 	return "An unusual sensation courses through {npc.yourHis} body as {npc.yourHis} "+slotName+" begin"+("s" if shouldHaveS else "")+" to shift and change! The familiar contours start to dissolve and reshape, morphing into something different. Gradually, the new "+slotName+" emerge"+("s" if shouldHaveS else "")+", taking on a more defined form. The process is quite painful and uncomfortable, but eventually "+("it settles" if shouldHaveS else "they settle")+" into "+("its" if shouldHaveS else "their")+" final appearance. {npc.YouHe} now {npc.youVerb('have', 'has')} "+getAVulgarName()+"."
+
+func setFluidsCauserID(_charID:String):
+	var _fluids = getFluids()
+	if(_fluids != null):
+		_fluids.setCauserID(_charID)

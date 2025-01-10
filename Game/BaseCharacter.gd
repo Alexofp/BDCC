@@ -962,7 +962,7 @@ func cummedInBodypartByAdvanced(bodypartSlot, characterID, advancedData:Dictiona
 		
 		var fluids = strapon.getFluids()
 		if(fluids != null):
-			resultAmount = fluids.transferTo(thebodypart, amountToTransfer)
+			resultAmount = fluids.transferTo(thebodypart, amountToTransfer, 0.0, getID())
 	else:
 		var thebodypart = getBodypart(bodypartSlot)
 		resultAmount = ch.getFluidAmount(sourceType) * amountToTransfer
@@ -1029,7 +1029,7 @@ func rubsVaginasWith(characterID, chanceToStealCum = 100, showMessages = true):
 	if(orifice == null || npcOrifice == null):
 		return
 	
-	var success = orifice.shareFluids(npcOrifice, RNG.randf_range(0.2, 0.4))
+	var success = orifice.shareFluids(npcOrifice, RNG.randf_range(0.2, 0.4), getID())
 	if(showMessages && success):
 		emit_signal("exchangedCumDuringRubbing", getName(), ch.getName())
 
@@ -2166,7 +2166,7 @@ func bodypartTransferFluidsTo(bodypartID, otherCharacterID, otherBodypartID, fra
 	if(otherOrifice == null):
 		return false
 	
-	return orifice.transferTo(otherOrifice, fraction, minAmount) > 0.0
+	return orifice.transferTo(otherOrifice, fraction, minAmount, getID()) > 0.0
 
 func bodypartTransferFluidsToAmount(bodypartID, otherCharacterID, otherBodypartID, fraction = 0.5, minAmount = 0.0):
 	if(!hasBodypart(bodypartID)):
@@ -2186,7 +2186,7 @@ func bodypartTransferFluidsToAmount(bodypartID, otherCharacterID, otherBodypartI
 	if(otherOrifice == null):
 		return 0.0
 	
-	return orifice.transferTo(otherOrifice, fraction, minAmount)
+	return orifice.transferTo(otherOrifice, fraction, minAmount, getID())
 
 func bodypartShareFluidsWith(bodypartID, otherCharacterID, otherBodypartID, fraction = 0.5):
 	if(!hasBodypart(bodypartID)):
@@ -2206,7 +2206,7 @@ func bodypartShareFluidsWith(bodypartID, otherCharacterID, otherBodypartID, frac
 	if(otherOrifice == null):
 		return false
 	
-	return orifice.shareFluids(otherOrifice, fraction)
+	return orifice.shareFluids(otherOrifice, fraction, getID())
 
 func processSexTurn():
 	for effectID in statusEffects.keys():

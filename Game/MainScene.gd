@@ -29,6 +29,7 @@ var IS:InteractionSystem = InteractionSystem.new()
 var RS:RelationshipSystem = RelationshipSystem.new()
 var WHS:WorldHistory = WorldHistory.new()
 var SAB:SlaveAuctionBidders = SlaveAuctionBidders.new()
+var SCI:Science = Science.new()
 
 var staticCharacters = {}
 var charactersToUpdate = {}
@@ -457,6 +458,7 @@ func saveData():
 	data["interactionSystem"] = IS.saveData()
 	data["relationshipSystem"] = RS.saveData()
 	data["auctionBidders"] = SAB.saveData()
+	data["science"] = SCI.saveData()
 	
 	data["scenes"] = []
 	for scene in sceneStack:
@@ -491,6 +493,7 @@ func loadData(data):
 	IS.loadData(SAVE.loadVar(data, "interactionSystem", {}))
 	RS.loadData(SAVE.loadVar(data, "relationshipSystem", {}))
 	SAB.loadData(SAVE.loadVar(data, "auctionBidders", {}))
+	SCI.loadData(SAVE.loadVar(data, "science", {}))
 	
 	var scenes = SAVE.loadVar(data, "scenes", [])
 	

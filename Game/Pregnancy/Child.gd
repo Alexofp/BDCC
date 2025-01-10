@@ -7,6 +7,7 @@ var species = []
 var birthDay: int
 var motherID: String
 var fatherID: String
+var causerID: String
 var rememberedMotherName: String = "" # Required in case the character gets deleted
 var rememberedFatherName: String = ""
 var uniqueID: int
@@ -51,11 +52,17 @@ func setFatherID(newfather):
 	if(character != null):
 		rememberedFatherName = character.getName()
 
+func setCauserID(newcauser:String):
+	causerID = newcauser
+
 func getMotherID():
 	return motherID
 
 func getFatherID():
 	return fatherID
+	
+func getCauserID() -> String:
+	return causerID
 	
 func getMonozygotic():
 	return bornFromMonozygotic
@@ -81,6 +88,7 @@ func loadFromEggCell(egg: EggCell):
 	species = egg.resultSpecies
 	setMotherID(egg.motherID)
 	setFatherID(egg.fatherID)
+	setCauserID(egg.causerID)
 
 func saveData():
 	var data = {
@@ -94,6 +102,7 @@ func saveData():
 		"uniqueID": uniqueID,
 		"rememberedMotherName": rememberedMotherName,
 		"rememberedFatherName": rememberedFatherName,
+		"causerID": causerID,
 	}
 	
 	return data
@@ -111,4 +120,5 @@ func loadData(data):
 	uniqueID = SAVE.loadVar(data, "uniqueID", 0)
 	rememberedMotherName = SAVE.loadVar(data, "rememberedMotherName", "")
 	rememberedFatherName = SAVE.loadVar(data, "rememberedFatherName", "")
-	
+	if(data.has("causerID")):
+		causerID = SAVE.loadVar(data, "causerID", "")

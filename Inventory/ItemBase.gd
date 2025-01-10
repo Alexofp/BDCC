@@ -385,6 +385,10 @@ func generateFluids():
 func getFluids():
 	return fluids
 
+func setFluidsCauserID(_charID:String):
+	if(fluids != null):
+		fluids.setCauserID(_charID)
+
 func isImportant():
 	return false
 

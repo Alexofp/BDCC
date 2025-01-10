@@ -1010,6 +1010,11 @@ _global_script_classes=[ {
 "path": "res://Characters/Dynamic/Generator/NurseGenerator.gd"
 }, {
 "base": "Reference",
+"class": "NurseryTaskBase",
+"language": "GDScript",
+"path": "res://Game/Science/NurseryTaskBase.gd"
+}, {
+"base": "Reference",
 "class": "Orifice",
 "language": "GDScript",
 "path": "res://Player/Orifice/Orifice.gd"
@@ -1288,6 +1293,11 @@ _global_script_classes=[ {
 "class": "SceneBase",
 "language": "GDScript",
 "path": "res://Scenes/SceneBase.gd"
+}, {
+"base": "Reference",
+"class": "Science",
+"language": "GDScript",
+"path": "res://Game/Science/Science.gd"
 }, {
 "base": "Reference",
 "class": "SensitiveZone",
@@ -1830,6 +1840,7 @@ _global_script_class_icons={
 "NpcRank": "",
 "NpcSlave": "",
 "NurseGenerator": "",
+"NurseryTaskBase": "",
 "Orifice": "",
 "OrificeType": "",
 "OverriddenPlayer": "",
@@ -1886,6 +1897,7 @@ _global_script_class_icons={
 "SaveConversion": "",
 "SayParser": "",
 "SceneBase": "",
+"Science": "",
 "SensitiveZone": "",
 "SexActivityBase": "",
 "SexActivityTag": "",

@@ -81,6 +81,7 @@ var pawnTypes:Dictionary = {}
 var transformations:Dictionary = {}
 var transformationRefs:Dictionary = {}
 var transformationEffects:Dictionary = {}
+var nurseryTasks:Dictionary = {}
 
 var bodypartStorageNode
 
@@ -433,6 +434,7 @@ func registerEverything():
 	
 	registerTransformationsFolder("res://Game/Transformation/TFs/")
 	registerTransformationEffectsFolder("res://Game/Transformation/Effects/")
+	registerNurseryTaskFolder("res://Game/Science/NurseryTasks/")
 	
 	emit_signal("loadingUpdate", 11.0/totalStages, "Sex scenes")
 	yield(get_tree(), "idle_frame")
@@ -2341,3 +2343,28 @@ func createTransformationEffect(id: String):
 		
 func getTransformationEffects():
 	return transformationEffects
+
+
+
+
+
+func registerNurseryTask(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	nurseryTasks[object.id] = loadedClass
+
+func registerNurseryTaskFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerNurseryTask(scriptPath)
+
+func createNurseryTask(id: String):
+	if(nurseryTasks.has(id)):
+		return nurseryTasks[id].new()
+	else:
+		Log.printerr("ERROR: nursery task with the id "+id+" wasn't found")
+		return null
+		
+func getNurseryTasks():
+	return nurseryTasks

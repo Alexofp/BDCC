@@ -103,6 +103,9 @@ func getCharacter():
 	var bodypartObject = getBodypart()
 	return bodypartObject.getCharacter()
 
+func setCauserID(_charID:String):
+	fluids.setCauserID(_charID)
+
 func saveData():
 	var data = {
 		"fluids": fluids.saveData(),
