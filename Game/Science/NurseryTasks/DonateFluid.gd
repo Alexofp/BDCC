@@ -20,7 +20,7 @@ func getDescription() -> String:
 	return "FILL ME"
 
 func getCompletionString() -> String:
-	return str(Util.roundF(curAmount, 1)+"/"+str(Util.roundF(needAmount, 1)))+"ml"
+	return str(Util.roundF(curAmount, 1))+"/"+str(Util.roundF(needAmount, 1))+"ml"
 
 func setTaskData(_data:Dictionary):
 	fluidID = _data["fluidID"]
@@ -35,6 +35,7 @@ func generatePossibleTasks() -> Array:
 			sciPoints = RNG.randi_range(10, 20),
 			fluidID = possibleFluidID,
 			needAmount = (RNG.randi_range(1, 5)+RNG.randi_range(1, 5))*50.0,
+			days = RNG.randi_range(1, 3),
 		})
 	
 	return result

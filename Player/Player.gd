@@ -968,3 +968,9 @@ func applyTFData(_data):
 		if(bodypart == null || !partSkinData.has(bodypartSlot)):
 			continue
 		bodypart.applySkinData(partSkinData[bodypartSlot] if partSkinData.has(bodypartSlot) else {})
+
+func onSexEvent(_event : SexEvent):
+	.onSexEvent(_event)
+	
+	if(GM.main != null && GM.main.SCI != null):
+		GM.main.SCI.handleSexEvent(_event)
