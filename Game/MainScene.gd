@@ -601,6 +601,7 @@ func processTime(_seconds):
 func doTimeProcess(_seconds):
 	# This splits long sleeping times into 1 hour chunks
 	IS.processTime(_seconds)
+	SCI.processTime(_seconds)
 	
 	var copySeconds = _seconds
 	while(copySeconds > 0):

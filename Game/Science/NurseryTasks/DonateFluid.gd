@@ -17,7 +17,7 @@ func getName() -> String:
 		return "Donate "+str(fluidObj.getVisibleName())
 
 func getDescription() -> String:
-	return "FILL ME"
+	return "Use the donation machine here or get milked by Dr. Quinn."
 
 func getCompletionString() -> String:
 	return str(Util.roundF(curAmount, 1))+"/"+str(Util.roundF(needAmount, 1))+"ml"
@@ -29,23 +29,45 @@ func setTaskData(_data:Dictionary):
 func generatePossibleTasks() -> Array:
 	var result:Array = []
 	
-	for possibleFluidID in ["", "Cum", "Milk"]:
+	var possibleFluids:Array = ["", "Cum", "Milk"]
+	
+	var importantID:String = RNG.pick(possibleFluids)
+	
+	for possibleFluidID in possibleFluids:
+		var aneed:float = (RNG.randi_range(1, 5)+RNG.randi_range(1, 5))*50.0
+		if(possibleFluidID == "Cum"):
+			aneed *= 0.25
 		result.append({
-			credits = RNG.randi_range(1, 3),
-			sciPoints = RNG.randi_range(10, 20),
+			difficulty = DIFFICULTY_EASY,
 			fluidID = possibleFluidID,
-			needAmount = (RNG.randi_range(1, 5)+RNG.randi_range(1, 5))*50.0,
-			days = RNG.randi_range(1, 3),
+			needAmount = aneed,
+			days = 1,
+			weight = 5.0 if importantID == possibleFluidID else 1.0,
 		})
 	
 	return result
 
-func isSameAs(_otherTask) -> bool:
-	return fluidID == _otherTask.fluidID
-
 func handleBountyFluid(_fluidType:String, _amount:float):
+	if(_fluidType == "Piss"):  # Nope
+		return
 	if(_fluidType == fluidID || fluidID == ""):
 		curAmount += _amount
 	
 		if(curAmount >= needAmount):
 			completeSelf()
+
+func saveData() -> Dictionary:
+	var data:Dictionary = .saveData()
+	
+	data["fluidID"] = fluidID
+	data["curAmount"] = curAmount
+	data["needAmount"] = needAmount
+	
+	return data
+
+func loadData(_data:Dictionary):
+	.loadData(_data)
+	
+	fluidID = SAVE.loadVar(_data, "fluidID", "Milk")
+	curAmount = SAVE.loadVar(_data, "curAmount", 0.0)
+	needAmount = SAVE.loadVar(_data, "needAmount", 0.0)

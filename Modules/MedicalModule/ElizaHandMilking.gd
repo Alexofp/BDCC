@@ -185,6 +185,7 @@ func _react(_action: String, _args):
 		
 		increaseModuleFlag("MedicalModule", "Med_milkMilked", howMuchMilked)
 		increaseModuleFlag("MedicalModule", "Med_milkedMilkTimes")
+		GM.main.SCI.handleBountyFluid(GM.pc.getFluidType(FluidSource.Breasts), howMuchMilked)
 		
 		addMessage(str(round(howMuchMilked / 10.0)*10.0)+" ml of milk was milked from your breasts")
 

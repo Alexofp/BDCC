@@ -8,12 +8,17 @@ var nurseryTasks:Array = []
 
 var storedFluids:Dictionary = {} # {FluidType = Amount}
 
+const DIFFICULTY_EASY = 0
+const DIFFICULTY_MEDIUM = 1
+const DIFFICULTY_HARD = 2
+const DIFFICULTY_VERY_HARD = 3
+
 func onNewDay():
 	var newNurseryTasks:Array = []
 	
 	for task in nurseryTasks:
 		task.days -= 1
-		if(task > 0):
+		if(task.days > 0):
 			newNurseryTasks.append(task)
 	nurseryTasks = newNurseryTasks
 	
@@ -34,6 +39,28 @@ func generateNurseryTasks():
 			var weight:float = 1.0
 			if(newTaskInfo.has("weight")):
 				weight = newTaskInfo["weight"]
+			if(newTaskInfo.has("difficulty")):
+				var diff:int = newTaskInfo["difficulty"]
+				var credReward:int = 0
+				var pointReward:int = 0
+				
+				if(diff == DIFFICULTY_EASY):
+					credReward = 1 + (1 if RNG.chance(20) else 0)
+					pointReward = 5
+				if(diff == DIFFICULTY_MEDIUM):
+					credReward = RNG.randi_range(3, 5)
+					pointReward = 10
+				if(diff == DIFFICULTY_HARD):
+					credReward = RNG.randi_range(5, 10)
+					pointReward = 15
+				if(diff == DIFFICULTY_VERY_HARD):
+					credReward = RNG.randi_range(10, 20)
+					pointReward = 25
+				
+				if(!newTaskInfo.has("credits")):
+					newTaskInfo["credits"] = credReward
+				if(!newTaskInfo.has("sciPoints")):
+					newTaskInfo["sciPoints"] = pointReward
 			
 			possible.append([newTaskInfo, weight])
 	
@@ -63,6 +90,8 @@ func peekNurseryTasks() -> Array:
 func removeNurseryTask(_task):
 	if(nurseryTasks.has(_task)):
 		nurseryTasks.erase(_task)
+		return true
+	return false
 
 func addFluid(fluidID:String, amount:float):
 	if(!storedFluids.has(fluidID)):
@@ -81,11 +110,24 @@ func getFluidAmount(fluidID:String) -> float:
 func handleBountyFluid(_fluidType:String, _amount:float):
 	for task in nurseryTasks:
 		task.handleBountyFluid(_fluidType, _amount)
-	addFluid(_fluidType, _amount*0.1)
+	#addFluid(_fluidType, _amount*0.1)
 
 func handleSexEvent(_event:SexEvent):
 	for task in nurseryTasks:
 		task.handleSexEvent(_event)
+
+func processTime(_seconds:int):
+	var taskAmount:int = nurseryTasks.size()
+	for _i in range(taskAmount):
+		var task:NurseryTaskBase = nurseryTasks[taskAmount-1-_i]
+		
+		if(task.isCompleted()):
+			task.completeSelf()
+			continue
+		
+		if(task.shouldBeCancelled()):
+			nurseryTasks.remove(taskAmount-1-_i)
+			continue
 
 func addPoints(howMuch:int):
 	points += howMuch
@@ -94,7 +136,31 @@ func getPoints() -> int:
 	return points
 
 func saveData() -> Dictionary:
-	return {}
+	var taskData:Array = []
+	for task in nurseryTasks:
+		taskData.append({
+			id = task.id,
+			data = task.saveData(),
+		})
+	
+	return {
+		points = points,
+		gt = generatedTasks,
+		sf = storedFluids,
+		nt = taskData,
+	}
 
 func loadData(_data:Dictionary):
-	pass
+	points = SAVE.loadVar(_data, "points", 0)
+	generatedTasks = SAVE.loadVar(_data, "gt", false)
+	storedFluids = SAVE.loadVar(_data, "sf", {})
+	
+	nurseryTasks.clear()
+	var taskData = SAVE.loadVar(_data, "nt", [])
+	for taskEntry in taskData:
+		var taskID:String = SAVE.loadVar(taskEntry, "id", "")
+		var theTask:NurseryTaskBase = GlobalRegistry.createNurseryTask(taskID)
+		if(theTask == null):
+			continue
+		nurseryTasks.append(theTask)
+		theTask.loadData(SAVE.loadVar(taskEntry, "data", {}))

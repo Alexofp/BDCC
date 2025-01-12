@@ -170,8 +170,14 @@ func getType():
 func getSourceChar():
 	return GlobalRegistry.getCharacter(sourceCharID)
 
+func getSourceCharID() -> String:
+	return sourceCharID
+
 func getTargetChar():
 	return GlobalRegistry.getCharacter(targetCharID)
+
+func getTargetCharID() -> String:
+	return targetCharID
 
 func getField(id, defaultValue = null):
 	if(!data.has(id)):

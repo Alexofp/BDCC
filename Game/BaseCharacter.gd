@@ -730,12 +730,18 @@ func getBreastsSize() -> int:
 
 func getFluidType(fluidSource):
 	if(fluidSource == FluidSource.Penis):
+		if(hasBodypart(BodypartSlot.Penis)):
+			return getBodypart(BodypartSlot.Penis).getFluidType(fluidSource)
 		return "Cum"
 	if(fluidSource == FluidSource.Vagina):
+		if(hasBodypart(BodypartSlot.Vagina)):
+			return getBodypart(BodypartSlot.Vagina).getFluidType(fluidSource)
 		return "GirlCum"
 	if(fluidSource == FluidSource.Strapon):
 		return "CumLube"
 	if(fluidSource == FluidSource.Breasts):
+		if(hasBodypart(BodypartSlot.Breasts)):
+			return getBodypart(BodypartSlot.Breasts).getFluidType(fluidSource)
 		return "Milk"
 	if(fluidSource == FluidSource.Pissing):
 		return "Piss"

@@ -21,7 +21,9 @@ func _run():
 				
 				sayn("- "+task.getName())
 				sayn(task.getDescription())
-				sayn(task.getCompletionString())
+				var compString:String = task.getCompletionString()
+				if(compString != ""):
+					sayn(compString)
 				sayn("Reward: "+task.getRewardString())
 				saynn(task.getDeadlineString())
 		
@@ -87,6 +89,7 @@ func _react(_action: String, _args):
 			var fluidAmount:float = fluidAmmounts[fluidID]
 			
 			GM.main.SCI.handleBountyFluid(fluidID, fluidAmount)
+			GM.main.SCI.addFluid(fluidID, fluidAmount*0.1)
 		fluids.clear()
 
 	setState(_action)

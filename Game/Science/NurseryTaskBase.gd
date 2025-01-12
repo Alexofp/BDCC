@@ -7,7 +7,10 @@ var credits:int = 0
 var sciPoints:int = 0
 var days:int = 1
 
-#var completed:bool = false
+const DIFFICULTY_EASY = 0
+const DIFFICULTY_MEDIUM = 1
+const DIFFICULTY_HARD = 2
+const DIFFICULTY_VERY_HARD = 3
 
 func getName() -> String:
 	return "ERROR"
@@ -49,25 +52,74 @@ func setTaskData(_data:Dictionary):
 func generatePossibleTasks() -> Array:
 	return []
 
-func isSameAs(_otherTask) -> bool:
-	return true
-	
-func isSameAsFinal(_otherTask) -> bool:
-	if(id != _otherTask.id):
-		return false
-	return isSameAs(_otherTask)
-
 func completeSelf():
-	GM.main.SCI.removeNurseryTask(self)
-	GM.pc.addCredits(credits)
-	GM.main.SCI.addPoints(sciPoints)
-	GM.main.addMessage("Nursery task '"+getName()+"' is completed! Received "+str(credits)+" credit"+("s" if credits != 1 else "")+" and "+str(sciPoints)+" science point"+("s" if sciPoints != 1 else "")+".")
-
-#func isCompleted() -> bool:
-#	return completed
+	if(GM.main.SCI.removeNurseryTask(self)):
+		GM.pc.addCredits(credits)
+		GM.main.SCI.addPoints(sciPoints)
+		GM.main.addMessage("Nursery bounty '"+getName()+"' got completed! Received "+getRewardString())
 
 func handleBountyFluid(_fluidType:String, _amount:float):
 	pass
 
 func handleSexEvent(_event:SexEvent):
 	pass
+
+func isCompleted() -> bool:
+	return false
+
+func shouldBeCancelled() -> bool:
+	return false
+
+func getFloorName(floorID:String) -> String:
+	#var room = GM.world.getRoomByID(loc)
+	#var floorID:String = room.getFloorID()
+	if(floorID == "Cellblock"):
+		return "Cellblock"
+	if(floorID == "MainHall"):
+		return "Main prison floor"
+	if(floorID == "Medical"):
+		return "Medical wing"
+	if(floorID == "MiningFloor"):
+		return "Mining floor"
+	
+	return "Unknown"
+
+func getCharName(theCharID:String) -> String:
+	if(theCharID != ""):
+		var character = GlobalRegistry.getCharacter(theCharID)
+		if(character != null):
+			return character.getName()
+	
+	return "Unknown"
+
+func getCharDescription(theCharID:String) -> String:
+	var character:BaseCharacter = GlobalRegistry.getCharacter(theCharID)
+	if(character == null):
+		return "ERROR, NO CHARACTER FOUND WITH ID "+str(theCharID)
+	
+	var desc:String = ""
+	desc = "Occupation: "+CharacterType.getName(character.getCharType())
+	if(GM.main.IS.hasPawn(theCharID)):
+		var pawn:CharacterPawn = GM.main.IS.getPawn(theCharID)
+		var room = GM.world.getRoomByID(pawn.getLocation())
+		if(room == null):
+			desc += "\nCurrent location: Error.."
+		else:
+			var floorID:String = room.getFloorID()
+			desc += "\nCurrent location: "+getFloorName(floorID)
+	else:
+		desc += "\nCurrent location: Resting (Can meet)"
+	
+	return desc
+
+func saveData() -> Dictionary:
+	return {
+		credits = credits,
+		sciPoints = sciPoints,
+		days = days,
+	}
+
+func loadData(_data:Dictionary):
+	credits = SAVE.loadVar(_data, "credits", 0)
+	sciPoints = SAVE.loadVar(_data, "sciPoints", 0)
+	days = SAVE.loadVar(_data, "days", 1)
