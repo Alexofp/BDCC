@@ -6,6 +6,7 @@ var points:int = 0
 var generatedTasks:bool = false
 var nurseryTasks:Array = []
 
+var unlockedTFs:Dictionary = {} # {TFID = true}
 var storedFluids:Dictionary = {} # {FluidType = Amount}
 
 const DIFFICULTY_EASY = 0
@@ -135,6 +136,17 @@ func addPoints(howMuch:int):
 func getPoints() -> int:
 	return points
 
+func isTransformationUnlocked(TFID:String) -> bool:
+	if(unlockedTFs.has(TFID) && unlockedTFs[unlockedTFs]):
+		return true
+	return false
+
+func getUnlockedTFs() -> Array:
+	return unlockedTFs.keys()
+
+func doUnlockTF(TFID:String):
+	unlockedTFs[TFID] = true
+
 func saveData() -> Dictionary:
 	var taskData:Array = []
 	for task in nurseryTasks:
@@ -148,12 +160,14 @@ func saveData() -> Dictionary:
 		gt = generatedTasks,
 		sf = storedFluids,
 		nt = taskData,
+		uf = unlockedTFs,
 	}
 
 func loadData(_data:Dictionary):
 	points = SAVE.loadVar(_data, "points", 0)
 	generatedTasks = SAVE.loadVar(_data, "gt", false)
 	storedFluids = SAVE.loadVar(_data, "sf", {})
+	unlockedTFs = SAVE.loadVar(_data, "uf", {})
 	
 	nurseryTasks.clear()
 	var taskData = SAVE.loadVar(_data, "nt", [])

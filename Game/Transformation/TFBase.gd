@@ -227,6 +227,28 @@ func processTime(_seconds:int):
 func onSexEvent(_event : SexEvent):
 	pass
 
+func getUnlockData() -> Dictionary:
+	return {
+		eliza = "Not sure what exactly it does. But I'm gonna call it.. "+getPillName()+". I think that name will fit it nicely.",
+#		tryOptions = [
+#			{
+#				name = "Try",
+#				desc = "Use it yourself",
+#				sceneID = "ASDScene",
+#			},
+#			{
+#				name = "Let Eliza try",
+#				desc = "Let Eliza try this pill",
+#				sceneID = "ASDScene",
+#			},
+#			{
+#				name = "Nope",
+#				desc = "This is a disabled option",
+#				disabled = true,
+#			},
+#		],
+	}
+
 func getBuffs() -> Array:
 	return []
 
