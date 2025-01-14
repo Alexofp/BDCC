@@ -72,7 +72,7 @@ func getSharedChildrenAmountFatherMother(firstCharID, secondCharID) -> int:
 	for child in children:
 		if((child.getFatherID() == firstCharID) && (child.getMotherID() == secondCharID)):
 			result += 1
-	result += getArchiveChildCount(firstCharID, secondCharID)
+	result += getArchiveChildCount(secondCharID, firstCharID)
 	return result
 
 func getChildBirthInfoString(childs) -> String:
