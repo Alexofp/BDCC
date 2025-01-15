@@ -26,6 +26,7 @@ func _run():
 		addButton("Biolab", "See what she wants to do", "in_biolab")
 	if(state == "in_biolab"):
 		aimCameraAndSetLocName("med_researchlab")
+		GM.pc.setLocation("med_researchlab")
 		saynn("You follow the white corridor and enter the research lab. Doctor Quinn is already there, preparing her equipment.")
 
 		saynn("[say=eliza]I gave your collar access to this area. But don't venture in too deep, nurses will still kick your butt if they see you.[/say]")
@@ -160,7 +161,7 @@ func _run():
 
 		saynn("The machine spits out a single pill, gleaming in its casing. Quinn holds it up to the light, admiring her work while speaking to herself.")
 
-		saynn("[say=eliza]If I wasn't stuck here in this hole, I'd make for a good drug lord..[/say]")
+		saynn("[say=eliza]If I wasn't stuck here in this hole, I'd make for a good drug lord.. queen?[/say]")
 
 		saynn("She turns to you, her smirk widening into a grin that flashes her sharp feline fangs.")
 
@@ -176,9 +177,187 @@ func _run():
 
 		saynn("Wow. Sounds safe indeed.")
 
-		addButton("Eat it", "Being a half-demon sounds fun!", "eat_pill")
+		addButton("Eat it", "Being a half-demon sounds fun! The pill will probably not work if you are already a demon or have other transformations already happening..", "eat_pill")
 		addButton("Refuse", "You'd rather not risk it", "no_eat")
-		addButton("Make her eat it", "(Sex) Ask if she is brave enough to try her own product", "make_her_eat")
+		addButton("Make her eat it", "(Submissive sex) Ask if she is brave enough to try her own product. She will probably become horny and dominant.. very dominant..", "make_her_eat")
+	if(state == "no_eat"):
+		saynn("[say=pc]I'm good. Can I just have that pill maybe?[/say]")
+
+		saynn("She twists the drug in her paw, an unsatisfied curiosity sparkling in her eyes.")
+
+		saynn("[say=eliza]Ummm.. nah.[/say]")
+
+		saynn("[say=pc]Why not?[/say]")
+
+		saynn("[say=eliza]I used my materials so it's only fair. If you want to have one, you can just make it now, assistant~.[/say]")
+
+		saynn("Eliza gasps softly.")
+
+		saynn("[say=eliza]Right! This is my lab.. but I will let you use it for now. There is a lot of equipment here, try not to break anything![/say]")
+
+		saynn("She pockets that pill that she made and turns out, showing you her chemistry station.")
+
+		saynn("[say=eliza]There is where you can brew drugs, just like I did right now. You will have to supply the base fluids yourself. Donating them in the nursery sends some here but you can just fill the tanks directly.. or let me milk you~.[/say]")
+
+		saynn("She then shows you some big machines and a computer.")
+
+		saynn("[say=eliza]Leave the drug scanning to me, it's quite a tricky procedure.. especially with our old equipment. But if you get enough science points, you can actually upgrade it.[/say]")
+
+		saynn("Science points.. you remember the nursery bounties giving you some.")
+
+		saynn("[say=pc]Science points?[/say]")
+
+		saynn("She shrugs.")
+
+		saynn("[say=eliza]It's.. entropy mumbo jumbo nonsense, I have no idea how it works. But we can use it to upgrade our equipment and unlock new drugs and prototypes.[/say]")
+
+		saynn("Prototypes.. that sounds interesting.")
+
+		saynn("[say=pc]And how do I earn those science points?[/say]")
+
+		saynn("[say=eliza]Well, by doing bounties and letting me scan new suspicious pills.[/say]")
+
+		saynn("She scritches her chin.")
+
+		saynn("[say=eliza]Oh yeah, we can also extra useful research data from transformations themselves. Come to me when you think that your transformation has reached its final stage and then I can scan the result! That would give us a lot of science points![/say]")
+
+		saynn("[say=pc]What if I don't want to try these pills on myself?[/say]")
+
+		saynn("Eliza hums.")
+
+		saynn("[say=eliza]Feed them to someone else then. And then bring that person to me~.[/say]")
+
+		saynn("So you just have to find a test subject..")
+
+		saynn("[say=pc]Alright. It's a lot so far.[/say]")
+
+		saynn("Eliza smiles and walks up to you, her paws land on your shoulders.")
+
+		saynn("[say=eliza]Poke around, it's not quantum physics~. Just try not to trash the place.. or I will come find you. And you don't want me to come after you~.[/say]")
+
+		saynn("So threatening.. but also.. you can't hide your chuckle.")
+
+		saynn("[say=eliza]Fuck, I did it again![/say]")
+
+		saynn("Eliza steps back and spreads her arms.")
+
+		saynn("[say=eliza]I will go back to my boring ass work shift now. Let me know if you find something interesting![/say]")
+
+		saynn("And just like, she leaves you alone.. in her lab.")
+
+		saynn("Time to do some science.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "eat_no_effect"):
+		saynn("What could go wrong.. You grab the pill from Eliza's paw.. and throw it into your mouth.")
+
+		saynn("[say=eliza]So eager~. I love the enthusiasm.[/say]")
+
+		saynn("You steady your breathing and try to focus on yourself.. So far.. you don't feel any different.")
+
+		saynn("[say=pc]How long does it take?[/say]")
+
+		saynn("Eliza shrugs.")
+
+		saynn("[say=eliza]DNA alteration is not a fast process.. It happens in stages too.. not gradual.. but in jumps.[/say]")
+
+		saynn("Time passes slowly when you're so focussed.. seconds feel like minutes.")
+
+		saynn("[say=eliza]But I think you should have felt something by now. Do you?[/say]")
+
+		saynn("You can't say that you do.. so you shake your head.")
+
+		saynn("[say=eliza]Aw. Not every pill is gonna work on everyone, our body is smart enough to refuse the DNA changes that it can't support. Maybe you're just already too much of a demon~.[/say]")
+
+		saynn("You shrug.")
+
+		saynn("[say=eliza]Or maybe your body is already being transformed by something else, hard for me to tell.. with just my eyes.[/say]")
+
+		addButton("Continue", "See what happens next", "end_tutorial")
+	if(state == "end_tutorial"):
+		saynn("[say=eliza]Anyway! This is my lab.. but I will let you use it for now. There is a lot of equipment here, try not to break anything! Be a good assistant.[/say]")
+
+		saynn("She turns out, showing you her chemistry station.")
+
+		saynn("[say=eliza]There is where you can brew drugs, just like I did right now. You will have to supply the base fluids yourself. Donating them in the nursery sends some here but you can just fill the tanks directly.. or let me milk you~.[/say]")
+
+		saynn("She then shows you some big machines and a computer.")
+
+		saynn("[say=eliza]Leave the drug scanning to me, it's quite a tricky procedure.. especially with our old equipment. But if you get enough science points, you can actually upgrade it.[/say]")
+
+		saynn("Science points.. you remember the nursery bounties giving you some.")
+
+		saynn("[say=pc]Science points?[/say]")
+
+		saynn("She shrugs.")
+
+		saynn("[say=eliza]It's.. entropy mumbo jumbo nonsense, I have no idea how it works. But we can use it to upgrade our equipment and unlock new drugs and prototypes.[/say]")
+
+		saynn("Prototypes.. that sounds interesting.")
+
+		saynn("[say=pc]And how do I earn those science points?[/say]")
+
+		saynn("[say=eliza]Well, by doing bounties and letting me scan new suspicious pills.[/say]")
+
+		saynn("She scritches her chin.")
+
+		saynn("[say=eliza]Oh yeah, we can also extra useful research data from transformations themselves. Come to me when you think that your transformation has reached its final stage and then I can scan the result! That would give us a lot of science points![/say]")
+
+		saynn("[say=pc]What if I don't want to try these pills on myself?[/say]")
+
+		saynn("Eliza hums.")
+
+		saynn("[say=eliza]Feed them to someone else then. And then bring that person to me~.[/say]")
+
+		saynn("So you just have to find a test subject..")
+
+		saynn("[say=pc]Alright. It's a lot so far.[/say]")
+
+		saynn("Eliza smiles and walks up to you, her paws land on your shoulders.")
+
+		saynn("[say=eliza]Poke around, it's not quantum physics~. Just try not to trash the place.. or I will come find you. And you don't want me to come after you~.[/say]")
+
+		saynn("So threatening.. but also.. you can't hide your chuckle.")
+
+		saynn("[say=eliza]Fuck, I did it again![/say]")
+
+		saynn("Eliza steps back and spreads her arms.")
+
+		saynn("[say=eliza]I will go back to my boring ass work shift now. Let me know if you find something interesting![/say]")
+
+		saynn("And just like, she leaves you alone.. in her lab.")
+
+		saynn("Time to do some science.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "eat_has_effect"):
+		saynn("What could go wrong.. You grab the pill from Eliza's paw.. and throw it into your mouth.")
+
+		saynn("[say=eliza]So eager~. I love the enthusiasm.[/say]")
+
+		saynn("You steady your breathing and try to focus on yourself.. So far.. you don't feel any different.")
+
+		saynn("[say=pc]How long does it take?[/say]")
+
+		saynn("Eliza shrugs.")
+
+		saynn("[say=eliza]DNA alteration is not a fast process.. It happens in stages too.. not gradual.. but in jumps.[/say]")
+
+		saynn("Time passes slowly when you're so focussed.. seconds feel like minutes.")
+
+		saynn("[say=eliza]But I think you should have felt something by now. Do you?[/say]")
+
+		saynn("In fact.. yeah.. a slight itch.. near your forehead. You scratch it.. but the feeling doesn't go away. Your butt feels a bit funny too.")
+
+		saynn("[say=pc]I think I do..[/say]")
+
+		saynn("[say=eliza]Great~. I'd love to watch it but, like I said, it's a process.. might take hours.. or days.[/say]")
+
+		saynn("All you can do is wait it seems..")
+
+		saynn("[say=eliza]I've read that some transformations can be accelerated. You will have to figure it out yourself.[/say]")
+
+		addButton("Continue", "See what happens next", "end_tutorial")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -190,5 +369,24 @@ func _react(_action: String, _args):
 
 	if(_action == "brewing_process"):
 		processTime(5*60)
+		GM.main.SCI.doUnlockTF("Demonification")
+
+	if(_action == "eat_pill"):
+		processTime(10*60)
+		if(!GM.pc.getTFHolder().canStartTransformation("Demonification")):
+			setState("eat_no_effect")
+		else:
+			GM.pc.getTFHolder().startTransformation("Demonification")
+			setState("eat_has_effect")
+		return
+
+	if(_action == "no_eat"):
+		processTime(3*60)
+
+	if(_action == "make_her_eat"):
+		runScene("ElizaDrugTestDemoniXScene")
+
+	if(_action == "end_tutorial"):
+		processTime(3*60)
 
 	setState(_action)

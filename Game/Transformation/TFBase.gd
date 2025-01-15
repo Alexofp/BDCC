@@ -15,6 +15,7 @@ const TFTYPE_PART = 1
 var tfTexts:Array = [] # no save
 var reactResultData:Dictionary = {} # no save
 var pillGenWeight:float = 1.0 # no save
+var pointsOnUnlock:int = 10
 
 func saveData() -> Dictionary:
 	return {
@@ -310,6 +311,9 @@ func generatePillArgs() -> Dictionary:
 
 func getSexGoalWeightModifier(_sexGoalID:String) -> float:
 	return 0.0
+
+func getUnlockPointsAward() -> int:
+	return pointsOnUnlock
 
 func addText(theText:String):
 	if(theText == ""):

@@ -144,8 +144,16 @@ func isTransformationUnlocked(TFID:String) -> bool:
 func getUnlockedTFs() -> Array:
 	return unlockedTFs.keys()
 
-func doUnlockTF(TFID:String):
+func doUnlockTF(TFID:String, givePoints:bool = true):
+	if(unlockedTFs.has(TFID)):
+		return
 	unlockedTFs[TFID] = true
+	var tfBase = GlobalRegistry.getTransformationRef(TFID)
+	if(givePoints):
+		if(tfBase != null):
+			addPoints(tfBase.getUnlockPointsAward())
+	if(tfBase != null):
+		GM.main.addMessage(tfBase.getPillName()+" pills will now be visible to you in the wild.")
 
 func saveData() -> Dictionary:
 	var taskData:Array = []

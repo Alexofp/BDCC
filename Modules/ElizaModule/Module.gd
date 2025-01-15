@@ -15,6 +15,8 @@ func _init():
 		"res://Modules/ElizaModule/Chapter0/Eliza2FirstDrugScene.gd",
 		
 		"res://Modules/ElizaModule/Science/NurseryBountyBoardScene.gd",
+		
+		"res://Modules/ElizaModule/DrugTesting/ElizaDrugTestDemoniXScene.gd",
 		]
 	characters = [
 	]
