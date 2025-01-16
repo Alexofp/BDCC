@@ -248,6 +248,18 @@ func _run():
 		saynn("Time to do some science.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "make_her_eat"):
+		saynn("Your mind is still quite cloudy.. but you're trying to focus..")
+
+		saynn("[say=pc]Didn't you say that it should take a while for effects to manifest?[/say]")
+
+		saynn("She hums.. and then shrugs.")
+
+		saynn("[say=eliza]That's how it should work.. Maybe something is accelerating the process for me. Might be the other drugs that I accidentally breathe in sometimes during work~.[/say]")
+
+		saynn("Right..")
+
+		addButton("Continue", "See what happens next", "end_tutorial")
 	if(state == "eat_no_effect"):
 		saynn("What could go wrong.. You grab the pill from Eliza's paw.. and throw it into your mouth.")
 
