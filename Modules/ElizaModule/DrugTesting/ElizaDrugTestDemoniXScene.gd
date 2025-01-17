@@ -218,6 +218,136 @@ func _run():
 
 		saynn("[say=eliza]You've got guts, I will give you that. But you're about to learn something very important, my little assistant..[/say]")
 
+		saynn("You clench your fists and focus your senses..")
+
+		addButton("Continue", "See what happens next", "resist_table")
+	if(state == "resist_table"):
+		playAnimation(StageScene.SexOralTable, "tease", {pc="elizaDemon", npc="pc", bodyState={naked=true}})
+		saynn("But before you can react, Eliza dashes towards you with demonic speed, her claws catching your wrists in an iron grip. She pushes you backward with inhuman strength, shoving you onto the procedure table. You struggle against her.. but she is far too strong, her clawed paws pinning you down.")
+
+		saynn("[say=pc]Agh.. How are you..[/say]")
+
+		saynn("[say=eliza]Simple biology. Mortal flesh is not holding me back.[/say]")
+
+		saynn("With quick motions she grabs the cuffs that are chained to the table and snaps them onto your wrists and ankles, locking you securely to the table. She steps back, admitting her handiwork.")
+
+		saynn("[say=eliza]Look at you.. So helpless.. So weak. You knew you wouldn't stand a chance.. Maybe you wanted this? Who am I to say no to this~.[/say]")
+
+		saynn("The dark after-echo of her feminine speech sends shivers down your spine, it reverberates your very soul.. You try to struggle against the chains but the metal is not yielding.")
+
+		saynn("Her long, flexible tail coils around your neck, above your collar, keeping your head still as she steps a bit closer, her hooves clicking against the sterile floor.")
+
+		saynn("[say=eliza]If you won't kneel willingly.. then I will make you serve me another way.[/say]")
+
+		saynn("Her wet, throbbing demon pussy is hovering just above your face. The musky scent of her arousal overwhelms your senses.. Her claws grip the table on either side of your head as she lowers herself slightly, teasing you with her wetness brushing against your lips without fully committing. A few drops of her arousal drip from her folds, landing on your cheeks and trailing down to your jaw..")
+
+		saynn("[say=eliza]Go on. Taste me. Or do I have to make you?[/say]")
+
+		saynn("Your body wants to respond.. it wants to listen.. your tongue is just itching to feel the heat of that pussy..")
+
+		saynn("[say=eliza]I can feel your desire~. C'mon.[/say]")
+
+		saynn("Her tail suddenly tightens around your throat, cutting off some of the blood flow.. Your head is spinning while she presses her warm, slick slit against your face, her folds spreading her wetness across your lips and chin.")
+
+		saynn("Giving that pussy a few licks is not gonna be the end of the world..")
+
+		addButton("Lick", "Submit to the urge..", "resist_lick")
+	if(state == "resist_lick"):
+		playAnimation(StageScene.SexOralTable, "lick", {pc="elizaDemon", npc="pc", bodyState={naked=true}})
+		saynn("You flick your tongue out and taste that demon's juices.. Incredible.. Her slick folds part against its tip and let you feel just how hot she is inside.")
+
+		saynn("[say=eliza]Yes~. Just like that. Nice and slow. Feel every inch of your demon queen.[/say]")
+
+		saynn("Her tail loosens a bit, letting you breathe in more of her intoxicating scent. Her juices begin to drip down the sides of your face while you're dragging your tongue over her folds.. doing little circles around the sensitive clit.. making her own breathing grow heavier.")
+
+		saynn("[say=eliza]Mmhh~..[/say]")
+
+		saynn("She lets out a satisfied sigh while rocking her hips gently, back and forth, meeting the motions of your tongue.")
+
+		saynn("[say=eliza]I love this form.. I'm gonna make the most out of it.. One piece of advice for you..[/say]")
+
+		saynn("Advice? You're barely paying attention, your tongue delving between the tantalizing folds, the tip slipping inside the little tight hole and lapping away at the inner walls..")
+
+		saynn("[say=eliza]Don't drown~.[/say]")
+
+		addButton("Continue", "See what happens next", "resist_lick_grind")
+	if(state == "resist_lick_grind"):
+		playAnimation(StageScene.SexOralTable, "grind", {pc="elizaDemon", npc="pc", bodyState={naked=true}})
+		saynn("Her tail flicks, the tip brushing teasingly against your chest as she starts riding your face, quickly picking the pace up, her hips bucking forward with increasing pressure. Her claws scrape against the table while you work tirelessly against her flower, licking and teasing it.")
+
+		saynn("[say=eliza]Yes.. yes.. just like that.[/say]")
+
+		saynn("Lack of air is not important, being a good pet is. All you see is her slick folds traveling across your face back and forth, forcing its scent into you, marking you.. and it's all that you need.")
+
+		saynn("Her breathing becomes panting, little demonic moans escaping from her as she presses down harder, the wet sounds of the grinding filling the room. Her tail is squirming a little, her thighs trembling, hooves clicking against the floor as she pushes herself to the edge.")
+
+		saynn("[say=eliza]Take a deep breath..[/say]")
+
+		addButton("Continue", "See what happens next", "resist_lick_cum")
+	if(state == "resist_lick_cum"):
+		playAnimation(StageScene.SexOralTable, "grindfast", {pc="elizaDemon", npc="pc", bodyState={naked=true}})
+		saynn("With a final, primal cry, her body seizes, her thighs locking around your head as a torrent of her juices gushes out, soaking your face in her orgasm. Her wetness splashes over your lips, cheeks and chin, dripping down your neck as she grinds through her climax, milking every last wave of pleasure.")
+
+		saynn("[say=eliza]Yes.. Take it all, every drop.. Like a good servant..[/say]")
+
+		saynn("She throws her head back from satisfaction, her demonic voice echoing in your mind as she rides the last waves of her release. You make sure to follow her orders.. and swallow as much of that hot nectar as possible.")
+
+		addButton("Continue", "See what happens next", "resist_grind_after")
+	if(state == "resist_grind_after"):
+		playAnimation(StageScene.SexOralTable, "tease", {pc="elizaDemon", npc="pc", bodyState={naked=true}})
+		saynn("When her grinding finally stops, she leans back and pulls her crotch away from your face, panting softly. Her glowing emerald eyes glowing with smug delight as she gazes down at your drenched face.")
+
+		saynn("[say=eliza]Look at you. Absolutely soaked in me. Maybe you should have just obeyed from the start~. I always get what I want.[/say]")
+
+		saynn("Her smirk widens as she traces a claw along your cheek, collecting a drop of her juices before bringing it to her lips and licking it clean.")
+
+		saynn("[say=eliza]But I suppose I can't complain. You do make a wonderful little pussy licker.[/say]")
+
+		saynn("While you're left to come up to your senses on the table, Eliza reaches for her labcoat. She pulls out a little pill from one of the pockets.")
+
+		saynn("[say=eliza]Should I.. I'm so sexy right now..[/say]")
+
+		saynn("She looks down at herself, at her clawed paws, at her strong hooves, at her curvy hips.. one of her paws reaches up high to her horns and gives them a small rub. But even that is enough to send shivers through her.")
+
+		saynn("[say=eliza]Oh.. that feels so strange.[/say]")
+
+		saynn("She stays quiet for a bit..")
+
+		saynn("[say=eliza]Nah..[/say]")
+
+		saynn("..and throws the pill into her mouth, swallowing it dry.")
+
+		addButton("Continue", "See what happens next", "resist_grind_after_undotf")
+	if(state == "resist_grind_after_undotf"):
+		playAnimation(StageScene.SexOralTable, "tease", {pc="eliza", npc="pc"})
+		saynn("Whatever Eliza ate, it seems to have an opposite effect to DemoniX. Her horns begin to retract back into her skull, getting smaller and smaller. Her pointy tail morphs, getting a bit shorter, losing its sharp tip and growing fur.. her hooves go away, replaced by the digitigrade hind paws. Her body loses some of its curviness..")
+
+		saynn("[say=eliza]Mmhh..[/say]")
+
+		saynn("After the process is over.. Eliza opens her eyes..")
+
+		saynn("[say=eliza]That was.. something.[/say]")
+
+		saynn("[say=pc]Woah..[/say]")
+
+		saynn("She chuckles and puts her clothes back on.")
+
+		saynn("[say=eliza]I don't feel so horny anymore. So, let's get you out.[/say]")
+
+		addButton("Continue", "See what happens next", "resist_grind_after_unlock")
+	if(state == "resist_grind_after_unlock"):
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
+		saynn("Eliza unlocks the cuffs and helps you to get up.")
+
+		saynn("[say=eliza]You're so wet.[/say]")
+
+		saynn("[say=pc]Wonder why.[/say]")
+
+		saynn("She pats you on the head.")
+
+		saynn("[say=eliza]I guess the pill worked~. Of course it did.[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -248,6 +378,29 @@ func _react(_action: String, _args):
 		processTime(3*60)
 
 	if(_action == "after_lick_undo_tf"):
+		processTime(3*60)
+
+	if(_action == "resist_table"):
+		processTime(5*60)
+
+	if(_action == "resist_lick"):
+		processTime(3*60)
+
+	if(_action == "resist_lick_grind"):
+		processTime(5*60)
+
+	if(_action == "resist_lick_cum"):
+		processTime(5*60)
+		GM.pc.cummedOnBy("eliza", FluidSource.Vagina)
+		GM.pc.cummedInMouthBy("eliza", FluidSource.Vagina)
+
+	if(_action == "resist_grind_after"):
+		processTime(3*60)
+
+	if(_action == "resist_grind_after_undotf"):
+		processTime(3*60)
+
+	if(_action == "resist_grind_after_unlock"):
 		processTime(3*60)
 
 	setState(_action)
