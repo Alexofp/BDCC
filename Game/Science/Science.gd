@@ -7,12 +7,58 @@ var generatedTasks:bool = false
 var nurseryTasks:Array = []
 
 var unlockedTFs:Dictionary = {} # {TFID = true}
+var testedTFs:Dictionary = {} # {TFID = true}
 var storedFluids:Dictionary = {} # {FluidType = Amount}
+var upgrades:Dictionary = {} # {upgradeID = true}
 
 const DIFFICULTY_EASY = 0
 const DIFFICULTY_MEDIUM = 1
 const DIFFICULTY_HARD = 2
 const DIFFICULTY_VERY_HARD = 3
+
+const upgradesInfo:Dictionary = {
+	"advBreastPump": {
+		name = "Breast Pump Mk2",
+		desc = "Unlocks a prototype of an advanced breast pump that you can buy in the medical vendomat.",
+		cost = 10,
+		requiredUpgrades = [],
+	},
+	"advPenisPump": {
+		name = "Penis Pump Mk2",
+		desc = "Unlocks a prototype of an advanced penis pump that you can buy in the medical vendomat.",
+		cost = 10,
+		requiredUpgrades = [],
+	},
+}
+
+func isUpgradeVisible(upgradeID:String) -> bool:
+	if(!upgradesInfo.has(upgradeID)):
+		return false
+	var theInfo:Dictionary = upgradesInfo[upgradeID]
+	if(!theInfo.has("requiredUpgrades")):
+		return true
+	for otherUpgradeID in theInfo["requiredUpgrades"]:
+		if(!hasUpgrade(otherUpgradeID)):
+			return false
+	return true
+
+func unlockUpgrade(upgradeID:String):
+	if(upgradesInfo.has(upgradeID)):
+		upgrades[upgradeID] = true
+
+func getUpgrades() -> Dictionary:
+	return upgradesInfo
+
+func getTotalUpgradeCount() -> int:
+	return upgradesInfo.size()
+
+func getUpgradeCount() -> int:
+	return upgrades.size()
+
+func hasUpgrade(upgradeID:String) -> bool:
+	if(upgrades.has(upgradeID)):
+		return true
+	return false
 
 func onNewDay():
 	var newNurseryTasks:Array = []
@@ -99,6 +145,9 @@ func addFluid(fluidID:String, amount:float):
 		storedFluids[fluidID] = 0.0
 
 	storedFluids[fluidID] += amount
+	
+	if(storedFluids[fluidID] > getStoredFluidLimit(fluidID)):
+		storedFluids[fluidID] = getStoredFluidLimit(fluidID)
 
 	if(storedFluids[fluidID] <= 0.0):
 		storedFluids.erase(fluidID)
@@ -137,7 +186,12 @@ func getPoints() -> int:
 	return points
 
 func isTransformationUnlocked(TFID:String) -> bool:
-	if(unlockedTFs.has(TFID) && unlockedTFs[unlockedTFs]):
+	if(unlockedTFs.has(TFID) && unlockedTFs[TFID]):
+		return true
+	return false
+
+func isTransformationTested(TFID:String) -> bool:
+	if(testedTFs.has(TFID) && testedTFs[TFID]):
 		return true
 	return false
 
@@ -155,6 +209,47 @@ func doUnlockTF(TFID:String, givePoints:bool = true):
 	if(tfBase != null):
 		GM.main.addMessage(tfBase.getPillName()+" pills will now be visible to you in the wild.")
 
+func getStoredFluids() -> Dictionary:
+	return storedFluids
+
+func getStoredFluidsWithDefauls() -> Dictionary:
+	var result:Dictionary = {
+		Milk = 0.0,
+		Cum = 0.0,
+		GirlCum = 0.0,
+	} # This way these 3 fluids are always first and always appear in the list
+	for fluidID in storedFluids:
+		result[fluidID] = storedFluids[fluidID]
+	return result
+
+func getStoredFluidLimit(fluidType:String) -> float:
+	var result:float = 1000.0
+	
+	var theFluid:FluidBase = GlobalRegistry.getFluid(fluidType)
+	if(theFluid != null):
+		result *= theFluid.getFluidTankLimitMod()
+	return result
+
+func getSciencePoints() -> int:
+	return points
+
+func getTotalStrangePillCount() -> int:
+	var result:int = 0
+	
+	for tfID in GlobalRegistry.getTransformationRefs():
+		var tf:TFBase = GlobalRegistry.getTransformationRef(tfID)
+		
+		if(tf.canUnlockAsPill()):
+			result += 1
+	
+	return result
+
+func getUnlockedStrangePillsCount() -> int:
+	return unlockedTFs.size()
+
+func getTestedStrangePillsCount() -> int:
+	return testedTFs.size()
+
 func saveData() -> Dictionary:
 	var taskData:Array = []
 	for task in nurseryTasks:
@@ -169,6 +264,8 @@ func saveData() -> Dictionary:
 		sf = storedFluids,
 		nt = taskData,
 		uf = unlockedTFs,
+		tt = testedTFs,
+		up = upgrades,
 	}
 
 func loadData(_data:Dictionary):
@@ -176,6 +273,8 @@ func loadData(_data:Dictionary):
 	generatedTasks = SAVE.loadVar(_data, "gt", false)
 	storedFluids = SAVE.loadVar(_data, "sf", {})
 	unlockedTFs = SAVE.loadVar(_data, "uf", {})
+	testedTFs = SAVE.loadVar(_data, "tt", {})
+	upgrades = SAVE.loadVar(_data, "up", {})
 	
 	nurseryTasks.clear()
 	var taskData = SAVE.loadVar(_data, "nt", [])

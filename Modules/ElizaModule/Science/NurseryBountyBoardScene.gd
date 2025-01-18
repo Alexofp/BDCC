@@ -93,3 +93,15 @@ func _react(_action: String, _args):
 		fluids.clear()
 
 	setState(_action)
+
+func saveData():
+	var data = .saveData()
+
+	data["donateText"] = donateText
+
+	return data
+
+func loadData(data):
+	.loadData(data)
+
+	donateText = SAVE.loadVar(data, "donateText", "")

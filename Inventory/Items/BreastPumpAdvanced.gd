@@ -7,7 +7,7 @@ func getVisibleName():
 	return "Breast Pump Mk2"
 	
 func getDescription():
-	return "(Will be a reward for something)\nA tool that can extract milk out of lactating breasts. This is an advanced version that will automatically collect milk if worn over time.\nIf put on during sex it extracts "+str(getMilkSpeedPerMinuteMin())+"-"+str(getMilkSpeedPerMinuteMax())+" of milk per minute."
+	return "A tool that can extract milk out of lactating breasts. This is an advanced version that will automatically collect milk if worn over time.\nIf put on during sex it extracts "+str(getMilkSpeedPerMinuteMin())+"-"+str(getMilkSpeedPerMinuteMax())+" of milk per minute."
 
 func getBuffs():
 	return [
@@ -27,7 +27,9 @@ func getMilkSpeedPerMinuteMax():
 	return 300.0
 
 func getTags():
-	return [ItemTag.SoldByMedicalVendomat, ItemTag.BreastPump]
+	if(GM.main != null && GM.main.SCI != null && GM.main.SCI.hasUpgrade("advBreastPump")):
+		return [ItemTag.SoldByMedicalVendomat, ItemTag.BreastPump]
+	return [ItemTag.BreastPump]
 
 func getUnriggedParts(_character):
 	var howFilled = fluids.getFluidAmount()/fluids.getCapacity()

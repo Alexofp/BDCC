@@ -61,6 +61,9 @@ func getName() -> String:
 func getPillName() -> String:
 	return getName()
 
+func getPillDatabaseDesc() -> String:
+	return "FILL ME"
+
 # Can't start a tf if we already have one with at least one shared tag
 func getTFCheckTags() -> Dictionary:
 	return {}
@@ -227,6 +230,9 @@ func processTime(_seconds:int):
 
 func onSexEvent(_event : SexEvent):
 	pass
+
+func canUnlockAsPill() -> bool:
+	return pillGenWeight > 0.0
 
 func getUnlockData() -> Dictionary:
 	return {

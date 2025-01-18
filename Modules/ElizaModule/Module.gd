@@ -2,7 +2,7 @@ extends Module
 
 func getFlags():
 	return {
-		#"Nova_GotHumiliatedByPC": flag(FlagType.Bool),
+		"firstDrugTestHappened": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -15,6 +15,7 @@ func _init():
 		"res://Modules/ElizaModule/Chapter0/Eliza2FirstDrugScene.gd",
 		
 		"res://Modules/ElizaModule/Science/NurseryBountyBoardScene.gd",
+		"res://Modules/ElizaModule/Science/ChemistryLabScene.gd",
 		
 		"res://Modules/ElizaModule/DrugTesting/ElizaDrugTestDemoniXScene.gd",
 		]
@@ -23,6 +24,8 @@ func _init():
 	items = []
 	events = [
 		"res://Modules/ElizaModule/Science/NurseryBountyBoardEvent.gd",
+		"res://Modules/ElizaModule/Science/EnterMedicalEvent.gd",
+		"res://Modules/ElizaModule/Science/ChemistryLabEvent.gd",
 	]
 
 func resetFlagsOnNewDay():

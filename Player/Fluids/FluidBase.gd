@@ -40,6 +40,14 @@ func getStatusEffectPicture():
 func getCost(_amount) -> int:
 	return 0
 
+func canStoreInFluidTank() -> bool:
+	return true
+
+func getFluidTankLimitMod() -> float:
+	if(!canStoreInFluidTank()):
+		return 0.0
+	return 1.0
+
 func buff(buffid, args = []):
 	var buff: BuffBase = GlobalRegistry.createBuff(buffid)
 	buff.initBuff(args)
