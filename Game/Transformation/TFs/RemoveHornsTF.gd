@@ -6,7 +6,7 @@ func _init():
 	id = "RemoveHornsTF"
 
 func getName() -> String:
-	return "Remove horns"
+	return "Removes horns"
 
 func getPillName() -> String:
 	return "HornsBeGone"

@@ -6,7 +6,7 @@ func _init():
 	id = "RemoveVaginaTF"
 
 func getName() -> String:
-	return "Remove pussy"
+	return "Removes pussy"
 
 func getPillName() -> String:
 	return "PussyBeGone"

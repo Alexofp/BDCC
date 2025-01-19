@@ -9,7 +9,7 @@ func _init():
 	#pillGenWeight = 0.0
 
 func getName() -> String:
-	return "Change skin"
+	return "Changes colors"
 
 func getPillName() -> String:
 	return "CoLore"

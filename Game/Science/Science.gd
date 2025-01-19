@@ -179,9 +179,14 @@ func processTime(_seconds:int):
 			nurseryTasks.remove(taskAmount-1-_i)
 			continue
 
-func addPoints(howMuch:int):
+func addPoints(howMuch:int, showMessage:bool = true):
 	points += howMuch
-
+	if(showMessage):
+		if(howMuch > 0):
+			GM.main.addMessage("You received "+str(howMuch)+" science point"+("s" if howMuch != 1 else "")+"!")
+		if(howMuch < 0):
+			GM.main.addMessage("You lost "+str(-howMuch)+" science point"+("s" if howMuch != -1 else "")+"")
+		
 func getPoints() -> int:
 	return points
 
@@ -201,13 +206,31 @@ func getUnlockedTFs() -> Array:
 func doUnlockTF(TFID:String, givePoints:bool = true):
 	if(unlockedTFs.has(TFID)):
 		return
-	unlockedTFs[TFID] = true
 	var tfBase = GlobalRegistry.getTransformationRef(TFID)
+	if(!tfBase.canUnlockAsPill()):
+		return
+	unlockedTFs[TFID] = true
 	if(givePoints):
 		if(tfBase != null):
 			addPoints(tfBase.getUnlockPointsAward())
 	if(tfBase != null):
 		GM.main.addMessage(tfBase.getPillName()+" pills will now be visible to you in the wild.")
+
+func doTestTF(TFID:String, givePoints:bool = true):
+	if(!unlockedTFs.has(TFID)):
+		return
+	if(testedTFs.has(TFID)):
+		return
+	var tfBase = GlobalRegistry.getTransformationRef(TFID)
+	if(!tfBase.canUnlockAsPill()):
+		return
+	testedTFs[TFID] = true
+	if(givePoints):
+		if(tfBase != null):
+			addPoints(tfBase.getUnlockPointsAward()*2)
+	if(tfBase != null):
+		GM.main.addMessage("The database now contains full info about "+tfBase.getPillName()+" pills.")
+
 
 func getStoredFluids() -> Dictionary:
 	return storedFluids

@@ -4,7 +4,7 @@ func _init():
 	id = "SpeciesTFMinor"
 
 func getName() -> String:
-	return "Create a hybrid"
+	return "Creates a hybrid"
 
 func getPillName() -> String:
 	return "Hybridizer"

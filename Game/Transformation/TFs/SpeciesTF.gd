@@ -7,7 +7,7 @@ func _init():
 	id = "SpeciesTF"
 
 func getName() -> String:
-	return "Change species"
+	return "Changes species"
 
 func getPillName() -> String:
 	return "WildShift"

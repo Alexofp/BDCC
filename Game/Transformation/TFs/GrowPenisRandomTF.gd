@@ -7,7 +7,7 @@ func _init():
 	id = "GrowPenisRandomTF"
 
 func getName() -> String:
-	return "Grow a random penis"
+	return "Grows a random penis"
 
 func getPillName() -> String:
 	return "CockRoll"

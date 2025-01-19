@@ -4,7 +4,7 @@ func _init():
 	id = "BreastSizeIncTF"
 
 func getName() -> String:
-	return "Increase size of breasts"
+	return "Increases size of breasts"
 
 func getPillName() -> String:
 	return "TiTS"

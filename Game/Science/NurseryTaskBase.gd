@@ -55,7 +55,7 @@ func generatePossibleTasks() -> Array:
 func completeSelf():
 	if(GM.main.SCI.removeNurseryTask(self)):
 		GM.pc.addCredits(credits)
-		GM.main.SCI.addPoints(sciPoints)
+		GM.main.SCI.addPoints(sciPoints, false)
 		GM.main.addMessage("Nursery bounty '"+getName()+"' got completed! Received "+getRewardString())
 
 func handleBountyFluid(_fluidType:String, _amount:float):

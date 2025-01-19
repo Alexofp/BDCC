@@ -6,7 +6,7 @@ func _init():
 	id = "RandomTFs"
 
 func getName() -> String:
-	return "Random Transformations"
+	return "???"
 
 func getPillName() -> String:
 	return "Unstable Mutagen"

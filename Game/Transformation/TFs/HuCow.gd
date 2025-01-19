@@ -8,7 +8,7 @@ func _init():
 	id = "HuCow"
 
 func getName() -> String:
-	return "HuCow"
+	return "HuCow transformation"
 
 func getPillName() -> String:
 	return "MegaMilkMAX"

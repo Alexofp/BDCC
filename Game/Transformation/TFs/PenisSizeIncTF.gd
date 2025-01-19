@@ -4,7 +4,7 @@ func _init():
 	id = "PenisSizeIncTF"
 
 func getName() -> String:
-	return "Increase length of penis"
+	return "Increases length of penis"
 
 func getPillName() -> String:
 	return "SuperShaft"

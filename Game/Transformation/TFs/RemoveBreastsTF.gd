@@ -6,7 +6,7 @@ func _init():
 	id = "RemoveBreastsTF"
 
 func getName() -> String:
-	return "Make breasts flat"
+	return "Makes breasts flat"
 
 func getPillName() -> String:
 	return "BreastsBeGone"

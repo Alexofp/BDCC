@@ -4,7 +4,7 @@ func _init():
 	id = "ThicknessAddTF"
 
 func getName() -> String:
-	return "Make thicker"
+	return "Makes you thicker"
 
 func getPillName() -> String:
 	return "ThiCC"
