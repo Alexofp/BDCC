@@ -1,6 +1,7 @@
 extends SexActivityBase
 
 var usedItemID = ""
+var usedUniqueItemID = ""
 var timePassed = 0
 var pillVariants:Array = []
 
@@ -40,27 +41,47 @@ func getSubTags():
 	return [SexActivityTag.OrderedToDoSomething]
 
 func getPossibleDrugsInfo(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
-	var thedrugs = {}
+	var thedrugs:Array = []
+	if(_domInfo.getChar().isPlayer()):
+		for item in GM.pc.getInventory().getItemsWithTag(ItemTag.SexEngineDrug):
+			if(item.has_method("getSexEngineInfo")):
+				thedrugs.append({
+					id = item.id,
+					item = item,
+					info = item.getSexEngineInfo(_sexEngine, _domInfo, _subInfo),
+				})
+		return thedrugs
+	
 	for itemID in GlobalRegistry.getItemIDsByTag(ItemTag.SexEngineDrug):
 		var item = GlobalRegistry.getItemRef(itemID)
 		if(item.has_method("getSexEngineInfo")):
-			thedrugs[itemID] = item.getSexEngineInfo(_sexEngine, _domInfo, _subInfo)
+			thedrugs.append({
+				id = itemID,
+				info = item.getSexEngineInfo(_sexEngine, _domInfo, _subInfo),
+			})
 	
 	return thedrugs
 	
 func getPossibleCanApplyInfo(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
-	var thedrugs = {}
+	var thedrugs:Array = []
 	for itemID in GlobalRegistry.getItemIDsByTag(ItemTag.SexEngineCanApply):
 		var item = GlobalRegistry.getItemRef(itemID)
 		if(item.has_method("getSexEngineInfo")):
-			thedrugs[itemID] = item.getSexEngineInfo(_sexEngine, _domInfo, _subInfo)
+			thedrugs.append({
+				id = itemID,
+				info = item.getSexEngineInfo(_sexEngine, _domInfo, _subInfo),
+			})
 	
 	return thedrugs
 	
-func getDrugInfo(itemID):
-	var item = GlobalRegistry.getItemRef(itemID)
-	if(item == null):
-		return null
+func getDrugInfo(itemID, uniqueItemID):
+	var item
+	if(uniqueItemID != ""):
+		item = getDom().getInventory().getItemByUniqueID(uniqueItemID)
+	else:
+		item = GlobalRegistry.getItemRef(itemID)
+		if(item == null):
+			return null
 	
 	return item.getSexEngineInfo(getSexEngine(), domInfo, subInfo)
 
@@ -75,17 +96,16 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	
 	return actions
 
-func addDrugButtons(actions:Array, possibleDrugsInfo:Dictionary, _sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo, _isCanApply:bool = false):
+func addDrugButtons(actions:Array, possibleDrugsInfo:Array, _sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo, _isCanApply:bool = false):
 	var dom:BaseCharacter = _domInfo.getChar()
 	var sub:BaseCharacter = _subInfo.getChar()
 	
-	for itemID in possibleDrugsInfo:
-		var drugInfo = possibleDrugsInfo[itemID]
+	for itemEntry in possibleDrugsInfo:
+		var itemID = itemEntry["id"]
+		var drugInfo = itemEntry["info"]
+		var item = itemEntry["item"] if itemEntry.has("item") else null # Only if pc
 		
-		if(dom.isPlayer()):
-			if(!dom.getInventory().hasItemID(itemID)):
-				continue
-		else:
+		if(!dom.isPlayer()):
 			if(drugInfo.has("maxUsesByNPC")):
 				var maxUses = drugInfo["maxUsesByNPC"]
 				var currentUses = _domInfo.getMemory("USEDDRUG_"+str(itemID), 0)
@@ -93,7 +113,7 @@ func addDrugButtons(actions:Array, possibleDrugsInfo:Dictionary, _sexEngine: Sex
 					continue
 
 		var desc = drugInfo["desc"]
-		if(dom.isPlayer()):
+		if(dom.isPlayer() && item != null && item.canCombine()):
 			desc = "Amount left: "+ str(dom.getInventory().getAmountOf(itemID))+"\n"+desc
 		
 		var drugFetishScore:float = 0.0
@@ -106,7 +126,7 @@ func addDrugButtons(actions:Array, possibleDrugsInfo:Dictionary, _sexEngine: Sex
 		if((_isCanApply || !dom.isOralBlocked()) && (!drugInfo.has("canUseOnDom") || drugInfo["canUseOnDom"])):
 			actions.append({
 				name = drugInfo["name"],
-				args = ["useonself", itemID, _isCanApply],
+				args = ["useonself", itemID, _isCanApply, item],
 				score = drugInfo["scoreOnSelf"] * drugFetishScore,
 				category = getCategory()+["Self" if !_isCanApply else "Apply self"],
 				desc = desc,
@@ -115,14 +135,14 @@ func addDrugButtons(actions:Array, possibleDrugsInfo:Dictionary, _sexEngine: Sex
 			if(_subInfo.canDoActions() && getSexType() != SexType.SlutwallSex && !_isCanApply):
 				actions.append({
 					name = drugInfo["name"],
-					args = ["offertosub", itemID, _isCanApply],
+					args = ["offertosub", itemID, _isCanApply, item],
 					score = drugInfo["scoreOnSub"]*(1.0 - _domInfo.getAngerScore()) * drugFetishScore,
 					category = getCategory()+["Offer to sub"],
 					desc = desc,
 				})
 			actions.append({
 				name = drugInfo["name"],
-				args = ["forcetosub", itemID, _isCanApply],
+				args = ["forcetosub", itemID, _isCanApply, item],
 				score = drugInfo["scoreOnSub"]*(_domInfo.getAngerScore() if !_isCanApply else 1.0) * drugFetishScore,
 				category = getCategory()+["Force on sub" if !_isCanApply else "Apply on sub"],
 				desc = desc,
@@ -140,7 +160,9 @@ func startActivity(_args):
 		timePassed = 0
 		#endActivity()
 		var itemID = _args[1]
-		var drugInfo = getDrugInfo(itemID)
+		var item = _args[3]
+		usedUniqueItemID = item.uniqueID if item != null else ""
+		var drugInfo = getDrugInfo(itemID, usedUniqueItemID)
 		usedItemID = itemID
 		var _isCanApply = _args[2]
 		
@@ -149,9 +171,11 @@ func startActivity(_args):
 		else:
 			state = "forcingCanApply"
 		
-		if(getDom().isPlayer()):
-			getDom().getInventory().removeXOfOrDestroy(itemID, 1)
-		else:
+		#if(getDom().isPlayer()):
+		#	if(item != null):
+		#		item.removeXOrDestroy(1)
+			#getDom().getInventory().removeXOfOrDestroy(itemID, 1)
+		if(!getDom().isPlayer()):
 			domInfo.increaseMemory("USEDDRUG_"+str(itemID))
 		
 		if(drugInfo == null):
@@ -178,7 +202,9 @@ func startActivity(_args):
 		timePassed = 0
 		#endActivity()
 		var itemID = _args[1]
-		var drugInfo = getDrugInfo(itemID)
+		var item = _args[3]
+		usedUniqueItemID = item.uniqueID if item != null else ""
+		var drugInfo = getDrugInfo(itemID, usedUniqueItemID)
 		usedItemID = itemID
 		var _isCanApply = _args[2]
 		
@@ -187,9 +213,11 @@ func startActivity(_args):
 		else:
 			state = "domabouttotakeCanApply"
 		
-		if(getDom().isPlayer()):
-			getDom().getInventory().removeXOfOrDestroy(itemID, 1)
-		else:
+		#if(getDom().isPlayer()):
+			#if(item != null):
+			#	item.removeXOrDestroy(1)
+			#getDom().getInventory().removeXOfOrDestroy(itemID, 1)
+		if(!getDom().isPlayer()):
 			domInfo.increaseMemory("USEDDRUG_"+str(itemID))
 		
 		if(drugInfo == null):
@@ -210,8 +238,11 @@ func startActivity(_args):
 		timePassed = 0
 		#endActivity()
 		var itemID = _args[1]
-		var drugInfo = getDrugInfo(itemID)
+		var item = _args[3]
+		usedUniqueItemID = item.uniqueID if item != null else ""
+		var drugInfo = getDrugInfo(itemID, usedUniqueItemID)
 		usedItemID = itemID
+
 		
 		if(drugInfo == null):
 			endActivity()
@@ -262,9 +293,9 @@ func processTurn():
 			return {text = text}
 		
 		if(state in ["forcing", "forcingCanApply"]):
-			var drugInfo = getDrugInfo(usedItemID)
+			var drugInfo = getDrugInfo(usedItemID, usedUniqueItemID)
 			
-			var itemRef = GlobalRegistry.getItemRef(usedItemID)
+			var itemRef = GlobalRegistry.getItemRef(usedItemID) if usedUniqueItemID == "" else getDom().getInventory().getItemByUniqueID(usedUniqueItemID)
 			if(itemRef == null || drugInfo == null):
 				return
 			if(usedItemID == "TFPill" && pillVariants.size() > 0):
@@ -292,12 +323,14 @@ func processTurn():
 				text = RNG.pick([
 					"{dom.You} {dom.youVerb('finish', 'finishes')} applying "+pcCanSeeText(drugInfo["usedName"], "something")+" on {sub.youHim}!"+pillResultText,
 				])
+			if(usedUniqueItemID != ""):
+				getDom().getInventory().getItemByUniqueID(usedUniqueItemID).removeXOrDestroy(1)
 			return {text = text}
 		
 		if(state in ["domabouttotake", "domabouttotakeCanApply"]):
-			var drugInfo = getDrugInfo(usedItemID)
+			var drugInfo = getDrugInfo(usedItemID, usedUniqueItemID)
 			
-			var itemRef = GlobalRegistry.getItemRef(usedItemID)
+			var itemRef = GlobalRegistry.getItemRef(usedItemID) if usedUniqueItemID == "" else getDom().getInventory().getItemByUniqueID(usedUniqueItemID)
 			if(itemRef == null || drugInfo == null):
 				return
 			
@@ -313,6 +346,8 @@ func processTurn():
 				text = RNG.pick([
 					"{dom.You} {dom.youVerb('finish', 'finishes')} applying "+pcCanSeeText(drugInfo["usedName"], "something")+" on {dom.yourself}!"+pillResultText,
 				])
+			if(usedUniqueItemID != ""):
+				getDom().getInventory().getItemByUniqueID(usedUniqueItemID).removeXOrDestroy(1)
 			return {text = text}
 			
 func getDomActions():
@@ -344,7 +379,7 @@ func getSubSpitOutChance(baseChance, domAngerRemoval):
 func getSubActions():
 	var actions = []
 	if(state == "offering"):
-		var drugInfo = getDrugInfo(usedItemID)
+		var drugInfo = getDrugInfo(usedItemID, usedUniqueItemID)
 		var theScore = subInfo.personalityScore({PersonalityStat.Naive: 0.2, PersonalityStat.Subby: 0.2}) + subInfo.fetishScore({Fetish.DrugUse: 1.0})
 		if(!getSub().isBlindfolded()):
 			theScore = (max(0.0, theScore) + drugInfo["scoreSubScore"]) * subInfo.getComplyScore()
@@ -377,7 +412,7 @@ func getSubActions():
 			})
 	
 	if(state == "forcingCanApply"):
-		var drugInfo = getDrugInfo(usedItemID)
+		var drugInfo = getDrugInfo(usedItemID, usedUniqueItemID)
 		actions.append({
 				"id": "resistForceCanApply",
 				"score": (1.0-max(0.0, drugInfo["scoreSubScore"])),
@@ -410,7 +445,7 @@ func doSubAction(_id, _actionInfo):
 		if(RNG.chance(getSubSpitOutChance(100.0, 60.0))):
 			domInfo.addAnger(0.3)
 			endActivity()
-			var drugInfo = getDrugInfo(usedItemID)
+			var drugInfo = getDrugInfo(usedItemID, usedUniqueItemID)
 			if(drugInfo.has("sexgoal")):
 				failGoal(drugInfo["sexgoal"])
 			return {
@@ -425,7 +460,7 @@ func doSubAction(_id, _actionInfo):
 	if(_id == "noteatit"):
 		endActivity()
 		
-		var drugInfo = getDrugInfo(usedItemID)
+		var drugInfo = getDrugInfo(usedItemID, usedUniqueItemID)
 		if(drugInfo.has("sexgoal")):
 			failGoal(drugInfo["sexgoal"])
 		
@@ -441,7 +476,7 @@ func doSubAction(_id, _actionInfo):
 		
 	if(_id in ["eatit", "swallowforced"]):
 		endActivity()
-		var drugInfo = getDrugInfo(usedItemID)
+		var drugInfo = getDrugInfo(usedItemID, usedUniqueItemID)
 		if(drugInfo.has("sexgoal")):
 			satisfyGoal(drugInfo["sexgoal"])
 		
@@ -450,7 +485,7 @@ func doSubAction(_id, _actionInfo):
 		elif(_id == "eatit"):
 			domInfo.increaseMemory("USEDDRUG_"+str(usedItemID))
 		
-		var itemRef = GlobalRegistry.getItemRef(usedItemID)
+		var itemRef = GlobalRegistry.getItemRef(usedItemID) if usedUniqueItemID == "" else getDom().getInventory().getItemByUniqueID(usedUniqueItemID)
 		if(itemRef == null || drugInfo == null):
 			return
 		if(usedItemID == "TFPill" && pillVariants.size() > 0):
@@ -468,6 +503,8 @@ func doSubAction(_id, _actionInfo):
 		var text = RNG.pick([
 			"{sub.You} {sub.youVerb('obey')} and {sub.youVerb('swallow')} "+pcCanSeeText(drugInfo["usedName"])+"!"+pillResultText,
 		])
+		if(usedUniqueItemID != ""):
+			getDom().getInventory().getItemByUniqueID(usedUniqueItemID).removeXOrDestroy(1)
 		return {text = text}
 	
 	if(_id == "resistdometake"):
@@ -479,6 +516,8 @@ func doSubAction(_id, _actionInfo):
 			}
 		
 		domInfo.addAnger(0.1)
+		if(usedUniqueItemID != ""):
+			getDom().getInventory().getItemByUniqueID(usedUniqueItemID).removeXOrDestroy(1)
 		return {text = "{sub.You} {sub.youVerb('try', 'tries')} to stop {dom.youHim} from taking the pill but {sub.youVerb('fail')}.",
 		subSay=subReaction(SexReaction.Resisting, 50)}
 
@@ -492,6 +531,8 @@ func doSubAction(_id, _actionInfo):
 			}
 		
 		domInfo.addAnger(0.1)
+		if(usedUniqueItemID != ""):
+			getDom().getInventory().getItemByUniqueID(usedUniqueItemID).removeXOrDestroy(1)
 		return {text = "{sub.You} {sub.youVerb('try', 'tries')} to stop {dom.youHim} but {sub.youVerb('fail')}.",
 		subSay=subReaction(SexReaction.Resisting, 50)}
 
@@ -508,6 +549,7 @@ func saveData():
 	var data = .saveData()
 	
 	data["usedItemID"] = usedItemID
+	data["usedUniqueItemID"] = usedUniqueItemID
 	data["timePassed"] = timePassed
 	data["pillVariants"] = pillVariants
 
@@ -517,5 +559,6 @@ func loadData(data):
 	.loadData(data)
 	
 	usedItemID = SAVE.loadVar(data, "usedItemID", "")
+	usedUniqueItemID = SAVE.loadVar(data, "usedUniqueItemID", "")
 	timePassed = SAVE.loadVar(data, "timePassed", 0)
 	pillVariants = SAVE.loadVar(data, "pillVariants", [])

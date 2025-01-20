@@ -29,6 +29,12 @@ const upgradesInfo:Dictionary = {
 		cost = 10,
 		requiredUpgrades = [],
 	},
+	"configurableDrugs": {
+		name = "Lab upgrade",
+		desc = "Allows you to 'configure' certain types of drugs when making them.",
+		cost = 10,
+		requiredUpgrades = [],
+	},
 }
 
 func isUpgradeVisible(upgradeID:String) -> bool:
@@ -272,6 +278,85 @@ func getUnlockedStrangePillsCount() -> int:
 
 func getTestedStrangePillsCount() -> int:
 	return testedTFs.size()
+
+func doesPCHaveUnknownStrangePills() -> bool:
+	for itemA in GM.pc.getInventory().getItems():
+		var item:ItemBase = itemA
+		if(item.id != "TFPill"):
+			continue
+		var tfID:String = item.getTFID()
+		if(!isTransformationUnlocked(tfID)):
+			return true
+	return false
+
+func getPCUnknownStrangePills() -> Array:
+	var result:Array = []
+	for itemA in GM.pc.getInventory().getItems():
+		var item:ItemBase = itemA
+		if(item.id != "TFPill"):
+			continue
+		var tfID:String = item.getTFID()
+		if(!isTransformationUnlocked(tfID)):
+			result.append(item)
+	return result
+
+func canConfigureDrugs() -> bool:
+	return hasUpgrade("configurableDrugs")
+
+func canMakePillResult(tfID:String) -> Array:
+	var tf:TFBase = GlobalRegistry.getTransformationRef(tfID)
+	if(tf == null):
+		return [false, "Error?"]
+	
+	var badResult:Array = []
+	var fluidsNeed:Dictionary = tf.getPillFluidsRequired()
+	for fluidID in fluidsNeed:
+		var fluidObj:FluidBase = GlobalRegistry.getFluid(fluidID)
+		var howMuchNeed:float = fluidsNeed[fluidID]
+		var howMuchWeHave:float = getFluidAmount(fluidID)
+		
+		if(howMuchWeHave < howMuchNeed):
+			badResult.append("Not enough "+(fluidObj.getVisibleName() if fluidObj != null else fluidID))
+	
+	if(badResult.empty()):
+		return [true, ""]
+	return [false, Util.join(badResult, "\n")]
+
+func getMakePillDescription(tfID:String) -> String:
+	var result:String = ""
+	var tf:TFBase = GlobalRegistry.getTransformationRef(tfID)
+	if(tf == null):
+		return "Error, bad pill"
+	
+	result += "Effect: "+tf.getName()
+	result += "\n\nRequired:"
+	
+	var fluidsNeed:Dictionary = tf.getPillFluidsRequired()
+	for fluidID in fluidsNeed:
+		var fluidObj:FluidBase = GlobalRegistry.getFluid(fluidID)
+		var howMuchNeed:float = fluidsNeed[fluidID]
+		var howMuchWeHave:float = getFluidAmount(fluidID)
+		
+		result += "\n- "+(fluidObj.getVisibleName() if fluidObj != null else fluidID)+": "+str(round(howMuchNeed))+"ml  (You have "+str(Util.roundF(howMuchWeHave, 1))+"ml)"
+	
+	if(canConfigureDrugs() && tf.getPillCanConfigure()):
+		result += "\n\nThis pill can be configured!"
+	
+	return result
+
+func useFluidsToMakePill(tfID:String, _args:Dictionary = {}) -> ItemBase:
+	var tf:TFBase = GlobalRegistry.getTransformationRef(tfID)
+	if(tf == null):
+		return null
+	
+	var fluidsNeed:Dictionary = tf.getPillFluidsRequired()
+	for fluidID in fluidsNeed:
+		addFluid(fluidID, -fluidsNeed[fluidID])
+	
+	var newPill:ItemBase = GlobalRegistry.createItem("TFPill")
+	newPill.tfID = tfID
+	newPill.tfArgs = _args
+	return newPill
 
 func saveData() -> Dictionary:
 	var taskData:Array = []

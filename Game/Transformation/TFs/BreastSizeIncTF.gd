@@ -1,5 +1,7 @@
 extends TFBase
 
+var stages:int = 3
+
 func _init():
 	id = "BreastSizeIncTF"
 
@@ -20,7 +22,24 @@ func isPossibleFor(_char) -> bool:
 	return true
 
 func start(_args:Dictionary):
-	pass
+	if(_args.has("stages")):
+		stages = _args["stages"]
+
+func getPillOptions() -> Dictionary:
+	return {
+		"stages": {
+			name = "Stages",
+			desc = "How many times should the breasts be increased.",
+			value = 3,
+			values = [
+				[1, "1"],
+				[2, "2"],
+				[3, "3"],
+				[4, "4"],
+				[5, "5"],
+			],
+		},
+	}
 
 func canTransformFurther() -> bool:
 	if(getChar().getBreastsSize() >= BreastsSize.O):
@@ -28,7 +47,7 @@ func canTransformFurther() -> bool:
 	return .canTransformFurther()
 	
 func getMaxStage() -> int:
-	return 3
+	return stages
 	
 func getTimerForStage(_theStage:int) -> int:
 	if(_theStage == 0):
@@ -47,3 +66,14 @@ func reactProgress(_context:Dictionary, _result:TFResult):
 	
 	playAnim(StageScene.GivingBirth, "birth", {bodyState={exposedCrotch=true, hard=true}})
 	
+func saveData() -> Dictionary:
+	var data:Dictionary = .saveData()
+	
+	data["st"] = stages
+	
+	return data
+
+func loadData(_data:Dictionary):
+	.loadData(_data)
+	
+	stages = SAVE.loadVar(_data, "st", 3)

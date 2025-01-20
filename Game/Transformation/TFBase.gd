@@ -61,6 +61,27 @@ func getName() -> String:
 func getPillName() -> String:
 	return getName()
 
+func getPillFluidsRequired() -> Dictionary:
+	return {
+		"Milk": 50.0,
+	}
+
+func getPillOptions() -> Dictionary:
+	return {
+#		"test": {
+#			name = "Meow",
+#			desc = "Meow meow.",
+#			value = "test",
+#			values = [
+#				["test", "Test!"],
+#				["test2", "Test 2!"],
+#			],
+#		},
+	}
+
+func getPillCanConfigure() -> bool:
+	return !getPillOptions().empty()
+
 func getPillDatabaseDesc() -> String:
 	return "FILL ME"
 

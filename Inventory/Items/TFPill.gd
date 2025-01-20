@@ -2,15 +2,23 @@ extends ItemBase
 
 var tfID:String = ""
 var tfArgs:Dictionary = {}
+var configDesc:String = ""
 
 func _init():
 	id = "TFPill"
 
 func getVisibleName():
+	var theID:String = getTFID()
+	if(GM.main != null && GM.main.SCI != null):
+		if(GM.main.SCI.isTransformationUnlocked(theID)):
+			var tf = GlobalRegistry.getTransformationRef(theID)
+			if(tf != null):
+				return tf.getPillName()
+	
 	return "Strange Pill"
 	
 func getDescription():
-	return "A pill that lacks any labels or instructions. Who knows what it will do..\n[color=#"+Color.cyan.to_html()+"]This pill might have some kind of transformative effect on your body.[/color]"
+	return "A pill that lacks any labels or instructions. Who knows what it will do..\n[color=#"+Color.cyan.to_html()+"]This pill might have some kind of transformative effect on your body.[/color]"+("\n\n[color=#"+Color.cyan.to_html()+"]Pill settings:\n"+configDesc+"[/color]" if configDesc != "" else "")
 
 func canUseInCombat():
 	return true
@@ -31,6 +39,9 @@ func setTFID(newTFID:String):
 		var tf = GlobalRegistry.getTransformationRef(tfID)
 		if(tf != null):
 			tfArgs = tf.generatePillArgs()
+
+func setConfigDesc(newDesc:String):
+	configDesc = newDesc
 
 func pillStartTF(_user) -> Array:
 	var _id:String = getTFID()
@@ -101,7 +112,7 @@ func getSexEngineInfo(_sexEngine, _domInfo, _subInfo):
 	#var dom:BaseCharacter = _domInfo.getChar()
 	
 	return {
-		"name": "Strange Pill",
+		"name": getVisibleName(),
 		"usedName": "a strange pill",
 		"desc": getDescription(),
 		"scoreOnSub": 0.2,#_domInfo.goalsScoreMax({SexGoal.FuckVaginal: 1.0, SexGoal.FuckAnal: 0.5}, _subInfo.charID)*_domInfo.fetishScore({Fetish.Breeding: 1.0}),
@@ -127,6 +138,7 @@ func saveData():
 	
 	data["tfID"] = tfID
 	data["tfArgs"] = tfArgs
+	data["configDesc"] = configDesc
 	
 	return data
 	
@@ -135,3 +147,4 @@ func loadData(data):
 	
 	tfID = SAVE.loadVar(data, "tfID", "")
 	tfArgs = SAVE.loadVar(data, "tfArgs", {})
+	configDesc = SAVE.loadVar(data, "configDesc", "")

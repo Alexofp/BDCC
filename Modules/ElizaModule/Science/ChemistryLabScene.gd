@@ -4,6 +4,8 @@ var genericInventoryScreenScene = preload("res://UI/Inventory/GenericInventorySc
 
 var pickedUpgrade:String = ""
 var pickedTF:String = ""
+var pickedTFOption:String = ""
+var pickedArgs:Dictionary = {}
 
 func _init():
 	sceneID = "ChemistryLabScene"
@@ -21,9 +23,43 @@ func _run():
 		
 		sayTanksVolume()
 		
+		addButton("Create", "See what you can create in this lab", "create_menu")
+		addButton("Fluid tanks", "See what you can do with the fluid tanks", "fluid_tanks")
 		addButton("Upgrades", "Look at the list of possible upgrades", "upgrades")
 		addButton("Database", "Look at the database of everything that you have unlocked or researched", "database")
+		if(GM.main.SCI.doesPCHaveUnknownStrangePills()):
+			addButton("Strange pill!", "Make Eliza scan the strange pill that you have", "scan_strange_pill")
 		addButton("Leave", "Time to go", "endthescene")
+	
+	if(state == "create_menu"):
+		addButton("Back", "Back to the previous menu", "")
+		
+		#var canConfigure:bool = GM.main.SCI.canConfigureDrugs()
+		
+		var entries:Dictionary = {}
+		
+		for tfID in GlobalRegistry.getTransformationRefs():
+			if(!GM.main.SCI.isTransformationUnlocked(tfID)):
+				continue
+			var canMakeResult:Array = GM.main.SCI.canMakePillResult(tfID)
+			var canMake:bool = canMakeResult[0]
+			var tf:TFBase = GlobalRegistry.getTransformationRef(tfID)
+			
+			var desc:String = GM.main.SCI.getMakePillDescription(tfID)
+			
+			entries[tfID] = {
+				name = tf.getPillName()+" pill",
+				desc = desc+("\n\n[color=red]"+canMakeResult[1]+"[/color]" if !canMake else ""),
+				actions = ([
+					["make", "Make"],
+				]) if canMake else [],
+			}
+		
+		var inventory = genericInventoryScreenScene.instance()
+		GM.ui.addFullScreenCustomControl("inventory", inventory)
+		inventory.setRightPanelStretchRation(0.75)
+		inventory.setEntries(entries)
+		var _ok = inventory.connect("onInteractWith", self, "onMakeInteract")
 	
 	if(state == "database"):
 		addButton("Back", "Back to the previous menu", "")
@@ -186,9 +222,61 @@ func _run():
 		saynn("You unlocked the '"+upgradeInfo["name"]+"' upgrade!")
 		addButton("Continue", "See what happens next", "upgrades")
 		
+	if(state == "configuring_drug"):
+		var tf:TFBase = GlobalRegistry.getTransformationRef(pickedTF)
+		
+		saynn("Here you can configure your pill before creating it.")
+		
+		sayn("Pill name: "+tf.getPillName())
+		saynn("Description: "+tf.getName())
+		
+		addButton("Create", "Create a pill with these options", "do_create_configured_pill")
+		
+		sayn("Settings:")
+		var _i:int = 1
+		var options:Dictionary = tf.getPillOptions()
+		for optionID in options:
+			var option:Dictionary = options[optionID]
+			
+			var currentOptionName:String = "???"
+			for valueEntry in option["values"]:
+				if(valueEntry[0] == pickedArgs[optionID]):
+					currentOptionName = valueEntry[1]
+			
+			sayn(str(_i)+". "+option["name"]+" = "+currentOptionName)
+			saynn(option["desc"])
+			addButton(option["name"], option["desc"], "configure_value_menu", [optionID])
+			
+		
+		addButton("CANCEL", "You changed your mind!", "")
+	
+	if(state == "configure_value_menu"):
+		var tf:TFBase = GlobalRegistry.getTransformationRef(pickedTF)
+		var options:Dictionary = tf.getPillOptions()
+		var option:Dictionary = options[pickedTFOption]
+		
+		var currentOptionName:String = "???"
+		for valueEntry in option["values"]:
+			if(valueEntry[0] == pickedArgs[pickedTFOption]):
+				currentOptionName = valueEntry[1]
+		
+		sayn("Option name: "+option["name"])
+		sayn("Description: "+option["desc"])
+		saynn("Current setting: "+currentOptionName)
+		
+		saynn("Pick a new setting for this option!")
+		
+		for valueEntry in option["values"]:
+			addButton(valueEntry[1], "Set the setting to this value", "set_value_configure", [valueEntry[0]])
+		
+		addButton("BACK", "You changed your mind!", "configuring_drug")
+		
 func onUpgradesInteract(_upgradeID:String, _id, _args):
 	pickedUpgrade = _upgradeID
 	GM.main.pickOption("doBuyUpgrade", [_upgradeID])
+		
+func onMakeInteract(_upgradeID:String, _id, _args):
+	GM.main.pickOption("doMakeTFPill", [_upgradeID])
 	
 func sayTanksVolume():
 	var storedFluids:Dictionary = GM.main.SCI.getStoredFluidsWithDefauls()
@@ -214,6 +302,12 @@ func _react(_action: String, _args):
 		pickedUpgrade = _args[0]
 	if(_action == "detailedViewTF"):
 		pickedTF = _args[0]
+	if(_action == "configure_value_menu"):
+		pickedTFOption = _args[0]
+	if(_action == "set_value_configure"):
+		pickedArgs[pickedTFOption] = _args[0]
+		setState("configuring_drug")
+		return
 	if(_action == "doBuyUpgrade"):
 		var upgradeInfo:Dictionary = GM.main.SCI.getUpgrades()[pickedUpgrade]
 		GM.main.SCI.addPoints(-upgradeInfo["cost"])
@@ -221,6 +315,49 @@ func _react(_action: String, _args):
 		#addMessage("You unlocked the '"+upgradeInfo["name"]+"' upgrade!")
 		#setState("upgrades")
 		setState("after_buy")
+		return
+	if(_action == "doMakeTFPill"):
+		var tfID:String = _args[0]
+		
+		var tf:TFBase = GlobalRegistry.getTransformationRef(tfID)
+		if(GM.main.SCI.canConfigureDrugs() && tf.getPillCanConfigure()):
+			pickedTF = tfID
+			pickedArgs = {}
+			var theOptions:Dictionary = tf.getPillOptions()
+			for optionID in theOptions:
+				pickedArgs[optionID] = theOptions[optionID]["value"]
+			setState("configuring_drug")
+			return
+		
+		var newPill:ItemBase = GM.main.SCI.useFluidsToMakePill(tfID)
+		if(newPill != null):
+			addMessage("You have create a "+tf.getPillName()+" pill!")
+			GM.pc.getInventory().addItem(newPill)
+		
+		setState("")
+		return
+	if(_action == "do_create_configured_pill"):
+		var tfID:String = pickedTF
+		
+		var newPill:ItemBase = GM.main.SCI.useFluidsToMakePill(tfID, pickedArgs)
+		if(newPill != null):
+			var tf:TFBase = GlobalRegistry.getTransformationRef(tfID)
+			var configDescAr:Array = []
+			var options:Dictionary = tf.getPillOptions()
+			for optionID in options:
+				var option:Dictionary = options[optionID]
+				
+				var currentOptionName:String = "???"
+				for valueEntry in option["values"]:
+					if(valueEntry[0] == pickedArgs[optionID]):
+						currentOptionName = valueEntry[1]
+				configDescAr.append(option["name"]+": "+currentOptionName)
+			newPill.setConfigDesc(Util.join(configDescAr, "\n"))
+			
+			addMessage("You have create a "+tf.getPillName()+" pill!")
+			GM.pc.getInventory().addItem(newPill)
+		
+		setState("")
 		return
 		
 	setState(_action)
@@ -311,6 +448,8 @@ func saveData():
 	
 	data["pickedUpgrade"] = pickedUpgrade
 	data["pickedTF"] = pickedTF
+	data["pickedTFOption"] = pickedTFOption
+	data["pickedArgs"] = pickedArgs
 	
 	return data
 	
@@ -319,3 +458,5 @@ func loadData(data):
 	
 	pickedUpgrade = SAVE.loadVar(data, "pickedUpgrade", "")
 	pickedTF = SAVE.loadVar(data, "pickedTF", "")
+	pickedTFOption = SAVE.loadVar(data, "pickedTFOption", "")
+	pickedArgs = SAVE.loadVar(data, "pickedArgs", {})
