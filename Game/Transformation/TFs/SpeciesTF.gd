@@ -26,6 +26,35 @@ func start(_args:Dictionary):
 			randomSpecies = Species.Canine
 			doCancelDelayed()
 		newSpecies = [randomSpecies]
+	
+	for bodypartSlot in BodypartSlot.getAll():
+		if(_args.has("no"+bodypartSlot) && _args["no"+bodypartSlot]):
+			affectedSlots[bodypartSlot] = true
+
+func getPillOptions() -> Dictionary:
+	var speciesArray:Array = []
+	for speciesID in GlobalRegistry.getAllPlayableSpecies():
+		speciesArray.append([speciesID, GlobalRegistry.getSpecies(speciesID).getVisibleName()])
+	var result:Dictionary = {
+		"species": {
+			name = "Species",
+			desc = "What species should the drug transform you into.",
+			value = Species.Canine,
+			values = speciesArray,
+		},
+	}
+	
+	for bodypartSlot in BodypartSlot.getAll():
+		if(bodypartSlot in [BodypartSlot.Hair, BodypartSlot.Vagina, BodypartSlot.Anus]):
+			continue
+		result["no"+bodypartSlot] = {
+			name = "Skip "+BodypartSlot.getVisibleNameNoCap(bodypartSlot),
+			desc = "Should this bodypart not be morphed?",
+			value = false,
+			values = [[false, "No"], [true, "Yes"]]
+		}
+	
+	return result
 
 func getSlotsToTransform() -> Array:
 	return BodypartSlot.getAll()

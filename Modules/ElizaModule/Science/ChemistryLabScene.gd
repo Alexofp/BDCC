@@ -1,6 +1,8 @@
 extends SceneBase
 
 var genericInventoryScreenScene = preload("res://UI/Inventory/GenericInventoryScreen.tscn")
+var colorPickerScene = preload("res://UI/ColorPickerWidget.tscn")
+
 
 var pickedUpgrade:String = ""
 var pickedTF:String = ""
@@ -47,14 +49,41 @@ func _run():
 			
 			var desc:String = GM.main.SCI.getMakePillDescription(tfID)
 			
+			var theActions:Array = []
+			if(canMake):
+				theActions = [["make", "Make"]]
+				if(tf.getPillCanConfigure() && GM.main.SCI.canConfigureDrugs()):
+					theActions = [["custom", "Custom"], ["make", "Make"]]
+			
 			entries[tfID] = {
 				name = tf.getPillName()+" pill",
 				desc = desc+("\n\n[color=red]"+canMakeResult[1]+"[/color]" if !canMake else ""),
-				actions = ([
-					["make", "Make"],
-				]) if canMake else [],
+				actions = theActions,
 			}
 		
+		var crafts:Dictionary = GM.main.SCI.getCraftableItems()
+		for itemID in crafts:
+			var craftInfo:Dictionary = crafts[itemID]
+			var itemRef:ItemBase = GlobalRegistry.getItemRef(itemID)
+			if(itemRef == null):
+				continue
+			
+			var itemName:String = itemRef.getVisibleName()
+			var itemDesc:String = itemRef.getVisisbleDescription()
+			var itemFluidsReq:String = GM.main.SCI.canMakeGetFluidsDescription(craftInfo["fluids"])
+			var canMakeResult:Array = GM.main.SCI.canMakeHasFluids(craftInfo["fluids"])
+			var canMake:bool = canMakeResult[0]
+			
+			var theActions:Array = []
+			if(canMake):
+				theActions = [["makeCraft", "Make"]]
+			
+			entries[itemID] = {
+				name = itemName,
+				desc = itemDesc+"\n\nRequired:\n"+itemFluidsReq+("\n\n[color=red]"+canMakeResult[1]+"[/color]" if !canMake else ""),
+				actions = theActions,
+			}
+			
 		var inventory = genericInventoryScreenScene.instance()
 		GM.ui.addFullScreenCustomControl("inventory", inventory)
 		inventory.setRightPanelStretchRation(0.75)
@@ -238,12 +267,15 @@ func _run():
 		for optionID in options:
 			var option:Dictionary = options[optionID]
 			
-			var currentOptionName:String = "???"
-			for valueEntry in option["values"]:
-				if(valueEntry[0] == pickedArgs[optionID]):
-					currentOptionName = valueEntry[1]
-			
-			sayn(str(_i)+". "+option["name"]+" = "+currentOptionName)
+			if(option.has("color") && option["color"]):
+				sayn(str(_i)+". "+option["name"]+" = [color="+pickedArgs[optionID]+"]"+pickedArgs[optionID]+"[/color]")
+			else:
+				var currentOptionName:String = "???"
+				for valueEntry in option["values"]:
+					if(valueEntry[0] == pickedArgs[optionID]):
+						currentOptionName = valueEntry[1]
+				
+				sayn(str(_i)+". "+option["name"]+" = "+currentOptionName)
 			saynn(option["desc"])
 			addButton(option["name"], option["desc"], "configure_value_menu", [optionID])
 			
@@ -255,20 +287,27 @@ func _run():
 		var options:Dictionary = tf.getPillOptions()
 		var option:Dictionary = options[pickedTFOption]
 		
-		var currentOptionName:String = "???"
-		for valueEntry in option["values"]:
-			if(valueEntry[0] == pickedArgs[pickedTFOption]):
-				currentOptionName = valueEntry[1]
-		
-		sayn("Option name: "+option["name"])
-		sayn("Description: "+option["desc"])
-		saynn("Current setting: "+currentOptionName)
-		
-		saynn("Pick a new setting for this option!")
-		
-		for valueEntry in option["values"]:
-			addButton(valueEntry[1], "Set the setting to this value", "set_value_configure", [valueEntry[0]])
-		
+		if(option.has("color") && option["color"]):
+			var colorPicker = colorPickerScene.instance()
+			GM.ui.addCustomControl("colorpicker", colorPicker)
+			colorPicker.setCurrentColor(Color(pickedArgs[pickedTFOption]))
+			
+			addButton("Apply", "Select this color", "set_value_configure_color")
+		else:
+			var currentOptionName:String = "???"
+			for valueEntry in option["values"]:
+				if(valueEntry[0] == pickedArgs[pickedTFOption]):
+					currentOptionName = valueEntry[1]
+			
+			sayn("Option name: "+option["name"])
+			sayn("Description: "+option["desc"])
+			saynn("Current setting: "+currentOptionName)
+			
+			saynn("Pick a new setting for this option!")
+			
+			for valueEntry in option["values"]:
+				addButton(valueEntry[1], "Set the setting to this value", "set_value_configure", [valueEntry[0]])
+			
 		addButton("BACK", "You changed your mind!", "configuring_drug")
 		
 func onUpgradesInteract(_upgradeID:String, _id, _args):
@@ -276,7 +315,7 @@ func onUpgradesInteract(_upgradeID:String, _id, _args):
 	GM.main.pickOption("doBuyUpgrade", [_upgradeID])
 		
 func onMakeInteract(_upgradeID:String, _id, _args):
-	GM.main.pickOption("doMakeTFPill", [_upgradeID])
+	GM.main.pickOption("doMakeTFPill", [_upgradeID, _id])
 	
 func sayTanksVolume():
 	var storedFluids:Dictionary = GM.main.SCI.getStoredFluidsWithDefauls()
@@ -308,6 +347,11 @@ func _react(_action: String, _args):
 		pickedArgs[pickedTFOption] = _args[0]
 		setState("configuring_drug")
 		return
+	if(_action == "set_value_configure_color"):
+		var colorPicker = GM.ui.getCustomControl("colorpicker")
+		pickedArgs[pickedTFOption] = "#"+colorPicker.getCurrentColor().to_html(false)
+		setState("configuring_drug")
+		return
 	if(_action == "doBuyUpgrade"):
 		var upgradeInfo:Dictionary = GM.main.SCI.getUpgrades()[pickedUpgrade]
 		GM.main.SCI.addPoints(-upgradeInfo["cost"])
@@ -319,8 +363,20 @@ func _react(_action: String, _args):
 	if(_action == "doMakeTFPill"):
 		var tfID:String = _args[0]
 		
+		if(_args[1] == "makeCraft"):
+			var theCrafts:Dictionary = GM.main.SCI.getCraftableItems()
+			var craftInfo:Dictionary = theCrafts[tfID]
+			var itemRef:ItemBase = GlobalRegistry.getItemRef(tfID)
+			
+			GM.main.SCI.useFluidsToMakeSomething(craftInfo["fluids"])
+			
+			addMessage("You have create '"+itemRef.getVisibleName()+"'!")
+			GM.pc.getInventory().addItem(GlobalRegistry.createItem(tfID))
+			setState("")
+			return
+		
 		var tf:TFBase = GlobalRegistry.getTransformationRef(tfID)
-		if(GM.main.SCI.canConfigureDrugs() && tf.getPillCanConfigure()):
+		if(_args[1] == "custom" && GM.main.SCI.canConfigureDrugs() && tf.getPillCanConfigure()):
 			pickedTF = tfID
 			pickedArgs = {}
 			var theOptions:Dictionary = tf.getPillOptions()
@@ -347,11 +403,14 @@ func _react(_action: String, _args):
 			for optionID in options:
 				var option:Dictionary = options[optionID]
 				
-				var currentOptionName:String = "???"
-				for valueEntry in option["values"]:
-					if(valueEntry[0] == pickedArgs[optionID]):
-						currentOptionName = valueEntry[1]
-				configDescAr.append(option["name"]+": "+currentOptionName)
+				if(option.has("color") && option["color"]):
+					configDescAr.append(option["name"]+": [color="+pickedArgs[optionID]+"]"+pickedArgs[optionID]+"[/color]")
+				else:
+					var currentOptionName:String = "???"
+					for valueEntry in option["values"]:
+						if(valueEntry[0] == pickedArgs[optionID]):
+							currentOptionName = valueEntry[1]
+					configDescAr.append(option["name"]+": "+currentOptionName)
 			newPill.setConfigDesc(Util.join(configDescAr, "\n"))
 			
 			addMessage("You have create a "+tf.getPillName()+" pill!")

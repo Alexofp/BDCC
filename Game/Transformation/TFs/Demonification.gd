@@ -22,6 +22,9 @@ func isPossibleFor(_char) -> bool:
 func start(_args:Dictionary):
 	newSpecies = [Species.Demon]
 
+func getPillOptions() -> Dictionary:
+	return {}
+
 func getSlotsToTransform() -> Array:
 	return [
 		BodypartSlot.Horns,

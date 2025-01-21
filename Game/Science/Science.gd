@@ -16,7 +16,7 @@ const DIFFICULTY_MEDIUM = 1
 const DIFFICULTY_HARD = 2
 const DIFFICULTY_VERY_HARD = 3
 
-const upgradesInfo:Dictionary = {
+var upgradesInfo:Dictionary = {
 	"advBreastPump": {
 		name = "Breast Pump Mk2",
 		desc = "Unlocks a prototype of an advanced breast pump that you can buy in the medical vendomat.",
@@ -34,6 +34,19 @@ const upgradesInfo:Dictionary = {
 		desc = "Allows you to 'configure' certain types of drugs when making them.",
 		cost = 10,
 		requiredUpgrades = [],
+	},
+	"TFAcceleratePill": {
+		name = "QuickShift Pill",
+		desc = "Allows you to make 'QuickShift' pills that speed up the process of transformation greatly.",
+		cost = 10,
+		requiredUpgrades = [],
+		items = {
+			"TFAcceleratePill": {
+				fluids = {
+					"Cum": 69.0,
+				},
+			},
+		},
 	},
 }
 
@@ -322,6 +335,37 @@ func canMakePillResult(tfID:String) -> Array:
 		return [true, ""]
 	return [false, Util.join(badResult, "\n")]
 
+func canMakeHasFluids(fluidsNeed:Dictionary) -> Array:
+	var badResult:Array = []
+	
+	for fluidID in fluidsNeed:
+		var fluidObj:FluidBase = GlobalRegistry.getFluid(fluidID)
+		var howMuchNeed:float = fluidsNeed[fluidID]
+		var howMuchWeHave:float = getFluidAmount(fluidID)
+		
+		if(howMuchWeHave < howMuchNeed):
+			badResult.append("Not enough "+(fluidObj.getVisibleName() if fluidObj != null else fluidID))
+	
+	if(badResult.empty()):
+		return [true, ""]
+	return [false, Util.join(badResult, "\n")]
+
+func canMakeGetFluidsDescription(fluidsNeed:Dictionary) -> String:
+	var result:String = ""
+	for fluidID in fluidsNeed:
+		var fluidObj:FluidBase = GlobalRegistry.getFluid(fluidID)
+		var howMuchNeed:float = fluidsNeed[fluidID]
+		var howMuchWeHave:float = getFluidAmount(fluidID)
+		
+		if(result != ""):
+			result += "\n"
+		result += "- "+(fluidObj.getVisibleName() if fluidObj != null else fluidID)+": "+str(round(howMuchNeed))+"ml  (You have "+str(Util.roundF(howMuchWeHave, 1))+"ml)"
+	return result
+
+func useFluidsToMakeSomething(fluidsNeed:Dictionary):
+	for fluidID in fluidsNeed:
+		addFluid(fluidID, -fluidsNeed[fluidID])
+
 func getMakePillDescription(tfID:String) -> String:
 	var result:String = ""
 	var tf:TFBase = GlobalRegistry.getTransformationRef(tfID)
@@ -357,6 +401,20 @@ func useFluidsToMakePill(tfID:String, _args:Dictionary = {}) -> ItemBase:
 	newPill.tfID = tfID
 	newPill.tfArgs = _args
 	return newPill
+
+func getCraftableItems() -> Dictionary:
+	var result:Dictionary = {}
+	
+	for upgradeID in upgrades:
+		var upgradeInfo:Dictionary = upgradesInfo[upgradeID]
+		
+		if(upgradeInfo.has("items")):
+			var theItems:Dictionary = upgradeInfo["items"]
+			
+			for itemID in theItems:
+				result[itemID] = theItems[itemID]
+	
+	return result
 
 func saveData() -> Dictionary:
 	var taskData:Array = []

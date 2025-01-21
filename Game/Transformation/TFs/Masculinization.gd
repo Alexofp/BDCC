@@ -26,7 +26,42 @@ func isPossibleFor(_char) -> bool:
 	return true
 
 func start(_args:Dictionary):
-	pass
+	if(_args.has("addPenis")):
+		addedPenis = !_args["addPenis"]
+	if(_args.has("removeVag")):
+		removedVag = !_args["removeVag"]
+	if(_args.has("switchBreasts")):
+		switchedbreasts = !_args["switchBreasts"]
+	if(_args.has("switchHair")):
+		switchedhair = !_args["switchHair"]
+
+func getPillOptions() -> Dictionary:
+	return {
+		"addPenis": {
+			name = "Grow penis",
+			desc = "Should the drug grow a fully-functional penis",
+			value = true,
+			values = [[true, "Yes", [false, "No"]]],
+		},
+		"removeVag": {
+			name = "Remove pussy",
+			desc = "Should the drug remove the vagina",
+			value = true,
+			values = [[true, "Yes", [false, "No"]]],
+		},
+		"switchBreasts": {
+			name = "Male breasts",
+			desc = "Should the drug morph female breasts to male pecs",
+			value = true,
+			values = [[true, "Yes", [false, "No"]]],
+		},
+		"switchHair": {
+			name = "Switch hair",
+			desc = "Should the drug grow male hair (only if it's not male already)",
+			value = true,
+			values = [[true, "Yes", [false, "No"]]],
+		},
+	}
 
 func charHasMaleBreasts(theChar) -> bool:
 	return theChar.bodypartHasTrait(BodypartSlot.Breasts, PartTrait.BreastsMale)
