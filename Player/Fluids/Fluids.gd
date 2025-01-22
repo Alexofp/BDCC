@@ -76,6 +76,16 @@ func removeEmptyInternalEntries():
 
 	contents = newContents
 
+func removeFluidType(fluidType:String):
+	cachedFluidsAmount = 0.0
+	var newContents:Array = []
+	for fluidData in contents:
+		if(fluidData["fluidType"] != fluidType):
+			newContents.append(fluidData)
+			cachedFluidsAmount += fluidData["amount"]
+			
+	contents = newContents
+
 func hasFluidType(fluidType):
 	for fluidData in contents:
 		if(fluidData["fluidType"] == fluidType):

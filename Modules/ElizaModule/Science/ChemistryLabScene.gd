@@ -8,6 +8,7 @@ var pickedUpgrade:String = ""
 var pickedTF:String = ""
 var pickedTFOption:String = ""
 var pickedArgs:Dictionary = {}
+var uniqueItemID:String = ""
 
 func _init():
 	sceneID = "ChemistryLabScene"
@@ -26,12 +27,199 @@ func _run():
 		sayTanksVolume()
 		
 		addButton("Create", "See what you can create in this lab", "create_menu")
-		addButton("Fluid tanks", "See what you can do with the fluid tanks", "fluid_tanks")
+		addButton("Fluids", "See what you can do with the fluid tanks", "fluid_tanks")
 		addButton("Upgrades", "Look at the list of possible upgrades", "upgrades")
 		addButton("Database", "Look at the database of everything that you have unlocked or researched", "database")
+		if(GM.main.SCI.hasUpgrade("bluespaceStash")):
+			addButton("Stash", "Look at your personal item stash", "look_stash")
 		if(GM.main.SCI.doesPCHaveUnknownStrangePills()):
 			addButton("Strange pill!", "Make Eliza scan the strange pill that you have", "scan_strange_pill")
 		addButton("Leave", "Time to go", "endthescene")
+	
+	if(state == "fluid_tanks"):
+		sayTanksVolume()
+		
+		saynn("What do you want to do?")
+		
+		addButton("Fill", "Fill the tanks with one of your items", "tank_fill_select")
+		addButton("Clear", "Select one of the fluid tanks and fully empty it", "tank_clear_select")
+		
+		if(GM.main.SCI.hasUpgrade("shower1")):
+			addButton("Shower", "Take a special shower that will collect all the fluids", "tank_shower")
+		if(GM.main.SCI.hasUpgrade("fluidInspector")):
+			addButton("Inspect container", "Use the lab's equipment to inspect one of your fluid containers and get full info about its contents", "inspect_select")
+		if(GM.main.SCI.hasUpgrade("fluidFilter")):
+			addButton("Filter container", "Use the lab's equipment to filter away fluids from one of your fluid containers", "filter_select")
+		
+		
+		addButton("Back", "Back to the previous menu", "")
+	
+	if(state == "filter_select"):
+		addButton("Back", "Back to the previous menu", "fluid_tanks")
+		
+		saynn("Pick a fluid container that you want to filter. You will be able to remove selected fluids from that container.")
+		
+		var equippedItems = GM.pc.getInventory().getAllEquippedItems()
+		for slot in equippedItems:
+			var equippedItem:ItemBase = equippedItems[slot]
+			
+			if(equippedItem.getFluids() != null && !equippedItem.getFluids().isEmpty()):
+				addButton(equippedItem.getStackName(), equippedItem.getVisisbleDescription(), "tank_pickFilter", [equippedItem])
+		for theitem in GM.pc.getInventory().getItems():
+			if(theitem.getFluids() != null):
+				if(theitem.getFluids().isEmpty()):
+					#addDisabledButton(theitem.getStackName(), "(This item is empty)\n\n"+theitem.getVisisbleDescription())
+					pass
+				else:
+					addButton(theitem.getStackName(), theitem.getVisisbleDescription(), "tank_pickFilter", [theitem])
+	
+	if(state == "tank_pickFilter"):
+		var item:ItemBase = GM.pc.getInventory().getItemByUniqueID(uniqueItemID)
+		if(item == null):
+			saynn("ERROR, NO ITEM FOUND.")
+			addButton("Continue", "See what happens next", "filter_select")
+			return
+		var fluids:Fluids = item.getFluids()
+		if(fluids == null):
+			saynn("ERROR, ITEM HAS NO FLUIDS OBJECT.")
+			addButton("Continue", "See what happens next", "filter_select")
+			return
+		addButton("Back", "Back to the previous menu", "filter_select")
+		
+		sayn("Container name: "+item.getVisibleName())
+		saynn("Capacity: "+str(Util.roundF(fluids.getFluidAmount(), 1))+(("/"+str(Util.roundF(fluids.getCapacity(), 1))) if fluids.isCapacityLimited() else "")+" ml")
+		
+		if(fluids.isEmpty()):
+			saynn("The container is empty!")
+		else:
+			var fluidByType:Dictionary = fluids.getFluidAmountByType()
+			sayn("Found fluids:")
+			
+			for fluidID in fluidByType:
+				var fluidAmount:float = fluidByType[fluidID]
+				var fluidOBJ:FluidBase = GlobalRegistry.getFluid(fluidID)
+				var fluidName:String = fluidOBJ.getVisibleName() if fluidOBJ != null else fluidID
+				
+				sayn(" - "+fluidName+": "+str(Util.roundF(fluidAmount, 1))+" ml")
+				
+				addButton(fluidName, "Remove "+str(Util.roundF(fluidAmount, 1))+" ml of "+fluidName, "do_filter_out", [fluids, fluidID])
+				
+			sayn("")
+			saynn("Select which fluid you want to filter out. The selected fluid will be removed from the container and disposed safely.")
+		
+	
+	if(state == "inspect_select"):
+		addButton("Back", "Back to the previous menu", "fluid_tanks")
+		
+		saynn("Pick a fluid container that you want to inspect. The lab will show you full detailed information about the contents of that item.")
+		
+		var equippedItems = GM.pc.getInventory().getAllEquippedItems()
+		for slot in equippedItems:
+			var equippedItem:ItemBase = equippedItems[slot]
+			
+			if(equippedItem.getFluids() != null && !equippedItem.getFluids().isEmpty()):
+				addButton(equippedItem.getStackName(), equippedItem.getVisisbleDescription(), "tank_pickInspect", [equippedItem])
+		for theitem in GM.pc.getInventory().getItems():
+			if(theitem.getFluids() != null):
+				if(theitem.getFluids().isEmpty()):
+					#addDisabledButton(theitem.getStackName(), "(This item is empty)\n\n"+theitem.getVisisbleDescription())
+					pass
+				else:
+					addButton(theitem.getStackName(), theitem.getVisisbleDescription(), "tank_pickInspect", [theitem])
+		
+	if(state == "tank_pickInspect"):
+		var item:ItemBase = GM.pc.getInventory().getItemByUniqueID(uniqueItemID)
+		if(item == null):
+			saynn("ERROR, NO ITEM FOUND.")
+			addButton("Continue", "See what happens next", "inspect_select")
+			return
+		var fluids:Fluids = item.getFluids()
+		if(fluids == null):
+			saynn("ERROR, ITEM HAS NO FLUIDS OBJECT.")
+			addButton("Continue", "See what happens next", "inspect_select")
+			return
+		
+		saynn("You put your container into the scanner and press a button. A computer screen lights up with various info.")
+		
+		sayn("Container name: "+item.getVisibleName())
+		saynn("Capacity: "+str(Util.roundF(fluids.getFluidAmount(), 1))+(("/"+str(Util.roundF(fluids.getCapacity(), 1))) if fluids.isCapacityLimited() else "")+" ml")
+		
+		saynn("Unique records found: "+str(fluids.contents.size()))
+		
+		var _i:int = 1
+		for recordInfo in fluids.contents:
+			var fluidType:String = recordInfo["fluidType"] if recordInfo.has("fluidType") else "ERROR"
+			var fluidAmount:float = recordInfo["amount"] if recordInfo.has("amount") else 0.0
+			var fluidDNA:FluidDNA = recordInfo["fluidDNA"] if recordInfo.has("fluidDNA") else null
+			var fluidOBJ:FluidBase = GlobalRegistry.getFluid(fluidType)
+			var fluidName:String = fluidOBJ.getVisibleName() if fluidOBJ != null else fluidType
+			
+			sayn("Record #"+str(_i))
+			sayn("Fluid type: "+fluidName)
+			sayn("Amount: "+str(Util.roundF(fluidAmount, 1))+" ml")
+			if(fluidDNA == null):
+				saynn("No DNA found")
+			else:
+				var theChar:BaseCharacter = fluidDNA.getCharacter()
+				var charName:String = theChar.getName() if theChar != null else "Unknown"
+				var theSpeciesRaw:Array = fluidDNA.getSpecies()
+				var theSpeciesStr:String = ""
+				for species in theSpeciesRaw:
+					var theSpeciesObj:Species = GlobalRegistry.getSpecies(species)
+					if(theSpeciesObj == null):
+						continue
+					if(theSpeciesStr != ""):
+						theSpeciesStr += ", "
+					theSpeciesStr += theSpeciesObj.getVisibleName()
+				sayn("DNA found: "+charName)
+				sayn("Species: "+theSpeciesStr)
+				sayn("Virility: "+str(Util.roundF(fluidDNA.getVirility()*100.0, 1))+"%")
+				sayn("")
+			
+			_i += 1
+		
+		addButton("Continue", "See what happens next", "inspect_select")
+		
+
+	if(state == "tank_shower"):
+		saynn("YOU TAKE A SPECIAL SHOWER.")
+		
+		addButton("Continue", "See what happens next", "")
+	
+	if(state == "tank_fill_select"):
+		addButton("Back", "Back to the previous menu", "fluid_tanks")
+		saynn("Which item do you want to use to fill the fluid tanks? The selected item will be [b]fully emptied[/b]!")
+		
+		sayTanksVolume()
+		
+		var equippedItems = GM.pc.getInventory().getAllEquippedItems()
+		for slot in equippedItems:
+			var equippedItem:ItemBase = equippedItems[slot]
+			
+			if(equippedItem.getFluids() != null && !equippedItem.getFluids().isEmpty()):
+				addButton(equippedItem.getStackName(), equippedItem.getVisisbleDescription(), "tank_pickFillFrom", [equippedItem])
+		for theitem in GM.pc.getInventory().getItems():
+			if(theitem.getFluids() != null):
+				if(theitem.getFluids().isEmpty()):
+					#addDisabledButton(theitem.getStackName(), "(This item is empty)\n\n"+theitem.getVisisbleDescription())
+					pass
+				else:
+					addButton(theitem.getStackName(), theitem.getVisisbleDescription(), "tank_pickFillFrom", [theitem])
+
+	
+	if(state == "tank_clear_select"):
+		addButton("Back", "Back to the previous menu", "fluid_tanks")
+		
+		saynn("Which fluid tank do you want to empty? [b]This will fully clear it, removing the fluds of that type from your lab[/b].")
+		
+		sayTanksVolume()
+		
+		var storedFluids:Dictionary = GM.main.SCI.getStoredFluids()
+		for fluidID in storedFluids:
+			var fluidOBJ:FluidBase = GlobalRegistry.getFluid(fluidID)
+			var fluidName:String = fluidOBJ.getVisibleName() if fluidOBJ != null else fluidID
+			
+			addButton(fluidName, "Empty "+str(round(storedFluids[fluidID]))+"ml of "+fluidName, "do_empty_tank", [fluidID])
 	
 	if(state == "create_menu"):
 		addButton("Back", "Back to the previous menu", "")
@@ -174,6 +362,7 @@ func _run():
 	
 	if(state == "upgrades"):
 		var upgradesInfo:Dictionary = GM.main.SCI.getUpgrades()
+		var currentDrugAmount:int = GM.main.SCI.getUnlockedStrangePillsCount()
 		
 		#saynn("Here is a list of upgrades that are currently available. Select any upgrade to see more information about it.")
 		
@@ -197,6 +386,11 @@ func _run():
 			var upgradeDesc:String = ""
 			upgradeDesc += upgradeInfo["desc"]
 			upgradeDesc += "\n\nCost: [color="+("red" if !canBuy else "green")+"]"+str(upgradeInfo["cost"])+" science points[/color]"
+			if(upgradeInfo.has("drugAmount")):
+				var needDrugAmount:int = upgradeInfo["drugAmount"]
+				if(currentDrugAmount < needDrugAmount):
+					canBuy = false
+				upgradeDesc += "\nAmount of drugs unlocked: [color="+("red" if currentDrugAmount < needDrugAmount else "green")+"]"+str(needDrugAmount)+" drug"+("s" if needDrugAmount != 1 else "")+"[/color]"
 			
 			entries[upgradeID] = {
 				name = upgradeInfo["name"],
@@ -419,6 +613,73 @@ func _react(_action: String, _args):
 		setState("")
 		return
 		
+	if(_action == "do_empty_tank"):
+		var fluidID:String = _args[0]
+		var fluidOBJ:FluidBase = GlobalRegistry.getFluid(fluidID)
+		var fluidName:String = fluidOBJ.getVisibleName() if fluidOBJ != null else fluidID
+		
+		GM.main.SCI.clearFluid(fluidID)
+		addMessage("'"+fluidName+"' fluid tank got cleared!")
+		return
+		
+	if(_action == "tank_pickFillFrom"):
+		var theItem:ItemBase = _args[0]
+		if(theItem == null):
+			return
+		var fluids:Fluids = theItem.getFluids()
+		if(fluids == null):
+			return
+		
+		var fluidsByType:Dictionary = fluids.getFluidAmountByType()
+		for fluidID in fluidsByType:
+			var theFluidOBJ:FluidBase = GlobalRegistry.getFluid(fluidID)
+			if(theFluidOBJ == null):
+				continue
+			
+			var howMuchAdded:float = GM.main.SCI.addFluid(fluidID, fluidsByType[fluidID])
+			if(howMuchAdded > 0.0):
+				addMessage(str(Util.roundF(howMuchAdded, 1))+" ml of "+theFluidOBJ.getVisibleName()+" was deposited into the fluids tanks.")
+		fluids.clear()
+		
+		return
+		
+	if(_action == "tank_shower"):
+		var fluidObjs:Array = [GM.pc.getFluids()]
+		if(GM.main.SCI.hasUpgrade("shower2")):
+			for bodypartSlot in [BodypartSlot.Head, BodypartSlot.Vagina, BodypartSlot.Anus]:
+				if(GM.pc.hasBodypart(bodypartSlot)):
+					fluidObjs.append(GM.pc.getBodypart(bodypartSlot).getFluids())
+		
+		for fluidObjA in fluidObjs:
+			var fluidObj:Fluids = fluidObjA
+			
+			var fluidsByType:Dictionary = fluidObj.getFluidAmountByType()
+			for fluidID in fluidsByType:
+				var theFluidOBJ:FluidBase = GlobalRegistry.getFluid(fluidID)
+				if(theFluidOBJ == null):
+					continue
+				
+				var howMuchAdded:float = GM.main.SCI.addFluid(fluidID, fluidsByType[fluidID])
+				if(howMuchAdded > 0.0):
+					addMessage(str(Util.roundF(howMuchAdded, 1))+" ml of "+theFluidOBJ.getVisibleName()+" was deposited into the fluids tanks.")
+			fluidObj.clear()
+	
+	if(_action == "look_stash"):
+		runScene("PlayerStashScene")
+		return
+	
+	if(_action in ["tank_pickInspect", "tank_pickFilter"]):
+		if(_args.size() > 0):
+			uniqueItemID = _args[0].uniqueID
+	
+	if(_action == "do_filter_out"):
+		var fluids:Fluids = _args[0]
+		var fluidID:String = _args[1]
+		
+		fluids.removeFluidType(fluidID)
+		
+		return
+	
 	setState(_action)
 
 
@@ -509,6 +770,7 @@ func saveData():
 	data["pickedTF"] = pickedTF
 	data["pickedTFOption"] = pickedTFOption
 	data["pickedArgs"] = pickedArgs
+	data["uniqueItemID"] = uniqueItemID
 	
 	return data
 	
@@ -519,3 +781,4 @@ func loadData(data):
 	pickedTF = SAVE.loadVar(data, "pickedTF", "")
 	pickedTFOption = SAVE.loadVar(data, "pickedTFOption", "")
 	pickedArgs = SAVE.loadVar(data, "pickedArgs", {})
+	uniqueItemID = SAVE.loadVar(data, "uniqueItemID", "")

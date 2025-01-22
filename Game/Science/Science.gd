@@ -48,6 +48,55 @@ var upgradesInfo:Dictionary = {
 			},
 		},
 	},
+	"cheaperCrafts1": {
+		name = "Lab efficiency 1",
+		desc = "Lowers the amount of fluids you need to create something by 10%.",
+		cost = 10,
+		drugAmount = 3,
+		requiredUpgrades = [],
+	},
+	"cheaperCrafts2": {
+		name = "Lab efficiency 2",
+		desc = "Lowers the amount of fluids you need to create something by an additional 15%.",
+		cost = 10,
+		requiredUpgrades = ["cheaperCrafts1"],
+	},
+	"cheaperCrafts3": {
+		name = "Lab efficiency 3",
+		desc = "Lowers the amount of fluids you need to create something by an additional 25%.",
+		cost = 10,
+		requiredUpgrades = ["cheaperCrafts2"],
+	},
+	"shower1": {
+		name = "Special shower",
+		desc = "Install a special shower that will wash off any fluids from your body and deposit them into the fluid tanks.",
+		cost = 10,
+		requiredUpgrades = [],
+	},
+	"shower2": {
+		name = "Shower Douche",
+		desc = "Upgrade the shower, allowing it to also collect fluids from inside your holes!",
+		cost = 10,
+		requiredUpgrades = ["shower1"],
+	},
+	"bluespaceStash": {
+		name = "Bluespace Stash",
+		desc = "Allows you to access your private stash from inside the lab!",
+		cost = 10,
+		requiredUpgrades = [],
+	},
+	"fluidInspector": {
+		name = "Fluid inspector",
+		desc = "Install a special scanner that will allow you to closely inspect any fluid container. It will show you the DNA of every fluid in the selected container",
+		cost = 10,
+		requiredUpgrades = [],
+	},
+	"fluidFilter": {
+		name = "Fluid filter",
+		desc = "Install a special fluid filter machine that will allow you to filter out selected fluids from your fluid containers.",
+		cost = 10,
+		requiredUpgrades = [],
+	},
 }
 
 func isUpgradeVisible(upgradeID:String) -> bool:
@@ -162,19 +211,26 @@ func removeNurseryTask(_task):
 func addFluid(fluidID:String, amount:float):
 	if(!storedFluids.has(fluidID)):
 		storedFluids[fluidID] = 0.0
-
+	var curVal:float = storedFluids[fluidID]
+	
 	storedFluids[fluidID] += amount
 	
 	if(storedFluids[fluidID] > getStoredFluidLimit(fluidID)):
 		storedFluids[fluidID] = getStoredFluidLimit(fluidID)
-
+	
+	var newVal:float = storedFluids[fluidID]
 	if(storedFluids[fluidID] <= 0.0):
 		storedFluids.erase(fluidID)
+	return newVal - curVal
 
 func getFluidAmount(fluidID:String) -> float:
 	if(!storedFluids.has(fluidID)):
 		return 0.0
 	return storedFluids[fluidID]
+
+func clearFluid(fluidID:String):
+	if(storedFluids.has(fluidID)):
+		storedFluids.erase(fluidID)
 
 func handleBountyFluid(_fluidType:String, _amount:float):
 	for task in nurseryTasks:
@@ -321,11 +377,12 @@ func canMakePillResult(tfID:String) -> Array:
 	if(tf == null):
 		return [false, "Error?"]
 	
+	var costMod:float = getFluidsCostMod()
 	var badResult:Array = []
 	var fluidsNeed:Dictionary = tf.getPillFluidsRequired()
 	for fluidID in fluidsNeed:
 		var fluidObj:FluidBase = GlobalRegistry.getFluid(fluidID)
-		var howMuchNeed:float = fluidsNeed[fluidID]
+		var howMuchNeed:float = round(fluidsNeed[fluidID] * costMod)
 		var howMuchWeHave:float = getFluidAmount(fluidID)
 		
 		if(howMuchWeHave < howMuchNeed):
@@ -338,9 +395,10 @@ func canMakePillResult(tfID:String) -> Array:
 func canMakeHasFluids(fluidsNeed:Dictionary) -> Array:
 	var badResult:Array = []
 	
+	var costMod:float = getFluidsCostMod()
 	for fluidID in fluidsNeed:
 		var fluidObj:FluidBase = GlobalRegistry.getFluid(fluidID)
-		var howMuchNeed:float = fluidsNeed[fluidID]
+		var howMuchNeed:float = round(fluidsNeed[fluidID] * costMod)
 		var howMuchWeHave:float = getFluidAmount(fluidID)
 		
 		if(howMuchWeHave < howMuchNeed):
@@ -351,10 +409,11 @@ func canMakeHasFluids(fluidsNeed:Dictionary) -> Array:
 	return [false, Util.join(badResult, "\n")]
 
 func canMakeGetFluidsDescription(fluidsNeed:Dictionary) -> String:
+	var costMod:float = getFluidsCostMod()
 	var result:String = ""
 	for fluidID in fluidsNeed:
 		var fluidObj:FluidBase = GlobalRegistry.getFluid(fluidID)
-		var howMuchNeed:float = fluidsNeed[fluidID]
+		var howMuchNeed:float = round(fluidsNeed[fluidID] * costMod)
 		var howMuchWeHave:float = getFluidAmount(fluidID)
 		
 		if(result != ""):
@@ -363,8 +422,20 @@ func canMakeGetFluidsDescription(fluidsNeed:Dictionary) -> String:
 	return result
 
 func useFluidsToMakeSomething(fluidsNeed:Dictionary):
+	var costMod:float = getFluidsCostMod()
 	for fluidID in fluidsNeed:
-		addFluid(fluidID, -fluidsNeed[fluidID])
+		addFluid(fluidID, -round(fluidsNeed[fluidID]*costMod))
+
+func getFluidsCostMod() -> float:
+	var theMod:float = 1.0
+	if(hasUpgrade("cheaperCrafts1")):
+		theMod -= 0.1
+	if(hasUpgrade("cheaperCrafts2")):
+		theMod -= 0.15
+	if(hasUpgrade("cheaperCrafts3")):
+		theMod -= 0.25
+	
+	return theMod
 
 func getMakePillDescription(tfID:String) -> String:
 	var result:String = ""
@@ -375,10 +446,11 @@ func getMakePillDescription(tfID:String) -> String:
 	result += "Effect: "+tf.getName()
 	result += "\n\nRequired:"
 	
+	var costMod:float = getFluidsCostMod()
 	var fluidsNeed:Dictionary = tf.getPillFluidsRequired()
 	for fluidID in fluidsNeed:
 		var fluidObj:FluidBase = GlobalRegistry.getFluid(fluidID)
-		var howMuchNeed:float = fluidsNeed[fluidID]
+		var howMuchNeed:float = round(fluidsNeed[fluidID] * costMod)
 		var howMuchWeHave:float = getFluidAmount(fluidID)
 		
 		result += "\n- "+(fluidObj.getVisibleName() if fluidObj != null else fluidID)+": "+str(round(howMuchNeed))+"ml  (You have "+str(Util.roundF(howMuchWeHave, 1))+"ml)"
@@ -393,9 +465,10 @@ func useFluidsToMakePill(tfID:String, _args:Dictionary = {}) -> ItemBase:
 	if(tf == null):
 		return null
 	
+	var costMod:float = getFluidsCostMod()
 	var fluidsNeed:Dictionary = tf.getPillFluidsRequired()
 	for fluidID in fluidsNeed:
-		addFluid(fluidID, -fluidsNeed[fluidID])
+		addFluid(fluidID, -round(fluidsNeed[fluidID]*costMod))
 	
 	var newPill:ItemBase = GlobalRegistry.createItem("TFPill")
 	newPill.tfID = tfID

@@ -45,7 +45,7 @@ func _run():
 		
 		saynn("The container will be fully cleared and returned back to you.")
 		
-		saynn("The ad claims that 10% of the donated fluids will be directed towards the development of new medical drugs.")
+		saynn("The ad claims that 30% of the donated fluids will be directed towards the development of new medical drugs.")
 		
 		addButton("Back", "You changed your mind", "")
 		var equippedItems = GM.pc.getInventory().getAllEquippedItems()
@@ -89,7 +89,7 @@ func _react(_action: String, _args):
 			var fluidAmount:float = fluidAmmounts[fluidID]
 			
 			GM.main.SCI.handleBountyFluid(fluidID, fluidAmount)
-			GM.main.SCI.addFluid(fluidID, fluidAmount*0.1)
+			GM.main.SCI.addFluid(fluidID, fluidAmount*0.3)
 		fluids.clear()
 
 	setState(_action)
