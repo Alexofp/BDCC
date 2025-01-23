@@ -62,6 +62,22 @@ func hasActiveTransformations() -> bool:
 func getActiveTransformationsCount() -> int:
 	return transformations.size()
 
+func getTransformationsInFinalStage() -> Array:
+	var result:Array = []
+	
+	for tf in transformations:
+		if(!tf.canTransformFurther()):
+			result.append(tf)
+	
+	return result
+
+func hasTransformationsInFinalStage() -> bool:
+	for tf in transformations:
+		if(!tf.canTransformFurther()):
+			return true
+	
+	return false
+
 func undoTransformation(tf):
 	if(!transformations.has(tf)):
 		return

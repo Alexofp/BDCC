@@ -20,19 +20,19 @@ var upgradesInfo:Dictionary = {
 	"advBreastPump": {
 		name = "Breast Pump Mk2",
 		desc = "Unlocks a prototype of an advanced breast pump that you can buy in the medical vendomat.",
-		cost = 10,
+		cost = 50,
 		requiredUpgrades = [],
 	},
 	"advPenisPump": {
 		name = "Penis Pump Mk2",
 		desc = "Unlocks a prototype of an advanced penis pump that you can buy in the medical vendomat.",
-		cost = 10,
+		cost = 50,
 		requiredUpgrades = [],
 	},
 	"configurableDrugs": {
 		name = "Lab upgrade",
 		desc = "Allows you to 'configure' certain types of drugs when making them.",
-		cost = 10,
+		cost = 50,
 		requiredUpgrades = [],
 	},
 	"TFAcceleratePill": {
@@ -48,53 +48,94 @@ var upgradesInfo:Dictionary = {
 			},
 		},
 	},
+	"TFApplyPill": {
+		name = "MorphIn Pill",
+		desc = "Allows you to make 'MorphIn' pills that make all transformations permanent.",
+		cost = 10,
+		requiredUpgrades = [],
+		items = {
+			"TFApplyPill": {
+				fluids = {
+					"Cum": 69.0,
+				},
+			},
+		},
+	},
+	"TFUndoPill": {
+		name = "MorphAway Pill",
+		desc = "Allows you to make 'MorphAway' pills that undo all transformations.",
+		cost = 10,
+		requiredUpgrades = [],
+		items = {
+			"TFUndoPill": {
+				fluids = {
+					"Cum": 69.0,
+				},
+			},
+		},
+	},
+	"painkillers": {
+		name = "Painkillers",
+		desc = "Allows you to make painkillers.",
+		cost = 10,
+		requiredUpgrades = [],
+		items = {
+			"painkillers": {
+				fluids = {
+					"Cum": 69.0,
+				},
+			},
+		},
+	},
 	"cheaperCrafts1": {
 		name = "Lab efficiency 1",
 		desc = "Lowers the amount of fluids you need to create something by 10%.",
 		cost = 10,
-		drugAmount = 3,
+		drugAmount = 2,
 		requiredUpgrades = [],
 	},
 	"cheaperCrafts2": {
 		name = "Lab efficiency 2",
 		desc = "Lowers the amount of fluids you need to create something by an additional 15%.",
-		cost = 10,
+		cost = 30,
+		drugAmount = 5,
 		requiredUpgrades = ["cheaperCrafts1"],
 	},
 	"cheaperCrafts3": {
 		name = "Lab efficiency 3",
 		desc = "Lowers the amount of fluids you need to create something by an additional 25%.",
-		cost = 10,
+		cost = 50,
+		drugAmount = 10,
 		requiredUpgrades = ["cheaperCrafts2"],
 	},
 	"shower1": {
 		name = "Special shower",
 		desc = "Install a special shower that will wash off any fluids from your body and deposit them into the fluid tanks.",
-		cost = 10,
+		cost = 20,
 		requiredUpgrades = [],
 	},
 	"shower2": {
 		name = "Shower Douche",
 		desc = "Upgrade the shower, allowing it to also collect fluids from inside your holes!",
-		cost = 10,
+		cost = 20,
 		requiredUpgrades = ["shower1"],
 	},
 	"bluespaceStash": {
 		name = "Bluespace Stash",
 		desc = "Allows you to access your private stash from inside the lab!",
-		cost = 10,
+		cost = 30,
 		requiredUpgrades = [],
 	},
 	"fluidInspector": {
 		name = "Fluid inspector",
 		desc = "Install a special scanner that will allow you to closely inspect any fluid container. It will show you the DNA of every fluid in the selected container",
-		cost = 10,
+		cost = 20,
 		requiredUpgrades = [],
 	},
 	"fluidFilter": {
 		name = "Fluid filter",
 		desc = "Install a special fluid filter machine that will allow you to filter out selected fluids from your fluid containers.",
-		cost = 10,
+		cost = 20,
 		requiredUpgrades = [],
 	},
 }
@@ -302,10 +343,45 @@ func doTestTF(TFID:String, givePoints:bool = true):
 	testedTFs[TFID] = true
 	if(givePoints):
 		if(tfBase != null):
-			addPoints(tfBase.getUnlockPointsAward()*2)
+			addPoints(tfBase.getUnlockPointsAward()*3)
 	if(tfBase != null):
 		GM.main.addMessage("The database now contains full info about "+tfBase.getPillName()+" pills.")
 
+func doTestTFsOf(theChar:BaseCharacter):
+	var holder:TFHolder = theChar.getTFHolder()
+	if(holder == null):
+		return
+	for tf in holder.getTransformationsInFinalStage():
+		doTestTF(tf.id)
+
+func hasTFsCanScan(theChar:BaseCharacter) -> bool:
+	var holder:TFHolder = theChar.getTFHolder()
+	if(holder == null):
+		return false
+	for tf in holder.getTransformationsInFinalStage():
+		var TFID:String = tf.id
+		
+		if(!unlockedTFs.has(TFID)):
+			continue
+		if(testedTFs.has(TFID)):
+			continue
+		return true
+	return false
+
+func getTFsCanScanAmount(theChar:BaseCharacter) -> int:
+	var holder:TFHolder = theChar.getTFHolder()
+	if(holder == null):
+		return 0
+	var result:int = 0
+	for tf in holder.getTransformationsInFinalStage():
+		var TFID:String = tf.id
+		
+		if(!unlockedTFs.has(TFID)):
+			continue
+		if(testedTFs.has(TFID)):
+			continue
+		result += 1
+	return result
 
 func getStoredFluids() -> Dictionary:
 	return storedFluids

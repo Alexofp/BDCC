@@ -21,8 +21,14 @@ func getEffectDesc():
 	if(tfHolder == null):
 		return "You shouldn't see this.."
 	var tfCount:int = tfHolder.getActiveTransformationsCount()
-	return "You are under the effects of "+str(tfCount)+" unknown transformation"+("s" if tfCount != 1 else "")+".."
+	var theText:String = "You are under the effects of "+str(tfCount)+" unknown transformation"+("s" if tfCount != 1 else "")+".."
+	
+	var canScanAmount:int = GM.main.SCI.getTFsCanScanAmount(character)
+	if(canScanAmount > 0):
+		theText += "\n\n"+str(canScanAmount)+" transformation"+("s" if canScanAmount != 1 else "")+" are ready to be scanned!"
 
+	return theText
+	
 func getEffectImage():
 	return "res://Images/StatusEffects/dna1.png"
 

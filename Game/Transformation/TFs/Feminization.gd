@@ -14,6 +14,11 @@ func getName() -> String:
 func getPillName() -> String:
 	return "EstroGPlus"
 
+func getUnlockData() -> Dictionary:
+	return {
+		eliza = "Intriguing! This pill seems to be formulated with a mix of phytoestrogens and androgen blockers that could promote feminization by altering hormonal balance. When taken, it will probably initiate a transformation towards female primary and secondary sexual characteristics. I think I’ll call it.. 'EstroGPlus.' It has a nice ring to it, don’t you think?",
+	}
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"gender": true,

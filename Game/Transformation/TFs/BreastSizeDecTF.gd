@@ -10,6 +10,11 @@ func getName() -> String:
 
 func getPillName() -> String:
 	return "Just-Ice"
+	
+func getUnlockData() -> Dictionary:
+	return {
+		eliza = "Interesting. It appears to contain a blend of phytoestrogens and cold-activated enzymes that target adipose tissue in the breast area. When ingested, it should trigger a localized reduction in fat cells. This pill will probably make your breasts smaller. Huh.. I'm gonna call it.. "+getPillName()+". I think that name will fit it nicely.",
+	}
 
 func getTFCheckTags() -> Dictionary:
 	return {

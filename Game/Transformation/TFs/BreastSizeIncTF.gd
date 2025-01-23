@@ -11,6 +11,11 @@ func getName() -> String:
 func getPillName() -> String:
 	return "TiTS"
 
+func getUnlockData() -> Dictionary:
+	return {
+		eliza = "Fascinating! This pill seems to be packed with a unique combination of herbal extracts and growth factors that stimulate breast tissue expansion. When taken, it will probably encourage cellular proliferation in the mammary glands, leading to an increase in size. I think I'll call it.. 'TiTS.' It has a nice ring to it, don’t you think?",
+	}
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"breasts": true,

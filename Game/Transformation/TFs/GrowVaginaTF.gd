@@ -11,6 +11,11 @@ func getName() -> String:
 func getPillName() -> String:
 	return "P-Bloom"
 
+func getUnlockData() -> Dictionary:
+	return {
+		eliza = "Intriguing! This pill appears to contain a mix of estrogenic compounds and tissue enhancers that could stimulate the development of female genitalia. When ingested, it will probably encourage the growth of a vagina in individuals who don’t have one. I think I’ll call it.. 'P-Bloom.' It's a short but nice name, I think.",
+	}
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"growvag": true,

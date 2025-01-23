@@ -16,6 +16,8 @@ func _init():
 		
 		"res://Modules/ElizaModule/Science/NurseryBountyBoardScene.gd",
 		"res://Modules/ElizaModule/Science/ChemistryLabScene.gd",
+		"res://Modules/ElizaModule/Science/ElizaGenericUnlockDrugScene.gd",
+		"res://Modules/ElizaModule/Science/ElizaGenericTestDrugScene.gd",
 		
 		"res://Modules/ElizaModule/DrugTesting/ElizaDrugTestDemoniXScene.gd",
 		]

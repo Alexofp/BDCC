@@ -13,6 +13,11 @@ func getName() -> String:
 func getPillName() -> String:
 	return "CockRoll"
 
+func getUnlockData() -> Dictionary:
+	return {
+		eliza = "Fascinating! This pill appears to contain a blend of growth factors and hormonal precursors that could stimulate penile tissue transformation. When ingested, it will probably affect your penis in some way.. I think I’ll call it.. 'CockRoll.' Why not!",
+	}
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"growpenis": true,

@@ -13,6 +13,11 @@ func getName() -> String:
 func getPillName() -> String:
 	return "MegaMilkMAX"
 
+func getUnlockData() -> Dictionary:
+	return {
+		eliza = "Wow.. This pill packs a lot.. Very interesting.. I think it will affect your breasts in some why.. but it will also do something else. I think I’ll call it.. 'MegaMilkMAX.' For no reason in particular.",
+	}
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"breasts": true,

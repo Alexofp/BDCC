@@ -385,7 +385,8 @@ func _run():
 			var canBuy:bool = upgradeInfo["cost"] <= GM.main.SCI.getPoints()
 			var upgradeDesc:String = ""
 			upgradeDesc += upgradeInfo["desc"]
-			upgradeDesc += "\n\nCost: [color="+("red" if !canBuy else "green")+"]"+str(upgradeInfo["cost"])+" science points[/color]"
+			upgradeDesc += "\n\nYou have "+str(GM.main.SCI.getPoints())+" science points"
+			upgradeDesc += "\nCost: [color="+("red" if !canBuy else "green")+"]"+str(upgradeInfo["cost"])+" science points[/color]"
 			if(upgradeInfo.has("drugAmount")):
 				var needDrugAmount:int = upgradeInfo["drugAmount"]
 				if(currentDrugAmount < needDrugAmount):
@@ -678,6 +679,10 @@ func _react(_action: String, _args):
 		
 		fluids.removeFluidType(fluidID)
 		
+		return
+	
+	if(_action == "scan_strange_pill"):
+		runScene("ElizaGenericUnlockDrugScene")
 		return
 	
 	setState(_action)
