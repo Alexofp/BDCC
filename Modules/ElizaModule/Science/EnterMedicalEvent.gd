@@ -5,12 +5,16 @@ func _init():
 
 func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "med_lobbynw")
+	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "med_lobbynw")
 	es.addTrigger(self, Trigger.EnteringRoom, "med_lobbyne")
+	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "med_lobbyne")
 
 func run(_triggerID, _args):
-	# Scream at me if I will forget to remove || true
-	if(getFlag("ElizaModule.firstDrugTestHappened") || true):
-		addButton("Enter", "Enter the medical block", "enter")
+	var hasLabAccess:bool = getModule("ElizaModule").hasLabAccess()
+	if(!hasLabAccess):
+		return
+	
+	addButton("Enter", "Enter the medical block", "enter")
 	
 func getPriority():
 	return 0

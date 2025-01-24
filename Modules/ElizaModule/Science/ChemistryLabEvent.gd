@@ -8,15 +8,18 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.TalkingToNPC, "eliza")
 
 func run(_triggerID, _args):
+	var hasLabAccess:bool = getModule("ElizaModule").hasLabAccess()
+	if(!hasLabAccess):
+		return
+
 	if(_triggerID == Trigger.TalkingToNPC):
-		if((getFlag("ElizaModule.firstDrugTestHappened") || true) && GM.main.SCI.doesPCHaveUnknownStrangePills()):
+		if((getFlag("ElizaModule.firstDrugTestHappened")) && GM.main.SCI.doesPCHaveUnknownStrangePills()):
 			addButton("Strange pill!", "Make Eliza scan the strange pill that you have", "scan_strange_pill")
-		if((getFlag("ElizaModule.firstDrugTestHappened") || true) && GM.main.SCI.hasTFsCanScan(GM.pc)):
+		if((getFlag("ElizaModule.firstDrugTestHappened")) && GM.main.SCI.hasTFsCanScan(GM.pc)):
 			addButton("Get scanned!", "Make Eliza scan the effects of your current transformations", "scan_tfs")
 		return
-	# Scream at me if I will forget to remove || true
-	if(getFlag("ElizaModule.firstDrugTestHappened") || true):
-		addButton("Lab", "Look at the lab", "lab")
+	#if(getFlag("ElizaModule.firstDrugTestHappened")):
+	addButton("Lab", "Look at the lab", "lab")
 	
 func getPriority():
 	return 0

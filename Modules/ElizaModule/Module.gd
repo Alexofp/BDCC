@@ -18,6 +18,7 @@ func _init():
 		"res://Modules/ElizaModule/Science/ChemistryLabScene.gd",
 		"res://Modules/ElizaModule/Science/ElizaGenericUnlockDrugScene.gd",
 		"res://Modules/ElizaModule/Science/ElizaGenericTestDrugScene.gd",
+		"res://Modules/ElizaModule/Science/ElizaGenericNPCTestDrugScene.gd",
 		
 		"res://Modules/ElizaModule/DrugTesting/ElizaDrugTestDemoniXScene.gd",
 		]
@@ -28,7 +29,14 @@ func _init():
 		"res://Modules/ElizaModule/Science/NurseryBountyBoardEvent.gd",
 		"res://Modules/ElizaModule/Science/EnterMedicalEvent.gd",
 		"res://Modules/ElizaModule/Science/ChemistryLabEvent.gd",
+		"res://Modules/ElizaModule/Science/ElizaBringNpcToBeTestedEvent.gd",
 	]
 
 func resetFlagsOnNewDay():
 	pass
+
+func hasLabAccess():
+	return true
+
+func canSendSlavesToBeMilked():
+	return true

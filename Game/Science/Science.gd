@@ -30,10 +30,11 @@ var upgradesInfo:Dictionary = {
 		requiredUpgrades = [],
 	},
 	"configurableDrugs": {
-		name = "Lab upgrade",
+		name = "Custom drugs",
 		desc = "Allows you to 'configure' certain types of drugs when making them.",
 		cost = 50,
 		requiredUpgrades = [],
+		main = true,
 	},
 	"TFAcceleratePill": {
 		name = "QuickShift Pill",
@@ -93,6 +94,7 @@ var upgradesInfo:Dictionary = {
 		cost = 10,
 		drugAmount = 2,
 		requiredUpgrades = [],
+		main = true,
 	},
 	"cheaperCrafts2": {
 		name = "Lab efficiency 2",
@@ -100,6 +102,7 @@ var upgradesInfo:Dictionary = {
 		cost = 30,
 		drugAmount = 5,
 		requiredUpgrades = ["cheaperCrafts1"],
+		main = true,
 	},
 	"cheaperCrafts3": {
 		name = "Lab efficiency 3",
@@ -107,6 +110,7 @@ var upgradesInfo:Dictionary = {
 		cost = 50,
 		drugAmount = 10,
 		requiredUpgrades = ["cheaperCrafts2"],
+		main = true,
 	},
 	"shower1": {
 		name = "Special shower",
@@ -119,6 +123,7 @@ var upgradesInfo:Dictionary = {
 		desc = "Upgrade the shower, allowing it to also collect fluids from inside your holes!",
 		cost = 20,
 		requiredUpgrades = ["shower1"],
+		main = true,
 	},
 	"bluespaceStash": {
 		name = "Bluespace Stash",
@@ -137,6 +142,34 @@ var upgradesInfo:Dictionary = {
 		desc = "Install a special fluid filter machine that will allow you to filter out selected fluids from your fluid containers.",
 		cost = 20,
 		requiredUpgrades = [],
+	},
+	"tanksUpgrade1": {
+		name = "Tanks capacity 1",
+		desc = "Expand the lab and install bigger fluid tanks that will hold more fluids.",
+		cost = 20,
+		requiredUpgrades = [],
+		main = true,
+	},
+	"tanksUpgrade2": {
+		name = "Tanks capacity 2",
+		desc = "Expand the lab and install bigger fluid tanks that will hold more fluids.",
+		cost = 40,
+		requiredUpgrades = ["tanksUpgrade1"],
+		main = true,
+	},
+	"tanksUpgrade3": {
+		name = "Tanks capacity 3",
+		desc = "Expand the lab and install bigger fluid tanks that will hold more fluids.",
+		cost = 60,
+		requiredUpgrades = ["tanksUpgrade2"],
+		main = true,
+	},
+	"tanksUpgrade4": {
+		name = "Tanks capacity 4",
+		desc = "Expand the lab and install bigger fluid tanks that will hold more fluids.",
+		cost = 100,
+		requiredUpgrades = ["tanksUpgrade3"],
+		main = true,
 	},
 }
 
@@ -398,6 +431,14 @@ func getStoredFluidsWithDefauls() -> Dictionary:
 
 func getStoredFluidLimit(fluidType:String) -> float:
 	var result:float = 1000.0
+	if(hasUpgrade("tanksUpgrade1")):
+		result = 3000.0
+	if(hasUpgrade("tanksUpgrade2")):
+		result = 10000.0
+	if(hasUpgrade("tanksUpgrade3")):
+		result = 25000.0
+	if(hasUpgrade("tanksUpgrade4")):
+		result = 100000.0
 	
 	var theFluid:FluidBase = GlobalRegistry.getFluid(fluidType)
 	if(theFluid != null):
@@ -555,6 +596,8 @@ func getCraftableItems() -> Dictionary:
 	var result:Dictionary = {}
 	
 	for upgradeID in upgrades:
+		if(!upgradesInfo.has(upgradeID)):
+			continue
 		var upgradeInfo:Dictionary = upgradesInfo[upgradeID]
 		
 		if(upgradeInfo.has("items")):
@@ -564,6 +607,59 @@ func getCraftableItems() -> Dictionary:
 				result[itemID] = theItems[itemID]
 	
 	return result
+
+func getAmountOfUnlockedMainUpgrade() -> int:
+	var result:int = 0
+	
+	for upgradeID in upgrades:
+		if(!upgradesInfo.has(upgradeID)):
+			continue
+		var upgradeInfo:Dictionary = upgradesInfo[upgradeID]
+		
+		if(upgradeInfo.has("main") && upgradeInfo["main"]):
+			result += 1
+	
+	return result
+
+func doMilkPlayer():
+	return doMilkCharacter(GM.pc)
+
+func doMilkCharacter(theChar:BaseCharacter):
+	var bodypartsToMilk:Array = [BodypartSlot.Breasts, BodypartSlot.Penis]
+	
+	var fluidsGot:Dictionary = {}
+	
+	for bodypartSlot in bodypartsToMilk:
+		if(!theChar.hasBodypart(bodypartSlot)):
+			continue
+		
+		var thePart:Bodypart = theChar.getBodypart(bodypartSlot)
+		var theFluids:Fluids = thePart.getFluids()
+		if(theFluids == null):
+			continue
+		
+		var fluidsByType:Dictionary = theFluids.getFluidAmountByType()
+		for fluidID in fluidsByType:
+			if(!fluidsGot.has(fluidID)):
+				fluidsGot[fluidID] = 0.0
+			fluidsGot[fluidID] += fluidsByType[fluidID]
+		theFluids.clear()
+		
+		if(bodypartSlot == BodypartSlot.Breasts):
+			theChar.milk() # Stimulate lactation
+	
+	if(theChar.hasBodypart(BodypartSlot.Vagina)):
+		var fluidAmount:float = theChar.getFluidAmount(FluidSource.Vagina)
+		var fluidType:String = theChar.getFluidType(FluidSource.Vagina)
+		if(!fluidsGot.has(fluidType)):
+			fluidsGot[fluidType] = 0.0
+		fluidsGot[fluidType] += fluidAmount
+	
+	for fluidType in fluidsGot:
+		fluidsGot[fluidType] *= RNG.randf_range(0.8, 1.0) # Simulates milking in-efficiency
+		addFluid(fluidType, fluidsGot[fluidType])
+	
+	return fluidsGot
 
 func saveData() -> Dictionary:
 	var taskData:Array = []
@@ -590,6 +686,9 @@ func loadData(_data:Dictionary):
 	unlockedTFs = SAVE.loadVar(_data, "uf", {})
 	testedTFs = SAVE.loadVar(_data, "tt", {})
 	upgrades = SAVE.loadVar(_data, "up", {})
+	for upgradeID in upgrades.keys():
+		if(!upgradesInfo.has(upgradeID)):
+			upgrades.erase(upgradeID)
 	
 	nurseryTasks.clear()
 	var taskData = SAVE.loadVar(_data, "nt", [])
