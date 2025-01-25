@@ -11,6 +11,8 @@ var testedTFs:Dictionary = {} # {TFID = true}
 var storedFluids:Dictionary = {} # {FluidType = Amount}
 var upgrades:Dictionary = {} # {upgradeID = true}
 
+var madeStrangePills:int = 0
+
 const DIFFICULTY_EASY = 0
 const DIFFICULTY_MEDIUM = 1
 const DIFFICULTY_HARD = 2
@@ -82,6 +84,20 @@ var upgradesInfo:Dictionary = {
 		requiredUpgrades = [],
 		items = {
 			"painkillers": {
+				fluids = {
+					"Cum": 69.0,
+				},
+			},
+		},
+	},
+	"strangepill": {
+		name = "Strange pill",
+		desc = "As you unlock more and more pills, it's becoming harder to find ones that you haven't seen before. This upgrade allows you to spend some Science Points and a lot of fluids to try to create a new strange pill from scratch by generating and assembling random molecular structures. Each pill will cost more than the last!",
+		cost = 10,
+		requiredUpgrades = [],
+		items = {
+			"TFPill": {
+				science = 10,
 				fluids = {
 					"Cum": 69.0,
 				},
@@ -606,6 +622,8 @@ func getCraftableItems() -> Dictionary:
 			for itemID in theItems:
 				result[itemID] = theItems[itemID]
 	
+	result["TFPill"]["science"] = 10 + madeStrangePills * 5
+	
 	return result
 
 func getAmountOfUnlockedMainUpgrade() -> int:
@@ -677,6 +695,7 @@ func saveData() -> Dictionary:
 		uf = unlockedTFs,
 		tt = testedTFs,
 		up = upgrades,
+		ms = madeStrangePills,
 	}
 
 func loadData(_data:Dictionary):
@@ -686,6 +705,7 @@ func loadData(_data:Dictionary):
 	unlockedTFs = SAVE.loadVar(_data, "uf", {})
 	testedTFs = SAVE.loadVar(_data, "tt", {})
 	upgrades = SAVE.loadVar(_data, "up", {})
+	madeStrangePills = SAVE.loadVar(_data, "ms", 0)
 	for upgradeID in upgrades.keys():
 		if(!upgradesInfo.has(upgradeID)):
 			upgrades.erase(upgradeID)

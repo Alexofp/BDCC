@@ -25,6 +25,18 @@ func start(_args:Dictionary):
 func getPillOptions() -> Dictionary:
 	return {}
 
+func getUnlockData() -> Dictionary:
+	return {
+		eliza = "Looks like this one will give you horns, a unique tail and hoofs. I'm gonna call it.. "+getPillName()+". I think that name will fit it nicely.",
+		tryOptions = [
+			{
+				name = "Make Eliza eat it",
+				desc = "(Submissive sex) Ask if she is brave enough to try her own product. She will probably become horny and dominant.. very dominant..",
+				sceneID = "ElizaDrugTestDemoniXScene",
+			},
+		],
+	}
+
 func getSlotsToTransform() -> Array:
 	return [
 		BodypartSlot.Horns,

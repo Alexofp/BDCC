@@ -18,8 +18,11 @@ func run(_triggerID, _args):
 			if(character.isSlaveToPlayer()):
 				var npcSlave:NpcSlave = character.getNpcSlavery()
 				if(!npcSlave.isDoingActivity()):
-					addButton("Milking", "Give your slave to Eliza to be milked every day", "give_to_be_milked", [_args[1]])
-				
+					if(npcSlave.hasSubmittedToPC()):
+						addButton("Milking", "Give your slave to Eliza to be milked every day", "give_to_be_milked", [_args[1]])
+					else:
+						addDisabledButton("Milking", "You can only give to Eliza slaves that have submitted to you. Otherwise they would run away, duh!")
+					
 		if(getModule("ElizaModule").hasLabAccess() && GM.main.SCI.hasTFsCanScan(character)):
 			addButton("Scan TFs!", "Make Eliza Quinn scan the transformations of your slave!", "do_scan_slave", [_args[1]])
 		return

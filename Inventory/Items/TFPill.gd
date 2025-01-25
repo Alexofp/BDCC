@@ -9,7 +9,7 @@ func _init():
 
 func getVisibleName():
 	var theID:String = getTFID()
-	if(GM.main != null && GM.main.SCI != null):
+	if(GM.main != null && GM.main.SCI != null && uniqueID!=null):
 		if(GM.main.SCI.isTransformationUnlocked(theID)):
 			var tf = GlobalRegistry.getTransformationRef(theID)
 			if(tf != null):
@@ -36,6 +36,14 @@ func setTFID(newTFID:String):
 	tfID = newTFID
 	tfArgs.clear()
 	if(tfID != ""):
+		var tf = GlobalRegistry.getTransformationRef(tfID)
+		if(tf != null):
+			tfArgs = tf.generatePillArgs()
+
+func makePillStrangeIfCan():
+	var newTfID:String = TFUtil.generateTFIDForAPill([], 0.0)
+	if(newTfID != ""):
+		tfID = newTfID
 		var tf = GlobalRegistry.getTransformationRef(tfID)
 		if(tf != null):
 			tfArgs = tf.generatePillArgs()

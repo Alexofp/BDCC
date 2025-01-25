@@ -8,6 +8,10 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.TalkingToNPC, "eliza")
 
 func run(_triggerID, _args):
+	if(_triggerID == Trigger.TalkingToNPC):
+		if(GM.pc.getTFHolder().hasActiveTransformations()):
+			addButton("I'm transformed!", "Ask the feline to help you with your changing body", "ask_help_tf")
+	
 	var hasLabAccess:bool = getModule("ElizaModule").hasLabAccess()
 	if(!hasLabAccess):
 		return
@@ -33,3 +37,5 @@ func onButton(_method, _args):
 	if(_method == "scan_tfs"):
 		GM.main.endCurrentScene()
 		runScene("ElizaGenericTestDrugScene")
+	if(_method == "ask_help_tf"):
+		runScene("ElizaHelpGotTransformedScene")

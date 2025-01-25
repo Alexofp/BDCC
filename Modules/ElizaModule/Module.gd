@@ -3,6 +3,7 @@ extends Module
 func getFlags():
 	return {
 		"firstDrugTestHappened": flag(FlagType.Bool),
+		"firstHelpTFHap": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -19,6 +20,7 @@ func _init():
 		"res://Modules/ElizaModule/Science/ElizaGenericUnlockDrugScene.gd",
 		"res://Modules/ElizaModule/Science/ElizaGenericTestDrugScene.gd",
 		"res://Modules/ElizaModule/Science/ElizaGenericNPCTestDrugScene.gd",
+		"res://Modules/ElizaModule/Science/ElizaHelpGotTransformedScene.gd",
 		
 		"res://Modules/ElizaModule/DrugTesting/ElizaDrugTestDemoniXScene.gd",
 		]

@@ -272,6 +272,7 @@ func getUnlockData() -> Dictionary:
 #			{
 #				name = "Nope",
 #				desc = "This is a disabled option",
+#				sceneID = "ASDASD",
 #				disabled = true,
 #			},
 #		],

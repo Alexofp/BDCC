@@ -334,6 +334,8 @@ func processTime(_secondsPassed):
 	var theTFHolder = getTFHolder()
 	if(theTFHolder != null):
 		theTFHolder.processTime(_secondsPassed)
+		if(GM.main != null && !GM.main.characterIsVisible(getID()) && theTFHolder.hasPendingTransformations()):
+			theTFHolder.doFirstPendingTransformation({}, true)
 		
 	if(!bodyFluids.isEmpty()):
 		bodyFluids.drain(0.1 * _secondsPassed / 60.0)
@@ -507,6 +509,11 @@ func shouldBeUpdated():
 	
 	if(isPregnant()):
 		return true
+	
+	if(hasEffect(StatusEffect.HasTFs)):
+		var theTFHolder = getTFHolder()
+		if(theTFHolder != null && theTFHolder.shouldAlwaysUpdateNPC()):
+			return true
 	
 	return false
 

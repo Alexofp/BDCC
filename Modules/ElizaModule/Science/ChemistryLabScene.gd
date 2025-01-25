@@ -258,10 +258,23 @@ func _run():
 			
 			var itemName:String = itemRef.getVisibleName()
 			var itemDesc:String = itemRef.getVisisbleDescription()
+			
+			if(itemID == "TFPill"):
+				itemName = "Strange Pill"
+				itemDesc = "Use advanced algorithms to brute-force random molecular structures until we find one that has transformative proporties.\n\nThis pill is guranteed to be one that hasn't been unlocked yet (Unless you have unlocked all of them already). The cost of this pill will raise each time you make it."
+			
 			var itemFluidsReq:String = GM.main.SCI.canMakeGetFluidsDescription(craftInfo["fluids"])
 			var canMakeResult:Array = GM.main.SCI.canMakeHasFluids(craftInfo["fluids"])
 			var canMake:bool = canMakeResult[0]
 			
+			if(craftInfo.has("science")):
+				itemFluidsReq = "Science points: "+str(craftInfo["science"])+"  (You have "+str(GM.main.SCI.getSciencePoints())+")\n"+itemFluidsReq
+				if(GM.main.SCI.getPoints() < craftInfo["science"]):
+					canMake = false
+					if(canMakeResult[1] != ""):
+						canMakeResult[1] += "\n"
+					canMakeResult[1] += "Not enough Science Points"
+				
 			var theActions:Array = []
 			if(canMake):
 				theActions = [["makeCraft", "Make"]]
@@ -280,6 +293,7 @@ func _run():
 	
 	if(state == "database"):
 		addButton("Back", "Back to the previous menu", "")
+		addButton("Replay scene", "Replay one of the old drug-related scene", "replay_menu")
 		
 		var entries:Dictionary = {}
 		entries["1"] = {
@@ -505,6 +519,40 @@ func _run():
 			
 		addButton("BACK", "You changed your mind!", "configuring_drug")
 		
+	if(state == "replay_menu"):
+		addButton("Back", "Back to the previous menu", "database")
+		saynn("Some transformation drugs have unique Eliza sex scenes attached to them. Here you can see and replay all of them.")
+		
+		for tfID in GlobalRegistry.getTransformationRefs():
+			if(!GM.main.SCI.isTransformationUnlocked(tfID)):
+				continue
+			var tf:TFBase = GlobalRegistry.getTransformationRef(tfID)
+			
+			var unlockData:Dictionary = tf.getUnlockData()
+			
+			if(unlockData.has("tryOptions")):
+				var tryOptions:Array = unlockData["tryOptions"]
+				if(tryOptions.size() > 0):
+					addButton(tf.getPillName(), "See scenes related to this drug", "replay_menu_drug", [tfID])
+		
+	if(state == "replay_menu_drug"):
+		addButton("Back", "Back to the previous menu", "replay_menu")
+		var tf:TFBase = GlobalRegistry.getTransformationRef(pickedTF)
+		
+		saynn("Selected drug: "+tf.getPillName())
+		saynn("Some scenes might not be available to all characters.")
+		
+		var unlockData:Dictionary = tf.getUnlockData()
+		if(!unlockData.has("tryOptions")):
+			return
+		var tryOptions:Array = unlockData["tryOptions"]
+		
+		for optionEntry in tryOptions:
+			if(optionEntry.has("disabled") && optionEntry["disabled"]):
+				addDisabledButton(optionEntry["name"], "(Impossible for your current body) "+optionEntry["desc"])
+			else:
+				addButton(optionEntry["name"], optionEntry["desc"], "play_replay_scene", [optionEntry["sceneID"]])
+
 func onUpgradesInteract(_upgradeID:String, _id, _args):
 	pickedUpgrade = _upgradeID
 	GM.main.pickOption("doBuyUpgrade", [_upgradeID])
@@ -536,6 +584,8 @@ func _react(_action: String, _args):
 		pickedUpgrade = _args[0]
 	if(_action == "detailedViewTF"):
 		pickedTF = _args[0]
+	if(_action == "replay_menu_drug"):
+		pickedTF = _args[0]
 	if(_action == "configure_value_menu"):
 		pickedTFOption = _args[0]
 	if(_action == "set_value_configure"):
@@ -563,10 +613,19 @@ func _react(_action: String, _args):
 			var craftInfo:Dictionary = theCrafts[tfID]
 			var itemRef:ItemBase = GlobalRegistry.getItemRef(tfID)
 			
+			if(craftInfo.has("science")):
+				GM.main.SCI.addPoints(-craftInfo["science"])
 			GM.main.SCI.useFluidsToMakeSomething(craftInfo["fluids"])
 			
 			addMessage("You have create '"+itemRef.getVisibleName()+"'!")
-			GM.pc.getInventory().addItem(GlobalRegistry.createItem(tfID))
+			
+			if(tfID == "TFPill"):
+				GM.main.SCI.madeStrangePills += 1
+				var newPill:ItemBase = GlobalRegistry.createItem(tfID)
+				newPill.makePillStrangeIfCan()
+				GM.pc.getInventory().addItem(newPill)
+			else:
+				GM.pc.getInventory().addItem(GlobalRegistry.createItem(tfID))
 			setState("")
 			return
 		
@@ -683,6 +742,11 @@ func _react(_action: String, _args):
 	
 	if(_action == "scan_strange_pill"):
 		runScene("ElizaGenericUnlockDrugScene")
+		return
+	
+	if(_action == "play_replay_scene"):
+		endScene()
+		runScene(_args[0])
 		return
 	
 	setState(_action)

@@ -337,6 +337,13 @@ func getSexGoalWeightModifier(_sexGoalID:String) -> float:
 	
 	return max(result, 0.0)
 
+func shouldAlwaysUpdateNPC() -> bool:
+	for tf in transformations:
+		if(tf.canTransformFurther()):
+			return true
+	
+	return false
+
 func saveData() -> Dictionary:
 	var effectsData:Array = []
 	for effect in effects:

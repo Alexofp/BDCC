@@ -51,7 +51,7 @@ static func getTFListCanStart() -> Array:
 			result.append([tf.id, tf.getName()])
 	return result
 
-static func generateTFIDForAPill(blacklist:Array = []) -> String:
+static func generateTFIDForAPill(blacklist:Array = [], knownMult:float = 0.5) -> String:
 	var possible:Array = []
 	
 	for tfID in GlobalRegistry.getTransformationRefs():
@@ -60,6 +60,10 @@ static func generateTFIDForAPill(blacklist:Array = []) -> String:
 		var tf = GlobalRegistry.getTransformationRef(tfID)
 		
 		var tfWeight:float = GM.main.getEncounterSettings().getTFWeight(tfID, tf.getPillGenWeight())
+		
+		if(GM.main != null && GM.main.SCI != null && GM.main.SCI.isTransformationUnlocked(tfID)):
+			tfWeight *= knownMult
+		
 		if(tfWeight > 0.0):
 			possible.append([tfID, tfWeight])
 	
