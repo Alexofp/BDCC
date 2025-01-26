@@ -5,6 +5,8 @@ var hasTarget:bool = false
 
 func _init():
 	id = "ThicknessAddTF"
+	
+	pointsOnUnlock = 5
 
 func getName() -> String:
 	return "Makes you thicker"
@@ -15,6 +17,11 @@ func getPillName() -> String:
 func getTFCheckTags() -> Dictionary:
 	return {
 		"thickness": true,
+	}
+
+func getPillFluidsRequired() -> Dictionary:
+	return {
+		"Cum": 500.0,
 	}
 
 func isPossibleFor(_char) -> bool:
@@ -55,8 +62,8 @@ func getMaxStage() -> int:
 	
 func getTimerForStage(_theStage:int) -> int:
 	if(_theStage == 0):
-		return 120
-	return 240
+		return 300
+	return 60*60*12
 	
 func doProgress(_context:Dictionary) -> Dictionary:
 	if(hasTarget):

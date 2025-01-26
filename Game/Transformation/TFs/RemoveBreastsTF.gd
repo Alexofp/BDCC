@@ -4,6 +4,8 @@ var removedBreasts:bool = false
 
 func _init():
 	id = "RemoveBreastsTF"
+	
+	pointsOnUnlock = 5
 
 func getName() -> String:
 	return "Makes breasts flat"
@@ -11,9 +13,19 @@ func getName() -> String:
 func getPillName() -> String:
 	return "BreastsBeGone"
 
+func getUnlockData() -> Dictionary:
+	return {
+		eliza = "Hmm. This pill seems to be formulated with a combination of hormonal suppressants and fat-reducing agents that could target breast tissue. When taken, it will probably lead to a flattening effect on the breasts. I think I’ll call it.. 'BreastsBeGone.' It perfectly captures the intended result!",
+	}
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"breasts": true,
+	}
+
+func getPillFluidsRequired() -> Dictionary:
+	return {
+		"GirlCum": 350.0,
 	}
 
 func isPossibleFor(_char) -> bool:
@@ -35,8 +47,8 @@ func canTransformFurther() -> bool:
 	
 func getTimerForStage(_theStage:int) -> int:
 	if(_theStage == 0):
-		return 120
-	return 240
+		return 200
+	return 60*60*5
 	
 func doProgress(_context:Dictionary) -> Dictionary:
 	if(removedBreasts):

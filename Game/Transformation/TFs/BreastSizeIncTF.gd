@@ -4,6 +4,8 @@ var stages:int = 3
 
 func _init():
 	id = "BreastSizeIncTF"
+	
+	pointsOnUnlock = 5
 
 func getName() -> String:
 	return "Increases size of breasts"
@@ -19,6 +21,11 @@ func getUnlockData() -> Dictionary:
 func getTFCheckTags() -> Dictionary:
 	return {
 		"breasts": true,
+	}
+
+func getPillFluidsRequired() -> Dictionary:
+	return {
+		"Cum": 500.0,
 	}
 
 func isPossibleFor(_char) -> bool:
@@ -56,8 +63,8 @@ func getMaxStage() -> int:
 	
 func getTimerForStage(_theStage:int) -> int:
 	if(_theStage == 0):
-		return 120
-	return 240
+		return 200
+	return 60*60*30
 	
 func doProgress(_context:Dictionary) -> Dictionary:
 	return {

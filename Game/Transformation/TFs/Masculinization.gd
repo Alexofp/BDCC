@@ -7,6 +7,8 @@ var switchedhair:bool = false
 
 func _init():
 	id = "Masculinization"
+	
+	pointsOnUnlock = 15
 
 func getName() -> String:
 	return "Masculinization"
@@ -14,10 +16,20 @@ func getName() -> String:
 func getPillName() -> String:
 	return "TestosteGo"
 
+func getUnlockData() -> Dictionary:
+	return {
+		eliza = "Interesting! This pill appears to contain a potent mix of testosterone boosters and androgenic compounds that could promote masculinization. When ingested, it will probably initiate the transformation of female characteristics into male ones.. all of the characteristics. I think I’ll call it.. 'TestosteGo.' Yes.. It will give you balls~.",
+	}
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"gender": true,
 		"breasts": true,
+	}
+
+func getPillFluidsRequired() -> Dictionary:
+	return {
+		"Milk": 2500.0,
 	}
 
 func isPossibleFor(_char) -> bool:
@@ -121,8 +133,8 @@ func canTransformFurther() -> bool:
 	
 func getTimerForStage(_theStage:int) -> int:
 	if(_theStage == 0):
-		return 120
-	return 240
+		return 200
+	return 60*60*10
 	
 func doProgress(_context:Dictionary) -> Dictionary:
 	var allSteps:Array = getPossibleSteps(getChar())

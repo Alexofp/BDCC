@@ -4,6 +4,8 @@ var lastStep:String = ""
 
 func _init():
 	id = "RandomTFs"
+	
+	pointsOnUnlock = 50
 
 func getName() -> String:
 	return "???"
@@ -11,9 +13,21 @@ func getName() -> String:
 func getPillName() -> String:
 	return "Unstable Mutagen"
 
+func getUnlockData() -> Dictionary:
+	return {
+		eliza = "Interesti-.. wait.. The heck is this. Wow. Wow! It's changing! Like.. the molecular structure of this drug is changing as we speak. I honestly have no idea if this is even safe to injest.. it could do anything. It's not even a drug at that point, it's just a concentrated dose of 'Unstable mutagen'.",
+	}
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"gender": true,
+	}
+
+func getPillFluidsRequired() -> Dictionary:
+	return {
+		"Cum": 2000.0,
+		"Milk": 5000.0,
+		"WhiteGoo": 50.0,
 	}
 
 #func getSexGoalWeightModifier(_sexGoalID:String) -> float:
@@ -56,8 +70,8 @@ func canTransformFurther() -> bool:
 	
 func getTimerForStage(_theStage:int) -> int:
 	if(_theStage == 0):
-		return 120
-	return 240
+		return 900
+	return 60*60*25
 	
 func doProgress(_context:Dictionary) -> Dictionary:
 	var allSteps:Array = getPossibleSteps(getChar())

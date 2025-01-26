@@ -4,6 +4,8 @@ var removedHorns:bool = false
 
 func _init():
 	id = "RemoveHornsTF"
+	
+	pointsOnUnlock = 5
 
 func getName() -> String:
 	return "Removes horns"
@@ -11,9 +13,19 @@ func getName() -> String:
 func getPillName() -> String:
 	return "HornsBeGone"
 
+func getUnlockData() -> Dictionary:
+	return {
+		eliza = "This pill appears to contain a blend of tissue-regulating compounds and growth inhibitors that could disrupt horn development. When ingested, it will probably facilitate the removal of horns.. if you have any that is. I think I’ll call it.. 'HornsBeGone.'",
+	}
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"horns": true,
+	}
+
+func getPillFluidsRequired() -> Dictionary:
+	return {
+		"GirlCum": 250.0,
 	}
 
 func isPossibleFor(_char) -> bool:
@@ -33,8 +45,8 @@ func canTransformFurther() -> bool:
 	
 func getTimerForStage(_theStage:int) -> int:
 	if(_theStage == 0):
-		return 120
-	return 240
+		return 60*20
+	return 60*60*2
 	
 func doProgress(_context:Dictionary) -> Dictionary:
 	if(removedHorns):

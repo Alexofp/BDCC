@@ -5,6 +5,8 @@ var hasTarget:bool = false
 
 func _init():
 	id = "PenisSizeIncTF"
+	
+	pointsOnUnlock = 5
 
 func getName() -> String:
 	return "Increases length of penis"
@@ -12,9 +14,19 @@ func getName() -> String:
 func getPillName() -> String:
 	return "SuperShaft"
 
+func getUnlockData() -> Dictionary:
+	return {
+		eliza = "Fascinating! This pill appears to contain a blend of growth factors and vasodilators that could promote penile lengthening. When ingested, it will probably lead to a noticeable increase in size. I think I’ll call it.. 'SuperShaft.' If you want my advice.. A big cock sounds nice.. but at some point it hurts more than it pleases.",
+	}
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"penis": true,
+	}
+
+func getPillFluidsRequired() -> Dictionary:
+	return {
+		"Milk": 1200.0,
 	}
 
 func isPossibleFor(_char) -> bool:
@@ -55,8 +67,8 @@ func getMaxStage() -> int:
 	
 func getTimerForStage(_theStage:int) -> int:
 	if(_theStage == 0):
-		return 120
-	return 240
+		return 300
+	return 60*60*5
 	
 func doProgress(_context:Dictionary) -> Dictionary:
 	if(hasTarget):

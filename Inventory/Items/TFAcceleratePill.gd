@@ -40,11 +40,11 @@ func addsIntoxication():
 
 func getTimedBuffs():
 	return [
-		buff(Buff.TransformationSpeedBuff, [1000.0]),
+		buff(Buff.TransformationSpeedBuff, [5000.0]),
 	]
 
 func getBuffsDurationSeconds():
-	return 60*5
+	return 60*20
 
 func getTimedBuffsTurns():
 	return [

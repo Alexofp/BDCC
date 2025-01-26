@@ -6,6 +6,8 @@ var nipsStage:int = 0
 
 func _init():
 	id = "HuCow"
+	
+	pointsOnUnlock = 25
 
 func getName() -> String:
 	return "HuCow transformation"
@@ -21,6 +23,11 @@ func getUnlockData() -> Dictionary:
 func getTFCheckTags() -> Dictionary:
 	return {
 		"breasts": true,
+	}
+
+func getPillFluidsRequired() -> Dictionary:
+	return {
+		"Milk": 10000.0,
 	}
 
 func getSexGoalWeightModifier(_sexGoalID:String) -> float:
@@ -79,8 +86,12 @@ func canTransformFurther() -> bool:
 	
 func getTimerForStage(_theStage:int) -> int:
 	if(_theStage == 0):
-		return 120
-	return 240
+		return 600
+	if(_theStage == 1):
+		return 1000
+	if(_theStage == 2):
+		return 2000
+	return 60*60*20
 	
 func doProgress(_context:Dictionary) -> Dictionary:
 	var allSteps:Array = getPossibleSteps(getChar())

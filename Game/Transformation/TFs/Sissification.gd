@@ -8,6 +8,8 @@ var penisStage:int = 0
 
 func _init():
 	id = "Sissification"
+	
+	pointsOnUnlock = 15
 
 func getName() -> String:
 	return "Sissification"
@@ -15,9 +17,19 @@ func getName() -> String:
 func getPillName() -> String:
 	return "SissiMoldPro"
 
+func getUnlockData() -> Dictionary:
+	return {
+		eliza = "Ooh, what do we have here! You found such a little gem. This pill looks like it's packed with estrogen.. a very targeted kind of estrogen that doesn't replace testosterone.. but suppresses it instead. When taken, it will probably enhance those softer, more feminine traits while making you crave a little more submission. So much fun! I will call it.. 'SissiMoldPro'! Because it does just that~.",
+	}
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"gender": true,
+	}
+
+func getPillFluidsRequired() -> Dictionary:
+	return {
+		"Cum": 3000.0,
 	}
 
 func getSexGoalWeightModifier(_sexGoalID:String) -> float:
@@ -86,8 +98,8 @@ func canTransformFurther() -> bool:
 	
 func getTimerForStage(_theStage:int) -> int:
 	if(_theStage == 0):
-		return 120
-	return 240
+		return 500
+	return 60*60*10
 	
 func doProgress(_context:Dictionary) -> Dictionary:
 	var allSteps:Array = getPossibleSteps(getChar())

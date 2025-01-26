@@ -8,3 +8,6 @@ func getVisibleName():
 
 func getCumOverlayColor():
 	return Color.lightgray
+
+func canStoreInFluidTank() -> bool:
+	return false

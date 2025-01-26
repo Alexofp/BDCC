@@ -4,6 +4,8 @@ var removedPenis:bool = false
 
 func _init():
 	id = "RemovePenisTF"
+	
+	pointsOnUnlock = 10
 
 func getName() -> String:
 	return "Removes penis"
@@ -11,9 +13,19 @@ func getName() -> String:
 func getPillName() -> String:
 	return "CockBeGone"
 
+func getUnlockData() -> Dictionary:
+	return {
+		eliza = "Aw, this pill is such a buzz kill. It has hormonal blockers and tissue-regulating agents that could target penile tissue. Oh yeah, it will fully get rid of all of the penile tissue in fact. There is only one name for such a pill: 'CockBeGone'.",
+	}
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"penis": true,
+	}
+
+func getPillFluidsRequired() -> Dictionary:
+	return {
+		"GirlCum": 500.0,
 	}
 
 func isPossibleFor(_char) -> bool:
@@ -35,8 +47,8 @@ func canTransformFurther() -> bool:
 	
 func getTimerForStage(_theStage:int) -> int:
 	if(_theStage == 0):
-		return 120
-	return 240
+		return 200
+	return 60*60*5
 	
 func doProgress(_context:Dictionary) -> Dictionary:
 	if(removedPenis):

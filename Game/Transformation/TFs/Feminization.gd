@@ -7,6 +7,8 @@ var switchedhair:bool = false
 
 func _init():
 	id = "Feminization"
+	
+	pointsOnUnlock = 15
 
 func getName() -> String:
 	return "Feminization"
@@ -23,6 +25,11 @@ func getTFCheckTags() -> Dictionary:
 	return {
 		"gender": true,
 		"breasts": true,
+	}
+
+func getPillFluidsRequired() -> Dictionary:
+	return {
+		"Cum": 1000.0,
 	}
 
 #func getSexGoalWeightModifier(_sexGoalID:String) -> float:
@@ -135,8 +142,8 @@ func canTransformFurther() -> bool:
 	
 func getTimerForStage(_theStage:int) -> int:
 	if(_theStage == 0):
-		return 120
-	return 240
+		return 200
+	return 60*60*10
 	
 func doProgress(_context:Dictionary) -> Dictionary:
 	var allSteps:Array = getPossibleSteps(getChar())

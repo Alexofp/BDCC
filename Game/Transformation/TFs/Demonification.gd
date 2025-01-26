@@ -2,6 +2,8 @@ extends "res://Game/Transformation/TFs/SpeciesTF.gd"
 
 func _init():
 	id = "Demonification"
+	
+	pointsOnUnlock = 15
 
 func getName() -> String:
 	return "Demonification"
@@ -13,6 +15,16 @@ func getTFCheckTags() -> Dictionary:
 	return {
 		"species": true,
 	}
+
+func getPillFluidsRequired() -> Dictionary:
+	return {
+		"Cum": 1000.0,
+	}
+
+func getTimerForStage(_theStage:int) -> int:
+	if(_theStage == 0):
+		return 300
+	return 60*60*5*_theStage
 
 func isPossibleFor(_char) -> bool:
 	if(Species.Demon in _char.getSpecies()):

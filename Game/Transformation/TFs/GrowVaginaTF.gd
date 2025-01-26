@@ -4,6 +4,8 @@ var addedVag:bool = false
 
 func _init():
 	id = "GrowVaginaTF"
+	
+	pointsOnUnlock = 10
 
 func getName() -> String:
 	return "Grows a pussy"
@@ -19,6 +21,11 @@ func getUnlockData() -> Dictionary:
 func getTFCheckTags() -> Dictionary:
 	return {
 		"growvag": true,
+	}
+
+func getPillFluidsRequired() -> Dictionary:
+	return {
+		"GirlCum": 1500.0,
 	}
 
 func isPossibleFor(_char) -> bool:
@@ -38,8 +45,8 @@ func canTransformFurther() -> bool:
 	
 func getTimerForStage(_theStage:int) -> int:
 	if(_theStage == 0):
-		return 120
-	return 240
+		return 200
+	return 60*60
 	
 func doProgress(_context:Dictionary) -> Dictionary:
 	if(getStage() == 0):

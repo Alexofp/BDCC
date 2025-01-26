@@ -29,8 +29,8 @@ func _run():
 		else:
 			addButton("Continue", "You changed..", "endthescene")
 		
-		if(true):
-			addButton("UNDO ALL", "See what happens..", "undoall")
+		#if(true):
+		#	addButton("UNDO ALL", "See what happens..", "undoall")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):

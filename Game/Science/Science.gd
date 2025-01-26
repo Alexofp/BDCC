@@ -18,35 +18,42 @@ const DIFFICULTY_MEDIUM = 1
 const DIFFICULTY_HARD = 2
 const DIFFICULTY_VERY_HARD = 3
 
+#MAX SCIENCE FOR UNLOCKING TFS: 275
+#MAX SCIENCE FOR UNLOCKING+TESTING TFS: 1100
+# ALL UPGRADES COST: 900
+
+# Base tank capacity 1000
+# Upgrade 1 capacity 3000
+# Upgrade 2 capacity 10000
+# Upgrade 3 capacity 25000
+# Upgrade 4 capacity 100000
+
+# POSSIBLE FLUIDS
+# Cum
+# Milk
+# GirlCum
+# BlackGoo
+# WhiteGoo
+# IvyNectar
+
+#Can't store:
+# CumLube
+# HealingGel
+# HotWax
+# Piss
+
+
+
 var upgradesInfo:Dictionary = {
-	"advBreastPump": {
-		name = "Breast Pump Mk2",
-		desc = "Unlocks a prototype of an advanced breast pump that you can buy in the medical vendomat.",
-		cost = 50,
-		requiredUpgrades = [],
-	},
-	"advPenisPump": {
-		name = "Penis Pump Mk2",
-		desc = "Unlocks a prototype of an advanced penis pump that you can buy in the medical vendomat.",
-		cost = 50,
-		requiredUpgrades = [],
-	},
-	"configurableDrugs": {
-		name = "Custom drugs",
-		desc = "Allows you to 'configure' certain types of drugs when making them.",
-		cost = 50,
-		requiredUpgrades = [],
-		main = true,
-	},
 	"TFAcceleratePill": {
 		name = "QuickShift Pill",
 		desc = "Allows you to make 'QuickShift' pills that speed up the process of transformation greatly.",
-		cost = 10,
+		cost = 15,
 		requiredUpgrades = [],
 		items = {
 			"TFAcceleratePill": {
 				fluids = {
-					"Cum": 69.0,
+					"Milk": 250.0,
 				},
 			},
 		},
@@ -54,12 +61,13 @@ var upgradesInfo:Dictionary = {
 	"TFApplyPill": {
 		name = "MorphIn Pill",
 		desc = "Allows you to make 'MorphIn' pills that make all transformations permanent.",
-		cost = 10,
-		requiredUpgrades = [],
+		cost = 30,
+		requiredUpgrades = ["TFAcceleratePill"],
 		items = {
 			"TFApplyPill": {
 				fluids = {
-					"Cum": 69.0,
+					"Milk": 500.0,
+					"Cum": 100.0,
 				},
 			},
 		},
@@ -67,12 +75,58 @@ var upgradesInfo:Dictionary = {
 	"TFUndoPill": {
 		name = "MorphAway Pill",
 		desc = "Allows you to make 'MorphAway' pills that undo all transformations.",
-		cost = 10,
-		requiredUpgrades = [],
+		cost = 50,
+		requiredUpgrades = ["TFAcceleratePill"],
 		items = {
 			"TFUndoPill": {
 				fluids = {
-					"Cum": 69.0,
+					"Milk": 400.0,
+					"GirlCum": 100.0,
+				},
+			},
+		},
+	},
+	
+	
+	"BasicPills": {
+		name = "Basic pills",
+		desc = "Lets you use fluids to create some of the non-transformative drugs: Heat pills, Breeder pills, Birth control pills, Anaphrodisiac pills.",
+		cost = 30,
+		requiredUpgrades = [],
+		items = {
+			"HeatPill": {
+				fluids = {
+					"Milk": 200.0,
+					"Cum": 100.0,
+				},
+			},
+			"BreederPill": {
+				fluids = {
+					"Cum": 200.0,
+				},
+			},
+			"BirthControlPill": {
+				fluids = {
+					"Milk": 200.0,
+				},
+			},
+			"AnaphrodisiacPill": {
+				fluids = {
+					"GirlCum": 200.0,
+				},
+			},
+		},
+	},
+	"EnergyDrink": {
+		name = "Energy drink",
+		desc = "Download a recipe of the most generic energy drink, allowing you to create them.",
+		cost = 40,
+		requiredUpgrades = ["BasicPills"],
+		items = {
+			"EnergyDrink": {
+				fluids = {
+					"Milk": 700.0,
+					"GirlCum": 100.0,
 				},
 			},
 		},
@@ -80,12 +134,13 @@ var upgradesInfo:Dictionary = {
 	"painkillers": {
 		name = "Painkillers",
 		desc = "Allows you to make painkillers.",
-		cost = 10,
-		requiredUpgrades = [],
+		cost = 50,
+		requiredUpgrades = ["BasicPills"],
 		items = {
 			"painkillers": {
 				fluids = {
-					"Cum": 69.0,
+					"Milk": 2500.0,
+					"Cum": 500.0,
 				},
 			},
 		},
@@ -93,72 +148,73 @@ var upgradesInfo:Dictionary = {
 	"strangepill": {
 		name = "Strange pill",
 		desc = "As you unlock more and more pills, it's becoming harder to find ones that you haven't seen before. This upgrade allows you to spend some Science Points and a lot of fluids to try to create a new strange pill from scratch by generating and assembling random molecular structures. Each pill will cost more than the last!",
-		cost = 10,
-		requiredUpgrades = [],
+		cost = 50,
+		requiredUpgrades = ["painkillers", "EnergyDrink"],
+		main = true,
 		items = {
 			"TFPill": {
 				science = 10,
 				fluids = {
-					"Cum": 69.0,
+					"Milk": 2500.0,
+					"Cum": 1000.0,
+					"GirlCum": 2500.0,
 				},
 			},
 		},
 	},
+	
+	
 	"cheaperCrafts1": {
 		name = "Lab efficiency 1",
 		desc = "Lowers the amount of fluids you need to create something by 10%.",
 		cost = 10,
 		drugAmount = 2,
-		requiredUpgrades = [],
+		requiredUpgrades = ["TFAcceleratePill"],
 		main = true,
 	},
+	
+	"shower1": {
+		name = "Smart Shower",
+		desc = "Install a special shower that will wash off any fluids from your body and deposit them into the fluid tanks.",
+		cost = 20,
+		requiredUpgrades = ["cheaperCrafts1"],
+	},
+	
 	"cheaperCrafts2": {
 		name = "Lab efficiency 2",
 		desc = "Lowers the amount of fluids you need to create something by an additional 15%.",
-		cost = 30,
+		cost = 35,
 		drugAmount = 5,
 		requiredUpgrades = ["cheaperCrafts1"],
 		main = true,
 	},
-	"cheaperCrafts3": {
-		name = "Lab efficiency 3",
-		desc = "Lowers the amount of fluids you need to create something by an additional 25%.",
-		cost = 50,
-		drugAmount = 10,
-		requiredUpgrades = ["cheaperCrafts2"],
-		main = true,
-	},
-	"shower1": {
-		name = "Special shower",
-		desc = "Install a special shower that will wash off any fluids from your body and deposit them into the fluid tanks.",
-		cost = 20,
-		requiredUpgrades = [],
-	},
+	
 	"shower2": {
 		name = "Shower Douche",
 		desc = "Upgrade the shower, allowing it to also collect fluids from inside your holes!",
 		cost = 20,
-		requiredUpgrades = ["shower1"],
+		requiredUpgrades = ["shower1", "cheaperCrafts2"],
 		main = true,
 	},
-	"bluespaceStash": {
-		name = "Bluespace Stash",
-		desc = "Allows you to access your private stash from inside the lab!",
-		cost = 30,
-		requiredUpgrades = [],
+	
+	"cheaperCrafts3": {
+		name = "Lab efficiency 3",
+		desc = "Lowers the amount of fluids you need to create something by an additional 25%.",
+		cost = 60,
+		drugAmount = 10,
+		requiredUpgrades = ["cheaperCrafts2"],
+		main = true,
 	},
-	"fluidInspector": {
-		name = "Fluid inspector",
-		desc = "Install a special scanner that will allow you to closely inspect any fluid container. It will show you the DNA of every fluid in the selected container",
-		cost = 20,
-		requiredUpgrades = [],
+	
+	"configurableDrugs": {
+		name = "Custom drugs",
+		desc = "Allows you to 'configure' certain types of drugs when making them.",
+		cost = 100,
+		requiredUpgrades = ["cheaperCrafts3"],
+		main = true,
 	},
-	"fluidFilter": {
-		name = "Fluid filter",
-		desc = "Install a special fluid filter machine that will allow you to filter out selected fluids from your fluid containers.",
-		cost = 20,
-		requiredUpgrades = [],
-	},
+	
+	
 	"tanksUpgrade1": {
 		name = "Tanks capacity 1",
 		desc = "Expand the lab and install bigger fluid tanks that will hold more fluids.",
@@ -166,6 +222,14 @@ var upgradesInfo:Dictionary = {
 		requiredUpgrades = [],
 		main = true,
 	},
+	
+	"fluidInspector": {
+		name = "Fluid inspector",
+		desc = "Install a special scanner that will allow you to closely inspect any fluid container. It will show you the DNA of every fluid in the selected container",
+		cost = 20,
+		requiredUpgrades = ["tanksUpgrade1"],
+	},
+	
 	"tanksUpgrade2": {
 		name = "Tanks capacity 2",
 		desc = "Expand the lab and install bigger fluid tanks that will hold more fluids.",
@@ -173,6 +237,20 @@ var upgradesInfo:Dictionary = {
 		requiredUpgrades = ["tanksUpgrade1"],
 		main = true,
 	},
+	
+	"fluidFilter": {
+		name = "Fluid filter",
+		desc = "Install a special fluid filter machine that will allow you to filter out selected fluids from your fluid containers.",
+		cost = 20,
+		requiredUpgrades = ["tanksUpgrade2"],
+	},
+	"bluespaceStash": {
+		name = "Bluespace Stash",
+		desc = "Allows you to access your private stash from inside the lab!",
+		cost = 30,
+		requiredUpgrades = ["tanksUpgrade2"],
+	},
+	
 	"tanksUpgrade3": {
 		name = "Tanks capacity 3",
 		desc = "Expand the lab and install bigger fluid tanks that will hold more fluids.",
@@ -180,6 +258,20 @@ var upgradesInfo:Dictionary = {
 		requiredUpgrades = ["tanksUpgrade2"],
 		main = true,
 	},
+	
+	"advBreastPump": {
+		name = "Breast Pump Mk2",
+		desc = "Unlocks a prototype of an advanced breast pump that you can buy in the medical vendomat.",
+		cost = 50,
+		requiredUpgrades = ["tanksUpgrade3"],
+	},
+	"advPenisPump": {
+		name = "Penis Pump Mk2",
+		desc = "Unlocks a prototype of an advanced penis pump that you can buy in the medical vendomat.",
+		cost = 50,
+		requiredUpgrades = ["tanksUpgrade3"],
+	},
+	
 	"tanksUpgrade4": {
 		name = "Tanks capacity 4",
 		desc = "Expand the lab and install bigger fluid tanks that will hold more fluids.",
@@ -187,6 +279,7 @@ var upgradesInfo:Dictionary = {
 		requiredUpgrades = ["tanksUpgrade3"],
 		main = true,
 	},
+	
 }
 
 func isUpgradeVisible(upgradeID:String) -> bool:
@@ -392,7 +485,7 @@ func doTestTF(TFID:String, givePoints:bool = true):
 	testedTFs[TFID] = true
 	if(givePoints):
 		if(tfBase != null):
-			addPoints(tfBase.getUnlockPointsAward()*3)
+			addPoints(tfBase.getTestingPointsAward())
 	if(tfBase != null):
 		GM.main.addMessage("The database now contains full info about "+tfBase.getPillName()+" pills.")
 
@@ -611,8 +704,8 @@ func useFluidsToMakePill(tfID:String, _args:Dictionary = {}) -> ItemBase:
 func getCraftableItems() -> Dictionary:
 	var result:Dictionary = {}
 	
-	for upgradeID in upgrades:
-		if(!upgradesInfo.has(upgradeID)):
+	for upgradeID in upgradesInfo:
+		if(!upgrades.has(upgradeID)):
 			continue
 		var upgradeInfo:Dictionary = upgradesInfo[upgradeID]
 		
@@ -622,7 +715,8 @@ func getCraftableItems() -> Dictionary:
 			for itemID in theItems:
 				result[itemID] = theItems[itemID]
 	
-	result["TFPill"]["science"] = 10 + madeStrangePills * 5
+	if(result.has("TFPill")):
+		result["TFPill"]["science"] = 10 + madeStrangePills * 5
 	
 	return result
 
@@ -678,6 +772,35 @@ func doMilkCharacter(theChar:BaseCharacter):
 		addFluid(fluidType, fluidsGot[fluidType])
 	
 	return fluidsGot
+
+func getMaxScienceFromUnlockingTFs() -> int:
+	var result:int = 0
+	
+	for tfID in GlobalRegistry.getTransformationRefs():
+		var tf:TFBase = GlobalRegistry.getTransformationRef(tfID)
+		result += tf.getUnlockPointsAward()
+	
+	return result
+
+func getMaxScienceFromUnlockingAndTestingTFs() -> int:
+	var result:int = 0
+	
+	for tfID in GlobalRegistry.getTransformationRefs():
+		var tf:TFBase = GlobalRegistry.getTransformationRef(tfID)
+		result += tf.getUnlockPointsAward()
+		result += tf.getTestingPointsAward()
+	
+	return result
+
+func getAllUpgradesScienceCost() -> int:
+	var result:int = 0
+	
+	for upgradeID in upgradesInfo:
+		var upgradeEntry:Dictionary = upgradesInfo[upgradeID]
+		
+		result += upgradeEntry["cost"]
+	
+	return result
 
 func saveData() -> Dictionary:
 	var taskData:Array = []

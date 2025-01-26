@@ -5,6 +5,8 @@ var affectedSlots:Dictionary = {}
 
 func _init():
 	id = "SpeciesTF"
+	
+	pointsOnUnlock = 25
 
 func getName() -> String:
 	return "Changes species"
@@ -15,6 +17,13 @@ func getPillName() -> String:
 func getTFCheckTags() -> Dictionary:
 	return {
 		"species": true,
+	}
+
+func getPillFluidsRequired() -> Dictionary:
+	return {
+		"Milk": 5000.0,
+		"GirlCum": 3000.0,
+		"Cum": 1000.0,
 	}
 
 func start(_args:Dictionary):
@@ -103,8 +112,8 @@ func canTransformFurther() -> bool:
 	
 func getTimerForStage(_theStage:int) -> int:
 	if(_theStage == 0):
-		return 120
-	return 240
+		return 500
+	return 60*60*10 + 60*60*2*_theStage
 	
 func doProgress(_context:Dictionary) -> Dictionary:
 	var allowsRemoving:bool = allowsRemovingParts()

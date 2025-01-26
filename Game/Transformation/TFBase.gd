@@ -123,7 +123,7 @@ func getTimerForStage(_theStage:int) -> int:
 	return 240
 
 func getTimerDeviation() -> float:
-	return 0.3
+	return 0.7
 
 func resetTimer():
 	var deviation:float = getTimerDeviation()
@@ -342,6 +342,9 @@ func getSexGoalWeightModifier(_sexGoalID:String) -> float:
 
 func getUnlockPointsAward() -> int:
 	return pointsOnUnlock
+
+func getTestingPointsAward() -> int:
+	return pointsOnUnlock * 3
 
 func addText(theText:String):
 	if(theText == ""):

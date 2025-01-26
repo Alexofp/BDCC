@@ -7,6 +7,8 @@ var pickedSkin:String = ""
 func _init():
 	id = "SkinTF"
 	#pillGenWeight = 0.0
+	
+	pointsOnUnlock = 10
 
 func getName() -> String:
 	return "Changes colors"
@@ -14,9 +16,19 @@ func getName() -> String:
 func getPillName() -> String:
 	return "CoLore"
 
+func getUnlockData() -> Dictionary:
+	return {
+		eliza = "Well, well! Look what we have here.. This pill seems to be infused with chromatic enhancers and pigment-modifying agents that could completely transform your appearance. When taken, it will probably change your skin or fur colors and patterns to something truly unique. Just think of the possibilities! I will call it.. 'CoLore'!",
+	}
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"skin": true,
+	}
+
+func getPillFluidsRequired() -> Dictionary:
+	return {
+		"Cum": 1000.0,
 	}
 
 func start(_args:Dictionary):
@@ -81,8 +93,8 @@ func canTransformFurther() -> bool:
 	
 func getTimerForStage(_theStage:int) -> int:
 	if(_theStage == 0):
-		return 120
-	return 240
+		return 500
+	return 60*60*2
 	
 func doProgress(_context:Dictionary) -> Dictionary:
 	prog += 0.2

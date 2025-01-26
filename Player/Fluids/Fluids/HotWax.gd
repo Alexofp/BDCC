@@ -45,3 +45,6 @@ func onGettingHitWith(_pc, _amount):
 
 func getCumOverlayColor():
 	return Color.red
+
+func canStoreInFluidTank() -> bool:
+	return false

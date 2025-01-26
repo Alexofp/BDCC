@@ -2,6 +2,8 @@ extends "res://Game/Transformation/TFs/SpeciesTF.gd"
 
 func _init():
 	id = "SpeciesTFMinor"
+	
+	pointsOnUnlock = 15
 
 func getName() -> String:
 	return "Creates a hybrid"
@@ -12,6 +14,13 @@ func getPillName() -> String:
 func getTFCheckTags() -> Dictionary:
 	return {
 		"species": true,
+	}
+
+func getPillFluidsRequired() -> Dictionary:
+	return {
+		"Milk": 2000.0,
+		"GirlCum": 1000.0,
+		"Cum": 200.0,
 	}
 
 func getSlotsToTransform() -> Array:

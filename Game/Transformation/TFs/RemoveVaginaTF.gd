@@ -4,6 +4,8 @@ var removedVag:bool = false
 
 func _init():
 	id = "RemoveVaginaTF"
+	
+	pointsOnUnlock = 10
 
 func getName() -> String:
 	return "Removes pussy"
@@ -11,9 +13,19 @@ func getName() -> String:
 func getPillName() -> String:
 	return "PussyBeGone"
 
+func getUnlockData() -> Dictionary:
+	return {
+		eliza = "Ohh. My crotch is aching just looking at this. This pill will target vaginal tissue.. getting rid of it.. together with the whole reproductive system. 'PussyBeGone' is a good name for it, I guess.",
+	}
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"vagina": true,
+	}
+
+func getPillFluidsRequired() -> Dictionary:
+	return {
+		"GirlCum": 500.0,
 	}
 
 func isPossibleFor(_char) -> bool:
@@ -33,8 +45,8 @@ func canTransformFurther() -> bool:
 	
 func getTimerForStage(_theStage:int) -> int:
 	if(_theStage == 0):
-		return 120
-	return 240
+		return 60*20
+	return 60*60*2
 	
 func doProgress(_context:Dictionary) -> Dictionary:
 	if(removedVag):

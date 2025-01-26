@@ -6,6 +6,8 @@ var specificPartID:String = ""
 
 func _init():
 	id = "GrowPenisRandomTF"
+	
+	pointsOnUnlock = 10
 
 func getName() -> String:
 	return "Grows a random penis"
@@ -21,6 +23,11 @@ func getUnlockData() -> Dictionary:
 func getTFCheckTags() -> Dictionary:
 	return {
 		"growpenis": true,
+	}
+
+func getPillFluidsRequired() -> Dictionary:
+	return {
+		"Milk": 2500.0,
 	}
 
 func isPossibleFor(_char) -> bool:
@@ -70,8 +77,8 @@ func canTransformFurther() -> bool:
 	
 func getTimerForStage(_theStage:int) -> int:
 	if(_theStage == 0):
-		return 120
-	return 240
+		return 500
+	return 60*30
 	
 func doProgress(_context:Dictionary) -> Dictionary:
 	if(getStage() == 0):

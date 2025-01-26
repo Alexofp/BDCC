@@ -44,3 +44,6 @@ func getCost(_amount) -> int:
 
 func getCumOverlayColor():
 	return Color(1.0, 1.0, 1.0, 0.2)
+
+func canStoreInFluidTank() -> bool:
+	return false

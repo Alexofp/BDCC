@@ -26,6 +26,12 @@ func _run():
 		
 		sayTanksVolume()
 		
+		# DEBUG INFO
+		if(true):
+			sayn("MAX SCIENCE FOR UNLOCKING TFS: "+str(GM.main.SCI.getMaxScienceFromUnlockingTFs()))
+			sayn("MAX SCIENCE FOR UNLOCKING+TESTING TFS: "+str(GM.main.SCI.getMaxScienceFromUnlockingAndTestingTFs()))
+			saynn("ALL UPGRADES COST: "+str(GM.main.SCI.getAllUpgradesScienceCost()))
+		
 		addButton("Create", "See what you can create in this lab", "create_menu")
 		addButton("Fluids", "See what you can do with the fluid tanks", "fluid_tanks")
 		addButton("Upgrades", "Look at the list of possible upgrades", "upgrades")
@@ -819,6 +825,24 @@ func getDebugActions():
 			},
 		],
 	},
+	{
+		"id": "unlockAll",
+		"name": "Unlock ALL TFs",
+		"args": [
+		],
+	},
+	{
+		"id": "testAll",
+		"name": "Test ALL TFs",
+		"args": [
+		],
+	},
+	{
+		"id": "lockAll",
+		"name": "Lock ALL TFs",
+		"args": [
+		],
+	},
 	]
 
 func doDebugAction(_id, _args = {}):
@@ -831,6 +855,15 @@ func doDebugAction(_id, _args = {}):
 	if(_id == "testTF"):
 		GM.main.SCI.doUnlockTF(_args["tf"])
 		GM.main.SCI.doTestTF(_args["tf"])
+	if(_id == "unlockAll"):
+		for tfID in GlobalRegistry.getTransformationRefs():
+			GM.main.SCI.doUnlockTF(tfID)
+	if(_id == "testAll"):
+		for tfID in GlobalRegistry.getTransformationRefs():
+			GM.main.SCI.doTestTF(tfID)
+	if(_id == "lockAll"):
+		GM.main.SCI.unlockedTFs.clear()
+		GM.main.SCI.testedTFs.clear()
 
 func saveData():
 	var data = .saveData()
