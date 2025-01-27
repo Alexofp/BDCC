@@ -14,6 +14,11 @@ func getName() -> String:
 func getPillName() -> String:
 	return "ThiCC"
 
+func getUnlockData() -> Dictionary:
+	return {
+		eliza = "This one is packed with growth enhancers and fat distribution agents. When taken, it will probably make you thicker and more.. voluptuous. Sorry but I really want to call it.. 'ThiCC'..",
+	}
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"thickness": true,

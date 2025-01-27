@@ -14,6 +14,11 @@ func getName() -> String:
 func getPillName() -> String:
 	return "SliMM"
 
+func getUnlockData() -> Dictionary:
+	return {
+		eliza = "This pill seems to be formulated with appetite suppressants and fat-burning compounds that could help you shed those extra pounds.. It's like one of those fake ad products.. but this one seems like it will actually work, huh. When taken, it will probably make you thinner.. so I really wanna call it.. 'SliMM'.",
+	}
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"thickness": true,

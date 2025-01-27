@@ -14,6 +14,11 @@ func getName() -> String:
 func getPillName() -> String:
 	return "WildShift"
 
+func getUnlockData() -> Dictionary:
+	return {
+		eliza = "Wow! This one is just.. packed.. with all sorts of DNA. I see a lot of different patterns.. but they do share something in common. I think this one has the potential to completely change you into something else! To override your species! Just imagine the adventures you could have in a new body. I will call it.. 'WildShift'.",
+	}
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"species": true,

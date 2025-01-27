@@ -11,6 +11,11 @@ func getName() -> String:
 func getPillName() -> String:
 	return "Hybridizer"
 
+func getUnlockData() -> Dictionary:
+	return {
+		eliza = "Interesting. This pill contains a DNA of some species. But not enough to override everything.. I think this pill will create a.. hybrid of sorts. A blend of two species. Isn't that cool? I think I will call it.. 'Hybridizer'",
+	}
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"species": true,
