@@ -30,6 +30,7 @@ var RS:RelationshipSystem = RelationshipSystem.new()
 var WHS:WorldHistory = WorldHistory.new()
 var SAB:SlaveAuctionBidders = SlaveAuctionBidders.new()
 var SCI:Science = Science.new()
+var DrugDenRun:DrugDen
 
 var staticCharacters = {}
 var charactersToUpdate = {}
@@ -459,6 +460,7 @@ func saveData():
 	data["relationshipSystem"] = RS.saveData()
 	data["auctionBidders"] = SAB.saveData()
 	data["science"] = SCI.saveData()
+	data["drugDen"] = DrugDenRun.saveData() if DrugDenRun != null else null
 	
 	data["scenes"] = []
 	for scene in sceneStack:
@@ -494,6 +496,7 @@ func loadData(data):
 	RS.loadData(SAVE.loadVar(data, "relationshipSystem", {}))
 	SAB.loadData(SAVE.loadVar(data, "auctionBidders", {}))
 	SCI.loadData(SAVE.loadVar(data, "science", {}))
+		
 	
 	var scenes = SAVE.loadVar(data, "scenes", [])
 	
@@ -518,6 +521,13 @@ func loadData(data):
 	
 	IS.resetExtraText()
 	GM.ui.recreateWorld()
+	
+	if(data.has("drugDen") && data["drugDen"] is Dictionary):
+		DrugDenRun = DrugDen.new()
+		DrugDenRun.loadData(SAVE.loadVar(data, "drugDen", {}))
+	else:
+		DrugDenRun = null
+	
 	GM.world.loadData(SAVE.loadVar(data, "world", {}))
 	#GM.world.updatePawns(IS)
 	#GM.world.setPawnsShowed(canShowPawns())
@@ -1854,3 +1864,9 @@ func canShowPawns() -> bool:
 		if(!scene.supportsShowingPawns()):
 			return false
 	return true
+
+func isInDungeon() -> bool:
+	return DrugDenRun != null
+
+func isOnDrugDenRun() -> bool:
+	return DrugDenRun != null

@@ -67,6 +67,7 @@ export(int) var lootEveryXDays = 0
 
 var astarID
 export(PoolStringArray) var astarConnectedTo = PoolStringArray()
+var astarConnections:Array = []
 
 var floorID = ""
 

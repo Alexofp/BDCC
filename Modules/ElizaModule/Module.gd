@@ -45,3 +45,6 @@ func hasLabAccess():
 
 func canSendSlavesToBeMilked():
 	return true
+
+func canStartDrugDenRun():
+	return true

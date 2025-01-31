@@ -510,6 +510,11 @@ _global_script_classes=[ {
 "path": "res://Player/Player3D/DollSkeleton.gd"
 }, {
 "base": "Reference",
+"class": "DrugDen",
+"language": "GDScript",
+"path": "res://Game/DrugDen/DrugDen.gd"
+}, {
+"base": "Reference",
 "class": "DynCharExtraSettings",
 "language": "GDScript",
 "path": "res://Characters/Dynamic/DynCharExtraSettings.gd"
@@ -1740,6 +1745,7 @@ _global_script_class_icons={
 "Doll3D": "",
 "DollAttachmentZone": "",
 "DollSkeleton": "",
+"DrugDen": "",
 "DynCharExtraSettings": "",
 "DynamicCharacter": "",
 "EggCell": "",
