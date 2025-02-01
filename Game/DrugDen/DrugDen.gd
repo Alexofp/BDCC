@@ -11,6 +11,8 @@ var map:Dictionary = {}
 var startLevelRoom:String = ""
 var nextLevelRoom:String = ""
 
+var savedCredits:int = 0
+
 func generateMap():
 	var result:Array = []
 	map = {}
@@ -77,9 +79,32 @@ func start():
 	generateMap()
 	buildMap()
 	GM.pc.setLocation(startLevelRoom)
+	
+	var theStashChar = GlobalRegistry.getCharacter("DrugDenStash")
+	var pcItems:Array = GM.pc.getInventory().getItems()
+	var itemAmount:int = pcItems.size()
+	for _i in range(itemAmount):
+		var theItem = pcItems[itemAmount - _i -1]
+		
+		GM.pc.getInventory().removeItem(theItem)
+		theStashChar.getInventory().addItem(theItem)
 
-func end():
+	savedCredits = GM.pc.getCredits()
+	GM.pc.addCredits(-savedCredits)
+
+func endRun():
 	GM.world.clearFloor(DrugDenFloor)
+	
+	var theStashChar = GlobalRegistry.getCharacter("DrugDenStash")
+	var stashItems:Array = theStashChar.getInventory().getItems()
+	var itemAmount:int = stashItems.size()
+	for _i in range(itemAmount):
+		var theItem = stashItems[itemAmount - _i -1]
+		
+		theStashChar.getInventory().removeItem(theItem)
+		GM.pc.getInventory().addItem(theItem)
+	
+	GM.pc.addCredits(savedCredits)
 
 func nextLevel():
 	level += 1
@@ -105,6 +130,8 @@ func saveData():
 		level = level,
 		map = map,
 		startLevelRoom = startLevelRoom,
+		nextLevelRoom = nextLevelRoom,
+		savedCredits = savedCredits,
 	}
 
 func loadData(_data:Dictionary):
@@ -113,4 +140,5 @@ func loadData(_data:Dictionary):
 	map = SAVE.loadVar(_data, "map", {})
 	startLevelRoom = SAVE.loadVar(_data, "startLevelRoom", "")
 	nextLevelRoom = SAVE.loadVar(_data, "nextLevelRoom", "")
+	savedCredits = SAVE.loadVar(_data, "savedCredits", 0)
 	buildMap()

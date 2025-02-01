@@ -938,10 +938,13 @@ func updateStuff():
 	if(GM.pc == null):
 		return
 	
+	var isDrugDen:bool = isOnDrugDenRun()
 	var playerIsBlindfolded = GM.pc.isBlindfolded()
-	GM.world.setDarknessVisible(playerIsBlindfolded)
-	if(playerIsBlindfolded):
-		if(GM.pc.canHandleBlindness()):
+	GM.world.setDarknessVisible(playerIsBlindfolded || isDrugDen)
+	if(playerIsBlindfolded || isDrugDen):
+		if(isDrugDen && !playerIsBlindfolded):
+			GM.world.setDarknessSize(64)
+		elif(GM.pc.canHandleBlindness()):
 			GM.world.setDarknessSize(64)
 		else:
 			GM.world.setDarknessSize(16)
@@ -1870,3 +1873,8 @@ func isInDungeon() -> bool:
 
 func isOnDrugDenRun() -> bool:
 	return DrugDenRun != null
+
+func stopDungeonRun():
+	if(DrugDenRun != null):
+		DrugDenRun.endRun()
+	DrugDenRun = null

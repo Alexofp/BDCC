@@ -337,26 +337,43 @@ func aimCamera(roomID, instantly = false):
 
 func zoomIn(mult:float = 1.0):
 	camera.zoom *= 1.1 * mult
+	updateDarknessSize()
 
 func zoomOut(mult:float = 1.0):
 	camera.zoom *= 0.9 / mult
+	updateDarknessSize()
 
 func zoomReset():
 	camera.zoom = Vector2(1.0, 1.0)
+	updateDarknessSize()
+
+onready var darkness_control = $CanvasLayer/DarknessControl
+onready var d_center = $CanvasLayer/DarknessControl/DCenter
+onready var d_top = $CanvasLayer/DarknessControl/DTop
+onready var d_bottom = $CanvasLayer/DarknessControl/DBottom
+onready var d_left = $CanvasLayer/DarknessControl/DLeft
+onready var d_right = $CanvasLayer/DarknessControl/DRight
 
 func setDarknessVisible(vis):
-	$CanvasLayer/DarknessControl.visible = vis
+	darkness_control.visible = vis
 
+var savedDarknessSize:float = 32.0
 func setDarknessSize(darknessSize):
-	$CanvasLayer/DarknessControl/DCenter.margin_left = -darknessSize
-	$CanvasLayer/DarknessControl/DCenter.margin_top = -darknessSize
-	$CanvasLayer/DarknessControl/DCenter.margin_right = darknessSize
-	$CanvasLayer/DarknessControl/DCenter.margin_bottom = darknessSize
+	savedDarknessSize = darknessSize
+	updateDarknessSize()
 
-	$CanvasLayer/DarknessControl/DTop.margin_bottom = -darknessSize + 0.5
-	$CanvasLayer/DarknessControl/DBottom.margin_top = darknessSize - 0.5
-	$CanvasLayer/DarknessControl/DLeft.margin_right = -darknessSize + 0.5
-	$CanvasLayer/DarknessControl/DRight.margin_left = darknessSize - 0.5
+func updateDarknessSize():
+	var darknessSize:float = savedDarknessSize * 2.0 / max(camera.zoom.x, 0.1)
+	
+	d_center.margin_left = -darknessSize
+	d_center.margin_top = -darknessSize
+	d_center.margin_right = darknessSize
+	d_center.margin_bottom = darknessSize
+
+	d_top.margin_bottom = -darknessSize + 0.5
+	d_bottom.margin_top = darknessSize - 0.5
+	d_left.margin_right = -darknessSize + 0.5
+	d_right.margin_left = darknessSize - 0.5
 
 func clearPawns():
 	for pawnID in pawns:

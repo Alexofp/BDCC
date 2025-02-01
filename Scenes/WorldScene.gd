@@ -48,7 +48,10 @@ func _run():
 	if(GM.pc.getInventory().hasRemovableRestraints()):
 		addButtonAt(8, "Struggle", "Struggle against your restraints", "struggle")
 	addButtonAt(9, "Me", "Shows actions related to you and also your personal information", "me")
-	addButtonAt(13, "Tasks", "Look at your tasks", "tasks")
+	if(GM.main.isInDungeon()):
+		addButtonAt(13, "Give up", "Give up exploring this place", "giveupdungeon")
+	else:
+		addButtonAt(13, "Tasks", "Look at your tasks", "tasks")
 	addButtonAt(14, "Inventory", "Look at your inventory", "inventory")
 	#addButtonAt(5, "Sex Test", "Sex test", "sextest")
 	#addButtonAt(7, "Slave Test", "Slave test", "slavetest")
@@ -98,7 +101,8 @@ func _react(_action: String, _args):
 		if(!GM.main.checkTFs()):
 			GM.main.showLog()
 			
-
+	if(_action == "giveupdungeon"):
+		runScene("DrugDenGiveUpScene")
 	if(_action == "inventory"):
 		runScene("InventoryScene")
 	if(_action == "tasks"):

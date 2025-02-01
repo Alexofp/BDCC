@@ -16,9 +16,7 @@ smoothing_enabled = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+mouse_filter = 2
 
 [node name="DCenter" type="TextureRect" parent="CanvasLayer/DarknessControl"]
 anchor_left = 0.5
@@ -29,6 +27,7 @@ margin_left = -32.0
 margin_top = -32.0
 margin_right = 32.0
 margin_bottom = 32.0
+mouse_filter = 2
 texture = ExtResource( 1 )
 expand = true
 
@@ -36,25 +35,22 @@ expand = true
 anchor_right = 1.0
 anchor_bottom = 0.5
 margin_bottom = -32.0
+mouse_filter = 2
 color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="DBottom" type="ColorRect" parent="CanvasLayer/DarknessControl"]
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 32.0
+mouse_filter = 2
 color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="DLeft" type="ColorRect" parent="CanvasLayer/DarknessControl"]
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_right = -32.0
+mouse_filter = 2
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -65,7 +61,5 @@ anchor_left = 0.5
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 32.0
+mouse_filter = 2
 color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}

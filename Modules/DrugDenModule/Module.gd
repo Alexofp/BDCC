@@ -10,8 +10,10 @@ func _init():
 	author = "Rahi"
 	
 	scenes = [
+		"res://Modules/DrugDenModule/DrugDen/DrugDenGiveUpScene.gd",
 		]
 	characters = [
+		"res://Modules/DrugDenModule/DrugDen/DrugDenStash.gd",
 	]
 	items = []
 	events = [
