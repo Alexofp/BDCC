@@ -170,6 +170,8 @@ func setBigAnswersMode(newmode):
 			button.visible = true
 	isInBigAnswersMode = newmode
 
+onready var save_button = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer2/SaveButton
+
 func updateButtons():
 	checkPageButtons()
 	
@@ -178,7 +180,11 @@ func updateButtons():
 			rollbackButton.disabled = false
 		else:
 			rollbackButton.disabled = true
-	
+		if(GM.main.canSave()):
+			save_button.disabled = false
+		else:
+			save_button.disabled = true
+		
 	for i in buttonsCountPerPage:
 		var button:Button = buttons[i]
 		button.disabled = true

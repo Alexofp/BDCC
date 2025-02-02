@@ -515,6 +515,11 @@ _global_script_classes=[ {
 "path": "res://Game/DrugDen/DrugDen.gd"
 }, {
 "base": "Reference",
+"class": "DungeonMapGenerator",
+"language": "GDScript",
+"path": "res://Game/DrugDen/DungeonMapGenerator.gd"
+}, {
+"base": "Reference",
 "class": "DynCharExtraSettings",
 "language": "GDScript",
 "path": "res://Characters/Dynamic/DynCharExtraSettings.gd"
@@ -1746,6 +1751,7 @@ _global_script_class_icons={
 "DollAttachmentZone": "",
 "DollSkeleton": "",
 "DrugDen": "",
+"DungeonMapGenerator": "",
 "DynCharExtraSettings": "",
 "DynamicCharacter": "",
 "EggCell": "",

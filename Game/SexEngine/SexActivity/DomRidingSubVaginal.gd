@@ -878,7 +878,7 @@ func doSubAction(_id, _actionInfo):
 		domInfo.addLust(5)
 		return {text = text}
 	if(_id == "throwoff"):
-		if(getSubResistChance(30.0, 25.0)):
+		if(RNG.chance(getSubResistChance(30.0, 25.0))):
 			if(state != ""):
 				state = ""
 				isMakingOut = false

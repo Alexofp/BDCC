@@ -5,8 +5,17 @@ var npcID:String = ""
 func _init():
 	sceneID = "DrugDenEncounterTemplateScene"
 
+func generateJunkieNPCID() -> String:
+	var theGenerator := InmateGenerator.new()
+	var theChar:BaseCharacter = theGenerator.generate({
+		NpcGen.Temporary: true,
+	})
+	var theID:String = theChar.id
+	
+	return theID
+
 func startFightWithNPC():
-	runScene("Fightscene", [npcID], "encounterFight")
+	runScene("FightScene", [npcID], "encounterFight")
 
 func _react_scene_end(_tag, _result):
 	if(_tag == "encounterFight"):
@@ -14,14 +23,15 @@ func _react_scene_end(_tag, _result):
 		var battlestate = _result[0]
 		
 		if(battlestate == "win"):
-			setState("won_encounter")
+			#setState("won_encounter")
+			endScene()
 			addExperienceToPlayer(10)
 		else:
 			setState("lost_encounter")
 
 	if(_tag == "defeated_sex"):
 		var gotUncon:bool = false
-		var sexResult:Dictionary = _result
+		var sexResult:Dictionary = _result[0]
 		if(sexResult.has("subs")):
 			var subs:Dictionary = sexResult["subs"]
 			if(subs.has("pc")):
@@ -97,10 +107,10 @@ func encounter_run():
 func encounter_react(_action: String, _args):
 	if(_action == "start_defeated_sex"):
 		getCharacter(npcID).prepareForSexAsDom()
-		runScene("GenericSexScene", [npcID, "pc"], "defeated_sex")
+		runScene("GenericSexScene", [npcID, "pc", SexType.DefaultSex, {subMustGoUnconscious=true}], "defeated_sex")
 		return true
 	if(_action == "encounter_endrun"):
-		GM.main.processTimeUntil(23*60*60)
+		GM.main.processTime(2*60*60)
 		GM.pc.setLocation("medical_hospitalwards")
 		GM.main.stopDungeonRun()
 		GM.pc.addPain(-GM.pc.getPain())

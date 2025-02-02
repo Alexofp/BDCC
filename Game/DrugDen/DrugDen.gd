@@ -19,42 +19,33 @@ func generateMap():
 	
 	var targetMapSize:int = 10
 	
-	var curPos:Vector2 = Vector2(0, 0)
-	
-	var simpleLayout:Dictionary = {}
-	simpleLayout[curPos] = true
-	var lastAction:String = ""
-	
-	# Simple walker
-	while(simpleLayout.size() < targetMapSize):
-		var toAct:String = RNG.pick(["goN", "goS", "goE", "goW"])
-		if(lastAction != "" && RNG.chance(25)):
-			toAct = lastAction
-		lastAction = toAct
-		if(toAct == "goN"):
-			curPos.y += 1
-		if(toAct == "goS"):
-			curPos.y -= 1
-		if(toAct == "goE"):
-			curPos.x -= 1
-		if(toAct == "goW"):
-			curPos.x += 1
-		
-		if(!simpleLayout.has(curPos)):
-			simpleLayout[curPos] = true
-	
+	var dunGen:DungeonMapGenerator = DungeonMapGenerator.new()
+	dunGen.generate({
+		mainPathLen = targetMapSize,
+	})
+	var randomEventsPosList:Array = dunGen.findRandomSpots(3)
 	
 	var mapIndex:int = 1
-	for pos in simpleLayout:
+	var posToIDMap:Dictionary = {}
+	for thePos in dunGen.map:
+		#var theCellInfo:Dictionary = dunGen.map[thePos]
 		var thisRoomID:String = "drugDenRoom"+str(mapIndex)
 		
-		map[pos] = {id=thisRoomID}
+		posToIDMap[thePos] = thisRoomID
+		map[thePos] = {id=thisRoomID,
+			canN=dunGen.canGo(thePos, DungeonMapGenerator.DIR_N),
+			canS=dunGen.canGo(thePos, DungeonMapGenerator.DIR_S),
+			canE=dunGen.canGo(thePos, DungeonMapGenerator.DIR_E),
+			canW=dunGen.canGo(thePos, DungeonMapGenerator.DIR_W),
+			isEvent = (thePos in randomEventsPosList),
+			isDeadend = (thePos in dunGen.deadends),
+			}
 		result.append(thisRoomID)
 		
 		mapIndex += 1
 	
-	startLevelRoom = result.front()
-	nextLevelRoom = result.back()
+	startLevelRoom = posToIDMap[dunGen.startPos]
+	nextLevelRoom = posToIDMap[dunGen.endPos]
 	
 	return result
 
@@ -67,14 +58,24 @@ func buildMap():
 		var theIcon = RoomStuff.RoomSprite.NONE
 		if(roomID == nextLevelRoom):
 			theIcon = RoomStuff.RoomSprite.STAIRS
+		if(roomInfo["isEvent"]):
+			theIcon = RoomStuff.RoomSprite.PERSON
+		if(roomInfo["isDeadend"]):
+			theIcon = RoomStuff.RoomSprite.IMPORTANT
 		
 		GM.world.addRoom(DrugDenFloor, roomInfo["id"], pos, {
 			icon = theIcon,
+			canW = roomInfo["canW"],
+			canE = roomInfo["canE"],
+			canS = roomInfo["canS"],
+			canN = roomInfo["canN"],
 		})
 	GM.world.addTransitions([DrugDenFloor])
 
 func start():
 	level = 1
+	
+	#GM.main.IS.deleteAllNonImportantPawns()
 	
 	generateMap()
 	buildMap()

@@ -414,6 +414,13 @@ func applyWorldEdit(id):
 		worldEdits[id].apply(GM.world)
 
 func canSave():
+	if(isInDungeon() && !OPTIONS.canSaveInDungeons()):
+		return false
+	return true
+
+func canRollback():
+	if(isInDungeon() && !OPTIONS.canSaveInDungeons()):
+		return false
 	return true
 
 func supportsBattleTurns():

@@ -77,6 +77,7 @@ text = "Main Menu"
 [node name="DatapackIngameMenu" parent="." instance=ExtResource( 5 )]
 visible = false
 
+[connection signal="visibility_changed" from="." to="." method="_on_InGameMenu_visibility_changed"]
 [connection signal="onClosePressed" from="LoadGameScreen" to="." method="_on_LoadGameScreen_onClosePressed"]
 [connection signal="onClosePressed" from="SaveGameScreen" to="." method="_on_SaveGameScreen_onClosePressed"]
 [connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]

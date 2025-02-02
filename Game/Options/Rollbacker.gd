@@ -20,6 +20,8 @@ func pushRollbackState():
 			rollbackStates.pop_front()
 			
 func canRollback():
+	if(GM.main != null && !GM.main.canRollback()):
+		return false
 	return rollbackStates.size() > 0
 
 func clear():

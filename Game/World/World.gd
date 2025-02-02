@@ -142,10 +142,10 @@ func addRoom(floorID:String, roomID:String, roomPosition:Vector2, roomData:Dicti
 	newCell.roomSprite = roomData["icon"] if roomData.has("icon") else RoomStuff.RoomSprite.NONE
 	newCell.roomColor = roomData["color"] if roomData.has("color") else RoomStuff.RoomColor.White
 	newCell.gridColor = roomData["gridColor"] if roomData.has("gridColor") else RoomStuff.RoomColor.White
-	newCell.canWest = roomData["canWest"] if roomData.has("canWest") else true
-	newCell.canNorth = roomData["canNorth"] if roomData.has("canNorth") else true
-	newCell.canEast = roomData["canEast"] if roomData.has("canEast") else true
-	newCell.canSouth = roomData["canSouth"] if roomData.has("canSouth") else true
+	newCell.canWest = roomData["canW"] if roomData.has("canW") else true
+	newCell.canNorth = roomData["canN"] if roomData.has("canN") else true
+	newCell.canEast = roomData["canE"] if roomData.has("canE") else true
+	newCell.canSouth = roomData["canS"] if roomData.has("canS") else true
 	
 	registerRoom(floorID, newCell)
 

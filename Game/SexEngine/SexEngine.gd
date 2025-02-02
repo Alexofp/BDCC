@@ -19,6 +19,7 @@ var sexType:SexTypeBase
 
 var disabledGoals:Dictionary = {}
 var bondageDisabled:bool = false
+var subMustGoUnconscious:bool = false
 
 func initSexType(theSexType, args:Dictionary = {}):
 	if(theSexType is String):
@@ -37,6 +38,8 @@ func initSexType(theSexType, args:Dictionary = {}):
 		
 	if(args.has("bondageDisabled")):
 		bondageDisabled = args["bondageDisabled"]
+	if(args.has("subMustGoUnconscious")):
+		subMustGoUnconscious = args["subMustGoUnconscious"]
 		
 	if(sexType != null):
 		sexType.setSexEngine(self)
@@ -409,6 +412,9 @@ func areSexTypesSupportedForActivity(activity):
 	return areSexTypesSupported(supportedSexTypes)
 
 func hasGoal(thedominfo, goal, thesubinfo):
+	if(goal == SexGoal.SubMakeUnconscious && subMustGoUnconscious):
+		return true
+	
 	for goalInfo in thedominfo.goals:
 		if(goalInfo[1] == thesubinfo.charID):
 			if(goalInfo[0] == goal):
@@ -1362,6 +1368,7 @@ func saveData():
 		"sexEnded": sexEnded,
 		"sexResult": sexResult,
 		"bondageDisabled": bondageDisabled,
+		"subMustGoUnconscious": subMustGoUnconscious,
 	}
 	if(sexType != null):
 		data["sexTypeID"] = sexType.id
@@ -1395,6 +1402,7 @@ func loadData(data):
 	sexEnded = SAVE.loadVar(data, "sexEnded", false)
 	sexResult = SAVE.loadVar(data, "sexResult", {})
 	bondageDisabled = SAVE.loadVar(data, "bondageDisabled", false)
+	subMustGoUnconscious = SAVE.loadVar(data, "subMustGoUnconscious", false)
 	
 	var sexTypeID = SAVE.loadVar(data, "sexTypeID", SexType.DefaultSex)
 	var theSexType = GlobalRegistry.createSexType(sexTypeID)

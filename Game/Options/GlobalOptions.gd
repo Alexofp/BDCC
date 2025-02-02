@@ -26,6 +26,7 @@ var sandboxNpcLeveling:float = 1.0
 var hardStruggleEnabled: bool = false
 var smartLockRarity: String = "normal" # never veryrare rare normal often veryoften bdsmslut always
 var overstimulationEnabled: bool = true
+var savingInDungeons: bool = false
 
 # Datapack editor
 var blockCatcherPanelHeight: int = 8
@@ -87,6 +88,7 @@ func resetToDefaults():
 	hardStruggleEnabled = false
 	smartLockRarity = "normal"
 	overstimulationEnabled = true
+	savingInDungeons = false
 	shouldScaleUI = true
 	uiScaleMultiplier = 1.0
 	showSpeakerName = true
@@ -188,6 +190,9 @@ func getSmartLockRarity():
 
 func isOverstimulationEnabled():
 	return overstimulationEnabled
+
+func canSaveInDungeons() -> bool:
+	return savingInDungeons
 
 func shouldShowSpeakerName():
 	return showSpeakerName
@@ -503,6 +508,13 @@ func getChangeableOptions():
 					"id": "overstimulationEnabled",
 					"type": "checkbox",
 					"value": overstimulationEnabled
+				},
+				{
+					"name": "Saving in dungeons",
+					"description": "Turn this on to be able to save/rollback during in-game dungeons (Drug den). Turning this on will make the dungeons easier.",
+					"id": "savingInDungeons",
+					"type": "checkbox",
+					"value": savingInDungeons
 				},
 			]
 		},
@@ -961,6 +973,8 @@ func applyOption(categoryID, optionID, value):
 			smartLockRarity = value
 		if optionID == "overstimulationEnabled":
 			overstimulationEnabled = value
+		if optionID == "savingInDungeons":
+			savingInDungeons = value
 	
 	if(categoryID == "other"):
 		if(optionID == "fetchLatestRelease"):
@@ -1053,6 +1067,7 @@ func saveData():
 		"hardStruggleEnabled": hardStruggleEnabled,
 		"smartLockRarity": smartLockRarity,
 		"overstimulationEnabled": overstimulationEnabled,
+		"savingInDungeons": savingInDungeons,
 		"shouldScaleUI": shouldScaleUI,
 		"uiScaleMultiplier": uiScaleMultiplier,
 		"uiButtonSize": uiButtonSize,
@@ -1108,6 +1123,7 @@ func loadData(data):
 	hardStruggleEnabled = loadVar(data, "hardStruggleEnabled", false)
 	smartLockRarity = loadVar(data, "smartLockRarity", "normal")
 	overstimulationEnabled = loadVar(data, "overstimulationEnabled", true)
+	savingInDungeons = loadVar(data, "savingInDungeons", false)
 	shouldScaleUI = loadVar(data, "shouldScaleUI", true)
 	uiScaleMultiplier = loadVar(data, "uiScaleMultiplier", 1.0)
 	uiButtonSize = loadVar(data, "uiButtonSize", 0)
