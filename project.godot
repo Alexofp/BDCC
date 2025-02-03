@@ -514,6 +514,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/DrugDen/DrugDen.gd"
 }, {
+"base": "InmateGenerator",
+"class": "DrugDenJunkieGenerator",
+"language": "GDScript",
+"path": "res://Characters/Dynamic/Generator/DrugDenJunkieGenerator.gd"
+}, {
 "base": "Reference",
 "class": "DungeonMapGenerator",
 "language": "GDScript",
@@ -853,6 +858,11 @@ _global_script_classes=[ {
 "class": "JiggleBone",
 "language": "GDScript",
 "path": "res://Player/Player3D/JiggleBone.gd"
+}, {
+"base": "LootTableBase",
+"class": "JunkieLoot",
+"language": "GDScript",
+"path": "res://Inventory/LootTable/JunkieLoot.gd"
 }, {
 "base": "FluidProduction",
 "class": "Lactation",
@@ -1751,6 +1761,7 @@ _global_script_class_icons={
 "DollAttachmentZone": "",
 "DollSkeleton": "",
 "DrugDen": "",
+"DrugDenJunkieGenerator": "",
 "DungeonMapGenerator": "",
 "DynCharExtraSettings": "",
 "DynamicCharacter": "",
@@ -1819,6 +1830,7 @@ _global_script_class_icons={
 "ItemState": "",
 "ItemTag": "",
 "JiggleBone": "",
+"JunkieLoot": "",
 "Lactation": "",
 "LightInventory": "",
 "LimbTypes": "",

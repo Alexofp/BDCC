@@ -13,6 +13,16 @@ func run(_triggerID, _args):
 	if(GM.pc.getLocation() == GM.main.DrugDenRun.getNextLevelRoom()):
 		addButton("Next level", "Go to the next level!", "go")
 	
+func react(_triggerID, _args):
+	if(GM.main.DrugDenRun == null):
+		return false
+	
+	if(GM.main.DrugDenRun.hasEncounterInRoom(GM.pc.getLocation())):
+		runScene("DrugDenEncounterInstantFightScene")
+		return true
+	
+	return false
+	
 func getPriority():
 	return 0
 

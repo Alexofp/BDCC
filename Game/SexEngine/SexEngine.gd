@@ -1060,6 +1060,15 @@ func sexShouldEnd():
 	if(isDom("pc") && getDomInfo("pc").canDoActions()):
 		return false
 		
+	if(subMustGoUnconscious):
+		var hasAnyHealthySubs:bool = false
+		for subID in subs:
+			var subInfo = subs[subID]
+			if(!subInfo.isUnconscious()):
+				hasAnyHealthySubs = true
+		if(!hasAnyHealthySubs):
+			return true
+		
 	var hasAnyHealthyDoms:bool = false
 	for domID in doms:
 		var domInfo = doms[domID]

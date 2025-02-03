@@ -6,7 +6,7 @@ func _init():
 	sceneID = "DrugDenEncounterTemplateScene"
 
 func generateJunkieNPCID() -> String:
-	var theGenerator := InmateGenerator.new()
+	var theGenerator := DrugDenJunkieGenerator.new()
 	var theChar:BaseCharacter = theGenerator.generate({
 		NpcGen.Temporary: true,
 	})
@@ -22,10 +22,14 @@ func _react_scene_end(_tag, _result):
 		processTime(10 * 60)
 		var battlestate = _result[0]
 		
+		if(GM.main.DrugDenRun != null):
+			GM.main.DrugDenRun.markEncounterAsCompleted(GM.pc.getLocation())
+		
 		if(battlestate == "win"):
 			#setState("won_encounter")
+			playAnimation(StageScene.Solo, "stand")
 			endScene()
-			addExperienceToPlayer(10)
+			addExperienceToPlayer(25)
 		else:
 			setState("lost_encounter")
 
@@ -47,7 +51,7 @@ func _react_scene_end(_tag, _result):
 
 func encounter_run():
 	if(state == "lost_encounter"):
-		playAnimation(StageScene.Duo, "defeated", {npc=npcID})
+		playAnimation(StageScene.Duo, "defeat", {npc=npcID})
 		
 		saynn("You lost! Prepare for bad stuff!")
 		

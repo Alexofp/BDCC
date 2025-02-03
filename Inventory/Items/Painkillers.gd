@@ -73,7 +73,7 @@ func getSexEngineInfo(_sexEngine, _domInfo, _subInfo):
 		"usedName": "a painkiller pill",
 		"desc": "Helps with the pain.",
 		"scoreOnSub": 0.0,
-		"scoreOnSelf": float(_domInfo.getChar().getPainLevel() >= 0.5),
+		"scoreOnSelf": float(_domInfo.getChar().getPainLevel() >= 0.5) if !GM.main.isInDungeon() else 0.0,
 		"scoreSubScore": 1.0,
 		"canUseOnDom": true,
 		"canUseOnSub": true,

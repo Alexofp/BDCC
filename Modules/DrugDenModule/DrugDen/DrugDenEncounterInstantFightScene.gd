@@ -6,6 +6,7 @@ func _init():
 func _reactInit():
 	npcID = generateJunkieNPCID()
 	addCharacter(npcID)
+	playAnimation(StageScene.Duo, "stand", {npc=npcID})
 	startFightWithNPC()
 
 func _run():

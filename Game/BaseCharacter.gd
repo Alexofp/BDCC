@@ -3130,6 +3130,9 @@ func onAutoLevelUp():
 	if(GM.main != null && GM.main.characterIsVisible(getID())):
 		GM.main.addMessage(getName()+" has reached level "+str(getLevel()))
 	
+	autoSpendFreeStatPoints()
+
+func autoSpendFreeStatPoints():
 	var statWeightMap:Dictionary = {}
 	for stat in Stat.getAll():
 		var statValue:int = skillsHolder.getStat(stat)
@@ -3142,6 +3145,7 @@ func onAutoLevelUp():
 	
 	while(skillsHolder.getFreeStatPoints() > 0):
 		var stat = RNG.pickWeightedDict(statWeightMap)
+		statWeightMap[stat] = sqrt(max(float(skillsHolder.getStat(stat)), 1.0))
 		skillsHolder.increaseStatIfCan(stat)
 
 func addFightExperienceAuto(_otherCharID:String, didWin:bool):

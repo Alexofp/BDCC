@@ -11,11 +11,14 @@ var map:Dictionary = {}
 var startLevelRoom:String = ""
 var nextLevelRoom:String = ""
 
+var encounterRooms:Dictionary = {}
+
 var savedCredits:int = 0
 
 func generateMap():
 	var result:Array = []
 	map = {}
+	encounterRooms = {}
 	
 	var targetMapSize:int = 10
 	
@@ -31,16 +34,21 @@ func generateMap():
 		#var theCellInfo:Dictionary = dunGen.map[thePos]
 		var thisRoomID:String = "drugDenRoom"+str(mapIndex)
 		
+		var isEncounter:bool = (thePos in randomEventsPosList)
+		
 		posToIDMap[thePos] = thisRoomID
-		map[thePos] = {id=thisRoomID,
+		map[thisRoomID] = {x=int(thePos.x),y=int(thePos.y),
 			canN=dunGen.canGo(thePos, DungeonMapGenerator.DIR_N),
 			canS=dunGen.canGo(thePos, DungeonMapGenerator.DIR_S),
 			canE=dunGen.canGo(thePos, DungeonMapGenerator.DIR_E),
 			canW=dunGen.canGo(thePos, DungeonMapGenerator.DIR_W),
-			isEvent = (thePos in randomEventsPosList),
+			isEncounter = isEncounter,
 			isDeadend = (thePos in dunGen.deadends),
 			}
 		result.append(thisRoomID)
+		
+		if(isEncounter):
+			encounterRooms[thisRoomID] = true
 		
 		mapIndex += 1
 	
@@ -51,19 +59,19 @@ func generateMap():
 
 func buildMap():
 	GM.world.clearFloor(DrugDenFloor)
-	for pos in map:
-		var roomInfo:Dictionary = map[pos]
-		var roomID:String = roomInfo["id"]
+	for roomID in map:
+		var roomInfo:Dictionary = map[roomID]
+		var pos:Vector2 = Vector2(roomInfo["x"], roomInfo["y"])
 		
 		var theIcon = RoomStuff.RoomSprite.NONE
 		if(roomID == nextLevelRoom):
 			theIcon = RoomStuff.RoomSprite.STAIRS
-		if(roomInfo["isEvent"]):
+		if(roomInfo.has("isEncounter") && roomInfo["isEncounter"]):
 			theIcon = RoomStuff.RoomSprite.PERSON
-		if(roomInfo["isDeadend"]):
+		if(roomInfo.has("isDeadend") && roomInfo["isDeadend"]):
 			theIcon = RoomStuff.RoomSprite.IMPORTANT
 		
-		GM.world.addRoom(DrugDenFloor, roomInfo["id"], pos, {
+		GM.world.addRoom(DrugDenFloor, roomID, pos, {
 			icon = theIcon,
 			canW = roomInfo["canW"],
 			canE = roomInfo["canE"],
@@ -105,6 +113,7 @@ func endRun():
 		theStashChar.getInventory().removeItem(theItem)
 		GM.pc.getInventory().addItem(theItem)
 	
+	GM.pc.addCredits(-GM.pc.getCredits())
 	GM.pc.addCredits(savedCredits)
 
 func nextLevel():
@@ -122,8 +131,35 @@ func addMessage(theText:String):
 func getLevel() -> int:
 	return level
 
+func getDifficultyFloat() -> float:
+	var flevel = float(level)
+	
+	var result:float = flevel*0.05 + flevel*flevel*0.01
+	
+	result += fmod(flevel, 5.0)*(0.1 + flevel*0.01)
+	
+	return result
+
+func getRunInfo() -> Array:
+	var result:Array = []
+	
+	result.append("Drug den level: "+str(level))
+	result.append("Difficulty: "+str(Util.roundF(getDifficultyFloat(), 2)))
+	
+	return result
+
 func getNextLevelRoom() -> String:
 	return nextLevelRoom
+
+func hasEncounterInRoom(roomID:String):
+	return encounterRooms.has(roomID) && encounterRooms[roomID]
+
+func markEncounterAsCompleted(roomID:String):
+	if(encounterRooms.has(roomID)):
+		encounterRooms.erase(roomID)
+		
+		GM.world.setRoomSprite(roomID, RoomStuff.RoomSprite.NONE)
+		map[roomID]["isEncounter"] = false
 
 func saveData():
 	return {
@@ -133,6 +169,7 @@ func saveData():
 		startLevelRoom = startLevelRoom,
 		nextLevelRoom = nextLevelRoom,
 		savedCredits = savedCredits,
+		encounterRooms = encounterRooms,
 	}
 
 func loadData(_data:Dictionary):
@@ -142,4 +179,5 @@ func loadData(_data:Dictionary):
 	startLevelRoom = SAVE.loadVar(_data, "startLevelRoom", "")
 	nextLevelRoom = SAVE.loadVar(_data, "nextLevelRoom", "")
 	savedCredits = SAVE.loadVar(_data, "savedCredits", 0)
+	encounterRooms = SAVE.loadVar(_data, "encounterRooms", {})
 	buildMap()

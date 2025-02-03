@@ -75,6 +75,9 @@ func _run():
 		
 	_roomInfo._onEnter()
 	GM.ES.triggerRun(Trigger.EnteringRoom, [GM.pc.location])
+	
+	if(GM.main.DrugDenRun != null):
+		saynn(Util.join(GM.main.DrugDenRun.getRunInfo(), "\n"))
 
 func _react(_action: String, _args):
 	# RoomAction support
