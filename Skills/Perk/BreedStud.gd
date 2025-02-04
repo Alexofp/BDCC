@@ -3,6 +3,7 @@ extends PerkBase
 func _init():
 	id = Perk.BreedStud
 	skillGroup = Skill.Breeder
+	dungeonWeight = 0.0
 
 func getVisibleName():
 	return "Stallion"

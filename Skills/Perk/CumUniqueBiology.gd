@@ -3,6 +3,7 @@ extends PerkBase
 func _init():
 	id = Perk.CumUniqueBiology
 	skillGroup = Skill.CumLover
+	dungeonWeight = 0.0
 
 func getVisibleName():
 	return "Unique Biology"

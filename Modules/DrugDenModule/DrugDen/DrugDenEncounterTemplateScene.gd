@@ -29,7 +29,10 @@ func _react_scene_end(_tag, _result):
 			#setState("won_encounter")
 			playAnimation(StageScene.Solo, "stand")
 			endScene()
-			addExperienceToPlayer(25)
+			addExperienceToPlayer(50)
+			
+			if(GM.main.DrugDenRun.shouldShowLevelUpScreen()):
+				runScene("DungeonLevelUpScene")
 		else:
 			setState("lost_encounter")
 

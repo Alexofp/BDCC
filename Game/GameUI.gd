@@ -171,6 +171,8 @@ func setBigAnswersMode(newmode):
 	isInBigAnswersMode = newmode
 
 onready var save_button = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer2/SaveButton
+onready var skills_button = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3/SkillsButton
+
 
 func updateButtons():
 	checkPageButtons()
@@ -184,6 +186,11 @@ func updateButtons():
 			save_button.disabled = false
 		else:
 			save_button.disabled = true
+		
+		if(GM.main.isInDungeon()):
+			skills_button.disabled = true
+		else:
+			skills_button.disabled = false
 		
 	for i in buttonsCountPerPage:
 		var button:Button = buttons[i]

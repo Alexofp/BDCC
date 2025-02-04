@@ -5,6 +5,8 @@ const DrugDenFloor = "DrugDenDungeon"
 
 var started:bool = false
 var level:int = 1
+var handledPCLevel:int = 0
+var lastSelectedStat:String = ""
 
 var map:Dictionary = {}
 
@@ -14,6 +16,7 @@ var nextLevelRoom:String = ""
 var encounterRooms:Dictionary = {}
 
 var savedCredits:int = 0
+var savedSkillsData:Dictionary = {}
 
 func generateMap():
 	var result:Array = []
@@ -85,10 +88,6 @@ func start():
 	
 	#GM.main.IS.deleteAllNonImportantPawns()
 	
-	generateMap()
-	buildMap()
-	GM.pc.setLocation(startLevelRoom)
-	
 	var theStashChar = GlobalRegistry.getCharacter("DrugDenStash")
 	var pcItems:Array = GM.pc.getInventory().getItems()
 	var itemAmount:int = pcItems.size()
@@ -100,6 +99,22 @@ func start():
 
 	savedCredits = GM.pc.getCredits()
 	GM.pc.addCredits(-savedCredits)
+	
+	savedSkillsData = GM.pc.skillsHolder.saveData().duplicate(true)
+	GM.pc.resetSkillHolderFully()
+	GM.pc.updateNonBattleEffects()
+	GM.pc.addStamina(-GM.pc.getStamina()) # Remove any excess stamina that we might have after resetting stats
+	GM.pc.addStamina(GM.pc.getMaxStamina()) # Reset stamina to max
+	GM.pc.addPain(-GM.pc.getPain())
+	GM.pc.addLust(-GM.pc.getLust())
+	GM.pc.getSkillsHolder().addPerk(Perk.StartMaleInfertility) # No babies while in a dungen
+	GM.pc.getSkillsHolder().addPerk(Perk.StartInfertile)
+	
+	generateMap()
+	buildMap()
+	GM.pc.setLocation(startLevelRoom)
+	
+
 
 func endRun():
 	GM.world.clearFloor(DrugDenFloor)
@@ -115,6 +130,9 @@ func endRun():
 	
 	GM.pc.addCredits(-GM.pc.getCredits())
 	GM.pc.addCredits(savedCredits)
+	GM.pc.resetSkillHolderFully()
+	GM.pc.skillsHolder.loadData(savedSkillsData)
+	GM.pc.updateNonBattleEffects()
 
 func nextLevel():
 	level += 1
@@ -161,6 +179,44 @@ func markEncounterAsCompleted(roomID:String):
 		GM.world.setRoomSprite(roomID, RoomStuff.RoomSprite.NONE)
 		map[roomID]["isEncounter"] = false
 
+func shouldShowLevelUpScreen() -> bool:
+	return handledPCLevel < GM.pc.getLevel()
+
+func afterLevelUp():
+	handledPCLevel += 1
+
+func getPerksForReachingLevel(_level:int) -> Array:
+	if(_level % 2 == 0):
+		return []
+	
+	var result:Array = []
+	var skillsHolder:SkillsHolder = GM.pc.getSkillsHolder()
+	
+	var possiblePerkIDWithWeight:Dictionary = {}
+	for perkID in GlobalRegistry.getPerks():
+		if(skillsHolder.hasPerkDisabledOrNot(perkID)):
+			continue
+		
+		var thePerk:PerkBase = GlobalRegistry.getPerk(perkID)
+		
+		if(!thePerk.canAppearInDungeons()):
+			continue
+		if(!skillsHolder.hasRequiredPerksToUnlockPerk(perkID)):
+			continue
+		
+		var theWeight:float = thePerk.getDungeonWeight()
+		possiblePerkIDWithWeight[perkID] = theWeight
+	
+	for _i in range(3):
+		if(possiblePerkIDWithWeight.empty()):
+			break
+		
+		var nextPerkID:String = RNG.pickWeightedDict(possiblePerkIDWithWeight)
+		result.append(nextPerkID)
+		possiblePerkIDWithWeight.erase(nextPerkID)
+	
+	return result
+
 func saveData():
 	return {
 		started = started,
@@ -170,6 +226,9 @@ func saveData():
 		nextLevelRoom = nextLevelRoom,
 		savedCredits = savedCredits,
 		encounterRooms = encounterRooms,
+		savedSkillsData = savedSkillsData,
+		handledPCLevel = handledPCLevel,
+		lastSelectedStat = lastSelectedStat,
 	}
 
 func loadData(_data:Dictionary):
@@ -180,4 +239,7 @@ func loadData(_data:Dictionary):
 	nextLevelRoom = SAVE.loadVar(_data, "nextLevelRoom", "")
 	savedCredits = SAVE.loadVar(_data, "savedCredits", 0)
 	encounterRooms = SAVE.loadVar(_data, "encounterRooms", {})
+	savedSkillsData = SAVE.loadVar(_data, "savedSkillsData", {})
+	handledPCLevel = SAVE.loadVar(_data, "handledPCLevel", 0)
+	lastSelectedStat = SAVE.loadVar(_data, "lastSelectedStat", "")
 	buildMap()

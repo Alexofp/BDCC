@@ -4,6 +4,7 @@ class_name PerkBase
 var npc = null
 var id = "error"
 var skillGroup = Skill.Combat
+var dungeonWeight:float = 1.0
 
 func getVisibleName():
 	return "Error"
@@ -91,6 +92,20 @@ func onPerkToggled(_isEnabledNow):
 	
 func getBuffs():
 	return []
+
+func getDungeonWeight() -> float:
+	return dungeonWeight
+
+func canAppearInDungeons() -> bool:
+	if(skillGroup == Skill.Start):
+		return false
+	if(skillGroup == Skill.Fertility):
+		return false
+	if(skillGroup == Skill.Hypnosis):
+		return false
+	if(dungeonWeight <= 0.0):
+		return false
+	return true
 
 func buff(buffid, args = []):
 	var buff: BuffBase = GlobalRegistry.createBuff(buffid)

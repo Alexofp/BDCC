@@ -21,6 +21,9 @@ func react(_triggerID, _args):
 		runScene("DrugDenEncounterInstantFightScene")
 		return true
 	
+	if(GM.main.DrugDenRun.shouldShowLevelUpScreen()):
+		runScene("DungeonLevelUpScene")
+	
 	return false
 	
 func getPriority():

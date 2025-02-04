@@ -3425,3 +3425,10 @@ func increaseBodypartSensitivity(bodypartSlot:String, howMuch:float):
 		return
 	zone.addSensitivity(howMuch)
 	
+func resetSkillHolderFully():
+	if(skillsHolder):
+		skillsHolder.queue_free()
+		skillsHolder = null
+	skillsHolder = SkillsHolder.new()
+	skillsHolder.setCharacter(self)
+	add_child(skillsHolder)

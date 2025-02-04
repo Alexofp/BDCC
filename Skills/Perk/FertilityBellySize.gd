@@ -3,6 +3,7 @@ extends PerkBase
 func _init():
 	id = Perk.FertilityBellySize
 	skillGroup = Skill.Fertility
+	dungeonWeight = 0.0
 
 func getVisibleName():
 	return "Maternal Intuition"

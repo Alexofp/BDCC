@@ -3,6 +3,7 @@ extends PerkBase
 func _init():
 	id = Perk.BreedStreak
 	skillGroup = Skill.Breeder
+	dungeonWeight = 0.0
 
 func getVisibleName():
 	return "Breeder's Streak"

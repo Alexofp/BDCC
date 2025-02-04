@@ -323,6 +323,16 @@ func canUnlockPerk(perkID):
 		
 	return true
 	
+func hasRequiredPerksToUnlockPerk(perkID):
+	var perk: PerkBase = GlobalRegistry.getPerk(perkID)
+	if(perk == null):
+		return false
+	var requiredPerks = perk.getRequiredPerks()
+	for requiredPerkID in requiredPerks:
+		if(!hasPerk(requiredPerkID)):
+			return false
+	return true
+	
 func canUnlockAnyPerkInSkill(skillID):
 	for perkID in GlobalRegistry.getPerksIDsBySkill(skillID):
 		if(perks.has(perkID)):
