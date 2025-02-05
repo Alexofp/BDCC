@@ -14,6 +14,9 @@ var startLevelRoom:String = ""
 var nextLevelRoom:String = ""
 
 var encounterRooms:Dictionary = {}
+var events:Dictionary = {} # location = drug den event
+var flags:Dictionary = {}
+var eventCooldowns:Dictionary = {}
 
 var savedCredits:int = 0
 var savedSkillsData:Dictionary = {}
@@ -38,6 +41,19 @@ func generateMap():
 		var thisRoomID:String = "drugDenRoom"+str(mapIndex)
 		
 		var isEncounter:bool = (thePos in randomEventsPosList)
+		var isDeadend:bool = (thePos in dunGen.deadends)
+		
+		if(isDeadend):
+			var newEvent = generateEvent()
+			if(newEvent == null):
+				isDeadend = false
+			else:
+				events[thisRoomID] = newEvent
+				newEvent.loc = thisRoomID
+				newEvent.onSpawn(self)
+				var theCooldown:int = newEvent.getCooldown()
+				if(theCooldown > 0):
+					eventCooldowns[newEvent.id] = theCooldown+1
 		
 		posToIDMap[thePos] = thisRoomID
 		map[thisRoomID] = {x=int(thePos.x),y=int(thePos.y),
@@ -46,7 +62,7 @@ func generateMap():
 			canE=dunGen.canGo(thePos, DungeonMapGenerator.DIR_E),
 			canW=dunGen.canGo(thePos, DungeonMapGenerator.DIR_W),
 			isEncounter = isEncounter,
-			isDeadend = (thePos in dunGen.deadends),
+			isDeadend = isDeadend,
 			}
 		result.append(thisRoomID)
 		
@@ -137,6 +153,11 @@ func endRun():
 func nextLevel():
 	level += 1
 	
+	for eventID in eventCooldowns.keys():
+		eventCooldowns[eventID] -= 1
+		if(eventCooldowns[eventID] <= 0):
+			eventCooldowns.erase(eventID)
+	
 	generateMap()
 	buildMap()
 	GM.pc.setLocation(startLevelRoom)
@@ -217,7 +238,69 @@ func getPerksForReachingLevel(_level:int) -> Array:
 	
 	return result
 
+func getEventAmountOfType(theType:String):
+	var result:int = 0
+	
+	for loc in events:
+		var theEvent = events[loc]
+		if(theEvent.id == theType):
+			result += 1
+	
+	return result
+
+func generateEvent():
+	var possible:Dictionary = {}
+	
+	for eventID in GlobalRegistry.getDrugDenEvents():
+		if(eventCooldowns.has(eventID)):
+			continue
+		
+		var theEvent = GlobalRegistry.getDrugDenEventRef(eventID)
+		
+		if(!theEvent.canSpawn(self)):
+			continue
+		
+		var eventAmount:int = getEventAmountOfType(eventID)
+		if(eventAmount >= theEvent.getMaxPerFloor()):
+			continue
+		
+		var weight:float = theEvent.getEventWeight()
+		if(weight <= 0.0):
+			continue
+		
+		possible[eventID] = weight
+		
+	if(possible.empty()):
+		return null
+	
+	var pickedEventID:String = RNG.pickWeightedDict(possible)
+	
+	var theEvent = GlobalRegistry.createDrugDenEvent(pickedEventID)
+	return theEvent
+
+func getEventInRoom(roomID:String):
+	if(!events.has(roomID)):
+		return null
+	return events[roomID]
+
+func removeEventFromRoom(roomID:String):
+	if(!events.has(roomID)):
+		return
+	
+	events.erase(roomID)
+	GM.world.setRoomSprite(roomID, RoomStuff.RoomSprite.NONE)
+	map[roomID]["isDeadend"] = false
+
 func saveData():
+	var eventData:Dictionary = {}
+	for loc in events:
+		var theEvent = events[loc]
+		
+		eventData[loc] = {
+			id = theEvent.id,
+			data = theEvent.saveData(),
+		}
+	
 	return {
 		started = started,
 		level = level,
@@ -229,6 +312,9 @@ func saveData():
 		savedSkillsData = savedSkillsData,
 		handledPCLevel = handledPCLevel,
 		lastSelectedStat = lastSelectedStat,
+		flags = flags,
+		events = eventData,
+		eventCooldowns = eventCooldowns,
 	}
 
 func loadData(_data:Dictionary):
@@ -242,4 +328,23 @@ func loadData(_data:Dictionary):
 	savedSkillsData = SAVE.loadVar(_data, "savedSkillsData", {})
 	handledPCLevel = SAVE.loadVar(_data, "handledPCLevel", 0)
 	lastSelectedStat = SAVE.loadVar(_data, "lastSelectedStat", "")
+	flags = SAVE.loadVar(_data, "flags", {})
+	eventCooldowns = SAVE.loadVar(_data, "eventCooldowns", {})
+	
+	events = {}
+	var eventData:Dictionary = SAVE.loadVar(_data, "events", {})
+	for loc in eventData:
+		var eventEntry:Dictionary = eventData[loc]
+		
+		var eventID:String = SAVE.loadVar(eventEntry, "id", "")
+		if(eventID == ""):
+			continue
+		var newEvent = GlobalRegistry.createDrugDenEvent(eventID)
+		if(newEvent == null):
+			continue
+		
+		newEvent.loc = loc
+		events[loc] = newEvent
+		newEvent.loadData(SAVE.loadVar(eventEntry, "data", {}))
+	
 	buildMap()

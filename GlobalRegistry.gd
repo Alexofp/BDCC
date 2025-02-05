@@ -82,6 +82,8 @@ var transformations:Dictionary = {}
 var transformationRefs:Dictionary = {}
 var transformationEffects:Dictionary = {}
 var nurseryTasks:Dictionary = {}
+var drugDenEvents:Dictionary = {}
+var drugDenEventRefs:Dictionary = {}
 
 var bodypartStorageNode
 
@@ -363,6 +365,7 @@ func registerEverything():
 	
 	registerEventFolder("res://Events/Event/")
 	registerEventFolder("res://Game/NpcSlavery/SlaveActivitiesEvents/")
+	registerDrugDenEventFolder("res://Game/DrugDen/Events/")
 	
 	emit_signal("loadingUpdate", 7.0/totalStages, "Scenes")
 	yield(get_tree(), "idle_frame")
@@ -2368,3 +2371,33 @@ func createNurseryTask(id: String):
 		
 func getNurseryTasks():
 	return nurseryTasks
+
+
+func registerDrugDenEvent(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	drugDenEvents[object.id] = loadedClass
+	drugDenEventRefs[object.id] = object
+
+func registerDrugDenEventFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerDrugDenEvent(scriptPath)
+
+func createDrugDenEvent(id: String):
+	if(drugDenEvents.has(id)):
+		return drugDenEvents[id].new()
+	else:
+		Log.printerr("ERROR: drug den event with the id "+id+" wasn't found")
+		return null
+
+func getDrugDenEventRef(id: String):
+	if(drugDenEventRefs.has(id)):
+		return drugDenEventRefs[id]
+	else:
+		Log.printerr("ERROR: drug den event with the id "+id+" wasn't found")
+		return null
+		
+func getDrugDenEvents():
+	return drugDenEventRefs
