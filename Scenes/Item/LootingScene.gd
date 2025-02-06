@@ -79,6 +79,10 @@ func _react(_action: String, _args):
 				var _howMany = GM.pc.unlockAllKeyholderLocksFrom(npcID)
 				continue
 			
+			if(item.id == "WorkCredit"):
+				GM.pc.addCredits(item.getAmount())
+				continue
+			
 			inv.removeItem(item)
 			GM.pc.getInventory().addItem(item)
 			addMessage("You looted "+item.getAStackName())
@@ -96,7 +100,11 @@ func _react(_action: String, _args):
 			return
 		
 		inv.removeItem(item)
-		GM.pc.getInventory().addItem(item)
+		
+		if(item.id == "WorkCredit"):
+			GM.pc.addCredits(item.getAmount())
+		else:
+			GM.pc.getInventory().addItem(item)
 		#addMessage("You looted "+item.getAStackName())
 		setState("")
 		if(savedCredits == 0 && inv.isEmpty()):

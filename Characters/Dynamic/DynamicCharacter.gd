@@ -778,3 +778,6 @@ func applyTFData(_data):
 
 func getTFHolder():
 	return tfHolder
+
+func canApplySmartLocks() -> bool:
+	return !temporaryCharacter

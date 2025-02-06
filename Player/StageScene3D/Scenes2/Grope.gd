@@ -61,6 +61,11 @@ func playAnimation(animID, _args = {}):
 	if(_args.has("npcCum") && _args["npcCum"]):
 		startCumPenis(doll2)
 	
+	if(_args.has("onlyPC") && _args["onlyPC"]):
+		doll2.visible = false
+	else:
+		doll2.visible = true
+	
 	updateSubAnims()
 	
 	var state_machine = animationTree["parameters/StateMachine/playback"]
@@ -118,3 +123,12 @@ func getSupportedStates():
 
 func getVarNpcs():
 	return ["pc", "npc"]
+
+func getVarOptions():
+	var options = .getVarOptions()
+	
+	options["onlyPC"] = {
+		type = "bool",
+	}
+	
+	return options

@@ -25,6 +25,7 @@ func generateMap():
 	var result:Array = []
 	map = {}
 	encounterRooms = {}
+	events = {}
 	
 	var targetMapSize:int = 10
 	
@@ -39,6 +40,7 @@ func generateMap():
 	for thePos in dunGen.map:
 		#var theCellInfo:Dictionary = dunGen.map[thePos]
 		var thisRoomID:String = "drugDenRoom"+str(mapIndex)
+		var customIcon = RoomStuff.RoomSprite.NONE
 		
 		var isEncounter:bool = (thePos in randomEventsPosList)
 		var isDeadend:bool = (thePos in dunGen.deadends)
@@ -51,6 +53,7 @@ func generateMap():
 				events[thisRoomID] = newEvent
 				newEvent.loc = thisRoomID
 				newEvent.onSpawn(self)
+				customIcon = newEvent.getMapIcon()
 				var theCooldown:int = newEvent.getCooldown()
 				if(theCooldown > 0):
 					eventCooldowns[newEvent.id] = theCooldown+1
@@ -63,6 +66,7 @@ func generateMap():
 			canW=dunGen.canGo(thePos, DungeonMapGenerator.DIR_W),
 			isEncounter = isEncounter,
 			isDeadend = isDeadend,
+			customIcon = customIcon,
 			}
 		result.append(thisRoomID)
 		
@@ -82,13 +86,13 @@ func buildMap():
 		var roomInfo:Dictionary = map[roomID]
 		var pos:Vector2 = Vector2(roomInfo["x"], roomInfo["y"])
 		
-		var theIcon = RoomStuff.RoomSprite.NONE
+		var theIcon = roomInfo["customIcon"] if roomInfo.has("customIcon") else RoomStuff.RoomSprite.NONE
 		if(roomID == nextLevelRoom):
 			theIcon = RoomStuff.RoomSprite.STAIRS
 		if(roomInfo.has("isEncounter") && roomInfo["isEncounter"]):
 			theIcon = RoomStuff.RoomSprite.PERSON
-		if(roomInfo.has("isDeadend") && roomInfo["isDeadend"]):
-			theIcon = RoomStuff.RoomSprite.IMPORTANT
+		#if(roomInfo.has("isDeadend") && roomInfo["isDeadend"]):
+		#	theIcon = RoomStuff.RoomSprite.IMPORTANT
 		
 		GM.world.addRoom(DrugDenFloor, roomID, pos, {
 			icon = theIcon,
@@ -153,6 +157,8 @@ func endRun():
 func nextLevel():
 	level += 1
 	
+	GM.pc.addIntoxication(-0.2)
+	
 	for eventID in eventCooldowns.keys():
 		eventCooldowns[eventID] -= 1
 		if(eventCooldowns[eventID] <= 0):
@@ -173,9 +179,9 @@ func getLevel() -> int:
 func getDifficultyFloat() -> float:
 	var flevel = float(level)
 	
-	var result:float = flevel*0.05 + flevel*flevel*0.01
+	var result:float = 0.1 + flevel*0.02 + flevel*flevel*0.01
 	
-	result += fmod(flevel, 5.0)*(0.1 + flevel*0.01)
+	result += fmod(flevel, 3.0)*(0.1 + flevel*0.01)
 	
 	return result
 

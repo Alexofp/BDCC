@@ -38,6 +38,8 @@ const sprites = {
 	RoomStuff.RoomSprite.SHOWER: preload("res://Images/World/shower.png"),
 	RoomStuff.RoomSprite.WC: preload("res://Images/World/wc.png"),
 	RoomStuff.RoomSprite.LAUNDRY: preload("res://Images/World/laundry.png"),
+	RoomStuff.RoomSprite.BED: preload("res://Images/World/bed.png"),
+	RoomStuff.RoomSprite.BOSS: preload("res://Images/World/boss.png"),
 }
 
 onready var roomSpriteObject = $Sprite

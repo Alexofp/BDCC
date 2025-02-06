@@ -14,8 +14,8 @@ func getLoot(_id, _characterID, _battleName):
 		]
 	if(_id == "junkie"):
 		return [
-			[5, ["StunBaton"]],
-			[10, ["Shiv"]],
+			[2, ["StunBaton"]],
+			[3, ["Shiv"]],
 		]
 
 	return []

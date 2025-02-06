@@ -4,23 +4,23 @@ class_name JunkieLoot
 func _init():
 	id = "junkie"
 	loot = [
-		[15, [["appleitem", 1, 2]]],
-		[7, ["painkillers"]],
-		[7, ["AnaphrodisiacPill"]],
-		[10, [["EnergyDrink", 1, 4]]],
-		[5, [["restraintkey", 1, 2]]],
-		[10, ["TFPill"]],
-		[2, ["TFPill"]],
-		[2, [["BreederPill", 1, 2]]],
-		[2, [["HeatPill", 1, 2]]],
+		[5, [["appleitem", 1, 2]]],
+		[3, ["painkillers"]],
+		[3, ["AnaphrodisiacPill"]],
+		[3, [["EnergyDrink", 1, 4]]],
+		[2, [["restraintkey", 1, 2]]],
+		[3, ["TFPill"]],
+		[1, ["TFPill"]],
+		[1, [["BreederPill", 1, 2]]],
+		[1, [["HeatPill", 1, 2]]],
 		
-		[3, ["basketmuzzle"]],
-		[3, ["ballgag"]],
-		[3, ["ringgag"]],
-		[3, ["blindfold"]],
-		[3, ["inmateanklecuffs"]],
-		[3, ["inmatewristcuffs"]],
-		[3, ["ropeharness"]],
+		[1, ["basketmuzzle"]],
+		[1, ["ballgag"]],
+		[1, ["ringgag"]],
+		[1, ["blindfold"]],
+		[1, ["inmateanklecuffs"]],
+		[1, ["inmatewristcuffs"]],
+		[1, ["ropeharness"]],
 	]
 	minCredits = 1
 	maxCredits = 4

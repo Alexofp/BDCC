@@ -3432,3 +3432,6 @@ func resetSkillHolderFully():
 	skillsHolder = SkillsHolder.new()
 	skillsHolder.setCharacter(self)
 	add_child(skillsHolder)
+
+func canApplySmartLocks() -> bool:
+	return false

@@ -38,7 +38,10 @@ func getInteractInfo() -> Dictionary:
 	}
 
 func doInteract(_actionID:String, _args:Array = []) -> Dictionary:
-	return {text="You did it!", lootTable="medicalstorage", ended=true}
+	return {text="You did it!", lootTable="medicalstorage", ended=true, anim=[StageScene.Sleeping, "sleep"]}
+
+func getMapIcon():
+	return RoomStuff.RoomSprite.BED
 
 func endEvent():
 	if(loc == ""):
