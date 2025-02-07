@@ -12,6 +12,8 @@ func _init():
 	scenes = [
 		"res://Modules/DrugDenModule/DrugDen/DrugDenGiveUpScene.gd",
 		"res://Modules/DrugDenModule/DrugDen/DrugDenEncounterInstantFightScene.gd",
+		"res://Modules/DrugDenModule/DrugDen/DrugDenEncounterBossScene.gd",
+		"res://Modules/DrugDenModule/DrugDen/DrugDenEncounterFirstScene.gd",
 		]
 	characters = [
 		"res://Modules/DrugDenModule/DrugDen/DrugDenStash.gd",

@@ -21,6 +21,10 @@ var eventCooldowns:Dictionary = {}
 var savedCredits:int = 0
 var savedSkillsData:Dictionary = {}
 
+const ENCOUNTER_NOTHING = 0
+const ENCOUNTER_NORMAL = 1
+const ENCOUNTER_BOSS = 2
+
 func generateMap():
 	var result:Array = []
 	map = {}
@@ -28,12 +32,17 @@ func generateMap():
 	events = {}
 	
 	var targetMapSize:int = 10
+	var shouldHaveBoss:bool = (level % 3 == 0)
 	
 	var dunGen:DungeonMapGenerator = DungeonMapGenerator.new()
 	dunGen.generate({
 		mainPathLen = targetMapSize,
 	})
 	var randomEventsPosList:Array = dunGen.findRandomSpots(3)
+	var bossPosList:Array = []
+	
+	if(shouldHaveBoss && !randomEventsPosList.empty()):
+		bossPosList.append(RNG.grab(randomEventsPosList))
 	
 	var mapIndex:int = 1
 	var posToIDMap:Dictionary = {}
@@ -43,6 +52,7 @@ func generateMap():
 		var customIcon = RoomStuff.RoomSprite.NONE
 		
 		var isEncounter:bool = (thePos in randomEventsPosList)
+		var isBoss:bool = (thePos in bossPosList)
 		var isDeadend:bool = (thePos in dunGen.deadends)
 		
 		if(isDeadend):
@@ -65,13 +75,16 @@ func generateMap():
 			canE=dunGen.canGo(thePos, DungeonMapGenerator.DIR_E),
 			canW=dunGen.canGo(thePos, DungeonMapGenerator.DIR_W),
 			isEncounter = isEncounter,
+			isBoss = isBoss,
 			isDeadend = isDeadend,
 			customIcon = customIcon,
 			}
 		result.append(thisRoomID)
 		
 		if(isEncounter):
-			encounterRooms[thisRoomID] = true
+			encounterRooms[thisRoomID] = ENCOUNTER_NORMAL
+		if(isBoss):
+			encounterRooms[thisRoomID] = ENCOUNTER_BOSS
 		
 		mapIndex += 1
 	
@@ -91,6 +104,8 @@ func buildMap():
 			theIcon = RoomStuff.RoomSprite.STAIRS
 		if(roomInfo.has("isEncounter") && roomInfo["isEncounter"]):
 			theIcon = RoomStuff.RoomSprite.PERSON
+		if(roomInfo.has("isBoss") && roomInfo["isBoss"]):
+			theIcon = RoomStuff.RoomSprite.BOSS
 		#if(roomInfo.has("isDeadend") && roomInfo["isDeadend"]):
 		#	theIcon = RoomStuff.RoomSprite.IMPORTANT
 		
@@ -189,7 +204,7 @@ func getRunInfo() -> Array:
 	var result:Array = []
 	
 	result.append("Drug den level: "+str(level))
-	result.append("Difficulty: "+str(Util.roundF(getDifficultyFloat(), 2)))
+	result.append("Difficulty: "+str(round(getDifficultyFloat()*100.0))+"%")
 	
 	return result
 
@@ -198,6 +213,11 @@ func getNextLevelRoom() -> String:
 
 func hasEncounterInRoom(roomID:String):
 	return encounterRooms.has(roomID) && encounterRooms[roomID]
+
+func getEncounterType(roomID:String) -> int:
+	if(!encounterRooms.has(roomID)):
+		return ENCOUNTER_NOTHING
+	return encounterRooms[roomID]
 
 func markEncounterAsCompleted(roomID:String):
 	if(encounterRooms.has(roomID)):
@@ -296,6 +316,14 @@ func removeEventFromRoom(roomID:String):
 	events.erase(roomID)
 	GM.world.setRoomSprite(roomID, RoomStuff.RoomSprite.NONE)
 	map[roomID]["isDeadend"] = false
+
+func getFlag(flagID:String, defaultValue = null):
+	if(!flags.has(flagID)):
+		return defaultValue
+	return flags[flagID]
+
+func setFlag(flagID:String, newValue):
+	flags[flagID] = newValue
 
 func saveData():
 	var eventData:Dictionary = {}

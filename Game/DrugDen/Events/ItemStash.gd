@@ -197,7 +197,7 @@ func doInteract(_actionID:String, _args:Array = []) -> Dictionary:
 			GM.pc.addPain(RNG.randi_range(20, 40))
 			return {text=beginText+"You got shocked as soon as you touched the stash. Ow!", ended=true, anim=[StageScene.Solo, "hurt"]}
 		elif(trapType == 1):
-			GM.pc.addLust(RNG.randi_range(20, 40))
+			GM.pc.addLust(RNG.randi_range(40, 80))
 			return {text=beginText+"A cloud of aprorosiac gas surrounds you, making you extremely horny!", ended=true, anim=[StageScene.Solo, "stand"]}
 		else:
 			GM.pc.getInventory().forceRestraintsWithTag(ItemTag.CanBeForcedByGuards, 2)

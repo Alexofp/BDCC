@@ -1,18 +1,25 @@
 extends SceneBase
 
 var npcID:String = ""
+var wonState:String = ""
+var expWin:int = 50
 
 func _init():
 	sceneID = "DrugDenEncounterTemplateScene"
 
-func generateJunkieNPCID() -> String:
+func generateJunkieNPCID(_isBoss:bool = false) -> String:
 	var theGenerator := DrugDenJunkieGenerator.new()
 	var theChar:BaseCharacter = theGenerator.generate({
 		NpcGen.Temporary: true,
+		NpcGen.IsBoss: _isBoss,
 	})
 	var theID:String = theChar.id
 	
 	return theID
+
+func resolveCustomCharacterName(_charID):
+	if(_charID == "npc"):
+		return npcID
 
 func startFightWithNPC():
 	runScene("FightScene", [npcID], "encounterFight")
@@ -27,9 +34,12 @@ func _react_scene_end(_tag, _result):
 		
 		if(battlestate == "win"):
 			#setState("won_encounter")
-			playAnimation(StageScene.Solo, "stand")
-			endScene()
-			addExperienceToPlayer(50)
+			if(wonState == ""):
+				playAnimation(StageScene.Solo, "stand")
+				endScene()
+			else:
+				setState(wonState)
+			addExperienceToPlayer(expWin)
 			
 			if(GM.main.DrugDenRun.shouldShowLevelUpScreen()):
 				runScene("DungeonLevelUpScene")

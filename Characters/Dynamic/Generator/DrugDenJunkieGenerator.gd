@@ -15,6 +15,8 @@ func getCurrentDrugDenDifficulty() -> float:
 
 func pickName(character:DynamicCharacter, _args = {}):
 	character.npcName = "Junkie"
+	if(_args.has(NpcGen.IsBoss) && _args[NpcGen.IsBoss]):
+		character.npcName = "Junkie Boss"
 
 func pickSmallDescription(_character:DynamicCharacter, _args = {}):
 #	var thedesc = ""
@@ -103,7 +105,12 @@ func pickLevel(character:DynamicCharacter, _args = {}):
 	if(_args.has(NpcGen.Level)):
 		character.npcLevel = _args[NpcGen.Level]
 	else:
+		var isBoss:bool = (_args.has(NpcGen.IsBoss) && _args[NpcGen.IsBoss])
+		
 		var theDiff:float = getCurrentDrugDenDifficulty()
+		if(isBoss):
+			theDiff *= 3.0
+		
 		var pcLevel:int = 5
 		if(GM.pc != null && is_instance_valid(GM.pc)):
 			pcLevel = GM.pc.getLevel()
@@ -131,6 +138,20 @@ func pickStats(character:DynamicCharacter, _args = {}):
 	var level = Util.maxi(0, character.npcLevel)
 	
 	var runDifficulty:float = getCurrentDrugDenDifficulty()
+	
+	var isBoss:bool = (_args.has(NpcGen.IsBoss) && _args[NpcGen.IsBoss])
+	if(isBoss):
+		if(runDifficulty < 0.5):
+			runDifficulty = 0.5
+		else:
+			runDifficulty *= 1.5
+		character.addEffect(RNG.pick([
+			"DrugDenBoss1",
+			"DrugDenBoss2",
+			"DrugDenBoss3",
+			"DrugDenBoss4",
+			"DrugDenBoss5",
+		]))
 	
 	character.npcBaseLust = 100
 	character.npcBasePain = 100

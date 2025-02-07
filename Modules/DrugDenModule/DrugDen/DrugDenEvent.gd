@@ -40,7 +40,17 @@ func react(_triggerID, _args):
 		return false
 	
 	if(GM.main.DrugDenRun.hasEncounterInRoom(GM.pc.getLocation())):
-		runScene("DrugDenEncounterInstantFightScene")
+		
+		var encounterType:int = GM.main.DrugDenRun.getEncounterType(GM.pc.getLocation())
+		if(encounterType == DrugDen.ENCOUNTER_NORMAL):
+			if(!GM.main.DrugDenRun.getFlag("FirstEncounterHap", false)):
+				GM.main.DrugDenRun.setFlag("FirstEncounterHap", true)
+				runScene("DrugDenEncounterFirstScene")
+			else:
+				runScene("DrugDenEncounterInstantFightScene")
+		elif(encounterType == DrugDen.ENCOUNTER_BOSS):
+			#var previousLoc:String = GM.world.applyDirectionID(GM.pc.getLocation(), GM.world.opposite(_args[1]))
+			runScene("DrugDenEncounterBossScene")
 		return true
 	
 	if(GM.main.DrugDenRun.shouldShowLevelUpScreen()):
