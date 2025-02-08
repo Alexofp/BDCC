@@ -11,6 +11,7 @@ func run(_triggerID, _args):
 		return
 	
 	if(GM.pc.getLocation() == GM.main.DrugDenRun.getNextLevelRoom()):
+		saynn("You see a vertical ladder here that leads deeper into the maintenance tunnels..")
 		addButton("Next level", "Go to the next level!", "go")
 	
 	var drugDenEvent = GM.main.DrugDenRun.getEventInRoom(GM.pc.getLocation())

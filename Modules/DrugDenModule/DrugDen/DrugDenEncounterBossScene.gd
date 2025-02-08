@@ -100,21 +100,25 @@ func _react(_action: String, _args):
 		newPill.makePillStrangeIfCan()
 		GM.pc.getInventory().addItem(newPill)
 		addMessage("You have created a strange pill")
+		GM.main.increaseFlag("DrugDenModule.RaidedLabs")
 		
 	if(_action == "do_science"):
 		processTime(5*60)
 		GM.main.SCI.addPoints(20 + 5*int(GM.main.DrugDenRun.getLevel()/3.0))
+		GM.main.increaseFlag("DrugDenModule.RaidedLabs")
 		
 	if(_action == "make_painkillers"):
 		processTime(5*60)
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
 		addMessage("You have created some painkillers")
+		GM.main.increaseFlag("DrugDenModule.RaidedLabs")
 		
 	if(_action == "make_anaphrodisiac"):
 		processTime(5*60)
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("AnaphrodisiacPill"))
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("AnaphrodisiacPill"))
 		addMessage("You have created some anaphrodisiacs")
+		GM.main.increaseFlag("DrugDenModule.RaidedLabs")
 		
 	if(_action == "startFight"):
 		startFightWithNPC()

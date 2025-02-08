@@ -15,6 +15,6 @@ func getPriority():
 
 func onButton(_method, _args):
 	if(_method == "start"):
-		GM.main.DrugDenRun = DrugDen.new()
-		GM.main.DrugDenRun.start()
-		#runScene("DungeonLevelUpScene")
+		#GM.main.DrugDenRun = DrugDen.new()
+		#GM.main.DrugDenRun.start()
+		runScene("DrugDenStartScene")

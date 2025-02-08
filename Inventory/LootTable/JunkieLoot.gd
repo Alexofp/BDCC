@@ -23,5 +23,5 @@ func _init():
 		[1, ["ropeharness"]],
 	]
 	minCredits = 1
-	maxCredits = 4
+	maxCredits = 3
 	creditsChance = 10

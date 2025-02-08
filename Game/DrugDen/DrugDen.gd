@@ -110,6 +110,8 @@ func buildMap():
 		#	theIcon = RoomStuff.RoomSprite.IMPORTANT
 		
 		GM.world.addRoom(DrugDenFloor, roomID, pos, {
+			name = "Drug Den",
+			desc = "The tunnel is dimly lit by the flickering emergency lights. Crumpled rags, used syringes, and shattered glass litter the floor, crunching softly underfoot. The air is thick - stale with sweat, smoke, and something sickly sweet that clings to your throat. Distant echoes bounce through the tunnels - low murmurs, the occasional rustling, maybe even a quiet, breathy laugh.",
 			icon = theIcon,
 			canW = roomInfo["canW"],
 			canE = roomInfo["canE"],
@@ -123,14 +125,7 @@ func start():
 	
 	#GM.main.IS.deleteAllNonImportantPawns()
 	
-	var theStashChar = GlobalRegistry.getCharacter("DrugDenStash")
-	var pcItems:Array = GM.pc.getInventory().getItems()
-	var itemAmount:int = pcItems.size()
-	for _i in range(itemAmount):
-		var theItem = pcItems[itemAmount - _i -1]
-		
-		GM.pc.getInventory().removeItem(theItem)
-		theStashChar.getInventory().addItem(theItem)
+	transferAllItems(GM.pc, GlobalRegistry.getCharacter("DrugDenStash"))
 
 	savedCredits = GM.pc.getCredits()
 	GM.pc.addCredits(-savedCredits)
@@ -145,29 +140,30 @@ func start():
 	GM.pc.getSkillsHolder().addPerk(Perk.StartMaleInfertility) # No babies while in a dungen
 	GM.pc.getSkillsHolder().addPerk(Perk.StartInfertile)
 	
+	for eventID in GlobalRegistry.getDrugDenEvents():
+		var theEvent = GlobalRegistry.getDrugDenEventRef(eventID)
+		var theCooldown:int = theEvent.getStartCooldown()
+		if(theCooldown > 0):
+			eventCooldowns[eventID] = theCooldown
+			
 	generateMap()
 	buildMap()
 	GM.pc.setLocation(startLevelRoom)
-	
-
 
 func endRun():
 	GM.world.clearFloor(DrugDenFloor)
 	
-	var theStashChar = GlobalRegistry.getCharacter("DrugDenStash")
-	var stashItems:Array = theStashChar.getInventory().getItems()
-	var itemAmount:int = stashItems.size()
-	for _i in range(itemAmount):
-		var theItem = stashItems[itemAmount - _i -1]
-		
-		theStashChar.getInventory().removeItem(theItem)
-		GM.pc.getInventory().addItem(theItem)
+	transferAllItems(GM.pc, GlobalRegistry.getCharacter("DrugDenStash")) # So the order of the items would be correct
+	transferAllItems(GlobalRegistry.getCharacter("DrugDenStash"), GM.pc)
 	
 	GM.pc.addCredits(-GM.pc.getCredits())
 	GM.pc.addCredits(savedCredits)
 	GM.pc.resetSkillHolderFully()
 	GM.pc.skillsHolder.loadData(savedSkillsData)
 	GM.pc.updateNonBattleEffects()
+	
+	if(checkSetNewHighestLevelReached()):
+		addMessage("Your highest reached Drug Den level is now "+str(level)+"!")
 
 func nextLevel():
 	level += 1
@@ -324,6 +320,27 @@ func getFlag(flagID:String, defaultValue = null):
 
 func setFlag(flagID:String, newValue):
 	flags[flagID] = newValue
+
+func getHighestLevelReached() -> int:
+	return int(GM.main.getFlag("DrugDenModule.HighestDrugDenLevel", 0))
+
+func checkSetNewHighestLevelReached() -> bool:
+	var currentHighestLevel:int = getHighestLevelReached()
+	
+	if(level <= currentHighestLevel):
+		return false
+	
+	GM.main.setFlag("DrugDenModule.HighestDrugDenLevel", level)
+	return true
+
+func transferAllItems(_charFrom, _charTo):
+	var theItems:Array = _charFrom.getInventory().getItems()
+	var itemAmount:int = theItems.size()
+	for _i in range(itemAmount):
+		var theItem = theItems[itemAmount - _i -1]
+		
+		_charFrom.getInventory().removeItem(theItem)
+		_charTo.getInventory().addItem(theItem)
 
 func saveData():
 	var eventData:Dictionary = {}

@@ -2,7 +2,9 @@ extends Module
 
 func getFlags():
 	return {
-		#"firstDrugTestHappened": flag(FlagType.Bool),
+		"HighestDrugDenLevel": flag(FlagType.Number),
+		"RaidedLabs": flag(FlagType.Number),
+		"FirstTimeHappened": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -14,6 +16,7 @@ func _init():
 		"res://Modules/DrugDenModule/DrugDen/DrugDenEncounterInstantFightScene.gd",
 		"res://Modules/DrugDenModule/DrugDen/DrugDenEncounterBossScene.gd",
 		"res://Modules/DrugDenModule/DrugDen/DrugDenEncounterFirstScene.gd",
+		"res://Modules/DrugDenModule/DrugDen/DrugDenStartScene.gd",
 		]
 	characters = [
 		"res://Modules/DrugDenModule/DrugDen/DrugDenStash.gd",

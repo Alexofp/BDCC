@@ -17,6 +17,9 @@ func getMaxPerFloor() -> int:
 func getCooldown() -> int:
 	return 0
 
+func getStartCooldown() -> int:
+	return 0
+
 func getEventWeight() -> float:
 	return eventWeight
 

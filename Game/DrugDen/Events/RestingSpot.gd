@@ -9,6 +9,9 @@ func getMaxPerFloor() -> int:
 func getCooldown() -> int:
 	return RNG.randi_range(1, 2)
 
+func getStartCooldown() -> int:
+	return RNG.randi_range(1, 2)
+
 func getInteractInfo() -> Dictionary:
 	return {
 		text = "You found someone's resting spot! You can rest and fully restore your stamina or masturbate and get rid of your lust!",

@@ -21,6 +21,6 @@ func _init():
 		[10, ["Shiv"]],
 		
 	]
-	minCredits = 2
-	maxCredits = 6
+	minCredits = 1
+	maxCredits = 4
 	creditsChance = 30
