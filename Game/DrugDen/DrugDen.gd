@@ -221,6 +221,8 @@ func markEncounterAsCompleted(roomID:String):
 		
 		GM.world.setRoomSprite(roomID, RoomStuff.RoomSprite.NONE)
 		map[roomID]["isEncounter"] = false
+	if(events.has(roomID)):
+		removeEventFromRoom(roomID)
 
 func shouldShowLevelUpScreen() -> bool:
 	return handledPCLevel < GM.pc.getLevel()

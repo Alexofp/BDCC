@@ -8,8 +8,8 @@ func _init():
 	id = "TFPill"
 
 func getVisibleName():
-	var theID:String = getTFID()
 	if(GM.main != null && GM.main.SCI != null && uniqueID!=null):
+		var theID:String = getTFID()
 		if(GM.main.SCI.isTransformationUnlocked(theID)):
 			var tf = GlobalRegistry.getTransformationRef(theID)
 			if(tf != null):

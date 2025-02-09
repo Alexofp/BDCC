@@ -17,6 +17,8 @@ func _init():
 		"res://Modules/DrugDenModule/DrugDen/DrugDenEncounterBossScene.gd",
 		"res://Modules/DrugDenModule/DrugDen/DrugDenEncounterFirstScene.gd",
 		"res://Modules/DrugDenModule/DrugDen/DrugDenStartScene.gd",
+		"res://Modules/DrugDenModule/DrugDen/DrugDenEventWhoreScene.gd",
+		"res://Modules/DrugDenModule/DrugDen/DrugDenEventWhoreSubScene.gd",
 		]
 	characters = [
 		"res://Modules/DrugDenModule/DrugDen/DrugDenStash.gd",

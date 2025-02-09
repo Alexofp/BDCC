@@ -631,6 +631,11 @@ func getSpeciesFullName():
 	return Util.getSpeciesName(species)
 	
 func getFightIntro(_battleName):
+	if(_battleName == "DrugDenEncounter"):
+		var theText:String = "You run into a junkie. Looks like "+heShe()+" isn't happy to see you."
+		theText += "\n\nThe junkie gets into the combat stance and prepares to fight."
+		return theText
+		
 	return getName() + " gets into the combat stance and prepares for a fight."
 
 func getFightState(_battleName):

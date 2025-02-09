@@ -21,8 +21,8 @@ func resolveCustomCharacterName(_charID):
 	if(_charID == "npc"):
 		return npcID
 
-func startFightWithNPC():
-	runScene("FightScene", [npcID], "encounterFight")
+func startFightWithNPC(theBattleName:String = "DrugDenEncounter"):
+	runScene("FightScene", [npcID, theBattleName], "encounterFight")
 
 func _react_scene_end(_tag, _result):
 	if(_tag == "encounterFight"):
@@ -66,7 +66,7 @@ func encounter_run():
 	if(state == "lost_encounter"):
 		playAnimation(StageScene.Duo, "defeat", {npc=npcID})
 		
-		saynn("You lost! Prepare for bad stuff!")
+		saynn("You lost! Looks like the junkie is eager to fuck you.")
 		
 		addButton("Continue", "See what happens next", "start_defeated_sex")
 	
