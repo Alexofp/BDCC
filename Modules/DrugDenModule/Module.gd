@@ -5,6 +5,9 @@ func getFlags():
 		"HighestDrugDenLevel": flag(FlagType.Number),
 		"RaidedLabs": flag(FlagType.Number),
 		"FirstTimeHappened": flag(FlagType.Bool),
+		
+		"Kidlat1Hap": flag(FlagType.Bool),
+		"KidlatCustomShopGreet": flag(FlagType.Text),
 	}
 
 func _init():
@@ -19,9 +22,13 @@ func _init():
 		"res://Modules/DrugDenModule/DrugDen/DrugDenStartScene.gd",
 		"res://Modules/DrugDenModule/DrugDen/DrugDenEventWhoreScene.gd",
 		"res://Modules/DrugDenModule/DrugDen/DrugDenEventWhoreSubScene.gd",
+		
+		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat1Scene.gd",
+		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlatShopScene.gd",
 		]
 	characters = [
 		"res://Modules/DrugDenModule/DrugDen/DrugDenStash.gd",
+		"res://Modules/DrugDenModule/Kidlat/Kidlat.gd",
 	]
 	items = []
 	events = [
@@ -31,3 +38,8 @@ func _init():
 
 func resetFlagsOnNewDay():
 	pass
+
+func getKidlatCustomGreeting():
+	var theGreet = getFlag("DrugDenModule.KidlatCustomShopGreet", "")
+	setFlag("DrugDenModule.KidlatCustomShopGreet", "")
+	return theGreet
