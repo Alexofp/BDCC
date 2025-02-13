@@ -5,12 +5,13 @@ func _init():
 	npcHasMenstrualCycle = true
 	npcCharacterType = CharacterType.Inmate
 	
-	pickedSkin="SoftSpikySkin"
-	pickedSkinRColor=Color("ffc0705d")
-	pickedSkinGColor=Color("ffdf8b78")
-	pickedSkinBColor=Color("ffb55945")
+	pickedSkin="KidlatSkin"
+	pickedSkinRColor=Color("ff323137")
+	pickedSkinGColor=Color("ff12cee7")
+	pickedSkinBColor=Color("ff135d6f")
 	npcSkinData={
-	"hair": {"r": Color("ffb05745"),"g": Color("ffb05745"),"b": Color("ff2288ab"),},
+	"hair": {"r": Color("ff1a1823"),"g": Color("ff494ea0"),"b": Color("ff13d9da"),},
+	"ears": {"b": Color("ff7113ed"),},
 	}
 	
 func _getName():
@@ -20,32 +21,35 @@ func getGender():
 	return Gender.Female
 	
 func getSmallDescription() -> String:
-	return "Wears a general block uniform with number P-12406. She is of medium height, has brown fur and a ponytail. Her naive eyes are blue."
+	return "A cute feline with a striking neon-like fur pattern."
 
 func getSpecies():
 	return ["feline"]
 
+func getChatColor():
+	return '#13d9da'
+
 func getThickness() -> int:
-	return 50
+	return 75
 
 func getFemininity() -> int:
 	return 100
 
 func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinehead"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("ponytailhair"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felineears"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("kidlathair"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felineears2"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthrobody"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthroarms"))
+	var breasts = GlobalRegistry.createBodypart("humanbreasts")
+	breasts.size = 4
+	giveBodypartUnlessSame(breasts)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
-	giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinetail"))
+	var tail = GlobalRegistry.createBodypart("fluffyfelinetail")
+	tail.tailScale = 0.8
+	giveBodypartUnlessSame(tail)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
-	var breasts = GlobalRegistry.createBodypart("humanbreasts")
-	breasts.size = 3
-	giveBodypartUnlessSame(breasts)
 
 func getDefaultEquipment():
-	if(GM.main != null && GM.main.getFlag("RahiModule.wearingPortalPanties")):
-		return ["inmatecollar", "inmateuniform", "PortalPantiesUnlocked"]
-	return ["inmatecollar", "inmateuniform"]
+	return ["inmatecollar", "inmateuniformSexDeviant"]

@@ -28,8 +28,11 @@ func _run():
 
 		saynn("You're still a bit confused by the sight. The feline notices that.. and grins, her tail giving a lazy flick.")
 
-		saynn("[say=kidlat]Right then, let's pretend that didn't happen, yeah? 'Cause I'm a serious businesswoman, see?[/say]")
+		saynn("[say=kidlat]Right then, let's pretend that didn't happen, yeah? Let me introduce myself![/say]")
 
+		addButton("Continue", "See what happens next", "box_intro")
+	if(state == "box_intro"):
+		playAnimation(StageScene.Duo, "stand", {npc="kidlat", kidlatBox=true, further=true})
 		saynn("With a theatrical flourish, she plops a battered cardboard box onto the floor and flips it open, revealing an assortment of goods inside. She spreads her arms as if presenting the finest wares in the world.")
 
 		saynn("[say=kidlat]Welcome to Kidlat's humble little shop of shady wonders! You got credits, I got goods. Simple, innit? No takin', no beggin' - I do business properly around here.[/say]")

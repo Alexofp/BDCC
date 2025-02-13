@@ -154,7 +154,6 @@ bodypartSlot = "hair"
 customSkinPattern = ExtResource( 4 )
 
 [node name="kidlathair2" type="MeshInstance" parent="." index="1"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.012 )
 mesh = SubResource( 3 )
 skin = SubResource( 2 )
 material/0 = SubResource( 4 )

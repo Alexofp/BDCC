@@ -54,6 +54,16 @@ func endEvent():
 	GM.main.DrugDenRun.removeEventFromRoom(loc)
 	loc = ""
 
+# These 3 functions are called on a 'ref' of an event, don't access any fields here!
+func onRunStart(_drugDen):
+	pass
+
+func onRunEnd(_drugDen):
+	pass
+
+func onRunNextFloor(_drugDen):
+	pass
+
 func saveData() -> Dictionary:
 	return {}
 

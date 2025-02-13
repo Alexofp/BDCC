@@ -145,6 +145,9 @@ func start():
 		var theCooldown:int = theEvent.getStartCooldown()
 		if(theCooldown > 0):
 			eventCooldowns[eventID] = theCooldown
+	for eventID in GlobalRegistry.getDrugDenEvents():
+		var theEvent = GlobalRegistry.getDrugDenEventRef(eventID)
+		theEvent.onRunStart(self)
 			
 	generateMap()
 	buildMap()
@@ -162,6 +165,10 @@ func endRun():
 	GM.pc.skillsHolder.loadData(savedSkillsData)
 	GM.pc.updateNonBattleEffects()
 	
+	for eventID in GlobalRegistry.getDrugDenEvents():
+		var theEvent = GlobalRegistry.getDrugDenEventRef(eventID)
+		theEvent.onRunEnd(self)
+	
 	if(checkSetNewHighestLevelReached()):
 		addMessage("Your highest reached Drug Den level is now "+str(level)+"!")
 
@@ -174,6 +181,9 @@ func nextLevel():
 		eventCooldowns[eventID] -= 1
 		if(eventCooldowns[eventID] <= 0):
 			eventCooldowns.erase(eventID)
+	for eventID in GlobalRegistry.getDrugDenEvents():
+		var theEvent = GlobalRegistry.getDrugDenEventRef(eventID)
+		theEvent.onRunNextFloor(self)
 	
 	generateMap()
 	buildMap()

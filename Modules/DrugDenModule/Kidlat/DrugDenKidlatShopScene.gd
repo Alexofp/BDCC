@@ -1,12 +1,14 @@
 extends SceneBase
 
+var buyLine = ""
+
 func _init():
 	sceneID = "DrugDenKidlatShopScene"
 
 func _run():
 	if(state == ""):
 		addCharacter("kidlat")
-		playAnimation(StageScene.Duo, "stand", {npc="kidlat"})
+		playAnimation(StageScene.Duo, "stand", {npc="kidlat", kidlatBox=true, further=true})
 		var customGreet = getModule("DrugDenModule").getKidlatCustomGreeting()
 		var drugDenEvent = GM.main.DrugDenRun.getEventInRoom(GM.pc.getLocation())
 		var isFirstTimeThisFloor:bool = drugDenEvent.isFirstTimeThisFloor()
@@ -14,7 +16,11 @@ func _run():
 		var isOutOfItems:bool = drugDenEvent.isOutOfItems()
 		saynn("You find Kidlat, standing behind her cardboard box.")
 
-		if (customGreet != ""):
+		if (buyLine != ""):
+			saynn("[say=kidlat]"+str(buyLine)+"[/say]")
+
+			buyLine = ""
+		elif (customGreet != ""):
 			saynn("[say=kidlat]"+str(customGreet)+"[/say]")
 
 		elif (isOutOfItems):
@@ -32,10 +38,30 @@ func _run():
 
 		addButton("Leave", "Time to go", "endthescene")
 		drugDenEvent.addBuyButtons(self)
+		drugDenEvent.applyVisitFlags()
+		if (false):
+			addButton("Buy", "Buy something", "buyKidlatItem")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
 		return
 
+	if(_action == "buyKidlatItem"):
+		var drugDenEvent = GM.main.DrugDenRun.getEventInRoom(GM.pc.getLocation())
+		buyLine = drugDenEvent.doBuyItem(_args[0])
+		return
+
 	setState(_action)
+
+func saveData():
+	var data = .saveData()
+
+	data["buyLine"] = buyLine
+
+	return data
+
+func loadData(data):
+	.loadData(data)
+
+	buyLine = SAVE.loadVar(data, "buyLine", "")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/StageScene3D/Scenes/Duo.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Player/Props/platform.png" type="Texture" id=4]
 [ext_resource path="res://Player/Props/chair.png" type="Texture" id=5]
 [ext_resource path="res://Player/StageScene3D/Scenes/DollSoloAndCuffsTree.tres" type="AnimationNodeBlendTree" id=6]
+[ext_resource path="res://Player/Props/kidlatBox.png" type="Texture" id=7]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
@@ -28,30 +29,35 @@ texture = ExtResource( 5 )
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -2.558, 1.928, 0.069 )
 texture = ExtResource( 5 )
 
-[node name="Doll3D" parent="." index="3" instance=ExtResource( 3 )]
+[node name="KidlatBox" type="Sprite3D" parent="." index="3"]
+transform = Transform( 0.799998, 0, 0, 0, 0.799998, 0, 0, 0, 1, 0.317144, 1.49628, 0.695331 )
+visible = false
+texture = ExtResource( 7 )
+
+[node name="Doll3D" parent="." index="4" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0 )
 
-[node name="Doll3D2" parent="." index="4" instance=ExtResource( 3 )]
+[node name="Doll3D2" parent="." index="5" instance=ExtResource( 3 )]
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0 )
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="5"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="6"]
 tree_root = ExtResource( 6 )
 parameters/AnimationNodeStateMachine/playback = SubResource( 1 )
 parameters/CuffsBlend/blend_amount = 0
 
-[node name="AnimationTree2" type="AnimationTree" parent="." index="6"]
+[node name="AnimationTree2" type="AnimationTree" parent="." index="7"]
 tree_root = ExtResource( 6 )
 parameters/AnimationNodeStateMachine/playback = SubResource( 2 )
 parameters/CuffsBlend/blend_amount = 0
 
-[node name="FarLeft" type="Position3D" parent="." index="7"]
+[node name="FarLeft" type="Position3D" parent="." index="8"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.18997, 5.39323, 1.77914 )
 
-[node name="FarRight" type="Position3D" parent="." index="8"]
+[node name="FarRight" type="Position3D" parent="." index="9"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.19, 5.393, 1.779 )
 
-[node name="Above" type="Position3D" parent="." index="9"]
+[node name="Above" type="Position3D" parent="." index="10"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.2541, 1.779 )
 
-[node name="Floor" type="Position3D" parent="." index="10"]
+[node name="Floor" type="Position3D" parent="." index="11"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.104177, 0.477503 )

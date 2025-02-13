@@ -8,6 +8,9 @@ func getFlags():
 		
 		"Kidlat1Hap": flag(FlagType.Bool),
 		"KidlatCustomShopGreet": flag(FlagType.Text),
+		
+		"KidlatShopFirstTimeRun": flag(FlagType.Bool),
+		"KidlatShopFirstTimeFloor": flag(FlagType.Bool),
 	}
 
 func _init():
