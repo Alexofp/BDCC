@@ -40,7 +40,7 @@ func _run():
 		
 		addButton("Fight", "Start the fight", "startFight")
 	
-	if(state == "wonFight"):
+	if(state == "wonFight"):			
 		removeCharacter(npcID)
 		playAnimation(StageScene.Solo, "stand")
 		
@@ -61,6 +61,20 @@ func _run():
 		addButton("Painkillers", "Use the lab to create 1 painkillers pill", "make_painkillers")
 		addButton("Anaphrodisiac", "Use the lab to create 2 anaphrodisiac pills", "make_anaphrodisiac")
 		addButton("Just destroy", "Just destroy the lab and move on", "just_destroy_lab")
+	
+		if(getFlag("DrugDenModule.Kidlat2Hap", false) && !getFlag("DrugDenModule.Kidlat3Hap", false)):
+			var drugDen:DrugDen = GM.main.DrugDenRun
+			if(!drugDen.getFlag("hasKidlatUniform", false)):
+				var uniformLevel = drugDen.getFlag("kidlatUniformFloor", -1)
+				
+				if(uniformLevel < 0):
+					drugDen.setFlag("kidlatUniformFloor", drugDen.level + 3)
+					
+					addMessage("One of the half-conscious junkies mentions that Kidlat's uniform might somewhere on Drug Den level "+str(drugDen.getFlag("kidlatUniformFloor", 0)))
+				if(uniformLevel == drugDen.level):
+					saynn("[b]You notice someone's uniform here.[/b]")
+					
+					addButton("Uniform", "This looks like Kidlat's uniform!", "take_kidlat_uniform")
 	
 	if(state == "make_strange_pill"):
 		saynn("You haphazardly mix questionable fluids, guided by the provided notes, your gut instinct and a bit of luck. The result is a strange, weird pill. Who knows what it will do, its is color unsettling. You pocket it, hoping it won’t kill you later. Time to move on.")
@@ -119,6 +133,11 @@ func _react(_action: String, _args):
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("AnaphrodisiacPill"))
 		addMessage("You have created some anaphrodisiacs")
 		GM.main.increaseFlag("DrugDenModule.RaidedLabs")
+		
+	if(_action == "take_kidlat_uniform"):
+		addMessage("You find a uniform that looks a lot like Kidlat's! Better find her now or you will lose it.")
+		GM.main.DrugDenRun.setFlag("hasKidlatUniform", true)
+		return
 		
 	if(_action == "startFight"):
 		startFightWithNPC()

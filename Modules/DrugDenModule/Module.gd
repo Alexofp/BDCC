@@ -7,6 +7,9 @@ func getFlags():
 		"FirstTimeHappened": flag(FlagType.Bool),
 		
 		"Kidlat1Hap": flag(FlagType.Bool),
+		"Kidlat2Hap": flag(FlagType.Bool),
+		"Kidlat3Hap": flag(FlagType.Bool),
+		
 		"KidlatCustomShopGreet": flag(FlagType.Text),
 		
 		"KidlatShopFirstTimeRun": flag(FlagType.Bool),
@@ -27,6 +30,8 @@ func _init():
 		"res://Modules/DrugDenModule/DrugDen/DrugDenEventWhoreSubScene.gd",
 		
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat1Scene.gd",
+		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat2Scene.gd",
+		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat3Scene.gd",
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlatShopScene.gd",
 		]
 	characters = [
@@ -46,3 +51,15 @@ func getKidlatCustomGreeting():
 	var theGreet = getFlag("DrugDenModule.KidlatCustomShopGreet", "")
 	setFlag("DrugDenModule.KidlatCustomShopGreet", "")
 	return theGreet
+
+func isKidlatNaked():
+	return getFlag("DrugDenModule.Kidlat2Hap", false) && !getFlag("DrugDenModule.Kidlat3Hap", false)
+
+func regenerateKidlatItems():
+	if(GM.main.DrugDenRun == null):
+		return
+	var drugDenEvent = GM.main.DrugDenRun.getEventInRoom(GM.pc.getLocation())
+	if(drugDenEvent == null || drugDenEvent.id != "KidlatShop"):
+		return
+	drugDenEvent.generateItemsToSell()
+	

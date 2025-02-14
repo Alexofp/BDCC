@@ -94,6 +94,19 @@ const sellList = {
 }
 
 const weightList = {
+	"painkillers": 0.3,
+	"appleitem": 2.0,
+	"AnaphrodisiacPill": 1.0,
+	"EnergyDrink": 0.3,
+	"restraintkey": 0.1,
+	"TFPill": 0.3,
+	"BreederPill": 0.2,
+	"HeatPill": 0.2,
+	"StunBaton": 0.1,
+	"Shiv": 0.1,
+}
+
+const weightBetterList = {
 	"painkillers": 1.0,
 	"appleitem": 2.0,
 	"AnaphrodisiacPill": 1.0,
@@ -144,6 +157,22 @@ func doInteract(_actionID:String, _args:Array = []) -> Dictionary:
 	if(!scene1Hap):
 		setModuleFlag("Kidlat1Hap", true)
 		return {sceneID="DrugDenKidlat1Scene"}
+	
+	var isFirstTimeInRun:bool = isFirstTimeThisRun()
+	var scene2Hap:bool = getModuleFlag("Kidlat2Hap", false)
+	var scene3Hap:bool = getModuleFlag("Kidlat3Hap", false)
+	
+	if(!scene2Hap):
+		if(isFirstTimeInRun && RNG.chance(100)):
+			setModuleFlag("Kidlat2Hap", true)
+			return {sceneID="DrugDenKidlat2Scene"}
+	
+	if(scene2Hap && !scene3Hap):
+		if(getDrugDenFlag("hasKidlatUniform", false)):
+			setModuleFlag("Kidlat3Hap", true)
+			setDrugDenFlag("hasKidlatUniform", false)
+			return {sceneID="DrugDenKidlat3Scene"}
+	
 	
 	return {sceneID="DrugDenKidlatShopScene"}
 
@@ -222,8 +251,13 @@ func getItemsListText():
 		
 	return Util.join(resultTexts, "\n\n")
 
+func isBetterItems() -> bool:
+	return getModuleFlag("Kidlat3Hap", false)
 
 func getAmountOfItemsToSell() -> int:
+	if(getModuleFlag("Kidlat2Hap", false) && !getModuleFlag("Kidlat3Hap", false)):
+		return 2
+	
 	return 3
 
 func generateItemsToSell():
@@ -231,7 +265,7 @@ func generateItemsToSell():
 	selling = []
 	
 	for _i in range(howMany):
-		var nextEntryID:String = RNG.pickWeightedDict(weightList)
+		var nextEntryID:String = RNG.pickWeightedDict(weightList if !isBetterItems() else weightBetterList)
 		
 		if(!sellList.has(nextEntryID)):
 			Log.printerr("MISSING ENTRY IN KIDLAT SHOP: "+str(nextEntryID))

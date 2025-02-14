@@ -7,8 +7,8 @@ func _init():
 
 func _run():
 	if(state == ""):
-		addCharacter("kidlat")
-		playAnimation(StageScene.Duo, "stand", {npc="kidlat", kidlatBox=true, further=true})
+		addCharacter("kidlat", [] if !getModule("DrugDenModule").isKidlatNaked() else ["naked"])
+		playAnimation(StageScene.Duo, "stand", {npc="kidlat", kidlatBox=true, further=true, npcBodyState={naked=getModule("DrugDenModule").isKidlatNaked()}})
 		var customGreet = getModule("DrugDenModule").getKidlatCustomGreeting()
 		var drugDenEvent = GM.main.DrugDenRun.getEventInRoom(GM.pc.getLocation())
 		var isFirstTimeThisFloor:bool = drugDenEvent.isFirstTimeThisFloor()

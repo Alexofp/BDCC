@@ -70,3 +70,8 @@ func saveData() -> Dictionary:
 func loadData(_data:Dictionary):
 	pass
 
+func getDrugDenFlag(theFlagID:String, defaultValue):
+	return GM.main.DrugDenRun.getFlag(theFlagID, defaultValue)
+
+func setDrugDenFlag(theFlagID:String, newVal):
+	return GM.main.DrugDenRun.setFlag(theFlagID, newVal)
