@@ -14,6 +14,8 @@ func getFlags():
 		
 		"KidlatShopFirstTimeRun": flag(FlagType.Bool),
 		"KidlatShopFirstTimeFloor": flag(FlagType.Bool),
+		"KidlatBap": flag(FlagType.Bool),
+		"KidlatItemsBought": flag(FlagType.Number),
 	}
 
 func _init():
@@ -63,3 +65,5 @@ func regenerateKidlatItems():
 		return
 	drugDenEvent.generateItemsToSell()
 	
+func getKidlatAmountOfItemsBoughtTotal():
+	return getFlag("DrugDenModule.KidlatItemsBought", 0)

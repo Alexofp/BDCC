@@ -120,6 +120,7 @@ const weightBetterList = {
 }
 
 var selling:Array = []
+var hasBap:bool = false
 
 func _init():
 	id = "KidlatShop"
@@ -127,6 +128,10 @@ func _init():
 
 func onSpawn(_drugDen):
 	generateItemsToSell()
+	
+	var itemsBoughtAmount:int = getDrugDenFlag("KidlatItemsBought", 0)
+	if(itemsBoughtAmount > 0 && !getDrugDenFlag("KidlatBap", false) && RNG.chance(30)):
+		hasBap = true
 
 func getMaxPerFloor() -> int:
 	return 1
@@ -161,9 +166,10 @@ func doInteract(_actionID:String, _args:Array = []) -> Dictionary:
 	var isFirstTimeInRun:bool = isFirstTimeThisRun()
 	var scene2Hap:bool = getModuleFlag("Kidlat2Hap", false)
 	var scene3Hap:bool = getModuleFlag("Kidlat3Hap", false)
+	var itemsBoughtAmount:int = getDrugDenFlag("KidlatItemsBought", 0)
 	
 	if(!scene2Hap):
-		if(isFirstTimeInRun && RNG.chance(100)):
+		if(isFirstTimeInRun && RNG.chance(100) && itemsBoughtAmount >= 3):
 			setModuleFlag("Kidlat2Hap", true)
 			return {sceneID="DrugDenKidlat2Scene"}
 	
@@ -228,6 +234,8 @@ func doBuyItem(entry:Dictionary):
 	GM.main.addMessage("You bought "+itemRef.getAStackName()+" from Kidlat!")
 	entry["sold"] = true
 	
+	setDrugDenFlag("KidlatItemsBought", getDrugDenFlag("KidlatItemsBought", 0)+1)
+	
 	if(!sellList.has(itemID) || !sellList[itemID].has("buyLines")):
 		return "There you go, hun!"
 	var sellEntry:Dictionary = sellList[itemID]
@@ -247,6 +255,10 @@ func getItemsListText():
 		if(itemRef == null):
 			continue
 		resultTexts.append(str(_i)+") "+itemRef.getVisibleName()+". Cost: "+str(cost)+" credit"+("s" if cost != 1 else "")+(" (SOLD!)" if wasSold else ""))
+		_i += 1
+	
+	if(hasBap):
+		resultTexts.append(str(_i)+") Loaf of bread. Cost: ? credits")
 		_i += 1
 		
 	return Util.join(resultTexts, "\n\n")
@@ -302,7 +314,9 @@ func onRunNextFloor(_drugDen):
 func saveData() -> Dictionary:
 	return {
 		selling = selling,
+		hasBap = hasBap,
 	}
 
 func loadData(_data:Dictionary):
 	selling = SAVE.loadVar(_data, "selling", [])
+	hasBap = SAVE.loadVar(_data, "hasBap", false)

@@ -14,6 +14,7 @@ func _run():
 		var isFirstTimeThisFloor:bool = drugDenEvent.isFirstTimeThisFloor()
 		var isFirstTimeThisRun:bool = drugDenEvent.isFirstTimeThisRun()
 		var isOutOfItems:bool = drugDenEvent.isOutOfItems()
+		var hasBap:bool = drugDenEvent.hasBap
 		saynn("You find Kidlat, standing behind her cardboard box.")
 
 		if (buyLine != ""):
@@ -41,6 +42,156 @@ func _run():
 		drugDenEvent.applyVisitFlags()
 		if (false):
 			addButton("Buy", "Buy something", "buyKidlatItem")
+		if (hasBap):
+			addButton("Loaf of bread", "Cost: ? credits\n\nA tasty-looking loaf of bread", "get_bapped")
+		if (getFlag("DrugDenModule.Kidlat3Hap", false)):
+			addButton("Chat", "Ask her a few things", "chat_menu")
+	if(state == "get_bapped"):
+		saynn("You notice something unusual among the items that Kidlat is selling.. There is a loaf of bread, just sitting casually in her cardboard box. It looks tasty.. much tastier than the normal slop that you eat.. There doesn't seem to be a price attached to it.. so it must be free?")
+
+		saynn("You reach to grab it.. but before your fingers even graze the squishy crust, Kidlat's paw shoots out, swatting your hand with lighting speed!")
+
+		saynn("[say=kidlat]No, mine![/say]")
+
+		saynn("Huh?")
+
+		saynn("[say=pc]It's not for sale? Why do you keep it?[/say]")
+
+		saynn("[say=kidlat]None of your business, luv! This is my emotional support bread.[/say]")
+
+		saynn("Fair enough.. You raise your hands, surrendering.")
+
+		saynn("[say=kidlat]Wise choice~.[/say]")
+
+		addButton("Continue", "Oh well", "")
+	if(state == "chat_menu"):
+		saynn("What do you wanna ask Kidlat?")
+
+		addButton("Crimes", "Ask her what she did to end up here in this prison", "ask_crimes")
+		addButton("Drug den", "Ask her why she lives here", "ask_drugden")
+		addButton("Back", "Go back to the previous menu", "")
+	if(state == "ask_crimes"):
+		saynn("You lean against the nearest wall, showing that you're not buying stuff anymore. Kidlat closes her cardboard box and looks at you with her waiting eyes.")
+
+		saynn("[say=kidlat]I'm not gonna show you where I stash my box, luv![/say]")
+
+		saynn("[say=pc]That's okay. I just wanted to ask something.[/say]")
+
+		saynn("Her ears perk.. and for a moment.. she just stares at you.")
+
+		saynn("[say=kidlat]Oh, aye? Sure, what's on your mind?[/say]")
+
+		saynn("[say=pc]What did you do to end up here?[/say]")
+
+		saynn("She looks around.")
+
+		saynn("[say=kidlat]Nothing? I just stumbled upon these tunnels one day.. And thought that they're kinda cool.[/say]")
+
+		saynn("Cool? Very debatable.. but that's not what you asked.")
+
+		saynn("[say=pc]No, I mean.. What did you do to end up here, in this prison? Why are you wearing a lilac uniform?[/say]")
+
+		saynn("Her fluffy tail flicks behind her, indecisively. She then huffs a small laugh and leans back against the wall, mimicking your posture.")
+
+		saynn("[say=kidlat]It's a long and boring story. Boring just like me. Ain't ya got better things to do?[/say]")
+
+		saynn("[say=pc]I can spare some time. Tell me, I'm very curious.[/say]")
+
+		saynn("There is a long pause before she finally speaks again.")
+
+		saynn("[say=kidlat]Well, let's just say I helped an ex-mate yoink a truck. Big payday, right? Should've been full of fancy gadgets.. laptops, datapads, all that overpriced crap.[/say]")
+
+		saynn("Interesting. Makes you wonder why she is wearing lilac colors rather than orange..")
+
+		saynn("[say=kidlat]Snoozin' already? I can stop, luv.[/say]")
+
+		saynn("[say=pc]No, keep going, please.[/say]")
+
+		saynn("She shrugs.")
+
+		saynn("[say=kidlat]It was all goin' well.. until we pulled over and checked the haul. Whole bloody thing was stuffed with sex toys.[/say]")
+
+		saynn("You try to.. stifle a laugh.. unsuccessfully. Kidlat smirks.. but her eyes darken a little.")
+
+		saynn("[say=kidlat]Yeah, feel free to laugh, luv.[/say]")
+
+		saynn("[say=pc]I mean, sex toys are expensive too.[/say]")
+
+		saynn("[say=kidlat]Maybe? But they're a pain to push.. Uh.. to sell I mean. 'Course, we weren't exactly thinkin' straight back then. And then we heard a siren.[/say]")
+
+		saynn("She crosses her arms, tail flicking sharply against the ground.")
+
+		saynn("[say=kidlat]My so-called mate decided to lock me up with all that 'inventory' and scattered. And you probably know the rest. Cops bagged me.. the prison slapped me with a collar and this uniform.. And now I get to be a slut, yay me.[/say]")
+
+		saynn("[say=pc]That's rough. Why did they betray you like that?[/say]")
+
+		saynn("Kidlat shrugs it off.")
+
+		saynn("[say=kidlat]No honour among thieves. And I'm a rubbish thief. An even worse person. Surprised we got as far as we did.[/say]")
+
+		saynn("She chuckles.")
+
+		saynn("[say=pc]You're not a bad person.[/say]")
+
+		saynn("Her fold back slightly, her eyes skeptical.")
+
+		saynn("[say=kidlat]Don't be soft on me now. There ain't no good people down here, luv.[/say]")
+
+		saynn("A short moment of silence..")
+
+		saynn("[say=kidlat]Except for you, maybe. Still not sure why you decided to help this dumb blue cat-shaped thing.[/say]")
+
+		addButton("Continue", "See what happens next", "chat_menu")
+	if(state == "ask_drugden"):
+		saynn("[say=pc]Might I ask something?[/say]")
+
+		saynn("Her ears perk, twitching slightly.")
+
+		saynn("[say=kidlat]Ye, go ahead.[/say]")
+
+		saynn("[say=pc]You seem to know your way around these tunnels.[/say]")
+
+		saynn("She grins, flashing a little fang.")
+
+		saynn("[say=kidlat]Yep! I don't live here if you're curious. I still have a cell and stuff. I just spend my free time here.[/say]")
+
+		saynn("That makes her very different from the junkies. They all have lost their minds by now.. only caring about getting their next fix.")
+
+		saynn("[say=pc]Okay. But what draws you here?[/say]")
+
+		saynn("She shrugs, leaning against the wall with her arms folded loosely.")
+
+		saynn("[say=kidlat]I get to earn credits.[/say]")
+
+		saynn("[say=pc]You can earn credits up there.[/say]")
+
+		saynn("[say=kidlat]By bashin' rocks all day? Gets old quick.[/say]")
+
+		saynn("She is right on that one.")
+
+		saynn("[say=pc]There are other ways.[/say]")
+
+		saynn("[say=kidlat]Heh, I know what you mean. I feel like I'd make for a bad slut.[/say]")
+
+		saynn("[say=pc]I didn't say that you should be a slut. There are many ways.[/say]")
+
+		saynn("She smiles and sways her girly hips from one side to another, her paws teasingly cupping her breasts as they slide along the contours of her belly. You get a feeling that she'd be a pretty good slut.. if she wanted to that is.")
+
+		saynn("[say=kidlat]Heh, you're precious, you know that?[/say]")
+
+		saynn("[say=pc]And you're a brat.[/say]")
+
+		saynn("She sticks her tongue out at you.")
+
+		saynn("[say=kidlat]Bratty brat~.[/say]")
+
+		saynn("A silence ensures.. an aura of unanswered questions nagging the feline.")
+
+		saynn("[say=kidlat]I don't know.. I just feel like I belong down here. I just fit. I hope that answers your question.[/say]")
+
+		saynn("Answers some of it.")
+
+		addButton("Continue", "See what happens next", "chat_menu")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -51,6 +202,11 @@ func _react(_action: String, _args):
 		var drugDenEvent = GM.main.DrugDenRun.getEventInRoom(GM.pc.getLocation())
 		buyLine = drugDenEvent.doBuyItem(_args[0])
 		return
+
+	if(_action == "get_bapped"):
+		setFlag("DrugDenModule.KidlatBap", true)
+		var drugDenEvent = GM.main.DrugDenRun.getEventInRoom(GM.pc.getLocation())
+		drugDenEvent.hasBap = false
 
 	setState(_action)
 
