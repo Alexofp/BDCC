@@ -2011,6 +2011,7 @@ config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
+PortableModeDetector="*res://Util/PortableModeDetector.gd"
 Console="*res://UI/DebugUI/ConsoleSingleton.gd"
 OPTIONS="*res://Game/Options/GlobalOptions.gd"
 GlobalRegistry="*res://GlobalRegistry.gd"
