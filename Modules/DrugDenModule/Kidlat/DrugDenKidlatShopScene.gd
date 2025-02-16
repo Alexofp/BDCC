@@ -1,5 +1,6 @@
 extends SceneBase
 
+var isBound = false
 var buyLine = ""
 
 func _init():
@@ -7,6 +8,7 @@ func _init():
 
 func _run():
 	if(state == ""):
+		isBound = getModule("DrugDenModule").isKidlatBound()
 		addCharacter("kidlat", [] if !getModule("DrugDenModule").isKidlatNaked() else ["naked"])
 		playAnimation(StageScene.Duo, "stand", {npc="kidlat", kidlatBox=true, further=true, npcBodyState={naked=getModule("DrugDenModule").isKidlatNaked()}})
 		var customGreet = getModule("DrugDenModule").getKidlatCustomGreeting()
@@ -18,20 +20,20 @@ func _run():
 		saynn("You find Kidlat, standing behind her cardboard box.")
 
 		if (buyLine != ""):
-			saynn("[say=kidlat]"+str(buyLine)+"[/say]")
+			saynn("[say=kidlat]"+str(buyLine if !isBound else "I hope you didn't just take it without paying.. This kitty kinda needs the creds.")+"[/say]")
 
 			buyLine = ""
 		elif (customGreet != ""):
 			saynn("[say=kidlat]"+str(customGreet)+"[/say]")
 
 		elif (isOutOfItems):
-			saynn("[say=kidlat]You bought everything I have, hun! See you around.[/say]")
+			saynn("[say=kidlat]"+str("You bought everything I have, hun! See you around." if !isBound else "Uh.. I think I don't have anything to sell anymore.. Find me again later!")+"[/say]")
 
 		elif (isFirstTimeThisRun || isFirstTimeThisFloor):
-			saynn("[say=kidlat]Hey, luv. Wanna trade?[/say]")
+			saynn("[say=kidlat]"+str("Hey, luv. Wanna trade?" if !isBound else "Oh, hey.. Welcome to my shop, don't mind how I look..")+"[/say]")
 
 		else:
-			saynn("[say=kidlat]Welcome back, hun.[/say]")
+			saynn("[say=kidlat]"+str("Welcome back, hun." if !isBound else "Welcome back.. I think?")+"[/say]")
 
 		saynn("Here is what she is selling:")
 
@@ -42,7 +44,7 @@ func _run():
 		drugDenEvent.applyVisitFlags()
 		if (false):
 			addButton("Buy", "Buy something", "buyKidlatItem")
-		if (hasBap):
+		if (hasBap && !isBound):
 			addButton("Loaf of bread", "Cost: ? credits\n\nA tasty-looking loaf of bread", "get_bapped")
 		if (getFlag("DrugDenModule.Kidlat3Hap", false)):
 			addButton("Chat", "Ask her a few things", "chat_menu")
@@ -69,6 +71,10 @@ func _run():
 
 		addButton("Crimes", "Ask her what she did to end up here in this prison", "ask_crimes")
 		addButton("Drug den", "Ask her why she lives here", "ask_drugden")
+		if (getFlag("DrugDenModule.Kidlat5Hap")):
+			addButton("Credits", "Ask her about credits", "ask_credits")
+		else:
+			addDisabledButton("Credits", "She doesn't trust you enough")
 		addButton("Back", "Go back to the previous menu", "")
 	if(state == "ask_crimes"):
 		saynn("You lean against the nearest wall, showing that you're not buying stuff anymore. Kidlat closes her cardboard box and looks at you with her waiting eyes.")
@@ -192,6 +198,85 @@ func _run():
 		saynn("Answers some of it.")
 
 		addButton("Continue", "See what happens next", "chat_menu")
+	if(state == "ask_credits"):
+		playAnimation(StageScene.Cuddling, "idle", {npc="kidlat"})
+		saynn("[say=pc]Can I ask you something?[/say]")
+
+		saynn("[say=kidlat]Sure, luv. But can I ask you something back first?[/say]")
+
+		saynn("That's unusual.")
+
+		saynn("[say=pc]Go ahead.[/say]")
+
+		saynn("[say=kidlat]Do you wanna.. cuddle for a bit?..[/say]")
+
+		saynn("Interesting proposition. It doesn't hurt to cuddle..")
+
+		saynn("[say=pc]Alright.[/say]")
+
+		saynn("You find the least grossest place nearby and plop your butts onto the floor. Even though the surface is cold, a warm embrace helps..")
+
+		saynn("[say=kidlat]What's your question, luv?[/say]")
+
+		saynn("[say=pc]You're doing this for credits? You know, selling stuff.[/say]")
+
+		saynn("She thinks for a bit and then sighs.")
+
+		saynn("[say=kidlat]Credits make the world go 'round. I don't think I'm very greedy.. but we all have to be, don't you think?[/say]")
+
+		saynn("That's one way to look at things.")
+
+		saynn("[say=kidlat]You literally can't live without credits. But also.. the more wealth you have, the more friends you have.. and also more ways to get away from bad thoughts. I don't wanna be greedy.. but that's just how life works.[/say]")
+
+		saynn("You can just feel the charred parts of her heart through her words.")
+
+		saynn("[say=pc]You don't seem greedy to me.[/say]")
+
+		saynn("She smiles and nuzzles you with her cheek.")
+
+		saynn("[say=kidlat]Hah, thanks. I keep bringing the mood down, I'm sorry hun.[/say]")
+
+		saynn("[say=pc]You're fine. Your mood corresponds to the overall mood of this place pretty well. These walls put pressure on me too.[/say]")
+
+		saynn("She nods and goes back to thinking.")
+
+		saynn("[say=kidlat]What I noticed is.. as soon as you stop providing value for your friends, they will be gone. The whole thing is.. transactional, really.. For example, you will forget me in an instant as soon as I stop selling things.. My dumb ramblings are probably putting you off too..[/say]")
+
+		saynn("That's a bold statement.")
+
+		saynn("[say=pc]They're not dumb. Why do you think I will forget you?[/say]")
+
+		saynn("Her ear lower, her cheeks blushing with cyan.")
+
+		saynn("[say=kidlat]I shouldn't have said that.. You've been different from my other friends.. ex-friends. Actually.. you're awesome, luv, I don't know how to repay you back for everything that you did.[/say]")
+
+		saynn("[say=pc]Don't worry about it.[/say]")
+
+		saynn("You pull her closer and gently caress her sides. Your ears pick up on her purring.")
+
+		saynn("[say=kidlat]I will worry all I want~.[/say]")
+
+		saynn("She turns her head and mlems your nose.")
+
+		saynn("[say=kidlat]But yeah, don't feel bad if you forget me.. I'm used to it.[/say]")
+
+		saynn("[say=pc]Kidlat..[/say]")
+
+		saynn("[say=kidlat]Sorry-y-y.[/say]")
+
+		saynn("She smiles and nuzzles your cheek again.")
+
+		saynn("[say=kidlat]So, the answer is.. Credits themselves don't help much.. but what I do with them does ease life a bit. I hope that makes sense.[/say]")
+
+		saynn("Makes you wonder what she does with the credits.. But it's probably enough cuddling for now.")
+
+		saynn("You help her to get up and return back to it.")
+
+		saynn("[say=kidlat]That was a good transaction, heh~.[/say]")
+
+		saynn("That it was.")
+
+		addButton("Continue", "See what happens next", "chat_menu")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -213,6 +298,7 @@ func _react(_action: String, _args):
 func saveData():
 	var data = .saveData()
 
+	data["isBound"] = isBound
 	data["buyLine"] = buyLine
 
 	return data
@@ -220,4 +306,5 @@ func saveData():
 func loadData(data):
 	.loadData(data)
 
+	isBound = SAVE.loadVar(data, "isBound", false)
 	buyLine = SAVE.loadVar(data, "buyLine", "")

@@ -9,6 +9,8 @@ func getFlags():
 		"Kidlat1Hap": flag(FlagType.Bool),
 		"Kidlat2Hap": flag(FlagType.Bool),
 		"Kidlat3Hap": flag(FlagType.Bool),
+		"Kidlat4Hap": flag(FlagType.Bool),
+		"Kidlat5Hap": flag(FlagType.Bool),
 		
 		"KidlatCustomShopGreet": flag(FlagType.Text),
 		
@@ -34,6 +36,8 @@ func _init():
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat1Scene.gd",
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat2Scene.gd",
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat3Scene.gd",
+		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat4Scene.gd",
+		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat5Scene.gd",
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlatShopScene.gd",
 		]
 	characters = [
@@ -55,6 +59,8 @@ func getKidlatCustomGreeting():
 	return theGreet
 
 func isKidlatNaked():
+	if(isKidlatBound()):
+		return true
 	return getFlag("DrugDenModule.Kidlat2Hap", false) && !getFlag("DrugDenModule.Kidlat3Hap", false)
 
 func regenerateKidlatItems():
@@ -67,3 +73,6 @@ func regenerateKidlatItems():
 	
 func getKidlatAmountOfItemsBoughtTotal():
 	return getFlag("DrugDenModule.KidlatItemsBought", 0)
+
+func isKidlatBound():
+	return getFlag("DrugDenModule.Kidlat4Hap", false) && !getFlag("DrugDenModule.Kidlat5Hap", false)

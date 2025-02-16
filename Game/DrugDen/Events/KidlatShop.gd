@@ -130,7 +130,7 @@ func onSpawn(_drugDen):
 	generateItemsToSell()
 	
 	var itemsBoughtAmount:int = getDrugDenFlag("KidlatItemsBought", 0)
-	if(itemsBoughtAmount > 0 && !getDrugDenFlag("KidlatBap", false) && RNG.chance(30)):
+	if(itemsBoughtAmount > 0 && !getDrugDenFlag("KidlatBap", false) && RNG.chance(30) && !isKidlatBound()):
 		hasBap = true
 
 func getMaxPerFloor() -> int:
@@ -144,7 +144,7 @@ func getStartCooldown() -> int:
 
 func getInteractInfo() -> Dictionary:
 	return {
-		text = "KIDLAAAAT.",
+		text = "You notice someone here.",
 		actions = [
 			{
 				id = "approach",
@@ -257,7 +257,7 @@ func getItemsListText():
 		resultTexts.append(str(_i)+") "+itemRef.getVisibleName()+". Cost: "+str(cost)+" credit"+("s" if cost != 1 else "")+(" (SOLD!)" if wasSold else ""))
 		_i += 1
 	
-	if(hasBap):
+	if(hasBap && !isKidlatBound()):
 		resultTexts.append(str(_i)+") Loaf of bread. Cost: ? credits")
 		_i += 1
 		
@@ -266,7 +266,16 @@ func getItemsListText():
 func isBetterItems() -> bool:
 	return getModuleFlag("Kidlat3Hap", false)
 
+func isKidlatNaked() -> bool:
+	return getModuleFlag("Kidlat2Hap", false) && !getModuleFlag("Kidlat3Hap", false)
+
+func isKidlatBound() -> bool:
+	return getModuleFlag("Kidlat4Hap", false) && !getModuleFlag("Kidlat5Hap", false)
+
 func getAmountOfItemsToSell() -> int:
+	if(isKidlatBound()):
+		return 1
+	
 	if(getModuleFlag("Kidlat2Hap", false) && !getModuleFlag("Kidlat3Hap", false)):
 		return 2
 	

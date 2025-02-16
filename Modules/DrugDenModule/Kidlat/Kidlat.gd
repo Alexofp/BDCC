@@ -52,4 +52,6 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
 
 func getDefaultEquipment():
+	if(GlobalRegistry.getModule("DrugDenModule").isKidlatBound()):
+		return ["inmatecollar", "inmatewristcuffs", "inmateanklecuffs", "blindfold"]
 	return ["inmatecollar", "inmateuniformSexDeviant"]
