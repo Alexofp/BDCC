@@ -39,6 +39,7 @@ func _init():
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat4Scene.gd",
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat5Scene.gd",
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlatShopScene.gd",
+		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlatBoundGropeScene.gd",
 		]
 	characters = [
 		"res://Modules/DrugDenModule/DrugDen/DrugDenStash.gd",

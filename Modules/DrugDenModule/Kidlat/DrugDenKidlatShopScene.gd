@@ -46,8 +46,12 @@ func _run():
 			addButton("Buy", "Buy something", "buyKidlatItem")
 		if (hasBap && !isBound):
 			addButton("Loaf of bread", "Cost: ? credits\n\nA tasty-looking loaf of bread", "get_bapped")
-		if (getFlag("DrugDenModule.Kidlat3Hap", false)):
+		if (getFlag("DrugDenModule.Kidlat3Hap", false) && !isBound):
 			addButton("Chat", "Ask her a few things", "chat_menu")
+		if (isBound && !drugDenEvent.isOutOfItems()):
+			addButton("Steal", "Take what she is selling for free", "do_sell")
+		if (isBound):
+			addButton("Grope", "Grope the helpless shopkeeper", "do_grope")
 	if(state == "get_bapped"):
 		saynn("You notice something unusual among the items that Kidlat is selling.. There is a loaf of bread, just sitting casually in her cardboard box. It looks tasty.. much tastier than the normal slop that you eat.. There doesn't seem to be a price attached to it.. so it must be free?")
 
@@ -292,6 +296,15 @@ func _react(_action: String, _args):
 		setFlag("DrugDenModule.KidlatBap", true)
 		var drugDenEvent = GM.main.DrugDenRun.getEventInRoom(GM.pc.getLocation())
 		drugDenEvent.hasBap = false
+
+	if(_action == "do_sell"):
+		var drugDenEvent = GM.main.DrugDenRun.getEventInRoom(GM.pc.getLocation())
+		buyLine = drugDenEvent.doStealAll()
+		return
+
+	if(_action == "do_grope"):
+		runScene("DrugDenKidlatBoundGropeScene")
+		return
 
 	setState(_action)
 

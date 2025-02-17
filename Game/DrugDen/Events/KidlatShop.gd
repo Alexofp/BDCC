@@ -241,6 +241,22 @@ func doBuyItem(entry:Dictionary):
 	var sellEntry:Dictionary = sellList[itemID]
 	return RNG.pick(sellEntry["buyLines"])
 
+func doStealAll():
+	for entry in selling:
+		var itemID:String = entry["itemID"]
+		#var cost:int = entry["cost"]
+		var itemRef:ItemBase = GlobalRegistry.getItemRef(itemID)
+		
+		if(itemRef == null):
+			continue
+		GM.pc.getInventory().addItem(GlobalRegistry.createItem(itemID))
+		GM.main.addMessage("You stole "+itemRef.getAStackName()+" from Kidlat!")
+		entry["sold"] = true
+		
+		#setDrugDenFlag("KidlatItemsBought", getDrugDenFlag("KidlatItemsBought", 0)+1)
+
+	return "Hope you paid for it, meow.."
+
 func getItemsListText():
 	var resultTexts:Array = []
 	
