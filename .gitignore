@@ -10,5 +10,6 @@ doc/_build/
 logs/
 
 *.pck
+**/*.blend1
 /.idea/
 /*.iml
