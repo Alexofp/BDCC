@@ -1,0 +1,251 @@
+[gd_scene load_steps=61 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes2/SexOralForced.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=474]
+animation = "SexOralForcedFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=475]
+animation = "SexOralForcedInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=476]
+animation = "SexOralForcedLickFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=477]
+animation = "SexOralForcedLick_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=478]
+animation = "SexOralForcedTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=479]
+animation = "SexOralForced_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=480]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=481]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=482]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=483]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=484]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=485]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=486]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=487]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=488]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=489]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=490]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=491]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=492]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=493]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=494]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=495]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=496]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=497]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=498]
+states/SexOralForcedFast_1-loop/node = SubResource( 474 )
+states/SexOralForcedFast_1-loop/position = Vector2( 951, 125 )
+states/SexOralForcedInside_1-loop/node = SubResource( 475 )
+states/SexOralForcedInside_1-loop/position = Vector2( 661, 162 )
+states/SexOralForcedLickFast_1-loop/node = SubResource( 476 )
+states/SexOralForcedLickFast_1-loop/position = Vector2( 261, 280 )
+states/SexOralForcedLick_1-loop/node = SubResource( 477 )
+states/SexOralForcedLick_1-loop/position = Vector2( 261, 190 )
+states/SexOralForcedTease_1-loop/node = SubResource( 478 )
+states/SexOralForcedTease_1-loop/position = Vector2( 467, 42 )
+states/SexOralForced_1-loop/node = SubResource( 479 )
+states/SexOralForced_1-loop/position = Vector2( 630, 313 )
+transitions = [ "SexOralForcedTease_1-loop", "SexOralForcedLick_1-loop", SubResource( 480 ), "SexOralForcedLick_1-loop", "SexOralForcedTease_1-loop", SubResource( 481 ), "SexOralForcedTease_1-loop", "SexOralForcedInside_1-loop", SubResource( 482 ), "SexOralForcedInside_1-loop", "SexOralForcedTease_1-loop", SubResource( 483 ), "SexOralForcedInside_1-loop", "SexOralForced_1-loop", SubResource( 484 ), "SexOralForced_1-loop", "SexOralForcedInside_1-loop", SubResource( 485 ), "SexOralForced_1-loop", "SexOralForcedFast_1-loop", SubResource( 486 ), "SexOralForcedFast_1-loop", "SexOralForced_1-loop", SubResource( 487 ), "SexOralForcedLick_1-loop", "SexOralForcedLickFast_1-loop", SubResource( 488 ), "SexOralForcedLickFast_1-loop", "SexOralForcedLick_1-loop", SubResource( 489 ), "SexOralForcedTease_1-loop", "SexOralForced_1-loop", SubResource( 490 ), "SexOralForced_1-loop", "SexOralForcedTease_1-loop", SubResource( 491 ), "SexOralForcedInside_1-loop", "SexOralForcedFast_1-loop", SubResource( 492 ), "SexOralForcedFast_1-loop", "SexOralForcedInside_1-loop", SubResource( 493 ), "SexOralForcedFast_1-loop", "SexOralForcedTease_1-loop", SubResource( 494 ), "SexOralForcedTease_1-loop", "SexOralForcedFast_1-loop", SubResource( 495 ), "SexOralForcedLick_1-loop", "SexOralForcedInside_1-loop", SubResource( 496 ), "SexOralForcedInside_1-loop", "SexOralForcedLick_1-loop", SubResource( 497 ) ]
+start_node = "SexOralForcedTease_1-loop"
+graph_offset = Vector2( 80, -8 )
+
+[sub_resource type="AnimationNodeBlendTree" id=499]
+graph_offset = Vector2( -348.69, 38.9555 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 498 )
+nodes/StateMachine/position = Vector2( 171.31, 113.956 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=460]
+
+[sub_resource type="AnimationNodeAnimation" id=500]
+animation = "SexOralForcedFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=501]
+animation = "SexOralForcedInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=502]
+animation = "SexOralForcedLickFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=503]
+animation = "SexOralForcedLick_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=504]
+animation = "SexOralForcedTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=505]
+animation = "SexOralForced_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=506]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=507]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=508]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=509]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=510]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=511]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=512]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=513]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=514]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=515]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=516]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=517]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=518]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=519]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=520]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=521]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=522]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=523]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=524]
+states/SexOralForcedFast_2-loop/node = SubResource( 500 )
+states/SexOralForcedFast_2-loop/position = Vector2( 1011, 135 )
+states/SexOralForcedInside_2-loop/node = SubResource( 501 )
+states/SexOralForcedInside_2-loop/position = Vector2( 721, 175 )
+states/SexOralForcedLickFast_2-loop/node = SubResource( 502 )
+states/SexOralForcedLickFast_2-loop/position = Vector2( 264, 297 )
+states/SexOralForcedLick_2-loop/node = SubResource( 503 )
+states/SexOralForcedLick_2-loop/position = Vector2( 285, 175 )
+states/SexOralForcedTease_2-loop/node = SubResource( 504 )
+states/SexOralForcedTease_2-loop/position = Vector2( 481, 47 )
+states/SexOralForced_2-loop/node = SubResource( 505 )
+states/SexOralForced_2-loop/position = Vector2( 678, 327 )
+transitions = [ "SexOralForcedTease_2-loop", "SexOralForcedLick_2-loop", SubResource( 506 ), "SexOralForcedLick_2-loop", "SexOralForcedTease_2-loop", SubResource( 507 ), "SexOralForcedLick_2-loop", "SexOralForcedLickFast_2-loop", SubResource( 508 ), "SexOralForcedLickFast_2-loop", "SexOralForcedLick_2-loop", SubResource( 509 ), "SexOralForcedTease_2-loop", "SexOralForcedInside_2-loop", SubResource( 510 ), "SexOralForcedInside_2-loop", "SexOralForcedTease_2-loop", SubResource( 511 ), "SexOralForcedInside_2-loop", "SexOralForced_2-loop", SubResource( 512 ), "SexOralForced_2-loop", "SexOralForcedInside_2-loop", SubResource( 513 ), "SexOralForcedInside_2-loop", "SexOralForcedFast_2-loop", SubResource( 514 ), "SexOralForcedFast_2-loop", "SexOralForcedInside_2-loop", SubResource( 515 ), "SexOralForcedFast_2-loop", "SexOralForced_2-loop", SubResource( 516 ), "SexOralForced_2-loop", "SexOralForcedFast_2-loop", SubResource( 517 ), "SexOralForcedTease_2-loop", "SexOralForcedFast_2-loop", SubResource( 518 ), "SexOralForcedFast_2-loop", "SexOralForcedTease_2-loop", SubResource( 519 ), "SexOralForcedLick_2-loop", "SexOralForcedInside_2-loop", SubResource( 520 ), "SexOralForcedInside_2-loop", "SexOralForcedLick_2-loop", SubResource( 521 ), "SexOralForcedTease_2-loop", "SexOralForced_2-loop", SubResource( 522 ), "SexOralForced_2-loop", "SexOralForcedTease_2-loop", SubResource( 523 ) ]
+start_node = "SexOralForcedTease_2-loop"
+graph_offset = Vector2( 57, 7 )
+
+[sub_resource type="AnimationNodeBlendTree" id=525]
+graph_offset = Vector2( -322.532, 74.6842 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 524 )
+nodes/StateMachine/position = Vector2( 192.468, 138.684 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=473]
+
+[node name="SexOralForced" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.317465, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06268, 0.0519446, -0.0201359 )
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06268, 0.0519446, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 499 )
+anim_player = NodePath("../Doll3D/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 460 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 525 )
+anim_player = NodePath("../Doll3D2/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 473 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]
+[editable path="Doll3D2"]
+[editable path="Doll3D2/DollSkeleton"]
+[editable path="Doll3D2/DollSkeleton2"]

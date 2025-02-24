@@ -11,6 +11,18 @@ var anims = {
 #	StageScene.GivingBirth: ["idle", "birth"],
 #	StageScene.Hug: ["hug"],
 }
+var animsOnlyList:Array = [
+#	StageScene.MilkingStallDuo,
+#	StageScene.MilkingStallSolo,
+#	StageScene.TFLook,
+#	StageScene.MilkingProstate,
+#	StageScene.MilkingProstateFuck,
+#	StageScene.Showering,
+#	StageScene.ShoweringDuo,
+#	StageScene.SexDoubleDown,
+#	StageScene.SexOralForced,
+#	StageScene.SexAgainstWall,
+]
 
 var currentCategory = ""
 var firstNPC = "pc"
@@ -23,6 +35,11 @@ func _init():
 
 func _reactInit():
 	anims = GlobalRegistry.getStageScenesCachedStates()
+	if(!animsOnlyList.empty()):
+		anims = anims.duplicate()
+		for animID in anims.keys():
+			if(!(animID in animsOnlyList)):
+				anims.erase(animID)
 
 func _run():
 	if(state == ""):

@@ -1,0 +1,272 @@
+[gd_scene load_steps=65 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes2/MilkingProstateFuck.gd" type="Script" id=4]
+[ext_resource path="res://Player/Props/BDSMMachine.tscn" type="PackedScene" id=5]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=575]
+animation = "MilkingProstateFuckFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=576]
+animation = "MilkingProstateFuckInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=577]
+animation = "MilkingProstateFuckTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=578]
+animation = "MilkingProstateFuck_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=579]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=580]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=581]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=582]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=583]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=584]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=585]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=586]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=587]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=588]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=589]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=590]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=591]
+states/MilkingProstateFuckFast_1-loop/node = SubResource( 575 )
+states/MilkingProstateFuckFast_1-loop/position = Vector2( 348, 229 )
+states/MilkingProstateFuckInside_1-loop/node = SubResource( 576 )
+states/MilkingProstateFuckInside_1-loop/position = Vector2( 147, 147 )
+states/MilkingProstateFuckTease_1-loop/node = SubResource( 577 )
+states/MilkingProstateFuckTease_1-loop/position = Vector2( 377, 43 )
+states/MilkingProstateFuck_1-loop/node = SubResource( 578 )
+states/MilkingProstateFuck_1-loop/position = Vector2( 584, 147 )
+transitions = [ "MilkingProstateFuckTease_1-loop", "MilkingProstateFuckInside_1-loop", SubResource( 579 ), "MilkingProstateFuckInside_1-loop", "MilkingProstateFuckTease_1-loop", SubResource( 580 ), "MilkingProstateFuckTease_1-loop", "MilkingProstateFuck_1-loop", SubResource( 581 ), "MilkingProstateFuck_1-loop", "MilkingProstateFuckTease_1-loop", SubResource( 582 ), "MilkingProstateFuckTease_1-loop", "MilkingProstateFuckFast_1-loop", SubResource( 583 ), "MilkingProstateFuckFast_1-loop", "MilkingProstateFuckTease_1-loop", SubResource( 584 ), "MilkingProstateFuckInside_1-loop", "MilkingProstateFuck_1-loop", SubResource( 585 ), "MilkingProstateFuck_1-loop", "MilkingProstateFuckInside_1-loop", SubResource( 586 ), "MilkingProstateFuckInside_1-loop", "MilkingProstateFuckFast_1-loop", SubResource( 587 ), "MilkingProstateFuckFast_1-loop", "MilkingProstateFuckInside_1-loop", SubResource( 588 ), "MilkingProstateFuckFast_1-loop", "MilkingProstateFuck_1-loop", SubResource( 589 ), "MilkingProstateFuck_1-loop", "MilkingProstateFuckFast_1-loop", SubResource( 590 ) ]
+start_node = "MilkingProstateFuckTease_1-loop"
+graph_offset = Vector2( -66, -29 )
+
+[sub_resource type="AnimationNodeBlendTree" id=556]
+graph_offset = Vector2( -132.532, 67.6842 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 591 )
+nodes/StateMachine/position = Vector2( 160, 140 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=460]
+
+[sub_resource type="AnimationNodeAnimation" id=592]
+animation = "MilkingProstateFuckFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=593]
+animation = "MilkingProstateFuckInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=594]
+animation = "MilkingProstateFuckTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=595]
+animation = "MilkingProstateFuck_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=596]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=597]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=598]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=599]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=600]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=601]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=602]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=603]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=604]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=605]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=606]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=607]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=608]
+states/MilkingProstateFuckFast_2-loop/node = SubResource( 592 )
+states/MilkingProstateFuckFast_2-loop/position = Vector2( 440, 287 )
+states/MilkingProstateFuckInside_2-loop/node = SubResource( 593 )
+states/MilkingProstateFuckInside_2-loop/position = Vector2( 248, 198 )
+states/MilkingProstateFuckTease_2-loop/node = SubResource( 594 )
+states/MilkingProstateFuckTease_2-loop/position = Vector2( 468, 96 )
+states/MilkingProstateFuck_2-loop/node = SubResource( 595 )
+states/MilkingProstateFuck_2-loop/position = Vector2( 646, 188 )
+transitions = [ "MilkingProstateFuckInside_2-loop", "MilkingProstateFuckTease_2-loop", SubResource( 596 ), "MilkingProstateFuckTease_2-loop", "MilkingProstateFuckInside_2-loop", SubResource( 597 ), "MilkingProstateFuckTease_2-loop", "MilkingProstateFuck_2-loop", SubResource( 598 ), "MilkingProstateFuck_2-loop", "MilkingProstateFuckTease_2-loop", SubResource( 599 ), "MilkingProstateFuckTease_2-loop", "MilkingProstateFuckFast_2-loop", SubResource( 600 ), "MilkingProstateFuckFast_2-loop", "MilkingProstateFuckTease_2-loop", SubResource( 601 ), "MilkingProstateFuckInside_2-loop", "MilkingProstateFuck_2-loop", SubResource( 602 ), "MilkingProstateFuck_2-loop", "MilkingProstateFuckInside_2-loop", SubResource( 603 ), "MilkingProstateFuckInside_2-loop", "MilkingProstateFuckFast_2-loop", SubResource( 604 ), "MilkingProstateFuckFast_2-loop", "MilkingProstateFuckInside_2-loop", SubResource( 605 ), "MilkingProstateFuck_2-loop", "MilkingProstateFuckFast_2-loop", SubResource( 606 ), "MilkingProstateFuckFast_2-loop", "MilkingProstateFuck_2-loop", SubResource( 607 ) ]
+start_node = "MilkingProstateFuckTease_2-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=609]
+graph_offset = Vector2( -132.532, 67.6842 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 608 )
+nodes/StateMachine/position = Vector2( 160, 140 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=473]
+
+[sub_resource type="AnimationNodeAnimation" id=610]
+animation = "MilkingProstateFuckFast_3-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=558]
+animation = "MilkingProstateFuckInside_3-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=559]
+animation = "MilkingProstateFuckTease_3-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=560]
+animation = "MilkingProstateFuck_3-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=561]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=562]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=567]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=568]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=569]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=570]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=611]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=612]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=613]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=614]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=615]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=616]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=573]
+states/MilkingProstateFuckFast_3-loop/node = SubResource( 610 )
+states/MilkingProstateFuckFast_3-loop/position = Vector2( 449, 334 )
+states/MilkingProstateFuckInside_3-loop/node = SubResource( 558 )
+states/MilkingProstateFuckInside_3-loop/position = Vector2( 172, 251 )
+states/MilkingProstateFuckTease_3-loop/node = SubResource( 559 )
+states/MilkingProstateFuckTease_3-loop/position = Vector2( 449, 116 )
+states/MilkingProstateFuck_3-loop/node = SubResource( 560 )
+states/MilkingProstateFuck_3-loop/position = Vector2( 697, 231 )
+transitions = [ "MilkingProstateFuckTease_3-loop", "MilkingProstateFuckInside_3-loop", SubResource( 561 ), "MilkingProstateFuckInside_3-loop", "MilkingProstateFuckTease_3-loop", SubResource( 562 ), "MilkingProstateFuckTease_3-loop", "MilkingProstateFuck_3-loop", SubResource( 567 ), "MilkingProstateFuck_3-loop", "MilkingProstateFuckTease_3-loop", SubResource( 568 ), "MilkingProstateFuckInside_3-loop", "MilkingProstateFuck_3-loop", SubResource( 569 ), "MilkingProstateFuck_3-loop", "MilkingProstateFuckInside_3-loop", SubResource( 570 ), "MilkingProstateFuckTease_3-loop", "MilkingProstateFuckFast_3-loop", SubResource( 611 ), "MilkingProstateFuckFast_3-loop", "MilkingProstateFuckTease_3-loop", SubResource( 612 ), "MilkingProstateFuckInside_3-loop", "MilkingProstateFuckFast_3-loop", SubResource( 613 ), "MilkingProstateFuckFast_3-loop", "MilkingProstateFuckInside_3-loop", SubResource( 614 ), "MilkingProstateFuckFast_3-loop", "MilkingProstateFuck_3-loop", SubResource( 615 ), "MilkingProstateFuck_3-loop", "MilkingProstateFuckFast_3-loop", SubResource( 616 ) ]
+start_node = "MilkingProstateFuckTease_3-loop"
+graph_offset = Vector2( -35, 50 )
+
+[sub_resource type="AnimationNodeBlendTree" id=574]
+graph_offset = Vector2( -322.532, 57.6842 )
+nodes/StateMachine/node = SubResource( 573 )
+nodes/StateMachine/position = Vector2( 145.468, 148.684 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "StateMachine" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=522]
+
+[node name="MilkingProstateFuck" instance=ExtResource( 2 )]
+transform = Transform( 0.859, 0, 0, 0, 0.859, 0, 0, 0, 0.859, -0.546624, 0.722142, 0 )
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.317465, 2.0428 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 556 )
+anim_player = NodePath("../Doll3D/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 460 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 609 )
+anim_player = NodePath("../Doll3D2/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 473 )
+
+[node name="AnimationTree3" type="AnimationTree" parent="." index="5"]
+tree_root = SubResource( 574 )
+anim_player = NodePath("../BDSMMachine/BDSMMachine2/AnimationPlayer")
+parameters/StateMachine/playback = SubResource( 522 )
+
+[node name="BDSMMachine" parent="." index="6" instance=ExtResource( 5 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]
+[editable path="Doll3D2"]
+[editable path="Doll3D2/DollSkeleton"]
+[editable path="Doll3D2/DollSkeleton2"]

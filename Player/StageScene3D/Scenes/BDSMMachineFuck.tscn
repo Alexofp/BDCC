@@ -239,4 +239,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.846375, 11.2418, 0.0936075 )
 
 [editable path="Doll3D"]
 [editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]
 [editable path="BDSMMachine"]
+[editable path="BDSMMachine/BDSMMachine2"]
