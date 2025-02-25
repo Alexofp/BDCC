@@ -84,7 +84,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "eliza_naked")
 	if(state == "eliza_naked"):
-		# (( new anim forced oral tease underwear
+		playAnimation(StageScene.SexOralForced, "tease", {pc="elizaDemon", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={hard=true}})
 		saynn("Her labcoat, her top, her pencil shirt, all fall down to the floor. All that's left on her is the fancy black lingerie. Her alluring curves, her gorgeous six-pack, her busty chest, wide hips and a firm ass, it's all out on display.")
 
 		saynn("[say=eliza]Liberating.[/say]")
@@ -113,7 +113,7 @@ func _run():
 
 		addButton("Lick", "Worship your queen", "do_lick")
 	if(state == "do_lick"):
-		# (( new anim forced oral lick naked
+		playAnimation(StageScene.SexOralForced, "lick", {pc="elizaDemon", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={hard=true}})
 		saynn("Your tongue flicks out, its tip touches and follows along the soft, slick folds of her demonic pussy. Quinn exhales sharply, her claws digging slightly into your wrists.")
 
 		saynn("[say=eliza]Hmm~..[/say]")
@@ -128,7 +128,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "lick_faster")
 	if(state == "lick_faster"):
-		# (( new anim forced oral lick fast naked
+		playAnimation(StageScene.SexOralForced, "lickfast", {pc="elizaDemon", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={hard=true}})
 		saynn("She moves her hips again.. and again.. her pussy sliding along your face as she begins to ride it. The soft sounds of your worship fill the room, mingling with her growly moans. All the while you just give it your all, your tongue licking away at her hot inner walls, lapping up any juices with full devotion. You're drowning in her heat.. and you can't get enough..")
 
 		saynn("[say=eliza]Such a good.. little.. pet..[/say]")

@@ -1,5 +1,7 @@
 extends SceneBase
 
+var didBreed = false
+
 func _init():
 	sceneID = "DrugDenKidlatBoundGropeScene"
 
@@ -61,6 +63,7 @@ func _run():
 
 		addButton("Make her cum", "Push Kidlat further with your touches", "do_finger")
 		addButton("Enough fun", "Let Kidlat cool down", "do_cooldown")
+		addButtonWithChecks("Forced BJ", "Time for you to have some fun too", "do_bj", [], [[ButtonChecks.HasReachablePenis]])
 		addButtonWithChecks("Breed", "Enough playing around", "do_breed", [], [[ButtonChecks.HasReachablePenis]])
 	if(state == "do_cooldown"):
 		saynn("Enough is enough, you decide to stop the teasing here and step back.")
@@ -110,10 +113,235 @@ func _run():
 		saynn("What a cute kitty.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_breed"):
+		playAnimation(StageScene.SexAgainstWall, "tease", {pc="pc", npc="kidlat", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Enough playing around.")
+
+		saynn("Kidlat's body quivers against you as your hands press her firmly against the cold surface of the nearest wall, raising her legs to her shoulders so that she is not touching the floor anymore. In this pinned position, her soaked slit already brushes against your {pc.penis}..")
+
+		saynn("[say=kidlat]Ohh fuck.. You're not a shy lad, are you..[/say]")
+
+		saynn("She squirms against your tight grip.. but there is nowhere for her to go. You shift her body slightly, pressing the tip of your cock against her inviting cyan flower.. the petals spreading without much force.")
+
+		saynn("[say=kidlat]Mmmhhph.. I'm s-screwed, aren't I..[/say]")
+
+		addButton("Ram it in", "Take her raw", "do_breed_fuck")
+	if(state == "do_breed_fuck"):
+		playAnimation(StageScene.SexAgainstWall, "sex", {pc="pc", npc="kidlat", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Her intuition wasn't betraying her.. but her body is.")
+
+		saynn("Kidlat lets out a choked gasp as you slide in, filling her in one deep motion. Her slick, hot walls tighten around your shaft immediately, her breasts bouncing wildly as you begin pounding into her without restraint, each thrust shaking her entire body.")
+
+		saynn("[say=kidlat]Nhh.. d-damn junkie.. w-why do you fuck so well.. ah.. you in particular..[/say]")
+
+		saynn("Her mouth is slightly opened, tongue out. Her moans begin to echo through the tunnel, her long fluffy tail is sweeping the floor. You want more.. so you lean in and force a deep kiss, invading her mouth and letting your tongues play, exchanging fluids.")
+
+		saynn("As you pull free, there is a string of saliva hanging between your and her lips. You two are so close.. and yet she can't see you.. while you see her cyan deep blushing face in full detail.")
+
+		saynn("[say=kidlat]Ngh..[/say]")
+
+		addButton("Faster", "Speed up the action", "do_breed_fast")
+	if(state == "do_breed_fast"):
+		playAnimation(StageScene.SexAgainstWall, "fast", {pc="pc", npc="kidlat", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Before she can say anything else, you thrust harder, faster, driving your cock into her with a primal need. Kidlat lets out a gasp as her entire body shudders, her pussy clenching around you even tighter.")
+
+		saynn("[say=kidlat]W-wai.. I'm.. ah.. hah.. Ah-h..[/say]")
+
+		saynn("You can feel it.. And you keep going, ravaging that cute cyan slit, keeping your pace fast and hard. Poor kitty is shivering in your hands, her lips parted as she is panting and huffing at you, her hot breathing tickling your nose.. while you just keep fucking her.")
+
+		saynn("Her pussy clenches around your {pc.penis} one last time.. before her climax washes over her.. her walls spasming around you as her juices drip down her thighs, dripping onto the floor.")
+
+		saynn("[say=kidlat]Hhh..ah..[/say]")
+
+		saynn("You don't stop, thrusting through her orgasm, overpowering her clenched inner walls.. grunting silently as the pleasurable friction makes your own legs shiver slightly too..")
+
+		addButton("Inside", "Breed the kitty", "do_breed_inside")
+		addButton("Pull out", "You'd rather not risk it", "do_breed_pullout")
+	if(state == "do_breed_inside"):
+		playAnimation(StageScene.SexAgainstWall, "inside", {pc="pc", npc="kidlat", pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You're close.. and the thought of breeding her completely fills your mind. You pull back.. before burying your cock as deep as possible, pinning her into the wall as your climax hits. Your {pc.penis} smashes into her cervix.. and begins throbbing.. spilling waves of hot, creamy {pc.cum} directly into her womb.")
+
+		saynn("[say=kidlat]Hhh-ahh.. f-fuck.. damn.. animal.. ah.. s-so much..[/say]")
+
+		saynn("Kidlat's restrained body trembles against you.. her long tail wrapping around your leg as you fill her up.. right here in these tunnels.. She is panting like crazy while your member is still inside, pumping her with the last bits of your seed.")
+
+		saynn("By the end of it, you're left panting..")
+
+		didBreed = true
+		addButton("Continue", "See what happens next", "do_breed_after")
+	if(state == "do_breed_pullout"):
+		playAnimation(StageScene.SexAgainstWall, "tease", {pc="pc", npc="kidlat", pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You're close.. But the thought of breeding her here, in these dirty tunnels doesn't seem appealing. You keep ramming it in.. but as soon as you feel the point of no return.. you pull out, your cock leaving her wet slit with a satisfying wet noise.")
+
+		saynn("[say=kidlat]Ah!..[/say]")
+
+		saynn("More silent grunts leave your lips as your {pc.penis} begins shooting beautiful strings of {pc.cum} into the wall behind Kidlat. Some of it lands on her fluffy tail that wraps around your leg during this.")
+
+		saynn("[say=kidlat]F-fuck..[/say]")
+
+		saynn("Her cyan pussy still clenches around hot empty air, moans escaping her.")
+
+		saynn("By the end of it, you're left panting..")
+
+		addButton("Continue", "See what happens next", "do_breed_after")
+	if(state == "do_breed_after"):
+		playAnimation(StageScene.SexStart, "start", {npc="kidlat", npcBodyState={naked=true}})
+		saynn("Carefully, you lower the squirming feline onto the floor. All without a single word.")
+
+		if (didBreed):
+			saynn("As you pull out, her used pussy instantly starts to drip with your seed, creating a little puddle of creamy stuff under her.")
+
+		else:
+			saynn("Her pussy is still dripping, creating a little puddle of juices under her.")
+
+		saynn("You step back, escaping the grasp of her tail.")
+
+		saynn("[say=kidlat]You're one.. awful.. shopper..[/say]")
+
+		saynn("She looks at you.. tries to.. through the tight blindfold.")
+
+		saynn("[say=kidlat]But maybe I will forgive you.. this time..[/say]")
+
+		saynn("What a cute kitty. Enough fun for now though.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_bj"):
+		playAnimation(StageScene.SexOralForced, "tease", {pc="pc", npc="kidlat", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("She had her share of fun.. time for you to do the same.")
+
+		saynn("Without any notice, you force Kidlat down to her knees in front of you, pulling her cuffed paws high above her head.")
+
+		saynn("[say=kidlat]Eek.. That was pretty rude.. Guess I should've expected it..[/say]")
+
+		saynn("She can't see anything.. but she can surely feel it when the tip of your {pc.penis} presses against her soft lips, smearing a bead of precum onto them. Kidlat flinches, her ears flicking at the sensation. She tries to instinctively pull away.. but you just bring her back, holding her wrists with a tight grip.")
+
+		saynn("[say=kidlat]You're really makin' me do this, lad?[/say]")
+
+		saynn("One of your hands tangles into her dark hair, keeping her extremely still as you drag your shaft along her cheek, feeling the warmth of her blushing furred skin against you. Her tail flicks in frustration.. but when you press your length against her lips again, her rough feline tongue sneakily flicks out to give you a quick lick.")
+
+		saynn("[say=kidlat]You're gonna buy something from me then, okay?[/say]")
+
+		saynn("A silent smirk appears on your face as she willingly parts her lips and grabs the head of your cock with them, her tongue gently plays with its tip, catching the next few drops of pre.")
+
+		saynn("You're not gonna go easy on her..")
+
+		addButton("Face-fucking", "Ramp it up real fast", "do_bj_sex")
+	if(state == "do_bj_sex"):
+		playAnimation(StageScene.SexOralForced, "suck", {pc="pc", npc="kidlat", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("She barely has time to react before you ram your whole length inside her bratty mouth, the head of your cock bending against the back of her mouth before going down her throat. Her muffled protest is lost as her walls instinctively clenche around you. You feel her struggle, trying to pull her bound arms away.. but there is no way for her to stop you.")
+
+		saynn("[say=kidlat]Mmf!.. Nngh..[/say]")
+
+		saynn("With her wrists in your hands, she can't push you away.. she can only take what you give. And so you begin sliding inside, letting her warm mouth envelop you, pulling out of her throat.. just to stretch it again a few moments later.")
+
+		saynn("She gags slightly but tries to adjust, drool already dripping down her chin as you fuck her like this. Each time her throat gets tight around your cock only spurs you on, various wet noises accompanying your motions.")
+
+		addButton("Faster", "Really fuck her face", "do_bj_fast")
+	if(state == "do_bj_fast"):
+		playAnimation(StageScene.SexOralForced, "suckfast", {pc="pc", npc="kidlat", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Her breathes come in short, needy gasps whenever you pull back.. but you don't give her much time before thrusting in again, fucking her face at a faster and faster pace. Her whole body trembles under your onslaught on her throat, her nipples hard, her thighs pressed together as she struggles to keep up.")
+
+		saynn("Kidlat keeps gagging and choking on your cock.. which feels great.. the walls of her throat squeezing your length in all of the various pleasurable ways.")
+
+		saynn("[say=kidlat]Nhhnn.. m..mhhff.. hh..[/say]")
+
+		saynn("Her cheeks are burning cyan.. her body is tense.. but by now she has stopped trying to break free.. just holding her shaky paws clenched into fists.. while you ravage her throat, stretching it and using it for your pleasure.")
+
+		saynn("Her feline tongue is unmistakable.. She could do some real damage with it if she wanted to.. but she just curls around your dick, spreading her saliva along it. What a good kitty.")
+
+		saynn("Her breasts jiggle slightly with each time, her body trembling as she submits to you, her chest rising and falling quickly as she tries her best to keep up.")
+
+		saynn("The way her throat treats you.. makes you want to grunt.. you're getting so close..")
+
+		addButton("Throatpie", "Send it all down her throat", "do_bj_throatpie")
+	if(state == "do_bj_throatpie"):
+		playAnimation(StageScene.SexOralForced, "suckinside", {pc="pc", npc="kidlat", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You thrust deeper one last time.. and just stay like this.. holding her in place as you feel yourself reaching your orgasm. You hear her letting quiet, muffled whimpers, her throat is pulsing around your cock.. pushing you over the edge.")
+
+		saynn("Your balls tense up hard.. as your {pc.penis} starts shooting waves of sticky {pc.cum} deep inside her with multiple throbbing motions..")
+
+		saynn("Kidlat gags a lot by this moment.. but tries to swallow instinctively.. only to realize that there is nothing to swallow, your load is sent directly down her throat, past her mouth into her belly.")
+
+		saynn("[say=kidlat]Nhh.h.. glk.. hh..hhh.. glk.. hh..[/say]")
+
+		saynn("The way her walls milk you for all your seed.. it's amazing.. making you wish you could stay like this forever.")
+
+		saynn("Sadly, you begin to notice Kidlat's strength fading away, her body struggling again.. out of desperation.. as her only source of air was cut off.. replaced with a constant supply of jizz..")
+
+		addButton("Pull out", "Let her breathe", "do_bj_end")
+	if(state == "do_bj_end"):
+		playAnimation(StageScene.SexOralForced, "tease", {pc="pc", npc="kidlat", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You'd rather not make the girl black out on you.. so you pull out as soon as her throat stops draining your balls.")
+
+		saynn("Kidlat gasps for air and starts coughing loudly.. all while still hanging by her arms above her head.")
+
+		saynn("[say=kidlat]Ghh-hh. hhhkhh.. B-bloody f-fucking hell.. kh..[/say]")
+
+		saynn("A thin strand of saliva and {pc.cum} connects her lips to your cock. She coughs more, trying to catch her breath.")
+
+		saynn("[say=kidlat]How about a little warnin' first, huh? F-fuck.. kh..[/say]")
+
+		saynn("Her expression is a mix of clear frustration and something else. She lowers her head and just breathes for a bit while moving her jaw.")
+
+		saynn("[say=kidlat]I kept up pretty well, eh?.. All things considered..[/say]")
+
+		saynn("Slowly, she licks her lips, catching and swallowing any lingering mess. She finds the tip of your cock again and cleans it too, dragging her tongue along its length.")
+
+		saynn("[say=kidlat]Customer always right..[/say]")
+
+		saynn("Looks like she has just made herself a new loyal customer.")
+
+		saynn("You let go of her wrists and help her get up. It's time to wrap up.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
 		return
 
+	if(_action == "do_breed_fuck"):
+		processTime(5*60)
+
+	if(_action == "do_breed_fast"):
+		processTime(5*60)
+
+	if(_action == "do_breed_inside"):
+		processTime(3*60)
+		getCharacter("kidlat").cummedInVaginaBy("pc")
+		GM.pc.orgasmFrom("kidlat")
+
+	if(_action == "do_breed_pullout"):
+		processTime(3*60)
+		GM.pc.orgasmFrom("kidlat")
+
+	if(_action == "do_breed_after"):
+		processTime(3*60)
+
+	if(_action == "do_bj_sex"):
+		processTime(3*60)
+
+	if(_action == "do_bj_fast"):
+		processTime(3*60)
+
+	if(_action == "do_bj_throatpie"):
+		processTime(3*60)
+		getCharacter("kidlat").cummedInMouthBy("pc")
+		GM.pc.orgasmFrom("kidlat")
+
+	if(_action == "do_bj_end"):
+		processTime(3*60)
+
 	setState(_action)
+
+func saveData():
+	var data = .saveData()
+
+	data["didBreed"] = didBreed
+
+	return data
+
+func loadData(data):
+	.loadData(data)
+
+	didBreed = SAVE.loadVar(data, "didBreed", false)

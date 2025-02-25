@@ -12,16 +12,16 @@ var anims = {
 #	StageScene.Hug: ["hug"],
 }
 var animsOnlyList:Array = [
-#	StageScene.MilkingStallDuo,
-#	StageScene.MilkingStallSolo,
-#	StageScene.TFLook,
-#	StageScene.MilkingProstate,
-#	StageScene.MilkingProstateFuck,
-#	StageScene.Showering,
-#	StageScene.ShoweringDuo,
-#	StageScene.SexDoubleDown,
-#	StageScene.SexOralForced,
-#	StageScene.SexAgainstWall,
+	StageScene.MilkingStallDuo,
+	StageScene.MilkingStallSolo,
+	StageScene.TFLook,
+	StageScene.MilkingProstate,
+	StageScene.MilkingProstateFuck,
+	StageScene.Showering,
+	StageScene.ShoweringDuo,
+	StageScene.SexDoubleDown,
+	StageScene.SexOralForced,
+	StageScene.SexAgainstWall,
 ]
 
 var currentCategory = ""
