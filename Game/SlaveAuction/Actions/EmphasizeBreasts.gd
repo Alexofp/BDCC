@@ -27,7 +27,7 @@ func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 	
 		sayPresenter("These are some beatiful, firm little babies. Trust me, they are incredibly fun to grope.")
 	if(_slaveTraits.has("BreastsHuge") && _slaveTraits["BreastsHuge"] > 0.0):
-		saynn("{presenter.You} {presenter.youVerb('approach')} {slave.name} before gripping {slave.hisHer} {slave.breasts} with both hands, lifting and squeezing them gently to emphasize their fullness. {presenter.YouHe} {presenter.youVerb('smile')} at the bidders as you continue to present the heavy curves to them.")
+		saynn("{presenter.You} {presenter.youVerb('approach', 'approaches')} {slave.name} before gripping {slave.hisHer} {slave.breasts} with both hands, lifting and squeezing them gently to emphasize their fullness. {presenter.YouHe} {presenter.youVerb('smile')} at the bidders as you continue to present the heavy curves to them.")
 	
 		sayPresenter("Look at the size of these! Full, soft, and incredibly fun to squeeze. You won’t find a better pair, trust me.")
 

@@ -134,7 +134,7 @@ func getSlaveReaction(_char:BaseCharacter, _reactionType) -> String:
 		])
 	if(_reactionType == AuctionSlaveReaction.MindBroken):
 		return RNG.pick([
-			"{slave.name} stands still, eyes dull and unfocused as {presenter.you} {presenter.youVerb('touch')} {slave.hisHer} body. There’s no reaction, {slave.heShe} doesn’t seem to notice what’s happening.",
+			"{slave.name} stands still, eyes dull and unfocused as {presenter.you} {presenter.youVerb('touch', 'touches')} {slave.hisHer} body. There’s no reaction, {slave.heShe} doesn’t seem to notice what’s happening.",
 			"{slave.name} remains motionless, {slave.hisHer} gaze vacant as {presenter.you} {presenter.youVerb('emphasize')} {slave.hisHer} form. {slave.HeShe} is completely detached from reality, unresponsive to {presenter.your} touch.",
 			"{slave.name}'s body is limp, {slave.hisHer} mind too far gone to care about being displayed. {slave.HeShe} offers no resistance, no acknowledgment of what’s happening around {slave.himHer}.",
 			"{slave.name} stares blankly into the distance, completely indifferent to {presenter.your} touch. {slave.HeShe} doesn’t react as {presenter.you} {presenter.youVerb('highlight')} {slave.hisHer} body, broken beyond recognition.",
