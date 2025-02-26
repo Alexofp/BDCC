@@ -1,12 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Hair/KidlatHair/hairKidlat.png" type="Texture" id=2]
-[ext_resource path="res://AssetsSource/character/MeshesExport/ponytail_png_001.material" type="Material" id=3]
 [ext_resource path="res://Player/Player3D/Parts/Hair/KidlatHair/hairKidlat_pattern.png" type="Texture" id=4]
 [ext_resource path="res://Player/Player3D/Parts/MeshWithPattern.gd" type="Script" id=10]
 
-[sub_resource type="ArrayMesh" id=1]
+[sub_resource type="ArrayMesh" id=5]
 resource_name = "KidlatHair_ponytailpng001"
 surfaces/0 = {
 "aabb": AABB( -1.13626, 6.0474, 0.055772, 2.32907, 2.32907, 9.99868e-06 ),
@@ -15,7 +14,6 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 6389207,
 "index_count": 6,
-"material": ExtResource( 3 ),
 "primitive": 4,
 "skeleton_aabb": [ AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -1.13626, 6.0474, 0.055772, 2.32907, 2.32907, 9.99868e-06 ) ],
 "vertex_count": 4
@@ -127,7 +125,7 @@ params_cull_mode = 2
 params_depth_draw_mode = 3
 albedo_texture = ExtResource( 2 )
 
-[sub_resource type="ArrayMesh" id=3]
+[sub_resource type="ArrayMesh" id=6]
 resource_name = "KidlatHair_ponytailpng002"
 surfaces/0 = {
 "aabb": AABB( -0.458053, 6.0474, 0.240584, 1.37877, 1.1885, 9.99868e-06 ),
@@ -136,7 +134,6 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 6389207,
 "index_count": 6,
-"material": ExtResource( 3 ),
 "primitive": 4,
 "skeleton_aabb": [ AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.458053, 6.0474, 0.240584, 1.37877, 1.1885, 9.99868e-06 ) ],
 "vertex_count": 4
@@ -146,7 +143,7 @@ surfaces/0 = {
 
 [node name="kidlathair" type="MeshInstance" parent="." index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.012 )
-mesh = SubResource( 1 )
+mesh = SubResource( 5 )
 skin = SubResource( 2 )
 material/0 = SubResource( 4 )
 script = ExtResource( 10 )
@@ -154,7 +151,7 @@ bodypartSlot = "hair"
 customSkinPattern = ExtResource( 4 )
 
 [node name="kidlathair2" type="MeshInstance" parent="." index="1"]
-mesh = SubResource( 3 )
+mesh = SubResource( 6 )
 skin = SubResource( 2 )
 material/0 = SubResource( 4 )
 script = ExtResource( 10 )
