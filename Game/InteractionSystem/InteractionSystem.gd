@@ -150,7 +150,7 @@ func processTime(_howMuch:int):
 
 func decideNextAction(interaction, _context:Dictionary = {}):
 	if(interaction == null):
-		assert(false, "Interation is null!")
+		assert(false, "Interaction is null!")
 		return
 	if(interaction.wasDeleted):
 		return

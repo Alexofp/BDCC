@@ -69,9 +69,9 @@ func getPoseDescriptor():
 	if(currentPose == POSE_LEGRAISED):
 		return " with one leg raised"
 	if(currentPose == POSE_AGAINSTWALL):
-		return " agaisnt a wall"
+		return " against a wall"
 	if(currentPose == POSE_PINNEDWALL):
-		return " pinned agaisnt a wall"
+		return " pinned against a wall"
 	return " [color=red]FIX DESCRIPTOR[/color]"
 
 const POSE_DEFAULT = "POSE_DEFAULT"

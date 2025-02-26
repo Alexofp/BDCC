@@ -30,7 +30,7 @@ func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 	
 		sayPresenter("This cock is going to give you everything you want, every time.")
 	if(_slaveTraits.has("PenisLong") && _slaveTraits["PenisLong"] > 0.0):
-		saynn("With a dramatic gesture, {presenter.you} {presenter.youVerb('approach')} the slave, {presenter.yourHis} hand reaching out to grab that {slave.penis} and give it a few slow strokes. As the weight of it fills {presenter.yourHis} hand, the bidders' eyes widen in appreciation.")
+		saynn("With a dramatic gesture, {presenter.you} {presenter.youVerb('approach', 'approaches')} the slave, {presenter.yourHis} hand reaching out to grab that {slave.penis} and give it a few slow strokes. As the weight of it fills {presenter.yourHis} hand, the bidders' eyes widen in appreciation.")
 	
 		sayPresenter("Now this.. is something special. Just look at the size of this cock!")
 		
@@ -134,7 +134,7 @@ func getSlaveReaction(_char:BaseCharacter, _reactionType) -> String:
 		])
 	if(_reactionType == AuctionSlaveReaction.Shy):
 		return RNG.pick([
-			"{slave.name}'s face flushes deeply as {presenter.you} {presenter.youVerb('touch')} {slave.hisHer} cock, a quiet gasp escaping {slave.hisHer} lips. {slave.HeShe} squirms slightly but doesn’t resist the display.",
+			"{slave.name}'s face flushes deeply as {presenter.you} {presenter.youVerb('touch', 'touches')} {slave.hisHer} cock, a quiet gasp escaping {slave.hisHer} lips. {slave.HeShe} squirms slightly but doesn’t resist the display.",
 			"{slave.name} bites {slave.hisHer} lip, blushing furiously as {presenter.you} {presenter.youVerb('present')} {slave.hisHer} cock to the crowd, the shyness making {slave.himHer} tremble slightly.",
 			"A deep blush spreads across {slave.name}'s cheeks as {presenter.you} {presenter.youVerb('hold')} {slave.hisHer} cock, the embarrassment clear in {slave.hisHer} body language.",
 			"{slave.name} avoids eye contact, {slave.hisHer} cheeks burning red as {presenter.you} {presenter.youVerb('emphasize')} {slave.hisHer} cock, the slave trembling slightly from the attention.",
