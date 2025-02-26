@@ -458,7 +458,7 @@ func doDomAction(_id, _actionInfo):
 		var text = RNG.pick([
 			"{dom.You} {dom.youVerb('open')} {dom.yourHis} mouth and {dom.youVerb('let')} {sub.your} "+RNG.pick(["cock", "dick", "member"])+" in before wrapping {dom.yourHis} lips around it.",
 		])
-		getDom().gotOrificeStretchedBy(BodypartSlot.Head, subID, 0.1)
+		getDom().gotOrificeStretchedBy(BodypartSlot.Head, subID, true, 0.1)
 		affectSub(subInfo.fetishScore({Fetish.OralSexReceiving: 1.0}), 0.1, -0.3, -0.01)
 		sendSexEvent(SexEvent.HolePenetrated, subID, domID, {hole=BodypartSlot.Head,engulfed=true,strapon=false})
 		return {text = text, domSay=domReaction(SexReaction.AboutToSuckSubOff)}

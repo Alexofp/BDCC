@@ -332,7 +332,7 @@ func processTurn():
 			sendSexEvent(SexEvent.PainInflicted, domID, subID, {pain=howMuchPainAdd,isDefense=false,intentional=false})
 			domInfo.addLust(10)
 			domInfo.addArousalForeplay(0.1)
-			getSub().gotOrificeStretchedBy(usedBodypart, domID, 0.1)
+			getSub().gotOrificeStretchedBy(usedBodypart, domID, true, 0.1)
 			return {text = text}
 	
 	if(state == "fucking"):
@@ -355,7 +355,7 @@ func processTurn():
 		if(RNG.chance(20)):
 			var freeRoom = getSub().getPenetrationFreeRoomBy(usedBodypart, domID)
 			
-			getSub().gotOrificeStretchedBy(usedBodypart, domID, 0.1)
+			getSub().gotOrificeStretchedBy(usedBodypart, domID, true, 0.1)
 			
 			if(usedBodypart == BodypartSlot.Vagina):
 				if(freeRoom <= 5.0):
@@ -616,7 +616,7 @@ func doDomAction(_id, _actionInfo):
 		else:
 			# Cock len vs Vagina depth check here
 			if(!RNG.chance(getSub().getPenetrateChanceBy(usedBodypart, domID))):
-				getSub().gotOrificeStretchedBy(usedBodypart, domID, 0.1)
+				getSub().gotOrificeStretchedBy(usedBodypart, domID, true, 0.1)
 				var text = RNG.pick([
 					"{dom.Your} "+getDickName()+" stretches {sub.your} "+RNG.pick(usedBodypartNames)+" out while trying to fit inside.",
 				])
@@ -630,7 +630,7 @@ func doDomAction(_id, _actionInfo):
 				sendSexEvent(SexEvent.HolePenetrated, domID, subID, {hole=usedBodypart,engulfed=false,strapon=isStraponSex()})
 				gonnaCumOutside = false
 				#getSub().gotFuckedBy(usedBodypart, domID)
-				getSub().gotOrificeStretchedBy(usedBodypart, domID, 0.2)
+				getSub().gotOrificeStretchedBy(usedBodypart, domID, true, 0.2)
 				state = "fucking"
 				affectSub(subInfo.fetishScore({fetishReceiving: 1.0}), 0.1, -0.3, 0.0)
 				affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.1*domSensitivity(), -0.05)
@@ -684,7 +684,7 @@ func doDomAction(_id, _actionInfo):
 				getSub().doPainfullyStretchHole(usedBodypart, domID)
 			
 			#isTryingToKnot = true
-			getSub().gotOrificeStretchedBy(usedBodypart, domID, 0.5)
+			getSub().gotOrificeStretchedBy(usedBodypart, domID, true, 0.5)
 			if(RNG.chance(getSub().getKnottingChanceBy(usedBodypart, domID))):
 				knotSuccess = true
 			else:
@@ -820,7 +820,7 @@ func doDomAction(_id, _actionInfo):
 			var text = RNG.pick([
 				"{dom.You} {dom.youVerb('try', 'tries')} to "+RNG.pick(["pull", "yank"])+" {dom.yourHis} "+RNG.pick(["cock", "dick"])+" out but {dom.youVerb('fail')}. The knot slowly deflates.",
 			])
-			getSub().gotOrificeStretchedBy(usedBodypart, domID, 0.1)
+			getSub().gotOrificeStretchedBy(usedBodypart, domID, true, 0.1)
 			affectSub(subInfo.fetishScore({fetishReceiving: 1.0}), 0.1, -0.3, 0.0)
 			affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.1, -0.05)
 			subInfo.addArousalForeplay(0.1)
@@ -952,7 +952,7 @@ func doSubAction(_id, _actionInfo):
 		return {text = "{sub.You} {sub.youVerb('rub')} against {dom.youHim}.",}
 	if(_id == "envelop"):
 		if(!RNG.chance(getSub().getPenetrateChanceBy(usedBodypart, domID))):
-			getSub().gotOrificeStretchedBy(usedBodypart, domID, 0.1)
+			getSub().gotOrificeStretchedBy(usedBodypart, domID, true, 0.1)
 			affectSub(subInfo.fetishScore({fetishReceiving: 1.0}), 0.1, 0.0, 0.0)
 			affectDom(domInfo.fetishScore({fetishGiving: 1.0}), 0.2, -0.01)
 			return {text="{sub.You} {sub.youVerb('try', 'tries')} to envelop {dom.yourHis} "+getDickName()+" but it's too big!"}
@@ -964,7 +964,7 @@ func doSubAction(_id, _actionInfo):
 		domInfo.stimulateArousalZone(0.1, BodypartSlot.Penis, 0.5)
 		
 		#getSub().gotFuckedBy(usedBodypart, domID)
-		getSub().gotOrificeStretchedBy(usedBodypart, domID, 0.2)
+		getSub().gotOrificeStretchedBy(usedBodypart, domID, true, 0.2)
 		gonnaCumOutside = false
 		state = "fucking"
 		return {text = "{sub.You} {sub.youVerb('engulf')} {dom.youHis} "+getDickName()+", letting it penetrate {sub.yourHis} "+RNG.pick(usedBodypartNames)+"."}

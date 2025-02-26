@@ -353,7 +353,7 @@ func doDomAction(_id, _actionInfo):
 				"{dom.You} {dom.youVerb('try', 'tries')} to force {dom.yourHis} "+getDickName()+" deeper but {sub.yourHis} throat is just too tight.",
 				"{dom.You} {dom.youVerb('try', 'tries')} to make {sub.you} deepthroat {dom.yourHis} "+getDickName()+" but {sub.youHe} {sub.youAre} just too tight.",
 				])
-			getSub().gotOrificeStretchedBy(BodypartSlot.Head, domID, 0.1)
+			getSub().gotOrificeStretchedBy(BodypartSlot.Head, domID, true, 0.1)
 			affectSub(domInfo.fetishScore({Fetish.OralSexGiving: 1.0}), 0.1, -0.1, -0.05)
 			domInfo.addLust(0.1)
 			domInfo.addArousalSex(0.03)
@@ -367,7 +367,7 @@ func doDomAction(_id, _actionInfo):
 				text = RNG.pick([
 					"{dom.You} {dom.youVerb('reach', 'reaches')} for {sub.yourHis} horns and use them as handlebars. ",
 				]) + text
-			getSub().gotOrificeStretchedBy(BodypartSlot.Head, domID, 0.2)
+			getSub().gotOrificeStretchedBy(BodypartSlot.Head, domID, true, 0.2)
 			affectSub(domInfo.fetishScore({Fetish.OralSexGiving: 1.0}), 0.1, -0.2, -0.05)
 			domInfo.addArousalSex(0.05 * domSensitivity())
 			return {text=text}
@@ -684,7 +684,7 @@ func doSubAction(_id, _actionInfo):
 			var text = RNG.pick([
 				"{sub.You} {sub.youVerb('try', 'tries')} to get {dom.yourHis} "+getDickName()+" into {sub.yourHis} throat but "+RNG.pick(["it's too big", "{sub.youHe} {sub.youVerb('struggle')}", "{sub.youVerb('fail')}"])+".",
 			])
-			getSub().gotOrificeStretchedBy(BodypartSlot.Head, domID, 0.1)
+			getSub().gotOrificeStretchedBy(BodypartSlot.Head, domID, true, 0.1)
 			affectDom(domInfo.fetishScore({Fetish.OralSexReceiving: 1.0}), 0.2*domSensitivity(), -0.03)
 			return {text = text}
 		else:
@@ -692,7 +692,7 @@ func doSubAction(_id, _actionInfo):
 			var text = RNG.pick([
 				"{sub.You} willingly {sub.youVerb('let')} {dom.yourHis} "+getDickName()+" deep down {sub.yourHis} throat and {sub.youVerb('start')} deepthroating it!",
 			])
-			getSub().gotOrificeStretchedBy(BodypartSlot.Head, domID, 0.2)
+			getSub().gotOrificeStretchedBy(BodypartSlot.Head, domID, true, 0.2)
 			affectDom(domInfo.fetishScore({Fetish.OralSexReceiving: 1.0}), 0.2*domSensitivity(), -0.03)
 			domInfo.addArousalForeplay(0.05*domSensitivity())
 			return {text=text}
