@@ -826,7 +826,7 @@ func doBlowjobTurnDom():
 	affectDom(domInfo.fetishScore({Fetish.OralSexReceiving: 0.5})+0.6, 0.1*getDomPenisSensetivity(), 0.0)
 	subInfo.addArousalForeplay(0.03)
 	domInfo.stimulateArousalZone(0.2, BodypartSlot.Penis, 1.0)
-	getSub().gotOrificeStretchedBy(BodypartSlot.Head, domID, 0.05)
+	getSub().gotOrificeStretchedBy(BodypartSlot.Head, domID, true, 0.05)
 	
 	var text = RNG.pick([
 		"{dom.Your} "+getDomDickName()+" is being sucked by {sub.youHim}.",
@@ -891,7 +891,7 @@ func doBlowjobTurnDom():
 
 
 func doDeepthroatTurnDom():
-	getSub().gotOrificeStretchedBy(BodypartSlot.Head, domID, 0.1)
+	getSub().gotOrificeStretchedBy(BodypartSlot.Head, domID, true, 0.1)
 	affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0})-0.3, 0.1, -0.1, -0.01)
 	affectDom(domInfo.fetishScore({Fetish.OralSexReceiving: 0.5})+0.6, 0.1*getDomPenisSensetivity(), 0.0)
 	subInfo.addArousalForeplay(0.06)
@@ -1070,7 +1070,7 @@ func doBlowjobTurnSub():
 	affectDom(domInfo.fetishScore({Fetish.OralSexGiving: 0.5})+0.1, 0.1, 0.0)
 	domInfo.addArousalForeplay(0.03)
 	subInfo.stimulateArousalZone(0.2, BodypartSlot.Penis, 1.0)
-	getDom().gotOrificeStretchedBy(BodypartSlot.Head, subID, 0.05)
+	getDom().gotOrificeStretchedBy(BodypartSlot.Head, subID, true, 0.05)
 	
 	var text = RNG.pick([
 		"{dom.You} {dom.youAre} sucking {sub.your} "+RNG.pick(["cock", "dick", "member"])+".",
