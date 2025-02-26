@@ -51,7 +51,28 @@ func _run():
 		if (isBound && !drugDenEvent.isOutOfItems()):
 			addButton("Steal", "Take what she is selling for free", "do_sell")
 		if (isBound):
-			addButton("Grope", "Grope the helpless shopkeeper", "do_grope")
+			if (!drugDenEvent.wasKidlatGroped()):
+				addButton("Grope", "Grope the helpless shopkeeper", "do_grope")
+				if (GM.pc.getInventory().getAmountOf("restraintkey") >= 2):
+					addButton("Unlock restraints", "Kidlat has 2 pairs of cuffs on her so you will need to use 2 restraint keys to unlock her!", "do_unlock_restraints")
+				else:
+					addDisabledButton("Unlock restraints", "(Not enough restraint keys) Kidlat has 2 pairs of cuffs on her so you will need to use 2 restraint keys to unlock her!")
+			else:
+				addDisabledButton("Grope", "You already groped her, give the poor kitty some rest")
+				addDisabledButton("Unlock restraints", "Groping her and then immediately saving her would be kinda suspicious..")
+		GM.ES.triggerRun(Trigger.TalkingToNPC, ["kidlat"])
+	if(state == "just_unlock_this_time"):
+		saynn("You use the restraint keys to unlock the poor Kidlat.")
+
+		saynn("[say=kidlat]Oh, hey luv. Thank you! You saved me trying to get out of these cuffs again.. And for this..[/say]")
+
+		saynn("She runs to one of the corners and pries a panel off.. before pulling a few items out.")
+
+		saynn("[say=kidlat]I can offer you a restock of my wares![/say]")
+
+		saynn("Kidlat neatly places her new wares in her cardboard box.")
+
+		addButton("Continue", "See what happens next", "")
 	if(state == "get_bapped"):
 		saynn("You notice something unusual among the items that Kidlat is selling.. There is a loaf of bread, just sitting casually in her cardboard box. It looks tasty.. much tastier than the normal slop that you eat.. There doesn't seem to be a price attached to it.. so it must be free?")
 
@@ -303,7 +324,23 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "do_grope"):
+		var drugDenEvent = GM.main.DrugDenRun.getEventInRoom(GM.pc.getLocation())
 		runScene("DrugDenKidlatBoundGropeScene")
+		drugDenEvent.wasGroped = true
+		return
+
+	if(_action == "do_unlock_restraints"):
+		GM.pc.getInventory().removeXOfOrDestroy("restraintkey", 2)
+		setFlag("DrugDenModule.KidlatLockedUpRandomly", false)
+		if(!getFlag("DrugDenModule.Kidlat5Hap", false)):
+			setFlag("DrugDenModule.Kidlat5Hap", true)
+			getCharacter("kidlat").resetEquipment()
+			runScene("DrugDenKidlat5Scene")
+			endScene()
+		else:
+			getCharacter("kidlat").resetEquipment()
+			getModule("DrugDenModule").regenerateKidlatItems()
+			setState("just_unlock_this_time")
 		return
 
 	setState(_action)

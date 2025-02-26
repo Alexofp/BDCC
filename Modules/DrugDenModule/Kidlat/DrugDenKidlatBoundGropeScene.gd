@@ -64,6 +64,7 @@ func _run():
 		addButton("Make her cum", "Push Kidlat further with your touches", "do_finger")
 		addButton("Enough fun", "Let Kidlat cool down", "do_cooldown")
 		addButtonWithChecks("Forced BJ", "Time for you to have some fun too", "do_bj", [], [[ButtonChecks.HasReachablePenis]])
+		addButtonWithChecks("Forced lick", "Time for you to have some fun too", "do_lick", [], [[ButtonChecks.HasReachableVagina]])
 		addButtonWithChecks("Breed", "Enough playing around", "do_breed", [], [[ButtonChecks.HasReachablePenis]])
 	if(state == "do_cooldown"):
 		saynn("Enough is enough, you decide to stop the teasing here and step back.")
@@ -294,6 +295,114 @@ func _run():
 		saynn("You let go of her wrists and help her get up. It's time to wrap up.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_lick"):
+		playAnimation(StageScene.SexOralForced, "tease", {pc="pc", npc="kidlat", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("She had her share of fun.. time for you to do the same.")
+
+		saynn("Without any notice, you force Kidlat down to her knees in front of you, pulling her cuffed paws high above her head.")
+
+		saynn("[say=kidlat]Eek.. That was pretty rude.. Junkies these days..[/say]")
+
+		saynn("Your {pc.foot} nudges her thighs, making her spread her legs for you, revealing just how wet she already is. The fur around her cyan slit is all shiny and slick.")
+
+		saynn("[say=kidlat]I'm not for sale, lad.. But I hope you will buy somethin' after this![/say]")
+
+		saynn("You stand close to her.. so close that your own wet flower is hovering a few inches away from her blushing face. Her chest is rising and falling in deep, long breaths.. yeah, she can totally feel your heat.")
+
+		saynn("[say=kidlat]That's a.. very wet.. scent. I'm sorry, I don't take payments in fish.[/say]")
+
+		saynn("So cheeky. You know just the way to use those bratty lips.")
+
+		addButton("Pull close", "Make her work", "do_lick_sex")
+	if(state == "do_lick_sex"):
+		playAnimation(StageScene.SexOralForced, "lick", {pc="pc", npc="kidlat", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Without a word, you push your {pc.masc} hips forward. Your dripping slit presses against her lips.")
+
+		saynn("[say=kidlat]O-oi-..[/say]")
+
+		saynn("The sudden contact makes her entire body tense, her mouth parts around your sensitive folds while the scent of your arousal fills her senses.")
+
+		saynn("She instinctively tries to pull away.. but your firm grasp on her cuffed wrists prevents it, forcing her into your crotch instead as you roll your hips against her face, rubbing your soaked folds against her soft lips.")
+
+		saynn("[say=kidlat]Mmfff-..[/say]")
+
+		saynn("She muffles a protest, her warm breathing spreading against your clit and folds. It sends a shiver through you, your pussy dripping arousal onto the fur of her cheeks.. onto her snout.. making her blush harder.")
+
+		saynn("You press harder against her mouth, your juices smearing against her lips.. until she has no choice but to taste you.")
+
+		saynn("[say=kidlat]Huff..f..[/say]")
+
+		saynn("She huffs warmly.. But then.. slowly.. tentatively.. her tongue flicks out.")
+
+		saynn("[say=kidlat]Mmf..[/say]")
+
+		saynn("She laps at your slit once, as if testing.. before another slow lick drags from your entrance up to your clit. Her cyan tongue has such a great texture, it makes you shiver, your legs giving up a little.")
+
+		saynn("[say=kidlat]Ngh.. hah.. yer real into this..[/say]")
+
+		saynn("Even now, she is trying to stay smug. So you roll your hips again, making her snout press against your mound, covering up her nostrils. She gasps softly, her tongue slipping out again, flicking against your clit.. it makes you let out a silent grunt.")
+
+		saynn("[say=kidlat]Heh..[/say]")
+
+		saynn("She keeps giving you teasing licks.. while you slowly ride her face, enjoying the sensations. The feline doesn't seem to resist much anymore, her own pussy dripping onto the floor.")
+
+		addButton("Faster", "Really grind her face", "do_lick_fast")
+	if(state == "do_lick_fast"):
+		playAnimation(StageScene.SexOralForced, "lickfast", {pc="pc", npc="kidlat", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Your shivering and the quiet noises make her smirk again.. so you speed up, proceeding to grind her face harder, forcing her deeper into your soaked needy folds.")
+
+		saynn("[say=kidlat]Mmmph-!..[/say]")
+
+		saynn("She tries to lean back.. but your grip keeps her right where she belongs.. between your legs.")
+
+		saynn("[say=kidlat]Haah.. f-fuckin'.. mmhhph..[/say]")
+
+		saynn("She gets the message.")
+
+		saynn("Her tongue is pressed firmly against your slit now, no longer hesitant. She does slow, deep strokes up and down your dripping pussy with it. The contrast of her rough tongue against your soft, sensitive folds sends more jolts of pleasure through you. Your thighs squeeze slightly around her head.. and she lets out a muffled whine.. but doesn't stop.")
+
+		saynn("[say=kidlat]Mmhh.. tastes.. hh.. nice..[/say]")
+
+		saynn("The way her voice vibrates between your legs adds to the sensations. She adjusts a little, tilting her head just enough to let her tongue prod at your pussy entrance.. and then sliding inside.")
+
+		saynn("Your breath hitches, your inner walls hugging the invading tongue.. tongue that is littered with little barbs all over. Her little brat grin returns. But it feels so good..")
+
+		saynn("She laps at you hungrily now, swirling her tongue inside you before pulling back to flick at your clit a few more times. Slow, lazy strokes are followed by sudden quick licks.. all the while you gently grind her face, making that blindfold on her eyes very wet by now..")
+
+		saynn("She purrs, the vibrations making your whole body shudder. Your fingers tighten against her wrists, pulling her into you.")
+
+		saynn("[say=kidlat]Mmhh~..[/say]")
+
+		saynn("Her tongue works your clit faster, her mouth sealing around you to suck gently before flicking it again. You feel needier and needier.. your hips buck against her face as you are ramping up the grinding again, chasing that pleasure..")
+
+		saynn("[say=kidlat]Mmmmhh.. ngh..[/say]")
+
+		saynn("She lets out a low purring again.. and that's what pushes you over.")
+
+		saynn("Your orgasm slams into you. Your whole body locks up, your legs trembling, thighs clamping around her head as you let out a silent cry, pleasure crashing through in overwhelming waves..")
+
+		saynn("Kidlat doesn't stop.. even as your juices gush onto her tongue, she keeps licking, keeps sucking, keeps devouring every last drop of your release. Her tongue slides inside you again and starts lapping at your pulsating inner walls, extending your peak..")
+
+		addButton("Continue", "See what happens next", "do_lick_after")
+	if(state == "do_lick_after"):
+		playAnimation(StageScene.SexOralForced, "tease", {pc="pc", npc="kidlat", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("She only pulls away when your grip loosens, her lips shiny, her breath heavy.. just like yours.")
+
+		saynn("Kidlat tilts her head up, grinning breathlessly into the darkness.")
+
+		saynn("[say=kidlat]Fuckin' hell.. haven't had customers like you before.[/say]")
+
+		saynn("You smirk and brush a thumb over her soaked lips.. making her lick them.")
+
+		saynn("Her ears flick, her tail swishes behind her.")
+
+		saynn("[say=kidlat]Tell other junkies I have the best customer service.. wait, don't..[/say]")
+
+		saynn("Licking and sniffing your pussy for so long clearly made her space out a little.")
+
+		saynn("Better stop there.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -330,6 +439,17 @@ func _react(_action: String, _args):
 		GM.pc.orgasmFrom("kidlat")
 
 	if(_action == "do_bj_end"):
+		processTime(3*60)
+
+	if(_action == "do_lick_sex"):
+		processTime(3*60)
+
+	if(_action == "do_lick_fast"):
+		processTime(3*60)
+		getCharacter("kidlat").cummedInMouthBy("pc", FluidSource.Vagina)
+		GM.pc.orgasmFrom("kidlat")
+
+	if(_action == "do_lick_after"):
 		processTime(3*60)
 
 	setState(_action)

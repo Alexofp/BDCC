@@ -121,6 +121,7 @@ const weightBetterList = {
 
 var selling:Array = []
 var hasBap:bool = false
+var wasGroped:bool = false
 
 func _init():
 	id = "KidlatShop"
@@ -164,9 +165,12 @@ func doInteract(_actionID:String, _args:Array = []) -> Dictionary:
 		return {sceneID="DrugDenKidlat1Scene"}
 	
 	var isFirstTimeInRun:bool = isFirstTimeThisRun()
+	var isFirstTimeOnTheFloor:bool = isFirstTimeThisFloor()
 	var scene2Hap:bool = getModuleFlag("Kidlat2Hap", false)
 	var scene3Hap:bool = getModuleFlag("Kidlat3Hap", false)
-	var itemsBoughtAmount:int = getDrugDenFlag("KidlatItemsBought", 0)
+	var itemsBoughtAmount:int = getModuleFlag("KidlatItemsBought", 0)
+	var scene4Hap:bool = getModuleFlag("Kidlat4Hap", false)
+	var isLockedRandomly:bool = getModuleFlag("KidlatLockedUpRandomly", false)
 	
 	if(!scene2Hap):
 		if(isFirstTimeInRun && RNG.chance(100) && itemsBoughtAmount >= 3):
@@ -178,8 +182,20 @@ func doInteract(_actionID:String, _args:Array = []) -> Dictionary:
 			setModuleFlag("Kidlat3Hap", true)
 			setDrugDenFlag("hasKidlatUniform", false)
 			return {sceneID="DrugDenKidlat3Scene"}
+			
+	if((scene3Hap && !scene4Hap)): #  || true
+		if((isFirstTimeInRun && RNG.chance(100) && itemsBoughtAmount >= 8)): #  || true
+			setModuleFlag("Kidlat4Hap", true)
+			GlobalRegistry.getCharacter("kidlat").resetEquipment()
+			return {sceneID="DrugDenKidlat4Scene"}
 	
+	if((scene4Hap && isFirstTimeOnTheFloor && !isLockedRandomly)): # || true
+		if(RNG.chance(5)):
+			setModuleFlag("KidlatCustomShopGreet", "I triggered a trap again.. oopsie.. Welcome to my shop, whoever you are..")
+			setModuleFlag("KidlatLockedUpRandomly", true)
+			generateItemsToSell()
 	
+	GlobalRegistry.getCharacter("kidlat").resetEquipment()
 	return {sceneID="DrugDenKidlatShopScene"}
 
 func getMapIcon():
@@ -234,7 +250,7 @@ func doBuyItem(entry:Dictionary):
 	GM.main.addMessage("You bought "+itemRef.getAStackName()+" from Kidlat!")
 	entry["sold"] = true
 	
-	setDrugDenFlag("KidlatItemsBought", getDrugDenFlag("KidlatItemsBought", 0)+1)
+	setModuleFlag("KidlatItemsBought", getModuleFlag("KidlatItemsBought", 0)+1)
 	
 	if(!sellList.has(itemID) || !sellList[itemID].has("buyLines")):
 		return "There you go, hun!"
@@ -253,7 +269,7 @@ func doStealAll():
 		GM.main.addMessage("You stole "+itemRef.getAStackName()+" from Kidlat!")
 		entry["sold"] = true
 		
-		#setDrugDenFlag("KidlatItemsBought", getDrugDenFlag("KidlatItemsBought", 0)+1)
+		#setModuleFlag("KidlatItemsBought", getModuleFlag("KidlatItemsBought", 0)+1)
 
 	return "Hope you paid for it, meow.."
 
@@ -286,7 +302,7 @@ func isKidlatNaked() -> bool:
 	return getModuleFlag("Kidlat2Hap", false) && !getModuleFlag("Kidlat3Hap", false)
 
 func isKidlatBound() -> bool:
-	return getModuleFlag("Kidlat4Hap", false) && !getModuleFlag("Kidlat5Hap", false)
+	return (getModuleFlag("Kidlat4Hap", false) && !getModuleFlag("Kidlat5Hap", false)) || getModuleFlag("KidlatLockedUpRandomly", false)
 
 func getAmountOfItemsToSell() -> int:
 	if(isKidlatBound()):
@@ -328,20 +344,28 @@ func applyVisitFlags():
 func onRunStart(_drugDen):
 	setModuleFlag("KidlatShopFirstTimeRun", true)
 	setModuleFlag("KidlatShopFirstTimeFloor", true)
+	setModuleFlag("KidlatLockedUpRandomly", false)
 
 func onRunEnd(_drugDen):
 	setModuleFlag("KidlatShopFirstTimeRun", false)
 	setModuleFlag("KidlatShopFirstTimeFloor", false)
+	setModuleFlag("KidlatLockedUpRandomly", false)
+	GlobalRegistry.getCharacter("kidlat").resetEquipment()
 
 func onRunNextFloor(_drugDen):
 	setModuleFlag("KidlatShopFirstTimeFloor", true)
+
+func wasKidlatGroped() -> bool:
+	return wasGroped
 
 func saveData() -> Dictionary:
 	return {
 		selling = selling,
 		hasBap = hasBap,
+		wasGroped = wasGroped,
 	}
 
 func loadData(_data:Dictionary):
 	selling = SAVE.loadVar(_data, "selling", [])
 	hasBap = SAVE.loadVar(_data, "hasBap", false)
+	wasGroped = SAVE.loadVar(_data, "wasGroped", false)

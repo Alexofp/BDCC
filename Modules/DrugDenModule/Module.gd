@@ -18,6 +18,7 @@ func getFlags():
 		"KidlatShopFirstTimeFloor": flag(FlagType.Bool),
 		"KidlatBap": flag(FlagType.Bool),
 		"KidlatItemsBought": flag(FlagType.Number),
+		"KidlatLockedUpRandomly": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -76,4 +77,4 @@ func getKidlatAmountOfItemsBoughtTotal():
 	return getFlag("DrugDenModule.KidlatItemsBought", 0)
 
 func isKidlatBound():
-	return getFlag("DrugDenModule.Kidlat4Hap", false) && !getFlag("DrugDenModule.Kidlat5Hap", false)
+	return (getFlag("DrugDenModule.Kidlat4Hap", false) && !getFlag("DrugDenModule.Kidlat5Hap", false)) || getFlag("DrugDenModule.KidlatLockedUpRandomly", false)
