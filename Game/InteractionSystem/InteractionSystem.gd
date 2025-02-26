@@ -166,7 +166,7 @@ func decideNextAction(interaction, _context:Dictionary = {}):
 	for action in actions:
 		var newScore:float = interaction.calcFinalActionScore(action)
 		action["finalScore"] = newScore
-		if(maxScore > newScore):
+		if(newScore > maxScore):
 			maxScore = newScore
 	
 	var minScore:float = maxScore * 0.1 # Filtering out unlikely actions
