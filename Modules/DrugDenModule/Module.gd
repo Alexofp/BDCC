@@ -19,6 +19,7 @@ func getFlags():
 		"KidlatBap": flag(FlagType.Bool),
 		"KidlatItemsBought": flag(FlagType.Number),
 		"KidlatLockedUpRandomly": flag(FlagType.Bool),
+		"KidlatDrunkHappened": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -39,6 +40,8 @@ func _init():
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat3Scene.gd",
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat4Scene.gd",
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat5Scene.gd",
+		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat6Scene.gd",
+		
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlatShopScene.gd",
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlatBoundGropeScene.gd",
 		]
