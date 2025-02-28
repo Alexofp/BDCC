@@ -330,6 +330,11 @@ func generateItemsToSell():
 		if(entryInfo.has("costMin") && entryInfo.has("costMax")):
 			cost = RNG.randi_range(entryInfo["costMin"], entryInfo["costMax"])
 		
+		if(getModuleFlag("DrugDenModule.Kidlat6Hap", false)):
+			cost = int(round(cost*0.8))
+			if(cost < 1):
+				cost = 1
+		
 		selling.append({
 			itemID = nextEntryID,
 			cost = cost,

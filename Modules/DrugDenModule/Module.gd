@@ -11,6 +11,7 @@ func getFlags():
 		"Kidlat3Hap": flag(FlagType.Bool),
 		"Kidlat4Hap": flag(FlagType.Bool),
 		"Kidlat5Hap": flag(FlagType.Bool),
+		"Kidlat6Hap": flag(FlagType.Bool),
 		
 		"KidlatCustomShopGreet": flag(FlagType.Text),
 		

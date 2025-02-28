@@ -15,66 +15,98 @@ func _run():
 		else:
 			isFirst = true
 			setFlag("DrugDenModule.KidlatDrunkHappened", true)
-		saynn("The tunnels are as damp and dimly lit as ever.. You navigate the winding paths, stepping over old debris.. when suddenly..")
+		if (isFirst):
+			saynn("The tunnels are as damp and dimly lit as ever.. You navigate the winding paths, stepping over old debris.. when suddenly..")
 
-		saynn("[say=kidlat]Oi, oi, oi..! That you, luv?[/say]")
+			saynn("[say=kidlat]Oi, oi, oi..! That you, luv?[/say]")
 
-		saynn("The slurred, sing-songy voice catches your attention..")
+			saynn("The slurred, sing-songy voice catches your attention..")
 
-		saynn("A few steps ahead, sits Kidlat, her butt resting on some rusted pipe. She seems happy.. but something is off..")
+			saynn("A few steps ahead, sits Kidlat, her butt resting on some rusted pipe. She seems happy.. but something is off..")
 
-		saynn("[say=kidlat]Hah.. 'bout bloody time someone showed up..[/say]")
+			saynn("[say=kidlat]Hah.. 'bout bloody time someone showed up..[/say]")
 
-		saynn("You approach her.. and see her swaying slightly, ears flicking in lazy motions, eyes half-lidded, unfocused, tail flicking about in slow, wobbly movements.")
+			saynn("You approach her.. and see her swaying slightly, ears flicking in lazy motions, eyes half-lidded, unfocused, tail flicking about in slow, wobbly movements.")
 
-		saynn("[say=kidlat]Hai, luv~.[/say]")
+			saynn("[say=kidlat]Hai, luv~.[/say]")
 
-		saynn("Her uniform is barely holding together.. some buttons undone, one sleeve slipping off her shoulder, shorts pulled down, barely hiding her bits.")
+			saynn("Her uniform is barely holding together.. some buttons undone, one sleeve slipping off her shoulder, shorts pulled down, barely hiding her bits.")
 
-		saynn("[say=kidlat]Welcome to.. hic.. my humble little shop~.[/say]")
+			saynn("[say=kidlat]Welcome to.. hic.. my humble little shop~.[/say]")
 
-		saynn("Kidlat leans forward, her chin resting on her palm. She gives you a slow, smug smirk while her paw waves over her usual setup.. a cardboard box.. with a few scattered items inside..")
+			saynn("Kidlat leans forward, her chin resting on her palm. She gives you a slow, smug smirk while her paw waves over her usual setup.. a cardboard box.. with a few scattered items inside..")
 
-		saynn("Under the pipe that she is sitting at.. you notice a bottle. Yeah.. the smell is unmistakable.")
+			saynn("Under the pipe that she is sitting at.. you notice a bottle. Yeah.. the smell is unmistakable.")
 
-		saynn("[say=kidlat]Got all sortsa good shite today.. hic.. 'm talkin'.. real premium..[/say]")
+			saynn("[say=kidlat]Got all sortsa good shite today.. hic.. 'm talkin'.. real premium..[/say]")
 
-		saynn("Her attempt at looking composed seems a bit weak.")
+			saynn("Her attempt at looking composed seems a bit weak.")
 
-		saynn("Then, as if suddenly remembering something, she gets up and leans in close.. Too close.. almost collapsing even.. Her breath is warm, sweet..")
+			saynn("Then, as if suddenly remembering something, she gets up and leans in close.. Too close.. almost collapsing even.. Her breath is warm, sweet..")
 
-		saynn("[say=kidlat]But also.. got an extra special offer.. just for you, luv..[/say]")
+			saynn("[say=kidlat]But also.. got an extra special offer.. just for you, luv..[/say]")
 
-		saynn("Her voice dips into a purr.. and then swaps to a light giggle. Her paw is trailing her clawed digits up her own arm.. before dragging them down her chest, slipping between the barely buttoned fabric of her uniform.. and cupping her breast underneath.")
+			saynn("Her voice dips into a purr.. and then swaps to a light giggle. Her paw is trailing her clawed digits up her own arm.. before dragging them down her chest, slipping between the barely buttoned fabric of her uniform.. and cupping her breast underneath.")
 
-		saynn("[say=kidlat]S'me.[/say]")
+			saynn("[say=kidlat]S'me.[/say]")
 
-		saynn("Her bedroom eyes are met with your unsure stare. She leans back and spreads her arms dramatically, her leg shoves the cardboard box away.")
+			saynn("Her bedroom eyes are met with your unsure stare. She leans back and spreads her arms dramatically, her leg shoves the cardboard box away.")
 
-		saynn("[say=kidlat]C'monnnnn.. Will even give you a special price.. hic.. Free!  I'm free to use. Free to fuck~.[/say]")
+			saynn("[say=kidlat]C'monnnnn.. Will even give you a special price.. hic.. Free!  I'm free to use. Free to fuck~.[/say]")
 
-		saynn("Her grin is utterly shameless, her tail curling playfully behind her, paw letting go of her chest and sliding down into her shorts.. the visible fabric shuffling tells you what she is doing in there.")
+			saynn("Her grin is utterly shameless, her tail curling playfully behind her, paw letting go of her chest and sliding down into her shorts.. the visible fabric shuffling tells you what she is doing in there.")
 
-		saynn("Kidlat tilts her head slightly, exposing the curve of her neck.. before committing to a stretch.. her chest rises and falls as she reaches high, her body tensing up.. before a cute moan escapes her lips.")
+			saynn("Kidlat tilts her head slightly, exposing the curve of her neck.. before committing to a stretch.. her chest rises and falls as she reaches high, her body tensing up.. before a cute moan escapes her lips.")
 
-		saynn("[say=kidlat]Ah~.. Watcha waitin' for, luv? Scared this lil' kitty shopkeeper can't handle ya?[/say]")
+			saynn("[say=kidlat]Ah~.. Watcha waitin' for, luv? Scared this lil' kitty shopkeeper can't handle ya?[/say]")
 
-		saynn("She licks her lips.")
+			saynn("She licks her lips.")
 
-		saynn("[say=kidlat]Pfft.. hic.. nah, I'd be so good for ya. Promise. Jus' gimme a ride, eh? Let me be your lil' plaything for the night~.[/say]")
+			saynn("[say=kidlat]Pfft.. hic.. nah, I'd be so good for ya. Promise. Jus' gimme a ride, eh? Let me be your lil' plaything for the night~.[/say]")
 
-		saynn("She pulls her shorts down more, teasing you with the sight of her cyan clit.. her digits idly rubbing it.")
+			saynn("She pulls her shorts down more, teasing you with the sight of her cyan clit.. her digits idly rubbing it.")
 
-		saynn("You feel her eyes lock onto you.. needy.")
+			saynn("You feel her eyes lock onto you.. needy.")
 
-		saynn("[say=kidlat]Wellll? You takin' me up on the offer, luv.. or you gonna be a bloody coward?[/say]")
+			saynn("[say=kidlat]Wellll? You takin' me up on the offer, luv.. or you gonna be a bloody coward?[/say]")
 
-		saynn("She giggles, biting her lip.")
+			saynn("She giggles, biting her lip.")
 
-		if (!GM.pc.hasReachablePenis()):
-			saynn("[say=kidlat]C'mon.. I even have a cute toy 'ere that you can use..[/say]")
+			if (!GM.pc.hasReachablePenis()):
+				saynn("[say=kidlat]C'mon.. I even have a cute toy 'ere that you can use..[/say]")
 
-			saynn("Oh yeah, there is a strapon harness in her box. Kitty really came prepared.")
+				saynn("Oh yeah, there is a strapon harness in her box. Kitty really came prepared.")
+
+		else:
+			# (( Not the first time
+			saynn("The tunnels twist and turn as you make your way through, the familiar scent lingering in the air..")
+
+			saynn("Alcohol.")
+
+			saynn("[say=kidlat]Oi, oi.. that you, luv?[/say]")
+
+			saynn("Playful, drunk voice grabs your attention. Yep, there she is.")
+
+			saynn("Kidlat is leaning against a wall, her uniform a mess.. again.. shirt is half-open, shorts riding dangerously low. A half-empty bottle is dangling from her fingers, swaying with lazy movements.")
+
+			saynn("She grins up at you, purring quietly. Looks like Kidlat is drunk.. again.")
+
+			saynn("[say=kidlat]Knew you'd come find me again~.[/say]")
+
+			saynn("She pushes away from the wall, stretching and letting out a cute moan. Then, without hesitation, she slides her free hand between her thighs, rubbing herself right there in front of you.. drunk and horny.")
+
+			saynn("[say=kidlat]I'm open for business again, hun~. Wanna exchange some stuff~?[/say]")
+
+			saynn("She giggles, her cheeks blushing shamelessly.")
+
+			saynn("[say=kidlat]C'mon.. ain't gonna make a lady beg, are ya?[/say]")
+
+			saynn("She bites her lip, her other hand tugging her shorts down just enough to show a glimpse of her cyan clit.")
+
+			if (!GM.pc.hasReachablePenis()):
+				saynn("[say=kidlat]C'mon.. I even have a cute toy 'ere that you can use..[/say]")
+
+				saynn("Oh yeah, there is still a strapon harness in her box. Kitty really wants you to use it..")
 
 		addButton("Drunk?", "Ask her why she is drunk", "ask_why_drunk")
 		addButton("Sex", "Might as well fuck that horny kitty", "do_sex")
@@ -173,9 +205,9 @@ func _run():
 
 		saynn("[say=pc]You know how to get it?[/say]")
 
-		saynn("[say=kidlat]Others are selling it. You know.. contraband.. Costs me a pretty penny. Still worth it, in my opinion.[/say]")
+		saynn("[say=kidlat]Others are selling it. You know.. contraband.. Costs me a pretty penny. Still worth it, in my opinion. Helps with the dark thoughts.[/say]")
 
-		saynn("Some things make more sense now..")
+		saynn("Some things make more sense now.. Wait.. Looks like you've been helping her to pay for her alcohol.")
 
 		saynn("You could interrogate her. Find out the whole reason.. Order her to quit.. But looking around.. yeah.. Popping a cold one here seems like a dream come true.")
 
@@ -201,14 +233,116 @@ func _run():
 
 		saynn("[say=kidlat]Sometimes this dumb cat-shaped thing doesn't understand you..[/say]")
 
-		saynn("[say=pc]What is here to understand? Just looking after this blue cat-shaped cat.[/say]")
+		saynn("[say=pc]I'm just looking after this blue cat-shaped cat.[/say]")
 
 		saynn("She chuckles softly.")
 
 		saynn("[say=kidlat]Yeah, heh.. Who else is gonna sell you random crap, right, hah..[/say]")
 
-		saynn("[say=pc]That's not why I'm here. Not why I gave you that pill.[/say]")
+		saynn("[say=pc]That's not why I'm here. Not why I gave you that pill. Same for the stolen uniform and the cuffs.[/say]")
 
+		saynn("Her ears perk. But she stays silent for some time.. thinking. She leans forward and looks back at you over her shoulder.")
+
+		saynn("[say=kidlat]Well.. why do all of that then?[/say]")
+
+		saynn("The obvious answer isn't so obvious for her. You don't hesitate.")
+
+		saynn("[say=pc]'Cause I care.[/say]")
+
+		saynn("She stiffens. Just slightly. Her big feline eyes are searching for insincerity in yours.. but they will never find any.. you look as serious as only some can.")
+
+		saynn("[say=kidlat]Heh..[/say]")
+
+		saynn("She looks away, unable to keep eye contact any longer.")
+
+		saynn("[say=kidlat]That's.. real sweet.. luv..[/say]")
+
+		saynn("[say=pc]You don't trust me?[/say]")
+
+		saynn("[say=kidlat]..well..[/say]")
+
+		saynn("She stays silent.")
+
+		saynn("[say=kidlat]It's just that.. I'm a dumb drama queen that sometimes just drinks her problems away. Why would anyone care for me..[/say]")
+
+		saynn("[say=pc]Look at me, Kidlat.[/say]")
+
+		saynn("Her ear perk.. her chin lowers. She plays with the bottle of alcohol in her paw.")
+
+		saynn("[say=pc]Please, just for a bit.[/say]")
+
+		saynn("Slowly, she looks at you again. Her sad eyes are watery.")
+
+		saynn("[say=pc]You are my friend, that's why I care for you. I can't solve all your problems, I have a bunch of my own. And.. At some point we might go our own separate ways, that's just how life works. But while I'm here, I wanna help with what I can.[/say]")
+
+		saynn("She keeps staring into your deep eyes.")
+
+		saynn("[say=pc]Not because you have a nice ass.. even though you totally do..[/say]")
+
+		saynn("A cute smile flashes on her face from your joke. A smile that is so infectious..")
+
+		saynn("[say=pc]Not because you sell me things.. although I'm very grateful for that too.[/say]")
+
+		saynn("Too? Better not focus on it.")
+
+		saynn("[say=pc]I just.. like you.. I wanna see you be happy. Because you're my friend. When you're happy, I also become happier.[/say]")
+
+		saynn("[say=kidlat]A friend? Heh.[/say]")
+
+		saynn("Kidlat seems to be cheering up. That's good.")
+
+		saynn("[say=pc]Maybe a bit more than that, who knows. I'd use the word fuckbuddies but it might be too much.[/say]")
+
+		saynn("You hear a chuckle.. and feel a slight bap of her paw on your nose. Oh yeah, the bottle is on the floor now.")
+
+		saynn("[say=kidlat]I'm just teasing.. Relax, luv..[/say]")
+
+		saynn("[say=pc]We're here together, in this mess. Might as well make the most out of it. Together.[/say]")
+
+		saynn("You end your speech there.. and just stare back at the smiling cat.")
+
+		saynn("[say=kidlat]Well.. I'm happy to be your friend~. Or your fuckbuddy, that sounds fancy, hah.[/say]")
+
+		saynn("Why not.. Fuckbuddies are like buddies.. but better.")
+
+		saynn("[say=kidlat]You help me, I help you. Still sounds transactional.. but you know what.. fuck it, I'm willing to empty my account on this one~.[/say]")
+
+		saynn("[say=pc]I'd be a bit more responsible with your savings. They might just run out at some point.[/say]")
+
+		saynn("[say=kidlat]Hah. I knoo-o-ow.. At some point our paths might diverge. Doesn't stop us from being friends.. or fuckbuddies~.[/say]")
+
+		saynn("[say=pc]Yeah.[/say]")
+
+		saynn("She rubs into you and nuzzles your face.. her purring reverberates through your whole body.")
+
+		saynn("Then she just rests against you, her tail brushing against your legs..")
+
+		saynn("Time slowly draws by.. It is usually quite chilly here.. but you only feel warmness.")
+
+		saynn("Kidlat breaks the silence.")
+
+		saynn("[say=kidlat]This life sucks sometimes.[/say]")
+
+		saynn("You raise a brow.")
+
+		saynn("[say=kidlat]But it sucks less with friends like you~.[/say]")
+
+		saynn("[say=pc]Same for you.[/say]")
+
+		addButton("Continue", "See what happens next", "after_cuddle")
+	if(state == "after_cuddle"):
+		playAnimation(StageScene.Duo, "stand", {npc="kidlat"})
+		saynn("After some time, Kidlat gets up and stretches.")
+
+		saynn("[say=kidlat]Well.. If you wanna buy something, I'm happy to provide, luv. For some reason I get a feeling that I won't need as many credits anymore~.[/say]")
+
+		saynn("[say=pc]They don't hurt though, right?[/say]")
+
+		saynn("[say=kidlat]I will bap you![/say]")
+
+		saynn("You smile and shrug.")
+
+		addButton("Browse", "See what she has to sell", "do_browse_resetshop")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -219,6 +353,17 @@ func _react(_action: String, _args):
 		GM.pc.getInventory().removeXOfOrDestroy("AnaphrodisiacPill", 1)
 
 	if(_action == "do_browse"):
+		endScene()
+		runScene("DrugDenKidlatShopScene")
+		return
+
+	if(_action == "after_cuddle"):
+		processTime(10*60)
+		addMessage("Kidlat will now have better prices")
+
+	if(_action == "do_browse_resetshop"):
+		setFlag("DrugDenModule.Kidlat6Hap", true)
+		getModule("DrugDenModule").regenerateKidlatItems()
 		endScene()
 		runScene("DrugDenKidlatShopScene")
 		return
