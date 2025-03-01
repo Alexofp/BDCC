@@ -22,6 +22,8 @@ var animsOnlyList:Array = [
 #	StageScene.SexDoubleDown,
 #	StageScene.SexOralForced,
 #	StageScene.SexAgainstWall,
+#	StageScene.SexLowDoggy,
+#	StageScene.SexCowgirlAmazon,
 ]
 
 var currentCategory = ""
