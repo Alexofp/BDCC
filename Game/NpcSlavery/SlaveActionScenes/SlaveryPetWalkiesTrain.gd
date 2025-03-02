@@ -203,7 +203,7 @@ func _run():
 		
 			saynn("[say=pc]Lick.[/say]")
 			
-			saynn("That command is quite unusual for pets.. but {npc.name} obeys anyway and proceeds to drag {npc.his} tongue over your sensetive folds, occasionally giving your clit a little smooch and lick too.")
+			saynn("That command is quite unusual for pets.. but {npc.name} obeys anyway and proceeds to drag {npc.his} tongue over your sensitive folds, occasionally giving your clit a little smooch and lick too.")
 		
 			saynn("[say=pc]Good {npc.boy}.[/say]")
 		else:

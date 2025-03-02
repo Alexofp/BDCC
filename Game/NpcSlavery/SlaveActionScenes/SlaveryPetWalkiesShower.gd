@@ -126,7 +126,7 @@ func _run():
 			
 			saynn("Water starts flowing along your pet's private bits and washing away any mess with it. A bit humiliating.. but not for good puppies.")
 			
-			saynn("Your pet moans softly as the water flows along and between {npc.his} sensetive pussy folds.")
+			saynn("Your pet moans softly as the water flows along and between {npc.his} sensitive pussy folds.")
 		else:
 			saynn("You also want to wash inside your pet's tailhole so you get up and put your foot on {npc.his} head, pinning {npc.him} to the cold wet floor while also making {npc.him} stick {npc.his} butt high up, ass positioned directly under the shower head.")
 			

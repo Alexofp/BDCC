@@ -140,7 +140,7 @@ func _run():
 
 		saynn("[say=artica]Y-yes.. ah.. hah..[/say]")
 
-		saynn("She feels the knot at the base of her cock inflating with blood.. and slapping against the sensetive folds, unable to fit inside anymore.")
+		saynn("She feels the knot at the base of her cock inflating with blood.. and slapping against the sensitive folds, unable to fit inside anymore.")
 
 		saynn("[say=artica]I should stop.. r-right now.. ah.. just a few more.. mhmm-m.. and that's all..[/say]")
 
@@ -248,7 +248,7 @@ func _run():
 
 		saynn("[say=artica]Wh-what.. are you..[/say]")
 
-		saynn("You don't answer, instead bringing the fleshlight close to her twitching cock, brushing the sensetive cyan folds against the pointy canine cock tip.. Artica shivers, her body reacting to the teasing touch.")
+		saynn("You don't answer, instead bringing the fleshlight close to her twitching cock, brushing the sensitive cyan folds against the pointy canine cock tip.. Artica shivers, her body reacting to the teasing touch.")
 
 		saynn("[say=pc]Such an eager girl..[/say]")
 

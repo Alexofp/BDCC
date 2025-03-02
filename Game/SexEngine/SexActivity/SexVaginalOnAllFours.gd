@@ -228,7 +228,7 @@ func getStartTextForPose(thePose):
 		])
 	elif(thePose == POSE_MATINGPRESS):
 		text = RNG.pick([
-			"{dom.You} {dom.youVerb('pin')} {sub.you} firmly against the floor in a mating press position, folding {sub.yourHis} legs up toward {sub.yourHis} shoulders. {dom.You} {dom.youVerb('press')} {dom.yourself} close, aligning {dom.yourHis} "+getDickName()+" against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
+			"{dom.You} {dom.youVerb('pin')} {sub.you} firmly against the floor in a mating press position, folding {sub.yourHis} legs up toward {sub.yourHis} shoulders. {dom.You} {dom.youVerb('press', 'presses')} {dom.yourself} close, aligning {dom.yourHis} "+getDickName()+" against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
 		])
 	elif(thePose == POSE_LEGRAISED):
 		text = RNG.pick([
@@ -236,7 +236,7 @@ func getStartTextForPose(thePose):
 		])
 	elif(thePose == POSE_AGAINSTWALL):
 		text = RNG.pick([
-			"{dom.You} {dom.youVerb('press')} {sub.you} firmly against the wall, {sub.yourHis} hands braced against it for support. {dom.You} {dom.youVerb('position')} {dom.yourself} behind, letting {dom.yourHis} "+getDickName()+" press against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
+			"{dom.You} {dom.youVerb('press', 'presses')} {sub.you} firmly against the wall, {sub.yourHis} hands braced against it for support. {dom.You} {dom.youVerb('position')} {dom.yourself} behind, letting {dom.yourHis} "+getDickName()+" press against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
 		])
 	elif(thePose == POSE_PINNEDWALL):
 		text = RNG.pick([
@@ -280,7 +280,7 @@ func getSwitchPoseTextForPose(thePose):
 		])
 	elif(thePose == POSE_AGAINSTWALL):
 		text = RNG.pick([
-			"{dom.You} {dom.youVerb('press')} {sub.you} firmly against the wall, {sub.yourHis} hands braced against it for support. {dom.You} {dom.youVerb('position')} {dom.yourself} behind, {dom.yourHis} "+getDickName()+" is still inside {sub.yourHis} "+getUsedBodypartName()+"!",
+			"{dom.You} {dom.youVerb('press', 'presses')} {sub.you} firmly against the wall, {sub.yourHis} hands braced against it for support. {dom.You} {dom.youVerb('position')} {dom.yourself} behind, {dom.yourHis} "+getDickName()+" is still inside {sub.yourHis} "+getUsedBodypartName()+"!",
 		])
 	elif(thePose == POSE_PINNEDWALL):
 		text = RNG.pick([
