@@ -1,6 +1,7 @@
 extends SceneBase
 
 var isFirst = true
+var isStrapon = false
 
 func _init():
 	sceneID = "DrugDenKidlat6Scene"
@@ -343,10 +344,164 @@ func _run():
 		saynn("You smile and shrug.")
 
 		addButton("Browse", "See what she has to sell", "do_browse_resetshop")
+	if(state == "do_vagsex"):
+		playAnimation(StageScene.SexLowDoggy, "tease", {pc="pc", npc="kidlat", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		addCharacter("kidlat", ["naked"])
+		saynn("She is being quite.. persuasive.. so why not take her up on that great offer.")
+
+		if (!isStrapon):
+			saynn("Without an extra word, your hand reaches out to grab her by the collar and bring her drunken form down.. lower and lower.. pretty much pinning her into the floor with her rear stuck up.")
+
+		else:
+			saynn("Her eyes shift from side to side as you grab that offered strapon harness from her box and secure it around your waist. Then, without an extra word, your hand reaches out to grab her by the collar and bring her drunken form down.. lower and lower.. pretty much pinning her into the floor with her rear stuck up.")
+
+		saynn("[say=kidlat]Eek.. Such a strong lad..[/say]")
+
+		saynn("[say=pc]Such a cute prey.[/say]")
+
+		saynn("Her drunken fluffy tail finds your forehead.. and misses.. but then tries again and baps you.")
+
+		saynn("[say=kidlat]I'm not cu-u-ute.[/say]")
+
+		saynn("Tail was easy to deal with with a quick tug.. Your hands then swiftly strip her shirt off.. and pull her shorts down, tossing the needless clothing aside.")
+
+		saynn("Underneath you is now a naked body that's trembling with a mix of desire and helplessness, arched in such a way that her slick entrance already meets with your "+str("hardening" if !isStrapon else "new rubber")+" length..")
+
+		addButton("Continue", "See what happens next", "do_vagsex_sex")
+	if(state == "do_vagsex_sex"):
+		playAnimation(StageScene.SexLowDoggy, "sex", {pc="pc", npc="kidlat", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("A soft, startled moan escapes her as you press forward, the tip of your "+str("{pc.penis}" if !isStrapon else "strapon")+" sliding into her waiting pussy. She gasps as her tight walls envelop you, every inch of "+str("your" if !isStrapon else "that")+" shaft met with a warm, wet flesh. She doesn't seem to resist.. even if you're not exactly being gentle.")
+
+		saynn("[say=kidlat]Ah.. You sure are taking the most out of your special offer..[/say]")
+
+		saynn("One of your hands is pressed into the floor, supporting you.. while the second finds her fluffy neck and wraps its digits around it, just above the collar. A somewhat tight squeeze makes her produce another little gasp.")
+
+		saynn("[say=pc]Is that a problem? I thought you're free to use.[/say]")
+
+		saynn("[say=kidlat]Eek.. This cat-shaped thing is free to use indeed..[/say]")
+
+		saynn("And so you begin a steady, deliberate rhythm, almost forceful, really. Each thrust sends shivers up her spine. Her body quivers against the unyielding concrete as her cyan pussy grips you tighter, inner walls spreading juices along "+str("your cock" if !isStrapon else "that rubber cock")+". Your hand stays on her neck, idly choking her at same time as you're fucking her..")
+
+		saynn("Her breasts, those perfect mounds - complete with a heart-shaped dark spot - slide along the floor from each thrust, her breathing becomes quicker, little moans escaping from her lips more and more.")
+
+		saynn("[say=kidlat]Fuck.. luv.. ah..[/say]")
+
+		addButton("Faster", "Use this kitty for your pleasure", "do_vagsex_sex_fast")
+	if(state == "do_vagsex_sex_fast"):
+		playAnimation(StageScene.SexLowDoggy, "fast", {pc="pc", npc="kidlat", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("The sound of flesh meeting flesh echoes in the tunnel, mingling with the low hum of emergency lights and Kidlat's pants.. Her hips buck reflexively, meeting yours.. as you adjust your rhythm, increasing the onslaught on her needy pussy.")
+
+		saynn("Your hand still reminds Kidlat of her place.. underneath you.. as your eager fucktoy. She doesn't seem to disagree. Instead, her wet, needy slit keeps squeezing your "+str("cock" if !isStrapon else "shiny shaft")+" with a beat of her heart.. a beat that you can just feel through her neck.")
+
+		saynn("[say=kidlat]Hh..ah.. hh.[/say]")
+
+		saynn("The tip of your"+str(" new" if isStrapone else "")+" cock starts reaching a natural wall inside her, leaving a visible bump on her belly on each thrust. She squirms.. but her body is unable to escape from under you, forced to endure the rough pounding.")
+
+		saynn("And soon, her body convulses, arching even harder as an overwhelming wave of pleasure surges through her. Her pussy clenches tightly around you as a cascade of juices floods the space between you.")
+
+		saynn("[say=kidlat]Nh.. hh-h.. c.. cu..[/say]")
+
+		if (!isStrapon):
+			saynn("You feel the explosive rush of her release.. her clenching pussy pushes you further, making you feel your own approaching climax. You don't even realize that you're blocking her from breathing air..")
+
+			addButton("Cum inside", "Breed the drunk kitty", "do_vagsex_inside")
+			addButton("Pull out", "Rather not risk it", "do_vagsex_pullout")
+		else:
+			saynn("You feel the explosive rush of her release.. her clenching pussy making it so the strapon is pushing against your crotch, the friction making you grunt softly.")
+
+			addButton("Pull out", "Enough fun", "do_vagsex_pullout")
+	if(state == "do_vagsex_pullout"):
+		playAnimation(StageScene.SexLowDoggy, "tease", {pc="pc", npc="kidlat", pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		if (!isStrapon):
+			saynn("You let her inner muscles contract tightly, milking your {pc.penis}.. but as soon as your orgasm begins to overwhelm your senses, you pull out, your throbbing shaft sending your seed flying through the air in beautiful arcs with some of it landing on Kidlat's ass and back and the rest hitting the floor.")
+
+			saynn("[say=pc]Nhh..[/say]")
+
+		else:
+			saynn("You let her inner muscles contract tightly, milking that strapon.. but as soon as her orgasm comes to an end, you pull out.")
+
+		saynn("For a long, breathless moment, you both remain stationary like this. Everything else fades away into the background.. dark tunnels, distant echoes, blinking lights.. leaving only the sounds of her body shuffling on the floor, her pulsing pussy that is not yet fully closed..")
+
+		saynn("As you let go of her neck, she starts to hungrily grab air with her mouth.")
+
+		saynn("[say=kidlat]Ah.. fucking hell, luv..[/say]")
+
+		saynn("Her chest is rising and falling in rapid, uneven breaths. Her ass is still stuck up, giving you a great view of her dripping cunt.")
+
+		saynn("[say=kidlat]You've really done me good this time..[/say]")
+
+		saynn("You give that bratty booty a smack, making it jiggle.")
+
+		saynn("[say=kidlat]Ow.. you're damaging the goods..[/say]")
+
+		saynn("[say=pc]You're saying that you're cute and soft and fragile?[/say]")
+
+		saynn("She huffs and baps you with her tail.")
+
+		saynn("[say=kidlat]You silly-y-y..[/say]")
+
+		addButton("Help her up", "You still might want to buy something", "do_sex_helpup")
+	if(state == "do_vagsex_inside"):
+		playAnimation(StageScene.SexLowDoggy, "inside", {pc="pc", npc="kidlat", pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You just let her inner muscles contract tightly, milking your {pc.penis}.. and soon.. a thick, warm creampie begins to fill her waiting depths, your shaft throbbing inside her, pumping her womb full of your {pc.cum} to the brim.")
+
+		saynn("[say=pc]Ngh..[/say]")
+
+		saynn("For a long, breathless moment, you both remain locked in that intense climax. Everything else fades away into the background.. dark tunnels, distant echoes, blinking lights.. leaving only the sounds of her body shuffling on the floor, her stuffed pussy dripping seed..")
+
+		addButton("Pull back", "Enough fucking", "do_vagsex_pullback")
+	if(state == "do_vagsex_pullback"):
+		playAnimation(StageScene.SexLowDoggy, "tease", {pc="pc", npc="kidlat", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("When you finally pull back, your cock is still pulsing faintly.. just like Kidlat's pussy. As you let go of her neck, she starts to hungrily grab air with her mouth.")
+
+		saynn("[say=kidlat]Ah.. fucking hell, luv..[/say]")
+
+		saynn("Her chest is rising and falling in rapid, uneven breaths. Her ass is still stuck up, giving you a great view of her stuffed dripping cunt.")
+
+		saynn("[say=kidlat]You've really done me good this time..[/say]")
+
+		saynn("You give that bratty booty a smack, making her clench enough for a small spurt of seed to come flying out of her used slit.")
+
+		saynn("[say=kidlat]Ow.. you're damaging the goods..[/say]")
+
+		saynn("[say=pc]You're saying that you're cute and soft and fragile?[/say]")
+
+		saynn("She huffs and baps you with her tail.")
+
+		saynn("[say=kidlat]You silly-y-y..[/say]")
+
+		addButton("Help her up", "You still might want to buy something", "do_sex_helpup")
+	if(state == "do_sex_helpup"):
+		addCharacter("kidlat")
+		playAnimation(StageScene.Duo, "stand", {npc="kidlat"})
+		saynn("Kidlat's legs are shaky so you help her to get up.")
+
+		saynn("She looks at you, her hair messy, her eyes satisfied.")
+
+		saynn("[say=kidlat]Meow.. Something else, luv?..[/say]")
+
+		saynn("You stare at her box.")
+
+		saynn("[say=kidlat]Oh, right.. the silly shop..[/say]")
+
+		saynn("She grabs the box and plops it between you and her.")
+
+		saynn("[say=kidlat]Welcome, hun![/say]")
+
+		addButton("Browse", "See what she has to sell", "do_browse")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
+		return
+
+	if(_action == "do_sex"):
+		if(GM.pc.hasReachablePenis()):
+			setState("do_vagsex")
+		else:
+			isStrapon = true
+			setState("do_vagsex")
+			GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("StraponCanine"))
 		return
 
 	if(_action == "give_anaphrodisiac"):
@@ -368,12 +523,36 @@ func _react(_action: String, _args):
 		runScene("DrugDenKidlatShopScene")
 		return
 
+	if(_action == "do_vagsex_sex"):
+		processTime(5*60)
+
+	if(_action == "do_vagsex_sex_fast"):
+		processTime(3*60)
+
+	if(_action == "do_vagsex_inside"):
+		processTime(3*60)
+		getCharacter("kidlat").cummedInVaginaBy("pc")
+		GM.pc.orgasmFrom("kidlat")
+
+	if(_action == "do_vagsex_pullout"):
+		processTime(3*60)
+		GM.pc.orgasmFrom("kidlat")
+
+	if(_action == "do_vagsex_pullback"):
+		processTime(3*60)
+
+	if(_action == "do_sex_helpup"):
+		processTime(3*60)
+		if(isStrapon):
+			GM.pc.removeStrapon()
+
 	setState(_action)
 
 func saveData():
 	var data = .saveData()
 
 	data["isFirst"] = isFirst
+	data["isStrapon"] = isStrapon
 
 	return data
 
@@ -381,3 +560,4 @@ func loadData(data):
 	.loadData(data)
 
 	isFirst = SAVE.loadVar(data, "isFirst", true)
+	isStrapon = SAVE.loadVar(data, "isStrapon", false)
