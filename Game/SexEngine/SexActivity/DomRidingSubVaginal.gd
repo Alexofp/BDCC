@@ -172,7 +172,7 @@ func getStartTextForPose(thePose):
 		])
 	elif(thePose == POSE_STANDRIDE):
 		text = RNG.pick([
-				"{dom.You} {dom.youVerb('raise')} one leg high and {dom.youVerb('pin')} {sub.you} against the nearby wall, {dom.yourHis} {dom.foot} brushing {sub.yourHis} shoulder. {dom.YourHis} "+getUsedBodypartName()+" {dom.youVerb('press')} against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock"]))+throughClothing+".",
+				"{dom.You} {dom.youVerb('raise')} one leg high and {dom.youVerb('pin')} {sub.you} against the nearby wall, {dom.yourHis} {dom.foot} brushing {sub.yourHis} shoulder. {dom.YourHis} "+getUsedBodypartName()+" {dom.youVerb('press', 'presses')} against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock"]))+throughClothing+".",
 			])
 	else:
 		text = RNG.pick([

@@ -323,7 +323,7 @@ func order_doSubAction(_id, _info):
 		else:
 			text += RNG.pick([
 				"Obediently, {sub.you} {sub.youVerb('extend')} {sub.yourHis} tongue and {sub.youVerb('begin')} licking {dom.yourHis} {dom.pussyStretch} pussy.",
-				"{sub.You} {sub.youVerb('press')} {sub.yourHis} tongue to {dom.yourHis} {dom.pussyStretch} pussy, lapping eagerly, obeying {dom.youHis} command without hesitation.",
+				"{sub.You} {sub.youVerb('press', 'presses')} {sub.yourHis} tongue to {dom.yourHis} {dom.pussyStretch} pussy, lapping eagerly, obeying {dom.youHis} command without hesitation.",
 			])
 		text += " "
 		if(domFocus == BodypartSlot.Penis):

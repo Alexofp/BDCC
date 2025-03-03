@@ -55,9 +55,9 @@ func getPuttingOnStringLong(withS):
 
 func getForcedOnMessage(isPlayer = true):
 	if(isPlayer):
-		return getAStackNameCapitalize()+" was forced onto you. The ropes keep rubbing against your sensetive spots"
+		return getAStackNameCapitalize()+" was forced onto you. The ropes keep rubbing against your sensitive spots"
 	else:
-		return getAStackNameCapitalize()+" was forced onto {receiver.name}. The ropes keep rubbing against {receiver.his} sensetive spots"
+		return getAStackNameCapitalize()+" was forced onto {receiver.name}. The ropes keep rubbing against {receiver.his} sensitive spots"
 
 func getRiggedParts(_character):
 	return {
