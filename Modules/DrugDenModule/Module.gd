@@ -12,6 +12,7 @@ func getFlags():
 		"Kidlat4Hap": flag(FlagType.Bool),
 		"Kidlat5Hap": flag(FlagType.Bool),
 		"Kidlat6Hap": flag(FlagType.Bool),
+		"Kidlat7Hap": flag(FlagType.Bool),
 		
 		"KidlatCustomShopGreet": flag(FlagType.Text),
 		
@@ -35,6 +36,7 @@ func _init():
 		"res://Modules/DrugDenModule/DrugDen/DrugDenStartScene.gd",
 		"res://Modules/DrugDenModule/DrugDen/DrugDenEventWhoreScene.gd",
 		"res://Modules/DrugDenModule/DrugDen/DrugDenEventWhoreSubScene.gd",
+		"res://Modules/DrugDenModule/DrugDen/DrugDenEncounterInstantLossScene.gd",
 		
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat1Scene.gd",
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat2Scene.gd",
@@ -42,6 +44,7 @@ func _init():
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat4Scene.gd",
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat5Scene.gd",
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat6Scene.gd",
+		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat7Scene.gd",
 		
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlatShopScene.gd",
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlatBoundGropeScene.gd",
@@ -49,6 +52,7 @@ func _init():
 	characters = [
 		"res://Modules/DrugDenModule/DrugDen/DrugDenStash.gd",
 		"res://Modules/DrugDenModule/Kidlat/Kidlat.gd",
+		"res://Modules/DrugDenModule/Kidlat/JunkieBoozeSeller.gd",
 	]
 	items = []
 	events = [

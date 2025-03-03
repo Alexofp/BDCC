@@ -395,7 +395,7 @@ func _run():
 
 		saynn("[say=kidlat]Hh..ah.. hh.[/say]")
 
-		saynn("The tip of your"+str(" new" if isStrapone else "")+" cock starts reaching a natural wall inside her, leaving a visible bump on her belly on each thrust. She squirms.. but her body is unable to escape from under you, forced to endure the rough pounding.")
+		saynn("The tip of your"+str(" new" if isStrapon else "")+" cock starts reaching a natural wall inside her, leaving a visible bump on her belly on each thrust. She squirms.. but her body is unable to escape from under you, forced to endure the rough pounding.")
 
 		saynn("And soon, her body convulses, arching even harder as an overwhelming wave of pleasure surges through her. Her pussy clenches tightly around you as a cascade of juices floods the space between you.")
 
