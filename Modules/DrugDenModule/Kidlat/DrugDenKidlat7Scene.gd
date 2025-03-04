@@ -162,24 +162,43 @@ func _run():
 
 		saynn("[say=pc]Let's hope that this day will never come.[/say]")
 
+		saynn("A bit optimistic. Feels like life will always find a way to screw you over, one way or another. It's up to you how you will react to it though.")
+
 		saynn("[say=kidlat]Until then, I will just make my current supply last for as long as possible~.[/say]")
 
 		saynn("[say=pc]Supply, huh? How much do you have stored?[/say]")
 
-		saynn("[say=kidlat]Well.. Did you know that it's possible to get drunk on love, luv~?[/say]")
+		saynn("She leans in a bit closer, making you feel her warm breath. Her muzzle is slightly tilted to the side, her eyes are tracking your lips.. Her tongue flicks out and mlems the air.")
 
-		saynn("She winks and mlems your lips. That answers some of your questions.")
+		saynn("[say=kidlat]Well..[/say]")
+
+		saynn("She leaves her mouth slightly opened after that single word, dragging the moment for a little longer.")
+
+		saynn("[say=kidlat]Did you know that it's possible to get drunk on love, luv~?[/say]")
+
+		saynn("She winks and boldly mlems your lips. That answers some of your questions.")
 
 		saynn("[say=kidlat]Hey, why don't you swing by my cell sometime later?[/say]")
 
 		saynn("[say=pc]You have a cell?[/say]")
 
+		saynn("Kidlat pouts and frees one of her hands to poke your cheek with her claws.")
+
 		saynn("[say=kidlat]I always had it! I swear![/say]")
 
 		saynn("[say=pc]Sure, sure.[/say]")
 
+		saynn("She squints.. and boops noses with you.")
+
 		saynn("[say=kidlat]Come and see it yourself then, you silly goober.[/say]")
 
+		saynn("This invitation is hard to say no to.")
+
+		saynn("[say=kidlat]But for now.. I'd be happy to sell you something~. You are my shop's most valuable customer.[/say]")
+
+		saynn("Seeing the population.. it's not that high of a bar to smash.")
+
+		addButton("Browse", "See what she has for sale!", "do_browse")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -190,6 +209,11 @@ func _react(_action: String, _args):
 		runScene("FightScene", ["junkieBoozeSeller"], "boozeJunkieFight")
 		return
 
+	if(_action == "do_browse"):
+		endScene()
+		runScene("DrugDenKidlatShopScene")
+		return
+
 	setState(_action)
 
 func _react_scene_end(_tag, _result):
@@ -197,13 +221,12 @@ func _react_scene_end(_tag, _result):
 		processTime(20 * 60)
 		var battlestate = _result[0]
 		
-		if(GM.main.DrugDenRun != null):
-			GM.main.DrugDenRun.markEncounterAsCompleted(GM.pc.getLocation())
-		
 		if(battlestate == "win"):
 			setFlag("DrugDenModule.Kidlat7Hap", true)
 			setState("fight_won")
 			addExperienceToPlayer(100)
 		else:
+			if(GM.main.DrugDenRun != null):
+				GM.main.DrugDenRun.markEncounterAsCompleted(GM.pc.getLocation())
 			endScene()
 			runScene("DrugDenEncounterInstantLossScene", ["junkieBoozeSeller"])

@@ -45,6 +45,7 @@ func _init():
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat5Scene.gd",
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat6Scene.gd",
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat7Scene.gd",
+		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlat8Scene.gd",
 		
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlatShopScene.gd",
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlatBoundGropeScene.gd",
