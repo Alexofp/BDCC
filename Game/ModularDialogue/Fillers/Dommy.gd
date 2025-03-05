@@ -45,12 +45,16 @@ func getFormIDs() -> Array:
 		"HelpRestraintsAsk",
 		"HelpRestraintsAgree",
 		"HelpRestraintsAltStart",
+		"HelpRestraintsAltRefuseUnhappy",
+		"HelpRestraintsAltRefuseKinky",
+		"HelpRestraintsAltRefuseKinkyReact",
 		"HelpRestraintsDeny",
 		"HelpRestraintsFinished",
 		"HelpRestraintsPaid",
 		"HelpRestraintsRefusePay",
 		"HelpRestraintsRefusePayWhatever",
 		
+		"HelpStocksSlutwallRefuse",
 		"SlutwallStealCredits",
 		"SlutwallAddTip",
 		"StocksShout",
@@ -510,11 +514,38 @@ func getText(_id:String, _args:Dictionary):
 			"Sure, I’ll take care of it. But you better remember who’s in charge.",
 		]
 	if(_id == "HelpRestraintsAltStart"):
+		var restraintIsPlural = getVar(_args, "restraintIsPlural", false)
+		var restraint_thatThose = "that" if(!restraintIsPlural) else "those"
 		return [
 			"Sit tight, cutie, let me help you.",
-			"Don’t move, sweet thing, I’ll handle these toys that you got.",
-			"Be a good slut and let me take care of those.",
+			"Don’t move, sweet thing, I’ll handle "+( "this toy" if(!restraintIsPlural) else "these toys" )+" that you got.",
+			"Be a good slut and let me take care of "+restraint_thatThose+".",
 			"Keep still, pet. I’ll get you out in a second.",
+		]
+	if(_id == "HelpRestraintsAltRefuseUnhappy"):
+		var restraintIsPlural = getVar(_args, "restraintIsPlural", false)
+		var restraint_itThem = "it" if(!restraintIsPlural) else "them"
+		# var restraint_thatThose = "that" if(!restraintIsPlural) else "those"
+		var restraint_That_sThose_are = "That's" if(!restraintIsPlural) else "Those are"
+		return [
+			"Thanks for looking out for me, but that's something I'd like to keep.",
+			"You want "+restraint_itThem+" for yourself, don't you? "+restraint_That_sThose_are+" mine.",
+			( "That stays" if(!restraintIsPlural) else "Those stay" )+" on, darling.",
+			"A pet like you should know how comfy "+( "it is in one of those" if(!restraintIsPlural) else "those are" )+"."
+		]
+	if(_id == "HelpRestraintsAltRefuseKinky"):
+		var restraintIsPlural = getVar(_args, "restraintIsPlural", false)
+		var restraint_itThem = "it" if(!restraintIsPlural) else "them"
+		var restraint_thatThose = "that" if(!restraintIsPlural) else "those"
+		return [
+			"That's very nice of you.. but I would rather keep wearing "+restraint_itThem+".",
+			"I'm wearing "+restraint_thatThose+" by my own choice, cutie.",
+			"There are better ways to serve me~.",
+			"You want "+( "one of those" if(!restraintIsPlural) else "those" )+" for yourself, don't you? Get on your knees and I might have some gear just for you~.",
+		]
+	if(_id == "HelpRestraintsAltRefuseKinkyReact"):
+		return [
+			"Adorable.",
 		]
 	if(_id == "HelpRestraintsDeny"):
 		return [
@@ -561,6 +592,17 @@ func getText(_id:String, _args:Dictionary):
 			"Sure, have it your way. Still pathetic.",
 			"Alright, cry about it.",
 			"Yeah, whatever, not my problem.",
+		]
+	if(_id == "HelpStocksSlutwallRefuse"):
+		return [
+			"It's quite comfy in here, you should try it~.",
+			"How about you join me here instead?~.",
+			"It's true you belong here more than I do, but you can't keep all the fun to yourself~.",
+			"Don't worry about me, even this locked and vulnerable, everyone still obeys my commands.",
+			"Aww, that's sweet of you.. yet I feel there's more fun for me to be had here~.",
+			"This is.. quite an experience. Don't bring it to an end for me just yet, will you?~.",
+			"I might not be a fucktoy like you, but right now I'm exactly where I want to be~.",
+			"Miss me already? You'll get to arch your back for me soon enough, let me relax a little longer~.",
 		]
 	if(_id == "SlutwallStealCredits"):
 		return [
