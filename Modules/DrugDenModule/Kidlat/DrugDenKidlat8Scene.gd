@@ -80,29 +80,41 @@ func _run():
 
 		saynn("[say=kidlat]But now I do. I think ya got this cat addicted to that.. feeling.[/say]")
 
-		saynn("[say=kidlat]You matter to me. And I wanna matter to you.[/say]")
+		saynn("A brief pause, Kidlat keeps pausing to try to gather her scrambled thoughts together.")
+
+		saynn("[say=kidlat]Sounds soapy, I know.. But you matter to me. And I wanna matter to you.[/say]")
+
+		saynn("Her sweet words are making your heart melt.")
 
 		saynn("[say=pc]You don't have to do anything to matter to me, Kidlat.[/say]")
 
 		saynn("[say=kidlat]I don't have to. But I want to. That's what friends do, they help each other~. Out of the kindness of their hearts![/say]")
 
+		saynn("Nice to hear that.")
+
 		saynn("[say=pc]You do have a kind heart, Kidlat, I will give you that. I'm not sure if I can be helped, though.[/say]")
 
 		saynn("[say=kidlat]You sure can be! I can help your adventures by continuing to be your shopkeeper~.[/say]")
 
-		saynn("[say=pc]You wanna return down there?[/say]")
+		saynn("You raise a brow and tilt your head, your voice tease-y.")
+
+		saynn("[say=pc]Didn't you say you're done? And already, you wanna return down there?[/say]")
 
 		saynn("[say=kidlat]That wouldn't be a.. return.. I'd only be down there when you're down there. I can raid stashes and sell stuff only to you![/say]")
+
+		saynn("Your very personal shopkeeper kitty.")
 
 		saynn("[say=pc]How would you find me?[/say]")
 
 		saynn("[say=kidlat]I know my ways around those tunnels, don't worry~.[/say]")
 
+		saynn("Somehow you were always running into her after all..")
+
 		saynn("[say=pc]It feels like I can't stop you from doing this.[/say]")
 
 		saynn("[say=kidlat]Not even if you tie me up~.[/say]")
 
-		saynn("She stops staring at you from this awkward angle.")
+		saynn("She sticks her tongue at you.. but then stops staring at you from this awkward angle.")
 
 		saynn("[say=kidlat]Speaking off.. Well.. if you don't wanna be down there.. We can just be buddies.. you know.. fuckbuddies. Haha.[/say]")
 
@@ -110,7 +122,7 @@ func _run():
 
 		saynn("[say=kidlat]With benefits~.[/say]")
 
-		saynn("She yawns.")
+		saynn("She giggles and then yawns.")
 
 		saynn("[say=kidlat]I'm pretty tired.. wanna rest for a bit?[/say]")
 
@@ -147,13 +159,22 @@ func _run():
 
 		saynn("[say=pc]No worries.[/say]")
 
+		saynn("She gives you a quick but tight hug.")
+
 		saynn("[say=kidlat]You don't have to check on me now! Feel free to do your thing, luv! Maybe our paths will cross again sometime. Or maybe they won't. And that's okay![/say]")
 
 		saynn("[say=pc]World works in mysterious ways, you're right.[/say]")
 
+		saynn("You approach the exit of her cell, still feeling fuzzy inside.")
+
 		saynn("[say=kidlat]See you around, hun![/say]")
 
+		saynn("[say=pc]See you too, Kidlat.[/say]")
+
+		saynn("Just like that, it was time to go.")
+
 		saynn("(( Kidlat's dedicated content ends here. Thank you for playing <3 ))")
+		setFlag("DrugDenModule.KidlatCustomTalkGreet", "Hey, luv! You're already back, hah.")
 		addButton("Continue", "See you around..", "endthescene")
 
 func _react(_action: String, _args):

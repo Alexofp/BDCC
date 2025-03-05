@@ -15,6 +15,7 @@ func getFlags():
 		"Kidlat7Hap": flag(FlagType.Bool),
 		
 		"KidlatCustomShopGreet": flag(FlagType.Text),
+		"KidlatCustomTalkGreet": flag(FlagType.Text),
 		
 		"KidlatShopFirstTimeRun": flag(FlagType.Bool),
 		"KidlatShopFirstTimeFloor": flag(FlagType.Bool),
@@ -49,6 +50,7 @@ func _init():
 		
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlatShopScene.gd",
 		"res://Modules/DrugDenModule/Kidlat/DrugDenKidlatBoundGropeScene.gd",
+		"res://Modules/DrugDenModule/Kidlat/KidlatTalkScene.gd",
 		]
 	characters = [
 		"res://Modules/DrugDenModule/DrugDen/DrugDenStash.gd",
@@ -67,6 +69,11 @@ func resetFlagsOnNewDay():
 func getKidlatCustomGreeting():
 	var theGreet = getFlag("DrugDenModule.KidlatCustomShopGreet", "")
 	setFlag("DrugDenModule.KidlatCustomShopGreet", "")
+	return theGreet
+	
+func getKidlatCustomTalkGreeting():
+	var theGreet = getFlag("DrugDenModule.KidlatCustomTalkGreet", "")
+	setFlag("DrugDenModule.KidlatCustomTalkGreet", "")
 	return theGreet
 
 func isKidlatNaked():

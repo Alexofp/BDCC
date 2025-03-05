@@ -163,6 +163,8 @@ static func getEditVars(triggerType):
 					"nova",
 					"tavi",
 					"taviSlavery",
+					"kidlat",
+					"kidlatShop",
 				],
 			},
 		}

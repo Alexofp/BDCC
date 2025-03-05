@@ -60,7 +60,7 @@ func _run():
 			else:
 				addDisabledButton("Grope", "You already groped her, give the poor kitty some rest")
 				addDisabledButton("Unlock restraints", "Groping her and then immediately saving her would be kinda suspicious..")
-		GM.ES.triggerRun(Trigger.TalkingToNPC, ["kidlat"])
+		GM.ES.triggerRun(Trigger.TalkingToNPC, ["kidlatShop"])
 	if(state == "just_unlock_this_time"):
 		saynn("You use the restraint keys to unlock the poor Kidlat.")
 
