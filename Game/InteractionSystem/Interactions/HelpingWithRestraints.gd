@@ -256,7 +256,7 @@ func getStarterAcceptHelpProbability() -> float:
 	var saverDommyness:float = getRolePawn("reacter").scorePersonalityMax({PersonalityStat.Subby: -1.0})
 	var dommynessDisadvantageRatio:float = max(saverDommyness - starterDommyness, 0.0) / 2.0
 
-	acceptHelpProbability = clamp(1.0 - getRolePawn("starter").scoreFetishMax({ Fetish.Bondage: 0.8 }) + 0.6 * dommynessDisadvantageRatio, 0.0, 1.0)
+	acceptHelpProbability = clamp(1.0 - getRolePawn("starter").scoreFetishMax({ Fetish.Bondage: 0.60 }) + 0.45 * dommynessDisadvantageRatio, 0.0, 1.0)
 	return acceptHelpProbability
 
 func getRestraintIsPlural(item:ItemBase) -> bool:

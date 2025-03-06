@@ -403,7 +403,7 @@ func getInmateAcceptHelpProbability() -> float:
 	var saverDommyness:float = getRolePawn("saver").scorePersonalityMax({PersonalityStat.Subby: -1.0})
 	var dommynessDisadvantageRatio:float = max(saverDommyness - inmateDommyness, 0.0) / 2.0
 
-	acceptHelpProbability = clamp(1.0 - getRolePawn("inmate").scoreFetishMax({ Fetish.Bondage: 0.8 }) + 0.6 * dommynessDisadvantageRatio, 0.0, 1.0)
+	acceptHelpProbability = clamp(1.0 - getRolePawn("inmate").scoreFetishMax({ Fetish.Bondage: 0.4 }) + 0.3 * dommynessDisadvantageRatio, 0.0, 1.0)
 	return acceptHelpProbability
 
 func saveUsingStamina() -> void:
