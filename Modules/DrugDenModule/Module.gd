@@ -23,6 +23,7 @@ func getFlags():
 		"KidlatItemsBought": flag(FlagType.Number),
 		"KidlatLockedUpRandomly": flag(FlagType.Bool),
 		"KidlatDrunkHappened": flag(FlagType.Bool),
+		"KidlatWearsPortalPanties": flag(FlagType.Bool),
 	}
 
 func _init():
