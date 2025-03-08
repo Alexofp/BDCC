@@ -24,6 +24,7 @@ func getFlags():
 		"KidlatLockedUpRandomly": flag(FlagType.Bool),
 		"KidlatDrunkHappened": flag(FlagType.Bool),
 		"KidlatWearsPortalPanties": flag(FlagType.Bool),
+		"KidlatPPTF": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -95,3 +96,6 @@ func getKidlatAmountOfItemsBoughtTotal():
 
 func isKidlatBound():
 	return (getFlag("DrugDenModule.Kidlat4Hap", false) && !getFlag("DrugDenModule.Kidlat5Hap", false)) || getFlag("DrugDenModule.KidlatLockedUpRandomly", false)
+
+func kidlatShouldHaveCock():
+	return getFlag("DrugDenModule.KidlatPPTF", false)

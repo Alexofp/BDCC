@@ -133,7 +133,10 @@ func _run():
 	if(state == "sex_menu"):
 		saynn("How do you want to have fun with the kitty?")
 
-		addButtonWithChecks("Vaginal", "Fuck Kidlat's pussy", "sex_vag", [], [[ButtonChecks.HasReachablePenis]])
+		if (GM.pc.hasReachablePenis()):
+			addButtonWithChecks("Vaginal", "Fuck Kidlat's pussy", "sex_vag", [], [[ButtonChecks.HasReachablePenis]])
+		else:
+			addButtonWithChecks("Vaginal", "Fuck Kidlat's pussy with your picked strapon", "sex_vag_pick_strapon", [], [[ButtonChecks.HasStraponAndCanWear]])
 		if (GM.pc.hasReachablePenis()):
 			addButtonWithChecks("Cowgirl", "Kidlat will ride you with her pussy", "sex_cowgirl", [], [[ButtonChecks.HasReachablePenis]])
 		else:
@@ -145,6 +148,10 @@ func _run():
 				addButton("Portal panties", "Ask Kidlat if she would want to wear portal panties", "sex_puton_portal_panties")
 			else:
 				addDisabledButton("Portal panties", "You don't have any..")
+		if (GM.pc.getInventory().hasKnownTFPillWithEffect("GrowPenisTF")):
+			addButton("Grow cock", "Give Kidlat one of your DiRecto pills and see if she will grow a cock.. Be ready to service her", "sex_cock")
+		else:
+			addDisabledButton("Grow cock", "You need a DiRecto pill in your inventory in order to temporary give Kidlat a cock")
 		addButton("Back", "Never mind", "")
 	if(state == "sex_puton_portal_panties"):
 		playAnimation(StageScene.TFLook, "crotch", {pc="kidlat", bodyState={underwear=true}})
@@ -193,6 +200,12 @@ func _run():
 		saynn("[say=kidlat]There you go, hun! Thank you for letting me try them~. Such a unique experience, haha.[/say]")
 
 		addButton("Continue", "See what happens next", "")
+	if(state == "sex_vag_pick_strapon"):
+		saynn("Pick which strapon you want to wear.")
+
+		addStraponButtons("sex_vag_strapon_pick_pick")
+		if (false):
+			addButton("Nope", "You shouldn't see this", "sex_vag_strapon_pick_pick")
 	if(state == "sex_cowgirl_pick_strapon"):
 		saynn("Pick which strapon you want to wear.")
 
@@ -436,6 +449,184 @@ func _run():
 
 		setFlag("DrugDenModule.KidlatCustomTalkGreet", "My pussy still aching, luv.. hai..")
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "sex_cock"):
+		playAnimation(StageScene.Duo, "stand", {npc="kidlat"})
+		saynn("A curious idea crosses your mind. You have some of those weird pills.. Why not try one of those on Kidlat.. a safe one that you know for sure works.")
+
+		saynn("[say=pc]Kidlat, I've got something..[/say]")
+
+		saynn("[say=kidlat]Luv?[/say]")
+
+		saynn("Your hand produces a pill.. one that is missing any kind of labels or instructions. You hold it on your open palm, presenting.")
+
+		saynn("[say=kidlat]Oh, I might have spent most of my time in the drug den.. But I'm not a junkie, hun![/say]")
+
+		saynn("[say=pc]It's safe, these are not the addictive kind. But this one does have an interesting effect.[/say]")
+
+		saynn("Kidlat raises a brow, her stare skeptical.")
+
+		saynn("[say=kidlat]What effect?[/say]")
+
+		saynn("[say=pc]I guess you will have to try it to find out.[/say]")
+
+		saynn("Avoiding the question made the kitty pout and cross her arms. She squints at you, trying to look mean and intimidating. Her tail is wagging actively behind her back, lips are trembling.. subtle growling vibrates the cell.. It feels like she is about to bite you really hard..")
+
+		saynn("[say=pc]So?[/say]")
+
+		saynn("[say=kidlat]Fine![/say]")
+
+		saynn("She swipes the pill from your hand and tosses it into her mouth..")
+
+		saynn("That was easy.")
+
+		saynn("Let's see what curiosity will do with this cat.")
+
+		addButton("Continue", "See what happens next", "sex_cock_tf")
+	if(state == "sex_cock_tf"):
+		playAnimation(StageScene.TFLook, "crotch", {pc="kidlat"})
+		saynn("[say=kidlat]What now, luv?.. Oh..[/say]")
+
+		saynn("It doesn't take long for her to feel something. Her paws dart towards her shorts.. clearly towards the source of some kind of new sensation..")
+
+		saynn("[say=kidlat]It.. tingles.. hah.. Is that bad?[/say]")
+
+		saynn("[say=pc]Just wait, Kidlat. This is expected.[/say]")
+
+		saynn("Well, you weren't exactly sure about it.. but you gotta look confident.")
+
+		saynn("Kidlat's new tingling feeling seems to be growing like a wildfire. She closes her legs and grabs onto her crotch, panting deeply. Her cheeks are blushing. Something is certainly changing about her.. awakening.")
+
+		saynn("Before her eyes, her familiar contours begin to change. The delicate softness between her legs tightens and morphs.. at this point even you can notice something new putting pressure on the cloth of her shorts.. bulging them out in the crotch region.")
+
+		saynn("[say=kidlat]What is.. this.. ah..[/say]")
+
+		saynn("As she touches herself down there, a moan leaves her lips, a little wet spot appears on the cloth.")
+
+		saynn("[say=pc]I think there is only one way to find out.[/say]")
+
+		addButton("Continue", "See what happens next", "sex_cock_reveal")
+	if(state == "sex_cock_reveal"):
+		playAnimation(StageScene.TFLook, "crotch", {pc="kidlat", bodyState={naked=true, hard=true}})
+		addCharacter("kidlat", ["naked"])
+		saynn("As she swiftly pulls her shorts down.. a breathtaking sight takes place.")
+
+		saynn("Kidlat stares at a thick, canine cock that's now hanging between her legs, complete with pulsing veins, two fluffy orbs, a pointy tip and a fat orb at the base of the shaft.")
+
+		saynn("[say=kidlat]Woah.. bloody..[/say]")
+
+		saynn("There sure is blood rushing to it, her new.. cock.. is hard as a rock, twitching and leaking pre. Kidlat stares at it with her big feline eyes, her lips parted.")
+
+		saynn("Hard to tell what she is thinking.. but her body tells you a few curious things. Her blue nips are stiff, her pussy that is still seemingly there behind her new package.. is dripping with juices onto the floor.")
+
+		saynn("[say=kidlat]I have.. a fuckin' dick.. a huge throbbing cock..[/say]")
+
+		saynn("Her paw reaches out and gently grasps her new length.. which sends a shiver rippling through her, legs shivering a little, cock pulsing. Her blush deepens greatly, her eyes admiring that length while her tongue drools a little..")
+
+		saynn("One stroke of her paw.. makes her arch her back.")
+
+		saynn("[say=kidlat]Ah~.. that feels.. so bloody good..[/say]")
+
+		addButton("Just watch", "Watch Kidlat play with her new cock", "sex_cock_watch")
+	if(state == "sex_cock_watch"):
+		playAnimation(StageScene.Grope, "watchstroke", {pc="kidlat", npc="pc", bodyState={naked=true, hard=true}})
+		saynn("You decide to just watch.. and see what she will do with her new.. toy. Kidlat is too preoccupied with it anyway to pay any attention to you.")
+
+		saynn("With a trembling paw, she begins to stroke her new.. impressive.. cock more. At first, her touches are soft and careful, exploring every new contour.. the digits brushing along the veiny texture.. rubbing along the many sensitive creases. She bites her lip, her eyes horny..")
+
+		saynn("[say=kidlat]Mhh.. I h-have to know..[/say]")
+
+		saynn("As the urge increases, her strokes become more confident.. more urgent. Her paw is sliding along the new length while her soft, feminine moans fill the small cell, blending with the wet, rhythmic sound of flesh.. Each caress sends shivers through her body, her nipples hardening further as pleasure ignites every nerve ending. Her second paw reaches to her breasts and begins playing with them, adding to the sensations..")
+
+		saynn("[say=kidlat]I have to know how it feels.. ah..[/say]")
+
+		saynn("Her initial exploration is now a display of desire. Kidlat leans against a wall and raises unsteadily to her toes and keeps stroking her length, her body squirming hard. There are ropes after ropes of thick pre spawning at the tip of that cock.. Some of them get caught by Kidlat and spread along the shaft.. while the rest just keep hanging or drop onto the floor.")
+
+		saynn("Her hips can't stay still, helping her paw by meeting the stroking motions with her thrusts.. humping her hand. Her movements are growing faster and more insistent with every passing moment, her moans illuminating the whole room. As she nears the peak, the thick knot at the base begins to inflate, engorging with blood.")
+
+		saynn("[say=kidlat]Feels to.. ah.. to.. ah..[/say]")
+
+		addButton("Continue", "See what happens next", "sex_cock_stroke_cum")
+	if(state == "sex_cock_stroke_cum"):
+		playAnimation(StageScene.Grope, "watchstroke", {pc="kidlat", npc="pc", pcCum=true, bodyState={naked=true, hard=true}})
+		saynn("Then, in one shattering moment of pure ecstasy, Kidlat's body succumbs.")
+
+		saynn("[say=kidlat]..Cum-m-m~.. Ah-h..[/say]")
+
+		saynn("With a passionate moan and a final, powerful motion, she cums hard. Her canine cock starts throbbing hard.. her balls tensing up.. as thick strings of seed arc from the tip, spattering the cold, hard floor beneath her. She just keeps moaning and squirming as her balls tense up more, her shaft still shooting seed for a while longer, leaving her gasping and panting, her entire body trembling from the force of the orgasm.")
+
+		saynn("For a few long, breathless seconds, she remains standing there.. still barely believing her eyes.. seemingly spent..")
+
+		saynn("[say=pc]You sure look like you enjoyed it. If you want it undone..[/say]")
+
+		saynn("Kidlat's eyes still have that spark in them.. spark of craziness..")
+
+		addButton("Continue", "See what happens next", "sex_cock_stroke_more")
+	if(state == "sex_cock_stroke_more"):
+		playAnimation(StageScene.Zonked, "strokecum", {pc="kidlat", npc="pc", pcCum=true, bodyState={naked=true, hard=true}})
+		saynn("Kidlat isn't finished yet.. Even as exhaustion tugs at every muscle of her body, she slides gracefully to the cold floor, her muscles unable to hold her weight anymore.. and yet.. every fiber of her being is shining with raw desire.")
+
+		saynn("Her new canine cock begins to get hard again under the slick, eager touch of her paws.. both paws this time. With a desperate hunger, she resumes stroking herself, her digits tightly wrapping around her veiny shaft.")
+
+		saynn("[say=kidlat]P-please..[/say]")
+
+		saynn("Wet noises spread throughout the whole cell, coupled together with her cute moans. She just can't get enough of this feeling, huh..")
+
+		saynn("She raises her legs high, offering you a view of her pussy that's still hiding behind the new fluffy orbs. Her neglected slit is pulsing.. dripping with arousal..")
+
+		saynn("[say=kidlat]Ah.. hah.. ah-..[/say]")
+
+		saynn("Driven by an insatiable need, Kidlat's strokes grow faster, her body arching and writhing like a wild, untamed creature. The heat within her rises rapidly, her cock's fat knot inflating with blood yet again.. a knot that her paws aren't afraid to squeeze..")
+
+		saynn("[say=kidlat]Fuck-k-k..[/say]")
+
+		saynn("Then, when the heat becomes too strong, it happens.. Kidlat arches her back hard.. her body convulsing in an overwhelming second orgasm as her cock spasms and shoots thick, shiny strings of seed that splatter onto her own belly.")
+
+		saynn("[say=kidlat]Nya-a-a-a~..[/say]")
+
+		saynn("Her eyes roll up, drooly tongue fully out.. she can barely comprehend it.. cumming her thoughts away. Her body just keeps shaking and shivering, her mouth producing moans and pants at an alarming rate.. her balls getting milked dry.. probably fully dry this time.")
+
+		addButton("Continue", "See what happens next", "sex_cock_stroke_after")
+	if(state == "sex_cock_stroke_after"):
+		playAnimation(StageScene.Zonked, "cum", {pc="kidlat", npc="pc", bodyState={naked=true, hard=true}})
+		saynn("When her dick finally stops leaving a mess everywhere, Kidlat just.. slumps.. her muscles still twitching.. but not responding.. not anymore. You only have one thing to say.")
+
+		saynn("[say=pc]Wow. You are one needy cat.[/say]")
+
+		saynn("She chuckles.. and moans again as her belly tenses up from giggling.")
+
+		saynn("[say=kidlat]That felt.. fucking brilliant.. I want more..[/say]")
+
+		saynn("[say=pc]I think you had enough, Kidlat.[/say]")
+
+		saynn("Her paw reaches out to her cock.. but gives up and just gathers a bit of her own seed, drawing it to her lips. She licks her fingers eagerly, the taste brings a look of fierce satisfaction to her eyes.")
+
+		saynn("[say=kidlat]Meow..[/say]")
+
+		saynn("[say=pc]Don't tell me you wanna keep it.[/say]")
+
+		saynn("[say=kidlat]Hah.. I think it's best if I don't..[/say]")
+
+		saynn("She looks at you with her exhausted eyes.")
+
+		saynn("[say=kidlat]It's not permanent, right?..[/say]")
+
+		saynn("[say=pc]Not unless you eat another pill. I suggest you go see a doctor.[/say]")
+
+		saynn("[say=kidlat]Okay-y-y..[/say]")
+
+		saynn("You help her to get up.. and pull the shorts up. Her legs are still swaying like crazy.")
+
+		saynn("[say=kidlat]I know where it is, luv..[/say]")
+
+		setFlag("DrugDenModule.KidlatCustomTalkGreet", "That was.. crazy.. last time.. do you have another pill, luv?..")
+		addButton("Continue", "See what happens next", "sex_cock_tf_back")
+	if(state == "sex_cock_tf_back"):
+		playAnimation(StageScene.Duo, "stand", {npc="kidlat"})
+		saynn("Kidlat returns after some time.. her shorts don't have that obvious bulge on them any more.")
+
+		saynn("That was fun.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 func addStraponButtons(thestate):
 	var strapons = GM.pc.getStrapons()
 	for strapon in strapons:
@@ -477,6 +668,21 @@ func _react(_action: String, _args):
 		setFlag("DrugDenModule.KidlatWearsPortalPanties", true)
 		GM.pc.getInventory().removeXOfOrDestroy("PortalPanties", 1)
 		getCharacter("kidlat").resetEquipment()
+
+	if(_action == "sex_cock"):
+		GM.pc.getInventory().removeTFPillWithEffect("GrowPenisTF")
+
+	if(_action == "sex_vag_strapon_pick_pick"):
+		isStrapon=true
+		setState("sex_vag")
+		var strapon = _args[0]
+		GM.pc.getInventory().removeItem(strapon)
+		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(strapon)
+		var theFluids = strapon.getFluids()
+		if(theFluids != null):
+			if(theFluids.hasFluidType("Cum")):
+				straponHasCum = true
+		return
 
 	if(_action == "sex_cowgirl_strapon_pick_pick"):
 		isStrapon=true
@@ -531,6 +737,31 @@ func _react(_action: String, _args):
 	if(_action == "sex_vag_sex_cum_pullout"):
 		processTime(10*60)
 		GM.pc.unequipStrapon()
+
+	if(_action == "sex_cock_tf"):
+		processTime(5*60)
+		setFlag("DrugDenModule.KidlatPPTF", true)
+		getCharacter("kidlat").updateBodyparts()
+
+	if(_action == "sex_cock_reveal"):
+		processTime(3*60)
+
+	if(_action == "sex_cock_watch"):
+		processTime(5*60)
+
+	if(_action == "sex_cock_stroke_cum"):
+		processTime(5*60)
+
+	if(_action == "sex_cock_stroke_more"):
+		processTime(5*60)
+
+	if(_action == "sex_cock_stroke_after"):
+		processTime(5*60)
+
+	if(_action == "sex_cock_tf_back"):
+		processTime(10*60)
+		setFlag("DrugDenModule.KidlatPPTF", false)
+		getCharacter("kidlat").updateBodyparts()
 
 	setState(_action)
 

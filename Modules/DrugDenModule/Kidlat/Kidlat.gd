@@ -51,6 +51,19 @@ func createBodyparts():
 	giveBodypartUnlessSame(tail)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
 
+func updateBodyparts():
+	var kidlatModule = GlobalRegistry.getModule("DrugDenModule")
+	
+	if(kidlatModule.kidlatShouldHaveCock()):
+		if(!hasBodypart(BodypartSlot.Penis)):
+			var penis = GlobalRegistry.createBodypart("caninepenis")
+			penis.lengthCM = 22
+			penis.ballsScale = 1
+			if(giveBodypartUnlessSame(penis)):
+				paintBodyparts()
+	else:
+		removeBodypart(BodypartSlot.Penis)
+
 func getDefaultEquipment():
 	if(GlobalRegistry.getModule("DrugDenModule").isKidlatBound()):
 		return ["inmatecollar", "inmatewristcuffs", "inmateanklecuffs", "blindfold"]

@@ -731,6 +731,22 @@ func removeRandomRestraints(removedRestraintsChance):
 	
 	return howManyRemoved
 
+func hasKnownTFPillWithEffect(tfID:String) -> bool:
+	for item in items:
+		if(item.id == "TFPill"):
+			var theTFID:String = item.getTFID()
+			if(tfID == theTFID && GM.main.SCI.isTransformationUnlocked(theTFID)):
+				return true
+	return false
+
+func removeTFPillWithEffect(tfID:String):
+	for item in items:
+		if(item.id == "TFPill"):
+			var theTFID:String = item.getTFID()
+			if(theTFID == tfID):
+				item.removeXOrDestroy(1)
+				return
+
 func saveData():
 	var data = {}
 	
