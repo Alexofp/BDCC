@@ -527,6 +527,10 @@ func _run():
 		saynn("[say=kidlat]Ah~.. that feels.. so bloody good..[/say]")
 
 		addButton("Just watch", "Watch Kidlat play with her new cock", "sex_cock_watch")
+		if (getCharacter("kidlat").isWearingPortalPanties() && GM.pc.getInventory().hasItemID("PortalPantiesFleshlight")):
+			addButton("Portal panties", "Kidlat has portal panties.. why not give her the portal fleshlight as well and see what she will do with it?", "sex_cock_portal_panties")
+		else:
+			addDisabledButton("Portal panties", "Either Kidlat is not wearing portal panties or you don't have a portal fleshlight to offer to her")
 	if(state == "sex_cock_watch"):
 		playAnimation(StageScene.Grope, "watchstroke", {pc="kidlat", npc="pc", bodyState={naked=true, hard=true}})
 		saynn("You decide to just watch.. and see what she will do with her new.. toy. Kidlat is too preoccupied with it anyway to pay any attention to you.")
@@ -621,6 +625,198 @@ func _run():
 		setFlag("DrugDenModule.KidlatCustomTalkGreet", "That was.. crazy.. last time.. do you have another pill, luv?..")
 		addButton("Continue", "See what happens next", "sex_cock_tf_back")
 	if(state == "sex_cock_tf_back"):
+		playAnimation(StageScene.Duo, "stand", {npc="kidlat"})
+		saynn("Kidlat returns after some time.. her shorts don't have that obvious bulge on them any more.")
+
+		saynn("That was fun.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "sex_cock_portal_panties"):
+		playAnimation(StageScene.SexPortalOral, "tease", {pc="kidlat", bodyState={underwear=true, hard=true}, onlyRight=true})
+		saynn("You decide to get her attention.. to guide her a little bit.")
+
+		saynn("[say=pc]You still have the panties I gave you?[/say]")
+
+		saynn("Kidlat pulls her attention from her cock.. and looks at you.")
+
+		saynn("[say=kidlat]Oh? Yeah, I have them, luv.. why?[/say]")
+
+		saynn("[say=pc]Pull them up.. just not fully.[/say]")
+
+		saynn("She tilts her head a bit.")
+
+		saynn("[say=kidlat]Is there some..[/say]")
+
+		saynn("[say=pc]You will see.[/say]")
+
+		saynn("The curiosity wins over yet again. Kidlat pulls her panties back on, covering up some of her privates.. her pussy and tailhole specifically.. letting her new hard cock to hang free, her testicles twitching a bit in anticipation for something.")
+
+		saynn("[say=kidlat]There you go, luv..[/say]")
+
+		saynn("While she was doing that, you were preparing a different device.. your hands are calibrating a fleshlight, a special one. You adjust the frequency to match that of the portal that is neatly pressed against Kidlat's most sensitive opening..")
+
+		saynn("After doing it, you turn the fleshlight on, making it light up and open a little portal on one of its ends. Kidlat is still busy staring at her new cock.. but your action has pulled a soft gasp out of her.")
+
+		saynn("[say=kidlat]Ah.. It's windy here..[/say]")
+
+		saynn("You chuckle and just hand her the fleshlight.")
+
+		saynn("[say=kidlat]Oh? What in the..[/say]")
+
+		saynn("She grabs the device and looks into the glowing portal.. inside it.. is seemingly an exact replica of her dripping, cyan pussy.. each fold, each detail captured with unnerving precision..")
+
+		saynn("Kidlat's eyes widen in startled surprise as she holds the fleshlight closer to her face. Her gaze wanders along the curves of her own exposed cyan pussy that's displayed on the futuristic toy.")
+
+		saynn("[say=kidlat]Is that my..[/say]")
+
+		saynn("From this point on, you just watch.. curious about what she will do with her new toys.")
+
+		addButton("Continue", "See what happens next", "sex_cock_portal_panties_lick")
+	if(state == "sex_cock_portal_panties_lick"):
+		playAnimation(StageScene.SexPortalOral, "lick", {pc="kidlat", bodyState={underwear=true, hard=true}, onlyRight=true})
+		saynn("Unable to resist, Kidlat brings the toy up to her mouth and lets her tongue flick out, tasting the wet sensitive flesh. Within moments, a soft moan escapes her lips as she realizes.. this isn't a replica..")
+
+		saynn("[say=kidlat]Ah..[/say]")
+
+		saynn("She keeps lapping along her folds, barely believing what she is feeling. You watch in great detail as her rough feline tongue does little circles, following the contours of her slit.. of her clit.")
+
+		saynn("Her neglected cock is pulsing hard by now, the overwhelming stimulation is making her legs go weak.")
+
+		saynn("She looks down at her cock.. and then at the toy in her paws.. and puts the two and two together.")
+
+		saynn("[say=kidlat]I.. I must..[/say]")
+
+		addButton("Continue", "See what happens next", "sex_cock_portal_panties_sit")
+	if(state == "sex_cock_portal_panties_sit"):
+		playAnimation(StageScene.FleshlightSit, "tease", {pc="kidlat", bodyState={underwear=true, hard=true}})
+		saynn("Kidlat sits on a chair.. and begins experimenting.")
+
+		saynn("She moves the fleshlight towards the tip of her cock, pointy fleshy head pressing gently against the rim of her slick pussy. As her cock makes contact, the soft folds of her slit spread invitingly, parting under prodding. Every subtle movement seems to send ripples of pleasure through her body..")
+
+		saynn("[say=kidlat]Bloody hell.. Why did you give it to me..[/say]")
+
+		saynn("[say=pc]Have fun, luv.[/say]")
+
+		saynn("Her cheeks are blushing hard.. while you offer her a cheeky smile.")
+
+		addButton("Continue", "See what happens next", "sex_cock_portal_panties_slide")
+	if(state == "sex_cock_portal_panties_slide"):
+		playAnimation(StageScene.FleshlightSit, "sex", {pc="kidlat", bodyState={underwear=true, hard=true}})
+		saynn("Unable to stop anymore, Kidlat teases herself further. She slowly starts to slide her new cock inside her own wet depths, the tip disappearing into the velvety softness, her folds hugging the veiny shaft quite nicely.")
+
+		saynn("[say=kidlat]F-fuck.. me..[/say]")
+
+		saynn("After getting most of it inside, she starts moving the fleshlight back and forth along the length of her cock, still at a slow pace.. but even that is enough to make her start producing passionate moans, her back arching a bit on that chair while her toes keep wanting to curl up or spread wide.")
+
+		addButton("Continue", "See what happens next", "sex_cock_portal_panties_slide_fast")
+	if(state == "sex_cock_portal_panties_slide_fast"):
+		playAnimation(StageScene.FleshlightSit, "fast", {pc="kidlat", bodyState={underwear=true, hard=true}})
+		saynn("Each inch of her cock that enters her own pussy is met with a tender yet insistent squeeze from her slick inner walls, which contract around her length, coating it with a layer of her wetness.")
+
+		saynn("[say=kidlat]Ah.. hah.. I can't stop.. hun..[/say]")
+
+		saynn("[say=pc]You don't have to, hun.[/say]")
+
+		saynn("[say=kidlat]I will bap you so hard.. ah..[/say]")
+
+		saynn("Her current activity has a much bigger priority than bapping anyone and you know it.")
+
+		saynn("As the pleasure begins to build, the knot at the best of her cock starts to respond.. swelling into a fat meaty orb that is impossible to ignore. More and more blood rushes into it, inflating it until it starts to strain against her sensitive pussy folds, unable to get past them.")
+
+		saynn("[say=kidlat]My pussy is so bloody tight.. I have to..[/say]")
+
+		saynn("Even to your eyes it looks a bit too big to fit inside that cute little pussy.. but Kidlat keeps trying, putting more and more pressure, pounding her own cunt with her own canine cock.. getting quite desperate.")
+
+		addButton("Continue", "See what happens next", "sex_cock_portal_panties_slide_cum")
+	if(state == "sex_cock_portal_panties_slide_cum"):
+		playAnimation(StageScene.FleshlightSit, "cum", {pc="kidlat", bodyState={underwear=true, hard=true}})
+		saynn("And then.. with one forceful motion.. she forces the swollen knot deep inside herself, stretching her pussy out enough to slide her whole cock in.")
+
+		saynn("[say=kidlat]..AH!.. F-fuck!.. It's in!.. Ah-h..[/say]")
+
+		saynn("She throws her head back and lets out a passionate cry of pleasure, her body arching itself back, really testing how sturdy that chair is underneath. Her paw pulls and pushes on the fleshlight more.. but it's stuck for good, her inner walls pulse and squeeze her own cock, driving her toward a peak in an instant.")
+
+		saynn("You can see the exact moment she cums.. Her balls tense up hard as her cock starts throbbing and pumping her own pulsing pussy full of creamy virile seed, stuffing her womb full of it.. and then more.. and more.")
+
+		saynn("[say=kidlat]I'm c-cumming.. ss-so much.. f-fuck.. ahh-h-.. I c-can't.. s-stop..[/say]")
+
+		saynn("She writhes around on that chair like crazy, her pussy being stimulated by her own cock extends her orgasm far beyond a normal one, causing her to moan and pant into the air while her balls are being milked and drained by the inner walls squeezing her knot.")
+
+		saynn("You can see the throbbing outline of her cock showing up on her belly.. there is just not enough space inside her to fit it all.. with so much cum and all..")
+
+		saynn("[say=kidlat]Nya-a-a..[/say]")
+
+		saynn("Every fiber of her being seems to be receiving shockwaves of ecstasy.. she just keeps riding and riding these waves of raw, unrestrained pleasure.. cumming all her thoughts away..")
+
+		saynn("Eventually, the feedback loop begins to slow down.. finally..")
+
+		addButton("Continue", "See what happens next", "sex_cock_portal_panties_slide_after_cum")
+	if(state == "sex_cock_portal_panties_slide_after_cum"):
+		playAnimation(StageScene.FleshlightSit, "inside", {pc="kidlat", bodyState={underwear=true, hard=true}})
+		saynn("As the climax begins to subside, turning into a lingering afterglow, Kidlat continues to moan and squirm, her worn out body getting quite exhausted by now.")
+
+		saynn("[say=kidlat]Fuck.. s-so much..[/say]")
+
+		saynn("[say=pc]Looks like you had a lot of fun there.[/say]")
+
+		saynn("[say=kidlat]Pff.. yea.. I can still feel my pussy clenching around my cock.. f-fuck that feels good.. ahh-h..[/say]")
+
+		saynn("She tugs on the fleshlight, trying to pull out.. but finds it quite difficult.")
+
+		saynn("[say=kidlat]Ah.. w-why did I knot myself..[/say]")
+
+		saynn("[say=pc]You regret it?[/say]")
+
+		saynn("[say=kidlat]No.. I would do it again.. and again.. and another time more maybe..[/say]")
+
+		saynn("She is panting heavily.")
+
+		saynn("[say=kidlat]It will deflate? Right, luv?..[/say]")
+
+		saynn("[say=pc]I mean.. as long as you don't think about how good it feels.. knotting your own pussy..[/say]")
+
+		saynn("Kidlat shifts around on her chair.")
+
+		saynn("[say=pc]..cumming inside your own pussy.. stuffing it feel of your seed..[/say]")
+
+		saynn("Kidlat huffs and moans more.")
+
+		saynn("[say=kidlat]I will bite you-u-u-u..[/say]")
+
+		saynn("You can't hide the smile while the poor kitty is squirming hard.")
+
+		saynn("[say=pc]Why did you grow a canine cock anyway? Aren't you a cock?[/say]")
+
+		saynn("[say=kidlat]Damned if I knew.. Not complainin' though..[/say]")
+
+		addButton("Continue", "See what happens next", "sex_cock_portal_panties_slide_after_pullout")
+	if(state == "sex_cock_portal_panties_slide_after_pullout"):
+		playAnimation(StageScene.FleshlightSit, "tease", {pc="kidlat", bodyState={underwear=true, hard=true}})
+		saynn("You spend some time together, chatting on unrelated topics, waiting for Kidlat's cock to go soft..")
+
+		saynn("When it finally does, she finally pulls it out of her pussy, causing a flood of cum to spawn from it.")
+
+		saynn("[say=kidlat]Ah.. shit..[/say]")
+
+		saynn("[say=pc]You were pretty pent up, huh.[/say]")
+
+		saynn("[say=kidlat]Yeah..[/say]")
+
+		saynn("She looks at her soft cock.")
+
+		saynn("[say=kidlat]It's not permanent, is it?..[/say]")
+
+		saynn("[say=pc]Not unless you eat another pill. I suggest you go see a doctor.[/say]")
+
+		saynn("[say=kidlat]Okay-y-y..[/say]")
+
+		saynn("You help her to get up.. and pull the shorts up. Her legs are still swaying like crazy.")
+
+		saynn("[say=kidlat]I know where it is, luv..[/say]")
+
+		setFlag("DrugDenModule.KidlatCustomTalkGreet", "That was.. crazy.. last time.. do you have another pill, luv?..")
+		addButton("Continue", "See what happens next", "sex_cock_tf_back_panties")
+	if(state == "sex_cock_tf_back_panties"):
 		playAnimation(StageScene.Duo, "stand", {npc="kidlat"})
 		saynn("Kidlat returns after some time.. her shorts don't have that obvious bulge on them any more.")
 
@@ -749,6 +945,10 @@ func _react(_action: String, _args):
 	if(_action == "sex_cock_watch"):
 		processTime(5*60)
 
+	if(_action == "sex_cock_portal_panties"):
+		var panties = getCharacter("kidlat").getInventory().getEquippedItem(InventorySlot.UnderwearBottom)
+		panties.coversPenis = false
+
 	if(_action == "sex_cock_stroke_cum"):
 		processTime(5*60)
 
@@ -759,6 +959,35 @@ func _react(_action: String, _args):
 		processTime(5*60)
 
 	if(_action == "sex_cock_tf_back"):
+		processTime(10*60)
+		setFlag("DrugDenModule.KidlatPPTF", false)
+		getCharacter("kidlat").updateBodyparts()
+
+	if(_action == "sex_cock_portal_panties_lick"):
+		processTime(5*60)
+
+	if(_action == "sex_cock_portal_panties_sit"):
+		processTime(5*60)
+
+	if(_action == "sex_cock_portal_panties_slide"):
+		processTime(3*60)
+
+	if(_action == "sex_cock_portal_panties_slide_fast"):
+		processTime(5*60)
+
+	if(_action == "sex_cock_portal_panties_slide_cum"):
+		processTime(15*60)
+		getCharacter("kidlat").cummedInVaginaBy("kidlat")
+
+	if(_action == "sex_cock_portal_panties_slide_after_cum"):
+		processTime(5*60)
+
+	if(_action == "sex_cock_portal_panties_slide_after_pullout"):
+		processTime(20*60)
+
+	if(_action == "sex_cock_tf_back_panties"):
+		var panties = getCharacter("kidlat").getInventory().getEquippedItem(InventorySlot.UnderwearBottom)
+		panties.coversPenis = true
 		processTime(10*60)
 		setFlag("DrugDenModule.KidlatPPTF", false)
 		getCharacter("kidlat").updateBodyparts()
