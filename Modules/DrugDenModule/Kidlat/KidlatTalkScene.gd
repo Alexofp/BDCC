@@ -2,6 +2,7 @@ extends SceneBase
 
 var isStrapon = false
 var straponHasCum = false
+var isVag = true
 
 func _init():
 	sceneID = "KidlatTalkScene"
@@ -152,6 +153,10 @@ func _run():
 			addButton("Grow cock", "Give Kidlat one of your DiRecto pills and see if she will grow a cock.. Be ready to service her", "sex_cock")
 		else:
 			addDisabledButton("Grow cock", "You need a DiRecto pill in your inventory in order to temporary give Kidlat a cock")
+		if (GM.main.getFlag("FightClubModule.BulldogBypassed")):
+			addButton("Free use", "(Heavy sharing) See if Kidlat would be up to be put inside a slut wall for anyone to fuck", "sex_freeuse")
+		else:
+			addDisabledButton("Free use", "You need access to a slut wall if you want to put Kidlat into it for everyone to fuck.")
 		addButton("Back", "Never mind", "")
 	if(state == "sex_puton_portal_panties"):
 		playAnimation(StageScene.TFLook, "crotch", {pc="kidlat", bodyState={underwear=true}})
@@ -532,6 +537,7 @@ func _run():
 		else:
 			addDisabledButton("Portal panties", "Either Kidlat is not wearing portal panties or you don't have a portal fleshlight to offer to her")
 		addButtonWithChecks("Offer pussy", "Let Kidlat try her new cock out on your pussy..", "sex_cock_vag", [], [[ButtonChecks.HasReachableVagina]])
+		addButtonWithChecks("Offer ass", "Let Kidlat try her new cock out on your tailhole..", "sex_cock_ass", [], [[ButtonChecks.HasReachableAnus]])
 	if(state == "sex_cock_watch"):
 		playAnimation(StageScene.Grope, "watchstroke", {pc="kidlat", npc="pc", bodyState={naked=true, hard=true}})
 		saynn("You decide to just watch.. and see what she will do with her new.. toy. Kidlat is too preoccupied with it anyway to pay any attention to you.")
@@ -830,7 +836,11 @@ func _run():
 
 		saynn("The way her palm slides along the hard, pulsing length, milking precum out of it.. makes you wonder..")
 
-		saynn("You bite your lip.. your hand sneakily slides down to your pussy.. you're all wet down there..")
+		if (isVag):
+			saynn("You bite your lip.. your hand sneakily slides down to your pussy.. you're all wet down there..")
+
+		else:
+			saynn("You bite your lip.. your hand sneakily lands on your butt and slides down to your {pc.analStretch} tailhole.. gently massaging the sensitive outer ring.")
 
 		saynn("[say=kidlat]Nhh..[/say]")
 
@@ -843,19 +853,19 @@ func _run():
 
 		saynn("[say=kidlat]Oi?..[/say]")
 
-		saynn("As Kidlat looks in your direction, she sees you on all fours, your back arched, your {pc.thick} ass sticking out high.. so that every curve of your butt and the inviting view of your wet, needy slit are laid bare.. a display that makes that cock of hers twitch uncontrollably, the sight creating raw hunger in her eyes.")
+		saynn("As Kidlat looks in your direction, she sees you on all fours, your back arched, your {pc.thick} ass sticking out high.. so that every curve of your butt and the inviting view of your "+str("wet, needy slit" if isVag else "needy tailhole")+" are laid bare.. a display that makes that cock of hers twitch uncontrollably, the sight creating raw hunger in her eyes.")
 
 		saynn("[say=kidlat]Oh, luv..[/say]")
 
-		saynn("She hesitates for a bit but is unable to resist for long, your digits spreading your slick folds for her was the last straw. Kidlat jumps up to you and kneels behind, her paws carefully stroking your back and groping your rear.")
+		saynn("She hesitates for a bit but is unable to resist for long, your "+str("digits spreading your slick folds" if isVag else "hands spreading your cheeks")+" for her was the last straw. Kidlat jumps up to you and kneels behind, her paws carefully stroking your back and groping your rear.")
 
 		saynn("[say=kidlat]I'm pretty soft for a..[/say]")
 
 		saynn("[say=pc]Just fuck me, Kidlat. Shove that juicy cock inside.[/say]")
 
-		saynn("Your words send shivers down her spine. With a deliberate but delicate touch, she pins you into the floor, one of her paws supporting her off of your back while the second gets a grasp on her twitching canine cock and lines it up with your wet, waiting pussy.")
+		saynn("Your words send shivers down her spine. With a deliberate but delicate touch, she pins you into the floor, one of her paws supporting her off of your back while the second gets a grasp on her twitching canine cock and lines it up with your "+str("wet, waiting pussy" if isVag else "back entrance")+".")
 
-		saynn("Just the tip of her length prodding your folds is sending your mind.. somewhere else.. You already want all of it..")
+		saynn("Just the tip of her length prodding your "+str("folds" if isVag else "anal ring")+" is sending your mind.. somewhere else.. You already want all of it..")
 
 		addButton("Continue", "See what happens next", "sex_cock_vag_sex")
 	if(state == "sex_cock_vag_sex"):
@@ -864,28 +874,31 @@ func _run():
 
 		saynn("[say=kidlat]That's so tight.. you're so tight.[/say]")
 
-		saynn("You chuckle softly and bite your lip again, letting Kidlat do it at her own pace. The more she slides inside you, the more your pussy grips her shaft, each buried inch sending shivers through both bodies.")
+		saynn("You chuckle softly and bite your lip again, letting Kidlat do it at her own pace. The more she slides inside you, the more your "+str("pussy" if isVag else "ass")+" grips her shaft, each buried inch sending shivers through both of you.")
 
 		saynn("[say=pc]Mmh~..[/say]")
 
-		saynn("Feels great to be the first one to test that great dick, little quiet moans escape your lips as Kidlat starts doing slow, measured thrusts, pulling a bit back before letting her length fill the empty space inside you yet again. Your back arches further in response, your inner walls leave a layer of transparent juices on her canine member.")
+		saynn("Feels great to be the first one to test that great dick, little quiet moans escape your lips as Kidlat starts doing slow, measured thrusts, pulling a bit back before letting her length fill the empty space inside you yet again. Your back arches further in response, your inner walls "+str("leave a layer of transparent juices on her canine member" if isVag else "become slick from the abundant amount of precum that her new canine member seems to be producing")+".")
 
-		saynn("[say=kidlat]Ah.. your pussy is just top-notch, luv.. I can't..[/say]")
+		if (!isVag && GM.pc.hasPenis()):
+			saynn("It quickly finds your little sensitive button.. and starts putting pressure on it.. already milking some prostate fluid out of it.")
+
+		saynn("[say=kidlat]Ah.. your "+str("pussy" if isVag else "tailhole")+" is just top-notch, luv.. I can't..[/say]")
 
 		saynn("At this steady pace, you can feel her cock pulsating as it grinds against your slick walls, the sounds of her hips slapping against your butt blending with your moans.")
 
 		addButton("Continue", "See what happens next", "sex_cock_vag_fast")
 	if(state == "sex_cock_vag_fast"):
 		playAnimation(StageScene.SexLowDoggy, "fast", {pc="kidlat", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
-		saynn("Kidlat gets eager, enjoying fucking your pussy so much that her thrusts grow more dominant and rough. With each of these thrusts, your body starts to react uncontrollably.. your hips buck, your legs shiver and even your anus clenches involuntarily. You look down, under yourself, for a second and notice Kidlat's pussy dripping steadily.. each motion drawing out another bead of arousal from her folds.")
+		saynn("Kidlat gets eager, enjoying fucking your "+str("{pc.pussyStretch} pussy" if isVag else "{pc.analStretch} asshole")+" so much that her thrusts grow more dominant and rough. With each of these thrusts, your body starts to react uncontrollably.. your hips buck, your legs shiver"+str(" and even your anus clenches involuntarily" if isVag else ", toes curl up")+". You look down, under yourself, for a second and notice Kidlat's pussy dripping steadily.. each motion drawing out another bead of arousal from her folds.")
 
 		saynn("[say=pc]Mhm.. ah.hh.. nhh~..[/say]")
 
-		saynn("That cock.. feels amazing.. the way it pounds your slit.. makes your eyes want to roll up. Hot moans leave your mouth as you're gripping the floor with all your might, meeting that veiny shaft with your ass, making the plaps louder.")
+		saynn("That cock.. feels amazing.. the way it pounds your "+str("slit" if isVag else "rear")+".. makes your eyes want to roll up. Hot moans leave your mouth as you're gripping the floor with all your might, meeting that veiny shaft with your ass, making the plaps louder.")
 
-		saynn("Amid all of that, the knot at the base of Kidlat's cock begins to inflate, swelling with blood, turning into a fat orb that is slapping against your folds, spreading them wider, trying to fit inside.")
+		saynn("Amid all of that, the knot at the base of Kidlat's cock begins to inflate, swelling with blood, turning into a fat orb that is slapping against your "+str("folds" if isVag else "star")+", spreading "+str("them" if isVag else "it")+" wider, trying to fit inside.")
 
-		saynn("[say=kidlat]C-can I knot you, luv.. ah.. I really wanna knot your pussy.. hhah.. Please, this feels amazing..[/say]")
+		saynn("[say=kidlat]C-can I knot you, luv.. ah.. I really wanna knot your "+str("pussy" if isVag else "ass")+".. hhah.. Please, this feels amazing..[/say]")
 
 		addButton("Allow it", "Allow Kidlat to knot you and cum inside", "sex_cock_vag_inside")
 		addButton("Pull out", "Order her to pull out rather than cumming inside", "sex_cock_vag_pullout")
@@ -899,9 +912,9 @@ func _run():
 
 		saynn("[say=kidlat]Okay, luv.. I won't.. ah..[/say]")
 
-		saynn("Kidlat's thrusts still take on a final, feral intensity.. pushing you over the edge in moments. Your whole body starts squirming under her grasp, your pussy clenching hard around her pulsing member.."+str(" Your {pc.penis} shooting {pc.cum} all over the cold floor, wasting its load.." if GM.pc.hasPenis() else "")+"")
+		saynn("Kidlat's thrusts still take on a final, feral intensity.. pushing you over the edge in moments. Your whole body starts squirming under her grasp, your "+str("pussy" if isVag else "tailhole")+" clenching hard around her pulsing member"+str(", your prostate squeezed hard" if (!isVag && GM.pc.hasPenis()) else "")+".."+str(" Your {pc.penis} shooting {pc.cum} all over the cold floor, wasting its load.." if GM.pc.hasPenis() else "")+"")
 
-		saynn("But right after she is pushed over her edge, she finds the strength inside her to pull out and direct her cock away from your pussy.. She moans and pants heavily while her body convulses from orgasmic waves, her knotted member throbbing as it sends beautiful white arcs of her seed through the air, one after another.. draining her balls..")
+		saynn("But right after she is pushed over her edge, she finds the strength inside her to pull out and direct her cock away from your "+str("pussy" if isVag else "ass")+".. She moans and pants heavily while her body convulses from orgasmic waves, her knotted member throbbing as it sends beautiful white arcs of her seed through the air, one after another.. draining her balls..")
 
 		saynn("[say=kidlat]Fuck.. bloody.. f-fucking.. ah.. nyaa.. hah..[/say]")
 
@@ -909,7 +922,7 @@ func _run():
 
 		saynn("[say=pc]Did that feel good?[/say]")
 
-		saynn("[say=kidlat]Yep.. ye.. hah.. you got a great pussy, hun. Was a real pleasure fucking it..[/say]")
+		saynn("[say=kidlat]Yep.. ye.. hah.. you got a great "+str("pussy" if isVag else "butt")+", hun. Was a real pleasure fucking it..[/say]")
 
 		saynn("[say=pc]And your cock was a real pleasure to be fucked by~.[/say]")
 
@@ -939,24 +952,24 @@ func _run():
 
 		saynn("[say=pc]Yes.. do it. I need you deep inside me..[/say]")
 
-		saynn("And with that, Kidlat's thrusts take on a final, feral intensity. She keeps ramming her cock inside your pussy, trying to fit the whole length, her knot stretching your pussy.. bit by bit..")
+		saynn("And with that, Kidlat's thrusts take on a final, feral intensity. She keeps ramming her cock inside your "+str("slit" if isVag else "ass")+", trying to fit the whole length, her knot stretching your "+str("petals" if isVag else "anal ring")+".. bit by bit..")
 
-		saynn("..until finally, with one big forceful push, she drives her cock deep into your trembling pussy, the fat orb slipping inside with a satisfying plop.. sending you over the edge.")
+		saynn("..until finally, with one big forceful push, she drives her cock deep into your trembling "+str("pussy" if isVag else "asshole")+", the fat orb slipping inside with a satisfying plop.. sending you over the edge.")
 
-		saynn("The tight walls of your cunt squeeze around her throbbing length as the swollen knot locks you in place.")
+		saynn("The tight walls of your "+str("cunt" if isVag else "butt")+" squeeze around her throbbing length as the swollen knot locks you in place.")
 
 		saynn("[say=kidlat]So t-tight..[/say]")
 
-		saynn("Kidlat's cock begins to pulse furiously.. each rhythmic contraction sending a wave of cum flooding deep into your womb, stuffing it full. Her balls twitch in time with the climax, each spurt marking your inner walls, painting them white..")
+		saynn("Kidlat's cock begins to pulse furiously.. each rhythmic contraction sending a wave of cum flooding deep "+str("into your womb, stuffing it full" if isVag else "down your tailhole, stuffing you full")+". Her balls twitch in time with the climax, each spurt marking your inner walls, painting them white..")
 
 		saynn("[say=kidlat]I'm b-breeding you, luv.. nya-a..[/say]")
 
 		saynn("[say=pc]Fuck-k..[/say]")
 
 		if (GM.pc.hasPenis()):
-			saynn("While she is breeding you, your {pc.penis} is wasting its load, shooting {pc.cum} onto the floor beneath you.. but you don't mind that..")
+			saynn("While she is breeding you, your {pc.penis} is wasting its load, shooting {pc.cum} onto the floor beneath you"+str(", your prostate smashed hard" if (!isVag && GM.pc.hasPenis()) else "")+".. but you don't mind that..")
 
-		saynn("Your pussy keeps milking her cock until her balls are completely dry.. and now.. you two remain locked together..")
+		saynn("Your body keeps milking her cock until her balls are completely dry.. and now.. you two remain locked together..")
 
 		saynn("[say=kidlat]Bloody.. f-fucking.. ah.. nyaa.. hah..[/say]")
 
@@ -964,7 +977,7 @@ func _run():
 
 		saynn("[say=pc]Did that feel good? Mmh..[/say]")
 
-		saynn("[say=kidlat]Yep.. ye.. hah.. you have a great pussy, hun. Was a real pleasure fucking it..[/say]")
+		saynn("[say=kidlat]Yep.. ye.. hah.. you have a great "+str("pussy" if isVag else "butt")+", hun. Was a real pleasure fucking it..[/say]")
 
 		saynn("[say=pc]And your cock was a real pleasure to get knotted by~.[/say]")
 
@@ -991,7 +1004,7 @@ func _run():
 
 		saynn("[say=pc]Ah~.. so messy..[/say]")
 
-		saynn("Your pussy continues to gape, leaking some of Kidlat's seed.")
+		saynn("Your "+str("pussy" if isVag else "asshole")+" continues to gape, leaking some of Kidlat's seed.")
 
 		saynn("After this, her cock quickly gets soft, retracting into its sheath. You catch her concerned stare.")
 
@@ -1009,6 +1022,129 @@ func _run():
 
 		setFlag("DrugDenModule.KidlatCustomTalkGreet", "That was.. crazy.. last time.. do you have another pill, luv?..")
 		addButton("Continue", "See what happens next", "sex_cock_tf_back")
+	if(state == "sex_freeuse"):
+		playAnimation(StageScene.Duo, "stand", {npc="kidlat"})
+		saynn("A somewhat of a wild idea shows up in your head.. a forbidden one even.. some might even say.. lewd.")
+
+		saynn("Of course Kidlat wouldn't agree to it.. surely. But still, curiosity makes you wonder.")
+
+		saynn("[say=pc]I have a question.[/say]")
+
+		saynn("Her ears perk up.")
+
+		saynn("[say=kidlat]Shoot![/say]")
+
+		saynn("You're not sure how to word it in the least.. offensive.. way.")
+
+		saynn("[say=pc]You like.. sex.. right?[/say]")
+
+		saynn("Your question is met with a cheeky smile.. and a slight sway of her hips.")
+
+		saynn("[say=kidlat]Who doesn't? Of course I like sex, hun~. Are ya offering?[/say]")
+
+		saynn("She flicks her tongue out and drags it over her upper lip.. seductively.")
+
+		saynn("[say=pc]Maybe. I'm wondering if you like casual sex in particular.[/say]")
+
+		saynn("Kidlat raises a brow.. but then chuckles and approaches you, putting her full femininity into her slow steps. Her paw reaches out and gently slides along the side of your {pc.masc} body..")
+
+		saynn("[say=kidlat]As casual as you can offer~. Anything for you, luv~.[/say]")
+
+		saynn("Interesting. Maybe there is a chance.")
+
+		saynn("[say=pc]Really now? You're saying that you have no limits?[/say]")
+
+		saynn("She hums.")
+
+		saynn("[say=kidlat]Well.. as long as it doesn't get me into a mess. If not, be my guest~.[/say]")
+
+		saynn("She leans in closer and gives you a little smooch on the cheek, her paws keep exploring your body, sliding dangerously close to your crotch..")
+
+		saynn("[say=pc]There might be a mess.. a lot of it.[/say]")
+
+		saynn("[say=kidlat]I don't mind that kind of mess, luv~. I welcome it. Let's just do it, why talk about it, hah.[/say]")
+
+		addButton("Slutwall", "Show Kidlat the slutwall", "sex_slutwall_show")
+	if(state == "sex_slutwall_show"):
+		aimCameraAndSetLocName("fight_slutwall")
+		saynn("Without another word, you take her paw and lead her from the confidence of her cell out into the public.")
+
+		saynn("[say=kidlat]Don't tell me you wanna fuck me while everyone is watching. That'd be so kinky~.[/say]")
+
+		saynn("[say=pc]Worse. Or better, depends on how you look at it. Although, not sure if you'd be looking at much.[/say]")
+
+		saynn("Your words certainly peak her interest.")
+
+		saynn("You and Kidlat get out into the main hall and walk down to the yard area.")
+
+		saynn("[say=kidlat]Giving me walkies~? I'm not a puppy.. unless you want me to bark.[/say]")
+
+		saynn("[say=pc]You will get your walkies later, Kidlat. If you will have any energy for them.[/say]")
+
+		saynn("She bites her lip.")
+
+		saynn("You pass by the bulldog guard without much trouble.. and start following the narrow dimly-lit corridor.")
+
+		saynn("[say=kidlat]Oh wow, I haven't been in these maintenance tunnels yet.[/say]")
+
+		saynn("Soon, you reach a special.. inmate hangout area. A big seemingly-abandoned space that got transformed into a room for inmates to enjoy their arena fights and cheap whores.")
+
+		saynn("[say=kidlat]This is cool. I don't even see any obvious junkies here.[/say]")
+
+		saynn("[say=pc]It's a nice little separated place, yes. I wanted to show you this..[/say]")
+
+		saynn("As you approach the corner of this space, Kidlat's eyes fix on one of the walls. She raises a brow, curious about the reason for those big holes in it.. but then her breath catches.")
+
+		saynn("[say=kidlat]Oh-.. Is that what I think it is?[/say]")
+
+		saynn("You smile, your hand scritches her under the chin. The chains, the little holes above the big one, tip boxes, markers, it all makes sense for her now.")
+
+		saynn("[say=pc]You said you're into casual sex. Doesn't get much more casual than this~.[/say]")
+
+		saynn("She doesn't show it.. but her body responds instinctively.. The mere sight of this wall makes her blush and rub her thighs against each other.")
+
+		saynn("[say=kidlat]I don't know, luv.. I'm concerned about how it would make you feel..[/say]")
+
+		saynn("She is being so sweet. But you don't hear her saying no.")
+
+		saynn("You lean in closer to her ear and start whispering..")
+
+		saynn("[say=pc]Doesn't the thought of getting fucked by a complete strange turn you on? Who says I can't be one of those strangers~?[/say]")
+
+		saynn("Even with all the inmates around, you can hear you swallowing her saliva.")
+
+		saynn("[say=pc]Cock after cock, fucking your little tight pussy while you're stuck in that slutwall.. unable to even see them.. Don't you wanna be a free-use whore, kitty~? Just this time~?[/say]")
+
+		saynn("Her blush becomes deeper and deeper, her eyes lustier.. You can just tell that she is wet down there by now.. you can just tell..")
+
+		saynn("[say=pc]C'mon, kitty cat. One word and I will lock you in~.[/say]")
+
+		saynn("Her nips look all stiff under that shirt of hers, her tail wrapped around her leg, little cute noises escape her maw. She keeps biting her lip.")
+
+		saynn("[say=kidlat]S-sure, luv..[/say]")
+
+		saynn("Your smile gets wider. Time to do this.")
+
+		addButton("Lock her in", "Lock Kidlat inside the slutwall", "sex_slutwall_lock")
+	if(state == "sex_slutwall_lock"):
+		addCharacter("kidlat", ["naked"])
+		playAnimation(StageScene.Slutwall, "idle", {pc="kidlat", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You grab her by the paw and guide her towards the slutwall, picking the middle spot that's empty.")
+
+		saynn("[say=pc]Don't mind me.[/say]")
+
+		saynn("With some extra authority, your hands begin to undo Kidlat's shirt buttons, exposing her perky tits to inmates around.. who already begin to gather interest in the new toy.. Kidlat sees all the eyes that are drawn towards her.. but doesn't cover herself up, allowing you to pull her shorts down as well, exposing her neat little cyan slit.")
+
+		saynn("[say=kidlat]Hey, uh.. luv..[/say]")
+
+		saynn("[say=pc]I will keep your clothes, don't worry~.[/say]")
+
+		saynn("While the audience is watching.. you help Kidlat to get inside the big hole.. positioning her so that her butt is still sticking out.")
+
+		saynn("[say=kidlat]Kinky.. Everyone is probably looking at my pussy already..[/say]")
+
+		saynn("You then grab some cuffs that are hanging by the chains and lock them around Kidlat's ankles and wrists, securing her body in this.. extremely vulnerable position.. where Kidlat's slick, cyan slit and tailhole are now on full display.")
+
 func addStraponButtons(thestate):
 	var strapons = GM.pc.getStrapons()
 	for strapon in strapons:
@@ -1053,6 +1189,9 @@ func _react(_action: String, _args):
 
 	if(_action == "sex_cock"):
 		GM.pc.getInventory().removeTFPillWithEffect("GrowPenisTF")
+
+	if(_action == "sex_freeuse"):
+		processTime(3*60)
 
 	if(_action == "sex_vag_strapon_pick_pick"):
 		isStrapon=true
@@ -1137,6 +1276,13 @@ func _react(_action: String, _args):
 
 	if(_action == "sex_cock_vag"):
 		processTime(5*60)
+		isVag = true
+
+	if(_action == "sex_cock_ass"):
+		processTime(5*60)
+		isVag = false
+		setState("sex_cock_vag")
+		return
 
 	if(_action == "sex_cock_stroke_cum"):
 		processTime(5*60)
@@ -1192,17 +1338,32 @@ func _react(_action: String, _args):
 
 	if(_action == "sex_cock_vag_inside"):
 		processTime(5*60)
-		GM.pc.gotVaginaFuckedBy("kidlat")
-		GM.pc.cummedInVaginaBy("kidlat")
+		if(isVag):
+			GM.pc.gotVaginaFuckedBy("kidlat")
+			GM.pc.cummedInVaginaBy("kidlat")
+		else:
+			GM.pc.gotAnusFuckedBy("kidlat")
+			GM.pc.cummedInAnusBy("kidlat")
 		GM.pc.orgasmFrom("kidlat")
 
 	if(_action == "sex_cock_vag_pullout"):
 		processTime(5*60)
-		GM.pc.gotVaginaFuckedBy("kidlat")
+		if(isVag):
+			GM.pc.gotVaginaFuckedBy("kidlat")
+		else:
+			GM.pc.gotAnusFuckedBy("kidlat")
 		GM.pc.orgasmFrom("kidlat")
 
 	if(_action == "sex_cock_vag_inside_rest"):
 		processTime(15*60)
+
+	if(_action == "sex_slutwall_show"):
+		processTime(10*60)
+
+	if(_action == "sex_slutwall_lock"):
+		processTime(10*60)
+		getCharacter("kidlat").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmatewristcuffs"))
+		getCharacter("kidlat").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmateanklecuffs"))
 
 	setState(_action)
 
@@ -1211,6 +1372,7 @@ func saveData():
 
 	data["isStrapon"] = isStrapon
 	data["straponHasCum"] = straponHasCum
+	data["isVag"] = isVag
 
 	return data
 
@@ -1219,3 +1381,4 @@ func loadData(data):
 
 	isStrapon = SAVE.loadVar(data, "isStrapon", false)
 	straponHasCum = SAVE.loadVar(data, "straponHasCum", false)
+	isVag = SAVE.loadVar(data, "isVag", true)
