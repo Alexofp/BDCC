@@ -1852,6 +1852,10 @@ func addBodywritingRandom():
 	var zone = BodyWritingsZone.getRandomZone()
 	addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone))
 
+func addBodywritingLowerBody():
+	var zone = BodyWritingsZone.getRandomZoneLowerPart()
+	addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone))
+
 func hasBodywritings():
 	return hasEffect(StatusEffect.HasBodyWritings)
 

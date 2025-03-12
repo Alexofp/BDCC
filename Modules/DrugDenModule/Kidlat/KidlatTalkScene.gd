@@ -3,9 +3,14 @@ extends SceneBase
 var isStrapon = false
 var straponHasCum = false
 var isVag = true
+var npcID = ""
 
 func _init():
 	sceneID = "KidlatTalkScene"
+
+func resolveCustomCharacterName(_charID):
+	if(_charID == "npc"):
+		return npcID
 
 func _run():
 	if(state == ""):
@@ -1139,11 +1144,147 @@ func _run():
 
 		saynn("[say=pc]I will keep your clothes, don't worry~.[/say]")
 
-		saynn("While the audience is watching.. you help Kidlat to get inside the big hole.. positioning her so that her butt is still sticking out.")
+		saynn("While the audience is waiting.. you help Kidlat to get inside the big hole.. positioning her so that her butt is still sticking out.")
 
-		saynn("[say=kidlat]Kinky.. Everyone is probably looking at my pussy already..[/say]")
+		saynn("You grab some cuffs that are hanging by the chains and lock them around Kidlat's ankles and wrists, securing her body in this.. extremely vulnerable position.. where Kidlat's slick, cyan slit and tailhole are now on full display.")
 
-		saynn("You then grab some cuffs that are hanging by the chains and lock them around Kidlat's ankles and wrists, securing her body in this.. extremely vulnerable position.. where Kidlat's slick, cyan slit and tailhole are now on full display.")
+		saynn("[say=kidlat]Kinky.. Everyone is probably hungrily watching my pussy already..[/say]")
+
+		saynn("And now.. as a last finishing touch, you grab a marker and write 'Free to use!' on the wall, near Kidlat's butt.")
+
+		saynn("Your bold marketing strategy seems to be working well.. there is a queue forming behind you..")
+
+		saynn("[say=kidlat]How did I end up in this situation.. meow..[/say]")
+
+		saynn("You chuckle and take a step back, inviting the first person. Now all you can do is watch.")
+
+		addButton("Watch", "See what happens next", "sex_slutwall_first")
+	if(state == "sex_slutwall_first"):
+		playAnimation(StageScene.SlutwallSex, "tease", {pc="kidlat", npc=npcID, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You can see Kidlat's toes curling as the first inmate steps forward, his {npc.penis} already hard, twitching in {npc.his} hand.")
+
+		saynn("Without hesitation, {npc.he} approaches the bound Kidlat, {npc.his} gaze quickly watching her over. {npc.His} touch is rough, lacking any.. empathy. {npc.He} spreads her cyan pussy wide with two digits, making the slick entrance itself open up, a string of juices already hanging between the folds.")
+
+		saynn("[say=kidlat]Oh.. hey there, lad.. um..[/say]")
+
+		addButton("Continue", "See what happens next", "sex_slutwall_first_sex")
+	if(state == "sex_slutwall_first_sex"):
+		playAnimation(StageScene.SlutwallSex, "sex", {pc="kidlat", npc=npcID, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("The inmate doesn't respond, {npc.he} just positions {npc.himself} between her spread legs and aligns {npc.his} cock with her wet, exposed slit. Then, with a single, forceful, thrust, {npc.he} plunges into her.")
+
+		saynn("[say=kidlat]..wai-.. ah!..[/say]")
+
+		saynn("You can barely hear the feline in there.. but you sure sees her body reacting.. her inner walls reflexively clenching around the intruding dick, spreading her juices along its length.")
+
+		saynn("{npc.He} doesn't stop there, already establishing a steady rhythm, pounding Kidlat's fresh pussy, enjoying getting to be the first.")
+
+		saynn("[say=kidlat]..hah.. you're a bold lad.. Oi![/say]")
+
+		saynn("Kidlat's ass jiggles as the inmate's hand slaps it hard, offering the girl a good lesson.. Fucktoys don't speak up.. they just get used.")
+
+		saynn("The inmate's thrusts are fast and unyielding, each one sending plaps and wet sounds to echo around the big open space. Kidlat's body is bound nicely, unable to squirm free.. she can only endure the rough fucking and let out occasional moans and shudders.")
+
+		saynn("[say=kidlat]Hh.. ah..[/say]")
+
+		addButton("Continue", "See what happens next", "sex_slutwall_first_cum")
+	if(state == "sex_slutwall_first_cum"):
+		playAnimation(StageScene.SlutwallSex, "inside", {pc="kidlat", npc=npcID, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("..but before Kidlat can realize it, the inmate already starts cumming inside her! {npc.He} rams {npc.his} cock as deep as her pussy allows.. and lets the clenching walls bring {npc.him} over the edge. {npc.He} starts stuffing her pussy full of seed.. emptying {npc.his} load inside.. a first of many, for sure..")
+
+		saynn("[say=kidlat]Oh.. ah.. a-already? That was a little.. fast.. AH![/say]")
+
+		saynn("Another smack leaves a glowing spot on Kidlat's ass, her slit pulsing around the throbbing cock.. Looks like it happened so fast, she didn't even get to cum..")
+
+		saynn("After the inmate pulls out, a great view of Kidlat's creamed pussy opens up to your eyes. Seed begins to drip out of her used hole..")
+
+		saynn("[say=kidlat]Mhh..[/say]")
+
+		saynn("Before leaving, the inmate grabs the marker and scribbles something bold and humiliating on her fur.. and then also draws a single tally mark on her butt.")
+
+		saynn("[say=kidlat]Are you drawing on me?.. Like I'm a slut?..[/say]")
+
+		saynn("The crowd is still tight around her.. but then someone cuts through it, ignoring the queue.")
+
+		addButton("Continue", "See what happens next", "sex_slutwall_second")
+	if(state == "sex_slutwall_second"):
+		addCharacter("jack")
+		playAnimation(StageScene.SlutwallSex, "tease", {pc="kidlat", npc="jack", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("A big, hung horse steps out and takes the spot of the next.. user. He didn't wait for his turn.. but no one seems to want to stop him.. they probably all know better than to mess with such a.. hung.. stallion.")
+
+		saynn("[say=jack]Huh, pretty thing already got used. No worries, gonna shove that weak beta sperm right out.[/say]")
+
+		saynn("His massive, veiny horsecock is pulsing between his legs, already fully out of its sheath. The head of his cock has a circle of spherical little.. bulges.. all of them already a bit inflated.")
+
+		saynn("[say=kidlat]Hey, uh.. hai, I guess..[/say]")
+
+		saynn("[say=jack]Little pussy still able to speak? Not for long.[/say]")
+
+		saynn("[say=kidlat]Um..[/say]")
+
+		saynn("She can't see him.. but she can surely feel the weight of his giant shaft resting on her used cunt, grinding against her cyan sensitive folds.")
+
+		saynn("[say=kidlat]I hope you're not too..[/say]")
+
+		saynn("While she is speaking, the horse aligns its fat flat tip with her pussy..")
+
+		addButton("Continue", "See what happens next", "sex_slutwall_second_sex")
+	if(state == "sex_slutwall_second_sex"):
+		playAnimation(StageScene.SlutwallSex, "fast", {pc="kidlat", npc="jack", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("The horse's rough hands find their places on Kidlat's hips.. before he does a forceful, strong push of his hips, ramming his horsecock into her, his thick girth spreading her cyan petals extremely wide, stretching them to their limits..")
+
+		saynn("[say=kidlat]AH!.. B-bloody![/say]")
+
+		saynn("Sharp moan escapes from behind the wall, Kidlat's tight, stretched pussy meets the guy's powerful thrusts with a desperate clench.. but that only seems to fuel the stallion's desire to fuck her pussy harder.")
+
+		saynn("[say=kidlat]Mhh-hh.. ahh.. ahh.. f-fu-uck.. it's s-so big.. ah..[/say]")
+
+		saynn("Poor kitty is squirming against the chains and cuffs.. but nah, she is completely helpless in that slutwall, her pussy at the horse's full mercy. And his thrusts are fierce.. a stark contrast to the previous inmate. With every strong, rapid thrust, he pounds into her, his flat tip smashing into her organic barricade over and over.")
+
+		saynn("Kidlat's moans grow louder and louder.. until her body begins to tremble, legs and arms starting to shake. She cums hard from that cock, her pussy visible clenching around him in a long series of spasmodic convulsions. Each powerful thrust forces her slit to stay stretched.. and makes it gush transparent fluids all over his length.")
+
+		saynn("[say=kidlat]Nhh-h.. fu-uck.. ahh.. ahh.. C-cumming.. ah.. c-can't s-stop.. ah..[/say]")
+
+		saynn("And the horsie is still not done, driving his member in faster and deeper, trying to fit more of his length inside. You can notice his balls twitching..")
+
+		addButton("Continue", "See what happens next", "sex_slutwall_second_cum")
+	if(state == "sex_slutwall_second_cum"):
+		playAnimation(StageScene.SlutwallSex, "inside", {pc="kidlat", npc="jack", npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("..until, with one final, rough motion, he buries his whole horsecock inside that poor little stretched pussy, stretching Kidlat's inner walls wide..")
+
+		saynn("The old cum that was inside Kidlat shoots out from around his shaft that has flared out, the little bumps on its head inflating greatly, pushing seed out..")
+
+		saynn("[say=kidlat]NYaaaaAaa-a.. hh.. ahh..[/say]")
+
+		saynn("[say=jack]Nghh. Such a tight whore.[/say]")
+
+		saynn("The stallion's body starts to spasm as his cock starts to release a torrent of thick, virile sperm deep inside Kidlat, flooding her sex and her babymaker until there is no space left.. and then more.. and more.. so much that it starts to overflow already, dripping messily onto the floor.")
+
+		saynn("It's impressive, really.. how Kidlat can handle such a cock.. but also how those twitching balls can produce so much..")
+
+		saynn("After his orgasm, his cock already begins to go soft.. so he decides to pull out.. unleashing another torrent of seed.. Kidlat's gaping pussy gushing out seed at a rate of her crazy heartbeat.. and there is no end to it..")
+
+		saynn("[say=kidlat]Mhh-h-h.. ahh-h-h.. m-my p-pussy.. ah..[/say]")
+
+		saynn("Her body is squirming, unable to contain the sensations.. unable to contain the cum..")
+
+		saynn("Before leaving, the guy reaches for a marker and scribbles a humiliating thing on her fur.. before adding a second tally mark.. At this rate, Kidlat won't be able to endure this for very long..")
+
+		saynn("[say=jack]Enjoy my foals, pretty thing.[/say]")
+
+		saynn("[say=kidlat]Nya-a-a.. ok-kay..[/say]")
+
+		saynn("Her answer makes you smile for some reason.")
+
+		saynn("After the stallion, it comes time for another inmate.. The queue is still long.. Everyone seems to want a piece of that puss..")
+
+		addButton("Continue", "See what happens next", "sex_slutwall_third")
+	if(state == "sex_slutwall_third"):
+		removeCharacter("jack")
+		addCharacter("axis")
+		playAnimation(StageScene.SlutwallSex, "tease", {pc="kidlat", npc="axis", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("A wolf approaches Kidlat.. a fancy-looking lilac that has white fur and red eyes.. a real alpha wolf. He sees Kidlat's pussy that is still not fully closed after that fat horsecock..")
+
+		saynn("[say=axis]Grr.. We should stop letting that fucker break the toys.[/say]")
 
 func addStraponButtons(thestate):
 	var strapons = GM.pc.getStrapons()
@@ -1365,6 +1506,35 @@ func _react(_action: String, _args):
 		getCharacter("kidlat").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmatewristcuffs"))
 		getCharacter("kidlat").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmateanklecuffs"))
 
+	if(_action == "sex_slutwall_first"):
+		processTime(3*60)
+		npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true})
+
+	if(_action == "sex_slutwall_first_sex"):
+		processTime(5*60)
+
+	if(_action == "sex_slutwall_first_cum"):
+		processTime(5*60)
+		getCharacter("kidlat").cummedInVaginaBy(npcID)
+		getCharacter("kidlat").addBodywritingLowerBody()
+		getCharacter("kidlat").addTallymarkButt()
+
+	if(_action == "sex_slutwall_second"):
+		removeCharacter(npcID)
+		processTime(5*60)
+
+	if(_action == "sex_slutwall_second_sex"):
+		processTime(5*60)
+
+	if(_action == "sex_slutwall_second_cum"):
+		processTime(3*60)
+		getCharacter("kidlat").cummedInVaginaBy("jack")
+		getCharacter("kidlat").addBodywritingLowerBody()
+		getCharacter("kidlat").addTallymarkButt()
+
+	if(_action == "sex_slutwall_third"):
+		processTime(5*60)
+
 	setState(_action)
 
 func saveData():
@@ -1373,6 +1543,7 @@ func saveData():
 	data["isStrapon"] = isStrapon
 	data["straponHasCum"] = straponHasCum
 	data["isVag"] = isVag
+	data["npcID"] = npcID
 
 	return data
 
@@ -1382,3 +1553,4 @@ func loadData(data):
 	isStrapon = SAVE.loadVar(data, "isStrapon", false)
 	straponHasCum = SAVE.loadVar(data, "straponHasCum", false)
 	isVag = SAVE.loadVar(data, "isVag", true)
+	npcID = SAVE.loadVar(data, "npcID", "")
