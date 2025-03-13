@@ -1282,9 +1282,147 @@ func _run():
 		removeCharacter("jack")
 		addCharacter("axis")
 		playAnimation(StageScene.SlutwallSex, "tease", {pc="kidlat", npc="axis", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
-		saynn("A wolf approaches Kidlat.. a fancy-looking lilac that has white fur and red eyes.. a real alpha wolf. He sees Kidlat's pussy that is still not fully closed after that fat horsecock..")
+		saynn("A wolf approaches Kidlat.. a fancy-looking lilac that has white fur and red eyes.. a real alpha wolf. He sees Kidlat's pussy that is still not fully closed after that fat horsecock, his digits open it a bit more, exposing the creamed depths..")
 
 		saynn("[say=axis]Grr.. We should stop letting that fucker break the toys.[/say]")
+
+		saynn("His gaze shifts purposefully to her untouched second entrance.. the little clenched tailhole. Even though Kidlat's mind is probably quite.. foggy.. from the previous guy, she gasps when the new knotted cock starts prodding at her anal ring, teasingly stretching her, the pointy tip spreading pre all around the sensitive star.")
+
+		saynn("[say=kidlat]AH.. ah.. t-that's.. that's the wrong hole, lad..[/say]")
+
+		saynn("[say=axis]I ain't fucking a used hole.[/say]")
+
+		saynn("He spits on his dick and starts working it in more, the pointy tip stretching Kidlat's anal ring gradually, making her toes curl up, her fluffy tail swiping the floor.")
+
+		saynn("[say=kidlat]Eek.. oi..[/say]")
+
+		saynn("Her muscles try to clench.. but the wolf just applies more and more force..")
+
+		addButton("Continue", "See what happens next", "sex_slutwall_third_sex")
+	if(state == "sex_slutwall_third_sex"):
+		playAnimation(StageScene.SlutwallSex, "sex", {pc="kidlat", npc="axis", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("..until one of the powerful motions makes Kidlat's now-slick tailhole open enough to let the head of the new cock slide inside.")
+
+		saynn("[say=kidlat]Ah!.. my butt..[/say]")
+
+		saynn("And the wolf keeps going at it, doing little deliberate thrusts that bury more of his length inside the poor bound kitty, stretching her out to fit him.")
+
+		saynn("[say=axis]Good thing this slut had at least some anal fucking before. Right, whore?[/say]")
+
+		saynn("Kidlat's body is trembling in that slutwall.. but more and more moans start to escape from behind it.")
+
+		saynn("[say=kidlat]Ah.. ah.. m-maybe.. hah.. I'm s-such a slut.. ah..[/say]")
+
+		saynn("It gets easier for the guy to fuck her.. his cock probably stretched and coated her inner walls with some precum by now. Kidlat's neglected pussy is still dripping the left-over seed, her anus being fucked with a thick cock makes her wet folds look smaller..")
+
+		addButton("Continue", "See what happens next", "sex_slutwall_third_fast")
+	if(state == "sex_slutwall_third_fast"):
+		playAnimation(StageScene.SlutwallSex, "fast", {pc="kidlat", npc="axis", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("The guy increases his pace, his cock sliding inside Kidlat's ass at a more urgent and forceful rate. Each thrust sends waves of sharp, intense pleasure ripping through the feline, her anal muscles clenching tightly around him.")
+
+		saynn("[say=kidlat]Ah.. ah.. bloody hell.. hhh..ah..[/say]")
+
+		saynn("She doesn't even see who is pounding her tight anal ring.. she only feels a fat canine cock ravaging her insides.. and hears the loud plaps echoing around the open space. The knot at the base of that member begins inflating with blood.. it's slapping against her fuckhole, stretching it even wider..")
+
+		saynn("[say=kidlat]W-wait.. you're n-not gonna..[/say]")
+
+		addButton("Continue", "See what happens next", "sex_slutwall_third_cum")
+	if(state == "sex_slutwall_third_cum"):
+		playAnimation(StageScene.SlutwallSex, "inside", {pc="kidlat", npc="axis", npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Before Kidlat can finish her sentence, her ass gets suddenly knotted by that fat cock, her sensitive anal ring gets forced open extremely wide by the fat orb that then slips inside, trapping the whole length inside.")
+
+		saynn("[say=kidlat]AHH-hHH!.. Hhnhh!.. hhhahh.. AhHHhh-..[/say]")
+
+		saynn("Kidlat is thrashing against the cuffs and chains.. while the guy unleashes his thick, virile load inside her squirming, clenching ass, his balls tensing up as he keeps pumping her second hole full to the brim.")
+
+		saynn("Both of Kidlat's fuckholes pulse hard, her pussy spawning a fountain of girlcum while her asshole keeps milking that wolf's cock for all of his seed..")
+
+		saynn("[say=axis]Grrh.. That's a good fucktoy.[/say]")
+
+		saynn("Kidlat just moans into the air, her body still shuddering, pussy pulsing and squirting from the overstimulation..")
+
+		saynn("While the wolf is stuck inside her, he grabs a marker and adds to the old scribbles.. and also adds an extra tallymark.. of course..")
+
+		saynn("Then, when his knot deflates enough, he just yanks his cock out, leaving Kidlat's tailhole to gape, showing how stuffed it is to all the observers.. extremely lewd sight.")
+
+		saynn("[say=kidlat]Ah!.. I'm s-such a fucktoy.. s-such a whore.. h-h.. nyaa-ah..[/say]")
+
+		saynn("The poor kitty tries to clench.. but it still takes a while for her hole to fully close, her ass and pussy now both dripping with seed..")
+
+		saynn("After the wolf steps away, another person begins to approach her.. but they are pushed back by another bold inmate who decides to skip the queue.")
+
+		saynn("Kidlat just can't get a break. But it looks like she is having fun at least.")
+
+		addButton("Continue", "See what happens next", "sex_slutwall_fourth")
+	if(state == "sex_slutwall_fourth"):
+		playAnimation(StageScene.SlutwallSex, "tease", {pc="kidlat", npc="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		removeCharacter("axis")
+		addCharacter("avy")
+		saynn("A mean-looking foxie with dark fur approaches the slutwall. A bulge on her shorts makes it obvious that this foxy is packing heat.. Her eyes take in the sight before her.")
+
+		saynn("Kidlat's butt.. covered in scribbles, cum and her own juices.. shuddering. Both her used holes are pulsing faintly, leaking seed..")
+
+		saynn("[say=avy]GRr.. Fuck, I'm always too late. Whatever, I hope your holes are not too loose yet, you stupid whore.[/say]")
+
+		saynn("With a rough touch, she grips Kidlat's hips, forcing her cum-soaked slit open.. while her cock starts to leave its sheath, getting harder. The foxy lets her shaft land on that messy crotch and start grinding against the cyan folds.")
+
+		saynn("[say=kidlat]Mhh..[/say]")
+
+		addButton("Continue", "See what happens next", "sex_slutwall_fourth_sex")
+	if(state == "sex_slutwall_fourth_sex"):
+		playAnimation(StageScene.SlutwallSex, "fast", {pc="kidlat", npc="avy", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Then, when she gets hard enough, she just guides her cock down that used fuckhole, letting the girl's folds spread around her veiny member. With one forceful thrust, the foxy plunges most of her length inside.. pushing some of the old cum out, replacing it with high-quality hard meat.")
+
+		saynn("[say=kidlat]..ah.. nyaah..[/say]")
+
+		saynn("[say=avy]Got your brains fucked out already? Don't worry, I will make sure you remember me.[/say]")
+
+		saynn("Foxy begins fucking the kitty.. while her claws dig deeper into her butt.")
+
+		saynn("[say=kidlat]Agh.. eek.. hh-hgh..[/say]")
+
+		saynn("She is dragging her claws, leaving a few shallow cuts.. that instantly begin bleeding. Kidlat's body reacts instantly, jerking to the side as much as the cuffs allow.. her pussy clenches hard around the girl's cock.")
+
+		saynn("[say=avy]There you go, slut. The only way to feel something with your stupid gaping holes.[/say]")
+
+		saynn("After leaving her marks, the foxy just smacks that ass a few times, sending it jiggling. Her paw then just catches the tail and uses it as a handle-bar, pulling on it while thrusting inside.")
+
+		saynn("[say=kidlat]Nhh.. nyaa.. ahh..[/say]")
+
+		saynn("Kidlat keeps letting out disjointed moans and occasional whimpers, her mind seems to be clouded by the constant barrage of pleasure, leaving her unable to respond with anything but.. just noises. The foxy's rough assault on her pussy is unyielding though, she quickly intensifies her pace, using that pussy for her pleasure.")
+
+		saynn("[say=avy]Can you take more, little bitch?[/say]")
+
+		saynn("With each hard, aggressive thrust, she drives her cock deeper, sometimes scratching Kidlat's butt more to make her clench.")
+
+		saynn("At some point soon, the foxy's knot begins to grow.. and so she is quick to force it inside!")
+
+		saynn("[say=kidlat]Ahh-hh~.. k-knotted.. Ahh![/say]")
+
+		saynn("Kidlat's pussy gets stretched wide open again.. but only for a short moment.. The mean girl rams her whole length inside just to pull it out moments later.. leaving empty space that she fills soon yet again.")
+
+		saynn("[say=avy]Oh yeah, there we fucking go.. Take it, whore.[/say]")
+
+		saynn("She keeps forcing her knot in and out, never letting Kidlat's gaping, pulsing hole to fully close.. Poor kitty is squirming and squirting, her slit gushing with juices as it's being knot-fucked raw..")
+
+		addButton("Continue", "See what happens next", "sex_slutwall_fourth_cum")
+	if(state == "sex_slutwall_fourth_cum"):
+		playAnimation(StageScene.SlutwallSex, "inside", {pc="kidlat", npc="avy", npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("With one final thrust, the foxy knots Kidlat.. and leaves her throbbing length inside. She herself begins to grunt, her body arching a bit as begins cumming inside, her thick cum flooding the cum-laden depths in big waves.")
+
+		saynn("[say=avy]Nhh.. ngh..[/say]")
+
+		saynn("All the while Kidlat just accepts it.. her body eagerly receiving another load, inner walls squeezing the intruding knotted shaft, milking it for all of its cream.")
+
+		saynn("[say=kidlat]Nyaa.aa.. I'm a.. ah.. t-total cum dumpster..[/say]")
+
+		saynn("The foxy adds another tally mark and something extra on her fur.")
+
+		saynn("[say=avy]Mhm. Enjoy, needy bitch.[/say]")
+
+		saynn("As she pulls out, the overflowing cum begins to drip messily down Kidlat's butt. The foxy finds some untouched fur to clean her messy cock with.")
+
+		saynn("And just like that, she puts her member away and disappears inside the crowd, leaving Kidlat for the rest of the crowd..")
 
 func addStraponButtons(thestate):
 	var strapons = GM.pc.getStrapons()
@@ -1534,6 +1672,30 @@ func _react(_action: String, _args):
 
 	if(_action == "sex_slutwall_third"):
 		processTime(5*60)
+
+	if(_action == "sex_slutwall_third_sex"):
+		processTime(5*60)
+
+	if(_action == "sex_slutwall_third_fast"):
+		processTime(5*60)
+
+	if(_action == "sex_slutwall_third_cum"):
+		processTime(3*60)
+		getCharacter("kidlat").cummedInAnusBy("axis")
+		getCharacter("kidlat").addBodywritingLowerBody()
+		getCharacter("kidlat").addTallymarkButt()
+
+	if(_action == "sex_slutwall_fourth"):
+		processTime(3*60)
+
+	if(_action == "sex_slutwall_fourth_sex"):
+		processTime(5*60)
+
+	if(_action == "sex_slutwall_fourth_cum"):
+		processTime(5*60)
+		getCharacter("kidlat").cummedInVaginaBy("avy")
+		getCharacter("kidlat").addBodywritingLowerBody()
+		getCharacter("kidlat").addTallymarkButt()
 
 	setState(_action)
 
