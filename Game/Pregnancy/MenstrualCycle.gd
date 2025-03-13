@@ -212,7 +212,10 @@ func ovulate():
 	var possibleEggAmounts = []
 	for specie in motherSpecies:
 		var speciesObject = GlobalRegistry.getSpecies(specie)
-		possibleEggAmounts.append_array(speciesObject.getEggCellOvulationAmount())
+		if speciesObject == null:
+			possibleEggAmounts.append_array([[1, 10.0],[2, 1.0]])
+		else:
+			possibleEggAmounts.append_array(speciesObject.getEggCellOvulationAmount())
 	
 	for orifice in OrificeType.getAll():
 		if(!hasWombIn(orifice)):
