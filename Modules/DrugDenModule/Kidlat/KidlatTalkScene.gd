@@ -4,6 +4,7 @@ var isStrapon = false
 var straponHasCum = false
 var isVag = true
 var npcID = ""
+var pcHadFun = false
 
 func _init():
 	sceneID = "KidlatTalkScene"
@@ -1133,7 +1134,7 @@ func _run():
 		addButton("Lock her in", "Lock Kidlat inside the slutwall", "sex_slutwall_lock")
 	if(state == "sex_slutwall_lock"):
 		addCharacter("kidlat", ["naked"])
-		playAnimation(StageScene.Slutwall, "idle", {pc="kidlat", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.Slutwall, "idle", {pc="kidlat", bodyState={naked=true, hard=true}})
 		saynn("You grab her by the paw and guide her towards the slutwall, picking the middle spot that's empty.")
 
 		saynn("[say=pc]Don't mind me.[/say]")
@@ -1424,6 +1425,193 @@ func _run():
 
 		saynn("And just like that, she puts her member away and disappears inside the crowd, leaving Kidlat for the rest of the crowd..")
 
+		addButton("Continue", "See what happens next", "sex_slutwall_montage_1")
+	if(state == "sex_slutwall_montage_1"):
+		playAnimation(StageScene.SlutwallSex, "sex", {pc="kidlat", npc=npcID, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("What happens next is more of a blur than anything.. All of the.. bold inmates.. already did what they wanted with the kitty. But there is still a small crowd of lads who wanna add their loads.. or just watch the action.")
+
+		saynn("Another {npc.boy} steps in closer, eyes fixed on Kidlat's exposed, fucked fuckholes. Without hesitation, {npc.he} drives {npc.his} hard cock into her slick heat.. using all the previous seed at lube.")
+
+		saynn("[say=kidlat]Mhah.. a-another cock.. f-fucking me~..[/say]")
+
+		saynn("This inmate is not the most.. delicate one.. but {npc.he} is still better than the mean foxy.")
+
+		saynn("{npc.His} thrusts quickly become a barrage of pounding.. an assault on Kidlat's used pussy.. The space around the slutwall fills with plaps, slaps and noises of love from Kidlat.. until the inmate slams deep into her slit, pumping it full of {npc.his} seed, leaving {npc.his} mark on the kitty in a form of a creampie.. and also a tally mark and a writing.")
+
+		saynn("[say=kidlat]Ah.. yes.. Breed me~.. nyaa..[/say]")
+
+		addButton("Continue", "See what happens next", "sex_slutwall_montage_2")
+	if(state == "sex_slutwall_montage_2"):
+		playAnimation(StageScene.SlutwallSex, "fast", {pc="kidlat", npc=npcID, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("The inmate pulls and steps away.. which lets Kidlat rest for a bit. There is so much cum oozing out of her holes, the floor underneath is getting quite messy and slippery by now.")
+
+		saynn("[say=kidlat]Who is next.. meow..[/say]")
+
+		saynn("Seeing how eager she still is, another inmate already approaches her. {npc.He} does what most others do, grabbing Kidlat's waist roughly and shoving {npc.his} cock inside her.")
+
+		saynn("{npc.His} thrusts are lightning-fast.. lacking any feelings attached to them.. only focussed on raw pleasure.. hard fucking.")
+
+		saynn("[say=kidlat]Mhhh-hh~.. ahh..[/say]")
+
+		saynn("Kidlat is cumming again, her body shaking against the chains, making them rattle, her pussy is milking the intruding dick.. making it throb.. and then causing it to start pumping her womb with yet another load of sticky stuff..")
+
+		saynn("[say=kidlat]Nya-a-a..[/say]")
+
+		saynn("Another scribble.. and a tally mark.. Kidlat probably lost count of how many times her holes got used a long time ago.. good thing it's easy for you and others to track it.")
+
+		addButton("Continue", "See what happens next", "sex_slutwall_montage_3")
+	if(state == "sex_slutwall_montage_3"):
+		playAnimation(StageScene.SlutwallSex, "fast", {pc="kidlat", npc=npcID, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("One inmate after another, Kidlat's pussy is being fucked and creampied.. again and again..")
+
+		saynn("At this point, most of the inmates have had their fun with her.. there is only one left in the queue.")
+
+		saynn("Same process.. quick penetration.. hard, rough pounding.. another load of seed forced inside the bound feline.. a tally mark..")
+
+		addButton("Continue", "See what happens next", "sex_slutwall_montage_after")
+	if(state == "sex_slutwall_montage_after"):
+		playAnimation(StageScene.Slutwall, "idle", {pc="kidlat", bodyState={naked=true, hard=true}})
+		saynn("The queue is finally empty.. Everyone who wanted to use Kidlat, did so..")
+
+		saynn("You decide to approach the kitty and take a closer look at the aftermath.")
+
+		saynn("Kidlat's used holes are displayed for all to see.. her twitching pussy folds are still slightly spread from all the cocks that stretched them and also from all the creampies.. Her tailhole is leaking someone's seed as well..")
+
+		saynn("All around her body are the many marks that got left after this.. brutal ritual.. Her used holes, her bruises and bleeding scratches, cum-stained fur, the many tally marks and humiliating writings..")
+
+		saynn("[say=kidlat]Nya-a..h..[/say]")
+
+		saynn("You were about to start unlocking her.. but maybe there is something else you might wanna do first..")
+
+		addButton("Just unlock", "Enough sex for Kidlat", "sex_slutwall_justunlock")
+		addButtonWithChecks("Fuck her", "Add one last creampie from you..", "sex_slutwall_fuckher", [], [[ButtonChecks.HasReachablePenis]])
+		addButton("Eat her", "Her holes are leaking so much cum.. Might as well help clean her with your tongue", "sex_slutwall_eather")
+	if(state == "sex_slutwall_justunlock"):
+		playAnimation(StageScene.SexStart, "start", {npc="kidlat", npcBodyState={naked=true}})
+		saynn("Kitty has had enough.")
+
+		saynn("You unlock her cuffs and begin to pull her out.. being careful as to not get any mess on you.")
+
+		saynn("[say=kidlat]Oh?.. F-fun is over?..[/say]")
+
+		saynn("Kidlat slumps to the floor fast, her legs still weak.")
+
+		saynn("[say=kidlat]Hey, luv..[/say]")
+
+		saynn("She is sitting in the puddle of cum..")
+
+		saynn("[say=pc]How was it?[/say]")
+
+		saynn("[say=kidlat]It was.. something.. for sure.. fun.. ye..[/say]")
+
+		saynn("Judging from how much she was moaning before.. yeah, safe to say that she had some 'fun'.")
+
+		saynn("She finally looks down at herself.. and sees.. everything.")
+
+		saynn("[say=kidlat]I'm such a slut.. Hah..[/say]")
+
+		saynn("She turns her head back and looks at the slutwall itself..")
+
+		saynn("[say=kidlat]Did the whole prison came down here to fuck me.. Bloody hell..[/say]")
+
+		saynn("[say=pc]Yeah, looks like your butt quickly got popular.[/say]")
+
+		saynn("[say=kidlat]Makes me regret hiding in the drug den more, ha.[/say]")
+
+		saynn("She tries to get up.. but the slippery surface.. and her overall weakness.. makes it difficult.")
+
+		saynn("[say=kidlat]I might need a hand, hun..[/say]")
+
+		saynn("[say=pc]What you need is a shower.[/say]")
+
+		saynn("[say=kidlat]That's a fair point. There is no way I'm licking all that off..[/say]")
+
+		saynn("You give her a strange look.. while she just smiles.")
+
+		saynn("[say=kidlat]Wha? I'm a cat.[/say]")
+
+		addButton("Shower", "Time to shower", "sex_slutwall_shower")
+	if(state == "sex_slutwall_shower"):
+		aimCameraAndSetLocName("main_shower2")
+		GM.pc.setLocation("main_shower2")
+		playAnimation(StageScene.ShoweringDuo, "shower", {pc="kidlat", npc="pc", bodyState={naked=true}, npcBodyState={naked=true}})
+		saynn("You bring Kidlat to the nearest shower room and support her.. while cold water begins to wash away any mess..")
+
+		saynn("And there is a lot of mess to wash.. for obvious reasons.")
+
+		if (pcHadFun):
+			saynn("[say=kidlat]Your touch is so nice, luv.. You totally did have some fun with me too, ha.[/say]")
+
+			saynn("Makes you blush a bit.")
+
+			saynn("[say=kidlat]I don't mind~. Hope you don't mind that I got.. you know.. I feel kinda bad now..[/say]")
+
+			saynn("[say=pc]Don't feel bad. It was my idea after all.[/say]")
+
+		else:
+			saynn("[say=kidlat]Your touch is so nice, luv..[/say]")
+
+			saynn("[say=pc]Thanks.[/say]")
+
+		saynn("Your hands travel along the fur of her butt, helping to get rid of any writings and marks..")
+
+		saynn("Eventually, she begins to look like her old self.. less white.. but only on the outside.")
+
+		addButton("Wash inside", "Spread Kidlat's holes and make her push all the cum that got forced inside her", "sex_slutwall_washinside")
+		addButton("Enough showering", "Leave her womb and ass stuffed..", "sex_slutwall_leavestuffed")
+	if(state == "sex_slutwall_leavestuffed"):
+		addCharacter("kidlat")
+		playAnimation(StageScene.Duo, "stand", {npc="kidlat"})
+		saynn("You decide to leave her holes stuffed.. why not..")
+
+		saynn("After the shower time ends, Kidlat puts on her uniform with your help.")
+
+		saynn("[say=kidlat]Thank you, luv.. This was fun~. I think I won't be able to sit for a while. Nya.[/say]")
+
+		saynn("[say=pc]Yeah, I think you should take it easy from now on.[/say]")
+
+		saynn("[say=kidlat]I will! Take care, hun![/say]")
+
+		saynn("She gives you a quick kiss on the cheek.. and then heads back to her cell.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "sex_slutwall_washinside"):
+		playAnimation(StageScene.ShoweringDuo, "rub", {pc="kidlat", npc="pc", bodyState={naked=true}, npcBodyState={naked=true}})
+		saynn("After finishing washing the fur, your hands slide closer to her crotch.")
+
+		saynn("With a gentle touch, your digits spread her cyan folds, making the kitty gasp softly.")
+
+		saynn("[say=kidlat]Ah..[/say]")
+
+		saynn("Not that long after, old cum begins to ooze out of Kidlat's sex..")
+
+		saynn("[say=pc]Push a little.[/say]")
+
+		saynn("She obeys.. increasing the flow of seed leaving her holes.")
+
+		saynn("[say=kidlat]So much..[/say]")
+
+		saynn("Some of it lands on her inner thighs.. but it's all quickly washed away by running water anyway.")
+
+		saynn("[say=kidlat]"+str("I'm pregnant anyway already.. But I appreciate the gesture, luv." if getCharacter("kidlat").isVisiblePregnant() else "Let's hope I didn't get pregnant..")+"[/say]")
+
+		saynn("You spread her butt next, making sure her tailhole is mostly clean now too.")
+
+		addButton("Enough showering", "Time to stop..", "sex_slutwall_spread_leave")
+	if(state == "sex_slutwall_spread_leave"):
+		addCharacter("kidlat")
+		playAnimation(StageScene.Duo, "stand", {npc="kidlat"})
+		saynn("After the shower time ends, Kidlat puts on her uniform with your help.")
+
+		saynn("[say=kidlat]Thank you, luv.. This was fun~. I think I won't be able to sit for a while. Nya.[/say]")
+
+		saynn("[say=pc]Yeah, I think you should take it easy from now on.[/say]")
+
+		saynn("[say=kidlat]I will! Take care, hun![/say]")
+
+		saynn("She gives you a quick kiss on the cheek.. and then heads back to her cell.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 func addStraponButtons(thestate):
 	var strapons = GM.pc.getStrapons()
 	for strapon in strapons:
@@ -1653,6 +1841,7 @@ func _react(_action: String, _args):
 
 	if(_action == "sex_slutwall_first_cum"):
 		processTime(5*60)
+		getCharacter("kidlat").cummedOnBy(npcID, FluidSource.Penis, 0.3)
 		getCharacter("kidlat").cummedInVaginaBy(npcID)
 		getCharacter("kidlat").addBodywritingLowerBody()
 		getCharacter("kidlat").addTallymarkButt()
@@ -1666,7 +1855,8 @@ func _react(_action: String, _args):
 
 	if(_action == "sex_slutwall_second_cum"):
 		processTime(3*60)
-		getCharacter("kidlat").cummedInVaginaBy("jack")
+		getCharacter("kidlat").cummedOnBy("jack", FluidSource.Penis, 0.3)
+		getCharacter("kidlat").cummedInVaginaBy("jack", FluidSource.Penis)
 		getCharacter("kidlat").addBodywritingLowerBody()
 		getCharacter("kidlat").addTallymarkButt()
 
@@ -1681,6 +1871,7 @@ func _react(_action: String, _args):
 
 	if(_action == "sex_slutwall_third_cum"):
 		processTime(3*60)
+		getCharacter("kidlat").cummedOnBy("axis", FluidSource.Penis, 0.3)
 		getCharacter("kidlat").cummedInAnusBy("axis")
 		getCharacter("kidlat").addBodywritingLowerBody()
 		getCharacter("kidlat").addTallymarkButt()
@@ -1693,9 +1884,66 @@ func _react(_action: String, _args):
 
 	if(_action == "sex_slutwall_fourth_cum"):
 		processTime(5*60)
+		getCharacter("kidlat").cummedOnBy("avy", FluidSource.Penis, 0.3)
 		getCharacter("kidlat").cummedInVaginaBy("avy")
 		getCharacter("kidlat").addBodywritingLowerBody()
 		getCharacter("kidlat").addTallymarkButt()
+
+	if(_action == "sex_slutwall_montage_1"):
+		processTime(10*60)
+		npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true})
+		getCharacter("kidlat").cummedOnBy(npcID, FluidSource.Penis, 0.3)
+		getCharacter("kidlat").cummedInVaginaBy(npcID)
+		getCharacter("kidlat").addBodywritingLowerBody()
+		getCharacter("kidlat").addTallymarkButt()
+		removeCharacter("avy")
+		addCharacter(npcID)
+
+	if(_action == "sex_slutwall_montage_2"):
+		processTime(10*60)
+		removeCharacter(npcID)
+		npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true})
+		getCharacter("kidlat").cummedOnBy(npcID, FluidSource.Penis, 0.3)
+		getCharacter("kidlat").cummedInVaginaBy(npcID)
+		getCharacter("kidlat").addBodywritingLowerBody()
+		getCharacter("kidlat").addTallymarkButt()
+		addCharacter(npcID)
+
+	if(_action == "sex_slutwall_montage_3"):
+		processTime(10*60)
+		removeCharacter(npcID)
+		npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true})
+		getCharacter("kidlat").cummedOnBy(npcID, FluidSource.Penis, 0.3)
+		getCharacter("kidlat").cummedInVaginaBy(npcID)
+		getCharacter("kidlat").addBodywritingLowerBody()
+		getCharacter("kidlat").addTallymarkButt()
+		addCharacter(npcID)
+
+	if(_action == "sex_slutwall_montage_after"):
+		processTime(5*60)
+		removeCharacter(npcID)
+		npcID=""
+
+	if(_action == "sex_slutwall_fuckher"):
+		pcHadFun = true
+
+	if(_action == "sex_slutwall_eather"):
+		pcHadFun = true
+
+	if(_action == "sex_slutwall_shower"):
+		processTime(10*60)
+		getCharacter("kidlat").afterTakingAShower()
+		GM.pc.afterTakingAShower()
+
+	if(_action == "sex_slutwall_washinside"):
+		processTime(5*60)
+		getCharacter("kidlat").clearOrificeFluidsCheckBlocked()
+
+	if(_action == "sex_slutwall_leavestuffed"):
+		processTime(5*60)
+
+	if(_action == "sex_slutwall_spread_leave"):
+		processTime(3*60)
 
 	setState(_action)
 
@@ -1706,6 +1954,7 @@ func saveData():
 	data["straponHasCum"] = straponHasCum
 	data["isVag"] = isVag
 	data["npcID"] = npcID
+	data["pcHadFun"] = pcHadFun
 
 	return data
 
@@ -1716,3 +1965,4 @@ func loadData(data):
 	straponHasCum = SAVE.loadVar(data, "straponHasCum", false)
 	isVag = SAVE.loadVar(data, "isVag", true)
 	npcID = SAVE.loadVar(data, "npcID", "")
+	pcHadFun = SAVE.loadVar(data, "pcHadFun", false)
