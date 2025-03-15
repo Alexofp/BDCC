@@ -33,8 +33,93 @@ func _run():
 	if(state == "chat_menu"):
 		saynn("What do you wanna chat about with Kidlat?")
 
+		addButton("How is", "Just ask how is she doing now", "ask_howis")
 		addButton("Alcohol", "Ask if she is still drinking", "ask_alcohol")
+		addButton("Betrayal", "Ask how she feels about her ex-friend betraying her now", "ask_betrayal")
+		addButton("Future", "Ask what will she do after BDCC", "ask_future")
 		addButton("Back", "Enough chatting", "")
+	if(state == "ask_howis"):
+		saynn("[say=pc]How is this cat doing?[/say]")
+
+		saynn("[say=kidlat]I'm doing well, thank you, luv~. I like being up here. I can wander around the prison without the threat of running into some angry junkie.. or triggering a trap.[/say]")
+
+		saynn("[say=pc]It's almost like the drug den sucks ass.[/say]")
+
+		saynn("She chuckles.")
+
+		saynn("[say=kidlat]Well, I had my reasons to be down there. But now there are more reasons to be up here, near you~.[/say]")
+
+		saynn("Her words still warm your heart..")
+
+		addButton("Continue", "See what happens next", "chat_menu")
+	if(state == "ask_betrayal"):
+		saynn("[say=pc]You ended up in this prison..[/say]")
+
+		saynn("[say=kidlat]Because I got betrayed, ye. Buddy locked me up in a van full of stolen sex toys.[/say]")
+
+		saynn("[say=pc]So how do you feel about that now, after everything settled down?[/say]")
+
+		saynn("She shrugs.")
+
+		saynn("[say=kidlat]I don't know.. I don't crave revenge. The police were on our butts so I can kinda understand it.[/say]")
+
+		saynn("[say=pc]Will you still talk with them? If you get out of here I mean.[/say]")
+
+		saynn("[say=kidlat]Maybe. I'd like to hear what they have to say at least. I can boil in my soup of anger and despair all I want here.. But might as well give them a chance first, am I right?[/say]")
+
+		saynn("[say=pc]Sure.[/say]")
+
+		saynn("[say=kidlat]Like you did, with me~.[/say]")
+
+		saynn("[say=pc]How could I pass up on such a cute kitty?[/say]")
+
+		saynn("Her tail darts straight for your nose, bapping you..")
+
+		saynn("[say=kidlat]Sorry, just a reflex~.[/say]")
+
+		saynn("[say=pc]..brat. A cute brat.[/say]")
+
+		saynn("She sticks her tongue out.")
+
+		addButton("Continue", "See what happens next", "chat_menu")
+	if(state == "ask_future"):
+		saynn("[say=pc]Whatcha gonna do after BDCC?[/say]")
+
+		saynn("She tilts her head.")
+
+		saynn("[say=kidlat]What do you mean, luv?[/say]")
+
+		saynn("[say=pc]After your sentence ends. Do you know when that is?[/say]")
+
+		saynn("[say=kidlat]I'm not sure. I don't recall them giving me a timed sentence.[/say]")
+
+		saynn("It's gotta end sometime, right?..")
+
+		saynn("[say=pc]Well, still. What are your plans?[/say]")
+
+		saynn("[say=kidlat]Gonna follow my gaze probably, see where the road brings me.[/say]")
+
+		saynn("[say=pc]C'mon, you probably have a dream?[/say]")
+
+		saynn("She hums.")
+
+		saynn("[say=kidlat]Dream? Hm.. Luv. You know what house cats are?[/say]")
+
+		saynn("[say=pc]Cats who never get out of their owner's house?[/say]")
+
+		saynn("[say=kidlat]Ye! They don't really have dreams, do they? They just purr and provide warmth~.[/say]")
+
+		saynn("[say=pc]So you're saying.. You want an owner who will cherish and cuddle you? Who will give you a place to sleep, who will feed you?[/say]")
+
+		saynn("She puts on a cheeky smile, her hips swaying to one side a bit, adding a seductive curve to her back.")
+
+		saynn("[say=kidlat]What I'm saying is.. that I'm more a slut cat rather than a house cat~. The rest of the logic applies~.[/say]")
+
+		saynn("The devilishly naughty kitty giggles softly.")
+
+		saynn("Somehow, it all makes perfect sense.")
+
+		addButton("Continue", "See what happens next", "chat_menu")
 	if(state == "ask_alcohol"):
 		saynn("[say=pc]How are your dark thoughts, Kidlat? Still having to drown them out?[/say]")
 
@@ -1612,6 +1697,111 @@ func _run():
 		saynn("She gives you a quick kiss on the cheek.. and then heads back to her cell.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "sex_slutwall_fuckher"):
+		playAnimation(StageScene.SlutwallSex, "tease", {pc="kidlat", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("That pussy has gotten so many creampies that she won't even notice another one.")
+
+		saynn("You put your hands on her thighs, keeping her pussy spread for you and your cock..")
+
+		saynn("[say=kidlat]Mh..[/say]")
+
+		saynn("Her body.. is like a battered canvas, muscles twitching ever so slightly from the many exhausting orgasms. Both of her holes are slick and dripping with mixed fluids of previous inmates.")
+
+		saynn("You guide your {pc.penis} down her spread slit..")
+
+		addButton("Thrust inside", "Time to have some fun", "sex_slutwall_fuckher_sex")
+	if(state == "sex_slutwall_fuckher_sex"):
+		playAnimation(StageScene.SlutwallSex, "sex", {pc="kidlat", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("..and thrust your hips forward, letting your length penetrate her worn out pussy entrance, spreading her sensitive folds wide.")
+
+		saynn("[say=kidlat]Ah..[/say]")
+
+		saynn("Little moans begin to come up from behind the wall.. Kidlat doesn't even realize that it's your cock is now fucking her, rubbing against her inner walls, pressing on her buttons.")
+
+		saynn("A copious amount of old spunk helps a lot, making her tunnel slick.. but she is still undeniably wet, the fur around her flower gives out a nice shine.. what a slut.")
+
+		saynn("[say=kidlat]Mhh.. ah.. another cock is fucking me.. feels so good..[/say]")
+
+		addButton("Faster", "Increase your onslaught on that bound pussy", "sex_slutwall_fuckher_fast")
+	if(state == "sex_slutwall_fuckher_fast"):
+		playAnimation(StageScene.SlutwallSex, "fast", {pc="kidlat", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("As you get bored of a slow pace, you speed up, throwing your hips forward at a faster rate, making them slap against Kidlat's butt while your cock buries itself deep inside her each time, smashing her cervix.")
+
+		saynn("[say=kidlat]Ah.. y-yes~.. f-fuck that little slutty pussy~.. raw..[/say]")
+
+		saynn("Despite all the.. tear and wear.. her love tunnel still manages to clamp around you with every forceful thrust. It's like she is sucking you in..")
+
+		saynn("Room is filled with her moans and the many plaps that come from this brutal vaginal fucking. With nothing holding you back, you pin her legs into the wall and start pounding her little stuffed slit as fast as you can.")
+
+		saynn("[say=kidlat]Nyaa-ahh..[/say]")
+
+		saynn("It doesn't take long before Kidlat's next climax catches up with her. Her inner walls begin squeezing hard on your cock, her whole body squirming under your relentless onslaught. Feels so good that you can't stop yourself from letting out a few grunts.. your balls begin to tense up, pressure rising inside you..")
+
+		saynn("There is only one way to finish this.")
+
+		addButton("Cum inside", "Add your load to all the other ones", "sex_slutwall_fuckher_cum")
+	if(state == "sex_slutwall_fuckher_cum"):
+		playAnimation(StageScene.SlutwallSex, "inside", {pc="kidlat", npc="pc", npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("That great cyan pussy pushes you over the edge.. You shove your {pc.penis} inside her and just let your orgasm take over.")
+
+		saynn("[say=kidlat]Yes-s-s-s..[/say]")
+
+		saynn("More primal grunts escape from you.. while your cock throbs inside her, pumping her already saturated womb with your load of thick, creamy {pc.cum}, so much that some of the old mess gets displaced and pushed out from around your shaft, adding more cum stains on her fur.")
+
+		saynn("Kidlat's body twitches in tact with your member throbbing.. passionate.. even if exhausted.. moans slip from behind the slutwall..")
+
+		saynn("[say=kidlat]So much.. inside me.. ah..[/say]")
+
+		saynn("After your orgasm begins to subside, you still stay inside, using her pussy as a cock warmer. Your hand reaches out to grab the marker and scribble some stuff on her.. as well as adding the final tally mark. Nice.")
+
+		saynn("After you're done using her, you slowly withdraw, trying to keep as much of your seed as possible inside her. Still, her pulsing pussy already pushes some out.. such a cum slut.")
+
+		saynn("Time to get her out.")
+
+		addButton("Unlock her", "Enough sex for Kidlat", "sex_slutwall_justunlock")
+	if(state == "sex_slutwall_eather"):
+		playAnimation(StageScene.SlutwallSexOral, "tease", {pc="kidlat", npc="pc", bodyState={naked=true, hard=true}})
+		saynn("You kneel in front of her.. in front of her used holes.")
+
+		saynn("Seeing her pussy like this.. slick and dripping cum messily after so many cocks.. it makes your mouth water up.")
+
+		saynn("You put your hands on her fluffy thighs and keep her legs spread wide while you lean a bit closer.. The sight up close is overwhelming.. Kidlat's used slit shines in the dim light, every fold and curve.. glorious.")
+
+		saynn("[say=kidlat]..more cocks?.. ah..[/say]")
+
+		saynn("You stick your tongue out and lick your lips. You don't even care how it will look.. you wanna taste her..")
+
+		addButton("Lick", "Start licking", "sex_slutwall_eather")
+		playAnimation(StageScene.SlutwallSexOral, "lick", {pc="kidlat", npc="pc", bodyState={naked=true, hard=true}})
+		saynn("Determined, you dig your face in and press your lips against her messy slit. Your tongue begins its exploration.. with smooth, deliberate strokes that carefully trace the curves of her glistening folds.")
+
+		saynn("[say=kidlat]Ah.. t-that's not a cock.. I think..[/say]")
+
+		saynn("While she is surprised, you continue dragging your tongue along the sensitive bits of her pussy, tracing her clit and petals.. while catching some of the mess.")
+
+		saynn("[say=kidlat]Mhh-h~.. feels kinda good though.. soothing..[/say]")
+
+		saynn("You swallow what you gathered.. you can definitely feel the salty taste of her juices mindled with a huge dose of creamy seed. Repulsive and yet.. irresistible. Not too bad..")
+
+		saynn("You dig in again, your tongue finding the entrance and pushing its tip inside, spreading her worn out cyan folds further. You can feel her heat.. while you lap at the pulsing inner walls, your tongue thrusting a bit deeper each time, trying to catch more of the mess.")
+
+		saynn("[say=kidlat]Mmhh.. ah.. fuck that feels good~..[/say]")
+
+		saynn("The more you eat her out, the more her flavours assault your senses.. a wild blend that you can't get enough of. With each lick, you become more insistent.. more forceful. You pull your tongue out to trace slow circles around her slit before darting in and out more. Kidlat's body is reacting more and more to your attention, you can feel her inner walls hugging your tongue.. until..")
+
+		saynn("[say=kidlat]N-nn.. nya..a-ah..[/say]")
+
+		saynn("Until suddenly, you push her over the edge. Her body convulses in time with your hungry licks, soft moans and urgent gasps filling the space. Her muscles contract around your tongue hard, drawing you deep into her.. before a final explosion of juices washes over your face.")
+
+		saynn("[say=kidlat]Ahh-h!..[/say]")
+
+		saynn("Kidlat squirts, her pussy gushing out a fountain of juices.. that you are quick to catch and swallow..")
+
+		saynn("Even during her orgasm, you continue to lick and taste, savoring every drop of this nectar.")
+
+		saynn("But eventually, it was time to pull her out of there..")
+
+		addButton("Unlock her", "Enough sex for Kidlat", "sex_slutwall_justunlock")
 func addStraponButtons(thestate):
 	var strapons = GM.pc.getStrapons()
 	for strapon in strapons:
@@ -1623,7 +1813,16 @@ func _react(_action: String, _args):
 		endScene()
 		return
 
+	if(_action == "ask_howis"):
+		processTime(5*60)
+
 	if(_action == "ask_alcohol"):
+		processTime(5*60)
+
+	if(_action == "ask_betrayal"):
+		processTime(5*60)
+
+	if(_action == "ask_future"):
 		processTime(5*60)
 
 	if(_action == "ask_alcohol_lock"):
@@ -1924,11 +2123,16 @@ func _react(_action: String, _args):
 		removeCharacter(npcID)
 		npcID=""
 
+	if(_action == "sex_slutwall_justunlock"):
+		getCharacter("kidlat").resetEquipment()
+
 	if(_action == "sex_slutwall_fuckher"):
 		pcHadFun = true
 
 	if(_action == "sex_slutwall_eather"):
-		pcHadFun = true
+		processTime(5*60)
+		getCharacter("kidlat").bodypartTransferFluidsTo(BodypartSlot.Vagina, "pc", BodypartSlot.Head, 0.6, 20.0)
+		GM.pc.cummedInMouthBy("kidlat", FluidSource.Vagina, 0.4)
 
 	if(_action == "sex_slutwall_shower"):
 		processTime(10*60)
@@ -1944,6 +2148,19 @@ func _react(_action: String, _args):
 
 	if(_action == "sex_slutwall_spread_leave"):
 		processTime(3*60)
+
+	if(_action == "sex_slutwall_fuckher_sex"):
+		processTime(5*60)
+
+	if(_action == "sex_slutwall_fuckher_fast"):
+		processTime(5*60)
+
+	if(_action == "sex_slutwall_fuckher_cum"):
+		processTime(5*60)
+		getCharacter("kidlat").cummedInVaginaBy("pc")
+		GM.pc.orgasmFrom("kidlat")
+		getCharacter("kidlat").addBodywritingLowerBody()
+		getCharacter("kidlat").addTallymarkButt()
 
 	setState(_action)
 
