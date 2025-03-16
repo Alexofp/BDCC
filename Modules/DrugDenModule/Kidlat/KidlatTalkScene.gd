@@ -1678,7 +1678,7 @@ func _run():
 
 		saynn("Some of it lands on her inner thighs.. but it's all quickly washed away by running water anyway.")
 
-		saynn("[say=kidlat]"+str("I'm pregnant anyway already.. But I appreciate the gesture, luv." if getCharacter("kidlat").isVisiblePregnant() else "Let's hope I didn't get pregnant..")+"[/say]")
+		saynn("[say=kidlat]"+str("I'm pregnant anyway already.. But I appreciate the gesture, luv." if getCharacter("kidlat").isVisiblyPregnant() else "Let's hope I didn't get pregnant..")+"[/say]")
 
 		saynn("You spread her butt next, making sure her tailhole is mostly clean now too.")
 
@@ -1771,7 +1771,8 @@ func _run():
 
 		saynn("You stick your tongue out and lick your lips. You don't even care how it will look.. you wanna taste her..")
 
-		addButton("Lick", "Start licking", "sex_slutwall_eather")
+		addButton("Lick", "Start licking", "sex_slutwall_eather_lick")
+	if(state == "sex_slutwall_eather_lick"):
 		playAnimation(StageScene.SlutwallSexOral, "lick", {pc="kidlat", npc="pc", bodyState={naked=true, hard=true}})
 		saynn("Determined, you dig your face in and press your lips against her messy slit. Your tongue begins its exploration.. with smooth, deliberate strokes that carefully trace the curves of her glistening folds.")
 
@@ -1929,6 +1930,7 @@ func _react(_action: String, _args):
 		processTime(5*60)
 		setFlag("DrugDenModule.KidlatPPTF", true)
 		getCharacter("kidlat").updateBodyparts()
+		getCharacter("kidlat").fillBalls(1.0)
 
 	if(_action == "sex_cock_reveal"):
 		processTime(3*60)
@@ -2130,9 +2132,7 @@ func _react(_action: String, _args):
 		pcHadFun = true
 
 	if(_action == "sex_slutwall_eather"):
-		processTime(5*60)
-		getCharacter("kidlat").bodypartTransferFluidsTo(BodypartSlot.Vagina, "pc", BodypartSlot.Head, 0.6, 20.0)
-		GM.pc.cummedInMouthBy("kidlat", FluidSource.Vagina, 0.4)
+		pcHadFun = true
 
 	if(_action == "sex_slutwall_shower"):
 		processTime(10*60)
@@ -2161,6 +2161,11 @@ func _react(_action: String, _args):
 		GM.pc.orgasmFrom("kidlat")
 		getCharacter("kidlat").addBodywritingLowerBody()
 		getCharacter("kidlat").addTallymarkButt()
+
+	if(_action == "sex_slutwall_eather_lick"):
+		processTime(5*60)
+		getCharacter("kidlat").bodypartTransferFluidsTo(BodypartSlot.Vagina, "pc", BodypartSlot.Head, 0.6, 20.0)
+		GM.pc.cummedInMouthBy("kidlat", FluidSource.Vagina, 0.4)
 
 	setState(_action)
 

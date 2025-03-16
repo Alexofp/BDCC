@@ -115,6 +115,9 @@ func _run():
 		if(!getFlag("Game_PickedStartingPerks", false)):
 			addButton("Pick Perks!", "Pick your starting perks. You can only do this once", "pickstartingperks")
 		#addButton("[debug] Struggle", "Test the struggle minigame", "teststruggle")
+		if(GM.main.isInDungeon()):
+			addButton("Tasks", "Look at your tasks", "tasks")
+		
 		
 	if(state == "domasturbate"):
 		saynn("You remove some stress by masturbating (temporary text)")
@@ -234,6 +237,10 @@ func _react(_action: String, _args):
 		
 	if(_action == "setpronouns"):
 		GM.pc.setPronounGender(_args[0])
+		setState("")
+		return
+	if(_action == "tasks"):
+		runScene("QuestLogScene")
 		setState("")
 		return
 	

@@ -539,6 +539,8 @@ func loadData(data):
 	#GM.world.updatePawns(IS)
 	#GM.world.setPawnsShowed(canShowPawns())
 
+	GM.pc.checkLocation()
+
 func saveCharactersData():
 	var data = {}
 	for characterID in staticCharacters:

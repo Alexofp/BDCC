@@ -85,7 +85,7 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "kidlat_dresses"):
-		addMessage("Kidlat will now sell better items")
+		addMessage("Kidlat will now sell better items. Task updated!")
 
 	if(_action == "start_browsing_shop"):
 		getModule("DrugDenModule").regenerateKidlatItems()

@@ -106,6 +106,12 @@ func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
 		return
+		
+	if(_action == "just_browse"):
+		addMessage("New task added! (Task log can be found inside the 'Me' menu during drug den runs)")
+	
+	if(_action == "ask_what"):
+		addMessage("New task added! (Task log can be found inside the 'Me' menu during drug den runs)")
 
 	if(_action == "run_generic_shop_scene"):
 		endScene()

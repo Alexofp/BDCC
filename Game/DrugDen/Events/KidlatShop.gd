@@ -11,8 +11,8 @@ const sellList = {
 		],
 	},
 	"appleitem": {
-		costMin = 1,
-		costMax = 5,
+		costMin = 2,
+		costMax = 7,
 		buyLines = [
 			"Fresh and juicy!",
 			"Good choice, luv. Ain’t often you find real fruit down here!",
@@ -20,8 +20,8 @@ const sellList = {
 		],
 	},
 	"AnaphrodisiacPill": {
-		costMin = 1,
-		costMax = 5,
+		costMin = 3,
+		costMax = 15,
 		buyLines = [
 			"Need a clear head, eh? This should do the trick, luv.",
 			"Take it quick before someone down here makes things.. complicated.",
@@ -29,8 +29,8 @@ const sellList = {
 		],
 	},
 	"EnergyDrink": {
-		costMin = 1,
-		costMax = 5,
+		costMin = 2,
+		costMax = 10,
 		buyLines = [
 			"Not enough alcohol in these for my likings.",
 			"A little pick-me-up for when the tunnels get rough. Stay quick, luv!",
@@ -39,7 +39,7 @@ const sellList = {
 	},
 	"restraintkey": {
 		costMin = 5,
-		costMax = 10,
+		costMax = 20,
 		buyLines = [
 			"Bet you’re glad to have that, eh? Never know when you’ll need it.",
 			"It’s yours now!",
@@ -125,7 +125,7 @@ var wasGroped:bool = false
 
 func _init():
 	id = "KidlatShop"
-	eventWeight = 10.5
+	eventWeight = 2.0
 
 func onSpawn(_drugDen):
 	generateItemsToSell()
@@ -138,10 +138,10 @@ func getMaxPerFloor() -> int:
 	return 1
 
 func getCooldown() -> int:
-	return 0#RNG.randi_range(2, 10)
+	return 2#0#RNG.randi_range(2, 10)
 
 func getStartCooldown() -> int:
-	return 0#RNG.randi_range(1, 2)
+	return 1#RNG.randi_range(1, 2)
 
 func getInteractInfo() -> Dictionary:
 	return {
@@ -170,7 +170,11 @@ func doInteract(_actionID:String, _args:Array = []) -> Dictionary:
 	var scene3Hap:bool = getModuleFlag("Kidlat3Hap", false)
 	var itemsBoughtAmount:int = getModuleFlag("KidlatItemsBought", 0)
 	var scene4Hap:bool = getModuleFlag("Kidlat4Hap", false)
-	var isLockedRandomly:bool = getModuleFlag("KidlatLockedUpRandomly", false)
+	#var isLockedRandomly:bool = getModuleFlag("KidlatLockedUpRandomly", false)
+	var isKidlatLocked:bool = GlobalRegistry.getModule("DrugDenModule").isKidlatBound()
+	var scene5Hap:bool = getModuleFlag("Kidlat5Hap", false)
+	var scene6Hap:bool = getModuleFlag("Kidlat6Hap", false)
+	var scene7Hap:bool = getModuleFlag("Kidlat7Hap", false)
 	
 	if(!scene2Hap):
 		if(isFirstTimeInRun && RNG.chance(100) && itemsBoughtAmount >= 3):
@@ -184,12 +188,26 @@ func doInteract(_actionID:String, _args:Array = []) -> Dictionary:
 			return {sceneID="DrugDenKidlat3Scene"}
 			
 	if((scene3Hap && !scene4Hap)): #  || true
-		if((isFirstTimeInRun && RNG.chance(100) && itemsBoughtAmount >= 8)): #  || true
+		if((isFirstTimeInRun && RNG.chance(100) && itemsBoughtAmount >= 6)): #  || true
 			setModuleFlag("Kidlat4Hap", true)
 			GlobalRegistry.getCharacter("kidlat").resetEquipment()
 			return {sceneID="DrugDenKidlat4Scene"}
 	
-	if((scene4Hap && isFirstTimeOnTheFloor && !isLockedRandomly)): # || true
+	if(scene5Hap && !scene6Hap && !isKidlatLocked):
+		if(itemsBoughtAmount >= 9):
+			# Kidlat6Hap flag gets set inside
+			setModuleFlag("Kidlat6Knows", true)
+			return {sceneID="DrugDenKidlat6Scene"}
+	
+	if(scene6Hap && !scene7Hap && !isKidlatLocked):
+		if(isFirstTimeOnTheFloor && itemsBoughtAmount >= 12):
+			# Kidlat7Hap flag gets set inside
+			setModuleFlag("Kidlat7Knows", true)
+			return {sceneID="DrugDenKidlat7Scene"}
+	
+	
+	# Random locked Kidlat chance
+	if((scene4Hap && isFirstTimeOnTheFloor && !isKidlatLocked)): # || true
 		if(RNG.chance(5)):
 			setModuleFlag("KidlatCustomShopGreet", "I triggered a trap again.. oopsie.. Welcome to my shop, whoever you are..")
 			setModuleFlag("KidlatLockedUpRandomly", true)
@@ -330,8 +348,8 @@ func generateItemsToSell():
 		if(entryInfo.has("costMin") && entryInfo.has("costMax")):
 			cost = RNG.randi_range(entryInfo["costMin"], entryInfo["costMax"])
 		
-		if(getModuleFlag("DrugDenModule.Kidlat6Hap", false)):
-			cost = int(round(cost*0.8))
+		if(getModuleFlag("Kidlat6Hap", false)):
+			cost = int(round(cost*0.7))
 			if(cost < 1):
 				cost = 1
 		

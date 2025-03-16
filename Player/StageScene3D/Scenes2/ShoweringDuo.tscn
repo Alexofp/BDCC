@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Player/StageScene3D/Scenes2/Showering.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=2]
@@ -35,12 +35,6 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=455]
 xfade_time = 0.5
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=456]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=457]
-xfade_time = 0.5
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=458]
 xfade_time = 0.5
 
@@ -68,11 +62,12 @@ states/ShoweringDuoTease_1-loop/node = SubResource( 450 )
 states/ShoweringDuoTease_1-loop/position = Vector2( 485, 65 )
 states/ShoweringDuo_1-loop/node = SubResource( 451 )
 states/ShoweringDuo_1-loop/position = Vector2( 332, 155 )
-transitions = [ "ShoweringDuoTease_1-loop", "ShoweringDuo_1-loop", SubResource( 452 ), "ShoweringDuo_1-loop", "ShoweringDuoTease_1-loop", SubResource( 453 ), "ShoweringDuo_1-loop", "ShoweringDuoStroke_1-loop", SubResource( 454 ), "ShoweringDuoStroke_1-loop", "ShoweringDuo_1-loop", SubResource( 455 ), "ShoweringDuoRub_1-loop", "ShoweringDuo_1-loop", SubResource( 456 ), "ShoweringDuo_1-loop", "ShoweringDuoRub_1-loop", SubResource( 457 ), "ShoweringDuoRub_1-loop", "ShoweringDuoStroke_1-loop", SubResource( 458 ), "ShoweringDuoStroke_1-loop", "ShoweringDuoRub_1-loop", SubResource( 459 ), "ShoweringDuoTease_1-loop", "ShoweringDuoRub_1-loop", SubResource( 460 ), "ShoweringDuoRub_1-loop", "ShoweringDuoTease_1-loop", SubResource( 461 ), "ShoweringDuoTease_1-loop", "ShoweringDuoStroke_1-loop", SubResource( 462 ), "ShoweringDuoStroke_1-loop", "ShoweringDuoTease_1-loop", SubResource( 463 ) ]
+transitions = [ "ShoweringDuoTease_1-loop", "ShoweringDuo_1-loop", SubResource( 452 ), "ShoweringDuo_1-loop", "ShoweringDuoTease_1-loop", SubResource( 453 ), "ShoweringDuo_1-loop", "ShoweringDuoStroke_1-loop", SubResource( 454 ), "ShoweringDuoStroke_1-loop", "ShoweringDuo_1-loop", SubResource( 455 ), "ShoweringDuoRub_1-loop", "ShoweringDuoStroke_1-loop", SubResource( 458 ), "ShoweringDuoStroke_1-loop", "ShoweringDuoRub_1-loop", SubResource( 459 ), "ShoweringDuoTease_1-loop", "ShoweringDuoRub_1-loop", SubResource( 460 ), "ShoweringDuoRub_1-loop", "ShoweringDuoTease_1-loop", SubResource( 461 ), "ShoweringDuoTease_1-loop", "ShoweringDuoStroke_1-loop", SubResource( 462 ), "ShoweringDuoStroke_1-loop", "ShoweringDuoTease_1-loop", SubResource( 463 ) ]
 start_node = "ShoweringDuoTease_1-loop"
+graph_offset = Vector2( -24, -125 )
 
 [sub_resource type="AnimationNodeBlendTree" id=465]
-graph_offset = Vector2( -268.114, -7.70406 )
+graph_offset = Vector2( -21, 34 )
 nodes/Animation/node = SubResource( 446 )
 nodes/Animation/position = Vector2( 140, 280 )
 nodes/CuffsBlend/node = SubResource( 447 )
@@ -114,12 +109,6 @@ xfade_time = 0.5
 [sub_resource type="AnimationNodeStateMachineTransition" id=475]
 xfade_time = 0.5
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=476]
-xfade_time = 0.5
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=477]
-xfade_time = 0.5
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=478]
 xfade_time = 0.5
 
@@ -141,8 +130,9 @@ states/ShoweringDuoTease_2-loop/node = SubResource( 468 )
 states/ShoweringDuoTease_2-loop/position = Vector2( 437, 54 )
 states/ShoweringDuo_2-loop/node = SubResource( 469 )
 states/ShoweringDuo_2-loop/position = Vector2( 211, 144 )
-transitions = [ "ShoweringDuo_2-loop", "ShoweringDuoTease_2-loop", SubResource( 470 ), "ShoweringDuoTease_2-loop", "ShoweringDuo_2-loop", SubResource( 471 ), "ShoweringDuoTease_2-loop", "ShoweringDuoRub_2-loop", SubResource( 472 ), "ShoweringDuoRub_2-loop", "ShoweringDuoTease_2-loop", SubResource( 473 ), "ShoweringDuoTease_2-loop", "ShoweringDuoStroke_2-loop", SubResource( 474 ), "ShoweringDuoStroke_2-loop", "ShoweringDuoTease_2-loop", SubResource( 475 ), "ShoweringDuo_2-loop", "ShoweringDuoStroke_2-loop", SubResource( 476 ), "ShoweringDuoStroke_2-loop", "ShoweringDuo_2-loop", SubResource( 477 ), "ShoweringDuo_2-loop", "ShoweringDuoRub_2-loop", SubResource( 478 ), "ShoweringDuoRub_2-loop", "ShoweringDuo_2-loop", SubResource( 479 ), "ShoweringDuoRub_2-loop", "ShoweringDuoStroke_2-loop", SubResource( 480 ), "ShoweringDuoStroke_2-loop", "ShoweringDuoRub_2-loop", SubResource( 481 ) ]
+transitions = [ "ShoweringDuo_2-loop", "ShoweringDuoTease_2-loop", SubResource( 470 ), "ShoweringDuoTease_2-loop", "ShoweringDuo_2-loop", SubResource( 471 ), "ShoweringDuoTease_2-loop", "ShoweringDuoRub_2-loop", SubResource( 472 ), "ShoweringDuoRub_2-loop", "ShoweringDuoTease_2-loop", SubResource( 473 ), "ShoweringDuoTease_2-loop", "ShoweringDuoStroke_2-loop", SubResource( 474 ), "ShoweringDuoStroke_2-loop", "ShoweringDuoTease_2-loop", SubResource( 475 ), "ShoweringDuo_2-loop", "ShoweringDuoRub_2-loop", SubResource( 478 ), "ShoweringDuoRub_2-loop", "ShoweringDuo_2-loop", SubResource( 479 ), "ShoweringDuoRub_2-loop", "ShoweringDuoStroke_2-loop", SubResource( 480 ), "ShoweringDuoStroke_2-loop", "ShoweringDuoRub_2-loop", SubResource( 481 ) ]
 start_node = "ShoweringDuoTease_2-loop"
+graph_offset = Vector2( -41, -57 )
 
 [sub_resource type="AnimationNodeBlendTree" id=483]
 graph_offset = Vector2( -268.114, -7.70406 )

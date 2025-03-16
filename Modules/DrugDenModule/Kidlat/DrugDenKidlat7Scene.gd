@@ -217,7 +217,7 @@ func _react(_action: String, _args):
 	setState(_action)
 
 func _react_scene_end(_tag, _result):
-	if(_tag == "junkieBoozeSeller"):
+	if(_tag == "boozeJunkieFight"):
 		processTime(20 * 60)
 		var battlestate = _result[0]
 		

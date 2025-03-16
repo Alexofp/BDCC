@@ -13,6 +13,7 @@ func getFlags():
 		"Kidlat5Hap": flag(FlagType.Bool),
 		"Kidlat6Hap": flag(FlagType.Bool),
 		"Kidlat7Hap": flag(FlagType.Bool),
+		"Kidlat8Hap": flag(FlagType.Bool),
 		
 		"KidlatCustomShopGreet": flag(FlagType.Text),
 		"KidlatCustomTalkGreet": flag(FlagType.Text),
@@ -25,6 +26,9 @@ func getFlags():
 		"KidlatDrunkHappened": flag(FlagType.Bool),
 		"KidlatWearsPortalPanties": flag(FlagType.Bool),
 		"KidlatPPTF": flag(FlagType.Bool),
+		
+		"Kidlat6Knows": flag(FlagType.Bool),
+		"Kidlat7Knows": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -63,6 +67,10 @@ func _init():
 	events = [
 		"res://Modules/DrugDenModule/DrugDen/DrugDenStartEvent.gd",
 		"res://Modules/DrugDenModule/DrugDen/DrugDenEvent.gd",
+		"res://Modules/DrugDenModule/Kidlat/KidlatTalkEvent.gd",
+	]
+	quests = [
+		"res://Modules/DrugDenModule/Kidlat/KidlatQuest.gd",
 	]
 
 func resetFlagsOnNewDay():

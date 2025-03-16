@@ -111,4 +111,4 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
 
 func getDefaultEquipment():
-	return ["inmatecollar", "inmateuniformHighSec"]
+	return ["inmatecollar", "inmateuniformHighsec"]

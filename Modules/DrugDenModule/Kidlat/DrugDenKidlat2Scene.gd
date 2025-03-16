@@ -47,7 +47,7 @@ func _run():
 
 		saynn("Her paw directed attention to the bathered cardboard box.. it sure has less stuff now. A slight sigh precedes her next words.")
 
-		saynn("[say=kidlat]If you, maybe, find it, this gal would appreciate it. You don't have to, though. Worry about yourself first, hun.[/say]")
+		saynn("[say=kidlat]If you, maybe, find it, this gal would appreciate it. You don't have to, though. Worry about yourself, hun.[/say]")
 
 		saynn("You nod.. but before you can say anything, she places a paw on her hip and offers you a cheeky smile.")
 
@@ -77,6 +77,7 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "start_browsing_shop"):
+		addMessage("Task updated! (Task log can be found inside the 'Me' menu during drug den runs)")
 		getModule("DrugDenModule").regenerateKidlatItems()
 		runScene("DrugDenKidlatShopScene")
 		endScene()

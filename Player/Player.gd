@@ -495,8 +495,6 @@ func loadData(data):
 	personality.loadData(SAVE.loadVar(data, "personality", {}))
 	reputation.loadData(SAVE.loadVar(data, "reputation", {}))
 	tfHolder.loadData(SAVE.loadVar(data, "tfHolder", {}))
-	
-	checkLocation()
 		
 	updateNonBattleEffects()
 	emit_signal("bodypart_changed")

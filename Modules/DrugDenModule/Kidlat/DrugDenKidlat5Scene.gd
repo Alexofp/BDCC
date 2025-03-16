@@ -5,7 +5,7 @@ func _init():
 
 func _run():
 	if(state == ""):
-		addCharacter("kidlat")
+		addCharacter("kidlat", ["naked"])
 		playAnimation(StageScene.Duo, "stand", {npc="kidlat", further=true, kidlatBox=true, npcBodyState={naked=true}})
 		saynn("Keys are hard to come by.. but you might as well free Kidlat, who knows how long she has been cuffed by now.")
 
@@ -101,7 +101,7 @@ func _react(_action: String, _args):
 		getCharacter("kidlat").resetEquipment()
 
 	if(_action == "a_hug"):
-		addMessage("Kidlat will now sell 4 items instead of 3")
+		addMessage("Kidlat will now sell 4 items instead of 3. Task updated!")
 		setFlag("DrugDenModule.KidlatCustomShopGreet", "I don't have more to sell right now.. 'cause I was cuffed.. duh..")
 
 	if(_action == "start_browsing_shop"):

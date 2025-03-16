@@ -514,7 +514,7 @@ func _react(_action: String, _args):
 
 	if(_action == "after_cuddle"):
 		processTime(10*60)
-		addMessage("Kidlat will now have better prices")
+		addMessage("Kidlat will now have better prices. Task updated!")
 
 	if(_action == "do_browse_resetshop"):
 		setFlag("DrugDenModule.Kidlat6Hap", true)

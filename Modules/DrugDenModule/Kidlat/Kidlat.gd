@@ -12,6 +12,7 @@ func _init():
 	npcSkinData={
 	"hair": {"r": Color("ff1a1823"),"g": Color("ff494ea0"),"b": Color("ff13d9da"),},
 	"ears": {"b": Color("ff7113ed"),},
+	"penis": {"skin": "Weiny","g": Color("ff12cee7"),"b": Color("ff0070ac"),},
 	}
 	
 func _getName():
