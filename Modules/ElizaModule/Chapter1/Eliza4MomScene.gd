@@ -98,7 +98,7 @@ func _run():
 
 		saynn("she exhales softly.")
 
-		saynn("[say=Eliza]Any other job would make me feel miserable.[/say]")
+		saynn("[say=eliza]Any other job would make me feel miserable.[/say]")
 
 		saynn("For a long moment, there is silence. Her raw passion is making you feel something fuzzy inside. And you're probably not alone in this. Eliza's mother studies her daughter's eyes.")
 
