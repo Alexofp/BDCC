@@ -148,7 +148,7 @@ func _run():
 
 		saynn("[say=eliza]Let's go get a table. What do you want me to get for you, wine or just some orange juice?[/say]")
 
-		saynn("She makes that question with a playful arch of her eyebrow. Wine? She is offering you something other than normal water? Wow.")
+		saynn("She makes that question with a playful arch of her eyebrow. Wine or juice? Interesting selection, for sure. But anything is better than plain water.")
 
 		addButton("Wine", "Choose the wine", "choose_wine")
 		addButton("Juice", "Choose the orange juice", "choose_juice")
@@ -195,26 +195,36 @@ func _run():
 
 		saynn("Little smile turns into a smug one.")
 
-		saynn("[say=eliza]Pain.. can be fun. It all depends on the situation. World isn't simple. But it's logical. And that's what I like about it.[/say]")
+		saynn("[say=eliza]Pain.. can be fun. It all depends on the situation. World isn't simple. But even the most insane events.. or people.. have logic behind them. And that's what I like about it.[/say]")
 
 		saynn("[say=pc]It's like a cardboard box.[/say]")
+
+		saynn("Her ears perk when you say that.")
 
 		saynn("[say=eliza]You remember, yeah~.[/say]")
 
 		saynn("[say=pc]Cardboard boxes are pretty fragile.[/say]")
 
-		saynn("[say=eliza]Well, I'm not hurting the box. I'm just testing it.. exploring its reactions. Or do you think I'm one of those 'bad guys'?[/say]")
+		saynn("[say=eliza]Well, I'm not hurting the box. I'm just testing it.. exploring its reactions. But maybe my moral compass has shifted too much. Tell me, do you think I'm one of those 'bad guys'? The evil scientist that won't be stopped by anything.[/say]")
 
-		saynn("It looks like she actually expects an honest answer to this one..")
+		saynn("She catches some of the purple fluid with her feline tongue and keeps the glass raised. It looks like she actually expects an honest answer to this one..")
 
 		addButton("Good girl", "Tell her she is a good girl", "say1_goodgirl")
 		addButton("Naughty girl", "Tell her she is a bad and naughty girl", "say1_badgirl")
 	if(state == "say1_badgirl"):
-		saynn("[say=pc]I think you're being on the naughty side quite often.[/say]")
+		saynn("[say=pc]I think you're being on the naughty side quite often. Perhaps you focus on science a little too much, forgetting that science should benefit people.[/say]")
 
-		saynn("[say=eliza]Hah, you might be right~. Maybe you're even being a little too soft with me. Because I can be a real mean bitch sometimes~.[/say]")
+		saynn("Eliza stays quiet for a bit, wiggling the wine in her glass.")
+
+		saynn("[say=eliza]What we do will benefit a lot of people. It's just that.. inmates that are here are not 'these' people. A real dilemma, isn't it? Do we do tests on people or do we not. If yes, which people?[/say]")
+
+		saynn("It doesn't seem to be much of a dilemma for her, considering what she does. The feline licks some more wine and chuckles, lighting up the mood.")
+
+		saynn("[say=eliza]Hah, but you might be right~. Maybe you're even being a little too soft with me. Because I can be a real mean bitch sometimes~.[/say]")
 
 		saynn("[say=pc]Do you like being treated like a bitch?[/say]")
+
+		saynn("Playfully, she shows you her fangs as she licks her lips.")
 
 		saynn("[say=eliza]I'm a doctor, I treat others~.[/say]")
 
@@ -224,7 +234,7 @@ func _run():
 
 		saynn("[say=pc]You're not on the best terms?[/say]")
 
-		saynn("[say=eliza]It's a.. it's a whole thing.[/say]")
+		saynn("[say=eliza]It's a.. it's a thing, for sure.[/say]")
 
 		saynn("[say=pc]We got time. I got ears"+str(" and some wine" if isWine else " and some juice")+".[/say]")
 
@@ -240,13 +250,17 @@ func _run():
 
 		saynn("[say=eliza]Aw, you're making me blush, hah. You're just saying it because you don't wanna ruin the mood.[/say]")
 
+		saynn("She sips some more of the purple wine and then licks her lips, flashing her sharp fangs for a second.")
+
 		saynn("[say=pc]Well, I mean it.[/say]")
 
 		saynn("[say=eliza]If my mom was here, she would start a fight with you~.[/say]")
 
+		saynn("She wiggles the wine in her glass with little circular motions of her paw.")
+
 		saynn("[say=pc]You're not on the best terms?[/say]")
 
-		saynn("[say=eliza]It's a.. it's a whole thing.[/say]")
+		saynn("[say=eliza]It's a.. it's a thing.[/say]")
 
 		saynn("[say=pc]We got time. I got ears"+str(" and some wine" if isWine else " and some juice")+".[/say]")
 
@@ -265,7 +279,6 @@ func _run():
 		saynn("She takes a sip.. emptying her glass.")
 
 		var drugDenLevel = getFlag("DrugDenModule.HighestDrugDenLevel", 0)
-
 		saynn("[say=eliza]You helped me to make some amazing discoveries in the lab. Oh yeah, I'm wondering, have you tried exploring that drug den yet?[/say]")
 
 		if (drugDenLevel <= 0):
@@ -322,32 +335,230 @@ func _run():
 
 			saynn("[say=eliza]Maybe. Still. I don't regret not telling the guards about it. Because it gave us this option. Isn't having options nice~?[/say]")
 
-		saynn("While she is busy, filling the glasses again, a question comes to your mind. A question that is related to her words.")
+		saynn("You take a sip.. and now both glasses are empty. But Eliza obviously has not yet achieved her desired level of wobbliness.. although, her cheeks do begin to glow with a pleasant shade of light pink.")
 
-		saynn("[say=pc]After we discover all of the drugs that the inmates have been making here, what will you do?[/say]")
+		saynn("[say=eliza]Could you maybe?..[/say]")
 
-		saynn("[say=eliza]I will show our findings to my mother. And then.. something will probably happen. I don't know what.[/say]")
+		saynn("You're the assistant here.. so you obviously nod."+str(" You grab the wine bottle and fill both glasses, not until edges.. but pretty close." if isWine else " You grab the wine bottle and fill her glass. Yours gets topped with juice instead.")+"")
 
-		saynn("[say=pc]What are you hoping will happen?[/say]")
+		saynn("But before you can return to drinking and resting, she covers the top of your glass with her paw.")
 
-		saynn("Her sharp feline tongue catches some more wine from the glass.")
+		saynn("[say=eliza]I wonder.. hmm~.[/say]")
 
-		saynn("[say=eliza]Well.. I never wanted to be here. Imagine.. ugh.. I don't know if I should talk about it.[/say]")
+		saynn("You can see a spark in her eyes.")
 
-		saynn("[say=pc]You're hoping she will take you back into her lab.[/say]")
+		saynn("[say=eliza]Do you trust me, my assistant~?[/say]")
 
-		saynn("[say=eliza]Mhm.. It's a good lab.. Well, it was. Not until I accidentally mixed water and potassium.. whole tanks of it.[/say]")
+		saynn("Oh no, what is she scheming again.. what other drug den is she gonna ask you to raid.")
 
-		saynn("[say=pc]Sounds like you shouldn't have?[/say]")
+		saynn("[say=pc]If I didn't trust you, at least a little bit, I probably wouldn't be here.[/say]")
 
-		saynn("[say=eliza]Hah. What I remember is.. a giant fire.. but it wasn't red. It had a lilac tint to it. Looked beautiful. For a few seconds that I saw it. I will never forget it. Felt like I was staring directly into.. the deep science.[/say]")
+		saynn("Eliza hums, biting her lip.")
 
-		saynn("[say=pc]What happened then?[/say]")
+		saynn("[say=eliza]Your words are laced with logic, I will give you that.[/say]")
 
-		saynn("[say=eliza]..boom. What happened then is a big boom. So big that it threw me against the wall. That was fun. Wheeee.[/say]")
+		saynn("[say=pc]Thank you.[/say]")
 
-		saynn("[say=eliza]..dad had to risk his life to get an unconscious me out from under the fire. That wasn't.[/say]")
+		saynn("Her free paw reaches somewhere into her pouches.")
 
+		saynn("[say=eliza]But can you prove your words~.[/say]")
+
+		saynn("She produces a little pill.. one that is lacking any obvious labels. Her digits play with it for a bit.. until it falls directly into your glass"+str(" of wine" if isWine else " of juice")+" with satisfying plop.")
+
+		saynn("Almost immediately, it begins to dissolve. Your brows raise high on their own.")
+
+		saynn("[say=pc]What was it?[/say]")
+
+		saynn("[say=eliza]Well.. Let's say.. It's just some sugar. Yes, exactly~.[/say]")
+
+		saynn("Somehow you find it hard to believe.")
+
+		saynn("[say=pc]Sugar?[/say]")
+
+		saynn("[say=eliza]What, you think I'd lie to you~?[/say]")
+
+		saynn("[say=pc]You sure took your time answering.[/say]")
+
+		saynn("[say=eliza]But my answer was loud and clear. It's nothing but sugar~. Or sucrose if you want to be precise.[/say]")
+
+		saynn("She wiggles your glass a bit, to make sure the pill fully dissolves in it. The way it looked.. it sure kinda reminded you of those weird")
+
+		saynn("[say=eliza]Now.. Do you trust Eliza Quinn? And I'm not looking for just words here~.[/say]")
+
+		saynn("Her paw moves the glass closer to you.")
+
+		saynn("[say=pc]If I don't, will you stop trusting me?[/say]")
+
+		saynn("[say=eliza]We will see~.[/say]")
+
+		saynn("That's not very inspiring. You stare at the "+str("wine" if isWine else "juice")+".. that could potentially be poisoned now.. or contain a drug that would transform you into who knows what..")
+
+		saynn("[say=eliza]C'mon~. Worst case, you will just wake up tied up to my bed. Ain't that exciting~?[/say]")
+
+		saynn("Drink spiking? This is totally just a date..")
+
+		addButton("Drink it", "Why the heck not", "do_drink")
+		addButton("Refuse", "(End date) You'd rather not risk it", "do_not_drink")
+	if(state == "do_not_drink"):
+		setFlag("ElizaModule.dateOutcome", "refused")
+		saynn("[say=pc]I'd rather not risk it.[/say]")
+
+		saynn("She nods slowly, her clawed digits tapping away at the table as she just stares at you..")
+
+		saynn("[say=eliza]That's okay, I get it.[/say]")
+
+		saynn("She grabs the glass and empties it down the bar's sink.")
+
+		saynn("[say=pc]What was in that glass?[/say]")
+
+		saynn("[say=eliza]Ain't tellin ya~.[/say]")
+
+		saynn("She really wants to keep you curious, it seems.")
+
+		saynn("[say=eliza]'Cause I don't remember myself.[/say]")
+
+		saynn("..or not..")
+
+		saynn("[say=pc]Really? You needed someone to test it? You lied to me?[/say]")
+
+		saynn("[say=eliza]Hey! I was.. about sixty percent sure that it was just sugar! I just wasn't fully sure~.[/say]")
+
+		saynn("You're not even sure how to feel about that one.")
+
+		saynn("[say=pc]You're.. crazy.[/say]")
+
+		saynn("She shrugs.")
+
+		saynn("[say=eliza]Someone has to be~.[/say]")
+
+		saynn("You two made a lot of noise.. others in the bar are staring at you, their gazes seem to cool the feline down.")
+
+		saynn("[say=eliza]I guess it didn't work the way I thought it would. Hope you had fun though.[/say]")
+
+		saynn("Looks like a good place to wrap up this.. date.")
+
+		saynn("[say=pc]This was something, for sure.[/say]")
+
+		saynn("Your words leave a lot of uncertainty. Gotta have at least some manners.")
+
+		saynn("[say=pc]Thanks for the "+str("wine" if isWine else "juice")+". I don't get to drink it very often.[/say]")
+
+		saynn("[say=eliza]You're welcome, assistant~.[/say]")
+
+		saynn("At least she didn't revoke your access to the lab.")
+
+		saynn("[say=eliza]Let me get you back to the cellblock.[/say]")
+
+		saynn("She grabs the leash.. and invites you to follow.")
+
+		addButton("Follow", "See where she will bring you", "failed_follow")
+	if(state == "failed_follow"):
+		aimCameraAndSetLocName("hall_mainentrance")
+		GM.pc.setLocation("hall_mainentrance")
+		playAnimation(StageScene.Duo, "stand", {npc="eliza", bodyState={leashedBy="eliza"}})
+		saynn("The elevator brings you back to the familiar floor.. Eliza walks you past the checkpoint.. and begins to take off the leash.")
+
+		saynn("[say=eliza]There we are. I hope you're not mad at me, heh.[/say]")
+
+		saynn("[say=pc]You might have almost killed me.[/say]")
+
+		saynn("[say=eliza]Pff, you're being overly dramatic, I'd never let my assistant suffer like that~.[/say]")
+
+		saynn("She puts the chain away.")
+
+		saynn("[say=eliza]If you're mad.. well.. sorry. Didn't mean to.[/say]")
+
+		saynn("Weird to hear that word from her.")
+
+		saynn("[say=pc]Sure. You gave me a choice at least.[/say]")
+
+		saynn("She nods.")
+
+		saynn("[say=eliza]If you want me out of your hair, you can help me fill out the database.[/say]")
+
+		saynn("[say=pc]What will happen then?[/say]")
+
+		saynn("[say=eliza]I will show it to my mother. She will hopefully be impressed. And then.. she will hopefully offer me to join her in her lab.[/say]")
+
+		saynn("Plan built on nothing but hopes. Sounds a lot like a.. dream.")
+
+		saynn("You just nod.")
+
+		saynn("[say=eliza]See ya~.[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "do_drink"):
+		saynn("Sure, what can go wrong.")
+
+		saynn("You grab the glass of "+str("wine" if isWine else "juice")+".. and empty it in one go.")
+
+		saynn("The taste.. it's hard to describe if it's different or not.. Obviously, the "+str("wine" if isWine else "juice")+" already has some sugar in it.")
+
+		saynn("Do you feel different?.. Maybe? Maybe not?")
+
+		saynn("Eliza tracks the changes in your face expression with great interest.. how you shuffle on the chair.. how you look down at yourself..")
+
+		saynn("You feel a bit.. warmer.. but that might just be from your heart beating faster.")
+
+		saynn("The tension.. It alone is killing you.")
+
+		saynn("[say=pc]Well, I drank it. Can you now tell what it was?[/say]")
+
+		saynn("You see her shrug.")
+
+		saynn("[say=eliza]Sugar, probably~.[/say]")
+
+		saynn("[say=pc]Probably?[/say]")
+
+		saynn("[say=eliza]Almost certainly.[/say]")
+
+		saynn("[say=pc]Almost?[/say]")
+
+		saynn("Her cheeky smile doesn't make it easier.")
+
+		saynn("[say=eliza]Relax, I'm here. I'd never let my assistant suffer~.[/say]")
+
+		saynn("If she wanted to kill you.. this probably ain't a place for it anyway.")
+
+		saynn("[say=eliza]I'm glad you trust me so much~. But.. Now the question is.. Can I trust you?[/say]")
+
+		saynn("A small, nervous giggle leaves your lips. All the while Eliza just continues to rest and enjoy her wine.")
+
+		saynn("[say=pc]I am not swallowing any more of your pills.[/say]")
+
+		saynn("The last one was hard enough to swallow already.")
+
+		saynn("[say=eliza]That's a very bold statement~. But no, I'm not gonna make you swallow anything for now.[/say]")
+
+		saynn("That chain that holds you leashed to the table keeps reminding about itself.")
+
+		saynn("[say=eliza]I just wanna play a little game with you~.[/say]")
+
+		saynn("[say=pc]What's the prize? A game has gotta have a prize.[/say]")
+
+		saynn("[say=eliza]Of course. How about.. my secrets? I will tell you everything. Answer your any question~.[/say]")
+
+		saynn("Her secrets.. huh..")
+
+		saynn("[say=eliza]All you had to do was drink some sweet "+str("wine" if isWine else "juice")+". Me sharing my secrets sounds like a much better deal, no~?[/say]")
+
+		saynn("To be fair, that drink could have killed you.. But her deal does sound somewhat intriguing.")
+
+		saynn("[say=pc]Alright. How do I prove that you can trust me? What's the game?[/say]")
+
+		saynn("Her paw puts the glass of wine down.. and produces a blindfold instead.")
+
+		saynn("[say=eliza]I need to put this on you first.[/say]")
+
+		saynn("A blindfold?")
+
+		saynn("[say=eliza]Quit worrying, I won't even touch you after this~.[/say]")
+
+		saynn("Well, what's the worst that can happen..")
+
+		saynn("She approaches you and begins tying a blindfold around your eyes..")
+
+		addButton("Continue", "See what happens next", "blindfolded")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -375,6 +586,17 @@ func _react(_action: String, _args):
 		isWine=false
 		setState("choose_wine")
 		return
+
+	if(_action == "do_drink"):
+		processTime(3*60)
+		GM.pc.addPain(-100)
+		GM.pc.addStamina(100)
+
+	if(_action == "do_not_drink"):
+		processTime(3*60)
+
+	if(_action == "blindfolded"):
+		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("blindfold"))
 
 	setState(_action)
 

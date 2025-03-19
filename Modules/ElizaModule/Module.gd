@@ -4,6 +4,8 @@ func getFlags():
 	return {
 		"firstDrugTestHappened": flag(FlagType.Bool),
 		"firstHelpTFHap": flag(FlagType.Bool),
+		
+		"dateOutcome": flag(FlagType.Text), # perfect failed refused
 	}
 
 func _init():
