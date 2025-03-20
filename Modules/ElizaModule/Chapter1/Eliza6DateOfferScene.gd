@@ -11,15 +11,17 @@ func _run():
 		addCharacter("eliza")
 		aimCameraAndSetLocName("med_lobbymain")
 		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
-		saynn("[say=eliza]Come here, my assistant~.[/say]")
+		saynn("[say=eliza]Come here, my assistant![/say]")
 
 		saynn("You're greeted with Eliza's kind eyes when you approach the counter. A playful smirk is curling her lips.")
 
-		saynn("[say=eliza]I can tell you a million times how helpful of an assistant you are.. But there is no reason to state the obvious anymore.[/say]")
+		saynn("[say=pc]What's up?[/say]")
+
+		saynn("[say=eliza]I can be boring and tell you for a millionth time how helpful of an assistant you are.. But you know that already.[/say]")
 
 		saynn("You raise a brow while she closes her laptop.")
 
-		saynn("[say=eliza]You know what.. I wanna know you a little better.[/say]")
+		saynn("[say=eliza]Why not do something together.. I want us to know each other a little better.[/say]")
 
 		saynn("With how much you did together.. What's more is there to learn.")
 
@@ -27,7 +29,7 @@ func _run():
 
 		saynn("A soft chuckle.")
 
-		saynn("[say=eliza]Call me Eliza, I'm not an old lady.[/say]")
+		saynn("[say=eliza]Call me Eliza, I'm not an old lady~.[/say]")
 
 		saynn("[say=pc]Sure. What's your proposition, Eliza?[/say]")
 
@@ -59,7 +61,7 @@ func _run():
 
 		saynn("She shrugs.")
 
-		saynn("[say=eliza]See it more like a.. way to protect the station from you~. Something needs to hold back all that power that is contained inside~.[/say]")
+		saynn("[say=eliza]See it more like a.. way to protect the station from you. Something needs to hold back all that power that is contained inside.[/say]")
 
 		saynn("That's.. a weird kind of compliment. But she might be right, you have access to some very powerful equipment.")
 
@@ -73,15 +75,17 @@ func _run():
 
 		saynn("She sighs softly, her eyes staring to the side.")
 
-		saynn("[say=eliza]Yeah.. sometimes I just wanna lean back.. and be lazy.[/say]")
+		saynn("[say=eliza]Yeah.[/say]")
 
-		saynn("You can see the tiredness in her eyes.")
+		saynn("You can see it in her eyes.")
 
 		saynn("[say=pc]But who is gonna push science forward then?[/say]")
 
 		saynn("[say=eliza]Nobody but us.. you're right.[/say]")
 
-		saynn("You nod.")
+		saynn("You nod. For some reason, seeing the sad feline makes your hand reach out and stroke her hair gently.")
+
+		saynn("Eliza catches it and nuzzles it, sticking her muzzle into your palm. Her nose is so cold, it tickles.")
 
 		saynn("[say=eliza]Here, after 11pm, don't forget~.[/say]")
 
