@@ -739,20 +739,20 @@ func _run():
 
 		saynn("She giggles.")
 
-		saynn("[say=eliza]I know you do~. Let me take off that blindfold.[/say]")
+		saynn("[say=eliza]I know your answer to that one, don't bother~. Let me take off that blindfold.[/say]")
 
 		addButton("Continue", "See what happens next", "won_remove_blindfold")
 	if(state == "won_remove_blindfold"):
 		setFlag("ElizaModule.dateOutcome", "perfect")
 		saynn("As she unties the blindfold, the first thing you see is her emerald eyes from up close..")
 
-		saynn("[say=eliza]Hey there. I think I can trust you with some of my secrets now~.[/say]")
+		saynn("[say=eliza]Hey there. You know, I think you're worth my trust~.[/say]")
 
 		saynn("Who knew that remembering her mother's name is enough to make her trust you..")
 
 		saynn("She plants her butt back into the chair and continues licking her wine.. the bottle has become considerably closer to being empty since the last time you saw it..")
 
-		saynn("[say=eliza]I will answer as honestly as I can. Ask away![/say]")
+		saynn("[say=eliza]So if you wanna ask something, now you have the chance.[/say]")
 
 		addButton("Continue", "See what happens next", "ask_menu")
 	if(state == "ask_menu"):
@@ -760,9 +760,56 @@ func _run():
 
 		addButton("Mug", "Ask about the mag", "ask_mug")
 		addButton("Future", "Ask about what she will do next", "ask_future")
+		addButton("Mother", "Ask about her mother", "ask_mother")
 		addButton("Do you like me", "Ask her if she likes you", "ask_likeme")
 		addButton("Bark for me", "Ask her to bark for you", "ask_bark")
 		addButton("Enough", "Enough questions", "stop_asking")
+	if(state == "ask_mug"):
+		saynn("[say=pc]Your mug.. the one that says 'best mom'. Is there a story behind that?[/say]")
+
+		saynn("[say=eliza]Oh yeah![/say]")
+
+		saynn("She rummages through her things.. and pulls out that mug. She carefully places it on the table.")
+
+		saynn("[say=eliza]It's my favorite one.. I hate it so much.[/say]")
+
+		saynn("Confusing..")
+
+		saynn("The mug seems to be just a normal white one.. with a print of a red heart and the words 'Best Mom'.")
+
+		saynn("[say=pc]Why?[/say]")
+
+		saynn("[say=eliza]Well, you might have already realized that this mug isn't exactly mine.. Well.. it IS mine..[/say]")
+
+		saynn("The more you look at it, the more details you begin to see.. The mug's surface has a few subtle cracks going through it.")
+
+		saynn("[say=pc]It's your mother's?[/say]")
+
+		saynn("[say=eliza]It's my gift to her. Well, it was supposed to be. I really meant it when I bought it, she is the best mom.[/say]")
+
+		saynn("[say=pc]So why haven't you gifted it yet? Want some help with that?[/say]")
+
+		saynn("[say=eliza]I did try! But mom just kinda threw it against a wall. Boom-m.[/say]")
+
+		saynn("Ohh. That's one way to deny a gift.")
+
+		saynn("[say=pc]That's not very grateful of her.[/say]")
+
+		saynn("[say=eliza]She was pretty angry. I guess she thought this was me trying to buy her forgiveness with gifts.[/say]")
+
+		saynn("[say=pc]Well, was it?[/say]")
+
+		saynn("[say=eliza]Pfff! Maybe? I don't know, no one likes when their mother is angry with them, I did what I could. But like I said, I really meant it.[/say]")
+
+		saynn("She gently drags her clawed digits along the surface of that mug, really showing how irregular it is.")
+
+		saynn("[say=eliza]I glued it back together. Now it's my mug, I guess.[/say]")
+
+		saynn("Huh. If that mug was really thrown against a wall, it'd be nothing but dust by now. Did she really glue a million little pieces back together..")
+
+		saynn("[say=eliza]I just don't wanna throw it out.[/say]")
+
+		addButton("Continue", "See what happens next", "ask_menu")
 	if(state == "ask_future"):
 		saynn("[say=pc]After we discover all of the drugs that the inmates have been making here, what will you do?[/say]")
 
@@ -772,17 +819,19 @@ func _run():
 
 		saynn("Her sharp feline tongue catches some more wine from the glass.")
 
-		saynn("[say=eliza]Well.. I never wanted to be here. Imagine.. ugh.. I don't know if I should talk about it.[/say]")
+		saynn("[say=eliza]Well.. I never wanted to be here. Imagine.. ugh.. I don't know if I should talk about it. You wanted to know what's next while I'm trying to bring up the past.[/say]")
 
-		saynn("You pretty much know the answer already.")
+		saynn("The past will always remind of itself, no matter how far into the future you're trying to look. You pretty much know the answer already.")
 
-		saynn("[say=pc]You're hoping she will take you back into her lab.[/say]")
+		saynn("[say=pc]It's okay. I think you are hoping she will take you back into her lab?[/say]")
 
-		saynn("[say=eliza]Everything that I know, I learned there. It's a good lab.. Well, it was. Not until I accidentally mixed water and potassium.. whole tanks of it.[/say]")
+		saynn("[say=eliza]Everything that I know, I learned there. It's a good lab.. Well, it was. I didn't wanna work under my mom's supervision so I kept sneaking inside it on my own. It was fun to experiment with all the equipment and substances. But then I accidentally mixed water and potassium.. whole tanks of it.[/say]")
+
+		saynn("You can tell when her love for science began.")
 
 		saynn("[say=pc]Sounds like you shouldn't have?[/say]")
 
-		saynn("[say=eliza]Hah. What I remember is.. a giant fire.. but it wasn't red. It had a lilac tint to it. Most beautiful thing I've ever seen in my life. Felt like I was staring directly into.. some eternal world.[/say]")
+		saynn("[say=eliza]Hah. What I remember is.. a giant fire.. but it wasn't red. It had a lilac tint to it. Most beautiful thing I've ever seen in my life. Felt like I was staring directly into.. some eternal world. It wasn't even Bluespace, it was something else.[/say]")
 
 		saynn("Wow.")
 
@@ -796,18 +845,170 @@ func _run():
 
 		saynn("Eliza lowers her hands.")
 
-		saynn("[say=eliza]Well.. dad had to risk his life to get an unconscious me out from under the fire. That wasn't so fun.[/say]")
+		saynn("[say=eliza]Well, I didn't. I found my death that day. Dad had to risk his life to get an unconscious me out from under the fire. Somehow he and my mother managed to make me breathe again.[/say]")
+
+		saynn("Hard to imagine what they all felt.")
+
+		saynn("[say=eliza]Seeing their faces.. That wasn't so fun.[/say]")
 
 		saynn("[say=pc]Sounds like your dad is a hero.[/say]")
 
 		saynn("She nods and lowers her head.")
 
-		saynn("[say=eliza]Yeah, he always supported me. He tried to talk mom out of it.. but she was keen on having me as far as possible from chemistry.[/say]")
+		saynn("[say=eliza]Yeah, he always supports me. He tried to talk mom out of it.. but she was keen on having me as far as possible from chemistry. She punished me by sending me here, to this isolated prison, to be a doctor.[/say]")
+
+		saynn("Her mother would rather let her stay around dangerous inmates rather than doing chemistry.")
 
 		saynn("A little smile shines on her face.")
 
-		saynn("[say=eliza]I always find a way though~.[/say]")
+		saynn("[say=eliza]I always find a way though~. A punishment will never stop me from doing what I want.[/say]")
 
+		saynn("[say=pc]That's one hell of a story.[/say]")
+
+		saynn("She chuckles.")
+
+		saynn("[say=eliza]So yeah. Plan is simple. I'm proving to my mother that I should be allowed to do chemistry. And then I'm getting the heck out of here![/say]")
+
+		addButton("Continue", "See what happens next", "ask_menu")
+	if(state == "ask_mother"):
+		saynn("[say=pc]Your mother.. Scarlet Quinn.. She seems like a powerful woman.[/say]")
+
+		saynn("[say=eliza]Hah. You can't even imagine.[/say]")
+
+		saynn("Eliza proudly holds her chin high.")
+
+		saynn("[say=eliza]My mother is the CMO of the whole AlphaCorp![/say]")
+
+		saynn("[say=pc]CMO?[/say]")
+
+		saynn("[say=eliza]Chief Medical Officer, one of the heads of AlphaCorp. There is no one above her in the medical field. She does so much cool secret corporate stuff, you can't even imagine! If I'd tell you even one percent of it, I'd have to kill you~.[/say]")
+
+		saynn("[say=pc]Looks like I will have to interrogate you.[/say]")
+
+		saynn("She laughs.")
+
+		saynn("[say=eliza]Good luck, no one was able to break me yet~.[/say]")
+
+		saynn("Oh yeah, about that.")
+
+		saynn("[say=pc]You're telling me that the CMO of AlphaCorp decided to send her daughter here? As far away from civilization as humanly possible?[/say]")
+
+		saynn("She shrugs.")
+
+		saynn("[say=eliza]It's a punishment for what I did. That's how I see it.[/say]")
+
+		saynn("Right.")
+
+		saynn("[say=eliza]So yeah, you don't wanna mess with my mother~.[/say]")
+
+		addButton("Continue", "See what happens next", "ask_menu")
+	if(state == "ask_likeme"):
+		saynn("[say=pc]Do you like me?[/say]")
+
+		saynn("[say=eliza]Sure, you're pretty cute~.[/say]")
+
+		saynn("She said it without hesitation, catching you off-guard.")
+
+		saynn("[say=pc]That was.. fast.[/say]")
+
+		saynn("[say=eliza]I kno-o-ow. I shouldn't get attached to inmates or patients or staff here since I'm not gonna be here for very long..[/say]")
+
+		saynn("Who knows..")
+
+		saynn("[say=eliza]But you're my assistant so it's a different deal~. You seem to want to help me push science forward. And I appreciate it.[/say]")
+
+		saynn("She reaches her paw out to boop you on the nose.")
+
+		saynn("[say=eliza]You also proved that I trust you~. So yeah, you're cute.[/say]")
+
+		addButton("Continue", "See what happens next", "ask_menu")
+	if(state == "ask_bark"):
+		saynn("[say=pc]Can you bark for me?[/say]")
+
+		saynn("[say=eliza]Bark-bark~.[/say]")
+
+		saynn("What.. Eliza even holds her paws near her chest, like a puppy. She sticks her tongue out and pants while watching your confused reaction.")
+
+		saynn("[say=eliza]Bark~? Want me to awoo? I can do awoo too.[/say]")
+
+		saynn("Her tail is wagging happily.")
+
+		saynn("[say=pc]Didn't expect you to just do it.[/say]")
+
+		saynn("She chuckles.")
+
+		saynn("[say=eliza]Why not~. I think I have all the kinks in the world. And petplay is certainly one of them.[/say]")
+
+		saynn("What a kinky kitty..")
+
+		saynn("[say=eliza]I like to experiment~. I can dominate or be a subby mess, I'm a total switch. If you want a list of my favorite kinks.. in no particular order..[/say]")
+
+		saynn("She begins listing them all..")
+
+		saynn("[say=eliza]Drug use is the obvious one.. Any kind of BDSM play is fuck yes~. Chastity can be extremely hot.. Petplay is fun. Oh yeah, have you ever tried ponyplay? It includes hot harnesses, wearing pony hooves, bits, reins, pulling carts, lots of whipping~. I love when I get to do it..[/say]")
+
+		saynn("She just doesn't stop..")
+
+		saynn("[say=eliza]Obviously sex is fun.. But vanilla is a bit boring for me, I love when it has some spice to it! Feetplay, tribadism, licking, face-sitting, yes-yes-yes.. Milking, oh yes, please, any kind of milking, I can't live without it~.[/say]")
+
+		saynn("She is breathing deeply, her cheeks blushing..")
+
+		saynn("[say=eliza]Even watersports can be super hot under the right conditions..[/say]")
+
+		saynn("[say=pc]Alright, I see.[/say]")
+
+		saynn("She puts on a polite little smile, her eyes innocent.")
+
+		saynn("[say=eliza]You wanted to hear my secrets, those are my secrets~.[/say]")
+
+		saynn("That's fair enough.")
+
+		addButton("Continue", "See what happens next", "ask_menu")
+	if(state == "stop_asking"):
+		saynn("[say=pc]That's all I wanted to know, I think.[/say]")
+
+		saynn("Eliza nods, her paw reaches for the wine bottle.. only to realize that it is now fully empty.")
+
+		saynn("[say=eliza]Just in time~.[/say]")
+
+		saynn("You empty your glass.. and just relax in the chair.. trying to feel as much comfort as you can before you have to leave.")
+
+		saynn("So many challenges.. but you managed to avoid her traps.")
+
+		saynn("[say=eliza]Hope you had fun, assistant, I know I did.[/say]")
+
+		saynn("[say=pc]Yeah.[/say]")
+
+		saynn("She grabs the leash that's connected to your collar.")
+
+		saynn("[say=eliza]But it's getting very late now. Let's get you back into the cellblock.[/say]")
+
+		addButton("Continue", "See what happens next", "after_questions_end")
+	if(state == "after_questions_end"):
+		aimCameraAndSetLocName("hall_mainentrance")
+		GM.pc.setLocation("hall_mainentrance")
+		playAnimation(StageScene.Duo, "stand", {npc="eliza", bodyState={leashedBy="eliza"}})
+		saynn("The elevator brings you back to the familiar floor.. Eliza walks you past the checkpoint.. and begins to take off the leash.")
+
+		saynn("[say=eliza]There we are.[/say]")
+
+		saynn("[say=pc]Glad you didn't kill me.[/say]")
+
+		saynn("[say=eliza]Pff, you're being overly dramatic.[/say]")
+
+		saynn("She puts the chain away.")
+
+		saynn("[say=eliza]If you're angry about that.. well.. sorry. Didn't mean to.[/say]")
+
+		saynn("Weird to hear that word from her.")
+
+		saynn("[say=pc]Sure. At least you would have helped me if I'd begun choking on my own saliva.[/say]")
+
+		saynn("She nods.")
+
+		saynn("[say=eliza]You would have done the same, I'm sure. See ya~.[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
 func addWrongAnswer(theText, ttheAns):
 	addButton(theText, "Say this", "pickWrongAns", [ttheAns])
 
