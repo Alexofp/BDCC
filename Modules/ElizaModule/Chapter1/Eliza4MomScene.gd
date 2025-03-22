@@ -253,7 +253,7 @@ func _run():
 
 		saynn("You roll your eyes as she laughs at her own joke.")
 
-		saynn("[say=eliza]Anyway~. I know that finding new drugs is gonna be harder now, since you found so many already.. I have a lead on something interesting that might help with this. I will tell you when I get more information~. Keep it up.[/say]")
+		saynn("[say=eliza]Either way, keep it up~. Don't forget that it might be easier to find the undiscovered drugs in the drug den.[/say]")
 
 		saynn("You nod. She taps a claw lightly against your chest.. before pulling away.")
 

@@ -17,9 +17,9 @@ func _init():
 		"res://Modules/ElizaModule/Chapter0/Eliza1DrugIntroScene.gd",
 		"res://Modules/ElizaModule/Chapter0/Eliza2FirstDrugScene.gd",
 		
-		"res://Modules/ElizaModule/Chapter1/Eliza3GoodJobScene.gd",
+		"res://Modules/ElizaModule/Chapter1/Eliza3DrugDenIntroScene.gd",
 		"res://Modules/ElizaModule/Chapter1/Eliza4MomScene.gd",
-		"res://Modules/ElizaModule/Chapter1/Eliza5DrugDenScene.gd",
+		"res://Modules/ElizaModule/Chapter1/Eliza5UnlockMilkingScene.gd",
 		"res://Modules/ElizaModule/Chapter1/Eliza6DateOfferScene.gd",
 		"res://Modules/ElizaModule/Chapter1/Eliza6DateScene.gd",
 		

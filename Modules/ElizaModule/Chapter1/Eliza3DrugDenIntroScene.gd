@@ -1,51 +1,70 @@
 extends SceneBase
 
 func _init():
-	sceneID = "Eliza5DrugDenScene"
+	sceneID = "Eliza3DrugDenIntroScene"
 
 func _run():
 	if(state == ""):
-		aimCameraAndSetLocName("med_lobbymain")
+		addCharacter("eliza")
 		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
-		saynn("[say=eliza]Come here, my assistant![/say]")
+		aimCameraAndSetLocName("med_lobbymain")
+		saynn("As you traverse medbay's lobby, you hear someone choking on coffee.. followed by a familiar voice.")
 
-		saynn("Eliza's voice stops you dead in tracks. You glance over and spot her behind the counter in her usual spot, coffee mug in hand, looking way too pleased with herself.")
+		saynn("[say=eliza]Khm.. fuck.. Oh hey! Come here, assistant.[/say]")
 
-		saynn("You approach her.")
+		saynn("You approach the counter, behind which you see Doctor Quinn, with her usual mag in her paw. Her lab coat has some dark wet splotches.")
 
-		saynn("[say=pc]What's up?[/say]")
+		saynn("[say=pc]Looks like you have a coffee addiction.[/say]")
 
-		saynn("She takes a sip before smiling.")
+		saynn("[say=eliza]What I have is a serious case of 'clumsy cat'. Inoperable. Coffee I can quit at any point.[/say]")
 
-		saynn("[say=eliza]First of all, great job so far! Our lab setup is still, like.. 5% of what I had before I got sent here. But trust me, that's a lot![/say]")
+		saynn("She puts the mag down and sighs.. before licking the wet cloth.")
 
-		saynn("[say=pc]You really liked that old lab, don't you?[/say]")
+		saynn("[say=eliza]But I just don't want to.[/say]")
 
-		saynn("[say=eliza]Ma-aybe? What makes you say so?[/say]")
+		saynn("You notice some damage on her personal mag. Little cracks that mess with the 'Best mom' print a bit. Probably not the first time she has almost dropped it.")
 
-		saynn("[say=pc]I don't know.. maybe the dozen times you've brought it up?[/say]")
+		saynn("[say=pc]Clumsy chemist sounds like a dangerous combination.[/say]")
 
-		saynn("Eliza huffs, flicking her tail.")
+		saynn("She uses some piece of cloth to clean her labcoat and giggles at your words.")
 
-		saynn("[say=eliza]Well, duh.. A master is only as good as their tools.. And I had the best tools. I need to work in that lab again. With everything I've learned here? I could so so much more.[/say]")
+		saynn("[say=eliza]Oh yeah. Did I ever tell you that I managed to blow a whole lab up once before~? That was fun.[/say]")
 
-		saynn("She pauses for a second, barely able to contain her excitement.")
+		saynn("This takes her 'clumsy' description up a few levels.. Right up to 'dangerous'.")
 
-		saynn("[say=eliza]I've heard rumors about the miracles my mother pulled off.. I wanna push science even further.[/say]")
+		saynn("[say=pc]You sure you're qualified?[/say]")
 
-		saynn("A small thought forms in your mind. A very nagging thought that is hard to ignore.")
+		saynn("[say=eliza]I got a paper that says that I am! Listen, you can't do science without an occasional boom, just not how it works. Laboratories can be rebuilt but the knowledge.. that stuff is eternal.[/say]")
 
-		saynn("[say=pc]Does that mean.. If she lets you back in, you're leaving?[/say]")
+		saynn("Rebuilding that laboratory is what you've been doing for some time now.")
 
-		saynn("Eliza barely even hesitates.")
+		saynn("[say=pc]Is that why the lab equipment is so outdated? You keep blowing it up?[/say]")
 
-		saynn("[say=eliza]A tool without a master is a wasted tool.. Yeah, nothing is really holding me here. Just the fears of my parents. I will get the fuck out of here as soon as I get the chance![/say]")
+		saynn("[say=eliza]Pff. I blow something once and now everyone thinks that I'm a serial blower![/say]")
 
-		saynn("Her casual gaze is directed at you while a short silence emerges. For some reason, it's hard not to be saddened by her words. But it makes sense for her to dream big.. she is not stuck behind bars like you.")
+		saynn("She realizes that her voice was loud enough for all the nurses to hear her way too late..")
 
-		saynn("Eliza's ears flick. She finally takes note of the void.. and gasps.")
+		saynn("[say=eliza]Did I say something? No. That was a different lab, wasn't even on this station. That lab was pure pleasure to work in though.[/say]")
 
-		saynn("[say=eliza]Oh, right! I didn't call you to be all soapy about my mom-and-dad issues. I actually have something I wanna show you![/say]")
+		saynn("She puts extra purring into the pure word. She sips some more coffee out of her mag.")
+
+		saynn("[say=eliza]You're right, the stuff here is pretty old. Would be so cool to see some of it upgraded.[/say]")
+
+		saynn("She guides her gaze away and stares at a wall for some time, her eyes reminiscing the past.")
+
+		addButton("Continue", "See what happens next", "start_dungeon_unlock")
+	if(state == "start_dungeon_unlock"):
+		saynn("[say=eliza]Anyway.. Speaking of labs.[/say]")
+
+		saynn("She looks at her laptop.")
+
+		saynn("[say=eliza]Good job so far! I'm looking at our database, you've been busy. Love to see it~.[/say]")
+
+		saynn("[say=pc]Thanks.[/say]")
+
+		saynn("She nods.")
+
+		saynn("[say=eliza]I've been busy too, for different reasons.. Can't help you with the lab much, outside of scanning those pills. But! I think I can help you with something.[/say]")
 
 		saynn("She leaves the mag on the counter and grabs something else.. some kind of little device.. an injector of sorts.")
 
@@ -89,7 +108,7 @@ func _run():
 
 		saynn("[say=eliza]It's so soft and cozy. He really appreciated the gesture, told me everything that I wanted~.[/say]")
 
-		saynn("She totally did torture him..")
+		saynn("Sounds a lot like she did torture him..")
 
 		saynn("[say=pc]Glad you had a good time.[/say]")
 
@@ -189,7 +208,7 @@ func _run():
 
 		saynn("You furrow your brows.")
 
-		saynn("[say=pc]Are you insane? That means I can't really prepare much. I'd have to go bare-handed. No weapons, no supplies. Just me.[/say]")
+		saynn("[say=pc]Are you insane? I have to go bare-handed? No weapons, no supplies, Just me?[/say]")
 
 		saynn("She pats your shoulder.")
 
@@ -221,6 +240,9 @@ func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
 		return
+
+	if(_action == "start_dungeon_unlock"):
+		processTime(5*60)
 
 	if(_action == "near_drugden"):
 		processTime(15*60)

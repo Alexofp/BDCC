@@ -8,6 +8,7 @@ func _init():
 
 func _run():
 	if(state == ""):
+		addCharacter("eliza")
 		aimCameraAndSetLocName("med_lobbymain")
 		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		saynn("Eliza's shift has ended.. which means.. It's time to meet her.")
@@ -610,7 +611,7 @@ func _run():
 		saynn("[say=eliza]Excuses~.[/say]")
 
 		addButton("Continue", "Oh well. Accept the failure", "accept_fail")
-		addButton("(Try again)", "Revert the time. Undo your mistake", "challenge_start")
+		addButton("(Try again)", "Revert the time. Undo your mistakes", "challenge_start")
 	if(state == "accept_fail"):
 		setFlag("ElizaModule.dateOutcome", "failed")
 		saynn("She undoes the blindfold, letting you see again.")
@@ -845,7 +846,7 @@ func _run():
 
 		saynn("Eliza lowers her hands.")
 
-		saynn("[say=eliza]Well, I didn't. I found my death that day. Dad had to risk his life to get an unconscious me out from under the fire. Somehow he and my mother managed to make me breathe again.[/say]")
+		saynn("[say=eliza]Well, I didn't. I found my eternal peace that day. Dad had to risk his life to get an unconscious me out from under the fire. Somehow he and my mother managed to make me breathe again.[/say]")
 
 		saynn("Hard to imagine what they all felt.")
 
@@ -867,7 +868,19 @@ func _run():
 
 		saynn("She chuckles.")
 
-		saynn("[say=eliza]So yeah. Plan is simple. I'm proving to my mother that I should be allowed to do chemistry. And then I'm getting the heck out of here![/say]")
+		saynn("[say=eliza]So yeah. Plan is simple. I'm proving to my mother that I should be allowed to do chemistry. And then.. I wanna return back to the old lab. To work by my mother's side.. I guess.[/say]")
+
+		saynn("Somehow, she doesn't sound.. so sure.")
+
+		saynn("[say=pc]Wasn't that your dream.[/say]")
+
+		saynn("[say=eliza]Yeah, it is. Still is. It's just..[/say]")
+
+		saynn("She stays silent, just catching more wine with her tongue.")
+
+		saynn("[say=eliza]Funny stuff.. I'm locked away in this prison by her, stripped of all my freedoms. But I think I'm still the most 'free' I ever was..[/say]")
+
+		saynn("Something for her to think about.")
 
 		addButton("Continue", "See what happens next", "ask_menu")
 	if(state == "ask_mother"):
