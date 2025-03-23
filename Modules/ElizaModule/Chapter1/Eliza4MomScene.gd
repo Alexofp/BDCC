@@ -68,7 +68,7 @@ func _run():
 
 		saynn("Her gaze sweeps across the workplace again.")
 
-		saynn("[say=elizaMom]But now I'm thinking about taking you with me.[/say]")
+		saynn("[say=elizaMom]But now I'm thinking about taking you with me. Especially now, when this prison seems to be having this.. drug.. problem.[/say]")
 
 		saynn("Eliza's eyes brighten up, her feline ears perk.")
 
@@ -78,13 +78,13 @@ func _run():
 
 		saynn("[say=elizaMom]What? No. Sweetheart, we just talked about it. Your science days are over, I will find you a different workplace.. One.. that's not so..[/say]")
 
-		saynn("Her lip curls slightly as she gestures vaguely around the room.")
+		saynn("Her lip curls slightly as she gestures vaguely around the room, swiftly skipping any faces.")
 
-		saynn("[say=elizaMom]Dirty.[/say]")
+		saynn("[say=elizaMom]Dirty. Full of unknown substances.[/say]")
 
-		saynn("Dirty? What is she talking about? Compared to the cellblock, this lobby is sterile.. pristine.")
+		saynn("Dirty? What is she talking about? Compared to the cellblock, this lobby is sterile.. pristine. She maybe has a point with the drug problem though..")
 
-		saynn("[say=eliza]But mom! I didn't blow up a single lab here! We've been making a lot of progress! Look.[/say]")
+		saynn("[say=eliza]But mom! We've been making a lot of progress researching these substances! Look.[/say]")
 
 		saynn("She hastily opens her laptop.. scrolling through files before showing something to her mom.")
 
@@ -102,15 +102,21 @@ func _run():
 
 		saynn("For a long moment, there is silence. Her raw passion is making you feel something fuzzy inside. And you're probably not alone in this. Eliza's mother studies her daughter's eyes.")
 
-		saynn("[say=elizaMom]Alright.. alright. Don't make out to be some kind of villain. Who am I to rob you of this life?[/say]")
+		saynn("[say=elizaMom]Don't make out to be some kind of villain, dear. I'm trying to protect you.. because you need to be protected. And I really don't want you to be anywhere close to this prison while this drug problem is happening.[/say]")
 
-		saynn("[say=eliza]You're my mom.. mom.. I'm gonna be the best chemist, I'm gonna make you proud![/say]")
+		saynn("[say=eliza]I'm not young and dumb anymore, mom. We can solve this problem. Do you trust me?[/say]")
+
+		saynn("Her mother sighs and lowers her gaze.")
+
+		saynn("[say=elizaMom]I feel like I'm making a mistake again. But fine. I have one condition. If you fail.. or put yourself into danger again.. you're gonna do what I say from that point on, got it? No more chemistry, I will find something safe for you to do.[/say]")
+
+		saynn("[say=eliza]I'm gonna make you proud![/say]")
 
 		saynn("Looks like a good talk is all they needed.")
 
-		saynn("Eliza's mother puts on a polite smile.")
+		saynn("Eliza's mother puts on a small, polite smile.")
 
-		saynn("[say=elizaMom]We will see about that~.[/say]")
+		saynn("[say=elizaMom]We will see about that.[/say]")
 
 		saynn("She pauses.")
 

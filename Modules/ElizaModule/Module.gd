@@ -22,6 +22,7 @@ func _init():
 		"res://Modules/ElizaModule/Chapter1/Eliza5UnlockMilkingScene.gd",
 		"res://Modules/ElizaModule/Chapter1/Eliza6DateOfferScene.gd",
 		"res://Modules/ElizaModule/Chapter1/Eliza6DateScene.gd",
+		"res://Modules/ElizaModule/Chapter1/Eliza7EndingScene.gd",
 		
 		"res://Modules/ElizaModule/Science/NurseryBountyBoardScene.gd",
 		"res://Modules/ElizaModule/Science/ChemistryLabScene.gd",
