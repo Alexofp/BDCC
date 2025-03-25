@@ -6,6 +6,8 @@ func getFlags():
 		"firstHelpTFHap": flag(FlagType.Bool),
 		
 		"dateOutcome": flag(FlagType.Text), # perfect failed refused
+		
+		"storyCompleted": flag(FlagType.Bool),
 	}
 
 func _init():

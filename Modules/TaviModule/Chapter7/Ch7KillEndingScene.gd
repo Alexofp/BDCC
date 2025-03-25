@@ -574,7 +574,64 @@ func _run():
 
 		saynn("And so he chose to return back to the frontlines. And do what he does best.. follow orders, no matter how suicidal they might be. Did he enjoy violence? Nah, the guy was sick of it. But you can't stop the wars.. if you don't fight them. And AlphaCorp was happy to supply him with an endless supply of wars.")
 
-		addButton("Alex Rynard", "See what happens with him", "ep_alex")
+		if (getFlag("AlexRynardModule.ch2FinalSceneHappened") && getFlag("ElizaModule.storyCompleted")):
+			addButton("Alex and Eliza", "See what happens with them", "ep_unique_alex_eliza")
+		else:
+			addButton("Alex Rynard", "See what happens with him", "ep_alex")
+	if(state == "ep_unique_alex_eliza"):
+		playAnimation(StageScene.Hug, "hug", {npc="eliza", pc="alexrynard"})
+		saynn("In the heat of the battle, Alex manages to get to and repair Sentinel-X.. his most powerful creation. And that is what saved the core of the station from getting destroyed by Syndicate. After that Alex guided other engineers to repair the hull of the station while he himself masterfully controlled its vents systems to make sure the surviving staff and inmates had at least something to breathe.")
+
+		saynn("He never really trusted people, he still doesn't. He much prefers machines for their lack of ability to lie. But during these critical moments, he had to work as a team. And he was good at it..")
+
+		saynn("Others were quick to claim credit for saving the station though. He didn't care though, he just said his word and that was it. There was nothing to gain anyway.")
+
+		saynn("Why not fight for it? Alex knew that you were responsible for this, one way or another. Putting so many people under danger just to escape this place.. is understandable.. but unforgivable. Alex began losing his grip again, closing up from everyone and everything. Who is there left to trust anyway? People? Hah, what a funny joke. Machines? Put too much trust into them and they will break you too.")
+
+		saynn("[say=eliza]Hey.. um.. Do you have a minute?..[/say]")
+
+		saynn("[say=alexrynard]Huh? Why?[/say]")
+
+		saynn("To say the least, the medical wing was a busy place during the attack.. There were a lot more wounded than there were hands to help them. Eliza had to prioritize.. picking certain lives over others.")
+
+		saynn("She felt awful. Not because of all the death and suffering.. but because she knew that she could have been more useful.. Eliza did some much science work.. And now, when the situation was testing her, there was nothing she could do.. other than bandaging and injecting people with painkillers. Having access to a great chemistry lab helped.. but drugs can only do so much.")
+
+		saynn("Her bloody paws are still shaking long after it all has ended. It only got slightly better when her shivering figure was embraced by the foxy's arms.")
+
+		saynn("[say=eliza]I still see it.. so much.. blood.. death..[/say]")
+
+		saynn("[say=alexrynard]It's okay.. Everything is gonna be okay. Stay strong, Eliza.[/say]")
+
+		saynn("Tears stream down her cheeks. They made Alex's eyes get watery too.")
+
+		saynn("[say=eliza]I don't wanna be strong anymore..[/say]")
+
+		saynn("[say=alexrynard]Don't say that.. things will get better.[/say]")
+
+		saynn("She couldn't let her give up.. which meant.. he couldn't give up himself.")
+
+		saynn("They decided to develop something together, to distract themselves from reality. They managed to develop a new prosthetic spine for Alex. One that wasn't bound by metal or wires.. but instead used artificial neurons and half-organic hard tissue. The era of surgical intervention was coming to its end, nanobots, tiny programmable robots made out of organic materials, were used to eat through the old prosthetic spine.. before constructing a new, much better one.")
+
+		saynn("[say=eliza]Hey, we're not that bad at this nanomachines thing.. Since we're both out of the job.. maybe we could start a company together?[/say]")
+
+		saynn("[say=alexrynard]What for?[/say]")
+
+		saynn("[say=eliza]Just for fun.. For us.. You're good at building stuff.. I'm good at convincing people to buy it.[/say]")
+
+		saynn("Alex stayed quiet for a while.")
+
+		saynn("[say=alexrynard]Hm.[/say]")
+
+		saynn("[say=eliza]If you don't feel like it.. or if you don't trust me enough.. It's okay. I can just return to my mother's lab..[/say]")
+
+		saynn("Alex grabs Eliza by the wrist.")
+
+		saynn("[say=alexrynard]You are the only person who I wanna trust.[/say]")
+
+		if (tookRahi):
+			addButton("Rahi", "See what happened with Rahi", "ep_rahi")
+		else:
+			addButton("Jaxon", "See what happened with Jaxon", "ep_jaxon")
 	if(state == "ep_alex"):
 		playAnimation(StageScene.Solo, "stand", {pc="alexrynard"})
 		if (getFlag("AlexRynardModule.ch2FinalSceneHappened")):
@@ -605,12 +662,33 @@ func _run():
 
 		addButton("Eliza", "See what happens to Eliza", "ep_eliza")
 	if(state == "ep_eliza"):
-		playAnimation(StageScene.Solo, "stand", {pc="eliza"})
-		saynn("To say the least, the medical wing was a busy place during the attack.. There were a lot more wounded than there were hands to help them. Eliza had to prioritize.. picking certain lives over others.")
+		if (!getFlag("ElizaModule.storyCompleted")):
+			playAnimation(StageScene.Solo, "stand", {pc="eliza"})
+			saynn("To say the least, the medical wing was a busy place during the attack.. There were a lot more wounded than there were hands to help them. Eliza had to prioritize.. picking certain lives over others.")
 
-		saynn("She felt awful. Not because of all the death and suffering.. but because she knew that she could have been more useful.. Eliza did some much science work.. And now, when the situation was testing her, there was nothing she could do.. other than bandaging and injecting people with simple painkillers.")
+			saynn("She felt awful. Not because of all the death and suffering.. but because she knew that she could have been more useful.. Eliza did some much science work.. And now, when the situation was testing her, there was nothing she could do.. other than bandaging and injecting people with simple painkillers.")
 
-		saynn("Her bloody paws were shaking by the end of it.. and that shiver never quite went away. She felt like she failed.. failed at what she set out to do in the first place. And so, after BDCC collapsed, she returned back to her mother's lab.. and became an obedient harmless daughter that her mother always wanted her to be.")
+			saynn("Her bloody paws were shaking by the end of it.. and that shiver never quite went away. She felt like she failed.. failed at what she set out to do in the first place. And so, after BDCC collapsed, she returned back to her mother's lab.. and became an obedient harmless daughter that her mother always wanted her to be.")
+
+		else:
+			playAnimation(StageScene.Hug, "hug", {npc="eliza", pc="elizaMom"})
+			saynn("To say the least, the medical wing was a busy place during the attack.. There were a lot more wounded than there were hands to help them. Eliza had to prioritize.. picking certain lives over others.")
+
+			saynn("She felt awful. Not because of all the death and suffering.. but because she knew that she could have been more useful.. Eliza did some much science work.. And now, when the situation was testing her, there was nothing she could do.. other than bandaging and injecting people with painkillers. Having access to a great chemistry lab helped.. but drugs can only do so much.")
+
+			saynn("Her bloody paws were shaking by the end of it.. and that shiver never quite went away.")
+
+			saynn("It only got slightly better when she was holding a certain package. It was a small box.. but it sure made her heart beat calmer. Inside it.. was a sleek, new mug.. a mug that proudly says 'Best Daughter'.")
+
+			saynn("[say=elizaMom]I should have sent it earlier, I'm sorry.[/say]")
+
+			saynn("[say=eliza]It's okay, mom..[/say]")
+
+			saynn("A tight hug. Tears begin to run wild.")
+
+			saynn("[say=elizaMom]I'm here.. I'm here.. everything is gonna be okay, sweetie..[/say]")
+
+			saynn("Eliza's mother took her back under her wing. Less freedom.. but at this point, Eliza just wanted to feel safe.")
 
 		if (tookRahi):
 			addButton("Rahi", "See what happened with Rahi", "ep_rahi")
@@ -764,7 +842,7 @@ func _run():
 		addButton("Continue", "See what happens next", "ep_end")
 	if(state == "ep_end"):
 		playAnimation(StageScene.Duo, "sit", {npc="tavi", npcBodyState={naked=true}})
-		saynn("You sit on one of the uncomfortable benches, eating a slice of pizza that you bought from one of the warp-throughs that don’t care about Syndicate ships."+str(" Rahi does the same.. purring while doing so." if tookRahi else "")+" The first pizza in.. forever. All the while your ship is flying through the vast nothingness. It's.. cool.")
+		saynn("You sit on one of the uncomfortable benches, eating a slice of pizza that you bought from one of the warp-throughs that don't care about Syndicate ships."+str(" Rahi does the same.. purring while doing so." if tookRahi else "")+" The first pizza in.. forever. All the while your ship is flying through the vast nothingness. It's.. cool.")
 
 		saynn("Tavi looks at you and smiles. She is still naked, openly showing you her sexy body.")
 
