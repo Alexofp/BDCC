@@ -8,8 +8,6 @@ func _init():
 		[5, ["AnaphrodisiacPill"]],
 		[10, [["EnergyDrink", 1, 4]]],
 		[5, [["Condom", 1, 10]]],
-		[10, ["TFPill"]],
-		[2, ["TFPill"]],
 		[2, [["PregnancyTest", 1, 2]]],
 		[2, [["BirthControlPill", 1, 2]]],
 		[2, ["plainBra"]],

@@ -117,7 +117,7 @@ func _run():
 		saynn("At least no blood was spilled.")
 
 		addButton("Continue", "See what happens next", "near_staff_bar")
-	if(state == "in_staff_bar"):
+	if(state == "near_staff_bar"):
 		removeCharacter("risha")
 		aimCameraAndSetLocName("cd_corridor5")
 		playAnimation(StageScene.Duo, "walk", {npc="eliza", bodyState={leashedBy="eliza"}, npcAction="walk", flipNPC=true})
@@ -671,7 +671,6 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "say1_eliza"):
-		addCharacter("eliza")
 		saynn("[say=pc]Eliza, that's your name.[/say]")
 
 		saynn("[say=eliza]That's correct~. I'd be very surprised if you'd forget that.[/say]")
@@ -687,6 +686,7 @@ func _run():
 		addWrongAnswer("Blonde", "Blonde?")
 		addWrongAnswer("Ginger", "Ginger?")
 	if(state == "say2_pink"):
+		addCharacter("eliza")
 		playAnimation(StageScene.PawJobUnderTable, "start", {pc="pc", npc="eliza"})
 		saynn("[say=pc]Pink? I remember it being pink-ish.[/say]")
 

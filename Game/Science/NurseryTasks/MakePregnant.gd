@@ -49,7 +49,7 @@ func generatePossibleTasks() -> Array:
 
 func isCompleted() -> bool:
 	var character:BaseCharacter = GlobalRegistry.getCharacter(charID)
-	if(character != null && character.isVisiblyPregnant()):
+	if(character != null && character.isPregnant()):
 		return true
 	return false
 

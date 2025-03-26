@@ -230,6 +230,9 @@ func _run():
 		else:
 			addDisabledButton("Obedience training", "(forced chastity content) You're already enrolled into this program")
 		
+		if(!getFlag("ElizaModule.s0hap")):
+			addButton("Lab Assistant", "Ask to become Eliza's lab assistant, maybe she could use one", "startlabassist")
+		
 		#addDisabledButton("Prototype testing", "Test bleeding-edge hi-tech machines or devices")
 		addButton("Back", "You're not interested", "")
 
@@ -435,6 +438,12 @@ func _react(_action: String, _args):
 	if(_action == "healinggel"):
 		GM.pc.addCredits(-5)
 		runScene("MedicalHealingGelScene")
+		endScene()
+		return
+	
+	if(_action == "startlabassist"):
+		setFlag("ElizaModule.s0hap", true)
+		runScene("Eliza0AskJobScene")
 		endScene()
 		return
 	

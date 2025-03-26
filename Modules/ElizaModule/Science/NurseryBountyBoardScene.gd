@@ -94,6 +94,30 @@ func _react(_action: String, _args):
 
 	setState(_action)
 
+func getDebugActions():
+	var fluidValues:Array = []
+	for fluidID in GlobalRegistry.getFluids():
+		fluidValues.append([fluidID, fluidID])
+	var tfValues:Array = []
+	for tfID in GlobalRegistry.getTransformationRefs():
+		var tf:TFBase = GlobalRegistry.getTransformationRef(tfID)
+		tfValues.append([tfID, tf.getPillName()+" ("+tf.getName()+")"])
+	
+	return [
+	{
+		"id": "completeTasks",
+		"name": "Complete all tasks",
+		"args": [
+		],
+	},
+	]
+
+func doDebugAction(_id, _args = {}):
+	if(_id == "completeTasks"):
+		while(!GM.main.SCI.peekNurseryTasks().empty()):
+			var task = GM.main.SCI.peekNurseryTasks()[0]
+			task.completeSelf()
+
 func saveData():
 	var data = .saveData()
 

@@ -17,7 +17,7 @@ func run(_triggerID, _args):
 		return
 
 	if(_triggerID == Trigger.TalkingToNPC):
-		if(GM.main.SCI.doesPCHaveUnknownStrangePills()):
+		if(getFlag("ElizaModule.s2hap") && GM.main.SCI.doesPCHaveUnknownStrangePills()):
 			addButton("Strange pill!", "Make Eliza scan the strange pill that you have", "scan_strange_pill")
 		if(GM.main.SCI.hasTFsCanScan(GM.pc)):
 			addButton("Get scanned!", "Make Eliza scan the effects of your current transformations", "scan_tfs")

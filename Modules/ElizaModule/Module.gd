@@ -2,6 +2,16 @@ extends Module
 
 func getFlags():
 	return {
+		"s0hap": flag(FlagType.Bool),
+		"s1hap": flag(FlagType.Bool),
+		"s2hap": flag(FlagType.Bool),
+		"s3hap": flag(FlagType.Bool),
+		"s4hap": flag(FlagType.Bool),
+		"s5hap": flag(FlagType.Bool),
+		"s6hap": flag(FlagType.Bool),
+		"s6DateHap": flag(FlagType.Bool),
+		"s7hap": flag(FlagType.Bool),
+		
 		"firstDrugTestHappened": flag(FlagType.Bool),
 		"firstHelpTFHap": flag(FlagType.Bool),
 		
@@ -44,16 +54,21 @@ func _init():
 		"res://Modules/ElizaModule/Science/EnterMedicalEvent.gd",
 		"res://Modules/ElizaModule/Science/ChemistryLabEvent.gd",
 		"res://Modules/ElizaModule/Science/ElizaBringNpcToBeTestedEvent.gd",
+		"res://Modules/ElizaModule/Chapter0/ElizaQuestEvent.gd",
+		"res://Modules/ElizaModule/Chapter0/ElizaQuestReactEvent.gd",
+	]
+	quests = [
+		"res://Modules/ElizaModule/Chapter0/ElizaQuest.gd",
 	]
 
 func resetFlagsOnNewDay():
 	pass
 
-func hasLabAccess():
-	return true
+func hasLabAccess() -> bool:
+	return getFlag("ElizaModule.s2hap", false)
 
-func canSendSlavesToBeMilked():
-	return true
+func canSendSlavesToBeMilked() -> bool:
+	return getFlag("ElizaModule.s5hap", false)
 
-func canStartDrugDenRun():
-	return true
+func canStartDrugDenRun() -> bool:
+	return getFlag("ElizaModule.s3hap", false)

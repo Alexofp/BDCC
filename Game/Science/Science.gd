@@ -5,6 +5,7 @@ var points:int = 0
 
 var generatedTasks:bool = false
 var nurseryTasks:Array = []
+var nurseryTasksCompleted:int = 0
 
 var unlockedTFs:Dictionary = {} # {TFID = true}
 var testedTFs:Dictionary = {} # {TFID = true}
@@ -802,6 +803,9 @@ func getAllUpgradesScienceCost() -> int:
 	
 	return result
 
+func getAmountOfCompletedNurseryTasks() -> int:
+	return nurseryTasksCompleted
+
 func saveData() -> Dictionary:
 	var taskData:Array = []
 	for task in nurseryTasks:
@@ -819,6 +823,7 @@ func saveData() -> Dictionary:
 		tt = testedTFs,
 		up = upgrades,
 		ms = madeStrangePills,
+		ntc = nurseryTasksCompleted,
 	}
 
 func loadData(_data:Dictionary):
@@ -829,6 +834,7 @@ func loadData(_data:Dictionary):
 	testedTFs = SAVE.loadVar(_data, "tt", {})
 	upgrades = SAVE.loadVar(_data, "up", {})
 	madeStrangePills = SAVE.loadVar(_data, "ms", 0)
+	nurseryTasksCompleted = SAVE.loadVar(_data, "ntc", 0)
 	for upgradeID in upgrades.keys():
 		if(!upgradesInfo.has(upgradeID)):
 			upgrades.erase(upgradeID)
