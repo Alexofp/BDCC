@@ -113,3 +113,6 @@ static func join(arr: Array, separator: String = "") -> String:
 		output += str(s) + separator
 	output = output.left( output.length() - separator.length() )
 	return output
+
+func getName():
+	return "Papago"

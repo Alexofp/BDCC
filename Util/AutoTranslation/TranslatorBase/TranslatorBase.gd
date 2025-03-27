@@ -29,3 +29,6 @@ func startCooldownMinutes(minutes):
 func afterTranslate():
 	if(antispamSeconds > 0):
 		antispamUntil = Time.get_unix_time_from_system() + antispamSeconds
+		
+func getName():
+	return "ERROR"
