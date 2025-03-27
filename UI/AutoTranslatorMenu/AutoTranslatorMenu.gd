@@ -14,8 +14,8 @@ func _ready():
 	
 	translatorsList.clearTranslators()
 	_i = 0
-	for i in AutoTranslation.translatorIDS:
-		translatorsList.addTranslator(i)
+	for id in AutoTranslation.translatorIDS:
+		translatorsList.addTranslator(AutoTranslation.getTranslatorName(id))
 		_i += 1
 
 	$VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/EnableTranslationBox.pressed = AutoTranslation.shouldTranslate()

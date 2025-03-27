@@ -8,6 +8,13 @@ var shouldTranslateButtons = true
 var translators = []
 var translatorIDS = ["google", "bing", "papago", "googlebatch"]
 
+var translatorNames = {
+	"google": "Google",
+	"bing": "Bing",
+	"papago": "Papago",
+	"googlebatch": "Google (batch)"
+}
+
 var hadToUseFallback = false
 
 func _ready():
@@ -16,7 +23,14 @@ func _ready():
 	#addTranslator("deepl") # Doesn't work anymore :(
 	recreateTranslatorIfNeeded()
 	setShouldTranslate(shouldBeTranslating)
-	
+
+func getTranslatorName(translatorID):
+	if translatorID in translatorNames:
+		return translatorNames[translatorID]
+	else:
+		Log.printerr("Error: invalid tranlatorID %s" % translatorID)
+		return "Unknown"
+
 func createTranslator(translatorID):
 	if(translatorID == "google"):
 		return GoogleTranslator.new()
