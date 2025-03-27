@@ -6,7 +6,7 @@ var manualTranslateButton = false
 var shouldTranslateButtons = true
 
 var translators = []
-var translatorIDS = []
+var translatorIDS = ["google", "bing", "papago", "googlebatch"]
 
 var hadToUseFallback = false
 
@@ -14,9 +14,7 @@ func _ready():
 	loadFromFile()
 	setTargetLanguage(targetLanguage)
 	#addTranslator("deepl") # Doesn't work anymore :(
-	addTranslator("google")
-	addTranslator("papago")
-	addTranslator("googlebatch")
+	recreateTranslatorIfNeeded()
 	setShouldTranslate(shouldBeTranslating)
 	
 func createTranslator(translatorID):
@@ -28,6 +26,8 @@ func createTranslator(translatorID):
 		return DeepLTranslator.new()
 	if(translatorID == "papago"):
 		return PapagoTranslate.new()
+	if(translatorID == "bing"):
+		return MicrosoftTranslator.new()
 	return null
 	
 func setTargetLanguage(tl):
@@ -39,6 +39,22 @@ func setTargetLanguage(tl):
 
 func getTargetLanguage():
 	return targetLanguage
+	
+func moveUpTranslator(id):
+	if id == 0:
+		return
+	var modified = translators.pop_at(id)
+	translators.insert(id - 1, modified)
+	modified = translatorIDS.pop_at(id)
+	translatorIDS.insert(id - 1, modified)
+
+func moveDownTranslator(id):
+	if id == len(translators) - 1:
+		return
+	var modified = translators.pop_at(id)
+	translators.insert(id + 1, modified)
+	modified = translatorIDS.pop_at(id)
+	translatorIDS.insert(id + 1, modified)
 
 func addTranslator(translatorID):
 	translatorIDS.append(translatorID)
@@ -172,6 +188,7 @@ func saveData():
 		"shouldBeTranslating": shouldBeTranslating,
 		"manualTranslateButton": manualTranslateButton,
 		"shouldTranslateButtons": shouldTranslateButtons,
+		"translatorIDS": translatorIDS
 	}
 
 func loadData(data):
@@ -179,6 +196,16 @@ func loadData(data):
 	shouldBeTranslating = SAVE.loadVar(data, "shouldBeTranslating", false)
 	manualTranslateButton = SAVE.loadVar(data, "manualTranslateButton", false)
 	shouldTranslateButtons = SAVE.loadVar(data, "shouldTranslateButtons", true)
+	var tempTranslatorIDS = SAVE.loadVar(data, "translatorIDS", translatorIDS)
+	for id in tempTranslatorIDS:
+		if id in translatorIDS:
+			translatorIDS.erase(id)
+		else:
+			tempTranslatorIDS.erase(id)
+	if len(translatorIDS) > 0:
+		translatorIDS = tempTranslatorIDS + translatorIDS
+	else:
+		translatorIDS = tempTranslatorIDS
 	
 var configFilePath = "user://autotranslation.json"
 func saveToFile():

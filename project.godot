@@ -959,6 +959,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Player3D/Parts/MeshWithPattern.gd"
 }, {
+"base": "TranslatorBase",
+"class": "MicrosoftTranslator",
+"language": "GDScript",
+"path": "res://Util/AutoTranslation/Translators/MicrosoftTranslator.gd"
+}, {
 "base": "Reference",
 "class": "MinigameResult",
 "language": "GDScript",
@@ -1855,6 +1860,7 @@ _global_script_class_icons={
 "MedicalModule": "",
 "MenstrualCycle": "",
 "MeshInstanceWithPattern": "",
+"MicrosoftTranslator": "",
 "MinigameResult": "",
 "ModEntry": "",
 "Module": "",
@@ -2116,6 +2122,10 @@ minigame_commit={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777221,"unicode":0,"echo":false,"script":null)
  ]
 }
+
+[mono]
+
+project/assembly_name="BDCC"
 
 [physics]
 
