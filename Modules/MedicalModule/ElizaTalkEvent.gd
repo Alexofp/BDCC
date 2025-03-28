@@ -21,4 +21,6 @@ func getPriority():
 
 func onButton(_method, _args):
 	if(_method == "talk"):
+		if(!getCharacter("eliza").getInventory().hasItemIDEquipped("LabcoatOutfit")):
+			getCharacter("eliza").resetEquipment()
 		runScene("ElizaTalkScene")
