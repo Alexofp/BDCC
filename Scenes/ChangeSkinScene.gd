@@ -88,7 +88,10 @@ func _run():
 		addButton("Back", "Go back", "basemenu")
 		for skinID in GlobalRegistry.getSkinsAllKeys():
 			var theSkin = GlobalRegistry.getSkin(skinID)
-			addButton(theSkin.getName(), "Pick this skin"+theSkin.getExtraDesc(), "changebaseskinmenu_select", [skinID])
+			var theSkinIsActive = (thePC.pickedSkin == skinID)
+			var theSkinName = ("[x] " if(theSkinIsActive) else "")+theSkin.getName()
+			var theSkinDesc = "This is the currently selected skin" if(theSkinIsActive) else "Pick this skin"
+			addButton(theSkinName, theSkinDesc+theSkin.getExtraDesc(), "changebaseskinmenu_select", [skinID])
 
 	if(state == "changebasecolormenu"):
 		var colorPicker = colorPickerScene.instance()
@@ -126,15 +129,27 @@ func _run():
 		addButton("Back", "Go back", "bodypartmenu")
 		
 		if(bodypart.hasCustomSkinPattern()):
-			addButton("Default", "Use the default skin pattern", "changepartskinmenu_select", [null])
+			var defaultSkinIsActive = (bodypart.pickedSkin == null)
+			var defaultSkinName = ("[x] " if(defaultSkinIsActive) else "")+"Default"
+			var defaultSkinDesc = "Currently using the default skin pattern" if(defaultSkinIsActive) else "Use the default skin pattern"
+			addButton(defaultSkinName, defaultSkinDesc, "changepartskinmenu_select", [null])
 			for skinID in GlobalRegistry.getPartSkins(bodypart.id):
 				var theSkin = GlobalRegistry.getPartSkin(bodypart.id, skinID)
-				addButton(theSkin.getName(), "Pick this skin"+theSkin.getExtraDesc(), "changepartskinmenu_select", [skinID])
+				var theSkinIsActive = (bodypart.pickedSkin == skinID)
+				var theSkinName = ("[x] " if(theSkinIsActive) else "")+theSkin.getName()
+				var theSkinDesc = "This is the currently selected skin" if(theSkinIsActive) else "Pick this skin"
+				addButton(theSkinName, theSkinDesc+theSkin.getExtraDesc(), "changepartskinmenu_select", [skinID])
 		else:
-			addButton("Same as base", "Inherit the skin from the base", "changepartskinmenu_select", [null])
+			var inheritedSkinIsActive = (bodypart.pickedSkin == null)
+			var inheritedSkinName = ("[x] " if(inheritedSkinIsActive) else "")+"Same as base"
+			var inheritedSkinDesc = "Currently inheriting the skin from the base" if(inheritedSkinIsActive) else "Inherit the skin from the base"
+			addButton(inheritedSkinName, inheritedSkinDesc, "changepartskinmenu_select", [null])
 			for skinID in GlobalRegistry.getSkinsAllKeys():
 				var theSkin = GlobalRegistry.getSkin(skinID)
-				addButton(theSkin.getName(), "Pick this skin"+theSkin.getExtraDesc(), "changepartskinmenu_select", [skinID])
+				var theSkinIsActive = (bodypart.pickedSkin == skinID)
+				var theSkinName = ("[x] " if(theSkinIsActive) else "")+theSkin.getName()
+				var theSkinDesc = "This is the currently selected skin" if(theSkinIsActive) else "Pick this skin"
+				addButton(theSkinName, theSkinDesc+theSkin.getExtraDesc(), "changepartskinmenu_select", [skinID])
 
 	if(state == "changepartcolormenu"):
 		var bodypart = thePC.getBodypart(pickedBodypartSlot)
@@ -235,7 +250,6 @@ func _react(_action: String, _args):
 	
 	if(_action == "changebaseskinmenu_select"):
 		thePC.pickedSkin = _args[0]
-		setState("basemenu")
 		thePC.updateAppearance()
 		return
 	
@@ -257,7 +271,6 @@ func _react(_action: String, _args):
 			bodypart.pickedSkin = null
 		else:
 			bodypart.pickedSkin = _args[0]
-		setState("bodypartmenu")
 		thePC.updateAppearance()
 		return
 	
