@@ -1,14 +1,14 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Inventory/RiggedModels/LabcoatOutfit/LabcoatMat.material" type="Material" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Player3D/Parts/Arms/HumanArms/arm.png" type="Texture" id=3]
+[ext_resource path="res://Inventory/RiggedModels/LabcoatOutfit/labcoatAlt.png" type="Texture" id=4]
 [ext_resource path="res://Player/Player3D/Parts/MeshWithPattern.gd" type="Script" id=6]
 [ext_resource path="res://Player/Player3D/Parts/Breasts/BreastsScaleable/breastsScaleable.png" type="Texture" id=7]
 [ext_resource path="res://Inventory/RiggedModels/NurseClothes/arm.png" type="Texture" id=8]
 [ext_resource path="res://Player/Player3D/Parts/PartStatePicker.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Player/Player3D/Parts/PartState.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Inventory/RiggedModels/LabcoatOutfit/labcoat.png" type="Texture" id=12]
 [ext_resource path="res://Player/Player3D/Prefabs/HandsPrefab.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Player/Player3D/Parts/Arms/HumanArms/forearm.png" type="Texture" id=15]
 [ext_resource path="res://Inventory/RiggedModels/LabcoatOutfit/breastsScaleable.png" type="Texture" id=16]
@@ -243,14 +243,14 @@ bind/27/name = "DeformBelly"
 bind/27/bone = -1
 bind/27/pose = Transform( 0.127554, -0.991832, 5.86852e-07, -0.991832, -0.127554, -2.3368e-08, 8.68952e-08, -5.41319e-07, -1, 4.73784, 0.229201, 2.55004e-06 )
 
-[sub_resource type="SpatialMaterial" id=62]
+[sub_resource type="SpatialMaterial" id=88]
 resource_name = "breasts4.png"
 flags_transparent = true
 flags_unshaded = true
 vertex_color_use_as_albedo = true
 params_cull_mode = 2
 params_depth_draw_mode = 3
-albedo_color = Color( 0, 0.286275, 0.498039, 1 )
+albedo_color = Color( 0.952941, 0.666667, 0.741176, 1 )
 albedo_texture = ExtResource( 16 )
 
 [sub_resource type="ArrayMesh" id=87]
@@ -365,14 +365,14 @@ bind/30/name = "DeformButt"
 bind/30/bone = -1
 bind/30/pose = Transform( 0.31345, 0.949604, -8.4791e-07, 0.949605, -0.31345, -5.59528e-08, -3.30048e-07, -7.49881e-07, -1, -4.0694, 1.33643, 3.13489e-06 )
 
-[sub_resource type="SpatialMaterial" id=57]
+[sub_resource type="SpatialMaterial" id=89]
 resource_name = "bodywide.png"
 flags_transparent = true
 flags_unshaded = true
 vertex_color_use_as_albedo = true
 params_cull_mode = 2
 params_depth_draw_mode = 3
-albedo_texture = ExtResource( 12 )
+albedo_texture = ExtResource( 4 )
 
 [sub_resource type="SpatialMaterial" id=4]
 resource_name = "LabcoatSkirtMat"
@@ -516,6 +516,14 @@ bind/29/pose = Transform( 0.127554, -0.991832, 5.86852e-07, -0.991832, -0.127554
 bind/30/name = "DeformButt"
 bind/30/bone = -1
 bind/30/pose = Transform( 0.31345, 0.949604, -8.4791e-07, 0.949605, -0.31345, -5.59528e-08, -3.30048e-07, -7.49881e-07, -1, -4.0694, 1.33643, 3.13489e-06 )
+
+[sub_resource type="SpatialMaterial" id=90]
+resource_name = "bodywide.png"
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+params_depth_draw_mode = 3
+albedo_color = Color( 0.454902, 0.227451, 0.435294, 1 )
 
 [sub_resource type="ArrayMesh" id=86]
 surfaces/0 = {
@@ -705,7 +713,7 @@ surfaces/0 = {
 [node name="NurseClothes" instance=ExtResource( 2 )]
 
 [node name="armpng" type="MeshInstance" parent="." index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.256229 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.297754 )
 mesh = SubResource( 19 )
 skin = SubResource( 20 )
 material/0 = SubResource( 51 )
@@ -727,13 +735,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.403 )
 mesh = SubResource( 60 )
 skin = SubResource( 61 )
 skeleton = NodePath("../../..")
-material/0 = SubResource( 62 )
+material/0 = SubResource( 88 )
 
 [node name="Labcoat" type="MeshInstance" parent="." index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0315073 )
 mesh = SubResource( 87 )
 skin = SubResource( 56 )
-material/0 = SubResource( 57 )
+material/0 = SubResource( 89 )
 
 [node name="LabcoatSecondLeg" type="MeshInstance" parent="." index="4"]
 visible = false
@@ -745,15 +753,15 @@ material/0 = SubResource( 59 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0531563 )
 
 [node name="handpng" parent="HandsPrefab/PartState" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.161117 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.202642 )
 
 [node name="handpng2" parent="HandsPrefab/PartState2" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.161117 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.202642 )
 
 [node name="CylinderSkirt" type="MeshInstance" parent="." index="6"]
 mesh = SubResource( 5 )
 skin = SubResource( 74 )
-material/0 = SubResource( 59 )
+material/0 = SubResource( 90 )
 
 [node name="NoTouchMeshInstance" type="MeshInstance" parent="CylinderSkirt" index="0"]
 visible = false
@@ -761,7 +769,7 @@ mesh = SubResource( 86 )
 material/0 = SubResource( 76 )
 
 [node name="armpng2" type="MeshInstance" parent="." index="7"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.221555 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.26308 )
 mesh = SubResource( 78 )
 skin = SubResource( 79 )
 skeleton = NodePath("../../..")
@@ -783,7 +791,7 @@ pattern_size = Vector2( 0.25, 1 )
 bodypartSlot = "arms"
 
 [node name="forearmpng" type="MeshInstance" parent="." index="9"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.221555 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.26308 )
 mesh = SubResource( 83 )
 skin = SubResource( 79 )
 skeleton = NodePath("../../..")

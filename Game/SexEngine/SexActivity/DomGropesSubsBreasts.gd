@@ -165,10 +165,10 @@ func processTurn():
 			else:
 				subInfo.stimulateArousalZone(0.05, BodypartSlot.Penis, 0.25)
 				text += RNG.pick([
-					" {dom.yourHis} free hand is stroking {sub.yourHis} {sub.penis}.",
-					" {dom.yourHis} free hand is stroking {sub.youHim}.",
-					" {dom.yourHis} is also stroking {sub.youHim}.",
-					" {dom.yourHis} is also stroking {sub.youHim} at the same time.",
+					" {dom.YourHis} free hand is stroking {sub.yourHis} {sub.penis}.",
+					" {dom.YourHis} free hand is stroking {sub.youHim}.",
+					" {dom.YouHe} {dom.youAre} also stroking {sub.youHim}.",
+					" {dom.YouHe} {dom.youAre} also stroking {sub.youHim} at the same time.",
 				])
 		
 		sendSexEvent(SexEvent.BreastsGroped, domID, subID, {madeLactate=suddenlyLactating})

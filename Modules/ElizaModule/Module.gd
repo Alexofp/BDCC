@@ -47,6 +47,7 @@ func _init():
 		]
 	characters = [
 		"res://Modules/ElizaModule/DrugTesting/ElizaDemon.gd",
+		"res://Modules/ElizaModule/Chapter1/ElizaMom.gd",
 	]
 	items = []
 	events = [
