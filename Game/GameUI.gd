@@ -8,7 +8,7 @@ var buttons: Array = []
 var buttonsCountPerPage: int = 15
 var optionButtonScene: PackedScene = preload("res://Game/SceneOptionButton.tscn")
 onready var optionButtonsContainer = $HBoxContainer/VBoxContainer2/HBoxContainer/GridContainer
-var currentPage = 0
+var currentPage:int = 0
 var options: Dictionary = {}
 var optionsCurrentID = 0
 var buttonsNeedUpdating = false
@@ -588,3 +588,17 @@ func _on_CloseFullArtWork_pressed():
 
 func showHornyMessage(theMessage: String):
 	hornyMessage.showMessageOnScreen(theMessage)
+
+func getCurrentPage() -> int:
+	return currentPage
+
+func setCurrentPage(newCurrentPage:int):
+	var maxpages:int = int(ceil(float(options.size())/float(buttonsCountPerPage)))
+	if(newCurrentPage > maxpages):
+		newCurrentPage = maxpages
+	if(newCurrentPage < 0):
+		newCurrentPage = 0
+	
+	currentPage = newCurrentPage
+	
+	updateButtons()
