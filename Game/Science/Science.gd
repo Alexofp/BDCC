@@ -734,6 +734,46 @@ func getAmountOfUnlockedMainUpgrade() -> int:
 	
 	return result
 
+func doMilkCharacterCustom(theChar:BaseCharacter, bodypartSlot, howMuch:float = 1.0, showMessage:bool = true):
+	howMuch = clamp(howMuch, 0.0, 1.0)
+	if(!theChar.hasBodypart(bodypartSlot)):
+		return 0.0
+	var fluidsGot:Dictionary = {}
+	
+	if(bodypartSlot in [BodypartSlot.Penis, BodypartSlot.Breasts]):
+		var thePart:Bodypart = theChar.getBodypart(bodypartSlot)
+		var theFluids:Fluids = thePart.getFluids()
+		if(theFluids == null):
+			return 0.0
+		var fluidsByType:Dictionary = theFluids.getFluidAmountByType()
+		for fluidID in fluidsByType:
+			if(!fluidsGot.has(fluidID)):
+				fluidsGot[fluidID] = 0.0
+			fluidsGot[fluidID] += fluidsByType[fluidID] * howMuch
+		theFluids.drainPercent(howMuch)
+		
+		thePart.getFluidProduction().afterMilked()
+	if(bodypartSlot == BodypartSlot.Vagina):
+		var fluidAmount:float = theChar.getFluidAmount(FluidSource.Vagina)
+		var fluidType:String = theChar.getFluidType(FluidSource.Vagina)
+		if(!fluidsGot.has(fluidType)):
+			fluidsGot[fluidType] = 0.0
+		fluidsGot[fluidType] += fluidAmount * howMuch
+	
+	var totalFluid:float = 0.0
+	for fluidType in fluidsGot:
+		totalFluid += fluidsGot[fluidType]
+	
+	if(showMessage):
+		for fluidType in fluidsGot:
+			var fluidObj:FluidBase = GlobalRegistry.getFluid(fluidType)
+			if(!fluidObj):
+				continue
+			var fluidAmStr:String = str(Util.roundF(fluidsGot[fluidType], 1))
+			GM.main.addMessage(fluidAmStr+" of "+fluidObj.getVisibleName()+" got collected from "+theChar.getName())
+	
+	return totalFluid
+		
 func doMilkPlayer():
 	return doMilkCharacter(GM.pc)
 

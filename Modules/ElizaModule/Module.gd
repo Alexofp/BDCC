@@ -43,6 +43,8 @@ func _init():
 		"res://Modules/ElizaModule/Science/ElizaGenericNPCTestDrugScene.gd",
 		"res://Modules/ElizaModule/Science/ElizaHelpGotTransformedScene.gd",
 		
+		"res://Modules/ElizaModule/Eliza/ElizaSexMenuScene.gd",
+		
 		"res://Modules/ElizaModule/DrugTesting/ElizaDrugTestDemoniXScene.gd",
 		]
 	characters = [
