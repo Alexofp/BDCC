@@ -9,6 +9,7 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		saynn("What kinky stuff do you want to do with Eliza?")
 
+		addButtonWithChecks("Vaginal", "Lock Eliza to the fancy table and fuck her!", "vag_start", [], [[ButtonChecks.HasReachablePenis]])
 		if (!getCharacter("eliza").hasEffect(StatusEffect.SoreNipplesAfterMilking)):
 			addButton("Milk her", "Why should you be the one who provides all the fluids? Time to milk Eliza!", "sex_milkher")
 		else:
@@ -52,8 +53,8 @@ func _run():
 
 			saynn("[say=eliza]I'm not really lactating.. but that will just require a small detour~.[/say]")
 
-			addButton("Detour", "See what Eliza will do about this problem", "in_lab")
-	if(state == "in_lab"):
+			addButton("Detour", "See what Eliza will do about this problem", "in_lab_milking")
+	if(state == "in_lab_milking"):
 		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		aimCameraAndSetLocName("med_researchlab")
 		saynn("You follow Eliza into her lab.")
@@ -94,6 +95,7 @@ func _run():
 
 		addButton("Milking room", "Find a milking stall for Eliza", "milking_stall")
 	if(state == "milking_stall"):
+		addCharacter("eliza", ["naked"])
 		aimCameraAndSetLocName("med_milkingroom")
 		playAnimation(StageScene.Duo, "stand", {npc="eliza", npcBodyState={exposedChest=true}})
 		GM.pc.setLocation("med_milkingroom")
@@ -123,8 +125,8 @@ func _run():
 
 		saynn("[say=pc]Let's get you locked up.[/say]")
 
-		addButton("Lock her", "Lock Eliza in the milking stall", "do_lock")
-	if(state == "do_lock"):
+		addButton("Lock her", "Lock Eliza in the milking stall", "do_lock_milking")
+	if(state == "do_lock_milking"):
 		playAnimation(StageScene.MilkingStallDuo, "start", {pc="eliza", npc="pc", bodyState={exposedChest=true}})
 		saynn("Eliza puts some extra sway into her hips as you bring her closer to the spot. Your hand lands on her fluffy back.. and begins putting some pressure, inviting the feline to bend forward. She obeys, following your touch with great interest sparking in her eyes.")
 
@@ -248,7 +250,191 @@ func _run():
 		saynn("You look around.. and notice that one of the neighbour stalls is configured for a different kind of milking.. it has a grated platform with a sybian machine on it.")
 
 		addButton("Enough", "That was enough for now", "stop_milking")
-		addButton("Sybian", "Milk Eliza's pussy as well", "sybian_milking")
+		addButton("Pussy milking", "Milk Eliza's pussy as well by using that sybian", "sybian_milking")
+	if(state == "sybian_milking"):
+		playAnimation(StageScene.Beg, "beg", {pc="eliza", npc="pc", bodyState={naked=true, hard=true}})
+		saynn("There is one more thing you wanna do with that milky feline.")
+
+		saynn("First, you gotta get her out of this stall. Eliza is panting and nuzzles her cheek against your hands as you unlock her wrists.")
+
+		saynn("[say=eliza]That was fun..[/say]")
+
+		saynn("[say=pc]The fun is not over yet.[/say]")
+
+		saynn("[say=eliza]Ohh..[/say]")
+
+		saynn("Her body barely listens to her.. leaving her kneeling in front of you after being unlocked.")
+
+		saynn("[say=pc]Let me see something.[/say]")
+
+		saynn("You lean down and begin pulling off her garter belt and the lace panties, what's left of her clothes.")
+
+		saynn("[say=eliza]M-moo?..[/say]")
+
+		saynn("[say=pc]Spread your legs for me.[/say]")
+
+		saynn("Eliza's obedience shines through, making her fulfil your order, revealing.. some careful pink pussy lips that have been soaking that black cloth with her juices this whole time. Eliza is looking.. needy.. with multiple beads of her juices hanging off of her neglected folds.")
+
+		saynn("[say=pc]Let's get you to a different stall.[/say]")
+
+		saynn("She doesn't even need a leash, crawling by your side as you head towards the stall with a different setup, swaying her hips and letting her udders dangle beneath her.")
+
+		saynn("Eliza's eyes light up when sees the sybian. The machine that looks like a comfy seat.. but with a ridged little platform and a small dildo in a place exactly where someone's private bits would be.")
+
+		saynn("[say=eliza]Oh my..[/say]")
+
+		saynn("[say=pc]Gonna milk you for everything you've got, understand?[/say]")
+
+		saynn("She bites her lip as you begin chaining her up to the machine.")
+
+		saynn("[say=eliza]..of course.. yes..[/say]")
+
+		saynn("You notice that there is also a set of electric breast pumps hanging nearby, with bendable tubes that are connected to all the ceiling piping. This place is such a milking heaven.. Might as well fully automate it all, right?")
+
+		addButton("Sybian", "Prepare Eliza..", "milking_tie_to_sybian")
+	if(state == "milking_tie_to_sybian"):
+		playAnimation(StageScene.SybianOral, "ride", {pc="eliza", npc="pc", chained=true, bodyState={naked=true, hard=true}})
+		saynn("You secure Eliza to the machine with some cuffs and chains, making her completely helpless yet again. Her neck also receives a collar with a metal leash that's connected to the floor.. all to make sure her body is positioned perfectly for what will come next.")
+
+		saynn("You grab and carefully attach 2 automatic breast pumps to her sensitive breasts.. which get glued to her swollen nips after they suck out some air.")
+
+		saynn("[say=eliza]I don't think I have any milk in my udders l-left..[/say]")
+
+		saynn("[say=pc]We will see, little cow.[/say]")
+
+		saynn("You turn them out.. and they respond instantly, proceeding to do slow rhythmic suctions, eager to pull the creamy fluids out.")
+
+		saynn("[say=eliza]Ah..[/say]")
+
+		saynn("Repetitive mechanical noise of sucking gets mingled with Eliza's cute moans as the pumps visibly tug on her nips.. again and again.. There are some drops of white milky stuff that your hand milking has missed.. but most of it seems fruitless.")
+
+		saynn("It makes Eliza squirm a lot though, her body pushing against the chains, her eyes looking slightly spaced out, her tongue out as her breasts get stimulated again and again.")
+
+		saynn("[say=eliza]Mhh.. ah.. please.. I w-wanna cum so much..[/say]")
+
+		saynn("Her neglected pussy begins to coat the sybian under her with her juices. She tries to hump the little dildo that she is sitting on.. but the chains limit her range of actions to pretty much nothing.")
+
+		addButton("Turn sybian on", "See what happens..", "milking_sybian_turn_on")
+	if(state == "milking_sybian_turn_on"):
+		playAnimation(StageScene.SybianOral, "intense", {pc="eliza", npc="pc", chained=true, bodyState={naked=true, hard=true}})
+		saynn("You grab a little remote.. and twist a knob.. sending the sybian machine into action. Its deep, steady vibrations begin to work against Eliza's already aroused pussy. Her clit gets stimulated by the moving ridges pressed against it.. while a small, vibrating dildo, strategically placed to tease her inner walls, sends a whole wave of pleasure pulses that mix with the unyielding pumping of her breasts.")
+
+		saynn("[say=eliza]Ah f-fuck.. ah.. Ah-h.. ah..[/say]")
+
+		saynn("Her body reacts instantly, her face switches to pure bliss as loud moans begin to slip past her lips, one after another. Her every muscle seems to be trembling, her hips bucking against the restraints as the sybian's vibrations push her deeper into this crazy den of pleasure.")
+
+		saynn("[say=eliza]I'm g-gonna.. gg-gonna.. Ah-h-h..[/say]")
+
+		saynn("[say=pc]Cum for me, cow.[/say]")
+
+		saynn("The relentless stimulation makes her squirm.. and soon.. she reaches an explosive climax. Eliza throws her head back and lets out a passionate love noise while her pulsing pussy gushes with girlcum, overstimulation making her body give up and completely let go.")
+
+		saynn("So much wetness.. it all begins to sip through the grated platform, collected by the giant fluid hopper underneath.")
+
+		saynn("The pumps are still working on her tits.. And as soon as her body gets pushed into this climactic state, her udders suddenly burst with two steady rivers of milk. The pumps just keep drawing more and more of that juice out, working on her stiff nips.")
+
+		saynn("[say=pc]See? You're such a good cow.[/say]")
+
+		saynn("[say=eliza]Ah.. moo-o-o..[/say]")
+
+		saynn("You see no thoughts behind her green eyes.. only.. pleasure.. complete submission.")
+
+		saynn("It doesn't take long for the next orgasm.. Eliza throws her head back again, letting the chains catch her body while her pussy squirts again, muscles throbbing while a little fountain of juices spawns between her wet legs, all neatly collected by the contraption beneath.")
+
+		saynn("And each time it happens, her milk flow increases again.. a cycle that keeps Eliza in her state of complete and total sensory overload. No thinking.. no distractions.. only constant, mindless milking.")
+
+		saynn("[say=eliza]Moo.. hh.. nhh-.. moo..[/say]")
+
+		saynn("Orgasm after orgasm, the machines are slowly wearing Eliza out, exhausting her already tired body until her eyes begin to shut on their own.")
+
+		saynn("A good place to stop, probably. For real, this time.")
+
+		addButton("Enough", "Stop milking the poor kitty", "stop_milking_after_all")
+	if(state == "stop_milking_after_all"):
+		playAnimation(StageScene.SybianOral, "ride", {pc="eliza", npc="pc", chained=true, bodyState={naked=true, hard=true}})
+		saynn("Finally, you turn off the sybian machine.. as well as the breast pumps.")
+
+		saynn("As the constant stimulation stops, Eliza is left panting heavily.")
+
+		saynn("[say=eliza]Mhh.. h-.. h..[/say]")
+
+		saynn("Barely making any noise.. she is just.. spent..")
+
+		saynn("Gently, you pull each pump off of her breasts.. Her nips are looking more red than pink after all this milking.")
+
+		saynn("[say=pc]How are you feeling?[/say]")
+
+		saynn("[say=eliza]I'mma.. ammakay..[/say]")
+
+		saynn("She certainly doesn't look so. You give her some scritches behind the ears.. and feel her raspy purr.")
+
+		saynn("[say=pc]You made a lot of milk for us. Such a good cow.[/say]")
+
+		saynn("[say=eliza]Moo~..[/say]")
+
+		saynn("You give her time to come back to her senses. There isn't any comfortable furniture around.. so this seat that she is sitting on will have to do.")
+
+		saynn("[say=eliza]You.. really milked me.. wow..[/say]")
+
+		saynn("[say=pc]I picked up a few tricks from being your assistant.[/say]")
+
+		saynn("A small, tired smile appears on her face.")
+
+		saynn("[say=pc]Gotta say, I like you with a collar.[/say]")
+
+		saynn("[say=eliza]Pff.. I will pat you.. after I'm done riding your face..[/say]")
+
+		saynn("She throws her head back and lets out a silly giggle, her tits bouncing slightly.")
+
+		saynn("[say=eliza]Every muscle hurts, hah.. I might need a stronger coffee today..[/say]")
+
+		addButton("Unchain her", "Might as well", "milking_unchain_after_all")
+	if(state == "milking_unchain_after_all"):
+		playAnimation(StageScene.Duo, "stand", {npc="eliza", npcBodyState={naked=true}})
+		saynn("You begin to undo the chains, slowly freeing Eliza's limbs one by one.")
+
+		saynn("As much as you don't wanna do it, you also unlock the collar and take it off of her neck.")
+
+		saynn("Her body barely listens to her.. so you help her to get up.")
+
+		saynn("[say=pc]There we go. Thank you for your contribution, let's hope it won't be the last one.[/say]")
+
+		saynn("She squints at your playful tone.. and reaches her paw to pat you on the head.")
+
+		saynn("[say=eliza]You're welcome. I really need a shower now.. so, if you excuse moo~..[/say]")
+
+		saynn("Her cheeks blush deeply.")
+
+		saynn("[say=eliza]I mean.. Me.. excuse me..[/say]")
+
+		saynn("She slowly walks past you. You only hear..")
+
+		saynn("[say=eliza]..fuck that was amazing..[/say]")
+
+		saynn("..before Eliza steps out of the stall and heads towards the exit.. still naked..")
+
+		saynn("That was fun.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "vag_start"):
+		saynn("You ask Eliza a question without much thought.")
+
+		saynn("[say=pc]How about a quickie?[/say]")
+
+		saynn("Eliza arches an eyebrow and smirks, the tip of her tongue licking her fang.")
+
+		saynn("[say=eliza]Oh yeah? Think you can handle me~?[/say]")
+
+		saynn("She puts her coffee mug away.")
+
+		saynn("[say=pc]Yes.[/say]")
+
+		saynn("A soft chuckle is heading your way. That cheeky cat..")
+
+		addButton("Grab her", "Bring her somewhere more secluded", "vag_table")
+	if(state == "vag_table"):
+		playAnimation(StageScene.SexPinnedBehind, "tease", {pc="pc", npc="eliza", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		addCharacter("eliza", ["naked"])
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -263,12 +449,12 @@ func _react(_action: String, _args):
 		runScene("ElizaTalkScene")
 		return
 
-	if(_action == "in_lab"):
+	if(_action == "in_lab_milking"):
 		getCharacter("eliza").induceLactation()
 		processTime(15*60)
 		getCharacter("eliza").fillBreasts()
 
-	if(_action == "do_lock"):
+	if(_action == "do_lock_milking"):
 		processTime(3*60)
 
 	if(_action == "begin_milking"):
@@ -289,6 +475,31 @@ func _react(_action: String, _args):
 		GM.pc.addSkillExperience(Skill.Milking, 20)
 
 	if(_action == "sybian_milking"):
+		processTime(3*60)
+
+	if(_action == "milking_tie_to_sybian"):
+		getCharacter("eliza").getInventory().forceEquipRemoveOther(GlobalRegistry.createItem("BreastPump"))
+		getCharacter("eliza").getInventory().forceEquipRemoveOther(GlobalRegistry.createItem("oldcollar"))
+		getCharacter("eliza").getInventory().forceEquipRemoveOther(GlobalRegistry.createItem("inmatewristcuffs"))
+		getCharacter("eliza").getInventory().forceEquipRemoveOther(GlobalRegistry.createItem("inmateanklecuffs"))
+
+	if(_action == "milking_sybian_turn_on"):
+		processTime(15*60)
+		GM.main.SCI.doMilkCharacterCustom(getCharacter("eliza"), BodypartSlot.Vagina)
+		getCharacter("eliza").fillBreasts(1.0)
+		getCharacter("eliza").fillBreasts(1.0)
+		GM.main.SCI.doMilkCharacterCustom(getCharacter("eliza"), BodypartSlot.Breasts)
+		GM.pc.addSkillExperience(Skill.Milking, 20)
+
+	if(_action == "stop_milking_after_all"):
+		processTime(3*60)
+		getCharacter("eliza").getInventory().clearSlot(InventorySlot.UnderwearTop)
+		getCharacter("eliza").addEffect(StatusEffect.SoreNipplesAfterMilking)
+
+	if(_action == "milking_unchain_after_all"):
+		getCharacter("eliza").resetEquipment()
+
+	if(_action == "vag_table"):
 		processTime(3*60)
 
 	setState(_action)
