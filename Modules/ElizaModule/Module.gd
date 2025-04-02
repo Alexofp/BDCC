@@ -18,6 +18,7 @@ func getFlags():
 		"dateOutcome": flag(FlagType.Text), # perfect failed refused
 		
 		"storyCompleted": flag(FlagType.Bool),
+		"scarletProgress": flag(FlagType.Number),
 	}
 
 func _init():
