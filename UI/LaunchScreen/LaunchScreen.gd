@@ -399,3 +399,20 @@ func _on_ModBrowser_closePressed():
 
 func _on_OpenModsFolder_pressed():
 	var _ok = OS.shell_open(ProjectSettings.globalize_path("user://mods"))
+
+func _input(event):
+	if(event.is_action_pressed("ui_down")):
+		onModEntryClicked(currentModOrder[currentModOrder.find(selectedEntry)+1])
+		return
+	if(event.is_action_pressed("ui_up")):
+		onModEntryClicked(currentModOrder[currentModOrder.find(selectedEntry)-1])
+		return
+	if(event.is_action_pressed("ui_select")):
+		$VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/ModDisableButton.emit_signal("pressed")
+		return
+	if(event.is_action_pressed("ui_left")):
+		$VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/MoveUpButton.emit_signal("pressed")
+		return
+	if(event.is_action_pressed("ui_right")):
+		$VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/MoveDownButton.emit_signal("pressed")
+		return
