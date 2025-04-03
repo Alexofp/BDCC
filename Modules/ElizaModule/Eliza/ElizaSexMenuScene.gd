@@ -725,7 +725,7 @@ func _run():
 
 		addButton("Intro", "Ask Eliza where her mother is currently", "s1_start")
 		if (scarletProgress >= 1):
-			addButton("Milking", "Let them milk each other", "s123_milking")
+			addButton("Milking", "Watch them milk each other", "s2_milking")
 		else:
 			addDisabledButton("Milking", "You haven't reached this point yet")
 		addButton("Back", "You changed your mind", "")
@@ -977,6 +977,288 @@ func _run():
 
 		GM.pc.setLocation("hall_mainentrance")
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "s2_milking"):
+		saynn("You're standing near Eliza's counter. She seems to be filling out some kind of reports, her mind distracted. But one close look from you is enough to make her blush.")
+
+		saynn("[say=eliza]What?..[/say]")
+
+		saynn("[say=pc]Nothing~.[/say]")
+
+		saynn("She puts the reports away and pouts at you.")
+
+		saynn("[say=eliza]I know what you're thinking.[/say]")
+
+		saynn("[say=pc]And what is that?[/say]")
+
+		saynn("[say=eliza]You're judging me![/say]")
+
+		saynn("She is still quite tense about what happened.")
+
+		saynn("[say=pc]Relax. It's up to you what you do with your mother.[/say]")
+
+		saynn("Blush creeps onto her face as she lowers her gaze.")
+
+		saynn("[say=pc]I'm an inmate here, I am the one who got judged.[/say]")
+
+		saynn("[say=eliza]Pff![/say]")
+
+		saynn("She sips some of her coffee.. her eyes pausing on the words that are written on it.")
+
+		saynn("[say=pc]How do you feel about it?[/say]")
+
+		saynn("[say=eliza]I don't know.. I'd rather not think about it..[/say]")
+
+		saynn("[say=pc]Maybe you wanna go pay her a visit?[/say]")
+
+		saynn("She squints at you.")
+
+		saynn("[say=pc]What?[/say]")
+
+		saynn("[say=eliza]You just wanna see us together![/say]")
+
+		saynn("You smile and shrug.")
+
+		saynn("[say=pc]You were pretty cute together.[/say]")
+
+		saynn("Her lips are trembling, her fists clenched. Your smug smile makes her expression soften up a bit.")
+
+		saynn("[say=pc]C'mon, you're trying to block these intrusive thoughts for some reason. Why not just talk it through with her.[/say]")
+
+		saynn("Eliza blinks a lot.. then lowers her gaze again.")
+
+		saynn("[say=eliza]She called me already..[/say]")
+
+		saynn("[say=pc]And?[/say]")
+
+		saynn("She stays quiet for a while.")
+
+		saynn("[say=eliza]I didn't answer..[/say]")
+
+		saynn("[say=pc]Why not?[/say]")
+
+		saynn("[say=eliza]I don't know! It's weird..[/say]")
+
+		saynn("[say=pc]What is?[/say]")
+
+		saynn("[say=eliza]You know what.. She's my mother..[/say]")
+
+		saynn("It's a fair point.")
+
+		saynn("[say=pc]I thought you're a kinky one.[/say]")
+
+		saynn("[say=eliza]Well, I guess you found my limit.[/say]")
+
+		saynn("The impossible has been achieved. Looks like you're not having another show today though..")
+
+		saynn("[say=pc]Then just say no to her. I'm sure she will understand, she seemed like a smart woman.[/say]")
+
+		saynn("Eliza stares somewhere into the distance, a million thoughts probably rushing through her mind.")
+
+		saynn("Suddenly, the elevator doors open..")
+
+		addButton("Continue", "See what happens next", "s2_scarlet_elevator")
+	if(state == "s2_scarlet_elevator"):
+		addCharacter("elizaMom")
+		playAnimation(StageScene.Duo, "stand", {pc="elizaMom", npc="eliza"})
+		saynn("The elevator doors reveal.. Scarlet Quinn. Alone this time, lacking her usual personal army.")
+
+		saynn("[say=eliza]Speak of the devil..[/say]")
+
+		saynn("Scarlet slowly approaches the counter, sending quick nods to both you and her daughter.")
+
+		saynn("[say=elizaMom]Hello-o. I called you earlier, sweetheart.[/say]")
+
+		saynn("Eliza sighs.")
+
+		saynn("[say=eliza]Mom.. uh.. can we just not..[/say]")
+
+		saynn("Scarlet's hand gently reaches out to scritch Eliza behind the ear. The feline doesn't pull away.. but doesn't lean into it either.")
+
+		saynn("[say=elizaMom]I understand, sweetie. I was calling for a different reason.[/say]")
+
+		saynn("Eliza looks at Scarlet and tilts her head subtly. Her blush returns when she notices that something is different about her.")
+
+		saynn("[say=eliza]I think I see it..[/say]")
+
+		saynn("Scarlet chuckles, her chest bounces a bit, the jiggle echoing in her ample breasts.")
+
+		saynn("[say=elizaMom]Remember when I said I forgot my personal breast pump? Yeah, it's getting bad now. I'm itching there a lot..[/say]")
+
+		saynn("[say=eliza]I can spare one from our reserves, hang on..[/say]")
+
+		saynn("Scarlet catches Eliza's hand before she leaves. The gesture makes them both blush.")
+
+		saynn("[say=elizaMom]I'd feel very weird using a pump that someone else used before. Even if it was cleaned a million times.[/say]")
+
+		saynn("She looks around and shivers.")
+
+		saynn("[say=elizaMom]This whole place is kinda.. yeah.. I'm sure you're taking good care of it. But it's far from a controlled, sterile environment that I'm used to.[/say]")
+
+		saynn("Eliza blinks a few times.")
+
+		saynn("[say=eliza]What do you propose then?..[/say]")
+
+		saynn("Scarlet hums while tapping on her chin.")
+
+		saynn("[say=elizaMom]I saw that you have a special room for this. Maybe I could use some of that.. famous personal touch.. you know?[/say]")
+
+		saynn("Eliza's eyes go wide, her ears turning down as the blush invades her whole face again.")
+
+		saynn("She takes her time, trying to come up with the right words.")
+
+		saynn("[say=eliza]I don't think I can do that for you.. sorry..[/say]")
+
+		saynn("Scarlet stares at her daughter with kind eyes, her tone casual.")
+
+		saynn("[say=elizaMom]I still remember you suckling on my breasts when you were just a little kitten.. It was so cute. C'mon, you'd be just helping your mother with this.. annoying feeling.[/say]")
+
+		saynn("Eliza's lips are trembling. Poor feline is put into such a weird spot. She gives you a quick look.")
+
+		saynn("[say=eliza]Sorry.. I shouldn't..[/say]")
+
+		saynn("Scarlet sighs, her hand gently pets Eliza.")
+
+		saynn("[say=elizaMom]That's okay, my dear.[/say]")
+
+		saynn("Her red eyes put their attention on you.")
+
+		saynn("[say=elizaMom]Can you maybe help me then~?[/say]")
+
+		saynn("Scarlet slowly closes the distance and leans in slightly, offering a great view. It catches you off-guard.")
+
+		saynn("[say=pc]Uh..[/say]")
+
+		saynn("[say=elizaMom]You're her assistant, right?[/say]")
+
+		saynn("[say=pc]Yeah.[/say]")
+
+		saynn("Eliza decides to bring herself back into the conversation.")
+
+		saynn("[say=eliza]{pc.He} doesn't have access to all the equipment..[/say]")
+
+		saynn("[say=elizaMom]But who does?[/say]")
+
+		saynn("[say=eliza]..me..[/say]")
+
+		saynn("Eliza blinks a lot while both, you and Scarlet, are looking at her.")
+
+		saynn("[say=eliza]..I guess I can show it, follow me.[/say]")
+
+		addButton("Follow", "See where Eliza brings you and Scarlet", "s2_in_milking_room")
+	if(state == "s2_in_milking_room"):
+		aimCameraAndSetLocName("med_milkingroom")
+		GM.pc.setLocation("med_milkingroom")
+		saynn("Eliza brings you to the big open space that has a very specific purpose. The ceiling has many pipes running through it, connecting the many stalls on one side of the room to the giant fluid tanks on the other.")
+
+		saynn("She guides you and Scarlet into one of the stalls.. and then also brings a small milk tank.")
+
+		saynn("[say=eliza]There you go.[/say]")
+
+		saynn("Scarlet looks around, her hand slides along the metal pipes, catching some dust that she is quick to shake off.")
+
+		saynn("[say=elizaMom]Can you make sure everything goes smoothly, sweetie?[/say]")
+
+		saynn("Eliza blinks.")
+
+		saynn("[say=eliza]Is that really needed?..[/say]")
+
+		saynn("Scarlet approaches her daughter and leans in slightly, an innocent smile illuminating her face.")
+
+		saynn("[say=elizaMom]I'm just asking you to watch. Can you do that for me, pretty please?[/say]")
+
+		saynn("Eliza swallows audibly.")
+
+		saynn("[say=eliza]I can do that..[/say]")
+
+		saynn("[say=elizaMom]Thank you~.[/say]")
+
+		saynn("Scarlet begins undressing..")
+
+		addButton("Continue", "See what happens next", "s2_scarlet_naked")
+	if(state == "s2_scarlet_naked"):
+		addCharacter("elizaMom", ["naked"])
+		playAnimation(StageScene.Duo, "stand", {npc="elizaMom", npcBodyState={naked=true}})
+		saynn("She takes off her lab coat and hands it to her daughter. Next comes the pink top and pencil skirt, revealing her fancy underwear. And yeah, that bra that she has.. it feels like it will burst at any second.. The fabric can barely contain the giant overflowing breasts. Not the first time that you see her like this.")
+
+		saynn("Eliza watches as Scarlet pulls off her bra, exposing the two beauties that bounce down and sag slightly after being set free. Her areolas have that dark red color to them.. with little drops of milk already showing up all around the sensitive surface.. Scarlet doesn't seem to mind you watching her.. closely..")
+
+		saynn("She takes off her panties and the garter belt too.. ending up completely naked in front of you two.")
+
+		saynn("[say=elizaMom]Well.. Guide me.[/say]")
+
+		saynn("Eliza points at the special spot where she left the milk tank. Scarlet looks at you, slightly tilting her head and smiling.")
+
+		addButton("Lock her up", "Prepare Scarlet to be milked", "s2_prepare_scarlet")
+	if(state == "s2_prepare_scarlet"):
+		playAnimation(StageScene.MilkingStallDuo, "start", {pc="elizaMom", npc="pc", bodyState={naked=true}})
+		saynn("You bring Scarlet to the right spot.. where there are some pipes to hold onto. Although, in this particular case, the main pipe has special cuffs-like restraints attached to it. You unlock them.. and then begin to guide Scarlet to bend forward, gently putting pressure on her back.")
+
+		saynn("[say=elizaMom]Kinky. I love the setup that you have here~.[/say]")
+
+		saynn("Eliza blushes while Scarlet purrs softly and obeys your touch, obediently placing her wrists into the spots for them. You make sure everything is in its rightful place before locking the cuffs, restraining Eliza's mother in the stall.")
+
+		saynn("[say=eliza]It was.. my idea..[/say]")
+
+		saynn("[say=elizaMom]Maybe I should ask something like this to be built in my lab~.[/say]")
+
+		saynn("You kneel in front of Scarlet and watch how her breasts, heavy and full, dangle underneath her.. from this angle.. they look more like.. something else..")
+
+		saynn("Scarlet's eyes lock with yours.")
+
+		saynn("[say=elizaMom]They're itching so much~.[/say]")
+
+		saynn("Best not to keep her waiting then.")
+
+		addButton("Milk Scarlet", "Proceed with the milking", "s2_pc_milks_scarlet")
+	if(state == "s2_pc_milks_scarlet"):
+		playAnimation(StageScene.MilkingStallDuo, "milk", {pc="elizaMom", npc="pc", bodyState={naked=true}})
+		saynn("With a careful touch, you reach your hands out and begin to work on Scarlet's breasts. Your palms start by exploring her soft, heavy curves, gently massaging and cupping them, testing their weight. You hear Scarlet's breathing getting slightly deeper, she is biting her lip while watching you work your magic.")
+
+		saynn("It doesn't take long.. As you apply some pressure on her swollen nipples, pinching them slightly, the milk begins to emerge from it.. spawning in little rivers all around her areolas. It drips down into the opened tank underneath.. plap.. plap.. plap-plap..")
+
+		saynn("[say=elizaMom]Mmm~..[/say]")
+
+		saynn("You keep the flow steady, gently kneading Scarlet's breasts, squeezing and occasionally pinching the stiff nips more. A series of quiet, almost imperceptible moans escape from the woman as the milking continues.. her eyes just keep watching you.. sparks of lust shining in them.")
+
+		saynn("With the corner of your eyes, you notice Eliza. She is leaning against the wall of the stall, the tip of her tongue poking slightly, sliding along her lower lip. Her gaze is also quite.. interested.")
+
+		saynn("[say=elizaMom]..mm.. yeah.. just like that.. milk those udders..[/say]")
+
+		saynn("She is quite kinky, this woman.. But you obey, putting a little more pressure, squeezing those giant hanging udders, drawing out more of that white nectar. There is no end to it, seemingly.. the fluid level in the tank rising steadily.")
+
+		saynn("You keep going as long as you can, kneading and massaging Scarlet's breasts.. milking them.. until you begin panting.")
+
+		saynn("[say=pc]Wow, I think I'm getting tired.[/say]")
+
+		saynn("[say=elizaMom]And I still feel like I'm full~.[/say]")
+
+		saynn("Yeah.. as you weigh her breasts.. they're pretty much just as heavy.")
+
+		saynn("[say=pc]We might need some breast pumps for those beauties.. industrial ones.[/say]")
+
+		saynn("[say=elizaMom]Haha.[/say]")
+
+		saynn("[say=eliza]Can I try?..[/say]")
+
+		saynn("Eliza approaches you and Scarlet, her gaze low, tail wrapped around her leg.")
+
+		saynn("[say=elizaMom]You wanna help, sweetie?[/say]")
+
+		saynn("[say=eliza]..yeah..[/say]")
+
+		saynn("[say=elizaMom]Please, I'd love you to do it.[/say]")
+
+		saynn("Yay, your hands can get some rest now.")
+
+		addButton("Continue", "See what happens next", "s2_eliza_takes_spot")
+	if(state == "s2_eliza_takes_spot"):
+		playAnimation(StageScene.MilkingStallDuo, "start", {pc="elizaMom", npc="eliza", bodyState={naked=true}})
+		saynn("You get up and offer your spot for Eliza, instead just leaning against the stall's wall like she did.")
+
+		saynn("Ohh.. the view from this spot.. Scarlet's tail is pulled to the side slightly, revealing her tasty-looking red flower.. her dripping, wet pussy.. Looks like the milking has made her quite horny.")
+
+		saynn("Eliza kneels in front of her mother.")
+
 func addStraponButtons(thestate):
 	var strapons = GM.pc.getStrapons()
 	for strapon in strapons:
@@ -1108,6 +1390,29 @@ func _react(_action: String, _args):
 		processTime(3*60)
 
 	if(_action == "s1_run"):
+		processTime(3*60)
+
+	if(_action == "s2_scarlet_elevator"):
+		processTime(3*60)
+		getCharacter("elizaMom").induceLactation()
+		getCharacter("elizaMom").fillBreasts()
+		getCharacter("elizaMom").fillBreasts()
+
+	if(_action == "s2_in_milking_room"):
+		processTime(3*60)
+
+	if(_action == "s2_scarlet_naked"):
+		processTime(3*60)
+
+	if(_action == "s2_prepare_scarlet"):
+		processTime(3*60)
+
+	if(_action == "s2_pc_milks_scarlet"):
+		processTime(3*60)
+		GM.main.SCI.doMilkCharacterCustom(getCharacter("elizaMom"), BodypartSlot.Breasts, 0.3)
+		GM.pc.addSkillExperience(Skill.Milking, 20)
+
+	if(_action == "s2_eliza_takes_spot"):
 		processTime(3*60)
 
 	setState(_action)

@@ -109,7 +109,7 @@ func getCharDescription(theCharID:String) -> String:
 			var floorID:String = room.getFloorID()
 			desc += "\nCurrent location: "+getFloorName(floorID)
 	else:
-		desc += "\nCurrent location: Resting (Can meet)"
+		desc += "\nCurrent location: Resting (Can meet through the Encounters menu)"
 	
 	return desc
 
