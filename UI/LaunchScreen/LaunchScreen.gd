@@ -167,6 +167,7 @@ func onModEntryClicked(entry):
 	updateSelectedEntry()
 
 func updateSelectedEntry():
+	
 	if(selectedEntry == null):
 		if(OS.get_name() == "Android" && false):
 			if(!foundBDCC):
@@ -179,6 +180,8 @@ func updateSelectedEntry():
 		
 		modDescriptionLabel.bbcode_text = "No mod selected"
 		return
+	$VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/ModDisableButton.text = "Enable" if(selectedEntry['disabled']) else "Disable"
+
 	
 	var desc = ""
 	desc += "Mod name: "+selectedEntry["name"]+"\n"
@@ -247,9 +250,7 @@ func tryToPopulateFilesList():
 
 
 func _on_ModDisableButton_pressed():
-	if(selectedEntry == null):
-		return
-	if(selectedEntry["name"] == "BDCC.pck"):
+	if(selectedEntry == null or selectedEntry["name"] == "BDCC.pck"):
 		return
 	
 	selectedEntry["disabled"] = !selectedEntry["disabled"]
@@ -257,9 +258,7 @@ func _on_ModDisableButton_pressed():
 
 
 func _on_MoveUpButton_pressed():
-	if(selectedEntry == null):
-		return
-	if(selectedEntry["name"] == "BDCC.pck"):
+	if(selectedEntry == null or selectedEntry["name"] == "BDCC.pck"):
 		return
 	
 	var currentIndex = currentModOrder.find(selectedEntry)
@@ -274,9 +273,7 @@ func _on_MoveUpButton_pressed():
 
 
 func _on_MoveDownButton_pressed():
-	if(selectedEntry == null):
-		return
-	if(selectedEntry["name"] == "BDCC.pck"):
+	if(selectedEntry == null or selectedEntry["name"] == "BDCC.pck"):
 		return
 	
 	var currentIndex = currentModOrder.find(selectedEntry)
