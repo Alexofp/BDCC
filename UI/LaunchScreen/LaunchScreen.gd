@@ -3,6 +3,9 @@ extends Control
 onready var modDescriptionLabel = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/RichTextLabel
 onready var modVList = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/ModList
 onready var modFileList = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ModFileList
+onready var modDisableButton = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/ModDisableButton
+
+
 var launchModEntryScene = preload("res://UI/LaunchScreen/LaunchModEntry.tscn")
 
 var currentModOrder = []
@@ -180,7 +183,7 @@ func updateSelectedEntry():
 		
 		modDescriptionLabel.bbcode_text = "No mod selected"
 		return
-	$VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/ModDisableButton.text = "Enable" if(selectedEntry['disabled']) else "Disable"
+	modDisableButton.text = "Enable" if(selectedEntry['disabled']) else "Disable"
 
 	
 	var desc = ""
@@ -255,6 +258,7 @@ func _on_ModDisableButton_pressed():
 	
 	selectedEntry["disabled"] = !selectedEntry["disabled"]
 	updateModList()
+	updateSelectedEntry()
 
 
 func _on_MoveUpButton_pressed():
@@ -408,11 +412,11 @@ func _input(event):
 		onModEntryClicked(currentModOrder[currentModOrder.find(selectedEntry)-1])
 		return
 	if(event.is_action_pressed("ui_select")):
-		$VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/ModDisableButton.emit_signal("pressed")
+		_on_ModDisableButton_pressed()
 		return
 	if(event.is_action_pressed("ui_left")):
-		$VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/MoveUpButton.emit_signal("pressed")
+		_on_MoveUpButton_pressed()
 		return
 	if(event.is_action_pressed("ui_right")):
-		$VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/MoveDownButton.emit_signal("pressed")
+		_on_MoveDownButton_pressed()
 		return
