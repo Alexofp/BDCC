@@ -4,6 +4,8 @@ var isStrapon = false
 var hasCumInStrapon = false
 var straponHasCum = false
 var sexDidPullout = false
+var isAnal = false
+var hasPP = false
 
 func _init():
 	sceneID = "ElizaSexMenuScene"
@@ -1778,7 +1780,7 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {pc="eliza", npc="elizaMom", bodyState={naked=true}, npcBodyState={naked=true}})
 		saynn("As you open the door and step inside.. you are greeted by.. quite a scene.")
 
-		saynn("In the soft, ambient light of the room, both Scarlet and Eliza stand waiting in alluring poses. Not a single piece of cloth is covering their curvy tits.. or feminine hips.. but that doesn't mean they don't have anything on.. Both of them sport a strapon harness fitted snugly around their waists. The sparks in their eyes.. and the confident tilt of their hips.. imminates pure power.")
+		saynn("In the soft, ambient light of the room, both Scarlet and Eliza stand waiting in alluring poses. Not a single piece of cloth is covering their curvy tits.. or feminine hips.. but that doesn't mean they don't have anything on.. Both of them sport a strapon harness fitted snugly around their waists. The sparks in their eyes.. and the confident tilt of their hips.. imminates pure power.. for real.. their biceps and abs look way more defined than usually..")
 
 		saynn("Both women lock eyes with you.. their cunning smiles tell you so much..")
 
@@ -1790,7 +1792,7 @@ func _run():
 
 		saynn("Eliza follows her mother. Together, they surround you, Scarlet pushing you further into the center of the space with a playful hip-bump.. her curvy body making it easy.")
 
-		saynn("Their hands begin to wander over your {pc.masc} figure.. stripping you of anything that's strippable and teasing your curves.. Your cock has gotten hard in an instant.. but you get a feeling that you won't get to use it much..")
+		saynn("Their hands begin to wander over your {pc.masc} figure.. stripping you of anything that's strippable and teasing your curves.. "+str("Your cock has gotten hard in an instant.. but you get a feeling that you won't get to use it much.." if (hasPP && !GM.pc.isWearingChastityCage()) else "")+""+str("Your cock tries to get hard in its cage.. but the metal prevents it from doing so.." if (hasPP && GM.pc.isWearingChastityCage()) else "")+"")
 
 		saynn("Scarlet leans close to your ear, her voice is close to purring..")
 
@@ -1812,7 +1814,11 @@ func _run():
 
 		saynn("Scarlet's hand smacks your butt, sending it jiggling.")
 
-		saynn("[say=elizaMom]Since I'm bigger, I will take that ass.[/say]")
+		if (isAnal):
+			saynn("[say=elizaMom]Since I'm bigger, I will take that ass.[/say]")
+
+		else:
+			saynn("[say=elizaMom]Since I'm bigger, I will take that ass. Well, puss.[/say]")
 
 		saynn("[say=eliza]Throat is fine by me~.[/say]")
 
@@ -1896,11 +1902,11 @@ func _run():
 
 		saynn("[say=pc]Ah![/say]")
 
-		saynn("[say=elizaMom]See? Told you it would work.[/say]")
+		saynn("[say=elizaMom]See? Told you it would work. I know my chemistry.[/say]")
 
 		saynn("[say=eliza]Yeah, thanks for the recipe~.[/say]")
 
-		saynn("Scarlet holds your hips and already aligns her smooth, rubber cock to your {pc.analStretch} anus.. prodding it.. while Eliza holds your chest, her toy positioned right at your mouth.. the tip brushing against your lips.")
+		saynn("Scarlet holds your hips and already aligns her smooth, rubber cock to your "+str("{pc.analStretch} anus" if isAnal else "{pc.pussyStretch} pussy")+".. prodding it.. while Eliza holds your chest, her toy positioned right at your mouth.. the tip brushing against your lips.")
 
 		saynn("[say=eliza]Open that little cute mouth for me~.[/say]")
 
@@ -1917,7 +1923,7 @@ func _run():
 		addButton("Continue", "See what happens to your holes next", "s3_spit_sex")
 	if(state == "s3_spit_sex"):
 		playAnimation(StageScene.SexSpitroast, "sex", {pc="pc", npc="elizaMom", npc2="eliza", bodyState={naked=true, caged=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
-		saynn("With one powerful burst of energy, Scarlet rams her strapon inside your asshole, the tip stretching your anal ring so wide you can't help but to gasp, your body thrashing against their grips..")
+		saynn("With one powerful burst of energy, Scarlet rams her strapon inside your "+str("asshole" if isAnal else "cunt")+", the tip stretching your "+str("anal ring" if !isAnal else "pussy folds")+" so wide you can't help but to gasp, your body thrashing against their grips..")
 
 		saynn("[say=pc]AHh-hh![/say]")
 
@@ -1929,11 +1935,11 @@ func _run():
 
 		saynn("The pounding begins gradually, each thrust deliberate and powerful. Eliza's strapon enters deeply, the tip quickly encountering the back of your mouth and bending down your throat, causing your muscles there to tense up.. hard..")
 
-		saynn("You're already gagging on Eliza's toy while Scarlet is fucking your ass, her pre-lubed strapon spreading your inner walls and kneading them, each forceful insertion sending shockwaves of pleasure through your body.")
+		saynn("You're already gagging on Eliza's toy while Scarlet is fucking your "+str("ass" if !isAnal else "slit")+", her pre-lubed strapon spreading your inner walls and kneading them, each forceful insertion sending shockwaves of pleasure through your body.")
 
 		saynn("[say=pc]Nhh.. hh.. khh.. ghh!..[/say]")
 
-		saynn("Eliza puts one of her paws around your throat, feeling her rubber cock traveling back and forth along it.. The wet noises and gagging of your throat and the slaps of Scarlet's hips against your butt fill the room. Your locked away cock squirts with precum as your prostate gets smashed.. again and again..")
+		saynn("Eliza puts one of her paws around your throat, feeling her rubber cock traveling back and forth along it.. The wet noises and gagging of your throat and the slaps of Scarlet's hips against your butt fill the room."+str(" Your locked away cock squirts with precum as your prostate gets smashed.. again and again.." if (hasPP && isAnal) else "")+""+str(" Your locked away cock squirts with precum as your g-spot gets smashed.. again and again.." if (hasPP && !isAnal) else "")+"")
 
 		saynn("[say=eliza]I can see that you love it~.[/say]")
 
@@ -1952,7 +1958,7 @@ func _run():
 		addButton("Continue", "See what happens next", "s3_spit_fast")
 	if(state == "s3_spit_fast"):
 		playAnimation(StageScene.SexSpitroast, "fast", {pc="pc", npc="elizaMom", npc2="eliza", bodyState={naked=true, caged=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
-		saynn("As their pace quickens, the dual strapons begin to pound your throat and asshole with increased urgency. With each rapid, forceful movement, the fat knots of their strapons smash against your lips and anal ring, trying to stretch them wide enough..")
+		saynn("As their pace quickens, the dual strapons begin to pound your throat and "+str("asshole" if !isAnal else "cunt")+" with increased urgency. With each rapid, forceful movement, the fat knots of their strapons smash against your lips and "+str("anal ring" if !isAnal else "pussy petals")+", trying to stretch them wide enough..")
 
 		saynn("Scarlet's ample breasts are bouncing a lot while she is fucking you.. a sight that Eliza seems to be glued to. Both of their pussies are soaked with juices, the tight leather straps of the harnesses rub against their sensitive folds a little too much..")
 
@@ -1964,7 +1970,11 @@ func _run():
 
 		saynn("[say=elizaMom]But I'm willing to test your hypothesis anyway~.[/say]")
 
-		saynn("Your poor caged cock is twitching eagerly in its little prison.. leaking transparent prostate fluid.. while your pleasure button keeps being milked by Scarlet's thick strap.. Your throat and asshole clench wildly around the intruding shafts.. all the while the girls keep going keeper and deeper..")
+		if (hasPP):
+			saynn("Your poor caged cock is twitching eagerly in its little prison.. leaking transparent"+str(" prostate" if isAnal else "")+" fluid.. while your pleasure button keeps being milked by Scarlet's thick strap.. Your throat and "+str("asshole" if isAnal else "pussy")+" clench wildly around the intruding shafts.. all the while the girls keep going keeper and deeper..")
+
+		else:
+			saynn("All of your pleasure buttons keep being smashed by Scarlet's thick strap.. Your throat and "+str("asshole" if isAnal else "pussy")+" clench wildly around the intruding shafts.. all the while the girls keep going keeper and deeper..")
 
 		saynn("You are on the edge..")
 
@@ -1975,19 +1985,23 @@ func _run():
 
 		saynn("[say=elizaMom]Now, sweetie.[/say]")
 
-		saynn("In one, synchronized moment, they throw their hips forward, ramming their rubber cocks inside you, the fat rubber knots meeting the resistance in the form of your lips and ass.. but stretching them wide open enough to slip inside with a satisfying plop..")
+		saynn("In one, synchronized moment, they throw their hips forward, ramming their rubber cocks inside you, the fat rubber knots meeting the resistance in the form of your lips and "+str("ass" if isAnal else "cunt")+".. but stretching them wide open enough to slip inside with a satisfying plop..")
 
-		saynn("As their knots stretch you beyond belief, your body reaches its peak.. All your muscles begin to tense up and relax completely uncontrollably, you're gagging on that fat knot as your locked cock shoots a weak torrent of {pc.cum} through that little hole in the cage, sending desperate strings of your seed that land on your belly.. The inner walls of your ass clenching hard around that huge orb, the sensation makes your mind go completely blank..")
+		saynn("As their knots stretch you beyond belief, your body reaches its peak.. All your muscles begin to tense up and relax completely uncontrollably, you're gagging on that fat knot"+str(" as your locked cock shoots a weak torrent of {pc.cum} through that little hole in the cage, sending desperate strings of your seed that land on your belly" if hasPP else " hard")+".. The inner walls of your "+str("ass" if isAnal else "squirting pussy are")+" clenching hard around that huge orb, the sensation makes your mind go completely blank..")
 
 		saynn("[say=elizaMom]It's not over yet~.[/say]")
 
-		saynn("The extreme tightness that your body provides triggers something in their toys.. You can feel Eliza's and Scarlet's strapons throbbing inside you as they start pumping you full of some kind of thick cum-like lube. Waves after waves of that stuff floods your belly and ass.. their knots making sure that almost nothing escapes..")
+		saynn("The extreme tightness that your body provides triggers something in their toys.. You can feel Eliza's and Scarlet's strapons throbbing inside you as they start pumping you full of some kind of thick cum-like lube. Waves after waves of that stuff floods your belly and "+str("ass" if isAnal else "womb")+".. their knots making sure that almost nothing escapes..")
 
 		saynn("[say=elizaMom]Much better~.[/say]")
 
 		saynn("[say=eliza]Ah.. Mhh~.. I think I just came..[/say]")
 
-		saynn("Your orgasm just keeps going and going.. your balls twitching as your locked dick dribbles with the remains of your seed.. your prostate feels completely destroyed.. fat knot constantly squeezing it dry..")
+		if (hasPP):
+			saynn("Your orgasm just keeps going and going.. your balls twitch as your locked dick dribbles with the remains of your seed.. your "+str("prostate" if isAnal else "g-spot")+" feels completely destroyed.. fat knot constantly squeezing it dry..")
+
+		else:
+			saynn("Your orgasm just keeps going and going.. Your pleasure spot feels completely destroyed.. while a fat knot is constantly squeezing it.."+str(" Your pussy is gushing with juices until there is nothing for it to squirt with.." if !isAnal else "")+"")
 
 		saynn("Your throat is blocked too.. making you lose oxygen fast.. the world begins to look all rainbow-y..")
 
@@ -2000,12 +2014,391 @@ func _run():
 		playAnimation(StageScene.SexSpitroast, "tease", {pc="pc", npc="elizaMom", npc2="eliza", bodyState={naked=true, caged=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
 		saynn("[say=eliza]Mm.. Three![/say]")
 
-		saynn("They yank their cocks out.. leaving your asshole gaping and your throat stretched wide..")
+		saynn("They yank their cocks out.. leaving your "+str("asshole" if isAnal else "cunt")+" gaping and your throat stretched wide..")
 
-		saynn("You instantly start coughing and gagging on air, multiple gasps escape you while your pulsing ring spawns a fountain of that cum-lube for a few seconds..")
+		saynn("You instantly start coughing and gagging on air, multiple gasps escape you while your pulsing "+str("ring" if isAnal else "slit")+" spawns a fountain of that thick, juicy cum-lube..")
 
 		saynn("[say=pc]KH! KGHH!.. Khh.. gh.h.. hhh..[/say]")
 
+		saynn("[say=elizaMom]Did we break {npc.him}?[/say]")
+
+		saynn("[say=eliza]I hope not, that's my best assistant![/say]")
+
+		saynn("You show a weak thumbs up.. while still struggling to get your breathing under control.")
+
+		saynn("[say=elizaMom]I think {npc.he} just needs some rest.[/say]")
+
+		saynn("[say=eliza]Yeah, I'm quite exhausted too. Was fun though~.[/say]")
+
+		addButton("Continue", "See what happens next", "s3_spitroast_bed")
+	if(state == "s3_spitroast_bed"):
+		playAnimation(StageScene.Sleeping, "sleep", {pc="elizaMom", npc="pc", bodyState={naked=true}, npcBodyState={naked=true}})
+		saynn("The two girls pull you into their comfy double-bed, letting you rest on top of their bodies.")
+
+		saynn("[say=eliza]We got ourselves a cute blanket~.[/say]")
+
+		saynn("You might be their blanket.. but Scarlet's breasts work surprisingly well as pillows..")
+
+		saynn("[say=elizaMom]Not as cute as you.[/say]")
+
+		saynn("[say=eliza]Whaaaa-at![/say]")
+
+		saynn("Eliza blushes.. Scarlet decides to smooch her on the lips.")
+
+		saynn("[say=elizaMom]My cute girl~.[/say]")
+
+		saynn("[say=eliza]Hmpf..[/say]")
+
+		saynn("You can feel their hands gently caressing your {pc.thick} curves.")
+
+		saynn("Your eyes begin to close..")
+
+		addButton("Nap..", "Take a small nap..", "s3_spitroast_nap")
+	if(state == "s3_spitroast_nap"):
+		removeCharacter("elizaMom")
+		playAnimation(StageScene.Sleeping, "sleep", {pc="eliza", npc="pc", bodyState={naked=true}, npcBodyState={naked=true}})
+		saynn("You wake up lying on Eliza.")
+
+		saynn("[say=eliza]Hey there, sleepy head~. How are you doing there?[/say]")
+
+		saynn("[say=pc]Good..[/say]")
+
+		saynn("[say=eliza]Up for more~?[/say]")
+
+		saynn("Your face contorts in ways you never thought it could.")
+
+		saynn("[say=eliza]Relax, I'm just teasing~. Thank you for being our little fucktoy. While mom is in the shower, let me get you back to your cellblock, okay?[/say]")
+
+		saynn("You nod softly..")
+
+		addButton("Follow", "Follow Eliza back to the cellblock", "s3_spit_back_to_cellblock")
+	if(state == "s3_spit_back_to_cellblock"):
+		addCharacter("eliza")
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
+		aimCameraAndSetLocName("hall_mainentrance")
+		GM.pc.setLocation("hall_mainentrance")
+		saynn("Your journey back wasn't as interesting. Eliza walks you back to the main elevator and brings you down to the cellblock..")
+
+		saynn("[say=eliza]There we are. Have fun~.[/say]")
+
+		saynn("[say=pc]Thanks..[/say]")
+
+		saynn("[say=eliza]You're welcome! Now, if you excuse me.[/say]")
+
+		saynn("No more giant, comfy pillows for you..")
+
+		saynn("Time to go.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "s3_lovetower"):
+		addCharacter("elizaMom", ["naked"])
+		addCharacter("eliza", ["naked"])
+		aimCameraAndSetLocName("cd_office2")
+		setLocationName("Scarlet's room")
+		playAnimation(StageScene.Duo, "stand", {pc="eliza", npc="elizaMom", bodyState={underwear=true}, npcBodyState={underwear=true}})
+		saynn("As you step inside the room, you are offered with.. quite a view.")
+
+		saynn("The two women, Eliza and Scarlet, are standing near each other, wearing only their sexy lingerie. Scarlet's silky black lace and delicate garters highlight her ample tits and curvy ass.. while Eliza's accentuates her.. not so thick but still sexy.. figure.")
+
+		saynn("[say=eliza]Hey there~.[/say]")
+
+		saynn("[say=elizaMom]You look surprised.[/say]")
+
+		saynn("They're entwined in a slow, teasing dance.. rubbing and caressing each other with some provocative touches.. cupping each other's breasts.. tugging on the panties.. groping the butts. Their eyes glimmer with mischief as they exchange teasing glances with you.")
+
+		saynn("Soon, they pull you into the dance, pressing and rubbing their bodies against you. Their hands graze along your chest and shoulders, stripping anything that's strippable.. exposing your {pc.penis}..")
+
+		saynn("[say=elizaMom]I've got dibs on {npc.his} cock.[/say]")
+
+		saynn("[say=eliza]{npc.His} face is mine to have fun with then~.[/say]")
+
+		saynn("But rather than letting them have it their way, you decide to take things into your hands. You face Scarlet and get a grasp on her hair.. while your other hand lands on her neck, catching her off-guard.")
+
+		saynn("[say=elizaMom]Oh? What are you..[/say]")
+
+		saynn("You lean in closer to her ear and, with a deep, dominant tone, start talking into it.")
+
+		saynn("[say=pc]I don't know what you prepared for me. But, today, you.. and your little slutty daughter.. are both gonna be my cock sleeves. Understand?[/say]")
+
+		saynn("Eliza's eyes are wide open as she watches you handling her mother so roughly.")
+
+		saynn("[say=elizaMom]Uh..[/say]")
+
+		saynn("Your digits squeeze Scarlet's throat, forcing out a quiet gasp out of her. Your strict gaze is drilling her.. making her ear turn down.. her lips are slightly parted..")
+
+		saynn("[say=pc]On your knees.[/say]")
+
+		saynn("You let go of Scarlet's hair and throat.. but smack her ass hard.. making it jiggle.")
+
+		saynn("[say=elizaMom]Ah-..[/say]")
+
+		addButton("Continue", "See what happens next", "s3_dom_kneel")
+	if(state == "s3_dom_kneel"):
+		playAnimation(StageScene.Duo, "kneel", {pc="eliza", npc="elizaMom", npcAction="kneel", bodyState={naked=true}, npcBodyState={naked=true}})
+		saynn("Inspired by your words, Scarlet slides down to her knees before you. Sparks of shy obedience shine in her eyes.")
+
+		saynn("[say=elizaMom]As you ordered..[/say]")
+
+		saynn("Not bad. That cat is not that hard to tame.")
+
+		saynn("You direct your gaze at Elize next. Her stare switches between you and her mother..")
+
+		saynn("[say=eliza]Uh..[/say]")
+
+		saynn("One step towards her.. and she drops to her knees as well. Your confidence alone is making her submit.")
+
+		saynn("[say=pc]Good little slut.[/say]")
+
+		saynn("[say=eliza]..meow..[/say]")
+
+		saynn("You point at the spot in the middle of the room.")
+
+		saynn("[say=pc]I want you both there.[/say]")
+
+		saynn("Scarlet blinks at you.. while Eliza just gets on all fours and begins crawling to it, swaying her hips quite a bit. Her mother sees it and copies the idea, crawling to the same spot.")
+
+		saynn("They kneel near each other, both facing you.")
+
+		saynn("You close the distance.. your half-hard member is close to their faces.")
+
+		saynn("[say=pc]Get my cock ready.[/say]")
+
+		saynn("The two girls look at each other with shy gazes..")
+
+		saynn("[say=eliza]Mom?..[/say]")
+
+		saynn("Scarlet shrugs softly.")
+
+		saynn("[say=elizaMom]I will lick the shaft..[/say]")
+
+		saynn("And so she leans in and parts her lips, catching the head of your cock with them and then using her feline tongue to play with the tip, licking and sucking.")
+
+		saynn("Eliza watches her mother work.. and swallows audibly.. her tongue peeks out too for a bit.. licking her own lip. Eventually, she decides to commit too, going lower than her mother and focussing on your balls instead, gently cupping them with her paws and dragging her tongue around.")
+
+		saynn("With such service, it doesn't take long for your shaft to start getting hard and bigger, blood flowing to it while Scarlet expertly curls her tongue around its girth, coating it with her saliva.")
+
+		saynn("[say=pc]Such good little whores. Take off what you're wearing.[/say]")
+
+		saynn("Both, Eliza and Scarlet, take their bras off.. and pull their panties down.. exposing their slick slits.")
+
+		saynn("[say=elizaMom]As you wish..[/say]")
+
+		saynn("Your hands land on their hands, scritching them behind the ears while they lick and suck on your shaft and balls.. Scarlet catches some of your precum and swallows it.. Eliza sticks her nose into your ballsack and breathes in the scent.. her warm breath making your cock twitch.")
+
+		saynn("Time to.. have some fun.")
+
+		addButton("All fours", "Put them on all fours. One on top of another", "s3_tower_assemble")
+	if(state == "s3_tower_assemble"):
+		playAnimation(StageScene.ButtStackSex, "tease", {pc="elizaMom", npc="eliza", npc2="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
+		saynn("With a firm grip of Scarlet's hair, you pull her away.")
+
+		saynn("[say=pc]I want to see you on all fours.[/say]")
+
+		saynn("[say=elizaMom]Of course..[/say]")
+
+		saynn("Without hesitation, she obeys, lowering her curvy frame until she is positioned on the cool floor. You nod towards Eliza next.")
+
+		saynn("[say=pc]Get above her, on all fours, too.[/say]")
+
+		saynn("Eliza tilts her head slightly.")
+
+		saynn("[say=eliza]Meow..[/say]")
+
+		saynn("You decide to help her, pulling her up and dropping her above Eliza.. creating a.. tower of sorts.. both of their their butts now available to you.")
+
+		saynn("[say=eliza]That's what I was gonna do![/say]")
+
+		saynn("A smack on the ass makes Eliza's body arch.")
+
+		saynn("[say=eliza]Ah..[/say]")
+
+		saynn("Then, your hands land on Scarlet's ass, spreading her cheeks, exposing her tight, red slit.. that's already glistening with arousal. She seems ready.. Still, you spit onto her folds and rub it in, making Scarlet moan softly as your digits brush against her sensitive folds..")
+
+		saynn("[say=elizaMom]Mmm-.. h..[/say]")
+
+		saynn("[say=pc]Mom is first.[/say]")
+
+		saynn("[say=eliza]No fair..[/say]")
+
+		saynn("Another spank makes Eliza writhle on top of Scarlet, her own pussy looking quite wet and inviting by now too..")
+
+		addButton("Scarlet", "Start fucking Scarlet", "s3_tower_scarlet")
+	if(state == "s3_tower_scarlet"):
+		playAnimation(StageScene.ButtStackSex, "sexdown", {pc="elizaMom", npc="eliza", npc2="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
+		saynn("You waste no time, aligning your cock at Scarlet's pussy entrance and sliding it in, letting the tip of your member to part her folds.")
+
+		saynn("[say=elizaMom]Mhh-h.. fuck~..[/say]")
+
+		saynn("[say=eliza]Mom, language![/say]")
+
+		saynn("[say=elizaMom]Shush, cutie~.. Your turn will come~..[/say]")
+
+		saynn("You begin to pound her slit raw and hard, each thrust sending ripples of pleasure through her, echoing around into the girl above. Scarlet's soft walls are clenching around your cock with relentless intensity.. making fucking her feel quite nice.")
+
+		saynn("At the same time, you decide to keep Eliza ready too. Your digits find their way to her slick, sensitive petals and begin rubbing them, your big thumb focussing on playing with her clit.")
+
+		saynn("[say=eliza]Mhh-..[/say]")
+
+		addButton("Faster", "Fuck Scarlet faster", "s3_tower_scarlet_faster")
+	if(state == "s3_tower_scarlet_faster"):
+		playAnimation(StageScene.ButtStackSex, "fastdown", {pc="elizaMom", npc="eliza", npc2="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
+		saynn("You increase the onslaught on Scarlet's pussy.. fucking her faster, driving your cock deeper down that hungry fuckhole, the tip of your member kissing her womb entrance each time, making her squirm.")
+
+		saynn("[say=elizaMom]Mhh.. hhah.. ah.. Pinned by my daughter.. being used by her assistant.. like a sextoy..[/say]")
+
+		saynn("[say=eliza]You kneeled first, you wanted this.. ah.. we're both sluts..[/say]")
+
+		saynn("She gets tight fast.. but you push through, shoving your dick in and out, your hips slapping against her fluffy ass. The room is filled with the sounds of hard, raw fucking.. and the moans of two sluts, your digits fingering the daughter of the woman that you're pounding..")
+
+		saynn("You feel your orgasm drawing near.. but you hold it back.. purposefully.. focusing on making that whore cum..")
+
+		saynn("[say=elizaMom]Mhh.. ah.. I'm.. Ah~.. Ah-h~~.. I can feel your cock.. mhh-.. throbbing..[/say]")
+
+		saynn("And soon, she does, Scarlet throws her head back and moans like a whore while her pussy starts to knead your shaft, all her muscles tensing up at random.")
+
+		saynn("[say=elizaMom]Feels so g-good.. hh-hhahh..[/say]")
+
+		saynn("[say=eliza]What about me-e-e..[/say]")
+
+		saynn("That's a good point.")
+
+		addButton("Eliza", "Switch to fucking Scarlet's daughter", "s3_tower_eliza_fast")
+	if(state == "s3_tower_eliza_fast"):
+		playAnimation(StageScene.ButtStackSex, "fastup", {pc="elizaMom", npc="eliza", npc2="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
+		saynn("You leave Scarlet to ride the rest of her orgasm and withdraw your cock from her depths, instead, rising up and aligning yourself with Eliza's eager pussy. You drive into her with equal force, her delicate walls spreading wide as she gasps.")
+
+		saynn("[say=eliza]Ah!..[/say]")
+
+		saynn("Scarlet daughter's pussy makes you feel at home.. allowing you to quickly reach the same pace. One of your hands gropes her ass while the second one reaches out and yanks on her ponytail, forcing her to keep her chin high.")
+
+		saynn("[say=eliza]Ah.. f-fuck.. so fast.. my pussy.. ah..[/say]")
+
+		saynn("[say=elizaMom]Mhh~.. language, sweetie..[/say]")
+
+		saynn("[say=eliza]Sorry.. ah.. mom.. AHh-h~..[/say]")
+
+		saynn("Wow, you can already feel her inner walls clenching around your cock, her whole body is shivering, her pussy trying to milk your shaft.")
+
+		saynn("[say=eliza]I'm cumming..[/say]")
+
+		saynn("[say=elizaMom]What a good girl.. Please, breed her slutty little slit.. You wanna be bred, right, sweetie?[/say]")
+
+		saynn("[say=eliza]Ss..s-sure.. please.. p-pump my womb full..[/say]")
+
+		saynn("You can feel your cock throbbing.. your own orgasm drawing..")
+
+		saynn("You got a better idea..")
+
+		addButton("Share the cum", "Start cumming inside Eliza but switch to Scarlet half-way through", "s3_dom_cum")
+	if(state == "s3_dom_cum"):
+		playAnimation(StageScene.ButtStackSex, "insidedown", {pc="elizaMom", npc="eliza", npc2="pc", npc2Cum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}, npc2BodyState={naked=true, hard=true}})
+		saynn("You keep fucking the slutty feline and let the orgasm feeling take over. Your cock starts throbbing even harder.. and releasing the first few waves of {pc.cum} deep inside Eliza, her pussy tightening rhythmically around your shaft as you pump her full.")
+
+		saynn("[say=eliza]Nyaa-a..[/say]")
+
+		saynn("But before the ecstatic feeling ends, you yank your cock free and immediately shove it back into Scarlet's slick sex.")
+
+		saynn("[say=elizaMom]Ah.. what is.. Nhh-h-..[/say]")
+
+		saynn("Your cock keeps throbbing and shooting seed.. but now inside Eliza's mother, pumping that neglected slit with the rest of your spunk..")
+
+		saynn("[say=elizaMom]Did you..[/say]")
+
+		saynn("[say=eliza]I think {npc.he} just bred us both, mom~.[/say]")
+
+		saynn("[say=elizaMom]That's.. hot..[/say]")
+
+		saynn("[say=eliza]What will dad say?[/say]")
+
+		saynn("[say=elizaMom]We're in an open relationship.. f-fuck.. my womb is being filled.. as we speak..[/say]")
+
+		saynn("You stay inside Scarlet, making sure her pussy milks your balls until the very last drop of your seed. Eliza's stuffed cunt is already leaking with it.. some of the mess landing on her mother's butt.")
+
+		saynn("[say=pc]You got good fuckholes, sluts. Couldn't resist stuffing them both.[/say]")
+
+		saynn("You give Scarlet and Eliza a good smack on their asses.")
+
+		saynn("[say=eliza]Ah..[/say]")
+
+		saynn("[say=elizaMom]Nhh.. t-thank you..[/say]")
+
+		saynn("You give Eliza another firm smack.. her butt now looks quite red.")
+
+		saynn("[say=eliza]Nghh-.. y-yes.. t-thank you for breeding a whore.. and her daughter..[/say]")
+
+		saynn("[say=elizaMom]Eliza! Spank her again.[/say]")
+
+		saynn("You obey, delivering a few firm impacts on that soft, fluffy ass. Eliza is gasping and writhing around.")
+
+		saynn("[say=eliza]Oww.. ahh.. ghh.. Two whores.. fine.. haha..[/say]")
+
+		saynn("[say=elizaMom]I will show you a whore..[/say]")
+
+		saynn("[say=eliza]Please do~.[/say]")
+
+		saynn("After properly breeding the mother, you pull out, letting her slit to start dripping with {pc.cum} too..")
+
+		saynn("You get up.")
+
+		saynn("[say=pc]You're free now.[/say]")
+
+		addButton("Continue", "See what happens next", "s3_tower_after_cum")
+	if(state == "s3_tower_after_cum"):
+		playAnimation(StageScene.SexStart, "start", {pc="elizaMom", npc="eliza", bodyState={naked=true}, npcBodyState={naked=true}})
+		saynn("You watch them climb off of each other. Eliza drops onto the floor and starts rubbing her glowing ass, her used pussy still fully exposed.")
+
+		saynn("Scarlet sits down.. and watches her daughter squirm from the painful sensations. She bites her lip while watching that creamed slit.. Something makes Scarlet start to crawl towards Eliza..")
+
+		saynn("[say=eliza]Mom?.. What are you..[/say]")
+
+		saynn("Looks like the fun isn't over for them yet.")
+
+		addButton("Continue", "See what happens next", "s3_tower_after_cum_69")
+	if(state == "s3_tower_after_cum_69"):
+		playAnimation(StageScene.Sex69, "tease", {pc="eliza", npc="elizaMom", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Scarlet pushes her daughter down onto her back.. and straddles her.. pushing her butt into her face..")
+
+		saynn("[say=elizaMom]Time to put your slutty tongue to good use.[/say]")
+
+		saynn("[say=eliza]Oh..[/say]")
+
+		saynn("Eliza blushes while seeing Scarlet's creamed pussy from up so close.")
+
+		saynn("Interesting.")
+
+		addButton("Continue", "See what happens next", "s3_tower_after_cum_69_do")
+	if(state == "s3_tower_after_cum_69_do"):
+		playAnimation(StageScene.SexStart, "FF", {pc="elizaMom", npc="eliza", bodyState={naked=true}, npcBodyState={naked=true}})
+		saynn("Scarlet lowers her butt onto Eliza's face.. and moans softly as her daughter begins eating her out, using her tongue to lick the mess that's dripping out of her used pussy.")
+
+		saynn("[say=elizaMom]Good girl..[/say]")
+
+		saynn("Scarlet does the same, leaning in low to Eliza's crotch and using her long, rough tongue to start lapping away at that other stuffed slit.")
+
+		saynn("Muffled, sweet moans begin to escape from the pair. Two girls eating each other out.. What a sight.")
+
+		saynn("[say=pc]Looks like you know how to keep yourself entertained.[/say]")
+
+		saynn("[say=eliza]Mmhh-h..[/say]")
+
+		saynn("Better to leave them to their fun. You had your share.")
+
+		saynn("Time to go..")
+
+		addButton("Leave", "Time to go", "s3_tower_after_cum_69_leave")
+	if(state == "s3_tower_after_cum_69_leave"):
+		removeCharacter("eliza")
+		removeCharacter("elizaMom")
+		playAnimation(StageScene.Solo, "stand")
+		aimCameraAndSetLocName("hall_mainentrance")
+		GM.pc.setLocation("hall_mainentrance")
+		saynn("Your journey back wasn't as interesting. You've walked into some guards.. who were quite confused about how you were able to get up there.")
+
+		saynn("You managed to talk your way out.. and so they just threw you back into the cell block.")
+
+		saynn("It was worth it.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 func addStraponButtons(thestate):
 	var strapons = GM.pc.getStrapons()
 	for strapon in strapons:
@@ -2194,6 +2587,10 @@ func _react(_action: String, _args):
 		processTime(10*60)
 
 	if(_action == "s3_spitroast"):
+		isAnal = true
+		if(GM.pc.hasReachableVagina()):
+			isAnal = false
+		hasPP = GM.pc.hasPenis()
 		var strapon = GlobalRegistry.createItem("StraponCanine")
 		strapon.clothesColor = Color.darkorange
 		var fluids = strapon.getFluids()
@@ -2258,12 +2655,57 @@ func _react(_action: String, _args):
 		if(GM.pc.hasPenis()):
 			GM.pc.cummedOnBy("pc")
 		GM.pc.gotMouthFuckedBy("eliza")
-		GM.pc.gotAnusFuckedBy("elizaMom")
 		GM.pc.orgasmFrom("elizaMom")
 		GM.pc.cummedInMouthBy("eliza", FluidSource.Strapon)
-		GM.pc.cummedInMouthBy("elizaMom", FluidSource.Strapon)
+		if(isAnal):
+			GM.pc.gotAnusFuckedBy("elizaMom")
+			GM.pc.cummedInAnusBy("elizaMom", FluidSource.Strapon)
+		else:
+			GM.pc.gotVaginaFuckedBy("elizaMom")
+			GM.pc.cummedInVaginaBy("elizaMom", FluidSource.Strapon)
 
 	if(_action == "s3_spit_after"):
+		processTime(5*60)
+
+	if(_action == "s3_spitroast_bed"):
+		processTime(10*60)
+		getCharacter("eliza").resetEquipment()
+		getCharacter("elizaMom").resetEquipment()
+
+	if(_action == "s3_spitroast_nap"):
+		processTime(15*60)
+
+	if(_action == "s3_spit_back_to_cellblock"):
+		processTime(5*60)
+
+	if(_action == "s3_dom_kneel"):
+		processTime(3*60)
+
+	if(_action == "s3_tower_assemble"):
+		processTime(5*60)
+
+	if(_action == "s3_tower_scarlet"):
+		processTime(5*60)
+
+	if(_action == "s3_tower_scarlet_faster"):
+		processTime(5*60)
+
+	if(_action == "s3_tower_eliza_fast"):
+		processTime(5*60)
+
+	if(_action == "s3_dom_cum"):
+		processTime(5*60)
+		getCharacter("eliza").cummedInVaginaBy("pc", FluidSource.Penis, 0.45)
+		getCharacter("elizaMom").cummedInVaginaBy("pc", FluidSource.Penis)
+		GM.pc.orgasmFrom("eliza")
+
+	if(_action == "s3_tower_after_cum"):
+		processTime(3*60)
+
+	if(_action == "s3_tower_after_cum_69_do"):
+		processTime(5*60)
+
+	if(_action == "s3_tower_after_cum_69_leave"):
 		processTime(5*60)
 
 	setState(_action)
@@ -2275,6 +2717,8 @@ func saveData():
 	data["hasCumInStrapon"] = hasCumInStrapon
 	data["straponHasCum"] = straponHasCum
 	data["sexDidPullout"] = sexDidPullout
+	data["isAnal"] = isAnal
+	data["hasPP"] = hasPP
 
 	return data
 
@@ -2285,3 +2729,5 @@ func loadData(data):
 	hasCumInStrapon = SAVE.loadVar(data, "hasCumInStrapon", false)
 	straponHasCum = SAVE.loadVar(data, "straponHasCum", false)
 	sexDidPullout = SAVE.loadVar(data, "sexDidPullout", false)
+	isAnal = SAVE.loadVar(data, "isAnal", false)
+	hasPP = SAVE.loadVar(data, "hasPP", false)
