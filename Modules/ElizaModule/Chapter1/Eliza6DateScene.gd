@@ -1092,6 +1092,9 @@ func _react(_action: String, _args):
 	if(_action == "won_remove_blindfold"):
 		GM.pc.getInventory().clearSlot(InventorySlot.Eyes)
 
+	if(_action == "after_questions_end"):
+		addMessage("Sex scenes with Eliza are now unlocked for successfully answering all her questions!")
+
 	setState(_action)
 
 func saveData():

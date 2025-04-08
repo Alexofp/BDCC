@@ -76,3 +76,6 @@ func canSendSlavesToBeMilked() -> bool:
 
 func canStartDrugDenRun() -> bool:
 	return getFlag("ElizaModule.s3hap", false)
+
+func canSexEliza() -> bool:
+	return getFlag("ElizaModule.storyCompleted", false) || (getFlag("ElizaModule.dateOutcome", "") == "perfect")

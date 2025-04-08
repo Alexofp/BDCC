@@ -66,6 +66,9 @@ func _run():
 		else:
 			addDisabledButton("I'm hurt", "You're not hurt enough to ask for medical help")
 			
+		if(getModule("ElizaModule").canSexEliza()):
+			addButton("Sex!", "Have some fun with Eliza", "start_sex_menu")
+			
 		addButton("Leave", "Do something else", "endthescene")
 		GM.ES.triggerRun(Trigger.TalkingToNPC, ["eliza"])
 		
@@ -444,6 +447,11 @@ func _react(_action: String, _args):
 	if(_action == "startlabassist"):
 		setFlag("ElizaModule.s0hap", true)
 		runScene("Eliza0AskJobScene")
+		endScene()
+		return
+		
+	if(_action == "start_sex_menu"):
+		runScene("ElizaSexMenuScene")
 		endScene()
 		return
 	
