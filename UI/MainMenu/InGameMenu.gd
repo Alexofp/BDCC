@@ -61,7 +61,4 @@ func _on_DatapackIngameMenu_onClosePressed():
 func _on_InGameMenu_visibility_changed():
 	if(visible):
 		if(GM.main != null):
-			if(GM.main.canSave()):
-				save_game_button_2.disabled = false
-			else:
-				save_game_button_2.disabled = true
+			save_game_button_2.disabled = !GM.main.canSave()
