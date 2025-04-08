@@ -99,14 +99,34 @@ func _run():
 			addDisabledButton("Heal privates", "Your private bits didn't sustain any damage")
 		addButton("Never mind", "You're fine", "")
 		
+#ACEPREGEXPAC - Eliza has pregnancy descriptors if you oogle her
+#I might change this depending on whats in Eliza content but until then, whatever.
+#that "make me a woman" line at the breeder ending of chastity content has to be a hint, right?
 	if(state == "appearance"):
-		saynn("Doctor Quinn looks like your typical doctor, she is pretty tall for a feline, about 1.8 meters tall, her fur is of a pastel yellow color with some white and pink accents. Her long hair is made into a ponytail. She is wearing glasses and a white labcoat with her badge attached to it. Under it you can spot a green top and a black knee length skirt. You do spot her wearing some dark transparent tights. She seems to be carrying quite a bit of equipment in her pockets and on her belt, mostly medical stuff but also a shock remote.")
+		if(getCharacter("eliza").isHeavilyPregnant()):
+			saynn("Doctor Eliza Quinn is a tired looking doctor, standing tall for a feline at around 1.8 meters tall. Her fur colors are pastel yellow with some white and pink accents, long hair tied back into a pony tail. She wears glasses with a white lab coat pinned with her name badge and an underlayer of a green top and black knee length skirt held with a belt of medical equipment.")
+			
+			saynn("Her top gives an effort to at least cover her late term pregnancy but still rides up to give a small view of her tummy at a glance. Her enlarged breasts also strain against the fabic of her top.")
+			
+			saynn("You’re too afraid to stick your head under her skirt but there isnt a bulge concealed betweem her legs...")
+			
+			saynn("Overall, she looks like a cute feline doctor.")
+		elif(getCharacter("eliza").isVisiblyPregnant()):
+			saynn("Doctor Quinn looks like your typical doctor, she is pretty tall for a feline, about 1.8 meters tall, her fur is of a pastel yellow color with some white and pink accents. Her long hair is made into a ponytail. She is wearing glasses and a white labcoat with her badge attached to it. Under it you can spot a green top and a black knee length skirt. You do spot her wearing some dark transparent tights. She seems to be carrying quite a bit of equipment in her pockets and on her belt, mostly medical stuff but also a shock remote.")
+			
+			saynn("All the covering of her clothing can't hide the roundness of her belly giving away that she's pregnant, with a bust that's starting to stretch the limits of a D-cup.")
+			
+			saynn("You’re too afraid to stick your head under her skirt but you can’t see a bulge between her legs.")
+			
+			saynn("Overall, she looks like a cute feline doctor.")
+		else:
+			saynn("Doctor Quinn looks like your typical doctor, she is pretty tall for a feline, about 1.8 meters tall, her fur is of a pastel yellow color with some white and pink accents. Her long hair is made into a ponytail. She is wearing glasses and a white labcoat with her badge attached to it. Under it you can spot a green top and a black knee length skirt. You do spot her wearing some dark transparent tights. She seems to be carrying quite a bit of equipment in her pockets and on her belt, mostly medical stuff but also a shock remote.")
 
-		saynn("Covered by all that clothing you can guess that her bust is a modest C-cup.")
+			saynn("Covered by all that clothing you can guess that her bust is a modest C-cup.")
 
-		saynn("You’re too afraid to stick your head under her skirt but you can’t see a bulge between her legs.")
+			saynn("You’re too afraid to stick your head under her skirt but you can’t see a bulge between her legs.")
 
-		saynn("Overall, she looks like a cute feline doctor.")
+			saynn("Overall, she looks like a cute feline doctor.")
 		
 		addButton("Back", "Go back", "")
 		
@@ -132,17 +152,30 @@ func _run():
 
 		addButton("Back", "Go back", "")
 
-
+#ACEPREGEXPAC - Eliza gives a different response if you comment on her best mom mug
 	if(state == "best_mom?"):
-		saynn("[say=pc]Your mug. Are you a mother?[/say]")
+		if (getCharacter("eliza").isVisiblyPregnant()):
+			saynn("[say=pc]Your mug. Are you a mother?[/say]")
+			
+			saynn("Eliza looks at her own coffee mug and sighs audibly.")
+			
+			saynn("[say=eliza]For now, at least. I'll try to enjoy it while I can.[/say]")
+			
+			saynn("That sounded... not the best. Probably not a good idea to keep bringing it up.")
+			
+			addMessage("[Whatever Rahi has planned for Eliza's content, I dont know it. Sorry. -Ace]")
+			
+			addButton("Continue", "Continue talking", "talk")
+		else:
+			saynn("[say=pc]Your mug. Are you a mother?[/say]")
 
-		saynn("Doctor looks at her own coffee mug and sighs audibly.")
+			saynn("Doctor looks at her own coffee mug and sighs audibly.")
 
-		saynn("[say=eliza]Kinda rude to ask that. But.. No, I’m not. And it’s a long story.[/say]")
+			saynn("[say=eliza]Kinda rude to ask that. But.. No, I’m not. And it’s a long story.[/say]")
 
-		saynn("Seems like that item is related to some sad memories.")
+			saynn("Seems like that item is related to some sad memories.")
 
-		addButton("Continue", "Continue talking", "talk")
+			addButton("Continue", "Continue talking", "talk")
 
 	if(state == "work"):
 		setModuleFlag("MedicalModule", "Med_pcKnowsAboutWork", true)

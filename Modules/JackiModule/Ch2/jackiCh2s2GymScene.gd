@@ -432,7 +432,8 @@ func _run():
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "gift_apple"):
 		playAnimation(StageScene.Duo, "stand", {npc="jacki"})
-		saynn("You offer Jacki an apple as a gesture of good will.")
+#lol. - ace
+		saynn("You offer Jacki an apple in this trying time.")
 
 		if (anger > 0.0):
 			saynn("[say=jacki]What is this?[/say]")
@@ -458,7 +459,10 @@ func _run():
 
 			saynn("[say=pc]Yeah. Vitamins for a sporty wolfie.[/say]")
 
-			saynn("You hand her the apple and watch her rub it against the cloth before taking a bite with her sharp teeth. And then another. Some juices flowing down her maw.")
+			saynn("You hand her the apple and watch her rub it against the cloth before taking a bite with her sharp claws. And then another. Some juices flowing down her maw.")
+#behold, the most tiny little change ever - ace
+			if (getCharacter("jacki").isVisiblyPregnant()):
+				saynn("[say=jacki]I've been so hungry lately.[/say]")
 
 			saynn("[say=jacki]Thankies![/say]")
 
@@ -793,6 +797,11 @@ func _run():
 			saynn("Not yet she isn't.")
 
 			addButton("Continue", "See what happens next", "endthescene")
+#ACEPREGEXPAC - Jacki has preg descriptors
+#good lord there's a buncha stuff in here, Jacki's stuff might take a minute
+#at least it makes packing the mod together more simple
+#for the "look at Jacki do yoga" scenes watch/perv, you can only see 2 scenes in perv, and watch allows for all of them, so I pick this one to preg-ify
+#
 	if(state == "kind_watch"):
 		saynn("You ask Jacki if you can just watch her do yoga.")
 
@@ -803,11 +812,11 @@ func _run():
 
 			if (RNG.chance(50)):
 				playAnimation(StageScene.Yoga, "camel", {pc="jacki"})
-				saynn("The last one interests you the most. Her lithe body gracefully arches backwards, her paws reaching for her legs. The way she stretches is quite captivating.")
+				saynn("The last one interests you the most. Her lithe body gracefully arches backwards, her paws reaching for her legs. The way she stretches is quite captivating."+str(" This pose must be quite hard having to carry around a pregnancy but Jacki seems to be fine with it." if getCharacter("jacki").isVisiblyPregnant() else "")+"")
 
 			else:
 				playAnimation(StageScene.Yoga, "warrior", {pc="jacki", bodyState={underwear=hasUnderwear}})
-				saynn("The last one interests you the most. Her lithe body gracefully arches backwards, her paws reaching high up. The way she stretches is quite captivating.")
+				saynn("The last one interests you the most. Her lithe body gracefully arches backwards, her paws reaching high up"+str(" while stumbling a bit from trying to keep balance with her pregnancy." if getCharacter("jacki").isVisiblyPregnant() else "")+"The way she stretches is quite captivating.")
 
 			saynn("[say=pc]Oh, I think you're pretty good.[/say]")
 
@@ -828,7 +837,7 @@ func _run():
 
 			if (RNG.chance(50)):
 				playAnimation(StageScene.Yoga, "dog", {pc="jacki"})
-				saynn("This time she decides to put the most focus on the pose called 'downward-facing dog'. Her hips rise high into the air while her hands are pressed firmly into the mat. She maintains this pose, the curves of her fit butt full on display, while gazing towards the ground.")
+				saynn("This time she decides to put the most focus on the pose called 'downward-facing dog'. Her hips rise high into the air"+str(", rounded belly tucked between her legs," if getCharacter("jacki").isVisiblyPregnant() else "")+" while her hands are pressed firmly into the mat. She maintains this pose, the curves of her fit butt full on display, while gazing towards the ground.")
 
 				saynn("[say=pc]Very nice.[/say]")
 
@@ -840,6 +849,9 @@ func _run():
 				playAnimation(StageScene.Yoga, "cobra", {pc="jacki"})
 				saynn("This time she decides to put the most focus on the pose called cobra. She is lying on the floor, her paws are pressed firmly into the mat as she proceeds to arch her back as much as she can. She maintains this pose, the curves of her fit butt and modest breasts are all on display.")
 
+				if(getCharacter("jacki").isVisiblyPregnant()):
+					saynn("Jacki has to squish her rounded out belly into the mat in order to reach the pose and giving her a bit of trouble. Softly moaning as she tries to arch her back a bit more than usual.")
+				
 				saynn("[say=pc]Very nice.[/say]")
 
 				saynn("[say=jacki]Thanks.. ah..[/say]")
@@ -864,10 +876,15 @@ func _run():
 				saynn("Jacki stands on all fours and then bends her back low while sticking her butt provocatively, emphasizing the curves of her rear. Even her fluffy tail moves out of the way to let you see her pinched clothing hugging her crotch tightly.")
 
 				saynn("After that she bends her back in the other direction, arching it instead, completing the cat-cow pose. Little moans occasionally escape from her as she moves from one pose to another.")
+				
+				if(getCharacter("jacki").isVisiblyPregnant()):
+					saynn("As she stretches and flexes her back Jacki puts one of her paws on her belly, holding it as she continues through her routine. Unsure how that helps but looks like it makes Jacki happy.")
 
 			else:
 				playAnimation(StageScene.Yoga, "bridge", {pc="jacki", bodyState={underwear=hasUnderwear}})
 				saynn("Jacki lies on her back before using her hind paws to raise her butt provocatively high. She arches her back as much as she can, her pose emphasizing the curves of her rear. Little moans occasionally escape from her as she tries to hold it.")
+				if(getCharacter("jacki").isVisiblyPregnant()):
+					saynn("As you watch you notice that this post quite prominently displays that Jacki is carrying a litter. Not sure if she knows but she continues regardless.")
 
 			saynn("[say=jacki]Always makes me feel like I'm in heat..[/say]")
 
@@ -965,7 +982,26 @@ func _run():
 			saynn("[say=pc]You mounting me helped, thank you~.[/say]")
 
 			saynn("That's when Jacki's face goes fully red.")
+		#PREGEXPACNOTE - minor changes to 'i need help with yoga' scene, probably could add more differences
+		elif (getCharacter("jacki").isVisiblyPregnant()):
+			saynn("Jacki huffs as she guides your movement, her form pushing against yours as she helps you get into the 'cow' pose. The friction of your bodies rubbing against each other creates a little intimate feeling.. A feeling that both of you seem to welcome.")
 
+			saynn("[say=jacki]Very good.. wruff..[/say]")
+
+			saynn("Even though this is probably looking quite.. kinky.. and pretty heavy actually.. from the side.. Jacki continues to guide you into the right pose with her own body. Pressing down into your back with her belly.")
+
+			saynn("[say=jacki]Sometimes a good mounting can fix everything..[/say]")
+
+			saynn("She isn't even trying to hide it, is she. You can feel her subtly humping you, her pregnant body grinding against your back and her crotch spreading the lewd scent coming from her constrained desperate flower to you.")
+
+			saynn("[say=jacki]There we go..[/say]")
+
+			saynn("Both of you pant softly while remaining intertwined in this.. weird kind of embrace.. for a while longer.")
+
+			saynn("[say=pc]Thank you, wolfie.[/say]")
+
+			saynn("She licks your ear and gets off you.")
+			
 		else:
 			saynn("Jacki guides your movement, her form brushing against yours as she helps you get into the 'cow' pose. The friction of your bodies rubbing against each other creates a little intimate feeling.. A feeling that both of you seem to welcome.")
 
@@ -994,7 +1030,7 @@ func _run():
 
 		saynn("[say=jacki]Oh.. That actually sounds kinda nice.[/say]")
 
-		saynn("There aren't really any spots for that.. so you just help her lie down on the mat. Then you kneel nearby and put your hands on her back.")
+		saynn("There aren't really any spots for that.. so you just help her lie down on the mat."+str(" It's a bit awkward with Jacki's pregnancy but you manage to help get her in a good position." if getCharacter("jacki").isVisiblyPregnant() else "")+" Then you kneel nearby and put your hands on her back.")
 
 		saynn("You begin simple, kneading the tension away from her shoulders and then doing the same to her shoulder plates and the back muscles.")
 
@@ -1019,10 +1055,12 @@ func _run():
 		saynn("[say=pc]Did you like it, wolfie?[/say]")
 
 		saynn("[say=jacki]Yeah.. that feels really good..[/say]")
-
 		addButton("Continue", "That was lewd", "endthescene")
 		addButtonWithChecks("Forced anal fuck", "Betray Jacki and have have rough sex with her right there", "kind_massage_forcedfuck", [], [ButtonChecks.HasReachablePenis])
 		addButton("Forced fisting", "Betray Jacki and fist her ass right there", "kind_massage_forcedfisting")
+#PREGEXPACNOTE - Jacki preg fuck in massage
+		if (getFlag("JackiModule.Jacki_ch2GotPussyFreed")) && (getCharacter("jacki").isVisiblyPregnant()):
+			addDisabledButton("Pregnant Sex", "[Ace Preg Expac] Soon. -Ace")
 	if(state == "kind_massage_forcedfuck"):
 		playAnimation(StageScene.SexBehind, "fast", {npc="jacki", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true}})
 		saynn("Since the wolfie is not suspecting anything.. Now is the perfect time to strike.")
@@ -1141,7 +1179,10 @@ func _run():
 		playAnimation(StageScene.Duo, "jog", {npc="jacki", npcAction="jog", flipNPC=true})
 		saynn("And so you two begin jogging around the only green area of the prison. The air here is nice and fresh.")
 
-		saynn("Jacki leads the way so you just jog behind her. You run past some rocks and even trees.")
+		if(getCharacter("jacki").isVisiblyPregnant()):
+			saynn("Jacki is a bit slower than her regular self. The both of you jogging next to each other as the repetitive scenery of the yard passes around the two of you.")
+		else:
+			saynn("Jacki leads the way so you just jog behind her. You run past some rocks and even trees.")
 
 		saynn("The more the wolfie jogs, the more you begin to notice something. She is panting way more than you would expect her to do. The fabric of her clothes rubbing against her sensitive spots might be the reason..")
 
@@ -1518,6 +1559,9 @@ func _run():
 
 		addButton("Nod", "Enough is enough", "jog_afterchat_nod")
 		addButton("Shower", "Offer her to go take a refreshing shower", "jog_afterchat_shower")
+#ACEPREGEXPAC - remember to write shower sex
+		if (getFlag("JackiModule.Jacki_ch2GotPussyFreed")):
+			addDisabledButton("Shower Breeding", "[Ace Preg Expac] Soon. -Ace")
 		addButton("Ask to jog more", "Ask to jog even more together", "jog_afterchat_askmore")
 		if (lust >= 0.4):
 			addButton("Lick her", "Try to make Jacki cum by licking and rubbing her stiched up pussy", "jog_try_piercings")
@@ -1669,7 +1713,8 @@ func _run():
 			saynn("[say=jacki]Well, either way, thank you! That helped a lot! I'm gonna go now though.[/say]")
 
 			saynn("You nod and let Jacki jog away.")
-
+#PREGEXPACNOTE - Yknow, I thought adding pregnancy to a character whose owner isnt really into it would be bad, but after reading the watersports scenes, I realized nothing I could add would be worse.
+#I know watersports mainly gets it's kick from humiliation, but I still really dont get why. -ace
 		elif (plasticBottleFluidID == "Piss"):
 			if (waterLevel <= 2):
 				saynn("You decided to be very naughty today and gave Jacki a bottle of piss..")
@@ -1745,6 +1790,7 @@ func _run():
 			saynn("[say=jacki]Thank you! That helped a lot! I'm gonna go now though.[/say]")
 
 			saynn("You nod and let Jacki jog away.")
+
 		elif (plasticBottleFluidID == "Cum"):
 			saynn("Thick sticky cum starts flowing down Jacki's tongue as she gulps it all up.. She understands what it is way too late..")
 

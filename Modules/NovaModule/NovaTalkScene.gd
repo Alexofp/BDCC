@@ -65,10 +65,12 @@ func _run():
 
 		addButton("Talk", "Ask Nova about things", "talk")
 		addButton("Appearance", "Look at Nova", "appearance")
-		if(!getCharacter("nova").isVisiblyPregnant()):
-			addButton("Lewd", "Offer yourself to Nova", "lewd")
-		else:
-			addDisabledButton("Lewd", "Can't offer yourself to Nova while she is pregnant")
+		#ACEPREGEXPAC - Nova can now Dom player while preggers
+		addButton("Lewd", "Offer yourself to Nova", "lewd")
+#		if(!getCharacter("nova").isVisiblyPregnant()):
+#			addButton("Lewd", "Offer yourself to Nova", "lewd")
+#		else:
+#			addDisabledButton("Lewd", "Can't offer yourself to Nova while she is pregnant")
 		addButton("Leave", "Time to go", "endthescene")
 		GM.ES.triggerRun(Trigger.TalkingToNPC, ["nova"])
 
@@ -76,15 +78,19 @@ func _run():
 	if(state == "appearance"):
 		saynn("Nova is one of the guards, medium height, gray fur, amber eyes. Her hair is somewhat short, not even reaching the shoulders, one of the hair strands has a strong blue tint to it. Long canine muzzle, perky ears, curled up fluffy tail, Nova has all the signs of a husky. She must have pretty strong muscles to be able to wear the power armor that she has. Underneath it is a skin-tight bodysuit and a black short skirt. Her stun baton is attached with a strap to the leg.")
 
-		# (is pregnant)
-		if(getCharacter("nova").isVisiblyPregnant()):
+#ACEPREGEXPAC - Comment if Nova is heavily preggers
+		if(getCharacter("nova").isHeavilyPregnant()):
+			saynn("Nova is quite clearly pregnant with her bodysuit stretched as tight as it is. Her arm rests atop her stomach, covering her enlarged chest.")
+		
+		# (is pregnant, changed to elif by ace)
+		elif(getCharacter("nova").isVisiblyPregnant()):
 			saynn("Nova’s belly is visibly inflated, good thing that her bodysuit is stretchy enough. Her breasts gained an extra size and are probably full of milk.")
-
+		
 		# (else)
 		else:
 			saynn("Nova’s breasts are a solid D-cup, encased in a stealthy black material.")
 
-		saynn("Underneath her skirt you can spot both a bulge and an outline of a pussy, this guard is packing quite some heat.")
+		saynn("Sneaking a glance underneath her skirt you can spot both a bulge and an outline of a pussy, this guard is packing quite some heat.")
 
 		addButton("Back", "Enough watching", "")
 

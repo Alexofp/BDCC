@@ -52,6 +52,8 @@ func _run():
 
 		addButton("Follow", "See where she brings you", "follow")
 
+#ACEPREGEXPAC - ghost hands scene 1, belly rubs
+
 	if(state == "follow"):
 		# (launches a walking scene first)
 		aimCameraAndSetLocName("med_researchlab")
@@ -99,7 +101,7 @@ func _run():
 
 		saynn("[say=eliza]Can you see yourself?[/say]")
 
-		saynn("You look down at yourself. Yeah, everything seems to be there. Your {pc.masc} body, your straitjacket, a chain leash, the testing table that you’re sitting on, everything.")
+		saynn("You look down at yourself. Yeah, everything seems to be there. Your {pc.masc} body, your straitjacket,"+str(" your growing belly," if GM.pc.isVisiblyPregnant() else "")+" a chain leash, the testing table that you’re sitting on, everything.")
 
 		saynn("[b]Suddenly, a hand touches your chin[/b]. You jump, making the chain rattle, the hand is half-transparent, lacks any color, and is not attached to anything, just floating! And just as suddenly, the hand disappears into nothingness as it gets pulled away from you.")
 
@@ -137,7 +139,25 @@ func _run():
 		elif(GM.pc.hasVagina()):
 			saynn("Your pussy slit is looking wet and needy after it was released, dripping arousal onto the table. The ghost paw spreads its folds open and gives the clit a rub, causing you to let out a muffled moan and try to close your legs.")
 
+		if(GM.pc.isHeavilyPregnant()):
+			saynn("The paw on your bits traces up over your hips and onto your very obvious pregnancy, feeling over it and massaging all strained and tender curves of your belly. You might've protested if it didnt feel kind of good. And if there weren't fingers in your mouth...")
+
+			saynn("Suddenly feeling the small twinges of movement in your tummy brings you back to what's happening. The paw massaging your gravid form freezes for a second as one of the kicks presses up against it. Once everything dies back down, you are free to receive more belly rubs...")
+
+		elif(GM.pc.isVisiblyPregnant()):
+			saynn("The paw on your bits traces up over your hips and onto your rounded out belly bringing attention your early pregnancy, rubbing down the side of your midriff before reaching down and feeling the weight of it. The paw entirely free to give you a belly rub...")
+
+		else:
+			saynn("The paw on your bits traces up over your hips and giving your midriff a rub, pressing into you as you feel the ghostly force behind it...")
+		
 		saynn("You have no idea what’s going on, the ghostly paws do whatever they want to your body and all you can do is squirm on the table and drop muffled moans. Suddenly you feel someone’s lips closing around your nipple and teasing it by squeezing between the fangs. You look down and find nothing, except for a pair of ghostly lips and the teeth.")
+
+#Just because this is a preg expansion doesnt mean I can't add milky tits too
+#"Eliza" is the milking lady, she's gotta know how to suck on some tiddy
+#also I gotta lay off the amount of commas in my writing
+		if(GM.pc.canBeMilked()):
+			saynn("Your nipples respond to the ghastly mouth latched to them by leaking fresh milk directly into the semi-transparent maw. A nice surprise that is happily sucked down and disappeared before your eyes. Feeling the strange tongue graze and lap at one of your now swollen nubs stimulating more milk from it... The lips wrapping around your {pc.breasts} and drinking freely in large sucks that seem to stimulate you more than actually draw milk from you. ")
+			saynn("Detaching with a little pop the lips pull away. Not drawing enough milk to make your nipples sore and making all the leftovers run down your milky chest...")
 
 		saynn("[say=pc]Wh-h..a..[/say]")
 
