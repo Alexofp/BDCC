@@ -1242,6 +1242,11 @@ func isPregnant():
 		return menstrualCycle.isPregnant()
 	return false
 
+func isPregnantFrom(_charID:String) -> bool:
+	if(menstrualCycle != null):
+		return menstrualCycle.isPregnantFrom(_charID)
+	return false
+
 func isVisiblyPregnant():
 	if(menstrualCycle != null):
 		return menstrualCycle.isVisiblyPregnant()

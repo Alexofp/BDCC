@@ -12,10 +12,6 @@ func _init():
 	events = [
 		"res://Modules/AcePregExpac/AlexScenes/AlexToldHeIsFatherEvent.gd",
 	]
-	
-	statusEffects = [
-		"res://Modules/AcePregExpac/Misc Stuff/OverduePregnant.gd"
-		]
 
 
 func getFlags():

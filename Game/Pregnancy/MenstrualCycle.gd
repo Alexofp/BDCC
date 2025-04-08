@@ -271,6 +271,15 @@ func isPregnantFromPlayer():
 			return true
 	return false
 
+func isPregnantFrom(_charID:String) -> bool:
+	if(!isPregnant()):
+		return false
+	
+	for egg in impregnatedEggCells:
+		if(egg.getFatherID() == _charID || egg.getMotherID() == _charID):
+			return true
+	return false
+
 func getPregnancyProgress() -> float:
 	var maxProgress = 0.0
 	for egg in impregnatedEggCells:

@@ -4,6 +4,8 @@ func _init():
 	sceneID = "TellAlexHeIsFatherScene"
 
 func _run():
+	var isPregFromAlex:bool = GM.pc.isPregnantFrom("alexrynard")
+	
 	if(state == ""):
 		addCharacter("alexrynard")
 		playAnimation(StageScene.Hug, "idle", {pc="pc", npc="alexrynard"})
@@ -29,18 +31,17 @@ func _run():
 		
 		saynn("What do you tell him?")
 		
-		saynn("")
-		
-		saynn("[The game doesn't have a code check to see what npc is the father of a pregnancy in a scene, Please answer whatever you want your personal headcanon to be, because thats all the game can work with]")
-		
-		addButton("Yes", "Continue on your way", "AlexYesFather")
-		addButton("No", "Continue on your way", "AlexNotFather")
+		addButton("Yes", ("(Lie) " if !isPregFromAlex else "")+"Say that he is the father", "AlexYesFather")
+		addButton("No", ("(Lie) " if isPregFromAlex else "")+"Say that he is not the father", "AlexNotFather")
 		
 		
 	if(state == "AlexYesFather"):
 		playAnimation(StageScene.Hug, "hug", {pc="alexrynard", npc="pc"})
 		
-		saynn("Well, might as well tell Alex now.")
+		if(isPregFromAlex):
+			saynn("Well, might as well tell Alex now.")
+		else:
+			saynn("He is not the father.. But you're curious how he would react..")
 		
 		saynn("[say=pc]Yes, You are gonna be a father...[/say]")
 		
@@ -88,7 +89,10 @@ func _run():
 		
 	
 	if(state == "AlexNotFather"):
-		saynn("You decide to tell Alex the truth.")
+		if(isPregFromAlex):
+			saynn("He is the father for sure.. but you decide to go easy on the poor foxy.")
+		else:
+			saynn("You decide to tell Alex the truth.")
 		
 		saynn("[say=pc]No, you're not.[/say]")
 		

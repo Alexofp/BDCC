@@ -75,12 +75,3 @@ func updateBodyparts():
 	if(jackiModule.shouldUnderwear() && getInventory().hasSlotEquipped(InventorySlot.Body)):
 		getInventory().removeItemFromSlot(InventorySlot.Body)
 		
-
-#ACEPREGEXPAC - Jacki Character file change to allow for things I need
-#Jacki will get a short birth scene because you gotta address the fem-chastity thing
-
-#Waits the longest because chastity + Jacki is an out of the way character
-func getBirthWaitTime():
-	return 60*60*24*14
-
-

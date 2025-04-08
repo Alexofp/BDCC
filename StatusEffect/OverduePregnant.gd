@@ -6,8 +6,8 @@ func _init():
 	id = "OverdueStatusAPE"
 	isBattleOnly = false
 
-	alwaysCheckedForNPCs = true
-	alwaysCheckedForPlayer = true
+	alwaysCheckedForNPCs = false # Disabled
+	alwaysCheckedForPlayer = false # Disabled
 	priorityDuringChecking = 85
 
 #var _days = floor(2/(3600.0*24.0))

@@ -1,7 +1,7 @@
 extends "res://Scenes/SceneBase.gd"
 
 func _init():
-	sceneID = "AlexPregTalk"
+	sceneID = "AlexPregTalkSceneAPE"
 
 func _run():
 	if(state == ""):
@@ -13,15 +13,16 @@ func _run():
 		saynn("What do you want to tell Alex?")
 		
 		if(GM.pc.isVisiblyPregnant() && (getModuleFlag("AcePregExpac", "Alex_ToldIsFather", 1))):
-			addButton("Gonna Be Father", "Tell Alex he is gonna be a father", "alexfatherreveal")
-		elif(!GM.pc.isVisiblyPregnant()):
-			addDisabledButton("Tell him", "You aren't pregnant")
+			if(GM.pc.isPregnantFrom("alexrynard")):
+				addButton("Gonna Be Father", "Tell Alex he is gonna be a father", "alexfatherreveal")
+			else:
+				addDisabledButton("Gonna Be Father", "You aren't pregnant from him")
 #less clutter on the button screen
 		
 		if(GM.pc.isVisiblyPregnant() && (!getModuleFlag("AcePregExpac", "Alex_ToldIsFather", 1))):
 			addButton("Cuddle", "Get some emotional support from Alex", "alexpregcuddle")
 		elif(!GM.pc.isVisiblyPregnant()):
-			addDisabledButton("Tell him", "You aren't pregnant")
+			addDisabledButton("Cuddle", "You aren't pregnant")
 		
 		if((!getModuleFlag("AcePregExpac", "Alex_ToldIsFather", 1))):
 			addButton("Snacks?", "Alex is staff, surely he has something you can eat. However Small it may be.", "AlexSnackStart")
