@@ -196,16 +196,23 @@ func loadData(data):
 	shouldBeTranslating = SAVE.loadVar(data, "shouldBeTranslating", false)
 	manualTranslateButton = SAVE.loadVar(data, "manualTranslateButton", false)
 	shouldTranslateButtons = SAVE.loadVar(data, "shouldTranslateButtons", true)
-	var tempTranslatorIDS = SAVE.loadVar(data, "translatorIDS", translatorIDS)
-	for id in tempTranslatorIDS:
-		if id in translatorIDS:
-			translatorIDS.erase(id)
-		else:
-			tempTranslatorIDS.erase(id)
-	if len(translatorIDS) > 0:
-		translatorIDS = tempTranslatorIDS + translatorIDS
-	else:
-		translatorIDS = tempTranslatorIDS
+	
+	var loadedTranslatorIDS:Array = SAVE.loadVar(data, "translatorIDS", [])
+	var defaultList:Array = translatorIDS.duplicate()
+	
+	var newTranslatorIDS:Array = []
+	
+	for loadedID in loadedTranslatorIDS:
+		if(!defaultList.has(loadedID)): # Skip any translator that we don't have (anymore)
+			continue
+		newTranslatorIDS.append(loadedID)
+	
+	for defaultID in defaultList:
+		if(newTranslatorIDS.has(defaultID)):
+			continue
+		newTranslatorIDS.append(defaultID) # Add new translators to the end of the list
+	
+	translatorIDS = newTranslatorIDS
 	
 var configFilePath = "user://autotranslation.json"
 func saveToFile():

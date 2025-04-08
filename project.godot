@@ -2123,10 +2123,6 @@ minigame_commit={
  ]
 }
 
-[mono]
-
-project/assembly_name="BDCC"
-
 [physics]
 
 common/enable_pause_aware_picking=true
