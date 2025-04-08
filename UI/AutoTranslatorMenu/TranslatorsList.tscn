@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://UI/AutoTranslatorMenu/TranslatorsList.gd" type="Script" id=1]
+[ext_resource path="res://UI/AutoTranslatorMenu/TranslatorItem.tscn" type="PackedScene" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.172549, 0.164706, 0.196078, 1 )
+
+[node name="TranslatorsList" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 72 )
+script = ExtResource( 1 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_right = 1280.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 24 )
+custom_styles/bg = SubResource( 1 )
+
+[node name="TranslatorList" type="VBoxContainer" parent="ScrollContainer"]
+margin_right = 1280.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TranslatorItem" parent="ScrollContainer/TranslatorList" instance=ExtResource( 2 )]
