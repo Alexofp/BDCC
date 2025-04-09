@@ -66,6 +66,11 @@ func playAnimation(animID, _args = {}):
 	else:
 		doll2.visible = true
 	
+	if(_args.has("milkTank") && _args["milkTank"]):
+		$MilkTank.visible = true
+	else:
+		$MilkTank.visible = false
+	
 	updateSubAnims()
 	
 	var state_machine = animationTree["parameters/StateMachine/playback"]
@@ -128,6 +133,9 @@ func getVarOptions():
 	var options = .getVarOptions()
 	
 	options["onlyPC"] = {
+		type = "bool",
+	}
+	options["milkTank"] = {
 		type = "bool",
 	}
 	

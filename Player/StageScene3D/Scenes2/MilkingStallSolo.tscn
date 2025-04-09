@@ -112,12 +112,21 @@ transform = Transform( 0.919, 0, 0, 0, 0.919, 0, 0, 0, 0.919, 0, 4.45785, 0.8880
 texture = ExtResource( 5 )
 
 [node name="Sprite3D3" type="Sprite3D" parent="." index="4"]
-transform = Transform( 0.793, 0, 0, 0, 0.793, 0, 0, 0, 0.793, -1.16076, 1.49904, 1.58133 )
+transform = Transform( 0.793, 0, 0, 0, 0.793, 0, 0, 0, 0.793, -2.50026, 1.49904, -0.679946 )
 texture = ExtResource( 6 )
 
 [node name="Sprite3D4" type="Sprite3D" parent="." index="5"]
 transform = Transform( 0.919, 0, 0, 0, 0.919, 0, 0, 0, 0.919, -2.54448, 2.2431, -1.57028 )
 texture = ExtResource( 7 )
+
+[node name="TopPipe" type="Position3D" parent="." index="6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.57328, 7.19899, -0.243 )
+
+[node name="BottomPipe" type="Position3D" parent="." index="7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.90338, 3.75183, 0.0307035 )
+
+[node name="MilkTank" type="Position3D" parent="." index="8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2968, 2.74419, -0.96693 )
 
 [editable path="Doll3D"]
 [editable path="Doll3D/DollSkeleton"]

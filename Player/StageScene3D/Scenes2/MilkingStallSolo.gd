@@ -56,3 +56,12 @@ func getSupportedStates():
 
 func getVarNpcs():
 	return ["pc"]
+
+func getChainPoint(_pointID):
+	if(_pointID == "toppipe"):
+		return $TopPipe
+	if(_pointID == "bottompipe"):
+		return $BottomPipe
+	if(_pointID == "milktank"):
+		return $MilkTank
+	return .getChainPoint(_pointID)

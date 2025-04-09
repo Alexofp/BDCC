@@ -805,6 +805,7 @@ func checkChains():
 var normalChainScene = preload("res://Player/Player3D/Chains/NormalChain.tscn")
 var shortChainScene = preload("res://Player/Player3D/Chains/ShortChain.tscn")
 var hoseChainScene = preload("res://Player/Player3D/Chains/HoseChain.tscn")
+var hoseShortChainScene = preload("res://Player/Player3D/Chains/HoseChainShort.tscn")
 				
 func createChainScene(chainType:String):
 	if(chainType == "normal"):
@@ -813,6 +814,8 @@ func createChainScene(chainType:String):
 		return shortChainScene.instance()
 	if(chainType == "hose"):
 		return hoseChainScene.instance()
+	if(chainType == "hoseshort"):
+		return hoseShortChainScene.instance()
 	if(chainType.ends_with(".tscn")):
 		return GlobalRegistry.instanceCached(chainType)
 	

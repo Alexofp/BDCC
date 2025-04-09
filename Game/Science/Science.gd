@@ -773,7 +773,16 @@ func doMilkCharacterCustom(theChar:BaseCharacter, bodypartSlot, howMuch:float = 
 			GM.main.addMessage(fluidAmStr+" of "+fluidObj.getVisibleName()+" got collected from "+theChar.getName())
 	
 	return totalFluid
-		
+
+func processMilkPlayerBreasts():
+	return doMilkCharacterCustom(GM.pc, BodypartSlot.Breasts, 1.0, true)
+
+func processMilkPlayerVagina():
+	return doMilkCharacterCustom(GM.pc, BodypartSlot.Vagina, 1.0, true)
+
+func processMilkPlayerPenis():
+	return doMilkCharacterCustom(GM.pc, BodypartSlot.Penis, 1.0, true)
+
 func doMilkPlayer():
 	return doMilkCharacter(GM.pc)
 
