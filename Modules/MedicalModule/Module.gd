@@ -131,6 +131,8 @@ func _init():
 		"res://Modules/MedicalModule/Milking/ElizaMilkingSeedHandScene.gd",
 		"res://Modules/MedicalModule/Milking/ElizaMilkingSeedPumpScene.gd",
 		"res://Modules/MedicalModule/Milking/ElizaMilkingProstateHandScene.gd",
+		"res://Modules/MedicalModule/Milking/ElizaMilkingProstateStraponScene.gd",
+		"res://Modules/MedicalModule/Milking/ElizaMilkingSeedPawjobScene.gd",
 		]
 	characters = [
 		"res://Modules/MedicalModule/MentalWard/LatexParasite.gd",
