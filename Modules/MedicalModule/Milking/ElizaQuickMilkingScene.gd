@@ -54,7 +54,7 @@ func _react(_action: String, _args):
 
 	if(_action == "endthescene_removestuff"):
 		if(hasPenisPump):
-			GM.pc.getInventory().clearSlot(InventorySlot.UnderwearBottom)
+			GM.pc.getInventory().clearSlot(InventorySlot.Penis)
 		if(breastsMilked):
 			GM.pc.getInventory().clearSlot(InventorySlot.UnderwearTop)
 		

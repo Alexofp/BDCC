@@ -69,6 +69,10 @@ func getFlags():
 		"Chastity_Event5GaveElizaDrug": flag(FlagType.Bool),
 		"Chastity_ExperimentWasSuccessful": flag(FlagType.Bool),
 		"Chastity_ReceivedRing": flag(FlagType.Bool),
+		
+		"Milked_Breasts": flag(FlagType.Bool),
+		"Milked_Penis": flag(FlagType.Bool),
+		"Milked_Pussy": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -169,6 +173,9 @@ func resetFlagsOnNewDay():
 		GM.main.increaseFlag("MedicalModule.Eliza_BusyDays", -1)
 	if(getFlag("MedicalModule.Medical_StoleDrugsToday")):
 		setFlag("MedicalModule.Medical_StoleDrugsToday", false)
+	setFlag("MedicalModule.Milked_Breasts", false)
+	setFlag("MedicalModule.Milked_Penis", false)
+	setFlag("MedicalModule.Milked_Pussy", false)
 
 func preparePCForMentalWard():
 	GM.pc.removeAllRestraints()

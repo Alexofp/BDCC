@@ -141,7 +141,7 @@ func _run():
 
 		addButton("Orgasm", "See what happens to your prostate next..", "process_cum")
 	if(state == "process_cum"):
-		playAnimation(StageScene.MilkingProstate, "fast", {pc="pc", npc="eliza", bodyState={exposedCrotch=true, hard=true}})
+		playAnimation(StageScene.MilkingProstate, "fast", {pc="pc", npc="eliza", pcCum=true, bodyState={exposedCrotch=true, hard=true}})
 		saynn("At some point.. it becomes too much. Every nerve, every fiber of your being, seems to suddenly ignite with pure, wild euphoria.. you cum hard.. Your cock starts to throb, your balls twitching, as your {pc.cum} gets forced out in a series of many weak but intensely satisfying spurts.. little weak strings of your seed that dribble from the tip of your member, landing into the machine's reservoir.")
 
 		saynn("[say=pc]Ah!.. ahh.. f-f.. ah..[/say]")

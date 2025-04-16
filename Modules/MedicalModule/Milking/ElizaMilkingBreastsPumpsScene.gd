@@ -22,7 +22,7 @@ func _run():
 
 		addButton("Bend forward", "Do what she wants you to do", "get_locked")
 	if(state == "get_locked"):
-		playAnimation(StageScene.MilkingStallDuo, "start", {pc="pc", npc="eliza", bodyState={exposedChest=true, hard=true, chains=[["hoseshort", "breastpump", "scene", "milktank"], ["short", "neck", "scene", "bottompipe"]]}})
+		playAnimation(StageScene.MilkingStallSolo, "start", {pc="pc", npc="eliza", bodyState={exposedChest=true, hard=true, chains=[["hoseshort", "breastpump", "scene", "milktank"], ["short", "neck", "scene", "bottompipe"]]}})
 		saynn("You follow the guidance of that paw, slowly bending forward and assuming the final position. You place your wrists in the offered holes for them in the restraints.. and watch as the doctor locks them up. Then, she also pulls out a short chain leash, attaching one end to your collar and the other to the sturdy pipe..")
 
 		saynn("[say=eliza]We don't want our cow to run off unmilked, do we~.[/say]")
@@ -37,7 +37,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "do_milk_start")
 	if(state == "do_milk_start"):
-		playAnimation(StageScene.MilkingStallDuo, "watch", {pc="pc", npc="eliza", bodyState={exposedChest=true, hard=true, chains=[["hoseshort", "breastpump", "scene", "milktank"], ["short", "neck", "scene", "bottompipe"]]}})
+		playAnimation(StageScene.MilkingStallSolo, "milking", {pc="pc", npc="eliza", bodyState={exposedChest=true, hard=true, chains=[["hoseshort", "breastpump", "scene", "milktank"], ["short", "neck", "scene", "bottompipe"]]}})
 		saynn("Eliza quickly makes sure that everything is tightly secured.. before flicking the activation switch.")
 
 		saynn("Almost immediately, a soft, rhythmic hum fills the stall as the pumps begin their work. They're not exactly gentle.. the first tugs on your sensitive nips make you gasp softly.. You look down at your chest and see your nipples getting pulled on by the machine.. again and again.. until the first drops of your {pc.milk} begin to pool at the bottom of the suction cups.. At some point enough gets collected for it to start flowing through the attached tubing..")
@@ -54,7 +54,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "do_milk_faster")
 	if(state == "do_milk_faster"):
-		playAnimation(StageScene.MilkingStallDuo, "watchfast", {pc="pc", npc="eliza", bodyState={exposedChest=true, hard=true, chains=[["hoseshort", "breastpump", "scene", "milktank"], ["short", "neck", "scene", "bottompipe"]]}})
+		playAnimation(StageScene.MilkingStallSolo, "fast", {pc="pc", npc="eliza", bodyState={exposedChest=true, hard=true, chains=[["hoseshort", "breastpump", "scene", "milktank"], ["short", "neck", "scene", "bottompipe"]]}})
 		saynn("The pumps work relentlessly.. tirelessly.. pulling out more and more {pc.milk} from your swollen nips.. The sensations are both electrifying and hypnotic.. every nerve of your sensitive buds gets triggered all at once by the machine.")
 
 		saynn("[say=eliza]Just let it all go.. Make any noises that you want, holding back will only lower the milk quality~.[/say]")
@@ -75,7 +75,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "do_milk_process")
 	if(state == "do_milk_process"):
-		playAnimation(StageScene.MilkingStallDuo, "start", {pc="pc", npc="eliza", bodyState={exposedChest=true, hard=true, chains=[["hoseshort", "breastpump", "scene", "milktank"], ["short", "neck", "scene", "bottompipe"]]}})
+		playAnimation(StageScene.MilkingStallSolo, "start", {pc="pc", npc="eliza", bodyState={exposedChest=true, hard=true, chains=[["hoseshort", "breastpump", "scene", "milktank"], ["short", "neck", "scene", "bottompipe"]]}})
 		saynn("Eventually, the flow begins to subside.. a constant flow becomes a slow, tedious dribble..")
 
 		saynn("Eliza slowly disengages the pumps. When the stimulation is gone, your eyes open..")

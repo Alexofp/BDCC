@@ -27,7 +27,7 @@ func _run():
 		sayTanksVolume()
 		
 		# DEBUG INFO
-		if(true):
+		if(false):
 			sayn("MAX SCIENCE FOR UNLOCKING TFS: "+str(GM.main.SCI.getMaxScienceFromUnlockingTFs()))
 			sayn("MAX SCIENCE FOR UNLOCKING+TESTING TFS: "+str(GM.main.SCI.getMaxScienceFromUnlockingAndTestingTFs()))
 			saynn("ALL UPGRADES COST: "+str(GM.main.SCI.getAllUpgradesScienceCost()))

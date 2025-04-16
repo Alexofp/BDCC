@@ -136,7 +136,7 @@ func _react(_action: String, _args):
 
 	if(_action == "outside_room"):
 		if(!hasCage):
-			GM.pc.getInventory().clearSlot(InventorySlot.UnderwearBottom)
+			GM.pc.getInventory().clearSlot(InventorySlot.Penis)
 
 	setState(_action)
 

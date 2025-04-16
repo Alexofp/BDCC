@@ -1173,6 +1173,16 @@ func gotThroatFuckedBy(characterID, showMessages = true):
 func getExposure():
 	return buffsHolder.getExposure()
 
+func makeNipplesSore():
+	if(!hasPerk(Perk.MilkNoSoreNipples)):
+		addEffect(StatusEffect.SoreNipplesAfterMilking)
+
+func hasSoreNipples() -> bool:
+	return hasEffect(StatusEffect.SoreNipplesAfterMilking)
+
+func removeNippleSoreness():
+	removeEffect(StatusEffect.SoreNipplesAfterMilking)
+
 # PREGNANCY STUFF
 
 func getBaseFertility() -> float:
@@ -1439,8 +1449,8 @@ func milk(howmuch = 1.0):
 		return 0.0
 	var howMuchMilk = production.drain(howmuch)
 	production.afterMilked()
-	if(!hasPerk(Perk.MilkNoSoreNipples) && howmuch >= 0.5):
-		addEffect(StatusEffect.SoreNipplesAfterMilking)
+	if(howmuch >= 0.5):
+		makeNipplesSore()
 	if(isPlayer()):
 		addSkillExperience(Skill.Milking, 20)
 	return howMuchMilk

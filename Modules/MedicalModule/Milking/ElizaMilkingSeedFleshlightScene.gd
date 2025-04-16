@@ -208,6 +208,7 @@ func _react(_action: String, _args):
 
 	if(_action == "socket_gives_fleshlight_back"):
 		processTime(3*60)
+		getCharacter("socket").clearOrificeFluids()
 
 	setState(_action)
 

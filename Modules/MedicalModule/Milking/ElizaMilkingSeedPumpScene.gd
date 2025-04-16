@@ -22,7 +22,7 @@ func _run():
 
 		addButton("Bend forward", "Do what she wants you to do", "get_locked")
 	if(state == "get_locked"):
-		playAnimation(StageScene.MilkingStallDuo, "start", {pc="pc", npc="eliza", bodyState={exposedCrotch=true, hard=true, chains=[["hoseshort", "penisPump", "scene", "milktank"], ["short", "neck", "scene", "bottompipe"]]}})
+		playAnimation(StageScene.MilkingStallSolo, "start", {pc="pc", npc="eliza", bodyState={exposedCrotch=true, hard=true, chains=[["hoseshort", "penisPump", "scene", "milktank"], ["short", "neck", "scene", "bottompipe"]]}})
 		saynn("You follow the guidance of that paw, slowly bending forward and assuming the final position. You place your wrists in the offered holes for them in the restraints.. and watch as the doctor locks them up. Then, she also pulls out a short chain leash, attaching one end to your collar and the other to the sturdy pipe..")
 
 		saynn("[say=eliza]We don't want our bull to run off unmilked, do we~.[/say]")
@@ -33,7 +33,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "do_milk_start")
 	if(state == "do_milk_start"):
-		playAnimation(StageScene.MilkingStallDuo, "watch", {pc="pc", npc="eliza", bodyState={exposedCrotch=true, hard=true, chains=[["hoseshort", "penisPump", "scene", "milktank"], ["short", "neck", "scene", "bottompipe"]]}})
+		playAnimation(StageScene.MilkingStallSolo, "milking", {pc="pc", npc="eliza", bodyState={exposedCrotch=true, hard=true, chains=[["hoseshort", "penisPump", "scene", "milktank"], ["short", "neck", "scene", "bottompipe"]]}})
 		saynn("She turns on the pump and then sits in front of you, just admiring the process.")
 
 		saynn("Almost immediately, the pump springs into action. It features a round soft 'pleasure' ring that begins its automated slide along your shaft, firmly hugging your girth.")
@@ -48,7 +48,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "do_milk_fast")
 	if(state == "do_milk_fast"):
-		playAnimation(StageScene.MilkingStallDuo, "watchfast", {pc="pc", npc="eliza", bodyState={exposedCrotch=true, hard=true, chains=[["hoseshort", "penisPump", "scene", "milktank"], ["short", "neck", "scene", "bottompipe"]]}})
+		playAnimation(StageScene.MilkingStallSolo, "fast", {pc="pc", npc="eliza", bodyState={exposedCrotch=true, hard=true, chains=[["hoseshort", "penisPump", "scene", "milktank"], ["short", "neck", "scene", "bottompipe"]]}})
 		saynn("But stroking is not all that this industrial piece of technology can do. You suddenly feel the pump.. pulling on your cock.. it seems to alternate between syphoning most of the air out, creating a strong negative pressure inside.. and then pumping it back, making you feel like your cock is getting pleasured hard..")
 
 		saynn("Together with that pleasure ring, your legs begin to feel weak, quiet grunts slipping from your lips.. It feels amazing.. like you're fucking the most tight pussy ever.. Your toes curl up as you squirm against the restraints and chains..")
@@ -59,7 +59,7 @@ func _run():
 
 		addButton("Cum", "Let it happen", "process_cum")
 	if(state == "process_cum"):
-		playAnimation(StageScene.MilkingStallDuo, "watchcum", {pc="pc", npc="eliza", bodyState={exposedCrotch=true, hard=true, chains=[["hoseshort", "penisPump", "scene", "milktank"], ["short", "neck", "scene", "bottompipe"]]}})
+		playAnimation(StageScene.MilkingStallSolo, "cum", {pc="pc", npc="eliza", bodyState={exposedCrotch=true, hard=true, chains=[["hoseshort", "penisPump", "scene", "milktank"], ["short", "neck", "scene", "bottompipe"]]}})
 		saynn("You cum hard.. Your body shudders as your {pc.penis} starts to throb and shoot its load in juicy waves. You pant and grunt heavily while the clear tube of the pump begins to quickly fill with your thick, hot seed.. before it all gets pumped out into the connected fluid tank.")
 
 		saynn("[say=eliza]Let it milk you dry.. We need every bit of that seed~.[/say]")
@@ -112,7 +112,7 @@ func _react(_action: String, _args):
 
 	if(_action == "undo_restraints"):
 		processTime(3*60)
-		GM.pc.getInventory().clearSlot(InventorySlot.UnderwearBottom)
+		GM.pc.getInventory().clearSlot(InventorySlot.Penis)
 
 	setState(_action)
 

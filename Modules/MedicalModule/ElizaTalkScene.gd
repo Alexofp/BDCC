@@ -46,11 +46,12 @@ func _run():
 		else:
 			addDisabledButton("Research", "Talk about it with Eliza first")
 		if(getModuleFlag("MedicalModule", "Med_pcKnowsAboutMilking")):
+			addButton("Milking", "See how you can be milked", "milking_menu")
 			
-			if(GM.pc.hasPerk(Perk.MilkNoSoreNipples) || (!getModuleFlag("MedicalModule", "Med_wasMilkedToday", false) && !GM.pc.hasEffect(StatusEffect.SoreNipplesAfterMilking))):
-				addButton("Milking", "Ask to be milked", "milking")
-			else:
-				addDisabledButton("Milking", "Give yourself some rest")
+#			if(GM.pc.hasPerk(Perk.MilkNoSoreNipples) || (!getModuleFlag("MedicalModule", "Med_wasMilkedToday", false) && !GM.pc.hasEffect(StatusEffect.SoreNipplesAfterMilking))):
+#				addButton("Milking", "Ask to be milked", "milking")
+#			else:
+#				addDisabledButton("Milking", "Give yourself some rest")
 		else:
 			addDisabledButton("Milking", "Talk about it with Eliza first")
 		
@@ -273,20 +274,107 @@ func _run():
 		addButton("Back", "You're not interested", "")
 
 
-	if(state == "milking"):
+	if(state == "milking_menu"):
 		saynn("[say=pc]I’m interested. You were talking about the possibility of donating milk and cum?[/say]")
 
 		saynn("The feline puts the mug away and stands up from the chair.")
 
 		saynn("[say=eliza]Yes, we can always use more. How would you like to be milked.[/say]")
-
-		addButton("Milk", "You want your breasts to be milked", "milk")
-		if(GM.pc.hasPenis()):
-			addButton("Seed", "You want your cock to be milked", "seed")
+		
+		if(getModule("ElizaModule").hasLabAccess()):
+			sayTanksVolume()
+		
+		if(!GM.pc.hasSoreNipples()):
+			if(GM.pc.canBeMilked()):
+				if(canBeMilked()):
+					addButton("Milk..", "Show the ways Eliza can milk your breasts", "milk_breasts_menu")
+				else:
+					addDisabledButton("Milk..", "Your breasts are not full enough to be milked")
+			else:
+				addDisabledButton("Milk..", "Your breasts can't be milked")
 		else:
-			addDisabledButton("Seed", "You would need a dick for that")
-		addDisabledButton("Both", "Not done yet")
+			addDisabledButton("Milk..", "Your nips are sore, give your breasts a rest!")
+		if(GM.pc.canBeSeedMilked()):
+			if(canBeSeedMilked()):
+				addButton("Seed..", "Show the ways Eliza can milk your penis", "milk_penis_menu")
+			else:
+				addDisabledButton("Seed..", "Your balls are not full enough to be seed-milked")
+		else:
+			addDisabledButton("Seed..", "There is no way to seed-milk you..")
+		if(GM.pc.hasReachableVagina()):
+			if(!getFlag("MedicalModule.Milked_Pussy", false)):
+				addButton("Girlcum..", "Show the ways Eliza can milk your pussy", "milk_vagina_menu")
+			else:
+				addDisabledButton("Girlcum..", "You already milked your pussy today, give it a break!")
+		else:
+			addDisabledButton("Girlcum..", "You don't have a reachable vagina in order for Eliza to milk it")
+		if(GM.main.SCI.hasMilkingTier3()):
+			if(!getFlag("MedicalModule.Milked_Breasts", false) && !getFlag("MedicalModule.Milked_Penis", false) && !getFlag("MedicalModule.Milked_Pussy", false)):
+				addButton("Quick milking", "Ask Eliza to milk everything at once and fast!", "do_start_milking_scene_quick")
+			else:
+				addDisabledButton("Quick milking", "You can only use this option if you haven't been milked any other way today")
+		else:
+			addDisabledButton("Quick milking", "You need to become Eliza's assistant and upgrade the lab enough to use this option.")
+		
 		addButton("Back", "Go back", "")
+
+	if(state == "milk_breasts_menu"):
+		saynn("How do you want Eliza to milk your {pc.breasts}?")
+		
+		if(getModule("ElizaModule").hasLabAccess()):
+			sayTanksVolume()
+
+		addButton("Hand-milking", "Let Eliza milk your breasts with her hands", "do_start_milking_scene_breasts", ["ElizaMilkingBreastsHandScene"])
+		if(GM.main.SCI.hasMilkingTier1()):
+			addButton("Stall Hand-milking", "Let Eliza milk your breasts with her hands while in a milking stall", "do_start_milking_scene_breasts", ["ElizaMilkingBreastsStallScene"])
+			addButton("Breast pumps", "Let Eliza use industrial breast pumps on you", "do_start_milking_scene_breasts", ["ElizaMilkingBreastsPumpsScene"])
+		else:
+			addDisabledButton("Stall Hand-milking", "You need to become Eliza's assistant and upgrade the lab enough to use this option.")
+			addDisabledButton("Breast pumps", "You need to become Eliza's assistant and upgrade the lab enough to use this option.")
+		if(GM.main.SCI.hasMilkingTier2()):
+			addButton("Milking machine", "Let Eliza use a milking machine to milk your breasts", "do_start_milking_scene_breasts", ["ElizaMilkingBreastsBDSMMachineScene"])
+		else:
+			addDisabledButton("Milking machine", "You need to become Eliza's assistant and upgrade the lab enough to use this option.")
+		
+		addButton("Back", "Go back", "milking_menu")
+
+	if(state == "milk_penis_menu"):
+		saynn("How do you want Eliza to milk your {pc.penis}?")
+		
+		if(getModule("ElizaModule").hasLabAccess()):
+			sayTanksVolume()
+			
+		addButtonWithChecks("Hand-milking", "Let Eliza milk your cock with her hands", "do_start_milking_scene_seed", ["ElizaMilkingSeedHandScene"], [[ButtonChecks.HasReachablePenis]])
+		addButton("Prostate milking", "Let Eliza milk your cock by milking your prostate directly with her fingers", "do_start_milking_scene_seed", ["ElizaMilkingProstateHandScene"])
+		if(GM.main.SCI.hasMilkingTier1()):
+			addButtonWithChecks("Penis pump", "Let Eliza milk your cock with an industrial penis pump", "do_start_milking_scene_seed", ["ElizaMilkingSeedPumpScene"], [[ButtonChecks.HasReachablePenis]])
+			addButton("Strapon milking", "Let Eliza milk your cock by pegging your butt with a strapon, milking your prostate that way", "do_start_milking_scene_seed", ["ElizaMilkingProstateStraponScene"])
+		else:
+			addDisabledButton("Penis pump", "You need to become Eliza's assistant and upgrade the lab enough to use this option.")
+			addDisabledButton("Strapon milking", "You need to become Eliza's assistant and upgrade the lab enough to use this option.")
+		if(GM.main.SCI.hasMilkingTier2()):
+			addButtonWithChecks("Pawjob", "Let Eliza milk your cock by with her hind paws", "do_start_milking_scene_seed", ["ElizaMilkingSeedPawjobScene"], [[ButtonChecks.HasReachablePenis]])
+			if(getFlag("SocketModule.h5completed", false)):
+				addButtonWithChecks("Fleshlight", "Let Eliza invite someone else to milk your cock with a fleshlight", "do_start_milking_scene_seed", ["ElizaMilkingSeedFleshlightScene"], [[ButtonChecks.HasReachablePenis]])
+			else:
+				addDisabledButton("Fleshlight", "You need to complete Socket's storyline to unlock this option. You will also need your cock to be reachable")
+			addButton("Milking machine", "Let Eliza milk your cock with milking machine. Includes prostate stimulation", "do_start_milking_scene_seed", ["ElizaMilkingSeedBDSMMachineScene"])
+		else:
+			addDisabledButton("Pawjob", "You need to become Eliza's assistant and upgrade the lab enough to use this option.")
+			addDisabledButton("Fleshlight", "You need to become Eliza's assistant and upgrade the lab enough to use this option.")
+			addDisabledButton("Milking machine", "You need to become Eliza's assistant and upgrade the lab enough to use this option.")
+			
+		addButton("Back", "Go back", "milking_menu")
+
+	if(state == "milk_vagina_menu"):
+		saynn("How do you want Eliza to milk your pussy?")
+		
+		if(getModule("ElizaModule").hasLabAccess()):
+			sayTanksVolume()
+		
+		addButton("Sybian", "Let Eliza use a sybian machine to extract girlcum out of your pussy", "do_start_milking_scene_girlcum", ["ElizaMilkingGirlcumSybianScene"])
+		
+		addButton("Back", "Go back", "milking_menu")
 
 	if(state == "milk"):
 		# (First time scene)
@@ -418,6 +506,21 @@ func _run():
 		addDisabledButton("Pump", "not done")
 		addButton("Never mind", "You changed your mind", "")
 
+func sayTanksVolume():
+	var storedFluids:Dictionary = GM.main.SCI.getStoredFluidsWithDefauls()
+	
+	sayn("Fluid tanks contents:")
+	for fluidID in storedFluids:
+		var fluidAmount:float = storedFluids[fluidID]
+		var fluidLimit:float = GM.main.SCI.getStoredFluidLimit(fluidID)
+		var fluidName:String = "Unknown fluid"
+		
+		var fluid:FluidBase = GlobalRegistry.getFluid(fluidID)
+		if(fluid != null):
+			fluidName = fluid.getVisibleName()
+		
+		sayn("- "+fluidName+": "+str(Util.roundF(fluidAmount, 1))+"/"+str(Util.roundF(fluidLimit, 1))+"ml")
+	sayn("")
 
 func _react(_action: String, _args):
 	if(_action == "induce_lactation"):
@@ -487,5 +590,49 @@ func _react(_action: String, _args):
 		runScene("ElizaSexMenuScene")
 		endScene()
 		return
+		
+	if(_action == "do_start_milking_scene_breasts"):
+		setFlag("MedicalModule.Milked_Breasts", true)
+		runScene(_args[0])
+		endScene()
+		return
+		
+	if(_action == "do_start_milking_scene_seed"):
+		setFlag("MedicalModule.Milked_Penis", true)
+		runScene(_args[0])
+		endScene()
+		return
+		
+	if(_action == "do_start_milking_scene_girlcum"):
+		setFlag("MedicalModule.Milked_Pussy", true)
+		runScene(_args[0])
+		endScene()
+		return
+		
+	if(_action == "do_start_milking_scene_quick"):
+		setFlag("MedicalModule.Milked_Breasts", true)
+		setFlag("MedicalModule.Milked_Penis", true)
+		setFlag("MedicalModule.Milked_Pussy", true)
+		runScene("ElizaQuickMilkingScene")
+		return
 	
 	setState(_action)
+
+
+func canBeMilked() -> bool:
+	if(!GM.pc.hasBodypart(BodypartSlot.Breasts)):
+		return false
+	var breasts: BodypartBreasts = GM.pc.getBodypart(BodypartSlot.Breasts)
+	var production: FluidProduction = breasts.getFluidProduction()
+	if(production == null):
+		return false
+	return production.getFluidAmount() >= 300.0 || production.getFluidLevel() >= 0.4
+
+func canBeSeedMilked() -> bool:
+	if(!GM.pc.hasBodypart(BodypartSlot.Penis)):
+		return false
+	var penis: BodypartPenis = GM.pc.getBodypart(BodypartSlot.Penis)
+	var production: FluidProduction = penis.getFluidProduction()
+	if(production == null):
+		return false
+	return production.getFluidAmount() >= 100.0 || production.getFluidLevel() >= 0.8

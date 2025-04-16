@@ -281,6 +281,26 @@ var upgradesInfo:Dictionary = {
 		main = true,
 	},
 	
+	"milkingBetter1": {
+		name = "Milking efficiency 1",
+		desc = "Install a better equipment in the milking room. Unlocks more ways for Eliza to milk you, makes ALL kinds of milking 25% more efficient.",
+		cost = 20,
+		requiredUpgrades = [],
+	},
+	"milkingBetter2": {
+		name = "Milking efficiency 2",
+		desc = "Install an even more better equipment in the milking room. Unlocks more ways for Eliza to milk you, makes ALL kinds of milking 75% more efficient.",
+		cost = 30,
+		drugAmount = 5,
+		requiredUpgrades = ["milkingBetter1"],
+	},
+	"milkingBetter3": {
+		name = "Milking efficiency 3",
+		desc = "Install the best equipment in the milking room. Unlocks ability for Eliza to 'quick milk' you, makes ALL kinds of milking 100% more efficient.",
+		cost = 50,
+		drugAmount = 10,
+		requiredUpgrades = ["milkingBetter2"],
+	},
 }
 
 func isUpgradeVisible(upgradeID:String) -> bool:
@@ -393,6 +413,8 @@ func removeNurseryTask(_task):
 	return false
 
 func addFluid(fluidID:String, amount:float):
+	if(!hasAccessToLab()):
+		return 0.0
 	if(!storedFluids.has(fluidID)):
 		storedFluids[fluidID] = 0.0
 	var curVal:float = storedFluids[fluidID]
@@ -734,35 +756,71 @@ func getAmountOfUnlockedMainUpgrade() -> int:
 	
 	return result
 
-func doMilkCharacterCustom(theChar:BaseCharacter, bodypartSlot, howMuch:float = 1.0, showMessage:bool = true):
+func hasAccessToLab() -> bool:
+	if(GM.main.getFlag("ElizaModule.s2hap", false)):
+		return true
+	return false
+
+func getMilkingOfPlayerEfficiency() -> float:
+	var mod:float = 1.0
+	
+	if(hasUpgrade("milkingBetter1")):
+		mod += 0.25
+	if(hasUpgrade("milkingBetter2")):
+		mod += 0.75
+	if(hasUpgrade("milkingBetter3")):
+		mod += 1.0
+	
+	return mod
+
+func hasMilkingTier1() -> bool:
+	return hasUpgrade("milkingBetter1")
+
+func hasMilkingTier2() -> bool:
+	return hasUpgrade("milkingBetter2")
+
+func hasMilkingTier3() -> bool:
+	return hasUpgrade("milkingBetter3")
+
+func doMilkCharacterCustom(theChar:BaseCharacter, bodypartSlot, howMuch:float = 1.0, showMessage:bool = true) -> Dictionary:
+	if(!theChar):
+		return {}
+	var efficiency:float = (getMilkingOfPlayerEfficiency() if theChar.isPlayer() else 1.0)
+	
 	howMuch = clamp(howMuch, 0.0, 1.0)
 	if(!theChar.hasBodypart(bodypartSlot)):
-		return 0.0
+		return {}
 	var fluidsGot:Dictionary = {}
 	
 	if(bodypartSlot in [BodypartSlot.Penis, BodypartSlot.Breasts]):
+		#if(bodypartSlot == BodypartSlot.Breasts && theChar.hasSoreNipples()):
+		#	return {}
 		var thePart:Bodypart = theChar.getBodypart(bodypartSlot)
 		var theFluids:Fluids = thePart.getFluids()
 		if(theFluids == null):
-			return 0.0
+			return {}
 		var fluidsByType:Dictionary = theFluids.getFluidAmountByType()
 		for fluidID in fluidsByType:
 			if(!fluidsGot.has(fluidID)):
 				fluidsGot[fluidID] = 0.0
-			fluidsGot[fluidID] += fluidsByType[fluidID] * howMuch
+			fluidsGot[fluidID] += fluidsByType[fluidID] * howMuch * efficiency
 		theFluids.drainPercent(howMuch)
 		
 		thePart.getFluidProduction().afterMilked()
+		
+		#if(howMuch >= 1.0): # Call it manually, I decided
+		#	theChar.makeNipplesSore()
+		
 	if(bodypartSlot == BodypartSlot.Vagina):
 		var fluidAmount:float = theChar.getFluidAmount(FluidSource.Vagina)
 		var fluidType:String = theChar.getFluidType(FluidSource.Vagina)
 		if(!fluidsGot.has(fluidType)):
 			fluidsGot[fluidType] = 0.0
-		fluidsGot[fluidType] += fluidAmount * howMuch
+		fluidsGot[fluidType] += fluidAmount * howMuch * efficiency
 	
-	var totalFluid:float = 0.0
-	for fluidType in fluidsGot:
-		totalFluid += fluidsGot[fluidType]
+	#var totalFluid:float = 0.0
+	#for fluidType in fluidsGot:
+	#	totalFluid += fluidsGot[fluidType]
 	
 	if(showMessage):
 		for fluidType in fluidsGot:
@@ -770,58 +828,65 @@ func doMilkCharacterCustom(theChar:BaseCharacter, bodypartSlot, howMuch:float = 
 			if(!fluidObj):
 				continue
 			var fluidAmStr:String = str(Util.roundF(fluidsGot[fluidType], 1))
-			GM.main.addMessage(fluidAmStr+" of "+fluidObj.getVisibleName()+" got collected from "+theChar.getName())
-	
-	return totalFluid
-
-func processMilkPlayerBreasts():
-	return doMilkCharacterCustom(GM.pc, BodypartSlot.Breasts, 1.0, true)
-
-func processMilkPlayerVagina():
-	return doMilkCharacterCustom(GM.pc, BodypartSlot.Vagina, 1.0, true)
-
-func processMilkPlayerPenis():
-	return doMilkCharacterCustom(GM.pc, BodypartSlot.Penis, 1.0, true)
-
-func doMilkPlayer():
-	return doMilkCharacter(GM.pc)
-
-func doMilkCharacter(theChar:BaseCharacter):
-	var bodypartsToMilk:Array = [BodypartSlot.Breasts, BodypartSlot.Penis]
-	
-	var fluidsGot:Dictionary = {}
-	
-	for bodypartSlot in bodypartsToMilk:
-		if(!theChar.hasBodypart(bodypartSlot)):
-			continue
-		
-		var thePart:Bodypart = theChar.getBodypart(bodypartSlot)
-		var theFluids:Fluids = thePart.getFluids()
-		if(theFluids == null):
-			continue
-		
-		var fluidsByType:Dictionary = theFluids.getFluidAmountByType()
-		for fluidID in fluidsByType:
-			if(!fluidsGot.has(fluidID)):
-				fluidsGot[fluidID] = 0.0
-			fluidsGot[fluidID] += fluidsByType[fluidID]
-		theFluids.clear()
-		
-		if(bodypartSlot == BodypartSlot.Breasts):
-			theChar.milk() # Stimulate lactation
-	
-	if(theChar.hasBodypart(BodypartSlot.Vagina)):
-		var fluidAmount:float = theChar.getFluidAmount(FluidSource.Vagina)
-		var fluidType:String = theChar.getFluidType(FluidSource.Vagina)
-		if(!fluidsGot.has(fluidType)):
-			fluidsGot[fluidType] = 0.0
-		fluidsGot[fluidType] += fluidAmount
-	
-	for fluidType in fluidsGot:
-		fluidsGot[fluidType] *= RNG.randf_range(0.8, 1.0) # Simulates milking in-efficiency
-		addFluid(fluidType, fluidsGot[fluidType])
+			GM.main.addMessage(fluidAmStr+" ml of "+fluidObj.getVisibleName()+" got collected from "+theChar.getName())
 	
 	return fluidsGot
+
+
+func processMilkPlayerCustom(bodypartSlot):
+	var fluidsGot:Dictionary = doMilkCharacterCustom(GM.pc, bodypartSlot, 1.0, true)
+	var totalFluid:float = 0.0
+	for fluidType in fluidsGot:
+		totalFluid += fluidsGot[fluidType]
+		addFluid(fluidType, fluidsGot[fluidType])
+		handleBountyFluid(fluidType, fluidsGot[fluidType])
+	return totalFluid
+
+func processMilkPlayerBreasts(makeNipsSore:bool = true):
+	# add sore nips
+	# add stimulation
+	var totalFluid:float = processMilkPlayerCustom(BodypartSlot.Breasts)
+	if(makeNipsSore):
+		GM.pc.makeNipplesSore()
+	return totalFluid
+
+func processMilkPlayerVagina():
+	return processMilkPlayerCustom(BodypartSlot.Vagina)
+
+func processMilkPlayerPenis():
+	return processMilkPlayerCustom(BodypartSlot.Penis)
+
+func doMilkCharacter(theChar:BaseCharacter):
+	if(!theChar):
+		return {}
+	var fluidsGotTotal:Dictionary = {}
+	
+	if(true): # We always try to milk breasts
+		var fluidsGot:Dictionary = doMilkCharacterCustom(theChar, BodypartSlot.Breasts, 1.0, false)
+		for fluidType in fluidsGot:
+			if(!fluidsGotTotal.has(fluidType)):
+				fluidsGotTotal[fluidType] = 0.0
+			fluidsGotTotal[fluidType] += fluidsGot[fluidType]
+	
+	if(theChar.hasPenis()):
+		var fluidsGot:Dictionary = doMilkCharacterCustom(theChar, BodypartSlot.Penis, 1.0, false)
+		for fluidType in fluidsGot:
+			if(!fluidsGotTotal.has(fluidType)):
+				fluidsGotTotal[fluidType] = 0.0
+			fluidsGotTotal[fluidType] += fluidsGot[fluidType]
+	
+	if(theChar.hasVagina()):
+		var fluidsGot:Dictionary = doMilkCharacterCustom(theChar, BodypartSlot.Vagina, 1.0, false)
+		for fluidType in fluidsGot:
+			if(!fluidsGotTotal.has(fluidType)):
+				fluidsGotTotal[fluidType] = 0.0
+			fluidsGotTotal[fluidType] += fluidsGot[fluidType]
+	
+	for fluidType in fluidsGotTotal:
+		fluidsGotTotal[fluidType] *= RNG.randf_range(0.8, 1.0) # Simulates milking in-efficiency
+		addFluid(fluidType, fluidsGotTotal[fluidType])
+	
+	return fluidsGotTotal
 
 func getMaxScienceFromUnlockingTFs() -> int:
 	var result:int = 0
