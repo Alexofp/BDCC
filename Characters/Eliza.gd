@@ -211,13 +211,24 @@ func updateBodyparts():
 			shouldPaint = true
 	elif(speciesTF == "catgirl"):
 		elizaSkinType = "catgirl"
-		if(currentHead != "humanhead"):
+		if(currentHead != "humanhead" || !hasTail()):
 			giveBodypartUnlessSame(GlobalRegistry.createBodypart("humanhead"))
 			if(hasHorns()):
 				removeBodypart(BodypartSlot.Horns)
 			giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinetail"))
 			giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
 			giveBodypartUnlessSame(GlobalRegistry.createBodypart("felineears2"))
+			shouldPaint = true
+	elif(speciesTF == "human"):
+		elizaSkinType = "human"
+		if(currentHead != "humanhead" || hasTail()):
+			giveBodypartUnlessSame(GlobalRegistry.createBodypart("humanhead"))
+			if(hasHorns()):
+				removeBodypart(BodypartSlot.Horns)
+			if(hasTail()):
+				removeBodypart(BodypartSlot.Tail)
+			giveBodypartUnlessSame(GlobalRegistry.createBodypart("plantilegs"))
+			giveBodypartUnlessSame(GlobalRegistry.createBodypart("humanears"))
 			shouldPaint = true
 	elif(speciesTF == "demon"):
 		elizaSkinType = "demon"
@@ -274,6 +285,17 @@ func updateBodyparts():
 		"tail": {"g": Color("ffeb7dbb"),},
 		"legs": {"skin": "LuxeSkin","g": Color("ffeb7dbb"),},
 		"penis": {"g": Color("ffff90e8"),"b": Color("ff8b0089"),},
+		}
+	elif(elizaSkinType == "human"):
+		pickedSkin="FurGirl"
+		pickedSkinRColor=Color("ffeebcad")
+		pickedSkinGColor=Color("ffea8432")
+		pickedSkinBColor=Color("ffebb7a0")
+		npcSkinData={
+		"hair": {"r": Color("ffd6aac7"),"g": Color("fff1c0e0"),"b": Color("ff46460d"),},
+		"ears": {"g": Color("ffd79482"),},
+		"penis": {"g": Color("ffffb290"),"b": Color("ffe0957e"),},
+		"tail": {"g": Color("ffd6aac7"),},
 		}
 	else:
 		pickedSkin="ArconSkin"

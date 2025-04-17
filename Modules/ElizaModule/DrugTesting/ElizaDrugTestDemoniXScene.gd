@@ -379,6 +379,9 @@ func _react(_action: String, _args):
 
 	if(_action == "after_lick_undo_tf"):
 		processTime(3*60)
+		if(!getFlag("ElizaModule.tfcan_demon", false)):
+			setFlag("ElizaModule.tfcan_demon", true)
+			addMessage("You can now tell Eliza to transform into a half-demon at any time.")
 
 	if(_action == "resist_table"):
 		processTime(5*60)
@@ -399,6 +402,9 @@ func _react(_action: String, _args):
 
 	if(_action == "resist_grind_after_undotf"):
 		processTime(3*60)
+		if(!getFlag("ElizaModule.tfcan_demon", false)):
+			setFlag("ElizaModule.tfcan_demon", true)
+			addMessage("You can now tell Eliza to transform into a half-demon at any time.")
 
 	if(_action == "resist_grind_after_unlock"):
 		processTime(3*60)

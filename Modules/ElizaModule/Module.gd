@@ -21,8 +21,8 @@ func getFlags():
 		"scarletProgress": flag(FlagType.Number),
 		
 		"elizatf_cock": flag(FlagType.Text), # "" canine feline horse human dragon
-		"elizatf_species": flag(FlagType.Text), # "" dragon catgirl demon
-		"elizatf_body": flag(FlagType.Text), # "" hucow male?
+		"elizatf_species": flag(FlagType.Text), # "" dragon catgirl demon human
+		"elizatf_body": flag(FlagType.Text), # "" hucow
 		
 		"tfcan_hucow": flag(FlagType.Bool),
 		"tfcan_demon": flag(FlagType.Bool),

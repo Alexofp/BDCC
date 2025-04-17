@@ -46,6 +46,7 @@ func _run():
 		if (getFlag("ElizaModule.tfcan_species")):
 			addButton("Dragon", "Make Eliza into a dragon", "species_dragon")
 			addButton("Catgirl", "Make Eliza into a catgirl", "species_catgirl")
+			addButton("Human", "Make Eliza into a human", "species_human")
 	if(state == "body_menu"):
 		playAnimation(StageScene.Solo, "stand", {pc="eliza", bodyState={naked=true, hard=true}})
 		saynn("How do you want to change Eliza's body?")
@@ -116,6 +117,12 @@ func _react(_action: String, _args):
 
 	if(_action == "species_catgirl"):
 		setFlag("ElizaModule.elizatf_species", "catgirl")
+		getCharacter("eliza").updateBodyparts()
+		setState("species_menu")
+		return
+
+	if(_action == "species_human"):
+		setFlag("ElizaModule.elizatf_species", "human")
 		getCharacter("eliza").updateBodyparts()
 		setState("species_menu")
 		return
