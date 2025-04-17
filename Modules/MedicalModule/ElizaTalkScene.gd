@@ -38,7 +38,10 @@ func _run():
 			saynn("You approach the counter and are greeted by the familiar feline face. The doc seems to always be sipping coffee out of her mug.")
 
 			saynn("[say=eliza]Dr. Quinn here. Need something?[/say]")
-
+		
+		if(getModule("ElizaModule").canTFEliza()):
+			addButtonAt(14, "TF menu", "Tell Eliza to use or stop using certain transformation drugs!", "openTFMenu")
+		
 		addButton("Talk", "Ask her some questions", "talk")
 		addButton("Appearance", "Take a closer look", "appearance")
 		if(getModuleFlag("MedicalModule", "Med_pcKnowsAboutTests")):
@@ -614,6 +617,10 @@ func _react(_action: String, _args):
 		setFlag("MedicalModule.Milked_Penis", true)
 		setFlag("MedicalModule.Milked_Pussy", true)
 		runScene("ElizaQuickMilkingScene")
+		return
+	
+	if(_action == "openTFMenu"):
+		runScene("ElizaTFHerScene")
 		return
 	
 	setState(_action)

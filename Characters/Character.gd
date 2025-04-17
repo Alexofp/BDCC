@@ -204,14 +204,10 @@ func paintBodyparts():
 				continue
 			var bodypart = getBodypart(bodypartSlot)
 			var bodypartSkinData = npcSkinData[bodypartSlot]
-			if(bodypartSkinData.has("skin")):
-				bodypart.pickedSkin = bodypartSkinData["skin"]
-			if(bodypartSkinData.has("r")):
-				bodypart.pickedRColor = bodypartSkinData["r"]
-			if(bodypartSkinData.has("g")):
-				bodypart.pickedGColor = bodypartSkinData["g"]
-			if(bodypartSkinData.has("b")):
-				bodypart.pickedBColor = bodypartSkinData["b"]
+			bodypart.pickedSkin = bodypartSkinData["skin"] if bodypartSkinData.has("skin") else null
+			bodypart.pickedRColor = bodypartSkinData["r"] if bodypartSkinData.has("r") else null
+			bodypart.pickedGColor = bodypartSkinData["g"] if bodypartSkinData.has("g") else null
+			bodypart.pickedBColor = bodypartSkinData["b"] if bodypartSkinData.has("b") else null
 
 func copySkinTo(otherNPC):
 	otherNPC.pickedSkin = pickedSkin
