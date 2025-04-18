@@ -12,7 +12,7 @@ func _run():
 		saynn("What do you want to change about Eliza?")
 
 		addButton("Done", "Enough tinkering", "endthescene")
-		if (getFlag("ElizaModule.tfcan_cocks")):
+		if (getFlag("ElizaModule.tfcan_cocks") || getFlag("ElizaModule.tfcan_felinecock", false)):
 			addButton("Cock", "Change Eliza's penis or get rid of it", "penis_menu")
 		else:
 			addDisabledButton("Cock", "You haven't unlocked a drug that can do this yet..")
@@ -30,11 +30,20 @@ func _run():
 
 		addButton("Confirm", "Make her like this", "")
 		addButton("No penis", "Tell her to stay as she normally is", "cock_no")
-		addButton("Canine", "Tell her to grow a canine cock", "cock_canine")
-		addButton("Feline", "Tell her to grow a feline cock", "cock_feline")
-		addButton("Dragon", "Tell her to grow a dragon cock", "cock_dragon")
-		addButton("Equine", "Tell her to grow a horse cock", "cock_horse")
-		addButton("Human", "Tell her to grow a human cock", "cock_human")
+		if(getFlag("ElizaModule.tfcan_felinecock", false)):
+			addButton("Feline", "Tell her to grow a feline cock", "cock_feline")
+		else:
+			addDisabledButton("Feline", "You haven't unlocked a drug that can do this yet..")
+		if(getFlag("ElizaModule.tfcan_cocks")):
+			addButton("Canine", "Tell her to grow a canine cock", "cock_canine")
+			addButton("Dragon", "Tell her to grow a dragon cock", "cock_dragon")
+			addButton("Equine", "Tell her to grow a horse cock", "cock_horse")
+			addButton("Human", "Tell her to grow a human cock", "cock_human")
+		else:
+			addDisabledButton("Canine", "You haven't unlocked a drug that can do this yet..")
+			addDisabledButton("Dragon", "You haven't unlocked a drug that can do this yet..")
+			addDisabledButton("Equine", "You haven't unlocked a drug that can do this yet..")
+			addDisabledButton("Human", "You haven't unlocked a drug that can do this yet..")
 	if(state == "species_menu"):
 		playAnimation(StageScene.Solo, "stand", {pc="eliza", bodyState={naked=true, hard=true}})
 		saynn("How do you want to change Eliza's species?")
