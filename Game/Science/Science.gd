@@ -19,6 +19,7 @@ const DIFFICULTY_MEDIUM = 1
 const DIFFICULTY_HARD = 2
 const DIFFICULTY_VERY_HARD = 3
 
+# (out of date)
 #MAX SCIENCE FOR UNLOCKING TFS: 275
 #MAX SCIENCE FOR UNLOCKING+TESTING TFS: 1100
 # ALL UPGRADES COST: 900
@@ -301,6 +302,14 @@ var upgradesInfo:Dictionary = {
 		drugAmount = 10,
 		requiredUpgrades = ["milkingBetter2"],
 	},
+	
+	
+	"unlimitedFluidStorage": {
+		name = "Tanks capacity +INF!",
+		desc = "Install special BLUESPACE fluid tanks that will hold a shit ton of fluids!",
+		cost = 250,
+		requiredUpgrades = ["milkingBetter3", "tanksUpgrade4", "advBreastPump", "advPenisPump", "configurableDrugs", "strangepill", "bluespaceStash"],
+	},
 }
 
 func isUpgradeVisible(upgradeID:String) -> bool:
@@ -571,6 +580,8 @@ func getStoredFluidLimit(fluidType:String) -> float:
 		result = 25000.0
 	if(hasUpgrade("tanksUpgrade4")):
 		result = 100000.0
+	if(hasUpgrade("unlimitedFluidStorage")):
+		result = 100000000.0
 	
 	var theFluid:FluidBase = GlobalRegistry.getFluid(fluidType)
 	if(theFluid != null):
@@ -832,6 +843,15 @@ func doMilkCharacterCustom(theChar:BaseCharacter, bodypartSlot, howMuch:float = 
 	
 	return fluidsGot
 
+func processMilkCharacterCustom(theChar, bodypartSlot, addBounty:bool = true):
+	var fluidsGot:Dictionary = doMilkCharacterCustom(theChar, bodypartSlot, 1.0, true)
+	var totalFluid:float = 0.0
+	for fluidType in fluidsGot:
+		totalFluid += fluidsGot[fluidType]
+		addFluid(fluidType, fluidsGot[fluidType])
+		if(addBounty):
+			handleBountyFluid(fluidType, fluidsGot[fluidType])
+	return totalFluid
 
 func processMilkPlayerCustom(bodypartSlot):
 	var fluidsGot:Dictionary = doMilkCharacterCustom(GM.pc, bodypartSlot, 1.0, true)
