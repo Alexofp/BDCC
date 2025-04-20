@@ -17,6 +17,13 @@ func getPillName() -> String:
 func getUnlockData() -> Dictionary:
 	return {
 		eliza = "Wow! This one is just.. packed.. with all sorts of DNA. I see a lot of different patterns.. but they do share something in common. I think this one has the potential to completely change you into something else! To override your species! Just imagine the adventures you could have in a new body. I will call it.. 'WildShift'.",
+		tryOptions = [
+			{
+				name = "Make Eliza eat it",
+				desc = "Ask if she is brave enough to try her own product. This might be funny or sad, who knows.",
+				sceneID = "ElizaDrugTestSpeciesScene",
+			},
+		],
 	}
 
 func getTFCheckTags() -> Dictionary:

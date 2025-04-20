@@ -27,6 +27,7 @@ func getFlags():
 		"tfcan_hucow": flag(FlagType.Bool),
 		"tfcan_demon": flag(FlagType.Bool),
 		"tfcan_species": flag(FlagType.Bool),
+		"tfcan_catgirl": flag(FlagType.Bool),
 		"tfcan_cocks": flag(FlagType.Bool),
 		"tfcan_felinecock": flag(FlagType.Bool),
 	}
@@ -60,6 +61,8 @@ func _init():
 		"res://Modules/ElizaModule/DrugTesting/ElizaDrugTestDemoniXScene.gd",
 		"res://Modules/ElizaModule/DrugTesting/ElizaDrugTestGrowCockScene.gd",
 		"res://Modules/ElizaModule/DrugTesting/ElizaDrugTestRandomCockScene.gd",
+		"res://Modules/ElizaModule/DrugTesting/ElizaDrugTestHybridScene.gd",
+		"res://Modules/ElizaModule/DrugTesting/ElizaDrugTestSpeciesScene.gd",
 		]
 	characters = [
 		"res://Modules/ElizaModule/DrugTesting/ElizaDemon.gd",
@@ -94,4 +97,4 @@ func canSexEliza() -> bool:
 	return getFlag("ElizaModule.storyCompleted", false) || (getFlag("ElizaModule.dateOutcome", "") == "perfect")
 
 func canTFEliza() -> bool:
-	return getFlag("ElizaModule.tfcan_felinecock", false) ||getFlag("ElizaModule.tfcan_hucow", false) || getFlag("ElizaModule.tfcan_demon", false) || getFlag("ElizaModule.tfcan_species", false) || getFlag("ElizaModule.tfcan_cocks", false)
+	return getFlag("ElizaModule.tfcan_catgirl", false) || getFlag("ElizaModule.tfcan_felinecock", false) || getFlag("ElizaModule.tfcan_hucow", false) || getFlag("ElizaModule.tfcan_demon", false) || getFlag("ElizaModule.tfcan_species", false) || getFlag("ElizaModule.tfcan_cocks", false)

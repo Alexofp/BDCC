@@ -16,7 +16,7 @@ func _run():
 			addButton("Cock", "Change Eliza's penis or get rid of it", "penis_menu")
 		else:
 			addDisabledButton("Cock", "You haven't unlocked a drug that can do this yet..")
-		if (getFlag("ElizaModule.tfcan_species") || getFlag("ElizaModule.tfcan_demon")):
+		if (getFlag("ElizaModule.tfcan_species") || getFlag("ElizaModule.tfcan_demon") || getFlag("ElizaModule.tfcan_catgirl")):
 			addButton("Species", "Change Eliza's species", "species_menu")
 		else:
 			addDisabledButton("Species", "You haven't unlocked a drug that can do this yet..")
@@ -52,9 +52,10 @@ func _run():
 		addButton("Feline", "Make Eliza her usual self", "species_feline")
 		if (getFlag("ElizaModule.tfcan_demon")):
 			addButton("Demon", "Make Eliza into a half-demon", "species_demon")
+		if (getFlag("ElizaModule.tfcan_catgirl")):
+			addButton("Catgirl", "Make Eliza into a catgirl", "species_catgirl")
 		if (getFlag("ElizaModule.tfcan_species")):
 			addButton("Dragon", "Make Eliza into a dragon", "species_dragon")
-			addButton("Catgirl", "Make Eliza into a catgirl", "species_catgirl")
 			addButton("Human", "Make Eliza into a human", "species_human")
 	if(state == "body_menu"):
 		playAnimation(StageScene.Solo, "stand", {pc="eliza", bodyState={naked=true, hard=true}})
