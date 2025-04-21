@@ -17,7 +17,14 @@ func getPillName() -> String:
 
 func getUnlockData() -> Dictionary:
 	return {
-		eliza = "Wow.. This pill packs a lot.. Very interesting.. I think it will affect your breasts in some why.. but it will also do something else. I think I’ll call it.. 'MegaMilkMAX.' For no reason in particular.",
+		eliza = "Wow.. This pill packs a lot.. Very interesting.. I think it will affect your breasts in some way.. but it will also do something else. I think I’ll call it.. 'MegaMilkMAX.' For no reason in particular.",
+		tryOptions = [
+			{
+				name = "Make Eliza eat it",
+				desc = "Ask if she is brave enough to try her own product. She will probably become very milky.",
+				sceneID = "ElizaDrugTestHuCowScene",
+			},
+		],
 	}
 
 func getTFCheckTags() -> Dictionary:

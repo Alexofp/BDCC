@@ -63,6 +63,7 @@ func _init():
 		"res://Modules/ElizaModule/DrugTesting/ElizaDrugTestRandomCockScene.gd",
 		"res://Modules/ElizaModule/DrugTesting/ElizaDrugTestHybridScene.gd",
 		"res://Modules/ElizaModule/DrugTesting/ElizaDrugTestSpeciesScene.gd",
+		"res://Modules/ElizaModule/DrugTesting/ElizaDrugTestHuCowScene.gd",
 		]
 	characters = [
 		"res://Modules/ElizaModule/DrugTesting/ElizaDemon.gd",
