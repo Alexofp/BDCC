@@ -6,6 +6,10 @@ var straponHasCum = false
 var sexDidPullout = false
 var isAnal = false
 var hasPP = false
+var isKnot = false
+var isBarbs = false
+var isHorse = false
+var isHuman = false
 
 func _init():
 	sceneID = "ElizaSexMenuScene"
@@ -28,6 +32,10 @@ func _run():
 			addButton("Scarlet..", "(Soft Incest) Show what fun things you could do with Eliza and her mother", "scarlet_menu")
 		else:
 			addDisabledButton("Scarlet..", "(Soft Incest) Complete Eliza's storyline first to unlock this")
+		if (getCharacter("eliza").hasReachablePenis()):
+			if (GM.pc.hasReachableVagina()):
+				addButtonWithChecks("Get fucked!", "Allow Eliza to fuck your pussy", "futa_sex", [], [[ButtonChecks.HasReachableVagina]])
+			addButton("Get pegged!", "Allow Eliza to fuck your ass", "futa_sex_anal")
 		addButton("Back", "You changed your mind", "cancethescene")
 	if(state == "sex_milkher"):
 		saynn("[say=pc]Just wanted to tell you, we're running low on milk.[/say]")
@@ -2401,6 +2409,118 @@ func _run():
 		saynn("It was worth it.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "futa_sex"):
+		aimCameraAndSetLocName("med_researchlab")
+		addCharacter("eliza", ["naked"])
+		isKnot = ((getFlag("ElizaModule.elizatf_cock", "") == "canine") || (getFlag("ElizaModule.elizatf_cock", "") == "dragon"))
+		isBarbs = (getFlag("ElizaModule.elizatf_cock", "") == "feline")
+		isHorse = (getFlag("ElizaModule.elizatf_cock", "") == "horse")
+		isHuman = (getFlag("ElizaModule.elizatf_cock", "") == "human")
+		playAnimation(StageScene.Grope, "tease", {pc="pc", npc="eliza", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Without saying much, you grab Eliza's hand and pull her into the research lab.")
+
+		saynn("[say=eliza]Huh? New drug?[/say]")
+
+		saynn("[say=pc]Better, we're testing something.[/say]")
+
+		saynn("[say=eliza]I like testing~.[/say]")
+
+		saynn("You make her raise a brow as your hands open her lab coat and pull it off of her shoulders.")
+
+		saynn("[say=pc]All clothing needs to be removed for this one.[/say]")
+
+		saynn("She smiles and lets you take off the rest of her fabric.. leaving the feline naked.. and with her {eliza.penis} out.")
+
+		saynn("Your bits are exposed too, your hand reaches down and spreads your pussy for her, showing how wet you are.")
+
+		saynn("[say=pc]Fuck me.. please.[/say]")
+
+		saynn("[say=eliza]I see. My cock is a hell of a drug, I guess~.[/say]")
+
+		saynn("A predatory smile curves her lips as she moves to close all the windows that lead out into the corridor.")
+
+		saynn("Eliza turns towards you, her step light and delicate as she circles around you, her cock bouncing ever so slightly.")
+
+		saynn("[say=eliza]Since I have the cock, we're doing it my way~.[/say]")
+
+		saynn("Her paw darts out towards your collar.. and yanks you towards the nearest table surface.")
+
+		addButton("Continue", "See what happens next", "futa_table")
+	if(state == "futa_table"):
+		playAnimation(StageScene.SexMatingPress, "tease", {pc="eliza", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Next moment you know it, you're on the table! Eliza uses her feline agility to climb on top of it and pin you down with the weight of her body. Her hands slide under your knees and raise them up to your shoulders, giving her member full access to your "+str("pussy" if !isAnal else "ass")+"..")
+
+		saynn("You can feel the heat hovering so closely to your "+str("sex" if !isAnal else "anal star")+".. a few droplets of her pre already meeting with your sensitive "+str("folds" if !isAnal else "flesh")+".")
+
+		saynn("[say=eliza]"+str("Since I have a pussy myself" if !isAnal else "Since I've been fucked before")+".. I know exactly what feels good~.[/say]")
+
+		saynn("She aligns the tip with your "+str("slit" if !isAnal else "star")+" and lets it part your "+str("slick petals" if !isAnal else "needy fuckhole")+"."+str(" You can feel the soft barbs brushing against your flesh." if isBarbs else "")+"")
+
+		addButton("Continue", "See what happens next", "futa_sex_sex")
+	if(state == "futa_sex_sex"):
+		playAnimation(StageScene.SexMatingPress, "sex", {pc="eliza", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Next moment you know it, she rams the rest of her shaft inside, making you arch your back, fingers grabbing onto the table's corner.")
+
+		saynn("[say=pc]Ah.. ah..[/say]")
+
+		saynn("She holds you pinned and rocks in and out of you, doing rough slow thrusts, letting you feel the full length of her cock, angled in such a way so that it can hit your "+str("g-spot" if !isAnal else "")+""+str("p-spot" if (isAnal && GM.pc.hasPenis()) else "")+""+str("pleasure spot" if (isAnal && !GM.pc.hasPenis()) else "")+".")
+
+		saynn("[say=eliza]Yeah.. you like my cock, don't you?[/say]")
+
+		saynn("Eliza purrs into your ear while fucking your "+str("{pc.vaginaStretch} pussy" if !isAnal else "{pc.anusStretch} tailhole")+", hot member coating your inner walls with her precum, making them nice and slick."+str(" Her barbs are gently scratching you on the inside, adding to the stimulation." if isBarbs else "")+"")
+
+		addButton("Continue", "See what happens next", "futa_sex_fast")
+	if(state == "futa_sex_fast"):
+		playAnimation(StageScene.SexMatingPress, "fast", {pc="eliza", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("She puts way more energy into her next thrusts, the head of her cock "+str("grazing your cervix" if !isAnal else "reaching deep")+" with each rough motion. Her breath becomes deep as she really picks up the pace, driving her {eliza.penis} deep inside you again and again.")
+
+		saynn("Your legs tremble, your "+str("pussy" if !isAnal else "anal ring")+" hugging that sliding member tightly. Your moans grow hotter.. Eliza has got you exactly where you want yourself to be.. vulnerable, spread wide, unable to do anything but to endure her relentless fucking."+str(" The knot at the base of her member inflates with blood.. and she is trying to squeeze it in." if isKnot else "")+"")
+
+		saynn("[say=eliza]With how your "+str("pussy" if !isAnal else "needy hole")+" is clenching around me.. I think I have no choice~.. mhh-.. Might as well see what happens, right~?[/say]")
+
+		addButton("Continue", "See what happens next", "futa_sex_cum")
+	if(state == "futa_sex_cum"):
+		playAnimation(StageScene.SexMatingPress, "inside", {pc="eliza", npc="pc", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("When your pussy pushes her over the edge, Eliza slams into you on final time, ramming her member as deep as your "+str("slit" if !isAnal else "ass")+" allows"+str(", her knot stretching you wide and slipping inside" if isKnot else "")+". Her cock starts to throb in time with her racing heartbeat."+str(" Her barbs are stiff like needles, preventing her from pulling out.." if isBarbs else "")+""+str(" The flat tip of her cock flares up inside you, becoming even more fat." if isHorse else "")+"")
+
+		saynn("[say=eliza]Cum for me-..[/say]")
+
+		saynn("She growls as she unloads inside you, her balls tensing up as her seed surges deep into your "+str("womb" if !isAnal else "nethers")+" in thick, hot ropes. You feel each pulse of her orgasm as her length twitches, buried completely within you. With a shudder, your own peak catches up with you, pleasure crashing over you in waves that tremble through your limbs"+str(", your own {pc.penis} shooting spurts of {pc.cum}, wasting it" if GM.pc.hasPenis() else "")+".")
+
+		saynn("[say=pc]Ah-h.. mhh.ahh.. nhh..[/say]")
+
+		saynn("For a long moment, Eliza holds you pinned, her throbbing cock lodged inside, both of you panting, exhausted.")
+
+		saynn("[say=eliza]Hah.. Sorry I didn't last that long.. ohh.. I'm still sensitive.[/say]")
+
+		saynn("You part your lips and continue panting.")
+
+		saynn("[say=pc]All.. good.. ah..[/say]")
+
+		saynn("She slowly withdraws, cum dripping from your stuffed "+str("slit, mingling with your juices on the table surface below." if !isAnal else "ass, pooling up on the table surface below.")+"")
+
+		addButton("Continue", "See what happens next", "futa_cuddle")
+	if(state == "futa_cuddle"):
+		playAnimation(StageScene.Cuddling, "idle", {pc="eliza", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("She sits beside you and pulls you into her arms for cuddles.")
+
+		saynn("[say=eliza]There we go..[/say]")
+
+		saynn("She rests her chin on your shoulder and purrs into your ear, her paws resting on your belly.")
+
+		saynn("[say=eliza]Thank you for helping me drain my balls~.[/say]")
+
+		saynn("[say=pc]You're welcome..[/say]")
+
+		saynn("[say=eliza]Using your "+str("pussy" if !isAnal else "little tailhole")+" is much more fun than a penis pump.[/say]")
+
+		saynn("She kisses your neck and gives it a gentle bite.")
+
+		saynn("[say=pc]Mh..[/say]")
+
+		saynn("You just rest together for a while.. until Eliza has to return back to her working spot. You follow her.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 func addStraponButtons(thestate):
 	var strapons = GM.pc.getStrapons()
 	for strapon in strapons:
@@ -2419,6 +2539,11 @@ func _react(_action: String, _args):
 
 	if(_action == "sex_milkher"):
 		processTime(3*60)
+
+	if(_action == "futa_sex_anal"):
+		isAnal = true
+		setState("futa_sex")
+		return
 
 	if(_action == "cancethescene"):
 		endScene()
@@ -2716,6 +2841,28 @@ func _react(_action: String, _args):
 	if(_action == "s3_tower_after_cum_69_leave"):
 		processTime(5*60)
 
+	if(_action == "futa_table"):
+		processTime(3*60)
+
+	if(_action == "futa_sex_sex"):
+		processTime(3*60)
+
+	if(_action == "futa_sex_fast"):
+		processTime(3*60)
+
+	if(_action == "futa_sex_cum"):
+		processTime(5*60)
+		if(isAnal):
+			GM.pc.gotAnusFuckedBy("eliza")
+			GM.pc.cummedInAnusBy("eliza")
+		else:
+			GM.pc.gotVaginaFuckedBy("eliza")
+			GM.pc.cummedInVaginaBy("eliza")
+		GM.pc.orgasmFrom("eliza")
+
+	if(_action == "futa_cuddle"):
+		processTime(5*60)
+
 	setState(_action)
 
 func saveData():
@@ -2727,6 +2874,10 @@ func saveData():
 	data["sexDidPullout"] = sexDidPullout
 	data["isAnal"] = isAnal
 	data["hasPP"] = hasPP
+	data["isKnot"] = isKnot
+	data["isBarbs"] = isBarbs
+	data["isHorse"] = isHorse
+	data["isHuman"] = isHuman
 
 	return data
 
@@ -2739,3 +2890,7 @@ func loadData(data):
 	sexDidPullout = SAVE.loadVar(data, "sexDidPullout", false)
 	isAnal = SAVE.loadVar(data, "isAnal", false)
 	hasPP = SAVE.loadVar(data, "hasPP", false)
+	isKnot = SAVE.loadVar(data, "isKnot", false)
+	isBarbs = SAVE.loadVar(data, "isBarbs", false)
+	isHorse = SAVE.loadVar(data, "isHorse", false)
+	isHuman = SAVE.loadVar(data, "isHuman", false)
