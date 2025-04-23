@@ -21,6 +21,9 @@ func getUnlockData() -> Dictionary:
 		eliza = "Intriguing! This pill seems to be formulated with a mix of phytoestrogens and androgen blockers that could promote feminization by altering hormonal balance. When taken, it will probably initiate a transformation towards female primary and secondary sexual characteristics. I think I’ll call it.. 'EstroGPlus.' It has a nice ring to it, don’t you think?",
 	}
 
+func getPillDatabaseDesc() -> String:
+	return "This drug will turn you into a girl. It does so by doing this:\n- Increasing your overall femininity.\n- Changing the shape of your chest from pecs to a more rounded set of breasts.\n- Increasing your breast size. The resulting size depends on how thick you are.\n- Repeatedly decreasing the size of your penis and then morphing it away completely.\n- Growing a vagina if you don’t have one.\n- Changing your haircut to a more feminine one.\n\nThe first stage will happen after a few minutes. After that, the next ones will happen roughly every 10 hours. This could be accelerated by using the QuickShift drug or by making the test subject [b]orgasm[/b].\n\nThis drug doesn’t have a set amount of stages. It will reach its final stage when there is nothing left to transform. It’s possible to disable some of the effects of this drug by using advanced lab equipment."
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"gender": true,
@@ -275,6 +278,12 @@ func reactProgress(_context:Dictionary, _result:TFResult):
 		playAnim(StageScene.Solo, "stand")
 	else:
 		playAnim(StageScene.GivingBirth, "birth", {bodyState={exposedCrotch=true, hard=true}})
+	
+func onSexEvent(_event : SexEvent):
+	var _npc = getChar()
+	if(_event.getType() in [SexEvent.Orgasmed]):
+		if(_event.getTargetChar() == _npc):
+			accelerateTimer(1.0)
 	
 func saveData() -> Dictionary:
 	var data:Dictionary = .saveData()

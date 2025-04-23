@@ -18,6 +18,9 @@ func getUnlockData() -> Dictionary:
 		eliza = "Intriguing! This pill appears to contain a mix of estrogenic compounds and tissue enhancers that could stimulate the development of female genitalia. When ingested, it will probably encourage the growth of a vagina in individuals who don’t have one. I think I’ll call it.. 'P-Bloom.' It's a short but nice name, I think.",
 	}
 
+func getPillDatabaseDesc() -> String:
+	return "This drug will grow you a vagina. It won’t do anything if you already have one.\n\nThe first stage will happen after a few minutes. The second stage will happen after roughly 60 minutes. This could be accelerated only by using the QuickShift drug.\n\nThis drug has 2 stages. First stage doesn’t cause any visible outside changes. Second stage grows you a vagina."
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"growvag": true,

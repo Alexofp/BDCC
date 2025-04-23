@@ -24,6 +24,9 @@ func getUnlockData() -> Dictionary:
 			},
 		],
 	}
+	
+func getPillDatabaseDesc() -> String:
+	return "This drug will grow you a penis of your species. It won’t do anything if you already have a penis. If you are a hybrid, it will choose a penis of either species. This drug will stop when the size of your new penis reaches at least 15cm.\n\nThe first stage will happen after a few minutes. After that, the next ones will happen roughly every 20 minutes. This could be accelerated only by using the QuickShift drug.\n\nThis drug doesn’t have a set amount of stages. It will reach its final stage when there is nothing left to transform."
 
 func getTFCheckTags() -> Dictionary:
 	return {

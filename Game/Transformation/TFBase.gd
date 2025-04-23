@@ -116,8 +116,12 @@ func getTimer() -> int:
 func accelerateTimerSeconds(howMuch:int):
 	timer -= howMuch
 
-func accelerateTimer(share:float):
-	timer = int(float(timer) * (1.0 - clamp(share, 0.0, 1.0)))
+func accelerateTimer(share:float, minDecrease:int = 600):
+	var newTimer:int = int(float(timer) * (1.0 - clamp(share, 0.0, 1.0)))
+	var howMuchRemoved:int = timer - newTimer
+	if(howMuchRemoved < minDecrease):
+		howMuchRemoved = minDecrease
+	timer -= howMuchRemoved
 
 func getTimerForStage(_theStage:int) -> int:
 	return 240

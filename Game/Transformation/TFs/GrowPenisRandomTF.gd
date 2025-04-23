@@ -13,11 +13,11 @@ func getName() -> String:
 	return "Grows a random penis"
 
 func getPillName() -> String:
-	return "CockRoll"
+	return "BoneRoll"
 
 func getUnlockData() -> Dictionary:
 	return {
-		eliza = "Fascinating! This pill appears to contain a blend of growth factors and hormonal precursors that could stimulate penile tissue transformation. When ingested, it will probably affect your penis in some way.. I think I’ll call it.. 'CockRoll.' Why not!",
+		eliza = "Fascinating! This pill appears to contain a blend of growth factors and hormonal precursors that could stimulate penile tissue transformation. When ingested, it will probably affect your penis in some way.. I think I’ll call it.. 'BoneRoll.' Why not!",
 		tryOptions = [
 			{
 				name = "Make Eliza eat it",
@@ -26,6 +26,9 @@ func getUnlockData() -> Dictionary:
 			},
 		],
 	}
+
+func getPillDatabaseDesc() -> String:
+	return "This drug will grow you a random penis of a random size between 15cm and 25cm. If you already have a penis, it will morph it into a different one.\n\nThe first stage will happen after about 10 minutes. After that, the next ones will happen roughly every 30 minutes. This could be accelerated only by using the QuickShift drug.\n\nThis drug doesn’t have a set amount of stages. It will reach its final stage when there is nothing left to transform.\n\nIt’s possible to pick which penis type to grow and its target length by using the advanced lab equipment."
 
 func getTFCheckTags() -> Dictionary:
 	return {
