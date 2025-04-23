@@ -49,7 +49,7 @@ func getHidesParts(_character):
 		return null
 	var removed = {
 		#BodypartSlot.Body: true,
-		#BodypartSlot.Legs: true,
+		BodypartSlot.Legs: true,
 		BodypartSlot.Arms: true,
 		BodypartSlot.Breasts: true,
 		"panties": true,

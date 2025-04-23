@@ -13,3 +13,4 @@ logs/
 **/*.blend1
 /.idea/
 /*.iml
+*.blend1

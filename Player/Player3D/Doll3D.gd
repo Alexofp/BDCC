@@ -352,13 +352,13 @@ func setBoneScale(boneName: String, boneScale: float):
 	
 	skeleton.set_bone_custom_pose(boneId, newTransform)
 
-func setBoneScaleAndOffset(boneName: String, boneScale: float, offset: Vector3):
+func setBoneScaleAndOffset(boneName: String, boneScale: float, offset: Vector3, scaleOnZ:bool = false):
 	var skeleton:Skeleton = getDollSkeleton().getSkeleton()
 	var boneId = skeleton.find_bone(boneName)
 	if(boneId < 0):
 		return
 	var newTransform:Transform = Transform.IDENTITY
-	newTransform = newTransform.scaled(Vector3(boneScale,boneScale,boneScale))
+	newTransform = newTransform.scaled(Vector3(boneScale,boneScale,boneScale if scaleOnZ else 1.0))
 	newTransform = newTransform.translated(offset)
 	
 	skeleton.set_bone_custom_pose(boneId, newTransform)
