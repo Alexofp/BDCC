@@ -741,3 +741,10 @@ static func distanceToHalfWithIntervalEased(value: float, halfpoint: float = 0.5
 		return ease_in_out(-(value - (halfpoint + intervalWidth)) / intervalWidth)
 	else:
 		return 0.0
+
+static func folderExists(path:String) -> bool:
+	var dir := Directory.new()
+	
+	if dir.open(path) == OK:
+		return true
+	return false
