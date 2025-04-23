@@ -490,8 +490,8 @@ func registerEverything():
 	emit_signal("loadingUpdate", 17.0/totalStages, "Datapacks")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
-	loadDatapacksFromFolder("res://StaticDatapacks")
 	loadDatapacksFromFolder(getDatapacksFolder())
+	loadDatapacksFromFolder("res://StaticDatapacks")
 	
 	emit_signal("loadingUpdate", 18.0/totalStages, "Modules late initialization")
 	yield(get_tree(), "idle_frame")
@@ -2128,8 +2128,8 @@ func loadDatapacksFromFolder(folder: String):
 
 func reloadPacks():
 	datapacks.clear()
-	loadDatapacksFromFolder("res://StaticDatapacks")
 	loadDatapacksFromFolder(getDatapacksFolder())
+	loadDatapacksFromFolder("res://StaticDatapacks")
 
 func deleteDatapack(id:String):
 	if(datapacks.has(id)):
