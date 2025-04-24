@@ -18,6 +18,9 @@ func getUnlockData() -> Dictionary:
 		eliza = "Interesti-.. wait.. The heck is this. Wow. Wow! It's changing! Like.. the molecular structure of this drug is changing as we speak. I honestly have no idea if this is even safe to injest.. it could do anything. It's not even a drug at that point, it's just a concentrated dose of 'Unstable mutagen'.",
 	}
 
+func getPillDatabaseDesc() -> String:
+	return "This drug will cause a random effect. The list of possible effects:\n- Random hair.\n- Random body part morphing into a different body part.\n- Breast size increase or decrease.\n- Penis length increase or decrease.\n- Femininity increase or decrease.\n- Body thickness increase or decrease.\n- Random colors and skin.\n\nThe first stage will happen after about 15 minutes. After that, the next ones will happen roughly every 25 hours. This could only be accelerated by using the QuickShift drug.\n\nThis drug doesn’t have a set amount of stages. It will gradually morph your body forever and can only be stopped by the MorphIn or MorphOut drugs."
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"gender": true,
@@ -67,6 +70,9 @@ func canTransformFurther() -> bool:
 	if(!getPossibleSteps(getChar()).empty()):
 		return true
 	return false
+	
+func canBeTested() -> bool:
+	return stage >= 5
 	
 func getTimerForStage(_theStage:int) -> int:
 	if(_theStage == 0):

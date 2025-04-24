@@ -21,6 +21,9 @@ func getUnlockData() -> Dictionary:
 		eliza = "Interesting! This pill appears to contain a potent mix of testosterone boosters and androgenic compounds that could promote masculinization. When ingested, it will probably initiate the transformation of female characteristics into male ones.. all of the characteristics. I think I’ll call it.. 'TestosteGo.' Yes.. It will give you balls~.",
 	}
 
+func getPillDatabaseDesc() -> String:
+	return "This drug will turn you into a guy. It will achieve that by doing the following:\n- Increasing your overall masculinity.\n- Changing the shape of your chest from round breasts to a more masculine set of pecs.\n- Gradually decrease your breast size until your chest is completely flat.\n- Morph away your vagina if you have one.\n- Grow a penis and gradually increase its length until it's at least 15cm.\n- Changing your haircut to a more masculine one.\n\nThe first stage will happen after a few minutes. After that, the next ones will happen roughly every 10 hours. This could be accelerated by using the QuickShift drug or by making the test subject [b]orgasm[/b].\n\nThis drug doesn’t have a set amount of stages. It will reach its final stage when there is nothing left to transform. It’s possible to disable some of the effects of this drug by using advanced lab equipment."
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"gender": true,
@@ -282,6 +285,12 @@ func reactProgress(_context:Dictionary, _result:TFResult):
 		playAnim(StageScene.Solo, "stand")
 	else:
 		playAnim(StageScene.GivingBirth, "birth", {bodyState={exposedCrotch=true, hard=true}})
+	
+func onSexEvent(_event : SexEvent):
+	var _npc = getChar()
+	if(_event.getType() in [SexEvent.Orgasmed]):
+		if(_event.getTargetChar() == _npc):
+			accelerateTimer(1.0)
 	
 func saveData() -> Dictionary:
 	var data:Dictionary = .saveData()

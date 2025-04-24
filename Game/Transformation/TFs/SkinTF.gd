@@ -21,6 +21,9 @@ func getUnlockData() -> Dictionary:
 		eliza = "Well, well! Look what we have here.. This pill seems to be infused with chromatic enhancers and pigment-modifying agents that could completely transform your appearance. When taken, it will probably change your skin or fur colors and patterns to something truly unique. Just think of the possibilities! I will call it.. 'CoLore'!",
 	}
 
+func getPillDatabaseDesc() -> String:
+	return "This drug will gradually change your skin and colors to new random ones.\n\nThe first stage will happen after about 15 minutes. After that, the next ones will happen roughly every 2 hours. This could be accelerated only by using the QuickShift drug.\n\nThis drug has 5 stages. It’s possible to modify the drug to target specific skin and colors if you have advanced lab equipment."
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"skin": true,

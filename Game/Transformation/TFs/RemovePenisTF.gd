@@ -18,6 +18,9 @@ func getUnlockData() -> Dictionary:
 		eliza = "Aw, this pill is such a buzz kill. It has hormonal blockers and tissue-regulating agents that could target penile tissue. Oh yeah, it will fully get rid of all of the penile tissue in fact. There is only one name for such a pill: 'CockBeGone'.",
 	}
 
+func getPillDatabaseDesc() -> String:
+	return "This drug will morph away your penis if you have one. It does so by gradually decreasing the length until the penis is small enough (less than 8cm) to be morphed away completely.\n\nThe first stage will happen after a few minutes. After that, the next ones will happen roughly every 5 hours. This could be accelerated by using the QuickShift drug or by making the test subject [b]orgasm[/b].\n\nThis drug doesn’t have a set amount of stages. It will keep making the penis smaller until it is completely gone."
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"penis": true,
@@ -74,6 +77,12 @@ func reactProgress(_context:Dictionary, _result:TFResult):
 	addText(_result.getAllTFTexts())
 	
 	playAnim(StageScene.GivingBirth, "birth", {bodyState={exposedCrotch=true, hard=true}})
+	
+func onSexEvent(_event : SexEvent):
+	var _npc = getChar()
+	if(_event.getType() in [SexEvent.Orgasmed]):
+		if(_event.getTargetChar() == _npc):
+			accelerateTimer(1.0)
 	
 func saveData() -> Dictionary:
 	var data:Dictionary = .saveData()

@@ -18,6 +18,9 @@ func getUnlockData() -> Dictionary:
 	return {
 		eliza = "Fascinating! This pill appears to contain a blend of growth factors and vasodilators that could promote penile lengthening. When ingested, it will probably lead to a noticeable increase in size. I think I’ll call it.. 'SuperShaft.' If you want my advice.. A big cock sounds nice.. but at some point it hurts more than it pleases.",
 	}
+	
+func getPillDatabaseDesc() -> String:
+	return "This drug will increase the length of your penis. It does so gradually until the maximum number of stages has been reached.\n\nThe first stage will happen after a few minutes. After that, the next ones will happen roughly every 5 hours. This could be accelerated by using the QuickShift drug or by making the test subject [b]orgasm[/b].\n\nThis drug has a maximum amount of 3 stages by default. It’s possible to use advanced lab equipment to override this behaviour and set a target penis length. Then this drug won’t have a fixed amount of stages, increasing the penis length until the target has been reached."
 
 func getTFCheckTags() -> Dictionary:
 	return {
@@ -93,6 +96,12 @@ func reactProgress(_context:Dictionary, _result:TFResult):
 	addText(_result.getAllTFTexts())
 	
 	playAnim(StageScene.GivingBirth, "birth", {bodyState={exposedCrotch=true, hard=true}})
+
+func onSexEvent(_event : SexEvent):
+	var _npc = getChar()
+	if(_event.getType() in [SexEvent.Orgasmed]):
+		if(_event.getTargetChar() == _npc):
+			accelerateTimer(1.0)
 
 func saveData() -> Dictionary:
 	var data:Dictionary = .saveData()

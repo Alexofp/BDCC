@@ -18,6 +18,9 @@ func getUnlockData() -> Dictionary:
 		eliza = "Ohh. My crotch is aching just looking at this. This pill will target vaginal tissue.. getting rid of it.. together with the whole reproductive system. 'PussyBeGone' is a good name for it, I guess.",
 	}
 
+func getPillDatabaseDesc() -> String:
+	return "This drug will morph away your vagina if you have one.\n\nThe transformation consists only of one stage that will happen roughly after 20 minutes. This could be accelerated only by using the QuickShift drug."
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"vagina": true,

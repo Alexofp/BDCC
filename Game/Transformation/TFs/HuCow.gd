@@ -27,6 +27,9 @@ func getUnlockData() -> Dictionary:
 		],
 	}
 
+func getPillDatabaseDesc() -> String:
+	return "This drug will turn you into a walking milky cow. It will achieve that by doing the following:\n- Increase the thickness of your body until it reaches 100%.\n- Morph your pecs into round breasts.\n- Gradually increase the size of your breasts until they become ‘M-cup’ or bigger. Moo.\n- Grow a set of horns if you don’t have any.\n- Increase the sensitivity of your nipples.\n- Cause you to lactate.\n\nThe first stage will happen after a few minutes. Stage 2 will happen after about 20 minutes. Stage 3 will happen after about 30 minutes. Next stages will happen roughly every 20 hours. This could be accelerated only by using the QuickShift drug or by stimulating the breasts.\n\nThis drug doesn’t have a set amount of stages. It will reach its final stage when there is nothing left to transform.\n\nBeing under the effects of this transformation will make others more likely to want to stimulate your breasts and have vaginal sex."
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"breasts": true,
@@ -241,7 +244,7 @@ func onSexEvent(_event : SexEvent):
 	var _npc = getChar()
 	if(_event.getType() in [SexEvent.BreastFeeding, SexEvent.BreastsGroped, SexEvent.BreastsPumpMilked]):
 		if(_event.getTargetChar() == _npc):
-			accelerateTimer(0.1)
+			accelerateTimer(0.4)
 	
 func saveData() -> Dictionary:
 	var data:Dictionary = .saveData()

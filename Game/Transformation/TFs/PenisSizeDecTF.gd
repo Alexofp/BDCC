@@ -19,6 +19,9 @@ func getUnlockData() -> Dictionary:
 		eliza = "Kinky! This pill seems to be formulated with a combination of hormonal inhibitors and tissue-reducing agents that could target penile size. When taken, it will probably lead to a decrease in length. I think I’ll call it.. 'ShrinkRay.' Because it.. shrinks your ray.. get it?",
 	}
 
+func getPillDatabaseDesc() -> String:
+	return "This drug will decrease the length of your penis. It does so gradually until the maximum number of stages has been reached or until the length of your penis has become 9cm or lower.\n\nThe first stage will happen after a few minutes. After that, the next ones will happen roughly every 5 hours. This could be accelerated by using the QuickShift drug or by making the test subject [b]orgasm[/b].\n\nThis drug has a maximum amount of 5 stages by default. It’s possible to use advanced lab equipment to override this behaviour and set a target penis length. Then this drug won’t have a fixed amount of stages, shrinking the penis until the target length has been reached."
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"penis": true,
@@ -65,7 +68,7 @@ func canTransformFurther() -> bool:
 	return .canTransformFurther()
 	
 func getMaxStage() -> int:
-	return 3
+	return 5
 	
 func getTimerForStage(_theStage:int) -> int:
 	if(_theStage == 0):
@@ -95,7 +98,13 @@ func reactProgress(_context:Dictionary, _result:TFResult):
 	addText(_result.getAllTFTexts())
 	
 	playAnim(StageScene.GivingBirth, "birth", {bodyState={exposedCrotch=true, hard=true}})
-	
+
+func onSexEvent(_event : SexEvent):
+	var _npc = getChar()
+	if(_event.getType() in [SexEvent.Orgasmed]):
+		if(_event.getTargetChar() == _npc):
+			accelerateTimer(1.0)
+
 func saveData() -> Dictionary:
 	var data:Dictionary = .saveData()
 	

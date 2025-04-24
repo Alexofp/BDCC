@@ -19,6 +19,9 @@ func getUnlockData() -> Dictionary:
 		eliza = "This pill seems to be formulated with appetite suppressants and fat-burning compounds that could help you shed those extra pounds.. It's like one of those fake ad products.. but this one seems like it will actually work, huh. When taken, it will probably make you thinner.. so I really wanna call it.. 'SliMM'.",
 	}
 
+func getPillDatabaseDesc() -> String:
+	return "This drug will gradually make your body less thick. It does so while your thickness is above 0% or until reaching the last stage.\n\nThe first stage will happen after a few minutes. After that, the next ones will happen roughly every 12 hours. This could be accelerated by using the QuickShift drug or by [b]spanking[/b] the test subject.\n\nThis drug is limited to 3 stages. It’s possible to override this behavior by using advanced lab equipment, instead picking a target thickness value."
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"thickness": true,
@@ -94,6 +97,12 @@ func reactProgress(_context:Dictionary, _result:TFResult):
 	addText(_result.getAllTFTexts())
 	
 	playAnim(StageScene.GivingBirth, "birth", {bodyState={exposedCrotch=true, hard=true}})
+	
+func onSexEvent(_event : SexEvent):
+	var _npc = getChar()
+	if(_event.getType() in [SexEvent.Spanked]):
+		if(_event.getTargetChar() == _npc):
+			accelerateTimer(0.4)
 	
 func saveData() -> Dictionary:
 	var data:Dictionary = .saveData()

@@ -101,6 +101,9 @@ func shouldCancelItselfFinal() -> bool:
 func canTransformFurther() -> bool:
 	return !isMaxStage()
 
+func canBeTested() -> bool:
+	return !canTransformFurther()
+
 func isReadyToProgress() -> bool:
 	return (timer <= 0)
 

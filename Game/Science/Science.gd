@@ -525,14 +525,14 @@ func doTestTFsOf(theChar:BaseCharacter):
 	var holder:TFHolder = theChar.getTFHolder()
 	if(holder == null):
 		return
-	for tf in holder.getTransformationsInFinalStage():
+	for tf in holder.getTransformationsCanBeTested():
 		doTestTF(tf.id)
 
 func hasTFsCanScan(theChar:BaseCharacter) -> bool:
 	var holder:TFHolder = theChar.getTFHolder()
 	if(holder == null):
 		return false
-	for tf in holder.getTransformationsInFinalStage():
+	for tf in holder.getTransformationsCanBeTested():
 		var TFID:String = tf.id
 		
 		if(!unlockedTFs.has(TFID)):
@@ -547,7 +547,7 @@ func getTFsCanScanAmount(theChar:BaseCharacter) -> int:
 	if(holder == null):
 		return 0
 	var result:int = 0
-	for tf in holder.getTransformationsInFinalStage():
+	for tf in holder.getTransformationsCanBeTested():
 		var TFID:String = tf.id
 		
 		if(!unlockedTFs.has(TFID)):

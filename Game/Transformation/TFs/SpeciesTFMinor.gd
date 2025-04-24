@@ -23,6 +23,9 @@ func getUnlockData() -> Dictionary:
 		],
 	}
 
+func getPillDatabaseDesc() -> String:
+	return "This drug will make a hybrid out of you, morphing some of your body parts to ones of a different species. The drug will attempt to gradually morph these parts:\n- Ears\n- Horns\n- Tail\n- Penis\n- Legs\n\nThe first stage will happen after about 15 minutes. After that, the next ones will happen roughly every 10 hours. Each next stage will take longer than the last. This could be accelerated only by using the QuickShift drug.\n\nThis drug doesn’t have a set amount of stages. It will reach its final stage when there is nothing left to transform. It’s possible to modify the drug to pick the target species by using the advanced lab equipment."
+
 func getTFCheckTags() -> Dictionary:
 	return {
 		"species": true,

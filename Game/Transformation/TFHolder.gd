@@ -71,6 +71,15 @@ func getTransformationsInFinalStage() -> Array:
 	
 	return result
 
+func getTransformationsCanBeTested() -> Array:
+	var result:Array = []
+	
+	for tf in transformations:
+		if(tf.canBeTested()):
+			result.append(tf)
+	
+	return result
+
 func hasTransformationsInFinalStage() -> bool:
 	for tf in transformations:
 		if(!tf.canTransformFurther()):

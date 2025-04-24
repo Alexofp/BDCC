@@ -15,12 +15,15 @@ func getName() -> String:
 	return "Sissification"
 
 func getPillName() -> String:
-	return "SissiMoldPro"
+	return "SissyMoldPro"
 
 func getUnlockData() -> Dictionary:
 	return {
-		eliza = "Ooh, what do we have here! You found such a little gem. This pill looks like it's packed with estrogen.. a very targeted kind of estrogen that doesn't replace testosterone.. but suppresses it instead. When taken, it will probably enhance those softer, more feminine traits while making you crave a little more submission. So much fun! I will call it.. 'SissiMoldPro'! Because it does just that~.",
+		eliza = "Ooh, what do we have here! You found such a little gem. This pill looks like it's packed with estrogen.. a very targeted kind of estrogen that doesn't replace testosterone.. but suppresses it instead. When taken, it will probably enhance those softer, more feminine traits while making you crave a little more submission. So much fun! I will call it.. 'SissyMoldPro'! Because it does just that~.",
 	}
+
+func getPillDatabaseDesc() -> String:
+	return "This drug will transform you into a sissy slut. It will achieve that by doing the following:\n- Make your body at least 75% thick.\n- Shrink the length of your penis until it is below 10cm.\n- Switch your hair to a more feminine one.\n- Switch pecs for round breasts.\n- If you have a flat chest, give you ‘A-cup’ breasts.\n- Make your anus more sensitive.\n- Make your nipples more sensitive.\n- Make your penis [b]less[/b] sensitive.\n\nThe drug will only begin its effects if you have a penis with a length of at least 11cm. The first stage will happen after about 15 minutes. After that, the next ones will happen roughly every 10 hours. This could only be accelerated by using the QuickShift drug or by making the test subject [b]orgasm[/b].\n\nThis drug doesn’t have a set amount of stages. It will reach its final stage when there is nothing left to transform.\n\nBeing under the effects of this transformation will make others more likely to want to have anal sex with you."
 
 func getTFCheckTags() -> Dictionary:
 	return {
