@@ -546,7 +546,7 @@ func _run():
 		var tf:TFBase = GlobalRegistry.getTransformationRef(pickedTF)
 		
 		saynn("Selected drug: "+tf.getPillName())
-		saynn("Some scenes might not be available to all characters.")
+		saynn("Do you wanna replay its scene?")
 		
 		var unlockData:Dictionary = tf.getUnlockData()
 		if(!unlockData.has("tryOptions")):

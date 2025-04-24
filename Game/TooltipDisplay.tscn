@@ -37,7 +37,7 @@ fallback/0 = SubResource( 6 )
 [sub_resource type="DynamicFontData" id=8]
 font_path = "res://Fonts/SourceCodePro/SourceCodePro-Bold.otf"
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=12]
 size = 20
 font_data = ExtResource( 3 )
 fallback/0 = SubResource( 8 )
@@ -110,7 +110,7 @@ mouse_filter = 2
 size_flags_horizontal = 3
 custom_fonts/bold_italics_font = SubResource( 5 )
 custom_fonts/italics_font = SubResource( 7 )
-custom_fonts/bold_font = SubResource( 9 )
+custom_fonts/bold_font = SubResource( 12 )
 custom_fonts/normal_font = SubResource( 11 )
 bbcode_enabled = true
 fit_content_height = true

@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://UI/Inventory/GenericInventoryScreen.gd" type="Script" id=1]
 [ext_resource path="res://UI/Inventory/InventoryEntry.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Fonts/Titillium-Bold.otf" type="DynamicFontData" id=3]
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=4]
+[ext_resource path="res://Fonts/Titillium-RegularItalic.otf" type="DynamicFontData" id=5]
+[ext_resource path="res://Fonts/Titillium-BoldItalic.otf" type="DynamicFontData" id=6]
 
 [sub_resource type="DynamicFontData" id=9]
 font_path = "res://Fonts/SourceCodePro/SourceCodePro-Regular.otf"
@@ -15,6 +18,46 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 4 )
 fallback/0 = SubResource( 9 )
+
+[sub_resource type="DynamicFontData" id=4]
+font_path = "res://Fonts/SourceCodePro/SourceCodePro-BoldIt.otf"
+
+[sub_resource type="DynamicFont" id=5]
+size = 20
+font_data = ExtResource( 6 )
+fallback/0 = SubResource( 4 )
+
+[sub_resource type="DynamicFontData" id=6]
+font_path = "res://Fonts/SourceCodePro/SourceCodePro-MediumIt.otf"
+
+[sub_resource type="DynamicFont" id=7]
+size = 20
+font_data = ExtResource( 5 )
+fallback/0 = SubResource( 6 )
+
+[sub_resource type="DynamicFontData" id=8]
+font_path = "res://Fonts/SourceCodePro/SourceCodePro-Bold.otf"
+
+[sub_resource type="DynamicFont" id=12]
+size = 20
+font_data = ExtResource( 3 )
+fallback/0 = SubResource( 8 )
+
+[sub_resource type="DynamicFontData" id=10]
+font_path = "res://Fonts/SourceCodePro/SourceCodePro-Regular.otf"
+
+[sub_resource type="DynamicFontData" id=2]
+font_path = "res://Fonts/DroidSansJapanese.woff2"
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://Fonts/DroidSansFallback.woff2"
+
+[sub_resource type="DynamicFont" id=11]
+size = 20
+font_data = ExtResource( 4 )
+fallback/0 = SubResource( 10 )
+fallback/1 = SubResource( 2 )
+fallback/2 = SubResource( 3 )
 
 [node name="GenericInventoryScreen" type="Control"]
 anchor_right = 1.0
@@ -63,6 +106,10 @@ margin_right = 422.0
 margin_bottom = 712.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_fonts/bold_italics_font = SubResource( 5 )
+custom_fonts/italics_font = SubResource( 7 )
+custom_fonts/bold_font = SubResource( 12 )
+custom_fonts/normal_font = SubResource( 11 )
 bbcode_enabled = true
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
