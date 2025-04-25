@@ -1,6 +1,5 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=67 format=2]
 
-[ext_resource path="res://AssetsSource/character/MeshesExport/LabcoatMat.material" type="Material" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Player3D/Parts/Arms/HumanArms/arm.png" type="Texture" id=3]
 [ext_resource path="res://Player/Player3D/Parts/Legs/HumanLegs/foot.png" type="Texture" id=4]
@@ -270,7 +269,6 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 6389207,
 "index_count": 606,
-"material": ExtResource( 1 ),
 "primitive": 4,
 "skeleton_aabb": [ AABB( -0.856342, 1.95998, 0.312531, 1.85599, 3.01067, 1.00136e-05 ), AABB( -0.856342, 3.92101, 0.312531, 1.84456, 1.04964, 1.00136e-05 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.729142, 1.95998, 0.312531, 1.72879, 2.55646, 1.00136e-05 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.856342, 1.95998, 0.312531, 1.6674, 3.01067, 1.00136e-05 ), AABB( -0.697698, 1.95998, 0.312531, 1.69735, 3.01067, 1.00136e-05 ) ],
 "vertex_count": 164
@@ -391,7 +389,6 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 6389207,
 "index_count": 420,
-"material": ExtResource( 1 ),
 "primitive": 4,
 "skeleton_aabb": [ AABB( -0.91488, 4.62393, 0.0665013, 1.73736, 1.37157, 9.99868e-06 ), AABB( -0.91488, 4.62393, 0.0665013, 1.77165, 2.52676, 9.99868e-06 ), AABB( -0.723427, 5.8498, 0.0665013, 1.5802, 1.30089, 9.99868e-06 ), AABB( -0.817725, 5.99473, 0.0665013, 1.64307, 1.15597, 9.99868e-06 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.91488, 4.62393, 0.0665013, 1.70307, 0.977297, 9.99868e-06 ), AABB( -0.224874, 4.69177, 0.0665013, 0.97795, 0.545186, 9.99868e-06 ) ],
 "vertex_count": 92
