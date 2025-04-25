@@ -30,7 +30,7 @@ func _run():
 	if(state == "slept"):
 		playAnimation(StageScene.Sleeping, "sleep", {bodyState={naked=true}})
 		
-		saynn("You slept in your cell. It's not the most pleasent experience but you managed to recover your energy.")
+		saynn("You slept in your cell. It's not the most pleasant experience but you managed to recover your energy.")
 		
 		saynn("You wake up when all the prison lights begin to turn on.")
 		
