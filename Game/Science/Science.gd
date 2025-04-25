@@ -940,6 +940,31 @@ func getAllUpgradesScienceCost() -> int:
 func getAmountOfCompletedNurseryTasks() -> int:
 	return nurseryTasksCompleted
 
+func doPCShowerRaw(fluidObjs:Array):
+	for fluidObjA in fluidObjs:
+		var fluidObj:Fluids = fluidObjA
+		
+		var fluidsByType:Dictionary = fluidObj.getFluidAmountByType()
+		for fluidID in fluidsByType:
+			var theFluidOBJ:FluidBase = GlobalRegistry.getFluid(fluidID)
+			if(theFluidOBJ == null):
+				continue
+			
+			var howMuchAdded:float = GM.main.SCI.addFluid(fluidID, fluidsByType[fluidID])
+			if(howMuchAdded > 0.0):
+				GM.main.addMessage(str(Util.roundF(howMuchAdded, 1))+" ml of "+theFluidOBJ.getVisibleName()+" was deposited into the fluids tanks.")
+		fluidObj.clear()
+
+func doPCShower():
+	doPCShowerRaw([GM.pc.getFluids()])
+
+func doPCShowerInside():
+	var fluidObjs:Array = []
+	for bodypartSlot in [BodypartSlot.Head, BodypartSlot.Vagina, BodypartSlot.Anus]:
+		if(GM.pc.hasBodypart(bodypartSlot)):
+			fluidObjs.append(GM.pc.getBodypart(bodypartSlot).getFluids())
+	doPCShowerRaw(fluidObjs)
+	
 func saveData() -> Dictionary:
 	var taskData:Array = []
 	for task in nurseryTasks:

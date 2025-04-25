@@ -50,6 +50,7 @@ func _init():
 		
 		"res://Modules/ElizaModule/Science/NurseryBountyBoardScene.gd",
 		"res://Modules/ElizaModule/Science/ChemistryLabScene.gd",
+		"res://Modules/ElizaModule/Science/ChemistryLabShowerScene.gd",
 		"res://Modules/ElizaModule/Science/ElizaGenericUnlockDrugScene.gd",
 		"res://Modules/ElizaModule/Science/ElizaGenericTestDrugScene.gd",
 		"res://Modules/ElizaModule/Science/ElizaGenericNPCTestDrugScene.gd",

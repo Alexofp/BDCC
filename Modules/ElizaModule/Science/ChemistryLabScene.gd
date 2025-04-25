@@ -43,6 +43,7 @@ func _run():
 		addButton("Leave", "Time to go", "endthescene")
 	
 	if(state == "fluid_tanks"):
+		playAnimation(StageScene.Solo, "stand")
 		sayTanksVolume()
 		
 		saynn("What do you want to do?")
@@ -185,12 +186,6 @@ func _run():
 			_i += 1
 		
 		addButton("Continue", "See what happens next", "inspect_select")
-		
-
-	if(state == "tank_shower"):
-		saynn("YOU TAKE A SPECIAL SHOWER.")
-		
-		addButton("Continue", "See what happens next", "")
 	
 	if(state == "tank_fill_select"):
 		addButton("Back", "Back to the previous menu", "fluid_tanks")
@@ -710,25 +705,8 @@ func _react(_action: String, _args):
 		return
 		
 	if(_action == "tank_shower"):
-		var fluidObjs:Array = [GM.pc.getFluids()]
-		if(GM.main.SCI.hasUpgrade("shower2")):
-			for bodypartSlot in [BodypartSlot.Head, BodypartSlot.Vagina, BodypartSlot.Anus]:
-				if(GM.pc.hasBodypart(bodypartSlot)):
-					fluidObjs.append(GM.pc.getBodypart(bodypartSlot).getFluids())
-		
-		for fluidObjA in fluidObjs:
-			var fluidObj:Fluids = fluidObjA
-			
-			var fluidsByType:Dictionary = fluidObj.getFluidAmountByType()
-			for fluidID in fluidsByType:
-				var theFluidOBJ:FluidBase = GlobalRegistry.getFluid(fluidID)
-				if(theFluidOBJ == null):
-					continue
-				
-				var howMuchAdded:float = GM.main.SCI.addFluid(fluidID, fluidsByType[fluidID])
-				if(howMuchAdded > 0.0):
-					addMessage(str(Util.roundF(howMuchAdded, 1))+" ml of "+theFluidOBJ.getVisibleName()+" was deposited into the fluids tanks.")
-			fluidObj.clear()
+		runScene("ChemistryLabShowerScene")
+		return
 	
 	if(_action == "look_stash"):
 		runScene("PlayerStashScene")
