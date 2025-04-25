@@ -535,7 +535,7 @@ func _run():
 
 		saynn("[say=pc]No I didn’t~[/say]")
 
-		saynn("Risha rolls her eyes and throws her head back, it’s like she accepted her faith.")
+		saynn("Risha rolls her eyes and throws her head back, it’s like she accepted her fate.")
 
 		# (scene ends)
 		addButton("Continue", "Time to go", "endthescene")
@@ -560,7 +560,7 @@ func _run():
 
 		saynn("[say=pc]No I didn’t~[/say]")
 
-		saynn("Risha rolls her eyes and throws her head back, it’s like she accepted her faith.")
+		saynn("Risha rolls her eyes and throws her head back, it’s like she accepted her fate.")
 
 		# (scene ends)
 		addButton("Continue", "Time to go", "endthescene")

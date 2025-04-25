@@ -333,7 +333,7 @@ func doDomAction(_id, _actionInfo):
 		satisfyGoals()
 
 		var text = RNG.pick([
-			"{dom.You} {dom.youVerb('quit')} feedng {sub.youHim}.",
+			"{dom.You} {dom.youVerb('quit')} feeding {sub.youHim}.",
 		])
 
 		return {text = text}

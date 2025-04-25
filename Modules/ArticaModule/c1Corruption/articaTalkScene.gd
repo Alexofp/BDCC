@@ -66,6 +66,7 @@ func _run():
 		addButton("Leave", "Time to go", "endthescene")
 		if (getFlag("ArticaModule.TentaclesPcHasFlower") && !getFlag("ArticaModule.TentaclesArticaHasFlower")):
 			addButton("Flower!", "Give Artica the flower that she is looking for", "do_give_flower")
+		GM.ES.triggerRun(Trigger.TalkingToNPC, ["artica"])
 	if(state == "ask_lilac"):
 		saynn("[say=pc]So why are you a lilac? What did you do to earn that purple color?[/say]")
 

@@ -42,7 +42,7 @@ func _run():
 
 		saynn("[say=rebel]Does this slut deserve her ass to be lubed?[/say]")
 
-		saynn("You hear many mixed answers, some mean inmates yell ‘Go bare! Fist {pc.him} raw! Make {pc.him} suffer!’. Some instead ask for lube. Rebel looks at you cute rear and finally makes up her mind.")
+		saynn("You hear many mixed answers, some mean inmates yell ‘Go bare! Fist {pc.him} raw! Make {pc.him} suffer!’. Some instead ask for lube. Rebel looks at your cute rear and finally makes up her mind.")
 
 		saynn("[say=rebel]Let's not break {pc.his} ass completely. Will be more fun for the other inmates to use {pc.him} later, am I right??[/say]")
 
@@ -105,7 +105,7 @@ func _run():
 
 		saynn("She pulls her hand out, leaving your ass gaping and you a moaning mess. So much emptiness inside you suddenly. And a desire for something to fill it. She dries her hand against your {pc.masc} butt and then turns towards the public to flex her muscles again.")
 
-		saynn("[say=rebel]That what happens to anyone who tries to mess with Rebel! Fuck yeah![/say]")
+		saynn("[say=rebel]That's what happens to anyone who tries to mess with Rebel! Fuck yeah![/say]")
 
 		saynn("She bathes in her glory for a bit longer before waving to you and getting over the fence. You’re left alone in the arena with your butt ruined. Time to leave..")
 

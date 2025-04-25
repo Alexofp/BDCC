@@ -341,7 +341,7 @@ func processTurn():
 				text += RNG.pick([
 					" {sub.You} {sub.youAre} being edged by {dom.you}.",
 					" {sub.You} {sub.youAre} about to cum!",
-					" {sub.You} {sub.youAre} keeping {dom.yourself} on edge.",
+					" {sub.You} {sub.youAre} keeping {sub.yourself} on edge.",
 				])
 			elif(subInfo.isCloseToCumming()):
 				text += RNG.pick([
@@ -354,7 +354,7 @@ func processTurn():
 				text += RNG.pick([
 					" {sub.You} {sub.youAre} being edged by {dom.you}.",
 					" {sub.You} {sub.youAre} about to cum!",
-					" {sub.You} {sub.youAre} keeping {dom.yourself} on edge.",
+					" {sub.You} {sub.youAre} keeping {sub.yourself} on edge.",
 					" {sub.Your} "+RNG.pick(["cock", "dick", "member"])+" is moments from cumming.",
 					" {sub.Your} "+RNG.pick(["cock", "dick", "member"])+" reached its peak."
 				])
@@ -504,7 +504,7 @@ func doDomAction(_id, _actionInfo):
 		var text:String = ""
 		if(!subInfo.isResistingSlightly()):
 			text += RNG.pick([
-				"{dom.You} {dom.youVerb('lean')} in closer, {dom.yourHis} lips locking with {sub.your} in a deep, heated kiss. Kiss that keeps going. {sub.YouHe} {sub.youVerb('respond')}, opening {sub.yourHis} mouth to meet {dom.yourHis} tongue.",
+				"{dom.You} {dom.youVerb('lean')} in closer, {dom.yourHis} lips locking with {sub.yourHis} in a deep, heated kiss. Kiss that keeps going. {sub.YouHe} {sub.youVerb('respond')}, opening {sub.yourHis} mouth to meet {dom.yourHis} tongue.",
 			])
 		else:
 			text += RNG.pick([

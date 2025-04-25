@@ -20,7 +20,7 @@ func _run():
 		addButton("A proposal", "See what happens next", "a_proposal")
 
 	if(state == "a_proposal"):
-		saynn("She is straddling you, using the weight of her body to keep you pinned. One her arm is holding yours while another is threatening to shove claws into your neck.")
+		saynn("She is straddling you, using the weight of her body to keep you pinned. One of her arms is holding yours while another is threatening to shove claws into your neck.")
 
 		saynn("[say=kait]Who taught you to fight?[/say]")
 
@@ -28,7 +28,7 @@ func _run():
 
 		saynn("[say=pc]Everyone has to be taught how to fight?[/say]")
 
-		saynn("She puts more pressure on her neck, her claws are digging into your skin, causing more pain.")
+		saynn("She puts more pressure on your neck, her claws are digging into your skin, causing more pain.")
 
 		saynn("[say=kait]Without being taught you wouldn’t be able to get this far.[/say]")
 
