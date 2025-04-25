@@ -65,7 +65,7 @@ func doProgress(_context:Dictionary) -> Dictionary:
 func reactProgress(_context:Dictionary, _result:TFResult):
 	addText(_result.getAllTFTexts())
 	
-	playAnim(StageScene.GivingBirth, "birth", {bodyState={exposedCrotch=true, hard=true}})
+	playAnim(StageScene.TFLook, "head")
 	
 func saveData() -> Dictionary:
 	var data:Dictionary = .saveData()

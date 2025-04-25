@@ -1,6 +1,7 @@
 extends TFBase
 
 var lastStep:String = ""
+var howOftenTime:int = -1
 
 func _init():
 	id = "RandomTFs"
@@ -19,7 +20,7 @@ func getUnlockData() -> Dictionary:
 	}
 
 func getPillDatabaseDesc() -> String:
-	return "This drug will cause a random effect. The list of possible effects:\n- Random hair.\n- Random body part morphing into a different body part.\n- Breast size increase or decrease.\n- Penis length increase or decrease.\n- Femininity increase or decrease.\n- Body thickness increase or decrease.\n- Random colors and skin.\n\nThe first stage will happen after about 15 minutes. After that, the next ones will happen roughly every 25 hours. This could only be accelerated by using the QuickShift drug.\n\nThis drug doesn’t have a set amount of stages. It will gradually morph your body forever and can only be stopped by the MorphIn or MorphOut drugs."
+	return "This drug will cause a random effect. The list of possible effects:\n- Random hair.\n- Random body part morphing into a different body part.\n- Breast size increase or decrease.\n- Penis length increase or decrease.\n- Femininity increase or decrease.\n- Body thickness increase or decrease.\n- Random colors and skin.\n\nThe first stage will happen after about 15 minutes. After that, the next ones will happen roughly every 25 hours. This could only be accelerated by using the QuickShift drug.\n\nThis drug doesn’t have a set amount of stages. It will gradually morph your body forever and can only be stopped by the MorphIn or MorphOut drugs. It's possible to alter the frequency of mutations by using the advanced lab equipment."
 
 func getTFCheckTags() -> Dictionary:
 	return {
@@ -46,7 +47,28 @@ func isPossibleFor(_char) -> bool:
 	return true
 
 func start(_args:Dictionary):
-	pass
+	if(_args.has("howOftenTime")):
+		howOftenTime = _args["howOftenTime"]
+
+func getPillOptions() -> Dictionary:
+	return {
+		"howOftenTime": {
+			name = "Frequency",
+			desc = "How often should the changes happen",
+			value = 60*60*25,
+			values = [
+				[60*10, "10 minutes"],
+				[60*30, "30 minutes"],
+				[60*60, "1 hour"],
+				[60*60*2, "2 hours"],
+				[60*60*6, "6 hours"],
+				[60*60*12, "12 hours"],
+				[60*60*25, "25 hours"],
+				[60*60*50, "50 hours"],
+				[60*60*100, "100 hours"],
+			],
+		},
+	}
 
 func getPossibleSteps(_char:BaseCharacter) -> Array:
 	var result:Array = [
@@ -75,6 +97,8 @@ func canBeTested() -> bool:
 	return stage >= 5
 	
 func getTimerForStage(_theStage:int) -> int:
+	if(howOftenTime > 0):
+		return howOftenTime
 	if(_theStage == 0):
 		return 900
 	return 60*60*25
@@ -139,6 +163,8 @@ func doProgress(_context:Dictionary) -> Dictionary:
 		var newPartID:String = RNG.pick(possiblePartIDs)
 		
 		return {
+			step = nextStep,
+			bodypartSlot = slot,
 			effects = [
 				partEffect("newpart", slot, "SwitchPart", [newPartID]),
 				charEffect("speciescalc", "SpeciesCalculate", []),
@@ -197,15 +223,32 @@ func reactProgress(_context:Dictionary, _result:TFResult):
 	elif(getStage() % 5 == 0):
 		addText("There is no pattern to these transformations.. they seem completely random..")
 	
-	if(step in ["feminc", "femincmale", "gender"]):
-		playAnim(StageScene.Solo, "stand")
+	if(step in ["hair"]):
+		playAnim(StageScene.TFLook, "head")
+	elif(step in ["breastsize"]):
+		playAnim(StageScene.TFLook, "breasts", {bodyState={exposedChest=true}})
+	elif(step in ["bodypart"]):
+		var bodypartSlot:String = _result.getField("bodypartSlot", "")
+		if(bodypartSlot in [BodypartSlot.Head, BodypartSlot.Hair, BodypartSlot.Ears, BodypartSlot.Horns]):
+			playAnim(StageScene.TFLook, "head")
+		elif(bodypartSlot in [BodypartSlot.Vagina, BodypartSlot.Penis, BodypartSlot.Tail]):
+			playAnim(StageScene.TFLook, "crotch", {bodyState={exposedCrotch=true,hard=true}})
+		elif(bodypartSlot in [BodypartSlot.Anus, BodypartSlot.Legs]):
+			playAnim(StageScene.GivingBirth, "birth", {bodyState={exposedCrotch=true, hard=true}})
+		elif(bodypartSlot in [BodypartSlot.Breasts]):
+			playAnim(StageScene.TFLook, "breasts", {bodyState={exposedChest=true}})
+		else:
+			playAnim(StageScene.TFLook, "hands")
+	elif(step in ["skin"]):
+		playAnim(StageScene.TFLook, "hands", {bodyState={naked=true}})
 	else:
-		playAnim(StageScene.GivingBirth, "birth", {bodyState={exposedCrotch=true, hard=true}})
+		playAnim(StageScene.TFLook, "hands")
 	
 func saveData() -> Dictionary:
 	var data:Dictionary = .saveData()
 	
 	data["ls"] = lastStep
+	data["hot"] = howOftenTime
 	
 	return data
 
@@ -213,3 +256,4 @@ func loadData(_data:Dictionary):
 	.loadData(_data)
 	
 	lastStep = SAVE.loadVar(_data, "ls", "")
+	howOftenTime = SAVE.loadVar(_data, "hot", -1)

@@ -163,27 +163,20 @@ func doProgress(_context:Dictionary) -> Dictionary:
 	return {}
 
 func reactProgress(_context:Dictionary, _result:TFResult):
-	var slot = _result.getField("slot", BodypartSlot.Body)
-	var showPenis:bool = _result.getField("showPenis", false)
-	if(showPenis):
-		slot = BodypartSlot.Penis
+	var bodypartSlot = _result.getField("slot", BodypartSlot.Body)
 	
-#	if(isFirstTime()):
-#		addText(("Something is happening to your chest.."))
-#	else:
-#		addText("A sudden warmth envelops your chest, and you feel an electrifying tingling sensation that sends shivers down your spine.")
-#
 	addText(_result.getAllTFTexts())
 	
-	
-	if(slot in [BodypartSlot.Head, BodypartSlot.Ears, BodypartSlot.Hair, BodypartSlot.Horns]):
-		playAnim(StageScene.Solo, "struggle_gag")
-	elif(slot == BodypartSlot.Legs):
-		playAnim(StageScene.Solo, "struggle_legs")
-	elif(slot in [BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]):
+	if(bodypartSlot in [BodypartSlot.Head, BodypartSlot.Hair, BodypartSlot.Ears, BodypartSlot.Horns]):
+		playAnim(StageScene.TFLook, "head")
+	elif(bodypartSlot in [BodypartSlot.Vagina, BodypartSlot.Penis, BodypartSlot.Tail]):
+		playAnim(StageScene.TFLook, "crotch", {bodyState={exposedCrotch=true,hard=true}})
+	elif(bodypartSlot in [BodypartSlot.Anus, BodypartSlot.Legs]):
 		playAnim(StageScene.GivingBirth, "birth", {bodyState={exposedCrotch=true, hard=true}})
+	elif(bodypartSlot in [BodypartSlot.Breasts]):
+		playAnim(StageScene.TFLook, "breasts", {bodyState={exposedChest=true}})
 	else:
-		playAnim(StageScene.Solo, "struggle", {bodyState={naked=true}})
+		playAnim(StageScene.TFLook, "hands")
 	
 #
 #func onSexEvent(_event : SexEvent):

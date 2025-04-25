@@ -8,7 +8,7 @@ func _init():
 
 func _run():
 	if(state == ""):
-		playAnimation(StageScene.Solo, "stand")
+		playAnimation(StageScene.TFLook, "start")
 		saynn("A strange sensation begins to wash over you..")
 		
 		saynn("Something is happening to your body.. you can feel it..")

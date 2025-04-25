@@ -63,25 +63,25 @@ func getPillOptions() -> Dictionary:
 			name = "Grow pussy",
 			desc = "Should the drug grow a fully-functional vagina",
 			value = true,
-			values = [[true, "Yes", [false, "No"]]],
+			values = [[true, "Yes"], [false, "No"]],
 		},
 		"removePenis": {
 			name = "Remove penis",
 			desc = "Should the drug remove the penis",
 			value = true,
-			values = [[true, "Yes", [false, "No"]]],
+			values = [[true, "Yes"], [false, "No"]],
 		},
 		"switchBreasts": {
 			name = "Feminine breasts",
 			desc = "Should the drug morph male pecs to female breasts",
 			value = true,
-			values = [[true, "Yes", [false, "No"]]],
+			values = [[true, "Yes"], [false, "No"]],
 		},
 		"switchHair": {
 			name = "Switch hair",
 			desc = "Should the drug grow feminine hair (only if it's not feminine already)",
 			value = true,
-			values = [[true, "Yes", [false, "No"]]],
+			values = [[true, "Yes"], [false, "No"]],
 		},
 	}
 
@@ -274,10 +274,16 @@ func reactProgress(_context:Dictionary, _result:TFResult):
 		addText("What is happening with your body..")
 	
 	
-	if(step in ["feminc", "femincmale", "gender"]):
-		playAnim(StageScene.Solo, "stand")
+	if(step in ["gender", "femincmale", "feminc"]):
+		playAnim(StageScene.TFLook, "hands")
+	elif(step in ["shrinkpenis", "rempenis", "penistovag", "growvag"]):
+		playAnim(StageScene.TFLook, "crotch", {bodyState={exposedCrotch=true,hard=true}})
+	elif(step in ["switchbreasts", "incbreasts"]):
+		playAnim(StageScene.TFLook, "breasts", {bodyState={exposedChest=true}})
+	elif(step in ["switchhair"]):
+		playAnim(StageScene.TFLook, "head")
 	else:
-		playAnim(StageScene.GivingBirth, "birth", {bodyState={exposedCrotch=true, hard=true}})
+		playAnim(StageScene.TFLook, "hands")
 	
 func onSexEvent(_event : SexEvent):
 	var _npc = getChar()

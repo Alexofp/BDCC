@@ -96,7 +96,7 @@ func doProgress(_context:Dictionary) -> Dictionary:
 func reactProgress(_context:Dictionary, _result:TFResult):
 	addText(_result.getAllTFTexts())
 	
-	playAnim(StageScene.GivingBirth, "birth", {bodyState={exposedCrotch=true, hard=true}})
+	playAnim(StageScene.TFLook, "hands")
 	
 func onSexEvent(_event : SexEvent):
 	var _npc = getChar()

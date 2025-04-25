@@ -219,11 +219,12 @@ func reactProgress(_context:Dictionary, _result:TFResult):
 		if(getPossibleSteps(getChar()).empty()):
 			addText("After all that, a sudden wave of realization washes over {npc.youHim}. {npc.YouHe} {npc.youAre} now a perfect HuCow! {npc.YouHe} just need to take some MorphIn and make these changes permanent..")
 	
-	
-	if(step in ["shrinkpenis"]):
-		playAnim(StageScene.GivingBirth, "birth", {bodyState={exposedCrotch=true, hard=true}})
+	if(step in ["switchbreasts", "incbreasts", "nipSen"]):
+		playAnim(StageScene.TFLook, "breasts", {bodyState={exposedChest=true}})
+	elif(step in ["addhorns"]):
+		playAnim(StageScene.TFLook, "head")
 	else:
-		playAnim(StageScene.Solo, "stand")
+		playAnim(StageScene.TFLook, "hands")
 		
 func getBuffs() -> Array:
 	var result:Array = []

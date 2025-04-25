@@ -1,5 +1,6 @@
 extends TFBase
 
+var noPenisShrink:bool = false
 var switchedbreasts:bool = false
 var switchedhair:bool = false
 var nipsStage:int = 0
@@ -23,7 +24,7 @@ func getUnlockData() -> Dictionary:
 	}
 
 func getPillDatabaseDesc() -> String:
-	return "This drug will transform you into a sissy slut. It will achieve that by doing the following:\n- Make your body at least 75% thick.\n- Shrink the length of your penis until it is below 10cm.\n- Switch your hair to a more feminine one.\n- Switch pecs for round breasts.\n- If you have a flat chest, give you ‘A-cup’ breasts.\n- Make your anus more sensitive.\n- Make your nipples more sensitive.\n- Make your penis [b]less[/b] sensitive.\n\nThe drug will only begin its effects if you have a penis with a length of at least 11cm. The first stage will happen after about 15 minutes. After that, the next ones will happen roughly every 10 hours. This could only be accelerated by using the QuickShift drug or by making the test subject [b]orgasm[/b].\n\nThis drug doesn’t have a set amount of stages. It will reach its final stage when there is nothing left to transform.\n\nBeing under the effects of this transformation will make others more likely to want to have anal sex with you."
+	return "This drug will transform you into a sissy slut. It will achieve that by doing the following:\n- Make your body at least 75% thick.\n- Shrink the length of your penis until it is below 10cm.\n- Switch your hair to a more feminine one.\n- Switch pecs for round breasts.\n- If you have a flat chest, give you ‘A-cup’ breasts.\n- Make your anus more sensitive.\n- Make your nipples more sensitive.\n- Make your penis [b]less[/b] sensitive.\n\nThe drug will only begin its effects if you have a penis with a length of at least 11cm. The first stage will happen after about 15 minutes. After that, the next ones will happen roughly every 10 hours. This could only be accelerated by using the QuickShift drug or by making the test subject [b]orgasm[/b].\n\nThis drug doesn’t have a set amount of stages. It will reach its final stage when there is nothing left to transform. It's possible to disable the penis shrinking aspect of this drug by using the advanced lab equipment.\n\nBeing under the effects of this transformation will make others more likely to want to have anal sex with you."
 
 func getTFCheckTags() -> Dictionary:
 	return {
@@ -52,7 +53,18 @@ func isPossibleFor(_char) -> bool:
 	return true
 
 func start(_args:Dictionary):
-	pass
+	if(_args.has("noPenisShrink")):
+		noPenisShrink = _args["noPenisShrink"]
+
+func getPillOptions() -> Dictionary:
+	return {
+		"noPenisShrink": {
+			name = "Penis shrinking",
+			desc = "Should the drug make the penis smaller",
+			value = false,
+			values = [[false, "Enabled"], [true, "Disabled"]],
+		},
+	}
 
 func charHasMaleBreasts(theChar) -> bool:
 	return theChar.bodypartHasTrait(BodypartSlot.Breasts, PartTrait.BreastsMale)
@@ -66,7 +78,7 @@ func getPossibleSteps(_char:BaseCharacter) -> Array:
 	if(fem < 80 || thick < 75):
 		result.append("femthick")
 	
-	if(fem > 20 && _char.hasPenis() && _char.getPenisSize() > 10):
+	if(fem > 20 && _char.hasPenis() && _char.getPenisSize() > 10 && !noPenisShrink):
 		result.append("shrinkpenis")
 	
 	if(!switchedhair && fem > 70):
@@ -341,6 +353,7 @@ func saveData() -> Dictionary:
 	data["ns"] = nipsStage
 	data["as"] = anusStage
 	data["ps"] = penisStage
+	data["nps"] = noPenisShrink
 	
 	return data
 
@@ -352,3 +365,4 @@ func loadData(_data:Dictionary):
 	nipsStage = SAVE.loadVar(_data, "ns", 0)
 	anusStage = SAVE.loadVar(_data, "as", 0)
 	penisStage = SAVE.loadVar(_data, "ps", 0)
+	noPenisShrink = SAVE.loadVar(_data, "nps", false)

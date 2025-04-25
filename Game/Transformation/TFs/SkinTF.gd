@@ -121,7 +121,7 @@ func reactProgress(_context:Dictionary, _result:TFResult):
 	else:
 		addText("The colors of {npc.yourHis} skin change more and more, slowly shifting towards their final state.")
 	
-	playAnim(StageScene.Solo, "struggle", {bodyState={naked=true}})
+	playAnim(StageScene.TFLook, "hands", {bodyState={naked=true}})
 	
 func getBuffs() -> Array:
 	return []
