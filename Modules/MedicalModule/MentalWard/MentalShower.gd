@@ -58,6 +58,8 @@ func _run():
 		addButtonWithChecks("Show", "Give Eliza a little show", "show", [], [[ButtonChecks.SkillCheck, Skill.Exhibitionism, 2]])
 
 	if(state == "ask_to_look_away"):
+		playAnimation(StageScene.Showering, "body", {pc="pc", bodyState={naked=true}})
+		
 		saynn("[say=pc]Can you not watch, please?[/say]")
 
 		saynn("[say=eliza]Sure, if you’re asking so nicely.[/say]")
@@ -69,6 +71,7 @@ func _run():
 		addButton("Done", "You’re finished showering", "done")
 		
 	if(state == "steal_keycard_failed"):
+		playAnimation(StageScene.Duo, "defeat", {npc="eliza"})
 		# (if failed)
 
 		saynn("You sneak up to the doctor and try to steal the keycard that she has on her belt.")
@@ -92,6 +95,7 @@ func _run():
 		addButton("Done", "You’re finished showering", "done")
 
 	if(state == "clean_inside"):
+		playAnimation(StageScene.Showering, "crotch", {pc="pc", bodyState={naked=true}})
 		# (if has pussy)
 		if(GM.pc.hasVagina()):
 			saynn("You spread your {pc.pussyStretch} pussy lips and wait if anything comes out. It all quickly goes down the drain. You then do the same with your butt. At least you don’t have to do this while Eliza is watching.")
@@ -110,6 +114,8 @@ func _run():
 		
 
 	if(state == "be_watched"):
+		playAnimation(StageScene.ShoweringDuo, "tease", {pc="pc", npc="eliza", bodyState={naked=true}})
+
 #ACEOREGEXPAC - Experiments Shower has a few lines for being heavily pregnant
 		if(GM.pc.isHeavilyPregnant()):
 			saynn("You step under the shower head and proceed to wash yourself. Hair, face, shoulders, {pc.breasts}, your {pc.masc} body. You can’t cover yourself forever so Eliza catches a few glimpses of your privates.")
@@ -177,6 +183,7 @@ func _run():
 		addButton("Done", "You’re finished showering", "done2")
 
 	if(state == "done2"):
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		saynn("You turn off the water, Eliza walks up to you and puts the straitjacket back on you. She then puts a leash on you and walks you back to your cell.")
 		
 		addButton("Continue", "You feel fresh", "endthescene")

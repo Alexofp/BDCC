@@ -63,7 +63,7 @@ func doAction(_id:String, _args:Dictionary):
 
 func getAnimData() -> Array:
 	if(sstate == "shower"):
-		return [StageScene.Solo, "struggle", {pc="main", bodyState={naked=true}}]
+		return [StageScene.Showering, RNG.pick(["body", "head"]), {pc="main", bodyState={naked=true}}]
 	if(sstate == "undress"):
 		return [StageScene.Solo, "stand", {pc="main", bodyState={naked=true}}]
 	return [StageScene.Solo, "walk", {pc="main"}]

@@ -335,7 +335,8 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "shower_alone"):
-		playAnimation(StageScene.Duo, "stand", {npc="tavi", npcBodyState={naked=true}})
+		playAnimation(StageScene.Showering, "body", {pc="tavi", bodyState={naked=true}})
+		#playAnimation(StageScene.Duo, "stand", {npc="tavi", npcBodyState={naked=true}})
 		saynn("You decide to just watch since you don't need a shower yourself. Your arms crossed as you lean against the wall.")
 
 		if (isNormal):
@@ -375,6 +376,7 @@ func _run():
 		else:
 			addDisabledButton("Clean inside", "Tavi doesn't have any cum in her holes")
 	if(state == "solo_cleaninside"):
+		playAnimation(StageScene.Showering, "rub", {pc="tavi", bodyState={naked=true}})
 		var hasCumInPussy = getCharacter("tavi").hasEffect(StatusEffect.HasCumInsideVagina)
 		var hasCumInAnus = getCharacter("tavi").hasEffect(StatusEffect.HasCumInsideAnus)
 		saynn("[say=pc]Clean inside too.[/say]")

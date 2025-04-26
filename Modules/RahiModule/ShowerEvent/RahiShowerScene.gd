@@ -22,8 +22,8 @@ func _run():
 			saynn("The feline strips her uniform in the undressing room and gets under one of the shower heads before twisting the nob that makes the water run.")
 		
 		addCharacter("rahi", ["naked"])
-		playAnimation(StageScene.Duo, "stand", {
-			npc="rahi", pc="pc", 
+		playAnimation(StageScene.ShoweringDuo, "tease", {
+			pc="rahi", npc="pc", 
 			bodyState={naked=true,},
 			npcBodyState={naked=true},
 		})
@@ -36,8 +36,8 @@ func _run():
 		addButton("Intervene", "Announce your presence", "intervene")
 
 	if(state == "intervene"):
-		playAnimation(StageScene.SexStanding, "tease", {
-			npc="rahi", pc="pc", 
+		playAnimation(StageScene.ShoweringDuo, "shower", {
+			pc="rahi", npc="pc", 
 			bodyState={naked=true,},
 			npcBodyState={naked=true},
 		})
@@ -103,6 +103,12 @@ func _run():
 			addDisabledButton("Clean inside", "Rahi doesn't have any cum or other fluids inside her holes")
 
 	if(state == "clean_rahi_inside"):
+		playAnimation(StageScene.ShoweringDuo, "rub", {
+			pc="rahi", npc="pc", 
+			bodyState={naked=true,},
+			npcBodyState={naked=true},
+		})
+		
 		saynn("[say=pc]Let's clean you inside too, kitty.[/say]")
 
 		saynn("[say=rahi]Meow?..[/say]")

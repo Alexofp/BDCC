@@ -43,19 +43,19 @@ func _run():
 				saynn("She then eyes you out and notices your pregnant belly.")
 				saynn("[say=nurse]Yeah, you'll need to come here soon enough.[/say]")
 				if(GM.pc.getInmateType() == InmateType.HighSec):
-					saynn("[say=nurse]And, please do me a favor and dont smash the place like the other Red Block inmates. Please and Thank you.[/say]")
+					saynn("[say=nurse]And, please do me a favor and don't smash the place like the other Red Block inmates. Please and Thank you.[/say]")
 			elif(GM.pc.isVisiblyPregnant()):
 				saynn("She then eyes you out and notices your pregnant belly.")
 				
 				saynn("[say=nurse]You're too late for birth control and you're too early to deliver. You'll need to see me sometime later.[/say]")
 				if(GM.pc.getInmateType() == InmateType.HighSec):
-					saynn("[say=nurse]And, please do me a favor and dont smash the place like the other Red Block inmates. Please and Thank you.[/say]")
+					saynn("[say=nurse]And, please do me a favor and don't smash the place like the other Red Block inmates. Please and Thank you.[/say]")
 
 			if(GM.pc.isReadyToGiveBirth()):
 				saynn("She then eyes you out and notices your pregnant belly.")
 				saynn("[say=nurse]You look ready to drop already, if you wanna get that over with just let me know.[/say]")
 				if(GM.pc.getInmateType() == InmateType.HighSec):
-					saynn("[say=nurse]And, please do me a favor and dont smash the place like the other Red Block inmates. Please and Thank you.[/say]")
+					saynn("[say=nurse]And, please do me a favor and don't smash the place like the other Red Block inmates. Please and Thank you.[/say]")
 			saynn("Well then. You look around. It looks more like a lobby, a few benches are placed near the white walls. You notice a few pictures there and there, all of them clearly drawn by someone young. There are two other doors, apart from the one that you walked in through.")
 
 		else:
@@ -143,7 +143,7 @@ func _run():
 		saynn("She motions to lean in closer so she can quickly whisper the answer to you.")
 		
 		saynn("[say=nurse]You got one the experimental variants of AlphaCorp's Fertility drugs, it should've completed by the time you woke up on your first day.[/say]")
-		saynn("[say=nurse]Don't worry about something [i]entirely[/i] weird happening to you, it still has benefits if you dont have a uterus, and all the staff get the same treatment for working in deep space, like this prison.[/say]")
+		saynn("[say=nurse]Don't worry about something [i]entirely[/i] weird happening to you, it still has benefits if you don't have a uterus, and all the staff get the same treatment for working in deep space, like this prison.[/say]")
 		saynn("[say=nurse]Namely, it should have massively boosted physical protection of your womb and any offspring you make, to the point anything in your womb will survive anything this place will throw at you.[/say]")
 		saynn("[say=nurse]And secondly, it will have altered how your offspring develops, progressing at a rate set by a Corporate Medical Officer. And as much as Corporate is full of idiots, they're smart enough to not let inmates give birth at random. Once someone starts feeling false contractions, they'll have to come here to get induced.[/say]")
 

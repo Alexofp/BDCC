@@ -162,7 +162,9 @@ func _run():
 		addButton("Showers", "See what she will be doing there", "artica_in_showers")
 	if(state == "artica_in_showers"):
 		addCharacter("artica", ["naked"])
-		playAnimation(StageScene.Grope, "watchstroke", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
+		#playAnimation(StageScene.Grope, "watchstroke", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.Showering, "stroke", {pc="artica", bodyState={naked=true, hard=true}})
+
 		aimCameraAndSetLocName("main_shower1")
 		saynn("[say=artica]Ah.. ah..[/say]")
 
@@ -177,7 +179,8 @@ func _run():
 		addButton("Watch more", "See what happens next", "artica_licks_fingers")
 		addButton("Lockers", "Return back to the lockers", "return_to_lockers")
 	if(state == "artica_licks_fingers"):
-		playAnimation(StageScene.Grope, "watchrub", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
+		#playAnimation(StageScene.Grope, "watchrub", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.Showering, "rub", {pc="artica", bodyState={naked=true, hard=true}})
 		saynn("After getting herself wet and bothered, Artica's paw collects some of her precum and brings it under her balls.. where a cute tight cyan pussy slit is hiding.")
 
 		if (getCharacter("artica").hasEffect(StatusEffect.HasCumInsideVagina)):
@@ -197,7 +200,8 @@ func _run():
 		addButton("Watch more", "See what happens next", "artica_cums_in_shower")
 		addButton("Lockers", "Return back to the lockers", "return_to_lockers")
 	if(state == "artica_cums_in_shower"):
-		playAnimation(StageScene.Grope, "watchstroke", {pc="artica", npc="pc", pcCum=true, bodyState={naked=true, hard=true}})
+		#playAnimation(StageScene.Grope, "watchstroke", {pc="artica", npc="pc", pcCum=true, bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.Showering, "stroke", {pc="artica", pcCum=true, bodyState={naked=true, hard=true}})
 		saynn("The more she sniffs her own paw, the more her {artica.penis} pulses, precum drips off of the tip.")
 
 		saynn("[say=artica]This s-shouldn't t-turn me on so much-h.. ah..[/say]")

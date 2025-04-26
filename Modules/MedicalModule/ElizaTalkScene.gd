@@ -167,7 +167,7 @@ func _run():
 			
 			saynn("That sounded... not the best. Probably not a good idea to keep bringing it up.")
 			
-			addMessage("[Whatever Rahi has planned for Eliza's content, I dont know it. Sorry. -Ace]")
+			#addMessage("[Whatever Rahi has planned for Eliza's content, I dont know it. Sorry. -Ace]")
 			
 			addButton("Continue", "Continue talking", "talk")
 		else:

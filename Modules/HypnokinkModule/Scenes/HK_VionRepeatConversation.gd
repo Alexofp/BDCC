@@ -93,7 +93,7 @@ func _run():
 
 		saynn("[say=pc]And the guards just let you get away with it?[/say]")
 
-		saynn("[say=vion]Well, if they dont they might have to explain why they never disposed of the thing properly like they were supposed to. Can't blame them for not wanting to bother - you ever try to carry a sofa into an elevator?[/say]")
+		saynn("[say=vion]Well, if they don't they might have to explain why they never disposed of the thing properly like they were supposed to. Can't blame them for not wanting to bother - you ever try to carry a sofa into an elevator?[/say]")
 
 		saynn("Fair point.")
 		
@@ -223,7 +223,7 @@ func _run():
 
 		saynn("[say=pc]Big?[/say]")
 
-		saynn("[say=vion]Trust me, when you see him you'll agree its an accurate descriptor. Anyway, he's a hybrid of equine and dragon. Neon blue hair in a mohawk, dark furred. High sec inmate, goes by the name of Rush. When he's not wandering around and harrasing me, you can usually find him in the gym or the high security cellblock.[/say]")
+		saynn("[say=vion]Trust me, when you see him you'll agree it's an accurate descriptor. Anyway, he's a hybrid of equine and dragon. Neon blue hair in a mohawk, dark furred. High sec inmate, goes by the name of Rush. When he's not wandering around and harrasing me, you can usually find him in the gym or the high security cellblock.[/say]")
 
 		saynn("[say=pc]Okay, I'll see what I can do.[/say]")
 

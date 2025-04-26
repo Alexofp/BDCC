@@ -1590,7 +1590,8 @@ func _run():
 		saynn("You enter the dressing room.")
 
 		if (corruption < 0.4):
-			playAnimation(StageScene.Duo, "stand", {npc="jacki", bodyState={naked=true}, npcBodyState={naked=true}})
+			playAnimation(StageScene.Showering, "body", {pc="jacki", bodyState={naked=true}})
+			#playAnimation(StageScene.Duo, "stand", {npc="jacki", bodyState={naked=true}, npcBodyState={naked=true}})
 			saynn("Jacki quickly takes off her clothes and puts them in the locker. She runs past you while covering herself up using her paws and tail. You follow.")
 
 			saynn("She doesn't seem to be eager to.. shower together. So you stand under separate shower heads and just wash yourselves in peace.")
@@ -1598,7 +1599,8 @@ func _run():
 			saynn("After you both are done, Jacki waves to you and heads to the dressing room. Looks like she is not corrupted enough to do more.")
 
 		else:
-			playAnimation(StageScene.SexStanding, "tease", {npc="jacki", pc="pc", bodyState={naked=true}, npcBodyState={naked=true}})
+			playAnimation(StageScene.ShoweringDuo, "shower", {pc="jacki", npc="pc", bodyState={naked=true}, npcBodyState={naked=true}})
+			#playAnimation(StageScene.SexStanding, "tease", {npc="jacki", pc="pc", bodyState={naked=true}, npcBodyState={naked=true}})
 			saynn("Jacki takes off her clothes and waits for you to do the same, standing near. After that, you head further, entering the showering area.")
 
 			saynn("You stand under one of the shower heads.")
