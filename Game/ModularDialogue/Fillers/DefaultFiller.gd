@@ -42,12 +42,16 @@ func getFormIDs() -> Array:
 		"HelpRestraintsAsk",
 		"HelpRestraintsAgree",
 		"HelpRestraintsAltStart",
+		"HelpRestraintsAltRefuseUnhappy",
+		"HelpRestraintsAltRefuseKinky",
+		"HelpRestraintsAltRefuseKinkyReact",
 		"HelpRestraintsDeny",
 		"HelpRestraintsFinished",
 		"HelpRestraintsPaid",
 		"HelpRestraintsRefusePay",
 		"HelpRestraintsRefusePayWhatever",
 		
+		"HelpStocksSlutwallRefuse",
 		"SlutwallStealCredits",
 		"SlutwallAddTip",
 		"StocksShout",
@@ -510,12 +514,42 @@ func getText(_id:String, _args:Dictionary):
 			"Sure, I can try.",
 		]
 	if(_id == "HelpRestraintsAltStart"):
+		var restraintIsPlural = getVar(_args, "restraintIsPlural", false)
+		var restraint_thatThose = "that" if(!restraintIsPlural) else "those"
 		return [
-			"Hey there, let me help you with those. Hold still.",
+			"Hey there, let me help you with "+restraint_thatThose+". Hold still.",
 			"Let me help you with your gear.",
-			"I want to help you with those. Hold tight.",
-			"I’ll help with those. Don’t move.",
-			"I’m going to help you out with those. Hang on.",
+			"I want to help you with "+restraint_thatThose+". Hold tight.",
+			"I’ll help with "+restraint_thatThose+". Don’t move.",
+			"I’m going to help you out with "+restraint_thatThose+". Hang on.",
+		]
+	if(_id == "HelpRestraintsAltRefuseUnhappy"):
+		var restraintIsPlural = getVar(_args, "restraintIsPlural", false)
+		var restraint_itThem = "it" if(!restraintIsPlural) else "them"
+		var restraint_it_sThey_re = "it's" if(!restraintIsPlural) else "they're"
+		var restraint_thatThose = "that" if(!restraintIsPlural) else "those"
+		return [
+			"I appreciate the thought, but I don't want you taking "+restraint_itThem+" off.",
+			( "That stays" if(!restraintIsPlural) else "Those stay" )+" on.",
+			"I don't want you taking "+restraint_thatThose+" off, "+restraint_it_sThey_re+" quite comfy..",
+			"I'm feeling like keeping "+restraint_thatThose+" for a little longer.",
+			( "It doesn't" if(!restraintIsPlural) else "These don't" )+" really bother me.",
+			"I've honestly forgotten I was still wearing "+restraint_thatThose+". "+( "It feels" if(!restraintIsPlural) else "They feel" )+" so natural.",
+		]
+	if(_id == "HelpRestraintsAltRefuseKinky"):
+		var restraintIsPlural = getVar(_args, "restraintIsPlural", false)
+		var restraint_itThem = "it" if(!restraintIsPlural) else "them"
+		var restraint_thatThose = "that" if(!restraintIsPlural) else "those"
+		return [
+			"Oh, I'm only wearing "+restraint_thatThose+" because I want to.",
+			"Hey, there's no need. I like having "+restraint_itThem+" on~.",
+			"I wanted to get rid of "+restraint_thatThose+" at first, but I think I'm starting to like "+restraint_itThem+"..",
+			( "It fits" if(!restraintIsPlural) else "They fit" )+" me so well, perhaps what you should be doing is adoring "+restraint_itThem+" close and intimate~.",
+		]
+	if(_id == "HelpRestraintsAltRefuseKinkyReact"):
+		return [
+			"Kinky.",
+			"Mmm, that's hot.",
 		]
 	if(_id == "HelpRestraintsDeny"):
 		return [
@@ -563,6 +597,16 @@ func getText(_id:String, _args:Dictionary):
 			"Whatever, it’s not worth arguing.",
 			"Whatever, have it your way.",
 			"Okay, whatever, I don’t care.",
+		]
+	if(_id == "HelpStocksSlutwallRefuse"):
+		return [
+			"Don't worry, I'm more than enjoying this.",
+			"I've yet to get my share of fun out of this.",
+			"Oh, you don't have to. I'm fine, really.",
+			"There are still so many inmates I want to meet, and.. really get to know them..",
+			"Thanks, but I'm not looking for an easy way out.",
+			"I can take this.. Surely..",
+			"I know I look really helpless in here, but that's kind of the point, y'know?",
 		]
 	if(_id == "SlutwallStealCredits"):
 		return [

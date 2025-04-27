@@ -5,6 +5,8 @@ var savedHow = ""
 var saveTryCount = 0
 var useCount = 0
 var tips = 0
+var shoutedForHelpCount = 0
+var immediatelyLeft = false
 
 func _init():
 	id = "InSlutwall"
@@ -62,6 +64,7 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 		checkSleep()
 		getCharByRole("inmate").addStamina(50)
 	if(_id == "shout"):
+		shoutedForHelpCount += 1
 		setState("about_to_shout", "inmate")
 	if(_id == "struggle"):
 		if(getRolePawn("inmate").isPlayer()):
@@ -174,7 +177,11 @@ func after_use_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func about_to_save_text():
-	saynn("{saver.name} approaches {inmate.you}!")
+	if(saveTryCount == 0):
+		saynn("{saver.You} {saver.youVerb('approach', 'approaches')} {inmate.you}!")
+	else:
+		saynn("{saver.You} {saver.youVerb('stand')} next to {inmate.you}.")
+
 	saynn("{saver.YouHe} can either spend some of {saver.yourHis} stamina and help {inmate.you} to struggle out of the slutwall.. or use a restraint key to unlock it.")
 
 	if(getRoleChar("saver").getStamina() > 0):
@@ -187,37 +194,72 @@ func about_to_save_text():
 
 func about_to_save_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "help"):
-		saveTryCount += 1
-		var inmate = getRoleChar("inmate")
-		var struggleData:Dictionary = inmate.doStruggleOutOfRestraints(false, true, getRoleChar("saver"), 2.0)
-		if(struggleData.empty()):
-			struggleText = "Something happened.."
+		if(saveTryCount == 0):
+			setState("refusable_save_using_stamina", "inmate")
 		else:
-			struggleText = struggleData["text"]
-		
-		if(inmate.getInventory().hasItemIDEquipped("SlutwallStatic")):
-			setState("save_after_help", "inmate")
-		else:
-			savedHow = "help"
-			setState("save_saved", "inmate")
-			affectAffection("inmate", "saver", 0.2)
+			saveUsingStamina()
 	if(_id == "key"):
-		savedHow = "key"
-		setState("save_saved", "inmate")
-		affectAffection("inmate", "saver", 0.2)
-		getRoleChar("saver").getInventory().removeXOfOrDestroy("restraintkey", 1)
-		getRoleChar("inmate").getInventory().clearStaticRestraints()
+		if(saveTryCount == 0):
+			setState("refusable_save_using_key", "inmate")
+		else:
+			saveUsingKey()
+	if(_id == "leave"):
+		if(saveTryCount == 0):
+			immediatelyLeft = true
+		setState("canceled_save", "saver")
+
+
+func refusable_save_using_stamina_text():
+	saynn("{saver.You} {saver.youAre} about to help {inmate.you} struggle out of the slutwall.")
+
+	var acceptHelpProbability = getInmateAcceptHelpProbability()
+	var refuseHelpProbability = 1.0 - acceptHelpProbability
+	addAction("accept", "Accept", "Allow them to help you", "default", acceptHelpProbability, 60, {})
+	addAction("refuse", "Refuse", "You'd rather stay in the slutwall", "default", refuseHelpProbability, 60, {})
+
+func refusable_save_using_stamina_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "accept"):
+		saveUsingStamina()
+	if(_id == "refuse"):
+		setState("refused_save", "saver")
+
+
+func refusable_save_using_key_text():
+	saynn("{saver.You} {saver.youAre} about to use a restraint key to unlock the slutwall.")
+
+	var acceptHelpProbability = getInmateAcceptHelpProbability()
+	var refuseHelpProbability = 1.0 - acceptHelpProbability
+	addAction("accept", "Accept", "Allow them to unlock the slutwall", "default", acceptHelpProbability, 60, {})
+	addAction("refuse", "Refuse", "You'd rather stay in the slutwall", "default", refuseHelpProbability, 60, {})
+
+func refusable_save_using_key_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "accept"):
+		saveUsingKey()
+	if(_id == "refuse"):
+		setState("refused_save", "saver")
+
+
+func refused_save_text():
+	saynn("{inmate.You} {inmate.youVerb('refuse', 'refused')} {saver.your} help.")
+	sayLine("inmate", "HelpStocksSlutwallRefuse", {main="inmate", target="saver"})
+
+	addAction("leave", "Leave", "Time to go", "default", 1.0, 60, {})
+
+func refused_save_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "leave"):
 		setState("canceled_save", "saver")
 
 
 func canceled_save_text():
-	saynn("{saver.name} is leaving, no longer trying to save {inmate.you}..")
+	if(immediatelyLeft):
+		saynn("{saver.You} {saver.youVerb('walk')} away, leaving {inmate.you} to {inmate.yourHis} fate..")
+	else:
+		saynn("{saver.You} {saver.youVerb('leave')}, no longer trying to save {inmate.you}..")
 
-	addAction("leave", "Leave", "Time to go", "default", 1.0, 60, {})
+	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 30, {})
 
 func canceled_save_do(_id:String, _args:Dictionary, _context:Dictionary):
-	if(_id == "leave"):
+	if(_id == "continue"):
 		doRemoveRole("saver")
 		setState("", "inmate")
 
@@ -371,9 +413,10 @@ func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _conte
 		doInvolvePawn("user", _pawn)
 		setState("about_to_use", "user")
 	if(_id == "free"):
+		saveTryCount = 0
+		immediatelyLeft = false
 		doInvolvePawn("saver", _pawn)
 		setState("about_to_save", "saver")
-		saveTryCount = 0
 	if(_id == "free_slave"):
 		doInvolvePawn("saver", _pawn)
 		setState("free_slave", "inmate")
@@ -382,7 +425,7 @@ func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _conte
 func getAnimData() -> Array:
 	if(getState() in ["save_saved", "free_slave"]):
 		return [StageScene.Duo, "stand", {pc="inmate", npc="saver"}]
-	if(getState() in ["about_to_save", "save_after_help"]):
+	if(getState() in ["about_to_save", "refusable_save_using_stamina", "refusable_save_using_key", "refused_save", "save_after_help"]):
 		return [StageScene.SlutwallSex, "tease", {pc="inmate", npc="saver"}]
 	if(getState() in ["about_to_use", "after_use", "after_tip"]):
 		return [StageScene.SlutwallSex, "tease", {pc="inmate", npc="user"}]
@@ -399,7 +442,7 @@ func getPreviewLineForRole(_role:String) -> String:
 	if(_role == "inmate"):
 		if(getState() in ["about_to_use", "after_use"]):
 			return "{inmate.name} is being used by {user.name}.."
-		if(getState() in ["about_to_save", "save_after_help"]):
+		if(getState() in ["about_to_save", "refusable_save_using_stamina", "refusable_save_using_key", "save_after_help"]):
 			return "{inmate.name} is being saved by {saver.name}.."
 		return "{inmate.name} is stuck in a slutwall.."
 	if(_role == "user"):
@@ -416,6 +459,43 @@ func onStopped():
 	if(hasRoleChar("inmate")):
 		getRoleChar("inmate").getInventory().clearStaticRestraints()
 
+func getInmateAcceptHelpProbability() -> float:
+	var acceptHelpProbability:float = 1.0
+
+	if(shoutedForHelpCount > 0):
+		acceptHelpProbability = 1.0
+		return acceptHelpProbability
+
+	var inmateDommyness:float = getRolePawn("inmate").scorePersonalityMax({PersonalityStat.Subby: -1.0})
+	var saverDommyness:float = getRolePawn("saver").scorePersonalityMax({PersonalityStat.Subby: -1.0})
+	var dommynessDisadvantageRatio:float = max(saverDommyness - inmateDommyness, 0.0) / 2.0
+
+	acceptHelpProbability = clamp(1.0 - getRolePawn("inmate").scoreFetishMax({ Fetish.Bondage: 0.4 }) + 0.3 * dommynessDisadvantageRatio, 0.0, 1.0)
+	return acceptHelpProbability
+
+func saveUsingStamina() -> void:
+	saveTryCount += 1
+	var inmate = getRoleChar("inmate")
+	var struggleData:Dictionary = inmate.doStruggleOutOfRestraints(false, true, getRoleChar("saver"), 2.0)
+	if(struggleData.empty()):
+		struggleText = "Something happened.."
+	else:
+		struggleText = struggleData["text"]
+	
+	if(inmate.getInventory().hasItemIDEquipped("SlutwallStatic")):
+		setState("save_after_help", "inmate")
+	else:
+		savedHow = "help"
+		setState("save_saved", "inmate")
+		affectAffection("inmate", "saver", 0.2)
+
+func saveUsingKey() -> void:
+	savedHow = "key"
+	setState("save_saved", "inmate")
+	affectAffection("inmate", "saver", 0.2)
+	getRoleChar("saver").getInventory().removeXOfOrDestroy("restraintkey", 1)
+	getRoleChar("inmate").getInventory().clearStaticRestraints()
+
 func saveData():
 	var data = .saveData()
 
@@ -424,6 +504,8 @@ func saveData():
 	data["saveTryCount"] = saveTryCount
 	data["useCount"] = useCount
 	data["tips"] = tips
+	data["shoutedForHelpCount"] = shoutedForHelpCount
+	data["immediatelyLeft"] = immediatelyLeft
 	return data
 
 func loadData(_data):
@@ -434,4 +516,6 @@ func loadData(_data):
 	saveTryCount = SAVE.loadVar(_data, "saveTryCount", 0)
 	useCount = SAVE.loadVar(_data, "useCount", 0)
 	tips = SAVE.loadVar(_data, "tips", 0)
+	shoutedForHelpCount = SAVE.loadVar(_data, "shoutedForHelpCount", 0)
+	immediatelyLeft = SAVE.loadVar(_data, "immediatelyLeft", false)
 

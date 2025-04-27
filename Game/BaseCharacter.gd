@@ -3037,39 +3037,83 @@ func hasSomethingToStruggleOutOf() -> bool:
 		return true
 	return false
 
-func doStruggleOutOfRestraints(isScared:bool = false, addStats:bool = true, customActor=null, damageMult:float = 1.0) -> Dictionary:
+func getRestraintsToStruggleOutOf() -> Dictionary:
 	var possible = []
 	var trivial = []
-	
-	var whoStruggles = self
-	if(customActor != null):
-		whoStruggles = customActor
-	
+
 	for item in getInventory().getEquppedRestraints():
-		var restraintData: RestraintData = item.getRestraintData()
-		
+		var restraintData:RestraintData = item.getRestraintData()
+
 		if(restraintData == null || !restraintData.canStruggleFinal() || !restraintData.shouldStruggle()):
 			continue
-		
+
 		if(!restraintData.shouldDoStruggleMinigame(self)):
 			trivial.append(item)
 		else:
 			possible.append(item)
-	
-	var pickedItem
-	var minigameResult:MinigameResult
+
+	var restraintsToStruggleOutOf = {
+		possible = possible,
+		trivial = trivial,
+	}
+
+	return restraintsToStruggleOutOf
+
+func getNextRestraintToStruggleOutOf(deterministicOrderHashInt:int = 0):
+	var nextRestraintToStruggleOutOf = null
+
+	if(deterministicOrderHashInt == 0):
+		deterministicOrderHashInt = RNG.randi_range(1, 1000000)
+
+	var restraintsToStruggleOutOf:Dictionary = getRestraintsToStruggleOutOf()
+
+	var possible:Array = restraintsToStruggleOutOf.possible
+	var trivial:Array = restraintsToStruggleOutOf.trivial
+
+	for item in possible:
+		if(item.id in ["StocksStatic", "SlutwallStatic"]):
+			nextRestraintToStruggleOutOf = {
+				item = item,
+				isTrivial = false,
+			}
+			return nextRestraintToStruggleOutOf
+
 	if(trivial.size() > 0):
-		pickedItem = RNG.pick(trivial)
+		nextRestraintToStruggleOutOf = {
+			item = RNG.pickHashed(trivial, deterministicOrderHashInt),
+			isTrivial = true,
+		}
+		return nextRestraintToStruggleOutOf
+	elif(possible.size() > 0):
+		nextRestraintToStruggleOutOf = {
+			item = RNG.pickHashed(possible, deterministicOrderHashInt),
+			isTrivial = false,
+		}
+		return nextRestraintToStruggleOutOf
+	else:
+		nextRestraintToStruggleOutOf = null
+		return nextRestraintToStruggleOutOf
+
+func doStruggleOutOfRestraints(isScared:bool = false, addStats:bool = true, customActor=null, damageMult:float = 1.0, deterministicOrderHashInt:int = 0) -> Dictionary:
+	var nextRestraintToStruggleOutOf = getNextRestraintToStruggleOutOf(deterministicOrderHashInt)
+
+	if(nextRestraintToStruggleOutOf == null):
+		return {}
+
+	var whoStruggles = self
+	if(customActor != null):
+		whoStruggles = customActor
+
+	var pickedItem = nextRestraintToStruggleOutOf.item
+	var minigameResult:MinigameResult
+	if(nextRestraintToStruggleOutOf.isTrivial):
 		minigameResult = MinigameResult.new()
 		minigameResult.score = 1.0
-	elif(possible.size() > 0):
-		pickedItem = RNG.pick(possible)
+	else:
 		minigameResult = whoStruggles.getRestraintStrugglingMinigameResult()
-		
+
 		if(isScared):
 			minigameResult.score = min(minigameResult.score, min(1.0, RNG.randf_range(0.6, 1.1)))
-	else:
-		return {}
 	
 	if(customActor != null):
 		minigameResult.beingHelped = true
