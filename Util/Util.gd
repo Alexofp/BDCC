@@ -748,3 +748,10 @@ static func folderExists(path:String) -> bool:
 	if dir.open(path) == OK:
 		return true
 	return false
+
+# EXAMPLE: if(Util.hasCommandLineArgument("-noRegistryCache")):
+static func hasCommandLineArgument(_theArg:String) -> bool:
+	for argument in OS.get_cmdline_args():
+		if(argument == _theArg):
+			return true
+	return false

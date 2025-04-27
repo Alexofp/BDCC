@@ -10,6 +10,9 @@ var currentChildUniqueID = 0
 var currentNPCUniqueID = 0
 var currentTFID := 0
 
+var pathToIDCache:Dictionary = {}
+var IDToPathCache:Dictionary = {}
+
 var scenes: Dictionary = {}
 var temporaryScenes: Dictionary = {}
 var sceneCreators: Dictionary = {}
@@ -204,7 +207,72 @@ func loadMods():
 			file_name = dir.get_next()
 	else:
 		Log.printerr("An error occurred when trying to access the path "+modsFolder)
+
+const CACHE_SCENE = "scene"
+const CACHE_CHAR = "char"
+const CACHE_STAGESCENE = "stagescene"
+
+func fillBaseCacheFields():
+	var theFields:Array = [CACHE_SCENE, CACHE_CHAR, CACHE_STAGESCENE]
 	
+	for field in theFields:
+		if(!pathToIDCache.has(field)):
+			pathToIDCache[field] = {}
+		if(!IDToPathCache.has(field)):
+			IDToPathCache[field] = {}
+
+var cacheEnabled:bool = true
+func checkCacheEnabled():
+	if(OS.get_name() == "HTML5"): # To save on userstorage
+		cacheEnabled = false
+	
+	if(Util.hasCommandLineArgument("-noRegistryCache")):
+		cacheEnabled = false
+
+func isCacheEnabled() -> bool:
+	return cacheEnabled
+
+func getCachedID(theType:String, thePath:String) -> String:
+	if(!pathToIDCache[theType].has(thePath)):
+		return ""
+	return pathToIDCache[theType][thePath]
+
+func getCachedPath(theType:String, theID:String) -> String:
+	if(!IDToPathCache[theType].has(theID)):
+		return ""
+	return IDToPathCache[theType][theID]
+
+func addCacheEntry(theType:String, theID:String, thePath:String):
+	if(!isCacheEnabled()):
+		return
+	IDToPathCache[theType][theID] = thePath
+	pathToIDCache[theType][thePath] = theID
+
+func removeCacheEntryByID(theType:String, theID:String, updateFile:bool=true):
+	if(!hasCachedID(theType, theID)):
+		return
+	pathToIDCache[theType].erase(getCachedPath(theType, theID))
+	IDToPathCache[theType].erase(theID)
+	
+	if(updateFile):
+		saveRegistryCacheToFile()
+
+func hasCachedPath(theType:String, thePath:String) -> bool:
+	if(!pathToIDCache[theType].has(thePath)):
+		return false
+	return true
+	
+func hasCachedID(theType:String, theID:String) -> bool:
+	if(!IDToPathCache[theType].has(theID)):
+		return false
+	return true
+
+func loadCached(theType:String, theID:String):
+	return load(getCachedPath(theType, theID))
+
+func newCached(theType:String, theID:String):
+	return loadCached(theType, theID).new()
+
 
 func _init():
 	checkModSupport()
@@ -294,6 +362,7 @@ const totalStages = 19.0
 
 func registerEverything():
 	var start = OS.get_ticks_usec()
+	loadRegistryCacheFromFile()
 	
 	startLoadingDonationData()
 	
@@ -498,6 +567,8 @@ func registerEverything():
 	yield(get_tree(), "idle_frame")
 	postInitModules()
 	
+	saveRegistryCacheToFile()
+	
 	var end = OS.get_ticks_usec()
 	var worker_time = (end-start)/1000000.0
 	Log.print("GlobalRegistry fully initialized in: %s seconds" % [worker_time])
@@ -547,12 +618,17 @@ func isVersionListHasCompatible(versionlist):
 	return false
 
 func registerScene(path: String, creator = null):
+	if(hasCachedPath(CACHE_SCENE, path)):
+		scenes[getCachedID(CACHE_SCENE, path)] = null
+		return
+	
 	var scene = load(path)
 	if(!scene):
 		Log.printerr("ERROR: couldn't load scene from path "+path)
 		return
 	var sceneObject = scene.new()
 	scenes[sceneObject.sceneID] = scene
+	addCacheEntry(CACHE_SCENE, sceneObject.sceneID, path)
 	sceneObject.queue_free()
 	if(creator != null):
 		sceneCreators[sceneObject.sceneID] = creator
@@ -591,13 +667,19 @@ func createScene(id: String):
 			newscene.setDatapackAndSceneIDs(datapackID, sceneID)
 			return newscene
 	
-	if(!scenes.has(id) && !temporaryScenes.has(id)):
+	if(!scenes.has(id) && !temporaryScenes.has(id) && !hasCachedID(CACHE_SCENE, id)):
 		Log.printerr("ERROR: scene with the id "+id+" wasn't found")
 		return null
 	var scene
 	if(temporaryScenes.has(id)):
 		scene = temporaryScenes[id].new()
 	else:
+		if(scenes[id] == null && hasCachedID(CACHE_SCENE, id)):
+			scenes[id] = loadCached(CACHE_SCENE, id)
+			if(scenes[id] == null): # We have a cache entry but the scene doesn't actually exist
+				removeCacheEntryByID(CACHE_SCENE, id)
+				Log.printerr("ERROR: scene with the id "+id+" wasn't found (cache error)")
+				return null
 		scene = scenes[id].new()
 	scene.name = scene.sceneID
 	return scene
@@ -668,11 +750,14 @@ func registerBodypartFolder(folder: String):
 		Log.printerr("An error occurred when trying to access the path "+folder)
 
 func registerCharacter(path: String):
+	if(hasCachedPath(CACHE_CHAR, path)):
+		characterClasses[getCachedID(CACHE_CHAR, path)] = null
+		return
+	
 	var character = load(path)
 	var characterObject = character.new()
-	#characters[characterObject.id] = characterObject
 	characterClasses[characterObject.id] = character
-	#add_child(characterObject)
+	addCacheEntry(CACHE_CHAR, characterObject.id, path)
 	characterObject.queue_free()
 
 func registerCharacterFolder(folder: String):
@@ -744,9 +829,17 @@ func createCharacter(charID:String):
 		remove_child(dynChar)
 		return dynChar
 	
+	return createStaticCharacter(charID)
+
+func createStaticCharacter(charID:String):
 	if(!characterClasses.has(charID)):
-		Log.printerr("ERROR: character class with the id "+charID+" wasn't found ")
+		Log.printerr("ERROR: character class with the id "+charID+" wasn't found")
 		return null
+	if(characterClasses[charID] == null && hasCachedID(CACHE_CHAR, charID)):
+		characterClasses[charID] = loadCached(CACHE_CHAR, charID)
+		if(!characterClasses[charID]):
+			Log.printerr("ERROR: character class with the id "+charID+" wasn't found (cache error)")
+			return null
 	return characterClasses[charID].new()
 
 func registerAttack(path: String):
@@ -1227,9 +1320,13 @@ func getLustTopicObjects():
 
 
 func registerStageScene(path: String):
+	if(hasCachedPath(CACHE_STAGESCENE, path)):
+		stageScenes[getCachedID(CACHE_STAGESCENE, path)] = null
+		return
 	var item:PackedScene = load(path)
 	var itemObject = item.instance()
 	stageScenes[itemObject.id] = item
+	addCacheEntry(CACHE_STAGESCENE, itemObject.id, path)
 	var possibleStates = itemObject.getSupportedStates()
 	if(possibleStates != null && possibleStates.size() > 0):
 		stageScenesCachedStates[itemObject.id] = possibleStates
@@ -1259,6 +1356,16 @@ func createStageScene(id: String):
 	if(!stageScenes.has(id)):
 		Log.printerr("ERROR: stage scene with the id "+id+" wasn't found")
 		return null
+	
+	if(stageScenes[id] == null && hasCachedID(CACHE_STAGESCENE, id)):
+		var item:PackedScene = load(getCachedPath(CACHE_STAGESCENE, id))
+		var itemObject = item.instance()
+		stageScenes[itemObject.id] = item
+		var possibleStates = itemObject.getSupportedStates()
+		if(possibleStates != null && possibleStates.size() > 0):
+			stageScenesCachedStates[itemObject.id] = possibleStates
+		return itemObject
+	
 	return stageScenes[id].instance()
 
 func getStageScenesCachedStates():
@@ -2405,3 +2512,60 @@ func getDrugDenEventRef(id: String):
 		
 func getDrugDenEvents():
 	return drugDenEventRefs
+
+func saveRegistryCache() -> Dictionary:
+	var data:Dictionary = {
+		pathToIDCache = pathToIDCache,
+		IDToPathCache = IDToPathCache,
+		sceneCreators = sceneCreators,
+		stageScenesCachedStates = stageScenesCachedStates,
+	}
+	
+	return data
+
+func loadRegistryCache(_data:Dictionary):
+	pathToIDCache = SAVE.loadVar(_data, "pathToIDCache", {})
+	IDToPathCache = SAVE.loadVar(_data, "IDToPathCache", {})
+	sceneCreators = SAVE.loadVar(_data, "sceneCreators", {})
+	stageScenesCachedStates = SAVE.loadVar(_data, "stageScenesCachedStates", {})
+
+func resetRegistryCache(shouldSaveToFile:bool=false):
+	pathToIDCache = {}
+	IDToPathCache = {}
+	sceneCreators = {}
+	stageScenesCachedStates = {}
+	fillBaseCacheFields()
+	if(shouldSaveToFile):
+		saveRegistryCacheToFile(true)
+
+const cacheFilePath = "user://registryCache.json"
+
+func saveRegistryCacheToFile(forceSave:bool = false):
+	if(!isCacheEnabled() && !forceSave):
+		return
+	var data:Dictionary = saveRegistryCache()
+
+	var save_game = File.new()
+	save_game.open(cacheFilePath, File.WRITE)
+	save_game.store_line(var2str(data))
+	save_game.close()
+
+func loadRegistryCacheFromFile():
+	checkCacheEnabled()
+	if(Util.hasCommandLineArgument("-resetRegistryCache")): # We just don't load it
+		fillBaseCacheFields()
+		return
+	if(!isCacheEnabled()):
+		fillBaseCacheFields()
+		return
+	var save_game = File.new()
+	if not save_game.file_exists(cacheFilePath):
+		return
+	
+	save_game.open(cacheFilePath, File.READ)
+	var data = str2var(save_game.get_as_text())
+	if(data is Dictionary):
+		loadRegistryCache(data)
+	save_game.close()
+	fillBaseCacheFields()
+

@@ -97,10 +97,10 @@ func createStaticCharacters():
 	Util.delete_children(charactersNode)
 	staticCharacters.clear()
 	
-	var characterClasses = GlobalRegistry.getCharacterClasses()
-	for charID in characterClasses:
-		var character = characterClasses[charID]
-		var characterObject = character.new()
+	#var characterClasses = GlobalRegistry.getCharacterClasses()
+	for charID in GlobalRegistry.getCharacterClasses():
+		#var character = characterClasses[charID]
+		var characterObject = GlobalRegistry.createStaticCharacter(charID)
 		staticCharacters[characterObject.id] = characterObject
 		charactersNode.add_child(characterObject)
 	

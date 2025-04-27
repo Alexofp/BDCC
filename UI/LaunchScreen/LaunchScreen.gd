@@ -420,3 +420,8 @@ func _input(event):
 	if(event.is_action_pressed("ui_right")):
 		_on_MoveDownButton_pressed()
 		return
+
+
+func _on_ResetGRCacheButton_pressed():
+	GlobalRegistry.resetRegistryCache(true)
+	$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/ResetGRCacheButton.disabled = true

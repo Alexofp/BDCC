@@ -162,39 +162,45 @@ margin_bottom = 644.0
 rect_min_size = Vector2( 0, 50 )
 
 [node name="Control" type="Control" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_right = 57.0
+margin_right = 30.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 
 [node name="TestButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 61.0
-margin_right = 201.0
+margin_left = 34.0
+margin_right = 174.0
 margin_bottom = 50.0
 text = "Build BDCC.pck"
 
+[node name="ResetGRCacheButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 178.0
+margin_right = 319.0
+margin_bottom = 50.0
+text = "Reset GR cache"
+
 [node name="OpenModsFolder" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 205.0
-margin_right = 324.0
+margin_left = 323.0
+margin_right = 442.0
 margin_bottom = 50.0
 text = "Mods Folder"
 
 [node name="ModBrowserButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 328.0
-margin_right = 454.0
+margin_left = 446.0
+margin_right = 572.0
 margin_bottom = 50.0
 text = "Mod Browser"
 
 [node name="NoModsButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 458.0
-margin_right = 629.0
+margin_left = 576.0
+margin_right = 713.0
 margin_bottom = 50.0
-text = "Play without mods"
+text = "Play (no mods)"
 
 [node name="WithModsButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 633.0
+margin_left = 717.0
 margin_right = 851.0
 margin_bottom = 50.0
-text = "Launch BDCC with mods"
+text = "Play (modded)"
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 margin_top = 648.0
@@ -225,6 +231,7 @@ visible = false
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/MoveDownButton" to="." method="_on_MoveDownButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/DeleteModButton" to="." method="_on_DeleteModButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/TestButton" to="." method="_on_TestButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/ResetGRCacheButton" to="." method="_on_ResetGRCacheButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/OpenModsFolder" to="." method="_on_OpenModsFolder_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/ModBrowserButton" to="." method="_on_ModBrowserButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/NoModsButton" to="." method="_on_NoModsButton_pressed"]
