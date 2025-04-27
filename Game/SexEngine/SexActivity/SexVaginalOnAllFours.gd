@@ -65,9 +65,9 @@ func getPoseDescriptor():
 	if(currentPose == POSE_BEHIND):
 		return " in a behind pose"
 	if(currentPose == POSE_MATINGPRESS):
-		return " on all fours"
-	if(currentPose == POSE_LOWDOGGY):
 		return " in a mating press"
+	if(currentPose == POSE_LOWDOGGY):
+		return " on all fours"
 	if(currentPose == POSE_LEGRAISED):
 		return " with one leg raised"
 	if(currentPose == POSE_AGAINSTWALL):
@@ -224,11 +224,11 @@ func getStartTextForPose(thePose):
 	var text = ""
 	if(thePose == POSE_ALLFOURS):
 		text = RNG.pick([
-			"{dom.You} {dom.youVerb('put')} {sub.you} on all fours and {dom.youVerb('position')} {dom.yourself} behind {sub.your} butt with {dom.yourHis} "+getDickName()+" out and presses it against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
+			"{dom.You} {dom.youVerb('put')} {sub.you} on all fours and {dom.youVerb('position')} {dom.yourself} behind {sub.your} butt with {dom.yourHis} "+getDickName()+" out and {dom.youVerb('press', 'presses')} it against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
 		])
 	elif(thePose == POSE_LOWDOGGY):
 		text = RNG.pick([
-			"{dom.You} {dom.youVerb('put')} {sub.you} on all fours and {dom.youVerb('position')} {dom.yourself} behind {sub.your} butt with {dom.yourHis} "+getDickName()+" out and presses it against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
+			"{dom.You} {dom.youVerb('put')} {sub.you} on all fours and {dom.youVerb('position')} {dom.yourself} behind {sub.your} butt with {dom.yourHis} "+getDickName()+" out and {dom.youVerb('press', 'presses')} it against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
 		])
 	elif(thePose == POSE_STANDING):
 		text = RNG.pick([
@@ -268,7 +268,7 @@ func getStartTextForPose(thePose):
 		])
 	else:
 		text = RNG.pick([
-			"{dom.You} {dom.youVerb('position')} {dom.yourself} behind {sub.your} butt with {dom.yourHis} "+getDickName()+" out and presses it against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
+			"{dom.You} {dom.youVerb('position')} {dom.yourself} behind {sub.your} butt with {dom.yourHis} "+getDickName()+" out and {dom.youVerb('press', 'presses')} it against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
 		])
 	return text
 	
