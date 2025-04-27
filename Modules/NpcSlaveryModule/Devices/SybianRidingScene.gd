@@ -297,7 +297,7 @@ func _run():
 			else:
 				playAnimation(StageScene.SybianOral, "lickfast", {pc="pc", npc=npcID, bodyState={naked=true}, npcBodyState={exposedCrotch=true, hard=true}})
 			if (isFirstRide):
-				saynn("You call {npc.name} to get closer.. before getting {npc.his} {npc.pussyStretch} exposed and pressing your face into it, your tongue out and ready to please.")
+				saynn("You call {npc.name} to get closer.. before getting {npc.his} {npc.pussyStretch} pussy exposed and pressing your face into it, your tongue out and ready to please.")
 
 				if (GM.pc.hasReachableVagina()):
 					saynn("At the same time, you begin to ride the humming machine with slow, deliberate movements, its toys pleasuring your eager holes. Feels so good to have all your holes busy..")

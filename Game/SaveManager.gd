@@ -79,9 +79,7 @@ func saveGame(_path):
 	
 	save_game.close()
 	
-	if(saveInfoCache.has(_path)):
-		saveInfoCache.erase(_path)
-	triggerSaveCacheSave()
+	invalidateCachedSaveInfoByPath(_path)
 
 const saveInfoCachePath = "user://saveInfoCache.json"
 
@@ -123,11 +121,18 @@ func triggerSaveCacheSave():
 	isSavingCache = true # De-bouncing. Only save once at the end of the frame in case there are many requests
 	call_deferred("saveInfoCacheToFile")
 
+func invalidateCachedSaveInfoByPath(_path:String):
+	if(saveInfoCache.has(_path)):
+		saveInfoCache.erase(_path)
+	triggerSaveCacheSave()
+
 func saveGameFromText(filepath: String, savedatastring):
 	var save_game = File.new()
 	save_game.open("user://saves/"+filepath.get_file().get_basename()+".save", File.WRITE)
 	save_game.store_line(savedatastring)
 	save_game.close()
+	
+	invalidateCachedSaveInfoByPath(filepath)
 
 func loadGameRelative(_name):
 	loadGame("user://saves/"+_name+".save")
@@ -213,6 +218,7 @@ func recursiveQuickSaveMakeBackup(currentI = 1):
 		
 		if(currentI >= maxBackupQuicksaves):
 			d.remove(quickSaveFullname)
+			invalidateCachedSaveInfoByPath(quickSaveFullname)
 			#print("I REMOVED "+quickSaveFullname)
 			return
 		
@@ -220,6 +226,7 @@ func recursiveQuickSaveMakeBackup(currentI = 1):
 		var newQuickSaveName = "quicksave backup"+str(i)
 		var newQuickSaveFullname = "user://saves/"+newQuickSaveName+".save"
 		d.rename(quickSaveFullname, newQuickSaveFullname)
+		invalidateCachedSaveInfoByPath(quickSaveFullname)
 		#print("RENAMING "+quickSaveFullname+" TO "+newQuickSaveFullname)
 
 func makeQuickSave():
@@ -350,3 +357,4 @@ func loadGameInformationFromSaveRaw(_path):
 func deleteSave(path):
 	var dir = Directory.new()
 	dir.remove(path)
+	invalidateCachedSaveInfoByPath(path)
