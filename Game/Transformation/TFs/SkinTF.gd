@@ -8,6 +8,8 @@ func _init():
 	id = "SkinTF"
 	#pillGenWeight = 0.0
 	
+	canStack = true
+	
 	pointsOnUnlock = 10
 
 func getName() -> String:

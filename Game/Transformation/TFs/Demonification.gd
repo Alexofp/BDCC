@@ -3,6 +3,8 @@ extends "res://Game/Transformation/TFs/SpeciesTF.gd"
 func _init():
 	id = "Demonification"
 	
+	canStack = false
+	
 	pointsOnUnlock = 15
 
 func getName() -> String:

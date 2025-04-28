@@ -6,6 +6,8 @@ var hasTarget:bool = false
 func _init():
 	id = "ThicknessAddTF"
 	
+	canStack = true
+	
 	pointsOnUnlock = 5
 
 func getName() -> String:

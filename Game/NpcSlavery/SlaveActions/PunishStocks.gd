@@ -23,7 +23,7 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 	
 	var text = "Eager to punish, you leash {npc.name} and bring {npc.him} to the main punishment platform. You find a free set of stocks and then throw your slave into them, amplying force if needed."
 	
-	text += "\n\nYou make {npc.his} head and arms are secured properly and just let {npc.him} 'enjoy' being forced into such a vulnerable exposed position for about half an hour.\n\n"
+	text += "\n\nYou make sure {npc.his} head and arms are secured properly and just let {npc.him} 'enjoy' being forced into such a vulnerable exposed position for about half an hour.\n\n"
 	
 	if(npcSlavery.getSpoiling() > 0.7):
 		text += "Your slave is not happy about this one bit, {npc.he} glares at you with {npc.his} spoiled eyes, clearly expecting you to free {npc.him} this very second. Luckily, you don't have to obey."

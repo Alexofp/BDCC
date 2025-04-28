@@ -5,6 +5,8 @@ var stages:int = 3
 func _init():
 	id = "BreastSizeDecTF"
 	
+	canStack = true
+	
 	pointsOnUnlock = 5
 
 func getName() -> String:

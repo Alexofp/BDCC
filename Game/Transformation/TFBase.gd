@@ -16,6 +16,7 @@ var tfTexts:Array = [] # no save
 var reactResultData:Dictionary = {} # no save
 var pillGenWeight:float = 1.0 # no save
 var pointsOnUnlock:int = 10
+var canStack:bool = false # allow more than one of the same tf
 
 func saveData() -> Dictionary:
 	return {
@@ -137,7 +138,7 @@ func resetTimer():
 	setTimer( int(round(float(getTimerForStage(getStage())) * (1.0 + RNG.randf_range(-deviation, deviation)))) )
 
 func doProgressFinal(_context:Dictionary) -> Dictionary:
-	resetTimer()
+	timer = 999999
 	return doProgress(_context)
 
 func doProgress(_context:Dictionary) -> Dictionary:
@@ -159,6 +160,7 @@ func reactProgressFinal(_context:Dictionary, _result:TFResult):
 	var reactDialogue:String = getReactionDialogueLine(_context, _result)
 	if(!_result.getField("noStageAdvance", false)):
 		stage += 1
+	resetTimer()
 	return {text=Util.join(tfTexts, "\n\n"), anim=(reactResultData["anim"] if reactResultData.has("anim") else []), say=reactDialogue}
 
 func reactProgressShort(_context:Dictionary, _result:TFResult):
@@ -170,6 +172,7 @@ func reactProgressShortFinal(_context:Dictionary, _result:TFResult):
 	reactProgressShort(_context, _result)
 	var reactDialogue:String = getReactionDialogueLine(_context, _result)
 	stage += 1
+	resetTimer()
 	return {text=Util.join(tfTexts, " "),say=reactDialogue}
 
 func getReactionDialogueLine(_context:Dictionary, _result:TFResult) -> String:
@@ -358,6 +361,9 @@ func addText(theText:String):
 		return
 	#getHolder().addTextToReactQueue(theText)
 	tfTexts.append(theText)
+
+func canTFStack() -> bool:
+	return canStack
 
 func effect(_effectID:String, _args:Array = [], bodypartSlot:String = ""):
 	var theEffect:TFEffect = GlobalRegistry.createTransformationEffect(_effectID)

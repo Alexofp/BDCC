@@ -6,6 +6,8 @@ var affectedSlots:Dictionary = {}
 func _init():
 	id = "SpeciesTF"
 	
+	canStack = false
+	
 	pointsOnUnlock = 25
 
 func getName() -> String:

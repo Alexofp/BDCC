@@ -35,6 +35,12 @@ func canStartTransformation(_tfID:String) -> bool:
 	if(newTF == null || !newTF.isPossibleFor(getChar())):
 		return false
 	
+	# Skip tags checking if tf is allowed to stack and we already have one
+	if(newTF.canTFStack()):
+		for tf in transformations:
+			if(tf.id == _tfID):
+				return true
+	
 	var currentTags:Dictionary = getCurrentTFTags()
 	var newTfTags:Dictionary = newTF.getTFCheckTags()
 	for tag in newTfTags:
@@ -259,7 +265,6 @@ func applyEffects(savedEffectObjs:Dictionary={}, applyResults:Dictionary={}):
 				effectResult["effect"] = effect
 			applyResults[savedEffectObjs[effect]] = effectResult
 	
-	theChar.applyTFData(charModifiedData)
 	for bodypartSlot in bodypartModifiedData:
 		theChar.applyTFBodypart(bodypartSlot, bodypartModifiedData[bodypartSlot])
 	
@@ -272,6 +277,8 @@ func applyEffects(savedEffectObjs:Dictionary={}, applyResults:Dictionary={}):
 		originalParts.erase(bodypartSlot)
 	affectedParts = newEffectedParts
 	
+	# Char data has to be last because it applies skin data to bodyparts
+	theChar.applyTFData(charModifiedData)
 	
 	theChar.updateAppearance()
 
