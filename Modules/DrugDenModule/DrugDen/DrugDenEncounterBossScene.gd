@@ -118,7 +118,7 @@ func _react(_action: String, _args):
 		
 	if(_action == "do_science"):
 		processTime(5*60)
-		GM.main.SCI.addPoints(20 + 5*int(GM.main.DrugDenRun.getLevel()/3.0))
+		GM.main.SCI.addPoints(20 + 5*int(GM.main.DrugDenRun.getLevel()/3.0) + 5*int(GM.main.DrugDenRun.getLevel()/9.0) + 5*int(GM.main.DrugDenRun.getLevel()/27.0))
 		GM.main.increaseFlag("DrugDenModule.RaidedLabs")
 		
 	if(_action == "make_painkillers"):

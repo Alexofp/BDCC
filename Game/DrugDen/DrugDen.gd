@@ -159,14 +159,17 @@ func endRun():
 	var drugDenChar = GlobalRegistry.getCharacter("DrugDenStash")
 	#transferAllItems(GM.pc, drugDenChar) # So the order of the items would be correct
 	
+	var keepAll:bool = GM.main.SCI.hasUpgrade("drugDenLoot")
+	
 	# Only keep items that have the item tag
 	var pcItems:Array = GM.pc.getInventory().getItems()
 	while(!pcItems.empty()):
 		var theItem:ItemBase = pcItems[0]
 		GM.pc.getInventory().removeItem(theItem)
-		if(theItem.hasTag(ItemTag.KeptAfterDrugDenRun)):
+		if(theItem.hasTag(ItemTag.KeptAfterDrugDenRun) || keepAll):
 			drugDenChar.getInventory().addItem(theItem)
-			addMessage("You managed to keep "+str(theItem.getAStackName())+"!")
+			if(!keepAll):
+				addMessage("You managed to keep "+str(theItem.getAStackName())+"!")
 		
 	transferAllItems(drugDenChar, GM.pc)
 	

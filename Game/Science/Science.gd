@@ -310,6 +310,12 @@ var upgradesInfo:Dictionary = {
 		cost = 250,
 		requiredUpgrades = ["milkingBetter3", "tanksUpgrade4", "advBreastPump", "advPenisPump", "configurableDrugs", "strangepill", "bluespaceStash"],
 	},
+	"drugDenLoot": {
+		name = "Strong Nanobots!",
+		desc = "Upgrade Eliza's nanobots, allowing them to extract you with ALL items that you have found during the drug den exploration!",
+		cost = 250,
+		requiredUpgrades = ["milkingBetter3", "tanksUpgrade4", "advBreastPump", "advPenisPump", "configurableDrugs", "strangepill", "bluespaceStash"],
+	},
 }
 
 func isUpgradeVisible(upgradeID:String) -> bool:
