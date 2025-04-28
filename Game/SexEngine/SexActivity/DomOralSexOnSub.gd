@@ -45,6 +45,15 @@ func getDomTagsCheck():
 func getSubTagsCheck():
 	return [SexActivityTag.OrderedToDoSomething, SexActivityTag.HavingSex, SexActivityTag.PenisUsed, SexActivityTag.VaginaUsed]
 
+func isActivityImpossibleShouldStop() -> bool:
+	if(state in ["blowjob", "lickingcock"]):
+		if(!getSub().hasReachablePenis() && !getSub().isWearingStrapon()):
+			return true
+	if(state in ["licking", "grinding"]):
+		if(!getSub().hasReachableVagina()):
+			return true
+	return false
+
 func startActivity(_args):
 	state = ""
 	

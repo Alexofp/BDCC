@@ -23,6 +23,17 @@ func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: Sex
 		
 	return .canStartActivity(_sexEngine, _domInfo, _subInfo)
 
+func isActivityImpossibleShouldStop() -> bool:
+	if(domFocus == BodypartSlot.Vagina && !getSub().hasReachableVagina()):
+		return true
+	if(domFocus == BodypartSlot.Penis && !getSub().hasReachablePenis()):
+		return true
+	if(subFocus == BodypartSlot.Vagina && !getDom().hasReachableVagina()):
+		return true
+	if(subFocus == BodypartSlot.Penis && !getDom().hasReachablePenis()):
+		return true
+	return false
+
 func getVisibleName():
 	return "69"
 

@@ -541,6 +541,7 @@ func checkFailedAndCompletedGoals():
 				domInfo.goals.remove(i)
 
 func removeEndedActivities():
+	checkImpossibleActivities()
 	for i in range(activities.size() - 1, -1, -1):
 		if(activities[i].hasEnded):
 			activities.remove(i)
@@ -1367,6 +1368,15 @@ func hasWallsNearby() -> bool:
 		return true
 	
 	return false
+
+func checkImpossibleActivities():
+	var activityAmount:int = activities.size()
+	for _i in range(activityAmount):
+		var acIndex:int = activityAmount - _i - 1
+		var theActivity = activities[acIndex]
+		
+		if(theActivity.isActivityImpossibleShouldStop()):
+			theActivity.endActivity()
 
 func saveData():
 	var data = {

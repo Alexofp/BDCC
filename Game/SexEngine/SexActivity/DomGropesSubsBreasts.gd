@@ -22,6 +22,12 @@ func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	return .canStartActivity(_sexEngine, _domInfo, _subInfo)
 
+func isActivityImpossibleShouldStop() -> bool:
+	if(alsoCock):
+		if(!getSub().hasReachablePenis()):
+			return true
+	return false
+
 func getVisibleName():
 	return "Grope breasts"
 

@@ -46,6 +46,10 @@ func clearSexEngineRefAndParticipants():
 	domInfo = null
 	subInfo = null
 
+# Will automatically end the activity if this returns true
+func isActivityImpossibleShouldStop() -> bool:
+	return false
+
 func endActivity():
 	if(!hasEnded):
 		hasEnded = true
@@ -819,7 +823,6 @@ func getSubDickName(dickName = null):
 	if(dickName == null):
 		return RNG.pick(["cock", "dick", "member"])
 	return dickName
-
 	
 func doBlowjobTurnDom():
 	affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0})+0.1, 0.1, -0.1, -0.01)

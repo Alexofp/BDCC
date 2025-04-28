@@ -157,6 +157,16 @@ func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: Sex
 	
 	return .canStartActivity(_sexEngine, _domInfo, _subInfo)
 
+func isActivityImpossibleShouldStop() -> bool:
+	if(!getDom().hasReachablePenis() && !getDom().isWearingStrapon()):
+		return true
+	if(usedBodypart == BodypartSlot.Vagina && !getSub().hasReachableVagina()):
+		return true
+	if(usedBodypart == BodypartSlot.Anus && !getSub().hasReachableAnus()):
+		return true
+		
+	return false
+
 func getVisibleName():
 	return "Vaginal"
 
