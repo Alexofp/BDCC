@@ -4,11 +4,11 @@ func _init():
 	id = "DrugDenStartEvent"
 
 func registerTriggers(es):
-	es.addTrigger(self, Trigger.EnteringRoom, "yard_deadend2") # CHANGE TO yard_deadend2 # medical_nursery
+	es.addTrigger(self, Trigger.EnteringRoom, "yard_deadend2")
 
 func run(_triggerID, _args):
 	if(getModule("ElizaModule") != null && getModule("ElizaModule").canStartDrugDenRun()):
-		addButtonUnlessLate("Drug Den", "Begin your adventure", "start")
+		addButton("Drug Den", "Begin your adventure", "start")
 	
 func getPriority():
 	return 0

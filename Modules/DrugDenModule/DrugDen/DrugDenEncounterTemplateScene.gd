@@ -120,6 +120,7 @@ func encounter_run():
 		saynn("[say=eliza]Take care now![/say]")
 		
 		addButton("Continue", "Time to go!", "endthescene")
+		addButton("Run back", "Rush back to the hidden drug den entrance", "encounter_endthescene_rushback")
 	
 func encounter_react(_action: String, _args):
 	if(_action == "start_defeated_sex"):
@@ -137,6 +138,10 @@ func encounter_react(_action: String, _args):
 		return true
 	if(_action == "encounter_back_to_lobby"):
 		setState("encounter_back_to_lobby")
+		return true
+	if(_action == "encounter_endthescene_rushback"):
+		GM.pc.setLocation("yard_deadend2")
+		endScene()
 		return true
 	
 	return false

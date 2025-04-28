@@ -56,9 +56,14 @@ func _run():
 		saynn("[say=eliza]Take care now![/say]")
 		
 		addButton("Continue", "Time to go!", "endthescene")
+		addButton("Run back", "Rush back to the hidden drug den entrance", "endthescene_rushback")
 	
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
+		endScene()
+		return
+	if(_action == "endthescene_rushback"):
+		GM.pc.setLocation("yard_deadend2")
 		endScene()
 		return
 	if(_action == "do_give_up"):

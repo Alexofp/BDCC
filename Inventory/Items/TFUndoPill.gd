@@ -59,6 +59,7 @@ func getTags():
 	return [
 		#ItemTag.SoldByMedicalVendomat,
 		ItemTag.SexEngineDrug,
+		ItemTag.KeptAfterDrugDenRun,
 		]
 
 func getBuyAmount():

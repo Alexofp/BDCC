@@ -156,8 +156,19 @@ func start():
 func endRun():
 	GM.world.clearFloor(DrugDenFloor)
 	
-	transferAllItems(GM.pc, GlobalRegistry.getCharacter("DrugDenStash")) # So the order of the items would be correct
-	transferAllItems(GlobalRegistry.getCharacter("DrugDenStash"), GM.pc)
+	var drugDenChar = GlobalRegistry.getCharacter("DrugDenStash")
+	#transferAllItems(GM.pc, drugDenChar) # So the order of the items would be correct
+	
+	# Only keep items that have the item tag
+	var pcItems:Array = GM.pc.getInventory().getItems()
+	while(!pcItems.empty()):
+		var theItem:ItemBase = pcItems[0]
+		GM.pc.getInventory().removeItem(theItem)
+		if(theItem.hasTag(ItemTag.KeptAfterDrugDenRun)):
+			drugDenChar.getInventory().addItem(theItem)
+			addMessage("You managed to keep "+str(theItem.getAStackName())+"!")
+		
+	transferAllItems(drugDenChar, GM.pc)
 	
 	GM.pc.addCredits(-GM.pc.getCredits())
 	GM.pc.addCredits(savedCredits)
@@ -349,9 +360,8 @@ func checkSetNewHighestLevelReached() -> bool:
 
 func transferAllItems(_charFrom, _charTo):
 	var theItems:Array = _charFrom.getInventory().getItems()
-	var itemAmount:int = theItems.size()
-	for _i in range(itemAmount):
-		var theItem = theItems[itemAmount - _i -1]
+	while(!theItems.empty()):
+		var theItem = theItems[0]
 		
 		_charFrom.getInventory().removeItem(theItem)
 		_charTo.getInventory().addItem(theItem)
