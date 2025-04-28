@@ -101,6 +101,11 @@ func resolveCustomCharacterName(_charID):
 		return interaction.involvedPawns[_charID]
 	return .resolveCustomCharacterName(_charID)
 
+func isSpyingOnInteractionsWith(_charID:String):
+	if(_charID == pawnID):
+		return true
+	return false
+
 func saveData():
 	var data = .saveData()
 	
