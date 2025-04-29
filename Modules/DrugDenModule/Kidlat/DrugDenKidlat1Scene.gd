@@ -86,7 +86,7 @@ func _run():
 
 		saynn("What a brat.. She smirks, watching your reaction, clearly enjoying herself. Then she shrugs.")
 
-		saynn("[say=kidlat]Besides, ain't like I know your name. Luv works for all sorts. Easy. Simple. Keeps things friendly n' cozy, and most folks don't whinge about it.[/say]")
+		saynn("[say=kidlat]Besides, ain't like I know your name. Luv works for all sorts. Easy. Simple. Keeps things friendly n' cozy, and most folks don't whine about it.[/say]")
 
 		saynn("She suddenly leans in slightly, her tail swishing playfully.")
 

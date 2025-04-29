@@ -5,6 +5,127 @@ var game_version_minor = 1
 var game_version_revision = 7
 var game_version_suffix = "fix1"
 
+var contributorsCredits:Dictionary = {
+	"Max-Maxou": [
+		"chastity cage sprites",
+		"android suit",
+		"engineer uniform",
+		"damaged uniforms",
+	],
+	"Firi": [
+		"code",
+		"[url=https://github.com/Alexofp/BDCC/pull/10]#1[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/11]#2[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/12]#3[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/13]#4[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/14]#5[/url]",
+	],
+	"Niel": [
+		"code",
+		"[url=https://github.com/Alexofp/BDCC/pull/17]#1[/url]",
+	],
+	"PeteTimesSix": [
+		"visible chains",
+		"[url=https://github.com/Alexofp/BDCC/pull/25]#1[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/26]#2[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/27]#3[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/29]#4[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/30]#5[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/31]#6[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/33]#7[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/35]#8[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/36]#9[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/41]#10[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/55]#11[/url]",
+	],
+	"Rayforward": [
+		"[url=https://github.com/Alexofp/BDCC/pull/34]#1[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/37]#2[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/40]#3[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/73]#4[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/74]#5[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/75]#6[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/76]#7[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/77]#8[/url]",
+	],
+	"CanInBad": [
+		"[url=https://github.com/Alexofp/BDCC/pull/39]#1[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/79]#2[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/106]#3[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/107]#4[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/111]#5[/url]",
+		"helping me with the mods browser",
+	],
+	"Ranchar": [
+		"[url=https://github.com/Alexofp/BDCC/pull/42]#1[/url]",
+	],
+	"AverageAce": [
+		"lots of skins",
+		"better room descriptions",
+		"sprite improvements",
+	],
+	"Dalt": [
+		"[url=https://github.com/Alexofp/BDCC/pull/43]#1[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/56]#2[/url]",
+	],
+	"Disillusioned-Gazer": [
+		"[url=https://github.com/Alexofp/BDCC/pull/89]#1[/url]",
+	],
+	"Sayonix": [
+		"lots of reported typos",
+	],
+	"Johnvic76": [
+		"lots of reported typos",
+	],
+	"PosionFox": [
+		"[url=https://github.com/Alexofp/BDCC/pull/104]#1[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/136]#2[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/137]#3[/url]",
+	],
+	"CKRainbow": [
+		"[url=https://github.com/Alexofp/BDCC/pull/112]#1[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/119]#2[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/157]#3[/url]",
+	],
+	"Friskygote": [
+		"[url=https://github.com/Alexofp/BDCC/pull/120]#1[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/128]#2[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/129]#3[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/139]#4[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/151]#5[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/160]#6[/url]",
+	],
+	"ScottVictorHalley": [
+		"[url=https://github.com/Alexofp/BDCC/pull/121]#1[/url]",
+	],
+	"whalekys": [
+		"[url=https://github.com/Alexofp/BDCC/pull/123]#1[/url]",
+	],
+	"klorpa": [
+		"[url=https://github.com/Alexofp/BDCC/pull/125]#1[/url]",
+	],
+	"MrUnicellular": [
+		"[url=https://github.com/Alexofp/BDCC/pull/133]#1[/url]"
+	],
+	"Merith-TK": [
+		"[url=https://github.com/Alexofp/BDCC/pull/142]#1[/url]",
+	],
+	"keerifox": [
+		"[url=https://github.com/Alexofp/BDCC/pull/145]#1[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/144]#2[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/146]#3[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/147]#4[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/148]#5[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/152]#6[/url]",
+	],
+	"CheeseyCake92": [
+		"[url=https://github.com/Alexofp/BDCC/pull/158]#1[/url]",
+	],
+	"[color=#E88EFF]Fox[color=#CC27DB]2[/color]Code[/color]": [
+		"code",
+	],
+}
+
 var currentUniqueID = 0
 var currentChildUniqueID = 0
 var currentNPCUniqueID = 0
