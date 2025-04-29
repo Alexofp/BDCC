@@ -3,8 +3,13 @@ extends SensitiveZone
 func _init():
 	zoneName = "Anus"
 
+#func getArousalGainModifier() -> float:
+#	return getSensitivity() * 0.3 # Really hard to orgasm until trained
 func getArousalGainModifier() -> float:
-	return getSensitivity() * 0.3 # Really hard to orgasm until trained
+	var theSensitivity:float = getSensitivity()*0.3
+	if(theSensitivity >= 1.0):
+		return pow(theSensitivity, 0.2)*2.0 - 1.0
+	return theSensitivity
 
 func getLowSensitivityRestoreRate() -> float: # 15% per day
 	return 0.15 * (1.0 + max(-1.0, getCustomAttribute(BuffAttribute.SensitivityRestoreAll) + getCustomAttribute(BuffAttribute.SensitivityRestoreAnus)))

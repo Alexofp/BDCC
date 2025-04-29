@@ -4,11 +4,20 @@ func _init():
 	zoneName = "Nipples"
 	zoneNameIs = "are"
 
+#func getArousalGainModifier() -> float:
+#	var theChar = getCharacter()
+#	if(theChar != null && theChar.isLactating()):
+#		return getSensitivity() * 0.25 # Easier if lactating
+#	return getSensitivity() * 0.15 # Really hard to orgasm until trained
 func getArousalGainModifier() -> float:
+	var theMod:float = 0.15
 	var theChar = getCharacter()
 	if(theChar != null && theChar.isLactating()):
-		return getSensitivity() * 0.25 # Easier if lactating
-	return getSensitivity() * 0.15 # Really hard to orgasm until trained
+		theMod = 0.25
+	var theSensitivity:float = getSensitivity()*theMod
+	if(theSensitivity >= 1.0):
+		return pow(theSensitivity, 0.2)*2.0 - 1.0
+	return theSensitivity
 
 func getLowSensitivityRestoreRate() -> float: # 15% per day
 	return 0.15 * (1.0 + max(-1.0, getCustomAttribute(BuffAttribute.SensitivityRestoreAll) + getCustomAttribute(BuffAttribute.SensitivityRestoreNipples)))
