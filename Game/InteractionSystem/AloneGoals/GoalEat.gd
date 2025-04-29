@@ -1,7 +1,7 @@
 extends InteractionGoalBase
 
 func getScore(_pawn:CharacterPawn) -> float:
-	if(!_pawn.isInmate()):
+	if(!_pawn.isInmate() && !_pawn.shouldPersueGoalOverride(id)):
 		return 0.0
 	var hunger:float = _pawn.getHunger()
 	if(hunger < 0.5):

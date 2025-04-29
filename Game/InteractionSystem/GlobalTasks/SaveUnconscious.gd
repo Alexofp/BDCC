@@ -9,7 +9,7 @@ func _init():
 	maxAssignedUnscaled = 4
 
 func canDoTask(_pawn:CharacterPawn) -> bool:
-	if(!_pawn.isNurse()):
+	if(!_pawn.isNurse() && !shouldIgnoreCharType(_pawn)):
 		return false
 	
 	if(pawnIDHasSavior.size() >= allUnconPawns.size()):

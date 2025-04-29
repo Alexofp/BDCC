@@ -6,4 +6,4 @@ func _init():
 	maxAssignedUnscaled = 1
 
 func canDoTask(_pawn:CharacterPawn) -> bool:
-	return _pawn.isNurse() && !_pawn.isSlaveToPlayer()
+	return (_pawn.isNurse() || shouldIgnoreCharType(_pawn)) && !_pawn.isSlaveToPlayer()
