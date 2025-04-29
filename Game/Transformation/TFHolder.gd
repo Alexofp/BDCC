@@ -34,6 +34,10 @@ func canStartTransformation(_tfID:String) -> bool:
 	var newTF = GlobalRegistry.getTransformationRef(_tfID)
 	if(newTF == null || !newTF.isPossibleFor(getChar())):
 		return false
+	# TFs only support dynamic characters and the player, sorry
+	if(!getChar().isDynamicCharacter() && !getChar().isPlayer()):
+		return false
+	
 	
 	# Skip tags checking if tf is allowed to stack and we already have one
 	if(newTF.canTFStack()):

@@ -142,7 +142,7 @@ func _run():
 
 		saynn("[say=eliza]It's unpowered.. hm.. There must be a manual way to open it.[/say]")
 
-		saynn("You glance around and spot a level tucked along the side. With a firm pull, the cover shudders, then begins to lift, while letting out a loud, metallic screech.")
+		saynn("You glance around and spot a lever tucked along the side. With a firm pull, the cover shudders, then begins to lift, while letting out a loud, metallic screech.")
 
 		saynn("Beyond it is nothing but darkness..")
 

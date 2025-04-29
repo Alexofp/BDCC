@@ -930,7 +930,7 @@ func saveOriginalTFData() -> Dictionary:
 		var bodypart = getBodypart(bodypartSlot)
 		if(bodypart == null):
 			continue
-		partSkinData[bodypartSlot] = bodypart.getSkinData()
+		partSkinData[bodypartSlot] = bodypart.getTFSkinData()
 	
 	var result:Dictionary = {
 		"species": pickedSpecies,
@@ -955,11 +955,11 @@ func applyTFData(_data):
 	pickedGender = loadTFVar(_data, "gender", pickedGender)
 	pronounsGender = loadTFVar(_data, "pronounsGender", pronounsGender)
 	if(_data.has("pickedSkinRColor")):
-		pickedSkinRColor = Color(_data["pickedSkinRColor"])
+		pickedSkinRColor = Util.tryFixColor(_data["pickedSkinRColor"], false)
 	if(_data.has("pickedSkinGColor")):
-		pickedSkinGColor = Color(_data["pickedSkinGColor"])
+		pickedSkinGColor = Util.tryFixColor(_data["pickedSkinGColor"], false)
 	if(_data.has("pickedSkinBColor")):
-		pickedSkinBColor = Color(_data["pickedSkinBColor"])
+		pickedSkinBColor = Util.tryFixColor(_data["pickedSkinBColor"], false)
 	var partSkinData:Dictionary = loadTFVar(_data, "partsSkins", {})
 	for bodypartSlot in bodyparts:
 		var bodypart = getBodypart(bodypartSlot)

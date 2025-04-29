@@ -417,15 +417,32 @@ func getSkinData():
 		"b": pickedBColor,
 	}
 
+func getTFSkinData():
+	if(hasCustomSkinPattern() && pickedSkin != null):
+		return {
+			"partskin": pickedSkin,
+			"partid": id,
+			"skin": null,
+			"r": pickedRColor.to_html() if (pickedRColor is Color) else pickedRColor,
+			"g": pickedGColor.to_html() if (pickedGColor is Color) else pickedGColor,
+			"b": pickedBColor.to_html() if (pickedBColor is Color) else pickedBColor,
+		}
+	
+	return {
+		"skin": pickedSkin,
+		"r": pickedRColor.to_html() if (pickedRColor is Color) else pickedRColor,
+		"g": pickedGColor.to_html() if (pickedGColor is Color) else pickedGColor,
+		"b": pickedBColor.to_html() if (pickedBColor is Color) else pickedBColor,
+	}
+
 func applySkinData(_data:Dictionary):
 	if(hasCustomSkinPattern() && _data.has("partskin") && _data["partskin"] != null):
 		pickedSkin = loadTFVar(_data, "partskin", null)
 	else:
 		pickedSkin = loadTFVar(_data, "skin", null)
-	pickedRColor = loadTFVar(_data, "r", null)
-	pickedGColor = loadTFVar(_data, "g", null)
-	pickedBColor = loadTFVar(_data, "b", null)
-	
+	pickedRColor = Util.tryFixColor(loadTFVar(_data, "r", null))
+	pickedGColor = Util.tryFixColor(loadTFVar(_data, "g", null))
+	pickedBColor = Util.tryFixColor(loadTFVar(_data, "b", null))
 
 func generateRandomSkinIfCan(_dynamicCharacter):
 	if(hasCustomSkinPattern()):
