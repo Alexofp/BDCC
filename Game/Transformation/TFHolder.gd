@@ -69,6 +69,19 @@ func startTransformation(_tfID:String, _args:Dictionary={}):
 func hasActiveTransformations() -> bool:
 	return !transformations.empty()
 
+func hasTF(tfID:String) -> bool:
+	for tf in transformations:
+		if(tf.id == tfID):
+			return true
+	return false
+
+func hasTFFinalStage(tfID:String) -> bool:
+	for tf in transformations:
+		if(tf.id == tfID):
+			if(!tf.canTransformFurther()):
+				return true
+	return false
+
 func getActiveTransformationsCount() -> int:
 	return transformations.size()
 
@@ -328,9 +341,9 @@ func forceProgressAll():
 		if(!result.has("success") || !result["success"]):
 			break
 
-func accelerateAllFull():
+func accelerateAllFull(howMuch:float = 1.0):
 	for tf in transformations:
-		tf.timer = 0
+		tf.timer *= (1.0 - howMuch)
 
 func getTotalStageSum() -> int:
 	var result:int = 0

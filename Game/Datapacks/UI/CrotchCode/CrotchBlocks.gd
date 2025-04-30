@@ -188,6 +188,16 @@ static func getAll():
 		"NpcAffectRelationship2",
 		"NpcGetRelationship2",
 		
+		"TFCanHas",
+		"TFStartTF",
+		"TFStartSpeciesTF",
+		"TFAccProg",
+		"TFProgress",
+		"TFIsUnlocked",
+		"TFDoUnlock",
+		"TFLabAccess",
+		"TFAddFluid",
+		"TFGetFluid",
 		
 		"Print",
 		#"TestList",

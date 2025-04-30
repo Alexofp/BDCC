@@ -574,3 +574,154 @@ func getRelationshipLust(char1ID:String, char2ID:String) -> float:
 		return 0.0
 	
 	return GM.main.RS.getLust(getCharacterActualID(char1ID), getCharacterActualID(char2ID))
+
+
+
+func canStartTF(charID:String, tfID:String):
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return false
+	var character:BaseCharacter = getCharacter(charID)
+	if(character == null):
+		return false
+	var tfHolder:TFHolder = character.getTFHolder()
+	if(!tfHolder):
+		return false
+	return tfHolder.canStartTransformation(tfID)
+
+func hasTF(charID:String, tfID:String):
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return false
+	var character:BaseCharacter = getCharacter(charID)
+	if(character == null):
+		return false
+	var tfHolder:TFHolder = character.getTFHolder()
+	if(!tfHolder):
+		return false
+	return tfHolder.hasTF(tfID)
+
+func hasTFFinalStage(charID:String, tfID:String):
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return false
+	var character:BaseCharacter = getCharacter(charID)
+	if(character == null):
+		return false
+	var tfHolder:TFHolder = character.getTFHolder()
+	if(!tfHolder):
+		return false
+	return tfHolder.hasTFFinalStage(tfID)
+
+func startTF(charID:String, tfID:String):
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return false
+	var character:BaseCharacter = getCharacter(charID)
+	if(character == null):
+		return false
+	var tfHolder:TFHolder = character.getTFHolder()
+	if(!tfHolder):
+		return false
+	return tfHolder.startTransformation(tfID) != null
+
+func startSpeciesTF(charID:String, speciesID:String):
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return false
+	var character:BaseCharacter = getCharacter(charID)
+	if(character == null):
+		return false
+	var tfHolder:TFHolder = character.getTFHolder()
+	if(!tfHolder):
+		return false
+	return tfHolder.startTransformation("SpeciesTF", {species=[speciesID]}) != null
+
+func startHybridSpeciesTF(charID:String, speciesID:String):
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return false
+	var character:BaseCharacter = getCharacter(charID)
+	if(character == null):
+		return false
+	var tfHolder:TFHolder = character.getTFHolder()
+	if(!tfHolder):
+		return false
+	return tfHolder.startTransformation("SpeciesTFMinor", {species=[speciesID]}) != null
+
+func forceProgressTFs(charID:String):
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return false
+	var character:BaseCharacter = getCharacter(charID)
+	if(character == null):
+		return false
+	var tfHolder:TFHolder = character.getTFHolder()
+	if(!tfHolder):
+		return false
+	tfHolder.forceProgressAll()
+	return true
+	
+func accelerateProgressTFs(charID:String, howMuch:float):
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return false
+	var character:BaseCharacter = getCharacter(charID)
+	if(character == null):
+		return false
+	var tfHolder:TFHolder = character.getTFHolder()
+	if(!tfHolder):
+		return false
+	tfHolder.accelerateAllFull(howMuch)
+	return true
+
+func makeTFsPermanent(charID:String):
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return false
+	var character:BaseCharacter = getCharacter(charID)
+	if(character == null):
+		return false
+	var tfHolder:TFHolder = character.getTFHolder()
+	if(!tfHolder):
+		return false
+	tfHolder.makeAllTransformationsPermanent()
+	return true
+	
+func undoAllTFs(charID:String):
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return false
+	var character:BaseCharacter = getCharacter(charID)
+	if(character == null):
+		return false
+	var tfHolder:TFHolder = character.getTFHolder()
+	if(!tfHolder):
+		return false
+	tfHolder.undoAllTransformations()
+	return true
+
+func isTFEffectUnlocked(tfID:String):
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return false
+	return GM.main.SCI.isTransformationUnlocked(tfID)
+
+func isTFEffectTested(tfID:String):
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return false
+	return GM.main.SCI.isTransformationTested(tfID)
+
+func hasAccessToTFLab():
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return false
+	return GM.main.SCI.hasAccessToLab()
+
+func doUnlockTF(tfID:String):
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return false
+	GM.main.SCI.doUnlockTF(tfID)
+
+func doTestTF(tfID:String):
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return false
+	GM.main.SCI.doTestTF(tfID)
+
+func addTFLabFluid(fluidID:String, amount:float):
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return false
+	GM.main.SCI.addFluid(fluidID, amount)
+
+func getTFLabFluid(fluidID:String):
+	if(GM.main == null || !is_instance_valid(GM.main)):
+		return 0.0
+	return GM.main.SCI.getFluidAmount(fluidID)
