@@ -5,6 +5,7 @@ var myProjectSettings
 var enabledContent = {}
 const optionsFilepath = "user://options.json"
 var fetchNewRelease = true
+var fullscreen:bool = false
 # Pregnancy options
 var menstrualCycleLengthDays: int
 var eggCellLifespanHours: int
@@ -1043,6 +1044,8 @@ func applyOption(categoryID, optionID, value):
 func applySettingsEffect():
 	applyUIScale()
 	
+	OS.window_fullscreen = fullscreen
+	
 func applyUIScale():
 	if(shouldScaleUI):
 		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D,SceneTree.STRETCH_ASPECT_EXPAND,Vector2(1280,720), uiScaleMultiplier)
@@ -1103,6 +1106,7 @@ func saveData():
 		"sandboxBreeding": sandboxBreeding,
 		"sandboxNpcLeveling": sandboxNpcLeveling,
 		"blockCatcherPanelHeight": blockCatcherPanelHeight,
+		"fullscreen": fullscreen,
 	}
 	
 	return data
@@ -1159,6 +1163,7 @@ func loadData(data):
 	sandboxBreeding = loadVar(data, "sandboxBreeding", "rare")
 	sandboxNpcLeveling = loadVar(data, "sandboxNpcLeveling", 1.0)
 	blockCatcherPanelHeight = loadVar(data, "blockCatcherPanelHeight", 16)
+	fullscreen = loadVar(data, "fullscreen", false)
 
 func saveToFile():
 	var saveData = saveData()
@@ -1218,3 +1223,12 @@ func checkImagePackOrder(imagePacks):
 
 func getImagePackOrder():
 	return imagePackOrder
+
+func isFullscreen() -> bool:
+	return fullscreen
+
+func _process(_delta:float):
+	if(Input.is_action_just_pressed("window_fullscreen")):
+		OS.window_fullscreen = !OS.window_fullscreen
+		fullscreen = OS.window_fullscreen
+		saveToFile()
