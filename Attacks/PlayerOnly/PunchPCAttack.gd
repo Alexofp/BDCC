@@ -6,9 +6,14 @@ func _init():
 	aiCategory = AICategory.Offensive
 	isPlayerAttack = true
 	attackPriority = 30
-	
+
+func canScratch(_pc) -> bool:
+	if(_pc.hasPerk(Perk.CombatScratching) && !_pc.hasBlockedHands()):
+		return true
+	return false
+
 func getVisibleName(_context = {}):
-	if(GM.pc != null && is_instance_valid(GM.pc) && GM.pc.hasPerk(Perk.CombatScratching)):
+	if(GM.pc != null && is_instance_valid(GM.pc) && canScratch(GM.pc)):
 		return "Scratch"
 	return "Punch"
 	
@@ -23,12 +28,12 @@ func _doAttack(_attacker, _receiver, _context = {}):
 		return genericDodgeMessage(_attacker, _receiver)
 
 	var texts = [
-		"{attacker.name} manages to land a few strong punches on {receiver.name}",
+		"{attacker.name} manages to land a few "+("strong punches" if !canScratch(_attacker) else "good scratches")+" on {receiver.name}",
 	]
 	var text = RNG.pick(texts)
 	
 	if(RNG.chance(50)):
-		if(_attacker.getSkillsHolder().hasPerk(Perk.CombatScratching) && _receiver.addEffect(StatusEffect.Bleeding)):
+		if(canScratch(_attacker) && _receiver.addEffect(StatusEffect.Bleeding)):
 			text += "Sharp claws caused {receiver.him} to start [color=red]bleeding[/color]."
 		
 	return {

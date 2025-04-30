@@ -414,12 +414,15 @@ func applyTallymarkIfNeededData(bodypartSlot):
 	#	return null
 	
 	var chanceToAdd = 0.0
+	var domBodywritingsScale: float = (domInfo.fetishScore({Fetish.Bodywritings: 1.0}) + 1.0)/2.0 # makes it a [0.0-1.0] value
+	
 	if(getSub().hasTallymarks() || getSexType() in [SexType.SlutwallSex, SexType.StocksSex]):
-		chanceToAdd = 100.0
+		chanceToAdd = 200.0
 	else:
 		chanceToAdd = (max(0.0, domInfo.fetishScore({Fetish.Bodywritings: 1.0})) + domInfo.personalityScore({PersonalityStat.Mean: 0.3})) * 100.0
 		if(!domInfo.isAngry()):
 			chanceToAdd *= 0.5
+	chanceToAdd *= domBodywritingsScale
 	
 	if(!RNG.chance(chanceToAdd)):
 		return null
