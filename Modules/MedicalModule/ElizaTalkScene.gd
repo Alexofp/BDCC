@@ -170,6 +170,16 @@ func _run():
 			#addMessage("[Whatever Rahi has planned for Eliza's content, I dont know it. Sorry. -Ace]")
 			
 			addButton("Continue", "Continue talking", "talk")
+		elif(GM.CS.getChildrenAmountOfOnlyMother("eliza") > 0):
+			saynn("[say=pc]Your mug. Are you a mother?[/say]")
+
+			saynn("Doctor looks at her own coffee mug and sighs audibly.")
+
+			saynn("[say=eliza]Obviously not.. wait. I guess I am now. Hah. I had this mug before.[/say]")
+
+			saynn("Seems like that item is related to some sad memories.")
+
+			addButton("Continue", "Continue talking", "talk")
 		else:
 			saynn("[say=pc]Your mug. Are you a mother?[/say]")
 

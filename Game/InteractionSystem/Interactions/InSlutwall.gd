@@ -48,7 +48,7 @@ func init_text():
 				saynn("{inmate.He} doesn't resist much, a sign of {inmate.his} spirit breaking.")
 
 	addAction("rest", "Rest", "Stay quiet and try to get some rest", "default", 0.1, 1800, {})
-	addAction("shout", "Shout", "Try to get some attention to you..", "default", (0.1 + scorePersonality("inmate", {PersonalityStat.Naive:0.1})), 30, {})
+	addAction("shout", "Shout", "Try to get some attention..", "default", (0.1 + scorePersonality("inmate", {PersonalityStat.Naive:0.1})), 30, {})
 	if(getRoleChar("inmate").getStamina() > 0):
 		addAction("struggle", "Struggle", "Maybe you can escape somehow", "default", 10.0, 300, {})
 	else:
