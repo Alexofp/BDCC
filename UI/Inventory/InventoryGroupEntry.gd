@@ -74,9 +74,9 @@ func updateInfo():
 		return
 	
 	if(item.isWornByWearer()):
-		itemNameLabel.text = "(worn) "+item.getVisibleName()
+		itemNameLabel.text = "(worn) "+item.getInventoryGroupName()
 	else:
-		itemNameLabel.text = item.getVisibleName()
+		itemNameLabel.text = item.getInventoryGroupName()
 	
 	var imagePath = item.getInventoryImage()
 	if(imagePath != null):

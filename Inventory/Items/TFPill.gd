@@ -16,7 +16,18 @@ func getVisibleName():
 				return tf.getPillName()
 	
 	return "Strange Pill"
-	
+
+#func getInventoryGroupID() -> String:
+#	if(GM.main == null):
+#		return .getInventoryGroupID()
+#	var theID:String = getTFID()
+#	if(GM.main != null && GM.main.SCI.isTransformationUnlocked(theID)):
+#		return .getInventoryGroupID()+"_"+theID
+#	return .getInventoryGroupID()
+
+func getInventoryGroupName() -> String:
+	return "Transformation pills"
+
 func getDescription():
 	return "A pill that lacks any labels or instructions. Who knows what it will do..\n[color=#"+Color.cyan.to_html()+"]This pill might have some kind of transformative effect on your body.[/color]"+("\n\n[color=#"+Color.cyan.to_html()+"]Pill settings:\n"+configDesc+"[/color]" if configDesc != "" else "")
 
@@ -141,6 +152,9 @@ func useInSex(_receiver):
 
 func getItemCategory():
 	return ItemCategory.Medical
+
+func getInventoryImage():
+	return "res://Images/Items/medical/tfpill.png"
 
 func saveData():
 	var data = .saveData()

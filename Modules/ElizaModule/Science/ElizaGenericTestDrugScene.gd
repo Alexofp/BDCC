@@ -53,7 +53,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "eat_red"):
-		saynn("You grab the blue one off of her paw.. and eat it.")
+		saynn("You grab the red one off of her paw.. and eat it.")
 
 		saynn("[say=eliza]Wise choice~.[/say]")
 

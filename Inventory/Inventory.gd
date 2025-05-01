@@ -107,10 +107,11 @@ func getItemsAndEquippedItemsTogetherGrouped():
 		result["%$%"+item.id] = [item]
 	
 	for item in items:
-		if(!result.has(item.id)):
-			result[item.id] = [item]
+		var invGroupID:String = item.getInventoryGroupID()
+		if(!result.has(invGroupID)):
+			result[invGroupID] = [item]
 		else:
-			result[item.id].append(item)
+			result[invGroupID].append(item)
 	
 	return result
 

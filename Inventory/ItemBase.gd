@@ -677,6 +677,12 @@ func canGroupRestraintWithOtherInFightScene(otherItem):
 		return false
 	return true
 
+func getInventoryGroupID() -> String:
+	return id
+
+func getInventoryGroupName() -> String:
+	return getVisibleName()
+
 func getDatapackEditVars():
 	var result = {}
 	if(canDye()):
