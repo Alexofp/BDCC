@@ -7,6 +7,7 @@ const optionsFilepath = "user://options.json"
 var fetchNewRelease = true
 var fullscreen:bool = false
 var fpsLimit:int = 0
+var webTextInputFallback:bool = false
 # Pregnancy options
 var menstrualCycleLengthDays: int
 var eggCellLifespanHours: int
@@ -78,6 +79,7 @@ var genderNamesOverrides = {}
 func resetToDefaults():
 	fetchNewRelease = true
 	fpsLimit = 0
+	webTextInputFallback = false
 	menstrualCycleLengthDays = 7
 	eggCellLifespanHours = 48
 	playerPregnancyTimeDays = 5
@@ -830,6 +832,13 @@ func getChangeableOptions():
 						[32, "32p"],
 					]
 				},
+				{
+					"name": "[WEB] Text Input field fallback",
+					"description": "HTML5 only. Use a pop-up window to allow text input on browsers that don't support godot's text inputs.",
+					"id": "webTextInputFallback",
+					"type": "checkbox",
+					"value": webTextInputFallback,
+				},
 			],
 		},
 		{
@@ -995,6 +1004,8 @@ func applyOption(categoryID, optionID, value):
 			savingInDungeons = value
 	
 	if(categoryID == "other"):
+		if(optionID == "webTextInputFallback"):
+			webTextInputFallback = value
 		if(optionID == "blockCatcherPanelHeight"):
 			blockCatcherPanelHeight = value
 		if(optionID == "fetchLatestRelease"):
@@ -1133,6 +1144,7 @@ func saveData():
 		"sandboxBreeding": sandboxBreeding,
 		"sandboxNpcLeveling": sandboxNpcLeveling,
 		"blockCatcherPanelHeight": blockCatcherPanelHeight,
+		"webTextInputFallback": webTextInputFallback,
 		"fullscreen": fullscreen,
 	}
 	
@@ -1191,6 +1203,7 @@ func loadData(data):
 	sandboxBreeding = loadVar(data, "sandboxBreeding", "rare")
 	sandboxNpcLeveling = loadVar(data, "sandboxNpcLeveling", 1.0)
 	blockCatcherPanelHeight = loadVar(data, "blockCatcherPanelHeight", 16)
+	webTextInputFallback = loadVar(data, "webTextInputFallback", false)
 	fullscreen = loadVar(data, "fullscreen", false)
 
 func saveToFile():
@@ -1255,8 +1268,25 @@ func getImagePackOrder():
 func isFullscreen() -> bool:
 	return fullscreen
 
+func shouldUseFallbackTextInputs() -> bool:
+	return webTextInputFallback
+
 func _process(_delta:float):
 	if(Input.is_action_just_pressed("window_fullscreen")):
 		OS.window_fullscreen = !OS.window_fullscreen
 		fullscreen = OS.window_fullscreen
 		saveToFile()
+
+func _ready() -> void:
+	get_viewport().connect("gui_focus_changed", self, "_on_focus_changed")
+
+func _on_focus_changed(control:Control) -> void:
+	if(!OPTIONS.shouldUseFallbackTextInputs()):
+		return
+	if control == null || !is_instance_valid(control):
+		return
+	if((control is LineEdit) || (control is TextEdit)):
+		if(!OS.has_feature('JavaScript')):
+			return
+		control.text = JavaScript.eval("""window.prompt('Please Input Text')""")
+		control.release_focus()
