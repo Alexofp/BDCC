@@ -6,6 +6,7 @@ var enabledContent = {}
 const optionsFilepath = "user://options.json"
 var fetchNewRelease = true
 var fullscreen:bool = false
+var fpsLimit:int = 0
 # Pregnancy options
 var menstrualCycleLengthDays: int
 var eggCellLifespanHours: int
@@ -76,6 +77,7 @@ var genderNamesOverrides = {}
 
 func resetToDefaults():
 	fetchNewRelease = true
+	fpsLimit = 0
 	menstrualCycleLengthDays = 7
 	eggCellLifespanHours = 48
 	playerPregnancyTimeDays = 5
@@ -321,25 +323,6 @@ func getChangeableOptions():
 			],
 		},
 		{
-			"name": "Datapack",
-			"id": "datapack",
-			"options": [
-				{
-					"name": "Block catcher panel height",
-					"description": "Adjust the size(height) of the block catcher panel",
-					"id": "blockCatcherPanelHeight",
-					"type": "list",
-					"value": blockCatcherPanelHeight,
-					"values": [
-						[4, "4p"],
-						[8, "8p"],
-						[16, "16p"],
-						[32, "32p"],
-					]
-				}
-			]
-		},
-		{
 			"name": "Sandbox",
 			"id": "sandbox",
 			"options": [
@@ -532,6 +515,25 @@ func getChangeableOptions():
 					"values": [
 						["GLES3", "GLES3"],
 						["GLES2", "GLES2"],
+					]
+				},
+				{
+					"name": "FPS limiter",
+					"description": "What's the fastest fps the game should run at? Lower values will stress the device less.",
+					"id": "fpsLimit",
+					"type": "list",
+					"value": fpsLimit,
+					"values": [
+						[10, "10 fps"],
+						[25, "25 fps"],
+						[30, "30 fps"],
+						[45, "45 fps"],
+						[60, "60 fps"],
+						[75, "75 fps"],
+						[90, "90 fps"],
+						[120, "120 fps"],
+						[0, "V-Sync"],
+						[9999, "Uncapped"],
 					]
 				},
 				{
@@ -815,6 +817,19 @@ func getChangeableOptions():
 #					"type": "checkbox",
 #					"value": showMapArt,
 #				},
+				{
+					"name": "Block catcher panel height",
+					"description": "Adjust the size(height) of the block catcher panel",
+					"id": "blockCatcherPanelHeight",
+					"type": "list",
+					"value": blockCatcherPanelHeight,
+					"values": [
+						[4, "4p"],
+						[8, "8p"],
+						[16, "16p"],
+						[32, "32p"],
+					]
+				},
 			],
 		},
 		{
@@ -903,6 +918,11 @@ func applyOption(categoryID, optionID, value):
 		if(value != ""):
 			genderNamesOverrides[optionID] = value
 	
+	if(categoryID == "render"):
+		if(optionID == "fpsLimit"):
+			fpsLimit = value
+			applySettingsEffect()
+	
 	if(categoryID == "sandbox"):
 		if(optionID == "sandboxPawnCount"):
 			sandboxPawnCount = value
@@ -941,9 +961,6 @@ func applyOption(categoryID, optionID, value):
 			if(showModdedLauncher):
 				var _ok = OS.request_permissions()
 	
-	if(categoryID == "datapack"):
-		if(optionID == "blockCatcherPanelHeight"):
-			blockCatcherPanelHeight = value
 	
 	if(categoryID == "pregnancy"):
 		if(optionID == "menstrualCycleLengthDays"):
@@ -978,6 +995,8 @@ func applyOption(categoryID, optionID, value):
 			savingInDungeons = value
 	
 	if(categoryID == "other"):
+		if(optionID == "blockCatcherPanelHeight"):
+			blockCatcherPanelHeight = value
 		if(optionID == "fetchLatestRelease"):
 			fetchNewRelease = value
 		if(optionID == "shouldScaleUI"):
@@ -1045,6 +1064,13 @@ func applySettingsEffect():
 	applyUIScale()
 	
 	OS.window_fullscreen = fullscreen
+	Engine.target_fps = fpsLimit
+	if(fpsLimit == 0):
+		OS.vsync_enabled = true
+	elif(fpsLimit < 30 || fpsLimit > 999):
+		OS.vsync_enabled = false
+	else:
+		OS.vsync_enabled = true
 	
 func applyUIScale():
 	if(shouldScaleUI):
@@ -1056,6 +1082,7 @@ func saveData():
 	var data = {
 		"optionsVersion": 1,
 		"enabledContent": enabledContent,
+		"fpsLimit": fpsLimit,
 		"fetchNewRelease": fetchNewRelease,
 		"menstrualCycleLengthDays": menstrualCycleLengthDays,
 		"eggCellLifespanHours": eggCellLifespanHours,
@@ -1114,6 +1141,7 @@ func saveData():
 func loadData(data):
 	enabledContent = loadVar(data, "enabledContent", {})
 	fetchNewRelease = loadVar(data, "fetchNewRelease", true)
+	fpsLimit = loadVar(data, "fpsLimit", 0)
 	menstrualCycleLengthDays = loadVar(data, "menstrualCycleLengthDays", 7)
 	eggCellLifespanHours = loadVar(data, "eggCellLifespanHours", 48)
 	playerPregnancyTimeDays = loadVar(data, "playerPregnancyTimeDays", 5)
