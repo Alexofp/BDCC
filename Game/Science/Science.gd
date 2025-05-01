@@ -273,6 +273,12 @@ var upgradesInfo:Dictionary = {
 		cost = 50,
 		requiredUpgrades = ["tanksUpgrade3"],
 	},
+	"advPlasticBottle": {
+		name = "Bluespace Plastic Bottle",
+		desc = "Unlocks a bluespace plastic bottle that you can buy in the medical vendomat. This bottle can store 100x as much fluids!",
+		cost = 50,
+		requiredUpgrades = ["advBreastPump", "advPenisPump"],
+	},
 	
 	"tanksUpgrade4": {
 		name = "Tanks capacity 4",
@@ -308,13 +314,13 @@ var upgradesInfo:Dictionary = {
 		name = "Tanks capacity +INF!",
 		desc = "Install special BLUESPACE fluid tanks that will hold a shit ton of fluids!",
 		cost = 250,
-		requiredUpgrades = ["milkingBetter3", "tanksUpgrade4", "advBreastPump", "advPenisPump", "configurableDrugs", "strangepill", "bluespaceStash"],
+		requiredUpgrades = ["milkingBetter3", "tanksUpgrade4", "advPlasticBottle", "configurableDrugs", "strangepill", "bluespaceStash"],
 	},
 	"drugDenLoot": {
 		name = "Strong Nanobots!",
 		desc = "Upgrade Eliza's nanobots, allowing them to extract you with ALL items that you have found during the drug den exploration!",
 		cost = 250,
-		requiredUpgrades = ["milkingBetter3", "tanksUpgrade4", "advBreastPump", "advPenisPump", "configurableDrugs", "strangepill", "bluespaceStash"],
+		requiredUpgrades = ["milkingBetter3", "tanksUpgrade4", "advPlasticBottle", "configurableDrugs", "strangepill", "bluespaceStash"],
 	},
 }
 
