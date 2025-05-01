@@ -23,6 +23,8 @@ func isStocksSex():
 	return getSexEngine().getSexTypeID() == SexType.StocksSex
 
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
+	if(_subInfo.getChar().isPlayer() && GM.main.getEncounterSettings().isGoalDisabledForSubPC(SexGoal.TieUp)):
+		return 0.0
 	var mult = 1.0
 	# Inmates don't have much bdsm gear
 	if(_domInfo.getChar().getCharacterType() == CharacterType.Inmate):
