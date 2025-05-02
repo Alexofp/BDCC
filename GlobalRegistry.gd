@@ -344,6 +344,9 @@ func fillBaseCacheFields():
 
 var cacheEnabled:bool = true
 func checkCacheEnabled():
+	if(true):
+		return false
+		
 	if(OS.get_name() == "HTML5"): # To save on userstorage
 		cacheEnabled = false
 	
@@ -2681,6 +2684,7 @@ func loadRegistryCacheFromFile():
 		return
 	var save_game = File.new()
 	if not save_game.file_exists(cacheFilePath):
+		fillBaseCacheFields()
 		return
 	
 	save_game.open(cacheFilePath, File.READ)
