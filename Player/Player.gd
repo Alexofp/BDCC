@@ -29,6 +29,8 @@ var intoxicationTolerance: float = 0.0
 var lustCombatState
 var reputation:Reputation
 
+var tfHolder:TFHolder
+
 var dynamicPersonality: bool = false
 
 func _init():
@@ -46,6 +48,9 @@ func _ready():
 	
 	reputation = Reputation.new()
 	reputation.setCharacter(self)
+	
+	tfHolder = TFHolder.new()
+	tfHolder.setCharacter(self)
 	
 	var _ok = menstrualCycle.connect("readyToGiveBirthOnce", self, "onPlayerReadyToGiveBirth")
 	var _ok2 = menstrualCycle.connect("visiblyPregnant", self, "onPlayerVisiblyPregnant")
@@ -259,6 +264,9 @@ func processTime(_secondsPassed):
 	if(lustCombatState != null):
 		lustCombatState.processTime(_secondsPassed)
 	
+	if(tfHolder != null):
+		tfHolder.processTime(_secondsPassed)
+	
 	if(!bodyFluids.isEmpty()):
 		bodyFluids.drain(0.1 * _secondsPassed / 60.0)
 	
@@ -425,6 +433,7 @@ func saveData():
 	data["fetishHolder"] = fetishHolder.saveData()
 	data["personality"] = personality.saveData()
 	data["reputation"] = reputation.saveData()
+	data["tfHolder"] = tfHolder.saveData()
 	
 	return data
 
@@ -485,8 +494,7 @@ func loadData(data):
 	fetishHolder.loadData(SAVE.loadVar(data, "fetishHolder", {}))
 	personality.loadData(SAVE.loadVar(data, "personality", {}))
 	reputation.loadData(SAVE.loadVar(data, "reputation", {}))
-	
-	checkLocation()
+	tfHolder.loadData(SAVE.loadVar(data, "tfHolder", {}))
 		
 	updateNonBattleEffects()
 	emit_signal("bodypart_changed")
@@ -912,3 +920,55 @@ func canStartSex() -> bool:
 
 func getReputation():
 	return reputation
+
+func getTFHolder():
+	return tfHolder
+
+func saveOriginalTFData() -> Dictionary:
+	var partSkinData:Dictionary = {}
+	for bodypartSlot in bodyparts:
+		var bodypart = getBodypart(bodypartSlot)
+		if(bodypart == null):
+			continue
+		partSkinData[bodypartSlot] = bodypart.getTFSkinData()
+	
+	var result:Dictionary = {
+		"species": pickedSpecies,
+		"femininity": pickedFemininity,
+		"thickness": pickedThickness,
+		"pickedSkin": pickedSkin,
+		"pickedSkinRColor": pickedSkinRColor.to_html(),
+		"pickedSkinGColor": pickedSkinGColor.to_html(),
+		"pickedSkinBColor": pickedSkinBColor.to_html(),
+		"gender": pickedGender,
+		"pronounsGender": pronounsGender,
+		"partsSkins": partSkinData,
+	}
+	
+	return result
+
+func applyTFData(_data):
+	pickedSpecies = loadTFVar(_data, "species", pickedSpecies)
+	pickedFemininity = loadTFVar(_data, "femininity", pickedFemininity)
+	pickedThickness = loadTFVar(_data, "thickness", pickedThickness)
+	pickedSkin = loadTFVar(_data, "pickedSkin", pickedSkin)
+	pickedGender = loadTFVar(_data, "gender", pickedGender)
+	pronounsGender = loadTFVar(_data, "pronounsGender", pronounsGender)
+	if(_data.has("pickedSkinRColor")):
+		pickedSkinRColor = Util.tryFixColor(_data["pickedSkinRColor"], false)
+	if(_data.has("pickedSkinGColor")):
+		pickedSkinGColor = Util.tryFixColor(_data["pickedSkinGColor"], false)
+	if(_data.has("pickedSkinBColor")):
+		pickedSkinBColor = Util.tryFixColor(_data["pickedSkinBColor"], false)
+	var partSkinData:Dictionary = loadTFVar(_data, "partsSkins", {})
+	for bodypartSlot in bodyparts:
+		var bodypart = getBodypart(bodypartSlot)
+		if(bodypart == null || !partSkinData.has(bodypartSlot)):
+			continue
+		bodypart.applySkinData(partSkinData[bodypartSlot] if partSkinData.has(bodypartSlot) else {})
+
+func onSexEvent(_event : SexEvent):
+	.onSexEvent(_event)
+	
+	if(GM.main != null && GM.main.SCI != null):
+		GM.main.SCI.handleSexEvent(_event)

@@ -77,8 +77,13 @@ func _run():
 			saynn("[say=pc]Moo-o![/say]")
 
 		saynn("Eliza bites her lip as she watches you. First few drops of {pc.milk} get collected. The pumps don’t stop, they switch to a more slow mode but each pump is much more deep and powerful, causing a steady flow to establish. You arch your back slightly, subtle moans escape from your lips. Doctor makes sure everything is working and then slides her palm over your {pc.thick} curves. She gives your butt a playful smack.")
-
-		saynn("[say=eliza]Good cow~. I wanna hear you moo for me.[/say]")
+#ACEPREGEXPAC - Eliza comments on her pregnant, possibly milky state
+		if(getCharacter("eliza").isVisiblyPregnant()):
+			saynn("[say=eliza]Good cow~. I wanna hear you moo for me.[/say]")
+			saynn("You see eliza rub her rounded out midriff as she seemingly study your reaction as the pumps milk your {pc.breasts}")
+			saynn("[say=eliza]I might have to try this later...")
+		else:
+			saynn("[say=eliza]Good cow~. I wanna hear you moo for me.[/say]")
 
 		saynn("You lean forward and let out a cute moo without controlling it, your mind starts to feel hazy. Pleasure from milking overflows your mind, you squirm and wiggle your butt while the pumps restlessly pump {pc.milk} from your {pc.breasts}.")
 
@@ -160,6 +165,7 @@ func _react(_action: String, _args):
 		
 		increaseModuleFlag("MedicalModule", "Med_milkMilked", howMuchMilked)
 		increaseModuleFlag("MedicalModule", "Med_milkedMilkTimes")
+		GM.main.SCI.handleBountyFluid(GM.pc.getFluidType(FluidSource.Breasts), howMuchMilked)
 		
 		addMessage(str(round(howMuchMilked / 10.0)*10.0)+" ml of milk was milked from your breasts")
 

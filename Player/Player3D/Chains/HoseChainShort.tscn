@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Player/Player3D/Chains/HoseMaterial.tres" type="Material" id=1]
+[ext_resource path="res://Player/Player3D/Chains/CurveRenderer.gd" type="Script" id=2]
+
+[node name="HoseChain" type="ImmediateGeometry"]
+material_override = ExtResource( 1 )
+script = ExtResource( 2 )
+width = 0.4
+sag_static = 0.5
+expected_length = 1.0
+max_sagging_length = 1.0
+sag_from_length = 1.0

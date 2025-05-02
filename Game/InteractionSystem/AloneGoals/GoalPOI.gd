@@ -3,7 +3,7 @@ extends InteractionGoalBase
 var targetLoc:String = ""
 
 func getScore(_pawn:CharacterPawn) -> float:
-	if(!_pawn.isInmate()):
+	if(!_pawn.isInmate() && !_pawn.shouldPersueGoalOverride(id)):
 		return 0.0
 	return 0.05
 

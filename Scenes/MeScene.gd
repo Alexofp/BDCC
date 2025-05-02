@@ -102,15 +102,22 @@ func _run():
 				
 		addButton("Close", "Continue on your way", "endthescene")
 		addButtonUnlessLate("Wait here", "Spend some time idling", "wait")
-		addButton("Masturbate", "Do the thing", "domasturbate")
+		if(GM.main.isInDungeon()):
+			addDisabledButton("Masturbate", "It's too dark and gross in here to masturbate. Find a resting spot!")
+		else:
+			addButton("Masturbate", "Do the thing", "domasturbate")
 		addButton("Gender", "Pick your gender", "pickgender")
 		addButton("Pronouns", "Pick your pronouns", "pickpronouns")
 		addButton("Encounters", "Info about your previous encounters", "encountersMenu")
 		addButton("Reputation", "Look at your reputation", "reputationMenu")
-		addButton("Look for trouble", "Try to find an encounter", "lookfortrouble")
+		if(!GM.main.isInDungeon()):
+			addButton("Look for trouble", "Try to find an encounter", "lookfortrouble")
 		if(!getFlag("Game_PickedStartingPerks", false)):
 			addButton("Pick Perks!", "Pick your starting perks. You can only do this once", "pickstartingperks")
 		#addButton("[debug] Struggle", "Test the struggle minigame", "teststruggle")
+		if(GM.main.isInDungeon()):
+			addButton("Tasks", "Look at your tasks", "tasks")
+		
 		
 	if(state == "domasturbate"):
 		saynn("You remove some stress by masturbating (temporary text)")
@@ -230,6 +237,10 @@ func _react(_action: String, _args):
 		
 	if(_action == "setpronouns"):
 		GM.pc.setPronounGender(_args[0])
+		setState("")
+		return
+	if(_action == "tasks"):
+		runScene("QuestLogScene")
 		setState("")
 		return
 	

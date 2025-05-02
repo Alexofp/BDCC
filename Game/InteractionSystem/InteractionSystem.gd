@@ -97,6 +97,8 @@ func _init():
 	pawnDistribution = calculatePawnDistribution()
 
 func processTime(_howMuch:int):
+	if(GM.main.isInDungeon()): # No pawn activity while in a dungeon
+		return
 #	var toUpdate:Array = getInteractionsThatNeedToProcessed()
 #	while(toUpdate.size() > 0):
 #		for interact in toUpdate:
@@ -410,6 +412,13 @@ func clearAll():
 	interactions.clear()
 
 func beforeNewDay():
+	deleteAllNonImportantPawns()
+
+func afterNewDay():
+	usedCharIDsToday.clear()
+	spawnMorningWave()
+
+func deleteAllNonImportantPawns():
 	for interaction in interactions.duplicate():
 		if(!interaction.shouldBeStoppedOnNewDay()):
 			continue
@@ -418,10 +427,6 @@ func beforeNewDay():
 		stopInteraction(interaction)
 		for thePawnID in involvedPawns:
 			deletePawn(thePawnID)
-
-func afterNewDay():
-	usedCharIDsToday.clear()
-	spawnMorningWave()
 
 func startInteraction(interactionID:String, involvedPawns:Dictionary, args:Dictionary = {}):
 	var interaction = GlobalRegistry.createInteraction(interactionID)
@@ -567,6 +572,8 @@ func spawnMorningWave():
 
 func checkAddNewPawns():
 	if(GM.main.getTime() >= 19*60*60): # No new pawns in the evening
+		return
+	if(GM.main.isInDungeon()): # No pawn activity while in a dungeon
 		return
 	
 	var maxPawns:int = getMaxPawnCount()

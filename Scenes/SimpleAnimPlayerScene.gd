@@ -1,5 +1,7 @@
 extends "res://Scenes/SceneBase.gd"
 
+var page:int = -1
+
 var anims = {
 #	StageScene.SexFullNelson: ["tease", "inside", "sex", "fast"],
 #	StageScene.SexRimming: ["tease", "sex", "fast"],
@@ -11,6 +13,20 @@ var anims = {
 #	StageScene.GivingBirth: ["idle", "birth"],
 #	StageScene.Hug: ["hug"],
 }
+var animsOnlyList:Array = [
+#	StageScene.MilkingStallDuo,
+#	StageScene.MilkingStallSolo,
+#	StageScene.TFLook,
+#	StageScene.MilkingProstate,
+#	StageScene.MilkingProstateFuck,
+#	StageScene.Showering,
+#	StageScene.ShoweringDuo,
+#	StageScene.SexDoubleDown,
+#	StageScene.SexOralForced,
+#	StageScene.SexAgainstWall,
+#	StageScene.SexLowDoggy,
+#	StageScene.SexCowgirlAmazon,
+]
 
 var currentCategory = ""
 var firstNPC = "pc"
@@ -23,6 +39,11 @@ func _init():
 
 func _reactInit():
 	anims = GlobalRegistry.getStageScenesCachedStates()
+	if(!animsOnlyList.empty()):
+		anims = anims.duplicate()
+		for animID in anims.keys():
+			if(!(animID in animsOnlyList)):
+				anims.erase(animID)
 
 func _run():
 	if(state == ""):
@@ -31,6 +52,9 @@ func _run():
 		
 		for stageScene in anims:
 			addButton(stageScene, "Choose this", "pickcat", [stageScene])
+			
+		if(page > 0):
+			GM.ui.setCurrentPage(page)
 
 	if(state == "settingsmenu"):
 		playAnimation(StageScene.Duo, "stand", {pc=firstNPC, npc=secondNPC})
@@ -68,6 +92,7 @@ func _react(_action: String, _args):
 		return
 	
 	if(_action == "pickcat"):
+		page = GM.ui.getCurrentPage()
 		lastSceneString = ""
 		currentCategory = _args[0]
 	if(_action == "playa"):
@@ -93,6 +118,7 @@ func saveData():
 	
 	data["currentCategory"] = currentCategory
 	data["everyoneCumming"] = everyoneCumming
+	data["page"] = page
 	
 	return data
 	
@@ -101,3 +127,4 @@ func loadData(data):
 	
 	currentCategory = SAVE.loadVar(data, "currentCategory", "")
 	everyoneCumming = SAVE.loadVar(data, "everyoneCumming", false)
+	page = SAVE.loadVar(data, "page", -1)

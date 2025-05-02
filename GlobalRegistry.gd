@@ -2,12 +2,137 @@ extends Node
 
 var game_version_major = 0
 var game_version_minor = 1
-var game_version_revision = 7
-var game_version_suffix = "fix1"
+var game_version_revision = 8
+var game_version_suffix = ""
+
+var contributorsCredits:Dictionary = {
+	"Max-Maxou": [
+		"chastity cage sprites",
+		"android suit",
+		"engineer uniform",
+		"damaged uniforms",
+	],
+	"Firi": [
+		"code",
+		"[url=https://github.com/Alexofp/BDCC/pull/10]#1[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/11]#2[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/12]#3[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/13]#4[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/14]#5[/url]",
+	],
+	"Niel": [
+		"code",
+		"[url=https://github.com/Alexofp/BDCC/pull/17]#1[/url]",
+	],
+	"PeteTimesSix": [
+		"visible chains",
+		"[url=https://github.com/Alexofp/BDCC/pull/25]#1[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/26]#2[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/27]#3[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/29]#4[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/30]#5[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/31]#6[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/33]#7[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/35]#8[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/36]#9[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/41]#10[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/55]#11[/url]",
+	],
+	"Rayforward": [
+		"[url=https://github.com/Alexofp/BDCC/pull/34]#1[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/37]#2[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/40]#3[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/73]#4[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/74]#5[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/75]#6[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/76]#7[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/77]#8[/url]",
+	],
+	"CanInBad": [
+		"[url=https://github.com/Alexofp/BDCC/pull/39]#1[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/79]#2[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/106]#3[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/107]#4[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/111]#5[/url]",
+		"helping me with the mods browser",
+	],
+	"Ranchar": [
+		"[url=https://github.com/Alexofp/BDCC/pull/42]#1[/url]",
+	],
+	"AverageAce": [
+		"lots of skins",
+		"better room descriptions",
+		"sprite improvements",
+	],
+	"Dalt": [
+		"[url=https://github.com/Alexofp/BDCC/pull/43]#1[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/56]#2[/url]",
+	],
+	"Disillusioned-Gazer": [
+		"[url=https://github.com/Alexofp/BDCC/pull/89]#1[/url]",
+	],
+	"Sayonix": [
+		"lots of reported typos",
+	],
+	"Johnvic76": [
+		"lots of reported typos",
+	],
+	"PosionFox": [
+		"[url=https://github.com/Alexofp/BDCC/pull/104]#1[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/136]#2[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/137]#3[/url]",
+	],
+	"CKRainbow": [
+		"[url=https://github.com/Alexofp/BDCC/pull/112]#1[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/119]#2[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/157]#3[/url]",
+	],
+	"Friskygote": [
+		"[url=https://github.com/Alexofp/BDCC/pull/120]#1[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/128]#2[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/129]#3[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/139]#4[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/151]#5[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/160]#6[/url]",
+	],
+	"ScottVictorHalley": [
+		"[url=https://github.com/Alexofp/BDCC/pull/121]#1[/url]",
+	],
+	"whalekys": [
+		"[url=https://github.com/Alexofp/BDCC/pull/123]#1[/url]",
+	],
+	"klorpa": [
+		"[url=https://github.com/Alexofp/BDCC/pull/125]#1[/url]",
+	],
+	"MrUnicellular": [
+		"[url=https://github.com/Alexofp/BDCC/pull/133]#1[/url]"
+	],
+	"Merith-TK": [
+		"[url=https://github.com/Alexofp/BDCC/pull/142]#1[/url]",
+	],
+	"keerifox": [
+		"[url=https://github.com/Alexofp/BDCC/pull/145]#1[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/144]#2[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/146]#3[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/147]#4[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/148]#5[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/152]#6[/url]",
+	],
+	"CheeseyCake92": [
+		"[url=https://github.com/Alexofp/BDCC/pull/158]#1[/url]",
+	],
+	"[color=#E88EFF]Fox[color=#CC27DB]2[/color]Code[/color]": [
+		"code",
+	],
+}
 
 var currentUniqueID = 0
 var currentChildUniqueID = 0
 var currentNPCUniqueID = 0
+var currentTFID := 0
+
+var pathToIDCache:Dictionary = {}
+var IDToPathCache:Dictionary = {}
 
 var scenes: Dictionary = {}
 var temporaryScenes: Dictionary = {}
@@ -77,6 +202,12 @@ var auctionTraits:Dictionary = {}
 var auctionTraitsRefs:Dictionary = {}
 var auctionActions:Dictionary = {}
 var pawnTypes:Dictionary = {}
+var transformations:Dictionary = {}
+var transformationRefs:Dictionary = {}
+var transformationEffects:Dictionary = {}
+var nurseryTasks:Dictionary = {}
+var drugDenEvents:Dictionary = {}
+var drugDenEventRefs:Dictionary = {}
 
 var bodypartStorageNode
 
@@ -197,7 +328,72 @@ func loadMods():
 			file_name = dir.get_next()
 	else:
 		Log.printerr("An error occurred when trying to access the path "+modsFolder)
+
+const CACHE_SCENE = "scene"
+const CACHE_CHAR = "char"
+const CACHE_STAGESCENE = "stagescene"
+
+func fillBaseCacheFields():
+	var theFields:Array = [CACHE_SCENE, CACHE_CHAR, CACHE_STAGESCENE]
 	
+	for field in theFields:
+		if(!pathToIDCache.has(field)):
+			pathToIDCache[field] = {}
+		if(!IDToPathCache.has(field)):
+			IDToPathCache[field] = {}
+
+var cacheEnabled:bool = true
+func checkCacheEnabled():
+	if(OS.get_name() == "HTML5"): # To save on userstorage
+		cacheEnabled = false
+	
+	if(Util.hasCommandLineArgument("-noRegistryCache")):
+		cacheEnabled = false
+
+func isCacheEnabled() -> bool:
+	return cacheEnabled
+
+func getCachedID(theType:String, thePath:String) -> String:
+	if(!pathToIDCache[theType].has(thePath)):
+		return ""
+	return pathToIDCache[theType][thePath]
+
+func getCachedPath(theType:String, theID:String) -> String:
+	if(!IDToPathCache[theType].has(theID)):
+		return ""
+	return IDToPathCache[theType][theID]
+
+func addCacheEntry(theType:String, theID:String, thePath:String):
+	if(!isCacheEnabled()):
+		return
+	IDToPathCache[theType][theID] = thePath
+	pathToIDCache[theType][thePath] = theID
+
+func removeCacheEntryByID(theType:String, theID:String, updateFile:bool=true):
+	if(!hasCachedID(theType, theID)):
+		return
+	pathToIDCache[theType].erase(getCachedPath(theType, theID))
+	IDToPathCache[theType].erase(theID)
+	
+	if(updateFile):
+		saveRegistryCacheToFile()
+
+func hasCachedPath(theType:String, thePath:String) -> bool:
+	if(!pathToIDCache[theType].has(thePath)):
+		return false
+	return true
+	
+func hasCachedID(theType:String, theID:String) -> bool:
+	if(!IDToPathCache[theType].has(theID)):
+		return false
+	return true
+
+func loadCached(theType:String, theID:String):
+	return load(getCachedPath(theType, theID))
+
+func newCached(theType:String, theID:String):
+	return loadCached(theType, theID).new()
+
 
 func _init():
 	checkModSupport()
@@ -287,6 +483,7 @@ const totalStages = 19.0
 
 func registerEverything():
 	var start = OS.get_ticks_usec()
+	loadRegistryCacheFromFile()
 	
 	startLoadingDonationData()
 	
@@ -358,6 +555,7 @@ func registerEverything():
 	
 	registerEventFolder("res://Events/Event/")
 	registerEventFolder("res://Game/NpcSlavery/SlaveActivitiesEvents/")
+	registerDrugDenEventFolder("res://Game/DrugDen/Events/")
 	
 	emit_signal("loadingUpdate", 7.0/totalStages, "Scenes")
 	yield(get_tree(), "idle_frame")
@@ -427,6 +625,10 @@ func registerEverything():
 	registerGlobalTaskFolder("res://Game/InteractionSystem/GlobalTasks/")
 	registerPawnTypesFolder("res://Game/InteractionSystem/PawnTypes/")
 	
+	registerTransformationsFolder("res://Game/Transformation/TFs/")
+	registerTransformationEffectsFolder("res://Game/Transformation/Effects/")
+	registerNurseryTaskFolder("res://Game/Science/NurseryTasks/")
+	
 	emit_signal("loadingUpdate", 11.0/totalStages, "Sex scenes")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
@@ -479,11 +681,14 @@ func registerEverything():
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	loadDatapacksFromFolder(getDatapacksFolder())
+	loadDatapacksFromFolder("res://StaticDatapacks")
 	
 	emit_signal("loadingUpdate", 18.0/totalStages, "Modules late initialization")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	postInitModules()
+	
+	saveRegistryCacheToFile()
 	
 	var end = OS.get_ticks_usec()
 	var worker_time = (end-start)/1000000.0
@@ -503,6 +708,10 @@ func generateChildUniqueID():
 func generateNPCUniqueID():
 	currentNPCUniqueID += 1
 	return currentNPCUniqueID - 1
+
+func generateTFID():
+	currentTFID += 1
+	return currentTFID - 1
 
 func getGameVersionString():
 	return str(game_version_major)+"."+str(game_version_minor)+"."+str(game_version_revision)+str(game_version_suffix)
@@ -530,12 +739,17 @@ func isVersionListHasCompatible(versionlist):
 	return false
 
 func registerScene(path: String, creator = null):
+	if(hasCachedPath(CACHE_SCENE, path)):
+		scenes[getCachedID(CACHE_SCENE, path)] = null
+		return
+	
 	var scene = load(path)
 	if(!scene):
 		Log.printerr("ERROR: couldn't load scene from path "+path)
 		return
 	var sceneObject = scene.new()
 	scenes[sceneObject.sceneID] = scene
+	addCacheEntry(CACHE_SCENE, sceneObject.sceneID, path)
 	sceneObject.queue_free()
 	if(creator != null):
 		sceneCreators[sceneObject.sceneID] = creator
@@ -574,13 +788,19 @@ func createScene(id: String):
 			newscene.setDatapackAndSceneIDs(datapackID, sceneID)
 			return newscene
 	
-	if(!scenes.has(id) && !temporaryScenes.has(id)):
+	if(!scenes.has(id) && !temporaryScenes.has(id) && !hasCachedID(CACHE_SCENE, id)):
 		Log.printerr("ERROR: scene with the id "+id+" wasn't found")
 		return null
 	var scene
 	if(temporaryScenes.has(id)):
 		scene = temporaryScenes[id].new()
 	else:
+		if(scenes[id] == null && hasCachedID(CACHE_SCENE, id)):
+			scenes[id] = loadCached(CACHE_SCENE, id)
+			if(scenes[id] == null): # We have a cache entry but the scene doesn't actually exist
+				removeCacheEntryByID(CACHE_SCENE, id)
+				Log.printerr("ERROR: scene with the id "+id+" wasn't found (cache error)")
+				return null
 		scene = scenes[id].new()
 	scene.name = scene.sceneID
 	return scene
@@ -651,11 +871,14 @@ func registerBodypartFolder(folder: String):
 		Log.printerr("An error occurred when trying to access the path "+folder)
 
 func registerCharacter(path: String):
+	if(hasCachedPath(CACHE_CHAR, path)):
+		characterClasses[getCachedID(CACHE_CHAR, path)] = null
+		return
+	
 	var character = load(path)
 	var characterObject = character.new()
-	#characters[characterObject.id] = characterObject
 	characterClasses[characterObject.id] = character
-	#add_child(characterObject)
+	addCacheEntry(CACHE_CHAR, characterObject.id, path)
 	characterObject.queue_free()
 
 func registerCharacterFolder(folder: String):
@@ -727,9 +950,17 @@ func createCharacter(charID:String):
 		remove_child(dynChar)
 		return dynChar
 	
+	return createStaticCharacter(charID)
+
+func createStaticCharacter(charID:String):
 	if(!characterClasses.has(charID)):
-		Log.printerr("ERROR: character class with the id "+charID+" wasn't found ")
+		Log.printerr("ERROR: character class with the id "+charID+" wasn't found")
 		return null
+	if(characterClasses[charID] == null && hasCachedID(CACHE_CHAR, charID)):
+		characterClasses[charID] = loadCached(CACHE_CHAR, charID)
+		if(!characterClasses[charID]):
+			Log.printerr("ERROR: character class with the id "+charID+" wasn't found (cache error)")
+			return null
 	return characterClasses[charID].new()
 
 func registerAttack(path: String):
@@ -1210,9 +1441,13 @@ func getLustTopicObjects():
 
 
 func registerStageScene(path: String):
+	if(hasCachedPath(CACHE_STAGESCENE, path)):
+		stageScenes[getCachedID(CACHE_STAGESCENE, path)] = null
+		return
 	var item:PackedScene = load(path)
 	var itemObject = item.instance()
 	stageScenes[itemObject.id] = item
+	addCacheEntry(CACHE_STAGESCENE, itemObject.id, path)
 	var possibleStates = itemObject.getSupportedStates()
 	if(possibleStates != null && possibleStates.size() > 0):
 		stageScenesCachedStates[itemObject.id] = possibleStates
@@ -1242,6 +1477,16 @@ func createStageScene(id: String):
 	if(!stageScenes.has(id)):
 		Log.printerr("ERROR: stage scene with the id "+id+" wasn't found")
 		return null
+	
+	if(stageScenes[id] == null && hasCachedID(CACHE_STAGESCENE, id)):
+		var item:PackedScene = load(getCachedPath(CACHE_STAGESCENE, id))
+		var itemObject = item.instance()
+		stageScenes[itemObject.id] = item
+		var possibleStates = itemObject.getSupportedStates()
+		if(possibleStates != null && possibleStates.size() > 0):
+			stageScenesCachedStates[itemObject.id] = possibleStates
+		return itemObject
+	
 	return stageScenes[id].instance()
 
 func getStageScenesCachedStates():
@@ -1656,7 +1901,9 @@ func getScriptsInFoldersRecursive(folder: String, ignoreBaseDir = false):
 	return result
 
 func getDatapacksInFolder(folder: String):
-	var result = []
+	if(!Util.folderExists(folder)):
+		return []
+	var result:Array = []
 	
 	var dir = Directory.new()
 	if dir.open(folder) == OK:
@@ -2110,6 +2357,7 @@ func loadDatapacksFromFolder(folder: String):
 func reloadPacks():
 	datapacks.clear()
 	loadDatapacksFromFolder(getDatapacksFolder())
+	loadDatapacksFromFolder("res://StaticDatapacks")
 
 func deleteDatapack(id:String):
 	if(datapacks.has(id)):
@@ -2278,3 +2526,167 @@ func getPawnType(id: String):
 		
 func getPawnTypes():
 	return pawnTypes
+
+
+func registerTransformation(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	transformations[object.id] = loadedClass
+	transformationRefs[object.id] = object
+
+func registerTransformationsFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerTransformation(scriptPath)
+
+func getTransformationRef(id: String):
+	if(transformationRefs.has(id)):
+		return transformationRefs[id]
+	else:
+		Log.printerr("ERROR: transformation with the id "+id+" wasn't found")
+		return null
+		
+func createTransformation(id: String):
+	if(transformations.has(id)):
+		return transformations[id].new()
+	else:
+		Log.printerr("ERROR: transformation with the id "+id+" wasn't found")
+		return null
+		
+func getTransformationRefs():
+	return transformationRefs
+
+
+func registerTransformationEffect(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	transformationEffects[object.id] = loadedClass
+
+func registerTransformationEffectsFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerTransformationEffect(scriptPath)
+
+func createTransformationEffect(id: String):
+	if(transformationEffects.has(id)):
+		return transformationEffects[id].new()
+	else:
+		Log.printerr("ERROR: transformation effect with the id "+id+" wasn't found")
+		return null
+		
+func getTransformationEffects():
+	return transformationEffects
+
+
+
+
+
+func registerNurseryTask(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	nurseryTasks[object.id] = loadedClass
+
+func registerNurseryTaskFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerNurseryTask(scriptPath)
+
+func createNurseryTask(id: String):
+	if(nurseryTasks.has(id)):
+		return nurseryTasks[id].new()
+	else:
+		Log.printerr("ERROR: nursery task with the id "+id+" wasn't found")
+		return null
+		
+func getNurseryTasks():
+	return nurseryTasks
+
+
+func registerDrugDenEvent(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	drugDenEvents[object.id] = loadedClass
+	drugDenEventRefs[object.id] = object
+
+func registerDrugDenEventFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerDrugDenEvent(scriptPath)
+
+func createDrugDenEvent(id: String):
+	if(drugDenEvents.has(id)):
+		return drugDenEvents[id].new()
+	else:
+		Log.printerr("ERROR: drug den event with the id "+id+" wasn't found")
+		return null
+
+func getDrugDenEventRef(id: String):
+	if(drugDenEventRefs.has(id)):
+		return drugDenEventRefs[id]
+	else:
+		Log.printerr("ERROR: drug den event with the id "+id+" wasn't found")
+		return null
+		
+func getDrugDenEvents():
+	return drugDenEventRefs
+
+func saveRegistryCache() -> Dictionary:
+	var data:Dictionary = {
+		pathToIDCache = pathToIDCache,
+		IDToPathCache = IDToPathCache,
+		sceneCreators = sceneCreators,
+		stageScenesCachedStates = stageScenesCachedStates,
+	}
+	
+	return data
+
+func loadRegistryCache(_data:Dictionary):
+	pathToIDCache = SAVE.loadVar(_data, "pathToIDCache", {})
+	IDToPathCache = SAVE.loadVar(_data, "IDToPathCache", {})
+	sceneCreators = SAVE.loadVar(_data, "sceneCreators", {})
+	stageScenesCachedStates = SAVE.loadVar(_data, "stageScenesCachedStates", {})
+
+func resetRegistryCache(shouldSaveToFile:bool=false):
+	pathToIDCache = {}
+	IDToPathCache = {}
+	sceneCreators = {}
+	stageScenesCachedStates = {}
+	fillBaseCacheFields()
+	if(shouldSaveToFile):
+		saveRegistryCacheToFile(true)
+
+const cacheFilePath = "user://registryCache.json"
+
+func saveRegistryCacheToFile(forceSave:bool = false):
+	if(!isCacheEnabled() && !forceSave):
+		return
+	var data:Dictionary = saveRegistryCache()
+
+	var save_game = File.new()
+	save_game.open(cacheFilePath, File.WRITE)
+	save_game.store_line(var2str(data))
+	save_game.close()
+
+func loadRegistryCacheFromFile():
+	checkCacheEnabled()
+	if(Util.hasCommandLineArgument("-resetRegistryCache")): # We just don't load it
+		fillBaseCacheFields()
+		return
+	if(!isCacheEnabled()):
+		fillBaseCacheFields()
+		return
+	var save_game = File.new()
+	if not save_game.file_exists(cacheFilePath):
+		return
+	
+	save_game.open(cacheFilePath, File.READ)
+	var data = str2var(save_game.get_as_text())
+	if(data is Dictionary):
+		loadRegistryCache(data)
+	save_game.close()
+	fillBaseCacheFields()
+

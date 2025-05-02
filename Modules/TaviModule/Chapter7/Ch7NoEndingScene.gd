@@ -654,7 +654,76 @@ func _run():
 
 		saynn("But.. he was missing something. He always was. And so eventually, he dropped everything.. And returned back to the frontlines.. As a soldier. To serve and fight not for his future.. but for the future of others.")
 
-		addButton("Alex Rynard", "See what happens with him", "ep_alex")
+		if (getFlag("AlexRynardModule.ch2FinalSceneHappened") && getFlag("ElizaModule.storyCompleted")):
+			addButton("Alex and Eliza", "See what happens with them", "ep_unique_alex_eliza")
+		else:
+			addButton("Alex Rynard", "See what happens with him", "ep_alex")
+	if(state == "ep_unique_alex_eliza"):
+		playAnimation(StageScene.Duo, "stand", {pc="alexrynard", npc="eliza"})
+		saynn("Alex and Eliza both had a pretty good idea about what happened to you and Tavi.. And they were glad that it happened.")
+
+		saynn("After the captain's ban of androids gets lifted, Alex immediately restarted all of the canceled or stopped projects. At first he had some problems with the law after saving Skar's life.. but soon AlphaCorp decides to drop any charges and instead offers him pretty much unlimited resources.")
+
+		saynn("After the captain became one of the inmates.. nothing really changed for Eliza Quinn. At first.. She just kept experimenting.. even if the range of tests got limited by quite a bit. Eventually, AlphaCorp decided to cancel any experiments that involve test subjects. Her freedom was stripped from her.. a weird kind of freedom that relied on other people's captivity. She was about to quit, move on with her life.. but then Alex decided to ask her if she can help him with a certain project. She eagerly agreed.")
+
+		saynn("It was a pretty unique project, a symbiosis of tech and biology. Rather than trying to invent new materials or machine learning algorithms.. they looked back.. and saw huge untapped potential in what is already there. It took months of development.. but together they managed to develop a new prosthetic spine for Alex. One that wasn't bound by metal or wires.. but instead used artificial neurons and half-organic hard tissue. The era of surgical intervention was coming to its end, nanobots, tiny programmable robots made out of organic materials, were used to eat through the old prosthetic spine.. before constructing a new, much better one.")
+
+		saynn("Seeing how much he and Eliza managed to do together in such a short time.. it made them both wonder. What if..")
+
+		saynn("[say=eliza]What's the worst that could happen~?[/say]")
+
+		saynn("[say=alexrynard]You're offering me to take on the whole world. Excuse me but you are one crazy woman.[/say]")
+
+		saynn("[say=eliza]We're gonna start small obviously! Aren't you sick of not owning your prototypes? You created them, why the fuck is AlphaCorp putting its trademarks and copyrights onto everything we make![/say]")
+
+		saynn("Alex lets out a sigh that has a low grumpy undertone.")
+
+		saynn("[say=alexrynard]Ngrhh.. I am pretty sick of that.[/say]")
+
+		saynn("[say=eliza]So, what do you say, young lad? Who if not us~.[/say]")
+
+		saynn("They decided to commit, Eliza managed to convince him in the end. They were perfect for each other. Alex, an engineer with a cold, calculated mind.. And Eliza, a hot-heated charismatic scientist who wasn't afraid to bend a few rules in the moment if it meant a better future for most.")
+
+		saynn("Eliza's room. Alex is sitting on a chair in front of her laptop.")
+
+		saynn("[say=alexrynard]How are we gonna name it? We will need a really good name.[/say]")
+
+		saynn("Eliza is chilling on the sofa behind him.")
+
+		saynn("[say=eliza]Huh. You're right. Marketing is important. Have something in mind, foxy?[/say]")
+
+		saynn("[say=alexrynard]Imagination is not my strongest trait.[/say]")
+
+		saynn("Eliza hums.")
+
+		saynn("[say=eliza]How about something that starts with Nano? Since we've been leaning into this nanomachines technology so much.. Who knows, maybe that's the future?[/say]")
+
+		saynn("[say=alexrynard]I don't know, NanoTech? I feel like that's a bit too simple.[/say]")
+
+		saynn("[say=eliza]It's not bad.. I like how it sounds. It has that.. ring to it.[/say]")
+
+		saynn("[say=alexrynard]NanoCorp?[/say]")
+
+		saynn("[say=eliza]No, I really don't wanna make it seem like we're creating another giant corporation. The world's got enough of those.[/say]")
+
+		saynn("[say=alexrynard]There is a huge chance that will be charged with treason at some point. Let's just pick something. Name is important.. but it's probably the last thing we should worry about.[/say]")
+
+		saynn("[say=eliza]Yeah, that's why we need something small and sneaky.. They shouldn't suspect a thing~.[/say]")
+
+		saynn("Eliza throws her head back and starts thinking out loud while staring at the ceiling.")
+
+		saynn("[say=eliza]Hm.. Nano.. Rynard.. Corp.. Tech.. Quinn.. Trait.. Future.. Treason..[/say]")
+
+		saynn("She keeps going and going.. but eventually she goes quiet.. not for long.")
+
+		saynn("[say=eliza]You know.. I think I know just the name~.[/say]")
+
+		saynn("The rest is history.")
+
+		if (tookRahi):
+			addButton("Rahi", "See what happened with Rahi", "ep_rahi")
+		else:
+			addButton("Jaxon", "See what happened with Jaxon", "ep_jaxon")
 	if(state == "ep_alex"):
 		playAnimation(StageScene.Solo, "stand", {pc="alexrynard"})
 		if (getFlag("AlexRynardModule.ch2FinalSceneHappened")):
@@ -664,7 +733,7 @@ func _run():
 
 			saynn("The first project that he did.. was done in cooperation with Eliza. It was a pretty unique one, a symbiosis of tech and biology. Rather than trying to invent new materials or machine learning algorithms.. they looked back.. and saw huge untapped potential in what is already there. It took months of development.. but together they managed to develop a new prosthetic spine for Alex. One that wasn't bound by metal or wires.. but instead used artificial neurons and half-organic hard tissue. The era of surgical intervention was coming to its end, nanobots, tiny programmable robots made out of organic materials, were used to eat through the old prosthetic spine.. before constructing a new, much better one.")
 
-			saynn("Seeing how much he and Eliza manage to do alone together.. made him wonder. How far can they really go? Maybe it was time to ditch BDCC. Maybe it was time to grow an even bigger spine and ditch AlphaCorp all together.")
+			saynn("Seeing how much he and Eliza manage to do together.. made him wonder. How far can they really go? Maybe it was time to ditch BDCC. Maybe it was time to grow an even bigger spine and ditch AlphaCorp all together.")
 
 			saynn("Sadly, Eliza was still busy trying to prove her mother something.. Having someone nearby would seem like cheating, as silly as that sounds. Maybe, one day, the time will come when both of them will look into the future.. and realize that they've been staring at each other this whole time.")
 
@@ -693,14 +762,25 @@ func _run():
 
 		addButton("Eliza", "See what happens to Eliza", "ep_eliza")
 	if(state == "ep_eliza"):
-		playAnimation(StageScene.Solo, "stand", {pc="eliza"})
-		saynn("Eliza, seeing no love from her mother, kept delving deeper and deeper into science.. searching for a perfect drug that would solve all her problems.. but never finding one.")
+		if (!getFlag("ElizaModule.storyCompleted")):
+			playAnimation(StageScene.Solo, "stand", {pc="eliza"})
+			saynn("Eliza, seeing no love from her mother, kept delving deeper and deeper into science.. searching for a perfect drug that would solve all her problems.. but never finding one.")
 
-		saynn("After the captain became one of the inmates.. nothing really changed for her. At first.. She just kept experimenting.. even if the range of tests got limited by quite a bit. Eventually, AlphaCorp decided to cancel any experiments that involve test subjects.. And that made Eliza protest.")
+			saynn("After the captain became one of the inmates.. nothing really changed for her. At first.. She just kept experimenting.. even if the range of tests got limited by quite a bit. Eventually, AlphaCorp decided to cancel any experiments that involve test subjects.. And that made Eliza protest.")
 
-		saynn("But.. Finding no support.. She had to quit.")
+			saynn("But.. Finding no support.. She had to quit.")
 
-		saynn("After BDCC, Eliza's mother reached out to her and invited her to work in her lab again.. And so she agreed.. eventually throwing out any great ideas out of her head and becoming an obedient harmless daughter that her mother always wanted her to be.")
+			saynn("After BDCC, Eliza's mother reached out to her and invited her to work in her lab again.. And so she agreed.. eventually throwing out any great ideas out of her head and becoming an obedient harmless daughter that her mother always wanted her to be.")
+
+		else:
+			playAnimation(StageScene.Duo, "stand", {pc="eliza", npc="elizaMom"})
+			saynn("The story of her favorite assistant suddenly disappearing was a big blow for Eliza. Her chemistry lab became a constant reminder of how things were not that long ago. It's hard not to miss good times.")
+
+			saynn("After the captain became one of the inmates.. nothing really changed for her, work wise. At first.. She just kept experimenting.. even if the range of tests got limited by quite a bit. Eventually, AlphaCorp decided to cancel any experiments that involve test subjects. Her freedom was stripped from her.. a weird kind of freedom that relied on other people's captivity. She was about to quit, move on with her life.")
+
+			saynn("But one day, Eliza received a strange shipment attached to her name. What arrived was a small package, wrapped up tightly and with lots of 'fragile' stickers on it. When she opened it, she quickly realized who it was from. Inside the little cardboard box was a perfectly sleek mug.. with the words 'Best Daughter' proudly written on it.")
+
+			saynn("With nothing holding her back anymore, Eliza knew exactly what to do next.")
 
 		if (tookRahi):
 			addButton("Rahi", "See what happened with Rahi", "ep_rahi")

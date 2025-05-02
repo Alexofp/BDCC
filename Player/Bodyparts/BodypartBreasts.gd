@@ -4,6 +4,7 @@ class_name BodypartBreasts
 
 var size = 0
 var cached_size = 0
+var fluidType:String = "Milk"
 
 func _init():
 	limbSlot = LimbTypes.Breasts
@@ -16,14 +17,23 @@ func setupSensitiveZone():
 	sensitiveZone = preload("res://Player/SensitiveZone/SensitiveBreasts.gd").new()
 	sensitiveZone.setBodypart(self)
 	
+func applyTFData(_data):
+	.applyTFData(_data)
+	
+	size = loadTFVar(_data, "size", size)
+	cached_size = getSize()
+	fluidType = loadTFVar(_data, "fluidType", fluidType)
+	
 func saveData():
 	var data = .saveData()
 	data["size"] = size
+	data["fluidType"] = fluidType
 	
 	return data
 
 func loadData(_data):
 	size = SAVE.loadVar(_data, "size", 0)
+	fluidType = SAVE.loadVar(_data, "fluidType", "Milk")
 	
 	.loadData(_data)
 	cached_size = getSize()
@@ -31,6 +41,11 @@ func loadData(_data):
 func loadDataNPC(_data):
 	.loadDataNPC(_data)
 	cached_size = getSize()
+
+func getTraits():
+	return {
+		PartTrait.BreastsFemale: true,
+	}
 
 func getSlot():
 	return BodypartSlot.Breasts
@@ -162,3 +177,9 @@ func getBreastsAdjustScale():
 
 func getRevealMessage():
 	return Util.capitalizeFirstLetter(getLewdDescriptionAndName()) + " got revealed."
+
+func getFluidType(_fluidSource) -> String:
+	return fluidType
+
+func getTransformMorphMessage(_context:Dictionary) -> String:
+	return "{npc.YouHe} {npc.youVerb('feel')} a warmth spreading across {npc.yourHis} chest, and suddenly, {npc.yourHis} breasts begin to swell and reshape, their countours and texture changing. {npc.YouHe} now {npc.youVerb('have', 'has')} "+getAVulgarName()+"."

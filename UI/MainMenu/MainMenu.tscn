@@ -365,9 +365,17 @@ margin_left = 152.0
 margin_top = 60.0
 margin_right = 300.0
 margin_bottom = 86.0
-hint_tooltip = "Experimental feature"
 size_flags_horizontal = 3
 text = "Datapacks"
+
+[node name="QuitButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
+margin_left = 304.0
+margin_top = 60.0
+margin_right = 452.0
+margin_bottom = 86.0
+hint_tooltip = "See you space cowboy..."
+size_flags_horizontal = 3
+text = "Quit"
 
 [node name="DevToolsScreen" type="VBoxContainer" parent="HBoxContainer"]
 visible = false
@@ -564,6 +572,7 @@ fit_content_height = true
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/ModsButton" to="." method="_on_ModsButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/AutoTranslatorButton" to="." method="_on_AutoTranslatorButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/DatapackButton" to="." method="_on_DatapackButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevClose" to="." method="_on_DevClose_pressed"]
 [connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevSceneConverter2" to="." method="_on_DevSceneConverter2_pressed"]
 [connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevLikesGenerator" to="." method="_on_DevLikesGenerator_pressed"]

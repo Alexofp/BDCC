@@ -2,9 +2,17 @@ extends Control
 
 signal onClosePressed
 
+onready var contributors_label = $"%ContributorsLabel"
+
 func _ready():
 	$VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer/DonationsLabel.bbcode_text = GlobalRegistry.getDonationDataString()
 	var _ok = GlobalRegistry.connect("donationDataUpdated", self, "updateDonationData")
+
+	var contributorText:String = ""
+	for contributorName in GlobalRegistry.contributorsCredits:
+		contributorText += "\n"+contributorName+" ("+Util.join(GlobalRegistry.contributorsCredits[contributorName], ", ")+")"
+
+	contributors_label.bbcode_text = "[center]Contributors:"+contributorText+"[/center]"
 
 func updateDonationData():
 	$VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer/DonationsLabel.bbcode_text = GlobalRegistry.getDonationDataString()

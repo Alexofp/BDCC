@@ -15,3 +15,6 @@ func getDoll3DScene():
 
 func generateRandomColors(_dynamicCharacter):
 	pass
+
+func getVulgarName() -> String:
+	return "cock"

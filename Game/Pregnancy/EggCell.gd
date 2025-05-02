@@ -4,8 +4,9 @@ class_name EggCell
 var lifeSpan: int # seconds
 var orificeType: int = OrificeType.Vagina
 var isimpregnated = false
-var motherID = ""
-var fatherID = ""
+var motherID:String = ""
+var fatherID:String = ""
+var causerID:String = ""
 var progress = 0.0
 var motherSpecies = []
 var resultSpecies = []
@@ -50,6 +51,9 @@ func getMotherID():
 
 func getFatherID():
 	return fatherID
+
+func setCauserID(newcauser:String):
+	causerID = newcauser
 
 func setOrifice(orif):
 	orificeType = orif
@@ -120,6 +124,7 @@ func impregnatedBy(fluidDNA):
 	
 	isimpregnated = true
 	fatherID = fluidDNA.getCharacterID()
+	causerID = fluidDNA.getCauserID()
 	
 	var father = GlobalRegistry.getCharacter(fatherID)
 	var mother = GlobalRegistry.getCharacter(motherID)
@@ -134,7 +139,7 @@ func impregnatedBy(fluidDNA):
 	else:
 		resultGender = NpcGender.generate()
 
-	print("EGGCELL IMPREGNATED BY "+str(fatherID)+", species: "+str(resultSpecies)+", gender: "+NpcGender.getVisibleName(resultGender), ", division: ", monozygotic)
+	print("EGGCELL IMPREGNATED BY "+str(fatherID)+", species: "+str(resultSpecies)+", gender: "+NpcGender.getVisibleName(resultGender), ", division: ", monozygotic, "" if causerID == "" else (" CAUSER: "+causerID))
 
 func tryImpregnate(fluidDNA, amountML, eggMultiplier = 1.0, fertility = 1.0, crossSpeciesCompatibility = 0.0):
 	if(!canImpregnate()):
@@ -170,6 +175,7 @@ func saveData():
 		"isimpregnated": isimpregnated,
 		"motherID": motherID,
 		"fatherID": fatherID,
+		"causerID": causerID,
 		"progress": progress,
 		"motherSpecies": motherSpecies,
 		"resultSpecies": resultSpecies,
@@ -186,6 +192,7 @@ func loadData(data):
 	isimpregnated = SAVE.loadVar(data, "isimpregnated", false)
 	motherID = SAVE.loadVar(data, "motherID", "pc")
 	fatherID = SAVE.loadVar(data, "fatherID", "pc")
+	causerID = SAVE.loadVar(data, "causerID", "")
 	progress = SAVE.loadVar(data, "progress", 0.0)
 	motherSpecies = SAVE.loadVar(data, "motherSpecies", ["feline"])
 	resultSpecies = SAVE.loadVar(data, "resultSpecies", [])

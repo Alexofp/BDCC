@@ -2,7 +2,7 @@ extends Control
 
 signal onClosePressed
 onready var langList = $VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/LanguageList
-
+onready var translatorsList = $VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/TranslatorsList
 func _ready():
 	var allLangs = TranslationLanguage.getAll()
 	var _i = 0
@@ -11,6 +11,13 @@ func _ready():
 		if(langID == AutoTranslation.getTargetLanguage()):
 			langList.select(_i)
 		_i += 1
+	
+	translatorsList.clearTranslators()
+	_i = 0
+	for translator in AutoTranslation.translators:
+		translatorsList.addTranslator(translator.getName())
+		_i += 1
+
 	$VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/EnableTranslationBox.pressed = AutoTranslation.shouldTranslate()
 	$VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/EnableManualTranslateButton.pressed = AutoTranslation.shouldHaveManualTranslateButton()
 	$VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/TranslateButtonsButton.pressed = AutoTranslation.shouldTranslateButtons
@@ -34,3 +41,9 @@ func _on_EnableManualTranslateButton_toggled(button_pressed):
 
 func _on_TranslateButtonsButton_toggled(button_pressed):
 	AutoTranslation.shouldTranslateButtons = button_pressed
+
+func _on_TranslatorsList_onDownPressed(id):
+	AutoTranslation.moveDownTranslator(id)
+
+func _on_TranslatorsList_onUpPressed(id):
+	AutoTranslation.moveUpTranslator(id)

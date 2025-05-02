@@ -6,6 +6,7 @@ var genderWeights = {}
 var disabledGoalsForSubPC = []
 var speciesWeights = {}
 var goalWeights = {}
+var tfWeights:Dictionary = {}
 
 func getGoalWeight(goalID, defaultValue = 1.0):
 	if(goalWeights.has(goalID)):
@@ -88,6 +89,42 @@ func generateGenderFromAllowed(npcGenders):
 		return RNG.pick([NpcGender.Male, NpcGender.Female])
 	return pickedGender
 	
+func generateSpecies() -> String:
+	var allSpecies = GlobalRegistry.getAllSpecies()
+	var possible = []
+	for speciesID in allSpecies:
+		var weight = GM.main.getEncounterSettings().getSpeciesWeight(speciesID)
+		if(weight != null && weight > 0.0):
+			possible.append([speciesID, weight])
+	if(possible.empty()):
+		return ""
+	return RNG.pickWeightedPairs(possible)
+	
+func generateSpeciesBlacklist(blacklist:Array) -> String:
+	var allSpecies = GlobalRegistry.getAllSpecies()
+	var possible = []
+	for speciesID in allSpecies:
+		if(blacklist.has(speciesID)):
+			continue
+		var weight = GM.main.getEncounterSettings().getSpeciesWeight(speciesID)
+		if(weight != null && weight > 0.0):
+			possible.append([speciesID, weight])
+	if(possible.empty()):
+		return ""
+	return RNG.pickWeightedPairs(possible)
+	
+func getTFWeight(tfID:String, defaultValue:float = 1.0) -> float:
+	if(!tfWeights.has(tfID)):
+		return defaultValue
+	return tfWeights[tfID]
+	
+func setTFWeight(tfID:String, value:float):
+	tfWeights[tfID] = value
+
+func resetTFWeight(tfID:String):
+	if(tfWeights.has(tfID)):
+		tfWeights.erase(tfID)
+	
 func saveData():
 	var data = {
 		"preferKnownEncounters": preferKnownEncounters,
@@ -95,6 +132,7 @@ func saveData():
 		"disabledGoalsForSubPC": disabledGoalsForSubPC,
 		"speciesWeights": speciesWeights,
 		"goalWeights": goalWeights,
+		"tfWeights": tfWeights,
 	}
 	return data
 
@@ -104,3 +142,4 @@ func loadData(data):
 	disabledGoalsForSubPC = SAVE.loadVar(data, "disabledGoalsForSubPC", [])
 	speciesWeights = SAVE.loadVar(data, "speciesWeights", {})
 	goalWeights = SAVE.loadVar(data, "goalWeights", {})
+	tfWeights = SAVE.loadVar(data, "tfWeights", {})

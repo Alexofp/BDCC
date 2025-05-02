@@ -1736,7 +1736,7 @@ func _run():
 
 			saynn("[say=mirri]NHHh-hh..[/say]")
 
-			saynn("Her pussy clenches hard, pushing you over the edge. Your {pc.penis} cock starts throbbing and stuffing her cunt full of your seed, your balls tighten up every second as her womb gets pumped full of it again and again..")
+			saynn("Her pussy clenches hard, pushing you over the edge. Your {pc.penis} starts throbbing and stuffing her cunt full of your seed, your balls tighten up every second as her womb gets pumped full of it again and again..")
 
 			saynn("[say=mirri]..C-cumming.. F-fuck!..[/say]")
 

@@ -7,7 +7,10 @@ func _init():
 
 func _run():
 	if(state == ""):
-		saynn("You find a place you can stash some items in, it's under your pillow. What do you wanna do")
+		if(GM.pc.getLocation() != GM.pc.getCellLocation()):
+			saynn("What do you want to do with your stash.")
+		else:
+			saynn("You find a place you can stash some items in, it's under your pillow. What do you wanna do")
 		
 		var items = GlobalRegistry.getCharacter("playerstash").getInventory().getAllItems()
 		var itemNames = []
@@ -73,7 +76,7 @@ func _react(_action: String, _args):
 		var newItem = item.splitAmount(_args[1])
 		
 		if(newItem != null):
-			GM.pc.addCredits(-newItem.getAmount())
+			#GM.pc.addCredits(-newItem.getAmount())
 			GlobalRegistry.getCharacter("playerstash").getInventory().addItem(newItem)
 		
 		return

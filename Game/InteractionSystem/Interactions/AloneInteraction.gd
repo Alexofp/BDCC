@@ -49,6 +49,7 @@ func getGoalsWithScores(aboveKeepScore:bool = true) -> Array:
 	var keepScore:float = 0.0
 	if(goal != null && aboveKeepScore):
 		keepScore = goal.getKeepScore()
+		keepScore = pawn.getProcessedGoalScore(goal.id, keepScore, true)
 	
 	var possibleNew := []
 	for goalID in goals:
@@ -57,6 +58,7 @@ func getGoalsWithScores(aboveKeepScore:bool = true) -> Array:
 		var newGoalRef:InteractionGoalBase = InteractionGoal.getRef(goalID)
 		
 		var newScore = newGoalRef.getScore(pawn)
+		newScore = pawn.getProcessedGoalScore(goalID, newScore, false)
 		if(newScore > keepScore || goal == null):
 			possibleNew.append([goalID, newScore])
 	
@@ -73,6 +75,7 @@ func getGoalsWithScores(aboveKeepScore:bool = true) -> Array:
 		
 		globalTask.configureGoalFinal(pawn, newgoal)
 		var newScore = newgoal.getScore(pawn)
+		newScore = pawn.getProcessedGoalScore(goalID, newScore, false)
 		if(newScore > keepScore || newgoal == null):
 			possibleNew.append([newgoal, newScore])
 	return possibleNew
@@ -162,7 +165,7 @@ func getDebugInfo():
 	if(goal != null):
 		res.append("")
 		res.append("Current goal: "+str(goal.id))
-		res.append("Goal keep score: "+str(Util.roundF(goal.getKeepScore(), 2)))
+		res.append("Goal keep score: "+str(Util.roundF(getRolePawn("main").getProcessedGoalScore(goal.id, goal.getKeepScore(), true), 2)))
 		res.append("")
 	
 	res.append("All goal weights:")

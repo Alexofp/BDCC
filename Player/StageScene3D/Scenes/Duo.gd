@@ -62,6 +62,11 @@ func playAnimation(animID, _args = {}):
 		doll2.scale.x = abs(doll2.scale.x)
 	else:
 		doll2.scale.x = -abs(doll2.scale.x)
+		
+	if(_args.has("kidlatBox") && _args["kidlatBox"]):
+		$KidlatBox.visible = true
+	else:
+		$KidlatBox.visible = false
 	
 	if(animID in ["crawl", "allfours"] || (_args.has("further") && _args["further"])):
 		doll.transform.origin.x = 2.5

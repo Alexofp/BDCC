@@ -9,7 +9,7 @@ func getMaxAssigned(_maxPawnCount:int) -> int:
 	return .getMaxAssigned(_maxPawnCount) - GM.main.IS.getInteractionsOfTypeAmount("Prostitution")
 
 func canDoTask(_pawn:CharacterPawn) -> bool:
-	return _pawn.isInmate()
+	return _pawn.isInmate() || shouldIgnoreCharType(_pawn)
 
 func configureGoal(_pawn:CharacterPawn, _goal):
 	#_goal.zone = patrolZone

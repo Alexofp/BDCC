@@ -119,17 +119,69 @@ func canGo(floorid: String, pos: Vector2, dir):
 		return false
 	return false
 
-func addTransitions():
+var roomScene
+func addRoom(floorID:String, roomID:String, roomPosition:Vector2, roomData:Dictionary):
+	if(!cells.has(floorID)):
+		return
+	#var floorcells = cells[floorID]
+	var floorObject = floorDict[floorID]
+	
+	roomPosition.x = round(roomPosition.x)
+	roomPosition.y = round(roomPosition.y)
+	var mapRoomPos:Vector2 = roomPosition * gridsize
+	
+	if(roomScene == null):
+		roomScene = load("res://Game/World/GameRoom.tscn")
+	var newCell = roomScene.instance()
+	floorObject.add_child(newCell)
+	newCell.global_position = mapRoomPos
+	
+	newCell.roomID = roomID
+	newCell.roomName = roomData["name"] if roomData.has("name") else "Unknown room"
+	newCell.roomDescription = roomData["desc"] if roomData.has("desc") else "You're standing in some kind of room. There is not much else to say about it."
+	newCell.roomSprite = roomData["icon"] if roomData.has("icon") else RoomStuff.RoomSprite.NONE
+	newCell.roomColor = roomData["color"] if roomData.has("color") else RoomStuff.RoomColor.White
+	newCell.gridColor = roomData["gridColor"] if roomData.has("gridColor") else RoomStuff.RoomColor.White
+	newCell.canWest = roomData["canW"] if roomData.has("canW") else true
+	newCell.canNorth = roomData["canN"] if roomData.has("canN") else true
+	newCell.canEast = roomData["canE"] if roomData.has("canE") else true
+	newCell.canSouth = roomData["canS"] if roomData.has("canS") else true
+	
+	registerRoom(floorID, newCell)
+
+func clearFloor(floorID:String):
+	if(!cells.has(floorID)):
+		return
+	var floorcells = cells[floorID]
+	for pos in floorcells.keys():
+		var _room = floorcells[pos]
+		
+		roomDict.erase(_room.roomID)
+		for otherRoomAStarID in _room.astarConnections:
+			if(astar.has_point(otherRoomAStarID)):
+				astar.disconnect_points(_room.astarID, otherRoomAStarID)
+		
+		astar.remove_point(_room.astarID)
+		astarIDToRoomIDMap.erase(_room.astarID)
+		
+		_room.queue_free()
+		floorcells.erase(pos)
+	
+
+func addTransitions(floorIDs:Array = []):
 	#Util.delete_children(connections)
+	if(floorIDs.empty()):
+		floorIDs = cells.keys()
 	
 	for floorid in cells:
-		var floorcells = cells[floorid]		
+		var floorcells = cells[floorid]
 		for pos in floorcells:
 			var _room = floorcells[pos]
 			for extraAstarConnection in _room.astarConnectedTo:
 				var extraRoom = getRoomByID(extraAstarConnection)
 				if(extraRoom != null):
 					astar.connect_points(_room.astarID, extraRoom.astarID)
+					_room.astarConnections.append(extraRoom.astarID)
 			
 			if(canGo(floorid, pos, Direction.EAST)):
 				#print("ADD TRANSITION FROM "+str(pos)+" TO EAST")
@@ -140,6 +192,7 @@ func addTransitions():
 				var nextRoomID = applyDirectionID(_room.roomID, Direction.EAST)
 				var nextRoom = getRoomByID(nextRoomID)
 				astar.connect_points(_room.astarID, nextRoom.astarID)
+				_room.astarConnections.append(nextRoom.astarID)
 				
 			if(canGo(floorid, pos, Direction.SOUTH)):
 				#print("ADD TRANSITION FROM "+str(pos)+" TO SOUTH")
@@ -151,6 +204,7 @@ func addTransitions():
 				var nextRoomID = applyDirectionID(_room.roomID, Direction.SOUTH)
 				var nextRoom = getRoomByID(nextRoomID)
 				astar.connect_points(_room.astarID, nextRoom.astarID)
+				_room.astarConnections.append(nextRoom.astarID)
 
 func _exit_tree():
 	pass
@@ -179,7 +233,8 @@ func _ready():
 			if(floorDict.has(f.id)):
 				assert(false)
 			floorDict[f.id] = f
-			
+			if(!cells.has(f.id)):
+				cells[f.id] = {}
 			var _cells = f.getRooms()
 			
 			for cell in _cells:
@@ -282,26 +337,43 @@ func aimCamera(roomID, instantly = false):
 
 func zoomIn(mult:float = 1.0):
 	camera.zoom *= 1.1 * mult
+	updateDarknessSize()
 
 func zoomOut(mult:float = 1.0):
 	camera.zoom *= 0.9 / mult
+	updateDarknessSize()
 
 func zoomReset():
 	camera.zoom = Vector2(1.0, 1.0)
+	updateDarknessSize()
+
+onready var darkness_control = $CanvasLayer/DarknessControl
+onready var d_center = $CanvasLayer/DarknessControl/DCenter
+onready var d_top = $CanvasLayer/DarknessControl/DTop
+onready var d_bottom = $CanvasLayer/DarknessControl/DBottom
+onready var d_left = $CanvasLayer/DarknessControl/DLeft
+onready var d_right = $CanvasLayer/DarknessControl/DRight
 
 func setDarknessVisible(vis):
-	$CanvasLayer/DarknessControl.visible = vis
+	darkness_control.visible = vis
 
+var savedDarknessSize:float = 32.0
 func setDarknessSize(darknessSize):
-	$CanvasLayer/DarknessControl/DCenter.margin_left = -darknessSize
-	$CanvasLayer/DarknessControl/DCenter.margin_top = -darknessSize
-	$CanvasLayer/DarknessControl/DCenter.margin_right = darknessSize
-	$CanvasLayer/DarknessControl/DCenter.margin_bottom = darknessSize
+	savedDarknessSize = darknessSize
+	updateDarknessSize()
 
-	$CanvasLayer/DarknessControl/DTop.margin_bottom = -darknessSize + 0.5
-	$CanvasLayer/DarknessControl/DBottom.margin_top = darknessSize - 0.5
-	$CanvasLayer/DarknessControl/DLeft.margin_right = -darknessSize + 0.5
-	$CanvasLayer/DarknessControl/DRight.margin_left = darknessSize - 0.5
+func updateDarknessSize():
+	var darknessSize:float = savedDarknessSize * 2.0 / max(camera.zoom.x, 0.1)
+	
+	d_center.margin_left = -darknessSize
+	d_center.margin_top = -darknessSize
+	d_center.margin_right = darknessSize
+	d_center.margin_bottom = darknessSize
+
+	d_top.margin_bottom = -darknessSize + 0.5
+	d_bottom.margin_top = darknessSize - 0.5
+	d_left.margin_right = -darknessSize + 0.5
+	d_right.margin_left = darknessSize - 0.5
 
 func clearPawns():
 	for pawnID in pawns:

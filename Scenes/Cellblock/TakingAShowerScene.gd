@@ -19,6 +19,8 @@ func _run():
 			addButton("Continue", "Go take a shower", "doShower")
 		
 	if(state == "doShower"):
+		playAnimation(StageScene.Showering, "head", {pc="pc", bodyState={naked=true}})
+		
 		saynn("You get under one of the shower heads and begin tinkering with the faucets.")
 		
 		saynn("But no matter what you do, all you get is cold water. It's not freezing but it's clear enough how the prison saves on costs")
@@ -40,11 +42,15 @@ func _run():
 		GM.ES.triggerRun(Trigger.TakingAShower)
 			
 	if(state == "cold_shower"):
+		playAnimation(StageScene.Showering, "crotch", {pc="pc", bodyState={naked=true}})
+		
 		saynn("You switch the water to the coldest it can be. It's refreshing and helps you to get away from the horny thoughts")
 			
 		addButton("Done", "Finish showering", "finish")
 			
 	if(state == "clean_inside"):
+		playAnimation(StageScene.Showering, "crotch", {pc="pc", bodyState={naked=true}})
+		
 		saynn("You use the shower to remove any fluids from your orifices")
 		
 		addButton("Done", "Finish showering", "finish")
@@ -65,6 +71,8 @@ func _run():
 
 #Hi im new and done by Ace
 	if(state == "masturbateselect"):
+		playAnimation(StageScene.Showering, "crotch", {pc="pc", bodyState={naked=true}})
+		
 		playAnimation(StageScene.Solo, "stand")
 		
 		if(GM.pc.hasPerk(Perk.NakedNoShame)):
@@ -90,7 +98,8 @@ func _run():
 	
 	
 	if(state == "masturbate_penis"):
-		playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.Showering, "stroke", {pc="pc", bodyState={naked=true,hard=true}})
+		#playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		if(GM.pc.hasPerk(Perk.NakedNoShame)):
 			saynn("Without so much as a thought for anyone who could be in here with you, your hands reach down your hips and start to tease your cock to get hard enough, feeling it over in your hands.")
 			if(GM.pc.isVisiblyPregnant()):
@@ -118,7 +127,8 @@ func _run():
 			
 		addButton("Cum!", "", "masturbate_peniscum")
 	if(state == "masturbate_peniscum"):
-		playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.Showering, "stroke", {pc="pc", pcCum=true, bodyState={naked=true,hard=true}})
+		#playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		
 		if(GM.pc.hasPerk(Perk.NakedNoShame)):
 			saynn("You shut your eyes as the shower water sprays the back of your head. Having turned around you aim your impending cumshot from your little shower area and out into the open.")
@@ -147,7 +157,8 @@ func _run():
 	
 	
 	if(state == "masturbate_penismilk"):
-		playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.Showering, "rub", {pc="pc", bodyState={naked=true,hard=true}})
+		#playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		if(GM.pc.hasPerk(Perk.NakedNoShame)):
 			saynn("You casually walk back to the locker rooms still naked and never grabbing a towel. Opening the locker you grab a cock milker and start heading back to your spot.")
 			saynn("Passing a few inmates on your way back, they're all focused on scrubbing themselves but if one notices you give them a quick flash of your body.")
@@ -174,7 +185,8 @@ func _run():
 		addButton("Cum!", "", "masturbate_penismilkcum")
 
 	if(state == "masturbate_penismilkcum"):
-		playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		#playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.Showering, "rub", {pc="pc", bodyState={naked=true,hard=true}})
 		
 		if(GM.pc.hasPerk(Perk.NakedNoShame)):
 			saynn("You let out a sharp cry as the pump milks you dry and continues going at your cock as you baste the inside of it with your {pc.cum}...")
@@ -200,7 +212,8 @@ func _run():
 
 
 	if(state == "masturbate_vaginal"):
-		playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.Showering, "rub", {pc="pc", bodyState={naked=true,hard=true}})
+		#playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		
 		if(GM.pc.hasPerk(Perk.NakedNoShame)):
 			saynn("Without so much as a thought for anyone who could be in here with you, your hands reach down your hips and start to tease your {pc.vaginaStretch} pussy as the water flows down your body.")
@@ -232,7 +245,8 @@ func _run():
 		addButton("Cum!", "", "masturbate_vaginalcum")
 	
 	if(state == "masturbate_vaginalcum"):
-		playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.Showering, "rub", {pc="pc", pcCum=true, bodyState={naked=true,hard=true}})
+		#playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		if(GM.pc.hasPerk(Perk.NakedNoShame)):
 			saynn("You let out an orgasmic cry as you're pushed over the edge from fingering yourself, your {pc.vaginaStretch} pussy covering your hands and thighs with girlcum.")
 			if(GM.pc.isWearingChastityCage()):
@@ -256,7 +270,8 @@ func _run():
 #Is now a bad time to say im not into most of solo-anal or anal fingering and don't really know how write it?
 
 	if(state == "masturbate_anal"):
-		playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.Showering, "rub", {pc="pc", bodyState={naked=true,hard=true}})
+		#playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		if(GM.pc.hasPerk(Perk.NakedNoShame)):
 			saynn("Making a decision you reach behind yourself and start fooling around with your ass, giving yourself a loud spank and spreading your asscheeks.")
 			saynn("Having left all your stuff in a locker, looks like your stuck fingering yourself. Oh well.")
@@ -322,7 +337,8 @@ func _run():
 		addButton("Cum!", "Cum!", "masturbate_analcum")
 		
 	if(state == "masturbate_analcum"):
-		playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		#playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.Showering, "rub", {pc="pc", pcCum=true, bodyState={naked=true,hard=true}})
 		if(GM.pc.hasPerk(Perk.NakedNoShame)):
 			saynn("You start you hammer your fingers faster as your orgasm hits. Letting out a loud moan as you go at it.")
 			#Herm
@@ -396,7 +412,9 @@ func _run():
 
 
 	if(state == "masturbate_milk"):
-		playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.Showering, "body", {pc="pc", bodyState={naked=true,hard=true}})
+		
+		#playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		if(GM.pc.hasEffect(StatusEffect.SoreNipplesAfterMilking)):
 			saynn("having a relaxed shower like this helps your sore nipples feel better, you could probably milk yourself even with them still sore...")
 		else:
@@ -439,7 +457,8 @@ func _run():
 		addButton("Cum!", "", "masturbate_milkcum")
 	
 	if(state == "masturbate_milkcum"):
-		playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		#playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.Showering, "body", {pc="pc", bodyState={naked=true,hard=true}})
 		
 		saynn("Your orgasm washes over you as you keep pinching at your nipples, overstimulating yourself while trying to milk yourself.")
 		if(GM.pc.hasPerk(Perk.NakedNoShame)):

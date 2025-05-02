@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://UI/AutoTranslatorMenu/AutoTranslatorMenu.gd" type="Script" id=1]
+[ext_resource path="res://UI/AutoTranslatorMenu/TranslatorsList.tscn" type="PackedScene" id=2]
 
 [node name="AutoTranslatorMenu" type="Control"]
 anchor_right = 1.0
@@ -21,7 +22,7 @@ size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 margin_right = 1280.0
-margin_bottom = 465.0
+margin_bottom = 541.0
 size_flags_horizontal = 3
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
@@ -120,6 +121,27 @@ margin_right = 1280.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 
+[node name="HBoxContainer6" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 469.0
+margin_right = 1280.0
+margin_bottom = 541.0
+
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6"]
+margin_top = 29.0
+margin_right = 638.0
+margin_bottom = 43.0
+size_flags_horizontal = 3
+text = "Translator orders"
+
+[node name="TranslatorsList" parent="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 642.0
+margin_right = 1280.0
+margin_bottom = 72.0
+rect_clip_content = true
+size_flags_horizontal = 3
+
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
 margin_top = 620.0
 margin_right = 1280.0
@@ -137,4 +159,6 @@ text = "Save and close"
 [connection signal="item_selected" from="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/LanguageList" to="." method="_on_LanguageList_item_selected"]
 [connection signal="toggled" from="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/EnableManualTranslateButton" to="." method="_on_EnableManualTranslateButton_toggled"]
 [connection signal="toggled" from="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/TranslateButtonsButton" to="." method="_on_TranslateButtonsButton_toggled"]
+[connection signal="onDownPressed" from="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/TranslatorsList" to="." method="_on_TranslatorsList_onDownPressed"]
+[connection signal="onUpPressed" from="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/TranslatorsList" to="." method="_on_TranslatorsList_onUpPressed"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]

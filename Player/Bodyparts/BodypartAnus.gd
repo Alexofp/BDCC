@@ -51,3 +51,15 @@ func getRevealMessage():
 
 func supportsSkin():
 	return false
+
+func getTransformMorphMessage(_context:Dictionary) -> String:
+	var theChar = getCharacter()
+	var hasVag:bool = false
+	if(theChar != null && theChar.hasVagina()):
+		hasVag = true
+	var hasWomb:bool = hasTrait(PartTrait.AnusWomb)
+	if(hasWomb):
+		if(hasVag):
+			return "{npc.YouHe} {npc.youVerb('feel')} a tingling at {npc.yourHis} rear, and suddenly, {npc.yourHis} anus begins to change. The shape shifts, becoming more pronounced and adorned with new textures. The change is much bigger than it looks on the outside.. This new tailhole now shares a womb with {npc.yourHis} pussy, intertwining their functions."
+		return "{npc.YouHe} {npc.youVerb('feel')} a tingling at {npc.yourHis} rear, and suddenly, {npc.yourHis} anus begins to change. The shape shifts, becoming more pronounced and adorned with new textures. The change is much bigger than it looks on the outside.. A womb forms inside {npc.youHim}, connected to your tailhole."
+	return "{npc.YouHe} {npc.youVerb('feel')} a tingling at {npc.yourHis} rear, and suddenly, {npc.yourHis} anus begins to change. The shape shifts, becoming more pronounced and adorned with new textures. The change is significant, yet it kept {npc.yourHis} current tightness. {npc.YouHe} now {npc.youVerb('have', 'has')} "+getAVulgarName()+"."

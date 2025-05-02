@@ -63,7 +63,7 @@ nodes/CuffsBlend/position = Vector2( 440, 160 )
 nodes/StateMachine/node = SubResource( 1051 )
 nodes/StateMachine/position = Vector2( 160, 100 )
 nodes/output/position = Vector2( 680, 180 )
-node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=460]
 
@@ -118,7 +118,7 @@ nodes/CuffsBlend/position = Vector2( 440, 160 )
 nodes/StateMachine/node = SubResource( 1066 )
 nodes/StateMachine/position = Vector2( 175.468, 138.684 )
 nodes/output/position = Vector2( 680, 180 )
-node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=473]
 
@@ -173,7 +173,7 @@ nodes/CuffsBlend/position = Vector2( 440, 160 )
 nodes/StateMachine/node = SubResource( 1077 )
 nodes/StateMachine/position = Vector2( 203.468, 148.684 )
 nodes/output/position = Vector2( 680, 180 )
-node_connections = [ "output", 0, "CuffsBlend", "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation" ]
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=1055]
 

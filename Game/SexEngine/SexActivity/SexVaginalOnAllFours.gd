@@ -66,11 +66,15 @@ func getPoseDescriptor():
 		return " in a behind pose"
 	if(currentPose == POSE_MATINGPRESS):
 		return " in a mating press"
+	if(currentPose == POSE_LOWDOGGY):
+		return " on all fours"
 	if(currentPose == POSE_LEGRAISED):
 		return " with one leg raised"
 	if(currentPose == POSE_AGAINSTWALL):
 		return " against a wall"
 	if(currentPose == POSE_PINNEDWALL):
+		return " pinned against a wall"
+	if(currentPose == POSE_WALLPRESS):
 		return " pinned against a wall"
 	return " [color=red]FIX DESCRIPTOR[/color]"
 
@@ -82,9 +86,11 @@ const POSE_FULLNELSON = "POSE_FULLNELSON"
 const POSE_CHOKEFUCK = "POSE_CHOKEFUCK"
 const POSE_BEHIND = "POSE_BEHIND"
 const POSE_MATINGPRESS = "POSE_MATINGPRESS"
+const POSE_LOWDOGGY = "POSE_LOWDOGGY"
 const POSE_LEGRAISED = "POSE_LEGRAISED"
 const POSE_AGAINSTWALL = "POSE_AGAINSTWALL"
 const POSE_PINNEDWALL = "POSE_PINNEDWALL"
+const POSE_WALLPRESS = "POSE_WALLPRESS"
 
 
 const PoseToName = {
@@ -96,9 +102,11 @@ const PoseToName = {
 	POSE_CHOKEFUCK: "Choke fuck",
 	POSE_BEHIND: "Behind",
 	POSE_MATINGPRESS: "Mating Press",
+	POSE_LOWDOGGY: "Low Doggy",
 	POSE_LEGRAISED: "Raised leg",
 	POSE_AGAINSTWALL: "Against a wall",
 	POSE_PINNEDWALL: "Pinned into wall",
+	POSE_WALLPRESS: "Wall Press",
 }
 const PoseToAnimName = {
 	POSE_DEFAULT: StageScene.SexAllFours,
@@ -109,9 +117,11 @@ const PoseToAnimName = {
 	POSE_CHOKEFUCK: StageScene.Choking,
 	POSE_BEHIND: StageScene.SexBehind,
 	POSE_MATINGPRESS: StageScene.SexMatingPress,
+	POSE_LOWDOGGY: StageScene.SexLowDoggy,
 	POSE_LEGRAISED: StageScene.SexPawLick,
 	POSE_AGAINSTWALL: StageScene.SexStanding,
 	POSE_PINNEDWALL: StageScene.SexPinnedBehind,
+	POSE_WALLPRESS: StageScene.SexAgainstWall,
 }
 func getAvaiablePoses():
 	if(currentPose == POSE_CHOKEFUCK):
@@ -119,13 +129,19 @@ func getAvaiablePoses():
 	
 	if(getSexType() == SexType.DefaultSex):
 		if(subInfo.isUnconscious()):
-			return [POSE_ALLFOURS, POSE_MISSONARY, POSE_FULLNELSON, POSE_BEHIND, POSE_MATINGPRESS]
+			var possible:= [POSE_ALLFOURS, POSE_MISSONARY, POSE_FULLNELSON, POSE_BEHIND, POSE_MATINGPRESS, POSE_LOWDOGGY]
+		
+			if(getSexEngine() != null && getSexEngine().hasWallsNearby()):
+				possible.append(POSE_WALLPRESS)
+		
+			return possible
 		else:
-			var possible:= [POSE_ALLFOURS, POSE_STANDING, POSE_MISSONARY, POSE_FULLNELSON, POSE_BEHIND, POSE_MATINGPRESS, POSE_LEGRAISED]
+			var possible:= [POSE_ALLFOURS, POSE_STANDING, POSE_MISSONARY, POSE_FULLNELSON, POSE_BEHIND, POSE_MATINGPRESS, POSE_LEGRAISED, POSE_LOWDOGGY]
 			
 			if(getSexEngine() != null && getSexEngine().hasWallsNearby()):
 				possible.append(POSE_AGAINSTWALL)
 				possible.append(POSE_PINNEDWALL)
+				possible.append(POSE_WALLPRESS)
 			
 			return possible
 	
@@ -140,6 +156,16 @@ func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: Sex
 		return false
 	
 	return .canStartActivity(_sexEngine, _domInfo, _subInfo)
+
+func isActivityImpossibleShouldStop() -> bool:
+	if(!getDom().hasReachablePenis() && !getDom().isWearingStrapon()):
+		return true
+	if(usedBodypart == BodypartSlot.Vagina && !getSub().hasReachableVagina()):
+		return true
+	if(usedBodypart == BodypartSlot.Anus && !getSub().hasReachableAnus()):
+		return true
+		
+	return false
 
 func getVisibleName():
 	return "Vaginal"
@@ -208,7 +234,11 @@ func getStartTextForPose(thePose):
 	var text = ""
 	if(thePose == POSE_ALLFOURS):
 		text = RNG.pick([
-			"{dom.You} {dom.youVerb('put')} {sub.you} on all fours and {dom.youVerb('position')} {dom.yourself} behind {sub.your} butt with {dom.yourHis} "+getDickName()+" out and presses it against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
+			"{dom.You} {dom.youVerb('put')} {sub.you} on all fours and {dom.youVerb('position')} {dom.yourself} behind {sub.your} butt with {dom.yourHis} "+getDickName()+" out and {dom.youVerb('press', 'presses')} it against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
+		])
+	elif(thePose == POSE_LOWDOGGY):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('put')} {sub.you} on all fours and {dom.youVerb('position')} {dom.yourself} behind {sub.your} butt with {dom.yourHis} "+getDickName()+" out and {dom.youVerb('press', 'presses')} it against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
 		])
 	elif(thePose == POSE_STANDING):
 		text = RNG.pick([
@@ -228,7 +258,7 @@ func getStartTextForPose(thePose):
 		])
 	elif(thePose == POSE_MATINGPRESS):
 		text = RNG.pick([
-			"{dom.You} {dom.youVerb('pin')} {sub.you} firmly against the floor in a mating press position, folding {sub.yourHis} legs up toward {sub.yourHis} shoulders. {dom.You} {dom.youVerb('press')} {dom.yourself} close, aligning {dom.yourHis} "+getDickName()+" against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
+			"{dom.You} {dom.youVerb('pin')} {sub.you} firmly against the floor in a mating press position, folding {sub.yourHis} legs up toward {sub.yourHis} shoulders. {dom.You} {dom.youVerb('press', 'presses')} {dom.yourself} close, aligning {dom.yourHis} "+getDickName()+" against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
 		])
 	elif(thePose == POSE_LEGRAISED):
 		text = RNG.pick([
@@ -236,21 +266,29 @@ func getStartTextForPose(thePose):
 		])
 	elif(thePose == POSE_AGAINSTWALL):
 		text = RNG.pick([
-			"{dom.You} {dom.youVerb('press')} {sub.you} firmly against the wall, {sub.yourHis} hands braced against it for support. {dom.You} {dom.youVerb('position')} {dom.yourself} behind, letting {dom.yourHis} "+getDickName()+" press against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
+			"{dom.You} {dom.youVerb('press', 'presses')} {sub.you} firmly against the wall, {sub.yourHis} hands braced against it for support. {dom.You} {dom.youVerb('position')} {dom.yourself} behind, letting {dom.yourHis} "+getDickName()+" press against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
 		])
 	elif(thePose == POSE_PINNEDWALL):
 		text = RNG.pick([
 			"{dom.You} {dom.youVerb('pin')} {sub.you} against the wall, {sub.yourHis} hands instinctively reaching up to grab it for stability. {dom.You} {dom.youVerb('get')} a hold of one of {sub.yourHis} legs and {dom.youVerb('press', 'presses')} {dom.yourHis} "+getDickName()+" against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
 		])
+	elif(thePose == POSE_WALLPRESS):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('pin')} {sub.you} firmly against the wall, legs raised high, {sub.yourHis} hands reaching out to grab {dom.yourHis} shoulders. {dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} "+getDickName()+" against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
+		])
 	else:
 		text = RNG.pick([
-			"{dom.You} {dom.youVerb('position')} {dom.yourself} behind {sub.your} butt with {dom.yourHis} "+getDickName()+" out and presses it against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
+			"{dom.You} {dom.youVerb('position')} {dom.yourself} behind {sub.your} butt with {dom.yourHis} "+getDickName()+" out and {dom.youVerb('press', 'presses')} it against {sub.yourHis} "+getUsedBodypartName()+throughClothing,
 		])
 	return text
 	
 func getSwitchPoseTextForPose(thePose):
 	var text = ""
 	if(thePose == POSE_ALLFOURS):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('put')} {sub.you} on all fours and {dom.youVerb('position')} {dom.yourself} behind {sub.your} butt, {dom.yourHis} "+getDickName()+" still inside {sub.yourHis} "+getUsedBodypartName()+"!",
+		])
+	elif(thePose == POSE_LOWDOGGY):
 		text = RNG.pick([
 			"{dom.You} {dom.youVerb('put')} {sub.you} on all fours and {dom.youVerb('position')} {dom.yourself} behind {sub.your} butt, {dom.yourHis} "+getDickName()+" still inside {sub.yourHis} "+getUsedBodypartName()+"!",
 		])
@@ -280,11 +318,15 @@ func getSwitchPoseTextForPose(thePose):
 		])
 	elif(thePose == POSE_AGAINSTWALL):
 		text = RNG.pick([
-			"{dom.You} {dom.youVerb('press')} {sub.you} firmly against the wall, {sub.yourHis} hands braced against it for support. {dom.You} {dom.youVerb('position')} {dom.yourself} behind, {dom.yourHis} "+getDickName()+" is still inside {sub.yourHis} "+getUsedBodypartName()+"!",
+			"{dom.You} {dom.youVerb('press', 'presses')} {sub.you} firmly against the wall, {sub.yourHis} hands braced against it for support. {dom.You} {dom.youVerb('position')} {dom.yourself} behind, {dom.yourHis} "+getDickName()+" is still inside {sub.yourHis} "+getUsedBodypartName()+"!",
 		])
 	elif(thePose == POSE_PINNEDWALL):
 		text = RNG.pick([
 			"{dom.You} {dom.youVerb('pin')} {sub.you} against the wall, {sub.yourHis} hands instinctively reaching up to grab it for stability. {dom.YourHis} "+getDickName()+" is still inside {sub.yourHis} "+getUsedBodypartName()+"!",
+		])
+	elif(thePose == POSE_WALLPRESS):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('pin')} {sub.you} firmly against the wall, legs raised high, {sub.yourHis} hands reaching out to grab {dom.yourHis} shoulders. {dom.YourHis} "+getDickName()+" is still inside {sub.yourHis} "+getUsedBodypartName()+"!",
 		])
 	else:
 		text = RNG.pick([

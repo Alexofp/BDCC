@@ -70,6 +70,11 @@ func getDomTags():
 func getSubTags():
 	return [SexActivityTag.PenisUsed, SexActivityTag.PenisInside]
 	
+func isActivityImpossibleShouldStop() -> bool:
+	if(!getSub().hasReachablePenis()):
+		return true
+	return false
+	
 func startActivity(_args):
 	state = ""
 	

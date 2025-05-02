@@ -2,6 +2,8 @@ extends Control
 onready var datapack_item_list = $DatapackViewer/VBoxContainer/HBoxContainer/DatapackItemList
 onready var datapack_desc_label = $DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer/DatapackDescLabel
 onready var new_pack_confirmation_dialog = $DatapackViewer/NewPackConfirmationDialog
+onready var edit_datapack_button = $DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer/EditDatapackButton
+onready var delete_datapack_button = $DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer/DeleteDatapackButton
 onready var export_datapack_button = $DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer/ExportDatapackButton
 onready var import_pack_button = $DatapackViewer/VBoxContainer/GridContainer/ImportPackButton
 
@@ -168,6 +170,9 @@ func _on_DatapackItemList_item_selected(index):
 		var datapack:Datapack = datapacksList[index]
 		
 		updateDatapackDesc(datapack)
+		var isStatic:bool = datapack.isStaticDatapack()
+		edit_datapack_button.disabled = isStatic
+		delete_datapack_button.disabled = isStatic
 
 func _on_DatapackFolderButton_pressed():
 	if(OS.get_name() == "Android"):

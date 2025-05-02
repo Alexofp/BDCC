@@ -741,3 +741,42 @@ static func distanceToHalfWithIntervalEased(value: float, halfpoint: float = 0.5
 		return ease_in_out(-(value - (halfpoint + intervalWidth)) / intervalWidth)
 	else:
 		return 0.0
+
+static func folderExists(path:String) -> bool:
+	var dir := Directory.new()
+	
+	if dir.open(path) == OK:
+		return true
+	return false
+
+# EXAMPLE: if(Util.hasCommandLineArgument("-noRegistryCache")):
+static func hasCommandLineArgument(_theArg:String) -> bool:
+	for argument in OS.get_cmdline_args():
+		if(argument == _theArg):
+			return true
+	return false
+
+static func tryFixColor(_colorVal, allowNull:bool = true):
+	if(_colorVal == null):
+		if(allowNull):
+			return null
+		else:
+			Log.printerr("Null color detected in tryFixColor: "+str(_colorVal))
+			return Color.black
+	if(_colorVal is Color):
+		return _colorVal
+	if(!(_colorVal is String)):
+		Log.printerr("Bad color detected in tryFixColor: "+str(_colorVal))
+		return Color.black
+	
+	if("," in _colorVal):
+		var nums:Array = _colorVal.split(",")
+		if(nums.size() != 3 && nums.size() != 4):
+			Log.printerr("Bad color detected in tryFixColor: "+str(_colorVal))
+			return Color.black
+		var rVal:float = float(nums[0])
+		var gVal:float = float(nums[1])
+		var bVal:float = float(nums[2])
+		return Color(rVal, gVal, bVal)
+	else:
+		return Color(_colorVal)

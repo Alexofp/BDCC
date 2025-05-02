@@ -19,3 +19,6 @@ func getTraits():
 	return {
 		PartTrait.PenisKnot: true,
 	}
+
+func getVulgarName() -> String:
+	return "knotted canine cock"

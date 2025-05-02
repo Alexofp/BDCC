@@ -19,6 +19,7 @@ var sexType:SexTypeBase
 
 var disabledGoals:Dictionary = {}
 var bondageDisabled:bool = false
+var subMustGoUnconscious:bool = false
 
 func initSexType(theSexType, args:Dictionary = {}):
 	if(theSexType is String):
@@ -37,6 +38,8 @@ func initSexType(theSexType, args:Dictionary = {}):
 		
 	if(args.has("bondageDisabled")):
 		bondageDisabled = args["bondageDisabled"]
+	if(args.has("subMustGoUnconscious")):
+		subMustGoUnconscious = args["subMustGoUnconscious"]
 		
 	if(sexType != null):
 		sexType.setSexEngine(self)
@@ -148,6 +151,14 @@ func getExtraData():
 	result = combineData(result, getExposedBodypartsNewData())
 	return result
 
+func getExtraDataLessImportant():
+	var result = null
+	for domID in doms:
+		result = combineData(result, doms[domID].getExtraOutputData(true))
+	for subID in subs:
+		result = combineData(result, subs[subID].getExtraOutputData(false))
+	return result
+
 func makeActivity(id, theDomID, theSubID):
 	var activityObject = GlobalRegistry.createSexActivity(id)
 	if(activityObject == null):
@@ -205,9 +216,9 @@ func combineData(firstData, secondData):
 	for data in [firstData, secondData]:
 		if(data.has("text") && data["text"] != null && data["text"] != ""):
 			texts.append(data["text"])
-		if(data.has("domSay") && data["domSay"] != null):
+		if(data.has("domSay") && data["domSay"] != null && data["domSay"] != ""):
 			domSays.append(data["domSay"])
-		if(data.has("subSay") && data["subSay"] != null):
+		if(data.has("subSay") && data["subSay"] != null && data["subSay"] != ""):
 			subSays.append(data["subSay"])
 		
 	var resultData = {}
@@ -302,6 +313,7 @@ func generateGoals():
 					
 					if(sexGoal.isPossible(self, personDomInfo, personSubInfo, goalData) && !sexGoal.isCompleted(self, personDomInfo, personSubInfo, goalData)):
 						var goalWeightModifier = GM.main.getEncounterSettings().getGoalWeight(sexGoal.id, sexGoal.getGoalDefaultWeight())
+						goalWeightModifier *= sub.getSexGoalSubWeightModifier(sexGoal.id, domID)
 						var goalObject = [[goal[0], sub.getID(), goalData], goal[1] * goalWeightModifier]
 						
 						possibleGoals.append(goalObject)
@@ -400,6 +412,9 @@ func areSexTypesSupportedForActivity(activity):
 	return areSexTypesSupported(supportedSexTypes)
 
 func hasGoal(thedominfo, goal, thesubinfo):
+	if(goal == SexGoal.SubMakeUnconscious && subMustGoUnconscious):
+		return true
+	
 	for goalInfo in thedominfo.goals:
 		if(goalInfo[1] == thesubinfo.charID):
 			if(goalInfo[0] == goal):
@@ -526,6 +541,7 @@ func checkFailedAndCompletedGoals():
 				domInfo.goals.remove(i)
 
 func removeEndedActivities():
+	checkImpossibleActivities()
 	for i in range(activities.size() - 1, -1, -1):
 		if(activities[i].hasEnded):
 			activities.remove(i)
@@ -570,6 +586,7 @@ func processTurn():
 		result = combineData(result, processedData)
 
 	result = combineData(result, (getExtraData()))
+	result = combineData(result, (getExtraDataLessImportant()))
 	
 	sendProcessedData(result)
 	
@@ -1044,6 +1061,15 @@ func sexShouldEnd():
 	if(isDom("pc") && getDomInfo("pc").canDoActions()):
 		return false
 		
+	if(subMustGoUnconscious):
+		var hasAnyHealthySubs:bool = false
+		for subID in subs:
+			var subInfo = subs[subID]
+			if(!subInfo.isUnconscious()):
+				hasAnyHealthySubs = true
+		if(!hasAnyHealthySubs):
+			return true
+		
 	var hasAnyHealthyDoms:bool = false
 	for domID in doms:
 		var domInfo = doms[domID]
@@ -1343,6 +1369,15 @@ func hasWallsNearby() -> bool:
 	
 	return false
 
+func checkImpossibleActivities():
+	var activityAmount:int = activities.size()
+	for _i in range(activityAmount):
+		var acIndex:int = activityAmount - _i - 1
+		var theActivity = activities[acIndex]
+		
+		if(theActivity.isActivityImpossibleShouldStop()):
+			theActivity.endActivity()
+
 func saveData():
 	var data = {
 		"revealedBodyparts": revealedBodyparts,
@@ -1352,6 +1387,7 @@ func saveData():
 		"sexEnded": sexEnded,
 		"sexResult": sexResult,
 		"bondageDisabled": bondageDisabled,
+		"subMustGoUnconscious": subMustGoUnconscious,
 	}
 	if(sexType != null):
 		data["sexTypeID"] = sexType.id
@@ -1385,6 +1421,7 @@ func loadData(data):
 	sexEnded = SAVE.loadVar(data, "sexEnded", false)
 	sexResult = SAVE.loadVar(data, "sexResult", {})
 	bondageDisabled = SAVE.loadVar(data, "bondageDisabled", false)
+	subMustGoUnconscious = SAVE.loadVar(data, "subMustGoUnconscious", false)
 	
 	var sexTypeID = SAVE.loadVar(data, "sexTypeID", SexType.DefaultSex)
 	var theSexType = GlobalRegistry.createSexType(sexTypeID)

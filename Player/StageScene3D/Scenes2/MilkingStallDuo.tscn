@@ -1,0 +1,247 @@
+[gd_scene load_steps=56 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes2/MilkingStallDuo.gd" type="Script" id=4]
+[ext_resource path="res://Player/Props/MilkingStall.png" type="Texture" id=5]
+[ext_resource path="res://Player/Props/MilkTank.png" type="Texture" id=6]
+[ext_resource path="res://Player/Props/MilkingStall_behind.png" type="Texture" id=7]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=1359]
+animation = "MilkingSoloCum_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=1360]
+animation = "MilkingSoloFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=1361]
+animation = "MilkingSoloStart_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=1362]
+animation = "MilkingSolo_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=1363]
+animation = "MilkingSolo_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1364]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1365]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1366]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1367]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1368]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1369]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1370]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1371]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1372]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1373]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1374]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1375]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1376]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1377]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1378]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1379]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1380]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1381]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1382]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1383]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=1384]
+states/MilkingSoloCum_1-loop/node = SubResource( 1359 )
+states/MilkingSoloCum_1-loop/position = Vector2( 829, 148 )
+states/MilkingSoloFast_1-loop/node = SubResource( 1360 )
+states/MilkingSoloFast_1-loop/position = Vector2( 611, 308 )
+states/MilkingSoloStart_1-loop/node = SubResource( 1361 )
+states/MilkingSoloStart_1-loop/position = Vector2( 431, -7 )
+states/MilkingSolo_1-loop/node = SubResource( 1363 )
+states/MilkingSolo_1-loop/position = Vector2( 140, 123 )
+"states/MilkingSolo_1-loop 2/node" = SubResource( 1362 )
+"states/MilkingSolo_1-loop 2/position" = Vector2( 295, 308 )
+transitions = [ "MilkingSoloStart_1-loop", "MilkingSolo_1-loop", SubResource( 1364 ), "MilkingSolo_1-loop", "MilkingSoloStart_1-loop", SubResource( 1365 ), "MilkingSoloStart_1-loop", "MilkingSolo_1-loop 2", SubResource( 1366 ), "MilkingSolo_1-loop 2", "MilkingSoloStart_1-loop", SubResource( 1367 ), "MilkingSoloFast_1-loop", "MilkingSoloStart_1-loop", SubResource( 1368 ), "MilkingSoloStart_1-loop", "MilkingSoloFast_1-loop", SubResource( 1369 ), "MilkingSoloStart_1-loop", "MilkingSoloCum_1-loop", SubResource( 1370 ), "MilkingSoloCum_1-loop", "MilkingSoloStart_1-loop", SubResource( 1371 ), "MilkingSolo_1-loop", "MilkingSolo_1-loop 2", SubResource( 1372 ), "MilkingSolo_1-loop 2", "MilkingSolo_1-loop", SubResource( 1373 ), "MilkingSolo_1-loop 2", "MilkingSoloFast_1-loop", SubResource( 1374 ), "MilkingSoloFast_1-loop", "MilkingSolo_1-loop 2", SubResource( 1375 ), "MilkingSoloFast_1-loop", "MilkingSoloCum_1-loop", SubResource( 1376 ), "MilkingSoloCum_1-loop", "MilkingSoloFast_1-loop", SubResource( 1377 ), "MilkingSoloFast_1-loop", "MilkingSolo_1-loop", SubResource( 1378 ), "MilkingSolo_1-loop", "MilkingSoloFast_1-loop", SubResource( 1379 ), "MilkingSolo_1-loop 2", "MilkingSoloCum_1-loop", SubResource( 1380 ), "MilkingSoloCum_1-loop", "MilkingSolo_1-loop 2", SubResource( 1381 ), "MilkingSolo_1-loop", "MilkingSoloCum_1-loop", SubResource( 1382 ), "MilkingSoloCum_1-loop", "MilkingSolo_1-loop", SubResource( 1383 ) ]
+start_node = "MilkingSoloStart_1-loop"
+graph_offset = Vector2( -60, -11 )
+
+[sub_resource type="AnimationNodeBlendTree" id=1385]
+graph_offset = Vector2( -209.114, 48.2959 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 1384 )
+nodes/StateMachine/position = Vector2( 35.886, 62.2959 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=460]
+
+[sub_resource type="AnimationNodeAdd2" id=1398]
+
+[sub_resource type="AnimationNodeAnimation" id=1399]
+animation = "MilkingSolo_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=1400]
+animation = "MilkingSoloFlat_2-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=1401]
+graph_offset = Vector2( -391.24, 16.96 )
+nodes/Add2/node = SubResource( 1398 )
+nodes/Add2/position = Vector2( 80, 120 )
+nodes/Animation/node = SubResource( 1400 )
+nodes/Animation/position = Vector2( -260, 80 )
+"nodes/Animation 2/node" = SubResource( 1399 )
+"nodes/Animation 2/position" = Vector2( -221, 213 )
+node_connections = [ "Add2", 0, "Animation", "Add2", 1, "Animation 2", "output", 0, "Add2" ]
+
+[sub_resource type="AnimationNodeAnimation" id=1393]
+animation = "MilkingSoloFlat_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=1394]
+animation = "MilkingSolo_2-loop"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id=1395]
+blend_point_0/node = SubResource( 1393 )
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource( 1394 )
+blend_point_1/pos = 1.0
+
+[sub_resource type="AnimationNodeAnimation" id=1386]
+animation = "MilkingSoloStart_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=1387]
+animation = "MilkingSolo_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1388]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1389]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1396]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1397]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1402]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=1403]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=1390]
+states/1BreastSize_2-loop/node = SubResource( 1401 )
+states/1BreastSize_2-loop/position = Vector2( 621, 176 )
+states/BreastSize_2-loop/node = SubResource( 1395 )
+states/BreastSize_2-loop/position = Vector2( 393, 199 )
+states/MilkingSoloStart_2-loop/node = SubResource( 1386 )
+states/MilkingSoloStart_2-loop/position = Vector2( 467, 39 )
+states/MilkingSolo_2-loop/node = SubResource( 1387 )
+states/MilkingSolo_2-loop/position = Vector2( 168, 132 )
+transitions = [ "MilkingSoloStart_2-loop", "MilkingSolo_2-loop", SubResource( 1388 ), "MilkingSolo_2-loop", "MilkingSoloStart_2-loop", SubResource( 1389 ), "MilkingSoloStart_2-loop", "BreastSize_2-loop", SubResource( 1396 ), "BreastSize_2-loop", "MilkingSoloStart_2-loop", SubResource( 1397 ), "MilkingSoloStart_2-loop", "1BreastSize_2-loop", SubResource( 1402 ), "1BreastSize_2-loop", "MilkingSoloStart_2-loop", SubResource( 1403 ) ]
+start_node = "MilkingSoloStart_2-loop"
+graph_offset = Vector2( -6, -21 )
+
+[sub_resource type="AnimationNodeBlendTree" id=1391]
+graph_offset = Vector2( -264.691, -24.5134 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 1390 )
+nodes/StateMachine/position = Vector2( 140, 100 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1392]
+
+[node name="MilkingStallDuo" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13326, 0, 0 )
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.317465, -0.553263 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.570413, 0.0337869, 0 )
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -0.570413, 0.0337869, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 1385 )
+anim_player = NodePath("../Doll3D/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 460 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 1391 )
+anim_player = NodePath("../Doll3D2/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 1392 )
+parameters/StateMachine/1BreastSize_2-loop/Add2/add_amount = 0
+parameters/StateMachine/BreastSize_2-loop/blend_position = 0
+
+[node name="Sprite3D2" type="Sprite3D" parent="." index="5"]
+transform = Transform( 0.919, 0, 0, 0, 0.919, 0, 0, 0, 0.919, 0, 4.45785, 0.888011 )
+texture = ExtResource( 5 )
+
+[node name="Sprite3D4" type="Sprite3D" parent="." index="6"]
+transform = Transform( 0.919, 0, 0, 0, 0.919, 0, 0, 0, 0.919, -2.54448, 2.2431, -1.57028 )
+texture = ExtResource( 7 )
+
+[node name="Sprite3D3" type="Sprite3D" parent="." index="7"]
+transform = Transform( 0.793, 0, 0, 0, 0.793, 0, 0, 0, 0.793, -0.628634, 1.49904, 0.884325 )
+texture = ExtResource( 6 )
+
+[node name="TopPipe" type="Position3D" parent="." index="8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.57328, 7.19899, -0.243 )
+
+[node name="BottomPipe" type="Position3D" parent="." index="9"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.90338, 3.75183, 0.0307035 )

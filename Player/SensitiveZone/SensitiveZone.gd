@@ -17,7 +17,10 @@ var zoneName:String = "FILL ME"
 var zoneNameIs:String = "is"
 
 func getArousalGainModifier() -> float:
-	return getSensitivity()
+	var theSensitivity:float = getSensitivity()
+	if(theSensitivity >= 1.0):
+		return pow(theSensitivity, 0.2)*2.0 - 1.0
+	return theSensitivity
 
 func getSensitivityGainModifier() -> float:
 	return 1.0 * (1.0 + max(-1.0, getCustomAttribute(BuffAttribute.SensitivityGainAll)))
@@ -215,6 +218,11 @@ func shouldShowOverstimualtedTextInSexEngine(_sexInfo) -> bool:
 		
 func generateDataFor(_dynamicCharacter):
 	pass
+
+func addSensitivity(howMuch:float):
+	sensitivity += howMuch
+	if(sensitivity < 0.1):
+		sensitivity = 0.1
 
 func saveData():
 	var data = {

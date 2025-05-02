@@ -29,6 +29,8 @@ var IS:InteractionSystem = InteractionSystem.new()
 var RS:RelationshipSystem = RelationshipSystem.new()
 var WHS:WorldHistory = WorldHistory.new()
 var SAB:SlaveAuctionBidders = SlaveAuctionBidders.new()
+var SCI:Science = Science.new()
+var DrugDenRun:DrugDen
 
 var staticCharacters = {}
 var charactersToUpdate = {}
@@ -95,10 +97,10 @@ func createStaticCharacters():
 	Util.delete_children(charactersNode)
 	staticCharacters.clear()
 	
-	var characterClasses = GlobalRegistry.getCharacterClasses()
-	for charID in characterClasses:
-		var character = characterClasses[charID]
-		var characterObject = character.new()
+	#var characterClasses = GlobalRegistry.getCharacterClasses()
+	for charID in GlobalRegistry.getCharacterClasses():
+		#var character = characterClasses[charID]
+		var characterObject = GlobalRegistry.createStaticCharacter(charID)
 		staticCharacters[characterObject.id] = characterObject
 		charactersNode.add_child(characterObject)
 	
@@ -412,6 +414,13 @@ func applyWorldEdit(id):
 		worldEdits[id].apply(GM.world)
 
 func canSave():
+	if(isInDungeon() && !OPTIONS.canSaveInDungeons()):
+		return false
+	return true
+
+func canRollback():
+	if(isInDungeon() && !OPTIONS.canSaveInDungeons()):
+		return false
 	return true
 
 func supportsBattleTurns():
@@ -457,6 +466,8 @@ func saveData():
 	data["interactionSystem"] = IS.saveData()
 	data["relationshipSystem"] = RS.saveData()
 	data["auctionBidders"] = SAB.saveData()
+	data["science"] = SCI.saveData()
+	data["drugDen"] = DrugDenRun.saveData() if DrugDenRun != null else null
 	
 	data["scenes"] = []
 	for scene in sceneStack:
@@ -491,6 +502,8 @@ func loadData(data):
 	IS.loadData(SAVE.loadVar(data, "interactionSystem", {}))
 	RS.loadData(SAVE.loadVar(data, "relationshipSystem", {}))
 	SAB.loadData(SAVE.loadVar(data, "auctionBidders", {}))
+	SCI.loadData(SAVE.loadVar(data, "science", {}))
+		
 	
 	var scenes = SAVE.loadVar(data, "scenes", [])
 	
@@ -515,9 +528,18 @@ func loadData(data):
 	
 	IS.resetExtraText()
 	GM.ui.recreateWorld()
+	
+	if(data.has("drugDen") && data["drugDen"] is Dictionary):
+		DrugDenRun = DrugDen.new()
+		DrugDenRun.loadData(SAVE.loadVar(data, "drugDen", {}))
+	else:
+		DrugDenRun = null
+	
 	GM.world.loadData(SAVE.loadVar(data, "world", {}))
 	#GM.world.updatePawns(IS)
 	#GM.world.setPawnsShowed(canShowPawns())
+
+	GM.pc.checkLocation()
 
 func saveCharactersData():
 	var data = {}
@@ -598,6 +620,7 @@ func processTime(_seconds):
 func doTimeProcess(_seconds):
 	# This splits long sleeping times into 1 hour chunks
 	IS.processTime(_seconds)
+	SCI.processTime(_seconds)
 	
 	var copySeconds = _seconds
 	while(copySeconds > 0):
@@ -670,6 +693,7 @@ func startNewDay():
 	
 	WHS.onNewDay()
 	IS.afterNewDay()
+	SCI.onNewDay()
 	
 	SAVE.triggerAutosave()
 	
@@ -923,10 +947,13 @@ func updateStuff():
 	if(GM.pc == null):
 		return
 	
+	var isDrugDen:bool = isOnDrugDenRun()
 	var playerIsBlindfolded = GM.pc.isBlindfolded()
-	GM.world.setDarknessVisible(playerIsBlindfolded)
-	if(playerIsBlindfolded):
-		if(GM.pc.canHandleBlindness()):
+	GM.world.setDarknessVisible(playerIsBlindfolded || isDrugDen)
+	if(playerIsBlindfolded || isDrugDen):
+		if(isDrugDen && !playerIsBlindfolded):
+			GM.world.setDarknessSize(64)
+		elif(GM.pc.canHandleBlindness()):
 			GM.world.setDarknessSize(64)
 		else:
 			GM.world.setDarknessSize(16)
@@ -996,6 +1023,13 @@ func showLog():
 	if(logMessages.size() > 0):
 		var scene = runScene("MessagesLogScene", [])
 		scene.sceneTag = "messageslog"
+		return true
+	return false
+
+func checkTFs():
+	var tfHolder = GM.pc.getTFHolder()
+	if(tfHolder != null && tfHolder.hasPendingTransformations()):
+		runScene("PlayerTFScene")
 		return true
 	return false
 
@@ -1321,11 +1355,54 @@ func getDebugActions():
 			"id": "toggleISDebug",
 			"name": "Toggle IS debug",
 		},
+		{
+			"id": "undoTFs",
+			"name": "Undo All TFs",
+		},
+		{
+			"id": "applyTFs",
+			"name": "Make TFs permanent",
+		},
+		{
+			"id": "forceProgressTFs",
+			"name": "Force-progress TFs",
+		},
+		{
+			"id": "accelerateTFs",
+			"name": "Accelerate TFs",
+		},
+		{
+			"id": "startTF",
+			"name": "Start TF",
+			"args": [
+				{
+					"id": "tfid",
+					"name": "TF id",
+					"type": "list",
+					"value": "Feminization",
+					"values": TFUtil.getTFListCanStart(),
+				},
+			],
+		},
+		
 	]
 
 func doDebugAction(id, args = {}):
 	print(id, " ", args)
 	
+	if(id == "forceProgressTFs"):
+		GM.pc.getTFHolder().forceProgressAll()
+	if(id == "accelerateTFs"):
+		GM.pc.getTFHolder().accelerateAllFull()
+	if(id == "startTF"):
+		if(!GM.pc.getTFHolder().canStartTransformation(args["tfid"])):
+			addMessage(args["tfid"] +" transformation is currently not possible.")
+		else:
+			GM.pc.getTFHolder().startTransformation(args["tfid"])
+	if(id == "undoTFs"):
+		GM.pc.undoAllTransformations()
+	if(id == "applyTFs"):
+		GM.pc.makeAllTransformationsPermanent()
 	if(id == "toggleISDebug"):
 		isDebuggingIS = !isDebuggingIS
 		if(isDebuggingIS):
@@ -1799,3 +1876,14 @@ func canShowPawns() -> bool:
 		if(!scene.supportsShowingPawns()):
 			return false
 	return true
+
+func isInDungeon() -> bool:
+	return DrugDenRun != null
+
+func isOnDrugDenRun() -> bool:
+	return DrugDenRun != null
+
+func stopDungeonRun():
+	if(DrugDenRun != null):
+		DrugDenRun.endRun()
+	DrugDenRun = null

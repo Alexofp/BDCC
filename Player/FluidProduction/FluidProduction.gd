@@ -42,10 +42,13 @@ func getProductionSpeedPerHour() -> float:
 func getFluidType():
 	var character = getCharacter()
 	if(character != null):
-		var theFluidType = character.getFluidType(getFluidSource())
-		if(theFluidType != null):
+		var theFluidType:String = character.getCustomFluidType(getFluidSource())
+		if(theFluidType != ""):
 			return theFluidType
 	
+	var thebodypart = getBodypart()
+	if(thebodypart != null && thebodypart.has_method("getFluidType")):
+		return thebodypart.getFluidType(getFluidSource())
 	return "Milk"
 
 func getFluidSource():
@@ -99,6 +102,9 @@ func getCharacter():
 		return null
 	var bodypartObject = getBodypart()
 	return bodypartObject.getCharacter()
+
+func setCauserID(_charID:String):
+	fluids.setCauserID(_charID)
 
 func saveData():
 	var data = {

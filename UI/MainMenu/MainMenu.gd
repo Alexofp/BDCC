@@ -239,3 +239,6 @@ func _on_InteractionCreator_pressed():
 	datapackMenu = load("res://Util/InteractionCreator/InteractionCreator.tscn").instance()
 	datapackMenu.connect("onClosePressed", self, "onDatapackMenuClosedPressed")
 	add_child(datapackMenu)
+
+func _on_QuitButton_pressed():
+	get_tree().quit()

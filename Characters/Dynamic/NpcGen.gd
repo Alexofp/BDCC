@@ -14,4 +14,5 @@ enum {
 	HasPenis,
 	Species,
 	HasVagina,
+	IsBoss,
 }

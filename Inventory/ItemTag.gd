@@ -42,6 +42,8 @@ enum {
 	RopeHarness,
 	ImaginaryRestraint,
 	
+	KeptAfterDrugDenRun,
+	
 	ITEMTAGCOUNT,
 }
 
@@ -85,6 +87,8 @@ const tagNames = [
 	
 	"RopeHarness",
 	"ImaginaryRestraint",
+	
+	"KeptAfterDrugDenRun",
 ]
 
 static func nameToTag(tagName):

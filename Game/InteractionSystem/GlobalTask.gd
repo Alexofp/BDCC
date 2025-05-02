@@ -13,6 +13,11 @@ func getMaxAssigned(_maxPawnCount:int) -> int:
 func canDoTask(_pawn:CharacterPawn) -> bool:
 	return true
 
+func shouldIgnoreCharType(_pawn:CharacterPawn) -> bool:
+	if(_pawn.canDoTaskOverride(id, self)):
+		return true
+	return false
+
 func canDoTaskFinal(_pawn:CharacterPawn) -> bool:
 	if(!_pawn.canBeInterrupted()):
 		return false

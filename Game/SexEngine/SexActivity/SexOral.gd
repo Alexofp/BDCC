@@ -745,7 +745,16 @@ func getAnimation():
 	
 	if(state in ["askingtosuck"]):
 		return [StageScene.SexOral, "tease", {pc=domID, npc=subID}]
+
+func isActivityImpossibleShouldStop() -> bool:
+	if(state in ["askingtolick", "licking", "grinding"]):
+		if(!getDom().hasReachableVagina()):
+			return true
+	if(state in ["askingtosuck", "blowjob", "deepthroat"]):
+		if(!getDom().hasReachablePenis() && !getDom().isWearingStrapon()):
+			return true
 	
+	return false
 
 func getDomOrgasmHandlePriority():
 	if(isStraponSex()):

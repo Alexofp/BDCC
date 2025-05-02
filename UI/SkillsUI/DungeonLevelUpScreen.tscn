@@ -1,0 +1,141 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
+[ext_resource path="res://UI/SkillsUI/PerkButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://UI/SkillsUI/DungeonLevelUpScreen.gd" type="Script" id=3]
+
+[node name="DungeonLevelUpScreen" type="ScrollContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 34.0
+
+[node name="LevelLabel" type="Label" parent="VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1273.0
+margin_bottom = 27.0
+text = "Welcome to level 123!"
+align = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer"]
+margin_top = 38.0
+margin_right = 1280.0
+margin_bottom = 126.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer2"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1273.0
+margin_bottom = 81.0
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer2/VBoxContainer"]
+margin_right = 1266.0
+margin_bottom = 20.0
+text = "Choose where you put 3 stat points"
+align = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/PanelContainer2/VBoxContainer"]
+margin_top = 24.0
+margin_right = 1266.0
+margin_bottom = 74.0
+
+[node name="StatList" type="HBoxContainer" parent="VBoxContainer/PanelContainer2/VBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+margin_left = 514.0
+margin_right = 752.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="StatButton" type="Button" parent="VBoxContainer/PanelContainer2/VBoxContainer/CenterContainer/StatList"]
+margin_right = 112.0
+margin_bottom = 50.0
+text = "[ Nowhere ]"
+
+[node name="StatButton2" type="Button" parent="VBoxContainer/PanelContainer2/VBoxContainer/CenterContainer/StatList"]
+margin_left = 116.0
+margin_right = 238.0
+margin_bottom = 50.0
+text = "Strength (10)"
+
+[node name="PerksPanel" type="PanelContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 130.0
+margin_right = 1280.0
+margin_bottom = 232.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PerksPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1273.0
+margin_bottom = 95.0
+
+[node name="Label" type="Label" parent="VBoxContainer/PerksPanel/VBoxContainer"]
+margin_right = 1266.0
+margin_bottom = 20.0
+text = "Choose a new perk"
+align = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/PerksPanel/VBoxContainer"]
+margin_top = 24.0
+margin_right = 1266.0
+margin_bottom = 88.0
+
+[node name="PerkList" type="HBoxContainer" parent="VBoxContainer/PerksPanel/VBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+margin_left = 533.0
+margin_right = 733.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="PerkButton" parent="VBoxContainer/PerksPanel/VBoxContainer/CenterContainer/PerkList" instance=ExtResource( 2 )]
+
+[node name="PerkButton2" parent="VBoxContainer/PerksPanel/VBoxContainer/CenterContainer/PerkList" instance=ExtResource( 2 )]
+margin_left = 68.0
+margin_right = 132.0
+
+[node name="PerkButton3" parent="VBoxContainer/PerksPanel/VBoxContainer/CenterContainer/PerkList" instance=ExtResource( 2 )]
+margin_left = 136.0
+margin_right = 200.0
+
+[node name="PanelContainer4" type="PanelContainer" parent="VBoxContainer"]
+margin_top = 236.0
+margin_right = 1280.0
+margin_bottom = 324.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer4"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1273.0
+margin_bottom = 81.0
+
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer4/VBoxContainer"]
+margin_right = 1266.0
+margin_bottom = 20.0
+text = "Let's go!"
+align = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/PanelContainer4/VBoxContainer"]
+margin_top = 24.0
+margin_right = 1266.0
+margin_bottom = 74.0
+
+[node name="ContinueButton" type="Button" parent="VBoxContainer/PanelContainer4/VBoxContainer/CenterContainer"]
+margin_left = 533.0
+margin_right = 733.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 200, 50 )
+text = "Confirm"
+
+[connection signal="pressed" from="VBoxContainer/PanelContainer4/VBoxContainer/CenterContainer/ContinueButton" to="." method="_on_ContinueButton_pressed"]

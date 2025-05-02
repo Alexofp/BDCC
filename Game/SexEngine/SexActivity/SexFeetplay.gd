@@ -556,3 +556,12 @@ func getAnimation():
 		return [StageScene.SexFeetPlay, "crotch", {pc=domID, npc=subID}]
 	if(state == "onheadwaitingforanswer"):
 		return [StageScene.SexFeetPlay, "head", {pc=domID, npc=subID}]
+
+func isActivityImpossibleShouldStop() -> bool:
+	if(state == "rubpussy"):
+		if(!getSub().hasReachableVagina()):
+			return true
+	if(state == "rubpenis"):
+		if(!getSub().hasReachablePenis() && !getSub().isWearingChastityCage()):
+			return true
+	return false

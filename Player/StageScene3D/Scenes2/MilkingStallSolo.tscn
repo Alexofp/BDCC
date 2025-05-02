@@ -1,0 +1,133 @@
+[gd_scene load_steps=29 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes2/MilkingStallSolo.gd" type="Script" id=4]
+[ext_resource path="res://Player/Props/MilkingStall.png" type="Texture" id=5]
+[ext_resource path="res://Player/Props/MilkTank.png" type="Texture" id=6]
+[ext_resource path="res://Player/Props/MilkingStall_behind.png" type="Texture" id=7]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=461]
+animation = "MilkingSoloCum_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=462]
+animation = "MilkingSoloFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=463]
+animation = "MilkingSoloStart_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=464]
+animation = "MilkingSolo_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=465]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=466]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=467]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=468]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=469]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=470]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=471]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=472]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=473]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=474]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=475]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=476]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=477]
+states/MilkingSoloCum_1-loop/node = SubResource( 461 )
+states/MilkingSoloCum_1-loop/position = Vector2( 576, 125 )
+states/MilkingSoloFast_1-loop/node = SubResource( 462 )
+states/MilkingSoloFast_1-loop/position = Vector2( 372, 238 )
+states/MilkingSoloStart_1-loop/node = SubResource( 463 )
+states/MilkingSoloStart_1-loop/position = Vector2( 276, 45 )
+states/MilkingSolo_1-loop/node = SubResource( 464 )
+states/MilkingSolo_1-loop/position = Vector2( 179, 138 )
+transitions = [ "MilkingSoloStart_1-loop", "MilkingSolo_1-loop", SubResource( 465 ), "MilkingSolo_1-loop", "MilkingSoloStart_1-loop", SubResource( 466 ), "MilkingSolo_1-loop", "MilkingSoloFast_1-loop", SubResource( 467 ), "MilkingSoloFast_1-loop", "MilkingSolo_1-loop", SubResource( 468 ), "MilkingSoloFast_1-loop", "MilkingSoloCum_1-loop", SubResource( 469 ), "MilkingSoloCum_1-loop", "MilkingSoloFast_1-loop", SubResource( 470 ), "MilkingSoloStart_1-loop", "MilkingSoloCum_1-loop", SubResource( 471 ), "MilkingSoloCum_1-loop", "MilkingSoloStart_1-loop", SubResource( 472 ), "MilkingSolo_1-loop", "MilkingSoloCum_1-loop", SubResource( 473 ), "MilkingSoloCum_1-loop", "MilkingSolo_1-loop", SubResource( 474 ), "MilkingSoloStart_1-loop", "MilkingSoloFast_1-loop", SubResource( 475 ), "MilkingSoloFast_1-loop", "MilkingSoloStart_1-loop", SubResource( 476 ) ]
+start_node = "MilkingSoloStart_1-loop"
+graph_offset = Vector2( -77, -38 )
+
+[sub_resource type="AnimationNodeBlendTree" id=478]
+graph_offset = Vector2( -268.114, -7.70406 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 477 )
+nodes/StateMachine/position = Vector2( 181.886, 53.2959 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=460]
+
+[node name="MilkingStallSolo" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.317465, -0.553263 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.570413, 0.0337869, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource( 478 )
+anim_player = NodePath("../Doll3D/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 460 )
+
+[node name="Sprite3D2" type="Sprite3D" parent="." index="3"]
+transform = Transform( 0.919, 0, 0, 0, 0.919, 0, 0, 0, 0.919, 0, 4.45785, 0.888011 )
+texture = ExtResource( 5 )
+
+[node name="Sprite3D3" type="Sprite3D" parent="." index="4"]
+transform = Transform( 0.793, 0, 0, 0, 0.793, 0, 0, 0, 0.793, -2.50026, 1.49904, -0.679946 )
+texture = ExtResource( 6 )
+
+[node name="Sprite3D4" type="Sprite3D" parent="." index="5"]
+transform = Transform( 0.919, 0, 0, 0, 0.919, 0, 0, 0, 0.919, -2.54448, 2.2431, -1.57028 )
+texture = ExtResource( 7 )
+
+[node name="TopPipe" type="Position3D" parent="." index="6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.57328, 7.19899, -0.243 )
+
+[node name="BottomPipe" type="Position3D" parent="." index="7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.90338, 3.75183, 0.0307035 )
+
+[node name="MilkTank" type="Position3D" parent="." index="8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2968, 2.74419, -0.96693 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]

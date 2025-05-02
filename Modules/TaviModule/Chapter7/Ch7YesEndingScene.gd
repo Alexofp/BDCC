@@ -185,7 +185,19 @@ func _run():
 
 			saynn("Alex, seeing how much he and Eliza manage to do alone together.. made him wonder. How far can they really go? Maybe it was time to ditch BDCC. Maybe it was time to grow an even bigger spine and ditch AlphaCorp all together.")
 
-			saynn("Sadly, Eliza was still busy trying to prove her mother something.. Having someone nearby would seem like cheating, as silly as that sounds. Maybe, one day, the time will come when both of them will look into the future.. and realize that they've been staring at each other this whole time.")
+			if (getFlag("ElizaModule.storyCompleted")):
+				saynn("[say=alexrynard]We're pretty good at this.[/say]")
+
+				saynn("[say=eliza]Yeah..[/say]")
+
+				saynn("[say=alexrynard]Maybe we should.. run away? Somewhere far away, where he can not get us.[/say]")
+
+				saynn("[say=eliza]Well.. I'm okay with taking the risk myself.. But what about my mother..[/say]")
+
+				saynn("Eliza's mother was the only head of AlphaCorp that got spared. She played her role in the captain's plan.. but she never earned his trust. Why would you trust someone who is capable of betraying?")
+
+			else:
+				saynn("Sadly, Eliza was still busy trying to prove her mother something.. Having someone nearby would seem like cheating, as silly as that sounds. Maybe, one day, the time will come when both of them will look into the future.. and realize that they've been staring at each other this whole time.")
 
 			saynn("And so, they began spending less and less time together. When the time became right for the captain, he focussed their efforts on a different task.")
 
@@ -195,7 +207,15 @@ func _run():
 
 			saynn("Eliza got a go-ahead to create the best possible drugs that would give the captain's soldiers just the edge that they needed. Painkillers, muscle and reflex stimulants, quick wound fixers. She also found a way to improve a soldier's performance with some hypnotism.. switching their focus to what truly matters during a war.")
 
-			saynn("If you and Tavi were the captain's hands.. Alex and Eliza were his legs. Legs without which he would never jump so high.")
+			if (getFlag("ElizaModule.storyCompleted")):
+				saynn("Over time, Eliza managed to work out a deal with the captain. A deal that allowed her mother to join Eliza in her lab. Being an assistant felt weird for Scarlet at first.. but it's better than rotting away in a cell.")
+
+				saynn("Little did he know, it was all a plan.")
+
+				saynn("One day, the captain woke up and realized that he was missing his best engineer and two of his best scientists.. along with one of the space cruisers.")
+
+			else:
+				saynn("If you and Tavi were the captain's hands.. Alex and Eliza were his legs. Legs without which he would never jump so high.")
 
 		else:
 			saynn("The captain knew how much potential there is in Alex and Eliza. He was purposefully holding them back, limiting them, creating impossible roadblocks.. but they just kept finding their way around.")
@@ -207,6 +227,9 @@ func _run():
 			saynn("All the while Eliza got a go-ahead to create the best possible drugs that would give the captain's soldiers just the edge that they needed. Painkillers, muscle and reflex stimulants, quick wound fixers. She also found a way to improve a soldier's performance with some hypnotism.. switching their focus to what truly matters during a war.")
 
 			saynn("They never really got to work together on something. Alex and Eliza were from completely different fields. Only makes you wonder what would happen if biology and mechanical engineering was somehow.. combined.")
+
+			if (getFlag("ElizaModule.storyCompleted")):
+				saynn("Eliza's mother was the only head of AlphaCorp that got spared. She played her role in the captain's plan.. but she never earned his trust. Why would you trust someone who is capable of betraying? Best deal she got out of this.. is getting to be with her daughter. Being Eliza's assistant felt weird for Scarlet at first.. but it's better than rotting away in a cell.")
 
 			saynn("If you and Tavi were the captain's hands.. Alex and Eliza were his legs. Legs without which he would never jump so high.")
 

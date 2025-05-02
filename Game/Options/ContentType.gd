@@ -5,6 +5,7 @@ const RiskyCondoms = "RiskyCondoms"
 const Watersports = "Watersports"
 const CumInflation = "CumInflation"
 const CumStealing = "CumStealing"
+const ForcedPermanentTFs = "ForcedPermanentTFs"
 
 static func getVisibleName(contentType):
 	if(contentType == RiskyCondoms):
@@ -13,6 +14,8 @@ static func getVisibleName(contentType):
 		return "Cum Inflation"
 	if(contentType == CumStealing):
 		return "Cum Stealing"
+	if(contentType == ForcedPermanentTFs):
+		return "Forced Permanent TFs"
 	
 	return contentType.capitalize()
 
@@ -25,14 +28,18 @@ static func getDescription(contentType):
 		return "Makes your belly look inflated if too many people cum inside you."
 	if(contentType == CumStealing):
 		return "Makes it so you can sometimes exchange cum with others during tribbing."
+	if(contentType == ForcedPermanentTFs):
+		return "If enabled, npcs will sometimes try to force-feed you a pill (MorphIn) that will make your transformations permanent. Turning this off does NOT disable tf content."
 	
 	return "No description provided"
 
 static func getAll():
-	return [RiskyCondoms, Watersports, CumInflation, CumStealing]
+	return [RiskyCondoms, Watersports, CumInflation, CumStealing, ForcedPermanentTFs]
 
 static func isDisabledByDefault(contentType):
 	if(contentType == Watersports):
+		return true
+	if(contentType == ForcedPermanentTFs):
 		return true
 	
 	return false

@@ -55,3 +55,11 @@ func generateSkinColors():
 	humanColors[2].v = RNG.randf_rangeX2(0.2, 0.5)
 	
 	return humanColors
+
+func calculateScoreForSpeciesCalculations(_npc) -> float:
+	var result:float = 0.98
+	if(!_npc.hasBodypart(BodypartSlot.Horns)):
+		result -= 0.49
+	if(!_npc.hasBodypart(BodypartSlot.Tail)):
+		result -= 0.49
+	return result

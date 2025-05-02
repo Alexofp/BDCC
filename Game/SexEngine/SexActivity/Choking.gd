@@ -24,6 +24,8 @@ func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 		return 0.0
 	if(_subInfo.isUnconscious()):
 		return -1.0
+	if(_sexEngine.hasGoal(_domInfo, SexGoal.SubMakeUnconscious, _subInfo)):
+		return 1.5
 	return _domInfo.getIsAngryScore() * 1.0 * max(0.1, 0.1 + _domInfo.personalityScore({PersonalityStat.Mean: 1.0})) - _subInfo.getAboutToPassOutScore() * _domInfo.fetishScore({Fetish.UnconsciousSex: -1.0})
 
 func getVisibleName():
@@ -161,6 +163,12 @@ func getDomActions():
 	
 	if(domInfo.goalsScoreMax({SexGoal.ChokeReceiveVaginal: 1.0, SexGoal.ChokeReceiveAnal: 1.0}, subID) > 0.0):
 		if(getSub().hasReachablePenis() || getSub().isWearingStrapon()):
+			stopChokeScore = 0.0
+	
+	if(getSexEngine().hasGoal(domInfo, SexGoal.SubMakeUnconscious, subInfo)):
+		if(subInfo.isUnconscious()):
+			stopChokeScore = 0.5
+		else:
 			stopChokeScore = 0.0
 	
 	if(state in ["choking", "hardchoking"] && !subInfo.isUnconscious()):

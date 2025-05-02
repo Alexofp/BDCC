@@ -14,6 +14,8 @@ func _run():
 			npcBodyState={naked=true,hard=true},
 		})
 
+#ACEPREGEXPAC - Risha in the Gym has a few line variants
+#I dont know for sure if Risha can actually be knocked up by someone other than the player, maybe I'll add a special line later but for now I can leave it ambiguious
 	if(state == ""):
 		saynn("It’s pretty late so this area is not that crowded. But, you see somebody that you didn’t expect to see here. Risha, the lynx, is sitting on one of the benches and removing pieces of her armor. You decide to approach her and ask what’s up.")
 
@@ -27,7 +29,12 @@ func _run():
 
 		saynn("[say=risha]My riot gear? You know, the last fucktoy that even touched it got his neck fried. I’d honestly like to see you try, you would make a great show for all the cameras. AlphaCorp isn’t fucking around with their security.[/say]")
 
-		saynn("She finishes stripping off her arms. Then she moves on to her chest, taking off the waist and chest plates. As she strips you realize that she has absolutely nothing under her armor. She casually exposes her huge breasts with bright red perky nipples and stretches a bit like all cats do.")
+		if(getCharacter("risha").isVisiblyPregnant()):
+			saynn("She finishes stripping off her arms. Then she moves on to her chest, taking off the waist and chest plates, gradually coming down around her pregnant midsection. Whatever is holding down the undersuit around her gravid belly practically snaps off now that it isnt being pulled so tight. As she strips you realize that she has absolutely nothing under her armor. She casually exposes her huge leaky breasts with bright red perky nipples and stretches a bit like all cats do.")
+			
+			saynn("[say=risha]Getting hard to even fit into it.[/say]")
+		else:
+			saynn("She finishes stripping off her arms. Then she moves on to her chest, taking off the waist and chest plates. As she strips you realize that she has absolutely nothing under her armor. She casually exposes her huge breasts with bright red perky nipples and stretches a bit like all cats do.")
 
 		saynn("[say=risha]Wearing it feels like being in an oven and it weighs a ton, fuck me.[/say]")
 
@@ -46,8 +53,11 @@ func _run():
 		saynn("[say=pc]Nah, you better find someone else.[/say]")
 
 		saynn("[say=risha]Well then don’t fucking waste my time, fucktoy[/say]")
-
-		saynn("Risha lies onto the bend and starts lifting heavy weights. She is growling as she quickly picks up the pace and starts to consistently push her body. You stare at her and her stored equipment a little longer and decide to leave her be.")
+		
+		if(getCharacter("risha").isVisiblyPregnant()):
+			saynn("Risha holds her gravid stomach as she lays back onto the bend and starts lifting heavy weights. She is growling as she quickly picks up the pace and starts to consistently push her body. You stare at her and her stored equipment a little longer and decide to leave her be.")
+		else:
+			saynn("Risha lies onto the bend and starts lifting heavy weights. She is growling as she quickly picks up the pace and starts to consistently push her body. You stare at her and her stored equipment a little longer and decide to leave her be.")
 
 		# (scene ends)
 		addButton("Continue", "Time to go", "endthescene")
@@ -121,8 +131,10 @@ func _run():
 		saynn("[say=pc]H-hey..[/say]")
 
 		saynn("She then lands a smack on your {pc.masc} butt and spreads the cheeks open, catching the view of your {pc.analStretch} anal ring clenching from the pain. She hovers over your ass and drools over your star.")
-
-		saynn("[say=risha]Hope you’re ready for me, slut. I just need to take the edge off.[/say]")
+		if(getCharacter("risha").isVisiblyPregnant()):
+			saynn("[say=risha]Hope you’re ready for me, slut. This pregnancy has been rough and I need to take the edge off.[/say]")
+		else:
+			saynn("[say=risha]Hope you’re ready for me, slut. I just need to take the edge off.[/say]")
 
 		saynn("Well she isn’t wrong technically, you are doing this for the credits. Risha doesn’t waste time for too long, she guides her barbed feline cock and presses it against your tailhole. You arch your back and struggle against the metal bar as the cat’s soft spikes are brushing against your soft {pc.thick} butt.")
 
@@ -223,6 +235,8 @@ func _run():
 			npcBodyState={},
 		})
 
+#ACEPREGEXPAC - Player and Risha have some additional lines if she's pregnant.
+#dialogue is still, eh, its there. I can come back later if I have to. Maybe its just the weirdness of actually doing it vs thinking of it.
 		saynn("Five credits is still something, you lower yourself onto your knees and shift closer to the bench. Risha spreads her legs for you, offering a full view of her male and female bits. She idly strokes her feline cock while her balls sway slightly, sometimes offering glimpses of her wet cunt.")
 
 		saynn("[say=risha]That was the right choice.[/say]")
@@ -233,7 +247,22 @@ func _run():
 
 		saynn("[say=risha]I didn’t exactly choose it, you know. I’m not gonna bottom for some wanna be criminal scum. I’d rather use them as my cock sock.[/say]")
 
-		saynn("[say=pc]Really now?[/say]")
+		if(getCharacter("risha").isVisiblyPregnant()):
+			saynn("You look up from under the lynx's expecting belly.")
+			
+			saynn("[say=pc]Are you sure about that?[/say]")
+			
+			saynn("[say=risha]Maybe, but you're still the same toy as the rest of the sluts here.[/say]")
+
+#		elif(getCharacter("risha").isVisiblyPregnantFromPlayer()):
+#			saynn("You look up from under the lynx's expecting belly.")
+#
+#			saynn("[say=pc]That didnt stop me.[/say]")
+#
+#			saynn("[say=risha]And yet you're back being my toy. Like all the other desperate sluts.[/say]")
+
+		else:
+			saynn("[say=pc]Really now?[/say]")
 
 		saynn("You keep stroking her red meaty shaft, you digits catch some of her precum and spread it along the surface. Risha smirks while watching you, her face doesn’t really indicate how much pleasure your stroking brings. You decide to toy with her and sneak the second hand under her ballsack, your digits landing on her pussy and teasing the sensitive folds, they are so wet. Risha lets out a surprised moan.")
 
@@ -267,7 +296,10 @@ func _run():
 		saynn("[say=pc]Why aren’t you begging, slut~[/say]")
 
 		saynn("Suddenly Risha leans forward and puts her hands around your head, the sharp discomfort makes you whine and open your mouth enough for her to pull your head onto her shaft, making you part your lips and then shoving her throbbing cock deep down your throat. She cries out a groan as your throat closes around her dick, quickly sending the lynx over the edge.")
-
+#ACEPREGEXPAC - V2 - More Preg Risha lines
+		if(getCharacter("risha").isHeavilyPregnant()):
+			saynn("Her heavily pregnant tummy is pressed against your face as her buff arms bend around it to hold you down around her cock.")
+		
 		saynn("[say=risha]Grr.. I told you to shut up, fucktoy[/say]")
 
 		saynn("Your fingers are still lodged into her cunt, you feel her pussy clenching and squirting juices all over your hand as her cock starts shooting many waves of hot cum down your throat. The barbs make sure pulling out at this moment would be a very painful thing so you sit still and allow the dickgirl to force feed you her semen. This orgasm seems very powerful for her, she is groaning and squirming a lot, moans escape one after another until you drain her balls completely.")
@@ -334,12 +366,16 @@ func _run():
 			saynn("Even though you are stuck in quite an exposed position and are about to be taken advantage of, you feel so horny, your {pc.cock} is getting hard.")
 
 		saynn("Risha gets some of your juices and rubs them into her cock and then, without much more preparation, buckles her hips forward, forcing her barbed member to penetrate your {pc.pussyStretch} pussy hole and stretch it open enough to shove the tip inside. You arch your back more and let out a moan as she roughly pushes her cock deeper, her spikes raking at your soft inner walls.")
+#ACEPREGEXPAC - V2 - More Preg Risha lines
+		if(getCharacter("risha").isHeavilyPregnant()):
+			saynn("The weight of Risha's large expecting belly rests on your ass as she bottoms out inside your pussy.")
 
 		# (if has cock)
 		if(GM.pc.isWearingChastityCage()):
 			saynn("You feel your useless cock leaking behind the chastity cage, being fucked by a tall lynx makes you so aroused.")
 		elif(GM.pc.hasPenis()):
 			saynn("You feel your neglected cock leaking, being fucked by a tall lynx makes you so aroused.")
+
 
 		saynn("[say=pc]Fuck.. So rough.[/say]")
 
@@ -499,7 +535,7 @@ func _run():
 
 		saynn("[say=pc]No I didn’t~[/say]")
 
-		saynn("Risha rolls her eyes and throws her head back, it’s like she accepted her faith.")
+		saynn("Risha rolls her eyes and throws her head back, it’s like she accepted her fate.")
 
 		# (scene ends)
 		addButton("Continue", "Time to go", "endthescene")
@@ -524,7 +560,7 @@ func _run():
 
 		saynn("[say=pc]No I didn’t~[/say]")
 
-		saynn("Risha rolls her eyes and throws her head back, it’s like she accepted her faith.")
+		saynn("Risha rolls her eyes and throws her head back, it’s like she accepted her fate.")
 
 		# (scene ends)
 		addButton("Continue", "Time to go", "endthescene")

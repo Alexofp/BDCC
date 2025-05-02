@@ -56,7 +56,7 @@ func _run():
 		else:
 			aimCameraAndSetLocName("main_shower1")
 		var npcSlavery:NpcSlave = npc.getNpcSlavery()
-		playAnimation(StageScene.SexStanding, "tease", {pc=npcID, npc="pc", bodyState={naked=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.ShoweringDuo, "shower", {pc="pc", npc=npcID, bodyState={naked=true}, npcBodyState={naked=true}})
 
 		var subReaction = "Okay."
 		
@@ -167,7 +167,7 @@ func _run():
 			aimCameraAndSetLocName("main_shower2")
 		else:
 			aimCameraAndSetLocName("main_shower1")
-		playAnimation(StageScene.SexStanding, "tease", {npc=npcID, bodyState={naked=true}, npcBodyState={naked=true}})
+		playAnimation(StageScene.ShoweringDuo, "shower", {pc=npcID, npc="pc", bodyState={naked=true}, npcBodyState={naked=true}})
 		saynn("You shower together with {npc.name}. The leash is clipped to the shower head to make sure your slave can't just escape or even turn towards you.")
 		
 		saynn("Your possessive hands land on {npc.his} body and begin washing it, making sure to clean the private bits too, everywhere but inside.")
@@ -212,7 +212,8 @@ func _run():
 		addButton("Clean inside", "Order them to clean inside too", "alone_cleaninside")
 		
 	if(state == "alone_cleaninside"):
-		playAnimation(StageScene.Duo, "stand", {npc=npcID, flipNPC=true, npcAction="struggle", npcBodyState={naked=true, leashedBy="pc"}})
+		playAnimation(StageScene.Showering, "rub", {pc=npcID, bodyState={naked=true}})
+		#playAnimation(StageScene.Duo, "stand", {npc=npcID, flipNPC=true, npcAction="struggle", npcBodyState={naked=true, leashedBy="pc"}})
 		
 		if(deservesPunishment):
 			if(npc.hasReachableVagina()):

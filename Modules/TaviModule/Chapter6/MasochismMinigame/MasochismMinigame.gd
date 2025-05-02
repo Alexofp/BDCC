@@ -434,7 +434,7 @@ func getAllActions():
 			messages = [
 				"An ice cube landing on Tavi's back makes her gasps and squirm actively.",
 				"You teasingly press an ice cube against Tavi's nipple and hold it there until it starts melting. Tavi bites her lips and moans.",
-				"Tavi lets out a long moan as you press the ice against her sensetive clit for a second, sending a wave of cool sensations through her body.",
+				"Tavi lets out a long moan as you press the ice against her sensitive clit for a second, sending a wave of cool sensations through her body.",
 				"Your hands place a few ice cubes on Tavi's thighs and hold her still while she tries to wiggle them off.",
 			],
 		}

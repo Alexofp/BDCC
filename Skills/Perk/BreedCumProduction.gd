@@ -3,6 +3,7 @@ extends PerkBase
 func _init():
 	id = Perk.BreedCumProduction
 	skillGroup = Skill.Breeder
+	dungeonWeight = 0.0
 
 func getVisibleName():
 	return "Prolific Seeder"

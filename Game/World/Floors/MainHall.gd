@@ -90,7 +90,7 @@ func _on_MainLaundry_onReact(room, key):
 
 
 func _on_MainGreenhousesJumpable_onEnter(room):
-	room.saynn("You look over the railing and see that the drop is not that high.")
+	#room.saynn("You look over the railing and see that the drop is not that high.")
 	
 	room.addButton("Vault over", "Seems like you can jump down to the yard here", "vault")
 

@@ -12,7 +12,6 @@ func isPossible(_sexEngine, _domInfo, _subInfo, _data):
 	if(_domInfo.getChar().isOralBlocked()):
 		return false
 	
-	
 	if(!_domInfo.getChar().hasReachablePenis() && !_domInfo.getChar().hasReachableVagina()):
 		return false
 	if(!_subInfo.getChar().hasReachablePenis() && !_subInfo.getChar().hasReachableVagina()):

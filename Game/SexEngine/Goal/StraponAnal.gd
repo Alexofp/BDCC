@@ -11,10 +11,10 @@ func isPossible(_sexEngine, _domInfo, _subInfo, _data):
 		return false
 	if(_subInfo.isUnconscious()):
 		return false
-	if(!_domInfo.getChar().hasPenis() && _subInfo.getChar().hasReachableAnus()):
-		return true
+	if(!_domInfo.getChar().canWearStrapon() || !_subInfo.getChar().hasReachableAnus()):
+		return false
 	
-	return false
+	return true
 
 func getSubGoals(_sexEngine, _domInfo, _subInfo, _data):
 	return {

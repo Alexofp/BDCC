@@ -26,6 +26,7 @@ func getTags():
 	return [
 		ItemTag.SoldByTheAnnouncer,
 		ItemTag.Illegal,
+		ItemTag.KeptAfterDrugDenRun,
 		]
 
 func getInventoryImage():

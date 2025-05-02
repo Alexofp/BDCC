@@ -34,7 +34,7 @@ func setSkeletonRecursive(childnode, skeleton):
 		childnode.software_skinning_transform_normals = false # Removing this will make Software Skinning break so don't
 		childnode.sorting_offset = 0.001 # IF REMOVED WILL LEAD TO FLICKERING. FOR WHATEVER REASON THIS LINE FIXES IT
 		
-		if(childnode.mesh != null):
+		if(childnode.mesh != null && !childnode.name.begins_with("NoTouch")):
 			for _i in range(childnode.mesh.get_surface_count()):
 				var material = childnode.mesh.surface_get_material(_i)
 				if(material is SpatialMaterial):

@@ -153,7 +153,7 @@ func _run():
 		addButton("No release", "Keep Artica horny", "no_release")
 		addButton("Lick her out", "Make Artica cum by eating her pussy", "eat_artica_out")
 	if(state == "do_deepthroat"):
-		playAnimation(StageScene.RopesOralSex, "sex", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.RopesOralSex, "sex", {pc="artica", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true,hard=true}})
 		saynn("Mean.. so mouthy that fluff is. Better use that for your advantage.")
 
 		saynn("With a gentle but firm touch, you guide her head towards your exposed {pc.penis}, inviting her to take you into her mouth.")
@@ -176,7 +176,7 @@ func _run():
 
 		addButton("Faster", "Really test her", "throatfuck_cum")
 	if(state == "throatfuck_cum"):
-		playAnimation(StageScene.RopesOralSex, "fast", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.RopesOralSex, "fast", {pc="artica", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true,hard=true}})
 		saynn("As your confidence in Artica's sucking abilities grows, you begin to fuck her throat faster and harder, her lips hugging your member as it goes deep, creating a bump on her neck each time. You can feel her gag reflex kicking in soon after.. poor fluff is choking on your cock, her throat making all sorts of wet slurps..")
 
 		saynn("[say=artica]Khh-h.. hhh.. khh..[/say]")
@@ -191,7 +191,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "deepthroat_pull")
 	if(state == "deepthroat_pull"):
-		playAnimation(StageScene.RopesOralSex, "tease", {pc="artica", npc="pc", bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.RopesOralSex, "tease", {pc="artica", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true,hard=true}})
 		saynn("As yank your member out of her throat, Artica starts gasping for air and coughing.")
 
 		saynn("[say=artica]Khh.. kh.. kh..[/say]")
@@ -224,7 +224,7 @@ func _run():
 		addButton("Continue", "See what happens next", "endthescene_getharness")
 	if(state == "eat_artica_out"):
 		if (isCaged):
-			playAnimation(StageScene.RopesSex, "lick", {pc="artica", npc="pc", pcCum=true, bodyState={naked=true, hard=true}})
+			playAnimation(StageScene.RopesSex, "lick", {pc="artica", npc="pc", pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={exposedCrotch=true,hard=true}})
 			saynn("You sigh and kneel behind her.. before stuffing your face into that needy pussy.")
 
 			saynn("[say=artica]Ah..[/say]")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Player/Props/BDSMMachine.glb" type="PackedScene" id=1]
 [ext_resource path="res://Player/Props/BDSMMachine.tres" type="Material" id=2]
 [ext_resource path="res://Player/Props/BDSMMachine.gd" type="Script" id=3]
+[ext_resource path="res://Player/Props/BDSMMachine2.glb" type="PackedScene" id=4]
 
 [node name="BDSMMachine" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
@@ -10,3 +11,10 @@ script = ExtResource( 3 )
 [node name="Plane" parent="BDSMMachine/Skeleton" index="0"]
 software_skinning_transform_normals = false
 material/0 = ExtResource( 2 )
+
+[node name="BDSMMachine2" parent="." index="2" instance=ExtResource( 4 )]
+
+[node name="AnimationPlayer" parent="BDSMMachine2" index="0"]
+root_node = NodePath("../..")
+
+[editable path="BDSMMachine2"]

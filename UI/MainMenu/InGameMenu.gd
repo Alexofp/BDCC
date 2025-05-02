@@ -5,6 +5,7 @@ onready var mainMenuScreen = $MainMenu
 onready var saveMenuScreen = $SaveGameScreen
 signal onResumeButtonPressed
 onready var datapack_ingame_menu = $DatapackIngameMenu
+onready var save_game_button_2 = $MainMenu/MainMenuCenter/VBoxContainer/SaveGameButton2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -55,3 +56,9 @@ func _on_DatapacksButton_pressed():
 func _on_DatapackIngameMenu_onClosePressed():
 	hideAllMenus()
 	mainMenuScreen.visible = true
+
+
+func _on_InGameMenu_visibility_changed():
+	if(visible):
+		if(GM.main != null):
+			save_game_button_2.disabled = !GM.main.canSave()

@@ -51,12 +51,16 @@ func getForms() -> Dictionary:
 		"HelpRestraintsAsk": form("Hey. Can you help me with these restraints maybe?", {main=CHAR, target=CHAR}, "main", "target"),
 		"HelpRestraintsAgree": form("Sure. Let's see what I can do.", {main=CHAR, target=CHAR}, "main", "target"),
 		"HelpRestraintsAltStart": form("Hey. I wanna help you with these restraints. Sit tight.", {main=CHAR, target=CHAR}, "main", "target"),
+		"HelpRestraintsAltRefuseUnhappy": form("I don't want your help with restraints.", {main=CHAR, target=CHAR}, "main", "target"),
+		"HelpRestraintsAltRefuseKinky": form("Oh, I'm only wearing those because I want to.", {main=CHAR, target=CHAR}, "main", "target"),
+		"HelpRestraintsAltRefuseKinkyReact": form("Kinky.", {main=CHAR, target=CHAR}, "main", "target"),
 		"HelpRestraintsDeny": form("No can't do. You will have to stay locked.", {main=CHAR, target=CHAR}, "main", "target"),
 		"HelpRestraintsFinished": form("That's all that I can do.", {main=CHAR, target=CHAR}, "main", "target"),
 		"HelpRestraintsPaid": form("That will do. I will go now.", {main=CHAR, target=CHAR}, "main", "target"),
 		"HelpRestraintsRefusePay": form("I'm not paying! You didn't even do that much.", {main=CHAR, target=CHAR}, "main", "target"),
 		"HelpRestraintsRefusePayWhatever": form("Whatever then.", {main=CHAR, target=CHAR}, "main", "target"),
 		
+		"HelpStocksSlutwallRefuse": form("I don't want your help breaking free.", {main=CHAR, target=CHAR}, "main", "target"),
 		"SlutwallStealCredits": form("A whore like you doesn't deserve these credits.", {main=CHAR, target=CHAR}, "main", "target"), # Stealing from the slutwall's tipbox
 		"SlutwallAddTip": form("There you go. What a good fucktoy.", {main=CHAR, target=CHAR}, "main", "target"), # Getting tipped after being used in a slutwall
 		"StocksShout": form("Anyone? I need some help over here.", {main=CHAR}, "main"), # Stuck in stocks, trying to get some attention

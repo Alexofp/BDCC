@@ -6,6 +6,7 @@ var pickedPersonalityStat = ""
 var pickedGenderToChange = ""
 var pickedSpeciesToChange = ""
 var pickedGoalIDToChange = ""
+var pickedTFIDToChange = ""
 var npclistScene = preload("res://UI/NpcList/NpcList.tscn") 
 
 func _init():
@@ -91,6 +92,7 @@ func _run():
 		addButton("Species", "Pick the chances of the species of the encountered npcs", "speciesmenu")
 		addButton("Restrictions", "Pick what things you don't want to happen to you in sex", "goalsmenu")
 		addButton("Goal weights", "Change the weights of sex goals that other characters will persue during sex", "goalweightsmenu")
+		addButton("TFs weights", "Change the weights of transformations that 'strange pills' might contain", "tfweightsmenu")
 
 	if(state == "goalweightsmenu"):
 		var encounterSettings:EncounterSettings = GM.main.getEncounterSettings()
@@ -107,6 +109,27 @@ func _run():
 			sayn(goal.getVisibleName()+": "+str(Util.roundF(goalWeight*100.0, 1))+"%")
 			addButton(goal.getVisibleName(), "Change the weight of this goal", "changegoalweightmenu", [goalID])
 		
+	if(state == "tfweightsmenu"):
+		var encounterSettings:EncounterSettings = GM.main.getEncounterSettings()
+		addButton("Back", "Close this menu", "")
+		
+		sayn("These are the current weights of all transformations that might be caused by 'strange pills':")
+		var allTFs = GlobalRegistry.getTransformationRefs()
+		for tfID in allTFs:
+			var tf: TFBase = GlobalRegistry.getTransformationRef(tfID)
+			if(tf == null || !tf.canChangeWeight()):
+				continue
+			var tfWeight = encounterSettings.getTFWeight(tfID, tf.getPillGenWeight())
+			
+			var pillName:String = tf.getPillName()
+			var tfName:String = tf.getName()
+			
+			if(pillName != tfName):
+				sayn(pillName+" ("+tfName+"): "+str(Util.roundF(tfWeight*100.0, 1))+"%")
+			else:
+				sayn(tfName+": "+str(Util.roundF(tfWeight*100.0, 1))+"%")
+			addButton(tf.getName(), "Change the weight of this transformation", "changetfweightmenu", [tfID])
+		
 	if(state == "changegoalweightmenu"):
 		var encounterSettings:EncounterSettings = GM.main.getEncounterSettings()
 		addButton("Back", "Close this menu", "")
@@ -122,6 +145,22 @@ func _run():
 				var weightStr = str(Util.roundF(weight*100.0, 1))+"%"
 				
 				addButton(weightStr, "Set the weight to this value", "changegoalweight", [weight])
+			
+	if(state == "changetfweightmenu"):
+		var encounterSettings:EncounterSettings = GM.main.getEncounterSettings()
+		addButton("Back", "Close this menu", "")
+		var pickedTF:TFBase = GlobalRegistry.getTransformationRef(pickedTFIDToChange)
+		if(pickedTF != null):
+			var goalWeight = encounterSettings.getTFWeight(pickedTFIDToChange, pickedTF.getPillGenWeight())
+			saynn("The current weight for '"+pickedTF.getName()+"' transformation is "+str(Util.roundF(goalWeight*100.0, 1))+"%")
+			
+			addButton("Default", "Reset the weight to the default value", "changetfweight", [-1])
+			
+			var possibleWeights = [0.0, 0.05, 0.1, 0.15, 0.2, 0.3, 0.4, 0.5, 0.7, 0.9, 1.0, 1.2, 1.5, 2.0, 3.0, 5.0]
+			for weight in possibleWeights:
+				var weightStr = str(Util.roundF(weight*100.0, 1))+"%"
+				
+				addButton(weightStr, "Set the weight to this value", "changetfweight", [weight])
 			
 		
 	if(state == "goalsmenu"):
@@ -392,6 +431,9 @@ func _react(_action: String, _args):
 		
 	if(_action == "changegoalweightmenu"):
 		pickedGoalIDToChange = _args[0]
+		
+	if(_action == "changetfweightmenu"):
+		pickedTFIDToChange = _args[0]
 	
 	if(_action == "setgenderchance"):
 		GM.main.getEncounterSettings().setGenderWeight(_args[0], _args[1])
@@ -413,6 +455,15 @@ func _react(_action: String, _args):
 		setState("goalweightsmenu")
 		return
 		
+		
+	if(_action == "changetfweight"):
+		if(_args[0] < 0):
+			GM.main.getEncounterSettings().resetTFWeight(pickedTFIDToChange)
+		else:
+			GM.main.getEncounterSettings().setTFWeight(pickedTFIDToChange, _args[0])
+		setState("tfweightsmenu")
+		return
+		
 	if(_action == "closenpclist"):
 		setState("")
 		GM.ui.clearCharactersPanel()
@@ -430,6 +481,7 @@ func saveData():
 	data["pickedGenderToChange"] = pickedGenderToChange
 	data["pickedSpeciesToChange"] = pickedSpeciesToChange
 	data["pickedGoalIDToChange"] = pickedGoalIDToChange
+	data["pickedTFIDToChange"] = pickedTFIDToChange
 
 	return data
 	
@@ -442,3 +494,4 @@ func loadData(data):
 	pickedGenderToChange = SAVE.loadVar(data, "pickedGenderToChange", "")
 	pickedSpeciesToChange = SAVE.loadVar(data, "pickedSpeciesToChange", "")
 	pickedGoalIDToChange = SAVE.loadVar(data, "pickedGoalIDToChange", "")
+	pickedTFIDToChange = SAVE.loadVar(data, "pickedTFIDToChange", "")

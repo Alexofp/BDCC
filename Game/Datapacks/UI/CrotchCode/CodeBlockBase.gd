@@ -122,6 +122,7 @@ const themeInventory = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockTh
 const themeNPC = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockNPC.tres")
 const themeString = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockString.tres")
 const themeFlagGlobal = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockFlagsGlobal.tres")
+const themeTFs = preload("res://Game/Datapacks/UI/CrotchCode/VisualBlockThemes/BlockTFs.tres")
 
 func getVisualBlockTheme():
 	var mainCategory = getMainCategory()
@@ -151,6 +152,8 @@ func getVisualBlockTheme():
 		return themeNPC
 	if(mainCategory in ["Strings"]):
 		return themeString
+	if(mainCategory in ["Transformation"]):
+		return themeTFs
 	
 	return themeOutput
 

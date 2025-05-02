@@ -316,6 +316,7 @@ func _run():
 		addButton("Continue", "Time to go", "endthescene")
 		
 
+#ACEPREGEXPAC - Giving Nova Head while she's pregnant gives a few unique lines
 	if(state == "oral"):
 		# (needs free mouth)
 		playAnimation(StageScene.SexOral, "sex", {
@@ -323,8 +324,10 @@ func _run():
 			bodyState={exposedCrotch=true,hard=true},
 			npcBodyState={naked=true,hard=true, leashedBy="nova"},
 		})
-
-		saynn("You crawl up to Nova’s legs and put your paws on her thighs. She gasps as you stick your head under her skirt and press your nose against her bulge.")
+		if(getCharacter("nova").isVisiblyPregnant()):
+			saynn("You crawl up to Nova’s legs and put your paws on her thighs, twisting your neck to fit under her pregnant belly. She gasps as you stick your head under her skirt and press your nose against her bulge.")
+		else:
+			saynn("You crawl up to Nova’s legs and put your paws on her thighs. She gasps as you stick your head under her skirt and press your nose against her bulge.")
 
 		saynn("[say=nova]Someone’s thirsty~?[/say]")
 
@@ -353,8 +356,10 @@ func _run():
 		saynn("You suck a little bit on her cock, getting used to the taste of her precum, you notice her knot slightly inflating already. You stick your tongue out and proceed to drag it across her member as you take more of it in. You stop just before the tip hits the back of your mouth and instead begin moving back and forth, taking you time, sucking Nova’s cock. She looks very aroused, her canine scent was only becoming stronger, she puts her paws on your head and offers you support, pulling your head onto her cock harder.")
 
 		saynn("[say=nova]Take it, slut~[/say]")
-
-		saynn("You hold your paws on her legs so she is free to make use of your mouth hole, she gets a better grasp and applies more pressure, causing her cock to slide deeper into your mouth and stretching your throat out, testing how well you can control your gag reflex. It gets to the point of her knot slapping against your nose as she starts to face-fuck you, throat bulging as you’re getting stretched. Your eyes roll up slightly, lack of air makes it really hard to concentrate. But it feels good, you keep pushing yourself deeper onto her cock and using your tongue to deliver so much pleasure to Nova that she starts to arch her back and moan loudly.")
+		if(getCharacter("nova").isVisiblyPregnant()):
+			saynn("You hold your paws on one of her thighs and the underside of her belly so she is free to make use of your mouth hole, she gets a better grasp and applies more pressure, causing her cock to slide deeper into your mouth and stretching your throat out, testing how well you can control your gag reflex. It gets to the point of her knot slapping against your nose as she starts to face-fuck you, throat bulging as you’re getting stretched. Your eyes roll up slightly, lack of air makes it really hard to concentrate. But it feels good, you keep pushing yourself deeper onto her cock and using your tongue to deliver so much pleasure to Nova that she starts to arch her back and moan loudly.")
+		else:
+			saynn("You hold your paws on her legs so she is free to make use of your mouth hole, she gets a better grasp and applies more pressure, causing her cock to slide deeper into your mouth and stretching your throat out, testing how well you can control your gag reflex. It gets to the point of her knot slapping against your nose as she starts to face-fuck you, throat bulging as you’re getting stretched. Your eyes roll up slightly, lack of air makes it really hard to concentrate. But it feels good, you keep pushing yourself deeper onto her cock and using your tongue to deliver so much pleasure to Nova that she starts to arch her back and moan loudly.")
 
 		addButton("Take it", "Let her cum down your throat", "take_it")
 		addButton("Outside", "You don’t wanna swallow Nova’s load", "outside")
@@ -498,7 +503,7 @@ func _run():
 
 	if(state == "vaginalcum"):
 		playAnimation(StageScene.SexAllFours, "fast", {
-			pc="nova", npc="pc", 
+			pc="nova", npc="pc",
 			pcCum=true, npcCum=true,
 			bodyState={exposedCrotch=true,hard=true,condom=usedCondom},
 			npcBodyState={naked=true,hard=true, leashedBy="nova"},

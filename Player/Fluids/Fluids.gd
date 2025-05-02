@@ -27,14 +27,14 @@ func isFull() -> bool:
 func setCapacity(newCapacity:float):
 	fluidLimit = newCapacity
 
-func addFluid(fluidType, amount: float, fluidDNA = null):
+func addFluid(fluidType, amount: float, fluidDNA = null, causerID:String = ""):
 	if(isCapacityLimited()):
 		var freeSpace = max(0.0, getCapacity() - getFluidAmount())
 		if(amount > freeSpace):
 			amount = freeSpace
-	return addFluidIgnoreCapacity(fluidType, amount, fluidDNA)
+	return addFluidIgnoreCapacity(fluidType, amount, fluidDNA, causerID)
 	
-func addFluidIgnoreCapacity(fluidType, amount: float, fluidDNA = null):
+func addFluidIgnoreCapacity(fluidType, amount: float, fluidDNA = null, causerID:String = ""):
 	if(amount <= 0.0):
 		return 0.0
 	
@@ -43,6 +43,12 @@ func addFluidIgnoreCapacity(fluidType, amount: float, fluidDNA = null):
 	
 	if(!(fluidDNA is FluidDNA)):
 		assert(false, "Bad fluid dna")
+	
+	if(causerID != fluidDNA.causerID):
+		var newFluidDNA := FluidDNA.new()
+		newFluidDNA.loadData(fluidDNA.saveData().duplicate(true))
+		newFluidDNA.setCauserID(causerID)
+		fluidDNA = newFluidDNA
 	
 	for contentData in contents:
 		if(fluidType == contentData["fluidType"] && contentData["fluidDNA"].canCombineWith(fluidDNA)):
@@ -68,6 +74,16 @@ func removeEmptyInternalEntries():
 			newContents.append(fluidData)
 			cachedFluidsAmount += fluidData["amount"]
 
+	contents = newContents
+
+func removeFluidType(fluidType:String):
+	cachedFluidsAmount = 0.0
+	var newContents:Array = []
+	for fluidData in contents:
+		if(fluidData["fluidType"] != fluidType):
+			newContents.append(fluidData)
+			cachedFluidsAmount += fluidData["amount"]
+			
 	contents = newContents
 
 func hasFluidType(fluidType):
@@ -109,7 +125,7 @@ func getFluidAmount() -> float:
 func isFluids():
 	return true
 
-func transferTo(otherFluids, fraction = 0.5, minAmount = 0.0):
+func transferTo(otherFluids, fraction = 0.5, minAmount = 0.0, causerID:String = ""):
 	if(!otherFluids.has_method("isFluids")):
 		if(otherFluids.has_method("getFluids")):
 			otherFluids = otherFluids.getFluids()
@@ -127,7 +143,7 @@ func transferTo(otherFluids, fraction = 0.5, minAmount = 0.0):
 	var result = 0.0
 	for contentData in contents:
 		var amountToTransfer = contentData["amount"] * fraction
-		var actuallyTransferred = otherFluids.addFluid(contentData["fluidType"], amountToTransfer, contentData["fluidDNA"])
+		var actuallyTransferred = otherFluids.addFluid(contentData["fluidType"], amountToTransfer, contentData["fluidDNA"], causerID)
 		contentData["amount"] -= actuallyTransferred
 		
 		result += actuallyTransferred
@@ -136,7 +152,7 @@ func transferTo(otherFluids, fraction = 0.5, minAmount = 0.0):
 	emit_signal("contentsChanged", oldFluidAmount, getFluidAmount())
 	return result
 
-func transferAmountTo(otherFluids, howMuch):
+func transferAmountTo(otherFluids, howMuch, causerID:String = ""):
 	if(howMuch <= 0.0):
 		return 0.0
 	
@@ -160,7 +176,7 @@ func transferAmountTo(otherFluids, howMuch):
 		var share: float = contentData["amount"] / fluidAmount
 		
 		var amountToTransfer = howMuch * share
-		var actuallyTransferred = otherFluids.addFluid(contentData["fluidType"], amountToTransfer, contentData["fluidDNA"])
+		var actuallyTransferred = otherFluids.addFluid(contentData["fluidType"], amountToTransfer, contentData["fluidDNA"], causerID)
 		contentData["amount"] -= actuallyTransferred
 		
 		result += actuallyTransferred
@@ -169,7 +185,7 @@ func transferAmountTo(otherFluids, howMuch):
 	return result
 	
 # Ignores capacity, be careful
-func shareFluids(otherFluids, fraction = 0.5):
+func shareFluids(otherFluids, fraction = 0.5, causerID:String = ""):
 	if(!otherFluids.has_method("isFluids")):
 		if(otherFluids.has_method("getFluids")):
 			otherFluids = otherFluids.getFluids()
@@ -197,7 +213,7 @@ func shareFluids(otherFluids, fraction = 0.5):
 		result = true
 		
 	for fluidsToAdd in ourFluids:
-		otherFluids.addFluid(fluidsToAdd[0], fluidsToAdd[1], fluidsToAdd[2])
+		otherFluids.addFluid(fluidsToAdd[0], fluidsToAdd[1], fluidsToAdd[2], causerID)
 	for fluidsToAdd in theirFluids:
 		addFluid(fluidsToAdd[0], fluidsToAdd[1], fluidsToAdd[2])
 	removeEmptyInternalEntries()
@@ -344,6 +360,11 @@ func getCost() -> int:
 		
 		result += fluidObject.getCost(amountByFluidType[fluidType])
 	return result
+	
+func setCauserID(_charID:String):
+	for fluidData in contents:
+		var fluidDNA = fluidData["fluidDNA"]
+		fluidDNA.setCauserID(_charID)
 	
 func saveData():
 	var theContents = []

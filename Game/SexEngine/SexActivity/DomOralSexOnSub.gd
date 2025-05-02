@@ -45,6 +45,15 @@ func getDomTagsCheck():
 func getSubTagsCheck():
 	return [SexActivityTag.OrderedToDoSomething, SexActivityTag.HavingSex, SexActivityTag.PenisUsed, SexActivityTag.VaginaUsed]
 
+func isActivityImpossibleShouldStop() -> bool:
+	if(state in ["blowjob", "lickingcock"]):
+		if(!getSub().hasReachablePenis() && !getSub().isWearingStrapon()):
+			return true
+	if(state in ["licking", "grinding"]):
+		if(!getSub().hasReachableVagina()):
+			return true
+	return false
+
 func startActivity(_args):
 	state = ""
 	
@@ -342,7 +351,7 @@ func doDomAction(_id, _actionInfo):
 		var condomBroke = false
 		if(state in ["subabouttocum", "licking", "tonguefucking"]):
 			text = RNG.pick([
-				"{dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} lips against {sub.yourHis} "+RNG.pick(["pussy", "slit", "sensetive folds", "petals"])+" and keep lapping up the arousal until [b]{sub.you} {sub.youVerb('cum')}[/b]! {sub.YourHis} juices rush into {dom.yourHis} mouth as {sub.youHe} squirts!",
+				"{dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} lips against {sub.yourHis} "+RNG.pick(["pussy", "slit", "sensitive folds", "petals"])+" and keep lapping up the arousal until [b]{sub.you} {sub.youVerb('cum')}[/b]! {sub.YourHis} juices rush into {dom.yourHis} mouth as {sub.youHe} squirts!",
 			])
 			getDom().cummedInMouthBy(subID, FluidSource.Vagina)
 			subInfo.cum()
@@ -603,11 +612,11 @@ func doSubAction(_id, _actionInfo):
 			])
 		if(state == "licking"):
 			text += RNG.pick([
-				"{dom.You} {dom.youAre} licking {sub.yourHis} "+RNG.pick(["pussy", "sensetive folds", "kitty", "petals", "wet pussy"])+".",
+				"{dom.You} {dom.youAre} licking {sub.yourHis} "+RNG.pick(["pussy", "sensitive folds", "kitty", "petals", "wet pussy"])+".",
 			])
 		if(state == "tonguefucking"):
 			text += RNG.pick([
-				"{dom.You} {dom.youAre} tongue-fucking {sub.yourHis} "+RNG.pick(["pussy", "sensetive folds", "kitty", "petals", "wet pussy"])+".",
+				"{dom.You} {dom.youAre} tongue-fucking {sub.yourHis} "+RNG.pick(["pussy", "sensitive folds", "kitty", "petals", "wet pussy"])+".",
 			])
 		if(state == "lickingcock"):
 			text += RNG.pick([

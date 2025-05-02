@@ -631,6 +631,11 @@ func getSpeciesFullName():
 	return Util.getSpeciesName(species)
 	
 func getFightIntro(_battleName):
+	if(_battleName == "DrugDenEncounter"):
+		var theText:String = "You run into a junkie. Looks like "+heShe()+" isn't happy to see you."
+		theText += "\n\nThe junkie gets into the combat stance and prepares to fight."
+		return theText
+		
 	return getName() + " gets into the combat stance and prepares for a fight."
 
 func getFightState(_battleName):
@@ -723,19 +728,33 @@ func getPenisSize():
 	var bodypart = getBodypart(BodypartSlot.Penis)
 	return bodypart.getLength()
 
+func getBreastsSize() -> int:
+	if(!hasBodypart(BodypartSlot.Breasts)):
+		return BreastsSize.FOREVER_FLAT
+	return getBodypart(BodypartSlot.Breasts).getSize()
+
 func getFluidType(fluidSource):
 	if(fluidSource == FluidSource.Penis):
+		if(hasBodypart(BodypartSlot.Penis)):
+			return getBodypart(BodypartSlot.Penis).getFluidType(fluidSource)
 		return "Cum"
 	if(fluidSource == FluidSource.Vagina):
+		if(hasBodypart(BodypartSlot.Vagina)):
+			return getBodypart(BodypartSlot.Vagina).getFluidType(fluidSource)
 		return "GirlCum"
 	if(fluidSource == FluidSource.Strapon):
 		return "CumLube"
 	if(fluidSource == FluidSource.Breasts):
+		if(hasBodypart(BodypartSlot.Breasts)):
+			return getBodypart(BodypartSlot.Breasts).getFluidType(fluidSource)
 		return "Milk"
 	if(fluidSource == FluidSource.Pissing):
 		return "Piss"
 		
 	return null
+
+func getCustomFluidType(_fluidSource) -> String:
+	return ""
 
 func getFluidAmount(fluidSource):
 	if(fluidSource == FluidSource.Penis):
@@ -954,7 +973,7 @@ func cummedInBodypartByAdvanced(bodypartSlot, characterID, advancedData:Dictiona
 		
 		var fluids = strapon.getFluids()
 		if(fluids != null):
-			resultAmount = fluids.transferTo(thebodypart, amountToTransfer)
+			resultAmount = fluids.transferTo(thebodypart, amountToTransfer, 0.0, getID())
 	else:
 		var thebodypart = getBodypart(bodypartSlot)
 		resultAmount = ch.getFluidAmount(sourceType) * amountToTransfer
@@ -1021,7 +1040,7 @@ func rubsVaginasWith(characterID, chanceToStealCum = 100, showMessages = true):
 	if(orifice == null || npcOrifice == null):
 		return
 	
-	var success = orifice.shareFluids(npcOrifice, RNG.randf_range(0.2, 0.4))
+	var success = orifice.shareFluids(npcOrifice, RNG.randf_range(0.2, 0.4), getID())
 	if(showMessages && success):
 		emit_signal("exchangedCumDuringRubbing", getName(), ch.getName())
 
@@ -1154,6 +1173,16 @@ func gotThroatFuckedBy(characterID, showMessages = true):
 func getExposure():
 	return buffsHolder.getExposure()
 
+func makeNipplesSore():
+	if(!hasPerk(Perk.MilkNoSoreNipples)):
+		addEffect(StatusEffect.SoreNipplesAfterMilking)
+
+func hasSoreNipples() -> bool:
+	return hasEffect(StatusEffect.SoreNipplesAfterMilking)
+
+func removeNippleSoreness():
+	removeEffect(StatusEffect.SoreNipplesAfterMilking)
+
 # PREGNANCY STUFF
 
 func getBaseFertility() -> float:
@@ -1221,6 +1250,11 @@ func getMenstrualCycle():
 func isPregnant():
 	if(menstrualCycle != null):
 		return menstrualCycle.isPregnant()
+	return false
+
+func isPregnantFrom(_charID:String) -> bool:
+	if(menstrualCycle != null):
+		return menstrualCycle.isPregnantFrom(_charID)
 	return false
 
 func isVisiblyPregnant():
@@ -1415,8 +1449,8 @@ func milk(howmuch = 1.0):
 		return 0.0
 	var howMuchMilk = production.drain(howmuch)
 	production.afterMilked()
-	if(!hasPerk(Perk.MilkNoSoreNipples) && howmuch >= 0.5):
-		addEffect(StatusEffect.SoreNipplesAfterMilking)
+	if(howmuch >= 0.5):
+		makeNipplesSore()
 	if(isPlayer()):
 		addSkillExperience(Skill.Milking, 20)
 	return howMuchMilk
@@ -1833,6 +1867,10 @@ func addBodywritingRandom():
 	var zone = BodyWritingsZone.getRandomZone()
 	addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone))
 
+func addBodywritingLowerBody():
+	var zone = BodyWritingsZone.getRandomZoneLowerPart()
+	addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone))
+
 func hasBodywritings():
 	return hasEffect(StatusEffect.HasBodyWritings)
 
@@ -2110,10 +2148,6 @@ func getWornChastityCage():
 	return null
 
 func isWearingChastityCage() -> bool:
-	# Having a chastity cage also means that you have a penis
-	if(!hasBodypart(BodypartSlot.Penis)):
-		return false
-	
 	if(!getInventory().hasSlotEquipped(InventorySlot.Penis)):
 		return false
 	
@@ -2162,7 +2196,7 @@ func bodypartTransferFluidsTo(bodypartID, otherCharacterID, otherBodypartID, fra
 	if(otherOrifice == null):
 		return false
 	
-	return orifice.transferTo(otherOrifice, fraction, minAmount) > 0.0
+	return orifice.transferTo(otherOrifice, fraction, minAmount, getID()) > 0.0
 
 func bodypartTransferFluidsToAmount(bodypartID, otherCharacterID, otherBodypartID, fraction = 0.5, minAmount = 0.0):
 	if(!hasBodypart(bodypartID)):
@@ -2182,7 +2216,7 @@ func bodypartTransferFluidsToAmount(bodypartID, otherCharacterID, otherBodypartI
 	if(otherOrifice == null):
 		return 0.0
 	
-	return orifice.transferTo(otherOrifice, fraction, minAmount)
+	return orifice.transferTo(otherOrifice, fraction, minAmount, getID())
 
 func bodypartShareFluidsWith(bodypartID, otherCharacterID, otherBodypartID, fraction = 0.5):
 	if(!hasBodypart(bodypartID)):
@@ -2202,7 +2236,7 @@ func bodypartShareFluidsWith(bodypartID, otherCharacterID, otherBodypartID, frac
 	if(otherOrifice == null):
 		return false
 	
-	return orifice.shareFluids(otherOrifice, fraction)
+	return orifice.shareFluids(otherOrifice, fraction, getID())
 
 func processSexTurn():
 	for effectID in statusEffects.keys():
@@ -2680,6 +2714,10 @@ func onSexEvent(_event : SexEvent):
 	for itemSlot in items:
 		var item = items[itemSlot]
 		item.onSexEvent(_event)
+	
+	var theTFHolder = getTFHolder()
+	if(theTFHolder != null):
+		theTFHolder.onSexEvent(_event)
 
 func onFightStart(_contex = {}):
 	beforeFightStarted() # Legacy
@@ -2999,39 +3037,83 @@ func hasSomethingToStruggleOutOf() -> bool:
 		return true
 	return false
 
-func doStruggleOutOfRestraints(isScared:bool = false, addStats:bool = true, customActor=null, damageMult:float = 1.0) -> Dictionary:
+func getRestraintsToStruggleOutOf() -> Dictionary:
 	var possible = []
 	var trivial = []
-	
-	var whoStruggles = self
-	if(customActor != null):
-		whoStruggles = customActor
-	
+
 	for item in getInventory().getEquppedRestraints():
-		var restraintData: RestraintData = item.getRestraintData()
-		
+		var restraintData:RestraintData = item.getRestraintData()
+
 		if(restraintData == null || !restraintData.canStruggleFinal() || !restraintData.shouldStruggle()):
 			continue
-		
+
 		if(!restraintData.shouldDoStruggleMinigame(self)):
 			trivial.append(item)
 		else:
 			possible.append(item)
-	
-	var pickedItem
-	var minigameResult:MinigameResult
+
+	var restraintsToStruggleOutOf = {
+		possible = possible,
+		trivial = trivial,
+	}
+
+	return restraintsToStruggleOutOf
+
+func getNextRestraintToStruggleOutOf(deterministicOrderHashInt:int = 0):
+	var nextRestraintToStruggleOutOf = null
+
+	if(deterministicOrderHashInt == 0):
+		deterministicOrderHashInt = RNG.randi_range(1, 1000000)
+
+	var restraintsToStruggleOutOf:Dictionary = getRestraintsToStruggleOutOf()
+
+	var possible:Array = restraintsToStruggleOutOf.possible
+	var trivial:Array = restraintsToStruggleOutOf.trivial
+
+	for item in possible:
+		if(item.id in ["StocksStatic", "SlutwallStatic"]):
+			nextRestraintToStruggleOutOf = {
+				item = item,
+				isTrivial = false,
+			}
+			return nextRestraintToStruggleOutOf
+
 	if(trivial.size() > 0):
-		pickedItem = RNG.pick(trivial)
+		nextRestraintToStruggleOutOf = {
+			item = RNG.pickHashed(trivial, deterministicOrderHashInt),
+			isTrivial = true,
+		}
+		return nextRestraintToStruggleOutOf
+	elif(possible.size() > 0):
+		nextRestraintToStruggleOutOf = {
+			item = RNG.pickHashed(possible, deterministicOrderHashInt),
+			isTrivial = false,
+		}
+		return nextRestraintToStruggleOutOf
+	else:
+		nextRestraintToStruggleOutOf = null
+		return nextRestraintToStruggleOutOf
+
+func doStruggleOutOfRestraints(isScared:bool = false, addStats:bool = true, customActor=null, damageMult:float = 1.0, deterministicOrderHashInt:int = 0) -> Dictionary:
+	var nextRestraintToStruggleOutOf = getNextRestraintToStruggleOutOf(deterministicOrderHashInt)
+
+	if(nextRestraintToStruggleOutOf == null):
+		return {}
+
+	var whoStruggles = self
+	if(customActor != null):
+		whoStruggles = customActor
+
+	var pickedItem = nextRestraintToStruggleOutOf.item
+	var minigameResult:MinigameResult
+	if(nextRestraintToStruggleOutOf.isTrivial):
 		minigameResult = MinigameResult.new()
 		minigameResult.score = 1.0
-	elif(possible.size() > 0):
-		pickedItem = RNG.pick(possible)
+	else:
 		minigameResult = whoStruggles.getRestraintStrugglingMinigameResult()
-		
+
 		if(isScared):
 			minigameResult.score = min(minigameResult.score, min(1.0, RNG.randf_range(0.6, 1.1)))
-	else:
-		return {}
 	
 	if(customActor != null):
 		minigameResult.beingHelped = true
@@ -3116,6 +3198,9 @@ func onAutoLevelUp():
 	if(GM.main != null && GM.main.characterIsVisible(getID())):
 		GM.main.addMessage(getName()+" has reached level "+str(getLevel()))
 	
+	autoSpendFreeStatPoints()
+
+func autoSpendFreeStatPoints():
 	var statWeightMap:Dictionary = {}
 	for stat in Stat.getAll():
 		var statValue:int = skillsHolder.getStat(stat)
@@ -3128,6 +3213,7 @@ func onAutoLevelUp():
 	
 	while(skillsHolder.getFreeStatPoints() > 0):
 		var stat = RNG.pickWeightedDict(statWeightMap)
+		statWeightMap[stat] = sqrt(max(float(skillsHolder.getStat(stat)), 1.0))
 		skillsHolder.increaseStatIfCan(stat)
 
 func addFightExperienceAuto(_otherCharID:String, didWin:bool):
@@ -3245,3 +3331,175 @@ func canZoneOrgasm(bodypartSlot) -> bool:
 		return true
 	
 	return thePart.getSensitiveZone().canOrgasm()
+
+func applyTFBodypart(bodypartSlot, data:Dictionary):
+	if(!hasBodypart(bodypartSlot)):
+		if(!data.has("bodypartID") || data["bodypartID"] == null || data["bodypartID"] == ""):
+			return
+		giveBodypart(GlobalRegistry.createBodypart(data["bodypartID"]), false)
+		getBodypart(bodypartSlot).generateRandomColors(self)
+		getBodypart(bodypartSlot).generateRandomSkinIfCan(self)
+		getBodypart(bodypartSlot).applyTFData(data)
+		return
+	
+	if(!data.has("bodypartID")):
+		return
+	if(data["bodypartID"] == null || data["bodypartID"] == ""):
+		removeBodypart(bodypartSlot, false)
+		return
+	
+	var currentPart = getBodypart(bodypartSlot)
+	if(currentPart.id == data["bodypartID"]):
+		currentPart.applyTFData(data)
+		return
+	
+	var savedData = currentPart.saveDataForTF()
+	giveBodypart(GlobalRegistry.createBodypart(data["bodypartID"]), false)
+	getBodypart(bodypartSlot).loadDataForTF(savedData)
+	getBodypart(bodypartSlot).applyTFData(data)
+
+func saveOriginalTFData() -> Dictionary:
+	return {}
+
+func applyTFData(_data):
+	pass
+
+func loadTFVar(_data:Dictionary, _keyID:String, default):
+	if(!_data.has(_keyID)):
+		return default
+	return _data[_keyID]
+
+func getTFHolder():
+	return null
+
+func getTFTotalStagesSum() -> int:
+	var theHolder = getTFHolder()
+	if(theHolder == null):
+		return 0
+	return theHolder.getTotalStageSum()
+
+func getSexGoalSubWeightModifier(_sexGoalID:String, _domID:String) -> float:
+	var result:float = 1.0
+	var theTFHolder = getTFHolder()
+	if(theTFHolder != null):
+		result *= theTFHolder.getSexGoalWeightModifier(_sexGoalID)
+	
+	return result
+
+func undoAllTransformations():
+	var theHolder = getTFHolder()
+	if(theHolder != null):
+		theHolder.undoAllTransformations()
+
+func makeAllTransformationsPermanent():
+	var theHolder = getTFHolder()
+	if(theHolder != null):
+		theHolder.makeAllTransformationsPermanent()
+
+func hasActiveTransformations() -> bool:
+	var theHolder = getTFHolder()
+	if(theHolder == null):
+		return false
+	return theHolder.hasActiveTransformations()
+
+func calculateSpeciesBasedOnParts(_limit:int = 2) -> Array:
+	var result:Array = []
+	while(_limit > 0):
+		var newBucket:Array = calculateSpeciesBasedOnPartsReq(result, 0.99 if !result.empty() else -999.9)
+		if(newBucket.size() <= 0):
+			break
+		while(_limit > 0 && newBucket.size() > 0):
+			result.append(newBucket.pop_front())
+			_limit -= 1
+	return result
+
+func calculateSpeciesBasedOnPartsReq(_ignoreSpecies:Array = [], minVal:float = -9999.9) -> Array:
+	#var result:Array = []
+	
+	var speciesScores:Dictionary = {}
+	
+	for bodypartSlot in bodyparts:
+		var theBodypart:Bodypart = getBodypart(bodypartSlot)
+		if(theBodypart == null):
+			continue
+		var partScores:Dictionary = theBodypart.getSpeciesScores()
+		
+		var isInIgnore:bool = false
+		for partSpecies in partScores:
+			if(_ignoreSpecies.has(partSpecies)):
+				isInIgnore = true
+				break
+		if(isInIgnore):
+			continue
+		
+		for partSpecies in partScores:
+			if(partSpecies == Species.Any || partSpecies == Species.AnyNPC):
+				continue
+			if(!speciesScores.has(partSpecies)):
+				speciesScores[partSpecies] = 0.0
+			speciesScores[partSpecies] += partScores[partSpecies]
+	
+	if(speciesScores.empty()):
+		return []
+	
+	var scoreToSpecies:Dictionary = {}
+	for theSpecies in speciesScores:
+		var theSpeciesObj:Species = GlobalRegistry.getSpecies(theSpecies)
+		if(theSpeciesObj == null):
+			continue
+		
+		var theSpeciesScore:float = speciesScores[theSpecies] * theSpeciesObj.calculateScoreForSpeciesCalculations(self)
+		if(theSpeciesScore <= 0.0):
+			continue
+		if(!scoreToSpecies.has(theSpeciesScore)):
+			scoreToSpecies[theSpeciesScore] = []
+		scoreToSpecies[theSpeciesScore].append(theSpecies)
+		
+	#print(scoreToSpecies)
+	
+	var biggestSp:Array = []
+	var biggestScore:float = minVal
+	for someScore in scoreToSpecies:
+		if(someScore > biggestScore):
+			biggestScore = someScore
+			biggestSp = scoreToSpecies[someScore]
+	return biggestSp
+
+func calculateNpcGender():
+	var resultGender = NpcGender.Male
+	var otherHasPenis = hasPenis()
+	var otherHasVag = hasVagina()
+	var otherHasTits = hasNonFlatBreasts()
+	if(otherHasPenis && otherHasVag):
+		resultGender = NpcGender.Herm
+	elif(otherHasPenis && otherHasTits):
+		resultGender = NpcGender.Shemale
+	elif(otherHasPenis):
+		resultGender = NpcGender.Male
+	elif(otherHasVag && !otherHasTits):
+		resultGender = NpcGender.Peachboy
+	else:
+		resultGender = NpcGender.Female
+	return resultGender
+
+func increaseBodypartSensitivity(bodypartSlot:String, howMuch:float):
+	if(!hasBodypart(bodypartSlot)):
+		return
+	
+	var bodypart = getBodypart(bodypartSlot)
+	
+	var zone = bodypart.getSensitiveZone()
+	if(zone == null):
+		return
+	zone.addSensitivity(howMuch)
+	
+func resetSkillHolderFully():
+	if(skillsHolder):
+		skillsHolder.queue_free()
+		skillsHolder = null
+	skillsHolder = SkillsHolder.new()
+	skillsHolder.setCharacter(self)
+	add_child(skillsHolder)
+
+func canApplySmartLocks() -> bool:
+	return false

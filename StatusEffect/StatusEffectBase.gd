@@ -21,6 +21,7 @@ const IconColorBlue = Color(0.207843, 0.227451, 0.556863)
 const IconColorWhite = Color.white
 const IconColorGray = Color.gray
 const IconColorYellow = Color.yellow
+const IconColorCyan = Color.cyan
 
 func _init():
 	pass

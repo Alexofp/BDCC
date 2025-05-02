@@ -340,3 +340,6 @@ func getScene(theID):
 	if(!scenes.has(theID)):
 		return null
 	return scenes[theID]
+
+func isStaticDatapack() -> bool:
+	return loadedPath.begins_with("res://")

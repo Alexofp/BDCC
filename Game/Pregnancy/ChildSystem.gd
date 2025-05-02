@@ -11,17 +11,17 @@ func _ready():
 func addChild(child):
 	children.append(child)
 	
-func getChildren():
+func getChildren() -> Array:
 	return children
 
-func getChildrenOf(charID):
+func getChildrenOf(charID) -> Array:
 	var result = []
 	for child in children:
 		if((child.getMotherID() == charID) || (child.getFatherID() == charID)):
 			result.append(child)
 	return result
 
-func getChildrenAmountOf(charID):
+func getChildrenAmountOf(charID) -> int:
 	var result = 0
 	for child in children:
 		if((child.getMotherID() == charID) || (child.getFatherID() == charID)):
@@ -30,7 +30,7 @@ func getChildrenAmountOf(charID):
 	result += getArchiveChildCountMotherOrFather(charID)
 	return result
 
-func getChildrenAmountOfOnlyMother(charID):
+func getChildrenAmountOfOnlyMother(charID) -> int:
 	var result = 0
 	for child in children:
 		if(child.getMotherID() == charID):
@@ -39,7 +39,7 @@ func getChildrenAmountOfOnlyMother(charID):
 	result += getArchiveChildCountMotherID(charID)
 	return result
 
-func getChildrenAmountOfOnlyFather(charID):
+func getChildrenAmountOfOnlyFather(charID) -> int:
 	var result = 0
 	for child in children:
 		if(child.getFatherID() == charID):
@@ -48,14 +48,16 @@ func getChildrenAmountOfOnlyFather(charID):
 	result += getArchiveChildCountFatherID(charID)
 	return result
 
-func getSharedChildren(firstCharID, secondCharID):
+# Get array of children created by both firstCharID and secondCharID regardless of their role (excluding archived children)
+func getSharedChildren(firstCharID, secondCharID) -> Array:
 	var result = []
 	for child in children:
 		if(((child.getMotherID() == firstCharID) && (child.getFatherID() == secondCharID)) || ((child.getFatherID() == firstCharID) && (child.getMotherID() == secondCharID))):
 			result.append(child)
 	return result
 
-func getSharedChildrenAmount(firstCharID, secondCharID):
+# Get amount of children created by both firstCharID and secondCharID regardless of their role
+func getSharedChildrenAmount(firstCharID, secondCharID) -> int:
 	var result = 0
 	for child in children:
 		if(((child.getMotherID() == firstCharID) && (child.getFatherID() == secondCharID)) || ((child.getFatherID() == firstCharID) && (child.getMotherID() == secondCharID))):
@@ -64,15 +66,16 @@ func getSharedChildrenAmount(firstCharID, secondCharID):
 	result += getArchiveChildCountAny(firstCharID, secondCharID)
 	return result
 
-func getSharedChildrenAmountFatherMother(firstCharID, secondCharID):
+# Get amount of children where firstCharID was a father and secondCharID was a mother
+func getSharedChildrenAmountFatherMother(firstCharID, secondCharID) -> int:
 	var result = 0
 	for child in children:
-		if((child.getFatherID() == firstCharID) || (child.getMotherID() == secondCharID)):
+		if((child.getFatherID() == firstCharID) && (child.getMotherID() == secondCharID)):
 			result += 1
-	result += getArchiveChildCount(firstCharID, secondCharID)
+	result += getArchiveChildCount(secondCharID, firstCharID)
 	return result
 
-func getChildBirthInfoString(childs):
+func getChildBirthInfoString(childs) -> String:
 	var bornChildString = ""
 	
 	for child in childs:
@@ -98,6 +101,7 @@ func getMaxStoredRecordsForPC() -> int:
 func getMaxStoredRecordsForNPC() -> int:
 	return OPTIONS.getMaxKeepNPCKids()
 
+# Turn children objects into archived version for optimization purposes
 func optimize():
 	if(!shouldOptimize()):
 		return

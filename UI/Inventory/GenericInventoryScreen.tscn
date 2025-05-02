@@ -1,0 +1,159 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://UI/Inventory/GenericInventoryScreen.gd" type="Script" id=1]
+[ext_resource path="res://UI/Inventory/InventoryEntry.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Fonts/Titillium-Bold.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=4]
+[ext_resource path="res://Fonts/Titillium-RegularItalic.otf" type="DynamicFontData" id=5]
+[ext_resource path="res://Fonts/Titillium-BoldItalic.otf" type="DynamicFontData" id=6]
+
+[sub_resource type="DynamicFontData" id=9]
+font_path = "res://Fonts/SourceCodePro/SourceCodePro-Regular.otf"
+
+[sub_resource type="DynamicFont" id=1]
+size = 28
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 4 )
+fallback/0 = SubResource( 9 )
+
+[sub_resource type="DynamicFontData" id=4]
+font_path = "res://Fonts/SourceCodePro/SourceCodePro-BoldIt.otf"
+
+[sub_resource type="DynamicFont" id=5]
+size = 20
+font_data = ExtResource( 6 )
+fallback/0 = SubResource( 4 )
+
+[sub_resource type="DynamicFontData" id=6]
+font_path = "res://Fonts/SourceCodePro/SourceCodePro-MediumIt.otf"
+
+[sub_resource type="DynamicFont" id=7]
+size = 20
+font_data = ExtResource( 5 )
+fallback/0 = SubResource( 6 )
+
+[sub_resource type="DynamicFontData" id=8]
+font_path = "res://Fonts/SourceCodePro/SourceCodePro-Bold.otf"
+
+[sub_resource type="DynamicFont" id=12]
+size = 20
+font_data = ExtResource( 3 )
+fallback/0 = SubResource( 8 )
+
+[sub_resource type="DynamicFontData" id=10]
+font_path = "res://Fonts/SourceCodePro/SourceCodePro-Regular.otf"
+
+[sub_resource type="DynamicFontData" id=2]
+font_path = "res://Fonts/DroidSansJapanese.woff2"
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://Fonts/DroidSansFallback.woff2"
+
+[sub_resource type="DynamicFont" id=11]
+size = 20
+font_data = ExtResource( 4 )
+fallback/0 = SubResource( 10 )
+fallback/1 = SubResource( 2 )
+fallback/2 = SubResource( 3 )
+
+[node name="GenericInventoryScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.105882, 0.0588235, 0.258824, 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 1276.0
+margin_bottom = 716.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_right = 422.0
+margin_bottom = 712.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_right = 422.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 1 )
+text = "Pick something"
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 32.0
+margin_right = 422.0
+margin_bottom = 36.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 40.0
+margin_right = 422.0
+margin_bottom = 712.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/bold_italics_font = SubResource( 5 )
+custom_fonts/italics_font = SubResource( 7 )
+custom_fonts/bold_font = SubResource( 12 )
+custom_fonts/normal_font = SubResource( 11 )
+bbcode_enabled = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_left = 426.0
+margin_right = 1272.0
+margin_bottom = 712.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+margin_right = 846.0
+margin_bottom = 712.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2/ScrollContainer"]
+margin_right = 846.0
+margin_bottom = 712.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SearchLineEdit" type="LineEdit" parent="MarginContainer/HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer2"]
+margin_right = 846.0
+margin_bottom = 24.0
+placeholder_text = "Search"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer2"]
+margin_top = 28.0
+margin_right = 846.0
+margin_bottom = 712.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer2/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 846.0
+margin_bottom = 64.0
+
+[node name="HBoxContainer2" parent="MarginContainer/HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer2/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 68.0
+margin_right = 846.0
+margin_bottom = 132.0
+
+[connection signal="text_changed" from="MarginContainer/HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer2/SearchLineEdit" to="." method="_on_SearchLineEdit_text_changed"]

@@ -25,15 +25,16 @@ static func getAll():
 	return [FOREVER_FLAT, FLAT, A, B, C, D, DD, DDD, G, H, I, J, K, L, M, N, O]
 
 static func breastSizeToString(bsize:int):
-	var names = {FOREVER_FLAT:"Forever flat", FLAT:"Flat", A:"A", B:"B", C:"C", D:"D", DD:"DD", DDD:"DDD", G:"G", H:"H", I:"I", J:"J", K:"K", L:"L", M:"M", N:"N", O:"O"}
-	#print(bsize," ",names[bsize])
-	if(names.has(bsize)):
-		
-		
-		return names[bsize]
-	if(bsize < -1):
-		return "Forever flat"
-	return "O+"
+	return breastSizeToNameProcedural(bsize, "")
+#	var names = {FOREVER_FLAT:"Forever flat", FLAT:"Flat", A:"A", B:"B", C:"C", D:"D", DD:"DD", DDD:"DDD", G:"G", H:"H", I:"I", J:"J", K:"K", L:"L", M:"M", N:"N", O:"O"}
+#	#print(bsize," ",names[bsize])
+#	if(names.has(bsize)):
+#
+#
+#		return names[bsize]
+#	if(bsize < -1):
+#		return "Forever flat"
+#	return "O+"
 
 static func getAllSizesWithNames():
 	var result = []
@@ -42,12 +43,13 @@ static func getAllSizesWithNames():
 	return result
 
 static func breastSizeToCupString(bsize:int):
-	var cupName = breastSizeToString(bsize)
-	if(bsize <= 0):
-		return cupName
-	if(bsize >= O):
-		return "O+ cup"
-	return cupName+"-cup"
+	return breastSizeToNameProcedural(bsize)
+#	var cupName = breastSizeToString(bsize)
+#	if(bsize <= 0):
+#		return cupName
+#	if(bsize >= O):
+#		return "O+ cup"
+#	return cupName+"-cup"
 
 static func breastSizeToMilkAmount(bsize:int):
 	var amounts = {FOREVER_FLAT: 0.0, FLAT: 0.5, A: 1.0, B: 1.5, C: 3.0, D: 5.0, DD: 8.0, DDD: 10.0, G: 12.0, H: 15.0, I: 20.0, J: 25.0, K: 32.0, L: 40.0, M: 50.0, N: 65.0, O: 80.0}
@@ -71,4 +73,24 @@ static func breastSizeToBoneScale(bsize:int):
 	
 	var lastKey = O
 	return sizes[lastKey] + float(bsize - lastKey) / 10.0
+
+# Flat | A-cup | B-cup | C-cup | D-cup | DD-cup | DDD-cup | G-cup | H-cup | I-cup | J-cup | K-cup | L-cup | M-cup | N-cup | O-cup | P-cup | Q-cup | R-cup | S-cup | T-cup | U-cup | V-cup | W-cup | X-cup | Y-cup | Z-cup | ZA-cup | ZB-cup | ZC-cup | ZD-cup | ZE-cup | ZF-cup | ZG-cup | ZH-cup | ZI-cup | ZJ-cup | ZK-cup | ZL-cup | ZM-cup | ZN-cup | ZO-cup | ZP-cup | ZQ-cup | ZR-cup | ZS-cup | ZT-cup | ZU-cup | ZV-cup | ZW-cup | ZX-cup | ZY-cup | ZZ-cup | ZZA-cup | ZZB-cup | ZZC-cup | ZZD-cup | ZZE-cup | ZZF-cup | ZZG-cup | ZZH-cup | ZZI-cup | ZZJ-cup ..........
+static func breastSizeToNameProcedural(bsize:int, cupEnding:String="-cup"):
+	if(bsize <= -1):
+		return "Forever flat"
+	if(bsize <= 0):
+		return "Flat"
 	
+	var names:Dictionary = {A:"A", B:"B", C:"C", D:"D", DD:"DD", DDD:"DDD"}
+	if(names.has(bsize)):
+		return names[bsize]+cupEnding
+	
+	var base_char:int = ord('A')
+	var cup_char_ind:int = (bsize)
+	var finalCupLetter:String = ""
+	while(cup_char_ind >= 26):
+		cup_char_ind -= 26
+		finalCupLetter += "Z"
+	if(cup_char_ind > 0):
+		finalCupLetter += char(base_char - 1 + cup_char_ind)
+	return finalCupLetter + cupEnding

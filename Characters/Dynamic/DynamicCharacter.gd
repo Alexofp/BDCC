@@ -22,9 +22,14 @@ var npcPronounsGender = null
 var datapackID = null
 var npcLootOverride = null
 var extraSettings:DynCharExtraSettings = null
+var tfHolder:TFHolder
 
 func _init():
 	npcHasMenstrualCycle = true
+
+func _ready():
+	tfHolder = TFHolder.new()
+	tfHolder.setCharacter(self)
 
 func _getName():
 	return npcName
@@ -404,6 +409,9 @@ func saveData():
 	if(extraSettings != null):
 		data["extraSettings"] = extraSettings.saveData()
 	
+	if(tfHolder != null):
+		data["tfHolder"] = tfHolder.saveData()
+	
 	return data
 
 func loadData(data):
@@ -512,6 +520,8 @@ func loadData(data):
 	lustInterests.loadDataDynamicNpc(SAVE.loadVar(data, "lustInterests", {}))
 	fetishHolder.loadData(SAVE.loadVar(data, "fetishHolder", {}))
 	personality.loadData(SAVE.loadVar(data, "personality", {}))
+	if(data.has("tfHolder") && tfHolder != null):
+		tfHolder.loadData(SAVE.loadVar(data, "tfHolder", {}))
 
 	if(data.has("enslaveQuest") && data["enslaveQuest"] != null):
 		var newEnslaveQuest = NpcEnslavementQuest.new()
@@ -722,3 +732,52 @@ func loadFromDatapackCharacter(_datapack:Datapack, _datapackChar:DatapackCharact
 	
 	stamina = getMaxStamina()
 	updateAppearance()
+
+func saveOriginalTFData() -> Dictionary:
+	var partSkinData:Dictionary = {}
+	for bodypartSlot in bodyparts:
+		var bodypart = getBodypart(bodypartSlot)
+		if(bodypart == null):
+			continue
+		partSkinData[bodypartSlot] = bodypart.getTFSkinData()
+	
+	var result:Dictionary = {
+		"species": npcSpecies,
+		"femininity": npcFeminity,
+		"thickness": npcThickness,
+		"pickedSkin": pickedSkin,
+		"pickedSkinRColor": pickedSkinRColor.to_html(),
+		"pickedSkinGColor": pickedSkinGColor.to_html(),
+		"pickedSkinBColor": pickedSkinBColor.to_html(),
+		"gender": npcGender,
+		"pronounsGender": npcPronounsGender,
+		"partsSkins": partSkinData,
+	}
+	
+	return result
+
+func applyTFData(_data):
+	npcSpecies = loadTFVar(_data, "species", npcSpecies)
+	npcFeminity = loadTFVar(_data, "femininity", npcFeminity)
+	npcThickness = loadTFVar(_data, "thickness", npcThickness)
+	pickedSkin = loadTFVar(_data, "pickedSkin", pickedSkin)
+	npcGender = loadTFVar(_data, "gender", npcGender)
+	npcPronounsGender = loadTFVar(_data, "pronounsGender", npcPronounsGender)
+	if(_data.has("pickedSkinRColor")):
+		pickedSkinRColor = Util.tryFixColor(_data["pickedSkinRColor"], false)
+	if(_data.has("pickedSkinGColor")):
+		pickedSkinGColor = Util.tryFixColor(_data["pickedSkinGColor"], false)
+	if(_data.has("pickedSkinBColor")):
+		pickedSkinBColor = Util.tryFixColor(_data["pickedSkinBColor"], false)
+	var partSkinData:Dictionary = loadTFVar(_data, "partsSkins", {})
+	for bodypartSlot in bodyparts:
+		var bodypart = getBodypart(bodypartSlot)
+		if(bodypart == null || !partSkinData.has(bodypartSlot)):
+			continue
+		bodypart.applySkinData(partSkinData[bodypartSlot] if partSkinData.has(bodypartSlot) else {})
+
+func getTFHolder():
+	return tfHolder
+
+func canApplySmartLocks() -> bool:
+	return !temporaryCharacter

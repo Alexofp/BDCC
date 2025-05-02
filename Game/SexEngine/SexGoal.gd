@@ -32,6 +32,7 @@ const BreastFeedSub = "BreastFeedSub"
 const MilkWithPenisPump = "MilkWithPenisPump"
 
 const Hypnotize = "Hypnotize"
+const UseTFDrug = "UseTFDrug"
 
 # Subgoals, these don't need classes defined
 const SubUndressSub = "SubUndressSub"
@@ -43,3 +44,4 @@ const SubWearStraponOnDom = "SubWearStraponOnDom"
 const SubChoking = "SubChoking"
 const SubOptionalApplyLubeOnSub = "SubOptionalApplyLubeOnSub"
 const SubOptionalApplyLubeOnDom = "SubOptionalApplyLubeOnDom"
+const SubMakeUnconscious = "SubMakeUnconscious"

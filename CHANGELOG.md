@@ -5,6 +5,43 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.1.8] - 2025-05-02
+### Added
+- Transformations! All sorts of weird drugs began popping up all around the prison. Weird drugs that seem to possess transformative properties..
+- Become Eliza's lab assistant! A whole new gameplay-oriented storyline about helping Eliza with this drug problem. A sane man would choose to get rid of this contraband as soon as possible. But not Eliza.. To start your journey of becoming her assistant, choose the 'Research' option when talking to Eliza.
+- [Kidlat](https://github.com/user-attachments/assets/3f74a9d7-5947-476e-8b5c-d030b4fe6ee6)! Welcome the new guest character, a very cute soft kitty. You will run into her during the exploration of a new zone. She has a wholesome questline attached to her. Will you help her help you? Just don't touch her loaf, it's not for sale.
+- Drug den! Explore the hidden layer of the BDCC prison.. countless abandoned maintenance corridors that got turned into a full-blown multi-floored drug den dungeon.. Loot stashes, fight junkies, raid their make-shift drug laboratories.. and earn science points. You will get access to this roguelike zone during Eliza's storyline!
+- Chemistry Lab! As Eliza's assistant, you will get access to her personal lab. Make drugs, unlock upgrades using science points, get access to prototypes. Help Eliza to fill out the transformation drug database. Each tf drug that you find and bring to her, you will be able to make yourself! Trust me, there is a lot to do.
+- Transformation system! Over 20+ TF drugs. Morph into different species (including modded ones), change your gender/skin/etc. I've designed it with a few goals in mind. Gradual transformation: things will happen over time rather than instantly and all at once. Composability: you can have several TFs happening at once (unless they're completely incompatible). Full control: no change is permanent, the game will always 'remember' how your character looked originally. If you want to undo the transformations, eat a blue pill or find Eliza. But you can also make the transformations permanent by eating a red pill.. or getting force-fed one (can be toggled in options). Dynamic npc support: drugs work with both, the player and dynamic npcs. The transformative effects can even happen during sex.
+- Eliza's mother. A new character that has an optional small lewd/wholesome storyline with soft incest themes. Becomes available if you complete Eliza's storyline.
+- Nursery bounty board. Will be unlocked as part of Eliza's storyline. This board will show tasks that you can complete in order to receive credits and science points.
+- New milking scenes with Eliza. Complete with new hot animations.
+- 3 new sex poses: one new cowgirl variant, one pose of fucking someone against the wall, one pose of fucking someone on the floor.
+- PregExpac mod by AverageAce integrated into the game. It has new scenes and also adds lots of little pregnancy-related touches in existing content.
+- 2 new hairs. New feline tail. New skin from me. +5 new skins from AverageAce!
+- You can now refuse when other npcs try to help with your restraints ([Pull request by keerifox](https://github.com/Alexofp/BDCC/pull/148))
+- Fullscreen toggle. Press 'Alt+Enter' to switch between windowed and fullscreen mode. Your selection will be remembered between launches. You can also limit the game's maximum fps in the options.
+- New bing auto-translator. Ability to choose the order of translators (if one translator fails, the next one in the list will be used). ([Pull request by CKRainbow](https://github.com/Alexofp/BDCC/pull/157))
+- Experimental global registry cache. Speeds up game loading by at least 50% after it has been opened at least once before. If this breaks things, launch the game with '-noRegistryCache' or '-resetRegistryCache' command line options
+- Better modding support for custom pawn types. Custom pawn types can now be made to persue the same goals/tasks as built-in types.
+- Mods can contain datapacks inside them. (Patch by Fox2Code)
+- Ability to make the game semi-portable. If you create a folder named 'BDCCData' near the .exe, the game will use it to store all of its data/saves/etc. ([Pull request by Merith](https://github.com/Alexofp/BDCC/pull/142))
+
+### Changed
+- Breast cup sizes are now procedural rather than a fixed list. Enjoy your M-cups (M stands for Milky)
+- Save info cache. The game will now cache info about your saves rather than reading each one each time that info is needed. This should greatly speed up the 'Load game' menu (after it has been opened at least once).
+- Sensitivity doesn't increase your arousal gain linearly anymore. 200% sensitivity will increase the arousal gain modifier only by about 30% now. This should help against you orgasming too fast.
+- Can tweak the amount of space between codeblocks inside the datapack scene editor now. ([Pull request by PosionFox](https://github.com/Alexofp/BDCC/pull/137))
+- Mods menu can be controlled with a keyboard ([Pull request by CheeseyCake92](https://github.com/Alexofp/BDCC/pull/158))
+
+### Fixed
+- Npcs should stop fucking you if achieving orgasm is no longer possible (fixed for real-real now).
+- Npcs won't randomly tie you up anymore if you have the 'Tie Up' sex goal disabled.
+- Slider-related skeleton bones (thickness, breast size) are now only scaled on 2 axis rather than all 3. This -should- help against most clipping.
+- For the web build, added a browser-based text field fallback option in case you are unable to interact with Godot's text fields using your browser. This option can be enabled in the options (last one in the Other section)
+- Skins menu won't reset the current page each time you switch to a new skin anymore. ([Pull request by keerifox](https://github.com/Alexofp/BDCC/pull/156))
+- An extremely high amount of bug and typo fixes that were reported by the community! Too many to list.. I should have kept a list.. Thank you ^^.
+
 ## [0.1.7] - 2024-12-20
 ### Added
 - Blacktail Market! A secret new place where you can sell your slaves for credits. Unlocked during the new storyline
@@ -507,7 +544,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.7...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.8...main
+[0.1.8]: https://github.com/Alexofp/BDCC/compare/0.1.7...0.1.8
 [0.1.7]: https://github.com/Alexofp/BDCC/compare/0.1.6...0.1.7
 [0.1.6]: https://github.com/Alexofp/BDCC/compare/0.1.5...0.1.6
 [0.1.5]: https://github.com/Alexofp/BDCC/compare/0.1.4...0.1.5

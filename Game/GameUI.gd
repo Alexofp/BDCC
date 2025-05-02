@@ -8,7 +8,7 @@ var buttons: Array = []
 var buttonsCountPerPage: int = 15
 var optionButtonScene: PackedScene = preload("res://Game/SceneOptionButton.tscn")
 onready var optionButtonsContainer = $HBoxContainer/VBoxContainer2/HBoxContainer/GridContainer
-var currentPage = 0
+var currentPage:int = 0
 var options: Dictionary = {}
 var optionsCurrentID = 0
 var buttonsNeedUpdating = false
@@ -170,6 +170,10 @@ func setBigAnswersMode(newmode):
 			button.visible = true
 	isInBigAnswersMode = newmode
 
+onready var save_button = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer2/SaveButton
+onready var skills_button = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3/SkillsButton
+
+
 func updateButtons():
 	checkPageButtons()
 	
@@ -178,7 +182,16 @@ func updateButtons():
 			rollbackButton.disabled = false
 		else:
 			rollbackButton.disabled = true
-	
+		if(GM.main.canSave()):
+			save_button.disabled = false
+		else:
+			save_button.disabled = true
+		
+		if(GM.main.isInDungeon()):
+			skills_button.disabled = true
+		else:
+			skills_button.disabled = false
+		
 	for i in buttonsCountPerPage:
 		var button:Button = buttons[i]
 		button.disabled = true
@@ -296,7 +309,8 @@ func addUITextbox(id):
 	var uitextbox = uiTextboxScene.instance()
 	uitextbox.id = id
 	textcontainer.add_child(uitextbox)
-	uitextbox.grab_focus()
+	if(!OPTIONS.shouldUseFallbackTextInputs()):
+		uitextbox.grab_focus()
 	textboxes[id] = uitextbox
 	return uitextbox
 
@@ -306,7 +320,8 @@ func addBigUITextbox(id):
 	var uitextbox = uiTextboxBigScene.instance()
 	uitextbox.id = id
 	textcontainer.add_child(uitextbox)
-	uitextbox.grab_focus()
+	if(!OPTIONS.shouldUseFallbackTextInputs()):
+		uitextbox.grab_focus()
 	textboxes[id] = uitextbox
 	return uitextbox
 	
@@ -575,3 +590,17 @@ func _on_CloseFullArtWork_pressed():
 
 func showHornyMessage(theMessage: String):
 	hornyMessage.showMessageOnScreen(theMessage)
+
+func getCurrentPage() -> int:
+	return currentPage
+
+func setCurrentPage(newCurrentPage:int):
+	var maxpages:int = int(ceil(float(options.size())/float(buttonsCountPerPage)))
+	if(newCurrentPage > maxpages):
+		newCurrentPage = maxpages
+	if(newCurrentPage < 0):
+		newCurrentPage = 0
+	
+	currentPage = newCurrentPage
+	
+	updateButtons()

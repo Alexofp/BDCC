@@ -15,6 +15,8 @@ func _init():
 	"head": {"skin": "LynxSkin",},
 	"hair": {"r": Color("ffd6aac7"),"g": Color("fff1c0e0"),"b": Color("ff46460d"),},
 	"ears": {"g": Color("ffdb6b74"),},
+	"horns": {"r": Color("ffbd64a5"),"g": Color("ffebc57d"),"b": Color("ff9e0081"),},
+	"penis": {"g": Color("ffff90e8"),"b": Color("ff8b0089"),},
 	}
 	
 	npcLustInterests = {
@@ -115,6 +117,14 @@ func getLootTable(_battleName):
 	return MedicalLoot.new()
 
 func getThickness() -> int:
+	if(GM.main):
+		var speciesTF:String = GM.main.getFlag("ElizaModule.elizatf_species", "")
+		var bodyTF:String = GM.main.getFlag("ElizaModule.elizatf_body", "")
+		
+		if(bodyTF == "hucow"):
+			return 120
+		if(speciesTF == "demon"):
+			return 90
 	return 75
 
 func getFemininity() -> int:
@@ -133,6 +143,176 @@ func createBodyparts():
 	var breasts = GlobalRegistry.createBodypart("humanbreasts")
 	breasts.size = 4
 	giveBodypartUnlessSame(breasts)
+
+func updateBodyparts():
+	if(!GM.main):
+		return
+	var cockTF:String = GM.main.getFlag("ElizaModule.elizatf_cock", "")
+	var speciesTF:String = GM.main.getFlag("ElizaModule.elizatf_species", "")
+	var bodyTF:String = GM.main.getFlag("ElizaModule.elizatf_body", "")
+	
+	var breasts: BodypartBreasts = getBodypart(BodypartSlot.Breasts)
+	var breastsSize:int = breasts.size if breasts else -1
+	
+	var shouldPaint:bool = false
+	var currentPP:String = ""
+	if(hasPenis()):
+		currentPP = getBodypart(BodypartSlot.Penis).id
+	
+	var elizaSkinType:String = ""
+	
+	if(cockTF == "canine"):
+		if(currentPP != "caninepenis"):
+			var penis = GlobalRegistry.createBodypart("caninepenis")
+			penis.lengthCM = 22
+			penis.ballsScale = 1
+			if(giveBodypartUnlessSame(penis)):
+				shouldPaint = true
+	elif(cockTF == "dragon"):
+		if(currentPP != "dragonpenis"):
+			var penis = GlobalRegistry.createBodypart("dragonpenis")
+			penis.lengthCM = 22
+			penis.ballsScale = 1
+			if(giveBodypartUnlessSame(penis)):
+				shouldPaint = true
+	elif(cockTF == "feline"):
+		if(currentPP != "felinepenis"):
+			var penis = GlobalRegistry.createBodypart("felinepenis")
+			penis.lengthCM = 18
+			penis.ballsScale = 1
+			if(giveBodypartUnlessSame(penis)):
+				shouldPaint = true
+	elif(cockTF == "horse"):
+		if(currentPP != "equinepenis"):
+			var penis = GlobalRegistry.createBodypart("equinepenis")
+			penis.lengthCM = 25
+			penis.ballsScale = 1
+			if(giveBodypartUnlessSame(penis)):
+				shouldPaint = true
+	elif(cockTF == "human"):
+		if(currentPP != "humanpenis"):
+			var penis = GlobalRegistry.createBodypart("humanpenis")
+			penis.lengthCM = 20
+			penis.ballsScale = 1
+			if(giveBodypartUnlessSame(penis)):
+				shouldPaint = true
+	else:
+		if(currentPP != ""):
+			removeBodypart(BodypartSlot.Penis)
+		
+	var currentHead:String = getBodypart(BodypartSlot.Head).id if hasBodypart(BodypartSlot.Head) else ""
+	if(speciesTF == "dragon"):
+		if(currentHead != "dragonhead"):
+			giveBodypartUnlessSame(GlobalRegistry.createBodypart("dragonhead"))
+			giveBodypartUnlessSame(GlobalRegistry.createBodypart("demonhorns2"))
+			giveBodypartUnlessSame(GlobalRegistry.createBodypart("dragontail"))
+			giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
+			giveBodypartUnlessSame(GlobalRegistry.createBodypart("dragonears"))
+			shouldPaint = true
+	elif(speciesTF == "catgirl"):
+		elizaSkinType = "catgirl"
+		if(currentHead != "humanhead" || !hasTail()):
+			giveBodypartUnlessSame(GlobalRegistry.createBodypart("humanhead"))
+			if(hasHorns()):
+				removeBodypart(BodypartSlot.Horns)
+			giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinetail"))
+			giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
+			giveBodypartUnlessSame(GlobalRegistry.createBodypart("felineears2"))
+			shouldPaint = true
+	elif(speciesTF == "human"):
+		elizaSkinType = "human"
+		if(currentHead != "humanhead" || hasTail()):
+			giveBodypartUnlessSame(GlobalRegistry.createBodypart("humanhead"))
+			if(hasHorns()):
+				removeBodypart(BodypartSlot.Horns)
+			if(hasTail()):
+				removeBodypart(BodypartSlot.Tail)
+			giveBodypartUnlessSame(GlobalRegistry.createBodypart("plantilegs"))
+			giveBodypartUnlessSame(GlobalRegistry.createBodypart("humanears"))
+			shouldPaint = true
+	elif(speciesTF == "demon"):
+		elizaSkinType = "demon"
+		if(currentHead != "felinehead" || !hasHorns()):
+			giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinehead"))
+			giveBodypartUnlessSame(GlobalRegistry.createBodypart("demonhorns2"))
+			giveBodypartUnlessSame(GlobalRegistry.createBodypart("demontail"))
+			giveBodypartUnlessSame(GlobalRegistry.createBodypart("hoofs"))
+			giveBodypartUnlessSame(GlobalRegistry.createBodypart("felineears"))
+			shouldPaint = true
+	else:
+		if(currentHead != "felinehead" || hasHorns()):
+			if(hasHorns()):
+				removeBodypart(BodypartSlot.Horns)
+			giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinehead"))
+			giveBodypartUnlessSame(GlobalRegistry.createBodypart("felinetail"))
+			giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
+			giveBodypartUnlessSame(GlobalRegistry.createBodypart("felineears"))
+			shouldPaint = true
+	
+	if(bodyTF == "hucow"):
+		if(breastsSize != 10):
+			breasts.size = 10
+	elif(speciesTF == "demon"):
+		if(breastsSize != 6):
+			breasts.size = 6
+	else:
+		if(breastsSize != 4):
+			breasts.size = 4
+	
+	
+	
+	if(elizaSkinType == "catgirl"):
+		pickedSkin="FurGirl"
+		pickedSkinRColor=Color("ffeebcad")
+		pickedSkinGColor=Color("ffea8432")
+		pickedSkinBColor=Color("fffee5c2")
+		npcSkinData={
+		"hair": {"r": Color("ffd6aac7"),"g": Color("fff1c0e0"),"b": Color("ff46460d"),},
+		"ears": {"r": Color("ffd6aac7"),"g": Color("ffdb6b74"),},
+		"penis": {"g": Color("ffff90e8"),"b": Color("ff8b0089"),},
+		"tail": {"g": Color("ffd6aac7"),},
+		}
+	elif(elizaSkinType == "demon"):
+		pickedSkin="ArconSkin"
+		pickedSkinRColor=Color("fffee5c2")
+		pickedSkinGColor=Color("fffff4f5")
+		pickedSkinBColor=Color("ffd39666")
+		npcSkinData={
+		"head": {"skin": "LynxSkin",},
+		"hair": {"r": Color("ffce74af"),"g": Color("fff1c0e0"),"b": Color("ff46460d"),},
+		"ears": {"g": Color("ffdb6b74"),},
+		"horns": {"r": Color("ffbd64a5"),"g": Color("ffebc57d"),"b": Color("ff9e0081"),},
+		"tail": {"g": Color("ffeb7dbb"),},
+		"legs": {"skin": "LuxeSkin","g": Color("ffeb7dbb"),},
+		"penis": {"g": Color("ffff90e8"),"b": Color("ff8b0089"),},
+		}
+	elif(elizaSkinType == "human"):
+		pickedSkin="FurGirl"
+		pickedSkinRColor=Color("ffeebcad")
+		pickedSkinGColor=Color("ffea8432")
+		pickedSkinBColor=Color("ffebb7a0")
+		npcSkinData={
+		"hair": {"r": Color("ffd6aac7"),"g": Color("fff1c0e0"),"b": Color("ff46460d"),},
+		"ears": {"g": Color("ffd79482"),},
+		"penis": {"g": Color("ffffb290"),"b": Color("ffe0957e"),},
+		"tail": {"g": Color("ffd6aac7"),},
+		}
+	else:
+		pickedSkin="ArconSkin"
+		pickedSkinRColor=Color("fffee5c2")
+		pickedSkinGColor=Color("fffff4f5")
+		pickedSkinBColor=Color("ffd39666")
+		npcSkinData={
+		"head": {"skin": "LynxSkin",},
+		"hair": {"r": Color("ffd6aac7"),"g": Color("fff1c0e0"),"b": Color("ff46460d"),},
+		"ears": {"g": Color("ffdb6b74"),},
+		"horns": {"r": Color("ffbd64a5"),"g": Color("ffebc57d"),"b": Color("ff9e0081"),},
+		"penis": {"g": Color("ffff90e8"),"b": Color("ff8b0089"),},
+		}
+	
+	if(shouldPaint):
+		paintBodyparts()
+		#updateAppearance()
 
 func reactRestraint(restraintType, restraintAmount, isGettingForced):
 	if(!isGettingForced):
@@ -193,4 +373,4 @@ func reactRestraint(restraintType, restraintAmount, isGettingForced):
 	return null
 
 func getDefaultEquipment():
-	return ["NurseClothes", "LaceBra", "LacePanties", "ElizaNecklace"]
+	return ["LabcoatOutfit", "LaceBra", "LacePanties", "ElizaNecklace"]

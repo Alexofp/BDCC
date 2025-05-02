@@ -152,14 +152,14 @@ func getCurrentNaturalSpill() -> float:
 func getFluids():
 	return fluids
 
-func addFluid(fluidType, amount: float, fluidDNA = null):
-	fluids.addFluid(fluidType, amount, fluidDNA)
+func addFluid(fluidType, amount: float, fluidDNA = null, causerID:String = ""):
+	fluids.addFluid(fluidType, amount, fluidDNA, causerID)
 
-func transferTo(otherOrifice, fraction = 0.5, minAmount = 0.0):
-	return fluids.transferTo(otherOrifice, fraction, minAmount)
+func transferTo(otherOrifice, fraction = 0.5, minAmount = 0.0, causerID:String = ""):
+	return fluids.transferTo(otherOrifice, fraction, minAmount, causerID)
 
-func shareFluids(otherOrifice, fraction = 0.5):
-	return fluids.shareFluids(otherOrifice, fraction)
+func shareFluids(otherOrifice, fraction = 0.5, causerID:String = ""):
+	return fluids.shareFluids(otherOrifice, fraction, causerID)
 
 func hasFluidType(fluidType):
 	return fluids.hasFluidType(fluidType)
@@ -270,6 +270,9 @@ func generateDataFor(_dynamicCharacter):
 		var fetishValue = fetishHolder.getFetishValue(Fetish.OralSexGiving)
 		if(fetishValue > 0.0):
 			looseness = RNG.randf_range(0.0, fetishValue*5.0)
+
+func setCauserID(_charID:String):
+	fluids.setCauserID(_charID)
 
 func saveData():
 	var data = {

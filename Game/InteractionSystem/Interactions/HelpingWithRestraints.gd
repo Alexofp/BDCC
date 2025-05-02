@@ -1,10 +1,12 @@
 extends PawnInteractionBase
 
-var surrendered = false
-var struggleText = ""
-var tryCount = 0
-var askCredits = 0
-var reacterStarted = false
+var surrendered:bool = false
+var struggleText:String = ""
+var tryCount:int = 0
+var askCredits:int = 0
+var reacterStarted:bool = false
+var deterministicOrderHashInt:int = 0
+var restraintItemID:String = ""
 
 func _init():
 	id = "HelpingWithRestraints"
@@ -12,9 +14,10 @@ func _init():
 func start(_pawns:Dictionary, _args:Dictionary):
 	doInvolvePawn("starter", _pawns["starter"])
 	doInvolvePawn("reacter", _pawns["reacter"])
+	deterministicOrderHashInt = RNG.randi_range(1, 1000000)
 	if(_args.has("reacterStarted") && _args["reacterStarted"]):
 		reacterStarted = true
-		setState("restraints_agree", "reacter")
+		setState("init_eager_to_help", "starter")
 	else:
 		reacterStarted = false
 		setState("", "reacter")
@@ -39,13 +42,58 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 		setState("restraints_deny", "starter")
 
 
+func init_eager_to_help_text():
+	if(struggleText != ""):
+		saynn(struggleText)
+
+	var restraintData = getRoleChar("starter").getNextRestraintToStruggleOutOf(deterministicOrderHashInt)
+	var restraintIsPlural = getRestraintIsPlural(restraintData.item) if(restraintData != null) else false
+	var restraintVisibleName = restraintData.item.getVisibleName() if(restraintData != null) else "the restraint"
+	saynn("{reacter.You} {reacter.youAre} about to help {starter.you} remove "+ restraintVisibleName + ".")
+
+	if(struggleText == ""):
+		sayLine("reacter", "HelpRestraintsAltStart", {main="reacter", target="starter"}, {restraintIsPlural=restraintIsPlural})
+
+	var acceptHelpProbability = getStarterAcceptHelpProbability()
+	var refuseHelpProbability = 1.0 - acceptHelpProbability
+	addAction("accept", "Accept", "Allow them to help with your restraints", "default", acceptHelpProbability, 60, {})
+	addAction("refuse", "Refuse", "You'd rather keep " + ("it" if(!restraintIsPlural) else "them"), "default", refuseHelpProbability, 60, {})
+
+func init_eager_to_help_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "accept"):
+		setState("restraints_agree", "reacter")
+	if(_id == "refuse"):
+		setState("eager_help_refused", "reacter")
+
+
+func eager_help_refused_text():
+	var restraintData = getRoleChar("starter").getNextRestraintToStruggleOutOf(deterministicOrderHashInt)
+	var restraintIsPlural = getRestraintIsPlural(restraintData.item) if(restraintData != null) else false
+	var restraintVisibleName = restraintData.item.getVisibleName() if(restraintData != null) else "the restraint"
+
+	saynn("{starter.You} {starter.youVerb('refuse', 'refused')} {reacter.your} help with removing "+restraintVisibleName+".")
+
+	var idSuffix = "Unhappy" if( RNG.chance(50) ) else "Kinky"
+	sayLine("starter", "HelpRestraintsAltRefuse"+idSuffix, {main="starter", target="reacter"}, {restraintIsPlural=restraintIsPlural})
+
+	if( (idSuffix == "Kinky") && RNG.chance(50) ):
+		sayLine("reacter", "HelpRestraintsAltRefuseKinkyReact", {main="reacter", target="starter"})
+
+	addAction("leave", "Leave", "Time to go", "default", 1.0, 60, {})
+
+func eager_help_refused_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "leave"):
+		getRolePawn("starter").afterSocialInteraction()
+		getRolePawn("reacter").satisfySocial()
+		stopMe()
+
+
 func restraints_agree_text():
 	if(!reacterStarted):
 		saynn("{reacter.name} nods and starts tugging on {starter.your} restraints.")
 		sayLine("reacter", "HelpRestraintsAgree", {main="reacter", target="starter"})
 	else:
-		saynn("{reacter.name} looks at {starter.your} restraints.")
-		sayLine("reacter", "HelpRestraintsAltStart", {main="reacter", target="starter"})
+		saynn("{reacter.name} starts tugging on {starter.your} restraints.")
 
 	addAction("help", "Help", "Start helping..", "default", 1.0, 60, {})
 
@@ -54,8 +102,6 @@ func restraints_agree_do(_id:String, _args:Dictionary, _context:Dictionary):
 		doHelpStruggleForStarter()
 		getRolePawn("reacter").afterSocialInteraction()
 		getRolePawn("starter").afterSocialInteraction()
-		setState("restraints_helping", "reacter")
-		tryCount = 1
 
 
 func restraints_deny_text():
@@ -83,8 +129,6 @@ func restraints_helping_text():
 func restraints_helping_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "help"):
 		doHelpStruggleForStarter()
-		setState("restraints_helping", "reacter")
-		tryCount += 1
 	if(_id == "stop"):
 		setState("restraints_enough", "starter")
 	if(_id == "stop_ask_credits"):
@@ -174,6 +218,8 @@ func restraints_refusedwhatever_do(_id:String, _args:Dictionary, _context:Dictio
 func getAnimData() -> Array:
 	if(getState() in ["restraints_refuse_attack", "reacter_won", "reacter_won_leave", "starter_won", "starter_won_leave"]):
 		return [StageScene.Duo, "stand", {pc="starter", npc="reacter"}]
+	if((getState() == "init_eager_to_help" && (tryCount == 0)) || getState() == "eager_help_refused"):
+		return [StageScene.Duo, "stand", {pc="reacter", npc="starter"}]
 	return [StageScene.SexStart, "start", {pc="reacter", npc="starter"}]
 	
 func getPreviewLineForRole(_role:String) -> String:
@@ -184,14 +230,38 @@ func getPreviewLineForRole(_role:String) -> String:
 	return .getPreviewLineForRole(_role)
 
 func doHelpStruggleForStarter():
+	var restraintData = getRoleChar("starter").getNextRestraintToStruggleOutOf(deterministicOrderHashInt)
+	restraintItemID = restraintData.item.id if(restraintData != null) else ""
+
 	var theStarter = getRoleChar("starter")
-	var struggleData:Dictionary = theStarter.doStruggleOutOfRestraints(false, true, getRoleChar("reacter"), 1.0)
+	var struggleData:Dictionary = theStarter.doStruggleOutOfRestraints(false, true, getRoleChar("reacter"), 1.0, deterministicOrderHashInt)
 	if(struggleData.empty()):
 		struggleText = "Something happened.."
 	else:
 		struggleText = struggleData["text"]
 		if(reacterStarted):
 			affectAffection("starter", "reacter", 0.02)
+
+	tryCount += 1
+
+	if(reacterStarted && !getRoleChar("starter").getInventory().hasItemIDEquipped(restraintItemID) && getRoleChar("starter").getInventory().hasRemovableRestraintsNoLockedSmartlocks() && getRoleChar("reacter").getStamina() > 0):
+		setState("init_eager_to_help", "starter")
+	else:
+		setState("restraints_helping", "reacter")
+
+func getStarterAcceptHelpProbability() -> float:
+	var acceptHelpProbability:float = 1.0
+
+	var starterDommyness:float = getRolePawn("starter").scorePersonalityMax({PersonalityStat.Subby: -1.0})
+	var saverDommyness:float = getRolePawn("reacter").scorePersonalityMax({PersonalityStat.Subby: -1.0})
+	var dommynessDisadvantageRatio:float = max(saverDommyness - starterDommyness, 0.0) / 2.0
+
+	acceptHelpProbability = clamp(1.0 - getRolePawn("starter").scoreFetishMax({ Fetish.Bondage: 0.60 }) + 0.45 * dommynessDisadvantageRatio, 0.0, 1.0)
+	return acceptHelpProbability
+
+func getRestraintIsPlural(item:ItemBase) -> bool:
+	# Ideally there'd be item.isPlural(), but the best we can do for now is an approximate guess
+	return ( item.getClothingSlot() in [InventorySlot.Wrists, InventorySlot.Hands, InventorySlot.Ankles] )
 
 func saveData():
 	var data = .saveData()
@@ -201,6 +271,8 @@ func saveData():
 	data["tryCount"] = tryCount
 	data["askCredits"] = askCredits
 	data["reacterStarted"] = reacterStarted
+	data["deterministicOrderHashInt"] = deterministicOrderHashInt
+	data["restraintItemID"] = restraintItemID
 	return data
 
 func loadData(_data):
@@ -211,4 +283,6 @@ func loadData(_data):
 	tryCount = SAVE.loadVar(_data, "tryCount", 0)
 	askCredits = SAVE.loadVar(_data, "askCredits", 0)
 	reacterStarted = SAVE.loadVar(_data, "reacterStarted", false)
+	deterministicOrderHashInt = SAVE.loadVar(_data, "deterministicOrderHashInt", 0)
+	restraintItemID = SAVE.loadVar(_data, "restraintItemID", "")
 

@@ -3,6 +3,9 @@ extends Control
 onready var modDescriptionLabel = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/RichTextLabel
 onready var modVList = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/ModList
 onready var modFileList = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ModFileList
+onready var modDisableButton = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/ModDisableButton
+
+
 var launchModEntryScene = preload("res://UI/LaunchScreen/LaunchModEntry.tscn")
 
 var currentModOrder = []
@@ -167,6 +170,7 @@ func onModEntryClicked(entry):
 	updateSelectedEntry()
 
 func updateSelectedEntry():
+	
 	if(selectedEntry == null):
 		if(OS.get_name() == "Android" && false):
 			if(!foundBDCC):
@@ -179,6 +183,8 @@ func updateSelectedEntry():
 		
 		modDescriptionLabel.bbcode_text = "No mod selected"
 		return
+	modDisableButton.text = "Enable" if(selectedEntry['disabled']) else "Disable"
+
 	
 	var desc = ""
 	desc += "Mod name: "+selectedEntry["name"]+"\n"
@@ -247,19 +253,16 @@ func tryToPopulateFilesList():
 
 
 func _on_ModDisableButton_pressed():
-	if(selectedEntry == null):
-		return
-	if(selectedEntry["name"] == "BDCC.pck"):
+	if(selectedEntry == null or selectedEntry["name"] == "BDCC.pck"):
 		return
 	
 	selectedEntry["disabled"] = !selectedEntry["disabled"]
 	updateModList()
+	updateSelectedEntry()
 
 
 func _on_MoveUpButton_pressed():
-	if(selectedEntry == null):
-		return
-	if(selectedEntry["name"] == "BDCC.pck"):
+	if(selectedEntry == null or selectedEntry["name"] == "BDCC.pck"):
 		return
 	
 	var currentIndex = currentModOrder.find(selectedEntry)
@@ -274,9 +277,7 @@ func _on_MoveUpButton_pressed():
 
 
 func _on_MoveDownButton_pressed():
-	if(selectedEntry == null):
-		return
-	if(selectedEntry["name"] == "BDCC.pck"):
+	if(selectedEntry == null or selectedEntry["name"] == "BDCC.pck"):
 		return
 	
 	var currentIndex = currentModOrder.find(selectedEntry)
@@ -402,3 +403,25 @@ func _on_ModBrowser_closePressed():
 
 func _on_OpenModsFolder_pressed():
 	var _ok = OS.shell_open(ProjectSettings.globalize_path("user://mods"))
+
+func _input(event):
+	if(event.is_action_pressed("ui_down")):
+		onModEntryClicked(currentModOrder[currentModOrder.find(selectedEntry)+1])
+		return
+	if(event.is_action_pressed("ui_up")):
+		onModEntryClicked(currentModOrder[currentModOrder.find(selectedEntry)-1])
+		return
+	if(event.is_action_pressed("ui_select")):
+		_on_ModDisableButton_pressed()
+		return
+	if(event.is_action_pressed("ui_left")):
+		_on_MoveUpButton_pressed()
+		return
+	if(event.is_action_pressed("ui_right")):
+		_on_MoveDownButton_pressed()
+		return
+
+
+func _on_ResetGRCacheButton_pressed():
+	GlobalRegistry.resetRegistryCache(true)
+	$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/ResetGRCacheButton.disabled = true

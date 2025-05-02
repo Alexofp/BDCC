@@ -204,14 +204,10 @@ func paintBodyparts():
 				continue
 			var bodypart = getBodypart(bodypartSlot)
 			var bodypartSkinData = npcSkinData[bodypartSlot]
-			if(bodypartSkinData.has("skin")):
-				bodypart.pickedSkin = bodypartSkinData["skin"]
-			if(bodypartSkinData.has("r")):
-				bodypart.pickedRColor = bodypartSkinData["r"]
-			if(bodypartSkinData.has("g")):
-				bodypart.pickedGColor = bodypartSkinData["g"]
-			if(bodypartSkinData.has("b")):
-				bodypart.pickedBColor = bodypartSkinData["b"]
+			bodypart.pickedSkin = bodypartSkinData["skin"] if bodypartSkinData.has("skin") else null
+			bodypart.pickedRColor = bodypartSkinData["r"] if bodypartSkinData.has("r") else null
+			bodypart.pickedGColor = bodypartSkinData["g"] if bodypartSkinData.has("g") else null
+			bodypart.pickedBColor = bodypartSkinData["b"] if bodypartSkinData.has("b") else null
 
 func copySkinTo(otherNPC):
 	otherNPC.pickedSkin = pickedSkin
@@ -330,6 +326,12 @@ func processTime(_secondsPassed):
 		
 	if(menstrualCycle != null):
 		menstrualCycle.processTime(_secondsPassed)
+		
+	var theTFHolder = getTFHolder()
+	if(theTFHolder != null):
+		theTFHolder.processTime(_secondsPassed)
+		if(GM.main != null && !GM.main.characterIsVisible(getID()) && theTFHolder.hasPendingTransformations()):
+			theTFHolder.doFirstPendingTransformation({}, true)
 		
 	if(!bodyFluids.isEmpty()):
 		bodyFluids.drain(0.1 * _secondsPassed / 60.0)
@@ -503,6 +505,11 @@ func shouldBeUpdated():
 	
 	if(isPregnant()):
 		return true
+	
+	if(hasEffect(StatusEffect.HasTFs)):
+		var theTFHolder = getTFHolder()
+		if(theTFHolder != null && theTFHolder.shouldAlwaysUpdateNPC()):
+			return true
 	
 	return false
 

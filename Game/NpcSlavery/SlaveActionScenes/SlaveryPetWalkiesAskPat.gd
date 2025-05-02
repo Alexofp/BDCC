@@ -239,7 +239,10 @@ func _run():
 			"Fine, whatever, go away.",
 		])+"[/say]")
 		
-		saynn("You chuckle while your puppy pees on the defeated enemy, as a final act of total humiliation.")
+		if(OPTIONS.isContentEnabled(ContentType.Watersports)):
+			saynn("You chuckle while your puppy pees on the defeated enemy, as a final act of total humiliation.")
+		else:
+			saynn("You chuckle while your puppy lightly headbutts the defeated enemy, as a final act of total humiliation.")
 		
 		saynn("[say=npc2]"+RNG.pick([
 			"HEY! No! Bad!",

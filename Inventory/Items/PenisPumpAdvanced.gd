@@ -23,7 +23,9 @@ func canSell():
 	return true
 
 func getTags():
-	return [ItemTag.SoldByMedicalVendomat, ItemTag.PenisPump]
+	if(GM.main != null && GM.main.SCI != null && GM.main.SCI.hasUpgrade("advPenisPump")):
+		return [ItemTag.SoldByMedicalVendomat, ItemTag.PenisPump]
+	return [ItemTag.PenisPump]
 
 func generateFluids():
 	fluids = Fluids.new()

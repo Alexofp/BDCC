@@ -510,6 +510,26 @@ _global_script_classes=[ {
 "path": "res://Player/Player3D/DollSkeleton.gd"
 }, {
 "base": "Reference",
+"class": "DrugDen",
+"language": "GDScript",
+"path": "res://Game/DrugDen/DrugDen.gd"
+}, {
+"base": "Reference",
+"class": "DrugDenEventBase",
+"language": "GDScript",
+"path": "res://Game/DrugDen/DrugDenEventBase.gd"
+}, {
+"base": "InmateGenerator",
+"class": "DrugDenJunkieGenerator",
+"language": "GDScript",
+"path": "res://Characters/Dynamic/Generator/DrugDenJunkieGenerator.gd"
+}, {
+"base": "Reference",
+"class": "DungeonMapGenerator",
+"language": "GDScript",
+"path": "res://Game/DrugDen/DungeonMapGenerator.gd"
+}, {
+"base": "Reference",
 "class": "DynCharExtraSettings",
 "language": "GDScript",
 "path": "res://Characters/Dynamic/DynCharExtraSettings.gd"
@@ -844,6 +864,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Player3D/JiggleBone.gd"
 }, {
+"base": "LootTableBase",
+"class": "JunkieLoot",
+"language": "GDScript",
+"path": "res://Inventory/LootTable/JunkieLoot.gd"
+}, {
 "base": "FluidProduction",
 "class": "Lactation",
 "language": "GDScript",
@@ -934,6 +959,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Player3D/Parts/MeshWithPattern.gd"
 }, {
+"base": "TranslatorBase",
+"class": "MicrosoftTranslator",
+"language": "GDScript",
+"path": "res://Util/AutoTranslation/Translators/MicrosoftTranslator.gd"
+}, {
 "base": "Reference",
 "class": "MinigameResult",
 "language": "GDScript",
@@ -1008,6 +1038,11 @@ _global_script_classes=[ {
 "class": "NurseGenerator",
 "language": "GDScript",
 "path": "res://Characters/Dynamic/Generator/NurseGenerator.gd"
+}, {
+"base": "Reference",
+"class": "NurseryTaskBase",
+"language": "GDScript",
+"path": "res://Game/Science/NurseryTaskBase.gd"
 }, {
 "base": "Reference",
 "class": "Orifice",
@@ -1290,6 +1325,11 @@ _global_script_classes=[ {
 "path": "res://Scenes/SceneBase.gd"
 }, {
 "base": "Reference",
+"class": "Science",
+"language": "GDScript",
+"path": "res://Game/Science/Science.gd"
+}, {
+"base": "Reference",
 "class": "SensitiveZone",
 "language": "GDScript",
 "path": "res://Player/SensitiveZone/SensitiveZone.gd"
@@ -1509,6 +1549,31 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/World/SubWorld.gd"
 }, {
+"base": "Reference",
+"class": "TFBase",
+"language": "GDScript",
+"path": "res://Game/Transformation/TFBase.gd"
+}, {
+"base": "Reference",
+"class": "TFEffect",
+"language": "GDScript",
+"path": "res://Game/Transformation/TFEffect.gd"
+}, {
+"base": "Reference",
+"class": "TFHolder",
+"language": "GDScript",
+"path": "res://Game/Transformation/TFHolder.gd"
+}, {
+"base": "Reference",
+"class": "TFResult",
+"language": "GDScript",
+"path": "res://Game/Transformation/TFResult.gd"
+}, {
+"base": "Object",
+"class": "TFUtil",
+"language": "GDScript",
+"path": "res://Game/Transformation/TFUtil.gd"
+}, {
 "base": "Module",
 "class": "TaviModule",
 "language": "GDScript",
@@ -1705,6 +1770,10 @@ _global_script_class_icons={
 "Doll3D": "",
 "DollAttachmentZone": "",
 "DollSkeleton": "",
+"DrugDen": "",
+"DrugDenEventBase": "",
+"DrugDenJunkieGenerator": "",
+"DungeonMapGenerator": "",
 "DynCharExtraSettings": "",
 "DynamicCharacter": "",
 "EggCell": "",
@@ -1772,6 +1841,7 @@ _global_script_class_icons={
 "ItemState": "",
 "ItemTag": "",
 "JiggleBone": "",
+"JunkieLoot": "",
 "Lactation": "",
 "LightInventory": "",
 "LimbTypes": "",
@@ -1790,6 +1860,7 @@ _global_script_class_icons={
 "MedicalModule": "",
 "MenstrualCycle": "",
 "MeshInstanceWithPattern": "",
+"MicrosoftTranslator": "",
 "MinigameResult": "",
 "ModEntry": "",
 "Module": "",
@@ -1805,6 +1876,7 @@ _global_script_class_icons={
 "NpcRank": "",
 "NpcSlave": "",
 "NurseGenerator": "",
+"NurseryTaskBase": "",
 "Orifice": "",
 "OrificeType": "",
 "OverriddenPlayer": "",
@@ -1861,6 +1933,7 @@ _global_script_class_icons={
 "SaveConversion": "",
 "SayParser": "",
 "SceneBase": "",
+"Science": "",
 "SensitiveZone": "",
 "SexActivityBase": "",
 "SexActivityTag": "",
@@ -1905,6 +1978,11 @@ _global_script_class_icons={
 "StatusEffectBase": "",
 "StatusEffectsPanel": "",
 "SubGameWorld": "",
+"TFBase": "",
+"TFEffect": "",
+"TFHolder": "",
+"TFResult": "",
+"TFUtil": "",
 "TaviModule": "",
 "TestQuest": "",
 "TestResource": "",
@@ -1939,6 +2017,7 @@ config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
+PortableModeDetector="*res://Util/PortableModeDetector.gd"
 Console="*res://UI/DebugUI/ConsoleSingleton.gd"
 OPTIONS="*res://Game/Options/GlobalOptions.gd"
 GlobalRegistry="*res://GlobalRegistry.gd"
@@ -2041,6 +2120,11 @@ minigame_commit={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":32,"unicode":0,"echo":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777221,"unicode":0,"echo":false,"script":null)
+ ]
+}
+window_fullscreen={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":true,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":16777221,"unicode":0,"echo":false,"script":null)
  ]
 }
 

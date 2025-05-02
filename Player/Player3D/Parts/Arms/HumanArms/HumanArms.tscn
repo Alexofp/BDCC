@@ -10,7 +10,7 @@
 [ext_resource path="res://Inventory/UnriggedModels/BondageMitten/bondagemitten.png" type="Texture" id=8]
 [ext_resource path="res://Player/Player3D/Parts/MeshWithPattern.gd" type="Script" id=10]
 
-[sub_resource type="SpatialMaterial" id=1]
+[sub_resource type="SpatialMaterial" id=77]
 resource_name = "arm.png.001"
 flags_transparent = true
 flags_unshaded = true
@@ -28,7 +28,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 2194903,
 "index_count": 6,
-"material": SubResource( 1 ),
+"material": SubResource( 77 ),
 "primitive": 4,
 "skeleton_aabb": [ AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.144165, 4.38865, 0.405854, 0.64, 2.56, 1.00136e-05 ) ],
 "vertex_count": 4
@@ -113,13 +113,13 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 2194903,
 "index_count": 6,
-"material": SubResource( 1 ),
+"material": SubResource( 77 ),
 "primitive": 4,
 "skeleton_aabb": [ AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.244165, 4.38865, -0.339218, 0.64, 2.56, 1.00136e-05 ) ],
 "vertex_count": 4
 }
 
-[sub_resource type="SpatialMaterial" id=54]
+[sub_resource type="SpatialMaterial" id=82]
 resource_name = "forearm.png.001"
 flags_transparent = true
 flags_unshaded = true
@@ -137,7 +137,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 2194903,
 "index_count": 6,
-"material": SubResource( 54 ),
+"material": SubResource( 82 ),
 "primitive": 4,
 "skeleton_aabb": [ AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.572433, 3.17222, 0.395528, 1.28, 2.56, 1.00136e-05 ) ],
 "vertex_count": 4
@@ -152,7 +152,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 2194903,
 "index_count": 6,
-"material": SubResource( 54 ),
+"material": SubResource( 82 ),
 "primitive": 4,
 "skeleton_aabb": [ AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.672433, 3.17222, -0.359544, 1.28, 2.56, 1.00136e-05 ) ],
 "vertex_count": 4
@@ -217,7 +217,7 @@ state = "armalpha"
 mesh = SubResource( 19 )
 skin = SubResource( 20 )
 skeleton = NodePath("../../..")
-material/0 = SubResource( 1 )
+material/0 = SubResource( 77 )
 script = ExtResource( 10 )
 pattern_start = Vector2( 0.125, 3 )
 pattern_size = Vector2( 0.25, 1 )
@@ -227,7 +227,7 @@ bodypartSlot = "arms"
 mesh = SubResource( 21 )
 skin = SubResource( 20 )
 skeleton = NodePath("../../..")
-material/0 = SubResource( 1 )
+material/0 = SubResource( 77 )
 script = ExtResource( 10 )
 pattern_start = Vector2( 0.125, 3 )
 pattern_size = Vector2( 0.25, 1 )
@@ -237,7 +237,7 @@ bodypartSlot = "arms"
 mesh = SubResource( 22 )
 skin = SubResource( 20 )
 skeleton = NodePath("../../..")
-material/0 = SubResource( 54 )
+material/0 = SubResource( 82 )
 script = ExtResource( 10 )
 pattern_start = Vector2( 0.5, 3 )
 pattern_size = Vector2( 0.5, 1 )
@@ -247,7 +247,7 @@ bodypartSlot = "arms"
 mesh = SubResource( 23 )
 skin = SubResource( 20 )
 skeleton = NodePath("../../..")
-material/0 = SubResource( 54 )
+material/0 = SubResource( 82 )
 script = ExtResource( 10 )
 pattern_start = Vector2( 0.5, 3 )
 pattern_size = Vector2( 0.5, 1 )

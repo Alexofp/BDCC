@@ -5,6 +5,11 @@ func _init():
 	id = "malebreasts"
 	size = BreastsSize.FLAT
 
+func getTraits():
+	return {
+		PartTrait.BreastsMale: true,
+	}
+
 func getLewdAdjective():
 	return RNG.pick(["firm", "strong"])
 
@@ -22,3 +27,9 @@ func safeWhenExposed():
 
 func generateDataFor(_dynamicCharacter):
 	pass
+
+func getVulgarName() -> String:
+	return "male pecs"
+
+func getAVulgarName() -> String:
+	return getVulgarName()

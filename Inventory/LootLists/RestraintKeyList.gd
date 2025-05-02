@@ -1,7 +1,7 @@
 extends LootList
 
 func _init():
-	handlesIds = ["guard", "inmate", "engineer", "medical"]
+	handlesIds = ["guard", "inmate", "engineer", "medical", "junkie", "junkieStash"]
 
 func getLoot(_id, _characterID, _battleName):
 	if(GM.pc == null || !is_instance_valid(GM.pc)):
@@ -16,6 +16,9 @@ func getLoot(_id, _characterID, _battleName):
 	var keyLimit = 4 + smartAmount
 	if(keyAmount > keyLimit):
 		chanceMod -= (keyAmount-keyLimit)*0.2
+	
+	if(_id == "junkie"):
+		chanceMod *= 0.3
 	
 	return [
 		[75.0*chanceMod, [["restraintkey", 1, 1]]],

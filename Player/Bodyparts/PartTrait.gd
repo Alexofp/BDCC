@@ -10,6 +10,7 @@ enum {
 	
 	# Horns
 	HornsGraspable,
+	HornsSingle,
 	
 	# Tail
 	TailFlexible,
@@ -19,12 +20,22 @@ enum {
 	LegsPlanti,
 	LegsHoofs,
 	
+	# Arms
+	ArmsBuff,
+	
 	# Hair
 	HairBald,
 	HairPonytail,
 	HairOvereye,
 	HairShort,
 	HairLong,
+	
+	# Breasts
+	BreastsMale,
+	BreastsFemale,
+	
+	# Anus
+	AnusWomb,
 	
 	TRAITCOUNT,
 }
@@ -38,6 +49,7 @@ const traitNames = [
 	
 	# Horns
 	"HornsGraspable",
+	"HornsSingle",
 	
 	# Tail
 	"TailFlexible",
@@ -47,12 +59,22 @@ const traitNames = [
 	"LegsPlanti",
 	"LegsHoofs",
 	
+	# Arms
+	"ArmsBuff",
+	
 	# Hair
 	"HairBald",
 	"HairPonytail",
 	"HairOvereye",
 	"HairShort",
 	"HairLong",
+	
+	# Breasts
+	"BreastsMale",
+	"BreastsFemale",
+	
+	# Anus
+	"AnusWomb",
 ]
 
 static func textToTrait(trait):

@@ -46,8 +46,10 @@ const POSE_COWGIRL = "POSE_COWGIRL"
 const POSE_REVERSECOWGIRL = "POSE_REVERSECOWGIRL"
 const POSE_COWGIRLALT = "POSE_COWGIRLALT"
 const POSE_LOTUS = "POSE_LOTUS"
+const POSE_COWGIRLAMAZON = "POSE_COWGIRLAMAZON"
 const POSE_STANDRIDE = "POSE_STANDRIDE"
 const POSE_COWGIRLCHOKE = "POSE_COWGIRLCHOKE"
+
 const PoseToName = {
 	POSE_DEFAULT: "Default",
 	POSE_COWGIRL: "Cowgirl",
@@ -56,6 +58,7 @@ const PoseToName = {
 	POSE_COWGIRLCHOKE: "Cowgirl Choking",
 	POSE_LOTUS: "Lotus",
 	POSE_STANDRIDE: "Standing",
+	POSE_COWGIRLAMAZON: "Cowgirl amazon",
 }
 const PoseToAnimName = {
 	POSE_DEFAULT: StageScene.SexCowgirl,
@@ -65,13 +68,14 @@ const PoseToAnimName = {
 	POSE_COWGIRLCHOKE: StageScene.SexCowgirlChoke,
 	POSE_LOTUS: StageScene.SexLotus,
 	POSE_STANDRIDE: StageScene.SexStandRide,
+	POSE_COWGIRLAMAZON: StageScene.SexCowgirlAmazon,
 }
 func getAvaiablePoses():
 	if(currentPose == POSE_COWGIRLCHOKE):
 		return [POSE_COWGIRLCHOKE]
 	
 	if(getSexType() == SexType.DefaultSex):
-		var possible:= [POSE_COWGIRL, POSE_REVERSECOWGIRL, POSE_COWGIRLALT, POSE_LOTUS]
+		var possible:= [POSE_COWGIRL, POSE_REVERSECOWGIRL, POSE_COWGIRLALT, POSE_LOTUS, POSE_COWGIRLAMAZON]
 		if(getSexEngine() != null && getSexEngine().hasWallsNearby()):
 			possible.append(POSE_STANDRIDE)
 		
@@ -88,6 +92,16 @@ func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: Sex
 		return false
 	
 	return .canStartActivity(_sexEngine, _domInfo, _subInfo)
+
+func isActivityImpossibleShouldStop() -> bool:
+	if(!getSub().hasReachablePenis() && !getSub().isWearingStrapon()):
+		return true
+	if(usedBodypart == BodypartSlot.Vagina && !getDom().hasReachableVagina()):
+		return true
+	if(usedBodypart == BodypartSlot.Anus && !getDom().hasReachableAnus()):
+		return true
+		
+	return false
 
 func getVisibleName():
 	return "Cowgirl Vaginal"
@@ -151,20 +165,24 @@ func getUsedBodypartName():
 func getStartTextForPose(thePose):
 	var throughClothing = "."
 	if(domInfo.getChar().getFirstItemThatCoversBodypart(usedBodypart) != null):
-		throughClothing = " through {dom.yourHis} clothing."
+		throughClothing = " through {dom.yourHis} clothing"
 	
 	var text = ""
 	if(thePose == POSE_COWGIRL):
 		text = RNG.pick([
-			"{dom.You} {dom.youVerb('stradle')} {sub.you} and {dom.youVerb('rub')} {dom.yourHis} "+getUsedBodypartName()+" against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+throughClothing,
+			"{dom.You} {dom.youVerb('stradle')} {sub.you} and {dom.youVerb('rub')} {dom.yourHis} "+getUsedBodypartName()+" against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+throughClothing+".",
 		])
 	elif(thePose == POSE_REVERSECOWGIRL):
 		text = RNG.pick([
-			"{dom.You} {dom.youVerb('stradle')} {sub.you} in a reverse cowgirl position and {dom.youVerb('rub')} {dom.yourHis} "+getUsedBodypartName()+" against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+throughClothing,
+			"{dom.You} {dom.youVerb('stradle')} {sub.you} in a reverse cowgirl position and {dom.youVerb('rub')} {dom.yourHis} "+getUsedBodypartName()+" against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+throughClothing+".",
+		])
+	elif(thePose == POSE_COWGIRLAMAZON):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('stradle')} {sub.you} in a half-amazon cowgirl position and {dom.youVerb('rub')} {dom.yourHis} "+getUsedBodypartName()+" against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+throughClothing+".",
 		])
 	elif(thePose == POSE_COWGIRLALT):
 		text = RNG.pick([
-			"{dom.You} {dom.youVerb('stradle')} {sub.you} and {dom.youVerb('tilt')} {dom.yourHis} body back while rubbing {dom.yourHis} "+getUsedBodypartName()+" against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+throughClothing,
+			"{dom.You} {dom.youVerb('stradle')} {sub.you} and {dom.youVerb('tilt')} {dom.yourHis} body back while rubbing {dom.yourHis} "+getUsedBodypartName()+" against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+throughClothing+".",
 		])
 	elif(thePose == POSE_LOTUS):
 		text = RNG.pick([
@@ -172,11 +190,11 @@ func getStartTextForPose(thePose):
 		])
 	elif(thePose == POSE_STANDRIDE):
 		text = RNG.pick([
-				"{dom.You} {dom.youVerb('raise')} one leg high and {dom.youVerb('pin')} {sub.you} against the nearby wall, {dom.yourHis} {dom.foot} brushing {sub.yourHis} shoulder. {dom.YourHis} "+getUsedBodypartName()+" {dom.youVerb('press')} against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock"]))+throughClothing+".",
+				"{dom.You} {dom.youVerb('raise')} one leg high and {dom.youVerb('pin')} {sub.you} against the nearby wall, {dom.yourHis} {dom.foot} brushing {sub.yourHis} shoulder. {dom.YourHis} "+getUsedBodypartName()+" {dom.youVerb('press', 'presses')} against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock"]))+throughClothing+".",
 			])
 	else:
 		text = RNG.pick([
-			"{dom.You} {dom.youVerb('stradle')} {sub.you} and {dom.youVerb('rub')} {dom.yourHis} "+getUsedBodypartName()+" against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+throughClothing,
+			"{dom.You} {dom.youVerb('stradle')} {sub.you} and {dom.youVerb('rub')} {dom.yourHis} "+getUsedBodypartName()+" against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+throughClothing+".",
 		])
 	return text
 	
@@ -189,6 +207,10 @@ func getSwitchPoseTextForPose(thePose):
 	elif(thePose == POSE_REVERSECOWGIRL):
 		text = RNG.pick([
 			"{dom.You} {dom.youVerb('stradle')} {sub.you} in a reverse cowgirl position, {sub.your} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+" is still inside {dom.yourHis} "+getUsedBodypartName()+"!",
+		])
+	elif(thePose == POSE_COWGIRLAMAZON):
+		text = RNG.pick([
+			"{dom.You} {dom.youVerb('stradle')} {sub.you} in a half-amazon cowgirl position, {sub.your} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+" is still inside {dom.yourHis} "+getUsedBodypartName()+"!",
 		])
 	elif(thePose == POSE_COWGIRLALT):
 		text = RNG.pick([
@@ -341,7 +363,7 @@ func processTurn():
 				text += RNG.pick([
 					" {sub.You} {sub.youAre} being edged by {dom.you}.",
 					" {sub.You} {sub.youAre} about to cum!",
-					" {sub.You} {sub.youAre} keeping {dom.yourself} on edge.",
+					" {sub.You} {sub.youAre} keeping {sub.yourself} on edge.",
 				])
 			elif(subInfo.isCloseToCumming()):
 				text += RNG.pick([
@@ -354,7 +376,7 @@ func processTurn():
 				text += RNG.pick([
 					" {sub.You} {sub.youAre} being edged by {dom.you}.",
 					" {sub.You} {sub.youAre} about to cum!",
-					" {sub.You} {sub.youAre} keeping {dom.yourself} on edge.",
+					" {sub.You} {sub.youAre} keeping {sub.yourself} on edge.",
 					" {sub.Your} "+RNG.pick(["cock", "dick", "member"])+" is moments from cumming.",
 					" {sub.Your} "+RNG.pick(["cock", "dick", "member"])+" reached its peak."
 				])
@@ -504,7 +526,7 @@ func doDomAction(_id, _actionInfo):
 		var text:String = ""
 		if(!subInfo.isResistingSlightly()):
 			text += RNG.pick([
-				"{dom.You} {dom.youVerb('lean')} in closer, {dom.yourHis} lips locking with {sub.your} in a deep, heated kiss. Kiss that keeps going. {sub.YouHe} {sub.youVerb('respond')}, opening {sub.yourHis} mouth to meet {dom.yourHis} tongue.",
+				"{dom.You} {dom.youVerb('lean')} in closer, {dom.yourHis} lips locking with {sub.yourHis} in a deep, heated kiss. Kiss that keeps going. {sub.YouHe} {sub.youVerb('respond')}, opening {sub.yourHis} mouth to meet {dom.yourHis} tongue.",
 			])
 		else:
 			text += RNG.pick([
@@ -878,7 +900,7 @@ func doSubAction(_id, _actionInfo):
 		domInfo.addLust(5)
 		return {text = text}
 	if(_id == "throwoff"):
-		if(getSubResistChance(30.0, 25.0)):
+		if(RNG.chance(getSubResistChance(30.0, 25.0))):
 			if(state != ""):
 				state = ""
 				isMakingOut = false

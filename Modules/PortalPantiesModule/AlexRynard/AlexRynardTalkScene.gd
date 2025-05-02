@@ -48,9 +48,13 @@ func _run():
 			addButton("Engineer", "Ask about his role", "engineer")
 			addButton("Bluespace", "What is bluespace", "bluespace")
 			addButton("Him", "Why is he here", "him")
+#ACEPREGEXPAC - New Talk scene about preg
+			if(getFlag("AlexRynardModule.ch2FinalSceneHappened") && GM.pc.isVisiblyPregnant() || (getCharacter("alexrynard").isVisiblyPregnant())):
+				addButton("Pregnancy", "All things related to pregnancy", "pregnancytalk")
+			else:
+				addDisabledButton("Pregnancy", "Alex should trust you enough.. and you should be pregnant, obviously")
 			addButton("Back", "Enough talking", "")
-
-
+			
 	if(state == "engineer"):
 		saynn("[say=pc]What do engineers do here?[/say]")
 
@@ -120,7 +124,6 @@ func _run():
 		# (scene ends)
 		addButton("Continue", "Enough staring", "")
 
-
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
@@ -129,6 +132,8 @@ func _react(_action: String, _args):
 		endScene()
 		runScene("AlexBuySellScene", ["buymenu"])
 		return
-
+	if(_action == "pregnancytalk"):
+		endScene()
+		runScene("AlexPregTalkSceneAPE")
 	setState(_action)
 

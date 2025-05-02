@@ -23,6 +23,17 @@ func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: Sex
 		
 	return .canStartActivity(_sexEngine, _domInfo, _subInfo)
 
+func isActivityImpossibleShouldStop() -> bool:
+	if(domFocus == BodypartSlot.Vagina && !getSub().hasReachableVagina()):
+		return true
+	if(domFocus == BodypartSlot.Penis && !getSub().hasReachablePenis()):
+		return true
+	if(subFocus == BodypartSlot.Vagina && !getDom().hasReachableVagina()):
+		return true
+	if(subFocus == BodypartSlot.Penis && !getDom().hasReachablePenis()):
+		return true
+	return false
+
 func getVisibleName():
 	return "69"
 
@@ -323,7 +334,7 @@ func order_doSubAction(_id, _info):
 		else:
 			text += RNG.pick([
 				"Obediently, {sub.you} {sub.youVerb('extend')} {sub.yourHis} tongue and {sub.youVerb('begin')} licking {dom.yourHis} {dom.pussyStretch} pussy.",
-				"{sub.You} {sub.youVerb('press')} {sub.yourHis} tongue to {dom.yourHis} {dom.pussyStretch} pussy, lapping eagerly, obeying {dom.youHis} command without hesitation.",
+				"{sub.You} {sub.youVerb('press', 'presses')} {sub.yourHis} tongue to {dom.yourHis} {dom.pussyStretch} pussy, lapping eagerly, obeying {dom.youHis} command without hesitation.",
 			])
 		text += " "
 		if(domFocus == BodypartSlot.Penis):

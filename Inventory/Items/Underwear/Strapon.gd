@@ -35,6 +35,12 @@ func getPrice():
 	return 10
 
 func getTags():
+	if(id == "Strapon"):
+		return [
+			ItemTag.Strapon,
+			ItemTag.SoldByMedicalVendomat,
+			ItemTag.SoldByTheAnnouncer,
+			]
 	return [
 		ItemTag.Strapon,
 		ItemTag.SoldByTheAnnouncer,

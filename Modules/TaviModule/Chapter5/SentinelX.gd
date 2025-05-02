@@ -68,5 +68,5 @@ func createBodyparts():
 func getDefaultEquipment():
 	return []
 
-func getFluidType(_fluidSource):
+func getCustomFluidType(_fluidSource) -> String:
 	return "BlackGoo"

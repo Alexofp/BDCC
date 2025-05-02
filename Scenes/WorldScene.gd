@@ -48,7 +48,10 @@ func _run():
 	if(GM.pc.getInventory().hasRemovableRestraints()):
 		addButtonAt(8, "Struggle", "Struggle against your restraints", "struggle")
 	addButtonAt(9, "Me", "Shows actions related to you and also your personal information", "me")
-	addButtonAt(13, "Tasks", "Look at your tasks", "tasks")
+	if(GM.main.isInDungeon()):
+		addButtonAt(13, "Give up", "Give up exploring this place", "giveupdungeon")
+	else:
+		addButtonAt(13, "Tasks", "Look at your tasks", "tasks")
 	addButtonAt(14, "Inventory", "Look at your inventory", "inventory")
 	#addButtonAt(5, "Sex Test", "Sex test", "sextest")
 	#addButtonAt(7, "Slave Test", "Slave test", "slavetest")
@@ -72,6 +75,9 @@ func _run():
 		
 	_roomInfo._onEnter()
 	GM.ES.triggerRun(Trigger.EnteringRoom, [GM.pc.location])
+	
+	if(GM.main.DrugDenRun != null):
+		saynn(Util.join(GM.main.DrugDenRun.getRunInfo(), "\n"))
 
 func _react(_action: String, _args):
 	# RoomAction support
@@ -88,6 +94,8 @@ func _react(_action: String, _args):
 	
 	if(_action == "go"):
 		playAnimation(StageScene.Solo, "walk")
+		#playAnimation(StageScene.MilkingStallDuo, "start", {bodyState={chains=[["normal", "neck", "scene", "toppipe"], ["short", "neck", "scene", "bottompipe"]]}})
+		#playAnimation(StageScene.MilkingStallSolo, "cum", {bodyState={chains=[["hoseshort", "breastpump", "scene", "milktank"], ["hoseshort", "penisPump", "scene", "milktank"], ["short", "neck", "scene", "bottompipe"]]}})
 		#playAnimation(StageScene.PuppySolo, "walk")
 		#playAnimation(StageScene.Solo, "custom", {anim={"Arm.L":{"a":[-0,0,-3.02]},"Arm.R":{"a":[-0,0,2.87]},"Chest":{"a":[-0,0,0.26]},"Hips":{"a":[-0,0,2.84],"p":[0,0.52,0]},"LegDown.R":{"a":[-0,0,-1.33]},"LegUpper.L":{"a":[-0,0,0.1]},"LegUpper.R":{"a":[-0,0,0.96]},"Tail1":{"a":[-0,0,-0.33]},"Tail2":{"a":[-0,0,-0.38]},"Tail3":{"a":[-0,0,-0.39]},"Tail4":{"a":[-0,0,-0.28]},"Tail5":{"a":[-0,0,-0.34]}}  })
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, _args[0]))
@@ -95,8 +103,11 @@ func _react(_action: String, _args):
 		aimCamera(GM.pc.location)
 		GM.ES.triggerReact(Trigger.EnteringRoom, [GM.pc.location, _args[1]])
 		
-		GM.main.showLog()
-
+		if(!GM.main.checkTFs()):
+			GM.main.showLog()
+			
+	if(_action == "giveupdungeon"):
+		runScene("DrugDenGiveUpScene")
 	if(_action == "inventory"):
 		runScene("InventoryScene")
 	if(_action == "tasks"):

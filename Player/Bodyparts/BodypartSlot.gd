@@ -20,6 +20,36 @@ static func getAll():
 static func getVisibleName(slot: String):
 	return slot.capitalize()
 
+static func getVisibleNameNoCap(slot: String):
+	return slot
+
+static func getSlotChildName(slot: String):
+	if(slot == Head):
+		return "neck"
+	if(slot == Hair):
+		return "head"
+	if(slot == Ears):
+		return "head"
+	if(slot == Horns):
+		return "head"
+	if(slot == Body):
+		return "body"
+	if(slot == Arms):
+		return "torso"
+	if(slot == Breasts):
+		return "chest"
+	if(slot == Penis):
+		return "crotch"
+	if(slot == Vagina):
+		return "crotch"
+	if(slot == Anus):
+		return "butt"
+	if(slot == Tail):
+		return "butt"
+	if(slot == Legs):
+		return "butt"
+	return "body"
+
 static func isEssential(slot):
 	if(slot == Horns):
 		return false

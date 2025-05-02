@@ -46,6 +46,10 @@ func clearSexEngineRefAndParticipants():
 	domInfo = null
 	subInfo = null
 
+# Will automatically end the activity if this returns true
+func isActivityImpossibleShouldStop() -> bool:
+	return false
+
 func endActivity():
 	if(!hasEnded):
 		hasEnded = true
@@ -410,12 +414,15 @@ func applyTallymarkIfNeededData(bodypartSlot):
 	#	return null
 	
 	var chanceToAdd = 0.0
+	var domBodywritingsScale: float = (domInfo.fetishScore({Fetish.Bodywritings: 1.0}) + 1.0)/2.0 # makes it a [0.0-1.0] value
+	
 	if(getSub().hasTallymarks() || getSexType() in [SexType.SlutwallSex, SexType.StocksSex]):
-		chanceToAdd = 100.0
+		chanceToAdd = 200.0
 	else:
 		chanceToAdd = (max(0.0, domInfo.fetishScore({Fetish.Bodywritings: 1.0})) + domInfo.personalityScore({PersonalityStat.Mean: 0.3})) * 100.0
 		if(!domInfo.isAngry()):
 			chanceToAdd *= 0.5
+	chanceToAdd *= domBodywritingsScale
 	
 	if(!RNG.chance(chanceToAdd)):
 		return null
@@ -758,7 +765,7 @@ func doSpitCumIntoHoleDom(bodypartSlot = BodypartSlot.Vagina):
 	var mixtureText = getDom().getBodypartContentsStringList(BodypartSlot.Head)
 	var locationName:String = ("{sub.pussyStretch} "+RNG.pick(["pussy", "slit"]) if bodypartSlot == BodypartSlot.Vagina else ("{sub.anusStretch} "+RNG.pick(["anus"])))
 	var text = RNG.pick([
-		"{dom.You} {dom.youVerb('press')} {dom.yourHis} lips against {sub.yourHis} "+locationName+" and [b]{dom.youVerb('spit')} "+mixtureText+" into it[/b]!",
+		"{dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} lips against {sub.yourHis} "+locationName+" and [b]{dom.youVerb('spit')} "+mixtureText+" into it[/b]!",
 	])
 	var howMuch = getDom().bodypartTransferFluidsToAmount(BodypartSlot.Head, subID, bodypartSlot, 0.2, 20.0)
 	if(getSub().hasWombIn(bodypartSlot)):
@@ -774,7 +781,7 @@ func doSpitCumIntoHoleSub(bodypartSlot = BodypartSlot.Vagina):
 	var mixtureText = getSub().getBodypartContentsStringList(BodypartSlot.Head)
 	var locationName:String = ("{dom.pussyStretch} "+RNG.pick(["pussy", "slit"]) if bodypartSlot == BodypartSlot.Vagina else ("{dom.anusStretch} "+RNG.pick(["anus"])))
 	var text = RNG.pick([
-		"{sub.You} {sub.youVerb('press')} {sub.yourHis} lips against {dom.yourHis} "+locationName+" and [b]{sub.youVerb('spit')} "+mixtureText+" into it[/b]!",
+		"{sub.You} {sub.youVerb('press', 'presses')} {sub.yourHis} lips against {dom.yourHis} "+locationName+" and [b]{sub.youVerb('spit')} "+mixtureText+" into it[/b]!",
 	])
 	var howMuch = getSub().bodypartTransferFluidsToAmount(BodypartSlot.Head, domID, bodypartSlot, 0.2, 20.0)
 	if(getDom().hasWombIn(bodypartSlot)):
@@ -819,7 +826,6 @@ func getSubDickName(dickName = null):
 	if(dickName == null):
 		return RNG.pick(["cock", "dick", "member"])
 	return dickName
-
 	
 func doBlowjobTurnDom():
 	affectSub(subInfo.fetishScore({Fetish.OralSexGiving: 1.0})+0.1, 0.1, -0.1, -0.01)
@@ -838,7 +844,7 @@ func doBlowjobTurnDom():
 		"{sub.You} {sub.youAre} sucking eagerly on {dom.your} "+getDomDickName(RNG.pick(["dick", "member", "shaft"]))+", drawing a moan from {dom.youHim}.",  
 		"{sub.You} {sub.youVerb('swirl')} {sub.yourHis} tongue around the head of {dom.your} "+getDomDickName(RNG.pick(["cock", "dick", "member"]))+".",  
 		"{sub.You} {sub.youVerb('take')} {dom.your} "+getDomDickName(RNG.pick(["length", "shaft", "cock"]))+ " further into {sub.yourHis} mouth, sucking hard.",  
-		"{sub.You} {sub.youVerb('press')} {sub.yourHis} tongue firmly against {dom.your} "+getDomDickName(RNG.pick(["cock", "dick", "member"]))+", sliding it slowly along its length.",  
+		"{sub.You} {sub.youVerb('press', 'presses')} {sub.yourHis} tongue firmly against {dom.your} "+getDomDickName(RNG.pick(["cock", "dick", "member"]))+", sliding it slowly along its length.",  
 	])
 	
 	if(!subInfo.isUnconscious()):
@@ -1082,7 +1088,7 @@ func doBlowjobTurnSub():
 		"{dom.You} {dom.youAre} sucking eagerly on {sub.your} "+RNG.pick(["dick", "member", "shaft"])+", drawing a moan from {sub.youHim}.",  
 		"{dom.You} {dom.youVerb('swirl')} {dom.yourHis} tongue around the head of {sub.your} "+RNG.pick(["cock", "dick", "member"])+".",  
 		"{dom.You} {dom.youVerb('take')} {sub.your} "+RNG.pick(["length", "shaft", "cock"])+ " further into {dom.yourHis} mouth, sucking hard.",  
-		"{dom.You} {dom.youVerb('press')} {dom.yourHis} tongue firmly against {sub.your} "+RNG.pick(["cock", "dick", "member"])+", sliding it slowly along its length.",  
+		"{dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} tongue firmly against {sub.your} "+RNG.pick(["cock", "dick", "member"])+", sliding it slowly along its length.",  
 	])
 	
 	if(RNG.chance(30)):

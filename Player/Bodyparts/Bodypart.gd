@@ -34,6 +34,15 @@ func getSlot():
 func getName():
 	return visibleName
 
+func getVulgarName() -> String:
+	return getName()
+
+func getAVulgarName() -> String:
+	var theSlot = getLimbSlot()
+	if(theSlot in [BodypartSlot.Arms, BodypartSlot.Breasts, BodypartSlot.Ears, BodypartSlot.Horns, BodypartSlot.Legs]):
+		return getVulgarName()
+	return "a "+getVulgarName()
+
 func getCharacterCreatorName():
 	return getName().capitalize()
 
@@ -42,6 +51,27 @@ func getCharacterCreatorDesc():
 
 func getCompatibleSpecies():
 	return []
+
+func getSpeciesScores() -> Dictionary:
+	var result:Dictionary = {}
+	
+	var theLimbSlot = getLimbSlot()
+	var scoreToAdd:float = 1.0
+	if(theLimbSlot == BodypartSlot.Head):
+		scoreToAdd = 1.51 # Weird numbers on purpose to lessen the chance of getting a same score
+	elif(theLimbSlot in [BodypartSlot.Tail]):
+		scoreToAdd = 1.02
+	elif(theLimbSlot in [BodypartSlot.Horns]):
+		scoreToAdd = 0.79
+	elif(theLimbSlot in [BodypartSlot.Breasts, BodypartSlot.Body, BodypartSlot.Legs]):
+		scoreToAdd = 0.74
+	elif(theLimbSlot in [BodypartSlot.Hair]):
+		scoreToAdd = 0.23
+	
+	for theSpecies in getCompatibleSpecies():
+		result[theSpecies] = scoreToAdd
+	
+	return result
 
 func getFluids():
 	if(orifice != null):
@@ -205,6 +235,43 @@ func handleInsertion(size: float, stretchMult = 1.0):
 func getOrificeName():
 	return "error"
 
+func saveOriginalTFData() -> Dictionary:
+	var saveDataData:Dictionary = saveData()
+	
+	var result:Dictionary = {}#saveData()
+	
+	for field in saveDataData:
+		if(field in ["orificeData", "fluidProductionData", "sensitiveZone", "pickedSkin", "pickedRColor", "pickedGColor", "pickedBColor"]):
+			continue
+		result[field] = saveDataData[field]
+		
+	result["bodypartID"] = id
+	
+	return result
+
+func applyTFData(_data):
+#	if(supportsSkin()):
+#		if(_data.has("skin")):
+#			pickedSkin = loadTFVar(_data, "skin", pickedSkin)
+#		if(_data.has("r")):
+#			pickedRColor = loadTFVar(_data, "r", pickedRColor)
+#			if(pickedRColor is String):
+#				pickedRColor = Color(pickedRColor)
+#		if(_data.has("g")):
+#			pickedGColor = loadTFVar(_data, "g", pickedGColor)
+#			if(pickedGColor is String):
+#				pickedGColor = Color(pickedGColor)
+#		if(_data.has("b")):
+#			pickedBColor = loadTFVar(_data, "b", pickedBColor)
+#			if(pickedBColor is String):
+#				pickedBColor = Color(pickedBColor)
+	pass
+
+func loadTFVar(_data:Dictionary, _keyID:String, default):
+	if(!_data.has(_keyID)):
+		return default
+	return _data[_keyID]
+
 func saveData():
 	var result = {}
 	
@@ -255,6 +322,12 @@ func loadData(_data):
 			pickedBColor = SAVE.loadVar(_data, "pickedBColor", null)
 			if(pickedBColor is String):
 				pickedBColor = Color(pickedBColor)
+
+func saveDataForTF():
+	return saveData()
+
+func loadDataForTF(_data):
+	loadData(_data)
 
 func saveDataNPC():
 	var result = {}
@@ -344,6 +417,33 @@ func getSkinData():
 		"b": pickedBColor,
 	}
 
+func getTFSkinData():
+	if(hasCustomSkinPattern() && pickedSkin != null):
+		return {
+			"partskin": pickedSkin,
+			"partid": id,
+			"skin": null,
+			"r": pickedRColor.to_html() if (pickedRColor is Color) else pickedRColor,
+			"g": pickedGColor.to_html() if (pickedGColor is Color) else pickedGColor,
+			"b": pickedBColor.to_html() if (pickedBColor is Color) else pickedBColor,
+		}
+	
+	return {
+		"skin": pickedSkin,
+		"r": pickedRColor.to_html() if (pickedRColor is Color) else pickedRColor,
+		"g": pickedGColor.to_html() if (pickedGColor is Color) else pickedGColor,
+		"b": pickedBColor.to_html() if (pickedBColor is Color) else pickedBColor,
+	}
+
+func applySkinData(_data:Dictionary):
+	if(hasCustomSkinPattern() && _data.has("partskin") && _data["partskin"] != null):
+		pickedSkin = loadTFVar(_data, "partskin", null)
+	else:
+		pickedSkin = loadTFVar(_data, "skin", null)
+	pickedRColor = Util.tryFixColor(loadTFVar(_data, "r", null))
+	pickedGColor = Util.tryFixColor(loadTFVar(_data, "g", null))
+	pickedBColor = Util.tryFixColor(loadTFVar(_data, "b", null))
+
 func generateRandomSkinIfCan(_dynamicCharacter):
 	if(hasCustomSkinPattern()):
 		if(!GlobalRegistry.getPartSkins(id).empty()):
@@ -351,3 +451,96 @@ func generateRandomSkinIfCan(_dynamicCharacter):
 
 func generateRandomColors(_dynamicCharacter):
 	pass
+
+static func findPossibleBodypartIDs(bodypartSlot, acharacter, theSpecies:Array, customNpcGender=null) -> Array:
+	var possible = []
+	#var fullWeight = 0.0
+	#if(!BodypartSlot.isEssential(bodypartSlot)):
+	#	possible.append([null, 1.0])
+	
+	var allbodypartsIDs = GlobalRegistry.getBodypartsIdsBySlot(bodypartSlot)
+	for bodypartID in allbodypartsIDs:
+		var bodypart = GlobalRegistry.getBodypartRef(bodypartID)
+		var supportedSpecies = bodypart.getCompatibleSpecies()
+		
+		var hasInSupported = false
+		var hasInAllowed = false
+		
+		for supported in supportedSpecies:
+			if((supported in theSpecies) || supported == Species.AnyNPC): # || supported == Species.Any
+				hasInSupported = true
+				break
+			
+		for playerSpecie in theSpecies:
+			var speciesObject = GlobalRegistry.getSpecies(playerSpecie)
+			if(bodypartID in speciesObject.getAllowedBodyparts()):
+				hasInAllowed = true
+				break
+		
+		if(hasInSupported || hasInAllowed):
+			var weight = bodypart.npcGenerationWeight(acharacter)
+			if(weight != null && weight > 0.0):
+				possible.append([bodypartID, weight])
+				#fullWeight += weight
+
+	# Adding the default bodypart of this species into the mix
+	for specie in theSpecies:
+		var speciesObject = GlobalRegistry.getSpecies(specie)
+		var bodypartID = speciesObject.getDefaultForSlotForNpcGender(bodypartSlot, acharacter.calculateNpcGender() if customNpcGender==null else customNpcGender)
+		var alreadyHasInPossible = false
+		for possibleEntry in possible:
+			if(possibleEntry[0] == bodypartID):
+				alreadyHasInPossible = true
+				break
+		if(alreadyHasInPossible):
+			continue
+		if(bodypartID == null):
+			possible.append(["", 1.0])
+			#fullWeight += 1.0
+			continue
+		var bodypart = GlobalRegistry.getBodypartRef(bodypartID)
+		var weight = bodypart.npcGenerationWeight(acharacter)
+		if(weight != null && weight > 0.0):
+			possible.append([bodypartID, weight])
+			#fullWeight += weight
+	return possible
+
+static func findPossibleBodypartIDsDict(bodypartSlot, acharacter, theSpecies:Array, customNpcGender=null) -> Dictionary:
+	var idsAr:Array = findPossibleBodypartIDs(bodypartSlot, acharacter, theSpecies, customNpcGender)
+	var result:Dictionary = {}
+	
+	for idEntry in idsAr:
+		if(idEntry[1] <= 0.0):
+			continue
+		if(idEntry[0] == null):
+			idEntry[0] = ""
+		
+		if(!result.has(idEntry[0])):
+			result[idEntry[0]] = 0.0
+		result[idEntry[0]] += float(idEntry[1])
+	
+	return result
+
+func getTransformAwayMessage(_context:Dictionary) -> String:
+	var slot = getSlot()
+	var slotName:String = BodypartSlot.getVisibleNameNoCap(slot)
+	var shouldHaveS:bool = !slotName.ends_with("s") || (slotName in ["penis", "anus"])
+	return "{npc.YouHe} {npc.youVerb('feel')} a tingling sensation on {npc.yourHis} scalp as {npc.yourHis} "+slotName+" begin"+("s" if shouldHaveS else "")+" to shift and change. Suddenly, {npc.YourHis} "+slotName+" morph"+("s" if shouldHaveS else "")+" away completely, leaving nothing in its place!"
+
+func getTransformGrowMessage(_context:Dictionary) -> String:
+	var slot = getSlot()
+	var slotName:String = BodypartSlot.getVisibleNameNoCap(slot)
+	var shouldHaveS:bool = !slotName.ends_with("s") || (slotName in ["penis", "anus"])
+	var slotChildName:String = BodypartSlot.getSlotChildName(slot)
+	return "A sudden warmth spreads through {npc.yourHis} body, and {npc.youHe} {npc.youVerb('feel')} a peculiar sensation as "+("a " if shouldHaveS else "")+"new "+slotName+" begin"+("s" if shouldHaveS else "")+" to form from {npc.yourHis} "+slotChildName+". "+("It gets" if shouldHaveS else "They get")+" more and more defined, the contours slowly taking shape. The process is quite.. uncomfortable.. to say the least.. but eventually "+("it finishes" if shouldHaveS else "they finish")+" growing, assuming "+("its" if shouldHaveS else "their")+" final form."
+
+func getTransformMorphMessage(_context:Dictionary) -> String:
+	var slot = getSlot()
+	var slotName:String = BodypartSlot.getVisibleNameNoCap(slot)
+	var shouldHaveS:bool = !slotName.ends_with("s") || (slotName in ["penis", "anus"])
+	return "An unusual sensation courses through {npc.yourHis} body as {npc.yourHis} "+slotName+" begin"+("s" if shouldHaveS else "")+" to shift and change! The familiar contours start to dissolve and reshape, morphing into something different. Gradually, the new "+slotName+" emerge"+("s" if shouldHaveS else "")+", taking on a more defined form. The process is quite painful and uncomfortable, but eventually "+("it settles" if shouldHaveS else "they settle")+" into "+("its" if shouldHaveS else "their")+" final appearance. {npc.YouHe} now {npc.youVerb('have', 'has')} "+getAVulgarName()+"."
+
+func setFluidsCauserID(_charID:String):
+	var _fluids = getFluids()
+	if(_fluids != null):
+		_fluids.setCauserID(_charID)

@@ -5,12 +5,18 @@ var maxBackupQuicksaves = 3
 
 var loadedSavefileVersion = -1
 
+var saveInfoCache:Dictionary = {}
+
+func _ready():
+	loadSaveInfoCacheFromFile()
+
 func saveData():
 	var data = {
 		"savefile_version": currentSavefileVersion,
 		"currentUniqueID_DONT_TOUCH": GlobalRegistry.currentUniqueID,
 		"currentChildUniqueID_DONT_TOUCH": GlobalRegistry.currentChildUniqueID,
 		"currentNPCUniqueID_DONT_TOUCH": GlobalRegistry.currentNPCUniqueID,
+		"currentTFID_DONT_TOUCH": GlobalRegistry.currentTFID,
 	}
 	
 	data["player"] = GM.main.getOriginalPC().saveData()
@@ -37,6 +43,7 @@ func loadData(data: Dictionary):
 	GlobalRegistry.currentUniqueID = SAVE.loadVar(data, "currentUniqueID_DONT_TOUCH", 0)
 	GlobalRegistry.currentChildUniqueID = SAVE.loadVar(data, "currentChildUniqueID_DONT_TOUCH", 0)
 	GlobalRegistry.currentNPCUniqueID = SAVE.loadVar(data, "currentNPCUniqueID_DONT_TOUCH", 0)
+	GlobalRegistry.currentTFID = SAVE.loadVar(data, "currentTFID_DONT_TOUCH", 0)
 	
 	GM.main.getOriginalPC().loadData(data["player"])
 	
@@ -61,7 +68,7 @@ func canSave():
 	
 func saveGame(_path):
 	if(!canSave()):
-		print("Can't save because one of the scenes doesn't support saving")
+		Log.printerr("Can't save because one of the scenes doesn't support saving")
 		return
 	
 	var saveData = saveData()
@@ -72,11 +79,60 @@ func saveGame(_path):
 	
 	save_game.close()
 	
+	invalidateCachedSaveInfoByPath(_path)
+
+const saveInfoCachePath = "user://saveInfoCache.json"
+
+func loadSaveInfoCacheFromFile():
+	var save_game = File.new()
+	if !save_game.file_exists(saveInfoCachePath):
+		return
+	
+	save_game.open(saveInfoCachePath, File.READ)
+	var jsonResult = JSON.parse(save_game.get_as_text())
+	if(jsonResult.error != OK):
+		Log.printerr("Save info cache is not a valid json file")
+		return
+	
+	var saveData:Dictionary = jsonResult.result
+	if(!saveData.has("version") || !saveData.has("saves")):
+		Log.printerr("Save info cache is not valid")
+		return
+	if(saveData["version"] != 1):
+		Log.printerr("Unsupported save info cache version")
+		return
+	saveInfoCache = saveData["saves"]
+
+func saveInfoCacheToFile():
+	var save_game = File.new()
+	save_game.open(saveInfoCachePath, File.WRITE)
+	save_game.store_line(JSON.print({
+		version = 1,
+		saves = saveInfoCache,
+	}, "\t", true))
+	save_game.close()
+	isSavingCache = false
+	#print("SAVED CACHE!")
+
+var isSavingCache:bool = false
+func triggerSaveCacheSave():
+	if(isSavingCache):
+		return
+	isSavingCache = true # De-bouncing. Only save once at the end of the frame in case there are many requests
+	call_deferred("saveInfoCacheToFile")
+
+func invalidateCachedSaveInfoByPath(_path:String):
+	if(saveInfoCache.has(_path)):
+		saveInfoCache.erase(_path)
+	triggerSaveCacheSave()
+
 func saveGameFromText(filepath: String, savedatastring):
 	var save_game = File.new()
 	save_game.open("user://saves/"+filepath.get_file().get_basename()+".save", File.WRITE)
 	save_game.store_line(savedatastring)
 	save_game.close()
+	
+	invalidateCachedSaveInfoByPath(filepath)
 
 func loadGameRelative(_name):
 	loadGame("user://saves/"+_name+".save")
@@ -162,6 +218,7 @@ func recursiveQuickSaveMakeBackup(currentI = 1):
 		
 		if(currentI >= maxBackupQuicksaves):
 			d.remove(quickSaveFullname)
+			invalidateCachedSaveInfoByPath(quickSaveFullname)
 			#print("I REMOVED "+quickSaveFullname)
 			return
 		
@@ -169,6 +226,7 @@ func recursiveQuickSaveMakeBackup(currentI = 1):
 		var newQuickSaveName = "quicksave backup"+str(i)
 		var newQuickSaveFullname = "user://saves/"+newQuickSaveName+".save"
 		d.rename(quickSaveFullname, newQuickSaveFullname)
+		invalidateCachedSaveInfoByPath(quickSaveFullname)
 		#print("RENAMING "+quickSaveFullname+" TO "+newQuickSaveFullname)
 
 func makeQuickSave():
@@ -250,6 +308,17 @@ func getSavesSortedByDate():
 	return result
 
 func loadGameInformationFromSave(_path):
+	if(saveInfoCache.has(_path)):
+		return saveInfoCache[_path]
+	
+	var theInfo = loadGameInformationFromSaveRaw(_path)
+	if(theInfo != null):
+		saveInfoCache[_path] = theInfo
+		#Log.print("CREATED SAVE INFO CACHE FOR: "+str(_path))
+		triggerSaveCacheSave()
+	return theInfo
+
+func loadGameInformationFromSaveRaw(_path):
 	var save_game = File.new()
 	if not save_game.file_exists(_path):
 		assert(false, "Save file is not found in "+str(_path))
@@ -288,3 +357,4 @@ func loadGameInformationFromSave(_path):
 func deleteSave(path):
 	var dir = Directory.new()
 	dir.remove(path)
+	invalidateCachedSaveInfoByPath(path)

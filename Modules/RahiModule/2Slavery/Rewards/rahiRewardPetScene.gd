@@ -145,17 +145,41 @@ func _run():
 			addButton("Belly rubs", "(Petplay) Give Rahi some good belly rubs", "petplay_bellyrubs")
 		else:
 			addDisabledButton("Belly rubs", "Kitty needs more petplay experience")
+	#ACEPREGEXPAC - Giving Rahi Belly Rubs has some line variants for rahi being pregnant and heavily pregnant.
 	if(state == "petplay_bellyrubs"):
 		playAnimation(StageScene.SexStart, "defeated", {npc="rahi", npcBodyState={naked=true}})
-		saynn("You're not done yet! You suddenly push Rahi down and unbutton her shirt before exposing her cute belly. Kitty watches with curiosity as you begin to rub her tummy.")
+		if(getCharacter("rahi").isHeavilyPregnant()):
+			saynn("You're not done yet! You suddenly nudge Rahi over and unbutton her shirt before exposing her cute, heavily pregnant belly. Kitty watches with curiosity as you begin to rub her tummy.")
 
-		saynn("Rahi tenses up a little, something inside her makes her try to scratch and nibble on your hands. But the more your fingers move over her soft fur, the more she relaxes. Her eyes close and a low purr begins to escape from her maw yet again.")
+			saynn("Rahi tenses up a little, but does little to stop you as you run your fingers over her tender, gravid tummy. Her eyes close and a low purr begins to escape from her maw yet again.")
 
-		saynn("[say=rahi]Me-e-eow..[/say]")
+			saynn("[say=rahi]Me-e-eow..[/say]")
 
-		saynn("Your fingers continue to brush over Rahi's belly, making her wiggle with delight. Her tail twitches back and forth, poking your legs, while she lets out little meows of happiness. You can't help but to chuckle at the cute sight as you continue to give her lots of belly rubs.")
+			saynn("Your fingers continue to brush over Rahi's belly, making her wiggle with delight. Her tail twitches back and forth, poking your legs, while she lets out little meows of happiness. You can't help but to chuckle at the cute sight as you continue to give her lots of belly rubs.")
 
-		saynn("As time goes on, her purring grows louder. She stretches for you, arching her back. Her eyes open a little as she gives you a look of pure bliss.")
+			saynn("You continue to rub as Rahi rests one of her hands atop her belly and stretches out, trying to expose herself for more rubs. You put both your hands and continue to rub even as now you feel something inside her press against your palms...")
+
+			saynn("As time goes on, her purring grows louder. She stretches for you, arching her back. Her eyes open a little as she gives you a look of pure bliss.")
+		elif(getCharacter("rahi").isVisiblyPregnant()):
+			saynn("You're not done yet! You suddenly push Rahi over and unbutton her shirt before exposing her cute pregnant belly. Kitty watches with curiosity as you begin to rub her tummy.")
+
+			saynn("Rahi tenses up a little, her feline instincts thinking to scratch and nibble your hands. As you run your fingers over the soft fur of her expectant tummy she gradually relaxes. Her eyes close and a low purr begins to escape from her maw yet again.")
+
+			saynn("[say=rahi]Me-e-eow..[/say]")
+
+			saynn("Your fingers continue to brush over Rahi's belly, making her wiggle with delight. Her tail twitches back and forth, poking your legs, while she lets out little meows of happiness. You can't help but to chuckle at the cute sight as you continue to give her lots of belly rubs.")
+
+			saynn("As time goes on, her purring grows louder. She stretches for you, arching her back. Her eyes open a little as she gives you a look of pure bliss.")
+		else:
+			saynn("You're not done yet! You suddenly push Rahi down and unbutton her shirt before exposing her cute belly. Kitty watches with curiosity as you begin to rub her tummy.")
+
+			saynn("Rahi tenses up a little, something inside her makes her try to scratch and nibble on your hands. But the more your fingers move over her soft fur, the more she relaxes. Her eyes close and a low purr begins to escape from her maw yet again.")
+
+			saynn("[say=rahi]Me-e-eow..[/say]")
+
+			saynn("Your fingers continue to brush over Rahi's belly, making her wiggle with delight. Her tail twitches back and forth, poking your legs, while she lets out little meows of happiness. You can't help but to chuckle at the cute sight as you continue to give her lots of belly rubs.")
+
+			saynn("As time goes on, her purring grows louder. She stretches for you, arching her back. Her eyes open a little as she gives you a look of pure bliss.")
 
 		if (getModule("RahiModule").getSkillScore("rahiSkillPetplay") > 7 && getModule("RahiModule").isSkillLearned("rahiSkillSex")):
 			saynn("And wow, Rahi seems to be quite wet down there. Someone really enjoys being a kitty way too much.")

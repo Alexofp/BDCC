@@ -22,6 +22,12 @@ func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	return .canStartActivity(_sexEngine, _domInfo, _subInfo)
 
+func isActivityImpossibleShouldStop() -> bool:
+	if(alsoCock):
+		if(!getSub().hasReachablePenis()):
+			return true
+	return false
+
 func getVisibleName():
 	return "Grope breasts"
 
@@ -165,10 +171,10 @@ func processTurn():
 			else:
 				subInfo.stimulateArousalZone(0.05, BodypartSlot.Penis, 0.25)
 				text += RNG.pick([
-					" {dom.yourHis} free hand is stroking {sub.yourHis} {sub.penis}.",
-					" {dom.yourHis} free hand is stroking {sub.youHim}.",
-					" {dom.yourHis} is also stroking {sub.youHim}.",
-					" {dom.yourHis} is also stroking {sub.youHim} at the same time.",
+					" {dom.YourHis} free hand is stroking {sub.yourHis} {sub.penis}.",
+					" {dom.YourHis} free hand is stroking {sub.youHim}.",
+					" {dom.YouHe} {dom.youAre} also stroking {sub.youHim}.",
+					" {dom.YouHe} {dom.youAre} also stroking {sub.youHim} at the same time.",
 				])
 		
 		sendSexEvent(SexEvent.BreastsGroped, domID, subID, {madeLactate=suddenlyLactating})

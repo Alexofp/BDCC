@@ -212,7 +212,10 @@ func ovulate():
 	var possibleEggAmounts = []
 	for specie in motherSpecies:
 		var speciesObject = GlobalRegistry.getSpecies(specie)
-		possibleEggAmounts.append_array(speciesObject.getEggCellOvulationAmount())
+		if speciesObject == null:
+			possibleEggAmounts.append_array([[1, 10.0],[2, 1.0]])
+		else:
+			possibleEggAmounts.append_array(speciesObject.getEggCellOvulationAmount())
 	
 	for orifice in OrificeType.getAll():
 		if(!hasWombIn(orifice)):
@@ -265,6 +268,15 @@ func isPregnantFromPlayer():
 	
 	for egg in impregnatedEggCells:
 		if(egg.getFatherID() == "pc" || egg.getMotherID() == "pc"):
+			return true
+	return false
+
+func isPregnantFrom(_charID:String) -> bool:
+	if(!isPregnant()):
+		return false
+	
+	for egg in impregnatedEggCells:
+		if(egg.getFatherID() == _charID || egg.getMotherID() == _charID):
 			return true
 	return false
 

@@ -69,6 +69,10 @@ func getFlags():
 		"Chastity_Event5GaveElizaDrug": flag(FlagType.Bool),
 		"Chastity_ExperimentWasSuccessful": flag(FlagType.Bool),
 		"Chastity_ReceivedRing": flag(FlagType.Bool),
+		
+		"Milked_Breasts": flag(FlagType.Bool),
+		"Milked_Penis": flag(FlagType.Bool),
+		"Milked_Pussy": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -123,6 +127,20 @@ func _init():
 		"res://Modules/MedicalModule/HealingScenes/MedicalHealCryopodScene.gd",
 		"res://Modules/MedicalModule/HealingScenes/MedicalHealingGelScene.gd",
 		"res://Modules/MedicalModule/HealingScenes/ElizaBackupPCSaveScene.gd",
+		
+		"res://Modules/MedicalModule/Milking/ElizaMilkingBreastsHandScene.gd",
+		"res://Modules/MedicalModule/Milking/ElizaMilkingBreastsStallScene.gd",
+		"res://Modules/MedicalModule/Milking/ElizaMilkingBreastsPumpsScene.gd",
+		"res://Modules/MedicalModule/Milking/ElizaMilkingBreastsBDSMMachineScene.gd",
+		"res://Modules/MedicalModule/Milking/ElizaMilkingSeedHandScene.gd",
+		"res://Modules/MedicalModule/Milking/ElizaMilkingSeedPumpScene.gd",
+		"res://Modules/MedicalModule/Milking/ElizaMilkingProstateHandScene.gd",
+		"res://Modules/MedicalModule/Milking/ElizaMilkingProstateStraponScene.gd",
+		"res://Modules/MedicalModule/Milking/ElizaMilkingSeedPawjobScene.gd",
+		"res://Modules/MedicalModule/Milking/ElizaMilkingSeedBDSMMachineScene.gd",
+		"res://Modules/MedicalModule/Milking/ElizaMilkingSeedFleshlightScene.gd",
+		"res://Modules/MedicalModule/Milking/ElizaMilkingGirlcumSybianScene.gd",
+		"res://Modules/MedicalModule/Milking/ElizaQuickMilkingScene.gd",
 		]
 	characters = [
 		"res://Modules/MedicalModule/MentalWard/LatexParasite.gd",
@@ -155,6 +173,9 @@ func resetFlagsOnNewDay():
 		GM.main.increaseFlag("MedicalModule.Eliza_BusyDays", -1)
 	if(getFlag("MedicalModule.Medical_StoleDrugsToday")):
 		setFlag("MedicalModule.Medical_StoleDrugsToday", false)
+	setFlag("MedicalModule.Milked_Breasts", false)
+	setFlag("MedicalModule.Milked_Penis", false)
+	setFlag("MedicalModule.Milked_Pussy", false)
 
 func preparePCForMentalWard():
 	GM.pc.removeAllRestraints()

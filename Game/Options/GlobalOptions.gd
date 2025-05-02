@@ -5,6 +5,9 @@ var myProjectSettings
 var enabledContent = {}
 const optionsFilepath = "user://options.json"
 var fetchNewRelease = true
+var fullscreen:bool = false
+var fpsLimit:int = 0
+var webTextInputFallback:bool = false
 # Pregnancy options
 var menstrualCycleLengthDays: int
 var eggCellLifespanHours: int
@@ -26,6 +29,7 @@ var sandboxNpcLeveling:float = 1.0
 var hardStruggleEnabled: bool = false
 var smartLockRarity: String = "normal" # never veryrare rare normal often veryoften bdsmslut always
 var overstimulationEnabled: bool = true
+var savingInDungeons: bool = false
 
 # Datapack editor
 var blockCatcherPanelHeight: int = 8
@@ -74,6 +78,8 @@ var genderNamesOverrides = {}
 
 func resetToDefaults():
 	fetchNewRelease = true
+	fpsLimit = 0
+	webTextInputFallback = false
 	menstrualCycleLengthDays = 7
 	eggCellLifespanHours = 48
 	playerPregnancyTimeDays = 5
@@ -87,6 +93,7 @@ func resetToDefaults():
 	hardStruggleEnabled = false
 	smartLockRarity = "normal"
 	overstimulationEnabled = true
+	savingInDungeons = false
 	shouldScaleUI = true
 	uiScaleMultiplier = 1.0
 	showSpeakerName = true
@@ -188,6 +195,9 @@ func getSmartLockRarity():
 
 func isOverstimulationEnabled():
 	return overstimulationEnabled
+
+func canSaveInDungeons() -> bool:
+	return savingInDungeons
 
 func shouldShowSpeakerName():
 	return showSpeakerName
@@ -313,25 +323,6 @@ func getChangeableOptions():
 					"value": showModdedLauncher,
 				},
 			],
-		},
-		{
-			"name": "Datapack",
-			"id": "datapack",
-			"options": [
-				{
-					"name": "Block catcher panel height",
-					"description": "Adjust the size(height) of the block catcher panel",
-					"id": "blockCatcherPanelHeight",
-					"type": "list",
-					"value": blockCatcherPanelHeight,
-					"values": [
-						[4, "4p"],
-						[8, "8p"],
-						[16, "16p"],
-						[32, "32p"],
-					]
-				}
-			]
 		},
 		{
 			"name": "Sandbox",
@@ -504,6 +495,13 @@ func getChangeableOptions():
 					"type": "checkbox",
 					"value": overstimulationEnabled
 				},
+				{
+					"name": "Saving in dungeons",
+					"description": "Turn this on to be able to save/rollback during in-game dungeons (Drug den). Turning this on will make the dungeons easier.",
+					"id": "savingInDungeons",
+					"type": "checkbox",
+					"value": savingInDungeons
+				},
 			]
 		},
 		{
@@ -519,6 +517,25 @@ func getChangeableOptions():
 					"values": [
 						["GLES3", "GLES3"],
 						["GLES2", "GLES2"],
+					]
+				},
+				{
+					"name": "FPS limiter",
+					"description": "What's the fastest fps the game should run at? Lower values will stress the device less.",
+					"id": "fpsLimit",
+					"type": "list",
+					"value": fpsLimit,
+					"values": [
+						[10, "10 fps"],
+						[25, "25 fps"],
+						[30, "30 fps"],
+						[45, "45 fps"],
+						[60, "60 fps"],
+						[75, "75 fps"],
+						[90, "90 fps"],
+						[120, "120 fps"],
+						[0, "V-Sync"],
+						[9999, "Uncapped"],
 					]
 				},
 				{
@@ -802,6 +819,26 @@ func getChangeableOptions():
 #					"type": "checkbox",
 #					"value": showMapArt,
 #				},
+				{
+					"name": "Block catcher panel height",
+					"description": "Adjust the size(height) of the block catcher panel",
+					"id": "blockCatcherPanelHeight",
+					"type": "list",
+					"value": blockCatcherPanelHeight,
+					"values": [
+						[4, "4p"],
+						[8, "8p"],
+						[16, "16p"],
+						[32, "32p"],
+					]
+				},
+				{
+					"name": "[WEB] Text Input field fallback",
+					"description": "HTML5 only. Use a pop-up window to allow text input on browsers that don't support godot's text inputs.",
+					"id": "webTextInputFallback",
+					"type": "checkbox",
+					"value": webTextInputFallback,
+				},
 			],
 		},
 		{
@@ -890,6 +927,11 @@ func applyOption(categoryID, optionID, value):
 		if(value != ""):
 			genderNamesOverrides[optionID] = value
 	
+	if(categoryID == "render"):
+		if(optionID == "fpsLimit"):
+			fpsLimit = value
+			applySettingsEffect()
+	
 	if(categoryID == "sandbox"):
 		if(optionID == "sandboxPawnCount"):
 			sandboxPawnCount = value
@@ -928,9 +970,6 @@ func applyOption(categoryID, optionID, value):
 			if(showModdedLauncher):
 				var _ok = OS.request_permissions()
 	
-	if(categoryID == "datapack"):
-		if(optionID == "blockCatcherPanelHeight"):
-			blockCatcherPanelHeight = value
 	
 	if(categoryID == "pregnancy"):
 		if(optionID == "menstrualCycleLengthDays"):
@@ -961,8 +1000,14 @@ func applyOption(categoryID, optionID, value):
 			smartLockRarity = value
 		if optionID == "overstimulationEnabled":
 			overstimulationEnabled = value
+		if optionID == "savingInDungeons":
+			savingInDungeons = value
 	
 	if(categoryID == "other"):
+		if(optionID == "webTextInputFallback"):
+			webTextInputFallback = value
+		if(optionID == "blockCatcherPanelHeight"):
+			blockCatcherPanelHeight = value
 		if(optionID == "fetchLatestRelease"):
 			fetchNewRelease = value
 		if(optionID == "shouldScaleUI"):
@@ -1029,6 +1074,15 @@ func applyOption(categoryID, optionID, value):
 func applySettingsEffect():
 	applyUIScale()
 	
+	OS.window_fullscreen = fullscreen
+	Engine.target_fps = fpsLimit
+	if(fpsLimit == 0):
+		OS.vsync_enabled = true
+	elif(fpsLimit < 30 || fpsLimit > 999):
+		OS.vsync_enabled = false
+	else:
+		OS.vsync_enabled = true
+	
 func applyUIScale():
 	if(shouldScaleUI):
 		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D,SceneTree.STRETCH_ASPECT_EXPAND,Vector2(1280,720), uiScaleMultiplier)
@@ -1039,6 +1093,7 @@ func saveData():
 	var data = {
 		"optionsVersion": 1,
 		"enabledContent": enabledContent,
+		"fpsLimit": fpsLimit,
 		"fetchNewRelease": fetchNewRelease,
 		"menstrualCycleLengthDays": menstrualCycleLengthDays,
 		"eggCellLifespanHours": eggCellLifespanHours,
@@ -1053,6 +1108,7 @@ func saveData():
 		"hardStruggleEnabled": hardStruggleEnabled,
 		"smartLockRarity": smartLockRarity,
 		"overstimulationEnabled": overstimulationEnabled,
+		"savingInDungeons": savingInDungeons,
 		"shouldScaleUI": shouldScaleUI,
 		"uiScaleMultiplier": uiScaleMultiplier,
 		"uiButtonSize": uiButtonSize,
@@ -1088,6 +1144,8 @@ func saveData():
 		"sandboxBreeding": sandboxBreeding,
 		"sandboxNpcLeveling": sandboxNpcLeveling,
 		"blockCatcherPanelHeight": blockCatcherPanelHeight,
+		"webTextInputFallback": webTextInputFallback,
+		"fullscreen": fullscreen,
 	}
 	
 	return data
@@ -1095,6 +1153,7 @@ func saveData():
 func loadData(data):
 	enabledContent = loadVar(data, "enabledContent", {})
 	fetchNewRelease = loadVar(data, "fetchNewRelease", true)
+	fpsLimit = loadVar(data, "fpsLimit", 0)
 	menstrualCycleLengthDays = loadVar(data, "menstrualCycleLengthDays", 7)
 	eggCellLifespanHours = loadVar(data, "eggCellLifespanHours", 48)
 	playerPregnancyTimeDays = loadVar(data, "playerPregnancyTimeDays", 5)
@@ -1108,6 +1167,7 @@ func loadData(data):
 	hardStruggleEnabled = loadVar(data, "hardStruggleEnabled", false)
 	smartLockRarity = loadVar(data, "smartLockRarity", "normal")
 	overstimulationEnabled = loadVar(data, "overstimulationEnabled", true)
+	savingInDungeons = loadVar(data, "savingInDungeons", false)
 	shouldScaleUI = loadVar(data, "shouldScaleUI", true)
 	uiScaleMultiplier = loadVar(data, "uiScaleMultiplier", 1.0)
 	uiButtonSize = loadVar(data, "uiButtonSize", 0)
@@ -1143,6 +1203,8 @@ func loadData(data):
 	sandboxBreeding = loadVar(data, "sandboxBreeding", "rare")
 	sandboxNpcLeveling = loadVar(data, "sandboxNpcLeveling", 1.0)
 	blockCatcherPanelHeight = loadVar(data, "blockCatcherPanelHeight", 16)
+	webTextInputFallback = loadVar(data, "webTextInputFallback", false)
+	fullscreen = loadVar(data, "fullscreen", false)
 
 func saveToFile():
 	var saveData = saveData()
@@ -1202,3 +1264,29 @@ func checkImagePackOrder(imagePacks):
 
 func getImagePackOrder():
 	return imagePackOrder
+
+func isFullscreen() -> bool:
+	return fullscreen
+
+func shouldUseFallbackTextInputs() -> bool:
+	return webTextInputFallback
+
+func _process(_delta:float):
+	if(Input.is_action_just_pressed("window_fullscreen")):
+		OS.window_fullscreen = !OS.window_fullscreen
+		fullscreen = OS.window_fullscreen
+		saveToFile()
+
+func _ready() -> void:
+	get_viewport().connect("gui_focus_changed", self, "_on_focus_changed")
+
+func _on_focus_changed(control:Control) -> void:
+	if(!OPTIONS.shouldUseFallbackTextInputs()):
+		return
+	if control == null || !is_instance_valid(control):
+		return
+	if((control is LineEdit) || (control is TextEdit)):
+		if(!OS.has_feature('JavaScript')):
+			return
+		control.text = JavaScript.eval("""window.prompt('Please Input Text')""")
+		control.release_focus()

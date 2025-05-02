@@ -27,7 +27,14 @@ func _run():
 
 		saynn("You try to shrug but realize that it’s impossible. The guard grabs you by the chin and makes you look at her crotch. No doubt she has a barbed feline cock somewhere behind all the armor.")
 
-		saynn("[say=risha]Here is the deal. I’m so fucking horny. You suck me off right here and now and I will even reward you.[/say]")
+		#ACEPREGEXPAC - Risha face fucking you in the stocks has a few line variants
+		#The If/Else statements are getting repetitive but atleast Im learning. I also have the suspicion that doing them everytime is not exactly *the best* way to code this, but hey, this early if it's working, it's working.
+		#also with how horny Risha usually is, I imagine Preg-Risha is even hornier. I know there are "themes" to a pregnancy. Horny, Tired, Affectionate, Sick, and so on. Maybe if I added more scenes I could play into that?? Maybe its better if it was a guide rather than a strict rule, so I can whatever.
+
+		if(getCharacter("risha").isVisiblyPregnant()):
+			saynn("[say=risha]Here is the deal. This pregnancy has me so fucking horny. You suck me off right here and now and I will even reward you.[/say]")
+		else:
+			saynn("[say=risha]Here is the deal. I’m so fucking horny. You suck me off right here and now and I will even reward you.[/say]")
 
 		# (if can’t oral)
 		if(GM.pc.isOralBlocked()):
@@ -57,12 +64,18 @@ func _run():
 		saynn("Well that’s a relief. You can’t really use your arms or move your head so all the initiative is on her. She positions herself in front of you and guides her cock towards your lips. You part them and stick your tongue out. Then you lick her red shaft and drag your tongue along its length. The barbs indeed feel soft, through tickling them like that made Risha moan deeply. She can’t stand all the teasing anymore and pushes her member between your lips and then shoves it deeper, forcing you to open your mouth wide.")
 
 		saynn("[say=risha]Oh fuck yeah. I like it rough, slut. Keep your preludes for soft bitches.[/say]")
-
-		saynn("She puts her hands above and below your maw and starts face-fucking you, thrusting her giant cock deep until it hits the back of your mouth and then goes down your throat. She seems to be leaking already, you feel the taste of her precum on your tongue as she uses you like some fucktoy.")
+		
+		if(getCharacter("risha").isVisiblyPregnant()):
+			saynn("She has to reach around her own pregnant belly to grab the back of your head to start face-fucking you, thrusting her giant cock deep until it hits the back of your mouth and then goes down your throat. She seems to be leaking already, you feel the taste of her precum on your tongue as she uses you like some fucktoy.")
+		else:
+			saynn("She puts her hands above and below your maw and starts face-fucking you, thrusting her giant cock deep until it hits the back of your mouth and then goes down your throat. She seems to be leaking already, you feel the taste of her precum on your tongue as she uses you like some fucktoy.")
 
 		saynn("[say=risha]Were you practicing? You’re a natural cock sucker.[/say]")
 
-		saynn("She rams her cock deeper, stealing your breathing each time she thrusts forward and causing your throat to visibly bulge. Her balls are slapping against your chin as she pounds your mouth faster and faster, you rub her barbs with tongue and feel the shaft pulsing as it shoots precum down your throat. Being forced to deepthroat her cat cock doesn’t feel quite good but at the same time.. it kinda does.. You clench your throat around her cock and watch her squirm and moan as she continues to stretch-fuck your mouthhole.")
+		if(getCharacter("risha").isVisiblyPregnant()):
+			saynn("She rams her cock deeper, with the underside of her belly pressed against your forehead, stealing your breathing each time she thrusts forward and causing your throat to visibly bulge. Her balls are slapping against your chin as she pounds your mouth faster and faster, you rub her barbs with tongue and feel the shaft pulsing as it shoots precum down your throat. Being forced to deepthroat her cat cock doesn’t feel quite good but at the same time.. it kinda does.. You clench your throat around her cock and watch her squirm and moan as she continues to stretch-fuck your mouthhole.")
+		else:
+			saynn("She rams her cock deeper, stealing your breathing each time she thrusts forward and causing your throat to visibly bulge. Her balls are slapping against your chin as she pounds your mouth faster and faster, you rub her barbs with tongue and feel the shaft pulsing as it shoots precum down your throat. Being forced to deepthroat her cat cock doesn’t feel quite good but at the same time.. it kinda does.. You clench your throat around her cock and watch her squirm and moan as she continues to stretch-fuck your mouthhole.")
 
 		saynn("[say=risha]Fuck me, I’m close already. Don’t fucking move when I cum.[/say]")
 

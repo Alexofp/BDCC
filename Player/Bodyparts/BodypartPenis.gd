@@ -1,8 +1,9 @@
 extends Bodypart
 class_name BodypartPenis
 
-var lengthCM = 15
+var lengthCM: float = 15
 var ballsScale: float = 1.0
+var fluidType:String = "Cum"
 
 func _init():
 	limbSlot = LimbTypes.Penis
@@ -32,16 +33,25 @@ func getTooltipInfo():
 	
 	return Util.join(result, "\n")
 
+func applyTFData(_data):
+	.applyTFData(_data)
+	
+	lengthCM = loadTFVar(_data, "lengthCM", lengthCM)
+	ballsScale = loadTFVar(_data, "ballsScale", ballsScale)
+	fluidType = loadTFVar(_data, "fluidType", fluidType)
+
 func saveData():
 	var data = .saveData()
 	data["lengthCM"] = lengthCM
 	data["ballsScale"] = ballsScale
+	data["fluidType"] = fluidType
 	
 	return data
 
 func loadData(_data):
-	lengthCM = SAVE.loadVar(_data, "lengthCM", 15)
+	lengthCM = SAVE.loadVar(_data, "lengthCM", 15.0)
 	ballsScale = SAVE.loadVar(_data, "ballsScale", 1.0)
+	fluidType = SAVE.loadVar(_data, "fluidType", "Cum")
 	
 	.loadData(_data)
 
@@ -196,3 +206,15 @@ func getCustomPumpScene(_isAdvanced = false):
 
 func shouldUseBigPump():
 	return false
+
+func getFluidType(_fluidSource) -> String:
+	return fluidType
+
+func getTransformAwayMessage(_context:Dictionary) -> String:
+	return "{npc.YouHe} suddenly {npc.youVerb('feel')} a rush of warmth enveloping {npc.yourHis} lower body, and a wave of energy courses through {npc.youHim}. {npc.YourHis} penis begins to dissolve, its flesh softening and retracting as if it were melting away. {npc.YouHe} can feel the skin pulling back, the sensation both exhilarating and unsettling. Inch by inch, {npc.youHe} {npc.youAre} losing {npc.yourHis} length.. until there is nothing left but a flat crotch."
+
+func getTransformGrowMessage(_context:Dictionary) -> String:
+	return "A weird, tingling sensation spreads through {npc.yourHis} groin, and {npc.youHe} {npc.youVerb('sense')} something new beginning to form within {npc.youHim}. The skin stretches and reshapes, as if something powerful is pushing outward from deep inside. The contours of {npc.yourHis} new anatomy begin to take shape, and {npc.youHe} can {npc.youVerb('feel')} the weight of testicles forming, settling into place beneath {npc.youHim}. A shaft begins to grow, thickening and lengthening, the skin stretching to accommodate its size. Finally, as the last remnants of the transformation settle, {npc.youHe} {npc.youVerb('realize')} that {npc.youHe} now {npc.youVerb('have', 'has')} "+getAVulgarName()+" hanging between {npc.yourHis} legs, pulsating with newfound virility and power."
+
+func getTransformMorphMessage(_context:Dictionary) -> String:
+	return "{npc.YouHe} {npc.youVerb('feel')} a stirring in {npc.yourHis} groin, and suddenly, {npc.yourHis} penis begins to change and morph, obtaining a different shape completely. {npc.YouHe} now {npc.youVerb('have', 'has')} "+getAVulgarName()+"."

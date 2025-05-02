@@ -30,7 +30,8 @@ func _run():
 	if(state == "artica_in_showers"):
 		addCharacter("artica", ["naked"])
 		aimCameraAndSetLocName("main_shower1")
-		playAnimation(StageScene.Solo, "struggle", {pc="artica", bodyState={naked=true,hard=(isLusty || getCharacter("artica").isInHeat())}})
+		playAnimation(StageScene.Showering, "body", {pc="artica", bodyState={naked=true, hard=(isLusty || getCharacter("artica").isInHeat())}})
+		#playAnimation(StageScene.Solo, "struggle", {pc="artica", bodyState={naked=true,hard=(isLusty || getCharacter("artica").isInHeat())}})
 		if (nakedAndShy):
 			saynn("Artica peeks her head into the bathroom.. and then quickly sneaks by before doing the same with the dressing room. She doesn't have any clothes to store.. so she just rushes into the showers area and jumps under one of the free shower heads.")
 
@@ -87,9 +88,12 @@ func _run():
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "artica_masturbation"):
 		if (isCaged):
-			playAnimation(StageScene.Grope, "watchrub", {pc="artica", npc="pc", pcCum=true, bodyState={naked=true, hard=true}})
+			#playAnimation(StageScene.Grope, "watchrub", {pc="artica", npc="pc", pcCum=true, bodyState={naked=true, hard=true}})
+			playAnimation(StageScene.Showering, "rub", {pc="artica", bodyState={naked=true, hard=true}})
 		else:
-			playAnimation(StageScene.Grope, "watchstroke", {pc="artica", npc="pc", pcCum=true, bodyState={naked=true, hard=true}})
+			#playAnimation(StageScene.Grope, "watchstroke", {pc="artica", npc="pc", pcCum=true, bodyState={naked=true, hard=true}})
+			playAnimation(StageScene.Showering, "stroke", {pc="artica", bodyState={naked=true, hard=true}})
+
 		saynn("Even the cold water cascading over her is unable to extinguish Artica's desire. She stares at her aroused body for some time, her ears lowering themselves..")
 
 		if (!isCaged):
@@ -307,7 +311,8 @@ func _run():
 				saynn("You chuckle, admiring the sight from up close.")
 
 		else:
-			playAnimation(StageScene.Grope, "tease", {pc="artica", npc="pc", bodyState={naked=true}, npcBodyState={naked=true}})
+			playAnimation(StageScene.ShoweringDuo, "tease", {pc="artica", npc="pc", bodyState={naked=true}, npcBodyState={naked=true}})
+			#playAnimation(StageScene.Grope, "tease", {pc="artica", npc="pc", bodyState={naked=true}, npcBodyState={naked=true}})
 			saynn("As you step inside and join Artica, she gasps softly.")
 
 			saynn("[say=artica]Ee-eep..[/say]")
@@ -354,7 +359,8 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "do_shower_together"):
-		playAnimation(StageScene.Grope, "grope", {pc="artica", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.ShoweringDuo, "shower", {pc="artica", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		#playAnimation(StageScene.Grope, "grope", {pc="artica", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("[say=pc]Let me help you.[/say]")
 
 		saynn("Your hands reach out to gently caress her shoulders. With a soft whimper, Artica leans into your touch, her eyes closing as she surrenders to your embrace.")

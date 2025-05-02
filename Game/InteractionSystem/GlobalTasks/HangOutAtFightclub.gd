@@ -9,7 +9,7 @@ func _init():
 	maxAssignedUnscaled = 4
 
 func canDoTask(_pawn:CharacterPawn) -> bool:
-	return canHangout && _pawn.isInmate()
+	return canHangout && (_pawn.isInmate() || shouldIgnoreCharType(_pawn))
 
 func configureGoal(_pawn:CharacterPawn, _goal):
 	_goal.zone = patrolZone

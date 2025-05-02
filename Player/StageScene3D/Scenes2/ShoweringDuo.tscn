@@ -1,0 +1,171 @@
+[gd_scene load_steps=40 format=2]
+
+[ext_resource path="res://Player/StageScene3D/Scenes2/Showering.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/StageScene3D/Scenes2/ShoweringDuo.gd" type="Script" id=3]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=448]
+animation = "ShoweringDuoRub_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=449]
+animation = "ShoweringDuoStroke_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=450]
+animation = "ShoweringDuoTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=451]
+animation = "ShoweringDuo_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=452]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=453]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=454]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=455]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=458]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=459]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=460]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=461]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=462]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=463]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=464]
+states/ShoweringDuoRub_1-loop/node = SubResource( 448 )
+states/ShoweringDuoRub_1-loop/position = Vector2( 728, 164 )
+states/ShoweringDuoStroke_1-loop/node = SubResource( 449 )
+states/ShoweringDuoStroke_1-loop/position = Vector2( 508, 265 )
+states/ShoweringDuoTease_1-loop/node = SubResource( 450 )
+states/ShoweringDuoTease_1-loop/position = Vector2( 485, 65 )
+states/ShoweringDuo_1-loop/node = SubResource( 451 )
+states/ShoweringDuo_1-loop/position = Vector2( 332, 155 )
+transitions = [ "ShoweringDuoTease_1-loop", "ShoweringDuo_1-loop", SubResource( 452 ), "ShoweringDuo_1-loop", "ShoweringDuoTease_1-loop", SubResource( 453 ), "ShoweringDuo_1-loop", "ShoweringDuoStroke_1-loop", SubResource( 454 ), "ShoweringDuoStroke_1-loop", "ShoweringDuo_1-loop", SubResource( 455 ), "ShoweringDuoRub_1-loop", "ShoweringDuoStroke_1-loop", SubResource( 458 ), "ShoweringDuoStroke_1-loop", "ShoweringDuoRub_1-loop", SubResource( 459 ), "ShoweringDuoTease_1-loop", "ShoweringDuoRub_1-loop", SubResource( 460 ), "ShoweringDuoRub_1-loop", "ShoweringDuoTease_1-loop", SubResource( 461 ), "ShoweringDuoTease_1-loop", "ShoweringDuoStroke_1-loop", SubResource( 462 ), "ShoweringDuoStroke_1-loop", "ShoweringDuoTease_1-loop", SubResource( 463 ) ]
+start_node = "ShoweringDuoTease_1-loop"
+graph_offset = Vector2( -24, -125 )
+
+[sub_resource type="AnimationNodeBlendTree" id=465]
+graph_offset = Vector2( -21, 34 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 464 )
+nodes/StateMachine/position = Vector2( 188.886, 70.2959 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=485]
+
+[sub_resource type="AnimationNodeAnimation" id=466]
+animation = "ShoweringDuoRub_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=467]
+animation = "ShoweringDuoStroke_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=468]
+animation = "ShoweringDuoTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=469]
+animation = "ShoweringDuo_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=470]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=471]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=472]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=473]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=474]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=475]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=478]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=479]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=480]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=481]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=482]
+states/ShoweringDuoRub_2-loop/node = SubResource( 466 )
+states/ShoweringDuoRub_2-loop/position = Vector2( 446, 283 )
+states/ShoweringDuoStroke_2-loop/node = SubResource( 467 )
+states/ShoweringDuoStroke_2-loop/position = Vector2( 690, 137 )
+states/ShoweringDuoTease_2-loop/node = SubResource( 468 )
+states/ShoweringDuoTease_2-loop/position = Vector2( 437, 54 )
+states/ShoweringDuo_2-loop/node = SubResource( 469 )
+states/ShoweringDuo_2-loop/position = Vector2( 211, 144 )
+transitions = [ "ShoweringDuo_2-loop", "ShoweringDuoTease_2-loop", SubResource( 470 ), "ShoweringDuoTease_2-loop", "ShoweringDuo_2-loop", SubResource( 471 ), "ShoweringDuoTease_2-loop", "ShoweringDuoRub_2-loop", SubResource( 472 ), "ShoweringDuoRub_2-loop", "ShoweringDuoTease_2-loop", SubResource( 473 ), "ShoweringDuoTease_2-loop", "ShoweringDuoStroke_2-loop", SubResource( 474 ), "ShoweringDuoStroke_2-loop", "ShoweringDuoTease_2-loop", SubResource( 475 ), "ShoweringDuo_2-loop", "ShoweringDuoRub_2-loop", SubResource( 478 ), "ShoweringDuoRub_2-loop", "ShoweringDuo_2-loop", SubResource( 479 ), "ShoweringDuoRub_2-loop", "ShoweringDuoStroke_2-loop", SubResource( 480 ), "ShoweringDuoStroke_2-loop", "ShoweringDuoRub_2-loop", SubResource( 481 ) ]
+start_node = "ShoweringDuoTease_2-loop"
+graph_offset = Vector2( -41, -57 )
+
+[sub_resource type="AnimationNodeBlendTree" id=483]
+graph_offset = Vector2( -268.114, -7.70406 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 482 )
+nodes/StateMachine/position = Vector2( 140, 100 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=484]
+
+[node name="ShoweringDuo" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Doll3D" parent="." index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.32166, 0.0337869, 0 )
+
+[node name="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 465 )
+parameters/StateMachine/playback = SubResource( 485 )
+
+[node name="Doll3D2" parent="." index="6" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.32166, 0.0337869, 0 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="7"]
+tree_root = SubResource( 483 )
+anim_player = NodePath("../Doll3D2/DollSkeleton2/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 484 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]

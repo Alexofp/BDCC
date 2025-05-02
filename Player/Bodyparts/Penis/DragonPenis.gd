@@ -20,3 +20,6 @@ func getTraits():
 		PartTrait.PenisKnot: true,
 		PartTrait.PenisRidges: true,
 	}
+
+func getVulgarName() -> String:
+	return "ridged dragon cock"

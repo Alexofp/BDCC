@@ -38,7 +38,10 @@ func _run():
 			saynn("You approach the counter and are greeted by the familiar feline face. The doc seems to always be sipping coffee out of her mug.")
 
 			saynn("[say=eliza]Dr. Quinn here. Need something?[/say]")
-
+		
+		if(getModule("ElizaModule").canTFEliza()):
+			addButtonAt(14, "TF menu", "Tell Eliza to use or stop using certain transformation drugs!", "openTFMenu")
+		
 		addButton("Talk", "Ask her some questions", "talk")
 		addButton("Appearance", "Take a closer look", "appearance")
 		if(getModuleFlag("MedicalModule", "Med_pcKnowsAboutTests")):
@@ -46,11 +49,12 @@ func _run():
 		else:
 			addDisabledButton("Research", "Talk about it with Eliza first")
 		if(getModuleFlag("MedicalModule", "Med_pcKnowsAboutMilking")):
+			addButton("Milking", "See how you can be milked", "milking_menu")
 			
-			if(GM.pc.hasPerk(Perk.MilkNoSoreNipples) || (!getModuleFlag("MedicalModule", "Med_wasMilkedToday", false) && !GM.pc.hasEffect(StatusEffect.SoreNipplesAfterMilking))):
-				addButton("Milking", "Ask to be milked", "milking")
-			else:
-				addDisabledButton("Milking", "Give yourself some rest")
+#			if(GM.pc.hasPerk(Perk.MilkNoSoreNipples) || (!getModuleFlag("MedicalModule", "Med_wasMilkedToday", false) && !GM.pc.hasEffect(StatusEffect.SoreNipplesAfterMilking))):
+#				addButton("Milking", "Ask to be milked", "milking")
+#			else:
+#				addDisabledButton("Milking", "Give yourself some rest")
 		else:
 			addDisabledButton("Milking", "Talk about it with Eliza first")
 		
@@ -65,6 +69,9 @@ func _run():
 				addButtonWithChecks("I'm hurt", "Ask for medical help", "healmenu", [], [ButtonChecks.NotGagged])
 		else:
 			addDisabledButton("I'm hurt", "You're not hurt enough to ask for medical help")
+			
+		if(getModule("ElizaModule").canSexEliza()):
+			addButton("Sex!", "Have some fun with Eliza", "start_sex_menu")
 			
 		addButton("Leave", "Do something else", "endthescene")
 		GM.ES.triggerRun(Trigger.TalkingToNPC, ["eliza"])
@@ -96,14 +103,34 @@ func _run():
 			addDisabledButton("Heal privates", "Your private bits didn't sustain any damage")
 		addButton("Never mind", "You're fine", "")
 		
+#ACEPREGEXPAC - Eliza has pregnancy descriptors if you oogle her
+#I might change this depending on whats in Eliza content but until then, whatever.
+#that "make me a woman" line at the breeder ending of chastity content has to be a hint, right?
 	if(state == "appearance"):
-		saynn("Doctor Quinn looks like your typical doctor, she is pretty tall for a feline, about 1.8 meters tall, her fur is of a pastel yellow color with some white and pink accents. Her long hair is made into a ponytail. She is wearing glasses and a white labcoat with her badge attached to it. Under it you can spot a green top and a black knee length skirt. You do spot her wearing some dark transparent tights. She seems to be carrying quite a bit of equipment in her pockets and on her belt, mostly medical stuff but also a shock remote.")
+		if(getCharacter("eliza").isHeavilyPregnant()):
+			saynn("Doctor Eliza Quinn is a tired looking doctor, standing tall for a feline at around 1.8 meters tall. Her fur colors are pastel yellow with some white and pink accents, long hair tied back into a pony tail. She wears glasses with a white lab coat pinned with her name badge and an underlayer of a green top and black knee length skirt held with a belt of medical equipment.")
+			
+			saynn("Her top gives an effort to at least cover her late term pregnancy but still rides up to give a small view of her tummy at a glance. Her enlarged breasts also strain against the fabic of her top.")
+			
+			saynn("You’re too afraid to stick your head under her skirt but there isnt a bulge concealed betweem her legs...")
+			
+			saynn("Overall, she looks like a cute feline doctor.")
+		elif(getCharacter("eliza").isVisiblyPregnant()):
+			saynn("Doctor Quinn looks like your typical doctor, she is pretty tall for a feline, about 1.8 meters tall, her fur is of a pastel yellow color with some white and pink accents. Her long hair is made into a ponytail. She is wearing glasses and a white labcoat with her badge attached to it. Under it you can spot a green top and a black knee length skirt. You do spot her wearing some dark transparent tights. She seems to be carrying quite a bit of equipment in her pockets and on her belt, mostly medical stuff but also a shock remote.")
+			
+			saynn("All the covering of her clothing can't hide the roundness of her belly giving away that she's pregnant, with a bust that's starting to stretch the limits of a D-cup.")
+			
+			saynn("You’re too afraid to stick your head under her skirt but you can’t see a bulge between her legs.")
+			
+			saynn("Overall, she looks like a cute feline doctor.")
+		else:
+			saynn("Doctor Quinn looks like your typical doctor, she is pretty tall for a feline, about 1.8 meters tall, her fur is of a pastel yellow color with some white and pink accents. Her long hair is made into a ponytail. She is wearing glasses and a white labcoat with her badge attached to it. Under it you can spot a green top and a black knee length skirt. You do spot her wearing some dark transparent tights. She seems to be carrying quite a bit of equipment in her pockets and on her belt, mostly medical stuff but also a shock remote.")
 
-		saynn("Covered by all that clothing you can guess that her bust is a modest C-cup.")
+			saynn("Covered by all that clothing you can guess that her bust is a modest C-cup.")
 
-		saynn("You’re too afraid to stick your head under her skirt but you can’t see a bulge between her legs.")
+			saynn("You’re too afraid to stick your head under her skirt but you can’t see a bulge between her legs.")
 
-		saynn("Overall, she looks like a cute feline doctor.")
+			saynn("Overall, she looks like a cute feline doctor.")
 		
 		addButton("Back", "Go back", "")
 		
@@ -129,17 +156,40 @@ func _run():
 
 		addButton("Back", "Go back", "")
 
-
+#ACEPREGEXPAC - Eliza gives a different response if you comment on her best mom mug
 	if(state == "best_mom?"):
-		saynn("[say=pc]Your mug. Are you a mother?[/say]")
+		if (getCharacter("eliza").isVisiblyPregnant()):
+			saynn("[say=pc]Your mug. Are you a mother?[/say]")
+			
+			saynn("Eliza looks at her own coffee mug and sighs audibly.")
+			
+			saynn("[say=eliza]For now, at least. I'll try to enjoy it while I can.[/say]")
+			
+			saynn("That sounded... not the best. Probably not a good idea to keep bringing it up.")
+			
+			#addMessage("[Whatever Rahi has planned for Eliza's content, I dont know it. Sorry. -Ace]")
+			
+			addButton("Continue", "Continue talking", "talk")
+		elif(GM.CS.getChildrenAmountOfOnlyMother("eliza") > 0):
+			saynn("[say=pc]Your mug. Are you a mother?[/say]")
 
-		saynn("Doctor looks at her own coffee mug and sighs audibly.")
+			saynn("Doctor looks at her own coffee mug and sighs audibly.")
 
-		saynn("[say=eliza]Kinda rude to ask that. But.. No, I’m not. And it’s a long story.[/say]")
+			saynn("[say=eliza]Obviously not.. wait. I guess I am now. Hah. I had this mug before.[/say]")
 
-		saynn("Seems like that item is related to some sad memories.")
+			saynn("Seems like that item is related to some sad memories.")
 
-		addButton("Continue", "Continue talking", "talk")
+			addButton("Continue", "Continue talking", "talk")
+		else:
+			saynn("[say=pc]Your mug. Are you a mother?[/say]")
+
+			saynn("Doctor looks at her own coffee mug and sighs audibly.")
+
+			saynn("[say=eliza]Kinda rude to ask that. But.. No, I’m not. And it’s a long story.[/say]")
+
+			saynn("Seems like that item is related to some sad memories.")
+
+			addButton("Continue", "Continue talking", "talk")
 
 	if(state == "work"):
 		setModuleFlag("MedicalModule", "Med_pcKnowsAboutWork", true)
@@ -230,24 +280,114 @@ func _run():
 		else:
 			addDisabledButton("Obedience training", "(forced chastity content) You're already enrolled into this program")
 		
+		if(!getFlag("ElizaModule.s0hap")):
+			addButton("Lab Assistant", "Ask to become Eliza's lab assistant, maybe she could use one", "startlabassist")
+		
 		#addDisabledButton("Prototype testing", "Test bleeding-edge hi-tech machines or devices")
 		addButton("Back", "You're not interested", "")
 
 
-	if(state == "milking"):
+	if(state == "milking_menu"):
 		saynn("[say=pc]I’m interested. You were talking about the possibility of donating milk and cum?[/say]")
 
 		saynn("The feline puts the mug away and stands up from the chair.")
 
 		saynn("[say=eliza]Yes, we can always use more. How would you like to be milked.[/say]")
-
-		addButton("Milk", "You want your breasts to be milked", "milk")
-		if(GM.pc.hasPenis()):
-			addButton("Seed", "You want your cock to be milked", "seed")
+		
+		if(getModule("ElizaModule").hasLabAccess()):
+			sayTanksVolume()
+		
+		if(!GM.pc.hasSoreNipples()):
+			if(GM.pc.canBeMilked()):
+				if(canBeMilked()):
+					addButton("Milk..", "Show the ways Eliza can milk your breasts", "milk_breasts_menu")
+				else:
+					addDisabledButton("Milk..", "Your breasts are not full enough to be milked")
+			else:
+				addDisabledButton("Milk..", "Your breasts can't be milked")
 		else:
-			addDisabledButton("Seed", "You would need a dick for that")
-		addDisabledButton("Both", "Not done yet")
+			addDisabledButton("Milk..", "Your nips are sore, give your breasts a rest!")
+		if(GM.pc.canBeSeedMilked()):
+			if(canBeSeedMilked()):
+				addButton("Seed..", "Show the ways Eliza can milk your penis", "milk_penis_menu")
+			else:
+				addDisabledButton("Seed..", "Your balls are not full enough to be seed-milked")
+		else:
+			addDisabledButton("Seed..", "There is no way to seed-milk you..")
+		if(GM.pc.hasReachableVagina()):
+			if(!getFlag("MedicalModule.Milked_Pussy", false)):
+				addButton("Girlcum..", "Show the ways Eliza can milk your pussy", "milk_vagina_menu")
+			else:
+				addDisabledButton("Girlcum..", "You already milked your pussy today, give it a break!")
+		else:
+			addDisabledButton("Girlcum..", "You don't have a reachable vagina in order for Eliza to milk it")
+		if(GM.main.SCI.hasMilkingTier3()):
+			if(!getFlag("MedicalModule.Milked_Breasts", false) && !getFlag("MedicalModule.Milked_Penis", false) && !getFlag("MedicalModule.Milked_Pussy", false)):
+				addButton("Quick milking", "Ask Eliza to milk everything at once and fast!", "do_start_milking_scene_quick")
+			else:
+				addDisabledButton("Quick milking", "You can only use this option if you haven't been milked any other way today")
+		else:
+			addDisabledButton("Quick milking", "You need to become Eliza's assistant and upgrade the lab enough to use this option.")
+		
 		addButton("Back", "Go back", "")
+
+	if(state == "milk_breasts_menu"):
+		saynn("How do you want Eliza to milk your {pc.breasts}?")
+		
+		if(getModule("ElizaModule").hasLabAccess()):
+			sayTanksVolume()
+
+		addButton("Hand-milking", "Let Eliza milk your breasts with her hands", "do_start_milking_scene_breasts", ["ElizaMilkingBreastsHandScene"])
+		if(GM.main.SCI.hasMilkingTier1()):
+			addButton("Stall Hand-milking", "Let Eliza milk your breasts with her hands while in a milking stall", "do_start_milking_scene_breasts", ["ElizaMilkingBreastsStallScene"])
+			addButton("Breast pumps", "Let Eliza use industrial breast pumps on you", "do_start_milking_scene_breasts", ["ElizaMilkingBreastsPumpsScene"])
+		else:
+			addDisabledButton("Stall Hand-milking", "You need to become Eliza's assistant and upgrade the lab enough to use this option.")
+			addDisabledButton("Breast pumps", "You need to become Eliza's assistant and upgrade the lab enough to use this option.")
+		if(GM.main.SCI.hasMilkingTier2()):
+			addButton("Milking machine", "Let Eliza use a milking machine to milk your breasts", "do_start_milking_scene_breasts", ["ElizaMilkingBreastsBDSMMachineScene"])
+		else:
+			addDisabledButton("Milking machine", "You need to become Eliza's assistant and upgrade the lab enough to use this option.")
+		
+		addButton("Back", "Go back", "milking_menu")
+
+	if(state == "milk_penis_menu"):
+		saynn("How do you want Eliza to milk your {pc.penis}?")
+		
+		if(getModule("ElizaModule").hasLabAccess()):
+			sayTanksVolume()
+			
+		addButtonWithChecks("Hand-milking", "Let Eliza milk your cock with her hands", "do_start_milking_scene_seed", ["ElizaMilkingSeedHandScene"], [[ButtonChecks.HasReachablePenis]])
+		addButton("Prostate milking", "Let Eliza milk your cock by milking your prostate directly with her fingers", "do_start_milking_scene_seed", ["ElizaMilkingProstateHandScene"])
+		if(GM.main.SCI.hasMilkingTier1()):
+			addButtonWithChecks("Penis pump", "Let Eliza milk your cock with an industrial penis pump", "do_start_milking_scene_seed", ["ElizaMilkingSeedPumpScene"], [[ButtonChecks.HasReachablePenis]])
+			addButton("Strapon milking", "Let Eliza milk your cock by pegging your butt with a strapon, milking your prostate that way", "do_start_milking_scene_seed", ["ElizaMilkingProstateStraponScene"])
+		else:
+			addDisabledButton("Penis pump", "You need to become Eliza's assistant and upgrade the lab enough to use this option.")
+			addDisabledButton("Strapon milking", "You need to become Eliza's assistant and upgrade the lab enough to use this option.")
+		if(GM.main.SCI.hasMilkingTier2()):
+			addButtonWithChecks("Pawjob", "Let Eliza milk your cock by with her hind paws", "do_start_milking_scene_seed", ["ElizaMilkingSeedPawjobScene"], [[ButtonChecks.HasReachablePenis]])
+			if(getFlag("SocketModule.h5completed", false)):
+				addButtonWithChecks("Fleshlight", "Let Eliza invite someone else to milk your cock with a fleshlight", "do_start_milking_scene_seed", ["ElizaMilkingSeedFleshlightScene"], [[ButtonChecks.HasReachablePenis]])
+			else:
+				addDisabledButton("Fleshlight", "You need to complete Socket's storyline to unlock this option. You will also need your cock to be reachable")
+			addButton("Milking machine", "Let Eliza milk your cock with milking machine. Includes prostate stimulation", "do_start_milking_scene_seed", ["ElizaMilkingSeedBDSMMachineScene"])
+		else:
+			addDisabledButton("Pawjob", "You need to become Eliza's assistant and upgrade the lab enough to use this option.")
+			addDisabledButton("Fleshlight", "You need to become Eliza's assistant and upgrade the lab enough to use this option.")
+			addDisabledButton("Milking machine", "You need to become Eliza's assistant and upgrade the lab enough to use this option.")
+			
+		addButton("Back", "Go back", "milking_menu")
+
+	if(state == "milk_vagina_menu"):
+		saynn("How do you want Eliza to milk your pussy?")
+		
+		if(getModule("ElizaModule").hasLabAccess()):
+			sayTanksVolume()
+		
+		addButton("Sybian", "Let Eliza use a sybian machine to extract girlcum out of your pussy", "do_start_milking_scene_girlcum", ["ElizaMilkingGirlcumSybianScene"])
+		
+		addButton("Back", "Go back", "milking_menu")
 
 	if(state == "milk"):
 		# (First time scene)
@@ -379,6 +519,21 @@ func _run():
 		addDisabledButton("Pump", "not done")
 		addButton("Never mind", "You changed your mind", "")
 
+func sayTanksVolume():
+	var storedFluids:Dictionary = GM.main.SCI.getStoredFluidsWithDefauls()
+	
+	sayn("Fluid tanks contents:")
+	for fluidID in storedFluids:
+		var fluidAmount:float = storedFluids[fluidID]
+		var fluidLimit:float = GM.main.SCI.getStoredFluidLimit(fluidID)
+		var fluidName:String = "Unknown fluid"
+		
+		var fluid:FluidBase = GlobalRegistry.getFluid(fluidID)
+		if(fluid != null):
+			fluidName = fluid.getVisibleName()
+		
+		sayn("- "+fluidName+": "+str(Util.roundF(fluidAmount, 1))+"/"+str(Util.roundF(fluidLimit, 1))+"ml")
+	sayn("")
 
 func _react(_action: String, _args):
 	if(_action == "induce_lactation"):
@@ -438,4 +593,63 @@ func _react(_action: String, _args):
 		endScene()
 		return
 	
+	if(_action == "startlabassist"):
+		setFlag("ElizaModule.s0hap", true)
+		runScene("Eliza0AskJobScene")
+		endScene()
+		return
+		
+	if(_action == "start_sex_menu"):
+		runScene("ElizaSexMenuScene")
+		endScene()
+		return
+		
+	if(_action == "do_start_milking_scene_breasts"):
+		setFlag("MedicalModule.Milked_Breasts", true)
+		runScene(_args[0])
+		endScene()
+		return
+		
+	if(_action == "do_start_milking_scene_seed"):
+		setFlag("MedicalModule.Milked_Penis", true)
+		runScene(_args[0])
+		endScene()
+		return
+		
+	if(_action == "do_start_milking_scene_girlcum"):
+		setFlag("MedicalModule.Milked_Pussy", true)
+		runScene(_args[0])
+		endScene()
+		return
+		
+	if(_action == "do_start_milking_scene_quick"):
+		setFlag("MedicalModule.Milked_Breasts", true)
+		setFlag("MedicalModule.Milked_Penis", true)
+		setFlag("MedicalModule.Milked_Pussy", true)
+		runScene("ElizaQuickMilkingScene")
+		return
+	
+	if(_action == "openTFMenu"):
+		runScene("ElizaTFHerScene")
+		return
+	
 	setState(_action)
+
+
+func canBeMilked() -> bool:
+	if(!GM.pc.hasBodypart(BodypartSlot.Breasts)):
+		return false
+	var breasts: BodypartBreasts = GM.pc.getBodypart(BodypartSlot.Breasts)
+	var production: FluidProduction = breasts.getFluidProduction()
+	if(production == null):
+		return false
+	return production.getFluidAmount() >= 300.0 || production.getFluidLevel() >= 0.4
+
+func canBeSeedMilked() -> bool:
+	if(!GM.pc.hasBodypart(BodypartSlot.Penis)):
+		return false
+	var penis: BodypartPenis = GM.pc.getBodypart(BodypartSlot.Penis)
+	var production: FluidProduction = penis.getFluidProduction()
+	if(production == null):
+		return false
+	return production.getFluidAmount() >= 100.0 || production.getFluidLevel() >= 0.8
