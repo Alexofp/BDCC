@@ -40,7 +40,7 @@ func _run():
 
 		saynn("[say=eliza]Great~. One last thing I forgot, let me set the mood~.[/say]")
 
-		saynn("Whatever she did, it made one one of the manipulators bring a screen in front of your eyes. This screen begins to display the exact amount of {pc.milk} that was collected from you.. and also lots of encouraging messages..")
+		saynn("Whatever she did, it made one of the manipulators bring a screen in front of your eyes. This screen begins to display the exact amount of {pc.milk} that was collected from you.. and also lots of encouraging messages..")
 
 		saynn("You're such a good cow..")
 

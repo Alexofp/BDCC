@@ -31,7 +31,7 @@ func _run():
 
 		saynn("Eliza huffs, flicking her tail.")
 
-		saynn("[say=eliza]Well, duh.. A master is only as good as their tools.. And I had the best tools. I need to work in that lab again. With everything I've learned here? I could so so much more.[/say]")
+		saynn("[say=eliza]Well, duh.. A master is only as good as their tools.. And I had the best tools. I need to work in that lab again. With everything I've learned here? I could do so much more.[/say]")
 
 		saynn("She pauses for a second, barely able to contain her excitement.")
 

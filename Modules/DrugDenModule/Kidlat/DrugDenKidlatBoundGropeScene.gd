@@ -51,7 +51,7 @@ func _run():
 
 		saynn("[say=kidlat]Nh.. I can still bite, you know..[/say]")
 
-		saynn("Does she now? You catch some more of her delicious wetness and quickly bring that hand up to her bratty lips, your digits boldly slipping past her teeth.")
+		saynn("Can she really though? You catch some more of her delicious wetness and quickly bring that hand up to her bratty lips, your digits boldly slipping past her teeth.")
 
 		saynn("[say=kidlat]Mhhhm?!..[/say]")
 

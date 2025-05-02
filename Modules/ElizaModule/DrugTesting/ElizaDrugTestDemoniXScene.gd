@@ -229,7 +229,7 @@ func _run():
 
 		saynn("[say=eliza]Simple biology. Mortal flesh is not holding me back.[/say]")
 
-		saynn("With quick motions she grabs the cuffs that are chained to the table and snaps them onto your wrists and ankles, locking you securely to the table. She steps back, admitting her handiwork.")
+		saynn("With quick motions she grabs the cuffs that are chained to the table and snaps them onto your wrists and ankles, locking you securely to the table. She steps back, admiring her handiwork.")
 
 		saynn("[say=eliza]Look at you.. So helpless.. So weak. You knew you wouldn't stand a chance.. Maybe you wanted this? Who am I to say no to this~.[/say]")
 
