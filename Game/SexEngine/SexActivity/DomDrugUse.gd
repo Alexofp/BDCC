@@ -196,7 +196,11 @@ func startActivity(_args):
 		
 		if(getSub().isPlayer() && itemID == "TFPill"):
 			text += " [color=#"+Color.cyan.to_html()+"]This pill might do something to your body[/color]"
-		return {text = text, domSay=domReaction(SexReaction.ForcingDrug)}
+
+		if(_isCanApply):
+			return {text = text}
+		else:
+			return {text = text, domSay=domReaction(SexReaction.ForcingDrug)}
 	
 	if(_args[0] == "useonself"):
 		timePassed = 0
