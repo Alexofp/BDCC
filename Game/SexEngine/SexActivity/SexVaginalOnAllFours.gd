@@ -684,10 +684,10 @@ func doDomAction(_id, _actionInfo):
 				])
 				if(usedBodypart == BodypartSlot.Anus && getSub().getInventory().hasSlotEquipped(InventorySlot.Anal)):
 					var item = getSub().getInventory().getEquippedItem(InventorySlot.Anal)
-					text = "{dom.You} temporarily {dom.youVerb('remove')} "+str(item.getAStackName())+" out of {sub.your} ass. "+text
+					text = "{dom.You} temporarily {dom.youVerb('retrieve')} "+str(item.getAStackName())+" out of {sub.your} ass. "+text
 				elif(usedBodypart == BodypartSlot.Vagina && getSub().getInventory().hasSlotEquipped(InventorySlot.Vagina)):
 					var item = getSub().getInventory().getEquippedItem(InventorySlot.Vagina)
-					text = "{dom.You} temporarily {dom.youVerb('remove')} "+str(item.getAStackName())+" out of {sub.your} pussy. "+text
+					text = "{dom.You} temporarily {dom.youVerb('retrieve')} "+str(item.getAStackName())+" out of {sub.your} pussy. "+text
 				
 				var freeRoom = getSub().getPenetrationFreeRoomBy(usedBodypart, domID)
 				var chanceToPain = -freeRoom * 2.0
