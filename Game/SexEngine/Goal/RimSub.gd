@@ -7,10 +7,10 @@ func getVisibleName():
 	return "Rim sub"
 
 func isPossible(_sexEngine, _domInfo, _subInfo, _data):
-	if(_subInfo.getChar().hasReachableAnus() && !_domInfo.getChar().isOralBlocked()):
-		return true
+	if(!_subInfo.getChar().hasReachableAnus() || _domInfo.getChar().isOralBlocked()):
+		return false
 	
-	return false
+	return true
 
 func getSubGoals(_sexEngine, _domInfo, _subInfo, _data):
 	return {

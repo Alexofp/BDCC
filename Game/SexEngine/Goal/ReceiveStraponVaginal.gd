@@ -9,10 +9,12 @@ func getVisibleName():
 func isPossible(_sexEngine, _domInfo, _subInfo, _data):
 	if(_domInfo.getChar().hasBoundArms() || _domInfo.getChar().hasBlockedHands()):
 		return false
-	if(_domInfo.getChar().hasReachableVagina() && !_subInfo.getChar().hasPenis()):
-		return true
+	if(!_domInfo.getChar().hasReachableVagina() || !_subInfo.getChar().canWearStrapon()):
+		return false
+	if(!_domInfo.getChar().canZoneOrgasm(BodypartSlot.Vagina)):
+		return false
 	
-	return false
+	return true
 
 func domWantsToCum():
 	return true

@@ -52,5 +52,5 @@ func createBodyparts():
 	giveBodypartUnlessSame(breasts)
 
 func getDefaultEquipment():
-	return ["NurseClothes", "LaceBra", "LacePanties", "ElizaNecklace"]
+	return ["LabcoatOutfit", "LaceBra", "LacePanties", "ElizaNecklace"]
 	#return []
