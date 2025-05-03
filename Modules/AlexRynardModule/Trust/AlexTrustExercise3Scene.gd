@@ -73,7 +73,7 @@ func _run():
 		else:
 			addCharacter("eliza")
 			playAnimation(StageScene.Duo, "stand", {npc="eliza", pc="alexrynard"})
-			saynn("You and Alex walk into the medical lobby. Eliza seems to be in her usual spot, drinking coffee out of her mag.")
+			saynn("You and Alex walk into the medical lobby. Eliza seems to be in her usual spot, drinking coffee out of her mug.")
 
 			saynn("She notices you two and smiles.")
 
