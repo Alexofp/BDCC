@@ -121,7 +121,7 @@ func in_stocks_text():
 func in_stocks_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "leave"):
 		stopMe()
-		startInteraction("InStocks", {inmate=getRoleID("target")})
+		startInteraction("InStocks", {inmate=getRoleID("target")}, {punisherID=getRoleID("punisher")})
 
 
 func after_sex_text():
@@ -189,7 +189,7 @@ func in_slutwall_text():
 func in_slutwall_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "leave"):
 		stopMe()
-		startInteraction("InSlutwall", {inmate=getRoleID("target")})
+		startInteraction("InSlutwall", {inmate=getRoleID("target")}, {punisherID=getRoleID("punisher")})
 
 
 func getAnimData() -> Array:
