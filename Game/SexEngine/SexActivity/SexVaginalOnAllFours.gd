@@ -440,7 +440,7 @@ func processTurn():
 			elif(domInfo.isCloseToCumming()):
 				text += RNG.pick([
 					" {dom.You} {dom.youVerb('pant')} eagerly.",
-					" {dom.You} closes in on {dom.yourHis} orgasm.",
+					" {dom.You} {dom.youVerb('close')} in on {dom.yourHis} orgasm.",
 					" {dom.You} {dom.youAre} gonna cum soon.",
 				])
 		else:
@@ -455,7 +455,7 @@ func processTurn():
 			elif(domInfo.isCloseToCumming()):
 				text += RNG.pick([
 					" {dom.You} {dom.youVerb('pant')} eagerly.",
-					" {dom.You} closes in on {dom.yourHis} orgasm.",
+					" {dom.You} {dom.youVerb('close')} in on {dom.yourHis} orgasm.",
 					" {dom.You} {dom.youAre} gonna cum soon.",
 					" {dom.Your} "+RNG.pick(["cock", "dick", "member"])+" is throbbing.",
 					" {dom.Your} "+RNG.pick(["cock", "dick", "member"])+" is twitching and leaking a lot."
@@ -684,10 +684,10 @@ func doDomAction(_id, _actionInfo):
 				])
 				if(usedBodypart == BodypartSlot.Anus && getSub().getInventory().hasSlotEquipped(InventorySlot.Anal)):
 					var item = getSub().getInventory().getEquippedItem(InventorySlot.Anal)
-					text = "{dom.You} temporary {dom.youVerb('take')} out "+str(item.getAStackName())+" out of {sub.your} ass. "+text
+					text = "{dom.You} temporarily {dom.youVerb('retrieve')} "+str(item.getAStackName())+" out of {sub.your} ass. "+text
 				elif(usedBodypart == BodypartSlot.Vagina && getSub().getInventory().hasSlotEquipped(InventorySlot.Vagina)):
 					var item = getSub().getInventory().getEquippedItem(InventorySlot.Vagina)
-					text = "{dom.You} temporary {dom.youVerb('take')} out "+str(item.getAStackName())+" out of {sub.your} pussy. "+text
+					text = "{dom.You} temporarily {dom.youVerb('retrieve')} "+str(item.getAStackName())+" out of {sub.your} pussy. "+text
 				
 				var freeRoom = getSub().getPenetrationFreeRoomBy(usedBodypart, domID)
 				var chanceToPain = -freeRoom * 2.0
