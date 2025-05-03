@@ -37,10 +37,13 @@ static func addHypnoButtons(scene: SceneBase, submitAction: String, resistAction
 	if(specificResistActions.size() == 0):
 		optionsResist.append("Resist")
 	optionsResist.shuffle()
+
+	var pcTendsToBeReallyIntoThis:bool = ( GM.pc.getFetishHolder().getFetishValue(Fetish.HypnosisSubject) > 0.7 )
+	var resistButtonIndexMin:int = 1 if(pcTendsToBeReallyIntoThis) else 0
 	
 	var buttonSlots = 11.0 - preexistingButtons
 	var submitButtonsToAdd = 2 + floor((min(getSuggestibleStacks(GM.pc), 100.0) / 100.0) * buttonSlots)
-	var resistButtonIndex = RNG.randi_range(0, submitButtonsToAdd)
+	var resistButtonIndex = RNG.randi_range(resistButtonIndexMin, submitButtonsToAdd)
 	
 	for i in range(submitButtonsToAdd + 1):
 		if(i == resistButtonIndex):
