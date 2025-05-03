@@ -342,16 +342,16 @@ func fillBaseCacheFields():
 		if(!IDToPathCache.has(field)):
 			IDToPathCache[field] = {}
 
-var cacheEnabled:bool = true
+var cacheEnabled:bool = false
+var cacheEnabledForEditor:bool = true
 func checkCacheEnabled():
-	if(true):
-		return false
-		
 	if(OS.get_name() == "HTML5"): # To save on userstorage
 		cacheEnabled = false
 	
 	if(Util.hasCommandLineArgument("-noRegistryCache")):
 		cacheEnabled = false
+	if(Util.hasCommandLineArgument("-enableRegistryCache") || (cacheEnabledForEditor && OS.has_feature("editor"))):
+		cacheEnabled = true
 
 func isCacheEnabled() -> bool:
 	return cacheEnabled
