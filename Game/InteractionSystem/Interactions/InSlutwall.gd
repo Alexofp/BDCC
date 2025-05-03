@@ -1,12 +1,13 @@
 extends PawnInteractionBase
 
-var struggleText = ""
-var savedHow = ""
-var saveTryCount = 0
-var useCount = 0
-var tips = 0
-var shoutedForHelpCount = 0
-var immediatelyLeft = false
+var punisherID:String = ""
+var struggleText:String = ""
+var savedHow:String = ""
+var saveTryCount:int = 0
+var useCount:int = 0
+var tips:int = 0
+var shoutedForHelpCount:int = 0
+var immediatelyLeft:bool = false
 
 func _init():
 	id = "InSlutwall"
@@ -15,6 +16,9 @@ func start(_pawns:Dictionary, _args:Dictionary):
 	doInvolvePawn("inmate", _pawns["inmate"])
 	setState("", "inmate")
 	getCharByRole("inmate").getInventory().forceEquipRemoveOther(GlobalRegistry.createItem("SlutwallStatic"))
+
+	if( _args.has("punisherID") ):
+		punisherID = _args["punisherID"]
 
 func init_text():
 	saynn("{inmate.You} {inmate.youAre} stuck in the slutwall. {inmate.YouHe} {inmate.youAre} completely helpless with {inmate.yourHis} {inmate.thick} {butt} sticking out, free for anyone to fuck..")
@@ -487,18 +491,23 @@ func saveUsingStamina() -> void:
 	else:
 		savedHow = "help"
 		setState("save_saved", "inmate")
-		affectAffection("inmate", "saver", 0.2)
+		affectAffectionOnSave()
 
 func saveUsingKey() -> void:
 	savedHow = "key"
 	setState("save_saved", "inmate")
-	affectAffection("inmate", "saver", 0.2)
+	affectAffectionOnSave()
 	getRoleChar("saver").getInventory().removeXOfOrDestroy("restraintkey", 1)
 	getRoleChar("inmate").getInventory().clearStaticRestraints()
+
+func affectAffectionOnSave() -> void:
+	var affectionGain:float = 0.05 if(getRoleChar("saver").getID() == punisherID) else 0.2
+	affectAffection("inmate", "saver", affectionGain)
 
 func saveData():
 	var data = .saveData()
 
+	data["punisherID"] = punisherID
 	data["struggleText"] = struggleText
 	data["savedHow"] = savedHow
 	data["saveTryCount"] = saveTryCount
@@ -511,6 +520,7 @@ func saveData():
 func loadData(_data):
 	.loadData(_data)
 
+	punisherID = SAVE.loadVar(_data, "punisherID", "")
 	struggleText = SAVE.loadVar(_data, "struggleText", "")
 	savedHow = SAVE.loadVar(_data, "savedHow", "")
 	saveTryCount = SAVE.loadVar(_data, "saveTryCount", 0)
