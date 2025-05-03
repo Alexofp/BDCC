@@ -27,6 +27,18 @@ func _run():
 				sayn("Reward: "+task.getRewardString())
 				saynn(task.getDeadlineString())
 		
+		if(getFlag("ElizaModule.s1hap", false)):
+			sayn("- SPECIAL BOUNTY")
+			var charIDWithDrug:String = GM.main.SCI.getRandomNpcIDForStrangeDrug()
+			if(charIDWithDrug == "" || getCharacter(charIDWithDrug) == null):
+				saynn("Intelligence is being gathered. Come back tomorrow.")
+			else:
+				var theCharacter:BaseCharacter = getCharacter(charIDWithDrug)
+				sayn(theCharacter.getName()+" is known to possess dangerous contraband substances. Convince them to hand it in.")
+				sayn(NurseryTaskBase.getCharDescription(charIDWithDrug))
+				sayn("Reward: Safer enviroment for everyone")
+				saynn("Last day before task expires")
+		
 		saynn("Near the board there is a machine that can accept any fluid container. A note says that the container will be fully emptied and then given back.")
 		
 		addButton("Donate", "Choose a fluid container with fluids that you want to donate", "choose_donate")

@@ -7,6 +7,9 @@ var generatedTasks:bool = false
 var nurseryTasks:Array = []
 var nurseryTasksCompleted:int = 0
 
+var npcIDWithDrug:String = ""
+var pickedNpcWithDrug:bool = false
+
 var unlockedTFs:Dictionary = {} # {TFID = true}
 var testedTFs:Dictionary = {} # {TFID = true}
 var storedFluids:Dictionary = {} # {FluidType = Amount}
@@ -364,6 +367,9 @@ func onNewDay():
 	
 	#nurseryTasks.clear()
 	generatedTasks = false
+	
+	npcIDWithDrug = ""
+	pickedNpcWithDrug = false
 
 func generateNurseryTasks():
 	var needTasksToGenerate:int = 3
@@ -976,7 +982,54 @@ func doPCShowerInside():
 		if(GM.pc.hasBodypart(bodypartSlot)):
 			fluidObjs.append(GM.pc.getBodypart(bodypartSlot).getFluids())
 	doPCShowerRaw(fluidObjs)
+
+func findRandomNpcIDForStrangeDrug() -> String:
+	var tries:int = 10
+	while(tries > 0):
+		tries -= 1
+		
+		var poolID:String = CharacterPool.Inmates
+		if(RNG.chance(5)):
+			poolID = RNG.pick([CharacterPool.Guards, CharacterPool.Nurses, CharacterPool.Nurses, CharacterPool.Engineers])
+		
+		var poolChars = GM.main.getDynamicCharacterIDsFromPool(poolID)
+		if(poolChars.empty()):
+			continue
+			
+		var randomDynamicCharID:String = RNG.pick(poolChars)
+		
+		var character:BaseCharacter = GlobalRegistry.getCharacter(randomDynamicCharID)
+		if(character == null):
+			continue
+		var fetishHolder:FetishHolder = character.getFetishHolder()
+		if(tries > 2 && fetishHolder.getFetishValue(Fetish.DrugUse) < 0.3 && fetishHolder.getFetishValue(Fetish.TFGiving) < 0.3 && fetishHolder.getFetishValue(Fetish.TFReceiving) < 0.3):
+			continue
+		return randomDynamicCharID
+	return ""
+
+func getRandomNpcIDForStrangeDrug() -> String:
+	if(!pickedNpcWithDrug):
+		npcIDWithDrug = findRandomNpcIDForStrangeDrug()
+		pickedNpcWithDrug = true
 	
+	if(npcIDWithDrug == ""):
+		return npcIDWithDrug
+	
+	if(GlobalRegistry.getCharacter(npcIDWithDrug) == null):
+		npcIDWithDrug = ""
+	
+	return npcIDWithDrug
+
+func peekRandomNpcIDForStrangeDrug() -> String:
+	if(npcIDWithDrug == ""):
+		return npcIDWithDrug
+	if(GlobalRegistry.getCharacter(npcIDWithDrug) == null):
+		npcIDWithDrug = ""
+	return npcIDWithDrug
+
+func clearRandomNpcIDForStrangeDrug():
+	npcIDWithDrug = ""
+
 func saveData() -> Dictionary:
 	var taskData:Array = []
 	for task in nurseryTasks:
@@ -985,7 +1038,7 @@ func saveData() -> Dictionary:
 			data = task.saveData(),
 		})
 	
-	return {
+	return { # Shorter names use less space on disk.. ignore the rest of the game..
 		points = points,
 		gt = generatedTasks,
 		sf = storedFluids,
@@ -995,6 +1048,8 @@ func saveData() -> Dictionary:
 		up = upgrades,
 		ms = madeStrangePills,
 		ntc = nurseryTasksCompleted,
+		nid = npcIDWithDrug,
+		pnd = pickedNpcWithDrug,
 	}
 
 func loadData(_data:Dictionary):
@@ -1006,6 +1061,8 @@ func loadData(_data:Dictionary):
 	upgrades = SAVE.loadVar(_data, "up", {})
 	madeStrangePills = SAVE.loadVar(_data, "ms", 0)
 	nurseryTasksCompleted = SAVE.loadVar(_data, "ntc", 0)
+	npcIDWithDrug = SAVE.loadVar(_data, "nid", "")
+	pickedNpcWithDrug = SAVE.loadVar(_data, "pnd", false)
 	for upgradeID in upgrades.keys():
 		if(!upgradesInfo.has(upgradeID)):
 			upgrades.erase(upgradeID)
