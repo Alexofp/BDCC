@@ -11,13 +11,19 @@ func start(_pawns:Dictionary, _args:Dictionary):
 func init_text():
 	saynn("{punisher.name} looms over {target.you}.")
 	sayLine("punisher", "PunishDecide", {punisher="punisher", target="target"})
+	
+	var punisherRestraintsPreventPulling:bool = getRoleChar("punisher").hasBlockedHands() || getRoleChar("punisher").hasBoundArms()
 
-	if(getRoleChar("target").getInventory().hasEquippedItemWithTag(ItemTag.AllowsEnslaving) && canGetToStocks()):
+	if(!punisherRestraintsPreventPulling && getRoleChar("target").getInventory().hasEquippedItemWithTag(ItemTag.AllowsEnslaving) && canGetToStocks()):
 		addAction("stocks", "Stocks", "Lock them up in stocks!", "punishMean", 0.2 * getStocksScoreMult(), 60, {})
+	elif(punisherRestraintsPreventPulling):
+		addDisabledAction("Stocks", "You can't do that with restraints on your arms..")
 	else:
 		addDisabledAction("Stocks", ""+("They need to be wearing a collar for this!" if canGetToStocks() else "Stocks are too far..")+"")
-	if(getRolePawn("punisher").isInmate() && getRoleChar("target").getInventory().hasEquippedItemWithTag(ItemTag.AllowsEnslaving) && canGetToSlutwall() && getRolePawn("target").isInmate()):
+	if(!punisherRestraintsPreventPulling && getRolePawn("punisher").isInmate() && getRoleChar("target").getInventory().hasEquippedItemWithTag(ItemTag.AllowsEnslaving) && canGetToSlutwall() && getRolePawn("target").isInmate()):
 		addAction("slutwall", "Slutwall", "Force them into a slutwall!", "punishMean", 0.2 * getSlutwallScoreMult(), 60, {})
+	elif(punisherRestraintsPreventPulling):
+		addDisabledAction("Slutwall", "You can't do that with restraints on your arms..")
 	else:
 		addDisabledAction("Slutwall", ""+(("They need to be wearing a collar for this!" if !getRoleChar("target").getInventory().hasEquippedItemWithTag(ItemTag.AllowsEnslaving) else "They are not one of the inmates..") if canGetToSlutwall() else "Can't get to the slutwall..")+"")
 	if(roleCanStartSex("punisher")):
