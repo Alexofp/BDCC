@@ -242,6 +242,8 @@ func getPreviewLineForRole(_role:String) -> String:
 	if(_role == "main"):
 		if(goal != null):
 			return goal.getText().split("\n")[0]
+		else:
+			return "{main.name} is deciding what to do next.."
 	return .getPreviewLineForRole(_role)
 
 func getActivityIconForRole(_role:String):

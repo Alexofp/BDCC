@@ -1885,7 +1885,7 @@ func _run():
 
 		saynn("[say=jacki]Yeah-h-h~.. That did it.. Fuck I'm such a slut..[/say]")
 
-		saynn("As pull away from her crotch, Jacki pulls you in for a little short kiss.")
+		saynn("As you pull away from her crotch, Jacki pulls you in for a little short kiss.")
 
 		saynn("[say=jacki]Thank you~. I needed that. Wruff.. I will be at my spot..[/say]")
 

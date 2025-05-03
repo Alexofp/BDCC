@@ -36,7 +36,7 @@ func getProgress():
 		result.append("You have completed enough bounties, go see Eliza!")
 	
 	if(s1hap):
-		result.append("Eliza wants you to find a 'strange pill' and bring it to her. Some of the inmates might have them but they won't share unless you make them.")
+		result.append("Eliza wants you to find a 'strange pill' and bring it to her. Some of the inmates might have them but they won't share unless you make them. Check the 'Special Bounty' on the bounty board in the nursery to help you find inmates that possess these strange drugs.")
 	
 	if(s2hap):
 		result.append("You now have access to the chemistry lab! Find more 'strange pills' and use the lab to discover what they do and how to make them. You need at least 3 pills unlocked in order to progress the story. You currently have "+str(amountOfPillsUnlocked)+".")

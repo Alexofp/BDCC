@@ -3,7 +3,7 @@ extends Node
 var game_version_major = 0
 var game_version_minor = 1
 var game_version_revision = 8
-var game_version_suffix = ""
+var game_version_suffix = "fix1"
 
 var contributorsCredits:Dictionary = {
 	"Max-Maxou": [
@@ -342,16 +342,16 @@ func fillBaseCacheFields():
 		if(!IDToPathCache.has(field)):
 			IDToPathCache[field] = {}
 
-var cacheEnabled:bool = true
+var cacheEnabled:bool = false
+var cacheEnabledForEditor:bool = true
 func checkCacheEnabled():
-	if(true):
-		return false
-		
 	if(OS.get_name() == "HTML5"): # To save on userstorage
 		cacheEnabled = false
 	
 	if(Util.hasCommandLineArgument("-noRegistryCache")):
 		cacheEnabled = false
+	if(Util.hasCommandLineArgument("-enableRegistryCache") || (cacheEnabledForEditor && OS.has_feature("editor"))):
+		cacheEnabled = true
 
 func isCacheEnabled() -> bool:
 	return cacheEnabled

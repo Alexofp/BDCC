@@ -143,7 +143,7 @@ func _run():
 	if(state == "isolation"):
 		playAnimation(StageScene.TentaclesSex, "fast", {pcCum=true, bodyState={naked=true, hard=true}})
 		
-		saynn("Even blindfolded and gagged, you have enough to worry about, the tentacle in your butt had began thrusting in and out at a steady pace, fucking you! Your {pc.analStretch} doesn’t even close fast enough before it’s stuffed again. Then a second tentacle joins, they begin pounding your butt interchangeably, stretching you out so much.")
+		saynn("Even blindfolded and gagged, you have enough to worry about, the tentacle in your butt had began thrusting in and out at a steady pace, fucking you! Your {pc.analStretch} anus doesn’t even close fast enough before it’s stuffed again. Then a second tentacle joins, they begin pounding your butt interchangeably, stretching you out so much.")
 
 		# (if vagina)
 		if(GM.pc.hasVagina()):

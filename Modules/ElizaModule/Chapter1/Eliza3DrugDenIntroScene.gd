@@ -18,7 +18,7 @@ func _run():
 
 		saynn("[say=eliza]What I have is a serious case of 'clumsy cat'. Inoperable. Coffee I can quit at any point.[/say]")
 
-		saynn("She puts the mag down and sighs.. before licking the wet cloth.")
+		saynn("She puts the mug down and sighs.. before licking the wet cloth.")
 
 		saynn("[say=eliza]But I just don't want to.[/say]")
 
@@ -46,7 +46,7 @@ func _run():
 
 		saynn("[say=eliza]Did I say something? No. That was a different lab, wasn't even on this station. That lab was pure pleasure to work in though.[/say]")
 
-		saynn("She puts extra purring into the pure word. She sips some more coffee out of her mag.")
+		saynn("She puts extra purring into the pure word. She sips some more coffee out of her mug.")
 
 		saynn("[say=eliza]You're right, the stuff here is pretty old. Would be so cool to see some of it upgraded.[/say]")
 
@@ -66,7 +66,7 @@ func _run():
 
 		saynn("[say=eliza]I've been busy too, for different reasons.. Can't help you with the lab much, outside of scanning those pills. But! I think I can help you with something.[/say]")
 
-		saynn("She leaves the mag on the counter and grabs something else.. some kind of little device.. an injector of sorts.")
+		saynn("She leaves the mug on the counter and grabs something else.. some kind of little device.. an injector of sorts.")
 
 		saynn("[say=pc]What is that?[/say]")
 

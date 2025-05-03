@@ -71,7 +71,7 @@ func getSubTags():
 	return [SexActivityTag.PenisUsed, SexActivityTag.PenisInside]
 	
 func isActivityImpossibleShouldStop() -> bool:
-	if(!getSub().hasReachablePenis()):
+	if(!getSub().hasPenis()):
 		return true
 	return false
 	

@@ -243,7 +243,7 @@ func _run():
 
 		saynn("[say=eliza]I will go back to my boring ass work shift now. Let me know if you find something interesting![/say]")
 
-		saynn("And just like, she leaves you alone.. in her lab.")
+		saynn("And just like that, she leaves you alone.. in her lab.")
 
 		saynn("Time to do some science.")
 
@@ -337,7 +337,7 @@ func _run():
 
 		saynn("[say=eliza]I will go back to my boring ass work shift now. Let me know if you find something interesting![/say]")
 
-		saynn("And just like, she leaves you alone.. in her lab.")
+		saynn("And just like that, she leaves you alone.. in her lab.")
 
 		saynn("Time to do some science.")
 

@@ -88,4 +88,4 @@ func getTransformGrowMessage(_context:Dictionary) -> String:
 	return "{npc.YouHe} {npc.youVerb('feel')} a strange tugging sensation at the base of {npc.yourHis} spine, and suddenly, a new"+(", flexible" if isFlexible else "")+" tail begins to sprout. It unfurls behind {npc.youHim} and already begins to sway with every movement."
 
 func getTransformMorphMessage(_context:Dictionary) -> String:
-	return "{npc.YourHis} tail begins to morph into a different one! It structure and silhouette changes dramatically, assuming a new form. {npc.YouHe} now {npc.youVerb('have', 'has')} "+getAVulgarName()+"."
+	return "{npc.YourHis} tail begins to morph into a different one! Its structure and silhouette changes dramatically, assuming a new form. {npc.YouHe} now {npc.youVerb('have', 'has')} "+getAVulgarName()+"."

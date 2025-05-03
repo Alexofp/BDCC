@@ -23,7 +23,7 @@ roomName = "Main hall"
 roomID = "hall_mainentrance"
 roomDescription = "The main hall is an incredibly huge room, circling a large raised platform hanging down in the middle. The towering walls of smoothed over rock keep you contained, although you can barely spot places where staff and guards go about their business far above. Railings keep you from the edge of the cavern leading down, and down the central hole below there are foundation supports, electrical cables, netting, other structural equipment and the lights of the cell blocks below. The ceiling stretches past it all and into the darkness above.
 
-To the north is the Central Elevator and it's guard checkpoint, and to the south there are a set of stairs lead up to the large raised platform in the center of the Main Hall."
+To the north is the Central Elevator and its guard checkpoint, and to the south there are a set of stairs lead up to the large raised platform in the center of the Main Hall."
 roomColor = 8
 population = 3
 
@@ -98,7 +98,7 @@ roomDescription = "In the center of this platform, a number of punishment device
 For all this stuff, though, you can’t shake the feeling all of this was set up because the prison staff did not know what else to put here.
 
 Off to the side there is a very depressed looking inmate in a special uniform with \"Janitorial Worker\" written across the back. 
-They do not look ready for a conversation, so you decide its best to ignore them."
+They do not look ready for a conversation, so you decide it's best to ignore them."
 roomSprite = 4
 population = 3
 

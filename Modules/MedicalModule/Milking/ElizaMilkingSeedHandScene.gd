@@ -60,7 +60,7 @@ func _run():
 
 		saynn("Her gaze returns to watching you as she begins a gentle, teasing stroke, her paw sliding along your shaft, getting it all nice and ready. You feel blood flowing down to it, a little drop of pre already shining at the tip.")
 
-		saynn("The feline tilts her head slightly and offers you a small smile.. while her fingertips glide and caress each ridge, feeling each vein.. it makes your member twitch softly in response. She really got an export touch for sure.. Your lips part ever so slightly as your breathing gets a bit deeper.")
+		saynn("The feline tilts her head slightly and offers you a small smile.. while her fingertips glide and caress each ridge, feeling each vein.. it makes your member twitch softly in response. She really got an expert touch for sure.. Your lips part ever so slightly as your breathing gets a bit deeper.")
 
 		saynn("After getting you ready, her digits quickly swipe off any precum beads that were hanging from the sensitive tip of your cock.. it made you squirm a bit.")
 
@@ -68,7 +68,7 @@ func _run():
 
 		saynn("She reaches for the condom wrapper and swiftly opens it with her fangs. She then stretches it slightly with her digits and starts putting it on you. The rubber ring is neatly hugging your girth as she carefully slides it along the length.. her touch making your cock twitch subtly.")
 
-		saynn("Once your member has been wrapped up, she guides you to sit on the air.")
+		saynn("Once your member has been wrapped up, she guides you to sit on the chair.")
 
 		addButton("Take a seat", "Let her do all the work", "taking_a_seat")
 	if(state == "taking_a_seat"):
@@ -83,11 +83,11 @@ func _run():
 
 		saynn("Little grunts escape you, your hard shaft responding to her every touch, pulsating and twitching in her grasp.. the head leaking more pre into the bell-shaped tip of the latex condom.")
 
-		saynn("Eliza focuses her gaze on your member as she intensifies the stroking even further.. making you really grip that chair. You're breathing deeply as you feel a powerful surge building.. a pressure deep within that cannot be held back.. any anymore..")
+		saynn("Eliza focuses her gaze on your member as she intensifies the stroking even further.. making you really grip that chair. You're breathing deeply as you feel a powerful surge building.. a pressure deep within that cannot be held back.. not anymore..")
 
 		saynn("[say=pc]Ghm.. gh-..[/say]")
 
-		saynn("You grunt as your {pc.penis} starts throbing under her touch.. Thick, hot spunk shoots from its tip, stuffing the condom to its brim. Eliza's rhythmic, unrelenting stroking continues even then.. milking your twitching balls to their very last drop.. until you feel completely spent.")
+		saynn("You grunt as your {pc.penis} starts throbbing under her touch.. Thick, hot spunk shoots from its tip, stuffing the condom to its brim. Eliza's rhythmic, unrelenting stroking continues even then.. milking your twitching balls to their very last drop.. until you feel completely spent.")
 
 		saynn("[say=eliza]Good.[/say]")
 

@@ -29,7 +29,7 @@ func _run():
 
 		saynn("Fair enough.. You can't help to notice.. that your position is quite.. vulnerable.. your {pc.breasts} dangling invitingly underneath you.")
 
-		saynn("Eliza moves the empty fluid tank underneath your chest and then kneels in front of you. Her blue eyes quickly inspect your exposed forms with a professional gaze.. with some unfiltered hints hidden in it..")
+		saynn("Eliza moves the empty fluid tank underneath your chest and then kneels in front of you. Her green eyes quickly inspect your exposed forms with a professional gaze.. with some unfiltered hints hidden in it..")
 
 		addButton("Continue", "See what happens next", "do_milk_start")
 	if(state == "do_milk_start"):

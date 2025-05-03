@@ -71,7 +71,7 @@ func isCompleted() -> bool:
 func shouldBeCancelled() -> bool:
 	return false
 
-func getFloorName(floorID:String) -> String:
+static func getFloorName(floorID:String) -> String:
 	#var room = GM.world.getRoomByID(loc)
 	#var floorID:String = room.getFloorID()
 	if(floorID == "Cellblock"):
@@ -93,7 +93,7 @@ func getCharName(theCharID:String) -> String:
 	
 	return "Unknown"
 
-func getCharDescription(theCharID:String) -> String:
+static func getCharDescription(theCharID:String) -> String:
 	var character:BaseCharacter = GlobalRegistry.getCharacter(theCharID)
 	if(character == null):
 		return "ERROR, NO CHARACTER FOUND WITH ID "+str(theCharID)

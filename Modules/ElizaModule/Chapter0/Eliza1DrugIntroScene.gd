@@ -166,7 +166,7 @@ func _run():
 
 		saynn("Find some strange pills and bring them to Doctor Quinn.. easy enough. You nod.")
 
-		saynn("[say=eliza]One might be enough for a start. If I tune my equipment a bit more, it should be enough.[/say]")
+		saynn("[say=eliza]One might be enough for a start. If I tune my equipment a bit more, it should be enough for sure.[/say]")
 
 		saynn("She looks around.")
 
@@ -193,6 +193,10 @@ func _run():
 		saynn("[say=eliza]I'm gonna go get a coffee refill from the break room. I trust you will find the exit by yourself?[/say]")
 
 		saynn("[say=pc]Sure.[/say]")
+		
+		saynn("A few nurses walk by.")
+		
+		saynn("[say=eliza]Oh, one more thing. I helped to install more scanners all around the prison. The bounty board has a special bounty now, just for you. Go check it. It should help you find a certain kind of contraband. Wink-wink~.[/say]")
 
 		saynn("She smiles.. and leaves you be.")
 
@@ -210,5 +214,6 @@ func _react(_action: String, _args):
 		processTime(5*60)
 		addExperienceToPlayer(100)
 		addMessage("Task updated")
+		addMessage("Bounty board in the nursery can now help you find inmates that have transformation drugs on them.")
 
 	setState(_action)

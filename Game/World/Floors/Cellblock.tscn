@@ -47,7 +47,7 @@ population = 1
 position = Vector2( 0, 64 )
 roomName = "Corridor"
 roomID = "cellblock_corridor_middle"
-roomDescription = "Your standing inside a giant sheet metal tube that connects the cellblocks with the rest of the prison. The only noteworthy thing here is the giant open blast door stretched across the hall."
+roomDescription = "You are standing inside a giant sheet metal tube that connects the cellblocks with the rest of the prison. The only noteworthy thing here is the giant open blast door stretched across the hall."
 population = 1
 
 [node name="CellblockRoom6" parent="." index="5" instance=ExtResource( 2 )]

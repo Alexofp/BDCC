@@ -154,9 +154,9 @@ func getExtraData():
 func getExtraDataLessImportant():
 	var result = null
 	for domID in doms:
-		result = combineData(result, doms[domID].getExtraOutputData(true))
+		result = combineData(result, processData(doms[domID].getExtraOutputData(true), domID, domID))
 	for subID in subs:
-		result = combineData(result, subs[subID].getExtraOutputData(false))
+		result = combineData(result, processData(subs[subID].getExtraOutputData(false), subID, subID))
 	return result
 
 func makeActivity(id, theDomID, theSubID):

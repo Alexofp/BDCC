@@ -368,7 +368,7 @@ func processTurn():
 			elif(subInfo.isCloseToCumming()):
 				text += RNG.pick([
 					" {sub.You} {sub.youVerb('pant')} eagerly.",
-					" {sub.You} closes in on {sub.yourHis} orgasm.",
+					" {sub.You} {sub.youVerb('close')} in on {sub.yourHis} orgasm.",
 					" {sub.You} {sub.youAre} gonna cum soon.",
 				])
 		else:
@@ -383,7 +383,7 @@ func processTurn():
 			elif(subInfo.isCloseToCumming()):
 				text += RNG.pick([
 					" {sub.You} {sub.youVerb('pant')} eagerly.",
-					" {sub.You} closes in on {sub.yourHis} orgasm.",
+					" {sub.You} {sub.youVerb('close')} in on {sub.yourHis} orgasm.",
 					" {sub.You} {sub.youAre} gonna cum soon.",
 					" {sub.Your} "+RNG.pick(["cock", "dick", "member"])+" is throbbing.",
 					" {sub.Your} "+RNG.pick(["cock", "dick", "member"])+" is twitching and leaking a lot."

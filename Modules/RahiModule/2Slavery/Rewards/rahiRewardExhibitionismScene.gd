@@ -691,7 +691,7 @@ func _run():
 
 		saynn("As she walks by weightlifting stations, Rahi can't resist giving a show to the inmates who were mid-lift. She approaches them and turns around before boldly bending forward, ensuring they catch glimpses of her wet dripping pussy and the inviting tight asshole.")
 
-		saynn("And just like, after getting everyone horny, Rahi quickly makes her escape before someone could catch her.")
+		saynn("And just like that, after getting everyone horny, Rahi quickly makes her escape before someone could catch her.")
 
 		addButton("Continue", "See what happens next", "par_good")
 	if(state == "ppee"):
