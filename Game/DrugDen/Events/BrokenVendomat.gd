@@ -33,9 +33,9 @@ func getInteractInfo() -> Dictionary:
 	}
 
 func doInteract(_actionID:String, _args:Array = []) -> Dictionary:
-	GM.pc.addCredits(-1)
+	GM.pc.addCredits(-useCost)
 	
-	timesUsed += useCost
+	timesUsed += 1
 	
 	var didBreak:bool = false
 	if(timesUsed >= 3):

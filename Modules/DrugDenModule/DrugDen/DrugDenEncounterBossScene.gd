@@ -77,7 +77,7 @@ func _run():
 					addButton("Uniform", "This looks like Kidlat's uniform!", "take_kidlat_uniform")
 	
 	if(state == "make_strange_pill"):
-		saynn("You haphazardly mix questionable fluids, guided by the provided notes, your gut instinct and a bit of luck. The result is a strange, weird pill. Who knows what it will do, its is color unsettling. You pocket it, hoping it won’t kill you later. Time to move on.")
+		saynn("You haphazardly mix questionable fluids, guided by the provided notes, your gut instinct and a bit of luck. The result is a strange, weird pill. Who knows what it will do, even its color is unsettling. You pocket it, hoping it won’t kill you later. Time to move on.")
 		
 		addButton("Continue", "Time to leave", "endthescene")
 	

@@ -172,7 +172,7 @@ region_rect = Rect2( 1, 1, 1022, 62 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.322196, -0.041567, 0 )
 
 [node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.322196, -0.041567, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.322196, -0.041567, 0.0447372 )
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="3"]
 tree_root = SubResource( 491 )
