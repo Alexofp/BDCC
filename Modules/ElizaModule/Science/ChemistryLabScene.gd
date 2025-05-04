@@ -262,7 +262,7 @@ func _run():
 			
 			if(itemID == "TFPill"):
 				itemName = "Strange Pill"
-				itemDesc = "Use advanced algorithms to brute-force random molecular structures until we find one that has transformative proporties.\n\nThis pill is guranteed to be one that hasn't been unlocked yet (Unless you have unlocked all of them already). The cost of this pill will raise each time you make it."
+				itemDesc = "Use advanced algorithms to brute-force random molecular structures until we find one that has transformative proporties.\n\nThis pill is guaranteed to be one that hasn't been unlocked yet (Unless you have unlocked all of them already). The cost of this pill will raise each time you make it."
 			
 			var itemFluidsReq:String = GM.main.SCI.canMakeGetFluidsDescription(craftInfo["fluids"])
 			var canMakeResult:Array = GM.main.SCI.canMakeHasFluids(craftInfo["fluids"])
@@ -618,7 +618,7 @@ func _react(_action: String, _args):
 				GM.main.SCI.addPoints(-craftInfo["science"])
 			GM.main.SCI.useFluidsToMakeSomething(craftInfo["fluids"])
 			
-			addMessage("You have create '"+itemRef.getVisibleName()+"'!")
+			addMessage("You have created '"+itemRef.getVisibleName()+"'!")
 			
 			if(tfID == "TFPill"):
 				GM.main.SCI.madeStrangePills += 1
@@ -642,7 +642,7 @@ func _react(_action: String, _args):
 		
 		var newPill:ItemBase = GM.main.SCI.useFluidsToMakePill(tfID)
 		if(newPill != null):
-			addMessage("You have create a "+tf.getPillName()+" pill!")
+			addMessage("You have created a "+tf.getPillName()+" pill!")
 			GM.pc.getInventory().addItem(newPill)
 		
 		setState("")
@@ -668,7 +668,7 @@ func _react(_action: String, _args):
 					configDescAr.append(option["name"]+": "+currentOptionName)
 			newPill.setConfigDesc(Util.join(configDescAr, "\n"))
 			
-			addMessage("You have create a "+tf.getPillName()+" pill!")
+			addMessage("You have created a "+tf.getPillName()+" pill!")
 			GM.pc.getInventory().addItem(newPill)
 		
 		setState("")

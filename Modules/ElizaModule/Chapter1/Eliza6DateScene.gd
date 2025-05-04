@@ -759,7 +759,7 @@ func _run():
 	if(state == "ask_menu"):
 		saynn("What do you want to ask Eliza?")
 
-		addButton("Mug", "Ask about the mag", "ask_mug")
+		addButton("Mug", "Ask about the mug", "ask_mug")
 		addButton("Future", "Ask about what she will do next", "ask_future")
 		addButton("Mother", "Ask about her mother", "ask_mother")
 		addButton("Do you like me", "Ask her if she likes you", "ask_likeme")

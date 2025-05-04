@@ -139,7 +139,7 @@ func _run():
 
 		saynn("[say=eliza]But then we realized that we can do the opposite and speed up the recovery. The name stuck though.[/say]")
 
-		saynn("Rahi closes her eyes as her head gets fully submerged under the heavy blue liquid. Then she dares to open her eyes again and realizes that it's not that bad. Eliza tapes at the glass and shows an 'ok' sign to Rahi. She responds with the same one.")
+		saynn("Rahi closes her eyes as her head gets fully submerged under the heavy blue liquid. Then she dares to open her eyes again and realizes that it's not that bad. Eliza taps at the glass and shows an 'ok' sign to Rahi. She responds with the same one.")
 
 		saynn("[say=eliza]She can't hear us anymore. But it seems everything is going well, the process has begun.[/say]")
 

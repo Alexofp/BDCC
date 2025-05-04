@@ -7,6 +7,7 @@ var resistance: float = 0.0
 var fear: float = 0.0
 var resistanceFull:float = 0.0
 var fearFull:float = 0.0
+var obeyMode:bool = false
 
 func getInfoString():
 	var character = getChar()
@@ -51,15 +52,23 @@ func isUnconscious():
 	return false
 
 func isResistingSlightly():
+	if(shouldFullyObey()):
+		return false
 	return resistance >= (0.1 + personalityScore({PersonalityStat.Naive: 0.05}))
 
 func isResisting():
+	if(shouldFullyObey()):
+		return false
 	return resistance >= (0.3 + personalityScore({PersonalityStat.Naive: 0.2}))
 
 func isScared():
+	if(shouldFullyObey()):
+		return false
 	return fear >= (0.5 - 0.3 * personalityScore({PersonalityStat.Coward: 1.0}))
 	
 func isVeryScared():
+	if(shouldFullyObey()):
+		return false
 	return fear >= 0.9
 	
 func getAboutToPassOutScore():
@@ -112,7 +121,7 @@ func addResistance(addres):
 		addFrustration(addres * 0.2)
 
 func getResistScore():
-	if(isScared()):
+	if(isScared() || shouldFullyObey()):
 		return 0.0
 	if(isResisting()):
 		return 1.0
@@ -121,7 +130,7 @@ func getResistScore():
 	return 0.0
 
 func getResistScoreSmooth():
-	if(isScared()):
+	if(isScared() || shouldFullyObey()):
 		return 0.0
 	if(isResisting()):
 		return 1.0
@@ -130,6 +139,8 @@ func getResistScoreSmooth():
 	return resistance
 
 func getComplyScore():
+	if(shouldFullyObey()):
+		return 1.0
 	if(isScared()):
 		return 0.0
 	if(isResisting()):
@@ -266,6 +277,12 @@ func onGoalFailed(_thedominfo, _goalid, _thesubinfo, _mult:float = 1.0):
 	else:
 		addFrustration(1.0*_mult)
 
+func setObeyMode(_newObey:bool):
+	obeyMode = _newObey
+
+func shouldFullyObey() -> bool:
+	return obeyMode
+
 func saveData():
 	var data = .saveData()
 	
@@ -273,6 +290,7 @@ func saveData():
 	data["fear"] = fear
 	data["resistanceFull"] = resistanceFull
 	data["fearFull"] = fearFull
+	data["obeyMode"] = obeyMode
 
 	return data
 	
@@ -283,3 +301,4 @@ func loadData(data):
 	fear = SAVE.loadVar(data, "fear", 0.0)
 	resistanceFull = SAVE.loadVar(data, "resistanceFull", 0.0)
 	fearFull = SAVE.loadVar(data, "fearFull", 0.0)
+	obeyMode = SAVE.loadVar(data, "obeyMode", false)

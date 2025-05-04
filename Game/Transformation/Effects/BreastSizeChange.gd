@@ -141,7 +141,7 @@ func describeBreastTransformation(origSize:int, size:int, breastsCovered:bool = 
 		])
 	if(diff == -1):
 		return RNG.pick([
-			"A cool sensation washes over {npc.yourHis} breasts, and {npc.youHe} {npc.youVerb('feel')} a gentle pull as they begin to shrink just a bit. The warmth that enveloped {npc.youHim} moments ago slowly fades, leaving a subtle lightness in its wake. {npc.youHe} {npc.youVerb('notice')} {npc.yourHis} breasts getting smaller, creating a more streamlined shape.",
+			"A cool sensation washes over {npc.yourHis} breasts, and {npc.youHe} {npc.youVerb('feel')} a gentle pull as they begin to shrink just a bit. The warmth that enveloped {npc.youHim} moments ago slowly fades, leaving a subtle lightness in its wake. {npc.YouHe} {npc.youVerb('notice')} {npc.yourHis} breasts getting smaller, creating a more streamlined shape.",
 			"{npc.YouHe} {npc.youVerb('sense')} a soft chill enveloping {npc.yourHis} chest, and as the sensation deepens, {npc.yourHis} breasts begin to diminish slightly. The change is subtle, but {npc.youHe} can feel the weight easing, {npc.yourHis} breasts becoming a bit smaller.",
 			"A gentle tingling sensation courses through {npc.yourHis} breasts, and {npc.youHe} {npc.youVerb('brace')} for the change. As the warmth dissipates, {npc.youHe} {npc.youVerb('realize')} they’ve shrunk slightly, the weight reduced enough to notice.",
 			"{npc.YouHe} {npc.youVerb('feel')} a soft pulse in {npc.yourHis} chest, and as it intensifies, {npc.yourHis} breasts begin to shrink, gradually losing their weight and shape.",

@@ -68,7 +68,7 @@ func _run():
 
 		saynn("[say=kidlat]Pffft, what kinda question is that, luv? What am I doing down here? What are you doin' down here, hun? Maybe I gotta be asking you the questions![/say]")
 
-		saynn("She snickers, learning back against the cold metal wall of an abandoned maintenance tunnel. She taps at her cardboard box with the claws of her hind paw, nodding to herself.")
+		saynn("She snickers, leaning back against the cold metal wall of an abandoned maintenance tunnel. She taps at her cardboard box with the claws of her hind paw, nodding to herself.")
 
 		saynn("[say=kidlat]I'm just chilling.. thrivin'. While you're all gettin' your butts beat - I just enjoy the ambience and make a little cash on the side. Beats hitting rocks all day![/say]")
 

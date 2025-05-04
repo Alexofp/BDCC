@@ -141,7 +141,7 @@ func processTurn():
 			text += RNG.pick([
 				"The breast pump stimulates {sub.your} {sub.breasts}.",
 				"The breast pump stimulates {sub.your} {sub.breasts} but doesn't draw any milk out.",
-				"The breast pump tries to milk {sub.your} {sub.breasts} but {sub.youHe} is not lactating.",
+				"The breast pump tries to milk {sub.your} {sub.breasts} but {sub.youHe} {sub.youAre} not lactating.",
 			])
 			var suddenlyLactate = false
 			if(getSub().stimulateLactation()):

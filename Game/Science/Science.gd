@@ -847,9 +847,9 @@ func doMilkCharacterCustom(theChar:BaseCharacter, bodypartSlot, howMuch:float = 
 			fluidsGot[fluidType] = 0.0
 		fluidsGot[fluidType] += fluidAmount * howMuch * efficiency
 	
-	#var totalFluid:float = 0.0
-	#for fluidType in fluidsGot:
-	#	totalFluid += fluidsGot[fluidType]
+	var totalFluid:float = 0.0
+	for fluidType in fluidsGot:
+		totalFluid += fluidsGot[fluidType]
 	
 	if(showMessage):
 		for fluidType in fluidsGot:
@@ -858,6 +858,16 @@ func doMilkCharacterCustom(theChar:BaseCharacter, bodypartSlot, howMuch:float = 
 				continue
 			var fluidAmStr:String = str(Util.roundF(fluidsGot[fluidType], 1))
 			GM.main.addMessage(fluidAmStr+" ml of "+fluidObj.getVisibleName()+" got collected from "+theChar.getName())
+	
+	if(theChar.isPlayer()):
+		if(bodypartSlot == BodypartSlot.Penis && totalFluid > 100.0):
+			var xpToGiveFloat:float = round(8.0*efficiency*pow(totalFluid,0.2))
+			var xpToGiveInt:int = int(xpToGiveFloat/5.0)*5
+			theChar.addSkillExperience(Skill.Breeder, xpToGiveInt)
+		if(bodypartSlot == BodypartSlot.Breasts && totalFluid > 100.0):
+			var xpToGiveFloat:float = round(8.0*efficiency*pow(totalFluid,0.2))
+			var xpToGiveInt:int = int(xpToGiveFloat/5.0)*5
+			theChar.addSkillExperience(Skill.Milking, xpToGiveInt)
 	
 	return fluidsGot
 

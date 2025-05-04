@@ -22,11 +22,12 @@ func _reactInit():
 	if(!GM.pc.hasPenis()):
 		setState("nopenis")
 		return
-	if(!GM.pc.hasReachablePenis()):
-		setState("noreachpenis")
-		return
-	
+
 	if(!item.isWornByWearer()):
+		if(!GM.pc.hasReachablePenis()):
+			setState("noreachpenis")
+			return
+
 		if(!GM.pc.hasBlockedHands()):
 			if(GM.pc.getInventory().hasSlotEquipped(item.getClothingSlot())):
 				var alreadyEquipped = GM.pc.getInventory().getEquippedItem(item.getClothingSlot())

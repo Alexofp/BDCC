@@ -53,6 +53,7 @@ static func getTFListCanStart() -> Array:
 
 static func generateTFIDForAPill(blacklist:Array = [], knownMult:float = 0.5) -> String:
 	var possible:Array = []
+	var disabledUnknown:Array = []
 	
 	for tfID in GlobalRegistry.getTransformationRefs():
 		if(blacklist.has(tfID)):
@@ -60,13 +61,19 @@ static func generateTFIDForAPill(blacklist:Array = [], knownMult:float = 0.5) ->
 		var tf = GlobalRegistry.getTransformationRef(tfID)
 		
 		var tfWeight:float = GM.main.getEncounterSettings().getTFWeight(tfID, tf.getPillGenWeight())
+		var isThisOneUnlocked:bool = (GM.main != null && GM.main.SCI != null && GM.main.SCI.isTransformationUnlocked(tfID))
 		
-		if(GM.main != null && GM.main.SCI != null && GM.main.SCI.isTransformationUnlocked(tfID)):
+		if(tfWeight <= 0.0 && !isThisOneUnlocked):
+			disabledUnknown.append(tfID)
+		
+		if(isThisOneUnlocked):
 			tfWeight *= knownMult
 		
 		if(tfWeight > 0.0):
 			possible.append([tfID, tfWeight])
 	
 	if(possible.empty()):
+		if(!disabledUnknown.empty()):
+			return RNG.pick(disabledUnknown)
 		return ""
 	return RNG.pickWeightedPairs(possible)
