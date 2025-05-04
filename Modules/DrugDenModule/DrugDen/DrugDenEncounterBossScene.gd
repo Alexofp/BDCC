@@ -56,7 +56,7 @@ func _run():
 		
 		saynn("You can always just smash this lab into pieces and be done with it.")
 		
-		addButton("Make strange pill", "Use this lab setup to create a strange pill. This one is guranteed to be one of the ones that you haven't discovered yet (unless you have discovered them all already).", "make_strange_pill")
+		addButton("Make strange pill", "Use this lab setup to create a strange pill. This one is guaranteed to be one of the ones that you haven't discovered yet (unless you have discovered them all already).", "make_strange_pill")
 		addButton("Science points", "Closely examine the lab setup to understand how it functions. This will give you some science points.", "do_science")
 		addButton("Painkillers", "Use the lab to create 1 painkillers pill", "make_painkillers")
 		addButton("Anaphrodisiac", "Use the lab to create 2 anaphrodisiac pills", "make_anaphrodisiac")
