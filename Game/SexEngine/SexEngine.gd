@@ -997,9 +997,13 @@ func processScene():
 func doAction(_actionInfo):
 	if(_actionInfo["id"] == "obey"):
 		messages.clear()
+		if(isSub("pc")):
+			getSubInfo("pc").setObeyMode(true)
 		processAIActions(true, true)
 		processTurn()
 		processAIActions(false, true)
+		if(isSub("pc")):
+			getSubInfo("pc").setObeyMode(false)
 	if(_actionInfo["id"] == "continue"):
 		messages.clear()
 		processAIActions(true)
