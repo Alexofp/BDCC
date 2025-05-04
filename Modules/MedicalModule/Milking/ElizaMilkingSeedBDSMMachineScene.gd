@@ -46,7 +46,7 @@ func _run():
 
 		saynn("[say=eliza]Just enjoy the ride~.[/say]")
 
-		saynn("When it's done sliding you, the machine begins retracting the tool.. before plunging it deep inside again, establishing a cycle. A cycle of pounding your ass.")
+		saynn("When it's done sliding inside you, the machine begins retracting the tool.. before plunging it deep inside again, establishing a cycle. A cycle of pounding your ass.")
 
 		if (!hasCage):
 			saynn("At the same time, the pump module spools up as well, it begins to tug on your cock by sucking most of the air out, creating negative pressure.. before stuffing the air back inside. It feels like you're fucking a hungry fuckhole that wants to suck you in.. There is also a pleasure ring that neatly hugs your hard shaft before proceeding to slide along it, stroking hard..")
@@ -54,7 +54,7 @@ func _run():
 		else:
 			saynn("As your p-spot gets stimulated so hard, your poor locked away member tries to get hard, blood flowing towards it but quickly encountering the cage that makes any kind of erection impossible. All your cock can do is dribble pre into the fluid collector below while your asshole is getting fucked by that machine..")
 
-		saynn("Eliza just stands near and watches you with great fascination, her little smile makes your glow red. The steady, powerful thrusts of that tool creates a storm of pleasurable sensations that cascade through your entire body as heat..")
+		saynn("Eliza just stands near and watches you with great fascination, her little smile makes yours glow red. The steady, powerful thrusts of that tool creates a storm of pleasurable sensations that cascade through your entire body as heat..")
 
 		addButton("Continue", "See what happens next", "process_cum")
 	if(state == "process_cum"):

@@ -19,7 +19,7 @@ valign = 1
 [node name="InvList" type="VBoxContainer" parent="."]
 margin_top = 18.0
 margin_right = 1280.0
-margin_bottom = 66.0
+margin_bottom = 42.0
 
 [node name="EquipItemVarUI" parent="InvList" instance=ExtResource( 1 )]
-margin_bottom = 48.0
+margin_bottom = 24.0

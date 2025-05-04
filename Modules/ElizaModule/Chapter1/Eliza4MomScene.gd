@@ -50,7 +50,7 @@ func _run():
 
 		saynn("[say=elizaMom]Science isn't a game. It's dangerous. But it's also boring, which makes it even worse for young minds like yours.[/say]")
 
-		saynn("[say=eliza]I'm not a young girl already, mom.. You can't kill my love for science..[/say]")
+		saynn("[say=eliza]I'm not a young girl anymore, mom.. You can't kill my love for science..[/say]")
 
 		saynn("Eliza exhales through her nose, tail flicking irritably.")
 
@@ -60,7 +60,7 @@ func _run():
 
 		saynn("[say=elizaMom]So you're going to do as I say.[/say]")
 
-		saynn("The older woman furrows her brows when noticing the mag on the counter. Eliza quickly snatches it up and starts sipping coffee out of it, her grip strong.")
+		saynn("The older woman furrows her brows when noticing the mug on the counter. Eliza quickly snatches it up and starts sipping coffee out of it, her grip strong.")
 
 		saynn("[say=eliza]Is that why you came here, to lecture me in person.. That's the first time I see you in a while..[/say]")
 
@@ -219,7 +219,7 @@ func _run():
 
 		saynn("[say=pc]Your mother doesn't like me much.[/say]")
 
-		saynn("Eliza lets out a small snicker, learning against the counter with an amused flick of her ear.")
+		saynn("Eliza lets out a small snicker, leaning against the counter with an amused flick of her ear.")
 
 		saynn("[say=eliza]Well, to be fair, you're nothing but dirty criminal scum in her eyes.[/say]")
 
