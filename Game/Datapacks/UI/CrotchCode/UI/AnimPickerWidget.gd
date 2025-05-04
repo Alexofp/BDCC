@@ -294,9 +294,9 @@ func a_gui_input(event: InputEvent):
 	
 	if event is InputEventMouseButton:
 		if(event.button_index == BUTTON_WHEEL_UP):
-			camera3d.size *= 0.9
+			camera3d.size *= 0.97
 		if(event.button_index == BUTTON_WHEEL_DOWN):
-			camera3d.size *= 1.1
+			camera3d.size /= 0.97
 	
 	if event is InputEventMouseButton:
 		if event.pressed:
