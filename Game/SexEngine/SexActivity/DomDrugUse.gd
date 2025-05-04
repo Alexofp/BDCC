@@ -384,32 +384,39 @@ func getSubActions():
 	var actions = []
 	if(state == "offering"):
 		var drugInfo = getDrugInfo(usedItemID, usedUniqueItemID)
-		var theScore = subInfo.personalityScore({PersonalityStat.Naive: 0.2, PersonalityStat.Subby: 0.2}) + subInfo.fetishScore({Fetish.DrugUse: 1.0})
+		var theObeyScore:float = subInfo.personalityScore({PersonalityStat.Naive: 0.2, PersonalityStat.Subby: 0.2}) + subInfo.fetishScore({Fetish.DrugUse: 1.0})
 		if(!getSub().isBlindfolded()):
-			theScore = (max(0.0, theScore) + drugInfo["scoreSubScore"]) * subInfo.getComplyScore()
+			theObeyScore = (max(0.0, theObeyScore) + drugInfo["scoreSubScore"]) * subInfo.getComplyScore()
+		if(subInfo.shouldFullyObey()):
+			theObeyScore = 10000.0
+		var theResistScore:float = 1.0 - clamp(theObeyScore, 0.0, 1.0)
 		actions.append({
 				"id": "eatit",
-				"score": theScore,
+				"score": theObeyScore,
 				"name": "Take pill",
 				"desc": "Eat the offered pill",
 			})
 		actions.append({
 				"id": "noteatit",
-				"score": 1.0 - clamp(theScore, 0.0, 1.0),
+				"score": theResistScore,
 				"name": "Decline pill",
 				"desc": "You don't wanna eat that pill",
 			})
 	if(state == "forcing" && getSexType() != SexType.SlutwallSex):
-		var theresistScore = 0.1 + subInfo.getResistScore()*(0.2 - subInfo.fetishScore({Fetish.DrugUse: 1.0}))
+		var theResistScore:float = 0.1 + subInfo.getResistScore()*(0.2 - subInfo.fetishScore({Fetish.DrugUse: 1.0}))
+		var theObeyScore:float = 1.0 - clamp(theResistScore, 0.0, 1.0)
+		if(subInfo.shouldFullyObey()):
+			theResistScore = 0.0
+			theObeyScore = 10000.0
 		actions.append({
 				"id": "swallowforced",
-				"score": (1.0 - theresistScore),
+				"score": theObeyScore,
 				"name": "Swallow pill",
 				"desc": "Swallow the pill in your mouth",
 			})
 		actions.append({
 				"id": "spitpillout",
-				"score": theresistScore,
+				"score": theResistScore,
 				"name": "Spit pill out",
 				"desc": "You really don't wanna swallow that",
 				"chance": getSubSpitOutChance(100.0, 60.0),
