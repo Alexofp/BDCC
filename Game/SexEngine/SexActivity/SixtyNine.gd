@@ -178,12 +178,12 @@ func doDomAction(_id, _actionInfo):
 	
 func _domActions():
 	var actions = []
-	actions.append({
-		"id": "tease",
-		"score": 1.0,
-		"name": "Tease "+BodypartSlot.getVisibleName(domFocus),
-		"desc": "Tease them!",
-	})
+#	actions.append({
+#		"id": "tease",
+#		"score": 1.0,
+#		"name": "Tease "+BodypartSlot.getVisibleName(domFocus),
+#		"desc": "Tease them!",
+#	})
 	
 	if(getSub().getFirstItemThatCoversBodypart(domFocus) == null):
 		if(getDom().hasReachableVagina() && getDom().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) == null):

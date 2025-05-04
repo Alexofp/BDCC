@@ -38,6 +38,10 @@ func canStartTransformation(_tfID:String) -> bool:
 	if(!getChar().isDynamicCharacter() && !getChar().isPlayer()):
 		return false
 	
+	if(getChar().isPlayer()):
+		var encounterSettings = GM.main.getEncounterSettings()
+		if(encounterSettings.getTFWeight(_tfID) <= 0.0): # If you disabled a TF, you probably don't want it
+			return false
 	
 	# Skip tags checking if tf is allowed to stack and we already have one
 	if(newTF.canTFStack()):

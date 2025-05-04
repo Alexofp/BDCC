@@ -387,7 +387,7 @@ func setBoneOffset(boneName: String, offset: Vector3):
 func setButtScale(buttScale: float, tailScale:float = 1.0):
 	var buttScaleMod = 1.0 + clamp(buttScale - 1.0, 0.0, 0.2)
 	setBoneScaleAndOffset("DeformButt", buttScale*buttScaleMod, Vector3(-0.109556, -0.109556, 0.0)*clamp((buttScale-1.0)*3, 0.0, 1.0))
-	setBoneScaleAndOffset("Tail1", tailScale, Vector3(0.409556, 0.409556, 0.0)*max(buttScale-1.0, 0.0))
+	setBoneScaleAndOffset("Tail1", tailScale, Vector3(0.0,0.0,0.05)+Vector3(0.409556, 0.409556, 0.0)*max(buttScale-1.0, 0.0))
 
 func setBreastsScale(breastsScale: float):
 	var mul = 0.0

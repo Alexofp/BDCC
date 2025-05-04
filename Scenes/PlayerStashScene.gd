@@ -76,7 +76,8 @@ func _react(_action: String, _args):
 		var newItem = item.splitAmount(_args[1])
 		
 		if(newItem != null):
-			#GM.pc.addCredits(-newItem.getAmount())
+			if(newItem.id == "WorkCredit"):
+				GM.pc.addCredits(-newItem.getAmount())
 			GlobalRegistry.getCharacter("playerstash").getInventory().addItem(newItem)
 		
 		return

@@ -707,7 +707,7 @@ func getDatapackEditVars():
 
 func applyDatapackEditVar(_id, _value):
 	if(_id == "clothesColor"):
-		clothesColor = _value
+		clothesColor = Util.tryFixColor(_value, false)
 	if(_id == "restraintLevel"):
 		restraintData.setLevel(_value)
 	if(_id == "aiWontResist"):

@@ -31,6 +31,9 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	if(!dom.hasReachablePenis() || dom.getInventory().hasSlotEquipped(InventorySlot.Penis) || dom.getFirstItemThatCoversBodypart(BodypartSlot.Penis) != null):
 		return []
 	
+	if(_subInfo.shouldFullyObey()):
+		return []
+	
 	actions.append({
 		name = "Beg to use condom",
 		desc = "Ask the dom to put on a condom",
