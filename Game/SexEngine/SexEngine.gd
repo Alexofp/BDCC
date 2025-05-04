@@ -745,6 +745,35 @@ func processAIActions(isDom = true, playerIsHypnotized = false):
 			var importantScores = []
 			#var importantScore = 0.0
 			
+			if(playerIsHypnotized && (personID == "pc")):
+				# it's very likely that the scores for most of these are already at <= 0 as a result
+				# of setting subInfo.resistance to 0.0 for the duration of OBEY turn, but we can
+				# exclude them here too, just to be safe & to allow adding exceptions if needed
+				var resistingActivityIDs = ["SubBegToPutOnACondom"]
+				var resistingActionIDs = ["begtopullout", "bite", "coverbutt", "escape", "noteatit", "pullaway", "refuse", "resist", "resistdometake", "resistduringfuck", "resistForceCanApply", "spitpillout", "throwoff"]
+				var resistingBasicActionArgs = ["kick", "punch", "struggle"]
+
+				# will be chosen even with score <= 0 (unless a more important action is available)
+				var importantActionIDs = ["eatit", "swallowforced"]
+
+				var obeyingActions = []
+				var obeyingActionsScores = []
+				for actionInfo in possibleActions:
+					var isImportantAction:bool = actionInfo.has("action") && (actionInfo.action.id in importantActionIDs)
+					if(isImportantAction):
+						actionInfo["priority"] = 1000
+
+					var isResistingActivity:bool = (str(actionInfo.activityID) in resistingActivityIDs)
+					var isResistingAction:bool = actionInfo.has("action") && (actionInfo.action.id in resistingActionIDs)
+					var isResistingBasicAction:bool = (str(actionInfo.activityID) == "SubBasicActions") && actionInfo.has("args") && (actionInfo.args[0] != null) && (actionInfo.args[0] in resistingBasicActionArgs)
+					if(!isResistingActivity && !isResistingAction && !isResistingBasicAction):
+						obeyingActions.append(actionInfo)
+						obeyingActionsScores.append(actionInfo["score"])
+				if(len(obeyingActions) < 1):
+					continue
+				possibleActions = obeyingActions
+				actionsScores = obeyingActionsScores
+			
 			var totalScore = 0.0
 			for actionInfo in possibleActions:
 				var thescore = actionInfo["score"]
@@ -997,9 +1026,12 @@ func processScene():
 func doAction(_actionInfo):
 	if(_actionInfo["id"] == "obey"):
 		messages.clear()
+		var pcSubResistance:float = getSubInfo("pc").resistance
+		getSubInfo("pc").resistance = 0.0
 		processAIActions(true, true)
 		processTurn()
 		processAIActions(false, true)
+		getSubInfo("pc").resistance = pcSubResistance
 	if(_actionInfo["id"] == "continue"):
 		messages.clear()
 		processAIActions(true)
