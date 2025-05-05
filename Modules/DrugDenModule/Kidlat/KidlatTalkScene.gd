@@ -319,7 +319,7 @@ func _run():
 
 		saynn("[say=pc]How about a bit of a sexy time?[/say]")
 
-		saynn("For a moment, Kidlat just stares.. But then, a playful grind spreads over her face as she walks up to you.")
+		saynn("For a moment, Kidlat just stares.. But then, a playful grin spreads over her face as she walks up to you.")
 
 		saynn("[say=kidlat]I'm always up for some sexy time~. Let me take the lead, luv..[/say]")
 

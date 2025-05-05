@@ -82,7 +82,7 @@ func _run():
 
 		saynn("[say=kidlat]I swear.. don't toy with me.. whoever you are..[/say]")
 
-		saynn("Her bratty is gone.. replaced with not-so-subtle desperation that she can't hide anymore. Your hands find her breasts again, fingers immediately seeking her stiff nipples. You roll them firmly, pinching and tugging.. until her legs begin to shaky, unable to resist the electric pulses shooting through her body.")
+		saynn("Her brattiness is gone.. replaced with not-so-subtle desperation that she can't hide anymore. Your hands find her breasts again, fingers immediately seeking her stiff nipples. You roll them firmly, pinching and tugging.. until her legs begin to shake, unable to resist the electric pulses shooting through her body.")
 
 		saynn("[say=kidlat]Hhh.m..[/say]")
 
