@@ -1484,12 +1484,16 @@ func createStageScene(id: String):
 	
 	if(stageScenes[id] == null && hasCachedID(CACHE_STAGESCENE, id)):
 		var item:PackedScene = load(getCachedPath(CACHE_STAGESCENE, id))
-		var itemObject = item.instance()
-		stageScenes[itemObject.id] = item
-		var possibleStates = itemObject.getSupportedStates()
-		if(possibleStates != null && possibleStates.size() > 0):
-			stageScenesCachedStates[itemObject.id] = possibleStates
-		return itemObject
+		if(item):
+			var itemObject = item.instance()
+			stageScenes[itemObject.id] = item
+			var possibleStates = itemObject.getSupportedStates()
+			if(possibleStates != null && possibleStates.size() > 0):
+				stageScenesCachedStates[itemObject.id] = possibleStates
+			return itemObject
+		else:
+			Log.printerr("ERROR: stage scene with the id "+id+" wasn't found (cache error)")
+			return null
 	
 	return stageScenes[id].instance()
 
