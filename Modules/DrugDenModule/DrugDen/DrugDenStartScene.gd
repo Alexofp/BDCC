@@ -19,7 +19,10 @@ func _run():
 		
 		saynn("Do you wanna start a new run?")
 		
-		addButton("New run", "Start exploring the tunnels", "do_start")
+		if(!GM.pc.isWearingPortalPanties()):
+			addDisabledButton("New run", "Your portal panties have bluespace tech in them which will interfere with Eliza's nanobots. Take them off first!")
+		else:
+			addButton("New run", "Start exploring the tunnels", "do_start")
 		addButton("Cancel", "You changed your mind!", "endthescene")
 
 	if(state == "do_start"):

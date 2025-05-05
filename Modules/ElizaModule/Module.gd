@@ -78,6 +78,7 @@ func _init():
 		"res://Modules/ElizaModule/Science/ElizaBringNpcToBeTestedEvent.gd",
 		"res://Modules/ElizaModule/Chapter0/ElizaQuestEvent.gd",
 		"res://Modules/ElizaModule/Chapter0/ElizaQuestReactEvent.gd",
+		"res://Modules/ElizaModule/Science/GetStrangePillFromDefeatedNPCEvent.gd",
 	]
 	quests = [
 		"res://Modules/ElizaModule/Chapter0/ElizaQuest.gd",

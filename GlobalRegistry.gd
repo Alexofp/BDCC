@@ -168,6 +168,7 @@ var orgasmLustActions: Array = []
 var lootTables: Dictionary = {}
 var lootTablesClasses: Dictionary = {}
 var lootLists: Dictionary = {}
+var lootListsAll: Array = []
 var lootListsByCharacter: Dictionary = {}
 var lootListsByBattle: Dictionary = {}
 var fightClubFightersByRank: Dictionary = {}
@@ -1560,7 +1561,9 @@ func registerLootList(path: String):
 		if(!lootListsByBattle.has(id)):
 			lootListsByBattle[id] = []
 		lootListsByBattle[id].append(itemObject)
-
+	if(itemObject.handlesAll):
+		lootListsAll.append(itemObject)
+	
 func registerLootListFolder(folder: String):
 	var dir = Directory.new()
 	if dir.open(folder) == OK:
@@ -1583,6 +1586,9 @@ func getLootLists(id: String):
 	if(!lootLists.has(id)):
 		return []
 	return lootLists[id]
+
+func getLootListsAll():
+	return lootListsAll
 
 func getLootListsByCharacter(charID: String):
 	if(!lootListsByCharacter.has(charID)):

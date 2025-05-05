@@ -49,6 +49,14 @@ func getPossibleLoot(characterID, battleName):
 			if(newLoot is Array):
 				resultLoot.append_array(newLoot)
 	
+	for allLootList in GlobalRegistry.getLootListsAll():
+		if(handledLists.has(allLootList)):
+			continue
+		handledLists[allLootList] = true
+		var newLoot = allLootList.getLoot(id, characterID, battleName)
+		if(newLoot is Array):
+			resultLoot.append_array(newLoot)
+	
 	return resultLoot
 
 func generate(characterID = null, battleName = null):
