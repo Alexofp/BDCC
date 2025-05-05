@@ -104,6 +104,10 @@ func onSwitchFrom(_otherActivity, _args):
 	return
 
 func processTurn():
+	if(state == "order"):
+		if(subInfo.isUnconscious()):
+			state = ""
+	
 	if(state == "sex"):
 		if(domFocus == BodypartSlot.Vagina && !getSub().hasReachableVagina()):
 			state = ""
@@ -184,33 +188,36 @@ func _domActions():
 #		"name": "Tease "+BodypartSlot.getVisibleName(domFocus),
 #		"desc": "Tease them!",
 #	})
+	var isSubUncon:bool = subInfo.isUnconscious()
 	
 	if(getSub().getFirstItemThatCoversBodypart(domFocus) == null):
 		if(getDom().hasReachableVagina() && getDom().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) == null):
-			actions.append({
-				"id": "orderlick",
-				"score": 1.0 - domInfo.getAngerScore(),
-				"name": "Order to lick",
-				"desc": "Order them to start licking your pussy!",
-			})
+			if(!isSubUncon):
+				actions.append({
+					"id": "orderlick",
+					"score": 1.0 - domInfo.getAngerScore(),
+					"name": "Order to lick",
+					"desc": "Order them to start licking your pussy!",
+				})
 			actions.append({
 				"id": "forcelick",
-				"score": domInfo.getAngerScore(),
+				"score": domInfo.getAngerScore() if !isSubUncon else 1.0,
 				"name": "Force to lick",
 				"desc": "Force the sub to start licking you off!",
 				"chance": getDomForceChance(),
 			})
 
 		if(getDom().hasReachablePenis() && getDom().getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
-			actions.append({
-				"id": "ordersuck",
-				"score": 1.0 - domInfo.getAngerScore(),
-				"name": "Order to suck",
-				"desc": "Order them to start sucking your cock!",
-			})
+			if(!isSubUncon):
+				actions.append({
+					"id": "ordersuck",
+					"score": 1.0 - domInfo.getAngerScore(),
+					"name": "Order to suck",
+					"desc": "Order them to start sucking your cock!",
+				})
 			actions.append({
 				"id": "forcesuck",
-				"score": domInfo.getAngerScore(),
+				"score": domInfo.getAngerScore() if !isSubUncon else 1.0,
 				"name": "Force to suck",
 				"desc": "Force the sub to start sucking you off!",
 				"chance": getDomForceChance(),
@@ -518,7 +525,7 @@ func getSubOrgasmHandlePriority():
 	return 10
 
 func getDomForceChance():
-	if(getSub().isBitingBlocked()):
+	if(getSub().isBitingBlocked() || subInfo.isUnconscious()):
 		return 100.0
 	if(subInfo.resistance <= 0.01):
 		return 100.0

@@ -1,10 +1,10 @@
 extends LootList
 
 func _init():
-	handlesIds = ["guard", "inmate", "engineer", "medical"]
+	handlesAll = true
 
 func getLoot(_id, _characterID, _battleName):
-	if(GM.main == null || !is_instance_valid(GM.main)):
+	if(GM.main == null || !is_instance_valid(GM.main) || !GM.main.SCI):
 		return []
 	
 	if(_characterID == GM.main.SCI.peekRandomNpcIDForStrangeDrug()):

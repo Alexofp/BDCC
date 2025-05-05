@@ -1191,6 +1191,11 @@ func addDefeatButtons(rolePC:String, _roleNPC:String):
 		if(involvedPawns.has(_roleNPC)):
 			GM.ES.triggerRun(Trigger.DefeatedDynamicNPC, [getRoleID(_roleNPC)])
 
+func addDefeatButtonsOnlyEvent(rolePC:String, _roleNPC:String):
+	if(involvedPawns.has(rolePC) && getRolePawn(rolePC).isPlayer()):
+		if(involvedPawns.has(_roleNPC)):
+			GM.ES.triggerRun(Trigger.DefeatedDynamicNPC, [getRoleID(_roleNPC)])
+
 func triggerTalkRunEvents(role:String):
 	if(isPlayersTurn()):
 		GM.ES.triggerRun(Trigger.TalkingToDynamicNPC, [getRoleID(role)])

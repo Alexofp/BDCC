@@ -33,7 +33,7 @@ func _run():
 			"Heh. HEH. Ohhh, you’re fucked, buddy. You don’t walk into my kingdom and just leave. I don’t like SHARING.",
 			"Hey, guys! Look at this dumb fuck. Thinks {pc.he} can just waltz in and take my shit! HAH! Let’s see if you can still breathe after I’m done with you!",
 			"Mmmnnghh. My head’s buzzing, my hands are itching, and you look like a fucking punching bag. Lucky you!",
-			"YOU WANT STEAL MY HIT FROM ME? YOU FUCKER, NO ONE STEALS MY HIT FROM ME!",
+			"YOU WANT TO STEAL MY HIT FROM ME? YOU FUCKER, NO ONE STEALS MY HIT FROM ME!",
 		])+"[/say]")
 		
 		saynn("Looks like you will have to fight {npc.him}..")

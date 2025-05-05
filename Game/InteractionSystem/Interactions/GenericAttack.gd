@@ -52,6 +52,8 @@ func starter_won_text():
 
 	addAction("punish", "Punish", "Have some fun!", "punish", 1.0, 60, {})
 	addAction("leave", "Leave", "Just leave", "default", 0.1, 60, {})
+	
+	addDefeatButtonsOnlyEvent("starter", "reacter")
 
 func starter_won_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "punish"):
@@ -83,6 +85,8 @@ func reacter_won_text():
 
 	addAction("punish", "Punish", "Punish them for attacking you!", "punish", 1.0, 60, {})
 	addAction("leave", "Leave", "Just leave", "surrender", 1.0, 60, {})
+	
+	addDefeatButtonsOnlyEvent("reacter", "starter")
 
 func reacter_won_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "punish"):

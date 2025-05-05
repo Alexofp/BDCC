@@ -281,7 +281,14 @@ func setObeyMode(_newObey:bool):
 	obeyMode = _newObey
 
 func shouldFullyObey() -> bool:
-	return obeyMode
+	if(obeyMode):
+		return true
+	
+	var forcedObedience:float = clamp(getChar().getForcedObedienceLevel(), 0.0, 1.0)
+	if(forcedObedience >= 1.0):
+		return true
+	
+	return false
 
 func saveData():
 	var data = .saveData()

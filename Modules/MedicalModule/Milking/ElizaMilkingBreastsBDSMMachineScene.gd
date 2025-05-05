@@ -72,7 +72,7 @@ func _run():
 
 		saynn("Your body is wonderful. You're amazing.")
 
-		saynn("Two sources of stimulations combine.. a constant, relentless suction on your breasts.. and the vibrating pressure against your "+str("slit" if !isAnal else "anal ring and taint")+". It feels so good, your whole body begins trying to squirm, your muscles hardly obey your brain..")
+		saynn("Two sources of stimulations combine together.. a constant, relentless suction on your breasts.. and the vibrating pressure against your "+str("slit" if !isAnal else "anal ring and taint")+". It feels so good, your whole body begins trying to squirm, your muscles hardly obey your brain..")
 
 		saynn("Forget everything else.. focus on the milking..")
 
@@ -147,7 +147,7 @@ func _run():
 
 		saynn("The dildo keeps pounding you, aligned in such a way that it can hit your pleasure spot with most efficiency.."+str(" your prostate.." if (isAnal && GM.pc.hasPenis()) else "")+""+str(" your g-spot.." if (!isAnal) else "")+"")
 
-		saynn("Two sources of stimulations combine.. a constant, relentless suction on your breasts.. and an intense fucking of your "+str("pussy slit" if !isAnal else "{pc.analStretch} anus")+". It feels so good, your whole body begins trying to squirm, your muscles hardly obey your brain..")
+		saynn("Two sources of stimulations combine together.. a constant, relentless suction on your breasts.. and an intense fucking of your "+str("pussy slit" if !isAnal else "{pc.analStretch} anus")+". It feels so good, your whole body begins trying to squirm, your muscles hardly obey your brain..")
 
 		saynn("Forget everything else.. focus on breeding.. focus on milking..")
 
@@ -220,7 +220,7 @@ func _run():
 		else:
 			saynn("The tools keep pounding you, aligned in such a way that they can hit all of your buttons with most efficiency.."+str(" your prostate gets smashed again and again, your {pc.penis} leaking pre non-stop.." if (GM.pc.hasPenis()) else "")+"")
 
-		saynn("Three sources of stimulations combine.. a constant, relentless suction on your breasts.. and an intense fucking of your "+str("holes" if !isAnal else "stretched-wide asshole")+". It feels so good, your whole body begins trying to squirm, your muscles hardly obey your brain..")
+		saynn("Three sources of stimulations combine together.. a constant, relentless suction on your breasts.. and an intense fucking of your "+str("holes" if !isAnal else "stretched-wide asshole")+". It feels so good, your whole body begins trying to squirm, your muscles hardly obey your brain..")
 
 		saynn("Forget everything else.. focus on breeding.. focus on milking..")
 

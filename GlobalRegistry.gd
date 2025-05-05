@@ -3,7 +3,7 @@ extends Node
 var game_version_major = 0
 var game_version_minor = 1
 var game_version_revision = 8
-var game_version_suffix = "fix2"
+var game_version_suffix = "fix3"
 
 var contributorsCredits:Dictionary = {
 	"Max-Maxou": [
@@ -168,6 +168,7 @@ var orgasmLustActions: Array = []
 var lootTables: Dictionary = {}
 var lootTablesClasses: Dictionary = {}
 var lootLists: Dictionary = {}
+var lootListsAll: Array = []
 var lootListsByCharacter: Dictionary = {}
 var lootListsByBattle: Dictionary = {}
 var fightClubFightersByRank: Dictionary = {}
@@ -1483,12 +1484,16 @@ func createStageScene(id: String):
 	
 	if(stageScenes[id] == null && hasCachedID(CACHE_STAGESCENE, id)):
 		var item:PackedScene = load(getCachedPath(CACHE_STAGESCENE, id))
-		var itemObject = item.instance()
-		stageScenes[itemObject.id] = item
-		var possibleStates = itemObject.getSupportedStates()
-		if(possibleStates != null && possibleStates.size() > 0):
-			stageScenesCachedStates[itemObject.id] = possibleStates
-		return itemObject
+		if(item):
+			var itemObject = item.instance()
+			stageScenes[itemObject.id] = item
+			var possibleStates = itemObject.getSupportedStates()
+			if(possibleStates != null && possibleStates.size() > 0):
+				stageScenesCachedStates[itemObject.id] = possibleStates
+			return itemObject
+		else:
+			Log.printerr("ERROR: stage scene with the id "+id+" wasn't found (cache error)")
+			return null
 	
 	return stageScenes[id].instance()
 
@@ -1560,7 +1565,9 @@ func registerLootList(path: String):
 		if(!lootListsByBattle.has(id)):
 			lootListsByBattle[id] = []
 		lootListsByBattle[id].append(itemObject)
-
+	if(itemObject.handlesAll):
+		lootListsAll.append(itemObject)
+	
 func registerLootListFolder(folder: String):
 	var dir = Directory.new()
 	if dir.open(folder) == OK:
@@ -1583,6 +1590,9 @@ func getLootLists(id: String):
 	if(!lootLists.has(id)):
 		return []
 	return lootLists[id]
+
+func getLootListsAll():
+	return lootListsAll
 
 func getLootListsByCharacter(charID: String):
 	if(!lootListsByCharacter.has(charID)):

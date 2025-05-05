@@ -390,7 +390,7 @@ func _run():
 
 		saynn("[say=eliza]But I did answer. It's sugar. Or sucrose if you want to be precise.[/say]")
 
-		saynn("She wiggles your glass a bit, to make sure the pill fully dissolves in it. The way it looked.. it sure kinda reminded you of those weird")
+		saynn("She wiggles your glass a bit, to make sure the pill fully dissolves in it. The way it looked.. it sure kinda reminded you of those weird ones.")
 
 		saynn("[say=eliza]Now.. Do you trust this feline that's sitting in front of you? And I'm not looking for just words here~.[/say]")
 
@@ -690,7 +690,7 @@ func _run():
 		playAnimation(StageScene.PawJobUnderTable, "start", {pc="pc", npc="eliza"})
 		saynn("[say=pc]Pink? I remember it being pink-ish.[/say]")
 
-		saynn("[say=eliza]Yep~. You've very observant.[/say]")
+		saynn("[say=eliza]Yep~. You're very observant.[/say]")
 
 		saynn("Wasn't too hard..")
 
@@ -858,7 +858,7 @@ func _run():
 
 		saynn("[say=eliza]Yeah, he always supports me. He tried to talk mom out of it.. but she was keen on having me as far as possible from chemistry. She punished me by sending me here, to this isolated prison, to be a doctor.[/say]")
 
-		saynn("Her mother would rather let her stay around dangerous inmates rather than doing chemistry.")
+		saynn("Her mother would rather let her stay around dangerous inmates than let her do chemistry.")
 
 		saynn("A little smile shines on her face.")
 
@@ -872,7 +872,7 @@ func _run():
 
 		saynn("Somehow, she doesn't sound.. so sure.")
 
-		saynn("[say=pc]Wasn't that your dream.[/say]")
+		saynn("[say=pc]Wasn't that your dream?[/say]")
 
 		saynn("[say=eliza]Yeah, it is. Still is. It's just..[/say]")
 
