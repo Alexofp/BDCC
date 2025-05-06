@@ -5,16 +5,18 @@ var activities:Array = []
 var revealedBodyparts: Dictionary = {}
 var messages:Array = []
 
-var doms = {}
-var subs = {}
-var trackedItems = {}
+var doms:Dictionary = {}
+var subs:Dictionary = {}
+var trackedItems:Dictionary = {}
 var inventoryToSaveItemsTo:LightInventory = null
 
-var currentLastActivityID = 0
+var currentLastActivityID:int = 0
 
-var sexEnded = false
-var sexResult = {}
+# Result stuff
+var sexEnded:bool = false
+var sexResult:Dictionary = {}
 
+# Configuration
 var sexType:SexTypeBase
 
 var disabledGoals:Dictionary = {}

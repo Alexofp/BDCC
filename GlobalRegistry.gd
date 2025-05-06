@@ -606,8 +606,8 @@ func registerEverything():
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
-	#registerSexActionsFolder("res://Game/SexEngine/SexActions/")
-	registerSexActivitiesFolder("res://Game/SexEngine/SexActivity/")
+	#TODO: CHANGE THIS BACK TO THE NORMAL FOLDER AFTER REFACTOR
+	registerSexActivitiesFolder("res://Game/SexEngine/SexActivityNew/")
 	registerFetishesFolder("res://Game/SexEngine/Fetish/")
 	registerSexGoalsFolder("res://Game/SexEngine/Goal/")
 	registerSexTypeFolder("res://Game/SexEngine/SexType/")

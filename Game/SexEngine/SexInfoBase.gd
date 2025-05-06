@@ -2,7 +2,7 @@ extends Reference
 class_name SexInfoBase
 
 var sexEngineRef: WeakRef
-var charID = ""
+var charID:String = ""
 var timesCame: int = 0
 var memory:Dictionary = {}
 var tick:int = 0
@@ -29,6 +29,9 @@ func getChar() -> BaseCharacter:
 		return null
 	
 	return GlobalRegistry.getCharacter(charID)
+
+func getCharID() -> String:
+	return charID
 
 func getInfoString():
 	var character = getChar()

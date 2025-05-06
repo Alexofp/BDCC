@@ -15,7 +15,7 @@ func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 	if(!_subInfo.getChar().hasNonFlatBreasts()):
 		return 0.0
 	
-	if(subInfo.getChar().canBeMilked()):
+	if(_subInfo.getChar().canBeMilked()):
 		return max(0.0, _domInfo.fetishScore({Fetish.Lactation: 0.02}))
 	return max(0.0, _domInfo.fetishScore({Fetish.Lactation: 0.01}))
 
