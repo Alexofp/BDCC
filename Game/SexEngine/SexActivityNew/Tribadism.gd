@@ -54,8 +54,7 @@ func startActivity(_args):
 #	])
 	addText("{dom.You} {dom.youVerb('lie')} down and {dom.youVerb('interlock')} legs with {sub.you}, ready to start grinding "+RNG.pick(["pussies", "pussy slits", "kitties", "clits"])+" against each other"+throughTheClothing+"!")
 	
-	stimulate(SUB_0, S_VAGINA, DOM_0, S_VAGINA, I_TEASE, [Fetish.Tribadism])
-	stimulate(DOM_0, S_VAGINA, SUB_0, S_VAGINA, I_TEASE, [Fetish.Tribadism])
+	stimulate(DOM_0, S_VAGINA, SUB_0, S_VAGINA, I_TEASE, Fetish.Tribadism)
 	
 	#affectSub(subInfo.fetishScore({Fetish.Tribadism: 1.0}), 0.1, -0.1, -0.01)
 	#affectDom(domInfo.fetishScore({Fetish.Tribadism: 1.0}), 0.1, -0.03)
@@ -77,8 +76,7 @@ func processTurn():
 			"{dom.You} "+RNG.pick(["dry {dom.youVerb('hump')}", "dry {dom.youVerb('fuck')}"])+" {sub.you}, stimulating each others "+RNG.pick(["pussies", "slits", "kitties"])+".",
 		])
 		
-		stimulate(SUB_0, S_VAGINA, DOM_0, S_VAGINA, I_SEX, [Fetish.Tribadism])
-		stimulate(DOM_0, S_VAGINA, SUB_0, S_VAGINA, I_SEX, [Fetish.Tribadism])
+		stimulate(DOM_0, S_VAGINA, SUB_0, S_VAGINA, I_SEX, Fetish.Tribadism)
 #
 #		affectSub(subInfo.fetishScore({Fetish.Tribadism: 1.0}), 0.1, -0.1, -0.01)
 #		affectDom(domInfo.fetishScore({Fetish.Tribadism: 1.0}), 0.1, -0.03)
@@ -113,6 +111,7 @@ func processTurn():
 				" This amount of pleasure is gonna make {sub.you} cum soon!",
 			])
 		
+		addText(text)
 		return {text = text}
 		
 	return

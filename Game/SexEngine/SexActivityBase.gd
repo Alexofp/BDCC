@@ -41,6 +41,11 @@ const I_SLOWSEX = SexActIntensity.SlowSex
 const I_SEX = SexActIntensity.Sex
 const I_HARDSEX = SexActIntensity.HardSex
 
+const A_PRIORITY = "priority"
+const A_CHANCE = "chance"
+const A_ARGS = "args"
+const A_CATEGORY = "category"
+
 func getDomOrSubInfo(_indx:int) -> SexInfoBase:
 	if(_indx >= 0):
 		return getDomInfo(_indx)
@@ -54,16 +59,157 @@ func getDomOrSubID(_indx:int) -> String:
 		return getDomID(_indx)
 	return getSubID(-_indx-1)
 
-func stimulate(_indx1:int, _slot1:String, _indx2:int, _slot2:String, _intensity:int = SexActIntensity.Sex, _fetishes:Array=[]):
-	#var info1:SexInfoBase = getDomOrSubInfo(_indx1)
-	#var info2:SexInfoBase = getDomOrSubInfo(_indx2)
-	pass
+func unClampValue(_theVal:float, _theBorder:float) -> float:
+	if(_theVal >= 0.0 && _theVal <= _theBorder):
+		_theVal = _theBorder
+	if(_theVal < 0.0 && _theVal > -_theBorder):
+		_theVal = -_theBorder
+	return _theVal
 
-func talk(_indx1:int, _indx2:int, _talkID:int):
-	pass
+func exposeToFetish(_indxTarget:int, _fetishID:String, _intensity:int, _indxExposer:int):
+	var info1:SexInfoBase = getDomOrSubInfo(_indxTarget)
+	
+	var fetishScore:float = info1.fetishScore({_fetishID:1.0}) if _fetishID != "" else 1.0
+	fetishScore = unClampValue(fetishScore, 0.2)
+	
+	if(info1 is SexSubInfo):
+		info1.addLust(10.0*fetishScore)
+		info1.addResistance(-0.1*fetishScore)
+		info1.addFear(-0.01*fetishScore)
+	
+	elif(info1 is SexDomInfo):
+		info1.addLust(10.0*fetishScore)
+		info1.addAnger(-0.05*fetishScore)
+
+func stimulate(_indxTarget:int, _slot1:String, _indxActor:int, _slot2:String, _intensity:int, _fetishID:String):
+	var info1:SexInfoBase = getDomOrSubInfo(_indxTarget)
+	var info2:SexInfoBase = getDomOrSubInfo(_indxActor)
+	
+	exposeToFetish(_indxTarget, _fetishID, _intensity, _indxActor)
+	exposeToFetish(_indxActor, _fetishID, _intensity, _indxActor) # Target is same as Exposer?
+	
+	var fetishScore:float = info1.fetishScore({_fetishID:1.0}) if _fetishID != "" else 1.0
+	fetishScore = unClampValue(fetishScore, 0.2)
+	var fetishScore2:float = info2.fetishScore({_fetishID:1.0}) if _fetishID != "" else 1.0
+	fetishScore2 = unClampValue(fetishScore2, 0.2)
+	
+	if(_intensity == SexActIntensity.Tease):
+		info1.addArousalForeplay(0.1 + fetishScore*0.05)
+		info2.addArousalForeplay(0.1 + fetishScore2*0.05)
+	elif(_intensity == SexActIntensity.SlowSex):
+		info1.stimulateArousalZone(0.1, _slot1, 0.5)
+		info2.stimulateArousalZone(0.1, _slot2, 0.5)
+	elif(_intensity == SexActIntensity.Sex):
+		info1.stimulateArousalZone(0.2, _slot1, 1.0)
+		info2.stimulateArousalZone(0.2, _slot2, 1.0)
+	elif(_intensity == SexActIntensity.HardSex):
+		info1.stimulateArousalZone(0.3, _slot1, 1.5)
+		info2.stimulateArousalZone(0.3, _slot2, 1.5)
+
+func addOutputRaw(_rawEntry:Array):
+	getSexEngine().addOutputRaw(_rawEntry)
+
+func talkText(_indx1:int, _text:String):
+	var theInfo := getDomOrSubInfo(_indx1)
+	addOutputRaw([SexEngine.OUTPUT_SAY, theInfo.getCharID(), processText(_text)])
+
+func talk(_indx1:int, _indx2:int, reactionID:int):
+	# Check if can talk
+	var theInfo := getDomOrSubInfo(_indx1)
+	if(theInfo.isUnconscious()):
+		return
+	var theInfo2 := getDomOrSubInfo(_indx2)
+	
+	var theText:String = ""
+	if(theInfo is SexDomInfo && theInfo2 is SexSubInfo):
+		theText = theInfo.getChar().getVoice().getDomReaction(reactionID, getSexEngine(), theInfo, theInfo2)
+		
+		if(theText != ""):
+			addOutputRaw([SexEngine.OUTPUT_SAY, theInfo.getCharID(), GM.ui.processString(theText, {
+				dom = theInfo.getCharID(),
+				sub = theInfo2.getCharID(),
+			})])
+		
+	elif(theInfo is SexSubInfo && theInfo2 is SexDomInfo):
+		theText = theInfo.getChar().getVoice().getSubReaction(reactionID, getSexEngine(), theInfo2, theInfo)
+	
+		if(theText != ""):
+			addOutputRaw([SexEngine.OUTPUT_SAY, theInfo.getCharID(), GM.ui.processString(theText, {
+				dom = theInfo2.getCharID(),
+				sub = theInfo.getCharID(),
+			})])
+
 
 func addText(_text:String):
-	print(_text)
+	addOutputRaw([SexEngine.OUTPUT_TEXT, processText(_text)])
+
+func processText(_text:String) -> String:
+	var theOverrides:Dictionary = {}
+	var _i:int = 0
+	for theSubInfo in subs:
+		if(_i == 0):
+			theOverrides["sub"] = theSubInfo.getCharID()
+		else:
+			theOverrides["sub"+str(_i+1)] = theSubInfo.getCharID()
+		_i += 1
+	_i = 0
+	for theDomInfo in doms:
+		if(_i == 0):
+			theOverrides["dom"] = theDomInfo.getCharID()
+		else:
+			theOverrides["dom"+str(_i+1)] = theDomInfo.getCharID()
+		_i += 1
+	return GM.ui.processString(_text, theOverrides)
+
+func convertCharIDToIndx(_charID:String) -> int:
+	for _i in range(doms.size()):
+		if(doms[_i].getCharID() == _charID):
+			return _i
+	for _i in range(subs.size()):
+		if(subs[_i].getCharID() == _charID):
+			return -_i-1
+	return -9999
+
+func doActionForCharID(_charID:String, _action:Dictionary):
+	var _indx:int = convertCharIDToIndx(_charID)
+	if(_indx <= -9999):
+		return
+	
+	if(has_method(state+"_doAction")):
+		call(state+"_doAction", _indx, _action["id"], _action)
+	doAction(_indx, _action["id"], _action)
+
+var actionsResult:Array
+func getActionsForCharID(_charID:String) -> Array:
+	actionsResult = []
+	
+	var _indx:int = convertCharIDToIndx(_charID)
+	if(_indx <= -9999):
+		return []
+	
+	if(has_method(state+"_getActions")):
+		call(state+"_getActions", _indx)
+	getActions(_indx)
+	
+	return actionsResult
+
+func getActions(_indx:int):
+	pass
+	
+func doAction(_indx:int, _actionID:String, _action:Dictionary):
+	pass
+
+func addAction(_aID:String, _aScore:float, _aName:String, _aDesc:String, _aExtra:Dictionary = {}):
+	var theEntry:Dictionary = {
+		id = _aID,
+		score = _aScore,
+		name = _aName,
+		desc = _aDesc,
+	}
+	for field in _aExtra:
+		theEntry[field] = _aExtra[field]
+	
+	actionsResult.append(theEntry)
 
 func getSubInfo(_indx:int = 0) -> SexSubInfo:
 	if(_indx < 0 || _indx >= subs.size()):

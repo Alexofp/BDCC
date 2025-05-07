@@ -23,6 +23,44 @@ var disabledGoals:Dictionary = {}
 var bondageDisabled:bool = false
 var subMustGoUnconscious:bool = false
 
+var outputRaw:Array = []
+const OUTPUT_TEXT = 0
+const OUTPUT_SAY = 1
+const OUTPUT_SEPARATOR = 2
+
+func clearOutputRaw():
+	outputRaw.clear()
+
+func addOutputRaw(_rawEntry:Array):
+	outputRaw.append(_rawEntry)
+
+func addOutputSeparator():
+	outputRaw.append([OUTPUT_SEPARATOR])
+
+func getFinalOutput() -> String:
+	var result:String = ""
+	
+	var savedTag:int = OUTPUT_TEXT
+	#var savedCharID:String = ""
+	
+	for outputEntry in outputRaw:
+		var isEmpt:bool = result.empty()
+		var theTag:int = outputEntry[0]
+		
+		if(theTag == OUTPUT_TEXT):
+			if(savedTag == OUTPUT_TEXT):
+				result += (" " if !isEmpt else "")+outputEntry[1]
+			else:
+				result += ("\n\n" if !isEmpt else "")+outputEntry[1]
+		elif(theTag == OUTPUT_SAY):
+			result += ("\n\n" if !isEmpt else "")+"[say="+outputEntry[1]+"]"+outputEntry[2]+"[/say]"
+		
+		savedTag = theTag
+	
+	if(result == ""):
+		return "NOTHING HAS HAPPENED, MEOW"
+	return result
+
 func initSexType(theSexType, args:Dictionary = {}):
 	if(theSexType is String):
 		theSexType = GlobalRegistry.createSexType(theSexType)
@@ -173,7 +211,7 @@ func makeActivity(id, theDomID, theSubID):
 	currentLastActivityID += 1
 	return activityObject
 
-func processText(thetext, theDomID, theSubID):
+func processText(thetext:String, theDomID:String, theSubID:String):
 	return GM.ui.processString(thetext, {dom=theDomID, sub=theSubID})
 
 func addText(thetext, theDomID, theSubID):
@@ -270,7 +308,7 @@ func switchActivity(oldActivity, newActivityID, _args = []):
 	
 	sendProcessedData(startData)
 
-func getActivityWithUniqueID(uniqueID):
+func getActivityWithUniqueID(uniqueID:int):
 	for activity in activities:
 		if(activity.uniqueID == uniqueID):
 			return activity
@@ -828,6 +866,45 @@ func getFinalText():
 	
 	return Util.join(messages, "\n\n")
 
+func getActionsForCharID(_charID:String) -> Array:
+	var result:Array = []
+	
+	if(_charID == "pc" && isSub("pc") && getSubInfo("pc").canDoActions()):
+		var forcedObedienceLevel = GM.pc.getForcedObedienceLevel()
+		if(RNG.chance(forcedObedienceLevel*100.0)):
+			result.append({
+				id = "obey",
+				name = "OBEY",
+				desc = "You have lost control of your body..",
+				priority = 999,
+			})
+			return result
+	
+	if(_charID == "pc"):
+		result.append({
+			id = "continue",
+			name = "Continue",
+			desc = "Just continue doing what you're doing",
+			priority = 999,
+		})
+	
+	for activity in activities:
+		if(activity.hasEnded):
+			continue
+		var activityActions:Array = activity.getActionsForCharID(_charID)
+		for actionEntry in activityActions:
+			result.append({
+				id = "action",
+				name = actionEntry["name"] if actionEntry.has("name") else "UNNAMMED ACTION",
+				desc = actionEntry["desc"] if actionEntry.has("desc") else "Do this action.",
+				score = actionEntry["score"] if actionEntry.has("score") else 0.0,
+				chance = actionEntry["chance"] if actionEntry.has("chance") else null,
+				category = actionEntry["category"] if actionEntry.has("category") else [],
+				priority = actionEntry["category"] if actionEntry.has("priority") else 0,
+				action = actionEntry,
+			})
+	return result
+
 func getActions():
 	var result = []
 	
@@ -991,6 +1068,7 @@ func getPCTarget():
 	return null
 
 func processScene():
+	clearOutputRaw()
 	messages.clear()
 	processAIActions(true)
 	processTurn()
@@ -998,6 +1076,7 @@ func processScene():
 
 func doAction(_actionInfo):
 	if(_actionInfo["id"] == "obey"):
+		clearOutputRaw()
 		messages.clear()
 		if(isSub("pc")):
 			getSubInfo("pc").setObeyMode(true)
@@ -1007,11 +1086,13 @@ func doAction(_actionInfo):
 		if(isSub("pc")):
 			getSubInfo("pc").setObeyMode(false)
 	if(_actionInfo["id"] == "continue"):
+		clearOutputRaw()
 		messages.clear()
 		processAIActions(true)
 		processTurn()
 		processAIActions(false)
 	if(_actionInfo["id"] == "domAction"):
+		clearOutputRaw()
 		messages.clear()
 		var activity = getActivityWithUniqueID(_actionInfo["activityID"])
 		doDomAction(activity, _actionInfo["action"])
@@ -1019,6 +1100,7 @@ func doAction(_actionInfo):
 		processTurn()
 		processAIActions(false)
 	if(_actionInfo["id"] == "subAction"):
+		clearOutputRaw()
 		messages.clear()
 		var activity = getActivityWithUniqueID(_actionInfo["activityID"])
 		doSubAction(activity, _actionInfo["action"])
@@ -1026,12 +1108,14 @@ func doAction(_actionInfo):
 		processTurn()
 		processAIActions(false)
 	if(_actionInfo["id"] == "startNewDomActivity"):
+		clearOutputRaw()
 		messages.clear()
 		startActivity(_actionInfo["activityID"], "pc", _actionInfo["subID"], _actionInfo["args"])
 		processAIActions(true)
 		processTurn()
 		processAIActions(false)
 	if(_actionInfo["id"] == "startNewSubActivity"):
+		clearOutputRaw()
 		messages.clear()
 		startActivity(_actionInfo["activityID"], _actionInfo["domID"], "pc", _actionInfo["args"])
 		processAIActions(true)

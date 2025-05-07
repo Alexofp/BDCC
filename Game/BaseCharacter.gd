@@ -2624,6 +2624,8 @@ func applyRandomSkin():
 	var possibleSkins = []
 	for speciesOne in species:
 		var theSpecies = GlobalRegistry.getSpecies(speciesOne)
+		if(!theSpecies):
+			continue
 		var skinType = theSpecies.getSkinType()
 		
 		for skinID in GlobalRegistry.getSkinsAllKeys():
@@ -2631,7 +2633,7 @@ func applyRandomSkin():
 			var fittingSkinTypes = theSkin.getFittingSkinTypes()
 			if(fittingSkinTypes is Dictionary && fittingSkinTypes.has(skinType)):
 				possibleSkins.append([skinID, fittingSkinTypes[skinType]])
-		
+	
 	var newSkin = RNG.pickWeightedPairs(possibleSkins)
 	
 	if(newSkin != null):

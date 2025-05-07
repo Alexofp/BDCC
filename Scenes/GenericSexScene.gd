@@ -39,7 +39,8 @@ func _initScene(_args = []):
 func _run():
 	if(state == ""):
 		sexEngine.playAnimation()
-		saynn(sexEngine.getFinalText())
+		#saynn(sexEngine.getFinalText())
+		saynn(sexEngine.getFinalOutput())
 		
 		if(sexEngine.hasSexEnded()):
 			pass

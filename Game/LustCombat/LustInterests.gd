@@ -71,6 +71,8 @@ func getOverallLikeness(_pc, isClamped:bool = false) -> float:
 	
 	for topicID in interests:
 		var topicGroup: TopicBase = GlobalRegistry.getLustTopic(topicID)
+		if(!topicGroup):
+			continue
 		var loveValue:float = Interest.getValue(interests[topicID])
 		
 		var playerValue:float = topicGroup.getTopicValue(topicID, _pc)
