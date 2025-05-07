@@ -869,6 +869,8 @@ func getFinalText():
 func getActionsForCharID(_charID:String) -> Array:
 	var result:Array = []
 	
+	var _isPC:bool = (_charID == "pc")
+	
 	if(_charID == "pc" && isSub("pc") && getSubInfo("pc").canDoActions()):
 		var forcedObedienceLevel = GM.pc.getForcedObedienceLevel()
 		if(RNG.chance(forcedObedienceLevel*100.0)):
@@ -880,7 +882,7 @@ func getActionsForCharID(_charID:String) -> Array:
 			})
 			return result
 	
-	if(_charID == "pc"):
+	if(_isPC):
 		result.append({
 			id = "continue",
 			name = "Continue",
@@ -888,21 +890,43 @@ func getActionsForCharID(_charID:String) -> Array:
 			priority = 999,
 		})
 	
-	for activity in activities:
-		if(activity.hasEnded):
-			continue
-		var activityActions:Array = activity.getActionsForCharID(_charID)
-		for actionEntry in activityActions:
-			result.append({
-				id = "action",
-				name = actionEntry["name"] if actionEntry.has("name") else "UNNAMMED ACTION",
-				desc = actionEntry["desc"] if actionEntry.has("desc") else "Do this action.",
-				score = actionEntry["score"] if actionEntry.has("score") else 0.0,
-				chance = actionEntry["chance"] if actionEntry.has("chance") else null,
-				category = actionEntry["category"] if actionEntry.has("category") else [],
-				priority = actionEntry["category"] if actionEntry.has("priority") else 0,
-				action = actionEntry,
-			})
+	var canCharDoActions:bool = false
+	if(isSub(_charID)):
+		canCharDoActions = getSubInfo(_charID).canDoActions()
+	if(isDom(_charID)):
+		canCharDoActions = getDomInfo(_charID).canDoActions()
+	
+	if(canCharDoActions):
+		for activity in activities:
+			if(activity.hasEnded):
+				continue
+			var activityActions:Array = activity.getActionsForCharID(_charID)
+			for actionEntry in activityActions:
+				result.append({
+					id = "action",
+					name = actionEntry["name"] if actionEntry.has("name") else "UNNAMMED ACTION",
+					desc = actionEntry["desc"] if actionEntry.has("desc") else "Do this action.",
+					score = actionEntry["score"] if actionEntry.has("score") else 0.0,
+					chance = actionEntry["chance"] if actionEntry.has("chance") else null,
+					category = actionEntry["category"] if actionEntry.has("category") else [],
+					priority = actionEntry["category"] if actionEntry.has("priority") else 0,
+					action = actionEntry,
+				})
+	
+	
+	
+	var importantActions:Array = []
+	for actionInfo in result:
+		if(actionInfo.has("priority") && actionInfo["priority"] >= 1000):
+			importantActions.append(actionInfo)
+		
+	if(importantActions.size() > 0):
+		if(_isPC):
+			importantActions.sort_custom(self, "sortActionsByPriority")
+		return importantActions
+	
+	if(_isPC):
+		result.sort_custom(self, "sortActionsByPriority")
 	return result
 
 func getActions():
