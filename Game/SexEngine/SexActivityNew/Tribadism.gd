@@ -42,80 +42,114 @@ func getSubTagsCheck():
 	return [SexActivityTag.VaginaUsed, SexActivityTag.HavingSex]
 
 func startActivity(_args):
-	state = ""
+	setState("")
 	
-	var clothingItem = getDom().getFirstItemThatCoversBodypart(BodypartSlot.Vagina)
-	var throughTheClothing = ""
-	if(clothingItem != null):
-		throughTheClothing = " through the "+clothingItem.getCasualName()
-	
-#	var text = RNG.pick([
-#		"{dom.You} {dom.youVerb('lie')} down and {dom.youVerb('interlock')} legs with {sub.you}, ready to start grinding "+RNG.pick(["pussies", "pussy slits", "kitties", "clits"])+" against each other"+throughTheClothing+"!",
-#	])
-	addText("{dom.You} {dom.youVerb('lie')} down and {dom.youVerb('interlock')} legs with {sub.you}, ready to start grinding "+RNG.pick(["pussies", "pussy slits", "kitties", "clits"])+" against each other"+throughTheClothing+"!")
+	addText("{dom.You} {dom.youVerb('lie')} down and {dom.youVerb('interlock')} legs with {sub.you}, ready to start grinding "+RNG.pick(["pussies", "pussy slits", "kitties", "clits"])+" against each other"+getThroughClothingText(DOM_0, BodypartSlot.Vagina)+"!")
 	
 	stimulate(DOM_0, S_VAGINA, SUB_0, S_VAGINA, I_TEASE, Fetish.Tribadism)
 	
 	#affectSub(subInfo.fetishScore({Fetish.Tribadism: 1.0}), 0.1, -0.1, -0.01)
 	#affectDom(domInfo.fetishScore({Fetish.Tribadism: 1.0}), 0.1, -0.03)
 	talk(DOM_0, SUB_0, SexReaction.AboutToRubPussiesTogether)
-	
-#	return {
-#		text = text,
-#		domSay = domReaction(SexReaction.AboutToRubPussiesTogether),
-#	}
 
 func onSwitchFrom(_otherActivity, _args):
 	return
 
-func processTurn():
-	if(state == "grinding"):
-		var text = RNG.pick([
-			"{dom.You} {dom.youVerb('grind')} {dom.yourHis} "+RNG.pick(["pussy", "clit"])+" against {sub.name}'s.",
-			"{dom.You} and {sub.you} are scissoring, grinding their "+RNG.pick(["pussies", "vulvae"])+" against each other.",
-			"{dom.You} "+RNG.pick(["dry {dom.youVerb('hump')}", "dry {dom.youVerb('fuck')}"])+" {sub.you}, stimulating each others "+RNG.pick(["pussies", "slits", "kitties"])+".",
-		])
-		
-		stimulate(DOM_0, S_VAGINA, SUB_0, S_VAGINA, I_SEX, Fetish.Tribadism)
+func grinding_processTurn():
+	addTextPick([
+		"{dom.You} {dom.youVerb('grind')} {dom.yourHis} "+RNG.pick(["pussy", "clit"])+" against {sub.name}'s.",
+		"{dom.You} and {sub.you} are scissoring, grinding their "+RNG.pick(["pussies", "vulvae"])+" against each other.",
+		"{dom.You} "+RNG.pick(["dry {dom.youVerb('hump')}", "dry {dom.youVerb('fuck')}"])+" {sub.you}, stimulating each others "+RNG.pick(["pussies", "slits", "kitties"])+".",
+	])
+	
+	stimulate(DOM_0, S_VAGINA, SUB_0, S_VAGINA, I_SEX, Fetish.Tribadism)
 #
 #		affectSub(subInfo.fetishScore({Fetish.Tribadism: 1.0}), 0.1, -0.1, -0.01)
 #		affectDom(domInfo.fetishScore({Fetish.Tribadism: 1.0}), 0.1, -0.03)
 #		subInfo.stimulateArousalZone(0.1, BodypartSlot.Vagina, 0.5)
 #		domInfo.stimulateArousalZone(0.1, BodypartSlot.Vagina, 0.5)
-		
-		if(OPTIONS.isContentEnabled(ContentType.CumStealing) && getDom().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) == null && getSub().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) == null):
-			if(RNG.chance(20) && getDom().bodypartShareFluidsWith(BodypartSlot.Vagina, subID, BodypartSlot.Vagina, 0.2)):
-				text += RNG.pick([
-					" {dom.You} and {sub.you} [b]share some cum[/b] while "+RNG.pick(["rubbing pussies together", "doing tribadism", "scissoring"])+"!",
-					" [b]Some cum gets shared[/b] between the two "+RNG.pick(["pussies", "slits", "kitties"])+"!",
-					" [b]Some cum leaks from one pussy to another[/b].",
-				])
-		
-		if(domInfo.isCloseToCumming() && subInfo.isCloseToCumming()):
-			text += RNG.pick([
-				" Both lovers "+RNG.pick(["moan lustfully", "moan", "shiver slightly"])+" as they get closer to their orgasms!",
-				" {dom.You} {dom.youVerb('see')} that {sub.youHe} {sub.youAre} close and so {dom.youAre} {dom.youHe}.",
-				" Both "+RNG.pick(["pussies", "kitties", "pussy slits"])+" drip quite a bit of arousal.",
-				" Both lovers gonna cum soon!",
-			])
-		elif(domInfo.isCloseToCumming()):
-			text += RNG.pick([
-				" {dom.You} gonna cum soon!",
-				" {dom.Your} "+RNG.pick(["kitty", "pussy"])+" twitches slightly from all the rubbing.",
-				" This amount of pleasure is gonna make {dom.you} cum soon!",
-			])
-		elif(subInfo.isCloseToCumming()):
-			text += RNG.pick([
-				" {sub.You} gonna cum soon!",
-				" {sub.Your} "+RNG.pick(["kitty", "pussy"])+" twitches slightly from all the rubbing.",
-				" This amount of pleasure is gonna make {sub.you} cum soon!",
-			])
-		
-		addText(text)
-		return {text = text}
-		
-	return
 	
+	if(OPTIONS.isContentEnabled(ContentType.CumStealing) && getDom().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) == null && getSub().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) == null):
+		if(RNG.chance(20) && getDom().bodypartShareFluidsWith(BodypartSlot.Vagina, subID, BodypartSlot.Vagina, 0.2)):
+			addTextPick([
+				"{dom.You} and {sub.you} [b]share some cum[/b] while "+RNG.pick(["rubbing pussies together", "doing tribadism", "scissoring"])+"!",
+				"[b]Some cum gets shared[/b] between the two "+RNG.pick(["pussies", "slits", "kitties"])+"!",
+				"[b]Some cum leaks from one pussy to another[/b].",
+			])
+	
+	if(isCloseToCumming(DOM_0) && isCloseToCumming(SUB_0)):
+		addTextPick([
+			"Both lovers "+RNG.pick(["moan lustfully", "moan", "shiver slightly"])+" as they get closer to their orgasms!",
+			"{dom.You} {dom.youVerb('see')} that {sub.youHe} {sub.youAre} close and so {dom.youAre} {dom.youHe}.",
+			"Both "+RNG.pick(["pussies", "kitties", "pussy slits"])+" drip quite a bit of arousal.",
+			"Both lovers gonna cum soon!",
+		])
+	elif(isCloseToCumming(DOM_0)):
+		addTextPick([
+			"{dom.You} gonna cum soon!",
+			"{dom.Your} "+RNG.pick(["kitty", "pussy"])+" twitches slightly from all the rubbing.",
+			"This amount of pleasure is gonna make {dom.you} cum soon!",
+		])
+	elif(isCloseToCumming(SUB_0)):
+		addTextPick([
+			"{sub.You} gonna cum soon!",
+			"{sub.Your} "+RNG.pick(["kitty", "pussy"])+" twitches slightly from all the rubbing.",
+			"This amount of pleasure is gonna make {sub.you} cum soon!",
+		])
+
+func getActions(_indx:int):
+	if(_indx == DOM_0):
+		addAction("stop", getStopScore(), "Stop tribadism", "Enough pussy rubbing")
+
+func doAction(_indx:int, _action:String, _actionDict:Dictionary):
+	if(_action == "stop"):
+		endActivity()
+		addTextPick([
+			"{dom.You} pulled {dom.yourHis} pussy away, ending the fun.",
+		])
+
+func _getActions(_indx:int):
+	if(_indx == DOM_0):
+		addAction("startgrinding", 1.0, "Start grinding", "Begin to rub kitties together!")
+
+func _doAction(_indx:int, _action:String, _actionDict:Dictionary):
+	if(_action == "startgrinding"):
+		setState("grinding")
+		addTextPick([
+			"{dom.You} began grinding "+RNG.pick(["pussies", "kitties", "vulvae"])+" together with {sub.you}, stimulating each other's clits"+getThroughClothingText(DOM_0, BodypartSlot.Vagina)+"!",
+		])
+		stimulate(DOM_0, S_VAGINA, SUB_0, S_VAGINA, I_TEASE, Fetish.Tribadism)
+
+func grinding_getActions(_indx:int):
+	if(_indx == DOM_0):
+		addAction("moanDom", 0.3, "Moan", "Show how much you enjoy it.")
+		if(isReadyToCum(DOM_0) && isHandlingDomOrgasms()):
+			addAction("cumDom", 1.0, "Cum!", "You gonna cum.", {A_PRIORITY:1001})
+
+func grinding_doAction(_indx:int, _action:String, _actionDict:Dictionary):
+	if(_action == "moanDom"):
+		addTextPick([
+			"{dom.You} "+RNG.pick(["{dom.youVerb('let')} out a moan", "{dom.youVerb('moan')}", "{dom.youVerb('produce')} a moan", "{dom.youVerb('make')} a noise of pleasure"])+" while "+RNG.pick(["rubbing pussies", "scissoring", "grinding slits"])+" with {sub.youHim}!",
+		])
+		getDomInfo().addAnger(-0.02)
+		getDomInfo().addLust(5)
+		getSubInfo().addLust(5)
+	if(_action == "cumDom"):
+		stimulate(DOM_0, S_VAGINA, SUB_0, S_VAGINA, I_HARDSEX, Fetish.Tribadism)
+		#subInfo.stimulateArousalZone(0.2, BodypartSlot.Vagina, 1.0)
+		if(doCheckDoubleOrgasm()):
+			satisfyGoals()
+			return
+		
+		cumAmount += 1
+		if(cumAmount >= 2):
+			satisfyGoals()
+		
+		getDom().cumOnFloor()
+		getDomInfo().cum()
+		sendSexEvent(SexEvent.UniqueOrgasm, SUB_0, DOM_0, {orgasmType="trib"})
+		addGenericDomOrgasmText()
+
 func getDomActions():
 	var actions = []
 
@@ -154,16 +188,19 @@ func getDomActions():
 	return actions
 
 func doCheckDoubleOrgasm():
-	if(domInfo.isReadyToCum() && isHandlingDomOrgasms()):
-		if(subInfo.isReadyToCum() && isHandlingSubOrgasms()):
+	if(isReadyToCum(DOM_0) && isHandlingDomOrgasms()):
+		if(isReadyToCum(SUB_0) && isHandlingSubOrgasms()):
 			getDom().cumOnFloor()
-			domInfo.cum()
-			sendSexEvent(SexEvent.UniqueOrgasm, subID, domID, {orgasmType="feet"})
-			getSub().cumOnFloor(domID)
-			subInfo.cum()
-			sendSexEvent(SexEvent.UniqueOrgasm, domID, subID, {orgasmType="trib"})
-			return combineData({text="[b]Double orgasm![/b]"}, combineData(getGenericDomOrgasmData(), getGenericSubOrgasmData()))
-	return null
+			getDomInfo().cum()
+			sendSexEvent(SexEvent.UniqueOrgasm, SUB_0, DOM_0, {orgasmType="trib"})
+			getSub().cumOnFloor(getDomID())
+			getSubInfo().cum()
+			sendSexEvent(SexEvent.UniqueOrgasm, DOM_0, SUB_0, {orgasmType="trib"})
+			addText("[b]Double orgasm![/b]")
+			addGenericDomOrgasmText()
+			addGenericSubOrgasmText()
+			return true
+	return false
 	
 func doDomAction(_id, _actionInfo):
 	if(_id == "cum"):
@@ -179,7 +216,7 @@ func doDomAction(_id, _actionInfo):
 		
 		getDom().cumOnFloor()
 		domInfo.cum()
-		sendSexEvent(SexEvent.UniqueOrgasm, subID, domID, {orgasmType="feet"})
+		sendSexEvent(SexEvent.UniqueOrgasm, SUB_0, DOM_0, {orgasmType="feet"})
 		return getGenericDomOrgasmData()
 	
 	if(_id == "moan"):
@@ -276,7 +313,7 @@ func doSubAction(_id, _actionInfo):
 		
 		getSub().cumOnFloor(domID)
 		subInfo.cum()
-		sendSexEvent(SexEvent.UniqueOrgasm, domID, subID, {orgasmType="trib"})
+		sendSexEvent(SexEvent.UniqueOrgasm, DOM_0, SUB_0, {orgasmType="trib"})
 		return getGenericSubOrgasmData()
 	
 	if(_id == "moan"):
@@ -310,11 +347,11 @@ func doSubAction(_id, _actionInfo):
 	return
 
 func getAnimation():
-	if(state in [""]):
-		return [StageScene.SexTribadism, "tease", {pc=domID, npc=subID}]
-	if(domInfo.isCloseToCumming()):
-		return [StageScene.SexTribadism, "fast", {pc=domID, npc=subID}]
-	return [StageScene.SexTribadism, "sex", {pc=domID, npc=subID}]
+	if(getState() in [""]):
+		return [StageScene.SexTribadism, "tease", {pc=DOM_0, npc=SUB_0}]
+	if(isCloseToCumming(DOM_0)):
+		return [StageScene.SexTribadism, "fast", {pc=DOM_0, npc=SUB_0}]
+	return [StageScene.SexTribadism, "sex", {pc=DOM_0, npc=SUB_0}]
 	
 func getDomOrgasmHandlePriority():
 	return 5

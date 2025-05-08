@@ -13,7 +13,7 @@ func getCharacter():
 	
 
 	
-func getDomReaction(_reactionID, _sexEngine, _domInfo, _subInfo):
+func getDomReaction(_reactionID, _sexEngine, _domInfo, _subInfo) -> String:
 	var possible = []
 	var domIsAngry = _domInfo.isAngry()
 	var domIsMean = _domInfo.personalityScore({PersonalityStat.Mean:1.0})>0.4
@@ -936,8 +936,9 @@ func getDomReaction(_reactionID, _sexEngine, _domInfo, _subInfo):
 			
 	if(possible.size() > 0):
 		return RNG.pick(possible)
+	return ""
 
-func getSubReaction(_reactionID, _sexEngine, _domInfo, _subInfo):
+func getSubReaction(_reactionID, _sexEngine, _domInfo, _subInfo) -> String:
 	var _sub = _subInfo.getChar()
 	var _dom = _domInfo.getChar()
 	var subInHeat = _sub.isInHeat()
@@ -1636,8 +1637,9 @@ func getSubReaction(_reactionID, _sexEngine, _domInfo, _subInfo):
 		
 	if(possible.size() > 0):
 		return RNG.pick(possible)
+	return ""
 		
-func domReactToSubBodypart(_bodypart, _sexEngine, _domInfo, _subInfo):
+func domReactToSubBodypart(_bodypart, _sexEngine, _domInfo, _subInfo) -> String:
 	var _dom = _domInfo.getChar()
 	var _sub = _subInfo.getChar()
 	var domIsAngry = _domInfo.isAngry()
@@ -1983,8 +1985,9 @@ func domReactToSubBodypart(_bodypart, _sexEngine, _domInfo, _subInfo):
 			
 	if(possible.size() > 0):
 		return RNG.pick(possible)
+	return ""
 
-func domReactionWhenUndressing(_bodypart, _sexEngine, _domInfo, _subInfo):
+func domReactionWhenUndressing(_bodypart, _sexEngine, _domInfo, _subInfo) -> String:
 	var possible = []
 	
 	var domIsAngry = _domInfo.isAngry()
@@ -2010,3 +2013,4 @@ func domReactionWhenUndressing(_bodypart, _sexEngine, _domInfo, _subInfo):
 	
 	if(possible.size() > 0):
 		return RNG.pick(possible)
+	return ""

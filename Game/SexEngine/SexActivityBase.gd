@@ -15,10 +15,10 @@ var startedBySub:bool = false # Can be started by sub?
 var state:String = ""
 
 #TODO: REMOVE THESE AFTER REFACTOR IS DONE
-var subID
-var domID
-var subInfo
-var domInfo
+var subID:String
+var domID:String
+var subInfo:SexSubInfo
+var domInfo:SexDomInfo
 
 # Here is hope this won't bite me
 # Only use these with stimulate()
@@ -110,6 +110,8 @@ func addOutputRaw(_rawEntry:Array):
 	getSexEngine().addOutputRaw(_rawEntry)
 
 func talkText(_indx1:int, _text:String):
+	if(_text.empty()):
+		return
 	var theInfo := getDomOrSubInfo(_indx1)
 	addOutputRaw([SexEngine.OUTPUT_SAY, theInfo.getCharID(), processText(_text)])
 
@@ -141,7 +143,14 @@ func talk(_indx1:int, _indx2:int, reactionID:int):
 
 
 func addText(_text:String):
+	if(_text.empty()):
+		return
 	addOutputRaw([SexEngine.OUTPUT_TEXT, processText(_text)])
+
+func addTextPick(_texts:Array):
+	if(_texts.empty()):
+		return
+	addText(RNG.pick(_texts))
 
 func processText(_text:String) -> String:
 	var theOverrides:Dictionary = {}
@@ -256,6 +265,32 @@ func switchDoms(_indx1:int=0, _indx2:int=1):
 	var domInfo1:SexDomInfo = doms[_indx1]
 	doms[_indx1] = doms[_indx2]
 	doms[_indx2] = domInfo1
+
+func indxToOverrideName(_indx:int) -> String:
+	if(_indx == SUB_0):
+		return "sub"
+	if(_indx == DOM_0):
+		return "dom"
+	if(_indx == SUB_1):
+		return "sub2"
+	if(_indx == DOM_1):
+		return "dom2"
+	
+	return "ERROR"
+
+func getThroughClothingText(_indx:int, _slot:String) -> String:
+	var theChar := getDomOrSub(_indx)
+	var clothingItem = theChar.getFirstItemThatCoversBodypart(BodypartSlot.Vagina)
+	var throughTheClothing:String = ""
+	if(clothingItem != null):
+		throughTheClothing = " through {"+indxToOverrideName(_indx)+".yourHis} "+clothingItem.getCasualName()
+	return throughTheClothing
+
+func isCloseToCumming(_indx:int) -> bool:
+	return getDomOrSubInfo(_indx).isCloseToCumming()
+	
+func isReadyToCum(_indx:int) -> bool:
+	return getDomOrSubInfo(_indx).isReadyToCum()
 
 func getVisibleName():
 	return id
@@ -401,15 +436,15 @@ func getActivityScoreMult(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 func getActivityScoreSub(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	return getActivityBaseScore(_sexEngine, _domInfo, _subInfo)
 
-func getStopScore(stopscore = 2.0, alwaysstopscore = 0.0):
+func getStopScore(_indx:int = DOM_0):
 	var sexEngine = getSexEngine()
 	
 	#TODO: FIX THIS
-	var activityScore = getActivityScore(sexEngine, getDomInfo(), getSubInfo(0))
+	var activityScore:float = getActivityScore(sexEngine, getDomInfo(_indx), getSubInfo(0))
 	
 	if(activityScore > 0.0):
-		return alwaysstopscore
-	return stopscore
+		return 0.0
+	return 2.0
 
 func hasActivity(_sexEngine: SexEngine, theid, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	return _sexEngine.hasActivity(theid, _domInfo.charID, _subInfo.charID)
@@ -607,7 +642,7 @@ func isHandlingSubOrgasms():
 func isHandlingDomOrgasms():
 	return getDomOrgasmHandlePriority() >= getSexEngine().getCurrentActivitiesMaxDomOrgasmHandlePriority(getDomID(0), getSubID(0))
 
-func getGenericOrgasmData(isSub, extraText = ""):
+func getGenericOrgasmData(isSub:bool, extraText = ""):
 	var character
 	if(isSub):
 		character = getSub()
@@ -665,6 +700,12 @@ func getGenericSubOrgasmData(extraText = ""):
 func getGenericDomOrgasmData(extraText = ""):
 	return getGenericOrgasmData(false, extraText)
 
+func addGenericSubOrgasmText(extraText:String = ""):
+	addText(getGenericSubOrgasmData(extraText)["text"])
+
+func addGenericDomOrgasmText(extraText:String = ""):
+	addText(getGenericDomOrgasmData(extraText)["text"])
+
 func applyTallymarkIfNeededData(bodypartSlot):
 	#if(getDom().isPlayer()):
 	#	return null
@@ -703,10 +744,12 @@ func applyTallymarkIfNeededData(bodypartSlot):
 		text = text,
 	}
 
-func sendSexEvent(type, source = "", target = "", data = {}):
-	if(source == "" || source == null):
+func sendSexEvent(type, sourceIndx:int = DOM_0, targetIndx:int = SUB_0, data = {}):
+	var source:String = getDomOrSubID(sourceIndx)
+	var target:String = getDomOrSubID(targetIndx)
+	if(source == ""):
 		source = getDomID(0)
-	if(target == "" || target == null):
+	if(target == ""):
 		target = getSubID(0)
 	
 	var newSexEvent:SexEvent = SexEvent.new()
@@ -732,6 +775,12 @@ func damageDomClothes():
 	if(damageClothesResult[0]):
 		return "[b]"+damageClothesResult[2].getVisibleName()+" got damaged![/b] "+damageClothesResult[1]
 	return ""
+	
+func getState() -> String:
+	return state
+
+func setState(_newState:String):
+	state = _newState
 	
 func saveData():
 	var subsData:Array = []
@@ -1043,7 +1092,7 @@ func doSpitCumIntoHoleDom(bodypartSlot = BodypartSlot.Vagina):
 		affectSub(getSubInfo(0).fetishScore({Fetish.OralSexReceiving:1.0}), 0.1, -0.1, -0.05)
 	elif(bodypartSlot == BodypartSlot.Anus):
 		affectSub(getSubInfo(0).fetishScore({Fetish.RimmingReceiving:1.0}), 0.1, -0.1, -0.05)
-	sendSexEvent(SexEvent.HoleSpitted, getDomID(0), getSubID(0), {hole=bodypartSlot, loadSize=howMuch})
+	sendSexEvent(SexEvent.HoleSpitted, DOM_0, SUB_0, {hole=bodypartSlot, loadSize=howMuch})
 	return {text = text}
 
 func doSpitCumIntoHoleSub(bodypartSlot = BodypartSlot.Vagina):
@@ -1059,7 +1108,7 @@ func doSpitCumIntoHoleSub(bodypartSlot = BodypartSlot.Vagina):
 		affectDom(getDomInfo(0).fetishScore({Fetish.OralSexReceiving:1.0}), 0.1, -0.1)
 	elif(bodypartSlot == BodypartSlot.Anus):
 		affectDom(getDomInfo(0).fetishScore({Fetish.RimmingReceiving:1.0}), 0.1, -0.1)
-	sendSexEvent(SexEvent.HoleSpitted, getSubID(0), getDomID(0), {hole=bodypartSlot, loadSize=howMuch})
+	sendSexEvent(SexEvent.HoleSpitted, SUB_0, DOM_0, {hole=bodypartSlot, loadSize=howMuch})
 	return {text = text}
 
 func isDomWearingStrapon():

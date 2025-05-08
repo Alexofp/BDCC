@@ -53,9 +53,10 @@ func _run():
 				sayn(domInfo.getInfoStringFinal())
 			for subID in sexEngine.getSubIDs():
 				var subInfo = sexEngine.getSubInfo(subID)
-				saynn(subInfo.getInfoStringFinal())
+				sayn(subInfo.getInfoStringFinal())
+			sayn("")
 
-			var theActions = sexEngine.getActions()
+			var theActions := sexEngine.getActionsForCharID("pc", true)
 			for actionInfo in theActions:
 				var actionCategory = []
 				if("category" in actionInfo):

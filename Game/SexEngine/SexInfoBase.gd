@@ -356,25 +356,15 @@ func calculateFinalSatisfaction() -> float:
 func combineData(_data1, _data2):
 	return getSexEngine().combineData(_data1, _data2)
 
-func getExtraOutputData(isDom:bool=false):
-	var result
-	
+func getExtraOutputData(_isDom:bool, _sexEngine):
 	var tfHolder:TFHolder = getChar().getTFHolder()
 	if(tfHolder != null && tfHolder.hasPendingTransformations()):
 		var tfResult:Dictionary = tfHolder.doFirstPendingTransformation({}, true)
 		if(tfResult.has("text") && tfResult["text"] != ""):
-			var extraData:Dictionary = {
-				text = getChar().getName()+"'s body is suddenly [b]changing[/b]! "+tfResult["text"]
-			}
+			_sexEngine.addTextRaw(getChar().getName()+"'s body is suddenly [b]changing[/b]! "+tfResult["text"])
+
 			if(tfResult.has("say") && tfResult["say"] != ""):
-				if(isDom):
-					extraData["domSay"] = tfResult["say"]
-				else:
-					extraData["subSay"] = tfResult["say"]
-			
-			result = combineData(result, extraData)
-	
-	return result
+				_sexEngine.talkText(charID, tfResult["say"])
 
 func saveData():
 	var data = {
