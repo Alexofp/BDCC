@@ -26,9 +26,10 @@ func getDefaultAnimation():
 	if(subs.size() == 0 || doms.size() == 0):
 		return null
 	
-	if(subs[subs.keys()[0]].isUnconscious()):
-		return [StageScene.SexStart, "defeated", {pc=doms.keys()[0], npc=subs.keys()[0]}]
-	return [StageScene.SexStart, "start", {pc=doms.keys()[0], npc=subs.keys()[0]}]
+	var theSubID:String = subs.keys()[0] if !sexEngine.canSwitchPCTarget() else sexEngine.getPCTarget()
+	if(subs[theSubID].isUnconscious()):
+		return [StageScene.SexStart, "defeated", {pc=doms.keys()[0], npc=theSubID}]
+	return [StageScene.SexStart, "start", {pc=doms.keys()[0], npc=theSubID}]
 
 func saveData():
 	return {

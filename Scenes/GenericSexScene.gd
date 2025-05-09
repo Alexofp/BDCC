@@ -42,18 +42,26 @@ func _run():
 		#saynn(sexEngine.getFinalText())
 		saynn(sexEngine.getFinalOutput())
 		
-		if(sexEngine.hasSexEnded()):
-			pass
-		else:
+		if(!sexEngine.hasSexEnded()):
+			if(sexEngine.isDom("pc")):
+				addButtonAt(14, "END SEX", "Enough fun for now", "stopsex")
+			else:
+				addButtonAt(14, "QUICK SEX", "Simulate the sex for a while until it ends", "simulatesex")
+			var canSelectTarget:bool = sexEngine.canSwitchPCTarget()
+			if(canSelectTarget):
+				addButtonAt(13, "TARGET", "Switch the target of your new activities", "switchtarget")
+			
 			if(currentCategory != []):
 				addButton("Back", "Back to the previous menu", "backbutton")
 			
+				
+			var theTargetID:String = sexEngine.getPCTarget()
 			for domID in sexEngine.getDomIDs():
 				var domInfo = sexEngine.getDomInfo(domID)
-				sayn(domInfo.getInfoStringFinal())
+				sayn(domInfo.getInfoStringFinal(canSelectTarget && theTargetID==domID))
 			for subID in sexEngine.getSubIDs():
 				var subInfo = sexEngine.getSubInfo(subID)
-				sayn(subInfo.getInfoStringFinal())
+				sayn(subInfo.getInfoStringFinal(canSelectTarget && theTargetID==subID))
 			sayn("")
 
 			var theActions := sexEngine.getActionsForCharID("pc", true)
@@ -73,8 +81,8 @@ func _run():
 			addCategoryButtons(theActions)
 			
 			#addButton("Process", "Process", "processTurn")
-			
-		if(sexEngine.hasSexEnded()):
+		
+		else:
 			if(sexEngine.canKeepItemsAfterSex()):
 				var itemNames = []
 				var itemsCanRecover = sexEngine.getRecovarableItemsAfterSex()
@@ -87,12 +95,6 @@ func _run():
 				addButton("LEAVE", "Just leave", "endthescene")
 			else:
 				addButton("LEAVE", "The sex has ended", "endthescene")
-		else:
-			if(sexEngine.isDom("pc")):
-				addButtonAt(14, "END SEX", "Enough fun for now", "stopsex")
-			else:
-				addButtonAt(14, "QUICK SEX", "Simulate the sex for a while until it ends", "simulatesex")
-
 
 func _react(_action: String, _args):
 	if(_action == "stopsex"):
@@ -124,6 +126,9 @@ func _react(_action: String, _args):
 	
 	if(_action == "backbutton"):
 		currentCategory.pop_back()
+		return
+	if(_action == "switchtarget"):
+		sexEngine.switchPCTarget()
 		return
 	
 	if(_action == "pickcategory"):

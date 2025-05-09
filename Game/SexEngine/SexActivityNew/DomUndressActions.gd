@@ -4,6 +4,10 @@ func _init():
 	id = "DomUndressActions"
 	startedByDom = true
 	startedBySub = false
+	
+	activityName = "Undress"
+	activityDesc = "Take off something."
+	activityCategory = ["Undress"]
 
 func getGoals():
 	return {
@@ -21,41 +25,21 @@ func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 	return 0.05 + max(_domInfo.fetishScore({Fetish.Exhibitionism: 0.1}), 0.0)
 
 func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
-	var bodypartsToExpose = [BodypartSlot.Breasts, BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]
+	var bodypartsToExpose:Array = [BodypartSlot.Breasts, BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]
 	var dom:BaseCharacter = _domInfo.getChar()
-	var handledItems = {}
-	var actions = []
+	var handledItems:Dictionary = {}
+	
+	var theScore:float = getActivityScore(_sexEngine, _domInfo, _subInfo)
 	
 	for bodypartToExpose in bodypartsToExpose:
-		var firstItem = dom.getFirstItemThatCoversBodypart(bodypartToExpose)
+		var firstItem:ItemBase = dom.getFirstItemThatCoversBodypart(bodypartToExpose)
 		if(firstItem == null || handledItems.has(firstItem) || firstItem.isRestraint()):
 			continue
 		
 		handledItems[firstItem] = true
-		actions.append({
-			name = "Take off "+str(firstItem.getCasualName()),
-			args = [firstItem],
-			score = getActivityScore(_sexEngine, _domInfo, _subInfo),
-			category = ["Undress"],
-		})
-	
-	return actions
-
-func getVisibleName():
-	return "Undress"
-
-func getCategory():
-	return ["Undress"]
-
-func getDomTags():
-	return []
-
-func getSubTags():
-	return []
+		addStartAction([firstItem], "Take off "+str(firstItem.getCasualName()), "Take off a certain item from yourself", theScore)
 
 func startActivity(_args):
-	setState("")
-	
 	var theitem:ItemBase = _args[0]
 	var itemState:ItemState = theitem.getItemState()
 	if(itemState == null):

@@ -33,17 +33,20 @@ func getChar() -> BaseCharacter:
 func getCharID() -> String:
 	return charID
 
-func getInfoString():
+func getInfoString(_isSelected:bool = false) -> String:
 	var character = getChar()
 	
 	var text:String = ""
 	if(character != null):
-		text += character.getName()
+		if(_isSelected):
+			text += "\\["+character.getName()+"\\]"
+		else:
+			text += character.getName()
 	
 	return text
 
-func getInfoStringFinal() -> String:
-	var text:String = getInfoString()
+func getInfoStringFinal(_isSelected:bool = false) -> String:
+	var text:String = getInfoString(_isSelected)
 	
 	var extraInfo:Array = getExtraInfoLines()
 	if(!extraInfo.empty()):

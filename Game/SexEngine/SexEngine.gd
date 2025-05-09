@@ -69,7 +69,7 @@ func getFinalOutput() -> String:
 		savedTag = theTag
 	
 	if(result == ""):
-		return "NOTHING HAS HAPPENED, MEOW"
+		return "Nothing new happened."
 	return result
 
 func initSexType(theSexType, args:Dictionary = {}):
@@ -854,8 +854,8 @@ func getActionsForCharID(_charID:String, isForMenu:bool = false) -> Array:
 				continue
 			if(!newSexActivityRef.canStartActivity(self, _domInfo, _subInfo)):
 				continue
-			var possibleActions = newSexActivityRef.getStartActions(self, _domInfo, _subInfo)
-			if(possibleActions == null):
+			var possibleActions:Array = newSexActivityRef.getStartActionsFinal(self, _domInfo, _subInfo)
+			if(possibleActions.empty()):
 				continue
 			for actionEntry in possibleActions:
 				result.append({
@@ -1051,6 +1051,36 @@ func getPCTarget() -> String:
 	
 	return ""
 
+func switchPCTarget():
+	var theTarget:String = getPCTarget()
+	if(isDom("pc")):
+		var subKeys:Array = subs.keys()
+		var theIndx:int = subKeys.find(theTarget)
+		if(theIndx < 0):
+			return
+		theIndx += 1
+		if(theIndx >= subKeys.size()):
+			theIndx = 0
+		pcTarget = subKeys[theIndx]
+	if(isSub("pc")):
+		var domKeys:Array = doms.keys()
+		var theIndx:int = domKeys.find(theTarget)
+		if(theIndx < 0):
+			return
+		theIndx += 1
+		if(theIndx >= domKeys.size()):
+			theIndx = 0
+		pcTarget = domKeys[theIndx]
+
+func canSwitchPCTarget() -> bool:
+	if(isDom("pc")):
+		if(subs.size() >= 2):
+			return true
+	if(isSub("pc")):
+		if(doms.size() >= 2):
+			return true
+	return false
+
 func processScene():
 	clearOutputRaw()
 	processAIActions(true)
@@ -1090,20 +1120,23 @@ func doAction(_actionInfo:Dictionary):
 		processTurn()
 		processAIActions(false)
 
-func hasTag(charID, tag):
+func hasTag(charID:String, tag:int) -> bool:
 	for activity in activities:
 		if(activity.hasEnded):
 			continue
 		
-		if(activity.domID == charID):
-			if(tag in activity.getDomTags()):
+		var theIndx:int = activity.convertCharIDToIndx(charID)
+		if(theIndx > -99):
+			if(tag in activity.getTags(theIndx)):
 				return true
-		if(activity.subID == charID):
-			if(tag in activity.getSubTags()):
-				return true
+
 	return false
 
-func hasActivity(id, thedomID, thesubID):
+func hasActivity(id:String, thedomID:String, thesubID:String) -> bool:
+	var theDomInfo:SexDomInfo = getDomInfo(thedomID)
+	var theSubInfo:SexSubInfo = getSubInfo(thesubID)
+	if(!theDomInfo || !theSubInfo):
+		return false
 	for activity in activities:
 		if(activity.hasEnded):
 			continue
@@ -1111,7 +1144,7 @@ func hasActivity(id, thedomID, thesubID):
 		if(activity.id != id):
 			continue
 		
-		if(activity.domID == thedomID && activity.subID == thesubID):
+		if(activity.doms.has(theDomInfo) && activity.subs.has(theSubInfo)):
 			return true
 	return false
 
@@ -1379,6 +1412,16 @@ func checkGearIsFromPC(whoWearsItID, itemUniqueID):
 		if(trackedData[0] == whoWearsItID && trackedData[1] == itemUniqueID):
 			return true
 	return false
+
+func getMaxOrgasmHandlePriority(_charID:String) -> int:
+	var maxResult:int = -1
+	for activity in activities:
+		var _indx:int = activity.convertCharIDToIndx(_charID)
+		if(_indx > -99):
+			var newPrio:int = activity.getOrgasmHandlePriority(_indx)
+			if(newPrio > maxResult):
+				maxResult = newPrio
+	return maxResult
 
 func getCurrentActivitiesMaxSubOrgasmHandlePriority(domID, subID):
 	var maxResult = -1

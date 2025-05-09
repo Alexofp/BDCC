@@ -82,12 +82,15 @@ func getSadisticActionStore():
 	
 	return sadistScore / 8.0 + angerScore / 10.0 + meanScore / 10.0
 
-func getInfoString():
+func getInfoString(_isSelected:bool = false) -> String:
 	var character = getChar()
 	
-	var text = ""
+	var text:String = ""
 	if(character != null):
-		text += character.getName()+". "
+		if(_isSelected):
+			text += "\\["+character.getName()+"\\]"+". "
+		else:
+			text += character.getName()+". "
 	text += "Anger: "+str(Util.roundF(anger*100))+"% "
 	text += "Arousal: "+str(Util.roundF(getArousal()*100))+"% "
 	

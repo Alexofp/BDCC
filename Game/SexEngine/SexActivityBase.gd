@@ -45,6 +45,12 @@ const A_PRIORITY = "priority"
 const A_CHANCE = "chance"
 const A_ARGS = "args"
 const A_CATEGORY = "category"
+const A_SCORE = "score"
+
+# Don't save these
+var activityName:String = "NEW ACTIVITY"
+var activityDesc:String = "Start new activity."
+var activityCategory:Array = []
 
 func getDomOrSubInfo(_indx:int) -> SexInfoBase:
 	if(_indx >= 0):
@@ -170,6 +176,8 @@ func processText(_text:String) -> String:
 		_i += 1
 	return GM.ui.processString(_text, theOverrides)
 
+const INDX_NOT_FOUND = -9999
+
 func convertCharIDToIndx(_charID:String) -> int:
 	for _i in range(doms.size()):
 		if(doms[_i].getCharID() == _charID):
@@ -177,15 +185,15 @@ func convertCharIDToIndx(_charID:String) -> int:
 	for _i in range(subs.size()):
 		if(subs[_i].getCharID() == _charID):
 			return -_i-1
-	return -9999
+	return INDX_NOT_FOUND
 
 func doActionForCharID(_charID:String, _action:Dictionary):
 	var _indx:int = convertCharIDToIndx(_charID)
-	if(_indx <= -9999):
+	if(_indx <= INDX_NOT_FOUND):
 		return
 	
-	if(has_method(state+"_doAction")):
-		call(state+"_doAction", _indx, _action["id"], _action)
+	if(has_method(getStatePrefix()+"_doAction")):
+		call(getStatePrefix()+"_doAction", _indx, _action["id"], _action)
 	doAction(_indx, _action["id"], _action)
 
 var actionsResult:Array
@@ -196,8 +204,8 @@ func getActionsForCharID(_charID:String) -> Array:
 	if(_indx <= -9999):
 		return []
 	
-	if(has_method(state+"_getActions")):
-		call(state+"_getActions", _indx)
+	if(has_method(getStatePrefix()+"_getActions")):
+		call(getStatePrefix()+"_getActions", _indx)
 	getActions(_indx)
 	
 	return actionsResult
@@ -214,6 +222,20 @@ func addAction(_aID:String, _aScore:float, _aName:String, _aDesc:String, _aExtra
 		score = _aScore,
 		name = _aName,
 		desc = _aDesc,
+	}
+	for field in _aExtra:
+		theEntry[field] = _aExtra[field]
+	
+	actionsResult.append(theEntry)
+
+func addStartAction(_aArgs:Array, _aName:String, _aDesc:String, _aScore:float, _aExtra:Dictionary = {}):
+	var theCategory:Array = getCategory() if !_aExtra.has(A_CATEGORY) else []
+	var theEntry:Dictionary = {
+		score = _aScore,
+		name = _aName,
+		desc = _aDesc,
+		category = theCategory,
+		args = _aArgs,
 	}
 	for field in _aExtra:
 		theEntry[field] = _aExtra[field]
@@ -292,11 +314,14 @@ func isCloseToCumming(_indx:int) -> bool:
 func isReadyToCum(_indx:int) -> bool:
 	return getDomOrSubInfo(_indx).isReadyToCum()
 
-func getVisibleName():
-	return id
+func getVisibleName() -> String:
+	return activityName
 
-func getCategory():
-	return []
+func getVisibleDesc() -> String:
+	return activityDesc
+
+func getCategory() -> Array:
+	return activityCategory
 
 func getSexEngine() -> SexEngine:
 	if(sexEngineRef == null):
@@ -400,12 +425,12 @@ func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: Sex
 	return tagsNotBusy(_sexEngine, _domInfo, _subInfo) && !hasActivity(_sexEngine, id, _domInfo, _subInfo)
 
 func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
-	return [{
-		name = getVisibleName(),
-		args = [],
-		score = getActivityScore(_sexEngine, _domInfo, _subInfo),
-		category = getCategory(),
-	}]
+	addStartAction([], getVisibleName(), getVisibleDesc(), getActivityScore(_sexEngine, _domInfo, _subInfo))
+
+func getStartActionsFinal(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo) -> Array:
+	actionsResult = []
+	getStartActions(_sexEngine, _domInfo, _subInfo)
+	return actionsResult
 
 func canBeStartedByDom():
 	return startedByDom
@@ -433,29 +458,31 @@ func getActivityScoreCustomGoals(goalData, _sexEngine: SexEngine, _domInfo: SexD
 func getActivityScoreMult(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	return 1.0
 
-func getActivityScoreSub(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
-	return getActivityBaseScore(_sexEngine, _domInfo, _subInfo)
-
-func getStopScore(_indx:int = DOM_0):
-	var sexEngine = getSexEngine()
+func getStopScore() -> float:
+	var sexEngine := getSexEngine()
 	
-	#TODO: FIX THIS
-	var activityScore:float = getActivityScore(sexEngine, getDomInfo(_indx), getSubInfo(0))
-	
+	var activityScore:float = 0.0
+	for theDomInfo in doms:
+		# If one of the doms in this activity is player, never automatically stop
+		if(theDomInfo.getCharID() == "pc"):
+			return 0.0
+		for theSubInfo in subs:
+			activityScore += max(getActivityScore(sexEngine, theDomInfo, theSubInfo), 0.0)
+		
 	if(activityScore > 0.0):
 		return 0.0
 	return 2.0
 
-func hasActivity(_sexEngine: SexEngine, theid, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
+func hasActivity(_sexEngine: SexEngine, theid:String, _domInfo: SexDomInfo, _subInfo: SexSubInfo) -> bool:
 	return _sexEngine.hasActivity(theid, _domInfo.charID, _subInfo.charID)
 
 func tagsNotBusy(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
-	var domTags = getDomTagsCheck()
+	var domTags:Array = getCheckTagsDom()
 	for tag in domTags:
 		if(_sexEngine.hasTag(_domInfo.charID, tag)):
 			return false
 			
-	var subTags = getSubTagsCheck()
+	var subTags:Array = getCheckTagsSub()
 	for tag in subTags:
 		if(_sexEngine.hasTag(_subInfo.charID, tag)):
 			return false
@@ -487,9 +514,18 @@ func getDomTagsCheck():
 func getSubTagsCheck():
 	return getSubTags()
 
+func getTags(_indx:int) -> Array:
+	return []
+
+func getCheckTagsDom() -> Array:
+	return getTags(DOM_0)
+
+func getCheckTagsSub() -> Array:
+	return getTags(SUB_0)
+
 func processTurnFinal():
-	if(has_method(state+"_processTurn")):
-		return call(state+"_processTurn")
+	if(has_method(getStatePrefix()+"_processTurn")):
+		return call(getStatePrefix()+"_processTurn")
 	return processTurn()
 
 func processTurn():
@@ -502,8 +538,8 @@ func reactActivityEnd(_otheractivity):
 
 func getDomActionsFinal():
 	var result:Array = getDomActions()
-	if(has_method(state+"_domActions")):
-		result.append_array(call(state+"_domActions"))
+	if(has_method(getStatePrefix()+"_domActions")):
+		result.append_array(call(getStatePrefix()+"_domActions"))
 	return result
 
 func getDomActions():
@@ -511,8 +547,8 @@ func getDomActions():
 
 func doDomActionFinal(_id, _actionInfo):
 	var result
-	if(has_method(state+"_doDomAction")):
-		result = call(state+"_doDomAction", _id, _actionInfo)
+	if(has_method(getStatePrefix()+"_doDomAction")):
+		result = call(getStatePrefix()+"_doDomAction", _id, _actionInfo)
 	if(result == null):
 		return doDomAction(_id, _actionInfo)
 	return result
@@ -524,8 +560,8 @@ func doDomAction(_id, _actionInfo):
 	
 func getSubActionsFinal():
 	var result:Array = getSubActions()
-	if(has_method(state+"_subActions")):
-		result.append_array(call(state+"_subActions"))
+	if(has_method(getStatePrefix()+"_subActions")):
+		result.append_array(call(getStatePrefix()+"_subActions"))
 	return result
 	
 func getSubActions():
@@ -533,8 +569,8 @@ func getSubActions():
 
 func doSubActionFinal(_id, _actionInfo):
 	var result
-	if(has_method(state+"_doSubAction")):
-		result = call(state+"_doSubAction", _id, _actionInfo)
+	if(has_method(getStatePrefix()+"_doSubAction")):
+		result = call(getStatePrefix()+"_doSubAction", _id, _actionInfo)
 	if(result == null):
 		return doSubAction(_id, _actionInfo)
 	return result
@@ -636,18 +672,45 @@ func getDomOrgasmHandlePriority():
 func getSubOrgasmHandlePriority():
 	return -1
 
+func getOrgasmHandlePriority(_indx:int) -> int:
+	return -1
+
+func isHandlingOrgasms(_indx:int) -> bool:
+	return getOrgasmHandlePriority(_indx) >= getSexEngine().getMaxOrgasmHandlePriority(getDomOrSubID(_indx))
+
 func isHandlingSubOrgasms():
 	return getSubOrgasmHandlePriority() >= getSexEngine().getCurrentActivitiesMaxSubOrgasmHandlePriority(getDomID(0), getSubID(0))
 
 func isHandlingDomOrgasms():
 	return getDomOrgasmHandlePriority() >= getSexEngine().getCurrentActivitiesMaxDomOrgasmHandlePriority(getDomID(0), getSubID(0))
 
-func getGenericOrgasmData(isSub:bool, extraText = ""):
-	var character
-	if(isSub):
-		character = getSub()
-	else:
-		character = getDom()
+func getResistScore(_indx:int) -> float:
+	if(_indx >= 0):
+		assert(false, "getResistScore function can only be called for subs!")
+		return 0.0
+	var theInfo := getDomOrSubInfo(_indx)
+	if(!theInfo):
+		Log.printerr("getResistScore: No character with id "+str(_indx)+" found in the sex activity")
+		return 0.0
+	return theInfo.getResistScore()
+
+func getComplyScore(_indx:int) -> float:
+	if(_indx >= 0):
+		assert(false, "getComplyScore function can only be called for subs!")
+		return 0.0
+	var theInfo := getDomOrSubInfo(_indx)
+	if(!theInfo):
+		Log.printerr("getComplyScore: No character with id "+str(_indx)+" found in the sex activity")
+		return 0.0
+	return theInfo.getComplyScore()
+
+func getGenericOrgasmData(_indx:int, extraText = ""):
+	var theCharID:String = getDomOrSubID(_indx)
+	if(theCharID == ""):
+		return ""
+	var character:BaseCharacter = getDomOrSub(_indx)
+	if(!character):
+		return ""
 	var text = RNG.pick([
 		"A [b]powerful orgasm[/b] overwhelms {<ORGASMER>.your} body"+str(extraText)+".",
 		"[b]{<ORGASMER>.You} {<ORGASMER>.youVerb('cum')}[/b] hard"+str(extraText)+"!",
@@ -685,14 +748,9 @@ func getGenericOrgasmData(isSub:bool, extraText = ""):
 				" The pump is full!"
 			])
 	
-	if(isSub):
-		text = text.replace("<ORGASMER>", "sub")
-	else:
-		text = text.replace("<ORGASMER>", "dom")
+	text = text.replace("<ORGASMER>", theCharID)
 	
-	return {
-		text = text,
-	}
+	return text
 
 func getGenericSubOrgasmData(extraText = ""):
 	return getGenericOrgasmData(true, extraText)
@@ -705,6 +763,9 @@ func addGenericSubOrgasmText(extraText:String = ""):
 
 func addGenericDomOrgasmText(extraText:String = ""):
 	addText(getGenericDomOrgasmData(extraText)["text"])
+
+func addGenericOrgasmText(_indx:int, extraText:String = ""):
+	addText(getGenericOrgasmData(_indx, extraText))
 
 func applyTallymarkIfNeededData(bodypartSlot):
 	#if(getDom().isPlayer()):
@@ -777,6 +838,11 @@ func damageDomClothes():
 	return ""
 	
 func getState() -> String:
+	return state
+
+func getStatePrefix() -> String:
+	if(state == ""):
+		return "init"
 	return state
 
 func setState(_newState:String):
