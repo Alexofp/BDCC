@@ -65,6 +65,11 @@ func getDomOrSubID(_indx:int) -> String:
 		return getDomID(_indx)
 	return getSubID(-_indx-1)
 
+# avoids near-zero values basically
+# unClampValue(0.2, 0.1) = 0.2
+# unClampValue(0.02, 0.1) = 0.1
+# unClampValue(-0.02, 0.1) = -0.1
+# 0.0 treated as positive
 func unClampValue(_theVal:float, _theBorder:float) -> float:
 	if(_theVal >= 0.0 && _theVal <= _theBorder):
 		_theVal = _theBorder
@@ -87,30 +92,116 @@ func exposeToFetish(_indxTarget:int, _fetishID:String, _intensity:int, _indxExpo
 		info1.addLust(10.0*fetishScore)
 		info1.addAnger(-0.05*fetishScore)
 
-func stimulate(_indxTarget:int, _slot1:String, _indxActor:int, _slot2:String, _intensity:int, _fetishID:String):
-	var info1:SexInfoBase = getDomOrSubInfo(_indxTarget)
-	var info2:SexInfoBase = getDomOrSubInfo(_indxActor)
+func stimulate(_indxActor:int, _slotActor:String, _indxTarget:int, _slotTarget:String, _intensity:int, _fetishID:String):
+	var infoActor:SexInfoBase = getDomOrSubInfo(_indxActor)
+	var infoTarget:SexInfoBase = getDomOrSubInfo(_indxTarget)
 	
 	exposeToFetish(_indxTarget, _fetishID, _intensity, _indxActor)
 	exposeToFetish(_indxActor, _fetishID, _intensity, _indxActor) # Target is same as Exposer?
 	
-	var fetishScore:float = info1.fetishScore({_fetishID:1.0}) if _fetishID != "" else 1.0
-	fetishScore = unClampValue(fetishScore, 0.2)
-	var fetishScore2:float = info2.fetishScore({_fetishID:1.0}) if _fetishID != "" else 1.0
-	fetishScore2 = unClampValue(fetishScore2, 0.2)
+	var fetishScoreActor:float = infoActor.fetishScore({_fetishID:1.0}) if _fetishID != "" else 1.0
+	fetishScoreActor = unClampValue(fetishScoreActor, 0.2)
+	var fetishScoreTarget:float = infoTarget.fetishScore({_fetishID:1.0}) if _fetishID != "" else 1.0
+	fetishScoreTarget = unClampValue(fetishScoreTarget, 0.2)
 	
 	if(_intensity == SexActIntensity.Tease):
-		info1.addArousalForeplay(0.1 + fetishScore*0.05)
-		info2.addArousalForeplay(0.1 + fetishScore2*0.05)
+		infoActor.addArousalForeplay(0.1 + fetishScoreActor*0.05)
+		infoTarget.addArousalForeplay(0.1 + fetishScoreTarget*0.05)
 	elif(_intensity == SexActIntensity.SlowSex):
-		info1.stimulateArousalZone(0.1, _slot1, 0.5)
-		info2.stimulateArousalZone(0.1, _slot2, 0.5)
+		infoActor.stimulateArousalZone(0.1, _slotActor, 0.5)
+		infoTarget.stimulateArousalZone(0.1, _slotTarget, 0.5)
 	elif(_intensity == SexActIntensity.Sex):
-		info1.stimulateArousalZone(0.2, _slot1, 1.0)
-		info2.stimulateArousalZone(0.2, _slot2, 1.0)
+		infoActor.stimulateArousalZone(0.2, _slotActor, 1.0)
+		infoTarget.stimulateArousalZone(0.2, _slotTarget, 1.0)
 	elif(_intensity == SexActIntensity.HardSex):
-		info1.stimulateArousalZone(0.3, _slot1, 1.5)
-		info2.stimulateArousalZone(0.3, _slot2, 1.5)
+		infoActor.stimulateArousalZone(0.3, _slotActor, 1.5)
+		infoTarget.stimulateArousalZone(0.3, _slotTarget, 1.5)
+
+const CHOKE_GENTLE = 0
+const CHOKE_NORMAL = 1
+const CHOKE_HARD = 2
+
+
+func choke(_indxActor:int, _indxTarget:int, _chokeStrength:int = CHOKE_NORMAL):
+	if(_indxActor < 0):
+		assert(false, "Subs can't choke")
+		return
+	if(_indxTarget >= 0):
+		assert(false, "Doms can't be chocked")
+		return
+	var actorInfo:SexDomInfo = getDomOrSubInfo(_indxActor)
+	var targetInfo:SexSubInfo = getDomOrSubInfo(_indxTarget)
+	
+	if(_chokeStrength == CHOKE_HARD):
+		targetInfo.addFear(0.1)
+		actorInfo.addAnger(-0.05)
+	else:
+		targetInfo.addFear(0.05)
+		actorInfo.addAnger(-0.05)
+	
+	var targetMasochism:float = fetish(_indxTarget, Fetish.Masochism, -0.5)
+	targetInfo.addLust(0.1 * targetMasochism)
+	targetInfo.addResistance(-0.2 * targetMasochism)
+	
+	var actorSadism:float = fetish(_indxActor, Fetish.Sadism, 0.5)
+	actorInfo.addLust(0.1 * actorSadism)
+	
+	if(_chokeStrength == CHOKE_GENTLE):
+		targetInfo.addConsciousness(-0.01)
+	elif(_chokeStrength == CHOKE_NORMAL):
+		targetInfo.addConsciousness(-RNG.randf_range(0.01, 0.05))
+	elif(_chokeStrength == CHOKE_HARD):
+		targetInfo.addConsciousness(-RNG.randf_range(0.05, 0.2))
+	
+	sendSexEvent(SexEvent.Choking, _indxActor, _indxTarget, {strongChoke=(_chokeStrength == CHOKE_HARD)})
+
+const STRIKE_NORMAL = 0
+const STRIKE_FULLFORCE = 1
+
+func strike(_indxActor:int, _indxTarget:int, _strikeStrength:int = STRIKE_NORMAL, _isDefense:bool = false, _isIntentional:bool = true):
+	if(_indxActor >= 0 && _indxTarget >= 0):
+		assert(false, "Doms can't hit doms")
+		return
+	if(_indxActor < 0 && _indxTarget < 0):
+		assert(false, "Subs can't hit subs")
+		return
+	
+	# Dom hits a sub
+	if(_indxActor >= 0 && _indxTarget < 0):
+		var actorInfo:SexDomInfo = getDomOrSubInfo(_indxActor)
+		var targetInfo:SexSubInfo = getDomOrSubInfo(_indxTarget)
+		
+		var targetMasochism:float = fetish(_indxTarget, Fetish.Masochism, -0.5)
+		if(_strikeStrength == STRIKE_FULLFORCE):
+			targetInfo.addFear(0.3)
+			targetInfo.addLust(0.2 * targetMasochism)
+			targetInfo.addResistance(-0.05 * targetMasochism)
+		else:
+			targetInfo.addFear(0.05)
+			targetInfo.addLust(0.1 * targetMasochism)
+			targetInfo.addResistance(-0.2 * targetMasochism)
+		
+		var actorSadism:float = fetish(_indxActor, Fetish.Sadism, 0.5)
+		var howMuchAddPain:int = 0
+		if(_strikeStrength == STRIKE_FULLFORCE):
+			howMuchAddPain = RNG.randi_range(15, 25)
+			actorInfo.addLust(0.2 * actorSadism)
+			actorInfo.addAnger(-0.2)
+		else:
+			howMuchAddPain = RNG.randi_range(4, 8)
+			actorInfo.addLust(0.1 * actorSadism)
+			actorInfo.addAnger(-0.1)
+		
+		targetInfo.addPain(howMuchAddPain)
+		sendSexEvent(SexEvent.PainInflicted, _indxActor, _indxTarget, {pain=howMuchAddPain,isDefense=_isDefense,intentional=_isIntentional})
+	# Sub hits a dom
+	if(_indxActor < 0 && _indxTarget >= 0):
+		assert(false, "IMPLEMENT ME")
+
+func fetish(_indx:int, _fetishID:String, _add:float = 0.0, _unclampVal:float = 0.1) -> float:
+	var theInfo:SexInfoBase = getDomOrSubInfo(_indx)
+	var theVal:float = clamp(theInfo.fetishScore({_fetishID:1.0})+_add, -1.0, 1.0)
+	return unClampValue(theVal, _unclampVal)
 
 func addOutputRaw(_rawEntry:Array):
 	getSexEngine().addOutputRaw(_rawEntry)
@@ -119,6 +210,8 @@ func talkText(_indx1:int, _text:String):
 	if(_text.empty()):
 		return
 	var theInfo := getDomOrSubInfo(_indx1)
+	if(theInfo.isUnconscious()):
+		return
 	addOutputRaw([SexEngine.OUTPUT_SAY, theInfo.getCharID(), processText(_text)])
 
 func talk(_indx1:int, _indx2:int, reactionID:int):
@@ -824,6 +917,12 @@ func sendSexEvent(type, sourceIndx:int = DOM_0, targetIndx:int = SUB_0, data = {
 	getDom().sendSexEvent(newSexEvent)
 	if(getSub() != getDom()):
 		getSub().sendSexEvent(newSexEvent)
+	
+func damageClothes(_indx:int) -> String:
+	var damageClothesResult = getDomOrSub(_indx).damageClothes()
+	if(damageClothesResult[0]):
+		return "[b]"+damageClothesResult[2].getVisibleName()+" got damaged![/b] "+damageClothesResult[1]
+	return ""
 	
 func damageSubClothes():
 	var damageClothesResult = getSub().damageClothes()

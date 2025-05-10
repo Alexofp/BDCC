@@ -297,7 +297,8 @@ func startActivity(id, theDomID, theSubID, _args = null):
 	if(activity.hasEnded):
 		reactToActivityEnd(activity)
 	checkExtra()
-	
+
+#TODO: MAKE THIS WORK PROPERLY. All doms/subs should be copied
 func switchActivity(oldActivity, newActivityID, _args = []):
 	oldActivity.endActivity()
 	

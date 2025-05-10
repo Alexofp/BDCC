@@ -171,7 +171,7 @@ func grinding_doAction(_indx:int, _action:String, _actionDict:Dictionary):
 		sendSexEvent(SexEvent.UniqueOrgasm, SUB_0, DOM_0, {orgasmType="trib"})
 		addGenericOrgasmText(DOM_0)
 	if(_action == "cumSub"):
-		stimulate(DOM_0, S_VAGINA, SUB_0, S_VAGINA, I_HARDSEX, Fetish.Tribadism)
+		stimulate(SUB_0, S_VAGINA, DOM_0, S_VAGINA, I_HARDSEX, Fetish.Tribadism)
 		#domInfo.stimulateArousalZone(0.2, BodypartSlot.Vagina, 1.0)
 		if(doCheckDoubleOrgasm()):
 			satisfyGoals()
