@@ -174,6 +174,7 @@ func addArousalSex(howmuch: float):
 	else:
 		addArousal(howmuch)
 
+# First argument is basically 'speed'. Last argument is how 'stimulating' it is
 func stimulateArousalZone(howmuch: float, bodypartSlot, stimulation:float = 1.0):
 	if(bodypartSlot == BodypartSlot.Penis && getChar().isWearingStrapon()):
 		var strapon = getChar().getWornStrapon()
@@ -183,28 +184,30 @@ func stimulateArousalZone(howmuch: float, bodypartSlot, stimulation:float = 1.0)
 		return
 	
 	var sensitiveZone:SensitiveZone = getChar().getBodypart(bodypartSlot).getSensitiveZone()
-	if(sensitiveZone != null):
-		turnsLastStim = 0
-		hadStim = true
-		sensitiveZone.stimulate(stimulation)
-		
-		var howMuchActually:float = sensitiveZone.getArousalGainModifier()
-		
-		var theArousal:float = getArousal()
-		
-		howMuchActually *= max((1.0 - min(theArousal, 0.5)*0.1 - theArousal*0.25), 0.01)
-		#if(howMuchActually <= 0.08 && RNG.chance(50)):
-		#	addArousalSex(-0.01)
-		#	return
-		if(howMuchActually*0.2 <= 0.07):
-			addArousalSex(-0.02)
-			return
-		#if(howMuchActually <= 0.09):
-		#	howMuchActually *= 0.2
-		
-		addArousalSex(howmuch * howMuchActually)
-	else:
-		addArousalSex(howmuch)
+	if(sensitiveZone == null):
+		return
+	turnsLastStim = 0
+	hadStim = true
+	sensitiveZone.stimulate(stimulation)
+	
+	var howMuchActually:float = sensitiveZone.getArousalGainModifier()
+	
+	var theArousal:float = getArousal()
+	
+	howMuchActually *= max((1.0 - min(theArousal, 0.5)*0.1 - theArousal*0.25), 0.01)
+	#if(howMuchActually <= 0.08 && RNG.chance(50)):
+	#	addArousalSex(-0.01)
+	#	return
+	if(howMuchActually*0.2 <= 0.07):
+		addArousalSex(-0.02)
+		return
+	#if(howMuchActually <= 0.09):
+	#	howMuchActually *= 0.2
+	
+	addArousalSex(howmuch * howMuchActually)
+	
+	#else:
+	#	addArousalSex(howmuch)
 
 func isCloseToCumming() -> bool:
 	return getArousal() >= 0.7

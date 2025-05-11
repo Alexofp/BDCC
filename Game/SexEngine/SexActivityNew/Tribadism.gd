@@ -53,7 +53,7 @@ func grinding_processTurn():
 		"{dom.You} "+RNG.pick(["dry {dom.youVerb('hump')}", "dry {dom.youVerb('fuck')}"])+" {sub.you}, stimulating each others "+RNG.pick(["pussies", "slits", "kitties"])+".",
 	])
 	
-	stimulate(DOM_0, S_VAGINA, SUB_0, S_VAGINA, I_SEX, Fetish.Tribadism)
+	stimulate(DOM_0, S_VAGINA, SUB_0, S_VAGINA, I_NORMAL, Fetish.Tribadism)
 #
 #		affectSub(subInfo.fetishScore({Fetish.Tribadism: 1.0}), 0.1, -0.1, -0.01)
 #		affectDom(domInfo.fetishScore({Fetish.Tribadism: 1.0}), 0.1, -0.03)
@@ -93,7 +93,7 @@ func getActions(_indx:int):
 		addAction("stop", getStopScore(), "Stop tribadism", "Enough pussy rubbing")
 	if(_indx == SUB_0):
 		addAction("pullaway", getResistScore(SUB_0), "Pull away", "Try to pull away", {
-			A_CHANCE: getSubResistChance(30.0, 25.0),
+			A_CHANCE: getResistChance(SUB_0, DOM_0, RESIST_LEGS_FOCUS, 30.0, 25.0),
 		})
 
 func doAction(_indx:int, _action:String, _actionDict:Dictionary):
@@ -103,7 +103,7 @@ func doAction(_indx:int, _action:String, _actionDict:Dictionary):
 			"{dom.You} pulled {dom.yourHis} pussy away, ending the fun.",
 		])
 	if(_action == "pullaway"):
-		var successChance:float = getSubResistChance(30.0, 25.0)
+		var successChance:float = getResistChance(SUB_0, DOM_0, RESIST_LEGS_FOCUS, 30.0, 25.0)
 		if(RNG.chance(successChance)):
 			addText("{sub.You} {sub.youVerb('pull')} away from {dom.you}.")
 			getDomInfo().addAnger(0.3)
@@ -144,19 +144,15 @@ func grinding_doAction(_indx:int, _action:String, _actionDict:Dictionary):
 		addTextPick([
 			"{dom.You} "+RNG.pick(["{dom.youVerb('let')} out a moan", "{dom.youVerb('moan')}", "{dom.youVerb('produce')} a moan", "{dom.youVerb('make')} a noise of pleasure"])+" while "+RNG.pick(["rubbing pussies", "scissoring", "grinding slits"])+" with {sub.youHim}!",
 		])
-		getDomInfo().addAnger(-0.02)
-		getDomInfo().addLust(5)
-		getSubInfo().addLust(5)
+		moan(DOM_0)
 	if(_action == "moanSub"):
 		addTextPick([
 			"{sub.You} "+RNG.pick(["{sub.youVerb('let')} out a moan", "{sub.youVerb('moan')}", "{sub.youVerb('produce')} a moan", "{sub.youVerb('make')} a noise of pleasure"])+" while {sub.yourHis} "+RNG.pick(["pussy", "kitty", "slit"])+" is being rubbed!",
 		])
-		getDomInfo().addAnger(-0.02)
-		getDomInfo().addLust(5)
-		getSubInfo().addLust(5)
+		moan(SUB_0)
 		
 	if(_action == "cumDom"):
-		stimulate(DOM_0, S_VAGINA, SUB_0, S_VAGINA, I_HARDSEX, Fetish.Tribadism)
+		stimulate(DOM_0, S_VAGINA, SUB_0, S_VAGINA, I_HIGH, Fetish.Tribadism)
 		#subInfo.stimulateArousalZone(0.2, BodypartSlot.Vagina, 1.0)
 		if(doCheckDoubleOrgasm()):
 			satisfyGoals()
@@ -171,7 +167,7 @@ func grinding_doAction(_indx:int, _action:String, _actionDict:Dictionary):
 		sendSexEvent(SexEvent.UniqueOrgasm, SUB_0, DOM_0, {orgasmType="trib"})
 		addGenericOrgasmText(DOM_0)
 	if(_action == "cumSub"):
-		stimulate(SUB_0, S_VAGINA, DOM_0, S_VAGINA, I_HARDSEX, Fetish.Tribadism)
+		stimulate(SUB_0, S_VAGINA, DOM_0, S_VAGINA, I_HIGH, Fetish.Tribadism)
 		#domInfo.stimulateArousalZone(0.2, BodypartSlot.Vagina, 1.0)
 		if(doCheckDoubleOrgasm()):
 			satisfyGoals()
@@ -203,19 +199,6 @@ func doCheckDoubleOrgasm():
 	
 func getOrgasmHandlePriority(_indx:int) -> int:
 	return 5
-
-func getSubResistChance(baseChance:float, domAngerRemoval:float) -> float:
-	var theChance = baseChance - getDomInfo().getAngerScore()*domAngerRemoval
-	if(getSub().hasBlockedHands()):
-		theChance *= 0.8
-	if(getSub().hasBoundArms()):
-		theChance *= 0.8
-	if(getSub().isBlindfolded()):
-		theChance *= 0.8
-	if(getSub().hasBoundLegs()):
-		theChance *= 0.5
-	
-	return max(theChance, 5.0)
 
 func getAnimation():
 	if(getState() in [""]):

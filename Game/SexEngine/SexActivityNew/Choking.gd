@@ -137,7 +137,7 @@ func getActions(_indx:int):
 	
 	if(_indx == SUB_0):
 		var escapeScore:float = 0.3 + getSubInfo().getResistScore() * 2.0 - getSubInfo().fetishScore({Fetish.Choking: 0.5})
-		addAction("escape", escapeScore, "Escape choking", "Try to escape the choking", {A_CHANCE: getSubResistChance()})
+		addAction("escape", escapeScore, "Escape choking", "Try to escape the choking", {A_CHANCE: getResistChance(SUB_0, DOM_0, RESIST_NECK_FOCUS, 20.0, 0.0)})
 
 
 func doAction(_indx:int, _actionID:String, _action:Dictionary):
@@ -174,7 +174,7 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 		addText("{dom.You} {dom.youVerb('pin')} {sub.you} to the floor, about to ride {sub.yourHis} {cock} with {dom.yourHis} {ass}.")
 		
 	if(_actionID == "escape"):
-		if(RNG.chance(getSubResistChance())):
+		if(RNG.chance(getResistChance(SUB_0, DOM_0, RESIST_NECK_FOCUS, 20.0, 0.0))):
 			if(getState() == ""):
 				endActivity()
 				failGoal(SexGoal.Choke)
@@ -215,22 +215,6 @@ func getStopChokeScore() -> float:
 		else:
 			stopChokeScore = 0.0
 	return stopChokeScore
-
-func getSubResistChance() -> float:
-	var defaultChance:float = 20.0
-	if(getSub().hasBoundArms()):
-		defaultChance *= 0.5
-	if(getSub().hasBlockedHands()):
-		defaultChance *= 0.5
-	if(getSub().isBlindfolded()):
-		defaultChance *= 0.8
-	if(getSub().hasBoundLegs()):
-		defaultChance *= 0.8
-	if(getState() == ""):
-		defaultChance *= 0.5
-	if(getSexType() in [SexType.SlutwallSex, SexType.StocksSex]):
-		defaultChance *= 0.5
-	return defaultChance
 
 func getAnimationPriority():
 	return 2

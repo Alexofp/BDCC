@@ -37,9 +37,14 @@ const S_LEGS = BodypartSlot.Legs
 const S_BREASTS = BodypartSlot.Breasts
 
 const I_TEASE = SexActIntensity.Tease
-const I_SLOWSEX = SexActIntensity.SlowSex
-const I_SEX = SexActIntensity.Sex
-const I_HARDSEX = SexActIntensity.HardSex
+const I_LOW = SexActIntensity.Low
+const I_NORMAL = SexActIntensity.Normal
+const I_HIGH = SexActIntensity.High
+
+const SPEED_VERYSLOW = 0
+const SPEED_SLOW = 1
+const SPEED_MEDIUM = 2
+const SPEED_FAST = 3
 
 const A_PRIORITY = "priority"
 const A_CHANCE = "chance"
@@ -64,6 +69,15 @@ func getDomOrSubID(_indx:int) -> String:
 	if(_indx >= 0):
 		return getDomID(_indx)
 	return getSubID(-_indx-1)
+
+func hasCharIDInvolved(_charID:String) -> bool:
+	for theDomInfo in doms:
+		if(theDomInfo.getCharID() == _charID):
+			return true
+	for theSubInfo in subs:
+		if(theSubInfo.getCharID() == _charID):
+			return true
+	return false
 
 # avoids near-zero values basically
 # unClampValue(0.2, 0.1) = 0.2
@@ -92,7 +106,7 @@ func exposeToFetish(_indxTarget:int, _fetishID:String, _intensity:int, _indxExpo
 		info1.addLust(10.0*fetishScore)
 		info1.addAnger(-0.05*fetishScore)
 
-func stimulate(_indxActor:int, _slotActor:String, _indxTarget:int, _slotTarget:String, _intensity:int, _fetishID:String):
+func stimulate(_indxActor:int, _slotActor:String, _indxTarget:int, _slotTarget:String, _intensity:int, _fetishID:String, speedSex:int = SPEED_MEDIUM):
 	var infoActor:SexInfoBase = getDomOrSubInfo(_indxActor)
 	var infoTarget:SexInfoBase = getDomOrSubInfo(_indxTarget)
 	
@@ -104,18 +118,28 @@ func stimulate(_indxActor:int, _slotActor:String, _indxTarget:int, _slotTarget:S
 	var fetishScoreTarget:float = infoTarget.fetishScore({_fetishID:1.0}) if _fetishID != "" else 1.0
 	fetishScoreTarget = unClampValue(fetishScoreTarget, 0.2)
 	
+	var arousalAdd:float = 0.1
+	if(speedSex == SPEED_VERYSLOW):
+		arousalAdd = 0.05
+	elif(speedSex == SPEED_SLOW):
+		arousalAdd = 0.1
+	elif(speedSex == SPEED_MEDIUM):
+		arousalAdd = 0.2
+	elif(speedSex == SPEED_FAST):
+		arousalAdd = 0.3
+	
 	if(_intensity == SexActIntensity.Tease):
-		infoActor.addArousalForeplay(0.1 + fetishScoreActor*0.05)
-		infoTarget.addArousalForeplay(0.1 + fetishScoreTarget*0.05)
-	elif(_intensity == SexActIntensity.SlowSex):
-		infoActor.stimulateArousalZone(0.1, _slotActor, 0.5)
-		infoTarget.stimulateArousalZone(0.1, _slotTarget, 0.5)
-	elif(_intensity == SexActIntensity.Sex):
-		infoActor.stimulateArousalZone(0.2, _slotActor, 1.0)
-		infoTarget.stimulateArousalZone(0.2, _slotTarget, 1.0)
-	elif(_intensity == SexActIntensity.HardSex):
-		infoActor.stimulateArousalZone(0.3, _slotActor, 1.5)
-		infoTarget.stimulateArousalZone(0.3, _slotTarget, 1.5)
+		infoActor.addArousalForeplay(arousalAdd*0.5 + fetishScoreActor*0.05)
+		infoTarget.addArousalForeplay(arousalAdd*0.5 + fetishScoreTarget*0.05)
+	elif(_intensity == SexActIntensity.Low):
+		infoActor.stimulateArousalZone(arousalAdd, _slotActor, 0.5)
+		infoTarget.stimulateArousalZone(arousalAdd, _slotTarget, 0.5)
+	elif(_intensity == SexActIntensity.Normal):
+		infoActor.stimulateArousalZone(arousalAdd, _slotActor, 1.0)
+		infoTarget.stimulateArousalZone(arousalAdd, _slotTarget, 1.0)
+	elif(_intensity == SexActIntensity.High):
+		infoActor.stimulateArousalZone(arousalAdd, _slotActor, 1.5)
+		infoTarget.stimulateArousalZone(arousalAdd, _slotTarget, 1.5)
 
 const CHOKE_GENTLE = 0
 const CHOKE_NORMAL = 1
@@ -198,10 +222,82 @@ func strike(_indxActor:int, _indxTarget:int, _strikeStrength:int = STRIKE_NORMAL
 	if(_indxActor < 0 && _indxTarget >= 0):
 		assert(false, "IMPLEMENT ME")
 
+func moan(_indx:int):
+	var theInfo:SexInfoBase = getDomOrSubInfo(_indx)
+	if(theInfo.isUnconscious()):
+		return
+	theInfo.addArousalForeplay(0.02)
+	for theSubInfo in subs:
+		theSubInfo.addLust(5)
+		theSubInfo.addFear(-0.02)
+	for theDomInfo in doms:
+		theDomInfo.addLust(5)
+		theDomInfo.addAnger(-0.02)
+	
 func fetish(_indx:int, _fetishID:String, _add:float = 0.0, _unclampVal:float = 0.1) -> float:
 	var theInfo:SexInfoBase = getDomOrSubInfo(_indx)
+	if(!theInfo):
+		return 0.0
 	var theVal:float = clamp(theInfo.fetishScore({_fetishID:1.0})+_add, -1.0, 1.0)
 	return unClampValue(theVal, _unclampVal)
+
+func personality(_indx:int, _persStatID:String, _add:float = 0.0, _unclampVal:float = 0.1) -> float:
+	var theInfo:SexInfoBase = getDomOrSubInfo(_indx)
+	if(!theInfo):
+		return 0.0
+	var theVal:float = clamp(theInfo.personalityScore({_persStatID:1.0})+_add, -1.0, 1.0)
+	return unClampValue(theVal, _unclampVal)
+
+const RESIST_BREASTS_FOCUS = 0
+const RESIST_NECK_FOCUS = 1
+const RESIST_LEGS_FOCUS = 2
+const RESIST_HANDS_FOCUS = 2
+func getResistChance(_indxSub:int, _indxDom:int, resistType:int, baseChance:float, domAngerRemoval:float) -> float:
+	#var theSubInfo:SexSubInfo = getDomOrSubInfo(_indxSub)
+	var theSub:BaseCharacter = getDomOrSub(_indxSub)
+	var theDomInfo:SexDomInfo = getDomOrSubInfo(_indxDom)
+	
+	var theChance:float = baseChance - theDomInfo.getAngerScore()*domAngerRemoval
+	if(resistType == RESIST_BREASTS_FOCUS):
+		if(theSub.hasBlockedHands()):
+			theChance *= 0.5
+		if(theSub.hasBoundArms()):
+			theChance *= 0.5
+		if(theSub.isBlindfolded()):
+			theChance *= 0.8
+		if(theSub.hasBoundLegs()):
+			theChance *= 0.5
+	if(resistType == RESIST_NECK_FOCUS):
+		if(theSub.hasBoundArms()):
+			theChance *= 0.5
+		if(theSub.hasBlockedHands()):
+			theChance *= 0.5
+		if(theSub.isBlindfolded()):
+			theChance *= 0.8
+		if(theSub.hasBoundLegs()):
+			theChance *= 0.8
+		#if(getState() == ""):
+		#	theChance *= 0.5
+		if(getSexType() in [SexType.SlutwallSex, SexType.StocksSex]):
+			theChance *= 0.5
+	if(resistType == RESIST_LEGS_FOCUS):
+		if(theSub.hasBlockedHands()):
+			theChance *= 0.8
+		if(theSub.hasBoundArms()):
+			theChance *= 0.8
+		if(theSub.isBlindfolded()):
+			theChance *= 0.8
+		if(theSub.hasBoundLegs()):
+			theChance *= 0.5
+	if(resistType == RESIST_HANDS_FOCUS):
+		if(theSub.hasBlockedHands()):
+			theChance *= 0.5
+		if(theSub.hasBoundArms()):
+			theChance *= 0.5
+		if(theSub.isBlindfolded()):
+			theChance *= 0.8
+	
+	return max(theChance, 5.0)
 
 func addOutputRaw(_rawEntry:Array):
 	getSexEngine().addOutputRaw(_rawEntry)
@@ -269,6 +365,12 @@ func processText(_text:String) -> String:
 		_i += 1
 	return GM.ui.processString(_text, theOverrides)
 
+func hasBodypartUncovered(_indx:int, bodypartSlot:String) -> bool:
+	var theChar:BaseCharacter = getDomOrSub(_indx)
+	if(!theChar):
+		return false
+	return (theChar.getFirstItemThatCoversBodypart(bodypartSlot) == null)
+
 const INDX_NOT_FOUND = -9999
 
 func convertCharIDToIndx(_charID:String) -> int:
@@ -306,7 +408,7 @@ func getActionsForCharID(_charID:String) -> Array:
 func getActions(_indx:int):
 	pass
 	
-func doAction(_indx:int, _actionID:String, _action:Dictionary):
+func doAction(_indx:int, _id:String, _action:Dictionary):
 	pass
 
 func addAction(_aID:String, _aScore:float, _aName:String, _aDesc:String, _aExtra:Dictionary = {}):
@@ -395,10 +497,18 @@ func indxToOverrideName(_indx:int) -> String:
 
 func getThroughClothingText(_indx:int, _slot:String) -> String:
 	var theChar := getDomOrSub(_indx)
-	var clothingItem = theChar.getFirstItemThatCoversBodypart(BodypartSlot.Vagina)
+	var clothingItem = theChar.getFirstItemThatCoversBodypart(_slot)
 	var throughTheClothing:String = ""
 	if(clothingItem != null):
 		throughTheClothing = " through {"+indxToOverrideName(_indx)+".yourHis} "+clothingItem.getCasualName()
+	return throughTheClothing
+
+func getThroughClothingTextCustom(_indx:int, _slot:String, _customText:String) -> String:
+	var theChar := getDomOrSub(_indx)
+	var clothingItem = theChar.getFirstItemThatCoversBodypart(_slot)
+	var throughTheClothing:String = ""
+	if(clothingItem != null):
+		throughTheClothing = _customText
 	return throughTheClothing
 
 func isCloseToCumming(_indx:int) -> bool:
@@ -406,6 +516,9 @@ func isCloseToCumming(_indx:int) -> bool:
 	
 func isReadyToCum(_indx:int) -> bool:
 	return getDomOrSubInfo(_indx).isReadyToCum()
+
+func isReadyToCumHandled(_indx:int) -> bool:
+	return isReadyToCum(_indx) && isHandlingOrgasms(_indx)
 
 func getVisibleName() -> String:
 	return activityName

@@ -1296,6 +1296,8 @@ func getBestAnimation():
 	var foundPriority = -999
 	var foundAnimInfo = null
 	var foundActivity = null
+	#var theCanTargetPC:bool = canSwitchPCTarget()
+	#var theTargetChar:String = getPCTarget()
 	
 	#var hasPlayer:bool = false
 	#if(isSub("pc") || isDom("pc")):
@@ -1307,6 +1309,10 @@ func getBestAnimation():
 		var animInfo = activity.getAnimation()
 		if(animInfo == null):
 			continue
+		
+		#if(theCanTargetPC):
+		#	if(!activity.hasCharIDInvolved(theTargetChar)):
+		#		continue
 		
 #		if(hasPlayer):
 #			if(activity.subID == "pc" || activity.domID == "pc"):
