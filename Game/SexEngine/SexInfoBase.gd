@@ -178,13 +178,14 @@ func addArousalSex(howmuch: float):
 func stimulateArousalZone(howmuch: float, bodypartSlot, stimulation:float = 1.0):
 	if(bodypartSlot == BodypartSlot.Penis && getChar().isWearingStrapon()):
 		var strapon = getChar().getWornStrapon()
-		var pleasureMod = strapon.getStraponPleasureForDom()
+		var pleasureMod:float = strapon.getStraponPleasureForDom()
 		
 		addArousalSex(howmuch * pleasureMod)
 		return
 	
 	var sensitiveZone:SensitiveZone = getChar().getBodypart(bodypartSlot).getSensitiveZone()
 	if(sensitiveZone == null):
+		addArousalForeplay(howmuch)
 		return
 	turnsLastStim = 0
 	hadStim = true

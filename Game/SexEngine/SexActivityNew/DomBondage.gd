@@ -109,7 +109,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 				addStartAction(["pc", item.uniqueID], item.getVisibleName(), "Restraint level: "+str(restraintData.getLevel()) + "\n" + item.getCombatDescription(), theActivityScore, {A_CATEGORY: (getCategory() if (!countsByItemID.has(item.id) || countsByItemID[item.id] <= 1) else (getCategory() + [str(countsByItemID[item.id])+"x"+item.getVisibleName()]))})
 			else:
 				#canActuallyPutOn += 1
-				addStartAction(["npc", item.id], "", "", theActivityScore*item.getAIForceItemWeight(getDom(), getSub()))
+				addStartAction(["npc", item.id], "", "", theActivityScore*item.getAIForceItemWeight(dom, sub))
 	
 	#if(!dom.isPlayer() && canActuallyPutOn == 0):
 	#	_sexEngine.satisfyGoal(_domInfo, SexGoal.TieUp, _subInfo)

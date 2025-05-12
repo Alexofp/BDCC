@@ -105,7 +105,8 @@ func feeding_processTurn():
 				" {sub.Your} breasts suddenly began [b]producing {sub.milk}[/b]!",
 			])
 		
-		stimulate(DOM_0, S_MOUTH, SUB_0, S_BREASTS, I_TEASE, Fetish.Lactation)
+		#stimulate(DOM_0, S_MOUTH, SUB_0, S_BREASTS, I_TEASE, Fetish.Lactation)
+		stimulate(DOM_0, S_MOUTH, SUB_0, S_BREASTS, I_NORMAL, Fetish.Lactation, SPEED_SLOW)
 #		affectSub(subInfo.fetishScore({Fetish.Lactation: 1.0}), 0.1, -0.1, -0.01)
 #		affectDom(domInfo.fetishScore({Fetish.Lactation: 1.0}), 0.1, -0.03)
 #		subInfo.addArousalForeplay(0.05)
@@ -171,7 +172,7 @@ func feeding_processTurn():
 #		subInfo.addArousalForeplay(0.1)
 #		domInfo.addArousalForeplay(0.1)
 #		subInfo.stimulateArousalZone(0.1, BodypartSlot.Breasts, 1.0)
-		stimulate(DOM_0, S_MOUTH, SUB_0, S_BREASTS, I_LOW, Fetish.Lactation)
+		stimulate(DOM_0, S_MOUTH, SUB_0, S_BREASTS, I_NORMAL, Fetish.Lactation, SPEED_SLOW)
 		
 		if(gropeAmount > 20 && RNG.chance(2) && !getSub().hasPerk(Perk.MilkNoSoreNipples) && !getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)):
 			if(getSub().addEffect(StatusEffect.SoreNipplesAfterMilking)):

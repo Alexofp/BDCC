@@ -1344,6 +1344,13 @@ func getBestAnimation():
 						theInfo = doms[theCharID]
 					if(theInfo && theInfo.didJustCame()):
 						extraInfoDict[npcField+"Cum"] = true
+						var bodyStateName:String = "bodyState"
+						if(npcField != "pc"):
+							bodyStateName = npcField + "BodyState"
+						if(!extraInfoDict.has(bodyStateName)):
+							extraInfoDict[bodyStateName] = {hard=true}
+						else:
+							extraInfoDict[bodyStateName]["hard"] = true
 
 		return foundAnimInfo
 	return sexType.getDefaultAnimation()
