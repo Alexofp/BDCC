@@ -130,11 +130,11 @@ func stimulate(_indxActor:int, _slotActor:String, _indxTarget:int, _slotTarget:S
 		arousalAdd = 0.3
 	
 	if(_intensity == SexActIntensity.Tease):
-		infoActor.addArousalForeplay(arousalAdd*0.5 + fetishScoreActor*0.05)
-		infoTarget.addArousalForeplay(arousalAdd*0.5 + fetishScoreTarget*0.05)
+		infoActor.addArousalForeplay(arousalAdd*0.25 + fetishScoreActor*0.05)
+		infoTarget.addArousalForeplay(arousalAdd*0.25 + fetishScoreTarget*0.05)
 	elif(_intensity == SexActIntensity.Low):
-		infoActor.stimulateArousalZone(arousalAdd, _slotActor, 0.5)
-		infoTarget.stimulateArousalZone(arousalAdd, _slotTarget, 0.5)
+		infoActor.stimulateArousalZone(arousalAdd*0.5, _slotActor, 0.5)
+		infoTarget.stimulateArousalZone(arousalAdd*0.5, _slotTarget, 0.5)
 	elif(_intensity == SexActIntensity.Normal):
 		infoActor.stimulateArousalZone(arousalAdd, _slotActor, 1.0)
 		infoTarget.stimulateArousalZone(arousalAdd, _slotTarget, 1.0)
@@ -321,11 +321,10 @@ func talkText(_indx1:int, _text:String):
 		return
 	addOutputRaw([SexEngine.OUTPUT_SAY, theInfo.getCharID(), processText(_text)])
 
-func talk(_indx1:int, _indx2:int, reactionID:int):
-	# Check if can talk
+func getTalkText(_indx1:int, _indx2:int, reactionID:int) -> String:
 	var theInfo := getDomOrSubInfo(_indx1)
-	if(theInfo.isUnconscious()):
-		return
+	if(!theInfo || theInfo.isUnconscious()):
+		return ""
 	var theInfo2 := getDomOrSubInfo(_indx2)
 	
 	var theText:String = ""
@@ -333,19 +332,30 @@ func talk(_indx1:int, _indx2:int, reactionID:int):
 		theText = theInfo.getChar().getVoice().getDomReaction(reactionID, getSexEngine(), theInfo, theInfo2)
 		
 		if(theText != ""):
-			addOutputRaw([SexEngine.OUTPUT_SAY, theInfo.getCharID(), GM.ui.processString(theText, {
+			return GM.ui.processString(theText, {
 				dom = theInfo.getCharID(),
 				sub = theInfo2.getCharID(),
-			})])
+			})
 		
 	elif(theInfo is SexSubInfo && theInfo2 is SexDomInfo):
 		theText = theInfo.getChar().getVoice().getSubReaction(reactionID, getSexEngine(), theInfo2, theInfo)
 	
 		if(theText != ""):
-			addOutputRaw([SexEngine.OUTPUT_SAY, theInfo.getCharID(), GM.ui.processString(theText, {
+			return GM.ui.processString(theText, {
 				dom = theInfo2.getCharID(),
 				sub = theInfo.getCharID(),
-			})])
+			})
+	return ""
+		
+
+func talk(_indx1:int, _indx2:int, reactionID:int):
+	var theText:String = getTalkText(_indx1, _indx2, reactionID)
+	if(theText == ""):
+		return
+	var theInfo := getDomOrSubInfo(_indx1)
+	if(!theInfo):
+		return
+	addOutputRaw([SexEngine.OUTPUT_SAY, theInfo.getCharID(), theText])
 
 
 func addText(_text:String):
@@ -984,7 +994,7 @@ func addGenericDomOrgasmText(extraText:String = ""):
 func addGenericOrgasmText(_indx:int, extraText:String = ""):
 	addText(getGenericOrgasmData(_indx, extraText))
 
-func applyTallymarkIfNeededData(bodypartSlot):
+func applyTallymarkIfNeeded(bodypartSlot:String):
 	#if(getDom().isPlayer()):
 	#	return null
 	
@@ -1000,7 +1010,7 @@ func applyTallymarkIfNeededData(bodypartSlot):
 	chanceToAdd *= domBodywritingsScale
 	
 	if(!RNG.chance(chanceToAdd)):
-		return null
+		return
 	
 	var theZone = null
 	if(bodypartSlot == BodypartSlot.Head):
@@ -1013,14 +1023,10 @@ func applyTallymarkIfNeededData(bodypartSlot):
 	if(theZone != null && theZone is int):
 		zoneText = BodyWritingsZone.getZoneVisibleName(theZone)
 	
-	var text = RNG.pick([
+	addTextPick([
 		"{dom.You} "+RNG.pick(["{dom.youVerb('draw')}"])+" a [b]tallymark[/b] on {sub.your} "+zoneText+".",
 		"{dom.You} "+RNG.pick(["{dom.youVerb('add')}"])+" a [b]tallymark[/b] to {sub.your} "+zoneText+".",
 	])
-	
-	return {
-		text = text,
-	}
 
 func sendSexEvent(type, sourceIndx:int = DOM_0, targetIndx:int = SUB_0, data = {}):
 	var source:String = getDomOrSubID(sourceIndx)
