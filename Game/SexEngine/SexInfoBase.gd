@@ -163,7 +163,7 @@ func isBeingDeniedHard() -> bool:
 func addArousalForeplay(howmuch: float):
 	#var lustLevel = getChar().getLustLevel()
 	# should be less efficient at high lust. or not
-	if(getArousal() < 0.5):
+	if(getArousal() < 0.33):
 		addArousal(howmuch)
 
 func addArousalSex(howmuch: float):
