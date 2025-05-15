@@ -4,6 +4,8 @@ signal onClosePressed
 onready var langList = $VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/LanguageList
 onready var translatorsList = $VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/TranslatorsList
 func _ready():
+	AutoTranslation.connect("translator_recreated", self, "_on_AutoTranslation_translator_recreated")
+	
 	var allLangs = TranslationLanguage.getAll()
 	var _i = 0
 	for langID in allLangs:
@@ -12,15 +14,21 @@ func _ready():
 			langList.select(_i)
 		_i += 1
 	
-	translatorsList.clearTranslators()
-	_i = 0
-	for translator in AutoTranslation.translators:
-		translatorsList.addTranslator(translator.getName())
-		_i += 1
+	refreshTranslatorOrder()
 
 	$VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/EnableTranslationBox.pressed = AutoTranslation.shouldTranslate()
 	$VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/EnableManualTranslateButton.pressed = AutoTranslation.shouldHaveManualTranslateButton()
 	$VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/TranslateButtonsButton.pressed = AutoTranslation.shouldTranslateButtons
+
+func _on_AutoTranslation_translator_recreated():
+	refreshTranslatorOrder()
+
+func refreshTranslatorOrder():
+	translatorsList.clearTranslators()
+	var _i = 0
+	for translator in AutoTranslation.translators:
+		translatorsList.addTranslator(translator.getName())
+		_i += 1
 
 func _on_CloseButton_pressed():
 	AutoTranslation.saveToFile()
