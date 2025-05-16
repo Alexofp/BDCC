@@ -26,10 +26,23 @@ func getDefaultAnimation():
 	if(subs.size() == 0 || doms.size() == 0):
 		return null
 	
-	var theSubID:String = subs.keys()[0] if !sexEngine.canSwitchPCTarget() else sexEngine.getPCTarget()
+	var theSubIDs:Array = subs.keys()
+	var theDomIDs:Array = doms.keys()
+	
+	#TODO: Make this better. Choose best anim out of all activities
+	var pcTarget:String = sexEngine.getPCTarget() #!sexEngine.canSwitchPCTarget()
+	var theSubID:String = theSubIDs[0]
+	var theDomID:String = theDomIDs[0]
+	if(pcTarget != ""):
+		var isPCTargetDom:bool = sexEngine.isDom(pcTarget)
+		if(isPCTargetDom):
+			theDomID = pcTarget
+		else:
+			theSubID = pcTarget
+	
 	if(subs[theSubID].isUnconscious()):
-		return [StageScene.SexStart, "defeated", {pc=doms.keys()[0], npc=theSubID}]
-	return [StageScene.SexStart, "start", {pc=doms.keys()[0], npc=theSubID}]
+		return [StageScene.SexStart, "defeated", {pc=theDomID, npc=theSubID}]
+	return [StageScene.SexStart, "start", {pc=theDomID, npc=theSubID}]
 
 func saveData():
 	return {

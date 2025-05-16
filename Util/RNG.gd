@@ -66,11 +66,11 @@ static func pickWeighted(ar, weights: Array):
 	
 	var sum = 0.0
 	for w in weights:
-		sum += w
+		sum += max(w, 0.0)
 	
 	var r:float = rand_range(0.0, sum)
 	for i in range(weights.size()):
-		r -= weights[i]
+		r -= max(weights[i], 0.0)
 		if r <= 0.0:
 			return ar[i]
 			
@@ -84,11 +84,11 @@ static func pickWeightedPairs(ar: Array):
 		
 	var sum = 0.0
 	for pair in ar:
-		sum += pair[1]
+		sum += max(pair[1], 0.0)
 		
 	var r:float = rand_range(0.0, sum)
 	for i in range(ar.size()):
-		r -= ar[i][1]
+		r -= max(ar[i][1], 0.0)
 		if r <= 0.0:
 			return ar[i][0]
 			
@@ -100,11 +100,11 @@ static func pickWeightedDict(ar: Dictionary):
 		
 	var sum = 0.0
 	for value in ar:
-		sum += ar[value]
+		sum += max(ar[value], 0.0)
 		
 	var r:float = rand_range(0.0, sum)
 	for key in ar:
-		r -= ar[key]
+		r -= max(ar[key], 0.0)
 		if r <= 0.0:
 			return key
 			
@@ -122,11 +122,11 @@ static func grabWeighted(ar, weights: Array):
 	
 	var sum = 0.0
 	for w in weights:
-		sum += w
+		sum += max(w, 0.0)
 	
 	var r:float = rand_range(0.0, sum)
 	for i in range(weights.size()):
-		r -= weights[i]
+		r -= max(weights[i], 0.0)
 		if r <= 0.0:
 			var result = ar[i]
 			ar.remove(i)
@@ -145,11 +145,11 @@ static func grabWeightedPairs(ar: Array):
 		
 	var sum = 0.0
 	for pair in ar:
-		sum += pair[1]
+		sum += max(pair[1], 0.0)
 		
 	var r:float = rand_range(0.0, sum)
 	for i in range(ar.size()):
-		r -= ar[i][1]
+		r -= max(ar[i][1], 0.0)
 		if r <= 0.0:
 			var result = ar[i][0]
 			ar.remove(i)

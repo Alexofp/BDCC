@@ -208,15 +208,20 @@ func checkExtraLessImportant():
 	for subID in subs:
 		subs[subID].getExtraOutputData(false, self)
 
-func makeActivity(id, theDomID, theSubID):
+func makeActivity(id:String, theDomID, theSubID):
+	var activityObject = makeActivityEmpty(id)
+	if(activityObject == null):
+		return null
+	activityObject.initParticipants(theDomID, theSubID)
+	return activityObject
+
+func makeActivityEmpty(id:String):
 	var activityObject = GlobalRegistry.createSexActivity(id)
 	if(activityObject == null):
 		return null
-	
 	activityObject.uniqueID = currentLastActivityID
 	activityObject.sexEngineRef = weakref(self)
 	activities.append(activityObject)
-	activityObject.initParticipants(theDomID, theSubID)
 	currentLastActivityID += 1
 	return activityObject
 
@@ -300,11 +305,18 @@ func startActivity(id, theDomID, theSubID, _args = null):
 
 #TODO: MAKE THIS WORK PROPERLY. All doms/subs should be copied
 func switchActivity(oldActivity, newActivityID, _args = []):
+	var theDomIDs:Array = []
+	for theDomInfo in oldActivity.doms:
+		theDomIDs.append(theDomInfo.getCharID())
+	var theSubIDs:Array = []
+	for theSubInfo in oldActivity.subs:
+		theSubIDs.append(theSubInfo.getCharID())
 	oldActivity.endActivity()
 	
-	var activity = makeActivity(newActivityID, oldActivity.domID, oldActivity.subID)
+	var activity = makeActivityEmpty(newActivityID)
 	if(activity == null):
 		return
+	activity.initParticipants(theDomIDs, theSubIDs)
 	
 	activity.onSwitchFrom(oldActivity, _args)
 	if(activity.hasEnded):
@@ -1041,37 +1053,49 @@ func getSafeValueFromDict(thedict:Dictionary, keyid:String, defaultValue = null)
 	return defaultValue
 
 func getPCTarget() -> String:
+	var canChooseDoms:bool = true
+	var canChooseSubs:bool = true
 	if(isDom("pc")):
-		if(pcTarget == "" || !subs.has(pcTarget)):
-			pcTarget = subs.keys()[0] if !subs.empty() else ""
-		return pcTarget
+		canChooseDoms = false
+		canChooseSubs = true
 	if(isSub("pc")):
-		if(pcTarget == "" || !doms.has(pcTarget)):
-			pcTarget = doms.keys()[0] if !doms.empty() else ""
+		canChooseDoms = true
+		canChooseSubs = false
+	
+	if(canChooseDoms && doms.has(pcTarget)):
+		return pcTarget
+	if(canChooseSubs && subs.has(pcTarget)):
 		return pcTarget
 	
-	return ""
+	if(!subs.has(pcTarget) && !doms.has(pcTarget)):
+		pcTarget = ""
+	
+	if(pcTarget == ""):
+		if(canChooseDoms && !doms.empty()):
+			pcTarget = doms.keys()[0]
+		elif(canChooseSubs && !subs.empty()):
+			pcTarget = subs.keys()[0]
+	
+	return pcTarget
 
 func switchPCTarget():
-	var theTarget:String = getPCTarget()
+	var idList:Array = []
 	if(isDom("pc")):
-		var subKeys:Array = subs.keys()
-		var theIndx:int = subKeys.find(theTarget)
-		if(theIndx < 0):
-			return
-		theIndx += 1
-		if(theIndx >= subKeys.size()):
-			theIndx = 0
-		pcTarget = subKeys[theIndx]
+		idList = subs.keys()
 	if(isSub("pc")):
-		var domKeys:Array = doms.keys()
-		var theIndx:int = domKeys.find(theTarget)
-		if(theIndx < 0):
-			return
-		theIndx += 1
-		if(theIndx >= domKeys.size()):
-			theIndx = 0
-		pcTarget = domKeys[theIndx]
+		idList = doms.keys()
+	if(!isDom("pc") && !isSub("pc")):
+		idList = (doms.keys() + subs.keys())
+	
+	var theTarget:String = getPCTarget()
+	var theIndx:int = idList.find(theTarget)
+	if(theIndx < 0):
+		return
+	theIndx += 1
+	if(theIndx >= idList.size()):
+		theIndx = 0
+	pcTarget = idList[theIndx]
+
 
 func canSwitchPCTarget() -> bool:
 	if(isDom("pc")):
@@ -1080,6 +1104,8 @@ func canSwitchPCTarget() -> bool:
 	if(isSub("pc")):
 		if(doms.size() >= 2):
 			return true
+	if((subs.size() + doms.size()) >= 3):
+		return true
 	return false
 
 func processScene():

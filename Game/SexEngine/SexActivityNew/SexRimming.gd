@@ -40,13 +40,12 @@ func startActivity(_args):
 	return
 
 func init_processTurn():
-	if(state == ""):
-		if(hasBodypartUncovered(DOM_0, BodypartSlot.Anus)):
-			waitTimer += 1
-		
-		if(waitTimer > 2):
-			getDomInfo().addAnger(0.05)
-			addText("{dom.You} {dom.youVerb('lose')} {dom.yourHis} patience.")
+	if(hasBodypartUncovered(DOM_0, BodypartSlot.Anus)):
+		waitTimer += 1
+	
+	if(waitTimer > 2):
+		getDomInfo().addAnger(0.05)
+		addText("{dom.You} {dom.youVerb('lose')} {dom.yourHis} patience.")
 
 func rimming_processTurn():
 	#affectDom(getDomInfo().fetishScore({Fetish.RimmingReceiving: 1.0})+0.3, 0.1, 0.0)
