@@ -4,6 +4,10 @@ func _init():
 	id = "SubUndressActions"
 	startedByDom = false
 	startedBySub = true
+	
+	activityName = "Undress"
+	activityDesc = "Take off something."
+	activityCategory = ["Undress"]
 
 func getGoals():
 	return {
@@ -14,46 +18,34 @@ func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 		return 1.0 - _subInfo.getResistScore()
 	return 0.0 + max(_subInfo.fetishScore({Fetish.Exhibitionism: 0.2}), 0.0) * _subInfo.getComplyScore()
 
+const bodypartsToExpose:Array = [BodypartSlot.Breasts, BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]
+
 func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
-	var bodypartsToExpose = [BodypartSlot.Breasts, BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]
 	var sub:BaseCharacter = _subInfo.getChar()
-	var handledItems = {}
-	var actions = []
+	var handledItems:Dictionary = {}
 	
 	if(sub.hasBoundArms() || sub.hasBlockedHands()):
 		return
 	
+	var theActivityScore:float = getActivityScore(_sexEngine, _domInfo, _subInfo)
 	for bodypartToExpose in bodypartsToExpose:
 		var firstItem = sub.getFirstItemThatCoversBodypart(bodypartToExpose)
 		if(firstItem == null || handledItems.has(firstItem) || firstItem.isRestraint()):
 			continue
 		
 		handledItems[firstItem] = true
-		actions.append({
-			name = "Take off "+str(firstItem.getCasualName()),
-			args = [firstItem],
-			score = getActivityScore(_sexEngine, _domInfo, _subInfo),
-			category = ["Undress"],
-		})
-	
-	return actions
+		addStartAction([firstItem], "Take off "+str(firstItem.getCasualName()), "Take off this item", theActivityScore, {A_CATEGORY: ["Undress"]})
 
-func getVisibleName():
-	return "Undress"
-
-func getCategory():
-	return ["Undress"]
-
-func getDomTags():
+func getTags(_indx:int) -> Array:
+	if(_indx == SUB_0):
+		return [SexActivityTag.HandsUsed]
 	return []
 
-func getSubTags():
-	return [SexActivityTag.HandsUsed]
-
 func startActivity(_args):
-	state = ""
-	
 	var theitem:ItemBase = _args[0]
+	if(theitem == null):
+		endActivity()
+		return
 	var itemState:ItemState = theitem.getItemState()
 	if(itemState == null):
 		getSub().getInventory().unequipItem(theitem)
@@ -61,6 +53,4 @@ func startActivity(_args):
 		itemState.remove()
 	
 	endActivity()
-	return {
-		text = "{sub.You} {sub.youVerb('take')} off {sub.yourHis} "+str(theitem.getCasualName())+".",
-	}
+	addText("{sub.You} {sub.youVerb('take')} off {sub.yourHis} "+str(theitem.getCasualName())+".")
