@@ -336,7 +336,7 @@ func aimCamera(roomID, instantly = false):
 		camera.reset_smoothing()
 
 func zoomIn(mult:float = 1.0):
-	camera.zoom *= 1.1 * mult
+	camera.zoom /= 0.9 / mult
 	updateDarknessSize()
 
 func zoomOut(mult:float = 1.0):
