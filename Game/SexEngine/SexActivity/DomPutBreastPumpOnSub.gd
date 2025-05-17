@@ -223,6 +223,9 @@ func getAnimation():
 		return null
 	return [StageScene.Cuddling, "squirm", {pc=DOM_0, npc=SUB_0}]
 
+func isAnimOptional() -> bool:
+	return true
+
 func saveData():
 	var data = .saveData()
 	

@@ -229,7 +229,6 @@ func processText(thetext:String, theDomID:String, theSubID:String):
 	return GM.ui.processString(thetext, {dom=theDomID, sub=theSubID})
 
 func addText(thetext:String, theDomID:String, theSubID:String):
-	#messages.append(processText(thetext, theDomID, theSubID))
 	addTextRaw(processText(thetext, theDomID, theSubID))
 
 #func processData(data, theDomID, theSubID):
@@ -390,10 +389,10 @@ func generateGoals():
 		print("Goals added to NPC: ", personDomInfo.goals)
 		personDomInfo.afterGoalsAssigned()
 	
-	if(!isDom("pc") && !generatedAnyGoals):
-		messages.append("Dom couldn't decide what to do with the sub, none of their fetishes apply.")
-		
-		messages.append("[say="+str(RNG.pick(doms))+"]You are a lucky slut.[/say]")
+	if(!isDom("pc") && !generatedAnyGoals && !doms.empty()):
+		addTextRaw("Dom couldn't decide what to do with the sub, none of their fetishes apply.")
+		talkText(RNG.pick(doms), "You are a lucky slut.")
+
 		
 	#domInfo.goals.append([SexGoal.Fuck, subID])
 
@@ -763,7 +762,7 @@ func start():
 		processAIActions(false)
 		processTurn()
 	else:
-		messages.append("You are a dom so you can choose what you wanna do with the sub.")
+		addTextRaw("You are a dom so you can choose what you wanna do with the sub.")
 
 func getFinalText():
 	if(messages.size() == 0):
@@ -1108,44 +1107,41 @@ func canSwitchPCTarget() -> bool:
 		return true
 	return false
 
+func doFullTurn(_isObeyMode:bool = false):
+	processAIActions(true, _isObeyMode)
+	addOutputSeparator()
+	processTurn()
+	addOutputSeparator()
+	processAIActions(false, _isObeyMode)
+
 func processScene():
 	clearOutputRaw()
-	processAIActions(true)
-	processTurn()
-	processAIActions(false)
+	doFullTurn()
 
 func doAction(_actionInfo:Dictionary):
 	if(_actionInfo["id"] == "obey"):
 		clearOutputRaw()
 		if(isSub("pc")):
 			getSubInfo("pc").setObeyMode(true)
-		processAIActions(true, true)
-		processTurn()
-		processAIActions(false, true)
+		doFullTurn(true)
 		if(isSub("pc")):
 			getSubInfo("pc").setObeyMode(false)
 	if(_actionInfo["id"] == "continue"):
 		clearOutputRaw()
-		processAIActions(true)
-		processTurn()
-		processAIActions(false)
+		doFullTurn()
 	if(_actionInfo["id"] == "action"):
 		clearOutputRaw()
 		var activity = getActivityWithUniqueID(_actionInfo["activityID"])
 		if(activity):
 			doActivityAction("pc", activity, _actionInfo["action"])
-		processAIActions(true)
-		processTurn()
-		processAIActions(false)
+		doFullTurn()
 	if(_actionInfo["id"] == "start"):
 		clearOutputRaw()
 		if(isDom("pc")):
 			startActivity(_actionInfo["activityID"], "pc", _actionInfo["target"], _actionInfo["args"])
 		else:
 			startActivity(_actionInfo["activityID"], _actionInfo["target"], "pc", _actionInfo["args"])
-		processAIActions(true)
-		processTurn()
-		processAIActions(false)
+		doFullTurn()
 
 func hasTag(charID:String, tag:int) -> bool:
 	for activity in activities:
@@ -1318,68 +1314,141 @@ func endSex():
 func hasSexEnded():
 	return sexEnded
 
-func getBestAnimation():
+func getActivityWithMaxAnimPriorityFor(_charID:String, skipOptional:bool = false):
 	var foundPriority = -999
-	var foundAnimInfo = null
+	#var foundAnimInfo = null
 	var foundActivity = null
-	#var theCanTargetPC:bool = canSwitchPCTarget()
-	#var theTargetChar:String = getPCTarget()
 	
-	#var hasPlayer:bool = false
-	#if(isSub("pc") || isDom("pc")):
-	#	hasPlayer = true
+	var foundCharInfo:SexInfoBase = null
+	var theIsDom:bool = false
+	if(subs.has(_charID)):
+		foundCharInfo = subs[_charID]
+	if(doms.has(_charID)):
+		foundCharInfo = doms[_charID]
+		theIsDom = true
+	if(!foundCharInfo):
+		return null
 	
 	for activity in activities:
 		if(activity.hasEnded):
 			continue
-		var animInfo = activity.getAnimation()
-		if(animInfo == null):
+		if(theIsDom && !activity.doms.has(foundCharInfo)):
+			continue
+		if(!theIsDom && !activity.subs.has(foundCharInfo)):
+			continue
+		if(skipOptional && activity.isAnimOptional()):
 			continue
 		
-		#if(theCanTargetPC):
-		#	if(!activity.hasCharIDInvolved(theTargetChar)):
-		#		continue
-		
-#		if(hasPlayer):
-#			if(activity.subID == "pc" || activity.domID == "pc"):
-#				if(activity.getAnimationPriority() > foundPriority || foundAnimInfo == null):
-#					foundAnimInfo = animInfo
-#					foundPriority = activity.getAnimationPriority()
-#					foundActivity = activity
-#		else:
-		if(activity.getAnimationPriority() > foundPriority || foundAnimInfo == null):
-			foundAnimInfo = animInfo
+		var animInfo = activity.getAnimationFinal()
+		if(animInfo == null):
+			continue
+		if(activity.getAnimationPriority() > foundPriority || foundActivity == null):
+			#foundAnimInfo = animInfo
 			foundPriority = activity.getAnimationPriority()
 			foundActivity = activity
+	return foundActivity
+
+func getXFreeDomIDsForAnim(_amount:int) -> Array:
+	if(_amount <= 0):
+		return []
+	var result:Array = []
+	var thePcTarget:String = getPCTarget()
 	
-	if(foundAnimInfo != null):
-		if(foundAnimInfo.size() > 2):
-			var extraInfoDict:Dictionary = foundAnimInfo[2]
-			
-			var fieldsToCheck:Array = ["pc", "npc", "npc2"]
-			for npcField in fieldsToCheck:
-				if(extraInfoDict.has(npcField)):
-					if(extraInfoDict[npcField] is int):
-						extraInfoDict[npcField] = foundActivity.getDomOrSubID(extraInfoDict[npcField])
-					
-					var theCharID:String = extraInfoDict[npcField]
-					var theInfo:SexInfoBase
-					if(subs.has(theCharID)):
-						theInfo = subs[theCharID]
-					if(doms.has(theCharID)):
-						theInfo = doms[theCharID]
-					if(theInfo && theInfo.didJustCame()):
-						extraInfoDict[npcField+"Cum"] = true
-						var bodyStateName:String = "bodyState"
-						if(npcField != "pc"):
-							bodyStateName = npcField + "BodyState"
-						if(!extraInfoDict.has(bodyStateName)):
-							extraInfoDict[bodyStateName] = {hard=true}
-						else:
-							extraInfoDict[bodyStateName]["hard"] = true
+	var toCheck:Array = doms.keys()
+	if(thePcTarget in toCheck):
+		toCheck.erase(thePcTarget)
+		toCheck = [thePcTarget] + toCheck
+	if("pc" in toCheck):
+		toCheck.erase("pc")
+		toCheck = ["pc"] + toCheck
+	
+	for charID in toCheck:
+		if(getActivityWithMaxAnimPriorityFor(charID, true) == null):
+			result.append(charID)
+			_amount -= 1
+			if(_amount <= 0):
+				return result
+	return result
+
+func getXFreeSubIDsForAnim(_amount:int) -> Array:
+	if(_amount <= 0):
+		return []
+	var result:Array = []
+	var thePcTarget:String = getPCTarget()
+	
+	var toCheck:Array = subs.keys()
+	if(thePcTarget in toCheck):
+		toCheck.erase(thePcTarget)
+		toCheck = [thePcTarget] + toCheck
+	if("pc" in toCheck):
+		toCheck.erase("pc")
+		toCheck = ["pc"] + toCheck
+	
+	for charID in toCheck:
+		if(getActivityWithMaxAnimPriorityFor(charID, true) == null):
+			result.append(charID)
+			_amount -= 1
+			if(_amount <= 0):
+				return result
+	return result
+
+func getBestAnimation():
+	var theTargetChar:String = getPCTarget()
+	if(theTargetChar == ""):
+		return null
+	var theTargetInfo:SexInfoBase
+	if(isDom(theTargetChar)):
+		theTargetInfo = doms[theTargetChar]
+	if(isSub(theTargetChar)):
+		theTargetInfo = subs[theTargetChar]
+	if(theTargetInfo == null):
+		return
+	var foundAnimInfo = null#getActivityAnimFor(theTargetChar)
+	for activity in activities:
+		if(!activity.subs.has(theTargetInfo) && !activity.doms.has(theTargetInfo)):
+			continue
+		var canUseThis:bool = true
+		for theOtherInfo in activity.subs:
+			if(activity != getActivityWithMaxAnimPriorityFor(theOtherInfo.getCharID())):
+				canUseThis = false
+				break
+		for theOtherInfo in activity.doms:
+			if(activity != getActivityWithMaxAnimPriorityFor(theOtherInfo.getCharID())):
+				canUseThis = false
+				break
+		if(canUseThis):
+			foundAnimInfo = activity.getAnimationFinal()
+			break
+		
+	if(foundAnimInfo == null):
+		foundAnimInfo = sexType.getDefaultAnimation()
+	if(foundAnimInfo == null):
+		return null
+
+	if(foundAnimInfo != null && foundAnimInfo.size() > 2):
+		var extraInfoDict:Dictionary = foundAnimInfo[2]
+		
+		var fieldsToCheck:Array = ["pc", "npc", "npc2", "npc3"]
+		for npcField in fieldsToCheck:
+			if(extraInfoDict.has(npcField)):
+				var theCharID:String = extraInfoDict[npcField]
+				var theInfo:SexInfoBase
+				if(subs.has(theCharID)):
+					theInfo = subs[theCharID]
+				if(doms.has(theCharID)):
+					theInfo = doms[theCharID]
+				if(theInfo && theInfo.didJustCame()):
+					extraInfoDict[npcField+"Cum"] = true
+					var bodyStateName:String = "bodyState"
+					if(npcField != "pc"):
+						bodyStateName = npcField + "BodyState"
+					if(!extraInfoDict.has(bodyStateName)):
+						extraInfoDict[bodyStateName] = {hard=true}
+					else:
+						extraInfoDict[bodyStateName]["hard"] = true
 
 		return foundAnimInfo
-	return sexType.getDefaultAnimation()
+	return null
 
 func resetJustCame():
 	for subID in subs:

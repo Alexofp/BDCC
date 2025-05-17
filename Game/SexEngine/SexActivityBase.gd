@@ -879,6 +879,23 @@ func getAnimationPriority():
 func getAnimation():
 	return null
 
+func isAnimOptional() -> bool:
+	return false
+
+func getAnimationFinal():
+	var theAnim = getAnimation()
+	if(theAnim == null):
+		return null
+	if(theAnim.size() <= 2):
+		theAnim.append({})
+		return theAnim
+	var theDict:Dictionary = theAnim[2]
+	for field in ["pc", "npc", "npc2", "npc3"]:
+		if(theDict.has(field)):
+			if(theDict[field] is int):
+				theDict[field] = getDomOrSubID(theDict[field])
+	return theAnim
+
 func affectSub(howmuch:float, lustMod, resistanceMod, fearMod):
 	if(lustMod != 0.0):
 		getSub().addLust(int(round(howmuch * lustMod * 100.0)))

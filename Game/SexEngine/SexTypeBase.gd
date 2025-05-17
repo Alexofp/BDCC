@@ -18,32 +18,30 @@ func getSexEngine():
 func getSupportedSexActivities():
 	return [id]
 
+func isUnconscious(_charID:String) -> bool:
+	var sexEngine = getSexEngine()
+	if(sexEngine.subs.has(_charID)):
+		return sexEngine.subs[_charID].isUnconscious()
+	return false
+
 func getDefaultAnimation():
 	var sexEngine = getSexEngine()
-	var subs = sexEngine.subs
-	var doms = sexEngine.doms
+	var theDomIDs:Array = sexEngine.getXFreeDomIDsForAnim(1)
+	var theSubIDs:Array = sexEngine.getXFreeSubIDsForAnim(1)
 	
-	if(subs.size() == 0 || doms.size() == 0):
+	if(theDomIDs.empty() && theSubIDs.empty()):
 		return null
+	if(theDomIDs.empty()):
+		if(isUnconscious(theSubIDs[0])):
+			return [StageScene.Sleeping, "sleep", {pc=theSubIDs[0]}]
+		return [StageScene.GivingBirth, "idle", {pc=theSubIDs[0]}]
+	if(theSubIDs.empty()):
+		return [StageScene.Solo, {pc=theDomIDs[0]}]
 	
-	var theSubIDs:Array = subs.keys()
-	var theDomIDs:Array = doms.keys()
+	if(isUnconscious(theSubIDs[0])):
+		return [StageScene.SexStart, "defeated", {pc=theDomIDs[0], npc=theSubIDs[0]}]
+	return [StageScene.SexStart, "start", {pc=theDomIDs[0], npc=theSubIDs[0]}]
 	
-	#TODO: Make this better. Choose best anim out of all activities
-	var pcTarget:String = sexEngine.getPCTarget() #!sexEngine.canSwitchPCTarget()
-	var theSubID:String = theSubIDs[0]
-	var theDomID:String = theDomIDs[0]
-	if(pcTarget != ""):
-		var isPCTargetDom:bool = sexEngine.isDom(pcTarget)
-		if(isPCTargetDom):
-			theDomID = pcTarget
-		else:
-			theSubID = pcTarget
-	
-	if(subs[theSubID].isUnconscious()):
-		return [StageScene.SexStart, "defeated", {pc=theDomID, npc=theSubID}]
-	return [StageScene.SexStart, "start", {pc=theDomID, npc=theSubID}]
-
 func saveData():
 	return {
 		
