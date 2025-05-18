@@ -1124,14 +1124,13 @@ func onSexEnded(_context = {}):
 	#_context = {sexEngine=self,isDom=false,sexFullResult=sexResult,sexResult=sexResult["subs"][subID]}
 	
 	if(_context.has("isDom") && !_context["isDom"]):
-		var domOrgasms = 0
-		var slaveOrgasms = 0
+		var domOrgasms:int = 0
+		var slaveOrgasms:int = 0
 		if(_context.has("sexFullResult")):
-			var fullSexResult = _context["sexFullResult"]
-			for domKey in fullSexResult["doms"]:
-				domOrgasms += fullSexResult["doms"][domKey]["timesCame"]
+			var fullSexResult:SexEngineResult = _context["sexFullResult"]
+			domOrgasms = fullSexResult.getDomTotalOrgasmCount()
 		if(_context.has("sexResult")):
-			slaveOrgasms = _context["sexResult"]["timesCame"]
+			slaveOrgasms = _context["sexResult"].timesCame
 		
 		if(slaveOrgasms == 0 && domOrgasms > 0):
 			# We got denied!

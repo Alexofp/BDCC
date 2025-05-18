@@ -1378,10 +1378,10 @@ func _react_scene_end(_tag, _result):
 	if(_tag == "socket_slutwall"):
 		if(_result.size() < 1):
 			return
-		var sexresult = _result[0]
+		var sexresult:SexEngineResult = _result[0]
 		
-		if(sexresult.has("subs") && sexresult["subs"].has("socket")):
-			var timesCame = sexresult["subs"]["socket"]["timesCame"]
+		if(sexresult):
+			var timesCame = sexresult.getSubOrgasmCount("socket")
 			if(timesCame > 0):
 				socketLust = 0
 				overstim += 10 * timesCame

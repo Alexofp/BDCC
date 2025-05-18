@@ -138,17 +138,10 @@ func _react_scene_end(_tag, _result):
 	._react_scene_end(_tag, _result)
 	
 	if(_tag == "prostitutionSex"):
-		var sexResult:Dictionary = _result[0]
-		var subSatisfaciton:float = sexResult["subs"][npcID]["satisfaction"]
-		var subTimesOrgasmed:float = sexResult["subs"][npcID]["timesCame"]
-		
-		var gotUncon:bool = false
-		if(sexResult.has("subs")):
-			var subs:Dictionary = sexResult["subs"]
-			if(subs.has("pc")):
-				var info:Dictionary = subs["pc"]
-				if(info.has("isUnconscious") && info["isUnconscious"]):
-					gotUncon = true
+		var sexResult:SexEngineResult = _result[0]
+		var subSatisfaciton:float = sexResult.getSubSatisfaction(npcID)
+		var subTimesOrgasmed:int = sexResult.getSubOrgasmCount(npcID)
+		var gotUncon:bool = sexResult.isSubUnconscious("pc")
 		
 		if(gotUncon):
 			setState("encounter_fully_rekt")

@@ -5,10 +5,15 @@ func _init():
 
 func getDefaultAnimation():
 	var sexEngine = getSexEngine()
-	var subs = sexEngine.subs
-	var doms = sexEngine.doms
+	var theDomIDs:Array = sexEngine.getXFreeDomIDsForAnim(1)
+	var theSubIDs:Array = sexEngine.getXFreeSubIDsForAnim(1)
 	
-	if(subs.size() == 0 || doms.size() == 0):
+	if(theSubIDs.empty() && theDomIDs.empty()):
 		return null
 	
-	return [StageScene.SlutwallSex, "tease", {npc=doms.keys()[0], pc=subs.keys()[0]}]
+	if(theSubIDs.empty()):
+		return [StageScene.Solo, "stand", {pc=theDomIDs[0]}]
+	if(theDomIDs.empty()):
+		return [StageScene.Slutwall, "idle", {pc=theSubIDs[0]}]
+	
+	return [StageScene.SlutwallSex, "tease", {npc=theDomIDs[0], pc=theSubIDs[0]}]

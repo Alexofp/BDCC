@@ -95,9 +95,19 @@ func sendStatusToInteraction(_result):
 	
 	interaction.receiveSceneStatusFinal(_result)
 
+func sendSexResultToInteraction(_result:SexEngineResult):
+	var pawn:CharacterPawn = GM.main.IS.getPawn(pawnID)
+	if(pawn == null):
+		return
+	var interaction:PawnInteractionBase = pawn.getInteraction()
+	if(interaction == null):
+		return
+	
+	interaction.receiveSexEngineResult(_result)
+
 func _react_scene_end(_tag, _result):
 	if(_tag == "interaction_sex"):
-		sendStatusToInteraction(_result[0])
+		sendSexResultToInteraction(_result[0])
 
 func resolveCustomCharacterName(_charID):
 	var pawn:CharacterPawn = GM.main.IS.getPawn(pawnID)

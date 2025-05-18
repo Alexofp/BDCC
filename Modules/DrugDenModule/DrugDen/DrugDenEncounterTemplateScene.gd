@@ -47,14 +47,8 @@ func _react_scene_end(_tag, _result):
 			setState("lost_encounter")
 
 	if(_tag == "defeated_sex"):
-		var gotUncon:bool = false
-		var sexResult:Dictionary = _result[0]
-		if(sexResult.has("subs")):
-			var subs:Dictionary = sexResult["subs"]
-			if(subs.has("pc")):
-				var info:Dictionary = subs["pc"]
-				if(info.has("isUnconscious") && info["isUnconscious"]):
-					gotUncon = true
+		var sexResult:SexEngineResult = _result[0]
+		var gotUncon:bool = sexResult.isSubUnconscious("pc")
 		
 		if(gotUncon):
 			setState("encounter_fully_rekt")

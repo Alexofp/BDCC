@@ -152,11 +152,14 @@ func about_to_sex_text():
 
 func about_to_sex_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "continue"):
-		var _result = getSexResult(_args, true)
-		if(slutDom):
-			clientSatisfaction = _result["subs"][getRoleID("client")]["satisfaction"]
+		var _result:SexEngineResult = getSexResult(_args, true)
+		if(_result):
+			if(slutDom):
+				clientSatisfaction = _result.getSubSatisfaction(getRoleID("client"))
+			else:
+				clientSatisfaction = _result.getDomSatisfaction(getRoleID("client"))
 		else:
-			clientSatisfaction = _result["doms"][getRoleID("client")]["satisfaction"]
+			Log.printerr("Prostitution interaction received null sex result")
 		setState("after_sex", "client")
 
 

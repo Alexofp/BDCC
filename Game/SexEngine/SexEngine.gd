@@ -14,7 +14,7 @@ var currentLastActivityID:int = 0
 
 # Result stuff
 var sexEnded:bool = false
-var sexResult:Dictionary = {}
+var sexResult:SexEngineResult = SexEngineResult.new()
 
 # Configuration
 var sexType:SexTypeBase
@@ -396,12 +396,8 @@ func generateGoals():
 		
 	#domInfo.goals.append([SexGoal.Fuck, subID])
 
-func doFastSex():
-	var newResult:Dictionary = {}
-	
-	
-	newResult["doms"] = {}
-	newResult["subs"] = {}
+func doFastSex() -> SexEngineResult:
+	var newResult:SexEngineResult = SexEngineResult.new()
 	
 	for subID in subs:
 		GM.main.updateCharacterUntilNow(subID)
@@ -424,20 +420,13 @@ func doFastSex():
 				sexGoal.doFastSex(self, domInfo, getSubInfo(goalSubID), goalData)
 				
 	for domID in doms:
-		newResult["doms"][domID] = {
-			"timesCame": RNG.randi_range(0, 3),
-			"averageLust": RNG.randf_rangeX2(0.0, 1.0),
-			"satisfaction": RNG.randf_rangeX2(0.0, 1.0),
-		}
+		var newDomResult:SexEngineResultDom = SexEngineResultDom.new()
+		newDomResult.doFastSex(self, doms[domID])
+		newResult.doms[domID] = newDomResult
 	for subID in subs:
-		newResult["subs"][subID] = {
-			"timesCame": RNG.randi_range(0, 3),
-			"averageLust": RNG.randf_rangeX2(0.0, 1.0),
-			"averageResistance": RNG.randf_rangeX2(0.0, 1.0),
-			"averageFear": RNG.randf_rangeX2(0.0, 1.0),
-			"satisfaction": RNG.randf_rangeX2(0.0, 1.0),
-			"isUnconscious": RNG.chance(5),
-		}
+		var newSubResult:SexEngineResultSub = SexEngineResultSub.new()
+		newSubResult.doFastSex(self, subs[subID])
+		newResult.subs[subID] = newSubResult
 	
 	return newResult
 
@@ -1240,30 +1229,23 @@ func keepItemsAfterSex(onlyAlwaysKept = false):
 func endSex():
 	if(sexEnded):
 		return
-	sexResult = {
-		subs = {},
-		doms = {},
-	}
+	sexResult.clear()
 	for domID in doms:
 		var domInfo = doms[domID]
-		sexResult["doms"][domID] = {
-			"timesCame": domInfo.timesCame,
-			"averageLust": domInfo.getAverageLust(),
-			"satisfaction": domInfo.calculateFinalSatisfaction(),
-		}
+		var newDomResult:SexEngineResultDom = SexEngineResultDom.new()
+		newDomResult.grabInfo(self, domInfo)
+		
+		sexResult.doms[domID] = newDomResult
+
 	for subID in subs:
 		var subInfo = subs[subID]
-		sexResult["subs"][subID] = {
-			"timesCame": subInfo.timesCame,
-			"averageLust": subInfo.getAverageLust(),
-			"averageResistance": subInfo.getAverageResistance(),
-			"averageFear": subInfo.getAverageFear(),
-			"satisfaction": subInfo.calculateFinalSatisfaction(),
-			"isUnconscious": subInfo.isUnconscious(),
-		}
+		var newSubResult:SexEngineResultSub = SexEngineResultSub.new()
+		newSubResult.grabInfo(self, subInfo)
+		
+		sexResult.subs[subID] = newSubResult
 	
 	sexEnded = true
-	var texts = ["The sex scene has ended!"]
+	var texts:Array = ["The sex scene has ended!"]
 	
 	for activity in activities:
 		activity.endActivity()
@@ -1282,7 +1264,7 @@ func endSex():
 					saveCondomToLootIfPerk(theCondom)
 			
 		domInfo.getChar().afterSexEnded(domInfo)
-		domInfo.getChar().onSexEnded({sexEngine=self,isDom=true,sexFullResult=sexResult,sexResult=sexResult["doms"][domID]})
+		domInfo.getChar().onSexEnded({sexEngine=self,isDom=true,sexFullResult=sexResult,sexResult=sexResult.doms[domID]})
 		
 		var sexEndInfo = domInfo.getSexEndInfo()
 		if(sexEndInfo.size() > 0):
@@ -1307,9 +1289,10 @@ func endSex():
 					saveItemToLoot(theCondom)
 		
 		subInfo.getChar().afterSexEnded(subInfo)
-		subInfo.getChar().onSexEnded({sexEngine=self,isDom=false,sexFullResult=sexResult,sexResult=sexResult["subs"][subID]})
+		subInfo.getChar().onSexEnded({sexEngine=self,isDom=false,sexFullResult=sexResult,sexResult=sexResult.subs[subID]})
 
-	messages.append(Util.join(texts, "\n"))
+	addOutputSeparator()
+	addTextRaw(Util.join(texts, "\n"))
 
 func hasSexEnded():
 	return sexEnded
@@ -1561,7 +1544,7 @@ func saveItemToLoot(theItem):
 	if(inventoryToSaveItemsTo != null):
 		inventoryToSaveItemsTo.addItem(theItem)
 
-func getSexResult():
+func getSexResult() -> SexEngineResult:
 	return sexResult
 
 func isBondageDisabled() -> bool:
@@ -1603,7 +1586,7 @@ func saveData():
 		"trackedItems": trackedItems,
 		"currentLastActivityID": currentLastActivityID,
 		"sexEnded": sexEnded,
-		"sexResult": sexResult,
+		"sexResult": sexResult.saveData(),
 		"bondageDisabled": bondageDisabled,
 		"subMustGoUnconscious": subMustGoUnconscious,
 		"outputRaw": outputRaw,
@@ -1639,7 +1622,7 @@ func loadData(data):
 	trackedItems = SAVE.loadVar(data, "trackedItems", {})
 	currentLastActivityID = SAVE.loadVar(data, "currentLastActivityID", 0)
 	sexEnded = SAVE.loadVar(data, "sexEnded", false)
-	sexResult = SAVE.loadVar(data, "sexResult", {})
+	sexResult.loadData(SAVE.loadVar(data, "sexResult", {}))
 	bondageDisabled = SAVE.loadVar(data, "bondageDisabled", false)
 	subMustGoUnconscious = SAVE.loadVar(data, "subMustGoUnconscious", false)
 	outputRaw = SAVE.loadVar(data, "outputRaw", [])

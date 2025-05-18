@@ -15,6 +15,7 @@ var charIDToRole:Dictionary = {} # ID = Role
 
 var currentActionID:String = ""
 var currentActionArgs:Dictionary = {}
+var sexResult:SexEngineResult
 
 var busyActionSeconds:int = 0
 var currentActionText:String = ""
@@ -635,6 +636,7 @@ func setState(newState:String, newRole:String, dirToRole:String = ""):
 	state = newState
 	currentActionID = ""
 	currentActionArgs = {}
+	sexResult = null
 
 func getState() -> String:
 	return state
@@ -714,11 +716,11 @@ func setPickedAction(_actionEntry, _context:Dictionary = {}):
 				isWaitingScene = true
 				_context["scene"].startInteractionSex(whoID, withWhomID, sexType, extraParams)
 
-func getSexResult(_args:Dictionary, checkForUncon=false):
-	if(_args.has("scene_result")):
+func getSexResult(_args:Dictionary, checkForUncon=false) -> SexEngineResult:
+	if(sexResult):
 		if(checkForUncon):
-			checkUncon(_args["scene_result"])
-		return _args["scene_result"]
+			checkUncon(sexResult)
+		return sexResult
 	
 	var _fightersData = currentActionArgs["sex"]
 	
@@ -733,9 +735,9 @@ func getSexResult(_args:Dictionary, checkForUncon=false):
 	sexEngine.initSexType(sexType)
 	sexEngine.generateGoals()
 	
-	var newResult:Dictionary = sexEngine.doFastSex()
-	
-	_args["scene_result"] = newResult
+	var newResult:SexEngineResult= sexEngine.doFastSex()
+	sexResult = newResult
+	#_args["scene_result"] = newResult
 
 	doSexAftermath(_fightersData, newResult)
 
@@ -808,7 +810,7 @@ func doFightAftermath(_fightersData, newResult):
 			else:
 				lostPawn.addRepScore(RepStat.Staff, -powerScale)
 
-func doSexAftermath(_sexData, _newResult):
+func doSexAftermath(_sexData, theSexResult:SexEngineResult):
 	var domPawn = getRolePawn(_sexData[0])
 	var subPawn = getRolePawn(_sexData[1])
 	var sexType = (_sexData[2] if _sexData.size() > 2 else SexType.DefaultSex)
@@ -822,20 +824,9 @@ func doSexAftermath(_sexData, _newResult):
 		
 		#GM.main.WHS.addEvent(WHEvent.GotFucked, subPawn.charID, domPawn.charID)
 	
-	var domSatisfaction:float = 0.0
-	var subSatisfaction:float = 0.0
-	if(_newResult.has("doms")):
-		for domID in _newResult["doms"]:
-			domSatisfaction += _newResult["doms"][domID]["satisfaction"]
-		domSatisfaction /= _newResult["doms"].size()
-	if(_newResult.has("subs")):
-		for subID in _newResult["subs"]:
-			subSatisfaction += _newResult["subs"][subID]["satisfaction"]
-		subSatisfaction /= _newResult["subs"].size()
-	_newResult["domSatisfaction"] = domSatisfaction
-	_newResult["subSatisfaction"] = subSatisfaction
-	var averageSatisfaction:float = (subSatisfaction + domSatisfaction) / 2.0
-	_newResult["averageSatisfaction"] = averageSatisfaction
+	var domSatisfaction:float = theSexResult.getAverageDomSatisfaction()
+	var subSatisfaction:float = theSexResult.getAverageSubSatisfaction()
+	var averageSatisfaction:float = theSexResult.getAverageSatisfaction()
 	
 	if(domPawn != null && subPawn != null):
 		affectAffection(_sexData[0], _sexData[1], (min(domSatisfaction, subSatisfaction) - 0.5)*0.4)
@@ -861,6 +852,7 @@ func doCurrentAction(_context:Dictionary = {}):
 	doActionFinal(currentActionID, currentActionArgs, _context)
 	currentActionID = ""
 	currentActionArgs = {}
+	sexResult = null
 	busyActionSeconds = 0
 
 #func getNextInteractionTime() -> int:
@@ -976,6 +968,11 @@ func getDebugInfo():
 		#"involvedPawns: "+str(involvedPawns),
 	]
 
+func receiveSexEngineResult(_result:SexEngineResult):
+	isWaitingScene = false
+	sexResult = _result
+	doSexAftermath(currentActionArgs["sex"], sexResult)
+
 func receiveSceneStatusFinal(_result:Dictionary):
 	isWaitingScene = false
 	
@@ -983,8 +980,10 @@ func receiveSceneStatusFinal(_result:Dictionary):
 	
 	if(currentActionArgs.has("fight")):
 		doFightAftermath(currentActionArgs["fight"], currentActionArgs["scene_result"])
-	if(currentActionArgs.has("sex")):
-		doSexAftermath(currentActionArgs["sex"], currentActionArgs["scene_result"])
+	else:
+		assert(false, "FIX ME")
+	#elif(currentActionArgs.has("sex")):
+	#	doSexAftermath(currentActionArgs["sex"], currentActionArgs["scene_result"])
 	
 	doCurrentAction()
 
@@ -1563,16 +1562,13 @@ func getSlutwallScoreMult() -> float:
 		return 0.2
 	return 1.0
 
-func checkUncon(sexResult):
-	if(sexResult == null):
+func checkUncon(_sexResult:SexEngineResult):
+	if(_sexResult == null):
 		return
 	
-	if(sexResult.has("subs")):
-		for subID in sexResult["subs"]:
-			var info = sexResult["subs"][subID]
-			
-			if(info.has("isUnconscious") && info["isUnconscious"]):
-				startInteraction("Unconscious", {main=subID})
+	for subID in _sexResult.subs:
+		if(_sexResult.isSubUnconscious(subID)):
+			startInteraction("Unconscious", {main=subID})
 
 func triggerUnconsciousPCGrabEvent(_pawn):
 	if(_pawn == null):
@@ -1718,8 +1714,9 @@ func saveData():
 		"ws": isWaitingScene,
 		"cLD": cachedLastDir,
 		"wD": wasDeleted,
-		
 	}
+	if(sexResult):
+		data["sr"] = sexResult.saveData()
 	return data
 
 func loadData(_data):
@@ -1740,4 +1737,9 @@ func loadData(_data):
 	isWaitingScene = SAVE.loadVar(_data, "ws", false)
 	cachedLastDir = SAVE.loadVar(_data, "cLD", -1)
 	wasDeleted = SAVE.loadVar(_data, "wD", false)
+	if(_data.has("sr")):
+		sexResult = SexEngineResult.new()
+		sexResult.loadData(SAVE.loadVar(_data, "sr", {}))
+	else:
+		sexResult = null
 	rebuildCharIDToRole()
