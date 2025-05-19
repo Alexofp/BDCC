@@ -20,7 +20,18 @@ static func getVisibleName(gender):
 	return OPTIONS.getGenderOverrideName(gender, getDefaultVisibleName(gender))
 
 static func getDefaultVisibleName(gender):
-	return gender.capitalize()
+	if (gender == Male):
+		return "Male"
+	elif(gender == Female):
+		return "Female"
+	elif(gender == Shemale):
+		return "Shemale"
+	elif(gender == Herm):
+		return "Herm"
+	elif(gender == Peachboy):
+		return "Peachboy"
+	else:
+		return "???"
 
 static func getOptionsDesc(gender):
 	if(gender == Male):

@@ -18,10 +18,60 @@ static func getAll():
 	return [Head, Hair, Ears, Horns, Body, Arms, Breasts, Penis, Vagina, Anus, Tail, Legs]
 
 static func getVisibleName(slot: String):
-	return slot.capitalize()
+	if(slot == Horns):
+		return "Horns"
+	elif(slot == Tail):
+		return "Tail"
+	elif(slot == Penis):
+		return "Penis"
+	elif(slot == Vagina):
+		return "Vagina"
+	elif(slot == Anus):
+		return "Anus"
+	elif(slot == Legs):
+		return "Legs"
+	elif(slot == Arms):
+		return "Arms"
+	elif(slot == Breasts):
+		return "Breasts"
+	elif(slot == Body):
+		return "Body"
+	elif(slot == Hair):
+		return "Hair"
+	elif(slot == Ears):
+		return "Ears"
+	elif(slot == Head):
+		return "Head"
+	else:
+		return "Error"
 
 static func getVisibleNameNoCap(slot: String):
-	return slot
+	if(slot == Horns):
+		return "horns"
+	elif(slot == Tail):
+		return "tail"
+	elif(slot == Penis):
+		return "penis"
+	elif(slot == Vagina):
+		return "vagina"
+	elif(slot == Anus):
+		return "anus"
+	elif(slot == Legs):
+		return "legs"
+	elif(slot == Arms):
+		return "arms"
+	elif(slot == Breasts):
+		return "breasts"
+	elif(slot == Body):
+		return "body"
+	elif(slot == Hair):
+		return "hair"
+	elif(slot == Ears):
+		return "ears"
+	elif(slot == Head):
+		return "head"
+	else:
+		return "error"
 
 static func getSlotChildName(slot: String):
 	if(slot == Head):
