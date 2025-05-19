@@ -91,7 +91,7 @@ func getActions(_indx:int):
 		if(state in ["rimming"]):
 			addAction("moan", 0.5, "Moan", "Show how much you enjoy it")
 		if(state in ["rimming"]):
-			if((getDomInfo().isReadyToCum() && isHandlingDomOrgasms())):
+			if(isReadyToCumHandled(DOM_0)):
 				addAction("cum", 1.0, "Cum!", "You're about to cum and there is nothing you can do about it", {A_PRIORITY: 1001})
 
 	if(_indx == SUB_0):

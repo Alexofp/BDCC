@@ -476,7 +476,7 @@ func getActions(_indx:int):
 					
 				addAction("cuminside", scoreToCumInside, "Cum inside", "Cum inside their "+RNG.pick(usedBodypartNames), {A_PRIORITY: 1001})
 				addAction("cumpullout", 1.0 - min(1.0, scoreToCumInside), "Pull out", "Cum on their butt", {A_PRIORITY: 1001})
-			elif(getSubInfo().isReadyToCum() && isHandlingSubOrgasms() && !getSubInfo().canDoActions()):
+			elif(isReadyToCumHandled(SUB_0) && !getSubInfo().canDoActions()):
 				addAction("subcumDom", 1.0, "Sub's orgasm", "They are about to cum!", {A_PRIORITY: 1001})
 
 		if(state in ["aftercumminginside"]):
@@ -497,22 +497,22 @@ func getActions(_indx:int):
 		
 	if(_indx == SUB_0):
 		if(state == ""):
-			var rubSubScore:float = getSubInfo().getComplyScore() * subFetishScore({fetishReceiving: 1.0})
+			var rubSubScore:float = getSubInfo().getComplyScore() * fetish(SUB_0, fetishReceiving)
 			addAction("rubSub", rubSubScore, "Rub", "Rub your "+RNG.pick(usedBodypartNames)+" against their cock")
 			addAction("resist", getSubInfo().getResistScore() / 2.0, RNG.pick(["Pull away"]), "Resist the attempts", {A_CHANCE: getSubResistChance(30.0, 25.0)})
 			if(getSubInfo().getChar().getFirstItemThatCoversBodypart(usedBodypart) == null && getDom().getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null && getDomInfo().isReadyToPenetrate()):
-				addAction("envelop", subFetishScore({fetishReceiving: 1.0}), RNG.pick(["Envelop cock"]), "Try to get this cock inside you")
+				addAction("envelop", fetish(SUB_0, fetishReceiving), RNG.pick(["Envelop cock"]), "Try to get this cock inside you")
 			if(getSubInfo().getChar().hasBodypart(otherHoleBodypart) && !getSexEngine().hasTag(getSubID(), otherHoleTag)):
 				var offerotherholeScore:float = min(0.2, getSubInfo().fetishScore({fetishReceiving: -1.0}) + getSubInfo().fetishScore({otherHoleFetishReceiving: 1.0}))
 				addAction("offerotherhole", offerotherholeScore, "Offer "+RNG.pick(otherHoleNames)+" instead", "Offer your other hole", {A_CHANCE: getDomSwitchHoleChance()})
 		if(state in ["fucking"]):
-			var moanScore:float = max(0.1, subFetishScore({fetishReceiving: 0.5}) + personality(SUB_0, PersonalityStat.Subby)*0.5)
+			var moanScore:float = max(0.1, fetish(SUB_0, fetishReceiving)*0.5 + personality(SUB_0, PersonalityStat.Subby)*0.5)
 			addAction("moan", moanScore, "Moan", "Show how much you like it")
 			addAction("resistduringfuck", getSubInfo().getResistScore() / 2.0, "Resist", "Try to stop them!", {A_CHANCE: getSubResistChance(20.0, 15.0)})
 			if(getDomInfo().isCloseToCumming() && !isStraponSex()):
 				var begtopulloutScore:float = (getResistScore(SUB_0) / 2.0 - getSubInfo().fetishScore({Fetish.BeingBred: 1.0})) / 3.0
 				addAction("begtopullout", begtopulloutScore, "Beg to pull out", "Ask them not to cum inside you", {A_CHANCE: 10 - 10 * getDomInfo().fetishScore({Fetish.Breeding: 1.0})})
-			if(getSubInfo().isReadyToCum() && isHandlingSubOrgasms()):
+			if(isReadyToCumHandled(SUB_0)):
 				addAction("subcum", 1.0, "Cum!", "You're about to cum!", {A_PRIORITY: 1001})
 		
 func doAction(_indx:int, _id:String, _action:Dictionary):

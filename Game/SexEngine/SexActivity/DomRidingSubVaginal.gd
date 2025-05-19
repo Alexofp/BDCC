@@ -447,7 +447,7 @@ func getActions(_indx:int):
 			if(isReadyToCumHandled(SUB_0) && isStraponSex()):
 				addAction("subcumstrapon", 1.0, "Cum!", "You're about to cum", {A_PRIORITY: 1001})
 			
-			if(getSubInfo().isReadyToCum() && isHandlingSubOrgasms() && !isStraponSex()):
+			if(isReadyToCumHandled(SUB_0) && !isStraponSex()):
 				addAction("warndom", 1.0, "Warn them", "Let them know that you're about to cum", {A_PRIORITY: 1001})
 				var cuminsideScore:float = getResistScore(SUB_0) + fetish(SUB_0, Fetish.Breeding)*0.5
 				addAction("cuminside", cuminsideScore, "Cum inside", "Cum inside their "+RNG.pick(usedBodypartNames), {A_PRIORITY: 1001})

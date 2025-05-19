@@ -39,7 +39,6 @@ func _initScene(_args = []):
 func _run():
 	if(state == ""):
 		sexEngine.playAnimation()
-		#saynn(sexEngine.getFinalText())
 		saynn(sexEngine.getFinalOutput())
 		
 		if(!sexEngine.hasSexEnded()):
@@ -56,10 +55,10 @@ func _run():
 			
 				
 			var theTargetID:String = sexEngine.getPCTarget()
-			for domID in sexEngine.getDomIDs():
+			for domID in sexEngine.getDoms():
 				var domInfo = sexEngine.getDomInfo(domID)
 				sayn(domInfo.getInfoStringFinal(canSelectTarget && theTargetID==domID))
-			for subID in sexEngine.getSubIDs():
+			for subID in sexEngine.getSubs():
 				var subInfo = sexEngine.getSubInfo(subID)
 				sayn(subInfo.getInfoStringFinal(canSelectTarget && theTargetID==subID))
 			sayn("")
@@ -110,7 +109,7 @@ func _react(_action: String, _args):
 		var turns = 100
 		while(!sexEngine.hasSexEnded() && turns > 0):
 			turns -= 1
-			sexEngine.doAction(sexEngine.getActions()[0])
+			sexEngine.doAction({id="auto"})
 			processTime(60)
 			updateDomsAndSubs()
 		sexEngine.endSex()

@@ -31,7 +31,10 @@ func checkIsDown():
 		return true
 	return false
 
-func canDoActions():
+func getIsDown() -> bool:
+	return isDown
+
+func canDoActions() -> bool:
 	return !isDown
 
 func addAnger(howmuch = 0.2):

@@ -14,19 +14,14 @@ var startedBySub:bool = false # Can be started by sub?
 
 var state:String = ""
 
-#TODO: REMOVE THESE AFTER REFACTOR IS DONE
-var subID:String
-var domID:String
-var subInfo:SexSubInfo
-var domInfo:SexDomInfo
-
 # Here is hope this won't bite me
-# Only use these with stimulate()
 const DOM_0 = 0
 const DOM_1 = 1
+const DOM_2 = 2
 
 const SUB_0 = -1
 const SUB_1 = -2
+const SUB_2 = -3
 
 const S_VAGINA = BodypartSlot.Vagina
 const S_ANUS = BodypartSlot.Anus
@@ -69,15 +64,6 @@ func getDomOrSubID(_indx:int) -> String:
 	if(_indx >= 0):
 		return getDomID(_indx)
 	return getSubID(-_indx-1)
-
-func hasCharIDInvolved(_charID:String) -> bool:
-	for theDomInfo in doms:
-		if(theDomInfo.getCharID() == _charID):
-			return true
-	for theSubInfo in subs:
-		if(theSubInfo.getCharID() == _charID):
-			return true
-	return false
 
 # avoids near-zero values basically
 # unClampValue(0.2, 0.1) = 0.2
@@ -152,7 +138,7 @@ func choke(_indxActor:int, _indxTarget:int, _chokeStrength:int = CHOKE_NORMAL):
 		assert(false, "Subs can't choke")
 		return
 	if(_indxTarget >= 0):
-		assert(false, "Doms can't be chocked")
+		assert(false, "Doms can't be choked")
 		return
 	var actorInfo:SexDomInfo = getDomOrSubInfo(_indxActor)
 	var targetInfo:SexSubInfo = getDomOrSubInfo(_indxTarget)
@@ -513,6 +499,10 @@ func indxToOverrideName(_indx:int) -> String:
 		return "sub2"
 	if(_indx == DOM_1):
 		return "dom2"
+	if(_indx > 0):
+		return "dom"+str(_indx+1)
+	if(_indx < 0):
+		return "sub"+str(-_indx)
 	
 	return "ERROR"
 
@@ -568,11 +558,6 @@ func initParticipants(theDoms, theSubs):
 		doms.append(getSexEngine().getDomInfo(theDomID))
 	for theSubID in theSubs:
 		subs.append(getSexEngine().getSubInfo(theSubID))
-
-func clearSexEngineRefAndParticipants():
-	sexEngineRef = null
-	subs.clear()
-	doms.clear()
 
 # Will automatically end the activity if this returns true
 func isActivityImpossibleShouldStop() -> bool:
@@ -659,10 +644,10 @@ func getStartActionsFinal(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 	getStartActions(_sexEngine, _domInfo, _subInfo)
 	return actionsResult
 
-func canBeStartedByDom():
+func canBeStartedByDom() -> bool:
 	return startedByDom
 	
-func canBeStartedBySub():
+func canBeStartedBySub() -> bool:
 	return startedBySub
 
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
@@ -717,29 +702,13 @@ func tagsNotBusy(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubIn
 	return true
 
 func startActivity(_args):
-	return {
-		text = str(id)+" HAS STARTED",
-	}
+	pass
 
 func onSwitchFrom(_otherActivity, _args):
-	return {
-		text = str(id)+" HAS STARTED BY BEING SWITCHED FROM "+str(_otherActivity.id)
-	}
+	pass
 
 func switchCurrentActivityTo(newactivityID, _args = []):
 	getSexEngine().switchActivity(self, newactivityID, _args)
-
-func getDomTags():
-	return []
-
-func getSubTags():
-	return []
-
-func getDomTagsCheck():
-	return getDomTags()
-
-func getSubTagsCheck():
-	return getSubTags()
 
 func getTags(_indx:int) -> Array:
 	return []
@@ -752,127 +721,15 @@ func getCheckTagsSub() -> Array:
 
 func processTurnFinal():
 	if(has_method(getStatePrefix()+"_processTurn")):
-		return call(getStatePrefix()+"_processTurn")
-	return processTurn()
+		call(getStatePrefix()+"_processTurn")
+	processTurn()
 
 func processTurn():
-	return {
-		text = str(id)+" IS STILL HAPPENING.",
-	}
+	pass
 
 func reactActivityEnd(_otheractivity):
-	return null
-
-func getDomActionsFinal():
-	var result:Array = getDomActions()
-	if(has_method(getStatePrefix()+"_domActions")):
-		result.append_array(call(getStatePrefix()+"_domActions"))
-	return result
-
-func getDomActions():
-	return []
-
-func doDomActionFinal(_id, _actionInfo):
-	var result
-	if(has_method(getStatePrefix()+"_doDomAction")):
-		result = call(getStatePrefix()+"_doDomAction", _id, _actionInfo)
-	if(result == null):
-		return doDomAction(_id, _actionInfo)
-	return result
-
-func doDomAction(_id, _actionInfo):
-	return {
-		"text": "Bad stuff happened",
-	}
+	pass
 	
-func getSubActionsFinal():
-	var result:Array = getSubActions()
-	if(has_method(getStatePrefix()+"_subActions")):
-		result.append_array(call(getStatePrefix()+"_subActions"))
-	return result
-	
-func getSubActions():
-	return []
-
-func doSubActionFinal(_id, _actionInfo):
-	var result
-	if(has_method(getStatePrefix()+"_doSubAction")):
-		result = call(getStatePrefix()+"_doSubAction", _id, _actionInfo)
-	if(result == null):
-		return doSubAction(_id, _actionInfo)
-	return result
-
-func doSubAction(_id, _actionInfo):
-	return {
-		"text": "Sub bad stuff happened",
-	}
-
-func domFetishScore(fetishes = {}):
-	var fetishHolder: FetishHolder = getDom().getFetishHolder()
-	
-	var result = 0.0
-	for fetishID in fetishes:
-		var fetishValue = fetishHolder.getFetishValue(fetishID)
-		result += fetishValue * fetishes[fetishID]
-	
-	return result
-	
-func subFetishScore(fetishes = {}):
-	var fetishHolder: FetishHolder = getSub().getFetishHolder()
-	
-	var result = 0.0
-	for fetishID in fetishes:
-		var fetishValue = fetishHolder.getFetishValue(fetishID)
-		result += fetishValue * fetishes[fetishID]
-	
-	return result
-
-func domPersonalityScore(personalityStats = {}):
-	var personality: Personality = getDom().getPersonality()
-	
-	var result = 0.0
-	for personalityStatID in personalityStats:
-		var personalityValue = personality.getStat(personalityStatID)
-		result += personalityValue * personalityStats[personalityStatID]
-	
-	return result
-
-func subPersonalityScore(personalityStats = {}):
-	var personality: Personality = getSub().getPersonality()
-	
-	var result = 0.0
-	for personalityStatID in personalityStats:
-		var personalityValue = personality.getStat(personalityStatID)
-		result += personalityValue * personalityStats[personalityStatID]
-	
-	return result
-
-func addDomLust(howmuch, fetishes = {}):
-	getDom().addLust(howmuch * (1.0 + domFetishScore(fetishes)))
-		
-func addSubLust(howmuch, fetishes = {}):
-	getSub().addLust(howmuch * (1.0 + subFetishScore(fetishes)))
-		
-func getSubLikingItScore():
-	return getSub().getLustLevel()
-
-func getSubHatingItScore():
-	return 1.0 - getSub().getLustLevel()
-
-func subReaction(reactionID, chance = 100):
-	if(getSubInfo(0).isUnconscious()):
-		return null
-	
-	if(chance >= 100 || RNG.chance(chance)):
-		return getSub().getVoice().getSubReaction(reactionID, getSexEngine(), getDomInfo(0), getSubInfo(0))
-
-func domReaction(reactionID, chance = 100):
-	if(getSubInfo(0).isUnconscious()):
-		return null
-	
-	if(chance >= 100 || RNG.chance(chance)):
-		return getDom().getVoice().getDomReaction(reactionID, getSexEngine(), getDomInfo(0), getSubInfo(0))
-
 func getAnimationPriority():
 	return 10
 
@@ -896,6 +753,23 @@ func getAnimationFinal():
 				theDict[field] = getDomOrSubID(theDict[field])
 	return theAnim
 
+func isSub(_charID:String) -> bool:
+	for theSubInfo in subs:
+		if(theSubInfo.getCharID() == _charID):
+			return true
+	return false
+
+func isDom(_charID:String) -> bool:
+	for theDomInfo in doms:
+		if(theDomInfo.getCharID() == _charID):
+			return true
+	return false
+
+func isInvolved(_charID:String) -> bool:
+	if(isSub(_charID) || isDom(_charID)):
+		return true
+	return false
+
 func affectSub(howmuch:float, lustMod, resistanceMod, fearMod):
 	if(lustMod != 0.0):
 		getSub().addLust(int(round(howmuch * lustMod * 100.0)))
@@ -910,23 +784,11 @@ func affectDom(howmuch:float, lustMod, angerMod):
 	if(angerMod != 0.0):
 		getDomInfo(0).addAnger(howmuch * angerMod)
 
-func getDomOrgasmHandlePriority():
-	return -1
-
-func getSubOrgasmHandlePriority():
-	return -1
-
 func getOrgasmHandlePriority(_indx:int) -> int:
 	return -1
 
 func isHandlingOrgasms(_indx:int) -> bool:
 	return getOrgasmHandlePriority(_indx) >= getSexEngine().getMaxOrgasmHandlePriority(getDomOrSubID(_indx))
-
-func isHandlingSubOrgasms():
-	return getSubOrgasmHandlePriority() >= getSexEngine().getCurrentActivitiesMaxSubOrgasmHandlePriority(getDomID(0), getSubID(0))
-
-func isHandlingDomOrgasms():
-	return getDomOrgasmHandlePriority() >= getSexEngine().getCurrentActivitiesMaxDomOrgasmHandlePriority(getDomID(0), getSubID(0))
 
 func getResistScore(_indx:int) -> float:
 	if(_indx >= 0):
@@ -996,18 +858,6 @@ func getGenericOrgasmData(_indx:int, extraText = ""):
 	
 	return text
 
-func getGenericSubOrgasmData(extraText = ""):
-	return getGenericOrgasmData(true, extraText)
-
-func getGenericDomOrgasmData(extraText = ""):
-	return getGenericOrgasmData(false, extraText)
-
-func addGenericSubOrgasmText(extraText:String = ""):
-	addText(getGenericSubOrgasmData(extraText)["text"])
-
-func addGenericDomOrgasmText(extraText:String = ""):
-	addText(getGenericDomOrgasmData(extraText)["text"])
-
 func addGenericOrgasmText(_indx:int, extraText:String = ""):
 	addText(getGenericOrgasmData(_indx, extraText))
 
@@ -1067,18 +917,6 @@ func sendSexEvent(type, sourceIndx:int = DOM_0, targetIndx:int = SUB_0, data = {
 	
 func damageClothes(_indx:int) -> String:
 	var damageClothesResult = getDomOrSub(_indx).damageClothes()
-	if(damageClothesResult[0]):
-		return "[b]"+damageClothesResult[2].getVisibleName()+" got damaged![/b] "+damageClothesResult[1]
-	return ""
-	
-func damageSubClothes():
-	var damageClothesResult = getSub().damageClothes()
-	if(damageClothesResult[0]):
-		return "[b]"+damageClothesResult[2].getVisibleName()+" got damaged![/b] "+damageClothesResult[1]
-	return ""
-
-func damageDomClothes():
-	var damageClothesResult = getDom().damageClothes()
 	if(damageClothesResult[0]):
 		return "[b]"+damageClothesResult[2].getVisibleName()+" got damaged![/b] "+damageClothesResult[1]
 	return ""

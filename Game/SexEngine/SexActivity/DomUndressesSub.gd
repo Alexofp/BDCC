@@ -110,7 +110,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			endActivity()
 			var damageText:String = ""
 			if(RNG.chance(20)):
-				damageText = damageSubClothes()
+				damageText = damageClothes(SUB_0)
 			addText("{sub.You} {sub.youVerb('manage', 'managed')} to resist {dom.yourHis} attempt to undress."+((" Struggling leads to {dom.name} ripping {sub.your} clothes. "+damageText) if damageText != "" else ""))
 			if(RNG.chance(50)):
 				talk(SUB_0, DOM_0, SexReaction.ActivelyResisting)
@@ -119,7 +119,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		getDomInfo().addAnger(0.1)
 		var damageText:String = ""
 		if(RNG.chance(10)):
-			damageText = damageSubClothes()
+			damageText = damageClothes(SUB_0)
 		addText("{sub.You} {sub.youVerb('try', 'tries')} to resist {dom.yourHis} hands but {sub.youVerb('fail')}."+((" Struggling leads to {dom.name} ripping {sub.your} clothes. "+damageText) if damageText != "" else ""))
 		if(RNG.chance(50)):
 			talk(SUB_0, DOM_0, SexReaction.Resisting)

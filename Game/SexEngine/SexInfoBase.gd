@@ -123,7 +123,7 @@ func addPain(newpain):
 func addLust(newlust):
 	getChar().addLust(newlust)
 
-func canDoActions():
+func canDoActions() -> bool:
 	return true
 
 func canTalk():

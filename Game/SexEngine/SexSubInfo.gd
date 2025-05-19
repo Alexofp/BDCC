@@ -44,7 +44,7 @@ func initFromPersonality():
 		var npcSlave = getChar().getNpcSlavery()
 		fear = npcSlave.getFear()
 
-func canDoActions():
+func canDoActions() -> bool:
 	if(getChar().getBuffsHolder().hasBuff(Buff.SpacedOutInSexBuff)):
 		return false
 	if(getConsciousness() <= 0.0):

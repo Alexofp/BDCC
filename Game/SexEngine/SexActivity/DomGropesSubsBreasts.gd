@@ -140,7 +140,7 @@ func groping_processTurn():
 		])
 	
 	if(alsoCock):
-		if(!subInfo.isReadyToPenetrate()):
+		if(!getSubInfo().isReadyToPenetrate()):
 			alsoCock = false
 		else:
 			stimulate(DOM_0, S_HANDS, SUB_0, S_PENIS, I_LOW, Fetish.SeedMilking, SPEED_VERYSLOW)
@@ -210,7 +210,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		addText("{dom.You} {dom.youVerb('quit')} groping {sub.yourHis} chest.")
 	
 	if(_id == "cum"):
-		getSub().cumOnFloor(domID)
+		getSub().cumOnFloor(getDomID())
 		getSubInfo().cum()
 		var extraText:String = ""
 		if(getSub().isLactating()):

@@ -61,7 +61,7 @@ func grinding_processTurn():
 #		domInfo.stimulateArousalZone(0.1, BodypartSlot.Vagina, 0.5)
 	
 	if(OPTIONS.isContentEnabled(ContentType.CumStealing) && getDom().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) == null && getSub().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) == null):
-		if(RNG.chance(20) && getDom().bodypartShareFluidsWith(BodypartSlot.Vagina, subID, BodypartSlot.Vagina, 0.2)):
+		if(RNG.chance(20) && getDom().bodypartShareFluidsWith(BodypartSlot.Vagina, getSubID(), BodypartSlot.Vagina, 0.2)):
 			addTextPick([
 				"{dom.You} and {sub.you} [b]share some cum[/b] while "+RNG.pick(["rubbing pussies together", "doing tribadism", "scissoring"])+"!",
 				"[b]Some cum gets shared[/b] between the two "+RNG.pick(["pussies", "slits", "kitties"])+"!",
