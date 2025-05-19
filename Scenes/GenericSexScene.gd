@@ -43,15 +43,17 @@ func _run():
 		
 		if(!sexEngine.hasSexEnded()):
 			if(sexEngine.isDom("pc")):
-				addButtonAt(14, "END SEX", "Enough fun for now", "stopsex")
+				addExtraButtonAt(4, "END SEX", "Enough fun for now", "stopsex")
 			else:
-				addButtonAt(14, "QUICK SEX", "Simulate the sex for a while until it ends", "simulatesex")
+				addExtraButtonAt(4, "QUICK SEX", "Simulate the sex for a while until it ends", "simulatesex")
 			var canSelectTarget:bool = sexEngine.canSwitchPCTarget()
 			if(canSelectTarget):
-				addButtonAt(13, "TARGET", "Switch the target of your new activities", "switchtarget")
+				addExtraButtonAt(3, "TARGET", "Switch the target of your new activities", "switchtarget")
 			
 			if(currentCategory != []):
 				addButton("Back", "Back to the previous menu", "backbutton")
+				if(GM.ui.getCurrentPage() > 0):
+					addExtraButton("Back", "Back to the previous menu", "backbutton")
 			
 				
 			var theTargetID:String = sexEngine.getPCTarget()
