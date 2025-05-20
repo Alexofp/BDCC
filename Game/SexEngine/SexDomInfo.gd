@@ -16,7 +16,7 @@ func afterGoalsAssigned():
 	checkHasCumGoals()
 
 func checkHasCumGoals():
-	hasAnyCumGoals = false
+	#hasAnyCumGoals = false
 	for goalInfo in goals:
 		var goalID = goalInfo[0]
 		var sexGoal = GlobalRegistry.getSexGoal(goalID)

@@ -50,6 +50,12 @@ func _run():
 			if(canSelectTarget):
 				addExtraButtonAt(3, "TARGET", "Switch the target of your new activities", "switchtarget")
 			
+			if(sexEngine.canChooseDomAutonomy()):
+				if(!sexEngine.isDomAutonomyEnabled()):
+					addExtraButton("Enable dom autonomy", "Allow other doms to do things with the sub", "toggle_dom_autonomy")
+				else:
+					addExtraButton("Disable dom autonomy", "Disallow other doms to do things with the sub", "toggle_dom_autonomy")
+			
 			if(currentCategory != []):
 				addButton("Back", "Back to the previous menu", "backbutton")
 				if(GM.ui.getCurrentPage() > 0):
@@ -100,6 +106,14 @@ func _run():
 func _react(_action: String, _args):
 	if(_action == "stopsex"):
 		sexEngine.endSex()
+		return
+	
+	if(_action == "toggle_dom_autonomy"):
+		sexEngine.toggleDomAutonomy()
+		if(sexEngine.isDomAutonomyEnabled()):
+			addMessage("Other doms now have action autonomy.")
+		else:
+			addMessage("Other doms won't do any new actions anymore.")
 		return
 	
 	if(_action == "recoverandleave"):

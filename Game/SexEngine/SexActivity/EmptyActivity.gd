@@ -71,7 +71,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			getDomInfo().addAnger(0.1)
 			return
 			
-func getSubResistChance(baseChance, domAngerRemoval):
+func getSubResistChance(baseChance:float, domAngerRemoval:float) -> float:
 	var theChance = baseChance - getDomInfo().getAngerScore()*domAngerRemoval
 	if(getSub().hasBlockedHands()):
 		theChance *= 0.5
@@ -84,6 +84,9 @@ func getSubResistChance(baseChance, domAngerRemoval):
 
 func getAnimation():
 	return [StageScene.Duo, "stand", {pc=SUB_0, npc=DOM_0, npcAction="stand"}]
+
+func getAnimationPriority():
+	return 10
 
 func getOrgasmHandlePriority(_indx:int) -> int:
 	return -1

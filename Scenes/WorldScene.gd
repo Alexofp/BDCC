@@ -119,7 +119,8 @@ func _react(_action: String, _args):
 		runScene("MeScene")
 	if(_action == "sextest"):
 		#runScene("GenericSexScene", ["pc", ["rahi", "nova"]])
-		runScene("GenericSexScene", [["avy", "nova"], ["rahi", "socket"]])
+		#runScene("GenericSexScene", [["avy", "nova"], ["rahi", "socket"]])
+		runScene("GenericSexScene", [["avy", "pc"], ["rahi", "socket"]])
 		#runScene("GenericSexScene", [["avy"], ["rahi"]])
 		#runScene("GenericSexScene", ["rahi", "pc"])
 		

@@ -1,5 +1,7 @@
 extends SexActivityBase
 
+var ticks:int = 0
+
 func _init():
 	id = "BeatingUpWhenAngry"
 	
@@ -21,7 +23,8 @@ func getSupportedSexTypes():
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	if(_subInfo.isUnconscious()):
 		return -1.0
-	return _domInfo.getIsAngryScore() * 1.0 * max(0.1, 0.1 + _domInfo.personalityScore({PersonalityStat.Mean: 1.0})) - _subInfo.getAboutToPassOutScore() * _domInfo.fetishScore({Fetish.UnconsciousSex: -1.0})
+	var theScore:float = _domInfo.getIsAngryScore() * 1.0 * max(0.1, 0.1 + _domInfo.personalityScore({PersonalityStat.Mean: 1.0})) - _subInfo.getAboutToPassOutScore() * _domInfo.fetishScore({Fetish.UnconsciousSex: -1.0})
+	return min(theScore, 0.2)
 
 func getTags(_indx:int) -> Array:
 	if(_indx == DOM_0):
@@ -35,6 +38,7 @@ func startActivity(_args):
 		talk(SUB_0, DOM_0, SexReaction.AboutToBeatUp)
 
 func init_processTurn():
+	ticks += 1
 	strike(DOM_0, SUB_0, STRIKE_NORMAL)
 	
 	var texts:Array = [
@@ -76,6 +80,8 @@ func init_processTurn():
 func getActions(_indx:int):
 	if(_indx == DOM_0):
 		var stopScore:float = 1.0 - getDomInfo().getIsAngryScore() + getSubInfo().getAboutToPassOutScore() * fetish(DOM_0, Fetish.UnconsciousSex, 0.5)
+		if(ticks < 2):
+			stopScore *= 0.1
 		addAction("stop", stopScore, "Stop beating up", "Enough violence")
 		var hitHardScore:float = getDomInfo().getIsAngryScore()*fetish(DOM_0, Fetish.Masochism)*0.4 - getSubInfo().getAboutToPassOutScore() * fetish(DOM_0, Fetish.UnconsciousSex, 0.5)
 		addAction("hithard", hitHardScore, "Hit really hard", "Make that bitch regret it")
@@ -106,3 +112,15 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 		talk(DOM_0, SUB_0, SexReaction.BeatingUpHard)
 		if(RNG.chance(20)):
 			talk(SUB_0, DOM_0, SexReaction.BeatingUpHard)
+
+func saveData():
+	var data = .saveData()
+	
+	data["ticks"] = ticks
+
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	ticks = SAVE.loadVar(data, "ticks", 0)

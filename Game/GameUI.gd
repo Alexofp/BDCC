@@ -184,7 +184,6 @@ func updateExtraButtons():
 		var currButtonAm:int = extra_buttons_grid.get_child_count()
 		if(_indx > currButtonAm):
 			for _i in range(_indx-currButtonAm):
-				print("ADDING SPACER")
 				var spaceHolder:Control = Control.new()
 				spaceHolder.size_flags_horizontal = SIZE_EXPAND_FILL
 				extra_buttons_grid.add_child(spaceHolder)

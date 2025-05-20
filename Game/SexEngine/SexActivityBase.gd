@@ -361,14 +361,14 @@ func processText(_text:String) -> String:
 		if(_i == 0):
 			theOverrides["sub"] = theSubInfo.getCharID()
 		else:
-			theOverrides["sub"+str(_i+1)] = theSubInfo.getCharID()
+			theOverrides["sub"+str(_i)] = theSubInfo.getCharID()
 		_i += 1
 	_i = 0
 	for theDomInfo in doms:
 		if(_i == 0):
 			theOverrides["dom"] = theDomInfo.getCharID()
 		else:
-			theOverrides["dom"+str(_i+1)] = theDomInfo.getCharID()
+			theOverrides["dom"+str(_i)] = theDomInfo.getCharID()
 		_i += 1
 	return GM.ui.processString(_text, theOverrides)
 
@@ -967,6 +967,86 @@ func loadData(data):
 	for theDomID in domsData:
 		doms.append(theSexEngine.getDomInfo(theDomID))
 
+# Condition stuff below
+enum {
+	COND_HasReachablePenisOrStrapon,
+	COND_AllowUnconsciousOrDowned,
+}
+
+func doesCharSatisfyCondition(_sexEngine, _charInfo:SexInfoBase, condEntry) -> bool:
+	var _char:BaseCharacter = _charInfo.getChar()
+	if(condEntry == COND_HasReachablePenisOrStrapon):
+		if(!_char.hasReachablePenis() && !_char.isWearingStrapon()):
+			return false
+	
+	return true
+
+func getDomIDsThatSatisfyConditions(_sexEngine, _condList:Array, _amount:int, _ignoreList:Array) -> Array:
+	var result:Array = []
+	
+	var allowUncon:bool = (COND_AllowUnconsciousOrDowned in _condList)
+	
+	var theChars:Array = _sexEngine.doms.keys()
+	theChars.shuffle()
+	for theDomID in theChars:
+		if(result.size() >= _amount):
+			break
+		if(theDomID in _ignoreList):
+			continue
+		var domInfo:SexDomInfo = _sexEngine.doms[theDomID]
+		#var dom:BaseCharacter = domInfo.getChar()
+		
+		if(!allowUncon && domInfo.getIsDown()):
+			continue
+		
+		for condEntry in _condList:
+			if(!doesCharSatisfyCondition(_sexEngine, domInfo, condEntry)):
+				continue
+		result.append(theDomID)
+	
+	return result
+
+func hasDomIDsThatSatisfyConditions(_sexEngine, _condList:Array, _amount:int, _ignoreList:Array) -> bool:
+	if((_sexEngine.doms.size()-_ignoreList.size()) < _amount):
+		return false
+	return getDomIDsThatSatisfyConditions(_sexEngine, _condList, _amount, _ignoreList).size() == _amount
+
+func getSubIDsThatSatisfyConditions(_sexEngine, _condList:Array, _amount:int, _ignoreList:Array) -> Array:
+	var result:Array = []
+	
+	var allowUncon:bool = (COND_AllowUnconsciousOrDowned in _condList)
+	
+	var theChars:Array = _sexEngine.subs.keys()
+	theChars.shuffle()
+	for theSubID in theChars:
+		if(result.size() >= _amount):
+			break
+		if(theSubID in _ignoreList):
+			continue
+		var subInfo:SexSubInfo = _sexEngine.subs[theSubID]
+		
+		if(!allowUncon && subInfo.isUnconscious()):
+			continue
+		
+		for condEntry in _condList:
+			if(!doesCharSatisfyCondition(_sexEngine, subInfo, condEntry)):
+				continue
+		result.append(theSubID)
+	
+	return result
+
+func hasSubIDsThatSatisfyConditions(_sexEngine, _condList:Array, _amount:int, _ignoreList:Array) -> bool:
+	if((_sexEngine.subs.size()-_ignoreList.size()) < _amount):
+		return false
+	return getSubIDsThatSatisfyConditions(_sexEngine, _condList, _amount, _ignoreList).size() == _amount
+
+func pullInDom(_otherDomID:String, stopTheirActivities:bool = true):
+	if(isDom(_otherDomID)):
+		return
+	var theSexEngine := getSexEngine()
+	if(stopTheirActivities):
+		theSexEngine.stopActivitiesThatInvolveCharID(_otherDomID)
+	doms.append(theSexEngine.getDomInfo(_otherDomID))
 
 
 # Building blocks below

@@ -22,6 +22,8 @@ var disabledGoals:Dictionary = {}
 var bondageDisabled:bool = false
 var subMustGoUnconscious:bool = false
 
+var pcAllowsDomAutonomy:bool = false
+
 var pcTarget:String = ""
 var outputRaw:Array = []
 const OUTPUT_TEXT = 0
@@ -260,73 +262,86 @@ func getActivityWithUniqueID(uniqueID:int):
 			return activity
 	return null
 
+func generateGoalsFor(domID:String, amountToGenerate:int) -> bool:
+	if(domID == "pc"):
+		return false
+	
+	var generatedAnyGoals:bool = false
+	var personDomInfo:SexDomInfo = doms[domID]
+	var possibleGoals:Array = []
+	
+	var breedingGoalsAmount:int = 0
+	var breedingGoals:Array = []
+	
+	var dom:BaseCharacter = personDomInfo.getChar()
+	
+	for subID in subs:
+		var personSubInfo = subs[subID]
+		var sub = personSubInfo.getChar()
+		if(sub.hasPerk(Perk.FertilitySubmissiveAndBreedable)):
+			breedingGoalsAmount += 1
+		
+		var goalsToAdd = dom.getFetishHolder().getGoals(self, sub)
+		if(goalsToAdd != null):
+			for goal in goalsToAdd:
+				if(disabledGoals.has(goal[0])):
+					continue
+				if(subID == "pc"):
+					if(GM.main.getEncounterSettings().isGoalDisabledForSubPC(goal[0])):
+						continue
+				
+				if(!checkIfThereAreAnyActivitiesThatSupportGoal(goal[0])):
+					continue
+
+				var sexGoal:SexGoalBase = GlobalRegistry.getSexGoal(goal[0])
+				var goalData = sexGoal.generateData(self, personDomInfo, personSubInfo)
+				
+				if(sexGoal.isPossible(self, personDomInfo, personSubInfo, goalData) && !sexGoal.isCompleted(self, personDomInfo, personSubInfo, goalData)):
+					var goalWeightModifier = GM.main.getEncounterSettings().getGoalWeight(sexGoal.id, sexGoal.getGoalDefaultWeight())
+					goalWeightModifier *= sub.getSexGoalSubWeightModifier(sexGoal.id, domID)
+					var goalObject = [[goal[0], sub.getID(), goalData], goal[1] * goalWeightModifier]
+					
+					possibleGoals.append(goalObject)
+					
+					if(sexGoal.canLeadToSubsPregnancy(self, personDomInfo, personSubInfo, goalData)):
+						breedingGoals.append(goalObject)
+						
+	if(possibleGoals.size() > 0):
+		for _i in range(0, amountToGenerate):
+			var randomGoalInfo = RNG.pickWeightedPairs(possibleGoals)
+			personDomInfo.goals.append(randomGoalInfo.duplicate(true))
+			generatedAnyGoals = true
+			
+	if(breedingGoalsAmount > 0 && breedingGoals.size() > 0):
+		for _i in range(0, breedingGoalsAmount):
+			var randomGoalInfo = RNG.pickWeightedPairs(breedingGoals)
+			personDomInfo.goals.append(randomGoalInfo.duplicate(true))
+		
+	Log.printVerbose("Goals added to NPC: "+str(personDomInfo.goals))
+	personDomInfo.afterGoalsAssigned()
+	return generatedAnyGoals
+
 func generateGoals():
 	var amountToGenerate = 2 + (subs.size()-1)
 	var generatedAnyGoals:bool = false
 	
 	for domID in doms:
-		if(domID == "pc"):
-			continue
-		
-		var personDomInfo = doms[domID]
-		var possibleGoals = []
-		
-		var breedingGoalsAmount = 0
-		var breedingGoals = []
-		
-		var dom = personDomInfo.getChar()
-		
-		for subID in subs:
-			var personSubInfo = subs[subID]
-			var sub = personSubInfo.getChar()
-			if(sub.hasPerk(Perk.FertilitySubmissiveAndBreedable)):
-				breedingGoalsAmount += 1
-			
-			var goalsToAdd = dom.getFetishHolder().getGoals(self, sub)
-			if(goalsToAdd != null):
-				for goal in goalsToAdd:
-					if(disabledGoals.has(goal[0])):
-						continue
-					if(subID == "pc"):
-						if(GM.main.getEncounterSettings().isGoalDisabledForSubPC(goal[0])):
-							continue
-					
-					if(!checkIfThereAreAnyActivitiesThatSupportGoal(goal[0])):
-						continue
+		if(generateGoalsFor(domID, amountToGenerate)):
+			generatedAnyGoals = true
 
-					var sexGoal:SexGoalBase = GlobalRegistry.getSexGoal(goal[0])
-					var goalData = sexGoal.generateData(self, personDomInfo, personSubInfo)
-					
-					if(sexGoal.isPossible(self, personDomInfo, personSubInfo, goalData) && !sexGoal.isCompleted(self, personDomInfo, personSubInfo, goalData)):
-						var goalWeightModifier = GM.main.getEncounterSettings().getGoalWeight(sexGoal.id, sexGoal.getGoalDefaultWeight())
-						goalWeightModifier *= sub.getSexGoalSubWeightModifier(sexGoal.id, domID)
-						var goalObject = [[goal[0], sub.getID(), goalData], goal[1] * goalWeightModifier]
-						
-						possibleGoals.append(goalObject)
-						
-						if(sexGoal.canLeadToSubsPregnancy(self, personDomInfo, personSubInfo, goalData)):
-							breedingGoals.append(goalObject)
-							
-		if(possibleGoals.size() > 0):
-			for _i in range(0, amountToGenerate):
-				var randomGoalInfo = RNG.pickWeightedPairs(possibleGoals)
-				personDomInfo.goals.append(randomGoalInfo.duplicate(true))
-				generatedAnyGoals = true
-				
-		if(breedingGoalsAmount > 0 && breedingGoals.size() > 0):
-			for _i in range(0, breedingGoalsAmount):
-				var randomGoalInfo = RNG.pickWeightedPairs(breedingGoals)
-				personDomInfo.goals.append(randomGoalInfo.duplicate(true))
-			
-		Log.printVerbose("Goals added to NPC: "+str(personDomInfo.goals))
-		personDomInfo.afterGoalsAssigned()
-	
 	if(!isDom("pc") && !generatedAnyGoals && !doms.empty()):
 		addTextRaw("Dom couldn't decide what to do with the sub, none of their fetishes apply.")
 		talkText(RNG.pick(doms), "You are a lucky slut.")
 
-		
-	#domInfo.goals.append([SexGoal.Fuck, subID])
+func checkIfDomsNeedMoreGoals():
+	if(!shouldDomsKeepGeneratingTasks()):
+		return
+	if(sexEnded):
+		return
+	for domID in doms:
+		var domInfo:SexDomInfo = doms[domID]
+		if(!domInfo.hasGoals()):
+			generateGoalsFor(domID, 2)
 
 func doFastSex() -> SexEngineResult:
 	var newResult:SexEngineResult = SexEngineResult.new()
@@ -559,6 +574,8 @@ func processTurn():
 	checkExtra()
 	checkExtraLessImportant()
 	
+	checkIfDomsNeedMoreGoals()
+	
 	removeEndedActivities()
 	
 func getSubs() -> Dictionary:
@@ -567,12 +584,32 @@ func getSubs() -> Dictionary:
 func getDoms() -> Dictionary:
 	return doms
 
+func shouldPauseDomActions() -> bool:
+	if(!isDom("pc") || !getDomInfo("pc").canDoActions()):
+		return false
+	return !pcAllowsDomAutonomy
+
+func canChooseDomAutonomy() -> bool:
+	return isDom("pc") && getDomInfo("pc").canDoActions() && doms.size() > 1
+
+func shouldDomsKeepGeneratingTasks() -> bool:
+	return canChooseDomAutonomy()
+
+func isDomAutonomyEnabled() -> bool:
+	return pcAllowsDomAutonomy
+
+func toggleDomAutonomy():
+	pcAllowsDomAutonomy = !pcAllowsDomAutonomy
+
 func processAIActions(isDom:bool = true, processPlayerToo:bool = false):
 	if(sexEnded):
 		return
 	
 	if(sexShouldEnd()):
 		endSex()
+		return
+	
+	if(isDom && shouldPauseDomActions()):
 		return
 	
 	var peopleToCheck:Dictionary = {}
@@ -591,7 +628,7 @@ func processAIActions(isDom:bool = true, processPlayerToo:bool = false):
 		var actionsScores:Array= []
 		var possibleActions:Array = getActionsForCharID(personID)
 		for actionEntry in possibleActions:
-			actionsScores.append(actionEntry["score"])
+			actionsScores.append(max(actionEntry["score"], 0.0))
 		
 		if(possibleActions.empty()):
 			continue
@@ -1323,6 +1360,7 @@ func saveData():
 		"subMustGoUnconscious": subMustGoUnconscious,
 		"outputRaw": outputRaw,
 		"pcTarget": pcTarget,
+		"pcAllowsDomAutonomy": pcAllowsDomAutonomy,
 	}
 	if(sexType != null):
 		data["sexTypeID"] = sexType.id
@@ -1358,6 +1396,7 @@ func loadData(data):
 	subMustGoUnconscious = SAVE.loadVar(data, "subMustGoUnconscious", false)
 	outputRaw = SAVE.loadVar(data, "outputRaw", [])
 	pcTarget = SAVE.loadVar(data, "pcTarget", "")
+	pcAllowsDomAutonomy = SAVE.loadVar(data, "pcAllowsDomAutonomy", false)
 	
 	var sexTypeID = SAVE.loadVar(data, "sexTypeID", SexType.DefaultSex)
 	var theSexType = GlobalRegistry.createSexType(sexTypeID)
