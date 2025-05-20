@@ -26,7 +26,7 @@ func _run():
 		for encounterPoolID in encounterPools:
 			var amount = GM.main.getDynamicCharactersPoolSize(encounterPoolID)
 			
-			sayn(str(encounterPoolID)+": "+str(amount))
+			sayn(CharacterPool.getVisibleName(encounterPoolID)+": "+str(amount))
 			hasSomeoneToForget = true
 		sayn("")
 		
@@ -249,7 +249,7 @@ func _run():
 		addButton("Back", "Go back a level", "") 
 		
 		for encounterPoolID in encounterPools:
-			addButton(str(encounterPoolID), "Pick this occupation", "occupationmenupool", [encounterPoolID])
+			addButton(CharacterPool.getVisibleName(encounterPoolID), "Pick this occupation", "occupationmenupool", [encounterPoolID])
 		
 	if(state == "occupationmenupool"):
 		var npclist = npclistScene.instance()
@@ -274,7 +274,7 @@ func _run():
 		
 		var encounterPools = GM.main.getDynamicCharactersPools()
 		for encounterPoolID in encounterPools:
-			addButton(str(encounterPoolID), "Pick this occupation", "occupationmenupool", [encounterPoolID])
+			addButton(CharacterPool.getVisibleName(encounterPoolID), "Pick this occupation", "occupationmenupool", [encounterPoolID])
 
 	if(state == "fetishmenu"):
 		var fetishHolder = GM.pc.getFetishHolder()

@@ -30,10 +30,42 @@ static func getStatic():
 	return [Static1, Static2, Static3]
 
 static func getVisibleName(slot: String):
+	if(slot == Eyes):
+		return "Eyes"
+	if(slot == Mouth):
+		return "Mouth"
+	if(slot == Neck):
+		return "Neck"
+	if(slot == Torso):
+		return "Torso"
+	if(slot == Body):
+		return "Body"
+	if(slot == Wrists):
+		return "Wrists"
+	if(slot == Hands):
+		return "Hands"
+	if(slot == Ring):
+		return "Ring"
+	if(slot == Ankles):
+		return "Ankles"
 	if(slot == UnderwearTop):
 		return "Underwear, top"
 	if(slot == UnderwearBottom):
 		return "Underwear, bottom"
+	if(slot == Penis):
+		return "Penis"
+	if(slot == Vagina):
+		return "Vagina"
+	if(slot == Anal):
+		return "Anal"
+	if(slot == Strapon):
+		return "Strapon"
+	if(slot == Unique):
+		return "Unique"
 	
-	return slot.capitalize()
+	return "Error"
+
+
+
+
 
