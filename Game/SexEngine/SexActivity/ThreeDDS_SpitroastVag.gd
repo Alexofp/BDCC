@@ -1,7 +1,9 @@
 extends SexActivityBase
 
+var usedBodypart:String = S_VAGINA
+
 func _init():
-	id = "ThreeDDS_Spitroast"
+	id = "ThreeDDS_SpitroastVag"
 	
 	activityName = "Spitroast (vag)"
 	activityDesc = "Fuck the sub's pussy and mouth with the other dom at the same time"
@@ -13,7 +15,7 @@ func _init():
 
 func getGoals():
 	return {
-		#SexGoal.SubUndressSub: 1.0,
+		SexGoal.FuckVaginal: 1.0,
 	}
 
 func getSupportedSexTypes():
@@ -51,25 +53,37 @@ func getTags(_indx:int) -> Array:
 	return []
 
 func startActivity(_args):
-	addText("Spitroast start.")
-	
 	var otherDomID:String = getDomIDsThatSatisfyConditions(getSexEngine(), [COND_HasReachablePenisOrStrapon], 1, [getDomInfo().getCharID()])[0]
 	pullInDom(otherDomID)
+
+	addText("{dom.You} and {dom1.you} grab {sub.you} and lift {sub.youHim} above the floor, cocks are pressed against {sub.yourHis} "+getNameHole(SUB_0, usedBodypart)+" and mouth.")
 
 func processTurn():
 	return
 
 func inside_processTurn():
-	stimulate(DOM_0, S_PENIS, SUB_0, S_VAGINA, I_TEASE, Fetish.VaginalSexGiving)
+	stimulate(DOM_0, S_PENIS, SUB_0, usedBodypart, I_TEASE, Fetish.VaginalSexGiving)
 	stimulate(DOM_1, S_PENIS, SUB_0, S_MOUTH, I_TEASE, Fetish.OralSexReceiving)
 	
-	addText("{sub.You} {sub.youAre} being a cock-warmer.")
+	var hasPC:bool = ((getDomInfo(DOM_0).getCharID() == "pc") || (getDomInfo(DOM_1).getCharID() == "pc"))
+	addText("{sub.You} {sub.youAre} being a cock-warmer for "+("your" if hasPC else "their")+" cocks.")
 
 func sex_processTurn():
-	stimulate(DOM_0, S_PENIS, SUB_0, S_VAGINA, I_NORMAL, Fetish.VaginalSexGiving)
+	stimulate(DOM_0, S_PENIS, SUB_0, usedBodypart, I_NORMAL, Fetish.VaginalSexGiving)
 	stimulate(DOM_1, S_PENIS, SUB_0, S_MOUTH, I_NORMAL, Fetish.OralSexReceiving)
 	
-	addText("{sub.You} {sub.youAre} being fucked.")
+	doProcessFuck(DOM_0, SUB_0, usedBodypart, " in a spitroast position")
+	doProcessFuck(DOM_1, SUB_0, S_MOUTH)
+	
+	if(RNG.chance(30) && isCloseToCumming(DOM_0) && isCloseToCumming(DOM_1)):
+		var hasPC:bool = ((getDomInfo(DOM_0).getCharID() == "pc") || (getDomInfo(DOM_1).getCharID() == "pc"))
+		addTextPick([
+			"Both of the doms are getting close.",
+			"Both of "+("you" if hasPC else "them")+" are about to cum!",
+		])
+	else:
+		doProcessFuckExtra(DOM_0, SUB_0, usedBodypart)
+		doProcessFuckExtra(DOM_1, SUB_0, S_MOUTH)
 
 func getActions(_indx:int):
 	if(_indx == DOM_0 || _indx == DOM_1):
@@ -80,8 +94,8 @@ func getActions(_indx:int):
 			addAction("pullOut", getStopScore(), "Pull out", "Pull your member out")
 		
 		if(state == ""):
-			addAction("rub", 1.0, "Rub", "Rub your cock against them")
-			if(getDomInfo().isReadyToPenetrate() && getDomInfo(1).isReadyToPenetrate()):
+			addAction("rub", 1.0 if !isReadyToPenetrate(_indx) else 0.4, "Rub", "Rub your cock against them")
+			if(isReadyToFuck(DOM_0) && isReadyToFuck(DOM_1)):
 				addAction("penetrate", 1.0, "Penetrate", "Try to start fucking them!")
 			addAction("switch", 0.0, "Switch positions", "Switch positions with the dom")
 		if(state == "sex"):
@@ -93,11 +107,16 @@ func getActions(_indx:int):
 
 func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "switch"):
+		addText("{<DOM>.You} {<DOM>.youVerb('decide')} to switch spots.".replace("<DOM>", indxToTextID(_indx)))
 		switchDoms(0, 1)
 	if(_id == "cum"):
-		getDomInfo().cum()
-		getDomInfo(1).cum()
-		addText("You cum inside {sub.you}!")
+		if(isReadyToCumHandled(DOM_0) && isReadyToCumHandled(DOM_1)):
+			addText("[b]Double orgasm![/b]")
+		if(isReadyToCumHandled(DOM_0)):
+			doProcessCumInside(DOM_0, SUB_0, usedBodypart, false)
+		if(isReadyToCumHandled(DOM_1)):
+			getDomInfo(1).cum()
+		satisfyGoals()
 		state = "inside"
 		return
 	if(_id == "fuckMore"):
@@ -105,7 +124,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		state = "sex"
 		return
 	if(_id == "pause"):
-		addText("You pause.")
+		addText("{<DOM>.You} {<DOM>.youVerb('pause')} the spitroasting.".replace("<DOM>", indxToTextID(_indx)))
 		state = "inside"
 		return
 	if(_id == "pullOut"):
@@ -114,7 +133,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		return
 	if(_id == "rub"):
 		addText("You rub cock against {sub.your} holes.")
-		stimulate(DOM_0, S_PENIS, SUB_0, S_VAGINA, I_TEASE, Fetish.VaginalSexGiving)
+		stimulate(DOM_0, S_PENIS, SUB_0, usedBodypart, I_TEASE, Fetish.VaginalSexGiving)
 		stimulate(DOM_1, S_PENIS, SUB_0, S_MOUTH, I_TEASE, Fetish.OralSexReceiving)
 		return
 	if(_id == "penetrate"):

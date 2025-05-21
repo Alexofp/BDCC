@@ -354,6 +354,25 @@ func addTextPick(_texts:Array):
 		return
 	addText(RNG.pick(_texts))
 
+func addTextRaw(_text:String):
+	if(_text.empty()):
+		return
+	addOutputRaw([SexEngine.OUTPUT_TEXT, (_text)])
+
+func addTextRawPick(_texts:Array):
+	if(_texts.empty()):
+		return
+	addTextRaw(RNG.pick(_texts))
+
+func indxToTextID(_indx:int) -> String:
+	if(_indx == 0):
+		return "dom"
+	if(_indx == -1):
+		return "sub"
+	if(_indx > 0):
+		return "dom"+str(_indx)
+	return "sub"+str(-_indx+1)
+
 func processText(_text:String) -> String:
 	var theOverrides:Dictionary = {}
 	var _i:int = 0
@@ -1748,3 +1767,252 @@ func doPussyLickingTurnSub():
 		])
 	
 	addText(text)
+
+
+# New-new building blocks
+
+func isReadyToPenetrate(_indx:int) -> bool:
+	var theChar:BaseCharacter = getDomOrSub(_indx)
+	if(!theChar):
+		return false
+	return theChar.isReadyToPenetrate()
+
+func isReadyToFuck(_indx:int) -> bool:
+	var theChar:BaseCharacter = getDomOrSub(_indx)
+	if(!theChar):
+		return false
+	return hasBodypartUncovered(_indx, S_PENIS) && theChar.isReadyToPenetrate()
+
+func getNamePenis(_indx:int) -> String:
+	var theChar:BaseCharacter = getDomOrSub(_indx)
+	if(!theChar):
+		return "[color=red]error[/color]"
+	if(theChar.isWearingStrapon()):
+		return "strapon"
+	return "{penis}"
+
+func getNameHole(_indx:int, _hole:String) -> String:
+	if(_hole == S_VAGINA):
+		return RNG.pick(["pussy", "pussy", "slit", "cunt", "kitty"])
+	if(_hole == S_ANUS):
+		return RNG.pick(["anus", "tailhole", "backdoor", "star", "anal ring"])
+	if(_hole == S_MOUTH):
+		return RNG.pick(["mouth", "face", "throat"])
+	return "[color=red]error[/color]"
+	
+func doProcessFuck(_indxTop:int, _indxBottom:int, _hole:String, _poseDescriptor:String = ""):
+	var topInfo:SexInfoBase = getDomOrSubInfo(_indxTop)
+	var topChar:BaseCharacter = topInfo.getChar()
+	var topStrapon:bool = topChar.isWearingStrapon()
+	var bottomInfo:SexInfoBase = getDomOrSubInfo(_indxBottom)
+	var bottomChar:BaseCharacter = bottomInfo.getChar()
+	
+	var usedBodypartName:String = getNameHole(_indxBottom, _hole)
+	
+	var text:String = RNG.pick([
+		"{<TOP>.You} {<TOP>.youAre} fucking {<BOTTOM>.youHim}"+_poseDescriptor+".",
+		"{<TOP>.You} {<TOP>.youVerb('pound')} {<BOTTOM>.your} "+usedBodypartName+".",
+		"{<TOP>.You} {<TOP>.youVerb('fuck')} {<BOTTOM>.your} "+usedBodypartName+".",
+	])
+
+	if(RNG.chance(20)):
+		var freeRoom:float = bottomChar.getPenetrationFreeRoomBy(_hole, topInfo.getCharID())
+		
+		bottomChar.gotOrificeStretchedBy(_hole, topInfo.getCharID(), true, 0.1)
+		
+		if(_hole == BodypartSlot.Vagina):
+			if(freeRoom <= 5.0):
+				text += RNG.pick([
+					" The tip of {<TOP>.yourHis} "+("{penis}" if !topStrapon else "strapon")+" easily "+RNG.pick(["hits", "smashes", "reaches", "finds"])+" {<BOTTOM>.yourHis} "+RNG.pick(["cervix", "natural barricade"])+".",
+				])
+			elif(freeRoom >= 10):
+				text += RNG.pick([
+					" The tip of {<TOP>.yourHis} "+("{penis}" if !topStrapon else "strapon")+" can barely reach anywhere deep.",
+					" The tip of {<TOP>.yourHis} "+("{penis}" if !topStrapon else "strapon")+" is struggling to reach {<BOTTOM>.yourHis} "+RNG.pick(["cervix", "natural barricade"])+".",
+				])
+		if(_hole == BodypartSlot.Anus):
+			if(freeRoom <= 5.0):
+				text += RNG.pick([
+					" The tip of {<TOP>.yourHis} "+("{penis}" if !topStrapon else "strapon")+" easily "+RNG.pick(["hits", "smashes", "reaches", "finds"])+" {<BOTTOM>.yourHis} "+RNG.pick(["pleasure spot"])+".",
+				])
+			elif(freeRoom >= 10):
+				text += RNG.pick([
+					" The tip of {<TOP>.yourHis} "+("{penis}" if !topStrapon else "strapon")+" can barely reach anywhere deep.",
+					" The tip of {<TOP>.yourHis} "+("{penis}" if !topStrapon else "strapon")+" is struggling to reach {<BOTTOM>.yourHis} "+RNG.pick(["pleasure spot"])+".",
+				])
+
+	addTextRaw(text.replace("<TOP>", topInfo.getCharID()).replace("<BOTTOM>", bottomInfo.getCharID()))
+
+
+func doProcessFuckExtra(_indxTop:int, _indxBottom:int, _hole:String):
+	var topInfo:SexInfoBase = getDomOrSubInfo(_indxTop)
+	var topChar:BaseCharacter = topInfo.getChar()
+	var topStrapon:bool = topChar.isWearingStrapon()
+	
+	if(RNG.chance(20) && topChar.bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisBarbs)):
+		addTextRaw(RNG.pick([
+			"Barbs on {dom.yourHis} "+("{penis}" if !topStrapon else "strapon")+" provide extra stimulation.",
+			"Barbs on {dom.yourHis} "+("{penis}" if !topStrapon else "strapon")+" "+RNG.pick(["rake against", "scratch"])+" the "+RNG.pick(["soft insides", "soft inner walls"])+".",
+		]).replace("<TOP>", topInfo.getCharID()))
+	if(RNG.chance(20) && topChar.bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisRidges)):
+		addTextRaw(RNG.pick([
+			" Ridges on {dom.yourHis} "+("{penis}" if !topStrapon else "strapon")+" provide extra stimulation.",
+		]).replace("<TOP>", topInfo.getCharID()))
+	
+	if(topInfo.getChar().isWearingStrapon()):
+		if(topInfo.isReadyToCum()):
+			addTextRaw(RNG.pick([
+				"{<TOP>.You} {<TOP>.youAre} trembling on the brink, straining against the harness.",
+				"{<TOP>.You} {<TOP>.youAre} quivering, {<TOP>.yourHis} body screaming for climax.",
+				"{<TOP>.You} {<TOP>.youVerb('quiver')} uncontrollably, inches from cumming.",
+				"{<TOP>.You} {<TOP>.youAre} edging {<TOP>.yourself}.",
+				"{<TOP>.You} {<TOP>.youAre} about to cum!",
+				"{<TOP>.You} {<TOP>.youAre} keeping {<TOP>.yourself} on edge.",
+			]).replace("<TOP>", topInfo.getCharID()))
+		elif(topInfo.isCloseToCumming()):
+			addTextRaw(RNG.pick([
+				"{<TOP>.You} {<TOP>.youVerb('pant')} hotly, the harness straining against {<TOP>.yourHis} body.",
+				"{<TOP>.You} {<TOP>.youVerb('pant')} eagerly.",
+				"{<TOP>.You} {<TOP>.youVerb('close')} in on {<TOP>.yourHis} orgasm.",
+				"{<TOP>.You} {<TOP>.youAre} gonna cum soon.",
+			]).replace("<TOP>", topInfo.getCharID()))
+	else:
+		if(topInfo.isReadyToCum()):
+			addTextRaw(RNG.pick([
+				"{<TOP>.You} {<TOP>.youAre} shaking on the edge, {<TOP>.yourHis} {penis} throbbing uncontrollably.",
+				"{<TOP>.You} {<TOP>.youAre} edging {<TOP>.yourself}.",
+				"{<TOP>.You} {<TOP>.youAre} about to cum!",
+				"{<TOP>.You} {<TOP>.youAre} keeping {<TOP>.yourself} on edge.",
+				"{<TOP>.Your} {penis} is moments from cumming.",
+				"{<TOP>.Your} {penis} reached its peak."
+			]).replace("<TOP>", topInfo.getCharID()))
+		elif(topInfo.isCloseToCumming()):
+			addTextRaw(RNG.pick([
+				"{<TOP>.You} {<TOP>.youVerb('pant')} greedily, hips jerking with each pulse.",
+				"{<TOP>.Your} member throbs, heavy and ripe for release.",
+				"{<TOP>.Your} cock twitches fiercely, slick with anticipation.",
+				"{<TOP>.Your} heavy member pulses, aching to unload.",
+				"{<TOP>.Your} twitching shaft is drenched in slick pre.",
+				"{<TOP>.You} {<TOP>.youVerb('pant')} eagerly.",
+				"{<TOP>.You} {<TOP>.youVerb('close')} in on {<TOP>.yourHis} orgasm.",
+				"{<TOP>.You} {<TOP>.youAre} gonna cum soon.",
+				"{<TOP>.Your} "+RNG.pick(["cock", "dick", "member"])+" is throbbing.",
+				"{<TOP>.Your} "+RNG.pick(["cock", "dick", "member"])+" is twitching and leaking a lot."
+			]).replace("<TOP>", topInfo.getCharID()))
+
+
+func doProcessCumInside(_indxTop:int, _indxBottom:int, _hole:String, tryKnot:bool = false) -> Dictionary:
+	var topInfo:SexInfoBase = getDomOrSubInfo(_indxTop)
+	var topChar:BaseCharacter = topInfo.getChar()
+	#var topStrapon:bool = topChar.isWearingStrapon()
+	var bottomInfo:SexInfoBase = getDomOrSubInfo(_indxBottom)
+	var bottomChar:BaseCharacter = bottomInfo.getChar()
+
+	var wombText:String = RNG.pick([
+		"womb", "womb",
+		"babymaker",
+	])
+	if(_hole == BodypartSlot.Anus):
+		wombText = RNG.pick([
+			"guts",
+			"insides",
+		])
+	var text:String = ""
+	var condomBroke:bool = false
+	var knotSuccess:bool = false
+	var didCumInside:bool = false
+	var handledCum:bool = false
+
+	if(tryKnot):
+		var freeRoom:float = bottomChar.getPenetrationFreeRoomBy(_hole, topChar.getID())
+		var chanceToPain:float = -freeRoom * 5.0
+		if(topInfo.isAngry()):
+			chanceToPain *= 2.0
+		if(RNG.chance(10)):
+			chanceToPain *= 1.5
+		if(RNG.chance(chanceToPain)):
+			bottomChar.doPainfullyStretchHole(_hole, topChar.getID())
+		
+		#isTryingToKnot = true
+		bottomChar.gotOrificeStretchedBy(_hole, topChar.getID(), true, 0.5)
+		if(RNG.chance(bottomChar.getKnottingChanceBy(_hole, topChar.getID()))):
+			knotSuccess = true
+		else:
+			text += RNG.pick([
+				"{<TOP>.You} {<TOP>.youVerb('try', 'tries')} to "+RNG.pick(["force {<TOP>.yourHis} knot in", "knot {<BOTTOM>.you}"])+" but the hole is just too tight. "
+			])
+	
+	if(knotSuccess):
+		text += RNG.pick([
+			"{<TOP>.You} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} cock deep inside {<BOTTOM>.yourHis} "+getNameHole(_indxBottom, _hole)+" and force the knot in, stretching {<BOTTOM>.yourHis} "+getNameHole(_indxBottom, _hole)+" wide before [b]"+RNG.pick(["stuffing", "filling"])+" it full of {<TOP>.yourHis} seed[/b]!",
+			"{<TOP>.You} {<TOP>.youVerb('manage')} to force {<TOP>.yourHis} knot in, stretching {<BOTTOM>.youHim} out! {<TOP>.YouHe} {<TOP>.youVerb('grunt')} as {<TOP>.yourHis} cock starts shooting thick ropes of "+RNG.pick(["cum", "seed", "jizz", "semen"])+" deep [b]inside {<BOTTOM>.yourHis} "+wombText+"[/b]!",
+			"{<TOP>.Your} balls tense up as {<TOP>.youHe} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} cock deep. The knot slips in, stretching {<BOTTOM>.yourHis} "+getNameHole(_indxBottom, _hole)+" while [b]{<TOP>.youHe} {<TOP>.youAre} cumming inside[/b]!",
+			"{<TOP>.You} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} cock balls-deep. The knot stretches {<BOTTOM>.yourHis} "+getNameHole(_indxBottom, _hole)+" until finally slipping in. {<TOP>.You} {<TOP>.youVerb('grunt')} while [b]stuffing {<BOTTOM>.yourHis} "+wombText+"[/b]!",
+		])
+	else:
+		text += RNG.pick([
+			"{<TOP>.You} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} cock deep inside {<BOTTOM>.yourHis} "+getNameHole(_indxBottom, _hole)+" and [b]"+RNG.pick(["{<TOP>.youVerb('stuff')}", "{<TOP>.youVerb('fill')}"])+" it full of {<TOP>.yourHis} seed[/b]!",
+			"{<TOP>.You} {<TOP>.youVerb('grunt')} as {<TOP>.yourHis} cock starts shooting thick ropes of "+RNG.pick(["cum", "seed", "jizz", "semen"])+" deep [b]inside {<BOTTOM>.yourHis} "+wombText+"[/b]!",
+			"{<TOP>.Your} balls tense up as {<TOP>.youHe} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} cock deep and [b]{<TOP>.youVerb('cum')} inside {<BOTTOM>.you}[/b]!",
+			"{<TOP>.You} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} cock balls-deep and {<TOP>.youVerb('grunt')} while [b]stuffing {<BOTTOM>.yourHis} "+getNameHole(_indxBottom, _hole)+"[/b]!",
+		])
+	
+	var condom:ItemBase = topChar.getWornCondom()
+	if(condom != null):
+		var breakChance:float = condom.getCondomBreakChance()
+		condomBroke = topChar.shouldCondomBreakWhenFucking(bottomChar, breakChance)
+		if(condomBroke):
+			text = "[b]The condom broke![/b] "+text
+			condom.destroyMe()
+			didCumInside = true
+		else:
+			handledCum = true
+			text = RNG.pick([
+				"{<TOP>.You} filled the condom inside {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+"!",
+				"{<TOP>.You} stuffed the condom in {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+" full of {<TOP>.yourHis} "+RNG.pick(["cum", "seed", "jizz", "semen"])+"!",
+			])
+			if(knotSuccess):
+				text = RNG.pick([
+					"{<TOP>.You} {<TOP>.youVerb('manage')} to knot {<BOTTOM>.youHim}! ",
+					"{<TOP>.You} {<TOP>.youVerb('manage')} to shove {<TOP>.yourHis} knot into {<BOTTOM>.youHim}! ",
+				]) + text
+			
+			var loadSize = topChar.cumInItem(condom)
+			topInfo.cum()
+			bottomInfo.addArousalSex(0.2)
+			sendSexEvent(SexEvent.FilledCondomInside, _indxTop, _indxBottom, {hole=_hole,loadSize=loadSize,knotted=knotSuccess})
+			#satisfyGoals()
+			#if(knotSuccess):
+			#	state = "knotting"
+			#else:
+			#	state = "aftercumminginside"
+			
+			#addText(text)
+			#applyTallymarkIfNeeded(usedBodypart)
+	
+	if(!handledCum):
+		didCumInside = true
+		if(bottomChar.hasWombIn(_hole)):
+			var beingBredScore:float = bottomInfo.fetishScore({Fetish.BeingBred: 1.0})
+			if(beingBredScore < 0.0):
+				bottomInfo.addResistance(1.0)
+				bottomInfo.addFear(0.1)
+		bottomChar.cummedInBodypartByAdvanced(_hole, getDomID(), {knotted=knotSuccess,condomBroke=condomBroke})
+		topInfo.cum()
+		bottomInfo.addArousalSex(0.2)
+	#satisfyGoals()
+	#if(knotSuccess):
+	#	state = "knotting"
+	#else:
+	#	state = "aftercumminginside"
+	
+	#addText(text)
+	#applyTallymarkIfNeeded(usedBodypart)
+	text=text.replace("<TOP>", topInfo.getCharID()).replace("<BOTTOM>", bottomInfo.getCharID())
+	addTextRaw(text)
+	return {
+		text=text,
+		didCumInside=didCumInside,
+		condomBroke=condomBroke,
+		knotSuccess=knotSuccess
+	}
