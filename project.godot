@@ -1640,6 +1640,11 @@ _global_script_classes=[ {
 "path": "res://Events/Trigger.gd"
 }, {
 "base": "Object",
+"class": "UniqueOrgasm",
+"language": "GDScript",
+"path": "res://Game/SexEngine/Util/UniqueOrgasm.gd"
+}, {
+"base": "Object",
 "class": "Util",
 "language": "GDScript",
 "path": "res://Util/Util.gd"
@@ -2016,6 +2021,7 @@ _global_script_class_icons={
 "TranslationLanguage": "",
 "TranslatorBase": "",
 "Trigger": "",
+"UniqueOrgasm": "",
 "Util": "",
 "VaginaOrifice": "",
 "WHCond": "",

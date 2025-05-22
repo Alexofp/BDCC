@@ -217,7 +217,7 @@ func init_doAction(_indx:int, _id:String, _action:Dictionary):
 		var text:String = ""
 		
 		if(domFocus == BodypartSlot.Penis):
-			sendSexEvent(SexEvent.HolePenetrated, SUB_0, DOM_0, {hole=BodypartSlot.Head,engulfed=true,strapon=isSubWearingStrapon()})
+			sendSexEvent(SexEvent.HolePenetrated, SUB_0, DOM_0, {hole=BodypartSlot.Head,engulfed=true,strapon=isWearingStrapon(SUB_0)})
 			
 			text += RNG.pick([
 				"{dom.You} {dom.youVerb('take')} {sub.yourHis} {penis} into {dom.yourHis} mouth, {dom.yourHis} lips sliding down its length.",
@@ -231,7 +231,7 @@ func init_doAction(_indx:int, _id:String, _action:Dictionary):
 		
 		text += " "
 		if(subFocus == BodypartSlot.Penis):
-			sendSexEvent(SexEvent.HolePenetrated, DOM_0, SUB_0, {hole=BodypartSlot.Head,engulfed=false,strapon=isDomWearingStrapon()})
+			sendSexEvent(SexEvent.HolePenetrated, DOM_0, SUB_0, {hole=BodypartSlot.Head,engulfed=false,strapon=isWearingStrapon(DOM_0)})
 			
 			text += RNG.pick([
 				"Without warning, {dom.you} {dom.youVerb('shift')} {dom.yourHis} hips, lining up {dom.yourHis} {dom.penis} with {sub.yourHis} lips. With a firm thrust, {dom.youHe} {dom.youVerb('part')} {sub.yourHis} mouth, forcing {sub.youHim} to return the favor by taking {dom.youHim}.",
@@ -262,7 +262,7 @@ func order_doAction(_indx:int, _id:String, _action:Dictionary):
 		state = "sex"
 		var text:String = ""
 		if(subFocus == BodypartSlot.Penis):
-			sendSexEvent(SexEvent.HolePenetrated, DOM_0, SUB_0, {hole=BodypartSlot.Head,engulfed=true,strapon=isDomWearingStrapon()})
+			sendSexEvent(SexEvent.HolePenetrated, DOM_0, SUB_0, {hole=BodypartSlot.Head,engulfed=true,strapon=isWearingStrapon(DOM_0)})
 			
 			text += RNG.pick([
 				"Obediently, {sub.you} {sub.youVerb('part')} {sub.yourHis} lips and {sub.youVerb('take')} {dom.yourHis} {dom.penis} into {sub.yourHis} mouth, sucking eagerly.",
@@ -275,7 +275,7 @@ func order_doAction(_indx:int, _id:String, _action:Dictionary):
 			])
 		text += " "
 		if(domFocus == BodypartSlot.Penis):
-			sendSexEvent(SexEvent.HolePenetrated, SUB_0, DOM_0, {hole=BodypartSlot.Head,engulfed=true,strapon=isSubWearingStrapon()})
+			sendSexEvent(SexEvent.HolePenetrated, SUB_0, DOM_0, {hole=BodypartSlot.Head,engulfed=true,strapon=isWearingStrapon(SUB_0)})
 			
 			text += RNG.pick([
 				"In return, {dom.You} {dom.youVerb('take')} {sub.yourHis} {penis} into {dom.yourHis} mouth, {dom.yourHis} lips sliding down its length.",
