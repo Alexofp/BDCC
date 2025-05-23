@@ -417,6 +417,31 @@ func doActionForCharID(_charID:String, _action:Dictionary):
 		call(getStatePrefix()+"_doAction", _indx, _action["id"], _action)
 	doAction(_indx, _action["id"], _action)
 
+func getJoinActions(_sexInfo:SexInfoBase):
+	pass
+
+func getJoinActionsFinal(_sexInfo:SexInfoBase) -> Array:
+	actionsResult = []
+	getJoinActions(_sexInfo)
+	return actionsResult
+
+func doJoinAction(_sexInfo:SexInfoBase, _args):
+	pass
+
+func addJoinAction(_aArgs:Array, _aName:String, _aDesc:String, _aScore:float, _aExtra:Dictionary = {}):
+	var theCategory:Array = getCategory() if !_aExtra.has(A_CATEGORY) else []
+	var theEntry:Dictionary = {
+		score = _aScore,
+		name = _aName,
+		desc = _aDesc,
+		category = theCategory,
+		args = _aArgs,
+	}
+	for field in _aExtra:
+		theEntry[field] = _aExtra[field]
+	
+	actionsResult.append(theEntry)
+
 var actionsResult:Array
 func getActionsForCharID(_charID:String) -> Array:
 	actionsResult = []
@@ -707,6 +732,35 @@ func getStopScore() -> float:
 		return 0.0
 	return 2.0
 
+func getPauseSexScore(_indxTop:int, _indxBottom:int, _slotBottom:String, _slotTop:String = BodypartSlot.Penis) -> float:
+	var topChar:BaseCharacter = getDomOrSub(_indxTop)
+	var bottomChar:BaseCharacter = getDomOrSub(_indxBottom)
+	
+	var topOverStim:float = topChar.getZoneOverstimulation(_slotTop)
+	if(topOverStim < 0.8):
+		topOverStim = 0.0
+	if(topChar.isZoneOverstimulated(_slotTop)):
+		topOverStim = 1.0
+	
+	var bottomOverStim:float = bottomChar.getZoneOverstimulation(_slotBottom)
+	if(bottomOverStim < 0.8):
+		bottomOverStim = 0.0
+	if(bottomChar.isZoneOverstimulated(_slotBottom)):
+		bottomOverStim = 1.0
+	
+	var slowdownScore:float = topOverStim * (1.0 - (personality(_indxTop, PersonalityStat.Impatient)+1.0)/2.0)
+	
+	slowdownScore = max(slowdownScore, bottomOverStim * (1.0 - (personality(_indxTop, PersonalityStat.Mean)+1.0)/2.0))
+	
+	return slowdownScore
+
+func getContinueSexScore(_indxTop:int, _indxBottom:int, _hole:String, _slotTop:String = BodypartSlot.Penis) -> float:
+	var thePauseScore:float = getPauseSexScore(_indxTop, _indxBottom, _hole, _slotTop)
+	if(thePauseScore > 0.1):
+		return 0.0
+	return 1.0
+
+
 func hasActivity(_sexEngine: SexEngine, theid:String, _domInfo: SexDomInfo, _subInfo: SexSubInfo) -> bool:
 	return _sexEngine.hasActivity(theid, _domInfo.charID, _subInfo.charID)
 
@@ -790,6 +844,15 @@ func isDom(_charID:String) -> bool:
 func isInvolved(_charID:String) -> bool:
 	if(isSub(_charID) || isDom(_charID)):
 		return true
+	return false
+
+func checkActiveDomPC(_indx:int) -> bool:
+	var _i:int = 0
+	for theDomInfo in doms:
+		if(theDomInfo.getCharID() == "pc" && theDomInfo.canDoActions()):
+			if(_indx != _i):
+				return true
+		_i += 1
 	return false
 
 func affectSub(howmuch:float, lustMod, resistanceMod, fearMod):

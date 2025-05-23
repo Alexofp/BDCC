@@ -380,8 +380,7 @@ func getActions(_indx:int):
 				addAction("switchhole", switchholeScore, "Switch hole", "Switch to the sub's "+RNG.pick(otherHoleNames))
 			addAction("stop", getStopScore(), "Stop fuck", "Stop fucking")
 		if(state in ["fucking"]):
-			var slowdownScore:float = (1.0 if getDom().isZoneOverstimulated(BodypartSlot.Penis) else 0.0)
-			addAction("slowdown", slowdownScore, "Slow down", "Stop fucking for a second..")
+			addAction("slowdown", getPauseSexScore(DOM_0, SUB_0, usedBodypart), "Slow down", "Stop fucking for a second..")
 			
 			if(isReadyToCumHandled(DOM_0) && isStraponSex()):
 				addAction("domstraponcum", 1.0, "Cum!", "You're about to cum!", {A_PRIORITY: 1001})
@@ -405,8 +404,7 @@ func getActions(_indx:int):
 				addAction("subcumDom", 1.0, "Sub's orgasm", "They are about to cum!", {A_PRIORITY: 1001})
 
 		if(state in ["aftercumminginside"]):
-			var continuefuckingScore:float = (0.0 if getDom().isZoneOverstimulated(BodypartSlot.Penis) else 0.25) - getStopScore()
-			addAction("continuefucking", continuefuckingScore, "Continue fucking", "Continue fucking their "+RNG.pick(usedBodypartNames))
+			addAction("continuefucking", getContinueSexScore(DOM_0, SUB_0, usedBodypart) - getStopScore(), "Continue fucking", "Continue fucking their "+RNG.pick(usedBodypartNames))
 		if(state in ["aftercumminginside", "fucking"]):
 			if(!getDomInfo().isReadyToCum()):
 				addAction("pullout", getStopScore(), "Pull out", "Pull your cock out and stop fucking them")
@@ -876,6 +874,35 @@ func getOrgasmHandlePriority(_indx:int) -> int:
 			return 10
 		return 5
 	return -1
+
+func getJoinActions(_sexInfo:SexInfoBase):
+	if(!(_sexInfo is SexDomInfo)):
+		return
+	var theChar:BaseCharacter = _sexInfo.getChar()
+	
+	if(theChar.hasReachablePenis() || theChar.isWearingStrapon()):
+		if(getSexType() in [SexType.DefaultSex, SexType.StocksSex]):
+			if(!getSub().isOralBlocked()):
+				addJoinAction(["spitroast"], "+Spitroast", "Join and fuck their mouth!", getActivityScore(getSexEngine(), _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
+		if(getSexType() in [SexType.DefaultSex]):
+			if(usedBodypart == S_VAGINA):
+				if(getSub().hasReachableAnus()):
+					addJoinAction(["dp"], "+DP (anal)", "Join and fuck their ass at the same time!", getActivityScore(getSexEngine(), _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
+			else:
+				if(getSub().hasReachableVagina()):
+					addJoinAction(["dp"], "+DP (vaginal)", "Join and fuck their pussy at the same time!", getActivityScore(getSexEngine(), _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
+			
+func doJoinAction(_sexInfo:SexInfoBase, _args):
+	if(_args[0] == "spitroast"):
+		if(usedBodypart == S_ANUS):
+			switchCurrentActivityTo("ThreeDDS_SpitroastAnal", [_sexInfo.getCharID()])
+		if(usedBodypart == S_VAGINA):
+			switchCurrentActivityTo("ThreeDDS_SpitroastVag", [_sexInfo.getCharID()])
+	if(_args[0] == "dp"):
+		if(usedBodypart == S_ANUS):
+			switchCurrentActivityTo("ThreeDDS_DP", ["vag", _sexInfo.getCharID()])
+		if(usedBodypart == S_VAGINA):
+			switchCurrentActivityTo("ThreeDDS_DP", ["anal", _sexInfo.getCharID()])
 
 func saveData():
 	var data = .saveData()

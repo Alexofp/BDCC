@@ -504,6 +504,13 @@ func getSubInfo(theSubID) -> SexSubInfo:
 		return null
 	return subs[theSubID]
 
+func getCharInfo(_theID:String) -> SexInfoBase:
+	if(doms.has(_theID)):
+		return doms[_theID]
+	if(subs.has(_theID)):
+		return subs[_theID]
+	return null
+
 func isDom(charID) -> bool:
 	if(!doms.has(charID)):
 		return false
@@ -667,6 +674,11 @@ func processAIActions(isDom:bool = true, processPlayerToo:bool = false):
 				startActivity(pickedFinalAction["activityID"], personID, pickedFinalAction["target"], pickedFinalAction["args"])
 			elif(isSub(personID)):
 				startActivity(pickedFinalAction["activityID"], pickedFinalAction["target"], personID, pickedFinalAction["args"])
+		if(pickedFinalAction["id"] == "joinAction"):
+			var activity = getActivityWithUniqueID(pickedFinalAction["activityID"])
+			if(!activity):
+				continue
+			doJoinAction(personID, activity, pickedFinalAction["args"] if pickedFinalAction.has("args") else [])
 			
 	removeEndedActivities()
 	
@@ -675,6 +687,11 @@ func processAIActions(isDom:bool = true, processPlayerToo:bool = false):
 
 func doActivityAction(_whoID:String, activity, action:Dictionary):
 	activity.doActionForCharID(_whoID, action)
+	if(activity.hasEnded):
+		reactToActivityEnd(activity)
+
+func doJoinAction(_whoID:String, activity, _args):
+	activity.doJoinAction(getCharInfo(_whoID), _args)
 	if(activity.hasEnded):
 		reactToActivityEnd(activity)
 
@@ -751,6 +768,23 @@ func getActionsForCharID(_charID:String, isForMenu:bool = false) -> Array:
 					priority = actionEntry["priority"] if actionEntry.has("priority") else 0,
 					action = actionEntry,
 				})
+			
+			if(!activity.isInvolved(_charID) && (_charID != "pc" || activity.isInvolved(getPCTarget()))):
+				var joinActions:Array = activity.getJoinActionsFinal(_charInfo)
+				for actionEntry in joinActions:
+					result.append({
+						id = "joinAction",
+						activityID = activity.uniqueID,
+						name = actionEntry["name"] if actionEntry.has("name") else "UNNAMMED ACTION",
+						desc = actionEntry["desc"] if actionEntry.has("desc") else "Do this action.",
+						score = actionEntry["score"] if actionEntry.has("score") else 0.0,
+						chance = actionEntry["chance"] if actionEntry.has("chance") else null,
+						category = actionEntry["category"] if actionEntry.has("category") else [],
+						priority = actionEntry["priority"] if actionEntry.has("priority") else 0,
+						args = actionEntry["args"] if actionEntry.has("args") else [],
+					})
+				
+				
 	
 	var peopleToCheck:Array = []
 	if(isSub(_charID)):
@@ -923,6 +957,11 @@ func doAction(_actionInfo:Dictionary):
 			startActivity(_actionInfo["activityID"], "pc", _actionInfo["target"], _actionInfo["args"])
 		else:
 			startActivity(_actionInfo["activityID"], _actionInfo["target"], "pc", _actionInfo["args"])
+	if(_actionInfo["id"] == "joinAction"):
+		clearOutputRaw()
+		var activity = getActivityWithUniqueID(_actionInfo["activityID"])
+		if(activity):
+			doJoinAction("pc", activity, _actionInfo["args"] if _actionInfo.has("args") else [])
 		doFullTurn()
 
 func hasTag(charID:String, tag:int) -> bool:

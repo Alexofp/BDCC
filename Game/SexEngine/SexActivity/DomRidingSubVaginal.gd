@@ -404,8 +404,7 @@ func getActions(_indx:int):
 			var moanScore:float = max(0.1, getDomInfo().fetishScore({fetishReceiving: 1.0}) + getDomInfo().personalityScore({PersonalityStat.Subby: 1.0}))
 			addAction("moan", moanScore, "Moan", "Show how much you like it")
 
-			var slowdownScore:float = (1.0 if getSub().isZoneOverstimulated(BodypartSlot.Penis) else 0.0)
-			addAction("slowdown", slowdownScore, "Slow down", "Stop fucking for a second..")
+			addAction("slowdown", getPauseSexScore(DOM_0, SUB_0, S_PENIS, usedBodypart), "Slow down", "Stop fucking for a second..")
 
 			if(isReadyToCumHandled(DOM_0)):
 				addAction("domcum", 1.0, "Cum!", "You're about to cum!", {A_PRIORITY: 1001})
@@ -435,8 +434,7 @@ func getActions(_indx:int):
 		
 		if(state == "inside"):
 			if(getDom().getFirstItemThatCoversBodypart(usedBodypart) == null && getSub().getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
-				var ridemoreScore:float = (0.0 if getSub().isZoneOverstimulated(BodypartSlot.Penis) else 0.25) - getStopScore()
-				addAction("ridemore", ridemoreScore, "Ride more", "Continue riding this "+getDickName("cock")+".")
+				addAction("ridemore", getContinueSexScore(DOM_0, SUB_0, S_PENIS, usedBodypart)-getStopScore(), "Ride more", "Continue riding this "+getDickName("cock")+".")
 			
 			
 	if(_indx == SUB_0):
