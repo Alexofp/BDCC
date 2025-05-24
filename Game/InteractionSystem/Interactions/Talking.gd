@@ -286,15 +286,20 @@ func flirt_flirted_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func flirt_reacted_text():
-	var answer = lust["answer"] if lust.has("answer") else "accept"
-	var likeness = lust["likeness"] if lust.has("likeness") else 1.0
+	var answer:String = lust["answer"] if lust.has("answer") else "accept"
+	var likeness:float = lust["likeness"] if lust.has("likeness") else 1.0
+	var text:String = lust["text"] if lust.has("text") else ""
+	var hasLearnedAnyLustInterests:bool = lust["hasLearnedAnyLustInterests"] if lust.has("hasLearnedAnyLustInterests") else false
 	if(answer == "accept"):
 		sayLine("reacter", "TalkFlirtAccept", {main="reacter", target="starter"})
 	else:
 		gotDenied = true
 		sayLine("reacter", "TalkFlirtDeny", {main="reacter", target="starter"})
 	if(getRolePawn("starter").isPlayer()):
-		saynn("You get a feeling that your flirt was "+str(Util.roundF(likeness*100.0, 1))+"% successful.."+lust["reason"]+"")
+		if(text != ""):
+			saynn(text+" ("+str(Util.roundF(likeness*100.0, 1))+"% success rate)")
+		if(hasLearnedAnyLustInterests == true):
+			addMessage("You learned something new about {reacter.nameS} likes and dislikes..")
 
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
 

@@ -1402,23 +1402,19 @@ func addReactToLustFocusButtons(actionID:String, lustEntry:Dictionary):
 	var role1pawn = getRolePawn(_role1)
 	var role2pawn = getRolePawn(_role2)
 	
-	var likeness:float = role2pawn.getFocussedLikeness(role1pawn, focus, true)
+	var focusedLikenessSummary:Dictionary = role2pawn.getFocusedLikenessSummary(role1pawn, focus, true)
+	
+	var likeness:float = focusedLikenessSummary["resultValue"]
 	
 	var affection:float = scoreAffection(_role2, _role1)
 	var lust:float = scoreLust(_role2, _role1)
 	var naive:float = scorePersonality(_role2, {PersonalityStat.Naive: 1.0})
 	if(affection < (0.5 - 0.45 * naive)):
 		likeness *= max(affection, lust)
-		lustEntry["reason"] = " (affection is too low)"
-	else:
-		if(likeness <= 0.6):
-			lustEntry["reason"] = " (didn't like the sight)"
-		else:
-			lustEntry["reason"] = ""
-	
+		lustEntry["affectionTooLow"] = true
+
 	if(role2pawn.isPlayer()):
 		likeness = 1.0
-		lustEntry["reason"] = ""
 	
 	#print("LIKENESS: ",likeness)
 	
@@ -1444,7 +1440,7 @@ func reactToLustFocus(args:Dictionary, lustEntry:Dictionary):
 	lustEntry["answer"] = answer
 	lustEntry["likeness"] = likeness
 
-	#var focus = lustEntry["focus"]
+	var focus = lustEntry["focus"]
 	var _role1:String = lustEntry["role1"]
 	var _role2:String = lustEntry["role2"]
 	
@@ -1452,7 +1448,134 @@ func reactToLustFocus(args:Dictionary, lustEntry:Dictionary):
 	var role2pawn = getRolePawn(_role2)
 	role1pawn.afterSocialInteraction()
 	role2pawn.afterSocialInteraction()
-	
+
+	var focusedLikenessSummary:Dictionary = role2pawn.getFocusedLikenessSummary(role1pawn, focus, true)
+	var affectionBeforeChange:float = scoreAffection(_role2, _role1)
+
+	if(likeness > 0.6 && (answer == "accept") && RNG.chance(50)):
+		lustEntry["text"] = ""
+	elif( lustEntry.has("affectionTooLow") && lustEntry["affectionTooLow"] == true && (answer == "deny") ):
+		if(affectionBeforeChange < -0.2):
+			lustEntry["text"] = RNG.pick([
+				"They.. don't really like you in general.",
+			])
+		else:
+			lustEntry["text"] = RNG.pick([
+				"You're too much of a stranger to them.",
+				"This is too sudden. Perhaps it's worth exchanging a word or two.",
+				"They barely know you. It's unlikely they'll openly admit anything to you.",
+			])
+	else:
+		var role2char:BaseCharacter = role2pawn.getChar()
+		var role2lustInterests:LustInterests
+
+		if(role2char != null):
+			role2lustInterests = role2char.getLustInterests()
+
+		var likedWhat:String = ""
+		var likedWhatIsPlural:bool = false
+		var dislikedWhat:String = ""
+		var dislikedWhatIsPlural:bool = false
+		var hasLearnedAnyLustInterests:bool = false
+
+		var role1perceptionScore = max( role1pawn.scorePersonalityMax({PersonalityStat.Naive: -1.0}), 0.0 )
+
+		var shouldRevealWhatWasLiked:bool = RNG.chance(35.0 + 15.0 * role1perceptionScore)
+		var shouldRevealWhatWasDisliked:bool = RNG.chance(35.0 + 15.0 * role1perceptionScore)
+
+		if(shouldRevealWhatWasLiked == true):
+			var suffixesOrdered:Array = ["Presence", "Absence"]
+			if(RNG.chance(20)):
+				suffixesOrdered.invert()
+			for summaryKeySuffix in suffixesOrdered:
+				var summaryKey:String = "topicsLiked" + summaryKeySuffix
+				if( focusedLikenessSummary[summaryKey].size() > 0 ):
+					var topicID = RNG.pick( focusedLikenessSummary[summaryKey] )
+					var topicGroup:TopicBase = GlobalRegistry.getLustTopic(topicID)
+					if(!topicGroup):
+						continue
+					likedWhat = topicGroup.getVisibleName(topicID)
+					if(summaryKeySuffix == "Absence"):
+						likedWhat = "the lack of "+likedWhat
+						likedWhatIsPlural = false
+					else:
+						likedWhatIsPlural = topicGroup.shouldUseAre(topicID)
+					if(role1pawn.isPlayer() && (role2lustInterests != null) && role2lustInterests.learnRandomInterestFromList([topicID])):
+						hasLearnedAnyLustInterests = true
+					break
+
+		if(shouldRevealWhatWasDisliked == true):
+			var suffixesOrdered:Array = ["Presence", "Absence"]
+			if(RNG.chance(20)):
+				suffixesOrdered.invert()
+			for summaryKeySuffix in suffixesOrdered:
+				var summaryKey:String = "topicsDisliked" + summaryKeySuffix
+				if( focusedLikenessSummary[summaryKey].size() > 0 ):
+					var topicID = RNG.pick( focusedLikenessSummary[summaryKey] )
+					var topicGroup:TopicBase = GlobalRegistry.getLustTopic(topicID)
+					if(!topicGroup):
+						continue
+					dislikedWhat = topicGroup.getVisibleName(topicID)
+					if(summaryKeySuffix == "Absence"):
+						dislikedWhat = "the lack of "+dislikedWhat
+						dislikedWhatIsPlural = false
+					else:
+						dislikedWhatIsPlural = topicGroup.shouldUseAre(topicID)
+					if(role1pawn.isPlayer() && (role2lustInterests != null) && role2lustInterests.learnRandomInterestFromList([topicID])):
+						hasLearnedAnyLustInterests = true
+					break
+
+		var LikedWhat:String = Util.capitalizeFirstLetter(likedWhat)
+		var DislikedWhat:String = Util.capitalizeFirstLetter(dislikedWhat)
+
+		if(likedWhat != ""):
+			lustEntry["text"] = RNG.pick([
+				"They seemed to like "+likedWhat,
+				"They seemed fond of "+likedWhat,
+				"They really appreciate "+likedWhat,
+				"They loved "+likedWhat,
+				LikedWhat+" really "+RNG.pick(["drew", "captured"])+" their attention",
+				LikedWhat+" "+("seem" if(likedWhatIsPlural) else "seems")+" to catch their attention pretty well",
+			])
+
+		if(dislikedWhat != ""):
+			if(likedWhat != ""):
+				lustEntry["text"] += RNG.pick([
+					", but they aren't really liking "+dislikedWhat,
+					", though "+dislikedWhat+" "+("aren't" if(dislikedWhatIsPlural) else "isn't")+" really appealing to them",
+					", however "+dislikedWhat+" "+("seem" if(dislikedWhatIsPlural) else "seems")+" to turn them off",
+				])
+			else:
+				lustEntry["text"] = RNG.pick([
+					"You noticed they aren't really into "+dislikedWhat,
+					"You were able to notice their aversion to "+dislikedWhat,
+					DislikedWhat+" "+("don't" if(dislikedWhatIsPlural) else "doesn't")+" seem to interest them",
+					DislikedWhat+" "+("are" if(dislikedWhatIsPlural) else "is")+" a bit outside their interests",
+				])
+		else:
+			if(likedWhat != "" && answer == "deny"):
+				lustEntry["text"] += RNG.pick([
+					", but unfortunately that wasn't enough",
+					", but that didn't seem enough",
+					", however something still seemed to turn them off",
+					", though they're still seemingly unhappy about something",
+				])
+
+		if(likedWhat != "" || dislikedWhat != ""):
+			lustEntry["text"] += "."
+		else:
+			if(answer == "accept"):
+				lustEntry["text"] = ""
+			else:
+				lustEntry["text"] = RNG.pick([
+					"It was difficult to tell what displeased them.",
+					"You were sure this was going to work..",
+					"Is there something wrong with their taste?..",
+				])
+
+		if(hasLearnedAnyLustInterests == true):
+			lustEntry["hasLearnedAnyLustInterests"] = true
+
 	if(answer == "accept"):
 		affectLust(_role2, _role1, max(likeness, 0.1) * 0.3)
 	elif(answer == "deny"):
