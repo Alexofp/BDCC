@@ -111,10 +111,12 @@ func getFocusedLikenessSummary(_pc, _focus, isClamped:bool = false) -> Dictionar
 		var playerValue:float = topicGroup.getTopicValue(topicID, _pc) # 0 to 1
 
 		var addsToFocus:float = topicGroup.getAddsToFocus(topicID, _focus)
-		var interestImportanceWithFocus:float = abs(loveValue * addsToFocus)
+		var interestImportance:float = abs(loveValue)
+		var interestImportanceWithFocus:float = (interestImportance * addsToFocus)
 
 		var goodMatchRatio:float = 1.0 - min(abs(loveValueRatio - playerValue), 1.0)
-		var goodMatchRatioWithFocus:float = (goodMatchRatio * addsToFocus)
+
+		var interestImportanceWithFocusMatched:float = (interestImportanceWithFocus * goodMatchRatio)
 
 		if(interestImportanceWithFocus >= 0.5 && (playerValue < 0.3 || playerValue > 0.7)):
 			var summaryKeySuffix:String = "Presence" if(playerValue > 0.5) else "Absence"
@@ -123,8 +125,8 @@ func getFocusedLikenessSummary(_pc, _focus, isClamped:bool = false) -> Dictionar
 			elif(goodMatchRatio < 0.3):
 				summaryDict["topicsDisliked" + summaryKeySuffix].append(topicID)
 
+		resultValue += interestImportanceWithFocusMatched
 		maxPossible += interestImportanceWithFocus
-		resultValue += goodMatchRatioWithFocus
 
 	if(isClamped):
 		if(maxPossible <= 0.0):
