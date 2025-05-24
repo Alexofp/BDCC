@@ -38,6 +38,7 @@ func _initScene(_args = []):
 
 func _run():
 	if(state == ""):
+		setCharactersEasyList(sexEngine.getCharIDList())
 		sexEngine.playAnimation()
 		saynn(sexEngine.getFinalOutput())
 		
@@ -49,6 +50,13 @@ func _run():
 			var canSelectTarget:bool = sexEngine.canSwitchPCTarget()
 			if(canSelectTarget):
 				addExtraButtonAt(3, "TARGET", "Switch the target of your new activities", "switchtarget")
+			
+			var canToggleDynJoiners:bool = sexEngine.canToggleDynamicJoiners()
+			if(canToggleDynJoiners):
+				if(sexEngine.didPCAllowDynamicJoiners()):
+					addExtraButton("Disallow joiners", "Disallow people around you from dynamically joining the sex.", "toggle_dynamic_join")
+				else:
+					addExtraButton("Allow joiners", "Allow people around you to join the sex.", "toggle_dynamic_join")
 			
 			if(sexEngine.canChooseDomAutonomy()):
 				if(!sexEngine.isDomAutonomyEnabled()):
@@ -114,6 +122,14 @@ func _react(_action: String, _args):
 			addMessage("Other doms now have action autonomy.")
 		else:
 			addMessage("Other doms won't do any new actions anymore.")
+		return
+	
+	if(_action == "toggle_dynamic_join"):
+		sexEngine.toggleDynamicJoiners()
+		if(sexEngine.didPCAllowDynamicJoiners()):
+			addMessage("Pawns around you might decide to join now.")
+		else:
+			addMessage("Pawns around you will no longer join.")
 		return
 	
 	if(_action == "recoverandleave"):

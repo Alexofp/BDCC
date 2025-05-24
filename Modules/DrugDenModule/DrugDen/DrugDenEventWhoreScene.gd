@@ -118,7 +118,7 @@ func _react(_action: String, _args):
 		startFightWithNPC("DrugDenWhoreAttack")
 		return
 	if(_action == "agree_sex"):
-		runScene("GenericSexScene", [npcID, "pc", SexType.DefaultSex, {bondageDisabled=true}], "prostitutionSex")
+		runScene("GenericSexScene", [npcID, "pc", SexType.DefaultSex, {SexMod.BondageDisabled: true, SexMod.DisableDynamicJoiners: true}], "prostitutionSex")
 		return
 	if(encounter_react(_action, _args)):
 		return

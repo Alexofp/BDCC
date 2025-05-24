@@ -450,7 +450,7 @@ func _react(_action: String, _args):
 		npc.orgasmFrom("pc")
 
 	if(_action == "start_sex"):
-		runScene("GenericSexScene", [npcID, "pc"], "sex_with_slave")
+		runScene("GenericSexScene", [npcID, "pc", SexType.DefaultSex, {SexMod.DisableDynamicJoiners:true}], "sex_with_slave")
 		return
 
 	setState(_action)

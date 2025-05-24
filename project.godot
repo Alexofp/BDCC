@@ -1400,6 +1400,11 @@ _global_script_classes=[ {
 "path": "res://Game/SexEngine/SexInfoBase.gd"
 }, {
 "base": "Object",
+"class": "SexMod",
+"language": "GDScript",
+"path": "res://Game/SexEngine/Util/SexMod.gd"
+}, {
+"base": "Object",
 "class": "SexReaction",
 "language": "GDScript",
 "path": "res://Game/SexEngine/SexReaction.gd"
@@ -1973,6 +1978,7 @@ _global_script_class_icons={
 "SexGoal": "",
 "SexGoalBase": "",
 "SexInfoBase": "",
+"SexMod": "",
 "SexReaction": "",
 "SexStance": "",
 "SexSubInfo": "",

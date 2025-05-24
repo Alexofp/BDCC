@@ -247,7 +247,7 @@ func _react(_action: String, _args):
 	if(_action == "startsexsubby"):
 		getCharacter(npcID).prepareForSexAsDom()
 		GlobalRegistry.getCharacter(npcID).addPain(-50)
-		runScene("GenericSexScene", [npcID, "pc"], "subbysex")
+		runScene("GenericSexScene", [npcID, "pc", SexType.DefaultSex, {SexMod.DisableDynamicJoiners:true}], "subbysex")
 		return
 	
 	if(_action == "startsexasdom"):

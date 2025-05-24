@@ -193,9 +193,9 @@ func _react(_action: String, _args):
 	
 	if(_action == "do_watch"):
 		if(slutIsDom):
-			runScene("GenericSexScene", [npcID, npc2ID], "prostitutionsex")
+			runScene("GenericSexScene", [npcID, npc2ID, SexType.DefaultSex, {SexMod.DisableDynamicJoiners:true}], "prostitutionsex")
 		else:
-			runScene("GenericSexScene", [npc2ID, npcID], "prostitutionsex")
+			runScene("GenericSexScene", [npc2ID, npcID, SexType.DefaultSex, {SexMod.DisableDynamicJoiners:true}], "prostitutionsex")
 		
 		setState("after_sex")
 		return

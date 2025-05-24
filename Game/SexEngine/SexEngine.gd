@@ -8,6 +8,7 @@ var doms:Dictionary = {}
 var subs:Dictionary = {}
 var trackedItems:Dictionary = {}
 var inventoryToSaveItemsTo:LightInventory = null
+var participatedDoms:Dictionary = {}
 
 var currentLastActivityID:int = 0
 
@@ -21,8 +22,10 @@ var sexType:SexTypeBase
 var disabledGoals:Dictionary = {}
 var bondageDisabled:bool = false
 var subMustGoUnconscious:bool = false
+var noDynamicJoiners:bool = false
 
 var pcAllowsDomAutonomy:bool = false
+var pcAllowsDynJoiners:bool = false
 
 var pcTarget:String = ""
 var outputRaw:Array = []
@@ -81,17 +84,19 @@ func initSexType(theSexType, args:Dictionary = {}):
 	else:
 		sexType = theSexType
 		
-	if(args.has("unconscious") && args["unconscious"]):
+	if(args.has(SexMod.SubsStartUnconscious) && args[SexMod.SubsStartUnconscious]):
 		for subID in subs:
 			getSubInfo(subID).getChar().addConsciousness(-1.0)
 		
-	if(args.has("disabledGoals")):
-		disabledGoals = args["disabledGoals"]
+	if(args.has(SexMod.DisabledGoals)):
+		disabledGoals = args[SexMod.DisabledGoals]
 		
-	if(args.has("bondageDisabled")):
-		bondageDisabled = args["bondageDisabled"]
-	if(args.has("subMustGoUnconscious")):
-		subMustGoUnconscious = args["subMustGoUnconscious"]
+	if(args.has(SexMod.BondageDisabled)):
+		bondageDisabled = args[SexMod.BondageDisabled]
+	if(args.has(SexMod.SubMustGoUnconscious)):
+		subMustGoUnconscious = args[SexMod.SubMustGoUnconscious]
+	if(args.has(SexMod.DisableDynamicJoiners)):
+		noDynamicJoiners = args[SexMod.DisableDynamicJoiners]
 		
 	if(sexType != null):
 		sexType.setSexEngine(self)
@@ -340,7 +345,7 @@ func checkIfDomsNeedMoreGoals():
 		return
 	for domID in doms:
 		var domInfo:SexDomInfo = doms[domID]
-		if(!domInfo.hasGoals()):
+		if(!domInfo.hasGoals() && !domInfo.isDynamicJoiner()):
 			generateGoalsFor(domID, 2)
 
 func doFastSex() -> SexEngineResult:
@@ -679,7 +684,9 @@ func processAIActions(isDom:bool = true, processPlayerToo:bool = false):
 			if(!activity):
 				continue
 			doJoinAction(personID, activity, pickedFinalAction["args"] if pickedFinalAction.has("args") else [])
-			
+		if(pickedFinalAction["id"] == "dynamicLeave"):
+			removeDynamicJoiner(personID)
+		
 	removeEndedActivities()
 	
 	#if(sexShouldEnd()):
@@ -752,6 +759,17 @@ func getActionsForCharID(_charID:String, isForMenu:bool = false) -> Array:
 	var canCharDoActions:bool = _charInfo.canDoActions()
 	
 	if(canCharDoActions):
+		if(!_isPC && !isForMenu && _isDom && (_charInfo is SexDomInfo)):
+			var _theDomInfo:SexDomInfo = _charInfo
+			if(_theDomInfo.isDynamicJoiner() && !_theDomInfo.hasGoals()):
+				result.append({
+					id = "dynamicLeave",
+					name = "Leave",
+					desc = "Leave the scene",
+					score = 1.0,
+					priority = 0,
+				})
+		
 		for activity in activities:
 			if(activity.hasEnded):
 				continue
@@ -926,6 +944,8 @@ func doFullTurn(_isObeyMode:bool = false):
 	processTurn()
 	addOutputSeparator()
 	processAIActions(false, _isObeyMode)
+	if(shouldFindDynamicJoiners()):
+		findDynamicJoiner()
 
 func processScene():
 	clearOutputRaw()
@@ -1359,18 +1379,131 @@ func getSexResult() -> SexEngineResult:
 func isBondageDisabled() -> bool:
 	return bondageDisabled || (GM.main.getEncounterSettings().getGoalWeight(SexGoal.TieUp) <= 0.0)
 
-func hasWallsNearby() -> bool:
-	var locToCheck:String = ""
+func getCharIDList() -> Array:
+	return doms.keys() + subs.keys()
+
+func isDynamicJoinAllowed() -> bool:
+	return !noDynamicJoiners
+
+func shouldFindDynamicJoiners() -> bool:
+	if(!isDynamicJoinAllowed()):
+		return false
+	if(doms.size() >= 2):
+		return false
+	if(isDom("pc") && !didPCAllowDynamicJoiners()):
+		return false
+	return true
+
+func toggleDynamicJoiners():
+	pcAllowsDynJoiners = !pcAllowsDynJoiners
+
+func didPCAllowDynamicJoiners() -> bool:
+	return pcAllowsDynJoiners
+
+func canToggleDynamicJoiners() -> bool:
+	if(!isDom("pc")):
+		return false
+	if(!noDynamicJoiners):
+		return false
+	
+	return true
+
+func removeDynamicJoiner(_charID:String):
+	if(!doms.has(_charID)):
+		return
+	
+	var theDomInfo:SexDomInfo = doms[_charID]
+	var theCharacter:BaseCharacter = theDomInfo.getChar()
+	
+	stopActivitiesThatInvolveCharID(_charID)
+	doms.erase(_charID)
+	
+	addTextRaw("[b]Dominant leaves.[/b] "+theCharacter.getName()+" has left.")
+	
+	var sexLoc:String = getLocation()
+	if(theCharacter.isDynamicCharacter() && sexLoc != ""):
+		var thePawn = GM.main.IS.spawnPawn(_charID)
+		if(thePawn):
+			thePawn.setLocation(sexLoc)
+
+func addDynamicDomParticipant(_charID:String):
+	if(doms.has(_charID) || subs.has(_charID)):
+		return
+	var domInfo := SexDomInfo.new()
+	domInfo.initInfo(_charID, self)
+	domInfo.setDynamicJoiner(true)
+	doms[_charID] = domInfo
+	checkRevealedFor(_charID)
+	generateGoalsFor(_charID, 2)
+	addTextRaw("[b]NEW DOMINANT![/b] "+domInfo.getChar().getName()+" joins in on the fun.")
+	participatedDoms[_charID] = true
+	if(GM.main):
+		#TODO: Do something better than just deleting pawns?
+		GM.main.IS.deletePawn(_charID)
+
+func getChanceForDynamicJoiner(_charID:String) -> float:
+	var result:float = 20.0
+	if(isDom("pc")):
+		result += 40.0
+	
+	var theCharacter:BaseCharacter = GlobalRegistry.getCharacter(_charID)
+	if(!theCharacter):
+		return 0.0
+	var thePers:Personality = theCharacter.getPersonality()
+	var theMean:float = thePers.getStat(PersonalityStat.Mean)
+	var theDom:float = -thePers.getStat(PersonalityStat.Subby)
+	
+	result += theMean*20.0
+	result += theDom*30.0
+	
+	for subID in subs:
+		var affection:float = GM.main.RS.getAffection(subID, _charID)
+		if(affection > 0.80): # best fren
+			return 0.0
+		result -= affection * 50.0 * (0.2 + max(theMean, -0.2))
+	
+	var thePawn:CharacterPawn = GM.main.IS.getPawn(_charID)
+	if(thePawn):
+		result += thePawn.getAngerClamped() * 50.0
+	
+	return clamp(result, 0.0, 90.0)
+
+func findDynamicJoiner():
+	var theLoc:String = getLocation()
+	if(theLoc == ""):
+		return
+	
+	var allPawnIDs:Array = GM.main.IS.getPawnIDsNear(theLoc, 1, 1)
+	if(allPawnIDs.empty()):
+		return
+	var pickedNewDomID:String = RNG.pick(allPawnIDs)
+	if(participatedDoms.has(pickedNewDomID)):
+		return
+	var thePawn = GM.main.IS.getPawn(pickedNewDomID)
+	if(!thePawn || !thePawn.canBeInterrupted()):
+		return
+	# Little hack-ish but it basically makes it so if you allow dynamic joiners, they will do stuff by default
+	if(isDom("pc") && doms.size() == 1 && participatedDoms.empty()):
+		pcAllowsDomAutonomy = true
+	var theChance:float = getChanceForDynamicJoiner(pickedNewDomID)
+	if(!RNG.chance(theChance)):
+		return
+	addDynamicDomParticipant(pickedNewDomID)
+
+func getLocation() -> String:
 	if(doms.has("pc") || subs.has("pc")):
-		locToCheck = GM.pc.getLocation()
+		return GM.pc.getLocation()
 	elif(GM.main != null):
 		for domID in doms:
 			if(GM.main.IS.hasPawn(domID)):
-				locToCheck = GM.main.IS.getPawn(domID).getLocation()
-		if(locToCheck == ""):
-			for subID in subs:
-				if(GM.main.IS.hasPawn(subID)):
-					locToCheck = GM.main.IS.getPawn(subID).getLocation()
+				return GM.main.IS.getPawn(domID).getLocation()
+		for subID in subs:
+			if(GM.main.IS.hasPawn(subID)):
+				return GM.main.IS.getPawn(subID).getLocation()
+	return ""
+	
+func hasWallsNearby() -> bool:
+	var locToCheck:String = getLocation()
 	
 	if(locToCheck == ""):
 		return true
@@ -1400,6 +1533,9 @@ func saveData():
 		"outputRaw": outputRaw,
 		"pcTarget": pcTarget,
 		"pcAllowsDomAutonomy": pcAllowsDomAutonomy,
+		"participatedDoms": participatedDoms,
+		"pcAllowsDynJoiners": pcAllowsDynJoiners,
+		"noDynamicJoiners": noDynamicJoiners,
 	}
 	if(sexType != null):
 		data["sexTypeID"] = sexType.id
@@ -1436,6 +1572,9 @@ func loadData(data):
 	outputRaw = SAVE.loadVar(data, "outputRaw", [])
 	pcTarget = SAVE.loadVar(data, "pcTarget", "")
 	pcAllowsDomAutonomy = SAVE.loadVar(data, "pcAllowsDomAutonomy", false)
+	participatedDoms = SAVE.loadVar(data, "participatedDoms", {})
+	pcAllowsDynJoiners = SAVE.loadVar(data, "pcAllowsDynJoiners", false)
+	noDynamicJoiners = SAVE.loadVar(data, "noDynamicJoiners", false)
 	
 	var sexTypeID = SAVE.loadVar(data, "sexTypeID", SexType.DefaultSex)
 	var theSexType = GlobalRegistry.createSexType(sexTypeID)

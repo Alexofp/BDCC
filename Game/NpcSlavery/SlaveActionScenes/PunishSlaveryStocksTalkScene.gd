@@ -89,11 +89,11 @@ func _react(_action: String, _args):
 		if(idToUse == null):
 			return
 		getCharacter(idToUse).prepareForSexAsDom()
-		runScene("GenericSexScene", [idToUse, npcID, SexType.StocksSex], "watchsex")
+		runScene("GenericSexScene", [idToUse, npcID, SexType.StocksSex, {SexMod.DisableDynamicJoiners:true}], "watchsex")
 		return
 		
 	if(_action == "do_use"):
-		runScene("GenericSexScene", ["pc", npcID, SexType.StocksSex], "usesex")
+		runScene("GenericSexScene", ["pc", npcID, SexType.StocksSex, {SexMod.DisableDynamicJoiners:true}], "usesex")
 		return
 		
 	setState(_action)

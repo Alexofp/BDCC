@@ -684,7 +684,7 @@ func _react(_action: String, _args):
 		return
 	
 	if(_action == "start_sex_as_sub"):
-		runScene("GenericSexScene", [npcID, "pc"], "fucked_by_angry_slave")
+		runScene("GenericSexScene", [npcID, "pc", SexType.DefaultSex, {SexMod.DisableDynamicJoiners:true}], "fucked_by_angry_slave")
 		setState("")
 		return
 		

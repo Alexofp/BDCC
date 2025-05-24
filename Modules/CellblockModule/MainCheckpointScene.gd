@@ -393,10 +393,10 @@ func _react(_action: String, _args):
 	if(_action == "startsexsubby"):
 		getCharacter("cp_guard").prepareForSexAsDom()
 		GlobalRegistry.getCharacter("cp_guard").addPain(-50)
-		runScene("GenericSexScene", ["cp_guard", "pc"], "subbysex")
+		runScene("GenericSexScene", ["cp_guard", "pc", SexType.DefaultSex, {SexMod.DisableDynamicJoiners:true}], "subbysex")
 	
 	if(_action == "startsexasdom"):
-		runScene("GenericSexScene", ["pc", "cp_guard"], "domsex")
+		runScene("GenericSexScene", ["pc", "cp_guard", SexType.DefaultSex, {SexMod.DisableDynamicJoiners:true}], "domsex")
 	
 	if(_action == "openinventory"):
 		runScene("InventoryScene")

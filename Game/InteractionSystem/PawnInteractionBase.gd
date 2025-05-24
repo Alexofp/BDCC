@@ -972,6 +972,7 @@ func receiveSexEngineResult(_result:SexEngineResult):
 	isWaitingScene = false
 	sexResult = _result
 	doSexAftermath(currentActionArgs["sex"], sexResult)
+	doCurrentAction()
 
 func receiveSceneStatusFinal(_result:Dictionary):
 	isWaitingScene = false

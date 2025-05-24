@@ -41,7 +41,7 @@ func about_to_fuck_text():
 	
 	saynn("A sinister glint shines in {user.his} eyes..")
 	
-	addAction("sex", "Sex", "Time to have some fun", "default", 1.0, 300, {start_sex=["user", "main", SexType.DefaultSex, {unconscious=true}],})
+	addAction("sex", "Sex", "Time to have some fun", "default", 1.0, 300, {start_sex=["user", "main", SexType.DefaultSex, {SexMod.SubsStartUnconscious: true}],})
 
 func about_to_fuck_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "sex"):

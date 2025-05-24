@@ -1330,12 +1330,12 @@ func _react(_action: String, _args):
 		processTime(6*60)
 
 	if(_action == "slutwall_watch"):
-		runScene("GenericSexScene", [NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [], InmateGenerator.new()), "socket", SexType.SlutwallSex], "socket_slutwall")
+		runScene("GenericSexScene", [NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [], InmateGenerator.new()), "socket", SexType.SlutwallSex, {SexMod.DisableDynamicJoiners:true}], "socket_slutwall")
 		getCharacter("socket").addEffect("SexSpacedOut")
 		return
 
 	if(_action == "slutwall_fuck"):
-		runScene("GenericSexScene", ["pc", "socket", SexType.SlutwallSex], "socket_slutwall")
+		runScene("GenericSexScene", ["pc", "socket", SexType.SlutwallSex, {SexMod.DisableDynamicJoiners:true}], "socket_slutwall")
 		getCharacter("socket").addEffect("SexSpacedOut")
 		return
 

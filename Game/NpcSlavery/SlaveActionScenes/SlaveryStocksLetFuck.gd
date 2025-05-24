@@ -55,9 +55,9 @@ func _react(_action: String, _args):
 		
 		if(GM.pc.getLocation() == "fight_slutwall"):
 			npc2.lustStateFullyUndress()
-			runScene("GenericSexScene", [npcID, npc2ID, SexType.SlutwallSex], "usesex")
+			runScene("GenericSexScene", [npcID, npc2ID, SexType.SlutwallSex, {SexMod.DisableDynamicJoiners:true}], "usesex")
 		else:
-			runScene("GenericSexScene", [npcID, npc2ID, SexType.StocksSex], "usesex")
+			runScene("GenericSexScene", [npcID, npc2ID, SexType.StocksSex, {SexMod.DisableDynamicJoiners:true}], "usesex")
 		
 		endScene()
 		return

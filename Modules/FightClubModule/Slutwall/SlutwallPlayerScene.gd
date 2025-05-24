@@ -60,7 +60,7 @@ func _react(_action: String, _args):
 		
 		GM.pc.lustStateFullyUndress()
 		var npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [], InmateGenerator.new(), {})
-		runScene("GenericSexScene", [npcID, "pc", SexType.SlutwallSex], "generic_sex_scene")
+		runScene("GenericSexScene", [npcID, "pc", SexType.SlutwallSex, {SexMod.DisableDynamicJoiners:true}], "generic_sex_scene")
 		return
 
 	setState(_action)

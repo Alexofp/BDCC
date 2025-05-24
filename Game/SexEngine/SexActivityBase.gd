@@ -1889,12 +1889,12 @@ func doProcessFuckExtra(_indxTop:int, _indxBottom:int, _hole:String):
 	
 	if(RNG.chance(20) && topChar.bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisBarbs)):
 		addTextRaw(RNG.pick([
-			"Barbs on {dom.yourHis} "+("{penis}" if !topStrapon else "strapon")+" provide extra stimulation.",
-			"Barbs on {dom.yourHis} "+("{penis}" if !topStrapon else "strapon")+" "+RNG.pick(["rake against", "scratch"])+" the "+RNG.pick(["soft insides", "soft inner walls"])+".",
+			"Barbs on {<TOP>.yourHis} "+("{penis}" if !topStrapon else "strapon")+" provide extra stimulation.",
+			"Barbs on {<TOP>.yourHis} "+("{penis}" if !topStrapon else "strapon")+" "+RNG.pick(["rake against", "scratch"])+" the "+RNG.pick(["soft insides", "soft inner walls"])+".",
 		]).replace("<TOP>", topInfo.getCharID()))
 	if(RNG.chance(20) && topChar.bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisRidges)):
 		addTextRaw(RNG.pick([
-			" Ridges on {dom.yourHis} "+("{penis}" if !topStrapon else "strapon")+" provide extra stimulation.",
+			" Ridges on {<TOP>.yourHis} "+("{penis}" if !topStrapon else "strapon")+" provide extra stimulation.",
 		]).replace("<TOP>", topInfo.getCharID()))
 	
 	if(topInfo.getChar().isWearingStrapon()):

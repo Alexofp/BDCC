@@ -119,7 +119,7 @@ func encounter_run():
 func encounter_react(_action: String, _args):
 	if(_action == "start_defeated_sex"):
 		getCharacter(npcID).prepareForSexAsDom()
-		runScene("GenericSexScene", [npcID, "pc", SexType.DefaultSex, {subMustGoUnconscious=true}], "defeated_sex")
+		runScene("GenericSexScene", [npcID, "pc", SexType.DefaultSex, {SexMod.SubMustGoUnconscious:true, SexMod.DisableDynamicJoiners:true}], "defeated_sex")
 		return true
 	if(_action == "encounter_endrun"):
 		GM.main.processTime(2*60*60)

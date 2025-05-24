@@ -90,12 +90,12 @@ func _react(_action: String, _args):
 			return
 		getCharacter(idToUse).prepareForSexAsDom()
 		npc.lustStateFullyUndress()
-		runScene("GenericSexScene", [idToUse, npcID, SexType.SlutwallSex], "watchsex")
+		runScene("GenericSexScene", [idToUse, npcID, SexType.SlutwallSex, {SexMod.DisableDynamicJoiners:true}], "watchsex")
 		return
 		
 	if(_action == "do_use"):
 		npc.lustStateFullyUndress()
-		runScene("GenericSexScene", ["pc", npcID, SexType.SlutwallSex], "usesex")
+		runScene("GenericSexScene", ["pc", npcID, SexType.SlutwallSex, {SexMod.DisableDynamicJoiners:true}], "usesex")
 		return
 		
 	setState(_action)

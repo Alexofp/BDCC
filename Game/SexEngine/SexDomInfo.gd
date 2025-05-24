@@ -8,6 +8,7 @@ var anger: float = 0.0
 var isDown:bool = false
 var angerFull: float = 0.0
 var hasAnyCumGoals:bool = false
+var dynamicJoiner:bool = false # Will auto-leave after completing their goals
 
 func hasGoalToCum() -> bool:
 	return hasAnyCumGoals
@@ -206,6 +207,12 @@ func onGoalSatisfied(_thedominfo, _goalid, _thesubinfo, _mult:float = 1.0):
 func onGoalFailed(_thedominfo, _goalid, _thesubinfo, _mult:float = 1.0):
 	addFrustration(1.0*_mult)
 
+func setDynamicJoiner(_isDyn:bool):
+	dynamicJoiner = _isDyn
+
+func isDynamicJoiner() -> bool:
+	return dynamicJoiner
+
 func saveData():
 	var data = .saveData()
 	
@@ -214,6 +221,7 @@ func saveData():
 	data["isDown"] = isDown
 	data["angerFull"] = angerFull
 	data["hasAnyCumGoals"] = hasAnyCumGoals
+	data["dynamicJoiner"] = dynamicJoiner
 
 	return data
 	
@@ -225,3 +233,4 @@ func loadData(data):
 	isDown = SAVE.loadVar(data, "isDown", false)
 	angerFull = SAVE.loadVar(data, "angerFull", 0.0)
 	hasAnyCumGoals = SAVE.loadVar(data, "hasAnyCumGoals", false)
+	dynamicJoiner = SAVE.loadVar(data, "dynamicJoiner", false)

@@ -542,6 +542,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		return
 	if(_id in ["knotinside", "cuminside"]):
 		var cumData:Dictionary = doProcessCumInside(DOM_0, SUB_0, usedBodypart, (_id == "knotinside"))
+		satisfyGoals()
 		if(cumData.has("knotSuccess") && cumData["knotSuccess"]):
 			state = "knotting"
 		else:

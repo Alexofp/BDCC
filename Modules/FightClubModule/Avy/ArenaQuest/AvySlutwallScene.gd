@@ -669,7 +669,7 @@ func _react(_action: String, _args):
 
 	if(_action == "start_freeuse_npc"):
 		getCharacter("avy").lustStateFullyUndress()
-		runScene("GenericSexScene", [npcID, "avy", SexType.SlutwallSex], "generic_sex_scene_avy")
+		runScene("GenericSexScene", [npcID, "avy", SexType.SlutwallSex, {SexMod.DisableDynamicJoiners:true}], "generic_sex_scene_avy")
 		removeCharacter(npcID)
 		npcID = ""
 		setState("")
