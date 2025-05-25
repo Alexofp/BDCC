@@ -897,6 +897,26 @@ func getOrgasmHandlePriority(_indx:int) -> int:
 		return 10
 	return -1
 
+func getJoinActions(_sexInfo:SexInfoBase):
+	if(!(_sexInfo is SexDomInfo)):
+		return
+	var theChar:BaseCharacter = _sexInfo.getChar()
+	
+	if(getSexType() in [SexType.DefaultSex]):
+		#TODO: Better score functions here
+		if(getSub().hasReachableAnus() && (theChar.hasReachablePenis() || theChar.isWearingStrapon())):
+			addJoinAction(["trainAnal"], "+Train (anal)", "Join and fuck the sub's ass at the same time!", getActivityScore(getSexEngine(), _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
+		if(getSub().hasReachableVagina() && (theChar.hasReachablePenis() || theChar.isWearingStrapon())):
+			addJoinAction(["trainVag"], "+Train (vag)", "Join and fuck the sub's pussy at the same time!", getActivityScore(getSexEngine(), _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
+	
+		
+func doJoinAction(_sexInfo:SexInfoBase, _args):
+	if(_args[0] == "trainVag"):
+		switchCurrentActivityTo("ThreeDDS_Train", [S_VAGINA, usedBodypart, _sexInfo.getCharID(), true])
+	if(_args[0] == "trainAnal"):
+		switchCurrentActivityTo("ThreeDDS_Train", [S_ANUS, usedBodypart, _sexInfo.getCharID(), true])
+	
+
 func saveData():
 	var data = .saveData()
 	

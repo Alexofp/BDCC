@@ -121,7 +121,8 @@ func _react(_action: String, _args):
 		#runScene("GenericSexScene", ["pc", ["rahi", "nova"]])
 		#runScene("GenericSexScene", [["avy", "nova"], ["rahi"]])
 		#runScene("GenericSexScene", [["avy", "pc"], ["rahi", "socket"]])
-		runScene("GenericSexScene", [["pc"], ["rahi", "socket"]])
+		runScene("GenericSexScene", [["rahi", "pc"], ["nova"]])
+		#runScene("GenericSexScene", [["pc"], ["rahi", "socket"]])
 		#runScene("GenericSexScene", [["avy"], ["rahi"]])
 		#runScene("GenericSexScene", ["rahi", "pc"])
 		

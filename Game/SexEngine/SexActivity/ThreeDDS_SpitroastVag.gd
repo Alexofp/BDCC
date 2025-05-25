@@ -50,8 +50,8 @@ func getTags(_indx:int) -> Array:
 		return [SexActivityTag.HavingSex, SexActivityTag.PenisUsed]
 	if(_indx == SUB_0):
 		if(state != ""):
-			return [SexActivityTag.HavingSex, SexActivityTag.MouthUsed, SexActivityTag.VaginaUsed, SexActivityTag.VaginaPenetrated]
-		return [SexActivityTag.HavingSex, SexActivityTag.MouthUsed, SexActivityTag.VaginaUsed]
+			return [SexActivityTag.HavingSex, SexActivityTag.MouthUsed, SexActivityTag.VaginaUsed if usedBodypart == S_VAGINA else SexActivityTag.AnusUsed, SexActivityTag.VaginaPenetrated if usedBodypart == S_VAGINA else SexActivityTag.AnusPenetrated]
+		return [SexActivityTag.HavingSex, SexActivityTag.MouthUsed, SexActivityTag.VaginaUsed if usedBodypart == S_VAGINA else SexActivityTag.AnusUsed]
 	return []
 
 func startActivity(_args):

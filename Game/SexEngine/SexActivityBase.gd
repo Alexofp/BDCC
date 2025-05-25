@@ -1826,7 +1826,7 @@ func getNamePenis(_indx:int) -> String:
 	if(!theChar):
 		return "[color=red]error[/color]"
 	if(theChar.isWearingStrapon()):
-		return "strapon"
+		return RNG.pick(["strapon", "rubber cock", "rubber dick", "rubber toy"])
 	return "{penis}"
 
 func getNameHole(_indx:int, _hole:String) -> String:
@@ -1982,17 +1982,17 @@ func doProcessCumInside(_indxTop:int, _indxBottom:int, _hole:String, tryKnot:boo
 	
 	if(knotSuccess):
 		text += RNG.pick([
-			"{<TOP>.You} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} cock deep inside {<BOTTOM>.yourHis} "+getNameHole(_indxBottom, _hole)+" and force the knot in, stretching {<BOTTOM>.yourHis} "+getNameHole(_indxBottom, _hole)+" wide before [b]"+RNG.pick(["stuffing", "filling"])+" it full of {<TOP>.yourHis} seed[/b]!",
-			"{<TOP>.You} {<TOP>.youVerb('manage')} to force {<TOP>.yourHis} knot in, stretching {<BOTTOM>.youHim} out! {<TOP>.YouHe} {<TOP>.youVerb('grunt')} as {<TOP>.yourHis} cock starts shooting thick ropes of "+RNG.pick(["cum", "seed", "jizz", "semen"])+" deep [b]inside {<BOTTOM>.yourHis} "+wombText+"[/b]!",
-			"{<TOP>.Your} balls tense up as {<TOP>.youHe} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} cock deep. The knot slips in, stretching {<BOTTOM>.yourHis} "+getNameHole(_indxBottom, _hole)+" while [b]{<TOP>.youHe} {<TOP>.youAre} cumming inside[/b]!",
-			"{<TOP>.You} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} cock balls-deep. The knot stretches {<BOTTOM>.yourHis} "+getNameHole(_indxBottom, _hole)+" until finally slipping in. {<TOP>.You} {<TOP>.youVerb('grunt')} while [b]stuffing {<BOTTOM>.yourHis} "+wombText+"[/b]!",
+			"{<TOP>.You} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} cock deep inside {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+" and force the knot in, stretching {<BOTTOM>.yourHis} "+getNameHole(_indxBottom, _hole)+" wide before [b]"+RNG.pick(["stuffing", "filling"])+" it full of {<TOP>.yourHis} seed[/b]!",
+			"{<TOP>.You} {<TOP>.youVerb('manage')} to force {<TOP>.yourHis} knot in, stretching {<BOTTOM>.you} out! {<TOP>.YouHe} {<TOP>.youVerb('grunt')} as {<TOP>.yourHis} cock starts shooting thick ropes of "+RNG.pick(["cum", "seed", "jizz", "semen"])+" deep [b]inside {<BOTTOM>.yourHis} "+wombText+"[/b]!",
+			"{<TOP>.Your} balls tense up as {<TOP>.youHe} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} cock deep. The knot slips in, stretching {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+" while [b]{<TOP>.youHe} {<TOP>.youAre} cumming inside[/b]!",
+			"{<TOP>.You} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} cock balls-deep. The knot stretches {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+" until finally slipping in. {<TOP>.You} {<TOP>.youVerb('grunt')} while [b]stuffing {<BOTTOM>.yourHis} "+wombText+"[/b]!",
 		])
 	else:
 		text += RNG.pick([
-			"{<TOP>.You} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} cock deep inside {<BOTTOM>.yourHis} "+getNameHole(_indxBottom, _hole)+" and [b]"+RNG.pick(["{<TOP>.youVerb('stuff')}", "{<TOP>.youVerb('fill')}"])+" it full of {<TOP>.yourHis} seed[/b]!",
-			"{<TOP>.You} {<TOP>.youVerb('grunt')} as {<TOP>.yourHis} cock starts shooting thick ropes of "+RNG.pick(["cum", "seed", "jizz", "semen"])+" deep [b]inside {<BOTTOM>.yourHis} "+wombText+"[/b]!",
+			"{<TOP>.You} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} cock deep inside {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+" and [b]"+RNG.pick(["{<TOP>.youVerb('stuff')}", "{<TOP>.youVerb('fill')}"])+" it full of {<TOP>.yourHis} seed[/b]!",
+			"{<TOP>.You} {<TOP>.youVerb('grunt')} as {<TOP>.yourHis} cock starts shooting thick ropes of "+RNG.pick(["cum", "seed", "jizz", "semen"])+" deep [b]inside {<BOTTOM>.your} "+wombText+"[/b]!",
 			"{<TOP>.Your} balls tense up as {<TOP>.youHe} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} cock deep and [b]{<TOP>.youVerb('cum')} inside {<BOTTOM>.you}[/b]!",
-			"{<TOP>.You} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} cock balls-deep and {<TOP>.youVerb('grunt')} while [b]stuffing {<BOTTOM>.yourHis} "+getNameHole(_indxBottom, _hole)+"[/b]!",
+			"{<TOP>.You} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} cock balls-deep and {<TOP>.youVerb('grunt')} while [b]stuffing {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+"[/b]!",
 		])
 	
 	var condom:ItemBase = topChar.getWornCondom()
@@ -2030,12 +2030,12 @@ func doProcessCumInside(_indxTop:int, _indxBottom:int, _hole:String, tryKnot:boo
 	
 	if(!handledCum):
 		didCumInside = true
-		if(bottomChar.hasWombIn(_hole)):
+		if(bottomChar.hasWombIn(_hole) && (bottomInfo is SexSubInfo)):
 			var beingBredScore:float = bottomInfo.fetishScore({Fetish.BeingBred: 1.0})
 			if(beingBredScore < 0.0):
 				bottomInfo.addResistance(1.0)
 				bottomInfo.addFear(0.1)
-		bottomChar.cummedInBodypartByAdvanced(_hole, getDomID(), {knotted=knotSuccess,condomBroke=condomBroke})
+		bottomChar.cummedInBodypartByAdvanced(_hole, topInfo.getCharID(), {knotted=knotSuccess,condomBroke=condomBroke})
 		topInfo.cum()
 		bottomInfo.addArousalSex(0.2)
 	#satisfyGoals()
@@ -2283,4 +2283,56 @@ func tryPenetrate(_indxTop:int, _indxBottom:int, _hole:String, isEnveloping:bool
 			bottomChar.doPainfullyStretchHole(_hole, topChar.getID())
 		
 		addTextTopBottom(text, _indxTop, _indxBottom)
+		return true
+
+# Does a 'result' of a penetration
+func penetration(didPenetrate:bool, _indxTop:int, _indxBottom:int, _hole:String, isEnveloping:bool = false) -> bool:
+	var topInfo:SexInfoBase = getDomOrSubInfo(_indxTop)
+	var topChar:BaseCharacter = topInfo.getChar()
+	var topStrapon:bool = topChar.isWearingStrapon()
+	var bottomInfo:SexInfoBase = getDomOrSubInfo(_indxBottom)
+	var bottomChar:BaseCharacter = bottomInfo.getChar()
+	
+	if(!(_hole in [S_VAGINA, S_ANUS])):
+		return true
+	var fetishGiving:String = Fetish.VaginalSexGiving if _hole == S_VAGINA else Fetish.AnalSexGiving
+	
+	if(!didPenetrate):
+		bottomChar.gotOrificeStretchedBy(_hole, topChar.getID(), true, 0.1)
+		#if(!isEnveloping):
+		#	addTextTopBottom("{<TOP>.Your} "+getNamePenis(_indxTop)+" stretches {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+" out while trying to fit inside.", _indxTop, _indxBottom)
+		#else:
+		#	addTextTopBottom("{<BOTTOM>.You} {<BOTTOM>.youVerb('try', 'tries')} to envelop {<TOP>.yourHis} "+getNamePenis(_indxTop)+" but it's too big!", _indxTop, _indxBottom)
+		stimulate(_indxTop, S_PENIS, _indxBottom, _hole, I_TEASE, fetishGiving)
+		
+		return false
+	else:
+		sendSexEvent(SexEvent.HolePenetrated, _indxTop, _indxBottom, {hole=_hole,engulfed=isEnveloping,strapon=topStrapon})
+		bottomChar.gotOrificeStretchedBy(_hole, topChar.getID(), true, 0.2)
+		stimulate(_indxTop, S_PENIS, _indxBottom, _hole, I_LOW, fetishGiving)
+		#var text:String = RNG.pick([
+		#	"{<TOP>.You} {<TOP>.youVerb('manage','manages')} to penetrate {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+"!",
+		#	"{<TOP>.You} {<TOP>.youVerb('shove','shoves')} {<TOP>.yourHis} "+getNamePenis(_indxTop)+" inside {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+"!",
+		#])
+		#if(isEnveloping):
+			#text = "{<BOTTOM>.You} {<BOTTOM>.youVerb('engulf')} {<TOP>.youHis} "+getNamePenis(_indxTop)+", letting it penetrate {<BOTTOM>.yourHis} "+getNameHole(_indxBottom, _hole)+"."
+		#if(_hole == BodypartSlot.Anus && bottomChar.getInventory().hasSlotEquipped(InventorySlot.Anal)):
+			#var item = bottomChar.getInventory().getEquippedItem(InventorySlot.Anal)
+			#if(!isEnveloping):
+				#text = "{<TOP>.You} temporarily {<TOP>.youVerb('retrieve')} "+str(item.getAStackName())+" out of {<BOTTOM>.your} ass. "+text
+			#else:
+				#text = "{<BOTTOM>.You} temporarily {<BOTTOM>.youVerb('retrieve')} "+str(item.getAStackName())+" out of {<BOTTOM>.yourHis} ass. "+text
+		#elif(_hole == BodypartSlot.Vagina && bottomChar.getInventory().hasSlotEquipped(InventorySlot.Vagina)):
+			#var item = bottomChar.getInventory().getEquippedItem(InventorySlot.Vagina)
+			#if(!isEnveloping):
+			#	text = "{<TOP>.You} temporarily {<TOP>.youVerb('retrieve')} "+str(item.getAStackName())+" out of {<BOTTOM>.your} pussy. "+text
+			#else:
+			#	text = "{<BOTTOM>.You} temporarily {<BOTTOM>.youVerb('retrieve')} "+str(item.getAStackName())+" out of {<BOTTOM>.yourHis} pussy. "+text
+		
+		var freeRoom:float = bottomChar.getPenetrationFreeRoomBy(_hole, topChar.getID())
+		var chanceToPain = -freeRoom * 2.0
+		if(RNG.chance(chanceToPain) || ((topInfo is SexDomInfo) && topInfo.isAngry() && RNG.chance(20))):
+			bottomChar.doPainfullyStretchHole(_hole, topChar.getID())
+		
+		#addTextTopBottom(text, _indxTop, _indxBottom)
 		return true

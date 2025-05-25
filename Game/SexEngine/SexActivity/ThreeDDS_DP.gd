@@ -182,9 +182,11 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		return
 	if(_id == "penetrate"):
 		if(tryPenetrate(DOM_0, SUB_0, S_VAGINA)):
+			penetration(true, DOM_1, SUB_0, S_ANUS)
 			addText("{dom1.You} {dom1.youVerb('follow')}, forcing {dom1.yourHis} "+getNamePenis(DOM_1)+" down {sub.yourHis} ass.")
 			state = "sex"
 		else:
+			penetration(false, DOM_1, SUB_0, S_ANUS)
 			addText("{dom1.You} {dom1.youVerb('try', 'tries')} to stretch {sub.yourHis} ass with {dom1.yourHis} "+getNamePenis(DOM_1)+".")
 		return
 	if(_id == "stop"):

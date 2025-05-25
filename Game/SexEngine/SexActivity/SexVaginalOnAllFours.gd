@@ -892,7 +892,15 @@ func getJoinActions(_sexInfo:SexInfoBase):
 			else:
 				if(getSub().hasReachableVagina()):
 					addJoinAction(["dp"], "+DP (vaginal)", "Join and fuck their pussy at the same time!", getActivityScore(getSexEngine(), _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
-			
+		
+	if(getSexType() in [SexType.DefaultSex]):
+		#TODO: Better score functions here
+		if(theChar.hasReachableAnus() && (getSub().hasReachablePenis() || getSub().isWearingStrapon())):
+			addJoinAction(["trainAnal"], "+Train (anal, receive)", "Join and let the sub fuck your ass at the same time!", getActivityScore(getSexEngine(), _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
+		if(theChar.hasReachableVagina() && (getSub().hasReachablePenis() || getSub().isWearingStrapon())):
+			addJoinAction(["trainVag"], "+Train (vag, receive)", "Join and let the sub fuck your pussy at the same time!", getActivityScore(getSexEngine(), _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
+	
+		
 func doJoinAction(_sexInfo:SexInfoBase, _args):
 	if(_args[0] == "spitroast"):
 		if(usedBodypart == S_ANUS):
@@ -904,7 +912,11 @@ func doJoinAction(_sexInfo:SexInfoBase, _args):
 			switchCurrentActivityTo("ThreeDDS_DP", ["vag", _sexInfo.getCharID()])
 		if(usedBodypart == S_VAGINA):
 			switchCurrentActivityTo("ThreeDDS_DP", ["anal", _sexInfo.getCharID()])
-
+	if(_args[0] == "trainVag"):
+		switchCurrentActivityTo("ThreeDDS_Train", [usedBodypart, S_VAGINA, _sexInfo.getCharID()])
+	if(_args[0] == "trainAnal"):
+		switchCurrentActivityTo("ThreeDDS_Train", [usedBodypart, S_ANUS, _sexInfo.getCharID()])
+	
 func saveData():
 	var data = .saveData()
 	
