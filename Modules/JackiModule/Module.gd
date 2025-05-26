@@ -136,11 +136,11 @@ func addAnger(howMuch, showMessage = true):
 	var currentAnger = getFlag("JackiModule.jackiAnger", 0.0)
 	if(currentAnger < -0.1 && howMuch > 0.0):
 		howMuch *= 2.0
-	var currentActualAnger = clamp(getFlag("JackiModule.jackiCorruption", 0.0), 0.0, 1.0)
+	var currentActualCorruption = clamp(getFlag("JackiModule.jackiCorruption", 0.0), 0.0, 1.0)
 	var oldAnger = currentAnger
 	
 	if(howMuch > 0):
-		howMuch *= (1.0 - currentActualAnger)
+		howMuch *= (1.0 - currentActualCorruption)
 	
 	currentAnger += howMuch
 	if(howMuch > 0.0 && currentAnger > 1.0):
