@@ -110,59 +110,59 @@ func addCorruption(howMuch, showMessage = true):
 
 func addLust(howMuch, showMessage = true):
 	howMuch /= 100.0
-	var currentCorruption = getFlag("JackiModule.jackiLust", 0.0)
-	var oldCor = currentCorruption
+	var currentLust = getFlag("JackiModule.jackiLust", 0.0)
+	var oldLust = currentLust
 	
-	currentCorruption += howMuch
-	if(howMuch > 0.0 && currentCorruption > 1.0):
-		currentCorruption = 1.0
+	currentLust += howMuch
+	if(howMuch > 0.0 && currentLust > 1.0):
+		currentLust = 1.0
 		
 		addCorruption(howMuch/2.0*100.0, showMessage)
-	if(howMuch < 0.0 && currentCorruption < 0.0):
-		currentCorruption = 0.0
+	if(howMuch < 0.0 && currentLust < 0.0):
+		currentLust = 0.0
 	
-	setFlag("JackiModule.jackiLust", currentCorruption)
+	setFlag("JackiModule.jackiLust", currentLust)
 	
 	if(showMessage):
-		var diff = currentCorruption - oldCor
+		var diff = currentLust - oldLust
 		if(diff > 0.0):
-			GM.main.addMessage("Jacki's lust has increased to "+str(Util.roundF(currentCorruption * 100.0, 1))+"%")
+			GM.main.addMessage("Jacki's lust has increased to "+str(Util.roundF(currentLust * 100.0, 1))+"%")
 		elif(diff < 0.0):
-			GM.main.addMessage("Jacki's lust has decreased to "+str(Util.roundF(currentCorruption * 100.0, 1))+"%")
+			GM.main.addMessage("Jacki's lust has decreased to "+str(Util.roundF(currentLust * 100.0, 1))+"%")
 
 
 func addAnger(howMuch, showMessage = true):
 	howMuch /= 100.0
-	var currentCorruption = getFlag("JackiModule.jackiAnger", 0.0)
-	if(currentCorruption < -0.1 && howMuch > 0.0):
+	var currentAnger = getFlag("JackiModule.jackiAnger", 0.0)
+	if(currentAnger < -0.1 && howMuch > 0.0):
 		howMuch *= 2.0
 	var currentActualCorruption = clamp(getFlag("JackiModule.jackiCorruption", 0.0), 0.0, 1.0)
-	var oldCor = currentCorruption
+	var oldAnger = currentAnger
 	
 	if(howMuch > 0):
 		howMuch *= (1.0 - currentActualCorruption)
 	
-	currentCorruption += howMuch
-	if(howMuch > 0.0 && currentCorruption > 1.0):
-		currentCorruption = 1.0
-	if(howMuch < 0.0 && currentCorruption < -1.0):
-		currentCorruption = -1.0
+	currentAnger += howMuch
+	if(howMuch > 0.0 && currentAnger > 1.0):
+		currentAnger = 1.0
+	if(howMuch < 0.0 && currentAnger < -1.0):
+		currentAnger = -1.0
 	
-	setFlag("JackiModule.jackiAnger", currentCorruption)
+	setFlag("JackiModule.jackiAnger", currentAnger)
 	
 	if(showMessage):
-		var diff = currentCorruption - oldCor
+		var diff = currentAnger - oldAnger
 		
-		if(currentCorruption > 0.0):
+		if(currentAnger > 0.0):
 			if(diff > 0.0):
-				GM.main.addMessage("Jacki's anger has increased to "+str(Util.roundF(currentCorruption * 100.0, 1))+"%")
+				GM.main.addMessage("Jacki's anger has increased to "+str(Util.roundF(currentAnger * 100.0, 1))+"%")
 			elif(diff < 0.0):
-				GM.main.addMessage("Jacki's anger has decreased to "+str(Util.roundF(currentCorruption * 100.0, 1))+"%")
+				GM.main.addMessage("Jacki's anger has decreased to "+str(Util.roundF(currentAnger * 100.0, 1))+"%")
 		else:
 			if(diff < 0.0):
-				GM.main.addMessage("Jacki's kindness has increased to "+str(Util.roundF(-currentCorruption * 100.0, 1))+"%")
+				GM.main.addMessage("Jacki's kindness has increased to "+str(Util.roundF(-currentAnger * 100.0, 1))+"%")
 			elif(diff > 0.0):
-				GM.main.addMessage("Jacki's kindness has decreased to "+str(Util.roundF(-currentCorruption * 100.0, 1))+"%")
+				GM.main.addMessage("Jacki's kindness has decreased to "+str(Util.roundF(-currentAnger * 100.0, 1))+"%")
 
 func shouldWearSportsBra():
 	return getFlag("JackiModule.jackiReceivedBra", false)
