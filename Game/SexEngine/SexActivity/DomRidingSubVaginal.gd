@@ -900,21 +900,26 @@ func getOrgasmHandlePriority(_indx:int) -> int:
 func getJoinActions(_sexInfo:SexInfoBase):
 	if(!(_sexInfo is SexDomInfo)):
 		return
-	var theChar:BaseCharacter = _sexInfo.getChar()
+	#var theChar:BaseCharacter = _sexInfo.getChar()
 	
-	if(getSexType() in [SexType.DefaultSex]):
-		#TODO: Better score functions here
-		if(getSub().hasReachableAnus() && (theChar.hasReachablePenis() || theChar.isWearingStrapon())):
-			addJoinAction(["trainAnal"], "+Train (anal)", "Join and fuck the sub's ass at the same time!", getActivityScore(getSexEngine(), _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
-		if(getSub().hasReachableVagina() && (theChar.hasReachablePenis() || theChar.isWearingStrapon())):
-			addJoinAction(["trainVag"], "+Train (vag)", "Join and fuck the sub's pussy at the same time!", getActivityScore(getSexEngine(), _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
-	
+	#TODO: Better score funcitons
+	if(canSwitchTo("ThreeDDS_Train", [_sexInfo, DOM_0], [SUB_0], [S_VAGINA, usedBodypart])):
+		addJoinAction(["trainVag"], "+Train (vag)", "Join and fuck the sub's pussy at the same time!", getActivityScore(getSexEngine(), _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
+	if(canSwitchTo("ThreeDDS_Train", [_sexInfo, DOM_0], [SUB_0], [S_ANUS, usedBodypart])):
+		addJoinAction(["trainAnal"], "+Train (anal)", "Join and fuck the sub's ass at the same time!", getActivityScore(getSexEngine(), _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
+		
+	if(canSwitchTo("ThreeDDS_RideGrind", [DOM_0, _sexInfo], [SUB_0], [usedBodypart])):
+		addJoinAction(["rideAndGrind"], "+Grind face", "Join and grind the sub's face at the same time!", getActivityScore(getSexEngine(), _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
+		
 		
 func doJoinAction(_sexInfo:SexInfoBase, _args):
 	if(_args[0] == "trainVag"):
 		switchCurrentActivityTo("ThreeDDS_Train", [S_VAGINA, usedBodypart, _sexInfo.getCharID(), true])
 	if(_args[0] == "trainAnal"):
 		switchCurrentActivityTo("ThreeDDS_Train", [S_ANUS, usedBodypart, _sexInfo.getCharID(), true])
+	
+	if(_args[0] == "rideAndGrind"):
+		switchCurrentActivityTo("ThreeDDS_RideGrind", [usedBodypart, _sexInfo.getCharID()])
 	
 
 func saveData():

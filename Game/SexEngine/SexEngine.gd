@@ -984,6 +984,21 @@ func doAction(_actionInfo:Dictionary):
 			doJoinAction("pc", activity, _actionInfo["args"] if _actionInfo.has("args") else [])
 		doFullTurn()
 
+func isAllowedAsRole(_activityID:String, _indx:int, _sexInfo:SexInfoBase, skipTagCheck:bool, _args:Array = []) -> bool:
+	var theActivity = GlobalRegistry.getSexActivityReference(_activityID)
+	if(!theActivity):
+		return false
+	return theActivity.isAllowedAsRoleFinal(self, _indx, _sexInfo, skipTagCheck, _args)
+
+func isAllowedAsRoles(_activityID:String, theDoms:Array, theSubs:Array, _args:Array = []) -> bool:
+	for _i in range(theDoms.size()):
+		if(!isAllowedAsRole(_activityID, _i, theDoms[_i][0], theDoms[_i][1], _args)):
+			return false
+	for _i in range(theSubs.size()):
+		if(!isAllowedAsRole(_activityID, -_i-1, theSubs[_i][0], theSubs[_i][1], _args)):
+			return false
+	return true
+
 func hasTag(charID:String, tag:int) -> bool:
 	for activity in activities:
 		if(activity.hasEnded):
@@ -994,6 +1009,13 @@ func hasTag(charID:String, tag:int) -> bool:
 			if(tag in activity.getTags(theIndx)):
 				return true
 
+	return false
+
+func hasAnyTag(_info:SexInfoBase, tags:Array) -> bool:
+	var theCharID:String = _info.getCharID()
+	for theTag in tags:
+		if(hasTag(theCharID, theTag)):
+			return true
 	return false
 
 func hasActivity(id:String, thedomID:String, thesubID:String) -> bool:
@@ -1009,6 +1031,16 @@ func hasActivity(id:String, thedomID:String, thesubID:String) -> bool:
 			continue
 		
 		if(activity.doms.has(theDomInfo) && activity.subs.has(theSubInfo)):
+			return true
+	return false
+
+func hasActivityWithInfo(id:String, _info:SexInfoBase) -> bool:
+	for activity in activities:
+		if(activity.hasEnded):
+			continue
+		if(activity.id != id):
+			continue
+		if(activity.doms.has(_info) && activity.subs.has(_info)):
 			return true
 	return false
 

@@ -53,6 +53,40 @@ func getTags(_indx:int) -> Array:
 		return [SexActivityTag.HavingSex, SexActivityTag.PenisUsed, SexActivityTag.VaginaUsed if usedBodypart == S_VAGINA else SexActivityTag.AnusUsed]
 	return []
 
+func isAllowedAsRole(_sexEngine, _indx:int, _sexInfo:SexInfoBase, skipTagsCheck:bool, _args:Array) -> bool:
+	var _usedBodypart:String = _args[0]
+	var _usedBodypart2:String = _args[1]
+	var theChar:BaseCharacter = _sexInfo.getChar()
+	
+	if(_indx == DOM_0):
+		if(!theChar.hasReachablePenis() && !theChar.isWearingStrapon()):
+			return false
+		if(!skipTagsCheck && hasAnyTag(_sexEngine, _sexInfo, [SexActivityTag.HavingSex, SexActivityTag.PenisUsed])):
+			return false
+		return true
+	
+	if(_indx == DOM_1):
+		if(_usedBodypart2 == S_VAGINA && !theChar.hasReachableVagina()):
+			return false
+		if(_usedBodypart2 == S_ANUS && !theChar.hasReachableAnus()):
+			return false
+		if(!skipTagsCheck && hasAnyTag(_sexEngine, _sexInfo, [SexActivityTag.HavingSex, SexActivityTag.VaginaUsed if _usedBodypart2 == S_VAGINA else SexActivityTag.AnusUsed])):
+			return false
+		return true
+	
+	if(_indx == SUB_0):
+		if(!theChar.hasReachablePenis() && !theChar.isWearingStrapon()):
+			return false
+		if(_usedBodypart == S_VAGINA && !theChar.hasReachableVagina()):
+			return false
+		if(_usedBodypart == S_ANUS && !theChar.hasReachableAnus()):
+			return false
+		if(!skipTagsCheck && hasAnyTag(_sexEngine, _sexInfo, [SexActivityTag.HavingSex, SexActivityTag.PenisUsed, SexActivityTag.VaginaUsed if _usedBodypart == S_VAGINA else SexActivityTag.AnusUsed])):
+			return false
+		return true
+	
+	return false
+
 func startActivity(_args):
 	assert(false, "This shouldn't be possible")
 	#var otherDomID:String = getDomIDsThatSatisfyConditions(getSexEngine(), [COND_HasReachablePenisOrStrapon], 1, [getDomInfo().getCharID()])[0]
@@ -213,6 +247,8 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		return 
 	if(_id == "domcumstrapon"):
 		cumGeneric(_indx, _indx)
+		if(_indx == DOM_1 && isStrapon(SUB_0)):
+			cumInside(SUB_0, DOM_1, usedBodypart2)
 		return
 
 	if(_id == "pullaway"):
@@ -238,9 +274,9 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		if(isStrapon(DOM_0)):
 			cumInside(DOM_0, SUB_0, usedBodypart)
 			shouldGoals = true
-		if(isStrapon(DOM_1)):
-			cumInside(DOM_1, SUB_0, S_MOUTH)
-			shouldGoals = true
+		#if(isStrapon(DOM_1)):
+		#	cumInside(DOM_1, SUB_0, S_MOUTH)
+		#	shouldGoals = true
 		if(shouldGoals):
 			satisfyGoals()
 		return
@@ -275,11 +311,15 @@ func getOrgasmHandlePriority(_indx:int) -> int:
 func saveData():
 	var data = .saveData()
 	
-	#data["tick"] = tick
+	data["usedBodypart"] = usedBodypart
+	data["usedBodypart2"] = usedBodypart2
 
 	return data
 	
 func loadData(data):
 	.loadData(data)
 	
-	#tick = SAVE.loadVar(data, "tick", 0)
+	usedBodypart = SAVE.loadVar(data, "usedBodypart", S_VAGINA)
+	usedFetish = Fetish.VaginalSexGiving if (usedBodypart == S_VAGINA) else Fetish.AnalSexGiving
+	usedBodypart2 = SAVE.loadVar(data, "usedBodypart2", S_VAGINA)
+	usedFetish2 = Fetish.VaginalSexGiving if (usedBodypart2 == S_VAGINA) else Fetish.AnalSexGiving

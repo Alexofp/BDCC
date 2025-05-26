@@ -51,6 +51,27 @@ func getTags(_indx:int) -> Array:
 		return [SexActivityTag.HavingSex, SexActivityTag.AnusUsed, SexActivityTag.VaginaUsed]
 	return []
 
+func isAllowedAsRole(_sexEngine, _indx:int, _sexInfo:SexInfoBase, skipTagsCheck:bool, _args:Array) -> bool:
+	var theChar:BaseCharacter = _sexInfo.getChar()
+	
+	if(_indx == DOM_0 || _indx == DOM_1):
+		if(!theChar.hasReachablePenis() && !theChar.isWearingStrapon()):
+			return false
+		if(!skipTagsCheck && hasAnyTag(_sexEngine, _sexInfo, [SexActivityTag.HavingSex, SexActivityTag.PenisUsed])):
+			return false
+		return true
+	
+	if(_indx == SUB_0):
+		if(!theChar.hasReachableVagina()):
+			return false
+		if(!theChar.hasReachableAnus()):
+			return false
+		if(!skipTagsCheck && hasAnyTag(_sexEngine, _sexInfo, [SexActivityTag.HavingSex, SexActivityTag.VaginaUsed, SexActivityTag.AnusUsed])):
+			return false
+		return true
+	
+	return false
+
 func startActivity(_args):
 	var otherDomID:String = getDomIDsThatSatisfyConditions(getSexEngine(), [COND_HasReachablePenisOrStrapon], 1, [getDomInfo().getCharID()])[0]
 	pullInDom(otherDomID)

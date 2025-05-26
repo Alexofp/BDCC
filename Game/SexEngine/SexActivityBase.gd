@@ -795,6 +795,48 @@ func getCheckTagsDom() -> Array:
 func getCheckTagsSub() -> Array:
 	return getTags(SUB_0)
 
+func isAllowedAsRoleFinal(_sexEngine, _indx:int, _sexInfo:SexInfoBase, skipTagsCheck:bool, _args:Array) -> bool:
+	if(!_sexInfo):
+		return false
+	if(!_sexEngine.areSexTypesSupportedForActivity(self)):
+		return false
+	if(_indx >= 0 && !(_sexInfo is SexDomInfo)):
+		return false
+	if(_indx < 0 && !(_sexInfo is SexSubInfo)):
+		return false
+	#return tagsNotBusy(_sexEngine, _domInfo, _subInfo) && !hasActivity(_sexEngine, id, _domInfo, _subInfo)
+	if(_sexEngine.hasActivityWithInfo(id, _sexInfo)):
+		return false
+	return isAllowedAsRole(_sexEngine, _indx, _sexInfo, skipTagsCheck, _args)
+
+func isAllowedAsRole(_sexEngine, _indx:int, _sexInfo:SexInfoBase, _skipTagsCheck:bool, _args:Array) -> bool:
+	return true
+
+func hasAnyTag(_sexEngine, _sexInfo:SexInfoBase, _tags:Array) -> bool:
+	for tag in _tags:
+		if(_sexEngine.hasTag(_sexInfo.charID, tag)):
+			return true
+	return false
+
+func canSwitchTo(_activityID:String, theDoms:Array, theSubs:Array, _args:Array = []) -> bool:
+	var newDoms:Array = []
+	var newSubs:Array = []
+	for domEntry in theDoms:
+		if(domEntry is int):
+			newDoms.append([getDomOrSubInfo(domEntry), true])
+		else:
+			newDoms.append([domEntry, false])
+	for subEntry in theSubs:
+		if(subEntry is int):
+			newSubs.append([getDomOrSubInfo(subEntry), true])
+		else:
+			newSubs.append([subEntry, false])
+	var theEngine:=getSexEngine()
+	
+	if(!theEngine.isAllowedAsRoles(_activityID, newDoms, newSubs, _args)):
+		return false
+	return true
+
 func processTurnFinal():
 	if(has_method(getStatePrefix()+"_processTurn")):
 		call(getStatePrefix()+"_processTurn")
