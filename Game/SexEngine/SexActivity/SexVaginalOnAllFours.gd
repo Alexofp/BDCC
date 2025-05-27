@@ -882,20 +882,20 @@ func getJoinActions(_sexInfo:SexInfoBase):
 	#var theChar:BaseCharacter = _sexInfo.getChar()
 	
 	if(usedBodypart == S_ANUS && canSwitchTo("ThreeDDS_SpitroastAnal", [DOM_0, _sexInfo], [SUB_0])):
-		addJoinAction(["spitroast"], "+Spitroast", "Join and fuck their mouth!", getActivityScore(getSexEngine(), _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
+		addJoinAction(["spitroast"], "+Spitroast", "Join and fuck their mouth!", getJoinActivityScore("ThreeDDS_SpitroastAnal", DOM_1, _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
 	elif(usedBodypart == S_VAGINA && canSwitchTo("ThreeDDS_SpitroastVag", [DOM_0, _sexInfo], [SUB_0])):
-		addJoinAction(["spitroast"], "+Spitroast", "Join and fuck their mouth!", getActivityScore(getSexEngine(), _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
+		addJoinAction(["spitroast"], "+Spitroast", "Join and fuck their mouth!", getJoinActivityScore("ThreeDDS_SpitroastVag", DOM_1, _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
 
 	if(canSwitchTo("ThreeDDS_DP", [DOM_0, _sexInfo], [SUB_0])):
 		if(usedBodypart == S_VAGINA):
-			addJoinAction(["dp"], "+DP (anal)", "Join and fuck their ass at the same time!", getActivityScore(getSexEngine(), _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
+			addJoinAction(["dp"], "+DP (anal)", "Join and fuck their ass at the same time!", getJoinActivityScore("ThreeDDS_DP", DOM_1, _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
 		else:
-			addJoinAction(["dp"], "+DP (vaginal)", "Join and fuck their pussy at the same time!", getActivityScore(getSexEngine(), _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
+			addJoinAction(["dp"], "+DP (vaginal)", "Join and fuck their pussy at the same time!", getJoinActivityScore("ThreeDDS_DP", DOM_0, _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
 	
 	if(canSwitchTo("ThreeDDS_Train", [DOM_0, _sexInfo], [SUB_0], [usedBodypart, S_VAGINA])):
-		addJoinAction(["trainVag"], "+Train (vag, receive)", "Join and let the sub fuck your pussy at the same time!", getActivityScore(getSexEngine(), _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
+		addJoinAction(["trainVag"], "+Train (vag, receive)", "Join and let the sub fuck your pussy at the same time!", getJoinActivityScore("ThreeDDS_Train", DOM_1, _sexInfo, getSubInfo(), [S_VAGINA]), {A_CATEGORY: ["Fuck"]})
 	if(canSwitchTo("ThreeDDS_Train", [DOM_0, _sexInfo], [SUB_0], [usedBodypart, S_ANUS])):
-		addJoinAction(["trainAnal"], "+Train (anal, receive)", "Join and let the sub fuck your ass at the same time!", getActivityScore(getSexEngine(), _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
+		addJoinAction(["trainAnal"], "+Train (anal, receive)", "Join and let the sub fuck your ass at the same time!", getJoinActivityScore("ThreeDDS_Train", DOM_1, _sexInfo, getSubInfo(), [S_ANUS]), {A_CATEGORY: ["Fuck"]})
 	
 		
 func doJoinAction(_sexInfo:SexInfoBase, _args):

@@ -308,76 +308,10 @@ func fucking_processTurn():
 #	getSubInfo().stimulateArousalZone(0.2, BodypartSlot.Penis, 1.0)
 #	getDomInfo().stimulateArousalZone(0.2, usedBodypart, 1.0)
 	
-	addTextPick([
-		"{dom.You} {dom.youAre} riding {sub.yourHis} "+getDickName(RNG.pick(["dick", "cock", "member"]))+".",
-		"{dom.You} {dom.youAre} bouncing on {sub.yourHis} "+getDickName(RNG.pick(["dick", "cock", "member"]))+" with {dom.yourHis} "+RNG.pick(usedBodypartNames)+".",
-		"{dom.You} {dom.youAre} going up and down on {sub.yourHis} "+getDickName(RNG.pick(["dick", "cock", "member"]))+" with {dom.yourHis} "+RNG.pick(usedBodypartNames)+".",
-		"{dom.You} {dom.youAre} fucking {sub.yourHis} "+getDickName(RNG.pick(["dick", "cock", "member"]))+" with {dom.yourHis} "+RNG.pick(usedBodypartNames)+".",
-	])
+	doProcessRide(DOM_0, SUB_0, usedBodypart)
 	
-	if(RNG.chance(20)):
-		var freeRoom:float = getDom().getPenetrationFreeRoomBy(usedBodypart, getSubID())
-		
-		getDom().gotOrificeStretchedBy(usedBodypart, getSubID(), true, 0.1)
-		
-		if(usedBodypart == BodypartSlot.Vagina):
-			if(freeRoom <= 5.0):
-				addTextPick([
-					"The tip of {sub.yourHis} "+getDickName(RNG.pick(["cock", "dick", "member"]))+" easily "+RNG.pick(["hits", "smashes", "reaches", "finds"])+" {dom.yourHis} "+RNG.pick(["cervix", "natural barricade"])+".",
-				])
-			elif(freeRoom >= 10):
-				addTextPick([
-					"The tip of {sub.yourHis} "+getDickName(RNG.pick(["cock", "dick", "member"]))+" can barely reach anywhere deep.",
-					"The tip of {sub.yourHis} "+getDickName(RNG.pick(["cock", "dick", "member"]))+" is struggling to reach {dom.yourHis} "+RNG.pick(["cervix", "natural barricade"])+".",
-				])
-		if(usedBodypart == BodypartSlot.Anus):
-			if(freeRoom <= 5.0):
-				addTextPick([
-					"The tip of {sub.yourHis} "+getDickName(RNG.pick(["cock", "dick", "member"]))+" easily "+RNG.pick(["hits", "smashes", "reaches", "finds"])+" {dom.yourHis} "+RNG.pick(["pleasure spot"])+".",
-				])
-			elif(freeRoom >= 10):
-				addTextPick([
-					"The tip of {sub.yourHis} "+getDickName(RNG.pick(["cock", "dick", "member"]))+" can barely reach anywhere deep.",
-					"The tip of {sub.yourHis} "+getDickName(RNG.pick(["cock", "dick", "member"]))+" is struggling to reach {dom.yourHis} "+RNG.pick(["pleasure spot"])+".",
-				])
-	
-	if(RNG.chance(20) && getSub().bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisBarbs)):
-		addTextPick([
-			"Barbs on {sub.yourHis} "+getDickName(RNG.pick(["cock", "dick", "shaft"]))+" provide extra stimulation.",
-			"Barbs on {sub.yourHis} "+getDickName(RNG.pick(["cock", "dick", "shaft"]))+" "+RNG.pick(["rake against", "scratch"])+" the "+RNG.pick(["soft insides", "soft inner walls"])+".",
-		])
-	
-	if(isStraponSex()):
-		if(getSubInfo().isReadyToCum()):
-			addTextPick([
-				"{sub.You} {sub.youAre} being edged by {dom.you}.",
-				"{sub.You} {sub.youAre} about to cum!",
-				"{sub.You} {sub.youAre} keeping {sub.yourself} on edge.",
-			])
-		elif(getSubInfo().isCloseToCumming()):
-			addTextPick([
-				"{sub.You} {sub.youVerb('pant')} eagerly.",
-				"{sub.You} {sub.youVerb('close')} in on {sub.yourHis} orgasm.",
-				"{sub.You} {sub.youAre} gonna cum soon.",
-			])
-	else:
-		if(getSubInfo().isReadyToCum()):
-			addTextPick([
-				"{sub.You} {sub.youAre} being edged by {dom.you}.",
-				"{sub.You} {sub.youAre} about to cum!",
-				"{sub.You} {sub.youAre} keeping {sub.yourself} on edge.",
-				"{sub.Your} "+RNG.pick(["cock", "dick", "member"])+" is moments from cumming.",
-				"{sub.Your} "+RNG.pick(["cock", "dick", "member"])+" reached its peak."
-			])
-		elif(getSubInfo().isCloseToCumming()):
-			addTextPick([
-				"{sub.You} {sub.youVerb('pant')} eagerly.",
-				"{sub.You} {sub.youVerb('close')} in on {sub.yourHis} orgasm.",
-				"{sub.You} {sub.youAre} gonna cum soon.",
-				"{sub.Your} "+RNG.pick(["cock", "dick", "member"])+" is throbbing.",
-				"{sub.Your} "+RNG.pick(["cock", "dick", "member"])+" is twitching and leaking a lot."
-			])
-	
+	doProcessRideExtra(DOM_0, SUB_0, usedBodypart)
+
 	processExtra()
 
 
@@ -904,12 +838,12 @@ func getJoinActions(_sexInfo:SexInfoBase):
 	
 	#TODO: Better score funcitons
 	if(canSwitchTo("ThreeDDS_Train", [_sexInfo, DOM_0], [SUB_0], [S_VAGINA, usedBodypart])):
-		addJoinAction(["trainVag"], "+Train (vag)", "Join and fuck the sub's pussy at the same time!", getActivityScore(getSexEngine(), _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
+		addJoinAction(["trainVag"], "+Train (vag)", "Join and fuck the sub's pussy at the same time!", getJoinActivityScore("ThreeDDS_Train", DOM_0, _sexInfo, getSubInfo(), [S_VAGINA]), {A_CATEGORY: ["Fuck"]})
 	if(canSwitchTo("ThreeDDS_Train", [_sexInfo, DOM_0], [SUB_0], [S_ANUS, usedBodypart])):
-		addJoinAction(["trainAnal"], "+Train (anal)", "Join and fuck the sub's ass at the same time!", getActivityScore(getSexEngine(), _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
+		addJoinAction(["trainAnal"], "+Train (anal)", "Join and fuck the sub's ass at the same time!", getJoinActivityScore("ThreeDDS_Train", DOM_0, _sexInfo, getSubInfo(), [S_ANUS]), {A_CATEGORY: ["Fuck"]})
 		
 	if(canSwitchTo("ThreeDDS_RideGrind", [DOM_0, _sexInfo], [SUB_0], [usedBodypart])):
-		addJoinAction(["rideAndGrind"], "+Grind face", "Join and grind the sub's face at the same time!", getActivityScore(getSexEngine(), _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
+		addJoinAction(["rideAndGrind"], "+Grind face", "Join and grind the sub's face at the same time!", getJoinActivityScore("ThreeDDS_RideGrind", DOM_1, _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
 		
 		
 func doJoinAction(_sexInfo:SexInfoBase, _args):

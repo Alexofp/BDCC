@@ -20,6 +20,18 @@ func getGoals():
 		SexGoal.StraponVaginal: 1.0,
 	}
 
+func getGoalsFor(_indx:int, _args:Array) -> Dictionary:
+	if(_indx == DOM_0):
+		return {
+			SexGoal.FuckVaginal: 1.0,
+			SexGoal.StraponVaginal: 1.0,
+		}
+	if(_indx == DOM_1):
+		return {
+			SexGoal.FuckOral: 1.0,
+		}
+	return {}
+
 func getSupportedSexTypes():
 	return {
 		SexType.DefaultSex: true,

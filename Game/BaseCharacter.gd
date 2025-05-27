@@ -2410,6 +2410,15 @@ func canWearStrapon():
 	
 	return true
 
+func canWearOrWearingStrapon() -> bool:
+	if(isWearingStrapon()):
+		return true
+	if(hasPenis() && !isWearingChastityCage()):
+		return false
+	if(getInventory().hasSlotEquipped(InventorySlot.Strapon)):
+		return false
+	return true
+
 func hasStrapons():
 	return getInventory().getItemsWithTag(ItemTag.Strapon).size() > 0
 

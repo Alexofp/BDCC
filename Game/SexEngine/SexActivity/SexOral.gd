@@ -114,10 +114,14 @@ func deepthroat_processTurn():
 	doDeepthroatTurnDom()
 
 func licking_processTurn():
-	return doPussyLickingTurnDom()
+	doPussyLickingTurnDom()
+	if(RNG.chance(10)):
+		talk(DOM_0, SUB_0, SexReaction.DomsPussyGetsLicked)
 	
 func grinding_processTurn():
-	return doPussyGrindingTurnDom()
+	doPussyGrindingTurnDom()
+	if(RNG.chance(10)):
+		talk(DOM_0, SUB_0, SexReaction.GrindingFaceWithPussy)
 	
 func getActions(_indx:int):
 	if(_indx == DOM_0):

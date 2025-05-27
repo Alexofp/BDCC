@@ -120,12 +120,28 @@ func sex_processTurn():
 		return
 		
 	if(RNG.chance(50)):
-		var _ok =doBlowjobTurnDom() if subFocus == BodypartSlot.Penis else doPussyLickingTurnDom()
-		var _ok2 =doBlowjobTurnSub() if domFocus == BodypartSlot.Penis else doPussyLickingTurnSub()
+		if(subFocus == BodypartSlot.Penis):
+			doBlowjobTurnDom()
+		else:
+			doPussyLickingTurnDom()
+			if(RNG.chance(10)):
+				talk(DOM_0, SUB_0, SexReaction.DomsPussyGetsLicked)
+		if(domFocus == BodypartSlot.Penis):
+			doBlowjobTurnSub()
+		else:
+			doPussyLickingTurnSub()
 		return
 	
-	var _ok =doBlowjobTurnSub() if domFocus == BodypartSlot.Penis else doPussyLickingTurnSub()
-	var _ok2 =doBlowjobTurnDom() if subFocus == BodypartSlot.Penis else doPussyLickingTurnDom()
+	if(domFocus == BodypartSlot.Penis):
+		doBlowjobTurnSub()
+	else:
+		doPussyLickingTurnSub()
+	if(subFocus == BodypartSlot.Penis):
+		doBlowjobTurnDom()
+	else:
+		doPussyLickingTurnDom()
+		if(RNG.chance(10)):
+			talk(DOM_0, SUB_0, SexReaction.DomsPussyGetsLicked)
 
 
 func getActions(_indx:int):

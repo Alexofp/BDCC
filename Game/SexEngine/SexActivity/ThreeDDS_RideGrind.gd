@@ -23,6 +23,20 @@ func getGoals():
 		SexGoal.FuckOral: 1.0,
 	}
 
+func getGoalsFor(_indx:int, _args:Array) -> Dictionary:
+	if(_indx == DOM_0):
+		return {
+			SexGoal.ReceiveVaginal: 1.0,
+			SexGoal.ReceiveStraponVaginal: 1.0,
+			SexGoal.ReceiveAnal: 1.0,
+			SexGoal.ReceiveStraponAnal: 1.0,
+		}
+	if(_indx == DOM_1):
+		return {
+			SexGoal.FuckOral: 1.0,
+		}
+	return {}
+
 func getSupportedSexTypes():
 	return {
 		SexType.DefaultSex: true,
@@ -90,7 +104,7 @@ func onSwitchFrom(_otherActivity, _args):
 	#usedFetish2 = Fetish.VaginalSexGiving if usedBodypart2 == S_VAGINA else Fetish.AnalSexGiving
 	pullInDom(_args[1])
 	
-	addText("RIDE AND GRIND.")
+	addText("{dom1.You} {dom1.youVerb('join')} in on the fun and {dom1.youVerb('bring')} {dom1.yourHis} "+getNameHole(DOM_1, S_VAGINA)+" to {sub.your} face!")
 	
 #	if(_args.size() > 3 && _args[3]):
 #		switchDoms(0, 1)
@@ -119,23 +133,23 @@ func inside_processTurn():
 	stimulate(SUB_0, S_MOUTH, DOM_1, S_VAGINA, I_TEASE, Fetish.OralSexGiving)
 	
 	addText("{dom.You} {dom.youAre} being a cock-warmer for {sub.your} "+getNamePenis(SUB_0)+".")
+	addText("{dom1.You} {dom1.youAre} sitting on {sub.your} face.")
 	#addText("At the same time, {dom1.You} {dom1.youAre} being a cock-warmer for {sub.your} "+getNamePenis(SUB_0)+".")
 
 func sex_processTurn():
 	stimulate(SUB_0, S_PENIS, DOM_0, usedBodypart, I_NORMAL, usedFetish)
 	stimulate(SUB_0, S_MOUTH, DOM_1, S_VAGINA, I_NORMAL, Fetish.OralSexGiving)
 	
-	doProcessFuck(DOM_0, SUB_0, usedBodypart, " in a train position")
-	#doProcessFuck(SUB_0, DOM_1, usedBodypart2, " in a train position")
+	doProcessPussyGrind(DOM_1, SUB_0)
+	doProcessRide(DOM_0, SUB_0, usedBodypart)
 	
-#	if(RNG.chance(30) && isCloseToCumming(DOM_0) && isCloseToCumming(DOM_1)):
-#		addTextPick([
-#			"Both of the doms are getting close.",
-#			"Both of "+("you" if isDom("pc") else "them")+" are about to cum!",
-#		])
-#	else:
-	doProcessFuckExtra(SUB_0, DOM_0, usedBodypart)
-	#doProcessFuckExtra(SUB_0, DOM_1, usedBodypart2)
+	if(RNG.chance(30) && isCloseToCumming(DOM_0) && isCloseToCumming(DOM_1)):
+		addTextPick([
+			"Both of the doms are getting close.",
+			"Both of "+("you" if isDom("pc") else "them")+" are about to cum!",
+		])
+	else:
+		doProcessRideExtra(SUB_0, DOM_0, usedBodypart)
 
 func getActions(_indx:int):
 	if(_indx == DOM_0 || _indx == DOM_1):
@@ -156,7 +170,8 @@ func getActions(_indx:int):
 			if(isReadyToFuck(SUB_0) && !checkActiveDomPC(_indx) && hasBodypartUncovered(DOM_0, usedBodypart)):
 				addAction("penetrate", 1.0, "Envelop cock" if isDom0 else ("Grind"), "Try to start fucking them!" if isDom0 else ("Try to get the action going"))
 			#TODO: Proper check for this
-			#addAction("switch", 0.0, "Switch positions", "Switch positions with the dom")
+			if(getDom(0).hasReachableVagina() && ((usedBodypart == S_VAGINA && getDom(1).hasReachableVagina()) || (usedBodypart == S_ANUS && getDom(1).hasReachableAnus()))):
+				addAction("switch", 0.0, "Switch positions", "Switch positions with the dom")
 		if(state == "sex" && !checkActiveDomPC(_indx)):
 			var pauseScore:float = 0.0
 			if(isDom0):
@@ -208,31 +223,35 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 #		state = "inside"
 #		return
 	if(_id == "fuckMore"):
-		addText("The doms start fucking {sub.you} again!")
+		addText("The doms start riding and grinding {sub.your} face again!")
 		state = "sex"
 		return
 	if(_id == "pause"):
-		addTextTopBottom("{<TOP>.You} {<TOP>.youVerb('pause')} the sex train.", _indx, SUB_0)
+		addTextTopBottom("{<TOP>.You} {<TOP>.youVerb('pause')} the sex.", _indx, SUB_0)
 		state = "inside"
 		return
 	if(_id == "pullOut"):
-		addText("The doms pull out from {sub.your} "+getNameHole(SUB_0, usedBodypart)+" and away from {sub.yourHis} "+getNamePenis(SUB_0)+".")
+		addText("The doms pull up from {sub.your} "+getNamePenis(SUB_0)+" and away from {sub.yourHis} face.")
 		state = ""
 		return
 	if(_id == "rub"):
 		#addText("{dom.You} {dom.youVerb('rub')} {dom.yourHis} "+getNamePenis(DOM_0)+" against {sub.your} "+getNameHole(SUB_0, usedBodypart)+".")
 		addText("{dom.You} {dom.youVerb('rub')} {dom.yourHis} "+getNameHole(DOM_0, usedBodypart)+" against {sub.your} "+getNamePenis(SUB_0)+".")
+		addText("{dom1.You} gently {dom1.youVerb('grind')} {dom1.yourHis} "+getNameHole(DOM_1, S_VAGINA)+" against {sub.your} face.")
 		stimulate(SUB_0, S_PENIS, DOM_0, usedBodypart, I_TEASE, usedFetish)
 		stimulate(SUB_0, S_MOUTH, DOM_1, S_VAGINA, I_TEASE, Fetish.OralSexGiving)
 		return
 	if(_id == "penetrate"):
 		if(tryPenetrate(SUB_0, DOM_0, usedBodypart)):
+			stimulate(SUB_0, S_MOUTH, DOM_1, S_VAGINA, I_TEASE, Fetish.OralSexGiving)
 			#penetration(true, SUB_0, DOM_1, usedBodypart2)
-			#addText("At the same time, {dom1.you} {dom1.youVerb('manage')} to envelop {sub.yourHis} "+getNamePenis(SUB_0)+" with {dom1.yourHis} "+getNameHole(DOM_1, usedBodypart2)+".")
+			addText("At the same time, {dom1.you} {dom1.youVerb('lower')} {dom1.yourHis} "+getNameHole(DOM_1, S_VAGINA)+" onto {sub.yourHis} face.")
 			state = "sex"
 		else:
+			stimulate(SUB_0, S_MOUTH, DOM_1, S_VAGINA, I_TEASE, Fetish.OralSexGiving)
 			#penetration(false, SUB_0, DOM_1, usedBodypart2)
-			addText("{dom.You} {dom.youVerb('try', 'tries')} to envelop {sub.yourHis} "+getNamePenis(SUB_0)+" with {dom.yourHis} "+getNameHole(DOM_0, usedBodypart)+".")
+			#addText("{dom.You} {dom.youVerb('try', 'tries')} to envelop {sub.yourHis} "+getNamePenis(SUB_0)+" with {dom.yourHis} "+getNameHole(DOM_0, usedBodypart)+".")
+			pass
 		return
 	if(_id == "stop"):
 		endActivity()
@@ -241,7 +260,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "domcum"):
 		cumGeneric(_indx, _indx)
 		if(_indx == DOM_0 && isStrapon(SUB_0)):
-			cumInside(SUB_0, DOM_0, usedBodypart)
+			cumInside(SUB_0, DOM_0, usedBodypart, {isRiding=true})
 		if(isStrapon(SUB_0)):
 			satisfyGoals()
 		return
@@ -263,11 +282,33 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			getDomInfo(1).addAnger(0.1)
 			return
 	if(_id == "subcum"):
+		stimulate(SUB_0, S_PENIS, DOM_0, usedBodypart, I_HIGH, usedFetish)
+		stimulate(SUB_0, S_MOUTH, DOM_1, S_VAGINA, I_HIGH, Fetish.OralSexGiving)
+		var orgAmount:int = 1
+		if(isReadyToCumHandled(DOM_0)):
+			orgAmount += 1
+		if(isReadyToCumHandled(DOM_1)):
+			orgAmount += 1
+
+		if(orgAmount == 2):
+			addText("[b]Double orgasm![/b]")
+		elif(orgAmount == 3):
+			addText("[b]Triple orgasm![/b]")
+		
 		if(getSub().hasReachablePenis()):
-			cumInside(SUB_0, DOM_0, usedBodypart)
+			cumInside(SUB_0, DOM_0, usedBodypart, {isRiding=true})
 			satisfyGoals()
 		else:
 			cumGeneric(SUB_0, DOM_0)
+			if(orgAmount > 1):
+				satisfyGoals()
+		
+		if(isReadyToCumHandled(DOM_1)):
+			cumGeneric(DOM_1, DOM_1)
+		if(isReadyToCumHandled(DOM_0)):
+			cumGeneric(DOM_0, DOM_0)
+			if(isStrapon(SUB_0)):
+				cumInside(SUB_0, DOM_0, usedBodypart, {isRiding=true})
 		
 		state = "inside"
 		return
