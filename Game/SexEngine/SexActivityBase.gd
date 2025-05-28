@@ -371,7 +371,7 @@ func indxToTextID(_indx:int) -> String:
 		return "sub"
 	if(_indx > 0):
 		return "dom"+str(_indx)
-	return "sub"+str(-_indx+1)
+	return "sub"+str(-_indx-1)
 
 func processText(_text:String) -> String:
 	var theOverrides:Dictionary = {}
@@ -1114,12 +1114,16 @@ func loadData(data):
 enum {
 	COND_HasReachablePenisOrStrapon,
 	COND_AllowUnconsciousOrDowned,
+	COND_HasReachableAnus,
 }
 
 func doesCharSatisfyCondition(_sexEngine, _charInfo:SexInfoBase, condEntry) -> bool:
 	var _char:BaseCharacter = _charInfo.getChar()
 	if(condEntry == COND_HasReachablePenisOrStrapon):
 		if(!_char.hasReachablePenis() && !_char.isWearingStrapon()):
+			return false
+	if(condEntry == COND_HasReachableAnus):
+		if(!_char.hasReachableAnus()):
 			return false
 	
 	return true
@@ -1194,6 +1198,14 @@ func pullInDom(_otherDomID:String, stopTheirActivities:bool = true):
 	if(stopTheirActivities):
 		theSexEngine.stopActivitiesThatInvolveCharID(_otherDomID)
 	doms.append(theSexEngine.getDomInfo(_otherDomID))
+
+func pullInSub(_otherSubID:String, stopTheirActivities:bool = true):
+	if(isSub(_otherSubID)):
+		return
+	var theSexEngine := getSexEngine()
+	if(stopTheirActivities):
+		theSexEngine.stopActivitiesThatInvolveCharID(_otherSubID)
+	subs.append(theSexEngine.getSubInfo(_otherSubID))
 
 
 # Building blocks below
@@ -2285,6 +2297,31 @@ func cumGeneric(_indxWho:int, _indxCauser:int, uniqueOrgasm:String = "", extraOr
 	if(uniqueOrgasm != ""):
 		sendSexEvent(SexEvent.UniqueOrgasm, _indxCauser, _indxWho, {orgasmType=uniqueOrgasm})
 
+func cumInsideShare(_indxWho:int, _indxTarget1:int, _hole1:String, _indxTarget2:int, _hole2:String, _shareFirst:float = 0.5):
+	var theInfo:SexInfoBase = getDomOrSubInfo(_indxWho)
+	var theChar:BaseCharacter = getDomOrSub(_indxWho)
+	var target1:BaseCharacter = getDomOrSub(_indxTarget1)
+	var target1Info:SexInfoBase = getDomOrSubInfo(_indxTarget1)
+	var target2:BaseCharacter = getDomOrSub(_indxTarget2)
+	var target2Info:SexInfoBase = getDomOrSubInfo(_indxTarget2)
+	
+	target1.cummedInBodypartByAdvanced(_hole1, theChar.getID(), {}, null, _shareFirst)
+	target2.cummedInBodypartByAdvanced(_hole2, theChar.getID(), {}, null)
+	
+	addTextRaw(("{<TOP>.You} {<TOP>.youVerb('stuff')} {<BOTTOM1>.your} "+getNameHole(_indxTarget1, _hole1)+" with the first waves of {<TOP>.yourHis} {<TOP>.cum}. While the orgasm is still going, {<TOP>.youHe} quickly {<TOP>.youVerb('pull')} out and {<TOP>.youVerb('pump')} the rest into {<BOTTOM2>.your} "+getNameHole(_indxTarget2, _hole2)+", [b]sharing {<TOP>.your} load between them[/b]!").replace("<TOP>", theChar.getID()).replace("<BOTTOM1>", target1.getID()).replace("<BOTTOM2>", target2.getID()))
+	
+	if(target1.hasWombIn(_hole1) && (target1Info is SexSubInfo)):
+		var beingBredScore:float = target1Info.fetishScore({Fetish.BeingBred: 1.0})
+		if(beingBredScore < 0.0):
+			target1Info.addResistance(1.0)
+			target1Info.addFear(0.1)
+	if(target2.hasWombIn(_hole2) && (target2Info is SexSubInfo)):
+		var beingBredScore:float = target2Info.fetishScore({Fetish.BeingBred: 1.0})
+		if(beingBredScore < 0.0):
+			target2Info.addResistance(1.0)
+			target2Info.addFear(0.1)
+	theInfo.cum()
+	
 func cumInside(_indxWho:int, _indxTarget:int, _hole:String, _extra:Dictionary = {}) -> Dictionary:
 	#var theInfo:SexInfoBase = getDomOrSubInfo(_indxWho)
 	var theChar:BaseCharacter = getDomOrSub(_indxWho)
@@ -2451,7 +2488,7 @@ func cumOnto(_indxWho:int, _indxTarget:int, _extra:Dictionary = {}):
 
 
 
-func tryPenetrate(_indxTop:int, _indxBottom:int, _hole:String, isEnveloping:bool = false) -> bool:
+func tryPenetrate(_indxTop:int, _indxBottom:int, _hole:String, isEnveloping:bool = false, isForcePenetrate:bool = false) -> bool:
 	var topInfo:SexInfoBase = getDomOrSubInfo(_indxTop)
 	var topChar:BaseCharacter = topInfo.getChar()
 	var topStrapon:bool = topChar.isWearingStrapon()
@@ -2462,7 +2499,7 @@ func tryPenetrate(_indxTop:int, _indxBottom:int, _hole:String, isEnveloping:bool
 		return true
 	var fetishGiving:String = Fetish.VaginalSexGiving if _hole == S_VAGINA else Fetish.AnalSexGiving
 	
-	if(!RNG.chance(bottomChar.getPenetrateChanceBy(_hole, topChar.getID()))):
+	if(!isForcePenetrate && !RNG.chance(bottomChar.getPenetrateChanceBy(_hole, topChar.getID()))):
 		bottomChar.gotOrificeStretchedBy(_hole, topChar.getID(), true, 0.1)
 		if(!isEnveloping):
 			addTextTopBottom("{<TOP>.Your} "+getNamePenis(_indxTop)+" stretches {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+" out while trying to fit inside.", _indxTop, _indxBottom)

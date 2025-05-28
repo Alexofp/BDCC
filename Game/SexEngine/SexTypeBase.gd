@@ -36,7 +36,7 @@ func getDefaultAnimation():
 			return [StageScene.Sleeping, "sleep", {pc=theSubIDs[0]}]
 		return [StageScene.GivingBirth, "idle", {pc=theSubIDs[0]}]
 	if(theSubIDs.empty()):
-		return [StageScene.Solo, {pc=theDomIDs[0]}]
+		return [StageScene.Solo, "stand", {pc=theDomIDs[0]}]
 	
 	if(isUnconscious(theSubIDs[0])):
 		return [StageScene.SexStart, "defeated", {pc=theDomIDs[0], npc=theSubIDs[0]}]

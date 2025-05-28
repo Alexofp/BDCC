@@ -1292,6 +1292,9 @@ func getBestAnimation():
 	if(foundAnimInfo == null):
 		return null
 
+	#if(foundAnimInfo != null && foundAnimInfo.size() == 2):
+	#	foundAnimInfo.append({})
+
 	if(foundAnimInfo != null && foundAnimInfo.size() > 2):
 		var extraInfoDict:Dictionary = foundAnimInfo[2]
 		
