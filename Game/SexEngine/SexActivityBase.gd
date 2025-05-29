@@ -97,7 +97,7 @@ func stimulate(_indxActor:int, _slotActor:String, _indxTarget:int, _slotTarget:S
 	var infoTarget:SexInfoBase = getDomOrSubInfo(_indxTarget)
 	
 	exposeToFetish(_indxTarget, _fetishID, _intensity, _indxActor)
-	exposeToFetish(_indxActor, _fetishID, _intensity, _indxActor) # Target is same as Exposer?
+	exposeToFetish(_indxActor, _fetishID, _intensity, _indxTarget)
 	
 	var fetishScoreActor:float = infoActor.fetishScore({_fetishID:1.0}) if _fetishID != "" else 1.0
 	fetishScoreActor = unClampValue(fetishScoreActor, 0.2)
@@ -2590,3 +2590,34 @@ func penetration(didPenetrate:bool, _indxTop:int, _indxBottom:int, _hole:String,
 		
 		#addTextTopBottom(text, _indxTop, _indxBottom)
 		return true
+
+
+
+func cockWarmer(_indxBottom:int, _indxTop:int, _hole:String, _isKnot:bool = false):
+	var topInfo:SexInfoBase = getDomOrSubInfo(_indxTop)
+	var topChar:BaseCharacter = topInfo.getChar()
+	#var topStrapon:bool = topChar.isWearingStrapon()
+	var bottomInfo:SexInfoBase = getDomOrSubInfo(_indxBottom)
+	var bottomChar:BaseCharacter = bottomInfo.getChar()
+	
+	stimulate(_indxTop, S_PENIS, _indxBottom, _hole, I_TEASE, Fetish.VaginalSexGiving if _hole == S_VAGINA else Fetish.AnalSexGiving, SPEED_SLOW)
+	
+	var freeRoom:float = bottomChar.getPenetrationFreeRoomBy(_hole, topChar.getID())
+	if(freeRoom > 0.0):
+		addTextTopBottom("{<BOTTOM>.You} {<BOTTOM>.youAre} being a "+RNG.pick(["great", "good"])+" cock warmer for {<TOP>.you}. There is enough room inside {<BOTTOM>.yourHis} "+getNameHole(_indxBottom, _hole)+" for {<BOTTOM>.youHim} not to feel any pain.", _indxTop, _indxBottom)
+		return
+	else:
+		addTextTopBottom("{<BOTTOM>.You} {<BOTTOM>.youAre} trying to be a cock warmer for {<TOP>.you} but {<BOTTOM>.yourHis} "+getNameHole(_indxBottom, _hole)+" is too tight, it's very painful! But it sure feels good for {<TOP>.you}.", _indxTop, _indxBottom)
+		var howMuchPainAdd = RNG.randi_range(1, 2)
+		bottomInfo.addPain(howMuchPainAdd)
+		sendSexEvent(SexEvent.PainInflicted, SUB_0, DOM_0, {pain=howMuchPainAdd,isDefense=false,intentional=false})
+		topInfo.addLust(10)
+		topInfo.addArousalForeplay(0.1)
+		bottomChar.gotOrificeStretchedBy(_hole, topChar.getID(), true, 0.1)
+		return
+
+func rubPenisAgainst(_indxTop:int, _indxBottom:int, _hole:String):
+	if(!(_hole in [S_VAGINA, S_ANUS])):
+		return
+	addTextTopBottom("{<TOP>.You} {<TOP>.youVerb('rub')} {<TOP>.yourHis} "+getNamePenis(_indxTop)+" against {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+" "+getThroughClothingText(_indxTop, S_PENIS)+".", _indxTop, _indxBottom)
+	stimulate(_indxTop, S_PENIS, _indxBottom, _hole, I_TEASE, Fetish.VaginalSexGiving if _hole == S_VAGINA else Fetish.AnalSexGiving)

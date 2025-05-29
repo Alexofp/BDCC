@@ -345,17 +345,7 @@ func processTurn():
 		choke(DOM_0, SUB_0, CHOKE_GENTLE)
 	
 func knotting_processTurn():
-	var freeRoom:float = getSub().getPenetrationFreeRoomBy(usedBodypart, getDomID())
-	if(freeRoom > 0.0):
-		addText("{sub.You} {sub.youAre} being a "+RNG.pick(["great", "good"])+" cock warmer for {dom.you}. There is enough room inside {sub.yourHis} "+RNG.pick(usedBodypartNames)+" for {sub.youHim} not to feel any pain.")
-	else:
-		addText("{sub.You} {sub.youAre} trying to be a cock warmer for {dom.you} but {sub.yourHis} "+RNG.pick(usedBodypartNames)+" is too tight, it's very painful! But it sure feels good for {dom.you}.")
-		var howMuchPainAdd:int = RNG.randi_range(2, 5)
-		getSubInfo().addPain(howMuchPainAdd)
-		sendSexEvent(SexEvent.PainInflicted, DOM_0, SUB_0, {pain=howMuchPainAdd,isDefense=false,intentional=false})
-		getDomInfo().addLust(10)
-		getDomInfo().addArousalForeplay(0.1)
-		getSub().gotOrificeStretchedBy(usedBodypart, getDomID(), true, 0.1)
+	cockWarmer(SUB_0, DOM_0, usedBodypart, true)
 
 func fucking_processTurn():
 	times += 1

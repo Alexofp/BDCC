@@ -285,21 +285,9 @@ func processTurn():
 		isMakingOut = false
 	
 	if(getState() == "knotting" || getState() == "inside"):
-		var freeRoom:float = getDom().getPenetrationFreeRoomBy(usedBodypart, getSubID())
-		if(freeRoom > 0.0):
-			addText("{dom.You} {dom.youAre} being a "+RNG.pick(["great", "good"])+" cock warmer for {sub.you}. There is enough room inside {dom.yourHis} "+RNG.pick(usedBodypartNames)+" for {dom.youHim} not to feel any pain.")
-			processExtra()
-			return
-		else:
-			addText("{dom.You} {dom.youAre} trying to be a cock warmer for {sub.you} but {dom.yourHis} "+RNG.pick(usedBodypartNames)+" is too tight, it's very painful! But it sure feels good for {sub.you}.")
-			var howMuchPainAdd = RNG.randi_range(1, 2)
-			getDomInfo().addPain(howMuchPainAdd)
-			sendSexEvent(SexEvent.PainInflicted, SUB_0, DOM_0, {pain=howMuchPainAdd,isDefense=false,intentional=false})
-			getSubInfo().addLust(10)
-			getSubInfo().addArousalForeplay(0.1)
-			getDom().gotOrificeStretchedBy(usedBodypart, getSubID(), true, 0.1)
-			processExtra()
-			return
+		cockWarmer(DOM_0, SUB_0, usedBodypart, getState() == "knotting")
+		processExtra()
+		return
 	
 func fucking_processTurn():
 	stimulate(SUB_0, S_PENIS, DOM_0, S_VAGINA, I_NORMAL, fetishGiving)

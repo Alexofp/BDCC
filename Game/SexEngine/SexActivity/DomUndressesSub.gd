@@ -27,7 +27,7 @@ func getSupportedSexTypes():
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	if(_domInfo.goalsScoreMax({SexGoal.TieUp: 1.0}, _subInfo.charID) > 0.0):
 		return 0.3 + max(_domInfo.getAngerScore(), 0.0)
-	return 0.0 + max(_domInfo.getAngerScore(), 0.0)
+	return 0.05 + max(_domInfo.getAngerScore(), 0.0)
 
 func getTags(_indx:int) -> Array:
 	if(_indx == SUB_0):
