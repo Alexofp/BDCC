@@ -19,6 +19,9 @@ func getSupportedSexTypes():
 		#SexType.SlutwallSex: true,
 	}
 
+func isActivityImpossibleShouldStop() -> bool:
+	return false
+
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	if(true):
 		return false

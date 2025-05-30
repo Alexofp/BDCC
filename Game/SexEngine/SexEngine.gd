@@ -526,6 +526,9 @@ func isSub(charID) -> bool:
 		return false
 	return true
 
+func isInvolved(_charID:String) -> bool:
+	return isDom(_charID) || isSub(_charID)
+
 func checkFailedAndCompletedGoals():
 	for domID in doms:
 		var domInfo = doms[domID]
@@ -1415,7 +1418,11 @@ func isBondageDisabled() -> bool:
 	return bondageDisabled || (GM.main.getEncounterSettings().getGoalWeight(SexGoal.TieUp) <= 0.0)
 
 func getCharIDList() -> Array:
-	return doms.keys() + subs.keys()
+	var extraCharIDs:Array = []
+	for activity in activities:
+		extraCharIDs.append_array(activity.getExtraInvolvedCharIDs())
+	
+	return doms.keys() + subs.keys() + extraCharIDs
 
 func isDynamicJoinAllowed() -> bool:
 	return !noDynamicJoiners

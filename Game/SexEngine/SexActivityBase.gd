@@ -1207,6 +1207,8 @@ func pullInSub(_otherSubID:String, stopTheirActivities:bool = true):
 		theSexEngine.stopActivitiesThatInvolveCharID(_otherSubID)
 	subs.append(theSexEngine.getSubInfo(_otherSubID))
 
+func getExtraInvolvedCharIDs() -> Array:
+	return []
 
 # Building blocks below
 
@@ -1908,7 +1910,16 @@ func getNameHole(_indx:int, _hole:String) -> String:
 	if(_hole == S_MOUTH):
 		return RNG.pick(["mouth", "face", "throat"])
 	return "[color=red]error[/color]"
-	
+
+func getNameHoleGeneric(_hole:String) -> String:
+	if(_hole == S_VAGINA):
+		return RNG.pick(["pussy", "pussy", "slit", "cunt", "kitty"])
+	if(_hole == S_ANUS):
+		return RNG.pick(["anus", "tailhole", "backdoor", "star", "anal ring"])
+	if(_hole == S_MOUTH):
+		return RNG.pick(["mouth", "face", "throat"])
+	return "[color=red]error[/color]"
+
 func doProcessFuck(_indxTop:int, _indxBottom:int, _hole:String, _poseDescriptor:String = ""):
 	var topInfo:SexInfoBase = getDomOrSubInfo(_indxTop)
 	var topChar:BaseCharacter = topInfo.getChar()

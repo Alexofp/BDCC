@@ -203,7 +203,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			addText("[b]Double orgasm![/b]")
 		elif(orgAmount == 3):
 			addText("[b]Triple orgasm![/b]")
-		elif(orgAmount == 3):
+		elif(orgAmount == 4):
 			addText("[b]Quadruple orgasm![/b]")
 		if(isReadyToCumHandled(SUB_0)):
 			cumGeneric(SUB_0, DOM_0)

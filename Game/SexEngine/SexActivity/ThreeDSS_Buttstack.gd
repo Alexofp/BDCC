@@ -327,7 +327,6 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		if(RNG.chance(successChance)):
 			addText("The subs pull away from {dom.you}.")
 			getDomInfo().addAnger(0.3)
-			getDomInfo(1).addAnger(0.3)
 			if(getState() != ""):
 				setState("")
 			else:
@@ -336,7 +335,6 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		else:
 			addText("The subs try to pull away from {dom.you} but fail.")
 			getDomInfo().addAnger(0.1)
-			getDomInfo(1).addAnger(0.1)
 			return
 	if(_id == "subcum"):
 		cumGeneric(_indx, DOM_0)

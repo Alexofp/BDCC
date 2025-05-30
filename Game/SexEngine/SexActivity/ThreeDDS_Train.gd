@@ -119,9 +119,9 @@ func onSwitchFrom(_otherActivity, _args):
 	
 	if(_args.size() > 3 && _args[3]):
 		switchDoms(0, 1)
-		addText("{dom.You} {dom.youVerb('sandwitch', 'sandwitches')} {sub.you} between {dom.youHim} and {dom1.you}, turning this intersource into a sex train! {dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} "+getNamePenis(DOM_0)+" against {sub.your} "+getNameHole(SUB_0, usedBodypart)+"!")
+		addText("{dom.You} {dom.youVerb('sandwich', 'sandwiches')} {sub.you} between {dom.youHim} and {dom1.you}, turning this intersource into a sex train! {dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} "+getNamePenis(DOM_0)+" against {sub.your} "+getNameHole(SUB_0, usedBodypart)+"!")
 	else:
-		addText("{dom1.You} {dom1.youVerb('sandwitch', 'sandwitches')} {sub.you} between {dom1.youHim} and {dom.you}, turning this intersource into a sex train! {dom1.You} {dom1.youVerb('press', 'presses')} {dom1.yourHis} "+getNameHole(DOM_1, usedBodypart2)+" against {sub.your} "+getNamePenis(SUB_0)+"!")
+		addText("{dom1.You} {dom1.youVerb('sandwich', 'sandwiches')} {sub.you} between {dom1.youHim} and {dom.you}, turning this intersource into a sex train! {dom1.You} {dom1.youVerb('press', 'presses')} {dom1.yourHis} "+getNameHole(DOM_1, usedBodypart2)+" against {sub.your} "+getNamePenis(SUB_0)+"!")
 
 func getYour(pcIsInvolvedText:String = "your", noPcText:String = "their") -> String:
 	if(isDom("pc")):
