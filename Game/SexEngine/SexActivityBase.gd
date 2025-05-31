@@ -2632,3 +2632,36 @@ func rubPenisAgainst(_indxTop:int, _indxBottom:int, _hole:String):
 		return
 	addTextTopBottom("{<TOP>.You} {<TOP>.youVerb('rub')} {<TOP>.yourHis} "+getNamePenis(_indxTop)+" against {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+" "+getThroughClothingText(_indxTop, S_PENIS)+".", _indxTop, _indxBottom)
 	stimulate(_indxTop, S_PENIS, _indxBottom, _hole, I_TEASE, Fetish.VaginalSexGiving if _hole == S_VAGINA else Fetish.AnalSexGiving)
+
+func strokePenis(_indxActor:int, _indxTarget:int):
+	var actorInfo:SexInfoBase = getDomOrSubInfo(_indxActor)
+	var targetInfo:SexInfoBase = getDomOrSubInfo(_indxTarget)
+	
+	addTextRaw(RNG.pick([
+		"{dom.You} {dom.youVerb('stroke')} {sub.yourHis} "+getNamePenis(_indxTarget)+".",
+		"{dom.You} {dom.youVerb('slide')} {dom.yourHis} hand along {sub.yourHis} "+getNamePenis(_indxTarget)+".",
+		"{dom.You} {dom.youVerb('slide')} {dom.yourHis} hand along {sub.yourHis} "+getNamePenis(_indxTarget)+" back and forth.",
+		"{dom.You} {dom.youVerb('rub')} the head of {sub.yourHis} "+getNamePenis(_indxTarget)+" in circles.",
+		"{dom.You} {dom.youVerb('trace')} the veins on {sub.yourHis} "+getNamePenis(_indxTarget)+" with your fingers.",
+		"{dom.You} {dom.youVerb('keep')} stroking {sub.yourHis} "+getNamePenis(_indxTarget)+" in a steady, teasing rhythm.",
+		
+	]).replace("dom.", actorInfo.getCharID()+".").replace("sub.", targetInfo.getCharID()+"."))
+	
+	if(isCloseToCumming(_indxTarget) && !isStrapon(_indxTarget) && RNG.chance(30)):
+		addTextRaw(RNG.pick([
+			"{sub.YouHe} {sub.youAre} about to cum!",
+			"{sub.YouHe} {sub.youAre} being kept on edge by {dom.youHim}.",
+			"{sub.YourHis} "+getNamePenis(_indxTarget)+" is twitching and throbbing.",
+			"{sub.YourHis} "+getNamePenis(_indxTarget)+" is leaking pre a lot.",
+			"{sub.YouHe} {sub.youAre} barely keeping {sub.yourself} from cumming.",
+			"{sub.YouHe} reached {sub.yourHis} peak!",
+		]).replace("dom.", actorInfo.getCharID()+".").replace("sub.", targetInfo.getCharID()+"."))
+	elif(isReadyToFuck(_indxTarget) && !isStrapon(_indxTarget) && RNG.chance(20)):
+		addTextRaw(RNG.pick([
+			"{sub.Your} hard cock is leaking "+RNG.pick(["pre", "precum", "arousal"])+".",
+			"{sub.Your} "+getNamePenis(_indxTarget)+" seems "+RNG.pick(["ready", "hard enough"])+" for a blowjob.",
+			"{sub.YourHis} "+getNamePenis(_indxTarget)+" tip glistens with fresh pre.",
+			"{sub.Your} "+getNamePenis(_indxTarget)+" is so hard, slick with arousal.",
+			"{sub.Your} "+getNamePenis(_indxTarget)+" is pulsing, begging for more touch.",
+			"{sub.Your} shaft is throbbing with need.",
+		]).replace("dom.", actorInfo.getCharID()+".").replace("sub.", targetInfo.getCharID()+"."))

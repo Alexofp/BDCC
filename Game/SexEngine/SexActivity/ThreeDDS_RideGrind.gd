@@ -62,6 +62,17 @@ func getTags(_indx:int) -> Array:
 		return [SexActivityTag.HavingSex, SexActivityTag.PenisUsed]
 	return []
 
+func isActivityImpossibleShouldStop() -> bool:
+	if(!getSub().hasReachablePenis() && !getSub().isWearingStrapon()):
+		return true
+	if(usedBodypart == S_VAGINA && !getDom(0).hasReachableVagina()):
+		return true
+	if(usedBodypart == S_ANUS && !getDom(0).hasReachableAnus()):
+		return true
+	if(!getDom(1).hasReachableVagina()):
+		return true
+	return false
+
 func isAllowedAsRole(_sexEngine, _indx:int, _sexInfo:SexInfoBase, skipTagsCheck:bool, _args:Array) -> bool:
 	var _usedBodypart:String = _args[0]
 	var theChar:BaseCharacter = _sexInfo.getChar()

@@ -70,6 +70,21 @@ func getTags(_indx:int) -> Array:
 		return [SexActivityTag.HavingSex, SexActivityTag.PenisUsed, SexActivityTag.VaginaUsed if usedBodypart == S_VAGINA else SexActivityTag.AnusUsed]
 	return []
 
+func isActivityImpossibleShouldStop() -> bool:
+	if(!getSub().hasReachablePenis() && !getSub().isWearingStrapon()):
+		return true
+	if(!getDom(0).hasReachablePenis() && !getDom(0).isWearingStrapon()):
+		return true
+	if(usedBodypart == S_VAGINA && !getSub().hasReachableVagina()):
+		return true
+	if(usedBodypart == S_ANUS && !getSub().hasReachableAnus()):
+		return true
+	if(usedBodypart2 == S_VAGINA && !getDom(1).hasReachableVagina()):
+		return true
+	if(usedBodypart2 == S_ANUS && !getDom(1).hasReachableAnus()):
+		return true
+	return false
+
 func isAllowedAsRole(_sexEngine, _indx:int, _sexInfo:SexInfoBase, skipTagsCheck:bool, _args:Array) -> bool:
 	var _usedBodypart:String = _args[0]
 	var _usedBodypart2:String = _args[1]
@@ -119,9 +134,9 @@ func onSwitchFrom(_otherActivity, _args):
 	
 	if(_args.size() > 3 && _args[3]):
 		switchDoms(0, 1)
-		addText("{dom.You} {dom.youVerb('sandwich', 'sandwiches')} {sub.you} between {dom.youHim} and {dom1.you}, turning this intersource into a sex train! {dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} "+getNamePenis(DOM_0)+" against {sub.your} "+getNameHole(SUB_0, usedBodypart)+"!")
+		addText("{dom.You} {dom.youVerb('sandwich', 'sandwiches')} {sub.you} between {dom.youHim} and {dom1.you}, turning this intercource into a sex train! {dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} "+getNamePenis(DOM_0)+" against {sub.your} "+getNameHole(SUB_0, usedBodypart)+"!")
 	else:
-		addText("{dom1.You} {dom1.youVerb('sandwich', 'sandwiches')} {sub.you} between {dom1.youHim} and {dom.you}, turning this intersource into a sex train! {dom1.You} {dom1.youVerb('press', 'presses')} {dom1.yourHis} "+getNameHole(DOM_1, usedBodypart2)+" against {sub.your} "+getNamePenis(SUB_0)+"!")
+		addText("{dom1.You} {dom1.youVerb('sandwich', 'sandwiches')} {sub.you} between {dom1.youHim} and {dom.you}, turning this intercource into a sex train! {dom1.You} {dom1.youVerb('press', 'presses')} {dom1.yourHis} "+getNameHole(DOM_1, usedBodypart2)+" against {sub.your} "+getNamePenis(SUB_0)+"!")
 
 func getYour(pcIsInvolvedText:String = "your", noPcText:String = "their") -> String:
 	if(isDom("pc")):

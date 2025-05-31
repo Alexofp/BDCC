@@ -1,6 +1,8 @@
 extends SexActivityBase
 var waitTimer:int = 0
 var straponHumps:int = 0
+var isForce:bool = false
+var isFacesit:bool = false
 
 func _init():
 	id = "SexOral"
@@ -97,6 +99,14 @@ func processTurn():
 		waitTimer += 1
 		return
 
+	if(state in ["blowjob", "deepthroat"]):
+		if(!isForce && getSubInfo().isUnconscious()):
+			isForce = true
+	if(state == "licking"):
+		if(!isForce && getSubInfo().isUnconscious()):
+			state = "grinding"
+			isForce = true
+
 func blowjob_processTurn():
 	if(isStraponSex()):
 		straponHumps += 1
@@ -157,6 +167,9 @@ func getActions(_indx:int):
 		if(state in ["deepthroat"]):
 			var stopdeepthroatScore:float = getSubInfo().getAboutToPassOutScore() * 0.2 * (1.0 - personality(DOM_0, PersonalityStat.Mean)*0.5 - fetish(DOM_0, Fetish.UnconsciousSex))
 			addAction("stopdeepthroat", stopdeepthroatScore, "Stop deepthroat", "Enough deepthroating for now")
+		if(state == "licking"):
+			if(!isFacesit):
+				addAction("startFacesit", 0.07-personality(DOM_0, PersonalityStat.Subby)*0.05, "Sit on face!", "Sit on their face while they are licking you out!")
 		if(state in ["licking", "grinding"]):
 			if(isReadyToCumHandled(DOM_0)):
 				addAction("pussycum", 1.0, "Cum!", "Cum all over the sub", {A_PRIORITY: 1001})
@@ -243,6 +256,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		talk(DOM_0, SUB_0, SexReaction.OrderLickPussy)
 		return
 	if(_id == "startgrindface"):
+		isForce = true
 		state = "grinding"
 		var text = RNG.pick([
 			"{dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} "+RNG.pick(["pussy", "slit", "kitty"])+" to {sub.yourHis} face and {dom.youVerb('proceed')} to grind it!",
@@ -263,6 +277,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			successChance = 100
 		
 		if(RNG.chance(successChance)):
+			isForce = true
 			state = "blowjob"
 			stimulate(DOM_0, S_PENIS, SUB_0, S_MOUTH, I_LOW, Fetish.OralSexReceiving)
 			#affectSub(getSubInfo().fetishScore({Fetish.OralSexGiving: 1.0}), 0.05, -0.2, -0.05)
@@ -354,6 +369,10 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		
 		addText("{dom.You} {dom.youVerb('pull')} {dom.yourHis} "+genitalsText+" away from {sub.yourHis} lips.")
 		return
+	if(_id == "startFacesit"):
+		isFacesit = true
+		addText("{dom.You} {dom.youVerb('bring')} {sub.you} down onto the floor and {dom.youVerb('sit')} on {sub.yourHis} face!")
+		return
 
 	if(_id == "teasecock"):
 		var throughTheClothing:String = getThroughClothingText(DOM_0, BodypartSlot.Penis)
@@ -401,6 +420,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		addText(text)
 		return
 	if(_id == "openmouth"):
+		isForce = false
 		state = "blowjob"
 		sendSexEvent(SexEvent.HolePenetrated, DOM_0, SUB_0, {hole=BodypartSlot.Head,engulfed=true,strapon=isStraponSex()})
 		addText("{sub.You} {sub.youVerb('open')} {sub.yourHis} mouth and {sub.youVerb('let')} {dom.your} "+getDickName()+" in before wrapping {sub.yourHis} lips around it.")
@@ -411,6 +431,8 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		addText("{sub.You} {sub.youVerb('refuse')} to open {sub.yourHis} mouth.")
 		return
 	if(_id == "startlicking"):
+		isForce = false
+		isFacesit = false
 		state = "licking"
 		addText("{sub.You} {sub.youVerb('stick')} {sub.yourHis} tongue out and {sub.youVerb('press', 'presses')} it against {dom.your} "+RNG.pick(["pussy", "slit", "petals", "folds"])+" before proceeding to lick them.")
 		return
@@ -573,11 +595,23 @@ func getAnimation():
 		return [StageScene.SexOral, "start", {pc=DOM_0, npc=SUB_0}]
 	
 	if(state in ["licking"]):
+		if(isFacesit):
+			if(isCloseToCumming(DOM_0)):
+				return [StageScene.SexFaceSitting, "grind", {pc=DOM_0, npc=SUB_0}]
+			return [StageScene.SexFaceSitting, "sit", {pc=DOM_0, npc=SUB_0}]
+		if(isCloseToCumming(DOM_0)):
+			return [StageScene.SexOral, "grind", {pc=DOM_0, npc=SUB_0}]
 		return [StageScene.SexOral, "lick", {pc=DOM_0, npc=SUB_0}]
 	if(state in ["grinding"]):
-		return [StageScene.SexOral, "grind", {pc=DOM_0, npc=SUB_0}]
+		if(isCloseToCumming(DOM_0)):
+			return [StageScene.SexOralForced, "lickfast", {pc=DOM_0, npc=SUB_0}]
+		return [StageScene.SexOralForced, "lick", {pc=DOM_0, npc=SUB_0}]
 	
 	if(state in ["blowjob", "deepthroat"]):
+		if(isForce):
+			if(getDomInfo().isCloseToCumming() || state == "deepthroat"):
+				return [StageScene.SexOralForced, "suckfast", {pc=DOM_0, npc=SUB_0}]
+			return [StageScene.SexOralForced, "suck", {pc=DOM_0, npc=SUB_0}]
 		if(getDomInfo().isCloseToCumming() || state == "deepthroat"):
 			return [StageScene.SexOral, "fast", {pc=DOM_0, npc=SUB_0}]
 		return [StageScene.SexOral, "sex", {pc=DOM_0, npc=SUB_0}]
@@ -607,6 +641,8 @@ func saveData():
 	
 	data["waitTimer"] = waitTimer
 	data["straponHumps"] = straponHumps
+	data["isForce"] = isForce
+	data["isFacesit"] = isFacesit
 
 	return data
 	
@@ -615,3 +651,5 @@ func loadData(data):
 	
 	waitTimer = SAVE.loadVar(data, "waitTimer", 0)
 	straponHumps = SAVE.loadVar(data, "straponHumps", 0)
+	isForce = SAVE.loadVar(data, "isForce", false)
+	isFacesit = SAVE.loadVar(data, "isFacesit", false)

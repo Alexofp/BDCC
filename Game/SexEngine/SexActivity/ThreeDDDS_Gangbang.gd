@@ -44,6 +44,17 @@ func getSupportedSexTypes():
 		#SexType.SlutwallSex: true,
 	}
 
+func isActivityImpossibleShouldStop() -> bool:
+	if(!getSub().hasReachableVagina() || !getSub().hasReachableAnus() || getSub().isOralBlocked()):
+		return true
+	if(!getDom(0).hasReachablePenis() && !getDom(0).isWearingStrapon()):
+		return true
+	if(!getDom(1).hasReachablePenis() && !getDom(1).isWearingStrapon()):
+		return true
+	if(!getDom(2).hasReachablePenis() && !getDom(2).isWearingStrapon()):
+		return true
+	return false
+
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	var sub:BaseCharacter = _subInfo.getChar()
 	if(!sub.hasReachableVagina()):

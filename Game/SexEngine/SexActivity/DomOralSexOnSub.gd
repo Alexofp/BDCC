@@ -68,6 +68,10 @@ func startActivity(_args):
 	else:
 		addText("{dom.You} {dom.youVerb('kneel')} down and {dom.youVerb('bring')} {dom.yourHis} mouth to {sub.yourHis} "+genitalsText+".")
 
+func handjob_processTurn():
+	stimulate(DOM_0, S_MOUTH, SUB_0, S_PENIS, I_NORMAL, Fetish.OralSexGiving, SPEED_SLOW)
+	strokePenis(DOM_0, SUB_0)
+
 func blowjob_processTurn():
 	if(getSub().isWearingChastityCage()):
 		setState("lickingcock")
@@ -154,11 +158,13 @@ func getActions(_indx:int):
 		if(getState() == ""):
 			if(getSub().hasReachablePenis()):
 				addAction("startcocklick", 1.0, "Lick cock", "Start licking their cock")
+				if(hasBodypartUncovered(SUB_0, S_PENIS)):
+					addAction("startHandjob", 1.0, "Stroke cock", "Get their cock ready by stroking it")
 			if(getSub().hasReachableVagina()):
 				addAction("startpussylick", 1.0, "Lick pussy", "Start licking their pussy")
-		if(getState() == "lickingcock"):
+		if(getState() == "lickingcock" || state == "handjob"):
 			if(getSub().isReadyToPenetrate() && hasBodypartUncovered(SUB_0, BodypartSlot.Penis)):
-				addAction("startblowjob", 1.0, "Blowjob", "Let that cock into your mouth")
+				addAction("startblowjob", 1.0 if state != "handjob" else 0.1, "Blowjob", "Let that cock into your mouth")
 		if(getState() == "licking"):
 			if(hasBodypartUncovered(SUB_0, BodypartSlot.Vagina)):
 				addAction("starttonguefuck", 1.0, "Tonguefuck", "Fuck that pussy with your tongue")
@@ -166,7 +172,7 @@ func getActions(_indx:int):
 			if(getDom().hasEffect(StatusEffect.HasCumInsideMouth) && getSub().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) == null && !getDom().isOralBlocked() && OPTIONS.isContentEnabled(ContentType.CumStealing)):
 				addAction("spitcumintosubspussy", 0.01 + getDomInfo().fetishScore({Fetish.Breeding: 0.1}), "Spit cum into pussy", "Force some cum into their slit")
 
-		if(getState() in ["subabouttocum", "subabouttocumcock"] || ((getState() in ["licking", "tonguefucking", "lickingcock", "blowjob"]) && getSubInfo().isReadyToCum() && !getSubInfo().canDoActions())):
+		if(getState() in ["subabouttocum", "subabouttocumcock", "subabouttocumHandjob"] || ((getState() in ["licking", "tonguefucking", "lickingcock", "blowjob", "handjob"]) && getSubInfo().isReadyToCum() && !getSubInfo().canDoActions())):
 			addAction("letsubcuminside", 1.0, "Inside", "Let the sub cum inside your mouth", {A_PRIORITY: 1001})
 			addAction("letsubcumoutside", 1.0, "Facial", "Let the sub cum on you", {A_PRIORITY: 1001})
 			addAction("makesubcumavoidmess", 1.0, "Avoid mess", "Let the sub cum but avoid getting messy", {A_PRIORITY: 1001})
@@ -175,7 +181,7 @@ func getActions(_indx:int):
 	
 	if(_indx == SUB_0):
 		addAction("pullaway", getResistScore(SUB_0), "Pull away", "Try to pull away", {A_CHANCE: getResistChance(SUB_0, DOM_0, RESIST_ORAL_FOCUS, 30.0, 25.0)})
-		if(getState() in ["blowjob", "lickingcock", "licking", "tonguefucking"]):
+		if(getState() in ["blowjob", "lickingcock", "licking", "tonguefucking", "handjob"]):
 			addAction("moan", getComplyScore(SUB_0)/3.0, "Moan", "Show how much you like it")
 			
 			if(isReadyToCumHandled(SUB_0)):
@@ -357,6 +363,13 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		
 		addText(text)
 		return
+	if(_id == "startHandjob"):
+		setState("handjob")
+		addTextPick([
+			"{dom.You} {dom.youVerb('wrap')} {dom.yourHis} digits around {sub.yourHis} "+getNamePenis(SUB_0)+"!",
+		])
+		stimulate(DOM_0, S_MOUTH, SUB_0, S_PENIS, I_TEASE, Fetish.OralSexGiving, SPEED_SLOW)
+		return
 	if(_id == "startcocklick"):
 		setState("lickingcock")
 		var clothingItem = getSub().getFirstItemThatCoversBodypart(BodypartSlot.Penis)
@@ -439,7 +452,9 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		addText("{dom.You} {dom.youVerb('pull')} {dom.yourHis} lips away from {sub.yourHis} "+genitalsText+".")
 
 	if(_id == "warndom"):
-		if(getState() in ["licking", "tonguefucking"]):
+		if(state == "handjob"):
+			setState("subabouttocumHandjob")
+		elif(getState() in ["licking", "tonguefucking"]):
 			setState("subabouttocum")
 		else:
 			setState("subabouttocumcock")
@@ -455,7 +470,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			doCumPussyLickSub(true)
 			setState("")
 			return
-		if(getState() == "lickingcock"):
+		if(getState() == "lickingcock" || state == "handjob"):
 			doCumBJFacialsSub(true)
 			setState("")
 			return
@@ -515,6 +530,8 @@ func getAnimation():
 	if(getSexType() == SexType.SlutwallSex):
 		if(getState() in [""]):
 			return [StageScene.SlutwallSexOral, "tease", {pc=SUB_0, npc=DOM_0}]
+		if(state == "handjob" || state == "subabouttocumHandjob"):
+			return [StageScene.SlutwallSexOral, "handjob", {pc=SUB_0, npc=DOM_0, bodyState={hard=true}}]
 		
 		if(getState() in ["licking", "subabouttocum"]):
 			return [StageScene.SlutwallSexOral, "lick", {pc=SUB_0, npc=DOM_0}]
@@ -532,6 +549,11 @@ func getAnimation():
 	
 	if(getState() in [""]):
 		return [StageScene.SexOral, "start", {pc=SUB_0, npc=DOM_0}]
+	if(state == "handjob" || state == "subabouttocumHandjob"):
+		if(isCloseToCumming(SUB_0)):
+			return [StageScene.SexHandjob, "fast", {pc=SUB_0, npc=DOM_0, bodyState={hard=true}}]
+		return [StageScene.SexHandjob, "sex", {pc=SUB_0, npc=DOM_0, bodyState={hard=true}}]
+	
 	
 	if(getState() in ["licking", "subabouttocum"]):
 		return [StageScene.SexOral, "lick", {pc=SUB_0, npc=DOM_0}]
