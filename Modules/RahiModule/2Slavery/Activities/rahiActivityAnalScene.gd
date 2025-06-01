@@ -411,7 +411,7 @@ func _run():
 
 		saynn("Rahi lets out a scream of ecstasy, her body convulsing as she cums hard. You hold her from falling by her tail and keep fucking her ass that clenches around your cock so well. Your own orgasm builds up until you can't hold back any longer.")
 
-		saynn("With a final trust, you shove your {pc.penis} as deep as Rahi can take before proceeding to pump her ass full of your seed, filling her with warmth. Rahi's inner walls basically milking your member, draining your balls. Your legs shake but you manage to stand.")
+		saynn("With a final thrust, you shove your {pc.penis} as deep as Rahi can take before proceeding to pump her ass full of your seed, filling her with warmth. Rahi's inner walls basically milking your member, draining your balls. Your legs shake but you manage to stand.")
 
 		saynn("You lean towards Rahi and place your chin on her shoulder. Your kitty is purring, still with your cock up her butt.")
 
@@ -584,7 +584,7 @@ func _run():
 	if(state == "fist1_double"):
 		saynn("As you watch Rahi's gaping anus struggling to close up.. You can't help but wonder.. If you could push her limits even further. With a little mean grin on your face, you slowly insert your hand back into the willing gaping hole, receiving almost no resistance. But now.. you also start to insert your second fist.. making kitty whine as you're attempting to stretch her even wider than before.")
 
-		saynn("[say=pc]H-hey!.. Ah.. F-fuck..[/say]")
+		saynn("[say=rahi]H-hey!.. Ah.. F-fuck..[/say]")
 
 		saynn("Rahi gasps in shock and pain as you somehow manage to work both of your hands inside her. It was quite easy to do when both of them were palms. But when you clench them both into fists.. Rahi arches her back as her anus now looks stretched almost unnaturally.")
 
