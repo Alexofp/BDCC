@@ -134,9 +134,9 @@ func onSwitchFrom(_otherActivity, _args):
 	
 	if(_args.size() > 3 && _args[3]):
 		switchDoms(0, 1)
-		addText("{dom.You} {dom.youVerb('sandwich', 'sandwiches')} {sub.you} between {dom.youHim} and {dom1.you}, turning this intercource into a sex train! {dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} "+getNamePenis(DOM_0)+" against {sub.your} "+getNameHole(SUB_0, usedBodypart)+"!")
+		addText("{dom.You} {dom.youVerb('sandwich', 'sandwiches')} {sub.you} between {dom.youHim} and {dom1.you}, turning this intercourse into a sex train! {dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} {dom.penisShort} against {sub.your} "+getNameHole(SUB_0, usedBodypart)+"!")
 	else:
-		addText("{dom1.You} {dom1.youVerb('sandwich', 'sandwiches')} {sub.you} between {dom1.youHim} and {dom.you}, turning this intercource into a sex train! {dom1.You} {dom1.youVerb('press', 'presses')} {dom1.yourHis} "+getNameHole(DOM_1, usedBodypart2)+" against {sub.your} "+getNamePenis(SUB_0)+"!")
+		addText("{dom1.You} {dom1.youVerb('sandwich', 'sandwiches')} {sub.you} between {dom1.youHim} and {dom.you}, turning this intercourse into a sex train! {dom1.You} {dom1.youVerb('press', 'presses')} {dom1.yourHis} "+getNameHole(DOM_1, usedBodypart2)+" against {sub.your} {sub.penisShort}!")
 
 func getYour(pcIsInvolvedText:String = "your", noPcText:String = "their") -> String:
 	if(isDom("pc")):
@@ -158,8 +158,8 @@ func inside_processTurn():
 	stimulate(DOM_0, S_PENIS, SUB_0, usedBodypart, I_TEASE, usedFetish)
 	stimulate(SUB_0, S_PENIS, DOM_1, usedBodypart2, I_TEASE, usedFetish2)
 	
-	addText("{sub.You} {sub.youAre} being a cock-warmer for {dom.your} "+getNamePenis(DOM_0)+".")
-	addText("At the same time, {dom1.You} {dom1.youAre} being a cock-warmer for {sub.your} "+getNamePenis(SUB_0)+".")
+	addText("{sub.You} {sub.youAre} being a cock-warmer for {dom.your} {dom.penisShort}.")
+	addText("At the same time, {dom1.You} {dom1.youAre} being a cock-warmer for {sub.your} {sub.penisShort}.")
 
 func sex_processTurn():
 	stimulate(DOM_0, S_PENIS, SUB_0, usedBodypart, I_NORMAL, usedFetish)
@@ -255,23 +255,23 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		state = "inside"
 		return
 	if(_id == "pullOut"):
-		addText("The doms pull out from {sub.your} "+getNameHole(SUB_0, usedBodypart)+" and away from {sub.yourHis} "+getNamePenis(SUB_0)+".")
+		addText("The doms pull out from {sub.your} "+getNameHole(SUB_0, usedBodypart)+" and away from {sub.yourHis} {sub.penisShort}.")
 		state = ""
 		return
 	if(_id == "rub"):
-		addText("{dom.You} {dom.youVerb('rub')} {dom.yourHis} "+getNamePenis(DOM_0)+" against {sub.your} "+getNameHole(SUB_0, usedBodypart)+".")
-		addText("{dom1.You} {dom1.youVerb('rub')} {dom1.yourHis} "+getNameHole(DOM_1, usedBodypart2)+" against {sub.your} "+getNamePenis(SUB_0)+".")
+		addText("{dom.You} {dom.youVerb('rub')} {dom.yourHis} {dom.penisShort} against {sub.your} "+getNameHole(SUB_0, usedBodypart)+".")
+		addText("{dom1.You} {dom1.youVerb('rub')} {dom1.yourHis} "+getNameHole(DOM_1, usedBodypart2)+" against {sub.your} {sub.penisShort}.")
 		stimulate(DOM_0, S_PENIS, SUB_0, usedBodypart, I_TEASE, usedFetish)
 		stimulate(SUB_0, S_PENIS, DOM_1, usedBodypart2, I_TEASE, usedFetish2)
 		return
 	if(_id == "penetrate"):
 		if(tryPenetrate(DOM_0, SUB_0, usedBodypart)):
 			penetration(true, SUB_0, DOM_1, usedBodypart2)
-			addText("At the same time, {dom1.you} {dom1.youVerb('manage')} to envelop {sub.yourHis} "+getNamePenis(SUB_0)+" with {dom1.yourHis} "+getNameHole(DOM_1, usedBodypart2)+".")
+			addText("At the same time, {dom1.you} {dom1.youVerb('manage')} to envelop {sub.yourHis} {sub.penisShort} with {dom1.yourHis} "+getNameHole(DOM_1, usedBodypart2)+".")
 			state = "sex"
 		else:
 			penetration(false, SUB_0, DOM_1, usedBodypart2)
-			addText("{dom1.You} {dom1.youVerb('try', 'tries')} to envelop {sub.yourHis} "+getNamePenis(SUB_0)+" with {dom1.yourHis} "+getNameHole(DOM_1, usedBodypart2)+".")
+			addText("{dom1.You} {dom1.youVerb('try', 'tries')} to envelop {sub.yourHis} {sub.penisShort} with {dom1.yourHis} "+getNameHole(DOM_1, usedBodypart2)+".")
 		return
 	if(_id == "stop"):
 		endActivity()

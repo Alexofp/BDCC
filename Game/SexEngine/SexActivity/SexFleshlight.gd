@@ -86,9 +86,9 @@ func init_processTurn():
 		
 func sex_processTurn():
 	addTextPick([
-		"{dom.You} {dom.youAre} stroking {sub.your} "+getNamePenis(SUB_0)+" with a fleshlight.",
-		"{dom.You} {dom.youVerb('slide')} a fleshlight along {sub.your} "+getNamePenis(SUB_0)+".",
-		"{dom.You} {dom.youVerb('pleasure')} {sub.your} "+getNamePenis(SUB_0)+" with a fleshlight.",
+		"{dom.You} {dom.youAre} stroking {sub.your} {sub.penisShort} with a fleshlight.",
+		"{dom.You} {dom.youVerb('slide')} a fleshlight along {sub.your} {sub.penisShort}.",
+		"{dom.You} {dom.youVerb('pleasure')} {sub.your} {sub.penisShort} with a fleshlight.",
 	])
 	stimulate(SUB_0, S_PENIS, getTargetIndx(), targetHole, I_NORMAL, Fetish.VaginalSexGiving if targetHole == S_VAGINA else S_ANUS)
 	doProcessFuck(SUB_0, getTargetIndx(), targetHole, " through the portal panties")
@@ -147,11 +147,11 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		return 
 	if(_id == "pullout"):
 		state = ""
-		addText("{dom.You} {dom.youVerb('pull')} the fleshlight off of {sub.your} "+getNamePenis(SUB_0)+".")
+		addText("{dom.You} {dom.youVerb('pull')} the fleshlight off of {sub.your} {sub.penisShort}.")
 		return
 	if(_id == "fuckmore"):
 		state = "sex"
-		addText("{dom.You} {dom.youVerb('begin')} to move {dom.yourHis} hand again, sliding the fleshlight along {sub.your} "+getNamePenis(SUB_0)+".")
+		addText("{dom.You} {dom.youVerb('begin')} to move {dom.yourHis} hand again, sliding the fleshlight along {sub.your} {sub.penisShort}.")
 		return
 	if(_id == "pause"):
 		state = "inside"

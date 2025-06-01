@@ -137,9 +137,9 @@ func inside_processTurn():
 	stimulate(SUB_0, S_PENIS, DOM_0, usedBodypart, I_TEASE, usedFetish)
 	stimulate(SUB_0, S_MOUTH, DOM_1, S_VAGINA, I_TEASE, Fetish.OralSexGiving)
 	
-	addText("{dom.You} {dom.youAre} being a cock-warmer for {sub.your} "+getNamePenis(SUB_0)+".")
+	addText("{dom.You} {dom.youAre} being a cock-warmer for {sub.your} {sub.penisShort}.")
 	addText("{dom1.You} {dom1.youAre} sitting on {sub.your} face.")
-	#addText("At the same time, {dom1.You} {dom1.youAre} being a cock-warmer for {sub.your} "+getNamePenis(SUB_0)+".")
+	#addText("At the same time, {dom1.You} {dom1.youAre} being a cock-warmer for {sub.your} {sub.penisShort}.")
 
 func sex_processTurn():
 	stimulate(SUB_0, S_PENIS, DOM_0, usedBodypart, I_NORMAL, usedFetish)
@@ -236,12 +236,12 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		state = "inside"
 		return
 	if(_id == "pullOut"):
-		addText("The doms pull up from {sub.your} "+getNamePenis(SUB_0)+" and away from {sub.yourHis} face.")
+		addText("The doms pull up from {sub.your} {sub.penisShort} and away from {sub.yourHis} face.")
 		state = ""
 		return
 	if(_id == "rub"):
-		#addText("{dom.You} {dom.youVerb('rub')} {dom.yourHis} "+getNamePenis(DOM_0)+" against {sub.your} "+getNameHole(SUB_0, usedBodypart)+".")
-		addText("{dom.You} {dom.youVerb('rub')} {dom.yourHis} "+getNameHole(DOM_0, usedBodypart)+" against {sub.your} "+getNamePenis(SUB_0)+".")
+		#addText("{dom.You} {dom.youVerb('rub')} {dom.yourHis} {dom.penisShort} against {sub.your} "+getNameHole(SUB_0, usedBodypart)+".")
+		addText("{dom.You} {dom.youVerb('rub')} {dom.yourHis} "+getNameHole(DOM_0, usedBodypart)+" against {sub.your} {sub.penisShort}.")
 		addText("{dom1.You} gently {dom1.youVerb('grind')} {dom1.yourHis} "+getNameHole(DOM_1, S_VAGINA)+" against {sub.your} face.")
 		stimulate(SUB_0, S_PENIS, DOM_0, usedBodypart, I_TEASE, usedFetish)
 		stimulate(SUB_0, S_MOUTH, DOM_1, S_VAGINA, I_TEASE, Fetish.OralSexGiving)
@@ -255,7 +255,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		else:
 			stimulate(SUB_0, S_MOUTH, DOM_1, S_VAGINA, I_TEASE, Fetish.OralSexGiving)
 			#penetration(false, SUB_0, DOM_1, usedBodypart2)
-			#addText("{dom.You} {dom.youVerb('try', 'tries')} to envelop {sub.yourHis} "+getNamePenis(SUB_0)+" with {dom.yourHis} "+getNameHole(DOM_0, usedBodypart)+".")
+			#addText("{dom.You} {dom.youVerb('try', 'tries')} to envelop {sub.yourHis} {sub.penisShort} with {dom.yourHis} "+getNameHole(DOM_0, usedBodypart)+".")
 			pass
 		return
 	if(_id == "stop"):

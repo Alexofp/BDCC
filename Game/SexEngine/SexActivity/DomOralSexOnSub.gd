@@ -366,7 +366,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "startHandjob"):
 		setState("handjob")
 		addTextPick([
-			"{dom.You} {dom.youVerb('wrap')} {dom.yourHis} digits around {sub.yourHis} "+getNamePenis(SUB_0)+"!",
+			"{dom.You} {dom.youVerb('wrap')} {dom.yourHis} digits around {sub.yourHis} {sub.penisShort}!",
 		])
 		stimulate(DOM_0, S_MOUTH, SUB_0, S_PENIS, I_TEASE, Fetish.OralSexGiving, SPEED_SLOW)
 		return

@@ -147,13 +147,37 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		if(_args.size() == 2):
 			return object.verbS(str(_args[0]), str(_args[1]))
 			
-	if(_command in ["penisOrStrapon", "penisStrapon", "strapon"] && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndName")):
+	if(_command in ["strapon"] && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndName")):
 		if(object.isWearingStrapon()):
 			return RNG.pick(["slick ", "rubber ", "shiny rubber ", ""])+"strapon"
 		else:
 			return object.getBodypartLewdDescriptionAndName(BodypartSlot.Penis)
 	if(_command in ["penis", "cock", "dick"] && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndName")):
 		return object.getBodypartLewdDescriptionAndName(BodypartSlot.Penis)
+	if(_command in ["penisStrapon", "penisOrStrapon"] && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndName")):
+		if(object.isWearingStrapon()):
+			if(RNG.chance(50)):
+				var theStrapon = object.getWornStrapon()
+				if(theStrapon && theStrapon.has_method("getLewdStraponName")):
+					return theStrapon.getLewdStraponName()
+			return RNG.pick(["strapon", "rubber cock", "rubber dick", "rubber toy"])
+		return object.getBodypartLewdDescriptionAndName(BodypartSlot.Penis)
+	if(_command in ["penisStraponShort", "penisShort"] && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndName")):
+		if(object.isWearingStrapon()):
+			return RNG.pick(["strapon", "rubber cock", "rubber dick", "rubber toy"])
+		if(object.isWearingChastityCage()):
+			return RNG.pick(["caged ", "caged ", "locked away "])+RNG.pick(["cock", "dick", "member"])
+		if(object.hasPenis()):
+			if(RNG.chance(50) && object.isReadyToPenetrate()):
+				return RNG.pick(["hard ", "pulsing ", "exposed ", "twitching "]) + RNG.pick(["cock", "dick", "member"])
+			return RNG.pick(["cock", "dick", "member"])
+		return "[color=red]NO PENIS OR STRAPON[/color]"
+	if(_command in ["penisType"] && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndName")):
+		if(object.isWearingStrapon()):
+			return RNG.pick(["strapon"])
+		if(object.hasPenis()):
+			return RNG.pick(["cock", "dick", "member"])
+		return "[color=red]NO PENIS OR STRAPON[/color]"
 	if(_command in ["aPenis", "aCock", "aDick"] && _args.size() == 0 && object.has_method("getBodypartLewdDescriptionAndNameWithA")):
 		return object.getBodypartLewdDescriptionAndNameWithA(BodypartSlot.Penis)
 	if(_command in ["penisSize", "cockSize", "dickSize"] && _args.size() == 0 && object.has_method("getBodypartLewdSizeAdjective")):

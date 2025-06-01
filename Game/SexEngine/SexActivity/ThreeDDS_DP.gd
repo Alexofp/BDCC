@@ -108,9 +108,9 @@ func onSwitchFrom(_otherActivity, _args):
 	addText("{dom1.You} {dom1.youVerb('join')} and {dom1.youVerb('turn')} this sex into a double-penetration!")
 	if(_args[0] == "vag"):
 		switchDoms(0, 1)
-		addText("{dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} "+getNamePenis(DOM_0)+" against {sub.yourHis} "+getNameHole(SUB_0, S_VAGINA)+".")
+		addText("{dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} {dom.penisShort} against {sub.yourHis} "+getNameHole(SUB_0, S_VAGINA)+".")
 	else:
-		addText("{dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} "+getNamePenis(DOM_0)+" against {sub.yourHis} "+getNameHole(SUB_0, S_ANUS)+".")
+		addText("{dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} {dom.penisShort} against {sub.yourHis} "+getNameHole(SUB_0, S_ANUS)+".")
 
 func getYour(pcIsInvolvedText:String = "your", noPcText:String = "their") -> String:
 	if(isDom("pc")):
@@ -228,11 +228,11 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "penetrate"):
 		if(tryPenetrate(DOM_0, SUB_0, S_VAGINA)):
 			penetration(true, DOM_1, SUB_0, S_ANUS)
-			addText("{dom1.You} {dom1.youVerb('follow')}, forcing {dom1.yourHis} "+getNamePenis(DOM_1)+" down {sub.yourHis} ass.")
+			addText("{dom1.You} {dom1.youVerb('follow')}, forcing {dom1.yourHis} {dom1.penisShort} down {sub.yourHis} ass.")
 			state = "sex"
 		else:
 			penetration(false, DOM_1, SUB_0, S_ANUS)
-			addText("{dom1.You} {dom1.youVerb('try', 'tries')} to stretch {sub.yourHis} ass with {dom1.yourHis} "+getNamePenis(DOM_1)+".")
+			addText("{dom1.You} {dom1.youVerb('try', 'tries')} to stretch {sub.yourHis} ass with {dom1.yourHis} {dom1.penisShort}.")
 		return
 	if(_id == "stop"):
 		endActivity()

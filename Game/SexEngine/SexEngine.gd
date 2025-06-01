@@ -1298,6 +1298,8 @@ func getBestAnimation():
 	#if(foundAnimInfo != null && foundAnimInfo.size() == 2):
 	#	foundAnimInfo.append({})
 
+	var leashesInfo:Dictionary = gatherAllLeashes()
+
 	if(foundAnimInfo != null && foundAnimInfo.size() > 2):
 		var extraInfoDict:Dictionary = foundAnimInfo[2]
 		
@@ -1306,19 +1308,23 @@ func getBestAnimation():
 			if(extraInfoDict.has(npcField)):
 				var theCharID:String = extraInfoDict[npcField]
 				var theInfo:SexInfoBase
+				
+				var bodyStateName:String = "bodyState"
+				if(npcField != "pc"):
+					bodyStateName = npcField + "BodyState"
+				if(!extraInfoDict.has(bodyStateName)):
+					extraInfoDict[bodyStateName] = {}
+				
 				if(subs.has(theCharID)):
 					theInfo = subs[theCharID]
 				if(doms.has(theCharID)):
 					theInfo = doms[theCharID]
 				if(theInfo && theInfo.didJustCame()):
 					extraInfoDict[npcField+"Cum"] = true
-					var bodyStateName:String = "bodyState"
-					if(npcField != "pc"):
-						bodyStateName = npcField + "BodyState"
-					if(!extraInfoDict.has(bodyStateName)):
-						extraInfoDict[bodyStateName] = {hard=true}
-					else:
-						extraInfoDict[bodyStateName]["hard"] = true
+					extraInfoDict[bodyStateName]["hard"] = true
+				
+				if(theInfo && leashesInfo.has(theCharID)):
+					extraInfoDict[bodyStateName]["leashedBy"] = leashesInfo[theCharID]
 
 		return foundAnimInfo
 	return null
@@ -1562,6 +1568,37 @@ func checkImpossibleActivities():
 		
 		if(theActivity.isActivityImpossibleShouldStop()):
 			theActivity.endActivity()
+
+# key= whoIsLeashed, value= leashedByWho
+func gatherAllLeashes() -> Dictionary:
+	var result:Dictionary = {}
+	for activity in activities:
+		var theLeashes:Dictionary = activity.getLeashes()
+		for whoHoldsLeashIndx in theLeashes:
+			var leashTargetIndx = theLeashes[whoHoldsLeashIndx]
+			var whoID:String = activity.getDomOrSubID(whoHoldsLeashIndx) if whoHoldsLeashIndx is int else whoHoldsLeashIndx
+			var targetID:String = activity.getDomOrSubID(leashTargetIndx) if leashTargetIndx is int else leashTargetIndx
+			result[targetID] = whoID
+		
+	return result
+
+func hasLeash(charIDWho:String, charIDTarget:String) -> bool:
+	var theLeashes:Dictionary = gatherAllLeashes()
+	if(theLeashes.has(charIDTarget) && theLeashes[charIDTarget] == charIDWho):
+		return true
+	return false
+
+func getLeashedBy(charIDTarget:String) -> String:
+	var theLeashes:Dictionary = gatherAllLeashes()
+	if(theLeashes.has(charIDTarget)):
+		return theLeashes[charIDTarget]
+	return ""
+
+func isLeashed(charIDTarget:String) -> bool:
+	var theLeashes:Dictionary = gatherAllLeashes()
+	if(theLeashes.has(charIDTarget)):
+		return true
+	return false
 
 func saveData():
 	var data = {

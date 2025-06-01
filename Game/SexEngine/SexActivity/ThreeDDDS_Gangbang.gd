@@ -249,12 +249,12 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "penetrate"):
 		if(tryPenetrate(DOM_0, SUB_0, S_VAGINA)):
 			penetration(true, DOM_1, SUB_0, S_ANUS)
-			addText("{dom1.You} {dom1.youVerb('force')} {dom1.yourHis} "+getNamePenis(DOM_1)+" down {sub.yourHis} ass.")
-			addText("{dom2.You} {dom2.youVerb('follow')}, forcing {dom2.yourHis} "+getNamePenis(DOM_2)+" down {sub.yourHis} throat.")
+			addText("{dom1.You} {dom1.youVerb('force')} {dom1.yourHis} {dom1.penisShort} down {sub.yourHis} ass.")
+			addText("{dom2.You} {dom2.youVerb('follow')}, forcing {dom2.yourHis} {dom2.penisShort} down {sub.yourHis} throat.")
 			state = "sex"
 		else:
 			penetration(false, DOM_1, SUB_0, S_ANUS)
-			addText("{dom1.You} {dom1.youVerb('try', 'tries')} to stretch {sub.yourHis} ass with {dom1.yourHis} "+getNamePenis(DOM_1)+".")
+			addText("{dom1.You} {dom1.youVerb('try', 'tries')} to stretch {sub.yourHis} ass with {dom1.yourHis} {dom1.penisShort}.")
 		return
 	if(_id == "stop"):
 		endActivity()

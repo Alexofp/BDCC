@@ -150,7 +150,7 @@ func startActivity(_args):
 	
 	#addText("{dom.You} and {dom1.you} grab {sub.you} and prepare to double-penetrate {sub.youHim}, "+getYour()+" "+getCocksName()+" are pressed against {sub.yourHis} "+getNameHole(SUB_0, S_VAGINA)+" and "+getNameHole(SUB_0, S_ANUS)+"!")
 	addText("{dom.You} {dom.youVerb('grab')} two subs and {dom.youVerb('place')} them on top of each other, forming a buttstack!")
-	addText("{dom.Your} "+getNamePenis(DOM_0)+" is pressed against {<SUB>.your}".replace("<SUB>", indxToTextID(domFocus))+" "+getNameHole(domFocus, getCurrentHole())+getThroughClothingText(DOM_0, S_PENIS)+".")
+	addText("{dom.Your} {dom.penisShort} is pressed against {<SUB>.your}".replace("<SUB>", indxToTextID(domFocus))+" "+getNameHole(domFocus, getCurrentHole())+getThroughClothingText(DOM_0, S_PENIS)+".")
 
 func onSwitchFrom(_otherActivity, _args):
 	pass
@@ -241,11 +241,11 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 				addText("{dom.You} {dom.youVerb('switch', 'switches')} {dom.yourHis} attention to {sub.you}!")
 			else:
 				addText("{dom.You} {dom.youVerb('switch', 'switches')} {dom.yourHis} attention to {sub1.you}!")
-			addText("{dom.Your} "+getNamePenis(DOM_0)+" is now pressed against {<SUB>.your}".replace("<SUB>", indxToTextID(domFocus))+" "+getNameHole(domFocus, getCurrentHole())+getThroughClothingText(DOM_0, S_PENIS)+".")
+			addText("{dom.Your} {dom.penisShort} is now pressed against {<SUB>.your}".replace("<SUB>", indxToTextID(domFocus))+" "+getNameHole(domFocus, getCurrentHole())+getThroughClothingText(DOM_0, S_PENIS)+".")
 
 		else:
 			tryPenetrate(DOM_0, domFocus, getCurrentHole(), false, true)
-			addText("{dom.You} {dom.youVerb('pull')} {dom.yourHis} "+getNamePenis(DOM_0)+" out and {dom.youVerb('shove')} it down "+("{sub.your}" if domFocus == SUB_0 else "{sub1.your}")+" "+getNameHole(domFocus, getCurrentHole())+" instead!")
+			addText("{dom.You} {dom.youVerb('pull')} {dom.yourHis} {dom.penisShort} out and {dom.youVerb('shove')} it down "+("{sub.your}" if domFocus == SUB_0 else "{sub1.your}")+" "+getNameHole(domFocus, getCurrentHole())+" instead!")
 		return
 	if(_id == "switchHole"):
 		addText("{dom.You} {dom.youVerb('switch', 'switches')} holes!")
@@ -262,10 +262,10 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		checkHolesPossible()
 		if(state == ""):
 			addText("{dom.You} {dom.youVerb('switch', 'switches')} {dom.yourHis} attention to "+("{sub.your}" if domFocus == SUB_0 else "{sub1.your}")+" other hole!")
-			addText("{dom.Your} "+getNamePenis(DOM_0)+" is now pressed against {<SUB>.your}".replace("<SUB>", indxToTextID(domFocus))+" "+getNameHole(domFocus, getCurrentHole())+getThroughClothingText(DOM_0, S_PENIS)+".")
+			addText("{dom.Your} {dom.penisShort} is now pressed against {<SUB>.your}".replace("<SUB>", indxToTextID(domFocus))+" "+getNameHole(domFocus, getCurrentHole())+getThroughClothingText(DOM_0, S_PENIS)+".")
 
 		else:
-			addText("{dom.You} {dom.youVerb('pull')} {dom.yourHis} "+getNamePenis(DOM_0)+" out and {dom.youVerb('guide')} it down the other hole.")
+			addText("{dom.You} {dom.youVerb('pull')} {dom.yourHis} {dom.penisShort} out and {dom.youVerb('guide')} it down the other hole.")
 			tryPenetrate(DOM_0, domFocus, getCurrentHole(), false, true)
 		return
 	if(_id == "cum"):
