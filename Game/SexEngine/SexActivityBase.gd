@@ -2443,9 +2443,11 @@ func squirtOnto(_indxWho:int, _indxTarget:int, _extra:Dictionary = {}):
 	if(!theChar.hasVagina()):
 		return {}
 	
+	var uniqueOrgasm:String = _extra["uniqueOrgasm"] if _extra.has("uniqueOrgasm") else ""
+	
 	var text:String = ""
 	text = RNG.pick([
-		"{<TOP>.You} {<TOP>.youVerb('arch', 'arches')} {<TOP>.yourHis} back while {<TOP>.yourHis} "+RNG.pick(["pussy", "pussy slit", "kitty"])+" twitches and squirts all over {<BOTTOM>.your} face!",
+		"{<TOP>.You} {<TOP>.youVerb('arch', 'arches')} {<TOP>.yourHis} back while {<TOP>.yourHis} "+RNG.pick(["pussy", "pussy slit", "kitty"])+" twitches and squirts all over {<BOTTOM>.your} body and face!",
 	])
 	target.cummedOnBy(theChar.getID(), FluidSource.Vagina)
 	theInfo.cum()
@@ -2459,7 +2461,8 @@ func squirtOnto(_indxWho:int, _indxTarget:int, _extra:Dictionary = {}):
 		])
 	
 	addTextTopBottom(text, _indxWho, _indxTarget)
-
+	if(uniqueOrgasm != ""):
+		sendSexEvent(SexEvent.UniqueOrgasm, _indxTarget, _indxWho, {orgasmType=uniqueOrgasm})
 
 func cumOnto(_indxWho:int, _indxTarget:int, _extra:Dictionary = {}):
 	var theInfo:SexInfoBase = getDomOrSubInfo(_indxWho)
@@ -2471,15 +2474,26 @@ func cumOnto(_indxWho:int, _indxTarget:int, _extra:Dictionary = {}):
 		return {}
 	
 	var isGeneric:bool = _extra.has("generic") && _extra["generic"]
+	var uniqueOrgasm:String = _extra["uniqueOrgasm"] if _extra.has("uniqueOrgasm") else ""
 	
 	var text:String = RNG.pick([
-		"{<TOP>.You} {<TOP>.youVerb('pull')} {<TOP>.yourHis} cock out and [b]{<TOP>.youVerb('cum')} all over {<BOTTOM>.your} face[/b]!",
+		"{<TOP>.You} {<TOP>.youVerb('pull')} {<TOP>.yourHis} {<TOP>.penisShort} out and [b]{<TOP>.youVerb('cum')} all over {<BOTTOM>.your} face[/b]!",
 		"{<TOP>.You} {<TOP>.youVerb('pull')} out, [b]cumming all over {<BOTTOM>.your} face[/b]!",
 	])
+	if(_indxWho == _indxTarget):
+		text = RNG.pick([
+			"{<TOP>.You} {<TOP>.youVerb('pull')} {<TOP>.yourHis} {<TOP>.penisShort} out and [b]{<TOP>.youVerb('cum')} all over {<TOP>.yourHis} own belly[/b]!",
+			"{<TOP>.You} {<TOP>.youVerb('pull')} out, [b]cumming all over {<TOP>.yourHis} own belly[/b]!",
+		])
 	if(isGeneric):
 		text = RNG.pick([
 			"{<TOP>.You} {<TOP>.youVerb('grunt')} as {<TOP>.youHe} [b]{<TOP>.youVerb('cum')} all over {<BOTTOM>.your} body and face[/b]!",
 		])
+		if(_indxWho == _indxTarget):
+			text = RNG.pick([
+				"{<TOP>.You} {<TOP>.youVerb('grunt')} as {<TOP>.youHe} [b]{<TOP>.youVerb('cum')} all over {<TOP>.yourHis} own belly[/b]!",
+			])
+	
 	
 	var condom:ItemBase = theChar.getWornCondom()
 	if(condom != null):
@@ -2504,6 +2518,8 @@ func cumOnto(_indxWho:int, _indxTarget:int, _extra:Dictionary = {}):
 			#satisfyGoals()
 			#state = ""
 			addTextTopBottom(text, _indxWho, _indxTarget)
+			if(uniqueOrgasm != ""):
+				sendSexEvent(SexEvent.UniqueOrgasm, _indxTarget, _indxWho, {orgasmType=uniqueOrgasm})
 			return
 	
 	target.cummedOnBy(theInfo.getCharID(), FluidSource.Penis)
@@ -2513,7 +2529,8 @@ func cumOnto(_indxWho:int, _indxTarget:int, _extra:Dictionary = {}):
 	#state = ""
 
 	addTextTopBottom(text, _indxWho, _indxTarget)
-
+	if(uniqueOrgasm != ""):
+		sendSexEvent(SexEvent.UniqueOrgasm, _indxTarget, _indxWho, {orgasmType=uniqueOrgasm})
 
 
 
@@ -2684,3 +2701,86 @@ func strokePenis(_indxActor:int, _indxTarget:int):
 			"{sub.Your} {sub.penisShort} is pulsing, begging for more touch.",
 			"{sub.Your} shaft is throbbing with need.",
 		]).replace("dom.", actorInfo.getCharID()+".").replace("sub.", targetInfo.getCharID()+"."))
+
+func cupballs(_indxWho:int, _indxTarget:int, poseDescription:String = ""):
+	#var theInfo:SexInfoBase = getDomOrSubInfo(_indxWho)
+	var theChar:BaseCharacter = getDomOrSub(_indxWho)
+	#var targetInfo:SexInfoBase = getDomOrSubInfo(_indxTarget)
+	var target:BaseCharacter = getDomOrSub(_indxTarget)
+	
+	var penis:BodypartPenis = target.getBodypart(BodypartSlot.Penis)
+	if(penis == null):
+		return
+	var cumProduction:FluidProduction = penis.getFluidProduction()
+	if(cumProduction == null):
+		return
+	
+	var level:float = cumProduction.getFluidLevel()
+	var text:String
+	if(level <= 0.3):
+		text = RNG.pick([
+			"{dom.You} "+RNG.pick(["{dom.youVerb('grope')}", "{dom.youVerb('fondle')}", "{dom.youVerb('play')} with"])+" {sub.your} balls"+poseDescription+" and {dom.youVerb('feel')} them "+RNG.pick(["getting heavier", "becoming more heavy", "producing more seed", "producing cum"])+".",
+		])
+	elif(level <= 0.7):
+		text = RNG.pick([
+			"{dom.You} "+RNG.pick(["{dom.youVerb('grope')}", "{dom.youVerb('fondle')}", "{dom.youVerb('play')} with"])+" {sub.your} balls"+poseDescription+" and {dom.youVerb('feel')} quite some weight to them. But they still "+RNG.pick(["get even more heavy", "produce even more seed", "produce more cum"])+" as {dom.youHe} {dom.youVerb('tease')} them.",
+		])
+	else:
+		text = RNG.pick([
+			"{dom.You} "+RNG.pick(["{dom.youVerb('grope')}", "{dom.youVerb('fondle')}", "{dom.youVerb('play')} with"])+" {sub.your} balls"+poseDescription+" and {dom.youVerb('realize')} "+RNG.pick(["that they are full", "how heavy they are", "how much cum is stored in them"])+". They "+RNG.pick(["tense up slightly"])+" as {dom.youHe} {dom.youVerb('tease')} them.",
+		])
+	addTextRaw(text.replace("{dom.", "{"+theChar.getID()+".").replace("{sub.", "{"+target.getID()+"."))
+	cumProduction.fillPercent(0.2)
+
+func rubWithFeet(_indxWho:int, _indxTarget:int, _hole:String):
+	#var theInfo:SexInfoBase = getDomOrSubInfo(_indxWho)
+	var theChar:BaseCharacter = getDomOrSub(_indxWho)
+	var targetInfo:SexInfoBase = getDomOrSubInfo(_indxTarget)
+	var target:BaseCharacter = getDomOrSub(_indxTarget)
+	
+	var text:String = ""
+	
+	if(_hole == S_PENIS):
+		text += RNG.pick([
+			"{dom.You} {dom.youVerb('use')} {dom.yourHis} {dom.toes} to pleasure {sub.your} {sub.penisShort}.",
+			"{dom.You} {dom.youVerb('rub')} {dom.yourHis} {dom.foot} against {sub.your} {sub.penisShort}.",
+			"{dom.You} {dom.youVerb('rub')} {sub.your} {sub.penisShort} with {dom.yourHis} {dom.foot}.",
+			"{dom.You} {dom.youVerb('pleasure')} {sub.your} {sub.penisShort} with {dom.yourHis} {dom.toes}.",
+			"{dom.You} {dom.youVerb('pleasure')} {sub.your} {sub.penisShort} with {dom.yourHis} {dom.feet}.",
+			"{dom.You} {dom.youVerb('stroke')} {sub.your} {sub.penisShort} with {dom.yourHis} {dom.foot}.",
+			"{dom.You} {dom.youVerb('stroke')} {sub.your} {sub.penisShort} with {dom.yourHis} {dom.feet}.",
+		])
+		if((targetInfo.isCloseToCumming() || RNG.chance(20)) && !isStrapon(_indxTarget)):
+			text += RNG.pick([
+				" {sub.YourHis} {sub.penisType} is twitching as it being pleasured.",
+				" {sub.YourHis} {sub.penisType} is throbbing from being rubbed so much.",
+				" {sub.YourHis} {sub.penisType} is dripping pre from being rubbed so much.",
+				" {sub.YourHis} {sub.penisType} is coating {dom.your} {dom.toes} with its precum."
+			])
+		if(targetInfo.isCloseToCumming() && RNG.chance(50)):
+			text += RNG.pick([
+				" {sub.You} {sub.youAre} about to cum!",
+				" {sub.You} can't hold back much longer!"
+			])
+	
+	if(_hole in [S_VAGINA, S_ANUS]):
+		text += RNG.pick([
+			"{dom.You} {dom.youVerb('use')} {dom.yourHis} {dom.toes} to pleasure {sub.your} "+getNameHole(_indxTarget, _hole)+".",
+			"{dom.You} {dom.youVerb('use')} {dom.yourHis} {dom.feet} to pleasure {sub.your} "+getNameHole(_indxTarget, _hole)+".",
+			"{dom.You} {dom.youVerb('rub')} {dom.yourHis} {dom.foot} against {sub.your} "+getNameHole(_indxTarget, _hole)+".",
+			"{dom.You} {dom.youVerb('rub')} {sub.yourHis} "+getNameHole(_indxTarget, _hole)+" with {dom.yourHis} {dom.foot}."
+		])
+	if(_hole == S_VAGINA):
+		if(targetInfo.isCloseToCumming() || RNG.chance(20)):
+			text += RNG.pick([
+				" {sub.YourHis} slit is making wet noises as it being pleasured.",
+				" {sub.YourHis} wet pussy is twitching from being rubbed so much.",
+				" {sub.YourHis} slit is dripping from being rubbed so much.",
+				" {sub.YourHis} slit is coating {dom.your} toes with its juices."
+			])
+		if(targetInfo.isCloseToCumming() && RNG.chance(50)):
+			text += RNG.pick([
+				" {sub.You} {sub.youAre} about to cum!",
+				" {sub.You} can't hold back much longer!"
+			])
+	addTextRaw(text.replace("{dom.", "{"+theChar.getID()+".").replace("{sub.", "{"+target.getID()+"."))

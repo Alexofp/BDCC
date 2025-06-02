@@ -54,26 +54,10 @@ func kissingfeet_processTurn():
 	teasingTimes += 1
 
 func rubpussy_processTurn():
-	var text:String = ""
-	text += RNG.pick([
-		"{dom.You} {dom.youVerb('use')} {dom.yourHis} toes to pleasure {sub.your} pussy.",
-		"{dom.You} {dom.youVerb('rub')} {dom.yourHis} foot against {sub.your} pussy.",
-		"{dom.You} {dom.youVerb('rub')} {sub.yourHis} pussy with {dom.yourHis} foot."
-	])
 	getSubInfo().stimulateArousalZone(0.1, BodypartSlot.Vagina, 0.5)
 	affectSub(getSubInfo().fetishScore({Fetish.FeetplayReceiving: 1.0})+0.3, 0.1, -0.005, -0.002)
-	if(getSubInfo().isCloseToCumming() || RNG.chance(20)):
-		text += RNG.pick([
-			" {sub.YourHis} slit is making wet noises as it being pleasured.",
-			" {sub.YourHis} wet pussy is twitching from being rubbed so much.",
-			" {sub.YourHis} slit is dripping from being rubbed so much.",
-			" {sub.YourHis} slit is coating {dom.your} toes with its juices."
-		])
-	if(getSubInfo().isCloseToCumming() && RNG.chance(50)):
-		text += RNG.pick([
-			" {sub.You} {sub.youAre} about to cum!",
-			" {sub.You} can't hold back much longer!"
-		])
+	rubWithFeet(DOM_0, SUB_0, S_VAGINA)
+	
 	if(isReadyToCum(SUB_0) && !getSubInfo().canDoActions()):
 		satisfyGoals()
 		getSub().cummedOnBy(getSubID(), FluidSource.Vagina)
@@ -81,33 +65,14 @@ func rubpussy_processTurn():
 			getSub().cummedOnBy(getSubID(), FluidSource.Penis, 0.3)
 		getSubInfo().cum()
 		state = ""
-		text += " {sub.Your} pussy is squirting all over {sub.yourHis} thighs as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!"
-		sendSexEvent(SexEvent.UniqueOrgasm, DOM_0, SUB_0, {orgasmType="feet"})
-	addText(text)
+		addText("{sub.Your} pussy is squirting all over {sub.yourHis} thighs as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!")
+		sendSexEvent(SexEvent.UniqueOrgasm, DOM_0, SUB_0, {orgasmType=UniqueOrgasm.Feet})
 
 func rubpenis_processTurn():
-	var text:String = ""
-	text += RNG.pick([
-		"{dom.You} {dom.youVerb('use')} {dom.yourHis} toes to pleasure {sub.your} cock.",
-		"{dom.You} {dom.youVerb('rub')} {dom.yourHis} foot against {sub.your} shaft.",
-		"{dom.You} {dom.youVerb('rub')} {sub.yourHis} dick with {dom.yourHis} foot.",
-		"{dom.You} {dom.youVerb('pleasure')} {sub.yourHis} dick with {dom.yourHis} toes.",
-		"{dom.You} {dom.youVerb('stroke')} {sub.yourHis} member with {dom.yourHis} foot."
-	])
 	getSubInfo().stimulateArousalZone(0.1, BodypartSlot.Penis, 0.5)
 	affectSub(getSubInfo().fetishScore({Fetish.FeetplayReceiving: 1.0})+0.3, 0.1, -0.005, -0.002)
-	if(getSubInfo().isCloseToCumming() || RNG.chance(20)):
-		text += RNG.pick([
-			" {sub.YourHis} cock is twitching as it being pleasured.",
-			" {sub.YourHis} hard dick is throbbing from being rubbed so much.",
-			" {sub.YourHis} member is dripping pre from being rubbed so much.",
-			" {sub.YourHis} cock is coating {dom.your} toes with its precum."
-		])
-	if(getSubInfo().isCloseToCumming() && RNG.chance(50)):
-		text += RNG.pick([
-			" {sub.You} {sub.youAre} about to cum!",
-			" {sub.You} can't hold back much longer!"
-		])
+	rubWithFeet(DOM_0, SUB_0, S_PENIS)
+	
 	if(getSubInfo().isReadyToCum() && !getSubInfo().canDoActions()):
 		satisfyGoals()
 		getSub().cummedOnBy(getSubID(), FluidSource.Penis)
@@ -120,9 +85,8 @@ func rubpenis_processTurn():
 			howCumText = "is filling {sub.yourHis} condom full"
 		if(getSub().getWornPenisPump() != null):
 			howCumText = "is filling {sub.yourHis} penis pump full"
-		text += " {sub.Your} cock "+howCumText+" as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!"
-		sendSexEvent(SexEvent.UniqueOrgasm, DOM_0, SUB_0, {orgasmType="feet"})
-	addText(text)
+		addText("{sub.Your} cock "+howCumText+" as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!")
+		sendSexEvent(SexEvent.UniqueOrgasm, DOM_0, SUB_0, {orgasmType=UniqueOrgasm.Feet})
 
 func onheadwaitingforanswer_processTurn():
 	var text:String = "{dom.You} {dom.youVerb('hold')} {sub.you} pinned to the floor with {dom.yourHis} foot while waiting for {sub.youHim}."

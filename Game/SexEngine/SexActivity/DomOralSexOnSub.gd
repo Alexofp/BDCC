@@ -326,32 +326,10 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		addText(text)
 		return
 	if(_id == "cupballs"):
-		var penis:BodypartPenis = getSub().getBodypart(BodypartSlot.Penis)
-		if(penis == null):
-			return
-		var cumProduction:FluidProduction = penis.getFluidProduction()
-		if(cumProduction == null):
-			return
-		
-		var level:float = cumProduction.getFluidLevel()
-		var text:String
-		if(level <= 0.3):
-			text = RNG.pick([
-				"{dom.You} "+RNG.pick(["{dom.youVerb('grope')}", "{dom.youVerb('fondle')}", "{dom.youVerb('play')} with"])+" {sub.your} balls and {dom.youVerb('feel')} them "+RNG.pick(["getting heavier", "becoming more heavy", "producing more seed", "producing cum"])+".",
-			])
-		elif(level <= 0.7):
-			text = RNG.pick([
-				"{dom.You} "+RNG.pick(["{dom.youVerb('grope')}", "{dom.youVerb('fondle')}", "{dom.youVerb('play')} with"])+" {sub.your} balls and {dom.youVerb('feel')} quite some weight to them. But they still "+RNG.pick(["get even more heavy", "produce even more seed", "produce more cum"])+" as {dom.youHe} {dom.youVerb('tease')} them.",
-			])
-		else:
-			text = RNG.pick([
-				"{dom.You} "+RNG.pick(["{dom.youVerb('grope')}", "{dom.youVerb('fondle')}", "{dom.youVerb('play')} with"])+" {sub.your} balls and {dom.youVerb('realize')} "+RNG.pick(["that they are full", "how heavy they are", "how much cum is stored in them"])+". They "+RNG.pick(["tense up slightly"])+" as {dom.youHe} {dom.youVerb('tease')} them.",
-			])
-		cumProduction.fillPercent(0.2)
+		cupballs(DOM_0, SUB_0)
 		stimulate(DOM_0, S_MOUTH, SUB_0, S_PENIS, I_TEASE, Fetish.OralSexGiving, SPEED_SLOW)
 		#affectSub(getSubInfo().fetishScore({Fetish.OralSexReceiving: 1.0}), 0.1, -0.05, -0.01)
 		
-		addText(text)
 		return
 	if(_id == "rubclit"):
 		var text = RNG.pick([

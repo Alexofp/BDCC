@@ -12,12 +12,12 @@ func _init():
 func getVisibleName() -> String:
 	if(GM.pc):
 		if(GM.pc.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsPlanti)):
-			return "Feetjob"
+			return "Footjob"
 	return activityName
 
 func getGoals():
 	return {
-		#SexGoal.SubUndressSub: 1.0,
+		SexGoal.Pawjob: 1.0,
 	}
 
 func getSupportedSexTypes():
@@ -65,7 +65,13 @@ func processTurn():
 
 func pawjob_processTurn():
 	stimulate(DOM_0, S_LEGS, SUB_0, S_PENIS, I_NORMAL, Fetish.FeetplayGiving, SPEED_SLOW if !isThrusting else SPEED_MEDIUM)
-	addText("Pawjob happens.")
+	if(isThrusting):
+		addTextPick([
+			"{sub.You} {sub.youVerb('thrust')} {sub.yourHis} {sub.penisType} between the {dom.feet}.",
+			"{sub.You} eagerly {sub.youVerb('thrust')} {sub.yourHis} {sub.penisType} between the {dom.feet}.",
+		])
+	rubWithFeet(DOM_0, SUB_0, S_PENIS)
+	
 	
 func getActions(_indx:int):
 	if(_indx == DOM_0):
@@ -73,15 +79,17 @@ func getActions(_indx:int):
 		
 		if(state == ""):
 			if(hasBodypartUncovered(SUB_0, S_PENIS)):
-				addAction("stroke", getContinueSexScore(DOM_0, SUB_0, S_LEGS), "Stroke cock", "Begin stroking the sub's penis with your feet/hind paws")
+				addAction("stroke", getContinueSexScore(DOM_0, SUB_0, S_PENIS, S_LEGS), "Stroke cock", "Begin stroking the sub's penis with your feet/hind paws")
 		if(state == "pawjob"):
-			addAction("pause", getPauseSexScore(DOM_0, SUB_0, S_LEGS), "Pause stroking", "Pause the stroking")
-		
+			addAction("pause", getPauseSexScore(DOM_0, SUB_0, S_PENIS, S_LEGS), "Pause stroking", "Pause the stroking")
+			addAction("rubballs", 0.1, "Rub balls", "Rub the sub's balls with your feet!")
+			addAction("squeeze", getDomInfo().getSadisticActionStore(), "Squeeze cock!", "Painfully squeeze that cock between your feet")
+			
 	if(_indx == SUB_0):
 		addAction("pullaway", getSubInfo().getResistScore(), "Pull away", "Try to pull away", {A_CHANCE: getSubResistChance(30.0, 25.0)})
-		if(isReadyToCumHandled(SUB_0)):
-			addAction("subcum", 1.0, "Cum!", "You're about to cum", {A_PRIORITY: 1001})
 		if(state == "pawjob"):
+			if(isReadyToCumHandled(SUB_0)):
+				addAction("subcum", 1.0, "Cum!", "You're about to cum", {A_PRIORITY: 1001})
 			if(!isThrusting):
 				addAction("subthrust", fetish(SUB_0, Fetish.FeetplayReceiving)*0.5, "Thrust!", "Begin thrusting your cock between their legs.")
 		
@@ -94,6 +102,16 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		state = "pawjob"
 		addText("Stroke begins.")
 		return
+	if(_id == "squeeze"):
+		addText("{dom.You} suddenly {dom.youVerb('close')} {dom.yourHis} {dom.feet} around {sub.yourHis} {sub.penisShort}, [b]squeezing it hard[/b]!")
+		strike(DOM_0, SUB_0, STRIKE_NORMAL)
+		# ow ow
+		return
+	if(_id == "rubballs"):
+		cupballs(DOM_0, SUB_0, " using {dom.yourHis} {dom.feet}")
+		stimulate(DOM_0, S_LEGS, SUB_0, S_PENIS, I_NORMAL, Fetish.FeetplayGiving, SPEED_SLOW)
+		return
+		
 	if(_id == "pause"):
 		state = ""
 		isThrusting = false
@@ -101,8 +119,9 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		return
 	
 	if(_id == "subcum"):
-		cumOnto(SUB_0, DOM_0, {"generic": true})
+		cumOnto(SUB_0, DOM_0, {"generic": true, "uniqueOrgasm": UniqueOrgasm.Feet})
 		state = ""
+		satisfyGoals()
 		return
 	if(_id == "subthrust"):
 		isThrusting = true
