@@ -1,5 +1,7 @@
 extends SexActivityBase
 
+var leashTimer:int = 0
+
 func _init():
 	id = "DomLeashesSub"
 	
@@ -49,19 +51,24 @@ func getCheckTagsSub() -> Array:
 	return [SexActivityTag.Leashed]
 
 func startActivity(_args):
-	addText("{dom.You} {dom.youVerb('clip')} a leash to {sub.your} collar!")
+	addText("{dom.You} {dom.youVerb('pull')} out a [b]leash[/b] and {dom.youVerb('start')} trying to clip it to {sub.your} collar!")
 
-func processTurn():
-	return
-	
+func init_processTurn():
+	leashTimer += 1
+	if(leashTimer >= 2):
+		setState("leashed")
+		addText("{dom.You} {dom.youVerb('clip')} a [b]leash[/b] to {sub.your} collar!")
+
 func getActions(_indx:int):
 	if(_indx == DOM_0):
-		addAction("stop", 0.0, "Remove leash", "Stop leashing them", {A_CATEGORY: ["Humiliate"]})
-		if(!getSubInfo().isUnconscious()):
-			var yankScore:float = getDomInfo().getIsAngryScore() * 1.0 * max(0.1, 0.1 + getDomInfo().personalityScore({PersonalityStat.Mean: 1.0})) - getSubInfo().getAboutToPassOutScore() * getDomInfo().fetishScore({Fetish.UnconsciousSex: -1.0})
-			addAction("yank", yankScore, "Yank leash", "Yank on that leash hard!", {A_CATEGORY: ["Violence"]})
-	#if(_indx == SUB_0):
-	#	addAction("pullaway", getSubInfo().getResistScore(), "Pull away", "Try to pull away", {A_CHANCE: getSubResistChance(30.0, 25.0)})
+		if(state == "leashed"):
+			addAction("stop", 0.0, "Remove leash", "Stop leashing them", {A_CATEGORY: ["Humiliate"]})
+			if(!getSubInfo().isUnconscious()):
+				var yankScore:float = getDomInfo().getIsAngryScore() * 1.0 * max(0.1, 0.1 + getDomInfo().personalityScore({PersonalityStat.Mean: 1.0})) - getSubInfo().getAboutToPassOutScore() * getDomInfo().fetishScore({Fetish.UnconsciousSex: -1.0})
+				addAction("yank", yankScore, "Yank leash", "Yank on that leash hard!", {A_CATEGORY: ["Violence"]})
+	if(_indx == SUB_0):
+		if(state == ""):
+			addAction("pullaway", getSubInfo().getResistScore(), "Resist leash!", "Try to pull away from the leash", {A_CHANCE: getSubResistChance(90.0, 40.0)})
 
 func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "stop"):
@@ -74,17 +81,14 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		return 
 
 	if(_id == "pullaway"):
-		var successChance:float = getSubResistChance(30.0, 25.0)
+		var successChance:float = getSubResistChance(90.0, 40.0)
 		if(RNG.chance(successChance)):
-			addText("{sub.You} {sub.youVerb('pull')} away from {dom.you}.")
+			addText("{sub.You} {sub.youVerb('resist')} and {sub.youVerb('manage')} to avoid getting leashed by {dom.you}!")
 			getDomInfo().addAnger(0.3)
-			if(getState() != ""):
-				setState("")
-			else:
-				endActivity()
+			endActivity()
 			return
 		else:
-			addText("{sub.You} {sub.youVerb('try', 'tries')} to pull away from {dom.you} but {sub.youVerb('fail')}.")
+			addText("{sub.You} {sub.youVerb('try', 'tries')} to resist getting leashed but {sub.youVerb('fail')}.")
 			getDomInfo().addAnger(0.1)
 			return
 			
@@ -100,6 +104,8 @@ func getSubResistChance(baseChance:float, domAngerRemoval:float) -> float:
 	return max(theChance, 5.0)
 	
 func getLeashes() -> Dictionary:
+	if(state == ""):
+		return {}
 	return {
 		DOM_0: SUB_0,
 	}
@@ -107,11 +113,11 @@ func getLeashes() -> Dictionary:
 func saveData():
 	var data = .saveData()
 	
-	#data["tick"] = tick
+	data["leashTimer"] = leashTimer
 
 	return data
 	
 func loadData(data):
 	.loadData(data)
 	
-	#tick = SAVE.loadVar(data, "tick", 0)
+	leashTimer = SAVE.loadVar(data, "leashTimer", 0)

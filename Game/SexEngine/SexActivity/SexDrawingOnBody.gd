@@ -1,5 +1,8 @@
 extends SexActivityBase
 
+var customWritingID:String = ""
+var customWritingZone:int = -1
+
 func _init():
 	id = "SexDrawingOnBody"
 	
@@ -21,12 +24,31 @@ func getSupportedSexTypes():
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	return _domInfo.fetishScore({Fetish.Bodywritings: 0.05}) * (1.0 + _domInfo.personalityScore({PersonalityStat.Mean: 0.3}))
 
+func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
+	if(!_domInfo.getChar().isPlayer()):
+		.getStartActions(_sexEngine, _domInfo, _subInfo)
+		return
+	
+	var writingsRandomList:Array = BodyWritings.getRandomWritingIDAmount(5)
+	for writingID in writingsRandomList:
+		var writingText:String = BodyWritings.getWritingText(writingID)
+		var randomZoneForWriting:int = BodyWritings.getRandomZoneForWritingID(writingID)
+		var randomZoneName:String = BodyWritingsZone.getZoneVisibleName(randomZoneForWriting)
+		
+		addStartAction([writingID, randomZoneForWriting], writingText, "Write '"+writingText+"' on the sub's "+randomZoneName, 0.0, {
+			A_CATEGORY: ["Humiliate", "Draw on body"],
+		})
+
 func getTags(_indx:int) -> Array:
 	if(_indx == DOM_0):
 		return [SexActivityTag.HandsUsed]
 	return []
 
 func startActivity(_args):
+	if(_args is Array && _args.size() >= 2):
+		customWritingID = _args[0]
+		customWritingZone = _args[1]
+	
 	affectSub(getSubInfo().fetishScore({Fetish.Bodywritings: 1.0}, -0.25), 0.01, -0.2, -0.02)
 	addText("{dom.You} {dom.youVerb('pull')} out a [b]black marker[/b].")
 	talk(DOM_0, SUB_0, SexReaction.AboutToDrawOnBody)
@@ -49,8 +71,10 @@ func abouttodraw_processTurn():
 	var zone:int = BodyWritingsZone.getRandomZone()
 	if(getSexType() == SexType.SlutwallSex):
 		zone = BodyWritingsZone.getRandomZoneLowerPart()
+	if(customWritingZone >= 0):
+		zone = customWritingZone
 	
-	var writingID:String = BodyWritings.getRandomWritingIDForZone(zone)
+	var writingID:String = BodyWritings.getRandomWritingIDForZone(zone) if customWritingID == "" else customWritingID
 	getSub().addBodywriting(zone, writingID)
 	sendSexEvent(SexEvent.BodyWritingAdded, DOM_0, SUB_0, {zone=zone,writingID=writingID})
 	
@@ -90,3 +114,17 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		if(RNG.chance(50)):
 			talk(SUB_0, DOM_0, SexReaction.Resisting)
 		return
+
+func saveData():
+	var data = .saveData()
+	
+	data["customWritingID"] = customWritingID
+	data["customWritingZone"] = customWritingZone
+
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	customWritingID = SAVE.loadVar(data, "customWritingID", "")
+	customWritingZone = SAVE.loadVar(data, "customWritingZone", -1)

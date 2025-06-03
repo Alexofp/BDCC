@@ -2116,6 +2116,14 @@ func getWornPenisPump():
 
 func isWearingCondom():
 	return getWornCondom() != null
+	
+func isWearingNonEmptyCondom() -> bool:
+	var theCondom = getWornCondom()
+	if(theCondom == null):
+		return false
+	if(!theCondom.getFluids() || theCondom.getFluids().isEmpty()):
+		return false
+	return true
 
 func getArousal() -> float:
 	return clamp(arousal, 0.0, 1.0)

@@ -12,7 +12,7 @@ var turnsLastStim:int = 0 # How many turns since last stimulation
 var satisfaction:float = 0.0
 var frustration:float = 0.0
 
-var justCame = false
+var justCame:bool = false
 
 func getSexEngine():
 	if(sexEngineRef == null):

@@ -980,6 +980,7 @@ func doAction(_actionInfo:Dictionary):
 			startActivity(_actionInfo["activityID"], "pc", _actionInfo["target"], _actionInfo["args"])
 		else:
 			startActivity(_actionInfo["activityID"], _actionInfo["target"], "pc", _actionInfo["args"])
+		doFullTurn()
 	if(_actionInfo["id"] == "joinAction"):
 		clearOutputRaw()
 		var activity = getActivityWithUniqueID(_actionInfo["activityID"])
@@ -1173,7 +1174,7 @@ func endSex():
 			if(theCondom.getFluids() != null):
 				if(!theCondom.getFluids().isEmpty()):
 					theCondom.destroyMe()
-					saveItemToLoot(theCondom)
+					saveCondomToLootIfPerk(theCondom)
 		
 		subInfo.getChar().afterSexEnded(subInfo)
 		subInfo.getChar().onSexEnded({sexEngine=self,isDom=false,sexFullResult=sexResult,sexResult=sexResult.subs[subID]})

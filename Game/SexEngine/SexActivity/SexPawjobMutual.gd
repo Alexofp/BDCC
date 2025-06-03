@@ -19,7 +19,7 @@ func getVisibleName() -> String:
 
 func getGoals():
 	return {
-		#SexGoal.SubUndressSub: 1.0,
+		SexGoal.Pawjob: 1.0,
 	}
 
 func getSupportedSexTypes():
@@ -62,7 +62,7 @@ func getCheckTagsSub() -> Array:
 	return [SexActivityTag.HavingSex, SexActivityTag.PenisUsed]
 
 func startActivity(_args):
-	addText("MUTUAL PAWJOB.")
+	addText("{dom.You} {dom.youVerb('pull')} {sub.you} down to the floor. {dom.YourHis} {dom.feet} are resting near {sub.your} {sub.penisShort}.")
 	
 	stimulate(DOM_0, S_LEGS, SUB_0, S_PENIS, I_TEASE, Fetish.FeetplayGiving)
 
@@ -137,7 +137,10 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		offerTime = 0
 		state = "pawjob"
 		getDomInfo().addAnger(-0.2)
-		addText("{sub.You} {sub.youVerb('agree')}!")
+		if(getDom().hasReachablePenis()):
+			addText("{sub.You} {sub.youVerb('agree')} to the offer and {sub.youVerb('begin')} teasing {dom.your} {dom.penisShort} with {sub.yourHis} {sub.feet}.")
+		else:
+			addText("{sub.You} {sub.youVerb('agree')} to the offer and {sub.youVerb('begin')} teasing {dom.your} {pussy} with {sub.yourHis} {sub.feet}.")
 		return
 	if(_id == "offer"):
 		offerTime = 3
@@ -145,7 +148,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		return
 	if(_id == "pause"):
 		state = ""
-		addText("Pawjob pause.")
+		addText("{dom.You} {dom.youVerb('pause')} the action.")
 		canJustContinue = true
 		return
 	if(_id == "pullaway"):

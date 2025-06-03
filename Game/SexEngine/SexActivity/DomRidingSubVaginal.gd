@@ -409,11 +409,6 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "stop"):
 		endActivity()
 		addText("{dom.You} {dom.youVerb('pull')} {dom.yourself} away from {sub.your} "+getDickName()+" and {dom.youVerb('get')} up.")
-		var condom:ItemBase = getSub().getWornCondom()
-		if(condom != null):
-			addText("{dom.You} {dom.youVerb('dispose')} of {sub.yourHis} condom.")
-			condom.destroyMe()
-			getSexEngine().saveCondomToLootIfPerk(condom)
 		return
 	if(_id == "domcum"):
 		getDom().cumOnFloor()
@@ -497,13 +492,6 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 				else:
 					state = "inside"
 				
-				if(!knotSuccess):
-					condom.destroyMe()
-					getSexEngine().saveCondomToLootIfPerk(condom)
-					text += RNG.pick([
-						" {dom.You} {dom.youVerb('dispose')} of the used condom.",
-					])
-				
 				addText(text)
 				return
 		
@@ -535,10 +523,8 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 				condom.destroyMe()
 			else:
 				text += RNG.pick([
-					" {sub.You} "+RNG.pick(["{sub.youVerb('fill')}", "{sub.youVerb('stuff')}"])+" {sub.yourHis} condom! {dom.You} {dom.youVerb('dispose')} of it.",
+					" {sub.You} "+RNG.pick(["{sub.youVerb('fill')}", "{sub.youVerb('stuff')}"])+" {sub.yourHis} condom!",
 				])
-				condom.destroyMe()
-				getSexEngine().saveCondomToLootIfPerk(condom)
 				getSub().cumInItem(condom)
 				getSubInfo().cum()
 				satisfyGoals()

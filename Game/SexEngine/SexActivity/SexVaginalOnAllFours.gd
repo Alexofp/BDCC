@@ -540,40 +540,9 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		applyTallymarkIfNeeded(usedBodypart)
 		return
 	if(_id == "cumpullout"):
-		var text:String = RNG.pick([
-			"{dom.You} {dom.youVerb('pull')} {dom.yourHis} "+getDickName()+" out and [b]cums all over {sub.your} butt[/b]!",
-			"{dom.You} {dom.youVerb('pull')} out, [b]cumming all over {sub.your} ass[/b]!",
-		])
-		
-		var condom:ItemBase = getDomCondom()
-		if(condom != null):
-			var breakChance = condom.getCondomBreakChance()
-			
-			if(RNG.chance(breakChance)):
-				text = "[b]The condom broke![/b] "+text
-				condom.destroyMe()
-			else:
-				text = RNG.pick([
-					"{dom.You} {dom.youVerb('pull')} {dom.yourHis} "+getDickName()+" out and {dom.youVerb('fill')} {dom.yourHis} condom! {dom.You} {dom.youVerb('dispose')} of it.",
-					"{dom.You} {dom.youVerb('pull')} out, stuffing {dom.yourHis} condom! {dom.You} {dom.youVerb('dispose')} of it.",
-				])
-				condom.destroyMe()
-				getSexEngine().saveCondomToLootIfPerk(condom)
-				getDom().cumInItem(condom)
-				getDomInfo().cum()
-				satisfyGoals()
-				state = ""
-				
-				addText(text)
-				applyTallymarkIfNeeded(usedBodypart)
-				return
-		
-		getSub().cummedOnBy(getDomID(), FluidSource.Penis)
-		getDomInfo().cum()
+		cumOnto(DOM_0, SUB_0)
 		satisfyGoals()
 		state = ""
-		
-		addText(text)
 		applyTallymarkIfNeeded(usedBodypart)
 		return
 	if(_id == "continuefucking"):
@@ -627,11 +596,6 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		var text:String = RNG.pick([
 			"{dom.You} {dom.youVerb('pull')} {dom.yourHis} "+getDickName()+" away.",
 		])
-		var condom:ItemBase = getDomCondom()
-		if(condom != null):
-			text += " {dom.You} {dom.youVerb('dispose')} of {dom.yourHis} condom."
-			condom.destroyMe()
-			getSexEngine().saveCondomToLootIfPerk(condom)
 		
 		addText(text)
 		return

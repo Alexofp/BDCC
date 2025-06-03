@@ -56,7 +56,7 @@ func getCheckTagsSub() -> Array:
 	return [SexActivityTag.HavingSex, SexActivityTag.PenisUsed]
 
 func startActivity(_args):
-	addText("Change me.")
+	addText("{dom.You} {dom.youVerb('sit')} down and {dom.youVerb('reach', 'reaches')} {dom.yourHis} {dom.feet} out towards {sub.your} crotch!")
 	
 	stimulate(DOM_0, S_LEGS, SUB_0, S_PENIS, I_TEASE, Fetish.FeetplayGiving)
 
@@ -96,11 +96,11 @@ func getActions(_indx:int):
 func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "stop"):
 		endActivity()
-		addText("{dom.You} pulled away.")
+		addText("{dom.You} pulled {dom.yourHis} legs away.")
 		return 
 	if(_id == "stroke"):
 		state = "pawjob"
-		addText("Stroke begins.")
+		addText("{dom.You} gently {dom.youVerb('wrap')} {dom.yourHis} {dom.feet} around {sub.yourHis} member.")
 		return
 	if(_id == "squeeze"):
 		addText("{dom.You} suddenly {dom.youVerb('close')} {dom.yourHis} {dom.feet} around {sub.yourHis} {sub.penisShort}, [b]squeezing it hard[/b]!")
@@ -115,7 +115,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "pause"):
 		state = ""
 		isThrusting = false
-		addText("Pawjob pause.")
+		addText("{dom.You} {dom.youVerb('decide')} to take a pause.")
 		return
 	
 	if(_id == "subcum"):

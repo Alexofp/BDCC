@@ -221,11 +221,6 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 					getSub().cumInItem(condom)
 					getSubInfo().cum()
 					setState("")
-					text += RNG.pick([
-						" {dom.You} {dom.youVerb('dispose')} of the used condom.",
-					])
-					condom.destroyMe()
-					getSexEngine().saveCondomToLootIfPerk(condom)
 					
 					addText(text)
 					return
@@ -266,11 +261,6 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 					getSub().cumInItem(condom)
 					getSubInfo().cum()
 					setState("")
-					text += RNG.pick([
-						" {dom.You} {dom.youVerb('dispose')} of the used condom.",
-					])
-					condom.destroyMe()
-					getSexEngine().saveCondomToLootIfPerk(condom)
 					
 					addText(text)
 					return
@@ -310,11 +300,6 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 					getSub().cumInItem(condom)
 					getSubInfo().cum()
 					setState("")
-					text += RNG.pick([
-						" {dom.You} {dom.youVerb('dispose')} of the used condom.",
-					])
-					condom.destroyMe()
-					getSexEngine().saveCondomToLootIfPerk(condom)
 					
 					addText(text)
 					return

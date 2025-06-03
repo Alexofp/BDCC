@@ -1272,11 +1272,6 @@ func doCumBJDom(isDeepthroat:bool = false):
 			getDom().cumInItem(condom)
 			getDomInfo(0).cum()
 			
-			condom.destroyMe()
-			getSexEngine().saveCondomToLootIfPerk(condom)
-			text += RNG.pick([
-				" {dom.You} {dom.youVerb('pull')} out and {dom.youVerb('dispose')} of the used condom.",
-			])
 			addText(text)
 			return
 	var beingBredScore:float = getSubInfo(0).fetishScore({Fetish.OralSexGiving: 1.0})
@@ -1285,12 +1280,6 @@ func doCumBJDom(isDeepthroat:bool = false):
 		getSubInfo(0).addFear(0.1)
 	getSub().cummedInBodypartByAdvanced(BodypartSlot.Head, getDomID(0), {condomBroke=condomBroke})
 	getDomInfo(0).cum()
-	
-	if(condom != null):
-		condom.destroyMe()
-		text += RNG.pick([
-			" {dom.You} {dom.youVerb('pull')} out and {dom.youVerb('dispose')} of the used condom.",
-		])
 	
 	#return getSexEngine().combineData({text=text}, applyTallymarkIfNeededData(BodypartSlot.Head))
 	addText(text)
@@ -1311,12 +1300,10 @@ func doCumBJFacialsDom():
 			condom.destroyMe()
 		else:
 			text = RNG.pick([
-				"{dom.You} {dom.youVerb('pull')} {dom.yourHis} cock out and {dom.youVerb('fill')} {dom.yourHis} condom! {dom.You} {dom.youVerb('dispose')} of it.",
-				"{dom.You} {dom.youVerb('pull')} out, stuffing {dom.yourHis} condom! {dom.You} {dom.youVerb('dispose')} of it.",
+				"{dom.You} {dom.youVerb('pull')} {dom.yourHis} cock out and {dom.youVerb('fill')} {dom.yourHis} condom!",
+				"{dom.You} {dom.youVerb('pull')} out, stuffing {dom.yourHis} condom!",
 			])
-			condom.destroyMe()
 			getDom().cumInItem(condom)
-			getSexEngine().saveCondomToLootIfPerk(condom)
 			getDomInfo(0).cum()
 			#satisfyGoals()
 			#state = ""
@@ -1397,11 +1384,6 @@ func doCumBJSub(supposedToBeAngry:bool = true):
 				text += RNG.pick([
 					" That made {dom.you} very angry.",
 				])
-			text += RNG.pick([
-				" {dom.You} {dom.youVerb('dispose')} of the used condom.",
-			])
-			condom.destroyMe()
-			getSexEngine().saveCondomToLootIfPerk(condom)
 			
 			addText(text)
 			return
@@ -1455,11 +1437,6 @@ func doCumBJFacialsSub(supposedToBeAngry:bool = true):
 				text += RNG.pick([
 					" That made {dom.you} very angry.",
 				])
-			text += RNG.pick([
-				" {dom.You} {dom.youVerb('dispose')} of the used condom.",
-			])
-			condom.destroyMe()
-			getSexEngine().saveCondomToLootIfPerk(condom)
 			
 			addText(text)
 			return
@@ -2406,11 +2383,6 @@ func doProcessCumBJInside(_indxTop:int, _indxBottom:int, isDeepthroat:bool = fal
 			topChar.cumInItem(condom)
 			topInfo.cum()
 			
-			condom.destroyMe()
-			getSexEngine().saveCondomToLootIfPerk(condom)
-			text += RNG.pick([
-				" {<TOP>.You} {<TOP>.youVerb('pull')} out and {<TOP>.youVerb('dispose')} of the used condom.",
-			])
 			addTextTopBottom(text, _indxTop, _indxBottom)
 			return {}
 	if(bottomInfo is SexSubInfo):
@@ -2420,12 +2392,6 @@ func doProcessCumBJInside(_indxTop:int, _indxBottom:int, isDeepthroat:bool = fal
 			bottomInfo.addFear(0.1)
 	bottomChar.cummedInBodypartByAdvanced(BodypartSlot.Head, topInfo.getCharID(), {condomBroke=condomBroke})
 	topInfo.cum()
-	
-	if(condom != null):
-		condom.destroyMe()
-		text += RNG.pick([
-			" {<TOP>.You} {<TOP>.youVerb('pull')} out and {<TOP>.youVerb('dispose')} of the used condom.",
-		])
 	
 	#return getSexEngine().combineData({text=text}, applyTallymarkIfNeededData(BodypartSlot.Head))
 	addTextTopBottom(text, _indxTop, _indxBottom)
@@ -2511,9 +2477,7 @@ func cumOnto(_indxWho:int, _indxTarget:int, _extra:Dictionary = {}):
 				text = RNG.pick([
 					"{<TOP>.You} {<TOP>.youVerb('grunt')} as {<TOP>.yourHis} {<TOP>.penisShort} throbs and stuffs the condom full!",
 				])
-			condom.destroyMe()
 			theChar.cumInItem(condom)
-			getSexEngine().saveCondomToLootIfPerk(condom)
 			theInfo.cum()
 			#satisfyGoals()
 			#state = ""
