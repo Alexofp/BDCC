@@ -330,9 +330,10 @@ func startActivity(_args):
 	currentPose = RNG.pick(getAvaiablePoses())
 	
 	addText(getStartTextForPose(currentPose))
-	if(RNG.chance(50)):
-		talk(DOM_0, SUB_0, aboutToPenetrateReaction)
-		talk(SUB_0, DOM_0, aboutToPenetrateReaction)
+	react(aboutToPenetrateReaction)
+	#if(RNG.chance(50)):
+	#	talk(DOM_0, SUB_0, aboutToPenetrateReaction)
+	#	talk(SUB_0, DOM_0, aboutToPenetrateReaction)
 
 func onSwitchFrom(_otherActivity, _args):
 	if(_args != null && _args == ["choke"]):

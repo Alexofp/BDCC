@@ -182,6 +182,7 @@ var sexActivitiesReferences: Dictionary = {}
 var fetishes: Dictionary = {}
 var sexGoals: Dictionary = {}
 var sexTypes: Dictionary = {}
+var sexReactionHandlersByID: Dictionary = {}
 var gameExtenders: Dictionary = {}
 var computers: Dictionary = {}
 var fluids: Dictionary = {}
@@ -610,6 +611,7 @@ func registerEverything():
 	registerFetishesFolder("res://Game/SexEngine/Fetish/")
 	registerSexGoalsFolder("res://Game/SexEngine/Goal/")
 	registerSexTypeFolder("res://Game/SexEngine/SexType/")
+	registerSexReactionHandlerFolder("res://Game/SexEngine/Reactions/")
 	
 	registerStatusEffectFolder("res://StatusEffect/")
 	
@@ -2645,6 +2647,30 @@ func getDrugDenEventRef(id: String):
 		
 func getDrugDenEvents():
 	return drugDenEventRefs
+
+
+func registerSexReactionHandler(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	for reactionID in object.chanceByReaction:
+		if(!sexReactionHandlersByID.has(reactionID)):
+			sexReactionHandlersByID[reactionID] = []
+		sexReactionHandlersByID[reactionID].append(object)
+
+func registerSexReactionHandlerFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerSexReactionHandler(scriptPath)
+
+func getSexReactionHandlersFor(id: int):
+	if(sexReactionHandlersByID.has(id)):
+		return sexReactionHandlersByID[id]
+	else:
+		return []
+		
+
+
 
 func saveRegistryCache() -> Dictionary:
 	var data:Dictionary = {

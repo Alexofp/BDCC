@@ -349,6 +349,16 @@ func talk(_indx1:int, _indx2:int, reactionID:int):
 		return
 	addOutputRaw([SexEngine.OUTPUT_SAY, theInfo.getCharID(), theText])
 
+func react(_reactionID:int, _args:Array = [], _actors:Array = [DOM_0, SUB_0]):
+	var allHandlers:Array = GlobalRegistry.getSexReactionHandlersFor(_reactionID)
+	if(allHandlers.empty()):
+		return
+	var handlersWeights:Array = []
+	for handler in allHandlers:
+		handlersWeights.append(handler.handlerWeight)
+	
+	var pickedHandler = RNG.pickWeighted(allHandlers, handlersWeights)
+	pickedHandler.doReactFinal(_reactionID, _actors, self, getSexEngine(), _args)
 
 func addText(_text:String):
 	if(_text.empty()):
