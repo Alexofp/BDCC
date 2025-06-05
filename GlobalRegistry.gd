@@ -2653,7 +2653,7 @@ func registerSexReactionHandler(path: String):
 	var loadedClass = load(path)
 	var object = loadedClass.new()
 	
-	for reactionID in object.chanceByReaction:
+	for reactionID in object.handles:
 		if(!sexReactionHandlersByID.has(reactionID)):
 			sexReactionHandlersByID[reactionID] = []
 		sexReactionHandlersByID[reactionID].append(object)

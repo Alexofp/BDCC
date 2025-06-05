@@ -230,7 +230,7 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 		getSubInfo().addFear(-0.02)
 		getSubInfo().addLust(5)
 		getDomInfo().addArousalForeplay(0.02)
-		talk(DOM_0, SUB_0, SexReaction.DomBreastfeedPraise)
+		react(SexReaction.DomBreastfeedPraise)
 	if(_actionID == "moan"):
 		var moanText:String = RNG.pick([
 			"{dom.youVerb('moan')}"

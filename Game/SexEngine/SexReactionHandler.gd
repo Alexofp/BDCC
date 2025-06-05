@@ -1,6 +1,10 @@
 extends Reference
 class_name SexReactionHandler
 
+const REACT_CHANCE = 0
+const REACT_TOGETHER = 1
+const REACT_CHANCES = 2
+
 const DOM_0 = 0
 const DOM_1 = 1
 const DOM_2 = 2
@@ -15,13 +19,23 @@ const ROLE_EXTRA = 2
 const ROLE_EXTRA_2 = 3
 
 var chanceToReact:float = 100.0
-var chanceByReaction:Dictionary = {}
+var handles:Dictionary = {}
 
 var handlerWeight:float = 1.0
 
+func shouldSayTogether(_reactionID:int) -> bool:
+	if(handles.has(_reactionID) && handles[_reactionID].has(REACT_TOGETHER)):
+		return handles[_reactionID][REACT_TOGETHER]
+	return false
+
 func getChance(_reactionID:int) -> float:
-	if(chanceByReaction.has(_reactionID)):
-		return chanceByReaction[_reactionID]
+	if(!shouldSayTogether(_reactionID) && handles.has(_reactionID) && handles[_reactionID].has(REACT_CHANCES)):
+		var theChances:Array = handles[_reactionID][REACT_CHANCES]
+		if(indxTemp < theChances.size()):
+			return theChances[indxTemp]
+	
+	if(handles.has(_reactionID) && handles[_reactionID].has(REACT_CHANCE)):
+		return handles[_reactionID][REACT_CHANCE]
 	return chanceToReact
 
 func checkChance(_reactionID:int) -> bool:
@@ -30,13 +44,13 @@ func checkChance(_reactionID:int) -> bool:
 func addLines(_lines:Array):
 	linesTemp.append_array(_lines)
 
-func getLines(_reaction:int, _role:int):
+func getLines(_reaction:int, _role:int, _args:Array):
 	addLines(["Fuck you!"])
 
-func say(_indx:int):
+func say(_indx:int, _args:Array):
 	activityIndxTemp = _indx
 	tempInfo = activityTemp.getDomOrSubInfo(activityIndxTemp)
-	getLines(idTemp, indxTemp)
+	getLines(idTemp, indxTemp, _args)
 	
 	if(!linesTemp.empty()):
 		talkRaw(_indx, RNG.pick(linesTemp))
@@ -62,10 +76,18 @@ func doReactFinal(_id:int, _actors:Array, _activity, _sexEngine, _args:Array):
 	idTemp = _id
 	actorsTemp = _actors
 	
-	if(checkChance(_id)):
+	var shouldTogether:bool = shouldSayTogether(_id)
+	if(shouldTogether):
+		if(checkChance(_id)):
+			indxTemp = 0
+			for actorIndx in _actors:
+				say(actorIndx, _args)
+				indxTemp += 1
+	else:
 		indxTemp = 0
 		for actorIndx in _actors:
-			say(actorIndx)
+			if(checkChance(_id)):
+				say(actorIndx, _args)
 			indxTemp += 1
 	
 	activityTemp = null
@@ -82,10 +104,22 @@ func isDom() -> bool:
 func isSub() -> bool:
 	return (tempInfo is SexSubInfo)
 
-func getInfo() -> SexInfoBase:
-	return tempInfo
-func isAngry() -> bool:
-	var theInfo:SexInfoBase = getInfo()
+func getInfo(_indx:int=-1) -> SexInfoBase:
+	if(_indx < 0):
+		return tempInfo
+	if(!actorsTemp || (_indx >= actorsTemp.size())):
+		Log.printerr("SexReactionHandler.getInfo() the index wasn't provided! ActorsTemp="+str(actorsTemp)+", indx="+str(_indx))
+		return null
+	return activityTemp.getDomOrSubInfo(actorsTemp[_indx])
+
+func getChar(_indx:int=-1) -> BaseCharacter:
+	var theInfo := getInfo(_indx)
+	if(!theInfo):
+		return null
+	return theInfo.getChar()
+
+func isAngry(_indx:int=-1) -> bool:
+	var theInfo:SexInfoBase = getInfo(_indx)
 	if(!theInfo):
 		return false
 	if(theInfo is SexDomInfo):
@@ -98,8 +132,8 @@ func isAngry() -> bool:
 		return false
 	return false
 
-func isVeryAngry() -> bool:
-	var theInfo:SexInfoBase = getInfo()
+func isVeryAngry(_indx:int=-1) -> bool:
+	var theInfo:SexInfoBase = getInfo(_indx)
 	if(!theInfo):
 		return false
 	if(theInfo is SexDomInfo):
