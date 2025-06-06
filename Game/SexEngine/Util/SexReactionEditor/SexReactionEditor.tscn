@@ -11,6 +11,7 @@ script = ExtResource( 1 )
 
 [node name="MainTab" type="Control" parent="."]
 unique_name_in_owner = true
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -97,7 +98,6 @@ text = "Load"
 
 [node name="ReactionTab" type="Control" parent="."]
 unique_name_in_owner = true
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -250,6 +250,20 @@ margin_right = 107.0
 margin_bottom = 26.0
 text = "Clean input"
 
+[node name="GeneratePromptButton" type="Button" parent="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer/HBoxContainer"]
+margin_left = 111.0
+margin_right = 188.0
+margin_bottom = 26.0
+text = "Prompt"
+
+[node name="PromptTextEdit" type="TextEdit" parent="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 192.0
+margin_right = 957.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="OutputTab" type="Control" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -289,4 +303,5 @@ size_flags_vertical = 3
 [connection signal="text_changed" from="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer/ConditionTextEdit" to="." method="_on_ConditionTextEdit_text_changed"]
 [connection signal="text_changed" from="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer/LinesTextEdit" to="." method="_on_LinesTextEdit_text_changed"]
 [connection signal="pressed" from="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer/HBoxContainer/CleanLinesButton" to="." method="_on_CleanLinesButton_pressed"]
+[connection signal="pressed" from="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer/HBoxContainer/GeneratePromptButton" to="." method="_on_GeneratePromptButton_pressed"]
 [connection signal="pressed" from="OutputTab/VBoxContainer/CloseOutputButton" to="." method="_on_CloseOutputButton_pressed"]

@@ -53,10 +53,25 @@ func say(_indx:int, _args:Array):
 	getLines(idTemp, indxTemp, _args)
 	
 	if(!linesTemp.empty()):
-		talkRaw(_indx, RNG.pick(linesTemp))
+		talk(_indx, RNG.pick(linesTemp))
 	
 	tempInfo = null
 	linesTemp.clear()
+
+func talk(_indx1:int, _text:String):
+	var theOverrides:Dictionary = {}
+	for _i in range(actorsTemp.size()):
+		var theID:String = getChar(_i).getID()
+		if(_i == 0):
+			theOverrides["main"] = theID
+		if(_i == 1):
+			theOverrides["target"] = theID
+		if(_i == 2):
+			theOverrides["extra"] = theID
+		if(_i == 3):
+			theOverrides["extra2"] = theID
+	
+	talkRaw(_indx1, GM.ui.processString(_text, theOverrides))
 
 func talkRaw(_indx1:int, _text:String):
 	activityTemp.talkText(_indx1, _text)
@@ -117,6 +132,12 @@ func getChar(_indx:int=-1) -> BaseCharacter:
 	if(!theInfo):
 		return null
 	return theInfo.getChar()
+
+func isSubby(_indx:int=-1) -> bool:
+	var theInfo:SexInfoBase = getInfo(_indx)
+	if(!theInfo):
+		return false
+	return theInfo.personalityScore({PersonalityStat.Subby:1.0})>0.4
 
 func isAngry(_indx:int=-1) -> bool:
 	var theInfo:SexInfoBase = getInfo(_indx)

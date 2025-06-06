@@ -4,7 +4,13 @@ func _init():
 	handles = {
 		SexReaction.AboutToPenetratePussy: {REACT_CHANCE: 100},
 		SexReaction.AboutToPenetrateAnal: {REACT_CHANCE: 100},
+		SexReaction.DomStartsGropingSubsBreasts: {REACT_CHANCE: 100},
+		SexReaction.DomGropesSubsBreasts: {REACT_CHANCE: 100},
+		SexReaction.Choking: {REACT_CHANCE: 100},
+		SexReaction.ChokingHard: {REACT_CHANCE: 100},
+		SexReaction.DomBreastfeedsSub: {REACT_CHANCE: 100},
 		SexReaction.DomBreastfeedPraise: {REACT_CHANCE: 100},
+		SexReaction.DomBreastfeedsOnSub: {REACT_CHANCE: 100},
 	}
 
 func getLines(_reaction:int, _role:int, _args:Array):
@@ -25,6 +31,22 @@ func getLines(_reaction:int, _role:int, _args:Array):
 						"Just relax and let me take control.",
 						"I want to feel you climax around me.",
 						"I'm going to make you mine, body and soul.",
+						"That pussy’s mine now.",
+						"Let’s see how deep I can get.",
+						"I bet you’ve been craving this.",
+						"You’re gonna take every inch.",
+						"Spread those legs for me.",
+						"Let’s stretch you open nice and wide.",
+						"I wanna feel you clench when I push in.",
+						"Here comes the real fun.",
+						"Hold still, I want to savor that first push.",
+						"You're dripping. You need this, don't you?",
+						"This pussy’s about to remember me.",
+						"Let me in. You want to feel it, don't you?",
+						"Your body’s begging for it.",
+						"I’m gonna push in nice and slow.. at first.",
+						"Let’s see how tight that hole really is.",
+						"Time to fill that needy little hole.",
 					])
 				if(isAngry()):
 					addLines([
@@ -36,6 +58,20 @@ func getLines(_reaction:int, _role:int, _args:Array):
 						"You should have thought twice before crossing me.",
 						"You're mine now. And I'm going to enjoy every second of it.",
 						"My turn to have some fun.",
+						"I’m about to shove it in and make you scream for mercy.",
+						"Shut up and spread those legs before I lose my patience.",
+						"I’m going to bury myself inside you and there’s nothing you can do.",
+						"You’ll take every hard thrust until you beg me to stop.",
+						"I’ve waited long enough—time to ruin that pretty little hole.",
+						"This pussy’s mine, and I’m going to fuck you senseless.",
+						"I swear I’ll make you regret ever opening your mouth.",
+						"Your screams don’t matter—my cock’s going all the way in.",
+						"You’ll be soaked and bruised by the time I’m done.",
+						"Don’t fight me, pet—I’ll smash you full of me anyway.",
+						"Let me in or I’ll force you until you sob.",
+						"Keep quiet, cunt, and stretch for me.",
+						"I’ll pound you so hard you’ll forget your own name.",
+						"You’ll choke on my cock if you don’t stay still.",
 					])
 
 		SexReaction.AboutToPenetrateAnal:
@@ -53,6 +89,21 @@ func getLines(_reaction:int, _role:int, _args:Array):
 						"Just relax and let me take control.",
 						"I want to feel you climax around me.",
 						"I'm going to make you mine, body and soul.",
+						"Let’s see how deep I can go.",
+						"Time to feel every inch.",
+						"Your hole’s begging for me.",
+						"Feel that tip on your rim?",
+						"Just relax and take it.",
+						"I’m sliding in nice and slow.",
+						"Let me hear that tiny gasp.",
+						"I’ve wanted this all day.",
+						"Can you feel me stretching you?",
+						"Your ass looks so ready.",
+						"Lean into it for me.",
+						"Your tight walls are calling.",
+						"I’m about to fill you up.",
+						"Hold still and enjoy it.",
+						"I’m right where I want to be.",
 					])
 				if(isAngry()):
 					addLines([
@@ -64,7 +115,527 @@ func getLines(_reaction:int, _role:int, _args:Array):
 						"You should have thought twice before crossing me.",
 						"You're mine now. And I'm going to enjoy every second of it.",
 						"My turn to have some fun.",
+						"Spread your ass, I’m going in.",
+						"I’ll shove my cock deep in your gut.",
+						"Don’t move or I’ll fuck you raw.",
+						"You think you can fight? I’ll pound you.",
+						"I’ll split you open if you don’t stay still.",
+						"That tight ass is mine to ruin.",
+						"I’m about to ram you until you cry.",
+						"Your asshole’s going to remember this.",
+						"Stop squirming and take it, bitch.",
+						"I’ll fuck you until you beg.",
+						"Hold still or I’ll break you.",
+						"I’ll bury myself in your ass and you’ll love it.",
+						"Keep quiet while I fuck your asshole.",
+						"I’ll stretch you out and don’t you dare move.",
+						"I’ll pound that tight hole nonstop.",
+						"I’ll fuck your ass until you can’t think.",
+						"Spread those cheeks, my cock’s not waiting.",
 					])
+
+		SexReaction.DomStartsGropingSubsBreasts:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"Oh yeah, let me grope those. Don't cry, bitch.",
+						"These are mine to grope any way I want.",
+						"These are mine to grope and fondle any way I want.",
+						"What a whore, letting me grope your tits.",
+						"Shut up and let me grab.",
+						"You’re lucky I’m in a good mood.",
+						"Feel that? You’re property.",
+						"Don’t cry, just take it.",
+						"I’ll squeeze till you scream.",
+						"My hands own those tits.",
+						"You’re nothing but my toy.",
+						"Quit whining and enjoy it.",
+						"These tits belong to me now.",
+						"I’m gonna bruise these pretty things.",
+						"Squirm all you want, bitch.",
+						"Stop being so sensitive.",
+						"My hands don’t ask, they take.",
+						"You’re lucky I’m gentle.. for now.",
+						"Whore, you will look good with my hands on you.",
+						"Don’t even think about pulling away.",
+						"I’ll squeeze until you beg for more.",
+					])
+					if(getChar(ROLE_TARGET).canBeMilked()):
+						addLines([
+							"So heavy I wanna squeeze them HARD.",
+							"Let me see that milk squirt.",
+							"I’ll drain every drop from these.",
+							"You don’t get a say, these are mine now.",
+						])
+					if(getChar(ROLE_TARGET).hasBigBreasts()):
+						addLines([
+							"Some nice heavy milkers!",
+							"You got some real udders, bitch!",
+							"Nice tits, so fucking heavy.",
+							"Are those tits even real? So fucking heavy!",
+							"Hell of a rack you’ve got there, slut.",
+							"Gotta say, those melons are impressive.",
+							"Such heavy tits begging to be grabbed.",
+							"I’m gonna make those tits work for me.",
+						])
+					if(getChar(ROLE_TARGET).hasSmallBreasts()):
+						addLines([
+							"There is nothing to grope even!",
+							"Why the flat chest? I need something to squeeze. Never mind.",
+							"This will have to do.",
+							"Cute chest, whore.",
+							"Barely anything to grab.",
+							"Pathetic little bumps.",
+							"This? This is all I get?",
+							"So flat, it’s almost sad.",
+							"Not much to squeeze here.",
+							"You call this a chest?",
+							"Might as well be nothing.",
+							"Small and useless, just like you.",
+							"Squishy little nothings.",
+							"Such tiny, worthless tits.",
+						])
+				if(!isAngry()):
+					addLines([
+						"I will try not to be too firm.",
+						"It will feel good, trust me.",
+						"Let me get a feel for yours.",
+						"Nice..",
+						"Soft and perfect, just how I like.",
+						"Just relax and enjoy this.",
+						"Getting to know you better.",
+						"You’re mine to touch.",
+					])
+					if(getChar(ROLE_TARGET).canBeMilked()):
+						addLines([
+							"I can feel them being heavy with milk already.",
+							"Perfect for milking, baby.",
+							"Heavy with all your sweet milk.",
+							"Can’t wait to drain these.",
+						])
+					if(getChar(ROLE_TARGET).hasBigBreasts()):
+						addLines([
+							"Those are some big breasts. Wow.",
+							"So heavy.. and soft.",
+							"How can I not play with such big tits.",
+							"These feels like pillows. Big pillows.",
+							"Heavy enough to drown in.",
+							"You’re carrying quite the treasures.",
+							"How’d you get these perfect pillows?",
+							"Can’t resist these big soft mounds.",
+						])
+					if(getChar(ROLE_TARGET).hasSmallBreasts()):
+						addLines([
+							"What a cute flat chest.",
+							"There is still something to grope.",
+							"A little flat. But it will do~.",
+							"Not much to grope. But I'm not complaining.",
+							"Cute little things you’ve got.",
+							"So petite, so perfect.",
+							"I love how easily they fit in my hands.",
+						])
+
+		SexReaction.DomGropesSubsBreasts:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"Do you like this, bitch?",
+						"I'm groping your tits. Feels good yet, whore?",
+						"Feels good yet, slut?",
+						"Just enjoy it, whore.",
+						"Don't try to deny that you love this.",
+						"These tits are mine to squeeze.",
+						"You like it rough, don’t lie.",
+						"Stop pretending you hate it.",
+						"I’ll crush these tits if I want.",
+						"Feel that grip, slut?",
+						"Your tits belong to me now.",
+						"Squirm for me, little toy.",
+						"Keep still or I get rougher.",
+						"Your pain’s my pleasure.",
+						"Mine to abuse, slut.",
+					])
+					if(getChar(ROLE_TARGET).canBeMilked()):
+						addLines([
+							"So milky.",
+							"So easy to milk your udders.",
+							"Nice and juicy.",
+							"Look at these dripping tits.",
+							"Mine to squeeze and milk.",
+							"Perfect for me to drain.",
+							"Can't wait to taste.",
+							"Overflowing for me.",
+							"Tender and dripping.",
+							"Mine to milk and own.",
+						])
+					if(getChar(ROLE_TARGET).hasBigBreasts()):
+						addLines([
+							"Huge tits whore.",
+							"Big tits, just for me.",
+							"So heavy, so mine.",
+							"Feel how hard I’m squeezing.",
+							"These fuckin’ beasts are mine.",
+							"You’re my big-breasted toy.",
+							"I own every inch of these.",
+							"Keep those jugs right here.",
+							"Mine to squeeze and tease.",
+						])
+					if(getChar(ROLE_TARGET).hasSmallBreasts()):
+						addLines([
+							"Flat chest whore.",
+							"Pathetic little tits.",
+							"Is that all you got?",
+							"Small, but mine.",
+							"Cute, but useless.",
+							"So flat, so weak.",
+							"Barely worth touching.",
+							"You’ll learn to love this.",
+							"I own every inch.",
+						])
+				if(!isAngry()):
+					addLines([
+						"You like this?",
+						"I know you like this.",
+						"Feels good, right?",
+						"Feels nice, doesn't it.",
+						"Feels nice to grope your chest.",
+						"Can’t get enough of these.",
+						"Look at these beauties.",
+						"You’re so damn touchable.",
+						"These are made for me.",
+						"You’re mine to fondle.",
+						"Can’t stop touching you.",
+					])
+					if(getChar(ROLE_TARGET).canBeMilked()):
+						addLines([
+							"So milky.",
+							"So easy to milk you.",
+							"Such juicy tits.",
+							"Perfect for squeezing.",
+							"Milk’s flowing nice.",
+							"Soft and swollen.",
+							"Keep leaking for me.",
+							"I could squeeze forever.",
+							"Gonna milk you dry.",
+						])
+					if(getChar(ROLE_TARGET).hasBigBreasts()):
+						addLines([
+							"So soft. Like pillows.",
+							"Such heavy, lovely tits.",
+							"Big and begging to be touched.",
+							"So full, so delicious.",
+							"I could squeeze these all day.",
+							"Love how they bounce for me.",
+							"These tits are my favorite toy.",
+							"I want to bury my face here.",
+						])
+					if(getChar(ROLE_TARGET).hasSmallBreasts()):
+						addLines([
+							"So small.",
+							"I can feel your hard nips at least.",
+							"Cute little mounds.",
+							"Perfect for my hands.",
+							"Small, but so sweet.",
+							"Love how soft you are.",
+							"These fit just right.",
+							"So eager under my touch.",
+							"Petite and perfect.",
+							"I could cup these all day.",
+							"You’re adorable like this.",
+							"I could squeeze you forever.",
+						])
+
+		SexReaction.Choking:
+			if(_role == ROLE_MAIN):
+				if(!isSubby()):
+					if(isAngry()):
+						addLines([
+							"Stupid bitch. You're probably getting off from this.",
+							"Fucking whore. Look at me while I'm choking you.",
+							"You don't need air, stupid slut.",
+							"It's your fault!",
+							"Do you like being choked, bitch?",
+							"Shut up and take it.",
+							"I’m the one in charge here.",
+							"Don’t fight me, worthless.",
+							"Keep your damn mouth shut.",
+							"You’re mine to control.",
+							"No air for a filthy slut.",
+							"Struggle all you want, bitch.",
+							"Look at me or I’ll squeeze harder.",
+							"You think you’re tough? Prove it.",
+							"Beg all you want, I don’t care.",
+							"This is your punishment.",
+							"Taste your own desperation.",
+							"I’m not done with you yet.",
+							"Say thank you, little slut.",
+							"Your breath is mine to take.",
+							"Feel that pressure? You asked for it.",
+							"Keep struggling, it only tightens.",
+							"You don’t get to breathe until I say.",
+						])
+					if(!isAngry()):
+						addLines([
+							"You like it? Having no air.",
+							"Arousing, isn't it? I have full control.",
+							"You enjoy being choked?",
+							"Just let it happen. Don't fight it.",
+							"Look at me while I'm choking you.",
+							"You look so cute.",
+							"Quiet now, listen to me.",
+							"No noise unless I say.",
+							"Stay still or suffer more.",
+							"Breathe when I let you.",
+							"Eyes on me, always.",
+							"Don’t fight, obey.",
+							"Control is mine alone.",
+							"Feel that pressure? Obey.",
+							"I decide when you breathe.",
+							"Not a sound, got it?",
+							"Stay obedient, or else.",
+							"I own you right now.",
+							"This is discipline, sweetie.",
+							"You’re mine to command.",
+							"Eyes up, no distractions.",
+						])
+				if(isSubby()):
+					addLines([
+						"I totally don't wanna be in your place..",
+						"Why is choking so hot..",
+						"Wanna choke me too?..",
+						"I shouldn’t like this, but I do..",
+						"Choking you feels so wrong.. and right.",
+						"You’re so cute when you gasp.",
+						"Holding your neck feels nice.",
+						"I wanna be gentle but.. choking’s hot.",
+						"Your gasps send shivers down my spine.",
+						"Is it wrong if I like this too much?",
+						"I don’t wanna hurt you.. but I want to.",
+						"Choking you makes me feel alive.",
+						"My hands shake but I wanna squeeze.",
+						"I never thought choking would be my thing.",
+						"You’re helpless, and it drives me wild.",
+						"Maybe I’m a little twisted, but I love this.",
+					])
+
+		SexReaction.ChokingHard:
+			if(_role == ROLE_MAIN):
+				if(!isSubby()):
+					if(isAngry()):
+						addLines([
+							"Gonna black out on me? Huh?",
+							"How much oxygen is left in that stupid head of yours.",
+							"Pass out already, whore.",
+							"I don't care. You're not breathing today.",
+							"You like it?! Stupid whore.",
+							"What? Roll your scared eyes away already.",
+							"Can’t breathe? Good.",
+							"Hold still or I’ll squeeze harder.",
+							"Gag for me, you worthless.",
+							"You think you can fight this?",
+							"Try to pass out, I dare you.",
+							"Struggle all you want, slut.",
+							"Taste your own panic.",
+							"Don’t slip away on me now.",
+							"I own your breath, don’t forget.",
+							"Keep gasping, it’s cute.",
+							"Fight harder or fade away.",
+							"No air for you, slut.",
+							"Beg for breath, I’m cruel.",
+							"Gag harder, it turns me on.",
+							"You’re mine to suffocate.",
+						])
+					if(!isAngry()):
+						addLines([
+							"Take a deep breath. Too late.",
+							"Let's see how much you can last.",
+							"Time is running out.. Tick.. Tack..",
+							"Feeling weaker and weaker..",
+							"Corners of your vision getting dark already?",
+							"You look so cute.",
+							"Gonna black out on me?",
+							"Hold still. Don’t fight me.",
+							"Breathe when I say so.",
+							"Good toys  don’t pass out.",
+							"Keep your eyes on me.",
+							"Don’t waste air on whining.",
+							"Focus, or you lose it.",
+							"Not a word. Just obey.",
+							"Almost there. Hold on.",
+						])
+				if(isSubby()):
+					addLines([
+						"So fucking hot.. I'm sorry..",
+						"I'm sorry..",
+						"I'm very sorry..",
+						"Sorry.. but I love this.",
+						"Ah.. I didn’t mean to be this rough.",
+						"So sorry.. can’t help myself.",
+						"Sorry, it’s just too hot.",
+						"I’m bad, sorry.. but it’s sexy.",
+						"Ah, sorry.. I can’t stop.",
+						"So sorry.. you make me wild.",
+						"Sorry.. choking’s just too hot.",
+						"I’m sorry.. but you make me do it.",
+						"I love being rough with you.",
+						"Ah, sorry.. I get carried away.",
+						"I’m sorry.. you’re just too tempting.",
+						"So sorry.. but this feels amazing.",
+					])
+
+		SexReaction.DomBreastfeedsSub:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					if(!getChar().canBeMilked()):
+						addLines([
+							"There will be milk eventually. Just suckle, slut.",
+							"You want milk? You will get it if you try hard enough, whore.",
+							"Harder, slut.. if you want milk.",
+							"You’re not ready yet, keep at it.",
+							"Still dry? Try harder.",
+							"No milk until you earn it.",
+							"Suckle properly or I’ll stop.",
+							"Quit slacking and feed.",
+							"No reward for lazy suckling.",
+							"Suck harder, nothing’s dripping.",
+							"Keep trying, I won’t give up.",
+							"Your mouth isn’t working right.",
+							"Feed like your life depends on it.",
+							"You call that suckling? Pathetic.",
+							"Milk better come soon.",
+						])
+					if(getChar().canBeMilked()):
+						addLines([
+							"You like my milk, whore?",
+							"You're so lucky I'm letting you do this.",
+							"Enjoy the milk while you can.",
+							"Suckle on my tits. Do it.",
+							"I feel the milk flowing.. Drink it.",
+							"Drink it all, bitch.",
+							"Slurp every drop, you needy bitch.",
+							"Don’t you dare pause.",
+							"Keep drinking until I say stop.",
+							"You fucking crave this, admit it.",
+							"Hurry up.",
+							"Lick those nipples raw.",
+							"You better be grateful.",
+							"Devour it like you owe me.",
+							"Obey and keep your mouth on me.",
+							"Suck harder, you pathetic thing.",
+							"Gag on it, you worthless pet.",
+							"Finish every drop, don’t waste it.",
+							"Eyes up, show me you deserve it.",
+							"No whining, just drink.",
+							"You’ll be begging by the time I’m done.",
+						])
+						if(getChar().hasBigBreasts()):
+							addLines([
+								"Oh yeah, you love my big leaky tits, don't you?",
+								"I'm such a fucking cow. Drink my milk.",
+								"Yeah.. suck on my udders.. Fuck yeah..",
+								"Drink up, slut.",
+								"Take every drop.",
+								"Gulp it all.",
+								"I’m overflowing—keep going.",
+								"Good girl, latch on.",
+								"You need this, don’t you?",
+								"Fill your mouth with my milk.",
+								"My tits are all yours.",
+								"Suckle harder.",
+								"Taste how full I am.",
+								"Better? Keep drinking.",
+								"Squeeze them, get every drop.",
+								"Mine to feed.",
+								"Beg for more milk.",
+								"Messy? Good.",
+								"My breasts, your pleasure.",
+								"Show me you’re hungry.",
+								"You’re my milk slut.",
+							])
+						if(getChar().hasSmallBreasts()):
+							addLines([
+								"What? Yeah, they're small. Keep sucking, bitch!",
+								"Small tits doesn't mean I can't lactate!",
+								"Yeah, they’re tiny, suck them dry.",
+								"Get on with it, you know what to do.",
+								"Stop gawking, drink up.",
+								"These little things still produce. Hurry.",
+								"Suck harder. I’m not here for cuddles.",
+								"Keep sucking, don’t you dare stop.",
+								"Milk me, brat. Prove you deserve it.",
+								"These small breasts still give plenty, drink up.",
+							])
+				if(!isAngry()):
+					if(!getChar().canBeMilked()):
+						addLines([
+							"There will be milk eventually..",
+							"You want milk? You will get it if you try hard enough..",
+							"I have no milk for now..",
+							"I'm dry for now.. But keep suckling..",
+							"Not yet.. keep sucking.",
+							"No milk yet.. don’t stop.",
+							"Keep licking.. it’ll come.",
+							"Hang on.. it’ll flow soon.",
+							"Keep that mouth busy.",
+							"Smooth and deep.. keep going.",
+							"Keep at it.. I’ll leak soon.",
+						])
+					if(getChar().canBeMilked()):
+						addLines([
+							"Oh.. I feel so motherly.",
+							"Mhm~.. Feels good.",
+							"Keep going sweetie..",
+							"Keep suckling on my nips, sweetheart..",
+							"Breastfeeding feels so good..",
+							"Knead them if you can..",
+							"I love how cute you look..",
+							"Suckling on my breasts.. So nice..",
+							"This is incredible..",
+							"Drink it all in.",
+							"That’s my good pet.",
+							"Keep sucking tight.",
+							"That’s perfect, baby.",
+							"Right there, good job.",
+							"Keep that mouth busy.",
+							"Mmm.. just like that.",
+							"So sweet.. keep going.",
+							"You’re doing so well.",
+							"Don’t stop now.",
+							"Feel every drop.",
+							"That’s it.. drink up.",
+							"Yes.. you’ve got it.",
+							"So good.. don’t let go.",
+							"Keep those lips moving.",
+							"Feel free to gulp it down.",
+						])
+						if(getChar().hasBigBreasts()):
+							addLines([
+								"You like my big breasts?..",
+								"So much milk in my jugs..",
+								"Not mooing is so hard..",
+								"Feel that warm milk?",
+								"Keep sucking hard.",
+								"My milk’s flowing just for you.",
+								"Don’t stop now.",
+								"You love my milk, don’t you?",
+								"My breasts are bursting.",
+								"Worship these tits.",
+								"Gulp it down, pet.",
+								"You’re so good at this.",
+							])
+						if(getChar().hasSmallBreasts()):
+							addLines([
+								"You look so good nursing on these.",
+								"My small breasts are all yours.",
+								"Suckle harder on these little jugs.",
+								"You love these tiny nips, don’t you?",
+								"Keep that mouth right on my nipple.",
+								"Mine are little, but for you, big enough.",
+								"My small tits are perfect for you.",
+								"Keep sucking, sweetheart.",
+								"I’m so wet with milk for you.",
+								"My little boobs are yours to feed on.",
+							])
 
 		SexReaction.DomBreastfeedPraise:
 			if(_role == ROLE_MAIN):
@@ -74,38 +645,201 @@ func getLines(_reaction:int, _role:int, _args:Array):
 						"Good whore. Keep at it.",
 						"You're doing good, little slut.",
 						"You're less pathetic than I thought, whore.",
+						"Milk me like you want your life to depend on it.",
+						"Suck harder, you useless thing.",
+						"Keep that mouth on my tit, don’t you dare slack off.",
+						"Good. Now don’t you pull away.",
+						"That’s right, don’t you choke on it.",
+						"You better swallow every drop.",
+						"Use those lips, slut, no half-measures.",
+						"Feed, whore, and keep your eyes on me.",
+						"Don’t even think of pulling off.",
+						"Stay right there and don’t whine.",
+						"Keep going until I tell you to quit.",
+						"That’s it, take it all, bitch.",
+						"Don’t slow down until I’m satisfied.",
+						"Good. Now don’t you dare blink.",
+						"Suck until I grow tired of you.",
+						"You got that? Don’t you dare slack.",
+						"Keep that mouth busy, pet.",
+						"Show me you can handle it.",
+						"Don’t stop until I say.",
 					])
-				if(isAngry() && getChar().canBeMilked() && getChar().hasBigBreasts()):
-					addLines([
-						"Good.. Suck on those big milky tits..",
-						"Good whore.. You like my huge udders, don't you?",
-					])
-				if(isAngry() && getChar().canBeMilked() && getChar().hasSmallBreasts()):
-					addLines([
-						"Good whore. Sucking on my small tits so eagerly.",
-						"Good bitch. Keep suckling on my flat chest.",
-					])
+					if(getChar().canBeMilked()):
+						if(getChar().hasBigBreasts()):
+							addLines([
+								"Good.. Suck on those big milky tits..",
+								"Good whore.. You like my huge udders, don't you?",
+							])
+						if(getChar().hasSmallBreasts()):
+							addLines([
+								"Good whore. Sucking on my small tits so eagerly.",
+								"Good bitch. Keep suckling on my flat chest.",
+							])
 				if(!isAngry()):
 					addLines([
 						"Good.. keep at it, cutie..",
 						"You're doing great, sweetheart.",
-						"Good {sub.girl}..",
+						"Good {target.girl}..",
 						"You're so cute.. keep going..",
 						"Show me how you can suckle..",
 						"Very nice.. So nice..",
 						"Ah.. you're doing great..",
 						"Such a cutie.. I'm proud..",
+						"That’s it, right there.",
+						"Just like that, baby.",
+						"Yeah.. suckle for me.",
+						"Perfect, don’t stop.",
+						"So good.. keep going.",
+						"Mmm.. you’re doing amazing.",
+						"Nice and steady.",
+						"Exactly how I like it.",
+						"Don’t let go.",
+						"Feel free to drink up.",
+						"Such a good feeder.",
+						"You’ve got this down.",
+						"Taste perfect.",
+						"Keep those lips working.",
+						"Just like that.. more.",
+						"Harder.. good girl.",
+						"You’re nailing it.",
+						"So warm.. so sweet.",
+						"That’s perfect pressure.",
+						"You make me so proud.",
 					])
-				if(!isAngry() && getChar().canBeMilked() && getChar().hasBigBreasts()):
-					addLines([
-						"Suckle on my big breasts.. Yeah, like that..",
-						"My breasts are heavy with milk.. Keep going.. You're doing great..",
-						"You're making me proud.. Suckling on my giant breasts like that..",
-						"You like the milk? Keep going.. There is plenty in my big breasts..",
-					])
-				if(!isAngry() && getChar().canBeMilked() && getChar().hasSmallBreasts()):
-					addLines([
-						"I don't have much milk.. But you're doing great..",
-						"Wow.. Keep sucking on my small tits..",
-					])
+					if(getChar().canBeMilked()):
+						if(getChar().hasBigBreasts()):
+							addLines([
+								"Suckle on my big breasts.. Yeah, like that..",
+								"My breasts are heavy with milk.. Keep going.. You're doing great..",
+								"You're making me proud.. Suckling on my giant breasts like that..",
+								"You like the milk? Keep going.. There is plenty in my big breasts..",
+							])
+						if(getChar().hasSmallBreasts()):
+							addLines([
+								"I don't have much milk.. But you're doing great..",
+								"Wow.. Keep sucking on my small tits..",
+							])
+
+		SexReaction.DomBreastfeedsOnSub:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					if(!getChar(ROLE_TARGET).canBeMilked()):
+						addLines([
+							"Where is the milk, bitch.",
+							"I don't taste any milk.",
+							"Huh..",
+							"Where’s the fucking milk?",
+							"Not a drop, you useless..",
+							"Pathetic. No milk at all.",
+							"Your tits are empty, like your worth.",
+							"I need milk.",
+						])
+					if(getChar(ROLE_TARGET).canBeMilked()):
+						addLines([
+							"Don't squirm.. Mmh~..",
+							"Mmh.. I can taste it.",
+							"What a slut..",
+							"Mhm~..",
+							"I need more.",
+							"You think you can hide that milk?",
+							"I’ll take every drop.",
+							"No whining, just milk.",
+							"You owe me this.",
+							"Give it to me straight.",
+							"Mine now, don’t stop.",
+							"That’s right, keep going.",
+							"Fill my mouth, slut.",
+							"I’m not letting go.",
+							"You’re mine to suck.",
+							"This is your only job.",
+							"Show me you can give more.",
+							"Make me satisfied.",
+						])
+						if(getChar(ROLE_TARGET).hasBigBreasts()):
+							addLines([
+								"Heavy udders.",
+								"Such a fucking cow.",
+								"Milking time, bitch.",
+								"Give me that milk now.",
+								"Drip every drop into my mouth.",
+								"Hurry up, I’m thirsty.",
+								"I’ll drain you dry.",
+								"I’ll rip those tits if you resist.",
+							])
+						if(getChar(ROLE_TARGET).hasSmallBreasts()):
+							addLines([
+								"Flat and yet I taste milk.",
+								"How much milk is in those little tits.",
+								"I want every last bit of milk.",
+								"Those small tits better gush for me.",
+								"Push more milk into my mouth.",
+								"Don’t hold back that sweet milk.",
+								"I’ll drain every drop, you hear?",
+								"Your tiny tits better not disappoint.",
+								"Show me how much you’ve got.",
+							])
+				if(!isAngry()):
+					if(!getChar(ROLE_TARGET).canBeMilked()):
+						addLines([
+							"Still no milk..",
+							"You like my tongue?",
+							"Let me smooch them.",
+							"One day they will have milk.",
+							"I don't taste any milk.",
+							"I’m getting thirsty.",
+							"Where’s your sweet nectar?",
+							"You’re teasing me.",
+							"Still nothing, darling?",
+							"Barely a trickle.",
+							"I’m getting an appetite.",
+							"No milk, no fun.",
+						])
+					if(getChar(ROLE_TARGET).canBeMilked()):
+						addLines([
+							"So milky.",
+							"So easy to milk you.",
+							"Mmh.. I can taste it.",
+							"Mhm~..",
+							"Tastes good..",
+							"Such a creamy flow.",
+							"Keep those streams coming.",
+							"You’re overflowing.",
+							"Can’t get enough of that milk.",
+							"You taste divine.",
+							"Your milk drives me wild.",
+							"I want every drop.",
+							"My favorite treat.",
+							"You’re a perfect milkmaid.",
+						])
+						if(getChar(ROLE_TARGET).hasBigBreasts()):
+							addLines([
+								"You're like a cow.",
+								"Lactating like a cow.",
+								"So much milk..",
+								"Such big, juicy tits for me.",
+								"Can’t get enough of this.",
+								"So full.. keep it coming.",
+								"You’re overflowing with milk.",
+								"You’re a damn milk machine.",
+								"Your tits are made for this.",
+								"Gushing milk just for me.",
+								"You’re my personal cow.",
+								"Can’t resist these heavy tits.",
+								"That milk’s thick and sweet.",
+							])
+						if(getChar(ROLE_TARGET).hasSmallBreasts()):
+							addLines([
+								"So small. But I taste milk.. Nice.",
+								"How much milk is in those little tits.",
+								"Sweet milk from tiny buds.",
+								"Little breasts, but so much milk.",
+								"Cute and milky, just right.",
+								"Small and full of milk.",
+								"Milk dripping from those small buds.",
+								"Those tiny tits hold so much.",
+								"Little breasts, plenty of milk.",
+								"Milk tastes better from tiny tits.",
+								"Soft, small, and milky.",
+							])
 

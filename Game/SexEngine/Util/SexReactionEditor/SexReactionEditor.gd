@@ -24,6 +24,8 @@ onready var lines_text_edit = $"%LinesTextEdit"
 
 onready var output_text_edit = $"%OutputTextEdit"
 
+onready var prompt_text_edit = $"%PromptTextEdit"
+
 
 func saveToFile():
 	var file := File.new()
@@ -271,27 +273,80 @@ func _on_GenerateCodeButton_pressed():
 			text += "\t\t\t"
 			text += "if(_role == "+roleName+"):\n"
 			
-			for theLinesEntry in reactionEntry["lines"][_i]:
-				var theCondition:String = theLinesEntry["condition"]
-				var conditionSplit:Array = theCondition.split("\n", false)
-				var theLines:String = theLinesEntry["lines"]
-				var linesSplit:Array = theLines.split("\n", false)
-				
-				if(conditionSplit.empty()):
-					text += theTabs + "addLines([\n"
-					for theLine in linesSplit:
-						text += theTabs + "\t\""+theLine+"\",\n"
-					text += theTabs + "])\n"
-				else:
-					text += theTabs + "if("+Util.join(conditionSplit, " && ")+"):\n"
-					text += theTabs + "\taddLines([\n"
-					for theLine in linesSplit:
-						text += theTabs + "\t\t\""+theLine+"\",\n"
-					text += theTabs + "\t])\n"
+			var conditionTree:Dictionary = calcConditionTree(reactionEntry["lines"][_i])
+			var finalLines:Array = conditionTreeToArrayOfLines(conditionTree)
+			for line in finalLines:
+				text += theTabs + line + "\n"
+			
+#			for theLinesEntry in reactionEntry["lines"][_i]:
+#				var theCondition:String = theLinesEntry["condition"]
+#				var conditionSplit:Array = theCondition.split("\n", false)
+#				var theLines:String = theLinesEntry["lines"]
+#				var linesSplit:Array = theLines.split("\n", false)
+#
+#				if(conditionSplit.empty()):
+#					text += theTabs + "addLines([\n"
+#					for theLine in linesSplit:
+#						text += theTabs + "\t\""+theLine+"\",\n"
+#					text += theTabs + "])\n"
+#				else:
+#					text += theTabs + "if("+Util.join(conditionSplit, " && ")+"):\n"
+#					text += theTabs + "\taddLines([\n"
+#					for theLine in linesSplit:
+#						text += theTabs + "\t\t\""+theLine+"\",\n"
+#					text += theTabs + "\t])\n"
 		
 		text += "\n"
 	
 	output_text_edit.text = text
+
+func calcConditionTree(entries:Array) -> Dictionary:
+	var result:Dictionary = {
+		lines = [],
+		more = {},
+	}
+	
+	for theLinesEntry in entries:
+		var theCondition:String = theLinesEntry["condition"]
+		var conditionSplit:Array = theCondition.split("\n", false)
+		var theLines:String = theLinesEntry["lines"]
+		var linesSplit:Array = theLines.split("\n", false)
+		
+		if(linesSplit.empty()):
+			continue
+		var dictToAddLinesTo:Dictionary = result
+		for conditionText in conditionSplit:
+			if(!dictToAddLinesTo["more"].has(conditionText)):
+				dictToAddLinesTo["more"][conditionText] = {
+					lines = [],
+					more = {},
+				}
+			dictToAddLinesTo = dictToAddLinesTo["more"][conditionText]
+		
+		dictToAddLinesTo["lines"].append_array(linesSplit)
+	
+	return result
+
+func conditionTreeToArrayOfLines(_tree:Dictionary, _condition:Array = []) -> Array:
+	var result:Array = []
+	
+	if(!_condition.empty()):
+		#Util.join(_condition, " && ")
+		result.append("\t".repeat(_condition.size()-1)+"if("+_condition.back()+"):")
+	if(!_tree["lines"].empty()):
+		var theTabs:String = "\t".repeat(_condition.size())
+		result.append(theTabs+"addLines([")
+		for line in _tree["lines"]:
+			result.append(theTabs+"\t\""+line+"\",")
+		result.append(theTabs+"])")
+	
+	for _extraCond in _tree["more"]:
+		var newConditions:Array = _condition.duplicate()
+		newConditions.append(_extraCond)
+		
+		result.append_array(conditionTreeToArrayOfLines(_tree["more"][_extraCond], newConditions))
+	
+	return result
 
 const ROLES_NAMES = ["ROLE_MAIN", "ROLE_TARGET", "ROLE_EXTRA", "ROLE_EXTRA_2"]
 
@@ -308,6 +363,13 @@ func _on_CleanLinesButton_pressed():
 			newLine = newLine.trim_suffix(",")
 			newLine = newLine.trim_suffix("\"")
 			newLine = newLine.trim_prefix("\"")
+			newLine = newLine.trim_prefix("“")
+			newLine = newLine.trim_suffix("”")
+			newLine = newLine.replace("...", "..")
+			newLine = newLine.replace("…", "..")
+			newLine = newLine.replace("—", ", ")
+			if(newLine == ""):
+				continue
 			newLines.append(newLine)
 		
 		lines_text_edit.text = Util.join(newLines, "\n")
@@ -327,3 +389,29 @@ func _on_CleanLinesButton_pressed():
 		
 		condition_text_edit.text = Util.join(newLines, "\n")
 		_on_ConditionTextEdit_text_changed()
+
+func updatePrompt():
+	if(editReaction.empty() || editReactionID == "" || reaction_entries_list.get_selected_items().empty()):
+		prompt_text_edit.text = ""
+		return
+	var thePrompt:String = "I'm making a lewd text-based game that has a sex engine. I need 20 dialogue lines that an npc might say as a reaction during one of the sex activities. Keep them short and snappy.\n"
+	thePrompt += "Reaction id: "+editReactionID+"\n"
+	var selectedRole:int = role_selector.selected
+	if(selectedRole == 0):
+		thePrompt += "Role: Main role. (This npc is the one who is doing the action)"
+	if(selectedRole == 1):
+		thePrompt += "Role: Target role. (This npc is the one who is being acted upon, receiving the action)"
+	if(selectedRole == 2 || selectedRole == 3):
+		thePrompt += "Role: Extra role. (This npc is the one who is doing the action but they are not the main npc)"
+	thePrompt += "\n\n"
+	if(condition_text_edit.text != ""):
+		thePrompt += "Npc current status (functions that are true):\n"+condition_text_edit.text
+		thePrompt += "\n\n"
+	if(lines_text_edit.text != ""):
+		thePrompt += "Example lines (avoid giving me these):\n"+lines_text_edit.text
+	
+	prompt_text_edit.text = thePrompt
+
+
+func _on_GeneratePromptButton_pressed():
+	updatePrompt()
