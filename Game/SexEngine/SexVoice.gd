@@ -676,15 +676,15 @@ func getDomReaction(_reactionID, _sexEngine, _domInfo, _subInfo) -> String:
 		SexReaction.OrderLickPussy:
 			if(domIsAngry || domIsMean):
 				possible.append_array([
-					"Don't make me repeat myself. Lick my "+RNG.pick(["pussy", "pussy", "pussy slit", "cunt"])+" now.",
-					"You better do as I say and lick my "+RNG.pick(["pussy", "pussy", "pussy slit", "cunt"])+".",
-					"I'm not playing around. Lick my fucking "+RNG.pick(["pussy", "pussy", "pussy slit", "cunt"])+".",
-					"I won't hesitate to punish you if you don't lick my "+RNG.pick(["pussy", "pussy", "pussy slit", "cunt"])+".",
+					"Don't make me repeat myself. Lick my {pussy} now.",
+					"You better do as I say and lick my {pussy}.",
+					"I'm not playing around. Lick my fucking {pussy}.",
+					"I won't hesitate to punish you if you don't lick my {pussy}.",
 					"I'm not joking. Lick. My. Pussy.",
-					"You have three seconds to start licking my "+RNG.pick(["pussy", "pussy", "pussy slit", "cunt"])+" or else.",
-					"I don't care if you like it or not. Lick my "+RNG.pick(["pussy", "pussy", "pussy slit", "cunt"])+" now.",
-					"You have no choice in the matter. Lick my "+RNG.pick(["pussy", "pussy", "pussy slit", "cunt"])+" now.",
-					"I'm not going to repeat myself. Lick my fucking "+RNG.pick(["pussy", "pussy", "pussy slit", "cunt"])+" now.",
+					"You have three seconds to start licking my {pussy} or else.",
+					"I don't care if you like it or not. Lick my {pussy} now.",
+					"You have no choice in the matter. Lick my {pussy} now.",
+					"I'm not going to repeat myself. Lick my fucking {pussy} now.",
 				])
 			else:
 				possible.append_array([

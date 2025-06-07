@@ -1,5 +1,56 @@
 {
 "reactions": {
+"AboutToLickPussy": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "I can't wait to taste you, you little slut.
+You're so lucky to have me lick your pussy.
+You know you want me to eat your pussy, don't you?
+I'm going to make you cum so hard.
+You're going to love the way I lick your clit.
+I'm going to make you beg for more.
+I'm going to make you cum so hard you won't be able to walk.
+Time to eat that filthy cunt, slut.
+Gonna drown in your pussy juices, bitch.
+I’m gonna fuck your slit with my tongue.
+You’re mine to lick and ruin, bitch.
+Spread those legs, I want that cunt.
+Gonna make you scream, you dirty slut.
+I’ll destroy that cunt with my tongue.
+Beg me to eat your filthy pussy.
+Your slit’s mine to torture, slut.
+Get ready to cum on my tongue, whore.
+Gonna lick that cunt till you beg.
+Your pussy’s gonna beg for mercy, slut.
+I’m going to ruin your pussy good."
+}, {
+"condition": "!isAngry()",
+"lines": "Are you ready for me to lick your pussy?
+I've been waiting to taste you.
+Your pussy is so wet and inviting.
+I'm going to lick you slowly and sensually.
+I want to make you feel amazing with my tongue.
+I'm going to make you cum with my tongue.
+Just relax and let me take control.
+I can't wait to hear your moans of pleasure as I lick your pussy.
+Gonna bury my tongue deep in your wet slit.
+Time to taste that little pussy.
+I’m gonna lap up all that sweet pussy juice.
+I’ll drown your pussy in my slobber.
+You’re my juicy little whore to lick.
+Can’t wait to taste your pussy.
+Gonna fuck your slit with my tongue.
+I'm such a needy little pussy slut.
+My tongue’s ready to fuck your tight hole.
+Gonna drown in your sweet pussy juice.
+That pussy’s mine to eat and own."
+} ]
+},
+"together": false
+},
 "AboutToPenetrateAnal": {
 "chance": 100,
 "chances": "",
@@ -123,6 +174,265 @@ I’ll pound you so hard you’ll forget your own name.
 You’ll choke on my cock if you don’t stay still."
 } ],
 1: [  ]
+},
+"together": false
+},
+"AboutToRideAnal": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "I hope you're ready for the ride of your life. It's going to be a bumpy one.
+You might want to brace yourself. This is going to be a rough one.
+Don't even think about trying to escape. I've got you right where I want you.
+Say goodbye to any pleasure you were hoping for. This is about domination, not satisfaction.
+You might be begging for mercy by the time I'm finished with you.
+I hope you're ready to be completely and utterly humiliated.
+I'm only doing this because I want to.
+You're not going to last long, trust me.
+Gonna take that cock deep, you fuck.
+This asshole’s gonna swallow you whole.
+Fuck me good, you dirty slut.
+Hold tight, I’m taking you rough.
+Gonna stretch this hole with your fat cock.
+Your cock’s gonna be buried deep in my ass.
+Fuck my tight hole, you nasty fucker.
+I’m gonna ride you till you break.
+Get ready for a rough ride, fucker."
+}, {
+"condition": "!isAngry()",
+"lines": "Are you ready for this?
+I'm going to straddle you now.
+I want to feel you inside me.
+This is going to be so good.
+I can't wait to feel you.
+I'm going to rock your world.
+You're going to love this.
+I'm going to take control.
+Hold on tight, this is going to be a wild ride.
+I want to look into your eyes as I straddle you and make love to you.
+Get ready to fill my tight hole.
+I’m gonna ride you hard, deep.
+Your cock’s gonna wreck my ass.
+Can’t wait to feel you pounding me.
+Your cock’s made for my tight ass.
+Feel my ass clench around your cock.
+You’re gonna fill me up so good.
+My ass is ready to swallow you whole.
+Can’t wait to feel you stretching me.
+I’m wet and aching for your cock.
+Your cock’s my favorite toy right now."
+} ]
+},
+"together": false
+},
+"AboutToRidePussy": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "I hope you're ready for the ride of your life. It's going to be a bumpy one.
+You might want to brace yourself. This is going to be a rough one.
+Don't even think about trying to escape. I've got you right where I want you.
+Say goodbye to any pleasure you were hoping for. This is about domination, not satisfaction.
+You might be begging for mercy by the time I'm finished with you.
+I hope you're ready to be completely and utterly humiliated.
+I'm only doing this because I want to.
+You're not going to last long, trust me.
+Get ready to fuck me hard, asshole.
+I’m gonna ride that cock like a wild bitch.
+You’re gonna drown in my pussy, fucker.
+I’m taking that cock and I’m not gentle.
+Gonna ride your dick raw and rough.
+Fuck me hard, don’t hold back, asshole.
+I’m the queen, and you’re my fucktoy.
+Feel my pussy squeeze you tight, fucker.
+I’m gonna make you lose your mind, slut.
+You’re mine to fuck, bitch, don’t forget.
+I want you pounding my pussy hard.
+Gonna fuck you stupid with my tight pussy."
+}, {
+"condition": "!isAngry()",
+"lines": "Are you ready for this?
+I'm going to straddle you now.
+I want to feel you inside me.
+This is going to be so good.
+I can't wait to feel you.
+I'm going to rock your world.
+You're going to love this.
+I'm going to take control.
+Hold on tight, this is going to be a wild ride.
+I want to look into your eyes as I straddle you and make love to you.
+Get ready to fill me up.
+Gonna ride that hard cock good.
+I want every inch inside me.
+You’re gonna fuck me deep.
+Can’t wait to feel you stretch me.
+Fuck me with that thick cock.
+I’m soaking wet for you.
+Feel how tight I am for you.
+I’m ready to take you deep.
+I want your cock pounding me.
+Let’s get messy and filthy."
+} ]
+},
+"together": false
+},
+"AboutToRimSub": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Enjoy it while it lasts.
+I do this because I want to, okay?
+Don't move or I will bite your ass.
+Don't fucking move, I need your ass.
+What? I wanna suck your asshole, deal with it.
+Your ass is mine now.
+I’m gonna make you squirm.
+Shut up and spread.
+Try to stay quiet, whore.
+You’re mine to lick and use.
+I’m gonna mark you good.
+Feel me deep inside, slut.
+Your ass belongs to me."
+}, {
+"condition": "!isAngry()",
+"lines": "I can't resist exploring every part of you.
+I'll be gentle, but I promise you'll love every second of it.
+You'll beg for more when I'm done with you.
+Let's see how that ass tastes.
+I wanna eat that ass so much.
+Gonna taste every inch.
+That ass is mine to lick.
+Ready for me to dive in?
+Let me show you how good this feels.
+Can’t wait to bury my tongue deep.
+You’re gonna love this, trust me.
+Time to make you shiver.
+I’m all about that sweet spot.
+Let me hear you moan for me.
+This tongue’s made for you.
+Let me worship that perfect ass.
+Get ready for a wild ride.
+I’m gonna make you melt.
+Can’t wait to eat you out."
+} ]
+},
+"together": false
+},
+"AboutToRubPussiesTogether": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Let’s see how wet you really are.
+Your pussy’s mine to toy with.
+Make a mess for me, slut.
+I’m not stopping till you scream.
+Two wet sluts, one dirty game.
+Grind, show me you want it.
+You’re dripping for me already.
+Gonna grind you into the floor.
+Time to fuck you with my pussy.
+Try to keep up, slut.
+I’ll leave you dripping.
+Let’s see how loud you get.
+Time to grind our cunts till you beg.
+Gonna fuck your pussy with mine, hard.
+Get ready, I’m scissoring that tight cunt.
+Let’s rub these slick pussies raw.
+Feel my cunt drag against your wetness.
+Watch me scissor your filthy little pussy.
+I want to hear your cunt scream under me.
+Your pussy’s mine to rub and fuck.
+Let’s rub these cunts ‘til we’re dripping.
+You ready to get your cunt wrecked?
+Gonna fuck your pussy with my cunt tight.
+My cunt’s gonna own your little pussy.
+Rubbing these cunt lips till you shiver.
+Scissor me hard, I wanna taste your cunt."
+}, {
+"condition": "!isAngry()",
+"lines": "Ready to feel me all over you?
+Let’s make these wet folds dance.
+Can’t wait to grind into you.
+Feel that heat building between us?
+Let’s get wet and wild together.
+I want to feel every inch of you.
+Let’s rub until we both melt.
+Our bodies fit so perfectly.
+I’m already dripping for you.
+Let's share some juices.
+Ready to scissor those tight cunts together?
+Let me grind my cunt deep into yours.
+Your dripping pussy’s begging for this.
+Time to rub these slick cunts real good.
+Wanna feel your pussy squeeze mine hard.
+Gonna mash our cunts till you lose it.
+Let’s scissor and make those cunts sweat.
+Gonna grind my pussy right on your slit.
+Can’t wait to rub our slick pussies raw.
+I’m gonna make your pussy tremble, baby.
+Time to mash these cunts and get wet.
+Gonna bury my pussy deep in your folds.
+Your cunt’s so wet, perfect for tribbing.
+Let’s rub these pussies till we both burst.
+Gonna scissor your pussy hard and fast.
+Your tight cunt’s gonna fuck my pussy good."
+} ]
+},
+"together": false
+},
+"AboutToSuckSubOff": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "I hope you know that I'm only doing this because I want to, not because I have to.
+Do you really think you're good enough for me to bother with this?
+You should be grateful that I'm even considering doing this for you.
+You know the rules. Warn me before you blow your load.
+I hope you're ready to take orders, because I'm not letting you come without my permission.
+Don't even think about finishing without giving me a heads up.
+You better warn me before you cum, or else.
+Don't you dare come without letting me know first.
+Get ready, I’m about to drain that filthy cock.
+Don’t even think about cumming without my say-so.
+I’m taking that cock deep, you worthless slut.
+Ready for me to make your balls empty?
+I’ll swallow every drop of your nasty cum.
+Beg for it, and maybe I’ll let you cum.
+Don’t move till I’m done with your cock.
+You’re gonna cum on my command, got it?
+I’m not stopping till your cock’s empty.
+Your balls are mine to squeeze and drain.
+Let me show you who owns that cock.
+I want your cum dripping down my throat."
+}, {
+"condition": "!isAngry()",
+"lines": "Just lie back and relax, and let me take care of everything.
+Can you let me know when you're about to cum? I don't want to be caught off guard.
+I hope you're ready for the best oral you've ever had.
+I'm going to make you feel so good.
+You're going to love how I do this.
+I can't wait to see the look on your face when I'm done with you.
+Gonna suck that fat cock nice and slow.
+Time to taste that thick dick of yours.
+I wanna taste all your sweet cum.
+Lemme feel that cock twitch in my mouth.
+Your dick’s begging for my lips already.
+I want your balls twitching in my hand.
+Gonna blow you so hard, you won’t stand.
+Your cock’s mine to suck and swallow.
+Get ready to cum all over my tongue.
+I’m starving for your fat dick right now."
+} ]
 },
 "together": false
 },
@@ -266,6 +576,53 @@ I love being rough with you.
 Ah, sorry.. I get carried away.
 I’m sorry.. you’re just too tempting.
 So sorry.. but this feels amazing."
+} ]
+},
+"together": false
+},
+"DomAboutToStartGropingSubsBreasts": {
+"chance": 100.0,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Give me those fucking tits.
+Don't fucking resist, bitch. I need your tits.
+I need something to squeeze. It's this or your throat.
+Don't mind me, whore.
+I need some stress-relief.
+Those tits are mine now.
+You’re not stopping me.
+You’re mine to squeeze.
+Don’t fight it, whore."
+}, {
+"condition": "isAngry()
+getChar(ROLE_TARGET).canBeMilked()",
+"lines": "Give me your udders.
+Give me those fucking milkers.
+I know there is milk in them. Don't fucking resist.
+Who are you storing that milk for, whore?
+Let me squeeze those tits hard.
+I’m taking what’s mine now.
+Those milkers won’t stay full for long.
+I’m gonna drain every drop.
+I’ll punish those milk bags.
+You can’t hide your milk from me.
+I’ll make those nipples hard."
+}, {
+"condition": "!isAngry()",
+"lines": "Let's stimulate your breasts a little.
+I just wanna make you feel good.
+Let's get your nipples nice and hard.
+Don't mind me.
+Can’t wait to feel these.
+Your tits are begging for attention.
+Gonna make those nipples twitch.
+Ready for some sweet teasing?
+These breasts won’t touch themselves.
+Let me show you how good this feels.
+Let’s get those nipples sensitive.
+I’m gonna make those nipples hard."
 } ]
 },
 "together": false
@@ -762,6 +1119,69 @@ I could squeeze you forever."
 },
 "together": false
 },
+"DomPutsOnACondom": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Wrapped up tight, so no surprises.
+Not a single drop slips out.
+I’m in control, not you.
+Not your breeder, not today.
+Don’t think you’re getting knocked up.
+No future offspring with me."
+}, {
+"condition": "!isAngry()",
+"lines": "I don't want to accidentally knock you up.
+I'm not trying to be a dad right now, so let's use protection.
+I can't risk having a baby with you.
+I always use a condom to avoid any unwanted pregnancies.
+Trust me, you don't want to have my baby.
+I'd rather not have any surprise pregnancies, so let's use protection.
+Better safe than sorry.
+Can’t have any accidents now.
+Let’s keep it risk-free.
+Don’t want any surprises."
+} ]
+},
+"together": false
+},
+"DomPutsOnACondomOnSub": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "If it breaks, you're done for.
+I'm not taking any chances with you, bitch.
+This stays on, got it?
+You’re lucky I’m even bothering.
+No excuses if this breaks.
+Not risking a damn thing.
+This stays on, slut.
+No sloppy mistakes allowed.
+You’re not getting off raw.
+One tear, and you’re done."
+}, {
+"condition": "!isAngry()",
+"lines": "I'm not taking any chances.
+Here, let me put that on for you.
+I don't want to take any chances.
+I want to make sure we're protected.
+I don't want to have to worry about this later.
+Just being responsible.
+Gotta keep it safe.
+Better safe than sorry.
+Wrapped up and ready.
+Safety first, then pleasure.
+Let’s keep it mess-free.
+This is for both of us.
+No surprises tonight."
+} ]
+},
+"together": false
+},
 "DomStartsGropingSubsBreasts": {
 "chance": 100,
 "chances": "",
@@ -862,6 +1282,563 @@ Not much to grope. But I'm not complaining.
 Cute little things you’ve got.
 So petite, so perfect.
 I love how easily they fit in my hands."
+} ]
+},
+"together": false
+},
+"DomsPussyGetsLicked": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "I can't believe you're actually enjoying this rough treatment.
+I love it when you lick my pussy. It feels so good.
+Oh, yes, keep licking my little kitty. I love it when you give me all your attention like that.
+Don't stop, baby. I want to feel your tongue on my most sensitive spot. Make me cum for you.
+That's it, lick and suck on my pussy like you're starving for it. I love how badly you want me.
+I can't get enough of your tongue on my clit. You know exactly how to make me scream with pleasure.
+I'm so close. Keep licking me, don't stop until I've climaxed.
+Fuck yeah, don’t stop that filthy tongue.
+Lick my tight cunt harder, slut.
+Suck my clit like the dirty fucktoy you are.
+Keep that nasty tongue flicking my cunt.
+Make my cunt drip all over your face.
+Don’t stop, fucker, I’m dripping for you.
+Taste my slick cunt, you filthy little bitch.
+My cunt’s dripping, shove that tongue in deeper.
+Get your tongue deep in my tight little pussy.
+Lick my cunt like you’re begging for it.
+Slobber all over my clit, you nasty slut.
+Taste my cunt juice, you greedy bitch.
+Fuck, you’re making my pussy throb.
+Tongue fuck me hard, slut, make me scream."
+}, {
+"condition": "!isAngry()",
+"lines": "Oh, yes, right there!
+Don't stop, keep going!
+It feels so good!
+I love the way you're licking me!
+Mmm, that feels amazing!
+Mmm, I love the way your tongue feels against my skin.
+I'm getting so turned on, keep going.
+Your tongue is so skilled, I can't get enough.
+I'm so wet, I can't control myself anymore.
+I'm going to cum, keep doing what you're doing!
+Fuck yeah, right there, slut!
+Lick me deep, don’t stop!
+Damn, you’re making me dripping wet!
+Suck my pussy good, baby!
+You tongue-fucking tease, keep going!
+Make me cum with that filthy tongue!
+Fuck, your tongue’s driving me crazy!
+Lick me raw, I’m dripping for you!
+You’re making my pussy pulse!
+Eat me out like the dirty slut you are!
+Keep that tongue slapping my clit!
+I want your tongue buried deep inside me!
+Lick me harder, I’m dripping all over you!
+Fuck, you’re ruining me with that mouth!
+Suck my pussy lips, you fucker!
+I’m dripping, keep licking that cunt!"
+} ]
+},
+"together": false
+},
+"ForcingDrug": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "",
+"lines": "You're going to take this pill whether you like it or not.
+Don't fight me on this. Just open your mouth and swallow.
+You know you want it. Just let go and let me take control.
+You don't have a choice. I'm going to make you take this pill.
+I can see the desire in your eyes. Give in to me and take the pill.
+Swallow this shit, slut, no excuses.
+I’m shoving this pill down your throat.
+You’re my bitch now, swallow it.
+Stop squirming, swallow the damn pill.
+Take this drug and shut your damn mouth.
+Swallow it fast, or I’ll force it down.
+Stop struggling, just take it.
+I don’t ask twice, you’ll take it now.
+Quit being a brat and take what I give you.
+No mercy, no choice. Just take it.
+You’ll thank me once you’re mine.
+Take the pill, or I’ll make you regret it."
+} ]
+},
+"together": false
+},
+"GrindingFaceWithPussy": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "You like that, don't you? My body grinding against your face.
+I love the way you squirm beneath me. Keep struggling, it only makes me want you more.
+You're mine now. I'm going to grind you into submission.
+I can feel your face getting redder and redder. You can't handle my roughness, can you?
+Don't even try to fight back. You know you want this as much as I do.
+You're at my mercy now. And I'm not going to show you any mercy.
+Do you like the way my body feels pressed against yours? I can feel your heart racing.
+I'm going to grind you into the ground. You're mine to do with as I please.
+You're completely helpless against me. And I love it.
+Suck this pussy good, you dirty slut.
+You’re gagging on my pussy, pathetic bitch.
+Such a worthless fucktoy.
+Taste every inch of my wet cunt.
+I’m gonna fuck your face raw.
+I own your tongue, whore.
+Grinding my cunt into your face.
+You’re nothing but my slut now.
+I’m making you drown in my pussy juice."
+}, {
+"condition": "!isAngry()",
+"lines": "Oh my goodness, your face is right up against my lady parts!
+I can't believe you're letting me grind my pussy against your face like this!
+Oh yes, just like that. Keep your face right there and let me grind against it.
+Your face feels so good against my pussy. Keep grinding, baby.
+I love the way your face feels against my sensitive parts. Don't stop.
+This is amazing. I never thought I'd be grinding my pussy against someone's face like this.
+Your face is so close to my most intimate areas. It's driving me wild.
+This is so hot. I can feel my juices flowing as I grind against your face.
+I never thought I'd be this turned on by grinding my pussy against someone's face, but here we are.
+Your face is the perfect surface for me to rub against. It feels so good.
+I never thought I'd be this passionate, but grinding against your face is driving me wild.
+I love the way your skin feels against mine as I grind against your face.
+I can feel every contour of your face against my sensitive parts. It's so intense.
+Grinding my wet pussy on your face makes me so damn horny.
+You like my dripping cunt pressed against your face, don’t you?
+Your face is my pussy’s favorite toy.
+I’m soaking wet and your face is the perfect fuckpad.
+I want my cunt all over your face.
+Your face is drowning in my dripping pussy juice.
+I want to see your face soaked with my pussy cream.
+Mmm, your face fits perfectly here.
+Keep still, I want every inch.
+You’re my favorite little cushion.
+Feels so good rubbing on you.
+Right there, don’t move.
+You’re so soft beneath me.
+Every grind gets better and better.
+Your face belongs under me.
+I could do this forever.
+You’re my perfect little throne.
+I’m not stopping anytime soon.
+Shh, just let me take over.
+You make this so damn easy."
+} ]
+},
+"together": false
+},
+"MilkingSubWithBreastPump": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()
+getChar(ROLE_TARGET).isLactating()",
+"lines": "Start mooing, whore.
+Moo like a good cowslut.
+Milking sluts is so fun.
+What a whore. Getting milked with pumps.
+Good milk, shame it’s from a bitch.
+I’ll drain you dry, little slut.
+Don’t stop now, milk slut.
+That’s it, keep the milk coming.
+Such a messy, milky whore.
+You’re just a milky cow now.
+Good cow, now moan for me."
+}, {
+"condition": "isAngry()
+!getChar(ROLE_TARGET).isLactating()",
+"lines": "Stupid bitch, start lactating already.
+I don't care. I'm gonna milk you.
+Still no milk? Such a greedy bitch.
+Give me milk already like a good cow.
+I want milk. Now.
+Stop wasting my time, bitch. Give me some milk.
+Where’s my milk, slut?
+I’m not done until your tits start to drip.
+Empty tits, useless toy.
+I’ll squeeze till you bleed.
+I’m taking what I want, bitch.
+You’re my broken little cow.
+Milk or pain, pick one.
+Pathetic little milkless brat."
+}, {
+"condition": "!isAngry()
+getChar(ROLE_TARGET).isLactating()",
+"lines": "Moo like a good cow for me.
+Doesn't that feel nice? Getting milked all day..
+Feels nice to have your breasts milked, right?
+Look at them pumps working. So nice.
+These pumps are working on your tits so nicely.
+If you moo, your milk will taste better..
+That milk’s coming out nice and slow.
+Your tits are doing all the work.
+Keep still, I want every bit.
+You’re such a good cow.
+Look at all that sweet milk.
+Perfect flow, keep it up.
+Your body knows what to do.
+Such soft, full breasts.
+These pumps love your milk.
+You make this so easy for me.
+I could milk you all day.
+Keep those tits working for me.
+I’m proud of how much you give.
+Such a sexy little dairy farm."
+}, {
+"condition": "!isAngry()
+!getChar(ROLE_TARGET).isLactating()",
+"lines": "No milk? You can still moo for me. Maybe that will help.
+Feels nice to have your breasts stimulated, right?
+Look at them pumps working. So nice.
+These pumps are working on your tits so nicely.
+Do you like that?
+Come on, show me some milk.
+Pumping those little nipples nice.
+I want to see those tits leaking.
+Just relax and let it flow.
+Your body’s made for this.
+Can’t wait to taste what you’ve got.
+You’re doing better than I thought.
+Nice and steady, don’t stop.
+Almost there, keep it up.
+You’re such a good milking pet.
+Feel that pull? It’s teasing you.
+I love watching you get all worked up.
+Those nipples look so sensitive."
+} ]
+},
+"together": false
+},
+"OfferingDrug": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Don't be a coward, just pop the pill in your mouth and let me show you what it can do.
+You think you can handle me? Prove it by swallowing this pill.
+Come on, don't be a wimp. Swallow the pill and let's see how wild you can get.
+Just swallow it and let me take care of the rest.
+You want to try something new?
+Stop whining and swallow this shit.
+Don’t act weak, pop it or shut up.
+If you’re too pussy to try, say so.
+I dare you to try this.
+Take it, or I’ll make you regret it.
+Don’t waste my time, just swallow.
+Quit hesitating and prove you’re not trash.
+Eat this. I’ll force it down if you’re useless.
+You think you’re tough? Then prove it. Eat this.
+Man up and pop it, bitch."
+}, {
+"condition": "!isAngry()",
+"lines": "Would you like to try it?
+Just swallow it and let it work its magic.
+Come on, live a little. You only live once.
+Come on, don't be shy. This pill is completely safe.
+Come on, I know you're curious.
+Don't be afraid, just pop it in your mouth and swallow.
+You want to try something new?
+Here, try this, trust me.
+Take it, you’ll love it.
+Just one pill, nothing crazy.
+Ready to feel something new?
+This’ll spice things up.
+Don’t think, just take it.
+Wanna play with something wild?
+A little something extra for you.
+This is the good stuff.
+Curious? Eat  it.
+Give it a shot, babe."
+} ]
+},
+"together": false
+},
+"OrderBlowjob": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "You better open your mouth if you know what's good for you.
+I'm not going to ask again, open your mouth.
+You better do as I say, open your mouth and let me do my thing.
+I don't care if you want to or not, open your mouth and let me have my way with you.
+If you know what's best for you, you'll open your mouth and let me take control.
+Open that filthy mouth and suck me off.
+Don’t make me tell you twice, fucking start sucking.
+Open wide, you worthless cock-hungry whore.
+I want you gagging on my cock, now!
+Stop whining and start sucking, bitch.
+Take me deep, you dirty little fucktoy.
+Fucking obey and blow me like you mean it.
+Suck me hard or I’ll make you regret it.
+I want to hear you choke on my cock.
+Show me how much you crave my cock, slut.
+Get that filthy mouth working, now.
+Suck hard or I’ll fuck your face myself."
+}, {
+"condition": "!isAngry()",
+"lines": "Open your mouth and let me in.
+I want to feel your mouth on me, so open up.
+Don't be shy, open your mouth and let me explore.
+I need to feel your warmth, so open up and let me in.
+You know you want it, so open your mouth and let me in.
+I want to feel your tongue, so open up.
+Show me how good you can be.
+Take me deep and don’t stop.
+Use that mouth, I’m waiting.
+Suck me right, don’t hold back.
+Warm me up with that mouth.
+Don’t tease, just suck me.
+Show me how you suck my cock.
+Take my shaft deep, baby.
+Suck that dick nice and slow.
+I want your mouth on my cock.
+Wrap your lips around me.
+Give me your best blowjob.
+Suck me hard and fast.
+I want to feel you choke on me.
+Open wide and take it all.
+Taste every inch of my cock."
+} ]
+},
+"together": false
+},
+"OrderLickPussy": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Don't make me repeat myself. Lick my {pussy} now.
+You better do as I say and lick my {pussy}.
+I'm not playing around. Lick my fucking {pussy}.
+I won't hesitate to punish you if you don't lick my {pussy}.
+I'm not joking. Lick. My. Pussy.
+You have three seconds to start licking my {pussy} or else.
+I don't care if you like it or not. Lick my {pussy} now.
+You have no choice in the matter. Lick my {pussy} now.
+I'm not going to repeat myself. Lick my fucking {pussy} now.
+Lick my dripping cunt, now.
+Get that tongue in my filthy pussy.
+Eat my soaked slit, you dumb fuck.
+Suck every drop from my tight cunt.
+Taste how wet my nasty cunt is.
+Slam your tongue deep in my cunt.
+I want your filthy tongue on my cunt.
+Lick my dripping hole, slut.
+Get that nasty tongue all over my pussy.
+Suck my slick pussy hard, you worthless.
+Eat my cunt like your life depends on it.
+Lick this fucked pussy or get punished."
+}, {
+"condition": "!isAngry()",
+"lines": "Lick my pussy, I want to feel your tongue on me.
+Don't be shy, just put your mouth on my clit and lick it.
+I need you to focus on my pussy, lick it slowly and sensually.
+My pussy is craving your touch, so don't be afraid to lick it.
+I want to feel your tongue swirling around my clit, so don't hold back.
+I need you to take control and lick my pussy with confidence.
+I'm feeling so turned on right now, so don't be afraid to lick my pussy.
+I want to feel your tongue exploring every inch of my pussy, so don't be shy.
+I need you to focus all your attention on my pussy and lick it until I climax.
+I want to feel your tongue worshipping my pussy, so don't be afraid to go for it.
+Get your tongue in me, now.
+Show me how good you can lick.
+Taste every inch of my pussy.
+Don’t be shy, dive right in.
+I want you to eat me out hard.
+Suck on my clit, nice and slow.
+Make that tongue dance for me.
+Worship my pussy with your mouth.
+Show me how good your tongue is."
+} ]
+},
+"together": false
+},
+"OrderRimming": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Suck my asshole, bitch.
+Hope you like licking asses.
+Don't make me force you.
+I need my asshole cleaned. Now.
+Lick it clean, slut.
+My ass isn’t gonna eat itself.
+Show me you’re useful.
+Your tongue belongs here.
+Lick it like you mean it.
+Earn your keep, asshole cleaner.
+No whining, just lick.
+Clean it up, slut.
+Show me how deep you’ll go."
+}, {
+"condition": "!isAngry()",
+"lines": "Start licking, nice and slow.
+Show me how good you are.
+Use that tongue right.
+Make me feel that love.
+I want you working down there.
+Taste every inch, baby.
+Get in there nice and deep.
+Make it all slippery.
+No hesitation, just go.
+Show me your dedication.
+Make me melt with that mouth."
+} ]
+},
+"together": false
+},
+"PutBreastPumpOnSub": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Give me your stupid milk, now.
+I will milk you until your tits are dry.
+Shut up and let me put these on your tits.
+Bitch, stop fucking resisting. I just need your milk.
+Shut your mouth-hole and get milked already.
+I'm getting my milk, whether you like it or not.
+This thing is gonna squeeze out every drop out of your tits, slut.
+I’ll drain you dry, bitch.
+You’re just a walking milk factory anyway.
+You’re just a cow anyway.
+Struggle all you want, I’m milking you.
+Get used to this, milk slave.
+Fill this pump with your milk, slut.
+It will squeeze every drop out.
+Whimper if you want, I don’t care."
+}, {
+"condition": "isAngry()
+!getChar(ROLE_TARGET).canBeMilked()",
+"lines": "You're not lactating? I don't give a fuck! I need milk.
+Where is the fucking milk, bitch?
+Your tits are not lactating? I will make them!
+No milk? Doesn’t matter, I’ll force it out.
+You’re gonna drip for me, no excuses.
+Start lactating or I will break you.
+I don’t care if you’re dry, I’ll make you leak.
+No milk now? That’s gonna change.
+I’ll get my milk out of you, one way or another.
+Pump on, bitch. I want that milk.
+You’ll be making milk for me soon enough.
+No milk? That’s just a challenge.
+Get ready to fill this pump, whether you like it or not."
+}, {
+"condition": "!isAngry()
+getChar(ROLE_TARGET).canBeMilked()",
+"lines": "I want some of that breast milk.
+Check these out. Will empty your jugs in a second.
+We don't want your breasts to itch from being so full, do we?
+Just looking at those makes me thirsty.
+You're lactating? I want some of that.
+Let’s see how much milk you’ve got.
+Time to drain those sweet tits.
+Pumping you dry, babe.
+These pumps are gonna make you gush.
+Fill the pump, nice and slow.
+Let’s get that milk flowing.
+Can’t wait to taste you.
+Gonna make those jugs empty.
+Let me milk you properly."
+}, {
+"condition": "!isAngry()
+!getChar(ROLE_TARGET).canBeMilked()",
+"lines": "Let's stimulate your breasts a little.
+Maybe some milk will come out if I stimulate your tits long enough.
+You're not lactating, I know. I just wanna make you feel good.
+Let's get your nipples nice and hard.
+Shame that you're not lactating. But we can still try.
+Let’s see if we can coax some milk out.
+Time to wake those sleepy nipples.
+Even if there’s no milk, you’ll love the feeling.
+I want to see you dripping soon.
+I bet those nipples will perk right up.
+Keep still, this will feel good.
+These pumps are gonna get your nipples nice and sensitive."
+} ]
+},
+"together": false
+},
+"RemoveBreastPumpFromSub": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()
+getChar(ROLE_TARGET).isLactating()",
+"lines": "Yeah, yeah, yeah. Shut up. Your milk is mine now.
+I will enjoy drinking this, bitch.
+Thank you for being a good slutty cow, you whore.
+What? Your udders needed to be milked. I'm waiting for a thank you.
+Finally done milking my little cow.
+Your milk’s all mine now.
+Quiet, this is my prize.
+I’ll be back when you’re full again.
+You’re nothing but my personal milk factory.
+Get used to this, bitch.
+You’re just my lactating toy now.
+I own every drop you produce.
+Want a round two, little cow?"
+}, {
+"condition": "isAngry()
+!getChar(ROLE_TARGET).isLactating()",
+"lines": "Where is my milk, whore!?
+Still not lactating? What a fucking joke of a chest you have.
+How are your tits still dry?!
+I give up. Someone should fucking breed you already.
+Come back when you're lactating, whore.
+Not a drop, useless.
+What a dry mess you are.
+No milk, no use.
+Try harder next time, maybe.
+Not a drop for me, huh?"
+}, {
+"condition": "!isAngry()
+getChar(ROLE_TARGET).isLactating()",
+"lines": "Thank you for the milk.
+I will be taking those back, thank you.
+Nice~. Something for me to drink.
+Thank you for being such a good cow.
+Thanks. Your breast milk is mine now.
+That’s enough for now, good cow.
+Your milk’s going to taste so good.
+Off with these, you did great.
+Milk’s collected, now rest up.
+Taking these off, you earned a break.
+Perfect yield today, well done.
+Your milk’s mine, remember that.
+Off they come, you’re amazing.
+Good job, little milky cow.
+Time to free those sweet tits.
+You’re such a good supplier.
+You did well, little cow."
+}, {
+"condition": "!isAngry()
+!getChar(ROLE_TARGET).isLactating()",
+"lines": "Still not lactating? Shame.
+It was worth a try.
+At least your tits got stimulated.
+Did you like that?
+Well, at least your breasts got some love.
+Not quite ready to give, huh?
+Guess we’ll have to wait.
+Maybe you’re saving it all for later."
 } ]
 },
 "together": false
