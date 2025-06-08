@@ -127,6 +127,26 @@ func getInfo(_indx:int=-1) -> SexInfoBase:
 		return null
 	return activityTemp.getDomOrSubInfo(actorsTemp[_indx])
 
+func hatesFetish(fetishID:String, _indx:int=-1) -> bool:
+	var theInfo := getInfo(_indx)
+	if(!theInfo):
+		return false
+	return theInfo.fetishScore({fetishID: 1.0}) < 0.0
+
+func lovesFetish(fetishID:String, _indx:int=-1) -> bool:
+	var theInfo := getInfo(_indx)
+	if(!theInfo):
+		return false
+	return theInfo.fetishScore({fetishID: 1.0}) > 0.0
+
+func isResisting(_indx:int=-1) -> bool:
+	var theInfo := getInfo(_indx)
+	if(!theInfo || (theInfo is SexDomInfo)):
+		return false
+	if(theInfo is SexSubInfo):
+		return theInfo.isResisting()
+	return false
+
 func getChar(_indx:int=-1) -> BaseCharacter:
 	var theInfo := getInfo(_indx)
 	if(!theInfo):

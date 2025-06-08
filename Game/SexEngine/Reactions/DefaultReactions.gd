@@ -6,6 +6,13 @@ func _init():
 		SexReaction.AboutToPenetrateAnal: {REACT_CHANCE: 100},
 		SexReaction.AboutToRidePussy: {REACT_CHANCE: 100},
 		SexReaction.AboutToRideAnal: {REACT_CHANCE: 100},
+		SexReaction.AboutToDrawOnBody: {REACT_CHANCE: 100},
+		SexReaction.AfterDrawingOnBody: {REACT_CHANCE: 100},
+		SexReaction.AboutToBeatUp: {REACT_CHANCE: 100},
+		SexReaction.BeatingUp: {REACT_CHANCE: 100},
+		SexReaction.BeatingUpHard: {REACT_CHANCE: 100},
+		SexReaction.OrderToUndress: {REACT_CHANCE: 100},
+		SexReaction.ForceUndress: {REACT_CHANCE: 100},
 		SexReaction.OfferingDrug: {REACT_CHANCE: 100},
 		SexReaction.ForcingDrug: {REACT_CHANCE: 100},
 		SexReaction.OrderBlowjob: {REACT_CHANCE: 100},
@@ -81,12 +88,12 @@ func getLines(_reaction:int, _role:int, _args:Array):
 						"Shut up and spread those legs before I lose my patience.",
 						"I’m going to bury myself inside you and there’s nothing you can do.",
 						"You’ll take every hard thrust until you beg me to stop.",
-						"I’ve waited long enough—time to ruin that pretty little hole.",
+						"I’ve waited long enough, time to ruin that pretty little hole.",
 						"This pussy’s mine, and I’m going to fuck you senseless.",
 						"I swear I’ll make you regret ever opening your mouth.",
-						"Your screams don’t matter—my cock’s going all the way in.",
+						"Your screams don’t matter, my cock’s going all the way in.",
 						"You’ll be soaked and bruised by the time I’m done.",
-						"Don’t fight me, pet—I’ll smash you full of me anyway.",
+						"Don’t fight me, pet, I’ll smash you full of me anyway.",
 						"Let me in or I’ll force you until you sob.",
 						"Keep quiet, cunt, and stretch for me.",
 						"I’ll pound you so hard you’ll forget your own name.",
@@ -248,6 +255,269 @@ func getLines(_reaction:int, _role:int, _args:Array):
 						"Can’t wait to feel you stretching me.",
 						"I’m wet and aching for your cock.",
 						"Your cock’s my favorite toy right now.",
+					])
+
+		SexReaction.AboutToDrawOnBody:
+			if(_role == ROLE_MAIN):
+				if(!isAngry()):
+					addLines([
+						"Check this out",
+						"Gonna leave you a memento",
+						"Hope you are into bodywritings",
+						"Stay still while I do this",
+						"I wanna draw something on you",
+						"Get ready to be humiliated!",
+						"This is going to be so embarrassing for you!",
+						"Freeze, I’m marking you.",
+						"Hold still, I'm writing.",
+						"You like being a canvas?",
+					])
+				if(isAngry()):
+					addLines([
+						"Don't fucking move, bitch",
+						"Don't you dare move",
+						"Stay still, slut",
+						"About to brand you",
+						"Stay still while I brand you, whore",
+						"Gonna brand you like the little prison's whore that you are.",
+						"I'm going to make sure everyone knows exactly what you did.",
+						"But don't worry, I'll make sure everyone knows who you are.",
+						"This is going to be the best graffiti I've ever done.",
+						"I can't wait to see the look on your face when you see what I've written.",
+						"You deserve everything you're about to get.",
+						"Hold still, you worthless canvas.",
+						"Don’t even think about squirming.",
+						"I’m gonna ruin you for everyone to see.",
+						"No fuckin’ moving or I’ll write more shit.",
+						"I’ll make sure everyone knows what you are.",
+					])
+
+		SexReaction.AfterDrawingOnBody:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"Wear it like a scar.",
+						"Marked and owned.",
+						"Everyone will know your place.",
+						"Look at what you are.",
+						"Say it loud, whore.",
+						"Now you’re marked, slut.",
+						"Wear it, bitch.",
+						"Can’t hide this whore tag.",
+						"Branded like the little slut you are.",
+						"This one suits you, bitch.",
+						"A reminder for every fucker.",
+						"Don’t wash this off, whore.",
+						"Look at that, you worthless slut.",
+						"Wear it proud, cunt.",
+						"Perfect for my little fucktoy.",
+					])
+				if(!isAngry()):
+					addLines([
+						"There we go.",
+						"A present from me.",
+						"Now everyone can see who you are.",
+						"Enjoy that.",
+						"Don't hide this one.",
+						"Want another one?",
+						"How many will fit I wonder.",
+						"This is real art.",
+						"That looks perfect on you.",
+						"Wear it with pride.",
+						"Every mark tells a story.",
+						"This one suits you well.",
+						"I made you special.",
+						"Look at what I wrote on you.",
+						"A little reminder for others.",
+						"That’ll get some attention.",
+					])
+
+		SexReaction.AboutToBeatUp:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"Bitch, you fucking asked for it.",
+						"You're not gonna get away unscarred, you stupid "+RNG.pick(["slut", "whore", "fucktoy", "bitch"])+".",
+						"Stop fucking resisting, you "+RNG.pick(["slut", "whore", "stupid fucktoy", "bitch"])+".",
+						"You brought this upon yourself, you "+RNG.pick(["slut", "whore", "fucktoy", "bitch"])+".",
+						"Time to teach you some pain.",
+						"I’ll leave marks you can’t hide.",
+						"Think you can take this, bitch?",
+						"You’re gonna regret this, slut.",
+						"I’m gonna break you down.",
+						"You asked for a beating, whore.",
+						"No mercy for trash like you.",
+						"Bitch, you’re about to learn fear.",
+						"You’ll bleed for me, slut.",
+						"You’re my fucktoy to break.",
+						"You want rough? I’ll give rough.",
+					])
+				if(!isAngry()):
+					addLines([
+						"I'm getting really mad with you.",
+						"I'm usually not that mean. But you are fucking annoying.",
+						"You made me do this.",
+						"You brought this upon yourself.",
+						"You asked for it, didn’t you?",
+						"Time to teach you a lesson.",
+						"Let’s see how tough you are.",
+						"You’re pushing me too far.",
+						"Better brace yourself.",
+						"This won’t end well for you.",
+						"You made me do this.",
+						"Don’t say I didn’t warn you.",
+						"Hope you can take a hit.",
+						"I’m about to get rough.",
+						"This is on you, so don’t complain.",
+					])
+
+		SexReaction.BeatingUp:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"Stupid. Fucking. Bitch.",
+						"You fucking whore",
+						"I'm gonna break you if I have to.",
+						"It's your fault!",
+						"Stupid painslut.",
+						"You worthless cunt.",
+						"Take it, slut.",
+						"Stupid little brat.",
+						"Pathetic.",
+						"Shut up, whore.",
+						"You begging yet?",
+						"Piece of shit.",
+						"Stop whining, slut.",
+						"I own you now.",
+						"Whimper for me.",
+						"Useless fucktoy.",
+						"Harder? Sure.",
+						"Pathetic cunt.",
+					])
+				if(!isAngry()):
+					addLines([
+						"Stop resisting already!",
+						"Stop making me mad!",
+						"Quit struggling on me.",
+						"Just let it fucking happen.",
+						"You are making this worse for yourself.",
+						"Quit squirming, it’s pointless.",
+						"You think you can fight this?",
+						"Stop wasting energy, slut.",
+						"You’re only hurting yourself.",
+						"Give up, this is your fate.",
+						"Stop flailing, it’s useless.",
+						"You like this, don’t you?",
+						"Surrender already, bitch.",
+						"Stop whining, take it.",
+						"Just accept it, slut.",
+					])
+
+		SexReaction.BeatingUpHard:
+			if(_role == ROLE_MAIN):
+				if(!isAngry()):
+					addLines([
+						"You like that, huh? I'll give you something to cry about.",
+						"I'm not done with you yet. Take this!",
+						"You want me to hit harder? Fine, I'll show you who's boss.",
+						"You thought this was just rough sex? Think again.",
+						"You're going to regret ever crossing me.",
+						"I told you to be ready for a rough ride. This is what you asked for.",
+						"You thought you could handle me? You were wrong.",
+						"I'm going to make you pay for your disobedience.",
+						"You better start begging for mercy, because I'm not going easy on you.",
+						"You thought this was just a game? Think again.",
+						"I'm going to make you pay for what you did.",
+						"You better start begging for mercy, because I'm not going to let up.",
+						"I warned you not to mess with me. Now you're going to suffer the consequences.",
+						"You want harder? I’ll crush you.",
+						"Feel every hit, little brat.",
+						"Don’t think you’re tough now.",
+						"This is punishment, not playtime.",
+						"I’ll break you down piece by piece.",
+						"Your screams won’t save you.",
+					])
+				if(isAngry()):
+					addLines([
+						"You stupid bitch!",
+						"You like pain, you dirty whore?",
+						"Shut up and take it, you worthless bitch!",
+						"I’m gonna break you, slut.",
+						"Beg for mercy, you stupid whore.",
+						"You asked for this, dumb bitch.",
+						"Scream louder, whore!",
+						"I’m gonna make you regret every word, bitch.",
+						"You’re mine to beat and abuse, whore.",
+						"Keep quiet or I’ll hit harder, bitch.",
+						"I’m gonna wreck you, slut.",
+						"You think you can handle me, whore? Think again.",
+						"Cry all you want, bitch, I don’t care.",
+						"I’m gonna leave my mark, bitch.",
+					])
+
+		SexReaction.OrderToUndress:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"Your <ITEM>, take that shit off.",
+						"Take your <ITEM> off, "+RNG.pick(["slut", "whore", "fucktoy", "bitch"])+".",
+						"Don't make me break you, take your stupid <ITEM> off.",
+						"Take off your <ITEM> or I'll rip your clothes off myself.",
+						"Get <ITEM> off before I lose it.",
+						"Off with <ITEM>, no excuses.",
+						"Yank <ITEM> off, slut.",
+						"Ditch your <ITEM>, or else.",
+						"Drop your <ITEM>, now.",
+						"Lose the <ITEM>, bitch.",
+						"Take your <ITEM> off, or I will.",
+					])
+				if(!isAngry()):
+					addLines([
+						"You don't need your <ITEM>. Undress for me.",
+						"I think you don't need your <ITEM>. Be a good toy and undress.",
+						"Take your <ITEM> off for me.",
+						"Strip your <ITEM> off, nice and slow.",
+						"I want to see you without your <ITEM>.",
+						"Get your <ITEM> off me.",
+					])
+
+		SexReaction.ForceUndress:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"Don't you dare resist, you little "+RNG.pick(["slut", "whore", "fucktoy", "bitch"])+".",
+						"You don't need that shit.",
+						"Don't whine about it, no one will save you.",
+						"You're going to do exactly what I say or you'll regret it.",
+						"I'll do whatever it takes to get you naked.",
+						"I won't stop until you're completely naked.",
+						"Fine, if you won't undress willingly, I'll do it for you.",
+						"Stop struggling! You're only making it worse for yourself.",
+						"You'll thank me later. Trust me, this is for your own good.",
+						"I’ll rip it right off you if I have to.",
+						"Stop whining and strip already.",
+						"Struggle all you want, it’s coming off.",
+					])
+				if(!isAngry()):
+					addLines([
+						"Let me take that off.",
+						"You don't need that with me.",
+						"That's only getting in the way.",
+						"Let me see what's under.",
+						"Why are you being so shy? Let me help you out of those clothes.",
+						"I can't wait to see what's underneath. Come on, let me take it off.",
+						"You can't resist me. Just let me undress you and we can get started.",
+						"Don't be such a prude. Let me show you how good it can be without all those clothes on.",
+						"You know you want me to take your clothes off. Just let go and let me do it.",
+						"I bet you're even more beautiful without any clothes on. Come on, let me see.",
+						"I can't wait to touch every inch of your bare skin. Just let me undress you.",
+						"Don't be scared. I promise I'll be gentle as I take off your clothes.",
+						"Let's make this even more exciting by letting me undress you. Trust me, you'll love it.",
+						"Let me help you take that off.",
+						"Come on, let me undress you.",
+						"No need to hide from me.",
+						"Let me free you from those.",
+						"Let me see all of you.",
 					])
 
 		SexReaction.OfferingDrug:
@@ -1171,6 +1441,170 @@ func getLines(_reaction:int, _role:int, _args:Array):
 							"So petite, so perfect.",
 							"I love how easily they fit in my hands.",
 						])
+			if(_role == ROLE_TARGET):
+				if(hatesFetish(Fetish.Lactation)):
+					if(!isResisting()):
+						addLines([
+							"Hey..",
+							"W-wait..",
+							"Not so firmly..",
+							"P-please, be gentle..",
+							"I.. I’m not used to this.",
+							"C-can you go slower?",
+							"U-uh.. this feels strange.",
+							"I don’t really like this..",
+							"S-so sudden..",
+							"I’m not sure about this..",
+							"I don’t want to hate it..",
+							"I’m a little scared..",
+							"D-don’t be too rough..",
+							"I’m not used to hands here.",
+							"Please don’t hurt me.",
+							"M-maybe a bit softer?",
+							"I don’t know if I like this..",
+							"J-just a little, okay?",
+							"I’m not sure how to feel.",
+							"T-this is kinda embarrassing..",
+							"I don’t want to push you away..",
+						])
+						if(getChar().canBeMilked()):
+							addLines([
+								"My milk.. ah..",
+								"Please.. not my milk..",
+								"My breasts.. please be gentle..",
+								"Ah.. you're making my breasts leak..",
+								"Please.. don’t squeeze so hard..",
+								"I’m so shy about this..",
+								"My milk.. it’s leaking..",
+								"It feels weird..",
+							])
+						if(getChar().hasBigBreasts()):
+							addLines([
+								"Is it because of the size?..",
+								"My big tits..",
+								"Groping my heavy breasts!",
+								"Don’t squeeze my big chest!",
+								"My breasts feel so exposed..",
+							])
+						if(getChar().hasSmallBreasts()):
+							addLines([
+								"I don't even have big tits, why are you.. ah.",
+								"Why don't you grope someone with bigger.. ah..",
+								"They’re so small.. are you sure?",
+								"These tiny things don’t deserve this..",
+								"Uh, my boobs are kinda flat, though.",
+								"Is there anything to grab here?",
+								"My little tits aren’t made for this.",
+								"You really want to touch these?",
+								"I don’t have much to offer, sorry.",
+								"They’re barely there, you know.",
+								"I wish I had more to hold.",
+								"These are nothing special..",
+								"You sure you want these tiny things?",
+								"They’re cute but so small..",
+								"I feel weird with you touching these.",
+								"Not much to squeeze, I’m sorry.",
+								"These little things don’t usually get this attention.",
+							])
+				if(isResisting()):
+					addLines([
+						"Stop! Hey..",
+						"Why so firmly! Hey..",
+						"Wait, stop groping me!",
+						"You really gonna grope my tits right now? Fuck..",
+						"Stop grabbing my breasts!",
+						"Get your hands off me!",
+						"Don’t squeeze so hard!",
+						"Quit groping me like that!",
+						"Hands off! I said stop!",
+						"That’s too rough, cut it out!",
+						"Stop fondling me!",
+						"Don’t grope me like I want it!",
+						"No! Don’t touch my chest!",
+						"You can’t just grab me!",
+						"Don’t squeeze my tits!",
+						"I’m serious, hands off!",
+						"Stop messing with me!",
+						"That’s way too much!",
+						"Please don’t grope me!",
+						"Get your hands away!",
+					])
+					if(getChar().canBeMilked()):
+						addLines([
+							"My milk!.. Ah..",
+							"Not my tits, ah..",
+							"No, don’t touch my milk!",
+							"My tits.. don’t squeeze!",
+							"Don’t milk me like that!",
+							"Quit it, I’m still full!",
+							"Don’t squeeze my milkbags!",
+							"Ah, stop milking me!",
+							"Don’t touch my swollen breasts!",
+							"My milk’s not for you!",
+							"No, don’t milk me now!",
+						])
+					if(getChar().hasBigBreasts()):
+						addLines([
+							"Big tits doesn't mean you can grope them! Ah..",
+							"Those are my tits, fuck off..",
+							"Get your hands off my big tits!",
+							"Hands off my heavy tits!",
+							"Quit pawing my big boobs!",
+							"These aren’t toys, get lost!",
+							"Back off these massive tits!",
+							"Quit squeezing my heavy breasts!",
+							"Hands off my big knockers!",
+						])
+				if(!isResisting()):
+					if(!hatesFetish(Fetish.Lactation)):
+						addLines([
+							"Ah..",
+							"Feels weird..",
+							"Not too hard..",
+							"My nips feel so stiff..",
+							"Mmm, that feels nice..",
+							"Mmm, that feels strange..",
+							"They’re so sensitive right now..",
+							"My skin’s tingling..",
+							"It’s a weird kind of nice..",
+							"That’s kind of hot, I guess..",
+						])
+						if(getChar().canBeMilked()):
+							addLines([
+								"My milk.. ah..",
+								"You're groping my lactating breasts.. ah..",
+								"Your hands.. on my milk-filled breasts..",
+								"Mmm, your touch makes them leak..",
+								"So gentle with my swollen tits..",
+								"Ah, your fingers on my lactating breasts..",
+								"I didn’t expect this feeling..",
+								"Your grip makes my nipples harden..",
+								"Your hands make me shiver..",
+								"Ah, your fingers coaxing my milk out..",
+							])
+						if(getChar().hasBigBreasts()):
+							addLines([
+								"Yeah.. grope my heavy tits..",
+								"Do you see how big they are?..",
+								"Do you feel how heavy they are?..",
+								"They’re so big.. don’t stop squeezing.",
+								"I’m not used to this much attention here.",
+								"Careful, they’re sensitive when squeezed.",
+								"It’s strange being handled like this.",
+								"Your fingers dig into all this softness.",
+								"They jiggle so much under your touch.",
+							])
+						if(getChar().hasSmallBreasts()):
+							addLines([
+								"I don't really have real tits..",
+								"Hope you're happy with my size.. ah..",
+								"Not much to grab here..",
+								"Feel a little empty, huh?",
+								"Guess my tits are tiny, sorry..",
+								"Hope you don’t mind these little things..",
+								"Barely enough for you to hold..",
+								"Not much to squeeze, huh?",
+							])
 
 		SexReaction.DomGropesSubsBreasts:
 			if(_role == ROLE_MAIN):
@@ -1281,6 +1715,76 @@ func getLines(_reaction:int, _role:int, _args:Array):
 							"You’re adorable like this.",
 							"I could squeeze you forever.",
 						])
+			if(_role == ROLE_TARGET):
+				if(isResisting()):
+					addLines([
+						"Hey..",
+						"W-wait..",
+						"Ngh..",
+						"E-Easy..",
+						"Not like that..",
+						"N-no, stop..",
+						"Get off me..",
+						"N-no way..",
+						"H-hands off!",
+						"Let go!..",
+						"N-not like that!",
+						"N-no more!",
+						"H-hey.. Fuck..",
+						"Fuck..",
+						"Not so hard.. Ugh..",
+						"Stop groping me..",
+						"Ngh..",
+						"Quit it..",
+					])
+					if(getChar().canBeMilked()):
+						addLines([
+							"My milk.. ah..",
+							"Stop.. my milk’s leaking..",
+							"Please.. not my breasts..",
+							"They’re full.. it hurts..",
+							"Don’t squeeze my lactating tits!",
+							"My milk’s spilling everywhere..",
+							"Ah.. don’t drain me like this..",
+							"I’m lactating.. please, no..",
+							"My milk’s flowing.. please stop..",
+							"My breasts.. they’re so swollen..",
+							"Please, my milk’s still coming..",
+							"You’re milking me against my will..",
+							"No! My milk’s not for you..",
+							"My milk.. Ah..",
+							"Not my leaky tits, ah..",
+							"Why am I leaking milk.. f-fuck..",
+						])
+				if(!isResisting()):
+					addLines([
+						"Ah..",
+						"Ah-h..",
+						"Ngh-h..",
+						"My nips feel so stiff..",
+						"Groping me.. so boldly..",
+						"My breasts..",
+						"My chest..",
+						"You're.. groping me..",
+						"Touching my tits..",
+						"My nipples.. hah..",
+					])
+					if(getChar().canBeMilked()):
+						addLines([
+							"My milk.. ah.. moo?..",
+							"My breasts are producing milk..",
+							"Mmm, my milk is flowing..",
+							"Ah, my milk’s coming out..",
+							"Don’t stop, my tits are dripping.",
+							"My breasts feel so full and warm.",
+							"Milk’s leaking from my nipples..",
+							"Can you feel my milk flowing?",
+							"I’m dripping milk all over you..",
+						])
+					if(getChar().hasBigBreasts()):
+						addLines([
+							"Heavy.. aren't they..",
+						])
 
 		SexReaction.Choking:
 			if(_role == ROLE_MAIN):
@@ -1354,6 +1858,86 @@ func getLines(_reaction:int, _role:int, _args:Array):
 						"You’re helpless, and it drives me wild.",
 						"Maybe I’m a little twisted, but I love this.",
 					])
+			if(_role == ROLE_TARGET):
+				if(isResisting()):
+					addLines([
+						"Let me breathe.. f-fucker..",
+						"I wanna.. b-breathe..",
+						"S-stop it..",
+						"Stop choking.. me..",
+						"Hands.. off.. my neck..",
+						"Q-quit it..",
+						"That's not funny.. ugh..",
+						"Kgh..",
+						"Let go..",
+						"S-stop choking me!",
+						"L-Let me go!",
+						"Air.. khh.. need air..",
+						"G-get off!.. fuck..",
+					])
+				if(!isResisting()):
+					if(lovesFetish(Fetish.Choking)):
+						addLines([
+							"Choke me harder..",
+							"Harder..",
+							"Ngh-h..",
+							"Choking me.. so nice..",
+							"Ngh..",
+							"Yes-s.. more..",
+							"Mmm.. don’t stop..",
+							"Harder.. please..",
+							"Ngh.. keep going..",
+							"So tight.. mmph..",
+							"Can’t breathe.. love it..",
+							"Ugh.. more..",
+							"Don’t.. let go..",
+							"Mmph.. choking me..",
+							"Yeah.. squeeze..",
+							"Guh.. feel good..",
+							"So rough.. mmph..",
+							"Need.. more..",
+							"Mmmph.. don’t stop..",
+							"Tight.. don’t ease..",
+							"Love this.. ngh..",
+							"Harder.. ngh..",
+							"Can’t.. stop..",
+							"Squeeze.. ahh..",
+							"Ngh.. don’t slow.. kh..",
+						])
+					if(!lovesFetish(Fetish.Choking)):
+						addLines([
+							"H-hey.. Fuck..",
+							"Fuck..",
+							"Air..",
+							"My neck..",
+							"Ngh..",
+							"Are you.. ngh..",
+							"Mmm.. breathe.. can’t..",
+							"G-give me air..",
+							"C-can’t.. hold on..",
+							"Ahh.. too tight..",
+							"Please.. easy..",
+							"H-hey.. don’t kill me..",
+							"Mmmph.. too much..",
+							"Ah.. need air..",
+							"Mmmph.. c-can’t..",
+							"C-can breathe.. please..",
+							"N-no.. too tight..",
+							"H-hurts.. stop..",
+							"G-give me air..",
+							"Nngh.. choking..",
+							"Please.. let go..",
+							"Mmm.. can’t.. breathe..",
+							"Struggling.. can’t..",
+							"Nngh.. too much..",
+							"H-hey.. too tight..",
+							"Mmmph.. please..",
+							"Nngh.. help..",
+							"H-hey.. g-get off..",
+							"Nngh.. can’t move..",
+							"Mmm.. please stop..",
+							"S-struggling.. air..",
+						])
 
 		SexReaction.ChokingHard:
 			if(_role == ROLE_MAIN):
@@ -1418,6 +2002,53 @@ func getLines(_reaction:int, _role:int, _args:Array):
 						"Ah, sorry.. I get carried away.",
 						"I’m sorry.. you’re just too tempting.",
 						"So sorry.. but this feels amazing.",
+					])
+			if(_role == ROLE_TARGET):
+				addLines([
+					"Ngh..",
+					"Hh-h-..",
+					"Kh-h.. hh-h..",
+					"..nh-h..",
+					"Hh-h.. h-h.. kh-..",
+					"Nh-h..",
+					"Fh-h..",
+					"Nngh..",
+					"Hh.. hh..",
+					"Mmmph..",
+					"Khh.. uh..",
+					"Hhnn..",
+					"Gah..",
+					"Uh.. ngh..",
+					"Hhhnn..",
+					"Mmph..",
+					"Nh.. ahh..",
+					"Khh.. mmph..",
+					"Hnngh..",
+					"Ugh..",
+					"Nghh..",
+					"Hhmm..",
+					"Mmmh..",
+					"Ghh..",
+					"Hnn..",
+					"Khh.. ahh..",
+				])
+				if(lovesFetish(Fetish.Choking)):
+					addLines([
+						"H-h..ot-t..",
+						"H-h.. ahr..-der..",
+						"Ngh~..",
+						"Mmphh~..",
+						"Nghh~..",
+						"Hngh~..",
+						"Mmmf~..",
+						"Nngh~..",
+						"Hmph~..",
+						"Mmff~..",
+						"Nghhmm~~..",
+						"Hnghh~..",
+						"Mmphh~..",
+						"Nffh~..",
+						"Hnhh.. h-hot..",
 					])
 
 		SexReaction.DomBreastfeedsSub:
@@ -1778,5 +2409,110 @@ func getLines(_reaction:int, _role:int, _args:Array):
 								"Little breasts, plenty of milk.",
 								"Milk tastes better from tiny tits.",
 								"Soft, small, and milky.",
+							])
+			if(_role == ROLE_TARGET):
+				if(hatesFetish(Fetish.Lactation)):
+					if(isResisting()):
+						addLines([
+							"I don't like this..",
+							"Please quit it..",
+							"Please stop.",
+							"Why are you doing this?",
+							"I don’t want this..",
+							"Please, no more..",
+							"Stop, seriously.",
+							"I’m not okay with this.",
+							"Can you just quit?",
+							"This feels wrong.",
+							"Why won’t you stop?",
+							"I’m really uncomfortable.",
+							"No, just stop it.",
+							"I don’t want to do this.",
+							"This is messing with me.",
+						])
+						if(getChar().isLactating()):
+							addLines([
+								"My nipple are leaking.. doesn't mean I like it..",
+								"How much longer are you gonna feed on me?",
+								"I'm not your cow..",
+								"I don't wanna breastfeed..",
+								"Don’t expect me to like this.",
+								"I’m only letting you because I have to.",
+								"I’m not your damn milk source.",
+								"Quit milking me like some animal.",
+								"My nipples are sore, stop.",
+								"I’m only here because I can’t resist.",
+								"I don’t want to be your teat.",
+								"This is humiliating, stop.",
+								"I hate being used like this.",
+							])
+				if(isResisting()):
+					addLines([
+						"I'm not your mommy! Stop it! Pathetic!.. Fuck..",
+						"Stop sucking on them already..",
+						"I'm not a cow!",
+						"Stop feeding, now!",
+						"What should I do to stop you..",
+						"I’m not your damn milk cow!",
+						"I’m not a cow, back off!",
+						"Get your mouth off me!",
+						"Don’t you dare keep going!",
+					])
+					if(getChar().isLactating()):
+						addLines([
+							"Stop stealing my milk, fucker!",
+							"It's my milk, not yours!",
+							"I don't wanna breastfeed you.. Stop it already..",
+							"Stop feeding on my tits..",
+							"Get off me, I’m not your damn cow!",
+							"Quit milking me!",
+							"I’m not sharing my milk with you!",
+							"This is my milk, back off!",
+							"Stop feeding, I’m not your damn snack!",
+							"Quit stealing from me, jerk!",
+							"I’m not your milkmaid, back off!",
+							"Get off my tits, damn it!",
+							"Stop stealing my milk, asshole!",
+							"These are my breasts, not yours!",
+							"Quit sucking my milk like a parasite!",
+							"Don’t lick my breasts, I said no!",
+							"Hands off my tits, stop feeding!",
+							"My milk’s not for you, back off!",
+							"Stop draining my breasts, jerk!",
+							"Stop feeding on my breasts, now!",
+							"I don’t wanna share my milk!",
+							"Get your mouth off my breasts!",
+						])
+				if(!isResisting()):
+					addLines([
+						"This feels so strange..",
+						"Just don't bite..",
+						"Ah.. my nips..",
+						"Mmm, your mouth feels warm.",
+						"Didn’t expect this, but okay.",
+						"I’m.. actually kind of into this.",
+						"This is way more intense than I thought.",
+						"You’re making me dizzy.",
+						"I didn’t know I had this in me.",
+						"Feels weird..",
+						"Your lips are so gentle.",
+						"My skin’s tingling.",
+						"You’re doing something to me.",
+						"This is something else entirely.",
+					])
+					if(!hatesFetish(Fetish.Lactation)):
+						if(getChar().isLactating()):
+							addLines([
+								"I'm breastfeeding..",
+								"I can see the milk flowing.. So strange..",
+								"My tits are being drained of all their milk..",
+								"I'm actually breastfeeding you..",
+								"My tits are so full..",
+								"You’re sucking my milk so good.",
+								"My breasts are leaking..",
+								"You’re making my nipples so sensitive.",
+								"I’m dripping milk down your chin.",
+								"Your mouth on my breasts feels amazing.",
+								"I’m melting as you suck my milk.",
 							])
 
