@@ -29,6 +29,7 @@ func _init():
 		SexReaction.PutBreastPumpOnSub: {REACT_CHANCE: 100},
 		SexReaction.MilkingSubWithBreastPump: {REACT_CHANCE: 100},
 		SexReaction.RemoveBreastPumpFromSub: {REACT_CHANCE: 100},
+		SexReaction.SubMoos: {REACT_CHANCE: 100},
 		SexReaction.DomAboutToStartGropingSubsBreasts: {REACT_CHANCE: 100},
 		SexReaction.DomStartsGropingSubsBreasts: {REACT_CHANCE: 100},
 		SexReaction.DomGropesSubsBreasts: {REACT_CHANCE: 100},
@@ -713,6 +714,42 @@ func getLines(_reaction:int, _role:int, _args:Array):
 						"Show me your dedication.",
 						"Make me melt with that mouth.",
 					])
+			if(_role == ROLE_TARGET):
+				if(!isResisting()):
+					if(hatesFetish(Fetish.RimmingGiving)):
+						addLines([
+							"Hey, I don't wanna do this.",
+							"I'm not really into rimming.",
+							"I'm not comfortable, can we not?",
+							"Licking buts isn't something I'm interested in trying.",
+							"Ugh, do I have to?",
+							"This is seriously gross.",
+						])
+					if(!hatesFetish(Fetish.RimmingGiving)):
+						addLines([
+							"Oh, um, you want me to.. do that?",
+							"I'm not sure about this.",
+							"It's a bit embarrassing.",
+							"This is kinda embarrassing..",
+							"Do you really want me to do that?",
+							"I’m not sure if I’m ready for this..",
+							"I don’t know if I’m good at this.",
+							"You want me to lick your ass?",
+							"Do I really have to do this now?",
+							"This feels kinda humiliating..",
+						])
+				if(isResisting()):
+					addLines([
+						"Fuck off, I'm not doing that!",
+						"Hey, I'm not gonna do that!",
+						"I will bite your ass if you make me do this!",
+						"No way I’m kissing that.",
+						"I’m not your damn toy.",
+						"I swear I’ll scratch your eyes out.",
+						"No fucking way, asshole.",
+						"You’ll regret this if you try.",
+						"Stop, or I’m biting back hard.",
+					])
 
 		SexReaction.GrindingFaceWithPussy:
 			if(_role == ROLE_MAIN):
@@ -1151,6 +1188,66 @@ func getLines(_reaction:int, _role:int, _args:Array):
 							"Keep still, this will feel good.",
 							"These pumps are gonna get your nipples nice and sensitive.",
 						])
+			if(_role == ROLE_TARGET):
+				if(hatesFetish(Fetish.Lactation)):
+					if(!isResisting()):
+						addLines([
+							"I don't really like milking..",
+							"Hey. Don't put this on me!",
+							"Don't milk me, I don't like it..",
+							"I’m not sure about this..",
+							"Why the pumps?",
+							"I don’t want this on me.",
+							"I don’t want to be pumped.",
+							"It’s cold and awkward..",
+						])
+						if(getChar().isLactating()):
+							addLines([
+								"I have milk but I don't like being milked..",
+								"Having milk doesn't mean I'm into being a cow..",
+							])
+				if(isResisting()):
+					addLines([
+						"Fuck off with your breast pumps!",
+						"Hey, take these off, fucker!",
+						"Don't touch my nipples, bitch!",
+						"I will shove these up your ass!",
+						"I'm not a fucking cow, fuck off!",
+						"I’m not some damn dairy cow!",
+						"Don’t you dare pump these!",
+						"Take those pumps off, now!",
+						"I won’t let you milk me!",
+						"I’m not your damn cow!",
+					])
+					if(getChar().isLactating()):
+						addLines([
+							"Don't you fucking dare steal my milk!",
+							"My milk is not for you to steal, fucker!",
+							"Don't you dare steal my breast milk, bitch!",
+							"Fucking weirdo, my milk is not for you!",
+							"No way you’re stealing my milk!",
+							"Stop milking me, you fuck!",
+						])
+				if(!isResisting()):
+					if(!hatesFetish(Fetish.Lactation)):
+						addLines([
+							"Ah.. What is this.. Breast pumps?..",
+							"You wanna try to milk me?.. Like I'm a cow?..",
+							"It's a bit embarrassing..",
+							"These will milk me? Wow..",
+							"Mmm, that feels weird.. but kinda nice.",
+							"You really wanna milk me like this?",
+							"So cold.. but I’m not complaining.",
+							"Are you serious? Pumping me now?",
+						])
+						if(getChar().isLactating()):
+							addLines([
+								"You’re really gonna milk me dry, huh?",
+								"You want all my milk, don’t you?",
+								"Guess I’m your little milk cow now.",
+								"My breasts are itching already..",
+								"I do have some milk..",
+							])
 
 		SexReaction.MilkingSubWithBreastPump:
 			if(_role == ROLE_MAIN):
@@ -1231,6 +1328,82 @@ func getLines(_reaction:int, _role:int, _args:Array):
 							"I love watching you get all worked up.",
 							"Those nipples look so sensitive.",
 						])
+			if(_role == ROLE_TARGET):
+				if(hatesFetish(Fetish.Lactation)):
+					if(!isResisting()):
+						addLines([
+							"I don't like this..",
+							"Please turn them off..",
+							"Please take them off my chest.",
+							"Nhh.. Please..",
+							"Nnhh.. this hurts..",
+							"Nnh.. it’s too much..",
+							"Please.. no more..",
+							"Mmm.. these pumps suck way too hard..",
+							"Nngh.. it’s so weird being milked like this..",
+							"Nnhh.. my poor breasts..",
+							"Mmm.. these pumps won’t quit, will they?",
+						])
+						if(getChar().isLactating()):
+							addLines([
+								"My nipple are leaking.. doesn't mean I like it..",
+								"How much longer are you gonna milk me?",
+								"Ugh, milk's leaking everywhere.. hhh..",
+								"These pumps suck so much.. nnhh..",
+							])
+				if(isResisting()):
+					addLines([
+						"Take them off already!",
+						"Stop trying to milk me!",
+						"I'm not a cow!",
+						"Turn them off, now!",
+						"How do I turn them off.",
+						"I will shake them off if I have to.",
+						"Stop milking my poor tits!",
+						"I’m not made for pumping.",
+						"This pumping’s driving me crazy.",
+						"My poor boobs can’t take this.",
+						"Enough with the milking already.",
+						"I’m not your personal dairy cow!",
+						"My nipples are way too sensitive.",
+					])
+					if(getChar().isLactating()):
+						addLines([
+							"Stop stealing my milk, fucker!",
+							"It's my milk, not yours!",
+							"Milk yourself instead!",
+							"These damn pump are squeezing me dry!",
+							"Quit draining my milk, fucker!",
+							"I’m not your personal milk supply!",
+							"Stop milking me like a toy!",
+							"I’m not a fucking milk cow!",
+							"This pumping hurts, you fuck!",
+						])
+				if(!isResisting()):
+					if(!hatesFetish(Fetish.Lactation)):
+						addLines([
+							"This feels so strange..",
+							"I can feel the pumps tugging on my nips..",
+							"Ah.. my nips..",
+							"Mmm, the pumps are pulling so good..",
+							"Feels so good on my breasts..",
+							"My nipples are so sensitive..",
+							"This pumping’s making me weak..",
+						])
+						if(getChar().isLactating()):
+							addLines([
+								"I can see the milk flowing.. So strange..",
+								"My tits are being drained of all their milk..",
+								"I'm being milked like a cow..",
+								"I can feel the milk draining out..",
+								"The pump’s pulling so hard, but it feels good.",
+								"I didn’t know my tits could do this much..",
+								"Milk’s just pouring out of me..",
+								"My tits look so swollen and juicy.",
+								"It’s so hot feeling my milk flow out like this.",
+								"My nipples are twitching with every pull.",
+								"Every pull makes my milk gush more.",
+							])
 
 		SexReaction.RemoveBreastPumpFromSub:
 			if(_role == ROLE_MAIN):
@@ -1296,6 +1469,117 @@ func getLines(_reaction:int, _role:int, _args:Array):
 							"Guess we’ll have to wait.",
 							"Maybe you’re saving it all for later.",
 						])
+			if(_role == ROLE_TARGET):
+				if(hatesFetish(Fetish.Lactation)):
+					if(!isResisting()):
+						addLines([
+							"I didn't really enjoy it.. Sorry..",
+							"Please don't do this again.",
+							"Finally..",
+							"That’s.. over now, right?",
+							"Was that supposed to feel good?",
+							"Glad it’s done.. I think.",
+							"Not sure if I liked that.",
+							"Please, no more pumping.",
+							"I’m just glad it’s off.",
+						])
+						if(getChar().isLactating()):
+							addLines([
+								"Finally.. You're happy with my milk?..",
+							])
+				if(isResisting()):
+					addLines([
+						"Fucking finally..",
+						"Uhh.. ow..",
+						"You fuck..",
+						"Hope you're happy, fucker..",
+					])
+					if(getChar().isLactating()):
+						addLines([
+							"Fucking milk thief..",
+							"Enjoy my milk, you fucker..",
+							"Hope you choke on it..",
+							"That’s my milk, asshole!",
+							"Don’t you dare waste it!",
+							"You left me empty, jerk!",
+						])
+				if(!isResisting()):
+					if(!hatesFetish(Fetish.Lactation)):
+						addLines([
+							"That was very embarrassing..",
+							"That was more intense than I thought.",
+							"Wow, my tits feel so sensitive now.",
+							"My boobs feel all tingly.",
+							"My chest feels so light now.",
+							"It’s weird how sensitive they are.",
+						])
+						if(getChar().isLactating()):
+							addLines([
+								"What are you gonna do with my milk?..",
+								"You're not gonna give it to me?..",
+								"Enjoy the milk..",
+								"I felt like a cow..",
+								"Hope you like the taste.",
+								"That’s all mine, don’t waste it.",
+								"You better enjoy what you got.",
+								"Feels weird without the pump..",
+							])
+
+		SexReaction.SubMoos:
+			if(_role == ROLE_MAIN):
+				if(!isResisting()):
+					addLines([
+						"Moo..",
+						"Moo~..",
+						"Moo-o!",
+						"Moo. Moo-o..",
+						"Moo?.. Moo..",
+						"Ah.. Moo..",
+						"Moooo~..",
+						"Moo~!",
+						"Mooooo!",
+						"Moo moo~",
+						"Moo? Moo!",
+						"Moooooo~!",
+						"Moo.. Moo?",
+						"Moo moo moo!",
+						"Mooooo..",
+						"Moo-o~",
+						"Moo moo!",
+						"Moo~ moo~",
+						"Moooo?",
+						"Moo moo~ moo!",
+						"Moo~ moo~ moo~",
+						"Moo moo..",
+						"Moo! Moo!",
+						"Mooo~ moo~",
+						"Moo? Mooo!",
+						"Moo moo!",
+						"Moooo~!",
+					])
+				if(isResisting()):
+					addLines([
+						"Mmmph, moo..",
+						"N-no, moo!",
+						"Moo! Stop..",
+						"Moo.. I won’t!",
+						"Mmm, moo.. please!",
+						"Ugh, moo..",
+						"Moo! Let me go!",
+						"Moo.. not fair!",
+						"Moo! I’m serious!",
+						"Mmmph, moo..",
+						"Nooo, moo..",
+						"Moo! Don’t make me!",
+						"Moo.. I’m trying!",
+						"Mmm, moo! Please!",
+						"Moo.. this isn’t right!",
+						"Mmmph, moo! Stop!",
+						"Moo.. I hate this!",
+						"Moo! I’m resisting!",
+						"Moo.. don’t force me!",
+						"Mmm, moo! Let go!",
+					])
 
 		SexReaction.DomAboutToStartGropingSubsBreasts:
 			if(_role == ROLE_MAIN):
@@ -1340,6 +1624,80 @@ func getLines(_reaction:int, _role:int, _args:Array):
 						"Let’s get those nipples sensitive.",
 						"I’m gonna make those nipples hard.",
 					])
+			if(_role == ROLE_TARGET):
+				if(hatesFetish(Fetish.Lactation)):
+					if(!isResisting()):
+						addLines([
+							"What are you?..",
+							"I'm not really into this..",
+							"What is it about my chest?",
+							"Hey, wait.. what are you doing?",
+							"I’m not sure about this..",
+							"Why my chest?",
+							"Is this really necessary?",
+							"I’m kinda uncomfortable..",
+							"This feels weird to me.",
+							"I’m not sure how to react.",
+							"I’m trying to stay calm..",
+						])
+						if(getChar().canBeMilked()):
+							addLines([
+								"I have milk but I don't like being groped..",
+								"Having milk doesn't mean.. you should..",
+								"I’m not into this, even if my breasts are leaking..",
+								"My milk’s not for you.",
+								"My breasts don’t want this, but here we go.",
+							])
+				if(isResisting()):
+					addLines([
+						"Fuck off! Don't touch my chest!",
+						"Hey, don't touch me, fucker!",
+						"Don't touch my nipples, bitch!",
+						"Get your hands off me!",
+						"Hands off my chest!",
+						"Stop! Not my tits!",
+						"Get your filthy hands away!",
+						"Stay away from my chest!",
+						"Don’t touch me like that!",
+						"Leave me the fuck alone!",
+					])
+					if(getChar().canBeMilked()):
+						addLines([
+							"I'm not a fucking cow, fuck off!",
+							"You will waste all my milk, fucker!",
+							"I’m not your milking cow!",
+							"Don’t touch what’s not yours!",
+							"Stop groping me, idiot!",
+							"My milk’s not for you!",
+							"I’m not your milking toy!",
+							"Hands off these tits, jerk!",
+							"I’m not your damn milk cow!",
+							"Get your hands away from my milk!",
+							"These breasts aren’t for you!",
+							"You’ll ruin my milk, fucker!",
+							"Don’t drain me, asshole!",
+							"Leave my milk alone, damn it!",
+						])
+				if(!isResisting()):
+					addLines([
+						"Ah.. What are you about to..",
+						"My chest?..",
+						"It's a bit embarrassing..",
+						"Are you gonna do what I'm thinking?..",
+						"Wait.. you’re really going to?",
+						"Please, be gentle..",
+						"Your hands on me..",
+						"I’m kinda trembling..",
+						"Your touch already feels warm.",
+					])
+					if(getChar().canBeMilked()):
+						addLines([
+							"My nipples are itching already..",
+							"Did you sensed that I'm lactating?..",
+							"They're already leaking for you..",
+							"My nipples are twitching..",
+							"My nipples are hard and needy.",
+						])
 
 		SexReaction.DomStartsGropingSubsBreasts:
 			if(_role == ROLE_MAIN):

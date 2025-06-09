@@ -960,6 +960,78 @@ These breasts won’t touch themselves.
 Let me show you how good this feels.
 Let’s get those nipples sensitive.
 I’m gonna make those nipples hard."
+} ],
+1: [ {
+"condition": "hatesFetish(Fetish.Lactation)
+!isResisting()",
+"lines": "What are you?..
+I'm not really into this..
+What is it about my chest?
+Hey, wait.. what are you doing?
+I’m not sure about this..
+Why my chest?
+Is this really necessary?
+I’m kinda uncomfortable..
+This feels weird to me.
+I’m not sure how to react.
+I’m trying to stay calm.."
+}, {
+"condition": "hatesFetish(Fetish.Lactation)
+!isResisting()
+getChar().canBeMilked()",
+"lines": "I have milk but I don't like being groped..
+Having milk doesn't mean.. you should..
+I’m not into this, even if my breasts are leaking..
+My milk’s not for you.
+My breasts don’t want this, but here we go."
+}, {
+"condition": "isResisting()",
+"lines": "Fuck off! Don't touch my chest!
+Hey, don't touch me, fucker!
+Don't touch my nipples, bitch!
+Get your hands off me!
+Hands off my chest!
+Stop! Not my tits!
+Get your filthy hands away!
+Stay away from my chest!
+Don’t touch me like that!
+Leave me the fuck alone!"
+}, {
+"condition": "isResisting()
+getChar().canBeMilked()",
+"lines": "I'm not a fucking cow, fuck off!
+You will waste all my milk, fucker!
+I’m not your milking cow!
+Don’t touch what’s not yours!
+Stop groping me, idiot!
+My milk’s not for you!
+I’m not your milking toy!
+Hands off these tits, jerk!
+I’m not your damn milk cow!
+Get your hands away from my milk!
+These breasts aren’t for you!
+You’ll ruin my milk, fucker!
+Don’t drain me, asshole!
+Leave my milk alone, damn it!"
+}, {
+"condition": "!isResisting()",
+"lines": "Ah.. What are you about to..
+My chest?..
+It's a bit embarrassing..
+Are you gonna do what I'm thinking?..
+Wait.. you’re really going to?
+Please, be gentle..
+Your hands on me..
+I’m kinda trembling..
+Your touch already feels warm."
+}, {
+"condition": "!isResisting()
+getChar().canBeMilked()",
+"lines": "My nipples are itching already..
+Did you sensed that I'm lactating?..
+They're already leaking for you..
+My nipples are twitching..
+My nipples are hard and needy."
 } ]
 },
 "together": false
@@ -2231,6 +2303,81 @@ You’re such a good milking pet.
 Feel that pull? It’s teasing you.
 I love watching you get all worked up.
 Those nipples look so sensitive."
+} ],
+1: [ {
+"condition": "hatesFetish(Fetish.Lactation)
+!isResisting()",
+"lines": "I don't like this..
+Please turn them off..
+Please take them off my chest.
+Nhh.. Please..
+Nnhh.. this hurts..
+Nnh.. it’s too much..
+Please.. no more..
+Mmm.. these pumps suck way too hard..
+Nngh.. it’s so weird being milked like this..
+Nnhh.. my poor breasts..
+Mmm.. these pumps won’t quit, will they?"
+}, {
+"condition": "hatesFetish(Fetish.Lactation)
+!isResisting()
+getChar().isLactating()",
+"lines": "My nipple are leaking.. doesn't mean I like it..
+How much longer are you gonna milk me?
+Ugh, milk's leaking everywhere.. hhh..
+These pumps suck so much.. nnhh.."
+}, {
+"condition": "isResisting()",
+"lines": "Take them off already!
+Stop trying to milk me!
+I'm not a cow!
+Turn them off, now!
+How do I turn them off.
+I will shake them off if I have to.
+Stop milking my poor tits!
+I’m not made for pumping.
+This pumping’s driving me crazy.
+My poor boobs can’t take this.
+Enough with the milking already.
+I’m not your personal dairy cow!
+My nipples are way too sensitive."
+}, {
+"condition": "isResisting()
+getChar().isLactating()",
+"lines": "Stop stealing my milk, fucker!
+It's my milk, not yours!
+Milk yourself instead!
+These damn pump are squeezing me dry!
+Quit draining my milk, fucker!
+I’m not your personal milk supply!
+Stop milking me like a toy!
+I’m not a fucking milk cow!
+This pumping hurts, you fuck!"
+}, {
+"condition": "!isResisting()
+!hatesFetish(Fetish.Lactation)",
+"lines": "This feels so strange..
+I can feel the pumps tugging on my nips..
+Ah.. my nips..
+Mmm, the pumps are pulling so good..
+Feels so good on my breasts..
+My nipples are so sensitive..
+This pumping’s making me weak.."
+}, {
+"condition": "!isResisting()
+!hatesFetish(Fetish.Lactation)
+getChar().isLactating()",
+"lines": "I can see the milk flowing.. So strange..
+My tits are being drained of all their milk..
+I'm being milked like a cow..
+I can feel the milk draining out..
+The pump’s pulling so hard, but it feels good.
+I didn’t know my tits could do this much..
+Milk’s just pouring out of me..
+My tits look so swollen and juicy.
+It’s so hot feeling my milk flow out like this.
+My nipples are twitching with every pull.
+Every pull makes my milk gush more."
 } ]
 },
 "together": false
@@ -2415,6 +2562,40 @@ Make it all slippery.
 No hesitation, just go.
 Show me your dedication.
 Make me melt with that mouth."
+} ],
+1: [ {
+"condition": "!isResisting()
+hatesFetish(Fetish.RimmingGiving)",
+"lines": "Hey, I don't wanna do this.
+I'm not really into rimming.
+I'm not comfortable, can we not?
+Licking buts isn't something I'm interested in trying.
+Ugh, do I have to?
+This is seriously gross."
+}, {
+"condition": "isResisting()",
+"lines": "Fuck off, I'm not doing that!
+Hey, I'm not gonna do that!
+I will bite your ass if you make me do this!
+No way I’m kissing that.
+I’m not your damn toy.
+I swear I’ll scratch your eyes out.
+No fucking way, asshole.
+You’ll regret this if you try.
+Stop, or I’m biting back hard."
+}, {
+"condition": "!isResisting()
+!hatesFetish(Fetish.RimmingGiving)",
+"lines": "Oh, um, you want me to.. do that?
+I'm not sure about this.
+It's a bit embarrassing.
+This is kinda embarrassing..
+Do you really want me to do that?
+I’m not sure if I’m ready for this..
+I don’t know if I’m good at this.
+You want me to lick your ass?
+Do I really have to do this now?
+This feels kinda humiliating.."
 } ]
 },
 "together": false
@@ -2517,6 +2698,65 @@ I want to see you dripping soon.
 I bet those nipples will perk right up.
 Keep still, this will feel good.
 These pumps are gonna get your nipples nice and sensitive."
+} ],
+1: [ {
+"condition": "hatesFetish(Fetish.Lactation)
+!isResisting()",
+"lines": "I don't really like milking..
+Hey. Don't put this on me!
+Don't milk me, I don't like it..
+I’m not sure about this..
+Why the pumps?
+I don’t want this on me.
+I don’t want to be pumped.
+It’s cold and awkward.."
+}, {
+"condition": "hatesFetish(Fetish.Lactation)
+!isResisting()
+getChar().isLactating()",
+"lines": "I have milk but I don't like being milked..
+Having milk doesn't mean I'm into being a cow.."
+}, {
+"condition": "isResisting()",
+"lines": "Fuck off with your breast pumps!
+Hey, take these off, fucker!
+Don't touch my nipples, bitch!
+I will shove these up your ass!
+I'm not a fucking cow, fuck off!
+I’m not some damn dairy cow!
+Don’t you dare pump these!
+Take those pumps off, now!
+I won’t let you milk me!
+I’m not your damn cow!"
+}, {
+"condition": "isResisting()
+getChar().isLactating()",
+"lines": "Don't you fucking dare steal my milk!
+My milk is not for you to steal, fucker!
+Don't you dare steal my breast milk, bitch!
+Fucking weirdo, my milk is not for you!
+No way you’re stealing my milk!
+Stop milking me, you fuck!"
+}, {
+"condition": "!isResisting()
+!hatesFetish(Fetish.Lactation)",
+"lines": "Ah.. What is this.. Breast pumps?..
+You wanna try to milk me?.. Like I'm a cow?..
+It's a bit embarrassing..
+These will milk me? Wow..
+Mmm, that feels weird.. but kinda nice.
+You really wanna milk me like this?
+So cold.. but I’m not complaining.
+Are you serious? Pumping me now?"
+}, {
+"condition": "!isResisting()
+!hatesFetish(Fetish.Lactation)
+getChar().isLactating()",
+"lines": "You’re really gonna milk me dry, huh?
+You want all my milk, don’t you?
+Guess I’m your little milk cow now.
+My breasts are itching already..
+I do have some milk.."
 } ]
 },
 "together": false
@@ -2585,6 +2825,119 @@ Well, at least your breasts got some love.
 Not quite ready to give, huh?
 Guess we’ll have to wait.
 Maybe you’re saving it all for later."
+} ],
+1: [ {
+"condition": "hatesFetish(Fetish.Lactation)
+!isResisting()",
+"lines": "I didn't really enjoy it.. Sorry..
+Please don't do this again.
+Finally..
+That’s.. over now, right?
+Was that supposed to feel good?
+Glad it’s done.. I think.
+Not sure if I liked that.
+Please, no more pumping.
+I’m just glad it’s off."
+}, {
+"condition": "hatesFetish(Fetish.Lactation)
+!isResisting()
+getChar().isLactating()",
+"lines": "Finally.. You're happy with my milk?.."
+}, {
+"condition": "isResisting()",
+"lines": "Fucking finally..
+Uhh.. ow..
+You fuck..
+Hope you're happy, fucker.."
+}, {
+"condition": "isResisting()
+getChar().isLactating()",
+"lines": "Fucking milk thief..
+Enjoy my milk, you fucker..
+Hope you choke on it..
+That’s my milk, asshole!
+Don’t you dare waste it!
+You left me empty, jerk!"
+}, {
+"condition": "!isResisting()
+!hatesFetish(Fetish.Lactation)",
+"lines": "That was very embarrassing..
+That was more intense than I thought.
+Wow, my tits feel so sensitive now.
+My boobs feel all tingly.
+My chest feels so light now.
+It’s weird how sensitive they are."
+}, {
+"condition": "!isResisting()
+!hatesFetish(Fetish.Lactation)
+getChar().isLactating()",
+"lines": "What are you gonna do with my milk?..
+You're not gonna give it to me?..
+Enjoy the milk..
+I felt like a cow..
+Hope you like the taste.
+That’s all mine, don’t waste it.
+You better enjoy what you got.
+Feels weird without the pump.."
+} ]
+},
+"together": false
+},
+"SubMoos": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "!isResisting()",
+"lines": "Moo..
+Moo~..
+Moo-o!
+Moo. Moo-o..
+Moo?.. Moo..
+Ah.. Moo..
+Moooo~..
+Moo~!
+Mooooo!
+Moo moo~
+Moo? Moo!
+Moooooo~!
+Moo.. Moo?
+Moo moo moo!
+Mooooo..
+Moo-o~
+Moo moo!
+Moo~ moo~
+Moooo?
+Moo moo~ moo!
+Moo~ moo~ moo~
+Moo moo..
+Moo! Moo!
+Mooo~ moo~
+Moo? Mooo!
+Moo moo!
+Moooo~!"
+}, {
+"condition": "isResisting()",
+"lines": "Mmmph, moo..
+N-no, moo!
+Moo! Stop..
+Moo.. I won’t!
+Mmm, moo.. please!
+Ugh, moo..
+Moo! Let me go!
+Moo.. not fair!
+Moo! I’m serious!
+Mmmph, moo..
+Nooo, moo..
+Moo! Don’t make me!
+Moo.. I’m trying!
+Mmm, moo! Please!
+Moo.. this isn’t right!
+Mmmph, moo! Stop!
+Moo.. I hate this!
+Moo! I’m resisting!
+Moo.. don’t force me!
+Mmm, moo! Let go!"
 } ]
 },
 "together": false
