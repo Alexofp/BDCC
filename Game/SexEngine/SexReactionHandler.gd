@@ -159,6 +159,21 @@ func isSubby(_indx:int=-1) -> bool:
 		return false
 	return theInfo.personalityScore({PersonalityStat.Subby:1.0})>0.4
 
+func isMean(_indx:int=-1) -> bool:
+	var theInfo:SexInfoBase = getInfo(_indx)
+	if(!theInfo):
+		return false
+	return theInfo.personalityScore({PersonalityStat.Mean:1.0})>0.5
+
+func isScared(_indx:int=-1) -> bool:
+	var theInfo:SexInfoBase = getInfo(_indx)
+	if(!theInfo):
+		return false
+	if(theInfo is SexSubInfo):
+		if(theInfo.isScared()):
+			return true
+	return false
+
 func isAngry(_indx:int=-1) -> bool:
 	var theInfo:SexInfoBase = getInfo(_indx)
 	if(!theInfo):

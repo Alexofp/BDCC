@@ -6,6 +6,7 @@ func _init():
 		SexReaction.AboutToPenetrateAnal: {REACT_CHANCE: 100},
 		SexReaction.AboutToRidePussy: {REACT_CHANCE: 100},
 		SexReaction.AboutToRideAnal: {REACT_CHANCE: 100},
+		SexReaction.Resisting: {REACT_CHANCE: 100},
 		SexReaction.AboutToDrawOnBody: {REACT_CHANCE: 100},
 		SexReaction.AfterDrawingOnBody: {REACT_CHANCE: 100},
 		SexReaction.AboutToBeatUp: {REACT_CHANCE: 100},
@@ -13,8 +14,18 @@ func _init():
 		SexReaction.BeatingUpHard: {REACT_CHANCE: 100},
 		SexReaction.OrderToUndress: {REACT_CHANCE: 100},
 		SexReaction.ForceUndress: {REACT_CHANCE: 100},
+		SexReaction.WarnAboutToCum: {REACT_CHANCE: 100},
+		SexReaction.Teasing: {REACT_CHANCE: 100},
+		SexReaction.Apologizing: {REACT_CHANCE: 100},
+		SexReaction.ResistingRestraints: {REACT_CHANCE: 100},
+		SexReaction.ActivelyResisting: {REACT_CHANCE: 100},
+		SexReaction.BeggingToPullOutVaginal: {REACT_CHANCE: 100},
+		SexReaction.BeggingToPullOutAnal: {REACT_CHANCE: 100},
 		SexReaction.OfferingDrug: {REACT_CHANCE: 100},
 		SexReaction.ForcingDrug: {REACT_CHANCE: 100},
+		SexReaction.RefusingToSwallowDrug: {REACT_CHANCE: 100},
+		SexReaction.BeggingForCondom: {REACT_CHANCE: 100},
+		SexReaction.OfferingACondom: {REACT_CHANCE: 100},
 		SexReaction.OrderBlowjob: {REACT_CHANCE: 100},
 		SexReaction.OrderLickPussy: {REACT_CHANCE: 100},
 		SexReaction.OrderRimming: {REACT_CHANCE: 100},
@@ -258,6 +269,57 @@ func getLines(_reaction:int, _role:int, _args:Array):
 						"Your cock’s my favorite toy right now.",
 					])
 
+		SexReaction.Resisting:
+			if(_role == ROLE_MAIN):
+				if(isMean()):
+					addLines([
+						"Fuck off with this shit!",
+						"FUCK OFF!",
+						"Go fuck yourself!",
+						"I will break you if you do this!",
+						"You stupid "+RNG.pick(["fucker", "bitch"])+", what are you doing?!",
+						"I don't want this, fuck off!",
+						"Stop it, go screw yourself!",
+						"Back off, you asshole!",
+						"Don’t touch me, fucker!",
+						"I’m not having this shit!",
+						"You’re not taking me that easy!",
+						"Fuck you and your games!",
+						"Leave me the hell alone!",
+						"I’m done with this crap!",
+						"Don’t test me, asshole!",
+						"Get your hands off!",
+						"No way in hell!",
+						"You don’t own me!",
+						"Don’t touch me, you dumb fuck!",
+						"I’ll make you regret this, asshole!",
+						"Fuck off before I snap!",
+						"You’re messing with the wrong bitch!",
+						"I’m not your damn plaything!",
+						"I’m done with your crap, asshole!",
+						"Get the fuck away from me!",
+						"Go fuck yourself, asshole!",
+					])
+				if(!isMean()):
+					addLines([
+						"Don't do this, please!",
+						"I don't want this!",
+						"I don't like this!",
+						"Don't touch me!",
+						"Stop it, please!",
+						"This is not funny, stop it!",
+						"I don't wanna do this!",
+						"I can't do this, it's not right.",
+						"Please, stop. I'm not ready for this.",
+						"Please, don’t!",
+						"Stop, no!",
+						"Leave me alone!",
+						"No, please!",
+						"Please, back off!",
+						"Please, no more!",
+						"I don’t want to!",
+					])
+
 		SexReaction.AboutToDrawOnBody:
 			if(_role == ROLE_MAIN):
 				if(!isAngry()):
@@ -291,6 +353,38 @@ func getLines(_reaction:int, _role:int, _args:Array):
 						"I’m gonna ruin you for everyone to see.",
 						"No fuckin’ moving or I’ll write more shit.",
 						"I’ll make sure everyone knows what you are.",
+					])
+			if(_role == ROLE_TARGET):
+				if(!isResisting()):
+					if(hatesFetish(Fetish.Bodywritings)):
+						addLines([
+							"What? No!",
+							"Put it away!",
+							"Why did you pull that out?",
+							"Don't do it",
+							"Hey! No!",
+							"Don’t you dare!",
+							"Get your pen away!",
+							"Stop that now!",
+							"Hands off me!",
+							"Quit it!",
+							"Don’t draw on me!",
+							"Don’t even try!",
+							"Put that down!",
+						])
+				if(isResisting()):
+					addLines([
+						"Fuck off with that pen!",
+						"Get your shitty marker away!",
+						"I’ll rip that pen from your hand!",
+						"You and your dumb doodles can fuck off!",
+						"Don’t even think about it, asshole!",
+						"Fuck you, no drawing here!",
+						"Not on my skin, you freak!",
+						"Go fuck yourself, art nerd!",
+						"I won’t let you, you dick!",
+						"Keep your crap away, jerk!",
+						"Shove that pen up your ass!",
 					])
 
 		SexReaction.AfterDrawingOnBody:
@@ -331,6 +425,55 @@ func getLines(_reaction:int, _role:int, _args:Array):
 						"Look at what I wrote on you.",
 						"A little reminder for others.",
 						"That’ll get some attention.",
+					])
+			if(_role == ROLE_TARGET):
+				if(!isResisting()):
+					if(hatesFetish(Fetish.Bodywritings)):
+						addLines([
+							"Don't you dare.. fuck",
+							"No! Fuck..",
+							"I didn't ask for that..",
+							"Why did you do that?!",
+							"That's too humiliating..",
+							"Really? Ugh..",
+							"Stop that, seriously.",
+							"Why the hell would you do this?",
+							"Not a fan, you know?",
+							"This is fucking dumb.",
+							"Erase it, now.",
+							"Great, more crap on me.",
+						])
+					if(lovesFetish(Fetish.Bodywritings)):
+						addLines([
+							"Kinda cute..",
+							"I kinda like it..",
+							"That looks hot.",
+							"I'm such a slut for bodywritings..",
+							"Do you have more ink in that pen?",
+							"I swear I feel every stroke.",
+							"That line about me.. damn.",
+							"That's hot.",
+							"You think it's true?..",
+						])
+				if(isResisting()):
+					addLines([
+						"Great, now I’m a damn art exhibit.",
+						"So beautiful.. you fucker.",
+						"Just perfect. Everyone’ll see this crap.",
+						"Just what I needed.. public shame.",
+						"Bravo, you fuck. Can’t scrub this off fast enough.",
+						"Wow, real funny.. not.",
+						"Lovely. That really showed me.",
+						"Fantastic. Fuck you.",
+						"Amazing. I feel so proud.. fuck you.",
+						"I hate you right now.",
+						"Ugh, get your ink off me!",
+						"You’ve got to be kidding me..",
+						"Seriously? Erase it now!",
+						"Fuck off with your marker!",
+						"I swear I’ll wipe this crap!",
+						"Not funny. Not funny at all, you fuck.",
+						"Enough. Erase every line.",
 					])
 
 		SexReaction.AboutToBeatUp:
@@ -521,6 +664,382 @@ func getLines(_reaction:int, _role:int, _args:Array):
 						"Let me see all of you.",
 					])
 
+		SexReaction.WarnAboutToCum:
+			if(_role == ROLE_MAIN):
+				if(!isSubby()):
+					addLines([
+						"I'm very close..",
+						"I'm gonna cum soon..",
+						"About to cum..",
+						"I really wanna cum..",
+						"I’m gonna cum..",
+						"I’m on the edge..",
+						"I’m about to cum..",
+					])
+				if(isSubby()):
+					addLines([
+						"Please let me cum, I really want to..",
+						"I wanna cum so much.. Please!",
+						"I'm about to cum, I need it!",
+						"May I please cum? Please!",
+						"I wanna cum so much.. Please! May I?",
+						"I really want to cum.. Please? Please..",
+						"Can I get a permission to cum.. I really want to..",
+					])
+
+		SexReaction.Teasing:
+			if(_role == ROLE_MAIN):
+				if(isResisting()):
+					addLines([
+						"You just gonna stop now?",
+						"Gonna give up now?",
+						"You saw some resistance and decided to stop?",
+						"Some resistance is enough to stop you?",
+						"Don't you want to play with me?",
+						"Oh, backing off already?",
+						"Lost your nerve, handsome?",
+						"Scared you’ll break me?",
+						"Too gentle for me?",
+						"What, afraid of a little fun?",
+						"You call that effort?",
+						"Is that the best you’ve got?",
+						"You stopping just as I’m warming up?",
+						"Playing it safe, are we?",
+						"That’s all you’ve got?",
+						"See this? It's not yours!",
+						"Fap to this and get the fuck out.",
+						"Are you fucking done already?",
+						"You're shaking. Can't you handle it?",
+						"Just one touch and you'll be begging for more.",
+						"Don't fight it. You know you're mine.",
+					])
+				if(!isResisting()):
+					if(!isMean()):
+						addLines([
+							"Do you like this?",
+							"Let's do something..",
+							"You know you want me.",
+							"I can see it in your eyes, you're craving me.",
+							"You want to give in to me, don't you?",
+							"I can't help but want you right now.",
+							"Bet you can’t handle this.",
+							"Feel that heat yet?",
+							"You look so hungry.",
+							"Too much for you?",
+							"Can you take it?",
+							"Can’t get enough, right?",
+						])
+					if(getChar().isInHeat()):
+						addLines([
+							"Can you feel that I'm in heat?..",
+							"Damn heat.. Wanna do something about it?..",
+							"I'm in heat..",
+							"Heat makes me feel so needy..",
+							"Damn heat..",
+							"Don't make me beg, I can't endure this heat..",
+							"Huff.. stupid heat..",
+							"You just gonna watch me while I'm in heat?..",
+						])
+					if(isMean()):
+						addLines([
+							"We're just gonna stare at each other?",
+							"Do something already!",
+							"C'mon, I don't have all day!",
+							"You're such a bitch.",
+							"Don't be so fucking rude and do something.",
+							"I'm waiting!",
+							"Look at you. Pathetic!",
+							"What’s wrong, can’t keep up?",
+							"Is that the best you’ve got?",
+							"You call that effort?",
+							"Pathetic. Try harder.",
+							"Quit gawking and do something to me!",
+							"You’re boring me already.",
+							"Is that all? Pathetic.",
+							"Wake up and do something.",
+							"You’re barely trying.",
+						])
+					if(isSubby()):
+						addLines([
+							"What are you gonna do to me..",
+							"What should I do..",
+							"We can do something..",
+							"Do you like this?..",
+							"You can do more than just stare..",
+							"You gonna..?",
+							"Do I look good..?",
+							"I want to do whatever you want. I want to make you happy.",
+							"I love the way you look at me, like I'm your little toy to play with.",
+							"I can't stop thinking about all the naughty things you could do to me.",
+							"I want to submit to you completely. I want to be yours.",
+							"I love the way your voice sounds when you tell me what to do.",
+							"I want to be your plaything, to do whatever you want with me.",
+							"I crave your touch, your dominance. I want you to take me.",
+						])
+
+		SexReaction.Apologizing:
+			if(_role == ROLE_MAIN):
+				if(isResisting()):
+					addLines([
+						"Quit it and I won't resist!",
+						"Stop it! I don't want this! Please!",
+						"I might cooperate if you ease up.",
+						"Please, just tone it down a bit!",
+						"I can’t do this if you’re so rough!",
+						"Just a little gentler, okay?",
+						"I’ll stop fighting if you’re more gentle.",
+						"Can you stop? I'm sorry but I have to resist.",
+					])
+				if(!isResisting()):
+					if(isScared()):
+						addLines([
+							"I'm not resisting! Please!",
+							"I will do anything! Please stop..",
+							"I'm sorry! I'm very sorry!",
+							"I'm scared.. Please stop..",
+							"Enough!.. Please..",
+							"I’m sorry, I didn’t mean to!",
+							"Please forgive me..",
+							"I’ll be good, I swear!",
+							"Don’t be mad, please!",
+							"I didn’t want this, sorry!",
+							"I’m sorry, please don’t hurt me!",
+							"I’ll do better, I promise!",
+							"Please, don’t be angry..",
+							"I didn’t mean to upset you!",
+							"I’m sorry, I’m scared..",
+							"Please have mercy..",
+							"I’m sorry, I’ll behave!",
+							"Don’t be mad, I’m sorry!",
+							"I’m begging you, forgive me!",
+							"I’m sorry, please stop!",
+							"I’ll do anything to make it right!",
+							"Please don’t punish me..",
+							"I’m sorry, I’m just scared!",
+							"Please, I’m so sorry!",
+						])
+					if(!isScared()):
+						if(!isMean()):
+							if(!isSubby()):
+								addLines([
+									"I'm sorry, okay?",
+									"Calm down, I'm sorry.",
+									"You don't have to do this. I'm sorry.",
+									"You don't have to do this..",
+									"I'm sorry for what I did.",
+									"Sorry, I didn’t mean to.",
+									"Please, don’t be mad.",
+									"I’m really sorry, truly.",
+									"Didn’t want to hurt you.",
+									"I didn’t mean it like that.",
+									"Forgive me, please.",
+									"I’m sorry, it won’t happen again.",
+									"Didn’t want to upset you.",
+									"Please don’t be angry.",
+									"I’m sorry for crossing the line.",
+									"Sorry, I lost control.",
+									"I didn’t want to hurt you.",
+									"I’m sorry, I’ll be better.",
+									"I regret what I did.",
+								])
+						if(isMean()):
+							addLines([
+								"I'm sorry. Calm down, bitch.",
+								"Will you calm the fuck down already?",
+								"Relax for fuck's sake. I'm sorry.",
+								"I said I'm sorry!",
+								"Chill out, I’m sorry.",
+								"I’m sorry, now stop.",
+								"Fine, I’m sorry, can we continue?",
+								"Not my fault, but I’m sorry.",
+								"Fine, fuck, I’m sorry. Happy now?",
+								"Damn it, I said sorry already!",
+								"Yeah, yeah, fuck, I’m sorry, alright?",
+								"Whatever, fuck, I said sorry!",
+								"Sorry, alright? Don’t push it.",
+								"Fuck, I’m sorry, no need to hurt me.",
+								"Stop acting like a cunt, I’m sorry.",
+								"You want me to say it? Sorry, fucker.",
+								"Jesus, I’m sorry, quit your crap.",
+								"Satisfied? Fuck, I’m sorry.",
+								"I’m sorry, now stop being a pain.",
+								"Fine, fuck, sorry. Happy now?",
+							])
+						if(isSubby()):
+							addLines([
+								"I'm very-very sorry..",
+								"I'm extremely sorry..",
+								"It's my fault, I'm sorry..",
+								"What I did was wrong, sorry..",
+								"I’m such a mess, I’m sorry!",
+								"I can’t believe I messed up like this!",
+								"I’m worthless, I’m so sorry!",
+								"I’m so pathetic, I’m sorry!",
+								"I’ll do anything to make it right!",
+								"I’m sorry for disappointing you!",
+								"I’ll be better, I promise!",
+							])
+
+		SexReaction.ResistingRestraints:
+			if(_role == ROLE_MAIN):
+				addLines([
+					"Nghh..",
+					"Uhh..",
+					"Ff-fh..",
+					"Hh-h..",
+					"Mgh-h..",
+				])
+
+		SexReaction.ActivelyResisting:
+			if(_role == ROLE_MAIN):
+				if(isMean()):
+					addLines([
+						"Fuck off! I don't want you!",
+						"Let me go, you "+RNG.pick(["fucker", "bitch"])+"!",
+						"Let me fucking go already!",
+						"Go fuck yourself!",
+						"I will break you fingers!",
+						"I will mess you up if you don't stop!",
+						"Get your fucking hands off me, asshole!",
+						"You think I’m gonna let you? Fuck no!",
+						"Back the fuck up, you fucker!",
+						"Don’t touch me, you piece of shit!",
+						"I’ll make you regret this, fucker!",
+						"Get lost, you stupid asshole!",
+						"I’m not your fucking toy, asshole!",
+						"Hands off, you disgusting fuck!",
+						"You want a fight? I’m ready, asshole!",
+						"Get the fuck away from me!",
+						"You’re gonna pay for this, fucker!",
+						"Fuck off and stop grabbing me!",
+						"Don’t you fucking dare!",
+						"Back the fuck off, you jerk!",
+						"I won’t take this shit, asshole!",
+						"Leave me the fuck alone!",
+						"Get your filthy hands off me!",
+					])
+				if(!isMean()):
+					addLines([
+						"Don't touch me!",
+						"Get away from me!",
+						"I don't wanna do this!",
+						"Don't make me do this!",
+						"I don't want any of this!",
+						"Stop it already, I wanna leave!",
+						"I don't want to do this, I'm begging you.",
+						"Leave me alone!",
+						"Stop this right now!",
+						"Get off me!",
+						"I’m serious, back off!",
+						"Quit it, please!",
+						"Leave me be!",
+						"Don’t force me!",
+						"Stop before I scream!",
+					])
+
+		SexReaction.BeggingToPullOutVaginal:
+			if(_role == ROLE_MAIN):
+				if(getChar().hasVagina()):
+					if(getChar().getFertility()>0.1):
+						if(!getChar().isVisiblyPregnant()):
+							if((getChar(ROLE_TARGET).getWornCondom() == null)):
+								if(getChar().isInHeat()):
+									addLines([
+										"I'm in heat, I can get pregnant! Please pull out!",
+										"I'm in heat, don't cum inside. Please!",
+										"Not inside.. not when I'm in heat..",
+										"Please pull out, I don't wanna get pregnant.. I'm in heat..",
+										"My body really wants it.. but please.. don't breed me..",
+										"Pull out, I can get pregnant like this!",
+										"Don’t breed me, I’m in heat!",
+										"Please pull out, I can get pregnant!",
+										"I’m so fertile, don’t cum inside!",
+										"Pull out, or I’ll get pregnant! I'm in heat..",
+										"I’m begging, don’t fill me up!",
+										"I’m in heat, but please keep it safe!",
+										"Please, pull out before it’s too late!",
+										"My body is in heat.. but don’t breed me!",
+									])
+								if(!getChar().isInHeat()):
+									addLines([
+										"I don't wanna get pregnant, please pull out..",
+										"Don't cum inside or I might get pregnant..",
+										"Please pull out, I really don't wanna become pregnant..",
+										"If you cum inside you might make me pregnant.. please don't..",
+										"Remember not to cum inside, please.. Don't make me pregnant.",
+										"Please pull out.. I might get pregnant if I don't..",
+										"Please, pull out before it’s too late.",
+										"Don’t cum inside me, I can get pregnant.",
+										"I’m begging you, don’t risk it, pull out.",
+										"Pull out, please, I’m not ready for this.",
+										"Don’t let me get pregnant, pull out now.",
+										"Not inside, I’m serious.. pull out now.",
+										"Pull out or I’ll end up pregnant.",
+										"Please don’t cum inside me, I’m fertile.",
+										"Pull out, I’m begging you, don’t make me pregnant.",
+										"Keep it out, I can’t handle being pregnant.",
+										"I’m fertile.. please don’t cum inside me.",
+										"Don’t make me pregnant, please pull out.",
+										"Pull out, I can get pregnant if you don’t.",
+									])
+							if((getChar(ROLE_TARGET).getWornCondom() != null)):
+								if(!getChar().isInHeat()):
+									addLines([
+										"I don't wanna get pregnant if the condom breaks, please pull out..",
+										"Don't cum inside.. the condom might break.. I don't wanna get pregnant..",
+										"Remember not to cum inside, please.. If the condom breaks I will become pregnant..",
+										"Please pull out.. I might get pregnant if the condom breaks..",
+									])
+								if(getChar().isInHeat()):
+									addLines([
+										"The condom might break.. you should play it safe and pull out.. I'm in heat..",
+										"Please don't test the condom and just pull out.. I'm in heat and don't wanna get pregnant..",
+										"Please pull out.. The condom might break.. And I'm in heat..",
+									])
+				if(getChar().isVisiblyPregnant() || getChar().getFertility()<=0.1):
+					if((getChar(ROLE_TARGET).getWornCondom() == null)):
+						addLines([
+							"Please pull out..",
+							"Don't cum inside, please..",
+							"Please don't cum inside my pussy..",
+							"Please, pull out now.",
+							"Pull out, please.",
+							"No cum inside my pussy.. please.",
+							"Please, don’t finish into my pussy.",
+							"Not inside my pussy, please.",
+							"Don’t cum in me.",
+							"Please, not inside.",
+						])
+					if((getChar(ROLE_TARGET).getWornCondom() != null)):
+						addLines([
+							"The condom might break.. Please pull out..",
+							"Don't cum inside, please.. What if the condom breaks..",
+							"The condom might break.. Please don't cum inside my pussy..",
+						])
+
+		SexReaction.BeggingToPullOutAnal:
+			if(_role == ROLE_MAIN):
+				if((getChar(ROLE_TARGET).getWornCondom() == null)):
+					addLines([
+						"Please pull out..",
+						"Don't cum inside, please..",
+						"Please don't cum inside my "+RNG.pick(["ass", "butt"])+"..",
+						"Please, pull out now.",
+						"Don’t finish inside me, please.",
+						"Not in my ass, please!",
+						"Please don’t cum inside me.",
+						"Don’t fill me up, please.",
+						"Please, don’t do it inside.",
+						"Don’t cum in my ass, please.",
+						"I’m begging you, pull out now.",
+					])
+				if((getChar(ROLE_TARGET).getWornCondom() != null)):
+					addLines([
+						"The condom might break.. Please pull out..",
+						"Don't cum inside, please.. What if the condom breaks..",
+						"The condom might break.. Please don't cum inside my "+RNG.pick(["ass", "butt"])+"..",
+					])
+
 		SexReaction.OfferingDrug:
 			if(_role == ROLE_MAIN):
 				if(isAngry()):
@@ -584,6 +1103,93 @@ func getLines(_reaction:int, _role:int, _args:Array):
 					"You’ll thank me once you’re mine.",
 					"Take the pill, or I’ll make you regret it.",
 				])
+
+		SexReaction.RefusingToSwallowDrug:
+			if(_role == ROLE_MAIN):
+				if(!isAngry()):
+					addLines([
+						"No way, I'm not swallowing that!",
+						"I don't do drugs, no thanks.",
+						"I don't think that's a good idea.",
+						"I'm sorry, but I'm not comfortable with that.",
+						"I don't want to do anything that could be dangerous.",
+						"No, I don't want to risk my health like that.",
+						"I'm sorry, but I just can't do that.",
+						"I'm sorry, but I just can't swallow that pill.",
+						"Pass. I’m not touching that.",
+						"Hard pass on the drugs.",
+						"Nah, not happening.",
+						"I’ll skip the pill, sorry.",
+						"Not my thing. Thanks.",
+						"Sorry, I don’t swallow random pills.",
+					])
+				if(isAngry()):
+					addLines([
+						"Fuck off with that pill!",
+						"Get that shit away from me!",
+						"Shove it where the sun don’t shine!",
+						"I’m not your lab rat, asshole!",
+						"Eat your own damn drugs!",
+						"Fuck you, no way!",
+						"Take your crap and leave!",
+						"Not in a million fuckin’ years!",
+						"Go screw yourself with that pill!",
+						"Nope, fuck off!",
+						"Don’t test me, fuckface!",
+					])
+
+		SexReaction.BeggingForCondom:
+			if(_role == ROLE_MAIN):
+				if(!isAngry()):
+					addLines([
+						"Please, put on a condom.",
+						"I beg of you, protect us both with a condom.",
+						"I don't want to take any risks. Can you please put on a condom?",
+						"I'm begging you, let's be safe and use a condom.",
+						"Can you please put on a condom?",
+						"Can you please slip a condom on your cock?",
+						"Please wrap your cock in a condom. Please?",
+						"Could you slip on a condom? I can’t handle being filled.",
+						"I’m begging, condom first. No mess inside me.",
+						"Use a condom, please. No cum is going in me.",
+						"Use a condom.. I don’t want you cumming inside.",
+						"Let’s be safe.. Condom first. No stuffing me.",
+						"Please don’t fill me raw, use a condom.",
+						"Don’t cum in me, put a condom on.",
+					])
+				if(isAngry()):
+					addLines([
+						"Dammit, use a condom. Now!",
+						"Get a condom. Right fucking now!",
+						"I’m not fucking without protection!",
+						"Condom first, or you will regret it, you fuck!",
+					])
+
+		SexReaction.OfferingACondom:
+			if(_role == ROLE_MAIN):
+				if(!isAngry()):
+					addLines([
+						"Please, put on a condom. You can use mine.",
+						"I beg of you, protect us both with a condom. I can give you one.",
+						"I don't want to take any risks. Can you please put on a condom? I have one here.",
+						"I'm begging you, let's be safe and use a condom. Use mine.",
+						"Can you please put on a condom? Take this one.",
+						"Take this.. don’t ruin me, please.",
+						"I don’t wanna be your breeding slut. Use this.",
+						"Take this damn condom, I’m asking you.",
+						"I’m begging you, put this on or don’t cum inside.",
+						"I’m asking.. please just use the condom.",
+						"Please don’t make me your breeder. Just wear this.",
+						"I’ll be your good if you just use the condom.",
+					])
+				if(isAngry()):
+					addLines([
+						"Use this condom. Now. Don’t even think of cumming inside.",
+						"Don’t test me, wrap your cock with this!",
+						"No bareback. Got it, fucker? Here!",
+						"Wrap up, or we’re done. I'm offering a rubber even though I don't have to!",
+						"Don’t dare cum in me. Use this, you fuck.",
+					])
 
 		SexReaction.OrderBlowjob:
 			if(_role == ROLE_MAIN):
