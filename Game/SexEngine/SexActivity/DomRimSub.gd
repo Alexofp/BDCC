@@ -37,7 +37,7 @@ func startActivity(_args):
 		"{dom.You} {dom.youVerb('kneel')} behind {sub.you} and {dom.youVerb('prepare')} to rim {sub.yourHis} ass."
 	])
 	affectSub(getSubInfo().fetishScore({Fetish.RimmingReceiving: 1.0})+0.0, 0.1, 0.2, 0.0)
-	talk(DOM_0, SUB_0, SexReaction.AboutToRimSub)
+	react(SexReaction.AboutToRimSub)
 
 func rimming_processTurn():
 	#affectDom(getDomInfo().fetishScore({Fetish.RimmingGiving: 0.5})+0.1, 0.1, 0.0)
@@ -165,8 +165,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 				"{sub.You} desperately {sub.youVerb('try', 'tries')} to pull {sub.yourHis} ass away from {dom.your} mouth.",
 			])
 			getDomInfo().addAnger(0.03)
-		if(RNG.chance(50)):
-			talk(SUB_0, DOM_0, SexReaction.Resisting)
+		reactSub(SexReaction.Resisting, [50])
 		return
 	if(_id == "moan"):
 		var text:String = RNG.pick([

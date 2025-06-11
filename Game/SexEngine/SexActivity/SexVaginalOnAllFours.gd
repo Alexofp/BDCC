@@ -330,10 +330,7 @@ func startActivity(_args):
 	currentPose = RNG.pick(getAvaiablePoses())
 	
 	addText(getStartTextForPose(currentPose))
-	react(aboutToPenetrateReaction)
-	#if(RNG.chance(50)):
-	#	talk(DOM_0, SUB_0, aboutToPenetrateReaction)
-	#	talk(SUB_0, DOM_0, aboutToPenetrateReaction)
+	react(aboutToPenetrateReaction, [50, 50])
 
 func onSwitchFrom(_otherActivity, _args):
 	if(_args != null && _args == ["choke"]):
@@ -692,8 +689,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		else:
 			getDomInfo().addAnger(0.2)
 			addText("{sub.You} {sub.youVerb('resist')} attempts to penetrate {sub.youHis} "+RNG.pick(usedBodypartNames)+".")
-			if(RNG.chance(50)):
-				talk(SUB_0, DOM_0, SexReaction.ActivelyResisting)
+			reactSub(SexReaction.ActivelyResisting, [50])
 			return
 	if(_id == "moan"):
 		var moanText:String = RNG.pick([
@@ -727,8 +723,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 				"{sub.You} {sub.youVerb('try', 'tries')} to resist while having {sub.yourHis} "+RNG.pick(usedBodypartNames)+" used!",
 				"{sub.You} {sub.youVerb('try', 'tries')} to make {dom.youHim} pull out!",
 			])
-			if(RNG.chance(50)):
-				talk(SUB_0, DOM_0, SexReaction.ActivelyResisting)
+			reactSub(SexReaction.ActivelyResisting, [50])
 			return
 	if(_id == "begtopullout"):
 		getDomInfo().addAnger(-0.02)
@@ -742,7 +737,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			text += " {dom.you} listened!"
 		
 		addText(text)
-		talk(SUB_0, DOM_0, sexReactionPullOut)
+		reactSub(sexReactionPullOut)
 		return
 	
 func getSubResistChance(baseChance:float, domAngerRemoval:float) -> float:

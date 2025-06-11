@@ -35,8 +35,7 @@ func getCheckTagsSub() -> Array:
 func startActivity(_args):
 	affectSub(getSubInfo().fetishScore({Fetish.RimmingGiving: 1.0})+0.0, 0.1, -0.1, -0.01)
 	addText("{dom.You} {dom.youVerb('force')} {sub.you} onto {sub.yourHis} knees and {dom.youVerb('position')} {dom.yourself} in front of {sub.youHim}, inviting to start licking {dom.yourHis} butt.")
-	talk(DOM_0, SUB_0, SexReaction.OrderRimming)
-	talk(SUB_0, DOM_0, SexReaction.OrderRimming)
+	react(SexReaction.OrderRimming)
 	return
 
 func init_processTurn():
@@ -160,8 +159,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 				"{sub.You} desperately {sub.youVerb('try', 'tries')} to pull away from {dom.your} ass.",
 			])
 			getDomInfo().addAnger(0.03)
-		if(RNG.chance(50)):
-			talk(SUB_0, DOM_0, SexReaction.Resisting)
+		reactSub(SexReaction.Resisting, [50])
 		return
 	if(_id == "startrim"):
 		state = "rimming"

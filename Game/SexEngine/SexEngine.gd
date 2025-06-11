@@ -173,7 +173,7 @@ func checkNewExposedBodyparts():
 				
 		for bodypart in bodypartsToReactTo:
 			var randomSubID:String = RNG.pick(subs)
-			talkText(domID, character.getVoice().domReactionWhenUndressing(bodypart, self, domInfo, subs[randomSubID]))
+			talkText(domID, SexVoice.domReactionWhenUndressing(bodypart, self, domInfo, subs[randomSubID]))
 		
 	for subID in subs:
 		var subInfo = subs[subID]
@@ -189,8 +189,8 @@ func checkNewExposedBodyparts():
 				
 		for bodypart in bodypartsToReactTo:
 			var randomDomID:String = RNG.pick(doms)
-			var domCharacter = doms[randomDomID].getChar()
-			talkText(randomDomID, domCharacter.getVoice().domReactToSubBodypart(bodypart, self, doms[randomDomID], subInfo))
+			#var domCharacter = doms[randomDomID].getChar()
+			talkText(randomDomID, SexVoice.domReactToSubBodypart(bodypart, self, doms[randomDomID], subInfo))
 
 func checkExtra():
 	checkNewExposedBodyparts()

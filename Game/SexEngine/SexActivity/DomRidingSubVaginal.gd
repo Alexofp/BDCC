@@ -238,7 +238,7 @@ func startActivity(_args):
 			"{dom.You} {dom.youVerb('stand')} on the chains and {dom.youVerb('stradle')} {sub.you}, {dom.yourHis} "+RNG.pick(usedBodypartNames)+" is rubbing against {sub.yourHis} "+getDickName(RNG.pick(["dick", "penis", "cock", "member"]))+".",
 		])
 	addText(text)
-	talk(DOM_0, SUB_0, aboutToRideReaction)
+	react(aboutToRideReaction)
 
 func onSwitchFrom(_otherActivity, _args):
 	if(_args != null && _args == ["choke"]):
@@ -662,15 +662,13 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 				endActivity()
 			
 			addText("{sub.You} {sub.youVerb('manage')} to throw {dom.youHim} away from {sub.yourHis} "+getDickName()+".")
-			if(RNG.chance(50)):
-				talk(SUB_0, DOM_0, SexReaction.ActivelyResisting)
+			reactSub(SexReaction.ActivelyResisting, [50])
 			getDomInfo().addAnger(0.3)
 			return
 		else:
 			addText("{sub.You} {sub.youVerb('try', 'tries')} to resist and "+RNG.pick(["shove", "push", "throw"])+" {dom.you} off but {sub.youVerb('fail')}.")
 			getDomInfo().addAnger(0.1)
-			if(RNG.chance(50)):
-				talk(SUB_0, DOM_0, SexReaction.ActivelyResisting)
+			reactSub(SexReaction.ActivelyResisting, [50])
 			return
 	if(_id == "rubSub"):
 		stimulate(SUB_0, S_PENIS, DOM_0, usedBodypart, I_TEASE, fetishGiving)
@@ -683,8 +681,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		state = "subabouttocum"
 		getDomInfo().addAnger(-0.05)
 		addText("{sub.You} {sub.youVerb('warn')} {dom.youHim} that {sub.youHe} {sub.youAre} "+RNG.pick(["about to cum", "close", "very close"])+".")
-		talk(DOM_0, SUB_0, SexReaction.WarnAboutToCum)
-		talk(SUB_0, DOM_0, SexReaction.WarnAboutToCum)
+		reactSub(SexReaction.WarnAboutToCum)
 		return
 	if(_id == "cuminside"):
 		var text:String = RNG.pick([

@@ -64,6 +64,17 @@ enum {
 	DomBreastfeedsSub,
 	DomBreastfeedPraise,
 	DomBreastfeedsOnSub,
+	
+	PawjobStart,
+	PawjobHappens,
+	PawjobRubBalls,
+	
+	PainGeneric,
+	MoanGeneric,
+	
+	LeashStart,
+	Leashed,
+	LeashYank,
 }
 
 static func getAllStrings():
@@ -130,4 +141,15 @@ static func getAllStrings():
 		"DomBreastfeedsSub",
 		"DomBreastfeedPraise",
 		"DomBreastfeedsOnSub",
+
+		"PawjobStart",
+		"PawjobHappens",
+		"PawjobRubBalls",
+		
+		"PainGeneric",
+		"MoanGeneric",
+		
+		"LeashStart",
+		"Leashed",
+		"LeashYank",
 	]

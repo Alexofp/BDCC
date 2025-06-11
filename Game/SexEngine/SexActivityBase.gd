@@ -313,43 +313,7 @@ func talkText(_indx1:int, _text:String):
 		return
 	addOutputRaw([SexEngine.OUTPUT_SAY, theInfo.getCharID(), processText(_text)])
 
-func getTalkText(_indx1:int, _indx2:int, reactionID:int) -> String:
-	var theInfo := getDomOrSubInfo(_indx1)
-	if(!theInfo || theInfo.isUnconscious()):
-		return ""
-	var theInfo2 := getDomOrSubInfo(_indx2)
-	
-	var theText:String = ""
-	if(theInfo is SexDomInfo && theInfo2 is SexSubInfo):
-		theText = theInfo.getChar().getVoice().getDomReaction(reactionID, getSexEngine(), theInfo, theInfo2)
-		
-		if(theText != ""):
-			return GM.ui.processString(theText, {
-				dom = theInfo.getCharID(),
-				sub = theInfo2.getCharID(),
-			})
-		
-	elif(theInfo is SexSubInfo && theInfo2 is SexDomInfo):
-		theText = theInfo.getChar().getVoice().getSubReaction(reactionID, getSexEngine(), theInfo2, theInfo)
-	
-		if(theText != ""):
-			return GM.ui.processString(theText, {
-				dom = theInfo2.getCharID(),
-				sub = theInfo.getCharID(),
-			})
-	return ""
-		
-
-func talk(_indx1:int, _indx2:int, reactionID:int):
-	var theText:String = getTalkText(_indx1, _indx2, reactionID)
-	if(theText == ""):
-		return
-	var theInfo := getDomOrSubInfo(_indx1)
-	if(!theInfo):
-		return
-	addOutputRaw([SexEngine.OUTPUT_SAY, theInfo.getCharID(), theText])
-
-func react(_reactionID:int, _args:Array = [], _actors:Array = [DOM_0, SUB_0]):
+func react(_reactionID:int, _chances:Array = [100.0, 100.0], _actors:Array = [DOM_0, SUB_0], _args:Array = []):
 	var allHandlers:Array = GlobalRegistry.getSexReactionHandlersFor(_reactionID)
 	if(allHandlers.empty()):
 		return
@@ -358,8 +322,12 @@ func react(_reactionID:int, _args:Array = [], _actors:Array = [DOM_0, SUB_0]):
 		handlersWeights.append(handler.handlerWeight)
 	
 	var pickedHandler = RNG.pickWeighted(allHandlers, handlersWeights)
-	pickedHandler.doReactFinal(_reactionID, _actors, self, getSexEngine(), _args)
+	pickedHandler.doReactFinal(_reactionID, _actors, _chances, self, getSexEngine(), _args)
 
+
+func reactSub(_reactionID:int, _chances:Array = [100.0, 100.0], _actors:Array = [SUB_0, DOM_0], _args:Array = []):
+	react(_reactionID, _chances, _actors, _args)
+	
 func addText(_text:String):
 	if(_text.empty()):
 		return

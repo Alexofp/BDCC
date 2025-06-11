@@ -175,7 +175,7 @@ func startActivity(_args):
 			addText(text)
 		else:
 			addText(text)
-			talk(DOM_0, SUB_0, SexReaction.ForcingDrug)
+			react(SexReaction.ForcingDrug)
 	
 	if(_args[0] == "useonself"):
 		timePassed = 0
@@ -257,7 +257,7 @@ func startActivity(_args):
 				])
 		addText(text)
 		if(customDomSay == ""):
-			talk(DOM_0, SUB_0, SexReaction.OfferingDrug)
+			react(SexReaction.OfferingDrug)
 		else:
 			talkText(DOM_0, customDomSay)
 	
@@ -377,8 +377,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			if(drugInfo.has("sexgoal")):
 				failGoal(drugInfo["sexgoal"])
 			addText("{sub.You} {sub.youVerb('manage', 'managed')} to spit the pill out!")
-			if(RNG.chance(50)):
-				talk(SUB_0, DOM_0, SexReaction.Resisting)
+			reactSub(SexReaction.Resisting, [50])
 			return
 		
 		getDomInfo().addAnger(0.1)
@@ -395,7 +394,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		if(!getDom().isPlayer() && RNG.chance(100.0 * getDomInfo().personalityScore({PersonalityStat.Impatient: 0.5, PersonalityStat.Mean: 0.2}))):
 			getDomInfo().addAnger(0.2)
 			addText("That made {dom.you} angry.")
-		talk(SUB_0, DOM_0, SexReaction.RefusingToSwallowDrug)
+		reactSub(SexReaction.RefusingToSwallowDrug)
 		
 	if(_id in ["eatit", "swallowforced"]):
 		endActivity()
@@ -438,8 +437,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		if(usedUniqueItemID != ""):
 			getDom().getInventory().getItemByUniqueID(usedUniqueItemID).removeXOrDestroy(1)
 		addText("{sub.You} {sub.youVerb('try', 'tries')} to stop {dom.youHim} from taking the pill but {sub.youVerb('fail')}.")
-		if(RNG.chance(50)):
-			talk(SUB_0, DOM_0, SexReaction.Resisting)
+		reactSub(SexReaction.Resisting, [50])
 	
 	if(_id == "resistForceCanApply"):
 		if(RNG.chance(getResistChance(SUB_0, DOM_0, RESIST_HANDS_FOCUS, 70.0, 30.0))):
@@ -451,8 +449,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		if(usedUniqueItemID != ""):
 			getDom().getInventory().getItemByUniqueID(usedUniqueItemID).removeXOrDestroy(1)
 		addText("{sub.You} {sub.youVerb('try', 'tries')} to stop {dom.youHim} but {sub.youVerb('fail')}.")
-		if(RNG.chance(50)):
-			talk(SUB_0, DOM_0, SexReaction.Resisting)
+		reactSub(SexReaction.Resisting, [50])
 
 func generatePillVariants(theItemID:String):
 	pillVariants = []

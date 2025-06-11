@@ -38,7 +38,10 @@ func getChance(_reactionID:int) -> float:
 		return handles[_reactionID][REACT_CHANCE]
 	return chanceToReact
 
-func checkChance(_reactionID:int) -> bool:
+func checkChance(_reactionID:int, _chances:Array = []) -> bool:
+	if(!_chances.empty()):
+		if(indxTemp >= 0 && indxTemp < _chances.size()):
+			return RNG.chance(_chances[indxTemp])
 	return RNG.chance(getChance(_reactionID))
 
 func addLines(_lines:Array):
@@ -85,7 +88,7 @@ var indxTemp:int# 0, 1, 2 (indx of an _actors array)
 var tempInfo
 var actorsTemp
 
-func doReactFinal(_id:int, _actors:Array, _activity, _sexEngine, _args:Array):
+func doReactFinal(_id:int, _actors:Array, _chances:Array, _activity, _sexEngine, _args:Array):
 	activityTemp = _activity
 	sexEngineTemp = _sexEngine
 	idTemp = _id
@@ -93,15 +96,15 @@ func doReactFinal(_id:int, _actors:Array, _activity, _sexEngine, _args:Array):
 	
 	var shouldTogether:bool = shouldSayTogether(_id)
 	if(shouldTogether):
-		if(checkChance(_id)):
-			indxTemp = 0
+		indxTemp = 0
+		if(checkChance(_id, _chances)):
 			for actorIndx in _actors:
 				say(actorIndx, _args)
 				indxTemp += 1
 	else:
 		indxTemp = 0
 		for actorIndx in _actors:
-			if(checkChance(_id)):
+			if(checkChance(_id, _chances)):
 				say(actorIndx, _args)
 			indxTemp += 1
 	

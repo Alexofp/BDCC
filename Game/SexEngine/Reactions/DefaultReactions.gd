@@ -49,6 +49,14 @@ func _init():
 		SexReaction.DomBreastfeedsSub: {REACT_CHANCE: 100},
 		SexReaction.DomBreastfeedPraise: {REACT_CHANCE: 100},
 		SexReaction.DomBreastfeedsOnSub: {REACT_CHANCE: 100},
+		SexReaction.PawjobStart: {REACT_CHANCE: 100},
+		SexReaction.PawjobHappens: {REACT_CHANCE: 100},
+		SexReaction.PawjobRubBalls: {REACT_CHANCE: 100},
+		SexReaction.PainGeneric: {REACT_CHANCE: 100},
+		SexReaction.MoanGeneric: {REACT_CHANCE: 100},
+		SexReaction.LeashStart: {REACT_CHANCE: 100},
+		SexReaction.Leashed: {REACT_CHANCE: 100},
+		SexReaction.LeashYank: {REACT_CHANCE: 100},
 	}
 
 func getLines(_reaction:int, _role:int, _args:Array):
@@ -603,26 +611,26 @@ func getLines(_reaction:int, _role:int, _args:Array):
 			if(_role == ROLE_MAIN):
 				if(isAngry()):
 					addLines([
-						"Your <ITEM>, take that shit off.",
-						"Take your <ITEM> off, "+RNG.pick(["slut", "whore", "fucktoy", "bitch"])+".",
-						"Don't make me break you, take your stupid <ITEM> off.",
-						"Take off your <ITEM> or I'll rip your clothes off myself.",
-						"Get <ITEM> off before I lose it.",
-						"Off with <ITEM>, no excuses.",
-						"Yank <ITEM> off, slut.",
-						"Ditch your <ITEM>, or else.",
-						"Drop your <ITEM>, now.",
-						"Lose the <ITEM>, bitch.",
-						"Take your <ITEM> off, or I will.",
+						"Your "+_args[0]+", take that shit off.",
+						"Take your "+_args[0]+" off, "+RNG.pick(["slut", "whore", "fucktoy", "bitch"])+".",
+						"Don't make me break you, take your stupid "+_args[0]+" off.",
+						"Take off your "+_args[0]+" or I'll rip your clothes off myself.",
+						"Get "+_args[0]+" off before I lose it.",
+						"Off with "+_args[0]+", no excuses.",
+						"Yank "+_args[0]+" off, slut.",
+						"Ditch your "+_args[0]+", or else.",
+						"Drop your "+_args[0]+", now.",
+						"Lose the "+_args[0]+", bitch.",
+						"Take your "+_args[0]+" off, or I will.",
 					])
 				if(!isAngry()):
 					addLines([
-						"You don't need your <ITEM>. Undress for me.",
-						"I think you don't need your <ITEM>. Be a good toy and undress.",
-						"Take your <ITEM> off for me.",
-						"Strip your <ITEM> off, nice and slow.",
-						"I want to see you without your <ITEM>.",
-						"Get your <ITEM> off me.",
+						"You don't need your "+_args[0]+". Undress for me.",
+						"I think you don't need your "+_args[0]+". Be a good toy and undress.",
+						"Take your "+_args[0]+" off for me.",
+						"Strip your "+_args[0]+" off, nice and slow.",
+						"I want to see you without your "+_args[0]+".",
+						"Get your "+_args[0]+" off me.",
 					])
 
 		SexReaction.ForceUndress:
@@ -3479,4 +3487,268 @@ func getLines(_reaction:int, _role:int, _args:Array):
 								"Your mouth on my breasts feels amazing.",
 								"I’m melting as you suck my milk.",
 							])
+
+		SexReaction.PawjobStart:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"Let’s see how you handle this, bitch.",
+						"See these {main.feet}? I bet you're drooling already, fucker.",
+						"Gonna grind you down with my {main.feet}.",
+						"Watch me turn you into a wet mess with my {main.feet}.",
+						"I bet you're gonna squirm under my {main.feet}, bitch.",
+						"Tighten up, I’m not going easy.",
+					])
+				if(!isAngry()):
+					addLines([
+						"Let’s see how you like this.",
+						"Hope you’re ready for my {main.feet}.",
+						"These {main.feet} aren’t just for walking.",
+						"Let me show you what my {main.feet} can do.",
+						"Let my {main.feet} do the talking.",
+						"Hope you can handle my grip.",
+					])
+			if(_role == ROLE_TARGET):
+				if(isResisting()):
+					addLines([
+						"The fuck? Don't you dare do this.",
+						"I will break your legs if you do anything stupid.",
+						"Do you want me to scratch your legs or something?",
+						"Don't you dare.",
+						"No way I’m letting you do that.",
+						"I won’t let you humiliate me.",
+						"Don’t test me with that shit.",
+						"I’m not your toy, stop it!",
+						"Don’t make me fight back.",
+					])
+				if(!isResisting()):
+					if(lovesFetish(Fetish.FeetplayReceiving)):
+						addLines([
+							"Mmm..",
+							"Damn..",
+							"Your {main.feet} are such a tease.",
+							"I’m yours..",
+							"Using your {main.feet} on me? Yes, please.",
+						])
+					if(!lovesFetish(Fetish.FeetplayReceiving)):
+						addLines([
+							"I'm not sure I'm into this..",
+							"This seems very humiliating..",
+							"Really? I don't know..",
+						])
+
+		SexReaction.PawjobHappens:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"Look at you.. feels good, fucker?",
+						"You’re lucky I’m even touching that thing.",
+						"Pathetic cock.. but I’ll keep going.",
+						"Get used to being my little foot toy.",
+						"You like my {main.feet} better than your hands, huh?",
+						"Such a desperate little prick.",
+						"Squirm for me, worthless pet.",
+						"This is all you get, weakling.",
+						"My {main.feet} own that sad little dick.",
+						"You want off? Earn it under my {main.feet}.",
+						"Suck it up, you’re my foot slave now.",
+						"I’ll make you beg with these {main.feet}.",
+						"Feel that? Yeah, you do, fucker.",
+						"You’re lucky I’m feeling generous today.",
+						"My {main.feet} can crush you, but I’ll play nice.",
+						"Keep squirming, you pathetic cock.",
+						"Don’t get cocky, my {main.feet} decide your fate.",
+					])
+				if(!isAngry()):
+					addLines([
+						"Yeah.. there we go.",
+						"Yeah.. Look at that..",
+						"Yeah.. Nice and hard.",
+						"How does that feel? Nice, huh?",
+						"Bet you didn’t expect this, huh?",
+						"How’s that feel? I can feel you getting harder.",
+						"Look at you, all worked up for my {main.feet}.",
+						"Gonna make you cum with just my {main.feet}.",
+						"Who needs hands when you’ve got {main.feet} like these?",
+						"That little cock loves my {main.feet}, huh?",
+						"You’re so cute, getting off on this.",
+						"Can’t wait to hear you beg under my {main.feet}.",
+						"Bet you never thought {main.feet} could feel this good.",
+						"Don’t fight it, my {main.feet} know what you want.",
+						"So desperate for my {main.feet}, aren’t you?",
+						"Watch me make you melt with just my {main.feet}.",
+					])
+
+		SexReaction.PawjobRubBalls:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"I can crush these so easily.",
+						"Should I kick you here?",
+						"I wanna see what will happen if I squeeze these.",
+						"These balls look pathetic under my {main.feet}.",
+						"Look at you, trembling under my {main.feet}.",
+						"You like it rough? I’ll break you.",
+						"These balls are begging for punishment.",
+						"Squirm for me, you worthless sack.",
+					])
+				if(!isAngry()):
+					addLines([
+						"Some love for the balls.",
+						"Look at you, all worked up under my {main.feet}.",
+						"You like it when I rub your balls like this?",
+						"Can’t resist my paws, can you?",
+						"These little balls are begging for it.",
+						"Don’t get too cocky, I’m in charge here.",
+						"Paws on your balls, and you’re melting.",
+						"Those balls are twitching under my touch.",
+						"Play nice or my {main.feet} get rough.",
+					])
+
+		SexReaction.PainGeneric:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"Ughh.. you fuck..",
+						"That hurts, you fucker!",
+						"Fuck, watch it!",
+						"Shit, don’t push it! Agh..",
+						"Grr.. bitch.",
+						"Ugh, enough, you fuck.",
+						"Grr.. quit it!",
+						"Argh, I’m not a toy!",
+						"Cut it out, asshole!",
+						"Ow! Cut that out!",
+						"Shit, stop it, bitch.",
+						"Argh, that hurts..",
+						"Ugh, fuck off!",
+						"Ow, easy..",
+						"Fuck, enough!",
+						"Cut it, asshole!",
+					])
+				if(!isAngry()):
+					addLines([
+						"Ow..",
+						"Ah!",
+						"Ugh!",
+						"Ow!",
+						"Ack!",
+						"Eek!",
+						"Argh!",
+						"Uh!",
+						"Gah!",
+						"Aah!",
+						"Ughh!",
+						"Ah.. fuck..",
+						"Ow.. that hurt..",
+					])
+
+		SexReaction.MoanGeneric:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"Ah.. fuck..",
+						"Hngh.. damn you.",
+						"Gah.. fuck yeah.",
+						"Mmph.. that’s it.",
+						"Ah.. you’re lucky.",
+						"Ah.. fucker..",
+						"Mmm..",
+						"Ahh..",
+						"Ohh..",
+						"Ah..",
+					])
+				if(!isAngry()):
+					addLines([
+						"Ah..",
+						"Mmm..",
+						"Ahh..",
+						"Ohh..",
+						"Hah..",
+						"Nngh..",
+						"Mm-hmm..",
+						"Mmph..",
+						"Hng..",
+						"Aah..",
+						"Nnh..",
+						"Mhmm..",
+						"Haa..",
+						"Nnhh..",
+					])
+
+		SexReaction.LeashStart:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"Don't fucking move.",
+						"I need your neck, bitch.",
+						"Hold still while I attach this.",
+						"No sudden moves, slut.",
+						"Stay quiet and take it.",
+						"Keep still, bitch.",
+						"Look at me when I put this on.",
+						"You’ll learn your place soon.",
+					])
+				if(!isAngry()):
+					addLines([
+						"Hold still.",
+						"Stay still.",
+						"Don’t move.",
+						"This is for your own good.",
+						"Quiet now.",
+						"No sudden moves.",
+						"Look at me.",
+						"Let me show you who’s boss.",
+					])
+
+		SexReaction.Leashed:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"You’ll learn your place soon.",
+						"You’re chained to me now.",
+						"Feel that? That’s control.",
+						"You’re locked down, bitch.",
+						"Stay put or I’ll yank that leash hard.",
+						"Obey, or I’m yanking you back.",
+						"You’re on a leash, remember that.",
+						"Don’t make me yank it.",
+					])
+				if(!isAngry()):
+					addLines([
+						"A leash looks nice on you.",
+						"You wear that leash so well.",
+						"I’m holding this leash. Stay put.",
+						"Behave, or I’ll give a little tug.",
+						"This leash is for your good.",
+						"Don’t make me pull on it.",
+						"You’re safe as long as you obey.",
+					])
+
+		SexReaction.LeashYank:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"Don’t test me.",
+						"Obey, or I’ll choke you out.",
+						"I'm in charge here, bitch.",
+						"You’ll learn your place, like it or not.",
+						"Stop struggling, or I’ll show you real pain.",
+						"I don’t like defiance.",
+						"Do you like gasping for air, whore?",
+						"Quit whining or feel this leash even tighten.",
+						"Stupid bitch, you earned this.",
+					])
+				if(!isAngry()):
+					addLines([
+						"Don’t make me yank this again.",
+						"You better listen.",
+						"Obey, I have your leash.",
+						"I’ll yank even harder if you don’t obey.",
+						"Don't make me angry.",
+						"Don't make me mad.",
+						"Don’t test me.",
+						"Quit resisting.",
+						"Do you really want to be choked?",
+					])
 

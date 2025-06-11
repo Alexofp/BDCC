@@ -115,8 +115,7 @@ func feeding_processTurn():
 		sendSexEvent(SexEvent.BreastFeeding, SUB_0, DOM_0, {madeLactate=suddenlyLactating, loadSize=0.0, targetIsDom=true})
 		
 		addText(text)
-		if(RNG.chance(30)):
-			talk(DOM_0, SUB_0, SexReaction.DomBreastfeedsSub)
+		react(SexReaction.DomBreastfeedsSub, [30, 30])
 	else:
 		var extraMessages:Array = []
 		var fluidByAmount:Dictionary = fluids.getFluidAmountByType()
@@ -175,8 +174,7 @@ func feeding_processTurn():
 		sendSexEvent(SexEvent.BreastFeeding, SUB_0, DOM_0, {madeLactate=false, loadSize=howMuchCollected, targetIsDom=true})
 		
 		addText(text)
-		if(RNG.chance(30)):
-			talk(DOM_0, SUB_0, SexReaction.DomBreastfeedsSub)
+		react(SexReaction.DomBreastfeedsSub, [30, 30])
 
 func getActions(_indx:int):
 	if(_indx == DOM_0):
@@ -343,8 +341,7 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 		else:
 			addText("{sub.You} {sub.youVerb('try', 'tries')} to pull away from {dom.you} but {sub.youVerb('fail')}.")
 			getDomInfo().addAnger(0.1)
-			if(RNG.chance(50)):
-				talk(SUB_0, DOM_0, SexReaction.ActivelyResisting)
+			reactSub(SexReaction.ActivelyResisting, [50])
 
 func getOrgasmHandlePriority(_indx:int) -> int:
 	if(_indx == DOM_0):

@@ -124,8 +124,7 @@ func sex_processTurn():
 			doBlowjobTurnDom()
 		else:
 			doPussyLickingTurnDom()
-			if(RNG.chance(10)):
-				talk(DOM_0, SUB_0, SexReaction.DomsPussyGetsLicked)
+			react(SexReaction.DomsPussyGetsLicked, [10.0, 10.0])
 		if(domFocus == BodypartSlot.Penis):
 			doBlowjobTurnSub()
 		else:
@@ -140,8 +139,7 @@ func sex_processTurn():
 		doBlowjobTurnDom()
 	else:
 		doPussyLickingTurnDom()
-		if(RNG.chance(10)):
-			talk(DOM_0, SUB_0, SexReaction.DomsPussyGetsLicked)
+		react(SexReaction.DomsPussyGetsLicked, [10.0, 10.0])
 
 
 func getActions(_indx:int):
@@ -179,8 +177,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		else:
 			getDomInfo().addAnger(0.1)
 			addText("{sub.You} {sub.youVerb('try', 'tries')} to pull away from {dom.you} but {sub.youVerb('fail')}.")
-			if(RNG.chance(50)):
-				talk(SUB_0, DOM_0, SexReaction.ActivelyResisting)
+			reactSub(SexReaction.ActivelyResisting, [50])
 			return
 
 	
@@ -207,14 +204,14 @@ func init_doAction(_indx:int, _id:String, _action:Dictionary):
 		subFocus = BodypartSlot.Vagina
 		affectSub(getSubInfo().fetishScore({Fetish.OralSexGiving: 1.0}), 0.05, -0.4, 0.0)
 		addText("{dom.You} {dom.youVerb('order')} {sub.youHim} to "+RNG.pick(["start licking {dom.yourHis} pussy", "stick {sub.yourHis} tongue out and start working on {dom.yourHis} pussy"])+".")
-		talk(DOM_0, SUB_0, SexReaction.OrderLickPussy)
+		react(SexReaction.OrderLickPussy)
 		return
 	if(_id == "ordersuck"):
 		state = "order"
 		subFocus = BodypartSlot.Penis
 		affectSub(getSubInfo().fetishScore({Fetish.OralSexGiving: 1.0}), 0.05, -0.4, 0.0)
 		addText("{dom.You} {dom.youVerb('order')} {sub.youHim} to "+RNG.pick(["open {sub.yourHis} mouth", "part {sub.yourHis} lips"])+".")
-		talk(DOM_0, SUB_0, SexReaction.OrderBlowjob)
+		react(SexReaction.OrderBlowjob)
 		return
 	if(_id in ["forcelick", "forcesuck"]):
 		var succChance:float = getDomForceChance()

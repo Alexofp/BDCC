@@ -160,9 +160,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			"{dom.You} {dom.youVerb('stomp')} on {sub.yourHis} chest [b]really hard[/b].",
 			"{dom.You} {dom.youVerb('kick')} {sub.yourHis} sides [b]really hard[/b]."
 		])
-		talk(DOM_0, SUB_0, SexReaction.BeatingUpHard)
-		if(RNG.chance(40)):
-			talk(SUB_0, DOM_0, SexReaction.BeatingUpHard)
+		react(SexReaction.BeatingUpHard, [100.0, 40.0])
 		return
 	if(_id == "pinhead"):
 		state = "onhead"
@@ -255,8 +253,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			text += "{sub.You} {sub.youVerb('try', 'tries')} to pull away from {dom.you} but {sub.youVerb('fail')}."
 			getDomInfo().addAnger(0.1)
 		addText(text)
-		if(RNG.chance(50)):
-			talk(SUB_0, DOM_0, SexReaction.ActivelyResisting)
+		reactSub(SexReaction.ActivelyResisting, [50])
 		return
 	if(_id == "bitefeet"):
 		var text:String = ""
@@ -270,8 +267,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			text += "{sub.You} {sub.youVerb('try', 'tries')} to bite {dom.yourHis} foot."
 			getDomInfo().addAnger(0.1)
 		addText(text)
-		if(RNG.chance(30)):
-			talk(SUB_0, DOM_0, SexReaction.ActivelyResisting)
+		reactSub(SexReaction.ActivelyResisting, [50])
 		return
 	if(_id == "licksoles"):
 		addTextPick([

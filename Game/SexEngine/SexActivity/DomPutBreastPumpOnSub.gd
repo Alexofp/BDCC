@@ -76,8 +76,7 @@ func startActivity(_args):
 		
 		noticedSore = getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)
 		
-		talk(DOM_0, SUB_0, SexReaction.PutBreastPumpOnSub)
-		talk(SUB_0, DOM_0, SexReaction.PutBreastPumpOnSub)
+		react(SexReaction.PutBreastPumpOnSub)
 
 func milkingSub_processTurn():
 	var pumpItem = getSub().getInventory().getEquippedItemByUniqueID(pumpID)
@@ -148,10 +147,7 @@ func milkingSub_processTurn():
 		])
 	
 	addText(text)
-	if(RNG.chance(10)):
-		talk(DOM_0, SUB_0, SexReaction.MilkingSubWithBreastPump)
-	if(RNG.chance(5)):
-		talk(SUB_0, DOM_0, SexReaction.MilkingSubWithBreastPump)
+	react(SexReaction.MilkingSubWithBreastPump, [7.0, 5.0])
 
 
 func getActions(_indx:int):
@@ -179,9 +175,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		
 		endActivity()
 		addText(text)
-		talk(DOM_0, SUB_0, SexReaction.RemoveBreastPumpFromSub)
-		if(RNG.chance(30)):
-			talk(SUB_0, DOM_0, SexReaction.RemoveBreastPumpFromSub)
+		react(SexReaction.RemoveBreastPumpFromSub, [100.0, 30.0])
 
 	if(_id == "moo"):
 		var muffled:String = ""
@@ -194,7 +188,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			"{sub.You} {sub.youVerb('moo')} while breast pumps work on {sub.yourHis} breasts.."
 		])
 		moan(SUB_0)
-		talk(SUB_0, DOM_0, SexReaction.SubMoos)
+		reactSub(SexReaction.SubMoos)
 		return
 	if(_id == "cum"):
 		getSub().cumOnFloor(getDomID())

@@ -71,7 +71,7 @@ func startActivity(_args):
 			])
 		if(getDomInfo().getChar().isPlayer()):
 			addText(text)
-			talk(SUB_0, DOM_0, condomBeggingReaction)
+			reactSub(condomBeggingReaction)
 			return
 		
 		if(getDomInfo().hasMemory("TiredOfCondomOffers")):
@@ -80,7 +80,7 @@ func startActivity(_args):
 			])
 			getDomInfo().addAnger(0.05)
 			addText(text)
-			talk(SUB_0, DOM_0, condomBeggingReaction)
+			reactSub(condomBeggingReaction)
 			return
 		
 		var successChance:float
@@ -105,7 +105,7 @@ func startActivity(_args):
 				condomItem.breakChance = getSub().useBestCondom()
 			
 			addText(text)
-			talk(SUB_0, DOM_0, condomBeggingReaction)
+			reactSub(condomBeggingReaction)
 			return
 		else:
 			var superFailChance:float = getDomInfo().getAngerScore() * 30.0
@@ -116,7 +116,7 @@ func startActivity(_args):
 				])
 				getDomInfo().addAnger(0.2)
 				addText(text)
-				talk(SUB_0, DOM_0, condomBeggingReaction)
+				reactSub(condomBeggingReaction)
 				return
 			
 			getDomInfo().addAnger(0.1)
@@ -125,6 +125,6 @@ func startActivity(_args):
 			])
 			
 			addText(text)
-			talk(SUB_0, DOM_0, condomBeggingReaction)
+			reactSub(condomBeggingReaction)
 			return
 

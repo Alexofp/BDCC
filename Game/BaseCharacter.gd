@@ -28,7 +28,6 @@ var skillsHolder: SkillsHolder
 var lustInterests: LustInterests
 var fetishHolder: FetishHolder
 var personality: Personality
-var sexVoice: SexVoice
 var bodyFluids: Fluids
 
 # Bodypart stuff
@@ -82,7 +81,6 @@ func _ready():
 	fetishHolder.setCharacter(self)
 	personality = Personality.new()
 	personality.setCharacter(self)
-	createVoice()
 	bodyFluids = Fluids.new()
 
 func getID():
@@ -2089,13 +2087,6 @@ func afterSexEnded(sexInfo):
 			GM.main.addMessage(resultText)
 		
 	updateAppearance()
-
-func createVoice():
-	sexVoice = SexVoice.new()
-	sexVoice.setCharacter(self)
-
-func getVoice() -> SexVoice:
-	return sexVoice
 
 func getFirstItemThatCoversBodypart(bodypartSlot):
 	return getInventory().getFirstItemThatCoversBodypart(bodypartSlot)

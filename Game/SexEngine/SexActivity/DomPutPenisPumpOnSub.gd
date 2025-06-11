@@ -144,7 +144,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			"{sub.You} {sub.youVerb('moo')} while a penis pump strokes {sub.yourHis} cock.."
 		])
 		moan(SUB_0)
-		talk(SUB_0, DOM_0, SexReaction.SubMoos)
+		reactSub(SexReaction.SubMoos)
 		return
 
 func onActivityEnd():

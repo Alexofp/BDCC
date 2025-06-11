@@ -91,11 +91,11 @@ func startActivity(_args):
 		getDom().getInventory().equipItem(condomItem)
 		
 		addText("{dom.You} {dom.youVerb('put')} a condom on {dom.yourHis} cock.")
-		talk(DOM_0, SUB_0, SexReaction.DomPutsOnACondom)
+		react(SexReaction.DomPutsOnACondom)
 		return
 	if(_args[0] == "sub"):
 		getSub().getInventory().equipItem(condomItem)
 	
 		addText("{dom.You} {dom.youVerb('put')} a condom on {sub.your} cock.")
-		talk(DOM_0, SUB_0, SexReaction.DomPutsOnACondomOnSub)
+		react(SexReaction.DomPutsOnACondomOnSub)
 		return
