@@ -3,6 +3,7 @@ class_name RestraintRingGag
 
 func _init():
 	restraintType = RestraintType.Gag
+	sexReaction = SexReaction.BondageGag
 
 func getResistAnimation():
 	return "struggle_gag"

@@ -4,6 +4,7 @@ class_name RestraintButtplug
 func _init():
 	npcDodgeDifficultyMod = 1.5
 	restraintType = RestraintType.ButtPlug
+	sexReaction = SexReaction.BondageButtplug
 
 func canUnlockWithKey():
 	return false

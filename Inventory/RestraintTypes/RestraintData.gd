@@ -11,6 +11,8 @@ var aiWontResist:bool = false
 
 var smartLock:SmartLockBase
 
+var sexReaction:int = -1
+
 func getItem():
 	return item.get_ref()
 

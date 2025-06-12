@@ -155,15 +155,19 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 	if(_actionID == "startvag"):
 		switchCurrentActivityTo("SexVaginalOnAllFours", ["choke"])
 		addText("{dom.You} {dom.youVerb('raise')} {sub.yourHis} leg, preparing to fuck {sub.yourHis} {pussy}.")
+		react(SexReaction.StartChokeFuck)
 	if(_actionID == "startanal"):
 		switchCurrentActivityTo("SexAnalOnAllFours", ["choke"])
 		addText("{dom.You} {dom.youVerb('raise')} {sub.yourHis} leg, preparing to fuck {sub.yourHis} {anus}.")
+		react(SexReaction.StartChokeFuck)
 	if(_actionID == "startridevag"):
 		switchCurrentActivityTo("DomRidingSubVaginal", ["choke"])
 		addText("{dom.You} {dom.youVerb('pin')} {sub.you} to the floor, about to ride {sub.yourHis} {cock} with {dom.yourHis} {pussy}.")
+		react(SexReaction.StartChokeRide)
 	if(_actionID == "startrideanal"):
 		switchCurrentActivityTo("DomRidingSubAnal", ["choke"])
 		addText("{dom.You} {dom.youVerb('pin')} {sub.you} to the floor, about to ride {sub.yourHis} {cock} with {dom.yourHis} {ass}.")
+		react(SexReaction.StartChokeRide)
 		
 	if(_actionID == "escape"):
 		if(RNG.chance(getResistChance(SUB_0, DOM_0, RESIST_NECK_FOCUS, 20.0, 0.0))):

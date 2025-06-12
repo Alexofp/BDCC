@@ -1,6 +1,9 @@
 extends RestraintData
 class_name RestraintSlaveCollar
 
+func _init():
+	sexReaction = SexReaction.BondageCollar
+
 func canStruggle():
 	return false
 

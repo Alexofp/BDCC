@@ -4,6 +4,7 @@ class_name RestraintVaginalplug
 func _init():
 	npcDodgeDifficultyMod = 1.5
 	restraintType = RestraintType.VaginalPlug
+	sexReaction = SexReaction.BondageVaginalPlug
 
 var turnedOn = false
 

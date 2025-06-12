@@ -75,6 +75,26 @@ enum {
 	LeashStart,
 	Leashed,
 	LeashYank,
+	
+	StartChokeFuck,
+	StartChokeRide,
+	TryForceSuckPenis,
+	TryForceLickPussy,
+	
+	AgreeGeneric,
+	RefuseGeneric,
+	OrgasmGeneric,
+	
+	BondageChastityCage,
+	BondageWristCuffs,
+	BondageAnkleCuffs,
+	BondageMittens,
+	BondageGag,
+	BondageMuzzle,
+	BondageBlindfold,
+	BondageVaginalPlug,
+	BondageButtplug,
+	BondageCollar,
 }
 
 static func getAllStrings():
@@ -152,4 +172,24 @@ static func getAllStrings():
 		"LeashStart",
 		"Leashed",
 		"LeashYank",
+		
+		"StartChokeFuck",
+		"StartChokeRide",
+		"TryForceSuckPenis",
+		"TryForceLickPussy",
+		
+		"AgreeGeneric",
+		"RefuseGeneric",
+		"OrgasmGeneric",
+		
+		"BondageChastityCage",
+		"BondageWristCuffs",
+		"BondageAnkleCuffs",
+		"BondageMittens",
+		"BondageGag",
+		"BondageMuzzle",
+		"BondageBlindfold",
+		"BondageVaginalPlug",
+		"BondageButtplug",
+		"BondageCollar",
 	]

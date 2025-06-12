@@ -6,6 +6,7 @@ var tightlockShiv:bool = false
 func _init():
 	npcDodgeDifficultyMod = 1.1
 	restraintType = RestraintType.AnkleCuffs
+	sexReaction = SexReaction.BondageAnkleCuffs
 
 func doStruggle(_pc, _minigame:MinigameResult):
 	var _handsFree = !_pc.hasBlockedHands()

@@ -206,6 +206,11 @@ func processTurn():
 		progressGoal(SexGoal.TieUp)
 		
 		addText(text)
+		
+		if(item && item.getRestraintData()):
+			var bondageSexReaction:int = item.getRestraintData().restraintType
+			if(bondageSexReaction >= 0):
+				react(bondageSexReaction)
 
 func getActions(_indx:int):
 	if(_indx == SUB_0):

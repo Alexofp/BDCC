@@ -224,6 +224,10 @@ func init_doAction(_indx:int, _id:String, _action:Dictionary):
 			getDomInfo().addAnger(0.05)
 			affectSub(getSubInfo().fetishScore({Fetish.OralSexGiving: 1.0}), 0.05, -0.2, 0.0)
 			addText("{dom.You} {dom.youVerb('try', 'tries')} to force {sub.you} to "+("start licking {dom.yourHis} pussy" if subFocus == BodypartSlot.Vagina else "start sucking {dom.yourHis} cock")+" but {dom.youVerb('fail')}.")
+			if(domFocus == BodypartSlot.Penis):
+				react(SexReaction.TryForceSuckPenis, [40.0, 20.0])
+			else:
+				react(SexReaction.TryForceLickPussy, [40.0, 20.0])
 			return
 		
 		state = "sex"
@@ -301,11 +305,13 @@ func order_doAction(_indx:int, _id:String, _action:Dictionary):
 			])
 		
 		addText(text)
+		reactSub(SexReaction.AgreeGeneric)
 		return
 	if(_id == "refuse"):
 		state = ""
 		getDomInfo().addAnger(0.3)
 		addText("{sub.You} {sub.youVerb('refuse')}.")
+		reactSub(SexReaction.RefuseGeneric)
 		return
 	if(_id == "bite"):
 		var successChance:float = getSubBiteChance(50.0, 30.0)
@@ -318,6 +324,7 @@ func order_doAction(_indx:int, _id:String, _action:Dictionary):
 				failGoals()
 			endActivity()
 			addText("{sub.You} {sub.youVerb('bite')} {dom.your} genitals! {dom.YouHe} {dom.youVerb('cry', 'cries')} from pain and {dom.youVerb('pull')} away.")
+			react(SexReaction.PainGeneric)
 			return
 		else:
 			getDomInfo().addAnger(0.4)

@@ -686,6 +686,32 @@ You think it's true?.."
 },
 "together": false
 },
+"AgreeGeneric": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Ugh.. fine.
+Fine, whatever.
+Sure, whatever.
+Yeah, whatever.
+Hmph, I guess.
+Hmph, whatever."
+}, {
+"condition": "!isAngry()",
+"lines": "Sure.
+Sounds good.
+Alright.
+Okay then.
+Works for me.
+I’m down.
+Alrighty.
+That’s a yes."
+} ]
+},
+"together": false
+},
 "Apologizing": {
 "chance": 100,
 "chances": "",
@@ -1027,6 +1053,289 @@ Please, not inside."
 "lines": "The condom might break.. Please pull out..
 Don't cum inside, please.. What if the condom breaks..
 The condom might break.. Please don't cum inside my pussy.."
+} ]
+},
+"together": false
+},
+"BondageAnkleCuffs": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Thought you could escape, bitch? Nope.
+Where you gonna run now, huh?
+Struggle all you want, you’re helpless.
+Can’t run, can’t hide, bitch.
+No escape with these on.
+Try to squirm, it won’t help."
+}, {
+"condition": "!isAngry()",
+"lines": "Can’t run now.
+These cuffs aren’t coming off.
+Locked down and helpless.
+You look good like this.
+Can’t wiggle free, can you?"
+} ]
+},
+"together": false
+},
+"BondageBlindfold": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Can’t see shit now, huh? Such a shame.
+That’s right, stay blind.
+No peeking, bitch.
+How do you like being helpless?
+World’s gone black? Good.
+Darkness is your punishment."
+}, {
+"condition": "!isAngry()",
+"lines": "No peeking.
+Your vision rights have been revoked.
+Let your other senses do the work.
+You look so vulnerable like this.
+Can’t see? Good.
+Lost without your sight?
+Your world’s gone dark.
+No eyes, all nerves."
+} ]
+},
+"together": false
+},
+"BondageButtplug": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Gonna stretch that hole nice and wide.
+Don't you dare take it out, whore.
+If you take this one out, I will shove a bigger one in.
+Your asshole is gonna be ruined for anyone else.
+You love being stuffed, don’t you?
+Don’t even think about pulling that out.
+That plug fits you like a glove, whore."
+}, {
+"condition": "!isAngry()",
+"lines": "That tight little hole needed a buttplug.
+How’s it feel being stretched like this?
+Look at you, stuffed and stretched already.
+That little asshole’s getting broken in good.
+You’re gonna be so sore from this, slut.
+You'd rather get a real cock up your butt?
+Look at that cute, swollen hole of yours."
+} ]
+},
+"together": false
+},
+"BondageChastityCage": {
+"chance": 100.0,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "You don't need your cock anyway, do you?
+Such a pathetic cock deserves to be locked away.
+Such a tight fit. But your cock will shrink, don't sorry.
+Much better. Such pathetic dick should always be caged.
+Start learning to cum without this pathetic thing.
+That cage suits your tiny, useless cock perfectly.
+No more fun for you, just humiliation.
+Good, gonna keep that pathetic cock locked where it belongs.
+Locked away like the worthless slut you’ve become.
+Your cock’s useless now.
+You’ll learn fast: whores don’t get to cum.
+Locked and useless, just how I like my sissy toys."
+}, {
+"condition": "!isAngry()",
+"lines": "Nice and locked.
+There we go. Much better.
+Ohh, adorable.
+I love how your cock looks now.
+Dripping already, I bet.
+Locked up tight, just for me.
+Can’t touch that now, huh?
+Your cock’s mine to control.
+All locked away, you’re helpless.
+Such a good caged cutie.
+Can’t play with this now, can you?
+Look at you, all caged and needy.
+No relief without my say-so.
+The cage suits you. So helpless."
+} ]
+},
+"together": false
+},
+"BondageCollar": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "How does that feel, bitch?
+You’re mine now, bitch.
+Wear it, and remember who owns you.
+You don’t get to say no anymore.
+Don’t even think about escaping, whore.
+That collar’s for your own good, slave.
+You’ll learn to obey with this on.
+You’re locked in, no backing out.
+Say it loud, you’re my slave.
+No more freedom for you, bitch."
+}, {
+"condition": "!isAngry()",
+"lines": "This collar suits you perfectly.
+Wear it proud.
+This is just the start, my pet.
+You wear it well, slave.
+How does that feel?
+Wear it, and remember who owns you.
+You don’t get to say no anymore.
+Don’t even think about escaping.
+That collar’s for your own good, slave.
+You’ll learn to obey with this on.
+You’re locked in, no backing out.
+Say it loud, you’re my slave.
+No more freedom for you."
+} ]
+},
+"together": false
+},
+"BondageGag": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Bite on this, whore.
+No more bitching.
+Keep that mouth shut, bitch.
+Can’t scream, can you?
+That gag suits you.
+No more dumb talk.
+Get gagged, bitch.
+Finally.
+Bite down, shut up.
+Learn your place."
+}, {
+"condition": "!isAngry()",
+"lines": "Mmm, you look so good gagged.
+No more talking, just drooling.
+Shhh, just listen to me.
+Can't say a word now, huh?
+Such a pretty little gagged pet.
+No talking, only moaning.
+Your muffled sounds turn me on.
+No complaints now. Perfect.
+You don't like it? Just say it then.
+You’re looking so helpless.
+This gag suits you well."
+} ]
+},
+"together": false
+},
+"BondageMittens": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "You don't need your hands, whore.
+Thought you could scratch me? There you go.
+Your hands are useless now.
+Mittens for a brat.
+No more grabbing, slut.
+Can’t scratch, can’t resist.
+No claws to dig with now.
+Let those hands rest, bitch.
+No more slaps from you."
+}, {
+"condition": "!isAngry()",
+"lines": "Can’t touch now, huh?
+Mittens on.
+Silly hands, locked away.
+How’s that for helpless?
+Those mittens make you look cute."
+} ]
+},
+"together": false
+},
+"BondageMuzzle": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "No more biting for you, slut.
+Thought you could bite me? Not anymore.
+Now you're all bark and no bite.
+Too bad, can’t bite me now.
+Can't bite? Good.
+Shut up and take it.
+No more snapping at me."
+}, {
+"condition": "!isAngry()",
+"lines": "Quiet now, no biting.
+Muzzled, like a puppy.
+Muzzle’s on, behave yourself.
+Can’t bite with that, huh?
+Muzzled and so cute.
+You look good all muzzled up.
+My little obedient pup now.
+Can't bite me with that on."
+} ]
+},
+"together": false
+},
+"BondageVaginalPlug": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Look at you, slut. Stuffed and helpless.
+Plugged tight.
+Gonna keep that cunt stretched for me.
+You’re such a filthy little plug whore.
+Such a big slut.
+This plug owns your tight little hole.
+Your tight little hole’s mine to ruin.
+Keep that hole stretched for me, slut."
+}, {
+"condition": "!isAngry()",
+"lines": "Look at you, all stretched out and full.
+Your pussy’s gonna be nice and loose now.
+You love being stuffed like this, don’t you?
+Gonna have that pussy loose and ready.
+Look at you, all filled and helpless.
+You’re already wet from being stuffed."
+} ]
+},
+"together": false
+},
+"BondageWristCuffs": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Struggle all you want.
+Can’t get free, can you? Good.
+Fight me if you want, it’s useless.
+Cuffed and helpless.
+Locked up nice and tight.
+Struggle harder, it only makes me smile."
+}, {
+"condition": "!isAngry()",
+"lines": "Those wrists look good cuffed.
+Hands behind your back, perfect.
+Locked down tight.
+Those cuffs suit you perfectly.
+No struggle, just surrender."
 } ]
 },
 "together": false
@@ -3161,6 +3470,53 @@ Get your \"+_args[0]+\" off me."
 },
 "together": false
 },
+"OrgasmGeneric": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Mhh.. ah.. fuck..
+Nhggnn.. fuck you.. ah..
+Mnhhh.. mhhh..
+Mhh.. ah.. fuck..
+Nhggnn.. fuck you.. ah..
+Mnhhh.. mhhh..
+Hngh.. ugh.. damn..
+Grr.. ah.. fuck..
+Mhh.. gah.. so good..
+Gnhh.. ah.. fuck yeah..
+Tch.. ugh.. damn you..
+Mhhh.. ugh.. can’t stop..
+Nhgh.. mhhh.. fuck..
+Gnhh.. ah.. so good..
+Nhggh.. mhh.. yeah..
+Mhmm.. ugh.. fuck..
+Tsk.. ugh.. so good..
+Mhhh.. damn.. can’t stop.."
+}, {
+"condition": "!isAngry()",
+"lines": "Ahh..
+Mmm..
+Oooh.. ah..
+Yeah.. hah..
+Hnnng.. mhh..
+Ohh yes.. hah..
+Nnngh.. ahh..
+Aah yeah.. hah..
+Mmph.. hhh..
+Oooh fuck.. ah..
+Hah.. nhhh..
+Yesss.. fuck..
+Ahhh fuck.. nhh..
+Nnnh.. mhh..
+Mmm yeah.. fuck..
+Ah yeah.. nhh..
+Hngh.."
+} ]
+},
+"together": false
+},
 "PainGeneric": {
 "chance": 100,
 "chances": "",
@@ -3458,6 +3814,40 @@ I do have some milk.."
 },
 "together": false
 },
+"RefuseGeneric": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Go fuck yourself.
+Not a chance, asshole.
+Get lost.
+Fuck off.
+Keep dreaming, fucker.
+Hell no.
+Not happening.
+Piss off.
+No. Just no.
+Fuck off, I mean it."
+}, {
+"condition": "!isAngry()",
+"lines": "No.
+Nope.
+I’m good, thanks.
+Nah, I’m not up for this.
+Sorry, can’t do it.
+I’ll pass.
+No thanks.
+I don’t want to.
+Hard pass.
+Nope, not happening.
+I’m gonna say no.
+That’s a no."
+} ]
+},
+"together": false
+},
 "RefusingToSwallowDrug": {
 "chance": 100,
 "chances": "",
@@ -3686,6 +4076,43 @@ Mgh-h.."
 },
 "together": false
 },
+"StartChokeFuck": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "",
+"lines": "Look at me while I fuck you.
+Scream for me, you slut.
+Take my cock with my hands on your throat.
+Shut up and take it, bitch.
+I’m gonna fuck you till you can’t breathe.
+Can’t handle this, little bitch?
+You like being fucked while strangled, don’t you, slut?
+I’m gonna fuck you senseless, bitch."
+} ]
+},
+"together": false
+},
+"StartChokeRide": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "",
+"lines": "You’re nothing but my fucktoy.
+I ain't taking off my hands off of your neck.
+Look at me while I ride you.
+Scream for me, you slut.
+Shut up and give me your cock, bitch.
+I’m gonna ride you till you can’t breathe.
+Can’t handle this, little bitch?
+You like being fucked while strangled, don’t you, slut?
+I’m gonna ride you senseless, bitch."
+} ]
+},
+"together": false
+},
 "SubMoos": {
 "chance": 100,
 "chances": "",
@@ -3834,6 +4261,54 @@ I want to submit to you completely. I want to be yours.
 I love the way your voice sounds when you tell me what to do.
 I want to be your plaything, to do whatever you want with me.
 I crave your touch, your dominance. I want you to take me."
+} ]
+},
+"together": false
+},
+"TryForceLickPussy": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "",
+"lines": "Lick it, slut. Now.
+Get that tongue in there, whore.
+Don’t make me repeat myself, bitch.
+Taste me like you mean it, slut.
+Lick or I’ll make you regret it.
+Put that tongue to work, whore.
+Suck and lick, you dirty bitch.
+Get that tongue moving, you lazy slut.
+You’re nothing but my pussy toy. Lick it.
+Make me wet.
+Tongue to pussy. Now.
+Lick me like you want to be punished, slut."
+} ]
+},
+"together": false
+},
+"TryForceSuckPenis": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "",
+"lines": "Start sucking it already, you slut.
+Open wide, whore.
+Don’t make me hit you, bitch.
+Start sucking already.
+Such a stupid whore.
+Get that mouth working, bitch.
+Suck me hard, you worthless slut.
+Start sucking, now.
+Gag on it, you stupid whore.
+Take it deep, slut.
+Use that mouth, you little bitch.
+I’ll force it if I have to, whore.
+Get your mouth working, slave.
+Don’t resist, you stupid slut.
+Suck it like you want it, bitch.
+You’re my fucktoy, start sucking now."
 } ]
 },
 "together": false
