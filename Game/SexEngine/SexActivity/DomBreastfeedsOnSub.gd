@@ -38,6 +38,7 @@ func startActivity(_args):
 	#affectDom(domInfo.fetishScore({Fetish.Lactation: 1.0}), 0.1, -0.03)
 	
 	noticedSore = getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)
+	react(SexReaction.DomBreastfeedsSubStart, [100, 50])
 
 func onSwitchFrom(_otherActivity, _args):
 	return

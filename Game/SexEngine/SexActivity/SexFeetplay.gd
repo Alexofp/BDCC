@@ -235,6 +235,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		addText("{sub.You} {sub.youVerb('open')} {sub.yourHis} mouth and start sucking on {dom.your} foot!")
 		state = "kissingfeet"
 		affectDom(getDomInfo().fetishScore({Fetish.FeetplayReceiving: 1.0})+0.1, 0.1, -0.05)
+		reactSub(SexReaction.AgreeGeneric)
 		return
 	if(_id == "breakfree"):
 		var text:String = ""

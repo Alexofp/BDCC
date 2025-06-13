@@ -32,6 +32,7 @@ func startActivity(_args):
 	addText("{dom.You} {dom.youVerb('sit')} on {sub.your} lap and {dom.youVerb('push', 'pushes')} {dom.yourHis}"+getThroughClothingTextCustom(DOM_0, BodypartSlot.Breasts, " clothed")+" chest into {sub.yourHis} face.")
 	stimulate(SUB_0, S_MOUTH, DOM_0, S_BREASTS, I_TEASE, Fetish.Lactation)
 	noticedSore = getDom().hasEffect(StatusEffect.SoreNipplesAfterMilking)
+	react(SexReaction.DomBreastfeedsSubStart, [100, 50])
 
 func onSwitchFrom(_otherActivity, _args):
 	return

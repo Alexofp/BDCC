@@ -79,6 +79,7 @@ func startActivity(_args):
 			"{dom.You} {dom.youVerb('force')} a "+pumpItem.getCasualName()+" on {sub.you}.",
 			"{dom.You} {dom.youVerb('put')} a "+pumpItem.getCasualName()+" on {sub.you}.",
 		])
+		react(SexReaction.DomPutOnPenisPumpOnSub)
 		return
 
 func milkingSub_processTurn():
@@ -128,10 +129,9 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		return
 		
 	if(_id == "cum"):
-		getSub().cumOnFloor(getDomID())
-		getSubInfo().cum()
+		cumGeneric(SUB_0, DOM_0, UniqueOrgasm.PenisPump)
 		satisfyGoals()
-		addGenericOrgasmText(SUB_0)
+		react(SexReaction.DomPenisPumpOnSubMilk)
 		return
 	if(_id == "moo"):
 		var muffled:String = ""
@@ -143,8 +143,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			"{sub.You} {sub.youVerb('moo')} while {sub.yourHis} {sub.penis} is being milked.",
 			"{sub.You} {sub.youVerb('moo')} while a penis pump strokes {sub.yourHis} cock.."
 		])
-		moan(SUB_0)
-		reactSub(SexReaction.SubMoos)
+		moan(SUB_0, SexReaction.SubMoos)
 		return
 
 func onActivityEnd():

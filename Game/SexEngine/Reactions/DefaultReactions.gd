@@ -35,6 +35,7 @@ func _init():
 		SexReaction.AboutToSuckSubOff: {REACT_CHANCE: 100},
 		SexReaction.AboutToRubPussiesTogether: {REACT_CHANCE: 100},
 		SexReaction.AboutToRimSub: {REACT_CHANCE: 100},
+		SexReaction.AboutToHandjobSub: {REACT_CHANCE: 100},
 		SexReaction.DomPutsOnACondom: {REACT_CHANCE: 100},
 		SexReaction.DomPutsOnACondomOnSub: {REACT_CHANCE: 100},
 		SexReaction.PutBreastPumpOnSub: {REACT_CHANCE: 100},
@@ -49,6 +50,8 @@ func _init():
 		SexReaction.DomBreastfeedsSub: {REACT_CHANCE: 100},
 		SexReaction.DomBreastfeedPraise: {REACT_CHANCE: 100},
 		SexReaction.DomBreastfeedsOnSub: {REACT_CHANCE: 100},
+		SexReaction.DomBreastfeedsSubStart: {REACT_CHANCE: 100},
+		SexReaction.DomBreastfeedsOnSubStart: {REACT_CHANCE: 100},
 		SexReaction.PawjobStart: {REACT_CHANCE: 100},
 		SexReaction.PawjobHappens: {REACT_CHANCE: 100},
 		SexReaction.PawjobRubBalls: {REACT_CHANCE: 100},
@@ -74,6 +77,14 @@ func _init():
 		SexReaction.BondageVaginalPlug: {REACT_CHANCE: 100},
 		SexReaction.BondageButtplug: {REACT_CHANCE: 100},
 		SexReaction.BondageCollar: {REACT_CHANCE: 100},
+		SexReaction.DomPutOnStrapon: {REACT_CHANCE: 100},
+		SexReaction.DomPutOnStraponOnSub: {REACT_CHANCE: 100},
+		SexReaction.DomPutOnPenisPumpOnSub: {REACT_CHANCE: 100},
+		SexReaction.DomPenisPumpOnSubMilk: {REACT_CHANCE: 100},
+		SexReaction.FeetplayAskToKiss: {REACT_CHANCE: 100},
+		SexReaction.FeetplayKissingFeet: {REACT_CHANCE: 100},
+		SexReaction.FeetplayRubbingPussy: {REACT_CHANCE: 100},
+		SexReaction.FeetplayRubbingPenis: {REACT_CHANCE: 100},
 	}
 
 func getLines(_reaction:int, _role:int, _args:Array):
@@ -1691,6 +1702,32 @@ func getLines(_reaction:int, _role:int, _args:Array):
 						"Get ready for a wild ride.",
 						"I’m gonna make you melt.",
 						"Can’t wait to eat you out.",
+					])
+
+		SexReaction.AboutToHandjobSub:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"Give me that fucking cock.",
+						"Let's get that pathetic cock nice and hard.",
+						"You think you deserve my mouth on this?",
+						"Gonna squeeze that worthless cock.",
+						"Let me see that cock twitch for me.",
+						"Think you deserve more? Think again, slut.",
+						"Let’s see how hard you can get, fucker.",
+						"Time to make you desperate.",
+						"Try not to hump my hand, fucker.",
+					])
+				if(!isAngry()):
+					addLines([
+						"Some teasing for you.",
+						"Let's get that cock nice and hard.",
+						"Let's start with this.",
+						"Nice girth, I can feel it.",
+						"Let me see that cock twitch for me.",
+						"Think you deserve more?",
+						"Let’s see how hard you can get.",
+						"Time to make you needy.",
 					])
 
 		SexReaction.DomPutsOnACondom:
@@ -3505,6 +3542,44 @@ func getLines(_reaction:int, _role:int, _args:Array):
 								"I’m melting as you suck my milk.",
 							])
 
+		SexReaction.DomBreastfeedsSubStart:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"You're gonna latch on. Or else.",
+						"You’ll do as I say.",
+						"Show me you want this.",
+						"Get your face in there, bitch.",
+						"Better be good at this.",
+						"I’m not gonna be gentle, got it?",
+						"Do you like my tits, bitch?",
+					])
+				if(!isAngry()):
+					addLines([
+						"Do you like my chest?",
+						"Wanna take a closer look?",
+						"I have something you can feed on.",
+						"Wanna have some fun with these?",
+						"How are you suckling skills I wonder.",
+					])
+
+		SexReaction.DomBreastfeedsOnSubStart:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"Give me your tits, bitch.",
+						"Don't you dare pull away.",
+						"I'm hungry. Got something for me, whore?",
+						"Let's see what you have, bitch.",
+					])
+				if(!isAngry()):
+					addLines([
+						"I'm very curious how you taste.",
+						"Don't pull away.",
+						"I'm hungry. Got something for me?",
+						"Let's see what you have.",
+					])
+
 		SexReaction.PawjobStart:
 			if(_role == ROLE_MAIN):
 				if(isAngry()):
@@ -4183,5 +4258,262 @@ func getLines(_reaction:int, _role:int, _args:Array):
 						"You’re locked in, no backing out.",
 						"Say it loud, you’re my slave.",
 						"No more freedom for you.",
+					])
+
+		SexReaction.DomPutOnStrapon:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"Time to wreck you.",
+						"Time to destroy your holes.",
+						"See this? It's gonna go inside you.",
+						"Ready to get fucked hard?",
+						"You’re gonna take every inch of this.",
+						"Gonna fuck you till you beg.",
+						"I’ll ruin you good.",
+						"Hope you like it rough.",
+						"No mercy for you today.",
+						"Gonna stretch you wide open.",
+						"This is your punishment.",
+						"You’ll be begging for more, whore.",
+						"Take it like the filthy slut you are.",
+					])
+				if(!isAngry()):
+					addLines([
+						"Look what I’ve got for you.",
+						"Ready for my new toy?",
+						"You’re gonna love what’s coming.",
+						"Can you handle this?",
+						"I'm all strapped in now.",
+						"You like what you see?",
+						"Ready to get fucked by me?",
+						"See that? That’s all for you.",
+						"Hope you’re ready to be stretched.",
+						"Time to take this for a spin.",
+					])
+
+		SexReaction.DomPutOnStraponOnSub:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"Now you're not completely useless.",
+						"Now I can finally have some fun.",
+						"Finally, you’re good for something.",
+						"Time to use you properly.",
+						"Don’t get too proud of that toy.",
+						"Ready to be my fucktoy?",
+						"Let’s see how you handle this.",
+						"Now you’re my little dildo.",
+						"I’m going to use you good and hard.",
+					])
+				if(!isAngry()):
+					addLines([
+						"You’re looking so damn sexy with that on.",
+						"Gonna make you fuck me good.",
+						"Ready to watch me go wild with this?",
+						"You’re about to get used hard.",
+						"Let’s see how well you take it.",
+						"Strapped up and ready to please.",
+						"Time to put that cock to work.",
+						"Let's have some fun with this.",
+					])
+
+		SexReaction.DomPutOnPenisPumpOnSub:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"Do you like being milked, bitch?",
+						"Let's see how long you can last, fucker.",
+						"What? You didn't think I'd let you fuck me, did you?",
+						"Gonna drain you dry, slut.",
+						"I own that sorry cock.",
+						"You’re my cum machine now.",
+					])
+				if(!isAngry()):
+					addLines([
+						"Do you like being milked?",
+						"Let's see how long you can last.",
+						"Gonna drain you dry.",
+						"Gonna milk your balls.",
+						"Dripping already, huh.",
+						"How does that feel, huh? Tight enough?",
+						"Can’t wait to see you burst.",
+						"You’re my little cum machine now.",
+					])
+
+		SexReaction.DomPenisPumpOnSubMilk:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"Yes, yes. Give me all your seed, fucker.",
+						"More. I want every fucking drop.",
+						"That's it? Got more in those pathetic balls of yours?",
+						"Pathetic. Is that all you got?",
+						"You’re leaking like a damn faucet.",
+						"Don’t stop now, I want it all.",
+						"Is that all you can squeeze out?",
+						"Yes, I wanna see that cock throb hard.",
+						"Hurry up, fill this thing right.",
+						"Come on, fill it up, bitch.",
+					])
+				if(!isAngry()):
+					addLines([
+						"Yes, good. Give me all your seed.",
+						"More. I want every drop.",
+						"Do you have more for me?",
+						"That’s it, fill it up nice and good.",
+						"More! I want every drop.",
+						"That’s my good little breeder.",
+						"Keep pumping that pump full, c'mon.",
+						"Give me everything. Good.",
+						"Would you want to spill all of that deep inside me?",
+						"That’s right, let your seed flood the thing.",
+					])
+
+		SexReaction.FeetplayAskToKiss:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"Kiss these. Now.",
+						"Kiss. That's an order.",
+						"Start sucking, now.",
+						"Kiss my {main.toes}. Now.",
+						"Lick ‘em good, fucker.",
+						"Show me you’re useful. Start sucking.",
+						"Kiss them like you mean it, bitch.",
+						"Put that mouth to work. Start sucking.",
+						"Suck these {main.toes}, slut.",
+						"Worship my {main.feet}, now.",
+					])
+				if(!isAngry()):
+					addLines([
+						"Why don't you give these a kiss.",
+						"Start kissing. I know you want to.",
+						"Start sucking. Be a good {main.foot}-slut.",
+						"Kiss my {main.toes}. C'mon.",
+						"Lick ‘em good. Please?",
+						"Put that mouth to work, why don't you.",
+						"Suck these {main.toes}.",
+						"I wanna see you worship my {main.feet}.",
+						"Come on, kiss these {main.toes} nice and slow.",
+						"Show me how much you want them.",
+						"Don’t be shy. Lick ‘em good.",
+						"Get those lips moving.",
+						"Worship my {main.feet} like you mean it.",
+						"Put those lips to work, baby.",
+						"Show me your devotion. Kiss my {main.feet}.",
+						"Don’t just look, taste them.",
+					])
+
+		SexReaction.FeetplayKissingFeet:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"Look at you, such a slut for my {main.feet}.",
+						"Can’t get enough of these, huh?",
+						"Pathetic little whore. Keep sucking.",
+						"You love licking my {main.feet}, don’t you?",
+						"Slobber all over my {main.toes}, you’re a mess.",
+						"Such a desperate slut.",
+						"You’re made to worship my {main.feet}.",
+						"Only a {main.foot}slave would do this.",
+						"You’re obsessed with my {main.feet}, aren’t you?",
+						"Such a dirty little {main.foot} slut.",
+						"You’re nothing but a {main.foot} toy.",
+						"Keep kissing. It looks cute.",
+						"Look at you, begging for my {main.feet}.",
+						"You’ll do anything for these {main.feet}.",
+						"You’re worthless without my {main.feet}.",
+						"Pathetic {main.foot} slut, keep going.",
+						"You live to lick my {main.toes}.",
+						"Your place is beneath my {main.feet}.",
+					])
+				if(!isAngry()):
+					addLines([
+						"Look at you, such a cute little {main.foot}slut.",
+						"Can’t get enough of these {main.feet}, huh?",
+						"You’re obsessed with my {main.toes}, aren’t you?",
+						"Sucking my {main.feet} like the good {main.foot}slut you are.",
+						"Keep going, you love being my {main.foot}slave.",
+						"Enjoying that, huh? Cute.",
+						"Such a cute {main.foot}slut, begging for more.",
+						"So desperate to please these {main.feet}.",
+						"Look at you, lost in my {main.toes}.",
+						"Such a needy little {main.foot} whore.",
+						"Licking up every inch like a true {main.foot}slut.",
+						"You’re hooked on my {main.feet} already.",
+						"Keep kissing, you’re made for this. So cute.",
+						"So eager to suck on my {main.toes}.",
+						"You live to serve my {main.feet}, don’t you?",
+					])
+
+		SexReaction.FeetplayRubbingPussy:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"You’re nothing but a slut, huh?",
+						"You love this, huh? Such a slut.",
+						"Your pussy’s mine to play with. Any way I want.",
+						"You’re soaking wet. Such a whore.",
+						"Such a desperate little {main.foot} slut.",
+						"Your slutty little pussy loves my {main.foot}, doesn’t it?",
+						"Keep squirming, whore.",
+						"Can’t hide it. You're loving it.",
+						"You’re dripping just from my {main.foot}, pathetic.",
+						"Should I stop? I bet you'd only squirm more.",
+						"You’re just a slut for {main.feet}, admit it.",
+						"Such a needy slut.",
+						"You're getting off from my {main.foot}? How humiliating.",
+					])
+				if(!isAngry()):
+					addLines([
+						"You’re nothing but a slut, huh?",
+						"You love this, huh? Cute.",
+						"Your pussy’s mine to play with. Any way I want.",
+						"You’re soaking wet. You're enjoying this.",
+						"Such a desperate little cutie.",
+						"Your little pussy loves my {main.foot}, doesn’t it?",
+						"Keep squirming.",
+						"Can’t hide it. You're loving it.",
+						"You’re dripping just from my {main.foot}.",
+						"Should I stop? I bet you'd only squirm more.",
+						"You’re just a slut for {main.feet}, admit it.",
+						"Such a needy cutie.",
+						"You're getting off from my {main.foot}? How cute.",
+					])
+
+		SexReaction.FeetplayRubbingPenis:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"You’re nothing but a slut, huh?",
+						"You love this, huh? Such a slut.",
+						"Your cock is mine to play with. Any way I want.",
+						"You’re throbbing already. Such a whore.",
+						"Such a desperate little {main.foot} slut.",
+						"Your cock loves my {main.foot}, doesn’t it?",
+						"Keep squirming, whore.",
+						"Can’t hide it. You're loving it.",
+						"You’re dripping just from my {main.foot}, pathetic.",
+						"Should I stop? I bet you'd only squirm more.",
+						"You’re just a slut for {main.feet}, admit it.",
+						"Such a needy slut.",
+						"You're getting off from my {main.foot}? How humiliating.",
+					])
+				if(!isAngry()):
+					addLines([
+						"You’re nothing but a slut, huh?",
+						"You love this, huh? Cute.",
+						"Your cock is mine to play with. Any way I want.",
+						"You’re throbbing, huh. You're enjoying this.",
+						"Such a desperate little cutie.",
+						"Your cock loves my {main.foot}, doesn’t it?",
+						"Keep squirming.",
+						"Can’t hide it. You're loving it.",
+						"You’re dripping just from my {main.foot}.",
+						"Should I stop? I bet you'd only squirm more.",
+						"You’re just a slut for {main.feet}, admit it.",
+						"Such a needy cutie.",
+						"You're getting off from my {main.foot}? How cute.",
 					])
 

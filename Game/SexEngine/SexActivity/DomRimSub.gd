@@ -178,16 +178,13 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		text += RNG.pick([
 			"{dom.your} tongue is licking {sub.yourHis} "+getRandomAnusWord()+"!",
 		])
-		moan(SUB_0)
 		addText(text)
+		moan(SUB_0)
 		return
 	if(_id == "cum"):
 		satisfyGoals()
-		getSub().cumOnFloor(getDomID())
-		getSubInfo().cum()
 		state = ""
-		sendSexEvent(SexEvent.UniqueOrgasm, DOM_0, SUB_0, {orgasmType="rim"})
-		addGenericOrgasmText(SUB_0)
+		cumGeneric(SUB_0, DOM_0, UniqueOrgasm.Rim)
 		return
 
 func getRandomAnusWord() -> String:

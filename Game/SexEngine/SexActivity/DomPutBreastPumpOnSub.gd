@@ -187,8 +187,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			"{sub.You} {sub.youVerb('moo')} while {sub.yourHis} {sub.breasts} are being milked.",
 			"{sub.You} {sub.youVerb('moo')} while breast pumps work on {sub.yourHis} breasts.."
 		])
-		moan(SUB_0)
-		reactSub(SexReaction.SubMoos)
+		moan(SUB_0, SexReaction.SubMoos)
 		return
 	if(_id == "cum"):
 		getSub().cumOnFloor(getDomID())

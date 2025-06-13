@@ -332,6 +332,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			"{dom.You} {dom.youVerb('wrap')} {dom.yourHis} digits around {sub.yourHis} {sub.penisShort}!",
 		])
 		stimulate(DOM_0, S_MOUTH, SUB_0, S_PENIS, I_TEASE, Fetish.OralSexGiving, SPEED_SLOW)
+		react(SexReaction.AboutToHandjobSub)
 		return
 	if(_id == "startcocklick"):
 		setState("lickingcock")
@@ -482,8 +483,8 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			text += RNG.pick([
 				"{dom.You} {dom.youAre} "+RNG.pick(["sucking"])+" {sub.yourHis} "+RNG.pick(["cock", "dick", "member"])+".",
 			])
-		moan(SUB_0)
 		addText(text)
+		moan(SUB_0)
 		return
 
 

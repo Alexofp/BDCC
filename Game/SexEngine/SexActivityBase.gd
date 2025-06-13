@@ -215,7 +215,7 @@ func strike(_indxActor:int, _indxTarget:int, _strikeStrength:int = STRIKE_NORMAL
 	if(_indxActor < 0 && _indxTarget >= 0):
 		assert(false, "IMPLEMENT ME")
 
-func moan(_indx:int):
+func moan(_indx:int, _theReaction:int = SexReaction.MoanGeneric):
 	var theInfo:SexInfoBase = getDomOrSubInfo(_indx)
 	if(theInfo.isUnconscious()):
 		return
@@ -226,6 +226,8 @@ func moan(_indx:int):
 	for theDomInfo in doms:
 		theDomInfo.addLust(5)
 		theDomInfo.addAnger(-0.02)
+	if(_theReaction >= 0):
+		react(_theReaction, [100.0], [_indx])
 	
 func fetish(_indx:int, _fetishID:String, _add:float = 0.0, _unclampVal:float = 0.1) -> float:
 	var theInfo:SexInfoBase = getDomOrSubInfo(_indx)
@@ -2263,7 +2265,7 @@ func addTextTopBottom(_theText:String, _indxTop:int, _indxBottom:int):
 	_theText=_theText.replace("<TOP>", topInfo.getCharID()).replace("<BOTTOM>", bottomInfo.getCharID())
 	addTextRaw(_theText)
 	
-func cumGeneric(_indxWho:int, _indxCauser:int, uniqueOrgasm:String = "", extraOrgasmText:String = ""):
+func cumGeneric(_indxWho:int, _indxCauser:int, uniqueOrgasm:String = "", extraOrgasmText:String = "", orgasmReaction:int = SexReaction.OrgasmGeneric):
 	var theInfo:SexInfoBase = getDomOrSubInfo(_indxWho)
 	var causerInfo:SexInfoBase = getDomOrSubInfo(_indxCauser)
 	theInfo.getChar().cumOnFloor(causerInfo.getCharID() if causerInfo != theInfo else "")
@@ -2271,7 +2273,9 @@ func cumGeneric(_indxWho:int, _indxCauser:int, uniqueOrgasm:String = "", extraOr
 	addGenericOrgasmText(_indxWho, extraOrgasmText)
 	if(uniqueOrgasm != ""):
 		sendSexEvent(SexEvent.UniqueOrgasm, _indxCauser, _indxWho, {orgasmType=uniqueOrgasm})
-
+	if(orgasmReaction >= 0):
+		react(orgasmReaction, [100.0, 100.0] if causerInfo != theInfo else [100.0], [_indxWho, _indxCauser] if causerInfo != theInfo else [_indxWho], [uniqueOrgasm])
+	
 func cumInsideShare(_indxWho:int, _indxTarget1:int, _hole1:String, _indxTarget2:int, _hole2:String, _shareFirst:float = 0.5):
 	var theInfo:SexInfoBase = getDomOrSubInfo(_indxWho)
 	var theChar:BaseCharacter = getDomOrSub(_indxWho)

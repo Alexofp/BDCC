@@ -87,6 +87,7 @@ func startActivity(_args):
 		getDom().getInventory().equipItem(straponItem)
 		
 		addText("{dom.You} {dom.youVerb('put')} on a "+straponItem.getCasualName()+".")
+		react(SexReaction.DomPutOnStrapon)
 		return
 	
 	if(_args[0] == "sub"):
@@ -101,4 +102,5 @@ func startActivity(_args):
 		getSub().getInventory().equipItem(straponItem)
 		
 		addText("{dom.You} {dom.youVerb('force')} a "+straponItem.getCasualName()+" on {sub.you}.")
+		react(SexReaction.DomPutOnStraponOnSub)
 		return
