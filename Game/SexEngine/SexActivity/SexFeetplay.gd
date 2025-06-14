@@ -52,6 +52,7 @@ func kissingfeet_processTurn():
 	#affectSub(getSubInfo().fetishScore({Fetish.FeetplayReceiving: 1.0})+0.0, 0.05, -0.05, -0.02)
 	#getDomInfo().addArousalForeplay(0.05)
 	teasingTimes += 1
+	react(SexReaction.FeetplayKissingFeet, [20, 10])
 
 func rubpussy_processTurn():
 	getSubInfo().stimulateArousalZone(0.1, BodypartSlot.Vagina, 0.5)
@@ -67,6 +68,8 @@ func rubpussy_processTurn():
 		state = ""
 		addText("{sub.Your} pussy is squirting all over {sub.yourHis} thighs as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!")
 		sendSexEvent(SexEvent.UniqueOrgasm, DOM_0, SUB_0, {orgasmType=UniqueOrgasm.Feet})
+	else:
+		react(SexReaction.FeetplayRubbingPussy, [20, 10])
 
 func rubpenis_processTurn():
 	getSubInfo().stimulateArousalZone(0.1, BodypartSlot.Penis, 0.5)
@@ -87,6 +90,8 @@ func rubpenis_processTurn():
 			howCumText = "is filling {sub.yourHis} penis pump full"
 		addText("{sub.Your} cock "+howCumText+" as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!")
 		sendSexEvent(SexEvent.UniqueOrgasm, DOM_0, SUB_0, {orgasmType=UniqueOrgasm.Feet})
+	else:
+		react(SexReaction.FeetplayRubbingPenis, [20, 10])
 
 func onheadwaitingforanswer_processTurn():
 	var text:String = "{dom.You} {dom.youVerb('hold')} {sub.you} pinned to the floor with {dom.yourHis} foot while waiting for {sub.youHim}."
@@ -160,7 +165,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			"{dom.You} {dom.youVerb('stomp')} on {sub.yourHis} chest [b]really hard[/b].",
 			"{dom.You} {dom.youVerb('kick')} {sub.yourHis} sides [b]really hard[/b]."
 		])
-		react(SexReaction.BeatingUpHard, [100.0, 40.0])
+		react(SexReaction.FeetplayStompChest, [100.0, 40.0])
 		return
 	if(_id == "pinhead"):
 		state = "onhead"
@@ -193,6 +198,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			"{dom.You} {dom.youVerb('order')} {sub.you} to start worshipping {dom.yourHis} foot!"
 		])
 		state = "onheadwaitingforanswer"
+		react(SexReaction.FeetplayAskToKiss, [100.0, 40.0])
 		return
 	if(_id == "stomppussy"):
 		affectDom(getDomInfo().fetishScore({Fetish.Sadism: 1.0})+0.0, 0.1, 0.0)
@@ -209,6 +215,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			"{dom.You} {dom.youVerb('kick')} {sub.yourHis} pussy sadistically!",
 			"{dom.You} {dom.youVerb('stomp')} on {sub.yourHis} pussy firmly, bringing an extreme amount of pain!"
 		])
+		react(SexReaction.FeetplayStompPussy, [100.0, 40.0])
 		return
 	if(_id == "stompcock"):
 		affectDom(getDomInfo().fetishScore({Fetish.Sadism: 1.0})+0.0, 0.1, 0.0)
@@ -225,6 +232,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			"{dom.You} {dom.youVerb('kick')} {sub.yourHis} cock sadistically!",
 			"{dom.You} {dom.youVerb('stomp')} on {sub.yourHis} balls, bringing an extreme amount of pain!"
 		])
+		react(SexReaction.FeetplayStompPenis, [100.0, 40.0])
 		return
 	if(_id == "stop"):
 		endActivity()
@@ -264,6 +272,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			getDomInfo().addPain(5)
 			sendSexEvent(SexEvent.PainInflicted, SUB_0, DOM_0, {pain=5,isDefense=true,intentional=true})
 			getDomInfo().addAnger(0.3)
+			react(SexReaction.PainGeneric)
 		else:
 			text += "{sub.You} {sub.youVerb('try', 'tries')} to bite {dom.yourHis} foot."
 			getDomInfo().addAnger(0.1)
@@ -287,7 +296,8 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		getSubInfo().cum()
 		state = ""
 		addText("{sub.Your} pussy is squirting all over {sub.yourHis} thighs as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!")
-		sendSexEvent(SexEvent.UniqueOrgasm, DOM_0, SUB_0, {orgasmType="feet"})
+		sendSexEvent(SexEvent.UniqueOrgasm, DOM_0, SUB_0, {orgasmType=UniqueOrgasm.Feet})
+		react(SexReaction.FeetplayCumPussy)
 		return
 	if(_id == "cumpenis"):
 		satisfyGoals()
@@ -302,7 +312,8 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		if(getSub().getWornPenisPump() != null):
 			howCumText = "is filling {sub.yourHis} penis pump full"
 		addText("{sub.Your} cock "+howCumText+" as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!")
-		sendSexEvent(SexEvent.UniqueOrgasm, DOM_0, SUB_0, {orgasmType="feet"})
+		sendSexEvent(SexEvent.UniqueOrgasm, DOM_0, SUB_0, {orgasmType=UniqueOrgasm.Feet})
+		react(SexReaction.FeetplayCumPenis)
 		return
 
 func getSubResistChance(baseChance:float, domAngerRemoval:float) -> float:

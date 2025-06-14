@@ -85,6 +85,12 @@ func _init():
 		SexReaction.FeetplayKissingFeet: {REACT_CHANCE: 100},
 		SexReaction.FeetplayRubbingPussy: {REACT_CHANCE: 100},
 		SexReaction.FeetplayRubbingPenis: {REACT_CHANCE: 100},
+		SexReaction.FeetplayStompPussy: {REACT_CHANCE: 100},
+		SexReaction.FeetplayStompPenis: {REACT_CHANCE: 100},
+		SexReaction.FeetplayStompChest: {REACT_CHANCE: 100},
+		SexReaction.FeetplayCumPussy: {REACT_CHANCE: 100},
+		SexReaction.FeetplayCumPenis: {REACT_CHANCE: 100},
+		SexReaction.TribadismHappens: {REACT_CHANCE: 100},
 	}
 
 func getLines(_reaction:int, _role:int, _args:Array):
@@ -4515,5 +4521,152 @@ func getLines(_reaction:int, _role:int, _args:Array):
 						"You’re just a slut for {main.feet}, admit it.",
 						"Such a needy cutie.",
 						"You're getting off from my {main.foot}? How cute.",
+					])
+
+		SexReaction.FeetplayStompPussy:
+			if(_role == ROLE_MAIN):
+				addLines([
+					"Learn your place. Now.",
+					"Do you want me to stomp harder? Obey, bitch.",
+					"Feel that? Do you want more?",
+					"This can get way worse, trust me.",
+					"You like pain? I canl give you more.",
+					"Keep quiet and take it.",
+					"That’s what happens when sluts disobey.",
+					"Scream if you want.",
+					"Take it like the brat you are.",
+					"You’ll learn it the hard way.",
+					"Next time, I won’t hold back.",
+				])
+
+		SexReaction.FeetplayStompPenis:
+			if(_role == ROLE_MAIN):
+				addLines([
+					"Learn your place. Now.",
+					"Do you want me to stomp harder? Obey, bitch.",
+					"Feel that? Do you want more?",
+					"This can get way worse, trust me.",
+					"You like pain? I canl give you more.",
+					"Keep quiet and take it.",
+					"That’s what happens when sluts disobey.",
+					"Scream if you want.",
+					"Take it like the brat you are.",
+					"You’ll learn it the hard way.",
+					"Next time, I won’t hold back.",
+				])
+
+		SexReaction.FeetplayStompChest:
+			if(_role == ROLE_MAIN):
+				addLines([
+					"Learn your place. Now.",
+					"Do you want me to stomp harder? Obey, bitch.",
+					"Feel that? Do you want more?",
+					"This can get way worse, trust me.",
+					"You like pain? I canl give you more.",
+					"Keep quiet and take it.",
+					"That’s what happens when sluts disobey.",
+					"Scream if you want.",
+					"Take it like the brat you are.",
+					"You’ll learn it the hard way.",
+					"Next time, I won’t hold back.",
+				])
+
+		SexReaction.FeetplayCumPussy:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"Pathetic. There are no other words.",
+						"Such a slut. Wow.",
+						"Cumming just from my {main.foot}. What a slut.",
+						"Look at you, so pathetic.",
+						"You’re such a desperate little slut.",
+						"Made you cum with my foot. Haha.",
+						"Can’t believe you came.",
+						"Only a desperate slut would squirt like that.",
+						"Such a needy little whore.",
+						"You managed to get off like this. Such a slut.",
+					])
+				if(!isAngry()):
+					addLines([
+						"Who knew {main.feet} could do this to you?",
+						"So sensitive.. cute.",
+						"Look at you, cumming in such a humiliating way.",
+						"Such a needy little thing, squirming for me.",
+						"Can’t get enough of my {main.foot}, huh?",
+						"Cute how you melt under my {main.toes}.",
+						"Didn’t expect you to be this needy.",
+						"All this from just a little rub of my {main.foot}.",
+						"Can’t hide how much you love this.",
+						"You’re so cute when you’re desperate.",
+						"Your pussy’s so sensitive.",
+						"That’s right, cum for me, baby.",
+					])
+
+		SexReaction.FeetplayCumPenis:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"Pathetic. There are no other words.",
+						"Such a slut. Wow.",
+						"Cumming just from my {main.foot}. What a slut.",
+						"Look at you, so pathetic.",
+						"You’re such a desperate little slut.",
+						"Made you cum with my foot. Haha.",
+						"Can’t believe you came.",
+						"Only a desperate slut would squirt like that.",
+						"Such a needy little whore.",
+						"You managed to get off like this. Such a slut.",
+					])
+				if(!isAngry()):
+					addLines([
+						"Who knew {main.feet} could do this to you?",
+						"So sensitive.. cute.",
+						"Look at you, cumming in such a humiliating way.",
+						"Such a needy little thing, squirming for me.",
+						"Can’t get enough of my {main.foot}, huh?",
+						"Cute how you melt under my {main.toes}.",
+						"Didn’t expect you to be this needy.",
+						"All this from just a little rub of my {main.foot}.",
+						"Can’t hide how much you love this.",
+						"You’re so cute when you’re desperate.",
+						"Your cock is so sensitive.",
+						"That’s right, cum for me, baby.",
+					])
+
+		SexReaction.TribadismHappens:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"You like that? Yeah..",
+						"Don’t get too comfortable, I’m just getting started.",
+						"You’re mine to toy with.",
+						"Squirm, slut.. hah.",
+						"Can you keep up, whore?",
+						"Your pussy’s rubbing right against mine.",
+						"Can you handle all this grinding?",
+						"So wet and close..",
+						"You like it?",
+						"Nothing like some good old tribbing.",
+						"You’re soaking wet, slut.",
+						"Your moans are music to me.",
+						"Wet and desperate, just how I like it.",
+					])
+				if(!isAngry()):
+					addLines([
+						"You like that? Yeah..",
+						"Don’t get too comfortable, I’m just getting started.",
+						"You’re mine to toy with.",
+						"Keep squirming.. hah.",
+						"Your pussy’s rubbing right against mine.",
+						"Can you handle all this grinding?",
+						"So wet and close..",
+						"You like it?",
+						"Nothing like some good old tribbing.",
+						"Your moans are music to me.",
+						"I love how you press against me.",
+						"Keep moving, don’t stop now.",
+						"That’s it, grind harder for me.",
+						"Let me feel you.",
+						"So hot..",
 					])
 

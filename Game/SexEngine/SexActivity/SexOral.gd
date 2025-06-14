@@ -288,6 +288,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			#affectSub(getSubInfo().fetishScore({Fetish.OralSexGiving: 1.0}), 0.05, -0.2, -0.01)
 			getDomInfo().addAnger(0.05)
 			addText("{dom.You} {dom.youVerb('try', 'tries')} to "+RNG.pick(["force", "push", "shove", "forcefully shove"])+" {dom.yourHis} "+getDickName()+" "+RNG.pick(["into {sub.yourHis} mouth", "past {sub.yourHis} lips", "past {sub.yourHis} teeth"])+".")
+			react(SexReaction.TryForceSuckPenis)
 			return
 	if(_id == "bjcuminside"):
 		state = ""

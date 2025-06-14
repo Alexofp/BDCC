@@ -88,6 +88,8 @@ func grinding_processTurn():
 			"This amount of pleasure is gonna make {sub.you} cum soon!",
 		])
 
+	react(SexReaction.TribadismHappens, [10.0, 5.0])
+
 func getActions(_indx:int):
 	if(_indx == DOM_0):
 		addAction("stop", getStopScore(), "Stop tribadism", "Enough pussy rubbing")

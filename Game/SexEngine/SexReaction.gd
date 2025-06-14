@@ -113,6 +113,8 @@ enum {
 	FeetplayStompChest,
 	FeetplayCumPussy,
 	FeetplayCumPenis,
+	
+	TribadismHappens,
 }
 
 static func getAllStrings():
@@ -228,4 +230,6 @@ static func getAllStrings():
 		"FeetplayStompChest",
 		"FeetplayCumPussy",
 		"FeetplayCumPenis",
+		
+		"TribadismHappens",
 	]
