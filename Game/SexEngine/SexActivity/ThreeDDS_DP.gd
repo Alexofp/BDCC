@@ -101,6 +101,7 @@ func startActivity(_args):
 	pullInDom(otherDomID)
 	
 	addText("{dom.You} and {dom1.you} grab {sub.you} and prepare to double-penetrate {sub.youHim}, "+getYour()+" "+getCocksName()+" are pressed against {sub.yourHis} "+getNameHole(SUB_0, S_VAGINA)+" and "+getNameHole(SUB_0, S_ANUS)+"!")
+	react(SexReaction.ThreesomeStart, [100.0, 100.0, 100.0], [DOM_0, SUB_0, DOM_1])
 
 func onSwitchFrom(_otherActivity, _args):
 	pullInDom(_args[1])
@@ -109,9 +110,13 @@ func onSwitchFrom(_otherActivity, _args):
 	if(_args[0] == "vag"):
 		switchDoms(0, 1)
 		addText("{dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} {dom.penisShort} against {sub.yourHis} "+getNameHole(SUB_0, S_VAGINA)+".")
+	
+		react(SexReaction.ThreesomeJoin, [100.0, 100.0, 100.0], [DOM_0, SUB_0, DOM_1])
 	else:
 		addText("{dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} {dom.penisShort} against {sub.yourHis} "+getNameHole(SUB_0, S_ANUS)+".")
-
+	
+		react(SexReaction.ThreesomeJoin, [100.0, 100.0, 100.0], [DOM_1, SUB_0, DOM_0])
+	
 func getYour(pcIsInvolvedText:String = "your", noPcText:String = "their") -> String:
 	if(isDom("pc")):
 		return pcIsInvolvedText
@@ -149,6 +154,7 @@ func sex_processTurn():
 	else:
 		doProcessFuckExtra(DOM_0, SUB_0, S_VAGINA)
 		doProcessFuckExtra(DOM_1, SUB_0, S_ANUS)
+	react(SexReaction.ThreesomeDP, [20.0, 10.0], [RNG.pick([DOM_0, DOM_1]), SUB_0])
 
 func getActions(_indx:int):
 	if(_indx == DOM_0 || _indx == DOM_1):

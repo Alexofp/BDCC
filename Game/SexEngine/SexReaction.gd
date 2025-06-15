@@ -115,6 +115,12 @@ enum {
 	FeetplayCumPenis,
 	
 	TribadismHappens,
+	
+	ThreesomeJoin,
+	ThreesomeStart,
+	ThreesomeDP,
+	ThreesomeSpitroast,
+	ThreesomeRideGrind,
 }
 
 static func getAllStrings():
@@ -232,4 +238,10 @@ static func getAllStrings():
 		"FeetplayCumPenis",
 		
 		"TribadismHappens",
+		
+		"ThreesomeJoin",
+		"ThreesomeStart",
+		"ThreesomeDP",
+		"ThreesomeSpitroast",
+		"ThreesomeRideGrind",
 	]

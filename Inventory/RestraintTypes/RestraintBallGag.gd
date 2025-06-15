@@ -3,6 +3,7 @@ class_name RestraintBallGag
 
 func _init():
 	restraintType = RestraintType.Gag
+	sexReaction = SexReaction.BondageGag
 
 func doStruggle(_pc, _minigame:MinigameResult):
 	var _handsFree = !_pc.hasBlockedHands()

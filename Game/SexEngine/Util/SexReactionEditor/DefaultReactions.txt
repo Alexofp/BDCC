@@ -4750,6 +4750,402 @@ I crave your touch, your dominance. I want you to take me."
 },
 "together": false
 },
+"ThreesomeDP": {
+"chance": 100.0,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "You love two cocks up your holes, huh?
+Such a whore, getting {target.his} holes double-penetrated.
+Such a tight whore.
+Two cocks pounding your tight little holes.
+Look at you, a cunt made for double penetration.
+Your ass and pussy both getting reamed hard.
+You’re a fucktoy for both our cocks.
+Whore, taking every inch we give you.
+You love being double-penetrated, slut.
+Both holes filled full with our cocks.
+Two cocks for one slut.
+You’re soaked, slut. Both your holes dripping.
+Taking all our cocks like the greedy slut you are.
+Tight little fucktoy, aren’t you?
+Stuffed full like the slut you are.
+You asked for this, whore.
+Take it. Take both of us.
+Don't you dare tighten up now!
+Only good for getting used.
+You wanted to be ruined? You will be.
+Nothing but a cumdump with legs.
+You belong to be fucked like this.
+We’re not stopping ‘til you break.
+Hope your guts can handle this.
+You like being our toy, don’t lie.
+Louder. Scream for your owners.
+This is what holes like yours are for.
+We’ll fill you ‘til you leak from both ends."
+}, {
+"condition": "!isAngry()",
+"lines": "Tight little hole, isn't it?
+So tight..
+Your holes feel so tight.
+Taking both cocks like a champ.
+Stretching so good around us.
+You were made for this.
+You’re getting wrecked, slut.
+You feel us? Deep inside?
+You’re taking us like a toy.
+You love being double-penetrated, don't you?
+Can’t get enough?
+You’re so tight, just for us.
+You’re taking us both so well.
+You’re dripping all over us.
+Think you will be able to walk after?
+Both holes begging for more.
+We’re buried so deep in you.
+Made to be stuffed like this.
+You’re squeezing us tight.
+This is what you were built for.
+You can’t even think, can you?
+You’re shaking already?
+We’re gonna break you in.
+Hold still, let us feel you.
+You’re not leaving unstretched.
+Just a fucktoy with two holes.
+You’re clenching so tight."
+} ],
+1: [ {
+"condition": "isResisting()",
+"lines": "It's too much! Nhh..
+Nhh.. ahh.. mhh..
+F-fuck.. my holes..
+Y-you're stretching my holes..
+You're gonna rip me apart.. ah.. mhh..
+F-fuck.. Ah.. Agh..
+T-too deep..! S-stop..!
+I-I can’t take both!
+It won’t fit..! Nghh..!
+Y-you're splitting me open..!
+Ahh! Not both at once!
+I said no.. ahh..!
+F-fuck, too full..
+M-my body, can’t handle it..
+D-don’t move, ahhh!
+I’m gonna break..!
+P-pull out..! I-I can’t!
+I-I'm not ready, nhhh..
+You're tearing me apart.. nhh..
+Too much, t-too rough.. ahh..
+I-it hurts..! Ahh.. nghh..
+F-fuck, I c-can’t, stop..!
+You're filling me, both holes..
+Noo, d-don’t go deeper!
+S-stretching me, ahh, too wide.."
+} ]
+},
+"together": false
+},
+"ThreesomeJoin": {
+"chance": 100.0,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "I see a fucktoy. May I join?
+I see you're having fun with that slut. May I?
+That's a nice fucktoy you have there. I wanna do {target.him} too.
+This fucktoy’s can serve more than one person. I can show.
+Having fun without me? I wanna join.
+Let's share this whore?
+Wanna share this slut together?
+Let’s ruin {target.him} together.
+I can't wait. I'm joining.
+You’re not fucking {target.him} without me.
+Don’t hog the fucktoy.
+You want to ruin {target.him}? Let’s do it together.
+Two doms are better than one. Let’s wreck {target.him}."
+}, {
+"condition": "!isAngry()",
+"lines": "May I join?
+I see you're having fun. May I?
+Can I join maybe? We can have some fun together.
+Room for one more?
+Mind if I slide in?
+Looks like fun. Let me help.
+Save some of that for me.
+Let’s double the trouble.
+I’m not just gonna watch.
+Tag me in."
+} ],
+1: [ {
+"condition": "isResisting()",
+"lines": "What? No!
+Are you gonna ask me first?!
+Wait wait! I can't handle two.
+No! That's too much for me!
+Two is too much!
+Stop, I’m overwhelmed!
+I didn’t agree to this!
+One at a time, please!
+I can’t take both!
+I need a break!"
+} ],
+2: [ {
+"condition": "isAngry()",
+"lines": "Yeah, sure. Let's fuck this slut together.
+Sure. Let's have fun with this whore.
+A threesome? Fuck yeah!
+Hell yeah, let’s tear this bitch up.
+About time we fucked this slut together.
+Sure. Let’s make this fucktoy squirm.
+Sure. That slut’s gonna remember it.
+Hell yeah, sharing this bitch sounds perfect."
+}, {
+"condition": "!isAngry()",
+"lines": "Yeah, sure. Let's fuck {target.him} together.
+Sure. Let's have fun with {target.him}.
+A threesome? Hell yeah!
+Heh, you read my mind.
+Let’s do it.
+Can’t say no to that.
+Let’s make {target.him} melt.
+Oh yeah, I’m in.
+Two on one? Yes, please."
+} ]
+},
+"together": false
+},
+"ThreesomeRideGrind": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Yeah.. Serve us both, fucker.
+Such a nice cock, all for me.
+{target.His} cock is in me. Jealous?
+You’re just a toy for us now.
+I’m using you. Shut up and stay hard.
+Keep licking {extra.him} while I ride you.
+You’re not cumming until we say so, bitch.
+That’s right, struggle under us.
+You think this is for you, fucker?
+All you’re good for is cock and tongue.
+You don’t get to enjoy this, slut.
+We’re going to break you together.
+Harder. I want to feel you squirm, bitch.
+Choke on {extra.him} while I use your dick.
+You look better under us.
+Getting fucked and smothered.. perfect for such a fucktoy.
+You're not the one in control, fucker.
+Lick {extra.his} pussy. Harder.
+Bet this is what you always wanted.
+Not done ‘til we’re both satisfied."
+}, {
+"condition": "!isAngry()",
+"lines": "Yeah.. Serve us both.
+Such a nice cock, all for me.
+{target.His} cock is in me. Jealous?
+You’re just a toy for us now.
+Keep licking {extra.him} while I ride you.
+You’re not cumming until we say so.
+We’re going to use you together.
+Harder. I want to feel you throb.
+Lick {extra.him} while I use your dick.
+You look better under us.
+You look so nice under us.
+You like serving us? I bet you do.
+Getting fucked and smothered.. perfect for such a subby pet.
+Lick {extra.his} pussy. Harder.
+Bet this is what you always wanted.
+Not done ‘til we’re both satisfied.
+Look at you, pleasuring us both.
+Both of us using you, feel that?
+Two dominants, one lucky toy.
+You’re a good little service top.
+Feel us both claiming you.
+I want to feel you throb for me.
+I’m not done riding you yet."
+} ],
+2: [ {
+"condition": "isAngry()",
+"lines": "Keep that tongue working, whore.
+You better earn this, slut.
+Don’t stop licking me, bitch.
+Get that tongue moving faster.
+I’m not here to be gentle.
+You’ll worship me, fucker.
+Keep that mouth busy, bitch.
+You’re mine to use, asshole.
+You love this pussy, don't you?
+Swallow all my juices, whore.
+Prove you deserve it, you stupid bitch.
+Don’t think you’re getting off easy.
+We're in charge here.
+Lick harder, fucktoy.
+You’re nothing but our plaything.
+Work that tongue, slut.
+Ride {target.him} hard, don’t stop.
+You’re ours to use.
+Keep that tongue moving.
+You’re beneath me, lick that wet pussy.
+Make me moan, or else.
+I’m not here for your comfort.
+Worship me like you mean it.
+This pussy demands a lot.
+Keep licking, no breaks.
+You exist for our pleasure.
+Don’t make us get rough."
+}, {
+"condition": "!isAngry()",
+"lines": "Keep that tongue working, pet.
+Don’t stop licking me.
+Keep that mouth busy, baby.
+Make me feel good.
+Don’t even think about stopping.
+Work that tongue harder.
+You love being used like this.
+Lick me good down there.
+Sitting on your face feels good.
+I like your face, very comfy.
+Good pet, don’t stop.
+You’re ours to use.
+Keep that tongue moving.
+Swallow all my juices.
+Keep licking, don’t stop.
+Don’t lose focus now.
+We're not done with you.
+Make us feel good.
+Keep those lips busy.
+Taste every drop.
+Push in with your tongue.
+That’s it, don’t stop.
+Lick and swallow.
+I want your whole face as a seat."
+} ]
+},
+"together": false
+},
+"ThreesomeSpitroast": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "You love being fucked from both ends, don't you, whore?
+You’re ours to fuck and choke.
+Shut up and take it.
+Don’t you dare enjoy this.
+You’re just a fucktoy for us.
+We own your holes.
+You love getting spitroasted, whore.
+You love it, you're tightening up.
+You’re a little needy slut.
+Look at you, so fucked out.
+You’ll take all of us.
+No mercy for your pretty mouth.
+Keep your mouth open, slut.
+Don’t make me go harder.
+You’ll beg for more, won’t you?
+Both holes are our to ruin.
+You’re nothing but our plaything.
+Scream if you must. That's right, you have a cock in there.
+We will break you in good.
+You’re trapped between us now.
+Take it like the slut you are.
+Serving two cocks at the same time. Such a whore."
+}, {
+"condition": "!isAngry()",
+"lines": "You love being fucked from both ends, don't you?
+Stuffed at both ends.. just how you like it.
+Don't bite, now. Be a good toy.
+Taking us so well, fuck.
+You’re made for this, aren’t you?
+Look at you, so full already.
+That mouth better not stop.
+Hope you don’t need to walk later.
+So greedy for cocks, huh?
+Both ends, nice and used.
+Your fuckhole is clenching every time you suck.
+We could take turns.
+You were made to be shared.
+You’re my favorite little fucktoy.
+You’re such a good slut.
+Look at you, so eager.
+We’re gonna ruin you.
+Take it deep and suck hard.
+Feels good to be spitroasted?
+Two cocks inside you.
+Serving two cocks at the same time."
+} ]
+},
+"together": false
+},
+"ThreesomeStart": {
+"chance": 100.0,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Wanna fuck this whore together?
+Wanna fuck this slut with me?
+Let's fuck this bitch together.
+Wanna help me wreck this bitch?
+Let's break this toy together. You in?
+Let’s see what this bitch can handle.
+Wanna double-team this whore?
+Tag in. Let’s fuck {target.him} together.
+Wanna make {target.him} our fucktoy?"
+}, {
+"condition": "!isAngry()",
+"lines": "Wanna have fun with {target.him} together?
+Wanna fuck {target.him} with me?
+Wanna share {target.him}?
+Help me break {target.him} in.
+Wanna do {target.him} together?
+Bet {target.he} can handle both of us.
+Let’s fuck {target.him} together.
+You thinking what I’m thinking?
+Let’s double-team {target.him}.
+I say we both fuck {target.him}."
+} ],
+1: [ {
+"condition": "isResisting()",
+"lines": "What? No!
+Are you gonna ask me first?!
+Wait wait! I can't handle two.
+No! That's too much for me!
+Two is too much!
+Stop, I’m overwhelmed!
+I didn’t agree to this!
+One at a time, please!
+I can’t take both!"
+} ],
+2: [ {
+"condition": "isAngry()",
+"lines": "Yeah, sure. Let's fuck this slut together.
+Sure. Let's have fun with this whore.
+A threesome? Fuck yeah!
+Hell yeah, let’s tear this bitch up.
+About time we fucked this slut together.
+Sure. Let’s make this fucktoy squirm.
+Sure. That slut’s gonna remember it.
+Hell yeah, sharing this bitch sounds perfect."
+}, {
+"condition": "!isAngry()",
+"lines": "Yeah, sure. Let's fuck {target.him} together.
+Sure. Let's have fun with {target.him}.
+A threesome? Hell yeah!
+Heh, you read my mind.
+Let’s do it.
+Can’t say no to that.
+Let’s make {target.him} melt.
+Oh yeah, I’m in.
+Two on one? Yes, please."
+} ]
+},
+"together": false
+},
 "TribadismHappens": {
 "chance": 100.0,
 "chances": "",

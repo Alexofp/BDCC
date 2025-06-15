@@ -116,6 +116,7 @@ func onSwitchFrom(_otherActivity, _args):
 	pullInDom(_args[1])
 	
 	addText("{dom1.You} {dom1.youVerb('join')} in on the fun and {dom1.youVerb('bring')} {dom1.yourHis} "+getNameHole(DOM_1, S_VAGINA)+" to {sub.your} face!")
+	react(SexReaction.ThreesomeJoin, [100.0, 100.0, 100.0], [DOM_1, SUB_0, DOM_0])
 
 func getYour(pcIsInvolvedText:String = "your", noPcText:String = "their") -> String:
 	if(isDom("pc")):
@@ -155,6 +156,7 @@ func sex_processTurn():
 		])
 	else:
 		doProcessRideExtra(SUB_0, DOM_0, usedBodypart)
+	react(SexReaction.ThreesomeRideGrind, [10.0, 10.0, 10.0], [DOM_0, SUB_0, DOM_1])
 
 func getActions(_indx:int):
 	if(_indx == DOM_0 || _indx == DOM_1):

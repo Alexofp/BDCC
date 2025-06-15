@@ -135,8 +135,10 @@ func onSwitchFrom(_otherActivity, _args):
 	if(_args.size() > 3 && _args[3]):
 		switchDoms(0, 1)
 		addText("{dom.You} {dom.youVerb('sandwich', 'sandwiches')} {sub.you} between {dom.youHim} and {dom1.you}, turning this intercourse into a sex train! {dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} {dom.penisShort} against {sub.your} "+getNameHole(SUB_0, usedBodypart)+"!")
+		react(SexReaction.ThreesomeJoin, [100.0, 100.0, 100.0], [DOM_0, SUB_0, DOM_1])
 	else:
 		addText("{dom1.You} {dom1.youVerb('sandwich', 'sandwiches')} {sub.you} between {dom1.youHim} and {dom.you}, turning this intercourse into a sex train! {dom1.You} {dom1.youVerb('press', 'presses')} {dom1.yourHis} "+getNameHole(DOM_1, usedBodypart2)+" against {sub.your} {sub.penisShort}!")
+		react(SexReaction.ThreesomeJoin, [100.0, 100.0, 100.0], [DOM_1, SUB_0, DOM_0])
 
 func getYour(pcIsInvolvedText:String = "your", noPcText:String = "their") -> String:
 	if(isDom("pc")):

@@ -208,7 +208,7 @@ func processTurn():
 		addText(text)
 		
 		if(item && item.getRestraintData()):
-			var bondageSexReaction:int = item.getRestraintData().restraintType
+			var bondageSexReaction:int = item.getRestraintData().sexReaction
 			if(bondageSexReaction >= 0):
 				react(bondageSexReaction)
 
