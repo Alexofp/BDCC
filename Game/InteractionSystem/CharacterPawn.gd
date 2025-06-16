@@ -530,13 +530,31 @@ func getHowMuchLikesPawn(otherPawn, isClamped:bool = false) -> float:
 	
 	return lust.getOverallLikeness(otherPawn.getChar(), isClamped)
 
-func getFocussedLikeness(otherPawn, _focus, isClamped:bool = false) -> float:
+func getFocusedLikeness(otherPawn, _focus, isClamped:bool = false) -> float:
 	var theChar:BaseCharacter = getChar()
 	if(theChar == null || otherPawn == null):
 		return 0.0
 	var lust:LustInterests = theChar.getLustInterests()
 	
 	return lust.getFocussedLikeness(otherPawn.getChar(), _focus, isClamped)
+
+func getFocussedLikeness(otherPawn, _focus, isClamped:bool = false) -> float:
+	return getFocusedLikeness(otherPawn, _focus, isClamped)
+
+func getFocusedLikenessSummary(otherPawn, _focus, isClamped:bool = false) -> Dictionary:
+	var summaryDict:Dictionary = {
+		"resultValue": 0.0,
+		"topicsLikedPresence": [],
+		"topicsLikedAbsence": [],
+		"topicsDislikedPresence": [],
+		"topicsDislikedAbsence": [],
+	}
+	var theChar:BaseCharacter = getChar()
+	if(theChar == null || otherPawn == null):
+		return summaryDict
+	var lust:LustInterests = theChar.getLustInterests()
+	
+	return lust.getFocusedLikenessSummary(otherPawn.getChar(), _focus, isClamped)
 	
 func canSocial() -> bool:
 	return social >= 0.1 || isPlayer()
