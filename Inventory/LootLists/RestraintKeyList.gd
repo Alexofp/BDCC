@@ -21,7 +21,7 @@ func getLoot(_id, _characterID, _battleName):
 		chanceMod *= 0.3
 	
 	return [
-		[75.0*chanceMod, [["restraintkey", 1, 1]]],
-		[50.0*chanceMod, [["restraintkey", 1, 2]]],
-		[10.0*chanceMod, [["restraintkey", 3, 5]]],
+		[75.0*chanceMod, [["restraintkey", 1]]],
+		[50.0*chanceMod, [["restraintkey", 1]]],
+		[10.0*chanceMod, [["restraintkey", 3]]],
 	]
