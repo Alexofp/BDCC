@@ -93,7 +93,7 @@ func _run():
 		addButton("BDCC", "Ask her about how she stumbled upon the AlphaCorp prison", "ask_bdcc")
 		addButton("Blacktail", "Ask her about her family", "ask_blacktail")
 		addButton("Slaves", "Ask her about why she enslaves people", "ask_slaves")
-		addButton("Collar", "Ask about them possible removing your collar", "ask_collar")
+		addButton("Collar", "Ask if it's possible for them to remove your collar", "ask_collar")
 		addButton("Catgirl", "Ask her about her species", "ask_catgirl")
 		addButton("Back", "Enough questions..", "")
 	if(state == "ask_luxe"):

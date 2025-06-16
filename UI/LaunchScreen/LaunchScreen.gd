@@ -197,7 +197,7 @@ func updateSelectedEntry():
 	else:
 		desc += "Author: " + str(jsonResult["author"])+"\n"
 		if(!GlobalRegistry.isVersionListHasCompatible(str(jsonResult["gameversion"]))):
-			desc += "[color=red]Game version: " + str(jsonResult["gameversion"])+" (You are running verson "+GlobalRegistry.getGameVersionString()+")[/color]\n"
+			desc += "[color=red]Game version: " + str(jsonResult["gameversion"])+" (You are running version "+GlobalRegistry.getGameVersionString()+")[/color]\n"
 		else:
 			desc += "Game version: " + str(jsonResult["gameversion"])+"\n"
 		desc += "Mod version: " + str(jsonResult["modversion"])+"\n"
