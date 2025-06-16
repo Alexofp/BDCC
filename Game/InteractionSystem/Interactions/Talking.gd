@@ -10,6 +10,9 @@ var tryCount = 0
 var askCredits = 0
 var didAmount = 0
 var gotDenied = false
+var pickedLineIndx:int = 0
+var fullpickupLine:String = ""
+var isLineCorrect:bool = false
 
 func _init():
 	id = "Talking"
@@ -208,17 +211,40 @@ func about_to_flirt_text():
 
 func about_to_flirt_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "pickup_line"):
-		setState("flirt_pickupline", "reacter")
+		pickedLineIndx = RNG.randi_range(0, PickupLineDB.DB.size()-1)
+		#setState("flirt_pickupline", "reacter")
+		setState("flirt_pickupline_start", "starter")
 	if(_id == "flirt_do"):
 		lust = _args["lust"]
 		setState("flirt_flirted", "reacter")
 
+func flirt_pickupline_start_text():
+	var theEntry:Dictionary = PickupLineDB.DB[pickedLineIndx]
+	saynn("[say=starter]"+theEntry["text"]+"[/say]")
+	saynn("{starter.name} takes a second to think about how to finish the line..")
+	
+	var allAnwers:Array = []
+	for correctAnswer in theEntry["correct"]:
+		allAnwers.append([correctAnswer, true])
+	for badAnswer in theEntry["wrong"]:
+		allAnwers.append([badAnswer, false])
+	allAnwers.shuffle()
+	for answerEntry in allAnwers:
+		addAction("pickline", answerEntry[0], "Finish the pick up line with this", "default", 1.0, 60, {args={answer=answerEntry[0], isCorrect=answerEntry[1]}})
+
+func flirt_pickupline_start_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "pickline"):
+		var theEntry:Dictionary = PickupLineDB.DB[pickedLineIndx]
+		fullpickupLine = theEntry["text"].replace("___", _args["answer"])
+		isLineCorrect = _args["isCorrect"]
+		setState("flirt_pickupline", "reacter")
 
 func flirt_pickupline_text():
-	sayLine("starter", "TalkChatPickupLine", {main="starter", target="reacter"})
+	#sayLine("starter", "TalkChatPickupLine", {main="starter", target="reacter"})
+	saynn("[say=starter]"+fullpickupLine+"[/say]")
 
-	addAction("accept", "Accept it", "Wasn't too bad of a line..", "acceptFlirt", 1.0, 60, {})
-	addAction("deny", "Deny", "That was so bad..", "default", 1.0, 60, {})
+	addAction("accept", "Accept it", "Wasn't too bad of a line..", "acceptFlirt", 1.0 if isLineCorrect else 0.0, 60, {})
+	addAction("deny", "Deny", "That was so bad..", "default", 1.0 if !isLineCorrect else 0.0, 60, {})
 
 func flirt_pickupline_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "accept"):
@@ -437,6 +463,8 @@ func about_to_kidnap_do(_id:String, _args:Dictionary, _context:Dictionary):
 func shouldShowBigButtons() -> bool:
 	if((getState() in ["chat_started"]) && isPlayersTurn()):
 		return true
+	if((getState() in ["flirt_pickupline_start"]) && isPlayersTurn()):
+		return true
 	return false
 
 func getAnimData() -> Array:
@@ -475,6 +503,9 @@ func saveData():
 	data["askCredits"] = askCredits
 	data["didAmount"] = didAmount
 	data["gotDenied"] = gotDenied
+	data["pickedLineIndx"] = pickedLineIndx
+	data["fullpickupLine"] = fullpickupLine
+	data["isLineCorrect"] = isLineCorrect
 	return data
 
 func loadData(_data):
@@ -490,4 +521,10 @@ func loadData(_data):
 	askCredits = SAVE.loadVar(_data, "askCredits", 0)
 	didAmount = SAVE.loadVar(_data, "didAmount", 0)
 	gotDenied = SAVE.loadVar(_data, "gotDenied", false)
-
+	fullpickupLine = SAVE.loadVar(_data, "fullpickupLine", "")
+	isLineCorrect = SAVE.loadVar(_data, "isLineCorrect", false)
+	pickedLineIndx = SAVE.loadVar(_data, "pickedLineIndx", 0)
+	if(pickedLineIndx < 0):
+		pickedLineIndx = 0
+	if(pickedLineIndx >= PickupLineDB.DB.size()):
+		pickedLineIndx = RNG.randi_range(0, PickupLineDB.DB.size()-1)
