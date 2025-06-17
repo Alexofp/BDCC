@@ -545,14 +545,18 @@ func getEquppedRestraints():
 func getEquippedRestraints():
 	return getEquppedRestraints()
 
-func hasRemovableRestraints():
+func getRemovableRestraintsAmount() -> int:
+	var result:int = 0
 	for itemSlot in equippedItems:
 		var item = equippedItems[itemSlot]
 		if(item.isRestraint()):
 			var restraintData = item.getRestraintData()
 			if(restraintData.canStruggle()):
-				return true
-	return false
+				result += 1
+	return result
+
+func hasRemovableRestraints():
+	return getRemovableRestraintsAmount() > 0
 
 func hasRemovableRestraintsNoLockedSmartlocks():
 	for itemSlot in equippedItems:

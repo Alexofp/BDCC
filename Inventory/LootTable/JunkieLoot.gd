@@ -8,7 +8,7 @@ func _init():
 		[3, ["painkillers"]],
 		[3, ["AnaphrodisiacPill"]],
 		[3, [["EnergyDrink", 1, 4]]],
-		[2, [["restraintkey", 1, 2]]],
+		[2, [["restraintkey", 1, 1]]],
 		[3, ["TFPill"]],
 		[1, ["TFPill"]],
 		[1, [["BreederPill", 1, 2]]],
