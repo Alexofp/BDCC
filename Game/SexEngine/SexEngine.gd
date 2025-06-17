@@ -1452,7 +1452,7 @@ func didPCAllowDynamicJoiners() -> bool:
 func canToggleDynamicJoiners() -> bool:
 	if(!isDom("pc")):
 		return false
-	if(!noDynamicJoiners):
+	if(noDynamicJoiners):
 		return false
 	
 	return true
@@ -1469,11 +1469,12 @@ func removeDynamicJoiner(_charID:String):
 	
 	addTextRaw("[b]Dominant leaves.[/b] "+theCharacter.getName()+" has left.")
 	
-	var sexLoc:String = getLocation()
-	if(theCharacter.isDynamicCharacter() && sexLoc != ""):
-		var thePawn = GM.main.IS.spawnPawn(_charID)
-		if(thePawn):
-			thePawn.setLocation(sexLoc)
+	# The InSex interaction should handle this
+	#var sexLoc:String = getLocation()
+	#if(theCharacter.isDynamicCharacter() && sexLoc != ""):
+	#	var thePawn = GM.main.IS.spawnPawn(_charID)
+	#	if(thePawn):
+	#		thePawn.setLocation(sexLoc)
 
 func addDynamicDomParticipant(_charID:String):
 	if(doms.has(_charID) || subs.has(_charID)):
@@ -1487,8 +1488,11 @@ func addDynamicDomParticipant(_charID:String):
 	addTextRaw("[b]NEW DOMINANT![/b] "+domInfo.getChar().getName()+" joins in on the fun.")
 	participatedDoms[_charID] = true
 	if(GM.main):
-		#TODO: Do something better than just deleting pawns?
-		GM.main.IS.deletePawn(_charID)
+		if(_charID != "pc" && GM.main.IS.hasPawn(_charID)):
+			var sexLoc:String = getLocation()
+			if(sexLoc != ""):
+				GM.main.IS.getPawn(_charID).setLocation(sexLoc)
+			GM.main.IS.startInteraction("InSex", {main=_charID})
 
 func getChanceForDynamicJoiner(_charID:String) -> float:
 	var result:float = 20.0

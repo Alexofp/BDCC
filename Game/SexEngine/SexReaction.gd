@@ -119,6 +119,7 @@ enum {
 	ThreesomeJoin,
 	ThreesomeStart,
 	ThreesomeDP,
+	ThreesomeDPSameHole,
 	ThreesomeSpitroast,
 	ThreesomeRideGrind,
 }
@@ -242,6 +243,7 @@ static func getAllStrings():
 		"ThreesomeJoin",
 		"ThreesomeStart",
 		"ThreesomeDP",
+		"ThreesomeDPSameHole",
 		"ThreesomeSpitroast",
 		"ThreesomeRideGrind",
 	]

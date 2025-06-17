@@ -1630,6 +1630,14 @@ func characterIsVisible(charID):
 	
 	return false
 
+func isCharacterInAnySexEngine(_charID:String) -> bool:
+	for scene in sceneStack:
+		if(scene.sceneID == "GenericSexScene"):
+			if(scene.sexEngine && scene.sexEngine.isInvolved(_charID)):
+				return true
+	
+	return false
+
 func updateCharacterUntilNow(charID):
 	var character = getCharacter(charID)
 	if(character != null):

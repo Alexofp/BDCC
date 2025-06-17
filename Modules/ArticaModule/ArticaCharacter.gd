@@ -103,10 +103,3 @@ func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
 	
 	GM.main.increaseFlag("ArticaModule.gaveBirthTimes")
 	GM.main.setFlag("ArticaModule.canReactGaveBirth", true)
-
-#TODO: Don't forget to remove these
-func getPortalSexHoleAvailable(_bodypartSlot):
-	return true
-
-func isWearingInvisiblePortalPanties():
-	return true

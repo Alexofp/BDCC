@@ -290,7 +290,7 @@ func processTurn():
 		return
 	
 func fucking_processTurn():
-	stimulate(SUB_0, S_PENIS, DOM_0, S_VAGINA, I_NORMAL, fetishGiving)
+	stimulate(SUB_0, S_PENIS, DOM_0, usedBodypart, I_NORMAL, fetishGiving)
 #	affectSub(getSubInfo().fetishScore({fetishGiving: 1.0})+0.5, 0.1 * subSensetivity(), -0.1, -0.01)
 #	affectDom(getDomInfo().fetishScore({fetishReceiving: 1.0})+0.3, 0.1, 0.0)
 #	getSubInfo().stimulateArousalZone(0.2, BodypartSlot.Penis, 1.0)
@@ -807,7 +807,6 @@ func getJoinActions(_sexInfo:SexInfoBase):
 		return
 	#var theChar:BaseCharacter = _sexInfo.getChar()
 	
-	#TODO: Better score funcitons
 	if(canSwitchTo("ThreeDDS_Train", [_sexInfo, DOM_0], [SUB_0], [S_VAGINA, usedBodypart])):
 		addJoinAction(["trainVag"], "+Train (vag)", "Join and fuck the sub's pussy at the same time!", getJoinActivityScore("ThreeDDS_Train", DOM_0, _sexInfo, getSubInfo(), [S_VAGINA]), {A_CATEGORY: ["Fuck"]})
 	if(canSwitchTo("ThreeDDS_Train", [_sexInfo, DOM_0], [SUB_0], [S_ANUS, usedBodypart])):

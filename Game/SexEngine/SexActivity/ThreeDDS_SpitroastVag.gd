@@ -54,7 +54,9 @@ func isActivityImpossibleShouldStop() -> bool:
 
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	var sub:BaseCharacter = _subInfo.getChar()
-	if(!sub.hasReachableVagina()):
+	if(usedBodypart == S_VAGINA && !sub.hasReachableVagina()):
+		return false
+	if(usedBodypart == S_ANUS && !sub.hasReachableAnus()):
 		return false
 	if(sub.isOralBlocked()):
 		return false

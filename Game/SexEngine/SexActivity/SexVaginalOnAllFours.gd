@@ -837,7 +837,13 @@ func getJoinActions(_sexInfo:SexInfoBase):
 		addJoinAction(["spitroast"], "+Spitroast", "Join and fuck their mouth!", getJoinActivityScore("ThreeDDS_SpitroastVag", DOM_1, _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
 
 	if(canSwitchTo("ThreeDDS_DP", [DOM_0, _sexInfo], [SUB_0])):
-		if(usedBodypart == S_VAGINA):
+		var theDPHole:String = S_ANUS if usedBodypart == S_VAGINA else S_VAGINA
+		if(!getSub().hasReachableVagina()):
+			theDPHole = S_ANUS
+		elif(getSub().hasReachableVagina() && !getSub().hasReachableAnus()):
+			theDPHole = S_VAGINA
+		
+		if(theDPHole == S_ANUS):
 			addJoinAction(["dp"], "+DP (anal)", "Join and fuck their ass at the same time!", getJoinActivityScore("ThreeDDS_DP", DOM_1, _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
 		else:
 			addJoinAction(["dp"], "+DP (vaginal)", "Join and fuck their pussy at the same time!", getJoinActivityScore("ThreeDDS_DP", DOM_0, _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
