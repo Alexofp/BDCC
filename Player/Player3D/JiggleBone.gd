@@ -101,6 +101,7 @@ func _physics_process(delta) -> void:
 	grav *= (stiffness / OPTIONS.getJigglePhysicsGlobalModifier())
 	vel += grav 
 	vel -= vel * (damping) * delta  # Damping
+	vel.z = 0.0
 	#vel.x = 0
 	#vel.y = 0
 	#vel.z *= 3000
