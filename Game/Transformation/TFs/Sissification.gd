@@ -278,7 +278,7 @@ func reactProgress(_context:Dictionary, _result:TFResult):
 			]))
 		else:
 			addText(RNG.pick([
-				"A shiver runs through {npc.youHim} as a pleasing coolness spreads through {npc.yourHis} prick. A feeling of.. dullness.. is creeping in.. making {npc.yourHis} member less and less sensitive. {npc.YourHis} cock is now almost almost useless.."+(" Good.. It's caged away already anyway." if getChar().isWearingChastityCage() else " Maybe {npc.youHe} should cage it away so {npc.youHe} wouldn't have to worry about it?")
+				"A shiver runs through {npc.youHim} as a pleasing coolness spreads through {npc.yourHis} prick. A feeling of.. dullness.. is creeping in.. making {npc.yourHis} member less and less sensitive. {npc.YourHis} cock is now almost useless.."+(" Good.. It's caged away already anyway." if getChar().isWearingChastityCage() else " Maybe {npc.youHe} should cage it away so {npc.youHe} wouldn't have to worry about it?")
 			]))
 	if(_result.getField("nipStageInc", false)):
 		if(nipsStage == 1):

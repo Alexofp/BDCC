@@ -220,7 +220,7 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 				]))
 		elif(neediness >= 25.0):
 			slaveWords.append(RNG.pick([
-				"I can't remember when was the last day that I came.. I so want to cum.. Please?",
+				"I can't remember when was the last day that I came.. I want to cum so much.. Please?",
 				]))
 		elif(neediness >= 10.0):
 			slaveWords.append(RNG.pick([

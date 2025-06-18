@@ -112,7 +112,7 @@ func _run():
 			saynn("Time passes but you don't really keep track, putting your hand against the wall in front of you and spreading your legs a bit to really start going at it. Not caring to suppress the new moans you make.")
 			saynn("A quick look up to see if you're gonna get caught and it seems like no one has bothered or just doesn't care.")
 			saynn("Uneventful, Maybe you should head out into the main hall if you want some attention...")
-			saynn("The building feeling of an orgasm welling up inside you distracts from your idle thoughts, and you get a really lecherous idea in your head. Your {pc.cock} pulses in your hands and you have just enough time to turn around and put your back to wall to keep you from slipping...")
+			saynn("The building feeling of an orgasm welling up inside you distracts from your idle thoughts, and you get a really lecherous idea in your head. Your {pc.cock} pulses in your hands and you have just enough time to turn around and put your back against the wall to keep you from slipping...")
 		else:
 			saynn("You keep looking over your shoulder as your hands trace down your body and start to fondle your sex. Pushing your body up against the shower wall and doing your best to cover what your doing with your back and legs.")
 			if(GM.pc.isVisiblyPregnant()):
@@ -169,7 +169,7 @@ func _run():
 			saynn("Not wanting to waste the opportunity you turn the water back on and just relax in the bliss of having your {pc.cock} pumped while in the shower.")
 			if(GM.pc.hasVagina()):
 				saynn("Not wanting to leave your {pc.vagina} behind you reach under your balls and begin to just idly thumb over your clitoris and finger your sex.")
-			saynn("You let the pump do it's work as your cock twitches an throbs against the masturbation ring, loudly moaning it each time it runs over your dick.")
+			saynn("You let the pump do it's work as your cock twitches and throbs against the masturbation ring, loudly moaning each time it runs over your dick.")
 			saynn("The shower definitely helps you relax as you have a dumb smile on your face with your back against the wall.")
 			saynn("Eventually you feel your orgasm well up within you...")
 		else:
@@ -196,7 +196,7 @@ func _run():
 			if(GM.pc.isVisiblyPregnant()):
 				saynn("Putting an arm around your pregnant belly as you get back into proper order.")
 			saynn("You switch the penis pump off and pull it off your softening cock with a really wet, lewd sounding plap.")
-			saynn("Giving the pump a look, you probably cant use any of the cum inside it because of the running water, but you have a better idea...")
+			saynn("Giving the pump a look, you probably can't use any of the cum inside it because of the running water, but you have a better idea...")
 			saynn("Holding the end of the pump up to the still running shower head you give a good clean out, like a responsible cum slut.")
 			saynn("Finishing up, you put the pump under your arm and grab two towels to dry you and the pump and get back to whatever you were doing.")
 		else:
@@ -290,7 +290,7 @@ func _run():
 				if(GM.pc.isWearingChastityCage()):
 					saynn("You feel your cock press against your chastity cage as you begin to fool around with yourself.")
 				saynn("Reaching deep, you always know a safe bet to get off. Trying to find where your prostate is you idly start to fondle your penis as well.")
-				saynn("Eventually you do find your g-spot and you start fingering away at it, your {pc.cock} responding by instantly getting hard and drooling cum from it's tip as you continue.")
+				saynn("Eventually you do find your please spot and you start fingering away at it, your {pc.cock} responding by instantly getting hard and drooling cum from it's tip as you continue.")
 				saynn("Finding where your prostate is you add more fingers to the mix, trying to get off on anal alone.")
 				saynn("You don't care if anyone hears the noises you make.")
 				saynn("A few minutes of this you feel your cock throb in an approaching orgasm...")
@@ -321,7 +321,7 @@ func _run():
 				if(GM.pc.isWearingChastityCage()):
 					saynn("You feel your cock press against your chastity cage as you begin to fool around with yourself.")
 				saynn("Reaching deep, you always know a safe bet to get off. Trying to find where your prostate is you idly start to fondle your balls as well.")
-				saynn("Eventually you do find your g-spot and you start fingering away at it, your {pc.cock} responding by instantly getting hard and drooling cum from it's tip as you continue.")
+				saynn("Eventually you do find your pleasure spot and you start fingering away at it, your {pc.cock} responding by instantly getting hard and drooling cum from it's tip as you continue.")
 				saynn("Finding where your prostate is you add more fingers to the mix, trying to get off on anal alone.")
 				saynn("A few minutes of this you feel your cock throb in an approaching orgasm...")
 			#Vagina Only
@@ -340,7 +340,7 @@ func _run():
 		#playAnimation(StageScene.Solo, "stand", {pc="pc", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		playAnimation(StageScene.Showering, "rub", {pc="pc", pcCum=true, bodyState={naked=true,hard=true}})
 		if(GM.pc.hasPerk(Perk.NakedNoShame)):
-			saynn("You start you hammer your fingers faster as your orgasm hits. Letting out a loud moan as you go at it.")
+			saynn("You start to slide your fingers faster as your orgasm hits. Letting out a loud moan as you go at it.")
 			#Herm
 			if(GM.pc.hasVagina() && GM.pc.hasPenis()):
 				if(GM.pc.isWearingChastityCage()):
@@ -349,7 +349,7 @@ func _run():
 					saynn("Your {pc.cock} sprays a few cumshots against the floor and wall, to all get washed away from the falling water.")
 				if(GM.pc.isVisiblyPregnant()):
 					saynn("Your offhand goes your heavy and pregnant belly to support your self as you recover from cumming.")
-			saynn("Pulling your hand from your {pc.analStretch} ass, you simply wash all the fresh cum from your body as you calm back down. Heading for the locker rooms and towels without mess.")
+				saynn("Pulling your hand from your {pc.analStretch} ass, you simply wash all the fresh cum from your body as you calm back down. Heading for the locker rooms and towels without mess.")
 			#Penis Only
 			if(!GM.pc.hasVagina() && GM.pc.hasPenis()):
 				if(GM.pc.isWearingChastityCage()):
@@ -374,7 +374,7 @@ func _run():
 				saynn("That was anti-climatic.")
 				saynn("You just wash everything off and go to grab a towel.")
 		else:
-			saynn("You start you hammer your fingers faster as your orgasm hits. Biting your lip to muffle your own orgasmic cry as you go.")
+			saynn("You start to slide your fingers faster as your orgasm hits. Biting your lip to muffle your own orgasmic cry as you go.")
 			#Herm
 			if(GM.pc.hasVagina() && GM.pc.hasPenis()):
 				if(GM.pc.isWearingChastityCage()):

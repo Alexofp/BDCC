@@ -332,7 +332,7 @@ static func domReactToSubBodypart(_bodypart, _sexEngine, _domInfo, _subInfo) -> 
 				possible.append_array([
 					"I don't think I can take your "+RNG.pick(["dick", "cock"])+" seriously.",
 					"Ugh, that's not what I was expecting at all.",
-					"I'm not impressed. I've seen bigger things on a baby's toy.",
+					"I'm not impressed. I've seen bigger things.",
 					"What is that thing? It's barely even a pecker!",
 					"I can barely see it from here. Is that all you've got?",
 					"You must be really insecure about that tiny thing.",
@@ -360,17 +360,17 @@ static func domReactionWhenUndressing(_bodypart, _sexEngine, _domInfo, _subInfo)
 		if(domIsAngry || domIsMean):
 			possible.append_array([
 				"See my dick? Wanna worship it like a good slut?",
-				"I'm gonna make you fall in love with my "+RNG.pick(["dick", "cock"])+", bitch",
+				"I'm gonna make you fall in love with my "+RNG.pick(["dick", "cock"])+", bitch.",
 				"Drooling already, slut?",
-				"There we go, here is my cock",
+				"There we go, here is my cock.",
 				"Come on, don't be shy. I know you're curious.",
 			])
 		else:
 			possible.append_array([
-				"Like what you see? That's my "+RNG.pick(["dick", "cock"]),
+				"Like what you see? That's my "+RNG.pick(["dick", "cock"])+".",
 				"Like my "+RNG.pick(["dick", "cock"])+"?",
-				"There we go",
-				"Check my "+RNG.pick(["dick", "cock"])+" out",
+				"There we go.",
+				"Check my "+RNG.pick(["dick", "cock"])+" out.",
 			])
 	
 	if(possible.size() > 0):

@@ -438,7 +438,7 @@ func _run():
 
 		saynn("[say=mirri]..and complete submission. Ah..[/say]")
 
-		saynn("Mirri's body trembles, her pussy visible pulsing in your view while her claws dig into your tongue.. ouch.. and yet, you don't bite, just tasting your blood while watching that beatiful pussy orgasm in front of you..")
+		saynn("Mirri's body trembles, her pussy visibly pulsing in your view while her claws dig into your tongue.. ouch.. and yet, you don't bite, just tasting your blood while watching that beatiful pussy orgasm in front of you..")
 
 		saynn("[say=mirri]Such a good.. sextoy.. fuck yes-s-s..[/say]")
 

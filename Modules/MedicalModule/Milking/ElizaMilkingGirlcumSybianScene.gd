@@ -87,11 +87,11 @@ func _run():
 
 		saynn("[say=eliza]Great, great~. I bet you could give me more than that.[/say]")
 
-		saynn("She keeps the dial at its full setting.. meaning that the sybian keeps pushing further and further into this abyss of pleasure.. until another wave of overstimulation catches up with you. Your muscles tense up uncontrollably as your pussy start to pulse and squirt, releasing more of that wet fluid into the air.")
+		saynn("She keeps the dial at its full setting.. meaning that the sybian keeps pushing you further and further into this abyss of pleasure.. until another wave of overstimulation catches up with you. Your muscles tense up uncontrollably as your pussy starts to pulse and squirt, releasing more of that wet fluid into the air.")
 
 		saynn("[say=pc]Mhhhnhh-h-hhahhh.. ahhh-h.. Ahh-h..[/say]")
 
-		saynn("Even if you wanted, you can't do anything about it, the sybain keeps milking your pussy for all of its fluids, the dildo pounding your g-pose while the ridged platform is thrashing against your clit, causing another orgasm to overwhelm you!")
+		saynn("Even if you wanted, you can't do anything about it, the sybain keeps milking your pussy for all of its fluids, the dildo pounding your g-spot while the ridged platform is thrashing against your clit, causing another orgasm to overwhelm you!")
 
 		saynn("Your pussy spawns a fountain of girlcum again.. and again.. but much less this time. You keep moaning like a slut.. while your pussy forces out the rest of its fluids with hard, powerful pulses.")
 

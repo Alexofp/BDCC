@@ -9,7 +9,7 @@ func getVisibleName():
 func getProgress():
 	var result = []
 	
-	result.append("Doctor Quinn has asked to steal a special plant with aphrodisiac properties. She said you can find them in the Green Houses.")
+	result.append("Doctor Quinn has asked me to steal a special plant with aphrodisiac properties. She said you can find them in the Green Houses.")
 
 	if(getFlag("FightClubModule.StolePlantForEliza")):
 		result.append("You stole the plant. Time to return to doctor Quinn. You can find her in the lobby of the medical wing.")

@@ -7,7 +7,7 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoom, "fight_neararena")
 	
 func run(_triggerID, _args):
-	saynn("Avy stands near the fences that make up the improvised arena")
+	saynn("Avy stands near the fences that make up the improvised arena.")
 	
 	if(!getFlag("FightClubModule.AnnouncerIntroduced")):
 		addDisabledButton("Avy", "Talk to the announcer first")

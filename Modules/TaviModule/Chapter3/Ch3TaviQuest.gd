@@ -18,7 +18,7 @@ func getProgress():
 		result.append("You need to find the control room and initiate a maintenance protocol in order to open the door to the bluespace transmitter.")
 
 	if(GM.main.getFlag("TaviModule.ch3CompletedDoorHack")):
-		result.append("You enabled the maintenance protocol. Return back to Tavi")
+		result.append("You enabled the maintenance protocol. Return back to Tavi.")
 
 	if(GM.main.getFlag("TaviModule.Ch4ServedPunishment")):
 		result.append("You're free! But you gotta get your revenge on the cat who told about your plans to the captain. Find Kait in the lilac block during mornings.")

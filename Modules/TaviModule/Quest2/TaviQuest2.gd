@@ -9,7 +9,7 @@ func getVisibleName():
 func getProgress():
 	var result = []
 	
-	result.append("Tavi told you to meet her near the checkpoint so you can get to the captain's office and try to call 'Tavi's friends'")
+	result.append("Tavi told you to meet her near the checkpoint so you can get to the captain's office and try to call 'Tavi's friends'.")
 
 	return result
 
