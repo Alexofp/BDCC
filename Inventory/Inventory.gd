@@ -387,6 +387,14 @@ func getSmartLockedItemsAmount() -> int:
 			result += 1
 	return result
 
+func getAllSmartLocks() -> Array:
+	var result:Array = []
+	for slot in equippedItems:
+		var item = equippedItems[slot]
+		if(item.restraintData != null && item.restraintData.hasSmartLock()):
+			result.append(item.restraintData.getSmartLock())
+	return result
+
 func hasItemIDEquipped(itemID: String):
 	for slot in equippedItems:
 		var item = equippedItems[slot]

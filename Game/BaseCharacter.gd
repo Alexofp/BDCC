@@ -3402,6 +3402,19 @@ func getSexGoalSubWeightModifier(_sexGoalID:String, _domID:String) -> float:
 	if(theTFHolder != null):
 		result *= theTFHolder.getSexGoalWeightModifier(_sexGoalID)
 	
+	var theNpcSlavery = getNpcSlavery()
+	if(theNpcSlavery):
+		result *= theNpcSlavery.getSexGoalWeightModifier(_sexGoalID)
+	
+	var theEnslaveQuest = getEnslaveQuest()
+	if(theEnslaveQuest):
+		result *= theEnslaveQuest.getSexGoalWeightModifier(_sexGoalID)
+	
+	var smartLocks:Array = getInventory().getAllSmartLocks()
+	for smartLock in smartLocks:
+		if(smartLock.id == SmartLock.SlutLock):
+			result *= smartLock.getSexGoalWeightModifier(_sexGoalID)
+	
 	return result
 
 func undoAllTransformations():

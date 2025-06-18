@@ -40,3 +40,10 @@ func getTaskString():
 
 func getTaskHint(_isSlaveLevelup):
 	return "Cum inside their pussy or ass. If you don't have a penis, you can use a loaded strapon! Worst case, just spit cum into it."
+
+func getSexGoalWeightModifier(_sexGoalID:String) -> float:
+	if(_sexGoalID == SexGoal.FuckVaginal):
+		return 3.0
+	if(_sexGoalID == SexGoal.FuckAnal):
+		return 3.0
+	return 0.0

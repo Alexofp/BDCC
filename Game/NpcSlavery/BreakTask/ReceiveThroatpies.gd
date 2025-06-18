@@ -45,3 +45,8 @@ func getTaskString():
 
 func getTaskHint(_isSlaveLevelup):
 	return "Cum down their throat. If you don't have a penis, you can use a loaded strapon!"
+
+func getSexGoalWeightModifier(_sexGoalID:String) -> float:
+	if(_sexGoalID == SexGoal.FuckOral):
+		return 3.0
+	return 0.0

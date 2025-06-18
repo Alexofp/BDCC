@@ -40,6 +40,11 @@ func getTaskString():
 func getTaskHint(_isSlaveLevelup):
 	return "Put different restraints on them during sex. If there is no space, remove something first."
 
+func getSexGoalWeightModifier(_sexGoalID:String) -> float:
+	if(_sexGoalID == SexGoal.TieUp):
+		return 3.0
+	return 0.0
+
 func saveData():
 	var data = .saveData()
 	data["didForce"] = didForce

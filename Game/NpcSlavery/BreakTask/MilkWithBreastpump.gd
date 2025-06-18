@@ -48,3 +48,8 @@ func getTaskString():
 
 func getTaskHint(_isSlaveLevelup):
 	return "Put a breastpump on them and collect this much milk!"
+
+func getSexGoalWeightModifier(_sexGoalID:String) -> float:
+	if(_sexGoalID == SexGoal.MilkWithBreastPump):
+		return 3.0
+	return 0.0
