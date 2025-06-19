@@ -322,14 +322,22 @@ func getActions(_indx:int):
 				var switchholeScore:float = 5.0 * (-getDomInfo().goalsScore(getGoals(), getSubID()) + getDomInfo().goalsScore({otherGoal: 1.0}, getSubID()))
 				addAction("switchhole", switchholeScore, "Switch hole", "Switch to riding with your "+RNG.pick(otherHoleNames))
 
+		if(state in ["fucking", "knotting"]):
+			if(isReadyToCumHandled(DOM_0)):
+				addAction("domcum", 1.0, "Cum!", "You're about to cum!", {A_PRIORITY: 1001})
+
 		if(state in ["fucking"]):
 			var moanScore:float = max(0.1, getDomInfo().fetishScore({fetishReceiving: 1.0}) + getDomInfo().personalityScore({PersonalityStat.Subby: 1.0}))
 			addAction("moan", moanScore, "Moan", "Show how much you like it")
 
 			addAction("slowdown", getPauseSexScore(DOM_0, SUB_0, S_PENIS, usedBodypart), "Slow down", "Stop fucking for a second..")
-
-			if(isReadyToCumHandled(DOM_0)):
-				addAction("domcum", 1.0, "Cum!", "You're about to cum!", {A_PRIORITY: 1001})
+			
+			if(isStraponSex() && getSub().bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)):
+				var domArousal:float = getDomInfo().getArousal()
+				var straponForceKnotScore:float = 0.01
+				if(domArousal > 0.8):
+					straponForceKnotScore = 0.5
+				addAction("straponForceKnot", straponForceKnotScore, "Force knot in", "Try to force their knot inside you!")
 				
 		if(getState() in ["subabouttocum"] || (getState() == "fucking" && getSubInfo().isReadyToCum() && !getSubInfo().canDoActions())):
 			var scoreToCumInside:float = 1.0
@@ -378,6 +386,28 @@ func getActions(_indx:int):
 			addAction("throwoff", getResistScore(SUB_0), "Throw them off", "Resist their attempts to ride you", {A_CHANCE: getSubResistChance(30.0, 25.0)})
 
 func doAction(_indx:int, _id:String, _action:Dictionary):
+	if(_id == "straponForceKnot"):
+		# Need a tryKnot func?
+		#if(tryPenetrate())
+		stimulate(SUB_0, S_PENIS, DOM_0, usedBodypart, I_NORMAL, fetishGiving, SPEED_SLOW)
+		#var subArousal:float = getSubInfo().getArousal()
+		if(RNG.chance(getDom().getKnottingChanceBy(usedBodypart, getSubID()) * 0.25)):
+			getDom().gotOrificeStretchedBy(usedBodypart, getSubID(), true, 0.2)
+			addTextTopBottom(RNG.pick([
+				#"{dom.You} {dom.youVerb('manage')} to knot {sub.you}!",
+				"{<BOTTOM>.You} {<BOTTOM>.youVerb('ride')} {<TOP>.your} {<TOP>.penisShort} hard until {<TOP>.yourHis} knot suddenly slips inside, stretching {<BOTTOM>.yourHis} "+getNameHole(DOM_0, usedBodypart)+" wide!",
+			]), SUB_0, DOM_0)
+			state = "knotting"
+			cumInside(SUB_0, DOM_0, usedBodypart)
+			#satisfyGoals()
+		else:
+			getDom().gotOrificeStretchedBy(usedBodypart, getSubID(), true, 0.1)
+			addTextPick([
+				"{dom.You} {dom.youVerb('try', 'tries')} to shove {sub.your} knot inside!",
+				"{dom.You} {dom.youVerb('try', 'tries')} to stretch {dom.yourHis} "+getNameHole(DOM_0, usedBodypart)+" on {sub.your} knot enough to make it slip inside!",
+				"{dom.You} {dom.youVerb('try', 'tries')} to knot {dom.yourself} on {sub.your} {sub.penisShort}!",
+			])
+		return
 	if(_id == "makeout"):
 		isMakingOut = true
 		if(!getSubInfo().isResistingSlightly()):
@@ -558,6 +588,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 					text += RNG.pick([
 						" Some "+RNG.pick(["cum", "seed", "semen"])+" leaks out of {dom.yourHis} used "+RNG.pick(usedBodypartNames)+".",
 					])
+			stimulate(SUB_0, S_PENIS, DOM_0, usedBodypart, I_NORMAL, fetishGiving, SPEED_VERYSLOW)
 			addText(text)
 			return
 		else:

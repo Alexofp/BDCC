@@ -110,3 +110,7 @@ func alwaysRecoveredAfterSex():
 
 func canDye():
 	return true
+
+func getStraponTraits() -> Dictionary:
+	return {
+	}

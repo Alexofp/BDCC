@@ -2303,7 +2303,16 @@ func loadBuffsData(data):
 		result.append(buff)
 	return result
 
-func bodypartHasTrait(bodypartSlot, traitID):
+func bodypartHasTrait(bodypartSlot, traitID, includeEquipment:bool = true):
+	if(includeEquipment):
+		if(bodypartSlot == BodypartSlot.Penis && isWearingStrapon()):
+			var theStrapon = getWornStrapon()
+			if(theStrapon.has_method("getStraponTraits")):
+				var theStraponTraits:Dictionary = theStrapon.getStraponTraits()
+				if(theStraponTraits.has(traitID) && theStraponTraits[traitID]):
+					return true
+			return false # Strapons override your penis' traits
+	
 	if(!hasBodypart(bodypartSlot)):
 		return false
 	
