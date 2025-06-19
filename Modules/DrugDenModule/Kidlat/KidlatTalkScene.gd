@@ -875,7 +875,7 @@ func _run():
 
 		saynn("Kidlat shifts around on her chair.")
 
-		saynn("[say=pc]..cumming inside your own pussy.. stuffing it feel of your seed..[/say]")
+		saynn("[say=pc]..cumming inside your own pussy.. stuffing it full of your seed..[/say]")
 
 		saynn("Kidlat huffs and moans more.")
 
@@ -883,7 +883,7 @@ func _run():
 
 		saynn("You can't hide the smile while the poor kitty is squirming hard.")
 
-		saynn("[say=pc]Why did you grow a canine cock anyway? Aren't you a cock?[/say]")
+		saynn("[say=pc]Why did you grow a canine cock anyway? Aren't you a cat?[/say]")
 
 		saynn("[say=kidlat]Damned if I knew.. Not complainin' though..[/say]")
 
@@ -1202,7 +1202,7 @@ func _run():
 
 		saynn("[say=pc]Doesn't the thought of getting fucked by a complete stranger turn you on? Who says I can't be one of those strangers~?[/say]")
 
-		saynn("Even with all the inmates around, you can hear you swallowing her saliva.")
+		saynn("Even with all the inmates around, you can hear her swallowing her saliva.")
 
 		saynn("[say=pc]Cock after cock, fucking your little tight pussy while you're stuck in that slutwall.. unable to even see them.. Don't you wanna be a free-use whore, kitty~? Just this time~?[/say]")
 

@@ -1021,7 +1021,7 @@ func _run():
 
 		saynn("Give up everything? Now? Fuck.. Maybe it's time to give up? But something about going with this guy rubs you the wrong way.")
 
-		saynn("[say=alexrynard]Is that why are you still here? To test how much you can lowball me?[/say]")
+		saynn("[say=alexrynard]Is that why you are still here? To test how much you can lowball me?[/say]")
 
 		saynn("[say=captain]I just wanted to look at the Expo. See what kind of projects people are working on. I heard that you had to quit your team?[/say]")
 

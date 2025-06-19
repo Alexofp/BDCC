@@ -729,9 +729,11 @@ func isVersionCompatible(otherversion:String):
 	
 	if(otherversion == "*"):
 		return true
-	if(otherversion != getGameVersionStringNoSuffix()):
-		return false
-	return true
+	if(otherversion == getGameVersionStringNoSuffix()):
+		return true
+	if(otherversion == getGameVersionString()):
+		return true
+	return false
 
 func isVersionListHasCompatible(versionlist):
 	if(!(versionlist is String)):

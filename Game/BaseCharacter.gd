@@ -732,6 +732,10 @@ func getBreastsSize() -> int:
 	return getBodypart(BodypartSlot.Breasts).getSize()
 
 func getFluidType(fluidSource):
+	var theCustomType:String = getCustomFluidType(fluidSource)
+	if(theCustomType != ""):
+		return theCustomType
+	
 	if(fluidSource == FluidSource.Penis):
 		if(hasBodypart(BodypartSlot.Penis)):
 			return getBodypart(BodypartSlot.Penis).getFluidType(fluidSource)
