@@ -10,6 +10,8 @@ const ForcedPermanentTFs = "ForcedPermanentTFs"
 static func getVisibleName(contentType):
 	if(contentType == RiskyCondoms):
 		return "Risky Condoms"
+	if(contentType == Watersports):
+		return "Watersports"
 	if(contentType == CumInflation):
 		return "Cum Inflation"
 	if(contentType == CumStealing):
@@ -17,7 +19,7 @@ static func getVisibleName(contentType):
 	if(contentType == ForcedPermanentTFs):
 		return "Forced Permanent TFs"
 	
-	return contentType.capitalize()
+	return "Error"
 
 static func getDescription(contentType):
 	if(contentType == RiskyCondoms):

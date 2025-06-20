@@ -113,7 +113,7 @@ func _run():
 	if(state == "before_birth"):
 		playAnimation(StageScene.GivingBirth, "birth", {pc=npcID, bodyState={naked=true}})
 		if (npcType == "kind"):
-			saynn("You stand by {npc.name} side while {npc.he} listens to the nurse's orders. Then {npc.he} reaches {npc.his} hand to you and smiles nervously. You decide to hold it, to help {npc.him} feel calmer.")
+			saynn("You stand by {npc.nameS} side while {npc.he} listens to the nurse's orders. Then {npc.he} reaches {npc.his} hand to you and smiles nervously. You decide to hold it, to help {npc.him} feel calmer.")
 
 			saynn("Contractions are happening, causing {npc.name} to groan from the pain while clenching your hand.")
 
@@ -122,14 +122,14 @@ func _run():
 			saynn("[say=npc]"+str(RNG.pick(["Thank you for being here..", "I don't know how would I do it without you..", "I couldn't go through this alone.. thank you.."]))+"[/say]")
 
 		elif (npcType == "mean"):
-			saynn("You stand by {npc.name} side while {npc.he} listens to the nurse's orders. You offer your hand to {npc.him} but it seems {npc.he} doesn't need it.")
+			saynn("You stand by {npc.nameS} side while {npc.he} listens to the nurse's orders. You offer your hand to {npc.him} but it seems {npc.he} doesn't need it.")
 
 			saynn("[say=npc]"+str(RNG.pick(["I'm strong, I don't need your pity.. ah..", "Do I look like I need your hand? Ah..", "Holding hands is for softies.. ah..", "I'm gonna give birth without any hand holding.. ah.."]))+"[/say]")
 
 			saynn("Contractions are happening, causing {npc.name} to groan from the pain and eventually grab your hand before clenching it tight.")
 
 		elif (npcType == "subby"):
-			saynn("You stand by {npc.name} side while {npc.he} listens to the nurse's orders and tries {npc.his} best not to make too much noise, probably feeling embarrassed. You decide to grab {npc.his} hand and hold it tightly which makes {npc.him} blush deeply.")
+			saynn("You stand by {npc.nameS} side while {npc.he} listens to the nurse's orders and tries {npc.his} best not to make too much noise, probably feeling embarrassed. You decide to grab {npc.his} hand and hold it tightly which makes {npc.him} blush deeply.")
 
 			saynn("[say=pc]"+str(RNG.pick(["You're doing great. Just breathe through it. I'm here with you.", "You can do it. Push when the nurse tells you.", "I believe in you, listen to the nurse.", "Don't hold it, it's okay to scream if you need to."]))+"[/say]")
 

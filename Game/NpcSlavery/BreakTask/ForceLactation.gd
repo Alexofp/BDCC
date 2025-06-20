@@ -41,4 +41,11 @@ func getTaskStringSlutLock():
 func getTaskHint(_isSlaveLevelup):
 	return "Squeeze their breasts until the milk starts coming out"
 
-
+func getSexGoalWeightModifier(_sexGoalID:String) -> float:
+	if(_sexGoalID == SexGoal.BreastFeedOnSub):
+		return 1.0
+	if(_sexGoalID == SexGoal.GropeBreasts):
+		return 2.0
+	if(_sexGoalID == SexGoal.MilkWithBreastPump):
+		return 1.0
+	return 0.0

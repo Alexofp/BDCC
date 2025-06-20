@@ -42,3 +42,10 @@ func getTaskString():
 
 func getTaskHint(_isSlaveLevelup):
 	return "Cum or spit inside their pussy/ass."
+
+func getSexGoalWeightModifier(_sexGoalID:String) -> float:
+	if(_sexGoalID == SexGoal.FuckAnal):
+		return 3.0
+	if(_sexGoalID == SexGoal.FuckVaginal):
+		return 3.0
+	return 0.0

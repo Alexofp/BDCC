@@ -1,29 +1,28 @@
 extends SexActivityBase
 
-var itemIDToRemove = ""
-var tick = 0
+var itemIDToRemove:String = ""
+var tick:int = 0
 
 func _init():
 	id = "OrderToUndress"
+	
+	activityName = "Order to undress"
+	activityDesc = "Order the sub to take something off"
+	activityCategory = ["Undress"]
 
 func getGoals():
 	return {
 		SexGoal.SubUndressSub: 1.0,
 	}
 
-func getVisibleName():
-	return "Order to undress"
+func getTags(_indx:int) -> Array:
+	if(_indx == DOM_0):
+		return [SexActivityTag.OrderedToDoSomething]
+	if(_indx == SUB_0):
+		return [SexActivityTag.OrderedToDoSomething, SexActivityTag.OrderedToUndress]
+	return []
 
-func getCategory():
-	return ["Order"]
-
-func getDomTags():
-	return [SexActivityTag.OrderedToDoSomething]
-
-func getSubTags():
-	return [SexActivityTag.OrderedToDoSomething, SexActivityTag.OrderedToUndress]
-
-func getSubTagsCheck():
+func getCheckTagsSub() -> Array:
 	return [SexActivityTag.OrderedToDoSomething, SexActivityTag.BeingUndressed]
 
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
@@ -42,23 +41,17 @@ func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: Sex
 	return .canStartActivity(_sexEngine, _domInfo, _subInfo)
 
 func startActivity(_args):
-	state = ""
-	
-	#affectSub(subInfo.fetishScore({Fetish.Bodywritings: 1.0}, -0.25), 0.01, 0.0, -0.2, -0.02)
 	var itemToUndress = getItemToRemove(getSub())
 	if(itemToUndress == null):
 		endActivity()
 		return
-	var casualName = str(itemToUndress.getCasualName())
+	var casualName:String = str(itemToUndress.getCasualName())
 	itemIDToRemove = itemToUndress.id
 	
-	return {
-		text = "{dom.You} {dom.youVerb('order')} {sub.you} to undress {sub.yourHis} <ITEM>.".replace("<ITEM>", casualName),
-		domSay = Util.replaceIfNotNull(domReaction(SexReaction.OrderToUndress), "<ITEM>", casualName),
-		subSay = Util.replaceIfNotNull(subReaction(SexReaction.OrderToUndress), "<ITEM>", casualName),
-	}
+	addText("{dom.You} {dom.youVerb('order')} {sub.you} to undress {sub.yourHis} <ITEM>.".replace("<ITEM>", casualName))
+	react(SexReaction.OrderToUndress, [100, 100], [DOM_0, SUB_0], [casualName])
 
-func checkRemoved():
+func checkRemoved() -> bool:
 	if(itemIDToRemove == null || itemIDToRemove == ""):
 		return true
 	
@@ -75,59 +68,42 @@ func checkRemoved():
 	return subDidIt
 
 func processTurn():
-	if(state == ""):
-		if(checkRemoved()):
-			domInfo.addAnger(-0.1)
-			endActivity()
-			return {
-				text = "{dom.You} {dom.youVerb('nod')}.",
-			}
-			
-		tick += 1
-		if(tick > 3):
-			endActivity()
-			return {
-				text = "{dom.You} gave up waiting."
-			}
+	if(checkRemoved()):
+		getDomInfo().addAnger(-0.1)
+		endActivity()
+		addText("{dom.You} {dom.youVerb('nod')}.")
+		return
 		
-		if(tick > 1):
-			domInfo.addAnger(0.1 + 0.02 * tick)
-			return {
-					text = "{dom.You} {dom.youAre} losing patience.",
-				}
+	tick += 1
+	if(tick > 3):
+		endActivity()
+		addText("{dom.You} gave up waiting.")
+		return
+	
+	if(tick > 1):
+		getDomInfo().addAnger(0.1 + 0.02 * tick)
+		addText("{dom.You} {dom.youAre} losing patience.")
+		return
 	
 func reactActivityEnd(_otheractivity):
 	if(checkRemoved()):
-		domInfo.addAnger(-0.1)
+		getDomInfo().addAnger(-0.1)
 		endActivity()
-		return {
-			text = "{dom.You} {dom.youVerb('nod')}.",
-		}
+		addText("{dom.You} {dom.youVerb('nod')}.")
 	
-func getDomActions():
-	var actions = []
 
-	return actions
+func getActions(_indx:int):
+	if(_indx == SUB_0):
+		if(!getSub().hasBoundArms()):
+			var saynoScore:float = getResistScore(SUB_0) - fetish(SUB_0, Fetish.Exhibitionism)
+			addAction("sayno", saynoScore, "Refuse to undress", "You're not gonna undress")
 
-func doDomAction(_id, _actionInfo):
-	return null
 
-func getSubActions():
-	var actions = []
-	if(!getSub().hasBoundArms()):
-		actions.append({
-				"id": "sayno",
-				"score": subInfo.getResistScore() * 1.0 - subInfo.fetishScore({Fetish.Exhibitionism: 1.0}),
-				"name": "Refuse to undress",
-				"desc": "You're not gonna undress",
-			})
-	return actions
-
-func doSubAction(_id, _actionInfo):
+func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "sayno"):
-		domInfo.addAnger(0.7)
+		getDomInfo().addAnger(0.7)
 		endActivity()
-		return {text = "{sub.You} {sub.youVerb('refuse')} to undress.",}
+		addText("{sub.You} {sub.youVerb('refuse')} to undress.")
 
 func getItemToRemove(character):
 	var bodypartsToExpose = [BodypartSlot.Breasts, BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Anus]

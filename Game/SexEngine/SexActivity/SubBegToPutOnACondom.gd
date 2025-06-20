@@ -4,6 +4,10 @@ func _init():
 	id = "SubBegToPutOnACondom"
 	startedByDom = false
 	startedBySub = true
+	
+	activityName = "Beg condom"
+	activityDesc = "Beg them to put on a condom"
+	activityCategory = ["Beg"]
 
 func getGoals():
 	return {
@@ -23,38 +27,21 @@ func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	var sub:BaseCharacter = _subInfo.getChar()
 	var dom:BaseCharacter = _domInfo.getChar()
-	var actions = []
-	
 	if(dom.getWornCondom() != null):
-		return []
+		return
 	
 	if(!dom.hasReachablePenis() || dom.getInventory().hasSlotEquipped(InventorySlot.Penis) || dom.getFirstItemThatCoversBodypart(BodypartSlot.Penis) != null):
-		return []
+		return
 	
 	if(_subInfo.shouldFullyObey()):
-		return []
+		return
 	
-	actions.append({
-		name = "Beg to use condom",
-		desc = "Ask the dom to put on a condom",
-		args = ["beg"],
-		score = getActivityScore(_sexEngine, _domInfo, _subInfo) * _subInfo.fetishScore({Fetish.BeingBred: -1.0}),
-		category = getCategory(),
-		chance = calculateSuccessChance(_domInfo, _subInfo, 100.0),
-	})
+	var begScore:float = getActivityScore(_sexEngine, _domInfo, _subInfo) * _subInfo.fetishScore({Fetish.BeingBred: -1.0})
+	addStartAction(["beg"], "Beg to use condom", "Ask the dom to put on a condom", begScore, {A_CATEGORY: getCategory(), A_CHANCE: calculateSuccessChance(_domInfo, _subInfo, 100.0)})
 	if(sub.isPlayer() && sub.hasCondoms() && !sub.hasBlockedHands()):
-		actions.append({
-			name = "Offer a condom",
-			desc = "Beg the dom to use your condom",
-			args = ["offer"],
-			score = getActivityScore(_sexEngine, _domInfo, _subInfo) * _subInfo.fetishScore({Fetish.BeingBred: -1.0}),
-			category = getCategory(),
-			chance = calculateSuccessChance(_domInfo, _subInfo, 130.0, 0.5),
-		})
-	
-	return actions
+		addStartAction(["offer"], "Offer a condom", "Beg the dom to use your condom", begScore, {A_CATEGORY: getCategory(), A_CHANCE: calculateSuccessChance(_domInfo, _subInfo, 130.0, 0.5)})
 
-func calculateSuccessChance(_domInfo: SexDomInfo, _subInfo: SexSubInfo, baseChance = 100.0, angerMult = 1.0):
+func calculateSuccessChance(_domInfo: SexDomInfo, _subInfo: SexSubInfo, baseChance:float = 100.0, angerMult:float = 1.0) -> float:
 	var successChance = 0.1 -_domInfo.fetishScore({Fetish.Breeding: 0.5}) + _domInfo.fetishScore({Fetish.Condoms: 1.0})
 	successChance = successChance * baseChance
 	if(successChance > 0.0):
@@ -63,25 +50,16 @@ func calculateSuccessChance(_domInfo: SexDomInfo, _subInfo: SexSubInfo, baseChan
 		successChance *= 0.5
 	return max(successChance, 5.0)
 
-func getVisibleName():
-	return "Beg condom"
-
-func getCategory():
-	return ["Beg"]
-
-func getDomTags():
-	return [SexActivityTag.PenisInside]
-
-func getSubTags():
+func getTags(_indx:int) -> Array:
+	if(_indx == DOM_0):
+		return [SexActivityTag.PenisInside]
 	return []
 
 func startActivity(_args):
-	state = ""
-	
 	if(_args[0] in ["beg", "offer"]):
 		var condomBeggingReaction = SexReaction.BeggingForCondom
 		endActivity()
-		var text
+		var text:String = ""
 		if(_args[0] == "beg"):
 			text = RNG.pick([
 				"{sub.You} {sub.youVerb('beg')} {dom.youHim} to put on a condom.",
@@ -91,27 +69,25 @@ func startActivity(_args):
 			text = RNG.pick([
 				"{sub.You} {sub.youVerb('offer')} {dom.youHim} to put on one of {sub.yourHis} condoms.",
 			])
-		if(domInfo.getChar().isPlayer()):
-			return {
-				text = text,
-				subSay = subReaction(condomBeggingReaction),
-			}
+		if(getDomInfo().getChar().isPlayer()):
+			addText(text)
+			reactSub(condomBeggingReaction)
+			return
 		
-		if(domInfo.hasMemory("TiredOfCondomOffers")):
+		if(getDomInfo().hasMemory("TiredOfCondomOffers")):
 			text += RNG.pick([
 				" {dom.You} {dom.youVerb('ignore')} {sub.yourHis} begging.",
 			])
-			domInfo.addAnger(0.05)
-			return {
-				text = text,
-				subSay = subReaction(condomBeggingReaction),
-			}
+			getDomInfo().addAnger(0.05)
+			addText(text)
+			reactSub(condomBeggingReaction)
+			return
 		
-		var successChance
+		var successChance:float
 		if(_args[0] == "beg"):
-			successChance = calculateSuccessChance(domInfo, subInfo, 100.0)
+			successChance = calculateSuccessChance(getDomInfo(), getSubInfo(), 100.0)
 		else:
-			successChance = calculateSuccessChance(domInfo, subInfo, 130.0, 0.5)
+			successChance = calculateSuccessChance(getDomInfo(), getSubInfo(), 130.0, 0.5)
 		
 		if(RNG.chance(successChance)):
 			if(_args[0] == "beg"):
@@ -128,27 +104,27 @@ func startActivity(_args):
 			if(getSub().isPlayer() && _args[0] == "offer"):
 				condomItem.breakChance = getSub().useBestCondom()
 			
-			return {text = text, subSay = subReaction(condomBeggingReaction)}
+			addText(text)
+			reactSub(condomBeggingReaction)
+			return
 		else:
-			var superFailChance = domInfo.getAngerScore() * 30.0
+			var superFailChance:float = getDomInfo().getAngerScore() * 30.0
 			if(RNG.chance(superFailChance)):
-				domInfo.remember("TiredOfCondomOffers")
+				getDomInfo().remember("TiredOfCondomOffers")
 				text += RNG.pick([
 					" {dom.You} {dom.youVerb('get')} very annoyed with {sub.yourHis} begging.",
 				])
-				domInfo.addAnger(0.2)
-				return {
-					text = text,
-					subSay = subReaction(condomBeggingReaction),
-				}
+				getDomInfo().addAnger(0.2)
+				addText(text)
+				reactSub(condomBeggingReaction)
+				return
 			
-			domInfo.addAnger(0.1)
+			getDomInfo().addAnger(0.1)
 			text += RNG.pick([
 				" {dom.You} {dom.youVerb('shake')} {dom.yourHis} head.",
 			])
 			
-			return {
-				text = text,
-				subSay = subReaction(condomBeggingReaction),
-			}
+			addText(text)
+			reactSub(condomBeggingReaction)
+			return
 

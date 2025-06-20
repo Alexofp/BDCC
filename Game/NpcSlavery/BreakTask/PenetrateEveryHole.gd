@@ -85,3 +85,12 @@ func loadData(data):
 	fuckedMouth = SAVE.loadVar(data, "fuckedMouth", false)
 	fuckedVag = SAVE.loadVar(data, "fuckedVag", false)
 	fuckedAnus = SAVE.loadVar(data, "fuckedAnus", false)
+
+func getSexGoalWeightModifier(_sexGoalID:String) -> float:
+	if(!fuckedMouth && _sexGoalID == SexGoal.FuckOral):
+		return 3.0
+	if(!fuckedVag && _sexGoalID in [SexGoal.FuckVaginal, SexGoal.StraponVaginal]):
+		return 3.0
+	if(!fuckedAnus && _sexGoalID in [SexGoal.FuckAnal, SexGoal.StraponAnal]):
+		return 3.0
+	return 0.0

@@ -43,3 +43,6 @@ func getBodywritingsAmount(_npc) -> int:
 		var theEffect = theNpc.getEffect(StatusEffect.HasBodyWritings)
 		return theEffect.getAmount()
 	return 0
+
+func getSexGoalWeightModifier(_sexGoalID:String) -> float:
+	return 0.0

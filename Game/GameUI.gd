@@ -10,8 +10,10 @@ var optionButtonScene: PackedScene = preload("res://Game/SceneOptionButton.tscn"
 onready var optionButtonsContainer = $HBoxContainer/VBoxContainer2/HBoxContainer/GridContainer
 var currentPage:int = 0
 var options: Dictionary = {}
+var extraOptions: Dictionary = {}
 var optionsCurrentID = 0
-var buttonsNeedUpdating = false
+var buttonsNeedUpdating:bool = false
+var extraButtonsNeedUpdating:bool = false
 onready var nextPageButton = $HBoxContainer/VBoxContainer2/HBoxContainer/NextPageButton
 onready var prevPageButton = $HBoxContainer/VBoxContainer2/HBoxContainer/PrevPageButton
 onready var optionTooltip = $CanvasLayer/TooltipDisplay
@@ -34,6 +36,7 @@ onready var devCommentaryPanel = $HBoxContainer/DevCommentary
 onready var sceneArtWorkRect = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer/SceneArtWorkRect
 onready var fullArtWorkRect = $FullArtworkRect
 onready var uniquePanelSpot = $HBoxContainer/VBoxContainer2/UniquePanelSpot
+onready var extra_buttons_grid = $"%ExtraButtonsGrid"
 var textboxes: Dictionary = {}
 var gameParser: GameParser
 var sayParser: SayParser
@@ -117,6 +120,7 @@ func clearButtons():
 	optionsCurrentID = 0
 	currentPage = 0
 	updateButtons()
+	clearExtraButtons()
 	_on_option_button_tooltip_end()
 		
 func addButtonAt(place, text: String, tooltip: String = "", method: String = "", args = []):
@@ -139,13 +143,59 @@ func addDisabledButton(text: String, tooltip: String = ""):
 	options[optionsCurrentID] = [false, text, tooltip]
 	queueUpdate()
 
+
 func queueUpdate():
+	if(buttonsNeedUpdating):
+		return
 	buttonsNeedUpdating = true
 	yield(get_tree(), "idle_frame")
-	if(!buttonsNeedUpdating):
-		return
 	buttonsNeedUpdating = false
 	updateButtons()
+
+func clearExtraButtons():
+	extraOptions.clear()
+	updateExtraButtons()
+
+func addExtraButton(text: String, tooltip: String = "", method: String = "", args = []):
+	var _i:int = 0
+	while(extraOptions.has(_i)):
+		_i += 1
+	addExtraButtonAt(_i, text, tooltip, method, args)
+
+func addExtraButtonAt(_indx:int, text: String, tooltip: String = "", method: String = "", args = []):
+	extraOptions[_indx] = [true, text, tooltip, method, args]
+	queueExtraUpdate()
+
+func queueExtraUpdate():
+	if(extraButtonsNeedUpdating):
+		return
+	extraButtonsNeedUpdating = true
+	yield(get_tree(), "idle_frame")
+	extraButtonsNeedUpdating = false
+	updateExtraButtons()
+
+func updateExtraButtons():
+	Util.delete_children(extra_buttons_grid)
+	
+	var theIndxes:Array = extraOptions.keys()
+	theIndxes.sort()
+	
+	for _indx in theIndxes:
+		var currButtonAm:int = extra_buttons_grid.get_child_count()
+		if(_indx > currButtonAm):
+			for _i in range(_indx-currButtonAm):
+				var spaceHolder:Control = Control.new()
+				spaceHolder.size_flags_horizontal = SIZE_EXPAND_FILL
+				extra_buttons_grid.add_child(spaceHolder)
+		
+		var theOptionEntry:Array = extraOptions[_indx]
+		var newButton = optionButtonScene.instance()
+		newButton.text = theOptionEntry[1]
+		extra_buttons_grid.add_child(newButton)
+		newButton.setShortcutPhysicalScancode(KEY_1+_indx, true)
+		var _some = newButton.connect("pressedActually", self, "_on_extra_option_button", [_indx])
+		var _some2 = newButton.connect("mouse_entered", self, "_on_extra_option_button_tooltip", [_indx])
+		var _some3 = newButton.connect("mouse_exited", self, "_on_option_button_tooltip_end")
 
 func setBigAnswersMode(newmode):
 	if(!isInBigAnswersMode && newmode):
@@ -225,15 +275,28 @@ func updateButtons():
 		var _some2 = button.connect("mouse_entered", self, "_on_option_button_tooltip", [index])
 		var _some3 = button.connect("mouse_exited", self, "_on_option_button_tooltip_end")
 
-		
+
+func _on_extra_option_button(index):
+	var option = extraOptions[index]
+	emit_signal("on_option_button", option[3], option[4])
+
 func _on_option_button(index):
 	var option = options[index]
 	#print("hello ",index, option)
 	
 	emit_signal("on_option_button", option[3], option[4])
 	
+func _on_extra_option_button_tooltip(index):
+	var option = extraOptions[index]
+	if(option[2] == ""):
+		return
+	optionTooltip.set_is_active(true)
+	optionTooltip.set_text(option[1], option[2])
+	
 func _on_option_button_tooltip(index):
 	var option = options[index]
+	if(option[2] == ""):
+		return
 	optionTooltip.set_is_active(true)
 	if(!AutoTranslation.shouldTranslateButtons || showOriginalCheckbox.pressed):
 		optionTooltip.set_text(option[1], option[2])

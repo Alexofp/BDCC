@@ -125,11 +125,11 @@ func after_struggle_do(_id:String, _args:Dictionary, _context:Dictionary):
 func about_to_use_text():
 	saynn("{user.name} approaches the slutwall, about to use {inmate.you}..")
 
-	addAction("continue", "Continue", "Start the sex!", "default", 1.0, 600, {start_sex=["user", "inmate", SexType.SlutwallSex],})
+	addAction("continue", "Continue", "Start the sex!", "default", 1.0, 600, {start_sex=["user", "inmate", SexType.SlutwallSex, {SexMod.DisableDynamicJoiners: true}],})
 
 func about_to_use_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "continue"):
-		var _sexResult = getSexResult(_args)
+		var _sexResult:SexEngineResult = getSexResult(_args)
 		sendSlaveryActivityEvent("inmate", "slutwallUsed", {sex=_sexResult})
 		doRepEvent("inmate", "befuckedslutwall")
 		setState("after_use", "user")

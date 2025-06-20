@@ -216,7 +216,7 @@ func _run():
 		addButton("Fuck fast", "Rail your pet", "fuck_vag_fast")
 	if(state == "fuck_vag_fast"):
 		playAnimation(StageScene.PuppySexAllFours, "fast", {pc="pc", npc=npcID, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
-		saynn("Your hands land on your pet's ass as you shove your cock inside, forcibly spreading the awaiting petals wide. Your pet jerks jerks forward.. but you just pull {npc.him} back while thrusting inside again, fucking {npc.his} needy slit.")
+		saynn("Your hands land on your pet's ass as you shove your cock inside, forcibly spreading the awaiting petals wide. Your pet jerks forward.. but you just pull {npc.him} back while thrusting inside again, fucking {npc.his} needy slit.")
 
 		saynn("Even though you're being very rough, moans begin to leave {npc.name}'s mouth, the restraints keeping {npc.him} completely helpless as your cock is pounding {npc.his} wet cunt at a rapid pace, love juices coating your shaft, keeping the friction somewhat endurable.")
 
@@ -268,7 +268,7 @@ func _run():
 		addButton("Fuck fast", "Rail your pet", "fuck_ass_fast")
 	if(state == "fuck_ass_fast"):
 		playAnimation(StageScene.PuppySexAllFours, "fast", {pc="pc", npc=npcID, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
-		saynn("Your hands land on your pet's ass as you shove your cock inside, forcibly spreading the awaiting star wide. Your pet jerks jerks forward.. but you just pull {npc.him} back while thrusting inside again, fucking {npc.his} needy hole.")
+		saynn("Your hands land on your pet's ass as you shove your cock inside, forcibly spreading the awaiting star wide. Your pet jerks forward.. but you just pull {npc.him} back while thrusting inside again, fucking {npc.his} needy hole.")
 
 		saynn("Even though you're being very rough, moans begin to leave {npc.name}'s mouth, the restraints keeping {npc.him} completely helpless as your cock is pounding {npc.his} tailhole at a rapid pace. You occasionally spit at your shaft to keep it lubed up which is helping to keep the friction somewhat endurable.")
 
@@ -337,7 +337,7 @@ func _run():
 		addButton("Fuck fast", "Rail your pet", "fuck_strapon_fast")
 	if(state == "fuck_strapon_fast"):
 		playAnimation(StageScene.PuppySexAllFours, "fast", {pc="pc", npc=npcID, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
-		saynn("Your hands land on your pet's ass as you shove the rubber toy inside, forcibly spreading the awaiting petals wide. Your pet jerks jerks forward.. but you just pull {npc.him} back while thrusting inside again, fucking {npc.his} needy slit.")
+		saynn("Your hands land on your pet's ass as you shove the rubber toy inside, forcibly spreading the awaiting petals wide. Your pet jerks forward.. but you just pull {npc.him} back while thrusting inside again, fucking {npc.his} needy slit.")
 
 		saynn("Even though you're being very rough, moans begin to leave {npc.name}'s mouth, the restraints keeping {npc.him} completely helpless as your strapon is pounding {npc.his} wet cunt at a rapid pace, love juices coating its shaft, keeping the friction somewhat endurable.")
 
@@ -385,7 +385,7 @@ func _run():
 		addButton("Fuck fast", "Rail your pet", "fuck_strapon_fast_ass")
 	if(state == "fuck_strapon_fast_ass"):
 		playAnimation(StageScene.PuppySexAllFours, "fast", {pc="pc", npc=npcID, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
-		saynn("Your hands land on your pet's butt as you shove the rubber toy inside, forcibly spreading the awaiting taihole wide. Your pet jerks jerks forward.. but you just pull {npc.him} back while thrusting inside again, fucking {npc.his} needy ass.")
+		saynn("Your hands land on your pet's butt as you shove the rubber toy inside, forcibly spreading the awaiting taihole wide. Your pet jerks forward.. but you just pull {npc.him} back while thrusting inside again, fucking {npc.his} needy ass.")
 
 		saynn("Even though you're being very rough, moans begin to leave {npc.name}'s mouth, the restraints keeping {npc.him} completely helpless as your strapon is pounding {npc.him} at a rapid pace. You occasionally spit on the rubber shaft, trying to keep the friction somewhat endurable for the puppy.")
 

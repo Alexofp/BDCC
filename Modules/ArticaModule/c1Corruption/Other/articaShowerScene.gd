@@ -629,10 +629,10 @@ func _run():
 		playAnimation(StageScene.SexPinnedBehind, "inside", {pc="pc", npc="artica", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		var pcHasKnot = GM.pc.bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)
 		if (pcHasKnot):
-			saynn("With one final trust, you bury your {pc.penis} deep inside Artica's quivering pussy.. until the knot slips inside, stretching her folds to their limits. It makes the fluff shake again, her inner walls squeezing your cock.. until she feels a hot rush of your {pc.cum} filling her womb, her orgasm crashing over yours..")
+			saynn("With one final thrust, you bury your {pc.penis} deep inside Artica's quivering pussy.. until the knot slips inside, stretching her folds to their limits. It makes the fluff shake again, her inner walls squeezing your cock.. until she feels a hot rush of your {pc.cum} filling her womb, her orgasm crashing over yours..")
 
 		else:
-			saynn("With one final trust, you bury your {pc.penis} deep inside Artica's quivering pussy, breaking into her womb. It makes the fluff shake again, her inner walls squeezing your cock.. until she feels a hot rush of your {pc.cum} filling her up, her orgasm crashing over yours..")
+			saynn("With one final thrust, you bury your {pc.penis} deep inside Artica's quivering pussy, breaking into her womb. It makes the fluff shake again, her inner walls squeezing your cock.. until she feels a hot rush of your {pc.cum} filling her up, her orgasm crashing over yours..")
 
 		saynn("[say=artica]Nya-a-ah.. ah.!..[/say]")
 

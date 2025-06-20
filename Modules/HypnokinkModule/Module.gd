@@ -160,9 +160,6 @@ func _init():
 	sexGoals = [
 		"res://Modules/HypnokinkModule/SexEngine/Goals/HK_Hypnotize.gd",
 	]
-	sexActivities = [
-		"res://Modules/HypnokinkModule/SexEngine/Activities/HK_Hypnotize.gd",
-	]
 	stageScenes = [
 		"res://Modules/HypnokinkModule/StageScenes/HK_ArmsRaisedDuo.tscn",
 		"res://Modules/HypnokinkModule/StageScenes/HK_ArmsRaisedSex.tscn",

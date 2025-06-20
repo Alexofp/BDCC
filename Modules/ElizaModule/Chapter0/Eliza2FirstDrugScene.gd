@@ -219,7 +219,7 @@ func _run():
 
 		saynn("She scritches her chin.")
 
-		saynn("[say=eliza]Oh yeah, we can also extra useful research data from transformations themselves. Come to me when you think that your transformation has reached its final stage and then I can scan the result! That would give us a lot of science points![/say]")
+		saynn("[say=eliza]Oh yeah, we can also extract useful research data from transformations themselves. Come to me when you think that your transformation has reached its final stage and then I can scan the result! That would give us a lot of science points![/say]")
 
 		saynn("[say=pc]What if I don't want to try these pills on myself?[/say]")
 
@@ -313,7 +313,7 @@ func _run():
 
 		saynn("She scritches her chin.")
 
-		saynn("[say=eliza]Oh yeah, we can also extra useful research data from transformations themselves. Come to me when you think that your transformation has reached its final stage and then I can scan the result! That would give us a lot of science points![/say]")
+		saynn("[say=eliza]Oh yeah, we can also extract useful research data from transformations themselves. Come to me when you think that your transformation has reached its final stage and then I can scan the result! That would give us a lot of science points![/say]")
 
 		saynn("[say=pc]What if I don't want to try these pills on myself?[/say]")
 

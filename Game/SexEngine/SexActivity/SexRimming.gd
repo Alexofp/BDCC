@@ -1,10 +1,14 @@
 extends SexActivityBase
 
-var boredTimer = 0
-var waitTimer = 0
+var boredTimer:int = 0
+var waitTimer:int = 0
 
 func _init():
 	id = "SexRimming"
+	
+	activityName = "Rimming"
+	activityDesc = "Make them eat your ass!"
+	activityCategory = ["Fuck"]
 
 func getGoals():
 	return {
@@ -18,149 +22,107 @@ func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: Sex
 		return false
 	return .canStartActivity(_sexEngine, _domInfo, _subInfo)
 
-func getVisibleName():
-	return "Rimming"
+func getTags(_indx:int) -> Array:
+	if(_indx == DOM_0):
+		return [SexActivityTag.AnusUsed, SexActivityTag.HavingSex]
+	if(_indx == SUB_0):
+		return [SexActivityTag.MouthUsed, SexActivityTag.HavingSex, SexActivityTag.PreventsSubTeasing]
+	return []
 
-func getCategory():
-	return ["Fuck"]
-
-func getDomTags():
-	return [SexActivityTag.AnusUsed, SexActivityTag.HavingSex]
-
-func getSubTags():
-	return [SexActivityTag.MouthUsed, SexActivityTag.HavingSex, SexActivityTag.PreventsSubTeasing]
+func getCheckTagsSub() -> Array:
+	return [SexActivityTag.MouthUsed, SexActivityTag.HavingSex]
 
 func startActivity(_args):
-	state = ""
-	var text = ""
-	var domSay = null
-	var subSay = null
-	affectSub(subInfo.fetishScore({Fetish.RimmingGiving: 1.0})+0.0, 0.1, -0.1, -0.01)
-	text += "{dom.You} {dom.youVerb('force')} {sub.you} onto {sub.yourHis} knees and {dom.youVerb('position')} {dom.yourself} in front of {sub.youHim}, inviting to start licking {dom.yourHis} butt."
-	domSay = domReaction(SexReaction.OrderRimming)
-	subSay = subReaction(SexReaction.OrderRimming)
-	return {
-		text = text,
-		domSay = domSay,
-		subSay = subSay,
-	}
+	affectSub(getSubInfo().fetishScore({Fetish.RimmingGiving: 1.0})+0.0, 0.1, -0.1, -0.01)
+	addText("{dom.You} {dom.youVerb('force')} {sub.you} onto {sub.yourHis} knees and {dom.youVerb('position')} {dom.yourself} in front of {sub.youHim}, inviting to start licking {dom.yourHis} butt.")
+	react(SexReaction.OrderRimming)
+	return
 
-func onSwitchFrom(_otherActivity, _args):
-	return .onSwitchFrom(_otherActivity, _args)
+func init_processTurn():
+	if(hasBodypartUncovered(DOM_0, BodypartSlot.Anus)):
+		waitTimer += 1
+	
+	if(waitTimer > 2):
+		getDomInfo().addAnger(0.05)
+		addText("{dom.You} {dom.youVerb('lose')} {dom.yourHis} patience.")
 
-func processTurn():
-	if(state == ""):
-		var text = ""
-		if(getDom().getFirstItemThatCoversBodypart(BodypartSlot.Anus) == null):
-			waitTimer += 1
-		
-		if(waitTimer > 2):
-			domInfo.addAnger(0.05)
-			text += "{dom.You} {dom.youVerb('lose')} {dom.yourHis} patience."
-		return {
-			text = text,
-		}
-	if(state == "rimming"):
-		var text = ""
-		affectDom(domInfo.fetishScore({Fetish.RimmingReceiving: 1.0})+0.3, 0.1, 0.0)
-		affectSub(subInfo.fetishScore({Fetish.RimmingGiving: 1.0})+0.0, 0.1, -0.1, -0.01)
-		
-		text += RNG.pick([
-			"{sub.You} {sub.youVerb('rim')} {dom.yourHis} "+str(getRandomAnusWord())+".",
-			"{sub.You} {sub.youVerb('drag')} {sub.yourHis} tongue over {dom.yourHis} "+str(getRandomAnusWord())+" in circular patterns.",
-			"{sub.You} {sub.youVerb('lick')} {dom.yourHis} "+str(getRandomAnusWord())+".",
-			"{sub.You} {sub.youVerb('prod')} {dom.yourHis} "+str(getRandomAnusWord())+" with {sub.yourHis} tongue."
+func rimming_processTurn():
+	#affectDom(getDomInfo().fetishScore({Fetish.RimmingReceiving: 1.0})+0.3, 0.1, 0.0)
+	#affectSub(getSubInfo().fetishScore({Fetish.RimmingGiving: 1.0})+0.0, 0.1, -0.1, -0.01)
+	
+	addTextPick([
+		"{sub.You} {sub.youVerb('rim')} {dom.yourHis} "+str(getRandomAnusWord())+".",
+		"{sub.You} {sub.youVerb('drag')} {sub.yourHis} tongue over {dom.yourHis} "+str(getRandomAnusWord())+" in circular patterns.",
+		"{sub.You} {sub.youVerb('lick')} {dom.yourHis} "+str(getRandomAnusWord())+".",
+		"{sub.You} {sub.youVerb('prod')} {dom.yourHis} "+str(getRandomAnusWord())+" with {sub.yourHis} tongue."
+	])
+	boredTimer += 1
+	if(boredTimer > 10 && RNG.chance(20) && !getDomInfo().isCloseToCumming()):
+		satisfyGoals()
+	if(getDom().hasPenis() && RNG.chance(50)):
+		addTextPick([
+			"The tongue massages {dom.yourHis} prostate so well!",
+			"{sub.YourHis} tongue is reaching {dom.yourHis} prostate and prods it!",
+			"{sub.YourHis} tongue stimulates {dom.yourHis} prostate!"
 		])
-		boredTimer += 1
-		if(boredTimer > 10 && RNG.chance(20) && !domInfo.isCloseToCumming()):
-			satisfyGoals()
-		if(getDom().hasPenis() && RNG.chance(50)):
-			text += RNG.pick([
-				" The tongue massages {dom.yourHis} prostate so well!",
-				" {sub.YourHis} tongue is reaching {dom.yourHis} prostate and prods it!",
-				" {sub.YourHis} tongue stimulates {dom.yourHis} prostate!"
-			])
-			domInfo.stimulateArousalZone(0.1, BodypartSlot.Anus, 1.0)
-		else:
-			domInfo.stimulateArousalZone(0.05, BodypartSlot.Anus, 1.0)
-			
-		if(getDom().hasVagina() && RNG.chance(20)):
-			text += RNG.pick([
-				" {sub.YourHis} tongue manages to massage {dom.yourHis} g-spot through the inner wall!",
-				" {dom.YourHis} pussy becomes more wet, receiving some stimulation through the inner wall!"
-			])
-		if(getDom().hasEffect(StatusEffect.HasCumInsideAnus) && OPTIONS.isContentEnabled(ContentType.CumStealing)):
-			if(RNG.chance(20)):
-				if(getDom().bodypartTransferFluidsTo(BodypartSlot.Anus, subID, BodypartSlot.Head, 0.1, 20.0)):
-					text += RNG.pick([ 
-						" "+Util.capitalizeFirstLetter(getDom().getBodypartContentsStringList(BodypartSlot.Anus))+" lands on {sub.yourHis} tongue, leaking out of {dom.yourHis} "+RNG.pick(["", "used ", "stuffed "])+RNG.pick(["ass", "anus", "tailhole"])+" and [b]{sub.you} {sub.youVerb('swallow')} it[/b].",
-					])
-		return {
-			text = text,
-		}
+	#	getDomInfo().stimulateArousalZone(0.1, BodypartSlot.Anus, 1.0)
+	#else:
+	#	getDomInfo().stimulateArousalZone(0.05, BodypartSlot.Anus, 1.0)
+	stimulate(DOM_0, S_ANUS, SUB_0, S_MOUTH, I_NORMAL, Fetish.RimmingReceiving)
+	
+	if(getDom().hasVagina() && RNG.chance(20)):
+		addTextPick([
+			"{sub.YourHis} tongue manages to massage {dom.yourHis} g-spot through the inner wall!",
+			"{dom.YourHis} pussy becomes more wet, receiving some stimulation through the inner wall!"
+		])
+	if(getDom().hasEffect(StatusEffect.HasCumInsideAnus) && OPTIONS.isContentEnabled(ContentType.CumStealing)):
+		if(RNG.chance(20)):
+			if(getDom().bodypartTransferFluidsTo(BodypartSlot.Anus, getSubID(), BodypartSlot.Head, 0.1, 20.0)):
+				addText(Util.capitalizeFirstLetter(getDom().getBodypartContentsStringList(BodypartSlot.Anus))+" lands on {sub.yourHis} tongue, leaking out of {dom.yourHis} "+RNG.pick(["", "used ", "stuffed "])+RNG.pick(["ass", "anus", "tailhole"])+" and [b]{sub.you} {sub.youVerb('swallow')} it[/b].")
 
-func getDomActions():
-	var actions = []
-	if(state in ["", "rimming"]):
-		actions.append({
-			"id": "stop",
-			"score": getStopScore(),
-			"name": "Stop",
-			"desc": "Stop making them rim you",
-			"priority" : 0,
-		})
-	if(state in [""]):
-		if((getDom().getFirstItemThatCoversBodypart(BodypartSlot.Anus) == null)):
-			actions.append({
-				"id": "forcerim",
-				"score": domInfo.getAngerScore(),
-				"name": "Force to rim",
-				"desc": "Make them lick your butt",
-				"priority" : 0,
-				"chance" : 30,
-			})
-	if(state in ["rimming"]):
-		actions.append({
-			"id": "moan",
-			"score": 0.5,
-			"name": "Moan",
-			"desc": "Show how much you enjoy it",
-			"priority" : 0,
-		})
-	if(state in ["rimming"]):
-		if((domInfo.isReadyToCum() && isHandlingDomOrgasms())):
-			actions.append({
-				"id": "cum",
-				"score": 1.0,
-				"name": "Cum!",
-				"desc": "You're about to cum and there is nothing you can do about it",
-				"priority" : 1001,
-			})
-	return actions
+func getActions(_indx:int):
+	if(_indx == DOM_0):
+		if(state in ["", "rimming"]):
+			addAction("stop", getStopScore(), "Stop", "Stop making them rim you")
+		if(state in [""]):
+			if((getDom().getFirstItemThatCoversBodypart(BodypartSlot.Anus) == null)):
+				addAction("forcerim", getDomInfo().getAngerScore(), "Force to rim", "Make them lick your butt", {A_CHANCE: 30})
+		if(state in ["rimming"]):
+			addAction("moan", 0.5, "Moan", "Show how much you enjoy it")
+		if(state in ["rimming"]):
+			if(isReadyToCumHandled(DOM_0)):
+				addAction("cum", 1.0, "Cum!", "You're about to cum and there is nothing you can do about it", {A_PRIORITY: 1001})
 
-func doDomAction(_id, _actionInfo):
+	if(_indx == SUB_0):
+		if(state in ["", "rimming"]):
+			addAction("pullaway", getSubInfo().getResistScore(), "Pull away", "Try to pull away", {A_CHANCE: getSubResistChance(30.0, 25.0)})
+		if(state in [""]):
+			if((getDom().getFirstItemThatCoversBodypart(BodypartSlot.Anus) == null)):
+				var startrimScore:float = getSubInfo().getComplyScore() * fetish(SUB_0, Fetish.RimmingGiving)
+				addAction("startrim", startrimScore, "Start rimming", "Start licking their butt")
+		if(state in ["", "rimming"]):
+			if((!getSub().isBitingBlocked())):
+				addAction("bite", getResistScore(SUB_0) / 4.0, "Bite!", "Bite their ass!", {A_CHANCE: getSubResistChance(60.0, 45.0)})
+		if(state in ["rimming"]):
+			var prodScore:float = getSubInfo().getComplyScore() * fetish(SUB_0, Fetish.RimmingGiving)
+			addAction("prod", prodScore, "Prod", "Try to slip your tongue deeper")
+
+func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "stop"):
-		var text = ""
-		text += "{dom.You} {dom.youVerb('stop')} making {sub.you} rim you."
+		addText("{dom.You} {dom.youVerb('stop')} making {sub.you} rim you.")
 		endActivity()
-		return {
-			text = text,
-		}
+		return
 	if(_id == "forcerim"):
-		var text = ""
 		if(RNG.chance(30)):
-			text += "{dom.You} {dom.youVerb('force')} {sub.you} to start rimming {dom.youHim}!"
+			addText("{dom.You} {dom.youVerb('force')} {sub.you} to start rimming {dom.youHim}!")
 			state = "rimming"
 		else:
-			domInfo.addAnger(0.05)
-			text += "{dom.You} {dom.youVerb('try', 'tries')} to make {sub.you} rim {dom.youHim}."
-		affectSub(subInfo.fetishScore({Fetish.RimmingGiving: 1.0})+0.0, 0.05, -0.1, -0.01)
-		return {
-			text = text,
-		}
+			getDomInfo().addAnger(0.05)
+			addText("{dom.You} {dom.youVerb('try', 'tries')} to make {sub.you} rim {dom.youHim}.")
+		affectSub(getSubInfo().fetishScore({Fetish.RimmingGiving: 1.0})+0.0, 0.05, -0.1, -0.01)
+		return
 	if(_id == "moan"):
-		var text = ""
-		text = RNG.pick([
+		var text:String = RNG.pick([
 			"{dom.You} "+RNG.pick(["{dom.youVerb('let')} out a moan", "{dom.youVerb('moan')}", "{dom.youVerb('produce')} a moan", "{dom.youVerb('make')} a noise of pleasure"])+" while ",
 		])
 		if(getDom().isGagged()):
@@ -170,143 +132,74 @@ func doDomAction(_id, _actionInfo):
 		text += RNG.pick([
 			"{sub.your} tongue is licking {dom.yourHis} "+getRandomAnusWord()+"!",
 		])
-		domInfo.addAnger(-0.02)
-		subInfo.addLust(5)
-		return {
-			text = text,
-		}
+		addText(text)
+		moan(DOM_0)
+		return
 	if(_id == "cum"):
-		var text = ""
 		satisfyGoals()
 		getDom().cumOnFloor()
-		domInfo.cum()
+		getDomInfo().cum()
 		state = ""
-		sendSexEvent(SexEvent.UniqueOrgasm, subID, domID, {orgasmType="rim"})
-		if(true):
-			return getGenericDomOrgasmData()
-		return {
-			text = text,
-		}
+		sendSexEvent(SexEvent.UniqueOrgasm, SUB_0, DOM_0, {orgasmType="rim"})
+		addGenericOrgasmText(DOM_0)
+		return
 
-func getSubActions():
-	var actions = []
-	if(state in ["", "rimming"]):
-		actions.append({
-			"id": "pullaway",
-			"score": subInfo.getResistScore(),
-			"name": "Pull away",
-			"desc": "Try to pull away",
-			"priority" : 0,
-			"chance" : getSubResistChance(30.0, 25.0),
-		})
-	if(state in [""]):
-		if((getDom().getFirstItemThatCoversBodypart(BodypartSlot.Anus) == null)):
-			actions.append({
-				"id": "startrim",
-				"score": subInfo.getComplyScore() * subInfo.fetishScore({Fetish.RimmingGiving: 1.0}),
-				"name": "Start rimming",
-				"desc": "Start licking their butt",
-				"priority" : 0,
-			})
-	if(state in ["", "rimming"]):
-		if((!getSub().isBitingBlocked())):
-			actions.append({
-				"id": "bite",
-				"score": subInfo.getResistScore() / 4.0,
-				"name": "Bite!",
-				"desc": "Bite their ass!",
-				"priority" : 0,
-				"chance" : getSubResistChance(60.0, 45.0),
-			})
-	if(state in ["rimming"]):
-		actions.append({
-			"id": "prod",
-			"score": subInfo.getComplyScore() * subInfo.fetishScore({Fetish.RimmingGiving: 1.0}),
-			"name": "Prod",
-			"desc": "Try to slip your tongue deeper",
-			"priority" : 0,
-		})
-	return actions
-
-func doSubAction(_id, _actionInfo):
 	if(_id == "pullaway"):
-		var text = ""
-		var domSay = null
-		var subSay = null
-		var successChance = getSubResistChance(30.0, 25.0)
+		var successChance:float = getSubResistChance(30.0, 25.0)
 		if(RNG.chance(successChance)):
-			text = RNG.pick([
-				"{sub.You} {sub.youVerb('pull')} away from {dom.you}.",
-			])
-			domInfo.addAnger(0.3)
+			addText("{sub.You} {sub.youVerb('pull')} away from {dom.you}.")
+			getDomInfo().addAnger(0.3)
 			if(state != ""):
 				state = ""
 			else:
 				endActivity()
 		else:
-			text = RNG.pick([
+			addTextPick([
 				"{sub.You} desperately {sub.youVerb('try', 'tries')} to pull away from {dom.your} butt.",
 				"{sub.You} desperately {sub.youVerb('try', 'tries')} to pull away from {dom.your} ass.",
 			])
-			domInfo.addAnger(0.03)
-		subSay = subReaction(SexReaction.Resisting, 50)
-		return {
-			text = text,
-			domSay = domSay,
-			subSay = subSay,
-		}
+			getDomInfo().addAnger(0.03)
+		reactSub(SexReaction.Resisting, [50])
+		return
 	if(_id == "startrim"):
-		var text = ""
 		state = "rimming"
-		affectDom(domInfo.fetishScore({Fetish.RimmingReceiving: 1.0})+0.0, 0.1, -0.1)
-		affectSub(subInfo.fetishScore({Fetish.RimmingGiving: 1.0})+0.0, 0.1, -0.05, -0.01)
-		text += RNG.pick([
+		affectDom(getDomInfo().fetishScore({Fetish.RimmingReceiving: 1.0})+0.0, 0.1, -0.1)
+		affectSub(getSubInfo().fetishScore({Fetish.RimmingGiving: 1.0})+0.0, 0.1, -0.05, -0.01)
+		addTextPick([
 			"{sub.You} {sub.youVerb('begin')} to eagerly rim {dom.yourHis} "+str(getRandomAnusWord())+".",
 			"{sub.You} {sub.youVerb('lean')} in closer and {sub.youVerb('begin')} to lick {dom.yourHis} "+str(getRandomAnusWord())+".",
 			"{sub.You} {sub.youVerb('begin')} to willingly rim {dom.yourHis} "+str(getRandomAnusWord())+"."
 		])
-		return {
-			text = text,
-		}
+		return
 	if(_id == "prod"):
-		var text = ""
-		domInfo.stimulateArousalZone(0.04, BodypartSlot.Anus, 0.25)
-		domInfo.addAnger(-0.03)
-		text += RNG.pick([
+		getDomInfo().stimulateArousalZone(0.04, BodypartSlot.Anus, 0.25)
+		getDomInfo().addAnger(-0.03)
+		addTextPick([
 			"{sub.You} willingly {sub.youVerb('thrust')} {sub.yourHis} tongue deeper into {dom.yourHis} "+str(getRandomAnusWord())+".",
 			"{sub.You} willingly {sub.youVerb('slide')} {sub.yourHis} past {dom.yourHis} anal ring and {sub.youVerb('lap')} at the inner walls.",
 			"{sub.You} eagerly {sub.youVerb('eat')} {dom.yourHis} "+str(getRandomAnusWord())+" out."
 		])
-		return {
-			text = text,
-		}
+		return
 	if(_id == "bite"):
-		var text = ""
 		if(getSubResistChance(60.0, 45.0)):
-			text = RNG.pick([
-				"{sub.You} {sub.youVerb('bite')} {dom.your} ass! {dom.YouHe} {dom.youVerb('grunt')} painfully and {dom.youVerb('pull')} away.",
-			])
-			domInfo.addPain(5)
-			sendSexEvent(SexEvent.PainInflicted, subID, domID, {pain=10,isDefense=true,intentional=true})
-			domInfo.addAnger(1.0 - domInfo.fetishScore({Fetish.Masochism: 0.5}))
-			domInfo.addLust(-5 + 10 * domInfo.fetishScore({Fetish.Masochism: 1.0}))
+			addText("{sub.You} {sub.youVerb('bite')} {dom.your} ass! {dom.YouHe} {dom.youVerb('grunt')} painfully and {dom.youVerb('pull')} away.")
+			getDomInfo().addPain(5)
+			sendSexEvent(SexEvent.PainInflicted, SUB_0, DOM_0, {pain=10,isDefense=true,intentional=true})
+			getDomInfo().addAnger(1.0 - getDomInfo().fetishScore({Fetish.Masochism: 0.5}))
+			getDomInfo().addLust(-5 + 10 * getDomInfo().fetishScore({Fetish.Masochism: 1.0}))
 			if(state == ""):
 				endActivity()
 			state = ""
 		else:
-			text = RNG.pick([
-				"{sub.You} {sub.youVerb('try', 'tries')} to bite {dom.you} but {dom.youHe} {dom.youVerb('avoid')} it!",
-			])
-			domInfo.addAnger(0.4)
-		return {
-			text = text,
-		}
+			addText("{sub.You} {sub.youVerb('try', 'tries')} to bite {dom.you} but {dom.youHe} {dom.youVerb('avoid')} it!")
+			getDomInfo().addAnger(0.4)
+		return
 
-func getRandomAnusWord():
+func getRandomAnusWord() -> String:
 	return RNG.pick(["back entrance", "anus", "tailhole"])
 	
-func getSubResistChance(baseChance, domAngerRemoval):
-	var theChance = baseChance - domInfo.getAngerScore()*domAngerRemoval
+func getSubResistChance(baseChance:float, domAngerRemoval:float) -> float:
+	var theChance = baseChance - getDomInfo().getAngerScore()*domAngerRemoval
 	if(getSub().hasBlockedHands()):
 		theChance *= 0.5
 	if(getSub().hasBoundArms()):
@@ -316,10 +209,9 @@ func getSubResistChance(baseChance, domAngerRemoval):
 	
 	return max(theChance, 5.0)
 	
-func getDomOrgasmHandlePriority():
-	return 10
-
-func getSubOrgasmHandlePriority():
+func getOrgasmHandlePriority(_indx:int) -> int:
+	if(_indx == DOM_0):
+		return 10
 	return -1
 
 func saveData():
@@ -338,8 +230,8 @@ func loadData(_data):
 
 func getAnimation():
 	if(state == ""):
-		return [StageScene.SexRimming, "tease", {pc=domID, npc=subID}]
+		return [StageScene.SexRimming, "tease", {pc=DOM_0, npc=SUB_0}]
 	if(state == "rimming"):
-		if(domInfo.isCloseToCumming()):
-			return [StageScene.SexRimming, "fast", {pc=domID, npc=subID}]
-		return [StageScene.SexRimming, "sex", {pc=domID, npc=subID}]
+		if(getDomInfo().isCloseToCumming()):
+			return [StageScene.SexRimming, "fast", {pc=DOM_0, npc=SUB_0}]
+		return [StageScene.SexRimming, "sex", {pc=DOM_0, npc=SUB_0}]

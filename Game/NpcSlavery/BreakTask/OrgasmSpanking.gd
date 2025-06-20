@@ -34,3 +34,8 @@ func getTaskString():
 
 func getTaskHint(_isSlaveLevelup):
 	return "Force them to orgasm just from you spanking their butt!"
+
+func getSexGoalWeightModifier(_sexGoalID:String) -> float:
+	if(_sexGoalID == SexGoal.SpankSub):
+		return 3.0
+	return 0.0

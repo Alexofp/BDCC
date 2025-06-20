@@ -86,6 +86,9 @@ func getPutOnScene():
 func getCasualName():
 	return "strapon"
 
+func getLewdStraponName() -> String:
+	return getCasualName()
+
 func generateFluids():
 	fluids = Fluids.new()
 	fluids.setCapacity(500.0)
@@ -107,3 +110,7 @@ func alwaysRecoveredAfterSex():
 
 func canDye():
 	return true
+
+func getStraponTraits() -> Dictionary:
+	return {
+	}

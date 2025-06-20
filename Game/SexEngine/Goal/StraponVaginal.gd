@@ -11,7 +11,7 @@ func isPossible(_sexEngine, _domInfo, _subInfo, _data):
 		return false
 	if(_subInfo.isUnconscious()):
 		return false
-	if(!_domInfo.getChar().canWearStrapon() || !_subInfo.getChar().hasReachableVagina()):
+	if(!_domInfo.getChar().canWearOrWearingStrapon() || !_subInfo.getChar().hasReachableVagina()):
 		return false
 	
 	return true

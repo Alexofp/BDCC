@@ -383,9 +383,7 @@ func saveData():
 	data["bodyFluids"] = bodyFluids.saveData()
 
 	data["timedBuffs"] = saveBuffsData(timedBuffs)
-	data["timedBuffsDurationSeconds"] = timedBuffsDurationSeconds
 	data["timedBuffsTurns"] = saveBuffsData(timedBuffsTurns)
-	data["timedBuffsDurationTurns"] = timedBuffsDurationTurns
 	
 	
 	data["lastUpdatedDay"] = lastUpdatedDay
@@ -509,9 +507,7 @@ func loadData(data):
 		menstrualCycle.loadData(SAVE.loadVar(data, "menstrualCycle", {}))
 
 	timedBuffs = loadBuffsData(SAVE.loadVar(data, "timedBuffs", []))
-	timedBuffsDurationSeconds = SAVE.loadVar(data, "timedBuffsDurationSeconds", 0)
 	timedBuffsTurns = loadBuffsData(SAVE.loadVar(data, "timedBuffsTurns", []))
-	timedBuffsDurationTurns = SAVE.loadVar(data, "timedBuffsDurationTurns", 0)
 	
 	lastUpdatedDay = SAVE.loadVar(data, "lastUpdatedDay", -1)
 	lastUpdatedSecond = SAVE.loadVar(data, "lastUpdatedSecond", -1)

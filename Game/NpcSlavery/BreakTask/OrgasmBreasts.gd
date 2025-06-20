@@ -34,3 +34,12 @@ func getTaskString():
 
 func getTaskHint(_isSlaveLevelup):
 	return "Force them to orgasm just from you stimulating their breasts!"
+
+func getSexGoalWeightModifier(_sexGoalID:String) -> float:
+	if(_sexGoalID == SexGoal.BreastFeedOnSub):
+		return 1.0
+	if(_sexGoalID == SexGoal.GropeBreasts):
+		return 2.0
+	if(_sexGoalID == SexGoal.MilkWithBreastPump):
+		return 1.0
+	return 0.0

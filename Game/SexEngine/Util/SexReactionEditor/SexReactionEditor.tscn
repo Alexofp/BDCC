@@ -1,0 +1,307 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/SexEngine/Util/SexReactionEditor/SexReactionEditor.gd" type="Script" id=1]
+[ext_resource path="res://GlobalTheme.tres" type="Theme" id=2]
+
+[node name="SexReactionEditor" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[node name="MainTab" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainTab"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainTab/VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainTab/VBoxContainer/HBoxContainer"]
+margin_right = 425.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainTab/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_right = 425.0
+margin_bottom = 26.0
+
+[node name="NewReactionList" type="OptionButton" parent="MainTab/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
+margin_right = 375.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+
+[node name="AddReactionButton" type="Button" parent="MainTab/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_left = 379.0
+margin_right = 425.0
+margin_bottom = 26.0
+text = "Add"
+
+[node name="EditButton" type="Button" parent="MainTab/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 30.0
+margin_right = 425.0
+margin_bottom = 56.0
+text = "Edit"
+
+[node name="ReactionList" type="ItemList" parent="MainTab/VBoxContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+margin_top = 60.0
+margin_right = 425.0
+margin_bottom = 690.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RemoveButton" type="Button" parent="MainTab/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 694.0
+margin_right = 425.0
+margin_bottom = 720.0
+text = "Remove selected"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainTab/VBoxContainer/HBoxContainer"]
+margin_left = 429.0
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainTab/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 851.0
+margin_bottom = 26.0
+
+[node name="SaveButton" type="Button" parent="MainTab/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_right = 100.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 100, 0 )
+text = "Save"
+
+[node name="GenerateCodeButton" type="Button" parent="MainTab/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 104.0
+margin_right = 238.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 100, 0 )
+text = "Generate code"
+
+[node name="LoadButton" type="Button" parent="MainTab/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 242.0
+margin_right = 342.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 100, 0 )
+text = "Load"
+
+[node name="ReactionTab" type="Control" parent="."]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ReactionTab"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="OkButton" type="Button" parent="ReactionTab/VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 26.0
+text = "Apply"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ReactionTab/VBoxContainer"]
+margin_top = 30.0
+margin_right = 1280.0
+margin_bottom = 60.0
+
+[node name="Label" type="Label" parent="ReactionTab/VBoxContainer/HBoxContainer"]
+margin_right = 105.0
+margin_bottom = 30.0
+size_flags_vertical = 7
+text = "Base chance"
+valign = 1
+
+[node name="ChanceSpinbox" type="SpinBox" parent="ReactionTab/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 109.0
+margin_right = 183.0
+margin_bottom = 30.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ReactionTab/VBoxContainer"]
+margin_top = 64.0
+margin_right = 1280.0
+margin_bottom = 92.0
+
+[node name="Label" type="Label" parent="ReactionTab/VBoxContainer/HBoxContainer2"]
+margin_right = 149.0
+margin_bottom = 28.0
+size_flags_vertical = 7
+text = "Say only together"
+valign = 1
+
+[node name="SayTogetherCheckbox" type="CheckBox" parent="ReactionTab/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+margin_left = 153.0
+margin_right = 177.0
+margin_bottom = 28.0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="ReactionTab/VBoxContainer"]
+margin_top = 96.0
+margin_right = 1280.0
+margin_bottom = 126.0
+
+[node name="Label" type="Label" parent="ReactionTab/VBoxContainer/HBoxContainer3"]
+margin_right = 82.0
+margin_bottom = 30.0
+size_flags_vertical = 7
+text = "Chances ["
+valign = 1
+
+[node name="ChancesLineEdit" type="LineEdit" parent="ReactionTab/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+margin_left = 86.0
+margin_right = 1269.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="ReactionTab/VBoxContainer/HBoxContainer3"]
+margin_left = 1273.0
+margin_right = 1280.0
+margin_bottom = 30.0
+size_flags_vertical = 7
+text = "]"
+valign = 1
+
+[node name="Separator" type="HSeparator" parent="ReactionTab/VBoxContainer"]
+margin_top = 130.0
+margin_right = 1280.0
+margin_bottom = 134.0
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="ReactionTab/VBoxContainer"]
+margin_top = 138.0
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ReactionTab/VBoxContainer/HBoxContainer4"]
+margin_right = 319.0
+margin_bottom = 582.0
+size_flags_horizontal = 3
+
+[node name="RoleSelector" type="OptionButton" parent="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer2"]
+unique_name_in_owner = true
+margin_right = 319.0
+margin_bottom = 26.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer2"]
+margin_top = 30.0
+margin_right = 319.0
+margin_bottom = 56.0
+
+[node name="AddReactionEntryButton" type="Button" parent="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer2/HBoxContainer"]
+margin_right = 233.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "Add"
+
+[node name="RemoveEntryButton" type="Button" parent="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer2/HBoxContainer"]
+margin_left = 237.0
+margin_right = 319.0
+margin_bottom = 26.0
+text = "Remove"
+
+[node name="ReactionEntriesList" type="ItemList" parent="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer2"]
+unique_name_in_owner = true
+margin_top = 60.0
+margin_right = 319.0
+margin_bottom = 582.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ReactionTab/VBoxContainer/HBoxContainer4"]
+margin_left = 323.0
+margin_right = 1280.0
+margin_bottom = 582.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="ConditionTextEdit" type="TextEdit" parent="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 957.0
+margin_bottom = 109.0
+size_flags_vertical = 3
+
+[node name="LinesTextEdit" type="TextEdit" parent="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 113.0
+margin_right = 957.0
+margin_bottom = 551.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer"]
+margin_top = 555.0
+margin_right = 957.0
+margin_bottom = 581.0
+
+[node name="CleanLinesButton" type="Button" parent="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer/HBoxContainer"]
+margin_right = 107.0
+margin_bottom = 26.0
+text = "Clean input"
+
+[node name="GeneratePromptButton" type="Button" parent="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer/HBoxContainer"]
+margin_left = 111.0
+margin_right = 188.0
+margin_bottom = 26.0
+text = "Prompt"
+
+[node name="PromptTextEdit" type="TextEdit" parent="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 192.0
+margin_right = 957.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="OutputTab" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OutputTab"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="CloseOutputButton" type="Button" parent="OutputTab/VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 26.0
+text = "Close"
+
+[node name="OutputTextEdit" type="TextEdit" parent="OutputTab/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 30.0
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_vertical = 3
+
+[connection signal="pressed" from="MainTab/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/AddReactionButton" to="." method="_on_AddReactionButton_pressed"]
+[connection signal="pressed" from="MainTab/VBoxContainer/HBoxContainer/VBoxContainer2/EditButton" to="." method="_on_EditButton_pressed"]
+[connection signal="pressed" from="MainTab/VBoxContainer/HBoxContainer/VBoxContainer2/RemoveButton" to="." method="_on_RemoveButton_pressed"]
+[connection signal="pressed" from="MainTab/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/SaveButton" to="." method="_on_SaveButton_pressed"]
+[connection signal="pressed" from="MainTab/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/GenerateCodeButton" to="." method="_on_GenerateCodeButton_pressed"]
+[connection signal="pressed" from="MainTab/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/LoadButton" to="." method="_on_LoadButton_pressed"]
+[connection signal="pressed" from="ReactionTab/VBoxContainer/OkButton" to="." method="_on_OkButton_pressed"]
+[connection signal="value_changed" from="ReactionTab/VBoxContainer/HBoxContainer/ChanceSpinbox" to="." method="_on_ChanceSpinbox_value_changed"]
+[connection signal="toggled" from="ReactionTab/VBoxContainer/HBoxContainer2/SayTogetherCheckbox" to="." method="_on_SayTogetherCheckbox_toggled"]
+[connection signal="text_changed" from="ReactionTab/VBoxContainer/HBoxContainer3/ChancesLineEdit" to="." method="_on_ChancesLineEdit_text_changed"]
+[connection signal="item_selected" from="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer2/RoleSelector" to="." method="_on_RoleSelector_item_selected"]
+[connection signal="pressed" from="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer2/HBoxContainer/AddReactionEntryButton" to="." method="_on_AddReactionEntryButton_pressed"]
+[connection signal="pressed" from="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer2/HBoxContainer/RemoveEntryButton" to="." method="_on_RemoveEntryButton_pressed"]
+[connection signal="item_selected" from="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer2/ReactionEntriesList" to="." method="_on_ReactionEntriesList_item_selected"]
+[connection signal="text_changed" from="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer/ConditionTextEdit" to="." method="_on_ConditionTextEdit_text_changed"]
+[connection signal="text_changed" from="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer/LinesTextEdit" to="." method="_on_LinesTextEdit_text_changed"]
+[connection signal="pressed" from="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer/HBoxContainer/CleanLinesButton" to="." method="_on_CleanLinesButton_pressed"]
+[connection signal="pressed" from="ReactionTab/VBoxContainer/HBoxContainer4/VBoxContainer/HBoxContainer/GeneratePromptButton" to="." method="_on_GeneratePromptButton_pressed"]
+[connection signal="pressed" from="OutputTab/VBoxContainer/CloseOutputButton" to="." method="_on_CloseOutputButton_pressed"]

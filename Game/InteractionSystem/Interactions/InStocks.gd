@@ -118,7 +118,7 @@ func about_to_use_text():
 
 func about_to_use_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "continue"):
-		var _sexResult = getSexResult(_args)
+		var _sexResult:SexEngineResult = getSexResult(_args)
 		sendSlaveryActivityEvent("inmate", "stocksUsed", {sex=_sexResult})
 		doRepEvent("inmate", "befuckedstocks")
 		setState("after_use", "user")

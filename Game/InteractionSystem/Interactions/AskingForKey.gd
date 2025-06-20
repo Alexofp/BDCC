@@ -77,13 +77,13 @@ func sex_challenge_start_text():
 	sayLine("reacter", "AskKeyChallenge", {main="reacter", target="starter"})
 	saynn("Looks like {starter.you} {starter.youAre}n't getting that key unless {starter.youHe} {starter.youVerb('let')} {reacter.you} fuck {starter.youHim}..")
 
-	addAction("submit", "Submit", "Let it happen..", "sexSub", 1.0, 300, {start_sex=["reacter", "starter", SexType.DefaultSex, {bondageDisabled=true}],})
+	addAction("submit", "Submit", "Let it happen..", "sexSub", 1.0, 300, {start_sex=["reacter", "starter", SexType.DefaultSex, {SexMod.BondageDisabled: true}],})
 	addAction("refuse", "Refuse", "You'd rather not..", "default", 0.1, 60, {})
 
 func sex_challenge_start_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "submit"):
-		var _result = getSexResult(_args, true)
-		domSatisfaction = _result["domSatisfaction"] if _result.has("domSatisfaction") else 0.0
+		var _result:SexEngineResult = getSexResult(_args, true)
+		domSatisfaction = _result.getAverageDomSatisfaction() if _result else 0.0
 		setState("sex_challenge_after_sex", "reacter")
 	if(_id == "refuse"):
 		setState("sex_challenge_refused", "starter")

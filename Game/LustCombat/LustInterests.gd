@@ -56,6 +56,8 @@ func getInterestValue(topicID):
 
 func getTopicValue(topicID, _pc):
 	var topicGroup: TopicBase = GlobalRegistry.getLustTopic(topicID)
+	if(!topicGroup):
+		return 0.0
 	
 	var loveValue = 0.0
 	if(interests.has(topicID)):
@@ -71,6 +73,8 @@ func getOverallLikeness(_pc, isClamped:bool = false) -> float:
 	
 	for topicID in interests:
 		var topicGroup: TopicBase = GlobalRegistry.getLustTopic(topicID)
+		if(!topicGroup):
+			continue
 		var loveValue:float = Interest.getValue(interests[topicID])
 		
 		var playerValue:float = topicGroup.getTopicValue(topicID, _pc)
@@ -85,26 +89,61 @@ func getOverallLikeness(_pc, isClamped:bool = false) -> float:
 		return clamp(resultValue / maxPossble, 0.0, 1.0)
 	return resultValue
 
-func getFocussedLikeness(_pc, _focus, isClamped:bool = false) -> float:
+func getFocusedLikenessSummary(_pc, _focus, isClamped:bool = false) -> Dictionary:
+	var summaryDict:Dictionary = {
+		"resultValue": 0.0,
+		"topicsLikedPresence": [],
+		"topicsLikedAbsence": [],
+		"topicsDislikedPresence": [],
+		"topicsDislikedAbsence": [],
+	}
+
 	var resultValue:float = 0.0
-	var maxPossble:float = 0.0
-	
+	var maxPossible:float = 0.0
+
 	for topicID in interests:
 		var topicGroup: TopicBase = GlobalRegistry.getLustTopic(topicID)
-		var loveValue:float = Interest.getValue(interests[topicID])
-		
-		var playerValue:float = topicGroup.getTopicValue(topicID, _pc)
-		
-		var addValue:float = loveValue * topicGroup.getAddsToFocus(topicID, _focus)
-		
-		maxPossble += abs(addValue)
-		resultValue += addValue * playerValue
-	
+		if(!topicGroup):
+			continue
+		var loveValue:float = Interest.getValue(interests[topicID]) # -2 to 1
+		var loveValueRatio:float = clamp((loveValue + 1.0) / 2.0, 0.0, 1.0)
+
+		var playerValue:float = topicGroup.getTopicValue(topicID, _pc) # 0 to 1
+
+		var addsToFocus:float = topicGroup.getAddsToFocus(topicID, _focus)
+		var interestImportance:float = abs(loveValue)
+		var interestImportanceWithFocus:float = (interestImportance * addsToFocus)
+
+		var goodMatchRatio:float = 1.0 - min(abs(loveValueRatio - playerValue), 1.0)
+
+		var interestImportanceWithFocusMatched:float = (interestImportanceWithFocus * goodMatchRatio)
+
+		if(interestImportanceWithFocus >= 0.5 && (playerValue < 0.3 || playerValue > 0.7)):
+			var summaryKeySuffix:String = "Presence" if(playerValue > 0.5) else "Absence"
+			if(goodMatchRatio >= 0.7):
+				summaryDict["topicsLiked" + summaryKeySuffix].append(topicID)
+			elif(goodMatchRatio < 0.3):
+				summaryDict["topicsDisliked" + summaryKeySuffix].append(topicID)
+
+		resultValue += interestImportanceWithFocusMatched
+		maxPossible += interestImportanceWithFocus
+
 	if(isClamped):
-		if(maxPossble <= 0.0):
-			return 0.0
-		return clamp(resultValue / maxPossble, 0.0, 1.0)
-	return resultValue
+		if(maxPossible <= 0.0):
+			resultValue = 0.0
+		else:
+			resultValue = clamp(resultValue / maxPossible, 0.0, 1.0)
+
+	summaryDict["resultValue"] = resultValue
+
+	return summaryDict
+
+func getFocusedLikeness(_pc, _focus, isClamped:bool = false) -> float:
+	var summaryDict:Dictionary = getFocusedLikenessSummary(_pc, _focus, isClamped)
+	return summaryDict["resultValue"]
+
+func getFocussedLikeness(_pc, _focus, isClamped:bool = false) -> float:
+	return getFocusedLikeness(_pc, _focus, isClamped)
 
 func reactLustAction(_pc, _actionInterests, _maxUnlocks = 1):
 	var resultValue = 0.0
@@ -116,6 +155,8 @@ func reactLustAction(_pc, _actionInterests, _maxUnlocks = 1):
 		if(!interests.has(topicID)):
 			continue
 		var topicGroup: TopicBase = GlobalRegistry.getLustTopic(topicID)
+		if(!topicGroup):
+			continue
 		
 		var actionValue = _actionInterests[topicID]
 		

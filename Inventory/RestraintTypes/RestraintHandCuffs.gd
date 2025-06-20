@@ -5,6 +5,7 @@ var tightlockShiv:bool = false
 
 func _init():
 	restraintType = RestraintType.WristCuffs
+	sexReaction = SexReaction.BondageWristCuffs
 
 func doStruggle(_pc, _minigame:MinigameResult):
 	var _handsFree = !_pc.hasBlockedHands()

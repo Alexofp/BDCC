@@ -9,9 +9,9 @@ func getVisibleName():
 func getProgress():
 	var result = []
 	
-	result.append("Tavi told you she wants an apple. You can get one in the greenhouses which are near prison's yard")
+	result.append("Tavi told you she wants an apple. You can get one in the greenhouses which are near the prison's yard.")
 	if(GM.pc.getInventory().hasItemID("appleitem")):
-		result.append("I have an apple. I should go give it to Tavi. She is always hanging around on the mining level")
+		result.append("I have an apple. I should go give it to Tavi. She is always hanging around on the mining level.")
 	
 	return result
 

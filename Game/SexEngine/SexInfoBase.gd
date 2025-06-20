@@ -2,7 +2,7 @@ extends Reference
 class_name SexInfoBase
 
 var sexEngineRef: WeakRef
-var charID = ""
+var charID:String = ""
 var timesCame: int = 0
 var memory:Dictionary = {}
 var tick:int = 0
@@ -12,7 +12,7 @@ var turnsLastStim:int = 0 # How many turns since last stimulation
 var satisfaction:float = 0.0
 var frustration:float = 0.0
 
-var justCame = false
+var justCame:bool = false
 
 func getSexEngine():
 	if(sexEngineRef == null):
@@ -30,17 +30,23 @@ func getChar() -> BaseCharacter:
 	
 	return GlobalRegistry.getCharacter(charID)
 
-func getInfoString():
+func getCharID() -> String:
+	return charID
+
+func getInfoString(_isSelected:bool = false) -> String:
 	var character = getChar()
 	
 	var text:String = ""
 	if(character != null):
-		text += character.getName()
+		if(_isSelected):
+			text += "\\["+character.getName()+"\\]"
+		else:
+			text += character.getName()
 	
 	return text
 
-func getInfoStringFinal() -> String:
-	var text:String = getInfoString()
+func getInfoStringFinal(_isSelected:bool = false) -> String:
+	var text:String = getInfoString(_isSelected)
 	
 	var extraInfo:Array = getExtraInfoLines()
 	if(!extraInfo.empty()):
@@ -117,7 +123,7 @@ func addPain(newpain):
 func addLust(newlust):
 	getChar().addLust(newlust)
 
-func canDoActions():
+func canDoActions() -> bool:
 	return true
 
 func canTalk():
@@ -157,7 +163,7 @@ func isBeingDeniedHard() -> bool:
 func addArousalForeplay(howmuch: float):
 	#var lustLevel = getChar().getLustLevel()
 	# should be less efficient at high lust. or not
-	if(getArousal() < 0.5):
+	if(getArousal() < 0.33):
 		addArousal(howmuch)
 
 func addArousalSex(howmuch: float):
@@ -168,37 +174,43 @@ func addArousalSex(howmuch: float):
 	else:
 		addArousal(howmuch)
 
+# First argument is basically 'speed'. Last argument is how 'stimulating' it is
 func stimulateArousalZone(howmuch: float, bodypartSlot, stimulation:float = 1.0):
 	if(bodypartSlot == BodypartSlot.Penis && getChar().isWearingStrapon()):
 		var strapon = getChar().getWornStrapon()
-		var pleasureMod = strapon.getStraponPleasureForDom()
+		var pleasureMod:float = strapon.getStraponPleasureForDom()
 		
 		addArousalSex(howmuch * pleasureMod)
 		return
 	
+	if(!getChar().hasBodypart(bodypartSlot)):
+		return
 	var sensitiveZone:SensitiveZone = getChar().getBodypart(bodypartSlot).getSensitiveZone()
-	if(sensitiveZone != null):
-		turnsLastStim = 0
-		hadStim = true
-		sensitiveZone.stimulate(stimulation)
-		
-		var howMuchActually:float = sensitiveZone.getArousalGainModifier()
-		
-		var theArousal:float = getArousal()
-		
-		howMuchActually *= max((1.0 - min(theArousal, 0.5)*0.1 - theArousal*0.25), 0.01)
-		#if(howMuchActually <= 0.08 && RNG.chance(50)):
-		#	addArousalSex(-0.01)
-		#	return
-		if(howMuchActually*0.2 <= 0.07):
-			addArousalSex(-0.02)
-			return
-		#if(howMuchActually <= 0.09):
-		#	howMuchActually *= 0.2
-		
-		addArousalSex(howmuch * howMuchActually)
-	else:
-		addArousalSex(howmuch)
+	if(sensitiveZone == null):
+		addArousalForeplay(howmuch)
+		return
+	turnsLastStim = 0
+	hadStim = true
+	sensitiveZone.stimulate(stimulation)
+	
+	var howMuchActually:float = sensitiveZone.getArousalGainModifier()
+	
+	var theArousal:float = getArousal()
+	
+	howMuchActually *= max((1.0 - min(theArousal, 0.5)*0.1 - theArousal*0.25), 0.01)
+	#if(howMuchActually <= 0.08 && RNG.chance(50)):
+	#	addArousalSex(-0.01)
+	#	return
+	if(howMuchActually*0.2 <= 0.07):
+		addArousalSex(-0.02)
+		return
+	#if(howMuchActually <= 0.09):
+	#	howMuchActually *= 0.2
+	
+	addArousalSex(howmuch * howMuchActually)
+	
+	#else:
+	#	addArousalSex(howmuch)
 
 func isCloseToCumming() -> bool:
 	return getArousal() >= 0.7
@@ -353,25 +365,15 @@ func calculateFinalSatisfaction() -> float:
 func combineData(_data1, _data2):
 	return getSexEngine().combineData(_data1, _data2)
 
-func getExtraOutputData(isDom:bool=false):
-	var result
-	
+func getExtraOutputData(_isDom:bool, _sexEngine):
 	var tfHolder:TFHolder = getChar().getTFHolder()
 	if(tfHolder != null && tfHolder.hasPendingTransformations()):
 		var tfResult:Dictionary = tfHolder.doFirstPendingTransformation({}, true)
 		if(tfResult.has("text") && tfResult["text"] != ""):
-			var extraData:Dictionary = {
-				text = getChar().getName()+"'s body is suddenly [b]changing[/b]! "+tfResult["text"]
-			}
+			_sexEngine.addTextRaw(getChar().getName()+"'s body is suddenly [b]changing[/b]! "+tfResult["text"])
+
 			if(tfResult.has("say") && tfResult["say"] != ""):
-				if(isDom):
-					extraData["domSay"] = tfResult["say"]
-				else:
-					extraData["subSay"] = tfResult["say"]
-			
-			result = combineData(result, extraData)
-	
-	return result
+				_sexEngine.talkText(charID, tfResult["say"])
 
 func saveData():
 	var data = {

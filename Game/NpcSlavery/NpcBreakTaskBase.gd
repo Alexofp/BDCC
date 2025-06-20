@@ -115,6 +115,9 @@ func scaledRangeWithDifficulty(minv:int, maxv:int, _difficulty:float):
 	var newmaxv:int = int(round(maxv * _difficulty))
 	return RNG.randi_range(newminv, newmaxv)
 
+func getSexGoalWeightModifier(_sexGoalID:String) -> float:
+	return 0.0
+
 func saveData():
 	var data = {
 		"taskIsCompleted": taskIsCompleted,

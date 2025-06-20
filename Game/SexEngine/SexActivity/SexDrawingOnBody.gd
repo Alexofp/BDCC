@@ -1,7 +1,14 @@
 extends SexActivityBase
 
+var customWritingID:String = ""
+var customWritingZone:int = -1
+
 func _init():
 	id = "SexDrawingOnBody"
+	
+	activityName = "Draw on body"
+	activityDesc = "Write something humiliating on them!"
+	activityCategory = ["Humiliate"]
 
 func getGoals():
 	return {
@@ -17,64 +24,62 @@ func getSupportedSexTypes():
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	return _domInfo.fetishScore({Fetish.Bodywritings: 0.05}) * (1.0 + _domInfo.personalityScore({PersonalityStat.Mean: 0.3}))
 
-func getVisibleName():
-	return "Draw on body"
+func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
+	if(!_domInfo.getChar().isPlayer()):
+		.getStartActions(_sexEngine, _domInfo, _subInfo)
+		return
+	
+	var writingsRandomList:Array = BodyWritings.getRandomWritingIDAmount(5)
+	for writingID in writingsRandomList:
+		var writingText:String = BodyWritings.getWritingText(writingID)
+		var randomZoneForWriting:int = BodyWritings.getRandomZoneForWritingID(writingID)
+		var randomZoneName:String = BodyWritingsZone.getZoneVisibleName(randomZoneForWriting)
+		
+		addStartAction([writingID, randomZoneForWriting], writingText, "Write '"+writingText+"' on the sub's "+randomZoneName, 0.0, {
+			A_CATEGORY: ["Humiliate", "Draw on body"],
+		})
 
-func getCategory():
-	return ["Humiliate"]
-
-func getDomTags():
-	return [SexActivityTag.HandsUsed]
-
-func getSubTags():
+func getTags(_indx:int) -> Array:
+	if(_indx == DOM_0):
+		return [SexActivityTag.HandsUsed]
 	return []
 
 func startActivity(_args):
-	state = ""
+	if(_args is Array && _args.size() >= 2):
+		customWritingID = _args[0]
+		customWritingZone = _args[1]
 	
-	affectSub(subInfo.fetishScore({Fetish.Bodywritings: 1.0}, -0.25), 0.01, -0.2, -0.02)
+	affectSub(getSubInfo().fetishScore({Fetish.Bodywritings: 1.0}, -0.25), 0.01, -0.2, -0.02)
+	addText("{dom.You} {dom.youVerb('pull')} out a [b]black marker[/b].")
+	react(SexReaction.AboutToDrawOnBody, [100.0, 50.0])
+
+func init_processTurn():
+	state = "drawsoon"
+
+func drawsoon_processTurn():
+	state = "abouttodraw"
+	affectSub(getSubInfo().fetishScore({Fetish.Bodywritings: 1.0}, -0.25), 0.01, -0.2, -0.02)
+	addText("{dom.You} {dom.youVerb('move')} the marker close to {sub.yourHis} body.")
+
+func abouttodraw_processTurn():
+	endActivity()
 	
-	return {
-		text = "{dom.You} {dom.youVerb('pull')} out a [b]black marker[/b].",
-		domSay = domReaction(SexReaction.AboutToDrawOnBody, 100),
-		subSay = subReaction(SexReaction.AboutToDrawOnBody, 20),
-	}
-
-func processTurn():
-	if(state == ""):
-		state = "drawsoon"
-		return null
-	if(state == "drawsoon"):
-		state = "abouttodraw"
-		affectSub(subInfo.fetishScore({Fetish.Bodywritings: 1.0}, -0.25), 0.01, -0.2, -0.02)
-		return {text="{dom.You} {dom.youVerb('move')} the marker close to {sub.yourHis} body."}
-	if(state == "abouttodraw"):
-		endActivity()
-		
-		affectSub(subInfo.fetishScore({Fetish.Bodywritings: 1.0}, -0.25), 0.01, -0.2, -0.02)
-		
-		var zone = BodyWritingsZone.getRandomZone()
-		if(getSexType() == SexType.SlutwallSex):
-			zone = BodyWritingsZone.getRandomZoneLowerPart()
-		
-		var writingID = BodyWritings.getRandomWritingIDForZone(zone)
-		getSub().addBodywriting(zone, writingID)
-		sendSexEvent(SexEvent.BodyWritingAdded, domID, subID, {zone=zone,writingID=writingID})
-		return {
-			text="{dom.You} drew [b]'"+str(BodyWritings.getWritingText(writingID))+"'[/b] on {sub.yourHis} "+BodyWritingsZone.getZoneVisibleName(zone)+".",
-			domSay = domReaction(SexReaction.AfterDrawingOnBody, 100),
-			subSay = subReaction(SexReaction.AfterDrawingOnBody, 50),
-			}
+	affectSub(getSubInfo().fetishScore({Fetish.Bodywritings: 1.0}, -0.25), 0.01, -0.2, -0.02)
 	
-func getDomActions():
-	var actions = []
-
-	return actions
-
-func doDomAction(_id, _actionInfo):
-	return null
-
-func getSubResistChance():
+	var zone:int = BodyWritingsZone.getRandomZone()
+	if(getSexType() == SexType.SlutwallSex):
+		zone = BodyWritingsZone.getRandomZoneLowerPart()
+	if(customWritingZone >= 0):
+		zone = customWritingZone
+	
+	var writingID:String = BodyWritings.getRandomWritingIDForZone(zone) if customWritingID == "" else customWritingID
+	getSub().addBodywriting(zone, writingID)
+	sendSexEvent(SexEvent.BodyWritingAdded, DOM_0, SUB_0, {zone=zone,writingID=writingID})
+	
+	addText("{dom.You} drew [b]'"+str(BodyWritings.getWritingText(writingID))+"'[/b] on {sub.yourHis} "+BodyWritingsZone.getZoneVisibleName(zone)+".")
+	react(SexReaction.AfterDrawingOnBody, [100.0, 50.0])
+	
+func getSubResistChance() -> float:
 	var defaultChance = 30.0
 	if(getSub().hasBoundArms()):
 		defaultChance *= 0.5
@@ -86,24 +91,34 @@ func getSubResistChance():
 		defaultChance *= 0.5
 	return defaultChance
 
-func getSubActions():
-	var actions = []
-	if(!getSub().hasBoundArms()):
-		actions.append({
-				"id": "resist",
-				"score": subInfo.getResistScore() * 2.0,
-				"name": "Whack marker away",
-				"desc": "Resist against the marker",
-				"chance": getSubResistChance(),
-			})
-	return actions
+func getActions(_indx:int):
+	if(_indx == SUB_0):
+		if(!getSub().hasBoundArms()):
+			addAction("resist", getResistScore(SUB_0) * 2.0, "Whack marker away", "Resist against the marker", {A_CHANCE: getSubResistChance()})
 
-func doSubAction(_id, _actionInfo):
+func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "resist"):
 		if(RNG.chance(getSubResistChance())):
 			endActivity()
-			domInfo.addAnger(0.2)
-			return {text = "{sub.You} managed to whack the marker out of {dom.yourHis} hands!",subSay=subReaction(SexReaction.ActivelyResisting, 50)}
+			getDomInfo().addAnger(0.2)
+			addText("{sub.You} managed to whack the marker out of {dom.yourHis} hands!")
+			reactSub(SexReaction.ActivelyResisting, [50])
+			return
 		
-		return {text = "{sub.You} {sub.youVerb('try', 'tries')} to whack the marker out of {dom.yourHis} hands but {sub.youVerb('fail')}.",
-		subSay=subReaction(SexReaction.Resisting, 50)}
+		addText("{sub.You} {sub.youVerb('try', 'tries')} to whack the marker out of {dom.yourHis} hands but {sub.youVerb('fail')}.")
+		reactSub(SexReaction.Resisting, [50])
+		return
+
+func saveData():
+	var data = .saveData()
+	
+	data["customWritingID"] = customWritingID
+	data["customWritingZone"] = customWritingZone
+
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	customWritingID = SAVE.loadVar(data, "customWritingID", "")
+	customWritingZone = SAVE.loadVar(data, "customWritingZone", -1)

@@ -30,7 +30,7 @@ func _run():
 	if(state == "before_birth"):
 		playAnimation(StageScene.GivingBirth, "birth", {pc=npcID, bodyState={naked=true}})
 
-		saynn("You stand by {npc.name} side while {npc.he} listens to the nurse's orders. Then {npc.he} reaches {npc.his} hand to you and smiles nervously. You decide to hold it, to help {npc.him} feel calmer.")
+		saynn("You stand by {npc.nameS} side while {npc.he} listens to the nurse's orders. Then {npc.he} reaches {npc.his} hand to you and smiles nervously. You decide to hold it, to help {npc.him} feel calmer.")
 
 		saynn("Contractions are happening, causing {npc.name} to groan from the pain while clenching your hand.")
 

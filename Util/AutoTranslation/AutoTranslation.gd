@@ -1,5 +1,7 @@
 extends Node
 
+signal translator_recreated
+
 var targetLanguage = "de"
 var shouldBeTranslating = false
 var manualTranslateButton = false
@@ -79,6 +81,8 @@ func recreateTranslatorIfNeeded():
 				continue
 			add_child(newTranslator)
 			translators.append(newTranslator)
+	
+	emit_signal("translator_recreated")
 
 func shouldTranslate():
 	return shouldBeTranslating

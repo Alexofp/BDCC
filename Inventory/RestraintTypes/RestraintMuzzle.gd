@@ -3,6 +3,7 @@ class_name RestraintMuzzle
 
 func _init():
 	restraintType = RestraintType.Muzzle
+	sexReaction = SexReaction.BondageMuzzle
 
 func doStruggle(_pc, _minigame:MinigameResult):
 	var _handsFree = !_pc.hasBlockedHands()

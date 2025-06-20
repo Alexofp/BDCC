@@ -54,6 +54,7 @@ func _run():
 		addButtonAt(13, "Tasks", "Look at your tasks", "tasks")
 	addButtonAt(14, "Inventory", "Look at your inventory", "inventory")
 	#addButtonAt(5, "Sex Test", "Sex test", "sextest")
+	#addExtraButtonAt(4, "Sex Test", "Sex test", "sextest")
 	#addButtonAt(7, "Slave Test", "Slave test", "slavetest")
 	#addButtonAt(7, "Computer test", "Computer test", "comptest")
 	#addButtonAt(7, "Auction test", "test", "auctiontest")
@@ -117,12 +118,22 @@ func _react(_action: String, _args):
 	if(_action == "me"):
 		runScene("MeScene")
 	if(_action == "sextest"):
+		#runScene("GenericSexScene", ["pc", ["rahi", "nova"]])
+		#runScene("GenericSexScene", [["rahi", "nova"], ["risha"]])
+		#runScene("GenericSexScene", [["avy", "pc", "nova"], ["rahi", "socket"]])
+		#runScene("GenericSexScene", [["avy", "nova"], ["socket"]])
+		runScene("GenericSexScene", [["pc", "nova"], ["avy"]])
+		#runScene("GenericSexScene", [["rahi", "pc"], ["nova"]])
+		#runScene("GenericSexScene", [["pc"], ["rahi", "socket"]])
+		#runScene("GenericSexScene", [["avy"], ["rahi"]])
+		#runScene("GenericSexScene", ["rahi", "pc"])
+		
 		#runScene("GenericSexScene", [NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true}), "socket", SexType.SlutwallSex])
 		#getCharacter("socket").addEffect("SexSpacedOut")
 		#runScene("GenericSexScene", ["rahi", "pc", SexType.SlutwallSex])
 		#GM.pc.getInventory().addItem(GlobalRegistry.createItem("BreastPump"))
 		#GM.pc.getInventory().addItem(GlobalRegistry.createItem("BreastPumpAdvanced"))
-		runScene("GenericSexScene", ["pc", "rahi"])
+		#runScene("GenericSexScene", ["pc", "rahi"])
 		#runScene("GenericSexScene", ["rahi", "pc"])
 		#runScene("GenericSexScene", ["nova", "pc"])
 		#runScene("GenericSexScene", ["pc", "nova"])
@@ -256,9 +267,19 @@ func sendStatusToInteraction(_result):
 	
 	interaction.receiveSceneStatusFinal(_result)
 
+func sendSexResultToInteraction(_result:SexEngineResult):
+	var pawn:CharacterPawn = GM.main.IS.getPawn("pc")
+	if(pawn == null):
+		return
+	var interaction:PawnInteractionBase = pawn.getInteraction()
+	if(interaction == null):
+		return
+	
+	interaction.receiveSexEngineResult(_result)
+
 func _react_scene_end(_tag, _result):
 	if(_tag == "interaction_sex"):
-		sendStatusToInteraction(_result[0])
+		sendSexResultToInteraction(_result[0])
 	
 	if(_tag == "interaction_fight_pcstarted"):
 		var battlestate = _result[0]

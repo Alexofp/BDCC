@@ -18,6 +18,9 @@ func _init():
 	aboutToRideReaction = SexReaction.AboutToRideAnal
 	isVag = false
 	
+	activityName = "Cowgirl Anal"
+	activityDesc = "Begin to ride them with your ass!"
+	
 func getGoals():
 	if(currentPose == POSE_COWGIRLCHOKE):
 		return {
@@ -30,7 +33,3 @@ func getGoals():
 		SexGoal.ReceiveAnal: 1.0,
 		SexGoal.ReceiveStraponAnal: 1.0,
 	}
-
-func getVisibleName():
-	return "Cowgirl Anal"
-

@@ -1,12 +1,15 @@
 extends SexActivityBase
 
-var pcUniqueID = ""
-var npcItemID = ""
+var pcUniqueID:String = ""
+var npcItemID:String = ""
 
 func _init():
 	id = "DomBondage"
 	startedByDom = true
 	startedBySub = false
+	
+	activityName = "Bondage"
+	activityCategory = ["Bondage"]
 
 func getGoals():
 	return {
@@ -19,7 +22,7 @@ func getSupportedSexTypes():
 		SexType.StocksSex: true,
 	}
 
-func isStocksSex():
+func isStocksSex() -> bool:
 	return getSexEngine().getSexTypeID() == SexType.StocksSex
 
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
@@ -31,24 +34,19 @@ func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 		mult = 0.1
 	return 0.0 + _domInfo.fetishScore({Fetish.Rigging: 0.05}) * mult
 
-func getVisibleName():
-	return "Bondage"
-
-func getCategory():
-	return ["Bondage"]
-
-func getDomTags():
+func getTags(_indx:int) -> Array:
+	if(_indx == DOM_0):
+		return []
+	if(_indx == SUB_0):
+		return [SexActivityTag.BeingUndressed]
 	return []
-
-func getSubTags():
-	return [SexActivityTag.BeingUndressed]
 
 func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	var actions = []
 	var dom:BaseCharacter = _domInfo.getChar()
 	var sub:BaseCharacter = _subInfo.getChar()
 	
-	var usableItems = []
+	var usableItems:Array = []
 	
 	if(_domInfo.getChar().isPlayer()):
 		if(_subInfo.getChar().isDynamicCharacter()):
@@ -57,7 +55,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 			usableItems = dom.getInventory().getAllCombatUsableRestraintsForStaticNpc()
 	else:
 		if(_sexEngine.isBondageDisabled()):
-			return []
+			return
 		
 		var itemTagToUse = ItemTag.CanBeForcedByGuards
 		if(_sexEngine.getSexTypeID() == SexType.StocksSex):#(isStocksSex()):
@@ -67,7 +65,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 		
 		for possibleRestraintID in possibleRestraints:
 			var item:ItemBase = GlobalRegistry.getItemRef(possibleRestraintID)
-			if(_domInfo.goalsScore({SexGoal.FuckOral: 1.0}, _subInfo.charID) > 0.0 || _domInfo.goalsScore({SexGoal.BreastFeedSub: 1.0}, _subInfo.charID) > 0.0 || _sexEngine.hasTag(subID, SexActivityTag.MouthUsed)):
+			if(_domInfo.goalsScore({SexGoal.FuckOral: 1.0}, _subInfo.charID) > 0.0 || _domInfo.goalsScore({SexGoal.BreastFeedSub: 1.0}, _subInfo.charID) > 0.0 || _sexEngine.hasTag(_subInfo.charID, SexActivityTag.MouthUsed)):
 				if(item.getClothingSlot() == InventorySlot.Mouth):
 					if(!item.hasBuff(Buff.RingGagBuff)):
 						continue
@@ -83,6 +81,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 				countsByItemID[item.id] += 1
 		
 	#var canActuallyPutOn = 0
+	var theActivityScore:float = getActivityScore(_sexEngine, _domInfo, _subInfo)
 	for item in usableItems:
 		var itemSlot = item.getClothingSlot()
 		var bodypartSlot = item.getRequiredBodypart()
@@ -106,22 +105,11 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 				continue
 			
 			if(_domInfo.getChar().isPlayer()):
-				actions.append({
-					name = item.getVisibleName(),
-					args = ["pc", item.uniqueID],
-					score = getActivityScore(_sexEngine, _domInfo, _subInfo),
-					category = (getCategory() if (!countsByItemID.has(item.id) || countsByItemID[item.id] <= 1) else (getCategory() + [str(countsByItemID[item.id])+"x"+item.getVisibleName()])),
-					desc = "Restraint level: "+str(restraintData.getLevel()) + "\n" + item.getCombatDescription(),
-				})
+#func addStartAction(_aArgs:Array, _aName:String, _aDesc:String, _aScore:float, _aExtra:Dictionary = {}):
+				addStartAction(["pc", item.uniqueID], item.getVisibleName(), "Restraint level: "+str(restraintData.getLevel()) + "\n" + item.getCombatDescription(), theActivityScore, {A_CATEGORY: (getCategory() if (!countsByItemID.has(item.id) || countsByItemID[item.id] <= 1) else (getCategory() + [str(countsByItemID[item.id])+"x"+item.getVisibleName()]))})
 			else:
 				#canActuallyPutOn += 1
-				actions.append({
-					name = item.getVisibleName(),
-					args = ["npc", item.id],
-					score = getActivityScore(_sexEngine, _domInfo, _subInfo) * item.getAIForceItemWeight(getDom(), getSub()),
-					category = getCategory(),
-					desc = "Restraint level: "+str(restraintData.getLevel()) + "\n" + item.getCombatDescription(),
-				})
+				addStartAction(["npc", item.id], "", "", theActivityScore*item.getAIForceItemWeight(dom, sub))
 	
 	#if(!dom.isPlayer() && canActuallyPutOn == 0):
 	#	_sexEngine.satisfyGoal(_domInfo, SexGoal.TieUp, _subInfo)
@@ -134,37 +122,25 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 			var restraintData:RestraintData = item.getRestraintData()
 			if(restraintData == null):
 				continue
-				
-			actions.append({
-				name = item.getVisibleName(),
-				args = ["rem", item.uniqueID],
-				score = 0.0,
-				category = ["Bondage", "Take off"],
-				desc = "Status: "+restraintData.getVisibleTightness()+"\nRestraint level: "+str(restraintData.getLevel()) + "\n" + item.getCombatDescription(),
-			})
+			
+			addStartAction(["rem", item.uniqueID], item.getVisibleName(), "Status: "+restraintData.getVisibleTightness()+"\nRestraint level: "+str(restraintData.getLevel()) + "\n" + item.getCombatDescription(), 0.0, {A_CATEGORY: ["Bondage", "Take off"]})
 	
 	return actions
 
 func startActivity(_args):
-	state = ""
-	
-	subInfo.addResistance(subInfo.fetishScore({Fetish.Bondage: -0.5})+0.3-subInfo.personalityScore({PersonalityStat.Subby: 0.2}))
-	subInfo.addLust(subInfo.fetishScore({Fetish.Bondage: 1.0}) * 20)
+	getSubInfo().addResistance(getSubInfo().fetishScore({Fetish.Bondage: -0.5})+0.3-getSubInfo().personalityScore({PersonalityStat.Subby: 0.2}))
+	getSubInfo().addLust(getSubInfo().fetishScore({Fetish.Bondage: 1.0}) * 20)
 	
 	if(_args[0] == "pc"):
 		pcUniqueID = _args[1]
 		
 		var item = getDom().getInventory().getItemByUniqueID(pcUniqueID)
-		return {
-			text = "{dom.You} {dom.youVerb('attempt')} to force "+str(item.getAStackName())+" onto {sub.you}!",
-		}
+		addText("{dom.You} {dom.youVerb('attempt')} to force "+str(item.getAStackName())+" onto {sub.you}!")
 	if(_args[0] == "npc"):
 		npcItemID = _args[1]
 	
 		var item = GlobalRegistry.getItemRef(npcItemID)
-		return {
-			text = "{dom.You} {dom.youVerb('attempt')} to force "+str(item.getAStackName())+" onto {sub.you}!",
-		}
+		addText("{dom.You} {dom.youVerb('attempt')} to force "+str(item.getAStackName())+" onto {sub.you}!")
 	if(_args[0] == "rem"):
 		endActivity()
 		var itemUniqueID = _args[1]
@@ -182,7 +158,7 @@ func startActivity(_args):
 			text += " [b]"+struggleText+"[/b]"
 		restraintData.onStruggleRemoval()
 		getSub().getInventory().removeEquippedItem(item)
-		getSexEngine().removeTrackedGear(domID, subID, item.uniqueID)
+		getSexEngine().removeTrackedGear(getDomID(), getSubID(), item.uniqueID)
 		
 		#var canKeepTheRestraint = false
 		if(!restraintData.alwaysBreaksWhenStruggledOutOf() && (getDom().hasPerk(Perk.BDSMCollector) || restraintData.alwaysSavedWhenStruggledOutOf())):
@@ -192,12 +168,12 @@ func startActivity(_args):
 			getDom().getInventory().addItem(item)
 		else:
 			text += " The restraint broke and was unable to be recovered."
-		return {text = text}
+		addText(text)
 
 func processTurn():
-	if(state == ""):
-		state = "aboutToTieUp"
-	elif(state == "aboutToTieUp"):
+	if(getState() == ""):
+		setState("aboutToTieUp")
+	elif(getState() == "aboutToTieUp"):
 		#var item = _args[1]
 		var sub:BaseCharacter = getSub()
 		var dom:BaseCharacter = getDom()
@@ -211,7 +187,8 @@ func processTurn():
 		endActivity()
 		
 		if(item == null):
-			return {text="{dom.You} somehow lost the restraint."}
+			addText("{dom.You} somehow lost the restraint.")
+			return
 		
 		if(dom.isPlayer()):
 			dom.getInventory().removeItem(item)
@@ -219,50 +196,39 @@ func processTurn():
 		#sub.getBuffsHolder().calculateBuffs()
 		#sub.updateNonBattleEffects()
 		
-		var text = RNG.pick([
+		var text:String = RNG.pick([
 			"{dom.You} {dom.youVerb('were', 'was')} successful. ",
 		])
-		text += GM.ui.processString(item.getForcedOnMessage(false), {receiver=subID})
+		text += GM.ui.processString(item.getForcedOnMessage(false), {receiver=getSubID()})
 		
-		sendSexEvent(SexEvent.BondageGearForced, domID, subID, {itemID=item.id})
-		getSexEngine().addTrackedGear(domID, subID, item.uniqueID)
+		sendSexEvent(SexEvent.BondageGearForced, DOM_0, SUB_0, {itemID=item.id})
+		getSexEngine().addTrackedGear(getDomID(), getSubID(), item.uniqueID)
 		progressGoal(SexGoal.TieUp)
 		
-		return {text = text}
-
-func getDomActions():
-	var actions = []
-
-	return actions
-
-func doDomAction(_id, _actionInfo):
-	return null
-
-func getSubActions():
-	var actions = []
-	if(!getSub().hasBoundArms()):
-		actions.append({
-				"id": "resist",
-				"score": subInfo.getResistScore() * 1.0 - subInfo.fetishScore({Fetish.Bondage: 1.0}) * subInfo.getComplyScore(),
-				"name": "Resist the restraint",
-				"desc": "You don't wanna be restrained",
-				"chance": 70.0 - domInfo.getAngerScore()*60.0,
-			})
-	return actions
-
-func doSubAction(_id, _actionInfo):
-	if(_id == "resist"):
-		if(RNG.chance(70.0 - domInfo.getAngerScore()*60.0)):
-			progressGoal(SexGoal.TieUp)
-			domInfo.addAnger(0.3)
-			endActivity()
-			return {
-				text = "{sub.You} {sub.youVerb('manage', 'managed')} to resist {dom.yourHis} attempt to force a restraint!",
-			}
+		addText(text)
 		
-		domInfo.addAnger(0.1)
-		return {text = "{sub.You} {sub.youVerb('try', 'tries')} to resist {dom.yourHis} attempt at restraining {sub.youHim} but {sub.youVerb('fail')}.",
-		subSay=subReaction(SexReaction.Resisting, 50)}
+		if(item && item.getRestraintData()):
+			var bondageSexReaction:int = item.getRestraintData().sexReaction
+			if(bondageSexReaction >= 0):
+				react(bondageSexReaction)
+
+func getActions(_indx:int):
+	if(_indx == SUB_0):
+		var resistScore:float = getSubInfo().getResistScore() * 1.0 - getSubInfo().fetishScore({Fetish.Bondage: 1.0}) * getSubInfo().getComplyScore()
+		addAction("resist", resistScore, "Resist the restraint", "You don't wanna be restrained", {A_CHANCE: 70.0 - getDomInfo().getAngerScore()*60.0})
+
+func doAction(_indx:int, _actionID:String, _action:Dictionary):
+	if(_actionID == "resist"):
+		if(RNG.chance(70.0 - getDomInfo().getAngerScore()*60.0)):
+			progressGoal(SexGoal.TieUp)
+			getDomInfo().addAnger(0.3)
+			endActivity()
+			addText("{sub.You} {sub.youVerb('manage', 'managed')} to resist {dom.yourHis} attempt to force a restraint!")
+			return
+		
+		getDomInfo().addAnger(0.1)
+		addText("{sub.You} {sub.youVerb('try', 'tries')} to resist {dom.yourHis} attempt at restraining {sub.youHim} but {sub.youVerb('fail')}.")
+		reactSub(SexReaction.Resisting, [50])
 
 func saveData():
 	var data = .saveData()

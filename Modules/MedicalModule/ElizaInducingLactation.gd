@@ -18,7 +18,7 @@ func _run():
 
 		saynn("Eliza pressed some button under the table and one of the airlocks opened up.")
 
-		saynn("[say=pc]Come in, cutie. I will leash you for safety.[/say]")
+		saynn("[say=eliza]Come in, cutie. I will leash you for safety.[/say]")
 
 		saynn("Without much thought you walk into the staff-only zone. Eliza quickly meets you, clicks a leash to your collar and walks you through the corridors into one of the labs.")
 

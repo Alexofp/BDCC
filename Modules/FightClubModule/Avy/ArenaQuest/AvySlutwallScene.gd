@@ -48,7 +48,7 @@ func _run():
 		saynn("With a sly smile on your face, you return back to the slutwall. In your hands you're holding a cute pink chastity cage that is surely a few sizes too small for Avy's cock. But that's part of the fun.")
 
 		if (howBroken < 0.5):
-			saynn("Time to do this. Avy cock is hard but at least the knot is not fully inflated so the ring part of the cage slips past it after you put some effort into it. The foxy feels that something is happening with her cock and starts thrashing against the chains.. desperately.")
+			saynn("Time to do this. Avy's cock is hard but at least the knot is not fully inflated so the ring part of the cage slips past it after you put some effort into it. The foxy feels that something is happening with her cock and starts thrashing against the chains.. desperately.")
 
 			saynn("[say=avy]Hey, don't do that! Help me! I will pay you! Credits, all of them![/say]")
 
@@ -61,9 +61,9 @@ func _run():
 			saynn("[say=avy]Ngh-h.. Fuck..[/say]")
 
 		else:
-			saynn("Time to do this. Avy cock has seen better days but it's still hard and the knot is not fully inflated so the ring part of the cage slips past it after you put some effort into it. The foxy feels that something is happening with her cock and moans loudly from the stimulation.")
+			saynn("Time to do this. Avy's cock has seen better days but it's still hard and the knot is not fully inflated so the ring part of the cage slips past it after you put some effort into it. The foxy feels that something is happening with her cock and moans loudly from the stimulation.")
 
-			saynn("[say=avy]Ah.. You're gonna lock her cock, aren't you?..[/say]")
+			saynn("[say=avy]Ah.. You're gonna lock my cock, aren't you?..[/say]")
 
 			saynn("She can't see you but hearing your giggling makes Avy sigh loudly.")
 
@@ -210,7 +210,7 @@ func _run():
 
 		saynn("At some point it becomes too much for the foxy, one of the thrusts finally manages to push her over that edge. Slutty moans escape from Avy, all the pressure inside her cock suddenly gets released when it starts shooting its load in powerful spurts that hit the wall before slowly dripping down back on Avy's crotch, creating such a lewd mess.")
 
-		saynn("You don't stop fucking her needy asshole even while its clenching around your rubber shaft, milking Avy's swollen prostate is where all the fun is at. You do that as long as you keep hearing Avy's muffled moans, feel her body shaking and see cum trickling out of her cock.")
+		saynn("You don't stop fucking her needy asshole even while it's clenching around your rubber shaft, milking Avy's swollen prostate is where all the fun is at. You do that as long as you keep hearing Avy's muffled moans, feel her body shaking and see cum trickling out of her cock.")
 
 		saynn("Finally, as her body gradually comes down from the high, you quickly pull out, suddenly creating lots of empty space inside the foxy, her stretched hole struggling to close in time, allowing you to gaze inside at her pulsating inner walls. Lewd.")
 
@@ -292,7 +292,7 @@ func _run():
 
 		saynn("At some point it becomes too much for the foxy, one of the thrusts finally manages to push her over that edge. Slutty moans escape from Avy, all the pressure inside her cock suddenly gets released when it starts shooting its load in powerful spurts that hit the wall before slowly dripping down back on Avy's crotch, creating such a lewd mess.")
 
-		saynn("You don't stop fucking her needy asshole even while its clenching around your rubber shaft, milking Avy's swollen prostate is where all the fun is at. While doing so, you keep hearing Avy's muffled moans, feel her body shaking and see cum trickling out of her cock.")
+		saynn("You don't stop fucking her needy asshole even while it's clenching around your hard shaft, milking Avy's swollen prostate is where all the fun is at. While doing so, you keep hearing Avy's muffled moans, feel her body shaking and see cum trickling out of her cock.")
 
 		saynn("Your own climax catches up with you from all that milking. Your own member starts throbbing inside Avy before you finally cum, waves upon waves of your thick sticky {pc.cum} begin flooding Avy's ass, overflowing almost. You grunt but keep fucking the foxy during that, wishing to shove that seed as deep as she can take it.")
 
@@ -396,7 +396,7 @@ func _run():
 		saynn("As you easily penetrate that sensitive tailhole with your tongue, Avy arches her back, her hips instinctively grinding against your lips. You slip your tongue as far as you can and begin licking her out from the inside, lapping at her inner walls.")
 
 		if (hasCumInside):
-			saynn("Your tongue gets coated with {avy.anusContents} that you eagerly swallow before pushing the tongue deeper and deeper, trying to clean Avy.")
+			saynn("Your tongue gets coated with all sorts of lewd stuff that you eagerly swallow before pushing the tongue deeper and deeper, trying to clean Avy.")
 
 		saynn("Very soon Avy's body begins to respond with uncontrollable spasms. Unable to hold back any longer, she succumbs to the overwhelming pleasure, her body shivering while waves of pleasure flow through her. Her muffled moans are followed by her "+str("caged up cock throbbing inside its contains and pushing a steady flow of cum through the little hole in the cage. All of it ends up marking her own fur." if isCaged else "canine cock throbbing and pulsating before a steady flow of cum spawns from the tip and drips down the shaft, marking her own fur.")+" A completely hands-free orgasm.")
 
@@ -669,7 +669,7 @@ func _react(_action: String, _args):
 
 	if(_action == "start_freeuse_npc"):
 		getCharacter("avy").lustStateFullyUndress()
-		runScene("GenericSexScene", [npcID, "avy", SexType.SlutwallSex], "generic_sex_scene_avy")
+		runScene("GenericSexScene", [npcID, "avy", SexType.SlutwallSex, {SexMod.DisableDynamicJoiners:true}], "generic_sex_scene_avy")
 		removeCharacter(npcID)
 		npcID = ""
 		setState("")

@@ -38,23 +38,48 @@ func _initScene(_args = []):
 
 func _run():
 	if(state == ""):
+		setCharactersEasyList(sexEngine.getCharIDList())
 		sexEngine.playAnimation()
-		saynn(sexEngine.getFinalText())
+		saynn(sexEngine.getFinalOutput())
 		
-		if(sexEngine.hasSexEnded()):
-			pass
-		else:
+		if(!sexEngine.hasSexEnded()):
+			if(sexEngine.isDom("pc")):
+				addExtraButtonAt(4, "END SEX", "Enough fun for now", "stopsex")
+			else:
+				addExtraButtonAt(4, "QUICK SEX", "Simulate the sex for a while until it ends", "simulatesex")
+			var canSelectTarget:bool = sexEngine.canSwitchPCTarget()
+			if(canSelectTarget):
+				addExtraButtonAt(3, "TARGET", "Switch the target of your new activities", "switchtarget")
+			
+			var canToggleDynJoiners:bool = sexEngine.canToggleDynamicJoiners()
+			if(canToggleDynJoiners):
+				if(sexEngine.didPCAllowDynamicJoiners()):
+					addExtraButton("Disallow joiners", "Disallow people around you from dynamically joining the sex.", "toggle_dynamic_join")
+				else:
+					addExtraButton("Allow joiners", "Allow people around you to join the sex.", "toggle_dynamic_join")
+			
+			if(sexEngine.canChooseDomAutonomy()):
+				if(!sexEngine.isDomAutonomyEnabled()):
+					addExtraButton("Enable dom autonomy", "Allow other doms to do things with the sub", "toggle_dom_autonomy")
+				else:
+					addExtraButton("Disable dom autonomy", "Disallow other doms to do things with the sub", "toggle_dom_autonomy")
+			
 			if(currentCategory != []):
 				addButton("Back", "Back to the previous menu", "backbutton")
+				if(GM.ui.getCurrentPage() > 0):
+					addExtraButton("Back", "Back to the previous menu", "backbutton")
 			
-			for domID in sexEngine.getDomIDs():
+				
+			var theTargetID:String = sexEngine.getPCTarget()
+			for domID in sexEngine.getDoms():
 				var domInfo = sexEngine.getDomInfo(domID)
-				sayn(domInfo.getInfoStringFinal())
-			for subID in sexEngine.getSubIDs():
+				sayn(domInfo.getInfoStringFinal(canSelectTarget && theTargetID==domID))
+			for subID in sexEngine.getSubs():
 				var subInfo = sexEngine.getSubInfo(subID)
-				saynn(subInfo.getInfoStringFinal())
+				sayn(subInfo.getInfoStringFinal(canSelectTarget && theTargetID==subID))
+			sayn("")
 
-			var theActions = sexEngine.getActions()
+			var theActions := sexEngine.getActionsForCharID("pc", true)
 			for actionInfo in theActions:
 				var actionCategory = []
 				if("category" in actionInfo):
@@ -71,8 +96,8 @@ func _run():
 			addCategoryButtons(theActions)
 			
 			#addButton("Process", "Process", "processTurn")
-			
-		if(sexEngine.hasSexEnded()):
+		
+		else:
 			if(sexEngine.canKeepItemsAfterSex()):
 				var itemNames = []
 				var itemsCanRecover = sexEngine.getRecovarableItemsAfterSex()
@@ -85,16 +110,26 @@ func _run():
 				addButton("LEAVE", "Just leave", "endthescene")
 			else:
 				addButton("LEAVE", "The sex has ended", "endthescene")
-		else:
-			if(sexEngine.isDom("pc")):
-				addButtonAt(14, "END SEX", "Enough fun for now", "stopsex")
-			else:
-				addButtonAt(14, "QUICK SEX", "Simulate the sex for a while until it ends", "simulatesex")
-
 
 func _react(_action: String, _args):
 	if(_action == "stopsex"):
 		sexEngine.endSex()
+		return
+	
+	if(_action == "toggle_dom_autonomy"):
+		sexEngine.toggleDomAutonomy()
+		if(sexEngine.isDomAutonomyEnabled()):
+			addMessage("Other doms now have action autonomy.")
+		else:
+			addMessage("Other doms won't do any new actions anymore.")
+		return
+	
+	if(_action == "toggle_dynamic_join"):
+		sexEngine.toggleDynamicJoiners()
+		if(sexEngine.didPCAllowDynamicJoiners()):
+			addMessage("Pawns around you might decide to join now.")
+		else:
+			addMessage("Pawns around you will no longer join.")
 		return
 	
 	if(_action == "recoverandleave"):
@@ -106,7 +141,7 @@ func _react(_action: String, _args):
 		var turns = 100
 		while(!sexEngine.hasSexEnded() && turns > 0):
 			turns -= 1
-			sexEngine.doAction(sexEngine.getActions()[0])
+			sexEngine.doAction({id="auto"})
 			processTime(60)
 			updateDomsAndSubs()
 		sexEngine.endSex()
@@ -122,6 +157,9 @@ func _react(_action: String, _args):
 	
 	if(_action == "backbutton"):
 		currentCategory.pop_back()
+		return
+	if(_action == "switchtarget"):
+		sexEngine.switchPCTarget()
 		return
 	
 	if(_action == "pickcategory"):

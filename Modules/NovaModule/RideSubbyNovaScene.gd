@@ -17,7 +17,7 @@ func _run():
 
 		saynn("You push Nova’s stun baton out of the way and begin stripping her out of her armor, all the pieces are connected with belts and electromagnetic locks but the generator that powers it all is out of charge so you can freely just yank them off, leaving the guard in her black skin-tight suit. You notice a bulge where her crotch is and bite your lip.")
 
-		saynn("[say=nova]If you wanted my cock you could have just asked, sweetie[/say]")
+		saynn("[say=nova]If you wanted my cock you could have just asked, sweetie.[/say]")
 
 		saynn("[say=pc]But that’s no fun~ I like being in control.[/say]")
 
@@ -37,7 +37,7 @@ func _run():
 
 		saynn("You quickly realize how to make it more hot, you straddle the herm, squeezing her cock between your thighs and then go through her things, finding a pair of handcuffs and a ball gag. She protests but you catch her wrists and cuff them together before shoving a ball into her mouth, gagging and restraining her. She tries to say something but it comes out very muffled.")
 
-		saynn("[say=pc]You can mumble and drool instead[/say]")
+		saynn("[say=pc]You can mumble and drool instead.[/say]")
 
 		saynn("A bright blush appears on her cheeks, her eyes look horny and subby. You begin teasing her cock, slowly grinding your cunt against its length and pressing it into her belly, Nova immediately reacts by breathing deeply, her cock quickly gets hard, it’s pointy tip leaking a bit of salty precum. But it also turns you on as well, your pussy spreading female juices across the herm’s shaft as you go back and forth in a slow loop, your paws land on Nova’s big breasts and grope them.")
 
@@ -171,7 +171,7 @@ func _run():
 		elif(GM.pc.hasPenis()):
 			saynn("Your own cock explodes with cum too, showering the husky with it, leaving a huge mess on her breasts and face in the process while she can’t even argue about it with that ball gag stuffed into her mouth. Not that she would anyway, she looks spaced out after what happened.")
 
-		saynn("You slowly calm down from the incredibly intense orgasm. You can’t stop breathing heavily and husky too.")
+		saynn("You slowly calm down from the incredibly intense orgasm. You can’t stop breathing heavily, just like the husky.")
 
 		saynn("[say=pc]I’m such a slut for knots~[/say]")
 

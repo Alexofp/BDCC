@@ -14,4 +14,16 @@ static func getAllForDatapackCharacter():
 	return [Inmate, Guard, Nurse, Engineer]
 
 static func getName(charType):
-	return str(charType)
+	if charType == Generic:
+		return "Generic"
+	elif charType == Inmate:
+		return "Inmate"
+	elif charType == Guard:
+		return "Guard"
+	elif charType == Nurse:
+		return "Nurse"
+	elif charType == Engineer:
+		return "Engineer"
+	else:
+		return "Error"
+

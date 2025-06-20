@@ -137,6 +137,9 @@ const database = {
 	},
 	
 	
+	"soft": {
+		DBText: "Soft",
+	},
 	"breedable": {
 		DBText: "Breedable",
 	},
@@ -177,6 +180,144 @@ const database = {
 	},
 	"cumdump": {
 		DBText: "Cum dump",
+	},
+	
+	"taken": {
+		DBText: "Taken",
+	},
+	"property_of_all": {
+		DBText: "Property of All",
+	},
+	"meattoy": {
+		DBText: "Meat Toy",
+	},
+	"damaged_goods": {
+		DBText: "Damaged Goods",
+	},
+	"for_sale": {
+		DBText: "For Sale",
+	},
+	"trash_pup": {
+		DBText: "Trash Pup",
+	},
+	"holetoy": {
+		DBText: "Hole Toy",
+	},
+	"usedgoods": {
+		DBText: "Used Goods",
+	},
+	"meat": {
+		DBText: "Meat",
+	},
+	"pawn": {
+		DBText: "Pawn",
+	},
+	"broken_toy": {
+		DBText: "Broken Toy",
+	},
+	"doll": {
+		DBText: "Doll",
+	},
+	"trashslut": {
+		DBText: "Trash Slut",
+	},
+	"broken": {
+		DBText: "Broken",
+	},
+	"plaything": {
+		DBText: "Plaything",
+	},
+	"brokenpet": {
+		DBText: "Broken pet",
+	},
+	"lickthis": {
+		DBText: "Lick this"
+	},
+	"bitehere": {
+		DBText: "Bite here"
+	},
+	"scratchhere": {
+		DBText: "Scratch here"
+	},
+	"kisshere": {
+		DBText: "Kiss here"
+	},
+	"cumwipe": {
+		DBText: "Cum wipe"
+	},
+	"cumaddict": {
+		DBText: "Cum addict"
+	},
+	"dirtyslave": {
+		DBText: "Dirty Slave"
+	},
+	"cocktease": {
+		DBText: "Cock Tease"
+	},
+	"cockaddict": {
+		DBText: "Cock addict"
+	},
+	"ownme": {
+		DBText: "Own me"
+	},
+	"poundme": {
+		DBText: "Pound me"
+	},
+	"fuckpuppet": {
+		DBText: "Fuck Puppet"
+	},
+	"cumvessel": {
+		DBText: "Cum Vessel"
+	},
+	"holeforhire": {
+		DBText: "Hole For Hire"
+	},
+	"wetpussy": {
+		DBText: "Wet Pussy"
+	},
+	"slutslave": {
+		DBText: "Slut Slave"
+	},
+	"cockhungry": {
+		DBText: "Cock-hungry"
+	},
+	"gapevme": {
+		DBText: "Gape v me",
+		DBZoneWhitelist: [BodyWritingsZone.LowerAbdomen, BodyWritingsZone.LowerBack, BodyWritingsZone.ButtcheekLeft, BodyWritingsZone.ButtcheekRight],
+	},
+	"cumdripper": {
+		DBText: "Cum dripper"
+	},
+	"fuckjunkie": {
+		DBText: "Fuck Junkie"
+	},
+	"cumcovered": {
+		DBText: "Cum Covered"
+	},
+	"uselesscunt": {
+		DBText: "Useless Cunt"
+	},
+	"cumwhore": {
+		DBText: "Cum Whore"
+	},
+	"punishmehard": {
+		DBText: "Punish Me Hard"
+	},
+	"tiedandused": {
+		DBText: "Tied & Used"
+	},
+	"milkmehard": {
+		DBText: "Milk Me Hard",
+		DBZoneWhitelist: [BodyWritingsZone.Breasts],
+	},
+
+	"caged": {
+		DBText: "Caged",
+		DBZoneWhitelist: [BodyWritingsZone.LowerAbdomen],
+	},
+	"cageme": {
+		DBText: "Cage me",
+		DBZoneWhitelist: [BodyWritingsZone.LowerAbdomen],
 	},
 	
 	

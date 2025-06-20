@@ -12,7 +12,7 @@ func initArgs(_args:Array):
 func applyEffect(_data:Dictionary) -> Dictionary:
 	var oldThickness:int = _data["thickness"] if _data.has("thickness") else 50
 	if(_data.has("thickness")):
-		if(_data["thickness"] < 150):
+		if(_data["thickness"] < 150 || howMuch < 0):
 			_data["thickness"] += howMuch
 			
 			if(_data["thickness"] > 150):

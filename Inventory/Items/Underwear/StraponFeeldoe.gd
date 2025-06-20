@@ -25,6 +25,9 @@ func getStraponPleasureForDom():
 func getCasualName():
 	return "feeldoe strapon"
 
+func getLewdStraponName() -> String:
+	return RNG.pick(["feeldoe strapon", "double-edged strapon", "knotted strapon", "rubber canine cock"])
+
 func getPrice():
 	return 30
 
@@ -34,3 +37,8 @@ func generateFluids():
 
 func getInventoryImage():
 	return "res://Images/Items/strapons/feeldoe.png"
+
+func getStraponTraits() -> Dictionary:
+	return {
+		PartTrait.PenisKnot: true,
+	}

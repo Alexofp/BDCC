@@ -4,6 +4,10 @@ func _init():
 	id = "SubBasicActions"
 	startedByDom = false
 	startedBySub = true
+	
+	activityName = "Basic actions"
+	activityDesc = "Basic things that a sub can do"
+	activityCategory = []
 
 func getGoals():
 	return {
@@ -16,7 +20,7 @@ func getSupportedSexTypes():
 		SexType.SlutwallSex: true,
 	}
 
-func isStocksSex():
+func isStocksSex() -> bool:
 	return getSexEngine().getSexTypeID() == SexType.StocksSex
 
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
@@ -25,126 +29,82 @@ func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	var sub:BaseCharacter = _subInfo.getChar()
 	#var dom:BaseCharacter = _domInfo.getChar()
-	var actions = []
 	
-	if(!_sexEngine.hasTag(_subInfo.charID, SexActivityTag.PreventsSubTeasing) && !_sexEngine.hasTag(_subInfo.charID, SexActivityTag.MouthUsed)):
-		actions.append({
-			name = "Tease",
-			desc = "Tease them",
-			args = ["tease"],
-			score = _subInfo.getComplyScore() * 0.1 + _subInfo.getResistScore() * 0.05 + max(0.0, _subInfo.personalityScore({PersonalityStat.Impatient: 0.1})),
-			category = getCategory(),
-			#chance = getApologySuccessChance(_domInfo, _subInfo),
-		})
+	if(!_sexEngine.hasTag(_subInfo.charID, SexActivityTag.PreventsSubTeasing) && !_sexEngine.hasTag(_subInfo.charID, SexActivityTag.HavingSex) && !_sexEngine.hasTag(_subInfo.charID, SexActivityTag.VaginaPenetrated)&& !_sexEngine.hasTag(_subInfo.charID, SexActivityTag.AnusPenetrated) && !_sexEngine.hasTag(_subInfo.charID, SexActivityTag.MouthUsed)):
+		var teaseScore:float = _subInfo.getComplyScore() * 0.1 + _subInfo.getResistScore() * 0.05 + max(0.0, _subInfo.personalityScore({PersonalityStat.Impatient: 0.1}))
+		addStartAction(["tease"], "Tease", "Tease them", teaseScore, {A_CATEGORY: []})
 		
-	var resistScore = _subInfo.getResistScore() * (0.15 + _subInfo.personalityScore({PersonalityStat.Subby: -0.1, PersonalityStat.Mean: 0.1, PersonalityStat.Coward: -0.05}))
-		
+	var resistScore:float = _subInfo.getResistScore() * (0.15 + _subInfo.personalityScore({PersonalityStat.Subby: -0.1, PersonalityStat.Mean: 0.1, PersonalityStat.Coward: -0.05}))
 	if(!_sexEngine.hasTag(_subInfo.charID, SexActivityTag.PreventsSubViolence)):
-		if(getSexType() != SexType.SlutwallSex):
-			if(!_subInfo.getChar().hasBoundArms() && !isStocksSex()):
-				actions.append({
-					name = "Punch",
-					desc = "Hit them!",
-					args = ["punch"],
-					score = resistScore,
-					category = getCategory(),
-					#chance = getApologySuccessChance(_domInfo, _subInfo),
-				})
+		if(_sexEngine.getSexTypeID() != SexType.SlutwallSex):
+			if(!_subInfo.getChar().hasBoundArms() && _sexEngine.getSexTypeID() != SexType.StocksSex):
+				addStartAction(["punch"], "Punch", "Hit them!", resistScore, {A_CATEGORY:[]})
 			elif(!_subInfo.getChar().hasBoundLegs()):
-				actions.append({
-					name = "Kick",
-					desc = "Hit them!",
-					args = ["kick"],
-					score = resistScore/1.5,
-					category = getCategory(),
-					#chance = getApologySuccessChance(_domInfo, _subInfo),
-				})
+				addStartAction(["kick"], "Kick", "Hit them!", resistScore/1.5, {A_CATEGORY: []})
 	
 	if(sub.getInventory().hasRemovableRestraintsNoLockedSmartlocks() && sub.getStamina() > 0):
-		actions.append({
-			name = "Restraints",
-			desc = "Struggle against your restraints",
-			args = ["struggle"],
-			score = _subInfo.getResistScore() - _subInfo.getComplyScore()*_subInfo.fetishScore({Fetish.Bondage: 1.0}),
-			category = getCategory(),
-		})
+		var struggleScore:float = _subInfo.getResistScore() - _subInfo.getComplyScore()*_subInfo.fetishScore({Fetish.Bondage: 1.0})
+		addStartAction(["struggle"], "Restraints", "Struggle against your restraints", struggleScore, {A_CATEGORY: []})
 	
 	if(_domInfo.isAngry() && !_sexEngine.hasTag(_subInfo.charID, SexActivityTag.MouthUsed)):
-		actions.append({
-			name = "Apologize",
-			desc = "Try to calm them down",
-			args = ["apologize"],
-			score = _subInfo.getAboutToPassOutScore() + _subInfo.personalityScore({PersonalityStat.Coward: 0.2, PersonalityStat.Brat: -0.1, PersonalityStat.Subby: 0.2}),
-			category = getCategory(),
-			chance = getApologySuccessChance(_domInfo, _subInfo),
-		})
-	
-	return actions
+		var apologizeScore:float = _subInfo.getAboutToPassOutScore() + _subInfo.personalityScore({PersonalityStat.Coward: 0.2, PersonalityStat.Brat: -0.1, PersonalityStat.Subby: 0.2})
+		addStartAction(["apologize"], "Apologize", "Try to calm them down", apologizeScore, {A_CATEGORY: [], A_CHANCE: getApologySuccessChance(_sexEngine, _domInfo, _subInfo)})
 
-func getVisibleName():
-	return "Basic actions"
-
-func getCategory():
-	return []
-
-func getDomTags():
-	return []
-
-func getSubTags():
-	return []
-
-func getApologySuccessChance(_domInfo, _subInfo):
+func getApologySuccessChance(_sexEngine, _domInfo, _subInfo) -> float:
 	var theChance = 90.0 - _domInfo.personalityScore({PersonalityStat.Mean: 1.0}) * 20.0
 	if(_subInfo.getChar().isGagged()):
 		theChance *= 0.5
-	if(getSexType() == SexType.SlutwallSex):
+	if(_sexEngine.getSexTypeID() == SexType.SlutwallSex):
 		theChance *= 0.6
 	return clamp(theChance, 5, 100)
 
 func startActivity(_args):
-	state = ""
-	var actionID = _args[0]
+	var actionID:String = _args[0]
 	
 	if(actionID in ["struggle"]):
 		endActivity()
 		var sub = getSub()
-		var struggleData:Dictionary = sub.doStruggleOutOfRestraints(subInfo.isScared(), false)
+		var struggleData:Dictionary = sub.doStruggleOutOfRestraints(getSubInfo().isScared(), false)
 		if(struggleData.empty()):
 			return
 		
-		var text = struggleData["text"] if struggleData.has("text") else "[color=red]ERROR? No struggle text provided[/color]"
+		var text:String = struggleData["text"] if struggleData.has("text") else "[color=red]ERROR? No struggle text provided[/color]"
 		
 		if(struggleData.has("lust") && struggleData["lust"] > 0):
-			subInfo.addLust(struggleData["lust"])
+			getSubInfo().addLust(struggleData["lust"])
 		if(struggleData.has("pain") && struggleData["pain"] > 0):
-			subInfo.addPain(struggleData["pain"])
-			subInfo.addFear(struggleData["pain"]/40.0)
+			getSubInfo().addPain(struggleData["pain"])
+			getSubInfo().addFear(struggleData["pain"]/40.0)
 		if(struggleData.has("stamina") && struggleData["stamina"] != 0):
 			sub.addStamina(-struggleData["stamina"])
 		
-		return {text=text, subSay=subReaction(SexReaction.ResistingRestraints, 30)}
+		addText(text)
+		reactSub(SexReaction.ResistingRestraints, [30])
+		return
 	
 	if(actionID in ["apologize"]):
 		endActivity()
-		var text = RNG.pick([
+		var text:String = RNG.pick([
 			"{sub.You} {sub.youVerb('try', 'tries')} to apologize.",
 			"{sub.You} {sub.youVerb('attempt')} to apologize for {sub.yourHis} actions.",
 		])
-		if(!RNG.chance(getApologySuccessChance(domInfo, subInfo))):
+		if(!RNG.chance(getApologySuccessChance(getSexEngine(), getDomInfo(), getSubInfo()))):
 			if(RNG.chance(30)):
-				domInfo.addAnger(0.1)
+				getDomInfo().addAnger(0.1)
 				text += RNG.pick([
 					" That only made {dom.youHim} more angry.",
 					" That only made {dom.youHim} more eager for violence.",
 				])
 		else:
-			domInfo.addAnger(-0.3)
+			getDomInfo().addAnger(-0.3)
 		
-		return {text = text, subSay=subReaction(SexReaction.Apologizing)}
+		addText(text)
+		reactSub(SexReaction.Apologizing)
+		return
 	
 	if(actionID in ["tease"]):
 		endActivity()
-		var possible = [
+		var possible:Array = [
 			"{sub.You} {sub.youVerb('tease')} {dom.youHim} with {sub.yourHis} body.",
 		]
 		if(isStocksSex()):
@@ -179,15 +139,16 @@ func startActivity(_args):
 					"{sub.You} {sub.youVerb('sway')} {sub.yourHis} tail seductively at {dom.youHim}.",
 				])
 			
-		var text = RNG.pick(possible)
+		var text:String = RNG.pick(possible)
 		
 		affectDom(1.0, 0.2, 0.0)
-		return {text=text,
-		subSay=subReaction(SexReaction.Teasing)}
+		addText(text)
+		reactSub(SexReaction.Teasing)
+		return
 		
 	if(actionID in ["punch", "kick"]):
 		endActivity()
-		var text
+		var text:String = ""
 		if(actionID == "punch"):
 			text = RNG.pick([
 				"{sub.You} {sub.youVerb('punch', 'punches')} {dom.youHim}!",
@@ -196,9 +157,11 @@ func startActivity(_args):
 			text = RNG.pick([
 				"{sub.You} {sub.youVerb('kick')} {dom.youHim}!",
 			])
-		domInfo.addAnger(0.2 + 0.1 * domInfo.fetishScore({Fetish.Masochism: -1.0}))
+		getDomInfo().addAnger(0.2 + 0.1 * getDomInfo().fetishScore({Fetish.Masochism: -1.0}))
 		var howMuchPainAdded = RNG.randi_range(4, 6)
-		domInfo.addPain(howMuchPainAdded)
-		sendSexEvent(SexEvent.PainInflicted, subID, domID, {pain=howMuchPainAdded,isDefense=true,intentional=true})
+		getDomInfo().addPain(howMuchPainAdded)
+		sendSexEvent(SexEvent.PainInflicted, SUB_0, DOM_0, {pain=howMuchPainAdded,isDefense=true,intentional=true})
 		
-		return {text=text, subSay=subReaction(SexReaction.ActivelyResisting, 50)}
+		addText(text)
+		reactSub(SexReaction.ActivelyResisting, [50])
+		return

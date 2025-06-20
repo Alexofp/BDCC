@@ -28,7 +28,6 @@ var skillsHolder: SkillsHolder
 var lustInterests: LustInterests
 var fetishHolder: FetishHolder
 var personality: Personality
-var sexVoice: SexVoice
 var bodyFluids: Fluids
 
 # Bodypart stuff
@@ -43,10 +42,8 @@ var fightingState = "" # dodge, block, defocus
 # pregnancy stuff
 var menstrualCycle: MenstrualCycle
 
-var timedBuffs: Array = []
-var timedBuffsDurationSeconds: int = 0
-var timedBuffsTurns: Array = []
-var timedBuffsDurationTurns: int = 0
+var timedBuffs: Array = [] # [ [buff, seconds], [buff, seconds], ... ]
+var timedBuffsTurns: Array = [] # [ [buff, turns], [buff, turns], ... ]
 
 # Skin data
 var pickedSkin:String = "EmptySkin"
@@ -82,7 +79,6 @@ func _ready():
 	fetishHolder.setCharacter(self)
 	personality = Personality.new()
 	personality.setCharacter(self)
-	createVoice()
 	bodyFluids = Fluids.new()
 
 func getID():
@@ -244,11 +240,24 @@ func updateEffectPanel(panel: StatusEffectsPanel):
 		var effect = statusEffects[effectID]
 		panel.addBattleEffect(effect.getIconColor(), effect.getEffectName(), effect.getVisisbleDescription(), effect.getEffectImage(), effect.shouldHaveWideTooltip())
 
+func processTimedBuffs(_seconds:int):
+	if(timedBuffs.empty() || _seconds <= 0):
+		return
+	var newTimedBuffs:Array = []
+	for buffEntry in timedBuffs:
+		buffEntry[1] -= _seconds
+		if(buffEntry[1] > 0):
+			newTimedBuffs.append(buffEntry)
+	timedBuffs = newTimedBuffs
+
 func processBattleTurn():
-	if(timedBuffsDurationTurns > 0):
-		timedBuffsDurationTurns -= 1
-		if(timedBuffsDurationTurns <= 0):
-			timedBuffsTurns.clear()
+	if(!timedBuffsTurns.empty()):
+		var newTimedBuffs:Array = []
+		for buffEntry in timedBuffsTurns:
+			buffEntry[1] -= 1
+			if(buffEntry[1] > 0):
+				newTimedBuffs.append(buffEntry)
+		timedBuffsTurns = newTimedBuffs
 	
 	for effectID in statusEffects.keys():
 		var effect = statusEffects[effectID]
@@ -265,7 +274,6 @@ func afterFightEnded():
 	print(getName()+" my fight has ended")
 	
 	timedBuffsTurns.clear()
-	timedBuffsDurationTurns = 0
 	
 	for effectID in statusEffects.keys():
 		var effect = statusEffects[effectID]
@@ -734,6 +742,10 @@ func getBreastsSize() -> int:
 	return getBodypart(BodypartSlot.Breasts).getSize()
 
 func getFluidType(fluidSource):
+	var theCustomType:String = getCustomFluidType(fluidSource)
+	if(theCustomType != ""):
+		return theCustomType
+	
 	if(fluidSource == FluidSource.Penis):
 		if(hasBodypart(BodypartSlot.Penis)):
 			return getBodypart(BodypartSlot.Penis).getFluidType(fluidSource)
@@ -2090,13 +2102,6 @@ func afterSexEnded(sexInfo):
 		
 	updateAppearance()
 
-func createVoice():
-	sexVoice = SexVoice.new()
-	sexVoice.setCharacter(self)
-
-func getVoice() -> SexVoice:
-	return sexVoice
-
 func getFirstItemThatCoversBodypart(bodypartSlot):
 	return getInventory().getFirstItemThatCoversBodypart(bodypartSlot)
 	
@@ -2116,6 +2121,14 @@ func getWornPenisPump():
 
 func isWearingCondom():
 	return getWornCondom() != null
+	
+func isWearingNonEmptyCondom() -> bool:
+	var theCondom = getWornCondom()
+	if(theCondom == null):
+		return false
+	if(!theCondom.getFluids() || theCondom.getFluids().isEmpty()):
+		return false
+	return true
 
 func getArousal() -> float:
 	return clamp(arousal, 0.0, 1.0)
@@ -2135,7 +2148,7 @@ func addConsciousness(newc:float):
 	consciousness = clamp(consciousness, 0.0, 1.0)
 
 func isLewdHorny() -> bool:
-	return getLustLevel() >= 0.5 || getLust() >= 50 || getArousal() >= 0.4
+	return getLustLevel() >= 0.5 || getLust() >= 50 || getArousal() >= 0.3
 
 func isReadyToPenetrate() -> bool:
 	return isLewdHorny() || isWearingStrapon()
@@ -2247,64 +2260,106 @@ func processSexTurn():
 		
 	#buffsHolder.calculateBuffs()
 
-func addTimedBuffs(buffs: Array, seconds):
-	for newbuff in buffs:
-		var foundBuff = false
-		for oldbuff in timedBuffs:
-			if(newbuff.id == oldbuff.id && oldbuff.canCombine(newbuff)):
-				oldbuff.combine(newbuff)
-				foundBuff = true
-				break
-		if(!foundBuff):
-			timedBuffs.append(newbuff)
+func addTimedBuff(newbuff:BuffBase, seconds:int):
+	for oldbuffEntry in timedBuffs:
+		var oldbuff:BuffBase = oldbuffEntry[0]
+		if(newbuff.id == oldbuff.id && oldbuff.canCombine(newbuff)):
+			oldbuff.combine(newbuff)
+			oldbuffEntry[1] = Util.maxi(oldbuffEntry[1], seconds)
+			return
 	
-	if(seconds > timedBuffsDurationSeconds):
-		timedBuffsDurationSeconds = seconds
+	timedBuffs.append([newbuff, seconds])
 
-func addTimedBuffsTurns(buffs: Array, turns):
+func addTimedBuffs(buffs: Array, seconds:int):
+	for newbuff in buffs:
+		addTimedBuff(newbuff, seconds)
+
+func addTimedBuffTurns(newbuff:BuffBase, turns:int):
+	#TODO: need a better way to check if a character is in a fight
+	if(!GM.main.supportsBattleTurns()):
+		return
+	
+	for oldbuffEntry in timedBuffsTurns:
+		var oldbuff:BuffBase = oldbuffEntry[0]
+		if(newbuff.id == oldbuff.id && oldbuff.canCombine(newbuff)):
+			oldbuff.combine(newbuff)
+			oldbuffEntry[1] = Util.maxi(oldbuffEntry[1], turns)
+			return
+	
+	timedBuffsTurns.append([newbuff, turns])
+
+func addTimedBuffsTurns(buffs: Array, turns:int):
+	#TODO: need a better way to check if a character is in a fight
 	if(!GM.main.supportsBattleTurns()):
 		return
 	
 	for newbuff in buffs:
-		var foundBuff = false
-		for oldbuff in timedBuffsTurns:
-			if(newbuff.id == oldbuff.id && oldbuff.canCombine(newbuff)):
-				oldbuff.combine(newbuff)
-				foundBuff = true
-				break
-		if(!foundBuff):
-			timedBuffsTurns.append(newbuff)
-	
-	if(turns > timedBuffsDurationTurns):
-		timedBuffsDurationTurns = turns
+		addTimedBuffTurns(newbuff, turns)
 
 func updateNonBattleEffects():
 	buffsHolder.calculateBuffs()
 
-func saveBuffsData(buffs):
-	var data = []
+func getSortedBuffsDataByTime(theBuffs:Array) -> Dictionary:
+	var result:Dictionary = {}
 	
-	for buff in buffs:
+	for buffEntry in theBuffs:
+		if(!result.has(buffEntry[1])):
+			result[buffEntry[1]] = [buffEntry[0]]
+		else:
+			result[buffEntry[1]].append(buffEntry[0])
+	
+	return result
+
+func getTimedBuffsTurns() -> Array:
+	var result:Array = []
+	for buffEntry in timedBuffsTurns:
+		result.append(buffEntry[0])
+	return result
+
+func getTimedBuffs() -> Array:
+	var result:Array = []
+	for buffEntry in timedBuffs:
+		result.append(buffEntry[0])
+	return result
+
+func saveBuffsData(buffs):
+	var data:Array = []
+	
+	for buffEntry in buffs:
+		var buff:BuffBase = buffEntry[0]
 		var buffData = {
 			"id": buff.id,
 			"buffdata": buff.saveData(),
+			"time": buffEntry[1],
 		}
 		data.append(buffData)
 	return data
 
 func loadBuffsData(data):
-	var result = []
+	var result:Array = []
 	
 	for buffFullData in data:
+		if(!buffFullData.has("time")):
+			continue
 		var id = SAVE.loadVar(buffFullData, "id", "error")
 		var buffdata = SAVE.loadVar(buffFullData, "buffdata", {})
+		var buffTime:int = SAVE.loadVar(buffFullData, "time", 0)
 		
 		var buff: BuffBase = GlobalRegistry.createBuff(id)
 		buff.loadData(buffdata)
-		result.append(buff)
+		result.append([buff, buffTime])
 	return result
 
-func bodypartHasTrait(bodypartSlot, traitID):
+func bodypartHasTrait(bodypartSlot, traitID, includeEquipment:bool = true):
+	if(includeEquipment):
+		if(bodypartSlot == BodypartSlot.Penis && isWearingStrapon()):
+			var theStrapon = getWornStrapon()
+			if(theStrapon.has_method("getStraponTraits")):
+				var theStraponTraits:Dictionary = theStrapon.getStraponTraits()
+				if(theStraponTraits.has(traitID) && theStraponTraits[traitID]):
+					return true
+			return false # Strapons override your penis' traits
+	
 	if(!hasBodypart(bodypartSlot)):
 		return false
 	
@@ -2408,6 +2463,15 @@ func canWearStrapon():
 	if(getInventory().hasSlotEquipped(InventorySlot.Strapon)):
 		return false
 	
+	return true
+
+func canWearOrWearingStrapon() -> bool:
+	if(isWearingStrapon()):
+		return true
+	if(hasPenis() && !isWearingChastityCage()):
+		return false
+	if(getInventory().hasSlotEquipped(InventorySlot.Strapon)):
+		return false
 	return true
 
 func hasStrapons():
@@ -2624,6 +2688,8 @@ func applyRandomSkin():
 	var possibleSkins = []
 	for speciesOne in species:
 		var theSpecies = GlobalRegistry.getSpecies(speciesOne)
+		if(!theSpecies):
+			continue
 		var skinType = theSpecies.getSkinType()
 		
 		for skinID in GlobalRegistry.getSkinsAllKeys():
@@ -2631,7 +2697,7 @@ func applyRandomSkin():
 			var fittingSkinTypes = theSkin.getFittingSkinTypes()
 			if(fittingSkinTypes is Dictionary && fittingSkinTypes.has(skinType)):
 				possibleSkins.append([skinID, fittingSkinTypes[skinType]])
-		
+	
 	var newSkin = RNG.pickWeightedPairs(possibleSkins)
 	
 	if(newSkin != null):
@@ -3321,6 +3387,14 @@ func isZoneOverstimulated(bodypartSlot) -> bool:
 	
 	return thePart.getSensitiveZone().isOverstimulated()
 
+func getZoneOverstimulation(bodypartSlot) -> float:
+	if(!hasBodypart(bodypartSlot)):
+		return 0.0
+	var thePart = getBodypart(bodypartSlot)
+	if(thePart.getSensitiveZone() == null):
+		return 0.0
+	return thePart.getSensitiveZone().getOverstimulation()
+
 func canZoneOrgasm(bodypartSlot) -> bool:
 	if(!hasBodypart(bodypartSlot)):
 		return false
@@ -3383,6 +3457,19 @@ func getSexGoalSubWeightModifier(_sexGoalID:String, _domID:String) -> float:
 	var theTFHolder = getTFHolder()
 	if(theTFHolder != null):
 		result *= theTFHolder.getSexGoalWeightModifier(_sexGoalID)
+	
+	var theNpcSlavery = getNpcSlavery()
+	if(theNpcSlavery):
+		result *= theNpcSlavery.getSexGoalWeightModifier(_sexGoalID)
+	
+	var theEnslaveQuest = getEnslaveQuest()
+	if(theEnslaveQuest):
+		result *= theEnslaveQuest.getSexGoalWeightModifier(_sexGoalID)
+	
+	var smartLocks:Array = getInventory().getAllSmartLocks()
+	for smartLock in smartLocks:
+		if(smartLock.id == SmartLock.SlutLock):
+			result *= smartLock.getSexGoalWeightModifier(_sexGoalID)
 	
 	return result
 

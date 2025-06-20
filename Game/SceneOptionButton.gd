@@ -1,6 +1,7 @@
 extends Button
 
 var savedKey = -1
+var requiresControl:bool = false
 
 signal pressedActually
 var showingDescription = false
@@ -16,14 +17,15 @@ func _ready():
 	if(minButtonSize > 0):
 		rect_min_size = Vector2(0, 20 + minButtonSize * 16)
 
-func setShortcutPhysicalScancode(code):
+func setShortcutPhysicalScancode(code, reqControl:bool = false):
 	var newShortcut = ShortCut.new()
 	var inputKey = InputEventKey.new()
 	inputKey.physical_scancode = code
+	inputKey.control = reqControl
 	newShortcut.shortcut = inputKey
 	shortcut = newShortcut
 
-	$KeyLabel.text = OS.get_scancode_string(code)
+	$KeyLabel.text = ("ctrl+" if reqControl else "")+OS.get_scancode_string(code)
 	savedKey = code
 
 #func _unhandled_input(event):

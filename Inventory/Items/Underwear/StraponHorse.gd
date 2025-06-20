@@ -24,6 +24,9 @@ func getStraponLength():
 func getCasualName():
 	return "giant horsecock strapon"
 
+func getLewdStraponName() -> String:
+	return RNG.pick(["giant rubber horsecock", "horsecock strapon", "giant strapon", "giant flared-tip strapon", "huge rubber cock"])
+
 func getPrice():
 	return 50
 
@@ -33,3 +36,8 @@ func generateFluids():
 
 func getInventoryImage():
 	return "res://Images/Items/strapons/horse.png"
+
+func getStraponTraits() -> Dictionary:
+	return {
+		PartTrait.PenisFlare: true,
+	}

@@ -9,15 +9,20 @@ var resistanceFull:float = 0.0
 var fearFull:float = 0.0
 var obeyMode:bool = false
 
-func getInfoString():
+func getInfoString(_isSelected:bool = false) -> String:
 	var character = getChar()
 	
 	if(getConsciousness() <= 0.0):
+		if(_isSelected):
+			return "\\["+character.getName()+"\\]"+" is unconscious."
 		return character.getName()+" is unconscious."
 	
-	var text = ""
+	var text:String = ""
 	if(character != null):
-		text += character.getName()+". "
+		if(_isSelected):
+			text += "\\["+character.getName()+"\\]"+". "
+		else:
+			text += character.getName()+". "
 	text += "Resistance: "+str(Util.roundF(resistance*100))+"% "
 	text += "Fear: "+str(Util.roundF(fear*100))+"% "
 	text += "Arousal: "+str(Util.roundF(getArousal()*100))+"% "
@@ -39,7 +44,7 @@ func initFromPersonality():
 		var npcSlave = getChar().getNpcSlavery()
 		fear = npcSlave.getFear()
 
-func canDoActions():
+func canDoActions() -> bool:
 	if(getChar().getBuffsHolder().hasBuff(Buff.SpacedOutInSexBuff)):
 		return false
 	if(getConsciousness() <= 0.0):

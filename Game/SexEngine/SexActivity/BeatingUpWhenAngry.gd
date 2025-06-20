@@ -1,7 +1,13 @@
 extends SexActivityBase
 
+var ticks:int = 0
+
 func _init():
 	id = "BeatingUpWhenAngry"
+	
+	activityName = "Beat up"
+	activityDesc = "Start hitting them!"
+	activityCategory = ["Violence"]
 
 func getGoals():
 	return {
@@ -17,107 +23,71 @@ func getSupportedSexTypes():
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	if(_subInfo.isUnconscious()):
 		return -1.0
-	return _domInfo.getIsAngryScore() * 1.0 * max(0.1, 0.1 + _domInfo.personalityScore({PersonalityStat.Mean: 1.0})) - _subInfo.getAboutToPassOutScore() * _domInfo.fetishScore({Fetish.UnconsciousSex: -1.0})
+	var theScore:float = _domInfo.getIsAngryScore() * 1.0 * max(0.1, 0.1 + _domInfo.personalityScore({PersonalityStat.Mean: 1.0})) - _subInfo.getAboutToPassOutScore() * _domInfo.fetishScore({Fetish.UnconsciousSex: -1.0})
+	return min(theScore, 0.2)
 
-func getVisibleName():
-	return "Beat up"
-
-func getCategory():
-	return ["Violence"]
-
-func getDomTags():
-	return [SexActivityTag.HandsUsed]
-
-func getSubTags():
+func getTags(_indx:int) -> Array:
+	if(_indx == DOM_0):
+		return [SexActivityTag.HandsUsed]
 	return []
 
 func startActivity(_args):
-	state = ""
-	
-	return {
-		text = "{dom.You} {dom.youVerb('start')} beating {sub.you} up!",
-		domSay = domReaction(SexReaction.AboutToBeatUp, 100),
-		subSay = subReaction(SexReaction.AboutToBeatUp, 20),
-	}
+	addText("{dom.You} {dom.youVerb('start')} beating {sub.you} up!")
+	react(SexReaction.AboutToBeatUp)
 
-func processTurn():
-	if(state == ""):
-		subInfo.addFear(0.05)
-		affectSub(subInfo.fetishScore({Fetish.Masochism: 1.0}, -0.5), 0.1, -0.2, 0.0)
-		affectDom(domInfo.fetishScore({Fetish.Sadism: 0.5}, 0.5), 0.1, 0.0)
-		var howMuchAddPain = RNG.randi_range(4, 8)
-		subInfo.addPain(howMuchAddPain)
-		sendSexEvent(SexEvent.PainInflicted, domID, subID, {pain=howMuchAddPain,isDefense=false,intentional=true})
-		domInfo.addAnger(-0.1)
-		
-		var texts = [
+func init_processTurn():
+	ticks += 1
+	strike(DOM_0, SUB_0, STRIKE_NORMAL)
+	
+	var texts:Array = [
+		"{dom.You} {dom.youVerb('punch', 'punches')} {sub.youHim}.",
+		"{dom.You} {dom.youVerb('punch', 'punches')} {sub.youHim} violently.",
+		"{dom.You} {dom.youVerb('punch', 'punches')} {sub.yourHis} jaw.",
+		"{dom.You} {dom.youVerb('scratch', 'scratches')} {sub.youHim}.",
+		"{dom.You} {dom.youVerb('scratch', 'scratches')} {sub.youHim} helpless.",
+		"{dom.You} {dom.youVerb('scratch', 'scratches')} {sub.yourHis} neck.",
+		"{dom.You} {dom.youVerb('scratch', 'scratches')} {sub.yourHis} back.",
+		"{dom.You} {dom.youVerb('pull')} on {sub.yourHis} hair.",
+	]
+	if(getSexType() == SexType.SlutwallSex):
+		texts = [
 			"{dom.You} {dom.youVerb('punch', 'punches')} {sub.youHim}.",
 			"{dom.You} {dom.youVerb('punch', 'punches')} {sub.youHim} violently.",
-			"{dom.You} {dom.youVerb('punch', 'punches')} {sub.yourHis} jaw.",
+			"{dom.You} {dom.youVerb('squeeze', 'squeezes')} {sub.yourHis} ass painfully.",
 			"{dom.You} {dom.youVerb('scratch', 'scratches')} {sub.youHim}.",
 			"{dom.You} {dom.youVerb('scratch', 'scratches')} {sub.youHim} helpless.",
-			"{dom.You} {dom.youVerb('scratch', 'scratches')} {sub.yourHis} neck.",
-			"{dom.You} {dom.youVerb('scratch', 'scratches')} {sub.yourHis} back.",
-			"{dom.You} {dom.youVerb('pull')} on {sub.yourHis} hair.",
+			"{dom.You} {dom.youVerb('scratch', 'scratches')} {sub.yourHis} thighs.",
 		]
-		if(getSexType() == SexType.SlutwallSex):
-			texts = [
-				"{dom.You} {dom.youVerb('punch', 'punches')} {sub.youHim}.",
-				"{dom.You} {dom.youVerb('punch', 'punches')} {sub.youHim} violently.",
-				"{dom.You} {dom.youVerb('squeeze', 'squeezes')} {sub.yourHis} ass painfully.",
-				"{dom.You} {dom.youVerb('scratch', 'scratches')} {sub.youHim}.",
-				"{dom.You} {dom.youVerb('scratch', 'scratches')} {sub.youHim} helpless.",
-				"{dom.You} {dom.youVerb('scratch', 'scratches')} {sub.yourHis} thighs.",
-			]
-		
-		var text = []
-		var amount = RNG.randi_range(1, Util.mini(3, texts.size()))
-		for _i in range(amount):
-			text.append(RNG.grab(texts))
-		
-		if(RNG.chance(1)):
-			var damageText = damageSubClothes()
-			if(damageText != ""):
-				text.append(damageText)
-		
-		return {
-			text=Util.join(text, " "),
-			domSay = domReaction(SexReaction.BeatingUp, 30),
-			subSay = subReaction(SexReaction.BeatingUp, 30),
-			}
 	
-func getDomActions():
-	var actions = []
-	actions.append({
-			"id": "stop",
-			"score": 1.0 - domInfo.getIsAngryScore() + subInfo.getAboutToPassOutScore() * domInfo.fetishScore({Fetish.UnconsciousSex: 1.0}, 0.5),
-			"name": "Stop beating up",
-			"desc": "Enough violence",
-		})
-	actions.append({
-			"id": "hithard",
-			"score": domInfo.getIsAngryScore()*domInfo.fetishScore({Fetish.Masochism: 0.4}) - subInfo.getAboutToPassOutScore() * domInfo.fetishScore({Fetish.UnconsciousSex: 1.0}, 0.5),
-			"name": "Hit really hard",
-			"desc": "Make that bitch regret it",
-		})
-	return actions
+	var text:Array = []
+	var amount = RNG.randi_range(1, Util.mini(3, texts.size()))
+	for _i in range(amount):
+		text.append(RNG.grab(texts))
+	
+	if(RNG.chance(1)):
+		var damageText := damageClothes(SUB_0)
+		if(damageText != ""):
+			text.append(damageText)
+			
+	addText(Util.join(text, " "))
+	react(SexReaction.BeatingUp, [30.0, 30.0])
 
-func doDomAction(_id, _actionInfo):
-	if(_id == "stop"):
+func getActions(_indx:int):
+	if(_indx == DOM_0):
+		var stopScore:float = 1.0 - getDomInfo().getIsAngryScore() + getSubInfo().getAboutToPassOutScore() * fetish(DOM_0, Fetish.UnconsciousSex, 0.5)
+		if(ticks < 2):
+			stopScore *= 0.1
+		addAction("stop", stopScore, "Stop beating up", "Enough violence")
+		var hitHardScore:float = getDomInfo().getIsAngryScore()*fetish(DOM_0, Fetish.Masochism)*0.4 - getSubInfo().getAboutToPassOutScore() * fetish(DOM_0, Fetish.UnconsciousSex, 0.5)
+		addAction("hithard", hitHardScore, "Hit really hard", "Make that bitch regret it")
+
+func doAction(_indx:int, _actionID:String, _action:Dictionary):
+	if(_actionID == "stop"):
 		endActivity()
-		
-		return {
-			text = "{dom.You} {dom.youVerb('have', 'has')} stopped beating {sub.you} up.",
-		}
+		addText("{dom.You} {dom.youVerb('have', 'has')} stopped beating {sub.you} up.")
 	
-	if(_id == "hithard"):
-		affectSub(subInfo.fetishScore({Fetish.Masochism: 1.0}, -0.5), 0.1, -0.05, 0.0)
-		affectDom(domInfo.fetishScore({Fetish.Sadism: 0.5}, 0.5), 0.2, 0.0)
-		var howMuchAddPain = RNG.randi_range(15, 25)
-		subInfo.addPain(howMuchAddPain)
-		sendSexEvent(SexEvent.PainInflicted, domID, subID, {pain=howMuchAddPain,isDefense=false,intentional=true})
-		domInfo.addAnger(-0.2)
-		subInfo.addFear(0.3)
+	if(_actionID == "hithard"):
+		strike(DOM_0, SUB_0, STRIKE_FULLFORCE)
 		
 		var text = RNG.pick([
 			"{dom.You} {dom.youVerb('hit')} {sub.youHim} [b]really hard[/b].",
@@ -126,23 +96,24 @@ func doDomAction(_id, _actionInfo):
 		])
 		
 		if(RNG.chance(50)):
-			getSub().doWound(domID)
+			getSub().doWound(getDomID())
 		
 		if(RNG.chance(33)):
-			var damageText = damageSubClothes()
+			var damageText := damageClothes(SUB_0)
 			if(damageText != ""):
 				text += " "+(damageText)
 		
-		return {
-			text = text,
-			domSay = domReaction(SexReaction.BeatingUpHard, 100),
-			subSay = subReaction(SexReaction.BeatingUpHard, 20),
-		}
+		addText(text)
+		react(SexReaction.BeatingUpHard, [100.0, 40.0])
 
-func getSubActions():
-	var actions = []
+func saveData():
+	var data = .saveData()
+	
+	data["ticks"] = ticks
 
-	return actions
-
-func doSubAction(_id, _actionInfo):
-	return null
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	ticks = SAVE.loadVar(data, "ticks", 0)

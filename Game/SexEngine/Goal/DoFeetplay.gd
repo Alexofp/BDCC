@@ -31,7 +31,7 @@ func doFastSex(_sexEngine, _domInfo, _subInfo, _data):
 	elif(sub.hasReachableVagina()):
 		sub.cummedOnBy(sub.getID(), FluidSource.Vagina)
 	
-	sendSexEvent(_sexEngine, SexEvent.UniqueOrgasm, _domInfo, _subInfo, {orgasmType="feet"})
+	sendSexEvent(_sexEngine, SexEvent.UniqueOrgasm, _domInfo, _subInfo, {orgasmType=UniqueOrgasm.Feet})
 
 	if(RNG.chance(50)):
 		sendSexEvent(_sexEngine, SexEvent.PainInflicted, _domInfo, _subInfo, {pain=RNG.randi_range(1, 20),isDefense=false,intentional=false})

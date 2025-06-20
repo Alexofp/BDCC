@@ -15,6 +15,7 @@ var charIDToRole:Dictionary = {} # ID = Role
 
 var currentActionID:String = ""
 var currentActionArgs:Dictionary = {}
+var sexResult:SexEngineResult
 
 var busyActionSeconds:int = 0
 var currentActionText:String = ""
@@ -635,6 +636,7 @@ func setState(newState:String, newRole:String, dirToRole:String = ""):
 	state = newState
 	currentActionID = ""
 	currentActionArgs = {}
+	sexResult = null
 
 func getState() -> String:
 	return state
@@ -714,11 +716,11 @@ func setPickedAction(_actionEntry, _context:Dictionary = {}):
 				isWaitingScene = true
 				_context["scene"].startInteractionSex(whoID, withWhomID, sexType, extraParams)
 
-func getSexResult(_args:Dictionary, checkForUncon=false):
-	if(_args.has("scene_result")):
+func getSexResult(_args:Dictionary, checkForUncon=false) -> SexEngineResult:
+	if(sexResult):
 		if(checkForUncon):
-			checkUncon(_args["scene_result"])
-		return _args["scene_result"]
+			checkUncon(sexResult)
+		return sexResult
 	
 	var _fightersData = currentActionArgs["sex"]
 	
@@ -733,9 +735,9 @@ func getSexResult(_args:Dictionary, checkForUncon=false):
 	sexEngine.initSexType(sexType)
 	sexEngine.generateGoals()
 	
-	var newResult:Dictionary = sexEngine.doFastSex()
-	
-	_args["scene_result"] = newResult
+	var newResult:SexEngineResult= sexEngine.doFastSex()
+	sexResult = newResult
+	#_args["scene_result"] = newResult
 
 	doSexAftermath(_fightersData, newResult)
 
@@ -808,7 +810,7 @@ func doFightAftermath(_fightersData, newResult):
 			else:
 				lostPawn.addRepScore(RepStat.Staff, -powerScale)
 
-func doSexAftermath(_sexData, _newResult):
+func doSexAftermath(_sexData, theSexResult:SexEngineResult):
 	var domPawn = getRolePawn(_sexData[0])
 	var subPawn = getRolePawn(_sexData[1])
 	var sexType = (_sexData[2] if _sexData.size() > 2 else SexType.DefaultSex)
@@ -822,20 +824,9 @@ func doSexAftermath(_sexData, _newResult):
 		
 		#GM.main.WHS.addEvent(WHEvent.GotFucked, subPawn.charID, domPawn.charID)
 	
-	var domSatisfaction:float = 0.0
-	var subSatisfaction:float = 0.0
-	if(_newResult.has("doms")):
-		for domID in _newResult["doms"]:
-			domSatisfaction += _newResult["doms"][domID]["satisfaction"]
-		domSatisfaction /= _newResult["doms"].size()
-	if(_newResult.has("subs")):
-		for subID in _newResult["subs"]:
-			subSatisfaction += _newResult["subs"][subID]["satisfaction"]
-		subSatisfaction /= _newResult["subs"].size()
-	_newResult["domSatisfaction"] = domSatisfaction
-	_newResult["subSatisfaction"] = subSatisfaction
-	var averageSatisfaction:float = (subSatisfaction + domSatisfaction) / 2.0
-	_newResult["averageSatisfaction"] = averageSatisfaction
+	var domSatisfaction:float = theSexResult.getAverageDomSatisfaction()
+	var subSatisfaction:float = theSexResult.getAverageSubSatisfaction()
+	var averageSatisfaction:float = theSexResult.getAverageSatisfaction()
 	
 	if(domPawn != null && subPawn != null):
 		affectAffection(_sexData[0], _sexData[1], (min(domSatisfaction, subSatisfaction) - 0.5)*0.4)
@@ -861,6 +852,7 @@ func doCurrentAction(_context:Dictionary = {}):
 	doActionFinal(currentActionID, currentActionArgs, _context)
 	currentActionID = ""
 	currentActionArgs = {}
+	sexResult = null
 	busyActionSeconds = 0
 
 #func getNextInteractionTime() -> int:
@@ -976,6 +968,12 @@ func getDebugInfo():
 		#"involvedPawns: "+str(involvedPawns),
 	]
 
+func receiveSexEngineResult(_result:SexEngineResult):
+	isWaitingScene = false
+	sexResult = _result
+	doSexAftermath(currentActionArgs["sex"], sexResult)
+	doCurrentAction()
+
 func receiveSceneStatusFinal(_result:Dictionary):
 	isWaitingScene = false
 	
@@ -983,8 +981,10 @@ func receiveSceneStatusFinal(_result:Dictionary):
 	
 	if(currentActionArgs.has("fight")):
 		doFightAftermath(currentActionArgs["fight"], currentActionArgs["scene_result"])
-	if(currentActionArgs.has("sex")):
-		doSexAftermath(currentActionArgs["sex"], currentActionArgs["scene_result"])
+	else:
+		assert(false, "FIX ME")
+	#elif(currentActionArgs.has("sex")):
+	#	doSexAftermath(currentActionArgs["sex"], currentActionArgs["scene_result"])
 	
 	doCurrentAction()
 
@@ -1402,23 +1402,19 @@ func addReactToLustFocusButtons(actionID:String, lustEntry:Dictionary):
 	var role1pawn = getRolePawn(_role1)
 	var role2pawn = getRolePawn(_role2)
 	
-	var likeness:float = role2pawn.getFocussedLikeness(role1pawn, focus, true)
+	var focusedLikenessSummary:Dictionary = role2pawn.getFocusedLikenessSummary(role1pawn, focus, true)
+	
+	var likeness:float = focusedLikenessSummary["resultValue"]
 	
 	var affection:float = scoreAffection(_role2, _role1)
 	var lust:float = scoreLust(_role2, _role1)
 	var naive:float = scorePersonality(_role2, {PersonalityStat.Naive: 1.0})
 	if(affection < (0.5 - 0.45 * naive)):
 		likeness *= max(affection, lust)
-		lustEntry["reason"] = " (affection is too low)"
-	else:
-		if(likeness <= 0.6):
-			lustEntry["reason"] = " (didn't like the sight)"
-		else:
-			lustEntry["reason"] = ""
-	
+		lustEntry["affectionTooLow"] = true
+
 	if(role2pawn.isPlayer()):
 		likeness = 1.0
-		lustEntry["reason"] = ""
 	
 	#print("LIKENESS: ",likeness)
 	
@@ -1444,7 +1440,7 @@ func reactToLustFocus(args:Dictionary, lustEntry:Dictionary):
 	lustEntry["answer"] = answer
 	lustEntry["likeness"] = likeness
 
-	#var focus = lustEntry["focus"]
+	var focus = lustEntry["focus"]
 	var _role1:String = lustEntry["role1"]
 	var _role2:String = lustEntry["role2"]
 	
@@ -1452,7 +1448,134 @@ func reactToLustFocus(args:Dictionary, lustEntry:Dictionary):
 	var role2pawn = getRolePawn(_role2)
 	role1pawn.afterSocialInteraction()
 	role2pawn.afterSocialInteraction()
-	
+
+	var focusedLikenessSummary:Dictionary = role2pawn.getFocusedLikenessSummary(role1pawn, focus, true)
+	var affectionBeforeChange:float = scoreAffection(_role2, _role1)
+
+	if(likeness > 0.6 && (answer == "accept") && RNG.chance(50)):
+		lustEntry["text"] = ""
+	elif( lustEntry.has("affectionTooLow") && lustEntry["affectionTooLow"] == true && (answer == "deny") ):
+		if(affectionBeforeChange < -0.2):
+			lustEntry["text"] = RNG.pick([
+				"They.. don't really like you in general.",
+			])
+		else:
+			lustEntry["text"] = RNG.pick([
+				"You're too much of a stranger to them.",
+				"This is too sudden. Perhaps it's worth exchanging a word or two.",
+				"They barely know you. It's unlikely they'll openly admit anything to you.",
+			])
+	else:
+		var role2char:BaseCharacter = role2pawn.getChar()
+		var role2lustInterests:LustInterests
+
+		if(role2char != null):
+			role2lustInterests = role2char.getLustInterests()
+
+		var likedWhat:String = ""
+		var likedWhatIsPlural:bool = false
+		var dislikedWhat:String = ""
+		var dislikedWhatIsPlural:bool = false
+		var hasLearnedAnyLustInterests:bool = false
+
+		var role1perceptionScore = max( role1pawn.scorePersonalityMax({PersonalityStat.Naive: -1.0}), 0.0 )
+
+		var shouldRevealWhatWasLiked:bool = RNG.chance(35.0 + 15.0 * role1perceptionScore)
+		var shouldRevealWhatWasDisliked:bool = RNG.chance(35.0 + 15.0 * role1perceptionScore)
+
+		if(shouldRevealWhatWasLiked == true):
+			var suffixesOrdered:Array = ["Presence", "Absence"]
+			if(RNG.chance(20)):
+				suffixesOrdered.invert()
+			for summaryKeySuffix in suffixesOrdered:
+				var summaryKey:String = "topicsLiked" + summaryKeySuffix
+				if( focusedLikenessSummary[summaryKey].size() > 0 ):
+					var topicID = RNG.pick( focusedLikenessSummary[summaryKey] )
+					var topicGroup:TopicBase = GlobalRegistry.getLustTopic(topicID)
+					if(!topicGroup):
+						continue
+					likedWhat = topicGroup.getVisibleName(topicID)
+					if(summaryKeySuffix == "Absence"):
+						likedWhat = "the lack of "+likedWhat
+						likedWhatIsPlural = false
+					else:
+						likedWhatIsPlural = topicGroup.shouldUseAre(topicID)
+					if(role1pawn.isPlayer() && (role2lustInterests != null) && role2lustInterests.learnRandomInterestFromList([topicID])):
+						hasLearnedAnyLustInterests = true
+					break
+
+		if(shouldRevealWhatWasDisliked == true):
+			var suffixesOrdered:Array = ["Presence", "Absence"]
+			if(RNG.chance(20)):
+				suffixesOrdered.invert()
+			for summaryKeySuffix in suffixesOrdered:
+				var summaryKey:String = "topicsDisliked" + summaryKeySuffix
+				if( focusedLikenessSummary[summaryKey].size() > 0 ):
+					var topicID = RNG.pick( focusedLikenessSummary[summaryKey] )
+					var topicGroup:TopicBase = GlobalRegistry.getLustTopic(topicID)
+					if(!topicGroup):
+						continue
+					dislikedWhat = topicGroup.getVisibleName(topicID)
+					if(summaryKeySuffix == "Absence"):
+						dislikedWhat = "the lack of "+dislikedWhat
+						dislikedWhatIsPlural = false
+					else:
+						dislikedWhatIsPlural = topicGroup.shouldUseAre(topicID)
+					if(role1pawn.isPlayer() && (role2lustInterests != null) && role2lustInterests.learnRandomInterestFromList([topicID])):
+						hasLearnedAnyLustInterests = true
+					break
+
+		var LikedWhat:String = Util.capitalizeFirstLetter(likedWhat)
+		var DislikedWhat:String = Util.capitalizeFirstLetter(dislikedWhat)
+
+		if(likedWhat != ""):
+			lustEntry["text"] = RNG.pick([
+				"They seemed to like "+likedWhat,
+				"They seemed fond of "+likedWhat,
+				"They really appreciate "+likedWhat,
+				"They loved "+likedWhat,
+				LikedWhat+" really "+RNG.pick(["drew", "captured"])+" their attention",
+				LikedWhat+" "+("seem" if(likedWhatIsPlural) else "seems")+" to catch their attention pretty well",
+			])
+
+		if(dislikedWhat != ""):
+			if(likedWhat != ""):
+				lustEntry["text"] += RNG.pick([
+					", but they aren't really liking "+dislikedWhat,
+					", though "+dislikedWhat+" "+("aren't" if(dislikedWhatIsPlural) else "isn't")+" really appealing to them",
+					", however "+dislikedWhat+" "+("seem" if(dislikedWhatIsPlural) else "seems")+" to turn them off",
+				])
+			else:
+				lustEntry["text"] = RNG.pick([
+					"You noticed they aren't really into "+dislikedWhat,
+					"You were able to notice their aversion to "+dislikedWhat,
+					DislikedWhat+" "+("don't" if(dislikedWhatIsPlural) else "doesn't")+" seem to interest them",
+					DislikedWhat+" "+("are" if(dislikedWhatIsPlural) else "is")+" a bit outside their interests",
+				])
+		else:
+			if(likedWhat != "" && answer == "deny"):
+				lustEntry["text"] += RNG.pick([
+					", but unfortunately that wasn't enough",
+					", but that didn't seem enough",
+					", however something still seemed to turn them off",
+					", though they're still seemingly unhappy about something",
+				])
+
+		if(likedWhat != "" || dislikedWhat != ""):
+			lustEntry["text"] += "."
+		else:
+			if(answer == "accept"):
+				lustEntry["text"] = ""
+			else:
+				lustEntry["text"] = RNG.pick([
+					"It was difficult to tell what displeased them.",
+					"You were sure this was going to work..",
+					"Is there something wrong with their taste?..",
+				])
+
+		if(hasLearnedAnyLustInterests == true):
+			lustEntry["hasLearnedAnyLustInterests"] = true
+
 	if(answer == "accept"):
 		affectLust(_role2, _role1, max(likeness, 0.1) * 0.3)
 	elif(answer == "deny"):
@@ -1563,16 +1686,13 @@ func getSlutwallScoreMult() -> float:
 		return 0.2
 	return 1.0
 
-func checkUncon(sexResult):
-	if(sexResult == null):
+func checkUncon(_sexResult:SexEngineResult):
+	if(_sexResult == null):
 		return
 	
-	if(sexResult.has("subs")):
-		for subID in sexResult["subs"]:
-			var info = sexResult["subs"][subID]
-			
-			if(info.has("isUnconscious") && info["isUnconscious"]):
-				startInteraction("Unconscious", {main=subID})
+	for subID in _sexResult.subs:
+		if(_sexResult.isSubUnconscious(subID)):
+			startInteraction("Unconscious", {main=subID})
 
 func triggerUnconsciousPCGrabEvent(_pawn):
 	if(_pawn == null):
@@ -1718,8 +1838,9 @@ func saveData():
 		"ws": isWaitingScene,
 		"cLD": cachedLastDir,
 		"wD": wasDeleted,
-		
 	}
+	if(sexResult):
+		data["sr"] = sexResult.saveData()
 	return data
 
 func loadData(_data):
@@ -1740,4 +1861,9 @@ func loadData(_data):
 	isWaitingScene = SAVE.loadVar(_data, "ws", false)
 	cachedLastDir = SAVE.loadVar(_data, "cLD", -1)
 	wasDeleted = SAVE.loadVar(_data, "wD", false)
+	if(_data.has("sr")):
+		sexResult = SexEngineResult.new()
+		sexResult.loadData(SAVE.loadVar(_data, "sr", {}))
+	else:
+		sexResult = null
 	rebuildCharIDToRole()

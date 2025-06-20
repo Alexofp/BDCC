@@ -18,18 +18,30 @@ func getSexEngine():
 func getSupportedSexActivities():
 	return [id]
 
+func isUnconscious(_charID:String) -> bool:
+	var sexEngine = getSexEngine()
+	if(sexEngine.subs.has(_charID)):
+		return sexEngine.subs[_charID].isUnconscious()
+	return false
+
 func getDefaultAnimation():
 	var sexEngine = getSexEngine()
-	var subs = sexEngine.subs
-	var doms = sexEngine.doms
+	var theDomIDs:Array = sexEngine.getXFreeDomIDsForAnim(1)
+	var theSubIDs:Array = sexEngine.getXFreeSubIDsForAnim(1)
 	
-	if(subs.size() == 0 || doms.size() == 0):
+	if(theDomIDs.empty() && theSubIDs.empty()):
 		return null
+	if(theDomIDs.empty()):
+		if(isUnconscious(theSubIDs[0])):
+			return [StageScene.Sleeping, "sleep", {pc=theSubIDs[0]}]
+		return [StageScene.GivingBirth, "idle", {pc=theSubIDs[0]}]
+	if(theSubIDs.empty()):
+		return [StageScene.Solo, "stand", {pc=theDomIDs[0]}]
 	
-	if(subs[subs.keys()[0]].isUnconscious()):
-		return [StageScene.SexStart, "defeated", {pc=doms.keys()[0], npc=subs.keys()[0]}]
-	return [StageScene.SexStart, "start", {pc=doms.keys()[0], npc=subs.keys()[0]}]
-
+	if(isUnconscious(theSubIDs[0])):
+		return [StageScene.SexStart, "defeated", {pc=theDomIDs[0], npc=theSubIDs[0]}]
+	return [StageScene.SexStart, "start", {pc=theDomIDs[0], npc=theSubIDs[0]}]
+	
 func saveData():
 	return {
 		

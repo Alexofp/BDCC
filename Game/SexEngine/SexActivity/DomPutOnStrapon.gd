@@ -4,6 +4,10 @@ func _init():
 	id = "DomPutOnStrapon"
 	startedByDom = true
 	startedBySub = false
+	
+	activityName = "Wear strapon"
+	activityDesc = "Strapon manipulation"
+	activityCategory = ["Wear"]
 
 func getGoals():
 	return {
@@ -22,7 +26,6 @@ func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	var dom:BaseCharacter = _domInfo.getChar()
 	var sub:BaseCharacter = _subInfo.getChar()
-	var actions = []
 	
 	var allStraponIds = GlobalRegistry.getItemIDsByTag(ItemTag.Strapon)
 	var putOnDomScore = getActivityScoreCustomGoals({SexGoal.SubWearStraponOnDom: 1.0}, _sexEngine, _domInfo, _subInfo) / float(allStraponIds.size())
@@ -31,58 +34,23 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	if(dom.canWearStrapon() && dom.getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
 		if(dom.isPlayer()):
 			for straponObject in dom.getInventory().getItemsWithTag(ItemTag.Strapon):
-				actions.append({
-					name = straponObject.getVisibleName(),
-					desc = straponObject.getVisisbleDescription(),
-					args = ["dom", straponObject.uniqueID],
-					score = putOnDomScore,
-					category = ["Wear", "Strapon"],
-				})
+				addStartAction(["dom", straponObject.uniqueID], straponObject.getVisibleName(), straponObject.getVisisbleDescription(), putOnDomScore, {A_CATEGORY: ["Wear", "Strapon"]})
 		else:
 			for straponID in allStraponIds:
 				var straponObject:ItemBase = GlobalRegistry.getItemRef(straponID)
-				
-				actions.append({
-					name = straponObject.getVisibleName(),
-					desc = straponObject.getVisisbleDescription(),
-					args = ["dom", straponID],
-					score = putOnDomScore,
-					category = ["Wear", "Strapon"],
-				})
+				addStartAction(["dom", straponID], straponObject.getVisibleName(), straponObject.getVisisbleDescription(), putOnDomScore, {A_CATEGORY: ["Wear", "Strapon"]})
 	if(sub.canWearStrapon() && sub.getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
 		if(dom.isPlayer()):
 			for straponObject in dom.getInventory().getItemsWithTag(ItemTag.Strapon):
-				actions.append({
-					name = straponObject.getVisibleName(),
-					desc = straponObject.getVisisbleDescription(),
-					args = ["sub", straponObject.uniqueID],
-					score = putOnSubScore,
-					category = ["Wear", "Strapon on sub"],
-				})
+				addStartAction(["sub", straponObject.uniqueID], straponObject.getVisibleName(), straponObject.getVisisbleDescription(), putOnSubScore, {A_CATEGORY: ["Wear", "Strapon on sub"]})
 		else:
 			for straponID in allStraponIds:
 				var straponObject:ItemBase = GlobalRegistry.getItemRef(straponID)
-				
-				actions.append({
-					name = straponObject.getVisibleName(),
-					desc = straponObject.getVisisbleDescription(),
-					args = ["sub", straponID],
-					score = putOnSubScore,
-					category = ["Wear", "Strapon on sub"],
-				})
-	
-	return actions
+				addStartAction(["sub", straponID], straponObject.getVisibleName(), straponObject.getVisisbleDescription(), putOnSubScore, {A_CATEGORY: ["Wear", "Strapon on sub"]})
 
-func getVisibleName():
-	return "Wear strapon"
-
-func getCategory():
-	return ["Wear"]
-
-func getDomTags():
-	return [SexActivityTag.HandsUsed, SexActivityTag.VaginaPenetrated, SexActivityTag.AnusPenetrated]
-
-func getSubTags():
+func getTags(_indx:int) -> Array:
+	if(_indx == DOM_0):
+		return [SexActivityTag.HandsUsed, SexActivityTag.VaginaPenetrated, SexActivityTag.AnusPenetrated]
 	return []
 
 func fuelStraponRandomly(strapon):
@@ -106,37 +74,33 @@ func fuelStraponRandomly(strapon):
 					return
 					
 func startActivity(_args):
-	state = ""
-	
 	endActivity()
 	
 	if(_args[0] == "dom"):
 		var straponItem:ItemBase
 		if(getDom().isPlayer()):
 			straponItem = getDom().getInventory().getItemByUniqueID(_args[1])
-			getSexEngine().addTrackedGear(domID, domID, straponItem.uniqueID)
+			getSexEngine().addTrackedGear(getDomID(), getDomID(), straponItem.uniqueID)
 		else:
 			straponItem = GlobalRegistry.createItem(_args[1])
 			fuelStraponRandomly(straponItem)
 		getDom().getInventory().equipItem(straponItem)
 		
-		return {
-			text = "{dom.You} {dom.youVerb('put')} on a "+straponItem.getCasualName()+".",
-			#domSay = domReaction(SexReaction.DomPutsOnACondom),
-		}
+		addText("{dom.You} {dom.youVerb('put')} on a "+straponItem.getCasualName()+".")
+		react(SexReaction.DomPutOnStrapon)
+		return
 	
 	if(_args[0] == "sub"):
 		var straponItem:ItemBase
 		if(getDom().isPlayer()):
 			straponItem = getDom().getInventory().getItemByUniqueID(_args[1])
-			getSexEngine().addTrackedGear(domID, subID, straponItem.uniqueID)
+			getSexEngine().addTrackedGear(getDomID(), getSubID(), straponItem.uniqueID)
 			getDom().getInventory().removeItem(straponItem)
 		else:
 			straponItem = GlobalRegistry.createItem(_args[1])
 			fuelStraponRandomly(straponItem)
 		getSub().getInventory().equipItem(straponItem)
 		
-		return {
-			text = "{dom.You} {dom.youVerb('force')} a "+straponItem.getCasualName()+" on {sub.you}.",
-			#domSay = domReaction(SexReaction.DomPutsOnACondomOnSub),
-		}
+		addText("{dom.You} {dom.youVerb('force')} a "+straponItem.getCasualName()+" on {sub.you}.")
+		react(SexReaction.DomPutOnStraponOnSub)
+		return

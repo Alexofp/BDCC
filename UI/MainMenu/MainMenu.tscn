@@ -445,6 +445,7 @@ size_flags_horizontal = 3
 text = "SceneConverter (old)"
 
 [node name="SexActivityCreator" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
+visible = false
 margin_top = 30.0
 margin_right = 188.0
 margin_bottom = 56.0

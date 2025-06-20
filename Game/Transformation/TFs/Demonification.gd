@@ -14,7 +14,7 @@ func getPillName() -> String:
 	return "DemoniX"
 
 func getPillDatabaseDesc() -> String:
-	return "This drug will turn you into a half-demon. It does so by making you grow horns, a demon tail and hooves. It will also morph your existing penis into an equine variant and increase its length to roughly 20cm if it’s currently below that length.\n\nThe first stage will happen after a few minutes. Stage 2 will happen roughly after 5 hours. Stage 3 will happen after 10 hours, stage 4 will happen after 15 hours, etc. This could be accelerated by using the QuickShift drug or by letting the test subject cause [b]pain[/b] to others during sexual intercources.\n\nThis drug doesn’t have a set amount of stages. It will reach its final stage when there is nothing left to transform."
+	return "This drug will turn you into a half-demon. It does so by making you grow horns, a demon tail and hooves. It will also morph your existing penis into an equine variant and increase its length to roughly 20cm if it’s currently below that length.\n\nThe first stage will happen after a few minutes. Stage 2 will happen roughly after 5 hours. Stage 3 will happen after 10 hours, stage 4 will happen after 15 hours, etc. This could be accelerated by using the QuickShift drug or by letting the test subject cause [b]pain[/b] to others during sexual intercourses.\n\nThis drug doesn’t have a set amount of stages. It will reach its final stage when there is nothing left to transform."
 
 func getTFCheckTags() -> Dictionary:
 	return {

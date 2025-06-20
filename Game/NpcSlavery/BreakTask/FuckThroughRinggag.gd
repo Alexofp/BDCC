@@ -37,3 +37,10 @@ func getTaskString():
 
 func getTaskHint(_isSlaveLevelup):
 	return "Put a ring-gag into their mouth and use your penis or strapon to fuck their throat"
+
+func getSexGoalWeightModifier(_sexGoalID:String) -> float:
+	if(_sexGoalID == SexGoal.FuckOral):
+		return 2.0
+	if(_sexGoalID == SexGoal.TieUp):
+		return 1.0
+	return 0.0

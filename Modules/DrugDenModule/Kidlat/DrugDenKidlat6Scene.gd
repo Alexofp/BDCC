@@ -391,7 +391,7 @@ func _run():
 		playAnimation(StageScene.SexLowDoggy, "fast", {pc="pc", npc="kidlat", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("The sound of flesh meeting flesh echoes in the tunnel, mingling with the low hum of emergency lights and Kidlat's pants.. Her hips buck reflexively, meeting yours.. as you adjust your rhythm, increasing the onslaught on her needy pussy.")
 
-		saynn("Your hand still reminds Kidlat of her place.. underneath you.. as your eager fucktoy. She doesn't seem to disagree. Instead, her wet, needy slit keeps squeezing your "+str("cock" if !isStrapon else "shiny shaft")+" with a beat of her heart.. a beat that you can just feel through her neck.")
+		saynn("Your hand still reminds Kidlat of her place.. underneath you.. as your eager fucktoy. She doesn't seem to disagree. Instead, her wet, needy slit keeps squeezing your "+str("cock" if !isStrapon else "shiny shaft")+" with every beat of her heart.. a beat that you can just feel through her neck.")
 
 		saynn("[say=kidlat]Hh..ah.. hh.[/say]")
 

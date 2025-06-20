@@ -249,10 +249,7 @@ func processTime(_secondsPassed):
 		if(intoxication < 0.0):
 			intoxication = 0.0
 	
-	if(timedBuffsDurationSeconds > 0):
-		timedBuffsDurationSeconds -= _secondsPassed
-		if(timedBuffsDurationSeconds <= 0):
-			timedBuffs.clear()
+	processTimedBuffs(_secondsPassed)
 	
 	for effectID in statusEffects:
 		var effect = statusEffects[effectID]
@@ -424,9 +421,7 @@ func saveData():
 	data["bodyFluids"] = bodyFluids.saveData()
 	
 	data["timedBuffs"] = saveBuffsData(timedBuffs)
-	data["timedBuffsDurationSeconds"] = timedBuffsDurationSeconds
 	data["timedBuffsTurns"] = saveBuffsData(timedBuffsTurns)
-	data["timedBuffsDurationTurns"] = timedBuffsDurationTurns
 	data["intoxication"] = intoxication
 	data["intoxicationTolerance"] = intoxicationTolerance
 	
@@ -485,9 +480,7 @@ func loadData(data):
 	bodyFluids.loadData(SAVE.loadVar(data, "bodyFluids", {}))
 	
 	timedBuffs = loadBuffsData(SAVE.loadVar(data, "timedBuffs", []))
-	timedBuffsDurationSeconds = SAVE.loadVar(data, "timedBuffsDurationSeconds", 0)
 	timedBuffsTurns = loadBuffsData(SAVE.loadVar(data, "timedBuffsTurns", []))
-	timedBuffsDurationTurns = SAVE.loadVar(data, "timedBuffsDurationTurns", 0)
 	intoxication = SAVE.loadVar(data, "intoxication", 0.0)
 	intoxicationTolerance = SAVE.loadVar(data, "intoxicationTolerance", 0.0)
 	

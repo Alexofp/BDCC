@@ -8,6 +8,7 @@ var anger: float = 0.0
 var isDown:bool = false
 var angerFull: float = 0.0
 var hasAnyCumGoals:bool = false
+var dynamicJoiner:bool = false # Will auto-leave after completing their goals
 
 func hasGoalToCum() -> bool:
 	return hasAnyCumGoals
@@ -16,7 +17,7 @@ func afterGoalsAssigned():
 	checkHasCumGoals()
 
 func checkHasCumGoals():
-	hasAnyCumGoals = false
+	#hasAnyCumGoals = false
 	for goalInfo in goals:
 		var goalID = goalInfo[0]
 		var sexGoal = GlobalRegistry.getSexGoal(goalID)
@@ -31,7 +32,10 @@ func checkIsDown():
 		return true
 	return false
 
-func canDoActions():
+func getIsDown() -> bool:
+	return isDown
+
+func canDoActions() -> bool:
 	return !isDown
 
 func addAnger(howmuch = 0.2):
@@ -82,12 +86,15 @@ func getSadisticActionStore():
 	
 	return sadistScore / 8.0 + angerScore / 10.0 + meanScore / 10.0
 
-func getInfoString():
+func getInfoString(_isSelected:bool = false) -> String:
 	var character = getChar()
 	
-	var text = ""
+	var text:String = ""
 	if(character != null):
-		text += character.getName()+". "
+		if(_isSelected):
+			text += "\\["+character.getName()+"\\]"+". "
+		else:
+			text += character.getName()+". "
 	text += "Anger: "+str(Util.roundF(anger*100))+"% "
 	text += "Arousal: "+str(Util.roundF(getArousal()*100))+"% "
 	
@@ -200,6 +207,12 @@ func onGoalSatisfied(_thedominfo, _goalid, _thesubinfo, _mult:float = 1.0):
 func onGoalFailed(_thedominfo, _goalid, _thesubinfo, _mult:float = 1.0):
 	addFrustration(1.0*_mult)
 
+func setDynamicJoiner(_isDyn:bool):
+	dynamicJoiner = _isDyn
+
+func isDynamicJoiner() -> bool:
+	return dynamicJoiner
+
 func saveData():
 	var data = .saveData()
 	
@@ -208,6 +221,7 @@ func saveData():
 	data["isDown"] = isDown
 	data["angerFull"] = angerFull
 	data["hasAnyCumGoals"] = hasAnyCumGoals
+	data["dynamicJoiner"] = dynamicJoiner
 
 	return data
 	
@@ -219,3 +233,4 @@ func loadData(data):
 	isDown = SAVE.loadVar(data, "isDown", false)
 	angerFull = SAVE.loadVar(data, "angerFull", 0.0)
 	hasAnyCumGoals = SAVE.loadVar(data, "hasAnyCumGoals", false)
+	dynamicJoiner = SAVE.loadVar(data, "dynamicJoiner", false)

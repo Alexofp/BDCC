@@ -109,7 +109,7 @@ func updatePickedModEntry():
 		text += "Author: "+str(pickedModEntry.author)+"\n"
 		text += "Mod version: "+str(pickedModEntry.modversion)+"\n"
 		if(!GlobalRegistry.isVersionListHasCompatible(str(pickedModEntry.gameversion))):
-			text += "[color=red]Game version: " + str(pickedModEntry.gameversion)+" (You are running verson "+GlobalRegistry.getGameVersionString()+")[/color]\n"
+			text += "[color=red]Game version: " + str(pickedModEntry.gameversion)+" (You are running version "+GlobalRegistry.getGameVersionString()+")[/color]\n"
 		else:
 			if(pickedModEntry.gameversion == "*"):
 				text += "Game version: Any\n"

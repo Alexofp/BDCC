@@ -54,7 +54,7 @@ func tryPickCharacterID() -> String:
 	
 	var possibleCharIds:Array = GM.main.getDynamicCharacterIDsFromPool(pool)
 	if(possibleCharIds.size() <= 0):
-		""
+		return ""
 	
 	var tryCount:int = 10
 	while(tryCount > 0):

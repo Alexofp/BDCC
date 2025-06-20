@@ -1330,12 +1330,12 @@ func _react(_action: String, _args):
 		processTime(6*60)
 
 	if(_action == "slutwall_watch"):
-		runScene("GenericSexScene", [NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [], InmateGenerator.new()), "socket", SexType.SlutwallSex], "socket_slutwall")
+		runScene("GenericSexScene", [NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [], InmateGenerator.new()), "socket", SexType.SlutwallSex, {SexMod.DisableDynamicJoiners:true}], "socket_slutwall")
 		getCharacter("socket").addEffect("SexSpacedOut")
 		return
 
 	if(_action == "slutwall_fuck"):
-		runScene("GenericSexScene", ["pc", "socket", SexType.SlutwallSex], "socket_slutwall")
+		runScene("GenericSexScene", ["pc", "socket", SexType.SlutwallSex, {SexMod.DisableDynamicJoiners:true}], "socket_slutwall")
 		getCharacter("socket").addEffect("SexSpacedOut")
 		return
 
@@ -1378,10 +1378,10 @@ func _react_scene_end(_tag, _result):
 	if(_tag == "socket_slutwall"):
 		if(_result.size() < 1):
 			return
-		var sexresult = _result[0]
+		var sexresult:SexEngineResult = _result[0]
 		
-		if(sexresult.has("subs") && sexresult["subs"].has("socket")):
-			var timesCame = sexresult["subs"]["socket"]["timesCame"]
+		if(sexresult):
+			var timesCame = sexresult.getSubOrgasmCount("socket")
 			if(timesCame > 0):
 				socketLust = 0
 				overstim += 10 * timesCame

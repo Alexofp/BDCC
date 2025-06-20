@@ -2,8 +2,8 @@ extends Node
 
 var game_version_major = 0
 var game_version_minor = 1
-var game_version_revision = 8
-var game_version_suffix = "fix3"
+var game_version_revision = 9
+var game_version_suffix = ""
 
 var contributorsCredits:Dictionary = {
 	"Max-Maxou": [
@@ -86,6 +86,9 @@ var contributorsCredits:Dictionary = {
 		"[url=https://github.com/Alexofp/BDCC/pull/112]#1[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/119]#2[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/157]#3[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/184]#4[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/186]#5[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/189]#6[/url]",
 	],
 	"Friskygote": [
 		"[url=https://github.com/Alexofp/BDCC/pull/120]#1[/url]",
@@ -117,6 +120,10 @@ var contributorsCredits:Dictionary = {
 		"[url=https://github.com/Alexofp/BDCC/pull/147]#4[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/148]#5[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/152]#6[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/177]#7[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/181]#8[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/187]#9[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/192]#10[/url]",
 	],
 	"CheeseyCake92": [
 		"[url=https://github.com/Alexofp/BDCC/pull/158]#1[/url]",
@@ -182,6 +189,7 @@ var sexActivitiesReferences: Dictionary = {}
 var fetishes: Dictionary = {}
 var sexGoals: Dictionary = {}
 var sexTypes: Dictionary = {}
+var sexReactionHandlersByID: Dictionary = {}
 var gameExtenders: Dictionary = {}
 var computers: Dictionary = {}
 var fluids: Dictionary = {}
@@ -606,11 +614,11 @@ func registerEverything():
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	
-	#registerSexActionsFolder("res://Game/SexEngine/SexActions/")
 	registerSexActivitiesFolder("res://Game/SexEngine/SexActivity/")
 	registerFetishesFolder("res://Game/SexEngine/Fetish/")
 	registerSexGoalsFolder("res://Game/SexEngine/Goal/")
 	registerSexTypeFolder("res://Game/SexEngine/SexType/")
+	registerSexReactionHandlerFolder("res://Game/SexEngine/Reactions/")
 	
 	registerStatusEffectFolder("res://StatusEffect/")
 	
@@ -728,9 +736,11 @@ func isVersionCompatible(otherversion:String):
 	
 	if(otherversion == "*"):
 		return true
-	if(otherversion != getGameVersionStringNoSuffix()):
-		return false
-	return true
+	if(otherversion == getGameVersionStringNoSuffix()):
+		return true
+	if(otherversion == getGameVersionString()):
+		return true
+	return false
 
 func isVersionListHasCompatible(versionlist):
 	if(!(versionlist is String)):
@@ -2646,6 +2656,30 @@ func getDrugDenEventRef(id: String):
 		
 func getDrugDenEvents():
 	return drugDenEventRefs
+
+
+func registerSexReactionHandler(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	for reactionID in object.handles:
+		if(!sexReactionHandlersByID.has(reactionID)):
+			sexReactionHandlersByID[reactionID] = []
+		sexReactionHandlersByID[reactionID].append(object)
+
+func registerSexReactionHandlerFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerSexReactionHandler(scriptPath)
+
+func getSexReactionHandlersFor(id: int):
+	if(sexReactionHandlersByID.has(id)):
+		return sexReactionHandlersByID[id]
+	else:
+		return []
+		
+
+
 
 func saveRegistryCache() -> Dictionary:
 	var data:Dictionary = {

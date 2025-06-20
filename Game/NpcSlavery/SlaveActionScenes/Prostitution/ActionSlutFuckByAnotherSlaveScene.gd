@@ -82,7 +82,7 @@ func _react(_action: String, _args):
 		else:
 			npc2Slavery.addDespair(-0.1)
 		
-		runScene("GenericSexScene", [npc2ID, npcID], "slavesfuck")
+		runScene("GenericSexScene", [npc2ID, npcID, SexType.DefaultSex, {SexMod.DisableDynamicJoiners: true}], "slavesfuck")
 		setState("after_sex")
 		return
 		

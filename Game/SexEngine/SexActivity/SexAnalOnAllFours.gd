@@ -19,6 +19,9 @@ func _init():
 	sexReactionPullOut = SexReaction.BeggingToPullOutAnal
 	isVag = false
 	
+	activityName = "Anal"
+	activityDesc = "Fuck their ass!"
+	
 func getGoals():
 	if(currentPose == POSE_CHOKEFUCK):
 		return {
@@ -30,7 +33,3 @@ func getGoals():
 		SexGoal.FuckAnal: 1.0,
 		SexGoal.StraponAnal: 1.0,
 	}
-
-func getVisibleName():
-	return "Anal"
-

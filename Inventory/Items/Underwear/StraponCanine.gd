@@ -21,6 +21,9 @@ func getRiggedParts(_character):
 func getCasualName():
 	return "canine strapon"
 
+func getLewdStraponName() -> String:
+	return RNG.pick(["knotted strapon", "canine strapon", "rubber canine cock"])
+
 func getPrice():
 	return 20
 
@@ -30,3 +33,8 @@ func generateFluids():
 
 func getInventoryImage():
 	return "res://Images/Items/strapons/canine.png"
+
+func getStraponTraits() -> Dictionary:
+	return {
+		PartTrait.PenisKnot: true,
+	}

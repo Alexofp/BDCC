@@ -15,7 +15,20 @@ static func statExists(stat):
 	return (stat in getAll())
 
 static func getVisibleName(stat):
-	return str(stat)
+	if stat == Brat:
+		return "Brat"
+	elif stat == Mean:
+		return "Mean"
+	elif stat == Subby:
+		return "Subby"
+	elif stat == Impatient:
+		return "Impatient"
+	elif stat == Naive:
+		return "Naive"
+	elif stat == Coward:
+		return "Coward"
+	else:
+		return "Error"
 
 static func getVisibleDesc(stat, value):
 	var texts = ["Error"]
