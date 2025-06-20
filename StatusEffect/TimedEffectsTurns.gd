@@ -26,9 +26,21 @@ func getEffectName():
 	return "Timed effects"
 
 func getEffectDesc():
-	var time = character.timedBuffsDurationTurns
+	var theTexts:Array = []
+	var theBuffsByTurns:Dictionary = character.getSortedBuffsDataByTime(character.timedBuffsTurns)
+	
+	for theTurns in theBuffsByTurns:
+		var theBuffs:Array = theBuffsByTurns[theTurns]
+		
+		var theBuffNames:Array = []
+		for theBuff in theBuffs:
+			theBuffNames.append(theBuff.getVisibleDescription())
+		theTexts.append(Util.join(theBuffNames, ", ")+" expire in "+str(theTurns)+" "+("turns" if theTurns != 1 else "turn"))
+	
+	#var time = character.timedBuffsDurationTurns
 
-	return "For the next "+str(time)+" turns:"
+	#return "For the next "+str(time)+" turns:"
+	return Util.join(theTexts, "\n")
 
 func getEffectImage():
 	return "res://Images/StatusEffects/medicines.png"
@@ -40,4 +52,4 @@ func combine(_args = []):
 	pass
 
 func getBuffs():
-	return character.timedBuffsTurns
+	return character.getTimedBuffsTurns()
