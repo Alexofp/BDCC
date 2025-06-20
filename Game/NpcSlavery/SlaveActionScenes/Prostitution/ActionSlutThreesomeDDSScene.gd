@@ -8,7 +8,7 @@ var npc2:DynamicCharacter
 func _initScene(_args = []):
 	npcID = _args[0]
 	npc = GlobalRegistry.getCharacter(npcID)
-	npc2ID = _args[1]["sub2"]
+	npc2ID = _args[1]["dom"]
 	npc2 = GlobalRegistry.getCharacter(npc2ID)
 
 func resolveCustomCharacterName(_charID):
