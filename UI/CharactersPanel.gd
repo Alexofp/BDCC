@@ -3,7 +3,6 @@ extends VBoxContainer
 var characterPanelScane = preload("res://UI/CharacterPanelSmall.tscn")
 var addedCharacters: Dictionary = {}
 onready var charactersBox = $ScrollContainer/CharactersBox
-onready var optionTooltip = $CanvasLayer/TooltipDisplay
 
 func _ready():
 	clear()
@@ -32,15 +31,15 @@ func removeCharacter(charID: String):
 	var _v = addedCharacters.erase(charID)
 
 func onCharacterMouseEntered(panel):
-	optionTooltip.set_is_active(true)
-	
 	var charID = panel.getCharacterID()
 	var character = GlobalRegistry.getCharacter(charID)
+	if(!character):
+		return
 	
-	optionTooltip.set_text(character.getName() + ", " + character.getSpeciesFullName(), character.getSmallDescription())
-
+	GlobalTooltip.showTooltip(character.getName() + ", " + character.getSpeciesFullName(), character.getSmallDescription(), true)
+	
 func onCharacterMouseExited():
-	optionTooltip.set_is_active(false)
+	GlobalTooltip.hideTooltip()
 
 func updateStatuses():
 	for charID in addedCharacters:

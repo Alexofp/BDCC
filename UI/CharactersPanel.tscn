@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=2]
-[ext_resource path="res://Game/TooltipDisplay.tscn" type="PackedScene" id=3]
 [ext_resource path="res://UI/CharacterPanelSmall.tscn" type="PackedScene" id=4]
 [ext_resource path="res://UI/CharactersPanel.gd" type="Script" id=5]
 
@@ -37,12 +36,3 @@ size_flags_horizontal = 3
 
 [node name="CharacterPanelSmall" parent="ScrollContainer/CharactersBox" instance=ExtResource( 4 )]
 margin_bottom = 24.0
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="TooltipDisplay" parent="CanvasLayer" instance=ExtResource( 3 )]
-margin_left = 30.2906
-margin_top = -128.289
-margin_right = 280.291
-margin_bottom = -96.289
-showBelow = true
