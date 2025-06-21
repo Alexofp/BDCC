@@ -2435,6 +2435,7 @@ func cumOnto(_indxWho:int, _indxTarget:int, _extra:Dictionary = {}):
 		return {}
 	
 	var isGeneric:bool = _extra.has("generic") && _extra["generic"]
+	var isSex:bool = _extra.has("sex") && _extra["sex"]
 	var uniqueOrgasm:String = _extra["uniqueOrgasm"] if _extra.has("uniqueOrgasm") else ""
 	
 	var text:String = RNG.pick([
@@ -2446,7 +2447,17 @@ func cumOnto(_indxWho:int, _indxTarget:int, _extra:Dictionary = {}):
 			"{<TOP>.You} {<TOP>.youVerb('pull')} {<TOP>.yourHis} {<TOP>.penisShort} out and [b]{<TOP>.youVerb('cum')} all over {<TOP>.yourHis} own belly[/b]!",
 			"{<TOP>.You} {<TOP>.youVerb('pull')} out, [b]cumming all over {<TOP>.yourHis} own belly[/b]!",
 		])
-	if(isGeneric):
+	if(isSex):
+		text = RNG.pick([
+			"{<TOP>.You} {<TOP>.youVerb('pull')} {<TOP>.yourHis} {<TOP>.penisShort} out and [b]{<TOP>.youVerb('cum')} all over {<BOTTOM>.your} butt[/b]!",
+			"{<TOP>.You} {<TOP>.youVerb('pull')} out, [b]cumming all over {<BOTTOM>.your} butt[/b]!",
+		])
+		if(_indxWho == _indxTarget):
+			text = RNG.pick([
+				"{<TOP>.You} {<TOP>.youVerb('pull')} {<TOP>.yourHis} {<TOP>.penisShort} out and [b]{<TOP>.youVerb('cum')} all over {<TOP>.yourHis} own belly[/b]!",
+				"{<TOP>.You} {<TOP>.youVerb('pull')} out, [b]cumming all over {<TOP>.yourHis} own belly[/b]!",
+			])
+	elif(isGeneric):
 		text = RNG.pick([
 			"{<TOP>.You} {<TOP>.youVerb('grunt')} as {<TOP>.youHe} [b]{<TOP>.youVerb('cum')} all over {<BOTTOM>.your} body and face[/b]!",
 		])

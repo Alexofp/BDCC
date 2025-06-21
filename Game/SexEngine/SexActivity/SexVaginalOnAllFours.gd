@@ -569,7 +569,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		applyTallymarkIfNeeded(usedBodypart)
 		return
 	if(_id == "cumpullout"):
-		cumOnto(DOM_0, SUB_0)
+		cumOnto(DOM_0, SUB_0, {sex=true})
 		satisfyGoals()
 		state = ""
 		applyTallymarkIfNeeded(usedBodypart)
