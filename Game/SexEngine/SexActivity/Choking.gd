@@ -21,6 +21,9 @@ func getSupportedSexTypes():
 		SexType.DefaultSex: true,
 	}
 
+func canStopSexWithThisActivity() -> bool:
+	return true
+
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	if(_sexEngine.hasGoal(_domInfo, SexGoal.SubChoking, _subInfo)):
 		return 0.5

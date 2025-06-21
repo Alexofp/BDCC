@@ -64,7 +64,7 @@ func init_processTurn():
 func getActions(_indx:int):
 	if(_indx == DOM_0):
 		if(state == "leashed"):
-			addAction("stop", 0.0, "Remove leash", "Stop leashing them", {A_CATEGORY: ["Humiliate"]})
+			addAction("stop", getStopSexScore(DOM_0), "Remove leash", "Stop leashing them", {A_CATEGORY: ["Humiliate"]})
 			if(!getSubInfo().isUnconscious()):
 				var yankScore:float = getDomInfo().getIsAngryScore() * 1.0 * max(0.1, 0.1 + getDomInfo().personalityScore({PersonalityStat.Mean: 1.0})) - getSubInfo().getAboutToPassOutScore() * getDomInfo().fetishScore({Fetish.UnconsciousSex: -1.0})
 				addAction("yank", yankScore, "Yank leash", "Yank on that leash hard!", {A_CATEGORY: ["Violence"]})

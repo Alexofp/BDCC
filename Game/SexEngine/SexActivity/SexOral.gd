@@ -166,7 +166,7 @@ func getActions(_indx:int):
 			var stopdeepthroatScore:float = getSubInfo().getAboutToPassOutScore() * 0.2 * (1.0 - personality(DOM_0, PersonalityStat.Mean)*0.5 - fetish(DOM_0, Fetish.UnconsciousSex))
 			addAction("stopdeepthroat", stopdeepthroatScore, "Stop deepthroat", "Enough deepthroating for now")
 		if(state == "licking"):
-			if(!isFacesit):
+			if(!isFacesit && (getSexType() == SexType.DefaultSex)):
 				addAction("startFacesit", 0.07-personality(DOM_0, PersonalityStat.Subby)*0.05, "Sit on face!", "Sit on their face while they are licking you out!")
 		if(state in ["licking", "grinding"]):
 			if(isReadyToCumHandled(DOM_0)):
@@ -584,8 +584,8 @@ func getAnimation():
 			return [StageScene.StocksSexOral, "pussy", {npc=DOM_0, pc=SUB_0}]
 		if(state in ["blowjob", "deepthroat"]):
 			if(getDomInfo().isCloseToCumming() || (isStraponSex() && getSubInfo().isCloseToCumming())):
-				return [StageScene.StocksSexOral, "sex", {npc=DOM_0, pc=SUB_0}]
-			return [StageScene.StocksSexOral, "fast", {npc=DOM_0, pc=SUB_0}]
+				return [StageScene.StocksSexOral, "fast", {npc=DOM_0, pc=SUB_0}]
+			return [StageScene.StocksSexOral, "sex", {npc=DOM_0, pc=SUB_0}]
 			
 		return [StageScene.StocksSexOral, "tease", {npc=DOM_0, pc=SUB_0}]
 	

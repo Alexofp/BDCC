@@ -20,6 +20,9 @@ func getSupportedSexTypes():
 		SexType.SlutwallSex: true,
 	}
 
+func canStopSexWithThisActivity() -> bool:
+	return true
+
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	if(_subInfo.isUnconscious()):
 		return -1.0
