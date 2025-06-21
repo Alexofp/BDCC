@@ -12,6 +12,9 @@ func getGoals():
 		SexGoal.Hypnotize: 1.0,
 	}
 
+func canStopSexWithThisActivity() -> bool:
+	return true
+
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	if(_subInfo.getChar().isBlindfolded()):
 		return false

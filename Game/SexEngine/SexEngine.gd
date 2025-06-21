@@ -760,6 +760,8 @@ func getActionsForCharID(_charID:String, isForMenu:bool = false) -> Array:
 		return result
 	
 	var canCharDoActions:bool = _charInfo.canDoActions()
+	if(!canCharDoActions): # Can't do anything, we can only continue
+		return result
 	
 	if(canCharDoActions):
 		if(!_isPC && !isForMenu && _isDom && (_charInfo is SexDomInfo)):
@@ -934,10 +936,10 @@ func canSwitchPCTarget() -> bool:
 	if(isDom("pc")):
 		if(subs.size() >= 2):
 			return true
-	if(isSub("pc")):
+	elif(isSub("pc")):
 		if(doms.size() >= 2):
 			return true
-	if((subs.size() + doms.size()) >= 3):
+	elif((subs.size() + doms.size()) >= 3):
 		return true
 	return false
 
@@ -1070,11 +1072,13 @@ func sexShouldEnd() -> bool:
 		
 		if(domInfo.canDoActions() && domInfo.hasGoals()):
 			return false
-	
-	if(activities.size() <= 0 || !hasAnyHealthyDoms):
+	if(!hasAnyHealthyDoms):
 		return true
-	else:
-		return false
+	
+	for activity in activities:
+		if(!activity.canStopSexWithThisActivity()):
+			return false
+	return true
 
 func getRecovarableItemsAfterSex() -> Array:
 	var result:Array = []

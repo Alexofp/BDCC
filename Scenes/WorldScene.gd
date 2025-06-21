@@ -118,15 +118,15 @@ func _react(_action: String, _args):
 	if(_action == "me"):
 		runScene("MeScene")
 	if(_action == "sextest"):
-		#runScene("GenericSexScene", ["pc", ["rahi", "nova"]])
+		runScene("GenericSexScene", ["pc", ["rahi", "nova"]])
 		#runScene("GenericSexScene", [["rahi", "nova"], ["risha"]])
 		#runScene("GenericSexScene", [["avy", "pc", "nova"], ["rahi", "socket"]])
 		#runScene("GenericSexScene", [["avy", "nova"], ["socket"]])
-		runScene("GenericSexScene", [["pc", "nova"], ["avy"]])
+		#runScene("GenericSexScene", [["pc", "nova"], ["avy"]])
 		#runScene("GenericSexScene", [["rahi", "pc"], ["nova"]])
 		#runScene("GenericSexScene", [["pc"], ["rahi", "socket"]])
 		#runScene("GenericSexScene", [["avy"], ["rahi"]])
-		#runScene("GenericSexScene", ["rahi", "pc"])
+		#runScene("GenericSexScene", ["rahi", "pc", SexType.DefaultSex, {SexMod.SubsStartUnconscious: true}])
 		
 		#runScene("GenericSexScene", [NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true}), "socket", SexType.SlutwallSex])
 		#getCharacter("socket").addEffect("SexSpacedOut")

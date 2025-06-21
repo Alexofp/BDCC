@@ -706,6 +706,19 @@ func getActivityScoreCustomGoals(goalData, _sexEngine: SexEngine, _domInfo: SexD
 func getActivityScoreMult(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	return 1.0
 
+func getStopSexScore(_indx:int) -> float:
+	if(_indx < 0):
+		return 0.0
+	var theInfo = getDomOrSubInfo(_indx)
+	if(!theInfo):
+		return 0.0
+	if(theInfo.hasGoals()):
+		return 0.0
+	return 1.0
+
+func canStopSexWithThisActivity() -> bool:
+	return false
+
 func getStopScore() -> float:
 	var sexEngine := getSexEngine()
 	
