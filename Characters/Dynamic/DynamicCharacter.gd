@@ -628,8 +628,11 @@ func loadFromDatapackCharacter(_datapack:Datapack, _datapackChar:DatapackCharact
 	npcFetishes = _datapackChar.fetishes.duplicate()
 	fetishHolder.clear()
 	for fetishID in npcFetishes:
-		if(npcFetishes[fetishID] != FetishInterest.Neutral):
-			fetishHolder.setFetish(fetishID, npcFetishes[fetishID])
+		var theVal = npcFetishes[fetishID]
+		if(theVal is String):
+			theVal = FetishInterest.textToNumber(theVal)
+		if(theVal != FetishInterest.Neutral):
+			fetishHolder.setFetish(fetishID, theVal)
 	
 	npcLustInterests = _datapackChar.lustInterests.duplicate()
 	lustInterests.clear()

@@ -182,5 +182,5 @@ func pickFetishes(character:DynamicCharacter, _args = {}):
 	.pickFetishes(character, _args)
 	var fetishHolder:FetishHolder = character.getFetishHolder()
 	
-	fetishHolder.addFetish(Fetish.DrugUse, FetishInterest.numberToInterest(RNG.randi_range(3, 6)))
+	fetishHolder.addFetish(Fetish.DrugUse, RNG.randf_range(0.75, 1.5))
 	

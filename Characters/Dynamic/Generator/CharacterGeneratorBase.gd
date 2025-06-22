@@ -180,13 +180,12 @@ func pickFetishes(character:DynamicCharacter, _args = {}):
 	for archetype in character.npcArchetypes:
 		var fetishes = CharacterArchetype.getFetishes(archetype)
 		for fetishID in fetishes:
-			var maxInterest = fetishes[fetishID]
-			var maxInterestNumber = FetishInterest.interestToNumber(maxInterest)
-			if(maxInterestNumber > 0):
-				fetishHolder.addFetish(fetishID, FetishInterest.numberToInterest(RNG.randi_range(1, maxInterestNumber)))
-			elif(maxInterestNumber < -1):
-				fetishHolder.addFetish(fetishID, FetishInterest.numberToInterest(-RNG.randi_range(1, -maxInterestNumber)))
-	
+			var addValue:float = fetishes[fetishID]
+			if(addValue > 0.0):
+				fetishHolder.addFetish(fetishID, RNG.randf_range(0.0, addValue))
+			elif(addValue < 0.0):
+				fetishHolder.addFetish(fetishID, -RNG.randf_range(0.0, -addValue))
+
 	fetishHolder.removeImpossibleFetishes()
 
 func pickLustInterests(character:DynamicCharacter, _args = {}):

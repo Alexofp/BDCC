@@ -3,8 +3,6 @@ class_name FetishHolder
 
 var character: WeakRef
 var fetishMap: Dictionary = {}
-var maxInterest = 4
-var minInterest = -4
 
 func _init():
 	for fetishID in GlobalRegistry.getFetishes():
@@ -13,8 +11,6 @@ func _init():
 		#setFetish(fetishID, FetishInterest.Hates)
 		setFetish(fetishID, FetishInterest.Likes)
 	
-	maxInterest = FetishInterest.getMaxPossibleInterestNumber()
-	minInterest = FetishInterest.getMinPossibleInterestNumber()
 	#setFetish(Fetish.OralSexReceiving, FetishInterest.Loves)
 	#setFetish(Fetish.VaginalSexGiving, FetishInterest.Loves)
 	#setFetish(Fetish.DrugUse, FetishInterest.Loves)
@@ -26,9 +22,9 @@ func _init():
 func clear():
 	fetishMap.clear()
 
-func clearToInterest(theInterest):
+func clearToInterest(theInterestValue:float):
 	for fetishID in GlobalRegistry.getFetishes():
-		setFetish(fetishID, theInterest)
+		setFetish(fetishID, theInterestValue)
 
 func getCharacter():
 	if(character == null):
@@ -38,52 +34,33 @@ func getCharacter():
 func setCharacter(newchar):
 	character = weakref(newchar)
 
-func setFetish(fetishID, interest):
-	fetishMap[fetishID] = interest
+func setFetish(fetishID:String, interest:float):
+	fetishMap[fetishID] = clamp(interest, -1.0, 1.0)
 
-# Increase or decrease fetish by 1 or more tiers, for example if we use "numTiers = 3" on the fetish that have 
-# "SlightlyDislikes" level it will become "Likes"
-func adjustFetishInterestByTier(fetishID, numTiers: int = 1) -> bool:
-	var currentInterestValueNum = FetishInterest.interestToNumber(getFetishInterest(fetishID))
-	var projectedInterestValueNum = int(clamp((currentInterestValueNum + numTiers), minInterest, maxInterest))
-	if(currentInterestValueNum != projectedInterestValueNum): #return true only if interest has changed
-		fetishMap[fetishID] = FetishInterest.numberToInterest(projectedInterestValueNum)
-		return true
-	else:
-		return false
-	
-func addFetish(fetishID, interest):
-	var currentInterest = getFetishInterest(fetishID)
-	var newvalue = FetishInterest.interestToNumber(currentInterest) + FetishInterest.interestToNumber(interest)
-	fetishMap[fetishID] = FetishInterest.numberToInterest(newvalue)
-
-func getFetishInterest(fetishID):
-	if(!fetishMap.has(fetishID)):
-		return FetishInterest.Neutral
-	return fetishMap[fetishID]
-
-func getFetishValue(fetishID):
+func getFetish(fetishID:String) -> float:
 	if(!fetishMap.has(fetishID)):
 		return 0.0
-	return FetishInterest.getScore(fetishMap[fetishID])
+	return fetishMap[fetishID]
 
-func setFetishValue(fetishID, newVal:float):
-	newVal = clamp(newVal, -1.0, 1.0)
-	newVal *= 4.0
-	
-	setFetish(fetishID, FetishInterest.numberToInterest(int(newVal)))
+func getFetishValue(fetishID:String) -> float:
+	if(!fetishMap.has(fetishID)):
+		return 0.0
+	return fetishMap[fetishID]
 
-func getFetishes():
+func addFetish(fetishID:String, theVal:float):
+	var newVal:float = clamp(getFetish(fetishID) + theVal, -1.0, 1.0)
+	fetishMap[fetishID] = newVal
+
+func getFetishes() -> Dictionary:
 	return fetishMap
 
-func getGoals(_sexEngine, _sub):
-	var result = []
+func getGoals(_sexEngine, _sub) -> Array:
+	var result:Array = []
 	
 	for fetishID in GlobalRegistry.getFetishes():
-		var fetishInterestValue = 0.0
+		var fetishInterestValue:float = 0.0
 		if(fetishMap.has(fetishID)):
-			var fetishInterest = fetishMap[fetishID]
-			fetishInterestValue = FetishInterest.getScore(fetishInterest)
+			fetishInterestValue = fetishMap[fetishID]
 		
 		if(fetishInterestValue >= 0.0):
 			var fetish:FetishBase = GlobalRegistry.getFetish(fetishID)
@@ -108,7 +85,7 @@ func scoreFetish(fetishes:Dictionary, onlyPositive:bool = false) -> float:
 	var maxPossibleValue = 0.0
 	var result = 0.0
 	for fetishID in fetishes:
-		var fetishValue = getFetishValue(fetishID)
+		var fetishValue:float = getFetishValue(fetishID)
 		var addValue = fetishValue * fetishes[fetishID]
 		if(!onlyPositive || (onlyPositive && addValue > 0.0)):
 			result += addValue
@@ -151,7 +128,10 @@ func loadData(data):
 			if(fetishObject == null):
 				Log.printerr("Removing fetish that doesn't exist: "+str(fetishID))
 				continue
-			filteredNewFetishMap[fetishID] = newfetishMap[fetishID]
+			var theValue = newfetishMap[fetishID]
+			if(theValue is String):
+				theValue = FetishInterest.textToNumber(theValue)
+			filteredNewFetishMap[fetishID] = theValue
 		newfetishMap = filteredNewFetishMap
 		
 		fetishMap = newfetishMap
@@ -168,4 +148,5 @@ func loadData(data):
 			for fetishID in GlobalRegistry.getFetishes():
 				if(!fetishMap.has(fetishID)):
 					if(GlobalRegistry.getFetish(fetishID).isPossibleFor(thechar)):
-						fetishMap[fetishID] = RNG.pick(FetishInterest.getAll())
+						#TODO: Better missing fetish generation?
+						fetishMap[fetishID] = RNG.randf_range(-1.0, 1.0)#RNG.pick(FetishInterest.getAll())

@@ -43,7 +43,7 @@ func execute(_contex:CodeContex):
 		throwError(_contex, "Personality stat value must a number, got "+str(amValue)+" instead")
 		return
 	
-	return _contex.charFetishHolderMethod(charName, "setFetishValue", [statName, amValue])
+	return _contex.charFetishHolderMethod(charName, "setFetish", [statName, amValue])
 
 
 func getTemplate():
