@@ -17,3 +17,8 @@ func isPossibleFor(_character):
 	if(!_character.hasVagina()):
 		return false
 	return true
+
+func getExposeMod(_charInfo) -> float:
+	if(_charInfo.getChar().isZoneOverstimulated(BodypartSlot.Vagina)):
+		return -5.0
+	return 1.0

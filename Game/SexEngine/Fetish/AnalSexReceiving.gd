@@ -12,3 +12,8 @@ func getGoals(_sexEngine, _domFetishHolder, _dom, _sub):
 	possible.append(SexGoal.ReceiveAnal)
 	
 	return possible
+
+func getExposeMod(_charInfo) -> float:
+	if(_charInfo.getChar().isZoneOverstimulated(BodypartSlot.Anus)):
+		return -5.0
+	return 1.0

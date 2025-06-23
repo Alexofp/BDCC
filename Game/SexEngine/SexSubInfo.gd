@@ -282,6 +282,12 @@ func onGoalFailed(_thedominfo, _goalid, _thesubinfo, _mult:float = 1.0):
 	else:
 		addFrustration(1.0*_mult)
 
+func isResistingNewFetishes(_fetishID:String) -> bool:
+	if(isResisting()):
+		if(getChar().getLustLevel() <= 0.8):
+			return true
+	return false
+
 func setObeyMode(_newObey:bool):
 	obeyMode = _newObey
 

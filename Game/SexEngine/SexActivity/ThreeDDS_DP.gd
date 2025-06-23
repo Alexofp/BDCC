@@ -183,6 +183,7 @@ func getActions(_indx:int):
 		if(state == "sex"):
 			if(isReadyToCumHandled(SUB_0)):
 				addAction("subcum", 1.0, "Cum!", "You're about to cum!", {A_PRIORITY: 1001})
+
 func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "switch"):
 		addText("{<DOM>.You} {<DOM>.youVerb('decide')} to switch spots.".replace("<DOM>", indxToTextID(_indx)))
@@ -255,6 +256,8 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			addText("{sub.You} {sub.youVerb('pull')} away from {dom.you}.")
 			getDomInfo().addAnger(0.3)
 			getDomInfo(1).addAnger(0.3)
+			fetishUp(SUB_0, Fetish.VaginalSexReceiving, -15.0)
+			fetishUp(SUB_0, Fetish.AnalSexReceiving, -15.0)
 			if(getState() != ""):
 				setState("")
 			else:
@@ -264,9 +267,14 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			addText("{sub.You} {sub.youVerb('try', 'tries')} to pull away from {dom.you} but {sub.youVerb('fail')}.")
 			getDomInfo().addAnger(0.1)
 			getDomInfo(1).addAnger(0.1)
+			fetishUp(SUB_0, Fetish.VaginalSexReceiving, -5.0)
+			fetishUp(SUB_0, Fetish.AnalSexReceiving, -5.0)
 			return
 	if(_id == "subcum"):
 		cumGeneric(SUB_0, DOM_0)
+		
+		fetishAffect(SUB_0, Fetish.VaginalSexReceiving, 3.0)
+		fetishAffect(SUB_0, Fetish.AnalSexReceiving, 3.0)
 		
 		var shouldGoals:bool = false
 		if(isStrapon(DOM_0)):

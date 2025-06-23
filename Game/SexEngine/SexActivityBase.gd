@@ -91,17 +91,30 @@ func exposeToFetish(_indxTarget:int, _fetishID:String, _intensity:int, _indxExpo
 	elif(info1 is SexDomInfo):
 		info1.addLust(10.0*fetishScore)
 		info1.addAnger(-0.05*fetishScore)
+	
+	var theFetish:FetishBase = GlobalRegistry.getFetish(_fetishID)
+	if(theFetish):
+		var fetishMod:float = theFetish.getExposeMod(info1)
+		if(_intensity == I_TEASE):
+			fetishAffect(_indxTarget, _fetishID, 0.1*fetishMod)
+		elif(_intensity == I_LOW):
+			fetishAffect(_indxTarget, _fetishID, 0.25*fetishMod)
+		elif(_intensity == I_NORMAL):
+			fetishAffect(_indxTarget, _fetishID, 1.0*fetishMod)
+		elif(_intensity == I_HIGH):
+			fetishAffect(_indxTarget, _fetishID, 1.5*fetishMod)
 
 func stimulate(_indxActor:int, _slotActor:String, _indxTarget:int, _slotTarget:String, _intensity:int, _fetishID:String, speedSex:int = SPEED_MEDIUM):
 	var infoActor:SexInfoBase = getDomOrSubInfo(_indxActor)
 	var infoTarget:SexInfoBase = getDomOrSubInfo(_indxTarget)
 	
-	exposeToFetish(_indxTarget, _fetishID, _intensity, _indxActor)
+	var targetFetishID:String = Fetish.getOppositeFetish(_fetishID)
+	
+	exposeToFetish(_indxTarget, targetFetishID, _intensity, _indxActor)
 	exposeToFetish(_indxActor, _fetishID, _intensity, _indxTarget)
 	
 	var fetishScoreActor:float = infoActor.fetishScore({_fetishID:1.0}) if _fetishID != "" else 1.0
 	fetishScoreActor = unClampValue(fetishScoreActor, 0.2)
-	var targetFetishID:String = Fetish.getOppositeFetish(_fetishID)
 	var fetishScoreTarget:float = infoTarget.fetishScore({targetFetishID:1.0}) if targetFetishID != "" else 1.0
 	fetishScoreTarget = unClampValue(fetishScoreTarget, 0.2)
 	
@@ -242,6 +255,18 @@ func personality(_indx:int, _persStatID:String, _add:float = 0.0, _unclampVal:fl
 		return 0.0
 	var theVal:float = clamp(theInfo.personalityScore({_persStatID:1.0})+_add, -1.0, 1.0)
 	return unClampValue(theVal, _unclampVal)
+
+func fetishUp(_indx:int, _fetishID:String, _amount:float = 1.0):
+	var theInfo = getDomOrSubInfo(_indx)
+	if(!theInfo):
+		return
+	theInfo.fetishUp(_fetishID, _amount)
+
+func fetishAffect(_indx:int, _fetishID:String, _amount:float = 1.0):
+	var theInfo = getDomOrSubInfo(_indx)
+	if(!theInfo):
+		return
+	theInfo.fetishAffect(_fetishID, _amount)
 
 const RESIST_BREASTS_FOCUS = 0
 const RESIST_NECK_FOCUS = 1
@@ -1941,8 +1966,7 @@ func doProcessFuck(_indxTop:int, _indxBottom:int, _hole:String, _poseDescriptor:
 				])
 
 	addTextRaw(text.replace("<TOP>", topInfo.getCharID()).replace("<BOTTOM>", bottomInfo.getCharID()))
-
-
+	
 func doProcessFuckExtra(_indxTop:int, _indxBottom:int, _hole:String):
 	var topInfo:SexInfoBase = getDomOrSubInfo(_indxTop)
 	var topChar:BaseCharacter = topInfo.getChar()
@@ -2155,6 +2179,9 @@ func doProcessCumInside(_indxTop:int, _indxBottom:int, _hole:String, tryKnot:boo
 			chanceToPain *= 1.5
 		if(RNG.chance(chanceToPain)):
 			bottomChar.doPainfullyStretchHole(_hole, topChar.getID())
+			fetishUp(_indxBottom, Fetish.VaginalSexReceiving if _hole == S_VAGINA else Fetish.AnalSexReceiving, -20.0)
+		else:
+			fetishAffect(_indxBottom, Fetish.VaginalSexReceiving if _hole == S_VAGINA else Fetish.AnalSexReceiving, 2)
 		
 		#isTryingToKnot = true
 		bottomChar.gotOrificeStretchedBy(_hole, topChar.getID(), true, 0.5)
@@ -2552,6 +2579,9 @@ func tryPenetrate(_indxTop:int, _indxBottom:int, _hole:String, isEnveloping:bool
 		var chanceToPain = -freeRoom * 2.0
 		if(RNG.chance(chanceToPain) || ((topInfo is SexDomInfo) && topInfo.isAngry() && RNG.chance(20))):
 			bottomChar.doPainfullyStretchHole(_hole, topChar.getID())
+			fetishUp(_indxBottom, Fetish.VaginalSexReceiving if _hole == S_VAGINA else Fetish.AnalSexReceiving, -20.0)
+		else:
+			fetishAffect(_indxBottom, Fetish.VaginalSexReceiving if _hole == S_VAGINA else Fetish.AnalSexReceiving, 2)
 		
 		addTextTopBottom(text, _indxTop, _indxBottom)
 		return true
@@ -2604,6 +2634,9 @@ func penetration(didPenetrate:bool, _indxTop:int, _indxBottom:int, _hole:String,
 		var chanceToPain = -freeRoom * 2.0
 		if(RNG.chance(chanceToPain) || ((topInfo is SexDomInfo) && topInfo.isAngry() && RNG.chance(20))):
 			bottomChar.doPainfullyStretchHole(_hole, topChar.getID())
+			fetishUp(_indxBottom, Fetish.VaginalSexReceiving if _hole == S_VAGINA else Fetish.AnalSexReceiving, -20.0)
+		else:
+			fetishAffect(_indxBottom, Fetish.VaginalSexReceiving if _hole == S_VAGINA else Fetish.AnalSexReceiving, 2)
 		
 		#addTextTopBottom(text, _indxTop, _indxBottom)
 		return true

@@ -14,3 +14,6 @@ func isPossibleFor(_character):
 
 func getInitialInterest(_character):
 	return FetishInterest.Likes
+
+func getExposeMod(_charInfo) -> float:
+	return 1.0

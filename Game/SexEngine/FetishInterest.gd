@@ -99,3 +99,23 @@ static func getEnumListValue(theValue:float) -> int:
 	elif(theValue <= 0.875):
 		return EnumList.ReallyLikes
 	return EnumList.Loves
+
+static func getChangeDesc(theValue:float) -> String:
+	var theColorStr:String = getColorString(theValue)
+	if(theValue <= -0.875):
+		return "now [color="+theColorStr+"]hates[/color]"
+	elif(theValue <= -0.625):
+		return "now [color="+theColorStr+"]really dislikes[/color]"
+	elif(theValue <= -0.375):
+		return "now [color="+theColorStr+"]dislikes[/color]"
+	elif(theValue <= -0.125):
+		return "now [color="+theColorStr+"]slightly dislikes[/color]"
+	elif(theValue <= 0.125):
+		return "is now [color="+theColorStr+"]neutral[/color] towards"
+	elif(theValue <= 0.375):
+		return "now [color="+theColorStr+"]kinda likes[/color]"
+	elif(theValue <= 0.625):
+		return "now [color="+theColorStr+"]likes[/color]"
+	elif(theValue <= 0.875):
+		return "now [color="+theColorStr+"]really likes[/color]"
+	return "now [color="+theColorStr+"]loves[/color]"

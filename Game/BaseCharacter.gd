@@ -2095,6 +2095,12 @@ func afterSexEnded(sexInfo):
 		item.resetLustState()
 		item.onSexEnd()
 		
+	var theFetishChangeResult:Dictionary = sexInfo.doFetishChangeCalculation()
+	if(theFetishChangeResult.has("messages")):
+		for message in theFetishChangeResult["messages"]:
+			GM.main.addMessage(message)
+		
+	#TODO: All of this should happen in sex engine endSex()?
 	if(personalityChangesAfterSex() && personality != null && fetishHolder != null):
 		var resultText = sexInfo.affectPersonality(personality, fetishHolder)
 		if(resultText != null && resultText != ""):

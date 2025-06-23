@@ -53,7 +53,7 @@ func _run():
 	else:
 		addButtonAt(13, "Tasks", "Look at your tasks", "tasks")
 	addButtonAt(14, "Inventory", "Look at your inventory", "inventory")
-	#addButtonAt(5, "Sex Test", "Sex test", "sextest")
+	addButtonAt(5, "Sex Test", "Sex test", "sextest")
 	#addExtraButtonAt(4, "Sex Test", "Sex test", "sextest")
 	#addButtonAt(7, "Slave Test", "Slave test", "slavetest")
 	#addButtonAt(7, "Computer test", "Computer test", "comptest")
