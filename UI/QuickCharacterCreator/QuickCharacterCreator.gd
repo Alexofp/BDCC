@@ -1,6 +1,6 @@
 extends Control
 
-onready var slotSlit = $HBoxContainer/PanelContainer/VBoxContainer/SlotList
+onready var slotList = $HBoxContainer/PanelContainer/VBoxContainer/SlotList
 onready var bodypartList = $HBoxContainer/PanelContainer/VBoxContainer/BodypartList
 onready var doll = $HBoxContainer/DollWrapper/Viewport/Doll3D
 onready var currentBodypartChoicesList = $HBoxContainer/PanelContainer/VBoxContainer/Control/HBoxContainer/CurrentBodypartChoices
@@ -27,9 +27,9 @@ func _ready():
 	updateBodypartSlotsList()
 
 func updateBodypartSlotsList():
-	slotSlit.clear()
+	slotList.clear()
 	for bodypartSlot in BodypartSlot.getAll():
-		slotSlit.add_item(bodypartSlot)
+		slotList.add_item(bodypartSlot)
 
 func updateBodypartList():
 	bodypartList.clear()
