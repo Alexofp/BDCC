@@ -59,6 +59,8 @@ func startActivity(_args):
 	addText("{dom.You} {dom.youVerb('sit')} down and {dom.youVerb('reach', 'reaches')} {dom.yourHis} {dom.feet} out towards {sub.your} crotch!")
 	
 	stimulate(DOM_0, S_LEGS, SUB_0, S_PENIS, I_TEASE, Fetish.FeetplayGiving)
+	
+	react(SexReaction.PawjobStart)
 
 func processTurn():
 	return
@@ -71,6 +73,7 @@ func pawjob_processTurn():
 			"{sub.You} eagerly {sub.youVerb('thrust')} {sub.yourHis} {sub.penisType} between the {dom.feet}.",
 		])
 	rubWithFeet(DOM_0, SUB_0, S_PENIS)
+	react(SexReaction.PawjobHappens, [20, 10])
 	
 	
 func getActions(_indx:int):
@@ -110,6 +113,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "rubballs"):
 		cupballs(DOM_0, SUB_0, " using {dom.yourHis} {dom.feet}")
 		stimulate(DOM_0, S_LEGS, SUB_0, S_PENIS, I_NORMAL, Fetish.FeetplayGiving, SPEED_SLOW)
+		react(SexReaction.PawjobStart, [30, 10])
 		return
 		
 	if(_id == "pause"):

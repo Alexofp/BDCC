@@ -3,6 +3,7 @@ class_name RestraintChastityCage
 
 func _init():
 	restraintType = RestraintType.ChastityCage
+	sexReaction = SexReaction.BondageChastityCage
 
 func doStruggle(_pc, _minigame:MinigameResult):
 	var _handsFree = !_pc.hasBlockedHands()

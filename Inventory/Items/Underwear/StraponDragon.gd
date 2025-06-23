@@ -33,3 +33,9 @@ func generateFluids():
 
 func getInventoryImage():
 	return "res://Images/Items/strapons/dragon.png"
+
+func getStraponTraits() -> Dictionary:
+	return {
+		PartTrait.PenisKnot: true,
+		PartTrait.PenisRidges: true,
+	}

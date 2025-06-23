@@ -262,7 +262,7 @@ func _run():
 			
 			if(itemID == "TFPill"):
 				itemName = "Strange Pill"
-				itemDesc = "Use advanced algorithms to brute-force random molecular structures until we find one that has transformative proporties.\n\nThis pill is guaranteed to be one that hasn't been unlocked yet (Unless you have unlocked all of them already). The cost of this pill will raise each time you make it."
+				itemDesc = "Use advanced algorithms to brute-force random molecular structures until we find one that has transformative properties.\n\nThis pill is guaranteed to be one that hasn't been unlocked yet (Unless you have unlocked all of them already). The cost of this pill will raise each time you make it."
 			
 			var itemFluidsReq:String = GM.main.SCI.canMakeGetFluidsDescription(craftInfo["fluids"])
 			var canMakeResult:Array = GM.main.SCI.canMakeHasFluids(craftInfo["fluids"])

@@ -215,7 +215,7 @@ func strike(_indxActor:int, _indxTarget:int, _strikeStrength:int = STRIKE_NORMAL
 	if(_indxActor < 0 && _indxTarget >= 0):
 		assert(false, "IMPLEMENT ME")
 
-func moan(_indx:int):
+func moan(_indx:int, _theReaction:int = SexReaction.MoanGeneric):
 	var theInfo:SexInfoBase = getDomOrSubInfo(_indx)
 	if(theInfo.isUnconscious()):
 		return
@@ -226,6 +226,8 @@ func moan(_indx:int):
 	for theDomInfo in doms:
 		theDomInfo.addLust(5)
 		theDomInfo.addAnger(-0.02)
+	if(_theReaction >= 0):
+		react(_theReaction, [100.0], [_indx])
 	
 func fetish(_indx:int, _fetishID:String, _add:float = 0.0, _unclampVal:float = 0.1) -> float:
 	var theInfo:SexInfoBase = getDomOrSubInfo(_indx)
@@ -313,43 +315,7 @@ func talkText(_indx1:int, _text:String):
 		return
 	addOutputRaw([SexEngine.OUTPUT_SAY, theInfo.getCharID(), processText(_text)])
 
-func getTalkText(_indx1:int, _indx2:int, reactionID:int) -> String:
-	var theInfo := getDomOrSubInfo(_indx1)
-	if(!theInfo || theInfo.isUnconscious()):
-		return ""
-	var theInfo2 := getDomOrSubInfo(_indx2)
-	
-	var theText:String = ""
-	if(theInfo is SexDomInfo && theInfo2 is SexSubInfo):
-		theText = theInfo.getChar().getVoice().getDomReaction(reactionID, getSexEngine(), theInfo, theInfo2)
-		
-		if(theText != ""):
-			return GM.ui.processString(theText, {
-				dom = theInfo.getCharID(),
-				sub = theInfo2.getCharID(),
-			})
-		
-	elif(theInfo is SexSubInfo && theInfo2 is SexDomInfo):
-		theText = theInfo.getChar().getVoice().getSubReaction(reactionID, getSexEngine(), theInfo2, theInfo)
-	
-		if(theText != ""):
-			return GM.ui.processString(theText, {
-				dom = theInfo2.getCharID(),
-				sub = theInfo.getCharID(),
-			})
-	return ""
-		
-
-func talk(_indx1:int, _indx2:int, reactionID:int):
-	var theText:String = getTalkText(_indx1, _indx2, reactionID)
-	if(theText == ""):
-		return
-	var theInfo := getDomOrSubInfo(_indx1)
-	if(!theInfo):
-		return
-	addOutputRaw([SexEngine.OUTPUT_SAY, theInfo.getCharID(), theText])
-
-func react(_reactionID:int, _args:Array = [], _actors:Array = [DOM_0, SUB_0]):
+func react(_reactionID:int, _chances:Array = [100.0, 100.0], _actors:Array = [DOM_0, SUB_0], _args:Array = []):
 	var allHandlers:Array = GlobalRegistry.getSexReactionHandlersFor(_reactionID)
 	if(allHandlers.empty()):
 		return
@@ -358,8 +324,12 @@ func react(_reactionID:int, _args:Array = [], _actors:Array = [DOM_0, SUB_0]):
 		handlersWeights.append(handler.handlerWeight)
 	
 	var pickedHandler = RNG.pickWeighted(allHandlers, handlersWeights)
-	pickedHandler.doReactFinal(_reactionID, _actors, self, getSexEngine(), _args)
+	pickedHandler.doReactFinal(_reactionID, _actors, _chances, self, getSexEngine(), _args)
 
+
+func reactSub(_reactionID:int, _chances:Array = [100.0, 100.0], _actors:Array = [SUB_0, DOM_0], _args:Array = []):
+	react(_reactionID, _chances, _actors, _args)
+	
 func addText(_text:String):
 	if(_text.empty()):
 		return
@@ -735,6 +705,19 @@ func getActivityScoreCustomGoals(goalData, _sexEngine: SexEngine, _domInfo: SexD
 
 func getActivityScoreMult(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	return 1.0
+
+func getStopSexScore(_indx:int) -> float:
+	if(_indx < 0):
+		return 0.0
+	var theInfo = getDomOrSubInfo(_indx)
+	if(!theInfo):
+		return 0.0
+	if(theInfo.hasGoals()):
+		return 0.0
+	return 1.0
+
+func canStopSexWithThisActivity() -> bool:
+	return false
 
 func getStopScore() -> float:
 	var sexEngine := getSexEngine()
@@ -2295,7 +2278,7 @@ func addTextTopBottom(_theText:String, _indxTop:int, _indxBottom:int):
 	_theText=_theText.replace("<TOP>", topInfo.getCharID()).replace("<BOTTOM>", bottomInfo.getCharID())
 	addTextRaw(_theText)
 	
-func cumGeneric(_indxWho:int, _indxCauser:int, uniqueOrgasm:String = "", extraOrgasmText:String = ""):
+func cumGeneric(_indxWho:int, _indxCauser:int, uniqueOrgasm:String = "", extraOrgasmText:String = "", orgasmReaction:int = SexReaction.OrgasmGeneric):
 	var theInfo:SexInfoBase = getDomOrSubInfo(_indxWho)
 	var causerInfo:SexInfoBase = getDomOrSubInfo(_indxCauser)
 	theInfo.getChar().cumOnFloor(causerInfo.getCharID() if causerInfo != theInfo else "")
@@ -2303,7 +2286,9 @@ func cumGeneric(_indxWho:int, _indxCauser:int, uniqueOrgasm:String = "", extraOr
 	addGenericOrgasmText(_indxWho, extraOrgasmText)
 	if(uniqueOrgasm != ""):
 		sendSexEvent(SexEvent.UniqueOrgasm, _indxCauser, _indxWho, {orgasmType=uniqueOrgasm})
-
+	if(orgasmReaction >= 0):
+		react(orgasmReaction, [100.0, 100.0] if causerInfo != theInfo else [100.0], [_indxWho, _indxCauser] if causerInfo != theInfo else [_indxWho], [uniqueOrgasm])
+	
 func cumInsideShare(_indxWho:int, _indxTarget1:int, _hole1:String, _indxTarget2:int, _hole2:String, _shareFirst:float = 0.5):
 	var theInfo:SexInfoBase = getDomOrSubInfo(_indxWho)
 	var theChar:BaseCharacter = getDomOrSub(_indxWho)
@@ -2450,6 +2435,7 @@ func cumOnto(_indxWho:int, _indxTarget:int, _extra:Dictionary = {}):
 		return {}
 	
 	var isGeneric:bool = _extra.has("generic") && _extra["generic"]
+	var isSex:bool = _extra.has("sex") && _extra["sex"]
 	var uniqueOrgasm:String = _extra["uniqueOrgasm"] if _extra.has("uniqueOrgasm") else ""
 	
 	var text:String = RNG.pick([
@@ -2461,7 +2447,17 @@ func cumOnto(_indxWho:int, _indxTarget:int, _extra:Dictionary = {}):
 			"{<TOP>.You} {<TOP>.youVerb('pull')} {<TOP>.yourHis} {<TOP>.penisShort} out and [b]{<TOP>.youVerb('cum')} all over {<TOP>.yourHis} own belly[/b]!",
 			"{<TOP>.You} {<TOP>.youVerb('pull')} out, [b]cumming all over {<TOP>.yourHis} own belly[/b]!",
 		])
-	if(isGeneric):
+	if(isSex):
+		text = RNG.pick([
+			"{<TOP>.You} {<TOP>.youVerb('pull')} {<TOP>.yourHis} {<TOP>.penisShort} out and [b]{<TOP>.youVerb('cum')} all over {<BOTTOM>.your} butt[/b]!",
+			"{<TOP>.You} {<TOP>.youVerb('pull')} out, [b]cumming all over {<BOTTOM>.your} butt[/b]!",
+		])
+		if(_indxWho == _indxTarget):
+			text = RNG.pick([
+				"{<TOP>.You} {<TOP>.youVerb('pull')} {<TOP>.yourHis} {<TOP>.penisShort} out and [b]{<TOP>.youVerb('cum')} all over {<TOP>.yourHis} own belly[/b]!",
+				"{<TOP>.You} {<TOP>.youVerb('pull')} out, [b]cumming all over {<TOP>.yourHis} own belly[/b]!",
+			])
+	elif(isGeneric):
 		text = RNG.pick([
 			"{<TOP>.You} {<TOP>.youVerb('grunt')} as {<TOP>.youHe} [b]{<TOP>.youVerb('cum')} all over {<BOTTOM>.your} body and face[/b]!",
 		])

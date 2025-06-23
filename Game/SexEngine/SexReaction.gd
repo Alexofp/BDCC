@@ -45,6 +45,7 @@ enum {
 	AboutToSuckSubOff,
 	AboutToRubPussiesTogether,
 	AboutToRimSub,
+	AboutToHandjobSub,
 	
 	DomPutsOnACondom,
 	DomPutsOnACondomOnSub,
@@ -64,6 +65,63 @@ enum {
 	DomBreastfeedsSub,
 	DomBreastfeedPraise,
 	DomBreastfeedsOnSub,
+	DomBreastfeedsSubStart,
+	DomBreastfeedsOnSubStart,
+	
+	PawjobStart,
+	PawjobHappens,
+	PawjobRubBalls,
+	
+	PainGeneric,
+	MoanGeneric,
+	
+	LeashStart,
+	Leashed,
+	LeashYank,
+	
+	StartChokeFuck,
+	StartChokeRide,
+	TryForceSuckPenis,
+	TryForceLickPussy,
+	
+	AgreeGeneric,
+	RefuseGeneric,
+	OrgasmGeneric,
+	
+	BondageChastityCage,
+	BondageWristCuffs,
+	BondageAnkleCuffs,
+	BondageMittens,
+	BondageGag,
+	BondageMuzzle,
+	BondageBlindfold,
+	BondageVaginalPlug,
+	BondageButtplug,
+	BondageCollar,
+	
+	DomPutOnStrapon,
+	DomPutOnStraponOnSub,
+	DomPutOnPenisPumpOnSub,
+	DomPenisPumpOnSubMilk,
+	
+	FeetplayAskToKiss,
+	FeetplayKissingFeet,
+	FeetplayRubbingPussy,
+	FeetplayRubbingPenis,
+	FeetplayStompPussy,
+	FeetplayStompPenis,
+	FeetplayStompChest,
+	FeetplayCumPussy,
+	FeetplayCumPenis,
+	
+	TribadismHappens,
+	
+	ThreesomeJoin,
+	ThreesomeStart,
+	ThreesomeDP,
+	ThreesomeDPSameHole,
+	ThreesomeSpitroast,
+	ThreesomeRideGrind,
 }
 
 static func getAllStrings():
@@ -111,6 +169,7 @@ static func getAllStrings():
 		"AboutToSuckSubOff",
 		"AboutToRubPussiesTogether",
 		"AboutToRimSub",
+		"AboutToHandjobSub",
 		
 		"DomPutsOnACondom",
 		"DomPutsOnACondomOnSub",
@@ -130,4 +189,61 @@ static func getAllStrings():
 		"DomBreastfeedsSub",
 		"DomBreastfeedPraise",
 		"DomBreastfeedsOnSub",
+		"DomBreastfeedsSubStart",
+		"DomBreastfeedsOnSubStart",
+
+		"PawjobStart",
+		"PawjobHappens",
+		"PawjobRubBalls",
+		
+		"PainGeneric",
+		"MoanGeneric",
+		
+		"LeashStart",
+		"Leashed",
+		"LeashYank",
+		
+		"StartChokeFuck",
+		"StartChokeRide",
+		"TryForceSuckPenis",
+		"TryForceLickPussy",
+		
+		"AgreeGeneric",
+		"RefuseGeneric",
+		"OrgasmGeneric",
+		
+		"BondageChastityCage",
+		"BondageWristCuffs",
+		"BondageAnkleCuffs",
+		"BondageMittens",
+		"BondageGag",
+		"BondageMuzzle",
+		"BondageBlindfold",
+		"BondageVaginalPlug",
+		"BondageButtplug",
+		"BondageCollar",
+		
+		"DomPutOnStrapon",
+		"DomPutOnStraponOnSub",
+		"DomPutOnPenisPumpOnSub",
+		"DomPenisPumpOnSubMilk",
+		
+		"FeetplayAskToKiss",
+		"FeetplayKissingFeet",
+		"FeetplayRubbingPussy",
+		"FeetplayRubbingPenis",
+		"FeetplayStompPussy",
+		"FeetplayStompPenis",
+		"FeetplayStompChest",
+		"FeetplayCumPussy",
+		"FeetplayCumPenis",
+		
+		"TribadismHappens",
+		
+		"ThreesomeJoin",
+		"ThreesomeStart",
+		"ThreesomeDP",
+		"ThreesomeDPSameHole",
+		"ThreesomeSpitroast",
+		"ThreesomeRideGrind",
 	]

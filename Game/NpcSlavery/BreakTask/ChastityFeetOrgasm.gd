@@ -40,3 +40,8 @@ func getTaskString():
 
 func getTaskHint(_isSlaveLevelup):
 	return "Force them to orgasm from feetplay while they are wearing a chastity cage"
+
+func getSexGoalWeightModifier(_sexGoalID:String) -> float:
+	if(_sexGoalID == SexGoal.DoFeetplay):
+		return 3.0
+	return 0.0

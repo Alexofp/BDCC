@@ -38,7 +38,10 @@ func getChance(_reactionID:int) -> float:
 		return handles[_reactionID][REACT_CHANCE]
 	return chanceToReact
 
-func checkChance(_reactionID:int) -> bool:
+func checkChance(_reactionID:int, _chances:Array = []) -> bool:
+	if(!_chances.empty()):
+		if(indxTemp >= 0 && indxTemp < _chances.size()):
+			return RNG.chance(_chances[indxTemp])
 	return RNG.chance(getChance(_reactionID))
 
 func addLines(_lines:Array):
@@ -85,7 +88,7 @@ var indxTemp:int# 0, 1, 2 (indx of an _actors array)
 var tempInfo
 var actorsTemp
 
-func doReactFinal(_id:int, _actors:Array, _activity, _sexEngine, _args:Array):
+func doReactFinal(_id:int, _actors:Array, _chances:Array, _activity, _sexEngine, _args:Array):
 	activityTemp = _activity
 	sexEngineTemp = _sexEngine
 	idTemp = _id
@@ -93,15 +96,15 @@ func doReactFinal(_id:int, _actors:Array, _activity, _sexEngine, _args:Array):
 	
 	var shouldTogether:bool = shouldSayTogether(_id)
 	if(shouldTogether):
-		if(checkChance(_id)):
-			indxTemp = 0
+		indxTemp = 0
+		if(checkChance(_id, _chances)):
 			for actorIndx in _actors:
 				say(actorIndx, _args)
 				indxTemp += 1
 	else:
 		indxTemp = 0
 		for actorIndx in _actors:
-			if(checkChance(_id)):
+			if(checkChance(_id, _chances)):
 				say(actorIndx, _args)
 			indxTemp += 1
 	
@@ -127,6 +130,26 @@ func getInfo(_indx:int=-1) -> SexInfoBase:
 		return null
 	return activityTemp.getDomOrSubInfo(actorsTemp[_indx])
 
+func hatesFetish(fetishID:String, _indx:int=-1) -> bool:
+	var theInfo := getInfo(_indx)
+	if(!theInfo):
+		return false
+	return theInfo.fetishScore({fetishID: 1.0}) < 0.0
+
+func lovesFetish(fetishID:String, _indx:int=-1) -> bool:
+	var theInfo := getInfo(_indx)
+	if(!theInfo):
+		return false
+	return theInfo.fetishScore({fetishID: 1.0}) > 0.0
+
+func isResisting(_indx:int=-1) -> bool:
+	var theInfo := getInfo(_indx)
+	if(!theInfo || (theInfo is SexDomInfo)):
+		return false
+	if(theInfo is SexSubInfo):
+		return theInfo.isResisting()
+	return false
+
 func getChar(_indx:int=-1) -> BaseCharacter:
 	var theInfo := getInfo(_indx)
 	if(!theInfo):
@@ -138,6 +161,21 @@ func isSubby(_indx:int=-1) -> bool:
 	if(!theInfo):
 		return false
 	return theInfo.personalityScore({PersonalityStat.Subby:1.0})>0.4
+
+func isMean(_indx:int=-1) -> bool:
+	var theInfo:SexInfoBase = getInfo(_indx)
+	if(!theInfo):
+		return false
+	return theInfo.personalityScore({PersonalityStat.Mean:1.0})>0.5
+
+func isScared(_indx:int=-1) -> bool:
+	var theInfo:SexInfoBase = getInfo(_indx)
+	if(!theInfo):
+		return false
+	if(theInfo is SexSubInfo):
+		if(theInfo.isScared()):
+			return true
+	return false
 
 func isAngry(_indx:int=-1) -> bool:
 	var theInfo:SexInfoBase = getInfo(_indx)

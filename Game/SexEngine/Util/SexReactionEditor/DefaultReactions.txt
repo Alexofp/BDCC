@@ -1,5 +1,144 @@
 {
 "reactions": {
+"AboutToBeatUp": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Bitch, you fucking asked for it.
+You're not gonna get away unscarred, you stupid \"+RNG.pick([\"slut\", \"whore\", \"fucktoy\", \"bitch\"])+\".
+Stop fucking resisting, you \"+RNG.pick([\"slut\", \"whore\", \"stupid fucktoy\", \"bitch\"])+\".
+You brought this upon yourself, you \"+RNG.pick([\"slut\", \"whore\", \"fucktoy\", \"bitch\"])+\".
+Time to teach you some pain.
+I’ll leave marks you can’t hide.
+Think you can take this, bitch?
+You’re gonna regret this, slut.
+I’m gonna break you down.
+You asked for a beating, whore.
+No mercy for trash like you.
+Bitch, you’re about to learn fear.
+You’ll bleed for me, slut.
+You’re my fucktoy to break.
+You want rough? I’ll give rough."
+}, {
+"condition": "!isAngry()",
+"lines": "I'm getting really mad with you.
+I'm usually not that mean. But you are fucking annoying.
+You made me do this.
+You brought this upon yourself.
+You asked for it, didn’t you?
+Time to teach you a lesson.
+Let’s see how tough you are.
+You’re pushing me too far.
+Better brace yourself.
+This won’t end well for you.
+You made me do this.
+Don’t say I didn’t warn you.
+Hope you can take a hit.
+I’m about to get rough.
+This is on you, so don’t complain."
+} ]
+},
+"together": false
+},
+"AboutToDrawOnBody": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "!isAngry()",
+"lines": "Check this out
+Gonna leave you a memento
+Hope you are into bodywritings
+Stay still while I do this
+I wanna draw something on you
+Get ready to be humiliated!
+This is going to be so embarrassing for you!
+Freeze, I’m marking you.
+Hold still, I'm writing.
+You like being a canvas?"
+}, {
+"condition": "isAngry()",
+"lines": "Don't fucking move, bitch
+Don't you dare move
+Stay still, slut
+About to brand you
+Stay still while I brand you, whore
+Gonna brand you like the little prison's whore that you are.
+I'm going to make sure everyone knows exactly what you did.
+But don't worry, I'll make sure everyone knows who you are.
+This is going to be the best graffiti I've ever done.
+I can't wait to see the look on your face when you see what I've written.
+You deserve everything you're about to get.
+Hold still, you worthless canvas.
+Don’t even think about squirming.
+I’m gonna ruin you for everyone to see.
+No fuckin’ moving or I’ll write more shit.
+I’ll make sure everyone knows what you are."
+} ],
+1: [ {
+"condition": "!isResisting()
+hatesFetish(Fetish.Bodywritings)",
+"lines": "What? No!
+Put it away!
+Why did you pull that out?
+Don't do it
+Hey! No!
+Don’t you dare!
+Get your pen away!
+Stop that now!
+Hands off me!
+Quit it!
+Don’t draw on me!
+Don’t even try!
+Put that down!"
+}, {
+"condition": "isResisting()",
+"lines": "Fuck off with that pen!
+Get your shitty marker away!
+I’ll rip that pen from your hand!
+You and your dumb doodles can fuck off!
+Don’t even think about it, asshole!
+Fuck you, no drawing here!
+Not on my skin, you freak!
+Go fuck yourself, art nerd!
+I won’t let you, you dick!
+Keep your crap away, jerk!
+Shove that pen up your ass!"
+} ]
+},
+"together": false
+},
+"AboutToHandjobSub": {
+"chance": 100.0,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Give me that fucking cock.
+Let's get that pathetic cock nice and hard.
+You think you deserve my mouth on this?
+Gonna squeeze that worthless cock.
+Let me see that cock twitch for me.
+Think you deserve more? Think again, slut.
+Let’s see how hard you can get, fucker.
+Time to make you desperate.
+Try not to hump my hand, fucker."
+}, {
+"condition": "!isAngry()",
+"lines": "Some teasing for you.
+Let's get that cock nice and hard.
+Let's start with this.
+Nice girth, I can feel it.
+Let me see that cock twitch for me.
+Think you deserve more?
+Let’s see how hard you can get.
+Time to make you needy."
+} ]
+},
+"together": false
+},
 "AboutToLickPussy": {
 "chance": 100,
 "chances": "",
@@ -162,12 +301,12 @@ I’m about to shove it in and make you scream for mercy.
 Shut up and spread those legs before I lose my patience.
 I’m going to bury myself inside you and there’s nothing you can do.
 You’ll take every hard thrust until you beg me to stop.
-I’ve waited long enough—time to ruin that pretty little hole.
+I’ve waited long enough, time to ruin that pretty little hole.
 This pussy’s mine, and I’m going to fuck you senseless.
 I swear I’ll make you regret ever opening your mouth.
-Your screams don’t matter—my cock’s going all the way in.
+Your screams don’t matter, my cock’s going all the way in.
 You’ll be soaked and bruised by the time I’m done.
-Don’t fight me, pet—I’ll smash you full of me anyway.
+Don’t fight me, pet, I’ll smash you full of me anyway.
 Let me in or I’ll force you until you sob.
 Keep quiet, cunt, and stretch for me.
 I’ll pound you so hard you’ll forget your own name.
@@ -436,6 +575,800 @@ I’m starving for your fat dick right now."
 },
 "together": false
 },
+"ActivelyResisting": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isMean()",
+"lines": "Fuck off! I don't want you!
+Let me go, you \"+RNG.pick([\"fucker\", \"bitch\"])+\"!
+Let me fucking go already!
+Go fuck yourself!
+I will break you fingers!
+I will mess you up if you don't stop!
+Get your fucking hands off me, asshole!
+You think I’m gonna let you? Fuck no!
+Back the fuck up, you fucker!
+Don’t touch me, you piece of shit!
+I’ll make you regret this, fucker!
+Get lost, you stupid asshole!
+I’m not your fucking toy, asshole!
+Hands off, you disgusting fuck!
+You want a fight? I’m ready, asshole!
+Get the fuck away from me!
+You’re gonna pay for this, fucker!
+Fuck off and stop grabbing me!
+Don’t you fucking dare!
+Back the fuck off, you jerk!
+I won’t take this shit, asshole!
+Leave me the fuck alone!
+Get your filthy hands off me!"
+}, {
+"condition": "!isMean()",
+"lines": "Don't touch me!
+Get away from me!
+I don't wanna do this!
+Don't make me do this!
+I don't want any of this!
+Stop it already, I wanna leave!
+I don't want to do this, I'm begging you.
+Leave me alone!
+Stop this right now!
+Get off me!
+I’m serious, back off!
+Quit it, please!
+Leave me be!
+Don’t force me!
+Stop before I scream!"
+} ]
+},
+"together": false
+},
+"AfterDrawingOnBody": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Wear it like a scar.
+Marked and owned.
+Everyone will know your place.
+Look at what you are.
+Say it loud, whore.
+Now you’re marked, slut.
+Wear it, bitch.
+Can’t hide this whore tag.
+Branded like the little slut you are.
+This one suits you, bitch.
+A reminder for every fucker.
+Don’t wash this off, whore.
+Look at that, you worthless slut.
+Wear it proud, cunt.
+Perfect for my little fucktoy."
+}, {
+"condition": "!isAngry()",
+"lines": "There we go.
+A present from me.
+Now everyone can see who you are.
+Enjoy that.
+Don't hide this one.
+Want another one?
+How many will fit I wonder.
+This is real art.
+That looks perfect on you.
+Wear it with pride.
+Every mark tells a story.
+This one suits you well.
+I made you special.
+Look at what I wrote on you.
+A little reminder for others.
+That’ll get some attention."
+} ],
+1: [ {
+"condition": "!isResisting()
+hatesFetish(Fetish.Bodywritings)",
+"lines": "Don't you dare.. fuck
+No! Fuck..
+I didn't ask for that..
+Why did you do that?!
+That's too humiliating..
+Really? Ugh..
+Stop that, seriously.
+Why the hell would you do this?
+Not a fan, you know?
+This is fucking dumb.
+Erase it, now.
+Great, more crap on me."
+}, {
+"condition": "isResisting()",
+"lines": "Great, now I’m a damn art exhibit.
+So beautiful.. you fucker.
+Just perfect. Everyone’ll see this crap.
+Just what I needed.. public shame.
+Bravo, you fuck. Can’t scrub this off fast enough.
+Wow, real funny.. not.
+Lovely. That really showed me.
+Fantastic. Fuck you.
+Amazing. I feel so proud.. fuck you.
+I hate you right now.
+Ugh, get your ink off me!
+You’ve got to be kidding me..
+Seriously? Erase it now!
+Fuck off with your marker!
+I swear I’ll wipe this crap!
+Not funny. Not funny at all, you fuck.
+Enough. Erase every line."
+}, {
+"condition": "!isResisting()
+lovesFetish(Fetish.Bodywritings)",
+"lines": "Kinda cute..
+I kinda like it..
+That looks hot.
+I'm such a slut for bodywritings..
+Do you have more ink in that pen?
+I swear I feel every stroke.
+That line about me.. damn.
+That's hot.
+You think it's true?.."
+} ]
+},
+"together": false
+},
+"AgreeGeneric": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Ugh.. fine.
+Fine, whatever.
+Sure, whatever.
+Yeah, whatever.
+Hmph, I guess.
+Hmph, whatever."
+}, {
+"condition": "!isAngry()",
+"lines": "Sure.
+Sounds good.
+Alright.
+Okay then.
+Works for me.
+I’m down.
+Alrighty.
+That’s a yes."
+} ]
+},
+"together": false
+},
+"Apologizing": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isResisting()",
+"lines": "Quit it and I won't resist!
+Stop it! I don't want this! Please!
+I might cooperate if you ease up.
+Please, just tone it down a bit!
+I can’t do this if you’re so rough!
+Just a little gentler, okay?
+I’ll stop fighting if you’re more gentle.
+Can you stop? I'm sorry but I have to resist."
+}, {
+"condition": "!isResisting()
+isScared()",
+"lines": "I'm not resisting! Please!
+I will do anything! Please stop..
+I'm sorry! I'm very sorry!
+I'm scared.. Please stop..
+Enough!.. Please..
+I’m sorry, I didn’t mean to!
+Please forgive me..
+I’ll be good, I swear!
+Don’t be mad, please!
+I didn’t want this, sorry!
+I’m sorry, please don’t hurt me!
+I’ll do better, I promise!
+Please, don’t be angry..
+I didn’t mean to upset you!
+I’m sorry, I’m scared..
+Please have mercy..
+I’m sorry, I’ll behave!
+Don’t be mad, I’m sorry!
+I’m begging you, forgive me!
+I’m sorry, please stop!
+I’ll do anything to make it right!
+Please don’t punish me..
+I’m sorry, I’m just scared!
+Please, I’m so sorry!"
+}, {
+"condition": "!isResisting()
+!isScared()
+!isMean()
+!isSubby()",
+"lines": "I'm sorry, okay?
+Calm down, I'm sorry.
+You don't have to do this. I'm sorry.
+You don't have to do this..
+I'm sorry for what I did.
+Sorry, I didn’t mean to.
+Please, don’t be mad.
+I’m really sorry, truly.
+Didn’t want to hurt you.
+I didn’t mean it like that.
+Forgive me, please.
+I’m sorry, it won’t happen again.
+Didn’t want to upset you.
+Please don’t be angry.
+I’m sorry for crossing the line.
+Sorry, I lost control.
+I didn’t want to hurt you.
+I’m sorry, I’ll be better.
+I regret what I did."
+}, {
+"condition": "!isResisting()
+!isScared()
+isMean()",
+"lines": "I'm sorry. Calm down, bitch.
+Will you calm the fuck down already?
+Relax for fuck's sake. I'm sorry.
+I said I'm sorry!
+Chill out, I’m sorry.
+I’m sorry, now stop.
+Fine, I’m sorry, can we continue?
+Not my fault, but I’m sorry.
+Fine, fuck, I’m sorry. Happy now?
+Damn it, I said sorry already!
+Yeah, yeah, fuck, I’m sorry, alright?
+Whatever, fuck, I said sorry!
+Sorry, alright? Don’t push it.
+Fuck, I’m sorry, no need to hurt me.
+Stop acting like a cunt, I’m sorry.
+You want me to say it? Sorry, fucker.
+Jesus, I’m sorry, quit your crap.
+Satisfied? Fuck, I’m sorry.
+I’m sorry, now stop being a pain.
+Fine, fuck, sorry. Happy now?"
+}, {
+"condition": "!isResisting()
+!isScared()
+isSubby()",
+"lines": "I'm very-very sorry..
+I'm extremely sorry..
+It's my fault, I'm sorry..
+What I did was wrong, sorry..
+I’m such a mess, I’m sorry!
+I can’t believe I messed up like this!
+I’m worthless, I’m so sorry!
+I’m so pathetic, I’m sorry!
+I’ll do anything to make it right!
+I’m sorry for disappointing you!
+I’ll be better, I promise!"
+} ]
+},
+"together": false
+},
+"BeatingUp": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Stupid. Fucking. Bitch.
+You fucking whore
+I'm gonna break you if I have to.
+It's your fault!
+Stupid painslut.
+You worthless cunt.
+Take it, slut.
+Stupid little brat.
+Pathetic.
+Shut up, whore.
+You begging yet?
+Piece of shit.
+Stop whining, slut.
+I own you now.
+Whimper for me.
+Useless fucktoy.
+Harder? Sure.
+Pathetic cunt."
+}, {
+"condition": "!isAngry()",
+"lines": "Stop resisting already!
+Stop making me mad!
+Quit struggling on me.
+Just let it fucking happen.
+You are making this worse for yourself.
+Quit squirming, it’s pointless.
+You think you can fight this?
+Stop wasting energy, slut.
+You’re only hurting yourself.
+Give up, this is your fate.
+Stop flailing, it’s useless.
+You like this, don’t you?
+Surrender already, bitch.
+Stop whining, take it.
+Just accept it, slut."
+} ]
+},
+"together": false
+},
+"BeatingUpHard": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "!isAngry()",
+"lines": "You like that, huh? I'll give you something to cry about.
+I'm not done with you yet. Take this!
+You want me to hit harder? Fine, I'll show you who's boss.
+You thought this was just rough sex? Think again.
+You're going to regret ever crossing me.
+I told you to be ready for a rough ride. This is what you asked for.
+You thought you could handle me? You were wrong.
+I'm going to make you pay for your disobedience.
+You better start begging for mercy, because I'm not going easy on you.
+You thought this was just a game? Think again.
+I'm going to make you pay for what you did.
+You better start begging for mercy, because I'm not going to let up.
+I warned you not to mess with me. Now you're going to suffer the consequences.
+You want harder? I’ll crush you.
+Feel every hit, little brat.
+Don’t think you’re tough now.
+This is punishment, not playtime.
+I’ll break you down piece by piece.
+Your screams won’t save you."
+}, {
+"condition": "isAngry()",
+"lines": "You stupid bitch!
+You like pain, you dirty whore?
+Shut up and take it, you worthless bitch!
+I’m gonna break you, slut.
+Beg for mercy, you stupid whore.
+You asked for this, dumb bitch.
+Scream louder, whore!
+I’m gonna make you regret every word, bitch.
+You’re mine to beat and abuse, whore.
+Keep quiet or I’ll hit harder, bitch.
+I’m gonna wreck you, slut.
+You think you can handle me, whore? Think again.
+Cry all you want, bitch, I don’t care.
+I’m gonna leave my mark, bitch."
+} ]
+},
+"together": false
+},
+"BeggingForCondom": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "!isAngry()",
+"lines": "Please, put on a condom.
+I beg of you, protect us both with a condom.
+I don't want to take any risks. Can you please put on a condom?
+I'm begging you, let's be safe and use a condom.
+Can you please put on a condom?
+Can you please slip a condom on your cock?
+Please wrap your cock in a condom. Please?
+Could you slip on a condom? I can’t handle being filled.
+I’m begging, condom first. No mess inside me.
+Use a condom, please. No cum is going in me.
+Use a condom.. I don’t want you cumming inside.
+Let’s be safe.. Condom first. No stuffing me.
+Please don’t fill me raw, use a condom.
+Don’t cum in me, put a condom on."
+}, {
+"condition": "isAngry()",
+"lines": "Dammit, use a condom. Now!
+Get a condom. Right fucking now!
+I’m not fucking without protection!
+Condom first, or you will regret it, you fuck!"
+} ]
+},
+"together": false
+},
+"BeggingToPullOutAnal": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "(getChar(ROLE_TARGET).getWornCondom() == null)",
+"lines": "Please pull out..
+Don't cum inside, please..
+Please don't cum inside my \"+RNG.pick([\"ass\", \"butt\"])+\"..
+Please, pull out now.
+Don’t finish inside me, please.
+Not in my ass, please!
+Please don’t cum inside me.
+Don’t fill me up, please.
+Please, don’t do it inside.
+Don’t cum in my ass, please.
+I’m begging you, pull out now."
+}, {
+"condition": "(getChar(ROLE_TARGET).getWornCondom() != null)",
+"lines": "The condom might break.. Please pull out..
+Don't cum inside, please.. What if the condom breaks..
+The condom might break.. Please don't cum inside my \"+RNG.pick([\"ass\", \"butt\"])+\".."
+} ]
+},
+"together": false
+},
+"BeggingToPullOutVaginal": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "getChar().hasVagina()
+getChar().getFertility()>0.1
+!getChar().isVisiblyPregnant()
+(getChar(ROLE_TARGET).getWornCondom() == null)
+getChar().isInHeat()",
+"lines": "I'm in heat, I can get pregnant! Please pull out!
+I'm in heat, don't cum inside. Please!
+Not inside.. not when I'm in heat..
+Please pull out, I don't wanna get pregnant.. I'm in heat..
+My body really wants it.. but please.. don't breed me..
+Pull out, I can get pregnant like this!
+Don’t breed me, I’m in heat!
+Please pull out, I can get pregnant!
+I’m so fertile, don’t cum inside!
+Pull out, or I’ll get pregnant! I'm in heat..
+I’m begging, don’t fill me up!
+I’m in heat, but please keep it safe!
+Please, pull out before it’s too late!
+My body is in heat.. but don’t breed me!"
+}, {
+"condition": "getChar().hasVagina()
+getChar().getFertility()>0.1
+!getChar().isVisiblyPregnant()
+(getChar(ROLE_TARGET).getWornCondom() == null)
+!getChar().isInHeat()",
+"lines": "I don't wanna get pregnant, please pull out..
+Don't cum inside or I might get pregnant..
+Please pull out, I really don't wanna become pregnant..
+If you cum inside you might make me pregnant.. please don't..
+Remember not to cum inside, please.. Don't make me pregnant.
+Please pull out.. I might get pregnant if I don't..
+Please, pull out before it’s too late.
+Don’t cum inside me, I can get pregnant.
+I’m begging you, don’t risk it, pull out.
+Pull out, please, I’m not ready for this.
+Don’t let me get pregnant, pull out now.
+Not inside, I’m serious.. pull out now.
+Pull out or I’ll end up pregnant.
+Please don’t cum inside me, I’m fertile.
+Pull out, I’m begging you, don’t make me pregnant.
+Keep it out, I can’t handle being pregnant.
+I’m fertile.. please don’t cum inside me.
+Don’t make me pregnant, please pull out.
+Pull out, I can get pregnant if you don’t."
+}, {
+"condition": "getChar().hasVagina()
+getChar().getFertility()>0.1
+!getChar().isVisiblyPregnant()
+(getChar(ROLE_TARGET).getWornCondom() != null)
+!getChar().isInHeat()",
+"lines": "I don't wanna get pregnant if the condom breaks, please pull out..
+Don't cum inside.. the condom might break.. I don't wanna get pregnant..
+Remember not to cum inside, please.. If the condom breaks I will become pregnant..
+Please pull out.. I might get pregnant if the condom breaks.."
+}, {
+"condition": "getChar().hasVagina()
+getChar().getFertility()>0.1
+!getChar().isVisiblyPregnant()
+(getChar(ROLE_TARGET).getWornCondom() != null)
+getChar().isInHeat()",
+"lines": "The condom might break.. you should play it safe and pull out.. I'm in heat..
+Please don't test the condom and just pull out.. I'm in heat and don't wanna get pregnant..
+Please pull out.. The condom might break.. And I'm in heat.."
+}, {
+"condition": "getChar().isVisiblyPregnant() || getChar().getFertility()<=0.1
+(getChar(ROLE_TARGET).getWornCondom() == null)",
+"lines": "Please pull out..
+Don't cum inside, please..
+Please don't cum inside my pussy..
+Please, pull out now.
+Pull out, please.
+No cum inside my pussy.. please.
+Please, don’t finish into my pussy.
+Not inside my pussy, please.
+Don’t cum in me.
+Please, not inside."
+}, {
+"condition": "getChar().isVisiblyPregnant() || getChar().getFertility()<=0.1
+(getChar(ROLE_TARGET).getWornCondom() != null)",
+"lines": "The condom might break.. Please pull out..
+Don't cum inside, please.. What if the condom breaks..
+The condom might break.. Please don't cum inside my pussy.."
+} ]
+},
+"together": false
+},
+"BondageAnkleCuffs": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Thought you could escape, bitch? Nope.
+Where you gonna run now, huh?
+Struggle all you want, you’re helpless.
+Can’t run, can’t hide, bitch.
+No escape with these on.
+Try to squirm, it won’t help."
+}, {
+"condition": "!isAngry()",
+"lines": "Can’t run now.
+These cuffs aren’t coming off.
+Locked down and helpless.
+You look good like this.
+Can’t wiggle free, can you?"
+} ]
+},
+"together": false
+},
+"BondageBlindfold": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Can’t see shit now, huh? Such a shame.
+That’s right, stay blind.
+No peeking, bitch.
+How do you like being helpless?
+World’s gone black? Good.
+Darkness is your punishment."
+}, {
+"condition": "!isAngry()",
+"lines": "No peeking.
+Your vision rights have been revoked.
+Let your other senses do the work.
+You look so vulnerable like this.
+Can’t see? Good.
+Lost without your sight?
+Your world’s gone dark.
+No eyes, all nerves."
+} ]
+},
+"together": false
+},
+"BondageButtplug": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Gonna stretch that hole nice and wide.
+Don't you dare take it out, whore.
+If you take this one out, I will shove a bigger one in.
+Your asshole is gonna be ruined for anyone else.
+You love being stuffed, don’t you?
+Don’t even think about pulling that out.
+That plug fits you like a glove, whore."
+}, {
+"condition": "!isAngry()",
+"lines": "That tight little hole needed a buttplug.
+How’s it feel being stretched like this?
+Look at you, stuffed and stretched already.
+That little asshole’s getting broken in good.
+You’re gonna be so sore from this, slut.
+You'd rather get a real cock up your butt?
+Look at that cute, swollen hole of yours."
+} ]
+},
+"together": false
+},
+"BondageChastityCage": {
+"chance": 100.0,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "You don't need your cock anyway, do you?
+Such a pathetic cock deserves to be locked away.
+Such a tight fit. But your cock will shrink, don't sorry.
+Much better. Such pathetic dick should always be caged.
+Start learning to cum without this pathetic thing.
+That cage suits your tiny, useless cock perfectly.
+No more fun for you, just humiliation.
+Good, gonna keep that pathetic cock locked where it belongs.
+Locked away like the worthless slut you’ve become.
+Your cock’s useless now.
+You’ll learn fast: whores don’t get to cum.
+Locked and useless, just how I like my sissy toys."
+}, {
+"condition": "!isAngry()",
+"lines": "Nice and locked.
+There we go. Much better.
+Ohh, adorable.
+I love how your cock looks now.
+Dripping already, I bet.
+Locked up tight, just for me.
+Can’t touch that now, huh?
+Your cock’s mine to control.
+All locked away, you’re helpless.
+Such a good caged cutie.
+Can’t play with this now, can you?
+Look at you, all caged and needy.
+No relief without my say-so.
+The cage suits you. So helpless."
+} ]
+},
+"together": false
+},
+"BondageCollar": {
+"chance": 100.0,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "How does that feel, bitch?
+You’re mine now, bitch.
+Wear it, and remember who owns you.
+You don’t get to say no anymore.
+Don’t even think about escaping, whore.
+That collar’s for your own good, slave.
+You’ll learn to obey with this on.
+You’re locked in, no backing out.
+Say it loud, you’re my slave.
+No more freedom for you, bitch."
+}, {
+"condition": "!isAngry()",
+"lines": "This collar suits you perfectly.
+Wear it proud.
+This is just the start, my pet.
+You wear it well, slave.
+How does that feel?
+Wear it, and remember who owns you.
+You don’t get to say no anymore.
+Don’t even think about escaping.
+That collar’s for your own good, slave.
+You’ll learn to obey with this on.
+You’re locked in, no backing out.
+Say it loud, you’re my slave.
+No more freedom for you."
+} ]
+},
+"together": false
+},
+"BondageGag": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Bite on this, whore.
+No more bitching.
+Keep that mouth shut, bitch.
+Can’t scream, can you?
+That gag suits you.
+No more dumb talk.
+Get gagged, bitch.
+Finally.
+Bite down, shut up.
+Learn your place."
+}, {
+"condition": "!isAngry()",
+"lines": "Mmm, you look so good gagged.
+No more talking, just drooling.
+Shhh, just listen to me.
+Can't say a word now, huh?
+Such a pretty little gagged pet.
+No talking, only moaning.
+Your muffled sounds turn me on.
+No complaints now. Perfect.
+You don't like it? Just say it then.
+You’re looking so helpless.
+This gag suits you well."
+} ]
+},
+"together": false
+},
+"BondageMittens": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "You don't need your hands, whore.
+Thought you could scratch me? There you go.
+Your hands are useless now.
+Mittens for a brat.
+No more grabbing, slut.
+Can’t scratch, can’t resist.
+No claws to dig with now.
+Let those hands rest, bitch.
+No more slaps from you."
+}, {
+"condition": "!isAngry()",
+"lines": "Can’t touch now, huh?
+Mittens on.
+Silly hands, locked away.
+How’s that for helpless?
+Those mittens make you look cute."
+} ]
+},
+"together": false
+},
+"BondageMuzzle": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "No more biting for you, slut.
+Thought you could bite me? Not anymore.
+Now you're all bark and no bite.
+Too bad, can’t bite me now.
+Can't bite? Good.
+Shut up and take it.
+No more snapping at me."
+}, {
+"condition": "!isAngry()",
+"lines": "Quiet now, no biting.
+Muzzled, like a puppy.
+Muzzle’s on, behave yourself.
+Can’t bite with that, huh?
+Muzzled and so cute.
+You look good all muzzled up.
+My little obedient pup now.
+Can't bite me with that on."
+} ]
+},
+"together": false
+},
+"BondageVaginalPlug": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Look at you, slut. Stuffed and helpless.
+Plugged tight.
+Gonna keep that cunt stretched for me.
+You’re such a filthy little plug whore.
+Such a big slut.
+This plug owns your tight little hole.
+Your tight little hole’s mine to ruin.
+Keep that hole stretched for me, slut."
+}, {
+"condition": "!isAngry()",
+"lines": "Look at you, all stretched out and full.
+Your pussy’s gonna be nice and loose now.
+You love being stuffed like this, don’t you?
+Gonna have that pussy loose and ready.
+Look at you, all filled and helpless.
+You’re already wet from being stuffed."
+} ]
+},
+"together": false
+},
+"BondageWristCuffs": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Struggle all you want.
+Can’t get free, can you? Good.
+Fight me if you want, it’s useless.
+Cuffed and helpless.
+Locked up nice and tight.
+Struggle harder, it only makes me smile."
+}, {
+"condition": "!isAngry()",
+"lines": "Those wrists look good cuffed.
+Hands behind your back, perfect.
+Locked down tight.
+Those cuffs suit you perfectly.
+No struggle, just surrender."
+} ]
+},
+"together": false
+},
 "Choking": {
 "chance": 100,
 "chances": "",
@@ -508,6 +1441,84 @@ My hands shake but I wanna squeeze.
 I never thought choking would be my thing.
 You’re helpless, and it drives me wild.
 Maybe I’m a little twisted, but I love this."
+} ],
+1: [ {
+"condition": "isResisting()",
+"lines": "Let me breathe.. f-fucker..
+I wanna.. b-breathe..
+S-stop it..
+Stop choking.. me..
+Hands.. off.. my neck..
+Q-quit it..
+That's not funny.. ugh..
+Kgh..
+Let go..
+S-stop choking me!
+L-Let me go!
+Air.. khh.. need air..
+G-get off!.. fuck.."
+}, {
+"condition": "!isResisting()
+lovesFetish(Fetish.Choking)",
+"lines": "Choke me harder..
+Harder..
+Ngh-h..
+Choking me.. so nice..
+Ngh..
+Yes-s.. more..
+Mmm.. don’t stop..
+Harder.. please..
+Ngh.. keep going..
+So tight.. mmph..
+Can’t breathe.. love it..
+Ugh.. more..
+Don’t.. let go..
+Mmph.. choking me..
+Yeah.. squeeze..
+Guh.. feel good..
+So rough.. mmph..
+Need.. more..
+Mmmph.. don’t stop..
+Tight.. don’t ease..
+Love this.. ngh..
+Harder.. ngh..
+Can’t.. stop..
+Squeeze.. ahh..
+Ngh.. don’t slow.. kh.."
+}, {
+"condition": "!isResisting()
+!lovesFetish(Fetish.Choking)",
+"lines": "H-hey.. Fuck..
+Fuck..
+Air..
+My neck..
+Ngh..
+Are you.. ngh..
+Mmm.. breathe.. can’t..
+G-give me air..
+C-can’t.. hold on..
+Ahh.. too tight..
+Please.. easy..
+H-hey.. don’t kill me..
+Mmmph.. too much..
+Ah.. need air..
+Mmmph.. c-can’t..
+C-can breathe.. please..
+N-no.. too tight..
+H-hurts.. stop..
+G-give me air..
+Nngh.. choking..
+Please.. let go..
+Mmm.. can’t.. breathe..
+Struggling.. can’t..
+Nngh.. too much..
+H-hey.. too tight..
+Mmmph.. please..
+Nngh.. help..
+H-hey.. g-get off..
+Nngh.. can’t move..
+Mmm.. please stop..
+S-struggling.. air.."
 } ]
 },
 "together": false
@@ -576,6 +1587,52 @@ I love being rough with you.
 Ah, sorry.. I get carried away.
 I’m sorry.. you’re just too tempting.
 So sorry.. but this feels amazing."
+} ],
+1: [ {
+"condition": "",
+"lines": "Ngh..
+Hh-h-..
+Kh-h.. hh-h..
+..nh-h..
+Hh-h.. h-h.. kh-..
+Nh-h..
+Fh-h..
+Nngh..
+Hh.. hh..
+Mmmph..
+Khh.. uh..
+Hhnn..
+Gah..
+Uh.. ngh..
+Hhhnn..
+Mmph..
+Nh.. ahh..
+Khh.. mmph..
+Hnngh..
+Ugh..
+Nghh..
+Hhmm..
+Mmmh..
+Ghh..
+Hnn..
+Khh.. ahh.."
+}, {
+"condition": "lovesFetish(Fetish.Choking)",
+"lines": "H-h..ot-t..
+H-h.. ahr..-der..
+Ngh~..
+Mmphh~..
+Nghh~..
+Hngh~..
+Mmmf~..
+Nngh~..
+Hmph~..
+Mmff~..
+Nghhmm~~..
+Hnghh~..
+Mmphh~..
+Nffh~..
+Hnhh.. h-hot.."
 } ]
 },
 "together": false
@@ -623,6 +1680,78 @@ These breasts won’t touch themselves.
 Let me show you how good this feels.
 Let’s get those nipples sensitive.
 I’m gonna make those nipples hard."
+} ],
+1: [ {
+"condition": "hatesFetish(Fetish.Lactation)
+!isResisting()",
+"lines": "What are you?..
+I'm not really into this..
+What is it about my chest?
+Hey, wait.. what are you doing?
+I’m not sure about this..
+Why my chest?
+Is this really necessary?
+I’m kinda uncomfortable..
+This feels weird to me.
+I’m not sure how to react.
+I’m trying to stay calm.."
+}, {
+"condition": "hatesFetish(Fetish.Lactation)
+!isResisting()
+getChar().canBeMilked()",
+"lines": "I have milk but I don't like being groped..
+Having milk doesn't mean.. you should..
+I’m not into this, even if my breasts are leaking..
+My milk’s not for you.
+My breasts don’t want this, but here we go."
+}, {
+"condition": "isResisting()",
+"lines": "Fuck off! Don't touch my chest!
+Hey, don't touch me, fucker!
+Don't touch my nipples, bitch!
+Get your hands off me!
+Hands off my chest!
+Stop! Not my tits!
+Get your filthy hands away!
+Stay away from my chest!
+Don’t touch me like that!
+Leave me the fuck alone!"
+}, {
+"condition": "isResisting()
+getChar().canBeMilked()",
+"lines": "I'm not a fucking cow, fuck off!
+You will waste all my milk, fucker!
+I’m not your milking cow!
+Don’t touch what’s not yours!
+Stop groping me, idiot!
+My milk’s not for you!
+I’m not your milking toy!
+Hands off these tits, jerk!
+I’m not your damn milk cow!
+Get your hands away from my milk!
+These breasts aren’t for you!
+You’ll ruin my milk, fucker!
+Don’t drain me, asshole!
+Leave my milk alone, damn it!"
+}, {
+"condition": "!isResisting()",
+"lines": "Ah.. What are you about to..
+My chest?..
+It's a bit embarrassing..
+Are you gonna do what I'm thinking?..
+Wait.. you’re really going to?
+Please, be gentle..
+Your hands on me..
+I’m kinda trembling..
+Your touch already feels warm."
+}, {
+"condition": "!isResisting()
+getChar().canBeMilked()",
+"lines": "My nipples are itching already..
+Did you sensed that I'm lactating?..
+They're already leaking for you..
+My nipples are twitching..
+My nipples are hard and needy."
 } ]
 },
 "together": false
@@ -841,6 +1970,129 @@ Those tiny tits hold so much.
 Little breasts, plenty of milk.
 Milk tastes better from tiny tits.
 Soft, small, and milky."
+} ],
+1: [ {
+"condition": "hatesFetish(Fetish.Lactation)
+isResisting()",
+"lines": "I don't like this..
+Please quit it..
+Please stop.
+Why are you doing this?
+I don’t want this..
+Please, no more..
+Stop, seriously.
+I’m not okay with this.
+Can you just quit?
+This feels wrong.
+Why won’t you stop?
+I’m really uncomfortable.
+No, just stop it.
+I don’t want to do this.
+This is messing with me."
+}, {
+"condition": "hatesFetish(Fetish.Lactation)
+isResisting()
+getChar().isLactating()",
+"lines": "My nipple are leaking.. doesn't mean I like it..
+How much longer are you gonna feed on me?
+I'm not your cow..
+I don't wanna breastfeed..
+Don’t expect me to like this.
+I’m only letting you because I have to.
+I’m not your damn milk source.
+Quit milking me like some animal.
+My nipples are sore, stop.
+I’m only here because I can’t resist.
+I don’t want to be your teat.
+This is humiliating, stop.
+I hate being used like this."
+}, {
+"condition": "isResisting()",
+"lines": "I'm not your mommy! Stop it! Pathetic!.. Fuck..
+Stop sucking on them already..
+I'm not a cow!
+Stop feeding, now!
+What should I do to stop you..
+I’m not your damn milk cow!
+I’m not a cow, back off!
+Get your mouth off me!
+Don’t you dare keep going!"
+}, {
+"condition": "isResisting()
+getChar().isLactating()",
+"lines": "Stop stealing my milk, fucker!
+It's my milk, not yours!
+I don't wanna breastfeed you.. Stop it already..
+Stop feeding on my tits..
+Get off me, I’m not your damn cow!
+Quit milking me!
+I’m not sharing my milk with you!
+This is my milk, back off!
+Stop feeding, I’m not your damn snack!
+Quit stealing from me, jerk!
+I’m not your milkmaid, back off!
+Get off my tits, damn it!
+Stop stealing my milk, asshole!
+These are my breasts, not yours!
+Quit sucking my milk like a parasite!
+Don’t lick my breasts, I said no!
+Hands off my tits, stop feeding!
+My milk’s not for you, back off!
+Stop draining my breasts, jerk!
+Stop feeding on my breasts, now!
+I don’t wanna share my milk!
+Get your mouth off my breasts!"
+}, {
+"condition": "!isResisting()",
+"lines": "This feels so strange..
+Just don't bite..
+Ah.. my nips..
+Mmm, your mouth feels warm.
+Didn’t expect this, but okay.
+I’m.. actually kind of into this.
+This is way more intense than I thought.
+You’re making me dizzy.
+I didn’t know I had this in me.
+Feels weird..
+Your lips are so gentle.
+My skin’s tingling.
+You’re doing something to me.
+This is something else entirely."
+}, {
+"condition": "!isResisting()
+!hatesFetish(Fetish.Lactation)
+getChar().isLactating()",
+"lines": "I'm breastfeeding..
+I can see the milk flowing.. So strange..
+My tits are being drained of all their milk..
+I'm actually breastfeeding you..
+My tits are so full..
+You’re sucking my milk so good.
+My breasts are leaking..
+You’re making my nipples so sensitive.
+I’m dripping milk down your chin.
+Your mouth on my breasts feels amazing.
+I’m melting as you suck my milk."
+} ]
+},
+"together": false
+},
+"DomBreastfeedsOnSubStart": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Give me your tits, bitch.
+Don't you dare pull away.
+I'm hungry. Got something for me, whore?
+Let's see what you have, bitch."
+}, {
+"condition": "!isAngry()",
+"lines": "I'm very curious how you taste.
+Don't pull away.
+I'm hungry. Got something for me?
+Let's see what you have."
 } ]
 },
 "together": false
@@ -1006,6 +2258,30 @@ My little boobs are yours to feed on."
 },
 "together": false
 },
+"DomBreastfeedsSubStart": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "You're gonna latch on. Or else.
+You’ll do as I say.
+Show me you want this.
+Get your face in there, bitch.
+Better be good at this.
+I’m not gonna be gentle, got it?
+Do you like my tits, bitch?"
+}, {
+"condition": "!isAngry()",
+"lines": "Do you like my chest?
+Wanna take a closer look?
+I have something you can feed on.
+Wanna have some fun with these?
+How are you suckling skills I wonder."
+} ]
+},
+"together": false
+},
 "DomGropesSubsBreasts": {
 "chance": 100,
 "chances": "",
@@ -1115,6 +2391,196 @@ Petite and perfect.
 I could cup these all day.
 You’re adorable like this.
 I could squeeze you forever."
+} ],
+1: [ {
+"condition": "isResisting()",
+"lines": "Hey..
+W-wait..
+Ngh..
+E-Easy..
+Not like that..
+N-no, stop..
+Get off me..
+N-no way..
+H-hands off!
+Let go!..
+N-not like that!
+N-no more!
+H-hey.. Fuck..
+Fuck..
+Not so hard.. Ugh..
+Stop groping me..
+Ngh..
+Quit it.."
+}, {
+"condition": "isResisting()
+getChar().canBeMilked()",
+"lines": "My milk.. ah..
+Stop.. my milk’s leaking..
+Please.. not my breasts..
+They’re full.. it hurts..
+Don’t squeeze my lactating tits!
+My milk’s spilling everywhere..
+Ah.. don’t drain me like this..
+I’m lactating.. please, no..
+My milk’s flowing.. please stop..
+My breasts.. they’re so swollen..
+Please, my milk’s still coming..
+You’re milking me against my will..
+No! My milk’s not for you..
+My milk.. Ah..
+Not my leaky tits, ah..
+Why am I leaking milk.. f-fuck.."
+}, {
+"condition": "!isResisting()",
+"lines": "Ah..
+Ah-h..
+Ngh-h..
+My nips feel so stiff..
+Groping me.. so boldly..
+My breasts..
+My chest..
+You're.. groping me..
+Touching my tits..
+My nipples.. hah.."
+}, {
+"condition": "!isResisting()
+getChar().canBeMilked()",
+"lines": "My milk.. ah.. moo?..
+My breasts are producing milk..
+Mmm, my milk is flowing..
+Ah, my milk’s coming out..
+Don’t stop, my tits are dripping.
+My breasts feel so full and warm.
+Milk’s leaking from my nipples..
+Can you feel my milk flowing?
+I’m dripping milk all over you.."
+}, {
+"condition": "!isResisting()
+getChar().hasBigBreasts()",
+"lines": "Heavy.. aren't they.."
+} ]
+},
+"together": false
+},
+"DomPenisPumpOnSubMilk": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Yes, yes. Give me all your seed, fucker.
+More. I want every fucking drop.
+That's it? Got more in those pathetic balls of yours?
+Pathetic. Is that all you got?
+You’re leaking like a damn faucet.
+Don’t stop now, I want it all.
+Is that all you can squeeze out?
+Yes, I wanna see that cock throb hard.
+Hurry up, fill this thing right.
+Come on, fill it up, bitch."
+}, {
+"condition": "!isAngry()",
+"lines": "Yes, good. Give me all your seed.
+More. I want every drop.
+Do you have more for me?
+That’s it, fill it up nice and good.
+More! I want every drop.
+That’s my good little breeder.
+Keep pumping that pump full, c'mon.
+Give me everything. Good.
+Would you want to spill all of that deep inside me?
+That’s right, let your seed flood the thing."
+} ]
+},
+"together": false
+},
+"DomPutOnPenisPumpOnSub": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Do you like being milked, bitch?
+Let's see how long you can last, fucker.
+What? You didn't think I'd let you fuck me, did you?
+Gonna drain you dry, slut.
+I own that sorry cock.
+You’re my cum machine now."
+}, {
+"condition": "!isAngry()",
+"lines": "Do you like being milked?
+Let's see how long you can last.
+Gonna drain you dry.
+Gonna milk your balls.
+Dripping already, huh.
+How does that feel, huh? Tight enough?
+Can’t wait to see you burst.
+You’re my little cum machine now."
+} ]
+},
+"together": false
+},
+"DomPutOnStrapon": {
+"chance": 100.0,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Time to wreck you.
+Time to destroy your holes.
+See this? It's gonna go inside you.
+Ready to get fucked hard?
+You’re gonna take every inch of this.
+Gonna fuck you till you beg.
+I’ll ruin you good.
+Hope you like it rough.
+No mercy for you today.
+Gonna stretch you wide open.
+This is your punishment.
+You’ll be begging for more, whore.
+Take it like the filthy slut you are."
+}, {
+"condition": "!isAngry()",
+"lines": "Look what I’ve got for you.
+Ready for my new toy?
+You’re gonna love what’s coming.
+Can you handle this?
+I'm all strapped in now.
+You like what you see?
+Ready to get fucked by me?
+See that? That’s all for you.
+Hope you’re ready to be stretched.
+Time to take this for a spin."
+} ]
+},
+"together": false
+},
+"DomPutOnStraponOnSub": {
+"chance": 100.0,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Now you're not completely useless.
+Now I can finally have some fun.
+Finally, you’re good for something.
+Time to use you properly.
+Don’t get too proud of that toy.
+Ready to be my fucktoy?
+Let’s see how you handle this.
+Now you’re my little dildo.
+I’m going to use you good and hard."
+}, {
+"condition": "!isAngry()",
+"lines": "You’re looking so damn sexy with that on.
+Gonna make you fuck me good.
+Ready to watch me go wild with this?
+You’re about to get used hard.
+Let’s see how well you take it.
+Strapped up and ready to please.
+Time to put that cock to work.
+Let's have some fun with this."
 } ]
 },
 "together": false
@@ -1282,6 +2748,173 @@ Not much to grope. But I'm not complaining.
 Cute little things you’ve got.
 So petite, so perfect.
 I love how easily they fit in my hands."
+} ],
+1: [ {
+"condition": "hatesFetish(Fetish.Lactation)
+!isResisting()",
+"lines": "Hey..
+W-wait..
+Not so firmly..
+P-please, be gentle..
+I.. I’m not used to this.
+C-can you go slower?
+U-uh.. this feels strange.
+I don’t really like this..
+S-so sudden..
+I’m not sure about this..
+I don’t want to hate it..
+I’m a little scared..
+D-don’t be too rough..
+I’m not used to hands here.
+Please don’t hurt me.
+M-maybe a bit softer?
+I don’t know if I like this..
+J-just a little, okay?
+I’m not sure how to feel.
+T-this is kinda embarrassing..
+I don’t want to push you away.."
+}, {
+"condition": "hatesFetish(Fetish.Lactation)
+!isResisting()
+getChar().canBeMilked()",
+"lines": "My milk.. ah..
+Please.. not my milk..
+My breasts.. please be gentle..
+Ah.. you're making my breasts leak..
+Please.. don’t squeeze so hard..
+I’m so shy about this..
+My milk.. it’s leaking..
+It feels weird.."
+}, {
+"condition": "hatesFetish(Fetish.Lactation)
+!isResisting()
+getChar().hasBigBreasts()",
+"lines": "Is it because of the size?..
+My big tits..
+Groping my heavy breasts!
+Don’t squeeze my big chest!
+My breasts feel so exposed.."
+}, {
+"condition": "hatesFetish(Fetish.Lactation)
+!isResisting()
+getChar().hasSmallBreasts()",
+"lines": "I don't even have big tits, why are you.. ah.
+Why don't you grope someone with bigger.. ah..
+They’re so small.. are you sure?
+These tiny things don’t deserve this..
+Uh, my boobs are kinda flat, though.
+Is there anything to grab here?
+My little tits aren’t made for this.
+You really want to touch these?
+I don’t have much to offer, sorry.
+They’re barely there, you know.
+I wish I had more to hold.
+These are nothing special..
+You sure you want these tiny things?
+They’re cute but so small..
+I feel weird with you touching these.
+Not much to squeeze, I’m sorry.
+These little things don’t usually get this attention."
+}, {
+"condition": "isResisting()",
+"lines": "Stop! Hey..
+Why so firmly! Hey..
+Wait, stop groping me!
+You really gonna grope my tits right now? Fuck..
+Stop grabbing my breasts!
+Get your hands off me!
+Don’t squeeze so hard!
+Quit groping me like that!
+Hands off! I said stop!
+That’s too rough, cut it out!
+Stop fondling me!
+Don’t grope me like I want it!
+No! Don’t touch my chest!
+You can’t just grab me!
+Don’t squeeze my tits!
+I’m serious, hands off!
+Stop messing with me!
+That’s way too much!
+Please don’t grope me!
+Get your hands away!"
+}, {
+"condition": "isResisting()
+getChar().canBeMilked()",
+"lines": "My milk!.. Ah..
+Not my tits, ah..
+No, don’t touch my milk!
+My tits.. don’t squeeze!
+Don’t milk me like that!
+Quit it, I’m still full!
+Don’t squeeze my milkbags!
+Ah, stop milking me!
+Don’t touch my swollen breasts!
+My milk’s not for you!
+No, don’t milk me now!"
+}, {
+"condition": "isResisting()
+getChar().hasBigBreasts()",
+"lines": "Big tits doesn't mean you can grope them! Ah..
+Those are my tits, fuck off..
+Get your hands off my big tits!
+Hands off my heavy tits!
+Quit pawing my big boobs!
+These aren’t toys, get lost!
+Back off these massive tits!
+Quit squeezing my heavy breasts!
+Hands off my big knockers!"
+}, {
+"condition": "!isResisting()
+!hatesFetish(Fetish.Lactation)",
+"lines": "Ah..
+Feels weird..
+Not too hard..
+My nips feel so stiff..
+Mmm, that feels nice..
+Mmm, that feels strange..
+They’re so sensitive right now..
+My skin’s tingling..
+It’s a weird kind of nice..
+That’s kind of hot, I guess.."
+}, {
+"condition": "!isResisting()
+!hatesFetish(Fetish.Lactation)
+getChar().canBeMilked()",
+"lines": "My milk.. ah..
+You're groping my lactating breasts.. ah..
+Your hands.. on my milk-filled breasts..
+Mmm, your touch makes them leak..
+So gentle with my swollen tits..
+Ah, your fingers on my lactating breasts..
+I didn’t expect this feeling..
+Your grip makes my nipples harden..
+Your hands make me shiver..
+Ah, your fingers coaxing my milk out.."
+}, {
+"condition": "!isResisting()
+!hatesFetish(Fetish.Lactation)
+getChar().hasBigBreasts()",
+"lines": "Yeah.. grope my heavy tits..
+Do you see how big they are?..
+Do you feel how heavy they are?..
+They’re so big.. don’t stop squeezing.
+I’m not used to this much attention here.
+Careful, they’re sensitive when squeezed.
+It’s strange being handled like this.
+Your fingers dig into all this softness.
+They jiggle so much under your touch."
+}, {
+"condition": "!isResisting()
+!hatesFetish(Fetish.Lactation)
+getChar().hasSmallBreasts()",
+"lines": "I don't really have real tits..
+Hope you're happy with my size.. ah..
+Not much to grab here..
+Feel a little empty, huh?
+Guess my tits are tiny, sorry..
+Hope you don’t mind these little things..
+Barely enough for you to hold..
+Not much to squeeze, huh?"
 } ]
 },
 "together": false
@@ -1341,6 +2974,338 @@ Lick me harder, I’m dripping all over you!
 Fuck, you’re ruining me with that mouth!
 Suck my pussy lips, you fucker!
 I’m dripping, keep licking that cunt!"
+} ]
+},
+"together": false
+},
+"FeetplayAskToKiss": {
+"chance": 100.0,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Kiss these. Now.
+Kiss. That's an order.
+Start sucking, now.
+Kiss my {main.toes}. Now.
+Lick ‘em good, fucker.
+Show me you’re useful. Start sucking.
+Kiss them like you mean it, bitch.
+Put that mouth to work. Start sucking.
+Suck these {main.toes}, slut.
+Worship my {main.feet}, now."
+}, {
+"condition": "!isAngry()",
+"lines": "Why don't you give these a kiss.
+Start kissing. I know you want to.
+Start sucking. Be a good {main.foot}-slut.
+Kiss my {main.toes}. C'mon.
+Lick ‘em good. Please?
+Put that mouth to work, why don't you.
+Suck these {main.toes}.
+I wanna see you worship my {main.feet}.
+Come on, kiss these {main.toes} nice and slow.
+Show me how much you want them.
+Don’t be shy. Lick ‘em good.
+Get those lips moving.
+Worship my {main.feet} like you mean it.
+Put those lips to work, baby.
+Show me your devotion. Kiss my {main.feet}.
+Don’t just look, taste them."
+} ]
+},
+"together": false
+},
+"FeetplayCumPenis": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Pathetic. There are no other words.
+Such a slut. Wow.
+Cumming just from my {main.foot}. What a slut.
+Look at you, so pathetic.
+You’re such a desperate little slut.
+Made you cum with my foot. Haha.
+Can’t believe you came.
+Only a desperate slut would squirt like that.
+Such a needy little whore.
+You managed to get off like this. Such a slut."
+}, {
+"condition": "!isAngry()",
+"lines": "Who knew {main.feet} could do this to you?
+So sensitive.. cute.
+Look at you, cumming in such a humiliating way.
+Such a needy little thing, squirming for me.
+Can’t get enough of my {main.foot}, huh?
+Cute how you melt under my {main.toes}.
+Didn’t expect you to be this needy.
+All this from just a little rub of my {main.foot}.
+Can’t hide how much you love this.
+You’re so cute when you’re desperate.
+Your cock is so sensitive.
+That’s right, cum for me, baby."
+} ]
+},
+"together": false
+},
+"FeetplayCumPussy": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Pathetic. There are no other words.
+Such a slut. Wow.
+Cumming just from my {main.foot}. What a slut.
+Look at you, so pathetic.
+You’re such a desperate little slut.
+Made you cum with my foot. Haha.
+Can’t believe you came.
+Only a desperate slut would squirt like that.
+Such a needy little whore.
+You managed to get off like this. Such a slut."
+}, {
+"condition": "!isAngry()",
+"lines": "Who knew {main.feet} could do this to you?
+So sensitive.. cute.
+Look at you, cumming in such a humiliating way.
+Such a needy little thing, squirming for me.
+Can’t get enough of my {main.foot}, huh?
+Cute how you melt under my {main.toes}.
+Didn’t expect you to be this needy.
+All this from just a little rub of my {main.foot}.
+Can’t hide how much you love this.
+You’re so cute when you’re desperate.
+Your pussy’s so sensitive.
+That’s right, cum for me, baby."
+} ]
+},
+"together": false
+},
+"FeetplayKissingFeet": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Look at you, such a slut for my {main.feet}.
+Can’t get enough of these, huh?
+Pathetic little whore. Keep sucking.
+You love licking my {main.feet}, don’t you?
+Slobber all over my {main.toes}, you’re a mess.
+Such a desperate slut.
+You’re made to worship my {main.feet}.
+Only a {main.foot}slave would do this.
+You’re obsessed with my {main.feet}, aren’t you?
+Such a dirty little {main.foot} slut.
+You’re nothing but a {main.foot} toy.
+Keep kissing. It looks cute.
+Look at you, begging for my {main.feet}.
+You’ll do anything for these {main.feet}.
+You’re worthless without my {main.feet}.
+Pathetic {main.foot} slut, keep going.
+You live to lick my {main.toes}.
+Your place is beneath my {main.feet}."
+}, {
+"condition": "!isAngry()",
+"lines": "Look at you, such a cute little {main.foot}slut.
+Can’t get enough of these {main.feet}, huh?
+You’re obsessed with my {main.toes}, aren’t you?
+Sucking my {main.feet} like the good {main.foot}slut you are.
+Keep going, you love being my {main.foot}slave.
+Enjoying that, huh? Cute.
+Such a cute {main.foot}slut, begging for more.
+So desperate to please these {main.feet}.
+Look at you, lost in my {main.toes}.
+Such a needy little {main.foot} whore.
+Licking up every inch like a true {main.foot}slut.
+You’re hooked on my {main.feet} already.
+Keep kissing, you’re made for this. So cute.
+So eager to suck on my {main.toes}.
+You live to serve my {main.feet}, don’t you?"
+} ]
+},
+"together": false
+},
+"FeetplayRubbingPenis": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "You’re nothing but a slut, huh?
+You love this, huh? Such a slut.
+Your cock is mine to play with. Any way I want.
+You’re throbbing already. Such a whore.
+Such a desperate little {main.foot} slut.
+Your cock loves my {main.foot}, doesn’t it?
+Keep squirming, whore.
+Can’t hide it. You're loving it.
+You’re dripping just from my {main.foot}, pathetic.
+Should I stop? I bet you'd only squirm more.
+You’re just a slut for {main.feet}, admit it.
+Such a needy slut.
+You're getting off from my {main.foot}? How humiliating."
+}, {
+"condition": "!isAngry()",
+"lines": "You’re nothing but a slut, huh?
+You love this, huh? Cute.
+Your cock is mine to play with. Any way I want.
+You’re throbbing, huh. You're enjoying this.
+Such a desperate little cutie.
+Your cock loves my {main.foot}, doesn’t it?
+Keep squirming.
+Can’t hide it. You're loving it.
+You’re dripping just from my {main.foot}.
+Should I stop? I bet you'd only squirm more.
+You’re just a slut for {main.feet}, admit it.
+Such a needy cutie.
+You're getting off from my {main.foot}? How cute."
+} ]
+},
+"together": false
+},
+"FeetplayRubbingPussy": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "You’re nothing but a slut, huh?
+You love this, huh? Such a slut.
+Your pussy’s mine to play with. Any way I want.
+You’re soaking wet. Such a whore.
+Such a desperate little {main.foot} slut.
+Your slutty little pussy loves my {main.foot}, doesn’t it?
+Keep squirming, whore.
+Can’t hide it. You're loving it.
+You’re dripping just from my {main.foot}, pathetic.
+Should I stop? I bet you'd only squirm more.
+You’re just a slut for {main.feet}, admit it.
+Such a needy slut.
+You're getting off from my {main.foot}? How humiliating."
+}, {
+"condition": "!isAngry()",
+"lines": "You’re nothing but a slut, huh?
+You love this, huh? Cute.
+Your pussy’s mine to play with. Any way I want.
+You’re soaking wet. You're enjoying this.
+Such a desperate little cutie.
+Your little pussy loves my {main.foot}, doesn’t it?
+Keep squirming.
+Can’t hide it. You're loving it.
+You’re dripping just from my {main.foot}.
+Should I stop? I bet you'd only squirm more.
+You’re just a slut for {main.feet}, admit it.
+Such a needy cutie.
+You're getting off from my {main.foot}? How cute."
+} ]
+},
+"together": false
+},
+"FeetplayStompChest": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "",
+"lines": "Learn your place. Now.
+Do you want me to stomp harder? Obey, bitch.
+Feel that? Do you want more?
+This can get way worse, trust me.
+You like pain? I canl give you more.
+Keep quiet and take it.
+That’s what happens when sluts disobey.
+Scream if you want.
+Take it like the brat you are.
+You’ll learn it the hard way.
+Next time, I won’t hold back."
+} ]
+},
+"together": false
+},
+"FeetplayStompPenis": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "",
+"lines": "Learn your place. Now.
+Do you want me to stomp harder? Obey, bitch.
+Feel that? Do you want more?
+This can get way worse, trust me.
+You like pain? I canl give you more.
+Keep quiet and take it.
+That’s what happens when sluts disobey.
+Scream if you want.
+Take it like the brat you are.
+You’ll learn it the hard way.
+Next time, I won’t hold back."
+} ]
+},
+"together": false
+},
+"FeetplayStompPussy": {
+"chance": 100.0,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "",
+"lines": "Learn your place. Now.
+Do you want me to stomp harder? Obey, bitch.
+Feel that? Do you want more?
+This can get way worse, trust me.
+You like pain? I canl give you more.
+Keep quiet and take it.
+That’s what happens when sluts disobey.
+Scream if you want.
+Take it like the brat you are.
+You’ll learn it the hard way.
+Next time, I won’t hold back."
+} ]
+},
+"together": false
+},
+"ForceUndress": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Don't you dare resist, you little \"+RNG.pick([\"slut\", \"whore\", \"fucktoy\", \"bitch\"])+\".
+You don't need that shit.
+Don't whine about it, no one will save you.
+You're going to do exactly what I say or you'll regret it.
+I'll do whatever it takes to get you naked.
+I won't stop until you're completely naked.
+Fine, if you won't undress willingly, I'll do it for you.
+Stop struggling! You're only making it worse for yourself.
+You'll thank me later. Trust me, this is for your own good.
+I’ll rip it right off you if I have to.
+Stop whining and strip already.
+Struggle all you want, it’s coming off."
+}, {
+"condition": "!isAngry()",
+"lines": "Let me take that off.
+You don't need that with me.
+That's only getting in the way.
+Let me see what's under.
+Why are you being so shy? Let me help you out of those clothes.
+I can't wait to see what's underneath. Come on, let me take it off.
+You can't resist me. Just let me undress you and we can get started.
+Don't be such a prude. Let me show you how good it can be without all those clothes on.
+You know you want me to take your clothes off. Just let go and let me do it.
+I bet you're even more beautiful without any clothes on. Come on, let me see.
+I can't wait to touch every inch of your bare skin. Just let me undress you.
+Don't be scared. I promise I'll be gentle as I take off your clothes.
+Let's make this even more exciting by letting me undress you. Trust me, you'll love it.
+Let me help you take that off.
+Come on, let me undress you.
+No need to hide from me.
+Let me free you from those.
+Let me see all of you."
 } ]
 },
 "together": false
@@ -1435,6 +3400,91 @@ You make this so damn easy."
 },
 "together": false
 },
+"LeashStart": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Don't fucking move.
+I need your neck, bitch.
+Hold still while I attach this.
+No sudden moves, slut.
+Stay quiet and take it.
+Keep still, bitch.
+Look at me when I put this on.
+You’ll learn your place soon."
+}, {
+"condition": "!isAngry()",
+"lines": "Hold still.
+Stay still.
+Don’t move.
+This is for your own good.
+Quiet now.
+No sudden moves.
+Look at me.
+Let me show you who’s boss."
+} ]
+},
+"together": false
+},
+"LeashYank": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Don’t test me.
+Obey, or I’ll choke you out.
+I'm in charge here, bitch.
+You’ll learn your place, like it or not.
+Stop struggling, or I’ll show you real pain.
+I don’t like defiance.
+Do you like gasping for air, whore?
+Quit whining or feel this leash even tighten.
+Stupid bitch, you earned this."
+}, {
+"condition": "!isAngry()",
+"lines": "Don’t make me yank this again.
+You better listen.
+Obey, I have your leash.
+I’ll yank even harder if you don’t obey.
+Don't make me angry.
+Don't make me mad.
+Don’t test me.
+Quit resisting.
+Do you really want to be choked?"
+} ]
+},
+"together": false
+},
+"Leashed": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "You’ll learn your place soon.
+You’re chained to me now.
+Feel that? That’s control.
+You’re locked down, bitch.
+Stay put or I’ll yank that leash hard.
+Obey, or I’m yanking you back.
+You’re on a leash, remember that.
+Don’t make me yank it."
+}, {
+"condition": "!isAngry()",
+"lines": "A leash looks nice on you.
+You wear that leash so well.
+I’m holding this leash. Stay put.
+Behave, or I’ll give a little tug.
+This leash is for your good.
+Don’t make me pull on it.
+You’re safe as long as you obey."
+} ]
+},
+"together": false
+},
 "MilkingSubWithBreastPump": {
 "chance": 100,
 "chances": "",
@@ -1514,6 +3564,146 @@ You’re such a good milking pet.
 Feel that pull? It’s teasing you.
 I love watching you get all worked up.
 Those nipples look so sensitive."
+} ],
+1: [ {
+"condition": "hatesFetish(Fetish.Lactation)
+!isResisting()",
+"lines": "I don't like this..
+Please turn them off..
+Please take them off my chest.
+Nhh.. Please..
+Nnhh.. this hurts..
+Nnh.. it’s too much..
+Please.. no more..
+Mmm.. these pumps suck way too hard..
+Nngh.. it’s so weird being milked like this..
+Nnhh.. my poor breasts..
+Mmm.. these pumps won’t quit, will they?"
+}, {
+"condition": "hatesFetish(Fetish.Lactation)
+!isResisting()
+getChar().isLactating()",
+"lines": "My nipple are leaking.. doesn't mean I like it..
+How much longer are you gonna milk me?
+Ugh, milk's leaking everywhere.. hhh..
+These pumps suck so much.. nnhh.."
+}, {
+"condition": "isResisting()",
+"lines": "Take them off already!
+Stop trying to milk me!
+I'm not a cow!
+Turn them off, now!
+How do I turn them off.
+I will shake them off if I have to.
+Stop milking my poor tits!
+I’m not made for pumping.
+This pumping’s driving me crazy.
+My poor boobs can’t take this.
+Enough with the milking already.
+I’m not your personal dairy cow!
+My nipples are way too sensitive."
+}, {
+"condition": "isResisting()
+getChar().isLactating()",
+"lines": "Stop stealing my milk, fucker!
+It's my milk, not yours!
+Milk yourself instead!
+These damn pump are squeezing me dry!
+Quit draining my milk, fucker!
+I’m not your personal milk supply!
+Stop milking me like a toy!
+I’m not a fucking milk cow!
+This pumping hurts, you fuck!"
+}, {
+"condition": "!isResisting()
+!hatesFetish(Fetish.Lactation)",
+"lines": "This feels so strange..
+I can feel the pumps tugging on my nips..
+Ah.. my nips..
+Mmm, the pumps are pulling so good..
+Feels so good on my breasts..
+My nipples are so sensitive..
+This pumping’s making me weak.."
+}, {
+"condition": "!isResisting()
+!hatesFetish(Fetish.Lactation)
+getChar().isLactating()",
+"lines": "I can see the milk flowing.. So strange..
+My tits are being drained of all their milk..
+I'm being milked like a cow..
+I can feel the milk draining out..
+The pump’s pulling so hard, but it feels good.
+I didn’t know my tits could do this much..
+Milk’s just pouring out of me..
+My tits look so swollen and juicy.
+It’s so hot feeling my milk flow out like this.
+My nipples are twitching with every pull.
+Every pull makes my milk gush more."
+} ]
+},
+"together": false
+},
+"MoanGeneric": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Ah.. fuck..
+Hngh.. damn you.
+Gah.. fuck yeah.
+Mmph.. that’s it.
+Ah.. you’re lucky.
+Ah.. fucker..
+Mmm..
+Ahh..
+Ohh..
+Ah.."
+}, {
+"condition": "!isAngry()",
+"lines": "Ah..
+Mmm..
+Ahh..
+Ohh..
+Hah..
+Nngh..
+Mm-hmm..
+Mmph..
+Hng..
+Aah..
+Nnh..
+Mhmm..
+Haa..
+Nnhh.."
+} ]
+},
+"together": false
+},
+"OfferingACondom": {
+"chance": 100.0,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "!isAngry()",
+"lines": "Please, put on a condom. You can use mine.
+I beg of you, protect us both with a condom. I can give you one.
+I don't want to take any risks. Can you please put on a condom? I have one here.
+I'm begging you, let's be safe and use a condom. Use mine.
+Can you please put on a condom? Take this one.
+Take this.. don’t ruin me, please.
+I don’t wanna be your breeding slut. Use this.
+Take this damn condom, I’m asking you.
+I’m begging you, put this on or don’t cum inside.
+I’m asking.. please just use the condom.
+Please don’t make me your breeder. Just wear this.
+I’ll be your good if you just use the condom."
+}, {
+"condition": "isAngry()",
+"lines": "Use this condom. Now. Don’t even think of cumming inside.
+Don’t test me, wrap your cock with this!
+No bareback. Got it, fucker? Here!
+Wrap up, or we’re done. I'm offering a rubber even though I don't have to!
+Don’t dare cum in me. Use this, you fuck."
 } ]
 },
 "together": false
@@ -1698,6 +3888,281 @@ Make it all slippery.
 No hesitation, just go.
 Show me your dedication.
 Make me melt with that mouth."
+} ],
+1: [ {
+"condition": "!isResisting()
+hatesFetish(Fetish.RimmingGiving)",
+"lines": "Hey, I don't wanna do this.
+I'm not really into rimming.
+I'm not comfortable, can we not?
+Licking buts isn't something I'm interested in trying.
+Ugh, do I have to?
+This is seriously gross."
+}, {
+"condition": "isResisting()",
+"lines": "Fuck off, I'm not doing that!
+Hey, I'm not gonna do that!
+I will bite your ass if you make me do this!
+No way I’m kissing that.
+I’m not your damn toy.
+I swear I’ll scratch your eyes out.
+No fucking way, asshole.
+You’ll regret this if you try.
+Stop, or I’m biting back hard."
+}, {
+"condition": "!isResisting()
+!hatesFetish(Fetish.RimmingGiving)",
+"lines": "Oh, um, you want me to.. do that?
+I'm not sure about this.
+It's a bit embarrassing.
+This is kinda embarrassing..
+Do you really want me to do that?
+I’m not sure if I’m ready for this..
+I don’t know if I’m good at this.
+You want me to lick your ass?
+Do I really have to do this now?
+This feels kinda humiliating.."
+} ]
+},
+"together": false
+},
+"OrderToUndress": {
+"chance": 100.0,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Your \"+_args[0]+\", take that shit off.
+Take your \"+_args[0]+\" off, \"+RNG.pick([\"slut\", \"whore\", \"fucktoy\", \"bitch\"])+\".
+Don't make me break you, take your stupid \"+_args[0]+\" off.
+Take off your \"+_args[0]+\" or I'll rip your clothes off myself.
+Get \"+_args[0]+\" off before I lose it.
+Off with \"+_args[0]+\", no excuses.
+Yank \"+_args[0]+\" off, slut.
+Ditch your \"+_args[0]+\", or else.
+Drop your \"+_args[0]+\", now.
+Lose the \"+_args[0]+\", bitch.
+Take your \"+_args[0]+\" off, or I will."
+}, {
+"condition": "!isAngry()",
+"lines": "You don't need your \"+_args[0]+\". Undress for me.
+I think you don't need your \"+_args[0]+\". Be a good toy and undress.
+Take your \"+_args[0]+\" off for me.
+Strip your \"+_args[0]+\" off, nice and slow.
+I want to see you without your \"+_args[0]+\".
+Get your \"+_args[0]+\" off me."
+} ]
+},
+"together": false
+},
+"OrgasmGeneric": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Mhh.. ah.. fuck..
+Nhggnn.. fuck you.. ah..
+Mnhhh.. mhhh..
+Mhh.. ah.. fuck..
+Nhggnn.. fuck you.. ah..
+Mnhhh.. mhhh..
+Hngh.. ugh.. damn..
+Grr.. ah.. fuck..
+Mhh.. gah.. so good..
+Gnhh.. ah.. fuck yeah..
+Tch.. ugh.. damn you..
+Mhhh.. ugh.. can’t stop..
+Nhgh.. mhhh.. fuck..
+Gnhh.. ah.. so good..
+Nhggh.. mhh.. yeah..
+Mhmm.. ugh.. fuck..
+Tsk.. ugh.. so good..
+Mhhh.. damn.. can’t stop.."
+}, {
+"condition": "!isAngry()",
+"lines": "Ahh..
+Mmm..
+Oooh.. ah..
+Yeah.. hah..
+Hnnng.. mhh..
+Ohh yes.. hah..
+Nnngh.. ahh..
+Aah yeah.. hah..
+Mmph.. hhh..
+Oooh fuck.. ah..
+Hah.. nhhh..
+Yesss.. fuck..
+Ahhh fuck.. nhh..
+Nnnh.. mhh..
+Mmm yeah.. fuck..
+Ah yeah.. nhh..
+Hngh.."
+} ]
+},
+"together": false
+},
+"PainGeneric": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Ughh.. you fuck..
+That hurts, you fucker!
+Fuck, watch it!
+Shit, don’t push it! Agh..
+Grr.. bitch.
+Ugh, enough, you fuck.
+Grr.. quit it!
+Argh, I’m not a toy!
+Cut it out, asshole!
+Ow! Cut that out!
+Shit, stop it, bitch.
+Argh, that hurts..
+Ugh, fuck off!
+Ow, easy..
+Fuck, enough!
+Cut it, asshole!"
+}, {
+"condition": "!isAngry()",
+"lines": "Ow..
+Ah!
+Ugh!
+Ow!
+Ack!
+Eek!
+Argh!
+Uh!
+Gah!
+Aah!
+Ughh!
+Ah.. fuck..
+Ow.. that hurt.."
+} ]
+},
+"together": false
+},
+"PawjobHappens": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Look at you.. feels good, fucker?
+You’re lucky I’m even touching that thing.
+Pathetic cock.. but I’ll keep going.
+Get used to being my little foot toy.
+You like my {main.feet} better than your hands, huh?
+Such a desperate little prick.
+Squirm for me, worthless pet.
+This is all you get, weakling.
+My {main.feet} own that sad little dick.
+You want off? Earn it under my {main.feet}.
+Suck it up, you’re my foot slave now.
+I’ll make you beg with these {main.feet}.
+Feel that? Yeah, you do, fucker.
+You’re lucky I’m feeling generous today.
+My {main.feet} can crush you, but I’ll play nice.
+Keep squirming, you pathetic cock.
+Don’t get cocky, my {main.feet} decide your fate."
+}, {
+"condition": "!isAngry()",
+"lines": "Yeah.. there we go.
+Yeah.. Look at that..
+Yeah.. Nice and hard.
+How does that feel? Nice, huh?
+Bet you didn’t expect this, huh?
+How’s that feel? I can feel you getting harder.
+Look at you, all worked up for my {main.feet}.
+Gonna make you cum with just my {main.feet}.
+Who needs hands when you’ve got {main.feet} like these?
+That little cock loves my {main.feet}, huh?
+You’re so cute, getting off on this.
+Can’t wait to hear you beg under my {main.feet}.
+Bet you never thought {main.feet} could feel this good.
+Don’t fight it, my {main.feet} know what you want.
+So desperate for my {main.feet}, aren’t you?
+Watch me make you melt with just my {main.feet}."
+} ]
+},
+"together": false
+},
+"PawjobRubBalls": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "I can crush these so easily.
+Should I kick you here?
+I wanna see what will happen if I squeeze these.
+These balls look pathetic under my {main.feet}.
+Look at you, trembling under my {main.feet}.
+You like it rough? I’ll break you.
+These balls are begging for punishment.
+Squirm for me, you worthless sack."
+}, {
+"condition": "!isAngry()",
+"lines": "Some love for the balls.
+Look at you, all worked up under my {main.feet}.
+You like it when I rub your balls like this?
+Can’t resist my paws, can you?
+These little balls are begging for it.
+Don’t get too cocky, I’m in charge here.
+Paws on your balls, and you’re melting.
+Those balls are twitching under my touch.
+Play nice or my {main.feet} get rough."
+} ]
+},
+"together": false
+},
+"PawjobStart": {
+"chance": 100.0,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Let’s see how you handle this, bitch.
+See these {main.feet}? I bet you're drooling already, fucker.
+Gonna grind you down with my {main.feet}.
+Watch me turn you into a wet mess with my {main.feet}.
+I bet you're gonna squirm under my {main.feet}, bitch.
+Tighten up, I’m not going easy."
+}, {
+"condition": "!isAngry()",
+"lines": "Let’s see how you like this.
+Hope you’re ready for my {main.feet}.
+These {main.feet} aren’t just for walking.
+Let me show you what my {main.feet} can do.
+Let my {main.feet} do the talking.
+Hope you can handle my grip."
+} ],
+1: [ {
+"condition": "isResisting()",
+"lines": "The fuck? Don't you dare do this.
+I will break your legs if you do anything stupid.
+Do you want me to scratch your legs or something?
+Don't you dare.
+No way I’m letting you do that.
+I won’t let you humiliate me.
+Don’t test me with that shit.
+I’m not your toy, stop it!
+Don’t make me fight back."
+}, {
+"condition": "!isResisting()
+lovesFetish(Fetish.FeetplayReceiving)",
+"lines": "Mmm..
+Damn..
+Your {main.feet} are such a tease.
+I’m yours..
+Using your {main.feet} on me? Yes, please."
+}, {
+"condition": "!isResisting()
+!lovesFetish(Fetish.FeetplayReceiving)",
+"lines": "I'm not sure I'm into this..
+This seems very humiliating..
+Really? I don't know.."
 } ]
 },
 "together": false
@@ -1771,6 +4236,136 @@ I want to see you dripping soon.
 I bet those nipples will perk right up.
 Keep still, this will feel good.
 These pumps are gonna get your nipples nice and sensitive."
+} ],
+1: [ {
+"condition": "hatesFetish(Fetish.Lactation)
+!isResisting()",
+"lines": "I don't really like milking..
+Hey. Don't put this on me!
+Don't milk me, I don't like it..
+I’m not sure about this..
+Why the pumps?
+I don’t want this on me.
+I don’t want to be pumped.
+It’s cold and awkward.."
+}, {
+"condition": "hatesFetish(Fetish.Lactation)
+!isResisting()
+getChar().isLactating()",
+"lines": "I have milk but I don't like being milked..
+Having milk doesn't mean I'm into being a cow.."
+}, {
+"condition": "isResisting()",
+"lines": "Fuck off with your breast pumps!
+Hey, take these off, fucker!
+Don't touch my nipples, bitch!
+I will shove these up your ass!
+I'm not a fucking cow, fuck off!
+I’m not some damn dairy cow!
+Don’t you dare pump these!
+Take those pumps off, now!
+I won’t let you milk me!
+I’m not your damn cow!"
+}, {
+"condition": "isResisting()
+getChar().isLactating()",
+"lines": "Don't you fucking dare steal my milk!
+My milk is not for you to steal, fucker!
+Don't you dare steal my breast milk, bitch!
+Fucking weirdo, my milk is not for you!
+No way you’re stealing my milk!
+Stop milking me, you fuck!"
+}, {
+"condition": "!isResisting()
+!hatesFetish(Fetish.Lactation)",
+"lines": "Ah.. What is this.. Breast pumps?..
+You wanna try to milk me?.. Like I'm a cow?..
+It's a bit embarrassing..
+These will milk me? Wow..
+Mmm, that feels weird.. but kinda nice.
+You really wanna milk me like this?
+So cold.. but I’m not complaining.
+Are you serious? Pumping me now?"
+}, {
+"condition": "!isResisting()
+!hatesFetish(Fetish.Lactation)
+getChar().isLactating()",
+"lines": "You’re really gonna milk me dry, huh?
+You want all my milk, don’t you?
+Guess I’m your little milk cow now.
+My breasts are itching already..
+I do have some milk.."
+} ]
+},
+"together": false
+},
+"RefuseGeneric": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Go fuck yourself.
+Not a chance, asshole.
+Get lost.
+Fuck off.
+Keep dreaming, fucker.
+Hell no.
+Not happening.
+Piss off.
+No. Just no.
+Fuck off, I mean it."
+}, {
+"condition": "!isAngry()",
+"lines": "No.
+Nope.
+I’m good, thanks.
+Nah, I’m not up for this.
+Sorry, can’t do it.
+I’ll pass.
+No thanks.
+I don’t want to.
+Hard pass.
+Nope, not happening.
+I’m gonna say no.
+That’s a no."
+} ]
+},
+"together": false
+},
+"RefusingToSwallowDrug": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "!isAngry()",
+"lines": "No way, I'm not swallowing that!
+I don't do drugs, no thanks.
+I don't think that's a good idea.
+I'm sorry, but I'm not comfortable with that.
+I don't want to do anything that could be dangerous.
+No, I don't want to risk my health like that.
+I'm sorry, but I just can't do that.
+I'm sorry, but I just can't swallow that pill.
+Pass. I’m not touching that.
+Hard pass on the drugs.
+Nah, not happening.
+I’ll skip the pill, sorry.
+Not my thing. Thanks.
+Sorry, I don’t swallow random pills."
+}, {
+"condition": "isAngry()",
+"lines": "Fuck off with that pill!
+Get that shit away from me!
+Shove it where the sun don’t shine!
+I’m not your lab rat, asshole!
+Eat your own damn drugs!
+Fuck you, no way!
+Take your crap and leave!
+Not in a million fuckin’ years!
+Go screw yourself with that pill!
+Nope, fuck off!
+Don’t test me, fuckface!"
 } ]
 },
 "together": false
@@ -1839,6 +4434,924 @@ Well, at least your breasts got some love.
 Not quite ready to give, huh?
 Guess we’ll have to wait.
 Maybe you’re saving it all for later."
+} ],
+1: [ {
+"condition": "hatesFetish(Fetish.Lactation)
+!isResisting()",
+"lines": "I didn't really enjoy it.. Sorry..
+Please don't do this again.
+Finally..
+That’s.. over now, right?
+Was that supposed to feel good?
+Glad it’s done.. I think.
+Not sure if I liked that.
+Please, no more pumping.
+I’m just glad it’s off."
+}, {
+"condition": "hatesFetish(Fetish.Lactation)
+!isResisting()
+getChar().isLactating()",
+"lines": "Finally.. You're happy with my milk?.."
+}, {
+"condition": "isResisting()",
+"lines": "Fucking finally..
+Uhh.. ow..
+You fuck..
+Hope you're happy, fucker.."
+}, {
+"condition": "isResisting()
+getChar().isLactating()",
+"lines": "Fucking milk thief..
+Enjoy my milk, you fucker..
+Hope you choke on it..
+That’s my milk, asshole!
+Don’t you dare waste it!
+You left me empty, jerk!"
+}, {
+"condition": "!isResisting()
+!hatesFetish(Fetish.Lactation)",
+"lines": "That was very embarrassing..
+That was more intense than I thought.
+Wow, my tits feel so sensitive now.
+My boobs feel all tingly.
+My chest feels so light now.
+It’s weird how sensitive they are."
+}, {
+"condition": "!isResisting()
+!hatesFetish(Fetish.Lactation)
+getChar().isLactating()",
+"lines": "What are you gonna do with my milk?..
+You're not gonna give it to me?..
+Enjoy the milk..
+I felt like a cow..
+Hope you like the taste.
+That’s all mine, don’t waste it.
+You better enjoy what you got.
+Feels weird without the pump.."
+} ]
+},
+"together": false
+},
+"Resisting": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isMean()",
+"lines": "Fuck off with this shit!
+FUCK OFF!
+Go fuck yourself!
+I will break you if you do this!
+You stupid \"+RNG.pick([\"fucker\", \"bitch\"])+\", what are you doing?!
+I don't want this, fuck off!
+Stop it, go screw yourself!
+Back off, you asshole!
+Don’t touch me, fucker!
+I’m not having this shit!
+You’re not taking me that easy!
+Fuck you and your games!
+Leave me the hell alone!
+I’m done with this crap!
+Don’t test me, asshole!
+Get your hands off!
+No way in hell!
+You don’t own me!
+Don’t touch me, you dumb fuck!
+I’ll make you regret this, asshole!
+Fuck off before I snap!
+You’re messing with the wrong bitch!
+I’m not your damn plaything!
+I’m done with your crap, asshole!
+Get the fuck away from me!
+Go fuck yourself, asshole!"
+}, {
+"condition": "!isMean()",
+"lines": "Don't do this, please!
+I don't want this!
+I don't like this!
+Don't touch me!
+Stop it, please!
+This is not funny, stop it!
+I don't wanna do this!
+I can't do this, it's not right.
+Please, stop. I'm not ready for this.
+Please, don’t!
+Stop, no!
+Leave me alone!
+No, please!
+Please, back off!
+Please, no more!
+I don’t want to!"
+} ]
+},
+"together": false
+},
+"ResistingRestraints": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "",
+"lines": "Nghh..
+Uhh..
+Ff-fh..
+Hh-h..
+Mgh-h.."
+} ]
+},
+"together": false
+},
+"StartChokeFuck": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "",
+"lines": "Look at me while I fuck you.
+Scream for me, you slut.
+Take my cock with my hands on your throat.
+Shut up and take it, bitch.
+I’m gonna fuck you till you can’t breathe.
+Can’t handle this, little bitch?
+You like being fucked while strangled, don’t you, slut?
+I’m gonna fuck you senseless, bitch."
+} ]
+},
+"together": false
+},
+"StartChokeRide": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "",
+"lines": "You’re nothing but my fucktoy.
+I ain't taking off my hands off of your neck.
+Look at me while I ride you.
+Scream for me, you slut.
+Shut up and give me your cock, bitch.
+I’m gonna ride you till you can’t breathe.
+Can’t handle this, little bitch?
+You like being fucked while strangled, don’t you, slut?
+I’m gonna ride you senseless, bitch."
+} ]
+},
+"together": false
+},
+"SubMoos": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "!isResisting()",
+"lines": "Moo..
+Moo~..
+Moo-o!
+Moo. Moo-o..
+Moo?.. Moo..
+Ah.. Moo..
+Moooo~..
+Moo~!
+Mooooo!
+Moo moo~
+Moo? Moo!
+Moooooo~!
+Moo.. Moo?
+Moo moo moo!
+Mooooo..
+Moo-o~
+Moo moo!
+Moo~ moo~
+Moooo?
+Moo moo~ moo!
+Moo~ moo~ moo~
+Moo moo..
+Moo! Moo!
+Mooo~ moo~
+Moo? Mooo!
+Moo moo!
+Moooo~!"
+}, {
+"condition": "isResisting()",
+"lines": "Mmmph, moo..
+N-no, moo!
+Moo! Stop..
+Moo.. I won’t!
+Mmm, moo.. please!
+Ugh, moo..
+Moo! Let me go!
+Moo.. not fair!
+Moo! I’m serious!
+Mmmph, moo..
+Nooo, moo..
+Moo! Don’t make me!
+Moo.. I’m trying!
+Mmm, moo! Please!
+Moo.. this isn’t right!
+Mmmph, moo! Stop!
+Moo.. I hate this!
+Moo! I’m resisting!
+Moo.. don’t force me!
+Mmm, moo! Let go!"
+} ]
+},
+"together": false
+},
+"Teasing": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isResisting()",
+"lines": "You just gonna stop now?
+Gonna give up now?
+You saw some resistance and decided to stop?
+Some resistance is enough to stop you?
+Don't you want to play with me?
+Oh, backing off already?
+Lost your nerve, handsome?
+Scared you’ll break me?
+Too gentle for me?
+What, afraid of a little fun?
+You call that effort?
+Is that the best you’ve got?
+You stopping just as I’m warming up?
+Playing it safe, are we?
+That’s all you’ve got?
+See this? It's not yours!
+Fap to this and get the fuck out.
+Are you fucking done already?
+You're shaking. Can't you handle it?
+Just one touch and you'll be begging for more.
+Don't fight it. You know you're mine."
+}, {
+"condition": "!isResisting()
+!isMean()",
+"lines": "Do you like this?
+Let's do something..
+You know you want me.
+I can see it in your eyes, you're craving me.
+You want to give in to me, don't you?
+I can't help but want you right now.
+Bet you can’t handle this.
+Feel that heat yet?
+You look so hungry.
+Too much for you?
+Can you take it?
+Can’t get enough, right?"
+}, {
+"condition": "!isResisting()
+getChar().isInHeat()",
+"lines": "Can you feel that I'm in heat?..
+Damn heat.. Wanna do something about it?..
+I'm in heat..
+Heat makes me feel so needy..
+Damn heat..
+Don't make me beg, I can't endure this heat..
+Huff.. stupid heat..
+You just gonna watch me while I'm in heat?.."
+}, {
+"condition": "!isResisting()
+isMean()",
+"lines": "We're just gonna stare at each other?
+Do something already!
+C'mon, I don't have all day!
+You're such a bitch.
+Don't be so fucking rude and do something.
+I'm waiting!
+Look at you. Pathetic!
+What’s wrong, can’t keep up?
+Is that the best you’ve got?
+You call that effort?
+Pathetic. Try harder.
+Quit gawking and do something to me!
+You’re boring me already.
+Is that all? Pathetic.
+Wake up and do something.
+You’re barely trying."
+}, {
+"condition": "!isResisting()
+isSubby()",
+"lines": "What are you gonna do to me..
+What should I do..
+We can do something..
+Do you like this?..
+You can do more than just stare..
+You gonna..?
+Do I look good..?
+I want to do whatever you want. I want to make you happy.
+I love the way you look at me, like I'm your little toy to play with.
+I can't stop thinking about all the naughty things you could do to me.
+I want to submit to you completely. I want to be yours.
+I love the way your voice sounds when you tell me what to do.
+I want to be your plaything, to do whatever you want with me.
+I crave your touch, your dominance. I want you to take me."
+} ]
+},
+"together": false
+},
+"ThreesomeDP": {
+"chance": 100.0,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "You love two cocks up your holes, huh?
+Such a whore, getting {target.his} holes double-penetrated.
+Such a tight whore.
+Two cocks pounding your tight little holes.
+Look at you, a cunt made for double penetration.
+Your ass and pussy both getting reamed hard.
+You’re a fucktoy for both our cocks.
+Whore, taking every inch we give you.
+You love being double-penetrated, slut.
+Both holes filled full with our cocks.
+Two cocks for one slut.
+You’re soaked, slut. Both your holes dripping.
+Taking all our cocks like the greedy slut you are.
+Tight little fucktoy, aren’t you?
+Stuffed full like the slut you are.
+You asked for this, whore.
+Take it. Take both of us.
+Don't you dare tighten up now!
+Only good for getting used.
+You wanted to be ruined? You will be.
+Nothing but a cumdump with legs.
+You belong to be fucked like this.
+We’re not stopping ‘til you break.
+Hope your guts can handle this.
+You like being our toy, don’t lie.
+Louder. Scream for your owners.
+This is what holes like yours are for.
+We’ll fill you ‘til you leak from both ends."
+}, {
+"condition": "!isAngry()",
+"lines": "Tight little hole, isn't it?
+So tight..
+Your holes feel so tight.
+Taking both cocks like a champ.
+Stretching so good around us.
+You were made for this.
+You’re getting wrecked, slut.
+You feel us? Deep inside?
+You’re taking us like a toy.
+You love being double-penetrated, don't you?
+Can’t get enough?
+You’re so tight, just for us.
+You’re taking us both so well.
+You’re dripping all over us.
+Think you will be able to walk after?
+Both holes begging for more.
+We’re buried so deep in you.
+Made to be stuffed like this.
+You’re squeezing us tight.
+This is what you were built for.
+You can’t even think, can you?
+You’re shaking already?
+We’re gonna break you in.
+Hold still, let us feel you.
+You’re not leaving unstretched.
+Just a fucktoy with two holes.
+You’re clenching so tight."
+} ],
+1: [ {
+"condition": "isResisting()",
+"lines": "It's too much! Nhh..
+Nhh.. ahh.. mhh..
+F-fuck.. my holes..
+Y-you're stretching my holes..
+You're gonna rip me apart.. ah.. mhh..
+F-fuck.. Ah.. Agh..
+T-too deep..! S-stop..!
+I-I can’t take both!
+It won’t fit..! Nghh..!
+Y-you're splitting me open..!
+Ahh! Not both at once!
+I said no.. ahh..!
+F-fuck, too full..
+M-my body, can’t handle it..
+D-don’t move, ahhh!
+I’m gonna break..!
+P-pull out..! I-I can’t!
+I-I'm not ready, nhhh..
+You're tearing me apart.. nhh..
+Too much, t-too rough.. ahh..
+I-it hurts..! Ahh.. nghh..
+F-fuck, I c-can’t, stop..!
+You're filling me, both holes..
+Noo, d-don’t go deeper!
+S-stretching me, ahh, too wide.."
+} ]
+},
+"together": false
+},
+"ThreesomeDPSameHole": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "You love two cocks up the same hole, huh?
+Such a whore, getting {target.his} only hole double-penetrated.
+Such a tight whore. Barely enough space for two cocks.
+Two cocks pounding your tight little hole.
+Look at you, your hole is made for double penetration.
+Your fuckhole is getting reamed hard.
+You’re a fucktoy for both our cocks.
+Whore, taking every inch we give you.
+You love being double-penetrated, slut.
+Your fuckhole is filled full with our cocks.
+Two cocks for one slut.
+You’re soaked, slut. Your fuckhole is dripping.
+Taking all our cocks like the greedy slut you are.
+Tight little fucktoy, aren’t you?
+Stuffed full like the slut you are.
+You asked for this, whore.
+Take it. Take both of us.
+Don't you dare tighten up now!
+Only good for getting used.
+You wanted to be ruined? You will be.
+Nothing but a cumdump with legs.
+You belong to be fucked like this.
+We’re not stopping ‘til you break.
+Hope your guts can handle this.
+You like being our toy, don’t lie.
+Louder. Scream for your owners.
+This is what fuckholes like yours are for.
+We’ll fill you ‘til you start leaking hard."
+}, {
+"condition": "!isAngry()",
+"lines": "Tight little hole, isn't it?
+So tight..
+Your fuckhole feels so tight.
+Taking both cocks like a champ.
+Stretching so good around us.
+You were made for this.
+You’re getting wrecked, slut.
+You feel us? Deep inside?
+You’re taking us like a toy.
+You love being double-penetrated, don't you?
+Can’t get enough?
+You’re so tight, just for us.
+You’re taking us both so well.
+You’re dripping all over us.
+Think you will be able to walk after?
+Your fuckhole is begging for more.
+We’re buried so deep in you.
+Made to be stuffed like this.
+You’re squeezing us tight.
+This is what you were built for.
+You can’t even think, can you?
+You’re shaking already?
+We’re gonna break you in.
+Hold still, let us feel you.
+You’re not leaving unstretched.
+Just a fucktoy with a fuckhole.
+You’re clenching so tight."
+} ],
+1: [ {
+"condition": "isResisting()",
+"lines": "It's too much! Nhh..
+Nhh.. ahh.. mhh..
+F-fuck.. my hole..
+Y-you're stretching my hole..
+You're gonna rip me apart.. ah.. mhh..
+F-fuck.. Ah.. Agh..
+T-too deep..! S-stop..!
+I-I can’t take both!
+I-I can’t take both! Not into the same hole!
+It won’t fit..! Nghh..!
+Y-you're splitting me open..!
+Ahh! Not both at once!
+I said no.. ahh..!
+F-fuck, too full..
+M-my body, can’t handle it..
+D-don’t move, ahhh!
+I’m gonna break..!
+P-pull out..! I-I can’t!
+I-I'm not ready, nhhh..
+You're tearing me apart.. nhh..
+Too much, t-too rough.. ahh..
+I-it hurts..! Ahh.. nghh..
+F-fuck, I c-can’t, stop..!
+You're filling me, my hole..
+Noo, d-don’t go deeper!
+S-stretching me, ahh, too wide.."
+} ]
+},
+"together": false
+},
+"ThreesomeJoin": {
+"chance": 100.0,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "I see a fucktoy. May I join?
+I see you're having fun with that slut. May I?
+That's a nice fucktoy you have there. I wanna do {target.him} too.
+This fucktoy’s can serve more than one person. I can show.
+Having fun without me? I wanna join.
+Let's share this whore?
+Wanna share this slut together?
+Let’s ruin {target.him} together.
+I can't wait. I'm joining.
+You’re not fucking {target.him} without me.
+Don’t hog the fucktoy.
+You want to ruin {target.him}? Let’s do it together.
+Two doms are better than one. Let’s wreck {target.him}."
+}, {
+"condition": "!isAngry()",
+"lines": "May I join?
+I see you're having fun. May I?
+Can I join maybe? We can have some fun together.
+Room for one more?
+Mind if I slide in?
+Looks like fun. Let me help.
+Save some of that for me.
+Let’s double the trouble.
+I’m not just gonna watch.
+Tag me in."
+} ],
+1: [ {
+"condition": "isResisting()",
+"lines": "What? No!
+Are you gonna ask me first?!
+Wait wait! I can't handle two.
+No! That's too much for me!
+Two is too much!
+Stop, I’m overwhelmed!
+I didn’t agree to this!
+One at a time, please!
+I can’t take both!
+I need a break!"
+} ],
+2: [ {
+"condition": "isAngry()",
+"lines": "Yeah, sure. Let's fuck this slut together.
+Sure. Let's have fun with this whore.
+A threesome? Fuck yeah!
+Hell yeah, let’s tear this bitch up.
+About time we fucked this slut together.
+Sure. Let’s make this fucktoy squirm.
+Sure. That slut’s gonna remember it.
+Hell yeah, sharing this bitch sounds perfect."
+}, {
+"condition": "!isAngry()",
+"lines": "Yeah, sure. Let's fuck {target.him} together.
+Sure. Let's have fun with {target.him}.
+A threesome? Hell yeah!
+Heh, you read my mind.
+Let’s do it.
+Can’t say no to that.
+Let’s make {target.him} melt.
+Oh yeah, I’m in.
+Two on one? Yes, please."
+} ]
+},
+"together": false
+},
+"ThreesomeRideGrind": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Yeah.. Serve us both, fucker.
+Such a nice cock, all for me.
+{target.His} cock is in me. Jealous?
+You’re just a toy for us now.
+I’m using you. Shut up and stay hard.
+Keep licking {extra.him} while I ride you.
+You’re not cumming until we say so, bitch.
+That’s right, struggle under us.
+You think this is for you, fucker?
+All you’re good for is cock and tongue.
+You don’t get to enjoy this, slut.
+We’re going to break you together.
+Harder. I want to feel you squirm, bitch.
+Choke on {extra.him} while I use your dick.
+You look better under us.
+Getting fucked and smothered.. perfect for such a fucktoy.
+You're not the one in control, fucker.
+Lick {extra.his} pussy. Harder.
+Bet this is what you always wanted.
+Not done ‘til we’re both satisfied."
+}, {
+"condition": "!isAngry()",
+"lines": "Yeah.. Serve us both.
+Such a nice cock, all for me.
+{target.His} cock is in me. Jealous?
+You’re just a toy for us now.
+Keep licking {extra.him} while I ride you.
+You’re not cumming until we say so.
+We’re going to use you together.
+Harder. I want to feel you throb.
+Lick {extra.him} while I use your dick.
+You look better under us.
+You look so nice under us.
+You like serving us? I bet you do.
+Getting fucked and smothered.. perfect for such a subby pet.
+Lick {extra.his} pussy. Harder.
+Bet this is what you always wanted.
+Not done ‘til we’re both satisfied.
+Look at you, pleasuring us both.
+Both of us using you, feel that?
+Two dominants, one lucky toy.
+You’re a good little service top.
+Feel us both claiming you.
+I want to feel you throb for me.
+I’m not done riding you yet."
+} ],
+2: [ {
+"condition": "isAngry()",
+"lines": "Keep that tongue working, whore.
+You better earn this, slut.
+Don’t stop licking me, bitch.
+Get that tongue moving faster.
+I’m not here to be gentle.
+You’ll worship me, fucker.
+Keep that mouth busy, bitch.
+You’re mine to use, asshole.
+You love this pussy, don't you?
+Swallow all my juices, whore.
+Prove you deserve it, you stupid bitch.
+Don’t think you’re getting off easy.
+We're in charge here.
+Lick harder, fucktoy.
+You’re nothing but our plaything.
+Work that tongue, slut.
+Ride {target.him} hard, don’t stop.
+You’re ours to use.
+Keep that tongue moving.
+You’re beneath me, lick that wet pussy.
+Make me moan, or else.
+I’m not here for your comfort.
+Worship me like you mean it.
+This pussy demands a lot.
+Keep licking, no breaks.
+You exist for our pleasure.
+Don’t make us get rough."
+}, {
+"condition": "!isAngry()",
+"lines": "Keep that tongue working, pet.
+Don’t stop licking me.
+Keep that mouth busy, baby.
+Make me feel good.
+Don’t even think about stopping.
+Work that tongue harder.
+You love being used like this.
+Lick me good down there.
+Sitting on your face feels good.
+I like your face, very comfy.
+Good pet, don’t stop.
+You’re ours to use.
+Keep that tongue moving.
+Swallow all my juices.
+Keep licking, don’t stop.
+Don’t lose focus now.
+We're not done with you.
+Make us feel good.
+Keep those lips busy.
+Taste every drop.
+Push in with your tongue.
+That’s it, don’t stop.
+Lick and swallow.
+I want your whole face as a seat."
+} ]
+},
+"together": false
+},
+"ThreesomeSpitroast": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "You love being fucked from both ends, don't you, whore?
+You’re ours to fuck and choke.
+Shut up and take it.
+Don’t you dare enjoy this.
+You’re just a fucktoy for us.
+We own your holes.
+You love getting spitroasted, whore.
+You love it, you're tightening up.
+You’re a little needy slut.
+Look at you, so fucked out.
+You’ll take all of us.
+No mercy for your pretty mouth.
+Keep your mouth open, slut.
+Don’t make me go harder.
+You’ll beg for more, won’t you?
+Both holes are our to ruin.
+You’re nothing but our plaything.
+Scream if you must. That's right, you have a cock in there.
+We will break you in good.
+You’re trapped between us now.
+Take it like the slut you are.
+Serving two cocks at the same time. Such a whore."
+}, {
+"condition": "!isAngry()",
+"lines": "You love being fucked from both ends, don't you?
+Stuffed at both ends.. just how you like it.
+Don't bite, now. Be a good toy.
+Taking us so well, fuck.
+You’re made for this, aren’t you?
+Look at you, so full already.
+That mouth better not stop.
+Hope you don’t need to walk later.
+So greedy for cocks, huh?
+Both ends, nice and used.
+Your fuckhole is clenching every time you suck.
+We could take turns.
+You were made to be shared.
+You’re my favorite little fucktoy.
+You’re such a good slut.
+Look at you, so eager.
+We’re gonna ruin you.
+Take it deep and suck hard.
+Feels good to be spitroasted?
+Two cocks inside you.
+Serving two cocks at the same time."
+} ]
+},
+"together": false
+},
+"ThreesomeStart": {
+"chance": 100.0,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "Wanna fuck this whore together?
+Wanna fuck this slut with me?
+Let's fuck this bitch together.
+Wanna help me wreck this bitch?
+Let's break this toy together. You in?
+Let’s see what this bitch can handle.
+Wanna double-team this whore?
+Tag in. Let’s fuck {target.him} together.
+Wanna make {target.him} our fucktoy?"
+}, {
+"condition": "!isAngry()",
+"lines": "Wanna have fun with {target.him} together?
+Wanna fuck {target.him} with me?
+Wanna share {target.him}?
+Help me break {target.him} in.
+Wanna do {target.him} together?
+Bet {target.he} can handle both of us.
+Let’s fuck {target.him} together.
+You thinking what I’m thinking?
+Let’s double-team {target.him}.
+I say we both fuck {target.him}."
+} ],
+1: [ {
+"condition": "isResisting()",
+"lines": "What? No!
+Are you gonna ask me first?!
+Wait wait! I can't handle two.
+No! That's too much for me!
+Two is too much!
+Stop, I’m overwhelmed!
+I didn’t agree to this!
+One at a time, please!
+I can’t take both!"
+} ],
+2: [ {
+"condition": "isAngry()",
+"lines": "Yeah, sure. Let's fuck this slut together.
+Sure. Let's have fun with this whore.
+A threesome? Fuck yeah!
+Hell yeah, let’s tear this bitch up.
+About time we fucked this slut together.
+Sure. Let’s make this fucktoy squirm.
+Sure. That slut’s gonna remember it.
+Hell yeah, sharing this bitch sounds perfect."
+}, {
+"condition": "!isAngry()",
+"lines": "Yeah, sure. Let's fuck {target.him} together.
+Sure. Let's have fun with {target.him}.
+A threesome? Hell yeah!
+Heh, you read my mind.
+Let’s do it.
+Can’t say no to that.
+Let’s make {target.him} melt.
+Oh yeah, I’m in.
+Two on one? Yes, please."
+} ]
+},
+"together": false
+},
+"TribadismHappens": {
+"chance": 100.0,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "You like that? Yeah..
+Don’t get too comfortable, I’m just getting started.
+You’re mine to toy with.
+Squirm, slut.. hah.
+Can you keep up, whore?
+Your pussy’s rubbing right against mine.
+Can you handle all this grinding?
+So wet and close..
+You like it?
+Nothing like some good old tribbing.
+You’re soaking wet, slut.
+Your moans are music to me.
+Wet and desperate, just how I like it."
+}, {
+"condition": "!isAngry()",
+"lines": "You like that? Yeah..
+Don’t get too comfortable, I’m just getting started.
+You’re mine to toy with.
+Keep squirming.. hah.
+Your pussy’s rubbing right against mine.
+Can you handle all this grinding?
+So wet and close..
+You like it?
+Nothing like some good old tribbing.
+Your moans are music to me.
+I love how you press against me.
+Keep moving, don’t stop now.
+That’s it, grind harder for me.
+Let me feel you.
+So hot.."
+} ]
+},
+"together": false
+},
+"TryForceLickPussy": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "",
+"lines": "Lick it, slut. Now.
+Get that tongue in there, whore.
+Don’t make me repeat myself, bitch.
+Taste me like you mean it, slut.
+Lick or I’ll make you regret it.
+Put that tongue to work, whore.
+Suck and lick, you dirty bitch.
+Get that tongue moving, you lazy slut.
+You’re nothing but my pussy toy. Lick it.
+Make me wet.
+Tongue to pussy. Now.
+Lick me like you want to be punished, slut."
+} ]
+},
+"together": false
+},
+"TryForceSuckPenis": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "",
+"lines": "Start sucking it already, you slut.
+Open wide, whore.
+Don’t make me hit you, bitch.
+Start sucking already.
+Such a stupid whore.
+Get that mouth working, bitch.
+Suck me hard, you worthless slut.
+Start sucking, now.
+Gag on it, you stupid whore.
+Take it deep, slut.
+Use that mouth, you little bitch.
+I’ll force it if I have to, whore.
+Get your mouth working, slave.
+Don’t resist, you stupid slut.
+Suck it like you want it, bitch.
+You’re my fucktoy, start sucking now."
+} ]
+},
+"together": false
+},
+"WarnAboutToCum": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "!isSubby()",
+"lines": "I'm very close..
+I'm gonna cum soon..
+About to cum..
+I really wanna cum..
+I’m gonna cum..
+I’m on the edge..
+I’m about to cum.."
+}, {
+"condition": "isSubby()",
+"lines": "Please let me cum, I really want to..
+I wanna cum so much.. Please!
+I'm about to cum, I need it!
+May I please cum? Please!
+I wanna cum so much.. Please! May I?
+I really want to cum.. Please? Please..
+Can I get a permission to cum.. I really want to.."
 } ]
 },
 "together": false

@@ -54,7 +54,9 @@ func isActivityImpossibleShouldStop() -> bool:
 
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	var sub:BaseCharacter = _subInfo.getChar()
-	if(!sub.hasReachableVagina()):
+	if(usedBodypart == S_VAGINA && !sub.hasReachableVagina()):
+		return false
+	if(usedBodypart == S_ANUS && !sub.hasReachableAnus()):
 		return false
 	if(sub.isOralBlocked()):
 		return false
@@ -110,12 +112,14 @@ func startActivity(_args):
 		addText("{dom.You} and {dom1.you} approach {sub.you} from different sides of the stocks, "+getYour()+" "+getCocksName()+" are pressed against {sub.yourHis} "+getNameHole(SUB_0, usedBodypart)+" and mouth.")
 	else:
 		addText("{dom.You} and {dom1.you} grab {sub.you} and lift {sub.youHim} above the floor, "+getYour()+" "+getCocksName()+" are pressed against {sub.yourHis} "+getNameHole(SUB_0, usedBodypart)+" and mouth.")
-
+	react(SexReaction.ThreesomeStart, [100.0, 100.0, 100.0], [DOM_0, SUB_0, DOM_1])
+	
 func onSwitchFrom(_otherActivity, _args):
 	pullInDom(_args[0])
 	
 	addText("{dom1.You} {dom1.youVerb('join')} and {dom1.youVerb('turn')} this sex into a spitroast!")
-
+	react(SexReaction.ThreesomeJoin, [100.0, 100.0, 100.0], [DOM_1, SUB_0, DOM_0])
+	
 func getYour(pcIsInvolvedText:String = "your", noPcText:String = "their") -> String:
 	if(isDom("pc")):
 		return pcIsInvolvedText
@@ -153,6 +157,7 @@ func sex_processTurn():
 	else:
 		doProcessFuckExtra(DOM_0, SUB_0, usedBodypart)
 		doProcessFuckExtra(DOM_1, SUB_0, S_MOUTH)
+	react(SexReaction.ThreesomeSpitroast, [20.0, 10.0], [RNG.pick([DOM_0, DOM_1]), SUB_0])
 
 func getActions(_indx:int):
 	if(_indx == DOM_0 || _indx == DOM_1):

@@ -93,7 +93,7 @@ func _run():
 		addButton("BDCC", "Ask her about how she stumbled upon the AlphaCorp prison", "ask_bdcc")
 		addButton("Blacktail", "Ask her about her family", "ask_blacktail")
 		addButton("Slaves", "Ask her about why she enslaves people", "ask_slaves")
-		addButton("Collar", "Ask about them possible removing your collar", "ask_collar")
+		addButton("Collar", "Ask if it's possible for them to remove your collar", "ask_collar")
 		addButton("Catgirl", "Ask her about her species", "ask_catgirl")
 		addButton("Back", "Enough questions..", "")
 	if(state == "ask_luxe"):
@@ -438,7 +438,7 @@ func _run():
 
 		saynn("[say=mirri]..and complete submission. Ah..[/say]")
 
-		saynn("Mirri's body trembles, her pussy visible pulsing in your view while her claws dig into your tongue.. ouch.. and yet, you don't bite, just tasting your blood while watching that beatiful pussy orgasm in front of you..")
+		saynn("Mirri's body trembles, her pussy visibly pulsing in your view while her claws dig into your tongue.. ouch.. and yet, you don't bite, just tasting your blood while watching that beatiful pussy orgasm in front of you..")
 
 		saynn("[say=mirri]Such a good.. sextoy.. fuck yes-s-s..[/say]")
 

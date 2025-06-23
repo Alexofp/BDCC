@@ -57,11 +57,9 @@ func doActionSimple(_slaveID, _extraSlavesIDs = {}):
 		var fetish:FetishBase = GlobalRegistry.getFetish(fetishID)
 		if(fetish == null):
 			continue
-		var fetishInterest = fetishHolder.getFetishInterest(fetishID)
-		if(fetishInterest == FetishInterest.Neutral):
-			continue
-		var fetishColor = FetishInterest.getColorString(fetishInterest)
-		var fetishInterestText = FetishInterest.getVisibleName(fetishInterest)
+		var fetishVal:float = fetishHolder.getFetish(fetishID)
+		var fetishColor = FetishInterest.getColorString(fetishVal)
+		var fetishInterestText = FetishInterest.getVisibleName(fetishVal)
 		
 		texts.append("[cell]"+fetish.getVisibleName()+": "+"[color="+fetishColor+"]"+fetishInterestText+"[/color][/cell]")
 	fetishTexts.append("[table=2]"+Util.join(texts, "")+"[/table]")

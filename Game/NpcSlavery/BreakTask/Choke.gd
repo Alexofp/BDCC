@@ -34,3 +34,8 @@ func getTaskString():
 
 func getTaskHint(_isSlaveLevelup):
 	return "Choke them during sex"
+
+func getSexGoalWeightModifier(_sexGoalID:String) -> float:
+	if(_sexGoalID == SexGoal.Choke):
+		return 3.0
+	return 0.0

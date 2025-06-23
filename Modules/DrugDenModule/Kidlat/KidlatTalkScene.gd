@@ -441,7 +441,7 @@ func _run():
 		playAnimation(StageScene.SexAgainstWall, "tease", {pc="pc", npc="kidlat", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("Then, in a sudden, decisive moment, your hand darts to grab her by the collar.. You only see the flashes of her blue and purple eyes.. before your primal desire takes over.")
 
-		saynn("The next moment you know it, Kidlat is under you, pinned into the floor by your body and hands. Her legs are raised high, trapped between you and her by your shoulders, giving you full exclusive to every inch of her slick cyan slit.")
+		saynn("The next moment you know it, Kidlat is pinned into the nearest wall by your body and hands. Her legs are raised high, trapped between you and her by your shoulders, giving you full exclusive to every inch of her slick cyan slit.")
 
 		if (!isStrapon):
 			saynn("Your {pc.penis} is already out, twitching over her sex, the tip spotting a little shiny drop of pre. You already align it with her entrance, one moment from penetrating..")
@@ -493,7 +493,7 @@ func _run():
 
 		addButton("Inside", "Breed that mew", "sex_vag_sex_cum")
 	if(state == "sex_vag_sex_cum"):
-		playAnimation(StageScene.SexAgainstWall, "fast", {pc="pc", npc="kidlat", pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexAgainstWall, "inside", {pc="pc", npc="kidlat", pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		var hasKnot = GM.pc.bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)
 		if (isStrapon):
 			saynn("In one final burst of primal energy, you shove your whole strapon inside, stretching Kidlat's folds wide as the rubber tip breaks inside her womb.")
@@ -875,7 +875,7 @@ func _run():
 
 		saynn("Kidlat shifts around on her chair.")
 
-		saynn("[say=pc]..cumming inside your own pussy.. stuffing it feel of your seed..[/say]")
+		saynn("[say=pc]..cumming inside your own pussy.. stuffing it full of your seed..[/say]")
 
 		saynn("Kidlat huffs and moans more.")
 
@@ -883,7 +883,7 @@ func _run():
 
 		saynn("You can't hide the smile while the poor kitty is squirming hard.")
 
-		saynn("[say=pc]Why did you grow a canine cock anyway? Aren't you a cock?[/say]")
+		saynn("[say=pc]Why did you grow a canine cock anyway? Aren't you a cat?[/say]")
 
 		saynn("[say=kidlat]Damned if I knew.. Not complainin' though..[/say]")
 
@@ -1200,9 +1200,9 @@ func _run():
 
 		saynn("You lean in closer to her ear and start whispering..")
 
-		saynn("[say=pc]Doesn't the thought of getting fucked by a complete strange turn you on? Who says I can't be one of those strangers~?[/say]")
+		saynn("[say=pc]Doesn't the thought of getting fucked by a complete stranger turn you on? Who says I can't be one of those strangers~?[/say]")
 
-		saynn("Even with all the inmates around, you can hear you swallowing her saliva.")
+		saynn("Even with all the inmates around, you can hear her swallowing her saliva.")
 
 		saynn("[say=pc]Cock after cock, fucking your little tight pussy while you're stuck in that slutwall.. unable to even see them.. Don't you wanna be a free-use whore, kitty~? Just this time~?[/say]")
 
@@ -1247,7 +1247,7 @@ func _run():
 		addButton("Watch", "See what happens next", "sex_slutwall_first")
 	if(state == "sex_slutwall_first"):
 		playAnimation(StageScene.SlutwallSex, "tease", {pc="kidlat", npc=npcID, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
-		saynn("You can see Kidlat's toes curling as the first inmate steps forward, his {npc.penis} already hard, twitching in {npc.his} hand.")
+		saynn("You can see Kidlat's toes curling as the first inmate steps forward, {npc.his} {npc.penis} already hard, twitching in {npc.his} hand.")
 
 		saynn("Without hesitation, {npc.he} approaches the bound Kidlat, {npc.his} gaze quickly watching her over. {npc.His} touch is rough, lacking any.. empathy. {npc.He} spreads her cyan pussy wide with two digits, making the slick entrance itself open up, a string of juices already hanging between the folds.")
 
@@ -1260,7 +1260,7 @@ func _run():
 
 		saynn("[say=kidlat]..wai-.. ah!..[/say]")
 
-		saynn("You can barely hear the feline in there.. but you sure sees her body reacting.. her inner walls reflexively clenching around the intruding dick, spreading her juices along its length.")
+		saynn("You can barely hear the feline in there.. but you sure see her body reacting.. her inner walls reflexively clenching around the intruding dick, spreading her juices along its length.")
 
 		saynn("{npc.He} doesn't stop there, already establishing a steady rhythm, pounding Kidlat's fresh pussy, enjoying getting to be the first.")
 
@@ -1326,7 +1326,7 @@ func _run():
 
 		saynn("Poor kitty is squirming against the chains and cuffs.. but nah, she is completely helpless in that slutwall, her pussy at the horse's full mercy. And his thrusts are fierce.. a stark contrast to the previous inmate. With every strong, rapid thrust, he pounds into her, his flat tip smashing into her organic barricade over and over.")
 
-		saynn("Kidlat's moans grow louder and louder.. until her body begins to tremble, legs and arms starting to shake. She cums hard from that cock, her pussy visible clenching around him in a long series of spasmodic convulsions. Each powerful thrust forces her slit to stay stretched.. and makes it gush transparent fluids all over his length.")
+		saynn("Kidlat's moans grow louder and louder.. until her body begins to tremble, legs and arms starting to shake. She cums hard from that cock, her pussy visibly clenching around him in a long series of spasmodic convulsions. Each powerful thrust forces her slit to stay stretched.. and makes it gush transparent fluids all over his length.")
 
 		saynn("[say=kidlat]Nhh-h.. fu-uck.. ahh.. ahh.. C-cumming.. ah.. c-can't s-stop.. ah..[/say]")
 
@@ -1347,7 +1347,7 @@ func _run():
 
 		saynn("It's impressive, really.. how Kidlat can handle such a cock.. but also how those twitching balls can produce so much..")
 
-		saynn("After his orgasm, his cock already begins to go soft.. so he decides to pull out.. unleashing another torrent of seed.. Kidlat's gaping pussy gushing out seed at a rate of her crazy heartbeat.. and there is no end to it..")
+		saynn("After his orgasm, his cock already begins to go soft.. so he decides to pull out.. unleashing another torrent of seed.. Kidlat's gaping pussy gushing out seed matching the pace of her rapid heartbeat.. and there is no end to it..")
 
 		saynn("[say=kidlat]Mhh-h-h.. ahh-h-h.. m-my p-pussy.. ah..[/say]")
 
@@ -1515,7 +1515,7 @@ func _run():
 		playAnimation(StageScene.SlutwallSex, "sex", {pc="kidlat", npc=npcID, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("What happens next is more of a blur than anything.. All of the.. bold inmates.. already did what they wanted with the kitty. But there is still a small crowd of lads who wanna add their loads.. or just watch the action.")
 
-		saynn("Another {npc.boy} steps in closer, eyes fixed on Kidlat's exposed, fucked fuckholes. Without hesitation, {npc.he} drives {npc.his} hard cock into her slick heat.. using all the previous seed at lube.")
+		saynn("Another {npc.boy} steps in closer, eyes fixed on Kidlat's exposed, fucked fuckholes. Without hesitation, {npc.he} drives {npc.his} hard cock into her slick heat.. using all the previous seed as lube.")
 
 		saynn("[say=kidlat]Mhah.. a-another cock.. f-fucking me~..[/say]")
 
@@ -1528,7 +1528,7 @@ func _run():
 		addButton("Continue", "See what happens next", "sex_slutwall_montage_2")
 	if(state == "sex_slutwall_montage_2"):
 		playAnimation(StageScene.SlutwallSex, "fast", {pc="kidlat", npc=npcID, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
-		saynn("The inmate pulls and steps away.. which lets Kidlat rest for a bit. There is so much cum oozing out of her holes, the floor underneath is getting quite messy and slippery by now.")
+		saynn("The inmate pulls out and steps away.. which lets Kidlat rest for a bit. There is so much cum oozing out of her holes, the floor underneath is getting quite messy and slippery by now.")
 
 		saynn("[say=kidlat]Who is next.. meow..[/say]")
 

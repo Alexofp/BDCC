@@ -183,6 +183,8 @@ func stimulateArousalZone(howmuch: float, bodypartSlot, stimulation:float = 1.0)
 		addArousalSex(howmuch * pleasureMod)
 		return
 	
+	if(!getChar().hasBodypart(bodypartSlot)):
+		return
 	var sensitiveZone:SensitiveZone = getChar().getBodypart(bodypartSlot).getSensitiveZone()
 	if(sensitiveZone == null):
 		addArousalForeplay(howmuch)

@@ -5,6 +5,36 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.1.9] - 2025-06-20
+### Added
+- Huge sex engine refactor. Most of its code was improved to make it more modular and easier to create content for. But that's not the main reason behind the refactor..
+- Sex engine now supports threesomes! A set of threesome sex activities was added that allows 2 doms to fuck 1 sub at the same time. Spitroasting (including stocks support), double-penetration (with same-hole support if you don't have a pussy), fuck train, ride and grind. There is also the buttstack sex for 1 dom + 2 subs.
+- Dynamic sex joiners! Nearby pawns can now choose to join an on-going sex scene, dynamically turning one-on-one sex into a threesome. If you're a sub, this can happen automatically.
+- If you are a dom, you can choose to allow or disallow dynamic joiners. You can also now choose if other doms should or shouldn't have autonomy, giving you full control over the sex.
+- Pick-up line flirting interaction was turned into a little minigame where you have to make a correct choice about how to complete a pick-up line. Some of these are very funny!
+- Sex dialogues expanded, added more lines and reaction types. Procedural sex should feel a bit more lively.
+- Pawjob sex activity added.
+- Mutual pawjob sex activity added.
+- Portal fleshlight masturbation sex activity added. You need to have a fleshlight to start it + someone who is wearing portal panties.
+- Oral sex uses forced oral sex anims if the dom has forced the oral sex. Pussy licking can be turned into face-sitting.
+- Handjob support added to the dom-doing-oral-to-sub sex activitiy.
+- Can choose which bodywriting you wanna write on a sub (Game shows you a re-rollable list of 5 variants). Added more bodywritings.
+- Npcs are more likely to help you complete your slutlock tasks during sex. They are also more likely to help you complete your slave's level-up tasks.
+- You can start threesomes with your slaves (Slave with slut level 5+ required). Can do either 1 dom + 2 subs or 2 doms + 1 sub.
+- Knotted strapons can knot.
+
+### Changed
+- Timed buffs now have separate timers. No more extending quickshift effect with birth control pills, sorry.
+- Restraint key drop chance rebalanced, making it more rare overall. ([Thanks to keerifox](https://github.com/Alexofp/BDCC/pull/187))
+- Flirting interaction should fail less. ([Pull request by keerifox](https://github.com/Alexofp/BDCC/pull/187))
+
+### Fixed
+- Hopefully fixed the clipping caused by wiggle physics + huge breasts. Sorry if they are still clipping, only so much I can do.
+- Dom npcs should be able to use strapons in sex again.
+- Autotranslator fix ([Pull request by CKRainbow](https://github.com/Alexofp/BDCC/pull/184))
+- Lots of typo fixes. Thank you Jack and Johnvic76 for tirelessly reporting most of these.
+- Some little bugs fixed. Can't remember what.. I'm sure there is still a million of them left..
+
 ## [0.1.8] - 2025-05-02
 ### Added
 - Transformations! All sorts of weird drugs began popping up all around the prison. Weird drugs that seem to possess transformative properties..
@@ -544,7 +574,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.8...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.9...main
+[0.1.9]: https://github.com/Alexofp/BDCC/compare/0.1.8...0.1.9
 [0.1.8]: https://github.com/Alexofp/BDCC/compare/0.1.7...0.1.8
 [0.1.7]: https://github.com/Alexofp/BDCC/compare/0.1.6...0.1.7
 [0.1.6]: https://github.com/Alexofp/BDCC/compare/0.1.5...0.1.6

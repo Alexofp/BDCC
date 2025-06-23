@@ -31,3 +31,8 @@ func getTaskString():
 
 func getTaskHint(_isSlaveLevelup):
 	return "Grope their breasts for this long"
+
+func getSexGoalWeightModifier(_sexGoalID:String) -> float:
+	if(_sexGoalID == SexGoal.GropeBreasts):
+		return 3.0
+	return 0.0

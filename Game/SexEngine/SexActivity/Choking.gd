@@ -21,6 +21,9 @@ func getSupportedSexTypes():
 		SexType.DefaultSex: true,
 	}
 
+func canStopSexWithThisActivity() -> bool:
+	return true
+
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	if(_sexEngine.hasGoal(_domInfo, SexGoal.SubChoking, _subInfo)):
 		return 0.5
@@ -41,9 +44,7 @@ func getTags(_indx:int) -> Array:
 
 func startActivity(_args):
 	addText("{dom.You} {dom.youVerb('put')} {dom.yourHis} hand on {sub.your} neck!")
-	talk(DOM_0, SUB_0, SexReaction.AboutToBeatUp)
-	if(RNG.chance(20)):
-		talk(SUB_0, DOM_0, SexReaction.AboutToBeatUp)
+	react(SexReaction.AboutToBeatUp)
 
 func getExtraChokeText() -> String:
 	var result:Array = []
@@ -93,10 +94,7 @@ func choking_processTurn():
 
 	var text:String = RNG.pick(texts)+getExtraChokeText()
 	addText(text)
-	if(RNG.chance(30)):
-		talk(DOM_0, SUB_0, SexReaction.Choking)
-	if(RNG.chance(30)):
-		talk(SUB_0, DOM_0, SexReaction.Choking)
+	react(SexReaction.Choking, [30, 30])
 	
 func hardchoking_processTurn():
 	choke(DOM_0, SUB_0, CHOKE_HARD)
@@ -109,10 +107,7 @@ func hardchoking_processTurn():
 
 	var text:String = RNG.pick(texts)+getExtraChokeText()
 	addText(text)
-	if(RNG.chance(30)):
-		talk(DOM_0, SUB_0, SexReaction.ChokingHard)
-	if(RNG.chance(30)):
-		talk(SUB_0, DOM_0, SexReaction.ChokingHard)
+	react(SexReaction.ChokingHard, [30, 30])
 
 func getActions(_indx:int):
 	if(_indx == DOM_0):
@@ -163,15 +158,19 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 	if(_actionID == "startvag"):
 		switchCurrentActivityTo("SexVaginalOnAllFours", ["choke"])
 		addText("{dom.You} {dom.youVerb('raise')} {sub.yourHis} leg, preparing to fuck {sub.yourHis} {pussy}.")
+		react(SexReaction.StartChokeFuck)
 	if(_actionID == "startanal"):
 		switchCurrentActivityTo("SexAnalOnAllFours", ["choke"])
 		addText("{dom.You} {dom.youVerb('raise')} {sub.yourHis} leg, preparing to fuck {sub.yourHis} {anus}.")
+		react(SexReaction.StartChokeFuck)
 	if(_actionID == "startridevag"):
 		switchCurrentActivityTo("DomRidingSubVaginal", ["choke"])
 		addText("{dom.You} {dom.youVerb('pin')} {sub.you} to the floor, about to ride {sub.yourHis} {cock} with {dom.yourHis} {pussy}.")
+		react(SexReaction.StartChokeRide)
 	if(_actionID == "startrideanal"):
 		switchCurrentActivityTo("DomRidingSubAnal", ["choke"])
 		addText("{dom.You} {dom.youVerb('pin')} {sub.you} to the floor, about to ride {sub.yourHis} {cock} with {dom.yourHis} {ass}.")
+		react(SexReaction.StartChokeRide)
 		
 	if(_actionID == "escape"):
 		if(RNG.chance(getResistChance(SUB_0, DOM_0, RESIST_NECK_FOCUS, 20.0, 0.0))):
@@ -184,15 +183,14 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 				setState("choking")
 			
 			addText("{sub.You} {sub.youVerb('manage')} to make {dom.youHim} relax {dom.yourHis} grasp on your neck!")
-			talk(SUB_0, DOM_0, SexReaction.ActivelyResisting)
+			reactSub(SexReaction.ActivelyResisting, [100])
 		else:
 			addTextPick([
 				"{sub.You} {sub.youVerb('try', 'tries')} to escape {dom.yourHis} grasp.",
 				"{sub.You} desperately {sub.youVerb('try', 'tries')} to escape {dom.yourHis} grasp.",
 				"{sub.You} desperately {sub.youVerb('try', 'tries')} to escape {dom.yourHis} choking.",
 			])
-			if(RNG.chance(30)):
-				talk(SUB_0, DOM_0, SexReaction.ChokingHard)
+			react(SexReaction.ChokingHard, [30, 30])
 		
 func getStopChokeScore() -> float:
 	var stopChokeScore:float = 1.0 - getDomInfo().getIsAngryScore() + getSubInfo().getAboutToPassOutScore() * getDomInfo().fetishScore({Fetish.UnconsciousSex: 1.0}, 0.5)

@@ -38,3 +38,8 @@ func getTaskString():
 
 func getTaskHint(_isSlaveLevelup):
 	return "Force them to orgasm from scissoring!"
+
+func getSexGoalWeightModifier(_sexGoalID:String) -> float:
+	if(_sexGoalID == SexGoal.Tribadism):
+		return 3.0
+	return 0.0

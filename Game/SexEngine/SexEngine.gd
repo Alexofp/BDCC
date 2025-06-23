@@ -173,7 +173,7 @@ func checkNewExposedBodyparts():
 				
 		for bodypart in bodypartsToReactTo:
 			var randomSubID:String = RNG.pick(subs)
-			talkText(domID, character.getVoice().domReactionWhenUndressing(bodypart, self, domInfo, subs[randomSubID]))
+			talkText(domID, SexVoice.domReactionWhenUndressing(bodypart, self, domInfo, subs[randomSubID]))
 		
 	for subID in subs:
 		var subInfo = subs[subID]
@@ -189,8 +189,8 @@ func checkNewExposedBodyparts():
 				
 		for bodypart in bodypartsToReactTo:
 			var randomDomID:String = RNG.pick(doms)
-			var domCharacter = doms[randomDomID].getChar()
-			talkText(randomDomID, domCharacter.getVoice().domReactToSubBodypart(bodypart, self, doms[randomDomID], subInfo))
+			#var domCharacter = doms[randomDomID].getChar()
+			talkText(randomDomID, SexVoice.domReactToSubBodypart(bodypart, self, doms[randomDomID], subInfo))
 
 func checkExtra():
 	checkNewExposedBodyparts()
@@ -760,6 +760,8 @@ func getActionsForCharID(_charID:String, isForMenu:bool = false) -> Array:
 		return result
 	
 	var canCharDoActions:bool = _charInfo.canDoActions()
+	if(!canCharDoActions): # Can't do anything, we can only continue
+		return result
 	
 	if(canCharDoActions):
 		if(!_isPC && !isForMenu && _isDom && (_charInfo is SexDomInfo)):
@@ -934,10 +936,10 @@ func canSwitchPCTarget() -> bool:
 	if(isDom("pc")):
 		if(subs.size() >= 2):
 			return true
-	if(isSub("pc")):
+	elif(isSub("pc")):
 		if(doms.size() >= 2):
 			return true
-	if((subs.size() + doms.size()) >= 3):
+	elif((subs.size() + doms.size()) >= 3):
 		return true
 	return false
 
@@ -1070,11 +1072,13 @@ func sexShouldEnd() -> bool:
 		
 		if(domInfo.canDoActions() && domInfo.hasGoals()):
 			return false
-	
-	if(activities.size() <= 0 || !hasAnyHealthyDoms):
+	if(!hasAnyHealthyDoms):
 		return true
-	else:
-		return false
+	
+	for activity in activities:
+		if(!activity.canStopSexWithThisActivity()):
+			return false
+	return true
 
 func getRecovarableItemsAfterSex() -> Array:
 	var result:Array = []
@@ -1452,7 +1456,7 @@ func didPCAllowDynamicJoiners() -> bool:
 func canToggleDynamicJoiners() -> bool:
 	if(!isDom("pc")):
 		return false
-	if(!noDynamicJoiners):
+	if(noDynamicJoiners):
 		return false
 	
 	return true
@@ -1469,11 +1473,12 @@ func removeDynamicJoiner(_charID:String):
 	
 	addTextRaw("[b]Dominant leaves.[/b] "+theCharacter.getName()+" has left.")
 	
-	var sexLoc:String = getLocation()
-	if(theCharacter.isDynamicCharacter() && sexLoc != ""):
-		var thePawn = GM.main.IS.spawnPawn(_charID)
-		if(thePawn):
-			thePawn.setLocation(sexLoc)
+	# The InSex interaction should handle this
+	#var sexLoc:String = getLocation()
+	#if(theCharacter.isDynamicCharacter() && sexLoc != ""):
+	#	var thePawn = GM.main.IS.spawnPawn(_charID)
+	#	if(thePawn):
+	#		thePawn.setLocation(sexLoc)
 
 func addDynamicDomParticipant(_charID:String):
 	if(doms.has(_charID) || subs.has(_charID)):
@@ -1487,8 +1492,11 @@ func addDynamicDomParticipant(_charID:String):
 	addTextRaw("[b]NEW DOMINANT![/b] "+domInfo.getChar().getName()+" joins in on the fun.")
 	participatedDoms[_charID] = true
 	if(GM.main):
-		#TODO: Do something better than just deleting pawns?
-		GM.main.IS.deletePawn(_charID)
+		if(_charID != "pc" && GM.main.IS.hasPawn(_charID)):
+			var sexLoc:String = getLocation()
+			if(sexLoc != ""):
+				GM.main.IS.getPawn(_charID).setLocation(sexLoc)
+			GM.main.IS.startInteraction("InSex", {main=_charID})
 
 func getChanceForDynamicJoiner(_charID:String) -> float:
 	var result:float = 20.0

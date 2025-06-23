@@ -283,7 +283,7 @@ func _run():
 
 		saynn("[say=pc]Now let's head back to the cell.[/say]")
 
-		saynn("The whole way back your pet is blushing, consciousness of her used anal hole that she can't do anything about.")
+		saynn("The whole way back your pet is blushing, conscious of her used anal hole that she can't do anything about.")
 
 		addButton("Continue", "See what happens next", "returntocell")
 	if(state == "yard1_anal_cumoutside"):
@@ -296,7 +296,7 @@ func _run():
 
 		saynn("[say=pc]Now let's head back to the cell.[/say]")
 
-		saynn("The whole way back your pet is blushing, consciousness of all the seed that is on her fur that she can't do anything about.")
+		saynn("The whole way back your pet is blushing, conscious of all the seed that is on her fur that she can't do anything about.")
 
 		addButton("Continue", "See what happens next", "returntocell")
 	if(state == "yard1_anal_strapon"):
@@ -351,7 +351,7 @@ func _run():
 
 		saynn("[say=pc]Now let's head back to the cell.[/say]")
 
-		saynn("The whole way back your pet is blushing, consciousness of her stretched anal hole that she can't do anything about.")
+		saynn("The whole way back your pet is blushing, conscious of her stretched anal hole that she can't do anything about.")
 
 		addButton("Continue", "See what happens next", "returntocellremovestrapon")
 	if(state == "yard1_breed"):
@@ -401,7 +401,7 @@ func _run():
 
 		saynn("[say=pc]Now let's head back to the cell.[/say]")
 
-		saynn("The whole way back your pet is blushing, consciousness of her used stuffed slit that she can't do anything about.")
+		saynn("The whole way back your pet is blushing, conscious of her used stuffed slit that she can't do anything about.")
 
 		addButton("Continue", "See what happens next", "returntocell")
 	if(state == "yard1_breed_cumoutside"):
@@ -418,7 +418,7 @@ func _run():
 
 		saynn("[say=pc]What, puppy? Are you disappointed? Hah.[/say]")
 
-		saynn("You get some rest and then proceed to walk Rahi back to her cell. The whole way back your pet is blushing, consciousness of her stretched dripping slit and her messy fur that she can't do anything about.")
+		saynn("You get some rest and then proceed to walk Rahi back to her cell. The whole way back your pet is blushing, conscious of her stretched dripping slit and her messy fur that she can't do anything about.")
 
 		addButton("Continue", "See what happens next", "returntocell")
 	if(state == "yard1_breed_strapon"):
@@ -469,7 +469,7 @@ func _run():
 
 		saynn("[say=pc]Now let's head back to the cell.[/say]")
 
-		saynn("The whole way back your pet is blushing, consciousness of her wet fucked slit that she can't do anything about.")
+		saynn("The whole way back your pet is blushing, conscious of her wet fucked slit that she can't do anything about.")
 
 		addButton("Continue", "See what happens next", "returntocellremovestrapon")
 	if(state == "yard2"):

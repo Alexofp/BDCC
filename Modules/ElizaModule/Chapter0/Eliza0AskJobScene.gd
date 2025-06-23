@@ -87,7 +87,7 @@ func _run():
 
 		saynn("[say=pc]Pfff.[/say]")
 
-		saynn("[say=eliza]What is the name of the coordination complex with the formula [Fe(CN)6]3-, known for its deep blue color and used in various chemical applications?[/say]")
+		saynn("[say=eliza]What is the name of the coordination complex with the formula [Fe(CN)6]3-, used in the production of a particular deep blue dye, as well as various other chemical applications?[/say]")
 
 		saynn("What the heck is that formula..")
 
@@ -95,7 +95,7 @@ func _run():
 
 		saynn("[say=pc]C'mon, we already had cyanide![/say]")
 
-		saynn("[say=eliza]What is the name of the organic compound with the formula C14H18O4, commonly known as a type of polyol and used in the production of plastics and resins?[/say]")
+		saynn("[say=eliza]What is the name of the organic compound with the formula C(CH2OH)4, commonly known as a type of polyol and used in the production of plastics and resins?[/say]")
 
 		saynn("She is just trying to bury you at this point..")
 

@@ -206,6 +206,11 @@ func processTurn():
 		progressGoal(SexGoal.TieUp)
 		
 		addText(text)
+		
+		if(item && item.getRestraintData()):
+			var bondageSexReaction:int = item.getRestraintData().sexReaction
+			if(bondageSexReaction >= 0):
+				react(bondageSexReaction)
 
 func getActions(_indx:int):
 	if(_indx == SUB_0):
@@ -223,8 +228,7 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 		
 		getDomInfo().addAnger(0.1)
 		addText("{sub.You} {sub.youVerb('try', 'tries')} to resist {dom.yourHis} attempt at restraining {sub.youHim} but {sub.youVerb('fail')}.")
-		if(RNG.chance(50)):
-			talk(SUB_0, DOM_0, SexReaction.Resisting)
+		reactSub(SexReaction.Resisting, [50])
 
 func saveData():
 	var data = .saveData()

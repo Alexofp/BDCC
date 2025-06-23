@@ -54,8 +54,7 @@ func startActivity(_args):
 	itemIDToRemove = itemToUndress.id
 	
 	addText("{dom.You} {dom.youVerb('reach', 'reaches')} to take off {sub.yourHis} <ITEM>.".replace("<ITEM>", casualName))
-	talkText(DOM_0, getTalkText(DOM_0, SUB_0, SexReaction.ForceUndress).replace("<ITEM>", casualName))
-	talkText(SUB_0, getTalkText(SUB_0, DOM_0, SexReaction.ForceUndress).replace("<ITEM>", casualName))
+	react(SexReaction.ForceUndress, [100, 100], [DOM_0, SUB_0], [casualName])
 	return
 
 func checkRemoved() -> bool:
@@ -112,8 +111,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			if(RNG.chance(20)):
 				damageText = damageClothes(SUB_0)
 			addText("{sub.You} {sub.youVerb('manage', 'managed')} to resist {dom.yourHis} attempt to undress."+((" Struggling leads to {dom.name} ripping {sub.your} clothes. "+damageText) if damageText != "" else ""))
-			if(RNG.chance(50)):
-				talk(SUB_0, DOM_0, SexReaction.ActivelyResisting)
+			reactSub(SexReaction.ActivelyResisting, [50])
 			return
 		
 		getDomInfo().addAnger(0.1)
@@ -121,8 +119,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		if(RNG.chance(10)):
 			damageText = damageClothes(SUB_0)
 		addText("{sub.You} {sub.youVerb('try', 'tries')} to resist {dom.yourHis} hands but {sub.youVerb('fail')}."+((" Struggling leads to {dom.name} ripping {sub.your} clothes. "+damageText) if damageText != "" else ""))
-		if(RNG.chance(50)):
-			talk(SUB_0, DOM_0, SexReaction.Resisting)
+		reactSub(SexReaction.Resisting, [50])
 		return
 
 func getItemToRemove(character):

@@ -65,6 +65,8 @@ func startActivity(_args):
 	addText("{dom.You} {dom.youVerb('pull')} {sub.you} down to the floor. {dom.YourHis} {dom.feet} are resting near {sub.your} {sub.penisShort}.")
 	
 	stimulate(DOM_0, S_LEGS, SUB_0, S_PENIS, I_TEASE, Fetish.FeetplayGiving)
+	
+	react(SexReaction.PawjobStart)
 
 func onSwitchFrom(_otherActivity, _args):
 	pass
@@ -91,6 +93,7 @@ func pawjob_processTurn():
 	stimulate(SUB_0, S_LEGS, DOM_0, getDomHole(), I_NORMAL, Fetish.FeetplayGiving, SPEED_MEDIUM)
 	rubWithFeet(DOM_0, SUB_0, S_PENIS)
 	rubWithFeet(SUB_0, DOM_0, getDomHole())
+	react(SexReaction.PawjobHappens, [20, 10])
 
 func getActions(_indx:int):
 	if(_indx == DOM_0):

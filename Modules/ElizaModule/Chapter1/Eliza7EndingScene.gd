@@ -224,7 +224,7 @@ func _run():
 		addButton("Continue", "See what happens next", "they_hug")
 	if(state == "they_hug"):
 		playAnimation(StageScene.Hug, "hug", {pc="elizaMom", npc="eliza"})
-		saynn("And so they embrace each other warmly. Eliza wraps her arms around her mouth and rests her lowered chin on Scarlet's chest.")
+		saynn("And so they embrace each other warmly. Eliza wraps her arms around her mother and rests her lowered chin on Scarlet's chest.")
 
 		saynn("[say=eliza]I love you, mom.. Sorry that I did so much dumb stuff..[/say]")
 

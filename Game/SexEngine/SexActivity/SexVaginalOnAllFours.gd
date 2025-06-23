@@ -330,10 +330,7 @@ func startActivity(_args):
 	currentPose = RNG.pick(getAvaiablePoses())
 	
 	addText(getStartTextForPose(currentPose))
-	react(aboutToPenetrateReaction)
-	#if(RNG.chance(50)):
-	#	talk(DOM_0, SUB_0, aboutToPenetrateReaction)
-	#	talk(SUB_0, DOM_0, aboutToPenetrateReaction)
+	react(aboutToPenetrateReaction, [50, 50])
 
 func onSwitchFrom(_otherActivity, _args):
 	if(_args != null && _args == ["choke"]):
@@ -373,6 +370,12 @@ func getActions(_indx:int):
 		if(state in ["fucking"]):
 			addAction("slowdown", getPauseSexScore(DOM_0, SUB_0, usedBodypart), "Slow down", "Stop fucking for a second..")
 			
+			if(isStraponSex() && getDom().bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)):
+				var subArousal:float = getSubInfo().getArousal()
+				var straponForceKnotScore:float = 0.05
+				if(subArousal > 0.8 || getSubInfo().isUnconscious()):
+					straponForceKnotScore = 0.5
+				addAction("straponForceKnot", straponForceKnotScore, "Force knot in", "Try to force the knot in!")
 			if(isReadyToCumHandled(DOM_0) && isStraponSex()):
 				addAction("domstraponcum", 1.0, "Cum!", "You're about to cum!", {A_PRIORITY: 1001})
 			if(isReadyToCumHandled(DOM_0) && !isStraponSex()):
@@ -426,10 +429,35 @@ func getActions(_indx:int):
 			if(getDomInfo().isCloseToCumming() && !isStraponSex()):
 				var begtopulloutScore:float = (getResistScore(SUB_0) / 2.0 - getSubInfo().fetishScore({Fetish.BeingBred: 1.0})) / 3.0
 				addAction("begtopullout", begtopulloutScore, "Beg to pull out", "Ask them not to cum inside you", {A_CHANCE: 10 - 10 * getDomInfo().fetishScore({Fetish.Breeding: 1.0})})
+		if(state in ["fucking", "knotting"]):
 			if(isReadyToCumHandled(SUB_0)):
 				addAction("subcum", 1.0, "Cum!", "You're about to cum!", {A_PRIORITY: 1001})
 		
 func doAction(_indx:int, _id:String, _action:Dictionary):
+	if(_id == "straponForceKnot"):
+		# Need a tryKnot func?
+		#if(tryPenetrate())
+		stimulate(DOM_0, S_PENIS, SUB_0, usedBodypart, I_NORMAL, fetishGiving, SPEED_SLOW)
+		#var subArousal:float = getSubInfo().getArousal()
+		if(RNG.chance(getSub().getKnottingChanceBy(usedBodypart, getDomID()) * 0.25)):
+			getSub().gotOrificeStretchedBy(usedBodypart, getDomID(), true, 0.2)
+			addTextTopBottom(RNG.pick([
+				#"{dom.You} {dom.youVerb('manage')} to knot {sub.you}!",
+				"{<TOP>.You} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} {<TOP>.penisShort} deep inside {<BOTTOM>.your} "+getNameHole(SUB_0, usedBodypart)+" and force the knot in, stretching {<BOTTOM>.yourHis} "+getNameHole(SUB_0, usedBodypart)+" wide!",
+				"{<TOP>.You} {<TOP>.youVerb('manage')} to force {<TOP>.yourHis} knot in, stretching {<BOTTOM>.you} out!",
+				"{<TOP>.You} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} {<TOP>.penisShort} balls-deep. The knot stretches {<BOTTOM>.your} "+getNameHole(SUB_0, usedBodypart)+" until finally slipping in.",
+			]), DOM_0, SUB_0)
+			state = "knotting"
+			cumInside(DOM_0, SUB_0, usedBodypart)
+			satisfyGoals()
+		else:
+			getSub().gotOrificeStretchedBy(usedBodypart, getDomID(), true, 0.1)
+			addTextPick([
+				"{dom.You} {dom.youVerb('try', 'tries')} to shove the knot inside!",
+				"{dom.You} {dom.youVerb('try', 'tries')} to stretch {sub.yourHis} "+getNameHole(SUB_0, usedBodypart)+" enough to slip the knot inside!",
+				"{dom.You} {dom.youVerb('try', 'tries')} to knot {sub.you}!",
+			])
+		return
 	if(_id == "slowdown"):
 		state = "aftercumminginside"
 		addText("{dom.You} {dom.youVerb('slow')} {dom.yourHis} pace down and just {dom.youVerb('let')} {dom.yourHis} "+getDickName()+" stay inside.")
@@ -541,7 +569,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		applyTallymarkIfNeeded(usedBodypart)
 		return
 	if(_id == "cumpullout"):
-		cumOnto(DOM_0, SUB_0)
+		cumOnto(DOM_0, SUB_0, {sex=true})
 		satisfyGoals()
 		state = ""
 		applyTallymarkIfNeeded(usedBodypart)
@@ -578,6 +606,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 					text += RNG.pick([
 						" Some "+RNG.pick(["cum", "seed", "semen"])+" leaks out of {sub.yourHis} used "+RNG.pick(usedBodypartNames)+".",
 					])
+			stimulate(DOM_0, S_PENIS, SUB_0, usedBodypart, I_NORMAL, fetishGiving, SPEED_VERYSLOW)
 			addText(text)
 			return
 		else:
@@ -692,8 +721,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		else:
 			getDomInfo().addAnger(0.2)
 			addText("{sub.You} {sub.youVerb('resist')} attempts to penetrate {sub.youHis} "+RNG.pick(usedBodypartNames)+".")
-			if(RNG.chance(50)):
-				talk(SUB_0, DOM_0, SexReaction.ActivelyResisting)
+			reactSub(SexReaction.ActivelyResisting, [50])
 			return
 	if(_id == "moan"):
 		var moanText:String = RNG.pick([
@@ -727,8 +755,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 				"{sub.You} {sub.youVerb('try', 'tries')} to resist while having {sub.yourHis} "+RNG.pick(usedBodypartNames)+" used!",
 				"{sub.You} {sub.youVerb('try', 'tries')} to make {dom.youHim} pull out!",
 			])
-			if(RNG.chance(50)):
-				talk(SUB_0, DOM_0, SexReaction.ActivelyResisting)
+			reactSub(SexReaction.ActivelyResisting, [50])
 			return
 	if(_id == "begtopullout"):
 		getDomInfo().addAnger(-0.02)
@@ -742,7 +769,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			text += " {dom.you} listened!"
 		
 		addText(text)
-		talk(SUB_0, DOM_0, sexReactionPullOut)
+		reactSub(sexReactionPullOut)
 		return
 	
 func getSubResistChance(baseChance:float, domAngerRemoval:float) -> float:
@@ -842,7 +869,13 @@ func getJoinActions(_sexInfo:SexInfoBase):
 		addJoinAction(["spitroast"], "+Spitroast", "Join and fuck their mouth!", getJoinActivityScore("ThreeDDS_SpitroastVag", DOM_1, _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
 
 	if(canSwitchTo("ThreeDDS_DP", [DOM_0, _sexInfo], [SUB_0])):
-		if(usedBodypart == S_VAGINA):
+		var theDPHole:String = S_ANUS if usedBodypart == S_VAGINA else S_VAGINA
+		if(!getSub().hasReachableVagina()):
+			theDPHole = S_ANUS
+		elif(getSub().hasReachableVagina() && !getSub().hasReachableAnus()):
+			theDPHole = S_VAGINA
+		
+		if(theDPHole == S_ANUS):
 			addJoinAction(["dp"], "+DP (anal)", "Join and fuck their ass at the same time!", getJoinActivityScore("ThreeDDS_DP", DOM_1, _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})
 		else:
 			addJoinAction(["dp"], "+DP (vaginal)", "Join and fuck their pussy at the same time!", getJoinActivityScore("ThreeDDS_DP", DOM_0, _sexInfo, getSubInfo()), {A_CATEGORY: ["Fuck"]})

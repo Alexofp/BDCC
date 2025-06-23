@@ -4,6 +4,7 @@ class_name RestraintMittens
 func _init():
 	npcDodgeDifficultyMod = 1.2
 	restraintType = RestraintType.Mittens
+	sexReaction = SexReaction.BondageMittens
 
 func doStruggle(_pc, _minigame:MinigameResult):
 	var _handsFree = !_pc.hasBlockedHands()

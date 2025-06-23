@@ -38,6 +38,7 @@ func startActivity(_args):
 	#affectDom(domInfo.fetishScore({Fetish.Lactation: 1.0}), 0.1, -0.03)
 	
 	noticedSore = getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)
+	react(SexReaction.DomBreastfeedsSubStart, [100, 50])
 
 func onSwitchFrom(_otherActivity, _args):
 	return
@@ -121,10 +122,7 @@ func feeding_processTurn():
 		sendSexEvent(SexEvent.BreastFeeding, DOM_0, SUB_0, {madeLactate=suddenlyLactating, loadSize=0.0, targetIsDom=false})
 		
 		addText(text)
-		if(RNG.chance(5)):
-			talk(DOM_0, SUB_0, SexReaction.DomBreastfeedsOnSub)
-		if(RNG.chance(30)):
-			talk(SUB_0, DOM_0, SexReaction.DomBreastfeedsOnSub)
+		react(SexReaction.DomBreastfeedsOnSub, [10, 30])
 	else:
 		var extraMessages:Array = []
 		var fluidByAmount:Dictionary = fluids.getFluidAmountByType()
@@ -183,10 +181,7 @@ func feeding_processTurn():
 		sendSexEvent(SexEvent.BreastFeeding, DOM_0, SUB_0, {madeLactate=false, loadSize=howMuchCollected, targetIsDom=false})
 		
 		addText(text)
-		if(RNG.chance(5)):
-			talk(DOM_0, SUB_0, SexReaction.DomBreastfeedsOnSub)
-		if(RNG.chance(30)):
-			talk(SUB_0, DOM_0, SexReaction.DomBreastfeedsOnSub)
+		react(SexReaction.DomBreastfeedsOnSub, [10, 30])
 	
 func getActions(_indx:int):
 	if(_indx == DOM_0):
@@ -303,8 +298,7 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 		else:
 			addText("{sub.You} {sub.youVerb('try', 'tries')} to pull away from {dom.you} but {sub.youVerb('fail')}.")
 			getDomInfo().addAnger(0.1)
-			if(RNG.chance(50)):
-				talk(SUB_0, DOM_0, SexReaction.ActivelyResisting)
+			reactSub(SexReaction.ActivelyResisting, [50])
 	if(_actionID == "moan"):
 		var moanText = RNG.pick([
 			"{sub.youVerb('moan')}"

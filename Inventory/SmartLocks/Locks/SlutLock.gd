@@ -1,7 +1,7 @@
 extends SmartLockBase
 
 var keyAmount:int = 5
-var tasks = []
+var tasks:Array = []
 var canRemoveReminded:bool = false
 
 func _init():
@@ -147,3 +147,11 @@ func getQuestProgressText():
 			result.append("[color=red]"+str(taskString)+" (Impossible)[/color]")
 	
 	return Util.join(result, "\n")
+
+func getSexGoalWeightModifier(_sexGoalID:String) -> float:
+	var result:float = 1.0
+	for theTask in tasks:
+		if(!theTask.isCompleted()):
+			result += theTask.getSexGoalWeightModifier(_sexGoalID)
+	
+	return max(result, 0.0)

@@ -116,6 +116,7 @@ func onSwitchFrom(_otherActivity, _args):
 	pullInDom(_args[1])
 	
 	addText("{dom1.You} {dom1.youVerb('join')} in on the fun and {dom1.youVerb('bring')} {dom1.yourHis} "+getNameHole(DOM_1, S_VAGINA)+" to {sub.your} face!")
+	react(SexReaction.ThreesomeJoin, [100.0, 100.0, 100.0], [DOM_1, SUB_0, DOM_0])
 
 func getYour(pcIsInvolvedText:String = "your", noPcText:String = "their") -> String:
 	if(isDom("pc")):
@@ -155,6 +156,7 @@ func sex_processTurn():
 		])
 	else:
 		doProcessRideExtra(SUB_0, DOM_0, usedBodypart)
+	react(SexReaction.ThreesomeRideGrind, [10.0, 10.0, 10.0], [DOM_0, SUB_0, DOM_1])
 
 func getActions(_indx:int):
 	if(_indx == DOM_0 || _indx == DOM_1):
@@ -174,7 +176,6 @@ func getActions(_indx:int):
 			addAction("rub", 1.0 if !isReadyToPenetrate(_indx) else 0.4, "Rub", "Rub your cock against them" if isDom0 else "Rub yourself against their cock")
 			if(isReadyToFuck(SUB_0) && !checkActiveDomPC(_indx) && hasBodypartUncovered(DOM_0, usedBodypart)):
 				addAction("penetrate", 1.0, "Envelop cock" if isDom0 else ("Grind"), "Try to start fucking them!" if isDom0 else ("Try to get the action going"))
-			#TODO: Proper check for this
 			if(getDom(0).hasReachableVagina() && ((usedBodypart == S_VAGINA && getDom(1).hasReachableVagina()) || (usedBodypart == S_ANUS && getDom(1).hasReachableAnus()))):
 				addAction("switch", 0.0, "Switch positions", "Switch positions with the dom")
 		if(state == "sex" && !checkActiveDomPC(_indx)):

@@ -34,3 +34,10 @@ func getTaskString():
 
 func getTaskHint(_isSlaveLevelup):
 	return "Force them to orgasm with just your feet!"
+
+func getSexGoalWeightModifier(_sexGoalID:String) -> float:
+	if(_sexGoalID == SexGoal.DoFeetplay):
+		return 2.0
+	if(_sexGoalID == SexGoal.Pawjob):
+		return 3.0
+	return 0.0

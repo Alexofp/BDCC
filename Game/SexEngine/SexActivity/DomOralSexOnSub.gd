@@ -332,6 +332,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			"{dom.You} {dom.youVerb('wrap')} {dom.yourHis} digits around {sub.yourHis} {sub.penisShort}!",
 		])
 		stimulate(DOM_0, S_MOUTH, SUB_0, S_PENIS, I_TEASE, Fetish.OralSexGiving, SPEED_SLOW)
+		react(SexReaction.AboutToHandjobSub)
 		return
 	if(_id == "startcocklick"):
 		setState("lickingcock")
@@ -373,7 +374,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		#getSubInfo().addArousalForeplay(0.05)
 		#affectSub(getSubInfo().fetishScore({Fetish.OralSexReceiving: 1.0}), 0.0, -0.3, -0.01)
 		addText(text)
-		talk(DOM_0, SUB_0, SexReaction.AboutToLickPussy)
+		react(SexReaction.AboutToLickPussy)
 		return
 	if(_id == "startblowjob"):
 		setState("blowjob")
@@ -386,7 +387,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		#affectSub(getSubInfo().fetishScore({Fetish.OralSexReceiving: 1.0}), 0.1, -0.3, -0.01)
 		sendSexEvent(SexEvent.HolePenetrated, SUB_0, DOM_0, {hole=BodypartSlot.Head,engulfed=true,strapon=false})
 		addText(text)
-		talk(DOM_0, SUB_0, SexReaction.AboutToSuckSubOff)
+		react(SexReaction.AboutToSuckSubOff)
 		return
 	if(_id == "starttonguefuck"):
 		setState("tonguefucking")
@@ -423,8 +424,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			setState("subabouttocumcock")
 		addText("{sub.You} {sub.youVerb('warn')} {dom.youHim} that {sub.youHe} {sub.youAre} "+RNG.pick(["about to cum", "close", "very close"])+".")
 		getDomInfo().addAnger(-0.05)
-		talk(DOM_0, SUB_0, SexReaction.WarnAboutToCum)
-		talk(SUB_0, DOM_0 , SexReaction.WarnAboutToCum)
+		reactSub(SexReaction.WarnAboutToCum)
 		return
 	if(_id == "cumondom"):
 		satisfyGoals()
@@ -457,35 +457,44 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		else:
 			addText("{sub.You} {sub.youVerb('try', 'tries')} to pull away from {dom.you} but {sub.youVerb('fail')}.")
 			getDomInfo().addAnger(0.1)
-			if(RNG.chance(50)):
-				talk(SUB_0, DOM_0, SexReaction.ActivelyResisting)
+			reactSub(SexReaction.ActivelyResisting, [50])
 			return
 	if(_id == "moan"):
-		var text:String = RNG.pick([
-			"{sub.You} "+RNG.pick(["{sub.youVerb('let')} out a moan", "{sub.youVerb('moan')}", "{sub.youVerb('produce')} a moan", "{sub.youVerb('make')} a noise of pleasure"])+" while ",
-		])
-		if(getSub().isGagged()):
-			text = RNG.pick([
-				"{sub.You} "+RNG.pick(["{sub.youVerb('let')} out a muffled moan", "{sub.youVerb('try', 'tries')} to moan", "{sub.youVerb('produce')} a muffled moan", "{sub.youVerb('make')} a muffled noise of pleasure"])+" while ",
+		if(state in ["licking", "tonguefucking", "lickingcock", "blowjob"]):
+			var text:String = RNG.pick([
+				"{sub.You} "+RNG.pick(["{sub.youVerb('let')} out a moan", "{sub.youVerb('moan')}", "{sub.youVerb('produce')} a moan", "{sub.youVerb('make')} a noise of pleasure"])+" while ",
 			])
-		if(getState() == "licking"):
-			text += RNG.pick([
-				"{dom.You} {dom.youAre} licking {sub.yourHis} "+RNG.pick(["pussy", "sensitive folds", "kitty", "petals", "wet pussy"])+".",
-			])
-		if(getState() == "tonguefucking"):
-			text += RNG.pick([
-				"{dom.You} {dom.youAre} tongue-fucking {sub.yourHis} "+RNG.pick(["pussy", "sensitive folds", "kitty", "petals", "wet pussy"])+".",
-			])
-		if(getState() == "lickingcock"):
-			text += RNG.pick([
-				"{dom.You} {dom.youAre} "+RNG.pick(["licking", "teasing", "preparing"])+" {sub.yourHis} "+RNG.pick(["cock", "dick", "member"])+".",
-			])
-		if(getState() == "blowjob"):
-			text += RNG.pick([
-				"{dom.You} {dom.youAre} "+RNG.pick(["sucking"])+" {sub.yourHis} "+RNG.pick(["cock", "dick", "member"])+".",
-			])
+			if(getSub().isGagged()):
+				text = RNG.pick([
+					"{sub.You} "+RNG.pick(["{sub.youVerb('let')} out a muffled moan", "{sub.youVerb('try', 'tries')} to moan", "{sub.youVerb('produce')} a muffled moan", "{sub.youVerb('make')} a muffled noise of pleasure"])+" while ",
+				])
+			if(getState() == "licking"):
+				text += RNG.pick([
+					"{dom.you} {dom.youAre} licking {sub.yourHis} "+RNG.pick(["pussy", "sensitive folds", "kitty", "petals", "wet pussy"])+".",
+				])
+			if(getState() == "tonguefucking"):
+				text += RNG.pick([
+					"{dom.you} {dom.youAre} tongue-fucking {sub.yourHis} "+RNG.pick(["pussy", "sensitive folds", "kitty", "petals", "wet pussy"])+".",
+				])
+			if(getState() == "lickingcock"):
+				text += RNG.pick([
+					"{dom.you} {dom.youAre} "+RNG.pick(["licking", "teasing", "preparing"])+" {sub.yourHis} "+RNG.pick(["cock", "dick", "member"])+".",
+				])
+			if(getState() == "blowjob"):
+				text += RNG.pick([
+					"{dom.you} {dom.youAre} "+RNG.pick(["sucking"])+" {sub.yourHis} "+RNG.pick(["cock", "dick", "member"])+".",
+				])
+			addText(text)
+		else:
+			if(getSub().isGagged()):
+				addTextPick([
+					"{sub.You} "+RNG.pick(["{sub.youVerb('let')} out a muffled moan","{sub.youVerb('moan')}", "{sub.youVerb('produce')} a muffled moan", "{sub.youVerb('make')} a muffled noise of pleasure"])+".",
+				])
+			else:
+				addTextPick([
+					"{sub.You} "+RNG.pick(["{sub.youVerb('let')} out a moan","{sub.youVerb('moan')}", "{sub.youVerb('produce')} a moan", "{sub.youVerb('make')} a noise of pleasure"])+".",
+				])
 		moan(SUB_0)
-		addText(text)
 		return
 
 

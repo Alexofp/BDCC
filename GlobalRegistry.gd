@@ -2,8 +2,8 @@ extends Node
 
 var game_version_major = 0
 var game_version_minor = 1
-var game_version_revision = 8
-var game_version_suffix = "fix3"
+var game_version_revision = 9
+var game_version_suffix = "fix1"
 
 var contributorsCredits:Dictionary = {
 	"Max-Maxou": [
@@ -86,6 +86,9 @@ var contributorsCredits:Dictionary = {
 		"[url=https://github.com/Alexofp/BDCC/pull/112]#1[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/119]#2[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/157]#3[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/184]#4[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/186]#5[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/189]#6[/url]",
 	],
 	"Friskygote": [
 		"[url=https://github.com/Alexofp/BDCC/pull/120]#1[/url]",
@@ -117,6 +120,10 @@ var contributorsCredits:Dictionary = {
 		"[url=https://github.com/Alexofp/BDCC/pull/147]#4[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/148]#5[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/152]#6[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/177]#7[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/181]#8[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/187]#9[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/192]#10[/url]",
 	],
 	"CheeseyCake92": [
 		"[url=https://github.com/Alexofp/BDCC/pull/158]#1[/url]",
@@ -729,9 +736,11 @@ func isVersionCompatible(otherversion:String):
 	
 	if(otherversion == "*"):
 		return true
-	if(otherversion != getGameVersionStringNoSuffix()):
-		return false
-	return true
+	if(otherversion == getGameVersionStringNoSuffix()):
+		return true
+	if(otherversion == getGameVersionString()):
+		return true
+	return false
 
 func isVersionListHasCompatible(versionlist):
 	if(!(versionlist is String)):

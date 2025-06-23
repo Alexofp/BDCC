@@ -123,6 +123,14 @@ func forceComplete():
 	forceCompleted = true
 	onBreakTaskCompleted(null)
 
+func getSexGoalWeightModifier(_sexGoalID:String) -> float:
+	var result:float = 1.0
+	for theTask in tasks:
+		if(!theTask.isCompleted()):
+			result += theTask.getSexGoalWeightModifier(_sexGoalID)
+	
+	return max(result, 0.0)
+
 func saveData():
 	var data = {
 		"slaveType": slaveType,

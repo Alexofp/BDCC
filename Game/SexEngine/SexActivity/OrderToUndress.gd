@@ -49,8 +49,7 @@ func startActivity(_args):
 	itemIDToRemove = itemToUndress.id
 	
 	addText("{dom.You} {dom.youVerb('order')} {sub.you} to undress {sub.yourHis} <ITEM>.".replace("<ITEM>", casualName))
-	talkText(DOM_0, getTalkText(DOM_0, SUB_0, SexReaction.OrderToUndress).replace("<ITEM>", casualName))
-	talkText(SUB_0, getTalkText(SUB_0, DOM_0, SexReaction.OrderToUndress).replace("<ITEM>", casualName))
+	react(SexReaction.OrderToUndress, [100, 100], [DOM_0, SUB_0], [casualName])
 
 func checkRemoved() -> bool:
 	if(itemIDToRemove == null || itemIDToRemove == ""):

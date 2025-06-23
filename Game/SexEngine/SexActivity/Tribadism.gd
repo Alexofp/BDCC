@@ -44,7 +44,7 @@ func startActivity(_args):
 	
 	#affectSub(subInfo.fetishScore({Fetish.Tribadism: 1.0}), 0.1, -0.1, -0.01)
 	#affectDom(domInfo.fetishScore({Fetish.Tribadism: 1.0}), 0.1, -0.03)
-	talk(DOM_0, SUB_0, SexReaction.AboutToRubPussiesTogether)
+	react(SexReaction.AboutToRubPussiesTogether)
 
 func grinding_processTurn():
 	addTextPick([
@@ -88,6 +88,8 @@ func grinding_processTurn():
 			"This amount of pleasure is gonna make {sub.you} cum soon!",
 		])
 
+	react(SexReaction.TribadismHappens, [10.0, 5.0])
+
 func getActions(_indx:int):
 	if(_indx == DOM_0):
 		addAction("stop", getStopScore(), "Stop tribadism", "Enough pussy rubbing")
@@ -114,8 +116,7 @@ func doAction(_indx:int, _action:String, _actionDict:Dictionary):
 		else:
 			addText("{sub.You} {sub.youVerb('try', 'tries')} to pull away from {dom.you} but {sub.youVerb('fail')}.")
 			getDomInfo().addAnger(0.1)
-			if(RNG.chance(50)):
-				talk(SUB_0, DOM_0, SexReaction.ActivelyResisting)
+			reactSub(SexReaction.ActivelyResisting, [50])
 
 func init_getActions(_indx:int):
 	if(_indx == DOM_0):

@@ -20,6 +20,9 @@ func getSupportedSexTypes():
 		SexType.SlutwallSex: true,
 	}
 
+func canStopSexWithThisActivity() -> bool:
+	return true
+
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	if(_subInfo.isUnconscious()):
 		return -1.0
@@ -33,9 +36,7 @@ func getTags(_indx:int) -> Array:
 
 func startActivity(_args):
 	addText("{dom.You} {dom.youVerb('start')} beating {sub.you} up!")
-	talk(DOM_0, SUB_0, SexReaction.AboutToBeatUp)
-	if(RNG.chance(20)):
-		talk(SUB_0, DOM_0, SexReaction.AboutToBeatUp)
+	react(SexReaction.AboutToBeatUp)
 
 func init_processTurn():
 	ticks += 1
@@ -72,10 +73,7 @@ func init_processTurn():
 			text.append(damageText)
 			
 	addText(Util.join(text, " "))
-	if(RNG.chance(30)):
-		talk(DOM_0, SUB_0, SexReaction.BeatingUp)
-	if(RNG.chance(30)):
-		talk(SUB_0, DOM_0, SexReaction.BeatingUp)
+	react(SexReaction.BeatingUp, [30.0, 30.0])
 
 func getActions(_indx:int):
 	if(_indx == DOM_0):
@@ -109,9 +107,7 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 				text += " "+(damageText)
 		
 		addText(text)
-		talk(DOM_0, SUB_0, SexReaction.BeatingUpHard)
-		if(RNG.chance(20)):
-			talk(SUB_0, DOM_0, SexReaction.BeatingUpHard)
+		react(SexReaction.BeatingUpHard, [100.0, 40.0])
 
 func saveData():
 	var data = .saveData()

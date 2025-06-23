@@ -9,7 +9,7 @@ func getVisibleName():
 func getProgress():
 	var result = []
 	
-	result.append("Someone stole Artica's dreamcatcher while you weren't looking. Find out who did it by beating inmates up and interogating them!\n\nAlternatively, you pay doctor Quinn a visit, maybe she can help cure Artica's sadness through alternative means..")
+	result.append("Someone stole Artica's dreamcatcher while you weren't looking. Find out who did it by beating inmates up and interrogating them!\n\nAlternatively, you can pay doctor Quinn a visit, maybe she can help cure Artica's sadness through alternative means..")
 
 	var clueNumber = getFlag("ArticaModule.lqClues", 0)
 	var allClues = GlobalRegistry.getModule("ArticaModule").getLastQuestHints()

@@ -156,7 +156,7 @@ func _run():
 
 			saynn("You arch your back harder, squirming while the dildos begin stuffing your holes with something. Something cold and sticky. One of them is pressed directly against your womb entering, painting the insides. The other one stuffs your guts full of this unknown stuff too. And since the knots prevent any leakage, your belly quickly begins to look somewhat inflated.. Eliza takes note of that.")
 
-			saynn("[say=eliza]That’s the healing gel~, don’t worry. There were only a few accidents where a real cum got used instead.[/say]")
+			saynn("[say=eliza]That’s the healing gel~, don’t worry. There were only a few accidents where real cum got used instead.[/say]")
 
 			saynn("Even though your holes are being stretched a lot, you only feel a slight tickling down there. Whatever it is, it seems to be doing its job, soothing the pain and healing your bits.")
 
@@ -174,7 +174,7 @@ func _run():
 
 			saynn("You arch your back harder, squirming while the dildo begins stuffing your hole with something. Something cold and sticky. It stuffs your guts full of this stuff. And since the knot prevents any leakage, your belly quickly begins to look somewhat inflated.. Eliza takes note of that.")
 
-			saynn("[say=eliza]That’s the healing gel~, don’t worry. There were only a few accidents where a real cum got used instead.[/say]")
+			saynn("[say=eliza]That’s the healing gel~, don’t worry. There were only a few accidents where real cum got used instead.[/say]")
 
 			saynn("Even though your hole is being stretched a lot, you only feel a slight tickling down there. Whatever it is, it seems to be doing its job, soothing the pain and healing your bits.")
 

@@ -46,9 +46,7 @@ func startActivity(_args):
 	
 	noticedSore = getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)
 	
-	talk(DOM_0, SUB_0, SexReaction.DomAboutToStartGropingSubsBreasts)
-	if(RNG.chance(30)):
-		talk(SUB_0, DOM_0, SexReaction.DomAboutToStartGropingSubsBreasts)
+	react(SexReaction.DomAboutToStartGropingSubsBreasts, [100, 50])
 
 func getExtraSubText() -> String:
 	var result:Array = []
@@ -155,10 +153,7 @@ func groping_processTurn():
 	sendSexEvent(SexEvent.BreastsGroped, DOM_0, SUB_0, {madeLactate=suddenlyLactating})
 	
 	addText(text)
-	if(RNG.chance(10)):
-		talk(DOM_0, SUB_0, SexReaction.DomGropesSubsBreasts)
-	if(RNG.chance(20)):
-		talk(SUB_0, DOM_0, SexReaction.DomGropesSubsBreasts)
+	react(SexReaction.DomGropesSubsBreasts, [10, 20])
 	
 	
 func getActions(_indx:int):
@@ -201,9 +196,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		
 		stimulate(DOM_0, S_HANDS, SUB_0, S_BREASTS, I_TEASE, Fetish.Lactation)
 		
-		talk(DOM_0, SUB_0, SexReaction.DomStartsGropingSubsBreasts)
-		if(RNG.chance(50)):
-			talk(SUB_0, DOM_0, SexReaction.DomStartsGropingSubsBreasts)
+		react(SexReaction.DomStartsGropingSubsBreasts, [100, 50])
 	if(_id == "stop"):
 		endActivity()
 		satisfyGoals()
@@ -232,8 +225,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		else:
 			addText("{sub.You} {sub.youVerb('try', 'tries')} to pull away from {dom.you} but {sub.youVerb('fail')}.")
 			getDomInfo().addAnger(0.1)
-			if(RNG.chance(50)):
-				talk(SUB_0, DOM_0, SexReaction.ActivelyResisting)
+			reactSub(SexReaction.ActivelyResisting, [50])
 
 func getOrgasmHandlePriority(_indx:int) -> int:
 	if(_indx == SUB_0):

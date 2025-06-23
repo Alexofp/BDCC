@@ -4,6 +4,7 @@ class_name RestraintBlindfold
 func _init():
 	npcDodgeDifficultyMod = 0.8
 	restraintType = RestraintType.Blindfold
+	sexReaction = SexReaction.BondageBlindfold
 
 func canInspectWhileBlindfolded():
 	return true

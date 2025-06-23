@@ -162,6 +162,29 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		targetHole = _action["args"][1]
 		
 		addTextTarget("{dom.You} {dom.youVerb('pick')} the target! A portal opens up on the fleshlight, revealing {<TARGET>.your} "+getNameHoleGeneric(targetHole)+".")
+		if(targetID == getDomOrSubID(DOM_0)):
+			talkText(DOM_0, RNG.pick([
+				"Hope you like this one.",
+				"See that? That's my "+getNameHole(DOM_0, targetHole)+".",
+				"Wanna fuck me? You can now.",
+				"Do you like this one? It's mine.",
+				"This "+getNameHole(DOM_0, targetHole)+" is mine, by the way.",
+			]))
+		elif(targetID == getDomOrSubID(SUB_0)):
+			talkText(DOM_0, RNG.pick([
+				"Looks familliar? It should.",
+				"Think you can handle yourself?",
+				"I can see your "+getNameHole(SUB_0, targetHole)+" clench.",
+				"Do you like this one? It's yours actually.",
+				"This "+getNameHole(SUB_0, targetHole)+" is yours, by the way.",
+			]))
+		else:
+			talkText(DOM_0, RNG.pick([
+				"Wonder if you know them.",
+				"Can you recognize who it is just by their holes?",
+				"Ready to feel them around your cock?",
+				"Ready to fuck someone else?",
+			]))
 		return
 	if(_id == "penetrate"):
 		if(tryPenetrate(SUB_0, getTargetIndx(), targetHole)):

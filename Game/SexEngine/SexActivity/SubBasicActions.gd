@@ -30,7 +30,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	var sub:BaseCharacter = _subInfo.getChar()
 	#var dom:BaseCharacter = _domInfo.getChar()
 	
-	if(!_sexEngine.hasTag(_subInfo.charID, SexActivityTag.PreventsSubTeasing) && !_sexEngine.hasTag(_subInfo.charID, SexActivityTag.VaginaPenetrated)&& !_sexEngine.hasTag(_subInfo.charID, SexActivityTag.AnusPenetrated) && !_sexEngine.hasTag(_subInfo.charID, SexActivityTag.MouthUsed)):
+	if(!_sexEngine.hasTag(_subInfo.charID, SexActivityTag.PreventsSubTeasing) && !_sexEngine.hasTag(_subInfo.charID, SexActivityTag.HavingSex) && !_sexEngine.hasTag(_subInfo.charID, SexActivityTag.VaginaPenetrated)&& !_sexEngine.hasTag(_subInfo.charID, SexActivityTag.AnusPenetrated) && !_sexEngine.hasTag(_subInfo.charID, SexActivityTag.MouthUsed)):
 		var teaseScore:float = _subInfo.getComplyScore() * 0.1 + _subInfo.getResistScore() * 0.05 + max(0.0, _subInfo.personalityScore({PersonalityStat.Impatient: 0.1}))
 		addStartAction(["tease"], "Tease", "Tease them", teaseScore, {A_CATEGORY: []})
 		
@@ -79,8 +79,7 @@ func startActivity(_args):
 			sub.addStamina(-struggleData["stamina"])
 		
 		addText(text)
-		if(RNG.chance(30)):
-			talk(SUB_0, DOM_0, SexReaction.ResistingRestraints)
+		reactSub(SexReaction.ResistingRestraints, [30])
 		return
 	
 	if(actionID in ["apologize"]):
@@ -100,7 +99,7 @@ func startActivity(_args):
 			getDomInfo().addAnger(-0.3)
 		
 		addText(text)
-		talk(SUB_0, DOM_0, SexReaction.Apologizing)
+		reactSub(SexReaction.Apologizing)
 		return
 	
 	if(actionID in ["tease"]):
@@ -144,7 +143,7 @@ func startActivity(_args):
 		
 		affectDom(1.0, 0.2, 0.0)
 		addText(text)
-		talk(SUB_0, DOM_0, SexReaction.Teasing)
+		reactSub(SexReaction.Teasing)
 		return
 		
 	if(actionID in ["punch", "kick"]):
@@ -164,6 +163,5 @@ func startActivity(_args):
 		sendSexEvent(SexEvent.PainInflicted, SUB_0, DOM_0, {pain=howMuchPainAdded,isDefense=true,intentional=true})
 		
 		addText(text)
-		if(RNG.chance(50)):
-			talk(SUB_0, DOM_0, SexReaction.ActivelyResisting)
+		reactSub(SexReaction.ActivelyResisting, [50])
 		return

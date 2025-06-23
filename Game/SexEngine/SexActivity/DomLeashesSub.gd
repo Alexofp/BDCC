@@ -52,17 +52,19 @@ func getCheckTagsSub() -> Array:
 
 func startActivity(_args):
 	addText("{dom.You} {dom.youVerb('pull')} out a [b]leash[/b] and {dom.youVerb('start')} trying to clip it to {sub.your} collar!")
+	react(SexReaction.LeashStart)
 
 func init_processTurn():
 	leashTimer += 1
 	if(leashTimer >= 2):
 		setState("leashed")
 		addText("{dom.You} {dom.youVerb('clip')} a [b]leash[/b] to {sub.your} collar!")
+		react(SexReaction.Leashed)
 
 func getActions(_indx:int):
 	if(_indx == DOM_0):
 		if(state == "leashed"):
-			addAction("stop", 0.0, "Remove leash", "Stop leashing them", {A_CATEGORY: ["Humiliate"]})
+			addAction("stop", getStopSexScore(DOM_0), "Remove leash", "Stop leashing them", {A_CATEGORY: ["Humiliate"]})
 			if(!getSubInfo().isUnconscious()):
 				var yankScore:float = getDomInfo().getIsAngryScore() * 1.0 * max(0.1, 0.1 + getDomInfo().personalityScore({PersonalityStat.Mean: 1.0})) - getSubInfo().getAboutToPassOutScore() * getDomInfo().fetishScore({Fetish.UnconsciousSex: -1.0})
 				addAction("yank", yankScore, "Yank leash", "Yank on that leash hard!", {A_CATEGORY: ["Violence"]})
@@ -76,8 +78,9 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		addText("{dom.You} {dom.youVerb('unclip')} the leash from {sub.your} collar.")
 		return 
 	if(_id == "yank"):
-		addText("{dom.You} {dom.youVerb('yank')} on {sub.your} leash [b]hard[/b], choking {sub.youHim}.")
+		addText("{dom.You} [b]{dom.youVerb('yank')}[/b] on {sub.your} leash [b]hard[/b], choking {sub.youHim}.")
 		choke(DOM_0, SUB_0, CHOKE_VERYHARD)
+		react(SexReaction.LeashYank, [50.0, 30.0])
 		return 
 
 	if(_id == "pullaway"):

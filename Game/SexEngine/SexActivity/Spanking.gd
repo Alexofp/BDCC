@@ -434,8 +434,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			])
 			getDomInfo().addAnger(0.03)
 		addText(text)
-		if(RNG.chance(50)):
-			talk(SUB_0, DOM_0, SexReaction.Resisting)
+		reactSub(SexReaction.Resisting, [50])
 		return
 
 func getRandomAnusWord() -> String:
