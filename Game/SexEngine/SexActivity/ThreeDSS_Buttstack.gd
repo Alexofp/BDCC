@@ -188,7 +188,7 @@ func inside_processTurn():
 	cockWarmer(domFocus, DOM_0, getCurrentHole())
 
 func sex_processTurn():
-	stimulate(DOM_0, S_PENIS, domFocus, getCurrentHole(), I_NORMAL, getCurrentGiveFetish())
+	stimulateSex(DOM_0, domFocus, getCurrentHole(), I_NORMAL)
 	
 	doProcessFuck(DOM_0, domFocus, getCurrentHole(), " in a buttstack position")
 	doProcessFuckExtra(DOM_0, domFocus, getCurrentHole())

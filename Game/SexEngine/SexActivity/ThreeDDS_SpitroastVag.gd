@@ -137,14 +137,14 @@ func processTurn():
 	return
 
 func inside_processTurn():
-	stimulate(DOM_0, S_PENIS, SUB_0, usedBodypart, I_TEASE, usedFetish)
-	stimulate(DOM_1, S_PENIS, SUB_0, S_MOUTH, I_TEASE, Fetish.OralSexReceiving)
+	stimulateSex(DOM_0, SUB_0, usedBodypart, I_TEASE)
+	stimulateSex(DOM_1, SUB_0, S_MOUTH, I_TEASE)
 	
 	addText("{sub.You} {sub.youAre} being a cock-warmer for "+getYour()+" "+getCocksName()+".")
 
 func sex_processTurn():
-	stimulate(DOM_0, S_PENIS, SUB_0, usedBodypart, I_NORMAL, usedFetish)
-	stimulate(DOM_1, S_PENIS, SUB_0, S_MOUTH, I_NORMAL, Fetish.OralSexReceiving)
+	stimulateSex(DOM_0, SUB_0, usedBodypart, I_NORMAL)
+	stimulateSex(DOM_1, SUB_0, S_MOUTH, I_NORMAL)
 	
 	doProcessFuck(DOM_0, SUB_0, usedBodypart, " in a spitroast position")
 	doProcessFuck(DOM_1, SUB_0, S_MOUTH)
@@ -230,8 +230,8 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		return
 	if(_id == "rub"):
 		addText(getYour("You rub your ", "The doms rub their ")+getCocksName()+" against {sub.your} holes.")
-		stimulate(DOM_0, S_PENIS, SUB_0, usedBodypart, I_TEASE, usedFetish)
-		stimulate(DOM_1, S_PENIS, SUB_0, S_MOUTH, I_TEASE, Fetish.OralSexReceiving)
+		stimulateSex(DOM_0, SUB_0, usedBodypart, I_TEASE)
+		stimulateSex(DOM_1, SUB_0, S_MOUTH, I_TEASE)
 		return
 	if(_id == "penetrate"):
 		if(tryPenetrate(DOM_0, SUB_0, usedBodypart)):

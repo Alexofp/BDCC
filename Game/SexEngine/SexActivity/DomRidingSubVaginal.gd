@@ -290,7 +290,7 @@ func processTurn():
 		return
 	
 func fucking_processTurn():
-	stimulate(SUB_0, S_PENIS, DOM_0, usedBodypart, I_NORMAL, fetishGiving)
+	stimulateSexRide(DOM_0, SUB_0, usedBodypart, I_NORMAL)
 #	affectSub(getSubInfo().fetishScore({fetishGiving: 1.0})+0.5, 0.1 * subSensetivity(), -0.1, -0.01)
 #	affectDom(getDomInfo().fetishScore({fetishReceiving: 1.0})+0.3, 0.1, 0.0)
 #	getSubInfo().stimulateArousalZone(0.2, BodypartSlot.Penis, 1.0)
@@ -389,7 +389,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "straponForceKnot"):
 		# Need a tryKnot func?
 		#if(tryPenetrate())
-		stimulate(SUB_0, S_PENIS, DOM_0, usedBodypart, I_NORMAL, fetishGiving, SPEED_SLOW)
+		stimulateSexRide(DOM_0, SUB_0, usedBodypart, I_NORMAL, SPEED_SLOW)
 		#var subArousal:float = getSubInfo().getArousal()
 		if(RNG.chance(getDom().getKnottingChanceBy(usedBodypart, getSubID()) * 0.25)):
 			getDom().gotOrificeStretchedBy(usedBodypart, getSubID(), true, 0.2)
@@ -588,7 +588,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 					text += RNG.pick([
 						" Some "+RNG.pick(["cum", "seed", "semen"])+" leaks out of {dom.yourHis} used "+RNG.pick(usedBodypartNames)+".",
 					])
-			stimulate(SUB_0, S_PENIS, DOM_0, usedBodypart, I_NORMAL, fetishGiving, SPEED_VERYSLOW)
+			stimulateSexRide(DOM_0, SUB_0, usedBodypart, I_NORMAL, SPEED_VERYSLOW)
 			addText(text)
 			return
 		else:
@@ -603,7 +603,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			addText(text)
 			return
 	if(_id == "rub"):
-		stimulate(DOM_0, usedBodypart, SUB_0, S_PENIS, I_TEASE, fetishReceiving)
+		stimulateSexRide(DOM_0, SUB_0, usedBodypart, I_TEASE)
 		#affectSub(getSubInfo().fetishScore({fetishGiving: 1.0}), 0.1 * subSensetivity(), 0.0, 0.0)
 		#affectDom(getDomInfo().fetishScore({fetishReceiving: 1.0}), 0.1, -0.01)
 		#getSubInfo().addArousalForeplay(0.05 * subSensetivity())
@@ -616,7 +616,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			getDom().gotOrificeStretchedBy(usedBodypart, getSubID(), true, 0.1)
 			#affectSub(getSubInfo().fetishScore({fetishGiving: 1.0}), 0.1 * subSensetivity(), 0.0, 0.0)
 			#affectDom(getDomInfo().fetishScore({fetishReceiving: 1.0}), 0.2, -0.01)
-			stimulate(DOM_0, usedBodypart, SUB_0, S_PENIS, I_TEASE, fetishReceiving)
+			stimulateSexRide(DOM_0, SUB_0, usedBodypart, I_TEASE)
 			addText("{dom.You} {dom.youVerb('try', 'tries')} to envelop {sub.yourHis} "+getDickName()+" but it's too big!")
 			return
 		
@@ -625,7 +625,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		#affectDom(getDomInfo().fetishScore({fetishReceiving: 1.0}), 0.1, -0.01)
 		#getSubInfo().stimulateArousalZone(0.1, BodypartSlot.Penis, 0.5)
 		#getDomInfo().stimulateArousalZone(0.1, usedBodypart, 0.5)
-		stimulate(DOM_0, usedBodypart, SUB_0, S_PENIS, I_LOW, fetishReceiving)
+		stimulateSexRide(DOM_0, SUB_0, usedBodypart, I_LOW)
 		
 		#getSub().gotFuckedBy(usedBodypart, getDomID())
 		getDom().gotOrificeStretchedBy(usedBodypart, getSubID(), true, 0.2)
@@ -702,7 +702,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			reactSub(SexReaction.ActivelyResisting, [50])
 			return
 	if(_id == "rubSub"):
-		stimulate(SUB_0, S_PENIS, DOM_0, usedBodypart, I_TEASE, fetishGiving)
+		stimulateSex(SUB_0, DOM_0, usedBodypart, I_TEASE)
 		#affectSub(getSubInfo().fetishScore({fetishGiving: 1.0}), 0.05 * subSensetivity(), -0.1, 0.0)
 		#affectDom(max(0.1, getDomInfo().fetishScore({fetishReceiving: 1.0})+1.0), 0.05, 0.0)
 		

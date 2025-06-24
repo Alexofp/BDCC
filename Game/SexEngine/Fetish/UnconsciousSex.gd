@@ -2,6 +2,10 @@ extends FetishBase
 
 func _init():
 	id = Fetish.UnconsciousSex
+	dynamicChangesPersonalityAffectors = {
+		PersonalityStat.Mean: 0.3,
+		PersonalityStat.Coward: -0.2,
+	}
 
 func getVisibleName():
 	return "Unconscious sex"

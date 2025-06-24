@@ -390,19 +390,14 @@ func getExtraOutputData(_isDom:bool, _sexEngine):
 
 func fetishUp(_fetishID:String, _amount:float = 1.0):
 	if(isUnconscious()):
-		return
+		if(!(_fetishID in [Fetish.Masochism, Fetish.Choking, Fetish.UnconsciousSex])):
+			return
 	if(!fetishGain.has(_fetishID)):
 		fetishGain[_fetishID] = _amount
 	else:
 		fetishGain[_fetishID] += _amount
 
-func isResistingNewFetishes(_fetishID:String) -> bool:
-	return false
-
 func fetishAffect(_fetishID:String, _amount:float = 1.0):
-	if(_amount > 0.0 && isResistingNewFetishes(_fetishID)):
-		_amount = -_amount
-	
 	fetishUp(_fetishID, _amount)
 
 func doFetishChangeCalculation() -> Dictionary:
@@ -414,15 +409,22 @@ func doFetishChangeCalculation() -> Dictionary:
 	var messages:Array = []
 	
 	var fetishHolder:FetishHolder = theChar.getFetishHolder()
-	#var personality:Personality = theChar.getPersonality()
-	
-	var minThreasholdForChange:float = 5.0
+	var personality:Personality = theChar.getPersonality()
 	
 	for fetishID in fetishGain:
 		var theFetish:FetishBase = GlobalRegistry.getFetish(fetishID)
 		if(!theFetish):
 			continue
-		var fetishGained:float = fetishGain[fetishID] * 100.0
+		
+		var currentFetishValue:float = fetishHolder.getFetish(fetishID)
+		
+		var minThreasholdForChange:float = lerp(theFetish.getDynamicChangeThreshold(), theFetish.getDynamicChangeThresholdMax(), abs(currentFetishValue))
+			
+		var fetishGained:float = fetishGain[fetishID]
+		if(fetishGained >= 0.0):
+			fetishGained *= theFetish.getFetishChangePersonalityMod(personality)
+		else:
+			fetishGained /= theFetish.getFetishChangePersonalityMod(personality)
 		
 		if(abs(fetishGained) < minThreasholdForChange):
 			continue
@@ -434,15 +436,15 @@ func doFetishChangeCalculation() -> Dictionary:
 			continue
 		fetishChange = clamp(fetishChange, -0.3, 0.3)
 		
-		var currentFetishValue:float = fetishHolder.getFetish(fetishID)
+		#var currentFetishValue:float = fetishHolder.getFetish(fetishID)
 		fetishHolder.addFetish(fetishID, fetishChange)
 		var newFetishValue:float = fetishHolder.getFetish(fetishID)
 		
 		var changeText:String = ""
 		if(fetishChange > 0.0):
-			changeText = " now likes "+theFetish.getVisibleName()+" more."
+			changeText = " now likes "+theFetish.getVisibleName()+" more."+" ("+str(Util.roundF(fetishChange*100.0, 1))+"%)"
 		else:
-			changeText = " now dislikes "+theFetish.getVisibleName()+" more."
+			changeText = " now dislikes "+theFetish.getVisibleName()+" more."+" ("+str(Util.roundF(fetishChange*100.0, 1))+"%)"
 		messages.append(theChar.getName()+changeText)
 		
 		if(FetishInterest.getEnumListValue(currentFetishValue) != FetishInterest.getEnumListValue(newFetishValue)):

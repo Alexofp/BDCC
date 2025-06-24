@@ -157,15 +157,15 @@ func processTurn():
 	return
 
 func inside_processTurn():
-	stimulate(DOM_0, S_PENIS, SUB_0, usedBodypart, I_TEASE, usedFetish)
-	stimulate(SUB_0, S_PENIS, DOM_1, usedBodypart2, I_TEASE, usedFetish2)
+	stimulateSex(DOM_0, SUB_0, usedBodypart, I_TEASE)
+	stimulateSex(SUB_0, DOM_1, usedBodypart2, I_TEASE)
 	
 	addText("{sub.You} {sub.youAre} being a cock-warmer for {dom.your} {dom.penisShort}.")
 	addText("At the same time, {dom1.You} {dom1.youAre} being a cock-warmer for {sub.your} {sub.penisShort}.")
 
 func sex_processTurn():
-	stimulate(DOM_0, S_PENIS, SUB_0, usedBodypart, I_NORMAL, usedFetish)
-	stimulate(SUB_0, S_PENIS, DOM_1, usedBodypart2, I_NORMAL, usedFetish2)
+	stimulateSex(DOM_0, SUB_0, usedBodypart, I_NORMAL)
+	stimulateSex(SUB_0, DOM_1, usedBodypart2, I_NORMAL)
 	
 	doProcessFuck(DOM_0, SUB_0, usedBodypart, " in a train position")
 	doProcessFuck(SUB_0, DOM_1, usedBodypart2, " in a train position")
@@ -263,8 +263,8 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "rub"):
 		addText("{dom.You} {dom.youVerb('rub')} {dom.yourHis} {dom.penisShort} against {sub.your} "+getNameHole(SUB_0, usedBodypart)+".")
 		addText("{dom1.You} {dom1.youVerb('rub')} {dom1.yourHis} "+getNameHole(DOM_1, usedBodypart2)+" against {sub.your} {sub.penisShort}.")
-		stimulate(DOM_0, S_PENIS, SUB_0, usedBodypart, I_TEASE, usedFetish)
-		stimulate(SUB_0, S_PENIS, DOM_1, usedBodypart2, I_TEASE, usedFetish2)
+		stimulateSex(DOM_0, SUB_0, usedBodypart, I_TEASE)
+		stimulateSex(SUB_0, DOM_1, usedBodypart2, I_TEASE)
 		return
 	if(_id == "penetrate"):
 		if(tryPenetrate(DOM_0, SUB_0, usedBodypart)):

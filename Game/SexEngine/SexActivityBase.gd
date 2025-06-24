@@ -92,17 +92,93 @@ func exposeToFetish(_indxTarget:int, _fetishID:String, _intensity:int, _indxExpo
 		info1.addLust(10.0*fetishScore)
 		info1.addAnger(-0.05*fetishScore)
 	
-	var theFetish:FetishBase = GlobalRegistry.getFetish(_fetishID)
-	if(theFetish):
-		var fetishMod:float = theFetish.getExposeMod(info1)
-		if(_intensity == I_TEASE):
-			fetishAffect(_indxTarget, _fetishID, 0.1*fetishMod)
-		elif(_intensity == I_LOW):
-			fetishAffect(_indxTarget, _fetishID, 0.25*fetishMod)
-		elif(_intensity == I_NORMAL):
-			fetishAffect(_indxTarget, _fetishID, 1.0*fetishMod)
-		elif(_intensity == I_HIGH):
-			fetishAffect(_indxTarget, _fetishID, 1.5*fetishMod)
+#	var theFetish:FetishBase = GlobalRegistry.getFetish(_fetishID)
+#	if(theFetish):
+#		var fetishMod:float = theFetish.getExposeMod(info1)
+#		if(_intensity == I_TEASE):
+#			fetishAffect(_indxTarget, _fetishID, 0.1*fetishMod)
+#		elif(_intensity == I_LOW):
+#			fetishAffect(_indxTarget, _fetishID, 0.25*fetishMod)
+#		elif(_intensity == I_NORMAL):
+#			fetishAffect(_indxTarget, _fetishID, 1.0*fetishMod)
+#		elif(_intensity == I_HIGH):
+#			fetishAffect(_indxTarget, _fetishID, 1.5*fetishMod)
+
+func intensityToFetishUpMod(_intensity:int) -> float:
+	if(_intensity == I_TEASE):
+		return 0.1
+	elif(_intensity == I_LOW):
+		return 0.25
+	elif(_intensity == I_NORMAL):
+		return 1.0
+	elif(_intensity == I_HIGH):
+		return 1.5
+	return 1.0
+#
+#func intensityZone(_intensity:int, _zone:String) -> float:
+#	var intensityMod:float = intensityToFetishUpMod(_intensity)
+#
+#	return 1.0
+
+func stimulateSex(_indxActor:int, _indxTarget:int, _hole:String, _intensity:int, speedSex:int = SPEED_MEDIUM):
+	var _fetishID:String = ""
+	
+	if(_hole == S_VAGINA):
+		_fetishID = Fetish.VaginalSexGiving
+	if(_hole == S_ANUS):
+		_fetishID = Fetish.AnalSexGiving
+	if(_hole == S_MOUTH):
+		_fetishID = Fetish.OralSexReceiving
+	
+	if(_fetishID == ""):
+		return
+	
+	var intensityMod:float = intensityToFetishUpMod(_intensity)
+	var stimModActor:float = (1.0 if !isZoneOverstimulated(_indxActor, S_PENIS) else -5.0)
+	var stimModTarget:float = (1.0 if !isZoneOverstimulated(_indxTarget, _hole) else -5.0)
+	fetishAffect(_indxActor, _fetishID, intensityMod*stimModActor)
+	fetishAffect(_indxTarget, Fetish.getOppositeFetish(_fetishID), intensityMod*stimModTarget)
+	
+	if(isUnconscious(_indxTarget)):
+		fetishUp(_indxActor, Fetish.UnconsciousSex, intensityMod)
+		fetishUp(_indxTarget, Fetish.UnconsciousSex, intensityMod)
+	
+	var restraintsAmount:int = getRemovableRestraintsAmount(_indxTarget)
+	if(restraintsAmount > 0):
+		fetishAffect(_indxActor, Fetish.Rigging, intensityMod*0.2*restraintsAmount*stimModActor)
+		fetishAffect(_indxTarget, Fetish.Bondage, intensityMod*0.2*restraintsAmount*stimModTarget)
+	
+	stimulate(_indxActor, S_PENIS, _indxTarget, _hole, _intensity, _fetishID, speedSex)
+
+func stimulateSexRide(_indxActor:int, _indxTarget:int, _hole:String, _intensity:int, speedSex:int = SPEED_MEDIUM):
+	var _fetishID:String = ""
+	
+	if(_hole == S_VAGINA):
+		_fetishID = Fetish.VaginalSexReceiving
+	if(_hole == S_ANUS):
+		_fetishID = Fetish.AnalSexReceiving
+	if(_hole == S_MOUTH):
+		_fetishID = Fetish.OralSexGiving
+	
+	if(_fetishID == ""):
+		return
+	
+	var intensityMod:float = intensityToFetishUpMod(_intensity)
+	var stimModActor:float = (1.0 if !isZoneOverstimulated(_indxActor, _hole) else -5.0)
+	var stimModTarget:float = (1.0 if !isZoneOverstimulated(_indxTarget, S_PENIS) else -5.0)
+	fetishAffect(_indxActor, _fetishID, intensityMod*stimModActor)
+	fetishAffect(_indxTarget, Fetish.getOppositeFetish(_fetishID), intensityMod*stimModTarget)
+	
+	if(isUnconscious(_indxTarget)):
+		fetishUp(_indxActor, Fetish.UnconsciousSex, intensityMod)
+		fetishUp(_indxTarget, Fetish.UnconsciousSex, intensityMod)
+	
+	var restraintsAmount:int = getRemovableRestraintsAmount(_indxTarget)
+	if(restraintsAmount > 0):
+		fetishAffect(_indxActor, Fetish.Rigging, intensityMod*0.2*restraintsAmount*stimModActor)
+		fetishAffect(_indxTarget, Fetish.Bondage, intensityMod*0.2*restraintsAmount*stimModTarget)
+	
+	stimulate(_indxActor, _hole, _indxTarget, S_PENIS, _intensity, _fetishID, speedSex)
 
 func stimulate(_indxActor:int, _slotActor:String, _indxTarget:int, _slotTarget:String, _intensity:int, _fetishID:String, speedSex:int = SPEED_MEDIUM):
 	var infoActor:SexInfoBase = getDomOrSubInfo(_indxActor)
@@ -157,6 +233,8 @@ func choke(_indxActor:int, _indxTarget:int, _chokeStrength:int = CHOKE_NORMAL):
 	var actorInfo:SexDomInfo = getDomOrSubInfo(_indxActor)
 	var targetInfo:SexSubInfo = getDomOrSubInfo(_indxTarget)
 	
+	#var wasConscious:bool = !targetInfo.isUnconscious()
+	
 	if(_chokeStrength == CHOKE_VERYHARD):
 		targetInfo.addFear(0.3)
 		actorInfo.addAnger(-0.05)
@@ -183,6 +261,13 @@ func choke(_indxActor:int, _indxTarget:int, _chokeStrength:int = CHOKE_NORMAL):
 	elif(_chokeStrength == CHOKE_VERYHARD):
 		targetInfo.addConsciousness(-RNG.randf_range(0.1, 0.25))
 	
+	var isConsciousNow:bool = !targetInfo.isUnconscious()
+	
+	if(isConsciousNow):
+		fetishAffect(_indxTarget, Fetish.Choking)
+	#elif(wasConscious): # Got chocked unconscious
+	#	fetishUp(_indxTarget, Fetish.Choking, -30.0)
+	
 	sendSexEvent(SexEvent.Choking, _indxActor, _indxTarget, {strongChoke=(_chokeStrength == CHOKE_HARD)})
 
 const STRIKE_NORMAL = 0
@@ -200,6 +285,7 @@ func strike(_indxActor:int, _indxTarget:int, _strikeStrength:int = STRIKE_NORMAL
 	if(_indxActor >= 0 && _indxTarget < 0):
 		var actorInfo:SexDomInfo = getDomOrSubInfo(_indxActor)
 		var targetInfo:SexSubInfo = getDomOrSubInfo(_indxTarget)
+		var wasConscious:bool = !targetInfo.isUnconscious()
 		
 		var targetMasochism:float = fetish(_indxTarget, Fetish.Masochism, -0.5)
 		if(_strikeStrength == STRIKE_FULLFORCE):
@@ -217,12 +303,28 @@ func strike(_indxActor:int, _indxTarget:int, _strikeStrength:int = STRIKE_NORMAL
 			howMuchAddPain = RNG.randi_range(15, 25)
 			actorInfo.addLust(0.2 * actorSadism)
 			actorInfo.addAnger(-0.2)
+			fetishAffect(_indxActor, Fetish.Sadism, 5.0)
 		else:
 			howMuchAddPain = RNG.randi_range(4, 8)
 			actorInfo.addLust(0.1 * actorSadism)
 			actorInfo.addAnger(-0.1)
+			fetishAffect(_indxActor, Fetish.Sadism)
 		
 		targetInfo.addPain(howMuchAddPain)
+		var isConsciousNow:bool = !targetInfo.isUnconscious()
+		
+		if(isConsciousNow):
+			if(_strikeStrength == STRIKE_FULLFORCE):
+				fetishAffect(_indxTarget, Fetish.Masochism, 5.0)
+			else:
+				fetishAffect(_indxTarget, Fetish.Masochism)
+		elif(wasConscious): # Got beaten unconscious
+			if(_strikeStrength == STRIKE_FULLFORCE):
+				fetishUp(_indxTarget, Fetish.Masochism, -50.0)
+			else:
+				fetishUp(_indxTarget, Fetish.Masochism, -40.0)
+			
+		
 		sendSexEvent(SexEvent.PainInflicted, _indxActor, _indxTarget, {pain=howMuchAddPain,isDefense=_isDefense,intentional=_isIntentional})
 	# Sub hits a dom
 	if(_indxActor < 0 && _indxTarget >= 0):
@@ -588,6 +690,15 @@ func isReadyToCumHandled(_indx:int) -> bool:
 
 func canDoActions(_indx:int) -> bool:
 	return getDomOrSubInfo(_indx).canDoActions()
+
+func isUnconscious(_indx:int) -> bool:
+	return getDomOrSubInfo(_indx).isUnconscious()
+
+func getRemovableRestraintsAmount(_indx:int) -> int:
+	return getDomOrSub(_indx).getInventory().getRemovableRestraintsAmount()
+
+func isZoneOverstimulated(_indx:int, _slot:String) -> bool:
+	return getDomOrSub(_indx).isZoneOverstimulated(_slot)
 
 func getVisibleName() -> String:
 	return activityName

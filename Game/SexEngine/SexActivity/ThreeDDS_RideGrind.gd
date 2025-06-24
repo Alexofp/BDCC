@@ -135,7 +135,7 @@ func processTurn():
 	return
 
 func inside_processTurn():
-	stimulate(SUB_0, S_PENIS, DOM_0, usedBodypart, I_TEASE, usedFetish)
+	stimulateSexRide(DOM_0, SUB_0, usedBodypart, I_TEASE)
 	stimulate(SUB_0, S_MOUTH, DOM_1, S_VAGINA, I_TEASE, Fetish.OralSexGiving)
 	
 	addText("{dom.You} {dom.youAre} being a cock-warmer for {sub.your} {sub.penisShort}.")
@@ -143,7 +143,7 @@ func inside_processTurn():
 	#addText("At the same time, {dom1.You} {dom1.youAre} being a cock-warmer for {sub.your} {sub.penisShort}.")
 
 func sex_processTurn():
-	stimulate(SUB_0, S_PENIS, DOM_0, usedBodypart, I_NORMAL, usedFetish)
+	stimulateSexRide(DOM_0, SUB_0, usedBodypart, I_NORMAL)
 	stimulate(SUB_0, S_MOUTH, DOM_1, S_VAGINA, I_NORMAL, Fetish.OralSexGiving)
 	
 	doProcessPussyGrind(DOM_1, SUB_0)
@@ -244,7 +244,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		#addText("{dom.You} {dom.youVerb('rub')} {dom.yourHis} {dom.penisShort} against {sub.your} "+getNameHole(SUB_0, usedBodypart)+".")
 		addText("{dom.You} {dom.youVerb('rub')} {dom.yourHis} "+getNameHole(DOM_0, usedBodypart)+" against {sub.your} {sub.penisShort}.")
 		addText("{dom1.You} gently {dom1.youVerb('grind')} {dom1.yourHis} "+getNameHole(DOM_1, S_VAGINA)+" against {sub.your} face.")
-		stimulate(SUB_0, S_PENIS, DOM_0, usedBodypart, I_TEASE, usedFetish)
+		stimulateSexRide(DOM_0, SUB_0, usedBodypart, I_TEASE)
 		stimulate(SUB_0, S_MOUTH, DOM_1, S_VAGINA, I_TEASE, Fetish.OralSexGiving)
 		return
 	if(_id == "penetrate"):

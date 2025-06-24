@@ -2,6 +2,9 @@ extends FetishBase
 
 func _init():
 	id = Fetish.VaginalSexReceiving
+	dynamicChangesPersonalityAffectors = {
+		PersonalityStat.Subby: 0.25,
+	}
 
 func getVisibleName():
 	return "Vaginal sex (Bottom)"
@@ -17,8 +20,3 @@ func isPossibleFor(_character):
 	if(!_character.hasVagina()):
 		return false
 	return true
-
-func getExposeMod(_charInfo) -> float:
-	if(_charInfo.getChar().isZoneOverstimulated(BodypartSlot.Vagina)):
-		return -5.0
-	return 1.0
