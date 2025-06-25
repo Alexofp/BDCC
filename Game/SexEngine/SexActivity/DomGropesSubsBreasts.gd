@@ -42,7 +42,7 @@ func getTags(_indx:int) -> Array:
 func startActivity(_args):
 	addText("{dom.You} {dom.youVerb('put')} {dom.yourHis} hands on {sub.your} {sub.breasts} and gets a feel for them"+getThroughClothingText(SUB_0, BodypartSlot.Breasts)+".")
 	
-	stimulate(DOM_0, S_HANDS, SUB_0, S_BREASTS, I_TEASE, Fetish.Lactation)
+	stimulateBreasts(DOM_0, SUB_0, S_HANDS, I_TEASE)
 	
 	noticedSore = getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)
 	
@@ -129,7 +129,7 @@ func groping_processTurn():
 			" {sub.Your} breasts suddenly began [b]producing {sub.milk}[/b]!",
 		])
 	
-	stimulate(DOM_0, S_HANDS, SUB_0, S_BREASTS, I_NORMAL, Fetish.Lactation, SPEED_SLOW)
+	stimulateBreasts(DOM_0, SUB_0, S_HANDS, I_NORMAL, SPEED_SLOW)
 	
 	if(!noticedSore && getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)):
 		noticedSore = true
@@ -181,20 +181,18 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			var howMuchCollectedStr:String = str(Util.roundF(howMuchCollected, 1))+" ml"
 					
 			addText("{dom.You} {dom.youVerb('squeeze')} {sub.yourHis} {sub.breasts} tightly and "+howMuchCollectedStr+" of {sub.milk} leaks out.")
-			
-			stimulate(DOM_0, S_HANDS, SUB_0, S_BREASTS, I_NORMAL, Fetish.Lactation)
 		else:
 			addTextPick([
 				"{dom.You} {dom.youVerb('squeeze')} {sub.yourHis} {sub.breasts} tightly.",
 				"{dom.You} {dom.youVerb('squeeze')} {sub.yourHis} {sub.breasts} tightly but nothing leaks out.",
 			])
-			stimulate(DOM_0, S_HANDS, SUB_0, S_BREASTS, I_NORMAL, Fetish.Lactation)
+		stimulateBreasts(DOM_0, SUB_0, S_HANDS, I_NORMAL)
 	if(_id == "startgrope"):
 		var throughTheClothing:String = getThroughClothingText(SUB_0, BodypartSlot.Breasts)
 		setState("groping")
 		addText("{dom.You} began actively groping {sub.you}"+throughTheClothing+"!")
 		
-		stimulate(DOM_0, S_HANDS, SUB_0, S_BREASTS, I_TEASE, Fetish.Lactation)
+		stimulateBreasts(DOM_0, SUB_0, S_HANDS, I_TEASE)
 		
 		react(SexReaction.DomStartsGropingSubsBreasts, [100, 50])
 	if(_id == "stop"):

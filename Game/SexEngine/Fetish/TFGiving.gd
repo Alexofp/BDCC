@@ -17,3 +17,9 @@ func getGoals(_sexEngine, _domFetishHolder, _dom, _sub):
 	possible.append(SexGoal.UseTFDrug)
 	
 	return possible
+
+func getDynamicChangeThreshold() -> float:
+	return 1.0
+	
+func getDynamicChangeThresholdMax() -> float:
+	return 5.0

@@ -14,3 +14,9 @@ func getGoals(_sexEngine, _domFetishHolder, _dom, _sub):
 	var possible = []
 	
 	return possible
+
+func getDynamicChangeThreshold() -> float:
+	return 1.0
+	
+func getDynamicChangeThresholdMax() -> float:
+	return 5.0

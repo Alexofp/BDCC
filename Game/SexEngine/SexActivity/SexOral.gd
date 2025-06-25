@@ -264,7 +264,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 				"{dom.You} {dom.youVerb('reach', 'reaches')} for {sub.yourHis} horns and use them as handlebars. ",
 			]) + text
 		
-		stimulate(DOM_0, S_VAGINA, SUB_0, S_MOUTH, I_LOW, Fetish.OralSexReceiving)
+		stimulateGrindFace(DOM_0, SUB_0, I_LOW)
 		#affectSub(getSubInfo().fetishScore({Fetish.OralSexGiving: 1.0}), 0.1, -0.3, -0.02)
 		getDomInfo().addAnger(-0.05)
 		addText(text)
@@ -277,14 +277,14 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		if(RNG.chance(successChance)):
 			isForce = true
 			state = "blowjob"
-			stimulate(DOM_0, S_PENIS, SUB_0, S_MOUTH, I_LOW, Fetish.OralSexReceiving)
+			stimulateSex(DOM_0, SUB_0, S_MOUTH, I_LOW)
 			#affectSub(getSubInfo().fetishScore({Fetish.OralSexGiving: 1.0}), 0.05, -0.2, -0.05)
 			getDomInfo().addAnger(-0.1)
 			sendSexEvent(SexEvent.HolePenetrated, DOM_0, SUB_0, {hole=BodypartSlot.Head,engulfed=false,strapon=isStraponSex()})
 			addText("{dom.You} {dom.youVerb('force')} {dom.yourHis} "+getDickName()+" "+RNG.pick(["past {sub.yourHis} lips", "inside {sub.yourHis} mouth", "past {sub.yourHis} teeth"])+" and {dom.youVerb('make')} {sub.you} "+RNG.pick(["suck", "blow"])+" {dom.youHim}!")
 			return
 		else:
-			stimulate(DOM_0, S_PENIS, SUB_0, S_MOUTH, I_TEASE, Fetish.OralSexReceiving)
+			stimulateSex(DOM_0, SUB_0, S_MOUTH, I_TEASE)
 			#affectSub(getSubInfo().fetishScore({Fetish.OralSexGiving: 1.0}), 0.05, -0.2, -0.01)
 			getDomInfo().addAnger(0.05)
 			addText("{dom.You} {dom.youVerb('try', 'tries')} to "+RNG.pick(["force", "push", "shove", "forcefully shove"])+" {dom.yourHis} "+getDickName()+" "+RNG.pick(["into {sub.yourHis} mouth", "past {sub.yourHis} lips", "past {sub.yourHis} teeth"])+".")
@@ -319,7 +319,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 				"{dom.You} {dom.youVerb('try', 'tries')} to make {sub.you} deepthroat {dom.yourHis} "+getDickName()+" but {sub.youHe} {sub.youAre} just too tight.",
 				])
 			getSub().gotOrificeStretchedBy(BodypartSlot.Head, getDomID(), true, 0.1)
-			stimulate(DOM_0, S_PENIS, SUB_0, S_MOUTH, I_TEASE, Fetish.OralSexReceiving)
+			stimulateSex(DOM_0, SUB_0, S_MOUTH, I_TEASE)
 			#affectSub(getDomInfo().fetishScore({Fetish.OralSexGiving: 1.0}), 0.1, -0.1, -0.05)
 			#getDomInfo().addLust(0.1)
 			#getDomInfo().addArousalSex(0.03)
@@ -335,7 +335,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 					"{dom.You} {dom.youVerb('reach', 'reaches')} for {sub.yourHis} horns and use them as handlebars. ",
 				]) + text
 			getSub().gotOrificeStretchedBy(BodypartSlot.Head, getDomID(), true, 0.2)
-			stimulate(DOM_0, S_PENIS, SUB_0, S_MOUTH, I_NORMAL, Fetish.OralSexReceiving)
+			stimulateSex(DOM_0, SUB_0, S_MOUTH, I_NORMAL)
 			#affectSub(getDomInfo().fetishScore({Fetish.OralSexGiving: 1.0}), 0.1, -0.2, -0.05)
 			#getDomInfo().addArousalSex(0.05 * domSensitivity())
 			addText(text)
@@ -508,13 +508,13 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "startdeepthroating"):
 		if(!RNG.chance(getSub().getPenetrateChanceBy(BodypartSlot.Head, getDomID()))):
 			getSub().gotOrificeStretchedBy(BodypartSlot.Head, getDomID(), true, 0.1)
-			stimulate(SUB_0, S_MOUTH, DOM_0, S_PENIS, I_TEASE, Fetish.OralSexGiving, SPEED_SLOW)
+			stimulateLick(SUB_0, DOM_0, S_PENIS, I_TEASE, SPEED_SLOW)
 			#affectDom(getDomInfo().fetishScore({Fetish.OralSexReceiving: 1.0}), 0.2*domSensitivity(), -0.03)
 			addText("{sub.You} {sub.youVerb('try', 'tries')} to get {dom.yourHis} "+getDickName()+" into {sub.yourHis} throat but "+RNG.pick(["it's too big", "{sub.youHe} {sub.youVerb('struggle')}", "{sub.youVerb('fail')}"])+".")
 			return
 		else:
 			state = "deepthroat"
-			stimulate(SUB_0, S_MOUTH, DOM_0, S_PENIS, I_NORMAL, Fetish.OralSexGiving, SPEED_SLOW)
+			stimulateLick(SUB_0, DOM_0, S_PENIS, I_NORMAL, SPEED_SLOW)
 			getSub().gotOrificeStretchedBy(BodypartSlot.Head, getDomID(), true, 0.2)
 			#affectDom(getDomInfo().fetishScore({Fetish.OralSexReceiving: 1.0}), 0.2*domSensitivity(), -0.03)
 			#getDomInfo().addArousalForeplay(0.05*domSensitivity())

@@ -81,7 +81,7 @@ func blowjob_processTurn():
 	doBlowjobTurn(DOM_0, SUB_0)
 	
 func lickingcock_processTurn():
-	stimulate(DOM_0, S_MOUTH, SUB_0, S_PENIS, I_TEASE, Fetish.OralSexGiving)
+	stimulateLick(DOM_0, SUB_0, S_PENIS, I_TEASE)
 #	affectSub(getSubInfo().fetishScore({Fetish.OralSexReceiving: 1.0})+0.3, 0.1, -0.1, -0.01)
 #	affectDom(getDomInfo().fetishScore({Fetish.OralSexGiving: 0.5})+0.6, 0.1, 0.0)
 #	getSubInfo().stimulateArousalZone(0.06, BodypartSlot.Penis, 0.25)
@@ -115,7 +115,7 @@ func licking_processTurn():
 	doPussyLickingTurn(DOM_0, SUB_0)
 	
 func tonguefucking_processTurn():
-	stimulate(DOM_0, S_MOUTH, SUB_0, S_VAGINA, I_LOW, Fetish.OralSexGiving)
+	stimulateLick(DOM_0, SUB_0, S_VAGINA, I_LOW)
 	#affectSub(getSubInfo().fetishScore({Fetish.OralSexReceiving: 1.0})+0.1, 0.1, -0.1, -0.01)
 	#affectDom(getDomInfo().fetishScore({Fetish.OralSexGiving: 0.5})+0.6, 0.1, 0.0)
 	#getSubInfo().stimulateArousalZone(0.1, BodypartSlot.Vagina, 0.5)
@@ -345,7 +345,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			"{dom.You} {dom.youVerb('bring')} {dom.yourHis} tongue to {sub.yourHis} "+RNG.pick(["dick", "cock", "member", "shaft"])+" and {dom.youVerb('proceed')} to lick it"+throughTheClothing+".",
 		])
 		
-		stimulate(DOM_0, S_MOUTH, SUB_0, S_PENIS, I_TEASE, Fetish.OralSexGiving, SPEED_SLOW)
+		stimulateLick(DOM_0, SUB_0, S_PENIS, I_TEASE, SPEED_SLOW)
 		#getSubInfo().addLust(10.0 + getSubInfo().fetishScore({Fetish.OralSexReceiving: 5.0}))
 		#getSubInfo().addArousalForeplay(0.05)
 		#affectSub(getSubInfo().fetishScore({Fetish.OralSexReceiving: 1.0}), 0.0, -0.3, -0.01)
@@ -369,7 +369,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			"{dom.You} {dom.youVerb('stick')} {dom.yourHis} tongue out and {dom.youVerb('press', 'presses')} it against {sub.your} "+RNG.pick(["pussy", "slit", "petals", "folds"])+" before proceeding to lick {sub.youHim} out"+throughTheClothing+".",
 		])
 		
-		stimulate(DOM_0, S_MOUTH, SUB_0, S_VAGINA, I_TEASE, Fetish.OralSexGiving, SPEED_SLOW)
+		stimulateLick(DOM_0, SUB_0, S_VAGINA, I_TEASE, SPEED_SLOW)
 		#getSubInfo().addLust(10.0 + getSubInfo().fetishScore({Fetish.OralSexReceiving: 5.0}))
 		#getSubInfo().addArousalForeplay(0.05)
 		#affectSub(getSubInfo().fetishScore({Fetish.OralSexReceiving: 1.0}), 0.0, -0.3, -0.01)
@@ -383,7 +383,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			"{dom.You} {dom.youVerb('open')} {dom.yourHis} mouth and {dom.youVerb('let')} {sub.your} "+RNG.pick(["cock", "dick", "member"])+" in before wrapping {dom.yourHis} lips around it.",
 		])
 		getDom().gotOrificeStretchedBy(BodypartSlot.Head, getSubID(), true, 0.1)
-		stimulate(DOM_0, S_MOUTH, SUB_0, S_PENIS, I_TEASE, Fetish.OralSexGiving, SPEED_SLOW)
+		stimulateLick(DOM_0, SUB_0, S_PENIS, I_TEASE, SPEED_SLOW)
 		#affectSub(getSubInfo().fetishScore({Fetish.OralSexReceiving: 1.0}), 0.1, -0.3, -0.01)
 		sendSexEvent(SexEvent.HolePenetrated, SUB_0, DOM_0, {hole=BodypartSlot.Head,engulfed=true,strapon=false})
 		addText(text)
@@ -395,7 +395,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		var text = RNG.pick([
 			"{dom.You} "+RNG.pick(["{dom.youVerb('find')}", "{dom.youVerb('reach', 'reaches')}"])+" for {sub.yourHis} "+RNG.pick(["pussy hole", "pussy entering"])+" and {dom.youVerb('penetrate')} it before proceeding to slide {dom.yourHis} tongue in and out, fucking it that way!",
 		])
-		stimulate(DOM_0, S_MOUTH, SUB_0, S_VAGINA, I_TEASE, Fetish.OralSexGiving, SPEED_SLOW)
+		stimulateLick(DOM_0, SUB_0, S_VAGINA, I_TEASE, SPEED_SLOW)
 		#affectSub(getSubInfo().fetishScore({Fetish.OralSexReceiving: 1.0}), 0.1, -0.3, -0.01)
 		addText(text)
 		return

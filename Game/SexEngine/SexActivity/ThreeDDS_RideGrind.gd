@@ -136,7 +136,7 @@ func processTurn():
 
 func inside_processTurn():
 	stimulateSexRide(DOM_0, SUB_0, usedBodypart, I_TEASE)
-	stimulate(SUB_0, S_MOUTH, DOM_1, S_VAGINA, I_TEASE, Fetish.OralSexGiving)
+	stimulateLick(SUB_0, DOM_1, S_VAGINA, I_TEASE)
 	
 	addText("{dom.You} {dom.youAre} being a cock-warmer for {sub.your} {sub.penisShort}.")
 	addText("{dom1.You} {dom1.youAre} sitting on {sub.your} face.")
@@ -144,7 +144,7 @@ func inside_processTurn():
 
 func sex_processTurn():
 	stimulateSexRide(DOM_0, SUB_0, usedBodypart, I_NORMAL)
-	stimulate(SUB_0, S_MOUTH, DOM_1, S_VAGINA, I_NORMAL, Fetish.OralSexGiving)
+	stimulateLick(SUB_0, DOM_1, S_VAGINA, I_NORMAL)
 	
 	doProcessPussyGrind(DOM_1, SUB_0)
 	doProcessRide(DOM_0, SUB_0, usedBodypart)
@@ -245,16 +245,16 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		addText("{dom.You} {dom.youVerb('rub')} {dom.yourHis} "+getNameHole(DOM_0, usedBodypart)+" against {sub.your} {sub.penisShort}.")
 		addText("{dom1.You} gently {dom1.youVerb('grind')} {dom1.yourHis} "+getNameHole(DOM_1, S_VAGINA)+" against {sub.your} face.")
 		stimulateSexRide(DOM_0, SUB_0, usedBodypart, I_TEASE)
-		stimulate(SUB_0, S_MOUTH, DOM_1, S_VAGINA, I_TEASE, Fetish.OralSexGiving)
+		stimulateLick(SUB_0, DOM_1, S_VAGINA, I_TEASE)
 		return
 	if(_id == "penetrate"):
 		if(tryPenetrate(SUB_0, DOM_0, usedBodypart)):
-			stimulate(SUB_0, S_MOUTH, DOM_1, S_VAGINA, I_TEASE, Fetish.OralSexGiving)
+			stimulateLick(SUB_0, DOM_1, S_VAGINA, I_TEASE)
 			#penetration(true, SUB_0, DOM_1, usedBodypart2)
 			addText("At the same time, {dom1.you} {dom1.youVerb('lower')} {dom1.yourHis} "+getNameHole(DOM_1, S_VAGINA)+" onto {sub.yourHis} face.")
 			state = "sex"
 		else:
-			stimulate(SUB_0, S_MOUTH, DOM_1, S_VAGINA, I_TEASE, Fetish.OralSexGiving)
+			stimulateLick(SUB_0, DOM_1, S_VAGINA, I_TEASE)
 			#penetration(false, SUB_0, DOM_1, usedBodypart2)
 			#addText("{dom.You} {dom.youVerb('try', 'tries')} to envelop {sub.yourHis} {sub.penisShort} with {dom.yourHis} "+getNameHole(DOM_0, usedBodypart)+".")
 			pass

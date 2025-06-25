@@ -3596,3 +3596,29 @@ func resetSkillHolderFully():
 
 func canApplySmartLocks() -> bool:
 	return false
+
+# Do we have any drugs in our system
+func isUnderDrugsInfluence() -> bool:
+	if(!timedBuffs.empty()):
+		return true
+	
+	for statusEffectID in statusEffects:
+		var theEffect = statusEffects[statusEffectID]
+		
+		if(theEffect.isDrugEffect()):
+			return true
+	
+	return false
+
+func getDrugsInfluenceAmount() -> int:
+	var result:int = 0
+	if(!timedBuffs.empty()):
+		result += timedBuffs.size()
+	
+	for statusEffectID in statusEffects:
+		var theEffect = statusEffects[statusEffectID]
+		
+		if(theEffect.isDrugEffect()):
+			result += 1
+	
+	return result

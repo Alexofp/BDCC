@@ -247,6 +247,10 @@ func cum(infoCaused = null):
 	if(restraintAmount > 0): # Cumming with restraints makes you like bondage more
 		fetishUp(Fetish.Bondage, 0.5 * restraintAmount)
 	
+	var drugsInfluenceAmount:int = theChar.getDrugsInfluenceAmount()
+	if(drugsInfluenceAmount > 0): # Cumming while under drugs inflience makes you like drugs more
+		fetishUp(Fetish.DrugUse, 0.5 * drugsInfluenceAmount)
+	
 	if(true):
 		var event = SexEventHelper.create(SexEvent.Orgasmed, infoCaused.charID, charID, {
 		})
@@ -383,6 +387,7 @@ func getExtraOutputData(_isDom:bool, _sexEngine):
 	if(tfHolder != null && tfHolder.hasPendingTransformations()):
 		var tfResult:Dictionary = tfHolder.doFirstPendingTransformation({}, true)
 		if(tfResult.has("text") && tfResult["text"] != ""):
+			fetishAffect(Fetish.TFReceiving, 5.0)
 			_sexEngine.addTextRaw(getChar().getName()+"'s body is suddenly [b]changing[/b]! "+tfResult["text"])
 
 			if(tfResult.has("say") && tfResult["say"] != ""):

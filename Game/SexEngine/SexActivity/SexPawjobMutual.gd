@@ -89,8 +89,8 @@ func processTurn():
 
 func pawjob_processTurn():
 	offerTime = 0
-	stimulate(DOM_0, S_LEGS, SUB_0, S_PENIS, I_NORMAL, Fetish.FeetplayGiving, SPEED_MEDIUM)
-	stimulate(SUB_0, S_LEGS, DOM_0, getDomHole(), I_NORMAL, Fetish.FeetplayGiving, SPEED_MEDIUM)
+	stimulateRubWithFoot(DOM_0, SUB_0, S_PENIS, I_NORMAL, SPEED_MEDIUM)
+	stimulateRubWithFoot(SUB_0, DOM_0, getDomHole(), I_NORMAL, SPEED_MEDIUM)
 	rubWithFeet(DOM_0, SUB_0, S_PENIS)
 	rubWithFeet(SUB_0, DOM_0, getDomHole())
 	react(SexReaction.PawjobHappens, [20, 10])

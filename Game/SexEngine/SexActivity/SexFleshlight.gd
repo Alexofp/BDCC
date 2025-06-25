@@ -90,7 +90,7 @@ func sex_processTurn():
 		"{dom.You} {dom.youVerb('slide')} a fleshlight along {sub.your} {sub.penisShort}.",
 		"{dom.You} {dom.youVerb('pleasure')} {sub.your} {sub.penisShort} with a fleshlight.",
 	])
-	stimulate(SUB_0, S_PENIS, getTargetIndx(), targetHole, I_NORMAL, Fetish.VaginalSexGiving if targetHole == S_VAGINA else S_ANUS)
+	stimulateSex(SUB_0, getTargetIndx(), targetHole, I_NORMAL)
 	doProcessFuck(SUB_0, getTargetIndx(), targetHole, " through the portal panties")
 	doProcessFuckExtra(SUB_0, getTargetIndx(), targetHole)
 	if(isReadyToCumHandled(getTargetIndx()) && getTargetIndx() != SUB_0):

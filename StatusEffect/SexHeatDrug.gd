@@ -18,3 +18,6 @@ func getEffectImage():
 
 func getIconColor():
 	return IconColorPurple
+
+func isDrugEffect() -> bool:
+	return true
