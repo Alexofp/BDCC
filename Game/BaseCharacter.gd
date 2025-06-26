@@ -2095,6 +2095,12 @@ func afterSexEnded(sexInfo):
 		item.resetLustState()
 		item.onSexEnd()
 		
+	var theFetishChangeResult:Dictionary = sexInfo.doFetishChangeCalculation()
+	if(theFetishChangeResult.has("messages")):
+		for message in theFetishChangeResult["messages"]:
+			GM.main.addMessage(message)
+		
+	#TODO: All of this should happen in sex engine endSex()?
 	if(personalityChangesAfterSex() && personality != null && fetishHolder != null):
 		var resultText = sexInfo.affectPersonality(personality, fetishHolder)
 		if(resultText != null && resultText != ""):
@@ -3590,3 +3596,29 @@ func resetSkillHolderFully():
 
 func canApplySmartLocks() -> bool:
 	return false
+
+# Do we have any drugs in our system
+func isUnderDrugsInfluence() -> bool:
+	if(!timedBuffs.empty()):
+		return true
+	
+	for statusEffectID in statusEffects:
+		var theEffect = statusEffects[statusEffectID]
+		
+		if(theEffect.isDrugEffect()):
+			return true
+	
+	return false
+
+func getDrugsInfluenceAmount() -> int:
+	var result:int = 0
+	if(!timedBuffs.empty()):
+		result += timedBuffs.size()
+	
+	for statusEffectID in statusEffects:
+		var theEffect = statusEffects[statusEffectID]
+		
+		if(theEffect.isDrugEffect()):
+			result += 1
+	
+	return result

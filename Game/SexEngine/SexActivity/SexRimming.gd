@@ -68,7 +68,7 @@ func rimming_processTurn():
 	#	getDomInfo().stimulateArousalZone(0.1, BodypartSlot.Anus, 1.0)
 	#else:
 	#	getDomInfo().stimulateArousalZone(0.05, BodypartSlot.Anus, 1.0)
-	stimulate(DOM_0, S_ANUS, SUB_0, S_MOUTH, I_NORMAL, Fetish.RimmingReceiving)
+	stimulateLick(SUB_0, DOM_0, S_ANUS, I_NORMAL)
 	
 	if(getDom().hasVagina() && RNG.chance(20)):
 		addTextPick([

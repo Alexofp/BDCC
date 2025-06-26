@@ -53,7 +53,7 @@ func _run():
 	else:
 		addButtonAt(13, "Tasks", "Look at your tasks", "tasks")
 	addButtonAt(14, "Inventory", "Look at your inventory", "inventory")
-	#addButtonAt(5, "Sex Test", "Sex test", "sextest")
+	addButtonAt(5, "Sex Test", "Sex test", "sextest")
 	#addExtraButtonAt(4, "Sex Test", "Sex test", "sextest")
 	#addButtonAt(7, "Slave Test", "Slave test", "slavetest")
 	#addButtonAt(7, "Computer test", "Computer test", "comptest")
@@ -118,7 +118,7 @@ func _react(_action: String, _args):
 	if(_action == "me"):
 		runScene("MeScene")
 	if(_action == "sextest"):
-		runScene("GenericSexScene", ["pc", ["rahi", "nova"]])
+		runScene("GenericSexScene", ["pc", ["socket"]])
 		#runScene("GenericSexScene", [["rahi", "nova"], ["risha"]])
 		#runScene("GenericSexScene", [["avy", "pc", "nova"], ["rahi", "socket"]])
 		#runScene("GenericSexScene", [["avy", "nova"], ["socket"]])

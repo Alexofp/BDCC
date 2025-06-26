@@ -2,6 +2,11 @@ extends FetishBase
 
 func _init():
 	id = Fetish.Tribadism
+	dynamicChangesPersonalityAffectors = {
+		PersonalityStat.Mean: -0.1,
+		PersonalityStat.Subby: 0.1,
+		PersonalityStat.Impatient: 0.1,
+	}
 
 func getVisibleName():
 	return "Tribadism"

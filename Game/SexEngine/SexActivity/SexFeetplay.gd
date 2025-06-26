@@ -55,7 +55,7 @@ func kissingfeet_processTurn():
 	react(SexReaction.FeetplayKissingFeet, [20, 10])
 
 func rubpussy_processTurn():
-	getSubInfo().stimulateArousalZone(0.1, BodypartSlot.Vagina, 0.5)
+	stimulateRubWithFoot(DOM_0, SUB_0, S_VAGINA, I_NORMAL, SPEED_SLOW)
 	affectSub(getSubInfo().fetishScore({Fetish.FeetplayReceiving: 1.0})+0.3, 0.1, -0.005, -0.002)
 	rubWithFeet(DOM_0, SUB_0, S_VAGINA)
 	
@@ -72,7 +72,7 @@ func rubpussy_processTurn():
 		react(SexReaction.FeetplayRubbingPussy, [20, 10])
 
 func rubpenis_processTurn():
-	getSubInfo().stimulateArousalZone(0.1, BodypartSlot.Penis, 0.5)
+	stimulateRubWithFoot(DOM_0, SUB_0, S_PENIS, I_NORMAL, SPEED_SLOW)
 	affectSub(getSubInfo().fetishScore({Fetish.FeetplayReceiving: 1.0})+0.3, 0.1, -0.005, -0.002)
 	rubWithFeet(DOM_0, SUB_0, S_PENIS)
 	

@@ -66,7 +66,7 @@ func processTurn():
 	return
 
 func pawjob_processTurn():
-	stimulate(DOM_0, S_LEGS, SUB_0, S_PENIS, I_NORMAL, Fetish.FeetplayGiving, SPEED_SLOW if !isThrusting else SPEED_MEDIUM)
+	stimulateRubWithFoot(DOM_0, SUB_0, S_PENIS, I_NORMAL, SPEED_SLOW if !isThrusting else SPEED_MEDIUM)
 	if(isThrusting):
 		addTextPick([
 			"{sub.You} {sub.youVerb('thrust')} {sub.yourHis} {sub.penisType} between the {dom.feet}.",

@@ -23,3 +23,6 @@ func getBuffs():
 	return [
 		buff(Buff.ForcedObedienceBuff, [100])
 	]
+
+func isDrugEffect() -> bool:
+	return true

@@ -11,6 +11,7 @@ var hadStim:bool = false # Did we have any stimulation this turn?
 var turnsLastStim:int = 0 # How many turns since last stimulation
 var satisfaction:float = 0.0
 var frustration:float = 0.0
+var fetishGain:Dictionary = {}
 
 var justCame:bool = false
 
@@ -75,6 +76,9 @@ func getExtraInfoLines() -> Array:
 			
 			result.append(zoneName+" overstimulation: "+("[color="+colorString+"]" if isBads else "")+str(Util.roundF(zoneStimulation*100.0, 1))+"%"+("[/color]" if isBads else "")+(" ("+Util.join(extraTexts, ", ")+")" if extraTexts.size() > 0 else ""))
 	
+	#TODO: Remove this before ship
+	for fetishID in fetishGain:
+		result.append(fetishID+": "+str(Util.roundF(fetishGain[fetishID], 2)))
 	
 	return result
 
@@ -220,24 +224,37 @@ func isReadyToCum() -> bool:
 	
 func getOpponentInfo():
 	return null
-	
+
+func isDom() -> bool:
+	return false
+
 func cum(infoCaused = null):
 	if(infoCaused == null):
 		infoCaused = getOpponentInfo()
 	if(infoCaused == null):
 		infoCaused = self
 	
+	var theChar := getChar()
+	
 	addSatisfaction(1.0)
 	justCame = true
 	setArousal(0.0)
-	getChar().addLust(-int(getChar().getLust()/2.0))
+	theChar.addLust(-int(theChar.getLust()/2.0))
 	timesCame += 1
-	getChar().afterOrgasm(true)
+	theChar.afterOrgasm(true)
+	
+	var restraintAmount:int = theChar.getInventory().getRemovableRestraintsAmount()
+	if(restraintAmount > 0): # Cumming with restraints makes you like bondage more
+		fetishUp(Fetish.Bondage, 0.5 * restraintAmount)
+	
+	var drugsInfluenceAmount:int = theChar.getDrugsInfluenceAmount()
+	if(drugsInfluenceAmount > 0): # Cumming while under drugs inflience makes you like drugs more
+		fetishUp(Fetish.DrugUse, 0.5 * drugsInfluenceAmount)
 	
 	if(true):
 		var event = SexEventHelper.create(SexEvent.Orgasmed, infoCaused.charID, charID, {
 		})
-		getChar().sendSexEvent(event)
+		theChar.sendSexEvent(event)
 		if(infoCaused != null && infoCaused != self):
 			infoCaused.getChar().sendSexEvent(event)
 
@@ -370,10 +387,77 @@ func getExtraOutputData(_isDom:bool, _sexEngine):
 	if(tfHolder != null && tfHolder.hasPendingTransformations()):
 		var tfResult:Dictionary = tfHolder.doFirstPendingTransformation({}, true)
 		if(tfResult.has("text") && tfResult["text"] != ""):
+			fetishAffect(Fetish.TFReceiving, 5.0)
 			_sexEngine.addTextRaw(getChar().getName()+"'s body is suddenly [b]changing[/b]! "+tfResult["text"])
 
 			if(tfResult.has("say") && tfResult["say"] != ""):
 				_sexEngine.talkText(charID, tfResult["say"])
+
+func fetishUp(_fetishID:String, _amount:float = 1.0):
+	if(isUnconscious()):
+		if(!(_fetishID in [Fetish.Masochism, Fetish.Choking, Fetish.UnconsciousSex])):
+			return
+	if(!fetishGain.has(_fetishID)):
+		fetishGain[_fetishID] = _amount
+	else:
+		fetishGain[_fetishID] += _amount
+
+func fetishAffect(_fetishID:String, _amount:float = 1.0):
+	fetishUp(_fetishID, _amount)
+
+func doFetishChangeCalculation() -> Dictionary:
+	var theChar := getChar()
+	#TODO: Bring this back after done
+	#if(!theChar.isDynamicCharacter() && !theChar.isPlayer()):
+	#	return {}
+	
+	var messages:Array = []
+	
+	var fetishHolder:FetishHolder = theChar.getFetishHolder()
+	var personality:Personality = theChar.getPersonality()
+	
+	for fetishID in fetishGain:
+		var theFetish:FetishBase = GlobalRegistry.getFetish(fetishID)
+		if(!theFetish):
+			continue
+		
+		var currentFetishValue:float = fetishHolder.getFetish(fetishID)
+		
+		var minThreasholdForChange:float = lerp(theFetish.getDynamicChangeThreshold(), theFetish.getDynamicChangeThresholdMax(), abs(currentFetishValue))
+			
+		var fetishGained:float = fetishGain[fetishID]
+		if(fetishGained >= 0.0):
+			fetishGained *= theFetish.getFetishChangePersonalityMod(personality)
+		else:
+			fetishGained /= theFetish.getFetishChangePersonalityMod(personality)
+		
+		if(abs(fetishGained) < minThreasholdForChange):
+			continue
+		
+		var fetishGainedAdjusted:float = fetishGained# - sign(fetishGained)*minThreasholdForChange
+		
+		var fetishChange:float = pow(abs(fetishGainedAdjusted), 0.9)*0.01*sign(fetishGained)
+		if(abs(fetishChange) <= 0.0):
+			continue
+		fetishChange = clamp(fetishChange, -0.3, 0.3)
+		
+		#var currentFetishValue:float = fetishHolder.getFetish(fetishID)
+		fetishHolder.addFetish(fetishID, fetishChange)
+		var newFetishValue:float = fetishHolder.getFetish(fetishID)
+		
+		var changeText:String = ""
+		if(fetishChange > 0.0):
+			changeText = " now likes "+theFetish.getVisibleName()+" more."+" ("+str(Util.roundF(fetishChange*100.0, 1))+"%)"
+		else:
+			changeText = " now dislikes "+theFetish.getVisibleName()+" more."+" ("+str(Util.roundF(fetishChange*100.0, 1))+"%)"
+		messages.append(theChar.getName()+changeText)
+		
+		if(FetishInterest.getEnumListValue(currentFetishValue) != FetishInterest.getEnumListValue(newFetishValue)):
+			var theChangeDesc:String = FetishInterest.getChangeDesc(newFetishValue)
+			messages.append(theChar.getName()+" "+theChangeDesc+" "+theFetish.getVisibleName())
+			
+	return {messages=messages}
+		
 
 func saveData():
 	var data = {
@@ -386,6 +470,7 @@ func saveData():
 		"turnsLastStim": turnsLastStim,
 		"satisfaction": satisfaction,
 		"frustration": frustration,
+		"fetishGain": fetishGain,
 	}
 
 	return data
@@ -400,3 +485,4 @@ func loadData(data):
 	turnsLastStim = SAVE.loadVar(data, "turnsLastStim", 0)
 	satisfaction = SAVE.loadVar(data, "satisfaction", 0.0)
 	frustration = SAVE.loadVar(data, "frustration", 0.0)
+	fetishGain = SAVE.loadVar(data, "fetishGain", {})

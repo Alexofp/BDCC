@@ -2,6 +2,12 @@ extends FetishBase
 
 func _init():
 	id = Fetish.BeingBred
+	dynamicChangesPersonalityAffectors = {
+		PersonalityStat.Subby: 0.25,
+		PersonalityStat.Naive: 0.25,
+		PersonalityStat.Impatient: 0.1,
+		PersonalityStat.Coward: -0.25,
+	}
 
 func getVisibleName():
 	return "Being bred"

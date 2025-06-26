@@ -43,7 +43,7 @@ func rimming_processTurn():
 	#affectDom(getDomInfo().fetishScore({Fetish.RimmingGiving: 0.5})+0.1, 0.1, 0.0)
 	#affectSub(getSubInfo().fetishScore({Fetish.RimmingReceiving: 1.0})+0.2, 0.1, -0.1, -0.01)
 	#getSubInfo().stimulateArousalZone(0.05, BodypartSlot.Anus, 0.5)
-	stimulate(DOM_0, S_MOUTH, SUB_0, S_ANUS, I_NORMAL, Fetish.RimmingGiving)
+	stimulateLick(DOM_0, SUB_0, S_ANUS, I_NORMAL)
 	addTextPick([
 		"{dom.You} {dom.youVerb('use')} {dom.yourHis} tongue to lap at {sub.yourHis} most intimate spot, delivering a mix of tantalizing licks and arousing kisses.",
 		"{dom.Your} tongue laps at {sub.yourHis} "+str(getRandomAnusWord())+", creating a steady rhythm of pleasure.",
