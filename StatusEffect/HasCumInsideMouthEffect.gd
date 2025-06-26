@@ -34,7 +34,7 @@ func getEffectDesc():
 	var fluidAmount = orifice.getFluidAmount()
 	var fluidAmountRounded = ceil(fluidAmount)
 	
-	var messFluids = orifice.getFluidList()
+	var messFluids = orifice.getFluidListNames()
 	var humanReadableString = Util.humanReadableList(messFluids)
 	
 	var message = "Your last lover came down your throat and now your belly is stuffed with " + str(fluidAmountRounded) + " ml of "+humanReadableString
