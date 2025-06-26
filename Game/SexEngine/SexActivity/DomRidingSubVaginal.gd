@@ -499,7 +499,11 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			if(condomBroke):
 				text = "[b]The condom broke![/b] "+text
 				condom.destroyMe()
+				fetishUp(SUB_0, Fetish.Condoms, -20.0)
+				fetishUp(DOM_0, Fetish.Condoms, -30.0)
 			else:
+				fetishAffect(SUB_0, Fetish.Condoms, 10.0)
+				fetishAffect(DOM_0, Fetish.Condoms, 15.0)
 				if(knotSuccess):
 					text = RNG.pick([
 						"{dom.You} "+RNG.pick(["{dom.youVerb('nod')} and", "just"])+" {dom.youVerb('keep')} riding {sub.your} "+RNG.pick(["cock", "dick", "member"])+" hard until {sub.yourHis} knot suddenly slips inside!",
@@ -551,7 +555,11 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			if(RNG.chance(breakChance)):
 				text = "[b]The condom broke![/b] "+text
 				condom.destroyMe()
+				fetishUp(SUB_0, Fetish.Condoms, -20.0)
+				fetishUp(DOM_0, Fetish.Condoms, -30.0)
 			else:
+				fetishAffect(SUB_0, Fetish.Condoms, 10.0)
+				fetishAffect(DOM_0, Fetish.Condoms, 15.0)
 				text += RNG.pick([
 					" {sub.You} "+RNG.pick(["{sub.youVerb('fill')}", "{sub.youVerb('stuff')}"])+" {sub.yourHis} condom!",
 				])
@@ -735,7 +743,11 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			if(condomBroke):
 				text = "[b]The condom broke![/b] "+text
 				condom.destroyMe()
+				fetishUp(SUB_0, Fetish.Condoms, -20.0)
+				fetishUp(DOM_0, Fetish.Condoms, -30.0)
 			else:
+				fetishAffect(SUB_0, Fetish.Condoms, 10.0)
+				fetishAffect(DOM_0, Fetish.Condoms, 15.0)
 				text = RNG.pick([
 					"{sub.You} {sub.youVerb('fill')} the condom inside {dom.your} "+RNG.pick(usedBodypartNames)+" [b]without asking for permission[/b]!",
 					"{sub.You} {sub.youVerb('stuff')} the condom in {dom.your} "+RNG.pick(usedBodypartNames)+" full of {sub.yourHis} "+RNG.pick(["cum", "seed", "jizz", "semen"])+" [b]without asking for permission[/b]!",

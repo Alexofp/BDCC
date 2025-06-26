@@ -1864,7 +1864,7 @@ func addTallymarkButt():
 func hasTallymarks():
 	return hasEffect(StatusEffect.HasTallyMarks)
 
-func getTallymarkCount():
+func getTallymarkCount() -> int:
 	if(!hasTallymarks()):
 		return 0
 	return getEffect(StatusEffect.HasTallyMarks).totalAmount
@@ -1886,7 +1886,7 @@ func addBodywritingLowerBody():
 func hasBodywritings():
 	return hasEffect(StatusEffect.HasBodyWritings)
 
-func getBodywritingsCount():
+func getBodywritingsCount() -> int:
 	if(!hasBodywritings()):
 		return 0
 	return getEffect(StatusEffect.HasBodyWritings).getAmount()

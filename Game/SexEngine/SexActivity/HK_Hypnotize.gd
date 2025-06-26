@@ -54,6 +54,8 @@ func init_processTurn():
 	affectDom(getDomInfo().fetishScore({Fetish.HypnosisHypnotist: 1.0})+0.0, 0.1, 0.0)
 	affectSub(getSubInfo().fetishScore({Fetish.HypnosisSubject: 1.0})+0.0, 0.1, -0.02, 0.0)
 	HypnokinkUtil.changeSuggestibilityBy(getSubInfo().getChar(), RNG.randi_range(4,6))
+	fetishAffect(SUB_0, Fetish.HypnosisSubject)
+	fetishAffect(DOM_0, Fetish.HypnosisHypnotist)
 
 
 func getActions(_indx:int):

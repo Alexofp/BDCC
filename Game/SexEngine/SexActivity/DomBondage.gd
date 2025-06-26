@@ -208,7 +208,7 @@ func processTurn():
 		addText(text)
 		
 		fetishAffect(SUB_0, Fetish.Bondage, 5.0)
-		fetishUp(DOM_0, Fetish.Rigging, 3.0)
+		fetishAffect(DOM_0, Fetish.Rigging, 3.0)
 		
 		if(item && item.getRestraintData()):
 			var bondageSexReaction:int = item.getRestraintData().sexReaction

@@ -53,4 +53,4 @@ func startActivity(_args):
 	
 	endActivity()
 	addText("{dom.You} {dom.youVerb('take')} off {dom.yourHis} "+str(theitem.getCasualName())+".")
-	fetishAffect(DOM_0, Fetish.Exhibitionism, 5.0)
+	fetishAffect(DOM_0, Fetish.Exhibitionism, RNG.randf_range(0.0, 5.0))

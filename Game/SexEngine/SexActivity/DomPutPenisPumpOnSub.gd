@@ -100,6 +100,8 @@ func milkingSub_processTurn():
 		"The penis pump pleasures {sub.your} {sub.penis}.",
 		"Pleasure ring of the penis pump strokes {sub.your} {sub.penis}.",
 	])
+	
+	fetishAffect(SUB_0, Fetish.SeedMilking)
 	return
 
 

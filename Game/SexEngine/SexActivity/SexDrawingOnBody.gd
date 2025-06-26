@@ -78,6 +78,9 @@ func abouttodraw_processTurn():
 	
 	addText("{dom.You} drew [b]'"+str(BodyWritings.getWritingText(writingID))+"'[/b] on {sub.yourHis} "+BodyWritingsZone.getZoneVisibleName(zone)+".")
 	react(SexReaction.AfterDrawingOnBody, [100.0, 50.0])
+	var writingsAmount:int = getSub().getBodywritingsCount()
+	fetishAffect(SUB_0, Fetish.Bodywritings, 1.0 + sqrt(writingsAmount))
+	fetishAffect(DOM_0, Fetish.Bodywritings, 1.0 + sqrt(writingsAmount)*0.5)
 	
 func getSubResistChance() -> float:
 	var defaultChance = 30.0
@@ -103,10 +106,12 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			getDomInfo().addAnger(0.2)
 			addText("{sub.You} managed to whack the marker out of {dom.yourHis} hands!")
 			reactSub(SexReaction.ActivelyResisting, [50])
+			fetishUp(SUB_0, Fetish.Bodywritings, -10.0)
 			return
 		
 		addText("{sub.You} {sub.youVerb('try', 'tries')} to whack the marker out of {dom.yourHis} hands but {sub.youVerb('fail')}.")
 		reactSub(SexReaction.Resisting, [50])
+		fetishUp(SUB_0, Fetish.Bodywritings, -15.0)
 		return
 
 func saveData():

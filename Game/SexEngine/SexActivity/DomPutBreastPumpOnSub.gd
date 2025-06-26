@@ -90,7 +90,7 @@ func milkingSub_processTurn():
 	if(!isZoneOverstimulated(SUB_0, S_BREASTS)):
 		fetishAffect(SUB_0, Fetish.Lactation)
 	else:
-		fetishAffect(SUB_0, Fetish.Lactation, -5.0)
+		fetishUp(SUB_0, Fetish.Lactation, -5.0)
 	
 	timesMilked += 1
 	var text:String = ""

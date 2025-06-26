@@ -61,7 +61,7 @@ func init_processTurn():
 		addText("{dom.You} {dom.youVerb('clip')} a [b]leash[/b] to {sub.your} collar!")
 		react(SexReaction.Leashed)
 		fetishAffect(SUB_0, Fetish.Bondage, 2.0)
-		fetishUp(DOM_0, Fetish.Rigging, 3.0)
+		fetishAffect(DOM_0, Fetish.Rigging, 3.0)
 
 func getActions(_indx:int):
 	if(_indx == DOM_0):
@@ -83,7 +83,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		addText("{dom.You} [b]{dom.youVerb('yank')}[/b] on {sub.your} leash [b]hard[/b], choking {sub.youHim}.")
 		choke(DOM_0, SUB_0, CHOKE_VERYHARD)
 		react(SexReaction.LeashYank, [50.0, 30.0])
-		fetishUp(DOM_0, Fetish.Choking, 3.0)
+		fetishAffect(DOM_0, Fetish.Choking, 3.0)
 		return 
 
 	if(_id == "pullaway"):

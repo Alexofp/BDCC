@@ -282,10 +282,10 @@ func onGoalFailed(_thedominfo, _goalid, _thesubinfo, _mult:float = 1.0):
 	else:
 		addFrustration(1.0*_mult)
 
-func fetishAffect(_fetishID:String, _amount:float = 1.0):
-	_amount = _amount * (1.0 - resistance*0.5) # Resisting new fetishes
-	
-	fetishUp(_fetishID, _amount)
+#func fetishAffect(_fetishID:String, _amount:float = 1.0):
+#	_amount = _amount * (1.0 - resistance*0.5) # Resisting new fetishes
+#
+#	fetishUp(_fetishID, _amount)
 
 func isResistingNewFetishes(_fetishID:String) -> bool:
 	if(isResisting()):
