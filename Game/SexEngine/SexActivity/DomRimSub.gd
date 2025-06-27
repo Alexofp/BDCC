@@ -185,6 +185,8 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		satisfyGoals()
 		state = ""
 		cumGeneric(SUB_0, DOM_0, UniqueOrgasm.Rim)
+		fetishAffect(SUB_0, Fetish.RimmingReceiving, 3.0)
+		fetishAffect(DOM_0, Fetish.RimmingGiving, 3.0)
 		return
 
 func getRandomAnusWord() -> String:

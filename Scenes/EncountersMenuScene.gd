@@ -36,9 +36,9 @@ func _run():
 			saynn("You don't mind meeting new characters.")
 		
 		if(GM.pc.dynamicPersonality):
-			saynn("Your personality can dynamically change after sex.")
+			saynn("Your personality or fetishes can dynamically change after sex.")
 		else:
-			saynn("Your personality will never change after sex.")
+			saynn("Your personality or fetishes will never change after sex.")
 		
 		sayn("Relative chances for the genders of encountered npcs:")
 		for gender in NpcGender.getAll():

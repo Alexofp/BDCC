@@ -281,11 +281,12 @@ func processTurn():
 				var thePick:String = RNG.pick(pillVariants)
 				itemRef.setTFID(thePick)
 				
+			if(usedItemID == "TFPill"):
 				fetishAffect(SUB_0, Fetish.TFReceiving, 10.0)
 				fetishAffect(DOM_0, Fetish.TFGiving, 10.0)
 			else:
-				fetishAffect(SUB_0, Fetish.DrugUse, 5.0)
-				fetishAffect(DOM_0, Fetish.DrugUse, 5.0)
+				fetishAffect(SUB_0, Fetish.DrugUse, 3.0)
+				fetishAffect(DOM_0, Fetish.DrugUse, 3.0)
 			
 			var pillResultText = ""
 			var result = itemRef.useInSex(getSub())
@@ -327,7 +328,7 @@ func processTurn():
 			if(usedItemID == "TFPill"):
 				fetishAffect(DOM_0, Fetish.TFGiving, 5.0)
 			else:
-				fetishAffect(DOM_0, Fetish.DrugUse, 5.0)
+				fetishAffect(DOM_0, Fetish.DrugUse, 2.0)
 			
 			var text = RNG.pick([
 				"{dom.You} {dom.youVerb('swallow')} "+pcCanSeeText(drugInfo["usedName"])+"!"+pillResultText,

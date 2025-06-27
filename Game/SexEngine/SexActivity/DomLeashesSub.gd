@@ -83,7 +83,6 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		addText("{dom.You} [b]{dom.youVerb('yank')}[/b] on {sub.your} leash [b]hard[/b], choking {sub.youHim}.")
 		choke(DOM_0, SUB_0, CHOKE_VERYHARD)
 		react(SexReaction.LeashYank, [50.0, 30.0])
-		fetishAffect(DOM_0, Fetish.Choking, 3.0)
 		return 
 
 	if(_id == "pullaway"):

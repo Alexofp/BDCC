@@ -96,7 +96,7 @@ var upgradesInfo:Dictionary = {
 	"BasicPills": {
 		name = "Basic pills",
 		desc = "Lets you use fluids to create some of the non-transformative drugs: Heat pills, Breeder pills, Birth control pills, Anaphrodisiac pills.",
-		cost = 30,
+		cost = 25,
 		requiredUpgrades = [],
 		items = {
 			"HeatPill": {
@@ -125,7 +125,7 @@ var upgradesInfo:Dictionary = {
 	"EnergyDrink": {
 		name = "Energy drink",
 		desc = "Download a recipe of the most generic energy drink, allowing you to create them.",
-		cost = 40,
+		cost = 30,
 		requiredUpgrades = ["BasicPills"],
 		items = {
 			"EnergyDrink": {
@@ -139,13 +139,27 @@ var upgradesInfo:Dictionary = {
 	"painkillers": {
 		name = "Painkillers",
 		desc = "Allows you to make painkillers.",
-		cost = 50,
+		cost = 30,
 		requiredUpgrades = ["BasicPills"],
 		items = {
 			"painkillers": {
 				fluids = {
 					"Milk": 2500.0,
 					"Cum": 500.0,
+				},
+			},
+		},
+	},
+	"AdvancedPills": {
+		name = "Advanced pills",
+		desc = "Allows you to make some advanced pills.",
+		cost = 40,
+		requiredUpgrades = ["EnergyDrink", "painkillers"],
+		items = {
+			"FetishGainPill": {
+				fluids = {
+					"Milk": 2000.0,
+					"Cum": 1000.0,
 				},
 			},
 		},

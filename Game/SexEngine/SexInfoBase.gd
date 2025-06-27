@@ -77,8 +77,9 @@ func getExtraInfoLines() -> Array:
 			result.append(zoneName+" overstimulation: "+("[color="+colorString+"]" if isBads else "")+str(Util.roundF(zoneStimulation*100.0, 1))+"%"+("[/color]" if isBads else "")+(" ("+Util.join(extraTexts, ", ")+")" if extraTexts.size() > 0 else ""))
 	
 	#TODO: Remove this before ship
-	for fetishID in fetishGain:
-		result.append(fetishID+": "+str(Util.roundF(fetishGain[fetishID][0], 2))+" "+str(Util.roundF(fetishGain[fetishID][1], 2)))
+	# Debug fetish gain info
+	#for fetishID in fetishGain:
+	#	result.append(fetishID+": "+str(Util.roundF(fetishGain[fetishID][0], 2))+" "+str(Util.roundF(fetishGain[fetishID][1], 2)))
 	
 	return result
 
@@ -88,6 +89,10 @@ func initFromPersonality():
 func processTurn():
 	tick += 1
 	lustFull += getChar().getLustLevel()
+	
+	var revealAmount:int = getSexEngine().getRevealedPartsAmount(getCharID())
+	if(revealAmount > 0):
+		fetishAffect(Fetish.Exhibitionism, 0.05*revealAmount)
 
 func resetJustCame():
 	justCame = false
@@ -172,11 +177,7 @@ func addArousalForeplay(howmuch: float):
 
 func addArousalSex(howmuch: float):
 	var lustLevel = getChar().getLustLevel()
-	if(lustLevel < 0.6):
-		# should be less efficient at low lust
-		addArousal(howmuch * max(lustLevel+0.3, 0.6))
-	else:
-		addArousal(howmuch)
+	addArousal(howmuch * (0.6 + lustLevel*0.4))
 
 # First argument is basically 'speed'. Last argument is how 'stimulating' it is
 func stimulateArousalZone(howmuch: float, bodypartSlot, stimulation:float = 1.0):
@@ -245,11 +246,11 @@ func cum(infoCaused = null):
 	
 	var restraintAmount:int = theChar.getInventory().getRemovableRestraintsAmount()
 	if(restraintAmount > 0): # Cumming with restraints makes you like bondage more
-		fetishAffect(Fetish.Bondage, 0.5 * restraintAmount)
+		fetishAffect(Fetish.Bondage, min(0.5 * restraintAmount, 4.0))
 	
 	var drugsInfluenceAmount:int = theChar.getDrugsInfluenceAmount()
 	if(drugsInfluenceAmount > 0): # Cumming while under drugs inflience makes you like drugs more
-		fetishAffect(Fetish.DrugUse, 0.5 * drugsInfluenceAmount)
+		fetishAffect(Fetish.DrugUse, min(0.5 * drugsInfluenceAmount, 4.0))
 	
 	if(true):
 		var event = SexEventHelper.create(SexEvent.Orgasmed, infoCaused.charID, charID, {
@@ -414,18 +415,32 @@ func fetishAffect(_fetishID:String, _amount:float = 1.0):
 	else:
 		fetishGain[_fetishID][0] += _amount
 
+func convertFetishChangeToPlusString(_change:float) -> String:
+	if(_change >= 0.15):
+		return "+++"
+	if(_change >= 0.05):
+		return "++"
+	if(_change > 0.0):
+		return "+"
+	if(_change <= -0.15):
+		return "---"
+	if(_change <= -0.05):
+		return "--"
+	if(_change < 0.0):
+		return "-"
+	
+	return ""
+
 func doFetishChangeCalculation() -> Dictionary:
 	var theChar := getChar()
-	#TODO: Bring this back after done
-	#if(!theChar.isDynamicCharacter() && !theChar.isPlayer()):
-	#	return {}
-	
+
 	var messages:Array = []
 	var upFetishes:Array = []
 	var downFetishes:Array = []
 	
 	var fetishHolder:FetishHolder = theChar.getFetishHolder()
 	var personality:Personality = theChar.getPersonality()
+	var buffHolder:BuffsHolder = theChar.getBuffsHolder()
 	
 	var globalScoreMult:float = 1.0
 	if(isDom()): # Doms gain fetishes slower
@@ -447,7 +462,7 @@ func doFetishChangeCalculation() -> Dictionary:
 		
 		var minThreasholdForChange:float = lerp(theFetish.getDynamicChangeThreshold(), theFetish.getDynamicChangeThresholdMax(), abs(currentFetishValue))
 		
-		var fetishGained:float = (fetishGain[fetishID][1] + fetishGain[fetishID][0]*satisfactionMod) * globalScoreMult
+		var fetishGained:float = (fetishGain[fetishID][1] + fetishGain[fetishID][0]*satisfactionMod) * globalScoreMult * (1.0+buffHolder.getFetishGain(fetishID))
 		if(fetishGained >= 0.0):
 			fetishGained *= theFetish.getFetishChangePersonalityMod(personality)
 		else:
@@ -470,10 +485,12 @@ func doFetishChangeCalculation() -> Dictionary:
 		#var changeText:String = ""
 		if(fetishChange > 0.0):
 			#changeText = " now likes "+theFetish.getVisibleName()+" more."+" ("+str(Util.roundF(fetishChange*100.0, 1))+"%)"
-			upFetishes.append(theFetish.getVisibleName()  +" ("+str(Util.roundF(fetishChange*100.0, 1))+"%)" )
+			#upFetishes.append(theFetish.getVisibleName()  +" ("+str(Util.roundF(fetishChange*100.0, 1))+"%)" )
+			upFetishes.append(theFetish.getVisibleName() + convertFetishChangeToPlusString(fetishChange))
 		else:
 			#changeText = " now dislikes "+theFetish.getVisibleName()+" more."+" ("+str(Util.roundF(fetishChange*100.0, 1))+"%)"
-			downFetishes.append(theFetish.getVisibleName()  +" ("+str(Util.roundF(fetishChange*100.0, 1))+"%)" )
+			downFetishes.append(theFetish.getVisibleName() + convertFetishChangeToPlusString(fetishChange))
+			#downFetishes.append(theFetish.getVisibleName()  +" ("+str(Util.roundF(fetishChange*100.0, 1))+"%)" )
 		#messages.append(theChar.getName()+changeText)
 		
 		var wasEnumVal:int = FetishInterest.getEnumListValue(currentFetishValue)
@@ -488,10 +505,10 @@ func doFetishChangeCalculation() -> Dictionary:
 			#messages.append(theChar.getName()+" "+theChangeDesc+" "+theFetish.getVisibleName())
 	
 	if(!downFetishes.empty()):
-		messages = [theChar.getName()+" [color=#FFB0A0]dislikes[/color] these fetishes more: "+Util.join(downFetishes,", ")] + messages
+		messages = [theChar.getName()+" [color=#FFB0A0]dislikes[/color] these fetishes more: "+Util.join(downFetishes," ")] + messages
 	
 	if(!upFetishes.empty()):
-		messages = [theChar.getName()+" [color=#FFBAF8]likes[/color] these fetishes more: "+Util.join(upFetishes,", ")] + messages
+		messages = [theChar.getName()+" [color=#FFBAF8]likes[/color] these fetishes more: "+Util.join(upFetishes," ")] + messages
 	
 	return {messages=messages}
 		

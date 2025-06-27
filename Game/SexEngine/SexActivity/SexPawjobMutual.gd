@@ -175,6 +175,8 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		orgasmAmount += 1
 		if(orgasmAmount >= 2):
 			satisfyGoals()
+		fetishAffect(SUB_0, Fetish.FeetplayReceiving, 3.0)
+		fetishAffect(DOM_0, Fetish.FeetplayGiving, 3.0)
 		return
 	if(_id == "domcum"):
 		if(getDom().hasReachablePenis()):
@@ -185,6 +187,8 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		orgasmAmount += 1
 		if(orgasmAmount >= 2):
 			satisfyGoals()
+		fetishAffect(DOM_0, Fetish.FeetplayReceiving, 3.0)
+		fetishAffect(SUB_0, Fetish.FeetplayGiving, 3.0)
 		return
 			
 func getSubResistChance(baseChance:float, domAngerRemoval:float) -> float:

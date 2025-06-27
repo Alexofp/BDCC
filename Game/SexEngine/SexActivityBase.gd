@@ -106,9 +106,9 @@ func exposeToFetish(_indxTarget:int, _fetishID:String, _intensity:int, _indxExpo
 
 func intensityToFetishUpMod(_intensity:int) -> float:
 	if(_intensity == I_TEASE):
-		return 0.1
-	elif(_intensity == I_LOW):
 		return 0.25
+	elif(_intensity == I_LOW):
+		return 0.5
 	elif(_intensity == I_NORMAL):
 		return 1.0
 	elif(_intensity == I_HIGH):
@@ -178,7 +178,11 @@ func stimulateSex(_indxActor:int, _indxTarget:int, _hole:String, _intensity:int,
 			fetishAffect(_indxActor, Fetish.StraponSexVaginal, intensityMod*stimModActor)
 		if(_hole == S_ANUS):
 			fetishAffect(_indxActor, Fetish.StraponSexAnal, intensityMod*stimModActor)
-			
+	
+	if(isWearingCondom(_indxActor)):
+		fetishAffect(_indxActor, Fetish.Condoms, intensityMod)
+		fetishAffect(_indxTarget, Fetish.Condoms, intensityMod)
+	
 	if(isUnconscious(_indxTarget)):
 		fetishUp(_indxActor, Fetish.UnconsciousSex, intensityMod*stimModActor)
 		fetishUp(_indxTarget, Fetish.UnconsciousSex, intensityMod*stimModTarget)
@@ -213,6 +217,10 @@ func stimulateSexRide(_indxActor:int, _indxTarget:int, _hole:String, _intensity:
 	if(isUnconscious(_indxTarget)):
 		fetishUp(_indxActor, Fetish.UnconsciousSex, intensityMod)
 		fetishUp(_indxTarget, Fetish.UnconsciousSex, intensityMod)
+	
+	if(isWearingCondom(_indxTarget)):
+		fetishAffect(_indxActor, Fetish.Condoms, intensityMod)
+		fetishAffect(_indxTarget, Fetish.Condoms, intensityMod)
 	
 	var restraintsAmount:int = getRemovableRestraintsAmount(_indxTarget)
 	if(restraintsAmount > 0):
@@ -329,6 +337,16 @@ const CHOKE_NORMAL = 1
 const CHOKE_HARD = 2
 const CHOKE_VERYHARD = 3
 
+func chokeStrengthFetishMod(_chokeStrength:int) -> float:
+	if(_chokeStrength == CHOKE_GENTLE):
+		return 0.5
+	if(_chokeStrength == CHOKE_NORMAL):
+		return 1.0
+	if(_chokeStrength == CHOKE_HARD):
+		return 1.5
+	if(_chokeStrength == CHOKE_VERYHARD):
+		return 2.5
+	return 1.0
 
 func choke(_indxActor:int, _indxTarget:int, _chokeStrength:int = CHOKE_NORMAL):
 	if(_indxActor < 0):
@@ -371,7 +389,7 @@ func choke(_indxActor:int, _indxTarget:int, _chokeStrength:int = CHOKE_NORMAL):
 	var isConsciousNow:bool = !targetInfo.isUnconscious()
 	
 	if(isConsciousNow):
-		fetishAffect(_indxTarget, Fetish.Choking)
+		fetishAffect(_indxTarget, Fetish.Choking, chokeStrengthFetishMod(_chokeStrength))
 	#elif(wasConscious): # Got chocked unconscious
 	#	fetishUp(_indxTarget, Fetish.Choking, -30.0)
 	
@@ -410,7 +428,7 @@ func strike(_indxActor:int, _indxTarget:int, _strikeStrength:int = STRIKE_NORMAL
 			howMuchAddPain = RNG.randi_range(15, 25)
 			actorInfo.addLust(0.2 * actorSadism)
 			actorInfo.addAnger(-0.2)
-			fetishAffect(_indxActor, Fetish.Sadism, 5.0)
+			fetishAffect(_indxActor, Fetish.Sadism, 3.0)
 		else:
 			howMuchAddPain = RNG.randi_range(4, 8)
 			actorInfo.addLust(0.1 * actorSadism)
@@ -422,7 +440,7 @@ func strike(_indxActor:int, _indxTarget:int, _strikeStrength:int = STRIKE_NORMAL
 		
 		if(isConsciousNow):
 			if(_strikeStrength == STRIKE_FULLFORCE):
-				fetishAffect(_indxTarget, Fetish.Masochism, 5.0)
+				fetishAffect(_indxTarget, Fetish.Masochism, 3.0)
 			else:
 				fetishAffect(_indxTarget, Fetish.Masochism)
 		elif(wasConscious): # Got beaten unconscious
@@ -1508,8 +1526,8 @@ func doCumBJDom(isDeepthroat:bool = false):
 			fetishUp(DOM_0, Fetish.Condoms, -20.0)
 			fetishUp(SUB_0, Fetish.Condoms, -30.0)
 		else:
-			fetishAffect(DOM_0, Fetish.Condoms, 10.0)
-			fetishAffect(SUB_0, Fetish.Condoms, 15.0)
+			fetishAffect(DOM_0, Fetish.Condoms, 5.0)
+			fetishAffect(SUB_0, Fetish.Condoms, 5.0)
 			text = RNG.pick([
 				"{dom.You} filled the condom inside {sub.your} "+RNG.pick(["mouth"])+"!",
 				"{dom.You} stuffed the condom in {sub.your} "+RNG.pick(["mouth"])+" full of {dom.yourHis} "+RNG.pick(["cum", "seed", "jizz", "semen"])+"!",
@@ -1546,8 +1564,8 @@ func doCumBJFacialsDom():
 			fetishUp(DOM_0, Fetish.Condoms, -20.0)
 			fetishUp(SUB_0, Fetish.Condoms, -30.0)
 		else:
-			fetishAffect(DOM_0, Fetish.Condoms, 10.0)
-			fetishAffect(SUB_0, Fetish.Condoms, 15.0)
+			fetishAffect(DOM_0, Fetish.Condoms, 5.0)
+			fetishAffect(SUB_0, Fetish.Condoms, 5.0)
 			text = RNG.pick([
 				"{dom.You} {dom.youVerb('pull')} {dom.yourHis} cock out and {dom.youVerb('fill')} {dom.yourHis} condom!",
 				"{dom.You} {dom.youVerb('pull')} out, stuffing {dom.yourHis} condom!",
@@ -1624,8 +1642,8 @@ func doCumBJSub(supposedToBeAngry:bool = true):
 			fetishUp(SUB_0, Fetish.Condoms, -20.0)
 			fetishUp(DOM_0, Fetish.Condoms, -30.0)
 		else:
-			fetishAffect(SUB_0, Fetish.Condoms, 10.0)
-			fetishAffect(DOM_0, Fetish.Condoms, 15.0)
+			fetishAffect(SUB_0, Fetish.Condoms, 5.0)
+			fetishAffect(DOM_0, Fetish.Condoms, 5.0)
 			text = RNG.pick([
 				"{sub.You} {sub.youVerb('grunt')} while {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" throbs and suddenly starts to stuff the condom with {sub.yourHis} "+RNG.pick(["cum", "seed", "semen"])+"!"+noPermissionText,
 			])
@@ -1681,8 +1699,8 @@ func doCumBJFacialsSub(supposedToBeAngry:bool = true):
 			fetishUp(SUB_0, Fetish.Condoms, -20.0)
 			fetishUp(DOM_0, Fetish.Condoms, -30.0)
 		else:
-			fetishAffect(SUB_0, Fetish.Condoms, 10.0)
-			fetishAffect(DOM_0, Fetish.Condoms, 15.0)
+			fetishAffect(SUB_0, Fetish.Condoms, 5.0)
+			fetishAffect(DOM_0, Fetish.Condoms, 5.0)
 			text = RNG.pick([
 				"{sub.You} {sub.youVerb('grunt')} while {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" throbs and suddenly starts to stuff the condom with {sub.yourHis} "+RNG.pick(["cum", "seed", "semen"])+"!"+noPermissionText,
 			])
@@ -1726,7 +1744,7 @@ func doSpitCumIntoHoleDom(bodypartSlot = BodypartSlot.Vagina):
 		affectSub(getSubInfo(0).fetishScore({Fetish.RimmingReceiving:1.0}), 0.1, -0.1, -0.05)
 	sendSexEvent(SexEvent.HoleSpitted, DOM_0, SUB_0, {hole=bodypartSlot, loadSize=howMuch})
 	addText(text)
-	if(getSub().hasWombIn(bodypartSlot)):
+	if(getSub().hasWombIn(bodypartSlot) && getSub().getFertility() > 0.1 && getDom().hasVirileFluidsIn(S_MOUTH)):
 		fetishAffect(DOM_0, Fetish.Breeding, 10.0)
 		fetishAffect(SUB_0, Fetish.BeingBred, 10.0)
 
@@ -1745,15 +1763,21 @@ func doSpitCumIntoHoleSub(bodypartSlot = BodypartSlot.Vagina):
 		affectDom(getDomInfo(0).fetishScore({Fetish.RimmingReceiving:1.0}), 0.1, -0.1)
 	sendSexEvent(SexEvent.HoleSpitted, SUB_0, DOM_0, {hole=bodypartSlot, loadSize=howMuch})
 	addText(text)
-	if(getDom().hasWombIn(bodypartSlot)):
-		fetishAffect(SUB_0, Fetish.Breeding, 10.0)
-		fetishAffect(DOM_0, Fetish.BeingBred, 10.0)
+	if(getDom().hasWombIn(bodypartSlot) && getDom().getFertility() > 0.1 && getSub().hasVirileFluidsIn(S_MOUTH)):
+		fetishAffect(SUB_0, Fetish.Breeding, 3.0)
+		fetishAffect(DOM_0, Fetish.BeingBred, 3.0)
 
 func isWearingStrapon(_indx:int) -> bool:
 	var theChar:BaseCharacter = getDomOrSub(_indx)
 	if(!theChar):
 		return false
 	return theChar.isWearingStrapon()
+	
+func isWearingCondom(_indx:int) -> bool:
+	var theChar:BaseCharacter = getDomOrSub(_indx)
+	if(!theChar):
+		return false
+	return theChar.isWearingCondom()
 
 # Just shorter func name
 func isStrapon(_indx:int) -> bool:
@@ -2415,6 +2439,13 @@ func doProcessCumInside(_indxTop:int, _indxBottom:int, _hole:String, tryKnot:boo
 	var didCumInside:bool = false
 	var handledCum:bool = false
 
+	if(_hole == S_VAGINA):
+		fetishAffect(_indxTop, Fetish.VaginalSexGiving, 3.0)
+		fetishAffect(_indxBottom, Fetish.VaginalSexReceiving, 3.0)
+	if(_hole == S_ANUS):
+		fetishAffect(_indxTop, Fetish.AnalSexGiving, 3.0)
+		fetishAffect(_indxBottom, Fetish.AnalSexReceiving, 3.0)
+
 	if(tryKnot):
 		var freeRoom:float = bottomChar.getPenetrationFreeRoomBy(_hole, topChar.getID())
 		var chanceToPain:float = -freeRoom * 5.0
@@ -2424,10 +2455,7 @@ func doProcessCumInside(_indxTop:int, _indxBottom:int, _hole:String, tryKnot:boo
 			chanceToPain *= 1.5
 		if(RNG.chance(chanceToPain)):
 			bottomChar.doPainfullyStretchHole(_hole, topChar.getID())
-			fetishUp(_indxBottom, Fetish.VaginalSexReceiving if _hole == S_VAGINA else Fetish.AnalSexReceiving, -20.0)
-		else:
-			fetishAffect(_indxBottom, Fetish.VaginalSexReceiving if _hole == S_VAGINA else Fetish.AnalSexReceiving, 2)
-		
+
 		#isTryingToKnot = true
 		bottomChar.gotOrificeStretchedBy(_hole, topChar.getID(), true, 0.5)
 		if(RNG.chance(bottomChar.getKnottingChanceBy(_hole, topChar.getID()))):
@@ -2481,8 +2509,8 @@ func doProcessCumInside(_indxTop:int, _indxBottom:int, _hole:String, tryKnot:boo
 			fetishUp(_indxTop, Fetish.Condoms, -20.0)
 			fetishUp(_indxBottom, Fetish.Condoms, -30.0)
 		else:
-			fetishAffect(_indxTop, Fetish.Condoms, 10.0)
-			fetishAffect(_indxBottom, Fetish.Condoms, 15.0)
+			fetishAffect(_indxTop, Fetish.Condoms, 5.0)
+			fetishAffect(_indxBottom, Fetish.Condoms, 5.0)
 			handledCum = true
 			
 			if(!isRiding):
@@ -2524,9 +2552,9 @@ func doProcessCumInside(_indxTop:int, _indxBottom:int, _hole:String, tryKnot:boo
 	
 	if(!handledCum):
 		didCumInside = true
-		if(bottomChar.hasWombIn(_hole)):
-			fetishAffect(_indxTop, Fetish.Breeding, 10.0)
-			fetishAffect(_indxBottom, Fetish.BeingBred, 10.0)
+		if(bottomChar.hasWombIn(_hole) && getDomOrSub(_indxTop).getFertility() > 0.1 && getDomOrSub(_indxBottom).getVirility() > 0.1):
+			fetishAffect(_indxTop, Fetish.Breeding, 5.0)
+			fetishAffect(_indxBottom, Fetish.BeingBred, 5.0)
 			
 			if(bottomInfo is SexSubInfo):
 				var beingBredScore:float = bottomInfo.fetishScore({Fetish.BeingBred: 1.0})
@@ -2571,7 +2599,7 @@ func cumGeneric(_indxWho:int, _indxCauser:int, uniqueOrgasm:String = "", extraOr
 		react(orgasmReaction, [100.0, 100.0] if causerInfo != theInfo else [100.0], [_indxWho, _indxCauser] if causerInfo != theInfo else [_indxWho], [uniqueOrgasm])
 	
 	if(theChar.getWornPenisPump() != null):
-		fetishAffect(_indxWho, Fetish.SeedMilking, 5.0)
+		fetishAffect(_indxWho, Fetish.SeedMilking, 3.0)
 	
 func cumInsideShare(_indxWho:int, _indxTarget1:int, _hole1:String, _indxTarget2:int, _hole2:String, _shareFirst:float = 0.5):
 	var theInfo:SexInfoBase = getDomOrSubInfo(_indxWho)
@@ -2614,15 +2642,23 @@ func cumInside(_indxWho:int, _indxTarget:int, _hole:String, _extra:Dictionary = 
 	var isDeepthroat:bool = _extra["isDeepthroat"] if _extra.has("isDeepthroat") else false
 	
 	if(theChar.isWearingStrapon()):
+		if(_hole == S_VAGINA):
+			fetishAffect(_indxWho, Fetish.StraponSexVaginal, 3.0)
+			fetishAffect(_indxTarget, Fetish.VaginalSexReceiving, 3.0)
+		if(_hole == S_ANUS):
+			fetishAffect(_indxWho, Fetish.StraponSexAnal, 3.0)
+			fetishAffect(_indxTarget, Fetish.AnalSexReceiving, 3.0)
+		
 		var strapon = theChar.getWornStrapon()
 		if(strapon.getFluids() != null && !strapon.getFluids().isEmpty()):
+			var straponHasCum:bool = strapon.getFluids().hasVirileFluids()
 			target.cummedInBodypartByAdvanced(_hole, theChar.getID())
 			var text:String = "{<TOP>.Your} strapon gets squeezed by {<BOTTOM>.your} "+getNameHole(_indxTarget, _hole)+" enough for it to suddenly [b]release its contents inside {<BOTTOM>.youHim}[/b]!"
 			addTextTopBottom(text, _indxWho, _indxTarget)
 			
-			if(target.hasWombIn(_hole)):
-				fetishAffect(_indxWho, Fetish.Breeding, 10.0)
-				fetishAffect(_indxTarget, Fetish.BeingBred, 10.0)
+			if(straponHasCum && target.hasWombIn(_hole) && target.getFertility() > 0.1):
+				fetishAffect(_indxWho, Fetish.Breeding, 5.0)
+				fetishAffect(_indxTarget, Fetish.BeingBred, 5.0)
 		return {}
 	
 	if(_hole in [S_VAGINA, S_ANUS]):
@@ -2650,6 +2686,9 @@ func doProcessCumBJInside(_indxTop:int, _indxBottom:int, isDeepthroat:bool = fal
 			"{<TOP>.You} {<TOP>.youVerb('ram')} {<TOP>.yourHis} "+RNG.pick(["cock", "dick"])+" "+RNG.pick(["balls deep", "as deep as {<BOTTOM>.yourHis} throat allows", "deep down {<BOTTOM>.yourHis} throat"])+" before [b]stuffing {<BOTTOM>.yourHis} belly with lots of cum[/b]!",
 		])
 	
+	fetishAffect(_indxTop, Fetish.OralSexReceiving, 3.0)
+	fetishAffect(_indxBottom, Fetish.OralSexGiving, 3.0)
+	
 	var condomBroke:bool = false
 	var condom:ItemBase = topChar.getWornCondom()
 	if(condom != null):
@@ -2661,8 +2700,8 @@ func doProcessCumBJInside(_indxTop:int, _indxBottom:int, isDeepthroat:bool = fal
 			fetishUp(_indxTop, Fetish.Condoms, -20.0)
 			fetishUp(_indxBottom, Fetish.Condoms, -30.0)
 		else:
-			fetishAffect(_indxTop, Fetish.Condoms, 10.0)
-			fetishAffect(_indxBottom, Fetish.Condoms, 15.0)
+			fetishAffect(_indxTop, Fetish.Condoms, 5.0)
+			fetishAffect(_indxBottom, Fetish.Condoms, 5.0)
 			text = RNG.pick([
 				"{<TOP>.You} filled the condom inside {<BOTTOM>.your} "+RNG.pick(["mouth"])+"!",
 				"{<TOP>.You} stuffed the condom in {<BOTTOM>.your} "+RNG.pick(["mouth"])+" full of {<TOP>.yourHis} "+RNG.pick(["cum", "seed", "jizz", "semen"])+"!",
@@ -2730,6 +2769,10 @@ func cumOnto(_indxWho:int, _indxTarget:int, _extra:Dictionary = {}):
 	var isSex:bool = _extra.has("sex") && _extra["sex"]
 	var uniqueOrgasm:String = _extra["uniqueOrgasm"] if _extra.has("uniqueOrgasm") else ""
 	
+	if(!isSex && !isGeneric):
+		fetishAffect(_indxWho, Fetish.OralSexReceiving, 3.0)
+		fetishAffect(_indxTarget, Fetish.OralSexGiving, 3.0)
+	
 	var text:String = RNG.pick([
 		"{<TOP>.You} {<TOP>.youVerb('pull')} {<TOP>.yourHis} {<TOP>.penisShort} out and [b]{<TOP>.youVerb('cum')} all over {<BOTTOM>.your} face[/b]!",
 		"{<TOP>.You} {<TOP>.youVerb('pull')} out, [b]cumming all over {<BOTTOM>.your} face[/b]!",
@@ -2769,8 +2812,8 @@ func cumOnto(_indxWho:int, _indxTarget:int, _extra:Dictionary = {}):
 			fetishUp(_indxWho, Fetish.Condoms, -20.0)
 			fetishUp(_indxTarget, Fetish.Condoms, -30.0)
 		else:
-			fetishAffect(_indxWho, Fetish.Condoms, 10.0)
-			fetishAffect(_indxTarget, Fetish.Condoms, 15.0)
+			fetishAffect(_indxWho, Fetish.Condoms, 5.0)
+			fetishAffect(_indxTarget, Fetish.Condoms, 5.0)
 			text = RNG.pick([
 				"{<TOP>.You} {<TOP>.youVerb('pull')} {<TOP>.yourHis} cock out and {<TOP>.youVerb('fill')} {<TOP>.yourHis} condom!",
 				"{<TOP>.You} {<TOP>.youVerb('pull')} out, {<TOP>.yourHis} cock throbbing while stuffing {<TOP>.yourHis} condom!",

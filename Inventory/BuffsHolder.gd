@@ -28,6 +28,7 @@ var minEggsAmount: int = 0
 var extraCrossSpeciesCompatibility = 0.0
 var skillsExperience = {}
 var statusEffectImmunity = {}
+var fetishGain:Dictionary = {}
 var customAttributes = {}
 var extraStats = {}
 
@@ -86,6 +87,7 @@ func calculateBuffs():
 	extraCrossSpeciesCompatibility = 0.0
 	skillsExperience.clear()
 	statusEffectImmunity.clear()
+	fetishGain.clear()
 	customAttributes.clear()
 	orificesPreventedFromRecovering.clear()
 	extraStats.clear()
@@ -228,3 +230,7 @@ func getExtraStat(stat) -> int:
 	if(!extraStats.has(stat)):
 		return 0
 	return extraStats[stat]
+
+func getFetishGain(fetishID:String) -> float:
+	return max(-1.0, (fetishGain[fetishID] if fetishGain.has(fetishID) else 0.0) + getCustom(BuffAttribute.FetishGainSpeed))
+	

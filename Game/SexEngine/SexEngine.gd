@@ -169,6 +169,7 @@ func checkNewExposedBodyparts():
 				var bodypart = character.getBodypart(bodypartID)
 				bodypartsToReactTo.append(bodypart)
 				revealedBodyparts[domID][bodypartID] = true
+				domInfo.fetishAffect(Fetish.Exhibitionism, 1.0*subs.size())
 				addTextRaw("[b]"+bodypart.getRevealMessage()+"[/b]")
 				
 		for bodypart in bodypartsToReactTo:
@@ -185,6 +186,7 @@ func checkNewExposedBodyparts():
 				var bodypart = character.getBodypart(bodypartID)
 				bodypartsToReactTo.append(bodypart)
 				revealedBodyparts[subID][bodypartID] = true
+				subInfo.fetishAffect(Fetish.Exhibitionism, 1.0*doms.size())
 				addTextRaw("[b]"+bodypart.getRevealMessage()+"[/b]")
 				
 		for bodypart in bodypartsToReactTo:
@@ -1608,6 +1610,11 @@ func isLeashed(charIDTarget:String) -> bool:
 	if(theLeashes.has(charIDTarget)):
 		return true
 	return false
+
+func getRevealedPartsAmount(_charID:String) -> int:
+	if(!revealedBodyparts.has(_charID)):
+		return 0
+	return revealedBodyparts[_charID].size()
 
 func saveData():
 	var data = {

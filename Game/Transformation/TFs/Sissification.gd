@@ -330,6 +330,7 @@ func getBuffs() -> Array:
 		result.append_array([
 			buff(Buff.SensitivityGainBuff, [BodypartSlot.Anus, 10*anusStage*anusStage]),
 			buff(Buff.GenitalElasticityBuff, [20*anusStage]),
+			buff(Buff.FetishSpecificGainBuff, [Fetish.AnalSexReceiving, 50*anusStage]),
 		])
 	if(penisStage >= 1):
 		result.append_array([

@@ -214,11 +214,11 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 				if(RNG.chance(breakChance)):
 					text = "[b]The condom broke![/b] "+text
 					condom.destroyMe()
-					fetishUp(SUB_0, Fetish.Condoms, -20.0)
-					fetishUp(DOM_0, Fetish.Condoms, -30.0)
+					fetishUp(SUB_0, Fetish.Condoms, -15.0)
+					fetishUp(DOM_0, Fetish.Condoms, -20.0)
 				else:
-					fetishAffect(SUB_0, Fetish.Condoms, 10.0)
-					fetishAffect(DOM_0, Fetish.Condoms, 15.0)
+					fetishAffect(SUB_0, Fetish.Condoms, 3.0)
+					fetishAffect(DOM_0, Fetish.Condoms, 3.0)
 					text = RNG.pick([
 						"{dom.You} {dom.youVerb('hold')} {dom.yourHis} face slightly to the side of {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" as it starts throbbing and [b]filling the condom with "+RNG.pick(["cum", "seed", "semen"])+"[/b]!",
 					])
@@ -258,11 +258,11 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 				if(RNG.chance(breakChance)):
 					text = "[b]The condom broke![/b] "+text
 					condom.destroyMe()
-					fetishUp(SUB_0, Fetish.Condoms, -20.0)
-					fetishUp(DOM_0, Fetish.Condoms, -30.0)
+					fetishUp(SUB_0, Fetish.Condoms, -15.0)
+					fetishUp(DOM_0, Fetish.Condoms, -20.0)
 				else:
-					fetishAffect(SUB_0, Fetish.Condoms, 10.0)
-					fetishAffect(DOM_0, Fetish.Condoms, 15.0)
+					fetishAffect(SUB_0, Fetish.Condoms, 3.0)
+					fetishAffect(DOM_0, Fetish.Condoms, 3.0)
 					text = RNG.pick([
 						"{dom.You} {dom.youVerb('hold')} {dom.yourHis} face near {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" as it starts throbbing and [b]filling the condom with "+RNG.pick(["cum", "seed", "semen"])+"[/b]!",
 					])
@@ -301,11 +301,11 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 				if(condomBroke):
 					text = "[b]The condom broke![/b] "+text
 					condom.destroyMe()
-					fetishUp(SUB_0, Fetish.Condoms, -20.0)
-					fetishUp(DOM_0, Fetish.Condoms, -30.0)
+					fetishUp(SUB_0, Fetish.Condoms, -15.0)
+					fetishUp(DOM_0, Fetish.Condoms, -20.0)
 				else:
-					fetishAffect(SUB_0, Fetish.Condoms, 10.0)
-					fetishAffect(DOM_0, Fetish.Condoms, 15.0)
+					fetishAffect(SUB_0, Fetish.Condoms, 3.0)
+					fetishAffect(DOM_0, Fetish.Condoms, 3.0)
 					text = RNG.pick([
 						"{dom.You} {dom.youVerb('hold')} {dom.yourHis} lips wrapped around {sub.yourHis} "+RNG.pick(["cock", "dick", "shaft"])+" as it starts throbbing and [b]filling the condom inside {dom.your} mouth with "+RNG.pick(["cum", "seed", "semen"])+"[/b]!",
 					])

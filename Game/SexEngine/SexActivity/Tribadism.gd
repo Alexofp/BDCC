@@ -158,6 +158,7 @@ func grinding_doAction(_indx:int, _action:String, _actionDict:Dictionary):
 		if(doCheckDoubleOrgasm()):
 			satisfyGoals()
 			return
+		fetishAffect(DOM_0, Fetish.Tribadism, 3.0)
 		
 		cumAmount += 1
 		if(cumAmount >= 2):
@@ -173,6 +174,7 @@ func grinding_doAction(_indx:int, _action:String, _actionDict:Dictionary):
 		if(doCheckDoubleOrgasm()):
 			satisfyGoals()
 			return
+		fetishAffect(SUB_0, Fetish.Tribadism, 3.0)
 		
 		cumAmount += 1
 		if(cumAmount >= 2):
@@ -195,6 +197,8 @@ func doCheckDoubleOrgasm():
 			addText("[b]Double orgasm![/b]")
 			addGenericOrgasmText(DOM_0)
 			addGenericOrgasmText(SUB_0)
+			fetishAffect(DOM_0, Fetish.Tribadism, 3.0)
+			fetishAffect(SUB_0, Fetish.Tribadism, 3.0)
 			return true
 	return false
 	

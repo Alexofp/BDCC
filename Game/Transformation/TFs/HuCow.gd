@@ -238,6 +238,10 @@ func getBuffs() -> Array:
 		result.append_array([
 			buff(Buff.BreastsForcedLactationBuff),
 		])
+	if(nipsStage >= 3):
+		result.append_array([
+			buff(Buff.FetishSpecificGainBuff, [Fetish.Lactation, 100.0]),
+		])
 			
 	return result
 	

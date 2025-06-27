@@ -2094,14 +2094,14 @@ func afterSexEnded(sexInfo):
 		var item = items[itemSlot]
 		item.resetLustState()
 		item.onSexEnd()
-		
-	var theFetishChangeResult:Dictionary = sexInfo.doFetishChangeCalculation()
-	if(theFetishChangeResult.has("messages")):
-		for message in theFetishChangeResult["messages"]:
-			GM.main.addMessage(message)
-		
+	
 	#TODO: All of this should happen in sex engine endSex()?
 	if(personalityChangesAfterSex() && personality != null && fetishHolder != null):
+		var theFetishChangeResult:Dictionary = sexInfo.doFetishChangeCalculation()
+		if(theFetishChangeResult.has("messages")):
+			for message in theFetishChangeResult["messages"]:
+				GM.main.addMessage(message)
+		
 		var resultText = sexInfo.affectPersonality(personality, fetishHolder)
 		if(resultText != null && resultText != ""):
 			GM.main.addMessage(resultText)
@@ -2174,6 +2174,15 @@ func isWearingChastityCage() -> bool:
 	if(item.hasTag(ItemTag.ChastityCage)):
 		return true
 	return false
+
+func hasVirileFluidsIn(bodypartSlot:String) -> bool:
+	if(!hasBodypart(bodypartSlot)):
+		return false
+	var bodypart = getBodypart(bodypartSlot)
+	var theFluids = bodypart
+	if(!theFluids):
+		return false
+	return theFluids.hasVirileFluids()
 
 #example return values: some cum | a mixture of cum and girlcum | a mixture of cum, black goo and girlcum
 func getBodypartContentsStringList(bodypartID):

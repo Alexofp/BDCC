@@ -126,6 +126,8 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		cumOnto(SUB_0, DOM_0, {"generic": true, "uniqueOrgasm": UniqueOrgasm.Feet})
 		state = ""
 		satisfyGoals()
+		fetishAffect(SUB_0, Fetish.FeetplayReceiving, 3.0)
+		fetishAffect(DOM_0, Fetish.FeetplayGiving, 3.0)
 		return
 	if(_id == "subthrust"):
 		isThrusting = true

@@ -140,8 +140,10 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		getDom().cumOnFloor()
 		getDomInfo().cum()
 		state = ""
-		sendSexEvent(SexEvent.UniqueOrgasm, SUB_0, DOM_0, {orgasmType="rim"})
+		sendSexEvent(SexEvent.UniqueOrgasm, SUB_0, DOM_0, {orgasmType=UniqueOrgasm.Rim})
 		addGenericOrgasmText(DOM_0)
+		fetishAffect(DOM_0, Fetish.RimmingReceiving, 3.0)
+		fetishAffect(SUB_0, Fetish.RimmingGiving, 3.0)
 		return
 
 	if(_id == "pullaway"):

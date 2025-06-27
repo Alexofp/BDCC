@@ -90,7 +90,6 @@ func init_processTurn():
 		
 		endActivity()
 		addText("{dom.You} {dom.youVerb('take')} off {sub.yourHis} "+str(theitem.getCasualName())+".")
-		fetishAffect(SUB_0, Fetish.Exhibitionism, RNG.randf_range(0.0, 15.0))
 		
 func reactActivityEnd(_otheractivity):
 	if(checkRemoved()):

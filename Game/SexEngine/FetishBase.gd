@@ -31,4 +31,4 @@ func getDynamicChangeThreshold() -> float:
 	return 5.0
 	
 func getDynamicChangeThresholdMax() -> float:
-	return 15.0
+	return 10.0

@@ -16,7 +16,9 @@ func getVisibleDescription():
 		text = "+"+text
 	
 	var statusEffectObj:StatusEffectBase = GlobalRegistry.getStatusEffectRef(statusEffect)
-		
+	if(!statusEffectObj):
+		return "Error: "+str(statusEffect)
+
 	return "'"+statusEffectObj.getEffectName()+"' immunity "+text+"%"
 
 func apply(_buffHolder):
