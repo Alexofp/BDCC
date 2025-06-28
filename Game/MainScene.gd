@@ -31,6 +31,7 @@ var WHS:WorldHistory = WorldHistory.new()
 var SAB:SlaveAuctionBidders = SlaveAuctionBidders.new()
 var SCI:Science = Science.new()
 var DrugDenRun:DrugDen
+var PS:PlayerSlaveryBase
 
 var staticCharacters = {}
 var charactersToUpdate = {}
@@ -468,6 +469,13 @@ func saveData():
 	data["auctionBidders"] = SAB.saveData()
 	data["science"] = SCI.saveData()
 	data["drugDen"] = DrugDenRun.saveData() if DrugDenRun != null else null
+	if(PS):
+		data["playerSlavery"] = {
+			id = PS.id,
+			data = PS.saveData(),
+		}
+	else:
+		data["playerSlavery"] = null
 	
 	data["scenes"] = []
 	for scene in sceneStack:
@@ -534,6 +542,21 @@ func loadData(data):
 		DrugDenRun.loadData(SAVE.loadVar(data, "drugDen", {}))
 	else:
 		DrugDenRun = null
+	
+	if(data.has("playerSlavery") && data["playerSlavery"] is Dictionary):
+		var theSlaveryID:String = SAVE.loadVar(data["playerSlavery"], "id", "")
+		var theSlaveryDef = GlobalRegistry.getPlayerSlaveryDef(theSlaveryID)
+		if(!theSlaveryDef):
+			PS = null
+		else:
+			var theSlavery = theSlaveryDef.createSlavery()
+			if(!theSlavery):
+				PS = null
+			else:
+				PS = theSlavery
+				PS.loadData(SAVE.loadVar(data["playerSlavery"], "data", {}))
+	else:
+		PS = null
 	
 	GM.world.loadData(SAVE.loadVar(data, "world", {}))
 	#GM.world.updatePawns(IS)
@@ -1384,6 +1407,19 @@ func getDebugActions():
 				},
 			],
 		},
+		{
+			"id": "startSlavery",
+			"name": "Start Player Slavery",
+			"args": [
+				{
+					"id": "slaveryID",
+					"name": "Slavery id",
+					"type": "list",
+					"value": GlobalRegistry.getPlayerSlaveryDefs().keys().front(),
+					"values": TFUtil.getPlayerSlaveryStartList(),
+				},
+			],
+		},
 		
 	]
 
@@ -1399,6 +1435,8 @@ func doDebugAction(id, args = {}):
 			addMessage(args["tfid"] +" transformation is currently not possible.")
 		else:
 			GM.pc.getTFHolder().startTransformation(args["tfid"])
+	if(id == "startSlavery"):
+		startPlayerSlavery(args["slaveryID"])
 	if(id == "undoTFs"):
 		GM.pc.undoAllTransformations()
 	if(id == "applyTFs"):
@@ -1895,3 +1933,25 @@ func stopDungeonRun():
 	if(DrugDenRun != null):
 		DrugDenRun.endRun()
 	DrugDenRun = null
+
+func startPlayerSlavery(_slaveryID:String):
+	if(PS):
+		Log.printerr("Trying to start player slavery while one is running already!")
+		return
+	
+	var theDef = GlobalRegistry.getPlayerSlaveryDef(_slaveryID)
+	if(!theDef):
+		return
+	
+	var theSlavery = theDef.createSlavery()
+	if(!theSlavery):
+		Log.printerr("Slavery Def didn't gave the game a slavery object!")
+		return
+		
+	PS = theSlavery
+	PS.onSlaveryStart()
+	var theStartSceneID:String = PS.getStartScene()
+	if(theStartSceneID == ""):
+		Log.printerr("Player slavery didn't give us a start scene!")
+		return
+	runScene(theStartSceneID)

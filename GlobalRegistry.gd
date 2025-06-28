@@ -217,6 +217,7 @@ var transformationEffects:Dictionary = {}
 var nurseryTasks:Dictionary = {}
 var drugDenEvents:Dictionary = {}
 var drugDenEventRefs:Dictionary = {}
+var playerSlaveryDefs:Dictionary = {}
 
 var bodypartStorageNode
 
@@ -632,6 +633,8 @@ func registerEverything():
 	registerSlaveActionFolder("res://Game/NpcSlavery/SlaveActions/")
 	registerSlaveEventFolder("res://Game/NpcSlavery/SlaveEvents/")
 	registerSlaveActivitiesFolder("res://Game/NpcSlavery/SlaveActivities/")
+	
+	registerPlayerSlaveryDefFolder("res://Game/PlayerSlavery/SnenarioDefs/")
 	
 	registerInteractionFolder("res://Game/InteractionSystem/Interactions/")
 	registerGlobalTaskFolder("res://Game/InteractionSystem/GlobalTasks/")
@@ -2678,6 +2681,29 @@ func getSexReactionHandlersFor(id: int):
 	else:
 		return []
 		
+
+
+
+func registerPlayerSlaveryDef(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	playerSlaveryDefs[object.id] = object
+
+func registerPlayerSlaveryDefFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerPlayerSlaveryDef(scriptPath)
+
+func getPlayerSlaveryDef(id: String):
+	if(playerSlaveryDefs.has(id)):
+		return playerSlaveryDefs[id]
+	else:
+		Log.printerr("ERROR: player slavery with the id "+id+" wasn't found")
+		return null
+		
+func getPlayerSlaveryDefs():
+	return playerSlaveryDefs
 
 
 

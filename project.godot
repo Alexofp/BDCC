@@ -1144,6 +1144,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Player.gd"
 }, {
+"base": "Reference",
+"class": "PlayerSlaveryBase",
+"language": "GDScript",
+"path": "res://Game/PlayerSlavery/PlayerSlaveryBase.gd"
+}, {
+"base": "Reference",
+"class": "PlayerSlaveryDef",
+"language": "GDScript",
+"path": "res://Game/PlayerSlavery/PlayerSlaveryDef.gd"
+}, {
 "base": "Module",
 "class": "PunishmentsModule",
 "language": "GDScript",
@@ -1937,6 +1947,8 @@ _global_script_class_icons={
 "PersonalityStat": "",
 "PickupLineDB": "",
 "Player": "",
+"PlayerSlaveryBase": "",
+"PlayerSlaveryDef": "",
 "PunishmentsModule": "",
 "Quest": "",
 "QuestBase": "",
