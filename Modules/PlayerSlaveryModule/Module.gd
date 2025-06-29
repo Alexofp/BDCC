@@ -11,6 +11,7 @@ func _init():
 	
 	scenes = [
 		"res://Modules/PlayerSlaveryModule/ShaftMiner/PSShaftMinerStart.gd",
+		"res://Modules/PlayerSlaveryModule/ShaftMiner/PSShaftMinerGameplayScene.gd",
 		]
 	characters = [
 	]

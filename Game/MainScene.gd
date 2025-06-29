@@ -972,14 +972,27 @@ func updateStuff():
 	
 	var isDrugDen:bool = isOnDrugDenRun()
 	var playerIsBlindfolded = GM.pc.isBlindfolded()
-	GM.world.setDarknessVisible(playerIsBlindfolded || isDrugDen)
-	if(playerIsBlindfolded || isDrugDen):
-		if(isDrugDen && !playerIsBlindfolded):
-			GM.world.setDarknessSize(64)
-		elif(GM.pc.canHandleBlindness()):
-			GM.world.setDarknessSize(64)
-		else:
-			GM.world.setDarknessSize(16)
+	
+	var shouldDarknessBeVisible:bool = playerIsBlindfolded || isDrugDen
+	var thePSDarkness:float = -1.0
+	if(PS):
+		thePSDarkness = PS.getPCViewDistance()
+		if(thePSDarkness > 0.0):
+			shouldDarknessBeVisible = true
+	
+	GM.world.setDarknessVisible(shouldDarknessBeVisible)
+	if(shouldDarknessBeVisible):
+		var theDist:float = 9999
+		if(isDrugDen):
+			theDist = min(64, theDist)
+		if(thePSDarkness > 0.0):
+			theDist = min(thePSDarkness, theDist)
+		if(playerIsBlindfolded):
+			if(GM.pc.canHandleBlindness()):
+				theDist = min(64, theDist)
+			else:
+				theDist = min(16, theDist)
+		GM.world.setDarknessSize(theDist)
 			
 	for worldEdit in GlobalRegistry.getRegularWorldEdits():
 		worldEdit.apply(GM.world)

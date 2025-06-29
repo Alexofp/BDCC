@@ -26,10 +26,12 @@ var highlightedRoom: Node2D
 var lastAimedRoomID = null
 
 var pawns:Dictionary = {}
+var entities:Dictionary = {}
 
 var roomConnectionScene = preload("res://Game/World/RoomConnection.tscn")
 onready var worldFloorScene = load("res://Game/World/WorldFloor.tscn")
 var worldPawnScene = preload("res://Game/World/WorldPawn.tscn")
+var worldEntityScene = preload("res://Game/World/WorldEntity.tscn")
 
 var astar:AStar2D
 var astarIDToRoomIDMap: Dictionary = {}
@@ -374,6 +376,65 @@ func updateDarknessSize():
 	d_bottom.margin_top = darknessSize - 0.5
 	d_left.margin_right = -darknessSize + 0.5
 	d_right.margin_left = darknessSize - 0.5
+
+func clearEntities():
+	for entityID in entities:
+		entities[entityID].queue_free()
+	entities.clear()
+
+func hasEntity(theID:String) -> bool:
+	if(entities.has(theID)):
+		return true
+	return false
+
+func getEntity(_theID:String):
+	if(!entities.has(_theID)):
+		return null
+	return entities[_theID]
+
+func moveEntity(_theID:String, loc:String):
+	var theEntity = getEntity(_theID)
+	if(!theEntity):
+		return
+	var room = getRoomByID(loc)
+	if(room == null):
+		return
+	if(theEntity.loc == loc):
+		return
+	
+	if(room.getFloorID() == theEntity.floorid):
+		theEntity.moveToPos(room.global_position)
+		theEntity.loc = loc
+	else:
+		theEntity.get_parent().remove_child(theEntity)
+		var roomFloor = room.getFloor()
+		roomFloor.add_child(theEntity)
+		theEntity.loc = loc
+		theEntity.floorid = roomFloor.id
+		theEntity.global_position = getRoomByID(loc).global_position + Vector2(RNG.randf_range(-16.0, 16.0), RNG.randf_range(-16.0, 16.0))
+		#createWorldPawn(charID, pawn, loc)
+
+func deleteEntity(_theID:String):
+	if(hasEntity(_theID)):
+		return
+	entities[_theID].queue_free()
+	entities.erase(_theID)
+
+func createEntity(theID:String, theTexture:Texture, loc:String):
+	if(entities.has(theID)):
+		entities[theID].queue_free()
+		var _ok = entities.erase(theID)
+	var room = getRoomByID(loc)
+	var roomFloor = room.getFloor()
+	
+	var newWorldEntity = worldEntityScene.instance()
+	roomFloor.add_child(newWorldEntity)
+	newWorldEntity.loc = loc
+	newWorldEntity.id = theID
+	newWorldEntity.floorid = roomFloor.id
+	newWorldEntity.global_position = getRoomByID(loc).global_position + Vector2(RNG.randf_range(-16.0, 16.0), RNG.randf_range(-16.0, 16.0))
+	newWorldEntity.setTexture(theTexture)
+	entities[theID] = newWorldEntity
 
 func clearPawns():
 	for pawnID in pawns:

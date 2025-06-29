@@ -12,6 +12,9 @@ func onSlaveryStart():
 func getStartScene() -> String:
 	return ""
 
+func getPCViewDistance() -> float:
+	return -1.0
+
 func saveData() -> Dictionary:
 	return {}
 
