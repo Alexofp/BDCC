@@ -415,7 +415,7 @@ func moveEntity(_theID:String, loc:String):
 		#createWorldPawn(charID, pawn, loc)
 
 func deleteEntity(_theID:String):
-	if(hasEntity(_theID)):
+	if(!hasEntity(_theID)):
 		return
 	entities[_theID].queue_free()
 	entities.erase(_theID)
@@ -435,6 +435,11 @@ func createEntity(theID:String, theTexture:Texture, loc:String):
 	newWorldEntity.global_position = getRoomByID(loc).global_position + Vector2(RNG.randf_range(-16.0, 16.0), RNG.randf_range(-16.0, 16.0))
 	newWorldEntity.setTexture(theTexture)
 	entities[theID] = newWorldEntity
+
+func setEntityTexture(_theID:String, _theTexture:Texture):
+	if(!entities.has(_theID)):
+		return
+	entities[_theID].setTexture(_theTexture)
 
 func clearPawns():
 	for pawnID in pawns:

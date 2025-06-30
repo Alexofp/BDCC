@@ -6,6 +6,9 @@ const IconNugget1 = preload("res://Images/WorldEntities/nugget1.png")
 const IconNugget2 = preload("res://Images/WorldEntities/nugget2.png")
 const IconNugget3 = preload("res://Images/WorldEntities/nugget3.png")
 
+const LOC_ENTRANCE = "psmine_entrance"
+const LOC_CAGE = "psmine_sleep"
+
 const MiningLocs = [
 	"psmine_mine1", "psmine_mine2", "psmine_mine3", "psmine_mine4", "psmine_mine5", "psmine_mine6", "psmine_mine7", "psmine_mine8",
 ]
@@ -30,6 +33,8 @@ var upgrades:Dictionary = {} # upgradeID = true
 
 var minecartLoc:String = "psmine_cartspawn"
 var pushingMinecart:bool = false
+var nuggetsCarrying:int = 0
+var nuggetsMinecart:int = 0
 
 var nextUniquieID:int = 0
 
@@ -55,7 +60,7 @@ func canSeeUpgrade(_upgradeID:String) -> bool:
 	if(upgrades.has(_upgradeID)):
 		return false
 	var upgradeInfo:Dictionary = UpgradesDB[_upgradeID]
-	var theReqs:Array = upgradeInfo[_upgradeID] if upgradeInfo.has(_upgradeID) else []
+	var theReqs:Array = upgradeInfo["reqs"] if upgradeInfo.has("reqs") else []
 	
 	for otherUpgradeID in theReqs:
 		if(!hasUpgrade(otherUpgradeID)):
@@ -102,11 +107,22 @@ func getUpgradesCanSee() -> Array:
 	
 	return result
 
+func getUpgradesCompletionStr() -> String:
+	var totalUpgrades:int = UpgradesDB.size()
+	var boughtUpgrades:int = upgrades.size()
+	return str(boughtUpgrades)+"/"+str(totalUpgrades)
+
 func createIcons():
-	GM.world.createEntity("ps_cart", IconMinecart, minecartLoc)
+	GM.world.createEntity("ps_cart", getMinecartTexture(), minecartLoc)
 	
 	for nuggetEntry in nuggets:
 		GM.world.createEntity("ps_nugget"+nuggetEntry[0], RNG.pick([IconNugget1, IconNugget2, IconNugget3]), nuggetEntry[1])
+
+func getMinecartTexture() -> Texture:
+	return (IconMinecart if nuggetsMinecart <= 0 else IconMinecartFull)
+
+func updateCartIcon():
+	GM.world.setEntityTexture("ps_cart", getMinecartTexture())
 
 func updateIcons():
 	GM.world.moveEntity("ps_cart", minecartLoc)
@@ -116,7 +132,15 @@ func updateIcons():
 func getPCViewDistance() -> float:
 	return 64.0
 
-func onStep():
+func afterMove():
+	if(nuggetsCarrying > 0):
+		var staminaUse:int = nuggetsCarrying * 3
+		addMessage("You used "+str(staminaUse)+" stamina carrying the nuggets.")
+		useStamina(staminaUse)
+		if(!hasStamina()):
+			dropAllNuggets()
+
+func processTurn():
 	pass
 
 func updateLoc():
@@ -131,13 +155,103 @@ func canMine() -> bool:
 	return GM.pc.getLocation() in MiningLocs
 
 func doMine():
+	var mineChance:float = 40.0
+	if(hasUpgrade("pick1")):
+		mineChance = 100.0
+	
+	useStamina(10)
+	
+	if(RNG.chance(mineChance)):
+		spawnNugget()
+		addMessage("You did some mining!")
+	else:
+		addMessage("You did some mining but failed to find any ore!")
+
+func dropAllNuggets():
+	if(GM.pc.getLocation() == LOC_ENTRANCE):
+		var credAmount:int = nuggetsCarrying
+		addCredits(credAmount)
+		addMessage("You have unloaded all your nuggets and got "+str(credAmount)+" credits for it!")
+		nuggetsCarrying = 0
+		return
+	
+	for _i in range(nuggetsCarrying):
+		spawnNugget()
+	nuggetsCarrying = 0
+	addMessage("You have dropped all your nuggets!")
+
+func spawnNugget():
 	var nuggetEntry:Array = [getUID(), GM.pc.getLocation()]
 	nuggets.append(nuggetEntry)
 	GM.world.createEntity("ps_nugget"+nuggetEntry[0], RNG.pick([IconNugget1, IconNugget2, IconNugget3]), nuggetEntry[1])
 
+func hasNuggetsIn(_loc:String) -> bool:
+	for nuggetEntry in nuggets:
+		if(nuggetEntry[1] == _loc):
+			return true
+	return false
+
+func getNuggetsIn(_loc:String) -> Array:
+	var result:Array = []
+	for nuggetEntry in nuggets:
+		if(nuggetEntry[1] == _loc):
+			result.append(nuggetEntry[0])
+	return result
+
+func getNuggetsAmmountIn(_loc:String) -> int:
+	var result:int = 0
+	for nuggetEntry in nuggets:
+		if(nuggetEntry[1] == _loc):
+			result += 1
+	return result
+
+func removeNugget(_id:String):
+	var _i:int = 0
+	for nuggetEntry in nuggets:
+		if(nuggetEntry[0] == _id):
+			GM.world.deleteEntity("ps_nugget"+nuggetEntry[0])
+			nuggets.remove(_i)
+			return
+		_i += 1
+
+func removeNuggetIn(_loc:String):
+	var _i:int = 0
+	for nuggetEntry in nuggets:
+		if(nuggetEntry[1] == _loc):
+			GM.world.deleteEntity("ps_nugget"+nuggetEntry[0])
+			nuggets.remove(_i)
+			return
+		_i += 1
+
+func pickupNugget():
+	removeNuggetIn(GM.pc.getLocation())
+	nuggetsCarrying += 1
+
 func getUID() -> String:
 	nextUniquieID += 1
 	return str(nextUniquieID - 1)
+
+func addMessage(_text:String):
+	GM.main.addMessage(_text)
+
+func useStamina(_howMuch:int):
+	GM.pc.addStamina(-_howMuch)
+
+func hasStamina() -> bool:
+	return GM.pc.getStamina() > 0
+
+func loadMinecartFromPC():
+	nuggetsMinecart += nuggetsCarrying
+	nuggetsCarrying = 0
+	updateCartIcon()
+	addMessage("You have put all your nuggets into the minecart.")
+
+func unloadMinecart():
+	var credAmount:int = nuggetsMinecart
+	addCredits(credAmount)
+	addMessage("You have unloaded the minecart and got "+str(credAmount)+" credits for it!")
+	nuggetsMinecart = 0
+	updateCartIcon()
 
 func saveData() -> Dictionary:
 	return {
@@ -145,6 +259,8 @@ func saveData() -> Dictionary:
 		minecartLoc = minecartLoc,
 		nextUniquieID = nextUniquieID,
 		nuggets = nuggets,
+		nuggetsCarrying = nuggetsCarrying,
+		nuggetsMinecart = nuggetsMinecart,
 	}
 
 func loadData(_data:Dictionary):
@@ -152,5 +268,7 @@ func loadData(_data:Dictionary):
 	minecartLoc = SAVE.loadVar(_data, "minecartLoc", "psmine_cartspawn")
 	nextUniquieID = SAVE.loadVar(_data, "nextUniquieID", 0)
 	nuggets = SAVE.loadVar(_data, "nuggets", [])
+	nuggetsCarrying = SAVE.loadVar(_data, "nuggetsCarrying", 0)
+	nuggetsMinecart = SAVE.loadVar(_data, "nuggetsMinecart", 0)
 	
 	createIcons()
