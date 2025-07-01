@@ -76,25 +76,26 @@ roomColor = 8
 
 [node name="PSMineRoom10" parent="." index="10" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
-position = Vector2( 320, -192 )
+position = Vector2( 448, -192 )
 roomName = "Mineshafts"
 roomColor = 8
 
 [node name="PSMineRoom11" parent="." index="11" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
-position = Vector2( 320, -256 )
+position = Vector2( 256, -256 )
 roomName = "Mineshafts"
+canWest = false
 roomColor = 8
 
 [node name="PSMineRoom12" parent="." index="12" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
-position = Vector2( 384, -256 )
+position = Vector2( 320, -256 )
 roomName = "Mineshafts"
 roomColor = 8
 
 [node name="PSMineRoom13" parent="." index="13" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
-position = Vector2( 384, -320 )
+position = Vector2( 512, -192 )
 roomName = "Mineshafts"
 roomColor = 8
 
@@ -106,111 +107,113 @@ roomColor = 8
 
 [node name="PSMineRoom15" parent="." index="15" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
-position = Vector2( 192, -320 )
+position = Vector2( 448, -128 )
 roomName = "Mineshafts"
 roomColor = 8
 
 [node name="PSMineRoom16" parent="." index="16" instance=ExtResource( 1 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
-position = Vector2( 192, -384 )
+position = Vector2( 192, -320 )
 roomName = "Mineshafts"
 roomColor = 7
 
 [node name="PSMineRoom17" parent="." index="17" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
-position = Vector2( 256, -384 )
+position = Vector2( 512, -128 )
 roomName = "Mineshafts"
 roomColor = 8
 
 [node name="PSMineRoom18" parent="." index="18" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
-position = Vector2( 256, -448 )
+position = Vector2( 192, -384 )
 roomName = "Mineshafts"
 roomColor = 8
 
 [node name="PSMineRoom19" parent="." index="19" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
-position = Vector2( 128, -384 )
+position = Vector2( 128, -320 )
 roomName = "Mineshafts"
 roomColor = 8
 
 [node name="PSMineRoom20" parent="." index="20" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
-position = Vector2( 64, -384 )
+position = Vector2( 64, -320 )
 roomName = "Mineshafts"
 roomColor = 8
 
 [node name="PSMineRoom21" parent="." index="21" instance=ExtResource( 1 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
-position = Vector2( 64, -320 )
+position = Vector2( 64, -256 )
 roomName = "Mineshafts"
 roomID = "psmine_mine5"
+canSouth = false
 roomColor = 7
 gridColor = 8
 
 [node name="PSMineRoom22" parent="." index="22" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
-position = Vector2( 64, -192 )
+position = Vector2( 448, 0 )
 roomName = "Mineshafts"
 roomColor = 8
 
 [node name="PSMineRoom23" parent="." index="23" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
-position = Vector2( 0, -192 )
+position = Vector2( 512, 0 )
 roomName = "Mineshafts"
 roomColor = 8
 
 [node name="PSMineRoom24" parent="." index="24" instance=ExtResource( 1 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
-position = Vector2( -64, -192 )
+position = Vector2( 64, -192 )
 roomName = "Mineshafts"
 roomColor = 7
 
 [node name="PSMineRoom25" parent="." index="25" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
-position = Vector2( -64, -256 )
+position = Vector2( 0, -192 )
 roomName = "Mineshafts"
 roomColor = 8
 
 [node name="PSMineRoom26" parent="." index="26" instance=ExtResource( 1 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
-position = Vector2( -64, -320 )
+position = Vector2( -64, -192 )
 roomName = "Mineshafts"
 roomColor = 7
 
 [node name="PSMineRoom27" parent="." index="27" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
-position = Vector2( -64, -128 )
+position = Vector2( 64, -128 )
 roomName = "Mineshafts"
 roomColor = 8
 
 [node name="PSMineRoom28" parent="." index="28" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
-position = Vector2( -64, -64 )
+position = Vector2( 64, -64 )
 roomName = "Mineshafts"
 roomColor = 8
 
 [node name="PSMineRoom29" parent="." index="29" instance=ExtResource( 1 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
-position = Vector2( -128, -64 )
+position = Vector2( 0, -64 )
 roomName = "Mineshafts"
 roomColor = 7
 
 [node name="PSMineRoom30" parent="." index="30" instance=ExtResource( 1 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
-position = Vector2( 384, -384 )
+position = Vector2( 320, -320 )
 roomName = "Mineshafts"
+canWest = false
 roomColor = 7
 
 [node name="PSMineRoom31" parent="." index="31" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
-position = Vector2( 448, -384 )
+position = Vector2( 384, -320 )
 roomName = "Mineshafts"
 roomColor = 8
 
 [node name="PSMineRoom32" parent="." index="32" instance=ExtResource( 1 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
-position = Vector2( 512, -384 )
+position = Vector2( 448, -320 )
 roomName = "Mineshafts"
 roomID = "psmine_mine8"
 roomColor = 7
@@ -218,15 +221,16 @@ gridColor = 8
 
 [node name="PSMineRoom45" parent="." index="33" instance=ExtResource( 1 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
-position = Vector2( 384, -448 )
+position = Vector2( 320, -384 )
 roomName = "Mineshafts"
 roomID = "psmine_mine7"
+canWest = false
 roomColor = 7
 gridColor = 8
 
 [node name="PSMineRoom33" parent="." index="34" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
-position = Vector2( 256, -512 )
+position = Vector2( 320, -512 )
 roomName = "Mineshafts"
 roomColor = 8
 
@@ -238,9 +242,10 @@ roomColor = 8
 
 [node name="PSMineRoom35" parent="." index="36" instance=ExtResource( 1 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
-position = Vector2( 128, -512 )
+position = Vector2( 256, -384 )
 roomName = "Mineshafts"
 roomID = "psmine_mine6"
+canEast = false
 roomColor = 7
 gridColor = 8
 
@@ -264,7 +269,7 @@ roomColor = 8
 
 [node name="PSMineRoom39" parent="." index="40" instance=ExtResource( 1 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
-position = Vector2( -192, -448 )
+position = Vector2( -128, -192 )
 roomName = "Mineshafts"
 roomID = "psmine_mine3"
 roomColor = 7
@@ -272,7 +277,7 @@ gridColor = 8
 
 [node name="PSMineRoom40" parent="." index="41" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
-position = Vector2( -64, -384 )
+position = Vector2( -64, -256 )
 roomName = "Mineshafts"
 roomColor = 8
 
@@ -284,23 +289,27 @@ roomColor = 8
 
 [node name="PSMineRoom42" parent="." index="43" instance=ExtResource( 1 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
-position = Vector2( -64, -512 )
+position = Vector2( 0, -256 )
 roomName = "Mineshafts"
 roomID = "psmine_mine4"
+canEast = false
+canSouth = false
 roomColor = 7
 gridColor = 8
 
 [node name="PSMineRoom43" parent="." index="44" instance=ExtResource( 1 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
-position = Vector2( -128, 0 )
+position = Vector2( 0, -128 )
 roomName = "Mineshafts"
 roomID = "psmine_mine1"
+canNorth = false
+canEast = false
 roomColor = 7
 gridColor = 8
 
 [node name="PSMineRoom44" parent="." index="45" instance=ExtResource( 1 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
-position = Vector2( -192, -64 )
+position = Vector2( -64, -64 )
 roomName = "Mineshafts"
 roomID = "psmine_mine2"
 roomColor = 7

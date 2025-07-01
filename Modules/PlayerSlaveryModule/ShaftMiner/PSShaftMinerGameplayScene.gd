@@ -22,7 +22,8 @@ func _run():
 		aimCameraAndSetLocName(GM.pc.getLocation())
 		saynn("You are roaming around.")
 		
-
+		var canMineInfo:Array = GM.main.PS.canMineSmart(roomID)
+		var canMine:bool = canMineInfo[0]
 		
 		if(GM.world.canGoID(roomID, GameWorld.Direction.NORTH)):
 			addButtonAt(6, "North", "Go north", "go", [GameWorld.Direction.NORTH, Direction.North])
@@ -40,6 +41,8 @@ func _run():
 			addButtonAt(12, "East", "Go east",  "go", [GameWorld.Direction.EAST, Direction.East])
 		else:
 			addDisabledButtonAt(12, "East", "Can't go east")
+		if(GM.main.PS.dudes.size() > 0):
+			addButtonAt(7, "Idle", "Just idle around, letting other slaves work", "justIdle")
 		
 		if(GM.main.PS.nuggetsCarrying > 0):
 			if(GM.pc.getLocation() != GM.main.PS.LOC_ENTRANCE):
@@ -51,14 +54,22 @@ func _run():
 			if(GM.pc.getLocation() == GM.main.PS.LOC_ENTRANCE && GM.main.PS.nuggetsMinecart > 0):
 				addButton("Unload minecart", "Unload the minecart and receive credits for all the ore nuggets.", "doUnloadMinecart")
 			addButton("Stop pushing", "Stop pushing the minecart", "stoppush")
-		elif(!GM.main.PS.pushingMinecart && GM.main.PS.canMine()):
+		
+		if(canMine):
 			if(GM.pc.getStamina() > 0):
 				addButton("Mine!", "Start mining", "domine")
 			else:
 				addDisabledButton("Mine!", "You don't have any stamina to do this")
+		else:
+			if(canMineInfo[1] != ""):
+				addDisabledButton("Mine!", canMineInfo[1])
+			
 		if(!GM.main.PS.pushingMinecart && GM.pc.getLocation() == GM.main.PS.minecartLoc):
 			if(GM.main.PS.nuggetsCarrying > 0):
-				addButton("Load minecart", "Put all the ore nuggets into the minecart", "doLoadMinecart")
+				if(GM.main.PS.canLoadMinecart()):
+					addButton("Load minecart", "Put all the ore nuggets into the minecart", "doLoadMinecart")
+				else:
+					addDisabledButton("Load minecart", "The minecart is full!")
 			addButton("Push minecart", "Start pushing the minecart", "startpush")
 		
 		if(!GM.main.PS.pushingMinecart && GM.main.PS.hasNuggetsIn(GM.pc.getLocation())):
@@ -80,6 +91,10 @@ func _run():
 			else:
 				saynn("You are standing near a minecart that has "+str(GM.main.PS.nuggetsMinecart)+" ore "+("nugget" if GM.main.PS.nuggetsMinecart == 1 else "nuggets")+" in it.")
 		
+		if(!GM.main.PS.pushingMinecart):
+			if(GM.pc.getLocation() == GM.main.PS.LOC_CAGE):
+				addButton("End day", "Sleep in the cage", "doSleep")
+		
 	if(state == "pickup_screen"):
 		var amountOfNuggets:int = GM.main.PS.getNuggetsAmmountIn(GM.pc.getLocation())
 		saynn("There "+("is" if amountOfNuggets == 1 else "are")+" "+str(amountOfNuggets)+" "+("nugget" if amountOfNuggets == 1 else "nuggets")+" on the ground here!")
@@ -89,8 +104,20 @@ func _run():
 		
 		addButtonAt(14, "Enough picking up", "Stop picking up the nuggets", "roam")
 		
+	if(state == "doSleep"):
+		saynn("YOU SLEEP.")
 		
+		saynn("WELCOME TO THE NEW DAY.")
+		addButton("Continue", "Time to work!", "roam")
+	
+	if(state == "timeToSleep"):
+		saynn("It's way too late for any work.")
 		
+		saynn("One of the armed goons finds you and drags you off back to your cage.")
+		
+		addButton("End day", "Sleep in the cage", "doSleep")
+		
+	
 	if(state == "upgrades_menu"):
 		#saynn("Upgrades ("+GM.main.PS.getUpgradesCompletionStr()+"):")
 		
@@ -156,14 +183,17 @@ func _react(_action: String, _args):
 
 	if(_action == "doLoadMinecart"):
 		GM.main.PS.loadMinecartFromPC()
+		doTurn()
 		return
 
 	if(_action == "doUnloadMinecart"):
 		GM.main.PS.unloadMinecart()
+		doTurn()
 		return
 
 	if(_action == "dropNuggets"):
 		GM.main.PS.dropAllNuggets()
+		doTurn()
 		return
 
 	if(_action == "doPickUpNugget"):
@@ -192,6 +222,7 @@ func _react(_action: String, _args):
 
 	if(_action == "domine"):
 		GM.main.PS.doMine()
+		doTurn()
 		return
 	if(_action == "startpush"):
 		GM.main.PS.pushingMinecart = true
@@ -202,22 +233,45 @@ func _react(_action: String, _args):
 		addMessage("You have stopped pushing the minecart!")
 		return
 
+	if(_action == "justIdle"):
+		doTurn()
+		return
+
 	if(_action == "go"):
+		GM.main.PS.prevPCLoc = GM.pc.getLocation()
 		playAnimation(StageScene.Solo, "walk")
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, _args[0]))
-		processTime((30 if !GM.pc.hasBoundLegs() else 60))
+		#processTime(600)
 		aimCamera(GM.pc.location)
 		#GM.ES.triggerReact(Trigger.EnteringRoom, [GM.pc.location, _args[1]])
 		
-		GM.main.PS.processTurn()
-		GM.main.PS.updateLoc()
-		GM.main.PS.afterMove()
-		
-		if(!GM.main.checkTFs()):
-			GM.main.showLog()
+		doTurn(true)
+		GM.main.PS.prevPCLoc = GM.pc.getLocation()
 		return
-
+	
+	if(_action == "doSleep"):
+		GM.main.startNewDay()
+		GM.pc.afterSleepingInBed()
+		GM.main.PS.sleep()
+	
 	setState(_action)
+
+func doTurn(isMove:bool=false):
+	processTime(600)
+	if(isMove):
+		GM.main.PS.afterMove()
+	GM.main.PS.processTurn()
+	GM.main.PS.updateLoc()
+	
+	if(!GM.main.checkTFs()):
+		GM.main.showLog()
+	sleepCheck()
+
+func sleepCheck():
+	if(GM.main.isVeryLate()):
+		GM.pc.setLocation(GM.main.PS.LOC_CAGE)
+		aimCameraAndSetLocName(GM.pc.getLocation())
+		setState("timeToSleep")
 
 func supportsShowingPawns() -> bool:
 	return true
