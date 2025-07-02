@@ -15,6 +15,7 @@ gridColor = 6
 [node name="PSMineRoom2" parent="." index="1" instance=ExtResource( 1 )]
 position = Vector2( 192, 0 )
 roomName = "Mineshafts"
+roomID = "psmine_meet"
 
 [node name="PSMineRoom3" parent="." index="2" instance=ExtResource( 1 )]
 position = Vector2( 192, -64 )

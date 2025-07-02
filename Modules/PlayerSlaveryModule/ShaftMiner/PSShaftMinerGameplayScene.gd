@@ -1,5 +1,8 @@
 extends SceneBase
 
+var npc1ID:String = ""
+var npc2ID:String = ""
+
 #var meow = 1
 var genericInventoryScreenScene = preload("res://UI/Inventory/GenericInventoryScreen.tscn")
 var nuggetButtons:Array = []
@@ -10,6 +13,12 @@ func _init():
 func _reactInit():
 	GM.pc.setLocation("psmine_sleep")
 	setState("roam")
+
+func resolveCustomCharacterName(_charID):
+	if(_charID == "npc1"):
+		return npc1ID
+	if(_charID == "npc2"):
+		return npc2ID
 
 func _run():
 	var roomID:String = GM.pc.getLocation()
@@ -80,20 +89,103 @@ func _run():
 			
 			addButton("Upgrades", "See how you can upgrade your tools", "upgrades_menu")
 		
-		if(GM.main.PS.pushingMinecart):
-			if(GM.main.PS.nuggetsMinecart <= 0):
-				saynn("You are pushing an empty cart.")
-			else:
-				saynn("You are pushing a minecart that has "+str(GM.main.PS.nuggetsMinecart)+" ore "+("nugget" if GM.main.PS.nuggetsMinecart == 1 else "nuggets")+" in it.")
-		elif(GM.pc.getLocation() == GM.main.PS.minecartLoc):
-			if(GM.main.PS.nuggetsMinecart <= 0):
-				saynn("You are standing near an empty cart.")
-			else:
-				saynn("You are standing near a minecart that has "+str(GM.main.PS.nuggetsMinecart)+" ore "+("nugget" if GM.main.PS.nuggetsMinecart == 1 else "nuggets")+" in it.")
-		
+
 		if(!GM.main.PS.pushingMinecart):
 			if(GM.pc.getLocation() == GM.main.PS.LOC_CAGE):
 				addButton("End day", "Sleep in the cage", "doSleep")
+				
+				if(GM.main.PS.canHireDudes(1)):
+					addButton("Hire helper", "Hire one of the other slaves to work with you", "hire1_pickslave")
+				if(GM.main.PS.canHireDudes(2)):
+					addButton("Hire 2 helpers", "Hire two slaves to work with you", "hire2_pickslave")
+		
+		if(!GM.main.PS.pushingMinecart):
+			if(GM.pc.getLocation() == GM.main.PS.LOC_BOSS):
+				if(GM.main.PS.totalMined >= GM.main.PS.TOTAL_MINED_TARGET):
+					addButton("Freedom!", "You have mined enough ore in order to leave!", "do_win")
+				else:
+					addDisabledButton("Freedom!", "You haven't mined enough ore in order to get your freedom..")
+				
+				addButtonAt(14, "Mine", "Do some mining here", "do_mine_boss")
+		
+		var theTexts:Array = GM.main.PS.getTextsForLocFinal(roomID)
+		if(!theTexts.empty()):
+			say(Util.join(theTexts, ""))
+		
+	if(state == "hire1_menu"):
+		playAnimation(StageScene.Duo, "stand", {npc=npc1ID})
+		
+		saynn("You walk up to one of the slaves and offer them to work for you.")
+		
+		saynn("They agreed to work for you for a day.. but only if you let them fuck you!")
+		
+		sayn("Offer:")
+		sayn("They receive: Your body.")
+		saynn("You receive: Their help.")
+		
+		addButton("Agree", "Let them fuck you!", "hire1_sex")
+		addButton("Cancel", "You changed your mind", "hire_cancel")
+	
+	if(state == "hire1_after_sex"):
+		playAnimation(StageScene.Duo, "stand", {npc=npc1ID})
+		
+		saynn("What do you want them to do?")
+		
+		if(GM.main.PS.canHireDude(true)):
+			addButton("Shaft miner", "They will do the mining", "hire1_pick_miner")
+		else:
+			addDisabledButton("Shaft miner", "You have too many of these already")
+		if(GM.main.PS.canHireDude(false)):
+			addButton("Ore carrier", "They will carry the ore", "hire1_pick_carrier")
+		else:
+			addDisabledButton("Ore carrier", "You have too many of these already")
+	
+	if(state == "hire2_menu"):
+		playAnimation(StageScene.Duo, "stand", {pc=npc1ID, npc=npc2ID})
+		
+		saynn("You walk up to two of the slaves and offer them to work for you.")
+		
+		saynn("They agreed to work for you for a day.. but only if you let them fuck you.. at the same time!")
+		
+		sayn("Offer:")
+		sayn("They receive: Your body.")
+		saynn("You receive: Their help.")
+		
+		addButton("Agree", "Let them fuck you!", "hire2_sex")
+		addButton("Cancel", "You changed your mind", "hire_cancel")
+	
+	if(state == "hire2_after_sex"):
+		playAnimation(StageScene.Duo, "stand", {npc=npc1ID})
+		
+		saynn("What do you want them to do?")
+		
+		if(GM.main.PS.canHireDude(true)):
+			addButton("Shaft miner", "They will do the mining", "hire2_pick_miner")
+		else:
+			addDisabledButton("Shaft miner", "You have too many of these already")
+		if(GM.main.PS.canHireDude(false)):
+			addButton("Ore carrier", "They will carry the ore", "hire2_pick_carrier")
+		else:
+			addDisabledButton("Ore carrier", "You have too many of these already")
+	
+	if(state == "hire2_2_after_sex"):
+		playAnimation(StageScene.Duo, "stand", {npc=npc2ID})
+		
+		saynn("What do you want them to do?")
+		
+		if(GM.main.PS.canHireDude(true)):
+			addButton("Shaft miner", "They will do the mining", "hire2_2_pick_miner")
+		else:
+			addDisabledButton("Shaft miner", "You have too many of these already")
+		if(GM.main.PS.canHireDude(false)):
+			addButton("Ore carrier", "They will carry the ore", "hire2_2_pick_carrier")
+		else:
+			addDisabledButton("Ore carrier", "You have too many of these already")
+	
+	if(state == "do_win"):
+		saynn("YOU WON!")
+		
+		addButton("Leave", "Time to go", "stopMinigame")
 		
 	if(state == "pickup_screen"):
 		var amountOfNuggets:int = GM.main.PS.getNuggetsAmmountIn(GM.pc.getLocation())
@@ -116,7 +208,25 @@ func _run():
 		saynn("One of the armed goons finds you and drags you off back to your cage.")
 		
 		addButton("End day", "Sleep in the cage", "doSleep")
+	
+	if(state == "first_offer_slave"):
+		playAnimation(StageScene.Duo, "stand", {npc=npc1ID})
 		
+		saynn("One of the slaves calls you.")
+		
+		saynn("They say that they are willing to help with the mining.")
+		
+		saynn("..but only if you let them fuck you. Right here, right now.")
+		
+		addButton("Agree", "Let them fuck you!", "first_offer_sex")
+		addButton("Nah", "Just keep going. You can do everything by yourself", "first_offer_deny")
+	
+	if(state == "first_offer_aftersex"):
+		playAnimation(StageScene.Duo, "stand", {npc=npc1ID})
+		
+		saynn("The slave is gonna help you mine ore for one day!")
+		
+		addButton("Continue", "Time to go", "first_offer_spawn")
 	
 	if(state == "upgrades_menu"):
 		#saynn("Upgrades ("+GM.main.PS.getUpgradesCompletionStr()+"):")
@@ -133,7 +243,7 @@ func _run():
 			var upgradeInfo:Dictionary = GM.main.PS.UpgradesDB[upgradeID]
 			
 			entries[upgradeID] = {
-				name = upgradeInfo["name"],
+				name = upgradeInfo["name"]+" ("+str(upgradeInfo["cost"])+" credits)",
 				desc = upgradeInfo["desc"]+"\n\nCost: "+str(upgradeInfo["cost"])+" credits",
 				actions = [["unlock", "Buy"]] if canUnlock else [],
 			}
@@ -242,17 +352,116 @@ func _react(_action: String, _args):
 		playAnimation(StageScene.Solo, "walk")
 		GM.pc.setLocation(GM.world.applyDirectionID(GM.pc.location, _args[0]))
 		#processTime(600)
-		aimCamera(GM.pc.location)
+		aimCameraAndSetLocName(GM.pc.location)
 		#GM.ES.triggerReact(Trigger.EnteringRoom, [GM.pc.location, _args[1]])
 		
 		doTurn(true)
 		GM.main.PS.prevPCLoc = GM.pc.getLocation()
+		
+		if(GM.main.PS.shouldDoFirstSlaveOfferEvent()):
+			npc1ID = genSlaveID()
+			addCharacter(npc1ID)
+			setState("first_offer_slave")
+		
 		return
 	
 	if(_action == "doSleep"):
 		GM.main.startNewDay()
 		GM.pc.afterSleepingInBed()
 		GM.main.PS.sleep()
+	
+	if(_action == "do_mine_boss"):
+		addMessage("You try to hit the reinforced door but your current tool bounces right off.")
+		#TODO: Upgrade check, alt win
+		return
+	
+	if(_action == "hire1_pickslave"):
+		npc1ID = genSlaveID()
+		addCharacter(npc1ID)
+		setState("hire1_menu")
+		return
+	if(_action == "hire2_pickslave"):
+		npc1ID = genSlaveID()
+		npc2ID = genSlaveID()
+		addCharacter(npc1ID)
+		addCharacter(npc2ID)
+		setState("hire2_menu")
+		return
+	if(_action == "hire_cancel"):
+		if(npc1ID != ""):
+			npc1ID = ""
+		if(npc2ID != ""):
+			npc2ID = ""
+		clearCharacter()
+		setState("roam")
+		return
+	if(_action == "first_offer_deny"):
+		npc1ID = ""
+		npc2ID = ""
+		clearCharacter()
+		setState("roam")
+		return
+	if(_action == "first_offer_spawn"):
+		npc1ID = ""
+		clearCharacter()
+		setState("roam")
+		addMessage("You have hired a shaft miner slave for one day!")
+		GM.main.PS.spawnDude(true)
+		return
+	if(_action == "first_offer_sex"):
+		runScene("GenericSexScene", [npc1ID, "pc", SexType.DefaultSex, {SexMod.BondageDisabled: true}])
+		setState("first_offer_aftersex")
+		return
+	if(_action == "hire1_sex"):
+		runScene("GenericSexScene", [npc1ID, "pc", SexType.DefaultSex, {SexMod.BondageDisabled: true}])
+		setState("hire1_after_sex")
+		return
+	if(_action == "hire2_sex"):
+		runScene("GenericSexScene", [[npc1ID, npc2ID], "pc", SexType.DefaultSex, {SexMod.BondageDisabled: true}])
+		setState("hire2_after_sex")
+		return
+	if(_action == "hire1_pick_miner"):
+		npc1ID = ""
+		clearCharacter()
+		setState("roam")
+		addMessage("You have hired a shaft miner slave for one day!")
+		GM.main.PS.spawnDude(true)
+		return
+	if(_action == "hire1_pick_carrier"):
+		npc1ID = ""
+		clearCharacter()
+		setState("roam")
+		addMessage("You have hired an ore carrier slave for one day!")
+		GM.main.PS.spawnDude(false)
+		return
+	if(_action == "hire2_pick_miner"):
+		npc1ID = ""
+		clearCharacter()
+		setState("hire2_2_after_sex")
+		addMessage("You have hired a shaft miner slave for one day!")
+		GM.main.PS.spawnDude(true)
+		return
+	if(_action == "hire2_pick_carrier"):
+		npc1ID = ""
+		clearCharacter()
+		setState("hire2_2_after_sex")
+		addMessage("You have hired an ore carrier slave for one day!")
+		GM.main.PS.spawnDude(false)
+		return
+	if(_action == "hire2_2_pick_miner"):
+		npc1ID = ""
+		clearCharacter()
+		setState("roam")
+		addMessage("You have hired a shaft miner slave for one day!")
+		GM.main.PS.spawnDude(true)
+		return
+	if(_action == "hire2_2_pick_carrier"):
+		npc1ID = ""
+		clearCharacter()
+		setState("roam")
+		addMessage("You have hired an ore carrier slave for one day!")
+		GM.main.PS.spawnDude(false)
+		return
 	
 	setState(_action)
 
@@ -276,10 +485,15 @@ func sleepCheck():
 func supportsShowingPawns() -> bool:
 	return true
 
+func genSlaveID() -> String:
+	var theID:String = InmateGenerator.new().generate({NpcGen.Temporary: true}).getID()
+	return theID
+
 func saveData():
 	var data = .saveData()
 
 	data["nuggetButtons"] = nuggetButtons
+	data["npc1ID"] = npc1ID
 
 	return data
 
@@ -287,3 +501,4 @@ func loadData(data):
 	.loadData(data)
 
 	nuggetButtons = SAVE.loadVar(data, "nuggetButtons", [])
+	npc1ID = SAVE.loadVar(data, "npc1ID", "")
