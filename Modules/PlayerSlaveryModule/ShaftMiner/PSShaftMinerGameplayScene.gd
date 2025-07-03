@@ -53,11 +53,15 @@ func _run():
 		if(GM.main.PS.dudes.size() > 0):
 			addButtonAt(7, "Idle", "Just idle around, letting other slaves work", "justIdle")
 		
+		if(GM.main.PS.canRefresh()):
+			addButtonAt(13, "Refreshments", "Use the minecart's refreshments", "useRefresh")
+		
 		if(GM.main.PS.nuggetsCarrying > 0):
 			if(GM.pc.getLocation() != GM.main.PS.LOC_ENTRANCE):
 				addButtonAt(14, "Drop nuggets", "Drop all the nuggets that you are holding", "dropNuggets")
 			else:
 				addButton("Drop nuggets", "Drop all the nuggets that you are holding", "dropNuggets")
+		
 		
 		if(GM.main.PS.pushingMinecart):
 			if(GM.pc.getLocation() == GM.main.PS.LOC_ENTRANCE && GM.main.PS.nuggetsMinecart > 0):
@@ -93,6 +97,10 @@ func _run():
 		if(!GM.main.PS.pushingMinecart):
 			if(GM.pc.getLocation() == GM.main.PS.LOC_CAGE):
 				addButton("End day", "Sleep in the cage", "doSleep")
+				if(GM.main.PS.hasUpgrade("rest")):
+					addButton("Rest", "Rest in the cage for 2 hours and recover some stamina", "doRest")
+				#else:
+				#	addDisabledButton("Rest", "It's too late to rest")
 				
 				if(GM.main.PS.canHireDudes(1)):
 					addButton("Hire helper", "Hire one of the other slaves to work with you", "hire1_pickslave")
@@ -155,18 +163,20 @@ func _run():
 		addButton("Cancel", "You changed your mind", "hire_cancel")
 	
 	if(state == "hire2_after_sex"):
-		playAnimation(StageScene.Duo, "stand", {npc=npc1ID})
+		playAnimation(StageScene.Duo, "stand", {pc=npc1ID, npc=npc2ID})
 		
-		saynn("What do you want them to do?")
+		saynn("These two slaves will now work for you!")
 		
-		if(GM.main.PS.canHireDude(true)):
-			addButton("Shaft miner", "They will do the mining", "hire2_pick_miner")
-		else:
-			addDisabledButton("Shaft miner", "You have too many of these already")
-		if(GM.main.PS.canHireDude(false)):
-			addButton("Ore carrier", "They will carry the ore", "hire2_pick_carrier")
-		else:
-			addDisabledButton("Ore carrier", "You have too many of these already")
+		addButton("Continue", "Great news", "hire2_do")
+		
+#		if(GM.main.PS.canHireDude(true)):
+#			addButton("Shaft miner", "They will do the mining", "hire2_pick_miner")
+#		else:
+#			addDisabledButton("Shaft miner", "You have too many of these already")
+#		if(GM.main.PS.canHireDude(false)):
+#			addButton("Ore carrier", "They will carry the ore", "hire2_pick_carrier")
+#		else:
+#			addDisabledButton("Ore carrier", "You have too many of these already")
 	
 	if(state == "hire2_2_after_sex"):
 		playAnimation(StageScene.Duo, "stand", {npc=npc2ID})
@@ -250,7 +260,7 @@ func _run():
 		
 		if(!GM.main.PS.upgrades.empty()):
 			entries["=placeholderbuy="] = {
-				name = "= Unlocked Upgrades =",
+				name = " === Unlocked Upgrades ===",
 				desc = "A list of what you have upgraded.",
 			}
 			for upgradeID in GM.main.PS.upgrades:
@@ -262,12 +272,13 @@ func _run():
 		
 		var inventory = genericInventoryScreenScene.instance()
 		GM.ui.addFullScreenCustomControl("inventory", inventory)
-		inventory.setRightPanelStretchRation(0.75)
+		inventory.setRightPanelStretchRation(1.25)
 		inventory.setEntries(entries)
 		var _ok = inventory.connect("onInteractWith", self, "onMakeInteract")
 		
 		addButton("Back", "Enough browsing", "roam")
-
+	
+	
 func onMakeInteract(_upgradeID:String, _id, _args):
 	GM.main.pickOption("doBuyUpgrade", [_upgradeID])
 
@@ -310,6 +321,12 @@ func _react(_action: String, _args):
 		var theIndx:int = _args[0]
 		nuggetButtons.erase(theIndx)
 		GM.main.PS.pickupNugget()
+		
+		var extraPickUp:int = GM.main.PS.getExtraPickupAmount()
+		for _i in range(extraPickUp):
+			if(!nuggetButtons.empty()):
+				nuggetButtons.erase(RNG.pick(nuggetButtons))
+			GM.main.PS.pickupNugget()
 		
 		var amountOfNuggets:int = GM.main.PS.getNuggetsAmmountIn(GM.pc.getLocation())
 		if(amountOfNuggets <= 0):
@@ -357,6 +374,9 @@ func _react(_action: String, _args):
 		
 		doTurn(true)
 		GM.main.PS.prevPCLoc = GM.pc.getLocation()
+		
+		if(!GM.main.checkTFs()):
+			GM.main.showLog()
 		
 		if(GM.main.PS.shouldDoFirstSlaveOfferEvent()):
 			npc1ID = genSlaveID()
@@ -449,18 +469,38 @@ func _react(_action: String, _args):
 		GM.main.PS.spawnDude(false)
 		return
 	if(_action == "hire2_2_pick_miner"):
-		npc1ID = ""
+		npc2ID = ""
 		clearCharacter()
 		setState("roam")
 		addMessage("You have hired a shaft miner slave for one day!")
 		GM.main.PS.spawnDude(true)
 		return
 	if(_action == "hire2_2_pick_carrier"):
-		npc1ID = ""
+		npc2ID = ""
 		clearCharacter()
 		setState("roam")
 		addMessage("You have hired an ore carrier slave for one day!")
 		GM.main.PS.spawnDude(false)
+		return
+	if(_action == "hire2_do"):
+		npc1ID = ""
+		npc2ID = ""
+		clearCharacter()
+		setState("roam")
+		addMessage("You have hired a shaft miner and an ore carrier slaves for one day!")
+		GM.main.PS.spawnDude(true)
+		GM.main.PS.spawnDude(false)
+		return
+	
+	if(_action == "useRefresh"):
+		GM.main.PS.doRefresh()
+		return
+	
+	if(_action == "doRest"):
+		processTime(60*60*2)
+		GM.main.PS.useStamina(-50)
+		for _i in range(12):
+			doTurn()
 		return
 	
 	setState(_action)
@@ -472,8 +512,6 @@ func doTurn(isMove:bool=false):
 	GM.main.PS.processTurn()
 	GM.main.PS.updateLoc()
 	
-	if(!GM.main.checkTFs()):
-		GM.main.showLog()
 	sleepCheck()
 
 func sleepCheck():

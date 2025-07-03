@@ -16,6 +16,8 @@ const MiningLocs = [
 	"psmine_mine1", "psmine_mine2", "psmine_mine3", "psmine_mine4", "psmine_mine5", "psmine_mine6", "psmine_mine7", "psmine_mine8",
 ]
 
+const debugFreeUpdates = false #TODO: Set this to false before ship
+
 const UpgradesDB = {
 	"headlight": {
 		name = "Headlight",
@@ -33,13 +35,13 @@ const UpgradesDB = {
 	"pick2": {
 		name = "Notched pickaxe",
 		desc = "Mining will produce 2 ore nuggets.",
-		cost = 100,
+		cost = 20,
 		reqs = ["pick1"],
 	},
 	"pick3": {
 		name = "Basic drill",
-		desc = "Mining uses 50% less stamina!",
-		cost = 2000,
+		desc = "Mining will produce 3 ore nuggets!",
+		cost = 500,
 		reqs = ["pick2"],
 	},
 	"pick4": {
@@ -48,30 +50,170 @@ const UpgradesDB = {
 		cost = 50000,
 		reqs = ["pick3"],
 	},
+	"pick5": {
+		name = "Super Mega drill",
+		desc = "This drill can get through the world's strongest materials with ease, even Voidsteel!",
+		cost = 1500000,
+		reqs = ["pick3"],
+	},
 	
 	"cart1": {
 		name = "Minecart storage 1",
-		desc = "Minecart can hold 50 ore nuggets.",
+		desc = "Minecart can hold 20 ore nuggets.",
 		cost = 20,
-		reqs = ["headlight"],
+		reqs = ["pick1"],
 	},
 	"cart2": {
 		name = "Minecart storage 2",
-		desc = "Minecart can hold 250 ore nuggets.",
-		cost = 300,
+		desc = "Minecart can hold 100 ore nuggets.",
+		cost = 60,
 		reqs = ["cart1"],
 	},
 	"cart3": {
 		name = "Minecart storage 3",
 		desc = "Minecart can hold 1000 ore nuggets.",
-		cost = 6000,
+		cost = 1000,
 		reqs = ["cart2"],
+	},
+	
+	"gloves1": {
+		name = "Grabby gloves",
+		desc = "Allows you (and other slaves) to pick up 2 nuggets at once.",
+		cost = 30,
+		reqs = ["pick1"],
+	},
+	"gloves2": {
+		name = "Grabbier Gloves",
+		desc = "Allows you (and other slaves) to pick up 5 nuggets at once.",
+		cost = 90,
+		reqs = ["gloves1"],
+	},
+	
+	"minecartscoop": {
+		name = "Minecart Scoop",
+		desc = "Pushing the minecart over nuggets will make it automatically pick them up.",
+		cost = 600,
+		reqs = ["cart2", "gloves2"],
+	},
+	
+	"minecartcredit": {
+		name = "Careful delivery",
+		desc = "Delivering ore with your minecart makes it bring 2x the credits!",
+		cost = 250,
+		reqs = ["cart2"],
+	},
+	
+	"minecartrefreshments1": {
+		name = "Refreshments",
+		desc = "The minecart has a water bottle taped to it. It allows you to fully refresh your stamina once per day.",
+		cost = 200,
+		reqs = ["cart1"],
+	},
+	"minecartrefreshments2": {
+		name = "Extra Refreshments",
+		desc = "The minecart has a little fridge installed. Using it allows you to fully refresh your stamina 3 times a day.",
+		cost = 3000,
+		reqs = ["minecartrefreshments1", "cart2"],
+	},
+	
+	"moreCreds1": {
+		name = "Ore processing 1",
+		desc = "Install basic ore processing (metal pans), allowing each nugget to get sold for 3 credits instead of 1.",
+		cost = 20,
+		reqs = ["headlight"],
+	},
+	"moreCreds2": {
+		name = "Ore processing 2",
+		desc = "Install better ore processing (magnets), allowing each nugget to get sold for 10 credits.",
+		cost = 222,
+		reqs = ["moreCreds1", "ore1"],
+	},
+	"moreCreds3": {
+		name = "Ore processing 3",
+		desc = "Install better ore processing (crushers), allowing each nugget to get sold for 20 credits.",
+		cost = 500,
+		reqs = ["moreCreds2"],
+	},
+	"moreCreds4": {
+		name = "Ore processing 4",
+		desc = "Install better ore processing (sorting bots), allowing each nugget to get sold for 50 credits.",
+		cost = 2500,
+		reqs = ["moreCreds3"],
+	},
+	"moreCreds5": {
+		name = "Ore processing 5",
+		desc = "Install better ore processing (bluespace extractors), allowing each nugget to get sold for 100 credits.",
+		cost = 10000,
+		reqs = ["moreCreds4"],
+	},
+	"moreCreds6": {
+		name = "Ore processing 6",
+		desc = "Install better ore processing (weed-high kobols), allowing each nugget to get sold for 1000 credits.",
+		cost = 69420,
+		reqs = ["moreCreds5"],
+	},
+	
+	"dudes1": {
+		name = "Sex toys",
+		desc = "Buy some sex toys for other slaves. This gives you 1x shaft miner and 1x ore carrier every morning.",
+		cost = 30,
+		reqs = ["pick1"],
+	},
+	"dudes2": {
+		name = "Fuck machines",
+		desc = "Install some fuck machines. This gives you 2x shaft miner and 1x ore carrier every morning.",
+		cost = 69,
+		reqs = ["dudes1"],
+	},
+	"dudes3": {
+		name = "Whores",
+		desc = "Hire some of the slaves as sluts for the other slaves. This gives you 2x shaft miner and 1x ore carrier every morning.",
+		cost = 80,
+		reqs = ["dudes2"],
+	},
+	"dudes4": {
+		name = "Bluespace fleshlights",
+		desc = "Hand out some portal panties and bluespace fleshlights to slaves. This gives you 2x shaft miner and 1x ore carrier every morning.",
+		cost = 420,
+		reqs = ["dudes3"],
+	},
+	"dudes5": {
+		name = "VR porn",
+		desc = "Give the slaves some portable VR headsets that are totally not hypnovisors. This gives you 2x shaft miner and 1x ore carrier every morning.",
+		cost = 1569,
+		reqs = ["dudes4"],
+	},
+	
+	"ore1": {
+		name = "Scanners 1",
+		desc = "Install some basic ore scanners. Makes the mining zones have 2x as much ore in them on average.",
+		cost = 100,
+		reqs = ["pick2"],
+	},
+	"ore2": {
+		name = "Scanners 2",
+		desc = "Install better ore scanners. Makes the mining zones have 3x as much ore in them on average.",
+		cost = 2000,
+		reqs = ["ore1", "moreCreds2"],
+	},
+	"ore3": {
+		name = "Scanners 3",
+		desc = "Install the best ore scanners. Makes the mining zones have 5x as much ore in them on average.",
+		cost = 4000,
+		reqs = ["ore2"],
+	},
+	
+	"rest": {
+		name = "Comfy cages",
+		desc = "Install better cages for you and other slaves. Allows you to rest for 2 hours to skip time and regain some stamina",
+		cost = 500,
+		reqs = ["dudes2"],
 	},
 }
 
 var day:int = 0
 var totalMined:int = 0
-const TOTAL_MINED_TARGET = 10
+const TOTAL_MINED_TARGET = 1000000
 
 var nuggets:Array = [] # [id, indx]
 var upgrades:Dictionary = {} # upgradeID = true
@@ -80,6 +222,7 @@ var minecartLoc:String = "psmine_cartspawn"
 var pushingMinecart:bool = false
 var nuggetsCarrying:int = 0
 var nuggetsMinecart:int = 0
+var refreshUsed:int = 0
 
 var nextUniquieID:int = 0
 
@@ -112,10 +255,13 @@ func getTextsForLoc(_loc:String):
 			sayn("Hired shaft miners: "+str(getDudeAmount(true))+"/"+str(getMaxDudeAmount(true)))
 			saynn("Hired ore carriers: "+str(getDudeAmount(false))+"/"+str(getMaxDudeAmount(false)))
 	if(_loc == LOC_BOSS):
-		sayn("Total amount of ore mined: "+str(totalMined))
-		saynn("Target to get freedom: "+str(TOTAL_MINED_TARGET))
+		var thePers:float = float(totalMined) / float(TOTAL_MINED_TARGET)
+		sayn("Total amount of credits earned: "+str(totalMined))
+		saynn("Target to get freedom: "+str(TOTAL_MINED_TARGET)+" ("+str(Util.roundF(thePers*100.0, 1))+"%)")
 
 func getToolName() -> String:
+	if(hasUpgrade("pick5")):
+		return "Super Mega drill"
 	if(hasUpgrade("pick4")):
 		return "Mega drill"
 	if(hasUpgrade("pick3")):
@@ -210,13 +356,23 @@ func canHireDude(_isMiner:bool) -> bool:
 
 func getDudeSpawnOnSleep(_isMiner:bool) -> int:
 	var result:int = 0
+	if(hasUpgrade("dudes1")):
+		result += 1
+	if(hasUpgrade("dudes2")):
+		result += 1 + (1 if _isMiner else 0)
+	if(hasUpgrade("dudes3")):
+		result += 1 + (1 if _isMiner else 0)
+	if(hasUpgrade("dudes4")):
+		result += 1 + (1 if _isMiner else 0)
+	if(hasUpgrade("dudes5")):
+		result += 1 + (1 if _isMiner else 0)
 	return result
 
 func getMaxDudeAmount(_isMiner:bool) -> int:
 	var result:int = 0
 	if(didFirstOfferEvent):
 		result += 1
-	return result
+	return result + getDudeSpawnOnSleep(_isMiner)
 
 func getDudeAmount(_isMiner:bool) -> int:
 	var result:int = 0
@@ -287,6 +443,14 @@ func processDude(dude:Dude):
 		if(hasNuggetsIn(dude.loc) && canPickup):
 			removeNuggetIn(dude.loc)
 			dude.nuggets += 1
+			if(hasUpgrade("gloves1") && hasNuggetsIn(dude.loc) && (dude.nuggets < 10)):
+				removeNuggetIn(dude.loc)
+				dude.nuggets += 1
+			if(hasUpgrade("gloves2") && getNuggetsAmmountIn(dude.loc)>=3 && (dude.nuggets < 10)):
+				removeNuggetIn(dude.loc)
+				removeNuggetIn(dude.loc)
+				removeNuggetIn(dude.loc)
+				dude.nuggets += 3
 			return
 		
 		if(dude.loc == LOC_ENTRANCE && dude.nuggets > 0):
@@ -316,8 +480,8 @@ func dudeDropNuggets(_dude:Dude):
 	if(_dude.nuggets <= 0):
 		return
 	if(_dude.loc == LOC_ENTRANCE):
-		addTotalMined(_dude.nuggets)
 		var theCreds:int = getNuggetCredits(_dude.nuggets)
+		addTotalMined(theCreds)
 		addCredits(theCreds)
 		addMessage("A carrier has deposited "+str(_dude.nuggets)+" "+("nugget" if _dude.nuggets == 1 else "nuggets")+" of ore, earning you "+str(theCreds)+" "+("credit" if theCreds == 1 else "credits")+"!")
 	else:
@@ -342,18 +506,35 @@ func getTextsForLocFinal(_loc:String) -> Array:
 	getTextsForLoc(_loc)
 	return outputTexts
 
+func getMiningZonesMod() -> int:
+	if(hasUpgrade("ore3")):
+		return 5
+	if(hasUpgrade("ore2")):
+		return 3
+	if(hasUpgrade("ore1")):
+		return 2
+	return 1
+
 func updateMiningZones():
 	oreLeft.clear()
 	for zone in MiningLocs:
-		oreLeft[zone] = RNG.randi_range(1, 8)
+		var toAdd:int = RNG.randi_range(2, 4)
+		if(RNG.chance(80)):
+			toAdd += RNG.randi_range(1, 2)
+		if(RNG.chance(60)):
+			toAdd += RNG.randi_range(1, 2)
+		if(RNG.chance(40)):
+			toAdd += RNG.randi_range(1, 2)
+		oreLeft[zone] = toAdd * getMiningZonesMod()
 		
-	for _i in range(RNG.randi_range(1, 2)):
+	for _i in range(RNG.randi_range(1, 2)*getMiningZonesMod()):
 		var randomZone:String = RNG.pick(MiningLocs)
 		for _i2 in range(RNG.randi_range(1, 2)):
 			spawnNugget(randomZone)
 
 func sleep():
 	day += 1
+	refreshUsed = 0
 	minecartLoc = "psmine_cartspawn"
 	pushingMinecart = false
 	nuggetsCarrying = 0
@@ -367,6 +548,7 @@ func sleep():
 	GM.pc.addStamina(GM.pc.getMaxStamina())
 	GM.pc.addPain(-GM.pc.getPain())
 	updateCartIcon()
+	GM.world.moveEntity("ps_cart", minecartLoc)
 	updateMiningZones()
 	
 	#upgrade stuff here
@@ -402,6 +584,8 @@ func canSeeUpgrade(_upgradeID:String) -> bool:
 		return false
 	if(upgrades.has(_upgradeID)):
 		return false
+	if(_upgradeID == "dudes1" && !didFirstOfferEvent):
+		return false
 	var upgradeInfo:Dictionary = UpgradesDB[_upgradeID]
 	var theReqs:Array = upgradeInfo["reqs"] if upgradeInfo.has("reqs") else []
 	
@@ -429,7 +613,7 @@ func canUnlockUpgrade(_upgradeID:String) -> bool:
 	var upgradeInfo:Dictionary = UpgradesDB[_upgradeID]
 	var theCost:int = upgradeInfo["cost"]
 	
-	if(getCredits() < theCost):
+	if(getCredits() < theCost && !debugFreeUpdates):
 		return false
 	return true
 
@@ -442,7 +626,8 @@ func payUnlockUpgrade(_upgradeID:String):
 	var theCost:int = upgradeInfo["cost"]
 
 	unlockUpgrade(_upgradeID)
-	addCredits(-theCost)
+	if(!debugFreeUpdates):
+		addCredits(-theCost)
 
 func getUpgradesCanSee() -> Array:
 	var result:Array = []
@@ -484,6 +669,9 @@ func getPCViewDistance() -> float:
 	return 40.0
 
 func afterMove():
+	if(pushingMinecart):
+		minecartLoc = GM.pc.getLocation()
+	
 	if(nuggetsCarrying > 0):
 		if(GM.pc.getLocation() != minecartLoc || pushingMinecart):
 			var staminaUse:int = nuggetsCarrying * 3
@@ -491,7 +679,20 @@ func afterMove():
 			useStamina(staminaUse)
 			if(!hasStamina()):
 				dropAllNuggets()
-
+	
+	if(pushingMinecart && hasUpgrade("minecartscoop")):
+		var theNuggetAmount:int = getNuggetsAmmountIn(minecartLoc)
+		if(theNuggetAmount > 0):
+			var freeSpace:int = Util.maxi(0, getMinecartCapacity() - theNuggetAmount)
+			if(freeSpace >= theNuggetAmount):
+				addMessage("The minecart scoop has picked up "+str(theNuggetAmount)+" "+("nugget" if theNuggetAmount == 1 else "nuggets")+"!")
+				removeXNuggetsIn(minecartLoc, theNuggetAmount)
+				nuggetsMinecart += theNuggetAmount
+			elif(freeSpace > 0):
+				addMessage("The minecart scoop has picked up "+str(freeSpace)+" "+("nugget" if freeSpace == 1 else "nuggets")+"! The minecart is now full.")
+				removeXNuggetsIn(minecartLoc, freeSpace)
+				nuggetsMinecart += freeSpace
+	
 func processTurn():
 	for dude in dudes:
 		processDude(dude)
@@ -519,12 +720,14 @@ func canMineLoc(theLoc:String) -> bool:
 func canMineSmart(theLoc:String) -> Array:
 	if(!MiningLocs.has(theLoc)):
 		return [false, ""]
-	if(pushingMinecart):
-		return [false, "You can't mine if you are pushing a minecart"]
-	
+		
 	var theOreLeft:int = oreLeft[theLoc] if oreLeft.has(theLoc) else 0
 	if(theOreLeft <= 0):
 		return [false, "There is no ore left here"]
+		
+	if(pushingMinecart):
+		return [false, "You can't mine if you are pushing a minecart"]
+	
 	return [true, ""]
 
 func doMineOutSpot(_loc:String):
@@ -553,16 +756,18 @@ func doMineSpotUpgraded(_loc:String):
 	doMineSpot(_loc)
 	if(hasUpgrade("pick2")):
 		doMineSpot(_loc)
+	if(hasUpgrade("pick3")):
+		doMineSpot(_loc)
 
 func doMine():
 	var mineChance:float = 40.0
 	if(hasUpgrade("pick1")):
 		mineChance = 100.0
 	
-	if(hasUpgrade("pick3")):
-		useStamina(5)
-	else:
-		useStamina(10)
+	#if(hasUpgrade("pick3")):
+	#	useStamina(5)
+	#else:
+	useStamina(10)
 	
 	if(RNG.chance(mineChance)):
 		doMineSpotUpgraded(GM.pc.getLocation())
@@ -571,12 +776,25 @@ func doMine():
 		addMessage("You did some mining but failed to find any ore!"+(" The deposit has been mined out." if !hasOreIn(GM.pc.getLocation()) else ""))
 
 func getNuggetCredits(_am:int) -> int:
+	if(hasUpgrade("moreCreds6")):
+		return _am * 1000
+	if(hasUpgrade("moreCreds5")):
+		return _am * 100
+	if(hasUpgrade("moreCreds4")):
+		return _am * 50
+	if(hasUpgrade("moreCreds3")):
+		return _am * 20
+	if(hasUpgrade("moreCreds2")):
+		return _am * 10
+	if(hasUpgrade("moreCreds1")):
+		return _am * 3
+	
 	return _am
 
 func dropAllNuggets():
 	if(GM.pc.getLocation() == LOC_ENTRANCE):
-		addTotalMined(nuggetsCarrying)
 		var credAmount:int = getNuggetCredits(nuggetsCarrying)
+		addTotalMined(credAmount)
 		addCredits(credAmount)
 		addMessage("You have unloaded all your nuggets and got "+str(credAmount)+" credits for it!")
 		nuggetsCarrying = 0
@@ -630,7 +848,14 @@ func removeNuggetIn(_loc:String):
 			return
 		_i += 1
 
+func removeXNuggetsIn(_loc:String, _am:int):
+	while(_am > 0):
+		removeNuggetIn(_loc)
+		_am -= 1
+
 func pickupNugget():
+	if(!hasNuggetsIn(GM.pc.getLocation())):
+		return
 	removeNuggetIn(GM.pc.getLocation())
 	nuggetsCarrying += 1
 
@@ -642,7 +867,10 @@ func addMessage(_text:String):
 	GM.main.addMessage(_text)
 
 func useStamina(_howMuch:int):
-	GM.pc.addStamina(-_howMuch)
+	var theMaxStamina:int = GM.pc.getMaxStamina()
+	var theMod:float = float(theMaxStamina) / 100.0
+	
+	GM.pc.addStamina(-int(ceil(_howMuch*theMod)))
 
 func hasStamina() -> bool:
 	return GM.pc.getStamina() > 0
@@ -698,12 +926,39 @@ func loadMinecartFromDude(_dude:Dude) -> bool:
 	return true
 
 func unloadMinecart():
-	addTotalMined(nuggetsMinecart)
-	var credAmount:int = nuggetsMinecart
+	var credAmount:int = getNuggetCredits(nuggetsMinecart)
+	if(hasUpgrade("minecartcredit")):
+		credAmount *= 2
+	addTotalMined(credAmount)
 	addCredits(credAmount)
 	addMessage("You have unloaded the minecart and got "+str(credAmount)+" credits for it!")
 	nuggetsMinecart = 0
 	updateCartIcon()
+
+func canRefresh() -> bool:
+	if(GM.pc.getStaminaLevel() >= 1.0):
+		return false
+	if(GM.pc.getLocation() != minecartLoc):
+		return false
+	
+	if(hasUpgrade("minecartrefreshments2") && refreshUsed < 3):
+		return true
+	if(hasUpgrade("minecartrefreshments1") && refreshUsed < 1):
+		return true
+	return false
+
+func doRefresh():
+	refreshUsed += 1
+	GM.pc.addStamina(GM.pc.getMaxStamina())
+	addMessage("You drink some water and feel refreshed!")
+
+func getExtraPickupAmount() -> int:
+	if(hasUpgrade("gloves2")):
+		return 4
+	if(hasUpgrade("gloves1")):
+		return 1
+	
+	return 0
 
 func saveData() -> Dictionary:
 	var dudesData:Array = []
@@ -723,6 +978,7 @@ func saveData() -> Dictionary:
 		didFirstOfferEvent = didFirstOfferEvent,
 		pushingMinecart = pushingMinecart,
 		dudes = dudesData,
+		refreshUsed = refreshUsed,
 	}
 
 func loadData(_data:Dictionary):
@@ -744,6 +1000,7 @@ func loadData(_data:Dictionary):
 	totalMined = SAVE.loadVar(_data, "totalMined", 0)
 	didFirstOfferEvent = SAVE.loadVar(_data, "didFirstOfferEvent", false)
 	pushingMinecart = SAVE.loadVar(_data, "pushingMinecart", false)
+	refreshUsed = SAVE.loadVar(_data, "refreshUsed", 0)
 	
 	var dudesData:Array = SAVE.loadVar(_data, "dudes", [])
 	for dudeEntry in dudesData:
