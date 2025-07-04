@@ -1,0 +1,150 @@
+extends SceneBase
+
+var knowsMirri = false
+var isFirstTime = true
+
+func _init():
+	sceneID = "PlayerSlaveryStartMirriScene"
+
+func _run():
+	if(state == ""):
+		playAnimation(StageScene.GivingBirth, "idle", {pc="pc"})
+		aimCameraAndSetLocName("solitary_cell")
+		saynn("Your head is ringing.. everything throbs in time with your heartbeat.. and not in a good way. The coarse concrete under you offers cold support as your mind slowly comes back to senses.")
+
+		saynn("Time to open your eyes.")
+
+		saynn("You force your vision into focus. You're in one of the solitary cells.. tiny cubicles of justice for inmates who've earned a special kind of punishment.")
+
+		saynn("A voice pulls your attention away from the confined space.")
+
+		saynn("[say=mirri]Someone's been a bad {pc.girl}..[/say]")
+
+		saynn("Your ears snap towards the reinforced glass wall, where the feminine voice has revealed itself. Mean blue eyes are staring at you from the dim corridor behind. Seeing the armored silhouette is enough to know that you are screwed.")
+
+		addButton("Get up", "Enough being lazy", "do_get_up")
+	if(state == "do_get_up"):
+		playAnimation(StageScene.Duo, "stand", {npc="mirri"})
+		addCharacter("mirri")
+		saynn("You push yourself to your feet, back against the wall, muscles disobeying slightly. As your sight adjusts, you begin to see more of the guard.. a strange-looking guard, for sure. She is missing what feels like half of her armor.")
+
+		saynn("Red ponytail.. some obvious human features.. but with a sprinkle of uniqueness in the form of feline ears and tail.")
+
+		saynn("[say=mirri]Scared?[/say]")
+
+		saynn("[say=pc]Should I be?[/say]")
+
+		saynn("[say=mirri]I don't know, should you~?[/say]")
+
+		saynn("She tilts her head, the transparent surface between you and her means you can't reach her even if you wanted to.")
+
+		saynn("[say=pc]C'mon, what is happening? Am I getting punished?[/say]")
+
+		saynn("The feline smiles and looks at something under her forearm's armor.")
+
+		saynn("[say=mirri]Depends on how you look at it. Anything is an improvement, if compared to this AlphaCorp shithole.[/say]")
+
+		saynn("She looks around and then reaches into her pouches. The guard seems to be missing her pants.. but she doesn't mind it.")
+
+		saynn("[say=pc]What do you..[/say]")
+
+		saynn("You hear a click.. followed by a bright flash.")
+
+		addButton("Continue", "See what happens next", "get_stripped")
+	if(state == "get_stripped"):
+		playAnimation(StageScene.Duo, "defeat", {npc="mirri"})
+		saynn("The familiar throbbing pain makes a comeback. Everything around you acquires a sharp white tint to it which is hard to look at. The floor isn't so nice this time, hitting you hard.")
+
+		saynn("[say=pc]Argh.. fuck..[/say]")
+
+		saynn("The guard steps into your cell.. and kicks you further down, adding to the sea of unpleasant sensations.")
+
+		saynn("[say=mirri]Don't move a muscle, fucker. I'm done playing games.[/say]")
+
+		saynn("Guard brutality continues with her running her knee into your stomach while her clawed hands strip you of all of your items..")
+
+		saynn("[say=mirri]You won't need this where you are going.[/say]")
+
+		saynn("Resisting only makes her wrench your arms behind your back, twisting them almost to their snapping point. As soon the whiteness in your eyes begins to dissipate.. another flash follows.")
+
+		saynn("[say=pc]The fuck are you doing.. ugh..[/say]")
+
+		saynn("[say=mirri]Say goodbye to this place.[/say]")
+
+		saynn("You hear noise a few feet away.. before the guard begins dragging you off towards it.")
+
+		addButton("Continue", "See what happens next", "get_tpd")
+	if(state == "get_tpd"):
+		playAnimation(StageScene.HangingDuo, "idle", {pc="pc", npc="mirri", bodyState={naked=true}})
+		aimCameraAndSetLocName("market_market")
+		saynn("The next moment you know it, you are getting pulled up by your chained wrists.. forcing you to stand on your toes.")
+
+		saynn("Your head feels like it's about to split in two..")
+
+		saynn("But a slap brings you back from the dream land.")
+
+		saynn("[say=mirri]Hey! Look at me.[/say]")
+
+		saynn("You open your eyes.. and see an entirely different environment surrounding you. Extremely high ceiling.. black wooden floor.. long hanging curtains behind the catgirl, blocking something.")
+
+		saynn("[say=pc]Wait.. where is the..[/say]")
+
+		saynn("Another slap.. ow.. followed by the guard grabbing your chin.")
+
+		saynn("[say=mirri]Your prison? Far away. You are on Syndicate territory now, little bitch.[/say]")
+
+		saynn("Her words are like a bucket of ice.. In one single moment, your whole life got turned upside down.")
+
+		saynn("[say=pc]The fuck..[/say]")
+
+		saynn("[say=mirri]Even worse for you, I'm a slaver.[/say]")
+
+		saynn("You hear shuffling behind the curtains.. several voices. A mild panic spreads through your body as you realize.. this is a stage.. an auction stage.")
+
+		saynn("[say=pc]Hey, I don't.. ugh..[/say]")
+
+		saynn("Her quick fist beats the air out of you.")
+
+		saynn("[say=mirri]Shut your pretty mouth, AlphaCorp slave. I don't have time for foreplay, the event is about to start. Strap in and pretend to look nice. I will get more digital coins.. and you.. maybe you will even enjoy your new fate.. You seem like the type.[/say]")
+
+		saynn("The guard.. or whoever she is.. jumps onto a little raised platform.. and spreads her arms, welcoming the bright light gradually illuminating the stage, the curtains sliding to the sides.")
+
+		saynn("[say=mirri]Hi! I mean.. Welcome! Welcome to the Blacktail Market! We got a really rare treat for you today.[/say]")
+
+		saynn("The projector light now basks you in its attention specifically..")
+
+		addButton("Continue", "See what happens next..", "start_auction")
+
+func _react(_action: String, _args):
+	if(_action == "endthescene"):
+		endScene()
+		return
+
+	if(_action == "do_get_up"):
+		processTime(3*60)
+
+	if(_action == "get_stripped"):
+		processTime(3*60)
+
+	if(_action == "get_tpd"):
+		processTime(3*60)
+
+	if(_action == "start_auction"):
+		runScene("PlayerSlaveryAuctionScene")
+		return
+
+	setState(_action)
+
+func saveData():
+	var data = .saveData()
+
+	data["knowsMirri"] = knowsMirri
+	data["isFirstTime"] = isFirstTime
+
+	return data
+
+func loadData(data):
+	.loadData(data)
+
+	knowsMirri = SAVE.loadVar(data, "knowsMirri", false)
+	isFirstTime = SAVE.loadVar(data, "isFirstTime", true)

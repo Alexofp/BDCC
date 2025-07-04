@@ -54,7 +54,7 @@ const UpgradesDB = {
 		name = "Super Mega drill",
 		desc = "This drill can get through the world's strongest materials with ease, even Voidsteel!",
 		cost = 1500000,
-		reqs = ["pick3"],
+		reqs = ["pick4"],
 	},
 	
 	"cart1": {
