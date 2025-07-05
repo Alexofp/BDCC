@@ -98,7 +98,7 @@ const UpgradesDB = {
 	
 	"minecartcredit": {
 		name = "Careful delivery",
-		desc = "Delivering ore with your minecart makes it bring 2x the credits!",
+		desc = "Delivering ore with your minecart makes you earn 2x the credits!",
 		cost = 250,
 		reqs = ["cart2"],
 	},

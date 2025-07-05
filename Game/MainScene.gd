@@ -32,6 +32,7 @@ var SAB:SlaveAuctionBidders = SlaveAuctionBidders.new()
 var SCI:Science = Science.new()
 var DrugDenRun:DrugDen
 var PS:PlayerSlaveryBase
+var PSH:PlayerSlaveryHolder = PlayerSlaveryHolder.new()
 
 var staticCharacters = {}
 var charactersToUpdate = {}
@@ -468,6 +469,7 @@ func saveData():
 	data["relationshipSystem"] = RS.saveData()
 	data["auctionBidders"] = SAB.saveData()
 	data["science"] = SCI.saveData()
+	data["playerSlaveryHolder"] = PSH.saveData()
 	data["drugDen"] = DrugDenRun.saveData() if DrugDenRun != null else null
 	if(PS):
 		data["playerSlavery"] = {
@@ -511,6 +513,7 @@ func loadData(data):
 	RS.loadData(SAVE.loadVar(data, "relationshipSystem", {}))
 	SAB.loadData(SAVE.loadVar(data, "auctionBidders", {}))
 	SCI.loadData(SAVE.loadVar(data, "science", {}))
+	PSH.loadData(SAVE.loadVar(data, "playerSlaveryHolder", {}))
 		
 	
 	var scenes = SAVE.loadVar(data, "scenes", [])

@@ -105,15 +105,38 @@ func _run():
 
 		saynn("Her quick fist beats the air out of you.")
 
-		saynn("[say=mirri]Shut your pretty mouth, AlphaCorp slave. I don't have time for foreplay, the event is about to start. Strap in and pretend to look nice. I will get more digital coins.. and you.. maybe you will even enjoy your new fate.. You seem like the type.[/say]")
+		saynn("[say=mirri]Shut your pretty mouth, AlphaCorp slave. I don't have time for foreplay, the event is about to start. Strap in and pretend to look nice. I will get more credits.. and you.. maybe you will even enjoy your new fate.. You seem like the type.[/say]")
 
-		saynn("The guard.. or whoever she is.. jumps onto a little raised platform.. and spreads her arms, welcoming the bright light gradually illuminating the stage, the curtains sliding to the sides.")
+		saynn("The guard.. or whoever she is.. jumps onto a little raised platform.. and spreads her arms, welcoming the bright projector light gradually illuminating the stage while the curtains are sliding to the sides.")
 
-		saynn("[say=mirri]Hi! I mean.. Welcome! Welcome to the Blacktail Market! We got a really rare treat for you today.[/say]")
-
-		saynn("The projector light now basks you in its attention specifically..")
+		saynn("[say=mirri]You got this, Mirri.[/say]")
 
 		addButton("Continue", "See what happens next..", "start_auction")
+	if(state == "after_auction"):
+		playAnimation(StageScene.Duo, "stand", {npc="mirri", bodyState={leashedBy="mirri"}, flipNPC=true})
+		saynn("Everything has happened so quickly..")
+
+		saynn("The guard slowly approaches you, her paw pulling out a chain leash.")
+
+		saynn("[say=mirri]You already have a collar, so handy.[/say]")
+
+		saynn("She clips the leash to your neck in one skilled motion and gestures to someone behind you to relax the tension on your wrists.")
+
+		saynn("[say=mirri]Don't be sad, I'm sure your new owner will treat you exactly the way you deserve it.[/say]")
+
+		saynn("Your {pc.feet} get fully planted onto the ground. A million thoughts rush through your head.")
+
+		saynn("[say=mirri]C'mon, move it, fucker. I ain't got all day.[/say]")
+
+		saynn("Mirri walks you to your new owner.. before handing them the leash.")
+
+		saynn("[say=mirri]Enjoy, {pc.heShe} {pc.isAre} all yours~.[/say]")
+
+		saynn("The masked figure nods.. and brings you along onto their spaceship.")
+
+		saynn("Few minutes later, you are already cruising the stars.. not as a free person.. but as someone's property.")
+
+		addButton("Continue", "See what happens next", "start_slavery")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -130,7 +153,14 @@ func _react(_action: String, _args):
 		processTime(3*60)
 
 	if(_action == "start_auction"):
+		setFlag("SlaveAuctionModule.knowsMirriName", true)
 		runScene("PlayerSlaveryAuctionScene")
+		setState("after_auction")
+		return
+
+	if(_action == "start_slavery"):
+		endScene()
+		runScene("PlayerSlaveryPickScene")
 		return
 
 	setState(_action)

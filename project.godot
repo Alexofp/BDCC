@@ -1154,6 +1154,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/PlayerSlavery/PlayerSlaveryDef.gd"
 }, {
+"base": "Reference",
+"class": "PlayerSlaveryHolder",
+"language": "GDScript",
+"path": "res://Game/PlayerSlavery/PlayerSlaveryHolder.gd"
+}, {
 "base": "Module",
 "class": "PunishmentsModule",
 "language": "GDScript",
@@ -1949,6 +1954,7 @@ _global_script_class_icons={
 "Player": "",
 "PlayerSlaveryBase": "",
 "PlayerSlaveryDef": "",
+"PlayerSlaveryHolder": "",
 "PunishmentsModule": "",
 "Quest": "",
 "QuestBase": "",

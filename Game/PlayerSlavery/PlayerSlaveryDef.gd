@@ -14,5 +14,12 @@ func getVisibleDesc() -> String:
 func canBeChosen() -> bool:
 	return true
 
+func getImpossibleReason() -> String:
+	return ""
+
+# It's not a true slavery, will never be picked randomly unless it's the only choice
+func isTrivial() -> bool:
+	return false
+
 func createSlavery():
 	return null

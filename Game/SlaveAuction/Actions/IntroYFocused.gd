@@ -27,6 +27,8 @@ func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 
 	saynn("The other bidders glance at each other but remain quiet, observing, while the main bidder leans forward, eyes narrowing. You make sure to note down everything of interest that you have noticed.")
 	
+	sayPresenter("The starting bet is "+str(_auction.startingBid)+" credits.")
+	
 	_auction.unlockPercentageOfTraitsRandomBidder(0.75, 1.0)
 
 func getPassiveDesireGain() -> float:

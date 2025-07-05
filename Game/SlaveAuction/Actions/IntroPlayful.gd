@@ -20,6 +20,8 @@ func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 	
 	saynn("A few chuckles rise from the crowd, though not all the bidders seem to be swayed by the casual tone. Some lean back, while others seem intrigued, their eyes flicking between {presenter.name} and the slave. You make sure to follow their reactions and note everything down.")
 	
+	sayPresenter("The starting bet is "+str(_auction.startingBid)+" credits.")
+	
 	for _i in range(3):
 		_auction.unlockRandomRelevantTraitEachBidder()
 

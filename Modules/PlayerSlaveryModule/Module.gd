@@ -15,6 +15,7 @@ func _init():
 		
 		"res://Modules/PlayerSlaveryModule/SlaveAuction/PlayerSlaveryStartMirriScene.gd",
 		"res://Modules/PlayerSlaveryModule/SlaveAuction/PlayerSlaveryAuctionScene.gd",
+		"res://Modules/PlayerSlaveryModule/SlaveAuction/PlayerSlaveryPickScene.gd",
 		]
 	characters = [
 	]

@@ -120,9 +120,42 @@ func doRandomAction():
 			possibleActions.append(action)
 	doAction(RNG.pick(possibleActions))
 
+func doBestAction():
+	var theActions:Array = getActions()
+	var actionToScore:Dictionary = {}
+	
+	var maxScore:float = 0.0
+	
+	for action in theActions:
+		var canDoData:Array = canDoAction(action)
+		if(canDoData[0]):
+			var theScore:float = action.getAIScore(getChar(), self, slaveTraits)
+			actionToScore[action] = theScore
+			if(theScore > maxScore):
+				maxScore = theScore
+	
+	if(actionToScore.empty()):
+		Log.printerr("Something is wrong, we can't pick an auction action to do")
+		return
+	
+	var filterScore:float = maxScore * 0.7
+	
+	var finalActionToScore:Dictionary = {}
+	
+	for action in actionToScore:
+		var theScore:float = actionToScore[action]
+		if(theScore >= filterScore):
+			finalActionToScore[action] = theScore
+	
+	var theAction = RNG.pickWeightedDict(finalActionToScore)
+	doAction(theAction)
+
 func doRandomActionsUntilReact():
+	if(state == "react" || state == "start" || state == "ended"):
+		doBestAction()
+	
 	while(state != "react" && state != "ended"):
-		doRandomAction()
+		doBestAction()
 
 func getActions() -> Array:
 	var result:Array = []
@@ -140,7 +173,7 @@ func getActions() -> Array:
 	else:
 		for actionID in GlobalRegistry.getAuctionActions():
 			var theAction:AuctionAction = GlobalRegistry.getAuctionAction(actionID)
-			if(theAction == null || theAction.id == "Continue"):
+			if(theAction == null || theAction.id == "Continue" || theAction.getActionType() == AuctionActionType.Intro):
 				continue
 			result.append(theAction)
 	
@@ -412,7 +445,7 @@ func doRoundOfBiddingWithChecks():
 		else:
 			canPresent = false
 			if(isPCBeingSold):
-				saynn("Since "+getSlaverName()+" got less than 2 new bids after the soft end, they can’t present your slave anymore.")
+				saynn("Since "+getSlaverName()+" got less than 2 new bids after the soft end, they can’t present you anymore.")
 			else:
 				saynn("Since you got less than 2 new bids after the soft end, you can’t present your slave anymore.")
 	else:

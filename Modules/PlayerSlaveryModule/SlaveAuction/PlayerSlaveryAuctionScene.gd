@@ -71,7 +71,7 @@ func _react(_action: String, _args):
 		return
 	if(_action == "doContinue"):
 		processTime(60)
-		slaveAuction.doRandomAction()
+		#slaveAuction.doRandomAction()
 		slaveAuction.doRandomActionsUntilReact()
 		if(slaveAuction.hasEnded()):
 			endScene([slaveAuction.getAuctionResult()])
