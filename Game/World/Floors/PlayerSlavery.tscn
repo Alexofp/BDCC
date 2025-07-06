@@ -28,7 +28,7 @@ roomName = "Mineshafts"
 [node name="PSMineRoom46" parent="." index="4" instance=ExtResource( 1 )]
 self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( 256, 128 )
-roomName = "Mineshafts"
+roomName = "Landing spot"
 roomID = "psmine_exit"
 canWest = false
 canNorth = false

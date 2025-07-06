@@ -18,6 +18,7 @@ func _init():
 		"res://Modules/PlayerSlaveryModule/SlaveAuction/PlayerSlaveryPickScene.gd",
 		]
 	characters = [
+		"res://Modules/PlayerSlaveryModule/ShaftMiner/PSRicky.gd",
 	]
 	items = []
 	events = [
