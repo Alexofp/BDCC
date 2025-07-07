@@ -571,7 +571,7 @@ func shouldDoFirstSlaveOfferEvent() -> bool:
 	return false
 
 func getStartScene() -> String:
-	return "PSShaftMinerGameplayScene"#"PSShaftMinerStart"
+	return "PSShaftMinerStart"#"PSShaftMinerGameplayScene"#"PSShaftMinerStart"
 
 func unlockUpgrade(_upgradeID:String):
 	upgrades[_upgradeID] = true
