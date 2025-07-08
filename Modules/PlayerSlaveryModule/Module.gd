@@ -12,6 +12,7 @@ func _init():
 	scenes = [
 		"res://Modules/PlayerSlaveryModule/ShaftMiner/PSShaftMinerStart.gd",
 		"res://Modules/PlayerSlaveryModule/ShaftMiner/PSShaftMinerGameplayScene.gd",
+		"res://Modules/PlayerSlaveryModule/ShaftMiner/PSShaftMinerEnding1.gd",
 		
 		"res://Modules/PlayerSlaveryModule/SlaveAuction/PlayerSlaveryStartMirriScene.gd",
 		"res://Modules/PlayerSlaveryModule/SlaveAuction/PlayerSlaveryAuctionScene.gd",

@@ -20,6 +20,7 @@ roomID = "psmine_meet"
 [node name="PSMineRoom3" parent="." index="2" instance=ExtResource( 1 )]
 position = Vector2( 192, -64 )
 roomName = "Mineshafts"
+roomID = "psmine_hide"
 
 [node name="PSMineRoom4" parent="." index="3" instance=ExtResource( 1 )]
 position = Vector2( 256, 0 )
