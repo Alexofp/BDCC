@@ -1275,18 +1275,34 @@ func getXFreeSubIDsForAnim(_amount:int) -> Array:
 				return result
 	return result
 
-func getBestNonDefaultAnimationTargeting(theTargetChar:String):
+func getBestNonDefaultAnimation(_params:Dictionary):
+	var theTargetChar:String = _params["targeting_char_id"]
+	var mustHavePCInvolved:bool = _params["must_have_pc_involved"]
+
 	var theTargetInfo:SexInfoBase
 	if(isDom(theTargetChar)):
 		theTargetInfo = doms[theTargetChar]
 	if(isSub(theTargetChar)):
 		theTargetInfo = subs[theTargetChar]
 	if(theTargetInfo == null):
-		return
+		return null
+
+	var thePCInfo:SexInfoBase
+	if(mustHavePCInvolved):
+		if(isDom("pc")):
+			thePCInfo = doms["pc"]
+		if(isSub("pc")):
+			thePCInfo = subs["pc"]
+		if(thePCInfo == null):
+			return null
+
 	var foundAnimInfo = null#getActivityAnimFor(theTargetChar)
 	for activity in activities:
 		if(!activity.subs.has(theTargetInfo) && !activity.doms.has(theTargetInfo)):
 			continue
+		if(mustHavePCInvolved):
+			if(!activity.subs.has(thePCInfo) && !activity.doms.has(thePCInfo)):
+				continue
 		var canUseThis:bool = true
 		for theOtherInfo in activity.subs:
 			if(activity != getActivityWithMaxAnimPriorityFor(theOtherInfo.getCharID())):
@@ -1307,7 +1323,7 @@ func findAnimationTargetingOtherChar(currentPCTarget:String) -> Dictionary:
 	var idList:Array = getPossiblePCTargetsIDList()
 	for otherTargetID in idList:
 		if otherTargetID != currentPCTarget:
-			var foundAnimInfoForOtherTarget = getBestNonDefaultAnimationTargeting(otherTargetID)
+			var foundAnimInfoForOtherTarget = getBestNonDefaultAnimation({targeting_char_id=otherTargetID, must_have_pc_involved=true})
 			if(foundAnimInfoForOtherTarget == null):
 				continue
 			return {animInfo = foundAnimInfoForOtherTarget, newPCTarget = otherTargetID}
@@ -1318,7 +1334,7 @@ func getBestAnimation():
 	if(theTargetChar == ""):
 		return null
 
-	var foundAnimInfo = getBestNonDefaultAnimationTargeting(theTargetChar)
+	var foundAnimInfo = getBestNonDefaultAnimation({targeting_char_id=theTargetChar, must_have_pc_involved=false})
 
 	if(foundAnimInfo == null):
 		var otherAnimDict:Dictionary = findAnimationTargetingOtherChar(theTargetChar)
