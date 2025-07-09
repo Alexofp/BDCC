@@ -28,6 +28,7 @@ var pcAllowsDomAutonomy:bool = false
 var pcAllowsDynJoiners:bool = false
 
 var pcTarget:String = ""
+var pcTargetWasSetManually:bool = false
 var outputRaw:Array = []
 const OUTPUT_TEXT = 0
 const OUTPUT_SAY = 1
@@ -915,7 +916,7 @@ func getPCTarget() -> String:
 	
 	return pcTarget
 
-func switchPCTarget():
+func getPossiblePCTargetsIDList() -> Array:
 	var idList:Array = []
 	if(isDom("pc")):
 		idList = subs.keys()
@@ -923,6 +924,10 @@ func switchPCTarget():
 		idList = doms.keys()
 	if(!isDom("pc") && !isSub("pc")):
 		idList = (doms.keys() + subs.keys())
+	return idList
+
+func switchPCTarget():
+	var idList:Array = getPossiblePCTargetsIDList()
 	
 	var theTarget:String = getPCTarget()
 	var theIndx:int = idList.find(theTarget)
@@ -932,6 +937,7 @@ func switchPCTarget():
 	if(theIndx >= idList.size()):
 		theIndx = 0
 	pcTarget = idList[theIndx]
+	pcTargetWasSetManually = true
 
 
 func canSwitchPCTarget() -> bool:
@@ -1269,10 +1275,7 @@ func getXFreeSubIDsForAnim(_amount:int) -> Array:
 				return result
 	return result
 
-func getBestAnimation():
-	var theTargetChar:String = getPCTarget()
-	if(theTargetChar == ""):
-		return null
+func getBestNonDefaultAnimationTargeting(theTargetChar:String):
 	var theTargetInfo:SexInfoBase
 	if(isDom(theTargetChar)):
 		theTargetInfo = doms[theTargetChar]
@@ -1296,9 +1299,35 @@ func getBestAnimation():
 		if(canUseThis):
 			foundAnimInfo = activity.getAnimationFinal()
 			break
-		
+	return foundAnimInfo
+
+func findAnimationTargetingOtherChar(currentPCTarget:String) -> Dictionary:
+	if(pcTargetWasSetManually):
+		return {animInfo = null}
+	var idList:Array = getPossiblePCTargetsIDList()
+	for otherTargetID in idList:
+		if otherTargetID != currentPCTarget:
+			var foundAnimInfoForOtherTarget = getBestNonDefaultAnimationTargeting(otherTargetID)
+			if(foundAnimInfoForOtherTarget == null):
+				continue
+			return {animInfo = foundAnimInfoForOtherTarget, newPCTarget = otherTargetID}
+	return {animInfo = null}
+
+func getBestAnimation():
+	var theTargetChar:String = getPCTarget()
+	if(theTargetChar == ""):
+		return null
+
+	var foundAnimInfo = getBestNonDefaultAnimationTargeting(theTargetChar)
+
 	if(foundAnimInfo == null):
-		foundAnimInfo = sexType.getDefaultAnimation()
+		var otherAnimDict:Dictionary = findAnimationTargetingOtherChar(theTargetChar)
+		if(otherAnimDict.animInfo != null):
+			foundAnimInfo = otherAnimDict.animInfo
+			pcTarget = otherAnimDict.newPCTarget
+			theTargetChar = pcTarget
+		else:
+			foundAnimInfo = sexType.getDefaultAnimation()
 	if(foundAnimInfo == null):
 		return null
 
