@@ -122,6 +122,141 @@ func _run():
 
 		saynn("The world tilts, your vision fracturing into shards of red and black.. and then.. everything goes dark..")
 
+		addButton("Continue", "See what happens next", "everything_dark")
+	if(state == "everything_dark"):
+		playAnimation(StageScene.Sleeping, "sleep")
+		saynn("Everything is dark..")
+
+		saynn("Very dark..")
+
+		saynn("Still dark..")
+
+		saynn("Dark..")
+
+		addButton("Continue", "See what happens after the darkness..", "got_saved")
+	if(state == "got_saved"):
+		playAnimation(StageScene.GivingBirth, "idle")
+		aimCameraAndSetLocName("intro_interogation")
+		addCharacter("intro_detective")
+		saynn("A faint hiss of recycled air greets you as consciousness seeps back in. You lie on something hard yet oddly cushioned, your limbs heavy as though weighted by steel. Blurred shapes drift in and out of focus.")
+
+		saynn("The sharp scent of antiseptic stings your nostrils.")
+
+		saynn("[say=intro_detective]Thanks, doctor. I will take it from here.[/say]")
+
+		saynn("Familiar voice.. Where did you hear it before?")
+
+		saynn("The vision is blurry.. but you see a silhouette.. well-tailored wolf in a white shirt and grey trousers.")
+
+		saynn("He snaps his fingers in front of your face, making your ears perk. After that, he just takes a seat on a chair. You open your eyes fully and look around.. you're in a rolling bed.. comfy. The guy offers you a cool gaze.")
+
+		saynn("[say=intro_detective]You've been brought back under AlphaCorp's protection. You're safe now.[/say]")
+
+		saynn("Somehow, you don't feel that much more safe.")
+
+		saynn("[say=pc]Yeah, hello to you too..[/say]")
+
+		saynn("[say=intro_detective]My name is Jake, IIPF, threat..[/say]")
+
+		saynn("It hits you.")
+
+		saynn("[say=pc]I know who you are.[/say]")
+
+		saynn("He tilts his head slightly down, brow raised.")
+
+		saynn("[say=pc]How did you find me?[/say]")
+
+		saynn("Jake grabs a few papers and swipes his gaze through them.")
+
+		saynn("[say=intro_detective]We intercepted your signal.[/say]")
+
+		saynn("Your personal escort team, how convenient..")
+
+		saynn("Your hand reaches to tug on your collar.. it's still there.. and it's still sitting just as tight as before.")
+
+		saynn("[say=pc]Was the shock part really that necessary?[/say]")
+
+		saynn("[say=intro_detective]It's for your own protection, really.[/say]")
+
+		saynn("You let out a bitter laugh.")
+
+		saynn("[say=pc]Of course, what else. What about the others?[/say]")
+
+		saynn("Jake's pen hovers over the files as he raises a brow.")
+
+		saynn("[say=intro_detective]Others?[/say]")
+
+		saynn("[say=pc]There were other.. people.. on that planet.[/say]")
+
+		saynn("He shuffles his papers and then puts them away.")
+
+		saynn("[say=intro_detective]I'm certain they've been processed accordingly.[/say]")
+
+		saynn("Alright..")
+
+		saynn("[say=pc]So.. what now?[/say]")
+
+		saynn("[say=intro_detective]I'm here to assess the failed escape attempt from one of our correctional facilities, do a clinical review of your actions, and perform all of the required legal procedures. I also gotta make sure this.. incident doesn't happen again.[/say]")
+
+		saynn("[say=pc]Escape attempt? Listen. I got kidnapped by one of the staff! I got sold away on a slave auction.[/say]")
+
+		saynn("He nods subtly after each of your sentences.")
+
+		saynn("[say=pc]You don't believe me, do you?[/say]")
+
+		saynn("You glare at him.")
+
+		saynn("[say=intro_detective]I have no reason to think that any of AlphaCorp's secret facilities are compromised.[/say]")
+
+		saynn("You growl.")
+
+		saynn("[say=pc]Well, you're dumb as bricks, then.[/say]")
+
+		saynn("He stays quiet, his expression barely reacting to your words.")
+
+		saynn("After a few seconds, he grabs a datapad and starts looking up something.")
+
+		saynn("[say=pc]You're not even gonna ask who it was?[/say]")
+
+		saynn("[say=intro_detective]Any of your claims will lack the most important part. Proof.[/say]")
+
+		saynn("Nothing you say can change anything. So you just sigh.. and relax in bed. Feels so much better than that cage..")
+
+		saynn("[say=intro_detective]I'm finishing the required paperwork.[/say]")
+
+		saynn("[say=pc]How are you gonna make sure that this doesn't happen?[/say]")
+
+		saynn("[say=intro_detective]Your sentence has been extended - an administrative penalty for the illegal actions.[/say]")
+
+		saynn("[say=pc]It's already indefinite anyway.[/say]")
+
+		saynn("He stares at you.. intently.")
+
+		saynn("[say=intro_detective]I will now invite the officers in.[/say]")
+
+		saynn("Next many moments blur into one..")
+
+		saynn("The officers cuff you and bring you onto a spaceship.")
+
+		saynn("Soon enough, you're already placing your foot back onto the BDCC's grounds.")
+
+		addButton("Continue", "See what happens next", "risha_items")
+	if(state == "risha_items"):
+		aimCameraAndSetLocName(GM.pc.getLocation())
+		playAnimation(StageScene.Duo, "stand", {npc="risha"})
+		removeCharacter("intro_detective")
+		addCharacter("risha")
+		saynn("[say=risha]Here is your shit.[/say]")
+
+		saynn("At least.. you don't have to start from zero.")
+
+		saynn("[say=risha]Be glad that I decided against just throwing it all out.[/say]")
+
+		saynn("You nod.")
+
+		saynn("You're back in your cell. Home, sweet home.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -139,5 +274,20 @@ func _react(_action: String, _args):
 
 	if(_action == "pc_gets_shocked"):
 		GM.pc.addPain(1000)
+		GM.pc.addCredits(-GM.pc.getCredits())
+
+	if(_action == "everything_dark"):
+		processTime(10*60)
+
+	if(_action == "got_saved"):
+		GM.main.startNewDay()
+		GM.pc.addPain(-1000)
+		processTime(60*83)
+
+	if(_action == "risha_items"):
+		processTime(3*60)
+		GM.pc.setLocation(GM.pc.getCellLocation())
+		GM.main.PSH.givePlayerItemsBack()
+		addMessage("All your items were returned to you.")
 
 	setState(_action)
