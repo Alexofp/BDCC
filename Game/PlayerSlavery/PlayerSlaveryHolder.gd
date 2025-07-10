@@ -36,12 +36,32 @@ func getRandomPossibleSlaveryID(includeTrivial:bool = false) -> String:
 func storePlayersItems():
 	storedCredits += GM.pc.getCredits()
 	GM.pc.addCredits(-GM.pc.getCredits())
-	#TODO: Store items too
+	transferAllItems(GM.pc, GlobalRegistry.getCharacter("PlayerSlaveryStash"), true)
 
 func givePlayerItemsBack():
 	GM.pc.addCredits(storedCredits)
 	storedCredits = 0
-	#TODO: Restore items
+	transferAllItems(GlobalRegistry.getCharacter("PlayerSlaveryStash"), GM.pc)
+
+func transferAllItems(_charFrom, _charTo, equippedToo:bool = false):
+	if(!_charFrom || !_charTo):
+		return
+	var theItems:Array = _charFrom.getInventory().getItems()
+	while(!theItems.empty()):
+		var theItem = theItems[0]
+		
+		_charFrom.getInventory().removeItem(theItem)
+		_charTo.getInventory().addItem(theItem)
+	
+	if(equippedToo):
+		for slot in _charFrom.getInventory().getEquippedItems():
+			var theItem:ItemBase = _charFrom.getInventory().getEquippedItem(slot)
+			if(theItem.isImportant()):
+				if(!theItem.hasTag(ItemTag.PortalPanties)): # Strip portal panties even though they're important
+					continue
+			_charFrom.getInventory().clearSlot(slot)
+			_charTo.getInventory().addItem(theItem)
+			
 
 func saveData() -> Dictionary:
 	return {
