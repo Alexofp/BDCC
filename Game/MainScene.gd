@@ -1453,7 +1453,7 @@ func doDebugAction(id, args = {}):
 		else:
 			GM.pc.getTFHolder().startTransformation(args["tfid"])
 	if(id == "startSlavery"):
-		startPlayerSlavery(args["slaveryID"])
+		startPlayerSlavery(args["slaveryID"], true)
 	if(id == "undoTFs"):
 		GM.pc.undoAllTransformations()
 	if(id == "applyTFs"):
@@ -1951,7 +1951,7 @@ func stopDungeonRun():
 		DrugDenRun.endRun()
 	DrugDenRun = null
 
-func startPlayerSlavery(_slaveryID:String):
+func startPlayerSlavery(_slaveryID:String, storeInv:bool = false):
 	if(PS):
 		Log.printerr("Trying to start player slavery while one is running already!")
 		return
@@ -1964,6 +1964,9 @@ func startPlayerSlavery(_slaveryID:String):
 	if(!theSlavery):
 		Log.printerr("Slavery Def didn't gave the game a slavery object!")
 		return
+	
+	if(storeInv):
+		PSH.storePlayersItems()
 		
 	PS = theSlavery
 	PS.onSlaveryStart()

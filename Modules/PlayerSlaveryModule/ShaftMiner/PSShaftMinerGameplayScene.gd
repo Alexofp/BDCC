@@ -29,7 +29,12 @@ func _run():
 	
 	if(state == "roam"):
 		aimCameraAndSetLocName(GM.pc.getLocation())
-		saynn("You are roaming around.")
+		var _roomInfo = GM.world.getRoomByID(roomID)
+
+		if(GM.pc.isBlindfolded() && !GM.pc.canHandleBlindness()):
+			saynn(_roomInfo.getBlindDescription())
+		else:
+			saynn(_roomInfo.getDescription())
 		
 		var canMineInfo:Array = GM.main.PS.canMineSmart(roomID)
 		var canMine:bool = canMineInfo[0]
@@ -524,7 +529,7 @@ func supportsShowingPawns() -> bool:
 	return true
 
 func genSlaveID() -> String:
-	var theID:String = InmateGenerator.new().generate({NpcGen.Temporary: true}).getID()
+	var theID:String = NakedSlaveGenerator.new().generate({NpcGen.Temporary: true}).getID()
 	return theID
 
 func saveData():

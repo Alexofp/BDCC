@@ -9,6 +9,9 @@
 position = Vector2( 128, 0 )
 roomName = "Cages"
 roomID = "psmine_sleep"
+roomDescription = "A wide pit that's carved into black rock. A huge metal cage fills most of the space, its bars heavy and cold.
+
+Inside, rows of worn blankets and shivering bodies. There is where the slaves sleep."
 roomSprite = 10
 gridColor = 6
 
@@ -16,15 +19,18 @@ gridColor = 6
 position = Vector2( 192, 0 )
 roomName = "Mineshafts"
 roomID = "psmine_meet"
+roomDescription = "A narrow tunnel winds between jagged walls of dark stone. The ground is uneven underfoot and bits of gravel crunch with each step. Faint echoes drift from deeper within the rock."
 
 [node name="PSMineRoom3" parent="." index="2" instance=ExtResource( 1 )]
 position = Vector2( 192, -64 )
 roomName = "Mineshafts"
 roomID = "psmine_hide"
+roomDescription = "Narrow halls wind through jagged black stone. Sharp walls close in on both sides, and every footstep echoes on the hard, uneven floor."
 
 [node name="PSMineRoom4" parent="." index="3" instance=ExtResource( 1 )]
 position = Vector2( 256, 0 )
 roomName = "Mineshafts"
+roomDescription = "Narrow halls wind through jagged black stone. Sharp walls close in on both sides, and every footstep echoes on the hard, uneven floor."
 
 [node name="PSMineRoom46" parent="." index="4" instance=ExtResource( 1 )]
 self_modulate = Color( 1, 0.6, 0.6, 1 )
@@ -44,6 +50,9 @@ self_modulate = Color( 1, 0.6, 0.6, 1 )
 position = Vector2( 256, 64 )
 roomName = "Mineshafts"
 roomID = "psmine_boss"
+roomDescription = "A rough hole in the mountain is sealed by a thick voidsteel wall. A reinforced door stands shut in the middle, its surface scarred by some very old blows.
+
+No light seeps through its edges."
 roomSprite = 11
 roomColor = 2
 gridColor = 2
@@ -53,6 +62,7 @@ self_modulate = Color( 1, 0.8, 0.6, 1 )
 position = Vector2( 192, -128 )
 roomName = "Mineshafts"
 roomID = "psmine_entrance"
+roomDescription = "A gaping hole in the rock face leads into shadow. Rough edges of black stone frame the entrance, hinting at deeper tunnels within."
 roomSprite = 4
 roomColor = 5
 gridColor = 5
@@ -62,18 +72,21 @@ self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 192, -192 )
 roomName = "Mineshafts"
 roomID = "psmine_cartspawn"
+roomDescription = "Stony walls arch overhead in a low ceiling of black rock. Patches of faint light reveal uneven ground and scattered pebbles underfoot."
 roomColor = 7
 
 [node name="PSMineRoom8" parent="." index="8" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, -192 )
 roomName = "Mineshafts"
+roomDescription = "Stony walls arch overhead in a low ceiling of black rock. Patches of faint light reveal uneven ground and scattered pebbles underfoot."
 roomColor = 8
 
 [node name="PSMineRoom9" parent="." index="9" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 256, -192 )
 roomName = "Mineshafts"
+roomDescription = "Stony walls arch overhead in a low ceiling of black rock. Patches of faint light reveal uneven ground and scattered pebbles underfoot."
 roomColor = 8
 
 [node name="PSMineRoom10" parent="." index="10" instance=ExtResource( 1 )]
@@ -86,6 +99,7 @@ roomColor = 8
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 256, -256 )
 roomName = "Mineshafts"
+roomDescription = "Stony walls arch overhead in a low ceiling of black rock. Patches of faint light reveal uneven ground and scattered pebbles underfoot."
 canWest = false
 roomColor = 8
 
@@ -93,6 +107,7 @@ roomColor = 8
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 320, -256 )
 roomName = "Mineshafts"
+roomDescription = "Stony walls arch overhead in a low ceiling of black rock. Patches of faint light reveal uneven ground and scattered pebbles underfoot."
 roomColor = 8
 
 [node name="PSMineRoom13" parent="." index="13" instance=ExtResource( 1 )]
@@ -105,6 +120,7 @@ roomColor = 8
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 192, -256 )
 roomName = "Mineshafts"
+roomDescription = "Stony walls arch overhead in a low ceiling of black rock. Patches of faint light reveal uneven ground and scattered pebbles underfoot."
 roomColor = 8
 
 [node name="PSMineRoom15" parent="." index="15" instance=ExtResource( 1 )]
@@ -117,6 +133,7 @@ roomColor = 8
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 192, -320 )
 roomName = "Mineshafts"
+roomDescription = "Stony walls arch overhead in a low ceiling of black rock. Patches of faint light reveal uneven ground and scattered pebbles underfoot."
 roomColor = 7
 
 [node name="PSMineRoom17" parent="." index="17" instance=ExtResource( 1 )]
@@ -129,18 +146,21 @@ roomColor = 8
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 192, -384 )
 roomName = "Mineshafts"
+roomDescription = "Stony walls arch overhead in a low ceiling of black rock. Patches of faint light reveal uneven ground and scattered pebbles underfoot."
 roomColor = 8
 
 [node name="PSMineRoom19" parent="." index="19" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, -320 )
 roomName = "Mineshafts"
+roomDescription = "Stony walls arch overhead in a low ceiling of black rock. Patches of faint light reveal uneven ground and scattered pebbles underfoot."
 roomColor = 8
 
 [node name="PSMineRoom20" parent="." index="20" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 64, -320 )
 roomName = "Mineshafts"
+roomDescription = "Stony walls arch overhead in a low ceiling of black rock. Patches of faint light reveal uneven ground and scattered pebbles underfoot."
 roomColor = 8
 
 [node name="PSMineRoom21" parent="." index="21" instance=ExtResource( 1 )]
@@ -148,6 +168,7 @@ self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 64, -256 )
 roomName = "Mineshafts"
 roomID = "psmine_mine5"
+roomDescription = "Veins of ore streak the black walls here. Dust hangs in the air, and every surface gleams with mineral shine."
 canSouth = false
 roomColor = 7
 gridColor = 8
@@ -168,42 +189,49 @@ roomColor = 8
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 64, -192 )
 roomName = "Mineshafts"
+roomDescription = "Stony walls arch overhead in a low ceiling of black rock. Patches of faint light reveal uneven ground and scattered pebbles underfoot."
 roomColor = 7
 
 [node name="PSMineRoom25" parent="." index="25" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 0, -192 )
 roomName = "Mineshafts"
+roomDescription = "Stony walls arch overhead in a low ceiling of black rock. Patches of faint light reveal uneven ground and scattered pebbles underfoot."
 roomColor = 8
 
 [node name="PSMineRoom26" parent="." index="26" instance=ExtResource( 1 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( -64, -192 )
 roomName = "Mineshafts"
+roomDescription = "Stony walls arch overhead in a low ceiling of black rock. Patches of faint light reveal uneven ground and scattered pebbles underfoot."
 roomColor = 7
 
 [node name="PSMineRoom27" parent="." index="27" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 64, -128 )
 roomName = "Mineshafts"
+roomDescription = "Stony walls arch overhead in a low ceiling of black rock. Patches of faint light reveal uneven ground and scattered pebbles underfoot."
 roomColor = 8
 
 [node name="PSMineRoom28" parent="." index="28" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 64, -64 )
 roomName = "Mineshafts"
+roomDescription = "Stony walls arch overhead in a low ceiling of black rock. Patches of faint light reveal uneven ground and scattered pebbles underfoot."
 roomColor = 8
 
 [node name="PSMineRoom29" parent="." index="29" instance=ExtResource( 1 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 0, -64 )
 roomName = "Mineshafts"
+roomDescription = "Stony walls arch overhead in a low ceiling of black rock. Patches of faint light reveal uneven ground and scattered pebbles underfoot."
 roomColor = 7
 
 [node name="PSMineRoom30" parent="." index="30" instance=ExtResource( 1 )]
 self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 320, -320 )
 roomName = "Mineshafts"
+roomDescription = "Stony walls arch overhead in a low ceiling of black rock. Patches of faint light reveal uneven ground and scattered pebbles underfoot."
 canWest = false
 roomColor = 7
 
@@ -211,6 +239,7 @@ roomColor = 7
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 384, -320 )
 roomName = "Mineshafts"
+roomDescription = "Stony walls arch overhead in a low ceiling of black rock. Patches of faint light reveal uneven ground and scattered pebbles underfoot."
 roomColor = 8
 
 [node name="PSMineRoom32" parent="." index="32" instance=ExtResource( 1 )]
@@ -218,6 +247,7 @@ self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 448, -320 )
 roomName = "Mineshafts"
 roomID = "psmine_mine8"
+roomDescription = "Veins of ore streak the black walls here. Dust hangs in the air, and every surface gleams with mineral shine."
 roomColor = 7
 gridColor = 8
 
@@ -226,6 +256,7 @@ self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 320, -384 )
 roomName = "Mineshafts"
 roomID = "psmine_mine7"
+roomDescription = "Veins of ore streak the black walls here. Dust hangs in the air, and every surface gleams with mineral shine."
 canWest = false
 roomColor = 7
 gridColor = 8
@@ -247,6 +278,7 @@ self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 256, -384 )
 roomName = "Mineshafts"
 roomID = "psmine_mine6"
+roomDescription = "Veins of ore streak the black walls here. Dust hangs in the air, and every surface gleams with mineral shine."
 canEast = false
 roomColor = 7
 gridColor = 8
@@ -274,6 +306,7 @@ self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( -128, -192 )
 roomName = "Mineshafts"
 roomID = "psmine_mine3"
+roomDescription = "Veins of ore streak the black walls here. Dust hangs in the air, and every surface gleams with mineral shine."
 roomColor = 7
 gridColor = 8
 
@@ -281,6 +314,7 @@ gridColor = 8
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -64, -256 )
 roomName = "Mineshafts"
+roomDescription = "Stony walls arch overhead in a low ceiling of black rock. Patches of faint light reveal uneven ground and scattered pebbles underfoot."
 roomColor = 8
 
 [node name="PSMineRoom41" parent="." index="42" instance=ExtResource( 1 )]
@@ -294,6 +328,7 @@ self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 0, -256 )
 roomName = "Mineshafts"
 roomID = "psmine_mine4"
+roomDescription = "Veins of ore streak the black walls here. Dust hangs in the air, and every surface gleams with mineral shine."
 canEast = false
 canSouth = false
 roomColor = 7
@@ -304,6 +339,7 @@ self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( 0, -128 )
 roomName = "Mineshafts"
 roomID = "psmine_mine1"
+roomDescription = "Veins of ore streak the black walls here. Dust hangs in the air, and every surface gleams with mineral shine."
 canNorth = false
 canEast = false
 roomColor = 7
@@ -314,5 +350,6 @@ self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( -64, -64 )
 roomName = "Mineshafts"
 roomID = "psmine_mine2"
+roomDescription = "Veins of ore streak the black walls here. Dust hangs in the air, and every surface gleams with mineral shine."
 roomColor = 7
 gridColor = 8

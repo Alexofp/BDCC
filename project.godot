@@ -989,6 +989,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Options/MyProjectSettings.gd"
 }, {
+"base": "InmateGenerator",
+"class": "NakedSlaveGenerator",
+"language": "GDScript",
+"path": "res://Characters/Dynamic/Generator/NakedSlaveGenerator.gd"
+}, {
 "base": "Module",
 "class": "NovaModule",
 "language": "GDScript",
@@ -1921,6 +1926,7 @@ _global_script_class_icons={
 "Module": "",
 "MyBoneAttachment": "",
 "MyProjectSettings": "",
+"NakedSlaveGenerator": "",
 "NovaModule": "",
 "NpcBreakTaskBase": "",
 "NpcCon": "",
