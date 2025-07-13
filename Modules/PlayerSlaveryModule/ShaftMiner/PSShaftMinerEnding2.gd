@@ -88,6 +88,7 @@ func _run():
 		addButton("Kill him", "End his life and escape with yours. Alone", "kill_ricky")
 		addButton("Save others", "Try to use Ricky to convince the goons to let others go with you. Ricky will have to stay alive for that", "save_others")
 	if(state == "kill_ricky"):
+		removeCharacter("psricky")
 		playAnimation(StageScene.Rekt, "end", {pc="pc", npc="psricky"})
 		saynn("You let go of his throat and take a step back.")
 
@@ -101,12 +102,259 @@ func _run():
 
 		saynn("[say=pc]Shut your mouth already, I'm sick of it.[/say]")
 
-		saynn("When that's done, you let his lifeless body slump onto the cold rock. No one will ever find him here. Good.")
+		saynn("When that's done, you let his lifeless body slump onto the cold rock. No one will ever find him here, especially not on this dead planet. Good.")
 
 		saynn("You search his pants and the remains of his jacket, finding some kind of digital keys. You drop the drill and grab his revolver, the thing is useless against rifles anyway.")
 
-		saynn("As you peak over the rock, you see the armed goons patrolling the space around the spaceship. Some of them are loading crates into it.")
+		saynn("As you peak over the rock, you see the armed goons patrolling the space around the spaceship. Some of them are busy loading crates.")
 
+		addButton("Sneak inside", "Try to sneak onto the ship", "sneak_in_kill")
+	if(state == "sneak_in_kill"):
+		playAnimation(StageScene.Solo, ["firepistol", "res://Inventory/UnriggedModels/Pistol/Pistol.tscn"])
+		aimCameraAndSetLocName("psmine_exit")
+		saynn("You wait for a good moment when the goons aren't looking your way and sneak onto the ship's loading ramp, using the crates as cover.")
+
+		saynn("Not everything goes as smoothly as you'd hope though. One of the armed dudes spots you and wastes no time, alerting the others. That was his last mistake.")
+
+		saynn("Your finger pulls the trigger on its own. A loud bang deafens your ears. A lead bullet destroys his.")
+
+		saynn("The situation gets heated quickly. Your fist punches the button that starts closing the ramp, making the painfully slow pistons screech below you while the ship's armor interior and exterior start taking damage from a frantic barrage of bullets.")
+
+		saynn("As fast as you can, you find the pilot chair, press the digital keys against the ship's controls and yank on the lever that says 'engines'.")
+
+		saynn("As the engines spool up, the low vibrations echo through your core. It seems the cabin's glass is strong enough to withstand the many impacts.. but it sure gets damaged in the process.")
+
+		saynn("There is not enough time to consult the ship's manual, not even the quick start section.. so you just grab the control wheel and push it.. forward. The ship obeys.. and instantly eats it.. digging its nose into the rocky ground, picking up dust all around.")
+
+		saynn("The dumb trigger-happy fucks still don't understand that if they don't stop shooting, no one will be able to use this thing anyway. The system information displays are beeping angrily at you while you finally pull up, causing the ship to leave the god-forsaken land and start taking off, heading up and away.")
+
+		saynn("Something is sparking somewhere.. but the ship seems to be holding up overall. What a great piece of cheap mass-produced manufactured technology.")
+
+		saynn("You fly up into the red sky, watching it transition into a pure void of space. The goons turn into dots in your rear mirror.. but their rifles are still desperately biting away for a bit. Nothing can stop you from getting that well-deserved freedom.")
+
+		addButton("Continue", "See what happens next", "do_relax_escape1")
+	if(state == "do_relax_escape1"):
+		playAnimation(StageScene.Solo, "sit")
+		saynn("As the ringing in your ears stops.. all that's left.. is a pleasing hum of engines, rumbling the chair that you're sitting in.")
+
+		saynn("The cockpit's windshield has all sorts of cracks in it.. but it doesn't matter, you see enough to keep going. Your hands stop shaking, allowing you to keep this baby directed on course.. somewhere.")
+
+		saynn("The whole world.. the whole universe.. is now at your disposal. Feels like you can go anywhere.. do anything..")
+
+		saynn("That is.. until the power suddenly cuts out, leaving you in complete darkness. Good times never last, huh.")
+
+		saynn("The ship's controls become unresponsive.. the displays stop showing those interesting stats about how fucked your ship really was by that point. The engines spool down. But at least you're still moving, drifting through space.. nothing can stop you now.")
+
+		saynn("So.. where was that manual. Surely you can repair this piece of junk with some scraps.. or maybe switch to some kind of emergency power source.. or at least send a distress signal. You realize that you have all that ore in your trunk. Shit's gotta be valuable to someone.")
+
+		addButton("Continue", "See what happens next", "escape1_fucked")
+	if(state == "escape1_fucked"):
+		playAnimation(StageScene.Solo, "stand")
+		saynn("You get off that comfy seat and start messing around, pressing buttons and pulling levers. It's hard to see much when all you have is the starlight to go off of..")
+
+		saynn("But it looks like you did something! You hear beeping again. Beep.")
+
+		saynn("A blinking red light illuminates the cockpit every few seconds. Those system information displays must be very angry with you for messing with their shit. Beep. Beep. You are so yanking out that speaker when you see it.")
+
+		saynn("The problem is.. when you return back to them.. they're still dead, not giving you any image. While the beeping still happens. Beep. Beep-Beep.")
+
+		saynn("It's only then that you realize.. it's your collar.")
+
+		addButton("Continue", "See how fucked you are", "escape1_actually_fucked")
+	if(state == "escape1_actually_fucked"):
+		playAnimation(StageScene.Solo, "defeat")
+		saynn("Without warning, a jolt of electricity surges through your body.. sharp and searing, like molten knives sliding through your veins. You convulse mid-breath, a strangled scream ripping from your throat.")
+
+		saynn("The world tilts, your vision fracturing into shards of red and black.. and then.. everything goes dark..")
+
+		addButton("Continue", "See what happens next", "everything_dark")
+	if(state == "everything_dark"):
+		playAnimation(StageScene.Sleeping, "sleep")
+		saynn("Everything is dark..")
+
+		saynn("Very dark..")
+
+		saynn("Still dark..")
+
+		saynn("Dark..")
+
+		addButton("Continue", "See what happens after the darkness..", "got_saved")
+	if(state == "got_saved"):
+		playAnimation(StageScene.GivingBirth, "idle")
+		aimCameraAndSetLocName("intro_interogation")
+		addCharacter("intro_detective")
+		saynn("A faint hiss of recycled air greets you as consciousness seeps back in. You lie on something hard yet oddly cushioned, your limbs heavy as though weighted by steel. Blurred shapes drift in and out of focus.")
+
+		saynn("The sharp scent of antiseptic stings your nostrils.")
+
+		saynn("[say=intro_detective]Thanks, doctor. I will take it from here.[/say]")
+
+		saynn("Familiar voice.. Where did you hear it before?")
+
+		saynn("The vision is blurry.. but you see a silhouette.. well-tailored wolf in a white shirt and grey trousers.")
+
+		saynn("He snaps his fingers in front of your face, making your ears perk. After that, he just takes a seat on a chair. You open your eyes fully and look around.. you're in a rolling bed.. comfy. The guy offers you a cool gaze.")
+
+		saynn("[say=intro_detective]You've been brought back under AlphaCorp's protection. You're safe now.[/say]")
+
+		saynn("Somehow, you don't feel that much more safe.")
+
+		saynn("[say=pc]Yeah, hello to you too..[/say]")
+
+		saynn("[say=intro_detective]My name is Jake, IIPF, threat..[/say]")
+
+		saynn("It hits you.")
+
+		saynn("[say=pc]I know who you are.[/say]")
+
+		saynn("He tilts his head slightly down, brow raised.")
+
+		saynn("[say=pc]How did you find me?[/say]")
+
+		saynn("Jake grabs a few papers and swipes his gaze through them.")
+
+		saynn("[say=intro_detective]We intercepted your signal.[/say]")
+
+		saynn("Your personal escort team, how convenient..")
+
+		saynn("Your hand reaches to tug on your collar.. it's still there.. and it's still sitting just as tight as before.")
+
+		saynn("[say=pc]Was the shock part really that necessary?[/say]")
+
+		saynn("[say=intro_detective]It's for your own protection, really.[/say]")
+
+		saynn("You let out a bitter laugh.")
+
+		saynn("[say=pc]Of course. Hey, before you say what you're gonna say.. I killed a slaver, the ship is the proof. Doesn't that account for something?[/say]")
+
+		saynn("Jake's pen hovers over the files as he raises a brow.")
+
+		saynn("[say=intro_detective]Something?[/say]")
+
+		saynn("[say=pc]You know.. something. You can keep the medal for yourself, just let me walk.[/say]")
+
+		saynn("He shuffles his papers and then puts them away.")
+
+		saynn("[say=intro_detective]If you killed a slaver, where are his slaves?[/say]")
+
+		saynn("Alright.. fair point. Better to stay quiet before you make things worse.")
+
+		saynn("[say=pc]So.. what now?[/say]")
+
+		saynn("[say=intro_detective]I'm here to assess the failed escape attempt from one of our correctional facilities, do a clinical review of your actions, and perform all of the required legal procedures. I also gotta make sure this.. incident doesn't happen again.[/say]")
+
+		saynn("[say=pc]Escape attempt? Listen. I got kidnapped by one of the staff! I got sold away on a slave auction.[/say]")
+
+		saynn("He nods subtly after each of your sentences.")
+
+		saynn("[say=pc]You don't believe me, do you?[/say]")
+
+		saynn("You glare at him.")
+
+		saynn("[say=intro_detective]I have no reason to think that any of AlphaCorp's secret facilities are compromised.[/say]")
+
+		saynn("You growl.")
+
+		saynn("[say=pc]Well, you're dumb as bricks, then.[/say]")
+
+		saynn("He stays quiet, his expression barely reacting to your words.")
+
+		saynn("After a few seconds, he grabs a datapad and starts looking up something.")
+
+		saynn("[say=pc]You're not even gonna ask who it was?[/say]")
+
+		saynn("[say=intro_detective]Any of your claims will lack the most important part. Proof.[/say]")
+
+		saynn("Nothing you say can change anything. So you just sigh.. and relax in bed. Feels so much better than that cage..")
+
+		saynn("[say=intro_detective]I'm finishing the required paperwork.[/say]")
+
+		saynn("[say=pc]How are you gonna make sure that this doesn't happen?[/say]")
+
+		saynn("[say=intro_detective]Your sentence has been extended - an administrative penalty for the illegal actions.[/say]")
+
+		saynn("[say=pc]It's already indefinite anyway.[/say]")
+
+		saynn("He stares at you.. intently.")
+
+		saynn("[say=intro_detective]I will now invite the officers in.[/say]")
+
+		saynn("Next many moments blur into one..")
+
+		saynn("The officers cuff you and bring you onto a spaceship.")
+
+		saynn("Soon enough, you're already placing your foot back onto the BDCC's grounds.")
+
+		addButton("Continue", "See what happens next", "risha_items")
+	if(state == "risha_items"):
+		aimCameraAndSetLocName(GM.pc.getLocation())
+		playAnimation(StageScene.Duo, "stand", {npc="risha"})
+		removeCharacter("intro_detective")
+		addCharacter("risha")
+		saynn("[say=risha]Here is your shit.[/say]")
+
+		saynn("At least.. you don't have to start from zero.")
+
+		saynn("[say=risha]Be glad that I decided against just throwing it all out.[/say]")
+
+		saynn("You nod.")
+
+		saynn("You're back in your cell. Home, sweet home.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "save_others"):
+		playAnimation(StageScene.Duo, ["holdpistol", "res://Inventory/UnriggedModels/Pistol/Pistol.tscn"], {npc="psricky", flipNPC=true})
+		saynn("The guy is not worth screwing other people over.")
+
+		saynn("[say=pc]Turn around.[/say]")
+
+		saynn("[say=psricky]Why? You're not gonna drill my ass, are you?[/say]")
+
+		saynn("You slap him with the thing and force him to turn.")
+
+		saynn("[say=pc]Shut your sleezy mouth. Keep your hands up or I will bring you down.[/say]")
+
+		saynn("While he is not looking, you switch your drill for his revolver. Just as much lethal power.. but with way higher range.")
+
+		saynn("With its barrel pressed against Ricky's back, you push him out into the open.")
+
+		saynn("[say=psricky]Bold one, aren't ya?[/say]")
+
+		saynn("The goons aim their guns at you the moment they see you.")
+
+		saynn("[say=pc]I don't wanna kill him. But I won't hesitate. Drop your guns. Now.[/say]")
+
+		saynn("They give each other quick glances. One of them barks a few words back.")
+
+		saynn("[sayMale]Why wouldn't we just shoot the both of you?[/sayMale]")
+
+		saynn("[say=psricky]Wow, loyalty means nothing already?[/say]")
+
+		saynn("Suddenly, you weren't the only one who was screwed.")
+
+		saynn("[say=psricky]You don't get paid shit until this gig is done, did you forget already, you dumb fucks? And how exactly are you planning to get off this dead piece of rock without me, huh? The ship's controls are locked. So, please, think for a second and listen to the bitch already. Drop your guns.[/say]")
+
+		saynn("Reluctantly, they obey you. Their rifles begin hitting the ground, one by one. Feels good.")
+
+		saynn("[say=pc]Now, go gather the slaves up near the cage.[/say]")
+
+		saynn("The goons look at Ricky.. who just shrugs and then nods, sending the goons off.")
+
+		saynn("[say=pc]You didn't really lock the controls, did you? You're not that smart.[/say]")
+
+		saynn("[say=psricky]This old piece of junk doesn't support that anyway. They could've easily just looted our dead bodies for the keys. Greedy fucks, aren't they?[/say]")
+
+		saynn("You nod.. and feel his pockets with your free hand until you find the keys that he is talking about.")
+
+		saynn("[say=psricky]Hey! You bitch.[/say]")
+
+		saynn("You shove him forward.")
+
+		saynn("[say=pc]Walk.[/say]")
+
+		addButton("Cages", "See what happens next", "escape2_cages")
+	if(state == "escape2_cages"):
+		aimCameraAndSetLocName("psmine_sleep")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -115,5 +363,36 @@ func _react(_action: String, _args):
 
 	if(_action == "do_drill"):
 		processTime(5*60)
+
+	if(_action == "sneak_in_kill"):
+		processTime(5*60)
+
+	if(_action == "do_relax_escape1"):
+		processTime(5*60)
+
+	if(_action == "escape1_fucked"):
+		processTime(3*60)
+
+	if(_action == "escape1_actually_fucked"):
+		processTime(5*60)
+		GM.pc.addPain(1000)
+		GM.pc.addCredits(-GM.pc.getCredits())
+
+	if(_action == "everything_dark"):
+		processTime(10*60)
+
+	if(_action == "got_saved"):
+		GM.main.startNewDay()
+		GM.pc.addPain(-1000)
+		processTime(60*83)
+
+	if(_action == "risha_items"):
+		processTime(3*60)
+		GM.pc.setLocation(GM.pc.getCellLocation())
+		GM.main.PSH.givePlayerItemsBack()
+		addMessage("All your items were returned to you.")
+
+	if(_action == "escape2_cages"):
+		processTime(3*60)
 
 	setState(_action)

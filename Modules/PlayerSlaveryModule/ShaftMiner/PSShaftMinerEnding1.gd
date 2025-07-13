@@ -180,7 +180,7 @@ func _run():
 
 		saynn("You let out a bitter laugh.")
 
-		saynn("[say=pc]Of course, what else. What about the others?[/say]")
+		saynn("[say=pc]Of course. What about the others?[/say]")
 
 		saynn("Jake's pen hovers over the files as he raises a brow.")
 
