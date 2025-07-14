@@ -561,7 +561,10 @@ func onSlaveryStart():
 	#print("Meow")
 	createIcons()
 	updateMiningZones()
-	
+
+func onSlaveryEnd():
+	pass
+
 func shouldDoFirstSlaveOfferEvent() -> bool:
 	if(didFirstOfferEvent):
 		return false

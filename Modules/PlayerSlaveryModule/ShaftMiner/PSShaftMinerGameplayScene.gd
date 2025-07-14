@@ -395,9 +395,17 @@ func _react(_action: String, _args):
 		GM.pc.afterSleepingInBed()
 		GM.main.PS.sleep()
 	
+	if(_action == "do_win"):
+		endScene()
+		runScene("PSShaftMinerEnding1")
+		return
+	
 	if(_action == "do_mine_boss"):
-		addMessage("You try to hit the reinforced door but your current tool bounces right off.")
-		#TODO: Upgrade check, alt win
+		if(!GM.main.PS.hasUpgrade("pick5")):
+			addMessage("You try to hit the reinforced door but your current tool bounces right off.")
+		else:
+			endScene()
+			runScene("PSShaftMinerEnding2")
 		return
 	
 	if(_action == "hire1_pickslave"):

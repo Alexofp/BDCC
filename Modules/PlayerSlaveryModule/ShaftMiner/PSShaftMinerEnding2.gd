@@ -1,5 +1,7 @@
 extends SceneBase
 
+var choseSave = false
+
 func _init():
 	sceneID = "PSShaftMinerEnding2"
 
@@ -225,19 +227,35 @@ func _run():
 
 		saynn("You let out a bitter laugh.")
 
-		saynn("[say=pc]Of course. Hey, before you say what you're gonna say.. I killed a slaver, the ship is the proof. Doesn't that account for something?[/say]")
+		if (!choseSave):
+			saynn("[say=pc]Of course. Hey, before you say what you're gonna say.. I killed a slaver, the ship is the proof. Doesn't that account for something?[/say]")
 
-		saynn("Jake's pen hovers over the files as he raises a brow.")
+			saynn("Jake's pen hovers over the files as he raises a brow.")
 
-		saynn("[say=intro_detective]Something?[/say]")
+			saynn("[say=intro_detective]Something?[/say]")
 
-		saynn("[say=pc]You know.. something. You can keep the medal for yourself, just let me walk.[/say]")
+			saynn("[say=pc]You know.. something. You can keep the medal for yourself, just let me walk.[/say]")
 
-		saynn("He shuffles his papers and then puts them away.")
+			saynn("He shuffles his papers and then puts them away.")
 
-		saynn("[say=intro_detective]If you killed a slaver, where are his slaves?[/say]")
+			saynn("[say=intro_detective]If you killed a slaver, where are his slaves?[/say]")
 
-		saynn("Alright.. fair point. Better to stay quiet before you make things worse.")
+			saynn("Alright.. fair point. Better to stay quiet before you make things worse.")
+
+		else:
+			saynn("[say=pc]Of course. Hey, before you say what you're gonna say. What did you do with the slaves?[/say]")
+
+			saynn("Jake's pen hovers over the files as he raises a brow.")
+
+			saynn("[say=intro_detective]You had slaves on board?[/say]")
+
+			saynn("[say=pc]Yes. Well.. no.. They're not mine. But I saved them. It's a long story, okay? I brought down a slaver, I hope you found him and his goons on that planet already.[/say]")
+
+			saynn("He shuffles his papers and then puts them away.")
+
+			saynn("[say=intro_detective]I'm certain they've been processed accordingly.[/say]")
+
+			saynn("Alright..")
 
 		saynn("[say=pc]So.. what now?[/say]")
 
@@ -342,7 +360,7 @@ func _run():
 
 		saynn("[say=pc]You didn't really lock the controls, did you? You're not that smart.[/say]")
 
-		saynn("[say=psricky]This old piece of junk doesn't support that anyway. They could've easily just looted our dead bodies for the keys. Greedy fucks, aren't they?[/say]")
+		saynn("[say=psricky]This old piece of junk? It only has shitty digital locks. They could've easily just looted our dead bodies for the keys. Greedy fucks, aren't they?[/say]")
 
 		saynn("You nod.. and feel his pockets with your free hand until you find the keys that he is talking about.")
 
@@ -355,6 +373,120 @@ func _run():
 		addButton("Cages", "See what happens next", "escape2_cages")
 	if(state == "escape2_cages"):
 		aimCameraAndSetLocName("psmine_sleep")
+		saynn("You and your new friend join others near the cages.")
+
+		saynn("Disarmed goons have lined the slaves up, some of them still holding their pickaxes. You get a lot of confused looks thrown your way.")
+
+		saynn("[say=pc]You're free now, slaves no more. Ain't that right, Ricky?[/say]")
+
+		saynn("He grunts as you shove the barrel into his back more.")
+
+		saynn("[say=psricky]I guess so. Funny, eh?[/say]")
+
+		saynn("[say=pc]What is?[/say]")
+
+		saynn("The slaves look around.. and see helpless goons. They clench their tools and surround them instead, turning the tables. They are the armed ones here now.")
+
+		saynn("[say=psricky]Since you have the collar, I'd thought you'd be the biggest bitch of them all. In a way, you still are. Are you?[/say]")
+
+		saynn("[say=pc]Here is something else funny. Go join the pile, Ricky.[/say]")
+
+		saynn("[say=psricky]Really?[/say]")
+
+		saynn("You shove him, inviting the guy to listen by pointing the gun at him.")
+
+		saynn("[say=psricky]You can't even use that thing, can you?[/say]")
+
+		saynn("Your finger cocks the revolver, making the barrel move to the next bullet.")
+
+		saynn("[say=psricky]Fine.[/say]")
+
+		saynn("Ricky joins his goons.. who are clearly not exactly happy about this.")
+
+		saynn("[say=psricky]What are you gonna do now? Gonna leave us out here to die? Like a true hero?[/say]")
+
+		saynn("That's an option.. but since you decided against killing anyone.. might as well continue your peaceful mission.")
+
+		saynn("[say=pc]I will send an SOS message with this location from your ship. I promise.[/say]")
+
+		saynn("He chuckles softly.")
+
+		saynn("[say=psricky]You better be honest, you slut. Otherwise, I will find you. And you don't want that, do you?[/say]")
+
+		saynn("You gesture to him and to other goons.")
+
+		saynn("[say=pc]Sure. For now, get in there.[/say]")
+
+		saynn("You point your gun towards the cage.")
+
+		saynn("[say=psricky]Hah. Fuck, that's funny. You're a funny one, you know that?[/say]")
+
+		saynn("The slaves aren't being funny though. They help you, pushing the disarmed goons into the big spacious cage.. before locking it.")
+
+		saynn("[say=pc]I will send the message as soon as I can.[/say]")
+
+		saynn("You lower the gun.. offer them a final wave.. and proceed onto the ship.")
+
+		addButton("Spaceship", "Time to fly away!", "escape2_ship")
+	if(state == "escape2_ship"):
+		removeCharacter("psricky")
+		playAnimation(StageScene.Solo, "sit")
+		aimCameraAndSetLocName("psmine_exit")
+		saynn("You and the other slaves.. ex-slaves.. get onto the spaceship. Since you are the one who got them this far, might as well be the captain-pilot of this vessel.. of this.. bucket.")
+
+		saynn("At least the captain's chair is somewhat comfy. You find a spot to press the keys against.. and watch as all the information displays light up, the engines slowly spooling up.")
+
+		saynn("The loading ramp closes.. the growling vibrations gradually increasing. You have no idea how to pilot this piece of junk.. so you just pull the wheel towards yourself while tugging on the lever that says 'engines'.")
+
+		saynn("And so, the ship begins to get lighter and lighter.. until it starts hovering above the ground, picking up and throwing dust all around. Then you add a slight pitch, guiding the ship's nose towards the sky.. and go full throttle on everything.")
+
+		saynn("You fly up into the red sky, watching it transition into a pure void of space. Nothing can stop you from getting that well-deserved freedom.")
+
+		addButton("Continue", "See what happens next", "escape2_inspace")
+	if(state == "escape2_inspace"):
+		playAnimation(StageScene.Solo, "stand")
+		saynn("Things go relatively smoothly from that point on.")
+
+		saynn("You talk it through with the other slaves, about what you should do next. You have a trunk full of precious ore, the results of your hard labor. The plan is simple.. sell it, split it, go your own separate ways, start new lives. Exciting. You get to keep the ship on top of that.. since it was your plan.")
+
+		saynn("Right, you almost forgot about sending that SOS message.")
+
+		saynn("You approach the communications console and turn it on. The display shows you the latest sent message automatically.. and you can't help but to read it.")
+
+		saynn("[say=psricky]After this little gig, I will be able to get you that ring. Cool, eh? Hole shit you're a pricey one. You're lucky your holes feel so unbelievably tight around my cock. Not for long though, start lubing them up already, princess, you hear? Don't worry about the slaves, I will get rid of them, one way or another. The armed dudes will wipe the floor clean and fuck off into oblivion too. We will have this ship for a whole month only for ourselves. Just stop sending those nudes to the whole intranet, you belong to me now, yeah? Don't make me sad, baby. I know you're a stripper and you just can't help it but to show off that beautiful body of yours. Still, I'm ripping my ass out here for you, please? Alright, I gotta turn off the comms now, send me something nice, be a good girl, okay?[/say]")
+
+		saynn("Right..")
+
+		saynn("You try not to think about it too much and just send an SOS message. Sadly, the system errors out on you.")
+
+		saynn("Error: Communications are disabled. Enable them and try again? Yes/No.")
+
+		saynn("Even though the console is one, the comms themselves are still off. Without much thought, you press Yes.")
+
+		saynn("A helpful window pops up.. one that says 'bluespace jamming protocols have been temporarily disabled'.")
+
+		saynn("Oh. Shit. There is no way that fucker didn't know about this.")
+
+		saynn("Beep.")
+
+		saynn("You look down at your collar.. and watch it start to blink red. Great.")
+
+		saynn("Beep. Beep.")
+
+		saynn("Too late to do anything. Whatever it wants to do to you.. it's probably about to do it..")
+
+		saynn("Beep. Beep-Beep..")
+
+		saynn("Here is hoping others won't let you down.")
+
+		addButton("Continue", "See how fucked you are", "escape2_broughtdown")
+	if(state == "escape2_broughtdown"):
+		playAnimation(StageScene.Solo, "defeat")
+		saynn("A jolt of electricity surges through your body.. sharp and searing, like molten knives sliding through your veins. You convulse mid-breath, a strangled scream ripping from your throat.")
+
+		saynn("The world tilts, your vision fracturing into shards of blue and red.. and then.. everything goes dark..")
+
+		addButton("Continue", "See what happens next", "everything_dark")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -363,6 +495,12 @@ func _react(_action: String, _args):
 
 	if(_action == "do_drill"):
 		processTime(5*60)
+
+	if(_action == "kill_ricky"):
+		choseSave = false
+
+	if(_action == "save_others"):
+		choseSave = true
 
 	if(_action == "sneak_in_kill"):
 		processTime(5*60)
@@ -389,10 +527,31 @@ func _react(_action: String, _args):
 	if(_action == "risha_items"):
 		processTime(3*60)
 		GM.pc.setLocation(GM.pc.getCellLocation())
-		GM.main.PSH.givePlayerItemsBack()
+		GM.main.stopPlayerSlavery()
 		addMessage("All your items were returned to you.")
 
 	if(_action == "escape2_cages"):
 		processTime(3*60)
 
+	if(_action == "escape2_ship"):
+		processTime(10*60)
+
+	if(_action == "escape2_inspace"):
+		processTime(10*60)
+
+	if(_action == "escape2_broughtdown"):
+		processTime(3*60)
+
 	setState(_action)
+
+func saveData():
+	var data = .saveData()
+
+	data["choseSave"] = choseSave
+
+	return data
+
+func loadData(data):
+	.loadData(data)
+
+	choseSave = SAVE.loadVar(data, "choseSave", false)

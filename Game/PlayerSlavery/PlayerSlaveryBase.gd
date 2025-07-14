@@ -8,6 +8,9 @@ var id:String = ""
 func onSlaveryStart():
 	pass
 
+func onSlaveryEnd():
+	pass
+
 # Gets called after onSlaveryStart()
 func getStartScene() -> String:
 	return ""

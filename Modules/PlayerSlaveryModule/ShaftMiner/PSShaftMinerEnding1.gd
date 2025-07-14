@@ -287,7 +287,7 @@ func _react(_action: String, _args):
 	if(_action == "risha_items"):
 		processTime(3*60)
 		GM.pc.setLocation(GM.pc.getCellLocation())
-		GM.main.PSH.givePlayerItemsBack()
+		GM.main.stopPlayerSlavery()
 		addMessage("All your items were returned to you.")
 
 	setState(_action)

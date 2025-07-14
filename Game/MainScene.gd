@@ -1437,7 +1437,12 @@ func getDebugActions():
 				},
 			],
 		},
-		
+		{
+			"id": "stopSlavery",
+			"name": "Stop Player Slavery",
+			"args": [
+			],
+		},
 	]
 
 func doDebugAction(id, args = {}):
@@ -1454,6 +1459,12 @@ func doDebugAction(id, args = {}):
 			GM.pc.getTFHolder().startTransformation(args["tfid"])
 	if(id == "startSlavery"):
 		startPlayerSlavery(args["slaveryID"], true)
+	if(id == "stopSlavery"):
+		if(PS):
+			stopPlayerSlavery()
+			GM.pc.setLocation(GM.pc.getCellLocation())
+			while(sceneStack.size() > 1):
+				endCurrentScene()
 	if(id == "undoTFs"):
 		GM.pc.undoAllTransformations()
 	if(id == "applyTFs"):
@@ -1975,3 +1986,11 @@ func startPlayerSlavery(_slaveryID:String, storeInv:bool = false):
 		Log.printerr("Player slavery didn't give us a start scene!")
 		return
 	runScene(theStartSceneID)
+
+func stopPlayerSlavery():
+	if(!PS):
+		return
+		
+	PS.onSlaveryEnd()
+	PSH.givePlayerItemsBack()
+	PS = null
