@@ -3,6 +3,7 @@ extends Module
 func getFlags():
 	return {
 		#"slavesSpace": flag(FlagType.Number),
+		"mirriTimes": flag(FlagType.Number),
 	}
 
 func _init():
