@@ -22,14 +22,14 @@ const UpgradesDB = {
 	"headlight": {
 		name = "Headlight",
 		desc = "Let's you see further in the dark",
-		cost = 5,
+		cost = 3,
 		reqs = [],
 	},
 	
 	"pick1": {
 		name = "Better pickaxe",
 		desc = "Mining will yield ore nuggets every time.",
-		cost = 8,
+		cost = 5,
 		reqs = ["headlight"],
 	},
 	"pick2": {
@@ -65,13 +65,13 @@ const UpgradesDB = {
 	},
 	"cart2": {
 		name = "Minecart storage 2",
-		desc = "Minecart can hold 100 ore nuggets.",
+		desc = "Minecart can hold 30 ore nuggets.",
 		cost = 60,
 		reqs = ["cart1"],
 	},
 	"cart3": {
 		name = "Minecart storage 3",
-		desc = "Minecart can hold 1000 ore nuggets.",
+		desc = "Minecart can hold 100 ore nuggets.",
 		cost = 1000,
 		reqs = ["cart2"],
 	},
@@ -84,7 +84,7 @@ const UpgradesDB = {
 	},
 	"gloves2": {
 		name = "Grabbier Gloves",
-		desc = "Allows you (and other slaves) to pick up 5 nuggets at once.",
+		desc = "Allows you (and other slaves) to pick up 5 nuggets at once. Your slaves can carry 20 nuggets instead of 10.",
 		cost = 90,
 		reqs = ["gloves1"],
 	},
@@ -106,7 +106,7 @@ const UpgradesDB = {
 	"minecartrefreshments1": {
 		name = "Refreshments",
 		desc = "The minecart has a water bottle taped to it. It allows you to fully refresh your stamina once per day.",
-		cost = 200,
+		cost = 45,
 		reqs = ["cart1"],
 	},
 	"minecartrefreshments2": {
@@ -131,7 +131,7 @@ const UpgradesDB = {
 	"moreCreds3": {
 		name = "Ore processing 3",
 		desc = "Install better ore processing (crushers), allowing each nugget to get sold for 20 credits.",
-		cost = 500,
+		cost = 1500,
 		reqs = ["moreCreds2"],
 	},
 	"moreCreds4": {
@@ -156,58 +156,58 @@ const UpgradesDB = {
 	"dudes1": {
 		name = "Sex toys",
 		desc = "Buy some sex toys for other slaves. This gives you 1x shaft miner and 1x ore carrier every morning.",
-		cost = 30,
+		cost = 15,
 		reqs = ["pick1"],
 	},
 	"dudes2": {
 		name = "Fuck machines",
-		desc = "Install some fuck machines. This gives you 2x shaft miner and 1x ore carrier every morning.",
+		desc = "Install some fuck machines. This gives you 1x shaft miner and 1x ore carrier every morning.",
 		cost = 69,
 		reqs = ["dudes1"],
 	},
 	"dudes3": {
 		name = "Whores",
-		desc = "Hire some of the slaves as sluts for the other slaves. This gives you 2x shaft miner and 1x ore carrier every morning.",
-		cost = 80,
+		desc = "Hire some of the slaves as sluts for the other slaves. This gives you 1x shaft miner and 1x ore carrier every morning.",
+		cost = 105,
 		reqs = ["dudes2"],
 	},
 	"dudes4": {
 		name = "Bluespace fleshlights",
-		desc = "Hand out some portal panties and bluespace fleshlights to slaves. This gives you 2x shaft miner and 1x ore carrier every morning.",
-		cost = 420,
+		desc = "Hand out some portal panties and bluespace fleshlights to slaves. This gives you 1x shaft miner and 1x ore carrier every morning.",
+		cost = 888,
 		reqs = ["dudes3"],
 	},
 	"dudes5": {
 		name = "VR porn",
-		desc = "Give the slaves some portable VR headsets that are totally not hypnovisors. This gives you 2x shaft miner and 1x ore carrier every morning.",
+		desc = "Give the slaves some portable VR headsets that are totally not hypnovisors. This gives you 1x shaft miner and 1x ore carrier every morning.",
 		cost = 1569,
 		reqs = ["dudes4"],
 	},
 	
 	"ore1": {
 		name = "Scanners 1",
-		desc = "Install some basic ore scanners. Makes the mining zones have 2x as much ore in them on average.",
+		desc = "Install some basic ore scanners. Makes the mining zones have 3x as much ore in them on average.",
 		cost = 100,
 		reqs = ["pick2"],
 	},
 	"ore2": {
 		name = "Scanners 2",
-		desc = "Install better ore scanners. Makes the mining zones have 3x as much ore in them on average.",
-		cost = 2000,
+		desc = "Install better ore scanners. Makes the mining zones have 5x as much ore in them on average.",
+		cost = 1000,
 		reqs = ["ore1", "moreCreds2"],
 	},
 	"ore3": {
 		name = "Scanners 3",
-		desc = "Install the best ore scanners. Makes the mining zones have 5x as much ore in them on average.",
-		cost = 4000,
+		desc = "Install the best ore scanners. Makes the mining zones have 10x as much ore in them on average.",
+		cost = 10000,
 		reqs = ["ore2"],
 	},
 	
 	"rest": {
 		name = "Comfy cages",
 		desc = "Install better cages for you and other slaves. Allows you to rest for 2 hours to skip time and regain some stamina",
-		cost = 500,
-		reqs = ["dudes2"],
+		cost = 20000,
+		reqs = ["dudes3"],
 	},
 }
 
@@ -359,13 +359,13 @@ func getDudeSpawnOnSleep(_isMiner:bool) -> int:
 	if(hasUpgrade("dudes1")):
 		result += 1
 	if(hasUpgrade("dudes2")):
-		result += 1 + (1 if _isMiner else 0)
+		result += 1# + (1 if _isMiner else 0)
 	if(hasUpgrade("dudes3")):
-		result += 1 + (1 if _isMiner else 0)
+		result += 1# + (1 if _isMiner else 0)
 	if(hasUpgrade("dudes4")):
-		result += 1 + (1 if _isMiner else 0)
+		result += 1# + (1 if _isMiner else 0)
 	if(hasUpgrade("dudes5")):
-		result += 1 + (1 if _isMiner else 0)
+		result += 1# + (1 if _isMiner else 0)
 	return result
 
 func getMaxDudeAmount(_isMiner:bool) -> int:
@@ -421,6 +421,13 @@ func processDude(dude:Dude):
 		
 		if(canMineLoc(dude.loc)):
 			doMineSpot(dude.loc)
+			if(hasUpgrade("pick2")):
+				doMineSpot(dude.loc)
+			if(hasUpgrade("pick3")):
+				doMineSpot(dude.loc)
+			if(hasUpgrade("pick4")):
+				doMineSpot(dude.loc)
+				doMineSpot(dude.loc)
 			dude.energyUsed += 1
 			return
 			
@@ -439,14 +446,17 @@ func processDude(dude:Dude):
 			dude.goHome()
 			return
 		
-		var canPickup:bool = (dude.nuggets < 10)
+		var maxNuggets:int = 10
+		if(hasUpgrade("gloves2")):
+			maxNuggets = 20
+		var canPickup:bool = (dude.nuggets < maxNuggets)
 		if(hasNuggetsIn(dude.loc) && canPickup):
 			removeNuggetIn(dude.loc)
 			dude.nuggets += 1
-			if(hasUpgrade("gloves1") && hasNuggetsIn(dude.loc) && (dude.nuggets < 10)):
+			if(hasUpgrade("gloves1") && hasNuggetsIn(dude.loc) && (dude.nuggets < maxNuggets)):
 				removeNuggetIn(dude.loc)
 				dude.nuggets += 1
-			if(hasUpgrade("gloves2") && getNuggetsAmmountIn(dude.loc)>=3 && (dude.nuggets < 10)):
+			if(hasUpgrade("gloves2") && getNuggetsAmmountIn(dude.loc)>=3 && (dude.nuggets < maxNuggets)):
 				removeNuggetIn(dude.loc)
 				removeNuggetIn(dude.loc)
 				removeNuggetIn(dude.loc)
@@ -508,11 +518,11 @@ func getTextsForLocFinal(_loc:String) -> Array:
 
 func getMiningZonesMod() -> int:
 	if(hasUpgrade("ore3")):
-		return 5
+		return 10
 	if(hasUpgrade("ore2")):
-		return 3
+		return 5
 	if(hasUpgrade("ore1")):
-		return 2
+		return 3
 	return 1
 
 func updateMiningZones():
@@ -529,7 +539,7 @@ func updateMiningZones():
 		
 	for _i in range(RNG.randi_range(1, 2)*getMiningZonesMod()):
 		var randomZone:String = RNG.pick(MiningLocs)
-		for _i2 in range(RNG.randi_range(1, 2)):
+		for _i2 in range(RNG.randi_range(1, 3)):
 			spawnNugget(randomZone)
 
 func sleep():
@@ -563,7 +573,13 @@ func onSlaveryStart():
 	updateMiningZones()
 
 func onSlaveryEnd():
-	pass
+	for dude in dudes:
+		GM.world.deleteEntity(dude.iconID)
+	#dudes.clear()
+	for nuggetEntry in nuggets:
+		GM.world.deleteEntity("ps_nugget"+nuggetEntry[0])
+	GM.world.deleteEntity("ps_cart")
+	#nuggets.clear()
 
 func shouldDoFirstSlaveOfferEvent() -> bool:
 	if(didFirstOfferEvent):
@@ -880,11 +896,11 @@ func hasStamina() -> bool:
 
 func getMinecartCapacity() -> int:
 	if(hasUpgrade("cart3")):
-		return 1000
+		return 100
 	if(hasUpgrade("cart2")):
-		return 250
+		return 30
 	if(hasUpgrade("cart1")):
-		return 50
+		return 20
 	return 10
 
 func canLoadMinecart() -> bool:
@@ -962,6 +978,9 @@ func getExtraPickupAmount() -> int:
 		return 1
 	
 	return 0
+
+func didReachTarget() -> bool:
+	return totalMined >= TOTAL_MINED_TARGET
 
 func saveData() -> Dictionary:
 	var dudesData:Array = []

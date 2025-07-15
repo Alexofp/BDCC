@@ -114,7 +114,7 @@ func _run():
 		
 		if(!GM.main.PS.pushingMinecart):
 			if(GM.pc.getLocation() == GM.main.PS.LOC_BOSS):
-				if(GM.main.PS.totalMined >= GM.main.PS.TOTAL_MINED_TARGET):
+				if(GM.main.PS.didReachTarget()):
 					addButton("Freedom!", "You have mined enough ore in order to leave!", "do_win")
 				else:
 					addDisabledButton("Freedom!", "You haven't mined enough ore in order to get your freedom..")
@@ -212,9 +212,19 @@ func _run():
 		addButtonAt(14, "Enough picking up", "Stop picking up the nuggets", "roam")
 		
 	if(state == "doSleep"):
-		saynn("YOU SLEEP.")
+		saynn("Exhausted, you climb into the cage and find an empty spot, among all the other slaves, to tuck yourself into.")
 		
-		saynn("WELCOME TO THE NEW DAY.")
+		saynn("You basically have to sleep on the ground. Compared to this, even the prison's beds feel soft and cozy.")
+		
+		saynn("Eventually you manage to slip into the land of the dreams..")
+		
+		saynn("When the morning comes, the goons wake everyone up.")
+		
+		saynn("Welcome to the new day. You are still a slave, it's not a dream.")
+		
+		if(GM.main.PS.didReachTarget()):
+			saynn("[b]You have reached the target that Ricky has set! Go meet him![/b]")
+		
 		addButton("Continue", "Time to work!", "roam")
 	
 	if(state == "timeToSleep"):

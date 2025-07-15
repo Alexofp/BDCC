@@ -39,6 +39,7 @@ func storePlayersItems():
 	transferAllItems(GM.pc, GlobalRegistry.getCharacter("PlayerSlaveryStash"), true)
 
 func givePlayerItemsBack():
+	GM.pc.addCredits(-GM.pc.getCredits())
 	GM.pc.addCredits(storedCredits)
 	storedCredits = 0
 	transferAllItems(GlobalRegistry.getCharacter("PlayerSlaveryStash"), GM.pc)
