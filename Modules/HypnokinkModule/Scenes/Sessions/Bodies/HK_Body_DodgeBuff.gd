@@ -51,7 +51,7 @@ func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
 		afterBody()
-		GM.pc.addTimedBuffs([buff(Buff.DodgeChanceBuff, [6 if betterBuffs() else 4])], 60 * 60 * 4 * buffDurationMultiplier())
+		GM.pc.addTimedBuffs([buff(Buff.DodgeChanceBuff, [6 if betterBuffs() else 4])], int(60 * 60 * 4 * buffDurationMultiplier()))
 		return
 
 	setState(_action)

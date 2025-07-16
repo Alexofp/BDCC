@@ -55,7 +55,7 @@ func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
 		afterBody()
-		GM.pc.addTimedBuffs([buff(Buff.MaxPainBuff, [15 if betterBuffs() else 10])], 60 * 60 * 4 * buffDurationMultiplier())
+		GM.pc.addTimedBuffs([buff(Buff.MaxPainBuff, [15 if betterBuffs() else 10])], int(60 * 60 * 4 * buffDurationMultiplier()))
 		return
 
 	setState(_action)

@@ -10,9 +10,9 @@ func _initScene(_args = []):
 	slaveAuction.setCharID(charID)
 	#addCharacter(charID)
 	
-	savedAuctionArgs = (_args[1] if _args.size() > 1 else {})
-	if(_args.size() > 2):
-		savedAuctionArgs["presenterID"] = _args[2]
+	savedAuctionArgs = (_args[0] if _args.size() > 0 else {})
+	if(_args.size() > 1):
+		savedAuctionArgs["presenterID"] = _args[1]
 	else:
 		savedAuctionArgs["presenterID"] = "mirri"
 	addCharacter(savedAuctionArgs["presenterID"])
