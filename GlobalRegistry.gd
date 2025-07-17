@@ -634,7 +634,7 @@ func registerEverything():
 	registerSlaveEventFolder("res://Game/NpcSlavery/SlaveEvents/")
 	registerSlaveActivitiesFolder("res://Game/NpcSlavery/SlaveActivities/")
 	
-	registerPlayerSlaveryDefFolder("res://Game/PlayerSlavery/SnenarioDefs/")
+	registerPlayerSlaveryDefFolder("res://Game/PlayerSlavery/ScenarioDefs/")
 	
 	registerInteractionFolder("res://Game/InteractionSystem/Interactions/")
 	registerGlobalTaskFolder("res://Game/InteractionSystem/GlobalTasks/")

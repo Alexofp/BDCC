@@ -7,7 +7,7 @@ func getVisibleName() -> String:
 	return "Shaft Miner"
 
 func getVisibleDesc() -> String:
-	return "(Non-sexual focus) You will be sold to one of the mining corporations and become a shaft miner slave."
+	return "(Non-sexual focus) You will be sold to a guy who will force you to become a shaft miner."
 
 func canBeChosen() -> bool:
 	return true

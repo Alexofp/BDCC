@@ -17,6 +17,8 @@ func _init():
 		"res://Modules/PlayerSlaveryModule/ShaftMiner/PSShaftMinerEnding1.gd",
 		"res://Modules/PlayerSlaveryModule/ShaftMiner/PSShaftMinerEnding2.gd",
 		
+		"res://Modules/PlayerSlaveryModule/MilkCafe/PSMilkCafeGameplayScene.gd",
+		
 		"res://Modules/PlayerSlaveryModule/SlaveAuction/PlayerSlaveryStartMirriScene.gd",
 		"res://Modules/PlayerSlaveryModule/SlaveAuction/PlayerSlaveryStartLuxeScene.gd",
 		"res://Modules/PlayerSlaveryModule/SlaveAuction/PlayerSlaveryAuctionScene.gd",
