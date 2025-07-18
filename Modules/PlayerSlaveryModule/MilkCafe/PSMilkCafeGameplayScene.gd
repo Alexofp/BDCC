@@ -20,7 +20,11 @@ func _run():
 					addDisabledButton(actionName, actionDesc)
 				else:
 					addButton(actionName, actionDesc, "doAction", [actionEntry])
-		
+			else:
+				if(!isEnabled):
+					addDisabledButtonAt(theIndx, actionName, actionDesc)
+				else:
+					addButtonAt(theIndx, actionName, actionDesc, "doAction", [actionEntry])
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):

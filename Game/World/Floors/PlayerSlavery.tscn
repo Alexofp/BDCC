@@ -353,3 +353,200 @@ roomID = "psmine_mine2"
 roomDescription = "Veins of ore streak the black walls here. Dust hangs in the air, and every surface gleams with mineral shine."
 roomColor = 7
 gridColor = 8
+
+[node name="PSMilkCafeRoom" parent="." index="46" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.8, 1 )
+position = Vector2( 1280, -192 )
+roomName = "Cafe's counter"
+roomID = "pscafe_counter"
+roomSprite = 1
+roomColor = 4
+
+[node name="PSMilkCafeRoom7" parent="." index="47" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 0.7, 1 )
+position = Vector2( 1344, -192 )
+roomName = "Basement"
+roomID = "pscafe_basement"
+roomSprite = 3
+roomColor = 8
+gridColor = 7
+
+[node name="PSMilkCafeRoom8" parent="." index="48" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 1344, -256 )
+roomName = "Basement"
+roomID = "pscafe_cow"
+roomSprite = 1
+roomColor = 7
+gridColor = 7
+
+[node name="PSMilkCafeRoom9" parent="." index="49" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 1, 0.7, 1 )
+position = Vector2( 1408, -256 )
+roomName = "Garden"
+roomID = "pscafe_eat"
+roomSprite = 2
+roomColor = 1
+gridColor = 1
+
+[node name="PSMilkCafeRoom10" parent="." index="50" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 1408, -192 )
+roomName = "Basement"
+roomID = "pscafe_center"
+roomColor = 7
+gridColor = 7
+
+[node name="PSMilkCafeRoom23" parent="." index="51" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 1472, -192 )
+roomName = "Basement"
+roomID = "pscafe_right"
+roomColor = 7
+gridColor = 7
+
+[node name="PSMilkCafeRoom24" parent="." index="52" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 1, 0.7, 1 )
+position = Vector2( 1472, -256 )
+roomName = "Garden"
+roomID = "pscafe_field"
+roomColor = 1
+gridColor = 1
+
+[node name="PSMilkCafeRoom25" parent="." index="53" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 1, 0.7, 1 )
+position = Vector2( 1472, -320 )
+roomName = "Garden"
+roomColor = 1
+gridColor = 1
+
+[node name="PSMilkCafeRoom26" parent="." index="54" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 1, 0.7, 1 )
+position = Vector2( 1408, -320 )
+roomName = "Garden"
+roomColor = 1
+gridColor = 1
+
+[node name="PSMilkCafeRoom11" parent="." index="55" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 1344, -128 )
+roomName = "Basement"
+roomID = "pscafe_bull"
+roomSprite = 1
+roomColor = 7
+gridColor = 7
+
+[node name="PSMilkCafeRoom12" parent="." index="56" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 1408, -128 )
+roomName = "Basement"
+roomID = "pscafe_act"
+canEast = false
+roomSprite = 4
+roomColor = 7
+gridColor = 7
+
+[node name="PSMilkCafeRoom13" parent="." index="57" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
+position = Vector2( 1472, -128 )
+roomName = "Cells"
+roomID = "pscafe_sleep"
+roomSprite = 10
+roomColor = 7
+gridColor = 7
+
+[node name="PSMilkCafeRoom2" parent="." index="58" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.8, 1 )
+position = Vector2( 1216, -192 )
+roomName = "Space-Cafe"
+roomColor = 4
+
+[node name="PSMilkCafeRoom21" parent="." index="59" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.8, 0.6, 1 )
+position = Vector2( 1152, -192 )
+roomName = "Docks"
+roomSprite = 3
+roomColor = 5
+
+[node name="PSMilkCafeRoom22" parent="." index="60" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.8, 0.6, 1 )
+position = Vector2( 1088, -192 )
+roomName = "Docks"
+roomID = "pscafe_docks"
+roomColor = 5
+
+[node name="PSMilkCafeRoom3" parent="." index="61" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.8, 1 )
+position = Vector2( 1216, -256 )
+roomName = "Space-Cafe"
+roomSprite = 2
+roomColor = 4
+
+[node name="PSMilkCafeRoom4" parent="." index="62" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.8, 1 )
+position = Vector2( 1280, -256 )
+roomName = "Space-Cafe"
+canEast = false
+roomColor = 4
+
+[node name="PSMilkCafeRoom5" parent="." index="63" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.8, 1 )
+position = Vector2( 1280, -128 )
+roomName = "Space-Cafe"
+canEast = false
+roomColor = 4
+
+[node name="PSMilkCafeRoom14" parent="." index="64" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.8, 1 )
+position = Vector2( 1280, -64 )
+roomName = "Space-Cafe"
+roomColor = 4
+
+[node name="PSMilkCafeRoom15" parent="." index="65" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.8, 1 )
+position = Vector2( 1344, -64 )
+roomName = "Space-Cafe"
+canNorth = false
+canSouth = false
+roomColor = 4
+
+[node name="PSMilkCafeRoom16" parent="." index="66" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.8, 1 )
+position = Vector2( 1408, -64 )
+roomName = "Space-Cafe"
+canNorth = false
+canSouth = false
+roomColor = 4
+
+[node name="PSMilkCafeRoom17" parent="." index="67" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.8, 1 )
+position = Vector2( 1408, 0 )
+roomName = "Space-Cafe"
+roomSprite = 2
+roomColor = 4
+
+[node name="PSMilkCafeRoom18" parent="." index="68" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.8, 1 )
+position = Vector2( 1344, 0 )
+roomName = "Space-Cafe"
+roomColor = 4
+
+[node name="PSMilkCafeRoom19" parent="." index="69" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.8, 1 )
+position = Vector2( 1280, 0 )
+roomName = "Space-Cafe"
+roomSprite = 2
+roomColor = 4
+
+[node name="PSMilkCafeRoom20" parent="." index="70" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.8, 1 )
+position = Vector2( 1216, -64 )
+roomName = "Space-Cafe"
+roomColor = 4
+
+[node name="PSMilkCafeRoom6" parent="." index="71" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 0.6, 0.8, 1 )
+position = Vector2( 1216, -128 )
+roomName = "Space-Cafe"
+roomSprite = 2
+roomColor = 4
