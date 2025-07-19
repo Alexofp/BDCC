@@ -383,7 +383,7 @@ gridColor = 7
 [node name="PSMilkCafeRoom9" parent="." index="49" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 1408, -256 )
-roomName = "Garden"
+roomName = "Small field"
 roomID = "pscafe_eat"
 roomSprite = 2
 roomColor = 1
@@ -408,7 +408,7 @@ gridColor = 7
 [node name="PSMilkCafeRoom24" parent="." index="52" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 1472, -256 )
-roomName = "Garden"
+roomName = "Small field"
 roomID = "pscafe_field"
 roomColor = 1
 gridColor = 1
@@ -416,14 +416,16 @@ gridColor = 1
 [node name="PSMilkCafeRoom25" parent="." index="53" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 1472, -320 )
-roomName = "Garden"
+roomName = "Small field"
+roomID = "pscafe_field2"
 roomColor = 1
 gridColor = 1
 
 [node name="PSMilkCafeRoom26" parent="." index="54" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 1, 0.7, 1 )
 position = Vector2( 1408, -320 )
-roomName = "Garden"
+roomName = "Small field"
+roomID = "pscafe_field3"
 roomColor = 1
 gridColor = 1
 
