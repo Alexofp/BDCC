@@ -17,6 +17,13 @@ var day:int = 0
 var milkedToday:int = 0
 var milkedTotal:int = 0
 
+var gotMilkedNoon:bool = false
+var gotMilkedEvening:bool = false
+
+func onNewDay():
+	gotMilkedNoon = false
+	gotMilkedEvening = false
+
 var agreeMilk:bool = true
 var agreeSeed:bool = false
 
@@ -70,6 +77,8 @@ func saveData() -> Dictionary:
 		milkedToday = milkedToday,
 		milkedTotal = milkedTotal,
 		idleState = idleState,
+		gotMilkedNoon = gotMilkedNoon,
+		gotMilkedEvening = gotMilkedEvening,
 	}
 
 func loadData(_data:Dictionary):
@@ -89,6 +98,8 @@ func loadData(_data:Dictionary):
 	milkedToday = SAVE.loadVar(_data, "milkedToday", 0)
 	milkedTotal = SAVE.loadVar(_data, "milkedTotal", 0)
 	idleState = SAVE.loadVar(_data, "idleState", IDLE_IDLE)
+	gotMilkedNoon = SAVE.loadVar(_data, "gotMilkedNoon", false)
+	gotMilkedEvening = SAVE.loadVar(_data, "gotMilkedEvening", false)
 
 func _init():
 	id = "MilkCafe"
@@ -97,7 +108,7 @@ func onSlaveryStart():
 	intro_state()
 
 func onSlaveryEnd():
-	pass
+	GM.pc.removeEffect(StatusEffect.PSMilkCafeProduction)
 
 # Gets called after onSlaveryStart()
 func getStartScene() -> String:
@@ -162,11 +173,22 @@ func getFinalActions() -> Array:
 	
 	return result
 
-func doFinalAction(_finalActionEntry:Array):
+func processFightEnd(_didPCWin:bool):
+	startNewState()
+	call(state + "_fightResult", _didPCWin)
+
+func processSexEnd(_sexResult:SexReaction):
+	startNewState()
+	call(state + "_sexResult", _sexResult)
+
+func startNewState():
+	actions.clear()
+	texts.clear()
+
+func doFinalAction(_finalActionEntry:Array) -> Dictionary:
 	if(_finalActionEntry[1] == "action"):
 		var _actionEntry:Array = _finalActionEntry[4]
-		actions.clear()
-		texts.clear()
+		startNewState()
 		
 		var theID:String = _actionEntry[4]
 		var theArgs:Array = _actionEntry[5]
@@ -174,12 +196,11 @@ func doFinalAction(_finalActionEntry:Array):
 		if(theID == "setState"):
 			state = theArgs[0]
 			call(state + "_state")
-			return
-		if(theID == "nextIdle"):
-			# Event check here
-			state = "main"
-			call(state + "_state")
-			return
+			return {}
+		if(theID == "startFight"):
+			return {fight=theArgs[0]}
+		if(theID == "startSex"):
+			return {sex=theArgs}
 			
 		
 		call(state + "_do", theID, theArgs)
@@ -187,7 +208,8 @@ func doFinalAction(_finalActionEntry:Array):
 			call(state + "_state")
 		elif(actions.empty()):
 			addAction("Continue", "See what happens next", "setState", [state])
-
+	return {}
+	
 func processTurn():
 	GM.main.processTime(60*60)
 	idleState += 1
@@ -203,7 +225,7 @@ func addUpTextNum(_value:String, _howMuch:int, reverse:bool = false):
 func addUpText(_value:String, _howMuch:int):
 	if(_howMuch == 0):
 		_howMuch = 1
-	var howMuchStr:String = ("+".repeat(_howMuch) if _howMuch >= 0 else "-".repeat(_howMuch))
+	var howMuchStr:String = ("+".repeat(_howMuch) if _howMuch >= 0 else "-".repeat(-_howMuch))
 	if(_howMuch >= 0):
 		addTextToBack("[color=#00CC00]("+_value+" "+howMuchStr+")[/color]")
 	else:
@@ -213,8 +235,11 @@ func addCredits(_howMuch:int):
 	GM.pc.addCredits(_howMuch)
 	addUpTextNum("Credits", _howMuch)
 func addStamina(_howMuch:int):
-	GM.pc.addStamina(_howMuch)
-	addUpTextNum("Stamina", _howMuch)
+	var theMaxStamina:float = float(GM.pc.getMaxStamina())
+	var theFactor:float = theMaxStamina/100.0
+	var howMuchActually:int = int(round(_howMuch*theFactor))
+	GM.pc.addStamina(howMuchActually)
+	addUpTextNum("Stamina", howMuchActually)
 func addPain(_howMuch:int):
 	GM.pc.addPain(_howMuch)
 	addUpTextNum("Pain", _howMuch, true)
@@ -244,6 +269,7 @@ func onDayEnd():
 		saynn("The cafe wasn't able to make any profit because there was not enough milk/cream.")
 	
 	milkedToday = 0
+	onNewDay()
 
 func intro_state():
 	playAnimation(StageScene.Solo, "kneel", {pc=C_PC})
@@ -277,7 +303,10 @@ func intro_do(_id:String, _args:Array):
 		setState("main")
 
 func main_state():
+	if(!GM.pc.hasEffect(StatusEffect.PSMilkCafeProduction)):
+		GM.pc.addEffect(StatusEffect.PSMilkCafeProduction)
 	aimCamera(L_CENTER)
+	playAnimation(StageScene.Solo, "stand")
 	
 	saynn("MAIN LOOP.")
 	
@@ -333,10 +362,20 @@ func triggerEventMaybe():
 	if(lateCheck()):
 		return
 	
+	if(!gotMilkedNoon && GM.main.getTime() >= 11*60*60):
+		gotMilkedNoon = true
+		setState(RNG.pick(["about_to_be_milked_by_guy", "about_to_be_milked_by_girl"]))
+		return
+	if(!gotMilkedEvening && GM.main.getTime() >= 20*60*60):
+		gotMilkedEvening = true
+		setState(RNG.pick(["about_to_be_milked_by_guy", "about_to_be_milked_by_girl"]))
+		return
+	
 	if(RNG.chance(50)):
-		addContinue("startEvent", ["test"])
-	else:
-		addContinue("setState", ["main"])
+		setState("test")
+		#addContinue("startEvent", ["test"])
+	#else:
+	#	addContinue("setState", ["main"])
 
 func addNextIdleStageButton():
 	addContinue("nextIdle")
@@ -438,3 +477,147 @@ func test_state():
 
 func test_do(_id:String, _args:Array):
 	pass
+
+func about_to_be_milked_by_guy_state():
+	aimCamera(L_ACT)
+	playAnimation(StageScene.Duo, "stand", {npc=C_GUY})
+	saynn("ABOUT TO BE MILKED BY GUY.")
+	
+	addAction("Agree", "Let him milk you!", "agree")
+	addAction("Decline", "You'd rather not.", "decline")
+
+func about_to_be_milked_by_guy_do(_id:String, _args:Array):
+	if(_id == "agree"):
+		saynn("You decide to let him milk you.")
+		addObedience(1)
+		
+		milkScene(C_GUY, C_PC)
+		setState("main")
+	if(_id == "decline"):
+		saynn("You decline his offer.")
+		addObedience(-1)
+		setState("main")
+
+func about_to_be_milked_by_girl_state():
+	aimCamera(L_ACT)
+	playAnimation(StageScene.Duo, "stand", {npc=C_GIRL})
+	saynn("ABOUT TO BE MILKED BY GIRL.")
+	
+	addAction("Allow", "Let her milk you", "agree")
+	addAction("Fight!", "Resist her attempts", "decline")
+
+func about_to_be_milked_by_girl_do(_id:String, _args:Array):
+	if(_id == "agree"):
+		saynn("You decide to let her milk you.")
+		addObedience(1)
+		
+		milkScene(C_GIRL, C_PC)
+		setState("main")
+	if(_id == "decline"):
+		#TODO: Add a fight here!
+		saynn("You decline her offer. YOU'RE GONNA HAVE TO FIGHT.")
+		addObedience(-1)
+		addAction("Fight!", "Start the fight", "startFight", [C_GIRL])
+
+func about_to_be_milked_by_girl_fightResult(_didPCWin:bool):
+	saynn("DID WIN: "+str(_didPCWin))
+	addContinue("setState", ["main"])
+
+func parse(_text:String, _chars:Dictionary):
+	return GM.ui.processString(_text, _chars)
+
+var charOverrides:Dictionary = {}# no sync
+
+func sayParsed(_text:String):
+	saynn(parse(_text, charOverrides))
+
+func milkScene(_actorID:String, _targetID:String):
+	charOverrides = {actor=_actorID, target=_targetID}
+	var _isPCActor:bool = (_actorID == C_PC)
+	var _isPCTarget:bool = (_targetID == C_PC)
+	var _actor:BaseCharacter = GlobalRegistry.getCharacter(_actorID)
+	var _target:BaseCharacter = GlobalRegistry.getCharacter(_targetID)
+	var _actorName:String = _actor.getName()
+	var _targetName:String = _target.getName()
+	if(_isPCTarget):
+		_targetName = "you"
+	var _targetCaged:bool = _target.isWearingChastityCage()
+	var _canMilkBreasts:bool = true
+	if(_isPCTarget && !agreeMilk):
+		_canMilkBreasts = false
+	if(_targetID == C_BULL):
+		_canMilkBreasts = false
+	var _canMilkPenis:bool = _target.hasReachablePenis()
+	var _canMilkProstate:bool = _targetCaged
+	if(_isPCTarget && !agreeSeed):
+		_canMilkPenis = false
+		_canMilkProstate = false
+	
+	var possible:Array = []
+	
+	if(_canMilkBreasts && _canMilkPenis):
+		possible.append(["gropeAndStroke", 3.0])
+	elif(_canMilkBreasts):
+		possible.append(["grope", 1.0])
+	if(_canMilkPenis):
+		possible.append(["stroke", 1.0])
+	if(_canMilkProstate):
+		possible.append(["fisting", 1.0])
+	
+	if(possible.empty()):
+		saynn("Game couldn't figure out how to milk you!")
+		return
+	var milkWay:String = RNG.pickWeightedPairs(possible)
+	
+	var shouldMilkPenis:bool = false
+	var shouldMilkBreasts:bool = false
+	var collectedEnough:bool = false
+	var collectedMilk:float = 0.0
+	var collectedSeed:float = 0.0
+	
+	if(milkWay == "gropeAndStroke"):
+		shouldMilkPenis = true
+		shouldMilkBreasts = true
+		playAnimation(StageScene.BreastGroping, "stroke", {pc=_actorID, npc=_targetID, npcCum=true, npcBodyState={naked=true,hard=true}})
+		sayParsed("{actor.You} {actor.youVerb('bring')} {target.you} down to the floor and {actor.youVerb('milk')} {target.yourHis} {target.breasts} with one hand while stroking {target.yourHis} {target.penis} with another!")
+	if(milkWay == "grope"):
+		shouldMilkBreasts = true
+		playAnimation(StageScene.BreastGroping, "grope", {pc=_actorID, npc=_targetID, npcCum=true, npcBodyState={naked=true,hard=true}})
+		sayParsed("{actor.You} {actor.youVerb('bring')} {target.you} down to the floor and {actor.youVerb('milk')} {target.yourHis} {target.breasts} with {actor.yourHis} hands!")
+	if(milkWay == "stroke"):
+		shouldMilkPenis = true
+		playAnimation(StageScene.ChairOral, "stroke", {pc=_targetID, npc=_actorID, pcCum=true, bodyState={naked=true,hard=true}})
+		sayParsed("{actor.You} {actor.youVerb('put')} {target.you} onto a chair and {actor.youVerb('proceed')} to stroke {target.yourHis} {target.penis} until the orgasm!")
+	if(milkWay == "fisting"):
+		shouldMilkPenis = true
+		playAnimation(StageScene.SexFisting, "sex", {pc=_actorID, npc=_targetID, npcCum=true, npcBodyState={naked=true,hard=true}})
+		sayParsed("{actor.You} {actor.youVerb('put')} {target.you} onto a chair and {actor.youVerb('proceed')} to stroke {target.yourHis} {target.penis} until the orgasm!")
+	
+	if(shouldMilkPenis):
+		collectedSeed += _target.milkSeed()
+	if(shouldMilkBreasts):
+		collectedMilk += _target.milk()
+	
+	_target.orgasmFrom(_actorID)
+	if(_isPCTarget):
+		addStamina(-40)
+	
+	#var collectedTotal:float = collectedMilk + collectedSeed
+	var collectedTotalWeighted:float = collectedMilk + collectedSeed*3.0
+	if(collectedTotalWeighted < 10.0):
+		collectedEnough = false
+	else:
+		collectedEnough = true
+	
+	if(shouldMilkBreasts && shouldMilkPenis):
+		sayParsed("{actor.You} managed to collect "+str(Util.roundF(collectedMilk, 1))+"ml of {target.milk} and "+str(Util.roundF(collectedSeed, 1))+"ml of {target.cum}.")
+	elif(shouldMilkBreasts):
+		sayParsed("{actor.You} managed to collect "+str(Util.roundF(collectedMilk, 1))+"ml of {target.milk}.")
+	elif(shouldMilkPenis):
+		sayParsed("{actor.You} managed to collect "+str(Util.roundF(collectedSeed, 1))+"ml of {target.cum}.")
+	
+	if(collectedEnough):
+		sayParsed("[say=actor]THAT'S ENOUGH![/say]")
+		milkedToday += 1
+	else:
+		sayParsed("[say=actor]THAT'S NOT ENOUGH![/say]")

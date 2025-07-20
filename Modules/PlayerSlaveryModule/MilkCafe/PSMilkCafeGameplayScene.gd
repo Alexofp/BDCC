@@ -5,7 +5,7 @@ func _init():
 
 func _run():
 	if(state == ""):
-		playAnimation(StageScene.Solo, "stand")
+		#playAnimation(StageScene.Solo, "stand")
 		
 		say(GM.main.PS.getFinalText())
 		var theActions:Array = GM.main.PS.getFinalActions()
@@ -32,7 +32,18 @@ func _react(_action: String, _args):
 		return
 		
 	if(_action == "doAction"):
-		GM.main.PS.doFinalAction(_args[0])
+		var result:Dictionary = GM.main.PS.doFinalAction(_args[0])
+		if(result.has("fight")):
+			runScene("FightScene", [result["fight"]], "fight_scene")
+		elif(result.has("sex")):
+			runScene("GenericSexScene", result["sex"], "sex_scene")
 		return
 
 	setState(_action)
+
+func _react_scene_end(_tag, _result):
+	if(_tag == "sex_scene"):
+		GM.main.PS.processSexEnd(_result[0])
+	if(_tag == "fight_scene"):
+		var battlestate = _result[0]
+		GM.main.PS.processFightEnd(battlestate == "win")
