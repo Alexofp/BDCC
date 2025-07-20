@@ -33,11 +33,11 @@ func addObedience(howMuch:float):
 	else:
 		pass
 		#mult += getTiredEffect()*0.5
-	
+
 	addObedienceRaw(howMuch * mult * (1.0 + sign(howMuch) * personalityScore({
 		PersonalityStat.Subby:0.8, # Subby people obey better
 		})))
-	
+
 # When reaches 1, the npc submits unwillingly (gives up)
 # Increased by punishing when disobeying? (only if big punishments) (2-3-4)
 # Increased by doing things that the npc doesn't like
@@ -59,7 +59,7 @@ func addBrokenSpirit(howMuch:float):
 	else:
 		#mult += getTiredEffect()*-0.2
 		pass
-	
+
 	addBrokenSpiritRaw(howMuch * mult * (1.0 + sign(howMuch) * personalityScore({
 		PersonalityStat.Coward:0.8, # Cowards are easier to break
 		})))
@@ -232,7 +232,7 @@ func getTiredEffect() -> float:
 	if(tiredness >= 5.0):
 		return 0.9
 	var progress = Util.remapValue(tiredness, 1.0, 5.0, 0.0, 1.0)
-	
+
 	return 0.1 + progress * progress * (3.0 - 2.0 * progress) * 0.9
 
 func getWorkEfficiency() -> float:
@@ -263,14 +263,14 @@ func tickUnhappiness():
 	unhapdelta += getResistScoreUnclamped() * 0.3
 	# A little bit of despair makes us act!
 	unhapdelta += Util.distanceToHalfWithIntervalEased(getDespair(), 0.15, 0.25) * 0.4
-	
+
 	var hapdelta = 0.0
 	# Spoiling us makes us less eager to leave
 	hapdelta += Util.distanceToHalfWithIntervalEased(max(getBrokenSpirit(), max(getObedience(), getLove())), 1.0, 1.0)
 	hapdelta += max(getAwareness(), max(getTrust(), getSpoiling()))
-	
+
 	hapdelta += Util.distanceToHalfWithIntervalEased(getFear(), 1.0, 1.0)
-	
+
 	var finalMod = 20.0
 	addUnhappiness((unhapdelta - hapdelta) * finalMod)
 
@@ -373,7 +373,7 @@ func onNewDay():
 	hasRandomEvent = false
 	randomEventWillHappenID = ""
 	gotBeatenUpToday = false
-	
+
 	tickUnhappiness()
 	var daysWithoutOrgasm = GM.main.getDays() - lastDayOrgasmed
 	if(daysWithoutOrgasm > 100):
@@ -385,19 +385,19 @@ func onNewDay():
 		addNeediness(1.0)
 	elif(getChar().isInHeat()):
 		addNeediness(1.0)
-	
+
 	# Random event should be decided here
 	var possibleEventsWithWeights = []
 	for eventID in GlobalRegistry.getSlaveEvents():
 		var slaveEvent = GlobalRegistry.getSlaveEvent(eventID)
 		if(!eventCooldowns.has(eventID) && slaveEvent.supportsActivity(getActivityID()) && slaveEvent.shouldHappenFinal(self)):
 			possibleEventsWithWeights.append([eventID, slaveEvent.getEventWeight()])
-	
+
 	for eventID in eventCooldowns.keys():
 		eventCooldowns[eventID] -= 1
 		if(eventCooldowns[eventID] <= 0):
 			eventCooldowns.erase(eventID)
-	
+
 	if(possibleEventsWithWeights.size() > 0):
 		var pickedRandomEvent = RNG.pickWeightedPairs(possibleEventsWithWeights)
 		if(pickedRandomEvent != null):
@@ -407,24 +407,24 @@ func onNewDay():
 			var theCooldown = slaveEvent.getCooldown(self)
 			if(theCooldown > 0):
 				eventCooldowns[randomEventWillHappenID] = theCooldown
-		
+
 	# If has any punishPoints, do something (maybe?)
-	
+
 	var character = getChar()
 	if(character.getInventory().hasRemovableRestraints()):
 		var restraintAmount = character.getInventory().getEquppedRemovableRestraints().size()
 		if(restraintAmount > 0):
 			addAwareness(0.03 * sqrt(restraintAmount))
-	
+
 	# If checked on us last day
 	if(checkedOnSlaveToday):
 		addBrokenSpirit(Util.distanceToHalfEased(getDespair())*(1.0+getAwareness())*0.02)
 		addAwareness(0.02)
-	
+
 	fear = fear / (2.5+personalityScore({PersonalityStat.Coward:-1.0}))
 	if(fear < 0.02):
 		fear = 0.0
-	
+
 	if(activity == null || !activity.preventsStatsDecay()): # Stats decay happens here
 		if(rewardBalance < 0):
 			addTrust(-rewardBalance * 0.04)
@@ -449,10 +449,10 @@ func onNewDay():
 		spoiling = decayValue(spoiling, 0.05, personalityScore({
 			PersonalityStat.Brat: -1.0,
 		}), 0.8)
-	
+
 	if(activity != null):
 		activity.onNewDay()
-	
+
 	rewardBalance = 0
 	punishmentsToday = 0
 	rewardsToday = 0
@@ -472,7 +472,7 @@ func getRewardBalanceString():
 	else:
 		var punishText = ["deserves a [b]small[/b] punishment", "deserves a [b]normal[/b] punishment", "deserves a [b]big[/b] punishment", "deserves the [b]biggest[/b] punishment"]
 		return punishText[Util.mini(-rewardBalance-1, punishText.size()-1)]
-		
+
 # 1 = small punishment
 # 2 = normal punishment
 # 3 = big punishment
@@ -482,7 +482,7 @@ func deservesPunishment(howBig:int):
 		rewardBalance = Util.maxi(-4, rewardBalance - 1)
 		return
 	rewardBalance = Util.mini(rewardBalance, -howBig)
-	
+
 	if(rewardBalance < -4):
 		rewardBalance = -4
 
@@ -503,19 +503,19 @@ func deservesReward(howBig:int):
 
 func handlePunishment(_howBig:int):
 	punishmentsToday += 1
-	
+
 	var diff = -rewardBalance - _howBig
 	var diffAbs = Util.maxi(diff, -diff)
-	
+
 	#if(getWorkEfficiency() <= 0.1): # We are very tired
 		# Who cares
 	#	rewardBalance = 0
 	#	return
-	
+
 	if(_howBig >= 3): # Big punishments always add despair
 		addDespair(0.02*_howBig)
 	addFearUpToAPoint(0.04 * _howBig * _howBig, 0.25 + 0.2*_howBig)
-	
+
 	if(diff >= 2): # Punishing not enough
 		addAwareness(-0.01 * diffAbs)
 	if(diff <= -2): # punishing way too much (or punishing when we should be rewarding)
@@ -523,7 +523,7 @@ func handlePunishment(_howBig:int):
 		addDespair(0.05*diffAbs)
 		addSpoiling(-0.02 * diffAbs * diffAbs)
 		addBrokenSpirit(0.02*diffAbs)
-		
+
 	if(diff == 0): # The punishment fits the crime just right
 		addAwareness(0.02 * _howBig)
 		addTrust(-0.02)
@@ -535,7 +535,7 @@ func handlePunishment(_howBig:int):
 		addTrust(-0.01)
 		addObedience(0.007 * _howBig)
 		addSpoiling(-0.01 * _howBig)
-	
+
 	if(punishmentsToday >= 2): # Did too many punishments
 		addDespair(0.01*diffAbs)
 		addTired(1)
@@ -543,21 +543,21 @@ func handlePunishment(_howBig:int):
 			addSpoiling(-0.01 * _howBig)
 		else: #Gave some rewards at least
 			pass
-	
+
 	rewardBalance = 0
 
 func handleReward(_howBig:int):
 	rewardsToday += 1
-	
+
 	var diff = rewardBalance - _howBig
 	var diffAbs = Util.maxi(diff, -diff)
-	
+
 	#if(getWorkEfficiency() <= 0.1): # We are very tired
 		# Who cares
 	#	rewardBalance = 0
 	#	return
 	addFear(-0.02 * _howBig * _howBig)
-	
+
 	if(diff >= 2): # Reward not big enough
 		addTrust(-0.03)
 		addAwareness(-0.02)
@@ -568,7 +568,7 @@ func handleReward(_howBig:int):
 	if(diff <= -1 && rewardBalance != 0): # Rewarding when should be punishing
 		addLove(0.01 * diffAbs)
 		addDespair(-0.02 * diffAbs)
-	
+
 	if(diff == 0): # Reward fits just right
 		addTrust(0.03 * _howBig)
 		addAwareness(0.02)
@@ -581,14 +581,14 @@ func handleReward(_howBig:int):
 		addDespair(-0.01)
 	else: # Rewarding for no good reason
 		pass
-	
+
 	if(rewardsToday >= 2): # Did too many rewards
 		addSpoiling(0.01 * _howBig)
 		if(rewardsToday == 0): # But never punished
 			addDespair(-0.02 * _howBig)
 		else: #Gave some punishments too
 			addDespair(-0.01 * _howBig)
-	
+
 	rewardBalance = 0
 
 func setChar(theChar):
@@ -610,7 +610,7 @@ func getChar():
 
 func handleSexEvent(_event:SexEvent):
 	var theChar = getChar()
-	
+
 	if(_event.getTargetChar() == theChar):
 		addNeediness(0.03) # Any kind of sex event makes us sliiightly needier
 		if(_event.getType() == SexEvent.Orgasmed):
@@ -618,14 +618,14 @@ func handleSexEvent(_event:SexEvent):
 			lastDayOrgasmed = GM.main.getDays()
 	else:
 		addNeediness(0.01) # Watching others get fucked also makes us a bit needier
-			
+
 	for task in levelupTasks:
 		task.onSexEvent(theChar, _event)
 
 func levelupCurrentSpecialization():
 	if(!slaveSpecializations.has(slaveType)):
 		slaveSpecializations[slaveType] = 0
-	
+
 	slaveSpecializations[slaveType] += 1
 	if(slaveSpecializations[slaveType] > 15):
 		slaveSpecializations[slaveType] = 15
@@ -633,7 +633,7 @@ func levelupCurrentSpecialization():
 func levelupSpecialization(theSlaveType):
 	if(!slaveSpecializations.has(slaveType)):
 		return false
-	
+
 	if(slaveSpecializations[theSlaveType] >= 15):
 		return false
 	slaveSpecializations[theSlaveType] += 1
@@ -664,13 +664,13 @@ func getMoodForWork() -> float:
 
 func doTrain():
 	var currentSlaveType:SlaveTypeBase = GlobalRegistry.getSlaveType(slaveType)
-	
+
 	var currentSkillLevel = getCurrentSpecializationLevel()
-	
+
 	var texts = []
 	texts.append(currentSlaveType.getTrainText(getChar(), currentSkillLevel))
 	var extraTexts = []
-	
+
 	var isSuccess = true
 	var actuallyAddedSkill = false
 	if(isResistingSuperActively()):
@@ -680,7 +680,7 @@ func doTrain():
 	else:
 		var workEffect = getWorkEfficiency()
 		var obeyMood = getMoodForWork()
-		
+
 		if(workEffect < 0.5 && RNG.chance(80.0*(1.0-workEffect))):
 			isSuccess = false
 			texts.append( currentSlaveType.getFailedTrainTextWeak(getChar()) )
@@ -715,31 +715,31 @@ func doTrain():
 				addObedience(0.01)
 				addLove(0.01)
 				addFear(-0.1)
-	
+
 	var newSkillLevel = getCurrentSpecializationLevel()
 	var unlockedSomething = false
 	if(actuallyAddedSkill && newSkillLevel != currentSkillLevel):
 		var allUnlocks = currentSlaveType.getUnlockHints(getChar())
-		
+
 		for unlockInfo in allUnlocks:
 			if(unlockInfo["unlocksAt"] == newSkillLevel):
 				extraTexts.append("[i]"+unlockInfo["name"]+" unlocked! "+unlockInfo["text"]+"[/i]")
 				unlockedSomething = true
-				
+
 		if(unlockedSomething):
 			for unlockInfo in allUnlocks:
 				if(unlockInfo["unlocksAt"] > newSkillLevel):
 					extraTexts.append("[i]Next unlock is "+unlockInfo["name"]+" at rank "+rankToLetter(unlockInfo["unlocksAt"])+"[/i]")
 					break
-	
+
 	texts.append_array(extraTexts)
-	
+
 	var result = {
 		actuallyAddedSkill = actuallyAddedSkill,
 		success = isSuccess,
 		texts = texts,
 	}
-	
+
 	if(isSuccess && actuallyAddedSkill):
 		addExperience(30)
 	elif(isSuccess):
@@ -747,7 +747,7 @@ func doTrain():
 	else:
 		addExperience(5)
 	tiredness += 1
-	
+
 	return result
 
 func hoursPassed(_howMuch):
@@ -757,10 +757,10 @@ func hoursPassed(_howMuch):
 static func getNextLevelExperienceForLevel(theLevel:int) -> int:
 	var baseExp = 100
 	var expMult = 1.1
-	
+
 	if(theLevel <= 0):
 		return baseExp
-	
+
 	var rawExp:float = float(baseExp) * pow(expMult, theLevel-1)
 	var nextLevelExp = int(((rawExp + 9) / 10) * 10)
 	return nextLevelExp
@@ -773,34 +773,34 @@ func getExperienceStr():
 
 func generateLevelUpTasks():
 	var taskAmount = 1
-	
+
 	if(slaveLevel >= 3 && RNG.chance(50)):
 		taskAmount += 1
 	if(slaveLevel >= 10 && RNG.chance(50)):
 		taskAmount += 1
 	if(slaveLevel >= 4 && RNG.chance(20 + personalityScore({PersonalityStat.Subby: 1.0}) * 10.0)):
 		taskAmount += 1
-	
+
 	var difficultyMin = 1.0
 	var difficultyMax = 1.0
-	
+
 	difficultyMin += sqrt(slaveLevel)*0.05
 	difficultyMax += sqrt(slaveLevel)*0.1
-	
+
 	if(slaveLevel >= 6 && RNG.chance(5)):
 		difficultyMax *= 2
-	
+
 	if(slaveLevel >= 3 && RNG.chance(10 + personalityScore({PersonalityStat.Mean: 1.0}) * 5.0)):
 		difficultyMax *= 4
-		
-	
+
+
 	levelupTasks = NpcBreakTaskBase.generateTasksFor(getChar(), slaveType, true, taskAmount, difficultyMin, difficultyMax)
 	for task in levelupTasks:
 		var _ok = task.connect("onTaskCompleted", self, "onLevelupTaskCompleted")
 
 func addExperience(howMuch:int):
 	slaveExperience += howMuch
-	
+
 	var experienceCap = getExperienceRequiredForNextLevel()
 	if(slaveExperience >= experienceCap):
 		if(!readyForLevelup):
@@ -808,7 +808,7 @@ func addExperience(howMuch:int):
 			if(GM.main != null):
 				GM.main.addMessage("Your slave named "+getChar().getName()+" is ready to be leveled up.")
 			generateLevelUpTasks()
-		
+
 		slaveExperience = experienceCap
 
 func isReadyToBeLeveledUp():
@@ -817,7 +817,7 @@ func isReadyToBeLeveledUp():
 func onLevelupTaskCompleted(_theTask):
 	if(readyForLevelup && areLevelupTasksCompleted()):
 		readyForLevelup = false
-		
+
 		doLevelup()
 
 func areLevelupTasksCompleted():
@@ -833,7 +833,7 @@ func checklevelUp():
 func doLevelup():
 	readyForLevelup = false
 	levelupTasks.clear()
-	
+
 	slaveExperience = 0
 	slaveLevel += 1
 
@@ -842,37 +842,37 @@ func doLevelup():
 		var howMuchExp = int(slaveLevel * 5)
 		GM.main.addMessage("You received "+str(howMuchExp)+" experience")
 		GM.pc.addExperience(howMuchExp)
-		
+
 		GM.pc.getReputation().addRep(RepStat.Alpha, 0.2*sqrt(slaveLevel))
-		
+
 	emit_signal("onSlaveLevelup", self)
 
 func getLevelupTaskProgressText():
 	var result = []
-	
+
 	for task in levelupTasks:
 		var taskString = task.getTaskString()
 		if(task.isCompleted()):
 			result.append("[color=green]"+str(taskString)+"[/color]")
 		else:
 			result.append("[color=red]"+str(taskString)+"[/color]")
-	
+
 	return Util.join(result, "\n")
 
 func fetishScore(fetishes = {}, addscore = 0.0):
 	var fetishHolder: FetishHolder = getChar().getFetishHolder()
-	
+
 	var maxPossibleValue = 0.0
 	var result = addscore
 	for fetishID in fetishes:
 		var fetishValue = fetishHolder.getFetishValue(fetishID)
 		result += fetishValue * fetishes[fetishID]
 		maxPossibleValue += 1.0
-	
+
 	var forcedObedience = clamp(getChar().getForcedObedienceLevel(), 0.0, 1.0)
 	if(forcedObedience > 0.0):
 		result = result * (1.0 - forcedObedience) + maxPossibleValue * forcedObedience
-	
+
 	return result
 
 # 1 = loves, -1 = hates
@@ -881,12 +881,12 @@ func fetishScoreOne(fetishID):
 
 func personalityScore(personalityStats = {}, addscore = 0.0):
 	var personality: Personality = getChar().getPersonality()
-	
+
 	var result = addscore
 	for personalityStatID in personalityStats:
 		var personalityValue = personality.getStat(personalityStatID)
 		result += personalityValue * personalityStats[personalityStatID]
-	
+
 	return result
 
 func personalityScoreOne(personalityStat):
@@ -918,19 +918,19 @@ func getResistScoreUnclamped():
 	overComeValue *= (1.0 - getObedience())
 	overComeValue *= (1.0 - getLove())
 	overComeValue *= (1.0 - getBrokenSpirit())
-	
+
 	var restraintAmount = getChar().getInventory().getEquppedRemovableRestraints().size()
 	for _i in range(restraintAmount):
 		overComeValue *= 0.9
-	
+
 	# Close to breaking, no resistance anymore
 	if(despair > 0.9):
 		overComeValue = min(0.1, overComeValue)
 	elif(despair > 0.6):
 		overComeValue = min(0.5, overComeValue)
-	
+
 	return max(0.0, overComeValue)
-		
+
 func getResistScore():
 	return clamp(getResistScoreUnclamped(), 0.0, 1.0)
 
@@ -982,7 +982,7 @@ func getMaxSkillsAmount():
 
 func canLearnNewSkill():
 	var skillAmount = slaveSpecializations.size()
-	
+
 	if(skillAmount < getMaxSkillsAmount()):
 		return true
 	return false
@@ -990,7 +990,7 @@ func canLearnNewSkill():
 func canLearnNewSkillAndHasAvailable():
 	if(!canLearnNewSkill()):
 		return false
-	
+
 	var allSkills = GlobalRegistry.getSlaveTypes()
 	for theSkillID in allSkills:
 		if(!slaveSpecializations.has(theSkillID)):
@@ -1012,7 +1012,7 @@ func learnNewSkill(theSlaveType):
 func getPerfectIdleMessage():
 	if(isMindBroken()):
 		return "{npc.He} stands still, {npc.his} stare blank.."
-	
+
 	var db = [
 		{stats={obedience=1.0,love=0.0,brokenspirit=1.0}, notblind=true, message="{npc.HeShe} stands perfectly still, eyes locked onto you with unwavering obedience. There's an unsettling lack of emotion in {npc.hisHer} gaze, as if {npc.heShe} exists solely to fulfill your commands."},
 		{stats={obedience=0.0,love=0.0,brokenspirit=0.0}, notblind=true, message="{npc.HeShe} glares defiantly at you, a spark of rebellion in {npc.hisHer} eyes. {npc.HisHer} posture exudes resistance, {npc.hisHer} body language challenging your authority at every turn. It's clear that {npc.heShe} despises being under your control."},
@@ -1030,43 +1030,43 @@ func getPerfectIdleMessage():
 		{stats={obedience=0.7,love=0.2,fear=0.8}, message="Avoiding your gaze, {npc.heShe} fidgets nervously, a mix of obedience and fear evident in {npc.his} demeanor. There's a hesitant submission, and the aura of tension suggests an anticipation of potential consequences for any misstep."},
 		#{stats={love=0.0}, message=""},
 	]
-	
+
 	var mainStats = {
 		obedience = obedience, love = love, brokenspirit = brokenspirit,
 	}
 	var supportStats = {
 		awareness = awareness, trust = trust, despair = despair, spoiling = spoiling, tiredness=getTiredEffect(), fear = fear,
 	}
-	
+
 	var highestScore = -100.0
 	var bestMessage = "Your slave stands still."
-	
+
 	for dbEntry in db:
 		var mainDistance = 0.0
 		var supportDistance = 0.0
 		var missingStatsDistance = 0.0
-		
+
 		var foundMainStats = 0
 		var foundSupportStats = 0
 		var theStats = dbEntry["stats"]
 		for stat in theStats:
 			if(mainStats.has(stat)):
 				var distance = abs(mainStats[stat] - theStats[stat])
-				mainDistance += 1.0 - distance
+				mainDistance += distance
 				foundMainStats += 1
 			elif(supportStats.has(stat)):
 				var distance = abs(supportStats[stat] - theStats[stat])
-				supportDistance += 1.0 - distance
+				supportDistance += distance
 				foundSupportStats += 1
-		
+
 		missingStatsDistance = Util.maxi(0, mainStats.size() - foundMainStats) * 2.0 + Util.maxi(0, supportStats.size() - foundSupportStats) * 1.0
-		
+
 		var finalScore = mainDistance*2.0/(foundMainStats+1) + supportDistance*1.0/(foundSupportStats+1) - missingStatsDistance*0.1
-		
+
 		if(finalScore > highestScore):
 			highestScore = finalScore
 			bestMessage = dbEntry["message"]
-	
+
 	return bestMessage
 
 func isDoingActivity():
@@ -1104,15 +1104,15 @@ func getTalkedTimesToday() -> int:
 
 func getLevelUpHintText():
 	var result = []
-	
+
 	for task in levelupTasks:
 		var taskString = task.getTaskString()
 		result.append("[b]"+str(taskString)+"[/b]"+(" (completed)" if task.isCompleted() else ""))
-		
+
 		var hintString = task.getTaskHint(true)
 		if(hintString != null && hintString != ""):
 			result.append(" - "+hintString)
-	
+
 	return Util.join(result, "\n")
 
 func checkIfTasksGotCompleted():
@@ -1122,7 +1122,7 @@ func checkIfTasksGotCompleted():
 
 func onSexEnded(_context = {}):
 	#_context = {sexEngine=self,isDom=false,sexFullResult=sexResult,sexResult=sexResult["subs"][subID]}
-	
+
 	if(_context.has("isDom") && !_context["isDom"]):
 		var domOrgasms:int = 0
 		var slaveOrgasms:int = 0
@@ -1131,11 +1131,11 @@ func onSexEnded(_context = {}):
 			domOrgasms = fullSexResult.getDomTotalOrgasmCount()
 		if(_context.has("sexResult")):
 			slaveOrgasms = _context["sexResult"].timesCame
-		
+
 		if(slaveOrgasms == 0 && domOrgasms > 0):
 			# We got denied!
 			addNeediness(sqrt(domOrgasms) / 2.0)
-	
+
 	var theChar = getChar()
 	for task in levelupTasks:
 		task.onSexEnded(theChar, _context)
@@ -1160,11 +1160,11 @@ func pawnExist() -> bool:
 
 func getSkillAmountFullyLearned() -> int:
 	var result:int = 0
-	
+
 	for skillID in slaveSpecializations:
 		if(slaveSpecializations[skillID] >= 15):
 			result += 1
-	
+
 	return result
 
 func getSexGoalWeightModifier(_sexGoalID:String) -> float:
@@ -1172,7 +1172,7 @@ func getSexGoalWeightModifier(_sexGoalID:String) -> float:
 	for theTask in levelupTasks:
 		if(!theTask.isCompleted()):
 			result += theTask.getSexGoalWeightModifier(_sexGoalID)
-	
+
 	return max(result, 0.0)
 
 func saveData():
@@ -1207,14 +1207,14 @@ func saveData():
 		"lastDayOrgasmed": lastDayOrgasmed,
 		"neediness": neediness,
 	}
-	
+
 	if(activity == null):
 		data["activity_id"] = ""
 		data["activity_data"] = {}
 	else:
 		data["activity_id"] = activity.id
 		data["activity_data"] = activity.saveData()
-	
+
 	var tasksData = []
 	for task in levelupTasks:
 		var taskData = {
@@ -1223,7 +1223,7 @@ func saveData():
 		}
 		tasksData.append(taskData)
 	data["levelupTasks"] = tasksData
-	
+
 	return data
 
 func loadData(data):
@@ -1262,7 +1262,7 @@ func loadData(data):
 	eventCooldowns = SAVE.loadVar(data, "eventCooldowns", {})
 	lastDayOrgasmed = SAVE.loadVar(data, "lastDayOrgasmed", 0)
 	neediness = SAVE.loadVar(data, "neediness", 0.0)
-	
+
 	var theActivityID = SAVE.loadVar(data, "activity_id", "")
 	if(theActivityID == null || theActivityID == ""):
 		activity = null
@@ -1273,7 +1273,7 @@ func loadData(data):
 			#newActivity.onStart(args)
 			activity = newActivity
 			newActivity.loadData(SAVE.loadVar(data, "activity_data", {}))
-	
+
 	levelupTasks = []
 	var tasksData = SAVE.loadVar(data, "levelupTasks", [])
 	for taskData in tasksData:
