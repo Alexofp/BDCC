@@ -27,6 +27,9 @@ func onNewDay():
 var agreeMilk:bool = true
 var agreeSeed:bool = false
 
+var cowTopic:int = 0
+var bullTopic:int = 0
+
 const IDLE_IDLE = 0
 const IDLE_SOCIAL = 1
 const IDLE_HUNGRY = 2
@@ -40,9 +43,9 @@ var texts:Array = []
 var actions:Array = []
 
 const C_PC = "pc"
-const C_COW = "rahi" #TODO: Change me
-const C_BULL = "rahiRabi"
-const C_GIRL = "tavi"
+const C_COW = "psmilka"
+const C_BULL = "pspip"
+const C_GIRL = "tavi" #TODO: Change me
 const C_GUY = "captain"
 
 const L_SLEEP = "pscafe_sleep"
@@ -79,6 +82,8 @@ func saveData() -> Dictionary:
 		idleState = idleState,
 		gotMilkedNoon = gotMilkedNoon,
 		gotMilkedEvening = gotMilkedEvening,
+		cowTopic = cowTopic,
+		bullTopic = bullTopic,
 	}
 
 func loadData(_data:Dictionary):
@@ -100,6 +105,85 @@ func loadData(_data:Dictionary):
 	idleState = SAVE.loadVar(_data, "idleState", IDLE_IDLE)
 	gotMilkedNoon = SAVE.loadVar(_data, "gotMilkedNoon", false)
 	gotMilkedEvening = SAVE.loadVar(_data, "gotMilkedEvening", false)
+	cowTopic = SAVE.loadVar(_data, "cowTopic", 0)
+	bullTopic = SAVE.loadVar(_data, "bullTopic", 0)
+
+const MILKA_LINES = [
+	"Oh, hai. There is more of us here now.",
+	"Name is Milka. I'm a cow here. I like making new friends!",
+	"I also make a lot of milk.. Well, I'm trying to.",
+	"If you ever feel sad, talk with me! I like helping!",
+	"I like being milked. Feels good! Moo!",
+	"Moo-moo-moo~.",
+	"People say my milk tastes like strawberries~.",
+	"My breasts aren't that big. I'm sure they will grow!",
+	"The bull over there is a bit grumpy. I think I know why!",
+	"I have many nipples.. but most of them don't work. Aw.",
+	"I don't like overthinking.. Makes my head buzz-buzz.",
+	"Life is getting better actually! The funny marks don't hurt as much.",
+	"These owners gave me my name.. Milka. Fits me, doesn't it? I just need bigger titties!",
+	"Do you have dreams? Sometimes I dream of soft grass and sunshine. Moo~.",
+	"This cafe isn't doing well financially.. reminds me of my childhood farm..",
+	"I can tell them to milk my breasts twice as much. Then they will go easier on you. Just let me know!",
+	"When I'm scared, I just count the lines. It helps!",
+	"I would love to help that bull.. Then he would breed me maybe! Breeding is in my DNA~.",
+	"What's my real name? Uh.. Um. Milka? I'm just a cow.. Silvery grass, fields, barns, that's where I grew up! I think.",
+	"Hm.. Thinking is hard. I will get back to you.",
+	"Oh. I remember a stage! Maybe I was a singer?",
+	"I like it when you scratch behind my ears. It reminds me of.. hm..",
+	"I like humming songs. Moo-moo-moo~. Man, I was totally a singer!",
+	"My memory is foggy.. froggy, haha. Get it?",
+	"I'm happiest I ever was!",
+	"My breasts feel funny. If you're sad, feel free to touch!",
+	"I don't know what tomorrow brings. But if you're here, it's okay!",
+	"I taste ash.. Did the grass always tasted like that?",
+	"I was a singer, I'm telling you. Ahhh-h-hh~.",
+	"A talent scout once told me I have a great voice!",
+	"More milking? Sign me up!",
+	"Oh yeah! I traveled a lot! I saw many places. Many stages. A singing cow, I was popular~.",
+	"I was trying to help my old farm. Earn credits with my voice!",
+	"That talent scout found me and gave me a chance!",
+	"Thank you for being here with me! Cows are social creatures.",
+	"Wanna talk about something else?",
+	"I think I'm out of things to talk about.. I might start repeating, I'm sorry!",
+]
+
+const PIP_LINES = [
+	"They got you too, huh? Welcome, I guess. I'm Pip.",
+	"I was the cheapest bull they were able to buy. Can you see why?",
+	"The previous owner has melted the key when I tried to run. Yeah, that key.",
+	"They still milk me. They need their stupid cream.",
+	"The owner girl is a real fucking bitch. The guy is better but I don't trust him.",
+	"That cow over there? Milka or whatever her name is.. She is delusional. I'm sorry but she totally is.",
+	"The customers don't even know that the owners use our milk and cum in their food.",
+	"I'm so fucking horny..",
+	"They turned the freezer room into our cells. They don't have enough credits to pay for it anyway.",
+	"My tailhole has really puffed up lately. Fuck..",
+	"I was caged because the owner wanted to turn me into a femboy. I'm a stud, god dammit!",
+	"No point in yelling.. The walls are too thick.",
+	"I'm not into pegging! I'm not, I'm not, I'm not. I allow it because otherwise the pressure becomes too much.",
+	"That Milka cow is dumb.. But I would breed her anyway.. Hell, I'd breed you..",
+	"If you could help me.. Please. I will do anything.",
+	"It's boring here. Could have been worse I guess.",
+	"Milka is eating that grass.. like a fucking cow. I'd rather starve. Or eat ass even.",
+	"I'm glad you're here. Well.. Not in the bad way.",
+	"I lied a bit. No, I just didn't tell you everything. I was caged and enslaved because I banged some club owner's slutty wife. If you ask me, that was worth it.",
+	"Yeah.. That pussy was clenching around my long, thick horsecock.. Shit, I'm dripping.",
+	"I heard one of the customers compliment the cupcakes. I knew my seed was good!",
+	"My nipples are getting sensitive too. Don't tell the owners or they will start milking them as well.",
+	"I play with my nips, okay? I fucking do. I finger my ass sometimes. I'm a stud, I need a ball-draining amount of pleasure.",
+	"When I get out, I'm heading straight back to that club.",
+	"Breeding.. This place is messing with me. I have weird dreams. Wet dreams.",
+	"If you wanna help me cum, I'd appreciate it, okay? Doesn't mean I'm a bottom.",
+	"They were talking about starting a cheese shop too.. I will give them some cheese alright.",
+	"That club owner that I fucked over? I don't regret it.",
+	"Days are just flying by, aren't they?",
+	"If you wanna milk me, let me know. I can bend over.",
+	"I can probably fist myself by this point.. I have such a fucking donut of a hole. Shit.",
+	"You know what I regret? I should have protected Milka more from these fuckers. I don't know, she is not that bad.",
+	"I fucked many caged sluts. Didn't know I would become one.",
+	"I don't know what else to say. I will start repeating I guess.",
+]
 
 func _init():
 	id = "MilkCafe"
@@ -442,14 +526,26 @@ func main_do(_id:String, _args:Array):
 		saynn("YOU EAT SOME HAY OUT OF A TROUGH.")
 		triggerEventMaybe()
 	if(_id == "talkCow"):
+		playAnimation(StageScene.Duo, "stand", {npc=C_COW})
 		aimCamera(L_COW)
 		saynn("YOU SPEND SOME TIME WITH THE COW.")
 		addUpText("Cow", 1)
+		if(cowTopic >= MILKA_LINES.size()):
+			talk(C_COW, RNG.pick(MILKA_LINES))
+		else:
+			talk(C_COW, MILKA_LINES[cowTopic])
+			cowTopic += 1
 		triggerEventMaybe()
 	if(_id == "talkBull"):
+		playAnimation(StageScene.Duo, "stand", {npc=C_BULL})
 		aimCamera(L_BULL)
 		saynn("YOU SPEND SOME TIME WITH THE BULL.")
 		addUpText("Bull", 1)
+		if(bullTopic >= PIP_LINES.size()):
+			talk(C_BULL, RNG.pick(PIP_LINES))
+		else:
+			talk(C_BULL, PIP_LINES[bullTopic])
+			bullTopic += 1
 		triggerEventMaybe()
 	if(_id == "startEvent"):
 		setState(_args[0])
@@ -521,6 +617,10 @@ func about_to_be_milked_by_girl_do(_id:String, _args:Array):
 
 func about_to_be_milked_by_girl_fightResult(_didPCWin:bool):
 	saynn("DID WIN: "+str(_didPCWin))
+	
+	if(_didPCWin):
+		addObedience(-5)
+	
 	addContinue("setState", ["main"])
 
 func parse(_text:String, _chars:Dictionary):

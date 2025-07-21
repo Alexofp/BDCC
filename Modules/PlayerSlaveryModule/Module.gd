@@ -27,6 +27,8 @@ func _init():
 	characters = [
 		"res://Modules/PlayerSlaveryModule/ShaftMiner/PSRicky.gd",
 		"res://Modules/PlayerSlaveryModule/SlaveAuction/PlayerSlaveryStash.gd",
+		"res://Modules/PlayerSlaveryModule/MilkCafe/PSPip.gd",
+		"res://Modules/PlayerSlaveryModule/MilkCafe/PSMilka.gd",
 	]
 	items = []
 	events = [
