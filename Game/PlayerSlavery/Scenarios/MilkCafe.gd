@@ -16,6 +16,7 @@ var day:int = 0
 
 var milkedToday:int = 0
 var milkedTotal:int = 0
+var totalEarned:int = 0
 
 var gotMilkedNoon:bool = false
 var gotMilkedEvening:bool = false
@@ -29,6 +30,16 @@ var agreeSeed:bool = false
 
 var cowTopic:int = 0
 var bullTopic:int = 0
+
+var treatAmount:int = 0
+
+var peekTried:int = 0
+var peekState:int = PEEK_START
+const PEEK_START = 0
+const PEEK_NOTICED_PADLOCK = 1
+const PEEK_NOTICED_CUSTOMER = 2
+
+var padlockDamage:float = 0.0
 
 const IDLE_IDLE = 0
 const IDLE_SOCIAL = 1
@@ -48,6 +59,7 @@ const C_BULL = "pspip"
 const C_GIRL = "tavi" #TODO: Change me
 const C_GUY = "captain"
 
+const L_DOOR = "pscafe_door"
 const L_SLEEP = "pscafe_sleep"
 const L_BASEMENT_RIGHT = "pscafe_right"
 const L_COW = "pscafe_cow"
@@ -84,6 +96,11 @@ func saveData() -> Dictionary:
 		gotMilkedEvening = gotMilkedEvening,
 		cowTopic = cowTopic,
 		bullTopic = bullTopic,
+		peekTried = peekTried,
+		peekState = peekState,
+		padlockDamage = padlockDamage,
+		treatAmount = treatAmount,
+		totalEarned = totalEarned,
 	}
 
 func loadData(_data:Dictionary):
@@ -107,6 +124,11 @@ func loadData(_data:Dictionary):
 	gotMilkedEvening = SAVE.loadVar(_data, "gotMilkedEvening", false)
 	cowTopic = SAVE.loadVar(_data, "cowTopic", 0)
 	bullTopic = SAVE.loadVar(_data, "bullTopic", 0)
+	peekTried = SAVE.loadVar(_data, "peekTried", 0)
+	peekState = SAVE.loadVar(_data, "peekState", 0)
+	padlockDamage = SAVE.loadVar(_data, "padlockDamage", 0.0)
+	treatAmount = SAVE.loadVar(_data, "treatAmount", 0)
+	totalEarned = SAVE.loadVar(_data, "totalEarned", 0)
 
 const MILKA_LINES = [
 	"Oh, hai. There is more of us here now.",
@@ -314,7 +336,26 @@ func addUpText(_value:String, _howMuch:int):
 		addTextToBack("[color=#00CC00]("+_value+" "+howMuchStr+")[/color]")
 	else:
 		addTextToBack("[color=red]("+_value+" "+howMuchStr+")[/color]")
+func addUpTextF(_value:String, _howMuch:float):
+	var theU:int = int(round(_howMuch))
+	if(theU == 0 && _howMuch > 0.0):
+		theU = 1
+	if(theU == 0 && _howMuch < 0.0):
+		theU = -1
+	addUpText(_value, theU)
 
+func addTreat(_howMuch:int = 1):
+	var oldAmount:int = treatAmount
+	treatAmount += _howMuch
+	if(treatAmount < 0):
+		treatAmount = 0
+	
+	if(oldAmount == treatAmount):
+		return
+	var theDiff:int = treatAmount - oldAmount
+	if(theDiff != 0):
+		addUpText("Treat" if (theDiff == 1 || theDiff == -1) else "Treats", theDiff)
+	
 func addCredits(_howMuch:int):
 	GM.pc.addCredits(_howMuch)
 	addUpTextNum("Credits", _howMuch)
@@ -327,16 +368,18 @@ func addStamina(_howMuch:int):
 func addPain(_howMuch:int):
 	GM.pc.addPain(_howMuch)
 	addUpTextNum("Pain", _howMuch, true)
-	
 func addObedience(_howMuch:float):
 	obedience += _howMuch / 100.0
-	
-	var theU:int = int(round(_howMuch))
-	if(theU == 0 && _howMuch > 0.0):
-		theU = 1
-	if(theU == 0 && _howMuch < 0.0):
-		theU = -1
-	addUpText("Obedience", theU)
+	addUpTextF("Obedience", _howMuch)
+func addCowTrust(_howMuch:float):
+	cowTrust += _howMuch / 100.0
+	addUpTextF("Cow's trust", _howMuch)
+func addBullTrust(_howMuch:float):
+	bullTrust += _howMuch / 100.0
+	addUpTextF("Bull's trust", _howMuch)
+func addPadlockDamage(_howMuch:float):
+	padlockDamage += _howMuch / 100.0
+	addUpTextF("Padlock's damage", _howMuch)
 
 func getCredits() -> int:
 	return GM.pc.getCredits()
@@ -347,8 +390,12 @@ func gotMilked(howMuch:int = 1):
 
 func onDayEnd():
 	if(milkedToday > 0):
+		var earnedCredsMin:int = milkedToday * 100
+		var earnedCredsMax:int = milkedToday * 300
+		var earned:int = RNG.randi_range(earnedCredsMin, earnedCredsMax)
+		totalEarned += earned
 		saynn("The cafe made some profit!")
-		addCredits(milkedToday * 3)
+		addCredits(earned)
 	else:
 		saynn("The cafe wasn't able to make any profit because there was not enough milk/cream.")
 	
@@ -395,7 +442,14 @@ func main_state():
 	saynn("MAIN LOOP.")
 	
 	sayn("Day: "+str(day))
-	saynn("Obedience: "+str(Util.roundF(obedience, 2)))
+	#TODO: Replace with texts
+	sayn("Obedience: "+str(Util.roundF(obedience*100.0, 1))+"%")
+	sayn("Cow's trust: "+str(Util.roundF(cowTrust*100.0, 1))+"%")
+	sayn("Bull's trust: "+str(Util.roundF(cowTrust*100.0, 1))+"%")
+	if(treatAmount > 0):
+		sayn("Treats: "+str(treatAmount))
+	
+	sayn("")
 	
 	if(idleState == IDLE_IDLE):
 		saynn("You don't have any particular needs.")
@@ -404,23 +458,47 @@ func main_state():
 		addAction("Hide in cell", "Hide in your cell", "idleCell")
 		# If messy
 		addAction("Wash", "Ask to be washed", "idleWash")
-		addAction("Peek outside", "Peek through the door's little window", "idlePeek")
-		#addAction("Kick padlock", "Smash the door's padlock with your leg", "idleSmash")
-		#addAction("Struggle", "Try to struggle off the restraints", "idleStruggle")
+		if(GM.pc.getStamina() > 0):
+			addAction("Peek outside", "Peek through the door's little window", "idlePeek")
+		else:
+			addDisabledAction("Peek outside", "The window is high so you need some stamina to reach it")
+		if(peekState >= PEEK_NOTICED_PADLOCK):
+			if(!GM.pc.hasBoundLegs()):
+				if(GM.pc.getStamina() > 0):
+					addAction("Kick door", "Smash the door to damage the padlock", "idleSmash")
+				else:
+					addDisabledAction("Kick door", "You don't have any stamina")
+			else:
+				addDisabledAction("Kick door", "Your legs are cuffed!")
+		if(GM.pc.getInventory().hasRemovableRestraintsNoLockedSmartlocks()):
+			if(GM.pc.getStamina() > 0):
+				addAction("Struggle", "Try to struggle off the restraints", "idleStruggle")
+			else:
+				addDisabledAction("Struggle", "You don't have any stamina!")
 	if(idleState == IDLE_SOCIAL):
 		saynn("You feel like socializing.")
 		
 		addAction("Cow", "Spend time with the cow", "talkCow")
 		addAction("Bull", "Spend time with the bull", "talkBull")
 		addAction("Annoy owners", "Make them regret buying you!", "talkAnnoy")
-		#addAction("Milk Cow", "Help with milking the cow", "talkCowMilk")
-		#addAction("Milk Bull", "Help with milking the bull", "talkBullMilk")
+		if(cowTrust > 0.1):
+			if(GM.pc.getStamina() > 0):
+				addAction("Milk Cow", "Help with milking the cow", "talkCowMilk")
+			else:
+				addDisabledAction("Milk Cow", "You don't have any stamina left")
+		if(bullTrust > 0.1):
+			if(GM.pc.getStamina() > 0):
+				addAction("Milk Bull", "Help with milking the bull", "talkBullMilk")
+			else:
+				addDisabledAction("Milk Bull", "You don't have any stamina left")
 	if(idleState == IDLE_HUNGRY):
 		saynn("You feel hungry.")
 		
 		addAction("Eat grass", "Go eat grass like a good livestock", "eatGrass")
 		addAction("Starve", "You refuse to eat the grass", "eatStarve")
 		addAction("Demand", "Demand the owners to be fed normal food", "eatDemand")
+		if(treatAmount > 0):
+			addAction("Eat a treat!", "Eat one of your treats", "eatTreat")
 		#addAction("Suck bull", "Feed on the bull's seed", "eatSuckBull")
 	if(idleState == IDLE_NEEDY):
 		saynn("You feel needy.")
@@ -504,7 +582,10 @@ func main_do(_id:String, _args:Array):
 		triggerEventMaybe()
 	if(_id == "idleWash"):
 		aimCamera(L_FIELD)
-		GM.pc.afterTakingAShower()
+		GM.pc.clearBodyFluids()
+		GM.pc.clearBodywritings()
+		GM.pc.clearTallymarks()
+		#GM.pc.afterTakingAShower()
 		saynn("YOU ASK TO BE WASHED.")
 		
 		if(RNG.chance(50)):
@@ -515,8 +596,107 @@ func main_do(_id:String, _args:Array):
 			saynn("THE GUY BRINGS YOU OUT INTO THE FIELD AND CAREFULLY WASHES YOUR BODY, HOSE IN ONE HAND, SPONGE IN ANOTHER.")
 			talk(C_GUY, "THERE WE GO. MUCH BETTER, EH?")
 		triggerEventMaybe()
+	if(_id == "idlePeek"):
+		aimCamera(L_COUNTER)
+		if(peekState == PEEK_START):
+			saynn("You stand high on your toes and peek into the small slit of a window on the top of the reinforced door.")
+			addStamina(-10)
+			saynn("It's dirty and cloudy.. and thick enough to not let out any sound.")
+			saynn("Hard to see much.. the counter blocks most of the view. But you do see some nice tables with pink cloths laid out on them.. wide sofa-like chairs.. and a few customers.")
+			saynn("You wave to try to get some attention.. but no one can see you. Someone is gotta help you, they just have to notice you..")
+			saynn("Soon, you give up.")
+			saynn("While looking through the small crack between the door and the frame.. you notice that there is a [b]padlock[/b] on the other side. You can't reach it.. but you can try to break it from this side.")
+			saynn("The bull sees you.")
+			talk(C_BULL, "That is a very dumb idea.")
+			saynn("You shrug.")
+			talk(C_BULL, "Don't let me stop you though. This world was built on dumb ideas.")
+			saynn("Sofie is approaching the door so you dash away while you still can.")
+			peekState = PEEK_NOTICED_PADLOCK
+			peekTried = 0
+		else: #PEEK_NOTICED_CUSTOMER
+		#elif(peekState == PEEK_NOTICED_PADLOCK):
+			peekTried += 1
+			saynn("You stand high on your toes and peek into the small window.")
+			addStamina(-10)
+			
+			saynn(RNG.pick([
+				"Sofie's back blocks the view completely, she is standing behind the counter. You can't see anything past her.",
+				"There are a few customers around.. But all of them are sitting behind the tables, casually chatting with each other or staring into their datapads. If only any of them would look your way..",
+				"You see Leo working as a waiter, serving tables. Sofie is preparing a meal for someone. Could be a fly-through, you don't see anyone sitting behind the tables.",
+				"All of the tables seem to be empty, no customers around.",
+				"You notice pure void of space behind the cafe's reinforced glass panels.. Even if you escape, where are you gonna go..",
+				"There are some customers so you do your best to get their attention, waving and tapping.",
+			]))
+			
+			if(peekState == PEEK_NOTICED_PADLOCK && RNG.chance(-5+peekTried*4)):
+				peekTried = 0
+				peekState = PEEK_NOTICED_CUSTOMER
+				saynn("YOU NOTICE SOMEONE STANDING IN FRONT OF THE COUNTER.")
+				saynn("HE IS WEARING EXPENSIVE CLOTHES.")
+				saynn("IT FEELS LIKE HE HAS [b]NOTICED YOU[/b].. MAYBE..")
+			else:
+				var special:String = RNG.pickWeightedDict({
+					"": 100.0, "guy": 10.0, "girl": 10.0,
+				})
+				if(special == "guy"):
+					playAnimation(StageScene.Duo, "stand", {npc=C_GUY})
+					saynn("Leo suddenly steps through the door.")
+					talk(C_GUY, "Excuse me, coming through.")
+					saynn("He almost just walks past you.. but then he stops.")
+					talk(C_GUY, "Wait. Step away from the door please.")
+					addObedience(-1)
+				if(special == "girl"):
+					playAnimation(StageScene.Duo, "defeat", {npc=C_GIRL})
+					saynn("The door hits your nose as Sofie suddenly opens it!")
+					addPain(20)
+					talk(C_GIRL, "Why are you so dumb? Don't make me punish you.")
+					addObedience(-1)
+				
+		triggerEventMaybe()
+	if(_id == "idleSmash"):
+		addStamina(-30)
+		aimCamera(L_DOOR)
+		
+		saynn("You wait for a good moment and hit the door!")
+		addPadlockDamage(RNG.randf_range(1.0, 3.0))
 
-
+		var special:String = RNG.pickWeightedDict({
+			"": 100.0, "guy": 10.0, "cuffs": 10.0,
+		})
+		if(special == "guy"):
+			playAnimation(StageScene.Duo, "stand", {npc=C_GUY})
+			saynn("A few seconds later, Leo steps out.")
+			talk(C_GUY, "Hey. Uh. Can you stop?")
+			saynn("At least you got out easy.")
+			addObedience(-1)
+		if(special == "girl"):
+			playAnimation(StageScene.Duo, "defeat", {npc=C_GIRL})
+			saynn("A few moments later, Sofie open the door and pins you to the floor.")
+			addPain(5)
+			talk(C_GIRL, "Stop doing that, you stupid whore.")
+			saynn("She pulls out some cuffs and locks them around your ankles!")
+			GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmateanklecuffs"))
+			addObedience(-2)
+		
+		triggerEventMaybe()
+	if(_id == "idleStruggle"):
+		var struggleData:Dictionary = GM.pc.doStruggleOutOfRestraints(false, false, null, 5.0)
+		if(struggleData.empty()):
+			return
+		var text:String = struggleData["text"] if struggleData.has("text") else "[color=red]ERROR? No struggle text provided[/color]"
+		saynn(text)
+		
+		if(struggleData.has("animation")):
+			playAnimation(StageScene.Solo, struggleData["animation"])
+		if(struggleData.has("lust") && struggleData["lust"] > 0):
+			GM.pc.addLust(struggleData["lust"])
+		if(struggleData.has("pain") && struggleData["pain"] > 0):
+			addPain(struggleData["pain"])
+		addStamina(-30)
+		#if(struggleData.has("stamina") && struggleData["stamina"] != 0):
+		#	sub.addStamina(-struggleData["stamina"])
+		
+		triggerEventMaybe()
 
 	if(_id == "goEat"):
 		aimCamera(L_EAT)
@@ -529,7 +709,7 @@ func main_do(_id:String, _args:Array):
 		playAnimation(StageScene.Duo, "stand", {npc=C_COW})
 		aimCamera(L_COW)
 		saynn("YOU SPEND SOME TIME WITH THE COW.")
-		addUpText("Cow", 1)
+		addCowTrust(1)
 		if(cowTopic >= MILKA_LINES.size()):
 			talk(C_COW, RNG.pick(MILKA_LINES))
 		else:
@@ -540,15 +720,132 @@ func main_do(_id:String, _args:Array):
 		playAnimation(StageScene.Duo, "stand", {npc=C_BULL})
 		aimCamera(L_BULL)
 		saynn("YOU SPEND SOME TIME WITH THE BULL.")
-		addUpText("Bull", 1)
+		addBullTrust(1)
 		if(bullTopic >= PIP_LINES.size()):
 			talk(C_BULL, RNG.pick(PIP_LINES))
 		else:
 			talk(C_BULL, PIP_LINES[bullTopic])
 			bullTopic += 1
 		triggerEventMaybe()
+	if(_id == "talkAnnoy"):
+		saynn(RNG.pick([
+			"You bang on the door to annoy your owners.",
+			"You annoy the owners while they get something from their little garden.",
+			"You annoy the owners while they check on the bull and the cow.",
+			"You annoy the owners while they are busy washing the other livestock.",
+		]))
+		addObedience(-1)
+		var special:String = RNG.pickWeightedDict({
+			"treat": 5.0,
+		})
+		if(special == "treat"):
+			playAnimation(StageScene.Duo, "stand", {npc=C_GUY})
+			saynn("Leo walks up to you.")
+			talk(C_GUY, "Sofie really doesn't like that you're making so much noise.")
+			saynn("His hand produces a slice of an apple.")
+			talk(C_GUY, "If I give you a treat, will you behave?")
+			saynn("You nod, obviously. The guy hands you the treat.")
+			addTreat(1)
+		
+		triggerEventMaybe()
+	if(_id == "talkCowMilk"):
+		saynn("You make Milka an offer to milk her. She agrees.")
+		milkScene(C_PC, C_COW)
+		addStamina(-40)
+		addCowTrust(3)
+		triggerEventMaybe()
+	if(_id == "talkBullMilk"):
+		saynn("You make Pip an offer to milk him. He agrees.")
+		milkScene(C_PC, C_BULL)
+		addStamina(-40)
+		addBullTrust(3)
+		triggerEventMaybe()
+	if(_id == "eatGrass"):
+		aimCamera(L_EAT)
+		saynn("You eat some grass.")
+		addStamina(30)
+		addObedience(1)
+		if(RNG.chance(20)):
+			saynn("Milka does the same nearby, chewing on some grass blades.")
+			talk(C_COW, "Tasty, isn't it?")
+			saynn("You.. nod.")
+			addCowTrust(1)
+		triggerEventMaybe()
+	if(_id == "eatStarve"):
+		saynn("Anything is better than eating grass. You decide to just starve.")
+		addStamina(-30)
+		if(GM.pc.getStamina() <= 0):
+			saynn("Ow.. Your belly hurts..")
+			addPain(20)
+		if(treatAmount <= 0 && RNG.chance(20)):
+			playAnimation(StageScene.Duo, "stand", {npc=C_GUY})
+			saynn("Leo approaches you and hands you a carrot..")
+			talk(C_GUY, "I know the grass isn't what you normally eat. But don't starve yourself, okay? Don't tell Sofie.")
+			saynn("Free treat, hey.")
+			addTreat(1)
+		triggerEventMaybe()
+	if(_id == "eatDemand"):
+		saynn("You demand to be fed normal food!")
+		addObedience(-1)
+		saynn("The owners don't seem to care. Looks like you're starving..")
+		addStamina(-30)
+		triggerEventMaybe()
+	if(_id == "eatTreat"):
+		saynn("You eat a treat! It was very tasty.")
+		addStamina(100)
+		addPain(-100)
+		saynn("But, soon, it ended.")
+		addTreat(-1)
+		
+		if(RNG.chance(30)):
+			saynn("Milka drools while watching you.")
+			if(treatAmount > 0):
+				saynn("You just can't watch Milka's puppy eyes.. You have a spare treat so you decide to give it to her.")
+				talk(C_COW, "For me? Thank you-u-u~!")
+				addCowTrust(2)
+				addTreat(-1)
+				
+		if(RNG.chance(20)):
+			saynn("Pip sighs.")
+			talk(C_BULL, "Did they bought you with just treats?")
+			saynn("You can hear some jealousy in his voice.")
+			addBullTrust(-1)
+		
+		triggerEventMaybe()
+	if(_id == "needyMilk"):
+		saynn("You ask to be milked an extra time..")
+		addObedience(1)
+		milkScene(RNG.pick([C_GUY, C_GIRL]), C_PC)
+		triggerEventMaybe()
+	if(_id == "needyMasturbate"):
+		saynn("You masturbate quietly in the corner..")
+		GM.pc.orgasmFrom("pc")
+		triggerEventMaybe()
+	if(_id == "needyOfferSelf"):
+		saynn("You decide to offer your body to the owners..")
+		
+		saynn("Who do you want to fuck you?")
+		
+		setState("needySex")
+		addAction("Leo", "Let the guy fuck you", "startSex", [C_GUY, C_PC])
+		addAction("Sofie", "Let the girl fuck you", "startSex", [C_GIRL, C_PC])
+	if(_id == "needyComplain"):
+		saynn("You complain about your neediness!")
+		addObedience(-1)
+		triggerEventMaybe()
+	
 	if(_id == "startEvent"):
 		setState(_args[0])
+
+func needySex_sexResult(_sex:SexEngineResult):
+	saynn("The sex has ended!")
+	addObedience(1)
+	
+	if(RNG.chance(30)):
+		saynn("The owner gave you a treat!")
+		addTreat(1)
+	
+	addContinue("setState", ["main"])
 
 func sleep_state():
 	aimCamera(L_SLEEP)
@@ -561,8 +858,9 @@ func sleep_state():
 func sleep_do(_id:String, _args:Array):
 	if(_id == "sleep"):
 		GM.main.startNewDay()
-		GM.pc.addStamina(GM.pc.getMaxStamina())
 		saynn("NEW DAY.")
+		addStamina(20)
+		addPain(-50)
 		setState("main")
 
 func test_state():
