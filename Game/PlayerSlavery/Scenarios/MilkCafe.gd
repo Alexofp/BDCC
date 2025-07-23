@@ -41,6 +41,12 @@ const PEEK_NOTICED_CUSTOMER = 2
 
 var padlockDamage:float = 0.0
 
+var canHelpCage:bool = false
+var cageRemoved:bool = false
+var cageDamage:float = 0.0
+
+var charsHere:Array = []
+
 const IDLE_IDLE = 0
 const IDLE_SOCIAL = 1
 const IDLE_HUNGRY = 2
@@ -101,6 +107,10 @@ func saveData() -> Dictionary:
 		padlockDamage = padlockDamage,
 		treatAmount = treatAmount,
 		totalEarned = totalEarned,
+		canHelpCage = canHelpCage,
+		cageRemoved = cageRemoved,
+		cageDamage = cageDamage,
+		charsHere = charsHere,
 	}
 
 func loadData(_data:Dictionary):
@@ -129,6 +139,10 @@ func loadData(_data:Dictionary):
 	padlockDamage = SAVE.loadVar(_data, "padlockDamage", 0.0)
 	treatAmount = SAVE.loadVar(_data, "treatAmount", 0)
 	totalEarned = SAVE.loadVar(_data, "totalEarned", 0)
+	canHelpCage = SAVE.loadVar(_data, "canHelpCage", false)
+	cageRemoved = SAVE.loadVar(_data, "cageRemoved", false)
+	cageDamage = SAVE.loadVar(_data, "cageDamage", 0.0)
+	charsHere = SAVE.loadVar(_data, "charsHere", [])
 
 const MILKA_LINES = [
 	"Oh, hai. There is more of us here now.",
@@ -211,6 +225,7 @@ func _init():
 	id = "MilkCafe"
 
 func onSlaveryStart():
+	updateCharacters()
 	intro_state()
 
 func onSlaveryEnd():
@@ -225,6 +240,12 @@ func getPCViewDistance() -> float:
 
 func setState(_state:String):
 	state = _state
+
+func updateCharacters():
+	GlobalRegistry.getCharacter("pspip").resetEquipment()
+
+func isPipCaged() -> bool:
+	return !cageRemoved
 
 func saynn(_text:String):
 	texts.append(_text+"\n\n")
@@ -245,8 +266,17 @@ func addTextToBack(_text:String):
 			lastText = lastText+" "+_text+"\n"
 		texts.append(lastText)
 
-func talk(_whoID:String, _text:String):
+func talk(_whoID:String, _text:String, addToChars:bool = true):
 	saynn("[say="+_whoID+"]"+_text+"[/say]")
+	if(addToChars):
+		addChar(_whoID)
+func addChar(_whoID:String):
+	if(_whoID == "pc"):
+		return
+	if(!charsHere.has(_whoID)):
+		charsHere.append(_whoID)
+func getCharacterList() -> Array:
+	return charsHere
 
 func aimCamera(_loc:String):
 	GM.main.aimCameraAndSetLocName(_loc)
@@ -290,6 +320,7 @@ func processSexEnd(_sexResult:SexReaction):
 func startNewState():
 	actions.clear()
 	texts.clear()
+	charsHere.clear()
 
 func doFinalAction(_finalActionEntry:Array) -> Dictionary:
 	if(_finalActionEntry[1] == "action"):
@@ -355,7 +386,20 @@ func addTreat(_howMuch:int = 1):
 	var theDiff:int = treatAmount - oldAmount
 	if(theDiff != 0):
 		addUpText("Treat" if (theDiff == 1 || theDiff == -1) else "Treats", theDiff)
-	
+
+func sayMilkaLine():
+	if(cowTopic >= MILKA_LINES.size()):
+		talk(C_COW, RNG.pick(MILKA_LINES))
+	else:
+		talk(C_COW, MILKA_LINES[cowTopic])
+		cowTopic += 1
+func sayPipLine():
+	if(bullTopic >= PIP_LINES.size()):
+		talk(C_BULL, RNG.pick(PIP_LINES))
+	else:
+		talk(C_BULL, PIP_LINES[bullTopic])
+		bullTopic += 1
+
 func addCredits(_howMuch:int):
 	GM.pc.addCredits(_howMuch)
 	addUpTextNum("Credits", _howMuch)
@@ -390,11 +434,11 @@ func gotMilked(howMuch:int = 1):
 
 func onDayEnd():
 	if(milkedToday > 0):
-		var earnedCredsMin:int = milkedToday * 100
-		var earnedCredsMax:int = milkedToday * 300
+		var earnedCredsMin:int = milkedToday * 100 + milkedTotal * milkedTotal
+		var earnedCredsMax:int = milkedToday * 300 + milkedTotal * milkedTotal
 		var earned:int = RNG.randi_range(earnedCredsMin, earnedCredsMax)
 		totalEarned += earned
-		saynn("The cafe made some profit!")
+		saynn("The cafe made some profits!")
 		addCredits(earned)
 	else:
 		saynn("The cafe wasn't able to make any profit because there was not enough milk/cream.")
@@ -402,6 +446,29 @@ func onDayEnd():
 	milkedToday = 0
 	onNewDay()
 
+func addStrapon(_charID:String, _cumID:String = "") -> bool:
+	var theChar:BaseCharacter = GlobalRegistry.getCharacter(_charID)
+	if(!theChar.canWearStrapon() || theChar.isWearingStrapon()):
+		return false
+	var theStrapon = GlobalRegistry.createItem(RNG.pick([
+		"Strapon",
+		"StraponCanine",
+		"StraponDragon",
+		"StraponFeline",
+		"StraponHorse",
+	]))
+	if(_cumID != ""):
+		var cumChar:BaseCharacter = GlobalRegistry.getCharacter(_cumID)
+		var fluids:Fluids = theStrapon.getFluids()
+		fluids.addFluid(cumChar.getFluidType(FluidSource.Penis), RNG.randf_range(400.0, 700.0), cumChar.getFluidDNA(FluidSource.Penis))
+	theChar.getInventory().forceEquipStoreOtherUnlessRestraint(theStrapon)
+	return true
+	
+func removeStrapon(_charID:String):
+	var theChar:BaseCharacter = GlobalRegistry.getCharacter(_charID)
+	if(theChar && theChar.isWearingStrapon()):
+		theChar.removeStrapon()
+	
 func intro_state():
 	playAnimation(StageScene.Solo, "kneel", {pc=C_PC})
 	
@@ -434,6 +501,8 @@ func intro_do(_id:String, _args:Array):
 		setState("main")
 
 func main_state():
+	removeStrapon(C_PC)
+	removeStrapon(C_GIRL)
 	if(!GM.pc.hasEffect(StatusEffect.PSMilkCafeProduction)):
 		GM.pc.addEffect(StatusEffect.PSMilkCafeProduction)
 	aimCamera(L_CENTER)
@@ -445,14 +514,16 @@ func main_state():
 	#TODO: Replace with texts
 	sayn("Obedience: "+str(Util.roundF(obedience*100.0, 1))+"%")
 	sayn("Cow's trust: "+str(Util.roundF(cowTrust*100.0, 1))+"%")
-	sayn("Bull's trust: "+str(Util.roundF(cowTrust*100.0, 1))+"%")
+	sayn("Bull's trust: "+str(Util.roundF(bullTrust*100.0, 1))+"%")
 	if(treatAmount > 0):
 		sayn("Treats: "+str(treatAmount))
 	
 	sayn("")
 	
 	if(idleState == IDLE_IDLE):
-		saynn("You don't have any particular needs.")
+		sayn("You don't have any particular needs.")
+		if(padlockDamage > 0.0):
+			sayn("Door: "+str(Util.roundF(padlockDamage*100.0, 1))+"%")
 		
 		addAction("Graze", "Spend time on the field, chew some grass", "idleGraze")
 		addAction("Hide in cell", "Hide in your cell", "idleCell")
@@ -475,22 +546,20 @@ func main_state():
 				addAction("Struggle", "Try to struggle off the restraints", "idleStruggle")
 			else:
 				addDisabledAction("Struggle", "You don't have any stamina!")
+		if(canHelpCage && !cageRemoved):
+			if(GM.pc.hasBoundArms() || GM.pc.hasBlockedHands()):
+				addDisabledAction("Bull's cage", "You can't do it with blocked hands")
+			else:
+				if(GM.pc.getStamina() <= 0):
+					addDisabledAction("Bull's cage", "You don't have any stamina to do this")
+				else:
+					addAction("Bull's cage", "Help Pip with his chastity cage", "idleBullCage")
 	if(idleState == IDLE_SOCIAL):
 		saynn("You feel like socializing.")
 		
 		addAction("Cow", "Spend time with the cow", "talkCow")
 		addAction("Bull", "Spend time with the bull", "talkBull")
 		addAction("Annoy owners", "Make them regret buying you!", "talkAnnoy")
-		if(cowTrust > 0.1):
-			if(GM.pc.getStamina() > 0):
-				addAction("Milk Cow", "Help with milking the cow", "talkCowMilk")
-			else:
-				addDisabledAction("Milk Cow", "You don't have any stamina left")
-		if(bullTrust > 0.1):
-			if(GM.pc.getStamina() > 0):
-				addAction("Milk Bull", "Help with milking the bull", "talkBullMilk")
-			else:
-				addDisabledAction("Milk Bull", "You don't have any stamina left")
 	if(idleState == IDLE_HUNGRY):
 		saynn("You feel hungry.")
 		
@@ -501,12 +570,26 @@ func main_state():
 			addAction("Eat a treat!", "Eat one of your treats", "eatTreat")
 		#addAction("Suck bull", "Feed on the bull's seed", "eatSuckBull")
 	if(idleState == IDLE_NEEDY):
-		saynn("You feel needy.")
+		saynn("You feel like you could do something lewd.")
 		
-		addAction("Be milked", "Ask the owners to milk you", "needyMilk")
-		addAction("Masturbate", "Satisfy yourself with your fingers", "needyMasturbate")
+		addAction("Just chill", "Get some extra stamina", "needyRest")
 		addAction("Offer self", "Let the owners do whatever they want with you..", "needyOfferSelf")
 		addAction("Complain", "Complain that you are extremely needy!", "needyComplain")
+		# Obedience check
+		if(obedience < 0.2):
+			addDisabledAction("Be milked", "You're not obedient enough to ask to be milked an extra time")
+		else:
+			addAction("Be milked", "Ask the owners to milk you an extra time", "needyMilk")
+		if(cowTrust > 0.1):
+			if(GM.pc.getStamina() > 0):
+				addAction("Milk Cow", "Help with milking the cow", "talkCowMilk")
+			else:
+				addDisabledAction("Milk Cow", "You don't have any stamina left")
+		if(bullTrust > 0.1):
+			if(GM.pc.getStamina() > 0):
+				addAction("Milk Bull", "Help with milking the bull", "talkBullMilk")
+			else:
+				addDisabledAction("Milk Bull", "You don't have any stamina left")
 		
 	#talk(C_GIRL, "Hello.")
 	
@@ -654,10 +737,11 @@ func main_do(_id:String, _args:Array):
 				
 		triggerEventMaybe()
 	if(_id == "idleSmash"):
-		addStamina(-30)
 		aimCamera(L_DOOR)
 		
 		saynn("You wait for a good moment and hit the door!")
+		addStamina(-30)
+		
 		addPadlockDamage(RNG.randf_range(1.0, 3.0))
 
 		var special:String = RNG.pickWeightedDict({
@@ -679,6 +763,143 @@ func main_do(_id:String, _args:Array):
 			addObedience(-2)
 		
 		triggerEventMaybe()
+	if(_id == "idleBullCage"):
+		aimCamera(L_BULL)
+		playAnimation(StageScene.ChairOral, "rub", {pc="pspip", npc="pc"})
+		
+		saynn(RNG.pick([
+			"You inspect Pip's chastity cage and try to wiggle it off.",
+			"You grip the base of Pip's cage and give it a firm twist, trying to loosen its hold on his sheath.",
+			"You slide your nail into the lock of Pip's chastity cage and try to turn it.",
+			"You find a little rock in the garden and start to carefully hit the lock of Pip's chastity cage.",
+			"You sharpen a twig that you have found in the garden and try to use it as a lockpick inside Pip's chastity cage.",
+			"You get a good grip on the metal pieces of Pip's chastity cage and use your full strength to try to bend them.",
+		]))
+		cageDamage += RNG.randf_range(0.1, 0.2)
+		addStamina(-20)
+		addBullTrust(1)
+		
+		sayPipLine()
+		
+		if(cageDamage >= 1.0):
+			saynn("Miraculously, you [b]manage to break the lock[/b]! It's pieces fall onto the ground.")
+			talk(C_BULL, "Ah..")
+			saynn("Carefully, you start tugging on the cage itself, trying to pull it off.. but something is still preventing that. Pip's throbbing cock is desperately trying to get hard.")
+			talk(C_BULL, "Fuck.. Really? How the fuck is it still stuck. I'm just destined to stay a femboy fucktoy, aren't I?")
+			saynn("You were just about ready to give up.. but you notice how Pip's trapped horsecock slowly bends the metal more and more, trying to become erect.")
+			saynn("If you can't pull off his cage.. Maybe you can make his cock do it by getting him even more horny.")
+			
+			addAction("Tease", "Keep teasing him about the chastity cage", "cageTeaseUnlock")
+			addAction("Anal", "Fuck his ass (or peg him with a strapon) to try to help him!", "cageAnalFuck")
+			#addAction("Sit on face", "Sit on his face to try to get him hard enough!", "cageSitOnFace")
+			return
+		#	cageRemoved = true
+		#	updateCharacters()
+		else:
+			if(cageDamage < 0.35):
+				saynn("Not much has changed. You have to keep trying.")
+			elif(cageDamage < 0.7):
+				saynn("The cage is giving way, you can feel it. There is more and more wiggle room after each try.")
+			else:
+				saynn("It feels like the cage will snap soon. You're almost there.")
+		triggerEventMaybe()
+	if(_id == "cageAnalFuck"):
+		cageRemoved = true
+		updateCharacters()
+		var _wornStrapon:bool = addStrapon(C_PC)
+		playAnimation(StageScene.SexLowDoggy, "fast", {pc="pc", npc="pspip", pcCum=true, npcCum=true, bodyState={hard=true}, npcBodyState={hard=true}})
+
+		if(!_wornStrapon):
+			saynn("You decide to help him. With a firm hand, you shove Pip onto the floor, his belly down and ass up.")
+			talk(C_PC, "Let's try this, stud.")
+			saynn("Pip's eyes widen as you press your hard cock against his slick, trembling asshole.")
+			talk(C_BULL, "W-wait.. what are you..")
+			saynn("You grip his hips, lifting them just enough to line yourself up perfectly. His tail whips as you tease the tip against his rim.")
+			talk(C_PC, "Relax.. you love this, don't you?")
+			saynn("With a smooth thrust, you drive deep into Pip’s tight asshole. He gasps, back arching, his locked cage rattling against the floor.")
+			saynn("Your cock sinks in and out, massaging his prostate. Each your thrust pulls cute moans out from him.")
+			talk(C_BULL, "Ahh.. f-fuck.. so rough..")
+			saynn("You don't give him any time to process it, increasing the pace. Your hand grabs his hair and yanks back on it.")
+			saynn("Precum drips from the tip of the cage as his ass clenches around you, the tension building until it’s almost unbearable.")
+			talk(C_PC, "That’s it.. be a good girl and cum for me.")
+			saynn("Pip’s cock twitches violently, the cage bending under the strain. With one final, hard thrust, his [b]member breaks free[/b], bars of his cage snapping apart from the sheer power of his erection!")
+			saynn("When freed, his flared horsecock springs to full hardness in seconds before bursting with a thick, virile blast of seed!")
+			saynn("Thick ropes of cum land all across the floor as Pip moans in bliss, his body shaking hard as you pump his full of your spunk.")
+			talk(C_BULL, "F-fuck! Ah! Ahhh-h!..")
+			talk(C_PC, "Holy shit, it worked.")
+			saynn("Even the owners come to check on all the noise.")
+			talk(C_GIRL, "What the hell is going on out here?")
+			talk(C_GUY, "Looks like they found a way to take off the cage.")
+			talk(C_GIRL, "Could have put a bucket under him at least, fuck.")
+			saynn("They could have been more happy about it.. but oh well. At least Pip seems to be enjoying it.")
+			talk(C_BULL, "T-thank you.. hh-hh..")
+			saynn("You smile, watching Pip’s spent form, your chest rising and falling with satisfaction.")
+		else:
+			saynn("You decide to help him. First, you go and grab a strapon harness from the milking equipment storage before securing it around your hips and applying a thick layer of lube onto its rubber shaft.")
+			saynn("Then with a firm hand, you shove Pip onto the floor, his belly down and ass up.")
+			talk(C_PC, "Let's try this, stud.")
+			saynn("Pip's eyes widen as you press your new rubber cock against his slick, trembling asshole.")
+			talk(C_BULL, "W-wait.. what are you..")
+			saynn("You grip his hips, lifting them just enough to line yourself up perfectly. His tail whips as you tease the tip against his rim.")
+			talk(C_PC, "Relax.. you love this, don't you?")
+			saynn("With a smooth thrust, you drive the strapon deep into Pip’s tight asshole. He gasps, back arching.")
+			saynn("Your rubber cock sinks in and out, massaging his prostate. Each of your thrusts pulls cute moans out from him.")
+			talk(C_BULL, "Ahh.. f-fuck.. so rough..")
+			saynn("You don't give him any time to process it, increasing the pace. One hand grabs his hair and yanks back on it as you hammer into him.")
+			saynn("Precum drips from the tip of his locked cage as his ass clenches around your toy, the tension building until it’s almost unbearable.")
+			talk(C_PC, "That’s it.. be a good girl and cum for me.")
+			saynn("Pip’s cock twitches violently inside its cage, the metal bending under the strain. With one final, hard thrust of your hips, his [b]cage snaps apart[/b] from the sheer power of his erection!")
+			saynn("When freed, his flared horsecock springs to full hardness in seconds before bursting with a thick, virile blast of seed!")
+			saynn("Thick ropes of cum land all across the floor as Pip moans in bliss, his body shaking hard.")
+			talk(C_BULL, "F-fuck! Ah! Ahhh-h!..")
+			talk(C_PC, "Holy shit, it worked.")
+			saynn("Even the owners come to check on all the noise.")
+			talk(C_GIRL, "What the hell is going on out here?")
+			talk(C_GUY, "Looks like they found a way to take off the cage.")
+			talk(C_GIRL, "Could have put a bucket under him at least, fuck.")
+			saynn("They could have been more happy about it.. but oh well. At least Pip seems to be enjoying it.")
+			talk(C_BULL, "T-thank you.. hh-hh..")
+			saynn("You smile, watching Pip’s spent form, your chest rising and falling with satisfaction.")
+		
+		GlobalRegistry.getCharacter(C_BULL).cummedInAnusBy(C_PC)
+		GM.pc.orgasmFrom(C_BULL)
+		addBullTrust(5)
+		addContinue("setState", ["main"])
+		
+	if(_id == "cageTeaseUnlock"):
+		cageRemoved = true
+		updateCharacters()
+		playAnimation(StageScene.ChairOral, "tease", {pc="pspip", npc="pc", pcCum=true, bodyState={hard=true}})
+		
+		saynn("Time to help him. You stop messing with his cage and just look up at him.")
+		talk(C_PC, "I guess you are right.")
+		saynn("He tilts his head.")
+		talk(C_BULL, "Huh?")
+		talk(C_PC, "I guess you are destined to be someone's slut.")
+		saynn("Pip sighs.. you notice his locked member twitching slightly.")
+		talk(C_PC, "It's not that bad. I'm sure you will grow to like it.")
+		talk(C_BULL, "What do you mean?")
+		talk(C_PC, "You love cumming from your prostate getting smashed already, don't you?")
+		saynn("He frowns.. but his cock twitches more, putting extra pressure onto his cage.")
+		talk(C_BULL, "I'm a stud!")
+		talk(C_PC, "Just face it. Your cock is locked away forever. It's no better than a clit. You're a girl, not a stud.")
+		saynn("Precum is flowing down from the tip of his cage. Pip is squirming hard, his throbbing attempt at an erection is bending the metal more and more!")
+		talk(C_BULL, "H-hey, d-don't say that.")
+		talk(C_PC, "Your clitty is dripping, slut. You love it, admit it. You love getting fucked like a girl.")
+		saynn("Suddenly, with a loud ping, the top part of his chastity cage flies off, instantly revealing his rock-hard flared shaft of a meaty horsecock. Wow.")
+		talk(C_BULL, "Ahh-h-h!..")
+		saynn("Pip sees it and gasps, grabbing onto the chair while his cock is still throbbing.. before suddenly shooting out a thick virile load of his seed! Strings after strings of cum fly through the air in beatiful arcs as he moans like a slut, his body unable to calm itself down, his head thrown back.")
+		talk(C_PC, "Holy shit, it worked.")
+		talk(C_BULL, "Mhh-h.. ah.. ghh-h.. ah-hh..")
+		saynn("Even the owners come to check on all the noise.")
+		talk(C_GIRL, "Really? You've hit pure oil and your lazy ass couldn't put a bucket under that stream?")
+		talk(C_GUY, "But at least his cage is off, Sofie. Milking him is gonna be easier.")
+		saynn("Sofie grumbles and walks away.")
+		talk(C_BULL, "Shit.. so much. T-thank you..")
+		saynn("You smile and nod.")
+		addBullTrust(5)
+		addContinue("setState", ["main"])
+	
 	if(_id == "idleStruggle"):
 		var struggleData:Dictionary = GM.pc.doStruggleOutOfRestraints(false, false, null, 5.0)
 		if(struggleData.empty()):
@@ -710,22 +931,21 @@ func main_do(_id:String, _args:Array):
 		aimCamera(L_COW)
 		saynn("YOU SPEND SOME TIME WITH THE COW.")
 		addCowTrust(1)
-		if(cowTopic >= MILKA_LINES.size()):
-			talk(C_COW, RNG.pick(MILKA_LINES))
-		else:
-			talk(C_COW, MILKA_LINES[cowTopic])
-			cowTopic += 1
+		sayMilkaLine()
 		triggerEventMaybe()
 	if(_id == "talkBull"):
 		playAnimation(StageScene.Duo, "stand", {npc=C_BULL})
 		aimCamera(L_BULL)
 		saynn("YOU SPEND SOME TIME WITH THE BULL.")
 		addBullTrust(1)
-		if(bullTopic >= PIP_LINES.size()):
-			talk(C_BULL, RNG.pick(PIP_LINES))
-		else:
-			talk(C_BULL, PIP_LINES[bullTopic])
-			bullTopic += 1
+		sayPipLine()
+		
+		if(bullTrust >= 0.05 && !canHelpCage):
+			canHelpCage = true
+			saynn("Before you go, he shows you his chastity cage. His locked away cock is pulsing hard inside its tight little prison.")
+			talk(C_BULL, "It's been there for at least a few months. I'm fucking desperate. Maybe you can try to do something? If you have the time.")
+			saynn("A caged bull just isn't right. On the other hand, maybe that's just his fate now.")
+		
 		triggerEventMaybe()
 	if(_id == "talkAnnoy"):
 		saynn(RNG.pick([
@@ -817,9 +1037,11 @@ func main_do(_id:String, _args:Array):
 		addObedience(1)
 		milkScene(RNG.pick([C_GUY, C_GIRL]), C_PC)
 		triggerEventMaybe()
-	if(_id == "needyMasturbate"):
-		saynn("You masturbate quietly in the corner..")
-		GM.pc.orgasmFrom("pc")
+	if(_id == "needyRest"):
+		saynn("You decide to just chill..")
+		addStamina(20)
+		
+		#GM.pc.orgasmFrom("pc")
 		triggerEventMaybe()
 	if(_id == "needyOfferSelf"):
 		saynn("You decide to offer your body to the owners..")
@@ -930,6 +1152,8 @@ func sayParsed(_text:String):
 	saynn(parse(_text, charOverrides))
 
 func milkScene(_actorID:String, _targetID:String):
+	addChar(_actorID)
+	addChar(_targetID)
 	charOverrides = {actor=_actorID, target=_targetID}
 	var _isPCActor:bool = (_actorID == C_PC)
 	var _isPCTarget:bool = (_targetID == C_PC)
@@ -946,7 +1170,7 @@ func milkScene(_actorID:String, _targetID:String):
 	if(_targetID == C_BULL):
 		_canMilkBreasts = false
 	var _canMilkPenis:bool = _target.hasReachablePenis()
-	var _canMilkProstate:bool = _targetCaged
+	var _canMilkProstate:bool = (_target.hasReachablePenis() || _target.isWearingChastityCage())
 	if(_isPCTarget && !agreeSeed):
 		_canMilkPenis = false
 		_canMilkProstate = false
@@ -1015,7 +1239,7 @@ func milkScene(_actorID:String, _targetID:String):
 		sayParsed("{actor.You} managed to collect "+str(Util.roundF(collectedSeed, 1))+"ml of {target.cum}.")
 	
 	if(collectedEnough):
-		sayParsed("[say=actor]THAT'S ENOUGH![/say]")
+		talk(_actorID, "THAT'S ENOUGH!")
 		milkedToday += 1
 	else:
-		sayParsed("[say=actor]THAT'S NOT ENOUGH![/say]")
+		talk(_actorID, "THAT'S NOT ENOUGH!")

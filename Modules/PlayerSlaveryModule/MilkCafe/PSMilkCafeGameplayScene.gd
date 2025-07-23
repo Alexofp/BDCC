@@ -6,6 +6,7 @@ func _init():
 func _run():
 	if(state == ""):
 		#playAnimation(StageScene.Solo, "stand")
+		setCharactersEasyList(GM.main.PS.getCharacterList())
 		
 		say(GM.main.PS.getFinalText())
 		var theActions:Array = GM.main.PS.getFinalActions()

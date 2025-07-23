@@ -53,4 +53,7 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("shorthair2"))
 
 func getDefaultEquipment():
+	if(GM.main.PS && GM.main.PS.id == "MilkCafe"):
+		if(!GM.main.PS.isPipCaged()):
+			return ["oldcollar"]
 	return ["oldcollar", "ChastityCage"]
