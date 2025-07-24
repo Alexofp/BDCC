@@ -41,7 +41,7 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthrobody"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthroarms"))
 	var breasts = GlobalRegistry.createBodypart("humanbreasts")
-	breasts.size = 4
+	breasts.size = 2
 	giveBodypartUnlessSame(breasts)
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("vagina"))
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
@@ -54,3 +54,13 @@ func createBodyparts():
 
 func getDefaultEquipment():
 	return ["oldcollar"]
+
+func updateBodyparts():
+	#if(taviModule.hasHorns()):#.hasHorns()):
+	#	if(giveBodypartUnlessSame(GlobalRegistry.createBodypart("demonhorns2"))):
+	#		paintBodyparts()
+	#elif(hasBodypart(BodypartSlot.Horns)):
+	#	removeBodypart(BodypartSlot.Horns)
+	if(GM.main.PS && GM.main.PS.id == "MilkCafe"):
+		var breasts: BodypartBreasts = getBodypart(BodypartSlot.Breasts)
+		breasts.size = GM.main.PS.getMilkaBreastSize()

@@ -45,6 +45,10 @@ var canHelpCage:bool = false
 var cageRemoved:bool = false
 var cageDamage:float = 0.0
 
+var canHelpMilka:bool = false
+var milkaExtraBreastSize:int = 0
+var helpedMilka:bool = false
+
 var charsHere:Array = []
 
 const IDLE_IDLE = 0
@@ -111,6 +115,9 @@ func saveData() -> Dictionary:
 		cageRemoved = cageRemoved,
 		cageDamage = cageDamage,
 		charsHere = charsHere,
+		canHelpMilka = canHelpMilka,
+		helpedMilka = helpedMilka,
+		milkaExtraBreastSize = milkaExtraBreastSize,
 	}
 
 func loadData(_data:Dictionary):
@@ -143,10 +150,13 @@ func loadData(_data:Dictionary):
 	cageRemoved = SAVE.loadVar(_data, "cageRemoved", false)
 	cageDamage = SAVE.loadVar(_data, "cageDamage", 0.0)
 	charsHere = SAVE.loadVar(_data, "charsHere", [])
+	canHelpMilka = SAVE.loadVar(_data, "canHelpMilka", false)
+	helpedMilka = SAVE.loadVar(_data, "helpedMilka", false)
+	milkaExtraBreastSize = SAVE.loadVar(_data, "milkaExtraBreastSize", 0)
 
 const MILKA_LINES = [
-	"Oh, hai. There is more of us here now.",
-	"Name is Milka. I'm a cow here. I like making new friends!",
+	"Oh, hai. There is more of us here now, neat. Name is Milka!",
+	"I'm a cow here. I like making new friends!",
 	"I also make a lot of milk.. Well, I'm trying to.",
 	"If you ever feel sad, talk with me! I like helping!",
 	"I like being milked. Feels good! Moo!",
@@ -243,9 +253,13 @@ func setState(_state:String):
 
 func updateCharacters():
 	GlobalRegistry.getCharacter("pspip").resetEquipment()
+	GlobalRegistry.getCharacter("psmilka").updateBodyparts()
 
 func isPipCaged() -> bool:
 	return !cageRemoved
+
+func getMilkaBreastSize() -> int:
+	return 2
 
 func saynn(_text:String):
 	texts.append(_text+"\n\n")
@@ -554,6 +568,14 @@ func main_state():
 					addDisabledAction("Bull's cage", "You don't have any stamina to do this")
 				else:
 					addAction("Bull's cage", "Help Pip with his chastity cage", "idleBullCage")
+		if(canHelpMilka && (getMilkaBreastSize() < BreastsSize.O)):
+			if(GM.pc.hasBoundArms() || GM.pc.hasBlockedHands()):
+				addDisabledAction("Milka's breasts", "You can't do it with blocked hands")
+			else:
+				if(GM.pc.getStamina() <= 0):
+					addDisabledAction("Milka's breasts", "You don't have any stamina to do this")
+				else:
+					addAction("Milka's breasts", "Help Milka by applying special cream to her breasts", "idleCowBreasts")
 	if(idleState == IDLE_SOCIAL):
 		saynn("You feel like socializing.")
 		
@@ -617,16 +639,17 @@ func triggerEventMaybe():
 		return
 	
 	if(RNG.chance(50)):
-		setState("test")
-		#addContinue("startEvent", ["test"])
-	#else:
-	#	addContinue("setState", ["main"])
+		#setState("test")
+		addContinue("startEvent", ["test"])
+	else:
+		addContinue("setState", ["main"])
 
 func addNextIdleStageButton():
 	addContinue("nextIdle")
 
 func main_do(_id:String, _args:Array):
-	processTurn()
+	if(_id.begins_with("idle") || _id.begins_with("talk") || _id.begins_with("eat") || _id.begins_with("needy")):
+		processTurn()
 	if(_id == "idleGraze"):
 		aimCamera(RNG.pick([L_FIELD, L_FIELD2, L_FIELD3]))
 		saynn("YOU SPEND SOME TIME GRAZING, CHEWING ON GRASS.")
@@ -763,6 +786,149 @@ func main_do(_id:String, _args:Array):
 			addObedience(-2)
 		
 		triggerEventMaybe()
+	if(_id == "idleCowBreasts"):
+		aimCamera(L_COW)
+		playAnimation(StageScene.BreastGroping, "grope", {pc="pc", npc="psmilka"})
+		
+		milkaExtraBreastSize += 1
+		updateCharacters()
+		
+		saynn(RNG.pick([
+			"You grab the cream tube from Milka's hands and begin to carefully apply it all around her breasts and nipples.",
+		]))
+		addStamina(-20)
+		talk(C_COW, RNG.pick([
+			"Ohh, feels funny!",
+			"Feels nice..",
+			"I can feel something already..",
+			"Thank you for helping!",
+		]))
+		saynn("The process takes a while so you have a little chat in the process.")
+		addCowTrust(1)
+		sayMilkaLine()
+		saynn(RNG.pick([
+			"Eventually, you notice Milka's breasts getting fuller and rounder! They clearly got bigger.",
+		]))
+		if(milkaExtraBreastSize > 5 && !helpedMilka):
+			helpedMilka = true
+			talk(C_COW, RNG.pick([
+				"Thank you, thank you, thank you! My titties look so much better now! I can make so much milk~.",
+			]))
+			saynn("Milka seems to be satisfied with this size.. but the tube isn't empty yet.")
+			talk(C_COW, "You can apply it more if you want.. But I just feel bad for taking up so much of your time.. Can I give back?")
+			addCowTrust(5)
+			addAction("It's okay", "You are happy that you helped Milka and that's all that you needed", "setState", ["main"])
+			addAction("Breastfeed", "Feed on Milka's breasts!", "milkaRewardBreastfeed")
+			addAction("Breed her", "Fuck Milka with your cock or a strapon!", "milkaRewardBreed")
+		
+		elif(GM.pc.getBreastsSize() < BreastsSize.O):
+			talk(C_COW, RNG.pick([
+				"Ah.. Thank you! I can use it on you too if you want!",
+			]))
+			saynn("You read the small text on the tube. It says that the change is instant and permanent.")
+		
+			triggerEventMaybe()
+			addAction("Your breasts", "Allow Milka to use the cream on your breasts, making them bigger!", "milkaUseCreamOnPC")
+		else:
+			talk(C_COW, RNG.pick([
+				"Ah.. I'm a better cow now.",
+			]))
+			triggerEventMaybe()
+	if(_id == "milkaUseCreamOnPC"):
+		playAnimation(StageScene.BreastGroping, "grope", {pc="psmilka", npc="pc", npcBodyState={hard=true}})
+		saynn("You agree, letting Milka use the special cream on your {pc.breasts}.")
+		saynn("It still takes a while so you chat some more.")
+		var theBreasts:BodypartBreasts = GM.pc.getBodypart(BodypartSlot.Breasts)
+		if(theBreasts):
+			theBreasts.size += 1
+			theBreasts.processTime(0)
+		sayMilkaLine()
+		saynn("Eventually, you begin to feel your chest twitching! A little gasp escapes your lips as you feel your breasts getting bigger!")
+		talk(C_COW, "There we go!")
+		triggerEventMaybe()
+	if(_id == "milkaRewardBreed"):
+		playAnimation(StageScene.SexMatingPress, "fast", {pc="pc", npc="psmilka", pcCum=true, bodyState={hard=true,naked=true}})
+		var _withStrapon:bool = addStrapon(C_PC, C_BULL)
+		
+		if(!_withStrapon):
+			saynn("Yeah, seeing Milka's flushed face and soft, needy body.. it gives you a wild idea. You carefully push her down to the floor.")
+			talk(C_PC, "Let's see how you take it, Milka.")
+			saynn("She gasps, ears flicking and tail twitching as you grab her thighs and spread them wide.")
+			talk(C_COW, "moo~?..")
+			saynn("You raise her legs high, pinning them up to her shoulders. Her slick pussy shines as you line your hard shaft up with her needy entrance.")
+			saynn("With a rough thrust, you push deep into her slit, making Milka cry out a desperate moan.")
+			talk(C_COW, "Ahhh~! Mooo~..")
+			saynn("Your hips slam into hers, your {pc.penis} pounding her pussy with steady, rough thrusts. Her big milky breasts bounce with every thrust, her nipples already leaking drops of strawberry-scented milk.")
+			talk(C_PC, "That's it.. take it, cowgirl.")
+			saynn("You grip her legs tighter and go faster, hammering her pussy, the tip of your cock pushing on her most sensitive spots until she’s squirming under you.")
+			talk(C_COW, "Ahhh.. ahhh.. moo~.. it’s too much!")
+			saynn("Milka’s body arches, her breasts shaking and spraying milk as her pussy clenches around you, her orgasm hitting hard. You feel her walls milking your cock, forcing your own climax.")
+			talk(C_PC, "Nghhh..")
+			saynn("With one final, deep thrust, you bury yourself to the hilt and start pumping her womb with your hot seed. Thick ropes of {pc.cum} flood her, mixing with her pussy juices.")
+			saynn("Milka cries out in pleasure, her nipples squirting more sweet milk while her body trembles beneath you, her tail curling tight.")
+			talk(C_COW, "Mmmhh~.. s-so warm.. moo..")
+			saynn("You stay inside her for a few moments, panting heavily before finally pulling out. A mix of cum and milk drips from her as she lies there, satisfied and glowing.")
+			talk(C_PC, "Good girl.")
+			talk(C_COW, "Thank you.. for filling me.. ahh..")
+			saynn("You sit beside her, resting for a bit while stroking her hair.")
+		else:
+			saynn("Yeah, seeing Milka's flushed face and soft, needy body.. it gives you a wild idea. You carefully push her down to the floor and go grab one of the strapon harnesses from the milking equipment shelf.")
+			talk(C_PC, "Let's see how you take it, Milka.")
+			saynn("She gasps, ears flicking and tail twitching as you grab her thighs and spread them wide.")
+			talk(C_COW, "moo~?..")
+			saynn("Before climbing on top of her, you secure that harness around your waist.")
+			saynn("You then raise Milka's legs high, pinning them to her shoulders as the slick tip of your prelubed toy presses against her needy entrance.")
+			talk(C_PC, "Ready to be bred, cowgirl?")
+			saynn("With a smooth, forceful thrust, you push deep into her slit, making Milka cry out a desperate moan.")
+			talk(C_COW, "Ahhh~! Mooo~..")
+			saynn("Your hips slam into hers, your strapon pounding her pussy with steady, rough thrusts. Her big milky breasts bounce with every movement, her nipples leaking sweet strawberry-scented milk.")
+			talk(C_PC, "That's it.. take it, cowgirl.")
+			saynn("You grip her legs tighter and go faster, hammering her pussy, the toy’s tip grazing her most sensitive spots until she’s squirming beneath you.")
+			talk(C_COW, "Ahhh.. ahhh.. moo~.. it’s too much!")
+			saynn("Milka’s body arches, her breasts shaking and spraying milk as her pussy clenches around the toy's shaft, her orgasm hitting hard. The sudden tightness triggers the hidden mechanism in the strapon.")
+			saynn("With a faint hum, the toy starts pumping warm seed deep into her womb, releasing thick ropes of cum-like fluid that mix with her juices.")
+			saynn("Milka moans loudly, her nipples squirting more sweet milk while her body trembles beneath you, her tail curling tight as she’s filled.")
+			talk(C_COW, "Mmmhh~.. s-so warm.. moo..")
+			saynn("You keep the strapon buried inside her for a few moments, watching her chest rise and fall before slowly pulling out. A mix of cum and milk drips from her pussy as she lies there, glowing and satisfied.")
+			talk(C_PC, "Good girl.")
+			talk(C_COW, "Thank you.. for filling me.. ahh..")
+			saynn("You sit beside her, resting for a bit while stroking her hair.")
+		
+		if(_withStrapon):
+			GlobalRegistry.getCharacter(C_COW).cummedInVaginaBy(C_PC, FluidSource.Strapon)
+		else:
+			GlobalRegistry.getCharacter(C_COW).cummedInVaginaBy(C_PC)
+		GM.pc.orgasmFrom(C_COW)
+		
+		addContinue("setState", ["main"])
+		
+	if(_id == "milkaRewardBreastfeed"):
+		playAnimation(StageScene.BreastFeeding, "feed", {pc="psmilka", npc="pc"})
+		
+		saynn("Yeah, seeing Milka's new tits.. it gives you an idea. You kneel before her and reach towards her new lovely big mounds.")
+		talk(C_PC, "Mind if I taste them?")
+		saynn("Milka blushes, her ears perking. She parts her legs and tilts her torso back, offering her heavy chest for you to play with.")
+		talk(C_COW, "Moo~. Anything for you, sweet friend.")
+		saynn("Leaning in, you wrap your lips around one swollen nipple, gently squeezing it between your teeth.")
+		saynn("A warm, sweet milk spurts into your mouth, tasting of fresh strawberries. Your hand cups the other breast, groping and kneading its heavy form.")
+		talk(C_COW, "Ah..")
+		saynn("Milka shudders, her tail swishing as she moans softly. You switch breasts, latching onto the other nipple and suckling deeply, coaxing another stream of milky sweetness.")
+		saynn("Your fingers knead and pinch, playing with her hardened nipples as they release more and more of that tasty strawberry-flavored milk into your mouth.")
+		talk(C_COW, "Ah.. more.. yes.. moo..")
+		saynn("Each swallow brings a shiver through her body. She throws her head back and lets out more encouraigng moans as her pussy gets wetter after each second.")
+		talk(C_COW, "Mmhh.. ahh-hh~..")
+		saynn("A series of quick convulses rocks through her body, her needy pussy slit pulsing as her nips squirt with more of that tasty goodness.")
+		saynn("After you’ve drained both breasts, you lean back, licking stray droplets from your lips. Milka sighs, satisfied, her eyes half-closed from pleasure.")
+		talk(C_PC, "Your milk tastes nice.")
+		talk(C_COW, "Thank you.. for making me feel so.. good.")
+		saynn("You sit together in the warm glow, her chest rising and falling as she tries to get her breathing back.")
+		
+		GlobalRegistry.getCharacter(C_COW).milk()
+		
+		addPain(-100)
+		addStamina(100)
+		addContinue("setState", ["main"])
+	
 	if(_id == "idleBullCage"):
 		aimCamera(L_BULL)
 		playAnimation(StageScene.ChairOral, "rub", {pc="pspip", npc="pc"})
@@ -929,14 +1095,24 @@ func main_do(_id:String, _args:Array):
 	if(_id == "talkCow"):
 		playAnimation(StageScene.Duo, "stand", {npc=C_COW})
 		aimCamera(L_COW)
-		saynn("YOU SPEND SOME TIME WITH THE COW.")
+		saynn("You spend some time hanging out with the cow.")
 		addCowTrust(1)
 		sayMilkaLine()
+		
+		if(cowTrust >= 0.05 && !canHelpMilka):
+			canHelpMilka = true
+			saynn("Before you go..")
+			talk(C_COW, "OH!")
+			saynn("You stop and watch her pull some kind of.. cream tube.")
+			talk(C_COW, "The owner bought it for me. But he is too busy running the cafe to apply it.")
+			saynn("You read the effects.. estrogen, prolactin.. apparently this cream is supposed to help with the lactation. Needs to be applied directly to the breasts.")
+			talk(C_COW, "I'm too afraid to use it myself, I'm just a cow!")
+		
 		triggerEventMaybe()
 	if(_id == "talkBull"):
 		playAnimation(StageScene.Duo, "stand", {npc=C_BULL})
 		aimCamera(L_BULL)
-		saynn("YOU SPEND SOME TIME WITH THE BULL.")
+		saynn("You spend some time hanging out with the bull.")
 		addBullTrust(1)
 		sayPipLine()
 		
