@@ -523,11 +523,12 @@ func addBreastPump(_charID:String):
 func removeBreastPump(_charID:String):
 	GlobalRegistry.getCharacter(_charID).getInventory().clearSlot(InventorySlot.UnderwearTop)
 
-func addPenisPump(_charID:String):
+func addPenisPump(_charID:String) -> bool:
 	var theChar:BaseCharacter = GlobalRegistry.getCharacter(_charID)
 	if(theChar.isWearingChastityCage()):
-		return
+		return false
 	theChar.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("PenisPump"))
+	return true
 
 func removePenisPump(_charID:String):
 	var theChar:BaseCharacter = GlobalRegistry.getCharacter(_charID)
@@ -1429,11 +1430,12 @@ func milkScene(_actorID:String, _targetID:String):
 	if(_isPCTarget && !agreeSeed):
 		_canMilkPenis = false
 		_canMilkProstate = false
+	var _canUsePumps:bool = (upgradeLevel >= UPGRADE_PUMPS)
 	
 	var possible:Array = []
 	
 	if(_canMilkBreasts && _canMilkPenis):
-		possible.append(["gropeAndStroke", 3.0])
+		possible.append(["gropeAndStroke", 1.0])
 	elif(_canMilkBreasts):
 		possible.append(["grope", 1.0])
 	if(_canMilkBreasts):
@@ -1448,9 +1450,19 @@ func milkScene(_actorID:String, _targetID:String):
 			possible.append(["milkmachine", 12.0])
 	if(_canMilkPenis):
 		possible.append(["stroke", 1.0])
+		if(upgradeLevel >= UPGRADE_PUMPS):
+			possible.append(["penispump", 3.0])
+		if(upgradeLevel >= UPGRADE_STALL):
+			possible.append(["stallpenispump", 5.0])
 	if(_canMilkProstate):
 		possible.append(["fingering", 0.5])
 		possible.append(["pegging", 0.5])
+		if(upgradeLevel >= UPGRADE_FUCKMACHINE):
+			possible.append(["fuckmachineseed", 8.0])
+		if(upgradeLevel >= UPGRADE_MILKINGTABLE):
+			possible.append(["fingeringsmarttable", 4.0])
+			possible.append(["peggingsmarttable", 4.0])
+			possible.append(["seedmilkmachine", 4.0])
 	
 	if(possible.empty()):
 		sayParsed("Game couldn't figure out how to milk {target.you}!")
@@ -1472,47 +1484,129 @@ func milkScene(_actorID:String, _targetID:String):
 		shouldMilkBreasts = true
 		playAnimation(StageScene.BreastGroping, "grope", {pc=_actorID, npc=_targetID, milkTank=true, npcCum=true, npcBodyState={naked=true,hard=true}})
 		sayParsed("{actor.You} {actor.youVerb('guide')} {target.you} down onto the floor and {actor.youVerb('milk')} {target.yourHis} {target.breasts} with both hands, letting every drop flow into the tank!")
+		if(_canUsePumps && _canMilkPenis && addPenisPump(_targetID)):
+			shouldMilkPenis = true
+			sayParsed("At the same time, a penis pump drains {target.yourHis} balls!")
 	if(milkWay == "stroke"):
 		shouldMilkPenis = true
 		#playAnimation(StageScene.ChairOral, "stroke", {pc=_targetID, npc=_actorID, pcCum=true, bodyState={naked=true,hard=true}})
 		playAnimation(StageScene.Grope, "strokefast", {pc=_targetID, npc=_actorID, milkTank=true, pcCum=true, pcBodyState={naked=true,hard=true}})
 		sayParsed("{actor.You} {actor.youVerb('lock')} eyes with {target.you} as {actor.youVerb('proceed')} to stroke {target.yourHis} {target.penis} in slow, firm strokes until {target.yourHis} seed splatters into the collection container!")
+		if(_canUsePumps && _canMilkBreasts && addBreastPump(_targetID)):
+			shouldMilkBreasts = true
+			sayParsed("At the same time, two breast-pumps hum away at {target.yourHis} {target.breasts}, pulling out {target.milk}!")
 	if(milkWay == "fingering"):
 		shouldMilkPenis = true
 		playAnimation(StageScene.SexFisting, "fast", {pc=_actorID, npc=_targetID, npcCum=true, npcBodyState={naked=true,hard=true}})
 		sayParsed("{actor.You} {actor.youVerb('position')} {target.you} on all fours, then {actor.youVerb('slide')} {actor.yourHis} fingers deep to tease {target.yourHis} prostate, pumping until {target.yourHis} {target.penis} spurts hot seed into the waiting container!")
+		if(_canUsePumps && _canMilkBreasts && addBreastPump(_targetID)):
+			shouldMilkBreasts = true
+			sayParsed("At the same time, two breast-pumps hum away at {target.yourHis} {target.breasts}, pulling out {target.milk}!")
 	if(milkWay == "pegging"):
 		shouldMilkPenis = true
-		playAnimation(StageScene.SexFreeStanding, "fast", {pc=_actorID, npc=_targetID, pcCum=true, npcCum=true, bodyState={showPenis=true,hard=true}, npcBodyState={naked=true,hard=true}})
 		if(addStrapon(_actorID)):
+			playAnimation(StageScene.SexFreeStanding, "fast", {pc=_actorID, npc=_targetID, pcCum=true, npcCum=true, bodyState={naked=true,hard=true}, npcBodyState={naked=true,hard=true}})
 			sayParsed("{actor.You} {actor.youVerb('wear')} a strapon and {actor.youVerb('start')} pegging {target.your} ass with it, the rubber toy pressing deep to tease and stimulate {target.yourHis} prostate! More and more seed trickles down from {target.yourHis} {target.penis} into the seed tank.")
 		else:
+			playAnimation(StageScene.SexFreeStanding, "fast", {pc=_actorID, npc=_targetID, pcCum=true, npcCum=true, bodyState={showPenis=true,hard=true}, npcBodyState={naked=true,hard=true}})
 			sayParsed("{actor.You} {actor.youVerb('grab')} {target.you} and {actor.youVerb('line')} {actor.yourHis} cock against {target.yourHis} slick asshole, then {actor.youVerb('ram')} in, every thrust aiming straight for {target.yourHis} prostate! More and more seed trickles down from {target.yourHis} {target.penis} into the seed tank.")
+		if(_canUsePumps && _canMilkBreasts && addBreastPump(_targetID)):
+			shouldMilkBreasts = true
+			sayParsed("At the same time, two breast-pumps hum away at {target.yourHis} {target.breasts}, pulling out {target.milk}!")
 	if(milkWay == "breastpumps"):
 		shouldMilkBreasts = true
 		addBreastPump(_targetID)
 		playAnimation(StageScene.Cuddling, "squirm", {pc=_actorID, npc=_targetID, npcCum=true, npcBodyState={naked=true, hard=true}})
 		sayParsed("{actor.You} {actor.youVerb('hold')} {target.you} close while two breast-pumps are working away on {target.yourHis} {target.breasts}, humming as they draw every drop of {target.milk} into their internal reservoirs!")
+		if(_canUsePumps && _canMilkPenis && addPenisPump(_targetID)):
+			shouldMilkPenis = true
+			sayParsed("At the same time, a penis pump drains {target.yourHis} balls!")
+	if(milkWay == "penispump"):
+		shouldMilkPenis = true
+		addPenisPump(_targetID)
+		playAnimation(StageScene.SybianOral, "hold", {pc=_targetID, npc=_actorID, nosybian=true, chained=true, bodyState={naked=true, hard=true}})
+		sayParsed("{actor.You} {actor.youVerb('secure')} a penis pump around {target.your} {target.penis} and {actor.youVerb('let')} it stroke away at {target.yourHis} member until {target.youHe} can no longer hold back, {target.yourHis} {target.cum} filling the internal reservoir!")
+		if(_canUsePumps && _canMilkBreasts && addBreastPump(_targetID)):
+			shouldMilkBreasts = true
+			sayParsed("At the same time, two breast-pumps hum away at {target.yourHis} {target.breasts}, pulling out {target.milk}!")
+	if(milkWay == "stallpenispump"):
+		shouldMilkPenis = true
+		addPenisPump(_targetID)
+		var theChains := [["hoseshort", "penisPump", "scene", "milktank"], ["short", "neck", "scene", "bottompipe"]]
+		sayParsed("{actor.You} {actor.youVerb('lock')} {target.you} into the milking stall and {actor.youVerb('fit')} a pump over {target.yourHis} {target.penis}. {actor.YouHe} then just {actor.youVerb('watch', 'watches')} as the pleasure ring strokes and caresses the length, stimulating {target.yourHis} cock until it starts stuffing the pump’s reservoir full!")
+		if(_canUsePumps && _canMilkBreasts && addBreastPump(_targetID)):
+			shouldMilkBreasts = true
+			sayParsed("At the same time, two breast-pumps hum away at {target.yourHis} {target.breasts}, pulling out {target.milk}!")
+			theChains.append(["hoseshort", "breastpump", "scene", "milktank"])
+		playAnimation(StageScene.MilkingStallSolo, "cum", {pc=_targetID, npc=_actorID, npcCum=true, bodyState={naked=true, hard=true, chains=theChains}})
 	if(milkWay == "milkstall"):
 		shouldMilkBreasts = true
 		playAnimation(StageScene.MilkingStallDuo, "cum", {pc=_targetID, npc=_actorID, npcCum=true, bodyState={naked=true, hard=true}})
 		sayParsed("{actor.You} {actor.youVerb('cuff')} {target.you} to the milking stall, bending {target.youHim} forward and then hand-milking {target.yourHis} {target.breasts}, like they're udders! Any milk drips down into the milk tank.")
+		if(_canUsePumps && _canMilkPenis && addPenisPump(_targetID)):
+			shouldMilkPenis = true
+			sayParsed("At the same time, a penis pump drains {target.yourHis} balls!")
 	if(milkWay == "milkstallpumps"):
 		shouldMilkBreasts = true
 		addBreastPump(_targetID)
-		playAnimation(StageScene.MilkingStallDuo, "watchcum", {pc=_targetID, npc=_actorID, npcCum=true, bodyState={naked=true, hard=true}})
+		var theChains := [["hoseshort", "breastpump", "scene", "milktank"], ["short", "neck", "scene", "bottompipe"]]
 		sayParsed("{actor.You} {actor.youVerb('cuff')} {target.you} to the milking stall and {actor.youVerb('let')} two breast pumps work away at {target.yourHis} {target.breasts}. {actor.YouHe} {actor.youVerb('watch', 'watches')} them hum and steadily fill the milk tank.")
+		if(_canUsePumps && _canMilkPenis && addPenisPump(_targetID)):
+			shouldMilkPenis = true
+			sayParsed("At the same time, a penis pump drains {target.yourHis} balls!")
+			theChains.append(["hoseshort", "penisPump", "scene", "milktank"])
+		playAnimation(StageScene.MilkingStallSolo, "cum", {pc=_targetID, npc=_actorID, npcCum=true, bodyState={naked=true, hard=true, chains=theChains}})
 	if(milkWay == "milksybian"):
 		shouldMilkBreasts = true
 		addBreastPump(_targetID)
-		playAnimation(StageScene.SybianOral, "hold", {pc=_targetID, npc=_actorID, pcCum=true, bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SybianOral, "hold", {pc=_targetID, npc=_actorID, pcCum=true, chained=true, bodyState={naked=true, hard=true}})
 		sayParsed("{actor.You} {actor.youVerb('set')} {target.you} on top of the buzzing sybian and {actor.youVerb('let')} two breast pumps hum away at {target.yourHis} {target.breasts}, collecting milk as the machine fucks {target.yourHis} "+("cunt" if _target.hasReachableVagina() else "ass")+"!")
+		if(_canUsePumps && _canMilkPenis && addPenisPump(_targetID)):
+			shouldMilkPenis = true
+			sayParsed("At the same time, a penis pump drains {target.yourHis} balls!")
+	if(milkWay == "fuckmachineseed"):
+		shouldMilkPenis = true
+		playAnimation(StageScene.HangingSexFuckmachine, "fast", {pc=_targetID, pcCum=true, bodyState={naked=true, hard=true}})
+		sayParsed("{actor.You} {actor.youVerb('cuff')} {target.you} by the wrists high above {target.yourHis} head. {actor.YouHe} then {actor.youVerb('bring')} a fuck-machine behind and {actor.youVerb('turn')} it on! Its thick dildo slides into {target.your} ass and starts hammering {target.yourHis} prostate until {target.yourHis} seed begins to trickle down into the collection tank!")
+		if(_canUsePumps && _canMilkBreasts && addBreastPump(_targetID)):
+			shouldMilkBreasts = true
+			sayParsed("At the same time, two breast-pumps hum away at {target.yourHis} {target.breasts}, pulling out {target.milk}!")
 	if(milkWay == "milkmachine"):
 		shouldMilkBreasts = true
 		addBreastPump(_targetID)
-		playAnimation(StageScene.BDSMMachineFuck, "fastdouble", {pc=_targetID, pcCum=true, bodyState={naked=true, hard=true,chains=[["hose", "breastpump", "scene", "milkIntake"]]}})
+		var theChains := [["hose", "breastpump", "scene", "milkIntake"]]
 		sayParsed("{actor.You} {actor.youVerb('oversee')} the process as an advanced milking machine uses its dildos to fuck {target.yourHis} holes, manipulators pinning {target.yourHis} limbs, two pumps draining {target.yourHis} {target.breasts} into the tanks!")
-		
+		if(_canUsePumps && _canMilkPenis && addPenisPump(_targetID)):
+			shouldMilkPenis = true
+			sayParsed("At the same time, a penis pump drains {target.yourHis} balls!")
+			theChains.append(["hose", "penisPump", "scene", "milkIntake"])
+		playAnimation(StageScene.BDSMMachineFuck, "fastdouble", {pc=_targetID, pcCum=true, bodyState={naked=true, hard=true,chains=theChains}})
+	if(milkWay == "fingeringsmarttable"):
+		shouldMilkPenis = true
+		playAnimation(StageScene.MilkingProstate, "fast", {pc=_targetID, npc=_actorID, pcCum=true, bodyState={naked=true, hard=true}})
+		sayParsed("{actor.You} {actor.youVerb('bend')} {target.you} forward over the advanced milking table, manipulators holding {target.yourHis} limbs in place. Two fingers slip into {target.yourHis} asshole, stroking {target.yourHis} prostate just right until {target.yourHis} cock starts throbbing and dripping high-quality seed into the fluid intake!")
+		if(_canUsePumps && _canMilkBreasts && addBreastPump(_targetID)):
+			shouldMilkBreasts = true
+			sayParsed("At the same time, two breast-pumps hum away at {target.yourHis} {target.breasts}, pulling out {target.milk}!")
+	if(milkWay == "peggingsmarttable"):
+		shouldMilkPenis = true
+		if(addStrapon(_actorID)):
+			playAnimation(StageScene.MilkingProstateFuck, "fast", {pc=_targetID, npc=_actorID, pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+			sayParsed("{actor.You} {actor.youVerb('secure')} {target.you} over the advanced table, manipulators holding {target.yourHis} limbs in place. A pre-lubed strapon presses against {target.yourHis} tight ring, spreading it wide before sliding inside. {actor.You} {actor.youVerb('begin')} pounding {target.yourHis} ass nice and hard, using the info that the table provides to maximize the stimulation of the prostate. Soon, seed begins to dribble down into the fluid intake.");
+		else:
+			playAnimation(StageScene.MilkingProstateFuck, "fast", {pc=_targetID, npc=_actorID, pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={showPenis=true, hard=true}})
+			sayParsed("{actor.You} {actor.youVerb('secure')} {target.you} over the advanced table, manipulators holding {target.yourHis} limbs in place. A {actor.penis} presses against {target.yourHis} tight ring, spreading it wide before sliding inside. {actor.You} {actor.youVerb('begin')} pounding {target.yourHis} ass nice and hard, using the info that the table provides to maximize the stimulation of the prostate. Soon, seed begins to dribble down into the fluid intake.");
+		if(_canUsePumps && _canMilkBreasts && addBreastPump(_targetID)):
+			shouldMilkBreasts = true
+			sayParsed("At the same time, two breast-pumps hum away at {target.yourHis} {target.breasts}, pulling out {target.milk}!")
+	if(milkWay == "seedmilkmachine"):
+		shouldMilkPenis = true
+		playAnimation(StageScene.BDSMMachineAltFuck, "fast" if !_target.hasReachableVagina() else "fastdouble", {pc=_targetID, bodyState={naked=true, hard=true}})
+		sayParsed("{actor.You} {actor.youVerb('activate')} the "+("dual-" if _target.hasReachableVagina() else "")+"dildo milking mode on the advanced table. "+("Two rigid dildos thrust in unison into {target.yourHis} holes" if _target.hasReachableVagina() else "A rigid dildo thrusts into {target.yourHis} fuckhole")+", stretching and pounding {target.yourHis} prostate until {target.yourHis} cock erupts, filling the seed tank with thick ropes!")
+		if(_canUsePumps && _canMilkBreasts && addBreastPump(_targetID)):
+			shouldMilkBreasts = true
+			sayParsed("At the same time, two breast-pumps hum away at {target.yourHis} {target.breasts}, pulling out {target.milk}!")
+	
 	if(shouldMilkPenis):
 		collectedSeed += _target.milkSeed()
 	if(shouldMilkBreasts):

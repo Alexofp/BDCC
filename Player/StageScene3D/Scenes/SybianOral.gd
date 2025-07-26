@@ -54,6 +54,11 @@ func playAnimation(animID, _args = {}):
 	
 	updateSubAnims()
 	
+	if(_args.has("nosybian") && _args["nosybian"]):
+		$Sybian.visible = false
+	else:
+		$Sybian.visible = true
+	
 	$Sybian/ChainRenderer.visible = (_args.has("chained") && _args["chained"])
 	
 	if(_args.has("pcCum") && _args["pcCum"]):
