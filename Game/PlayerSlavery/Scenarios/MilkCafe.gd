@@ -170,26 +170,42 @@ func loadData(_data:Dictionary):
 # default milking ways: fingering, stroking, stroking+groping, groping, pegging over table
 const UPGRADES = [
 	{
-		earned = 800,
+		earned = 500,
 		message = "The owners bought some breast and penis pumps!",
+		creditsMult = 5.0,
 	},
 	{
-		earned = 5500,
+		earned = 5000,
+		message = "The owners have replaced the grass in the garden with tastier one!",
+		creditsMult = 15.0,
+	},
+	{
+		earned = 10000,
 		message = "The owners have installed a milking stall!",
+		creditsMult = 30.0,
 	},
 	{
-		earned = 15500,
+		earned = 25000,
 		message = "The owners have bought some fuck-machines!",
+		creditsMult = 50.0,
+	},
+	{
+		earned = 50000,
+		message = "The owners have made the cafe prettier and also gave you better cells!",
+		creditsMult = 100.0,
 	},
 	{
 		earned = 100000,
 		message = "The owners have installed an advanced milking table!",
+		creditsMult = 200.0,
 	},
 ]
 const UPGRADE_PUMPS = 0
-const UPGRADE_STALL = 1
-const UPGRADE_FUCKMACHINE = 2
-const UPGRADE_MILKINGTABLE = 3
+const UPGRADE_GRASS = 1
+const UPGRADE_STALL = 2
+const UPGRADE_FUCKMACHINE = 3
+const UPGRADE_CELLS = 4
+const UPGRADE_MILKINGTABLE = 5
 
 const MILKA_LINES = [
 	"Oh, hai. There is more of us here now, neat. Name is Milka!",
@@ -206,7 +222,7 @@ const MILKA_LINES = [
 	"Life is getting better actually! The funny marks don't hurt as much.",
 	"These owners gave me my name.. Milka. Fits me, doesn't it? I just need bigger titties!",
 	"Do you have dreams? Sometimes I dream of soft grass and sunshine. Moo~.",
-	"This cafe isn't doing well financially.. reminds me of my childhood farm..",
+	"The cafe doesn't seem to be doing well.. reminds me of my home..",
 	"I can tell them to milk my breasts twice as much. Then they will go easier on you. Just let me know!",
 	"When I'm scared, I just count the lines. It helps!",
 	"I would love to help that bull.. Then he would breed me maybe! Breeding is in my DNA~.",
@@ -274,6 +290,7 @@ func _init():
 func onSlaveryStart():
 	updateCharacters()
 	intro_state()
+	GlobalRegistry.getCharacter(C_COW).induceLactation()
 
 func onSlaveryEnd():
 	GM.pc.removeEffect(StatusEffect.PSMilkCafeProduction)
@@ -296,7 +313,12 @@ func isPipCaged() -> bool:
 	return !cageRemoved
 
 func getMilkaBreastSize() -> int:
-	return 2
+	return 2 + milkaExtraBreastSize
+
+func getCreditsEarnMult() -> float:
+	if(upgradeLevel >= 0 && upgradeLevel < UPGRADES.size()):
+		return UPGRADES[upgradeLevel]["creditsMult"]
+	return 1.0
 
 func saynn(_text:String):
 	texts.append(_text+"\n\n")
@@ -389,6 +411,12 @@ func doFinalAction(_finalActionEntry:Array) -> Dictionary:
 			return {fight=theArgs[0]}
 		if(theID == "startSex"):
 			return {sex=theArgs}
+		if(theID == "triggerEventMaybe"):
+			triggerEventMaybe()
+			call(state + "_state")
+			return {}
+		if(theID == "ENDING"):
+			return {end=theArgs[0]}
 			
 		
 		call(state + "_do", theID, theArgs)
@@ -399,7 +427,7 @@ func doFinalAction(_finalActionEntry:Array) -> Dictionary:
 	return {}
 	
 func processTurn():
-	GM.main.processTime(60*60)
+	GM.main.processTime(60*RNG.randi_range(60, 180))
 	idleState += 1
 	if(idleState > IDLE_MAX):
 		idleState = 0
@@ -487,9 +515,10 @@ func onDayEnd():
 	var earned:int = extraProfit
 	
 	if(milkedToday > 0):
+		var earnMult:float = getCreditsEarnMult()
 		var earnedCredsMin:int = milkedToday * 100 + milkedTotal * milkedTotal
 		var earnedCredsMax:int = milkedToday * 300 + milkedTotal * milkedTotal
-		earned += RNG.randi_range(earnedCredsMin, earnedCredsMax)
+		earned += RNG.randi_range(int(earnedCredsMin*earnMult), int(earnedCredsMax*earnMult))
 	
 	if(earned > 0):
 		totalEarned += earned
@@ -505,20 +534,21 @@ func onDayEnd():
 		var amountToEarn:int = theEntry["earned"]
 		if(totalEarned >= amountToEarn):
 			upgradeLevel = theNewUpgradeLevel
-			sayn("The cafe earned enough credits for an upgrade!")
+			sayn("[b]The cafe earned enough credits for an upgrade![/b]")
 			saynn(theEntry["message"])
 	
 	milkedToday = 0
 	extraProfit = 0
 	onNewDay()
 
-func addBreastPump(_charID:String):
+func addBreastPump(_charID:String) -> bool:
 	var theChar:BaseCharacter = GlobalRegistry.getCharacter(_charID)
 	var thePump = GlobalRegistry.createItem("BreastPump")
 	if(theChar.canBeMilked()):
 		var theFluids = thePump.getFluids()
 		theFluids.addFluid("Milk", 400.0)
 	theChar.getInventory().forceEquipStoreOtherUnlessRestraint(thePump)
+	return true
 
 func removeBreastPump(_charID:String):
 	GlobalRegistry.getCharacter(_charID).getInventory().clearSlot(InventorySlot.UnderwearTop)
@@ -682,12 +712,12 @@ func main_state():
 			addDisabledAction("Be milked", "You're not obedient enough to ask to be milked an extra time")
 		else:
 			addAction("Be milked", "Ask the owners to milk you an extra time", "needyMilk")
-		if(cowTrust > 0.1):
+		if(helpedMilka):
 			if(GM.pc.getStamina() > 0):
 				addAction("Milk Cow", "Help with milking the cow", "talkCowMilk")
 			else:
 				addDisabledAction("Milk Cow", "You don't have any stamina left")
-		if(bullTrust > 0.1):
+		if(bullTrust > 0.5 || cageRemoved):
 			if(GM.pc.getStamina() > 0):
 				addAction("Milk Bull", "Help with milking the bull", "talkBullMilk")
 			else:
@@ -698,6 +728,9 @@ func main_state():
 	#addAction("Eat", "Go eat out of a trough", "goEat")
 	#addAction("Cow", "Spend time with the cow", "talkCow")
 	#addAction("Bull", "Spend time with the bull", "talkBull")
+
+func addContinueEventTrigger():
+	addContinue("triggerEventMaybe")
 
 func lateCheck() -> bool:
 	if(GM.main.isVeryLate()):
@@ -719,10 +752,11 @@ func triggerEventMaybe():
 		return
 	
 	if(RNG.chance(50)):
-		#setState("test")
-		addContinue("startEvent", ["test"])
+		setState("test")
+		#addContinue("startEvent", ["test"])
 	else:
-		addContinue("setState", ["main"])
+		setState("main")
+		#addContinue("setState", ["main"])
 
 func addNextIdleStageButton():
 	addContinue("nextIdle")
@@ -733,8 +767,12 @@ func main_do(_id:String, _args:Array):
 	if(_id == "idleGraze"):
 		aimCamera(RNG.pick([L_FIELD, L_FIELD2, L_FIELD3]))
 		saynn("YOU SPEND SOME TIME GRAZING, CHEWING ON GRASS.")
-		addStamina(10)
-		addPain(-10)
+		if(upgradeLevel >= UPGRADE_GRASS):
+			addStamina(20)
+			addPain(-20)
+		else:
+			addStamina(10)
+			addPain(-10)
 		
 		var special:String = RNG.pickWeightedDict({
 			"": 100.0, "guy": 20.0, "girl": 20.0,
@@ -748,11 +786,14 @@ func main_do(_id:String, _args:Array):
 			talk(C_GIRL, "YEAH, LOOK DUMB AND KEEP CHEWING, I NEED YOUR MILK.")
 			addObedience(1)
 		
-		triggerEventMaybe()
+		addContinueEventTrigger()
 	if(_id == "idleCell"):
 		aimCamera(L_SLEEP)
 		saynn("YOU HIDE IN THE CELL, AWAY FROM EVERYBODY.")
-		addStamina(15)
+		if(upgradeLevel >= UPGRADE_CELLS):
+			addStamina(50)
+		else:
+			addStamina(15)
 		
 		var special:String = RNG.pickWeightedDict({
 			"": 100.0, "guy": 20.0, "girl": 40.0,
@@ -765,7 +806,7 @@ func main_do(_id:String, _args:Array):
 			addPain(10)
 			talk(C_GIRL, "STUPID BITCH, YOU'RE A COW, ACT LIKE IT.")
 			addObedience(-2)
-		triggerEventMaybe()
+		addContinueEventTrigger()
 	if(_id == "idleWash"):
 		aimCamera(L_FIELD)
 		GM.pc.clearBodyFluids()
@@ -781,7 +822,7 @@ func main_do(_id:String, _args:Array):
 		else:
 			saynn("THE GUY BRINGS YOU OUT INTO THE FIELD AND CAREFULLY WASHES YOUR BODY, HOSE IN ONE HAND, SPONGE IN ANOTHER.")
 			talk(C_GUY, "THERE WE GO. MUCH BETTER, EH?")
-		triggerEventMaybe()
+		addContinueEventTrigger()
 	if(_id == "idlePeek"):
 		aimCamera(L_COUNTER)
 		if(peekState == PEEK_START):
@@ -838,7 +879,7 @@ func main_do(_id:String, _args:Array):
 					talk(C_GIRL, "Why are you so dumb? Don't make me punish you.")
 					addObedience(-1)
 				
-		triggerEventMaybe()
+		addContinueEventTrigger()
 	if(_id == "idleSmash"):
 		aimCamera(L_DOOR)
 		
@@ -865,7 +906,7 @@ func main_do(_id:String, _args:Array):
 			GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("inmateanklecuffs"))
 			addObedience(-2)
 		
-		triggerEventMaybe()
+		addContinueEventTrigger()
 	if(_id == "idleCowBreasts"):
 		aimCamera(L_COW)
 		playAnimation(StageScene.BreastGroping, "grope", {pc="pc", npc="psmilka"})
@@ -907,13 +948,13 @@ func main_do(_id:String, _args:Array):
 			]))
 			saynn("You read the small text on the tube. It says that the change is instant and permanent.")
 		
-			triggerEventMaybe()
+			addContinueEventTrigger()
 			addAction("Your breasts", "Allow Milka to use the cream on your breasts, making them bigger!", "milkaUseCreamOnPC")
 		else:
 			talk(C_COW, RNG.pick([
 				"Ah.. I'm a better cow now.",
 			]))
-			triggerEventMaybe()
+			addContinueEventTrigger()
 	if(_id == "milkaUseCreamOnPC"):
 		playAnimation(StageScene.BreastGroping, "grope", {pc="psmilka", npc="pc", npcBodyState={hard=true}})
 		saynn("You agree, letting Milka use the special cream on your {pc.breasts}.")
@@ -925,7 +966,7 @@ func main_do(_id:String, _args:Array):
 		sayMilkaLine()
 		saynn("Eventually, you begin to feel your chest twitching! A little gasp escapes your lips as you feel your breasts getting bigger!")
 		talk(C_COW, "There we go!")
-		triggerEventMaybe()
+		addContinueEventTrigger()
 	if(_id == "milkaRewardBreed"):
 		playAnimation(StageScene.SexMatingPress, "fast", {pc="pc", npc="psmilka", pcCum=true, bodyState={hard=true,naked=true}})
 		var _withStrapon:bool = addStrapon(C_PC, C_BULL)
@@ -1048,7 +1089,7 @@ func main_do(_id:String, _args:Array):
 				saynn("The cage is giving way, you can feel it. There is more and more wiggle room after each try.")
 			else:
 				saynn("It feels like the cage will snap soon. You're almost there.")
-		triggerEventMaybe()
+		addContinueEventTrigger()
 	if(_id == "cageAnalFuck"):
 		cageRemoved = true
 		updateCharacters()
@@ -1163,7 +1204,7 @@ func main_do(_id:String, _args:Array):
 		#if(struggleData.has("stamina") && struggleData["stamina"] != 0):
 		#	sub.addStamina(-struggleData["stamina"])
 		
-		triggerEventMaybe()
+		addContinueEventTrigger()
 
 	if(_id == "goEat"):
 		aimCamera(L_EAT)
@@ -1171,7 +1212,7 @@ func main_do(_id:String, _args:Array):
 		addUpText("Obedience", 1)
 		
 		saynn("YOU EAT SOME HAY OUT OF A TROUGH.")
-		triggerEventMaybe()
+		addContinueEventTrigger()
 	if(_id == "talkCow"):
 		playAnimation(StageScene.Duo, "stand", {npc=C_COW})
 		aimCamera(L_COW)
@@ -1188,7 +1229,7 @@ func main_do(_id:String, _args:Array):
 			saynn("You read the effects.. estrogen, prolactin.. apparently this cream is supposed to help with the lactation. Needs to be applied directly to the breasts.")
 			talk(C_COW, "I'm too afraid to use it myself, I'm just a cow!")
 		
-		triggerEventMaybe()
+		addContinueEventTrigger()
 	if(_id == "talkBull"):
 		playAnimation(StageScene.Duo, "stand", {npc=C_BULL})
 		aimCamera(L_BULL)
@@ -1202,7 +1243,7 @@ func main_do(_id:String, _args:Array):
 			talk(C_BULL, "It's been there for at least a few months. I'm fucking desperate. Maybe you can try to do something? If you have the time.")
 			saynn("A caged bull just isn't right. On the other hand, maybe that's just his fate now.")
 		
-		triggerEventMaybe()
+		addContinueEventTrigger()
 	if(_id == "talkAnnoy"):
 		saynn(RNG.pick([
 			"You bang on the door to annoy your owners.",
@@ -1223,30 +1264,38 @@ func main_do(_id:String, _args:Array):
 			saynn("You nod, obviously. The guy hands you the treat.")
 			addTreat(1)
 		
-		triggerEventMaybe()
+		addContinueEventTrigger()
 	if(_id == "talkCowMilk"):
 		saynn("You make Milka an offer to milk her. She agrees.")
 		milkScene(C_PC, C_COW)
 		addStamina(-40)
 		addCowTrust(3)
-		triggerEventMaybe()
+		addContinueEventTrigger()
+		addAction("Breed her", "Fuck Milka with your cock or a strapon!", "milkaRewardBreed")
 	if(_id == "talkBullMilk"):
 		saynn("You make Pip an offer to milk him. He agrees.")
 		milkScene(C_PC, C_BULL)
 		addStamina(-40)
 		addBullTrust(3)
-		triggerEventMaybe()
+		addContinueEventTrigger()
 	if(_id == "eatGrass"):
 		aimCamera(L_EAT)
-		saynn("You eat some grass.")
-		addStamina(30)
+		if(upgradeLevel >= UPGRADE_GRASS):
+			saynn("You eat some tasty grass.")
+			addStamina(50)
+			GM.pc.fillBalls(0.2)
+			GM.pc.fillBreasts(0.2)
+		else:
+			saynn("You eat some grass.")
+			addStamina(30)
 		addObedience(1)
 		if(RNG.chance(20)):
+			GlobalRegistry.getCharacter(C_COW).fillBreasts(0.5)
 			saynn("Milka does the same nearby, chewing on some grass blades.")
 			talk(C_COW, "Tasty, isn't it?")
 			saynn("You.. nod.")
 			addCowTrust(1)
-		triggerEventMaybe()
+		addContinueEventTrigger()
 	if(_id == "eatStarve"):
 		saynn("Anything is better than eating grass. You decide to just starve.")
 		addStamina(-30)
@@ -1259,13 +1308,13 @@ func main_do(_id:String, _args:Array):
 			talk(C_GUY, "I know the grass isn't what you normally eat. But don't starve yourself, okay? Don't tell Sofie.")
 			saynn("Free treat, hey.")
 			addTreat(1)
-		triggerEventMaybe()
+		addContinueEventTrigger()
 	if(_id == "eatDemand"):
 		saynn("You demand to be fed normal food!")
 		addObedience(-1)
 		saynn("The owners don't seem to care. Looks like you're starving..")
 		addStamina(-30)
-		triggerEventMaybe()
+		addContinueEventTrigger()
 	if(_id == "eatTreat"):
 		saynn("You eat a treat! It was very tasty.")
 		addStamina(100)
@@ -1287,18 +1336,18 @@ func main_do(_id:String, _args:Array):
 			saynn("You can hear some jealousy in his voice.")
 			addBullTrust(-1)
 		
-		triggerEventMaybe()
+		addContinueEventTrigger()
 	if(_id == "needyMilk"):
 		saynn("You ask to be milked an extra time..")
 		addObedience(1)
 		milkScene(RNG.pick([C_GUY, C_GIRL]), C_PC)
-		triggerEventMaybe()
+		addContinueEventTrigger()
 	if(_id == "needyRest"):
 		saynn("You decide to just chill..")
 		addStamina(20)
 		
 		#GM.pc.orgasmFrom("pc")
-		triggerEventMaybe()
+		addContinueEventTrigger()
 	if(_id == "needyOfferSelf"):
 		saynn("You decide to offer your body to the owners..")
 		
@@ -1310,7 +1359,7 @@ func main_do(_id:String, _args:Array):
 	if(_id == "needyComplain"):
 		saynn("You complain about your neediness!")
 		addObedience(-1)
-		triggerEventMaybe()
+		addContinueEventTrigger()
 	
 	if(_id == "startEvent"):
 		setState(_args[0])
@@ -1337,9 +1386,18 @@ func sleep_do(_id:String, _args:Array):
 	if(_id == "sleep"):
 		GM.main.startNewDay()
 		saynn("NEW DAY.")
-		addStamina(20)
-		addPain(-50)
-		setState("main")
+		if(upgradeLevel >= UPGRADE_CELLS):
+			addStamina(50)
+			addPain(-100)
+		else:
+			addStamina(20)
+			addPain(-50)
+		
+		addContinue("setState", ["main"])
+		if(GM.pc.getCredits() >= 0):
+			saynn("[b]The owners have paid off their debt! You can released![/b]")
+			addAction("Freedom!", "You did your part. Time for the owners to do the same", "ENDING", ["end_credits"])
+		#setState("main")
 
 func test_state():
 	addCredits(5)
@@ -1407,7 +1465,7 @@ var charOverrides:Dictionary = {}# no sync
 func sayParsed(_text:String):
 	saynn(parse(_text, charOverrides))
 
-func milkScene(_actorID:String, _targetID:String):
+func induceLactationScene(_actorID:String, _targetID:String):
 	addChar(_actorID)
 	addChar(_targetID)
 	charOverrides = {actor=_actorID, target=_targetID}
@@ -1415,11 +1473,83 @@ func milkScene(_actorID:String, _targetID:String):
 	var _isPCTarget:bool = (_targetID == C_PC)
 	var _actor:BaseCharacter = GlobalRegistry.getCharacter(_actorID)
 	var _target:BaseCharacter = GlobalRegistry.getCharacter(_targetID)
-	var _actorName:String = _actor.getName()
-	var _targetName:String = _target.getName()
-	if(_isPCTarget):
-		_targetName = "you"
-	var _targetCaged:bool = _target.isWearingChastityCage()
+	
+	var _hasVag:bool = _target.hasReachableVagina()
+	var _canGetPreg:bool = _target.hasWombIn(BodypartSlot.Vagina if _hasVag else BodypartSlot.Anus) && _target.getFertility() > 0.3
+	
+	var _hasCumAlready:bool = false
+	if(_hasVag && _target.hasEffect(StatusEffect.HasCumInsideVagina)):
+		_hasCumAlready = true
+	if(!_hasVag && _target.hasEffect(StatusEffect.HasCumInsideAnus)):
+		_hasCumAlready = true
+	
+	sayParsed("{actor.You} {actor.youVerb('check')} {target.your} {target.breasts}, squeezing them.. and finding no milk.")
+	talk(_actorID, "You're not lactating. We need to fix that.")
+	
+	# Just stimulate breasts
+	if(_hasCumAlready):
+		playAnimation(StageScene.BreastGroping, "grope", {pc=_actorID, npc=_targetID, npcBodyState={naked=true,hard=true}})
+		sayParsed("{actor.You} {actor.youVerb('see')} that {target.yourHis} "+("cunt" if _hasVag else "tailhole")+" is already creamed enough so {actor.youHe} just {actor.youVerb('pull')} {target.youHim} into a tight embrace and {actor.youVerb('begin')} tightly-squeezing {target.yourHis} {target.breasts}, stimulating them!")
+		talk(_targetID, "Ah..")
+		if(_target.stimulateLactation()):
+			sayParsed("And soon enough, {target.yourHis} nipples start squirting {target.milk}! {target.YouHe} [b]began lactating[/b]!")
+			talk(_actorID, "There we go.")
+		else:
+			sayParsed("{target.YourHis} nipples get hard and sensitive from the stimulation.. But there is no milk still.")
+			talk(_actorID, "We will keep trying.")
+	# BREED
+	else:
+		var _isStrap:bool = false
+		if(addStrapon(_actorID, C_GUY)):
+			_isStrap = true
+			sayParsed("{actor.You} {actor.youVerb('secure')} a strapon around {actor.yourHis} waist and {actor.youVerb('load')} it with something that looks a lot like cum..")
+			if(!_canGetPreg):
+				talk(_targetID, "Wait, I can't get pregnant.")
+				talk(_actorID, "We will see if that's true.")
+			else:
+				talk(_targetID, "Are you really planning to breed me!?")
+				talk(_actorID, "Cows make a lot more milk if they're pregnant.")
+			sayParsed("{target.You} {target.youVerb('get')} pinned to the floor!")
+		else:
+			sayParsed("{actor.You} {actor.youVerb('pull')} {actor.yourHis} {actor.penis} out..")
+			if(!_canGetPreg):
+				talk(_targetID, "Wait, I can't get pregnant.")
+				talk(_actorID, "We will see if that's true.")
+			else:
+				talk(_targetID, "Are you really planning to breed me!?")
+				talk(_actorID, "Cows make a lot more milk if they're pregnant.")
+			sayParsed("{target.You} {target.youVerb('get')} pinned to the floor!")
+		
+		if(_isStrap):
+			playAnimation(StageScene.SexLowDoggy, "fast", {pc=_actorID, npc=_targetID, pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+			sayParsed("{actor.You} {actor.youVerb('slam')} {actor.yourHis} shiny strapon down {target.yourHis} "+str("tailhole" if !_hasVag else "pussy")+" and {actor.youVerb('pound')} it hard until the tightness makes the toy release its load deep inside {target.youHim}!")
+		else:
+			playAnimation(StageScene.SexLowDoggy, "fast", {pc=_actorID, npc=_targetID, pcCum=true, npcCum=true, bodyState={showPenis=true, hard=true}, npcBodyState={naked=true, hard=true}})
+			sayParsed("{actor.You} {actor.youVerb('slam')} {actor.yourHis} {actor.penis} down {target.yourHis} "+str("tailhole" if !_hasVag else "pussy")+" and {actor.youVerb('pound')} it hard until the orgasm makes {actor.youHim} stuff it full of {actor.yourHis} seed!")
+		
+		if(_hasVag):
+			_target.gotVaginaFuckedBy(_actorID)
+			_target.cummedInVaginaBy(_actorID, FluidSource.Strapon if _isStrap else FluidSource.Penis)
+		else:
+			_target.gotAnusFuckedBy(_actorID)
+			_target.cummedInAnusBy(_actorID, FluidSource.Strapon if _isStrap else FluidSource.Penis)
+		_target.orgasmFrom(_actorID)
+		_actor.orgasmFrom(_targetID)
+		if(!_canGetPreg):
+			if(_target.stimulateLactation()):
+				sayParsed("{target.Your} {target.breasts} suddenly start leaking {target.milk}! {target.YouHe} [b]began lactating[/b]!")
+				talk(_actorID, "There we go. And you doubted me.")
+
+func milkScene(_actorID:String, _targetID:String):
+	addChar(_actorID)
+	addChar(_targetID)
+	if(_targetID == C_COW):
+		GlobalRegistry.getCharacter(C_COW).induceLactation()
+	charOverrides = {actor=_actorID, target=_targetID}
+	var _isPCActor:bool = (_actorID == C_PC)
+	var _isPCTarget:bool = (_targetID == C_PC)
+	var _actor:BaseCharacter = GlobalRegistry.getCharacter(_actorID)
+	var _target:BaseCharacter = GlobalRegistry.getCharacter(_targetID)
 	var _canMilkBreasts:bool = true
 	if(_isPCTarget && !agreeMilk):
 		_canMilkBreasts = false
@@ -1431,6 +1561,10 @@ func milkScene(_actorID:String, _targetID:String):
 		_canMilkPenis = false
 		_canMilkProstate = false
 	var _canUsePumps:bool = (upgradeLevel >= UPGRADE_PUMPS)
+	
+	if(_canMilkBreasts && _targetID == C_PC && !_target.canBeMilked()):
+		induceLactationScene(_actorID, _targetID)
+		return
 	
 	var possible:Array = []
 	
@@ -1490,14 +1624,14 @@ func milkScene(_actorID:String, _targetID:String):
 	if(milkWay == "stroke"):
 		shouldMilkPenis = true
 		#playAnimation(StageScene.ChairOral, "stroke", {pc=_targetID, npc=_actorID, pcCum=true, bodyState={naked=true,hard=true}})
-		playAnimation(StageScene.Grope, "strokefast", {pc=_targetID, npc=_actorID, milkTank=true, pcCum=true, pcBodyState={naked=true,hard=true}})
+		playAnimation(StageScene.Grope, "strokefast", {pc=_targetID, npc=_actorID, milkTank=true, pcCum=true, bodyState={naked=true,hard=true}})
 		sayParsed("{actor.You} {actor.youVerb('lock')} eyes with {target.you} as {actor.youVerb('proceed')} to stroke {target.yourHis} {target.penis} in slow, firm strokes until {target.yourHis} seed splatters into the collection container!")
 		if(_canUsePumps && _canMilkBreasts && addBreastPump(_targetID)):
 			shouldMilkBreasts = true
 			sayParsed("At the same time, two breast-pumps hum away at {target.yourHis} {target.breasts}, pulling out {target.milk}!")
 	if(milkWay == "fingering"):
 		shouldMilkPenis = true
-		playAnimation(StageScene.SexFisting, "fast", {pc=_actorID, npc=_targetID, npcCum=true, npcBodyState={naked=true,hard=true}})
+		playAnimation(StageScene.SexFisting, "sex", {pc=_actorID, npc=_targetID, npcCum=true, npcBodyState={naked=true,hard=true}})
 		sayParsed("{actor.You} {actor.youVerb('position')} {target.you} on all fours, then {actor.youVerb('slide')} {actor.yourHis} fingers deep to tease {target.yourHis} prostate, pumping until {target.yourHis} {target.penis} spurts hot seed into the waiting container!")
 		if(_canUsePumps && _canMilkBreasts && addBreastPump(_targetID)):
 			shouldMilkBreasts = true

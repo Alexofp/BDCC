@@ -26,7 +26,10 @@ func _run():
 					addDisabledButtonAt(theIndx, actionName, actionDesc)
 				else:
 					addButtonAt(theIndx, actionName, actionDesc, "doAction", [actionEntry])
-
+	if(state == "end_credits"):
+		saynn("YOU WON!")
+		addButton("Continue", "See what happens next", "doEnd")
+	
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
@@ -38,6 +41,17 @@ func _react(_action: String, _args):
 			runScene("FightScene", [result["fight"]], "fight_scene")
 		elif(result.has("sex")):
 			runScene("GenericSexScene", result["sex"], "sex_scene")
+		elif(result.has("end")):
+			setState(result["end"])
+		else:
+			if(!GM.main.checkTFs()):
+				GM.main.showLog()
+		return
+
+	if(_action == "doEnd"):
+		GM.main.stopPlayerSlavery()
+		GM.pc.setLocation(GM.pc.getCellLocation())
+		endScene()
 		return
 
 	setState(_action)
