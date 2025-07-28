@@ -52,6 +52,8 @@ var helpedMilka:bool = false
 var upgradeLevel:int = -1
 var extraProfit:int = 0
 
+var lactationTry:int = 0
+
 var charsHere:Array = []
 
 const IDLE_IDLE = 0
@@ -123,6 +125,7 @@ func saveData() -> Dictionary:
 		milkaExtraBreastSize = milkaExtraBreastSize,
 		upgradeLevel = upgradeLevel,
 		extraProfit = extraProfit,
+		lactationTry = lactationTry,
 	}
 
 func loadData(_data:Dictionary):
@@ -160,6 +163,7 @@ func loadData(_data:Dictionary):
 	milkaExtraBreastSize = SAVE.loadVar(_data, "milkaExtraBreastSize", 0)
 	upgradeLevel = SAVE.loadVar(_data, "upgradeLevel", -1)
 	extraProfit = SAVE.loadVar(_data, "extraProfit", 0)
+	lactationTry = SAVE.loadVar(_data, "lactationTry", 0)
 
 # max earned = 250000
 
@@ -386,7 +390,7 @@ func processFightEnd(_didPCWin:bool):
 	startNewState()
 	call(state + "_fightResult", _didPCWin)
 
-func processSexEnd(_sexResult:SexReaction):
+func processSexEnd(_sexResult:SexEngineResult):
 	startNewState()
 	call(state + "_sexResult", _sexResult)
 
@@ -492,7 +496,7 @@ func addPain(_howMuch:int):
 	GM.pc.addPain(_howMuch)
 	addUpTextNum("Pain", _howMuch, true)
 func addObedience(_howMuch:float):
-	obedience += _howMuch / 100.0
+	obedience += (_howMuch*2.0 if _howMuch<0.0 else _howMuch) / 100.0
 	addUpTextF("Obedience", _howMuch)
 func addCowTrust(_howMuch:float):
 	cowTrust += _howMuch / 100.0
@@ -501,7 +505,7 @@ func addBullTrust(_howMuch:float):
 	bullTrust += _howMuch / 100.0
 	addUpTextF("Bull's trust", _howMuch)
 func addPadlockDamage(_howMuch:float):
-	padlockDamage += _howMuch / 100.0
+	padlockDamage += _howMuch / 20.0
 	addUpTextF("Padlock's damage", _howMuch)
 
 func getCredits() -> int:
@@ -605,8 +609,12 @@ func intro_do(_id:String, _args:Array):
 		addCredits(-250000)
 		
 		addAction("Milk", "Your breasts will be milked. Their size will be increased over time", "agreeMilk")
-		addAction("Seed", "Your cock will be milked", "agreeSeed")
-		addAction("Both", "Both, your breasts and your cock will be milked", "agreeBoth")
+		if(GM.pc.hasReachablePenis() || GM.pc.isWearingChastityCage()):
+			addAction("Seed", "Your cock will be milked", "agreeSeed")
+			addAction("Both", "Both, your breasts and your cock will be milked", "agreeBoth")
+		else:
+			addDisabledAction("Seed", "Sadly, you don't have a penis to be seed-milked")
+			addDisabledAction("Both", "Sadly, you don't have a penis to also be seed-milked")
 	if(_id == "agreeMilk"):
 		agreeMilk = true
 		agreeSeed = false
@@ -658,7 +666,12 @@ func main_state():
 		else:
 			addDisabledAction("Peek outside", "The window is high so you need some stamina to reach it")
 		if(peekState >= PEEK_NOTICED_PADLOCK):
-			if(!GM.pc.hasBoundLegs()):
+			if(padlockDamage >= 1.0):
+				if(cageRemoved && helpedMilka):
+					addAction("Freedom!", "The door is open. You can leave!", "ENDING", ["end_breaklock"])
+				else:
+					addAction("Freedom!", "The door is open. You can leave", "endingLockCheck")
+			elif(!GM.pc.hasBoundLegs()):
 				if(GM.pc.getStamina() > 0):
 					addAction("Kick door", "Smash the door to damage the padlock", "idleSmash")
 				else:
@@ -678,14 +691,6 @@ func main_state():
 					addDisabledAction("Bull's cage", "You don't have any stamina to do this")
 				else:
 					addAction("Bull's cage", "Help Pip with his chastity cage", "idleBullCage")
-		if(canHelpMilka && (getMilkaBreastSize() < BreastsSize.O)):
-			if(GM.pc.hasBoundArms() || GM.pc.hasBlockedHands()):
-				addDisabledAction("Milka's breasts", "You can't do it with blocked hands")
-			else:
-				if(GM.pc.getStamina() <= 0):
-					addDisabledAction("Milka's breasts", "You don't have any stamina to do this")
-				else:
-					addAction("Milka's breasts", "Help Milka by applying special cream to her breasts", "idleCowBreasts")
 	if(idleState == IDLE_SOCIAL):
 		saynn("You feel like socializing.")
 		
@@ -712,6 +717,14 @@ func main_state():
 			addDisabledAction("Be milked", "You're not obedient enough to ask to be milked an extra time")
 		else:
 			addAction("Be milked", "Ask the owners to milk you an extra time", "needyMilk")
+		if(canHelpMilka && (getMilkaBreastSize() < BreastsSize.O)):
+			if(GM.pc.hasBoundArms() || GM.pc.hasBlockedHands()):
+				addDisabledAction("Milka's breasts", "You can't do it with blocked hands")
+			else:
+				if(GM.pc.getStamina() <= 0):
+					addDisabledAction("Milka's breasts", "You don't have any stamina to do this")
+				else:
+					addAction("Milka's breasts", "Help Milka by applying special cream to her breasts", "idleCowBreasts")
 		if(helpedMilka):
 			if(GM.pc.getStamina() > 0):
 				addAction("Milk Cow", "Help with milking the cow", "talkCowMilk")
@@ -880,6 +893,10 @@ func main_do(_id:String, _args:Array):
 					addObedience(-1)
 				
 		addContinueEventTrigger()
+	if(_id == "endingLockCheck"):
+		setState("failedlockescape")
+		padlockDamage = 0.8
+		
 	if(_id == "idleSmash"):
 		aimCamera(L_DOOR)
 		
@@ -1251,7 +1268,7 @@ func main_do(_id:String, _args:Array):
 			"You annoy the owners while they check on the bull and the cow.",
 			"You annoy the owners while they are busy washing the other livestock.",
 		]))
-		addObedience(-1)
+		addObedience(-3)
 		var special:String = RNG.pickWeightedDict({
 			"treat": 5.0,
 		})
@@ -1311,7 +1328,7 @@ func main_do(_id:String, _args:Array):
 		addContinueEventTrigger()
 	if(_id == "eatDemand"):
 		saynn("You demand to be fed normal food!")
-		addObedience(-1)
+		addObedience(-2)
 		saynn("The owners don't seem to care. Looks like you're starving..")
 		addStamina(-30)
 		addContinueEventTrigger()
@@ -1358,7 +1375,7 @@ func main_do(_id:String, _args:Array):
 		addAction("Sofie", "Let the girl fuck you", "startSex", [C_GIRL, C_PC])
 	if(_id == "needyComplain"):
 		saynn("You complain about your neediness!")
-		addObedience(-1)
+		addObedience(-2)
 		addContinueEventTrigger()
 	
 	if(_id == "startEvent"):
@@ -1366,11 +1383,20 @@ func main_do(_id:String, _args:Array):
 
 func needySex_sexResult(_sex:SexEngineResult):
 	saynn("The sex has ended!")
-	addObedience(1)
-	
-	if(RNG.chance(30)):
-		saynn("The owner gave you a treat!")
-		addTreat(1)
+	if(_sex.didSubsWin()):
+		saynn("The owner got beaten.")
+		addObedience(-4)
+	else:
+		if(_sex.getAverageDomSatisfaction() < 0.7):
+			saynn("The owner didn't like it.")
+			addObedience(-2)
+		else:
+			addObedience(3)
+			
+			if(RNG.chance(30.0+obedience*70.0)):
+				saynn("The owner gave you a treat!")
+				addTreat(1)
+
 	
 	addContinue("setState", ["main"])
 
@@ -1393,11 +1419,14 @@ func sleep_do(_id:String, _args:Array):
 			addStamina(20)
 			addPain(-50)
 		
-		addContinue("setState", ["main"])
-		if(GM.pc.getCredits() >= 0):
-			saynn("[b]The owners have paid off their debt! You can released![/b]")
-			addAction("Freedom!", "You did your part. Time for the owners to do the same", "ENDING", ["end_credits"])
-		#setState("main")
+		if(obedience <= -1.0):
+			addContinue("ENDING", ["end_annoying"])
+		else:
+			addContinue("setState", ["main"])
+			if(GM.pc.getCredits() >= 0):
+				saynn("[b]The owners have paid off their debt! You can released![/b]")
+				addAction("Freedom!", "You did your part. Time for the owners to do the same", "ENDING", ["end_credits"])
+			#setState("main")
 
 func test_state():
 	addCredits(5)
@@ -1465,6 +1494,13 @@ var charOverrides:Dictionary = {}# no sync
 func sayParsed(_text:String):
 	saynn(parse(_text, charOverrides))
 
+func stimulateLactation(_target:BaseCharacter, forceLactation:bool = false) -> bool:
+	if(forceLactation):
+		_target.induceLactation()
+	if(_target.stimulateLactation() || _target.stimulateLactation()):
+		return true
+	return false
+
 func induceLactationScene(_actorID:String, _targetID:String):
 	addChar(_actorID)
 	addChar(_targetID)
@@ -1491,7 +1527,8 @@ func induceLactationScene(_actorID:String, _targetID:String):
 		playAnimation(StageScene.BreastGroping, "grope", {pc=_actorID, npc=_targetID, npcBodyState={naked=true,hard=true}})
 		sayParsed("{actor.You} {actor.youVerb('see')} that {target.yourHis} "+("cunt" if _hasVag else "tailhole")+" is already creamed enough so {actor.youHe} just {actor.youVerb('pull')} {target.youHim} into a tight embrace and {actor.youVerb('begin')} tightly-squeezing {target.yourHis} {target.breasts}, stimulating them!")
 		talk(_targetID, "Ah..")
-		if(_target.stimulateLactation()):
+		if(stimulateLactation(_target, lactationTry >= (6 if _canGetPreg else 3))):
+			lactationTry = 0
 			sayParsed("And soon enough, {target.yourHis} nipples start squirting {target.milk}! {target.YouHe} [b]began lactating[/b]!")
 			talk(_actorID, "There we go.")
 		else:
@@ -1536,7 +1573,8 @@ func induceLactationScene(_actorID:String, _targetID:String):
 		_target.orgasmFrom(_actorID)
 		_actor.orgasmFrom(_targetID)
 		if(!_canGetPreg):
-			if(_target.stimulateLactation()):
+			if(stimulateLactation(_target, lactationTry >= (6 if _canGetPreg else 3))):
+				lactationTry = 0
 				sayParsed("{target.Your} {target.breasts} suddenly start leaking {target.milk}! {target.YouHe} [b]began lactating[/b]!")
 				talk(_actorID, "There we go. And you doubted me.")
 
@@ -1562,9 +1600,13 @@ func milkScene(_actorID:String, _targetID:String):
 		_canMilkProstate = false
 	var _canUsePumps:bool = (upgradeLevel >= UPGRADE_PUMPS)
 	
-	if(_canMilkBreasts && _targetID == C_PC && !_target.canBeMilked()):
-		induceLactationScene(_actorID, _targetID)
-		return
+	if(_targetID == C_PC):
+		if(_canMilkBreasts && !_target.canBeMilked()):
+			induceLactationScene(_actorID, _targetID)
+			lactationTry += 1
+			return
+		else:
+			lactationTry = 0
 	
 	var possible:Array = []
 	
@@ -1769,3 +1811,84 @@ func milkScene(_actorID:String, _targetID:String):
 		milkedToday += 1
 	else:
 		talk(_actorID, "THAT'S NOT ENOUGH!")
+
+
+func failedlockescape_state():
+	playAnimation(StageScene.Solo, "kick")
+	aimCamera(L_COUNTER)
+	
+	saynn("You put your whole strength into the next attack.. and kick the reinforced door down! The padlock snaps in half, unable to keep you locked away any longer.")
+	addStamina(-80)
+	
+	saynn("Feeling brave.. and inspired.. you rush out of that damn dungeon, your eyes squinting from the brightness of the cafe lights.")
+	
+	saynn("After making so much noise, the customers turns their heads towards you.. Their eyes become huge.")
+	
+	saynn("Without even realizing it, you vault over the counter and dash towards the exit!")
+	
+	addContinue("setState", ["fldown"])
+
+func fldown_state():
+	addChar(C_GUY)
+	#addChar(C_GIRL)
+	playAnimation(StageScene.Duo, "defeat", {npc=C_GUY, npcAction="stunbaton"})
+	aimCamera(L_DOCKS)
+	
+	saynn("You don't think.. you just act. Fight or flight. But it looks like you are not flying today..")
+	
+	saynn("Leaving the cafe was the easy part.. but now you're in some kind of docks. Nothing but spaceships and complete void behind the windows.")
+	
+	saynn("You try to board one of the ships.. but the door's panel beeps at you.")
+	
+	saynn("And that's when the consequences catch up.. You feel immense pain as a cattle-prod gets shoved into your ribs, sending a shock that is strong enough to bring down an elephant, let alone you.")
+	
+	addPain(70)
+	
+	talk(C_GUY, "Sorry, I can't let you go.")
+	
+	saynn("You'd like to respond.. but you can't. Your body is spazzing out on the floor from the aftershocks..")
+	
+	saynn("Leo grabs your by the collar and pulls you back into the cafe.")
+	
+	talk(C_GUY, "Uh.. ignore us, please. Enjoy your meals, pretend we're not here.")
+	
+	saynn("Seeing a naked you.. and a guy with a cattle-prod.. most of the customers just pack up their things and leave in a hurry.")
+	
+	addContinue("setState", ["flback"])
+
+func flback_state():
+	addChar(C_GUY)
+	addChar(C_GIRL)
+	playAnimation(StageScene.Duo, "stand", {pc=C_GIRL, npc=C_GUY})
+	aimCamera(L_CENTER)
+	
+	saynn("You get dragged off back into the dimly-lit staff-only room..")
+	
+	talk(C_GIRL, "REALLY? You let {pc.him} escape? What the fuck is wrong with you?!")
+	
+	talk(C_GUY, "I didn't. {pc.He} broke out somehow.")
+	
+	if(!cageRemoved && !helpedMilka):
+		saynn("Still dizzy, you look around and see the other slaves. The bull sighs.. and the cow is just shaking in the corner, her terrified eyes are only focussed on the cattle prod.")
+	elif(cageRemoved):
+		saynn("Still dizzy, you look around and see the other slaves. The bull looks like he is ready to help you.. but there are also obvious signs of doubts in his stare. And the cow is just shaking in the corner, her terrified eyes are only focussed on the cattle prod.")
+	else:
+		saynn("Still dizzy, you look around and see the other slaves. The cow clearly wants to help any way she can.. but the sight of that cattle-prod is making her shiver and wince. The bull.. he just sighs at you and shakes his head.")
+	
+	saynn("You get a feeling that, without their combined help, you're screwed.")
+	
+	saynn("The owners step out and shut the door behind. You can hear them still arguing about it.")
+	
+	saynn("Looks like your escape attempt has failed.. And now everything hurts.")
+	
+	addContinue("setState", ["flcheck"])
+
+func flcheck_state():
+	processTurn()
+	playAnimation(StageScene.Solo, "stand")
+	
+	saynn("After some time, you manage to get up.")
+	
+	saynn("The door is locked yet again.. but it looks like they just used the same half-broken padlock. These cheapskates didn't even bother to get a new one.")
+	
+	addContinue("setState", ["main"])

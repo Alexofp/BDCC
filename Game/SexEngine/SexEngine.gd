@@ -1124,8 +1124,12 @@ func endSex():
 	if(sexEnded):
 		return
 	sexResult.clear()
+	sexResult.subsWon = true
 	for domID in doms:
 		var domInfo = doms[domID]
+		if(!domInfo.getIsDown()):
+			sexResult.subsWon = false
+		
 		var newDomResult:SexEngineResultDom = SexEngineResultDom.new()
 		newDomResult.grabInfo(self, domInfo)
 		

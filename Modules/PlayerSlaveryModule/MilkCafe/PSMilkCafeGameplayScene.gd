@@ -29,6 +29,12 @@ func _run():
 	if(state == "end_credits"):
 		saynn("YOU WON!")
 		addButton("Continue", "See what happens next", "doEnd")
+	if(state == "end_annoying"):
+		saynn("YOU ANNOYED THE OWNERS UNTIL THEY DECIDED TO LET YOU GO! YOU WON.")
+		addButton("Continue", "See what happens next", "doEnd")
+	if(state == "end_breaklock"):
+		saynn("YOU BROKE THE LOCK AND ESCAPED!")
+		addButton("Continue", "See what happens next", "doEnd")
 	
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
