@@ -281,6 +281,7 @@ func _react(_action: String, _args):
 		GM.pc.addPain(-30)
 
 	if(_action == "endthescene"):
+		setModuleFlag("RahiModule", "Rahi_CanteenSceneHappened", true)
 		endScene()
 		return
 	
