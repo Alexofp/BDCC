@@ -10,8 +10,6 @@ var obedience:float = 0.0
 
 var needsPunishment:bool = false
 
-var mindset:float = 0.0
-
 var day:int = 0
 
 var milkedToday:int = 0
@@ -53,6 +51,7 @@ var upgradeLevel:int = -1
 var extraProfit:int = 0
 
 var lactationTry:int = 0
+var isGuyTurn:bool = false
 
 var charsHere:Array = []
 
@@ -97,7 +96,6 @@ func saveData() -> Dictionary:
 		bullTrust = bullTrust,
 		obedience = obedience,
 		needsPunishment = needsPunishment,
-		mindset = mindset,
 		day = day,
 		state = state,
 		texts = texts,
@@ -126,6 +124,7 @@ func saveData() -> Dictionary:
 		upgradeLevel = upgradeLevel,
 		extraProfit = extraProfit,
 		lactationTry = lactationTry,
+		isGuyTurn = isGuyTurn,
 	}
 
 func loadData(_data:Dictionary):
@@ -135,7 +134,6 @@ func loadData(_data:Dictionary):
 	bullTrust = SAVE.loadVar(_data, "bullTrust", 0.0)
 	obedience = SAVE.loadVar(_data, "obedience", 0.0)
 	needsPunishment = SAVE.loadVar(_data, "needsPunishment", false)
-	mindset = SAVE.loadVar(_data, "mindset", 0.0)
 	day = SAVE.loadVar(_data, "day", 0)
 	state = SAVE.loadVar(_data, "state", "")
 	texts = SAVE.loadVar(_data, "texts", [])
@@ -164,6 +162,7 @@ func loadData(_data:Dictionary):
 	upgradeLevel = SAVE.loadVar(_data, "upgradeLevel", -1)
 	extraProfit = SAVE.loadVar(_data, "extraProfit", 0)
 	lactationTry = SAVE.loadVar(_data, "lactationTry", 0)
+	isGuyTurn = SAVE.loadVar(_data, "isGuyTurn", false)
 
 # max earned = 250000
 
@@ -529,6 +528,7 @@ func onDayEnd():
 		saynn("The cafe made some profits!")
 		addCredits(earned)
 	else:
+		needsPunishment = true
 		saynn("The cafe wasn't able to make any profit because there was not enough milk/cream.")
 	
 	for theNewUpgradeLevel in range(UPGRADES.size()):
@@ -710,13 +710,16 @@ func main_state():
 		saynn("You feel like you could do something lewd.")
 		
 		addAction("Just chill", "Get some extra stamina", "needyRest")
-		addAction("Offer self", "Let the owners do whatever they want with you..", "needyOfferSelf")
 		addAction("Complain", "Complain that you are extremely needy!", "needyComplain")
+		addAction("Offer self", "Let the owners do whatever they want with you..", "needyOfferSelf")
 		# Obedience check
-		if(obedience < 0.2):
+		if(obedience < 0.4):
 			addDisabledAction("Be milked", "You're not obedient enough to ask to be milked an extra time")
 		else:
-			addAction("Be milked", "Ask the owners to milk you an extra time", "needyMilk")
+			if(GM.pc.getStamina() <= 0):
+				addDisabledAction("Be milked", "You don't have enough stamina to be milked!")
+			else:
+				addAction("Be milked", "Ask the owners to milk you an extra time", "needyMilk")
 		if(canHelpMilka && (getMilkaBreastSize() < BreastsSize.O)):
 			if(GM.pc.hasBoundArms() || GM.pc.hasBlockedHands()):
 				addDisabledAction("Milka's breasts", "You can't do it with blocked hands")
@@ -757,19 +760,31 @@ func triggerEventMaybe():
 	
 	if(!gotMilkedNoon && GM.main.getTime() >= 11*60*60):
 		gotMilkedNoon = true
-		setState(RNG.pick(["about_to_be_milked_by_guy", "about_to_be_milked_by_girl"]))
+		if(isGuyTurn):
+			setState("about_to_be_milked_by_guy")
+		else:
+			setState("about_to_be_milked_by_girl")
+		isGuyTurn = !isGuyTurn
 		return
 	if(!gotMilkedEvening && GM.main.getTime() >= 20*60*60):
 		gotMilkedEvening = true
-		setState(RNG.pick(["about_to_be_milked_by_guy", "about_to_be_milked_by_girl"]))
+		if(isGuyTurn):
+			setState("about_to_be_milked_by_guy")
+		else:
+			setState("about_to_be_milked_by_girl")
+		isGuyTurn = !isGuyTurn
 		return
 	
+	var possible:Array = []
+	
 	if(RNG.chance(50)):
-		setState("test")
-		#addContinue("startEvent", ["test"])
+		possible.append(["eOwnerMilkSlave", 10.0])
+		possible.append(["eGirlBulliesSlave", 3.0])
+	
+	if(!possible.empty()):
+		setState(RNG.pickWeightedPairs(possible))
 	else:
 		setState("main")
-		#addContinue("setState", ["main"])
 
 func addNextIdleStageButton():
 	addContinue("nextIdle")
@@ -1371,8 +1386,9 @@ func main_do(_id:String, _args:Array):
 		saynn("Who do you want to fuck you?")
 		
 		setState("needySex")
-		addAction("Leo", "Let the guy fuck you", "startSex", [C_GUY, C_PC])
-		addAction("Sofie", "Let the girl fuck you", "startSex", [C_GIRL, C_PC])
+		addAction("Leo", "Let the guy fuck you", "startSex", [C_GUY, C_PC, SexType.DefaultSex, {SexMod.BondageDisabled: true, SexMod.DisableDynamicJoiners: true}])
+		addAction("Sofie", "Let the girl fuck you", "startSex", [C_GIRL, C_PC, SexType.DefaultSex, {SexMod.BondageDisabled: true, SexMod.DisableDynamicJoiners: true}])
+		addAction("Both", "Let them both have fun with you", "startSex", [[C_GIRL, C_GUY], C_PC, SexType.DefaultSex, {SexMod.BondageDisabled: true, SexMod.DisableDynamicJoiners: true}])
 	if(_id == "needyComplain"):
 		saynn("You complain about your neediness!")
 		addObedience(-2)
@@ -1384,20 +1400,19 @@ func main_do(_id:String, _args:Array):
 func needySex_sexResult(_sex:SexEngineResult):
 	saynn("The sex has ended!")
 	if(_sex.didSubsWin()):
-		saynn("The owner got beaten.")
+		saynn("They got beaten.")
 		addObedience(-4)
 	else:
 		if(_sex.getAverageDomSatisfaction() < 0.7):
-			saynn("The owner didn't like it.")
+			saynn("They didn't like it.")
 			addObedience(-2)
 		else:
 			addObedience(3)
 			
 			if(RNG.chance(30.0+obedience*70.0)):
-				saynn("The owner gave you a treat!")
+				saynn("They gave you a treat!")
 				addTreat(1)
 
-	
 	addContinue("setState", ["main"])
 
 func sleep_state():
@@ -1410,6 +1425,8 @@ func sleep_state():
 
 func sleep_do(_id:String, _args:Array):
 	if(_id == "sleep"):
+		aimCamera(L_SLEEP)
+		playAnimation(StageScene.Sleeping, "sleep")
 		GM.main.startNewDay()
 		saynn("NEW DAY.")
 		if(upgradeLevel >= UPGRADE_CELLS):
@@ -1422,7 +1439,10 @@ func sleep_do(_id:String, _args:Array):
 		if(obedience <= -1.0):
 			addContinue("ENDING", ["end_annoying"])
 		else:
-			addContinue("setState", ["main"])
+			if(needsPunishment):
+				addContinue("setState", ["morningpunish"])
+			else:
+				addContinue("setState", ["main"])
 			if(GM.pc.getCredits() >= 0):
 				saynn("[b]The owners have paid off their debt! You can released![/b]")
 				addAction("Freedom!", "You did your part. Time for the owners to do the same", "ENDING", ["end_credits"])
@@ -1479,10 +1499,27 @@ func about_to_be_milked_by_girl_do(_id:String, _args:Array):
 		addAction("Fight!", "Start the fight", "startFight", [C_GIRL])
 
 func about_to_be_milked_by_girl_fightResult(_didPCWin:bool):
-	saynn("DID WIN: "+str(_didPCWin))
-	
 	if(_didPCWin):
+		saynn("You managed to fight Sofie off!")
+		talk(C_GIRL, RNG.pick([
+			"I'm not done with you, slut..",
+			"Argh.. Screw you then, you stupid bitch.",
+			"Alright, fuck you, I will go milk someone else.",
+			"I will just make cupcakes out of you if you're gonna keep doing this.",
+		]))
+		
 		addObedience(-5)
+	else:
+		saynn("You lost the fight..")
+		talk(C_GIRL, RNG.pick([
+			"Pathetic.",
+			"That was dumb. Very dumb.",
+			"Stop being such a fucking brat.",
+			"I got enough lazy fucks around me.",
+		]))
+		saynn("Sofie grabs you and prepares for the milking procedure.")
+		
+		milkScene(C_GIRL, C_PC)
 	
 	addContinue("setState", ["main"])
 
@@ -1577,7 +1614,9 @@ func induceLactationScene(_actorID:String, _targetID:String):
 				lactationTry = 0
 				sayParsed("{target.Your} {target.breasts} suddenly start leaking {target.milk}! {target.YouHe} [b]began lactating[/b]!")
 				talk(_actorID, "There we go. And you doubted me.")
-
+	if(_targetID == C_PC):
+		addStamina(-20)
+	
 func milkScene(_actorID:String, _targetID:String):
 	addChar(_actorID)
 	addChar(_targetID)
@@ -1890,5 +1929,195 @@ func flcheck_state():
 	saynn("After some time, you manage to get up.")
 	
 	saynn("The door is locked yet again.. but it looks like they just used the same half-broken padlock. These cheapskates didn't even bother to get a new one.")
+	
+	addContinue("setState", ["main"])
+
+
+
+func morningpunish_state():
+	addChar(C_GIRL)
+	playAnimation(StageScene.SexCowgirlChoke, "tease", {pc="pc", npc=C_GIRL})
+	
+	saynn("Before you can get up, Sofie walks into your cell and pins you to the floor, her hands quickly find your throat!")
+	talk(C_GIRL, RNG.pick([
+		"WHY ARE YOU SO FUCKING LAZY? WHERE IS MY "+("MILK" if agreeMilk else "SEED")+"? HOW AM I SUPPOSED TO RUN MY CAFE?",
+		"YOU THOUGHT THIS IS A HOLIDAY RESORT? YOU BETTER START GIVING ME YOUR "+("MILK" if agreeMilk else "SEED")+" OR I WILL HAVE TO SELL YOU. MAYBE EVEN IN BITS.",
+		"BITCH, I BOUGHT YOU BECAUSE I NEED TO MAKE CUPCAKES OUT OF SOMETHING. GIVE ME "+("MILK" if agreeMilk else "SEED")+" OR IT WILL BE YOUR FLESH.",
+		"YOU THINK YOU'RE SMART? I WILL TORTURE YOU UNTIL YOU START GIVING ME MY "+("MILK" if agreeMilk else "SEED")+". ALL OF IT.",
+	]))
+	
+	saynn("She is clearly mad because you didn't make any seed or milk for the cafe..")
+	
+	saynn("You try to throw her off.. but it seems that she is not done punishing you yet..")
+	
+	addContinue("startSex", [C_GIRL, C_PC, SexType.DefaultSex, {SexMod.SubMustGoUnconscious:true, SexMod.DisableDynamicJoiners:true}])
+
+func morningpunish_sexResult(_sex:SexEngineResult):
+	saynn("The punishment has ended!")
+	if(_sex.didSubsWin()):
+		playAnimation(StageScene.Duo, "shove", {npc=C_GIRL, npcAction="hurt"})
+		saynn("You managed to fight back against Sofie.")
+		talk(C_GIRL, RNG.pick([
+			"..fucking slut.",
+			"..stupid bitch.",
+			"..I'm not done with you, whore.",
+			"Ugh. Fuck you.",	
+		]))
+		saynn("She grunts.. and leaves you be.. for now.")
+		addObedience(-5)
+	else:
+		if(_sex.isSubUnconscious(C_PC)):
+			playAnimation(StageScene.SexStart, "defeated", {pc=C_GIRL})
+			saynn("Sofie pulls her hands away from your throat and slaps your cheek a few times.")
+			talk(C_GIRL, RNG.pick([
+				"Get up, your dumb bitch. I know you're not dead.",
+				"Get up. If you don't want more, you better start producing.",
+			]))
+			saynn("She quickly leaves and comes back with a bucket of water that she spills over your face. Refreshing.")
+			addStamina(40)
+			addPain(-50)
+		elif(_sex.getAverageDomSatisfaction() < 0.7):
+			playAnimation(StageScene.SexStart, "start", {pc=C_GIRL})
+			saynn("Sofie is done with you.. but she doesn't exactly look satisfied.")
+			talk(C_GIRL, RNG.pick([
+				"You can't even struggle right.",
+				"Why are you so fucking weak? Ughh, everyone around me is a mistake.",
+				"Next time, try harder, you slut.",
+			]))
+			addObedience(-2)
+		else:
+			playAnimation(StageScene.SexStart, "start", {pc=C_GIRL})
+			saynn("Sofie is done with you.. she doesn't seem so.. pent up.. anymore.")
+			talk(C_GIRL, RNG.pick([
+				"Start producing or you will see me again.",
+				"If anything, at least I got myself a punching bag. Second one.",
+				"Next time, try harder, you slut",
+			]))
+	
+	needsPunishment = false
+	addContinue("setState", ["main"])
+
+
+
+func eOwnerMilkSlave_state():
+	var theOwner:String = RNG.pick([C_GUY, C_GIRL])
+	var theSlave:String = RNG.pick([C_BULL, C_COW])
+	charOverrides = {actor=theOwner, target=theSlave}
+	addChar(theOwner)
+	addChar(theSlave)
+	playAnimation(StageScene.Duo, "stand", {pc=theOwner, npc=theSlave})
+	if(theSlave == C_BULL):
+		aimCamera(L_BULL)
+	else:
+		aimCamera(L_COW)
+	
+	sayParsed("{actor.You} {actor.youVerb('want')} to milk {target.you}!")
+	
+	addAction("Watch", "See what happens", "doWatch", [theOwner, theSlave])
+	if(obedience > 0.2):
+		if(GM.pc.getStamina() > 0):
+			addAction("Help owner", "Ask to be the one who is doing the milking.", "doHelp", [theOwner, theSlave])
+		else:
+			addDisabledAction("Help owner", "You don't have enough stamina")
+	else:
+		addDisabledAction("Help owner", "The owners don't trust you enough.")
+
+func eOwnerMilkSlave_do(_id:String, _args:Array):
+	var theOwner:String = _args[0]
+	var theSlave:String = _args[1]
+	charOverrides = {actor=theOwner, target=theSlave}
+	if(_id == "doWatch"):
+		milkScene(theOwner, theSlave)
+		addContinue("setState", ["main"])
+	if(_id == "doHelp"):
+		sayParsed("You ask {actor.name} if you can help with the milking. {actor.He} decides to let you do it.")
+		if(theOwner == C_GIRL):
+			talk(theOwner, RNG.pick([
+				"Sure, saves me time.",
+				"Fine, be useful.",
+				"Fuck it, go ahead. Squeeze every last drop out though.",
+				"Whatever, go do it, I need to return to the counter.",
+				"You? Okay. Don't you dare slacking off though.",
+			]), false)
+		else:
+			talk(theOwner, RNG.pick([
+				"Sure, saves me time.",
+				"Fine, be useful.",
+				"Fuck it, go ahead. Squeeze every last drop out though.",
+				"Whatever, go do it, I need to return to the counter.",
+				"You? Okay. Don't you dare slacking off though.",
+			]), false)
+		addObedience(2)
+		milkScene(C_PC, theSlave)
+		addStamina(-30)
+		addContinue("setState", ["main"])
+
+
+func eGirlBulliesSlave_state():
+	var theOwner:String = C_GIRL
+	var theSlave:String = RNG.pick([C_BULL, C_COW])
+	charOverrides = {actor=theOwner, target=theSlave}
+	addChar(theOwner)
+	addChar(theSlave)
+	playAnimation(StageScene.Duo, "stand", {pc=theOwner, npc=theSlave})
+	if(theSlave == C_BULL):
+		aimCamera(L_BULL)
+	else:
+		aimCamera(L_COW)
+	
+	sayParsed("{actor.You} {actor.youVerb('want')} to bully {target.you}!")
+	
+	addAction("Let it happen", "See what happens", "doWatch", [theOwner, theSlave])
+	addAction("Protect", "Protect the slave!", "doProtect", [theOwner, theSlave])
+	addAction("Take blame", "Say that it was your fault", "takeBlame", [theOwner, theSlave])
+
+func eGirlBulliesSlave_do(_id:String, _args:Array):
+	var theOwner:String = _args[0]
+	var theSlave:String = _args[1]
+	charOverrides = {actor=theOwner, target=theSlave}
+	if(_id == "doWatch"):
+		sayParsed("Sofie bullies {target.you}!")
+		if(theSlave == C_BULL):
+			addBullTrust(-3)
+		else:
+			addCowTrust(-3)
+		addContinue("setState", ["main"])
+	
+	if(_id == "doProtect"):
+		playAnimation(StageScene.Duo, "stand", {npc=C_GIRL})
+		sayParsed("You protect {target.you} from Sofie!")
+		addObedience(-1)
+		sayParsed("Looks like you will have to fight.")
+		addAction("Fight", "Start the fight", "startFight", [C_GIRL])
+	
+	if(_id == "takeBlame"):
+		playAnimation(StageScene.Duo, "stand", {npc=C_GIRL})
+		sayParsed("You decide to take the blame!")
+		addObedience(-1)
+		sayParsed(("You get bullied by Sofie!"))
+		if(theSlave == C_BULL):
+			addCowTrust(2)
+		else:
+			addBullTrust(2)
+
+func eGirlBulliesSlave_fightResult(_didPCWin:bool):
+	if(_didPCWin):
+		saynn("You managed to fight Sofie off!")
+		talk(C_GIRL, RNG.pick([
+			"I'm not done with you, slut..",
+			"Argh.. Screw you then, you stupid bitch.",
+			"Alright, fuck you then.",
+			"I will just make cupcakes out of you if you're gonna keep doing this.",
+		]))
+		addObedience(-5)
+	else:
+		saynn("You lost the fight..")
+		talk(C_GIRL, RNG.pick([
+			"Pathetic.",
+			"That was dumb. Very dumb.",
+			"From hero to zero.",
+			"I got enough lazy fucks around me.",
+		]))
+		saynn("Sofie bullies you!")
 	
 	addContinue("setState", ["main"])
