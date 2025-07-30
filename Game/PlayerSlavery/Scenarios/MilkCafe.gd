@@ -780,6 +780,8 @@ func triggerEventMaybe():
 	if(RNG.chance(50)):
 		possible.append(["eOwnerMilkSlave", 10.0])
 		possible.append(["eGirlBulliesSlave", 3.0])
+		possible.append(["eGirlCattleProdCow", 2.0])
+		possible.append(["eGirlCattleProdBull", 2.0])
 	
 	if(!possible.empty()):
 		setState(RNG.pickWeightedPairs(possible))
@@ -1616,7 +1618,117 @@ func induceLactationScene(_actorID:String, _targetID:String):
 				talk(_actorID, "There we go. And you doubted me.")
 	if(_targetID == C_PC):
 		addStamina(-20)
+
+func bullyScene(_targetID:String):
+	addChar(C_GIRL)
+	addChar(_targetID)
+	charOverrides = {actor=C_GIRL, target=_targetID}
+	#var _isPCActor:bool = (_actorID == C_PC)
+	var _isPCTarget:bool = (_targetID == C_PC)
+	var _actor:BaseCharacter = GlobalRegistry.getCharacter(C_GIRL)
+	var _target:BaseCharacter = GlobalRegistry.getCharacter(_targetID)
 	
+	var possible:Array = []
+	possible.append(["choke", 1.0])
+	possible.append(["puppypin", 1.0])
+	possible.append(["chokeride", 1.0])
+	possible.append(["sitface", 1.0])
+	possible.append(["feetcrotch", 1.0])
+	possible.append(["feetface", 1.0])
+	possible.append(["lickcrotch", 1.0])
+	possible.append(["spank", 1.0])
+	
+	var bullyWay:String = RNG.pickWeightedPairs(possible)
+	if(bullyWay == "choke"):
+		playAnimation(StageScene.Choking, "idle", {pc=C_GIRL, npc=_targetID})
+		sayParsed("Sofie grabs {target.your} throat and puts enough pressure on it to make {target.youHim} see darkness in {target.yourHis} eyes.")
+		talk(C_GIRL, RNG.pick([
+			"Not so tough now, are you?",
+			"What's gonna break first, your neck or your spirit?",
+			"Seeing stars already? These are the only stars you will ever see.",
+			"You are nothing but a slave. My slave!",
+			"You are a fucking slave, hear me?",
+		]))
+	elif(bullyWay == "puppypin"):
+		playAnimation(StageScene.PuppyPinned, "pinned", {pc=C_GIRL, npc=_targetID, npcBodyState={naked=true,hard=true,leashedBy=C_GIRL}})
+		sayParsed("Sofie shoves some puppy restraints onto {target.your} arms and legs before pinning {target.youHim} to the floor with her leg, her toes brushing against the back of {target.yourHis} head.")
+		talk(C_GIRL, RNG.pick([
+			"Bark, you dumb mut.",
+			"Say something and I will keep these on you.",
+			"Nothing but a breeding bitch.",
+			"Wiggle your ass for me, bitch. Show me what I paid for.",
+		]))
+	elif(bullyWay == "chokeride"):
+		playAnimation(StageScene.SexCowgirlChoke, "tease", {pc=_targetID, npc=C_GIRL, bodyState={naked=true, hard=true, leashedBy=C_GIRL}})
+		sayParsed("Sofie pulls {target.you} down to the floor and then straddles {target.youHim}, leaning down to wrap both hands around {target.yourHis} throat, making it extremely hard to breathe.")
+		talk(C_GIRL, RNG.pick([
+			"Not so tough now, are you?",
+			"What's gonna break first, your neck or your spirit?",
+			"Seeing stars already? These are the only stars you will ever see.",
+			"You are nothing but a slave. My slave!",
+			"You are a fucking slave, hear me?",
+		]))
+	elif(bullyWay == "sitface"):
+		playAnimation(StageScene.SexFaceSitting, "grind", {pc=C_GIRL, npc=_targetID, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, leashedBy=C_GIRL}})
+		sayParsed("Sofie pushes {target.you} down to the floor and sits on top of {target.yourHis} face, grinding her soaking pussy against {target.yourHis} face, rocking her hips and glancing down at {target.youHim}.")
+		talk(C_GIRL, RNG.pick([
+			"You're nothing but my pussy licker, slut.",
+			"You're enjoying this, aren't you? Stupid bitch.",
+			"Drown in my cunt for all I care.",
+			"I paid a lot for your ass. I get to use this face any way I want.",
+			"Lick me. Do it or I will make you drown.",
+		]))
+	elif(bullyWay == "feetcrotch"):
+		playAnimation(StageScene.SexFeetPlay, "crotch", {pc=C_GIRL, npc=_targetID, npcBodyState={naked=true, hard=true, leashedBy=C_GIRL}})
+		if(_target.hasPenis()):
+			sayParsed("Sofie flexes her toes and puts them over {target.your} {target.penis}, rubbing and applying just enough pressure to make {target.youHim} squirm and whine.")
+			if(_target.isWearingChastityCage()):
+				talk(C_GIRL, RNG.pick([
+					"Your cock is useless anyway, should I crush it?",
+					"Don't you dare drip onto my toes. I will crush your balls for that.",
+					"You love it, huh? Pathetic.",
+				]))
+			else:
+				talk(C_GIRL, RNG.pick([
+					"You're lucky I can milk this cock. Otherwise I'd just crush it.",
+					"Don't you dare drip onto my toes. I will crush your balls for that.",
+					"You love it, huh? Pathetic.",
+				]))
+		else:
+			sayParsed("Sofie flexes her toes and puts them over {target.your} crotch, rubbing and applying just enough pressure to make {target.youHim} squirm and whine.")
+			talk(C_GIRL, RNG.pick([
+				"You love it, huh? Pathetic.",
+				"Stupid bitch.",
+				"Why are you so dumb?",
+			]))
+	elif(bullyWay == "feetface"):
+		playAnimation(StageScene.SexFeetPlay, "head", {pc=C_GIRL, npc=_targetID, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, leashedBy=C_GIRL}})
+		sayParsed("Sofie lifts her foot and slowly brushes her toes across {target.your} cheek and lips, pressing her heel into {target.yourHis} jaw.")
+		talk(C_GIRL, RNG.pick([
+			"Suck on these. Do it, whore.",
+			"Why are you blushing? You're enjoying it, huh?",
+			"You look more pathetic than my husband.",
+		]))
+	elif(bullyWay == "lickcrotch"):
+		playAnimation(StageScene.SexOralForced, "lick", {pc=C_GIRL, npc=_targetID, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true, leashedBy=C_GIRL}})
+		sayParsed("Sofie yanks {target.you} down to {target.yourHis} knees and shoves her wet cunt into {target.yourHis} face.")
+		talk(C_GIRL, RNG.pick([
+			"You're nothing but my pussy licker, slut.",
+			"You're enjoying this, aren't you? Stupid bitch.",
+			"Drown in my cunt for all I care.",
+			"I paid a lot for your ass. I get to use this face any way I want.",
+			"Lick me. Do it or I will make you drown.",
+		]))
+	elif(bullyWay == "spank"):
+		playAnimation(StageScene.Spanking, "fast", {pc=C_GIRL, npc=_targetID, npcBodyState={naked=true, hard=true}})
+		sayParsed("Sofie brings {target.you} onto all fours and delivers a sharp smack to {target.yourHis} ass with her palm, again and again, making redness appear on {target.yourHis} skin.")
+		talk(C_GIRL, RNG.pick([
+			"Produce more for me or your ass will be glowing every day.",
+			"Take it, slut.",
+			"Gonna whine, huh?",
+		]))
+	sayParsed("After Sofie is satisfied with bullying {target.you}, she finally lets {target.youHim} be.")
+
 func milkScene(_actorID:String, _targetID:String):
 	addChar(_actorID)
 	addChar(_targetID)
@@ -2076,7 +2188,7 @@ func eGirlBulliesSlave_do(_id:String, _args:Array):
 	var theSlave:String = _args[1]
 	charOverrides = {actor=theOwner, target=theSlave}
 	if(_id == "doWatch"):
-		sayParsed("Sofie bullies {target.you}!")
+		bullyScene(theSlave)
 		if(theSlave == C_BULL):
 			addBullTrust(-3)
 		else:
@@ -2094,7 +2206,7 @@ func eGirlBulliesSlave_do(_id:String, _args:Array):
 		playAnimation(StageScene.Duo, "stand", {npc=C_GIRL})
 		sayParsed("You decide to take the blame!")
 		addObedience(-1)
-		sayParsed(("You get bullied by Sofie!"))
+		bullyScene(C_PC)
 		if(theSlave == C_BULL):
 			addCowTrust(2)
 		else:
@@ -2118,6 +2230,171 @@ func eGirlBulliesSlave_fightResult(_didPCWin:bool):
 			"From hero to zero.",
 			"I got enough lazy fucks around me.",
 		]))
-		saynn("Sofie bullies you!")
+		bullyScene(C_PC)
+	
+	addContinue("setState", ["main"])
+
+
+
+
+func eGirlCattleProdCow_state():
+	var theOwner:String = C_GIRL
+	var theSlave:String = C_COW
+	charOverrides = {actor=theOwner, target=theSlave}
+	addChar(theOwner)
+	addChar(theSlave)
+	playAnimation(StageScene.Duo, "stand", {pc=theOwner, npc=theSlave})
+	if(theSlave == C_BULL):
+		aimCamera(L_BULL)
+	else:
+		aimCamera(L_COW)
+	
+	sayParsed("Sofie approaches Milka with a cattle-prod in her hand!")
+	talk(C_GIRL, RNG.pick([
+		"Some shock is ought to help you make more milk.",
+		"The cafe needs more milk, Milka. Show me your tits.",
+		"Present your tits, cow.",
+		"This will help your tits. Present them.",
+	]))
+	sayParsed("Milka shivers, her lips trembling.")
+	talk(C_COW, RNG.pick([
+		"It hurts when you do that..",
+		"If you say so..",
+		"I thought I make enough..",
+	]))
+	
+	addAction("Let it happen", "See what happens", "doWatch", [theOwner, theSlave])
+	addAction("Protect", "Protect the slave!", "doProtect", [theOwner, theSlave])
+
+func eGirlCattleProdCow_do(_id:String, _args:Array):
+	var theOwner:String = _args[0]
+	var theSlave:String = _args[1]
+	charOverrides = {actor=theOwner, target=theSlave}
+	if(_id == "doWatch"):
+		addChar(theOwner)
+		addChar(theSlave)
+		GlobalRegistry.getCharacter(C_COW).fillBreasts(1.0)
+		playAnimation(StageScene.Duo, "stunbaton", {pc=theOwner, npc=theSlave, npcAction="hurt"})
+		saynn("Sofie presses the cattle prod against Milka's breasts and squeezes the handle, sending a painful shock through her chest.")
+		talk(C_COW, "Ow!")
+		saynn("Milka's body convulses, her muscles all tensing up.. and her nipples squirt out pure milk! ")
+		talk(C_GIRL, "Much better.")
+	
+	if(_id == "doProtect"):
+		if(RNG.chance(50)):
+			playAnimation(StageScene.Duo, "stunbaton", {pc=theOwner, npc="pc", npcAction="hurt"})
+			
+			saynn("You push Milka out of the cattle prod's way.. and get hit by it instead. Ow! Your whole body convulses from the sudden painful shock that is rocking through it.")
+			addPain(40)
+			addStamina(-25)
+			
+			talk(C_GIRL, "Really? Fine, your tits will do too.")
+			addObedience(-1)
+			
+			if(GM.pc.isLactating()):
+				GM.pc.fillBreasts(1.0)
+				saynn("Your breasts [b]feel full, leaking {pc.milk}![/b]")
+			else:
+				if(GM.pc.stimulateLactation()):
+					saynn("Your breasts [b]suddenly began lactating![/b]")
+				else:
+					saynn("Your breasts feel stimulated..")
+			saynn("When Sofie leaves, Milka gives you a quick hug.")
+			addCowTrust(2)
+		else:
+			playAnimation(StageScene.Duo, "stunbaton", {pc=theOwner, npc="pc", npcAction="dodge"})
+			
+			saynn("You push Milka out of the cattle prod's way.. and manage to dodge it as well!")
+			addStamina(-25)
+			saynn("Sofie rolls her eyes.")
+			talk(C_GIRL, "I have no time for this. Screw you.")
+			addObedience(-4)
+			saynn("When Sofie leaves, Milka gives you a quick hug.")
+			addCowTrust(2)
+	
+	addContinue("setState", ["main"])
+
+
+
+func eGirlCattleProdBull_state():
+	var theOwner:String = C_GIRL
+	var theSlave:String = C_BULL
+	charOverrides = {actor=theOwner, target=theSlave}
+	addChar(theOwner)
+	addChar(theSlave)
+	playAnimation(StageScene.Duo, "stand", {pc=theOwner, npc=theSlave})
+	if(theSlave == C_BULL):
+		aimCamera(L_BULL)
+	else:
+		aimCamera(L_COW)
+	
+	sayParsed("Sofie approaches Pip with a cattle-prod in her hand!")
+	talk(C_GIRL, RNG.pick([
+		"Some shock is ought to help you make more seed.",
+		"The cafe needs more cream, Pip. Show me your cock.",
+		"Present your balls, bull.",
+		"This will help your cum-production. Present yourself.",
+	]))
+	sayParsed("Pip steps back, away from her.")
+	talk(C_BULL, RNG.pick([
+		"Really? Use it on that weird cow, not me.",
+		"You are NOT putting it anywhere near my balls.",
+		"No-no-no, go away.",
+		"I will get you your cream, you don't have to do this.",
+	]))
+	
+	addAction("Let it happen", "See what happens", "doWatch", [theOwner, theSlave])
+	addAction("Protect", "Protect the slave!", "doProtect", [theOwner, theSlave])
+
+func eGirlCattleProdBull_do(_id:String, _args:Array):
+	var theOwner:String = _args[0]
+	var theSlave:String = _args[1]
+	charOverrides = {actor=theOwner, target=theSlave}
+	if(_id == "doWatch"):
+		addChar(theOwner)
+		addChar(theSlave)
+		GlobalRegistry.getCharacter(C_BULL).fillBalls(1.0)
+		playAnimation(StageScene.Duo, "stunbaton", {pc=theOwner, npc=theSlave, npcBodyState={hard=true}, npcAction="hurt"})
+		saynn("Sofie presses the cattle prod against Pip's "+("chastity cage" if !cageRemoved else "balls")+" and squeezes the handle, sending a painful shock through him.")
+		talk(C_BULL, "ARGH! FUCK!")
+		saynn("Pip's body convulses, a guttural scream leaves his mouth.. "+("His locked cock throbs inside its tight prison, leaking with seed." if !cageRemoved else "His cock goes hard instantly, throbbing, flared tip dripping with seed."))
+		talk(C_GIRL, "Much better.")
+	
+	if(_id == "doProtect"):
+		if(RNG.chance(50)):
+			playAnimation(StageScene.Duo, "stunbaton", {pc=theOwner, npc="pc", npcAction="hurt", npcBodyState={hard=true}})
+			
+			saynn("You push Pip out of the cattle prod's way.. and get hit by it instead. Ow! Your whole body convulses from the sudden painful shock that is rocking through it.")
+			addPain(40)
+			addStamina(-25)
+			
+			talk(C_GIRL, "You really wanna protect that pathetic joke of a stud? Pff.")
+			addObedience(-1)
+			
+			if(GM.pc.hasPenis()):
+				GM.pc.fillBalls(1.0)
+				saynn("Your balls [b]feel full![/b]")
+			elif(GM.pc.isLactating()):
+				GM.pc.fillBreasts(1.0)
+				saynn("Your breasts [b]feel full, leaking {pc.milk}![/b]")
+			else:
+				if(GM.pc.stimulateLactation()):
+					saynn("Your breasts [b]suddenly began lactating![/b]")
+				else:
+					saynn("Your breasts feel stimulated..")
+			saynn("When Sofie leaves, Pip approaches you.")
+			talk(C_BULL, "This sucks. Sorry.")
+			addBullTrust(2)
+		else:
+			playAnimation(StageScene.Duo, "stunbaton", {pc=theOwner, npc="pc", npcAction="dodge"})
+			
+			saynn("You push Pip out of the cattle prod's way.. and manage to dodge it as well!")
+			addStamina(-25)
+			saynn("Sofie rolls her eyes.")
+			talk(C_GIRL, "I have no time for this. Screw you.")
+			addObedience(-4)
+			saynn("When Sofie leaves, Pip approaches you.")
+			talk(C_BULL, "Fuck that bitch, right?")
+			addBullTrust(2)
 	
 	addContinue("setState", ["main"])
