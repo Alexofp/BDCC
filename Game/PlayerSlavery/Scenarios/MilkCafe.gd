@@ -22,12 +22,14 @@ var gotMilkedEvening:bool = false
 func onNewDay():
 	gotMilkedNoon = false
 	gotMilkedEvening = false
+	day += 1
 
 var agreeMilk:bool = true
 var agreeSeed:bool = false
 
 var cowTopic:int = 0
 var bullTopic:int = 0
+var guyTopic:int = 0
 
 var treatAmount:int = 0
 
@@ -109,6 +111,7 @@ func saveData() -> Dictionary:
 		gotMilkedEvening = gotMilkedEvening,
 		cowTopic = cowTopic,
 		bullTopic = bullTopic,
+		guyTopic = guyTopic,
 		peekTried = peekTried,
 		peekState = peekState,
 		padlockDamage = padlockDamage,
@@ -147,6 +150,7 @@ func loadData(_data:Dictionary):
 	gotMilkedEvening = SAVE.loadVar(_data, "gotMilkedEvening", false)
 	cowTopic = SAVE.loadVar(_data, "cowTopic", 0)
 	bullTopic = SAVE.loadVar(_data, "bullTopic", 0)
+	guyTopic = SAVE.loadVar(_data, "guyTopic", 0)
 	peekTried = SAVE.loadVar(_data, "peekTried", 0)
 	peekState = SAVE.loadVar(_data, "peekState", 0)
 	padlockDamage = SAVE.loadVar(_data, "padlockDamage", 0.0)
@@ -178,7 +182,7 @@ const UPGRADES = [
 		creditsMult = 5.0,
 	},
 	{
-		earned = 5000,
+		earned = 3000,
 		message = "The owners have replaced the grass in the garden with tastier one!",
 		creditsMult = 15.0,
 	},
@@ -285,6 +289,16 @@ const PIP_LINES = [
 	"You know what I regret? I should have protected Milka more from these fuckers. I don't know, she is not that bad.",
 	"I fucked many caged sluts. Didn't know I would become one.",
 	"I don't know what else to say. I will start repeating I guess.",
+]
+
+const LEO_LINES = [
+	"Sorry.. but it had to be like this. Cheap milk is hard to get.. Customers hate cheap milk..",
+	"We and Sofie, my love, we're in huge need of credits.. This cafe wasn't cheap to buy.",
+	"Sofie has a big, kind heart. It's just.. tough times for us.",
+	"We're both at fault, I think.. we made some mistakes..",
+	"You know.. this little space cafe was always our dream.. We're so close.. to being free.",
+	"I put everything on this dream.. Sofie put everything on red.. I don't blame her, it's my fault for not stopping her..",
+	"I love her.. maybe I'm dumb.. but it feels good to be near her, you know? No matter what happens..",
 ]
 
 func _init():
@@ -481,6 +495,12 @@ func sayPipLine():
 	else:
 		talk(C_BULL, PIP_LINES[bullTopic])
 		bullTopic += 1
+func sayLeoLine():
+	if(guyTopic >= LEO_LINES.size()):
+		talk(C_GUY, RNG.pick(LEO_LINES))
+	else:
+		talk(C_GUY, LEO_LINES[guyTopic])
+		guyTopic += 1
 
 func addCredits(_howMuch:int):
 	GM.pc.addCredits(_howMuch)
@@ -777,11 +797,17 @@ func triggerEventMaybe():
 	
 	var possible:Array = []
 	
-	if(RNG.chance(50)):
+	if(RNG.chance(70) && day >= 1):
 		possible.append(["eOwnerMilkSlave", 10.0])
 		possible.append(["eGirlBulliesSlave", 3.0])
 		possible.append(["eGirlCattleProdCow", 2.0])
 		possible.append(["eGirlCattleProdBull", 2.0])
+		possible.append(["eEatAss", 1.0 if !GM.pc.isOralBlocked() else 3.0])
+		possible.append(["eWannaCuddle", 2.0])
+		possible.append(["eRandomStuff", 5.0])
+		if(treatAmount > 0):
+			possible.append(["eCowSeesTreat", 4.0])
+			possible.append(["eBullSeesTreat", 4.0])
 	
 	if(!possible.empty()):
 		setState(RNG.pickWeightedPairs(possible))
@@ -2128,7 +2154,10 @@ func eOwnerMilkSlave_state():
 	addAction("Watch", "See what happens", "doWatch", [theOwner, theSlave])
 	if(obedience > 0.2):
 		if(GM.pc.getStamina() > 0):
-			addAction("Help owner", "Ask to be the one who is doing the milking.", "doHelp", [theOwner, theSlave])
+			if(GM.pc.hasBlockedHands() || GM.pc.hasBoundArms()):
+				addDisabledAction("Help owner", "Your arms are bound..")
+			else:
+				addAction("Help owner", "Ask to be the one who is doing the milking.", "doHelp", [theOwner, theSlave])
 		else:
 			addDisabledAction("Help owner", "You don't have enough stamina")
 	else:
@@ -2211,6 +2240,7 @@ func eGirlBulliesSlave_do(_id:String, _args:Array):
 			addCowTrust(2)
 		else:
 			addBullTrust(2)
+		addContinue("setState", ["main"])
 
 func eGirlBulliesSlave_fightResult(_didPCWin:bool):
 	if(_didPCWin):
@@ -2397,4 +2427,285 @@ func eGirlCattleProdBull_do(_id:String, _args:Array):
 			talk(C_BULL, "Fuck that bitch, right?")
 			addBullTrust(2)
 	
+	addContinue("setState", ["main"])
+
+
+
+func eEatAss_state():
+	addChar(C_GIRL)
+	playAnimation(StageScene.Duo, "stand", {pc=C_PC, npc=C_GIRL})
+
+	saynn("Sofie approaches you, a tasty-looking treat in her hand.")
+	talk(C_GIRL, "Want this? I know you do.")
+	saynn("Her free hand grabs you by the collar.")
+	talk(C_GIRL, "My ass needs a good eating.")
+	if(GM.pc.isOralBlocked()):
+		saynn("She jiggles some keys in front of your face.")
+		talk(C_GIRL, "I will even free your face if you do.")
+	
+	addAction("Deny", "A treat isn't worth it", "deny")
+	addAction("Eat ass", "Ohh, a treat!", "eatAss")
+
+func eEatAss_do(_id:String, _args:Array):
+	if(_id == "deny"):
+		saynn("You deny her offer.")
+		talk(C_GIRL, "Alright, screw you then.")
+		addObedience(-1)
+	
+	if(_id == "eatAss"):
+		GM.pc.freeEyesDeleteAll()
+		GM.pc.freeMouthDeleteAll()
+		playAnimation(StageScene.SexRimming, "fast", {pc=C_GIRL, npc=C_PC, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You obey by getting on your knees and watching Sofie turn around and shove her ass into your face.")	
+		saynn("With gentle licks of your tongue, you begin serving her, getting her pucker nice and wet with your saliva.")
+		talk(C_GIRL, RNG.pick([
+			"C'mon, get your tongue in there, you slut.",
+			"Do it properly or no treat!",
+			"Mhh.. maybe I should use you as my ass-licker instead.",
+		]))
+		saynn("Quiet moans escape from the girl while you go at it, eating her ass, letting your tongue explore her star.")
+		saynn("After the job is done, she reluctantly hands you the reward.")
+		addTreat(1)
+		addObedience(3)
+	
+	addContinue("setState", ["main"])
+
+func eWannaCuddle_state():
+	addChar(C_GUY)
+	playAnimation(StageScene.Duo, "stand", {pc=C_PC, npc=C_GUY})
+
+	saynn("Leo approaches you.")
+	talk(C_GUY, "I'm not here to bully you, don't worry. Wanna chill together maybe?")
+	
+	addAction("Chill", "Agree to chill with your owner", "chill")
+	addAction("No", "You'd rather not", "noChill")
+
+func eWannaCuddle_do(_id:String, _args:Array):
+	if(_id == "noChill"):
+		saynn("You deny his offer.")
+		talk(C_GUY, "Sure, okay, no problem.")
+	
+	if(_id == "chill"):
+		playAnimation(StageScene.Cuddling, "idle", {pc=C_GUY, npc=C_GIRL})
+		saynn("You decide to spend some time with the guy.")
+		saynn("It's nice to not be abused or bullied for once. Leo is chatting with you while you just stay quiet mostly.")
+		sayLeoLine()
+		saynn("Eventually, he gets up and leaves.")
+		addStamina(30)
+		addObedience(1)
+	
+	addContinue("setState", ["main"])
+
+
+func eCowSeesTreat_state():
+	addChar(C_COW)
+	playAnimation(StageScene.Beg, "beg", {pc=C_COW, npc=C_PC})
+
+	saynn("Milka hops around.. before stopping near you and sniffing the air.")
+	talk(C_COW, RNG.pick([
+		"You have a treat? Can I have?? Pretty please-e-e-e-e!",
+		"Treat? Please?.. I love treats..",
+		"I sniff a treat on you! Since you haven't eaten it yet.. maybe I can..",
+		"Treat?..",
+	]))
+	saynn("She gets on her knees before you.. her puppy eyes looking up at you.")
+	
+	addAction("Give treat", "Give Milka a treat", "give")
+	addAction("No", "You'd rather save it", "noGive")
+
+func eCowSeesTreat_do(_id:String, _args:Array):
+	if(_id == "noGive"):
+		saynn("You deny Milka.")
+		talk(C_COW, "Aww..")
+		saynn("She tries to hide it.. but she is certainly sad.")
+		addCowTrust(-3)
+	
+	if(_id == "give"):
+		playAnimation(StageScene.Beg, "pat", {pc=C_COW, npc=C_PC})
+		saynn("How can you say no? You feed Milka the treat and give her a pat.")
+		addTreat(-1)
+		saynn("Milka happily noms the treat and eagerly nuzzles your hand!")
+		talk(C_COW, RNG.pick([
+			"Thank you, thank you, thank-youuuuu!",
+			"It tasted SO GOOD!",
+			"Thankiesssss!",
+			"You are so kind!",
+		]))
+		addCowTrust(3)
+	
+	addContinue("setState", ["main"])
+
+
+func eBullSeesTreat_state():
+	addChar(C_BULL)
+	playAnimation(StageScene.Duo, "stand", {pc=C_PC, npc=C_BULL})
+
+	saynn("Pip slowly approaches you, his head lowered.")
+	talk(C_BULL, RNG.pick([
+		"I'm gonna be honest.. I'm hungry as fuck.. I don't wanna eat that stupid grass.. Do you maybe have something?",
+		"I'm sorry for asking.. but do you maybe have something to eat? I hate the grass, man.. I hate it so much..",
+	]))
+	saynn("He looks desperate.")
+	
+	addAction("Give treat", "Give Pip a treat", "give")
+	addAction("No", "You'd rather save it", "noGive")
+	addAction("Eat ass!", "Tease him. Your ass is a great treat", "eatAss")
+
+func eBullSeesTreat_do(_id:String, _args:Array):
+	if(_id == "noGive"):
+		saynn("You deny Pip.")
+		talk(C_BULL, RNG.pick([
+			"Shit.. fine..",
+			"I saw that you had a treat.. but it's okay.. shit..",
+			]))
+		saynn("He heads towards the grass field.")
+		addBullTrust(-2)
+	if(_id == "give"):
+		playAnimation(StageScene.Duo, "stand", {pc=C_PC, npc=C_BULL})
+		saynn("You have a spare treat so you decide to give him one.")
+		addTreat(-1)
+		saynn("Pip grabs it and savours it, making sure to lick it from all sides.. before digging his teeth in.")
+		talk(C_BULL, RNG.pick([
+			"Shit, that tastes too good.. Thank you, friend.",
+			"Fuck me that tastes good.. Thank you.",
+			"What are they putting into these.. I want more.. Thank you.",
+		]))
+		addBullTrust(3)
+	if(_id == "eatAss"):
+		playAnimation(StageScene.SexRimming, "fast", {pc=C_PC, npc=C_BULL, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		talk(C_PC, "My ass is a good treat, you know.")
+		saynn("He shrugs.")
+		talk(C_BULL, "Sure.")
+		saynn("You give him a confused look.. but he just commits to it, kneeling behind you and digging his face into your ass, dragging his long muscly tongue along the flesh of your {pc.analStretch} star..")
+		saynn("Oh shit.. he slips his tongue inside, eating you out.. your whole body shivering..")
+		if(GM.pc.isWearingChastityCage()):
+			saynn("Your locked cock is pulsing in its cage.. your prostate is tingling from being stimulated..")
+		elif(GM.pc.hasReachablePenis()):
+			saynn("Your cock is pulsing, dripping pre.. your prostate is tingling from being stimulated..")
+		elif(GM.pc.hasReachableVagina()):
+			saynn("Your pussy is pulsing subtly, dripping juices..")
+		saynn("Soft moans escape your lips while the guy is servicing you so thoroughly..")
+		saynn("When he is done.. you're left trembling. Pip gets up and prepares to leave.")
+		talk(C_PC, "Wait, want the treat?")
+		talk(C_BULL, "Uh.. I guess I'm good now. Thanks.")
+		addBullTrust(1)
+	addContinue("setState", ["main"])
+
+func eRandomStuff_state():
+	var possible:Array = [
+		"milkapip1",
+		"milkapip2",
+		"milkapip3",
+		"milkapip4",
+		"milkapip5",
+		"milkapip6",
+		"milkapip7",
+	]
+	
+	var theEvent:String = RNG.pick(possible)
+	if(theEvent == "milkapip1"):
+		addChar(C_COW)
+		addChar(C_BULL)
+		playAnimation(StageScene.Duo, "stand", {pc=C_COW, npc=C_BULL})
+		
+		talk(C_BULL, "Can I ask something? Do you even understand that you're a slave?")
+		talk(C_COW, "Moo? I'm a cow.. Cows can't be slaves..")
+		talk(C_BULL, "You have a collar around your neck.")
+		saynn("Milka tries to look down at her neck.")
+		talk(C_COW, "Do I? Maybe I'm also a puppy then? A cowpup! Awoof-moo!")
+		saynn("The guy sighs and just leaves her be.")
+	if(theEvent == "milkapip2"):
+		addChar(C_COW)
+		addChar(C_BULL)
+		playAnimation(StageScene.Duo, "stand", {pc=C_COW, npc=C_BULL})
+		
+		talk(C_COW, "Hope you're doing well, Pip!")
+		talk(C_BULL, "I guess. Why are you asking? What do you want?")
+		saynn("Milka blinks.")
+		talk(C_COW, "Um.. I don't know.. uh.. I'm sorry..")
+		saynn("Pip sighs.")
+		talk(C_BULL, "It's okay, Milka.. It's okay. Thank you, hope you're well too.")
+		saynn("Milka brightens up and gives the stud a quick nuzzle before running away.")
+	if(theEvent == "milkapip3"):
+		addChar(C_COW)
+		addChar(C_BULL)
+		playAnimation(StageScene.Duo, "stand", {pc=C_COW, npc=C_BULL})
+		
+		talk(C_COW, "Pip, do bulls like carrots?")
+		talk(C_BULL, "That's.. rabbits. I'm also a horse, not a bull.")
+		saynn("Milka tilts her head in confusion, her ears flopping a little.")
+		talk(C_COW, "Oh. What about sugar cubes then?")
+		talk(C_BULL, "I'd eat one, sure.")
+		saynn("She gasps.")
+		talk(C_COW, "Horses eat suger cubes?! I want to be a horse too! Neigh-moo!")
+		saynn("Pip just closes his eyes and sighs, trying not to smile.")
+	if(theEvent == "milkapip4"):
+		addChar(C_COW)
+		addChar(C_BULL)
+		playAnimation(StageScene.Duo, "stand", {pc=C_COW, npc=C_BULL})
+		
+		talk(C_COW, "You look sad, Pip. Want me to share my milk with you?")
+		talk(C_BULL, "That’s.. not really something I drink.")
+		saynn("Milka tilts her head, then shrugs.")
+		talk(C_COW, "More for me then!")
+		saynn("She cups her own breasts and giggles while Pip mutters something under his breath and looks away.")
+	if(theEvent == "milkapip5"):
+		addChar(C_COW)
+		addChar(C_BULL)
+		playAnimation(StageScene.Duo, "stand", {pc=C_COW, npc=C_BULL})
+		
+		saynn("Milka walks up to Pip holding a tiny flower between her fingers.")
+		talk(C_COW, "For you!")
+		talk(C_BULL, "Where did you even get this?")
+		talk(C_COW, "Found it growing near the wall! It was lonely, so now it’s yours.")
+		saynn("Pip hesitates before taking it, clearly unsure how to react.")
+		talk(C_BULL, "..Thanks, Milka.")
+		saynn("Milka helps tie it to Pip's ear.")
+		talk(C_COW, "Yay! Now you’re a fancy bull!")
+	if(theEvent == "milkapip6"):
+		addChar(C_COW)
+		addChar(C_BULL)
+		playAnimation(StageScene.Duo, "stand", {pc=C_COW, npc=C_BULL})
+		
+		if(!cageRemoved):
+			saynn("Milka is crouched in front of Pip, staring at his chastity cage.")
+			talk(C_BULL, "What are you doing?")
+			talk(C_COW, "What is that?")
+			saynn("Pip sighs.")
+			talk(C_BULL, "Chastity cage. I can't breed anyone with it on.")
+			saynn("Milka gasps.")
+			talk(C_COW, "But what kind of bull are you if you can't breed?! How are you gonna breed me?!")
+			talk(C_BULL, "I'm not a bull, okay? I'm a stud! These stupid owners bought me and are using me as a bull.")
+			saynn("Milka squints.")
+			talk(C_COW, "Things just don't add up, you're right. You're not a bull.")
+			saynn("Pip shrugs.")
+			talk(C_COW, "And you're not a stud also.. Maybe you're a cow, like me! Can you moo? Moo~.")
+			saynn("Pip sighs again.")
+		else:
+			saynn("Milka is crouched in front of Pip, staring at his horsecock.")
+			talk(C_BULL, "What are you doing?")
+			talk(C_COW, "Where is your thingie?")
+			talk(C_BULL, "T.. Thingie?")
+			saynn("Milka tilts her head.")
+			talk(C_COW, "You know.. a metal thingie.")
+			talk(C_BULL, "Chastity cage. Our friend here helped me break it.")
+			saynn("He nods towards you.")
+			talk(C_COW, "OHH! Means you can breed now?!")
+			talk(C_BULL, "I guess.")
+			saynn("Milka smiles.")
+	if(theEvent == "milkapip7"):
+		addChar(C_COW)
+		addChar(C_BULL)
+		playAnimation(StageScene.Duo, "stand", {pc=C_COW, npc=C_BULL})
+		
+		talk(C_COW, "Pip, can bulls purr?")
+		talk(C_BULL, "No.")
+		talk(C_COW, "Are you sure?")
+		talk(C_BULL, "Very.")
+		saynn("Milka leans in close to his chest and closes her eyes.")
+		talk(C_COW, "Hmm.. nope. No purring. You’re a broken bull.")
+		talk(C_BULL, "..I feel broken, yeah.")
+		talk(C_COW, "I still like you..")
+		saynn("Milka pats him gently, then skips away.")
+
 	addContinue("setState", ["main"])
