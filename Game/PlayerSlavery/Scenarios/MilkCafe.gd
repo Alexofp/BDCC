@@ -38,6 +38,12 @@ var peekState:int = PEEK_START
 const PEEK_START = 0
 const PEEK_NOTICED_PADLOCK = 1
 const PEEK_NOTICED_CUSTOMER = 2
+const PEEK_NOTICED_BY_CUSTOMER = 3
+const PEEK_BULLIED_BY_GIRL = 4
+const PEEK_FIRST_EVENT_HAPPENED = 5
+const PEEK_SECOND_EVENT_HAPPENED = 6
+const PEEK_THIRD_EVENT_HAPPENED = 7
+var gonnaHavePeekEvent:bool = false
 
 var padlockDamage:float = 0.0
 
@@ -54,6 +60,8 @@ var extraProfit:int = 0
 
 var lactationTry:int = 0
 var isGuyTurn:bool = false
+
+var lastEvent:String = ""
 
 var charsHere:Array = []
 
@@ -73,7 +81,8 @@ const C_PC = "pc"
 const C_COW = "psmilka"
 const C_BULL = "pspip"
 const C_GIRL = "tavi" #TODO: Change me
-const C_GUY = "captain"
+const C_GUY = "alexrynard"
+const C_OFFICER = "captain"
 
 const L_DOOR = "pscafe_door"
 const L_SLEEP = "pscafe_sleep"
@@ -128,6 +137,8 @@ func saveData() -> Dictionary:
 		extraProfit = extraProfit,
 		lactationTry = lactationTry,
 		isGuyTurn = isGuyTurn,
+		lastEvent = lastEvent,
+		gonnaHavePeekEvent = gonnaHavePeekEvent,
 	}
 
 func loadData(_data:Dictionary):
@@ -167,6 +178,8 @@ func loadData(_data:Dictionary):
 	extraProfit = SAVE.loadVar(_data, "extraProfit", 0)
 	lactationTry = SAVE.loadVar(_data, "lactationTry", 0)
 	isGuyTurn = SAVE.loadVar(_data, "isGuyTurn", false)
+	lastEvent = SAVE.loadVar(_data, "lastEvent", "")
+	gonnaHavePeekEvent = SAVE.loadVar(_data, "gonnaHavePeekEvent", false)
 
 # max earned = 250000
 
@@ -808,9 +821,17 @@ func triggerEventMaybe():
 		if(treatAmount > 0):
 			possible.append(["eCowSeesTreat", 4.0])
 			possible.append(["eBullSeesTreat", 4.0])
+		if(canHelpCage && !cageRemoved):
+			possible.append(["eHelpCage", 4.0])
 	
 	if(!possible.empty()):
-		setState(RNG.pickWeightedPairs(possible))
+		var theEvent:String = RNG.pickWeightedPairs(possible)
+		if(theEvent == lastEvent):
+			theEvent = RNG.pickWeightedPairs(possible)
+		if(theEvent == lastEvent):
+			theEvent = RNG.pickWeightedPairs(possible)
+		setState(theEvent)
+		lastEvent = theEvent
 	else:
 		setState("main")
 
@@ -882,9 +903,9 @@ func main_do(_id:String, _args:Array):
 	if(_id == "idlePeek"):
 		aimCamera(L_COUNTER)
 		if(peekState == PEEK_START):
-			saynn("You stand high on your toes and peek into the small slit of a window on the top of the reinforced door.")
+			saynn("You stand high on your toes and peek into the small slit of a window near the top of the reinforced door.")
 			addStamina(-10)
-			saynn("It's dirty and cloudy.. and thick enough to not let out any sound.")
+			saynn("It's dirty and foggy.. and also thick enough to not let out any sound.")
 			saynn("Hard to see much.. the counter blocks most of the view. But you do see some nice tables with pink cloths laid out on them.. wide sofa-like chairs.. and a few customers.")
 			saynn("You wave to try to get some attention.. but no one can see you. Someone is gotta help you, they just have to notice you..")
 			saynn("Soon, you give up.")
@@ -896,44 +917,77 @@ func main_do(_id:String, _args:Array):
 			saynn("Sofie is approaching the door so you dash away while you still can.")
 			peekState = PEEK_NOTICED_PADLOCK
 			peekTried = 0
-		else: #PEEK_NOTICED_CUSTOMER
-		#elif(peekState == PEEK_NOTICED_PADLOCK):
-			peekTried += 1
-			saynn("You stand high on your toes and peek into the small window.")
-			addStamina(-10)
-			
-			saynn(RNG.pick([
-				"Sofie's back blocks the view completely, she is standing behind the counter. You can't see anything past her.",
-				"There are a few customers around.. But all of them are sitting behind the tables, casually chatting with each other or staring into their datapads. If only any of them would look your way..",
-				"You see Leo working as a waiter, serving tables. Sofie is preparing a meal for someone. Could be a fly-through, you don't see anyone sitting behind the tables.",
-				"All of the tables seem to be empty, no customers around.",
-				"You notice pure void of space behind the cafe's reinforced glass panels.. Even if you escape, where are you gonna go..",
-				"There are some customers so you do your best to get their attention, waving and tapping.",
-			]))
-			
-			if(peekState == PEEK_NOTICED_PADLOCK && RNG.chance(-5+peekTried*4)):
-				peekTried = 0
-				peekState = PEEK_NOTICED_CUSTOMER
-				saynn("YOU NOTICE SOMEONE STANDING IN FRONT OF THE COUNTER.")
-				saynn("HE IS WEARING EXPENSIVE CLOTHES.")
-				saynn("IT FEELS LIKE HE HAS [b]NOTICED YOU[/b].. MAYBE..")
-			else:
-				var special:String = RNG.pickWeightedDict({
-					"": 100.0, "guy": 10.0, "girl": 10.0,
-				})
-				if(special == "guy"):
-					playAnimation(StageScene.Duo, "stand", {npc=C_GUY})
-					saynn("Leo suddenly steps through the door.")
-					talk(C_GUY, "Excuse me, coming through.")
-					saynn("He almost just walks past you.. but then he stops.")
-					talk(C_GUY, "Wait. Step away from the door please.")
-					addObedience(-1)
-				if(special == "girl"):
-					playAnimation(StageScene.Duo, "defeat", {npc=C_GIRL})
-					saynn("The door hits your nose as Sofie suddenly opens it!")
-					addPain(20)
-					talk(C_GIRL, "Why are you so dumb? Don't make me punish you.")
-					addObedience(-1)
+			return
+		peekTried += 1
+		saynn("You stand high on your toes and peek into the small window.")
+		addStamina(-10)
+		
+		saynn(RNG.pick([
+			"Sofie's back blocks the view completely, she is standing behind the counter. You can't see anything past her.",
+			"There are a few customers around.. But all of them are sitting behind the tables, casually chatting with each other or staring into their datapads. If only any of them would look your way..",
+			"You see Leo working as a waiter, serving tables. Sofie is preparing a meal for someone. Could be a fly-through, you don't see anyone sitting behind the tables.",
+			"All of the tables seem to be empty, no customers around.",
+			"You notice pure void of space behind the cafe's reinforced glass panels.. Even if you escape, where are you gonna go..",
+			"There are some customers so you do your best to get their attention, waving and tapping.",
+		]))
+	
+		if(peekState == PEEK_NOTICED_PADLOCK && RNG.chance(-30+peekTried*20)):
+			peekTried = 0
+			peekState = PEEK_NOTICED_CUSTOMER
+			playAnimation(StageScene.Solo, "stand", {pc=C_OFFICER})
+			saynn("You were about to give up.. but then you [b]notice someone[/b]..")
+			saynn("He is wearing fancy clothes.. and also spots one hell of a smile. What a wolf.")
+			saynn("You bounce and wave.. but he turns away too fast. And soon, he head off.")
+			return
+		elif(peekState == PEEK_NOTICED_CUSTOMER && RNG.chance(-30+peekTried*20)):
+			peekTried = 0
+			peekState = PEEK_NOTICED_BY_CUSTOMER
+			playAnimation(StageScene.Solo, "stand", {pc=C_OFFICER})
+			saynn("You were about to give up.. but then you [b]notice him[/b] again!")
+			saynn("It's the fancy wolf that you saw the other day. He is busy ordering something.")
+			saynn("It's your chance! You wave and jump, trying to get his attention..")
+			saynn("The wolf finishing making his order.. and then gives your door a quick glance.")
+			talk(C_PC, "C'mon, notice me! I'm here!")
+			saynn("His brow shifts ever so subtly.. But you really can't tell.")
+			saynn("Sofie hands him his order.. and so he leaves. Fuck, almost..")
+			return
+		elif(peekState == PEEK_NOTICED_BY_CUSTOMER && RNG.chance(-30+peekTried*20)):
+			peekTried = 0
+			peekState = PEEK_BULLIED_BY_GIRL
+			playAnimation(StageScene.Solo, "stand", {pc=C_OFFICER})
+			saynn("You see [b]him[/b]! He is back, making his order.")
+			saynn("This time you don't even need to wave.. he is looking over Sofie's shoulder at your door.")
+			saynn("You can see him saying something to the girl.. something that startles her. Oh shit.")
+			addContinue("setState", ["pEventBullyByGirl"])
+			return
+		elif(peekState == PEEK_BULLIED_BY_GIRL && RNG.chance(10+peekTried*40) && !gonnaHavePeekEvent):
+			peekTried = 0
+			gonnaHavePeekEvent = true
+			peekState = PEEK_FIRST_EVENT_HAPPENED
+			playAnimation(StageScene.Solo, "stand", {pc=C_OFFICER})
+			saynn("You see [b]him[/b]!")
+			saynn("Who cares what that bitch said.. you wave your arms and get his attention. It seems to work!")
+			saynn("The wolf puts on a subtle smile.. but that's about it. Huh..")
+			saynn("He finishes making his order.. grabs it.. and just leaves.")
+			saynn("Maybe.. maybe this is pointless. Maybe there is nothing you can do..")
+			return
+		
+		var special:String = RNG.pickWeightedDict({
+			"": 100.0, "guy": 10.0, "girl": 10.0,
+		})
+		if(special == "guy"):
+			playAnimation(StageScene.Duo, "stand", {npc=C_GUY})
+			saynn("Leo suddenly steps through the door.")
+			talk(C_GUY, "Excuse me, coming through.")
+			saynn("He almost just walks past you.. but then he stops.")
+			talk(C_GUY, "Wait. Step away from the door please.")
+			addObedience(-1)
+		if(special == "girl"):
+			playAnimation(StageScene.Duo, "defeat", {npc=C_GIRL})
+			saynn("The door hits your nose as Sofie suddenly opens it!")
+			addPain(20)
+			talk(C_GIRL, "Why are you so dumb? Don't make me punish you.")
+			addObedience(-1)
 				
 		addContinueEventTrigger()
 	if(_id == "endingLockCheck"):
@@ -2708,4 +2762,97 @@ func eRandomStuff_state():
 		talk(C_COW, "I still like you..")
 		saynn("Milka pats him gently, then skips away.")
 
+	addContinue("setState", ["main"])
+
+
+
+func eHelpCage_state():
+	playAnimation(StageScene.TFLook, "crotch", {pc=C_BULL})
+	aimCamera(L_BULL)
+	
+	saynn("Pip is tugging on his chastity cage, trying to slide it off.. but only pinching his balls in the process.")
+	talk(C_BULL, "Ah, fuck.. God dammit.")
+	
+	addAction("Ignore", "Let him stay caged", "setState", ["main"])
+	if(GM.pc.getStamina() > 0):
+		addAction("Help", "Help Pip with his cage. Will use some stamina..", "doHelp")
+	addAction("Bully", "Bully him and his locked cock!", "doBully")
+
+func eHelpCage_do(_id:String, _args:Array):
+	if(_id == "doHelp"):
+		saynn("You decide to help him.")
+		talk(C_BULL, "Oh.. sure, you can try.")
+		playAnimation(StageScene.ChairOral, "rub", {pc="pspip", npc="pc"})
+		
+		saynn(RNG.pick([
+			"You inspect Pip's chastity cage and try to wiggle it off.",
+			"You grip the base of Pip's cage and give it a firm twist, trying to loosen its hold on his sheath.",
+			"You slide your nail into the lock of Pip's chastity cage and try to turn it.",
+			"You find a little rock in the garden and start to carefully hit the lock of Pip's chastity cage.",
+			"You sharpen a twig that you have found in the garden and try to use it as a lockpick inside Pip's chastity cage.",
+			"You get a good grip on the metal pieces of Pip's chastity cage and use your full strength to try to bend them.",
+		]))
+		cageDamage += RNG.randf_range(0.1, 0.2)
+		addStamina(-20)
+		addBullTrust(1)
+		
+		sayPipLine()
+
+		if(cageDamage < 0.35):
+			saynn("Not much has changed. You have to keep trying.")
+		elif(cageDamage < 0.7):
+			saynn("The cage is giving way, you can feel it. There is more and more wiggle room after each try.")
+		else:
+			saynn("It feels like the cage will snap soon. You're almost there.")
+	if(_id == "doBully"):
+		playAnimation(StageScene.SexFaceSitting, "sit", {pc=C_PC, npc=C_BULL, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Instead of helping him, you decide to tease him for his chastity.")
+		if(GM.pc.hasPenis()):
+			saynn("You pin him down to the floor and sit on his face, your balls rest on his forehead"+(", your pussy coats his snout and cheeks with your juices" if GM.pc.hasReachableVagina() else "")+"!")
+		elif(GM.pc.hasReachableVagina()):
+			saynn("You pin him down to the floor and sit on his face, your pussy coats his snout and cheeks with your juices!")
+		else:
+			saynn("You pin him down to the floor and sit on his face, your crotch rubbing against his snout!")
+		talk(C_PC, RNG.pick([
+			"Do you really need your cock? You're doing fine as is. Grade S buttslut.",
+			"Bet you forgot what your own cock feels like. Doesn’t matter though, does it? Your ass does all the work.",
+			"Such a pretty little femboy, all caged up. I almost feel bad.. almost.",
+			"Silly stud, I thought you'd get used to being a fucktoy by now.",
+		]))
+		saynn("His face is blushing softly.. but he is trying to push you off.")
+		talk(C_BULL, RNG.pick([
+			"I'm a stud..",
+			"I'm not a slut..",
+			"I'm strong.. and virile..",
+		]))
+		addBullTrust(1)
+		
+	addContinue("setState", ["main"])
+
+
+func pEventBullyByGirl_state():
+	addChar(C_GIRL)
+	addChar(C_GUY)
+	aimCamera(L_CENTER)
+	playAnimation(StageScene.Duo, "hurt", {npc=C_GIRL, npcAction="shove"})
+	
+	saynn("Sofie hands the fancy wolf his order.. and then rushes to you.")
+	saynn("You can't even make a few steps back before she is already near you, grabbing you by the collar and shoving you back.")
+	talk(C_GIRL, "WHY ARE YOU SO STUPID? ARGH!")
+	saynn("Wow.. what an angry bitch.")
+	talk(C_GIRL, "I WILL CUT YOUR LEGS OFF IF I HAVE TO. HEAR ME?")
+	saynn("The other owner joins her.")
+	talk(C_GUY, "What's wrong, sweetheart?")
+	saynn("She grabs him and shoves him back too.")
+	talk(C_GIRL, "WHAT'S WRONG? We're almost got caught with FUCKING SLAVES in our basement, that's what! It's all your fault!")
+	saynn("The guy lowers his head slightly.. and carefully approaches his partner, gently embracing.")
+	talk(C_GUY, "But we didn't get caught, did we?")
+	saynn("Sofie slaps his hands away..")
+	talk(C_GIRL, "If you don't look after this bitch, it's only a matter of time. I don't wanna rot in a fucking prison.")
+	saynn("Leo embraces her again, gently nuzzling her cheek.")
+	talk(C_GUY, "My bad, love. Try to relax, take some rest. If we're gonna be careful, we will be able to pull through. Together.")
+	saynn("Sofie gives you a piercing glare.. but then just sighs.")
+	talk(C_GIRL, "Fine.. I need a massage.")
+	saynn("Leo lightens up. He grabs Sofie's hand and invites her to follow.")
+	saynn("Interesting.")
 	addContinue("setState", ["main"])
