@@ -97,6 +97,7 @@ const L_DOCKS = "pscafe_docks"
 const L_FIELD = "pscafe_field"
 const L_FIELD2 = "pscafe_field2"
 const L_FIELD3 = "pscafe_field3"
+const L_TABLE = "pscafe_table"
 
 func saveData() -> Dictionary:
 
@@ -447,6 +448,10 @@ func doFinalAction(_finalActionEntry:Array) -> Dictionary:
 			return {}
 		if(theID == "ENDING"):
 			return {end=theArgs[0]}
+		if(theID == "SLEEP"):
+			setState("main")
+			sleepScene()
+			return {}
 			
 		
 		call(state + "_do", theID, theArgs)
@@ -1503,32 +1508,43 @@ func sleep_state():
 	
 	onDayEnd()
 	
-	addAction("Sleep", "Time to sleep", "sleep")
+	if(gonnaHavePeekEvent):
+		if(peekState == PEEK_FIRST_EVENT_HAPPENED):
+			addAction("Sleep?", "It's time to sleep but you feel like something is about to happen..", "setState", ["ePeekFirstEvent"])
+		if(peekState == PEEK_SECOND_EVENT_HAPPENED):
+			addAction("Sleep?", "It's time to sleep but you feel like something is about to happen..", "setState", ["ePeekSecondEvent"])
+		if(peekState == PEEK_THIRD_EVENT_HAPPENED):
+			addAction("Sleep?", "It's time to sleep but you feel like something is about to happen..", "setState", ["ePeekThirdEvent"])
+		return
+	addAction("Sleep", "Time to sleep", "SLEEP")
 
-func sleep_do(_id:String, _args:Array):
-	if(_id == "sleep"):
-		aimCamera(L_SLEEP)
-		playAnimation(StageScene.Sleeping, "sleep")
-		GM.main.startNewDay()
-		saynn("NEW DAY.")
-		if(upgradeLevel >= UPGRADE_CELLS):
-			addStamina(50)
-			addPain(-100)
+func sleepScene():
+	aimCamera(L_SLEEP)
+	playAnimation(StageScene.Sleeping, "sleep")
+	GM.main.startNewDay()
+	saynn("NEW DAY.")
+	if(upgradeLevel >= UPGRADE_CELLS):
+		addStamina(50)
+		addPain(-100)
+	else:
+		addStamina(20)
+		addPain(-50)
+	
+	if(obedience <= -1.0):
+		addContinue("ENDING", ["end_annoying"])
+	else:
+		if(needsPunishment):
+			addContinue("setState", ["morningpunish"])
 		else:
-			addStamina(20)
-			addPain(-50)
-		
-		if(obedience <= -1.0):
-			addContinue("ENDING", ["end_annoying"])
-		else:
-			if(needsPunishment):
-				addContinue("setState", ["morningpunish"])
-			else:
-				addContinue("setState", ["main"])
-			if(GM.pc.getCredits() >= 0):
-				saynn("[b]The owners have paid off their debt! You can released![/b]")
-				addAction("Freedom!", "You did your part. Time for the owners to do the same", "ENDING", ["end_credits"])
-			#setState("main")
+			addContinue("setState", ["main"])
+		if(GM.pc.getCredits() >= 0):
+			saynn("[b]The owners have paid off their debt! You can released![/b]")
+			addAction("Freedom!", "You did your part. Time for the owners to do the same", "ENDING", ["end_credits"])
+
+#func sleep_do(_id:String, _args:Array):
+#	if(_id == "sleep"):
+#
+#			#setState("main")
 
 func test_state():
 	addCredits(5)
@@ -2856,3 +2872,89 @@ func pEventBullyByGirl_state():
 	saynn("Leo lightens up. He grabs Sofie's hand and invites her to follow.")
 	saynn("Interesting.")
 	addContinue("setState", ["main"])
+
+
+func ePeekFirstEvent_state():
+	aimCamera(L_SLEEP)
+	addChar(C_GIRL)
+	addChar(C_GUY)
+	playAnimation(StageScene.Choking, "idle", {pc=C_GIRL, npc=C_PC})
+	
+	saynn("Before you fall asleep, Sofie storms your cell and pins you against a wall.")
+	talk(C_GIRL, "YOU FUCKED US, YOU KNOW THAT? I HOPE YOU'RE FUCKING HAPPY.")
+	saynn("She growls and chokes you slightly.. but then she suddenly pulls her hands away from your neck.")
+	talk(C_GIRL, "And I can't even hurt you. Aghh, I hate you so much.")
+	saynn("Leo walks in, the second owner.")
+	talk(C_GUY, "Sofie? We're closed for the day but someone is still sitting behind the table.")
+	talk(C_GIRL, "Yep. He knows about THIS BITCH.")
+	saynn("The guy's eyes go wide.")
+	talk(C_GUY, "Oh shit.. I saw a holster on his belt. Are we screwed?")
+	talk(C_GIRL, "I don't fucking know. But he said he wants to see {pc.him}.")
+	addContinue("setState", ["ePeekFirstEvent2"])
+	
+func ePeekFirstEvent2_state():
+	aimCamera(L_SLEEP)
+	addChar(C_GIRL)
+	addChar(C_GUY)
+	playAnimation(StageScene.Duo, "stand", {pc=C_PC, npc=C_GIRL, bodyState={leashedBy=C_GIRL}})
+	saynn("Sofie pulls out a leash and clips it to your collar. She then looks you in the eyes.")
+	talk(C_GIRL, "No. Funny. Business. You hear me? I really don't wanna turn my cafe into a steakhouse.")
+	saynn("You nod..")
+	talk(C_GUY, "..it's our cafe, right, sweetheart?")
+	saynn("She growls.")
+	talk(C_GIRL, "If we fuck this up, it will be nobody's cafe. C'mon, try to look nice.")
+	saynn("Sofie begins pulling you towards the door..")
+	addContinue("setState", ["ePeekFirstEvent3"])
+
+func ePeekFirstEvent3_state():
+	aimCamera(L_TABLE)
+	addChar(C_OFFICER)
+	addChar(C_GIRL)
+	addChar(C_GUY)
+	playAnimation(StageScene.Duo, "stand", {pc=C_PC, npc=C_OFFICER, npcAction="sit", bodyState={hard=true}})
+	saynn("You get brought out.. your eyes squint as they struggle to adjust to the bright enviroment.")
+	saynn("The cafe is empty.. It's past its closing hour. All the tables are empty.. except for one.")
+	saynn("A mature wolf is waiting behind it, his eyes are busy reading the menu.")
+	talk(C_GIRL, "There you go, sir. Here is the person that you saw. {pc.He} {pc.isAre} just our..")
+	saynn("Sofie's voice is so much more.. polite.")
+	talk(C_OFFICER, "Thank you.")
+	saynn("Sofie and Leo look at each other, their faces puzzled. You're standing still near the table, arms behind your back.. the atmosphere is quite.. charged.")
+	talk(C_OFFICER, "I have a long night shift ahead of me. So.. a cup of coffee would be nice. Maybe a cupcake.")
+	saynn("The two owners exchange confused glances again.. until Sofie shoves her elbow into Leo's side.")
+	talk(C_GUY, "Oh.. of course. I will get right to it, sir.")
+	saynn("Leo rushes towards the counter.. while the officer puts away the menu and switches his attention towards you.. towards your {pc.masc} body.. towards your {pc.breasts}.."+(" towards your {pc.penis}.." if GM.pc.hasPenis() else ""))
+	talk(C_OFFICER, "I knew there was some secret to this place.. It's a crime.")
+	talk(C_GIRL, "Uh.. it's nothing illegal.. we can explain..")
+	saynn("The officer cuts her off.")
+	talk(C_OFFICER, "Your food and coffee have no right to be SO good. Let me tell you, best in the whole galaxy. And I've been in a lot of these space cafes, believe me.")
+	saynn("Sofie doesn't know how to react to such words.. so she just nods.. her hand still holding a leash to your collar.")
+	talk(C_OFFICER, "I know that you have your secret.. ingreendients. And I don't wanna reveal them to others. That would be extremely rude, wouldn't it?")
+	talk(C_GIRL, "Uh.. y-yeah, it would be.")
+	saynn("The officer nods.")
+	talk(C_OFFICER, "All I'm asking for is.. some personal dinners. I will pay, of course. I will make it worth it for you.")
+	saynn("Sofie rubs her face with her free hand.. you can see the slight shiver in her limbs.")
+	talk(C_GIRL, "Of course, sir. That can be arranged.")
+	talk(C_OFFICER, "I don't wanna be push-y. I'm okay with getting the same treatment that everyone else does. I want to ask {pc.his} opinion.")
+	saynn("He grabs the middle of the leash.. and tugs on it slightly, inviting you to come closer to him.")
+	talk(C_OFFICER, "Do you want to service me?")
+	saynn("Leo finally returns, bringing the officer's order. A cup of coffee and a few cupcakes..")
+	
+	addAction("Agree", "Agree to service the offer", "doAgree")
+	addAction("No", "This is too much", "noAgree")
+
+func ePeekFirstEvent3_do(_id:String, _args:Array):
+	if(_id == "noAgree"):
+		gonnaHavePeekEvent = false
+		peekState = PEEK_BULLIED_BY_GIRL
+		aimCamera(L_SLEEP)
+		playAnimation(StageScene.Duo, "stand", {npc=C_GIRL})
+		saynn("You decide to deny his offer. Sofie's glare is piercing you..")
+		talk(C_OFFICER, "That's okay. I understand. I will just stay as a normal client.")
+		talk(C_GIRL, "Okay. Now, if you excuse us..")
+		saynn("The officer nods. Sofie yanks you back into the basement.. into your cell.")
+		talk(C_GIRL, "You are SO fucking lucky. I was gonna murder you on the spot. Now sleep.")
+		saynn("She leaves and locks the cell.")
+		addAction("Sleep", "Now it's time to sleep.. for real", "SLEEP")
+	if(_id == "doAgree"):
+		gonnaHavePeekEvent = false
+		

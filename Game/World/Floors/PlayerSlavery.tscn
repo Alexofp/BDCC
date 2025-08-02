@@ -550,5 +550,6 @@ roomColor = 4
 self_modulate = Color( 1, 0.6, 0.8, 1 )
 position = Vector2( 1216, -128 )
 roomName = "Space-Cafe"
+roomID = "pscafe_table"
 roomSprite = 2
 roomColor = 4
