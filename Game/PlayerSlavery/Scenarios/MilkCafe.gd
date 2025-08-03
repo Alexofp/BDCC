@@ -976,6 +976,15 @@ func main_do(_id:String, _args:Array):
 			saynn("He finishes making his order.. grabs it.. and just leaves.")
 			saynn("Maybe.. maybe this is pointless. Maybe there is nothing you can do..")
 			return
+		elif(peekState == PEEK_FIRST_EVENT_HAPPENED && RNG.chance(10+peekTried*40) && !gonnaHavePeekEvent):
+			peekTried = 0
+			gonnaHavePeekEvent = true
+			peekState = PEEK_SECOND_EVENT_HAPPENED
+			playAnimation(StageScene.Solo, "stand", {pc=C_OFFICER})
+			saynn("You see [b]him[/b]! It's the officer.")
+			saynn("He looks at you.. and puts on a familliar smile.")
+			saynn("This means that he is probably gonna be on a night shift today.. and so are you.")
+			return
 		
 		var special:String = RNG.pickWeightedDict({
 			"": 100.0, "guy": 10.0, "girl": 10.0,
@@ -2015,10 +2024,10 @@ func milkScene(_actorID:String, _targetID:String):
 		shouldMilkPenis = true
 		if(addStrapon(_actorID)):
 			playAnimation(StageScene.MilkingProstateFuck, "fast", {pc=_targetID, npc=_actorID, pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
-			sayParsed("{actor.You} {actor.youVerb('secure')} {target.you} over the advanced table, manipulators holding {target.yourHis} limbs in place. A pre-lubed strapon presses against {target.yourHis} tight ring, spreading it wide before sliding inside. {actor.You} {actor.youVerb('begin')} pounding {target.yourHis} ass nice and hard, using the info that the table provides to maximize the stimulation of the prostate. Soon, seed begins to dribble down into the fluid intake.");
+			sayParsed("{actor.You} {actor.youVerb('secure')} {target.you} over the advanced table, manipulators holding {target.yourHis} limbs in place. A pre-lubed strapon presses against {target.yourHis} tight ring, spreading it wide before sliding inside. {actor.You} {actor.youVerb('begin')} pounding {target.yourHis} ass nice and hard, using the info that the table provides to maximize the stimulation of the prostate. Soon, seed begins to dribble down into the fluid intake.")
 		else:
 			playAnimation(StageScene.MilkingProstateFuck, "fast", {pc=_targetID, npc=_actorID, pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={showPenis=true, hard=true}})
-			sayParsed("{actor.You} {actor.youVerb('secure')} {target.you} over the advanced table, manipulators holding {target.yourHis} limbs in place. A {actor.penis} presses against {target.yourHis} tight ring, spreading it wide before sliding inside. {actor.You} {actor.youVerb('begin')} pounding {target.yourHis} ass nice and hard, using the info that the table provides to maximize the stimulation of the prostate. Soon, seed begins to dribble down into the fluid intake.");
+			sayParsed("{actor.You} {actor.youVerb('secure')} {target.you} over the advanced table, manipulators holding {target.yourHis} limbs in place. A {actor.penis} presses against {target.yourHis} tight ring, spreading it wide before sliding inside. {actor.You} {actor.youVerb('begin')} pounding {target.yourHis} ass nice and hard, using the info that the table provides to maximize the stimulation of the prostate. Soon, seed begins to dribble down into the fluid intake.")
 		if(_canUsePumps && _canMilkBreasts && addBreastPump(_targetID)):
 			shouldMilkBreasts = true
 			sayParsed("At the same time, two breast-pumps hum away at {target.yourHis} {target.breasts}, pulling out {target.milk}!")
@@ -2956,5 +2965,104 @@ func ePeekFirstEvent3_do(_id:String, _args:Array):
 		saynn("She leaves and locks the cell.")
 		addAction("Sleep", "Now it's time to sleep.. for real", "SLEEP")
 	if(_id == "doAgree"):
+		addChar(C_OFFICER)
 		gonnaHavePeekEvent = false
-		
+		playAnimation(StageScene.Duo, "kneel", {npc=C_OFFICER, npcAction="sit", bodyState={hard=true, leashedBy=C_OFFICER}})
+		saynn("Instead of saying anything, you just show your obedience by kneeling near him.")
+		saynn("The officer smiles.. and reaches his hand out to scritch you under the chin.")
+		talk(C_GIRL, "Do you still.. uh.. need us?")
+		talk(C_OFFICER, "I think I will need one of you.")
+		saynn("Sofie shoves her elbow into his partner side again to make him disappear.")
+		if(agreeMilk || !GM.pc.hasPenis()):
+			saynn("The officer grabs a cup of freshly brewed coffee and takes a sip.")
+			talk(C_OFFICER, "I think it could use a bit more milk. Fresh milk.")
+			saynn("He places the cup near the edge of the table.. near your chest.")
+			talk(C_GIRL, "Of course, I will fix it right away.")
+			addAction("Fresh milk..", "See what Sofie will do with your breasts", "setState", ["ePeekFirstEventMilk"])
+		else:
+			saynn("The officer grabs a cupcake.. and brings it closer, inspecting.")
+			talk(C_OFFICER, "Looks a bit.. dry to me. Could use some more cream. Fresh cream. What do you think?")
+			saynn("He places the cupcake near the edge of the table.. near you.")
+			talk(C_GIRL, "Of course, I will fix it right away.")
+			saynn("Sofie runs away to grab something.. a strapon harness.")
+			addAction("Fresh cream..", "See what Sofie will do with you", "setState", ["ePeekFirstEventSeed"])
+
+func ePeekFirstEventMilk_state():
+	addChar(C_OFFICER)
+	addChar(C_GIRL)
+	playAnimation(StageScene.BreastGroping, "grope", {pc=C_GIRL, npc=C_PC, npcCum=true, npcBodyState={naked=true,hard=true}})
+	GM.pc.milk()
+	saynn("Sofie nods at the officer and gently takes your hand, guiding you closer to the table.")
+	saynn("She positions you near the edge, your {pc.breasts} just beneath the officer’s steaming cup.")
+	saynn("Slowly, Sofie cups your breasts and begins fondling and caressing them.")
+	saynn("Her thumbs press on your nipples, rolling them left and right until you shiver and your buds get all hard and sensitive.")
+	saynn("A drop of creamy {pc.milk} forms at each nipple before trickling down into the officer’s cup.")
+	saynn("Seeing that, Sofie begins milking you, squeezing your breasts in gentle yet firm strokes.. causing the {pc.milk} to squirt straight into the coffee.")
+	saynn("You moan softly, squirming under her touch as waves of pleasure and embarrassment wash over you. The officer can't pull his gaze away from you.")
+	saynn("After some time, the cup receives a nice extra layer of your warm {pc.milk}. The officer nods in approval, lifts the cup, and takes a sip.") 
+	talk(C_OFFICER, "Mmm.. that is perfect.")
+	saynn("Sofie's eyes light up when she hears that.")
+	if(agreeSeed && GM.pc.hasPenis()):
+		saynn("Next, the officer grabs a cupcake.. and brings it closer, inspecting.")
+		talk(C_OFFICER, "Looks a bit.. dry to me. Could use some more cream. What do you think?")
+		saynn("He places the cupcake back.")
+		talk(C_GIRL, "Of course, sir. I will fix it right away.")
+		saynn("Sofie runs away to grab something.. a strapon harness.")
+		addAction("Fresh cream..", "See what Sofie will do with you", "setState", ["ePeekFirstEventSeed"])
+	else:
+		addContinue("setState", ["ePeekFirstEvent4"])
+
+func ePeekFirstEventSeed_state():
+	addChar(C_OFFICER)
+	addChar(C_GIRL)
+	addStrapon(C_GIRL)
+	playAnimation(StageScene.SexFreeStanding, "fast", {pc=C_GIRL, npc=C_PC, pcCum=true, npcCum=true, bodyState={naked=true,hard=true}, npcBodyState={naked=true,hard=true}})
+	GM.pc.milkSeed()
+	GM.pc.orgasmFrom(C_GIRL)
+	saynn("Sofie secures a strapon harness around her hips, the rubber cock bobbing eagerly at her waist.")
+	saynn("She grabs your wrists and guides them behind your back while pushing on your back, bending you forward, your cock hovering above the cupcake..")
+	saynn("Firmly, she lines her new rubber shaft up with your needy asshole.")
+	saynn("With a strong thrust, Sofie drives the strapon deep into you. You gasp as the tip presses against your pleasure spot.. "+("making your cock go hard instantly." if !GM.pc.isWearingChastityCage() else "making your caged cock attempt to go hard in its prison."))
+	saynn("She begins a slow, deliberate rhythm, each stroke massaging your prostate further and making you squirm.")
+	talk(C_PC, "M-mmh.. mmm..")
+	saynn("Pre is dribbling from your member as her toy plunges in and out. The officer is watching you get fucked with great interest.")
+	saynn("Sofie picks up the pace, pounding you nice and hard. Your moans grow louder, echoing in the cafe.")
+	saynn("It doesn't take long until your prostate inflates and becomes stiff. And soon, with a cry of pleasure, you start cumming.. Thick ropes of cream are pulsing out of your dick, landing directly onto the placed cupcake.")
+	saynn("Sofie holds steady, letting your cock add that extra layer on top of the existing frosting.")
+	saynn("When you're done.. the officer leans forward and grabs that cupcake from the table.. before taking a good bite.")
+	talk(C_OFFICER, "Mmm.. that’s rich. Incredible.")
+	saynn("Hearing that makes Sofie smile.. while you're busy panting.. your balls drained.")
+	addContinue("setState", ["ePeekFirstEvent4"])
+
+func ePeekFirstEvent4_state():
+	removeStrapon(C_GIRL)
+	playAnimation(StageScene.Duo, "stand", {pc=C_GUY, npc=C_OFFICER, npcAction="sit"})
+	saynn("The officer enjoys the rest of his.. dinner.. sipping the coffee and finishing the cupcake.")
+	saynn("You stand near.. but Sofie and Leo are a few steps away, as to not disturb the meal.")
+	talk(C_OFFICER, "Alright, I think I can pay now.")
+	extraProfit += 10000
+	saynn("Leo swiftly approaches the table.. the bill in his hands.")
+	talk(C_OFFICER, "Would this be enough, perhaps?")
+	saynn("The officer produces a credits chip.. and hands it to the guy. Leo's eyes go wide.")
+	talk(C_GUY, "Sir.. this is way too much.")
+	saynn("The officer smiles.")
+	talk(C_OFFICER, "The rest is a tip. I really enjoyed the service. I hope we can do this again sometime. Eh?")
+	saynn("Sofie runs up to Leo and whispers into his ear.")
+	talk(C_GIRL, "..take the fucking chip already and go, don't be stupid.. take the slave too..")
+	saynn("Leo nods to the officer.. and takes your leash.")
+	talk(C_GUY, "Thank you, sir. We would love to have you here again.")
+	saynn("The officer nods back.. and watches Leo walk you back into the kitchen.")
+	
+	addContinue("setState", ["ePeekFirstEvent5"])
+
+func ePeekFirstEvent5_state():
+	aimCamera(L_SLEEP)
+	addChar(C_GUY)
+	playAnimation(StageScene.Duo, "stand", {npc=C_GUY, bodyState={leashedBy=C_GUY}})
+	
+	saynn("Leo brings you back into your cell. You feel.. quite tired.")
+	talk(C_GUY, "You did very well. Thank you..")
+	saynn("He removes the leash from your collar.")
+	talk(C_GUY, "Sleep well.")
+	
+	addAction("Sleep", "Time to sleep!", "SLEEP")
