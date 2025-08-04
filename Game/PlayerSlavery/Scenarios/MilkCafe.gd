@@ -73,7 +73,7 @@ const IDLE_MAX = 3
 
 var idleState:int = IDLE_IDLE
 
-var state:String = "intro"
+var state:String = "intro" #"ePeekSecondEvent"
 var texts:Array = []
 var actions:Array = []
 
@@ -320,7 +320,7 @@ func _init():
 
 func onSlaveryStart():
 	updateCharacters()
-	intro_state()
+	call(state+"_state")
 	GlobalRegistry.getCharacter(C_COW).induceLactation()
 
 func onSlaveryEnd():
@@ -3066,3 +3066,173 @@ func ePeekFirstEvent5_state():
 	talk(C_GUY, "Sleep well.")
 	
 	addAction("Sleep", "Time to sleep!", "SLEEP")
+
+
+func ePeekSecondEvent_state():
+	playAnimation(StageScene.Duo, "stand", {npc=C_GIRL, bodyState={leashedBy=C_GIRL}})
+	saynn("You weren't planning to sleep.. and it looks like you were right.")
+
+	saynn("Sofie enters your cell and instantly clips a leash to your collar.")
+
+	talk(C_GIRL, "You're in luck, the guy wants to see you again.")
+	saynn("She pulls you up off of the floor and swipes any dust from your butt. Her free hand catches your chin.")
+
+	talk(C_GIRL, "If you don't want to be in trouble, you are gonna do everything that he wants you to do. Like a good slut.")
+	saynn("Feels like you won't have much of a choice this time..")
+	addAction("Follow", "See where she brings you", "setState", ["ePeekSecondEvent2"])
+
+func ePeekSecondEvent2_state():
+	aimCamera(L_TABLE)
+	addChar(C_OFFICER)
+	addChar(C_GIRL)
+	playAnimation(StageScene.ChairOral, "tease", {pc=C_OFFICER, npc=C_PC, bodyState={showPenis=true,hard=true}, npcBodyState={naked=true, hard=true}})
+	GM.pc.freeMouthDeleteAll()
+	GM.pc.freeHandsDeleteAll()
+	GM.pc.freeArmsDeleteAll()
+	saynn("Sofie brings you out into the seating area of the cafe. The cafe is closed so there is no one around.. except for him that is. The guy is sitting behind his usual table, already eating a cupcake and enjoying his coffee.")
+
+	saynn("You kneel near his table.. it feels right for some reason.")
+
+	talk(C_GIRL, "Your dessert has arrived, sir.")
+	talk(C_OFFICER, "Wonderful.")
+	saynn("Dessert? You don't think anyone ever called you like that..")
+
+	saynn("The officer reaches his hand out to cup your chin, the soft touch of his big, manly palm makes something inside you tingle. Let's hope this dessert doesn't start melting down.")
+
+	talk(C_OFFICER, "Are they treating you well here?")
+	saynn("He is asking you.. The sudden question makes you lower your eyes. You can just feel Sofie's drilling gaze behind you..")
+
+	saynn("It takes a while to force a gesture.. but you nod.. slowly.. subtly. Sofie lets out a sigh of relief behind you.")
+
+	talk(C_OFFICER, "I see. It's just.. would be a shame to see such a treat go to waste.")
+	talk(C_GIRL, "We take good care of {pc.him}.")
+	saynn("The officer nods.. takes a sip of his coffee.. and then carefully unzips his pants, revealing his half-hard member.")
+
+	saynn("Seeing it so close.. makes your mouth watery. Each vein, all the crevices, the pointy tip, the scent.. makes you want to serve.")
+	addContinue("setState", ["ePeekSecondEvent3"])
+
+func ePeekSecondEvent3_state():
+	addChar(C_OFFICER)
+	addChar(C_GIRL)
+	playAnimation(StageScene.ChairOral, "stroke", {pc=C_OFFICER, npc=C_PC, bodyState={showPenis=true,hard=true}, npcBodyState={naked=true, hard=true}})
+	saynn("You get under the table.. and position yourself behind his legs.")
+
+	saynn("His cock is a magnet.. seeing it makes you grasp it with one hand, your digits wrapping around his shaft.")
+
+	saynn("The officer doesn't seem to mind your bravery. You get a glimpse of his smile as he just casually continues to have his dinner.")
+
+	saynn("Seeing no pushback, you push further yourself, your hand moving along the shiny texture, getting that cock nice and hard, watching from up close how it fills with more and more blood, veins inflating, the pointy tip releasing a first drop of precum.")
+
+	talk(C_GIRL, "If you need something, I'm here. Just so you know.")
+	talk(C_OFFICER, "I think all my current needs are satisfied, thank you.")
+	saynn("You keep stroking him off, your hand gliding along his length up and down, his balls tensing up ever so slightly.")
+
+	saynn("While eating his cupcake, some of the crumbs land onto his pants.. but one of the lucky ones ends up directly on his dick, floating in the small pool of his pre.. Makes you want to steal it..")
+	addContinue("setState", ["ePeekSecondEvent4"])
+	
+func ePeekSecondEvent4_state():
+	addChar(C_OFFICER)
+	addChar(C_GIRL)
+	playAnimation(StageScene.ChairOral, "suck", {pc=C_OFFICER, npc=C_PC, bodyState={showPenis=true,hard=true}, npcBodyState={naked=true, hard=true}})
+	saynn("You bring your head closer to the tip of that member.. and then.. with a flick of your tongue.. you catch the crumb that is soaked with his slightly-salty precum.")
+
+	saynn("He notices it.. and purposefully sprinkles a few more of them all around his cock.")
+
+	saynn("And so.. rather than going one by one after them.. you just part your lips and let the whole head of his member inside your mouth, your tongue instantly starts the search, gliding along the pulsing surface, coating it with your saliva.")
+
+	saynn("You get more and more of that dick in, the tip already meets with the back of your mouth and gets guided down your tight throat. Before you trigger your gag reflex, you decide to pull away slightly.. before swallowing some of his cock again.")
+
+	saynn("Your ears pick up on his quiet growl. Each time your tongue flicks against his sensitive tip, his balls tense up again, his shaft feeding you more of his pre.")
+
+	talk(C_OFFICER, "Actually.. Do you have.. chains.. perhaps?")
+	talk(C_GIRL, "Yes, plenty. Mmh, may I ask why do you need them?")
+	saynn("The officer chuckles softly and finishes his coffee in a few gulps.")
+
+	talk(C_OFFICER, "I'd like to enjoy my dessert on the table, not under it.")
+	talk(C_GIRL, "Of course, sir.")
+	addContinue("setState", ["ePeekSecondEvent5"])
+	
+func ePeekSecondEvent5_state():
+	playAnimation(StageScene.SexOralTable, "tease", {pc=C_OFFICER, npc=C_PC, bodyState={showPenis=true, hard=true}, npcBodyState={naked=true, hard=true}})
+	saynn("Sofie returns with the chains.. and helps to tie you up to the table, your head hanging from the edge.")
+
+	talk(C_OFFICER, "Thank you.")
+	saynn("The officer gets up and approaches you.. his hard cock looming over your face, the tip dripping onto your chin.")
+
+	talk(C_OFFICER, "I will try to be careful.")
+	saynn("Slowly, he begins to bury his cock down between your lips, the tip slides past your teeth and brushes against your cushion of a tongue before finding the back of your mouth and curving down your throat.")
+
+	saynn("You can feel it stretching you out.. your fist clench as you try to pull your focus away from your gag reflex. Still, eventually it begins to catch up with you, your throat suddenly clenching around his cock, producing wet gagging noises.")
+
+	talk(C_OFFICER, "Mhh.. that felt good. May I?")
+	saynn("Your fists are still clenched.. but your thumbs perk up..")
+	addContinue("setState", ["ePeekSecondEvent6"])
+
+func ePeekSecondEvent6_state():
+	playAnimation(StageScene.SexOralTable, "suck", {pc=C_OFFICER, npc=C_PC, bodyState={showPenis=true, hard=true}, npcBodyState={naked=true, hard=true}})
+	saynn("The officer proceeds to move his hips, sliding most of his cock out.. before thrusting forward again, stretching your throat further.")
+
+	saynn("His hands land on your neck, getting a feel for that bump that his member is creating while passing by.")
+
+	saynn("You get short glimpses of Sofie. Her mean eyes are silently tracking the main action, making sure you're not completely broken yet.")
+
+	saynn("You gag and choke on that cock more and more.. and yet.. you can't get enough. Lonely tears stream down your cheeks as your throat is being used for his pleasure. Your whole body wants to squirm.. but the chains keep you still for him.")
+
+	talk(C_OFFICER, "Yeah.. such a nice treat. Could use some cream stuffing, huh?")
+	saynn("Yes..")
+	addContinue("setState", ["ePeekSecondEvent7"])
+
+func ePeekSecondEvent7_state():
+	playAnimation(StageScene.SexOralTable, "suckfast", {pc=C_OFFICER, npc=C_PC, bodyState={showPenis=true, hard=true}, npcBodyState={naked=true, hard=true}})
+	saynn("He increases his pace, fucking your throat even faster, really testing your limits. When most of the time, your wind pipe is blocked by a giant cock, the air becomes a very limited supply.. your inner walls clench harder around that shaft, making the guy grunt from pleasure.")
+
+	saynn("You can see his knot inflating.. getting fatter as blood rushes down to his crotch. He makes a few attempts to fit it inside.. but decides against dislocating your jaw.")
+
+	talk(C_OFFICER, "Hope you are ready..")
+	addContinue("setState", ["ePeekSecondEvent8"])
+	
+func ePeekSecondEvent8_state():
+	GM.pc.gotThroatFuckedBy(C_OFFICER)
+	GM.pc.cummedInMouthBy(C_OFFICER)
+	playAnimation(StageScene.SexOralTable, "suckinside", {pc=C_OFFICER, npc=C_PC, bodyState={showPenis=true, hard=true}, npcBodyState={naked=true, hard=true}})
+	saynn("With one last thrust, he shoves most of his length inside, his knot pressing against your lips as his shaft starts to pulse inside your throat.")
+
+	saynn("He throws his head back and growls.. as his cock starts shooting waves of creamy seed down your inner walls, straight into your belly.")
+
+	talk(C_OFFICER, "Ngh-h..")
+	saynn("While he is busy pumping you full of his spunk, you begin to see darkness creeping in around the corners of your vision, everything is getting blurrier. And yet, you continue to serve, eagerly swallowing everything his cock gives you.")
+	addContinue("setState", ["ePeekSecondEvent9"])
+
+func ePeekSecondEvent9_state():
+	playAnimation(StageScene.SexOralTable, "tease", {pc=C_OFFICER, npc=C_PC, bodyState={showPenis=true, hard=true}, npcBodyState={naked=true, hard=true}})
+	saynn("When the officer is done, he finally pulls out, letting you suddenly breathe again. You cough.. you cough a lot.. hungrily grabbing any piece of air you can get.")
+
+	talk(C_OFFICER, "What a treat. Could be the best treat in the whole galaxy.")
+	saynn("Sofie approaches you two.")
+
+	talk(C_GIRL, "I'm glad you have enjoyed our offerings.")
+	saynn("He nods.. and hands her a credits chip.")
+
+	talk(C_OFFICER, "Will this be enough?")
+	saynn("She quickly checks it. There is clearly a big number on it.. and yet.. her lips go narrow.")
+
+	talk(C_GIRL, "Well..")
+	saynn("Without a word extra, the officer just hands a second chip.")
+
+	talk(C_OFFICER, "Best treat, like I said.")
+	saynn("Sofie takes the chip and nods.")
+
+	talk(C_GIRL, "Thank you. I will wrap everything up.")
+	saynn("The officer nods again.. zips his pants.. and starts heading towards the exit, shooting you a quick glance and a smile when he is at the door.")
+	addContinue("setState", ["ePeekSecondEvent10"])
+
+func ePeekSecondEvent10_state():
+	aimCamera(L_SLEEP)
+	playAnimation(StageScene.Duo, "stand", {npc=C_GIRL})
+	saynn("After this dinner, Sofie brings you back into your cell.")
+
+	talk(C_GIRL, "Next time, put a little more passion into it. We got bills to pay.")
+	saynn("You don't respond.. just waiting for her to leave.")
+	
+	gonnaHavePeekEvent = false
+	addAction("Sleep", "Time to sleep", "SLEEP")
