@@ -35,6 +35,9 @@ func _run():
 	if(state == "end_breaklock"):
 		saynn("YOU BROKE THE LOCK AND ESCAPED!")
 		addButton("Continue", "See what happens next", "doEnd")
+	if(state == "end_officer"):
+		saynn("YOU WON BY BECOMING AN OFFICER'S PERSONAL PET!")
+		addButton("Continue", "See what happens next", "doEnd")
 	
 func _react(_action: String, _args):
 	if(_action == "endthescene"):

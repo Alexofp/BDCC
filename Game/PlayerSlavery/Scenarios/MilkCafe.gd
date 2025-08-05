@@ -3236,3 +3236,188 @@ func ePeekSecondEvent10_state():
 	
 	gonnaHavePeekEvent = false
 	addAction("Sleep", "Time to sleep", "SLEEP")
+
+
+
+
+func ePeekThirdEvent_state():
+	playAnimation(StageScene.Duo, "stand", {npc=C_GIRL, bodyState={leashedBy=C_GIRL}})
+	saynn("You knew that Sofie would come for you after the cafe closes for the night. You were waiting for it.")
+
+	talk(C_GIRL, "C'mon, you know the drill.")
+	saynn("She clips a leash to your collar and tugs on it, inviting you to follow.")
+
+	talk(C_GIRL, "I'm expecting a lot of credits. Got it, slut?")
+	saynn("You nod.. what else are you supposed to do.")
+	
+	addContinue("setState", ["ePeekThirdEvent2"])
+
+func ePeekThirdEvent2_state():
+	aimCamera(L_TABLE)
+	addChar(C_OFFICER)
+	addChar(C_GIRL)
+	playAnimation(StageScene.ChairOral, "tease", {pc=C_OFFICER, npc=C_PC, bodyState={showPenis=true,hard=true}, npcBodyState={naked=true, hard=true}})
+	saynn("You follow the greedy girl out into the seating area and approach the usual table. The wolf is already waiting for you.")
+
+	saynn("Gotta earn those credits.. Without any input, you get down to your knees and get under the table, your hands find the zipper and get the officer's balls and sheath out. After some gentle stroking, the tip of his cock starts to peek out.. and then the rest of his shaft follows from you nuzzling it.")
+
+	talk(C_OFFICER, "I thought I'm the hungry one here. Hah.")
+	saynn("Sofie puts on a polite smile, her free hand is now holding a menu.")
+
+	talk(C_GIRL, "Would you like to order something, sir?")
+	talk(C_OFFICER, "You know.. I'm pretty hungry tonight. I could go for a whole cake. Or a pie.")
+	saynn("Sofie raises a brow and clears her throat.")
+
+	talk(C_GIRL, "Hm.. we would have to check if we still have some left.")
+	saynn("While you're busy getting his cock hard with your tongue, he reaches under the table to pat you.")
+
+	talk(C_OFFICER, "No worries. I already have everything I need.")
+	saynn("His smile.. he is about to do something.")
+
+	addContinue("setState", ["ePeekThirdEvent3"])
+
+func ePeekThirdEvent3_state():
+	addChar(C_OFFICER)
+	playAnimation(StageScene.SexOverTable, "tease", {pc=C_OFFICER, npc=C_PC, bodyState={showPenis=true, hard=true}, npcBodyState={naked=true, hard=true}})
+	saynn("The officer grabs the leash and invites you to get from under the table.. before placing you on top of it, your body bent forward, your {pc.thick} ass sticking out.")
+
+	saynn("He rests his hard cock on top of your buns and gently slides back and forth.")
+
+	talk(C_OFFICER, "What a treat, no reason to keep you on the dirty floor. Right?")
+	saynn("You look back over your shoulder.. and see his smile.. as well as Sofie's strict eyes. You nod..")
+
+	saynn("#sex start")
+
+	saynn("The officer brushes the tip of his member over your "+str("holes.. your pussy and tailhole" if GM.pc.hasReachableVagina() else "{pc.anusStretch} tailhole")+".. his pre dripping onto your sensitive flesh. "+str("He ends up guiding his cock down to your needy slit, the tip pressing against the folds.. before spreading them wide." if GM.pc.hasReachableVagina() else "He takes some time teasing you before guiding his cock down to your needy star, the tip pressing against it.. before spreading it slightly.")+"")
+
+	addContinue("setState", ["ePeekThirdEvent4"])
+
+func ePeekThirdEvent4_state():
+	addChar(C_OFFICER)
+	playAnimation(StageScene.SexOverTable, "sex", {pc=C_OFFICER, npc=C_PC, bodyState={showPenis=true, hard=true}, npcBodyState={naked=true, hard=true}})
+	saynn("With a firm thrust, he slides into your "+str("velvet" if GM.pc.hasReachableVagina() else "inviting")+" warmth. Inch by inch, his member is exploring your wet inner walls, getting deeper each time.")
+
+	talk(C_OFFICER, "That's it.. Take it all.")
+	saynn("He sets a slow.. but extremely pleasurable rhythm, each pump sending you further into a mindset of a submissive sex toy.. Little moans escape your mouth while you're getting fucked over the table, your hands holding onto the edges.")
+
+	addContinue("setState", ["ePeekThirdEvent5"])
+
+func ePeekThirdEvent5_state():
+	addChar(C_OFFICER)
+	playAnimation(StageScene.SexOverTable, "fast", {pc=C_OFFICER, npc=C_PC, bodyState={showPenis=true, hard=true}, npcBodyState={naked=true, hard=true}})
+	saynn("It feels good.. for both, you and him. Feeling that your "+str("{pc.pussyStretch} pussy" if GM.pc.hasReachableVagina() else "{pc.analStretch} ass")+" is handling his cock nicely, the guy speeds his pace up, thrusting deeper and harder.")
+
+	talk(C_PC, "Ah.. ah..")
+	talk(C_OFFICER, "Such a nice pussy." if GM.pc.hasReachableVagina() else "Such a nice ass.")
+	saynn("Hearing that.. makes your inner muscles clench, your slick walls hugging his shaft tightly as he keeps fucking you, pushing through the friction.")
+
+	saynn("You won't be able to endure that for very long.. you're about to cum.")
+
+	addContinue("setState", ["ePeekThirdEvent6"])
+
+func ePeekThirdEvent6_state():
+	addChar(C_OFFICER)
+	playAnimation(StageScene.SexOverTable, "inside", {pc=C_OFFICER, npc=C_PC, pcCum=true, npcCum=true, bodyState={showPenis=true, hard=true}, npcBodyState={naked=true, hard=true}})
+	if(GM.pc.hasReachableVagina()):
+		GM.pc.gotVaginaFuckedBy(C_OFFICER)
+		GM.pc.cummedInVaginaBy(C_OFFICER)
+	else:
+		GM.pc.gotAnusFuckedBy(C_OFFICER)
+		GM.pc.cummedInAnusBy(C_OFFICER)
+	GM.pc.orgasmFrom(C_OFFICER)
+	saynn("You feel the base of his cock swell as the knot engorges with blood. Without warning, he pins you harder against the table.. and then shoves his entire length in one powerful thrust.. knot and all.. filling you completely.")
+
+	talk(C_OFFICER, "Grrhh..")
+	talk(C_PC, "Ahhh-h!..")
+	saynn("Warm seed floods your "+str("womb" if GM.pc.hasReachableVagina() else "butt")+" in thick waves, the table shaking from your body squirming, unable to contain this amount of cock.. You cum soon after, your "+str("pussy" if GM.pc.hasReachableVagina() else "tailhole")+" pulsing and clenching around his throbbing knot, milking every drop of his hot cum.")
+
+	saynn("There is too much stimulation.. your eyes keep rolling up as your loud moans echo around the empty cafe.. "+str("Your pussy squirts from your g-spot getting smashed by his fat orb" if GM.pc.hasReachableVagina() else "")+""+str("Your {pc.penis} squirts with {pc.cum} from your prostate getting smashed by his fat orb" if (!GM.pc.hasReachableVagina() && GM.pc.hasPenis()) else "")+""+str("Your tailhole keeps pusling" if (!GM.pc.hasReachableVagina() && !GM.pc.hasPenis()) else "")+", your legs are shaking wildly while the wolf behind you keeps breeding you, his balls emptying up inside you.")
+
+	saynn("When that's done, the two of you tremble on top of the table.. both completely spent.")
+
+	talk(C_OFFICER, "That.. I really needed that.")
+	saynn("While you're still squirming from having his full length inside you, Sofie approaches you two.")
+
+	talk(C_GIRL, "I hope you have been satisfied with our selection.")
+	saynn("He chuckles.")
+
+	talk(C_OFFICER, "I'm still very much hungry, miss.")
+	
+	addContinue("setState", ["ePeekThirdEvent7"])
+	
+func ePeekThirdEvent7_state():
+	addChar(C_OFFICER)
+	playAnimation(StageScene.SexOverTable, "lick", {pc=C_OFFICER, npc=C_PC, bodyState={showPenis=true, hard=true}, npcBodyState={naked=true, hard=true}})
+	saynn("He yanks his knot out of your "+str("pussy" if GM.pc.hasReachableVagina() else "ass")+".. before getting down to his knees and shoving his face into your "+str("crotch" if GM.pc.hasReachableVagina() else "butt")+".")
+
+	saynn("The wolf.. he starts eating you out.. you can feel his powerful tongue slide over your "+str("folds" if GM.pc.hasReachableVagina() else "tailhole")+".. before penetrating the creamed hole and proceeding to lap away at the inner wall.")
+
+	talk(C_GIRL, "Of course, sir. Enjoy your.. cake.")
+	saynn("And so he does, licking you out from the inside, thrusting his tongue in and out, swallowing your juices.. as well as his own seed. Looks like the guy is not the picky kind..")
+
+	saynn("Getting treated like this.. feels nice.. your soft moans keep him hungry for more. He leaves the cream that's inside you mostly in-tact.. and just finishes by glazing your "+str("folds" if GM.pc.hasReachableVagina() else "star")+" a bit more, dragging his tongue along the contours.")
+
+	saynn("When he is done, he gets up and gently gropes your rear.")
+
+	talk(C_OFFICER, "So tasty.")
+	
+	addContinue("setState", ["ePeekThirdEvent8"])
+	
+func ePeekThirdEvent8_state():
+	addChar(C_OFFICER)
+	addChar(C_GIRL)
+	playAnimation(StageScene.Duo, "stand", {pc=C_OFFICER, npc=C_GIRL})
+	saynn("The wolf turns towards the girl and starts reaching into his pockets, producing some credit chips.")
+
+	saynn("But before he hands them to the lady.. he stops. A slight twitch of Sofie's brows is followed by her puffing her lips.")
+
+	talk(C_OFFICER, "I'm aware of your cafe's.. situation.")
+	saynn("Sofie tilts her head a bit, slightly worried now.")
+
+	talk(C_GIRL, "What do you mean exactly?")
+	talk(C_OFFICER, "The numerous debts. You did what you did.. to survive. You resorted to using illegal slaves.")
+	saynn("He gives you a quick glance. You're still on the table, panting heavily..")
+
+	saynn("Sofie blinks many times.. you can just tell that her heart is now beating faster than yours. Leo approaches the table as well, listening carefully.")
+
+	talk(C_GIRL, "Uh.. there was.. no other choice really.")
+	talk(C_OFFICER, "I ain't planning to blackmail you, don't worry. And you ain't going to jail, not because of me. What I want to do.. is make an offer.")
+	saynn("Leo and Sofie look at each other.")
+
+	talk(C_GUY, "An offer?")
+	talk(C_OFFICER, "I give you enough credits to pay off your debts. A clean slate, a new life. And in exchange..")
+	saynn("His manly hand lands on your back.. and gently strokes it.")
+
+	talk(C_OFFICER, "I get to keep this cutie pie.")
+	saynn("Leo and Sofie look at each other again, their eyes huge. They just can't believe it.")
+
+	talk(C_GUY, "Oh..")
+	saynn("There is a short silence.. as the gears in the girl's head turn.")
+
+	talk(C_GIRL, "How about.. ten percent on top maybe?.. We will really-really miss this cutie pie.")
+	talk(C_GUY, "Sofie..")
+	talk(C_GIRL, "Tshhh.. shut up..")
+	saynn("Really? Even the wolf is stunned by the haggling attempts.")
+
+	talk(C_OFFICER, "I can give five.")
+	talk(C_GIRL, "Deal.")
+	saynn("The officer pulls out a few more colorful credit chips.. makes sure the sum is correct.. and then hands them to Sofie. In exchange, she hands the leash to your collar.")
+
+	saynn("After the deal is done, the pair quickly retracts into the kitchen. Only Leo gives you a final goodbye wave of his hand.. before Sofie pulls him out of view.")
+
+	addContinue("setState", ["ePeekThirdEvent9"])
+
+func ePeekThirdEvent9_state():
+	addChar(C_OFFICER)
+	playAnimation(StageScene.Duo, "stand", {npc=C_OFFICER, bodyState={leashedBy=C_OFFICER}})
+	aimCamera(L_DOCKS)
+	saynn("The officer helps you to get up.. and then clips a leash to your collar..")
+
+	talk(C_OFFICER, "Well.. let's go then.")
+	saynn("You nod and follow the wolf down into the docks. As you look through the window, you see his ship.. it's huge.. barely fitting.")
+
+	saynn("Your eyes pick up on the AlphaCorp emblems everywhere. Whoever he is, he must be someone high on the food chain.")
+
+	saynn("You approach the docking port. He opens the airlock.. and invites you in. You give the cafe the last glimpse.. before stepping inside.")
+
+	addContinue("ENDING", ["end_officer"])
