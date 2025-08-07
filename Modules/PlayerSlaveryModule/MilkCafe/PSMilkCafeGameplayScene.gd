@@ -27,11 +27,83 @@ func _run():
 				else:
 					addButtonAt(theIndx, actionName, actionDesc, "doAction", [actionEntry])
 	if(state == "end_credits"):
-		saynn("YOU WON!")
-		addButton("Continue", "See what happens next", "doEnd")
-	if(state == "end_annoying"):
-		saynn("YOU ANNOYED THE OWNERS UNTIL THEY DECIDED TO LET YOU GO! YOU WON.")
-		addButton("Continue", "See what happens next", "doEnd")
+		addCharacter("psmilkgirl")
+		addCharacter("psmilkguy")
+		playAnimation(StageScene.Duo, "stand", {npc="psmilkguy"})
+		saynn("Before you can exit your cell, the two owners step inside.")
+
+		saynn("[say=pc]Is it milking time already?[/say]")
+
+		saynn("[say=psmilkguy]Well.. not exactly.[/say]")
+
+		saynn("A little suspicious. But they seem pretty happy.")
+
+		saynn("[say=psmilkguy]We actually wanted to tell you.. that we have paid all our debts. We're free![/say]")
+
+		saynn("Sofie nods.")
+
+		saynn("[say=pc]That's nice. I'm happy for you two.[/say]")
+
+		saynn("[say=psmilkgirl]Buying you was the right choice. And it was my choice.[/say]")
+
+		saynn("[say=psmilkguy]Yeah, yeah. But now we.. kinda don't need you anymore.[/say]")
+
+		saynn("[say=pc]Uh..[/say]")
+
+		saynn("Sofie licks her lips and smiles.")
+
+		saynn("[say=psmilkgirl]If we were gonna butcher you, we would have brought some knives. Relax, we're gonna set you free.[/say]")
+
+		saynn("[say=psmilkguy]We are very grateful. You gave us a chance to start from a clean slate. No more crime from now on. No more milking slaves.[/say]")
+
+		saynn("Somehow you doubt that they will last much.. but who knows.")
+
+		saynn("[say=psmilkgirl]I was gonna sell you all at the auction again. But Leo talked me out of it.[/say]")
+
+		saynn("They smooch each other. She really changed. Indeed.")
+
+		saynn("[say=pc]I can't really go anywhere because of my collar.[/say]")
+
+		saynn("[say=psmilkguy]Oh, right. You came with some kind of jamming equipment. Do you wanna stay?[/say]")
+
+		saynn("Sofie squints towards her partner. She clearly wants you to leave.")
+
+		saynn("[say=pc]I guess there is no point in running for me.[/say]")
+
+		saynn("Back to the prison it is.. At least you're not getting sold into slavery again.")
+
+		saynn("You say your goodbyes and prepare to leave.")
+
+		addButton("Continue", "See what happens next", "credits_detective")
+	if(state == "credits_detective"):
+		removeCharacter("psmilkguy")
+		removeCharacter("psmilkgirl")
+		playAnimation(StageScene.Solo, "sit")
+		aimCameraAndSetLocName("intro_interogation")
+		addCharacter("intro_detective")
+		saynn("Hours later.. and you're already sitting in a familiar chair.")
+
+		saynn("[say=intro_detective]And so you're saying that you don't recall anything about what happened in the last few weeks? And why your collar tracking suddenly began working again?[/say]")
+
+		saynn("Sterile lights irritate your eyes that long have forgotten how it feels.. to be in a well-lit room.")
+
+		saynn("[say=pc]I don't remember it, yeah.[/say]")
+
+		saynn("It'd be very easy to snitch on Leo and Sofie. But what's the point?")
+
+		saynn("[say=intro_detective]Do you remember that you somehow managed to escape one of the most secure prisons in the galaxy?[/say]")
+
+		saynn("[say=pc]Sorry, I just can't seem to remember.[/say]")
+
+		saynn("He hums, tapping against the table with his pen. Then he leans a bit closer.")
+
+		saynn("[say=intro_detective]Helping me understand what happened is in our best interest. You're giving me nothing and that makes you seem like a bad person. You don't want the judges to think that you're a bad person, do you? Maybe you just made some mistakes, it's understandable. I can help you. But only if you help me first.[/say]")
+
+		saynn("[say=pc]I know how it will end. Just put me back where I belong.[/say]")
+
+		saynn("Jake tilts his head slightly at first.. but then he just nods.")
+
+		addButton("Continue", "See what happens next", "in_bdcc")
 	if(state == "end_breaklock"):
 		saynn("YOU BROKE THE LOCK AND ESCAPED!")
 		addButton("Continue", "See what happens next", "doEnd")
@@ -161,6 +233,184 @@ func _run():
 		saynn("You're back in your cell. Home, sweet home.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	
+	if(state == "end_annoying"):
+		addCharacter("psmilkgirl")
+		addCharacter("psmilkguy")
+		playAnimation(StageScene.Duo, "defeat", {npc="psmilkgirl", npcAction="shove"})
+		saynn("Before you can fully get up, Sofie rushes into your cell and shoves you back down to the ground. Leo joins too, grabbing Sofie's arm and pulling her away from you.")
+
+		saynn("[say=psmilkguy]Sofie! Stop.[/say]")
+
+		saynn("[say=psmilkgirl]LET ME GO, YOU SPINELESS. I'M GONNA FUCKING KILL THEM.[/say]")
+
+		saynn("Wow. Wow-w-w. You get back a few steps, away from the crazy bitch.")
+
+		saynn("Leo still tries to hold Sofie.")
+
+		saynn("[say=psmilkguy]If you kill {pc.him}, how are we gonna pay our debts? And killing is also.. bad.. you know?[/say]")
+
+		saynn("[say=psmilkgirl]I DON'T EVEN CARE ANYMORE. I JUST HATE THEM. I WANT THEM GONE. DEAD. THROWN OUT INTO SPACE LIKE A PIECE OF THRASH THAT THEY ARE. NOTHING BUT TROUBLE CAME FROM THEM.[/say]")
+
+		saynn("That's not nice..")
+
+		addButton("Continue", "See what happens next", "annoy_shittalk")
+	if(state == "annoy_shittalk"):
+		playAnimation(StageScene.Duo, "stand", {pc="psmilkguy", npc="psmilkgirl"})
+		saynn("Sofie scratches her partner with her claws, trying to break free. The blood gets spilled.. at least it's not yours.")
+
+		saynn("[say=psmilkguy]Ow.. I'm sorry, Sofie. This feeling will pass, just try to relax.. breathe in and out, sweetie, please.[/say]")
+
+		saynn("You look behind the two and realize.. They left the door out of this basement open. This could be your chance.. unless this crazy bitch actually manages to break free.")
+
+		saynn("[say=psmilkgirl]LET ME GO ALREADY, YOU LIMP DICK LOOSER. IT'S ALL YOUR FAULT.[/say]")
+
+		saynn("[say=psmilkguy]Don't say that, sweetheart. And we were choosing the slaves together.. we didn't have much of a choice.. remember our financial situation?[/say]")
+
+		saynn("Sofie stops trying to kill you and instead glares at her partner.")
+
+		saynn("[say=psmilkgirl]SO YOU'RE SAYING I'M TO BLAME? IT'S MY FAULT WE'RE HERE IN THIS SHITHOLE OF A CAFE?[/say]")
+
+		saynn("[say=psmilkguy]Try to relax, you're not thinking straight. I'm not saying you're to blame. You're not, love.. It's just.. We both share some of it. Also, ouch..[/say]")
+
+		saynn("Somehow, the guy is still trying to keep himself composed. You're not sure if you should feel sorry or be impressed.")
+
+		saynn("[say=psmilkgirl]I DON'T SHARE SHIT. THINKING STRAIGHT? YOU'RE THE MOST GAY ONE HERE, BEGGING FOR MY STRAP LIKE A FUCKING SLUT. I SHOULD HAVE JUST MADE YOU ONE OF THE SLAVES. YOU'D BE WAY MORE USEFUL THEN, YOU FUCKING IDIOT.[/say]")
+
+		saynn("[say=psmilkguy]Try to calm down, we can talk it through like adults. I really don't like what you're saying, please.[/say]")
+
+		saynn("It's great that they're busy arguing with each other.. but they're still blocking the only exit.")
+
+		saynn("[say=psmilkgirl]FUCK YOU. WHAT ARE YOU GONNA DO? HUH? YOU'RE JUST A BETA BITCH, A PUSHOVER, A STRAP-HUNGRY WHORE.[/say]")
+
+		saynn("[say=psmilkguy]My interests or personality have nothing to do with this.[/say]")
+
+		saynn("So much yelling makes your ears hurt. Soon they will start bleeding.")
+
+		saynn("[say=psmilkgirl]MAN UP ALREADY. FIND SOME FUCKING BALLS AT LEAST, I KNOW YOU CAN'T GROW ANY.[/say]")
+
+		saynn("[say=psmilkguy]..At least I'm not the one who gambled all our savings away.[/say]")
+
+		saynn("Ooh.")
+
+		addButton("Continue", "See what happens next", "annoy_firstslap")
+	if(state == "annoy_firstslap"):
+		playAnimation(StageScene.Duo, "stand", {pc="psmilkguy", npc="psmilkgirl", npcAction="defeat"})
+		saynn("[say=psmilkgirl]What? REALLY? TRYING TO PUSH THE BLAME ONTO ME, AGAIN? WHAT A FAILURE OF A MAN.[/say]")
+
+		saynn("A loud slap echoes around the whole freezer.. Sofie grabs onto her red cheek.")
+
+		saynn("[say=psmilkgirl]Did you just..[/say]")
+
+		saynn("Another slap makes her other cheek the same color. Sofie collapses down to her knees, her expression.. priceless.")
+
+		saynn("[say=psmilkguy]Shut your mouth, please. I'm so tired of your screaming.[/say]")
+
+		saynn("Sofie is shaking..")
+
+		saynn("[say=psmilkgirl]You.. YOU LITTLE..[/say]")
+
+		saynn("A third slap.. that one looked like it hurt.")
+
+		saynn("[say=psmilkguy]Quiet, I said, just stop shouting to listen to me, for once. I would really hate to use a fucking cattle prod on the love of my life.[/say]")
+
+		saynn("Sofie's lips are trembling as she rubs her red cheeks.")
+
+		saynn("[say=psmilkguy]I tried to be peaceful. I thought that this.. state of yours.. would pass eventually. I thought that it's just the tough times that have caused this. I remember the times where you were acting nice to me.. I cherish those moments. I dreamed of them coming back.[/say]")
+
+		saynn("Slowly, you follow the wall of the cell towards the exit, one step at a time.")
+
+		saynn("[say=psmilkguy]I'm the dumb one here, I know. You can't find a guy who is more stupid than me. I fucking love you, even though you clearly hate me.[/say]")
+
+		saynn("Love is a powerful force, huh.")
+
+		saynn("[say=psmilkguy]I'm not perfect, I made my share of mistakes. I have forgiven you for spending all my savings on gambling. I have even forgiven you for cheating on me with that guy who visits us ever so often and just laughs his ass off behind my back. I agreed to break the law with you and visit that shady-ass Blacktail market. Multiple times. Wow.. What was I thinking?[/say]")
+
+		saynn("Buying you was clearly their biggest mistake.")
+
+		saynn("[say=psmilkguy]But you.. You have bigger problems, Sofie. You are sick in your head. And there is nothing I can do to change that. I can't help you. I don't want to anymore. I hate you.[/say]")
+
+		saynn("Sofie is just blinking a lot, speechless.")
+
+		saynn("[say=psmilkguy]I thought the tough times have caused this.. But they just revealed who you really are.[/say]")
+
+		saynn("You get closer and closer to the exit.")
+
+		saynn("[say=psmilkguy]Do me a favor. Get some help. But not from me. I'm done. Officially. I'm fucking done dealing with your bullshit.[/say]")
+
+		saynn("[say=psmilkgirl]L-Leo.[/say]")
+
+		saynn("[say=psmilkguy]SHUT UP, Sofie. Shut your whore's mouth. Don't make it worse, you did enough.[/say]")
+
+		saynn("They're both busy with each other, barely paying any attention to the surroundings. Now seems like as good of a time as any to make your escape.")
+
+		addButton("Sneak out", "Time to go!", "annoy_sneakout")
+	if(state == "annoy_sneakout"):
+		removeCharacter("psmilkguy")
+		removeCharacter("psmilkgirl")
+		aimCameraAndSetLocName("pscafe_counter")
+		playAnimation(StageScene.Solo, "stand")
+		saynn("You manage to sneak out of the fridge and head towards the door that they have forgotten to close. You still hear some of the pair arguing.")
+
+		saynn("[say=psmilkguy]If I had my ring, I would have thrown it out into the trash right now. But I pawned it. Just so we'd be able to keep this dream afloat for a little longer. Gosh, I'm so fucking stupid.[/say]")
+
+		saynn("As you step out, the bright lights of the small kitchen and the seating area hit you.. It's early morning so there aren't any customers here yet.")
+
+		saynn("You are still naked.. would be nice if you weren't. You look around but all you can find is an apron.. That's better than nothing.")
+
+		saynn("You approach the counter and hop over it. It would be nice to get some credits from the digital cash register.. but it's locked.")
+
+		addButton("Docks", "Head towards the docks", "annoy_docks")
+	if(state == "annoy_docks"):
+		aimCameraAndSetLocName("pscafe_docks")
+		saynn("With nothing better to do, you head towards the docks.")
+
+		saynn("It's a small series of corridors, each one ending with a docking port. Not much you can do unless you have a spaceship.. and last time you checked, you didn't..")
+
+		saynn("The best thing you can do.. is just wait really.")
+
+		addButton("Wait", "See what happens next", "annoy_get_helped")
+	if(state == "annoy_get_helped"):
+		saynn("After some minutes, the first clients actually begin to dock.")
+
+		saynn("You stop them.. and do your best to explain your situation.. and that you really need a ride somewhere safe.")
+
+		saynn("The first clients seemingly just ignore you.. probably thinking you're some homeless space junkie. But one kind soul offers to help.")
+
+		saynn("You board their ship.. and watch through the ship's window as the cafe gets smaller and smaller.")
+
+		saynn("Freedom. Or so it seems.")
+
+		saynn("Sadly, it doesn't last long.")
+
+		saynn("Soon enough, your spaceship gets stopped by one of the AlphaCorp patrols. Somehow, they knew to check you exactly.")
+
+		saynn("One awkward attempt at fighting back later.. and you're in cuffs.")
+
+		addButton("Continue", "See what happens next", "annoy_detective")
+	if(state == "annoy_detective"):
+		addCharacter("intro_detective")
+		playAnimation(StageScene.Solo, "sit")
+		aimCameraAndSetLocName("intro_interogation")
+		saynn("[say=intro_detective]And so you're saying that you don't recall anything about what happened in the last few days?[/say]")
+
+		saynn("Sterile lights irritate your eyes that long have forgotten how it feels.. to be in a well-lit room.")
+
+		saynn("[say=pc]You say days but it could have been weeks or months, I don't remember shit.[/say]")
+
+		saynn("[say=intro_detective]Do you remember that you somehow managed to escape one of the most secure prisons in the galaxy?[/say]")
+
+		saynn("[say=pc]I was in a prison? Wow. I only saw prisons in my nightmares.[/say]")
+
+		saynn("He hums, tapping against the table with his pen. Then he leans a bit closer.")
+
+		saynn("[say=intro_detective]Helping me understand what happened is in our best interest. You're giving me nothing and that makes you seem like a bad person. You don't want the judges to think that you're a bad person, do you? Maybe you just made some mistakes, it's understandable. I can help you. But only if you help me first.[/say]")
+
+		saynn("[say=pc]You really need new lines, want me to help you come up with some new ones?[/say]")
+
+		saynn("Jake tilts his head slightly at first.. but then his expression switches to a very mean one.")
+
+		addButton("Continue", "See what happens next", "in_bdcc")
 	
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
