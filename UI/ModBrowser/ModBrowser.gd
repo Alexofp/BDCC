@@ -32,10 +32,10 @@ func resetMods():
 	Util.delete_children(modList)
 	allMods.clear()
 
-func updateModList():
+func updateModList(modsArray = allMods):
 	visualModEntries.clear()
 	Util.delete_children(modList)
-	for modEntry in allMods:
+	for modEntry in modsArray:
 		var newBrowserEntry = modEntryScene.instance()
 		modList.add_child(newBrowserEntry)
 		newBrowserEntry.setModEntry(modEntry)
@@ -198,3 +198,19 @@ func _on_CloseButton_pressed():
 
 func _on_RichTextLabel_meta_clicked(meta):
 	var _ok = OS.shell_open(meta)
+
+
+func _on_ModSearch_text_changed(new_text: String):
+	if new_text.length() > 2:
+		var modsFound = []
+		for mod in allMods:
+			if new_text.begins_with("@"):
+				if mod.author.to_lower().find(new_text.to_lower().trim_prefix("@")) != -1:
+					modsFound.append(mod)
+			else:
+				if new_text.to_lower() in mod.name.to_lower():
+					modsFound.append(mod)
+		updateModList(modsFound)
+	if new_text.length() == 0:
+		updateModList()
+	
