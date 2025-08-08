@@ -96,8 +96,15 @@ margin_right = 277.0
 margin_bottom = 20.0
 text = "Oldest first"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+[node name="ModSearch" type="LineEdit" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
 margin_top = 42.0
+margin_right = 411.0
+margin_bottom = 66.0
+max_length = 256
+placeholder_text = "Search Mod..."
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+margin_top = 70.0
 margin_right = 411.0
 margin_bottom = 654.0
 size_flags_horizontal = 3
@@ -106,7 +113,7 @@ script = ExtResource( 2 )
 
 [node name="ModList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer"]
 margin_right = 411.0
-margin_bottom = 612.0
+margin_bottom = 584.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -187,5 +194,6 @@ dialog_autowrap = true
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/HFlowContainer/SortNameButton" to="." method="_on_SortNameButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/HFlowContainer/SortNewestFirstButton" to="." method="_on_SortNewestFirstButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/HFlowContainer/SortOldestFirstButton" to="." method="_on_SortOldestFirstButton_pressed"]
+[connection signal="text_changed" from="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ModSearch" to="." method="_on_ModSearch_text_changed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/DownloadModButton" to="." method="_on_DownloadModButton_pressed"]
 [connection signal="meta_clicked" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]

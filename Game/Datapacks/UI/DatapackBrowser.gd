@@ -53,11 +53,11 @@ func resetMods():
 	Util.delete_children(modList)
 	allDatapacks.clear()
 
-func updateModList():
+func updateModList(datapacksArray = allDatapacks):
 	datapackLinks = {}
 	visualModEntries.clear()
 	Util.delete_children(modList)
-	for modEntry in allDatapacks:
+	for modEntry in datapacksArray:
 		var newBrowserEntry = datapackEntryScene.instance()
 		modList.add_child(newBrowserEntry)
 		newBrowserEntry.id = modEntry["id"]
@@ -333,3 +333,18 @@ func _on_OpenFullButton_pressed():
 func _on_CloseFullButton_pressed():
 	$FullTextureRect.texture = null
 	$FullTextureRect.visible = false
+
+
+func _on_DatapackSearch_text_changed(new_text):
+	if new_text.length() > 2:
+		var datapacksFound = []
+		for dp in allDatapacks:
+			if new_text.begins_with("@"):
+				if dp.author.to_lower().find(new_text.to_lower().trim_prefix("@")) != -1:
+					datapacksFound.append(dp)
+			else:
+				if new_text.to_lower() in dp.name.to_lower():
+					datapacksFound.append(dp)
+		updateModList(datapacksFound)
+	if new_text.length() == 0:
+		updateModList()
