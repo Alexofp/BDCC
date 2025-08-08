@@ -104,9 +104,7 @@ func _run():
 		saynn("Jake tilts his head slightly at first.. but then he just nods.")
 
 		addButton("Continue", "See what happens next", "in_bdcc")
-	if(state == "end_breaklock"):
-		saynn("YOU BROKE THE LOCK AND ESCAPED!")
-		addButton("Continue", "See what happens next", "doEnd")
+
 	if(state == "end_officer"):
 		playAnimation(StageScene.Duo, "kneel", {npc="psmilkofficer", npcAction="sit", bodyState={leashedBy="psmilkofficer"}})
 		saynn("The officer brings you onto his ship and shows you around. Quite spacious for a ship that doesn't require any extra crew..")
@@ -269,7 +267,7 @@ func _run():
 
 		saynn("Sofie stops trying to kill you and instead glares at her partner.")
 
-		saynn("[say=psmilkgirl]SO YOU'RE SAYING I'M TO BLAME? IT'S MY FAULT WE'RE HERE IN THIS SHITHOLE OF A CAFE?[/say]")
+		saynn("[say=psmilkgirl]SO YOU'RE SAYING I'M TO BLAME? IT'S MY FAULT WE'RE HERE IN THIS SHITHOLE OF A CAFE? I’M THE ONLY ONE WHO KEEPS THIS FAILED BUSINESS STILL RUNNING. ME.[/say]")
 
 		saynn("[say=psmilkguy]Try to relax, you're not thinking straight. I'm not saying you're to blame. You're not, love.. It's just.. We both share some of it. Also, ouch..[/say]")
 
@@ -411,7 +409,264 @@ func _run():
 		saynn("Jake tilts his head slightly at first.. but then his expression switches to a very mean one.")
 
 		addButton("Continue", "See what happens next", "in_bdcc")
-	
+
+
+	if(state == "end_breaklock"):
+		playAnimation(StageScene.Solo, "stand")
+		saynn("The padlock isn't holding the door closed anymore.. which means that the freedom is near.")
+
+		saynn("You look through the slit and wait for a good moment..")
+
+		saynn("But then..")
+
+		addButton("Continue", "See what happens next", "lock_pip")
+	if(state == "lock_pip"):
+		addCharacter("pspip")
+		playAnimation(StageScene.Duo, "stand", {npc="pspip"})
+		saynn("Before you commit, a hand lands on your shoulder and pulls you back.")
+
+		saynn("You were about to throw a punch.. but then you see who it is.")
+
+		saynn("[say=pspip]Tshh. I think this is a dumb idea.[/say]")
+
+		saynn("[say=pc]Getting out of here is a dumb idea? You can stay here if you want, Pip.[/say]")
+
+		saynn("[say=pspip]No, doing it alone is a dumb idea. One versus two. I wanna help even up the chances.[/say]")
+
+		saynn("That doesn't seem like a bad idea.")
+
+		saynn("[say=pc]Alright.[/say]")
+
+		saynn("Pip peeks his head out slightly, observing the surroundings.")
+
+		saynn("[say=pspip]The girl is standing behind the counter, the guy is serving the tables. I'm pretty sure that one of them has a cattle prod, usually him. Hurts like shit, enough to bring us down.[/say]")
+
+		saynn("A voice from behind..")
+
+		saynn("[say=psmilka]Cattle prod?[/say]")
+
+		addButton("Continue", "See what happens next", "lock_milka")
+	if(state == "lock_milka"):
+		addCharacter("pspip")
+		playAnimation(StageScene.Duo, "stand", {npc="psmilka", pc="pspip"})
+		saynn("Sneaky Milka makes both of you jump..")
+
+		saynn("[say=pspip]God dammit Milka.[/say]")
+
+		saynn("[say=psmilka]Moo? Whatcha doing?[/say]")
+
+		saynn("Her ears perked up curiously.")
+
+		saynn("[say=pspip]We're.. gonna steal some ice-cream. To do that, we need to sneak by the owners without them noticing.[/say]")
+
+		saynn("[say=psmilka]Ohh.. Are you trying to escape?[/say]")
+
+		saynn("Pip looks at you, confused.")
+
+		saynn("[say=pc]Yeah.[/say]")
+
+		saynn("Milka blinks a few times, the corners of her mouth turning down.")
+
+		saynn("[say=psmilka]I'm missing my old farm.. I wanna help![/say]")
+
+		saynn("Pip covers her mouth.")
+
+		saynn("[say=pspip]Tshh, quiet. One of them has a weapon, probably the guy. That cattle prod can bring all of us down.[/say]")
+
+		saynn("A visible shiver runs through Milka.")
+
+		saynn("[say=psmilka]Cattle prod..[/say]")
+
+		saynn("She winces just thinking about it.")
+
+		saynn("[say=psmilka]I think I can take it..[/say]")
+
+		saynn("[say=pspip]Are you sure, Milka? It will be set to its most painful setting.[/say]")
+
+		saynn("Milka stares at the walls of this basement for a few long seconds.")
+
+		saynn("[say=psmilka]Yeah..[/say]")
+
+		saynn("Having two friends by your sides.. makes this three versus two.")
+
+		saynn("[say=pc]Hm. I wonder if we can..[/say]")
+
+		saynn("[say=pspip]Change the plan? We might be able to. Here is what I'm thinking..[/say]")
+
+		saynn("You discuss the best way to handle this.. and then.. you get into your positions.")
+
+		saynn("Time to do this.")
+
+		addButton("Continue", "See what happens next", "lock_start")
+	if(state == "lock_start"):
+		playAnimation(StageScene.Solo, "stand", {pc="psmilka"})
+		saynn("The cafe is going through its normal routine. Customers ordering food and consuming it behind the tables. Sofie is taking in the orders.. before handing them to Leo who prepares and hands them out.")
+
+		saynn("Suddenly, the door at the end of the kitchen opens up.. the one that leads to the basement. It reveals.. a curious busty puppy.")
+
+		saynn("[say=psmilka]Moo?[/say]")
+
+		saynn("She steps out into the kitchen and kicks the broken padlock for a bit.")
+
+		addButton("Continue", "See what happens next", "lock_sofie")
+	if(state == "lock_sofie"):
+		addCharacter("psmilkgirl")
+		playAnimation(StageScene.Duo, "stand", {pc="psmilka", npc="psmilkgirl"})
+		aimCameraAndSetLocName("pscafe_center")
+		saynn("Milka wanders around the kitchen more, sniffing all the various cooking equipment.")
+
+		saynn("It doesn't take long before she gets spotted by Sofie..")
+
+		saynn("[say=psmilkgirl]Hey! No-no-no-no. Bad, the fuck are you doing here.[/say]")
+
+		saynn("[say=psmilka]Moo-o?[/say]")
+
+		saynn("As Sofie starts creeping towards Milka, she keeps stepping back.. until she ends up back in the basement.")
+
+		saynn("[say=psmilkgirl]Did you really break the padlock? What a dumb fucking animal, you need to be taught a good lesson.[/say]")
+
+		saynn("She turns around and yells towards the kitchen.")
+
+		saynn("[say=psmilkgirl]Leo! Come here, you lazy fuck.[/say]")
+
+		addButton("Continue", "See what happens next", "lock_leo")
+	if(state == "lock_leo"):
+		addCharacter("psmilkguy")
+		playAnimation(StageScene.Duo, "stand", {pc="psmilka", npc="psmilkguy"})
+		aimCameraAndSetLocName("pscafe_field2")
+		saynn("Leo quickly rushes down to the basement.")
+
+		saynn("[say=psmilkguy]Why is the door broken?[/say]")
+
+		saynn("[say=psmilkgirl]That's because this dumb bitch broke it.[/say]")
+
+		saynn("Milka puts on her big puppy eyes, her arms squeezing her breasts.")
+
+		saynn("[say=psmilka]Moo?..[/say]")
+
+		saynn("[say=psmilkgirl]She completely lost her mind by now it seems. Whatever. Hit her with the pain stick. As hard as your tiny balls will let you.[/say]")
+
+		saynn("Milka shivers when hearing that, she keeps backing away, now stepping onto the grass of the small garden.")
+
+		saynn("[say=psmilka]Moo-o![/say]")
+
+		saynn("Leo pulls out his cattle prod.. but he deliberates.")
+
+		saynn("[say=psmilkguy]Are you sure, Sofie? I feel like she got the lesson already. Right, Milka?[/say]")
+
+		saynn("The puppy nods eagerly.")
+
+		saynn("[say=psmilkgirl]Hit her or give me the stick and go away already, I'm getting sick of your softness towards mindless animals.[/say]")
+
+		saynn("Leo squeezes the weapon tighter.")
+
+		saynn("[say=psmilkguy]You're right, Sofie. We gotta punish her.[/say]")
+
+		saynn("Milka backs herself into a corner.. and moos sadly.. while Leo is approaching her.. and Sofie is watching from behind.")
+
+		saynn("[say=psmilka]Moo-o..[/say]")
+
+		saynn("Leo raises the cattle prod..")
+
+		saynn("You gesture to Pip..")
+
+		addButton("Continue", "See what happens next", "lock_ambush")
+	if(state == "lock_ambush"):
+		playAnimation(StageScene.SexCowgirlChoke, "tease", {pc="psmilkgirl", npc="pspip"})
+		saynn("Pip sneaks up behind Sofie and yanks on her hair, bringing her down to the floor and pinning her in place.")
+
+		saynn("[say=psmilkgirl]ARGH-H! YOU BITCH![/say]")
+
+		saynn("[say=pspip]Got you.[/say]")
+
+		saynn("Leo turns around.. and sees her partner in trouble.")
+
+		addButton("Continue", "See what happens next", "lock_maybefight")
+	if(state == "lock_maybefight"):
+		playAnimation(StageScene.Duo, "stand", {npc="psmilkguy"})
+		saynn("You step out and stand between Leo and Sofie, blocking the path.")
+
+		saynn("[say=pc]What are you gonna do without your girl now?[/say]")
+
+		saynn("Sofie is trying to break free.. but Pip seems to be strong enough to hold her.")
+
+		saynn("[say=psmilkgirl]LEO! GET THIS FUCKER OFF ME! SHOCK HIS FUCKING BALLS OFF![/say]")
+
+		saynn("Leo's eyes go wide, he squeezes his cattle prod like it's his last hope, switching it to its most painful setting.")
+
+		saynn("[say=psmilkguy]Let go of her! This will hurt a lot.[/say]")
+
+		saynn("And since you're naked, you can't even block it. Still, you raise your clenched fists, preparing for a fight.")
+
+		saynn("[say=pc]Try and hit me then.[/say]")
+
+		saynn("He furrows his brows.. and starts approaching you, his weapon creating scary sparks.")
+
+		addButton("Continue", "See what happens next", "lock_milkasaves")
+	if(state == "lock_milkasaves"):
+		playAnimation(StageScene.Duo, "defeat", {pc="psmilka", npc="psmilkguy", npcAction="stunbaton"})
+		saynn("Leo raises the cattle prod and swings his arm to strike you..")
+
+		saynn("But just before it connects with your skin, Milka suddenly gets into the way and takes the hit instead!")
+
+		saynn("[say=psmilka]Ahh-hh!..[/say]")
+
+		saynn("She cries out from pain as she drops onto the floor, the shock making her body convulse, her every muscle has started spazzing uncontrollably.")
+
+		saynn("While the guy is confused, you smack the weapon out of his hand and shove him down to the floor!")
+
+		addButton("Continue", "See what happens next", "lock_tieup")
+	if(state == "lock_tieup"):
+		playAnimation(StageScene.Hogtied, "idle", {pc="psmilkguy"})
+		saynn("You quickly go through his things and find some zip ties that you use to tie him up. You toss some to Pip and watch as he does the same with Sofie's wrists and ankles.")
+
+		saynn("[say=psmilkguy]Oh shit..[/say]")
+
+		saynn("[say=psmilkgirl]USELESS! ALL OF YOU! FUCK ME, I'VE NEVER SEEN ANYONE WHO IS MORE PATHETIC THAN YOU, LEO![/say]")
+
+		saynn("You rush to Milka and check if she is okay.")
+
+		saynn("[say=pc]Milka?..[/say]")
+
+		saynn("[say=psmilka]..moo-o.. pain..[/say]")
+
+		saynn("At least she is breathing. You hug the poor pup.. and notice that her breasts are leaking milk even from a slight pressure.")
+
+		saynn("Milka catches some of her milk and laps it up.")
+
+		saynn("[say=psmilka]..strawberries.. that's so tasty.. hah.. ow..[/say]")
+
+		saynn("The more she licks it.. the more her tail starts to wag. She then leans down and noms some grass from the field.")
+
+		saynn("[say=psmilka]Moo..[/say]")
+
+		saynn("Milka is hungry from so much stress. You find a snack in the guy's pockets and give it to her.")
+
+		saynn("[say=psmilka]Thank you-u-u-u!..[/say]")
+
+		saynn("She sits down on her butt and starts snacking, already looking much more lively.")
+
+		saynn("[say=psmilkgirl]I WILL KILL ALL OF YOU, FUCKERS![/say]")
+
+		saynn("Sofie receives a big smack on the ass from Pip.")
+
+		saynn("[say=psmilkgirl]OWW![/say]")
+
+		saynn("[say=pspip]Eat the grass if it hurts, slut.[/say]")
+
+		saynn("[say=psmilkgirl]FUCK YOU![/say]")
+
+		saynn("She is screaming.. but the walls are thick enough for her to not be heard outside. Their own basement is now working against them.")
+
+		saynn("[say=psmilkguy]Welp.. Can we talk about it? We can discuss letting you go..[/say]")
+
+		saynn("Looks like.. both of the owners are defeated!")
+
+		saynn("[say=pc]Talk about letting us go? Suddenly, you want to do that? You didn't discuss with us if we're okay becoming your milking slaves.[/say]")
+
+		saynn("[say=psmilkgirl]WE ARE IN HUGE DEBT, YOU DUMB FUCK! WE HAD TO DO IT![/say]")
+
+
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()

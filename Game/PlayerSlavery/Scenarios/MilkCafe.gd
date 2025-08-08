@@ -706,9 +706,9 @@ func main_state():
 		if(peekState >= PEEK_NOTICED_PADLOCK):
 			if(padlockDamage >= 1.0):
 				if(cageRemoved && helpedMilka):
-					addAction("Freedom!", "The door is open. You can leave!", "ENDING", ["end_breaklock"])
+					addAction("Freedom!", "The door is pretty much open. You can leave!", "ENDING", ["end_breaklock"])
 				else:
-					addAction("Freedom!", "The door is open. You can leave", "endingLockCheck")
+					addAction("Freedom!", "The door is pretty much open. You can leave", "endingLockCheck")
 			elif(!GM.pc.hasBoundLegs()):
 				if(GM.pc.getStamina() > 0):
 					addAction("Kick door", "Smash the door to damage the padlock", "idleSmash")
