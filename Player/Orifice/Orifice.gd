@@ -221,6 +221,9 @@ func onObsorb(obsorbEntry):
 func getFluidList():
 	return fluids.getFluidList()
 
+func getFluidListNames():
+	return fluids.getFluidListNames()
+
 func getUniqueCharactersAmount():
 	return fluids.getUniqueCharactersAmount()
 

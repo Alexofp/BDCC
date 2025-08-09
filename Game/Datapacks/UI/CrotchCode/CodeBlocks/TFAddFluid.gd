@@ -27,7 +27,7 @@ func execute(_contex:CodeContex):
 	if(_contex.hadAnError()):
 		return false
 	if(!isNumber(fluidAmount)):
-		throwError(_contex, "Aceleration ammount must a number, got "+str(fluidAmount)+" instead")
+		throwError(_contex, "Fluid amount must a number, got "+str(fluidAmount)+" instead")
 		return false
 
 	return _contex.addTFLabFluid(fluidName, fluidAmount)

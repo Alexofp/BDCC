@@ -34,7 +34,7 @@ func getEffectDesc():
 	var fluidAmount = orifice.getFluidAmount()
 	var fluidAmountRounded = ceil(fluidAmount)
 	
-	var messFluids = orifice.getFluidList()
+	var messFluids = orifice.getFluidListNames()
 	var humanReadableString = Util.humanReadableList(messFluids)
 	
 	var message = "You got fucked in the ass and now your butt is stuffed with " + str(fluidAmountRounded) + " ml of "+humanReadableString
