@@ -666,6 +666,222 @@ func _run():
 
 		saynn("[say=psmilkgirl]WE ARE IN HUGE DEBT, YOU DUMB FUCK! WE HAD TO DO IT![/say]")
 
+		addButton("Continue", "See what happens next", "lock_choicesofie")
+	if(state == "lock_choicesofie"):
+		playAnimation(StageScene.SexBehind, "tease", {pc="pspip", npc="psmilkgirl", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Sofie is still trying to struggle free so Pip forces her face into the floor instead, his hands stripping her clothes off.")
+
+		saynn("[say=pspip]Hey.. how are we gonna punish this bitch?[/say]")
+
+		saynn("[say=psmilkgirl]HANDS OFF.. GGRR.. F-Fuck you..[/say]")
+
+		saynn("[say=pspip]You thought you could break me. Maybe I should just break into your womb.[/say]")
+
+		saynn("[say=psmilkgirl]WHAT? NEVER IN THE MILLION.. AGH..[/say]")
+
+		saynn("Her ass gets slapped firmly.. Pip's cock seems to be getting hard.")
+
+		saynn("[say=pc]Really? Right in front of her lover?[/say]")
+
+		saynn("[say=psmilkguy]Uhh..[/say]")
+
+		saynn("[say=psmilkgirl]IS THAT ALL YOU CAN SAY? Such a PATHETIC FUCKING MAN. Fine, BREED ME, stud. Make me feel like a woman at least ONCE in my life.[/say]")
+
+		addButton("Let Pip breed", "Let Pip breed Sofie", "lock_sofie_breed")
+		addButton("Milking machine", "Hook Sofie up to a milking machine instead", "lock_sofie_milking")
+	if(state == "lock_sofie_breed"):
+		playAnimation(StageScene.SexMatingPress, "fast", {pc="pspip", npc="psmilkgirl", pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You let Pip do it.. seems like a good way to let him get his revenge on her.")
+
+		saynn("He wastes no time, grabbing Sofie's legs and pinning them into her shoulders.. before plunging his flared horsecock down her snatch.")
+
+		saynn("[say=psmilkgirl]AHhh-h! Such a THICK COCK![/say]")
+
+		saynn("Pip starts going at it, pounding the mouthy dragon girl into the ground, her pussy making wet noises as it gets stretched wide by the fat shaft again and again.")
+
+		saynn("[say=psmilkgirl]LOOK AT THIS, LOVER! This is how you FUCK A PUSSY! AH!..[/say]")
+
+		saynn("Slutty moans echo around the garden as Pip keeps thrusting inside, really enjoying ravaging that needy slit.")
+
+		saynn("Leo is just watching, rubbing his thighs against each other.")
+
+		saynn("[say=psmilkguy]Sofie..[/say]")
+
+		saynn("It doesn't take long before Pip gets to his peak.. He shoves most of his shaft inside, creating a huge bump on Sofie's belly.. a bump that only starts to inflate more as the stud starts pumping her womb full of his virile seed.. wave after wave.")
+
+		saynn("[say=psmilkgirl]AH-hhh.. My clenching pussy.. is milking your cock.. BREED ME! FEELS SO GOOD![/say]")
+
+		saynn("Pip is grunting.. as he drains his balls into the annoying bitch.. while Leo is squirming around on the floor.")
+
+		saynn("[say=psmilkgirl]Nh-h..[/say]")
+
+		saynn("The girl has been dealt with..")
+
+		addButton("Continue", "See what happens next", "lock_choice_leo")
+	if(state == "lock_choice_leo"):
+		playAnimation(StageScene.SexCowgirlAmazon, "tease", {pc="psmilkguy", npc="psmilka", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("Milka seems to have fully recovered by now.. She unties Leo.. just so she can also strip him of his clothes.")
+
+		saynn("[say=psmilka]Hey there, moo~.[/say]")
+
+		saynn("[say=psmilkguy]Uh.. sorry for.. hitting you.[/say]")
+
+		saynn("Milka chuckles as she straddles him.")
+
+		saynn("[say=psmilka]It's okay~. You can make up for it.[/say]")
+
+		saynn("Sofie is still panting heavily.. but she sees the things that are happening.")
+
+		saynn("[say=psmilkgirl]Hh.. H-hey! That's my husband! He is a limp-dick asshole.. but he is still mine![/say]")
+
+		saynn("Milka smiles as she sees Leo getting hard under her, his cock is brushing against her wet slit..")
+
+		saynn("[say=psmilkguy]Uh.. Milka..[/say]")
+
+		saynn("[say=psmilka]Tshhh~..[/say]")
+
+		saynn("She looks at you for approval.")
+
+		addButton("Let Milka ride", "Allow Milka to ride Leo's cock", "lock_milka_breed")
+		addButton("Milking machine", "Hook up Leo into a milking machine instead", "lock_leo_milk")
+	if(state == "lock_milka_breed"):
+		playAnimation(StageScene.SexCowgirlAmazon, "fast", {pc="psmilkguy", npc="psmilka", pcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+		saynn("You decide to let Milka do what she wants to do.")
+
+		saynn("She smiles.. then wraps her digits around Leo's ridged cock.. before guiding it down her pink slit as she lowers herself onto the tip.")
+
+		saynn("[say=psmilka]Mmh.. moo~.[/say]")
+
+		saynn("Milka starts riding the guy.. bouncing up and down on his hard shaft, her big milky breasts jiggling in the process, swollen nips spawning little rivers of her milk..")
+
+		saynn("[say=psmilkguy]Ah.. your pussy.. feels incredible..[/say]")
+
+		saynn("[say=psmilka]Thank you~. Your cock feels great too![/say]")
+
+		saynn("[say=psmilkgirl]YOU DIDN'T EVEN ASK ME, ASSHOLE! I HOPE THAT CUNT IS WORTH IT! Hey!.. No-no-no![/say]")
+
+		saynn("You gesture to Pip to deal with the noisy bitch.. and so he does, gagging her mouth.")
+
+		saynn("[say=psmilkgirl]MHH-hhh! Mhhh..[/say]")
+
+		saynn("Milka chuckles as Leo reaches his hand out to cup and grope and Milka's full tits.")
+
+		saynn("[say=psmilka]I'm a good cow, right~?[/say]")
+
+		saynn("[say=psmilkguy]Best one I ever knew.. mhh..[/say]")
+
+		saynn("Leo throws his head back and moans more as Milka increases the pace, riding him harder, her pussy eagerly swallowing his knotted cock, coating it with her juices.")
+
+		saynn("[say=psmilkguy]Milka.. I.. I'm.. ah-..[/say]")
+
+		saynn("[say=psmilka]Breed me~. Moo-o~..[/say]")
+
+		saynn("It doesn't take long before Milka gets what she wants. Leo's balls tense up as his member starts throbbing inside the pup, filling her up with his thick seed.. stuffing more and more into her.")
+
+		saynn("[say=psmilkguy]Nghh-..[/say]")
+
+		saynn("All the while, Sofie is forced to watch how her husband is breeding one of her slaves.")
+
+		saynn("[say=psmilka]Pump this pussy full.. good..[/say]")
+
+		saynn("[say=psmilkgirl]Grrr..[/say]")
+
+		saynn("And now the guy is handled too. Time to make your escape!")
+
+		addButton("Continue", "See what happens next", "lock_about_to_escape")
+	if(state == "lock_about_to_escape"):
+		removeCharacter("psmilkguy")
+		removeCharacter("psmilkgirl")
+		aimCameraAndSetLocName("pscafe_docks")
+		playAnimation(StageScene.Duo, "stand", {pc="psmilka", npc="pspip"})
+		saynn("You sneak up through the cafe's seating area and get into the docks, all three of you.")
+
+		saynn("[say=pc]Well.. what now?[/say]")
+
+		saynn("[say=pspip]I found some keys on the guy. I think they are for the shitty spacetruck that's over there.[/say]")
+
+		saynn("It's a real beater.. but it's better than nothing.")
+
+		saynn("[say=pspip]Where do you wanna go, Milka?[/say]")
+
+		saynn("[say=psmilka]Me?.. um.. my farm.[/say]")
+
+		saynn("[say=pspip]Alright. And where would that be?[/say]")
+
+		saynn("[say=psmilka]I don't.. remember.. I don't remember much, I'm sorry. Not even my real name.[/say]")
+
+		saynn("Pip nods.. while Milka ears lower themselves.")
+
+		saynn("[say=pspip]Huh. That makes things a bit complicated..[/say]")
+
+		saynn("[say=psmilka]I'm sorry..[/say]")
+
+		saynn("Pip pats Milka on the head.")
+
+		saynn("[say=pspip]Don't be. I will help you, we will figure it out.[/say]")
+
+		saynn("Milka cheers up visible, her tail wagging.")
+
+		saynn("[say=psmilka]Don't you have your own things that you have you do?[/say]")
+
+		saynn("[say=pspip]Ehh, they can wait.[/say]")
+
+		saynn("Milka nods. Pip turns towards you.")
+
+		saynn("[say=pspip]What about you?[/say]")
+
+		saynn("[say=pc]AlphaCorp is gonna be looking for me. I think I'm screwed either way.[/say]")
+
+		saynn("You tug on your collar.")
+
+		saynn("[say=pspip]Yeah, looks like you are in a bigger pickle than my caged cock was.[/say]")
+
+		saynn("[say=psmilka]But your cock IS a big pickle~.[/say]")
+
+		saynn("[say=pspip]Milka..[/say]")
+
+		saynn("She giggles and sticks her tongue out. Pip rolls his eyes and sighs.")
+
+		saynn("[say=pspip]Brat.[/say]")
+
+		addButton("Continue", "See what happens next", "lock_yadayada")
+	if(state == "lock_yadayada"):
+		removeCharacter("pspip")
+		removeCharacter("psmilka")
+		playAnimation(StageScene.Solo, "stand")
+		saynn("And so you ride the spacetruck with them until the first space station. That's where you part your ways and say your goodbyes.")
+
+		saynn("It's a good thing that you did.. because soon after one of the AlphaCorp patrols catches you. You couldn't even hide anywhere.. it's like they knew where you were exactly.")
+
+		addButton("Continue", "See what happens next", "lock_caught")
+	if(state == "lock_caught"):
+		playAnimation(StageScene.Solo, "sit")
+		aimCameraAndSetLocName("intro_interogation")
+		addCharacter("intro_detective")
+		saynn("Hours later.. and you're already sitting in a familiar chair.")
+
+		saynn("[say=intro_detective]And so you're saying that you don't recall anything about what happened in the last few weeks? And why your collar tracking suddenly began working again?[/say]")
+
+		saynn("Sterile lights irritate your eyes that long have forgotten how it feels.. to be in a well-lit room.")
+
+		saynn("[say=pc]I don't remember it, yeah.[/say]")
+
+		saynn("It'd be very easy to snitch on Leo and Sofie. But what's the point?")
+
+		saynn("[say=intro_detective]Do you remember that you somehow managed to escape one of the most secure prisons in the galaxy?[/say]")
+
+		saynn("[say=pc]Sorry, I just can't seem to remember.[/say]")
+
+		saynn("He hums, tapping against the table with his pen. Then he leans a bit closer.")
+
+		saynn("[say=intro_detective]Helping me understand what happened is in our best interest. You're giving me nothing and that makes you seem like a bad person. You don't want the judges to think that you're a bad person, do you? Maybe you just made some mistakes, it's understandable. I can help you. But only if you help me first.[/say]")
+
+		saynn("[say=pc]How long did you practice that one?[/say]")
+
+		saynn("Jake tilts his head slightly at first.. but then his expression switches to a very mean one.")
+
+		addButton("Continue", "See what happens next", "in_bdcc")
+
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -695,6 +911,21 @@ func _react(_action: String, _args):
 		GM.pc.setLocation(GM.pc.getCellLocation)
 		GM.main.stopPlayerSlavery()
 		addMessage("All your items were returned to you.")
+
+	if(_action == "lock_sofie_breed"):
+		getCharacter("psmilkgirl").cummedInVaginaBy("pspip")
+
+	if(_action == "lock_sofie_milking"):
+		var thePump = GlobalRegistry.createItem("BreastPump")
+		var theFluids = thePump.getFluids()
+		theFluids.addFluid("Milk", 400.0)
+		getCharacter("psmilkgirl").getInventory().forceEquipStoreOtherUnlessRestraint(thePump)
+
+	if(_action == "lock_milka_breed"):
+		getCharacter("psmilka").cummedInVaginaBy("psmilkguy")
+
+	if(_action == "lock_leo_milk"):
+		getCharacter("psmilkguy").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("PenisPump"))
 
 	setState(_action)
 
