@@ -18,6 +18,8 @@ func _run():
 		if(GM.main.getTimeInGlobalSeconds() >= (getFlag("LastTimePeed", 0) + 60*60*4)):
 			if(GM.pc.getInventory().getItemsWithTag(ItemTag.CanPeeInto).size() == 0):
 				addDisabledButton("Pee into..", "You don't have any bottles to pee into")
+			elif(!GM.pc.hasReachablePenisForUrination() && !GM.pc.hasReachableVaginaForUrination()):
+				addDisabledButton("Pee into..", "Your genitals are completely inaccessible")
 			else:
 				addButton("Pee into..", "Pee into one of your bottles", "peeintomenu")
 		else:

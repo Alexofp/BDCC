@@ -1380,6 +1380,16 @@ func hasReachableAnus():
 		return false
 	return hasAnus()
 
+func hasReachablePenisForUrination():
+	if(buffsHolder.hasBuff(Buff.BlocksUrinationPenisBuff)):
+		return false
+	return hasPenis()
+
+func hasReachableVaginaForUrination():
+	if(buffsHolder.hasBuff(Buff.BlocksUrinationVaginaBuff)):
+		return false
+	return hasVagina()
+
 func hasHair():
 	return hasBodypart(BodypartSlot.Hair) && getBodypart(BodypartSlot.Hair).id != "baldhair"
 

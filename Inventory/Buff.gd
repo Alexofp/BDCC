@@ -61,6 +61,8 @@ const StatBuff = "StatBuff"
 const ChastityPenisBuff = "ChastityPenisBuff"
 const ChastityVaginaBuff = "ChastityVaginaBuff"
 const ChastityAnusBuff = "ChastityAnusBuff"
+const BlocksUrinationPenisBuff = "BlocksUrinationPenisBuff"
+const BlocksUrinationVaginaBuff = "BlocksUrinationVaginaBuff"
 
 const RestraintRecoveryBuff = "RestraintRecoveryBuff"
 const RestraintForcingSuccessBuff = "RestraintForcingSuccessBuff"

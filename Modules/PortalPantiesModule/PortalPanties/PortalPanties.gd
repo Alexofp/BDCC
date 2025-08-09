@@ -25,11 +25,14 @@ func getBuffs():
 		return [
 			buff(Buff.ChastityVaginaBuff),
 			buff(Buff.ChastityAnusBuff),
+			buff(Buff.BlocksUrinationVaginaBuff),
 			]
 	return [
 		buff(Buff.ChastityPenisBuff),
 		buff(Buff.ChastityVaginaBuff),
 		buff(Buff.ChastityAnusBuff),
+		buff(Buff.BlocksUrinationPenisBuff),
+		buff(Buff.BlocksUrinationVaginaBuff),
 		]
 
 func getPrice():
