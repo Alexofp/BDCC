@@ -24,6 +24,7 @@ var maxKeepNPCKids:int = 30
 var sandboxPawnCount:int = 30
 var sandboxBreeding:String = "rare" # normal reduced rare veryrare never
 var sandboxNpcLeveling:float = 1.0
+var sandboxNpcNaming: String = "default"
 
 # Difficulty options
 var hardStruggleEnabled: bool = false
@@ -125,6 +126,7 @@ func resetToDefaults():
 	sandboxPawnCount = 30
 	sandboxBreeding = "rare"
 	sandboxNpcLeveling = 1.0
+	sandboxNpcNaming = "default"
 	blockCatcherPanelHeight = 8
 	
 	enabledContent.clear()
@@ -286,6 +288,9 @@ func getSandboxPawnCount() -> int:
 func getSandboxNpcLeveling() -> float:
 	return sandboxNpcLeveling
 
+func getSandboxNpcNaming() -> String:
+	return sandboxNpcNaming
+
 func getSandboxOffscreenBreedingMult() -> float:
 	if(sandboxBreeding == "normal"):
 		return 1.0
@@ -366,6 +371,18 @@ func getChangeableOptions():
 						[1.0, "100%"],
 						[1.5, "150%"],
 						[2.0, "200%"],
+					],
+				},
+				{
+					"name": "NPC naming generation",
+					"description": "Pawn names will be randomized depending on this setting.",
+					"id": "sandboxNpcNaming",
+					"type": "list",
+					"value": sandboxNpcNaming,
+					"values": [
+						["default", "Default"],
+						["markov", "Markov Chain"],
+						["markov_weighted", "Markov Chain Weighted"]
 					],
 				},
 			],
@@ -941,6 +958,8 @@ func applyOption(categoryID, optionID, value):
 			sandboxBreeding = value
 		if(optionID == "sandboxNpcLeveling"):
 			sandboxNpcLeveling = value
+		if(optionID == "sandboxNpcNaming"):
+			sandboxNpcNaming = value
 	
 	if(categoryID == "jigglephysics"):
 		if(optionID == "jigglePhysicsBreastsEnabled"):
@@ -1143,6 +1162,7 @@ func saveData():
 		"sandboxPawnCount": sandboxPawnCount,
 		"sandboxBreeding": sandboxBreeding,
 		"sandboxNpcLeveling": sandboxNpcLeveling,
+		"sandboxNpcNaming": sandboxNpcNaming,
 		"blockCatcherPanelHeight": blockCatcherPanelHeight,
 		"webTextInputFallback": webTextInputFallback,
 		"fullscreen": fullscreen,
@@ -1202,6 +1222,7 @@ func loadData(data):
 	sandboxPawnCount = loadVar(data, "sandboxPawnCount", 30)
 	sandboxBreeding = loadVar(data, "sandboxBreeding", "rare")
 	sandboxNpcLeveling = loadVar(data, "sandboxNpcLeveling", 1.0)
+	sandboxNpcNaming = loadVar(data, "sandboxNpcNaming", "default")
 	blockCatcherPanelHeight = loadVar(data, "blockCatcherPanelHeight", 16)
 	webTextInputFallback = loadVar(data, "webTextInputFallback", false)
 	fullscreen = loadVar(data, "fullscreen", false)

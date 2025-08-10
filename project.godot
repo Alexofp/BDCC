@@ -939,6 +939,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/World/MapDecoration.gd"
 }, {
+"base": "NameGenerator",
+"class": "MarkovNameGenerator",
+"language": "GDScript",
+"path": "res://Util/NameGeneration/MarkovNameGenerator.gd"
+}, {
+"base": "MarkovNameGenerator",
+"class": "MarkovNameGeneratorWeighted",
+"language": "GDScript",
+"path": "res://Util/NameGeneration/MarkovNameGeneratorWeighted.gd"
+}, {
 "base": "LootTableBase",
 "class": "MedicalLoot",
 "language": "GDScript",
@@ -988,6 +998,11 @@ _global_script_classes=[ {
 "class": "MyProjectSettings",
 "language": "GDScript",
 "path": "res://Game/Options/MyProjectSettings.gd"
+}, {
+"base": "Object",
+"class": "NameGenerator",
+"language": "GDScript",
+"path": "res://Util/NameGeneration/NameGenerator.gd"
 }, {
 "base": "Module",
 "class": "NovaModule",
@@ -1896,6 +1911,8 @@ _global_script_class_icons={
 "LustInterests": "",
 "MainScene": "",
 "MapDecoration": "",
+"MarkovNameGenerator": "",
+"MarkovNameGeneratorWeighted": "",
 "MedicalLoot": "",
 "MedicalModule": "",
 "MenstrualCycle": "",
@@ -1906,6 +1923,7 @@ _global_script_class_icons={
 "Module": "",
 "MyBoneAttachment": "",
 "MyProjectSettings": "",
+"NameGenerator": "",
 "NovaModule": "",
 "NpcBreakTaskBase": "",
 "NpcCon": "",
