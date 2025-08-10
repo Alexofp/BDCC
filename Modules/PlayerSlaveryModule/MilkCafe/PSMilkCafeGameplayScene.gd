@@ -881,6 +881,104 @@ func _run():
 		saynn("Jake tilts his head slightly at first.. but then his expression switches to a very mean one.")
 
 		addButton("Continue", "See what happens next", "in_bdcc")
+	if(state == "lock_sofie_milking"):
+		aimCameraAndSetLocName("pscafe_cow")
+		playAnimation(StageScene.BDSMMachineFuck, "fastdouble", {pc="psmilkgirl", pcCum=true, bodyState={naked=true, hard=true, chains=[["hose", "breastpump", "scene", "milkIntake"]]}})
+		saynn("[say=pc]I think it's best we just give her a taste of her own medicine.[/say]")
+
+		saynn("[say=pspip]I think I know what you are talking about.[/say]")
+
+		saynn("You and Pip pull Sofie onto the advanced milking machine and tightly secure her limbs, making her helpless while all her holes and her tits are nice and exposed.")
+
+		saynn("[say=psmilkgirl]What the fuck are you doing? Stop it![/say]")
+
+		saynn("You select the most.. intense.. mode.. and let the machine start its work.")
+
+		saynn("Two breast pumps get secured around Sofie's tits while two pre-lubed dildos slide dangerously close to her holes, pretty much kissing them.")
+
+		saynn("[say=psmilkgirl]Don't you dare.. AH![/say]")
+
+		saynn("Before she can even complain, her holes get forcibly stretched wide open by the tools. The machine proceeds to double-penetrate Sofie's pussy and ass while the pumps start sucking away at her tits, attempting to draw milk.. but fruitlessly so far.")
+
+		saynn("[say=psmilkgirl]I'M NOT A FUCKING COW!.. AH-h.. F-fuck!..[/say]")
+
+		saynn("Milka brings Leo near so he can watch as her partner gets fucked and milked at the same time.")
+
+		saynn("[say=psmilkguy]That's pretty hot..[/say]")
+
+		saynn("It doesn't take long before Sofie throws her head back and lets out a cry of passion, her helpless body thrashes against the manipulators while the machine just keeps stimulating her everywhere.")
+
+		saynn("[say=psmilkgirl]MHHh.h.. hhh-h.. ah.. Fuck you.. ah..[/say]")
+
+		saynn("Orgasm after orgasm, the mean bitch is slowly loses touch with reality from the constant fucking. Her nips become hard and swollen from getting pumped so much.")
+
+		saynn("[say=psmilkgirl]S-Stop.. T-This.. I'm N-Not.. A.. C-Cow..[/say]")
+
+		saynn("Her body betrays her. Suddenly, her nips start squirting with milk! Multiple little rivers spawn from her enlarged buds, flowing down along her areolas before getting collected by the pumps.")
+
+		saynn("[say=pspip]I think the customers will enjoy today's milkshakes a lot.[/say]")
+
+		saynn("[say=psmilka]Or ice cream![/say]")
+
+		saynn("Sofie moans into the air while her tired body gets milked and her pussy and ass get stuffed again and again.")
+
+		saynn("[say=pc]Ice cream?[/say]")
+
+		saynn("[say=psmilka]Yeah! Or cheese.[/say]")
+
+		saynn("Thinking about breastmilk cheese.. makes you feel uneasy.")
+
+		saynn("Soon, the machine begins to slow down.. Pip helps unlock her. As soon as Sofie steps onto the floor, she just collapses, from exhaustion.")
+
+		saynn("[say=psmilkgirl]Nh-h..[/say]")
+
+		saynn("The girl has been dealt with..")
+
+		addButton("Continue", "See what happens next", "lock_choice_leo")
+	if(state == "lock_leo_milk"):
+		playAnimation(StageScene.BDSMMachineAltFuck, "fast", {pc="psmilkguy", bodyState={naked=true, hard=true, chains=[["hose", "penisPump", "scene", "milkIntake"]]}})
+		aimCameraAndSetLocName("pscafe_bull")
+		saynn("[say=pc]Why don't we treat him the way he was treating us?[/say]")
+
+		saynn("[say=psmilka]That works too![/say]")
+
+		saynn("You and Milka drag Leo onto an advanced milking machine and lock his legs and arms to it, exposing his tight tailhole and ridged knotted cock to its tools.")
+
+		saynn("Milka chooses the most intense milking mode available. And so, the machine springs into life, aligning one of its pre-lubed dildos with Leo's cute butthole. At the same time, another manipulator secures a penis pump around his half-hard member..")
+
+		saynn("[say=psmilkguy]Wait.. Are you sure about.. Ah!..[/say]")
+
+		saynn("The dildo stretches Leo's asshole wide and slides inside, exploring him from the inside, quickly stumbling upon a little sensitive bump.. a bump that it proceeds to massage by fucking his ass!")
+
+		saynn("[say=psmilkguy]Mhh-h.. f-fuck.k..[/say]")
+
+		saynn("His cock gets fully hard in seconds.. before the penis pump engages too, sliding its soft pleasure ring along the ridged surface of his shaft.. up and down..")
+
+		saynn("The guy starts moaning.. a lot. His cute noises mix in well with the mechanical hum of the tools as they work on stimulating his prostate and his cock. The tip of his twitching member leaks more and more precum.. before suddenly shooting a thick line of seed! And then another! His cock is throbbing as the pump works hard, milking the rest of his load out and then collecting it.")
+
+		saynn("[say=psmilkguy]Ahh-h.. T-that feels too good..[/say]")
+
+		saynn("[say=psmilkgirl]BECAUSE I MARRIED A FUCKING BOTTOM![/say]")
+
+		saynn("Pip quickly gags her mouth with her own panties.")
+
+		saynn("[say=psmilkgirl]MHHhh-hh!.. hhh-hm..[/say]")
+
+		saynn("[say=pspip]There is nothing wrong with a bottom, miss. Look at him go.[/say]")
+
+		saynn("Leo cums again, throwing his head back and moaning as his cock throbs and shoots more of these beautiful strings of seed, stuffing the pump's reservoir. Even between the orgasms, his cock is constantly leaking something.. his prostate is getting smashed hard by the machine.")
+
+		saynn("[say=psmilka]The cupcakes today are gonna be extra creamy![/say]")
+
+		saynn("[say=pspip]Customers will certainly want more.[/say]")
+
+		saynn("[say=psmilkgirl]Grrr..[/say]")
+
+		saynn("The dildo keeps pounding Leo's ass.. but each orgasm draws out less and less seed from him.. until his balls are left completely dry.")
+
+		saynn("That's when you turn off the machine and let him rest. Now the guy is handled too. Time to make your escape!")
+
+		addButton("Continue", "See what happens next", "lock_about_to_escape")
 
 
 func _react(_action: String, _args):
@@ -926,6 +1024,12 @@ func _react(_action: String, _args):
 
 	if(_action == "lock_leo_milk"):
 		getCharacter("psmilkguy").getInventory().forceEquipStoreOtherUnlessRestraint(GlobalRegistry.createItem("PenisPump"))
+
+	if(_action == "lock_choice_leo"):
+		getCharacter("psmilkgirl").resetEquipment()
+
+	if(_action == "lock_about_to_escape"):
+		getCharacter("psmilkguy").resetEquipment()
 
 	setState(_action)
 

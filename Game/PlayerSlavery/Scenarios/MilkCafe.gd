@@ -80,9 +80,9 @@ var actions:Array = []
 const C_PC = "pc"
 const C_COW = "psmilka"
 const C_BULL = "pspip"
-const C_GIRL = "tavi" #TODO: Change me
-const C_GUY = "alexrynard"
-const C_OFFICER = "captain"
+const C_GIRL = "psmilkgirl"
+const C_GUY = "psmilkguy"
+const C_OFFICER = "psmilkofficer"
 
 const L_DOOR = "pscafe_door"
 const L_SLEEP = "pscafe_sleep"
