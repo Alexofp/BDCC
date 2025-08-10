@@ -40,6 +40,8 @@ var dynamicCharactersPools = {}
 var loadedDatapacks = {}
 var datapackCharacters = {}
 
+var npcNameGenerators = {}
+
 signal time_passed(_secondsPassed)
 signal saveLoadingFinished
 
@@ -222,6 +224,18 @@ func _ready():
 	add_child(pc)
 	
 	randomize()
+	
+	# could be more flexible
+	if OPTIONS.getSandboxNpcNaming() == "markov":
+		npcNameGenerators["male"] = MarkovNameGenerator.new()
+		npcNameGenerators["male"].train(RNGData.maleNames)
+		npcNameGenerators["female"] = MarkovNameGenerator.new()
+		npcNameGenerators["female"].train(RNGData.femaleNames)
+	elif OPTIONS.getSandboxNpcNaming() == "markov_weighted":
+		npcNameGenerators["male"] = MarkovNameGeneratorWeighted.new()
+		npcNameGenerators["male"].train(RNGData.maleNames)
+		npcNameGenerators["female"] = MarkovNameGeneratorWeighted.new()
+		npcNameGenerators["female"].train(RNGData.femaleNames)
 	
 	WHS.clearHistory()
 	startNewGame()

@@ -160,10 +160,22 @@ static func grabWeightedPairs(ar: Array):
 	return result
 	
 static func randomMaleName():
-	return pick(RNGData.maleNames)
+	var namingSetting = OPTIONS.getSandboxNpcNaming()
+	var name = ""
+	if namingSetting == "default":
+		name = pick(RNGData.maleNames)
+	else:
+		name = GM.main.npcNameGenerators["male"].generateName()
+	return name
 
 static func randomFemaleName():
-	return pick(RNGData.femaleNames)
+	var namingSetting = OPTIONS.getSandboxNpcNaming()
+	var name = ""
+	if namingSetting == "default":
+		name = pick(RNGData.femaleNames)
+	else:
+		name = GM.main.npcNameGenerators["female"].generateName()
+	return name
 
 static func pickHashed(ar, thehash:int):
 	thehash = thehash % ar.size()
