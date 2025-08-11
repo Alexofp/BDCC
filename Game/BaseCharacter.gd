@@ -3631,3 +3631,8 @@ func getDrugsInfluenceAmount() -> int:
 			result += 1
 	
 	return result
+
+func cancelPregnancy():
+	if(!menstrualCycle):
+		return
+	menstrualCycle.cancelPregnancy()

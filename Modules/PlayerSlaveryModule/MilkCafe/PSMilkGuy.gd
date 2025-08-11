@@ -133,7 +133,15 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
 
 func getDefaultEquipment():
-	return ["CasualClothes"]
+	return [
+	{
+		id = "CasualClothes",
+		data = {
+			clothesColor = "AA2222",
+			amount = 1,
+		},
+	},
+	]
 
 #func getLootTable(_battleName):
 #	return InmateLoot.new()

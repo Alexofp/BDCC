@@ -1,8 +1,5 @@
 extends PlayerSlaveryBase
 
-var totalMilk:float = 0.0
-var totalSeed:float = 0.0
-
 var cowTrust:float = 0.0
 var bullTrust:float = 0.0
 
@@ -102,8 +99,6 @@ const L_TABLE = "pscafe_table"
 func saveData() -> Dictionary:
 
 	return {
-		totalMilk = totalMilk,
-		totalSeed = totalSeed,
 		cowTrust = cowTrust,
 		bullTrust = bullTrust,
 		obedience = obedience,
@@ -143,8 +138,6 @@ func saveData() -> Dictionary:
 	}
 
 func loadData(_data:Dictionary):
-	totalMilk = SAVE.loadVar(_data, "totalMilk", 0.0)
-	totalSeed = SAVE.loadVar(_data, "totalSeed", 0.0)
 	cowTrust = SAVE.loadVar(_data, "cowTrust", 0.0)
 	bullTrust = SAVE.loadVar(_data, "bullTrust", 0.0)
 	obedience = SAVE.loadVar(_data, "obedience", 0.0)
@@ -182,13 +175,6 @@ func loadData(_data:Dictionary):
 	lastEvent = SAVE.loadVar(_data, "lastEvent", "")
 	gonnaHavePeekEvent = SAVE.loadVar(_data, "gonnaHavePeekEvent", false)
 
-# max earned = 250000
-
-# ways milk: stall hand-milking, stall breast pumps, sybian (milk), milking machine (milk)
-# ways seed: stall penis-pump, fuck machine (seed), pegging, prostate milking on table, milking machine (seed)
-# ways both: stall breast+penis pumps, milking machine (both)
-
-# default milking ways: fingering, stroking, stroking+groping, groping, pegging over table
 const UPGRADES = [
 	{
 		earned = 500,
@@ -321,10 +307,17 @@ func _init():
 func onSlaveryStart():
 	updateCharacters()
 	call(state+"_state")
-	GlobalRegistry.getCharacter(C_COW).induceLactation()
+	var theCow = GlobalRegistry.getCharacter(C_COW)
+	if(theCow):
+		theCow.induceLactation()
+		theCow.cancelPregnancy()
 
 func onSlaveryEnd():
 	GM.pc.removeEffect(StatusEffect.PSMilkCafeProduction)
+	var theCow = GlobalRegistry.getCharacter(C_COW)
+	if(theCow):
+		theCow.induceLactation()
+		theCow.cancelPregnancy()
 
 # Gets called after onSlaveryStart()
 func getStartScene() -> String:
@@ -631,7 +624,7 @@ func removeStrapon(_charID:String):
 	if(theChar && theChar.isWearingStrapon()):
 		theChar.removeStrapon()
 	
-func intro_state():
+func introOLD_state():
 	playAnimation(StageScene.Solo, "kneel", {pc=C_PC})
 	
 	saynn("INTRO.")
@@ -640,7 +633,7 @@ func intro_state():
 	
 	addContinue("arrive")
 
-func intro_do(_id:String, _args:Array):
+func introOLD_do(_id:String, _args:Array):
 	if(_id == "arrive"):
 		saynn("HOW WILL YOU MAKE US CREDITS.")
 		
@@ -3421,3 +3414,200 @@ func ePeekThirdEvent9_state():
 	saynn("You approach the docking port. He opens the airlock.. and invites you in. You give the cafe the last glimpse.. before stepping inside.")
 
 	addContinue("ENDING", ["end_officer"])
+
+
+
+
+func intro_state():
+	aimCamera(L_DOCKS)
+	GM.pc.setLocation(L_CENTER)
+	playAnimation(StageScene.Solo, "kneel")
+	saynn("You find yourself.. in something that looks like the trunk of the spacetruck. There are a few crates around, most of them locked. You manage to peek into one of them and find.. fruits and vegetables. Weird.")
+
+	saynn("Apart from the cargo.. you're alone in here.")
+
+	saynn("The spacetruck is certainly moving.. somewhere. You look around a bit more.")
+
+	saynn("There are two ways out of here, in the form of two doors. One of them is wide, designed for unloading stuff.. and certainly leads into outer space. The second one is a small one and probably leads into the cockpit. That one is locked. You hear some voices behind it.. but that's about it.")
+
+	saynn("Might as well just wait and see what happens next..")
+
+	addContinue("setState", ["intro2"])
+
+func intro2_state():
+	playAnimation(StageScene.Duo, "stand", {pc=C_GIRL, npc=C_GUY})
+	saynn("Soon, the spacetruck starts to dock somewhere. After the.. less than smooth.. docking process, the engines finally shut off.")
+
+	saynn("Two.. dragons.. enter the cargo space. The girl starts speaking first.")
+
+	talk(C_GIRL, "You're still alive. Good. Gonna start slow. Here is the deal. In case you haven't noticed it yet, we have bought you.")
+	saynn("Two versus one.. and you're not exactly armed. Who knows how many others are behind the wall as well.")
+
+	talk(C_GIRL, "Since you are now our property.. you are gonna do exactly what we tell you to do. Otherwise.. Show {pc.him}, Leo.")
+	talk(C_GUY, "Sure.")
+	saynn("The guy pulls out a.. what looks like a collapsable baton.. but with a little fork at the tip. He squeezes the handle.. and a little lightning of electricity spawns between the fork's tines.")
+
+	talk(C_GUY, "If this touches you, it will hurt.")
+	saynn("Yeah, that seems obvious.")
+
+	talk(C_GIRL, "Now. I'm gonna put a leash on you. Leo?")
+	talk(C_GUY, "I got you.")
+	talk(C_GIRL, "You fucking better.")
+	saynn("The girl.. Sofie.. pulls out a leash and reaches out to clip it to your collar. All the while the guy is ready to strike you at any point.")
+
+	saynn("You stand still and let them do whatever they have to do.")
+
+	talk(C_GIRL, "Now grab a crate.")
+	saynn("They're not too heavy.. but they're not exactly light either. After you do that, the girl starts glaring at the guy.. clearly confusing him.")
+
+	talk(C_GUY, "Sofie?")
+	talk(C_GIRL, "Grab one too, don't be a lazy fuck.")
+	talk(C_GUY, "Alright.")
+	saynn("The guy puts the weapon away and grabs a crate.. before following you.")
+
+	addContinue("setState", ["intro3"])
+
+func intro3_state():
+	addChar(C_GIRL)
+	addChar(C_GUY)
+	playAnimation(StageScene.Duo, "stand", {npc=C_GIRL, flipNPC=true, bodyState={leashedBy=C_GIRL}})
+	aimCamera(L_COUNTER)
+	saynn("You step out of the spacetruck.. and see some kind of docks. There are a few other docking ports.. but all of them are not occupied currently. Whatever this place is, it doesn't get a lot of traffic.")
+
+	saynn("As you follow the docks, still on a leash, you begin to see.. a structure at the end of it. You could say that it's a space station.. but that would be exaggerating things greatly. It's the size of a two-story building.")
+
+	saynn("It's hard to see through the dock's windows.. but you do notice a giant neon sign above the structure. It says.. 'The Daily Drip'.")
+
+	saynn("Inside it.. you see a seating area consisting out of a few pink tables.. and a counter, with a small kitchen behind it.")
+
+	saynn("The girl walks you behind the counter.. and towards the door at the back of the kitchen.")
+
+	addContinue("setState", ["intro4"])
+
+func intro4_state():
+	aimCamera(L_CENTER)
+	addChar(C_GIRL)
+	addChar(C_GUY)
+	saynn("Behind the door.. There are some small stairs that lead into darkness.")
+
+	talk(C_GIRL, "Keep going, animal.")
+	saynn("Animal? Carefully, you step down the stairs, awkwardly looking from around the crate that you're carrying.")
+
+	saynn("Your eyes begin to slowly adapt to the darkness. While that is happening, they also begin to pick up on some silhouettes. Before you can make out any details, the girl yanks on the leash.")
+
+	talk(C_GIRL, "You will get a chance to say hi later.")
+	
+	addContinue("setState", ["intro5"])
+	
+func intro5_state():
+	aimCamera(L_SLEEP)
+	playAnimation(StageScene.Duo, "stand", {npc=C_GIRL})
+	saynn("You follow the mean girl into some kind of.. industrial fridge? It's big and divided into a few sections but only one of them seems to be actually powered. You place the crate exactly where you are told to do so.")
+
+	talk(C_GIRL, "Go sleep now.")
+	saynn("She points at one of the empty sections of the fridge.")
+
+	saynn("You step inside.. The door behind you closes shut.")
+
+	saynn("It's chilly here.. but it will have to do.")
+
+	addContinue("setState", ["intro6"])
+
+func intro6_state():
+	GM.main.startNewDay()
+	playAnimation(StageScene.Sleeping, "sleep")
+	saynn("You manage to get some sleep.. but it wasn't exactly the pleasant kind.")
+
+	addStamina(20)
+	addPain(-50)
+	saynn("You hear the banging on the door.. which means.. it's probably time to get up.")
+	
+	addContinue("setState", ["intro7"])
+	
+func intro7_state():
+	aimCamera(L_CENTER)
+	addChar(C_GIRL)
+	addChar(C_GUY)
+	playAnimation(StageScene.Duo, "stand", {npc=C_GIRL})
+	saynn("You get up and step out into the main space. You're not the only one who got woken up it seems.. From the other sections of the fridge, come out two other.. slaves.. a horse and a colorful puppy.")
+
+	saynn("The girl and the guy from yesterday are here too.. your new owners.")
+
+	talk(C_GIRL, "Everyone welcome the new animal.")
+	saynn("The girl catches your confused stare. You look around a bit more.. and notice a lot of.. strange equipment. In the corner of this.. basement.. there seems to be a special walled-off space.. with a little garden. The sunlight that comes through the ceiling of that garden is the only light that illuminates the rest of the basement.")
+
+	talk(C_GIRL, "Yes. You are now an animal.")
+	talk(C_GUY, "We're running a cafe and we need milk and cream to keep it running.")
+	saynn("Leo receives a glare from Sofie.")
+
+	talk(C_GIRL, "Why don't you tell them the exact coordinates of this cafe while you're at it, huh?")
+	talk(C_GUY, "My bad.")
+	saynn("The girl turns towards you again.")
+
+	talk(C_GIRL, "He is not wrong though. Ever so often, we are gonna come down here and milk you. All of you.")
+	saynn("Milk? So that's probably what the equipment is for.")
+
+	talk(C_GUY, "Once you help the cafe earn enough credits, we will actually let you go.")
+	talk(C_GIRL, "We will consider that, yes. How much is enough? Right now it's 250 thousand credits.")
+	addCredits(-250000)
+	saynn("That's a lot..")
+
+	saynn("Sofie approaches you specifically.")
+
+	talk(C_GIRL, "So. How are you gonna be useful to us? We already have a cow and a bull so you could be either, I don't care. I just don't take 'no' for an answer.")
+
+	addAction("Milk", "Your breasts will be milked. Their size will be increased over time", "setState", ["intro8milk"])
+	if(GM.pc.hasReachablePenis() || GM.pc.isWearingChastityCage()):
+		addAction("Seed", "Your cock will be milked", "setState", ["intro8seed"])
+		addAction("Both", "Both, your breasts and your cock will be milked", "setState", ["intro8both"])
+	else:
+		addDisabledAction("Seed", "Sadly, you don't have a penis to be seed-milked")
+		addDisabledAction("Both", "Sadly, you don't have a penis to also be seed-milked")
+
+func intro8milk_state():
+	agreeMilk = true
+	agreeSeed = false
+	addChar(C_GIRL)
+	addChar(C_GUY)
+	saynn("You tell the owners that you choose your breasts.")
+
+	talk(C_GIRL, "Alright. And if you're not lactating, we will find a way to make you do it, don't you worry, cow.")
+	saynn("A cow.. is that who you are now?")
+
+	talk(C_GIRL, "We will start milking you soon. If you're hungry, go eat grass.")
+	saynn("And with that, your new owners leave you be.")
+
+	saynn("The other slaves.. animals.. the cow and the bull.. head towards their corners.")
+	addContinue("setState", ["main"])
+
+func intro8seed_state():
+	agreeMilk = false
+	agreeSeed = true
+	addChar(C_GIRL)
+	addChar(C_GUY)
+	saynn("You tell the owners that you choose your cock.")
+
+	talk(C_GIRL, "Alright. So you're a bull then. Good.")
+	saynn("A bull.. is that who you are now?")
+
+	talk(C_GIRL, "We will start milking you soon. If you're hungry, go eat grass.")
+	saynn("And with that, your new owners leave you be.")
+
+	saynn("The other slaves.. animals.. the cow and the bull.. head towards their corners.")
+	addContinue("setState", ["main"])
+
+func intro8both_state():
+	agreeMilk = true
+	agreeSeed = true
+	addChar(C_GIRL)
+	addChar(C_GUY)
+	saynn("You tell the owners that you choose.. both your cock and your breasts.")
+
+	talk(C_GIRL, "Alright. We shouldn't have any problems milking your cock. But if you're not lactating, we will find a way to make you do it, don't you worry, cow.")
+	saynn("A cow.. is that who you are now?")
+
+	talk(C_GIRL, "We will start milking you soon. If you're hungry, go eat grass.")
+	saynn("And with that, your new owners leave you be.")
+
+	saynn("The other slaves.. animals.. the cow and the bull.. head towards their corners.")
+	addContinue("setState", ["main"])
