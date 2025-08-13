@@ -1006,7 +1006,7 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "in_bdcc"):
-		GM.pc.setLocation(GM.pc.getCellLocation)
+		GM.pc.setLocation(GM.pc.getCellLocation())
 		GM.main.stopPlayerSlavery()
 		addMessage("All your items were returned to you.")
 
