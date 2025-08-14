@@ -993,6 +993,7 @@ func _react(_action: String, _args):
 		elif(result.has("sex")):
 			runScene("GenericSexScene", result["sex"], "sex_scene")
 		elif(result.has("end")):
+			GM.pc.freeMouthDeleteAll(true)
 			setState(result["end"])
 		else:
 			if(!GM.main.checkTFs()):

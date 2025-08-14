@@ -702,10 +702,11 @@ func getAttributesText():
 		["Thickness", str(pickedThickness)+"%"],
 	]
 
-func freeMouthDeleteAll():
+func freeMouthDeleteAll(includeRingGag:bool = false):
+	var r0 = getInventory().removeEquippedItemsWithBuff(Buff.RingGagBuff) if includeRingGag else false
 	var r1 = getInventory().removeEquippedItemsWithBuff(Buff.GagBuff)
 	var r2 = getInventory().removeEquippedItemsWithBuff(Buff.MuzzleBuff)
-	return r1 || r2
+	return r0 || r1 || r2
 	
 func freeHandsDeleteAll():
 	return getInventory().removeEquippedItemsWithBuff(Buff.BlockedHandsBuff)

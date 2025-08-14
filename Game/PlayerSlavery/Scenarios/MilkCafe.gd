@@ -6,9 +6,11 @@ var bullTrust:float = 0.0
 var obedience:float = 0.0
 
 var needsPunishment:bool = false
+var canMilkOthers:bool = false
 
 var day:int = 0
 
+var pcGaveMilkOrSeed:int = 0 # How many times pc was milked or milked others
 var milkedToday:int = 0
 var milkedTotal:int = 0
 var totalEarned:int = 0
@@ -27,8 +29,6 @@ var agreeSeed:bool = false
 var cowTopic:int = 0
 var bullTopic:int = 0
 var guyTopic:int = 0
-
-var treatAmount:int = 0
 
 var peekTried:int = 0
 var peekState:int = PEEK_START
@@ -62,9 +62,9 @@ var lastEvent:String = ""
 
 var charsHere:Array = []
 
-const IDLE_IDLE = 0
+const IDLE_HUNGRY = 0
 const IDLE_SOCIAL = 1
-const IDLE_HUNGRY = 2
+const IDLE_IDLE = 2
 const IDLE_NEEDY = 3
 const IDLE_MAX = 3
 
@@ -102,6 +102,7 @@ func saveData() -> Dictionary:
 		cowTrust = cowTrust,
 		bullTrust = bullTrust,
 		obedience = obedience,
+		canMilkOthers = canMilkOthers,
 		needsPunishment = needsPunishment,
 		day = day,
 		state = state,
@@ -109,6 +110,7 @@ func saveData() -> Dictionary:
 		actions = actions,
 		agreeMilk = agreeMilk,
 		agreeSeed = agreeSeed,
+		pcGaveMilkOrSeed = pcGaveMilkOrSeed,
 		milkedToday = milkedToday,
 		milkedTotal = milkedTotal,
 		idleState = idleState,
@@ -120,7 +122,6 @@ func saveData() -> Dictionary:
 		peekTried = peekTried,
 		peekState = peekState,
 		padlockDamage = padlockDamage,
-		treatAmount = treatAmount,
 		totalEarned = totalEarned,
 		canHelpCage = canHelpCage,
 		cageRemoved = cageRemoved,
@@ -141,6 +142,7 @@ func loadData(_data:Dictionary):
 	cowTrust = SAVE.loadVar(_data, "cowTrust", 0.0)
 	bullTrust = SAVE.loadVar(_data, "bullTrust", 0.0)
 	obedience = SAVE.loadVar(_data, "obedience", 0.0)
+	canMilkOthers = SAVE.loadVar(_data, "canMilkOthers", false)
 	needsPunishment = SAVE.loadVar(_data, "needsPunishment", false)
 	day = SAVE.loadVar(_data, "day", 0)
 	state = SAVE.loadVar(_data, "state", "")
@@ -148,6 +150,7 @@ func loadData(_data:Dictionary):
 	actions = SAVE.loadVar(_data, "actions", [])
 	agreeMilk = SAVE.loadVar(_data, "agreeMilk", true)
 	agreeSeed = SAVE.loadVar(_data, "agreeSeed", false)
+	pcGaveMilkOrSeed = SAVE.loadVar(_data, "pcGaveMilkOrSeed", 0)
 	milkedToday = SAVE.loadVar(_data, "milkedToday", 0)
 	milkedTotal = SAVE.loadVar(_data, "milkedTotal", 0)
 	idleState = SAVE.loadVar(_data, "idleState", IDLE_IDLE)
@@ -159,7 +162,6 @@ func loadData(_data:Dictionary):
 	peekTried = SAVE.loadVar(_data, "peekTried", 0)
 	peekState = SAVE.loadVar(_data, "peekState", 0)
 	padlockDamage = SAVE.loadVar(_data, "padlockDamage", 0.0)
-	treatAmount = SAVE.loadVar(_data, "treatAmount", 0)
 	totalEarned = SAVE.loadVar(_data, "totalEarned", 0)
 	canHelpCage = SAVE.loadVar(_data, "canHelpCage", false)
 	cageRemoved = SAVE.loadVar(_data, "cageRemoved", false)
@@ -184,17 +186,17 @@ const UPGRADES = [
 	{
 		earned = 3000,
 		message = "The owners have replaced the grass in the garden with tastier one!",
-		creditsMult = 15.0,
+		creditsMult = 10.0,
 	},
 	{
 		earned = 10000,
 		message = "The owners have installed a milking stall!",
-		creditsMult = 30.0,
+		creditsMult = 20.0,
 	},
 	{
 		earned = 25000,
 		message = "The owners have bought some fuck-machines!",
-		creditsMult = 50.0,
+		creditsMult = 30.0,
 	},
 	{
 		earned = 50000,
@@ -479,16 +481,35 @@ func addUpTextF(_value:String, _howMuch:float):
 	addUpText(_value, theU)
 
 func addTreat(_howMuch:int = 1):
-	var oldAmount:int = treatAmount
-	treatAmount += _howMuch
-	if(treatAmount < 0):
-		treatAmount = 0
+	var oldAmount:int = getTreatAmount()
+	if(_howMuch > 0):
+		for _i in range(_howMuch):
+			GM.pc.getInventory().addItem(GlobalRegistry.createItem("appleitem"))
+	if(_howMuch < 0):
+		GM.pc.getInventory().removeXOfOrDestroy("appleitem", -_howMuch)
+	var newTreatAmount:int = getTreatAmount()
 	
-	if(oldAmount == treatAmount):
+	if(oldAmount == newTreatAmount):
 		return
-	var theDiff:int = treatAmount - oldAmount
+	var theDiff:int = newTreatAmount - oldAmount
 	if(theDiff != 0):
 		addUpText("Treat" if (theDiff == 1 || theDiff == -1) else "Treats", theDiff)
+
+func getTreatAmount() -> int:
+	return GM.pc.getInventory().getAmountOf("appleitem")
+
+func addShiv():
+	GM.pc.getInventory().addItem(GlobalRegistry.createItem("Shiv"))
+	addUpText("Shiv", 1)
+
+func useShiv() -> bool:
+	if(GM.pc.getInventory().removeFirstOf("Shiv")):
+		addUpText("Shiv", -1)
+		return true
+	return false
+
+func getShivAmount() -> int:
+	return GM.pc.getInventory().getAmountOf("Shiv")
 
 func sayMilkaLine():
 	if(cowTopic >= MILKA_LINES.size()):
@@ -550,12 +571,14 @@ func onDayEnd():
 		var earnedCredsMax:int = milkedToday * 300 + milkedTotal * milkedTotal
 		earned += RNG.randi_range(int(earnedCredsMin*earnMult), int(earnedCredsMax*earnMult))
 	
+	if(pcGaveMilkOrSeed <= 0):
+		needsPunishment = true
+	
 	if(earned > 0):
 		totalEarned += earned
 		saynn("The cafe made some profit!")
 		addCredits(earned)
 	else:
-		needsPunishment = true
 		saynn("The cafe wasn't able to make any profit because there was not enough milk/cream.")
 	
 	for theNewUpgradeLevel in range(UPGRADES.size()):
@@ -570,6 +593,7 @@ func onDayEnd():
 	
 	milkedToday = 0
 	extraProfit = 0
+	pcGaveMilkOrSeed = 0
 	onNewDay()
 
 func addBreastPump(_charID:String) -> bool:
@@ -631,55 +655,58 @@ func cowBull() -> String:
 	return cowBullBoth("cow", "bull", "cow")
 
 func getObedienceText() -> String:
-	if(obedience <= -0.9):
+	var theObedience:float = obedience if obedience < 0.0 else obedience*2.0
+	if(theObedience <= -0.9):
 		return "The owners despise you. You’re nothing but trouble in their eyes."
-	if(obedience <= -0.7):
+	if(theObedience <= -0.7):
 		return "The owners really hate you."
-	if(obedience <= -0.5):
+	if(theObedience <= -0.5):
 		return "The owners dislike your behaviour."
-	if(obedience <= -0.3):
+	if(theObedience <= -0.3):
 		return "The owners think you're very disobedient."
-	if(obedience <= -0.1):
+	if(theObedience <= -0.1):
 		return "The owners think you're disobedient."
-	if(obedience <= 0.1):
+	if(theObedience <= 0.1):
 		return "The owners keep a close eye on you."
-	if(obedience <= 0.3):
+	if(theObedience <= 0.3):
 		return "The owners see you as somewhat cooperative."
-	if(obedience <= 0.5):
+	if(theObedience <= 0.5):
 		return "The owners are pleased with your behaviour."
-	if(obedience <= 0.7):
+	if(theObedience <= 0.7):
 		return "The owners think you're very obedient."
-	if(obedience <= 0.9):
+	if(theObedience <= 0.9):
 		return "The owners think you're very loyal."
 	return "The owners think you're the perfect slave."
 
 func getCowTrustText() -> String:
-	if(cowTrust < 0.0):
+	var theTrust:float = cowTrust * 2.0
+	if(theTrust < 0.0):
 		return "The cow dislikes you."
-	if(cowTrust <= 0.0):
+	if(theTrust <= 0.0):
 		return "The cow doesn't know you."
-	if(cowTrust <= 0.2):
+	if(theTrust <= 0.2):
 		return "The cow knows you a little bit."
-	if(cowTrust <= 0.4):
+	if(theTrust <= 0.4):
 		return "The cow likes you."
-	if(cowTrust <= 0.6):
+	if(theTrust <= 0.6):
 		return "The cow thinks you're very nice."
-	if(cowTrust <= 0.8):
+	if(theTrust <= 0.8):
 		return "The cow adores you."
 	return "You are cow's best friend."
 
 func getBullTrustText() -> String:
-	if(bullTrust < 0.0):
+	var theTrust:float = bullTrust * 2.0
+	if(theTrust < 0.0):
 		return "The bull dislikes you."
-	if(bullTrust <= 0.0):
+	if(theTrust <= 0.0):
 		return "The bull doesn't know you."
-	if(bullTrust <= 0.2):
+	if(theTrust <= 0.2):
 		return "The bull knows you a little bit."
-	if(bullTrust <= 0.4):
+	if(theTrust <= 0.4):
 		return "The bull thinks you're alright."
-	if(bullTrust <= 0.6):
+	if(theTrust <= 0.6):
 		return "The bull respects you."
-	if(bullTrust <= 0.8):
+	if(theTrust <= 0.8):
 		return "The bull admires you."
 	return "You and the bull are buddies."
 
@@ -718,11 +745,13 @@ func main_state():
 	
 	sayn("Day: "+str(day))
 	#TODO: Replace with texts
-	sayn("Obedience: "+getObedienceText()+" "+str(Util.roundF(obedience*100.0, 1))+"%")
-	sayn("Cow's trust: "+getCowTrustText()+" "+str(Util.roundF(cowTrust*100.0, 1))+"%")
-	sayn("Bull's trust: "+getBullTrustText()+" "+str(Util.roundF(bullTrust*100.0, 1))+"%")
-	if(treatAmount > 0):
-		sayn("Treats: "+str(treatAmount))
+	sayn("Obedience: "+getObedienceText())#+" "+str(Util.roundF(obedience*100.0, 1))+"%")
+	sayn("Cow's trust: "+getCowTrustText())#+" "+str(Util.roundF(cowTrust*100.0, 1))+"%")
+	sayn("Bull's trust: "+getBullTrustText())#+" "+str(Util.roundF(bullTrust*100.0, 1))+"%")
+	if(getTreatAmount() > 0):
+		sayn("Treats: "+str(getTreatAmount()))
+	if(getShivAmount() > 0):
+		sayn("Shivs: "+str(getShivAmount()))
 	
 	sayn("")
 	
@@ -736,7 +765,10 @@ func main_state():
 		# If messy
 		addAction("Wash", "Ask to be washed", "idleWash")
 		if(GM.pc.getStamina() > 0):
-			addAction("Peek outside", "Peek through the door's little window", "idlePeek")
+			if(GM.pc.isBlindfolded()):
+				addDisabledAction("Peek outside", "You can't see..")
+			else:
+				addAction("Peek outside", "Peek through the door's little window", "idlePeek")
 		else:
 			addDisabledAction("Peek outside", "The window is high so you need some stamina to reach it")
 		if(peekState >= PEEK_NOTICED_PADLOCK):
@@ -777,7 +809,7 @@ func main_state():
 		addAction("Eat grass", "Go eat grass like a good livestock", "eatGrass")
 		addAction("Starve", "You refuse to eat the grass", "eatStarve")
 		addAction("Demand", "Demand the owners to be fed normal food", "eatDemand")
-		if(treatAmount > 0):
+		if(getTreatAmount() > 0):
 			addAction("Eat a treat!", "Eat one of your treats", "eatTreat")
 		#addAction("Suck bull", "Feed on the bull's seed", "eatSuckBull")
 	if(idleState == IDLE_NEEDY):
@@ -802,12 +834,12 @@ func main_state():
 					addDisabledAction("Milka's breasts", "You don't have any stamina to do this")
 				else:
 					addAction("Milka's breasts", "Help Milka by applying special cream to her breasts", "idleCowBreasts")
-		if(helpedMilka):
+		if(helpedMilka || canMilkOthers):
 			if(GM.pc.getStamina() > 0):
 				addAction("Milk Cow", "Help with milking the cow", "talkCowMilk")
 			else:
 				addDisabledAction("Milk Cow", "You don't have any stamina left")
-		if(bullTrust > 0.5 || cageRemoved):
+		if(bullTrust > 0.5 || cageRemoved || canMilkOthers):
 			if(GM.pc.getStamina() > 0):
 				addAction("Milk Bull", "Help with milking the bull", "talkBullMilk")
 			else:
@@ -853,7 +885,7 @@ func triggerEventMaybe():
 		possible.append(["eEatAss", 1.0 if !GM.pc.isOralBlocked() else 3.0])
 		possible.append(["eWannaCuddle", 2.0])
 		possible.append(["eRandomStuff", 5.0])
-		if(treatAmount > 0):
+		if(getTreatAmount() > 0):
 			possible.append(["eCowSeesTreat", 4.0])
 			possible.append(["eBullSeesTreat", 4.0])
 		if(canHelpCage && !cageRemoved):
@@ -886,6 +918,10 @@ func main_do(_id:String, _args:Array):
 		else:
 			addStamina(10)
 			addPain(-10)
+		
+		if(obedience < 0.0 && RNG.chance(10.0 - 4.0*getShivAmount())):
+			saynn("While exploring, you find a sharp piece of wood.")
+			addShiv()
 		
 		var special:String = RNG.pickWeightedDict({
 			"": 100.0, "guy": 20.0, "girl": 20.0, "cow": 10.0,
@@ -1032,7 +1068,7 @@ func main_do(_id:String, _args:Array):
 			"There are some customers so you do your best to get their attention, waving and tapping.",
 		]))
 	
-		if(peekState == PEEK_NOTICED_PADLOCK && RNG.chance(-30+peekTried*20)):
+		if(peekState == PEEK_NOTICED_PADLOCK && RNG.chance(-50+peekTried*40)):
 			peekTried = 0
 			peekState = PEEK_NOTICED_CUSTOMER
 			playAnimation(StageScene.Solo, "stand", {pc=C_OFFICER})
@@ -1040,7 +1076,7 @@ func main_do(_id:String, _args:Array):
 			saynn("He is wearing fancy clothes.. and also spots one hell of a smile. What a wolf.")
 			saynn("You bounce and wave.. but he turns away too fast. And soon, he head off.")
 			return
-		elif(peekState == PEEK_NOTICED_CUSTOMER && RNG.chance(-30+peekTried*40)):
+		elif(peekState == PEEK_NOTICED_CUSTOMER && RNG.chance(-30+peekTried*50)):
 			peekTried = 0
 			peekState = PEEK_NOTICED_BY_CUSTOMER
 			playAnimation(StageScene.Solo, "stand", {pc=C_OFFICER})
@@ -1052,7 +1088,7 @@ func main_do(_id:String, _args:Array):
 			saynn("His brow shifts ever so subtly.. But you really can't tell.")
 			saynn("Sofie hands him his order.. and so he leaves. Fuck, almost..")
 			return
-		elif(peekState == PEEK_NOTICED_BY_CUSTOMER && RNG.chance(-30+peekTried*50)):
+		elif(peekState == PEEK_NOTICED_BY_CUSTOMER && RNG.chance(-20+peekTried*50)):
 			peekTried = 0
 			peekState = PEEK_BULLIED_BY_GIRL
 			playAnimation(StageScene.Solo, "stand", {pc=C_OFFICER})
@@ -1061,7 +1097,7 @@ func main_do(_id:String, _args:Array):
 			saynn("You can see him saying something to the girl.. something that startles her. Oh shit.")
 			addContinue("setState", ["pEventBullyByGirl"])
 			return
-		elif(peekState == PEEK_BULLIED_BY_GIRL && RNG.chance(10+peekTried*40) && !gonnaHavePeekEvent):
+		elif(peekState == PEEK_BULLIED_BY_GIRL && RNG.chance(-10+peekTried*60) && !gonnaHavePeekEvent):
 			peekTried = 0
 			gonnaHavePeekEvent = true
 			peekState = PEEK_FIRST_EVENT_HAPPENED
@@ -1072,7 +1108,7 @@ func main_do(_id:String, _args:Array):
 			saynn("He finishes making his order.. grabs it.. and just leaves.")
 			saynn("Maybe.. maybe this is pointless. Maybe there is nothing you can do..")
 			return
-		elif(peekState == PEEK_FIRST_EVENT_HAPPENED && RNG.chance(10+peekTried*50) && !gonnaHavePeekEvent):
+		elif(peekState == PEEK_FIRST_EVENT_HAPPENED && RNG.chance(-30+peekTried*100) && !gonnaHavePeekEvent):
 			peekTried = 0
 			gonnaHavePeekEvent = true
 			peekState = PEEK_SECOND_EVENT_HAPPENED
@@ -1081,7 +1117,7 @@ func main_do(_id:String, _args:Array):
 			saynn("He looks at you.. and puts on a familliar smile.")
 			saynn("This means that he is probably gonna be on a night shift today.. and so are you.")
 			return
-		elif(peekState == PEEK_SECOND_EVENT_HAPPENED && RNG.chance(10+peekTried*50) && !gonnaHavePeekEvent):
+		elif(peekState == PEEK_SECOND_EVENT_HAPPENED && RNG.chance(min(-40+peekTried*60, 50.0)) && !gonnaHavePeekEvent):
 			peekTried = 0
 			gonnaHavePeekEvent = true
 			peekState = PEEK_THIRD_EVENT_HAPPENED
@@ -1132,7 +1168,18 @@ func main_do(_id:String, _args:Array):
 		addStamina(-30)
 		
 		addPadlockDamage(RNG.randf_range(1.0, 3.0))
-
+		
+		if(cageRemoved):
+			saynn("Pip joins and kicks the door with his powerful hooves as well!")
+			addPadlockDamage(RNG.randf_range(1.0, 3.0))
+		
+		if(padlockDamage >= 1.0):
+			saynn("[b]The padlock got broken![/b] But there is not enough time to do anything about it now.")
+		
+		if(RNG.chance(30.0 - 10.0*getShivAmount())):
+			saynn("A small piece of the door splinters off.. quite a sharp piece.")
+			addShiv()
+		
 		var special:String = RNG.pickWeightedDict({
 			"": 100.0, "guy": 10.0, "cuffs": 10.0,
 		})
@@ -1178,7 +1225,7 @@ func main_do(_id:String, _args:Array):
 		aimCamera(L_COW)
 		playAnimation(StageScene.BreastGroping, "grope", {pc="pc", npc="psmilka"})
 		
-		milkaExtraBreastSize += 1
+		milkaExtraBreastSize += 2
 		updateCharacters()
 		
 		saynn(RNG.pick([
@@ -1329,7 +1376,7 @@ func main_do(_id:String, _args:Array):
 			"You sharpen a twig that you have found in the garden and try to use it as a lockpick inside Pip's chastity cage.",
 			"You get a good grip on the metal pieces of Pip's chastity cage and use your full strength to try to bend them.",
 		]))
-		cageDamage += RNG.randf_range(0.1, 0.2)
+		cageDamage += RNG.randf_range(0.2, 0.3)
 		addStamina(-20)
 		addBullTrust(1)
 		
@@ -1488,6 +1535,9 @@ func main_do(_id:String, _args:Array):
 			talk(C_COW, "The owner bought it for me. But he is too busy running the cafe to apply it.")
 			saynn("You read the effects.. estrogen, prolactin.. apparently this cream is supposed to help with the lactation. Needs to be applied directly to the breasts.")
 			talk(C_COW, "I'm too afraid to use it myself, I'm just a cow!")
+		elif(helpedMilka):
+			saynn("You chat a little more.")
+			sayMilkaLine()
 		
 		addContinueEventTrigger()
 	if(_id == "talkBull"):
@@ -1502,6 +1552,9 @@ func main_do(_id:String, _args:Array):
 			saynn("Before you go, he shows you his chastity cage. His locked away cock is pulsing hard inside its tight little prison.")
 			talk(C_BULL, "It's been there for at least a few months. I'm fucking desperate. Maybe you can try to do something? If you have the time.")
 			saynn("A caged bull just isn't right. On the other hand, maybe that's just his fate now.")
+		elif(cageRemoved):
+			saynn("You chat a little more.")
+			sayPipLine()
 		
 		addContinueEventTrigger()
 	if(_id == "talkAnnoy"):
@@ -1514,8 +1567,9 @@ func main_do(_id:String, _args:Array):
 		addObedience(-3)
 		var special:String = RNG.pickWeightedDict({
 			"nothing": 5.0,
-			"treat": 5.0 if treatAmount <= 2 else 1.0,
+			"treat": 5.0 if getTreatAmount() <= 1 else 1.0,
 			"bully": 2.0 - obedience*3.0,
+			"shiv": 2.0 - getShivAmount()*0.5,
 		})
 		if(special == "treat"):
 			playAnimation(StageScene.Duo, "stand", {npc=C_GUY})
@@ -1533,17 +1587,37 @@ func main_do(_id:String, _args:Array):
 				"YOU WANT MY ATTENTION? YOU GOT IT, WHORE.",
 			]))
 			bullyScene(C_PC)
+		if(special == "shiv"):
+			if(bullTopic <= 0):
+				saynn("After that stunt, one of the other slaves approaches you.")
+				talk(C_GUY, "Hey.. you don't know me.. but I think this might be more useful to you than me.")
+				saynn("He hands you a sharpened rock.. could be used as a weapon.")
+				
+			else:
+				saynn("After that stunt, Pip approaches you.")
+				talk(C_GUY, "Hey.. I think this might be more useful to you than me.")
+				saynn("He hands you a sharpened rock.. could be used as a weapon.")
+			addShiv()
 		
 		addContinueEventTrigger()
 	if(_id == "talkCowMilk"):
-		saynn("You make Milka an offer to milk her. She agrees.")
+		if(cowTopic > 0):
+			saynn("You make Milka an offer to milk her. She agrees.")
+		else:
+			saynn("You tell the cow that it's time for you to milk her.")
 		milkScene(C_PC, C_COW)
 		addStamina(-40)
 		addCowTrust(3)
 		addContinueEventTrigger()
-		addAction("Breed her", "Fuck Milka with your cock or a strapon!", "milkaRewardBreed")
+		if(helpedMilka):
+			addAction("Breed her", "Fuck Milka with your cock or a strapon!", "milkaRewardBreed")
+		else:
+			addDisabledAction("Breed her", "She doesn't trust you enough..")
 	if(_id == "talkBullMilk"):
-		saynn("You make Pip an offer to milk him. He agrees.")
+		if(bullTopic > 0):
+			saynn("You make Pip an offer to milk him. He agrees.")
+		else:
+			saynn("You tell the bull that it's time for you to milk him.")
 		milkScene(C_PC, C_BULL)
 		addStamina(-40)
 		addBullTrust(3)
@@ -1595,7 +1669,7 @@ func main_do(_id:String, _args:Array):
 		if(GM.pc.getStamina() <= 0):
 			saynn("Ow.. Your belly hurts..")
 			addPain(20)
-		if(treatAmount <= 0 && RNG.chance(20+GM.pc.getPainLevel()*80.0+clamp(obedience, 0.0, 1.0)*50.0)):
+		if(getTreatAmount() <= 0 && RNG.chance(20+GM.pc.getPainLevel()*80.0+clamp(obedience, 0.0, 1.0)*50.0)):
 			playAnimation(StageScene.Duo, "stand", {npc=C_GUY})
 			saynn("Leo approaches you and hands you a carrot..")
 			talk(C_GUY, "I know the grass isn't what you normally eat. But don't starve yourself, okay? Don't tell Sofie.")
@@ -1621,7 +1695,7 @@ func main_do(_id:String, _args:Array):
 		
 		if(RNG.chance(30) && cowTrust > 0.0):
 			saynn("Milka drools while watching you.")
-			if(treatAmount > 0):
+			if(getTreatAmount() > 0):
 				saynn("You just can't watch Milka's puppy eyes.. You have a spare treat so you decide to give it to her.")
 				talk(C_COW, "For me? Thank you-u-u~!")
 				addCowTrust(3)
@@ -1804,6 +1878,8 @@ func about_to_be_milked_by_guy_do(_id:String, _args:Array):
 			saynn("Looks like she wants to fight you..")
 			
 			addAction("Fight!", "Start the fight", "startFight", [C_GIRL])
+			if(getShivAmount() > 0):
+				addAction("Shiv her!", "Use your shiv to make her fuck off", "useShiv")
 		else:
 			if(obedience < -0.1):
 				talk(C_GUY, RNG.pick([
@@ -1862,7 +1938,6 @@ func about_to_be_milked_by_girl_do(_id:String, _args:Array):
 		milkScene(C_GIRL, C_PC)
 		setState("main")
 	if(_id == "decline"):
-		#TODO: Add a fight here!
 		saynn("You decline her offer.")
 		addObedience(-1)
 		if(obedience < -0.1):
@@ -1879,7 +1954,26 @@ func about_to_be_milked_by_girl_do(_id:String, _args:Array):
 			]))
 		saynn("Looks like you are gonna have to fight her.")
 		addAction("Fight!", "Start the fight", "startFight", [C_GIRL])
-
+		if(getShivAmount() > 0):
+			addAction("Shiv her!", "Use your shiv to make her fuck off", "useShiv")
+	if(_id == "useShiv"):
+		playAnimation(StageScene.Duo, "shiv", {npc=C_GIRL, npcAction="defeat"})
+		saynn("Before Sofie can react, you pull out a shiv and attack her with it!")
+		
+		talk(C_GIRL, RNG.pick([
+			"OW, FUCKER!",
+			"WHERE DID YOU GET THAT, YOU BITCH?",
+			"UGH, I WILL BREAK YOU.. fuck..",
+		]))
+		addObedience(-3)
+		
+		if(RNG.chance(10 - (getShivAmount()-1)*3)):
+			saynn("Sofie grunts as she leaves. Miraculously, [b]you managed to keep the shiv[/b].")
+		else:
+			saynn("Sofie grunts as she leaves. Sadly, her skin is thick enough to break the shiv.")
+			useShiv()
+		setState("main")
+	
 func about_to_be_milked_by_girl_fightResult(_didPCWin:bool):
 	if(_didPCWin):
 		saynn("You managed to fight Sofie off!")
@@ -2372,13 +2466,13 @@ func milkScene(_actorID:String, _targetID:String):
 		var theCapacity:float = getBreastsCapacity(_target)
 		if(theCapacity > 0.0):
 			var fluidRatio:float = collectedMilk / theCapacity
-			if(fluidRatio >= 0.2):
+			if(fluidRatio >= 0.2 || collectedMilk >= 400.0):
 				collectedEnough = true
 	if(shouldMilkPenis):
 		var theCapacity:float = getBallsCapacity(_target)
 		if(theCapacity > 0.0):
 			var fluidRatio:float = collectedSeed / theCapacity
-			if(fluidRatio >= 0.4):
+			if(fluidRatio >= 0.4 || collectedSeed >= 250.0):
 				collectedEnough = true
 	
 	#var collectedTotal:float = collectedMilk + collectedSeed
@@ -2396,6 +2490,8 @@ func milkScene(_actorID:String, _targetID:String):
 		sayParsed("{actor.You} managed to collect "+str(Util.roundF(collectedSeed, 1))+"ml of {target.cum}.")
 	
 	if(collectedEnough):
+		if(_targetID == C_PC || _actorID == C_PC):
+			pcGaveMilkOrSeed += 1
 		if(_actorID == C_GIRL):
 			talk(_actorID, RNG.pick([
 				"Good enough.",
@@ -2539,6 +2635,29 @@ func morningpunish_state():
 	saynn("You try to throw her off.. but it seems that she is not done punishing you yet..")
 	
 	addContinue("startSex", [C_GIRL, C_PC, SexType.DefaultSex, {SexMod.SubMustGoUnconscious:true, SexMod.DisableDynamicJoiners:true}])
+	if(getShivAmount() > 0):
+		addAction("Shiv her!", "Make her fuck off by shiving her", "useshiv")
+	else:
+		addDisabledAction("Shiv her!", "You don't have any shivs")
+
+func morningpunish_do(_id:String, _args:Array):
+	if(_id == "useshiv"):
+		playAnimation(StageScene.Duo, "shiv", {npc=C_GIRL, npcAction="defeat"})
+		
+		saynn("You break free by forcing a shiv into her arm!")
+		talk(C_GIRL, RNG.pick([
+			"ARGH! YOU FUCKER!",
+			"YOU BITCH.. FUCK!",
+			"THAT FUCKING HURT, FUCKER.",
+		]))
+		if(RNG.chance(10 - (getShivAmount()-1)*3)):
+			saynn("Sofie grunts as she leaves. Miraculously, [b]you managed to keep the shiv[/b].")
+		else:
+			saynn("Sofie grunts as she leaves. Sadly, her skin is thick enough to break the shiv.")
+			useShiv()
+		
+		needsPunishment = false
+		addContinue("setState", ["main"])
 
 func morningpunish_sexResult(_sex:SexEngineResult):
 	saynn("The punishment has ended!")
@@ -2581,6 +2700,11 @@ func morningpunish_sexResult(_sex:SexEngineResult):
 				"If anything, at least I got myself a punching bag. Second one.",
 				"Next time, try harder, you slut",
 			]))
+	
+	if(!canMilkOthers):
+		canMilkOthers = true
+		saynn("Before she leaves, she adds one more thing..")
+		talk(C_GIRL, "If you can't give me enough "+cowBullBoth("milk", "cream", "milk")+", start milking others. Be useful, bitch.")
 	
 	needsPunishment = false
 	addContinue("setState", ["main"])
@@ -2700,7 +2824,7 @@ func eGirlBulliesSlave_do(_id:String, _args:Array):
 	
 	if(_id == "doProtect"):
 		playAnimation(StageScene.Duo, "stand", {npc=C_GIRL})
-		sayParsed("You attempts to protect {target.you} from Sofie!")
+		sayParsed("You attempt to protect {target.you} from Sofie!")
 		if(theSlave == C_BULL):
 			addCowTrust(5)
 		else:
@@ -2713,7 +2837,26 @@ func eGirlBulliesSlave_do(_id:String, _args:Array):
 		sayParsed("Looks like you will have to fight.")
 		addObedience(-1)
 		addAction("Fight", "Start the fight", "startFight", [C_GIRL])
-	
+		if(getShivAmount() > 0):
+			addAction("Shiv her!", "Use your shiv to make her fuck off", "useShiv")
+	if(_id == "useShiv"):
+		playAnimation(StageScene.Duo, "shiv", {npc=C_GIRL, npcAction="defeat"})
+		saynn("Before Sofie can react, you pull out a shiv and attack her with it!")
+		
+		talk(C_GIRL, RNG.pick([
+			"OW, FUCKER!",
+			"WHERE DID YOU GET THAT, YOU BITCH?",
+			"UGH, I WILL BREAK YOU.. fuck..",
+		]))
+		addObedience(-3)
+		
+		if(RNG.chance(10 - (getShivAmount()-1)*3)):
+			saynn("Sofie grunts as she leaves. Miraculously, [b]you managed to keep the shiv[/b].")
+		else:
+			saynn("Sofie grunts as she leaves. Sadly, her skin is thick enough to break the shiv.")
+			useShiv()
+		addContinue("setState", ["main"])
+		
 	if(_id == "takeBlame"):
 		playAnimation(StageScene.Duo, "stand", {npc=C_GIRL})
 		sayParsed("You tell Sofie to let her anger on you instead!")
@@ -2914,6 +3057,11 @@ func eGirlCattleProdBull_do(_id:String, _args:Array):
 			talk(C_BULL, "Fuck that bitch, right?")
 			addBullTrust(4)
 	
+		if(RNG.chance(100.0 - getShivAmount()*40.0)):
+			saynn("He hands you a sharpened stone.")
+			addShiv()
+			talk(C_BULL, "I hope this will be helpful to you.")
+	
 	addContinue("setState", ["main"])
 
 
@@ -2973,7 +3121,7 @@ func eWannaCuddle_do(_id:String, _args:Array):
 		talk(C_GUY, "Sure, okay, no problem.")
 	
 	if(_id == "chill"):
-		playAnimation(StageScene.Cuddling, "idle", {pc=C_GUY, npc=C_GIRL})
+		playAnimation(StageScene.Cuddling, "idle", {pc=C_GUY, npc=C_PC})
 		saynn("You decide to spend some time with the guy.")
 		saynn("It's nice to not be abused or bullied for once. Leo is chatting with you while you just stay quiet mostly.")
 		sayLeoLine()
@@ -3225,7 +3373,7 @@ func eHelpCage_do(_id:String, _args:Array):
 			"You sharpen a twig that you have found in the garden and try to use it as a lockpick inside Pip's chastity cage.",
 			"You get a good grip on the metal pieces of Pip's chastity cage and use your full strength to try to bend them.",
 		]))
-		cageDamage += RNG.randf_range(0.1, 0.2)
+		cageDamage += RNG.randf_range(0.1, 0.25)
 		addStamina(-20)
 		addBullTrust(1)
 		
