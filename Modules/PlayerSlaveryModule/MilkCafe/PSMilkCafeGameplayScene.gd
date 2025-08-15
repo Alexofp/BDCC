@@ -1031,7 +1031,16 @@ func _react(_action: String, _args):
 
 	if(_action == "lock_about_to_escape"):
 		getCharacter("psmilkguy").resetEquipment()
-
+	
+	if(_action == "lock_about_to_escape"):
+		GM.main.PSH.unlockEndingAddMessage("MilkCafe", "escaped")
+	if(_action == "credits_detective"):
+		GM.main.PSH.unlockEndingAddMessage("MilkCafe", "earned")
+	if(_action == "annoy_get_helped"):
+		GM.main.PSH.unlockEndingAddMessage("MilkCafe", "annoyed")
+	if(_action == "officer_goodlife"):
+		GM.main.PSH.unlockEndingAddMessage("MilkCafe", "officer")
+	
 	setState(_action)
 
 func _react_scene_end(_tag, _result):

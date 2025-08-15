@@ -23,3 +23,6 @@ func isTrivial() -> bool:
 
 func createSlavery():
 	return null
+
+func getEndings() -> Dictionary:
+	return {}

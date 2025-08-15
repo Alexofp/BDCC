@@ -1428,13 +1428,13 @@ func getDebugActions():
 			"id": "startSlavery",
 			"name": "Start Player Slavery",
 			"args": [
-				{
-					"id": "slaveryID",
-					"name": "Slavery id",
-					"type": "list",
-					"value": GlobalRegistry.getPlayerSlaveryDefs().keys().front(),
-					"values": TFUtil.getPlayerSlaveryStartList(),
-				},
+#				{
+#					"id": "slaveryID",
+#					"name": "Slavery id",
+#					"type": "list",
+#					"value": GlobalRegistry.getPlayerSlaveryDefs().keys().front(),
+#					"values": TFUtil.getPlayerSlaveryStartList(),
+#				},
 			],
 		},
 		{
@@ -1458,7 +1458,11 @@ func doDebugAction(id, args = {}):
 		else:
 			GM.pc.getTFHolder().startTransformation(args["tfid"])
 	if(id == "startSlavery"):
-		startPlayerSlavery(args["slaveryID"], true)
+		if(PS):
+			return
+		PSH.storePlayersItems()
+		runScene("PlayerSlaveryPickScene")
+		#startPlayerSlavery(args["slaveryID"], true)
 	if(id == "stopSlavery"):
 		if(PS):
 			stopPlayerSlavery()

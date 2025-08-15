@@ -20,6 +20,9 @@ func _run():
 	if(state == "pick_menu"):
 		saynn("Which slavery scenario do you want to experience?")
 		
+		saynn("Unlocked Endings:")
+		sayn(GM.main.PSH.getEndingsInfo())
+		
 		for slaveryID in GlobalRegistry.getPlayerSlaveryDefs():
 			var thePlayerSlaveryDef:PlayerSlaveryDef = GlobalRegistry.getPlayerSlaveryDef(slaveryID)
 			

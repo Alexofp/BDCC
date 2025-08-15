@@ -24,7 +24,7 @@ func _run():
 	var roomID:String = GM.pc.getLocation()
 	
 	if(state == ""):
-		saynn("meow")
+		saynn("If you see this, something went wrong.")
 	
 	
 	if(state == "roam"):

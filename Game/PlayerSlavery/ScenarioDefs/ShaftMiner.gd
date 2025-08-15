@@ -14,3 +14,19 @@ func canBeChosen() -> bool:
 
 func createSlavery():
 	return load("res://Game/PlayerSlavery/Scenarios/ShaftMiner.gd").new()
+
+func getEndings() -> Dictionary:
+	return {
+		"mined": {
+			name = "No rock left unmined",
+			desc = "Reach the required amount of credits",
+		},
+		"escaped": {
+			name = "Super Mega drill",
+			desc = "Find a way to escape together with other slaves",
+		},
+		"killedboss": {
+			name = "Drilled to see you",
+			desc = "Make the guy regret ever messing with you",
+		},
+	}

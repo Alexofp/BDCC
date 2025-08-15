@@ -265,6 +265,7 @@ func _react(_action: String, _args):
 
 	if(_action == "near_cages"):
 		processTime(3*60)
+		GM.main.PSH.unlockEndingAddMessage("ShaftMiner", "mined")
 
 	if(_action == "slave_gets_shot"):
 		processTime(3*60)

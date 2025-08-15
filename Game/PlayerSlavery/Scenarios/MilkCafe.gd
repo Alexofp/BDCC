@@ -3509,6 +3509,7 @@ func ePeekFirstEvent3_state():
 
 func ePeekFirstEvent3_do(_id:String, _args:Array):
 	if(_id == "noAgree"):
+		GM.main.PSH.unlockEnding("MilkCafe", "officer") # In case people don't wanna sub to him
 		gonnaHavePeekEvent = false
 		peekState = PEEK_BULLIED_BY_GIRL
 		aimCamera(L_SLEEP)

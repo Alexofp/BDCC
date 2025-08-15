@@ -87,8 +87,8 @@ func _run():
 
 		saynn("[say=psricky]Really? You're still thinking? Just drop the drill, drop the whole act, you ain't got the balls anyway. I might even spare you. You're stupid, you see? Even if you escape.. you got enslaved once, you will just get enslaved again. Again and again. You can't help it, you just need someone to always yank on your leash, don't you?[/say]")
 
-		addButton("Kill him", "End his life and escape with yours. Alone", "kill_ricky")
 		addButton("Save others", "Try to use Ricky to convince the goons to let others go with you. Ricky will have to stay alive for that", "save_others")
+		addButton("Kill him", "End his life and escape with yours. Alone", "kill_ricky")
 	if(state == "kill_ricky"):
 		removeCharacter("psricky")
 		playAnimation(StageScene.Rekt, "end", {pc="pc", npc="psricky"})
@@ -541,6 +541,11 @@ func _react(_action: String, _args):
 
 	if(_action == "escape2_broughtdown"):
 		processTime(3*60)
+		
+	if(_action == "do_relax_escape1"):
+		GM.main.PSH.unlockEndingAddMessage("ShaftMiner", "killedboss")
+	if(_action == "escape2_ship"):
+		GM.main.PSH.unlockEndingAddMessage("ShaftMiner", "escaped")
 
 	setState(_action)
 
