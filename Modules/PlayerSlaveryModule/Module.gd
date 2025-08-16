@@ -23,6 +23,7 @@ func _init():
 		"res://Modules/PlayerSlaveryModule/SlaveAuction/PlayerSlaveryStartLuxeScene.gd",
 		"res://Modules/PlayerSlaveryModule/SlaveAuction/PlayerSlaveryAuctionScene.gd",
 		"res://Modules/PlayerSlaveryModule/SlaveAuction/PlayerSlaveryPickScene.gd",
+		"res://Modules/PlayerSlaveryModule/Other/PlayerSlaveryStartMemeScene.gd",
 		]
 	characters = [
 		"res://Modules/PlayerSlaveryModule/ShaftMiner/PSRicky.gd",
@@ -35,7 +36,13 @@ func _init():
 	]
 	items = []
 	events = [
+		"res://Modules/PlayerSlaveryModule/Other/PlayerSlaveryStartMemeEvent.gd",
 	]
 
 func resetFlagsOnNewDay():
 	pass
+
+func getSlaveryStartScene():
+	if(getFlag("SlaveAuctionModule.r6outcome", "") in ["mirrislave", "mirrigone"]):
+		return "PlayerSlaveryStartLuxeScene"
+	return "PlayerSlaveryStartMirriScene"

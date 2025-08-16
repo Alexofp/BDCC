@@ -1460,8 +1460,9 @@ func doDebugAction(id, args = {}):
 	if(id == "startSlavery"):
 		if(PS):
 			return
-		PSH.storePlayersItems()
-		runScene("PlayerSlaveryPickScene")
+		#PSH.storePlayersItems()
+		#runScene("PlayerSlaveryPickScene")
+		runScene(GlobalRegistry.getModule("PlayerSlaveryModule").getSlaveryStartScene())
 		#startPlayerSlavery(args["slaveryID"], true)
 	if(id == "stopSlavery"):
 		if(PS):
