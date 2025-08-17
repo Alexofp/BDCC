@@ -37,6 +37,7 @@ func _init():
 	items = []
 	events = [
 		"res://Modules/PlayerSlaveryModule/Other/PlayerSlaveryStartMemeEvent.gd",
+		"res://Modules/PlayerSlaveryModule/Other/UnconStartSlaveryEvent.gd",
 	]
 
 func resetFlagsOnNewDay():

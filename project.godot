@@ -1549,6 +1549,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Inventory/SmartLocks/SmartLockBase.gd"
 }, {
+"base": "Object",
+"class": "SocialEventType",
+"language": "GDScript",
+"path": "res://Game/InteractionSystem/Relationship/SocialEventType.gd"
+}, {
+"base": "Reference",
+"class": "SpecialRelationshipBase",
+"language": "GDScript",
+"path": "res://Game/InteractionSystem/Relationship/SpecialRelationshipBase.gd"
+}, {
 "base": "Reference",
 "class": "Species",
 "language": "GDScript",
@@ -2038,6 +2048,8 @@ _global_script_class_icons={
 "SlaveTypeBase": "",
 "SmartLock": "",
 "SmartLockBase": "",
+"SocialEventType": "",
+"SpecialRelationshipBase": "",
 "Species": "",
 "SpeciesCompatibility": "",
 "SpeechModifierBase": "",

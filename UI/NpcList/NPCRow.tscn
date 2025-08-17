@@ -55,14 +55,31 @@ size_flags_horizontal = 3
 size_flags_vertical = 0
 custom_constants/separation = 0
 
-[node name="Name" type="Label" parent="HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 margin_right = 248.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 110, 50 )
+mouse_filter = 2
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_right = 248.0
+margin_bottom = 23.0
 size_flags_horizontal = 11
-size_flags_vertical = 0
+size_flags_vertical = 3
 custom_styles/normal = SubResource( 1 )
 text = "Name:"
+valign = 1
+autowrap = true
+
+[node name="RelationshipName" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_top = 27.0
+margin_right = 248.0
+margin_bottom = 50.0
+size_flags_horizontal = 11
+size_flags_vertical = 3
+custom_styles/normal = SubResource( 1 )
+text = "(Nemesis)"
 valign = 1
 autowrap = true
 

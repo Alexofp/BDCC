@@ -2,9 +2,15 @@ extends Reference
 class_name RelationshipSystem
 
 var entries: Dictionary = {}
+var special: Dictionary = {}
 
 func clearRelationships():
 	entries.clear()
+
+func hoursPassed(_howMany:int):
+	decayRelationships(_howMany)
+	for charID in special:
+		special[charID].hoursPassed(_howMany)
 
 func decayRelationships(hoursPassed:int):
 	var rem:float = float(hoursPassed) * 0.0005
@@ -188,7 +194,60 @@ func removeAllEntriesOf(char1:String):
 	for otherCharID in toRemove:
 		removeEntry(char1, otherCharID)
 
+func onCharDelete(_char1:String):
+	removeAllEntriesOf(_char1)
+	if(special.has(_char1)):
+		special.erase(_char1)
+
+func sendSocialEvent(_charActor:String, _charTarget:String, _eventID:int, _args:Array = []):
+	if(_charActor != "pc" && _charTarget != "pc"):
+		return
+	for shipID in GlobalRegistry.getSpecialRelationships():
+		var theShipRef:SpecialRelationshipBase = GlobalRegistry.getSpecialRelationshipRef(shipID)
+		
+		if(theShipRef.checkSocialEventShouldStart(_charActor, _charTarget, _eventID, _args)):
+			if(_charActor != "pc"):
+				# Pass args from check func?
+				startSpecialRelantionship(shipID, _charActor, [])
+			elif(_charTarget != "pc"):
+				startSpecialRelantionship(shipID, _charTarget, [])
+
+func startSpecialRelantionship(_relationshipID:String, _charID:String, _args:Array = []):
+	if(_charID == "pc"): # Player can't have a special relantionship with themselves
+		return
+	var newShip = GlobalRegistry.createSpecialRelationship(_relationshipID)
+	if(!newShip):
+		return
+	newShip.charID = _charID
+	special[_charID] = newShip
+	newShip.onStart(_args)
+
+func hasSpecialRelationship(_charID:String) -> bool:
+	return special.has(_charID)
+
+func getAllSpecialOfType(_shipID:String) -> Array:
+	var result:Array = []
+	for charID in special:
+		if(special[charID] == _shipID):
+			result.append(special[charID])
+	return result
+
+func getSpecialTextAndColor(_charID:String) -> Array:
+	if(!hasSpecialRelationship(_charID)):
+		return []
+	var theShip = special[_charID]
+	return [theShip.getCategoryName(), theShip.getCategoryColor()]
+
+func stopSpecialRelationship(_charID:String):
+	if(!hasSpecialRelationship(_charID)):
+		return
+	special.erase(_charID)
+
 func saveData():
+	var specialData:Array = []
+	for charID in special:
+		specialData.append(special[charID].saveData())
+	
 	var entriesData:Array = []
 	var checkedEntries:Dictionary = {}
 	
@@ -207,6 +266,7 @@ func saveData():
 	
 	return {
 		"entries": entriesData,
+		"special": specialData,
 	}
 
 func loadData(_data):
@@ -228,3 +288,16 @@ func loadData(_data):
 			entries[c2] = {}
 		entries[c1][c2] = entry
 		entries[c2][c1] = entry
+	
+	special.clear()
+	
+	var specialData = SAVE.loadVar(_data, "special", [])
+	for specialEntry in specialData:
+		var theID:String = specialEntry["id"] if specialEntry.has("id") else ""
+		if(theID == ""):
+			continue
+		var theShip = GlobalRegistry.createSpecialRelationship(theID)
+		if(!theShip):
+			continue
+		theShip.loadData(specialEntry)
+		special[theShip.charID] = theShip

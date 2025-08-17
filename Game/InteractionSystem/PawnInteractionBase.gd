@@ -1824,6 +1824,12 @@ func hasRepLevelPC(_role:String, _repID:String, _reqLevel:int) -> bool:
 func addWHSEvent(_eventID:String, whoRole:String, byRole:String, args:Dictionary = {}):
 	GM.main.WHS.addEvent(_eventID, getRoleID(whoRole), getRoleID(byRole), args)
 
+func sendSocialEvent(_roleActor:String, _roleTarget:String, _eventID:int, _args:Array = []):
+	var _charIDActor:String = getCharIDByRole(_roleActor)
+	var _charIDTarget:String = getCharIDByRole(_roleTarget)
+	
+	GM.main.RS.sendSocialEvent(_charIDActor, _charIDTarget, _eventID, _args)
+
 func saveData():
 	var data = {
 		"loc": location,

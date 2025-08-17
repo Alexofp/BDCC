@@ -149,7 +149,7 @@ func removeDynamicCharacter(characterID, printDebug = true):
 		if(printDebug):
 			Log.print("removeDynamicCharacter(): Removing "+str(characterID)+" character")
 		removeDynamicCharacterFromAllPools(characterID)
-		RS.removeAllEntriesOf(characterID)
+		RS.onCharDelete(characterID)
 		IS.deletePawn(characterID)
 		
 		dynamicCharacters[characterID].queue_free()
@@ -686,7 +686,7 @@ func hoursPassed(howMuch):
 			if(character != null && character.isSlaveToPlayer()):
 				character.getNpcSlavery().hoursPassed(howMuch)
 	
-	RS.decayRelationships(howMuch)
+	RS.hoursPassed(howMuch)
 
 func processTimeUntil(newseconds):
 	if(timeOfDay >= newseconds):

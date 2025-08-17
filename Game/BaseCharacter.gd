@@ -142,6 +142,14 @@ func getName() -> String:
 func getSmallDescription() -> String:
 	return "Test test test"
 
+func getSmallDescriptionWithRelationship() -> String:
+	var result:String = getSmallDescription()
+	if(GM.main && GM.main.RS):
+		var specialText:Array = GM.main.RS.getSpecialTextAndColor(getID())
+		if(specialText.size() >= 2):
+			result += "\n([color=#"+specialText[1].to_html(false)+"]"+specialText[0]+"[/color])"
+	return result
+	
 func getBasePainThreshold() -> int:
 	return 100
 

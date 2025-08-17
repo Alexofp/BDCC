@@ -36,7 +36,7 @@ func onCharacterMouseEntered(panel):
 	if(!character):
 		return
 	
-	GlobalTooltip.showTooltip(character.getName() + ", " + character.getSpeciesFullName(), character.getSmallDescription(), true)
+	GlobalTooltip.showTooltip(character.getName() + ", " + character.getSpeciesFullName(), character.getSmallDescriptionWithRelationship(), true)
 	
 func onCharacterMouseExited():
 	GlobalTooltip.hideTooltip()

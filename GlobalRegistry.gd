@@ -218,6 +218,8 @@ var nurseryTasks:Dictionary = {}
 var drugDenEvents:Dictionary = {}
 var drugDenEventRefs:Dictionary = {}
 var playerSlaveryDefs:Dictionary = {}
+var specialRelationships:Dictionary = {}
+var specialRelationshipRefs:Dictionary = {}
 
 var bodypartStorageNode
 
@@ -635,6 +637,7 @@ func registerEverything():
 	registerSlaveActivitiesFolder("res://Game/NpcSlavery/SlaveActivities/")
 	
 	registerPlayerSlaveryDefFolder("res://Game/PlayerSlavery/ScenarioDefs/")
+	registerSpecialRelantionshipFolder("res://Game/InteractionSystem/Relationship/SpecialRelationships/")
 	
 	registerInteractionFolder("res://Game/InteractionSystem/Interactions/")
 	registerGlobalTaskFolder("res://Game/InteractionSystem/GlobalTasks/")
@@ -2704,6 +2707,38 @@ func getPlayerSlaveryDef(id: String):
 		
 func getPlayerSlaveryDefs():
 	return playerSlaveryDefs
+
+
+
+func registerSpecialRelationship(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	specialRelationships[object.id] = loadedClass
+	specialRelationshipRefs[object.id] = object
+
+func registerSpecialRelantionshipFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerSpecialRelationship(scriptPath)
+
+func createSpecialRelationship(id: String):
+	if(specialRelationships.has(id)):
+		return specialRelationships[id].new()
+	else:
+		Log.printerr("ERROR: special relationship with the id "+id+" wasn't found")
+		return null
+
+func getSpecialRelationshipRef(id: String):
+	if(specialRelationshipRefs.has(id)):
+		return specialRelationshipRefs[id]
+	else:
+		Log.printerr("ERROR: special relationship with the id "+id+" wasn't found")
+		return null
+		
+func getSpecialRelationships():
+	return specialRelationshipRefs
+
 
 
 
