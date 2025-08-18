@@ -24,6 +24,7 @@ func start(_pawns:Dictionary, _args:Dictionary):
 		setState("grabbed_about_to_fuck", "reacter")
 	else:
 		setState("", "starter")
+		sendSocialEvent("starter", "reacter", SocialEventType.GotTalkedTo)
 
 func init_text():
 	if(!notFirst):

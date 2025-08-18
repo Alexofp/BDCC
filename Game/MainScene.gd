@@ -721,6 +721,7 @@ func startNewDay():
 	WHS.onNewDay()
 	IS.afterNewDay()
 	SCI.onNewDay()
+	RS.onNewDay()
 	
 	SAVE.triggerAutosave()
 	

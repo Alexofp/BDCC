@@ -1,9 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Images/WorldPawns/collar.png" type="Texture" id=1]
 [ext_resource path="res://Game/World/WorldPawn.gd" type="Script" id=2]
 [ext_resource path="res://Images/WorldPawnActivity/chat.png" type="Texture" id=3]
 [ext_resource path="res://Images/WorldPawns/fem.png" type="Texture" id=4]
+[ext_resource path="res://Fonts/FreeMonospacedBold.otf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 5 )
 
 [node name="WorldPawn" type="Node2D"]
 z_index = 5
@@ -23,3 +29,12 @@ z_index = 5
 texture = ExtResource( 3 )
 
 [node name="MoveTween" type="Tween" parent="."]
+
+[node name="RelationshipLabel" type="Label" parent="."]
+margin_left = 5.0
+margin_top = -1.0
+margin_right = 45.0
+margin_bottom = 19.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "N"

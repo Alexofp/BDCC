@@ -9,6 +9,7 @@ onready var move_tween = $MoveTween
 onready var icon = $Icon
 onready var icon_2 = $Icon2
 onready var icon_3 = $Icon/Icon3
+onready var relationship_label = $RelationshipLabel
 
 func moveToPos(thePos:Vector2):
 	move_tween.interpolate_property(self, "position",
@@ -59,4 +60,12 @@ func setPawnColor(theColor:Color):
 
 func setShowCollar(isShow:bool):
 	icon_3.visible = isShow
-		
+
+func setRelationshipText(_text:String, _color:Color = Color.white):
+	if(_text.empty()):
+		relationship_label.visible = false
+		relationship_label.text = _text
+		return
+	relationship_label.visible = true
+	relationship_label.text = _text
+	relationship_label["custom_colors/font_color"] = _color

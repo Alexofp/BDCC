@@ -7,6 +7,10 @@ var special: Dictionary = {}
 func clearRelationships():
 	entries.clear()
 
+func onNewDay():
+	for charID in special:
+		special[charID].onNewDay()
+
 func hoursPassed(_howMany:int):
 	decayRelationships(_howMany)
 	for charID in special:
@@ -224,6 +228,11 @@ func startSpecialRelantionship(_relationshipID:String, _charID:String, _args:Arr
 
 func hasSpecialRelationship(_charID:String) -> bool:
 	return special.has(_charID)
+
+func getSpecialRelationship(_charID:String):
+	if(!hasSpecialRelationship(_charID)):
+		return null
+	return special[_charID]
 
 func getAllSpecialOfType(_shipID:String) -> Array:
 	var result:Array = []

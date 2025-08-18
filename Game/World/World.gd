@@ -446,6 +446,11 @@ func clearPawns():
 		pawns[pawnID].queue_free()
 	pawns.clear()
 
+func updatePawn(worldPawn, pawn):
+	worldPawn.setPawnActivityIcon(pawn.getActivityIcon())
+	var theTagAndColor:Array = pawn.getPawnRelationshipTextAndColor()
+	worldPawn.setRelationshipText(theTagAndColor[0], theTagAndColor[1])
+
 func updatePawns(IS):
 	#var visiblePawns = {}
 	var checkedPawns = pawns.duplicate()
@@ -464,7 +469,10 @@ func updatePawns(IS):
 			checkedPawns.erase(charID)
 			var worldPawn = pawns[charID]
 			
-			worldPawn.setPawnActivityIcon(pawn.getActivityIcon())
+			updatePawn(worldPawn, pawn)
+			#worldPawn.setPawnActivityIcon(pawn.getActivityIcon())
+			#var theTagAndColor:Array = pawn.getPawnRelationshipTextAndColor()
+			#worldPawn.setRelationshipText(theTagAndColor[0], theTagAndColor[1])
 			
 			if(worldPawn.loc == loc):
 				continue
@@ -497,7 +505,8 @@ func createWorldPawn(charID, pawn, loc):
 	newWorldPawn.setPawnTexture(pawn.getPawnTexture())
 	newWorldPawn.setPawnColor(pawn.getPawnColor())
 	newWorldPawn.setShowCollar(pawn.getShouldShowCollarOnSprite())
-	newWorldPawn.setPawnActivityIcon(pawn.getActivityIcon())
+	#newWorldPawn.setPawnActivityIcon(pawn.getActivityIcon())
+	updatePawn(newWorldPawn, pawn)
 	pawns[charID] = newWorldPawn
 
 func getZoneRooms(zoneID:String, fallbackRooms:Array = []) -> Array:

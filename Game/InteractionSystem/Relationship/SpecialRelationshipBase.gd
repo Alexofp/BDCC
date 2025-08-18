@@ -10,6 +10,9 @@ func getVisibleName() -> String:
 func getCategoryName() -> String:
 	return getVisibleName()
 
+func getMapTag() -> String:
+	return getVisibleName()[0]
+
 func getCategoryColor() -> Color:
 	return Color.white
 

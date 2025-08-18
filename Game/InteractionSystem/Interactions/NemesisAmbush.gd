@@ -1,0 +1,154 @@
+extends PawnInteractionBase
+
+# if we don't have extra1 or extra2, we go to random spots on the map and ask other pawns to join
+# after we have extra1 and extra2, we start spying on the player
+# after some time, we start the ambush
+
+const ROLE_MAIN = "main"
+const ROLE_EXTRA1 = "extra1"
+const ROLE_EXTRA2 = "extra2"
+const ROLE_OFFER = "offer"
+
+var hasExtra1:bool = false
+var hasExtra2:bool = false
+var targetLoc:String = ""
+
+func shouldLookForExtras() -> bool:
+	if(hasExtra1 && hasExtra2):
+		return false
+	return true
+
+func findExtraPawn() -> CharacterPawn:
+	var pawn = getRolePawn(ROLE_MAIN)
+	var allPawnIDs = GM.main.IS.getPawnIDsNear(getLocation(), 1, 1)
+	allPawnIDs.shuffle()
+	for otherPawnID in allPawnIDs:
+		var otherPawn = getPawn(otherPawnID)
+		if(otherPawn == pawn):
+			continue
+		if(otherPawn.isPlayer()):
+			continue
+
+		if(!otherPawn.canInterrupt()):
+			continue
+		
+		return otherPawn
+		#if(otherPawn.tryInterruptPawns([pawn], keepScoreMult)):
+		#	return true
+	return null
+
+func inviteExtra(_otherPawn:CharacterPawn) -> bool:
+	if(!_otherPawn):
+		return false
+	if(!hasExtra1):
+		hasExtra1 = true
+		doInvolvePawn(ROLE_EXTRA1, _otherPawn)
+		return true
+	if(!hasExtra2):
+		hasExtra2 = true
+		doInvolvePawn(ROLE_EXTRA2, _otherPawn)
+		return true
+	return false
+
+func tryAutoInvitePawn():
+	if(shouldLookForExtras()):
+		var thePawn := findExtraPawn()
+		if(thePawn):
+			inviteExtra(thePawn)
+
+func _init():
+	id = "NemesisAmbush"
+
+func start(_pawns:Dictionary, _args:Dictionary):
+	doInvolvePawn("main", _pawns["main"])
+	setState("", "main")
+
+func init_text():
+	saynn("{main.You} {main.youAre} heading somewhere..")
+	
+	addAction("go", "Go!", "Time to go", "default", 1.0, 30, {})
+
+func init_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "go"):
+		if(shouldLookForExtras()):
+			if(targetLoc == ""):
+				targetLoc = RNG.pick(GM.world.getZoneRooms("poi", [
+					"cellblock_nearcells",
+					"main_punishment_spot",
+					"main_laundry",
+					"main_bathroom1",
+					"main_bathroom2",
+					"yard_deadend2",
+					"gym_entrance",
+					"fight_neararena",
+					"fight_slutwall",
+					"med_lobby_start",
+					"mining_nearentrance",
+				]))
+			if(goTowards(targetLoc)):
+				targetLoc = ""
+			#stopMe()
+			#tryAutoInvitePawn()
+			var thePawn := findExtraPawn()
+			if(thePawn):
+				doInvolvePawn(ROLE_OFFER, thePawn)
+				setState("offer", ROLE_OFFER, ROLE_MAIN)
+		else:
+			var leaveTarget:String = GM.pc.getLocation()
+	#		if(GM.main.IS.hasPawn("pc") && GM.main.IS.getPawn("pc").canBeInterrupted()):
+	#			if(getLocation() == leaveTarget):
+	#				completeGoal()
+	#				GM.main.runScene("SlutProstitutionReceiveCredits", [getPawn().charID])
+			var room = GM.world.getRoomByID(leaveTarget)
+			if(room != null && !room.isOfflimitsForInmates()):
+				var theDist := GM.world.simpleRingDistance(getLocation(), GM.pc.getLocation())
+				if(theDist > 2.0 || (theDist > 1.0 && RNG.chance(30))):
+					goTowards(leaveTarget)
+				else:
+					doWander()
+
+func offer_text():
+	saynn("{main.You} {main.youVerb('offer')} {offer.you} to join..")
+	
+	addAction("join", "Answer", "Time to answer", "default", 1.0, 120, {})
+
+func offer_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "join"):
+		var thePawn := getRolePawn(ROLE_OFFER)
+		doRemoveRole(ROLE_OFFER)
+		inviteExtra(thePawn)
+		setState("", ROLE_MAIN)
+
+func canRoleBeInterrupted(_role:String) -> bool:
+	return false
+
+func getInterruptActions(_pawn:CharacterPawn) -> Array:
+	return []
+
+func getAnimData() -> Array:
+	return [StageScene.Solo, "walk", {pc="main"}]
+
+func getPreviewLineForRole(_role:String) -> String:
+	#if(_role == "main"):
+	return "{"+_role+".name} is heading somewhere.."
+	#return .getPreviewLineForRole(_role)
+
+func getActivityIconForRole(_role:String):
+	if(getState() == "offer"):
+		return RoomStuff.PawnActivity.Chat
+	return RoomStuff.PawnActivity.None
+
+func saveData():
+	var data = .saveData()
+
+	data["hasExtra1"] = hasExtra1
+	data["hasExtra2"] = hasExtra2
+	data["targetLoc"] = targetLoc
+	return data
+
+func loadData(_data):
+	.loadData(_data)
+
+	hasExtra1 = SAVE.loadVar(_data, "hasExtra1", false)
+	hasExtra2 = SAVE.loadVar(_data, "hasExtra2", false)
+	targetLoc = SAVE.loadVar(_data, "targetLoc", "")

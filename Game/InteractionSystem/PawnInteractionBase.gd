@@ -1042,7 +1042,7 @@ func shoutForInterruptions(role:String, searchDepth:int, maxDist:float = -1.0, k
 	allPawnIDs.shuffle()
 	for otherPawnID in allPawnIDs:
 		var otherPawn = getPawn(otherPawnID)
-		if(otherPawn == self):
+		if(otherPawn == pawn):
 			continue
 		if(otherPawn.isPlayer() && !pawn.isPlayer()):
 			if(pcMessage != ""):

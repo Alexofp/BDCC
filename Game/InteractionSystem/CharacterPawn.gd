@@ -712,3 +712,13 @@ func getPawnTypeID() -> String:
 
 func getPawnType():
 	return GlobalRegistry.getPawnType(getPawnTypeID())
+
+func getPawnRelationshipTextAndColor() -> Array:
+	var special:SpecialRelationshipBase = GM.main.RS.getSpecialRelationship(charID)
+	if(special):
+		return [special.getMapTag(), special.getCategoryColor()]
+	
+	return ["", Color.white]
+
+func getSpecialRelationship() -> SpecialRelationshipBase:
+	return GM.main.RS.getSpecialRelationship(charID)
