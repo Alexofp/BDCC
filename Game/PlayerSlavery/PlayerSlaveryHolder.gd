@@ -132,7 +132,7 @@ func getUnlockedEndingsAmountOf(slaveryID:String) -> int:
 	
 	return result
 
-func getEndingsInfo() -> String:
+func getEndingsInfo(includeDesc:bool = true) -> String:
 	var result:Array = []
 	for slaveryID in GlobalRegistry.getPlayerSlaveryDefs():
 		var slaveryDef:PlayerSlaveryDef = GlobalRegistry.getPlayerSlaveryDef(slaveryID)
@@ -141,6 +141,8 @@ func getEndingsInfo() -> String:
 			continue
 		var unlockedAmount:int = getUnlockedEndingsAmountOf(slaveryID)
 		result.append(slaveryDef.getVisibleName()+" ("+str(unlockedAmount)+"/"+str(theEndings.size())+"):")
+		if(includeDesc):
+			result.append(slaveryDef.getVisibleDesc())
 		for endingID in theEndings:
 			var endingInfo:Dictionary = theEndings[endingID]
 			var endingName:String = endingInfo["name"] if endingInfo.has("name") else "Error?"

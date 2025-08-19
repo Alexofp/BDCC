@@ -23,7 +23,9 @@ func _init():
 		"res://Modules/PlayerSlaveryModule/SlaveAuction/PlayerSlaveryStartLuxeScene.gd",
 		"res://Modules/PlayerSlaveryModule/SlaveAuction/PlayerSlaveryAuctionScene.gd",
 		"res://Modules/PlayerSlaveryModule/SlaveAuction/PlayerSlaveryPickScene.gd",
-		"res://Modules/PlayerSlaveryModule/Other/PlayerSlaveryStartMemeScene.gd",
+		"res://Modules/PlayerSlaveryModule/Start/PlayerSlaveryStartMemeScene.gd",
+		
+		"res://Modules/PlayerSlaveryModule/Start/NemesisAmbushScene.gd",
 		]
 	characters = [
 		"res://Modules/PlayerSlaveryModule/ShaftMiner/PSRicky.gd",
@@ -36,8 +38,9 @@ func _init():
 	]
 	items = []
 	events = [
-		"res://Modules/PlayerSlaveryModule/Other/PlayerSlaveryStartMemeEvent.gd",
-		"res://Modules/PlayerSlaveryModule/Other/UnconStartSlaveryEvent.gd",
+		"res://Modules/PlayerSlaveryModule/Start/PlayerSlaveryStartMemeEvent.gd",
+		"res://Modules/PlayerSlaveryModule/Start/UnconStartSlaveryEvent.gd",
+		"res://Modules/PlayerSlaveryModule/Start/NemesisAmbushEvent.gd",
 	]
 
 func resetFlagsOnNewDay():

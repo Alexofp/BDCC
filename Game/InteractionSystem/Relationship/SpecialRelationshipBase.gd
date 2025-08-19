@@ -49,8 +49,10 @@ func getChar() -> BaseCharacter:
 
 func saveData() -> Dictionary:
 	return {
+		id = id,
 		charID = charID,
 	}
 
 func loadData(_data:Dictionary):
+	id = SAVE.loadVar(_data, "id", "")
 	charID = SAVE.loadVar(_data, "charID", "")

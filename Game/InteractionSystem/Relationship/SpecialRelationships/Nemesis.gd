@@ -12,6 +12,8 @@ func getCategoryColor() -> Color:
 	return Color.red
 
 func checkSocialEventShouldStart(_charActor:String, _charTarget:String, _eventID:int, _args:Array) -> bool:
+	if(_eventID == SocialEventType.BeganGettingEnslaved):
+		return true
 	return true
 	#return false
 

@@ -24,6 +24,7 @@ func registerEventTriggers():
 	registerEventTrigger(Trigger.PCLookingForTrouble, EventTriggerWeighted.new())
 	registerEventTrigger(Trigger.MasturbationSpottedGuard, EventTriggerWeighted.new())
 	registerEventTrigger(Trigger.MasturbationSpottedInmate, EventTriggerWeighted.new())
+	registerEventTrigger(Trigger.AboutToSleepInCell, EventTriggerWeighted.new())
 	registerEventTrigger(Trigger.SleepInCell, EventTriggerWeighted.new())
 	registerEventTrigger(Trigger.SceneAndStateHook, EventTriggerSceneHook.new())
 	registerEventTrigger(Trigger.SlaverySlutLookAtEvent, EventTriggerWeighted.new())

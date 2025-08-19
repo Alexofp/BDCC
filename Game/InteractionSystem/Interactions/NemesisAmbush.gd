@@ -56,6 +56,14 @@ func tryAutoInvitePawn():
 		if(thePawn):
 			inviteExtra(thePawn)
 
+func calcWillJoin(_mainPawn:CharacterPawn, _newPawn:CharacterPawn) -> bool:
+	return true
+
+func canAmbush() -> bool:
+	if(state == "" && hasExtra1 && hasExtra2 && GM.world.simpleRingDistance(getLocation(), GM.pc.getLocation()) <= 5):
+		return true
+	return false
+
 func _init():
 	id = "NemesisAmbush"
 
@@ -104,7 +112,7 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 				var theDist := GM.world.simpleRingDistance(getLocation(), GM.pc.getLocation())
 				if(theDist > 2.0 || (theDist > 1.0 && RNG.chance(30))):
 					goTowards(leaveTarget)
-				else:
+				elif(theDist > 1.0 && RNG.chance(30)):
 					doWander()
 
 func offer_text():
@@ -115,8 +123,11 @@ func offer_text():
 func offer_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "join"):
 		var thePawn := getRolePawn(ROLE_OFFER)
-		doRemoveRole(ROLE_OFFER)
-		inviteExtra(thePawn)
+		if(calcWillJoin(getRolePawn(ROLE_MAIN), thePawn)):
+			doRemoveRole(ROLE_OFFER)
+			inviteExtra(thePawn)
+		else:
+			doRemoveRole(ROLE_OFFER)
 		setState("", ROLE_MAIN)
 
 func canRoleBeInterrupted(_role:String) -> bool:

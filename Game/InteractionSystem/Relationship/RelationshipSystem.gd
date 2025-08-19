@@ -223,6 +223,9 @@ func startSpecialRelantionship(_relationshipID:String, _charID:String, _args:Arr
 	if(!newShip):
 		return
 	newShip.charID = _charID
+	
+	if(special.has(_charID)):
+		special[_charID].onEnd()
 	special[_charID] = newShip
 	newShip.onStart(_args)
 
@@ -247,10 +250,15 @@ func getSpecialTextAndColor(_charID:String) -> Array:
 	var theShip = special[_charID]
 	return [theShip.getCategoryName(), theShip.getCategoryColor()]
 
-func stopSpecialRelationship(_charID:String):
+func stopSpecialRelationship(_charID:String, callOnEnd:bool = true):
 	if(!hasSpecialRelationship(_charID)):
 		return
+	if(callOnEnd):
+		special[_charID].onEnd()
 	special.erase(_charID)
+
+func onGettingEnslavedByPlayer(_charID:String):
+	stopSpecialRelationship(_charID)
 
 func saveData():
 	var specialData:Array = []
