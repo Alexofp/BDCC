@@ -14,16 +14,16 @@ func getPriority():
 
 func react(_triggerID, _args):
 	if(_triggerID == Trigger.EnteringRoom):
-		if(tryStartAmbush(RNG.pick(["normalshiv", "normaldrugged"]), true)):
+		if(tryStartAmbush("normal", true)):
 			return true
 	elif(_triggerID == Trigger.AboutToSleepInCell):
-		if(tryStartAmbush("cellbondage")):
+		if(tryStartAmbush("cell")):
 			return true
 	elif(_triggerID == Trigger.TakingAShower):
-		if(tryStartAmbush("showeritems")):
+		if(tryStartAmbush("shower")):
 			return true
 	elif(_triggerID == Trigger.EatingInCanteen):
-		if(tryStartAmbush("canteendrugged")):
+		if(tryStartAmbush("canteen")):
 			return true
 	
 	return false

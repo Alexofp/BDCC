@@ -35,6 +35,7 @@ func _init():
 		"res://Modules/PlayerSlaveryModule/MilkCafe/PSMilkGirl.gd",
 		"res://Modules/PlayerSlaveryModule/MilkCafe/PSMilkGuy.gd",
 		"res://Modules/PlayerSlaveryModule/MilkCafe/PSMilkOfficer.gd",
+		"res://Modules/PlayerSlaveryModule/Start/TempAmbushStash.gd",
 	]
 	items = []
 	events = [
