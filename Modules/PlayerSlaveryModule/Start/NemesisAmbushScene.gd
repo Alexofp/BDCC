@@ -1,10 +1,11 @@
 extends SceneBase
 
 var ambushPlace:String = "" # normal, shower, canteen, cell
-var ambushType:String = "" # showeritems, normalshiv, normaldrugged, canteendrugged, cellbondage
+var ambushType:String = "" # showeritems, normalshiv, normaldrugged_stamina, canteendrugged_lust, cellbondage
 var npcMain:String = ""
 var npcExtra1:String = ""
 var npcExtra2:String = ""
+var nemesisReason:int = NemesisReason.Generic
 
 func _initScene(_args = []):
 	ambushPlace = _args[0]
@@ -13,9 +14,9 @@ func _initScene(_args = []):
 	npcExtra2 = _args[3]
 
 func _reactInit():
-	#addCharacter(npcMain)
-	#addCharacter(npcExtra1)
-	#addCharacter(npcExtra2)
+	var theNemesis:SpecialRelationshipBase = GM.main.RS.getSpecialRelationship(npcMain)
+	if(theNemesis && theNemesis.id == "Nemesis"):
+		nemesisReason = theNemesis.getReason()
 	
 	GM.main.IS.deletePawn(npcMain)
 	GM.main.IS.deletePawn(npcExtra1)
@@ -42,9 +43,20 @@ func _reactInit():
 		GM.pc.addStamina(-GM.pc.getMaxStamina())
 		addMessage("You feel VERY weak..")
 	if(ambushType == "normalshiv"):
-		GM.pc.addPain(40)
-		addMessage("It hurts..")
-	
+		GM.pc.addPain(30)
+		GM.pc.doWound(npcMain)
+	if(ambushType == "cellbondage"):
+		transferHelpfulItems(GM.pc, getCharacter("TempAmbushStash"))
+		var possibleRestraints:Array = ["basketmuzzle", "blindfold", "bondagemittens", "inmateanklecuffs", "inmatewristcuffs"]
+		possibleRestraints.shuffle()
+		var addedList := GM.pc.getInventory().forceRestraintsList(possibleRestraints, 2)
+		if(addedList.empty()):
+			addMessage("Looks like they didn't really manage to add more bondage gear onto you..")
+		elif(addedList.size() == 1):
+			addMessage("Looks like they only managed to add one piece of bondage gear onto you..")
+		else:
+			addMessage("You got some bondage gear forced onto you..")
+		
 	setState(ambushType)
 
 func resolveCustomCharacterName(_charID):
@@ -71,15 +83,21 @@ func _run():
 		addCharacter(npcExtra2)
 		playAnimation(StageScene.Duo, "hurt", {npc=npcMain})
 		
-		saynn("YOU GOT SYRINGE'D. YOU FEEL WEAK.")
+		saynn("You’re walking alone, minding your own business.. when someone suddenly collides with you, hard enough to knock you off balance.")
+
+		saynn("Before you can react, you feel a sharp sting.. a needle pricking your skin. A strange warmth begins spreading through your veins.")
+		
+		saynn("And now you realize.. you're surrounded by three figures.")
 		
 		saynn("[say=npc]"+RNG.pick([
-			"HAHA.",
+			"What's the rush. Slow down. Remember me?",
+			"It's not poison, don't worry. Do you know who I am?",
+			"You're not looking so hot, pal. Remember me?",
 		])+"[/say]")
 		
-		saynn("It's {npc.him}.. your nemesis.")
+		saynn("It's {npc.him}.. your nemesis. Whatever it was in that syringe.. it makes you feel weaker by the second.")
 		
-		#TODO: Specific line maybe
+		saynn("[say=npc]"+NemesisReason.getAmbushLine(nemesisReason, getCharacter(npcMain))+"[/color]")
 		
 		saynn("Looks like {npc.he} brought some friends.")
 		
@@ -99,15 +117,21 @@ func _run():
 		addCharacter(npcExtra2)
 		playAnimation(StageScene.Duo, "hurt", {npc=npcMain, npcAction="shiv"})
 	
-		saynn("YOU GOT SHIVED! OW.")
-	
+		saynn("You were on your way when someone slams into your shoulder, nearly spinning you around.")
+
+		saynn("A sudden, burning pain flares in your side. You glance down and see a thin line of your blood blossoming on your clothes. You got stabbed..")
+			
 		saynn("[say=npc]"+RNG.pick([
-			"HAHA.",
+			"Ohh. That hurt, didn't it?",
+			"Remember me?",
+			"Oops.",
+			"You're not looking too hot, buddy.",
+			"Should I do it again?",
 		])+"[/say]")
 		
-		saynn("It's {npc.him}.. your nemesis.")
+		saynn("It's {npc.him}.. your nemesis.. holding a shiv. The stab didn't reach too deep.. but the wound is still bleeding.")
 		
-		#TODO: Specific line maybe
+		saynn("[say=npc]"+NemesisReason.getAmbushLine(nemesisReason, getCharacter(npcMain))+"[/color]")
 		
 		saynn("Looks like {npc.he} brought some friends.")
 		
@@ -117,14 +141,20 @@ func _run():
 			"Don't be stupid. It's three against one.",
 		])+"[/say]")
 		
-		saynn("Something tells you they won't give you a bondage to help stop the bleeding..")
+		saynn("Something tells you they won't give you a bondage to help stop the blood..")
 		
 		addButton("Continue", "See what happens next", "show_others")
 	
 	if(state == "cellbondage"):
 		playAnimation(StageScene.Sleeping, "sleep")
 	
-		saynn("YOU WAKE UP WITH BONDAGE ITEMS ON YOU.")
+		saynn("You lay on your bed and close your eyes.")
+		
+		saynn("As your mind drifts away.. a weird feeling starts washing over your body.")
+		
+		saynn("Like something is.. touching your limbs.. caressing you.. but now is not the time for that.")
+		
+		saynn("Hard to tell, everything is pure haze in your head.. but it feels like something is going through your pockets as well. Best to try to get up and see it for yourself.")
 		
 		addButton("Continue", "See what happens next", "cellbondage_reveal")
 	
@@ -137,12 +167,14 @@ func _run():
 		saynn("You get up.. and see three figures surrounding you. The leader steps closer.")
 		
 		saynn("[say=npc]"+RNG.pick([
-			"HAHA.",
+			"You were sleeping so soundly, I didn't want to wake you up.",
+			"Good morning, sunshine. Remember me?",
+			"Nice cell you got here. I left you some gifts. Remember who I am?",
 		])+"[/say]")
 		
-		saynn("It's {npc.him}.. your nemesis.")
+		saynn("It's {npc.him}.. your nemesis. You realize that you're missing some of your items..")
 		
-		#TODO: Specific line maybe
+		saynn("[say=npc]"+NemesisReason.getAmbushLine(nemesisReason, getCharacter(npcMain))+"[/color]")
 		
 		saynn("Looks like {npc.he} brought some friends.")
 		
@@ -194,7 +226,7 @@ func _run():
 		
 		saynn("It's {npc.him}.. your nemesis.")
 		
-		#TODO: Specific line maybe
+		saynn("[say=npc]"+NemesisReason.getAmbushLine(nemesisReason, getCharacter(npcMain))+"[/color]")
 		
 		saynn("Looks like {npc.he} brought some friends.")
 		
@@ -233,7 +265,7 @@ func _run():
 		
 		saynn("It's {npc.him}.. your nemesis.")
 		
-		#TODO: Specific line maybe
+		saynn("[say=npc]"+NemesisReason.getAmbushLine(nemesisReason, getCharacter(npcMain))+"[/color]")
 		
 		saynn("Looks like {npc.he} brought some friends.")
 		
@@ -258,6 +290,12 @@ func _run():
 			saynn("You got stabbed.. so you will also start the first fight with a [color=red]huge[/color] bleeding.")
 		if(ambushType == "showeritems"):
 			saynn("You got ambushed in a shower room. You will have to fight [b]naked[/b] and with no access to your weapons or other helpful items like painkillers.")
+		if(ambushType == "canteendrugged_lust"):
+			saynn("You will start the fight incredibly horny. If you don't find a way to solve your lust, you will lose.")
+		if(ambushType == "normaldrugged_stamina"):
+			saynn("You feel incredibly tired because of the drug.")
+		if(ambushType == "cellbondage"):
+			saynn("Since they went through your pockets, you won't be able to use most items: your weapons and drugs.")
 		
 		addButton("Fight", "You'd rather fight", "first_fight")
 		addButton("Submit", "See what happens..", "do_submit")
@@ -353,7 +391,7 @@ func _run():
 		addButton("Continue", "See what happens next..", "get_knocked_out")
 	
 	if(state == "do_submit"):
-		playAnimation(StageScene.Duo, "knee", {npc=npcMain})
+		playAnimation(StageScene.Duo, "kneel", {npc=npcMain})
 		
 		saynn("Fighting.. is not worth it. You decide to submit.")
 		
@@ -433,6 +471,14 @@ func _react_scene_end(_tag, _result):
 		var battlestate = _result[0]
 		if(battlestate == "win"):
 			setState("second_fight")
+			
+			if(ambushType == "canteendrugged_lust"):
+				GM.pc.addLust(GM.pc.lustThreshold())
+				GM.pc.forceIntoHeat()
+				addMessage("You still feel VERY lusty..")
+			if(ambushType == "normaldrugged_stamina"):
+				GM.pc.addStamina(-GM.pc.getMaxStamina())
+				addMessage("You still feel VERY weak..")
 		else:
 			setState("lost_fight")
 	if(_tag == "second_fight"):
@@ -440,6 +486,14 @@ func _react_scene_end(_tag, _result):
 		var battlestate = _result[0]
 		if(battlestate == "win"):
 			setState("third_fight")
+			
+			if(ambushType == "canteendrugged_lust"):
+				GM.pc.addLust(GM.pc.lustThreshold())
+				GM.pc.forceIntoHeat()
+				addMessage("You still feel VERY lusty..")
+			if(ambushType == "normaldrugged_stamina"):
+				GM.pc.addStamina(-GM.pc.getMaxStamina())
+				addMessage("You still feel VERY weak..")
 		else:
 			setState("lost_fight")
 	if(_tag == "third_fight"):
@@ -459,6 +513,7 @@ func saveData():
 	data["npcMain"] = npcMain
 	data["npcExtra1"] = npcExtra1
 	data["npcExtra2"] = npcExtra2
+	data["nemesisReason"] = nemesisReason
 	
 	return data
 	
@@ -470,6 +525,7 @@ func loadData(data):
 	npcMain = SAVE.loadVar(data, "npcMain", "")
 	npcExtra1 = SAVE.loadVar(data, "npcExtra1", "")
 	npcExtra2 = SAVE.loadVar(data, "npcExtra2", "")
+	nemesisReason = SAVE.loadVar(data, "nemesisReason", NemesisReason.Generic)
 
 
 

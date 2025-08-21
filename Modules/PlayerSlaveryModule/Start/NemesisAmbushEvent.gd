@@ -7,7 +7,7 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.AboutToSleepInCell)
 	es.addTrigger(self, Trigger.EatingInCanteen)
 	es.addTrigger(self, Trigger.TakingAShower)
-	es.addTrigger(self, Trigger.EnteringRoom)
+	#es.addTrigger(self, Trigger.EnteringRoom) # The interaction itself is now doing it
 
 func getPriority():
 	return 5.0

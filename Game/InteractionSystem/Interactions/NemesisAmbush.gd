@@ -12,6 +12,8 @@ const ROLE_OFFER = "offer"
 var hasExtra1:bool = false
 var hasExtra2:bool = false
 var targetLoc:String = ""
+var preparation:float = 0.0
+var goingAfter:bool = false
 
 func shouldLookForExtras() -> bool:
 	if(hasExtra1 && hasExtra2):
@@ -110,7 +112,19 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 			var room = GM.world.getRoomByID(leaveTarget)
 			if(room != null && !room.isOfflimitsForInmates()):
 				var theDist := GM.world.simpleRingDistance(getLocation(), GM.pc.getLocation())
-				if(theDist > 2.0 || (theDist > 1.0 && RNG.chance(30))):
+				if(theDist <= 2.0):
+					preparation += RNG.randf_range(0.0, 0.1)
+					if(preparation >= 1.0 && !goingAfter && RNG.chance(10)):
+						goingAfter = true
+				if(goingAfter):
+					goTowards(leaveTarget)
+					if(RNG.chance(30)):
+						goTowards(leaveTarget)
+					if(getLocation() == GM.pc.getLocation()):
+						stopMe()
+						runScene("NemesisAmbushScene", ["normal", getRoleID(ROLE_MAIN), getRoleID(ROLE_EXTRA1), getRoleID(ROLE_EXTRA2)])
+						return
+				elif(theDist > 2.0 || (theDist > 1.0 && RNG.chance(30))):
 					goTowards(leaveTarget)
 				elif(theDist > 1.0 && RNG.chance(30)):
 					doWander()
@@ -155,6 +169,8 @@ func saveData():
 	data["hasExtra1"] = hasExtra1
 	data["hasExtra2"] = hasExtra2
 	data["targetLoc"] = targetLoc
+	data["preparation"] = preparation
+	data["goingAfter"] = goingAfter
 	return data
 
 func loadData(_data):
@@ -163,3 +179,5 @@ func loadData(_data):
 	hasExtra1 = SAVE.loadVar(_data, "hasExtra1", false)
 	hasExtra2 = SAVE.loadVar(_data, "hasExtra2", false)
 	targetLoc = SAVE.loadVar(_data, "targetLoc", "")
+	preparation = SAVE.loadVar(_data, "preparation", 0.0)
+	goingAfter = SAVE.loadVar(_data, "goingAfter", false)

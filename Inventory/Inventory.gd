@@ -624,6 +624,32 @@ func forceRestraintsWithTag(tag, amount = 1):
 				return result
 	return result
 
+func forceRestraintsList(_itemIDs:Array, maxAmount:int=-1) -> Array:
+	var result:Array = []
+	var added:int = 0
+	
+	for itemID in _itemIDs:
+		var potentialItem = GlobalRegistry.getItemRef(itemID)
+		
+		var slot = potentialItem.getClothingSlot()
+		if(slot == null || !canEquipSlot(slot)):
+			continue
+		
+		if(hasSlotEquipped(slot)):
+			var ourItem = getEquippedItem(slot)
+			if(ourItem.isRestraint() || ourItem.isImportant()):
+				continue
+		
+		var newItem = GlobalRegistry.createItem(itemID)
+		if(forceEquipStoreOtherUnlessRestraint(newItem)):
+			result.append(newItem)
+			added += 1
+			
+			if(maxAmount >= 0 && added >= maxAmount):
+				return result
+	
+	return result
+
 func getFirstItemThatCoversBodypart(bodypartSlot):
 	for inventorySlot in InventorySlot.getAll():
 		if(!hasSlotEquipped(inventorySlot)):

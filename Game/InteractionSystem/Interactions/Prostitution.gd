@@ -142,6 +142,7 @@ func offer_accepted_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "scam"):
 		setState("slut_scam", "client")
 		affectAffection("client", "main", -0.15)
+		sendSocialEvent("main", "client", SocialEventType.GotScammed)
 
 
 func about_to_sex_text():
@@ -212,6 +213,7 @@ func client_demands_credits_do(_id:String, _args:Dictionary, _context:Dictionary
 	if(_id == "refuse"):
 		setState("slut_refused_creds_back", "client")
 		affectAffection("client", "main", -0.2)
+		sendSocialEvent("client", "main", SocialEventType.GotScammed)
 
 
 func client_got_credits_back_text():

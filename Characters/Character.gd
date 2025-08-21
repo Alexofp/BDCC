@@ -409,6 +409,7 @@ func onCharacterVisiblyPregnant():
 			GM.main.addLogMessage("News", "You just received news that "+getName()+" is pregnant with your children.")
 			if(isDynamicCharacter()):
 				GM.main.WHS.addEvent(WHEvent.Impregnated, "pc", getID())
+				GM.main.RS.sendSocialEvent("pc", getID(), SocialEventType.GotImpregnated)
 			
 func onCharacterHeavyIntoPregnancy():
 	#print(getName()+" is heavy into pregnancy")

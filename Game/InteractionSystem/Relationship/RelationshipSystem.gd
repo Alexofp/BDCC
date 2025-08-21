@@ -209,15 +209,19 @@ func sendSocialEvent(_charActor:String, _charTarget:String, _eventID:int, _args:
 	for shipID in GlobalRegistry.getSpecialRelationships():
 		var theShipRef:SpecialRelationshipBase = GlobalRegistry.getSpecialRelationshipRef(shipID)
 		
-		if(theShipRef.checkSocialEventShouldStart(_charActor, _charTarget, _eventID, _args)):
+		var theShouldData := theShipRef.checkSocialEventShouldStart(_charActor, _charTarget, _eventID, _args)
+		if(theShouldData[0]):
 			if(_charActor != "pc"):
 				# Pass args from check func?
-				startSpecialRelantionship(shipID, _charActor, [])
+				startSpecialRelantionship(shipID, _charActor, theShouldData[1] if theShouldData.size() > 1 else [])
 			elif(_charTarget != "pc"):
-				startSpecialRelantionship(shipID, _charTarget, [])
+				startSpecialRelantionship(shipID, _charTarget, theShouldData[1] if theShouldData.size() > 1 else [])
 
 func startSpecialRelantionship(_relationshipID:String, _charID:String, _args:Array = []):
 	if(_charID == "pc"): # Player can't have a special relantionship with themselves
+		return
+	var theChar:BaseCharacter = GlobalRegistry.getCharacter(_charID)
+	if(!theChar || !theChar.isDynamicCharacter()):
 		return
 	var newShip = GlobalRegistry.createSpecialRelationship(_relationshipID)
 	if(!newShip):

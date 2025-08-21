@@ -7,3 +7,5 @@ const LostFight = 0 # Actor won, Target lost
 const GotRefused = 1 # Actor was the one who refused, Target got refused
 const GotTalkedTo = 2 # Actor started the talk, Target got talked to
 const BeganGettingEnslaved = 3 # Actor began enslaving, Target is the one being enslaved
+const GotImpregnated = 4 # Actor did the impregnation, Target is the one who got impregnated
+const GotScammed = 5 # Actor did the scam, Target got scammed

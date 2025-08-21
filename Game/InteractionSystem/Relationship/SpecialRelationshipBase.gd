@@ -17,8 +17,8 @@ func getCategoryColor() -> Color:
 	return Color.white
 
 # Gets called when we are NOT in a special relationship
-func checkSocialEventShouldStart(_charActor:String, _charTarget:String, _eventID:int, _args:Array) -> bool:
-	return false
+func checkSocialEventShouldStart(_charActor:String, _charTarget:String, _eventID:int, _args:Array) -> Array:
+	return [false]
 
 func onStart(_args:Array):
 	showMessage("MEOW MEOW STARTED")
