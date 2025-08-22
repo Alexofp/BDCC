@@ -110,6 +110,7 @@ func giving_offer_do(_id:String, _args:Dictionary, _context:Dictionary):
 		sendSlaveryActivityEvent("main", "slutPaid", {credits=askCreds})
 	if(_id == "deny"):
 		setState("offer_denied", "main")
+		sendSocialEvent("client", "main", SocialEventType.GotRefused)
 	if(_id == "haggle"):
 		setState("meow", "inmate")
 

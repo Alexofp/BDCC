@@ -206,17 +206,28 @@ func onCharDelete(_char1:String):
 func sendSocialEvent(_charActor:String, _charTarget:String, _eventID:int, _args:Array = []):
 	if(_charActor != "pc" && _charTarget != "pc"):
 		return
-	for shipID in GlobalRegistry.getSpecialRelationships():
-		var theShipRef:SpecialRelationshipBase = GlobalRegistry.getSpecialRelationshipRef(shipID)
-		
-		var theShouldData := theShipRef.checkSocialEventShouldStart(_charActor, _charTarget, _eventID, _args)
-		if(theShouldData[0]):
-			if(_charActor != "pc"):
-				# Pass args from check func?
-				startSpecialRelantionship(shipID, _charActor, theShouldData[1] if theShouldData.size() > 1 else [])
-			elif(_charTarget != "pc"):
-				startSpecialRelantionship(shipID, _charTarget, theShouldData[1] if theShouldData.size() > 1 else [])
-
+	if(_charActor == "pc" && _charTarget == "pc"):
+		return
+	
+	var theNpcID:String = _charActor if _charTarget == "pc" else _charTarget
+	if(special.has(theNpcID)):
+		special[theNpcID].onSocialEvent(_charActor, _charTarget, _eventID, _args)
+	else:
+		# There maybe should be a priority system here
+		for shipID in GlobalRegistry.getSpecialRelationships():
+			var theShipRef:SpecialRelationshipBase = GlobalRegistry.getSpecialRelationshipRef(shipID)
+			
+			theShipRef.charID = theNpcID # Hack but makes things so much easier
+			
+			if(_charActor == "pc"):
+				var theShouldData := theShipRef.checkSocialEventShouldStartTarget(_charActor, _charTarget, _eventID, _args)
+				if(theShouldData[0]):
+					startSpecialRelantionship(shipID, theNpcID, theShouldData[1] if theShouldData.size() > 1 else [])
+			else:
+				var theShouldData := theShipRef.checkSocialEventShouldStartActor(_charActor, _charTarget, _eventID, _args)
+				if(theShouldData[0]):
+					startSpecialRelantionship(shipID, theNpcID, theShouldData[1] if theShouldData.size() > 1 else [])
+			
 func startSpecialRelantionship(_relationshipID:String, _charID:String, _args:Array = []):
 	if(_charID == "pc"): # Player can't have a special relantionship with themselves
 		return

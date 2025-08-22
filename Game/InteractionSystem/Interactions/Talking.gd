@@ -177,6 +177,7 @@ func chat_asked_do(_id:String, _args:Dictionary, _context:Dictionary):
 		setState("chat_reacted", "starter")
 		if(chatAnswer != "agree"):
 			gotDenied = true
+			sendSocialEvent("reacter", "starter", SocialEventType.GotRefused)
 
 
 func chat_reacted_text():
@@ -255,6 +256,7 @@ func flirt_pickupline_do(_id:String, _args:Dictionary, _context:Dictionary):
 		affectLust("reacter", "starter", -0.07)
 		setState("flirt_denied", "starter")
 		gotDenied = true
+		sendSocialEvent("reacter", "starter", SocialEventType.GotRefused)
 
 
 func flirt_accepted_text():
@@ -310,6 +312,9 @@ func flirt_flirted_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "flirt_react"):
 		reactToLustFocus(_args, lust)
 		setState("flirt_reacted", "starter")
+		var answer:String = lust["answer"] if lust.has("answer") else "accept"
+		if(answer != "accept"):
+			sendSocialEvent("reacter", "starter", SocialEventType.GotRefused)
 
 
 func flirt_reacted_text():
@@ -351,6 +356,7 @@ func offered_sex_do(_id:String, _args:Dictionary, _context:Dictionary):
 		getRolePawn("reacter").afterSocialInteraction()
 		getRolePawn("starter").afterFailedSocialInteraction()
 		gotDenied = true
+		sendSocialEvent("reacter", "starter", SocialEventType.GotRefused)
 
 
 func offered_sex_agreed_text():
@@ -391,6 +397,7 @@ func offered_self_do(_id:String, _args:Dictionary, _context:Dictionary):
 		getRolePawn("reacter").afterSocialInteraction()
 		getRolePawn("starter").afterFailedSocialInteraction()
 		gotDenied = true
+		sendSocialEvent("reacter", "starter", SocialEventType.GotRefused)
 
 
 func offered_self_agreed_text():

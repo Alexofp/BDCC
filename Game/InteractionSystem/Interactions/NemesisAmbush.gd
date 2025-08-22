@@ -78,9 +78,21 @@ func init_text():
 	
 	addAction("go", "Go!", "Time to go", "default", 1.0, 30, {})
 
+func shouldJustWander() -> bool:
+	if(shouldLookForExtras()):
+		return true
+	var pcPawn := GM.main.IS.getPawn("pc")
+	if(!pcPawn || !pcPawn.canBeInterrupted()):
+		return true
+	return false
+
 func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "go"):
-		if(shouldLookForExtras()):
+		if(GM.main.isVeryLate() || getRolePawn(ROLE_MAIN).tiredness >= 1.0):
+			stopMe()
+			return
+		
+		if(shouldJustWander()):
 			if(targetLoc == ""):
 				targetLoc = RNG.pick(GM.world.getZoneRooms("poi", [
 					"cellblock_nearcells",
@@ -99,10 +111,11 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 				targetLoc = ""
 			#stopMe()
 			#tryAutoInvitePawn()
-			var thePawn := findExtraPawn()
-			if(thePawn):
-				doInvolvePawn(ROLE_OFFER, thePawn)
-				setState("offer", ROLE_OFFER, ROLE_MAIN)
+			if(shouldLookForExtras()):
+				var thePawn := findExtraPawn()
+				if(thePawn):
+					doInvolvePawn(ROLE_OFFER, thePawn)
+					setState("offer", ROLE_OFFER, ROLE_MAIN)
 		else:
 			var leaveTarget:String = GM.pc.getLocation()
 	#		if(GM.main.IS.hasPawn("pc") && GM.main.IS.getPawn("pc").canBeInterrupted()):

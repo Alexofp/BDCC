@@ -18,6 +18,9 @@ func _reactInit():
 	if(theNemesis && theNemesis.id == "Nemesis"):
 		nemesisReason = theNemesis.getReason()
 	
+	#if(getCharacter(npcMain).hasEnslaveQuest()):
+	getCharacter(npcMain).setEnslaveQuest(null)
+	
 	GM.main.IS.deletePawn(npcMain)
 	GM.main.IS.deletePawn(npcExtra1)
 	GM.main.IS.deletePawn(npcExtra2)

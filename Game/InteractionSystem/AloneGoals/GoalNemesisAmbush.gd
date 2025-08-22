@@ -28,6 +28,10 @@ func getActions() -> Array:
 func doAction(_id:String, _args:Dictionary):
 	if(_id == "go"):
 		if(true):
+			var nemesis := getPawn().getSpecialRelationship()
+			if(nemesis && nemesis.id == "Nemesis"):
+				nemesis.gonnaAmbush = false
+			
 			GM.main.IS.startInteraction("NemesisAmbush", {main=getPawn().charID})
 			return
 		
