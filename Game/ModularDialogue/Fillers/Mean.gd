@@ -81,6 +81,7 @@ func getFormIDs() -> Array:
 		"PunishLockIntoSlutwall",
 		
 		"TalkChatWhat",
+		"TalkStartNemesis",
 		"TalkChatCancel",
 		"TalkChatLeaving",
 		"TalkChatAgree",
@@ -852,6 +853,14 @@ func getText(_id:String, _args:Dictionary):
 			"Hurry up and speak, whore.",
 			"Better be good, or I’ll shut you up myself.",
 			"What the fuck do you want?",
+		]
+	if(_id == "TalkStartNemesis"):
+		return [
+			"Stay the fuck away from me, you whore.",
+			"The fuck are you doing here, you stupid fucking bitch.",
+			"Every time I see you, I wanna punch your face in.",
+			"You're a fucking joke, go get lost.",
+			"I can rip that mouth off your face.",
 		]
 	if(_id == "TalkChatCancel"):
 		return [

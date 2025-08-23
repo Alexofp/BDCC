@@ -76,7 +76,7 @@ func getExtraInfoLines() -> Array:
 			
 			result.append(zoneName+" overstimulation: "+("[color="+colorString+"]" if isBads else "")+str(Util.roundF(zoneStimulation*100.0, 1))+"%"+("[/color]" if isBads else "")+(" ("+Util.join(extraTexts, ", ")+")" if extraTexts.size() > 0 else ""))
 	
-	#TODO: Remove this before ship
+	#Remove this before ship
 	# Debug fetish gain info
 	#for fetishID in fetishGain:
 	#	result.append(fetishID+": "+str(Util.roundF(fetishGain[fetishID][0], 2))+" "+str(Util.roundF(fetishGain[fetishID][1], 2)))

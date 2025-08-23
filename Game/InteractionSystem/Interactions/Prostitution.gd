@@ -273,8 +273,10 @@ func client_attacked_slut_do(_id:String, _args:Dictionary, _context:Dictionary):
 		
 			setState("client_won", "client")
 			sendSlaveryActivityEvent("main", "slutReturnedCredits", {credits=askCreds})
+			sendSocialEvent("client", "main", SocialEventType.LostFight)
 		else:
 			setState("slut_won", "main")
+			sendSocialEvent("main", "client", SocialEventType.LostFight)
 
 
 func client_won_text():

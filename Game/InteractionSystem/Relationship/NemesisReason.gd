@@ -6,6 +6,7 @@ const Fight = 1
 const Impregnation = 2
 const Scammed = 3
 const EnslavementAttmept = 4
+const AwfulSex = 5
 
 static func getAmbushLine(_reason:int, _char:BaseCharacter) -> String:
 	if(_reason == Fight):
@@ -38,6 +39,12 @@ static func getAmbushLine(_reason:int, _char:BaseCharacter) -> String:
 			"You really thought you could make me your bitch? Nuh-uh.",
 			"You really thought that I would just wait until you come make me your bitch? Fuck you.",
 			"I was never gonna be your slave, get real.",
+		])
+	elif(_reason == AwfulSex):
+		return RNG.pick([
+			"You thought you could abuse me and get away with it?",
+			"I still remember that sex that we had. It was fucking awful.",
+			"You abused me. And I didn't forgive you for that.",
 		])
 	
 	#generic

@@ -32,6 +32,7 @@ func getRandomPossibleSlaveryID(includeTrivial:bool = false) -> String:
 			return ""
 	
 	#TODO: Prefer to pick slaveries that weren't picked before
+	#Maybe random is fine for now
 	return RNG.pick(theSlaveries)
 
 func storePlayersItems():

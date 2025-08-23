@@ -16,7 +16,7 @@ const MiningLocs = [
 	"psmine_mine1", "psmine_mine2", "psmine_mine3", "psmine_mine4", "psmine_mine5", "psmine_mine6", "psmine_mine7", "psmine_mine8",
 ]
 
-const debugFreeUpdates = false #TODO: Set this to false before ship
+const debugFreeUpdates = false #Set this to false before ship
 
 const UpgradesDB = {
 	"headlight": {

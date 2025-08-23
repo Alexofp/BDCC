@@ -143,6 +143,16 @@ func getActionsFinal() -> Array:
 func getScoreTypeValueGeneric(_scoreType:String, curPawn:CharacterPawn, dirToPawn:CharacterPawn):
 	if(curPawn == null || dirToPawn == null):
 		return 1.0
+	var theValue:float = getScoreTypeValueGenericInternal(_scoreType, curPawn, dirToPawn)
+	if(dirToPawn.isPlayer()):
+		var specialRelationship:SpecialRelationshipBase = curPawn.getSpecialRelationship()
+		if(specialRelationship):
+			theValue = specialRelationship.processInteractionActionGenericScore(_scoreType, theValue)
+	return theValue
+	
+func getScoreTypeValueGenericInternal(_scoreType:String, curPawn:CharacterPawn, dirToPawn:CharacterPawn):
+	if(curPawn == null || dirToPawn == null):
+		return 1.0
 	var curID:String = curPawn.charID
 	var dirToID:String = dirToPawn.charID
 	
@@ -844,6 +854,11 @@ func doSexAftermath(_sexData, theSexResult:SexEngineResult):
 		
 		if(subSatisfaction > 0.8):
 			domPawn.addRepScore(RepStat.Alpha, subSatisfaction * 0.4)
+		
+		if(subSatisfaction <= 0.1):
+			GM.main.RS.sendSocialEvent(domPawn.charID, subPawn.charID, SocialEventType.AwfulSex)
+		if(subSatisfaction >= 0.9):
+			GM.main.RS.sendSocialEvent(domPawn.charID, subPawn.charID, SocialEventType.GreatSex)
 
 func doCurrentAction(_context:Dictionary = {}):
 	if(currentActionID == "" || wasDeleted):
@@ -1829,6 +1844,21 @@ func sendSocialEvent(_roleActor:String, _roleTarget:String, _eventID:int, _args:
 	var _charIDTarget:String = getCharIDByRole(_roleTarget)
 	
 	GM.main.RS.sendSocialEvent(_charIDActor, _charIDTarget, _eventID, _args)
+
+func isNemesisTo(_roleWho:String, _roleTo:String) -> bool:
+	var _roleWhoPawn := getRolePawn(_roleWho)
+	var _roleToPawn := getRolePawn(_roleTo)
+	if(!_roleToPawn.isPlayer()):
+		return false
+	var specialRelantionship := _roleWhoPawn.getSpecialRelationship()
+	if(specialRelantionship && specialRelantionship.id == "Nemesis"):
+		return true
+	return false
+
+func areNemesis(_roleWho:String, _roleTo:String) -> bool:
+	if(isNemesisTo(_roleWho, _roleTo) || isNemesisTo(_roleTo, _roleWho)):
+		return true
+	return false
 
 func saveData():
 	var data = {

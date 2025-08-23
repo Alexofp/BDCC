@@ -81,6 +81,7 @@ func getFormIDs() -> Array:
 		"PunishLockIntoSlutwall",
 		
 		"TalkChatWhat",
+		"TalkStartNemesis",
 		"TalkChatCancel",
 		"TalkChatLeaving",
 		"TalkChatAgree",
@@ -770,6 +771,14 @@ func getText(_id:String, _args:Dictionary):
 			"Uh, do you want to talk about something?",
 			"I-I’m listening if you want to share.",
 			"W-What’s up? I’m here to listen.",
+		]
+	if(_id == "TalkStartNemesis"):
+		return [
+			"Quit bothering me. Okay?",
+			"Just leave me alone already.",
+			"I.. I really don't wanna deal with you right now.",
+			"Stop talking with me. Please.",
+			"Find someone else to annoy.",
 		]
 	if(_id == "TalkChatCancel"):
 		return [

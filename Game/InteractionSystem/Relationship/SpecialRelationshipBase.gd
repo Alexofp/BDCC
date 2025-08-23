@@ -25,16 +25,21 @@ func checkSocialEventShouldStartTarget(_charActor:String, _charTarget:String, _e
 	return [false]
 
 func onStart(_args:Array):
-	showMessage("MEOW MEOW STARTED")
+	#showMessage("MEOW MEOW STARTED")
+	pass
 
 func onEnd():
-	showMessage("MEOW MEOW ENDED")
+	#showMessage("MEOW MEOW ENDED")
+	pass
 
 func onSocialEvent(_charActor:String, _charTarget:String, _eventID:int, _args:Array):
 	pass
 
 func hoursPassed(_hoursPassed:int):
 	pass
+
+func processInteractionActionGenericScore(_scoreType:String, _value:float) -> float:
+	return _value
 
 func onNewDay():
 	pass

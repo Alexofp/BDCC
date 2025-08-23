@@ -744,7 +744,6 @@ func main_state():
 		saynn("You are standing in a dimly-lit basement that is used as the cafe's storage space.")
 	
 	sayn("Day: "+str(day))
-	#TODO: Replace with texts
 	sayn("Obedience: "+getObedienceText())#+" "+str(Util.roundF(obedience*100.0, 1))+"%")
 	sayn("Cow's trust: "+getCowTrustText())#+" "+str(Util.roundF(cowTrust*100.0, 1))+"%")
 	sayn("Bull's trust: "+getBullTrustText())#+" "+str(Util.roundF(bullTrust*100.0, 1))+"%")

@@ -32,6 +32,12 @@ func doAction(_id:String, _args:Dictionary):
 			if(nemesis && nemesis.id == "Nemesis"):
 				nemesis.gonnaAmbush = false
 			
+			var currentAmbushesAmount:int = GM.main.IS.getInteractionsOfTypeAmount("NemesisAmbush")
+			if(currentAmbushesAmount > 0):
+				# Limiting to only one ambush at a time
+				completeGoal()
+				return
+			
 			GM.main.IS.startInteraction("NemesisAmbush", {main=getPawn().charID})
 			return
 		

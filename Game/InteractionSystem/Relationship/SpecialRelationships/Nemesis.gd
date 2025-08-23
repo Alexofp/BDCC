@@ -1,18 +1,21 @@
 extends SpecialRelationshipBase
 
-var gonnaAmbush:bool = true
+var gonnaAmbush:bool = false
 var reason:int = NemesisReason.Generic
+var anger:float = 0.0
 
 const SocialEventTypeToNemesisReason = {
 	SocialEventType.BeganGettingEnslaved: NemesisReason.EnslavementAttmept,
 	SocialEventType.GotScammed: NemesisReason.Scammed,
 	SocialEventType.GotImpregnated: NemesisReason.Impregnation,
 	SocialEventType.LostFight: NemesisReason.Fight,
+	SocialEventType.AwfulSex: NemesisReason.AwfulSex,
 }
 const SocialEventMinimalAffection = { #default is 1.0
 	SocialEventType.LostFight: -0.5,
 	SocialEventType.GotScammed: -0.3,
 	SocialEventType.GotImpregnated: 0.3,
+	SocialEventType.AwfulSex: -0.2,
 }
 
 func _init():
@@ -62,13 +65,58 @@ func checkSocialEventShouldStartTarget(_charActor:String, _charTarget:String, _e
 		return [true, [_theReason]]
 	return [false]
 
+func onSocialEvent(_charActor:String, _charTarget:String, _eventID:int, _args:Array):
+	var eventBadness:float = SocialEventType.HATE_MULT[_eventID] if SocialEventType.HATE_MULT.has(_eventID) else 0.0
+	
+	if(eventBadness > 0.0):
+		anger += eventBadness*0.1
+
 func onStart(_args:Array):
 	reason = _args[0] if _args.size() > 0 else NemesisReason.Generic
 	showMessage(getChar().getName()+" became your Nemesis!")
 
+func onEnd():
+	showMessage(getChar().getName()+" is no longer your Nemesis!")
+
 func onNewDay():
-	#TODO: A cooldown?
-	gonnaAmbush = RNG.chance(100)
+	anger += 0.1 + personality(PersonalityStat.Mean)*0.05
+	
+	var ambushChance:float = anger * 100.0
+	ambushChance = clamp(ambushChance, 5.0, 50.0)
+	
+	gonnaAmbush = RNG.chance(ambushChance)
+	if(gonnaAmbush):
+		anger *= 0.2
+
+func processInteractionActionGenericScore(_scoreType:String, _value:float) -> float:
+	if(_scoreType == "fight"):
+		return _value*3.0
+	elif(_scoreType == "punish"):
+		return _value*5.0
+	elif(_scoreType == "punishMean"):
+		return _value*5.0
+	elif(_scoreType == "sexDom"):
+		return _value*3.0
+	elif(_scoreType == "sexSub"):
+		return _value*0.2
+	elif(_scoreType == "hatefuck"):
+		return _value*3.0
+	elif(_scoreType == "resist"):
+		return _value*1.5
+	elif(_scoreType == "help"):
+		return _value*0.1
+	elif(_scoreType == "sexUse"):
+		return _value*2.0
+	elif(_scoreType == "attack"):
+		return _value*3.0
+	elif(_scoreType == "agreeSexWithSlut"):
+		return _value*1.0
+	elif(_scoreType == "talk"):
+		return _value*0.01
+	elif(_scoreType == "flirt"):
+		return _value*0.01
+	
+	return _value
 
 func getReason() -> int:
 	return reason
@@ -78,6 +126,7 @@ func saveData() -> Dictionary:
 	
 	data["gonnaAmbush"] = gonnaAmbush
 	data["reason"] = reason
+	data["anger"] = anger
 	
 	return data
 
@@ -86,7 +135,4 @@ func loadData(_data:Dictionary):
 	
 	gonnaAmbush = SAVE.loadVar(_data, "gonnaAmbush", false)
 	reason = SAVE.loadVar(_data, "reason", NemesisReason.Generic)
-
-
-
-
+	anger = SAVE.loadVar(_data, "anger", 0.0)

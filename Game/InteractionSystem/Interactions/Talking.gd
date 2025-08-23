@@ -30,16 +30,25 @@ func init_text():
 	if(!notFirst):
 		saynn("{starter.name} approaches {reacter.you}.")
 		notFirst=true
+		
+		if(isNemesisTo("reacter", "starter")):
+			sayLine("reacter", "TalkStartNemesis", {main="reacter", target="starter"})
 	else:
 		saynn("{starter.name} is standing near {reacter.you}.")
 	saynn("{reacter.Your} affection with {starter.you} is "+getAffectionString("starter", "reacter")+".\nLust is "+getLustString("starter", "reacter")+".")
 
 	if(!getRoleChar("starter").isGagged() && getRolePawn("reacter").canSocial()):
-		addAction("chat", "Chat", "Chat about stuff", "talk", 1.0, 30, {})
+		if(!isNemesisTo("reacter", "starter")):
+			addAction("chat", "Chat", "Chat about stuff", "talk", 1.0, 30, {})
+		else:
+			addDisabledAction("Chat", "They hate you too much..")
 	else:
 		addDisabledAction("Chat", ""+("Can't chat if you can't talk.." if getRolePawn("reacter").canSocial() else "They don't seem to be in a chatty mood..")+"")
 	if(getRolePawn("reacter").canSocial()):
-		addAction("flirt", "Flirt", "Try to flirt with them", "flirt", 1.0, 30, {})
+		if(!isNemesisTo("reacter", "starter")):
+			addAction("flirt", "Flirt", "Try to flirt with them", "flirt", 1.0, 30, {})
+		else:
+			addDisabledAction("Flirt", "They hate you too much..")
 	else:
 		addDisabledAction("Flirt", "They don't seem to be in a flirty mood..")
 	if(getRolePawn("reacter").canGrabAndFuck() && roleCanStartSex("starter")):

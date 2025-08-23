@@ -62,8 +62,10 @@ func about_to_fight_do(_id:String, _args:Dictionary, _context:Dictionary):
 		
 		if(fightResult["won"]):
 			setState("inmate_won", "inmate")
+			sendSocialEvent("inmate", "guard", SocialEventType.LostFight)
 		else:
 			setState("guard_won", "guard")
+			sendSocialEvent("guard", "inmate", SocialEventType.LostFight)
 	if(_id == "surrender"):
 		setState("inmate_won", "inmate")
 		guardSurrender = true
