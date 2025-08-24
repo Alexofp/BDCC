@@ -100,7 +100,7 @@ func _run():
 		
 		saynn("It's {npc.him}.. your nemesis. Whatever it was in that syringe.. it makes you feel weaker by the second.")
 		
-		saynn("[say=npc]"+NemesisReason.getAmbushLine(nemesisReason, getCharacter(npcMain))+"[/color]")
+		saynn("[say=npc]"+NemesisReason.getAmbushLine(nemesisReason, getCharacter(npcMain))+"[/say]")
 		
 		saynn("Looks like {npc.he} brought some friends.")
 		
@@ -134,7 +134,7 @@ func _run():
 		
 		saynn("It's {npc.him}.. your nemesis.. holding a shiv. The stab didn't reach too deep.. but the wound is still bleeding.")
 		
-		saynn("[say=npc]"+NemesisReason.getAmbushLine(nemesisReason, getCharacter(npcMain))+"[/color]")
+		saynn("[say=npc]"+NemesisReason.getAmbushLine(nemesisReason, getCharacter(npcMain))+"[/say]")
 		
 		saynn("Looks like {npc.he} brought some friends.")
 		
@@ -177,7 +177,7 @@ func _run():
 		
 		saynn("It's {npc.him}.. your nemesis. You realize that you're missing some of your items..")
 		
-		saynn("[say=npc]"+NemesisReason.getAmbushLine(nemesisReason, getCharacter(npcMain))+"[/color]")
+		saynn("[say=npc]"+NemesisReason.getAmbushLine(nemesisReason, getCharacter(npcMain))+"[/say]")
 		
 		saynn("Looks like {npc.he} brought some friends.")
 		
@@ -229,7 +229,7 @@ func _run():
 		
 		saynn("It's {npc.him}.. your nemesis.")
 		
-		saynn("[say=npc]"+NemesisReason.getAmbushLine(nemesisReason, getCharacter(npcMain))+"[/color]")
+		saynn("[say=npc]"+NemesisReason.getAmbushLine(nemesisReason, getCharacter(npcMain))+"[/say]")
 		
 		saynn("Looks like {npc.he} brought some friends.")
 		
@@ -268,7 +268,7 @@ func _run():
 		
 		saynn("It's {npc.him}.. your nemesis.")
 		
-		saynn("[say=npc]"+NemesisReason.getAmbushLine(nemesisReason, getCharacter(npcMain))+"[/color]")
+		saynn("[say=npc]"+NemesisReason.getAmbushLine(nemesisReason, getCharacter(npcMain))+"[/say]")
 		
 		saynn("Looks like {npc.he} brought some friends.")
 		
@@ -455,6 +455,7 @@ func _react(_action: String, _args):
 	if(_action == "start_slavery"):
 		transferAllItems(getCharacter("TempAmbushStash"), GM.pc)
 		endScene()
+		GM.main.RS.stopSpecialRelationship(npcMain)
 		runScene(getModule("PlayerSlaveryModule").getSlaveryStartScene())
 		return
 	if(_action == "startPunish"):

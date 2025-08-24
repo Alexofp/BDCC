@@ -3,6 +3,7 @@ class_name RelationshipSystem
 
 var entries: Dictionary = {}
 var special: Dictionary = {}
+var cooldowns:Dictionary = {} # cooldowns[special][charID] = X days
 
 func clearRelationships():
 	entries.clear()
@@ -10,6 +11,16 @@ func clearRelationships():
 func onNewDay():
 	for charID in special:
 		special[charID].onNewDay()
+	
+	for specialID in cooldowns:
+		var theCooldowns:Dictionary = cooldowns[specialID]
+		var toRemove:Array = []
+		for charID in theCooldowns:
+			theCooldowns[charID] -= 1
+			if(theCooldowns[charID] <= 0):
+				toRemove.append(charID)
+		for charID in toRemove:
+			theCooldowns.erase(charID)
 
 func hoursPassed(_howMany:int):
 	decayRelationships(_howMany)
@@ -202,12 +213,15 @@ func onCharDelete(_char1:String):
 	removeAllEntriesOf(_char1)
 	if(special.has(_char1)):
 		special.erase(_char1)
+	for shipID in cooldowns:
+		if(cooldowns[shipID].has(_char1)):
+			cooldowns[shipID].eraase(_char1)
 
 func sendSocialEvent(_charActor:String, _charTarget:String, _eventID:int, _args:Array = []):
 	if(_charActor != "pc" && _charTarget != "pc"):
-		return
+		return false
 	if(_charActor == "pc" && _charTarget == "pc"):
-		return
+		return false
 	
 	var theNpcID:String = _charActor if _charTarget == "pc" else _charTarget
 	if(special.has(theNpcID)):
@@ -219,20 +233,22 @@ func sendSocialEvent(_charActor:String, _charTarget:String, _eventID:int, _args:
 			
 			theShipRef.charID = theNpcID # Hack but makes things so much easier
 			
-			if(_charActor == "pc"):
-				var theShouldData := theShipRef.checkSocialEventShouldStartTarget(_charActor, _charTarget, _eventID, _args)
-				if(theShouldData[0]):
+			var theShouldData:Array = theShipRef.checkSocialEventShouldStartTarget(_charActor, _charTarget, _eventID, _args) if _charActor == "pc" else theShipRef.checkSocialEventShouldStartActor(_charActor, _charTarget, _eventID, _args)
+			if(theShouldData[0]):
+				if(hasSpecialRelationshipCooldown(shipID, theNpcID)):
+					halfSpecialRelationshipCooldown(shipID, theNpcID)
+				else:
 					startSpecialRelantionship(shipID, theNpcID, theShouldData[1] if theShouldData.size() > 1 else [])
-			else:
-				var theShouldData := theShipRef.checkSocialEventShouldStartActor(_charActor, _charTarget, _eventID, _args)
-				if(theShouldData[0]):
-					startSpecialRelantionship(shipID, theNpcID, theShouldData[1] if theShouldData.size() > 1 else [])
-			
+					return true
+	return false
+				
 func startSpecialRelantionship(_relationshipID:String, _charID:String, _args:Array = []):
 	if(_charID == "pc"): # Player can't have a special relantionship with themselves
 		return
 	var theChar:BaseCharacter = GlobalRegistry.getCharacter(_charID)
 	if(!theChar || !theChar.isDynamicCharacter()):
+		return
+	if(theChar.getNpcSlavery()): # player's slaves can't be nemesis
 		return
 	var newShip = GlobalRegistry.createSpecialRelationship(_relationshipID)
 	if(!newShip):
@@ -265,15 +281,41 @@ func getSpecialTextAndColor(_charID:String) -> Array:
 	var theShip = special[_charID]
 	return [theShip.getCategoryName(), theShip.getCategoryColor()]
 
-func stopSpecialRelationship(_charID:String, callOnEnd:bool = true):
+func stopSpecialRelationship(_charID:String, callOnEnd:bool = true, addCooldown:bool = true):
 	if(!hasSpecialRelationship(_charID)):
 		return
 	if(callOnEnd):
 		special[_charID].onEnd()
+	if(addCooldown):
+		setSpecialRelationshipCooldown(special[_charID].id, _charID, special[_charID].getCooldown())
 	special.erase(_charID)
 
 func onGettingEnslavedByPlayer(_charID:String):
 	stopSpecialRelationship(_charID)
+
+func setSpecialRelationshipCooldown(_shipID:String, _charID:String, _days:int):
+	if(!cooldowns.has(_shipID)):
+		cooldowns[_shipID] = {}
+	if(_days > 0):
+		cooldowns[_shipID][_charID] = _days
+	else:
+		if(cooldowns[_shipID].has(_charID)):
+			cooldowns[_shipID].erase(_charID)
+
+func hasSpecialRelationshipCooldown(_shipID:String, _charID:String) -> bool:
+	if(!cooldowns.has(_shipID)):
+		return false
+	return cooldowns[_shipID].has(_charID)
+
+func halfSpecialRelationshipCooldown(_shipID:String, _charID:String):
+	if(!hasSpecialRelationshipCooldown(_shipID, _charID)):
+		return
+	var currentAmount:int = cooldowns[_shipID][_charID]
+	currentAmount /= 2
+	if(currentAmount <= 0):
+		cooldowns[_shipID].erase(_charID)
+	else:
+		cooldowns[_shipID][_charID] = currentAmount
 
 func saveData():
 	var specialData:Array = []
@@ -299,6 +341,7 @@ func saveData():
 	return {
 		"entries": entriesData,
 		"special": specialData,
+		"cooldowns": cooldowns,
 	}
 
 func loadData(_data):
@@ -333,3 +376,5 @@ func loadData(_data):
 			continue
 		theShip.loadData(specialEntry)
 		special[theShip.charID] = theShip
+	
+	cooldowns = SAVE.loadVar(_data, "cooldowns", {})

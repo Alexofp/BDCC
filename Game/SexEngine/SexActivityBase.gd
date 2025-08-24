@@ -358,7 +358,7 @@ func choke(_indxActor:int, _indxTarget:int, _chokeStrength:int = CHOKE_NORMAL):
 	var actorInfo:SexDomInfo = getDomOrSubInfo(_indxActor)
 	var targetInfo:SexSubInfo = getDomOrSubInfo(_indxTarget)
 	
-	#var wasConscious:bool = !targetInfo.isUnconscious()
+	var wasConscious:bool = !targetInfo.isUnconscious()
 	
 	if(_chokeStrength == CHOKE_VERYHARD):
 		targetInfo.addFear(0.3)
@@ -390,7 +390,8 @@ func choke(_indxActor:int, _indxTarget:int, _chokeStrength:int = CHOKE_NORMAL):
 	
 	if(isConsciousNow):
 		fetishAffect(_indxTarget, Fetish.Choking, chokeStrengthFetishMod(_chokeStrength))
-	#elif(wasConscious): # Got chocked unconscious
+	elif(wasConscious): # Got chocked unconscious
+		GM.main.RS.sendSocialEvent(actorInfo.getCharID(), targetInfo.getCharID(), SocialEventType.ForcedUnconscious)
 	#	fetishUp(_indxTarget, Fetish.Choking, -30.0)
 	
 	sendSexEvent(SexEvent.Choking, _indxActor, _indxTarget, {strongChoke=(_chokeStrength == CHOKE_HARD)})
@@ -444,6 +445,7 @@ func strike(_indxActor:int, _indxTarget:int, _strikeStrength:int = STRIKE_NORMAL
 			else:
 				fetishAffect(_indxTarget, Fetish.Masochism)
 		elif(wasConscious): # Got beaten unconscious
+			GM.main.RS.sendSocialEvent(actorInfo.getCharID(), targetInfo.getCharID(), SocialEventType.ForcedUnconscious)
 			#if(_strikeStrength == STRIKE_FULLFORCE):
 			#	fetishUp(_indxTarget, Fetish.Masochism, -50.0)
 			#else:

@@ -41,10 +41,13 @@ func init_text():
 func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "stocks"):
 		setState("about_to_stocks", "punisher")
+		#sendSocialEvent("punisher", "target", SocialEventType.PunishStocks)
 	if(_id == "slutwall"):
 		setState("about_to_slutwall", "punisher")
+		#sendSocialEvent("punisher", "target", SocialEventType.PunishSlutwall)
 	if(_id == "sex"):
 		setState("about_to_sex", "punisher")
+		sendSocialEvent("punisher", "target", SocialEventType.PunishSex)
 	if(_id == "sexsub"):
 		setState("about_to_subsex", "punisher")
 	if(_id == "leave"):
@@ -109,6 +112,7 @@ func about_to_lock_stocks_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "lock_them"):
 		affectAffection("target", "punisher", -0.1)
 		addRepScore("target", RepStat.Alpha, -3.0)
+		sendSocialEvent("punisher", "target", SocialEventType.PunishStocks)
 		setState("in_stocks", "punisher")
 
 
@@ -177,6 +181,7 @@ func about_to_lock_slutwall_do(_id:String, _args:Dictionary, _context:Dictionary
 	if(_id == "lock_them"):
 		affectAffection("target", "punisher", -0.1)
 		addRepScore("target", RepStat.Alpha, -3.0)
+		sendSocialEvent("punisher", "target", SocialEventType.PunishSlutwall)
 		setState("in_slutwall", "punisher")
 
 

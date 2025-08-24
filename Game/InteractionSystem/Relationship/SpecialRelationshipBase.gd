@@ -44,6 +44,10 @@ func processInteractionActionGenericScore(_scoreType:String, _value:float) -> fl
 func onNewDay():
 	pass
 
+func getCooldown() -> int:
+	# days
+	return 3
+
 func stopMe():
 	var theRelationship = GM.main.RS.getSpecialRelationship(charID)
 	if(theRelationship == self):

@@ -10,12 +10,19 @@ const SocialEventTypeToNemesisReason = {
 	SocialEventType.GotImpregnated: NemesisReason.Impregnation,
 	SocialEventType.LostFight: NemesisReason.Fight,
 	SocialEventType.AwfulSex: NemesisReason.AwfulSex,
+	SocialEventType.PunishSex: NemesisReason.PunishedSex,
+	SocialEventType.PunishStocks: NemesisReason.PunishedStocks,
+	SocialEventType.PunishSlutwall: NemesisReason.PunishedSlutwall,
+	SocialEventType.EscapedSlavery: NemesisReason.EscapedSlavery,
+	SocialEventType.ForcedUnconscious: NemesisReason.ForcedUnconscious,
 }
 const SocialEventMinimalAffection = { #default is 1.0
 	SocialEventType.LostFight: -0.5,
 	SocialEventType.GotScammed: -0.3,
 	SocialEventType.GotImpregnated: 0.3,
 	SocialEventType.AwfulSex: -0.2,
+	SocialEventType.PunishSex: -0.6,
+	SocialEventType.ForcedUnconscious: -0.6,
 }
 
 func _init():
@@ -37,6 +44,7 @@ func checkSocialEventShouldStartTarget(_charActor:String, _charTarget:String, _e
 	var _affectionRaw:float = affection(_charActor)
 	var _minAffection:float = SocialEventMinimalAffection[_eventID] if SocialEventMinimalAffection.has(_eventID) else 1.0
 	if(_affectionRaw > _minAffection):
+		print("[NEMESIS debug] RAW NEMESIS CHANCE: AFFECTION TOO HIGH")
 		return [false]
 	
 	var _affectionSlide:float = SocialEventType.AFFECTION_BONUS[_eventID] if SocialEventType.AFFECTION_BONUS.has(_eventID) else 0.0
@@ -55,6 +63,12 @@ func checkSocialEventShouldStartTarget(_charActor:String, _charTarget:String, _e
 		var _breedFetish:float = fetish(Fetish.BeingBred)
 		_breedFetish = clamp(_breedFetish+0.5, -1.0, 1.0)
 		nemesisChance *= (1.0 - _breedFetish)
+	elif(_eventID == SocialEventType.ForcedUnconscious):
+		var _fetish:float = fetish(Fetish.UnconsciousSex)
+		_fetish = clamp(_fetish+0.5, -1.0, 1.0)
+		nemesisChance *= (1.0 - _fetish)
+	
+	print("[NEMESIS debug] RAW NEMESIS CHANCE: "+str(nemesisChance))
 	
 	if(nemesisChance > 70.0):
 		nemesisChance = 100.0
@@ -73,7 +87,7 @@ func onSocialEvent(_charActor:String, _charTarget:String, _eventID:int, _args:Ar
 
 func onStart(_args:Array):
 	reason = _args[0] if _args.size() > 0 else NemesisReason.Generic
-	showMessage(getChar().getName()+" became your Nemesis!")
+	showMessage(getChar().getName()+" became your [b][color=red]Nemesis[/color][/b]!")
 
 func onEnd():
 	showMessage(getChar().getName()+" is no longer your Nemesis!")
@@ -87,6 +101,10 @@ func onNewDay():
 	gonnaAmbush = RNG.chance(ambushChance)
 	if(gonnaAmbush):
 		anger *= 0.2
+		print("[NEMESIS debug] AMBUSH WILL HAPPEN TODAY")
+
+func getCooldown() -> int:
+	return 10
 
 func processInteractionActionGenericScore(_scoreType:String, _value:float) -> float:
 	if(_scoreType == "fight"):

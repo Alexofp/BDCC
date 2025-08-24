@@ -59,10 +59,18 @@ func tryAutoInvitePawn():
 			inviteExtra(thePawn)
 
 func calcWillJoin(_mainPawn:CharacterPawn, _newPawn:CharacterPawn) -> bool:
-	return true
+	var pcPawn := GM.main.IS.getPawn("pc")
+	if(!pcPawn):
+		return false
+	var pcAffection:float = _newPawn.getAffection("pc")
+	
+	var joinScore:float = getScoreTypeValueGeneric("fight", _newPawn, pcPawn)
+	var joinChance:float = joinScore*100.0 * clamp(1.0 - pcAffection*2.0, 0.0, 2.0)
+	
+	return RNG.chance(joinChance)
 
 func canAmbush() -> bool:
-	if(state == "" && hasExtra1 && hasExtra2 && GM.world.simpleRingDistance(getLocation(), GM.pc.getLocation()) <= 5):
+	if(state == "" && hasExtra1 && hasExtra2):# && GM.world.simpleRingDistance(getLocation(), GM.pc.getLocation()) <= 5):
 		return true
 	return false
 

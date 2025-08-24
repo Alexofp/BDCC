@@ -22,8 +22,10 @@ func runEvent(_npcSlavery:NpcSlave):
 	
 	theText += "\n\nYou can try to find and enslave them again. Or let someone else take their place. But for now, you are one slave down."
 
-	GlobalRegistry.getModule("NpcSlaveryModule").doFreeEnslavedCharacter(_npcSlavery.getChar().getID())
+	var slaveID:String = _npcSlavery.getChar().getID()
+	GlobalRegistry.getModule("NpcSlaveryModule").doFreeEnslavedCharacter(slaveID)
 	GM.pc.getReputation().addRep(RepStat.Alpha, -3.0)
+	GM.main.RS.sendSocialEvent("pc", slaveID, SocialEventType.EscapedSlavery)
 	
 	return {
 		text = theText,
@@ -33,6 +35,8 @@ func getAnimInfo(_npcSlavery:NpcSlave):
 	return [StageScene.Solo, "stand", {}]
 
 func onEventSkipped(_npcSlavery:NpcSlave):
-	GlobalRegistry.getModule("NpcSlaveryModule").doFreeEnslavedCharacter(_npcSlavery.getChar().getID())
+	var slaveID:String = _npcSlavery.getChar().getID()
+	GlobalRegistry.getModule("NpcSlaveryModule").doFreeEnslavedCharacter(slaveID)
 	GM.main.addLogMessage("Oh no, anyway", "Looks like one of your slaves has managed to escape. Maybe you can try to track them down")
 	GM.pc.getReputation().addRep(RepStat.Alpha, -3.0)
+	GM.main.RS.sendSocialEvent("pc", slaveID, SocialEventType.EscapedSlavery)

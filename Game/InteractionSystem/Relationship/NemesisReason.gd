@@ -7,6 +7,11 @@ const Impregnation = 2
 const Scammed = 3
 const EnslavementAttmept = 4
 const AwfulSex = 5
+const PunishedSex = 6
+const PunishedStocks = 7
+const PunishedSlutwall = 8
+const EscapedSlavery = 9
+const ForcedUnconscious = 10
 
 static func getAmbushLine(_reason:int, _char:BaseCharacter) -> String:
 	if(_reason == Fight):
@@ -44,6 +49,36 @@ static func getAmbushLine(_reason:int, _char:BaseCharacter) -> String:
 		return RNG.pick([
 			"You thought you could abuse me and get away with it?",
 			"I still remember that sex that we had. It was fucking awful.",
+			"You abused me. And I didn't forgive you for that.",
+		])
+	elif(_reason == PunishedSex):
+		return RNG.pick([
+			"You thought you could fuck me and get away with it?",
+			"Thinking that I'm a subby bitch that can be fucked was your biggest mistake.",
+			"You thought that I'm some dirty slut? You're wrong.",
+		])
+	elif(_reason == PunishedStocks):
+		return RNG.pick([
+			"You thought you could lock me into the stocks and get away with it?",
+			"You're dumb if you think that I would forget how you locked me up in those stocks.",
+			"I still remember when you locked me into stocks. That was your last mistake.",
+		])
+	elif(_reason == PunishedSlutwall):
+		return RNG.pick([
+			"You thought you could lock me up like some kind of whore in that wall and get away with it?",
+			"You're dumb if you think that I would forget how you locked me up in the slutwall.",
+			"I still remember when you locked me into the slutwall. That was your last mistake.",
+		])
+	elif(_reason == EscapedSlavery):
+		return RNG.pick([
+			"You thought you could keep me as your slave forever? You're so dumb.",
+			"I'm not your slave, your hear me? I will make you remember.",
+			"I will never be your slave ever again. You fucked up hard.",
+		])
+	elif(_reason == ForcedUnconscious):
+		return RNG.pick([
+			"You thought you could abuse me and get away with it?",
+			"You thought I wouldn't be able to remember it if you'd made me black out? I remember.",
 			"You abused me. And I didn't forgive you for that.",
 		])
 	

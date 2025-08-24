@@ -13,6 +13,13 @@ const GotScammed = 5 # Actor did the scam, Target got scammed
 const AwfulSex = 6
 const GreatSex = 7
 
+const PunishSex = 8
+const PunishStocks = 9
+const PunishSlutwall = 10
+
+const EscapedSlavery = 11 # Target escaped Actor's slavery
+const ForcedUnconscious = 12
+
 # How much does this event make the target hate the actor.
 # 1.0 = fight loss
 # 0.2 = rude talk
@@ -24,6 +31,11 @@ const HATE_MULT = {
 	GotImpregnated: 3.0,
 	GotScammed: 2.0,
 	AwfulSex: 1.0,
+	PunishSex: 0.8,
+	PunishStocks: 1.5,
+	PunishSlutwall: 1.5,
+	EscapedSlavery: 5.0,
+	ForcedUnconscious: 1.0,
 }
 
 const AFFECTION_BONUS = { #Higher number = less chance of nemesis
@@ -33,4 +45,6 @@ const AFFECTION_BONUS = { #Higher number = less chance of nemesis
 	GotImpregnated: 0.0,
 	GotScammed: -0.1,
 	AwfulSex: -0.4,
+	EscapedSlavery: -0.3,
+	ForcedUnconscious: 0.1,
 }
