@@ -158,7 +158,7 @@ func onActivityEnd():
 
 func getOrgasmHandlePriority(_indx:int) -> int:
 	if(_indx == SUB_0):
-		return 3
+		return 2
 	return -1
 
 func saveData():

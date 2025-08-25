@@ -2991,7 +2991,7 @@ func strokePenis(_indxActor:int, _indxTarget:int):
 		"{dom.You} {dom.youVerb('slide')} {dom.yourHis} hand along {sub.yourHis} {sub.penisShort}.",
 		"{dom.You} {dom.youVerb('slide')} {dom.yourHis} hand along {sub.yourHis} {sub.penisShort} back and forth.",
 		"{dom.You} {dom.youVerb('rub')} the head of {sub.yourHis} {sub.penisShort} in circles.",
-		"{dom.You} {dom.youVerb('trace')} the veins on {sub.yourHis} {sub.penisShort} with your fingers.",
+		"{dom.You} {dom.youVerb('trace')} the veins on {sub.yourHis} {sub.penisShort} with {dom.yourHis} fingers.",
 		"{dom.You} {dom.youVerb('keep')} stroking {sub.yourHis} {sub.penisShort} in a steady, teasing rhythm.",
 		
 	]).replace("dom.", actorInfo.getCharID()+".").replace("sub.", targetInfo.getCharID()+"."))

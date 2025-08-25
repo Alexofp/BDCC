@@ -122,10 +122,11 @@ func getActions(_indx:int):
 			for portalNPC in theNpcs:
 				var charName:String = portalNPC.getName()
 				for slot in HOLES_CAN_PORTAL_FUCK:
-					var theHoleName:String = getNameHoleGeneric(slot)
-					addAction("setTarget", 0.0, theHoleName, "Target "+charName+"'s "+theHoleName, {
-						A_CATEGORY: ["Fleshlight Target", charName], A_ARGS: [portalNPC.getID(), slot], A_PRIORITY: 5,
-					})
+					if(charCanUse(portalNPC, slot)):
+						var theHoleName:String = getNameHoleGeneric(slot)
+						addAction("setTarget", 0.0, theHoleName, "Target "+charName+"'s "+theHoleName, {
+							A_CATEGORY: ["Fleshlight Target", charName], A_ARGS: [portalNPC.getID(), slot], A_PRIORITY: 5,
+						})
 		
 			if(isReadyToFuck(SUB_0)):
 				addAction("penetrate", 1.0, "Penetrate", "Try to penetrate that hole with the sub's cock.")

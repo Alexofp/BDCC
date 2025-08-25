@@ -178,7 +178,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		getDomInfo().addAnger(-0.03)
 		addTextPick([
 			"{sub.You} willingly {sub.youVerb('thrust')} {sub.yourHis} tongue deeper into {dom.yourHis} "+str(getRandomAnusWord())+".",
-			"{sub.You} willingly {sub.youVerb('slide')} {sub.yourHis} past {dom.yourHis} anal ring and {sub.youVerb('lap')} at the inner walls.",
+			"{sub.You} willingly {sub.youVerb('slide')} {sub.yourHis} tongue past {dom.yourHis} anal ring and {sub.youVerb('lap')} at the inner walls.",
 			"{sub.You} eagerly {sub.youVerb('eat')} {dom.yourHis} "+str(getRandomAnusWord())+" out."
 		])
 		return

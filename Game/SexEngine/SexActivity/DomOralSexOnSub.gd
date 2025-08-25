@@ -416,11 +416,11 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		
 		var exposedThings:Array = []
 		var genitalsText:String = "crotch"
-		if(getDom().hasPenis() && getDom().getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
+		if(getSub().hasPenis() && getSub().getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
 			exposedThings.append(RNG.pick(["dick", "cock", "member"]))
 			if(RNG.chance(50)):
 				exposedThings.append("balls")
-		if(getDom().hasVagina() && getDom().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) == null):
+		if(getSub().hasVagina() && getSub().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) == null):
 			exposedThings.append(RNG.pick(["pussy", "pussy", "slit", "kitty"]))
 		if(exposedThings.size() > 0):
 			genitalsText = "exposed "+Util.humanReadableList(exposedThings)

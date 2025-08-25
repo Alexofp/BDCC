@@ -1126,7 +1126,7 @@ func getLines(_reaction:int, _role:int, _args:Array):
 						"Wanna play with something wild?",
 						"A little something extra for you.",
 						"This is the good stuff.",
-						"Curious? Eat  it.",
+						"Curious? Eat it.",
 						"Give it a shot, babe.",
 					])
 
@@ -3572,7 +3572,7 @@ func getLines(_reaction:int, _role:int, _args:Array):
 						"Wanna take a closer look?",
 						"I have something you can feed on.",
 						"Wanna have some fun with these?",
-						"How are you suckling skills I wonder.",
+						"How are your suckling skills I wonder.",
 					])
 
 		SexReaction.DomBreastfeedsOnSubStart:

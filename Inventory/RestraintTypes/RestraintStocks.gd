@@ -56,7 +56,7 @@ func doStruggle(_pc, _minigame:MinigameResult):
 		damage = calcDamage(_pc, _minigame)
 		stamina = 70
 	else:
-		text = "{user.name} helplessly wiggles {user.his} body, having {user.his} legs restrained makes this pretty much uselss."
+		text = "{user.name} helplessly wiggles {user.his} body, having {user.his} legs restrained makes this pretty much useless."
 		damage = calcDamage(_pc, _minigame, 0.5)
 		stamina = RNG.randi_range(70, 90)
 		
