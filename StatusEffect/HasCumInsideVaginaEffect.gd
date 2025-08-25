@@ -34,7 +34,7 @@ func getEffectDesc():
 	var fluidAmount = womb.getFluidAmount()
 	var fluidAmountRounded = ceil(fluidAmount)
 	
-	var messFluids = womb.getFluidList()
+	var messFluids = womb.getFluidListNames()
 	var humanReadableString = Util.humanReadableList(messFluids)
 	
 	var message = "You got fucked and now your womb is stuffed with " + str(fluidAmountRounded) + " ml of "+humanReadableString

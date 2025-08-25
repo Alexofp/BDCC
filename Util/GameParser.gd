@@ -280,7 +280,7 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		return orifice.getLoosenessString()
 	
 	if(_command in ["bodyContents", "bodyMess"] && _args.size() == 0):
-		var thetext = Util.humanReadableList(object.getFluids().getFluidList())
+		var thetext = Util.humanReadableList(object.getFluids().getFluidListNames())
 		if(thetext == null || thetext == ""):
 			return "nothing"
 		return thetext
@@ -294,7 +294,7 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		var orifice:Orifice = bodypart.getOrifice()
 		if(orifice == null):
 			return "[color=red]ERROR:NOVAGINA[/color]"
-		var thetext = Util.humanReadableList(orifice.getFluidList())
+		var thetext = Util.humanReadableList(orifice.getFluidListNames())
 		if(thetext == null || thetext == ""):
 			return "nothing"
 		return thetext
@@ -308,7 +308,7 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		var orifice:Orifice = bodypart.getOrifice()
 		if(orifice == null):
 			return "[color=red]ERROR:NOANUS[/color]"
-		var thetext = Util.humanReadableList(orifice.getFluidList())
+		var thetext = Util.humanReadableList(orifice.getFluidListNames())
 		if(thetext == null || thetext == ""):
 			return "nothing"
 		return thetext
@@ -322,7 +322,7 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		var orifice:Orifice = bodypart.getOrifice()
 		if(orifice == null):
 			return "[color=red]ERROR:NOTHROAT[/color]"
-		var thetext = Util.humanReadableList(orifice.getFluidList())
+		var thetext = Util.humanReadableList(orifice.getFluidListNames())
 		if(thetext == null || thetext == ""):
 			return "nothing"
 		return thetext
