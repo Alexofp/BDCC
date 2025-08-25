@@ -101,6 +101,9 @@ func initSexType(theSexType, args:Dictionary = {}):
 	if(sexType != null):
 		sexType.setSexEngine(self)
 		sexType.initArgs(args)
+		sexResult.sexTypeID = sexType.id
+	else:
+		sexResult.sexTypeID = SexType.DefaultSex
 
 func getSexTypeID() -> String:
 	if(sexType == null):
@@ -352,6 +355,7 @@ func checkIfDomsNeedMoreGoals():
 
 func doFastSex() -> SexEngineResult:
 	var newResult:SexEngineResult = SexEngineResult.new()
+	newResult.sexTypeID = getSexTypeID()
 	
 	for subID in subs:
 		GM.main.updateCharacterUntilNow(subID)
@@ -1124,6 +1128,7 @@ func endSex():
 	if(sexEnded):
 		return
 	sexResult.clear()
+	sexResult.sexTypeID = getSexTypeID()
 	sexResult.subsWon = true
 	for domID in doms:
 		var domInfo = doms[domID]

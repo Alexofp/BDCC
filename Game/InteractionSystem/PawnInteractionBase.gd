@@ -823,7 +823,7 @@ func doFightAftermath(_fightersData, newResult):
 func doSexAftermath(_sexData, theSexResult:SexEngineResult):
 	var domPawn = getRolePawn(_sexData[0])
 	var subPawn = getRolePawn(_sexData[1])
-	var sexType = (_sexData[2] if _sexData.size() > 2 else SexType.DefaultSex)
+	var sexType = (_sexData[2] if _sexData.size() > 2 else theSexResult.sexTypeID)
 	
 	if(domPawn != null):
 		domPawn.afterSex(true)
@@ -986,7 +986,14 @@ func getDebugInfo():
 func receiveSexEngineResult(_result:SexEngineResult):
 	isWaitingScene = false
 	sexResult = _result
-	doSexAftermath(currentActionArgs["sex"], sexResult)
+	if(currentActionArgs.has("sex")):
+		doSexAftermath(currentActionArgs["sex"], sexResult)
+	else:
+		assert(false, "FIX ME")
+		# Try to recover sex aftermath data outside the editor
+		var derivedSexData = sexResult.tryDeriveSexData()
+		if(derivedSexData != null):
+			doSexAftermath(derivedSexData, sexResult)
 	doCurrentAction()
 
 func receiveSceneStatusFinal(_result:Dictionary):

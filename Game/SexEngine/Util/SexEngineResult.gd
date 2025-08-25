@@ -1,11 +1,13 @@
 extends Reference
 class_name SexEngineResult
 
+var sexTypeID:String = SexType.DefaultSex
 var doms:Dictionary = {}
 var subs:Dictionary = {}
 var subsWon:bool = false
 
 func clear():
+	sexTypeID = SexType.DefaultSex
 	doms.clear()
 	subs.clear()
 	subsWon = false
@@ -112,12 +114,14 @@ func saveData() -> Dictionary:
 		subsData[subID] = subs[subID].saveData()
 	
 	return {
+		sexTypeID = sexTypeID,
 		doms = domsData,
 		subs = subsData,
 		subsWon = subsWon,
 	}
 
 func loadData(_data:Dictionary):
+	sexTypeID = SAVE.loadVar(_data, "sexTypeID", SexType.DefaultSex)
 	subsWon = SAVE.loadVar(_data, "subsWon", false)
 	var domsData:Dictionary = SAVE.loadVar(_data, "doms", {})
 	var subsData:Dictionary = SAVE.loadVar(_data, "subs", {})
@@ -135,3 +139,9 @@ func loadData(_data:Dictionary):
 		newSubResult.id = subID
 		newSubResult.loadData(SAVE.loadVar(subsData, subID, {}))
 		subs[subID] = newSubResult
+
+func tryDeriveSexData():
+	if (doms.size() != 1 || subs.size() != 1):
+		# Can't derive from unusual parameters
+		return null
+	return [doms.keys()[0], subs.keys()[0], sexTypeID]
