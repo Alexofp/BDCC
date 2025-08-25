@@ -602,12 +602,12 @@ func updatePCLocation():
 	var latestPCLoc:String = GM.pc.getLocation()
 	pawn.setLocation(latestPCLoc)
 
-func getAllUnconsciousPawns() -> Array:
+func getAllUnconsciousPawns() -> Array: # The ones that can be saved
 	var allUnconInteractions:Array = getInteractionsOfType("Unconscious")
 	
 	var result:Array = []
 	for interaction in allUnconInteractions:
-		if(interaction.getPawnCount() != 1):
+		if(!interaction.canNurseSave()):
 			continue
 		result.append(interaction.getRolePawn("main"))
 	return result

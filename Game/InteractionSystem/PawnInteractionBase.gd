@@ -985,6 +985,9 @@ func getDebugInfo():
 
 func receiveSexEngineResult(_result:SexEngineResult):
 	isWaitingScene = false
+	if(!currentActionArgs.has("sex")):
+		Log.printerr("receiveSexEngineResult() was called but the "+id+" interaction wasn't expecting it!")
+		return
 	sexResult = _result
 	doSexAftermath(currentActionArgs["sex"], sexResult)
 	doCurrentAction()
