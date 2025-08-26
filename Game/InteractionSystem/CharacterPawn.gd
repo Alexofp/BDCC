@@ -419,7 +419,8 @@ func isHighSecInmate() -> bool:
 	return isInmate() && getChar().getInmateType() == InmateType.HighSec
 
 func isSlaveToPlayer():
-	return getChar().isSlaveToPlayer()
+	var theChar = getChar()
+	return theChar != null && theChar.isSlaveToPlayer()
 
 func getNpcSlavery() -> NpcSlave:
 	return getChar().getNpcSlavery()
