@@ -1863,6 +1863,12 @@ func areNemesis(_roleWho:String, _roleTo:String) -> bool:
 		return true
 	return false
 
+func hasMissingCharacters() -> bool:
+	for involvedPawnRole in involvedPawns:
+		if(getRolePawn(involvedPawnRole) == null):
+			return true
+	return false
+
 func saveData():
 	var data = {
 		"loc": location,
@@ -1906,9 +1912,3 @@ func loadData(_data):
 	else:
 		sexResult = null
 	rebuildCharIDToRole()
-
-func getInvalidCharCause():
-	for involvedPawnRole in involvedPawns.keys():
-		if getRolePawn(involvedPawnRole) == null:
-			return involvedPawns[involvedPawnRole]
-	return null

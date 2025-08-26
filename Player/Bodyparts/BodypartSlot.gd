@@ -132,9 +132,9 @@ static func findReplacement(slot, oldvalue, species=null, gender=Gender.Androgyn
 				break
 	if(mainSpecies == null):
 		mainSpecies = GlobalRegistry.getSpecies("canine")
-	var replacmentIdFor = mainSpecies.getDefaultForSlot(slot, gender)
-	if(replacmentIdFor != null && GlobalRegistry.getBodypartRef(replacmentIdFor) != null):
-		return replacmentIdFor
+	var replacementIdFor = mainSpecies.getDefaultForSlot(slot, gender)
+	if(replacementIdFor != null && GlobalRegistry.getBodypartRef(replacementIdFor) != null):
+		return replacementIdFor
 	# Hardcoded fallback convertions
 	if(slot == Body):
 		return "anthrobody"
@@ -143,7 +143,7 @@ static func findReplacement(slot, oldvalue, species=null, gender=Gender.Androgyn
 	elif(slot == Anus):
 		return "anus"
 	elif(slot == Legs):
-		return "plantilegs"
+		return "digilegs"
 	elif(slot == Vagina):
 		return "vagina"
 	return null

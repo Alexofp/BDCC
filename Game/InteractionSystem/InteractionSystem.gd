@@ -43,11 +43,10 @@ func loadData(_data):
 	pawnsByLoc.clear()
 	var pawnData = SAVE.loadVar(_data, "pawns", {})
 	for charID in pawnData:
-		# Skip loading character pawns if the character does not exists, as it may leads to game crashes
-		if charID != "" and GlobalRegistry.getCharacter(charID) == null:
-			Log.printerr("Unable to load pawn with character " + charID + " as the character is missing!")
+		if(charID == "" || GlobalRegistry.getCharacter(charID) == null):
+			Log.printerr("Unable to load pawn with character id "+str(charID)+" as the character is missing!")
 			continue
-		var pawnEntry = pawnData[charID]
+		var pawnEntry:Dictionary = SAVE.loadVar(pawnData, charID, {})
 		
 		var newPawn: CharacterPawn = CharacterPawn.new()
 		newPawn.charID = charID
@@ -66,13 +65,12 @@ func loadData(_data):
 		
 		var interaction = GlobalRegistry.createInteraction(interactionID)
 		if(interaction == null):
-			Log.printerr("Unable interaction with the id " + interactionID + " as the interaction id is missing!")
+			Log.printerr("Unable to load interaction with the id "+str(interactionID)+" because it's not registered.")
 			continue
 		interaction.loadData(SAVE.loadVar(interactionEntry, "data", {}))
-		# Loading an interaction with missing actors may lead to game crashes
-		var invalidCharCause = interaction.getInvalidCharCause()
-		if invalidCharCause != null:
-			Log.printerr("Unable to load interaction with the id " + interactionID + " as the character " + invalidCharCause + " is missing!")
+		
+		if(interaction.hasMissingCharacters()):
+			Log.printerr("Unable to load interaction with the id "+str(interactionID)+" because it has missing characters.")
 			continue
 		interactions.append(interaction)
 
