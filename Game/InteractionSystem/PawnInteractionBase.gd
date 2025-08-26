@@ -1046,7 +1046,7 @@ func doLookAround(role:String, keepScoreMult:float = 1.0):
 	if(GM.main.IS.areInteractionsDisabled()):
 		return false
 	var pawn = getRolePawn(role)
-	if(!pawn.canInterrupt()):
+	if(pawn == null || !pawn.canInterrupt()):
 		return false
 	var loc:String = pawn.getLocation()
 	
@@ -1906,3 +1906,9 @@ func loadData(_data):
 	else:
 		sexResult = null
 	rebuildCharIDToRole()
+
+func getInvalidCharCause():
+	for involvedPawnRole in involvedPawns.keys():
+		if getRolePawn(involvedPawnRole) == null:
+			return involvedPawns[involvedPawnRole]
+	return null

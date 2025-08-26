@@ -23,10 +23,12 @@ func getBuffs():
 	if(!npc.isPlayer()):
 		return
 	
-	var ass = npc.getBodypart(BodypartSlot.Anus)
-	var assOrifice = ass.getOrifice()
-	var uniqueUsersAss = assOrifice.getUniqueCharactersAmount()
-	
+	var uniqueUsersAss = 0
+	if(npc.hasBodypart(BodypartSlot.Anus)):
+		var ass = npc.getBodypart(BodypartSlot.Anus)
+		var assOrifice = ass.getOrifice()
+		uniqueUsersAss = assOrifice.getUniqueCharactersAmount()
+		
 	var uniqueUsersPussy = 0
 	if(npc.hasBodypart(BodypartSlot.Vagina)):
 		var pussy = npc.getBodypart(BodypartSlot.Vagina)
