@@ -865,6 +865,8 @@ func endActivity():
 	if(!hasEnded):
 		hasEnded = true
 		onActivityEnd()
+		if(getSexEngine()):
+			getSexEngine().reconsiderPCTarget()
 	
 	hasEnded = true
 

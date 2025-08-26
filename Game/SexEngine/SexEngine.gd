@@ -232,7 +232,8 @@ func reactToActivityEnd(theactivity):
 			continue
 		
 		activity.reactActivityEnd(theactivity)
-		checkExtra()
+	checkExtra()
+	reconsiderPCTarget()
 
 func startActivity(id, theDomID, theSubID, _args = null):
 	var activity = makeActivity(id, theDomID, theSubID)
@@ -243,6 +244,7 @@ func startActivity(id, theDomID, theSubID, _args = null):
 	if(activity.hasEnded):
 		reactToActivityEnd(activity)
 	checkExtra()
+	reconsiderPCTarget()
 
 func switchActivity(oldActivity, newActivityID, _args = []):
 	var theDomIDs:Array = []
@@ -262,6 +264,7 @@ func switchActivity(oldActivity, newActivityID, _args = []):
 	if(activity.hasEnded):
 		reactToActivityEnd(activity)
 	checkExtra()
+	reconsiderPCTarget()
 
 func getActivityWithUniqueID(uniqueID:int):
 	for activity in activities:
@@ -1273,6 +1276,29 @@ func getXFreeSubIDsForAnim(_amount:int) -> Array:
 				return result
 	return result
 
+# Makes us automatically switch targets if one of the doms grabs us
+func reconsiderPCTarget():
+	if(!isSub("pc") || doms.size() < 2):
+		return
+	var theTargetChar:String = getPCTarget()
+	var theTargetInfo:SexInfoBase = getCharInfo(theTargetChar)
+	if(!theTargetInfo):
+		return
+	var domsThatHaveActivitiesWithPC:Array = []
+	for activity in activities:
+		if(activity.hasEnded || !activity.isInvolved("pc") || activity.getAnimation() == null):
+			continue
+		
+		for otherDomInfo in activity.doms:
+			if(otherDomInfo == theTargetInfo):
+				return # We have at least one animated activity with the current target, all is good
+			
+			if(!domsThatHaveActivitiesWithPC.has(otherDomInfo.charID)):
+				domsThatHaveActivitiesWithPC.append(otherDomInfo.charID)
+	# We have a target but we don't have any sex activities with it, lets try to switch to the one that we do
+	if(!domsThatHaveActivitiesWithPC.empty()):
+		pcTarget = domsThatHaveActivitiesWithPC[0]
+	
 func getBestAnimation():
 	var theTargetChar:String = getPCTarget()
 	if(theTargetChar == ""):
