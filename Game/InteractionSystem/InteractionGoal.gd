@@ -18,12 +18,13 @@ const HangoutAt = "HangoutAt"
 const SlaveLeave = "SlaveLeave"
 const SlaveGiveCredits = "SlaveGiveCredits"
 const NemesisAmbush = "NemesisAmbush"
+const GetHealed = "GetHealed"
 
 static func getAll():
 	return [Wander, Eat, Hangout, WorkMine, Patrol, POI, Save, Prostitute, Shower, RepairClothes, Leave, Struggle, GiveBirth, HangoutAt, SlaveLeave, SlaveGiveCredits]
 
 static func getAllAlone():
-	return [Wander, Eat, Hangout, WorkMine, POI, Shower, RepairClothes, Leave, Struggle, GiveBirth, SlaveLeave, SlaveGiveCredits, Prostitute, NemesisAmbush]
+	return [Wander, Eat, Hangout, WorkMine, POI, Shower, RepairClothes, Leave, Struggle, GiveBirth, SlaveLeave, SlaveGiveCredits, Prostitute, NemesisAmbush, GetHealed]
 
 static func create(theID:String):
 	var newGoal

@@ -274,14 +274,16 @@ func hoursPassed(_howmuch):
 	var targetLust = getAmbientLust()
 	
 	if(currentLust < targetLust):
-		var addValue = min(_howmuch, (targetLust - currentLust))
+		var addPerHour:int = Util.maxi(1, targetLust/10.0)
+		var addValue = min(_howmuch*addPerHour, (targetLust - currentLust))
 		addLust(addValue)
 
 	var currentPain = getPain()
 	var targetPain = getAmbientPain()
 	
 	if(currentPain < targetPain):
-		var addValue = min(_howmuch, (targetPain - currentPain))
+		var addPerHour:int = Util.maxi(1, targetPain/10.0)
+		var addValue = min(_howmuch*addPerHour, (targetPain - currentPain))
 		addPain(addValue)
 		
 	skillsHolder.hoursPassed(_howmuch)
@@ -852,23 +854,27 @@ func personalityChangesAfterSex():
 func getCharacterType():
 	return CharacterType.Inmate
 
-func doPainfullyStretchHole(_bodypart, _who = "pc"):
+func doPainfullyStretchHole(_bodypart, _who = "pc") -> bool:
 	if(_bodypart == BodypartSlot.Vagina && hasBodypart(_bodypart)):
 		if(hasEffect(StatusEffect.LubedUp)):
-			return
+			return false
 		
 		addEffect(StatusEffect.StretchedPainfullyPussy, [1])
 		emit_signal("holePainfullyStretched", _bodypart, _who)
+		return true
 	if(_bodypart == BodypartSlot.Anus && hasBodypart(_bodypart)):
 		if(hasEffect(StatusEffect.LubedUp)):
-			return
+			return false
 		
 		addEffect(StatusEffect.StretchedPainfullyAnus, [1])
 		emit_signal("holePainfullyStretched", _bodypart, _who)
+		return true
+	return false
 
-func doWound(_who = "pc"):
+func doWound(_who = "pc") -> bool:
 	addEffect(StatusEffect.Wounded, [1])
 	emit_signal("gotWoundedBy", _who)
+	return true
 
 func getEncounterChanceModifierStaff():
 	return clamp(buffsHolder.getCustom(BuffAttribute.EncounterChanceModifierStaff) + 1.0, 0.1, 10.0)

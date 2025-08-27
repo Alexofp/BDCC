@@ -97,6 +97,7 @@ func _init():
 		SexReaction.ThreesomeDPSameHole: {REACT_CHANCE: 100},
 		SexReaction.ThreesomeSpitroast: {REACT_CHANCE: 100},
 		SexReaction.ThreesomeRideGrind: {REACT_CHANCE: 100},
+		SexReaction.PainStrongGeneric: {REACT_CHANCE: 100},
 	}
 
 func getLines(_reaction:int, _role:int, _args:Array):
@@ -5158,5 +5159,24 @@ func getLines(_reaction:int, _role:int, _args:Array):
 						"That’s it, don’t stop.",
 						"Lick and swallow.",
 						"I want your whole face as a seat.",
+					])
+
+		SexReaction.PainStrongGeneric:
+			if(_role == ROLE_MAIN):
+				if(isAngry()):
+					addLines([
+						"AGH! DAMN IT..",
+						"ARGH! FUCK..",
+						"OW.. Fuck! Piece of shit..",
+						"AGH.. Shit..",
+						"G-Gah!.. Fuck..",
+					])
+				if(!isAngry()):
+					addLines([
+						"AGH!",
+						"ARGH!",
+						"OW.. Fuck!",
+						"AGH.. Shit..",
+						"G-Gah!..",
 					])
 

@@ -780,3 +780,20 @@ func getTFHolder():
 
 func canApplySmartLocks() -> bool:
 	return !temporaryCharacter
+
+func doWound(_who = "pc") -> bool:
+	addEffect(StatusEffect.Wounded, [1])
+	return true
+
+func doPainfullyStretchHole(_bodypart, _who = "pc") -> bool:
+	if(_bodypart == BodypartSlot.Vagina && hasBodypart(_bodypart)):
+		if(hasEffect(StatusEffect.LubedUp)):
+			return false
+		addEffect(StatusEffect.StretchedPainfullyPussy, [1])
+		return true
+	elif(_bodypart == BodypartSlot.Anus && hasBodypart(_bodypart)):
+		if(hasEffect(StatusEffect.LubedUp)):
+			return false
+		addEffect(StatusEffect.StretchedPainfullyAnus, [1])
+		return true
+	return false

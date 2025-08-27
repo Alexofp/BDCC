@@ -16,6 +16,7 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "medical_nursery")
 	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "hall_canteen")
 	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "main_laundry")
+	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "med_lobbymain")
 	for theSpot in peeSpots:
 		es.addTrigger(self, Trigger.EnteringRoomWithSlave, theSpot)
 	for theSpot in playSpots:
@@ -78,6 +79,10 @@ func run(_triggerID, _args):
 		else:
 			addDisabledButton("Give birth (Slave)", "Your slave is not pregnant or is not ready to give birth yet")
 	
+	if(locName == "med_lobbymain"):
+		if(theChar.hasEffect(StatusEffect.Wounded) || theChar.hasEffect(StatusEffect.StretchedPainfullyAnus) || theChar.hasEffect(StatusEffect.StretchedPainfullyPussy)):
+			addButton("Heal", "Ask the doctors to heal your slave", "doHeal", [theChar])
+	
 func getPriority():
 	return 0
 
@@ -86,6 +91,13 @@ func onButton(_method, _args):
 		GM.pc.addCredits(-5)
 		_args[0].repairAllClothes()
 		addMessage("Your slave's clothes have been repaired!")
+		GM.main.reRun()
+	if(_method == "doHeal"):
+		var theChar:BaseCharacter = _args[0]
+		theChar.removeEffect(StatusEffect.Wounded)
+		theChar.removeEffect(StatusEffect.StretchedPainfullyAnus)
+		theChar.removeEffect(StatusEffect.StretchedPainfullyPussy)
+		addMessage("Your slave has been healed!")
 		GM.main.reRun()
 	if(_method == "starthair"):
 		runScene("ActionSlaveryHaircut", [_args[0]])

@@ -2549,11 +2549,11 @@ func unequipStrapon():
 		return null
 	return getInventory().unequipItem(theStrapon)
 
-func doPainfullyStretchHole(_bodypart, _who = "pc"):
-	pass
+func doPainfullyStretchHole(_bodypart, _who = "pc") -> bool:
+	return false
 
-func doWound(_who = "pc"):
-	pass
+func doWound(_who = "pc") -> bool:
+	return false
 
 func unequipAllRestraints():
 	for item in inventory.getEquppedRestraints():

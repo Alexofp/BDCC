@@ -42,10 +42,14 @@ func in_wards_do(_id:String, _args:Dictionary, _context:Dictionary):
 			setState("in_wards_pc", "inmate")
 			doRemoveRole("nurse")
 		else:
+			var theChar = getRoleChar("inmate")
 			var inpawn = getRolePawn("inmate")
 			stopMe()
 			inpawn.deleteMe()
-
+			if(theChar):
+				theChar.removeEffect(StatusEffect.Wounded)
+				theChar.removeEffect(StatusEffect.StretchedPainfullyAnus)
+				theChar.removeEffect(StatusEffect.StretchedPainfullyPussy)
 
 func in_wards_pc_text():
 	saynn("Time to rest..")

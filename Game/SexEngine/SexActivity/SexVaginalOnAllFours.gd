@@ -548,12 +548,13 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 					var item = getSub().getInventory().getEquippedItem(InventorySlot.Vagina)
 					text = "{dom.You} temporarily {dom.youVerb('retrieve')} "+str(item.getAStackName())+" out of {sub.your} pussy. "+text
 				
+				addText(text)
+				
 				var freeRoom:float = getSub().getPenetrationFreeRoomBy(usedBodypart, getDomID())
 				var chanceToPain = -freeRoom * 2.0
 				if(RNG.chance(chanceToPain) || (getDomInfo().isAngry() && RNG.chance(20))):
-					getSub().doPainfullyStretchHole(usedBodypart, getDomID())
-				
-				addText(text)
+					doStretch(DOM_0, SUB_0, usedBodypart)
+
 				return
 	if(_id == "switchhole"):
 		switchCurrentActivityTo(switchHoleActivity)

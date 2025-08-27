@@ -459,6 +459,22 @@ func strike(_indxActor:int, _indxTarget:int, _strikeStrength:int = STRIKE_NORMAL
 	if(_indxActor < 0 && _indxTarget >= 0):
 		assert(false, "IMPLEMENT ME")
 
+func doStretch(_indxActor:int, _indxTarget:int, _hole:String, showText:bool = true) -> bool:
+	if(getDomOrSub(_indxTarget).doPainfullyStretchHole(_hole, getDomOrSubID(_indxActor))):
+		if(showText):
+			addTextTopBottom("{<BOTTOM>.Your} "+getNameHole(_indxTarget, _hole)+" gets [b]stretched painfully wide[/b]!", _indxActor, _indxTarget)
+			react(SexReaction.PainStrongGeneric, [100.0], [_indxTarget])
+		return true
+	return false
+
+func doWound(_indxActor:int, _indxTarget:int, showText:bool = true) -> bool:
+	if(getDomOrSub(_indxTarget).doWound(getDomOrSubID(_indxActor))):
+		if(showText):
+			addTextTopBottom("{<BOTTOM>.You} [b]{<BOTTOM>.youVerb('get')} wounded[/b]!", _indxActor, _indxTarget)
+			react(SexReaction.PainStrongGeneric, [100.0], [_indxTarget])
+			return true
+	return false
+
 func moan(_indx:int, _theReaction:int = SexReaction.MoanGeneric):
 	var theInfo:SexInfoBase = getDomOrSubInfo(_indx)
 	if(theInfo.isUnconscious()):
@@ -2442,6 +2458,7 @@ func doProcessCumInside(_indxTop:int, _indxBottom:int, _hole:String, tryKnot:boo
 	var knotSuccess:bool = false
 	var didCumInside:bool = false
 	var handledCum:bool = false
+	var shouldStretchPainfully:bool = false
 
 	if(_hole == S_VAGINA):
 		fetishAffect(_indxTop, Fetish.VaginalSexGiving, 3.0)
@@ -2458,7 +2475,7 @@ func doProcessCumInside(_indxTop:int, _indxBottom:int, _hole:String, tryKnot:boo
 		if(RNG.chance(10)):
 			chanceToPain *= 1.5
 		if(RNG.chance(chanceToPain)):
-			bottomChar.doPainfullyStretchHole(_hole, topChar.getID())
+			shouldStretchPainfully = true
 
 		#isTryingToKnot = true
 		bottomChar.gotOrificeStretchedBy(_hole, topChar.getID(), true, 0.5)
@@ -2577,6 +2594,10 @@ func doProcessCumInside(_indxTop:int, _indxBottom:int, _hole:String, tryKnot:boo
 	#addText(text)
 	#applyTallymarkIfNeeded(usedBodypart)
 	addTextTopBottom(text, _indxTop, _indxBottom)
+	
+	if(shouldStretchPainfully):
+		doStretch(_indxTop, _indxBottom, _hole)
+	
 	return {
 		text=text,
 		didCumInside=didCumInside,
@@ -2891,13 +2912,13 @@ func tryPenetrate(_indxTop:int, _indxBottom:int, _hole:String, isEnveloping:bool
 			else:
 				text = "{<BOTTOM>.You} temporarily {<BOTTOM>.youVerb('retrieve')} "+str(item.getAStackName())+" out of {<BOTTOM>.yourHis} pussy. "+text
 		
+		addTextTopBottom(text, _indxTop, _indxBottom)
+		
 		var freeRoom:float = bottomChar.getPenetrationFreeRoomBy(_hole, topChar.getID())
 		var chanceToPain = -freeRoom * 2.0
 		if(RNG.chance(chanceToPain) || ((topInfo is SexDomInfo) && topInfo.isAngry() && RNG.chance(20))):
-			bottomChar.doPainfullyStretchHole(_hole, topChar.getID())
+			doStretch(_indxTop, _indxBottom, _hole)
 			#fetishUp(_indxBottom, Fetish.VaginalSexReceiving if _hole == S_VAGINA else Fetish.AnalSexReceiving, -20.0)
-
-		addTextTopBottom(text, _indxTop, _indxBottom)
 		return true
 
 # Does a 'result' of a penetration
@@ -2947,7 +2968,7 @@ func penetration(didPenetrate:bool, _indxTop:int, _indxBottom:int, _hole:String,
 		var freeRoom:float = bottomChar.getPenetrationFreeRoomBy(_hole, topChar.getID())
 		var chanceToPain = -freeRoom * 2.0
 		if(RNG.chance(chanceToPain) || ((topInfo is SexDomInfo) && topInfo.isAngry() && RNG.chance(20))):
-			bottomChar.doPainfullyStretchHole(_hole, topChar.getID())
+			doStretch(_indxTop, _indxBottom, _hole)
 			#fetishUp(_indxBottom, Fetish.VaginalSexReceiving if _hole == S_VAGINA else Fetish.AnalSexReceiving, -20.0)
 
 		#addTextTopBottom(text, _indxTop, _indxBottom)
