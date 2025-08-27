@@ -11,10 +11,8 @@ func getScore(_pawn:CharacterPawn) -> float:
 		theScore += 0.03
 	return theScore
 
-#func getKeepScore() -> float:
-#	if(getPawn().getChar().isReadyToGiveBirth()):
-#		return 1.1
-#	return 0.0
+func getKeepScore() -> float:
+	return 0.7
 
 func getText():
 	if(getLocation() == "med_lobbymain"):
