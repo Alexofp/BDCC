@@ -74,6 +74,7 @@ const PainInflicted = "PainInflicted"
 #data:
 # zone = Where was the bodywriting added
 # writingID = which bodywriting was added. Get the text with BodyWritings.getWritingText(writingID)
+# isPermanent = is the writing permanent
 const BodyWritingAdded = "BodyWritingAdded"
 
 # Only gets called in sex engine

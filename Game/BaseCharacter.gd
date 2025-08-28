@@ -1880,16 +1880,16 @@ func getTallymarkCount() -> int:
 func clearTallymarks():
 	removeEffect(StatusEffect.HasTallyMarks)
 
-func addBodywriting(zone, writingID):
-	addEffect(StatusEffect.HasBodyWritings, [zone, writingID])
+func addBodywriting(zone, writingID, isPermanent:bool = false):
+	addEffect(StatusEffect.HasBodyWritings, [zone, writingID, isPermanent])
 
-func addBodywritingRandom():
+func addBodywritingRandom(isPermanent:bool = false):
 	var zone = BodyWritingsZone.getRandomZone()
-	addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone))
+	addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone), isPermanent)
 
-func addBodywritingLowerBody():
+func addBodywritingLowerBody(isPermanent:bool = false):
 	var zone = BodyWritingsZone.getRandomZoneLowerPart()
-	addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone))
+	addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone), isPermanent)
 
 func hasBodywritings():
 	return hasEffect(StatusEffect.HasBodyWritings)
@@ -1899,8 +1899,14 @@ func getBodywritingsCount() -> int:
 		return 0
 	return getEffect(StatusEffect.HasBodyWritings).getAmount()
 
-func clearBodywritings():
-	removeEffect(StatusEffect.HasBodyWritings)
+func clearBodywritings(nonPermanent:bool = true, permanent:bool = false):
+	if(nonPermanent && permanent):
+		removeEffect(StatusEffect.HasBodyWritings)
+		return
+	if(!hasEffect(StatusEffect.HasBodyWritings)):
+		return
+	var theEffect = getEffect(StatusEffect.HasBodyWritings)
+	theEffect.removeWritings(nonPermanent, permanent)
 
 func hasBoundArms():
 	return buffsHolder.hasBuff(Buff.RestrainedArmsBuff)
