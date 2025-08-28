@@ -19,6 +19,7 @@ const PunishSlutwall = 10
 
 const EscapedSlavery = 11 # Target escaped Actor's slavery
 const ForcedUnconscious = 12
+const GotWounded = 13 # Target got wounded by Actor
 
 # How much does this event make the target hate the actor.
 # 1.0 = fight loss
@@ -26,7 +27,7 @@ const ForcedUnconscious = 12
 # 5.0 = enslavement attempt
 const HATE_MULT = {
 	LostFight: 1.0,
-	GotRefused: 0.2,
+	GotRefused: 0.5,
 	BeganGettingEnslaved: 5.0,
 	GotImpregnated: 3.0,
 	GotScammed: 2.0,
@@ -36,6 +37,7 @@ const HATE_MULT = {
 	PunishSlutwall: 1.5,
 	EscapedSlavery: 5.0,
 	ForcedUnconscious: 1.0,
+	GotWounded: 0.5,
 }
 
 const AFFECTION_BONUS = { #Higher number = less chance of nemesis
@@ -47,4 +49,5 @@ const AFFECTION_BONUS = { #Higher number = less chance of nemesis
 	AwfulSex: -0.4,
 	EscapedSlavery: -0.3,
 	ForcedUnconscious: 0.1,
+	GotWounded: 0.1,
 }

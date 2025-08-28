@@ -12,6 +12,7 @@ const PunishedStocks = 7
 const PunishedSlutwall = 8
 const EscapedSlavery = 9
 const ForcedUnconscious = 10
+const Wounded = 11
 
 static func getAmbushLine(_reason:int, _char:BaseCharacter) -> String:
 	if(_reason == Fight):
@@ -79,6 +80,12 @@ static func getAmbushLine(_reason:int, _char:BaseCharacter) -> String:
 		return RNG.pick([
 			"You thought you could abuse me and get away with it?",
 			"You thought I wouldn't be able to remember it if you'd made me black out? I remember.",
+			"You abused me. And I didn't forgive you for that.",
+		])
+	elif(_reason == Wounded):
+		return RNG.pick([
+			"You thought you could abuse me and get away with it?",
+			"You thought that breaking my ribs would make me scared of you? It only made me angrier.",
 			"You abused me. And I didn't forgive you for that.",
 		])
 	

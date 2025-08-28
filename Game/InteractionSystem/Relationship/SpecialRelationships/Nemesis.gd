@@ -15,6 +15,7 @@ const SocialEventTypeToNemesisReason = {
 	SocialEventType.PunishSlutwall: NemesisReason.PunishedSlutwall,
 	SocialEventType.EscapedSlavery: NemesisReason.EscapedSlavery,
 	SocialEventType.ForcedUnconscious: NemesisReason.ForcedUnconscious,
+	SocialEventType.GotWounded: NemesisReason.Wounded,
 }
 const SocialEventMinimalAffection = { #default is 1.0
 	SocialEventType.LostFight: -0.5,
@@ -67,6 +68,13 @@ func checkSocialEventShouldStartTarget(_charActor:String, _charTarget:String, _e
 		var _fetish:float = fetish(Fetish.UnconsciousSex)
 		_fetish = clamp(_fetish+0.5, -1.0, 1.0)
 		nemesisChance *= (1.0 - _fetish)
+	elif(_eventID == SocialEventType.GotWounded):
+		var woundedAmount:int = _args[0] if _args.size() > 0 else 1
+		
+		var _fetish:float = fetish(Fetish.Masochism)
+		_fetish = clamp(_fetish+0.25, -1.0, 1.0)
+		nemesisChance *= (1.0 - _fetish)
+		nemesisChance *= 1.0 + Util.maxi(woundedAmount-1, 0)
 	
 	print("[NEMESIS debug] RAW NEMESIS CHANCE: "+str(nemesisChance))
 	

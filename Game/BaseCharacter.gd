@@ -2555,6 +2555,12 @@ func doPainfullyStretchHole(_bodypart, _who = "pc") -> bool:
 func doWound(_who = "pc") -> bool:
 	return false
 
+func getWoundedAmount() -> int:
+	if(!hasEffect(StatusEffect.Wounded)):
+		return 0
+	var theEffect = getEffect(StatusEffect.Wounded)
+	return theEffect.stacks
+
 func unequipAllRestraints():
 	for item in inventory.getEquppedRestraints():
 		if(item.isImportant()):

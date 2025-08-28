@@ -472,7 +472,8 @@ func doWound(_indxActor:int, _indxTarget:int, showText:bool = true) -> bool:
 		if(showText):
 			addTextTopBottom("{<BOTTOM>.You} [b]{<BOTTOM>.youVerb('get')} wounded[/b]!", _indxActor, _indxTarget)
 			react(SexReaction.PainStrongGeneric, [100.0], [_indxTarget])
-			return true
+		GM.main.RS.sendSocialEvent(getDomOrSubID(_indxActor), getDomOrSubID(_indxTarget), SocialEventType.GotWounded, [getDomOrSub(_indxTarget).getWoundedAmount()])
+		return true
 	return false
 
 func moan(_indx:int, _theReaction:int = SexReaction.MoanGeneric):
