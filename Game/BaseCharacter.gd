@@ -1894,6 +1894,12 @@ func addBodywritingLowerBody(isPermanent:bool = false):
 func hasBodywritings():
 	return hasEffect(StatusEffect.HasBodyWritings)
 
+func hasPermanentBodywritings() -> bool:
+	if(hasEffect(StatusEffect.HasBodyWritings)):
+		var theEffect = getEffect(StatusEffect.HasBodyWritings)
+		return theEffect.getPermanentAmount() > 0
+	return false
+
 func getBodywritingsCount() -> int:
 	if(!hasBodywritings()):
 		return 0

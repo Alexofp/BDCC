@@ -3,13 +3,35 @@ extends StatusEffectBase
 var writings:Dictionary = {}
 var permWritings:Dictionary = {}
 
-func getAmount():
-	var result = 0
+func getNormalAmount() -> int:
+	var result:int = 0
 	for allZone in writings:
 		result += writings[allZone].size()
+	return result
+	
+func getPermanentAmount() -> int:
+	var result:int = 0
 	for allZone in permWritings:
 		result += permWritings[allZone].size()
 	return result
+	
+func getAmount() -> int:
+	return getNormalAmount() + getPermanentAmount()
+
+func hasNormalWritingID(_writingID:String) -> bool:
+	for allZone in writings:
+		if(writings[allZone].has(_writingID)):
+			return true
+	return false
+
+func hasPermanentWritingID(_writingID:String) -> bool:
+	for allZone in permWritings:
+		if(permWritings[allZone].has(_writingID)):
+			return true
+	return false
+
+func hasWritingID(_writingID:String) -> bool:
+	return hasNormalWritingID(_writingID) || hasPermanentWritingID(_writingID)
 
 func addWriting(zone, writingID):
 	zone = str(zone)

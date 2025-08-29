@@ -15,14 +15,19 @@ func getDescription():
 #func useInCombat(_attacker, _receiver):
 #	removeXOrDestroy(getAmount())
 
-#func getPossibleActions():
-#	return [
-#		{
-#			"name": "Credit in",
-#			"scene": "UseItemLikeInCombatScene",
-#			"description": "Push the credits to your account",
-#		},
-#	]
+func getPossibleActions():
+	return [
+		{
+			"name": "Draw on self",
+			"scene": "PermanentMarkerScene",
+			"description": "Use the marker to draw something on yourself!",
+		},
+	]
+
+func getTags():
+	return [
+		ItemTag.SoldByTheAnnouncer,
+		]
 
 func getPrice():
 	return 30
@@ -40,4 +45,4 @@ func getItemCategory():
 	return ItemCategory.Generic
 
 func getInventoryImage():
-	return "res://Images/Items/generic/chip.png"
+	return "res://Images/Items/generic/marker.png"

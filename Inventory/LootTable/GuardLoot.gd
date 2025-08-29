@@ -27,6 +27,8 @@ func _init():
 		[3, ["buttplug"]],
 		[3, ["bondagemittens"]],
 		[3, ["ChastityCage"]],
+		[2, [["Soap", 1, 1]]],
+		[3, [["PermanentMarker", 1, 1]]],
 	]
 	minCredits = 1
 	maxCredits = 2

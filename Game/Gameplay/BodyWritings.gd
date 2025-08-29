@@ -55,6 +55,20 @@ static func getRandomWritingIDForZone(zone, randomChance = 20):
 		return RNG.pick(randomOnes)
 	
 	return RNG.pick(priorityOnes)
+	
+static func getWritingIDsForZone(zone:int) -> Array:
+	var randomOnes:Array = []
+	var priorityOnes:Array = []
+	
+	for id in BodyWritingsDB.database:
+		var data = getWritingInfo(id)
+		if(data.has(BodyWritingsDB.DBZoneWhitelist) && data[BodyWritingsDB.DBZoneWhitelist].size() > 0):
+			if(data[BodyWritingsDB.DBZoneWhitelist].has(zone)):
+				priorityOnes.append(id)
+			continue
+		randomOnes.append(id)
+	
+	return priorityOnes + randomOnes
 
 static func getRandomWritingIDAmount(howMany:int, doFilter:bool = false) -> Array:
 	if(howMany <= 0):

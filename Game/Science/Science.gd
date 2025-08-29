@@ -125,7 +125,7 @@ var upgradesInfo:Dictionary = {
 	"EnergyDrink": {
 		name = "Energy drink",
 		desc = "Download a recipe of the most generic energy drink, allowing you to create them.",
-		cost = 30,
+		cost = 25,
 		requiredUpgrades = ["BasicPills"],
 		items = {
 			"EnergyDrink": {
@@ -139,7 +139,7 @@ var upgradesInfo:Dictionary = {
 	"painkillers": {
 		name = "Painkillers",
 		desc = "Allows you to make painkillers.",
-		cost = 30,
+		cost = 25,
 		requiredUpgrades = ["BasicPills"],
 		items = {
 			"painkillers": {
@@ -153,7 +153,7 @@ var upgradesInfo:Dictionary = {
 	"AdvancedPills": {
 		name = "Advanced pills",
 		desc = "Allows you to make some advanced pills.",
-		cost = 40,
+		cost = 35,
 		requiredUpgrades = ["EnergyDrink", "painkillers"],
 		items = {
 			"FetishGainPill": {
@@ -214,6 +214,21 @@ var upgradesInfo:Dictionary = {
 		cost = 20,
 		requiredUpgrades = ["shower1", "cheaperCrafts2"],
 		main = true,
+	},
+	
+	"soap": {
+		name = "Bio-Scrub Soap",
+		desc = "Unlock a recipe for the bio-scrub soap that is capable of removing permanent bodywritings.",
+		cost = 15,
+		requiredUpgrades = ["shower2", "AdvancedPills"],
+		items = {
+			"Soap": {
+				fluids = {
+					"Milk": 5000.0,
+					"Cum": 2000.0,
+				},
+			},
+		},
 	},
 	
 	"cheaperCrafts3": {

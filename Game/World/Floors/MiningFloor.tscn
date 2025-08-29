@@ -264,8 +264,7 @@ gridColor = 5
 loctag_Offlimits = true
 population = 2
 lootable = true
-lootTableId = "engineer"
-lootItemIds = PoolStringArray( "painkillers", "painkillers", "painkillers", "EnergyDrink", "EnergyDrink", "restraintkey", "restraintkey" )
+lootTableId = "engineerstorage"
 lootCredits = 3
 lootEveryXDays = 7
 

@@ -33,6 +33,9 @@ func getPossibleActions():
 func getPrice():
 	return 100
 
+func getSellPrice():
+	return 5
+
 func canSell():
 	return true
 
@@ -49,7 +52,7 @@ func getItemCategory():
 	return ItemCategory.Medical
 
 func getInventoryImage():
-	return "res://Images/Items/medical/lubricant.png"
+	return "res://Images/Items/generic/soap.png"
 
 func getSexEngineInfo(_sexEngine, _domInfo, _subInfo):
 	#var sub:BaseCharacter = _subInfo.getChar()
