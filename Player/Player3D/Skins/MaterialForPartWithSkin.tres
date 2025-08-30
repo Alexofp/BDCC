@@ -15,6 +15,7 @@ uniform sampler2D texture_albedo : hint_albedo;
 uniform sampler2D texture_pattern : hint_albedo;
 uniform sampler2D texture_customOverlay : hint_albedo;
 uniform sampler2D texture_cumOverlay : hint_albedo;
+uniform sampler2D texture_writings : hint_albedo;
 uniform vec3 uv1_scale;
 uniform vec3 uv1_offset;
 uniform vec2 pattern_start;
@@ -51,6 +52,9 @@ void fragment() {
 	albedo_tex.rgb = mix(albedo_tex.rgb, overlay_tex.rgb, overlay_tex.a);//overlay_tex.rgb * overlay_tex.a + albedo_tex.rgb*(1.0 - overlay_tex.a);
 	albedo_tex.a = max(albedo_tex.a, overlay_tex.a);
 	
+	vec4 writings_tex = texture(texture_writings,base_uv);
+	albedo_tex.rgb = mix(albedo_tex.rgb, writings_tex.rgb, writings_tex.a);
+	
 	for (int i = 1;i<=5;i++)
 	{
 		if(i <= cum_amount){
@@ -86,3 +90,4 @@ shader_param/texture_albedo = ExtResource( 1 )
 shader_param/texture_pattern = ExtResource( 2 )
 shader_param/texture_customOverlay = ExtResource( 3 )
 shader_param/texture_cumOverlay = ExtResource( 4 )
+shader_param/texture_writings = ExtResource( 3 )

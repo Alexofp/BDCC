@@ -1,7 +1,7 @@
 extends Object
 class_name BodyWritingsZone
 
-enum {
+enum { # IF YOU ADD ANY, ADD THEM TO WritingZoneInfoNode CLASS TOO
 	Forehead,
 	CheekLeft,
 	CheekRight,

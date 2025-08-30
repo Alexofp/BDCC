@@ -1743,6 +1743,16 @@ _global_script_classes=[ {
 "class": "WorldZone",
 "language": "GDScript",
 "path": "res://Game/World/Util/WorldZone.gd"
+}, {
+"base": "Node",
+"class": "WritingZoneInfoNode",
+"language": "GDScript",
+"path": "res://Player/Player3D/WritingsHandler/WritingZoneInfoNode.gd"
+}, {
+"base": "Node",
+"class": "WritingsHandler",
+"language": "GDScript",
+"path": "res://Player/Player3D/WritingsHandler/WritingsHandler.gd"
 } ]
 _global_script_class_icons={
 "AIStrategyBase": "",
@@ -2091,7 +2101,9 @@ _global_script_class_icons={
 "WorldHistory": "",
 "WorldHistoryEvent": "",
 "WorldPopulation": "",
-"WorldZone": ""
+"WorldZone": "",
+"WritingZoneInfoNode": "",
+"WritingsHandler": ""
 }
 
 [application]

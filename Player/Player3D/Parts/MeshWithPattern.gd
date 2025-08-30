@@ -16,6 +16,10 @@ var defaultOverlay = preload("res://Player/Player3D/Skins/defaultoverlay.png")
 
 var materialWithSkin = preload("res://Player/Player3D/Skins/MaterialForPartWithSkin.tres")
 
+export(bool) var supportsWritings = false
+var writingsHandler
+var writingZoneInfos:Dictionary = {}
+
 func getPart():
 	if(partRef == null):
 		return null
@@ -53,6 +57,15 @@ func _ready():
 		fancyMaterial.set_shader_param("texture_customOverlay", customOverlay)
 	fancyMaterial.set_shader_param("random_shift", RNG.randf_range(0.0, 1000.0))
 	set_surface_material(0, fancyMaterial)
+	
+	if(supportsWritings):
+		for child in get_children():
+			if(child is WritingZoneInfoNode):
+				writingZoneInfos[child.zone] = child
+		
+		writingsHandler = preload("res://Player/Player3D/WritingsHandler/WritingsHandler.tscn").instance()
+		add_child(writingsHandler)
+		writingsHandler.setData(self)
 
 func updateMaterial():
 	if(!OPTIONS.shouldUseAdvancedShaders()):
@@ -105,3 +118,7 @@ func updateMaterial():
 			else:
 				fancyMaterial.set_shader_param("pattern_blue_color", Color.white)
 			#print(skinData)
+
+func updateFacing():
+	if(writingsHandler):
+		writingsHandler.updateFacing()

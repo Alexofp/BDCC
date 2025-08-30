@@ -82,6 +82,10 @@ func setStateRecursive(childnode, stateID, value):
 		setStateRecursive(child, stateID, value)
 
 func setState(stateID, value):
+	if(stateID == "facing"):
+		for mesh in meshesThatUpdateMaterial:
+			mesh.updateFacing()
+	
 	if(!partPickers.has(stateID)):
 		return
 	for picker in partPickers[stateID]:

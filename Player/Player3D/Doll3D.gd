@@ -11,6 +11,15 @@ var savedCharacterID
 var temporaryState = {}
 var exposedBodyparts = []
 var skinData = {}
+var writingsData:Dictionary = {
+	BodyWritingsZone.ThighLeft: [
+		["FUCK ME TEST", false],
+		["MAKE ME CUM TEST TEST TEST", false],
+	],
+	BodyWritingsZone.ThighRight: [
+		["FREE USE AAAAAA", false],
+	],
+} # {zone = [["writing1", isBold], ["writing2", isBold2]]}
 
 var armsCuffed = false
 var armsPuppy = false
