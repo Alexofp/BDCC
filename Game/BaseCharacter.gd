@@ -1602,7 +1602,14 @@ func updateLeaking(doll: Doll3D):
 	else:
 		doll.setAnusLeaking(false)
 
+func getWritingsData() -> Dictionary:
+	if(hasEffect(StatusEffect.HasBodyWritings)):
+		return getEffect(StatusEffect.HasBodyWritings).getDollData()
+	return {}
+
 func softUpdateDoll(doll: Doll3D):
+	doll.writingsData = getWritingsData()
+	
 	var skinData = {}
 	var bodySkinData = getSkinData()
 	var fieldsToCheckSkin = ["skin", "r", "g", "b"]

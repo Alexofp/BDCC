@@ -12,13 +12,13 @@ var temporaryState = {}
 var exposedBodyparts = []
 var skinData = {}
 var writingsData:Dictionary = {
-	BodyWritingsZone.ThighLeft: [
-		["FUCK ME TEST", false],
-		["MAKE ME CUM TEST TEST TEST", false],
-	],
-	BodyWritingsZone.ThighRight: [
-		["FREE USE AAAAAA", false],
-	],
+#	BodyWritingsZone.ThighLeft: [
+#		["Fuck me", false],
+#		["Make me cum", false],
+#	],
+#	BodyWritingsZone.ThighRight: [
+#		["Free use", false],
+#	],
 } # {zone = [["writing1", isBold], ["writing2", isBold2]]}
 
 var armsCuffed = false

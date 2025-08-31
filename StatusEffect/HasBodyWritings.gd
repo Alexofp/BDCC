@@ -111,6 +111,35 @@ func combine(_args = []):
 	else:
 		addPermanentWriting(_args[0], _args[1])
 
+#var writingsData:Dictionary = {
+#	BodyWritingsZone.ThighLeft: [
+#		["Fuck me", false],
+#		["Make me cum", false],
+#	],
+#	BodyWritingsZone.ThighRight: [
+#		["Free use", false],
+#	],
+#}
+func getDollData() -> Dictionary:
+	var result:Dictionary = {}
+	
+	for allZoneStr in permWritings:
+		var allZone:int = int(allZoneStr)
+		result[allZone] = []
+		var theAr:Array = result[allZone]
+		for writingID in permWritings[allZoneStr]:
+			var writingText:String = BodyWritings.getWritingText(writingID)
+			theAr.append([writingText, true])
+	for allZoneStr in writings:
+		var allZone:int = int(allZoneStr)
+		if(!result.has(allZone)):
+			result[allZone] = []
+		var theAr:Array = result[allZone]
+		for writingID in writings[allZoneStr]:
+			var writingText:String = BodyWritings.getWritingText(writingID)
+			theAr.append([writingText, false])
+	return result
+
 func saveData():
 	return {
 		"writings": writings,

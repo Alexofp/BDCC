@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Legs/Hoofs/hoofs.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player3D/Parts/MeshWithPattern.gd" type="Script" id=2]
 [ext_resource path="res://Player/Player3D/Parts/PartState.gd" type="Script" id=3]
 [ext_resource path="res://Player/Player3D/Parts/PartStatePicker.gd" type="Script" id=4]
+[ext_resource path="res://Player/Player3D/WritingsHandler/WritingZoneInfoNode.gd" type="Script" id=5]
 
 [sub_resource type="SpatialMaterial" id=1]
 resource_name = "hoofs.png.001"
@@ -155,6 +156,16 @@ script = ExtResource( 2 )
 pattern_start = Vector2( 0.5, 5 )
 pattern_size = Vector2( 0.5, 1 )
 bodypartSlot = "legs"
+supportsWritings = true
+
+[node name="WritingZoneInfoNode" type="Node" parent="PartState/hoofspng001"]
+script = ExtResource( 5 )
+zone = 20
+pos = Vector2( 88, 88 )
+posSpread = 5.0
+rot = 60.0
+rotSpread = 10.0
+scale = 0.8
 
 [node name="hoofspng002" type="MeshInstance" parent="PartState"]
 mesh = SubResource( 49 )
@@ -165,3 +176,13 @@ script = ExtResource( 2 )
 pattern_start = Vector2( 0.5, 5 )
 pattern_size = Vector2( 0.5, 1 )
 bodypartSlot = "legs"
+supportsWritings = true
+
+[node name="WritingZoneInfoNode2" type="Node" parent="PartState/hoofspng002"]
+script = ExtResource( 5 )
+zone = 21
+pos = Vector2( 88, 88 )
+posSpread = 5.0
+rot = 60.0
+rotSpread = 10.0
+scale = 0.8

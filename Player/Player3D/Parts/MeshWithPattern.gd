@@ -19,6 +19,7 @@ var materialWithSkin = preload("res://Player/Player3D/Skins/MaterialForPartWithS
 export(bool) var supportsWritings = false
 var writingsHandler
 var writingZoneInfos:Dictionary = {}
+var albedoTextureSize:Vector2
 
 func getPart():
 	if(partRef == null):
@@ -35,12 +36,14 @@ func _ready():
 	if(!OPTIONS.shouldUseAdvancedShaders()):
 		return
 	
-	var albedoTexture
+	var albedoTexture:Texture
 	if(customAlbedo != null):
 		albedoTexture = customAlbedo
 	else:
 		var current_material = get_surface_material(0)
 		albedoTexture = current_material.albedo_texture
+	if(albedoTexture):
+		albedoTextureSize = albedoTexture.get_size()
 	
 	
 	fancyMaterial = materialWithSkin.duplicate()
@@ -70,6 +73,8 @@ func _ready():
 func updateMaterial():
 	if(!OPTIONS.shouldUseAdvancedShaders()):
 		return
+	if(writingsHandler):
+		writingsHandler.triggerUpdate()
 	
 	var theDoll = getDoll()
 	if(theDoll != null):

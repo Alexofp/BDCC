@@ -1444,11 +1444,37 @@ func getDebugActions():
 			"args": [
 			],
 		},
+		{
+			"id": "addBodywritings",
+			"name": "Add bodywritings",
+			"args": [
+				{
+					"id": "amount",
+					"name": "Amount",
+					"type": "number",
+					"value": 10,
+				},
+			],
+		},
+		{
+			"id": "clearBodywritings",
+			"name": "Clear writings",
+			"args": [
+			],
+		},
 	]
 
 func doDebugAction(id, args = {}):
 	print(id, " ", args)
 	
+	if(id == "addBodywritings"):
+		var theAm:int = args["amount"]
+		for _i in range(theAm):
+			GM.pc.addBodywritingRandom()
+		GM.pc.updateAppearance()
+	if(id == "clearBodywritings"):
+		GM.pc.clearBodywritings(true, true)
+		GM.pc.updateAppearance()
 	if(id == "forceProgressTFs"):
 		GM.pc.getTFHolder().forceProgressAll()
 	if(id == "accelerateTFs"):
