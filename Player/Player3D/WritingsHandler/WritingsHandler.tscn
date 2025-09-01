@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://Player/Player3D/WritingsHandler/WritingsHandler.gd" type="Script" id=1]
-[ext_resource path="res://Fonts/BodyWritingsFont.tres" type="DynamicFont" id=2]
 
 [node name="WritingsHandler" type="Node"]
 script = ExtResource( 1 )
@@ -23,35 +22,5 @@ anchor_bottom = 1.0
 [node name="UpdateTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 one_shot = true
-
-[node name="Control" type="Control" parent="."]
-visible = false
-margin_right = 40.0
-margin_bottom = 40.0
-rect_scale = Vector2( 0.435, 1 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
-margin_left = 72.0
-margin_top = 83.0
-margin_right = 349.0
-margin_bottom = 140.0
-rect_rotation = -43.8
-rect_pivot_offset = Vector2( 138, 20 )
-custom_constants/separation = -5
-
-[node name="Label" type="Label" parent="Control/VBoxContainer"]
-margin_right = 277.0
-margin_bottom = 31.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 2 )
-text = "Suck my cock"
-
-[node name="Label2" type="Label" parent="Control/VBoxContainer"]
-margin_top = 26.0
-margin_right = 277.0
-margin_bottom = 57.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 2 )
-text = "Suck my cock asdasd Hello whore WHORE"
 
 [connection signal="timeout" from="UpdateTimer" to="." method="_on_UpdateTimer_timeout"]

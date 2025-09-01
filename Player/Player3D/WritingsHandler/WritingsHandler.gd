@@ -8,6 +8,14 @@ onready var layers = $"%Layers"
 const WritingsFont = preload("res://Fonts/BodyWritingsFont.tres")
 const EmptyTexture = preload("res://Player/Player3D/Skins/defaultoverlay.png")
 
+var random:RandomNumberGenerator = RandomNumberGenerator.new()
+var randomSeed:int = 0
+
+func _ready():
+	randomSeed = RNG.randi_range(1, 10000)
+	random.seed = randomSeed
+	random.state = randomSeed
+
 #TODO: A single viewport?
 
 var meshTextureSize:Vector2
@@ -24,9 +32,11 @@ func setData(_mesh):
 func triggerUpdate():
 	if(!update_timer.is_stopped()):
 		return
-	update_timer.start(RNG.randf_range(0.1, 0.2))
+	update_timer.start(RNG.randf_range(0.05, 0.1))
 
 func doUpdate():
+	random.state = randomSeed
+	
 	viewport.size = meshTextureSize#Vector2(256, 256)
 	Util.delete_children(layers)
 	var _theData := getWritingsData()
@@ -42,7 +52,7 @@ func doUpdate():
 #		layers.rect_position = Vector2(layers.rect_size.x, 0.0)
 	var shouldRender:bool = false
 	
-	if(!_theData.empty()):
+	if(!_theData.empty() && mesh.is_visible_in_tree()):
 		for zone in _zones:
 			var dataZone:int = zone
 			if(!_isLookingLeft):
@@ -62,7 +72,7 @@ func doUpdate():
 			var vbox:VBoxContainer = VBoxContainer.new()
 			layers.add_child(vbox)
 			vbox.rect_position = zoneInfo.pos#(zoneInfo.pos + Vector2(RNG.randf_range(-zoneInfo.posSpread, zoneInfo.posSpread), RNG.randf_range(-zoneInfo.posSpread, zoneInfo.posSpread)))/meshTextureSizeDiv
-			vbox.rect_rotation = zoneInfo.rot + RNG.randf_range(-zoneInfo.rotSpread, zoneInfo.rotSpread)
+			vbox.rect_rotation = zoneInfo.rot + random.randf_range(-zoneInfo.rotSpread, zoneInfo.rotSpread)
 			vbox["custom_constants/separation"] = -5.0
 			vbox.rect_scale = Vector2(zoneInfo.scale, zoneInfo.scale)
 			
@@ -77,20 +87,9 @@ func doUpdate():
 				newLabel.text = writingInfo[0]
 				vbox.add_child(newLabel)
 				shouldRender = true
-				
-				#newLabel.rect_position.x = RNG.randf_range(-60.0, 60.0)
-				#newLabel.rect_rotation = RNG.randf_range(-30.0, 30.0)
-#				newLabel.rect_position = (zoneInfo.pos + Vector2(RNG.randf_range(-zoneInfo.posSpread, zoneInfo.posSpread), RNG.randf_range(-zoneInfo.posSpread, zoneInfo.posSpread)))/meshTextureSizeDiv
-#				newLabel.rect_rotation = zoneInfo.rot + RNG.randf_range(-zoneInfo.rotSpread, zoneInfo.rotSpread)
-#				newLabel.rect_pivot_offset = newLabel.rect_size / 2.0
-#				newLabel.rect_position -= newLabel.rect_pivot_offset
-#				newLabel.rect_scale.x = scaleRightMod
 				_i += 1
 			
-			call_deferred("fixVbox", vbox, scaleRightMod)
-			#vbox.rect_pivot_offset = vbox.get_rect().size / 2.0
-			#vbox.rect_position -= vbox.rect_pivot_offset
-			#vbox.rect_scale.x = scaleRightMod
+			call_deferred("fixVbox", vbox, scaleRightMod, zoneInfo.squish)
 	if(shouldRender):
 		viewport.size = meshTextureSize
 		viewport.render_target_update_mode = Viewport.UPDATE_ONCE
@@ -101,21 +100,18 @@ func doUpdate():
 		#viewport.size = Vector2(0, 0)
 		mesh.fancyMaterial.set_shader_param("texture_writings", EmptyTexture)
 
-func fixVbox(vbox:VBoxContainer, scaleRightMod:float):
+func fixVbox(vbox:VBoxContainer, scaleRightMod:float, squish:Vector2):
 	vbox.rect_pivot_offset = vbox.get_rect().size / 2.0
 	vbox.rect_position -= vbox.rect_pivot_offset
 	vbox.rect_scale.x = abs(vbox.rect_scale.x) * scaleRightMod
+	vbox.rect_scale *= squish
 	call_deferred("randomizeLabels", vbox)
-	#for labelA in vbox.get_children():
-	#	var newLabel:Label = labelA
-	#	newLabel.rect_rotation = RNG.randf_range(-20.0, 20.0)
-	#	newLabel.rect_position.x = RNG.randf_range(-60.0, 60.0)
 
 func randomizeLabels(vbox:VBoxContainer):
 	for labelA in vbox.get_children():
 		var newLabel:Label = labelA
-		newLabel.rect_rotation = RNG.randf_range(-3.0, 3.0)
-		newLabel.rect_position.x = RNG.randf_range(-10.0, 10.0)
+		newLabel.rect_rotation = random.randf_range(-3.0, 3.0)
+		newLabel.rect_position.x = random.randf_range(-10.0, 10.0)
 
 func _on_UpdateTimer_timeout():
 	doUpdate()

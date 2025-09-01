@@ -71,6 +71,7 @@ var chainsEnabled = true
 var cumEnabled = true
 var cumDependsOnBallsSize = true
 var cumIntensityMult = 1.0
+var visibleWritings:bool = true
 
 var autosaveEnabled = true
 
@@ -276,6 +277,9 @@ func getCumShotsDependOnBallsVolume():
 
 func getCumShotsIntensityMult():
 	return cumIntensityMult
+
+func isVisibleBodywritingsEnabled() -> bool:
+	return visibleWritings
 
 func getBlockCatcherPanelHeight():
 	return blockCatcherPanelHeight
@@ -551,6 +555,13 @@ func getChangeableOptions():
 					"id": "advancedShadersEnabled",
 					"type": "checkbox",
 					"value": advancedShadersEnabled,
+				},
+				{
+					"name": "Visible bodywritings",
+					"description": "Turn on visible bodywritings on dolls. Uses quite a bit of extra VRAM, turn off if the game is lagging.",
+					"id": "visibleWritings",
+					"type": "checkbox",
+					"value": visibleWritings,
 				}
 			]
 		},
@@ -1054,6 +1065,8 @@ func applyOption(categoryID, optionID, value):
 			myProjectSettings.save()
 		if(optionID == "advancedShadersEnabled"):
 			advancedShadersEnabled = value
+		if(optionID == "visibleWritings"):
+			visibleWritings = value
 			
 	if(categoryID == "debug"):
 		if(optionID == "debugPanel"):
@@ -1140,6 +1153,7 @@ func saveData():
 		"cumEnabled": cumEnabled,
 		"cumDependsOnBallsSize": cumDependsOnBallsSize,
 		"cumIntensityMult": cumIntensityMult,
+		"visibleWritings": visibleWritings,
 		"sandboxPawnCount": sandboxPawnCount,
 		"sandboxBreeding": sandboxBreeding,
 		"sandboxNpcLeveling": sandboxNpcLeveling,
@@ -1199,6 +1213,7 @@ func loadData(data):
 	cumEnabled = loadVar(data, "cumEnabled", true)
 	cumDependsOnBallsSize = loadVar(data, "cumDependsOnBallsSize", true)
 	cumIntensityMult = loadVar(data, "cumIntensityMult", 1.0)
+	visibleWritings = loadVar(data, "visibleWritings", true)
 	sandboxPawnCount = loadVar(data, "sandboxPawnCount", 30)
 	sandboxBreeding = loadVar(data, "sandboxBreeding", "rare")
 	sandboxNpcLeveling = loadVar(data, "sandboxNpcLeveling", 1.0)

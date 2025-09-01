@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Prefabs/HandsPrefab.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Player/Player3D/Parts/PartStatePicker.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Player/Player3D/Parts/PartState.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Inventory/UnriggedModels/BondageMitten/bondagemitten.png" type="Texture" id=8]
+[ext_resource path="res://Player/Player3D/WritingsHandler/WritingZoneInfoNode.gd" type="Script" id=9]
 [ext_resource path="res://Player/Player3D/Parts/MeshWithPattern.gd" type="Script" id=10]
 
 [sub_resource type="SpatialMaterial" id=77]
@@ -222,6 +223,16 @@ script = ExtResource( 10 )
 pattern_start = Vector2( 0.125, 3 )
 pattern_size = Vector2( 0.25, 1 )
 bodypartSlot = "arms"
+supportsWritings = true
+
+[node name="WritingZoneInfoNode" type="Node" parent="PartStatePicker3/PartState/armpng" index="0"]
+script = ExtResource( 9 )
+zone = 4
+pos = Vector2( 31, 110 )
+posSpread = 5.0
+rot = 90.0
+rotSpread = 10.0
+squish = Vector2( 1, 0.9 )
 
 [node name="armpng001" type="MeshInstance" parent="PartStatePicker3/PartState" index="1"]
 mesh = SubResource( 21 )
@@ -232,6 +243,16 @@ script = ExtResource( 10 )
 pattern_start = Vector2( 0.125, 3 )
 pattern_size = Vector2( 0.25, 1 )
 bodypartSlot = "arms"
+supportsWritings = true
+
+[node name="WritingZoneInfoNode" type="Node" parent="PartStatePicker3/PartState/armpng001" index="0"]
+script = ExtResource( 9 )
+zone = 5
+pos = Vector2( 31, 110 )
+posSpread = 5.0
+rot = 90.0
+rotSpread = 10.0
+squish = Vector2( 1, 0.9 )
 
 [node name="forearmpng" type="MeshInstance" parent="PartStatePicker3/PartState" index="2"]
 mesh = SubResource( 22 )
@@ -242,6 +263,16 @@ script = ExtResource( 10 )
 pattern_start = Vector2( 0.5, 3 )
 pattern_size = Vector2( 0.5, 1 )
 bodypartSlot = "arms"
+supportsWritings = true
+
+[node name="WritingZoneInfoNode" type="Node" parent="PartStatePicker3/PartState/forearmpng" index="0"]
+script = ExtResource( 9 )
+zone = 6
+pos = Vector2( 55, 139 )
+posSpread = 5.0
+rot = -55.0
+rotSpread = 5.0
+squish = Vector2( 1, 0.7 )
 
 [node name="forearmpng001" type="MeshInstance" parent="PartStatePicker3/PartState" index="3"]
 mesh = SubResource( 23 )
@@ -252,6 +283,16 @@ script = ExtResource( 10 )
 pattern_start = Vector2( 0.5, 3 )
 pattern_size = Vector2( 0.5, 1 )
 bodypartSlot = "arms"
+supportsWritings = true
+
+[node name="WritingZoneInfoNode" type="Node" parent="PartStatePicker3/PartState/forearmpng001" index="0"]
+script = ExtResource( 9 )
+zone = 7
+pos = Vector2( 55, 139 )
+posSpread = 5.0
+rot = -55.0
+rotSpread = 5.0
+squish = Vector2( 1, 0.7 )
 
 [node name="PartState2" parent="PartStatePicker3" index="1" instance=ExtResource( 7 )]
 stateValue = "hidearms"

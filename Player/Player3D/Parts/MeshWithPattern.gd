@@ -61,7 +61,7 @@ func _ready():
 	fancyMaterial.set_shader_param("random_shift", RNG.randf_range(0.0, 1000.0))
 	set_surface_material(0, fancyMaterial)
 	
-	if(supportsWritings):
+	if(supportsWritings && OPTIONS.isVisibleBodywritingsEnabled()):
 		for child in get_children():
 			if(child is WritingZoneInfoNode):
 				writingZoneInfos[child.zone] = child

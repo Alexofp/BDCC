@@ -1,9 +1,9 @@
 [gd_resource type="DynamicFont" load_steps=2 format=2]
 
-[ext_resource path="res://Fonts/JustAnotherHand.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Fonts/Chocolate Covered Raindrops BOLD.ttf" type="DynamicFontData" id=1]
 
 [resource]
 size = 30
-outline_color = Color( 0.392157, 0.392157, 0.392157, 0.490196 )
-use_filter = true
+outline_size = 1
+outline_color = Color( 0, 0, 0, 0.462745 )
 font_data = ExtResource( 1 )

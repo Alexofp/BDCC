@@ -302,10 +302,21 @@ supportsWritings = true
 [node name="WritingZoneInfoNode" type="Node" parent="legupDeformable" index="0"]
 script = ExtResource( 6 )
 zone = 18
-pos = Vector2( 60, 117 )
+pos = Vector2( 60, 122 )
 posSpread = 10.0
-rot = -70.0
+rot = -10.0
 rotSpread = 10.0
+scale = 1.3
+squish = Vector2( 0.7, 1 )
+
+[node name="WritingZoneInfoNode2" type="Node" parent="legupDeformable" index="1"]
+script = ExtResource( 6 )
+zone = 14
+pos = Vector2( 64, 40 )
+rot = 20.0
+rotSpread = 5.0
+scale = 0.7
+squish = Vector2( 0.8, 1 )
 
 [node name="legupDeformable001" type="MeshInstance" parent="." index="3"]
 mesh = SubResource( 45 )
@@ -320,10 +331,21 @@ supportsWritings = true
 [node name="WritingZoneInfoNode2" type="Node" parent="legupDeformable001" index="0"]
 script = ExtResource( 6 )
 zone = 19
-pos = Vector2( 60, 117 )
+pos = Vector2( 60, 122 )
 posSpread = 10.0
-rot = -70.0
+rot = -10.0
 rotSpread = 10.0
+scale = 1.3
+squish = Vector2( 0.7, 1 )
+
+[node name="WritingZoneInfoNode3" type="Node" parent="legupDeformable001" index="1"]
+script = ExtResource( 6 )
+zone = 15
+pos = Vector2( 64, 40 )
+rot = 20.0
+rotSpread = 5.0
+scale = 0.7
+squish = Vector2( 0.8, 1 )
 
 [node name="AttachmentProxy" parent="." index="4" instance=ExtResource( 2 )]
 transform = Transform( 1.19189, 0.519039, 0, -0.519039, 1.19189, 0, 0, 0, 1.3, 0.498434, 0.792379, 0.284713 )

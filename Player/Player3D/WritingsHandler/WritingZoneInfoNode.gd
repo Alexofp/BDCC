@@ -51,6 +51,7 @@ export var posSpread:float = 0.0
 export var rot:float = 0.0
 export var rotSpread:float = 0.0
 export var scale:float = 1.0
+export var squish:Vector2 = Vector2(1.0, 1.0)
 export var showLeft:bool = true
 export var showRight:bool = true
 export var maxWritings:int = 2
