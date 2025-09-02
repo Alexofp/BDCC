@@ -44,7 +44,7 @@ func _run():
 		addButton("Calm her down", "She should really calm down", "calm_her_down")
 
 	if(state == "calm_her_down"):
-		saynn("[say=pc]You should calm down, Tavi. It didn’t went too bad, at least we’re alive.[/say]")
+		saynn("[say=pc]You should calm down, Tavi. It didn’t go too bad, at least we’re alive.[/say]")
 
 		saynn("She gives you a cold stare. You try to make a few steps towards her.")
 

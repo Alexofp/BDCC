@@ -215,7 +215,7 @@ func _run():
 		playAnimation(StageScene.Showering, "rub", {pc=npcID, bodyState={naked=true}})
 		#playAnimation(StageScene.Duo, "stand", {npc=npcID, flipNPC=true, npcAction="struggle", npcBodyState={naked=true, leashedBy="pc"}})
 		
-		if(deservesPunishment):
+		if(!deservesPunishment):
 			if(npc.hasReachableVagina()):
 				saynn("You order {npc.him} to wash inside too. {npc.name} spreads both {npc.his} holes with {npc.his} hands for you and pushes any mess out.")
 			else:

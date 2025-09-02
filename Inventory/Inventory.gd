@@ -571,7 +571,7 @@ func hasRemovableRestraintsNoLockedSmartlocks():
 		var item = equippedItems[itemSlot]
 		if(item.isRestraint()):
 			var restraintData = item.getRestraintData()
-			if(restraintData.canStruggleFinal()):
+			if(restraintData.canStruggleFinal() && restraintData.shouldStruggle()):
 				return true
 	return false
 

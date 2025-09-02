@@ -226,7 +226,7 @@ region_enabled = true
 region_rect = Rect2( 1, 1, 1022, 62 )
 
 [node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06268, 0.0519446, -0.0201359 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.063, 0.052, 0.043 )
 
 [node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
 transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06268, 0.0519446, 0 )

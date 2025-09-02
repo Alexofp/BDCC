@@ -716,11 +716,16 @@ func hasWallsNearby(locID:String) -> bool:
 func saveData():
 	var data = {}
 	data["lastAimedRoomID"] = lastAimedRoomID
+	data["zoomx"] = camera.zoom.x
+	data["zoomy"] = camera.zoom.y
 	
 	return data
 	
 func loadData(data):
 	lastAimedRoomID = SAVE.loadVar(data, "lastAimedRoomID", "")
+	if(data.has("zoomx") && data.has("zoomy")):
+		camera.zoom = Vector2(SAVE.loadVar(data, "zoomx", 1.0), SAVE.loadVar(data, "zoomy", 1.0))
 	
+	updateDarknessSize()
 	if(lastAimedRoomID != null && lastAimedRoomID != ""):
 		aimCamera(lastAimedRoomID, true)

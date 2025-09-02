@@ -60,7 +60,7 @@ func _run():
 				"Yes, {rahiMaster}?..",
 				"She enjoyed our last.. heist?..",
 				"Hey, {rahiMaster}.. She is trying to stay out of trouble..",
-				"She appretiates your company, {rahiMaster}..",
+				"She appreciates your company, {rahiMaster}..",
 				"She hopes you're not too disappointed with her, {rahiMaster}..",
 				"That was fun.. what we did.. Wasn't it, {rahiMaster}?..",
 				"Wanna chat for a bit, {rahiMaster}?.. She is not much of a talker..",

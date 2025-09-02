@@ -18,7 +18,7 @@ func run(_triggerID, _args):
 			if(character.isSlaveToPlayer()):
 				var npcSlave:NpcSlave = character.getNpcSlavery()
 				if(!npcSlave.isDoingActivity()):
-					if(npcSlave.hasSubmittedToPC()):
+					if(npcSlave.hasSubmittedToPC() || npcSlave.isMindBroken()):
 						addButton("Milking", "Give your slave to Eliza to be milked every day", "give_to_be_milked", [_args[1]])
 					else:
 						addDisabledButton("Milking", "You can only give to Eliza slaves that have submitted to you. Otherwise they would run away, duh!")

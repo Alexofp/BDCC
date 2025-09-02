@@ -460,7 +460,7 @@ func _run():
 
 		saynn("Desperate deep noises manage to slip past her gagged mouth. She can't say a single word but you can tell, kitty is completely spaced out, there is only one thing on her mind, constant overstimulation.")
 
-		saynn("You crotch before the kitty and raise her blindfold, letting her see. Rahi's eyes are rolled up so high that you almost can't see them.")
+		saynn("You crouch before the kitty and raise her blindfold, letting her see. Rahi's eyes are rolled up so high that you almost can't see them.")
 
 		saynn("Well, might as well untie her now. You turn off the vibrators, letting kitty finally.. relax. She keeps panting through her nose and will probably continue doing that for a while. You start unchaining her paws, ankles, untying her tail, chest, crotch, pulling out the dildo..")
 

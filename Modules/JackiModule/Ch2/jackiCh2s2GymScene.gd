@@ -816,7 +816,7 @@ func _run():
 
 			else:
 				playAnimation(StageScene.Yoga, "warrior", {pc="jacki", bodyState={underwear=hasUnderwear}})
-				saynn("The last one interests you the most. Her lithe body gracefully arches backwards, her paws reaching high up"+str(" while stumbling a bit from trying to keep balance with her pregnancy." if getCharacter("jacki").isVisiblyPregnant() else "")+"The way she stretches is quite captivating.")
+				saynn("The last one interests you the most. Her lithe body gracefully arches backwards, her paws reaching high up"+str(" while stumbling a bit from trying to keep balance with her pregnancy." if getCharacter("jacki").isVisiblyPregnant() else ". ")+"The way she stretches is quite captivating.")
 
 			saynn("[say=pc]Oh, I think you're pretty good.[/say]")
 
