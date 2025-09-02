@@ -11,12 +11,12 @@ const EmptyTexture = preload("res://Player/Player3D/Skins/defaultoverlay.png")
 var random:RandomNumberGenerator = RandomNumberGenerator.new()
 var randomSeed:int = 0
 
+var cacheArray:Array = []
+
 func _ready():
 	randomSeed = RNG.randi_range(1, 10000)
 	random.seed = randomSeed
 	random.state = randomSeed
-
-#TODO: A single viewport?
 
 var meshTextureSize:Vector2
 const meshTextureSizeDiv:int = 1
@@ -44,13 +44,9 @@ func doUpdate():
 	
 	var _isLookingLeft:bool = isLookingLeft()
 	var scaleRightMod:float = 1.0 if _isLookingLeft else -1.0
-#	if(isLookingLeft()):
-#		layers.rect_scale = Vector2(1.0, 1.0)
-#		layers.rect_position = Vector2(0.0, 0.0)
-#	else:
-#		layers.rect_scale = Vector2(-1.0, 1.0)
-#		layers.rect_position = Vector2(layers.rect_size.x, 0.0)
+
 	var shouldRender:bool = false
+	var newCache:Array = [_isLookingLeft]
 	
 	if(!_theData.empty() && mesh.is_visible_in_tree()):
 		for zone in _zones:
@@ -87,15 +83,18 @@ func doUpdate():
 				newLabel.text = writingInfo[0]
 				vbox.add_child(newLabel)
 				shouldRender = true
+				newCache.append(writingInfo[0])
 				_i += 1
 			
 			call_deferred("fixVbox", vbox, scaleRightMod, zoneInfo.squish)
 	if(shouldRender):
-		viewport.size = meshTextureSize
-		viewport.render_target_update_mode = Viewport.UPDATE_ONCE
-		var theTexture:ViewportTexture= viewport.get_texture()
-		theTexture.flags = theTexture.FLAG_FILTER
-		mesh.fancyMaterial.set_shader_param("texture_writings", theTexture)
+		if(newCache != cacheArray):
+			cacheArray = newCache
+			viewport.size = meshTextureSize
+			viewport.render_target_update_mode = Viewport.UPDATE_ONCE
+			var theTexture:ViewportTexture= viewport.get_texture()
+			theTexture.flags = theTexture.FLAG_FILTER
+			mesh.fancyMaterial.set_shader_param("texture_writings", theTexture)
 	else:
 		#viewport.size = Vector2(0, 0)
 		mesh.fancyMaterial.set_shader_param("texture_writings", EmptyTexture)

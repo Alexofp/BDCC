@@ -33,11 +33,18 @@ func hasPermanentWritingID(_writingID:String) -> bool:
 func hasWritingID(_writingID:String) -> bool:
 	return hasNormalWritingID(_writingID) || hasPermanentWritingID(_writingID)
 
+func hasPermanentWritingIDAtZone(zone, writingID:String) -> bool:
+	zone = str(zone)
+	if(permWritings.has(zone) && permWritings[zone].has(writingID)):
+		return true
+	return false
+
 func addWriting(zone, writingID):
 	zone = str(zone)
-	for allZone in writings:
-		if(writings[allZone].has(writingID)):
-			return
+	if(writings.has(zone) && writings[zone].has(writingID)):
+		return
+	if(permWritings.has(zone) && permWritings[zone].has(writingID)):
+		return
 	
 	if(!writings.has(zone)):
 		writings[zone] = []
@@ -45,9 +52,8 @@ func addWriting(zone, writingID):
 
 func addPermanentWriting(zone, writingID):
 	zone = str(zone)
-	for allZone in permWritings:
-		if(permWritings[allZone].has(writingID)):
-			return
+	if(permWritings.has(zone) && permWritings[zone].has(writingID)):
+		return
 	
 	if(!permWritings.has(zone)):
 		permWritings[zone] = []

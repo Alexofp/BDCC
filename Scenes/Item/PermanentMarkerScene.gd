@@ -7,7 +7,7 @@ func _init():
 
 func _run():
 	if(state == ""):
-		playAnimation(StageScene.Solo, "stand")
+		playAnimation(StageScene.Solo, "stand", {bodystate={naked=true}})
 		
 		saynn("You are holding a black [b]permanent[/b] marker in your hand.")
 
@@ -34,18 +34,18 @@ func _run():
 		if(GM.pc.hasEffect(StatusEffect.HasBodyWritings)):
 			theEffect = GM.pc.getEffect(StatusEffect.HasBodyWritings)
 		
-		addButton("Cancel", "You changed your mind", "pickzonemenu")
+		addButton("Back", "You changed your mind", "pickzonemenu")
 		for writingID in BodyWritings.getWritingIDsForZone(pickedZone):
 			var writingInfo:Dictionary = BodyWritings.getWritingInfo(writingID)
 			
 			var writingName:String = writingInfo[BodyWritingsDB.DBText]
-			if(theEffect && theEffect.hasPermanentWritingID(writingID)):
-				addDisabledButton(writingName, "You already have this permanent writing on you somewhere!")
+			if(theEffect && theEffect.hasPermanentWritingIDAtZone(pickedZone, writingID)):
+				addDisabledButton(writingName, "You already have this permanent writing in this zone!")
 			else:
 				addButton(writingName, "Write this with a permanent marker!", "doWrite", [writingID])
 	
 	if(state == "afterwrite"):
-		playAnimation(StageScene.Solo, "stand")
+		playAnimation(StageScene.Solo, "stand", {bodystate={naked=true}})
 		
 		saynn("You finish scribbling a writing on your skin with a permanent marker!")
 		

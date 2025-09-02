@@ -1915,11 +1915,13 @@ func getBodywritingsCount() -> int:
 func clearBodywritings(nonPermanent:bool = true, permanent:bool = false):
 	if(nonPermanent && permanent):
 		removeEffect(StatusEffect.HasBodyWritings)
+		updateAppearance()
 		return
 	if(!hasEffect(StatusEffect.HasBodyWritings)):
 		return
 	var theEffect = getEffect(StatusEffect.HasBodyWritings)
 	theEffect.removeWritings(nonPermanent, permanent)
+	updateAppearance()
 
 func hasBoundArms():
 	return buffsHolder.hasBuff(Buff.RestrainedArmsBuff)
