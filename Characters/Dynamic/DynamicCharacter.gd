@@ -374,7 +374,8 @@ func saveData():
 			"data": bodyparts[slot].saveData(),
 		}
 	
-	data["statusEffects"] = saveStatusEffectsData()
+	if(!statusEffects.empty()):
+		data["statusEffects"] = saveStatusEffectsData()
 	data["inventory"] = inventory.saveData()
 	data["skills"] = skillsHolder.saveData()
 	data["lustInterests"] = lustInterests.saveData()
@@ -382,8 +383,10 @@ func saveData():
 		data["menstrualCycle"] = menstrualCycle.saveData()
 	data["bodyFluids"] = bodyFluids.saveData()
 
-	data["timedBuffs"] = saveBuffsData(timedBuffs)
-	data["timedBuffsTurns"] = saveBuffsData(timedBuffsTurns)
+	if(!timedBuffs.empty()):
+		data["timedBuffs"] = saveBuffsData(timedBuffs)
+	if(!timedBuffsTurns.empty()):
+		data["timedBuffsTurns"] = saveBuffsData(timedBuffsTurns)
 	
 	
 	data["lastUpdatedDay"] = lastUpdatedDay
@@ -408,7 +411,8 @@ func saveData():
 		data["extraSettings"] = extraSettings.saveData()
 	
 	if(tfHolder != null):
-		data["tfHolder"] = tfHolder.saveData()
+		if(tfHolder.shouldSaveData()):
+			data["tfHolder"] = tfHolder.saveData()
 	
 	return data
 
@@ -497,7 +501,11 @@ func loadData(data):
 		bodypart.loadData(SAVE.loadVar(loadedBodyparts[slot], "data", {}))
 	checkSkins(true)
 	
-	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
+	if(data.has("statusEffects")):
+		loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
+	else:
+		for effectID in statusEffects.keys():
+			removeEffect(effectID)
 	inventory.loadDataNPC(SAVE.loadVar(data, "inventory", {}), self)
 	skillsHolder.loadData(SAVE.loadVar(data, "skills", {}))
 	lustInterests.loadData(SAVE.loadVar(data, "lustInterests", {}))
@@ -506,8 +514,14 @@ func loadData(data):
 	if(menstrualCycle != null && data.has("menstrualCycle")):
 		menstrualCycle.loadData(SAVE.loadVar(data, "menstrualCycle", {}))
 
-	timedBuffs = loadBuffsData(SAVE.loadVar(data, "timedBuffs", []))
-	timedBuffsTurns = loadBuffsData(SAVE.loadVar(data, "timedBuffsTurns", []))
+	if(data.has("timedBuffs")):
+		timedBuffs = loadBuffsData(SAVE.loadVar(data, "timedBuffs", []))
+	else:
+		timedBuffs = []
+	if(data.has("timedBuffsTurns")):
+		timedBuffsTurns = loadBuffsData(SAVE.loadVar(data, "timedBuffsTurns", []))
+	else:
+		timedBuffsTurns = []
 	
 	lastUpdatedDay = SAVE.loadVar(data, "lastUpdatedDay", -1)
 	lastUpdatedSecond = SAVE.loadVar(data, "lastUpdatedSecond", -1)

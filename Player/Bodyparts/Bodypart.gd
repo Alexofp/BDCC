@@ -282,19 +282,23 @@ func saveData():
 	if(sensitiveZone != null):
 		result["sensitiveZone"] = sensitiveZone.saveData()
 	if(supportsSkin()):
-		result["pickedSkin"] = pickedSkin
-		if(pickedRColor is Color):
-			result["pickedRColor"] = pickedRColor.to_html()
-		else:
-			result["pickedRColor"] = pickedRColor
-		if(pickedGColor is Color):
-			result["pickedGColor"] = pickedGColor.to_html()
-		else:
-			result["pickedGColor"] = pickedGColor
-		if(pickedBColor is Color):
-			result["pickedBColor"] = pickedBColor.to_html()
-		else:
-			result["pickedBColor"] = pickedBColor
+		if(pickedSkin != null):
+			result["skin"] = pickedSkin
+		if(pickedRColor != null):
+			if(pickedRColor is Color):
+				result["r"] = pickedRColor.to_html()
+			else:
+				result["r"] = pickedRColor
+		if(pickedGColor != null):
+			if(pickedGColor is Color):
+				result["g"] = pickedGColor.to_html()
+			else:
+				result["g"] = pickedGColor
+		if(pickedBColor != null):
+			if(pickedBColor is Color):
+				result["b"] = pickedBColor.to_html()
+			else:
+				result["b"] = pickedBColor
 	return result
 
 func loadData(_data):
@@ -308,20 +312,42 @@ func loadData(_data):
 		else:
 			sensitiveZone.loadData(SAVE.loadVar(_data, "sensitiveZone", {}))
 	if(supportsSkin()):
-		if(_data.has("pickedSkin")):
+		if(_data.has("skin")):
+			pickedSkin = SAVE.loadVar(_data, "skin", null)
+		elif(_data.has("pickedSkin")):
 			pickedSkin = SAVE.loadVar(_data, "pickedSkin", null)
-		if(_data.has("pickedRColor")):
+		else:
+			pickedSkin = null
+		if(_data.has("r")):
+			pickedRColor = SAVE.loadVar(_data, "r", null)
+			if(pickedRColor is String):
+				pickedRColor = Color(pickedRColor)
+		elif(_data.has("pickedRColor")):
 			pickedRColor = SAVE.loadVar(_data, "pickedRColor", null)
 			if(pickedRColor is String):
 				pickedRColor = Color(pickedRColor)
-		if(_data.has("pickedGColor")):
+		else:
+			pickedRColor = null
+		if(_data.has("g")):
+			pickedGColor = SAVE.loadVar(_data, "g", null)
+			if(pickedGColor is String):
+				pickedGColor = Color(pickedGColor)
+		elif(_data.has("pickedGColor")):
 			pickedGColor = SAVE.loadVar(_data, "pickedGColor", null)
 			if(pickedGColor is String):
 				pickedGColor = Color(pickedGColor)
-		if(_data.has("pickedBColor")):
+		else:
+			pickedGColor = null
+		if(_data.has("b")):
+			pickedBColor = SAVE.loadVar(_data, "b", null)
+			if(pickedBColor is String):
+				pickedBColor = Color(pickedBColor)
+		elif(_data.has("pickedBColor")):
 			pickedBColor = SAVE.loadVar(_data, "pickedBColor", null)
 			if(pickedBColor is String):
 				pickedBColor = Color(pickedBColor)
+		else:
+			pickedBColor = null
 
 func saveDataForTF():
 	return saveData()

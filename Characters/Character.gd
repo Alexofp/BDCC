@@ -106,15 +106,18 @@ func saveData():
 			"data": bodyparts[slot].saveDataNPC(),
 		}
 	
-	data["statusEffects"] = saveStatusEffectsData()
+	if(!statusEffects.empty()):
+		data["statusEffects"] = saveStatusEffectsData()
 	data["inventory"] = inventory.saveData()
 	data["lustInterests"] = lustInterests.saveData()
 	if(menstrualCycle != null):
 		data["menstrualCycle"] = menstrualCycle.saveData()
 	data["bodyFluids"] = bodyFluids.saveData()
 
-	data["timedBuffs"] = saveBuffsData(timedBuffs)
-	data["timedBuffsTurns"] = saveBuffsData(timedBuffsTurns)
+	if(!timedBuffs.empty()):
+		data["timedBuffs"] = saveBuffsData(timedBuffs)
+	if(!timedBuffsTurns.empty()):
+		data["timedBuffsTurns"] = saveBuffsData(timedBuffsTurns)
 	
 	
 	data["lastUpdatedDay"] = lastUpdatedDay
@@ -145,16 +148,26 @@ func loadData(data):
 			continue
 		bodypart.loadDataNPC(bodypartData)
 	
-	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
+	if(data.has("statusEffects")):
+		loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
+	else:
+		for effectID in statusEffects.keys():
+			removeEffect(effectID)
 	inventory.loadDataNPC(SAVE.loadVar(data, "inventory", {}), self)
 	lustInterests.loadData(SAVE.loadVar(data, "lustInterests", {}))
 	bodyFluids.loadData(SAVE.loadVar(data, "bodyFluids", {}))
 
 	if(menstrualCycle != null && data.has("menstrualCycle")):
 		menstrualCycle.loadData(SAVE.loadVar(data, "menstrualCycle", {}))
-
-	timedBuffs = loadBuffsData(SAVE.loadVar(data, "timedBuffs", []))
-	timedBuffsTurns = loadBuffsData(SAVE.loadVar(data, "timedBuffsTurns", []))
+	
+	if(data.has("timedBuffs")):
+		timedBuffs = loadBuffsData(SAVE.loadVar(data, "timedBuffs", []))
+	else:
+		timedBuffs = []
+	if(data.has("timedBuffsTurns")):
+		timedBuffsTurns = loadBuffsData(SAVE.loadVar(data, "timedBuffsTurns", []))
+	else:
+		timedBuffsTurns = []
 	
 	lastUpdatedDay = SAVE.loadVar(data, "lastUpdatedDay", -1)
 	lastUpdatedSecond = SAVE.loadVar(data, "lastUpdatedSecond", -1)
