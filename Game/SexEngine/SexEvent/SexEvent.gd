@@ -18,6 +18,13 @@ const HolePenetrated = "HolePenetration"
 # condomBroke = if there was a condom and it broke
 const HoleCreampied = "HoleCreampied"
 
+# Source = Person who made the target swallow
+# Target = Who swallowed
+#data:
+# loadSize = how much
+# fluidID = what was swallowed
+const SwallowFluid = "SwallowFluid"
+
 # Source = Person who spits
 # Target = Who got creampied
 #data:

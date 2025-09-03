@@ -3671,3 +3671,20 @@ func cancelPregnancy():
 	if(!menstrualCycle):
 		return
 	menstrualCycle.cancelPregnancy()
+
+func doSwallow(_fluidID:String, _amount:float) -> Dictionary:
+	var fluidObject:FluidBase = GlobalRegistry.getFluid(_fluidID)
+	if(fluidObject == null):
+		return {text=""}
+
+	var resultMessage = fluidObject.onSwallow(self, _amount)
+	
+	var event := SexEventHelper.create(SexEvent.SwallowFluid, getID(), getID(), {
+		loadSize = _amount,
+		fluidID = _fluidID,
+	})
+	sendSexEvent(event)
+	
+	if(resultMessage != null && resultMessage != ""):
+		return {text=resultMessage}
+	return {text=""}

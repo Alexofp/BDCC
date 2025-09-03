@@ -1954,13 +1954,9 @@ func doDeepthroatTurnDom():
 			var extraMessages = []
 			var fluidByAmount = strapon.getFluids().getFluidAmountByType()
 			for fluidID in fluidByAmount:
-				var fluidObject = GlobalRegistry.getFluid(fluidID)
-				if(fluidObject == null):
-					continue
-				
-				var resultMessage = fluidObject.onSwallow(getSub(), fluidByAmount[fluidID])
-				if(resultMessage != null && resultMessage != ""):
-					extraMessages.append(resultMessage)
+				var swallowData:Dictionary = getSub().doSwallow(fluidID, fluidByAmount[fluidID])
+				if(swallowData.has("text") && swallowData["text"] != ""):
+					extraMessages.append(swallowData["text"])
 			
 			getSub().cummedInBodypartByAdvanced(BodypartSlot.Head, getDomID(0))
 			text += " {dom.Your} strapon gets squeezed by {sub.your} "+RNG.pick(["throat"])+" enough for it to suddenly [b]release its contents inside {sub.yourHis} mouth[/b]!"

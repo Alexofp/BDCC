@@ -416,9 +416,9 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		if(drugInfo.has("sexgoal")):
 			satisfyGoal(drugInfo["sexgoal"])
 		
-		if(getDom().isPlayer() && _id == "eatit"):
-			getDom().getInventory().removeXOfOrDestroy(usedItemID, 1)
-		elif(_id == "eatit"):
+		#if(getDom().isPlayer() && _id == "eatit"):
+		#	getDom().getInventory().removeXOfOrDestroy(usedItemID, 1)
+		if(!getDom().isPlayer() && _id == "eatit"):
 			getDomInfo().increaseMemory("USEDDRUG_"+str(usedItemID))
 		
 		var itemRef = GlobalRegistry.getItemRef(usedItemID) if usedUniqueItemID == "" else getDom().getInventory().getItemByUniqueID(usedUniqueItemID)

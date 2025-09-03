@@ -30,13 +30,9 @@ func _reactInit():
 	var extraMessages = []
 	var fluidByAmount = fluids.getFluidAmountByType()
 	for fluidID in fluidByAmount:
-		var fluidObject:FluidBase = GlobalRegistry.getFluid(fluidID)
-		if(fluidObject == null):
-			continue
-		
-		var resultMessage = fluidObject.onSwallow(GM.pc, fluidByAmount[fluidID])
-		if(resultMessage != null && resultMessage != ""):
-			extraMessages.append(resultMessage)
+		var swallowData:Dictionary = GM.pc.doSwallow(fluidID, fluidByAmount[fluidID])
+		if(swallowData.has("text") && swallowData["text"] != ""):
+			extraMessages.append(swallowData["text"])
 	
 	fluids.transferTo(GM.pc.getBodypart(BodypartSlot.Head), 1.0)
 	savedEffects = Util.join(extraMessages, " ")

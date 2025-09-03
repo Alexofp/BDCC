@@ -142,14 +142,11 @@ func feeding_processTurn():
 		
 		if(howMuchCollected > 0.0):
 			for fluidID in fluidByAmount:
-				var fluidObject:FluidBase = GlobalRegistry.getFluid(fluidID)
-				if(fluidObject == null):
-					continue
-				
 				var share:float = fluidByAmount[fluidID] / totalAmount
-				var resultMessage = fluidObject.onSwallow(getDom(), share*howMuchCollected*10.0)
-				if(resultMessage != null && resultMessage != ""):
-					extraMessages.append(resultMessage)
+				
+				var swallowData:Dictionary = getDom().doSwallow(fluidID, share*howMuchCollected*10.0)
+				if(swallowData.has("text") && swallowData["text"] != ""):
+					extraMessages.append(swallowData["text"])
 		
 		var text = RNG.pick([
 			"{dom.You} actively {dom.youVerb('feed')} on {sub.your} leaky nipples, consuming "+howMuchCollectedStr+".",

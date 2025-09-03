@@ -295,6 +295,7 @@ anim_offset_random = 1.0
 [node name="DollAttachmentZones" type="Spatial" parent="."]
 
 [node name="RandomLeakTimer" type="Timer" parent="."]
+unique_name_in_owner = true
 one_shot = true
 
 [node name="DollSkeleton2" parent="." instance=ExtResource( 7 )]

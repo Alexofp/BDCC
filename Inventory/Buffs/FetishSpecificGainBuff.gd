@@ -19,7 +19,7 @@ func getVisibleDescription():
 	if(!fetishObj):
 		return "Error: "+str(fetishID)
 	
-	return "'"+fetishObj.getEffectName()+"' gain "+text+"%"
+	return "'"+fetishObj.getVisibleName()+"' gain "+text+"%"
 
 func apply(_buffHolder):
 	if(!_buffHolder.fetishGain.has(fetishID)):

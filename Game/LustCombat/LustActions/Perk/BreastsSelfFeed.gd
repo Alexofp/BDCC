@@ -48,13 +48,9 @@ func doAction(_lustState: LustCombatState, _args):
 	var fluids:Fluids = pc.getBodypart(BodypartSlot.Breasts).getFluids()
 	var fluidByAmount = fluids.getFluidAmountByType()
 	for fluidID in fluidByAmount:
-		var fluidObject:FluidBase = GlobalRegistry.getFluid(fluidID)
-		if(fluidObject == null):
-			continue
-		
-		var resultMessage = fluidObject.onSwallow(pc, fluidByAmount[fluidID] * 0.4)
-		if(resultMessage != null && resultMessage != ""):
-			extraMessages.append(resultMessage)
+		var swallowData:Dictionary = pc.doSwallow(fluidID, fluidByAmount[fluidID] * 0.4)
+		if(swallowData.has("text") && swallowData["text"] != ""):
+			extraMessages.append(swallowData["text"])
 	
 	fluids.transferTo(pc.getBodypart(BodypartSlot.Head), 0.4, 100.0)
 	
