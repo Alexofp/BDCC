@@ -5,6 +5,29 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.1.10] - 2025-09-04
+### Added
+- Player slavery system! You can now be sold on the Blacktail Market yourself, which will trigger one of the 2 new soft bad ends (with more to come hopefully, these are really hard to make x3). There are 3 ways to trigger the player slavery: a certain new event near the underground arena, a 50/50 chance if you get found unconscious, or losing an ambush.
+- 2 player slavery soft-bad end scenarios, one non-lewd and one that's very lewd. The first scenario is about being a shaft miner slave on the planet! The second scenario is about being a cow/bull slave for a space cafe! Multiple endings for both. These are little self-contained repetable slavery stories basically.
+- [Visible bodywritings system!](https://github.com/user-attachments/assets/eada3561-cae1-42bf-9626-2e86602f1f26) Dolls now display bodywritings on them. Completely dynamic system, the game generates textures with the bodywritings on the fly. Uses quite a bit of VRAM so this settings can be turned off.
+- Nemesis system! Wait, no, that's patented.. Nemesis.. relationships! If you really upset the dynamic npcs, they now have a chance to become your nemesis! Nemesis npcs will hate you with every fiber of their digital life. There is no easy way to get rid of this status. While the npc is your nemesis, they will begin planning an ambush on you. The ambush can happen at any day, at any time.. but you can spot it getting prepared if you have an eye for it. An ambush is an event where your nemesis will try to attack you while you have some handicap to your power.
+- Dynamic fetishes system. The fetishes of dynamic npcs will now dynamically change after each sex. Depending on how satisfied they were and what fetishes they were exposed to, they can now learn to like or dislike kinks! The chemistry lab has a new drug that can make this process faster.
+- Permanent bodywritings system. The npcs can now sometimes use a permanent marker instead of a normal one on you. Permanent bodywritings won't get washed away after taking a shower. The only way to get rid of them is by using a new Bio-Scrub Soap item. The player can also use permanent markers on npcs but you will have to find them first.
+- Mod and datapack browsers have a search ([Pull request by PosionFox](https://github.com/Alexofp/BDCC/pull/209))
+
+### Changed
+- Npcs can now be wounded and painfully-stretched too, just like the player. They will go to the medical block on their own sometimes. Eliza can treat your wounded slaves too.
+- The npc slavery 'idle texts' replaced with a better system. The new texts should reflect the state of your slave better too.
+- If you are a sub in a threesome with 2 doms, the game will now automatically switch the target to the dom who interacts with you.
+
+### Fixed
+- A crash that happens if an unconscious npc gets yoinked by a nurse in the middle of the sex.
+- Fixed wrong fetish being checked for the dom in the sex engine (was causing doms to get angry for no reason).
+- Can't pee with portal panties anymore ([Pull request by MarsDDDDD](https://github.com/Alexofp/BDCC/pull/211))
+- Game should crash less after removing mods now (Pull requests by Fox2Code: [#1](https://github.com/Alexofp/BDCC/pull/215), [#2](https://github.com/Alexofp/BDCC/pull/216))
+- Chemistry is fixed ([Pull request by moon-halo-xviii](https://github.com/Alexofp/BDCC/pull/196))
+- Lots of typpps got eleminated
+
 ## [0.1.9] - 2025-06-20
 ### Added
 - Huge sex engine refactor. Most of its code was improved to make it more modular and easier to create content for. But that's not the main reason behind the refactor..
@@ -574,7 +597,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.9...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.10...main
+[0.1.10]: https://github.com/Alexofp/BDCC/compare/0.1.9...0.1.10
 [0.1.9]: https://github.com/Alexofp/BDCC/compare/0.1.8...0.1.9
 [0.1.8]: https://github.com/Alexofp/BDCC/compare/0.1.7...0.1.8
 [0.1.7]: https://github.com/Alexofp/BDCC/compare/0.1.6...0.1.7
