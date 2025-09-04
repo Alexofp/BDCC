@@ -1,9 +1,11 @@
 extends "res://Game/Datapacks/UI/PackVarUIs/PackVarUIBase.gd"
 
-var selectedInterest = FetishInterest.Neutral
-var fetish = Fetish.AnalSexReceiving
+var selectedInterest:float = FetishInterest.Neutral
+var fetish:String = Fetish.AnalSexReceiving
 
 func setFetishInterestValue(_value):
+	if(_value is String):
+		_value = FetishInterest.textToNumber(_value)
 	$HatesButton.disabled = (_value == FetishInterest.Hates)
 	$ReallyDislikesButton.disabled = (_value == FetishInterest.ReallyDislikes)
 	$DislikesButton.disabled = (_value == FetishInterest.Dislikes)

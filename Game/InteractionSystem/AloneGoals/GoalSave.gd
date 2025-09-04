@@ -43,7 +43,9 @@ func doAction(_id:String, _args:Dictionary):
 		if(pawn == null):
 			completeGoal()
 			return
-		if(pawn.getInteraction() == null || pawn.getInteraction().id != "Unconscious"):
+		
+		var thePawnInteraction = pawn.getInteraction()
+		if(thePawnInteraction == null || thePawnInteraction.id != "Unconscious" || !thePawnInteraction.canNurseSave()):
 			completeGoal()
 			return
 		

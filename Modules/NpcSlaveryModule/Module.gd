@@ -120,6 +120,9 @@ func doEnslaveCharacter(npcID, defaultSlaveType = SlaveType.Slut):
 	GM.main.IS.deletePawn(npcID)
 	GM.main.removeDynamicCharacterFromAllPools(npcID)
 	GM.main.addDynamicCharacterToPool(npcID, CharacterPool.Slaves)
+	
+	GM.main.RS.onGettingEnslavedByPlayer(npcID)
+	
 	return true
 
 func doFreeEnslavedCharacter(npcID):

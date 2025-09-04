@@ -16,12 +16,14 @@ func getProductionSpeedPerHour() -> float:
 	if(!shouldProduce()):
 		return 0.0
 		
-	var mult = 1.0
+	var mult:float = 1.0
+	var multFinal:float = 1.0 # Can't go below zero
 	var pc = getCharacter()
 	if(pc != null):
 		mult += pc.getCustomAttribute(BuffAttribute.PenisCumProduction)
+		multFinal += pc.getCustomAttribute(BuffAttribute.PenisCumProductionFinal)
 		
-	return 100.0 * mult
+	return 100.0 * mult * max(multFinal, 0.0)
 
 func getFluidSource():
 	return FluidSource.Penis

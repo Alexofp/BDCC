@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Head/FoxHead/headfox.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Player/Player3D/Parts/MeshWithPattern.gd" type="Script" id=11]
 [ext_resource path="res://Player/Player3D/Parts/Head/HorseHead2/HorseHead_ringgag_overlay.png" type="Texture" id=12]
 [ext_resource path="res://Player/Player3D/Parts/Head/HorseHead2/HorseHead_ballgag_overlay.png" type="Texture" id=13]
+[ext_resource path="res://Player/Player3D/WritingsHandler/WritingZoneInfoNode.gd" type="Script" id=14]
 
 [sub_resource type="SpatialMaterial" id=6]
 resource_name = "headfox.png"
@@ -257,9 +258,34 @@ material/0 = SubResource( 17 )
 script = ExtResource( 11 )
 pattern_start = Vector2( 2, 1 )
 bodypartSlot = "head"
+supportsWritings = true
+
+[node name="WritingZoneInfoNode" type="Node" parent="PartStatePicker2/PartState/headfoxpng" index="0"]
+script = ExtResource( 14 )
+pos = Vector2( 117, 110 )
+rotSpread = 5.0
+squish = Vector2( 0.7, 1 )
+maxWritings = 1
+
+[node name="WritingZoneInfoNode2" type="Node" parent="PartStatePicker2/PartState/headfoxpng" index="1"]
+script = ExtResource( 14 )
+zone = 1
+pos = Vector2( 99, 144 )
+rot = -10.0
+rotSpread = 4.0
+maxWritings = 1
+
+[node name="WritingZoneInfoNode4" type="Node" parent="PartStatePicker2/PartState/headfoxpng" index="2"]
+script = ExtResource( 14 )
+zone = 3
+pos = Vector2( 82, 168 )
+rot = -25.0
+rotSpread = 3.0
+scale = 0.7
+squish = Vector2( 0.7, 1 )
+maxWritings = 1
 
 [node name="PartState2" parent="PartStatePicker2" index="1" instance=ExtResource( 5 )]
-visible = false
 stateValue = "ballgag"
 
 [node name="headfoxpng" type="MeshInstance" parent="PartStatePicker2/PartState2" index="0"]
@@ -270,6 +296,32 @@ script = ExtResource( 11 )
 pattern_start = Vector2( 2, 1 )
 bodypartSlot = "head"
 customOverlay = ExtResource( 13 )
+supportsWritings = true
+
+[node name="WritingZoneInfoNode" type="Node" parent="PartStatePicker2/PartState2/headfoxpng" index="0"]
+script = ExtResource( 14 )
+pos = Vector2( 117, 110 )
+rotSpread = 5.0
+squish = Vector2( 0.7, 1 )
+maxWritings = 1
+
+[node name="WritingZoneInfoNode2" type="Node" parent="PartStatePicker2/PartState2/headfoxpng" index="1"]
+script = ExtResource( 14 )
+zone = 1
+pos = Vector2( 99, 144 )
+rot = -10.0
+rotSpread = 4.0
+maxWritings = 1
+
+[node name="WritingZoneInfoNode4" type="Node" parent="PartStatePicker2/PartState2/headfoxpng" index="2"]
+script = ExtResource( 14 )
+zone = 3
+pos = Vector2( 82, 175 )
+rot = -35.0
+rotSpread = 3.0
+scale = 0.7
+squish = Vector2( 0.7, 1 )
+maxWritings = 1
 
 [node name="PartState3" parent="PartStatePicker2" index="2" instance=ExtResource( 5 )]
 visible = false
@@ -283,6 +335,32 @@ script = ExtResource( 11 )
 pattern_start = Vector2( 2, 1 )
 bodypartSlot = "head"
 customOverlay = ExtResource( 12 )
+supportsWritings = true
+
+[node name="WritingZoneInfoNode" type="Node" parent="PartStatePicker2/PartState3/headfoxpng" index="0"]
+script = ExtResource( 14 )
+pos = Vector2( 117, 110 )
+rotSpread = 5.0
+squish = Vector2( 0.7, 1 )
+maxWritings = 1
+
+[node name="WritingZoneInfoNode2" type="Node" parent="PartStatePicker2/PartState3/headfoxpng" index="1"]
+script = ExtResource( 14 )
+zone = 1
+pos = Vector2( 99, 144 )
+rot = -10.0
+rotSpread = 4.0
+maxWritings = 1
+
+[node name="WritingZoneInfoNode4" type="Node" parent="PartStatePicker2/PartState3/headfoxpng" index="2"]
+script = ExtResource( 14 )
+zone = 3
+pos = Vector2( 82, 175 )
+rot = -35.0
+rotSpread = 3.0
+scale = 0.7
+squish = Vector2( 0.7, 1 )
+maxWritings = 1
 
 [node name="PartState4" parent="PartStatePicker2" index="3" instance=ExtResource( 5 )]
 visible = false
@@ -295,6 +373,32 @@ material/0 = SubResource( 20 )
 script = ExtResource( 11 )
 pattern_start = Vector2( 2, 1 )
 bodypartSlot = "head"
+supportsWritings = true
+
+[node name="WritingZoneInfoNode" type="Node" parent="PartStatePicker2/PartState4/headfoxpng" index="0"]
+script = ExtResource( 14 )
+pos = Vector2( 117, 110 )
+rotSpread = 5.0
+squish = Vector2( 0.7, 1 )
+maxWritings = 1
+
+[node name="WritingZoneInfoNode2" type="Node" parent="PartStatePicker2/PartState4/headfoxpng" index="1"]
+script = ExtResource( 14 )
+zone = 1
+pos = Vector2( 99, 144 )
+rot = -10.0
+rotSpread = 4.0
+maxWritings = 1
+
+[node name="WritingZoneInfoNode4" type="Node" parent="PartStatePicker2/PartState4/headfoxpng" index="2"]
+script = ExtResource( 14 )
+zone = 3
+pos = Vector2( 82, 175 )
+rot = -35.0
+rotSpread = 3.0
+scale = 0.7
+squish = Vector2( 0.7, 1 )
+maxWritings = 1
 
 [node name="PartStatePicker" parent="." index="2" instance=ExtResource( 4 )]
 state = "muzzle"

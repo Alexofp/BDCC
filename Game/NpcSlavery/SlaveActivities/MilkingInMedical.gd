@@ -47,7 +47,7 @@ func getInteractActions():
 			name = "Cancel",
 			desc = "Bring your slave back.",
 			sceneID = "SlaveryCancelActivity",
-			args = ["You find {npc.name} in the medical and begin {npc.him} back."],
+			args = ["You find {npc.name} in the medical and bring {npc.him} back."],
 			buttonChecks = [],
 		}
 	]

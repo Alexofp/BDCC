@@ -1,6 +1,7 @@
 extends PanelContainer
 
-onready var _npcNameLabel = $HBoxContainer/Name
+onready var _npcNameLabel = $HBoxContainer/VBoxContainer/Name
+onready var relationship_name = $HBoxContainer/VBoxContainer/RelationshipName
 onready var _npcGenderLabel = $HBoxContainer/Gender
 onready var _npcPersonalityLabel = $HBoxContainer/Personality
 onready var _amountOfChildrenLabel = $HBoxContainer/Children
@@ -28,6 +29,7 @@ func initData(name, gender, subbyStat, ID, occupation, children, canForget=true,
 	_amountOfChildrenLabel.text  = str(children)
 	forgetButton.disabled = !canForget
 	meetButton.disabled = !canMeet
+	relationship_name.visible = false
 
 func setRelationShipData(newAff:float, newLust:float):
 	affection = newAff
@@ -35,6 +37,11 @@ func setRelationShipData(newAff:float, newLust:float):
 	
 	relationship.text = "Affection: "+str(Util.roundF(affection*100.0, 1))+"%\n"
 	relationship.text += "Lust: "+str(Util.roundF(lust*100.0, 1))+"%"
+
+func setSpecialRelationship(_name:String, _color:Color):
+	relationship_name.visible = true
+	relationship_name.text = "("+_name+")"
+	relationship_name["custom_colors/font_color"] = _color
 
 func setNpcID(ID: String):
 	if(ID == ""):

@@ -26,10 +26,12 @@ var highlightedRoom: Node2D
 var lastAimedRoomID = null
 
 var pawns:Dictionary = {}
+var entities:Dictionary = {}
 
 var roomConnectionScene = preload("res://Game/World/RoomConnection.tscn")
 onready var worldFloorScene = load("res://Game/World/WorldFloor.tscn")
 var worldPawnScene = preload("res://Game/World/WorldPawn.tscn")
+var worldEntityScene = preload("res://Game/World/WorldEntity.tscn")
 
 var astar:AStar2D
 var astarIDToRoomIDMap: Dictionary = {}
@@ -375,10 +377,79 @@ func updateDarknessSize():
 	d_left.margin_right = -darknessSize + 0.5
 	d_right.margin_left = darknessSize - 0.5
 
+func clearEntities():
+	for entityID in entities:
+		entities[entityID].queue_free()
+	entities.clear()
+
+func hasEntity(theID:String) -> bool:
+	if(entities.has(theID)):
+		return true
+	return false
+
+func getEntity(_theID:String):
+	if(!entities.has(_theID)):
+		return null
+	return entities[_theID]
+
+func moveEntity(_theID:String, loc:String):
+	var theEntity = getEntity(_theID)
+	if(!theEntity):
+		return
+	var room = getRoomByID(loc)
+	if(room == null):
+		return
+	if(theEntity.loc == loc):
+		return
+	
+	if(room.getFloorID() == theEntity.floorid):
+		theEntity.moveToPos(room.global_position)
+		theEntity.loc = loc
+	else:
+		theEntity.get_parent().remove_child(theEntity)
+		var roomFloor = room.getFloor()
+		roomFloor.add_child(theEntity)
+		theEntity.loc = loc
+		theEntity.floorid = roomFloor.id
+		theEntity.global_position = getRoomByID(loc).global_position + Vector2(RNG.randf_range(-16.0, 16.0), RNG.randf_range(-16.0, 16.0))
+		#createWorldPawn(charID, pawn, loc)
+
+func deleteEntity(_theID:String):
+	if(!hasEntity(_theID)):
+		return
+	entities[_theID].queue_free()
+	entities.erase(_theID)
+
+func createEntity(theID:String, theTexture:Texture, loc:String):
+	if(entities.has(theID)):
+		entities[theID].queue_free()
+		var _ok = entities.erase(theID)
+	var room = getRoomByID(loc)
+	var roomFloor = room.getFloor()
+	
+	var newWorldEntity = worldEntityScene.instance()
+	roomFloor.add_child(newWorldEntity)
+	newWorldEntity.loc = loc
+	newWorldEntity.id = theID
+	newWorldEntity.floorid = roomFloor.id
+	newWorldEntity.global_position = getRoomByID(loc).global_position + Vector2(RNG.randf_range(-16.0, 16.0), RNG.randf_range(-16.0, 16.0))
+	newWorldEntity.setTexture(theTexture)
+	entities[theID] = newWorldEntity
+
+func setEntityTexture(_theID:String, _theTexture:Texture):
+	if(!entities.has(_theID)):
+		return
+	entities[_theID].setTexture(_theTexture)
+
 func clearPawns():
 	for pawnID in pawns:
 		pawns[pawnID].queue_free()
 	pawns.clear()
+
+func updatePawn(worldPawn, pawn):
+	worldPawn.setPawnActivityIcon(pawn.getActivityIcon())
+	var theTagAndColor:Array = pawn.getPawnRelationshipTextAndColor()
+	worldPawn.setRelationshipText(theTagAndColor[0], theTagAndColor[1])
 
 func updatePawns(IS):
 	#var visiblePawns = {}
@@ -398,7 +469,10 @@ func updatePawns(IS):
 			checkedPawns.erase(charID)
 			var worldPawn = pawns[charID]
 			
-			worldPawn.setPawnActivityIcon(pawn.getActivityIcon())
+			updatePawn(worldPawn, pawn)
+			#worldPawn.setPawnActivityIcon(pawn.getActivityIcon())
+			#var theTagAndColor:Array = pawn.getPawnRelationshipTextAndColor()
+			#worldPawn.setRelationshipText(theTagAndColor[0], theTagAndColor[1])
 			
 			if(worldPawn.loc == loc):
 				continue
@@ -431,7 +505,8 @@ func createWorldPawn(charID, pawn, loc):
 	newWorldPawn.setPawnTexture(pawn.getPawnTexture())
 	newWorldPawn.setPawnColor(pawn.getPawnColor())
 	newWorldPawn.setShowCollar(pawn.getShouldShowCollarOnSprite())
-	newWorldPawn.setPawnActivityIcon(pawn.getActivityIcon())
+	#newWorldPawn.setPawnActivityIcon(pawn.getActivityIcon())
+	updatePawn(newWorldPawn, pawn)
 	pawns[charID] = newWorldPawn
 
 func getZoneRooms(zoneID:String, fallbackRooms:Array = []) -> Array:
@@ -641,11 +716,16 @@ func hasWallsNearby(locID:String) -> bool:
 func saveData():
 	var data = {}
 	data["lastAimedRoomID"] = lastAimedRoomID
+	data["zoomx"] = camera.zoom.x
+	data["zoomy"] = camera.zoom.y
 	
 	return data
 	
 func loadData(data):
 	lastAimedRoomID = SAVE.loadVar(data, "lastAimedRoomID", "")
+	if(data.has("zoomx") && data.has("zoomy")):
+		camera.zoom = Vector2(SAVE.loadVar(data, "zoomx", 1.0), SAVE.loadVar(data, "zoomy", 1.0))
 	
+	updateDarknessSize()
 	if(lastAimedRoomID != null && lastAimedRoomID != ""):
 		aimCamera(lastAimedRoomID, true)

@@ -66,6 +66,11 @@ func playAnimation(animID, _args = {}):
 	if(_args.has("pcCum") && _args["pcCum"]):
 		startCumPenis(doll)
 	
+	if(_args.has("hideNPC") && _args["hideNPC"]):
+		doll2.visible = false
+	else:
+		doll2.visible = true
+	
 	var state_machine = animationTree["parameters/StateMachine/playback"]
 	var state_machine2 = animationTree2["parameters/StateMachine/playback"]
 
@@ -105,6 +110,15 @@ func canTransitionTo(_actionID, _args = []):
 
 func getSupportedStates():
 	return ["tease", "inside", "sex", "fast", "finger", "lick", "stroke"]
+
+func getVarOptions():
+	var options = .getVarOptions()
+	
+	options["hideNPC"] = {
+		type = "bool",
+	}
+	
+	return options
 
 func getVarNpcs():
 	return ["pc", "npc"]

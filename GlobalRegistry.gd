@@ -2,8 +2,8 @@ extends Node
 
 var game_version_major = 0
 var game_version_minor = 1
-var game_version_revision = 9
-var game_version_suffix = "fix1"
+var game_version_revision = 10
+var game_version_suffix = ""
 
 var contributorsCredits:Dictionary = {
 	"Max-Maxou": [
@@ -81,6 +81,7 @@ var contributorsCredits:Dictionary = {
 		"[url=https://github.com/Alexofp/BDCC/pull/104]#1[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/136]#2[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/137]#3[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/209]#4[/url]",
 	],
 	"CKRainbow": [
 		"[url=https://github.com/Alexofp/BDCC/pull/112]#1[/url]",
@@ -89,6 +90,7 @@ var contributorsCredits:Dictionary = {
 		"[url=https://github.com/Alexofp/BDCC/pull/184]#4[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/186]#5[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/189]#6[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/197]#7[/url]",
 	],
 	"Friskygote": [
 		"[url=https://github.com/Alexofp/BDCC/pull/120]#1[/url]",
@@ -130,6 +132,15 @@ var contributorsCredits:Dictionary = {
 	],
 	"[color=#E88EFF]Fox[color=#CC27DB]2[/color]Code[/color]": [
 		"code",
+		"[url=https://github.com/Alexofp/BDCC/pull/215]#1[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/216]#2[/url]",
+	],
+	"moon-halo-xviii": [
+		"[url=https://github.com/Alexofp/BDCC/pull/196]#1[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/207]#2[/url]",
+	],
+	"MarsDDDDD": [
+		"[url=https://github.com/Alexofp/BDCC/pull/211]#1[/url]",
 	],
 }
 
@@ -217,6 +228,9 @@ var transformationEffects:Dictionary = {}
 var nurseryTasks:Dictionary = {}
 var drugDenEvents:Dictionary = {}
 var drugDenEventRefs:Dictionary = {}
+var playerSlaveryDefs:Dictionary = {}
+var specialRelationships:Dictionary = {}
+var specialRelationshipRefs:Dictionary = {}
 
 var bodypartStorageNode
 
@@ -632,6 +646,9 @@ func registerEverything():
 	registerSlaveActionFolder("res://Game/NpcSlavery/SlaveActions/")
 	registerSlaveEventFolder("res://Game/NpcSlavery/SlaveEvents/")
 	registerSlaveActivitiesFolder("res://Game/NpcSlavery/SlaveActivities/")
+	
+	registerPlayerSlaveryDefFolder("res://Game/PlayerSlavery/ScenarioDefs/")
+	registerSpecialRelantionshipFolder("res://Game/InteractionSystem/Relationship/SpecialRelationships/")
 	
 	registerInteractionFolder("res://Game/InteractionSystem/Interactions/")
 	registerGlobalTaskFolder("res://Game/InteractionSystem/GlobalTasks/")
@@ -2678,6 +2695,61 @@ func getSexReactionHandlersFor(id: int):
 	else:
 		return []
 		
+
+
+
+func registerPlayerSlaveryDef(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	playerSlaveryDefs[object.id] = object
+
+func registerPlayerSlaveryDefFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerPlayerSlaveryDef(scriptPath)
+
+func getPlayerSlaveryDef(id: String):
+	if(playerSlaveryDefs.has(id)):
+		return playerSlaveryDefs[id]
+	else:
+		Log.printerr("ERROR: player slavery with the id "+id+" wasn't found")
+		return null
+		
+func getPlayerSlaveryDefs():
+	return playerSlaveryDefs
+
+
+
+func registerSpecialRelationship(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	specialRelationships[object.id] = loadedClass
+	specialRelationshipRefs[object.id] = object
+
+func registerSpecialRelantionshipFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerSpecialRelationship(scriptPath)
+
+func createSpecialRelationship(id: String):
+	if(specialRelationships.has(id)):
+		return specialRelationships[id].new()
+	else:
+		Log.printerr("ERROR: special relationship with the id "+id+" wasn't found")
+		return null
+
+func getSpecialRelationshipRef(id: String):
+	if(specialRelationshipRefs.has(id)):
+		return specialRelationshipRefs[id]
+	else:
+		Log.printerr("ERROR: special relationship with the id "+id+" wasn't found")
+		return null
+		
+func getSpecialRelationships():
+	return specialRelationshipRefs
+
 
 
 

@@ -365,7 +365,22 @@ func setCauserID(_charID:String):
 	for fluidData in contents:
 		var fluidDNA = fluidData["fluidDNA"]
 		fluidDNA.setCauserID(_charID)
-	
+
+# Does this fluids container have fluids that can get you pregnant
+func hasVirileFluids() -> bool:
+	for fluidData in contents:
+		var fluidDNA = fluidData["fluidDNA"] if fluidData.has("fluidDNA") else null
+		if(!fluidDNA):
+			continue
+		var fluidType:String = fluidData["fluidType"]
+		var theFluid:FluidBase = GlobalRegistry.getFluid(fluidType)
+		if(!theFluid):
+			continue
+		
+		if(theFluid.canImpregnate() && fluidDNA.getVirility() > 0.01):
+			return true
+	return false
+
 func saveData():
 	var theContents = []
 	for contentData in contents:

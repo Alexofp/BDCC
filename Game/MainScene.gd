@@ -31,6 +31,8 @@ var WHS:WorldHistory = WorldHistory.new()
 var SAB:SlaveAuctionBidders = SlaveAuctionBidders.new()
 var SCI:Science = Science.new()
 var DrugDenRun:DrugDen
+var PS:PlayerSlaveryBase
+var PSH:PlayerSlaveryHolder = PlayerSlaveryHolder.new()
 
 var staticCharacters = {}
 var charactersToUpdate = {}
@@ -147,7 +149,7 @@ func removeDynamicCharacter(characterID, printDebug = true):
 		if(printDebug):
 			Log.print("removeDynamicCharacter(): Removing "+str(characterID)+" character")
 		removeDynamicCharacterFromAllPools(characterID)
-		RS.removeAllEntriesOf(characterID)
+		RS.onCharDelete(characterID)
 		IS.deletePawn(characterID)
 		
 		dynamicCharacters[characterID].queue_free()
@@ -467,7 +469,15 @@ func saveData():
 	data["relationshipSystem"] = RS.saveData()
 	data["auctionBidders"] = SAB.saveData()
 	data["science"] = SCI.saveData()
+	data["playerSlaveryHolder"] = PSH.saveData()
 	data["drugDen"] = DrugDenRun.saveData() if DrugDenRun != null else null
+	if(PS):
+		data["playerSlavery"] = {
+			id = PS.id,
+			data = PS.saveData(),
+		}
+	else:
+		data["playerSlavery"] = null
 	
 	data["scenes"] = []
 	for scene in sceneStack:
@@ -503,6 +513,7 @@ func loadData(data):
 	RS.loadData(SAVE.loadVar(data, "relationshipSystem", {}))
 	SAB.loadData(SAVE.loadVar(data, "auctionBidders", {}))
 	SCI.loadData(SAVE.loadVar(data, "science", {}))
+	PSH.loadData(SAVE.loadVar(data, "playerSlaveryHolder", {}))
 		
 	
 	var scenes = SAVE.loadVar(data, "scenes", [])
@@ -534,6 +545,21 @@ func loadData(data):
 		DrugDenRun.loadData(SAVE.loadVar(data, "drugDen", {}))
 	else:
 		DrugDenRun = null
+	
+	if(data.has("playerSlavery") && data["playerSlavery"] is Dictionary):
+		var theSlaveryID:String = SAVE.loadVar(data["playerSlavery"], "id", "")
+		var theSlaveryDef = GlobalRegistry.getPlayerSlaveryDef(theSlaveryID)
+		if(!theSlaveryDef):
+			PS = null
+		else:
+			var theSlavery = theSlaveryDef.createSlavery()
+			if(!theSlavery):
+				PS = null
+			else:
+				PS = theSlavery
+				PS.loadData(SAVE.loadVar(data["playerSlavery"], "data", {}))
+	else:
+		PS = null
 	
 	GM.world.loadData(SAVE.loadVar(data, "world", {}))
 	#GM.world.updatePawns(IS)
@@ -619,8 +645,9 @@ func processTime(_seconds):
 
 func doTimeProcess(_seconds):
 	# This splits long sleeping times into 1 hour chunks
-	IS.processTime(_seconds)
-	SCI.processTime(_seconds)
+	if(!PS):
+		IS.processTime(_seconds)
+		SCI.processTime(_seconds)
 	
 	var copySeconds = _seconds
 	while(copySeconds > 0):
@@ -659,7 +686,7 @@ func hoursPassed(howMuch):
 			if(character != null && character.isSlaveToPlayer()):
 				character.getNpcSlavery().hoursPassed(howMuch)
 	
-	RS.decayRelationships(howMuch)
+	RS.hoursPassed(howMuch)
 
 func processTimeUntil(newseconds):
 	if(timeOfDay >= newseconds):
@@ -694,6 +721,7 @@ func startNewDay():
 	WHS.onNewDay()
 	IS.afterNewDay()
 	SCI.onNewDay()
+	RS.onNewDay()
 	
 	SAVE.triggerAutosave()
 	
@@ -949,14 +977,27 @@ func updateStuff():
 	
 	var isDrugDen:bool = isOnDrugDenRun()
 	var playerIsBlindfolded = GM.pc.isBlindfolded()
-	GM.world.setDarknessVisible(playerIsBlindfolded || isDrugDen)
-	if(playerIsBlindfolded || isDrugDen):
-		if(isDrugDen && !playerIsBlindfolded):
-			GM.world.setDarknessSize(64)
-		elif(GM.pc.canHandleBlindness()):
-			GM.world.setDarknessSize(64)
-		else:
-			GM.world.setDarknessSize(16)
+	
+	var shouldDarknessBeVisible:bool = playerIsBlindfolded || isDrugDen
+	var thePSDarkness:float = -1.0
+	if(PS):
+		thePSDarkness = PS.getPCViewDistance()
+		if(thePSDarkness > 0.0):
+			shouldDarknessBeVisible = true
+	
+	GM.world.setDarknessVisible(shouldDarknessBeVisible)
+	if(shouldDarknessBeVisible):
+		var theDist:float = 9999
+		if(isDrugDen):
+			theDist = min(64, theDist)
+		if(thePSDarkness > 0.0):
+			theDist = min(thePSDarkness, theDist)
+		if(playerIsBlindfolded):
+			if(GM.pc.canHandleBlindness()):
+				theDist = min(64, theDist)
+			else:
+				theDist = min(16, theDist)
+		GM.world.setDarknessSize(theDist)
 			
 	for worldEdit in GlobalRegistry.getRegularWorldEdits():
 		worldEdit.apply(GM.world)
@@ -1384,12 +1425,56 @@ func getDebugActions():
 				},
 			],
 		},
-		
+		{
+			"id": "startSlavery",
+			"name": "Start Player Slavery",
+			"args": [
+#				{
+#					"id": "slaveryID",
+#					"name": "Slavery id",
+#					"type": "list",
+#					"value": GlobalRegistry.getPlayerSlaveryDefs().keys().front(),
+#					"values": TFUtil.getPlayerSlaveryStartList(),
+#				},
+			],
+		},
+		{
+			"id": "stopSlavery",
+			"name": "Stop Player Slavery",
+			"args": [
+			],
+		},
+		{
+			"id": "addBodywritings",
+			"name": "Add bodywritings",
+			"args": [
+				{
+					"id": "amount",
+					"name": "Amount",
+					"type": "number",
+					"value": 10,
+				},
+			],
+		},
+		{
+			"id": "clearBodywritings",
+			"name": "Clear writings",
+			"args": [
+			],
+		},
 	]
 
 func doDebugAction(id, args = {}):
 	print(id, " ", args)
 	
+	if(id == "addBodywritings"):
+		var theAm:int = args["amount"]
+		for _i in range(theAm):
+			GM.pc.addBodywritingRandom()
+		GM.pc.updateAppearance()
+	if(id == "clearBodywritings"):
+		GM.pc.clearBodywritings(true, true)
+		GM.pc.updateAppearance()
 	if(id == "forceProgressTFs"):
 		GM.pc.getTFHolder().forceProgressAll()
 	if(id == "accelerateTFs"):
@@ -1399,6 +1484,19 @@ func doDebugAction(id, args = {}):
 			addMessage(args["tfid"] +" transformation is currently not possible.")
 		else:
 			GM.pc.getTFHolder().startTransformation(args["tfid"])
+	if(id == "startSlavery"):
+		if(PS):
+			return
+		#PSH.storePlayersItems()
+		#runScene("PlayerSlaveryPickScene")
+		runScene(GlobalRegistry.getModule("PlayerSlaveryModule").getSlaveryStartScene())
+		#startPlayerSlavery(args["slaveryID"], true)
+	if(id == "stopSlavery"):
+		if(PS):
+			stopPlayerSlavery()
+			GM.pc.setLocation(GM.pc.getCellLocation())
+			while(sceneStack.size() > 1):
+				endCurrentScene()
 	if(id == "undoTFs"):
 		GM.pc.undoAllTransformations()
 	if(id == "applyTFs"):
@@ -1895,3 +1993,36 @@ func stopDungeonRun():
 	if(DrugDenRun != null):
 		DrugDenRun.endRun()
 	DrugDenRun = null
+
+func startPlayerSlavery(_slaveryID:String, storeInv:bool = false):
+	if(PS):
+		Log.printerr("Trying to start player slavery while one is running already!")
+		return
+	
+	var theDef = GlobalRegistry.getPlayerSlaveryDef(_slaveryID)
+	if(!theDef):
+		return
+	
+	var theSlavery = theDef.createSlavery()
+	if(!theSlavery):
+		Log.printerr("Slavery Def didn't gave the game a slavery object!")
+		return
+	
+	if(storeInv):
+		PSH.storePlayersItems()
+		
+	PS = theSlavery
+	PS.onSlaveryStart()
+	var theStartSceneID:String = PS.getStartScene()
+	if(theStartSceneID == ""):
+		Log.printerr("Player slavery didn't give us a start scene!")
+		return
+	runScene(theStartSceneID)
+
+func stopPlayerSlavery():
+	if(!PS):
+		return
+		
+	PS.onSlaveryEnd()
+	PSH.givePlayerItemsBack()
+	PS = null

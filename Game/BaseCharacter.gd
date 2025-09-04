@@ -142,6 +142,14 @@ func getName() -> String:
 func getSmallDescription() -> String:
 	return "Test test test"
 
+func getSmallDescriptionWithRelationship() -> String:
+	var result:String = getSmallDescription()
+	if(GM.main && GM.main.RS):
+		var specialText:Array = GM.main.RS.getSpecialTextAndColor(getID())
+		if(specialText.size() >= 2):
+			result += "\n([color=#"+specialText[1].to_html(false)+"]"+specialText[0]+"[/color])"
+	return result
+	
 func getBasePainThreshold() -> int:
 	return 100
 
@@ -1594,7 +1602,14 @@ func updateLeaking(doll: Doll3D):
 	else:
 		doll.setAnusLeaking(false)
 
+func getWritingsData() -> Dictionary:
+	if(hasEffect(StatusEffect.HasBodyWritings)):
+		return getEffect(StatusEffect.HasBodyWritings).getDollData()
+	return {}
+
 func softUpdateDoll(doll: Doll3D):
+	doll.writingsData = getWritingsData()
+	
 	var skinData = {}
 	var bodySkinData = getSkinData()
 	var fieldsToCheckSkin = ["skin", "r", "g", "b"]
@@ -1864,7 +1879,7 @@ func addTallymarkButt():
 func hasTallymarks():
 	return hasEffect(StatusEffect.HasTallyMarks)
 
-func getTallymarkCount():
+func getTallymarkCount() -> int:
 	if(!hasTallymarks()):
 		return 0
 	return getEffect(StatusEffect.HasTallyMarks).totalAmount
@@ -1872,27 +1887,41 @@ func getTallymarkCount():
 func clearTallymarks():
 	removeEffect(StatusEffect.HasTallyMarks)
 
-func addBodywriting(zone, writingID):
-	addEffect(StatusEffect.HasBodyWritings, [zone, writingID])
+func addBodywriting(zone, writingID, isPermanent:bool = false):
+	addEffect(StatusEffect.HasBodyWritings, [zone, writingID, isPermanent])
 
-func addBodywritingRandom():
+func addBodywritingRandom(isPermanent:bool = false):
 	var zone = BodyWritingsZone.getRandomZone()
-	addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone))
+	addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone), isPermanent)
 
-func addBodywritingLowerBody():
+func addBodywritingLowerBody(isPermanent:bool = false):
 	var zone = BodyWritingsZone.getRandomZoneLowerPart()
-	addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone))
+	addBodywriting(zone, BodyWritings.getRandomWritingIDForZone(zone), isPermanent)
 
 func hasBodywritings():
 	return hasEffect(StatusEffect.HasBodyWritings)
 
-func getBodywritingsCount():
+func hasPermanentBodywritings() -> bool:
+	if(hasEffect(StatusEffect.HasBodyWritings)):
+		var theEffect = getEffect(StatusEffect.HasBodyWritings)
+		return theEffect.getPermanentAmount() > 0
+	return false
+
+func getBodywritingsCount() -> int:
 	if(!hasBodywritings()):
 		return 0
 	return getEffect(StatusEffect.HasBodyWritings).getAmount()
 
-func clearBodywritings():
-	removeEffect(StatusEffect.HasBodyWritings)
+func clearBodywritings(nonPermanent:bool = true, permanent:bool = false):
+	if(nonPermanent && permanent):
+		removeEffect(StatusEffect.HasBodyWritings)
+		updateAppearance()
+		return
+	if(!hasEffect(StatusEffect.HasBodyWritings)):
+		return
+	var theEffect = getEffect(StatusEffect.HasBodyWritings)
+	theEffect.removeWritings(nonPermanent, permanent)
+	updateAppearance()
 
 func hasBoundArms():
 	return buffsHolder.hasBuff(Buff.RestrainedArmsBuff)
@@ -2094,8 +2123,14 @@ func afterSexEnded(sexInfo):
 		var item = items[itemSlot]
 		item.resetLustState()
 		item.onSexEnd()
-		
+	
+	#TODO: All of this should happen in sex engine endSex()?
 	if(personalityChangesAfterSex() && personality != null && fetishHolder != null):
+		var theFetishChangeResult:Dictionary = sexInfo.doFetishChangeCalculation()
+		if(theFetishChangeResult.has("messages")):
+			for message in theFetishChangeResult["messages"]:
+				GM.main.addMessage(message)
+		
 		var resultText = sexInfo.affectPersonality(personality, fetishHolder)
 		if(resultText != null && resultText != ""):
 			GM.main.addMessage(resultText)
@@ -2168,6 +2203,15 @@ func isWearingChastityCage() -> bool:
 	if(item.hasTag(ItemTag.ChastityCage)):
 		return true
 	return false
+
+func hasVirileFluidsIn(bodypartSlot:String) -> bool:
+	if(!hasBodypart(bodypartSlot)):
+		return false
+	var bodypart = getBodypart(bodypartSlot)
+	var theFluids = bodypart
+	if(!theFluids):
+		return false
+	return theFluids.hasVirileFluids()
 
 #example return values: some cum | a mixture of cum and girlcum | a mixture of cum, black goo and girlcum
 func getBodypartContentsStringList(bodypartID):
@@ -2526,11 +2570,17 @@ func unequipStrapon():
 		return null
 	return getInventory().unequipItem(theStrapon)
 
-func doPainfullyStretchHole(_bodypart, _who = "pc"):
-	pass
+func doPainfullyStretchHole(_bodypart, _who = "pc") -> bool:
+	return false
 
-func doWound(_who = "pc"):
-	pass
+func doWound(_who = "pc") -> bool:
+	return false
+
+func getWoundedAmount() -> int:
+	if(!hasEffect(StatusEffect.Wounded)):
+		return 0
+	var theEffect = getEffect(StatusEffect.Wounded)
+	return theEffect.stacks
 
 func unequipAllRestraints():
 	for item in inventory.getEquppedRestraints():
@@ -3590,3 +3640,51 @@ func resetSkillHolderFully():
 
 func canApplySmartLocks() -> bool:
 	return false
+
+# Do we have any drugs in our system
+func isUnderDrugsInfluence() -> bool:
+	if(!timedBuffs.empty()):
+		return true
+	
+	for statusEffectID in statusEffects:
+		var theEffect = statusEffects[statusEffectID]
+		
+		if(theEffect.isDrugEffect()):
+			return true
+	
+	return false
+
+func getDrugsInfluenceAmount() -> int:
+	var result:int = 0
+	if(!timedBuffs.empty()):
+		result += timedBuffs.size()
+	
+	for statusEffectID in statusEffects:
+		var theEffect = statusEffects[statusEffectID]
+		
+		if(theEffect.isDrugEffect()):
+			result += 1
+	
+	return result
+
+func cancelPregnancy():
+	if(!menstrualCycle):
+		return
+	menstrualCycle.cancelPregnancy()
+
+func doSwallow(_fluidID:String, _amount:float) -> Dictionary:
+	var fluidObject:FluidBase = GlobalRegistry.getFluid(_fluidID)
+	if(fluidObject == null):
+		return {text=""}
+
+	var resultMessage = fluidObject.onSwallow(self, _amount)
+	
+	var event := SexEventHelper.create(SexEvent.SwallowFluid, getID(), getID(), {
+		loadSize = _amount,
+		fluidID = _fluidID,
+	})
+	sendSexEvent(event)
+	
+	if(resultMessage != null && resultMessage != ""):
+		return {text=resultMessage}
+	return {text=""}

@@ -11,6 +11,8 @@ func _init():
 		[10, ["ZiptiesWrist"]],
 		[10, ["blindfold"]],
 		[10, [["restraintkey", 1, 2]]],
+		[1, [["Soap", 1, 1]]],
+		[2, [["PermanentMarker", 1, 1]]],
 	]
 	minCredits = 1
 	maxCredits = 2

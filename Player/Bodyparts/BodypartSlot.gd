@@ -112,16 +112,38 @@ static func isEssential(slot):
 	
 	return true
 
-static func findReplacement(slot, oldvalue):
-	if(slot == Body):
-		return "anthrobody"
-	if(slot == Arms):
-		return "anthroarms"
+# Note: we assume "oldvalue" does not exists as a bodypart ref.
+static func findReplacement(slot, oldvalue, species=null, gender=Gender.Androgynous):
+	# Hardcoded known good convertions
 	if(slot == Legs):
-		if(oldvalue in ["felineleg", "canineleg", "dragonleg"]):
+		if(oldvalue in ["flufflegs", "felineleg", "canineleg", "dragonleg"]):
 			return "digilegs"
 		if(oldvalue in ["humanleg"]):
 			return "plantilegs"
-		return "plantilegs"
-	
+	elif(slot == Body):
+		if(oldvalue in ["fluffbody"]):
+			return "anthrobody"
+	# Get default bodypart from species
+	var mainSpecies = null
+	if(species != null):
+		for speciesItr in species:
+			mainSpecies = GlobalRegistry.getSpecies(speciesItr)
+			if mainSpecies != null:
+				break
+	if(mainSpecies == null):
+		mainSpecies = GlobalRegistry.getSpecies("canine")
+	var replacementIdFor = mainSpecies.getDefaultForSlot(slot, gender)
+	if(replacementIdFor != null && GlobalRegistry.getBodypartRef(replacementIdFor) != null):
+		return replacementIdFor
+	# Hardcoded fallback convertions
+	if(slot == Body):
+		return "anthrobody"
+	elif(slot == Arms):
+		return "anthroarms"
+	elif(slot == Anus):
+		return "anus"
+	elif(slot == Legs):
+		return "digilegs"
+	elif(slot == Vagina):
+		return "vagina"
 	return null

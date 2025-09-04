@@ -205,6 +205,10 @@ func getHitPreferencesAmount() -> int:
 func calculateChanceToBid() -> float:
 	var theAuction = getAuction()
 	var roundNumber:int = theAuction.getRoundNumber()
+	
+	if(theAuction.isPCBeingSold && roundNumber == 3 && index == 1): # Fail-safe
+		return 100.0
+	
 	var theDesire:float = getFinalDesire()
 	
 	var theChance:float = theDesire * 100.0
@@ -218,6 +222,9 @@ func calculateChanceToBid() -> float:
 		
 	#if(roundNumber >= 5):
 	#	theChance -= (roundNumber - 5) * 20
+	
+	if(theAuction.isPCBeingSold):
+		mult += 0.5
 	
 	return theChance * mult
 

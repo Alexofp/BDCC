@@ -16,7 +16,9 @@ func _run():
 		saynn("How do you wanna fill something?")
 		
 		if(GM.main.getTimeInGlobalSeconds() >= (getFlag("LastTimePeed", 0) + 60*60*4)):
-			if(GM.pc.getInventory().getItemsWithTag(ItemTag.CanPeeInto).size() == 0):
+			if(GM.pc.isWearingPortalPanties()):
+				addDisabledButton("Pee into..", "Your portal panties prevent you from peeing into containers")
+			elif(GM.pc.getInventory().getItemsWithTag(ItemTag.CanPeeInto).size() == 0):
 				addDisabledButton("Pee into..", "You don't have any bottles to pee into")
 			else:
 				addButton("Pee into..", "Pee into one of your bottles", "peeintomenu")

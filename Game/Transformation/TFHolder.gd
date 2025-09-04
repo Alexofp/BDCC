@@ -381,6 +381,16 @@ func shouldAlwaysUpdateNPC() -> bool:
 	
 	return false
 
+func shouldSaveData() -> bool:
+	if(!originalParts.empty() || !originalCharData.empty()):
+		return true
+	if(!transformations.empty() || !effects.empty()):
+		return true
+	if(!affectedParts.empty()):
+		return true
+	
+	return false
+
 func saveData() -> Dictionary:
 	var effectsData:Array = []
 	for effect in effects:

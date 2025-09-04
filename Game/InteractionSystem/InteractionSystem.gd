@@ -43,7 +43,10 @@ func loadData(_data):
 	pawnsByLoc.clear()
 	var pawnData = SAVE.loadVar(_data, "pawns", {})
 	for charID in pawnData:
-		var pawnEntry = pawnData[charID]
+		if(charID == "" || GlobalRegistry.getCharacter(charID) == null):
+			Log.printerr("Unable to load pawn with character id "+str(charID)+" as the character is missing!")
+			continue
+		var pawnEntry:Dictionary = SAVE.loadVar(pawnData, charID, {})
 		
 		var newPawn: CharacterPawn = CharacterPawn.new()
 		newPawn.charID = charID
@@ -62,9 +65,14 @@ func loadData(_data):
 		
 		var interaction = GlobalRegistry.createInteraction(interactionID)
 		if(interaction == null):
+			Log.printerr("Unable to load interaction with the id "+str(interactionID)+" because it's not registered.")
+			continue
+		interaction.loadData(SAVE.loadVar(interactionEntry, "data", {}))
+		
+		if(interaction.hasMissingCharacters()):
+			Log.printerr("Unable to load interaction with the id "+str(interactionID)+" because it has missing characters.")
 			continue
 		interactions.append(interaction)
-		interaction.loadData(SAVE.loadVar(interactionEntry, "data", {}))
 
 		for pawnRole in interaction.involvedPawns:
 			var pawn = getPawn(interaction.involvedPawns[pawnRole])
@@ -602,12 +610,12 @@ func updatePCLocation():
 	var latestPCLoc:String = GM.pc.getLocation()
 	pawn.setLocation(latestPCLoc)
 
-func getAllUnconsciousPawns() -> Array:
+func getAllUnconsciousPawns() -> Array: # The ones that can be saved
 	var allUnconInteractions:Array = getInteractionsOfType("Unconscious")
 	
 	var result:Array = []
 	for interaction in allUnconInteractions:
-		if(interaction.getPawnCount() != 1):
+		if(!interaction.canNurseSave()):
 			continue
 		result.append(interaction.getRolePawn("main"))
 	return result

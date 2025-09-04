@@ -29,8 +29,10 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 		if(fightResult["won"]):
 			setState("starter_won", "starter")
 			onStarterWin()
+			sendSocialEvent("starter", "reacter", SocialEventType.LostFight)
 		else:
 			setState("reacter_won", "reacter")
+			sendSocialEvent("reacter", "starter", SocialEventType.LostFight)
 	if(_id == "surrender"):
 		surrendered = true
 		setState("starter_won", "starter")

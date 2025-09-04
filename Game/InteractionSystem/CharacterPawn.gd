@@ -419,7 +419,8 @@ func isHighSecInmate() -> bool:
 	return isInmate() && getChar().getInmateType() == InmateType.HighSec
 
 func isSlaveToPlayer():
-	return getChar().isSlaveToPlayer()
+	var theChar = getChar()
+	return theChar != null && theChar.isSlaveToPlayer()
 
 func getNpcSlavery() -> NpcSlave:
 	return getChar().getNpcSlavery()
@@ -712,3 +713,13 @@ func getPawnTypeID() -> String:
 
 func getPawnType():
 	return GlobalRegistry.getPawnType(getPawnTypeID())
+
+func getPawnRelationshipTextAndColor() -> Array:
+	var special:SpecialRelationshipBase = GM.main.RS.getSpecialRelationship(charID)
+	if(special):
+		return [special.getMapTag(), special.getCategoryColor()]
+	
+	return ["", Color.white]
+
+func getSpecialRelationship() -> SpecialRelationshipBase:
+	return GM.main.RS.getSpecialRelationship(charID)

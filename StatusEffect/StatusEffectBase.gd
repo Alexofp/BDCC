@@ -128,3 +128,6 @@ func onSexEvent(_event:SexEvent):
 
 func onSexEnded(_contex = {}):
 	pass
+
+func isDrugEffect() -> bool:
+	return false

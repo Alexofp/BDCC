@@ -374,7 +374,8 @@ func saveData():
 			"data": bodyparts[slot].saveData(),
 		}
 	
-	data["statusEffects"] = saveStatusEffectsData()
+	if(!statusEffects.empty()):
+		data["statusEffects"] = saveStatusEffectsData()
 	data["inventory"] = inventory.saveData()
 	data["skills"] = skillsHolder.saveData()
 	data["lustInterests"] = lustInterests.saveData()
@@ -382,8 +383,10 @@ func saveData():
 		data["menstrualCycle"] = menstrualCycle.saveData()
 	data["bodyFluids"] = bodyFluids.saveData()
 
-	data["timedBuffs"] = saveBuffsData(timedBuffs)
-	data["timedBuffsTurns"] = saveBuffsData(timedBuffsTurns)
+	if(!timedBuffs.empty()):
+		data["timedBuffs"] = saveBuffsData(timedBuffs)
+	if(!timedBuffsTurns.empty()):
+		data["timedBuffsTurns"] = saveBuffsData(timedBuffsTurns)
 	
 	
 	data["lastUpdatedDay"] = lastUpdatedDay
@@ -408,7 +411,8 @@ func saveData():
 		data["extraSettings"] = extraSettings.saveData()
 	
 	if(tfHolder != null):
-		data["tfHolder"] = tfHolder.saveData()
+		if(tfHolder.shouldSaveData()):
+			data["tfHolder"] = tfHolder.saveData()
 	
 	return data
 
@@ -487,7 +491,7 @@ func loadData(data):
 		var id = SAVE.loadVar(loadedBodyparts[slot], "id", "errorbad")
 		var bodypart = GlobalRegistry.createBodypart(id)
 		if(bodypart == null):
-			var replacementID = BodypartSlot.findReplacement(slot, id)
+			var replacementID = BodypartSlot.findReplacement(slot, id, getSpecies(), getGender())
 			if(replacementID == null || replacementID == ""):
 				Log.printerr("Couldn't find an replacement bodypart for slot "+str(slot))
 				continue
@@ -497,7 +501,11 @@ func loadData(data):
 		bodypart.loadData(SAVE.loadVar(loadedBodyparts[slot], "data", {}))
 	checkSkins(true)
 	
-	loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
+	if(data.has("statusEffects")):
+		loadStatusEffectsData(SAVE.loadVar(data, "statusEffects", {}))
+	else:
+		for effectID in statusEffects.keys():
+			removeEffect(effectID)
 	inventory.loadDataNPC(SAVE.loadVar(data, "inventory", {}), self)
 	skillsHolder.loadData(SAVE.loadVar(data, "skills", {}))
 	lustInterests.loadData(SAVE.loadVar(data, "lustInterests", {}))
@@ -506,8 +514,14 @@ func loadData(data):
 	if(menstrualCycle != null && data.has("menstrualCycle")):
 		menstrualCycle.loadData(SAVE.loadVar(data, "menstrualCycle", {}))
 
-	timedBuffs = loadBuffsData(SAVE.loadVar(data, "timedBuffs", []))
-	timedBuffsTurns = loadBuffsData(SAVE.loadVar(data, "timedBuffsTurns", []))
+	if(data.has("timedBuffs")):
+		timedBuffs = loadBuffsData(SAVE.loadVar(data, "timedBuffs", []))
+	else:
+		timedBuffs = []
+	if(data.has("timedBuffsTurns")):
+		timedBuffsTurns = loadBuffsData(SAVE.loadVar(data, "timedBuffsTurns", []))
+	else:
+		timedBuffsTurns = []
 	
 	lastUpdatedDay = SAVE.loadVar(data, "lastUpdatedDay", -1)
 	lastUpdatedSecond = SAVE.loadVar(data, "lastUpdatedSecond", -1)
@@ -628,8 +642,11 @@ func loadFromDatapackCharacter(_datapack:Datapack, _datapackChar:DatapackCharact
 	npcFetishes = _datapackChar.fetishes.duplicate()
 	fetishHolder.clear()
 	for fetishID in npcFetishes:
-		if(npcFetishes[fetishID] != FetishInterest.Neutral):
-			fetishHolder.setFetish(fetishID, npcFetishes[fetishID])
+		var theVal = npcFetishes[fetishID]
+		if(theVal is String):
+			theVal = FetishInterest.textToNumber(theVal)
+		if(theVal != FetishInterest.Neutral):
+			fetishHolder.setFetish(fetishID, theVal)
 	
 	npcLustInterests = _datapackChar.lustInterests.duplicate()
 	lustInterests.clear()
@@ -646,7 +663,7 @@ func loadFromDatapackCharacter(_datapack:Datapack, _datapackChar:DatapackCharact
 		var id = SAVE.loadVar(loadedBodyparts[slot], "id", "errorbad")
 		var bodypart = GlobalRegistry.createBodypart(id)
 		if(bodypart == null):
-			var replacementID = BodypartSlot.findReplacement(slot, id)
+			var replacementID = BodypartSlot.findReplacement(slot, id, getSpecies(), getGender())
 			if(replacementID == null || replacementID == ""):
 				Log.printerr("Couldn't find an replacement bodypart for slot "+str(slot))
 				continue
@@ -777,3 +794,20 @@ func getTFHolder():
 
 func canApplySmartLocks() -> bool:
 	return !temporaryCharacter
+
+func doWound(_who = "pc") -> bool:
+	addEffect(StatusEffect.Wounded, [1])
+	return true
+
+func doPainfullyStretchHole(_bodypart, _who = "pc") -> bool:
+	if(_bodypart == BodypartSlot.Vagina && hasBodypart(_bodypart)):
+		if(hasEffect(StatusEffect.LubedUp)):
+			return false
+		addEffect(StatusEffect.StretchedPainfullyPussy, [1])
+		return true
+	elif(_bodypart == BodypartSlot.Anus && hasBodypart(_bodypart)):
+		if(hasEffect(StatusEffect.LubedUp)):
+			return false
+		addEffect(StatusEffect.StretchedPainfullyAnus, [1])
+		return true
+	return false

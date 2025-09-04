@@ -160,7 +160,7 @@ func _run():
 
 			saynn("That means there are.. two of Rahi? Or that Rahi shares a body with someone else.. Just thinking about it.. makes you sad too. So you try to cheer the kitty up by pulling her towards you and leaving a little kiss on her cheek.")
 
-			saynn("[say=pc]Let's just.. put that away. I don't wanna make you talk about something that would hurt your mentally, kitty. You won't hear that question again.[/say]")
+			saynn("[say=pc]Let's just.. put that away. I don't wanna make you talk about something that would hurt you mentally, kitty. You won't hear that question again.[/say]")
 
 			saynn("You can hear subtle purring after the kiss, the corners of her mouth raised slightly.")
 

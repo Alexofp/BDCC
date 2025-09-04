@@ -2,6 +2,10 @@ extends FetishBase
 
 func _init():
 	id = Fetish.FeetplayGiving
+	dynamicChangesPersonalityAffectors = {
+		PersonalityStat.Subby: -0.25,
+		PersonalityStat.Mean: 0.2,
+	}
 
 func getVisibleName():
 	return "Feetplay (Dom)"

@@ -33,11 +33,18 @@ func generateFor(_npc, _isSlaveLevelup, _difficulty = 1.0):
 	needAmount = scaledRangeWithDifficulty(50, 100, _difficulty)
 
 func onSexEvent(_npc, _event:SexEvent):
-	if(_event.getType() == SexEvent.HoleCreampied || _event.getType() == SexEvent.StraponCreampied || _event.getType() == SexEvent.HoleSpitted):
+	if(_event.getType() == SexEvent.HoleCreampied || _event.getType() == SexEvent.StraponCreampied || _event.getType() == SexEvent.HoleSpitted || _event.getType() == SexEvent.SwallowFluid):
 		if(_event.getTargetChar() == _npc):
-			if(_event.getField("hole", BodypartSlot.Head) in [BodypartSlot.Head]):
-				advanceTask(_event.getField("loadSize", 0))
-				return true
+			if(_event.getType() == SexEvent.SwallowFluid):
+				var fluidID:String = _event.getField("fluidID", "Cum")
+				var fluidObj:FluidBase = GlobalRegistry.getFluid(fluidID)
+				if(fluidObj && fluidObj.canImpregnate()):
+					advanceTask(_event.getField("loadSize", 0))
+					return true
+			else:
+				if(_event.getField("hole", BodypartSlot.Head) in [BodypartSlot.Head]):
+					advanceTask(_event.getField("loadSize", 0))
+					return true
 	return false
 
 func getTaskString():

@@ -40,7 +40,7 @@ func getCheckTagsSub() -> Array:
 func startActivity(_args):
 	addText("{dom.You} {dom.youVerb('lie')} down and {dom.youVerb('interlock')} legs with {sub.you}, ready to start grinding "+RNG.pick(["pussies", "pussy slits", "kitties", "clits"])+" against each other"+getThroughClothingText(DOM_0, BodypartSlot.Vagina)+"!")
 	
-	stimulate(DOM_0, S_VAGINA, SUB_0, S_VAGINA, I_TEASE, Fetish.Tribadism)
+	stimulateTribadism(DOM_0, SUB_0, I_TEASE)
 	
 	#affectSub(subInfo.fetishScore({Fetish.Tribadism: 1.0}), 0.1, -0.1, -0.01)
 	#affectDom(domInfo.fetishScore({Fetish.Tribadism: 1.0}), 0.1, -0.03)
@@ -53,7 +53,7 @@ func grinding_processTurn():
 		"{dom.You} "+RNG.pick(["dry {dom.youVerb('hump')}", "dry {dom.youVerb('fuck')}"])+" {sub.you}, stimulating each others "+RNG.pick(["pussies", "slits", "kitties"])+".",
 	])
 	
-	stimulate(DOM_0, S_VAGINA, SUB_0, S_VAGINA, I_NORMAL, Fetish.Tribadism)
+	stimulateTribadism(DOM_0, SUB_0, I_NORMAL)
 #
 #		affectSub(subInfo.fetishScore({Fetish.Tribadism: 1.0}), 0.1, -0.1, -0.01)
 #		affectDom(domInfo.fetishScore({Fetish.Tribadism: 1.0}), 0.1, -0.03)
@@ -128,7 +128,7 @@ func init_doAction(_indx:int, _action:String, _actionDict:Dictionary):
 		addTextPick([
 			"{dom.You} began grinding "+RNG.pick(["pussies", "kitties", "vulvae"])+" together with {sub.you}, stimulating each other's clits"+getThroughClothingText(DOM_0, BodypartSlot.Vagina)+"!",
 		])
-		stimulate(DOM_0, S_VAGINA, SUB_0, S_VAGINA, I_TEASE, Fetish.Tribadism)
+		stimulateTribadism(DOM_0, SUB_0, I_TEASE)
 
 func grinding_getActions(_indx:int):
 	if(_indx == DOM_0):
@@ -158,6 +158,7 @@ func grinding_doAction(_indx:int, _action:String, _actionDict:Dictionary):
 		if(doCheckDoubleOrgasm()):
 			satisfyGoals()
 			return
+		fetishAffect(DOM_0, Fetish.Tribadism, 3.0)
 		
 		cumAmount += 1
 		if(cumAmount >= 2):
@@ -173,6 +174,7 @@ func grinding_doAction(_indx:int, _action:String, _actionDict:Dictionary):
 		if(doCheckDoubleOrgasm()):
 			satisfyGoals()
 			return
+		fetishAffect(SUB_0, Fetish.Tribadism, 3.0)
 		
 		cumAmount += 1
 		if(cumAmount >= 2):
@@ -195,6 +197,8 @@ func doCheckDoubleOrgasm():
 			addText("[b]Double orgasm![/b]")
 			addGenericOrgasmText(DOM_0)
 			addGenericOrgasmText(SUB_0)
+			fetishAffect(DOM_0, Fetish.Tribadism, 3.0)
+			fetishAffect(SUB_0, Fetish.Tribadism, 3.0)
 			return true
 	return false
 	

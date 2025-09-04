@@ -17,6 +17,8 @@ const modOrderPath = "user://modOrder.json"
 const pckversionPath = "user://bdccpckversion.txt"
 var foundBDCC = false
 
+var startedPlaying:bool = false # Used to prevent the bug where you sometimes double-tap the play button on mobile
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#randomize()
@@ -151,6 +153,9 @@ func updateModList():
 			newEntry.makeActive()
 
 func _on_WithModsButton_pressed():
+	if(startedPlaying):
+		return
+	startedPlaying = true
 	saveOrderIntoFile(currentModOrder)
 	
 	GlobalRegistry.loadModOrder(currentModOrder)
@@ -158,6 +163,9 @@ func _on_WithModsButton_pressed():
 	var _ok = get_tree().change_scene("res://UI/LoadingScreen.tscn")#"res://UI/MainMenu/MainMenu.tscn"
 
 func _on_NoModsButton_pressed():
+	if(startedPlaying):
+		return
+	startedPlaying = true
 	saveOrderIntoFile(currentModOrder)
 	
 	#GlobalRegistry.loadModOrder(currentModOrder)

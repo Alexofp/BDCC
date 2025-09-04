@@ -11,6 +11,15 @@ var savedCharacterID
 var temporaryState = {}
 var exposedBodyparts = []
 var skinData = {}
+var writingsData:Dictionary = {
+#	BodyWritingsZone.ThighLeft: [
+#		["Fuck me", false],
+#		["Make me cum", false],
+#	],
+#	BodyWritingsZone.ThighRight: [
+#		["Free use", false],
+#	],
+} # {zone = [["writing1", isBold], ["writing2", isBold2]]}
 
 var armsCuffed = false
 var armsPuppy = false
@@ -52,6 +61,9 @@ onready var breastsJiggleBone = $DollSkeleton/BreastsJiggleBone
 onready var bellyJiggleBone = $DollSkeleton/BellyJiggleBone
 onready var buttJiggleBone = $DollSkeleton/ButtJiggleBone
 
+onready var random_leak_timer = $"%RandomLeakTimer"
+
+
 func getDollSkeleton():
 	return $DollSkeleton
 
@@ -68,7 +80,8 @@ func _ready():
 	
 	if(addTestBody):
 		testBody()
-	$RandomLeakTimer.start(RNG.randf_range(3, 20))
+	if(random_leak_timer):
+		random_leak_timer.start(RNG.randf_range(3, 20))
 	
 	if(GM.main != null && is_instance_valid(GM.main)):
 		var _ok = GM.main.connect("saveLoadingFinished", self, "reconnect")
@@ -706,7 +719,7 @@ func _on_RandomLeakTimer_timeout():
 	if(anusLeaking):
 		waitTime -= 5.0
 	
-	$RandomLeakTimer.start(RNG.randf_range(waitTime * 0.5, waitTime * 1.5))
+	random_leak_timer.start(RNG.randf_range(waitTime * 0.5, waitTime * 1.5))
 
 func setCockTemporaryHard():
 	var currentCockState = getFinalState("cock")

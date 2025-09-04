@@ -58,10 +58,10 @@ func loadData(_data):
 	stacks = SAVE.loadVar(_data, "stacks", 1)
 
 func getBuffs():
-	if(stacks > 5):
+	if(stacks > 1):
 		return [
 			buff(Buff.AmbientPainBuff, [stacks*5]),
-			buff(Buff.MaxStaminaBuff, [(stacks-5)*-5]),
+			buff(Buff.MaxStaminaBuff, [stacks*(-5)]),
 		]
 	
 	return [

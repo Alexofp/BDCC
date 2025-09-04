@@ -52,7 +52,8 @@ func onBlockMouseExited():
 func clearBattleEffects():
 	for b in battleEffects:
 		flexContainer.remove_child(b)
-		b.queue_free()
+		if(b):
+			b.queue_free()
 	battleEffects = []
 
 func clearStatusEffects():

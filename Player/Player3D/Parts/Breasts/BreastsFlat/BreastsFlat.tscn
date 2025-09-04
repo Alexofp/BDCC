@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Breasts/BreastsFlat/breastsflat.png" type="Texture" id=2]
 [ext_resource path="res://Player/Player3D/Parts/AttachmentProxy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Player/Player3D/Parts/MeshWithPattern.gd" type="Script" id=4]
+[ext_resource path="res://Player/Player3D/WritingsHandler/WritingZoneInfoNode.gd" type="Script" id=5]
 
 [sub_resource type="SpatialMaterial" id=1]
 resource_name = "breastsflat.png"
@@ -118,6 +119,16 @@ script = ExtResource( 4 )
 pattern_start = Vector2( 0.219, 0.54 )
 pattern_size = Vector2( 0.25, 0.5 )
 bodypartSlot = "breasts"
+supportsWritings = true
+
+[node name="WritingZoneInfoNode" type="Node" parent="breastsflatpng" index="0"]
+script = ExtResource( 5 )
+zone = 9
+pos = Vector2( 22, 87 )
+rot = -80.0
+scale = 0.8
+squish = Vector2( 1, 0.7 )
+maxWritings = 1
 
 [node name="AttachmentProxy" parent="." index="1" instance=ExtResource( 3 )]
 transform = Transform( 0.974702, 0.223505, 0, -0.223505, 0.974702, 0, 0, 0, 1, -0.60085, 5.77395, 0.043 )

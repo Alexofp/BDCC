@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/World/WorldEntity.gd" type="Script" id=1]
+[ext_resource path="res://Images/WorldPawns/fem.png" type="Texture" id=4]
+
+[node name="WorldEntity" type="Node2D"]
+z_index = 4
+script = ExtResource( 1 )
+
+[node name="Icon" type="Sprite" parent="."]
+scale = Vector2( 0.282, 0.282 )
+texture = ExtResource( 4 )
+
+[node name="MoveTween" type="Tween" parent="."]

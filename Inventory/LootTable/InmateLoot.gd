@@ -14,6 +14,8 @@ func _init():
 		[2, ["plainBriefs"]],
 		[2, ["plainPanties"]],
 		[2, ["plainUndershirt"]],
+		[1, [["Soap", 1, 1]]],
+		[3, [["PermanentMarker", 1, 1]]],
 	]
 	minCredits = 1
 	maxCredits = 4

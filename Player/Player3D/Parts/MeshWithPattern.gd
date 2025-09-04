@@ -16,6 +16,11 @@ var defaultOverlay = preload("res://Player/Player3D/Skins/defaultoverlay.png")
 
 var materialWithSkin = preload("res://Player/Player3D/Skins/MaterialForPartWithSkin.tres")
 
+export(bool) var supportsWritings = false
+var writingsHandler
+var writingZoneInfos:Dictionary = {}
+var albedoTextureSize:Vector2
+
 func getPart():
 	if(partRef == null):
 		return null
@@ -31,12 +36,14 @@ func _ready():
 	if(!OPTIONS.shouldUseAdvancedShaders()):
 		return
 	
-	var albedoTexture
+	var albedoTexture:Texture
 	if(customAlbedo != null):
 		albedoTexture = customAlbedo
 	else:
 		var current_material = get_surface_material(0)
 		albedoTexture = current_material.albedo_texture
+	if(albedoTexture):
+		albedoTextureSize = albedoTexture.get_size()
 	
 	
 	fancyMaterial = materialWithSkin.duplicate()
@@ -53,10 +60,21 @@ func _ready():
 		fancyMaterial.set_shader_param("texture_customOverlay", customOverlay)
 	fancyMaterial.set_shader_param("random_shift", RNG.randf_range(0.0, 1000.0))
 	set_surface_material(0, fancyMaterial)
+	
+	if(supportsWritings && OPTIONS.isVisibleBodywritingsEnabled()):
+		for child in get_children():
+			if(child is WritingZoneInfoNode):
+				writingZoneInfos[child.zone] = child
+		
+		writingsHandler = preload("res://Player/Player3D/WritingsHandler/WritingsHandler.tscn").instance()
+		add_child(writingsHandler)
+		writingsHandler.setData(self)
 
 func updateMaterial():
 	if(!OPTIONS.shouldUseAdvancedShaders()):
 		return
+	if(writingsHandler):
+		writingsHandler.triggerUpdate()
 	
 	var theDoll = getDoll()
 	if(theDoll != null):
@@ -105,3 +123,7 @@ func updateMaterial():
 			else:
 				fancyMaterial.set_shader_param("pattern_blue_color", Color.white)
 			#print(skinData)
+
+func updateFacing():
+	if(writingsHandler):
+		writingsHandler.updateFacing()

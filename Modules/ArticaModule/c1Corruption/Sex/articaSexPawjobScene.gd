@@ -94,7 +94,7 @@ func _run():
 
 		saynn("[say=pc]Nh.. not bad.[/say]")
 
-		saynn("You sit still and let Artica do all the work, her both paws are now gently caressing you, sliding up and down along your slick shaft, stroking it at a slow.. but very pleasurable.. pace. Her eyes are fully focussed on your {pc.penis}, Artica bites her lip and fully invests herself into giving you the best possible pawjob..")
+		saynn("You sit still and let Artica do all the work, both of her paws are now gently caressing you, sliding up and down along your slick shaft, stroking it at a slow.. but very pleasurable.. pace. Her eyes are fully focussed on your {pc.penis}, Artica bites her lip and fully invests herself into giving you the best possible pawjob..")
 
 		addButton("Continue", "See what happens next", "receive_pawjob_cum")
 	if(state == "receive_pawjob_cum"):

@@ -2,6 +2,9 @@ extends FetishBase
 
 func _init():
 	id = Fetish.Lactation
+	dynamicChangesPersonalityAffectors = {
+		PersonalityStat.Subby: 0.2,
+	}
 
 func getVisibleName():
 	return "Lactation"

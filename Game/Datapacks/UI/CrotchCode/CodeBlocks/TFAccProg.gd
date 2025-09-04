@@ -27,7 +27,7 @@ func execute(_contex:CodeContex):
 	if(_contex.hadAnError()):
 		return false
 	if(!isNumber(tfName)):
-		throwError(_contex, "Aceleration ammount must a number, got "+str(tfName)+" instead")
+		throwError(_contex, "Acceleration amount must a number, got "+str(tfName)+" instead")
 		return false
 
 	return _contex.accelerateProgressTFs(charName, tfName/100.0)

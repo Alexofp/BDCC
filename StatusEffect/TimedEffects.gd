@@ -53,3 +53,6 @@ func combine(_args = []):
 
 func getBuffs():
 	return character.getTimedBuffs()
+
+func isDrugEffect() -> bool:
+	return true

@@ -55,6 +55,10 @@ func _react(_action: String, _args):
 		return
 		
 	if(_action == "gosleep"):
+		if(GM.ES.triggerReact(Trigger.AboutToSleepInCell)):
+			endScene()
+			return
+		
 		GM.main.startNewDay()
 		GM.pc.afterSleepingInBed()
 		

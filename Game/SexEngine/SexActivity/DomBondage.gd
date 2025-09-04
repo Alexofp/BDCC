@@ -207,6 +207,9 @@ func processTurn():
 		
 		addText(text)
 		
+		fetishAffect(SUB_0, Fetish.Bondage, 3.0)
+		fetishAffect(DOM_0, Fetish.Rigging, 3.0)
+		
 		if(item && item.getRestraintData()):
 			var bondageSexReaction:int = item.getRestraintData().sexReaction
 			if(bondageSexReaction >= 0):
@@ -222,10 +225,13 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 		if(RNG.chance(70.0 - getDomInfo().getAngerScore()*60.0)):
 			progressGoal(SexGoal.TieUp)
 			getDomInfo().addAnger(0.3)
+			fetishUp(SUB_0, Fetish.Bondage, -1.0)
+			fetishUp(DOM_0, Fetish.Rigging, -4.0)
 			endActivity()
 			addText("{sub.You} {sub.youVerb('manage', 'managed')} to resist {dom.yourHis} attempt to force a restraint!")
 			return
 		
+		fetishUp(SUB_0, Fetish.Bondage, -1.0)
 		getDomInfo().addAnger(0.1)
 		addText("{sub.You} {sub.youVerb('try', 'tries')} to resist {dom.yourHis} attempt at restraining {sub.youHim} but {sub.youVerb('fail')}.")
 		reactSub(SexReaction.Resisting, [50])

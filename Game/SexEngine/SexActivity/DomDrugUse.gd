@@ -280,6 +280,13 @@ func processTurn():
 				itemRef = GlobalRegistry.createItem(usedItemID)
 				var thePick:String = RNG.pick(pillVariants)
 				itemRef.setTFID(thePick)
+				
+			if(usedItemID == "TFPill"):
+				fetishAffect(SUB_0, Fetish.TFReceiving, 10.0)
+				fetishAffect(DOM_0, Fetish.TFGiving, 10.0)
+			else:
+				fetishAffect(SUB_0, Fetish.DrugUse, 3.0)
+				fetishAffect(DOM_0, Fetish.DrugUse, 3.0)
 			
 			var pillResultText = ""
 			var result = itemRef.useInSex(getSub())
@@ -317,6 +324,11 @@ func processTurn():
 			var result = itemRef.useInSex(getDom())
 			if(result != null && result.has("text") && result["text"]!=""):
 				pillResultText = " "+result["text"]
+			
+			if(usedItemID == "TFPill"):
+				fetishAffect(DOM_0, Fetish.TFGiving, 5.0)
+			else:
+				fetishAffect(DOM_0, Fetish.DrugUse, 2.0)
 			
 			var text = RNG.pick([
 				"{dom.You} {dom.youVerb('swallow')} "+pcCanSeeText(drugInfo["usedName"])+"!"+pillResultText,
@@ -378,11 +390,13 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 				failGoal(drugInfo["sexgoal"])
 			addText("{sub.You} {sub.youVerb('manage', 'managed')} to spit the pill out!")
 			reactSub(SexReaction.Resisting, [50])
+			fetishUp(SUB_0, Fetish.DrugUse, -10.0)
 			return
 		
 		getDomInfo().addAnger(0.1)
 		addText("{sub.You} {sub.youVerb('try', 'tries')} to spit the pill out but {sub.youVerb('fail')}.")
-	
+		fetishUp(SUB_0, Fetish.DrugUse, -20.0)
+		
 	if(_id == "noteatit"):
 		endActivity()
 		
@@ -402,9 +416,9 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		if(drugInfo.has("sexgoal")):
 			satisfyGoal(drugInfo["sexgoal"])
 		
-		if(getDom().isPlayer() && _id == "eatit"):
-			getDom().getInventory().removeXOfOrDestroy(usedItemID, 1)
-		elif(_id == "eatit"):
+		#if(getDom().isPlayer() && _id == "eatit"):
+		#	getDom().getInventory().removeXOfOrDestroy(usedItemID, 1)
+		if(!getDom().isPlayer() && _id == "eatit"):
 			getDomInfo().increaseMemory("USEDDRUG_"+str(usedItemID))
 		
 		var itemRef = GlobalRegistry.getItemRef(usedItemID) if usedUniqueItemID == "" else getDom().getInventory().getItemByUniqueID(usedUniqueItemID)
@@ -414,6 +428,9 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			itemRef = GlobalRegistry.createItem(usedItemID)
 			var thePick:String = RNG.pick(pillVariants)
 			itemRef.setTFID(thePick)
+			fetishUp(SUB_0, Fetish.TFReceiving, 10.0)
+		else:
+			fetishUp(SUB_0, Fetish.DrugUse, 5.0)
 		
 		var pillResultText = ""
 		var result = itemRef.useInSex(getSub())
@@ -431,6 +448,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			getDomInfo().addAnger(0.3)
 			endActivity()
 			addText("{sub.You} {sub.youVerb('manage', 'managed')} to make {dom.youHim} drop the pill, losing it!")
+			fetishUp(SUB_0, Fetish.DrugUse, -10.0)
 			return
 		
 		getDomInfo().addAnger(0.1)

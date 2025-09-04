@@ -78,6 +78,7 @@ func getForms() -> Dictionary:
 		"ProstitutionScam": form("You know what.. I decided to raise the price. 5 more credits please.", {main=CHAR, target=CHAR}, "main", "target"), # Whore is trying to scam the client and get more credits
 		
 		"TalkChatWhat": form("What do you wanna chat about?", {main=CHAR, target=CHAR}, "main", "target"),
+		"TalkStartNemesis": form("The fuck do you want?", {main=CHAR, target=CHAR}, "main", "target"),
 		"TalkChatCancel": form("Never mind, I don't wanna chat anymore.", {main=CHAR, target=CHAR}, "main", "target"),
 		"TalkChatLeaving": form("Whatever then, I'm leaving.", {main=CHAR, target=CHAR}, "main", "target"),
 		"TalkChatAgree": form("I agree.", {main=CHAR, target=CHAR}, "main", "target"),

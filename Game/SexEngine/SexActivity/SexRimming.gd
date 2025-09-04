@@ -68,7 +68,7 @@ func rimming_processTurn():
 	#	getDomInfo().stimulateArousalZone(0.1, BodypartSlot.Anus, 1.0)
 	#else:
 	#	getDomInfo().stimulateArousalZone(0.05, BodypartSlot.Anus, 1.0)
-	stimulate(DOM_0, S_ANUS, SUB_0, S_MOUTH, I_NORMAL, Fetish.RimmingReceiving)
+	stimulateLick(SUB_0, DOM_0, S_ANUS, I_NORMAL)
 	
 	if(getDom().hasVagina() && RNG.chance(20)):
 		addTextPick([
@@ -140,8 +140,10 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		getDom().cumOnFloor()
 		getDomInfo().cum()
 		state = ""
-		sendSexEvent(SexEvent.UniqueOrgasm, SUB_0, DOM_0, {orgasmType="rim"})
+		sendSexEvent(SexEvent.UniqueOrgasm, SUB_0, DOM_0, {orgasmType=UniqueOrgasm.Rim})
 		addGenericOrgasmText(DOM_0)
+		fetishAffect(DOM_0, Fetish.RimmingReceiving, 3.0)
+		fetishAffect(SUB_0, Fetish.RimmingGiving, 3.0)
 		return
 
 	if(_id == "pullaway"):
@@ -176,7 +178,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		getDomInfo().addAnger(-0.03)
 		addTextPick([
 			"{sub.You} willingly {sub.youVerb('thrust')} {sub.yourHis} tongue deeper into {dom.yourHis} "+str(getRandomAnusWord())+".",
-			"{sub.You} willingly {sub.youVerb('slide')} {sub.yourHis} past {dom.yourHis} anal ring and {sub.youVerb('lap')} at the inner walls.",
+			"{sub.You} willingly {sub.youVerb('slide')} {sub.yourHis} tongue past {dom.yourHis} anal ring and {sub.youVerb('lap')} at the inner walls.",
 			"{sub.You} eagerly {sub.youVerb('eat')} {dom.yourHis} "+str(getRandomAnusWord())+" out."
 		])
 		return

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Head/FelineHead/cathead.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Player/Player3D/Parts/Head/FennecHead/fennecheadballgag.png" type="Texture" id=11]
 [ext_resource path="res://Player/Player3D/Parts/Head/FennecHead/fennecheadringgag_overlay.png" type="Texture" id=12]
 [ext_resource path="res://Player/Player3D/Parts/Head/FennecHead/fennechead.png" type="Texture" id=13]
+[ext_resource path="res://Player/Player3D/WritingsHandler/WritingZoneInfoNode.gd" type="Script" id=14]
 
 [sub_resource type="SpatialMaterial" id=1]
 resource_name = "cathead.png"
@@ -252,6 +253,32 @@ material/0 = SubResource( 16 )
 script = ExtResource( 10 )
 pattern_start = Vector2( 1, 1 )
 bodypartSlot = "head"
+supportsWritings = true
+
+[node name="WritingZoneInfoNode" type="Node" parent="PartStatePicker2/PartState/catheadpng" index="0"]
+script = ExtResource( 14 )
+pos = Vector2( 91, 106 )
+rotSpread = 5.0
+squish = Vector2( 0.7, 1 )
+maxWritings = 1
+
+[node name="WritingZoneInfoNode2" type="Node" parent="PartStatePicker2/PartState/catheadpng" index="1"]
+script = ExtResource( 14 )
+zone = 1
+pos = Vector2( 88, 156 )
+rot = -10.0
+rotSpread = 4.0
+squish = Vector2( 0.7, 1 )
+maxWritings = 1
+
+[node name="WritingZoneInfoNode4" type="Node" parent="PartStatePicker2/PartState/catheadpng" index="2"]
+script = ExtResource( 14 )
+zone = 3
+pos = Vector2( 100, 175 )
+rotSpread = 3.0
+scale = 0.7
+squish = Vector2( 0.7, 1 )
+maxWritings = 1
 
 [node name="PartState2" parent="PartStatePicker2" index="1" instance=ExtResource( 4 )]
 visible = false
@@ -266,6 +293,33 @@ script = ExtResource( 10 )
 pattern_start = Vector2( 1, 1 )
 bodypartSlot = "head"
 customOverlay = ExtResource( 6 )
+supportsWritings = true
+
+[node name="WritingZoneInfoNode" type="Node" parent="PartStatePicker2/PartState2/catheadpng" index="0"]
+script = ExtResource( 14 )
+pos = Vector2( 91, 106 )
+rotSpread = 5.0
+squish = Vector2( 0.7, 1 )
+maxWritings = 1
+
+[node name="WritingZoneInfoNode2" type="Node" parent="PartStatePicker2/PartState2/catheadpng" index="1"]
+script = ExtResource( 14 )
+zone = 1
+pos = Vector2( 88, 156 )
+rot = -10.0
+rotSpread = 4.0
+squish = Vector2( 0.7, 1 )
+maxWritings = 1
+
+[node name="WritingZoneInfoNode4" type="Node" parent="PartStatePicker2/PartState2/catheadpng" index="2"]
+script = ExtResource( 14 )
+zone = 3
+pos = Vector2( 104, 183 )
+rot = -20.0
+rotSpread = 3.0
+scale = 0.7
+squish = Vector2( 0.7, 1 )
+maxWritings = 1
 
 [node name="PartState3" parent="PartStatePicker2" index="2" instance=ExtResource( 4 )]
 visible = false
@@ -280,6 +334,33 @@ script = ExtResource( 10 )
 pattern_start = Vector2( 1, 1 )
 bodypartSlot = "head"
 customOverlay = ExtResource( 12 )
+supportsWritings = true
+
+[node name="WritingZoneInfoNode" type="Node" parent="PartStatePicker2/PartState3/catheadpng" index="0"]
+script = ExtResource( 14 )
+pos = Vector2( 91, 106 )
+rotSpread = 5.0
+squish = Vector2( 0.7, 1 )
+maxWritings = 1
+
+[node name="WritingZoneInfoNode2" type="Node" parent="PartStatePicker2/PartState3/catheadpng" index="1"]
+script = ExtResource( 14 )
+zone = 1
+pos = Vector2( 88, 156 )
+rot = -10.0
+rotSpread = 4.0
+squish = Vector2( 0.7, 1 )
+maxWritings = 1
+
+[node name="WritingZoneInfoNode4" type="Node" parent="PartStatePicker2/PartState3/catheadpng" index="2"]
+script = ExtResource( 14 )
+zone = 3
+pos = Vector2( 104, 183 )
+rot = -20.0
+rotSpread = 3.0
+scale = 0.7
+squish = Vector2( 0.7, 1 )
+maxWritings = 1
 
 [node name="PartState4" parent="PartStatePicker2" index="3" instance=ExtResource( 4 )]
 visible = false
@@ -293,6 +374,33 @@ material/0 = SubResource( 19 )
 script = ExtResource( 10 )
 pattern_start = Vector2( 1, 1 )
 bodypartSlot = "head"
+supportsWritings = true
+
+[node name="WritingZoneInfoNode" type="Node" parent="PartStatePicker2/PartState4/catheadpng" index="0"]
+script = ExtResource( 14 )
+pos = Vector2( 91, 106 )
+rotSpread = 5.0
+squish = Vector2( 0.7, 1 )
+maxWritings = 1
+
+[node name="WritingZoneInfoNode2" type="Node" parent="PartStatePicker2/PartState4/catheadpng" index="1"]
+script = ExtResource( 14 )
+zone = 1
+pos = Vector2( 88, 156 )
+rot = -10.0
+rotSpread = 4.0
+squish = Vector2( 0.7, 1 )
+maxWritings = 1
+
+[node name="WritingZoneInfoNode4" type="Node" parent="PartStatePicker2/PartState4/catheadpng" index="2"]
+script = ExtResource( 14 )
+zone = 3
+pos = Vector2( 104, 183 )
+rot = -20.0
+rotSpread = 3.0
+scale = 0.7
+squish = Vector2( 0.7, 1 )
+maxWritings = 1
 
 [node name="PartStatePicker" parent="." index="1" instance=ExtResource( 5 )]
 state = "muzzle"

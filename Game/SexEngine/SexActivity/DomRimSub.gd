@@ -43,7 +43,7 @@ func rimming_processTurn():
 	#affectDom(getDomInfo().fetishScore({Fetish.RimmingGiving: 0.5})+0.1, 0.1, 0.0)
 	#affectSub(getSubInfo().fetishScore({Fetish.RimmingReceiving: 1.0})+0.2, 0.1, -0.1, -0.01)
 	#getSubInfo().stimulateArousalZone(0.05, BodypartSlot.Anus, 0.5)
-	stimulate(DOM_0, S_MOUTH, SUB_0, S_ANUS, I_NORMAL, Fetish.RimmingGiving)
+	stimulateLick(DOM_0, SUB_0, S_ANUS, I_NORMAL)
 	addTextPick([
 		"{dom.You} {dom.youVerb('use')} {dom.yourHis} tongue to lap at {sub.yourHis} most intimate spot, delivering a mix of tantalizing licks and arousing kisses.",
 		"{dom.Your} tongue laps at {sub.yourHis} "+str(getRandomAnusWord())+", creating a steady rhythm of pleasure.",
@@ -185,6 +185,8 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		satisfyGoals()
 		state = ""
 		cumGeneric(SUB_0, DOM_0, UniqueOrgasm.Rim)
+		fetishAffect(SUB_0, Fetish.RimmingReceiving, 3.0)
+		fetishAffect(DOM_0, Fetish.RimmingGiving, 3.0)
 		return
 
 func getRandomAnusWord() -> String:

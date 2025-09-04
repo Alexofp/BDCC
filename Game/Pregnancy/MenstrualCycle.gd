@@ -454,3 +454,9 @@ func giveBirth():
 	
 	return result
 
+func cancelPregnancy():
+	impregnatedEggCells.clear()
+	cycleProgress = 1.0
+	noticedVisiblyPregnant = false
+	noticedHeavyIntoPregnancy = false
+	noticedReadyToGiveBirth = false

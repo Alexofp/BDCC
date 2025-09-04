@@ -90,7 +90,7 @@ func sex_processTurn():
 		"{dom.You} {dom.youVerb('slide')} a fleshlight along {sub.your} {sub.penisShort}.",
 		"{dom.You} {dom.youVerb('pleasure')} {sub.your} {sub.penisShort} with a fleshlight.",
 	])
-	stimulate(SUB_0, S_PENIS, getTargetIndx(), targetHole, I_NORMAL, Fetish.VaginalSexGiving if targetHole == S_VAGINA else S_ANUS)
+	stimulateSex(SUB_0, getTargetIndx(), targetHole, I_NORMAL)
 	doProcessFuck(SUB_0, getTargetIndx(), targetHole, " through the portal panties")
 	doProcessFuckExtra(SUB_0, getTargetIndx(), targetHole)
 	if(isReadyToCumHandled(getTargetIndx()) && getTargetIndx() != SUB_0):
@@ -122,10 +122,11 @@ func getActions(_indx:int):
 			for portalNPC in theNpcs:
 				var charName:String = portalNPC.getName()
 				for slot in HOLES_CAN_PORTAL_FUCK:
-					var theHoleName:String = getNameHoleGeneric(slot)
-					addAction("setTarget", 0.0, theHoleName, "Target "+charName+"'s "+theHoleName, {
-						A_CATEGORY: ["Fleshlight Target", charName], A_ARGS: [portalNPC.getID(), slot], A_PRIORITY: 5,
-					})
+					if(charCanUse(portalNPC, slot)):
+						var theHoleName:String = getNameHoleGeneric(slot)
+						addAction("setTarget", 0.0, theHoleName, "Target "+charName+"'s "+theHoleName, {
+							A_CATEGORY: ["Fleshlight Target", charName], A_ARGS: [portalNPC.getID(), slot], A_PRIORITY: 5,
+						})
 		
 			if(isReadyToFuck(SUB_0)):
 				addAction("penetrate", 1.0, "Penetrate", "Try to penetrate that hole with the sub's cock.")

@@ -989,6 +989,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Options/MyProjectSettings.gd"
 }, {
+"base": "InmateGenerator",
+"class": "NakedSlaveGenerator",
+"language": "GDScript",
+"path": "res://Characters/Dynamic/Generator/NakedSlaveGenerator.gd"
+}, {
+"base": "Object",
+"class": "NemesisReason",
+"language": "GDScript",
+"path": "res://Game/InteractionSystem/Relationship/NemesisReason.gd"
+}, {
 "base": "Module",
 "class": "NovaModule",
 "language": "GDScript",
@@ -1143,6 +1153,21 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://Player/Player.gd"
+}, {
+"base": "Reference",
+"class": "PlayerSlaveryBase",
+"language": "GDScript",
+"path": "res://Game/PlayerSlavery/PlayerSlaveryBase.gd"
+}, {
+"base": "Reference",
+"class": "PlayerSlaveryDef",
+"language": "GDScript",
+"path": "res://Game/PlayerSlavery/PlayerSlaveryDef.gd"
+}, {
+"base": "Reference",
+"class": "PlayerSlaveryHolder",
+"language": "GDScript",
+"path": "res://Game/PlayerSlavery/PlayerSlaveryHolder.gd"
 }, {
 "base": "Module",
 "class": "PunishmentsModule",
@@ -1529,6 +1554,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Inventory/SmartLocks/SmartLockBase.gd"
 }, {
+"base": "Object",
+"class": "SocialEventType",
+"language": "GDScript",
+"path": "res://Game/InteractionSystem/Relationship/SocialEventType.gd"
+}, {
+"base": "Reference",
+"class": "SpecialRelationshipBase",
+"language": "GDScript",
+"path": "res://Game/InteractionSystem/Relationship/SpecialRelationshipBase.gd"
+}, {
 "base": "Reference",
 "class": "Species",
 "language": "GDScript",
@@ -1708,6 +1743,16 @@ _global_script_classes=[ {
 "class": "WorldZone",
 "language": "GDScript",
 "path": "res://Game/World/Util/WorldZone.gd"
+}, {
+"base": "Node",
+"class": "WritingZoneInfoNode",
+"language": "GDScript",
+"path": "res://Player/Player3D/WritingsHandler/WritingZoneInfoNode.gd"
+}, {
+"base": "Node",
+"class": "WritingsHandler",
+"language": "GDScript",
+"path": "res://Player/Player3D/WritingsHandler/WritingsHandler.gd"
 } ]
 _global_script_class_icons={
 "AIStrategyBase": "",
@@ -1906,6 +1951,8 @@ _global_script_class_icons={
 "Module": "",
 "MyBoneAttachment": "",
 "MyProjectSettings": "",
+"NakedSlaveGenerator": "",
+"NemesisReason": "",
 "NovaModule": "",
 "NpcBreakTaskBase": "",
 "NpcCon": "",
@@ -1937,6 +1984,9 @@ _global_script_class_icons={
 "PersonalityStat": "",
 "PickupLineDB": "",
 "Player": "",
+"PlayerSlaveryBase": "",
+"PlayerSlaveryDef": "",
+"PlayerSlaveryHolder": "",
 "PunishmentsModule": "",
 "Quest": "",
 "QuestBase": "",
@@ -2014,6 +2064,8 @@ _global_script_class_icons={
 "SlaveTypeBase": "",
 "SmartLock": "",
 "SmartLockBase": "",
+"SocialEventType": "",
+"SpecialRelationshipBase": "",
 "Species": "",
 "SpeciesCompatibility": "",
 "SpeechModifierBase": "",
@@ -2049,7 +2101,9 @@ _global_script_class_icons={
 "WorldHistory": "",
 "WorldHistoryEvent": "",
 "WorldPopulation": "",
-"WorldZone": ""
+"WorldZone": "",
+"WritingZoneInfoNode": "",
+"WritingsHandler": ""
 }
 
 [application]

@@ -98,7 +98,7 @@ func _run():
 		addButton("Do it", "Try to follow your intuition", "do_it")
 
 	if(state == "do_it"):
-		saynn("You look around, that seems to be helpful even with a blindfold. Then you take a fist step and realize that your ‘eyes’ don’t deceive you, the testing table and the walls are exactly where you think they are. You begin walking around the room like you see everything just fine. Although, when you try to read something from up close, the text is just too blurry.")
+		saynn("You look around, that seems to be helpful even with a blindfold. Then you take a first step and realize that your ‘eyes’ don’t deceive you, the testing table and the walls are exactly where you think they are. You begin walking around the room like you see everything just fine. Although, when you try to read something from up close, the text is just too blurry.")
 
 		saynn("You wonder where Eliza is.")
 

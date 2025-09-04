@@ -110,6 +110,7 @@ func giving_offer_do(_id:String, _args:Dictionary, _context:Dictionary):
 		sendSlaveryActivityEvent("main", "slutPaid", {credits=askCreds})
 	if(_id == "deny"):
 		setState("offer_denied", "main")
+		sendSocialEvent("client", "main", SocialEventType.GotRefused)
 	if(_id == "haggle"):
 		setState("meow", "inmate")
 
@@ -142,6 +143,7 @@ func offer_accepted_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "scam"):
 		setState("slut_scam", "client")
 		affectAffection("client", "main", -0.15)
+		sendSocialEvent("main", "client", SocialEventType.GotScammed)
 
 
 func about_to_sex_text():
@@ -212,6 +214,7 @@ func client_demands_credits_do(_id:String, _args:Dictionary, _context:Dictionary
 	if(_id == "refuse"):
 		setState("slut_refused_creds_back", "client")
 		affectAffection("client", "main", -0.2)
+		sendSocialEvent("client", "main", SocialEventType.GotScammed)
 
 
 func client_got_credits_back_text():
@@ -270,8 +273,10 @@ func client_attacked_slut_do(_id:String, _args:Dictionary, _context:Dictionary):
 		
 			setState("client_won", "client")
 			sendSlaveryActivityEvent("main", "slutReturnedCredits", {credits=askCreds})
+			sendSocialEvent("client", "main", SocialEventType.LostFight)
 		else:
 			setState("slut_won", "main")
+			sendSocialEvent("main", "client", SocialEventType.LostFight)
 
 
 func client_won_text():

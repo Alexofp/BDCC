@@ -36,9 +36,9 @@ func _run():
 			saynn("You don't mind meeting new characters.")
 		
 		if(GM.pc.dynamicPersonality):
-			saynn("Your personality can dynamically change after sex.")
+			saynn("Your personality or fetishes can dynamically change after sex.")
 		else:
-			saynn("Your personality will never change after sex.")
+			saynn("Your personality or fetishes will never change after sex.")
 		
 		sayn("Relative chances for the genders of encountered npcs:")
 		for gender in NpcGender.getAll():
@@ -284,9 +284,9 @@ func _run():
 		sayn("Your fetishes:")
 		for fetishID in GlobalRegistry.getFetishes():
 			var fetish = GlobalRegistry.getFetish(fetishID)
-			var fetishInterest = fetishHolder.getFetishInterest(fetishID)
-			var fetishColor = FetishInterest.getColorString(fetishInterest)
-			var fetishInterestText = FetishInterest.getVisibleName(fetishInterest)
+			var fetishValue:float = fetishHolder.getFetish(fetishID)
+			var fetishColor = FetishInterest.getColorString(fetishValue)
+			var fetishInterestText = FetishInterest.getVisibleName(fetishValue)
 			
 			sayn(fetish.getVisibleName()+": "+"[color="+fetishColor+"]"+fetishInterestText+"[/color]")
 			
@@ -296,7 +296,7 @@ func _run():
 		var fetishHolder = GM.pc.getFetishHolder()
 		var fetish = GlobalRegistry.getFetish(pickedFetishToChange)
 		if(fetish != null):
-			saynn("Your current value for '"+fetish.getVisibleName()+"' fetish is "+FetishInterest.getVisibleName(fetishHolder.getFetishInterest(pickedFetishToChange)))
+			saynn("Your current value for '"+fetish.getVisibleName()+"' fetish is "+FetishInterest.getVisibleName(fetishHolder.getFetish(pickedFetishToChange)))
 			
 			saynn("Pick your new value for this fetish")
 			

@@ -82,3 +82,6 @@ const MaternalGlow = "MaternalGlow"
 const TaviWombMark = "TaviWombMark"
 const JackiCumInUrethra = "JackiCumInUrethra"
 const ArticaFullWithPlantEggs = "ArticaFullWithPlantEggs"
+
+# Special effects
+const PSMilkCafeProduction = "PSMilkCafeProduction"

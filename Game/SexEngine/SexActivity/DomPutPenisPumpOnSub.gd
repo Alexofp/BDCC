@@ -100,6 +100,8 @@ func milkingSub_processTurn():
 		"The penis pump pleasures {sub.your} {sub.penis}.",
 		"Pleasure ring of the penis pump strokes {sub.your} {sub.penis}.",
 	])
+	
+	fetishAffect(SUB_0, Fetish.SeedMilking)
 	return
 
 
@@ -156,7 +158,7 @@ func onActivityEnd():
 
 func getOrgasmHandlePriority(_indx:int) -> int:
 	if(_indx == SUB_0):
-		return 3
+		return 2
 	return -1
 
 func saveData():

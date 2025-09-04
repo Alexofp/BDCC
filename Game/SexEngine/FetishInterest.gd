@@ -1,137 +1,121 @@
 extends Object
 class_name FetishInterest
 
-const Hates = "Hates"
-const ReallyDislikes = "ReallyDislikes"
-const Dislikes = "Dislikes"
-const SlightlyDislikes = "SlightlyDislikes"
-const Neutral = "Neutral"
-const SlightlyLikes = "SlightlyLikes"
-const Likes = "Likes"
-const ReallyLikes = "ReallyLikes"
-const Loves = "Loves"
-const MaxPossibleInterestNumber = 4
-const MinPossibleInterestNumber = -4
+const Hates = -1.0
+const ReallyDislikes = -0.75
+const Dislikes = -0.5
+const SlightlyDislikes = -0.25
+const Neutral = 0.0
+const SlightlyLikes = 0.25
+const Likes = 0.5
+const ReallyLikes = 0.75
+const Loves = 1.0
 
-static func getScore(interest):
+enum EnumList {
+	Hates, ReallyDislikes, Dislikes, SlightlyDislikes, Neutral, SlightlyLikes, Likes, ReallyLikes, Loves,
+}
+
+static func textToNumber(interest:String) -> float:
 	match(interest):
-		Hates:
+		"Hates":
 			return -1.0
-		ReallyDislikes:
+		"ReallyDislikes":
 			return -0.75
-		Dislikes:
+		"Dislikes":
 			return -0.5
-		SlightlyDislikes:
+		"SlightlyDislikes":
 			return -0.25
-		Neutral:
+		"Neutral":
 			return 0.0
-		SlightlyLikes:
+		"SlightlyLikes":
 			return 0.25
-		Likes:
+		"Likes":
 			return 0.5
-		ReallyLikes:
+		"ReallyLikes":
 			return 0.75
-		Loves:
+		"Loves":
 			return 1.0
 	return 0.0
-		
+
 static func getAll():
 	return [Hates, ReallyDislikes, Dislikes, SlightlyDislikes, Neutral, SlightlyLikes, Likes, ReallyLikes, Loves]
 
-static func getMaxPossibleInterestNumber():
-	return MaxPossibleInterestNumber
+static func getAllText() -> Array:
+	return ["Hates", "ReallyDislikes", "Dislikes", "SlightlyDislikes", "Neutral", "SlightlyLikes", "Likes", "ReallyLikes", "Loves"]
 
-static func getMinPossibleInterestNumber():
-	return MinPossibleInterestNumber
-
-static func interestToNumber(interest):
-	match(interest):
-		Hates:
-			return -4
-		ReallyDislikes:
-			return -3
-		Dislikes:
-			return -2
-		SlightlyDislikes:
-			return -1
-		Neutral:
-			return 0
-		SlightlyLikes:
-			return 1
-		Likes:
-			return 2
-		ReallyLikes:
-			return 3
-		Loves:
-			return 4
-	return 0
-
-static func numberToInterest(theNumber:int):
-	if(theNumber < -4):
-		return Hates
-	if(theNumber > 4):
-		return Loves
-	
-	match(theNumber):
-		-4:
-			return Hates
-		-3:
-			return ReallyDislikes
-		-2:
-			return Dislikes
-		-1:
-			return SlightlyDislikes
-		0:
-			return Neutral
-		1:
-			return SlightlyLikes
-		2:
-			return Likes
-		3:
-			return ReallyLikes
-		4:
-			return Loves
-	return Neutral
-
-static func getColorString(interest):
-	if(interest == Hates):
+static func getColorString(theValue:float) -> String:
+	if(theValue <= -0.875):
 		return "#FF554C"
-	if(interest == ReallyDislikes):
+	elif(theValue <= -0.625):
 		return "#FF837A"
-	if(interest == Dislikes):
+	elif(theValue <= -0.375):
 		return "#FFB0A0"
-	if(interest == SlightlyDislikes):
+	elif(theValue <= -0.125):
 		return "#FFCED2"
-	if(interest == Neutral):
+	elif(theValue <= 0.125):
 		return "#D5CEFF"
-	if(interest == SlightlyLikes):
+	elif(theValue <= 0.375):
 		return "#FFC9FE"
-	if(interest == Likes):
+	elif(theValue <= 0.625):
 		return "#FFBAF8"
-	if(interest == ReallyLikes):
+	elif(theValue <= 0.875):
 		return "#FF9EE3"
-	if(interest == Loves):
-		return "#FF63E7"
+	return "#FF63E7"
 	
-	return "#FFFFFF"
-	
-static func getVisibleName(interest):
-	if(interest == Hates):
+static func getVisibleName(theValue:float) -> String:
+	if(theValue <= -0.875):
 		return "hates"
-	if(interest == ReallyDislikes):
+	elif(theValue <= -0.625):
 		return "really dislikes"
-	if(interest == Dislikes):
+	elif(theValue <= -0.375):
 		return "dislikes"
-	if(interest == SlightlyDislikes):
+	elif(theValue <= -0.125):
 		return "slightly dislikes"
-	if(interest == Neutral):
+	elif(theValue <= 0.125):
 		return "neutral"
-	if(interest == SlightlyLikes):
+	elif(theValue <= 0.375):
 		return "kinda likes"
-	if(interest == Likes):
+	elif(theValue <= 0.625):
 		return "likes"
-	if(interest == ReallyLikes):
+	elif(theValue <= 0.875):
 		return "really likes"
-	if(interest == Loves):
-		return "loves"
-	return "error:"+str(interest)
+	return "loves"
+
+static func getEnumListValue(theValue:float) -> int:
+	if(theValue <= -0.875):
+		return EnumList.Hates
+	elif(theValue <= -0.625):
+		return EnumList.ReallyDislikes
+	elif(theValue <= -0.375):
+		return EnumList.Dislikes
+	elif(theValue <= -0.125):
+		return EnumList.SlightlyDislikes
+	elif(theValue <= 0.125):
+		return EnumList.Neutral
+	elif(theValue <= 0.375):
+		return EnumList.SlightlyLikes
+	elif(theValue <= 0.625):
+		return EnumList.Likes
+	elif(theValue <= 0.875):
+		return EnumList.ReallyLikes
+	return EnumList.Loves
+
+static func getChangeDesc(theValue:float) -> String:
+	var theColorStr:String = getColorString(theValue)
+	if(theValue <= -0.875):
+		return "now [color="+theColorStr+"]hates[/color]"
+	elif(theValue <= -0.625):
+		return "now [color="+theColorStr+"]really dislikes[/color]"
+	elif(theValue <= -0.375):
+		return "now [color="+theColorStr+"]dislikes[/color]"
+	elif(theValue <= -0.125):
+		return "now [color="+theColorStr+"]slightly dislikes[/color]"
+	elif(theValue <= 0.125):
+		return "is now [color="+theColorStr+"]neutral[/color] towards"
+	elif(theValue <= 0.375):
+		return "now [color="+theColorStr+"]kinda likes[/color]"
+	elif(theValue <= 0.625):
+		return "now [color="+theColorStr+"]likes[/color]"
+	elif(theValue <= 0.875):
+		return "now [color="+theColorStr+"]really likes[/color]"
+	return "now [color="+theColorStr+"]loves[/color]"

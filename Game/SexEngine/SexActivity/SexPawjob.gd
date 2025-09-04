@@ -66,7 +66,7 @@ func processTurn():
 	return
 
 func pawjob_processTurn():
-	stimulate(DOM_0, S_LEGS, SUB_0, S_PENIS, I_NORMAL, Fetish.FeetplayGiving, SPEED_SLOW if !isThrusting else SPEED_MEDIUM)
+	stimulateRubWithFoot(DOM_0, SUB_0, S_PENIS, I_NORMAL, SPEED_SLOW if !isThrusting else SPEED_MEDIUM)
 	if(isThrusting):
 		addTextPick([
 			"{sub.You} {sub.youVerb('thrust')} {sub.yourHis} {sub.penisType} between the {dom.feet}.",
@@ -126,6 +126,8 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		cumOnto(SUB_0, DOM_0, {"generic": true, "uniqueOrgasm": UniqueOrgasm.Feet})
 		state = ""
 		satisfyGoals()
+		fetishAffect(SUB_0, Fetish.FeetplayReceiving, 3.0)
+		fetishAffect(DOM_0, Fetish.FeetplayGiving, 3.0)
 		return
 	if(_id == "subthrust"):
 		isThrusting = true

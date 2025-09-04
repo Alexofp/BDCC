@@ -98,9 +98,6 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 			"{dom.You} {dom.youVerb('punch', 'punches')} {sub.youHim} [b]really hard[/b].",
 		])
 		
-		if(RNG.chance(50)):
-			getSub().doWound(getDomID())
-		
 		if(RNG.chance(33)):
 			var damageText := damageClothes(SUB_0)
 			if(damageText != ""):
@@ -108,6 +105,8 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 		
 		addText(text)
 		react(SexReaction.BeatingUpHard, [100.0, 40.0])
+		if(RNG.chance(50)):
+			doWound(DOM_0, SUB_0)
 
 func saveData():
 	var data = .saveData()

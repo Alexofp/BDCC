@@ -122,6 +122,8 @@ enum {
 	ThreesomeDPSameHole,
 	ThreesomeSpitroast,
 	ThreesomeRideGrind,
+	
+	PainStrongGeneric,
 }
 
 static func getAllStrings():
@@ -246,4 +248,6 @@ static func getAllStrings():
 		"ThreesomeDPSameHole",
 		"ThreesomeSpitroast",
 		"ThreesomeRideGrind",
+		
+		"PainStrongGeneric",
 	]

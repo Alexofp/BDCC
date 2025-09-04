@@ -18,6 +18,13 @@ const HolePenetrated = "HolePenetration"
 # condomBroke = if there was a condom and it broke
 const HoleCreampied = "HoleCreampied"
 
+# Source = Person who made the target swallow
+# Target = Who swallowed
+#data:
+# loadSize = how much
+# fluidID = what was swallowed
+const SwallowFluid = "SwallowFluid"
+
 # Source = Person who spits
 # Target = Who got creampied
 #data:
@@ -74,6 +81,7 @@ const PainInflicted = "PainInflicted"
 #data:
 # zone = Where was the bodywriting added
 # writingID = which bodywriting was added. Get the text with BodyWritings.getWritingText(writingID)
+# isPermanent = is the writing permanent
 const BodyWritingAdded = "BodyWritingAdded"
 
 # Only gets called in sex engine

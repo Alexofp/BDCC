@@ -1,7 +1,7 @@
 extends Object
 class_name BodyWritingsZone
 
-enum {
+enum { # IF YOU ADD ANY, ADD THEM TO WritingZoneInfoNode CLASS TOO
 	Forehead,
 	CheekLeft,
 	CheekRight,
@@ -55,6 +55,33 @@ const zoneVisibleName = {
 	ShinLeft: "left shin",
 	ShinRight: "right shin",
 }
+const ALL = [
+	Forehead,
+	CheekLeft,
+	CheekRight,
+	Chin,
+	
+	ArmLeft,
+	ArmRight,
+	ForearmLeft,
+	ForearmRight,
+	
+	UpperChest,
+	Breasts,
+	Belly,
+	LowerAbdomen,
+	Back,
+	LowerBack,
+	HipLeft,
+	HipRight,
+	
+	ButtcheekLeft,
+	ButtcheekRight,	
+	ThighLeft,
+	ThighRight,
+	ShinLeft,
+	ShinRight,
+]
 
 static func getAll():
 	return zoneVisibleName.keys()

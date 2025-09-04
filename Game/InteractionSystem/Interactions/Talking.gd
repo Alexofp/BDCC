@@ -24,21 +24,31 @@ func start(_pawns:Dictionary, _args:Dictionary):
 		setState("grabbed_about_to_fuck", "reacter")
 	else:
 		setState("", "starter")
+		sendSocialEvent("starter", "reacter", SocialEventType.GotTalkedTo)
 
 func init_text():
 	if(!notFirst):
 		saynn("{starter.name} approaches {reacter.you}.")
 		notFirst=true
+		
+		if(isNemesisTo("reacter", "starter")):
+			sayLine("reacter", "TalkStartNemesis", {main="reacter", target="starter"})
 	else:
 		saynn("{starter.name} is standing near {reacter.you}.")
 	saynn("{reacter.Your} affection with {starter.you} is "+getAffectionString("starter", "reacter")+".\nLust is "+getLustString("starter", "reacter")+".")
 
 	if(!getRoleChar("starter").isGagged() && getRolePawn("reacter").canSocial()):
-		addAction("chat", "Chat", "Chat about stuff", "talk", 1.0, 30, {})
+		if(!isNemesisTo("reacter", "starter")):
+			addAction("chat", "Chat", "Chat about stuff", "talk", 1.0, 30, {})
+		else:
+			addDisabledAction("Chat", "They hate you too much..")
 	else:
 		addDisabledAction("Chat", ""+("Can't chat if you can't talk.." if getRolePawn("reacter").canSocial() else "They don't seem to be in a chatty mood..")+"")
 	if(getRolePawn("reacter").canSocial()):
-		addAction("flirt", "Flirt", "Try to flirt with them", "flirt", 1.0, 30, {})
+		if(!isNemesisTo("reacter", "starter")):
+			addAction("flirt", "Flirt", "Try to flirt with them", "flirt", 1.0, 30, {})
+		else:
+			addDisabledAction("Flirt", "They hate you too much..")
 	else:
 		addDisabledAction("Flirt", "They don't seem to be in a flirty mood..")
 	if(getRolePawn("reacter").canGrabAndFuck() && roleCanStartSex("starter")):
@@ -176,6 +186,7 @@ func chat_asked_do(_id:String, _args:Dictionary, _context:Dictionary):
 		setState("chat_reacted", "starter")
 		if(chatAnswer != "agree"):
 			gotDenied = true
+			sendSocialEvent("reacter", "starter", SocialEventType.GotRefused)
 
 
 func chat_reacted_text():
@@ -254,6 +265,7 @@ func flirt_pickupline_do(_id:String, _args:Dictionary, _context:Dictionary):
 		affectLust("reacter", "starter", -0.07)
 		setState("flirt_denied", "starter")
 		gotDenied = true
+		sendSocialEvent("reacter", "starter", SocialEventType.GotRefused)
 
 
 func flirt_accepted_text():
@@ -309,6 +321,9 @@ func flirt_flirted_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "flirt_react"):
 		reactToLustFocus(_args, lust)
 		setState("flirt_reacted", "starter")
+		var answer:String = lust["answer"] if lust.has("answer") else "accept"
+		if(answer != "accept"):
+			sendSocialEvent("reacter", "starter", SocialEventType.GotRefused)
 
 
 func flirt_reacted_text():
@@ -350,6 +365,7 @@ func offered_sex_do(_id:String, _args:Dictionary, _context:Dictionary):
 		getRolePawn("reacter").afterSocialInteraction()
 		getRolePawn("starter").afterFailedSocialInteraction()
 		gotDenied = true
+		sendSocialEvent("reacter", "starter", SocialEventType.GotRefused)
 
 
 func offered_sex_agreed_text():
@@ -390,6 +406,7 @@ func offered_self_do(_id:String, _args:Dictionary, _context:Dictionary):
 		getRolePawn("reacter").afterSocialInteraction()
 		getRolePawn("starter").afterFailedSocialInteraction()
 		gotDenied = true
+		sendSocialEvent("reacter", "starter", SocialEventType.GotRefused)
 
 
 func offered_self_agreed_text():

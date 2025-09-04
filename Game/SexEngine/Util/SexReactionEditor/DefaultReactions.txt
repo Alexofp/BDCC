@@ -2277,7 +2277,7 @@ Do you like my tits, bitch?"
 Wanna take a closer look?
 I have something you can feed on.
 Wanna have some fun with these?
-How are you suckling skills I wonder."
+How are your suckling skills I wonder."
 } ]
 },
 "together": false
@@ -3747,7 +3747,7 @@ Don’t think, just take it.
 Wanna play with something wild?
 A little something extra for you.
 This is the good stuff.
-Curious? Eat  it.
+Curious? Eat it.
 Give it a shot, babe."
 } ]
 },
@@ -4003,7 +4003,7 @@ Hngh.."
 "together": false
 },
 "PainGeneric": {
-"chance": 100,
+"chance": 100.0,
 "chances": "",
 "lines": {
 0: [ {
@@ -4039,6 +4039,28 @@ Aah!
 Ughh!
 Ah.. fuck..
 Ow.. that hurt.."
+} ]
+},
+"together": false
+},
+"PainStrongGeneric": {
+"chance": 100,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "isAngry()",
+"lines": "AGH! DAMN IT..
+ARGH! FUCK..
+OW.. Fuck! Piece of shit..
+AGH.. Shit..
+G-Gah!.. Fuck.."
+}, {
+"condition": "!isAngry()",
+"lines": "AGH!
+ARGH!
+OW.. Fuck!
+AGH.. Shit..
+G-Gah!.."
 } ]
 },
 "together": false

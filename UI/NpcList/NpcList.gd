@@ -26,6 +26,10 @@ func addRow(name: String, gender: String, subbyStat: float, ID: String, occupati
 	container.add_child(newRow)
 	newRow.initData(name, gender, subbyStat, ID, occupation, children, canForget, canMeet)
 	newRow.setRelationShipData(GM.main.RS.getAffection("pc", ID), GM.main.RS.getLust("pc", ID))
+	if(GM.main && GM.main.RS):
+		var theSpecial:Array = GM.main.RS.getSpecialTextAndColor(ID)
+		if(theSpecial.size() >= 2):
+			newRow.setSpecialRelationship(theSpecial[0], theSpecial[1])
 	newRow.connect("onForgetButtonPressed", self, "forgetNPC")
 	newRow.connect("onMeetButtonPressed", self, "meetNPC")
 	

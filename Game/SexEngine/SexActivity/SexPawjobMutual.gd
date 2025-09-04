@@ -89,8 +89,8 @@ func processTurn():
 
 func pawjob_processTurn():
 	offerTime = 0
-	stimulate(DOM_0, S_LEGS, SUB_0, S_PENIS, I_NORMAL, Fetish.FeetplayGiving, SPEED_MEDIUM)
-	stimulate(SUB_0, S_LEGS, DOM_0, getDomHole(), I_NORMAL, Fetish.FeetplayGiving, SPEED_MEDIUM)
+	stimulateRubWithFoot(DOM_0, SUB_0, S_PENIS, I_NORMAL, SPEED_MEDIUM)
+	stimulateRubWithFoot(SUB_0, DOM_0, getDomHole(), I_NORMAL, SPEED_MEDIUM)
 	rubWithFeet(DOM_0, SUB_0, S_PENIS)
 	rubWithFeet(SUB_0, DOM_0, getDomHole())
 	react(SexReaction.PawjobHappens, [20, 10])
@@ -175,6 +175,8 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		orgasmAmount += 1
 		if(orgasmAmount >= 2):
 			satisfyGoals()
+		fetishAffect(SUB_0, Fetish.FeetplayReceiving, 3.0)
+		fetishAffect(DOM_0, Fetish.FeetplayGiving, 3.0)
 		return
 	if(_id == "domcum"):
 		if(getDom().hasReachablePenis()):
@@ -185,6 +187,8 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		orgasmAmount += 1
 		if(orgasmAmount >= 2):
 			satisfyGoals()
+		fetishAffect(DOM_0, Fetish.FeetplayReceiving, 3.0)
+		fetishAffect(SUB_0, Fetish.FeetplayGiving, 3.0)
 		return
 			
 func getSubResistChance(baseChance:float, domAngerRemoval:float) -> float:

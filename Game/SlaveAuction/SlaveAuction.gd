@@ -28,8 +28,11 @@ var slaveReactionType = AuctionSlaveReaction.Confused
 var bidders:Array = []
 var shouldEnd:bool = false
 
+var isPCBeingSold:bool = false
+
 func setCharID(newCharID:String):
 	charID = newCharID
+	isPCBeingSold = (charID == "pc")
 	slaveReactionType = calculateSlaveReactionType()
 
 func getChar() -> BaseCharacter:
@@ -108,6 +111,52 @@ func getText() -> String:
 	
 	return Util.join(theTexts, "\n")
 
+func doRandomAction():
+	var theActions:Array = getActions()
+	var possibleActions:Array = []
+	for action in theActions:
+		var canDoData:Array = canDoAction(action)
+		if(canDoData[0]):
+			possibleActions.append(action)
+	doAction(RNG.pick(possibleActions))
+
+func doBestAction():
+	var theActions:Array = getActions()
+	var actionToScore:Dictionary = {}
+	
+	var maxScore:float = 0.0
+	
+	for action in theActions:
+		var canDoData:Array = canDoAction(action)
+		if(canDoData[0]):
+			var theScore:float = action.getAIScore(getChar(), self, slaveTraits)
+			actionToScore[action] = theScore
+			if(theScore > maxScore):
+				maxScore = theScore
+	
+	if(actionToScore.empty()):
+		Log.printerr("Something is wrong, we can't pick an auction action to do")
+		return
+	
+	var filterScore:float = maxScore * 0.7
+	
+	var finalActionToScore:Dictionary = {}
+	
+	for action in actionToScore:
+		var theScore:float = actionToScore[action]
+		if(theScore >= filterScore):
+			finalActionToScore[action] = theScore
+	
+	var theAction = RNG.pickWeightedDict(finalActionToScore)
+	doAction(theAction)
+
+func doRandomActionsUntilReact():
+	if(state == "react" || state == "start" || state == "ended"):
+		doBestAction()
+	
+	while(state != "react" && state != "ended"):
+		doBestAction()
+
 func getActions() -> Array:
 	var result:Array = []
 	
@@ -124,7 +173,7 @@ func getActions() -> Array:
 	else:
 		for actionID in GlobalRegistry.getAuctionActions():
 			var theAction:AuctionAction = GlobalRegistry.getAuctionAction(actionID)
-			if(theAction == null || theAction.id == "Continue"):
+			if(theAction == null || theAction.id == "Continue" || theAction.getActionType() == AuctionActionType.Intro):
 				continue
 			result.append(theAction)
 	
@@ -336,7 +385,7 @@ func doAction(_auctionAction:AuctionAction):
 		if(disDisLikesTexts.size() > 0):
 			disTexts.append("dislikes slaves with "+Util.humanReadableList(disDisLikesTexts)+" trait"+("s" if disDisLikesTexts.size() > 1 else ""))
 
-		sayn("[i]You learned that "+bidder.name+" "+Util.join(disTexts, " and ")+".[/i]")
+		sayn("[i]"+getSlaverName()+" learned that "+bidder.name+" "+Util.join(disTexts, " and ")+".[/i]")
 		hadAnyLearns = true
 	if(hadAnyLearns):
 		sayn("")
@@ -354,6 +403,16 @@ func doAction(_auctionAction:AuctionAction):
 	#	actionText += "\n\n"+Util.join(extraTexts, "\n")
 		
 	actionText = Util.join(extraActionTexts, "")
+
+func getSlaverName() -> String:
+	if(isPCBeingSold):
+		if(presenterID == "mirri"):
+			return "Mirri"
+		if(presenterID == "luxe"):
+			return "Luxe"
+		return GlobalRegistry.getCharacter(presenterID).getName()
+	
+	return "You"
 
 func saynn(theText:String):
 	extraActionTexts.append(theText+"\n\n")
@@ -377,17 +436,29 @@ func doRoundOfBiddingWithChecks():
 	if(roundNumber >= getSoftEndRound()):
 		if(bidAmount >= 2):
 			#print("YAY. BID AMOUNT: "+str(bidAmount))
-			saynn("Since you got at least 2 new bids, you can present your slave more!")
+			if(isPCBeingSold):
+				saynn("Since "+getSlaverName()+" got at least 2 new bids, they can present you more!")
+			else:
+				saynn("Since you got at least 2 new bids, you can present your slave more!")
 			canPresent = true
 			bidLastChances = 0
 		else:
 			canPresent = false
-			saynn("Since you got less than 2 new bids after the soft end, you can’t present your slave anymore.")
+			if(isPCBeingSold):
+				saynn("Since "+getSlaverName()+" got less than 2 new bids after the soft end, they can’t present you anymore.")
+			else:
+				saynn("Since you got less than 2 new bids after the soft end, you can’t present your slave anymore.")
 	else:
 		if(roundNumber == 0):
-			saynn("The auction has started! Learn as many bidders preferences as possible before the soft end.")
+			if(isPCBeingSold):
+				saynn("The auction has started!")
+			else:
+				saynn("The auction has started! Learn as many bidders preferences as possible before the soft end.")
 		else:
-			saynn("Since it’s round "+str(roundNumber)+" and the soft end hasn’t happened yet, you can present your slave more.")
+			if(isPCBeingSold):
+				saynn("Since it’s round "+str(roundNumber)+" and the soft end hasn’t happened yet, "+getSlaverName()+" can present you more.")
+			else:
+				saynn("Since it’s round "+str(roundNumber)+" and the soft end hasn’t happened yet, you can present your slave more.")
 		canPresent = true
 		bidLastChances = 0
 
@@ -785,6 +856,7 @@ func saveData():
 		shouldEnd = shouldEnd,
 		bidders = biddersData,
 		presenterID = presenterID,
+		isPCBeingSold = isPCBeingSold,
 	}
 
 func loadData(_data):
@@ -806,6 +878,7 @@ func loadData(_data):
 	slaveReactionType = SAVE.loadVar(_data, "slaveReactionType", AuctionSlaveReaction.Confused)
 	shouldEnd = SAVE.loadVar(_data, "shouldEnd", false)
 	presenterID = SAVE.loadVar(_data, "presenterID", "mirri")
+	isPCBeingSold = SAVE.loadVar(_data, "isPCBeingSold", false)
 	
 	bidders = []
 	var biddersData = SAVE.loadVar(_data, "bidders", [])

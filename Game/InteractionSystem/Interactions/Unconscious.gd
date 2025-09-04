@@ -5,6 +5,9 @@ var timesWaited:int = 0
 func _init():
 	id = "Unconscious"
 
+func canNurseSave() -> bool:
+	return getPawnAmount() == 1
+
 func start(_pawns:Dictionary, _args:Dictionary):
 	doInvolvePawn("main", _pawns["main"])
 	setState("", "main")

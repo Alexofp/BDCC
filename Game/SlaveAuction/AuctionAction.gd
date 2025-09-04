@@ -25,6 +25,29 @@ func sayPresenter(theText:String):
 func saySlave(theText:String):
 	saynn("[say=slave]"+theText+"[/say]")
 
+func getBaseAIScore(_char:BaseCharacter, _auction, _slaveTraits:Dictionary) -> float:
+	return 0.1
+
+func getAIScore(_char:BaseCharacter, _auction, _slaveTraits:Dictionary) -> float:
+	var result:float = getBaseAIScore(_char, _auction, _slaveTraits)
+	
+	var theActionTraits := getTraits()
+	for traitID in theActionTraits:
+		var theTraitAm:float = theActionTraits[traitID]
+		
+		if(!_slaveTraits.has(traitID) || _slaveTraits[traitID] <= 0.0):
+			continue
+		var theSlaveTraitAm:float = _slaveTraits[traitID]
+		
+		for bidder in _auction.bidders:
+			if(bidder.likes.has(traitID)):
+				result += theTraitAm * theSlaveTraitAm * 1.0
+			if(bidder.dislikes.has(traitID)):
+				result -= theTraitAm * theSlaveTraitAm * 0.5
+	
+	result += getPassiveDesireGain()
+	return max(result, 0.1)
+
 func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 	return {
 		text = "FILL MEEEEE",
