@@ -22,6 +22,19 @@ func useInCombat(_attacker, _receiver):
 	return _attacker.getName() + " applied the bio-scrub soap!"
 
 func getPossibleActions():
+	if(GM.pc.getLocation() in ["main_shower1", "main_shower2"]): #Tshhh
+		return [
+			{
+				"name": "Use",
+				"scene": "UseItemLikeInCombatScene",
+				"description": "Use the soap",
+			},
+			{
+				"name": "Drop",
+				"scene": "DropSoapScene",
+				"description": "Drop the soap",
+			},
+		]
 	return [
 		{
 			"name": "Use",
