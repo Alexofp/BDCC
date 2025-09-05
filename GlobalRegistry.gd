@@ -144,6 +144,8 @@ var contributorsCredits:Dictionary = {
 	],
 }
 
+var gles2Mode:bool = false
+
 var currentUniqueID = 0
 var currentChildUniqueID = 0
 var currentNPCUniqueID = 0
@@ -422,6 +424,8 @@ func newCached(theType:String, theID:String):
 
 
 func _init():
+	gles2Mode = (OS.get_current_video_driver() == OS.VIDEO_DRIVER_GLES2)
+	
 	checkModSupport()
 	#loadMods()
 	
