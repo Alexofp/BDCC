@@ -30,7 +30,7 @@ func _ready():
 	if(GlobalTheme != null):
 		if(OS.has_touchscreen_ui_hint()):
 			GlobalTheme.rename_stylebox("scrollTouch", "scroll", "VScrollBar")
-			
+	
 	var rawModList = GlobalRegistry.getRawModList()
 	if(GlobalRegistry.hasModSupport() && OS.get_name() == "Android" && (rawModList.size() > 0) || OPTIONS.shouldShowModdedLauncher()):
 		if(Util.readFile(pckversionPath) != GlobalRegistry.getGameVersionString()):

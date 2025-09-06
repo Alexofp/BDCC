@@ -1477,6 +1477,8 @@ func shouldFindDynamicJoiners() -> bool:
 		return false
 	if(isDom("pc") && !didPCAllowDynamicJoiners()):
 		return false
+	if(isSub("pc") && !GM.main.encounterSettings.shouldSubThreesomesBeEnabled()):
+		return false
 	return true
 
 func toggleDynamicJoiners():

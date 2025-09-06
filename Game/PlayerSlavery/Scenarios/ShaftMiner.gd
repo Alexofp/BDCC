@@ -213,7 +213,7 @@ const UpgradesDB = {
 
 var day:int = 0
 var totalMined:int = 0
-const TOTAL_MINED_TARGET = -1
+const TOTAL_MINED_TARGET = 1000000
 
 var nuggets:Array = [] # [id, indx]
 var upgrades:Dictionary = {} # upgradeID = true

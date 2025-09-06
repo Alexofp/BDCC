@@ -6,6 +6,7 @@ onready var update_timer = $"%UpdateTimer"
 onready var layers = $"%Layers"
 
 const WritingsFont = preload("res://Fonts/BodyWritingsFont.tres")
+const WritingsFontThin = preload("res://Fonts/BodyWritingsFontThin.tres")
 const EmptyTexture = preload("res://Player/Player3D/Skins/defaultoverlay.png")
 
 var random:RandomNumberGenerator = RandomNumberGenerator.new()
@@ -78,7 +79,7 @@ func doUpdate():
 					break
 				var newLabel:Label = Label.new()
 				newLabel.align = Label.ALIGN_CENTER
-				newLabel["custom_fonts/font"] = WritingsFont
+				newLabel["custom_fonts/font"] = WritingsFont if !GlobalRegistry.gles2Mode else WritingsFontThin
 				newLabel["custom_colors/font_color"] = Color.black
 				newLabel.text = writingInfo[0]
 				vbox.add_child(newLabel)

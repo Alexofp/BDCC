@@ -3,7 +3,7 @@ extends Node
 var game_version_major = 0
 var game_version_minor = 1
 var game_version_revision = 10
-var game_version_suffix = ""
+var game_version_suffix = "fix1"
 
 var contributorsCredits:Dictionary = {
 	"Max-Maxou": [
@@ -143,6 +143,8 @@ var contributorsCredits:Dictionary = {
 		"[url=https://github.com/Alexofp/BDCC/pull/211]#1[/url]",
 	],
 }
+
+var gles2Mode:bool = false
 
 var currentUniqueID = 0
 var currentChildUniqueID = 0
@@ -422,6 +424,8 @@ func newCached(theType:String, theID:String):
 
 
 func _init():
+	gles2Mode = (OS.get_current_video_driver() == OS.VIDEO_DRIVER_GLES2)
+	
 	checkModSupport()
 	#loadMods()
 	

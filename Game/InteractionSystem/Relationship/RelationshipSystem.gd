@@ -215,7 +215,7 @@ func onCharDelete(_char1:String):
 		special.erase(_char1)
 	for shipID in cooldowns:
 		if(cooldowns[shipID].has(_char1)):
-			cooldowns[shipID].eraase(_char1)
+			cooldowns[shipID].erase(_char1)
 
 func sendSocialEvent(_charActor:String, _charTarget:String, _eventID:int, _args:Array = []):
 	if(_charActor != "pc" && _charTarget != "pc"):
