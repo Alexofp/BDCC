@@ -654,7 +654,7 @@ func _react(_action: String, _args):
 
 	if(_action == "anal_sex_cum"):
 		processTime(5*60)
-		getCharacter("artica").cummedInVaginaBy("pc")
+		getCharacter("artica").cummedInAnusBy("pc")
 		getModule("ArticaModule").triggerCorruption(0.03)
 		GM.pc.orgasmFrom("artica")
 

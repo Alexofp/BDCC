@@ -3492,7 +3492,7 @@ func ePeekFirstEvent3_state():
 	saynn("The officer cuts her off.")
 	talk(C_OFFICER, "Your food and coffee have no right to be SO good. Let me tell you, best in the whole galaxy. And I've been in a lot of these space cafes, believe me.")
 	saynn("Sofie doesn't know how to react to such words.. so she just nods.. her hand still holding a leash to your collar.")
-	talk(C_OFFICER, "I know that you have your secret.. ingreendients. And I don't wanna reveal them to others. That would be extremely rude, wouldn't it?")
+	talk(C_OFFICER, "I know that you have your secret.. ingredients. And I don't wanna reveal them to others. That would be extremely rude, wouldn't it?")
 	talk(C_GIRL, "Uh.. y-yeah, it would be.")
 	saynn("The officer nods.")
 	talk(C_OFFICER, "All I'm asking for is.. some personal dinners. I will pay, of course. I will make it worth it for you.")
