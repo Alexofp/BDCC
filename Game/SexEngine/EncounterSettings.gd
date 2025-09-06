@@ -7,6 +7,7 @@ var disabledGoalsForSubPC = []
 var speciesWeights = {}
 var goalWeights = {}
 var tfWeights:Dictionary = {}
+var subThreesomes:bool = true
 
 func getGoalWeight(goalID, defaultValue = 1.0):
 	if(goalWeights.has(goalID)):
@@ -125,6 +126,12 @@ func resetTFWeight(tfID:String):
 	if(tfWeights.has(tfID)):
 		tfWeights.erase(tfID)
 	
+func shouldSubThreesomesBeEnabled() -> bool:
+	return subThreesomes
+
+func toggleThreesomesSub():
+	subThreesomes = !subThreesomes
+
 func saveData():
 	var data = {
 		"preferKnownEncounters": preferKnownEncounters,
@@ -133,6 +140,7 @@ func saveData():
 		"speciesWeights": speciesWeights,
 		"goalWeights": goalWeights,
 		"tfWeights": tfWeights,
+		"subThreesomes": subThreesomes,
 	}
 	return data
 
@@ -143,3 +151,4 @@ func loadData(data):
 	speciesWeights = SAVE.loadVar(data, "speciesWeights", {})
 	goalWeights = SAVE.loadVar(data, "goalWeights", {})
 	tfWeights = SAVE.loadVar(data, "tfWeights", {})
+	subThreesomes = SAVE.loadVar(data, "subThreesomes", true)
