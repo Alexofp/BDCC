@@ -35,9 +35,9 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 		if(!dom.getInventory().hasSlotEquipped(InventorySlot.Penis) && dom.getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
 			addStartAction(["dom"], "Wear condom", "Put on your best condom", wearCondomScore, {A_CATEGORY: ["Wear"]})
 		if(dom.getWornCondom() != null && dom.getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
-			var domremCondomScore:float = 1.0
-			if(wearCondomScore > 0.0 && !dom.isWearingNonEmptyCondom()):
-				domremCondomScore = 0.0
+			var domremCondomScore:float = 0.0
+			if(dom.isWearingNonEmptyCondom()):
+				domremCondomScore = 1.0
 			addStartAction(["domrem"], "Remove condom", "Take off your condom", domremCondomScore, {A_CATEGORY: ["Wear"]})
 			
 		
@@ -46,9 +46,9 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 		if(!sub.getInventory().hasSlotEquipped(InventorySlot.Penis) && sub.getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
 			addStartAction(["sub"], "Put condom on sub", "Put on your best condom on the sub", condomOnSubScore, {A_CATEGORY: ["Wear"]})
 		if(sub.getWornCondom() != null && sub.getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
-			var subremCondomScore:float = 1.0
-			if(condomOnSubScore > 0.0 && !sub.isWearingNonEmptyCondom()):
-				subremCondomScore = 0.0
+			var subremCondomScore:float = 0.0
+			if(sub.isWearingNonEmptyCondom()):
+				subremCondomScore = 1.0
 			addStartAction(["subrem"], "Remove sub's condom", "Take off the sub's condom", subremCondomScore, {A_CATEGORY: ["Wear"]})
 			
 func getTags(_indx:int) -> Array:
