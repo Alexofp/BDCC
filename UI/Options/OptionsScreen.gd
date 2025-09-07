@@ -84,10 +84,10 @@ func onOptionMouseEntered(optionUIObject):
 		var optionName = "Option"
 		if(optionUIObject.has_method("getOptionName")):
 			optionName = optionUIObject.getOptionName()
-		GlobalTooltip.showTooltip(optionName, optionUIObject.getDescription())
+		GlobalTooltip.showTooltip(optionUIObject, optionName, optionUIObject.getDescription(), false, true)
 			
 func onOptionMouseExited(_optionUIObject):
-	GlobalTooltip.hideTooltip()
+	GlobalTooltip.hideTooltip(_optionUIObject)
 				
 func onOptionChanged(categoryID, optionID, optionNewValue):
 	OPTIONS.applyOption(categoryID, optionID, optionNewValue)

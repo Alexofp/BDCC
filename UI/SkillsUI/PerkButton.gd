@@ -36,11 +36,11 @@ func _on_TextureButton_pressed():
 func _on_TextureButton_mouse_entered():
 	if(perk == null):
 		return
-	GlobalTooltip.showTooltip(perk.getVisibleName(), (("Cost: "+str(perk.getCost())+"\n") if showCost else "")+perk.getVisibleDescription())
+	GlobalTooltip.showTooltip(self, perk.getVisibleName(), (("Cost: "+str(perk.getCost())+"\n") if showCost else "")+perk.getVisibleDescription())
 
 
 func _on_TextureButton_mouse_exited():
-	GlobalTooltip.hideTooltip()
+	GlobalTooltip.hideTooltip(self)
 
 func setSkippedPerk():
 	$PerkButtonRect.texture = preload("res://UI/SkillsUI/sprites/perkSkip.png")

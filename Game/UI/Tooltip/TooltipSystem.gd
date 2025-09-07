@@ -2,21 +2,32 @@ extends Node
 
 onready var tooltip = $CanvasLayer/TooltipDisplay
 
-var tooltipS = 0
+var nodeRef:WeakRef
 
-func showTooltip(title: String, text: String, showBelow: bool = false, delayShow: bool = false, wideTooltip: bool = false):
+func showTooltip(theControl, title: String, text: String, showBelow: bool = false, delayShow: bool = false, wideTooltip: bool = false):
 	tooltip.set_is_active(true, delayShow)
 	tooltip.setIsWide(wideTooltip)
 	tooltip.setShowBelow(showBelow)
 	tooltip.set_text(title, text)
-	tooltipS += 1
+	nodeRef = weakref(theControl) if theControl else null
 
-func hideTooltip():
-	tooltipS -= 1
-	if(tooltipS <= 0):
-		tooltipS = 0
-		tooltip.set_is_active(false)
+func hideTooltip(theNodeRef):
+	if(getRefNode() && theNodeRef != getRefNode()):
+		return
+
+	nodeRef = null
+	tooltip.set_is_active(false)
 
 func resetTooltips():
-	tooltipS = 0
+	nodeRef = null
 	tooltip.set_is_active(false)
+
+func _process(_delta):
+	if(nodeRef == null):
+		return
+	var theNode:Control = nodeRef.get_ref()
+	if(!theNode || !theNode.is_visible_in_tree()):
+		resetTooltips()
+
+func getRefNode():
+	return nodeRef.get_ref() if nodeRef else null

@@ -188,14 +188,14 @@ func _on_NameLabel_mouse_entered():
 		var charData = characters[currentCharacter]
 		
 		if(charData.has("imageArtist") && charData["imageArtist"]):
-			GlobalTooltip.showTooltip(character.getName() + ", " + character.getSpeciesFullName(), character.getSmallDescriptionWithRelationship()+"\n\n[i]Art drawn by "+str(charData["imageArtist"])+"[/i]", true)
+			GlobalTooltip.showTooltip(nameLabel, character.getName() + ", " + character.getSpeciesFullName(), character.getSmallDescriptionWithRelationship()+"\n\n[i]Art drawn by "+str(charData["imageArtist"])+"[/i]", true)
 			return
 	
-	GlobalTooltip.showTooltip(character.getName() + ", " + character.getSpeciesFullName(), character.getSmallDescriptionWithRelationship(), true)
+	GlobalTooltip.showTooltip(nameLabel, character.getName() + ", " + character.getSpeciesFullName(), character.getSmallDescriptionWithRelationship(), true)
 
 
 func _on_NameLabel_mouse_exited():
-	GlobalTooltip.hideTooltip()
+	GlobalTooltip.hideTooltip(nameLabel)
 
 func hasNonGenericPortrait():
 	for charID in characters:

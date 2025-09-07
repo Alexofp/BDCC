@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://UI/RichTextBoxEffects/cuss_richtexteffect.tres" type="RichTextEffect" id=1]
 [ext_resource path="res://UI/RichTextBoxEffects/console_richtexteffect.tres" type="RichTextEffect" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://UI/RichTextBoxEffects/ghost_richtexteffect.tres" type="RichTextEffect" id=4]
 [ext_resource path="res://UI/RichTextBoxEffects/matrix_richtexteffect.tres" type="RichTextEffect" id=5]
 [ext_resource path="res://UI/RichTextBoxEffects/pulse_richtexteffect.tres" type="RichTextEffect" id=6]
-[ext_resource path="res://Game/UI/Tooltip/TooltipDisplay.tscn" type="PackedScene" id=7]
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=8]
 [ext_resource path="res://Game/UI/GameUI.gd" type="Script" id=9]
 [ext_resource path="res://UI/FontResources/Normal/BoldFont.tres" type="DynamicFont" id=10]
@@ -256,7 +255,8 @@ size_flags_vertical = 3
 script = ExtResource( 21 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/ScrollContainer"]
-margin_bottom = 29.0
+margin_right = 710.0
+margin_bottom = 640.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -445,14 +445,6 @@ size_flags_vertical = 3
 [node name="PlayerPanel" parent="HBoxContainer/Panel/MarginContainer" instance=ExtResource( 17 )]
 margin_right = 354.0
 margin_bottom = 696.0
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="TooltipDisplay" parent="CanvasLayer" instance=ExtResource( 7 )]
-margin_left = 30.2906
-margin_top = -128.289
-margin_right = 280.291
-margin_bottom = -96.289
 
 [node name="FullArtworkRect" type="TextureRect" parent="."]
 visible = false

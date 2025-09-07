@@ -16,7 +16,6 @@ var buttonsNeedUpdating:bool = false
 var extraButtonsNeedUpdating:bool = false
 onready var nextPageButton = $"%NextPageButton"
 onready var prevPageButton = $"%PrevPageButton"
-onready var optionTooltip = $CanvasLayer/TooltipDisplay
 onready var textOutput = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer/RichTextLabel
 onready var mapAndTimePanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/MapAndTimePanel
 onready var playerPanel = $HBoxContainer/Panel/MarginContainer/PlayerPanel
@@ -121,7 +120,7 @@ func clearButtons():
 	currentPage = 0
 	updateButtons()
 	clearExtraButtons()
-	_on_option_button_tooltip_end()
+	#_on_option_button_tooltip_end()
 		
 func addButtonAt(place, text: String, tooltip: String = "", method: String = "", args = []):
 	options[place] = [true, text, tooltip, method, args]
@@ -194,8 +193,8 @@ func updateExtraButtons():
 		extra_buttons_grid.add_child(newButton)
 		newButton.setShortcutPhysicalScancode(KEY_1+_indx, true)
 		var _some = newButton.connect("pressedActually", self, "_on_extra_option_button", [_indx])
-		var _some2 = newButton.connect("mouse_entered", self, "_on_extra_option_button_tooltip", [_indx])
-		var _some3 = newButton.connect("mouse_exited", self, "_on_option_button_tooltip_end")
+		var _some2 = newButton.connect("mouse_entered", self, "_on_extra_option_button_tooltip", [_indx, newButton])
+		var _some3 = newButton.connect("mouse_exited", self, "_on_option_button_tooltip_end", [newButton])
 
 func setBigAnswersMode(newmode):
 	if(!isInBigAnswersMode && newmode):
@@ -272,8 +271,8 @@ func updateButtons():
 				button.text = option[3]
 		#button.set_meta("game_option", index)
 		var _some = button.connect("pressedActually", self, "_on_option_button", [index])
-		var _some2 = button.connect("mouse_entered", self, "_on_option_button_tooltip", [index])
-		var _some3 = button.connect("mouse_exited", self, "_on_option_button_tooltip_end")
+		var _some2 = button.connect("mouse_entered", self, "_on_option_button_tooltip", [index, button])
+		var _some3 = button.connect("mouse_exited", self, "_on_option_button_tooltip_end", [button])
 
 
 func _on_extra_option_button(index):
@@ -286,30 +285,28 @@ func _on_option_button(index):
 	
 	emit_signal("on_option_button", option[3], option[4])
 	
-func _on_extra_option_button_tooltip(index):
+func _on_extra_option_button_tooltip(index, _button):
 	var option = extraOptions[index]
 	if(option[2] == ""):
 		return
-	optionTooltip.set_is_active(true)
-	optionTooltip.set_text(option[1], option[2])
+	GlobalTooltip.showTooltip(_button, option[1], option[2])
 	
-func _on_option_button_tooltip(index):
+func _on_option_button_tooltip(index, _button):
 	var option = options[index]
 	if(option[2] == ""):
 		return
-	optionTooltip.set_is_active(true)
 	if(!AutoTranslation.shouldTranslateButtons || showOriginalCheckbox.pressed):
-		optionTooltip.set_text(option[1], option[2])
+		GlobalTooltip.showTooltip(_button, option[1], option[2])
 	else:
 		if(option[0] && option.size() > 6):
-			optionTooltip.set_text(option[5], option[6])
+			GlobalTooltip.showTooltip(_button, option[5], option[6])
 		elif(!option[0]&& option.size() > 4):
-			optionTooltip.set_text(option[3], option[4])
+			GlobalTooltip.showTooltip(_button, option[3], option[4])
 		else:
-			optionTooltip.set_text(option[1], option[2])
+			GlobalTooltip.showTooltip(_button, option[1], option[2])
 
-func _on_option_button_tooltip_end():
-	optionTooltip.set_is_active(false)
+func _on_option_button_tooltip_end(_button):
+	GlobalTooltip.hideTooltip(_button)
 
 func checkPageButtons():
 	if(currentPage > 0):

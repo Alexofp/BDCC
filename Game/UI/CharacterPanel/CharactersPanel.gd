@@ -36,10 +36,10 @@ func onCharacterMouseEntered(panel):
 	if(!character):
 		return
 	
-	GlobalTooltip.showTooltip(character.getName() + ", " + character.getSpeciesFullName(), character.getSmallDescriptionWithRelationship(), true)
+	GlobalTooltip.showTooltip(self, character.getName() + ", " + character.getSpeciesFullName(), character.getSmallDescriptionWithRelationship(), true)
 	
 func onCharacterMouseExited():
-	GlobalTooltip.hideTooltip()
+	GlobalTooltip.hideTooltip(self)
 
 func updateStatuses():
 	for charID in addedCharacters:

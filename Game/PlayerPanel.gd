@@ -6,7 +6,6 @@ onready var creditsLabel = $CreditsLabel
 #onready var camera = $ViewportContainer/Viewport/Camera2D
 onready var camera3d = $ViewportWrapper/Viewport/Camera
 onready var stage3d = $ViewportWrapper/Viewport/Stage3D
-onready var tooltip = $CanvasLayer/TooltipDisplay
 onready var viewport = $ViewportWrapper/Viewport
 #onready var viewport = $ViewportContainer/Viewport
 onready var staminaBar = $StaminaBar
