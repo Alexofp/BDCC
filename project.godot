@@ -707,7 +707,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "GameUI",
 "language": "GDScript",
-"path": "res://Game/GameUI.gd"
+"path": "res://Game/UI/GameUI.gd"
 }, {
 "base": "Node2D",
 "class": "GameWorld",
@@ -2125,7 +2125,7 @@ OPTIONS="*res://Game/Options/GlobalOptions.gd"
 GlobalRegistry="*res://GlobalRegistry.gd"
 GM="*res://Game/GM.gd"
 SAVE="*res://Game/SaveManager.gd"
-GlobalTooltip="*res://UI/GlobalTooltipSystem.gd"
+GlobalTooltip="*res://Game/UI/Tooltip/GlobalTooltipSystem.gd"
 AutoTranslation="*res://Util/AutoTranslation/AutoTranslation.gd"
 CrotchFavBlocks="*res://Game/Datapacks/UI/CrotchCode/Util/CrotchFavBlocks.gd"
 ModularDialogue="*res://Game/ModularDialogue/ModularDialogue.gd"

@@ -1827,7 +1827,7 @@ func sleepScene():
 		else:
 			addContinue("setState", ["main"])
 		if(GM.pc.getCredits() >= 0):
-			saynn("[b]The owners have paid off their debt! You can released![/b]")
+			saynn("[b]The owners have paid off their debt! You can be released![/b]")
 			addAction("Freedom!", "You did your part. Time for the owners to do the same", "ENDING", ["end_credits"])
 
 #func sleep_do(_id:String, _args:Array):

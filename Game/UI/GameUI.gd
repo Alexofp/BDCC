@@ -6,16 +6,16 @@ signal on_rollback_button
 signal onDevComButton
 var buttons: Array = []
 var buttonsCountPerPage: int = 15
-var optionButtonScene: PackedScene = preload("res://Game/SceneOptionButton.tscn")
-onready var optionButtonsContainer = $HBoxContainer/VBoxContainer2/HBoxContainer/GridContainer
+var optionButtonScene: PackedScene = preload("res://Game/UI/Buttons/SceneOptionButton.tscn")
+onready var optionButtonsContainer = $"%ButtonGridContainer"
 var currentPage:int = 0
 var options: Dictionary = {}
 var extraOptions: Dictionary = {}
-var optionsCurrentID = 0
+var optionsCurrentID:int = 0
 var buttonsNeedUpdating:bool = false
 var extraButtonsNeedUpdating:bool = false
-onready var nextPageButton = $HBoxContainer/VBoxContainer2/HBoxContainer/NextPageButton
-onready var prevPageButton = $HBoxContainer/VBoxContainer2/HBoxContainer/PrevPageButton
+onready var nextPageButton = $"%NextPageButton"
+onready var prevPageButton = $"%PrevPageButton"
 onready var optionTooltip = $CanvasLayer/TooltipDisplay
 onready var textOutput = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer/RichTextLabel
 onready var mapAndTimePanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/MapAndTimePanel

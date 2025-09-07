@@ -5,7 +5,7 @@ onready var charactersPanel = $CharactersPanel
 onready var fightCharacterList = $ScrollContainer/FightCharacterPanels
 onready var scrollContainer = $ScrollContainer
 
-var fightCharacterUIScene = preload("res://Game/CharacterPanel.tscn")
+var fightCharacterUIScene = preload("res://Game/UI/CharacterPanel/CharacterPanel.tscn")
 var isInFightMode = false
 
 var characters = {}

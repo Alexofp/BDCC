@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-var characterPanelScane = preload("res://UI/CharacterPanelSmall.tscn")
+var characterPanelScane = preload("res://Game/UI/CharacterPanel/CharacterPanelSmall.tscn")
 var addedCharacters: Dictionary = {}
 onready var charactersBox = $ScrollContainer/CharactersBox
 

@@ -1,9 +1,10 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=1]
-[ext_resource path="res://Game/CharacterPanel.gd" type="Script" id=2]
+[ext_resource path="res://Game/UI/CharacterPanel/CharacterPanel.gd" type="Script" id=2]
 [ext_resource path="res://UI/StatusEffectsPanel/StatusEffectsPanel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://UI/LabeledProgressBar.tscn" type="PackedScene" id=4]
+
 
 [sub_resource type="DynamicFontData" id=12]
 font_path = "res://Fonts/SourceCodePro/SourceCodePro-Regular.otf"

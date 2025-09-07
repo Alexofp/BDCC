@@ -4,7 +4,7 @@
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=2]
 [ext_resource path="res://UI/SkillsUI/SkillsUI.gd" type="Script" id=3]
 [ext_resource path="res://UI/SkillsUI/SkillStatLine.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=5]
+[ext_resource path="res://Game/UI/Util/SmartScrollContainer.gd" type="Script" id=5]
 [ext_resource path="res://UI/SkillsUI/SkillsOverviewTab.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/SkillsUI/BuffsScreen.tscn" type="PackedScene" id=7]
 

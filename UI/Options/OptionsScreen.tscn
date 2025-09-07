@@ -4,7 +4,7 @@
 [ext_resource path="res://UI/Options/OptionsCategory.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/Options/OptionsScreen.gd" type="Script" id=3]
 [ext_resource path="res://UI/Options/OptionUnknownType.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=5]
+[ext_resource path="res://Game/UI/Util/SmartScrollContainer.gd" type="Script" id=5]
 
 [node name="OptionsScreen" type="Control"]
 anchor_right = 1.0

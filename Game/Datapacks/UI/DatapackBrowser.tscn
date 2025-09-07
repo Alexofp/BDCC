@@ -1,8 +1,9 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Game/Datapacks/UI/DatapackBrowser.gd" type="Script" id=1]
-[ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=2]
+[ext_resource path="res://Game/UI/Util/SmartScrollContainer.gd" type="Script" id=2]
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=3]
+
 
 [sub_resource type="DynamicFont" id=1]
 size = 38

@@ -8,8 +8,9 @@
 [ext_resource path="res://UI/MainMenu/CreditsScreen.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Fonts/Titillium-Bold.otf" type="DynamicFontData" id=7]
 [ext_resource path="res://UI/ModsMenu/ModsMenu.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=9]
+[ext_resource path="res://Game/UI/Util/SmartScrollContainer.gd" type="Script" id=9]
 [ext_resource path="res://UI/AutoTranslatorMenu/AutoTranslatorMenu.tscn" type="PackedScene" id=10]
+
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )

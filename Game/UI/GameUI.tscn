@@ -1,29 +1,29 @@
 [gd_scene load_steps=39 format=2]
 
-[ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
-[ext_resource path="res://Game/TooltipDisplay.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Game/GameUI.gd" type="Script" id=3]
-[ext_resource path="res://UI/FontResources/Normal/NormalFont.tres" type="DynamicFont" id=4]
-[ext_resource path="res://UI/FontResources/Normal/BoldItalicsFont.tres" type="DynamicFont" id=5]
-[ext_resource path="res://UI/FontResources/Normal/ItalicsFont.tres" type="DynamicFont" id=6]
-[ext_resource path="res://UI/FontResources/Normal/BoldFont.tres" type="DynamicFont" id=7]
-[ext_resource path="res://Game/PlayerPanel.tscn" type="PackedScene" id=8]
-[ext_resource path="res://UI/MapAndTimePanel.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Game/SmartCharacterPanel.tscn" type="PackedScene" id=10]
-[ext_resource path="res://UI/RichTextBoxEffects/ghost_richtexteffect.tres" type="RichTextEffect" id=11]
-[ext_resource path="res://UI/MainMenu/InGameMenu.tscn" type="PackedScene" id=12]
-[ext_resource path="res://UI/SkillsUI/SkillsUI.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=14]
-[ext_resource path="res://UI/DebugUI/DebugPanel.tscn" type="PackedScene" id=15]
-[ext_resource path="res://UI/RichTextBoxEffects/pulse_richtexteffect.tres" type="RichTextEffect" id=16]
-[ext_resource path="res://UI/RichTextBoxEffects/matrix_richtexteffect.tres" type="RichTextEffect" id=17]
-[ext_resource path="res://UI/RichTextBoxEffects/console_richtexteffect.tres" type="RichTextEffect" id=18]
-[ext_resource path="res://UI/RichTextBoxEffects/cuss_richtexteffect.tres" type="RichTextEffect" id=19]
-[ext_resource path="res://UI/RichTextBoxEffects/corrupt_richtexteffect.tres" type="RichTextEffect" id=20]
-[ext_resource path="res://UI/LayeredSprite.gd" type="Script" id=21]
-[ext_resource path="res://UI/HornyMessageUI/HornyMessage.tscn" type="PackedScene" id=22]
-[ext_resource path="res://Images/UI/expandHover.png" type="Texture" id=23]
-[ext_resource path="res://Images/UI/expand.png" type="Texture" id=24]
+[ext_resource path="res://UI/RichTextBoxEffects/cuss_richtexteffect.tres" type="RichTextEffect" id=1]
+[ext_resource path="res://UI/RichTextBoxEffects/console_richtexteffect.tres" type="RichTextEffect" id=2]
+[ext_resource path="res://UI/RichTextBoxEffects/corrupt_richtexteffect.tres" type="RichTextEffect" id=3]
+[ext_resource path="res://UI/RichTextBoxEffects/ghost_richtexteffect.tres" type="RichTextEffect" id=4]
+[ext_resource path="res://UI/RichTextBoxEffects/matrix_richtexteffect.tres" type="RichTextEffect" id=5]
+[ext_resource path="res://UI/RichTextBoxEffects/pulse_richtexteffect.tres" type="RichTextEffect" id=6]
+[ext_resource path="res://Game/UI/Tooltip/TooltipDisplay.tscn" type="PackedScene" id=7]
+[ext_resource path="res://GlobalTheme.tres" type="Theme" id=8]
+[ext_resource path="res://Game/UI/GameUI.gd" type="Script" id=9]
+[ext_resource path="res://UI/FontResources/Normal/BoldFont.tres" type="DynamicFont" id=10]
+[ext_resource path="res://UI/FontResources/Normal/NormalFont.tres" type="DynamicFont" id=11]
+[ext_resource path="res://UI/FontResources/Normal/BoldItalicsFont.tres" type="DynamicFont" id=12]
+[ext_resource path="res://UI/FontResources/Normal/ItalicsFont.tres" type="DynamicFont" id=13]
+[ext_resource path="res://UI/SkillsUI/SkillsUI.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Game/UI/MapAndTimePanel.tscn" type="PackedScene" id=15]
+[ext_resource path="res://UI/DebugUI/DebugPanel.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Game/PlayerPanel.tscn" type="PackedScene" id=17]
+[ext_resource path="res://UI/MainMenu/InGameMenu.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Game/UI/CharacterPanel/SmartCharacterPanel.tscn" type="PackedScene" id=19]
+[ext_resource path="res://UI/HornyMessageUI/HornyMessage.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Game/UI/Util/SmartScrollContainer.gd" type="Script" id=21]
+[ext_resource path="res://UI/LayeredSprite.gd" type="Script" id=22]
+[ext_resource path="res://Images/UI/expand.png" type="Texture" id=23]
+[ext_resource path="res://Images/UI/expandHover.png" type="Texture" id=24]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
@@ -76,8 +76,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -2.82843
 margin_bottom = -2.82843
-theme = ExtResource( 1 )
-script = ExtResource( 3 )
+theme = ExtResource( 8 )
+script = ExtResource( 9 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
@@ -100,9 +100,6 @@ margin_right = -12.0
 margin_bottom = -12.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Panel2/MarginContainer"]
 margin_right = 236.0
@@ -113,7 +110,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SmartCharacterPanel" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer" instance=ExtResource( 10 )]
+[node name="SmartCharacterPanel" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer" instance=ExtResource( 19 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 236.0
@@ -130,7 +127,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.01
 
-[node name="MapAndTimePanel" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer" instance=ExtResource( 9 )]
+[node name="MapAndTimePanel" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer" instance=ExtResource( 15 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 346.0
@@ -256,11 +253,10 @@ margin_right = 710.0
 margin_bottom = 674.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource( 14 )
+script = ExtResource( 21 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/ScrollContainer"]
-margin_right = 710.0
-margin_bottom = 640.0
+margin_bottom = 29.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -269,13 +265,13 @@ margin_right = 710.0
 size_flags_horizontal = 3
 expand = true
 stretch_mode = 6
-script = ExtResource( 21 )
+script = ExtResource( 22 )
 
 [node name="OpenFullArtWorkButton" type="TextureButton" parent="HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer/SceneArtWorkRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture_normal = ExtResource( 24 )
-texture_hover = ExtResource( 23 )
+texture_normal = ExtResource( 23 )
+texture_hover = ExtResource( 24 )
 expand = true
 stretch_mode = 2
 
@@ -286,14 +282,14 @@ margin_bottom = 29.0
 focus_mode = 2
 mouse_filter = 1
 size_flags_horizontal = 3
-custom_fonts/bold_italics_font = ExtResource( 5 )
-custom_fonts/italics_font = ExtResource( 6 )
-custom_fonts/bold_font = ExtResource( 7 )
-custom_fonts/normal_font = ExtResource( 4 )
+custom_fonts/bold_italics_font = ExtResource( 12 )
+custom_fonts/italics_font = ExtResource( 13 )
+custom_fonts/bold_font = ExtResource( 10 )
+custom_fonts/normal_font = ExtResource( 11 )
 bbcode_enabled = true
 fit_content_height = true
 selection_enabled = true
-custom_effects = [ ExtResource( 11 ), ExtResource( 17 ), ExtResource( 16 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ]
+custom_effects = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 2 ), ExtResource( 1 ), ExtResource( 3 ) ]
 
 [node name="UniquePanelSpot" type="MarginContainer" parent="HBoxContainer/VBoxContainer2"]
 visible = false
@@ -317,13 +313,15 @@ margin_right = 710.0
 margin_bottom = 708.0
 
 [node name="PrevPageButton" type="Button" parent="HBoxContainer/VBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
 margin_right = 23.0
 margin_bottom = 26.0
 shortcut_in_tooltip = false
 shortcut = SubResource( 26 )
 text = "<"
 
-[node name="GridContainer" type="GridContainer" parent="HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="ButtonGridContainer" type="GridContainer" parent="HBoxContainer/VBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
 margin_left = 27.0
 margin_right = 683.0
 margin_bottom = 26.0
@@ -332,6 +330,7 @@ size_flags_vertical = 3
 columns = 5
 
 [node name="NextPageButton" type="Button" parent="HBoxContainer/VBoxContainer2/HBoxContainer"]
+unique_name_in_owner = true
 margin_left = 687.0
 margin_right = 710.0
 margin_bottom = 26.0
@@ -345,7 +344,7 @@ margin_right = 710.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 0, 8 )
 
-[node name="InGameMenu" parent="HBoxContainer" instance=ExtResource( 12 )]
+[node name="InGameMenu" parent="HBoxContainer" instance=ExtResource( 18 )]
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -353,7 +352,7 @@ margin_left = 652.0
 margin_right = 1027.0
 margin_bottom = 720.0
 
-[node name="SkillsUI" parent="HBoxContainer" instance=ExtResource( 13 )]
+[node name="SkillsUI" parent="HBoxContainer" instance=ExtResource( 14 )]
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -383,17 +382,17 @@ margin_right = 710.0
 margin_bottom = 616.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource( 14 )
+script = ExtResource( 21 )
 
 [node name="DevComLabel" type="RichTextLabel" parent="HBoxContainer/DevCommentary/ScrollContainer"]
 margin_right = 710.0
 margin_bottom = 592.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/bold_italics_font = ExtResource( 5 )
-custom_fonts/italics_font = ExtResource( 6 )
-custom_fonts/bold_font = ExtResource( 7 )
-custom_fonts/normal_font = ExtResource( 4 )
+custom_fonts/bold_italics_font = ExtResource( 12 )
+custom_fonts/italics_font = ExtResource( 13 )
+custom_fonts/bold_font = ExtResource( 10 )
+custom_fonts/normal_font = ExtResource( 11 )
 bbcode_enabled = true
 fit_content_height = true
 
@@ -410,7 +409,7 @@ margin_bottom = 26.0
 size_flags_horizontal = 3
 text = "Close"
 
-[node name="DebugPanel" parent="HBoxContainer" instance=ExtResource( 15 )]
+[node name="DebugPanel" parent="HBoxContainer" instance=ExtResource( 16 )]
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -443,13 +442,13 @@ margin_bottom = -12.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PlayerPanel" parent="HBoxContainer/Panel/MarginContainer" instance=ExtResource( 8 )]
+[node name="PlayerPanel" parent="HBoxContainer/Panel/MarginContainer" instance=ExtResource( 17 )]
 margin_right = 354.0
 margin_bottom = 696.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="TooltipDisplay" parent="CanvasLayer" instance=ExtResource( 2 )]
+[node name="TooltipDisplay" parent="CanvasLayer" instance=ExtResource( 7 )]
 margin_left = 30.2906
 margin_top = -128.289
 margin_right = 280.291
@@ -461,7 +460,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 expand = true
 stretch_mode = 6
-script = ExtResource( 21 )
+script = ExtResource( 22 )
 
 [node name="ColorRect" type="ColorRect" parent="FullArtworkRect"]
 show_behind_parent = true
@@ -483,7 +482,7 @@ margin_top = 70.0
 margin_right = 71.0
 margin_bottom = 90.0
 
-[node name="MessageSystem" parent="." instance=ExtResource( 22 )]
+[node name="MessageSystem" parent="." instance=ExtResource( 20 )]
 visible = false
 
 [connection signal="onDevComButton" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/MapAndTimePanel" to="." method="_on_MapAndTimePanel_onDevComButton"]

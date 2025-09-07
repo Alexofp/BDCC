@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://UI/MapAndTimePanel.gd" type="Script" id=1]
+[ext_resource path="res://Game/UI/MapAndTimePanel.gd" type="Script" id=1]
 [ext_resource path="res://Game/World/World.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/CustomViewportControl.tscn" type="PackedScene" id=3]
 
