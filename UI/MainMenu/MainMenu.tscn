@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=2]
@@ -10,7 +10,7 @@
 [ext_resource path="res://UI/ModsMenu/ModsMenu.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Game/UI/Util/SmartScrollContainer.gd" type="Script" id=9]
 [ext_resource path="res://UI/AutoTranslatorMenu/AutoTranslatorMenu.tscn" type="PackedScene" id=10]
-
+[ext_resource path="res://Game/UI/Buttons/BetterButton.tscn" type="PackedScene" id=11]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
@@ -273,41 +273,54 @@ margin_bottom = 720.0
 rect_min_size = Vector2( 0, 100 )
 columns = 5
 
-[node name="ResumeButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
+[node name="ResumeButton" parent="HBoxContainer/MainVBox/GridContainer" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 148.0
 margin_bottom = 26.0
-hint_tooltip = "Load the latest save and continue playing"
-size_flags_horizontal = 3
-disabled = true
 text = "Resume"
+myTooltipDesc = "Load the latest save and continue playing"
+myShortcutKey = "1"
 
-[node name="NewGameButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
+[node name="NewGameButton" parent="HBoxContainer/MainVBox/GridContainer" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 152.0
 margin_right = 300.0
 margin_bottom = 26.0
-size_flags_horizontal = 3
 text = "New game"
+myTooltipDesc = "Start a new game"
+myShortcutKey = "2"
 
-[node name="LoadGameButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
+[node name="LoadGameButton" parent="HBoxContainer/MainVBox/GridContainer" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 304.0
 margin_right = 452.0
 margin_bottom = 26.0
-size_flags_horizontal = 3
 text = "Load game"
+myTooltipDesc = "Load a previous game"
+myShortcutKey = "3"
 
-[node name="OptionsButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
+[node name="OptionsButton" parent="HBoxContainer/MainVBox/GridContainer" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 456.0
 margin_right = 603.0
 margin_bottom = 26.0
-size_flags_horizontal = 3
 text = "Options"
+myTooltipDesc = "Open the settings menu"
+myShortcutKey = "4"
 
-[node name="CreditsButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
+[node name="CreditsButton" parent="HBoxContainer/MainVBox/GridContainer" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 607.0
 margin_right = 754.0
 margin_bottom = 26.0
-size_flags_horizontal = 3
 text = "Credits"
+myTooltipDesc = "Check the credits"
+myShortcutKey = "5"
 
 [node name="DiscordButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
 margin_top = 30.0
@@ -562,11 +575,11 @@ fit_content_height = true
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 
 [connection signal="meta_clicked" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer3/DonationsLabel" to="." method="_on_DonationsLabel_meta_clicked"]
-[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/NewGameButton" to="." method="_on_NewGameButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="pressedActually" from="HBoxContainer/MainVBox/GridContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
+[connection signal="pressedActually" from="HBoxContainer/MainVBox/GridContainer/NewGameButton" to="." method="_on_NewGameButton_pressed"]
+[connection signal="pressedActually" from="HBoxContainer/MainVBox/GridContainer/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
+[connection signal="pressedActually" from="HBoxContainer/MainVBox/GridContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="pressedActually" from="HBoxContainer/MainVBox/GridContainer/CreditsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/DiscordButton" to="." method="_on_DiscordButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/GithubButton" to="." method="_on_GithubButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/DevToolsButton" to="." method="_on_DevToolsButton_pressed"]

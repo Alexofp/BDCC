@@ -52,6 +52,11 @@ action = "gameui_menu"
 [sub_resource type="ShortCut" id=8]
 shortcut = SubResource( 32 )
 
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
+corner_radius_top_left = 16
+corner_radius_bottom_left = 16
+
 [sub_resource type="InputEventAction" id=33]
 action = "gameui_prevpage"
 
@@ -64,12 +69,7 @@ action = "gameui_nextpage"
 [sub_resource type="ShortCut" id=28]
 shortcut = SubResource( 34 )
 
-[sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
-corner_radius_top_left = 16
-corner_radius_bottom_left = 16
-
-[node name="GameUI" type="Control"]
+[node name="GameUITouchVertical" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -2.82843
@@ -77,19 +77,24 @@ margin_bottom = -2.82843
 theme = ExtResource( 8 )
 script = ExtResource( 9 )
 
-[node name="MainLayout" type="HBoxContainer" parent="."]
+[node name="MainLayout" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="LeftPanel" type="Panel" parent="MainLayout"]
-margin_right = 260.0
-margin_bottom = 720.0
+[node name="HBoxContainer" type="HBoxContainer" parent="MainLayout"]
+margin_right = 1280.0
+margin_bottom = 358.0
+size_flags_vertical = 3
+
+[node name="LeftPanel" type="Panel" parent="MainLayout/HBoxContainer"]
+margin_right = 546.0
+margin_bottom = 358.0
 rect_min_size = Vector2( 260, 0 )
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
 custom_styles/panel = SubResource( 1 )
 
-[node name="Margin" type="MarginContainer" parent="MainLayout/LeftPanel"]
+[node name="Margin" type="MarginContainer" parent="MainLayout/HBoxContainer/LeftPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 12.0
@@ -99,52 +104,51 @@ margin_bottom = -12.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBox" type="VBoxContainer" parent="MainLayout/LeftPanel/Margin"]
-margin_right = 236.0
-margin_bottom = 696.0
+[node name="VBox" type="VBoxContainer" parent="MainLayout/HBoxContainer/LeftPanel/Margin"]
+margin_right = 522.0
+margin_bottom = 368.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SmartCharacterPanel" parent="MainLayout/LeftPanel/Margin/VBox" instance=ExtResource( 19 )]
+[node name="SmartCharacterPanel" parent="MainLayout/HBoxContainer/LeftPanel/Margin/VBox" instance=ExtResource( 19 )]
 unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 236.0
-margin_bottom = 328.0
+margin_right = 522.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="MainLayout/LeftPanel/Margin/VBox"]
-margin_top = 332.0
-margin_right = 236.0
-margin_bottom = 342.0
+[node name="VBoxContainer3" type="VBoxContainer" parent="MainLayout/HBoxContainer/LeftPanel/Margin/VBox"]
+margin_top = 4.0
+margin_right = 522.0
+margin_bottom = 14.0
 rect_min_size = Vector2( 0, 10 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.01
 
-[node name="MapAndTimePanel" parent="MainLayout/LeftPanel/Margin/VBox" instance=ExtResource( 15 )]
+[node name="MapAndTimePanel" parent="MainLayout/HBoxContainer/LeftPanel/Margin/VBox" instance=ExtResource( 15 )]
 unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 346.0
-margin_right = 236.0
-margin_bottom = 606.0
+margin_top = 18.0
+margin_right = 522.0
+margin_bottom = 278.0
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MainLayout/LeftPanel/Margin/VBox"]
-margin_top = 610.0
-margin_right = 236.0
-margin_bottom = 636.0
+[node name="HBoxContainer2" type="HBoxContainer" parent="MainLayout/HBoxContainer/LeftPanel/Margin/VBox"]
+margin_top = 282.0
+margin_right = 522.0
+margin_bottom = 308.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SaveButton" type="Button" parent="MainLayout/LeftPanel/Margin/VBox/HBoxContainer2"]
+[node name="SaveButton" type="Button" parent="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/HBoxContainer2"]
 unique_name_in_owner = true
-margin_right = 116.0
+margin_right = 259.0
 margin_bottom = 26.0
 hint_tooltip = "Quick save (F5)"
 size_flags_horizontal = 3
@@ -152,9 +156,9 @@ shortcut_in_tooltip = false
 shortcut = SubResource( 16 )
 text = "Q.save"
 
-[node name="LoadButton" type="Button" parent="MainLayout/LeftPanel/Margin/VBox/HBoxContainer2"]
-margin_left = 120.0
-margin_right = 236.0
+[node name="LoadButton" type="Button" parent="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/HBoxContainer2"]
+margin_left = 263.0
+margin_right = 522.0
 margin_bottom = 26.0
 hint_tooltip = "Quick load (F9)"
 size_flags_horizontal = 3
@@ -162,17 +166,17 @@ shortcut_in_tooltip = false
 shortcut = SubResource( 18 )
 text = "Q.load"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="MainLayout/LeftPanel/Margin/VBox"]
-margin_top = 640.0
-margin_right = 236.0
-margin_bottom = 666.0
+[node name="HBoxContainer3" type="HBoxContainer" parent="MainLayout/HBoxContainer/LeftPanel/Margin/VBox"]
+margin_top = 312.0
+margin_right = 522.0
+margin_bottom = 338.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SkillsButton" type="Button" parent="MainLayout/LeftPanel/Margin/VBox/HBoxContainer3"]
+[node name="SkillsButton" type="Button" parent="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/HBoxContainer3"]
 unique_name_in_owner = true
-margin_right = 95.0
+margin_right = 238.0
 margin_bottom = 26.0
 hint_tooltip = "Spend the stat points and look at your skills (X)"
 size_flags_horizontal = 3
@@ -180,9 +184,9 @@ shortcut_in_tooltip = false
 shortcut = SubResource( 10 )
 text = "Skills"
 
-[node name="MenuButton" type="Button" parent="MainLayout/LeftPanel/Margin/VBox/HBoxContainer3"]
-margin_left = 99.0
-margin_right = 195.0
+[node name="MenuButton" type="Button" parent="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/HBoxContainer3"]
+margin_left = 242.0
+margin_right = 481.0
 margin_bottom = 26.0
 hint_tooltip = "Open the menu (C)"
 size_flags_horizontal = 3
@@ -190,45 +194,63 @@ shortcut_in_tooltip = false
 shortcut = SubResource( 8 )
 text = "Menu"
 
-[node name="DebugMenuButton" type="Button" parent="MainLayout/LeftPanel/Margin/VBox/HBoxContainer3"]
+[node name="DebugMenuButton" type="Button" parent="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/HBoxContainer3"]
 unique_name_in_owner = true
-margin_left = 199.0
-margin_right = 236.0
+margin_left = 485.0
+margin_right = 522.0
 margin_bottom = 26.0
 hint_tooltip = "Open the debug/cheats menu"
 shortcut_in_tooltip = false
 text = "DG"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainLayout/LeftPanel/Margin/VBox"]
-margin_top = 670.0
-margin_right = 236.0
-margin_bottom = 696.0
+[node name="HBoxContainer" type="HBoxContainer" parent="MainLayout/HBoxContainer/LeftPanel/Margin/VBox"]
+margin_top = 342.0
+margin_right = 522.0
+margin_bottom = 368.0
 
-[node name="RollbackButton" type="Button" parent="MainLayout/LeftPanel/Margin/VBox/HBoxContainer"]
+[node name="RollbackButton" type="Button" parent="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/HBoxContainer"]
 unique_name_in_owner = true
-margin_right = 236.0
+margin_right = 522.0
 margin_bottom = 26.0
 hint_tooltip = "Rollback the game's state back"
 size_flags_horizontal = 3
 shortcut_in_tooltip = false
 text = "Rollback"
 
-[node name="HSplitContainer" type="HSplitContainer" parent="MainLayout"]
-margin_left = 264.0
-margin_right = 269.0
-margin_bottom = 720.0
-rect_min_size = Vector2( 5, 0 )
+[node name="RightPanel" type="Panel" parent="MainLayout/HBoxContainer"]
+margin_left = 550.0
+margin_right = 1280.0
+margin_bottom = 358.0
+rect_min_size = Vector2( 240, 0 )
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+custom_styles/panel = SubResource( 6 )
+
+[node name="Margin" type="MarginContainer" parent="MainLayout/HBoxContainer/RightPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 12.0
+margin_right = -12.0
+margin_bottom = -12.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PlayerPanel" parent="MainLayout/HBoxContainer/RightPanel/Margin" instance=ExtResource( 17 )]
+unique_name_in_owner = true
+margin_right = 706.0
+margin_bottom = 334.0
 
 [node name="MainScreenBoxContainer" type="VBoxContainer" parent="MainLayout"]
 unique_name_in_owner = true
-margin_left = 273.0
-margin_right = 983.0
+margin_top = 362.0
+margin_right = 1280.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Panel" type="Control" parent="MainLayout/MainScreenBoxContainer"]
-margin_right = 710.0
+margin_right = 1280.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
 
@@ -259,22 +281,22 @@ text = "Translate"
 [node name="MainScrollContainer" type="ScrollContainer" parent="MainLayout/MainScreenBoxContainer"]
 unique_name_in_owner = true
 margin_top = 34.0
-margin_right = 710.0
-margin_bottom = 674.0
+margin_right = 1280.0
+margin_bottom = 312.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 21 )
 
 [node name="TextAreaContainer" type="VBoxContainer" parent="MainLayout/MainScreenBoxContainer/MainScrollContainer"]
 unique_name_in_owner = true
-margin_right = 710.0
-margin_bottom = 640.0
+margin_right = 1280.0
+margin_bottom = 278.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="SceneArtWorkRect" type="TextureRect" parent="MainLayout/MainScreenBoxContainer/MainScrollContainer/TextAreaContainer"]
 unique_name_in_owner = true
-margin_right = 710.0
+margin_right = 1280.0
 size_flags_horizontal = 3
 expand = true
 stretch_mode = 6
@@ -291,7 +313,7 @@ stretch_mode = 2
 [node name="TextOutput" type="RichTextLabel" parent="MainLayout/MainScreenBoxContainer/MainScrollContainer/TextAreaContainer"]
 unique_name_in_owner = true
 margin_top = 4.0
-margin_right = 710.0
+margin_right = 1280.0
 margin_bottom = 29.0
 focus_mode = 2
 mouse_filter = 1
@@ -316,16 +338,16 @@ size_flags_vertical = 3
 
 [node name="ExtraButtonsGrid" type="GridContainer" parent="MainLayout/MainScreenBoxContainer"]
 unique_name_in_owner = true
-margin_top = 678.0
-margin_right = 710.0
-margin_bottom = 678.0
+margin_top = 316.0
+margin_right = 1280.0
+margin_bottom = 316.0
 size_flags_horizontal = 3
 columns = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MainLayout/MainScreenBoxContainer"]
-margin_top = 682.0
-margin_right = 710.0
-margin_bottom = 708.0
+margin_top = 320.0
+margin_right = 1280.0
+margin_bottom = 346.0
 
 [node name="PrevPageButton" type="Button" parent="MainLayout/MainScreenBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -338,7 +360,7 @@ text = "<"
 [node name="ButtonGridContainer" type="GridContainer" parent="MainLayout/MainScreenBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 margin_left = 27.0
-margin_right = 683.0
+margin_right = 1253.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -346,17 +368,17 @@ columns = 5
 
 [node name="NextPageButton" type="Button" parent="MainLayout/MainScreenBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 687.0
-margin_right = 710.0
+margin_left = 1257.0
+margin_right = 1280.0
 margin_bottom = 26.0
 shortcut_in_tooltip = false
 shortcut = SubResource( 28 )
 text = ">"
 
 [node name="Control" type="Control" parent="MainLayout/MainScreenBoxContainer"]
-margin_top = 712.0
-margin_right = 710.0
-margin_bottom = 720.0
+margin_top = 350.0
+margin_right = 1280.0
+margin_bottom = 358.0
 rect_min_size = Vector2( 0, 8 )
 
 [node name="InGameMenu" parent="MainLayout" instance=ExtResource( 18 )]
@@ -437,36 +459,6 @@ margin_left = 652.0
 margin_right = 1027.0
 margin_bottom = 720.0
 
-[node name="HSplitContainer2" type="HSplitContainer" parent="MainLayout"]
-margin_left = 987.0
-margin_right = 992.0
-margin_bottom = 720.0
-rect_min_size = Vector2( 5, 0 )
-
-[node name="RightPanel" type="Panel" parent="MainLayout"]
-margin_left = 996.0
-margin_right = 1280.0
-margin_bottom = 720.0
-rect_min_size = Vector2( 240, 0 )
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.4
-custom_styles/panel = SubResource( 6 )
-
-[node name="Margin" type="MarginContainer" parent="MainLayout/RightPanel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 12.0
-margin_top = 12.0
-margin_right = -12.0
-margin_bottom = -12.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PlayerPanel" parent="MainLayout/RightPanel/Margin" instance=ExtResource( 17 )]
-unique_name_in_owner = true
-margin_right = 354.0
-margin_bottom = 696.0
-
 [node name="FullArtworkRect" type="TextureRect" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -497,13 +489,13 @@ margin_top = 70.0
 margin_right = 71.0
 margin_bottom = 90.0
 
-[connection signal="onDevComButton" from="MainLayout/LeftPanel/Margin/VBox/MapAndTimePanel" to="." method="_on_MapAndTimePanel_onDevComButton"]
-[connection signal="pressed" from="MainLayout/LeftPanel/Margin/VBox/HBoxContainer2/SaveButton" to="." method="_on_SaveButton_pressed"]
-[connection signal="pressed" from="MainLayout/LeftPanel/Margin/VBox/HBoxContainer2/LoadButton" to="." method="_on_LoadButton_pressed"]
-[connection signal="pressed" from="MainLayout/LeftPanel/Margin/VBox/HBoxContainer3/SkillsButton" to="." method="_on_SkillsButton_pressed"]
-[connection signal="pressed" from="MainLayout/LeftPanel/Margin/VBox/HBoxContainer3/MenuButton" to="." method="_on_MenuButton_pressed"]
-[connection signal="pressed" from="MainLayout/LeftPanel/Margin/VBox/HBoxContainer3/DebugMenuButton" to="." method="_on_DebugMenu_pressed"]
-[connection signal="pressed" from="MainLayout/LeftPanel/Margin/VBox/HBoxContainer/RollbackButton" to="." method="_on_RollbackButton_pressed"]
+[connection signal="onDevComButton" from="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/MapAndTimePanel" to="." method="_on_MapAndTimePanel_onDevComButton"]
+[connection signal="pressed" from="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/HBoxContainer2/SaveButton" to="." method="_on_SaveButton_pressed"]
+[connection signal="pressed" from="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/HBoxContainer2/LoadButton" to="." method="_on_LoadButton_pressed"]
+[connection signal="pressed" from="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/HBoxContainer3/SkillsButton" to="." method="_on_SkillsButton_pressed"]
+[connection signal="pressed" from="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/HBoxContainer3/MenuButton" to="." method="_on_MenuButton_pressed"]
+[connection signal="pressed" from="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/HBoxContainer3/DebugMenuButton" to="." method="_on_DebugMenu_pressed"]
+[connection signal="pressed" from="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/HBoxContainer/RollbackButton" to="." method="_on_RollbackButton_pressed"]
 [connection signal="pressed" from="MainLayout/MainScreenBoxContainer/Panel/TranslateBox/ShowOriginalCheckbox" to="." method="_on_ShowOriginalCheckbox_pressed"]
 [connection signal="pressed" from="MainLayout/MainScreenBoxContainer/Panel/TranslateBox/ManualTranslateButton" to="." method="_on_ManualTranslateButton_pressed"]
 [connection signal="pressed" from="MainLayout/MainScreenBoxContainer/MainScrollContainer/TextAreaContainer/SceneArtWorkRect/OpenFullArtWorkButton" to="." method="_on_OpenFullArtWorkButton_pressed"]

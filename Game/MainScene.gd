@@ -1,7 +1,8 @@
 extends Control
 class_name MainScene
 
-onready var gameUI = $GameUI
+var gameUI:GameUI
+#onready var agameUI = $GameUI
 onready var charactersNode = $Characters
 onready var dynamicCharactersNode = $DynamicCharacters
 var sceneStack: Array = []
@@ -88,7 +89,7 @@ func connectSignalsToPC(who):
 	_s = who.connect("orificeBecomeMoreLoose", self, "_on_Player_orificeBecomeMoreLoose")
 	_s = who.connect("exchangedCumDuringRubbing", self, "_on_Player_exchangedCumDuringRubbing")
 	_s = who.connect("skillLevelChanged", self, "_on_Player_skillLevelChanged")
-	_s = who.connect("stat_changed", $GameUI, "_on_Player_stat_changed")
+	_s = who.connect("stat_changed", gameUI, "_on_Player_stat_changed")
 	_s = who.connect("holePainfullyStretched", self, "_on_Player_holePinafullyStretched")
 	_s = who.connect("gotWoundedBy", self, "_on_Player_gotWoundedBy")
 
@@ -213,6 +214,13 @@ func getDynamicCharactersPools():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	gameUI = load("res://Game/UI/GameUI.tscn").instance()
+	#gameUI = load("res://Game/UI/GameUITouchVertical.tscn").instance()
+	add_child(gameUI)
+	gameUI.connect("onDevComButton", self, "_on_GameUI_onDevComButton")
+	gameUI.connect("on_option_button", self, "_on_GameUI_on_option_button")
+	gameUI.connect("on_rollback_button", self, "_on_GameUI_on_rollback_button")
+	
 	GM.main = self
 	createStaticCharacters()
 	call_deferred("updateStaticCharacters")

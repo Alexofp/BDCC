@@ -893,8 +893,6 @@ func giveBirth():
 		var paycheck = Util.mini(20, bornChildAmount * 2)
 		addCredits(paycheck)
 		
-		#if(GM.ui != null):
-		#	GM.ui.showHornyMessage("[center][color=#f0dd61]AlphaCorp thanks you for your compliance and hopes to continue our 'fruitful cooperation' in the future \n [b]You recieved: " +str(paycheck)+ " credits![/b][/color][/center]")
 		GM.main.addMessage("AlphaCorp has transferred "+str(paycheck)+" credits to you for being a good mother.")
 	
 	return bornChildren

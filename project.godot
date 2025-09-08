@@ -79,6 +79,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Combat/AIStrategy/BasicAI.gd"
 }, {
+"base": "Button",
+"class": "BetterButton",
+"language": "GDScript",
+"path": "res://Game/UI/Buttons/BetterButton.gd"
+}, {
 "base": "Object",
 "class": "BodilyFluids",
 "language": "GDScript",
@@ -1769,6 +1774,7 @@ _global_script_class_icons={
 "BaseCharacter": "",
 "BaseStageScene3D": "",
 "BasicAI": "",
+"BetterButton": "",
 "BodilyFluids": "",
 "BodyWritings": "",
 "BodyWritingsDB": "",

@@ -18,6 +18,11 @@ func hideTooltip(theNodeRef):
 	nodeRef = null
 	tooltip.set_is_active(false)
 
+func setTooltipText(theNodeRef, title:String, text:String):
+	if(getRefNode() && theNodeRef != getRefNode()):
+		return
+	tooltip.set_text(title, text)
+
 func resetTooltips():
 	nodeRef = null
 	tooltip.set_is_active(false)

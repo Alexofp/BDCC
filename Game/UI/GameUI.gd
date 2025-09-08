@@ -16,31 +16,33 @@ var buttonsNeedUpdating:bool = false
 var extraButtonsNeedUpdating:bool = false
 onready var nextPageButton = $"%NextPageButton"
 onready var prevPageButton = $"%PrevPageButton"
-onready var textOutput = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer/RichTextLabel
-onready var mapAndTimePanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/MapAndTimePanel
-onready var playerPanel = $HBoxContainer/Panel/MarginContainer/PlayerPanel
-onready var scrollPanel = $HBoxContainer/VBoxContainer2/ScrollContainer
-onready var mainGameScreen = $HBoxContainer/VBoxContainer2
-onready var ingameMenuScreen = $HBoxContainer/InGameMenu
-onready var skillsScreen = $HBoxContainer/SkillsUI
-onready var skillsButton = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3/SkillsButton
-onready var debugScreen = $HBoxContainer/DebugPanel
-onready var debugPanelButton = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3/DebugMenu
-onready var rollbackButton = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/RollbackButton
+onready var textOutput = $"%TextOutput"
+onready var mapAndTimePanel = $"%MapAndTimePanel"
+onready var playerPanel = $"%PlayerPanel"
+onready var scrollPanel = $"%MainScrollContainer"
+onready var mainGameScreen = $"%MainScreenBoxContainer"
+onready var ingameMenuScreen = $"%InGameMenu"
+onready var skillsScreen = $"%SkillsUI"
+onready var skillsButton = $"%SkillsButton"
+onready var save_button = $"%SaveButton"
+onready var debugScreen = $"%DebugPanel"
+onready var debugPanelButton = $"%DebugMenuButton"
+onready var rollbackButton = $"%RollbackButton"
 var uiTextboxScene = preload("res://UI/UITextbox.tscn")
 var uiTextboxBigScene = preload("res://UI/UITextboxBig.tscn")
-onready var textcontainer = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer
-onready var smartCharacterPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/SmartCharacterPanel
-onready var devCommentaryPanel = $HBoxContainer/DevCommentary
-onready var sceneArtWorkRect = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer/SceneArtWorkRect
-onready var fullArtWorkRect = $FullArtworkRect
-onready var uniquePanelSpot = $HBoxContainer/VBoxContainer2/UniquePanelSpot
+onready var textcontainer = $"%TextAreaContainer"
+onready var smartCharacterPanel = $"%SmartCharacterPanel"
+onready var devCommentaryPanel = $"%DevCommentary"
+onready var sceneArtWorkRect = $"%SceneArtWorkRect"
+onready var fullArtWorkRect = $"%FullArtworkRect"
+onready var uniquePanelSpot = $"%UniquePanelSpot"
 onready var extra_buttons_grid = $"%ExtraButtonsGrid"
 var textboxes: Dictionary = {}
 var gameParser: GameParser
 var sayParser: SayParser
-onready var hornyMessage = $MessageSystem
-var isInBigAnswersMode = false
+var isInBigAnswersMode:bool = false
+
+onready var translate_box = $"%TranslateBox"
 
 func _exit_tree():
 	GM.ui = null
@@ -54,7 +56,7 @@ func _ready():
 		debugPanelButton.disabled = true
 	
 	if(!AutoTranslation.shouldTranslate()):
-		$HBoxContainer/VBoxContainer2/Panel/TranslateBox.visible = false
+		translate_box.visible = false
 	
 	manualTranslateButton.visible = false
 	
@@ -93,8 +95,6 @@ func _ready():
 	if(OS.has_touchscreen_ui_hint()):
 		textOutput.selection_enabled = false
 	
-	hornyMessage.visible = true
-		
 func say(text: String):
 	#textOutput.append_bbcode(gameParser.executeString(sayParser.processString(text)))
 	textOutput.bbcode_text += gameParser.executeString(sayParser.processString(text))
@@ -219,10 +219,6 @@ func setBigAnswersMode(newmode):
 			button.visible = true
 	isInBigAnswersMode = newmode
 
-onready var save_button = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer2/SaveButton
-onready var skills_button = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3/SkillsButton
-
-
 func updateButtons():
 	checkPageButtons()
 	
@@ -237,9 +233,9 @@ func updateButtons():
 			save_button.disabled = true
 		
 		if(GM.main.isInDungeon()):
-			skills_button.disabled = true
+			skillsButton.disabled = true
 		else:
-			skills_button.disabled = false
+			skillsButton.disabled = false
 		
 	for i in buttonsCountPerPage:
 		var button:Button = buttons[i]
@@ -527,9 +523,9 @@ func _on_RollbackButton_pressed():
 var savedOriginalText = ""
 var savedTranslatedText = ""
 var currentTranslationTask = 0
-onready var translateStatusLabel = $HBoxContainer/VBoxContainer2/Panel/TranslateBox/TranslateStatusLabel
-onready var showOriginalCheckbox = $HBoxContainer/VBoxContainer2/Panel/TranslateBox/ShowOriginalCheckbox
-onready var manualTranslateButton = $HBoxContainer/VBoxContainer2/Panel/TranslateBox/ManualTranslateButton
+onready var translateStatusLabel = $"%TranslateStatusLabel"
+onready var showOriginalCheckbox = $"%ShowOriginalCheckbox"
+onready var manualTranslateButton = $"%ManualTranslateButton"
 func translateText(manualButton = false):
 	if(AutoTranslation.shouldTranslate()):
 		showOriginalCheckbox.disabled = true
@@ -607,7 +603,9 @@ func _on_MapAndTimePanel_onDevComButton():
 	
 	
 
-onready var devComLabel = $HBoxContainer/DevCommentary/ScrollContainer/DevComLabel
+onready var devComLabel = $"%DevComLabel"
+onready var full_art_label = $"%FullArtLabel"
+
 func showDevCommentary(thetext):
 	hideAllScreens()
 	devCommentaryPanel.visible = true
@@ -623,16 +621,16 @@ func clearSceneArtwork():
 	sceneArtWorkRect.textures = null
 	sceneArtWorkRect.visible = false
 	fullArtWorkRect.textures = null
-	$FullArtworkRect/Label.text = ""
+	full_art_label.text = ""
 
 func setSceneArtWork(imageData):
 	if(imageData == null || !(imageData is Dictionary) || !OPTIONS.shouldShowSceneArt()):
 		pass
 	else:
 		if(imageData.has("artist") && imageData["artist"] != ""):
-			$FullArtworkRect/Label.text = "Art by "+str(imageData["artist"])
+			full_art_label.text = "Art by "+str(imageData["artist"])
 		else:
-			$FullArtworkRect/Label.text = ""
+			full_art_label.text = ""
 		fullArtWorkRect.textures = imageData["imagePath"]
 		sceneArtWorkRect.textures = imageData["imagePath"]
 		if(imageData.has("imageHeight")):
@@ -647,9 +645,6 @@ func _on_OpenFullArtWorkButton_pressed():
 
 func _on_CloseFullArtWork_pressed():
 	fullArtWorkRect.visible = false
-
-func showHornyMessage(theMessage: String):
-	hornyMessage.showMessageOnScreen(theMessage)
 
 func getCurrentPage() -> int:
 	return currentPage
