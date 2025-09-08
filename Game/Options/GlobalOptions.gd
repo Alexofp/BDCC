@@ -74,6 +74,8 @@ var cumIntensityMult = 1.0
 var visibleWritings:bool = true
 
 var autosaveEnabled = true
+var incrementalSaveNames: bool = false
+var saveNameCounter: int = 1
 
 var genderNamesOverrides = {}
 
@@ -121,6 +123,8 @@ func resetToDefaults():
 	advancedShadersEnabled = true
 	chainsEnabled = true
 	autosaveEnabled = true
+	incrementalSaveNames = false
+	saveNameCounter = 1
 	inventoryIconsSize = "small"
 	genderNamesOverrides = {}
 	sandboxPawnCount = 30
@@ -264,7 +268,17 @@ func shouldUseAdvancedShaders():
 	return advancedShadersEnabled
 
 func shouldAutosave():
-	return autosaveEnabled
+    return autosaveEnabled
+
+func shouldUseIncrementalSaveNames() -> bool:
+	return incrementalSaveNames
+
+func getSaveNameCounter() -> int:
+	return saveNameCounter
+
+func incrementSaveNameCounter() -> void:
+	saveNameCounter += 1
+	saveToFile()
 
 func shouldSpawnChains():
 	return chainsEnabled
@@ -624,6 +638,13 @@ func getChangeableOptions():
 					"id": "autosaveEnabled",
 					"type": "checkbox",
 					"value": autosaveEnabled,
+				},
+				{
+					"name": "Use incremental save names",
+					"description": "Default save names will follow an incremental numbering format",
+					"id": "incrementalSaveNames",
+					"type": "checkbox",
+					"value": incrementalSaveNames,
 				}
 			],
 		},
@@ -974,6 +995,8 @@ func applyOption(categoryID, optionID, value):
 	if(categoryID == "saves"):
 		if(optionID == "autosaveEnabled"):
 			autosaveEnabled = value
+		if(optionID == "incrementalSaveNames"):
+			incrementalSaveNames = value
 
 	if(categoryID == "modding"):
 		if(optionID == "showModdedLauncher"):
@@ -1148,6 +1171,8 @@ func saveData():
 		"advancedShadersEnabled": advancedShadersEnabled,
 		"chainsEnabled": chainsEnabled,
 		"autosaveEnabled": autosaveEnabled,
+		"incrementalSaveNames": incrementalSaveNames,
+		"saveNameCounter": saveNameCounter,
 		"inventoryIconsSize": inventoryIconsSize,
 		"genderNamesOverrides": genderNamesOverrides,
 		"cumEnabled": cumEnabled,
@@ -1208,6 +1233,8 @@ func loadData(data):
 	advancedShadersEnabled = loadVar(data, "advancedShadersEnabled", true)
 	chainsEnabled = loadVar(data, "chainsEnabled", true)
 	autosaveEnabled = loadVar(data, "autosaveEnabled", true)
+	incrementalSaveNames = loadVar(data, "incrementalSaveNames", false)
+	saveNameCounter = loadVar(data, "saveNameCounter", 1)
 	inventoryIconsSize = loadVar(data, "inventoryIconsSize", "small")
 	genderNamesOverrides = loadVar(data, "genderNamesOverrides", {})
 	cumEnabled = loadVar(data, "cumEnabled", true)
