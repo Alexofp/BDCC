@@ -35,13 +35,17 @@ func _on_CloseButton_pressed():
 
 
 func _on_LoadGameScreen_visibility_changed():
-	if(visible):
-		updateSaves()
-		
-		if(GM.ui != null && GM.pc != null):
-			saveFileNameInput.text = Util.stripBadFilenameCharacters(GM.pc.getName() + " - " + GM.ui.getCurrentLocationName())
-		else:
-			saveFileNameInput.text = "Unknown location"
+    if(visible):
+        updateSaves()
+        
+        if(GM.ui != null && GM.pc != null):
+            if(OPTIONS.shouldUseIncrementalSaveNames()):
+                var nextIndex:int = OPTIONS.getSaveNameCounter()
+                saveFileNameInput.text = Util.stripBadFilenameCharacters(GM.pc.getName() + " - Save " + str(nextIndex))
+            else:
+                saveFileNameInput.text = Util.stripBadFilenameCharacters(GM.pc.getName() + " - " + GM.ui.getCurrentLocationName())
+        else:
+            saveFileNameInput.text = "Unknown location"
 
 
 func _on_DeleteButton_pressed():
@@ -50,9 +54,11 @@ func _on_DeleteButton_pressed():
 
 
 func _on_SaveButton_pressed():
-	var saveName = saveFileNameInput.text
-	SAVE.saveGameRelative(saveName)
-	updateSaves()
+    var saveName = saveFileNameInput.text
+    SAVE.saveGameRelative(saveName)
+    if(OPTIONS.shouldUseIncrementalSaveNames()):
+        OPTIONS.incrementSaveNameCounter()
+    updateSaves()
 
 
 func _on_SaveFileNameInput_text_changed(new_text):
