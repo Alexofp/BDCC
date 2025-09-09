@@ -28,6 +28,11 @@ bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
 corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
+corner_radius_top_left = 16
+corner_radius_bottom_left = 16
+
 [sub_resource type="InputEventAction" id=29]
 action = "gameui_quicksave"
 
@@ -51,11 +56,6 @@ action = "gameui_menu"
 
 [sub_resource type="ShortCut" id=8]
 shortcut = SubResource( 32 )
-
-[sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
-corner_radius_top_left = 16
-corner_radius_bottom_left = 16
 
 [sub_resource type="InputEventAction" id=33]
 action = "gameui_prevpage"
@@ -106,7 +106,7 @@ size_flags_vertical = 3
 
 [node name="VBox" type="VBoxContainer" parent="MainLayout/HBoxContainer/LeftPanel/Margin"]
 margin_right = 522.0
-margin_bottom = 368.0
+margin_bottom = 334.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
 __meta__ = {
@@ -118,13 +118,14 @@ unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 522.0
+margin_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="MainLayout/HBoxContainer/LeftPanel/Margin/VBox"]
-margin_top = 4.0
+margin_top = 60.0
 margin_right = 522.0
-margin_bottom = 14.0
+margin_bottom = 70.0
 rect_min_size = Vector2( 0, 10 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -134,88 +135,9 @@ size_flags_stretch_ratio = 0.01
 unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 18.0
+margin_top = 74.0
 margin_right = 522.0
-margin_bottom = 278.0
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="MainLayout/HBoxContainer/LeftPanel/Margin/VBox"]
-margin_top = 282.0
-margin_right = 522.0
-margin_bottom = 308.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="SaveButton" type="Button" parent="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/HBoxContainer2"]
-unique_name_in_owner = true
-margin_right = 259.0
-margin_bottom = 26.0
-hint_tooltip = "Quick save (F5)"
-size_flags_horizontal = 3
-shortcut_in_tooltip = false
-shortcut = SubResource( 16 )
-text = "Q.save"
-
-[node name="LoadButton" type="Button" parent="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/HBoxContainer2"]
-margin_left = 263.0
-margin_right = 522.0
-margin_bottom = 26.0
-hint_tooltip = "Quick load (F9)"
-size_flags_horizontal = 3
-shortcut_in_tooltip = false
-shortcut = SubResource( 18 )
-text = "Q.load"
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="MainLayout/HBoxContainer/LeftPanel/Margin/VBox"]
-margin_top = 312.0
-margin_right = 522.0
-margin_bottom = 338.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="SkillsButton" type="Button" parent="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/HBoxContainer3"]
-unique_name_in_owner = true
-margin_right = 238.0
-margin_bottom = 26.0
-hint_tooltip = "Spend the stat points and look at your skills (X)"
-size_flags_horizontal = 3
-shortcut_in_tooltip = false
-shortcut = SubResource( 10 )
-text = "Skills"
-
-[node name="MenuButton" type="Button" parent="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/HBoxContainer3"]
-margin_left = 242.0
-margin_right = 481.0
-margin_bottom = 26.0
-hint_tooltip = "Open the menu (C)"
-size_flags_horizontal = 3
-shortcut_in_tooltip = false
-shortcut = SubResource( 8 )
-text = "Menu"
-
-[node name="DebugMenuButton" type="Button" parent="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/HBoxContainer3"]
-unique_name_in_owner = true
-margin_left = 485.0
-margin_right = 522.0
-margin_bottom = 26.0
-hint_tooltip = "Open the debug/cheats menu"
-shortcut_in_tooltip = false
-text = "DG"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MainLayout/HBoxContainer/LeftPanel/Margin/VBox"]
-margin_top = 342.0
-margin_right = 522.0
-margin_bottom = 368.0
-
-[node name="RollbackButton" type="Button" parent="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/HBoxContainer"]
-unique_name_in_owner = true
-margin_right = 522.0
-margin_bottom = 26.0
-hint_tooltip = "Rollback the game's state back"
-size_flags_horizontal = 3
-shortcut_in_tooltip = false
-text = "Rollback"
+margin_bottom = 334.0
 
 [node name="RightPanel" type="Panel" parent="MainLayout/HBoxContainer"]
 margin_left = 550.0
@@ -282,7 +204,7 @@ text = "Translate"
 unique_name_in_owner = true
 margin_top = 34.0
 margin_right = 1280.0
-margin_bottom = 312.0
+margin_bottom = 264.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 21 )
@@ -290,7 +212,7 @@ script = ExtResource( 21 )
 [node name="TextAreaContainer" type="VBoxContainer" parent="MainLayout/MainScreenBoxContainer/MainScrollContainer"]
 unique_name_in_owner = true
 margin_right = 1280.0
-margin_bottom = 278.0
+margin_bottom = 230.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -330,26 +252,128 @@ custom_effects = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtReso
 [node name="UniquePanelSpot" type="MarginContainer" parent="MainLayout/MainScreenBoxContainer"]
 unique_name_in_owner = true
 visible = false
-margin_top = 358.0
-margin_right = 710.0
-margin_bottom = 678.0
+margin_top = 175.0
+margin_right = 1280.0
+margin_bottom = 312.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ExtraButtonsGrid" type="GridContainer" parent="MainLayout/MainScreenBoxContainer"]
-unique_name_in_owner = true
-margin_top = 316.0
+[node name="HBoxContainer" type="HBoxContainer" parent="MainLayout/MainScreenBoxContainer"]
+margin_top = 268.0
 margin_right = 1280.0
-margin_bottom = 316.0
+margin_bottom = 346.0
+custom_constants/separation = 0
+
+[node name="SideMenuButtons" type="VBoxContainer" parent="MainLayout/MainScreenBoxContainer/HBoxContainer"]
+margin_right = 162.0
+margin_bottom = 78.0
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MainLayout/MainScreenBoxContainer/HBoxContainer/SideMenuButtons"]
+margin_right = 162.0
+margin_bottom = 26.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveButton" type="Button" parent="MainLayout/MainScreenBoxContainer/HBoxContainer/SideMenuButtons/HBoxContainer2"]
+unique_name_in_owner = true
+margin_right = 79.0
+margin_bottom = 26.0
+hint_tooltip = "Quick save (F5)"
+size_flags_horizontal = 3
+shortcut_in_tooltip = false
+shortcut = SubResource( 16 )
+text = "Q.save"
+
+[node name="LoadButton" type="Button" parent="MainLayout/MainScreenBoxContainer/HBoxContainer/SideMenuButtons/HBoxContainer2"]
+margin_left = 83.0
+margin_right = 162.0
+margin_bottom = 26.0
+hint_tooltip = "Quick load (F9)"
+size_flags_horizontal = 3
+shortcut_in_tooltip = false
+shortcut = SubResource( 18 )
+text = "Q.load"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MainLayout/MainScreenBoxContainer/HBoxContainer/SideMenuButtons"]
+margin_top = 26.0
+margin_right = 162.0
+margin_bottom = 52.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SkillsButton" type="Button" parent="MainLayout/MainScreenBoxContainer/HBoxContainer/SideMenuButtons/HBoxContainer3"]
+unique_name_in_owner = true
+margin_right = 56.0
+margin_bottom = 26.0
+hint_tooltip = "Spend the stat points and look at your skills (X)"
+size_flags_horizontal = 3
+shortcut_in_tooltip = false
+shortcut = SubResource( 10 )
+text = "Skills"
+
+[node name="MenuButton" type="Button" parent="MainLayout/MainScreenBoxContainer/HBoxContainer/SideMenuButtons/HBoxContainer3"]
+margin_left = 60.0
+margin_right = 121.0
+margin_bottom = 26.0
+hint_tooltip = "Open the menu (C)"
+size_flags_horizontal = 3
+shortcut_in_tooltip = false
+shortcut = SubResource( 8 )
+text = "Menu"
+
+[node name="DebugMenuButton" type="Button" parent="MainLayout/MainScreenBoxContainer/HBoxContainer/SideMenuButtons/HBoxContainer3"]
+unique_name_in_owner = true
+margin_left = 125.0
+margin_right = 162.0
+margin_bottom = 26.0
+hint_tooltip = "Open the debug/cheats menu"
+shortcut_in_tooltip = false
+text = "DG"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainLayout/MainScreenBoxContainer/HBoxContainer/SideMenuButtons"]
+margin_top = 52.0
+margin_right = 162.0
+margin_bottom = 78.0
+size_flags_vertical = 3
+
+[node name="RollbackButton" type="Button" parent="MainLayout/MainScreenBoxContainer/HBoxContainer/SideMenuButtons/HBoxContainer"]
+unique_name_in_owner = true
+margin_right = 162.0
+margin_bottom = 26.0
+hint_tooltip = "Rollback the game's state back"
+size_flags_horizontal = 3
+shortcut_in_tooltip = false
+text = "Rollback"
+
+[node name="VSeparator" type="VSeparator" parent="MainLayout/MainScreenBoxContainer/HBoxContainer"]
+margin_left = 162.0
+margin_right = 166.0
+margin_bottom = 78.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainLayout/MainScreenBoxContainer/HBoxContainer"]
+margin_left = 166.0
+margin_right = 1280.0
+margin_bottom = 78.0
+size_flags_horizontal = 3
+custom_constants/separation = 0
+
+[node name="ExtraButtonsGrid" type="GridContainer" parent="MainLayout/MainScreenBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 1114.0
 size_flags_horizontal = 3
 columns = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainLayout/MainScreenBoxContainer"]
-margin_top = 320.0
-margin_right = 1280.0
-margin_bottom = 346.0
+[node name="HBoxContainer" type="HBoxContainer" parent="MainLayout/MainScreenBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 1114.0
+margin_bottom = 26.0
 
-[node name="PrevPageButton" type="Button" parent="MainLayout/MainScreenBoxContainer/HBoxContainer"]
+[node name="PrevPageButton" type="Button" parent="MainLayout/MainScreenBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 margin_right = 23.0
 margin_bottom = 26.0
@@ -357,19 +381,19 @@ shortcut_in_tooltip = false
 shortcut = SubResource( 26 )
 text = "<"
 
-[node name="ButtonGridContainer" type="GridContainer" parent="MainLayout/MainScreenBoxContainer/HBoxContainer"]
+[node name="ButtonGridContainer" type="GridContainer" parent="MainLayout/MainScreenBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 margin_left = 27.0
-margin_right = 1253.0
+margin_right = 1087.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 5
 
-[node name="NextPageButton" type="Button" parent="MainLayout/MainScreenBoxContainer/HBoxContainer"]
+[node name="NextPageButton" type="Button" parent="MainLayout/MainScreenBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-margin_left = 1257.0
-margin_right = 1280.0
+margin_left = 1091.0
+margin_right = 1114.0
 margin_bottom = 26.0
 shortcut_in_tooltip = false
 shortcut = SubResource( 28 )
@@ -490,17 +514,17 @@ margin_right = 71.0
 margin_bottom = 90.0
 
 [connection signal="onDevComButton" from="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/MapAndTimePanel" to="." method="_on_MapAndTimePanel_onDevComButton"]
-[connection signal="pressed" from="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/HBoxContainer2/SaveButton" to="." method="_on_SaveButton_pressed"]
-[connection signal="pressed" from="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/HBoxContainer2/LoadButton" to="." method="_on_LoadButton_pressed"]
-[connection signal="pressed" from="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/HBoxContainer3/SkillsButton" to="." method="_on_SkillsButton_pressed"]
-[connection signal="pressed" from="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/HBoxContainer3/MenuButton" to="." method="_on_MenuButton_pressed"]
-[connection signal="pressed" from="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/HBoxContainer3/DebugMenuButton" to="." method="_on_DebugMenu_pressed"]
-[connection signal="pressed" from="MainLayout/HBoxContainer/LeftPanel/Margin/VBox/HBoxContainer/RollbackButton" to="." method="_on_RollbackButton_pressed"]
 [connection signal="pressed" from="MainLayout/MainScreenBoxContainer/Panel/TranslateBox/ShowOriginalCheckbox" to="." method="_on_ShowOriginalCheckbox_pressed"]
 [connection signal="pressed" from="MainLayout/MainScreenBoxContainer/Panel/TranslateBox/ManualTranslateButton" to="." method="_on_ManualTranslateButton_pressed"]
 [connection signal="pressed" from="MainLayout/MainScreenBoxContainer/MainScrollContainer/TextAreaContainer/SceneArtWorkRect/OpenFullArtWorkButton" to="." method="_on_OpenFullArtWorkButton_pressed"]
-[connection signal="pressed" from="MainLayout/MainScreenBoxContainer/HBoxContainer/PrevPageButton" to="." method="_on_PrevPageButton_pressed"]
-[connection signal="pressed" from="MainLayout/MainScreenBoxContainer/HBoxContainer/NextPageButton" to="." method="_on_NextPageButton_pressed"]
+[connection signal="pressed" from="MainLayout/MainScreenBoxContainer/HBoxContainer/SideMenuButtons/HBoxContainer2/SaveButton" to="." method="_on_SaveButton_pressed"]
+[connection signal="pressed" from="MainLayout/MainScreenBoxContainer/HBoxContainer/SideMenuButtons/HBoxContainer2/LoadButton" to="." method="_on_LoadButton_pressed"]
+[connection signal="pressed" from="MainLayout/MainScreenBoxContainer/HBoxContainer/SideMenuButtons/HBoxContainer3/SkillsButton" to="." method="_on_SkillsButton_pressed"]
+[connection signal="pressed" from="MainLayout/MainScreenBoxContainer/HBoxContainer/SideMenuButtons/HBoxContainer3/MenuButton" to="." method="_on_MenuButton_pressed"]
+[connection signal="pressed" from="MainLayout/MainScreenBoxContainer/HBoxContainer/SideMenuButtons/HBoxContainer3/DebugMenuButton" to="." method="_on_DebugMenu_pressed"]
+[connection signal="pressed" from="MainLayout/MainScreenBoxContainer/HBoxContainer/SideMenuButtons/HBoxContainer/RollbackButton" to="." method="_on_RollbackButton_pressed"]
+[connection signal="pressed" from="MainLayout/MainScreenBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/PrevPageButton" to="." method="_on_PrevPageButton_pressed"]
+[connection signal="pressed" from="MainLayout/MainScreenBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/NextPageButton" to="." method="_on_NextPageButton_pressed"]
 [connection signal="onResumeButtonPressed" from="MainLayout/InGameMenu" to="." method="showGameScreen"]
 [connection signal="onClosePressed" from="MainLayout/SkillsUI" to="." method="showGameScreen"]
 [connection signal="meta_clicked" from="MainLayout/DevCommentary/ScrollContainer/DevComLabel" to="." method="_on_DevComLabel_meta_clicked"]

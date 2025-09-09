@@ -18,7 +18,53 @@ script = ExtResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+margin_right = 1280.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="HFlowContainer" type="HFlowContainer" parent="VBoxContainer"]
+margin_top = 24.0
+margin_right = 1280.0
+margin_bottom = 64.0
+
+[node name="GameplayCatButton" type="Button" parent="VBoxContainer/HFlowContainer"]
+unique_name_in_owner = true
+margin_right = 334.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 3
+text = "Gameplay"
+
+[node name="GameCatButton" type="Button" parent="VBoxContainer/HFlowContainer"]
+unique_name_in_owner = true
+margin_left = 338.0
+margin_right = 636.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 3
+text = "Game"
+
+[node name="DisplayCatButton" type="Button" parent="VBoxContainer/HFlowContainer"]
+unique_name_in_owner = true
+margin_left = 640.0
+margin_right = 951.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 3
+text = "Display"
+
+[node name="InterfaceCatButton" type="Button" parent="VBoxContainer/HFlowContainer"]
+unique_name_in_owner = true
+margin_left = 955.0
+margin_right = 1280.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 3
+text = "Interface"
+
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+margin_top = 68.0
 margin_right = 1280.0
 margin_bottom = 616.0
 size_flags_horizontal = 3
@@ -27,33 +73,28 @@ script = ExtResource( 5 )
 
 [node name="ScrollVBox" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 margin_right = 1280.0
-margin_bottom = 616.0
+margin_bottom = 548.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
+[node name="CategoryNameLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
+unique_name_in_owner = true
 margin_right = 1280.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 0, 20 )
-
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
-margin_top = 24.0
-margin_right = 1280.0
-margin_bottom = 45.0
+margin_bottom = 21.0
 bbcode_enabled = true
 bbcode_text = "Options screen"
 text = "Options screen"
 fit_content_height = true
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
-margin_top = 49.0
+margin_top = 25.0
 margin_right = 1280.0
-margin_bottom = 53.0
+margin_bottom = 29.0
 
 [node name="OptionsContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
-margin_top = 57.0
+margin_top = 33.0
 margin_right = 1280.0
-margin_bottom = 167.0
+margin_bottom = 143.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
@@ -108,6 +149,10 @@ hint_tooltip = "Resets render settings, useful if someting breaks. Restart the g
 size_flags_horizontal = 3
 text = "Reset Render Settings"
 
+[connection signal="pressed" from="VBoxContainer/HFlowContainer/GameplayCatButton" to="." method="_on_GameplayCatButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HFlowContainer/GameCatButton" to="." method="_on_GameCatButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HFlowContainer/DisplayCatButton" to="." method="_on_DisplayCatButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HFlowContainer/InterfaceCatButton" to="." method="_on_InterfaceCatButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/RevertButton" to="." method="_on_RevertButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/GridContainer/ResetRenderButton" to="." method="_on_ResetRenderButton_pressed"]

@@ -46,10 +46,12 @@ onready var translate_box = $"%TranslateBox"
 
 func _exit_tree():
 	GM.ui = null
+	OPTIONS.checkScreenOrientation()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GM.ui = self
+	OPTIONS.checkScreenOrientation()
 	
 	if(!OPTIONS.isDebugPanelEnabled()):
 		debugPanelButton.visible = false

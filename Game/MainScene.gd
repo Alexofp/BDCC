@@ -214,7 +214,10 @@ func getDynamicCharactersPools():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	gameUI = load("res://Game/UI/GameUI.tscn").instance()
+	if(OPTIONS.getUILayoutFinal() == OPTIONS.LAYOUT_TOUCH_VERTICAL):
+		gameUI = load("res://Game/UI/GameUITouchVertical.tscn").instance()
+	else:
+		gameUI = load("res://Game/UI/GameUI.tscn").instance()
 	#gameUI = load("res://Game/UI/GameUITouchVertical.tscn").instance()
 	add_child(gameUI)
 	gameUI.connect("onDevComButton", self, "_on_GameUI_onDevComButton")

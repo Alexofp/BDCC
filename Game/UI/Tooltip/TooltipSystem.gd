@@ -30,7 +30,7 @@ func resetTooltips():
 func _process(_delta):
 	if(nodeRef == null):
 		return
-	var theNode:Control = nodeRef.get_ref()
+	var theNode = nodeRef.get_ref()
 	if(!theNode || !theNode.is_visible_in_tree()):
 		resetTooltips()
 
