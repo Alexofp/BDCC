@@ -6,7 +6,8 @@ signal on_rollback_button
 signal onDevComButton
 var buttons: Array = []
 var buttonsCountPerPage: int = 15
-var optionButtonScene: PackedScene = preload("res://Game/UI/Buttons/SceneOptionButton.tscn")
+#var optionButtonScene: PackedScene = preload("res://Game/UI/Buttons/SceneOptionButton.tscn")
+var optionButtonScene: PackedScene = preload("res://Game/UI/Buttons/BetterButton.tscn")
 onready var optionButtonsContainer = $"%ButtonGridContainer"
 var currentPage:int = 0
 var options: Dictionary = {}
@@ -46,12 +47,12 @@ onready var translate_box = $"%TranslateBox"
 
 func _exit_tree():
 	GM.ui = null
-	OPTIONS.checkScreenOrientation()
+	OPTIONS.setSupportsVertical(true)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GM.ui = self
-	OPTIONS.checkScreenOrientation()
+	#OPTIONS.setSupportsVertical(false)
 	
 	if(!OPTIONS.isDebugPanelEnabled()):
 		debugPanelButton.visible = false
@@ -191,7 +192,7 @@ func updateExtraButtons():
 		
 		var theOptionEntry:Array = extraOptions[_indx]
 		var newButton = optionButtonScene.instance()
-		newButton.text = theOptionEntry[1]
+		newButton.setButtonText(theOptionEntry[1])
 		extra_buttons_grid.add_child(newButton)
 		newButton.setShortcutPhysicalScancode(KEY_1+_indx, true)
 		var _some = newButton.connect("pressedActually", self, "_on_extra_option_button", [_indx])
@@ -241,8 +242,8 @@ func updateButtons():
 		
 	for i in buttonsCountPerPage:
 		var button:Button = buttons[i]
-		button.disabled = true
-		button.text = ""
+		button.setIsDisabled(true)
+		button.setButtonText("")
 		if(button.is_connected("pressedActually", self, "_on_option_button")):
 			button.disconnect("pressedActually", self, "_on_option_button")
 		if(button.is_connected("mouse_entered", self, "_on_option_button_tooltip")):
@@ -260,13 +261,13 @@ func updateButtons():
 			
 		var option = options[index]
 		var button:Button = buttons[i]
-		button.text = option[1]
-		button.disabled = !option[0]
+		button.setButtonText(option[1])
+		button.setIsDisabled(!option[0])
 		if(AutoTranslation.shouldTranslateButtons && !showOriginalCheckbox.pressed):
 			if(!button.disabled && option.size() > 5):
-				button.text = option[5]
+				button.setButtonText(option[5])
 			if(button.disabled && option.size() > 3):
-				button.text = option[3]
+				button.setButtonText(option[3])
 		#button.set_meta("game_option", index)
 		var _some = button.connect("pressedActually", self, "_on_option_button", [index])
 		var _some2 = button.connect("mouse_entered", self, "_on_option_button_tooltip", [index, button])
@@ -661,3 +662,13 @@ func setCurrentPage(newCurrentPage:int):
 	currentPage = newCurrentPage
 	
 	updateButtons()
+
+var isSideMenuOnLeft:bool = true
+onready var side_menu_buttons = $"%SideMenuButtons"
+func _on_SwitchButtonsSideButton_pressed():
+	var thePar:Control = side_menu_buttons.get_parent()
+	if(isSideMenuOnLeft):
+		thePar.move_child(side_menu_buttons, thePar.get_child_count()-1)
+	else:
+		thePar.move_child(side_menu_buttons, 0)
+	isSideMenuOnLeft = !isSideMenuOnLeft

@@ -55,11 +55,13 @@ theme = ExtResource( 1 )
 script = ExtResource( 3 )
 GlobalTheme = ExtResource( 1 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="MainHBox" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Panel2" type="Panel" parent="HBoxContainer"]
+[node name="Panel2" type="Panel" parent="MainHBox"]
+unique_name_in_owner = true
 margin_right = 260.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 260, 0 )
@@ -67,7 +69,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
 custom_styles/panel = SubResource( 1 )
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Panel2"]
+[node name="MarginContainer" type="MarginContainer" parent="MainHBox/Panel2"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 12.0
@@ -77,7 +79,7 @@ margin_bottom = -12.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Panel2/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainHBox/Panel2/MarginContainer"]
 margin_right = 236.0
 margin_bottom = 696.0
 size_flags_horizontal = 3
@@ -86,27 +88,28 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainHBox/Panel2/MarginContainer/VBoxContainer"]
 margin_right = 236.0
 margin_bottom = 696.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 9 )
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="MainHBox/Panel2/MarginContainer/VBoxContainer/ScrollContainer"]
 margin_right = 236.0
 margin_bottom = 696.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="DonationsLabel" type="RichTextLabel" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer3"]
+[node name="DonationsLabel" type="RichTextLabel" parent="MainHBox/Panel2/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer3"]
+unique_name_in_owner = true
 margin_right = 236.0
 margin_bottom = 21.0
 custom_fonts/bold_font = SubResource( 6 )
 bbcode_enabled = true
 fit_content_height = true
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MainHBox/Panel2/MarginContainer/VBoxContainer"]
 visible = false
 margin_top = 640.0
 margin_right = 236.0
@@ -115,14 +118,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SaveButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="SaveButton" type="Button" parent="MainHBox/Panel2/MarginContainer/VBoxContainer/HBoxContainer2"]
 margin_right = 116.0
 margin_bottom = 26.0
 hint_tooltip = "Save the game"
 size_flags_horizontal = 3
 text = "Quick save"
 
-[node name="LoadButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="LoadButton" type="Button" parent="MainHBox/Panel2/MarginContainer/VBoxContainer/HBoxContainer2"]
 margin_left = 120.0
 margin_right = 236.0
 margin_bottom = 26.0
@@ -130,13 +133,13 @@ hint_tooltip = "Load the saved game"
 size_flags_horizontal = 3
 text = "Quick load"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainHBox/Panel2/MarginContainer/VBoxContainer"]
 visible = false
 margin_top = 670.0
 margin_right = 236.0
 margin_bottom = 696.0
 
-[node name="PrevPageButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="PrevPageButton" type="Button" parent="MainHBox/Panel2/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_right = 116.0
 margin_bottom = 26.0
 hint_tooltip = "Flip to the previous page of options"
@@ -147,7 +150,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NextPageButton" type="Button" parent="HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="NextPageButton" type="Button" parent="MainHBox/Panel2/MarginContainer/VBoxContainer/HBoxContainer"]
 margin_left = 120.0
 margin_right = 236.0
 margin_bottom = 26.0
@@ -159,26 +162,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HSplitContainer" type="HSplitContainer" parent="HBoxContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="MainHBox"]
 margin_left = 264.0
 margin_right = 269.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 5, 0 )
 
-[node name="MainVBox" type="VBoxContainer" parent="HBoxContainer"]
+[node name="CenterAreaVBox" type="VBoxContainer" parent="MainHBox"]
+unique_name_in_owner = true
 margin_left = 273.0
 margin_right = 1027.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
+custom_constants/separation = 0
+
+[node name="MainVBox" type="VBoxContainer" parent="MainHBox/CenterAreaVBox"]
+unique_name_in_owner = true
+margin_right = 754.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/MainVBox"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainHBox/CenterAreaVBox/MainVBox"]
 margin_right = 754.0
 margin_bottom = 616.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/MainVBox/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainHBox/CenterAreaVBox/MainVBox/ScrollContainer"]
 margin_right = 754.0
 margin_bottom = 616.0
 size_flags_horizontal = 3
@@ -188,12 +199,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/MainVBox/ScrollContainer/VBoxContainer"]
+[node name="Spacer" type="Control" parent="MainHBox/CenterAreaVBox/MainVBox/ScrollContainer/VBoxContainer"]
 margin_right = 754.0
 margin_bottom = 150.0
-rect_min_size = Vector2( 0, 150 )
+size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="HBoxContainer/MainVBox/ScrollContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MainHBox/CenterAreaVBox/MainVBox/ScrollContainer/VBoxContainer"]
 margin_top = 160.0
 margin_right = 754.0
 margin_bottom = 199.0
@@ -202,7 +213,7 @@ text = "Broken Dreams Correctional Center"
 align = 1
 autowrap = true
 
-[node name="Label3" type="RichTextLabel" parent="HBoxContainer/MainVBox/ScrollContainer/VBoxContainer"]
+[node name="Label3" type="RichTextLabel" parent="MainHBox/CenterAreaVBox/MainVBox/ScrollContainer/VBoxContainer"]
 margin_top = 209.0
 margin_right = 754.0
 margin_bottom = 230.0
@@ -211,19 +222,19 @@ bbcode_text = "[center]An erotic text-based rpg about being a prisoner in a spac
 text = "An erotic text-based rpg about being a prisoner in a space prison."
 fit_content_height = true
 
-[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/MainVBox/ScrollContainer/VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="MainHBox/CenterAreaVBox/MainVBox/ScrollContainer/VBoxContainer"]
 margin_top = 240.0
 margin_right = 754.0
 margin_bottom = 309.0
 rect_min_size = Vector2( 0, 69 )
 
-[node name="Panel" type="PanelContainer" parent="HBoxContainer/MainVBox/ScrollContainer/VBoxContainer"]
+[node name="Panel" type="PanelContainer" parent="MainHBox/CenterAreaVBox/MainVBox/ScrollContainer/VBoxContainer"]
 margin_top = 319.0
 margin_right = 754.0
 margin_bottom = 417.0
 custom_styles/panel = SubResource( 4 )
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/MainVBox/ScrollContainer/VBoxContainer/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="MainHBox/CenterAreaVBox/MainVBox/ScrollContainer/VBoxContainer/Panel"]
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 750.0
@@ -236,7 +247,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="RichTextLabel" parent="HBoxContainer/MainVBox/ScrollContainer/VBoxContainer/Panel/MarginContainer"]
+[node name="Label2" type="RichTextLabel" parent="MainHBox/CenterAreaVBox/MainVBox/ScrollContainer/VBoxContainer/Panel/MarginContainer"]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 726.0
@@ -250,14 +261,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VersionLabel" type="Label" parent="HBoxContainer/MainVBox/ScrollContainer/VBoxContainer"]
+[node name="VersionLabel" type="Label" parent="MainHBox/CenterAreaVBox/MainVBox/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 427.0
 margin_right = 754.0
 margin_bottom = 447.0
 text = "Version number here"
 align = 2
 
-[node name="Label2" type="RichTextLabel" parent="HBoxContainer/MainVBox/ScrollContainer/VBoxContainer"]
+[node name="Label2" type="RichTextLabel" parent="MainHBox/CenterAreaVBox/MainVBox/ScrollContainer/VBoxContainer"]
 margin_top = 457.0
 margin_right = 754.0
 margin_bottom = 478.0
@@ -266,14 +278,22 @@ bbcode_text = "[right]Created by Rahi[/right]"
 text = "Created by Rahi"
 fit_content_height = true
 
-[node name="GridContainer" type="GridContainer" parent="HBoxContainer/MainVBox"]
+[node name="Spacer2" type="Control" parent="MainHBox/CenterAreaVBox/MainVBox/ScrollContainer/VBoxContainer"]
+margin_top = 488.0
+margin_right = 754.0
+margin_bottom = 616.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.85
+
+[node name="GridContainer" type="GridContainer" parent="MainHBox/CenterAreaVBox/MainVBox"]
 margin_top = 620.0
 margin_right = 754.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 0, 100 )
 columns = 5
 
-[node name="ResumeButton" parent="HBoxContainer/MainVBox/GridContainer" instance=ExtResource( 11 )]
+[node name="ResumeButton" parent="MainHBox/CenterAreaVBox/MainVBox/GridContainer" instance=ExtResource( 11 )]
+unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 148.0
@@ -282,7 +302,7 @@ text = "Resume"
 myTooltipDesc = "Load the latest save and continue playing"
 myShortcutKey = "1"
 
-[node name="NewGameButton" parent="HBoxContainer/MainVBox/GridContainer" instance=ExtResource( 11 )]
+[node name="NewGameButton" parent="MainHBox/CenterAreaVBox/MainVBox/GridContainer" instance=ExtResource( 11 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 152.0
@@ -292,7 +312,7 @@ text = "New game"
 myTooltipDesc = "Start a new game"
 myShortcutKey = "2"
 
-[node name="LoadGameButton" parent="HBoxContainer/MainVBox/GridContainer" instance=ExtResource( 11 )]
+[node name="LoadGameButton" parent="MainHBox/CenterAreaVBox/MainVBox/GridContainer" instance=ExtResource( 11 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 304.0
@@ -302,7 +322,7 @@ text = "Load game"
 myTooltipDesc = "Load a previous game"
 myShortcutKey = "3"
 
-[node name="OptionsButton" parent="HBoxContainer/MainVBox/GridContainer" instance=ExtResource( 11 )]
+[node name="OptionsButton" parent="MainHBox/CenterAreaVBox/MainVBox/GridContainer" instance=ExtResource( 11 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 456.0
@@ -312,7 +332,7 @@ text = "Options"
 myTooltipDesc = "Open the settings menu"
 myShortcutKey = "4"
 
-[node name="CreditsButton" parent="HBoxContainer/MainVBox/GridContainer" instance=ExtResource( 11 )]
+[node name="CreditsButton" parent="MainHBox/CenterAreaVBox/MainVBox/GridContainer" instance=ExtResource( 11 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 607.0
@@ -322,103 +342,122 @@ text = "Credits"
 myTooltipDesc = "Check the credits"
 myShortcutKey = "5"
 
-[node name="DiscordButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
+[node name="DiscordButton" parent="MainHBox/CenterAreaVBox/MainVBox/GridContainer" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 30.0
 margin_right = 148.0
 margin_bottom = 56.0
-hint_tooltip = "Join the game's community on discord"
-size_flags_horizontal = 3
 text = "Join Discord"
+myTooltipDesc = "Join the game's discord server (18+ only)"
+myShortcutKey = "Q"
 
-[node name="GithubButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
+[node name="GithubButton" parent="MainHBox/CenterAreaVBox/MainVBox/GridContainer" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 152.0
 margin_top = 30.0
 margin_right = 300.0
 margin_bottom = 56.0
-hint_tooltip = "Open the project's github page"
-size_flags_horizontal = 3
 text = "Github"
+myTooltipDesc = "Open the game's GitHub page"
+myShortcutKey = "W"
 
-[node name="DevToolsButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
+[node name="DevToolsButton" parent="MainHBox/CenterAreaVBox/MainVBox/GridContainer" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 304.0
 margin_top = 30.0
 margin_right = 452.0
 margin_bottom = 56.0
-hint_tooltip = "Open the panel with the tools that are useful for content developers"
-size_flags_horizontal = 3
 text = "DevTools"
+myTooltipDesc = "Open the panel with the tools that are useful for content developers"
+myShortcutKey = "E"
 
-[node name="ChangelogButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
+[node name="ChangelogButton" parent="MainHBox/CenterAreaVBox/MainVBox/GridContainer" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 456.0
 margin_top = 30.0
 margin_right = 603.0
 margin_bottom = 56.0
-hint_tooltip = "View the project's changelog"
-size_flags_horizontal = 3
 text = "Changelog"
+myTooltipDesc = "View the project's changelog"
+myShortcutKey = "R"
 
-[node name="ModsButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
+[node name="ModsButton" parent="MainHBox/CenterAreaVBox/MainVBox/GridContainer" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 607.0
 margin_top = 30.0
 margin_right = 754.0
 margin_bottom = 56.0
-hint_tooltip = "See what modules are loaded currently"
-size_flags_horizontal = 3
 text = "Mods"
+myTooltipDesc = "See what modules are loaded currently"
+myShortcutKey = "T"
 
-[node name="AutoTranslatorButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
+[node name="AutoTranslatorButton" parent="MainHBox/CenterAreaVBox/MainVBox/GridContainer" instance=ExtResource( 11 )]
+unique_name_in_owner = true
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 60.0
 margin_right = 148.0
 margin_bottom = 86.0
-hint_tooltip = "Experimental feature"
-size_flags_horizontal = 3
 text = "AutoTranslator"
+myTooltipDesc = "Experimental feature that translates scenes on the fly"
+myShortcutKey = "A"
 
-[node name="DatapackButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
+[node name="DatapackButton" parent="MainHBox/CenterAreaVBox/MainVBox/GridContainer" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 152.0
 margin_top = 60.0
 margin_right = 300.0
 margin_bottom = 86.0
-size_flags_horizontal = 3
 text = "Datapacks"
+myTooltipDesc = "Manage or create datapacks"
+myShortcutKey = "S"
 
-[node name="QuitButton" type="Button" parent="HBoxContainer/MainVBox/GridContainer"]
+[node name="QuitButton" parent="MainHBox/CenterAreaVBox/MainVBox/GridContainer" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 304.0
 margin_top = 60.0
 margin_right = 452.0
 margin_bottom = 86.0
-hint_tooltip = "See you space cowboy..."
-size_flags_horizontal = 3
 text = "Quit"
+myTooltipDesc = "See you space cowboy..."
+myShortcutKey = "D"
 
-[node name="DevToolsScreen" type="VBoxContainer" parent="HBoxContainer"]
+[node name="DevToolsScreen" type="VBoxContainer" parent="MainHBox/CenterAreaVBox"]
+unique_name_in_owner = true
 visible = false
-margin_left = 273.0
-margin_right = 1027.0
+margin_right = 754.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="DevScreen" type="Control" parent="HBoxContainer/DevToolsScreen"]
+[node name="DevScreen" type="Control" parent="MainHBox/CenterAreaVBox/DevToolsScreen"]
+unique_name_in_owner = true
 margin_right = 754.0
 margin_bottom = 616.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="GridContainer" type="GridContainer" parent="HBoxContainer/DevToolsScreen"]
+[node name="GridContainer" type="GridContainer" parent="MainHBox/CenterAreaVBox/DevToolsScreen"]
 margin_top = 620.0
 margin_right = 754.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 0, 100 )
 columns = 5
 
-[node name="DevClose" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
+[node name="DevClose" type="Button" parent="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer"]
 margin_right = 188.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 text = "Close"
 
-[node name="DevSceneConverter2" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
+[node name="DevSceneConverter2" type="Button" parent="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer"]
 margin_left = 192.0
 margin_right = 339.0
 margin_bottom = 26.0
@@ -426,7 +465,7 @@ hint_tooltip = "Converts scenes from plain-text format into what the game can us
 size_flags_horizontal = 3
 text = "SceneConverter"
 
-[node name="DevLikesGenerator" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
+[node name="DevLikesGenerator" type="Button" parent="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer"]
 margin_left = 343.0
 margin_right = 478.0
 margin_bottom = 26.0
@@ -434,7 +473,7 @@ hint_tooltip = "Panel for easy creation of npc likes/dislikes tables. Used for l
 size_flags_horizontal = 3
 text = "Npc Likes Gen."
 
-[node name="DevCharCreator" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
+[node name="DevCharCreator" type="Button" parent="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer"]
 margin_left = 482.0
 margin_right = 616.0
 margin_bottom = 26.0
@@ -442,7 +481,7 @@ hint_tooltip = "A thing to quickly design an npc"
 size_flags_horizontal = 3
 text = "Char Creator"
 
-[node name="DevModCreator" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
+[node name="DevModCreator" type="Button" parent="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer"]
 margin_left = 620.0
 margin_right = 754.0
 margin_bottom = 26.0
@@ -450,7 +489,7 @@ hint_tooltip = "A tool to export your mod"
 size_flags_horizontal = 3
 text = "ModMaker"
 
-[node name="DevSceneConverter" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
+[node name="DevSceneConverter" type="Button" parent="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer"]
 margin_top = 30.0
 margin_right = 188.0
 margin_bottom = 56.0
@@ -458,7 +497,7 @@ hint_tooltip = "Converts scenes from plain-text format into what the game can us
 size_flags_horizontal = 3
 text = "SceneConverter (old)"
 
-[node name="SexActivityCreator" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
+[node name="SexActivityCreator" type="Button" parent="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer"]
 visible = false
 margin_top = 30.0
 margin_right = 188.0
@@ -467,7 +506,7 @@ hint_tooltip = "Provides an easier way to code sex activities"
 size_flags_horizontal = 3
 text = "Sex Activity Creator"
 
-[node name="InteractionCreator" type="Button" parent="HBoxContainer/DevToolsScreen/GridContainer"]
+[node name="InteractionCreator" type="Button" parent="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer"]
 margin_top = 30.0
 margin_right = 188.0
 margin_bottom = 56.0
@@ -475,53 +514,67 @@ hint_tooltip = "Provides an easier way to code sex activities"
 size_flags_horizontal = 3
 text = "Interaction Creator"
 
-[node name="LoadGameScreen" parent="HBoxContainer" instance=ExtResource( 4 )]
+[node name="LoadGameScreen" parent="MainHBox/CenterAreaVBox" instance=ExtResource( 4 )]
+unique_name_in_owner = true
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 730.0
-margin_right = 1027.0
+margin_left = 515.0
+margin_right = 754.0
 margin_bottom = 720.0
 
-[node name="OptionsScreen" parent="HBoxContainer" instance=ExtResource( 5 )]
+[node name="OptionsScreen" parent="MainHBox/CenterAreaVBox" instance=ExtResource( 5 )]
+unique_name_in_owner = true
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 761.0
-margin_right = 1027.0
+margin_left = 488.0
+margin_right = 754.0
 margin_bottom = 720.0
 
-[node name="CreditsScreen" parent="HBoxContainer" instance=ExtResource( 6 )]
+[node name="CreditsScreen" parent="MainHBox/CenterAreaVBox" instance=ExtResource( 6 )]
+unique_name_in_owner = true
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 730.0
-margin_right = 1027.0
+margin_left = 457.0
+margin_right = 754.0
 margin_bottom = 720.0
 
-[node name="ModsMenu" parent="HBoxContainer" instance=ExtResource( 8 )]
+[node name="ModsMenu" parent="MainHBox/CenterAreaVBox" instance=ExtResource( 8 )]
+unique_name_in_owner = true
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 1027.0
-margin_right = 1027.0
+margin_left = 754.0
+margin_right = 754.0
 margin_bottom = 720.0
 
-[node name="AutoTranslatorMenu" parent="HBoxContainer" instance=ExtResource( 10 )]
+[node name="AutoTranslatorMenu" parent="MainHBox/CenterAreaVBox" instance=ExtResource( 10 )]
+unique_name_in_owner = true
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 1027.0
-margin_right = 1027.0
+margin_left = 754.0
+margin_right = 754.0
 margin_bottom = 720.0
 
-[node name="HSplitContainer2" type="HSplitContainer" parent="HBoxContainer"]
+[node name="VerticalBottomSpacer" type="Control" parent="MainHBox/CenterAreaVBox"]
+unique_name_in_owner = true
+visible = false
+margin_top = 660.0
+margin_right = 754.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 0, 60 )
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="MainHBox"]
 margin_left = 1031.0
 margin_right = 1036.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 5, 0 )
 
-[node name="Panel" type="Panel" parent="HBoxContainer"]
+[node name="Panel" type="Panel" parent="MainHBox"]
+unique_name_in_owner = true
 margin_left = 1040.0
 margin_right = 1280.0
 margin_bottom = 720.0
@@ -530,7 +583,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.3
 custom_styles/panel = SubResource( 2 )
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="MainHBox/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 12.0
@@ -540,30 +593,33 @@ margin_bottom = -12.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainHBox/Panel/MarginContainer"]
 margin_right = 216.0
 margin_bottom = 696.0
 
-[node name="GithubReleaseLabel" type="Label" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="GithubReleaseLabel" type="Label" parent="MainHBox/Panel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 margin_right = 216.0
 margin_bottom = 43.0
 text = "Latest github release: loading"
 autowrap = true
 
-[node name="GithubReleasesButton" type="Button" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="GithubReleasesButton" type="Button" parent="MainHBox/Panel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 47.0
 margin_right = 216.0
 margin_bottom = 73.0
 text = "Github Releases"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainHBox/Panel/MarginContainer/VBoxContainer"]
 margin_top = 77.0
 margin_right = 216.0
 margin_bottom = 696.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="LoadedModsLabel" type="RichTextLabel" parent="HBoxContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer"]
+[node name="LoadedModsLabel" type="RichTextLabel" parent="MainHBox/Panel/MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
 margin_right = 216.0
 margin_bottom = 619.0
 rect_min_size = Vector2( 0, 500 )
@@ -573,33 +629,34 @@ bbcode_enabled = true
 fit_content_height = true
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
 
-[connection signal="meta_clicked" from="HBoxContainer/Panel2/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer3/DonationsLabel" to="." method="_on_DonationsLabel_meta_clicked"]
-[connection signal="pressedActually" from="HBoxContainer/MainVBox/GridContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
-[connection signal="pressedActually" from="HBoxContainer/MainVBox/GridContainer/NewGameButton" to="." method="_on_NewGameButton_pressed"]
-[connection signal="pressedActually" from="HBoxContainer/MainVBox/GridContainer/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
-[connection signal="pressedActually" from="HBoxContainer/MainVBox/GridContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
-[connection signal="pressedActually" from="HBoxContainer/MainVBox/GridContainer/CreditsButton" to="." method="_on_OptionsButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/DiscordButton" to="." method="_on_DiscordButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/GithubButton" to="." method="_on_GithubButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/DevToolsButton" to="." method="_on_DevToolsButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/ChangelogButton" to="." method="_on_ChangelogButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/ModsButton" to="." method="_on_ModsButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/AutoTranslatorButton" to="." method="_on_AutoTranslatorButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/DatapackButton" to="." method="_on_DatapackButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/MainVBox/GridContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevClose" to="." method="_on_DevClose_pressed"]
-[connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevSceneConverter2" to="." method="_on_DevSceneConverter2_pressed"]
-[connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevLikesGenerator" to="." method="_on_DevLikesGenerator_pressed"]
-[connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevCharCreator" to="." method="_on_DevCharCreator_pressed"]
-[connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevModCreator" to="." method="_on_DevModCreator_pressed"]
-[connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/DevSceneConverter" to="." method="_on_DevSceneConverter_pressed"]
-[connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/SexActivityCreator" to="." method="_on_SexActivityCreator_pressed"]
-[connection signal="pressed" from="HBoxContainer/DevToolsScreen/GridContainer/InteractionCreator" to="." method="_on_InteractionCreator_pressed"]
-[connection signal="onClosePressed" from="HBoxContainer/LoadGameScreen" to="." method="switchToMainMenu"]
-[connection signal="onClosePressed" from="HBoxContainer/OptionsScreen" to="." method="switchToMainMenu"]
-[connection signal="onClosePressed" from="HBoxContainer/CreditsScreen" to="." method="switchToMainMenu"]
-[connection signal="onClosePressed" from="HBoxContainer/ModsMenu" to="." method="switchToMainMenu"]
-[connection signal="onClosePressed" from="HBoxContainer/AutoTranslatorMenu" to="." method="_on_AutoTranslatorMenu_onClosePressed"]
-[connection signal="pressed" from="HBoxContainer/Panel/MarginContainer/VBoxContainer/GithubReleasesButton" to="." method="_on_GithubReleasesButton_pressed"]
+[connection signal="meta_clicked" from="MainHBox/Panel2/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer3/DonationsLabel" to="." method="_on_DonationsLabel_meta_clicked"]
+[connection signal="pressedActually" from="MainHBox/CenterAreaVBox/MainVBox/GridContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
+[connection signal="pressedActually" from="MainHBox/CenterAreaVBox/MainVBox/GridContainer/NewGameButton" to="." method="_on_NewGameButton_pressed"]
+[connection signal="pressedActually" from="MainHBox/CenterAreaVBox/MainVBox/GridContainer/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
+[connection signal="pressedActually" from="MainHBox/CenterAreaVBox/MainVBox/GridContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="pressedActually" from="MainHBox/CenterAreaVBox/MainVBox/GridContainer/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="pressedActually" from="MainHBox/CenterAreaVBox/MainVBox/GridContainer/DiscordButton" to="." method="_on_DiscordButton_pressed"]
+[connection signal="pressedActually" from="MainHBox/CenterAreaVBox/MainVBox/GridContainer/GithubButton" to="." method="_on_GithubButton_pressed"]
+[connection signal="pressedActually" from="MainHBox/CenterAreaVBox/MainVBox/GridContainer/DevToolsButton" to="." method="_on_DevToolsButton_pressed"]
+[connection signal="pressedActually" from="MainHBox/CenterAreaVBox/MainVBox/GridContainer/ChangelogButton" to="." method="_on_ChangelogButton_pressed"]
+[connection signal="pressedActually" from="MainHBox/CenterAreaVBox/MainVBox/GridContainer/ModsButton" to="." method="_on_ModsButton_pressed"]
+[connection signal="pressedActually" from="MainHBox/CenterAreaVBox/MainVBox/GridContainer/AutoTranslatorButton" to="." method="_on_AutoTranslatorButton_pressed"]
+[connection signal="pressedActually" from="MainHBox/CenterAreaVBox/MainVBox/GridContainer/DatapackButton" to="." method="_on_DatapackButton_pressed"]
+[connection signal="pressedActually" from="MainHBox/CenterAreaVBox/MainVBox/GridContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/DevClose" to="." method="_on_DevClose_pressed"]
+[connection signal="pressed" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/DevSceneConverter2" to="." method="_on_DevSceneConverter2_pressed"]
+[connection signal="pressed" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/DevLikesGenerator" to="." method="_on_DevLikesGenerator_pressed"]
+[connection signal="pressed" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/DevCharCreator" to="." method="_on_DevCharCreator_pressed"]
+[connection signal="pressed" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/DevModCreator" to="." method="_on_DevModCreator_pressed"]
+[connection signal="pressed" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/DevSceneConverter" to="." method="_on_DevSceneConverter_pressed"]
+[connection signal="pressed" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/SexActivityCreator" to="." method="_on_SexActivityCreator_pressed"]
+[connection signal="pressed" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/InteractionCreator" to="." method="_on_InteractionCreator_pressed"]
+[connection signal="onClosePressed" from="MainHBox/CenterAreaVBox/LoadGameScreen" to="." method="switchToMainMenu"]
+[connection signal="onClosePressed" from="MainHBox/CenterAreaVBox/OptionsScreen" to="." method="switchToMainMenu"]
+[connection signal="onClosePressed" from="MainHBox/CenterAreaVBox/CreditsScreen" to="." method="switchToMainMenu"]
+[connection signal="onClosePressed" from="MainHBox/CenterAreaVBox/ModsMenu" to="." method="switchToMainMenu"]
+[connection signal="onClosePressed" from="MainHBox/CenterAreaVBox/AutoTranslatorMenu" to="." method="_on_AutoTranslatorMenu_onClosePressed"]
+[connection signal="pressed" from="MainHBox/Panel/MarginContainer/VBoxContainer/GithubReleasesButton" to="." method="_on_GithubReleasesButton_pressed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]

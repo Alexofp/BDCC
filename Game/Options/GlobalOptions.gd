@@ -13,8 +13,10 @@ const LAYOUT_TOUCH_VERTICAL = 3
 const SCREEN_HORIZONTAL = 0
 const SCREEN_VERTICAL = 1
 
+var currentSupportsVertical:bool = false
 var currentScreenOrientation:int = SCREEN_HORIZONTAL # not saved
 signal onScreenOrientationChange
+signal onLayoutChange
 
 var myProjectSettings
 
@@ -1194,6 +1196,8 @@ func applySettingsEffect():
 	else:
 		OS.vsync_enabled = true
 	
+	emit_signal("onLayoutChange")
+	
 func applyUIScale():
 	var idealSize := Vector2(1280,720) if currentScreenOrientation == SCREEN_HORIZONTAL else Vector2(720, 1280)
 	
@@ -1212,17 +1216,34 @@ func getUILayoutFinal() -> int:
 		return LAYOUT_NORMAL
 	return uiLayout
 
+func onSceneChange():
+	checkScreenOrientation()
+
+func setSupportsVertical(_supportsVertical:bool):
+	currentSupportsVertical = _supportsVertical
+	checkScreenOrientation()
+
+func getCurrentScreenOrientation() -> int:
+	return currentScreenOrientation
+
+func isVerticalOrientation() -> bool:
+	return currentScreenOrientation == SCREEN_VERTICAL
+
+func isTouchFriendlyUI() -> bool:
+	return getUILayoutFinal() in [LAYOUT_TOUCH_HORIZONTAL, LAYOUT_TOUCH_VERTICAL]
+
 func checkScreenOrientation():
 	var finalLayout:int = getUILayoutFinal()
 	var newOrientation:int = 0
 	
-	#TODO: Proper check to see if the current UI 'supports' a vertical orientation
-	if(finalLayout == LAYOUT_TOUCH_VERTICAL && GM.ui != null):
+	if(finalLayout == LAYOUT_TOUCH_VERTICAL && currentSupportsVertical):
 		newOrientation = SCREEN_VERTICAL
 	else:
 		newOrientation = SCREEN_HORIZONTAL
 	
 	if(newOrientation != currentScreenOrientation):
+		var _oldOr:int = currentScreenOrientation
+		
 		currentScreenOrientation = newOrientation
 		
 		if(currentScreenOrientation == SCREEN_HORIZONTAL):
@@ -1231,6 +1252,25 @@ func checkScreenOrientation():
 			OS.screen_orientation = OS.SCREEN_ORIENTATION_SENSOR_PORTRAIT
 		
 		applyUIScale()
+		
+		# Only do this on desktop
+#		var screenSize:Vector2 = OS.get_screen_size()-Vector2(0.0, 100.0)
+#		var newSize:Vector2 = Vector2(OS.window_size.y, OS.window_size.x)
+#		#print(newSize)
+#		if(newSize.x > screenSize.x):
+#			var howMuchScale:float = newSize.x / screenSize.x
+#			newSize.x /= howMuchScale
+#			newSize.y /= howMuchScale
+#		if(newSize.y > screenSize.y):
+#			var howMuchScale:float = newSize.y / screenSize.y
+#			newSize.x /= howMuchScale
+#			newSize.y /= howMuchScale
+#		#print(newSize)
+#
+#		OS.window_size = newSize
+		
+		#if(get_tree().root && get_tree().root.has_method("onScreenOrientationChange")):
+		#	get_tree().root.onScreenOrientationChange(oldOr, newOrientation)
 		emit_signal("onScreenOrientationChange")
 		
 func saveData():

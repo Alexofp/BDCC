@@ -4,6 +4,7 @@ func _ready():
 	if(GlobalRegistry.isInitialized):
 		var _ok = get_tree().change_scene("res://UI/MainMenu/MainMenu.tscn")
 		return
+	OPTIONS.setSupportsVertical(true)
 	var _ok = GlobalRegistry.connect("loadingUpdate", self, "onGlobalRegistryUpdate")
 	var _ok2 = GlobalRegistry.connect("loadingFinished", self, "onGlobalRegistryFinishedUpdate")
 	GlobalRegistry.registerEverything()

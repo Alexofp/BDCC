@@ -27,10 +27,7 @@ func _ready():
 	else:
 		key_label.visible = false
 	
-	if(shouldScaleToUIButtonSize):
-		var minButtonSize:float = OPTIONS.getUiButtonSize()
-		if(minButtonSize > 0):
-			rect_min_size = Vector2(0, 20 + minButtonSize * 16)
+	updateButtonSize()
 	
 	if(!text.empty() && myButtonText.empty()):
 		myButtonText = text
@@ -43,6 +40,20 @@ func _ready():
 	
 	if(!myShortcutKey.empty()):
 		setShortcutPhysicalScancode(OS.find_scancode_from_string(myShortcutKey), myShortcutCtrl)
+	checkDisabled()
+	
+	OPTIONS.connect("onLayoutChange", self, "updateButtonSize")
+
+func updateButtonSize():
+	if(shouldScaleToUIButtonSize):
+		var minButtonSize:float = OPTIONS.getUiButtonSize()
+		if(minButtonSize > 0):
+			rect_min_size = Vector2(0, 20 + minButtonSize * 16)
+	else:
+		rect_min_size = Vector2(0.0, 0.0)
+	if(OPTIONS.isTouchFriendlyUI()):
+		rect_min_size.y = max(rect_min_size.y, 52.0)
+		
 	
 func setButtonText(_text:String):
 	myButtonText = _text
@@ -91,3 +102,15 @@ func _on_BetterButton_pressed():
 			emit_signal("pressedActually")
 	else:
 		emit_signal("pressedActually")
+
+func setIsDisabled(_dis:bool):
+	if(_dis == disabled):
+		return
+	disabled = _dis
+	checkDisabled()
+
+func checkDisabled():
+	if(disabled):
+		button_label["custom_colors/font_color"] = Color.darkgray
+	else:
+		button_label["custom_colors/font_color"] = Color.white
