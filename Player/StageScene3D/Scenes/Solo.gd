@@ -30,6 +30,12 @@ func playAnimation(animID, _args = {}):
 	else:
 		doll.applyBodyState({})
 	
+	#TODO: Make this hack better?
+	if(OPTIONS.getUILayoutFinal() == OPTIONS.LAYOUT_TOUCH_HORIZONTAL):
+		doll.scale.x = -abs(doll.scale.x)
+	else:
+		doll.scale.x = abs(doll.scale.x)
+	
 	if(animID == "sit"):
 		$Chair.visible = true
 	else:

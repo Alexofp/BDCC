@@ -285,6 +285,29 @@ margin_bottom = 616.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.85
 
+[node name="VerticalGithubReleaseBox" type="VBoxContainer" parent="MainHBox/CenterAreaVBox/MainVBox/ScrollContainer/VBoxContainer/Spacer2"]
+unique_name_in_owner = true
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -200.0
+margin_bottom = 73.0
+rect_min_size = Vector2( 200, 0 )
+
+[node name="VerticalGithubReleaseLabel" type="Label" parent="MainHBox/CenterAreaVBox/MainVBox/ScrollContainer/VBoxContainer/Spacer2/VerticalGithubReleaseBox"]
+unique_name_in_owner = true
+margin_right = 200.0
+margin_bottom = 43.0
+text = "Latest github release: loading"
+align = 2
+autowrap = true
+
+[node name="GithubReleasesButton" type="Button" parent="MainHBox/CenterAreaVBox/MainVBox/ScrollContainer/VBoxContainer/Spacer2/VerticalGithubReleaseBox"]
+margin_top = 47.0
+margin_right = 200.0
+margin_bottom = 87.0
+rect_min_size = Vector2( 0, 40 )
+text = "Github Releases"
+
 [node name="GridContainer" type="GridContainer" parent="MainHBox/CenterAreaVBox/MainVBox"]
 margin_top = 620.0
 margin_right = 754.0
@@ -632,6 +655,7 @@ fit_content_height = true
 unique_name_in_owner = true
 
 [connection signal="meta_clicked" from="MainHBox/Panel2/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer3/DonationsLabel" to="." method="_on_DonationsLabel_meta_clicked"]
+[connection signal="pressed" from="MainHBox/CenterAreaVBox/MainVBox/ScrollContainer/VBoxContainer/Spacer2/VerticalGithubReleaseBox/GithubReleasesButton" to="." method="_on_GithubReleasesButton_pressed"]
 [connection signal="pressedActually" from="MainHBox/CenterAreaVBox/MainVBox/GridContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
 [connection signal="pressedActually" from="MainHBox/CenterAreaVBox/MainVBox/GridContainer/NewGameButton" to="." method="_on_NewGameButton_pressed"]
 [connection signal="pressedActually" from="MainHBox/CenterAreaVBox/MainVBox/GridContainer/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]

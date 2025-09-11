@@ -12,3 +12,7 @@ func _on_Button_pressed():
 
 func setText(newtext):
 	$Button.text = newtext
+
+func _ready():
+	if(OPTIONS.isTouchFriendlyUI()):
+		rect_min_size = Vector2(0.0, 44.0)

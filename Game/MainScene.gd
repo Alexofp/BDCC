@@ -216,6 +216,8 @@ func getDynamicCharactersPools():
 func _ready():
 	if(OPTIONS.getUILayoutFinal() == OPTIONS.LAYOUT_TOUCH_VERTICAL):
 		gameUI = load("res://Game/UI/GameUITouchVertical.tscn").instance()
+	elif(OPTIONS.getUILayoutFinal() == OPTIONS.LAYOUT_TOUCH_HORIZONTAL):
+		gameUI = load("res://Game/UI/GameUITouchHorizontal.tscn").instance()
 	else:
 		gameUI = load("res://Game/UI/GameUI.tscn").instance()
 	#gameUI = load("res://Game/UI/GameUITouchVertical.tscn").instance()

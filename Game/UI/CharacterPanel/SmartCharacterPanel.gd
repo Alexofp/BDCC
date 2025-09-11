@@ -59,7 +59,7 @@ func updateVisibility():
 	if(characters.size() <= 0):
 		scrollContainer.visible = false
 		artworkPanel.visible = false
-		charactersPanel.visible = false
+		charactersPanel.visible = false if !OPTIONS.isTouchFriendlyUI() else true
 		return
 	
 	if(isInFightMode):

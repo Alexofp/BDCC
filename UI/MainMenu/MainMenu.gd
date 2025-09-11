@@ -20,7 +20,21 @@ onready var auto_translator_button = $"%AutoTranslatorButton"
 onready var center_area_v_box = $"%CenterAreaVBox"
 onready var vertical_bottom_spacer = $"%VerticalBottomSpacer"
 
+onready var vertical_github_release_box = $"%VerticalGithubReleaseBox"
+onready var vertical_github_release_label = $"%VerticalGithubReleaseLabel"
+var verticalModsStr:String = ""
+
 export(Resource) var GlobalTheme
+
+func updateVerticalGithubReleaseVisibility():
+	if(OPTIONS.shouldFetchGithubRelease() && OPTIONS.isVerticalOrientation()):
+		vertical_github_release_box.visible = true
+	else:
+		vertical_github_release_box.visible = false
+
+func setGithubLabelStr(_simpleText:String, _extraText:String):
+	gutHubReleaseLabel.text = _simpleText + (_extraText if !_extraText.empty() else "")
+	vertical_github_release_label.text = _simpleText + ("\n"+verticalModsStr if !verticalModsStr.empty() else "")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,16 +49,18 @@ func _ready():
 	if(OPTIONS.shouldFetchGithubRelease()):
 		getNewRelease()
 	else:
-		gutHubReleaseLabel.text = "Latest github release: DISABLED"
+		setGithubLabelStr("Latest github release: DISABLED", "")
 		gutHubReleaseLabel.visible = false
 		gitHubReleaseButton.visible = false
-		
+	updateVerticalGithubReleaseVisibility()
+	
 	var loadedMods = GlobalRegistry.getLoadedMods()
 	if(loadedMods.size() > 0):
 		var text = "Loaded mods:"
 		for mod in loadedMods:
 			text += "\n"+str(mod)
 		loadedModsLabel.bbcode_text = text
+		verticalModsStr = str(loadedMods.size())+" mod"+("s" if loadedMods.size() != 1 else "")
 	
 	if(OS.get_name() == "HTML5"):
 		auto_translator_button.disabled = true
@@ -107,25 +123,25 @@ func getNewRelease():
 	var error = http_request.request("https://api.github.com/repos/Alexofp/BDCC/releases")
 	if error != OK:
 		Log.printerr("[MainMenu] An error occurred in the HTTP request.")
-		gutHubReleaseLabel.text = "Latest github release: Error"
+		setGithubLabelStr("Latest github release: Error", "")
 
 func _on_HTTPRequest_request_completed(result, _response_code, _headers, body):
 	if result != HTTPRequest.RESULT_SUCCESS:
 		Log.printerr("[MainMenu] Couldn't get the latest release from github")
-		gutHubReleaseLabel.text = "Latest github release: Error"
+		setGithubLabelStr("Latest github release: Error", "")
 		return
 	
 	var jsonResult = JSON.parse(body.get_string_from_utf8())
 	if(jsonResult.error != OK):
 		Log.printerr("[MainMenu] Couldn't parse json data from github.")
-		gutHubReleaseLabel.text = "Latest github release: Error"
+		setGithubLabelStr("Latest github release: Error", "")
 		return
 	
 	var releasesData = jsonResult.result
 
 	if(!(releasesData is Array)):
 		Log.printerr("[MainMenu] Bad data from github")
-		gutHubReleaseLabel.text = "Latest github release: Error"
+		setGithubLabelStr("Latest github release: Error", "")
 		return
 		
 	for release in releasesData:
@@ -136,13 +152,16 @@ func _on_HTTPRequest_request_completed(result, _response_code, _headers, body):
 		
 		var time = Util.ISO8601DateToDatetime(release["published_at"])
 		
-		gutHubReleaseLabel.text = "Latest github release: "+release["tag_name"]
+		var theSimpleText:String = ""
+		var theAdvancedText:String = ""
+		theSimpleText = "Latest github release: "+str(release["tag_name"])
 		if(time != null):
-			gutHubReleaseLabel.text += "\n" + Util.datetimeToRFC113(time)
+			theAdvancedText += "\n" + Util.datetimeToRFC113(time)
 		
-		gutHubReleaseLabel.text += "\n\nYour current version: "+GlobalRegistry.getGameVersionString()
+		theAdvancedText += "\n\nYour current version: "+GlobalRegistry.getGameVersionString()
+		setGithubLabelStr(theSimpleText, theAdvancedText)
 		return
-	gutHubReleaseLabel.text = "Latest github release: Nothing found"
+	setGithubLabelStr("Latest github release: Nothing found", "")
 
 func _on_GithubReleasesButton_pressed():
 	var _ok = OS.shell_open("https://github.com/Alexofp/BDCC/releases")
@@ -173,6 +192,7 @@ func updateSidePanelsVisibility():
 	panel_2.visible = shouldBeVis
 	panel.visible = shouldBeVis
 	vertical_bottom_spacer.visible = isVert
+	updateVerticalGithubReleaseVisibility()
 
 func _on_DevSceneConverter_pressed():
 	Util.delete_children(devSubScreen)

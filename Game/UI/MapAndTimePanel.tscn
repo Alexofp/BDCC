@@ -70,6 +70,15 @@ margin_right = 1280.0
 margin_bottom = 720.0
 text = "12:00, day 0"
 
+[node name="CompactLabel" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+margin_top = 706.0
+margin_right = 1280.0
+margin_bottom = 720.0
+text = "12:00, day 0"
+clip_text = true
+
 [connection signal="gui_input" from="." to="." method="_on_MapAndTimePanel_gui_input"]
 [connection signal="pressed" from="sceneCreatorLabel/TextureButton" to="." method="_on_TextureButton_pressed"]
 [connection signal="pressed" from="CustomViewportControl/HBoxContainer/ZoomInButton" to="." method="_on_ZoomInButton_pressed"]

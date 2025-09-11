@@ -1230,7 +1230,8 @@ func isVerticalOrientation() -> bool:
 	return currentScreenOrientation == SCREEN_VERTICAL
 
 func isTouchFriendlyUI() -> bool:
-	return getUILayoutFinal() in [LAYOUT_TOUCH_HORIZONTAL, LAYOUT_TOUCH_VERTICAL]
+	var theFinalLayout:int = getUILayoutFinal()
+	return theFinalLayout == LAYOUT_TOUCH_HORIZONTAL || theFinalLayout == LAYOUT_TOUCH_VERTICAL
 
 func checkScreenOrientation():
 	var finalLayout:int = getUILayoutFinal()

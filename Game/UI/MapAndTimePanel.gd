@@ -6,18 +6,31 @@ onready var sceneCreatorLabel = $sceneCreatorLabel
 var worldScene = preload("res://Game/World/World.tscn")
 onready var world = $Viewport/World
 signal onDevComButton
+onready var compact_label = $"%CompactLabel"
+
+
+export var compactMode:bool = false
 
 func _ready():
 	if(OS.get_name() == "Android"):
 		$CustomViewportControl/HBoxContainer.visible = true
 	else:
 		$CustomViewportControl/HBoxContainer.visible = false
+	
+	if(compactMode):
+		compact_label.visible = true
+		locationLabel.visible = false
+		timeLabel.visible = false
 
 func setLocationName(newname: String):
 	locationLabel.text = newname
+	if(compactMode):
+		compact_label.text = timeLabel.text+". "+locationLabel.text
 
 func onTimePassed(_secondsPassed):
 	timeLabel.text = GM.main.getVisibleTime()
+	if(compactMode):
+		compact_label.text = timeLabel.text+". "+locationLabel.text
 
 func getLocationName():
 	return locationLabel.text

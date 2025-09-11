@@ -52,7 +52,7 @@ func updateButtonSize():
 	else:
 		rect_min_size = Vector2(0.0, 0.0)
 	if(OPTIONS.isTouchFriendlyUI()):
-		rect_min_size.y = max(rect_min_size.y, 52.0)
+		rect_min_size.y = max(rect_min_size.y, 68.0)
 		
 	
 func setButtonText(_text:String):

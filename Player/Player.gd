@@ -546,12 +546,13 @@ func getBodypartTooltipInfo(_bodypartSlot):
 	
 	return "error"
 
-func afterSleeping():
-	var mult = max(1.0 + GM.pc.getBuffsHolder().getCustom(BuffAttribute.RestEffectiveness), 0.1) # 0.1 minimum to avoid softlock scenarios
-	var staminaChange = mult * (getMaxStamina() - getStamina())
-	var painChange = mult * getPain()
-	addStamina(staminaChange)
-	addPain(-painChange)
+func afterSleeping(restoreStats:bool = true):
+	if(restoreStats):
+		var mult = max(1.0 + GM.pc.getBuffsHolder().getCustom(BuffAttribute.RestEffectiveness), 0.1) # 0.1 minimum to avoid softlock scenarios
+		var staminaChange = mult * (getMaxStamina() - getStamina())
+		var painChange = mult * getPain()
+		addStamina(staminaChange)
+		addPain(-painChange)
 	skillsHolder.onNewDay()
 	for item in getInventory().getEquppedRestraints():
 		item.getRestraintData().resetOnNewDay()

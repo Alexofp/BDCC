@@ -1424,7 +1424,7 @@ func main_do(_id:String, _args:Array):
 			talk(C_PC, "That’s it.. be a good girl and cum for me.")
 			saynn("Pip’s cock twitches violently, the cage bending under the strain. With one final, hard thrust, his [b]member breaks free[/b], bars of his cage snapping apart from the sheer power of his erection!")
 			saynn("When freed, his flared horsecock springs to full hardness in seconds before bursting with a thick, virile blast of seed!")
-			saynn("Thick ropes of cum land all across the floor as Pip moans in bliss, his body shaking hard as you pump his full of your spunk.")
+			saynn("Thick ropes of cum land all across the floor as Pip moans in bliss, his body shaking hard as you pump his ass full of your spunk.")
 			talk(C_BULL, "F-fuck! Ah! Ahhh-h!..")
 			talk(C_PC, "Holy shit, it worked.")
 			saynn("Even the owners come to check on all the noise.")
@@ -1809,6 +1809,7 @@ func sleepScene():
 	aimCamera(L_SLEEP)
 	playAnimation(StageScene.Sleeping, "sleep")
 	GM.main.startNewDay()
+	GM.pc.afterSleeping(false)
 	saynn("It's a new day. Time to wake up.")
 	if(upgradeLevel >= UPGRADE_CELLS):
 		saynn("Sleeping on an actual bed is so much nicer.")
