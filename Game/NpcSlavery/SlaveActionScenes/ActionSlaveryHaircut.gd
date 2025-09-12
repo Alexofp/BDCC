@@ -84,7 +84,7 @@ func _run():
 	if(state == "changecolor"):
 		var bodypart = npc.getBodypart(BodypartSlot.Hair)
 		var colorPicker = colorPickerScene.instance()
-		GM.ui.addCustomControl("colorpicker", colorPicker)
+		GM.ui.addFullScreenCustomControl("colorpicker", colorPicker)
 		if(whichColorIsEdited == 0):
 			colorPicker.setCurrentColor(bodypart.pickedRColor)
 			rememberedColor = bodypart.pickedRColor

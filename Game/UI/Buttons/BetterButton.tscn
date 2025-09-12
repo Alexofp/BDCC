@@ -15,9 +15,9 @@ unique_name_in_owner = true
 self_modulate = Color( 1, 1, 1, 0.317647 )
 anchor_bottom = 1.0
 margin_left = 4.0
-margin_right = 8.0
+margin_top = 4.0
+margin_right = 12.0
 text = "1"
-valign = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0

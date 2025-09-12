@@ -11,7 +11,7 @@ func _ready():
 	updateSaves()
 	
 	if(OS.get_name() == "Android"):
-		$VBoxContainer/GridContainer/SavesButton.disabled = true
+		$VBoxContainer/GridContainer/SavesButton.visible = false
 	
 	if(OS.get_name() == "HTML5"):
 		$VBoxContainer/GridContainer/SavesButton.visible = false

@@ -1589,12 +1589,12 @@ func main_do(_id:String, _args:Array):
 		if(special == "shiv"):
 			if(bullTopic <= 0):
 				saynn("After that stunt, one of the other slaves approaches you.")
-				talk(C_GUY, "Hey.. you don't know me.. but I think this might be more useful to you than me.")
+				talk(C_BULL, "Hey.. you don't know me.. but I think this might be more useful to you than me.")
 				saynn("He hands you a sharpened rock.. could be used as a weapon.")
 				
 			else:
 				saynn("After that stunt, Pip approaches you.")
-				talk(C_GUY, "Hey.. I think this might be more useful to you than me.")
+				talk(C_BULL, "Hey.. I think this might be more useful to you than me.")
 				saynn("He hands you a sharpened rock.. could be used as a weapon.")
 			addShiv()
 		

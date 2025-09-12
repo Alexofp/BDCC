@@ -99,7 +99,7 @@ func _run():
 
 	if(state == "changebasecolormenu"):
 		var colorPicker = colorPickerScene.instance()
-		GM.ui.addCustomControl("colorpicker", colorPicker)
+		GM.ui.addFullScreenCustomControl("colorpicker", colorPicker)
 		if(whichColorIsEdited == 0):
 			colorPicker.setCurrentColor(thePC.pickedSkinRColor)
 			rememberedColor = thePC.pickedSkinRColor
@@ -161,7 +161,7 @@ func _run():
 	if(state == "changepartcolormenu"):
 		var bodypart = thePC.getBodypart(pickedBodypartSlot)
 		var colorPicker = colorPickerScene.instance()
-		GM.ui.addCustomControl("colorpicker", colorPicker)
+		GM.ui.addFullScreenCustomControl("colorpicker", colorPicker)
 		if(whichColorIsEdited == 0):
 			colorPicker.setCurrentColor(bodypart.pickedRColor)
 			rememberedColor = bodypart.pickedRColor

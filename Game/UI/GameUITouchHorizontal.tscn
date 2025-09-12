@@ -32,7 +32,6 @@ corner_radius_bottom_right = 16
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
 corner_radius_top_left = 16
 corner_radius_top_right = 16
-corner_radius_bottom_left = 16
 
 [sub_resource type="StyleBoxFlat" id=35]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
@@ -75,7 +74,7 @@ action = "gameui_menu"
 [sub_resource type="ShortCut" id=8]
 shortcut = SubResource( 32 )
 
-[node name="GameUI" type="Control"]
+[node name="GameUITouchHorizontal" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 8 )
@@ -123,6 +122,7 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 0.01
 
 [node name="RightPanel" type="Panel" parent="MainLayout"]
+unique_name_in_owner = true
 margin_right = 305.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 240, 0 )
@@ -228,13 +228,13 @@ margin_right = 874.0
 margin_bottom = 29.0
 mouse_filter = 2
 size_flags_horizontal = 3
-custom_constants/margin_right = 8
-custom_constants/margin_left = 8
+custom_constants/margin_right = 16
+custom_constants/margin_left = 16
 
 [node name="TextOutput" type="RichTextLabel" parent="MainLayout/MainScreenBoxContainer/MainScrollContainer/TextAreaContainer/MarginContainer"]
 unique_name_in_owner = true
-margin_left = 8.0
-margin_right = 866.0
+margin_left = 16.0
+margin_right = 858.0
 margin_bottom = 25.0
 focus_mode = 2
 mouse_filter = 1
@@ -252,7 +252,7 @@ custom_effects = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtReso
 unique_name_in_owner = true
 visible = false
 margin_top = 333.0
-margin_right = 806.0
+margin_right = 874.0
 margin_bottom = 628.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -263,6 +263,8 @@ margin_top = 632.0
 margin_right = 874.0
 margin_bottom = 632.0
 size_flags_horizontal = 3
+custom_constants/vseparation = 1
+custom_constants/hseparation = 1
 columns = 5
 
 [node name="PanelContainer" type="PanelContainer" parent="MainLayout/MainScreenBoxContainer"]
@@ -320,8 +322,8 @@ margin_right = 802.0
 margin_bottom = 72.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/vseparation = 0
-custom_constants/hseparation = 0
+custom_constants/vseparation = 1
+custom_constants/hseparation = 1
 columns = 5
 
 [node name="NextPageButton" type="Button" parent="MainLayout/MainScreenBoxContainer/PanelContainer/VBoxContainer/HBoxContainer"]
@@ -426,6 +428,7 @@ margin_bottom = 720.0
 rect_min_size = Vector2( 5, 0 )
 
 [node name="MenuButtonsContainer" type="VBoxContainer" parent="MainLayout"]
+unique_name_in_owner = true
 margin_left = 1179.0
 margin_right = 1279.0
 margin_bottom = 720.0
@@ -454,9 +457,18 @@ margin_top = 8.0
 margin_right = 85.0
 margin_bottom = 8.0
 
-[node name="LoadButton" type="Button" parent="MainLayout/MenuButtonsContainer"]
+[node name="SwitchLayoutHorizontalButton" type="Button" parent="MainLayout/MenuButtonsContainer"]
+unique_name_in_owner = true
 margin_right = 100.0
-margin_bottom = 120.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+shortcut_in_tooltip = false
+text = "<->"
+
+[node name="LoadButton" type="Button" parent="MainLayout/MenuButtonsContainer"]
+margin_top = 26.0
+margin_right = 100.0
+margin_bottom = 141.0
 hint_tooltip = "Quick load (F9)"
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -466,9 +478,9 @@ text = "Q.load"
 
 [node name="SaveButton" type="Button" parent="MainLayout/MenuButtonsContainer"]
 unique_name_in_owner = true
-margin_top = 120.0
+margin_top = 141.0
 margin_right = 100.0
-margin_bottom = 240.0
+margin_bottom = 257.0
 hint_tooltip = "Quick save (F5)"
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -478,9 +490,9 @@ text = "Q.save"
 
 [node name="DebugMenuButton" type="Button" parent="MainLayout/MenuButtonsContainer"]
 unique_name_in_owner = true
-margin_top = 240.0
+margin_top = 257.0
 margin_right = 100.0
-margin_bottom = 360.0
+margin_bottom = 372.0
 hint_tooltip = "Open the debug/cheats menu"
 size_flags_vertical = 3
 shortcut_in_tooltip = false
@@ -488,9 +500,9 @@ text = "Debug"
 
 [node name="SkillsButton" type="Button" parent="MainLayout/MenuButtonsContainer"]
 unique_name_in_owner = true
-margin_top = 360.0
+margin_top = 372.0
 margin_right = 100.0
-margin_bottom = 480.0
+margin_bottom = 488.0
 hint_tooltip = "Spend the stat points and look at your skills (X)"
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -499,9 +511,9 @@ shortcut = SubResource( 10 )
 text = "Skills"
 
 [node name="MenuButton" type="Button" parent="MainLayout/MenuButtonsContainer"]
-margin_top = 480.0
+margin_top = 488.0
 margin_right = 100.0
-margin_bottom = 600.0
+margin_bottom = 604.0
 hint_tooltip = "Open the menu (C)"
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -511,7 +523,7 @@ text = "Menu"
 
 [node name="RollbackButton" type="Button" parent="MainLayout/MenuButtonsContainer"]
 unique_name_in_owner = true
-margin_top = 600.0
+margin_top = 604.0
 margin_right = 100.0
 margin_bottom = 720.0
 hint_tooltip = "Rollback the game's state back"
@@ -560,6 +572,7 @@ margin_bottom = 90.0
 [connection signal="onClosePressed" from="MainLayout/SkillsUI" to="." method="showGameScreen"]
 [connection signal="meta_clicked" from="MainLayout/DevCommentary/ScrollContainer/DevComLabel" to="." method="_on_DevComLabel_meta_clicked"]
 [connection signal="pressed" from="MainLayout/DevCommentary/GridContainer/CloseButton" to="." method="showGameScreen"]
+[connection signal="pressed" from="MainLayout/MenuButtonsContainer/SwitchLayoutHorizontalButton" to="." method="_on_SwitchLayoutHorizontalButton_pressed"]
 [connection signal="pressed" from="MainLayout/MenuButtonsContainer/LoadButton" to="." method="_on_LoadButton_pressed"]
 [connection signal="pressed" from="MainLayout/MenuButtonsContainer/SaveButton" to="." method="_on_SaveButton_pressed"]
 [connection signal="pressed" from="MainLayout/MenuButtonsContainer/DebugMenuButton" to="." method="_on_DebugMenu_pressed"]

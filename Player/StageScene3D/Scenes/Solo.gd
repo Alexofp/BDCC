@@ -2,6 +2,8 @@ extends "res://Player/StageScene3D/BaseStageScene3D.gd"
 
 onready var animationTree = $AnimationTree
 onready var doll = $Doll3D
+onready var flipper = $"%Flipper"
+onready var chair = $"%Chair"
 
 func _init():
 	id = StageScene.Solo
@@ -30,16 +32,17 @@ func playAnimation(animID, _args = {}):
 	else:
 		doll.applyBodyState({})
 	
-	#TODO: Make this hack better?
-	if(OPTIONS.getUILayoutFinal() == OPTIONS.LAYOUT_TOUCH_HORIZONTAL):
+	if(OPTIONS.shouldSoloDollLookRight()):
 		doll.scale.x = -abs(doll.scale.x)
+		flipper.scale.x = -abs(flipper.scale.x)
 	else:
 		doll.scale.x = abs(doll.scale.x)
+		flipper.scale.x = abs(flipper.scale.x)
 	
 	if(animID == "sit"):
-		$Chair.visible = true
+		chair.visible = true
 	else:
-		$Chair.visible = false
+		chair.visible = false
 	
 	updateSubAnims()
 	
@@ -71,13 +74,13 @@ func canTransitionTo(_actionID, _args = []):
 
 func getChainPoint(_pointID):
 	if(_pointID == "farleft"):
-		return $FarLeft
+		return $Flipper/FarLeft
 	if(_pointID == "farright"):
-		return $FarRight
+		return $Flipper/FarRight
 	if(_pointID == "above"):
-		return $Above
+		return $Flipper/Above
 	if(_pointID == "floor"):
-		return $Floor
+		return $Flipper/Floor
 	return .getChainPoint(_pointID)
 
 func getVarNpcs():

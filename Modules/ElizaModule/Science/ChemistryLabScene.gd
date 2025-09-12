@@ -499,7 +499,7 @@ func _run():
 		
 		if(option.has("color") && option["color"]):
 			var colorPicker = colorPickerScene.instance()
-			GM.ui.addCustomControl("colorpicker", colorPicker)
+			GM.ui.addFullScreenCustomControl("colorpicker", colorPicker)
 			colorPicker.setCurrentColor(Color(pickedArgs[pickedTFOption]))
 			
 			addButton("Apply", "Select this color", "set_value_configure_color")

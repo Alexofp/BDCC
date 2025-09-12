@@ -240,19 +240,18 @@ stretch_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="MainLayout/MainScreenBoxContainer/MainScrollContainer/TextAreaContainer"]
 margin_top = 4.0
 margin_right = 1280.0
-margin_bottom = 233.0
-size_flags_vertical = 3
+margin_bottom = 29.0
 
 [node name="Control" type="Control" parent="MainLayout/MainScreenBoxContainer/MainScrollContainer/TextAreaContainer/HBoxContainer"]
 margin_right = 8.0
-margin_bottom = 229.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 8, 0 )
 
 [node name="TextOutput" type="RichTextLabel" parent="MainLayout/MainScreenBoxContainer/MainScrollContainer/TextAreaContainer/HBoxContainer"]
 unique_name_in_owner = true
 margin_left = 12.0
 margin_right = 1268.0
-margin_bottom = 229.0
+margin_bottom = 25.0
 focus_mode = 2
 mouse_filter = 1
 size_flags_horizontal = 3
@@ -268,7 +267,7 @@ custom_effects = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtReso
 [node name="Control2" type="Control" parent="MainLayout/MainScreenBoxContainer/MainScrollContainer/TextAreaContainer/HBoxContainer"]
 margin_left = 1272.0
 margin_right = 1280.0
-margin_bottom = 229.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 8, 0 )
 
 [node name="UniquePanelSpot" type="MarginContainer" parent="MainLayout/MainScreenBoxContainer"]
@@ -324,7 +323,6 @@ size_flags_vertical = 3
 [node name="SwitchButtonsSideButton" type="Button" parent="MainLayout/MainScreenBoxContainer/HBoxContainer/SideMenuButtons/HBoxContainer4"]
 margin_right = 293.0
 margin_bottom = 26.0
-hint_tooltip = "Rollback the game's state back"
 size_flags_horizontal = 3
 shortcut_in_tooltip = false
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://UI/Options/OptionsCategory.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/Options/OptionsScreen.gd" type="Script" id=3]
 [ext_resource path="res://UI/Options/OptionUnknownType.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Game/UI/Util/SmartScrollContainer.gd" type="Script" id=5]
+[ext_resource path="res://Game/UI/Buttons/BetterButton.tscn" type="PackedScene" id=6]
 
 [node name="OptionsScreen" type="Control"]
 anchor_right = 1.0
@@ -128,31 +129,39 @@ margin_bottom = 720.0
 rect_min_size = Vector2( 0, 100 )
 columns = 5
 
-[node name="CloseButton" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="CloseButton" parent="VBoxContainer/GridContainer" instance=ExtResource( 6 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 255.0
 margin_bottom = 26.0
-size_flags_horizontal = 3
-text = "Save and close"
+text = "Save"
+myTooltipDesc = "Save the settings and close this menu"
+myShortcutKey = "1"
 
-[node name="RevertButton" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="RevertButton" parent="VBoxContainer/GridContainer" instance=ExtResource( 6 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 259.0
 margin_right = 514.0
 margin_bottom = 26.0
-size_flags_horizontal = 3
-text = "Revert to defaults"
+text = "Defaults"
+myTooltipDesc = "Reset settings to their default values"
+myShortcutKey = "2"
 
-[node name="ResetRenderButton" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="ResetRenderButton" parent="VBoxContainer/GridContainer" instance=ExtResource( 6 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 518.0
 margin_right = 772.0
 margin_bottom = 26.0
-hint_tooltip = "Resets render settings, useful if someting breaks. Restart the game after pressing"
-size_flags_horizontal = 3
-text = "Reset Render Settings"
+text = "Reset Render"
+myTooltipDesc = "Hard-Reset render settings"
+myShortcutKey = "3"
 
 [connection signal="pressed" from="VBoxContainer/HFlowContainer/GameplayCatButton" to="." method="_on_GameplayCatButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HFlowContainer/GameCatButton" to="." method="_on_GameCatButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HFlowContainer/DisplayCatButton" to="." method="_on_DisplayCatButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HFlowContainer/InterfaceCatButton" to="." method="_on_InterfaceCatButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/RevertButton" to="." method="_on_RevertButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/ResetRenderButton" to="." method="_on_ResetRenderButton_pressed"]
+[connection signal="pressedActually" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
+[connection signal="pressedActually" from="VBoxContainer/GridContainer/RevertButton" to="." method="_on_RevertButton_pressed"]
+[connection signal="pressedActually" from="VBoxContainer/GridContainer/ResetRenderButton" to="." method="_on_ResetRenderButton_pressed"]

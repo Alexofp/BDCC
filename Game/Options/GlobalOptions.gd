@@ -53,6 +53,7 @@ var savingInDungeons: bool = false
 var blockCatcherPanelHeight: int = 8
 
 var uiLayout:int = LAYOUT_AUTO
+var uiLayoutRightHanded:bool = true
 var shouldScaleUI: bool = true
 var uiScaleMultiplier = 1.0
 var requireDoubleTapOnMobile = false
@@ -115,6 +116,7 @@ func resetToDefaults():
 	overstimulationEnabled = true
 	savingInDungeons = false
 	uiLayout = LAYOUT_AUTO
+	uiLayoutRightHanded = true
 	shouldScaleUI = true
 	uiScaleMultiplier = 1.0
 	showSpeakerName = true
@@ -1273,7 +1275,19 @@ func checkScreenOrientation():
 		#if(get_tree().root && get_tree().root.has_method("onScreenOrientationChange")):
 		#	get_tree().root.onScreenOrientationChange(oldOr, newOrientation)
 		emit_signal("onScreenOrientationChange")
-		
+
+func isUILayoutRightHanded() -> bool:
+	return uiLayoutRightHanded
+
+func toggleUILayoutRightHanded():
+	uiLayoutRightHanded = !uiLayoutRightHanded
+	saveToFile()
+
+func shouldSoloDollLookRight() -> bool:
+	if(getUILayoutFinal() == LAYOUT_TOUCH_HORIZONTAL && uiLayoutRightHanded && GM.ui):
+		return true
+	return false
+
 func saveData():
 	var data = {
 		"optionsVersion": 1,
@@ -1295,6 +1309,7 @@ func saveData():
 		"overstimulationEnabled": overstimulationEnabled,
 		"savingInDungeons": savingInDungeons,
 		"uiLayout": uiLayout,
+		"uiLayoutRightHanded": uiLayoutRightHanded,
 		"shouldScaleUI": shouldScaleUI,
 		"uiScaleMultiplier": uiScaleMultiplier,
 		"uiButtonSize": uiButtonSize,
@@ -1356,6 +1371,7 @@ func loadData(data):
 	overstimulationEnabled = loadVar(data, "overstimulationEnabled", true)
 	savingInDungeons = loadVar(data, "savingInDungeons", false)
 	uiLayout = loadVar(data, "uiLayout", LAYOUT_AUTO)
+	uiLayoutRightHanded = loadVar(data, "uiLayoutRightHanded", true)
 	shouldScaleUI = loadVar(data, "shouldScaleUI", true)
 	uiScaleMultiplier = loadVar(data, "uiScaleMultiplier", 1.0)
 	uiButtonSize = loadVar(data, "uiButtonSize", 0)

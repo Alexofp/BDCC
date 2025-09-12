@@ -26,20 +26,24 @@ texture = ExtResource( 4 )
 region_enabled = true
 region_rect = Rect2( 1, 1, 1022, 62 )
 
-[node name="Chair" type="Sprite3D" parent="." index="3"]
+[node name="Flipper" type="Spatial" parent="." index="3"]
+unique_name_in_owner = true
+
+[node name="Chair" type="Sprite3D" parent="Flipper" index="0"]
+unique_name_in_owner = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05789, 1.92807, 0.0685949 )
 texture = ExtResource( 5 )
 
-[node name="FarLeft" type="Position3D" parent="." index="4"]
+[node name="FarLeft" type="Position3D" parent="Flipper" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.18997, 5.39323, 1.77914 )
 
-[node name="FarRight" type="Position3D" parent="." index="5"]
+[node name="FarRight" type="Position3D" parent="Flipper" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.19, 5.393, 1.779 )
 
-[node name="Above" type="Position3D" parent="." index="6"]
+[node name="Above" type="Position3D" parent="Flipper" index="3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.2541, 1.779 )
 
-[node name="Floor" type="Position3D" parent="." index="7"]
+[node name="Floor" type="Position3D" parent="Flipper" index="4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.104177, 0.477503 )
 
 [editable path="Doll3D"]

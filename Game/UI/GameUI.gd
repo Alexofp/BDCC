@@ -82,6 +82,7 @@ func _ready():
 	var _i = 0
 	for n in buttonsCountPerPage:
 		var newbutton = optionButtonScene.instance()
+		newbutton.allowDoubleTabSetting = true
 		buttons.append(newbutton)
 		optionButtonsContainer.add_child(newbutton)
 		
@@ -97,6 +98,7 @@ func _ready():
 	
 	if(OS.has_touchscreen_ui_hint()):
 		textOutput.selection_enabled = false
+	setIsRightHandedLayout(OPTIONS.isUILayoutRightHanded())
 	
 func say(text: String):
 	#textOutput.append_bbcode(gameParser.executeString(sayParser.processString(text)))
@@ -192,6 +194,7 @@ func updateExtraButtons():
 		
 		var theOptionEntry:Array = extraOptions[_indx]
 		var newButton = optionButtonScene.instance()
+		newButton.allowDoubleTabSetting = true
 		newButton.setButtonText(theOptionEntry[1])
 		extra_buttons_grid.add_child(newButton)
 		newButton.setShortcutPhysicalScancode(KEY_1+_indx, true)
@@ -663,12 +666,37 @@ func setCurrentPage(newCurrentPage:int):
 	
 	updateButtons()
 
-var isSideMenuOnLeft:bool = true
-onready var side_menu_buttons = $"%SideMenuButtons"
 func _on_SwitchButtonsSideButton_pressed():
-	var thePar:Control = side_menu_buttons.get_parent()
-	if(isSideMenuOnLeft):
-		thePar.move_child(side_menu_buttons, thePar.get_child_count()-1)
-	else:
-		thePar.move_child(side_menu_buttons, 0)
-	isSideMenuOnLeft = !isSideMenuOnLeft
+	OPTIONS.toggleUILayoutRightHanded()
+	setIsRightHandedLayout(OPTIONS.isUILayoutRightHanded())
+
+func setIsRightHandedLayout(_isRighthanded:bool):
+	if(OPTIONS.getUILayoutFinal() == OPTIONS.LAYOUT_TOUCH_VERTICAL):
+		var side_menu_buttons = $"%SideMenuButtons"
+		var thePar:Control = side_menu_buttons.get_parent()
+		if(!_isRighthanded):
+			thePar.move_child(side_menu_buttons, thePar.get_child_count()-1)
+		else:
+			thePar.move_child(side_menu_buttons, 0)
+	if(OPTIONS.getUILayoutFinal() == OPTIONS.LAYOUT_TOUCH_HORIZONTAL):
+		var rightPanel = $"%RightPanel"
+		var rightPanelPar:Control = rightPanel.get_parent()
+		
+		var mapPar:Control = mapAndTimePanel.get_parent()
+		
+		var menuButtonsContainer = $"%MenuButtonsContainer"
+		var thePar:Control = menuButtonsContainer.get_parent()
+		if(_isRighthanded):
+			thePar.move_child(menuButtonsContainer, thePar.get_child_count()-1)
+			rightPanelPar.move_child(rightPanel, 0)
+			mapPar.move_child(mapAndTimePanel, 0)
+			mapPar.move_child(smartCharacterPanel, 0)
+		else:
+			thePar.move_child(menuButtonsContainer, 0)
+			rightPanelPar.move_child(rightPanel, rightPanelPar.get_child_count()-1)
+			mapPar.move_child(mapAndTimePanel, mapPar.get_child_count()-1)
+			mapPar.move_child(smartCharacterPanel, mapPar.get_child_count()-1)
+
+func _on_SwitchLayoutHorizontalButton_pressed():
+	OPTIONS.toggleUILayoutRightHanded()
+	setIsRightHandedLayout(OPTIONS.isUILayoutRightHanded())

@@ -764,7 +764,7 @@ func _run():
 
 		saynn("[say=psmilkgirl]MHH-hhh! Mhhh..[/say]")
 
-		saynn("Milka chuckles as Leo reaches his hand out to cup and grope and Milka's full tits.")
+		saynn("Milka chuckles as Leo reaches his hand out to cup and grope Milka's full tits.")
 
 		saynn("[say=psmilka]I'm a good cow, right~?[/say]")
 
@@ -810,7 +810,7 @@ func _run():
 
 		saynn("[say=psmilka]I don't.. remember.. I don't remember much, I'm sorry. Not even my real name.[/say]")
 
-		saynn("Pip nods.. while Milka ears lower themselves.")
+		saynn("Pip nods.. while Milka's ears lower themselves.")
 
 		saynn("[say=pspip]Huh. That makes things a bit complicated..[/say]")
 
@@ -820,7 +820,7 @@ func _run():
 
 		saynn("[say=pspip]Don't be. I will help you, we will figure it out.[/say]")
 
-		saynn("Milka cheers up visible, her tail wagging.")
+		saynn("Milka cheers up visibly, her tail wagging.")
 
 		saynn("[say=psmilka]Don't you have your own things that you have you do?[/say]")
 

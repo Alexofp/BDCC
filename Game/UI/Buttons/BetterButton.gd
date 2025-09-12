@@ -7,6 +7,7 @@ export var myTooltipDesc:String = ""
 
 export var shouldScaleToUIButtonSize:bool = true
 export var shouldShowShortcut:bool = true
+export var allowDoubleTabSetting:bool = false
 
 export var myShortcutKey:String = ""
 export var myShortcutCtrl:bool = false
@@ -93,7 +94,7 @@ func setTooltipText(_name:String, _desc:String):
 
 
 func _on_BetterButton_pressed():
-	if(OS.has_touchscreen_ui_hint() && OPTIONS.shouldRequireDoubleTapOnMobile()):
+	if(OS.has_touchscreen_ui_hint() && OPTIONS.shouldRequireDoubleTapOnMobile() && allowDoubleTabSetting):
 		if(!showingDescription):
 			showingDescription = true
 			emit_signal("mouse_entered")
