@@ -34,6 +34,7 @@ render_target_update_mode = 3
 [node name="World" parent="Viewport" instance=ExtResource( 2 )]
 
 [node name="CustomViewportControl" parent="." instance=ExtResource( 3 )]
+unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_top = 18.0
@@ -45,6 +46,7 @@ texture = SubResource( 1 )
 viewportPath = NodePath("../Viewport")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CustomViewportControl"]
+visible = false
 anchor_right = 1.0
 
 [node name="ZoomInButton" type="Button" parent="CustomViewportControl/HBoxContainer"]

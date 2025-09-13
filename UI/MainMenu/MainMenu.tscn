@@ -474,68 +474,79 @@ margin_bottom = 720.0
 rect_min_size = Vector2( 0, 100 )
 columns = 5
 
-[node name="DevClose" type="Button" parent="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer"]
-margin_right = 188.0
+[node name="DevClose" parent="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 148.0
 margin_bottom = 26.0
-size_flags_horizontal = 3
 text = "Close"
+myShortcutKey = "1"
 
-[node name="DevSceneConverter2" type="Button" parent="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer"]
-margin_left = 192.0
-margin_right = 339.0
+[node name="DevSceneConverter2" parent="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 152.0
+margin_right = 300.0
 margin_bottom = 26.0
-hint_tooltip = "Converts scenes from plain-text format into what the game can use"
-size_flags_horizontal = 3
 text = "SceneConverter"
+myTooltipDesc = "A tool that can convert scenes written in a simple text format into code"
+myShortcutKey = "2"
 
-[node name="DevLikesGenerator" type="Button" parent="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer"]
-margin_left = 343.0
-margin_right = 478.0
+[node name="DevLikesGenerator" parent="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 304.0
+margin_right = 452.0
 margin_bottom = 26.0
-hint_tooltip = "Panel for easy creation of npc likes/dislikes tables. Used for lust combat"
-size_flags_horizontal = 3
 text = "Npc Likes Gen."
+myShortcutKey = "3"
 
-[node name="DevCharCreator" type="Button" parent="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer"]
-margin_left = 482.0
-margin_right = 616.0
+[node name="DevCharCreator" parent="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 456.0
+margin_right = 603.0
 margin_bottom = 26.0
-hint_tooltip = "A thing to quickly design an npc"
-size_flags_horizontal = 3
 text = "Char Creator"
+myShortcutKey = "4"
 
-[node name="DevModCreator" type="Button" parent="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer"]
-margin_left = 620.0
+[node name="DevModCreator" parent="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 607.0
 margin_right = 754.0
 margin_bottom = 26.0
-hint_tooltip = "A tool to export your mod"
-size_flags_horizontal = 3
 text = "ModMaker"
+myShortcutKey = "5"
 
-[node name="DevSceneConverter" type="Button" parent="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer"]
+[node name="DevSceneConverter" parent="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 30.0
-margin_right = 188.0
+margin_right = 148.0
 margin_bottom = 56.0
-hint_tooltip = "Converts scenes from plain-text format into what the game can use"
-size_flags_horizontal = 3
-text = "SceneConverter (old)"
+text = "(old) SceneConverter"
+myShortcutKey = "Q"
 
 [node name="SexActivityCreator" type="Button" parent="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer"]
 visible = false
+margin_left = 135.0
 margin_top = 30.0
-margin_right = 188.0
+margin_right = 311.0
 margin_bottom = 56.0
 hint_tooltip = "Provides an easier way to code sex activities"
 size_flags_horizontal = 3
 text = "Sex Activity Creator"
 
-[node name="InteractionCreator" type="Button" parent="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer"]
+[node name="InteractionCreator" parent="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 152.0
 margin_top = 30.0
-margin_right = 188.0
+margin_right = 300.0
 margin_bottom = 56.0
-hint_tooltip = "Provides an easier way to code sex activities"
-size_flags_horizontal = 3
 text = "Interaction Creator"
+myShortcutKey = "W"
 
 [node name="LoadGameScreen" parent="MainHBox/CenterAreaVBox" instance=ExtResource( 4 )]
 unique_name_in_owner = true
@@ -669,14 +680,14 @@ unique_name_in_owner = true
 [connection signal="pressedActually" from="MainHBox/CenterAreaVBox/MainVBox/GridContainer/AutoTranslatorButton" to="." method="_on_AutoTranslatorButton_pressed"]
 [connection signal="pressedActually" from="MainHBox/CenterAreaVBox/MainVBox/GridContainer/DatapackButton" to="." method="_on_DatapackButton_pressed"]
 [connection signal="pressedActually" from="MainHBox/CenterAreaVBox/MainVBox/GridContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
-[connection signal="pressed" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/DevClose" to="." method="_on_DevClose_pressed"]
-[connection signal="pressed" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/DevSceneConverter2" to="." method="_on_DevSceneConverter2_pressed"]
-[connection signal="pressed" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/DevLikesGenerator" to="." method="_on_DevLikesGenerator_pressed"]
-[connection signal="pressed" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/DevCharCreator" to="." method="_on_DevCharCreator_pressed"]
-[connection signal="pressed" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/DevModCreator" to="." method="_on_DevModCreator_pressed"]
-[connection signal="pressed" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/DevSceneConverter" to="." method="_on_DevSceneConverter_pressed"]
+[connection signal="pressedActually" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/DevClose" to="." method="_on_DevClose_pressed"]
+[connection signal="pressedActually" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/DevSceneConverter2" to="." method="_on_DevSceneConverter2_pressed"]
+[connection signal="pressedActually" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/DevLikesGenerator" to="." method="_on_DevLikesGenerator_pressed"]
+[connection signal="pressedActually" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/DevCharCreator" to="." method="_on_DevCharCreator_pressed"]
+[connection signal="pressedActually" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/DevModCreator" to="." method="_on_DevModCreator_pressed"]
+[connection signal="pressedActually" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/DevSceneConverter" to="." method="_on_DevSceneConverter_pressed"]
 [connection signal="pressed" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/SexActivityCreator" to="." method="_on_SexActivityCreator_pressed"]
-[connection signal="pressed" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/InteractionCreator" to="." method="_on_InteractionCreator_pressed"]
+[connection signal="pressedActually" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/InteractionCreator" to="." method="_on_InteractionCreator_pressed"]
 [connection signal="onClosePressed" from="MainHBox/CenterAreaVBox/LoadGameScreen" to="." method="switchToMainMenu"]
 [connection signal="onClosePressed" from="MainHBox/CenterAreaVBox/OptionsScreen" to="." method="switchToMainMenu"]
 [connection signal="onClosePressed" from="MainHBox/CenterAreaVBox/CreditsScreen" to="." method="switchToMainMenu"]

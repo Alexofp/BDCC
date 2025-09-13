@@ -7,15 +7,16 @@ var worldScene = preload("res://Game/World/World.tscn")
 onready var world = $Viewport/World
 signal onDevComButton
 onready var compact_label = $"%CompactLabel"
+onready var custom_viewport_control = $"%CustomViewportControl"
 
 
 export var compactMode:bool = false
 
 func _ready():
-	if(OS.get_name() == "Android"):
-		$CustomViewportControl/HBoxContainer.visible = true
-	else:
-		$CustomViewportControl/HBoxContainer.visible = false
+#	if(OS.get_name() == "Android"):
+#		$CustomViewportControl/HBoxContainer.visible = true
+#	else:
+#		$CustomViewportControl/HBoxContainer.visible = false
 	
 	if(compactMode):
 		compact_label.visible = true
@@ -69,6 +70,11 @@ func a_gui_input(event: InputEvent):
 		if(event.button_index == BUTTON_WHEEL_DOWN):
 			world.zoomIn()
 
+	if event is InputEventScreenTouch:
+		_handle_touch(event)
+	elif event is InputEventScreenDrag:
+		_handle_drag(event)
+
 func _on_MapAndTimePanel_gui_input(event):
 	a_gui_input(event)
 
@@ -78,3 +84,49 @@ func _on_ZoomInButton_pressed():
 
 func _on_ZoomOutButton_pressed():
 	world.zoomIn(1.2)
+
+var touch_points: Dictionary = {}
+
+func _handle_touch(event: InputEventScreenTouch):
+	if event.pressed:
+		touch_points[event.index] = event.position
+	else:
+		if(touch_points.has(event.index)):
+			touch_points.erase(event.index)
+
+func _handle_drag(event: InputEventScreenDrag):
+	#if touch_points.size() == 1:
+		#print(touch_points)
+		#offset -= event.relative / zoom.x
+		#touch_points[event.index] = event.position
+		#touch_points[1] = Vector2(0.0, 0.0)
+
+	if touch_points.size() == 1 || touch_points.size() == 2:
+		var pivot_point: Vector2
+		
+		if(touch_points.size() == 2):
+			# Find the index of the other finger
+			var pivot_index:int = -1
+			for fingerIndex in touch_points:
+				if(fingerIndex != event.index):
+					pivot_index = fingerIndex
+					break
+			if(pivot_index < 0):
+				return
+			pivot_point = touch_points[pivot_index]
+		else:
+			pivot_point = custom_viewport_control.rect_position + custom_viewport_control.rect_size*0.5 #Vector2(0.0, 0.0)
+		
+		var old_point: Vector2 = touch_points[event.index]
+		var new_point: Vector2 = event.position
+
+		var old_vector: Vector2 = old_point - pivot_point
+		var new_vector: Vector2 = new_point - pivot_point
+		
+		var delta_scale = new_vector.length() / old_vector.length()
+		#zoom *= delta_scale
+		world.zoomRaw(delta_scale)
+		touch_points[event.index] = new_point
+		
+		#var drag_vector: Vector2 = event.relative
+		#offset -= drag_vector / 2 * zoom

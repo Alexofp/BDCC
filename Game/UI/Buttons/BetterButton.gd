@@ -32,7 +32,7 @@ func _ready():
 	
 	if(!text.empty() && myButtonText.empty()):
 		myButtonText = text
-	text = ""
+	text = " "
 	
 	if(!hint_tooltip.empty() && myTooltipDesc.empty()):
 		myTooltipDesc = hint_tooltip

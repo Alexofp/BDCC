@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://UI/ModsMenu/ModsMenu.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/Titillium-Bold.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://Game/UI/Buttons/BetterButton.tscn" type="PackedScene" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -66,46 +67,60 @@ margin_bottom = 720.0
 rect_min_size = Vector2( 0, 100 )
 columns = 5
 
-[node name="CloseButton" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="CloseButton" parent="VBoxContainer/GridContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 253.0
 margin_bottom = 20.0
-size_flags_horizontal = 3
 text = "Close"
+myShortcutKey = "1"
 
-[node name="ModsFolderButton" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="ModsFolderButton" parent="VBoxContainer/GridContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 257.0
 margin_right = 510.0
 margin_bottom = 20.0
-size_flags_horizontal = 3
 text = "Open mods folder"
+myTooltipDesc = "Show the mods folder"
+myShortcutKey = "2"
 
-[node name="AddModButton" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="AddModButton" parent="VBoxContainer/GridContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 514.0
 margin_right = 767.0
 margin_bottom = 20.0
-size_flags_horizontal = 3
 text = "Import mod"
+myShortcutKey = "3"
 
-[node name="RemoveModsButton" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="RemoveModsButton" parent="VBoxContainer/GridContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 771.0
 margin_right = 1024.0
 margin_bottom = 20.0
-size_flags_horizontal = 3
 text = "Delete ALL mods"
+myTooltipDesc = "(HTML version) delete all mods"
+myShortcutKey = "4"
 
-[node name="WikiButton" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="WikiButton" parent="VBoxContainer/GridContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 1028.0
 margin_right = 1280.0
 margin_bottom = 20.0
-size_flags_horizontal = 3
 text = "Modding wiki"
+myShortcutKey = "5"
 
-[node name="SkinsFolderButton" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="SkinsFolderButton" parent="VBoxContainer/GridContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 24.0
 margin_right = 253.0
 margin_bottom = 44.0
-size_flags_horizontal = 3
 text = "Skins folder"
+myShortcutKey = "Q"
 
 [node name="ImportModDialog" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -158,11 +173,11 @@ margin_right = 247.5
 margin_bottom = 57.0
 
 [connection signal="meta_clicked" from="VBoxContainer/ScrollContainer/VBoxContainer/ModsLabel" to="." method="_on_ModsLabel_meta_clicked"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/ModsFolderButton" to="." method="_on_ModsFolderButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/AddModButton" to="." method="_on_AddModButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/RemoveModsButton" to="." method="_on_RemoveModsButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/WikiButton" to="." method="_on_WikiButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/SkinsFolderButton" to="." method="_on_SkinsFolderButton_pressed"]
+[connection signal="pressedActually" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
+[connection signal="pressedActually" from="VBoxContainer/GridContainer/ModsFolderButton" to="." method="_on_ModsFolderButton_pressed"]
+[connection signal="pressedActually" from="VBoxContainer/GridContainer/AddModButton" to="." method="_on_AddModButton_pressed"]
+[connection signal="pressedActually" from="VBoxContainer/GridContainer/RemoveModsButton" to="." method="_on_RemoveModsButton_pressed"]
+[connection signal="pressedActually" from="VBoxContainer/GridContainer/WikiButton" to="." method="_on_WikiButton_pressed"]
+[connection signal="pressedActually" from="VBoxContainer/GridContainer/SkinsFolderButton" to="." method="_on_SkinsFolderButton_pressed"]
 [connection signal="file_selected" from="ImportModDialog" to="." method="_on_ImportModDialog_file_selected"]
 [connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_confirmed"]
