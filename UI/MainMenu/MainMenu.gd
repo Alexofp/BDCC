@@ -150,13 +150,20 @@ func _on_HTTPRequest_request_completed(result, _response_code, _headers, body):
 			if(!release.has(req)):
 				continue
 		
-		var time = Util.ISO8601DateToDatetime(release["published_at"])
+		var publishedAtISOString:String = release["published_at"]
+		var publishedAtUnix:int = Time.get_unix_time_from_datetime_string(publishedAtISOString)
+		var timezone_info:Dictionary = Time.get_time_zone_from_system()
+		var offset_minutes:int = timezone_info["bias"]
+		var publishedAtLocal:int = publishedAtUnix + offset_minutes*60
+		
+		#var time = Time.get_datetime_string_from_unix_time(publishedAtLocal, true)#Util.ISO8601DateToDatetime(release["published_at"])
+		#print(release["published_at"])
 		
 		var theSimpleText:String = ""
 		var theAdvancedText:String = ""
 		theSimpleText = "Latest github release: "+str(release["tag_name"])
-		if(time != null):
-			theAdvancedText += "\n" + Util.datetimeToRFC113(time)
+		#if(time != null):
+		theAdvancedText += "\n" + Time.get_datetime_string_from_unix_time(publishedAtLocal, true)
 		
 		theAdvancedText += "\n\nYour current version: "+GlobalRegistry.getGameVersionString()
 		setGithubLabelStr(theSimpleText, theAdvancedText)

@@ -296,9 +296,9 @@ func customSavePathComparison(a, b):
 func getSavesSortedByDate():
 	var savesPaths = getAllSavePaths()
 	var sortedSavePaths = []
-	var file = File.new()
+	#var file = File.new()
 	for path in savesPaths:
-		var fileModifTime = file.get_modified_time(path)
+		var fileModifTime = Util.getFileModifiedTime(path)#file.get_modified_time(path)
 		sortedSavePaths.append([path, fileModifTime])
 	sortedSavePaths.sort_custom(self, "customSavePathComparison")
 	

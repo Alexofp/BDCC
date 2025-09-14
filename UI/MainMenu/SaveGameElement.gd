@@ -1,6 +1,6 @@
 extends HBoxContainer
 
-var saveFile = ""
+var saveFile:String = ""
 onready var saveNameLabel = $SaveNameLabel
 signal onLoadButtonPressed(saveFile)
 signal onDeleteButtonPressed(saveFile)
@@ -14,12 +14,10 @@ func _ready():
 	#setDeleteMode(false)
 
 func setSaveFile(path):
-	var file = File.new()
-	var fileModifTime = file.get_modified_time(path)
-	if(fileModifTime is String):
-		assert(false)
-	var fileModifTimeDict = OS.get_datetime_from_unix_time(fileModifTime)
-	var fileModifTimeString = Util.datetimeToRFC113(fileModifTimeDict)
+	var fileModifTime:int = Util.getFileModifiedTime(path)
+	
+	var fileModifTimeDict:Dictionary = Time.get_datetime_dict_from_unix_time(fileModifTime)
+	var fileModifTimeString:String = Util.datetimeToRFC113(fileModifTimeDict) #Time.get_datetime_string_from_datetime_dict(fileModifTimeDict, true)#
 	
 	saveFile = path
 	
@@ -32,7 +30,9 @@ func setSaveFile(path):
 		extra += " - Time: "+str(Util.getTimeStringHHMM(gameData["timeOfDay"]))
 		#extra += " - Location: "+str(gameData["location"])
 	
-	saveNameLabel.bbcode_text = "[b]" + saveFile.get_file() + "[/b] - " + fileModifTimeString + "\n"+extra
+	var isExternal:bool = !saveFile.begins_with("user://")
+	
+	saveNameLabel.bbcode_text = ("(External) " if isExternal else "") + "[b]" + saveFile.get_file() + "[/b] - " + fileModifTimeString + "\n"+extra
 
 func _on_LoadButton_pressed():
 	emit_signal("onLoadButtonPressed", saveFile)

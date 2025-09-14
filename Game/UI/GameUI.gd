@@ -83,6 +83,7 @@ func _ready():
 	for n in buttonsCountPerPage:
 		var newbutton = optionButtonScene.instance()
 		newbutton.allowDoubleTabSetting = true
+		newbutton.instantTooltip = true
 		buttons.append(newbutton)
 		optionButtonsContainer.add_child(newbutton)
 		
@@ -195,6 +196,7 @@ func updateExtraButtons():
 		var theOptionEntry:Array = extraOptions[_indx]
 		var newButton = optionButtonScene.instance()
 		newButton.allowDoubleTabSetting = true
+		newButton.instantTooltip = true
 		newButton.setButtonText(theOptionEntry[1])
 		extra_buttons_grid.add_child(newButton)
 		newButton.setShortcutPhysicalScancode(KEY_1+_indx, true)

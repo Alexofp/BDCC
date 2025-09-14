@@ -8,6 +8,7 @@ export var myTooltipDesc:String = ""
 export var shouldScaleToUIButtonSize:bool = true
 export var shouldShowShortcut:bool = true
 export var allowDoubleTabSetting:bool = false
+export var instantTooltip:bool = false
 
 export var myShortcutKey:String = ""
 export var myShortcutCtrl:bool = false
@@ -82,7 +83,7 @@ func _on_BetterButton_mouse_exited():
 func showTooltip():
 	if(myTooltipName.empty() && myTooltipDesc.empty()):
 		return
-	GlobalTooltip.showTooltip(self, myTooltipName if !myTooltipName.empty() else myButtonText, myTooltipDesc)
+	GlobalTooltip.showTooltip(self, myTooltipName if !myTooltipName.empty() else myButtonText, myTooltipDesc, false, !instantTooltip)
 
 func hideTooltip():
 	GlobalTooltip.hideTooltip(self)

@@ -2139,6 +2139,7 @@ ModularDialogue="*res://Game/ModularDialogue/ModularDialogue.gd"
 [debug]
 
 gdscript/warnings/treat_warnings_as_errors=true
+gdscript/warnings/integer_division=false
 gdscript/warnings/unsafe_cast=true
 
 [display]
