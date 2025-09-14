@@ -150,6 +150,7 @@ var currentUniqueID = 0
 var currentChildUniqueID = 0
 var currentNPCUniqueID = 0
 var currentTFID := 0
+var currentSave:int = 1
 
 var pathToIDCache:Dictionary = {}
 var IDToPathCache:Dictionary = {}

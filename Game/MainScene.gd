@@ -252,6 +252,7 @@ func _ready():
 	applyAllWorldEdits()
 	
 func startNewGame():
+	GlobalRegistry.currentSave = 1
 	GM.ES.registerDatapackEvents(loadedDatapacks.keys())
 	for scene in sceneStack:
 		scene.queue_free()
