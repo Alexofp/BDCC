@@ -26,6 +26,7 @@ onready var ingameMenuScreen = $"%InGameMenu"
 onready var skillsScreen = $"%SkillsUI"
 onready var skillsButton = $"%SkillsButton"
 onready var save_button = $"%SaveButton"
+onready var load_button = $"%LoadButton"
 onready var debugScreen = $"%DebugPanel"
 onready var debugPanelButton = $"%DebugMenuButton"
 onready var rollbackButton = $"%RollbackButton"
@@ -93,7 +94,8 @@ func _ready():
 		
 	if(!OPTIONS.isRollbackEnabled()):
 		rollbackButton.visible = false
-		
+	
+	load_button.disabled = true
 	updateButtons()
 	#setBigAnswersMode(true)
 	
@@ -244,6 +246,9 @@ func updateButtons():
 			skillsButton.disabled = true
 		else:
 			skillsButton.disabled = false
+		
+		if(load_button.disabled && SAVE.canQuickLoad()):
+			load_button.disabled = false
 		
 	for i in buttonsCountPerPage:
 		var button:Button = buttons[i]
@@ -421,6 +426,8 @@ func loadingSavefileFinished():
 
 func _on_SaveButton_pressed():
 	SAVE.makeQuickSave()
+	if(load_button.disabled && SAVE.canQuickLoad()):
+		load_button.disabled = false
 
 func _on_LoadButton_pressed():
 	SAVE.loadQuickSave()

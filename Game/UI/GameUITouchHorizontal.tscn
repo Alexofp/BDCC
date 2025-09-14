@@ -466,6 +466,7 @@ shortcut_in_tooltip = false
 text = "<->"
 
 [node name="LoadButton" type="Button" parent="MainLayout/MenuButtonsContainer"]
+unique_name_in_owner = true
 margin_top = 26.0
 margin_right = 100.0
 margin_bottom = 141.0
@@ -511,6 +512,7 @@ shortcut = SubResource( 10 )
 text = "Skills"
 
 [node name="MenuButton" type="Button" parent="MainLayout/MenuButtonsContainer"]
+unique_name_in_owner = true
 margin_top = 488.0
 margin_right = 100.0
 margin_bottom = 604.0

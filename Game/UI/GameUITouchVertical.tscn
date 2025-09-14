@@ -470,6 +470,7 @@ margin_bottom = 684.0
 rect_min_size = Vector2( 0, 50 )
 
 [node name="LoadButton" type="Button" parent="MainLayout/HBoxContainer2"]
+unique_name_in_owner = true
 margin_right = 66.0
 margin_bottom = 50.0
 hint_tooltip = "Quick load (F9)"
@@ -487,6 +488,7 @@ shortcut_in_tooltip = false
 text = "Rollback"
 
 [node name="MenuButton" type="Button" parent="MainLayout/HBoxContainer2"]
+unique_name_in_owner = true
 margin_left = 159.0
 margin_right = 647.0
 margin_bottom = 50.0

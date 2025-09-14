@@ -153,6 +153,7 @@ shortcut = SubResource( 16 )
 text = "Q.save"
 
 [node name="LoadButton" type="Button" parent="MainLayout/LeftPanel/Margin/VBox/HBoxContainer2"]
+unique_name_in_owner = true
 margin_left = 120.0
 margin_right = 236.0
 margin_bottom = 26.0
@@ -181,6 +182,7 @@ shortcut = SubResource( 10 )
 text = "Skills"
 
 [node name="MenuButton" type="Button" parent="MainLayout/LeftPanel/Margin/VBox/HBoxContainer3"]
+unique_name_in_owner = true
 margin_left = 99.0
 margin_right = 195.0
 margin_bottom = 26.0
