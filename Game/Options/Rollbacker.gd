@@ -23,6 +23,9 @@ func notifyMadeChoice():
 	if(usesThread && saveThread.is_active()):
 		saveThread.wait_to_finish()
 	madeChoice = true
+	
+	if(OPTIONS.isRollbackEnabled() && rollbackStates.size() == 0):
+		pushRollbackState_THREAD()
 
 func pushRollbackState():
 	if(!OPTIONS.isRollbackEnabled()):
@@ -52,6 +55,8 @@ func pushRollbackState_THREAD():
 func canRollback():
 	if(GM.main != null && !GM.main.canRollback()):
 		return false
+	if(madeChoice && rollbackStates.size() > 0):
+		return true
 	return (rollbackStates.size() > 0 && !madeChoice) || (rollbackStates.size() > 1 && madeChoice)
 
 func clear():

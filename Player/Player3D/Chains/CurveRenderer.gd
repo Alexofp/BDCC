@@ -19,6 +19,7 @@ var curve := Curve3D.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	#curve.bake_interval = 22.5
 	curve.clear_points()
 	curve.add_point(Vector3(0,0,0))
 	curve.add_point(Vector3(-1,0,0))
@@ -57,7 +58,7 @@ func _process(_delta):
 	curve.set_point_in(1, (mid_point_sagged - anchor_point) * flex)
 	curve.set_point_position(1, anchor_point)
 	
-	var points = curve.tessellate()
+	var points = curve.tessellate(3, 20)
 	
 	#turn curve into a strip by offsetting the points by half-width in each direction
 	var camera_normal = Vector3(0,0,1)

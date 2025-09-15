@@ -197,10 +197,10 @@ func updateExtraButtons():
 		
 		var theOptionEntry:Array = extraOptions[_indx]
 		var newButton = optionButtonScene.instance()
+		extra_buttons_grid.add_child(newButton)
 		newButton.allowDoubleTabSetting = true
 		newButton.instantTooltip = true
 		newButton.setButtonText(theOptionEntry[1])
-		extra_buttons_grid.add_child(newButton)
 		newButton.setShortcutPhysicalScancode(KEY_1+_indx, true)
 		var _some = newButton.connect("pressedActually", self, "_on_extra_option_button", [_indx])
 		var _some2 = newButton.connect("mouse_entered", self, "_on_extra_option_button_tooltip", [_indx, newButton])
