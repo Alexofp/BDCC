@@ -94,6 +94,7 @@ func connectSignalsToPC(who):
 	_s = who.connect("gotWoundedBy", self, "_on_Player_gotWoundedBy")
 
 func _exit_tree():
+	rollbacker.onDestroy()
 	GM.main = null
 	
 func createStaticCharacters():
@@ -357,7 +358,8 @@ func _on_GameUI_on_option_button(method, args):
 	pickOption(method, args)
 	
 func pickOption(method, args):
-	rollbacker.pushRollbackState()
+	rollbacker.notifyMadeChoice()
+	
 	IS.resetExtraText()
 	GM.main.clearMessages()
 	GlobalTooltip.resetTooltips()
@@ -372,6 +374,8 @@ func pickOption(method, args):
 
 	allowExecuteOnce = true # For 'run code once' code block
 	runCurrentScene()
+	
+	rollbacker.pushRollbackState()
 	
 func runCurrentScene():
 	if(sceneStack.size() > 0):

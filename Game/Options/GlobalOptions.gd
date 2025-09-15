@@ -78,6 +78,7 @@ var imagePackOrder = []
 var rollbackEnabled = false
 var rollbackSlots = 5
 var rollbackSaveEvery = 1
+var rollbackThread:bool = true
 
 var showModdedLauncher = false
 
@@ -132,6 +133,7 @@ func resetToDefaults():
 	showSceneArt = true
 	showSceneCreator = true
 	rollbackEnabled = false
+	rollbackThread = true
 	rollbackSlots = 5
 	rollbackSaveEvery = 1
 	showModdedLauncher = false
@@ -257,6 +259,9 @@ func shouldShowMapArt():
 
 func isRollbackEnabled():
 	return rollbackEnabled
+
+func isRollbackThreadEnabled() -> bool:
+	return rollbackThread
 
 func getRollbackSlotsAmount():
 	return rollbackSlots
@@ -957,6 +962,14 @@ func getChangeableOptions():
 					"tab": TAB_GAME,
 				},
 				{
+					"name": "Separate thread",
+					"description": "If checked, the game will save the game's rollback state in a separate thread. Should result in a smoother gameplay but might lead to all sorts of strange bugs. Disable if the game is crashing randomly.",
+					"id": "rollbackThread",
+					"type": "checkbox",
+					"value": rollbackThread,
+					"tab": TAB_GAME,
+				},
+				{
 					"name": "Rollback history size",
 					"description": "How many actions you wanna be able to undo",
 					"id": "rollbackSlots",
@@ -1176,6 +1189,8 @@ func applyOption(categoryID, optionID, value):
 	if(categoryID == "rollback"):
 		if(optionID == "rollbackEnabled"):
 			rollbackEnabled = value
+		if(optionID == "rollbackThread"):
+			rollbackThread = value
 		if(optionID == "rollbackSlots"):
 			rollbackSlots = Util.maxi(value, 1)
 		if(optionID == "rollbackSaveEvery"):
@@ -1325,6 +1340,7 @@ func saveData():
 		"showSceneCreator": showSceneCreator,
 		"showMapArt": showMapArt,
 		"rollbackEnabled": rollbackEnabled,
+		"rollbackThread": rollbackThread,
 		"rollbackSlots": rollbackSlots,
 		"rollbackSaveEvery": rollbackSaveEvery,
 		"showModdedLauncher": showModdedLauncher,
@@ -1387,6 +1403,7 @@ func loadData(data):
 	showSceneCreator = loadVar(data, "showSceneCreator", true)
 	showMapArt = loadVar(data, "showMapArt", false)
 	rollbackEnabled = loadVar(data, "rollbackEnabled", false)
+	rollbackThread = loadVar(data, "rollbackThread", true)
 	rollbackSlots = loadVar(data, "rollbackSlots", 5)
 	rollbackSaveEvery = loadVar(data, "rollbackSaveEvery", 1)
 	showModdedLauncher = loadVar(data, "showModdedLauncher", false)
