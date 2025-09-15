@@ -34,7 +34,7 @@ func _run():
 
 		saynn("[say=rahi]The same as everyone else.. Working in the mines, wandering around.. She likes doing yoga.[/say]")
 
-		saynn("[say=pc]Yoga, huh[/say]")
+		saynn("[say=pc]Yoga, huh.[/say]")
 
 		saynn("Kitty looks at you and smiles.")
 
@@ -102,7 +102,7 @@ func _run():
 
 		# (if pink)
 		if(GM.pc.getInmateType() == InmateType.SexDeviant):
-			saynn("[say=avy]A lilac toy is trying to tell me something? Shouldn’t your mouth be busy with staff cocks 24/7[/say]")
+			saynn("[say=avy]A lilac toy is trying to tell me something? Shouldn’t your mouth be busy with staff cocks 24/7.[/say]")
 
 		saynn("[say=pc]I’m asking you.[/say]")
 

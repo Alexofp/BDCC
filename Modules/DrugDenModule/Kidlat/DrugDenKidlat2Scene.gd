@@ -27,7 +27,7 @@ func _run():
 
 		saynn("Her tail flicks, her tough stance wobbling a little..")
 
-		saynn("[say=kidlat]It's a long story, luv. I try not to rip people off.. But some bastard thought it would be fun to do so with my clothes. I managed to bolt before things go worse.. but now.. well[/say]")
+		saynn("[say=kidlat]It's a long story, luv. I try not to rip people off.. But some bastard thought it would be fun to do so with my clothes. I managed to bolt before things go worse.. but now.. well.[/say]")
 
 		saynn("She looks down at herself.. your gaze involuntarily follows, observing her exposed forms.")
 

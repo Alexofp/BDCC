@@ -27,13 +27,13 @@ func _run():
 		
 		saynn("You decide not to announce your presence and instead begin to slowly creep up to the lady, who seems to be too busy with reading something off of her tablet. You keep watching her as you make your steps as light as possible. You notice her feline ears twitching ever so slightly. As you approach the instrument table, you notice a variety of tools: syringes, clamps, retractors but most importantly, a few scalpels. Your hand hovers over one as you try to grab it. But as soon as you do, you hear a voice.")
 
-		saynn("[say=eliza]You will regret it, inmate. Put it down[/say]")
+		saynn("[say=eliza]You will regret it, inmate. Put it down.[/say]")
 
 		saynn("You turn your head and notice the doctor pointing some kind of remote at you, her eyes strict. You decide to hold onto the weapon for now, unsure how much of a threat a single doctor is.")
 
 		saynn("[say=pc]Or else?[/say]")
 
-		saynn("[say=eliza]Or else I will do this[/say]")
+		saynn("[say=eliza]Or else I will do this.[/say]")
 
 		saynn("She clicks some red button on her remote, which causes your collar to beep and then send a powerful shock through your body a second later. It was enough for you to drop everything and drop to your knees. The collar doesn’t stop while the doctor holds the button.")
 
@@ -47,7 +47,7 @@ func _run():
 
 		saynn("[say=pc]ughh.. What do you mean apologize.[/say]")
 
-		saynn("[say=eliza]Say that you’re sorry[/say]")
+		saynn("[say=eliza]Say that you’re sorry.[/say]")
 
 		saynn("[say=pc]Why would I?[/say]")
 
@@ -57,19 +57,19 @@ func _run():
 
 		saynn("The shock never comes. You open your eyes and see the doctor watching you with a smirk on her face.")
 
-		saynn("[say=eliza]I’m waiting[/say]")
+		saynn("[say=eliza]I’m waiting.[/say]")
 
 		saynn("[say=pc]I’m sorry?[/say]")
 
 		saynn("Doctor shakes her head.")
 
-		saynn("[say=eliza]Too weak. Put some effort into it[/say]")
+		saynn("[say=eliza]Too weak. Put some effort into it.[/say]")
 
-		saynn("[say=pc]Um. I’m very sorry that I snuck up on you and tried to steal the scalpel[/say]")
+		saynn("[say=pc]Um. I’m very sorry that I snuck up on you and tried to steal the scalpel.[/say]")
 
 		saynn("Doctor’s smirk turns into a smile as she puts away the remote into her pocket. She then gestures towards the surgical bed.")
 
-		saynn("[say=eliza]Take a seat. And no funny business[/say]")
+		saynn("[say=eliza]Take a seat. And no funny business.[/say]")
 
 		addButton("Sit", "Take a sit", "sit")
 
@@ -94,9 +94,9 @@ func _run():
 		
 		saynn("You sit on the side of a bed, it’s not the most comfy one but what can you do.")
 
-		saynn("[say=eliza]You can call me doctor Quinn, inmate. Since this is your first time here I will need to do some procedures. Nothing too painful but still[/say]")
+		saynn("[say=eliza]You can call me doctor Quinn, inmate. Since this is your first time here I will need to do some procedures. Nothing too painful but still.[/say]")
 
-		saynn("[say=pc]Well, okay[/say]")
+		saynn("[say=pc]Well, okay.[/say]")
 
 		saynn("The doctor rummages through some drawers and finds a small pill bottle that says “Spacecillin” on it. She grabs one pill and offers it to you as well as a glass of water.")
 
@@ -114,7 +114,7 @@ func _run():
 
 		# (if orange)
 		if(GM.pc.getInmateType() == InmateType.General):
-			saynn("[say=eliza]Listen. If you want to get out of here as fast as possible, the lilac block is your best bet. Even if you don’t get paroled, you will at least get access to a better cell and comfortable furniture[/say]")
+			saynn("[say=eliza]Listen. If you want to get out of here as fast as possible, the lilac block is your best bet. Even if you don’t get paroled, you will at least get access to a better cell and comfortable furniture.[/say]")
 
 			saynn("[say=pc]As a reward for letting others fuck me?[/say]")
 
@@ -140,15 +140,15 @@ func _run():
 		else:
 			saynn("You watch the doctor put all her things away and then pull out a somewhat long chain.")
 
-			saynn("[say=eliza]I will escort you to the cellblock now[/say]")
+			saynn("[say=eliza]I will escort you to the cellblock now.[/say]")
 
-			saynn("[say=pc]And why do you need that chain[/say]")
+			saynn("[say=pc]And why do you need that chain.[/say]")
 
 			saynn("She taps on a handy hook on your collar.")
 
 			saynn("[say=pc]You gonna leash me? Like a dog?[/say]")
 
-			saynn("[say=eliza]Can’t have you running away now, you know[/say]")
+			saynn("[say=eliza]Can’t have you running away now, you know.[/say]")
 
 			saynn("She offers you a cheeky smile")
 
@@ -161,7 +161,7 @@ func _run():
 		aimCamera("intro_beforeelevator")
 		setLocationName("Intake area")
 		
-		saynn("[say=pc]Yeah, that’s not happening. How about you go screw yourself instead[/say]")
+		saynn("[say=pc]Yeah, that’s not happening. How about you go screw yourself instead.[/say]")
 
 		saynn("Doctor raises her brows but tries to clip the leash to your collar anyways which is met with your resistance. You take a hold of her hand and try to wrench it which proves to be effective, considering the doctor is not that strong. She hisses from pain but then uses her free hand to punch you directly in the stomach. You grunt and let go, giving the doctor just enough time to press something on your wrist cuffs which made them connect to each other with a very strong magnetic force. She then grabs you by the collar and threatens to punch again with the second hand.")
 
@@ -169,7 +169,7 @@ func _run():
 
 		saynn("You don’t resist her clipping the leash to your collar, just weakly growling at her. She tugs you off the bed and pulls you out of this room. You try to fight the leash at first but you feel it choking you as the doctor tugs harder and harder. So you have no other option but to obey it.")
 
-		saynn("[say=pc]Easy, I’m going[/say]")
+		saynn("[say=pc]Easy, I’m going.[/say]")
 
 		saynn("Doctor walks you to some huge secure lift, even to just call it she uses her badge.")
 
@@ -181,7 +181,7 @@ func _run():
 		aimCamera("intro_beforeelevator")
 		setLocationName("Intake area")
 		
-		saynn("[say=pc]Fine[/say]")
+		saynn("[say=pc]Fine.[/say]")
 
 		saynn("You raise your chin and present the collar to the doctor, she doesn’t take much time to clip the leash to it.")
 
@@ -189,7 +189,7 @@ func _run():
 
 		saynn("She smiles again and gently tugs on the leash. You obey and get off the bed. Slight blush on your cheeks exposes your embarrassment.")
 
-		saynn("[say=pc]Sure, it’s for safety[/say]")
+		saynn("[say=pc]Sure, it’s for safety.[/say]")
 
 		saynn("Doctor chuckles and escorts you out of the room and to some kind of lift. She makes sure you are following so the leash doesn’t choke you out. She uses her badge to call it.")
 
@@ -220,11 +220,11 @@ func _run():
 		
 		saynn("It takes a minute but the lift finally arrives. When the doors open, the first thing you see is a checkpoint with a few guards standing around.")
 
-		saynn("[say=eliza]That inmate is with me[/say]")
+		saynn("[say=eliza]That inmate is with me.[/say]")
 
 		saynn("One of them nods and lets you two pass freely. When you exit the checkpoint, you are presented to a huge open room, about 20x20 meters. The walls seem to be made out of dark concrete but there are massive metal pillars there and there which make the design not as dull. The middle is taken mostly by a huge raised platform with stairs connecting it to the lower level.")
 
-		saynn("[say=eliza]This is the main hall[/say]")
+		saynn("[say=eliza]This is the main hall.[/say]")
 		
 		addButton("Look around", "Look around the main hall", "lookaroundmainhall")
 	
@@ -248,7 +248,7 @@ func _run():
 		aimCamera("cellblock_nearcells")
 		setLocationName("Cellblock")
 		
-		saynn("[say=eliza]Here, that’s your cell[/say]")
+		saynn("[say=eliza]Here, that’s your cell.[/say]")
 
 		saynn("Doctor points at one of the cells. Each cell is a small room about 2x5 meters of space with some furniture inside: a bed that's built into the wall, a normal stool and a window outside. The door into the cell is always open but there seems to be a staff console nearby that might be able to control it.")
 
@@ -256,7 +256,7 @@ func _run():
 
 		saynn("Doctor removes all the cuffs, unleashes you and puts the chain away before looking at you.")
 
-		saynn("[say=eliza]Well, settle down, I need to go get coffee for myself[/say]")
+		saynn("[say=eliza]Well, settle down, I need to go get coffee for myself.[/say]")
 
 		saynn("She gives you a last glance before leaving you at last, alone, near your new cell.")
 

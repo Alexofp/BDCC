@@ -148,7 +148,7 @@ func _run():
 		saynn("[say=nurse]And secondly, it will have altered how your offspring develops, progressing at a rate set by a Corporate Medical Officer. And as much as Corporate is full of idiots, they're smart enough to not let inmates give birth at random. Once someone starts feeling false contractions, they'll have to come here to get induced.[/say]")
 
 		saynn("The nurse pushes you away and returns to her normal voice.")
-		saynn("[say=nurse]That should be everything, inmate[/say]")
+		saynn("[say=nurse]That should be everything, inmate.[/say]")
 
 		saynn("Curious... You rub your chin and look down at your belly.")
 

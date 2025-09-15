@@ -54,7 +54,7 @@ func doAction(_lustState: LustCombatState, _args):
 		text += RNG.pick([
 			"[say=pc]Feels so good..[/say]",
 			"[say=pc]Fuck yes, I want more..[/say]",
-			"[say=pc]My tits, anyone can see me touching myself.. so hot[/say]",
+			"[say=pc]My tits, anyone can see me touching myself.. so hot.[/say]",
 			"[say=pc]Oh fuck..[/say]",
 		])
 		text += "\n\n"

@@ -42,7 +42,7 @@ func _run():
 		
 		saynn("The officer walks up closer to you and takes a good look, his hand grabs you by the chin and makes you look at him.")
 
-		saynn("[say=captain]State your name first, future inmate[/say]")
+		saynn("[say=captain]State your name first, future inmate.[/say]")
 		
 		addButton("It's "+GM.pc.getName(), "Say your name", "sayname")
 		addButton("Shove away", "How dares he", "shoveaway")
@@ -61,7 +61,7 @@ func _run():
 		
 		saynn("You slap his arm away and shove him back. You growl and bare your fangs.")
 		
-		saynn("[say=pc]Don’t touch me. And I won’t tell you anything[/say]")
+		saynn("[say=pc]Don’t touch me. And I won’t tell you anything.[/say]")
 
 		saynn("Officer staggers back but then suddenly pulls out what looks like an energy gun and aims it directly at you, the guard’s stun baton sparks, ready to hit someone.")
 		
@@ -73,7 +73,7 @@ func _run():
 		
 		saynn("The officer lowers the gun.")
 		
-		saynn("[say=captain]See, much better. This kind of behavior is not tolerated here as you will find out. Follow me, time to process you[/say]")
+		saynn("[say=captain]See, much better. This kind of behavior is not tolerated here as you will find out. Follow me, time to process you.[/say]")
 		
 		addButton("Follow", "Follow the officer and his guard", "follow")
 		
@@ -91,7 +91,7 @@ func _run():
 		
 		saynn("You tilt your head")
 		
-		saynn("[say=pc]But. That will leave me naked[/say]")
+		saynn("[say=pc]But. That will leave me naked.[/say]")
 		
 		saynn("The officer nods and offers you a smile. The guard seems to be smirking too")
 		
@@ -106,11 +106,11 @@ func _run():
 		
 		saynn("[say=pc]Fine.. Can you not look at least?[/say]")
 		
-		saynn("[say=captain]Get used to it[/say]")
+		saynn("[say=captain]Get used to it.[/say]")
 		
 		saynn("Seeing that there is no other choice, you approach the bin and begin undressing. You expose your chest and then your legs, of course covering yourself when you’re done. The guard in particular seems to be hungrily watching your body but the officer just mostly smirks at your blush. He then points at the airlock")
 		
-		saynn("[say=captain]Go inside, every inmate needs to be washed[/say]")
+		saynn("[say=captain]Go inside, every inmate needs to be washed.[/say]")
 		
 		addButton("Shower", "Take the refreshing shower", "shower")
 		
@@ -121,11 +121,11 @@ func _run():
 		
 		saynn("You grit your teeth and show a middle finger to the guy.")
 		
-		saynn("[say=pc]Fuck no and fuck off, I’m not doing that[/say]")
+		saynn("[say=pc]Fuck no and fuck off, I’m not doing that.[/say]")
 		
 		saynn("The officer sighs and unholsters his energy gun. You, seeing him do that, don’t waste your time and try to punch him but before you can get close, you’re blocked by the tall figure that shoves you away.")
 		
-		saynn("[say=risha]Hey, captain. Let me have some fun with this one, {pc.he} seems to be too eager. I won’t kill, promise, only break a little[/say]")
+		saynn("[say=risha]Hey, captain. Let me have some fun with this one, {pc.he} seems to be too eager. I won’t kill, promise, only break a little.[/say]")
 		
 		saynn("You growl and get into the combat stance")
 		
@@ -141,24 +141,24 @@ func _run():
 		
 		saynn("The guard kneels before you, defeated, her hand drops the baton as she grunts from pain. You quickly pick up the weapon and turn it on.")
 
-		saynn("[say=risha]Fucker, you will pay for that.. ghhh-h[/say]")
+		saynn("[say=risha]Fucker, you will pay for that.. ghhh-h.[/say]")
 		
 		saynn("You growl and raise the baton, about to strike. But you notice that the officer is aiming his weapon at you.")
 		
-		saynn("[say=captain]Drop it[/say]")
+		saynn("[say=captain]Drop it.[/say]")
 		
 		saynn("[say=risha]You lost still. Haha..mh..[/say]")
 		
 		saynn("You are shaking, guards words enrage you even more and as you swing the weapon, suddenly you feel a powerful shock going through you. The officer switched the mode of his gun to the taser and took a shot. Suddenly your every single muscle begins to tense, the pain is unbearable. You cry in agony and collapse to the floor. The officer slowly approaches you, still aiming his gun and kicks the baton away. He then crouches near you.")
 	
 	if(state == "losttorisha" || state == "wonrisha"):
-		saynn("[say=captain]Such a silly person you are. What did you think was gonna happen? Even if you would have won, what would you do? There are no ships here, the only ones that arrive bring new inmates and leave. Are you sure you can beat up every single guard here? You’re stuck here on this rock for the rest of your life. Do you wanna make that life miserable for yourself? Don’t be silly, you just arrived, don’t make me space you[/say]")
+		saynn("[say=captain]Such a silly person you are. What did you think was gonna happen? Even if you would have won, what would you do? There are no ships here, the only ones that arrive bring new inmates and leave. Are you sure you can beat up every single guard here? You’re stuck here on this rock for the rest of your life. Do you wanna make that life miserable for yourself? Don’t be silly, you just arrived, don’t make me space you.[/say]")
 		
 		saynn("[say=pc]Ugh.. fuck you..[/say]")
 		
 		saynn("The captain shakes his head and pulls out something from his pouch. It’s a muzzle.")
 		
-		saynn("[say=captain]If you’re gonna be a rebel, prepare to be punished like a rebel[/say]")
+		saynn("[say=captain]If you’re gonna be a rebel, prepare to be punished like a rebel.[/say]")
 		
 		saynn("He shoves his knee into your chest, causing a painful feeling, before putting the muzzle on your face and tightening the straps around your head.")
 		
@@ -167,7 +167,7 @@ func _run():
 	if(state == "getgagged"):
 		saynn("He then stands up and gestures the guard")
 		
-		saynn("[say=captain]Looks like {pc.he} needs some help to get up[/say]")
+		saynn("[say=captain]Looks like {pc.he} needs some help to get up.[/say]")
 		
 		saynn("The guard obeys and drags you to the bin where she forcibly undresses you and then shoves you into the shower room")
 		
@@ -191,19 +191,19 @@ func _run():
 		
 		saynn("[say=pc]What is that?![/say]")
 		
-		saynn("[say=captain]Delousing powder. Gets rid of head lice, fleas, scabies and the like. Just don’t let it get into your eye[/say]")
+		saynn("[say=captain]Delousing powder. Gets rid of head lice, fleas, scabies and the like. Just don’t let it get into your eye.[/say]")
 		
 		saynn("After a few seconds, the shower starts again and this time the cold water feels like a much needed breeze.")
 		
-		saynn("[say=risha]You should rub yourself, hah[/say]")
+		saynn("[say=risha]You should rub yourself, hah.[/say]")
 		
-		saynn("[say=pc]Not while you’re watching[/say]")
+		saynn("[say=pc]Not while you’re watching.[/say]")
 		
-		saynn("[say=risha]I’m capable of way more than just watching, trust me[/say]")
+		saynn("[say=risha]I’m capable of way more than just watching, trust me.[/say]")
 		
 		saynn("When all of that is finally over, you get dried with a stream of hot air. Then you walk to the other end of the room where the second airlock is, waiting to be let out.")
 		
-		saynn("[say=captain]Great. Time to register you[/say]")
+		saynn("[say=captain]Great. Time to register you.[/say]")
 		
 		addButton("Step out", "Do the registration", "aftershower")
 		
@@ -215,11 +215,11 @@ func _run():
 		
 		saynn("You step out back into the intake room and follow the lines on the floor to your next stop. You see a vendomat mounted onto a wall, it’s a machine capable of producing and dispensing different things. Near it on a wall is a console. It looks pretty dated, a screen that can only output green color, a bulky card reader and a mechanical keyboard, not even sensory. The officer begins to type some stuff into it while the guard watches you out.")
 		
-		saynn("[say=captain]Was a while since the last time I used this[/say]")
+		saynn("[say=captain]Was a while since the last time I used this.[/say]")
 		
 		saynn("[say=pc]How often do you have intakes?[/say]")
 		
-		saynn("[say=captain]Pretty often[/say]")
+		saynn("[say=captain]Pretty often.[/say]")
 		
 		saynn("[say=pc]But then you should be used to this?[/say]")
 		
@@ -233,15 +233,15 @@ func _run():
 		
 		saynn("[say=captain]You’re not {pc.name} anymore. Now you’re an inmate number {pc.inmateNumber}, {pc.inmateType} block. Put it on.[/say]")
 		
-		saynn("[say=pc]Whatever you say[/say]")
+		saynn("[say=pc]Whatever you say.[/say]")
 		
 		saynn("You take your time putting the fresh uniform on, it's exactly the right size for you.")
 		
-		saynn("[say=captain]If you lose it - you’re gonna be in trouble, just keep that in mind[/say]")
+		saynn("[say=captain]If you lose it - you’re gonna be in trouble, just keep that in mind.[/say]")
 		
 		saynn("Next, the machine produces two sets of bulky metal cuffs and a collar. They look heavy and uncomfortable but at least they have a soft padding on the inside. The captain takes it all and glances at you.")
 		
-		saynn("[say=captain]I will put these on you. Stand still[/say]")
+		saynn("[say=captain]I will put these on you. Stand still.[/say]")
 		
 		addButton("Stand still", "Let him do it", "cuffs")
 		
@@ -260,11 +260,11 @@ func _run():
 		
 		saynn("[say=pc]What is that, is it gonna blow my head?[/say]")
 		
-		saynn("[say=captain]Now there is no way for you to take it off. And not a single staff member can take it off too. It won’t kill you. But it is a shock collar[/say]")
+		saynn("[say=captain]Now there is no way for you to take it off. And not a single staff member can take it off too. It won’t kill you. But it is a shock collar.[/say]")
 		
 		saynn("[say=pc]Great..[/say]")
 		
-		saynn("[say=captain]I’m glad you like it. Next stop is the medical checkup, I will let the doctor take over. See you around[/say]")
+		saynn("[say=captain]I’m glad you like it. Next stop is the medical checkup, I will let the doctor take over. See you around.[/say]")
 		
 		saynn("[say=pc]Huh?[/say]")
 		

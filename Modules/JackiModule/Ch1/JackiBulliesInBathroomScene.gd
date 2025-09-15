@@ -91,7 +91,7 @@ func _run():
 
 		saynn("The main guy smiles.")
 
-		saynn("[say=gymbully]5 credits[/say]")
+		saynn("[say=gymbully]5 credits.[/say]")
 
 		saynn("You hand him a chip with 5 work credits.")
 

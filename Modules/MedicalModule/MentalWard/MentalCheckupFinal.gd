@@ -32,7 +32,7 @@ func _run():
 
 		saynn("[say=pc]Tha..[/say]")
 
-		saynn("[say=eliza]Shh-h[/say]")
+		saynn("[say=eliza]Shh-h..[/say]")
 
 		saynn("She pulls her digit and drags it across your other cheek. Eliza softly giggles.")
 

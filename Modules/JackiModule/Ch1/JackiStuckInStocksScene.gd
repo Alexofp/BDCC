@@ -321,7 +321,7 @@ func _run():
 	if(state == "continue2"):
 		saynn("The guard presses a few buttons on her datapad, transferring a work credit to your inmate account.")
 
-		saynn("[say=femaleguard_feline]Finger-fucking is fucking in my book, you still made her look like a mess. Good job, inmate[/say]")
+		saynn("[say=femaleguard_feline]Finger-fucking is fucking in my book, you still made her look like a mess. Good job, inmate.[/say]")
 
 		saynn("[say=pc]Yeah, thanks, it was fun teaching her.[/say]")
 

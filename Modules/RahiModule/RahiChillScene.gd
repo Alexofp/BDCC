@@ -112,7 +112,7 @@ func _run():
 		
 
 	if(state == "take_a_sip"):
-		saynn("[say=pc]Sure[/say]")
+		saynn("[say=pc]Sure.[/say]")
 
 		saynn("You take the offered glass and sip out of it. The orange-colored drink is sweet but then it also burns your mouth quite a bit, you cough and breathe through your mouth.")
 

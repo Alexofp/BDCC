@@ -17,7 +17,7 @@ func _run():
 
 		saynn("She tilts her head at you and frowns.")
 
-		saynn("[say=tavi]Why in the world would I do that. I’m not your fucking sextoy[/say]")
+		saynn("[say=tavi]Why in the world would I do that. I’m not your fucking sextoy.[/say]")
 
 		saynn("Tavi is clearly not gonna do it willingly so you decide to help her. You walk up to the downed feline and reach your hand out to try and grab her hair. She tries to push you away but you overpower her and manage to get a good pull on her hair, causing her to hiss and let out a painful groan.")
 
@@ -35,18 +35,18 @@ func _run():
 	if(state == "let_her_go"):
 		saynn("You chuckle and cross your arms again.")
 
-		saynn("[say=pc]Pathetic. You’re weak. Why did they even put you in red[/say]")
+		saynn("[say=pc]Pathetic. You’re weak. Why did they even put you in red.[/say]")
 
 		saynn("Tavi gets up with her help of the nearest wall and glares at you.")
 
-		saynn("[say=tavi]Go die in a fire.. With the rest of this fucking prison[/say]")
+		saynn("[say=tavi]Go die in a fire.. With the rest of this fucking prison.[/say]")
 
 		saynn("The defeated cat swiftly makes her escape before you change your mind.")
 
 		addButton("Continue", "She got what she deserved anyways", "endthescene")
 
 	if(state == "break_tavi"):
-		saynn("[say=pc]Where are you going? I’m not done with you yet[/say]")
+		saynn("[say=pc]Where are you going? I’m not done with you yet.[/say]")
 
 		saynn("You slowly walk up to Tavi just in time for her to get up from the floor. You grab her by the collar and shove into the nearest wall, then your hand shifts up and closes around her neck instead, your second hand turns into a fist and threatens to punch her stomach. She growls into your face and tries to take your hand off her neck, her eyes show true hatred.")
 
@@ -58,13 +58,13 @@ func _run():
 
 		saynn("Tavi looks terrified, as each second passes she loses more and more strength, the corners of her vision darken, her resistance gets weaker. She shakes her head to your question and raises her paws, surrendering.")
 
-		saynn("[say=pc]Good choice[/say]")
+		saynn("[say=pc]Good choice.[/say]")
 
 		saynn("You didn’t really give her any choice but oh well, it was you or her. You stop choking her and she falls to the floor, coughing and gasping for air, her breathing is all messed up. She then rubs her neck and looks at you, her eyes don’t show much, just fear.")
 
 		saynn("You step back and point at the floor before you.")
 
-		saynn("[say=pc]Kneel[/say]")
+		saynn("[say=pc]Kneel.[/say]")
 
 		saynn("Tavi tilts her head down and slowly crawls up to the spot before raising herself to her knees, still trying to catch her breath in the process. You lean down and grab her by the chin, she avoids any eye contact.")
 
@@ -72,13 +72,13 @@ func _run():
 
 		saynn("She looks you in the eyes but quickly turns her head away, you pull it back and give her face a slap, she grunts and obeys.")
 
-		saynn("[say=pc]I see that you have some willpower, you’re not a simple girl. I will be very strict with you. Strict until you start to obey[/say]")
+		saynn("[say=pc]I see that you have some willpower, you’re not a simple girl. I will be very strict with you. Strict until you start to obey.[/say]")
 
 		saynn("She sits still and tries not to show her true emotion but her feline tail is betraying her by wagging around.")
 
-		saynn("[say=tavi]Well. What do you want[/say]")
+		saynn("[say=tavi]Well. What do you want.[/say]")
 
-		saynn("[say=pc]You belong to me now. Say it[/say]")
+		saynn("[say=pc]You belong to me now. Say it.[/say]")
 
 		saynn("She rolls her eyes but the bruises on her neck give her a reminder. She sighs and looks down at the floor.")
 
@@ -86,13 +86,13 @@ func _run():
 
 		saynn("You give her some scritches behind the ear. Quiet purring can be heard from Tavi.")
 
-		saynn("[say=pc]Hands behind back, lean forward on the floor[/say]")
+		saynn("[say=pc]Hands behind back, lean forward on the floor.[/say]")
 
 		saynn("She thinks about your order but eventually obeys, putting her arms behind and lowering herself a bit. You see her struggling and decide to help by putting your foot on her back and pushing down, forcing her to be pretty much kissing the floor, her voice is muffled.")
 
 		saynn("[say=tavi]Mgh-h. There you go. Enjoying yourself?[/say]")
 
-		saynn("[say=pc]Seeing you like this? Yes. Your behaviour? No[/say]")
+		saynn("[say=pc]Seeing you like this? Yes. Your behaviour? No.[/say]")
 
 		saynn("[say=tavi]You get what you paid for.[/say]")
 

@@ -304,7 +304,7 @@ func _run():
 		elif(GM.pc.hasPenis()):
 			saynn("All the while your {pc.cock} is being neglected. You rub your legs together, desperately trying to get any stimulation. But are of course entirely focused on worshiping Eliza first.")
 
-		saynn("[say=eliza]Trying to make me cum, huh~. Such a good pet[/say]")
+		saynn("[say=eliza]Trying to make me cum, huh~. Such a good pet.[/say]")
 
 		saynn("Eliza’s moans become more frequent, you prod at the spot where her pussy entering is but the cloth blocks it so you just keep lapping at it, quickly bringing the doctor to her peak. She parts her lips and produces a series of dragged-on pleasure noises, it’s honestly kinda cute. She tries to close her shaking legs around your head while you breathe warmly at her panties and get their strong scent.")
 

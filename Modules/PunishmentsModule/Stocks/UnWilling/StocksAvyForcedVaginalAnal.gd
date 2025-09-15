@@ -71,7 +71,7 @@ func _run():
 
 		# (if no condom)
 		if(!usedCondom):
-			saynn("[say=avy]But what am I supposed to do with my rut~. Your begging only made me breed you more, slut[/say]")
+			saynn("[say=avy]But what am I supposed to do with my rut~. Your begging only made me breed you more, slut.[/say]")
 
 			saynn("She strokes her cock in your view until it’s fully hard. She makes it leak a drop of precum onto your forehead. You blush. Seems like your begging didn’t work, she puts the condom away and walks behind you.")
 

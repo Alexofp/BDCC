@@ -69,7 +69,7 @@ func _run():
 
 		saynn("You close your mouth and swallow the load with an audible noise before presenting it to Nova again, this time empty. She looks satisfied.")
 
-		saynn("[say=nova]Good slut~. You’re free to go[/say]")
+		saynn("[say=nova]Good slut~. You’re free to go.[/say]")
 
 		# (scene ends)
 		addButton("Continue", "Lewd", "endthescene")

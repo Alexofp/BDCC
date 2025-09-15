@@ -13,7 +13,7 @@ func _run():
 		
 		saynn("You hear someone’s footsteps behind, sounds like heavy boots. You decide to hide behind the nearest wall and hope not to be spotted. You hear a female voice.")
 
-		saynn("[say=nova]I know you’re there, you can come out[/say]")
+		saynn("[say=nova]I know you’re there, you can come out.[/say]")
 
 		saynn("Seems like the gig is up, you sigh and show yourself to the guard, she seems quite surprised.")
 
@@ -107,7 +107,7 @@ func _run():
 		
 		saynn("Nova’s hands slide down along your back and then squeeze your butt. You gasp but let her continue. She gives you a firm spank to see how bouncy it is which makes you shift away. But she pulls you back and force-spreads your legs.")
 
-		saynn("[say=nova]Stand still~, you naughty inmate[/say]")
+		saynn("[say=nova]Stand still~, you naughty inmate.[/say]")
 
 		saynn("You lean forward and stick out your butt for her as she continues to work on you.")
 
@@ -148,7 +148,7 @@ func _run():
 		addButton("Leave", "Probably not the worst thing that happened to you", "endthesceneStealItems")
 
 	if(state == "offer_self"):
-		saynn("[say=pc]Does it matter much? How about you let me go if I offer you something in return[/say]")
+		saynn("[say=pc]Does it matter much? How about you let me go if I offer you something in return.[/say]")
 
 		saynn("Nova hums eagerly and scratches her chin while eyeing you out, her other paw tugging on her skirt, teasing her bulge.")
 
@@ -165,7 +165,7 @@ func _run():
 		
 
 	if(state == "attack"):
-		saynn("[say=pc]You should just let me go. It’s in your best interests, really[/say]")
+		saynn("[say=pc]You should just let me go. It’s in your best interests, really.[/say]")
 
 		saynn("Nova notices your intimidating tone and steps back, her hand pulls out a classic stun baton, the blue trim lines on her armor light up. She is smiling.")
 
@@ -242,7 +242,7 @@ func _run():
 		if(RNG.chance(50)):
 			saynn("Some other guard approaches you, a tall guard that looks like a lynx with cyan fur. She gives your butt a firm smack and chuckles.")
 
-			saynn("[say=risha]Very breedable[/say]")
+			saynn("[say=risha]Very breedable.[/say]")
 
 		addButton("Continue", "You’re on a leash", "beleashedtostocks")
 
@@ -260,14 +260,14 @@ func _run():
 			else:
 				saynn("Nova puts her hand on your balls and gives them a gentle squeeze. She then rubs the head of your cock and strokes you until you become hard. She also licks one of her digits and then prods at your backdoor. She manages to slide one in and then feels your prostate, causing you to start leaking pre.")
 
-			saynn("[say=nova]Hope you like being a buttslut~. Prepare to be used a lot[/say]")
+			saynn("[say=nova]Hope you like being a buttslut~. Prepare to be used a lot.[/say]")
 
 		# (if has vagina)
 		
 		if(!GM.pc.hasPenis() && GM.pc.hasReachableVagina()):
 			saynn("Nova puts her hand on your exposed slit and gives it a rub, she uses her digit to trace along your sensitive lips and then spreads them open before giving you a spank.")
 
-			saynn("[say=nova]Hope you like being fucked without a rubber~. Prepare to be used a lot[/say]")
+			saynn("[say=nova]Hope you like being fucked without a rubber~. Prepare to be used a lot.[/say]")
 
 		# (if has both)
 		if(GM.pc.hasPenis() && GM.pc.hasReachableVagina()):

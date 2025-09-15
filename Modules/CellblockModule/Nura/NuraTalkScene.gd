@@ -135,11 +135,11 @@ func _run():
 		playAnimation(StageScene.SexTribadism, "tease", {npc="nura", pc="pc"})
 		saynn("You find an empty workplace table and quickly clear it of all the trash that it had on it. Then you grab the android's hand and bring her to it before helping her climb it. You climb on it too and position Nur-A on her back.")
 
-		saynn("[say=pc]Spread your legs slightly[/say]")
+		saynn("[say=pc]Spread your legs slightly.[/say]")
 
 		saynn("Nur-A spreads her legs for you. Her crotch is perfectly flat, not even a hint of a pussy anywhere.")
 
-		saynn("[say=nura]Task completed[/say]")
+		saynn("[say=nura]Task completed.[/say]")
 
 		saynn("But what can you do, you lie down opposite of her and intertwine your legs with hers, such that your crotches are pressed against each other's.")
 
@@ -152,7 +152,7 @@ func _run():
 
 		saynn("[say=nura]Does this feel good, patient?[/say]")
 
-		saynn("[say=pc]Yes, continue[/say]")
+		saynn("[say=pc]Yes, continue.[/say]")
 
 		saynn("Nur-A listens to you and picks up the pace, rubbing her metal crotch against your slit. Very soon you begin to moan quietly. Quietly enough to not get spotted.")
 
@@ -177,7 +177,7 @@ func _run():
 
 		saynn("You put one of your hands on her shoulder. Cold still shoulder. Nur-A seems to be quite a good support for you. You walk around her, your other hand swiftly gets your member hard before guiding it between her metal thighs. Luckily there is nothing there to get your skin pinched on so you can freely press it against her featureless crotch.")
 
-		saynn("[say=pc]Can you.. close your legs a little more? But not too much[/say]")
+		saynn("[say=pc]Can you.. close your legs a little more? But not too much.[/say]")
 
 		saynn("Nur-A listens and does as you ask, trapping your cock between her cold thighs. It's kinda kinky..")
 
@@ -198,7 +198,7 @@ func _run():
 
 		saynn("You let out a passionate grunt before cumming, your {pc.cock} starts throbbing and pulsating as it shoots out wave after wave of hot sticky {pc.cum} between the android's thighs, creating quite a mess on the floor. It feels good. Nur-A seems to have detected that and stopped her motions, not overstimulating you any further.")
 
-		saynn("[say=pc]Wow. Thank you, Nur-A[/say]")
+		saynn("[say=pc]Wow. Thank you, Nur-A.[/say]")
 
 		saynn("[say=nura]Nur-A is glad to be of service.[/say]")
 

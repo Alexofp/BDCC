@@ -15,13 +15,13 @@ func _run():
 
 		saynn("When you approach the guard he gives you a stop sign.")
 
-		saynn("[say=cp_guard]Name[/say]")
+		saynn("[say=cp_guard]Name.[/say]")
 
 		saynn("[say=pc]It’s {pc.name}[/say]")
 
 		saynn("He chuckles.")
 
-		saynn("[say=cp_guard]Don’t give a fuck about that one. Your real name, inmate[/say]")
+		saynn("[say=cp_guard]Don’t give a fuck about that one. Your real name, inmate.[/say]")
 
 		saynn("That’s kinda annoying, you sigh while the guy slowly eyes out your {pc.feminine} body.")
 
@@ -40,7 +40,7 @@ func _run():
 			saynn("[say=cp_guard]Any weapons, any contraband. I don’t have all day, inmate.[/say]")
 		# (if naked)
 		else:
-			saynn("[say=pc]Can’t you see that I don’t have anything, I’m naked[/say]")
+			saynn("[say=pc]Can’t you see that I don’t have anything, I’m naked.[/say]")
 
 			saynn("[say=cp_guard]Oh yeah? You can’t imagine where inmates hide contraband. Don’t waste my time, slut.[/say]")
 
@@ -70,7 +70,7 @@ func _run():
 
 		saynn("The guard squints at you.")
 
-		saynn("[say=cp_guard]Fuck off then[/say]")
+		saynn("[say=cp_guard]Fuck off then.[/say]")
 
 		addButton("Continue", "Oh well", "leaveandendthescene")
 
@@ -93,7 +93,7 @@ func _run():
 
 			saynn("[say=pc]On the floor?[/say]")
 
-			saynn("[say=cp_guard]Yeah, sure. I will be taking that away[/say]")
+			saynn("[say=cp_guard]Yeah, sure. I will be taking that away.[/say]")
 
 			saynn("Well, what can you do. You roll your eyes and walk away.")
 		else:
@@ -126,7 +126,7 @@ func _run():
 
 		# (if red)
 		if(GM.pc.getInmateType() == InmateType.HighSec):
-			saynn("[say=cp_guard]You’re awfully slutty for a red. Don’t you dare use your claws, whore[/say]")
+			saynn("[say=cp_guard]You’re awfully slutty for a red. Don’t you dare use your claws, whore.[/say]")
 
 		# (if general)
 		if(GM.pc.getInmateType() == InmateType.General):
@@ -140,7 +140,7 @@ func _run():
 
 		saynn("It all happens in a public place but you don’t care, you look up at the guy and teasingly lick his cock once, getting some of his pre, you hand slides back and forth at a steady pace, you notice his knot inflating, his shaft throbbing.")
 
-		saynn("[say=cp_guard]I wouldn’t mind cumming down your throat, slut[/say]")
+		saynn("[say=cp_guard]I wouldn’t mind cumming down your throat, slut.[/say]")
 
 		saynn("You chuckle softly and push him towards the peak faster, both your hands slide along the twitching length, his panting and a big knot shows that he is close.")
 
@@ -211,18 +211,18 @@ func _run():
 
 		# (if general)
 		if(GM.pc.getInmateType() == InmateType.General):
-			saynn("[say=cp_guard]Disobeying inmate, huh. Time to teach you a lesson[/say]")
+			saynn("[say=cp_guard]Disobeying inmate, huh. Time to teach you a lesson.[/say]")
 
 		# (if pink)
 		if(GM.pc.getInmateType() == InmateType.SexDeviant):
-			saynn("[say=cp_guard]This slut has teeth? I will have so much fun with you[/say]")
+			saynn("[say=cp_guard]This slut has teeth? I will have so much fun with you.[/say]")
 
 		saynn("Seems like it’s a fight.")
 		
 		addButton("Fight", "Start the fight", "fight")
 
 	if(state == "lost_fight"):
-		saynn("[say=cp_guard]You better start behaving now, inmate[/say]")
+		saynn("[say=cp_guard]You better start behaving now, inmate.[/say]")
 
 		saynn("He pins you to the ground, you can’t really resist much.")
 
@@ -236,7 +236,7 @@ func _run():
 
 		# (if pink)
 		if(GM.pc.getInmateType() == InmateType.SexDeviant):
-			saynn("[say=cp_guard]Defeated by some sextoy, fuck me[/say]")
+			saynn("[say=cp_guard]Defeated by some sextoy, fuck me.[/say]")
 		
 		addWonButton()
 		
@@ -249,11 +249,11 @@ func _run():
 		
 		saynn("You straddle the guy and unzip his pants, he seems more intrigued than scared, watching you. You of course made sure he can’t reach his weapons or the shock remote, rendering him helpless.")
 
-		saynn("[say=cp_guard]You could have asked, you know[/say]")
+		saynn("[say=cp_guard]You could have asked, you know.[/say]")
 
-		saynn("[say=pc]I like getting things the hard way[/say]")
+		saynn("[say=pc]I like getting things the hard way.[/say]")
 
-		saynn("[say=cp_guard]Oh yeah? I like the sound of that[/say]")
+		saynn("[say=cp_guard]Oh yeah? I like the sound of that.[/say]")
 
 		saynn("Your hand pulls out his cock and keeps stroking it until he becomes hard. His member has a pointy canine shape with a fat knot at the end and is pretty long, about {cp_guard.penisSizeStr}. The guy smirks and tries to get a hold of your {pc.breasts} but you smack his hand away.")
 
@@ -273,7 +273,7 @@ func _run():
 		if(GM.pc.hasVagina()):
 			saynn("Your slit doesn’t get any attention but it becomes wet just from you feeling so aroused.")
 
-		saynn("[say=cp_guard]Don’t stop now, slut[/say]")
+		saynn("[say=cp_guard]Don’t stop now, slut.[/say]")
 
 		saynn("He puts his hands on your {pc.feminine} hips and pushes you down, helping his cock to slide deeper into you. You let out a cute noise and bite your lips as your ring gets stretched enough to fit about half of his length.")
 
@@ -299,9 +299,9 @@ func _run():
 
 		saynn("You push yourself further, getting almost his full size! Your ring got stretched enough and all the precum that he has been pumping into you allows you to start bouncing on his cock faster. You drool and pant, your digits pinch your sensitive nips while you ride him completely hands-free, it feels so great. The guy pants too, his hands pull you up and down, making your motions stronger.")
 
-		saynn("[say=pc]Fuck me, you’re a good fill[/say]")
+		saynn("[say=pc]Fuck me, you’re a good fill.[/say]")
 
-		saynn("[say=cp_guard]And you’re not getting off without me stuffing you[/say]")
+		saynn("[say=cp_guard]And you’re not getting off without me stuffing you.[/say]")
 
 		# (if has cock)
 		if(GM.pc.isWearingChastityCage()):
@@ -321,11 +321,11 @@ func _run():
 
 		saynn("You both pant heavily as you come down from your peaks. You look down at your belly and see a bulge on your belly. You try to stand up but realize that you can’t.")
 
-		saynn("[say=cp_guard]Wow, you’re such a buttslut. And now you’re stuck on my cock. Works better than any handcuffs[/say]")
+		saynn("[say=cp_guard]Wow, you’re such a buttslut. And now you’re stuck on my cock. Works better than any handcuffs.[/say]")
 
 		saynn("[say=pc]Oh yeah? I can keep going until you give up then.[/say]")
 
-		saynn("[say=cp_guard]You lucky slut[/say]")
+		saynn("[say=cp_guard]You lucky slut.[/say]")
 
 		saynn("You’re stuck together for about 30 minutes. In public. You do get many eyes from other inmates but for them it's almost a normal sight. Eventually the knot deflates enough to let you get up, your used butthole looks stretched and is leaking cum. Time to run before someone makes you clean the mess you made.")
 		

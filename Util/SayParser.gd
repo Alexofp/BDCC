@@ -2,9 +2,9 @@ extends Reference
 class_name SayParser
 enum TagType {Text, Tag, CloseTag}
 
-# This thing parses [say=pc]text[/say] commands while ignoring all other tags. Its messy but it works
+# This thing parses [say=pc]text.[/say] commands while ignoring all other tags. Its messy but it works
 
-#input: text text [say=pc]hello world[/say] text
+#input: text text [say=pc]hello world.[/say] text
 #output: [[TEXT, text text ], [TAG, say, pc], [TEXT, hello world], [CLOSETAG, say], [TEXT,  text]]
 func findTags(text: String):
 	var savedText = ""

@@ -16,7 +16,7 @@ func _run():
 	if(state == ""):
 		saynn("You wait until Ans is free and get his attention.")
 
-		saynn("[say=announcer]Hey there, babe[/say]")
+		saynn("[say=announcer]Hey there, babe.[/say]")
 
 		addButton("Talk", "Ask him some questions", "talk")
 		if(getFlag("FightClubModule.AnnouncerAskedAboutShop")):

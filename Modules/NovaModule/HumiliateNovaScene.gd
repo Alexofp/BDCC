@@ -14,21 +14,21 @@ func _run():
 	if(state == ""):
 		saynn("You come up to Nova and quickly snatch her weapon so she can’t use it against you. You then straddle and pin her to the floor, your hands behind ripping the parts of her armor off.")
 
-		saynn("[say=pc]Time for me to play with you[/say]")
+		saynn("[say=pc]Time for me to play with you.[/say]")
 
 		saynn("Nova tries to struggle but she just can’t, you take off her armor and skirt, leaving her only in a skin-tight black suit.")
 
-		saynn("[say=nova]You won’t be able to get away with this[/say]")
+		saynn("[say=nova]You won’t be able to get away with this.[/say]")
 
-		saynn("[say=pc]Oh yeah? Watch me[/say]")
+		saynn("[say=pc]Oh yeah? Watch me.[/say]")
 
 		saynn("You slip two digits into her maw and wiggle them around. You can hear growling from her but that quickly dies down when she sees a turned-on stun baton in your hand.")
 
-		saynn("[say=pc]Suck on them, prove how big of a slut you are[/say]")
+		saynn("[say=pc]Suck on them, prove how big of a slut you are.[/say]")
 
 		saynn("Nova gets confused for a second, then a bright red blush appears on her cheeks as obeys and proceeds to lick your digits and suck on them. You slide them in and out deeper and she eagerly gives in and curls her canine tongue around them, her paws holding onto your hand, rendering the guard quite cute.")
 
-		saynn("[say=pc]Good girl[/say]")
+		saynn("[say=pc]Good girl.[/say]")
 
 		saynn("[say=nova]Nhyoo..[/say]")
 
@@ -36,25 +36,25 @@ func _run():
 
 		saynn("[say=nova]Hee-ey.. You had your fun, quit it..[/say]")
 
-		saynn("[say=pc]We’re only just starting, slut[/say]")
+		saynn("[say=pc]We’re only just starting, slut.[/say]")
 
 		saynn("You give her milkers another smack and tug on the perky nips, causing her to start squirming under you and making quiet pleasure noises. Her cheeks blush harder and her cock peeks out more, she helplessly tries to break the handcuffs but doesn’t resist in any other way.")
 
 		saynn("You sneak a hand under her package and spread her needy cunt with two digits, you immediately start to feel arousal dripping down them.")
 
-		saynn("[say=pc]Say that you’re a slut[/say]")
+		saynn("[say=pc]Say that you’re a slut.[/say]")
 
 		saynn("[say=nova]I’m not! I’m not a slut.. ah..[/say]")
 
 		saynn("She moans quietly as you rub her slit. Then you prod the entering and your two digits easily slide in, thanks for her wetness. You wiggle them inside and find a little bump that you hammer at, Nova reacts by arching her back and trying to close her legs, pushing you out. You can see more of her canine cock after your actions and it visibly leaks precum.")
 
-		saynn("[say=pc]Well, you leave me no choice[/say]")
+		saynn("[say=pc]Well, you leave me no choice.[/say]")
 
 		saynn("You grab her stun baton again and turn it on, it sparks, you can hear it’s intimidating electrical hum and Nova is clearly intimidated already.")
 
-		saynn("[say=nova]Wait, no, don’t do it, please[/say]")
+		saynn("[say=nova]Wait, no, don’t do it, please.[/say]")
 
-		saynn("[say=pc]Say it. Admit that you’re a needy slut that needs to be used daily[/say]")
+		saynn("[say=pc]Say it. Admit that you’re a needy slut that needs to be used daily.[/say]")
 
 		saynn("Nova bites her lip and ponders at your offer. But you don’t give her much time, you move the baton to her thighs and threaten to shock them, she whines and instinctively spreads her legs open for you, exposing her wet cunt again. She swallows audibly.")
 
@@ -78,7 +78,7 @@ func _run():
 
 		saynn("You only increase the pace after the girl’s reaction, it seems like the baton has stretched her pussy enough. The guard keeps moaning and biting her lips, she tries to close her legs but stops after you spread them again. You find her pleasure spot and begin to hammer at it, Nova arches her back and squirms heavily, the knot of her cock inflates, showing that she might be quite close.")
 
-		saynn("[say=pc]Trying to sneakily get off without warning me, huh~? Say it[/say]")
+		saynn("[say=pc]Trying to sneakily get off without warning me, huh~? Say it.[/say]")
 
 		saynn("Nova moans loudly while you stuff her cunt, her pussy and cock both pulsate, ready to burst. The herm sounds desperate, she keeps leaking with pre and pussy juices but it’s just not quite enough to cum.")
 
@@ -159,7 +159,7 @@ func _run():
 
 		saynn("She huffs at you but as soon as you try to leave, she switches to begging.")
 
-		saynn("[say=nova]Wait. You can’t leave me like this. What if someone finds me. Hey! Please. Ple-e-ease[/say]")
+		saynn("[say=nova]Wait. You can’t leave me like this. What if someone finds me. Hey! Please. Ple-e-ease.[/say]")
 
 		saynn("You decide that it would be too dangerous for you to unlock her so you just throw the key from the handcuffs at her and quickly escape the scene.")
 

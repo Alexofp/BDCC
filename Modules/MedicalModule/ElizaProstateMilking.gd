@@ -126,7 +126,7 @@ func _run():
 
 		saynn("She now also keeps the pressure on your neck. You really want it. Right now your mind has only one thought, to cum from this. To cum from being fucked with this little glass dildo.")
 
-		saynn("[say=eliza]Well then cum for me, little slut[/say]")
+		saynn("[say=eliza]Well then cum for me, little slut.[/say]")
 
 		saynn("She pounds at your prostate mercilessly, it only takes a few more seconds after hearing the permission for you to suddenly cum. Your whole body starts to shiver and shake uncontrollably, your {pc.cock} shooting a wave after wave of thick {pc.cum} as it throbs, all of it directly into the container. You moan like a slut, your legs really want to give, the only things keeping you up are the dildo in your butt and doctor’s hand. It overwhelms you, your climax doesn’t want to end, you keep trashing against everything but Eliza keeps you still, dildo pounding at your poor prostate.")
 

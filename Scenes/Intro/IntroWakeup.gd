@@ -16,7 +16,7 @@ func _run():
 
 		saynn("You willingly obey and get off the bed, it wasn’t very comfortable anyways. The guard opens the cell and steps inside.")
 
-		saynn("[say=risha]Lazy time is over, inmate, I want you to go to the mineshafts level and do actual work[/say]")
+		saynn("[say=risha]Lazy time is over, inmate, I want you to go to the mineshafts level and do actual work.[/say]")
 
 		if(GM.pc.getInventory().hasSlotEquipped(InventorySlot.Mouth)):
 			saynn("The guard also takes a note of your head harness.")
@@ -27,7 +27,7 @@ func _run():
 		addButton("Fuck off", "Tell her you’re not happy", "fuck_off")
 
 	if(state == "fine"):
-		saynn("[say=pc]You’re the boss[/say]")
+		saynn("[say=pc]You’re the boss.[/say]")
 
 		saynn("The guard smirks and gives you a cold head pat.")
 
@@ -39,14 +39,14 @@ func _run():
 
 		saynn("She suddenly gives your butt a good spank, forcing a gasp out of you.")
 
-		saynn("[say=risha]But for now, use the lift to get to the mineshafts[/say]")
+		saynn("[say=risha]But for now, use the lift to get to the mineshafts.[/say]")
 
 		saynn("The guard exits your cell and continues on her way, leaving you alone with your thoughts.")
 		
 		addButton("Continue", "Time to do the do", "endTheScene")
 
 	if(state == "fuck_off"):
-		saynn("[say=pc]Why don’t you fuck off and pester someone else instead[/say]")
+		saynn("[say=pc]Why don’t you fuck off and pester someone else instead.[/say]")
 
 		saynn("The guard is not very surprised, though she keeps her hand on her stun baton in your clear view now.")
 
@@ -57,7 +57,7 @@ func _run():
 		else:
 			saynn("You grit your teeth but stay quiet, messing with the guard doesn’t seem like the best idea.")
 
-		saynn("[say=risha]Another fuck up like that near me and I will personally put you into stocks for everyone to fuck, that will show how big of a whore you are. Now go and use the lift to get to the mineshafts[/say]")
+		saynn("[say=risha]Another fuck up like that near me and I will personally put you into stocks for everyone to fuck, that will show how big of a whore you are. Now go and use the lift to get to the mineshafts.[/say]")
 
 		saynn("The guard exits your cell and continues on her way, leaving you alone with your thoughts.")
 		

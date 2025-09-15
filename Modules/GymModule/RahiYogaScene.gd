@@ -93,7 +93,7 @@ func _run():
 
 		saynn("[say=rahi]Um.. Are they?[/say]")
 
-		saynn("[say=pc]You know, something more skin-tight would be better[/say]")
+		saynn("[say=pc]You know, something more skin-tight would be better.[/say]")
 
 		saynn("[say=rahi]Kitty doesn’t have anything like that..[/say]")
 

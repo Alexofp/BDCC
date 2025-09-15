@@ -18,7 +18,7 @@ func _run():
 
 		saynn("You notice him rubbing his crotch, the bulge in his pants looks so huge.")
 
-		saynn("[say=jack]I won’t resist if ya want a breedin’ from a stallion[/say]")
+		saynn("[say=jack]I won’t resist if ya want a breedin’ from a stallion.[/say]")
 
 		addButton("Leave", "You won and that all that matters", "leave")
 		addButtonWithChecks("Vaginal", "Ride him using your pussy", "vaginal", [], [ButtonChecks.HasReachableVagina])
@@ -95,7 +95,7 @@ func _run():
 		
 		saynn("Jack is sitting on the floor, supporting his back with his hands and with you straddling his crotch.")
 
-		saynn("[say=jack]Whacha waitin’ for, pretty thing? I’m not gonna bite[/say]")
+		saynn("[say=jack]Whacha waitin’ for, pretty thing? I’m not gonna bite.[/say]")
 
 		saynn("You put on your mean face and grab Jack by the chin, forcing eye contact. All the while you silently raise above him and hover your wet pussy just near his flared horse cock, teasingly brushing your sensitive folds against that giant shaft.")
 
@@ -143,7 +143,7 @@ func _run():
 		
 		saynn("You force yourself onto that shaft like there is no tomorrow and make quite a bit of progress, your pussy can now fit most of Jack’s length inside, there is a visible bump on your belly each time you lower yourself onto him. The more you do it the louder Jack’s noises are, his balls are tensing up and his cock starts throbbing until the moment he is finally pushed over the edge.")
 
-		saynn("[say=jack]Nnghh-h[/say]")
+		saynn("[say=jack]Nnghh-h.[/say]")
 
 		# (if raw)
 		if(!usedCondom):
@@ -189,7 +189,7 @@ func _run():
 
 			saynn("You look down at your pussy and pull out a broken condom.")
 
-			saynn("[say=pc]Oh.. fuck.. fuck-fuck[/say]")
+			saynn("[say=pc]Oh.. fuck.. fuck-fuck.[/say]")
 
 			# (if visibly pregnant)
 			if(GM.pc.isVisiblyPregnant()):
@@ -268,7 +268,7 @@ func _run():
 		
 		saynn("Jack is sitting on the floor, supporting his back with his hands and with you straddling his crotch.")
 
-		saynn("[say=jack]Whacha waitin’ for, pretty thing? I’m not gonna bite[/say]")
+		saynn("[say=jack]Whacha waitin’ for, pretty thing? I’m not gonna bite.[/say]")
 
 		saynn("You put on your mean face and grab Jack by the chin, forcing eye contact. All the while you silently raise above him and hover your needy anal hole just near his flared horse cock, teasingly brushing your butt against that giant shaft.")
 
@@ -316,7 +316,7 @@ func _run():
 		
 		saynn("You force yourself onto that shaft like there is no tomorrow and make quite a bit of progress, your {pc.masc} butt can now fit most of Jack’s length inside, there is a visible bump on your belly each time you lower yourself onto him. The more you do it the louder Jack’s noises are, his balls are tensing up and his cock starts throbbing until the moment he is finally pushed over the edge.")
 
-		saynn("[say=jack]Nnghh-h[/say]")
+		saynn("[say=jack]Nnghh-h.[/say]")
 
 		# (if raw)
 		if(!usedCondom):
@@ -362,7 +362,7 @@ func _run():
 
 			saynn("You reach down to your butt and pull out a broken condom.")
 
-			saynn("[say=pc]Oh.. fuck[/say]")
+			saynn("[say=pc]Oh.. fuck.[/say]")
 
 			# (if visibly pregnant)
 			if(GM.pc.isVisiblyPregnant()):

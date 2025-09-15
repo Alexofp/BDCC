@@ -71,7 +71,7 @@ func _run():
 
 		saynn("[say=artica]..eep..[/say]")
 
-		saynn("[say=eliza]Uh huh.. Thank you, sweetheart. Don't worry.. Artica.. that's your name right? Everything is gonna be okay[/say]")
+		saynn("[say=eliza]Uh huh.. Thank you, sweetheart. Don't worry.. Artica.. that's your name right? Everything is gonna be okay.[/say]")
 
 		saynn("Doctor Quinn looks at you and nods towards the exit.")
 

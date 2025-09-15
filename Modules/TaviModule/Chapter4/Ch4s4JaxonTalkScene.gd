@@ -250,7 +250,7 @@ func _run():
 
 		saynn("You slowly get up, aiming your gun at the airlock just to get shot completely out of nowhere. A loud cry escapes from your lips while you hit the floor again, your shoulder took most of the damage. Where is he?!")
 
-		saynn("[say=pc]Grr-r[/say]")
+		saynn("[say=pc]Grr-r.[/say]")
 
 		saynn("The glass panel! The fucker is looking at you through the transparent wall. You quickly take your aim and fire back. Multiple energy blasts pass through the glass panels like it's not even there and hit the guy. Many misses but there was one lucky hit directly on his head, causing the guy to flop awkwardly, his eyes already lifeless.")
 
