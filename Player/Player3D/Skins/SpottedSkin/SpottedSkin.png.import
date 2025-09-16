@@ -2,20 +2,24 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SpottedSkin.png-c75956f59410355e9cc14b1490c90677.stex"
+path.s3tc="res://.import/SpottedSkin.png-c75956f59410355e9cc14b1490c90677.s3tc.stex"
+path.etc2="res://.import/SpottedSkin.png-c75956f59410355e9cc14b1490c90677.etc2.stex"
+path.etc="res://.import/SpottedSkin.png-c75956f59410355e9cc14b1490c90677.etc.stex"
+path.pvrtc="res://.import/SpottedSkin.png-c75956f59410355e9cc14b1490c90677.pvrtc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2", "etc", "pvrtc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Player/Player3D/Skins/SpottedSkin/SpottedSkin.png"
-dest_files=[ "res://.import/SpottedSkin.png-c75956f59410355e9cc14b1490c90677.stex" ]
+dest_files=[ "res://.import/SpottedSkin.png-c75956f59410355e9cc14b1490c90677.s3tc.stex", "res://.import/SpottedSkin.png-c75956f59410355e9cc14b1490c90677.etc2.stex", "res://.import/SpottedSkin.png-c75956f59410355e9cc14b1490c90677.etc.stex", "res://.import/SpottedSkin.png-c75956f59410355e9cc14b1490c90677.pvrtc.stex" ]
 
 [params]
 
-compress/mode=0
-compress/lossy_quality=0.7
+compress/mode=2
+compress/lossy_quality=0.8
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
