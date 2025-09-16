@@ -2566,7 +2566,7 @@ func _react(_action: String, _args):
 
 	if(_action == "do_milk_first"):
 		processTime(3*60)
-		GM.main.SCI.doMilkCharacterCustom(getCharacter("eliza"), BodypartSlot.Breasts)
+		GM.main.SCI.processMilkCharacterCustom(getCharacter("eliza"), BodypartSlot.Breasts)
 		GM.pc.addSkillExperience(Skill.Milking, 20)
 
 	if(_action == "stop_milking"):
@@ -2575,7 +2575,7 @@ func _react(_action: String, _args):
 
 	if(_action == "milk_more"):
 		getCharacter("eliza").fillBreasts(RNG.randf_range(0.7, 1.0))
-		GM.main.SCI.doMilkCharacterCustom(getCharacter("eliza"), BodypartSlot.Breasts)
+		GM.main.SCI.processMilkCharacterCustom(getCharacter("eliza"), BodypartSlot.Breasts)
 		GM.pc.addSkillExperience(Skill.Milking, 20)
 
 	if(_action == "sybian_milking"):
@@ -2589,10 +2589,10 @@ func _react(_action: String, _args):
 
 	if(_action == "milking_sybian_turn_on"):
 		processTime(15*60)
-		GM.main.SCI.doMilkCharacterCustom(getCharacter("eliza"), BodypartSlot.Vagina)
+		GM.main.SCI.processMilkCharacterCustom(getCharacter("eliza"), BodypartSlot.Vagina)
 		getCharacter("eliza").fillBreasts(1.0)
 		getCharacter("eliza").fillBreasts(1.0)
-		GM.main.SCI.doMilkCharacterCustom(getCharacter("eliza"), BodypartSlot.Breasts)
+		GM.main.SCI.processMilkCharacterCustom(getCharacter("eliza"), BodypartSlot.Breasts)
 		GM.pc.addSkillExperience(Skill.Milking, 20)
 
 	if(_action == "stop_milking_after_all"):
@@ -2685,7 +2685,7 @@ func _react(_action: String, _args):
 
 	if(_action == "s2_pc_milks_scarlet"):
 		processTime(3*60)
-		GM.main.SCI.doMilkCharacterCustom(getCharacter("elizaMom"), BodypartSlot.Breasts, 0.3)
+		GM.main.SCI.processMilkCharacterCustom(getCharacter("elizaMom"), BodypartSlot.Breasts, true, 0.3)
 		GM.pc.addSkillExperience(Skill.Milking, 20)
 
 	if(_action == "s2_eliza_takes_spot"):
@@ -2694,17 +2694,17 @@ func _react(_action: String, _args):
 	if(_action == "s2_eliza_starts_milking_scarlet"):
 		processTime(5*60)
 		getCharacter("elizaMom").fillBreasts()
-		GM.main.SCI.doMilkCharacterCustom(getCharacter("elizaMom"), BodypartSlot.Breasts, 0.2)
+		GM.main.SCI.processMilkCharacterCustom(getCharacter("elizaMom"), BodypartSlot.Breasts, true, 0.2)
 
 	if(_action == "s2_eliza_starts_milking_scarlet_fast"):
 		processTime(5*60)
 		getCharacter("elizaMom").fillBreasts()
-		GM.main.SCI.doMilkCharacterCustom(getCharacter("elizaMom"), BodypartSlot.Breasts, 0.4)
+		GM.main.SCI.processMilkCharacterCustom(getCharacter("elizaMom"), BodypartSlot.Breasts, true, 0.4)
 
 	if(_action == "s2_eliza_starts_milking_scarlet_cum"):
 		processTime(5*60)
 		getCharacter("elizaMom").fillBreasts()
-		GM.main.SCI.doMilkCharacterCustom(getCharacter("elizaMom"), BodypartSlot.Breasts)
+		GM.main.SCI.processMilkCharacterCustom(getCharacter("elizaMom"), BodypartSlot.Breasts)
 
 	if(_action == "s2_after_eliza_milks_scarlet"):
 		processTime(3*60)

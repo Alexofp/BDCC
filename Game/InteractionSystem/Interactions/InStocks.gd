@@ -19,7 +19,7 @@ func start(_pawns:Dictionary, _args:Dictionary):
 		punisherID = _args["punisherID"]
 
 func init_text():
-	saynn("{inmate.You} {inmate.youAre} stuck in stocks, there is very little {inmate.youHe} can do, the movement of {inmate.yourHis} head and arms is blocked by a giant metal frame with 3 holes, its angle is forcing {inmate.youHe} to constantly stay bent forward, exposing {inmate.yourHis} butt, your ankles are chained so {inmate.youHe} can’t really move them too. {inmate.YouHe} {inmate.youAre} completely helpless.")
+	saynn("{inmate.You} {inmate.youAre} stuck in stocks, there is very little {inmate.youHe} can do, the movement of {inmate.yourHis} head and arms is blocked by a giant metal frame with 3 holes, its angle is forcing {inmate.youHe} to constantly stay bent forward, exposing {inmate.yourHis} butt, {inmate.yourHis} ankles are chained so {inmate.youHe} can’t really move them too. {inmate.YouHe} {inmate.youAre} completely helpless.")
 	var thePawn = getRolePawn("inmate")
 	if(!thePawn.isPlayer()):
 		saynn("{inmate.name} has "+str(getRoleChar("inmate").getStamina())+" stamina left.")

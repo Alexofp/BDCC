@@ -128,3 +128,4 @@ func loadData(data):
 	currentCategory = SAVE.loadVar(data, "currentCategory", "")
 	everyoneCumming = SAVE.loadVar(data, "everyoneCumming", false)
 	page = SAVE.loadVar(data, "page", -1)
+	_reactInit()

@@ -20,6 +20,7 @@ var sexReactionPullOut:int = SexReaction.BeggingToPullOutVaginal
 var currentPose:String = ""
 var switchedPoseOnce:bool = false
 var isVag:bool = true
+var straponTimer:int = 0
 
 func _init():
 	id = "SexVaginalOnAllFours"
@@ -356,6 +357,11 @@ func fucking_processTurn():
 		addText("Unable to continue standing, {sub.you} {sub.youVerb('fall')} to all fours!")
 	
 	doProcessFuckExtra(DOM_0, SUB_0, usedBodypart)
+	
+	if(isStraponSex() && !getSub().canZoneOrgasm(usedBodypart)): # If sub can't cum, just have some fun
+		straponTimer += 1
+		if(straponTimer > 5 && RNG.chance(5.0*straponTimer)):
+			satisfyGoals()
 
 func getActions(_indx:int):
 	if(_indx == DOM_0):
@@ -910,6 +916,7 @@ func saveData():
 	data["gonnaCumOutside"] = gonnaCumOutside
 	data["switchedPoseOnce"] = switchedPoseOnce
 	data["currentPose"] = currentPose
+	data["straponTimer"] = straponTimer
 
 	return data
 	
@@ -920,5 +927,6 @@ func loadData(data):
 	gonnaCumOutside = SAVE.loadVar(data, "gonnaCumOutside", false)
 	switchedPoseOnce = SAVE.loadVar(data, "switchedPoseOnce", false)
 	currentPose = SAVE.loadVar(data, "currentPose", "")
+	straponTimer = SAVE.loadVar(data, "straponTimer", 0)
 	if(currentPose == ""):
 		currentPose = RNG.pick(getAvaiablePoses())
