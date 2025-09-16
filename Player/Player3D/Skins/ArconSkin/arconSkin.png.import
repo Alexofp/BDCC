@@ -5,16 +5,15 @@ type="StreamTexture"
 path.s3tc="res://.import/arconSkin.png-f6d6f1613f61643d4b4c4b51d052ff11.s3tc.stex"
 path.etc2="res://.import/arconSkin.png-f6d6f1613f61643d4b4c4b51d052ff11.etc2.stex"
 path.etc="res://.import/arconSkin.png-f6d6f1613f61643d4b4c4b51d052ff11.etc.stex"
-path.pvrtc="res://.import/arconSkin.png-f6d6f1613f61643d4b4c4b51d052ff11.pvrtc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2", "etc", "pvrtc" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Player/Player3D/Skins/ArconSkin/arconSkin.png"
-dest_files=[ "res://.import/arconSkin.png-f6d6f1613f61643d4b4c4b51d052ff11.s3tc.stex", "res://.import/arconSkin.png-f6d6f1613f61643d4b4c4b51d052ff11.etc2.stex", "res://.import/arconSkin.png-f6d6f1613f61643d4b4c4b51d052ff11.etc.stex", "res://.import/arconSkin.png-f6d6f1613f61643d4b4c4b51d052ff11.pvrtc.stex" ]
+dest_files=[ "res://.import/arconSkin.png-f6d6f1613f61643d4b4c4b51d052ff11.s3tc.stex", "res://.import/arconSkin.png-f6d6f1613f61643d4b4c4b51d052ff11.etc2.stex", "res://.import/arconSkin.png-f6d6f1613f61643d4b4c4b51d052ff11.etc.stex" ]
 
 [params]
 
