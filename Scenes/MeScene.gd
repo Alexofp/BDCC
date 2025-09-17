@@ -126,7 +126,7 @@ func _run():
 		
 	if(state == "teststruggle"):
 		var game = minigameScene.instance()
-		GM.ui.addCustomControl("minigame", game)
+		GM.ui.addFullScreenCustomControl("minigame", game)
 		game.setDifficulty(4)
 		game.connect("minigameCompleted", self, "onMinigameTest")
 

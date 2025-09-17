@@ -59,7 +59,7 @@ func _run():
 		if(usedCondom && usedNovasCondom):
 			saynn("You lick your digits and shove a few into her slit, spreading the petals open. Yes, she is wet and ready, her cock is leaking pre as you tease her. You find a strip of condoms on her belt, grab one and rip it open with your teeth before swiftly putting it on your cock.")
 
-		saynn("[say=pc]You’re such a slut[/say]")
+		saynn("[say=pc]You’re such a slut.[/say]")
 
 		saynn("[say=nova]Hmpf.. no you..[/say]")
 

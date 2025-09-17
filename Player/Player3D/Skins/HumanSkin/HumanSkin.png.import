@@ -2,20 +2,24 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/HumanSkin.png-f155bd0be3405ee437eb754cc91e591b.stex"
+path.s3tc="res://.import/HumanSkin.png-f155bd0be3405ee437eb754cc91e591b.s3tc.stex"
+path.etc2="res://.import/HumanSkin.png-f155bd0be3405ee437eb754cc91e591b.etc2.stex"
+path.etc="res://.import/HumanSkin.png-f155bd0be3405ee437eb754cc91e591b.etc.stex"
+path.pvrtc="res://.import/HumanSkin.png-f155bd0be3405ee437eb754cc91e591b.pvrtc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2", "etc", "pvrtc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Player/Player3D/Skins/HumanSkin/HumanSkin.png"
-dest_files=[ "res://.import/HumanSkin.png-f155bd0be3405ee437eb754cc91e591b.stex" ]
+dest_files=[ "res://.import/HumanSkin.png-f155bd0be3405ee437eb754cc91e591b.s3tc.stex", "res://.import/HumanSkin.png-f155bd0be3405ee437eb754cc91e591b.etc2.stex", "res://.import/HumanSkin.png-f155bd0be3405ee437eb754cc91e591b.etc.stex", "res://.import/HumanSkin.png-f155bd0be3405ee437eb754cc91e591b.pvrtc.stex" ]
 
 [params]
 
-compress/mode=0
-compress/lossy_quality=0.7
+compress/mode=2
+compress/lossy_quality=0.8
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0

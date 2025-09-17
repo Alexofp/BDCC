@@ -79,6 +79,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Combat/AIStrategy/BasicAI.gd"
 }, {
+"base": "Button",
+"class": "BetterButton",
+"language": "GDScript",
+"path": "res://Game/UI/Buttons/BetterButton.gd"
+}, {
 "base": "Object",
 "class": "BodilyFluids",
 "language": "GDScript",
@@ -707,7 +712,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "GameUI",
 "language": "GDScript",
-"path": "res://Game/GameUI.gd"
+"path": "res://Game/UI/GameUI.gd"
 }, {
 "base": "Node2D",
 "class": "GameWorld",
@@ -1769,6 +1774,7 @@ _global_script_class_icons={
 "BaseCharacter": "",
 "BaseStageScene3D": "",
 "BasicAI": "",
+"BetterButton": "",
 "BodilyFluids": "",
 "BodyWritings": "",
 "BodyWritingsDB": "",
@@ -2125,7 +2131,7 @@ OPTIONS="*res://Game/Options/GlobalOptions.gd"
 GlobalRegistry="*res://GlobalRegistry.gd"
 GM="*res://Game/GM.gd"
 SAVE="*res://Game/SaveManager.gd"
-GlobalTooltip="*res://UI/GlobalTooltipSystem.gd"
+GlobalTooltip="*res://Game/UI/Tooltip/TooltipSystem.tscn"
 AutoTranslation="*res://Util/AutoTranslation/AutoTranslation.gd"
 CrotchFavBlocks="*res://Game/Datapacks/UI/CrotchCode/Util/CrotchFavBlocks.gd"
 ModularDialogue="*res://Game/ModularDialogue/ModularDialogue.gd"
@@ -2133,6 +2139,7 @@ ModularDialogue="*res://Game/ModularDialogue/ModularDialogue.gd"
 [debug]
 
 gdscript/warnings/treat_warnings_as_errors=true
+gdscript/warnings/integer_division=false
 gdscript/warnings/unsafe_cast=true
 
 [display]
@@ -2238,7 +2245,6 @@ common/enable_pause_aware_picking=true
 
 quality/driver/fallback_to_gles2=true
 vram_compression/import_etc=true
-vram_compression/import_pvrtc=true
 gles2/compatibility/disable_half_float=true
 environment/default_clear_color=Color( 0.247059, 0.243137, 0.490196, 1 )
 quality/filters/use_fxaa=true

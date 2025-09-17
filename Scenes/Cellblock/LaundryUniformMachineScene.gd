@@ -46,7 +46,7 @@ func _run():
 			playAnimation(StageScene.Solo, "stand")
 		
 		var colorPicker = colorPickerScene.instance()
-		GM.ui.addCustomControl("colorpicker", colorPicker)
+		GM.ui.addFullScreenCustomControl("colorpicker", colorPicker)
 		colorPicker.setCurrentColor(theItem.clothesColor)
 		colorPicker.connect("color_changed", self, "changebasecolormenu_colorchanged")
 		

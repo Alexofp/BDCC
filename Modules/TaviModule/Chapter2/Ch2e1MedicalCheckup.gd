@@ -771,7 +771,7 @@ func _run():
 
 		saynn("[say=eliza]Why are you standing exactly, inmate?[/say]")
 
-		saynn("[say=pc]Uh[/say]")
+		saynn("[say=pc]Uh.[/say]")
 
 		saynn("She turns towards you and frowns.")
 

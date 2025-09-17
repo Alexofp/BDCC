@@ -64,7 +64,7 @@ func _run():
 
 		# (if naked)
 		if(GM.pc.isFullyNaked()):
-			saynn("[say=nova]You came prepared, I see~. No clothes just like it should be, pets aren’t supposed to wear anything[/say]")
+			saynn("[say=nova]You came prepared, I see~. No clothes just like it should be, pets aren’t supposed to wear anything.[/say]")
 
 			saynn("Your privates are all exposed but you stand proudly as Nova gives you a few pats on the head. You nod to her words, it’s a fact that pets are usually naked.")
 
@@ -244,7 +244,7 @@ func _run():
 
 			saynn("Each second of waiting results in your butt getting spanked again and again, you nod very eagerly and put on sorry puppy eyes for Nova. But ow, your butt is red.")
 
-			saynn("[say=nova]Good~. Maybe you wanted this[/say]")
+			saynn("[say=nova]Good~. Maybe you wanted this.[/say]")
 
 		# (if kitty)
 		if(!isPuppy):
@@ -260,7 +260,7 @@ func _run():
 
 			saynn("Each second of waiting results in your butt getting spanked again and again, you nod very eagerly and put on sorry kitty eyes for Nova. But ow, your butt is red.")
 
-			saynn("[say=nova]Good~. Maybe you wanted this[/say]")
+			saynn("[say=nova]Good~. Maybe you wanted this.[/say]")
 
 			# (end)
 
@@ -495,7 +495,7 @@ func _run():
 
 		saynn("Nova’s knot is inflating. You can’t see it but you certainly feel how it’s slapping against your pussy lips each time she pushes her hips forward. Nova’s lips produce some little moans too in between all the panting, it seems she wants to breed you nice and swift.")
 
-		saynn("[say=nova]Ready to be knotted, slut? I’m not gonna stop now[/say]")
+		saynn("[say=nova]Ready to be knotted, slut? I’m not gonna stop now.[/say]")
 
 		saynn("With each her thrusts, your cunt is getting stretched more and more by Nova knot, it already starts to slip in deeper. You drool all over the floor and touch your {pc.breasts} with one hand, pulling on the firm nipple. Your own moans become louder. Fuck, you’re gonna cum.")
 
@@ -517,7 +517,7 @@ func _run():
 		elif(GM.pc.hasPenis()):
 			saynn("Your cock throbs and shoots a strong line of {pc.cum} onto the stone pathway underneath you!")
 
-		saynn("[say=nova]Oh fuck, your cunt is gonna make me cum[/say]")
+		saynn("[say=nova]Oh fuck, your cunt is gonna make me cum.[/say]")
 
 		saynn("And indeed, Nova puts all her strength into the next thrust and manages to shove her inflated red orb inside you, stretching your slit twice as much as it was before. The pure sensation of getting knotted sends you over the second peak instantly, you cum and squirt again, your pussy pulsates around the orb, trying to squeeze it but it’s no help, Nova’s is completely inside you, its head breaks into your womb.")
 
@@ -738,7 +738,7 @@ func _run():
 		if(GM.pc.hasVagina()):
 			saynn("Your G-spot gets rubbed enough through the inner wall that it causes overstimulation, your cunt squirts with your juices even though it never received any stimulation. You’re such a buttslut!")
 
-		saynn("[say=nova]Oh fuck-k[/say]")
+		saynn("[say=nova]Oh fuck-k.[/say]")
 
 		saynn("Nova grunts heavily as she cums too, the sure feeling of your tight insides applying so much pressure on her member causes it to explode with cum, the husky lets out long noises of pleasure while stuffing your butt full of cum with her knot keeping it all nice and secure inside. The orgasmic waves cause all your muscles to flex, including your anal ring, you’re milking Nova’s ball for all her cum!")
 

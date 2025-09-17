@@ -7,8 +7,11 @@
    viewBox="0 0 33.866666 33.866668"
    version="1.1"
    id="svg5"
-   inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
    sodipodi:docname="logo.svg"
+   inkscape:export-filename="logo432x432.png"
+   inkscape:export-xdpi="324"
+   inkscape:export-ydpi="324"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -24,19 +27,27 @@
      inkscape:document-units="mm"
      showgrid="false"
      units="px"
-     inkscape:zoom="0.7513148"
-     inkscape:cx="252.2245"
-     inkscape:cy="5.9895"
+     inkscape:zoom="4.2500783"
+     inkscape:cx="67.998747"
+     inkscape:cy="44.822703"
      inkscape:window-width="1920"
-     inkscape:window-height="1018"
+     inkscape:window-height="1017"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1">
+     inkscape:current-layer="layer1"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#d1d1d1">
     <inkscape:grid
        type="xygrid"
        id="grid824"
-       empspacing="8" />
+       empspacing="8"
+       originx="0"
+       originy="0"
+       spacingy="1"
+       spacingx="1"
+       units="px"
+       visible="false" />
   </sodipodi:namedview>
   <defs
      id="defs2">

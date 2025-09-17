@@ -319,7 +319,7 @@ func prepareCharacter(charID):
 	call_deferred("checkDirection") # Deferred because the character is usually flipped after this call
 
 func checkDirection():
-	var newIsFacingRight:bool = (get_scale().x < 0)
+	var newIsFacingRight:bool = (get_scale().x*(get_parent().get_scale().x if get_parent() else 1.0) < 0)
 	
 	if(newIsFacingRight != isFacingRight):
 		isFacingRight = newIsFacingRight
@@ -445,7 +445,7 @@ func setBallsScale(newScale: float):
 	setBoneScaleAndOffset("Balls", newScale, Vector3(0.0, 0.156431, 0.0)*offsetScale)
 
 
-func _on_Doll3DTooltip_mouseEntered(bodypartID):
+func _on_Doll3DTooltip_mouseEntered(_dollTooltip, bodypartID):
 	if(savedCharacterID is String && savedCharacterID != "" && bodypartID != "" && is_visible_in_tree() && !isOnlyPenis):
 		var character = getCharFromID(savedCharacterID)
 		if(character == null):
@@ -455,10 +455,10 @@ func _on_Doll3DTooltip_mouseEntered(bodypartID):
 		if(bodypart == null):
 			return
 			
-		GlobalTooltip.showTooltip(bodypart.getName(), bodypart.getTooltipInfo())
+		GlobalTooltip.showTooltip(_dollTooltip, bodypart.getName(), bodypart.getTooltipInfo())
 		
 
-func _on_Doll3DTooltip_mouseExited(bodypartID):
+func _on_Doll3DTooltip_mouseExited(_dollTooltip, bodypartID):
 	if(savedCharacterID is String && savedCharacterID != "" && bodypartID != ""):
 		var character = getCharFromID(savedCharacterID)
 		if(character == null):
@@ -467,7 +467,7 @@ func _on_Doll3DTooltip_mouseExited(bodypartID):
 		var bodypart:Bodypart = character.getBodypart(bodypartID)
 		if(bodypart == null):
 			return
-		GlobalTooltip.hideTooltip()
+		GlobalTooltip.hideTooltip(_dollTooltip)
 
 func setHiddenParts(newHiddenParts):
 	hiddenPartZones = newHiddenParts

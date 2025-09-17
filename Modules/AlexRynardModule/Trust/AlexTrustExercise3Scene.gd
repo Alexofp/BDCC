@@ -671,7 +671,7 @@ func _run():
 			saynn("[say=alexrynard]Speaking of.. "+str(Util.roundF(totalSeed, 0))+" ml of seed and "+str(Util.roundF(totalMilk, 0))+" ml of milk. That's how much you made.[/say]")
 
 		else:
-			saynn("[say=alexrynard]Speaking of.. "+str(Util.roundF(totalMilk, 0))+" ml of milk. That's how much you made[/say]")
+			saynn("[say=alexrynard]Speaking of.. "+str(Util.roundF(totalMilk, 0))+" ml of milk. That's how much you made.[/say]")
 
 		saynn("What are numbers anyway.. All you want is moo..")
 

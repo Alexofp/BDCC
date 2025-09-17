@@ -89,7 +89,7 @@ func _run():
 
 		saynn("[say=pc]I don’t know what you want. But I don’t trust a red.[/say]")
 
-		saynn("[say=tavi]I never lie, {pc.name}. I’m always honest. You know. I could help you escape from this place, together with me. I really can. Or I can help us to be paroled. But I need your help. But you’re too stubborn to see that, busy thinking that my red uniform means something[/say]")
+		saynn("[say=tavi]I never lie, {pc.name}. I’m always honest. You know. I could help you escape from this place, together with me. I really can. Or I can help us to be paroled. But I need your help. But you’re too stubborn to see that, busy thinking that my red uniform means something.[/say]")
 
 		saynn("Her words confuse your mind, put it under stress, you’re just staring at her as she approaches you again, her palm lands on your cheek and caresses it.")
 
@@ -148,7 +148,7 @@ func _run():
 	if(state == "push_away"):
 		saynn("You start to understand that this is not going into a good direction for you. But as you try to shove the red away, she suddenly gets a hold of your hair and pulls you to the side, causing a painful spike.")
 
-		saynn("[say=pc]Agh, fuck! Let go, you bitch[/say]")
+		saynn("[say=pc]Agh, fuck! Let go, you bitch.[/say]")
 
 		saynn("Her voice is strict, the stare drills you.")
 
@@ -190,7 +190,7 @@ func _run():
 	if(state == "push"):
 		saynn("Instead of trying to escape from Tavi’s grasp, you do the opposite, dashing into her and trying to knock her down. It was an unexpected move for Tavi and she lets go of your hair as you both collapse onto the cold metal floor.")
 
-		saynn("[say=tavi]Argh. You will pay for that[/say]")
+		saynn("[say=tavi]Argh. You will pay for that.[/say]")
 
 		saynn("You quickly crawl away and stand up but the feline manages to recover too. And seems like she is blocking the exit. Tavi notices that and chuckles at you.")
 
@@ -218,7 +218,7 @@ func _run():
 	if(state == "submit1"):
 		saynn("You nod silently and don’t resist much. Tavi sees that and quickly calms down, putting her happy face on again.")
 
-		saynn("[say=tavi]Wasn’t too hard, was it? I’m glad you picked the right choice. Since you are so prone to misbehave, there are gonna be rules for you[/say]")
+		saynn("[say=tavi]Wasn’t too hard, was it? I’m glad you picked the right choice. Since you are so prone to misbehave, there are gonna be rules for you.[/say]")
 
 		#if(GM.pc.getInventory().hasSlotEquipped(InventorySlot.Mouth) && GM.pc.isGagged()):
 
@@ -300,11 +300,11 @@ func _run():
 
 		saynn("She slides her paw along your shoulders.")
 
-		saynn("[say=tavi]Like I said, you don’t lie to me. Ever[/say]")
+		saynn("[say=tavi]Like I said, you don’t lie to me. Ever.[/say]")
 
 		saynn("She traces her digits over your lips while licking hers.")
 
-		saynn("[say=tavi]And you obey my commands. If I tell you to jump - you jump. Be good for me and we won’t have any problems. You will be my personal pet. Think I lied to you? Pets are friends, aren’t they? Yes they are, hah[/say]")
+		saynn("[say=tavi]And you obey my commands. If I tell you to jump - you jump. Be good for me and we won’t have any problems. You will be my personal pet. Think I lied to you? Pets are friends, aren’t they? Yes they are, hah.[/say]")
 
 		saynn("You tilt your head down.")
 
@@ -312,7 +312,7 @@ func _run():
 
 		saynn("Suddenly she gets a hold of your hair again.")
 
-		saynn("[say=tavi]Hands behind your back, pet. Close your eyes[/say]")
+		saynn("[say=tavi]Hands behind your back, pet. Close your eyes.[/say]")
 
 		addButton("Obey", "Put your hands behind your back and close eyes", "obey")
 
@@ -332,7 +332,7 @@ func _run():
 
 		saynn("[say=pc]Yes, I do..[/say]")
 
-		saynn("[say=tavi]Yes, who? Stick your tongue out, pet[/say]")
+		saynn("[say=tavi]Yes, who? Stick your tongue out, pet.[/say]")
 
 		saynn("She pushes you more into her crotch as you obey. You feel the slight bumps that are her pussy lips, your tongue can distinguish where the sensitive little bean is, you begin licking it eagerly and exhale warmly while the tall feline uses your tongue for her pleasure. She can’t help but to open her mouth and let out a slight moan. You feel her becoming wet, you feel the female scent becoming stronger as you continue to lick her out, even though doing it through the shorts seems humiliating.")
 
@@ -340,7 +340,7 @@ func _run():
 
 		saynn("Tavi enjoys your tongue so much she slowly starts to grind her crotch against your face, slowly picking up the pace. Her warm moans become more pronounced, you’re lucky there is no one around.")
 
-		saynn("[say=tavi]Yes, very good.. mhm~.. Such a good toy.. Such a good pussy licker. You want to see me cum on your face, right cutie~? Maybe I should steal that from you[/say]")
+		saynn("[say=tavi]Yes, very good.. mhm~.. Such a good toy.. Such a good pussy licker. You want to see me cum on your face, right cutie~? Maybe I should steal that from you.[/say]")
 
 		saynn("[say=pc]Yes, Miss.. Please.. Don’t steal..[/say]")
 
@@ -361,7 +361,7 @@ func _run():
 			else:
 				saynn("As she sits down on your face, you can’t help but to sneak one of your hands down to your hard cock. You’re so turned on that it leaks precum already. You begin to slowly stroke yourself.")
 
-			saynn("[say=tavi]Don’t think I don’t see that~. But I will allow it[/say]")
+			saynn("[say=tavi]Don’t think I don’t see that~. But I will allow it.[/say]")
 
 			saynn("Little moans escape from your mouth.")
 
@@ -371,11 +371,11 @@ func _run():
 		elif(GM.pc.hasVagina()):
 			saynn("As she sits down on your face, you can’t help but to sneak one of your hands down to your crotch. Your digits find your sensitive button and begin to sneakily rub it. It just feels so good.")
 
-			saynn("[say=tavi]Don’t think I don’t see that~. But I will allow it[/say]")
+			saynn("[say=tavi]Don’t think I don’t see that~. But I will allow it.[/say]")
 
 			saynn("You rub yourself harder, little moans begin to escape from your mouth. You’re wet. Very wet. And your digits quickly become too.")
 
-		saynn("[say=tavi]So lustful.. so eager.. so.. slutty[/say]")
+		saynn("[say=tavi]So lustful.. so eager.. so.. slutty.[/say]")
 
 		saynn("Dirty words only make it more hot, Tavi finally fully lowers her crotch onto your face and lets you do the work. You stick your tongue out and begin to lap at her lips, gathering more and more of her female wetness. You trace the tip around your clit and then push around the wet entrance. She shows how she enjoys it by moaning warmly. You prod at the entrance itself too and manage to slip a bit of the lenght inside as she begins to slowly shift up and down, letting you tongue-fuck her.")
 
@@ -412,7 +412,7 @@ func _run():
 
 		saynn("Eventually you both calm down though your hearts are still racing and Tavi is panting a lot. She slowly stands up and takes a look at the mess she left, smiling.")
 
-		saynn("[say=tavi]Good little toy~. I will see you around, my pet[/say]")
+		saynn("[say=tavi]Good little toy~. I will see you around, my pet.[/say]")
 
 		saynn("[say=pc]Thank you, Miss Tavi..[/say]")
 

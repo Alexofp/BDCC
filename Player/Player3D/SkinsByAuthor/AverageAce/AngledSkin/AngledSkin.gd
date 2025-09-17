@@ -7,7 +7,7 @@ func getName():
 	return "Angled"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/SkinsByAuthor/AverageAce/AngledSkin/Angled_f_s.png")
+	return load("res://Player/Player3D/SkinsByAuthor/AverageAce/AngledSkin/Angled_f_s.png")
 
 func getFittingSkinTypes():
 	return {

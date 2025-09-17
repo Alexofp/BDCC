@@ -345,6 +345,12 @@ func zoomOut(mult:float = 1.0):
 	camera.zoom *= 0.9 / mult
 	updateDarknessSize()
 
+func zoomRaw(mult:float = 1.0):
+	camera.zoom *= mult
+	camera.zoom.x = clamp(camera.zoom.x, 0.2, 5.0)
+	camera.zoom.y = clamp(camera.zoom.y, 0.2, 5.0)
+	updateDarknessSize()
+
 func zoomReset():
 	camera.zoom = Vector2(1.0, 1.0)
 	updateDarknessSize()

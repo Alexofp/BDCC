@@ -57,7 +57,7 @@ func _run():
 
 		saynn("[say=eliza]I was a ghost, right? That sounds spooky~[/say]")
 
-		saynn("[say=pc]Well, I only saw parts of you that were.. touching me? And that was somewhat unsettling, yes[/say]")
+		saynn("[say=pc]Well, I only saw parts of you that were.. touching me? And that was somewhat unsettling, yes.[/say]")
 
 		saynn("Doctor fidgets around a bit, rubbing her chin and thinking.")
 
@@ -116,7 +116,7 @@ func _run():
 
 		saynn("A paw appears and grabs you by the collar again before pulling you to the nearest wall. It pins your back to it while something else starts to rub against your chastity belt. Something.. quite phallic and hard.")
 
-		saynn("[say=pc]Is that a.. cock[/say]")
+		saynn("[say=pc]Is that a.. cock.[/say]")
 
 		saynn("[say=eliza]Surprised? Just a feeldoe strapon, relax~[/say]")
 

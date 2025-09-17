@@ -26,8 +26,8 @@ func _input(event: InputEvent):
 		if(distance < 0.5 && (event.position.x >= 0 && event.position.y >= 0)):
 			if(!isIn):
 				isIn = true
-				emit_signal("mouseEntered", bodypartID)
+				emit_signal("mouseEntered", self, bodypartID)
 		else:
 			if(isIn):
 				isIn = false
-				emit_signal("mouseExited", bodypartID)
+				emit_signal("mouseExited", self, bodypartID)

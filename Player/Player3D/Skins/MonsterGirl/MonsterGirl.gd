@@ -7,7 +7,7 @@ func getName():
 	return "Monster Girl"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/Skins/MonsterGirl/MonsterGirl.png")
+	return load("res://Player/Player3D/Skins/MonsterGirl/MonsterGirl.png")
 
 func getFittingSkinTypes():
 	return {

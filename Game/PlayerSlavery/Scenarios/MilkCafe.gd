@@ -294,7 +294,7 @@ const PIP_LINES = [
 ]
 
 const LEO_LINES = [
-	"Sorry.. but it had to be like this. Cheap milk is hard to get.. Customers hate cheap milk..",
+	"Sorry.. but it had to be like this. Good milk is hard to get.. Customers hate cheap milk..",
 	"We and Sofie, my love, we're in huge need of credits.. This cafe wasn't cheap to buy.",
 	"Sofie has a big, kind heart. It's just.. tough times for us.",
 	"We're both at fault, I think.. we made some mistakes..",
@@ -1424,7 +1424,7 @@ func main_do(_id:String, _args:Array):
 			talk(C_PC, "That’s it.. be a good girl and cum for me.")
 			saynn("Pip’s cock twitches violently, the cage bending under the strain. With one final, hard thrust, his [b]member breaks free[/b], bars of his cage snapping apart from the sheer power of his erection!")
 			saynn("When freed, his flared horsecock springs to full hardness in seconds before bursting with a thick, virile blast of seed!")
-			saynn("Thick ropes of cum land all across the floor as Pip moans in bliss, his body shaking hard as you pump his full of your spunk.")
+			saynn("Thick ropes of cum land all across the floor as Pip moans in bliss, his body shaking hard as you pump his ass full of your spunk.")
 			talk(C_BULL, "F-fuck! Ah! Ahhh-h!..")
 			talk(C_PC, "Holy shit, it worked.")
 			saynn("Even the owners come to check on all the noise.")
@@ -1589,12 +1589,12 @@ func main_do(_id:String, _args:Array):
 		if(special == "shiv"):
 			if(bullTopic <= 0):
 				saynn("After that stunt, one of the other slaves approaches you.")
-				talk(C_GUY, "Hey.. you don't know me.. but I think this might be more useful to you than me.")
+				talk(C_BULL, "Hey.. you don't know me.. but I think this might be more useful to you than me.")
 				saynn("He hands you a sharpened rock.. could be used as a weapon.")
 				
 			else:
 				saynn("After that stunt, Pip approaches you.")
-				talk(C_GUY, "Hey.. I think this might be more useful to you than me.")
+				talk(C_BULL, "Hey.. I think this might be more useful to you than me.")
 				saynn("He hands you a sharpened rock.. could be used as a weapon.")
 			addShiv()
 		
@@ -1809,6 +1809,7 @@ func sleepScene():
 	aimCamera(L_SLEEP)
 	playAnimation(StageScene.Sleeping, "sleep")
 	GM.main.startNewDay()
+	GM.pc.afterSleeping(false)
 	saynn("It's a new day. Time to wake up.")
 	if(upgradeLevel >= UPGRADE_CELLS):
 		saynn("Sleeping on an actual bed is so much nicer.")
@@ -1827,7 +1828,7 @@ func sleepScene():
 		else:
 			addContinue("setState", ["main"])
 		if(GM.pc.getCredits() >= 0):
-			saynn("[b]The owners have paid off their debt! You can released![/b]")
+			saynn("[b]The owners have paid off their debt! You can be released![/b]")
 			addAction("Freedom!", "You did your part. Time for the owners to do the same", "ENDING", ["end_credits"])
 
 #func sleep_do(_id:String, _args:Array):
@@ -2335,7 +2336,7 @@ func milkScene(_actorID:String, _targetID:String):
 		shouldMilkPenis = true
 		#playAnimation(StageScene.ChairOral, "stroke", {pc=_targetID, npc=_actorID, pcCum=true, bodyState={naked=true,hard=true}})
 		playAnimation(StageScene.Grope, "strokefast", {pc=_targetID, npc=_actorID, milkTank=true, pcCum=true, bodyState={naked=true,hard=true}})
-		sayParsed("{actor.You} {actor.youVerb('lock')} eyes with {target.you} as {actor.youVerb('proceed')} to stroke {target.yourHis} {target.penis} in slow, firm strokes until {target.yourHis} seed splatters into the collection container!")
+		sayParsed("{actor.You} {actor.youVerb('lock')} eyes with {target.you} and {actor.youVerb('proceed')} to stroke {target.yourHis} {target.penis} in slow, firm strokes until {target.yourHis} seed splatters into the collection container!")
 		if(_canUsePumps && _canMilkBreasts && addBreastPump(_targetID)):
 			shouldMilkBreasts = true
 			sayParsed("At the same time, two breast-pumps hum away at {target.yourHis} {target.breasts}, pulling out {target.milk}!")
@@ -2825,9 +2826,9 @@ func eGirlBulliesSlave_do(_id:String, _args:Array):
 		playAnimation(StageScene.Duo, "stand", {npc=C_GIRL})
 		sayParsed("You attempt to protect {target.you} from Sofie!")
 		if(theSlave == C_BULL):
-			addCowTrust(5)
-		else:
 			addBullTrust(5)
+		else:
+			addCowTrust(5)
 		talk(C_GIRL, RNG.pick([
 			"Really? You are even more dumb than I thought.",
 			"I guess I will have you punish both of you.",
@@ -2866,9 +2867,9 @@ func eGirlBulliesSlave_do(_id:String, _args:Array):
 		]))
 		bullyScene(C_PC)
 		if(theSlave == C_BULL):
-			addCowTrust(4)
-		else:
 			addBullTrust(4)
+		else:
+			addCowTrust(4)
 		addContinue("setState", ["main"])
 
 func eGirlBulliesSlave_fightResult(_didPCWin:bool):
@@ -3271,7 +3272,7 @@ func eRandomStuff_state():
 		talk(C_COW, "Oh. What about sugar cubes then?")
 		talk(C_BULL, "I'd eat one, sure.")
 		saynn("She gasps.")
-		talk(C_COW, "Horses eat suger cubes?! I want to be a horse too! Neigh-moo!")
+		talk(C_COW, "Horses eat sugar cubes?! I want to be a horse too! Neigh-moo!")
 		saynn("Pip just closes his eyes and sighs, trying not to smile.")
 	if(theEvent == "milkapip4"):
 		addChar(C_COW)

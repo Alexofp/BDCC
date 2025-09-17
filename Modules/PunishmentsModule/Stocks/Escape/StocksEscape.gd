@@ -18,15 +18,15 @@ func _run():
 		if(!GM.main.getModuleFlag("RahiModule", "Rahi_Introduced")):
 			saynn("Huh, she is talking about herself in third person?")
 
-			saynn("[say=pc]Um.. thanks anyways[/say]")
+			saynn("[say=pc]Um.. thanks anyways.[/say]")
 
 			saynn("[say=rahi]Don’t mention it..[/say]")
 		else:
-			saynn("[say=pc]Thank you, kitty[/say]")
+			saynn("[say=pc]Thank you, kitty.[/say]")
 
 			saynn("She offers you a smile and nods.")
 
-			saynn("[say=rahi]All good[/say]")
+			saynn("[say=rahi]All good.[/say]")
 
 		saynn("The brown feline makes sure you’re okay and then goes back to resting on the bench in the corner.")
 

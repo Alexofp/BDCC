@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://UI/CharacterPanelSmall.gd" type="Script" id=1]
+[ext_resource path="res://Game/UI/CharacterPanel/CharacterPanelSmall.gd" type="Script" id=1]
 [ext_resource path="res://UI/StatusEffectsPanel/StatusEffectsPanel.tscn" type="PackedScene" id=2]
 
 [sub_resource type="StyleBoxEmpty" id=8]

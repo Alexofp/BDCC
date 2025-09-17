@@ -41,7 +41,7 @@ func _run():
 	
 	if(state == "pick_chatcolor"):
 		var colorPicker = colorPickerScene.instance()
-		GM.ui.addCustomControl("colorpicker", colorPicker)
+		GM.ui.addFullScreenCustomControl("colorpicker", colorPicker)
 		colorPicker.setCurrentColor(npc.getChatColor())
 			
 		addButton("Confirm", "Change the name", "do_pick_color")

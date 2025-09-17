@@ -211,8 +211,21 @@ static func numberToPercentString(value: float):
 		return "+"+str(value*100)+"%"
 	return "0%"
 
+static func getFileModifiedTime(_path:String, correctTimezone:bool = true) -> int:
+	var file = File.new()
+	var fileModifTime:int = file.get_modified_time(_path)
+	if(fileModifTime > 100000000000): # Android returns milliseconds I think so we have to use this hack
+		fileModifTime = fileModifTime / 1000
+	
+	if(correctTimezone):
+		var timezone_info:Dictionary = Time.get_time_zone_from_system()
+		var offset_minutes:int = timezone_info["bias"]
+		fileModifTime += offset_minutes*60
+	
+	return fileModifTime
+
 # https://godotengine.org/qa/19077/how-to-get-the-date-as-per-rfc-1123-date-format-in-game
-static func datetimeToRFC113(time):
+static func datetimeToRFC113(time) -> String:
 	var nameweekday= ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 	var namemonth= ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 	var dayofweek = time["weekday"]   # from 0 to 6 --> Sunday to Saturday

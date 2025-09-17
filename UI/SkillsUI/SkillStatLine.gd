@@ -20,11 +20,11 @@ func setCanPressPlus(can):
 func _on_SkillStatLine_mouse_entered():
 	var stat: StatBase = GlobalRegistry.getStat(statID)
 	if(stat != null):
-		GlobalTooltip.showTooltip(stat.getVisibleName(), stat.getVisibleDescription())
+		GlobalTooltip.showTooltip(self, stat.getVisibleName(), stat.getVisibleDescription())
 
 
 func _on_SkillStatLine_mouse_exited():
-	GlobalTooltip.hideTooltip()
+	GlobalTooltip.hideTooltip(self)
 
 
 func _on_PlusButton_pressed():

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://UI/AutoTranslatorMenu/AutoTranslatorMenu.gd" type="Script" id=1]
 [ext_resource path="res://UI/AutoTranslatorMenu/TranslatorsList.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Game/UI/Buttons/BetterButton.tscn" type="PackedScene" id=3]
 
 [node name="AutoTranslatorMenu" type="Control"]
 anchor_right = 1.0
@@ -149,11 +150,13 @@ margin_bottom = 720.0
 rect_min_size = Vector2( 0, 100 )
 columns = 5
 
-[node name="CloseButton" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="CloseButton" parent="VBoxContainer/GridContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 256.0
 margin_bottom = 20.0
-size_flags_horizontal = 3
-text = "Save and close"
+text = "Save"
+myShortcutKey = "1"
 
 [connection signal="toggled" from="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/EnableTranslationBox" to="." method="_on_EnableTranslationBox_toggled"]
 [connection signal="item_selected" from="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/LanguageList" to="." method="_on_LanguageList_item_selected"]
@@ -161,4 +164,4 @@ text = "Save and close"
 [connection signal="toggled" from="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/TranslateButtonsButton" to="." method="_on_TranslateButtonsButton_toggled"]
 [connection signal="onDownPressed" from="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/TranslatorsList" to="." method="_on_TranslatorsList_onDownPressed"]
 [connection signal="onUpPressed" from="VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer6/TranslatorsList" to="." method="_on_TranslatorsList_onUpPressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
+[connection signal="pressedActually" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]

@@ -7,7 +7,7 @@ func getName():
 	return "Breeze"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/SkinsByAuthor/AverageAce/BreezeSkin/BreezeSkin.png")
+	return load("res://Player/Player3D/SkinsByAuthor/AverageAce/BreezeSkin/BreezeSkin.png")
 
 func getFittingSkinTypes():
 	return {

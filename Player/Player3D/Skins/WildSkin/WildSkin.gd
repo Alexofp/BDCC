@@ -7,7 +7,7 @@ func getName():
 	return "Wild"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/Skins/WildSkin/WildSkin.png")
+	return load("res://Player/Player3D/Skins/WildSkin/WildSkin.png")
 
 func getFittingSkinTypes():
 	return {

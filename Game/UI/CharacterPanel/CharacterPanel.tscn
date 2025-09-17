@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=1]
-[ext_resource path="res://Game/CharacterPanel.gd" type="Script" id=2]
+[ext_resource path="res://Game/UI/CharacterPanel/CharacterPanel.gd" type="Script" id=2]
 [ext_resource path="res://UI/StatusEffectsPanel/StatusEffectsPanel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://UI/LabeledProgressBar.tscn" type="PackedScene" id=4]
 
@@ -60,7 +60,7 @@ anchor_bottom = 0.0
 margin_top = 32.0
 margin_right = 1280.0
 margin_bottom = 48.0
-mouse_filter = 1
+mouse_filter = 2
 colorGradient = SubResource( 10 )
 propertyName = "Level"
 
@@ -70,7 +70,7 @@ anchor_bottom = 0.0
 margin_top = 52.0
 margin_right = 1280.0
 margin_bottom = 68.0
-mouse_filter = 1
+mouse_filter = 2
 colorGradient = SubResource( 8 )
 propertyName = "Pain"
 
@@ -80,6 +80,7 @@ anchor_bottom = 0.0
 margin_top = 72.0
 margin_right = 1280.0
 margin_bottom = 88.0
+mouse_filter = 2
 colorGradient = SubResource( 13 )
 propertyName = "Consciousness"
 
@@ -87,6 +88,7 @@ propertyName = "Consciousness"
 margin_top = 92.0
 margin_right = 1280.0
 margin_bottom = 108.0
+mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="LustBar" parent="HBoxContainer" instance=ExtResource( 4 )]
@@ -94,7 +96,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 638.0
 margin_bottom = 16.0
-mouse_filter = 1
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 colorGradient = SubResource( 9 )
@@ -106,6 +108,7 @@ anchor_bottom = 0.0
 margin_left = 642.0
 margin_right = 1280.0
 margin_bottom = 16.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 colorGradient = SubResource( 14 )
@@ -117,7 +120,7 @@ anchor_bottom = 0.0
 margin_top = 112.0
 margin_right = 1280.0
 margin_bottom = 128.0
-mouse_filter = 1
+mouse_filter = 2
 colorGradient = SubResource( 11 )
 propertyName = "Stamina"
 

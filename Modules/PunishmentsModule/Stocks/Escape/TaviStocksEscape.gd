@@ -18,7 +18,7 @@ func _run():
 
 		saynn("Tavi walks into your view and crouches before you, her paw slides along your cheek and taps a few times.")
 
-		saynn("[say=tavi]You look cute there, maybe I shouldn’t unlock you. But oh well[/say]")
+		saynn("[say=tavi]You look cute there, maybe I shouldn’t unlock you. But oh well.[/say]")
 
 		saynn("Tall feline unchains your legs and then unlocks the stocks, letting you stand up at last.")
 

@@ -7,7 +7,7 @@ func getName():
 	return "Tribal"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/SkinsByAuthor/AverageAce/TribalSkin/TribalSkin.png")
+	return load("res://Player/Player3D/SkinsByAuthor/AverageAce/TribalSkin/TribalSkin.png")
 
 func getFittingSkinTypes():
 	return {

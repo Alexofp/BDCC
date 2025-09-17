@@ -1,49 +1,74 @@
 extends Control
 
-onready var versionLabel = $HBoxContainer/MainVBox/ScrollContainer/VBoxContainer/VersionLabel
-onready var MainVBox = $HBoxContainer/MainVBox
-onready var LoadGameTab = $HBoxContainer/LoadGameScreen
-onready var optionsGameTab = $HBoxContainer/OptionsScreen
-onready var creditsGameTab = $HBoxContainer/CreditsScreen
-onready var resumeButton = $HBoxContainer/MainVBox/GridContainer/ResumeButton
-onready var http_request = $HTTPRequest
-onready var gutHubReleaseLabel = $HBoxContainer/Panel/MarginContainer/VBoxContainer/GithubReleaseLabel
-onready var gitHubReleaseButton = $HBoxContainer/Panel/MarginContainer/VBoxContainer/GithubReleasesButton
-onready var devToolsScreen = $HBoxContainer/DevToolsScreen
-onready var devSubScreen = $HBoxContainer/DevToolsScreen/DevScreen
-onready var loadedModsLabel = $HBoxContainer/Panel/MarginContainer/VBoxContainer/ScrollContainer/LoadedModsLabel
-onready var modsMenu = $HBoxContainer/ModsMenu
-onready var autoTranslatorMenu = $HBoxContainer/AutoTranslatorMenu
+onready var versionLabel = $"%VersionLabel"
+onready var MainVBox = $"%MainVBox"
+onready var LoadGameTab = $"%LoadGameScreen"
+onready var optionsGameTab = $"%OptionsScreen"
+onready var creditsGameTab = $"%CreditsScreen"
+onready var resumeButton = $"%ResumeButton"
+onready var http_request = $"%HTTPRequest"
+onready var gutHubReleaseLabel = $"%GithubReleaseLabel"
+onready var gitHubReleaseButton = $"%GithubReleasesButton"
+onready var devToolsScreen = $"%DevToolsScreen"
+onready var devSubScreen = $"%DevScreen"
+onready var loadedModsLabel = $"%LoadedModsLabel"
+onready var modsMenu = $"%ModsMenu"
+onready var autoTranslatorMenu = $"%AutoTranslatorMenu"
+onready var donations_label = $"%DonationsLabel"
+onready var auto_translator_button = $"%AutoTranslatorButton"
+
+onready var center_area_v_box = $"%CenterAreaVBox"
+onready var vertical_bottom_spacer = $"%VerticalBottomSpacer"
+
+onready var vertical_github_release_box = $"%VerticalGithubReleaseBox"
+onready var vertical_github_release_label = $"%VerticalGithubReleaseLabel"
+var verticalModsStr:String = ""
 
 export(Resource) var GlobalTheme
 
+func updateVerticalGithubReleaseVisibility():
+	if(OPTIONS.shouldFetchGithubRelease() && OPTIONS.isVerticalOrientation()):
+		vertical_github_release_box.visible = true
+	else:
+		vertical_github_release_box.visible = false
+
+func setGithubLabelStr(_simpleText:String, _extraText:String):
+	gutHubReleaseLabel.text = _simpleText + (_extraText if !_extraText.empty() else "")
+	vertical_github_release_label.text = _simpleText + ("\n"+verticalModsStr if !verticalModsStr.empty() else "")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	OPTIONS.setSupportsVertical(true)
+	updateSidePanelsVisibility()
 	versionLabel.text = "Version: "+GlobalRegistry.getGameVersionString()
 
-	$HBoxContainer/Panel2/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer3/DonationsLabel.bbcode_text = GlobalRegistry.getDonationDataString()
+	donations_label.bbcode_text = GlobalRegistry.getDonationDataString()
 	var _ok = GlobalRegistry.connect("donationDataUpdated", self, "updateDonationData")
 
 	checkCanResume()
 	if(OPTIONS.shouldFetchGithubRelease()):
 		getNewRelease()
 	else:
-		gutHubReleaseLabel.text = "Latest github release: DISABLED"
+		setGithubLabelStr("Latest github release: DISABLED", "")
 		gutHubReleaseLabel.visible = false
 		gitHubReleaseButton.visible = false
-		
+	updateVerticalGithubReleaseVisibility()
+	
 	var loadedMods = GlobalRegistry.getLoadedMods()
 	if(loadedMods.size() > 0):
 		var text = "Loaded mods:"
 		for mod in loadedMods:
 			text += "\n"+str(mod)
 		loadedModsLabel.bbcode_text = text
+		verticalModsStr = str(loadedMods.size())+" mod"+("s" if loadedMods.size() != 1 else "")
 	
 	if(OS.get_name() == "HTML5"):
-		$HBoxContainer/MainVBox/GridContainer/AutoTranslatorButton.disabled = true
-
+		auto_translator_button.disabled = true
+	
+	OPTIONS.connect("onScreenOrientationChange", self, "updateSidePanelsVisibility")
+	
 func updateDonationData():
-	$HBoxContainer/Panel2/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer3/DonationsLabel.bbcode_text = GlobalRegistry.getDonationDataString()
+	donations_label.bbcode_text = GlobalRegistry.getDonationDataString()
 
 func _on_NewGameButton_pressed():
 	var _ok = get_tree().change_scene("res://Game/MainScene.tscn")
@@ -56,9 +81,9 @@ func hideAllMenus():
 	creditsGameTab.visible = false
 	devToolsScreen.visible = false
 	modsMenu.visible = false
-	$HBoxContainer/Panel2.visible = true
-	$HBoxContainer/Panel.visible = true
 	autoTranslatorMenu.visible = false
+	
+	updateSidePanelsVisibility()
 
 func switchToMainMenu():
 	hideAllMenus()
@@ -98,25 +123,25 @@ func getNewRelease():
 	var error = http_request.request("https://api.github.com/repos/Alexofp/BDCC/releases")
 	if error != OK:
 		Log.printerr("[MainMenu] An error occurred in the HTTP request.")
-		gutHubReleaseLabel.text = "Latest github release: Error"
+		setGithubLabelStr("Latest github release: Error", "")
 
 func _on_HTTPRequest_request_completed(result, _response_code, _headers, body):
 	if result != HTTPRequest.RESULT_SUCCESS:
 		Log.printerr("[MainMenu] Couldn't get the latest release from github")
-		gutHubReleaseLabel.text = "Latest github release: Error"
+		setGithubLabelStr("Latest github release: Error", "")
 		return
 	
 	var jsonResult = JSON.parse(body.get_string_from_utf8())
 	if(jsonResult.error != OK):
 		Log.printerr("[MainMenu] Couldn't parse json data from github.")
-		gutHubReleaseLabel.text = "Latest github release: Error"
+		setGithubLabelStr("Latest github release: Error", "")
 		return
 	
 	var releasesData = jsonResult.result
 
 	if(!(releasesData is Array)):
 		Log.printerr("[MainMenu] Bad data from github")
-		gutHubReleaseLabel.text = "Latest github release: Error"
+		setGithubLabelStr("Latest github release: Error", "")
 		return
 		
 	for release in releasesData:
@@ -125,15 +150,25 @@ func _on_HTTPRequest_request_completed(result, _response_code, _headers, body):
 			if(!release.has(req)):
 				continue
 		
-		var time = Util.ISO8601DateToDatetime(release["published_at"])
+		var publishedAtISOString:String = release["published_at"]
+		var publishedAtUnix:int = Time.get_unix_time_from_datetime_string(publishedAtISOString)
+		var timezone_info:Dictionary = Time.get_time_zone_from_system()
+		var offset_minutes:int = timezone_info["bias"]
+		var publishedAtLocal:int = publishedAtUnix + offset_minutes*60
 		
-		gutHubReleaseLabel.text = "Latest github release: "+release["tag_name"]
-		if(time != null):
-			gutHubReleaseLabel.text += "\n" + Util.datetimeToRFC113(time)
+		#var time = Time.get_datetime_string_from_unix_time(publishedAtLocal, true)#Util.ISO8601DateToDatetime(release["published_at"])
+		#print(release["published_at"])
 		
-		gutHubReleaseLabel.text += "\n\nYour current version: "+GlobalRegistry.getGameVersionString()
+		var theSimpleText:String = ""
+		var theAdvancedText:String = ""
+		theSimpleText = "Latest github release: "+str(release["tag_name"])
+		#if(time != null):
+		theAdvancedText += "\n" + Time.get_datetime_string_from_unix_time(publishedAtLocal, true)
+		
+		theAdvancedText += "\n\nYour current version: "+GlobalRegistry.getGameVersionString()
+		setGithubLabelStr(theSimpleText, theAdvancedText)
 		return
-	gutHubReleaseLabel.text = "Latest github release: Nothing found"
+	setGithubLabelStr("Latest github release: Nothing found", "")
 
 func _on_GithubReleasesButton_pressed():
 	var _ok = OS.shell_open("https://github.com/Alexofp/BDCC/releases")
@@ -147,9 +182,24 @@ func _on_DevClose_pressed():
 func _on_DevToolsButton_pressed():
 	hideAllMenus()
 	devToolsScreen.visible = true
-	$HBoxContainer/Panel2.visible = false
-	$HBoxContainer/Panel.visible = false
+	updateSidePanelsVisibility()
 
+onready var panel_2 = $"%Panel2"
+onready var panel = $"%Panel"
+
+func updateSidePanelsVisibility():
+	var isVert:bool = OPTIONS.isVerticalOrientation()
+	
+	var shouldBeVis:bool = true
+	if(devToolsScreen.visible):
+		shouldBeVis = false
+	if(OPTIONS.isVerticalOrientation()):
+		shouldBeVis = false
+	
+	panel_2.visible = shouldBeVis
+	panel.visible = shouldBeVis
+	vertical_bottom_spacer.visible = isVert
+	updateVerticalGithubReleaseVisibility()
 
 func _on_DevSceneConverter_pressed():
 	Util.delete_children(devSubScreen)
@@ -219,10 +269,12 @@ func _on_SexActivityCreator_pressed():
 	var scene = load("res://Util/SexActivityCreator/SexActivityCreator.tscn")
 	devSubScreen.add_child(scene.instance())
 
+onready var main_h_box = $"%MainHBox"
+
 var datapackMenu
 func _on_DatapackButton_pressed():
 	#hideAllMenus()
-	$HBoxContainer.visible = false
+	main_h_box.visible = false
 	datapackMenu = load("res://Game/Datapacks/UI/DatapackMenu.tscn").instance()
 	datapackMenu.connect("onClosePressed", self, "onDatapackMenuClosedPressed")
 	add_child(datapackMenu)
@@ -231,11 +283,11 @@ func onDatapackMenuClosedPressed():
 	if(datapackMenu != null):
 		datapackMenu.queue_free()
 		datapackMenu = null
-		$HBoxContainer.visible = true
+		main_h_box.visible = true
 
 
 func _on_InteractionCreator_pressed():
-	$HBoxContainer.visible = false
+	main_h_box.visible = false
 	datapackMenu = load("res://Util/InteractionCreator/InteractionCreator.tscn").instance()
 	datapackMenu.connect("onClosePressed", self, "onDatapackMenuClosedPressed")
 	add_child(datapackMenu)

@@ -7,7 +7,7 @@ func getName():
 	return "RockStar"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/SkinsByAuthor/AverageAce/RockStarSkin/RockStarSkin.png")
+	return load("res://Player/Player3D/SkinsByAuthor/AverageAce/RockStarSkin/RockStarSkin.png")
 
 func getFittingSkinTypes():
 	return {

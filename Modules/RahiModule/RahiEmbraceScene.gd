@@ -66,7 +66,7 @@ func _run():
 
 		saynn("[say=pc]Like it?[/say]")
 
-		saynn("[say=rahi]..yes[/say]")
+		saynn("[say=rahi]..yes.[/say]")
 
 		saynn("You begin gently groping them. And wow they feel heavy, kitty must be lactating so much already. And sure enough, you give them a little squeeze and a short burst of milk squirts from her nips only stopped by the shirt. Kitty lets out a passionate moan and arches her back, so sensitive.")
 

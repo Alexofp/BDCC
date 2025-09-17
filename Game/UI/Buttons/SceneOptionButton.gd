@@ -1,7 +1,6 @@
 extends Button
 
 var savedKey = -1
-var requiresControl:bool = false
 
 signal pressedActually
 var showingDescription = false

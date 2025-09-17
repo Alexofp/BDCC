@@ -1,5 +1,23 @@
 extends Node
 
+const TAB_GAMEPLAY = 0
+const TAB_GAME = 1
+const TAB_DISPLAY = 2
+const TAB_INTERFACE = 3
+
+const LAYOUT_AUTO = 0
+const LAYOUT_NORMAL = 1
+const LAYOUT_TOUCH_HORIZONTAL = 2
+const LAYOUT_TOUCH_VERTICAL = 3
+
+const SCREEN_HORIZONTAL = 0
+const SCREEN_VERTICAL = 1
+
+var currentSupportsVertical:bool = false
+var currentScreenOrientation:int = SCREEN_HORIZONTAL # not saved
+signal onScreenOrientationChange
+signal onLayoutChange
+
 var myProjectSettings
 
 var enabledContent = {}
@@ -34,6 +52,8 @@ var savingInDungeons: bool = false
 # Datapack editor
 var blockCatcherPanelHeight: int = 8
 
+var uiLayout:int = LAYOUT_AUTO
+var uiLayoutRightHanded:bool = true
 var shouldScaleUI: bool = true
 var uiScaleMultiplier = 1.0
 var requireDoubleTapOnMobile = false
@@ -58,6 +78,7 @@ var imagePackOrder = []
 var rollbackEnabled = false
 var rollbackSlots = 5
 var rollbackSaveEvery = 1
+var rollbackThread:bool = true
 
 var showModdedLauncher = false
 
@@ -95,6 +116,8 @@ func resetToDefaults():
 	smartLockRarity = "normal"
 	overstimulationEnabled = true
 	savingInDungeons = false
+	uiLayout = LAYOUT_AUTO
+	uiLayoutRightHanded = true
 	shouldScaleUI = true
 	uiScaleMultiplier = 1.0
 	showSpeakerName = true
@@ -110,6 +133,7 @@ func resetToDefaults():
 	showSceneArt = true
 	showSceneCreator = true
 	rollbackEnabled = false
+	rollbackThread = true
 	rollbackSlots = 5
 	rollbackSaveEvery = 1
 	showModdedLauncher = false
@@ -236,6 +260,9 @@ func shouldShowMapArt():
 func isRollbackEnabled():
 	return rollbackEnabled
 
+func isRollbackThreadEnabled() -> bool:
+	return rollbackThread
+
 func getRollbackSlotsAmount():
 	return rollbackSlots
 
@@ -325,6 +352,7 @@ func getChangeableOptions():
 					"id": "showModdedLauncher",
 					"type": "checkbox",
 					"value": showModdedLauncher,
+					"tab": TAB_GAME,
 				},
 			],
 		},
@@ -338,6 +366,7 @@ func getChangeableOptions():
 					"id": "sandboxPawnCount",
 					"type": "int",
 					"value": sandboxPawnCount,
+					"tab": TAB_GAMEPLAY,
 				},
 				{
 					"name": "Off-screen breeding",
@@ -352,6 +381,7 @@ func getChangeableOptions():
 						["veryrare", "Very rare (5%)"],
 						["never", "Never (0%)"],
 					],
+					"tab": TAB_GAMEPLAY,
 				},
 				{
 					"name": "Accelerated pawn auto-leveling",
@@ -371,6 +401,7 @@ func getChangeableOptions():
 						[1.5, "150%"],
 						[2.0, "200%"],
 					],
+					"tab": TAB_GAMEPLAY,
 				},
 			],
 		},
@@ -384,6 +415,7 @@ func getChangeableOptions():
 					"id": "menstrualCycleLengthDays",
 					"type": "int",
 					"value": menstrualCycleLengthDays,
+					"tab": TAB_GAMEPLAY,
 				},
 				{
 					"name": "Egg cell lifespan (hours)",
@@ -391,6 +423,7 @@ func getChangeableOptions():
 					"id": "eggCellLifespanHours",
 					"type": "int",
 					"value": eggCellLifespanHours,
+					"tab": TAB_GAMEPLAY,
 				},
 				{
 					"name": "Player pregnancy length (days)",
@@ -398,6 +431,7 @@ func getChangeableOptions():
 					"id": "playerPregnancyTimeDays",
 					"type": "int",
 					"value": playerPregnancyTimeDays,
+					"tab": TAB_GAMEPLAY,
 				},
 				{
 					"name": "NPC pregnancy length (days)",
@@ -405,6 +439,7 @@ func getChangeableOptions():
 					"id": "npcPregnancyTimeDays",
 					"type": "int",
 					"value": npcPregnancyTimeDays,
+					"tab": TAB_GAMEPLAY,
 				},
 				{
 					"name": "Impregnation chance modifier (%)",
@@ -412,6 +447,7 @@ func getChangeableOptions():
 					"id": "impregnationChanceModifier",
 					"type": "int",
 					"value": impregnationChanceModifier,
+					"tab": TAB_GAMEPLAY,
 				},
 				{
 					"name": "Belly size depends on litter amount",
@@ -419,6 +455,7 @@ func getChangeableOptions():
 					"id": "bellySizeDependsOnLitterSize",
 					"type": "checkbox",
 					"value": bellySizeDependsOnLitterSize,
+					"tab": TAB_GAMEPLAY,
 				},
 				{
 					"name": "Pregnant belly size (%)",
@@ -440,6 +477,7 @@ func getChangeableOptions():
 						[1.75, "175%"],
 						[2.0, "200%"],
 					],
+					"tab": TAB_GAMEPLAY,
 				},
 				{
 					"name": "Auto child record optimizer",
@@ -447,6 +485,7 @@ func getChangeableOptions():
 					"id": "optimizeChilds",
 					"type": "checkbox",
 					"value": optimizeChilds,
+					"tab": TAB_GAME,
 				},
 				{
 					"name": "Max player-related children records",
@@ -454,6 +493,7 @@ func getChangeableOptions():
 					"id": "maxKeepPCKids",
 					"type": "int",
 					"value": maxKeepPCKids,
+					"tab": TAB_GAME,
 				},
 				{
 					"name": "Max non-player-related children records",
@@ -461,6 +501,7 @@ func getChangeableOptions():
 					"id": "maxKeepNPCKids",
 					"type": "int",
 					"value": maxKeepNPCKids,
+					"tab": TAB_GAME,
 				},
 			]
 		},
@@ -473,7 +514,8 @@ func getChangeableOptions():
 					"description": "Makes getting restraints off harder. Turn this option on only if you feel like Houdini.",
 					"id": "hardStruggleEnabled",
 					"type": "checkbox",
-					"value": hardStruggleEnabled
+					"value": hardStruggleEnabled,
+					"tab": TAB_GAMEPLAY,
 				},
 				{
 					"name": "Smart Lock rarity",
@@ -490,21 +532,24 @@ func getChangeableOptions():
 						["veryoften", "Very often"],
 						["bdsmslut", "BDSM SLUT"],
 						["always", "Always"],
-					]
+					],
+					"tab": TAB_GAMEPLAY,
 				},
 				{
 					"name": "Overstimulation mechanic",
 					"description": "Makes it so any erogenous zone can be overstimulated during sex. Overstimulated zones lose sensitivity when stimulated further. Nipples can be overstimulated even if this option is disabled.",
 					"id": "overstimulationEnabled",
 					"type": "checkbox",
-					"value": overstimulationEnabled
+					"value": overstimulationEnabled,
+					"tab": TAB_GAMEPLAY,
 				},
 				{
 					"name": "Saving in dungeons",
 					"description": "Turn this on to be able to save/rollback during in-game dungeons (Drug den). Turning this on will make the dungeons easier.",
 					"id": "savingInDungeons",
 					"type": "checkbox",
-					"value": savingInDungeons
+					"value": savingInDungeons,
+					"tab": TAB_GAMEPLAY,
 				},
 			]
 		},
@@ -521,7 +566,8 @@ func getChangeableOptions():
 					"values": [
 						["GLES3", "GLES3"],
 						["GLES2", "GLES2"],
-					]
+					],
+					"tab": TAB_DISPLAY,
 				},
 				{
 					"name": "FPS limiter",
@@ -540,7 +586,8 @@ func getChangeableOptions():
 						[120, "120 fps"],
 						[0, "V-Sync"],
 						[9999, "Uncapped"],
-					]
+					],
+					"tab": TAB_DISPLAY,
 				},
 				{
 					"name": "Force Software Skinning",
@@ -548,6 +595,7 @@ func getChangeableOptions():
 					"id": "softwareSkinning",
 					"type": "checkbox",
 					"value": ProjectSettings.get_setting("rendering/quality/skinning/force_software_skinning"),
+					"tab": TAB_DISPLAY,
 				},
 				{
 					"name": "Skin shaders",
@@ -555,6 +603,15 @@ func getChangeableOptions():
 					"id": "advancedShadersEnabled",
 					"type": "checkbox",
 					"value": advancedShadersEnabled,
+					"tab": TAB_DISPLAY,
+				},
+				{
+					"name": "Visible chains",
+					"description": "Visible chains when your character is cuffed/leashed. Disabling might improve perfomance.",
+					"id": "chainsEnabled",
+					"type": "checkbox",
+					"value": chainsEnabled,
+					"tab": TAB_DISPLAY,
 				},
 				{
 					"name": "Visible bodywritings",
@@ -562,7 +619,8 @@ func getChangeableOptions():
 					"id": "visibleWritings",
 					"type": "checkbox",
 					"value": visibleWritings,
-				}
+					"tab": TAB_DISPLAY,
+				},
 			]
 		},
 		{
@@ -575,6 +633,7 @@ func getChangeableOptions():
 					"id": "jigglePhysicsBreastsEnabled",
 					"type": "checkbox",
 					"value": jigglePhysicsBreastsEnabled,
+					"tab": TAB_DISPLAY,
 				},
 				{
 					"name": "Belly jiggle physics",
@@ -582,6 +641,7 @@ func getChangeableOptions():
 					"id": "jigglePhysicsBellyEnabled",
 					"type": "checkbox",
 					"value": jigglePhysicsBellyEnabled,
+					"tab": TAB_DISPLAY,
 				},
 				{
 					"name": "Butt jiggle physics",
@@ -589,6 +649,7 @@ func getChangeableOptions():
 					"id": "jigglePhysicsButtEnabled",
 					"type": "checkbox",
 					"value": jigglePhysicsButtEnabled,
+					"tab": TAB_DISPLAY,
 				},
 				{
 					"name": "Jiggle physics modifier",
@@ -611,6 +672,7 @@ func getChangeableOptions():
 						[1.5, "150%"],
 						[2.0, "200%"],
 					],
+					"tab": TAB_DISPLAY,
 				},
 			]
 		},
@@ -624,6 +686,7 @@ func getChangeableOptions():
 					"id": "autosaveEnabled",
 					"type": "checkbox",
 					"value": autosaveEnabled,
+					"tab": TAB_GAME,
 				}
 			],
 		},
@@ -637,6 +700,7 @@ func getChangeableOptions():
 					"id": "cumEnabled",
 					"type": "checkbox",
 					"value": cumEnabled,
+					"tab": TAB_DISPLAY,
 				},
 				{
 					"name": "Cumshot intensity multiplier",
@@ -659,6 +723,7 @@ func getChangeableOptions():
 						[3.0, "300%"],
 						[5.0, "500%"],
 					],
+					"tab": TAB_DISPLAY,
 				},
 				{
 					"name": "Cumshots depend on balls volume",
@@ -666,19 +731,27 @@ func getChangeableOptions():
 					"id": "cumDependsOnBallsSize",
 					"type": "checkbox",
 					"value": cumDependsOnBallsSize,
+					"tab": TAB_DISPLAY,
 				},
 			]
 		},
 		{
-			"name": "Other",
-			"id": "other",
+			"name": "Interface layout",
+			"id": "layout",
 			"options": [
 				{
-					"name": "Fetch latest release",
-					"description": "Should the game load latest update info from github when starting the game",
-					"id": "fetchLatestRelease",
-					"type": "checkbox",
-					"value": fetchNewRelease,
+					"name": "UI layout",
+					"description": "Which layout should be used in-game. Automatic uses a touch-friendly horizontal layout if touch capacities are detected and a Normal one otherwise.",
+					"id": "uiLayout",
+					"type": "list",
+					"value": uiLayout,
+					"values": [
+						[LAYOUT_AUTO, "Automatic"],
+						[LAYOUT_NORMAL, "Normal"],
+						[LAYOUT_TOUCH_HORIZONTAL, "Touch-friendly (horizontal)"],
+						[LAYOUT_TOUCH_VERTICAL, "Touch-friendly (vertical)"],
+					],
+					"tab": TAB_INTERFACE,
 				},
 				{
 					"name": "UI scaling",
@@ -686,6 +759,7 @@ func getChangeableOptions():
 					"id": "shouldScaleUI",
 					"type": "checkbox",
 					"value": shouldScaleUI,
+					"tab": TAB_INTERFACE,
 				},
 				{
 					"name": "UI scale multiplier",
@@ -708,13 +782,7 @@ func getChangeableOptions():
 						[1.35, "135%"],
 						[1.5, "150%"],
 					],
-				},
-				{
-					"name": "Show speaker name",
-					"description": "Adds a name of the speaker before the speech",
-					"id": "showSpeakerName",
-					"type": "checkbox",
-					"value": showSpeakerName,
+					"tab": TAB_INTERFACE,
 				},
 				{
 					"name": "Output font size",
@@ -727,13 +795,7 @@ func getChangeableOptions():
 						["normal", "Normal"],
 						["big", "Big"],
 					],
-				},
-				{
-					"name": "Show shortcuts",
-					"description": "Show the shortcut key on the button",
-					"id": "showShortcuts",
-					"type": "checkbox",
-					"value": showShortcuts,
+					"tab": TAB_INTERFACE,
 				},
 				{
 					"name": "Button size",
@@ -747,6 +809,7 @@ func getChangeableOptions():
 						[2, "Big"],
 						[3, "Very big"],
 					],
+					"tab": TAB_INTERFACE,
 				},
 				{
 					"name": "Inventory icons",
@@ -759,6 +822,52 @@ func getChangeableOptions():
 						["normal", "Normal"],
 						["big", "Big"],
 					],
+					"tab": TAB_INTERFACE,
+				},
+				{
+					"name": "Block catcher panel height",
+					"description": "(Datapack scene creator) Adjust the size (height) of the block catcher panel",
+					"id": "blockCatcherPanelHeight",
+					"type": "list",
+					"value": blockCatcherPanelHeight,
+					"values": [
+						[4, "4p"],
+						[8, "8p"],
+						[16, "16p"],
+						[32, "32p"],
+					],
+					"tab": TAB_INTERFACE,
+				},
+			],
+		},
+		
+		{
+			"name": "Other",
+			"id": "other",
+			"options": [
+				{
+					"name": "Fetch latest release",
+					"description": "Should the game load latest update info from github when starting the game",
+					"id": "fetchLatestRelease",
+					"type": "checkbox",
+					"value": fetchNewRelease,
+					"tab": TAB_INTERFACE,
+				},
+				{
+					"name": "Show speaker name",
+					"description": "Adds a name of the speaker before the speech",
+					"id": "showSpeakerName",
+					"type": "checkbox",
+					"value": showSpeakerName,
+					"tab": TAB_INTERFACE,
+				},
+				{
+					"name": "Show shortcuts",
+					"description": "Show the shortcut key on the button",
+					"id": "showShortcuts",
+					"type": "checkbox",
+					"value": showShortcuts,
+					"tab": TAB_INTERFACE,
 				},
 				{
 					"name": "Double-tap to pick option (mobile)",
@@ -766,6 +875,7 @@ func getChangeableOptions():
 					"id": "requireDoubleTapOnMobile",
 					"type": "checkbox",
 					"value": requireDoubleTapOnMobile,
+					"tab": TAB_INTERFACE,
 				},
 				{
 					"name": "Measurement units",
@@ -778,6 +888,7 @@ func getChangeableOptions():
 						["imperial", "Imperial (in)"],
 						["metricimperial", "Metric and Imperial"],
 					],
+					"tab": TAB_INTERFACE,
 				},
 				{
 					"name": "Show character art",
@@ -785,6 +896,7 @@ func getChangeableOptions():
 					"id": "showCharacterArt",
 					"type": "checkbox",
 					"value": showCharacterArt,
+					"tab": TAB_INTERFACE,
 				},
 				{
 					"name": "Show scene art",
@@ -792,6 +904,7 @@ func getChangeableOptions():
 					"id": "showSceneArt",
 					"type": "checkbox",
 					"value": showSceneArt,
+					"tab": TAB_INTERFACE,
 				},
 				{
 					"name": "Image packs",
@@ -801,6 +914,7 @@ func getChangeableOptions():
 					"imagePacks": true,
 					"value": "",
 					"values": imagePackOrder,
+					"tab": TAB_INTERFACE,
 				},
 				{
 					"name": "Show scene creator",
@@ -808,6 +922,7 @@ func getChangeableOptions():
 					"id": "showSceneCreator",
 					"type": "checkbox",
 					"value": showSceneCreator,
+					"tab": TAB_INTERFACE,
 				},
 				{
 					"name": "Developer commentary",
@@ -815,13 +930,7 @@ func getChangeableOptions():
 					"id": "developerCommentary",
 					"type": "checkbox",
 					"value": developerCommentary,
-				},
-				{
-					"name": "Visible chains",
-					"description": "Visible chains when your character is cuffed/leashed. Disabling might improve perfomance.",
-					"id": "chainsEnabled",
-					"type": "checkbox",
-					"value": chainsEnabled,
+					"tab": TAB_INTERFACE,
 				},
 #				{
 #					"name": "Show map art (WIP)",
@@ -831,24 +940,12 @@ func getChangeableOptions():
 #					"value": showMapArt,
 #				},
 				{
-					"name": "Block catcher panel height",
-					"description": "Adjust the size(height) of the block catcher panel",
-					"id": "blockCatcherPanelHeight",
-					"type": "list",
-					"value": blockCatcherPanelHeight,
-					"values": [
-						[4, "4p"],
-						[8, "8p"],
-						[16, "16p"],
-						[32, "32p"],
-					]
-				},
-				{
 					"name": "[WEB] Text Input field fallback",
 					"description": "HTML5 only. Use a pop-up window to allow text input on browsers that don't support godot's text inputs.",
 					"id": "webTextInputFallback",
 					"type": "checkbox",
 					"value": webTextInputFallback,
+					"tab": TAB_INTERFACE,
 				},
 			],
 		},
@@ -862,6 +959,15 @@ func getChangeableOptions():
 					"id": "rollbackEnabled",
 					"type": "checkbox",
 					"value": rollbackEnabled,
+					"tab": TAB_GAME,
+				},
+				{
+					"name": "Separate thread",
+					"description": "If checked, the game will save the game's rollback state in a separate thread. Should result in a smoother gameplay but might lead to all sorts of strange bugs. Disable if the game is crashing randomly.",
+					"id": "rollbackThread",
+					"type": "checkbox",
+					"value": rollbackThread,
+					"tab": TAB_GAME,
 				},
 				{
 					"name": "Rollback history size",
@@ -869,6 +975,7 @@ func getChangeableOptions():
 					"id": "rollbackSlots",
 					"type": "int",
 					"value": rollbackSlots,
+					"tab": TAB_GAME,
 				},
 				{
 					"name": "Make snapshot every X choices",
@@ -876,6 +983,7 @@ func getChangeableOptions():
 					"id": "rollbackSaveEvery",
 					"type": "int",
 					"value": rollbackSaveEvery,
+					"tab": TAB_GAME,
 				},
 			]
 		},
@@ -889,6 +997,7 @@ func getChangeableOptions():
 					"id": "debugPanel",
 					"type": "checkbox",
 					"value": debugPanel,
+					"tab": TAB_GAME,
 				},
 			]
 		},
@@ -902,6 +1011,7 @@ func getChangeableOptions():
 			"id": contentType,
 			"type": "checkbox",
 			"value": isContentEnabled(contentType),
+			"tab": TAB_GAMEPLAY,
 		})
 	settings.append({
 		"name": "Enabled Fetish Content",
@@ -922,6 +1032,7 @@ func getChangeableOptions():
 			"type": "string",
 			"value": getGenderOverrideName(gender, ""),
 			"placeholder": NpcGender.getDefaultVisibleName(gender),
+			"tab": TAB_GAME,
 		})
 	settings.append({
 		"name": "Npc Self-Identity Names Override",
@@ -1014,35 +1125,38 @@ func applyOption(categoryID, optionID, value):
 		if optionID == "savingInDungeons":
 			savingInDungeons = value
 	
-	if(categoryID == "other"):
-		if(optionID == "webTextInputFallback"):
-			webTextInputFallback = value
+	if(categoryID == "layout"):
 		if(optionID == "blockCatcherPanelHeight"):
 			blockCatcherPanelHeight = value
-		if(optionID == "fetchLatestRelease"):
-			fetchNewRelease = value
+		if(optionID == "uiLayout"):
+			uiLayout = value
+			applySettingsEffect()
 		if(optionID == "shouldScaleUI"):
 			shouldScaleUI = value
-			
 			applySettingsEffect()
 		if(optionID == "uiScaleMultiplier"):
 			uiScaleMultiplier = value
-			
 			applySettingsEffect()
-		if(optionID == "showSpeakerName"):
-			showSpeakerName = value
 		if(optionID == "fontSize"):
 			fontSize = value
+		if(optionID == "uiButtonSize"):
+			uiButtonSize = value
+		if(optionID == "inventoryIconsSize"):
+			inventoryIconsSize = value
+	
+	if(categoryID == "other"):
+		if(optionID == "webTextInputFallback"):
+			webTextInputFallback = value
+		if(optionID == "fetchLatestRelease"):
+			fetchNewRelease = value
+		if(optionID == "showSpeakerName"):
+			showSpeakerName = value
 		if(optionID == "showShortcuts"):
 			showShortcuts = value
 		if(optionID == "measurementUnits"):
 			measurementUnits = value
 		if(optionID == "requireDoubleTapOnMobile"):
 			requireDoubleTapOnMobile = value
-		if(optionID == "uiButtonSize"):
-			uiButtonSize = value
-		if(optionID == "inventoryIconsSize"):
-			inventoryIconsSize = value
 		if(optionID == "showCharacterArt"):
 			showCharacterArt = value
 		if(optionID == "showSceneArt"):
@@ -1053,8 +1167,6 @@ func applyOption(categoryID, optionID, value):
 			showMapArt = value
 		if(optionID == "developerCommentary"):
 			developerCommentary = value
-		if(optionID == "chainsEnabled"):
-			chainsEnabled = value
 		
 	if(categoryID == "render"):
 		if(optionID == "renderer"):
@@ -1067,6 +1179,8 @@ func applyOption(categoryID, optionID, value):
 			advancedShadersEnabled = value
 		if(optionID == "visibleWritings"):
 			visibleWritings = value
+		if(optionID == "chainsEnabled"):
+			chainsEnabled = value
 			
 	if(categoryID == "debug"):
 		if(optionID == "debugPanel"):
@@ -1075,6 +1189,8 @@ func applyOption(categoryID, optionID, value):
 	if(categoryID == "rollback"):
 		if(optionID == "rollbackEnabled"):
 			rollbackEnabled = value
+		if(optionID == "rollbackThread"):
+			rollbackThread = value
 		if(optionID == "rollbackSlots"):
 			rollbackSlots = Util.maxi(value, 1)
 		if(optionID == "rollbackSaveEvery"):
@@ -1085,6 +1201,7 @@ func applyOption(categoryID, optionID, value):
 	print("SETTING "+categoryID+":"+optionID+" TO "+str(value))
 
 func applySettingsEffect():
+	checkScreenOrientation()
 	applyUIScale()
 	
 	OS.window_fullscreen = fullscreen
@@ -1096,11 +1213,95 @@ func applySettingsEffect():
 	else:
 		OS.vsync_enabled = true
 	
+	emit_signal("onLayoutChange")
+	
 func applyUIScale():
+	var idealSize := Vector2(1280,720) if currentScreenOrientation == SCREEN_HORIZONTAL else Vector2(720, 1280)
+	
 	if(shouldScaleUI):
-		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D,SceneTree.STRETCH_ASPECT_EXPAND,Vector2(1280,720), uiScaleMultiplier)
+		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D,SceneTree.STRETCH_ASPECT_EXPAND,idealSize, uiScaleMultiplier)
 	else:
-		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_DISABLED,SceneTree.STRETCH_ASPECT_EXPAND,Vector2(1280,720))
+		get_tree().set_screen_stretch(SceneTree.STRETCH_MODE_DISABLED,SceneTree.STRETCH_ASPECT_EXPAND,idealSize)
+
+func getUILayoutRaw() -> int:
+	return uiLayout
+
+func getUILayoutFinal() -> int:
+	if(uiLayout == LAYOUT_AUTO):
+		if(OS.has_feature("mobile") || OS.has_feature("web_android") || OS.has_feature("web_ios")):
+			return LAYOUT_TOUCH_HORIZONTAL
+		return LAYOUT_NORMAL
+	return uiLayout
+
+func onSceneChange():
+	checkScreenOrientation()
+
+func setSupportsVertical(_supportsVertical:bool):
+	currentSupportsVertical = _supportsVertical
+	checkScreenOrientation()
+
+func getCurrentScreenOrientation() -> int:
+	return currentScreenOrientation
+
+func isVerticalOrientation() -> bool:
+	return currentScreenOrientation == SCREEN_VERTICAL
+
+func isTouchFriendlyUI() -> bool:
+	var theFinalLayout:int = getUILayoutFinal()
+	return theFinalLayout == LAYOUT_TOUCH_HORIZONTAL || theFinalLayout == LAYOUT_TOUCH_VERTICAL
+
+func checkScreenOrientation():
+	var finalLayout:int = getUILayoutFinal()
+	var newOrientation:int = 0
+	
+	if(finalLayout == LAYOUT_TOUCH_VERTICAL && currentSupportsVertical):
+		newOrientation = SCREEN_VERTICAL
+	else:
+		newOrientation = SCREEN_HORIZONTAL
+	
+	if(newOrientation != currentScreenOrientation):
+		var _oldOr:int = currentScreenOrientation
+		
+		currentScreenOrientation = newOrientation
+		
+		if(currentScreenOrientation == SCREEN_HORIZONTAL):
+			OS.screen_orientation = OS.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+		else:
+			OS.screen_orientation = OS.SCREEN_ORIENTATION_SENSOR_PORTRAIT
+		
+		applyUIScale()
+		
+		# Only do this on desktop
+#		var screenSize:Vector2 = OS.get_screen_size()-Vector2(0.0, 100.0)
+#		var newSize:Vector2 = Vector2(OS.window_size.y, OS.window_size.x)
+#		#print(newSize)
+#		if(newSize.x > screenSize.x):
+#			var howMuchScale:float = newSize.x / screenSize.x
+#			newSize.x /= howMuchScale
+#			newSize.y /= howMuchScale
+#		if(newSize.y > screenSize.y):
+#			var howMuchScale:float = newSize.y / screenSize.y
+#			newSize.x /= howMuchScale
+#			newSize.y /= howMuchScale
+#		#print(newSize)
+#
+#		OS.window_size = newSize
+		
+		#if(get_tree().root && get_tree().root.has_method("onScreenOrientationChange")):
+		#	get_tree().root.onScreenOrientationChange(oldOr, newOrientation)
+		emit_signal("onScreenOrientationChange")
+
+func isUILayoutRightHanded() -> bool:
+	return uiLayoutRightHanded
+
+func toggleUILayoutRightHanded():
+	uiLayoutRightHanded = !uiLayoutRightHanded
+	saveToFile()
+
+func shouldSoloDollLookRight() -> bool:
+	if(getUILayoutFinal() == LAYOUT_TOUCH_HORIZONTAL && uiLayoutRightHanded && GM.ui):
+		return true
+	return false
 
 func saveData():
 	var data = {
@@ -1122,6 +1323,8 @@ func saveData():
 		"smartLockRarity": smartLockRarity,
 		"overstimulationEnabled": overstimulationEnabled,
 		"savingInDungeons": savingInDungeons,
+		"uiLayout": uiLayout,
+		"uiLayoutRightHanded": uiLayoutRightHanded,
 		"shouldScaleUI": shouldScaleUI,
 		"uiScaleMultiplier": uiScaleMultiplier,
 		"uiButtonSize": uiButtonSize,
@@ -1137,6 +1340,7 @@ func saveData():
 		"showSceneCreator": showSceneCreator,
 		"showMapArt": showMapArt,
 		"rollbackEnabled": rollbackEnabled,
+		"rollbackThread": rollbackThread,
 		"rollbackSlots": rollbackSlots,
 		"rollbackSaveEvery": rollbackSaveEvery,
 		"showModdedLauncher": showModdedLauncher,
@@ -1182,6 +1386,8 @@ func loadData(data):
 	smartLockRarity = loadVar(data, "smartLockRarity", "normal")
 	overstimulationEnabled = loadVar(data, "overstimulationEnabled", true)
 	savingInDungeons = loadVar(data, "savingInDungeons", false)
+	uiLayout = loadVar(data, "uiLayout", LAYOUT_AUTO)
+	uiLayoutRightHanded = loadVar(data, "uiLayoutRightHanded", true)
 	shouldScaleUI = loadVar(data, "shouldScaleUI", true)
 	uiScaleMultiplier = loadVar(data, "uiScaleMultiplier", 1.0)
 	uiButtonSize = loadVar(data, "uiButtonSize", 0)
@@ -1197,6 +1403,7 @@ func loadData(data):
 	showSceneCreator = loadVar(data, "showSceneCreator", true)
 	showMapArt = loadVar(data, "showMapArt", false)
 	rollbackEnabled = loadVar(data, "rollbackEnabled", false)
+	rollbackThread = loadVar(data, "rollbackThread", true)
 	rollbackSlots = loadVar(data, "rollbackSlots", 5)
 	rollbackSaveEvery = loadVar(data, "rollbackSaveEvery", 1)
 	showModdedLauncher = loadVar(data, "showModdedLauncher", false)

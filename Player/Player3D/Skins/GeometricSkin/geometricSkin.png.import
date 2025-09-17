@@ -2,20 +2,24 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/geometricSkin.png-c26471f4ac5d850697997766345be840.stex"
+path.s3tc="res://.import/geometricSkin.png-c26471f4ac5d850697997766345be840.s3tc.stex"
+path.etc2="res://.import/geometricSkin.png-c26471f4ac5d850697997766345be840.etc2.stex"
+path.etc="res://.import/geometricSkin.png-c26471f4ac5d850697997766345be840.etc.stex"
+path.pvrtc="res://.import/geometricSkin.png-c26471f4ac5d850697997766345be840.pvrtc.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2", "etc", "pvrtc" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Player/Player3D/Skins/GeometricSkin/geometricSkin.png"
-dest_files=[ "res://.import/geometricSkin.png-c26471f4ac5d850697997766345be840.stex" ]
+dest_files=[ "res://.import/geometricSkin.png-c26471f4ac5d850697997766345be840.s3tc.stex", "res://.import/geometricSkin.png-c26471f4ac5d850697997766345be840.etc2.stex", "res://.import/geometricSkin.png-c26471f4ac5d850697997766345be840.etc.stex", "res://.import/geometricSkin.png-c26471f4ac5d850697997766345be840.pvrtc.stex" ]
 
 [params]
 
-compress/mode=0
-compress/lossy_quality=0.7
+compress/mode=2
+compress/lossy_quality=0.8
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0

@@ -2,8 +2,8 @@ extends Node
 
 var game_version_major = 0
 var game_version_minor = 1
-var game_version_revision = 10
-var game_version_suffix = "fix1"
+var game_version_revision = 11
+var game_version_suffix = ""
 
 var contributorsCredits:Dictionary = {
 	"Max-Maxou": [
@@ -150,6 +150,7 @@ var currentUniqueID = 0
 var currentChildUniqueID = 0
 var currentNPCUniqueID = 0
 var currentTFID := 0
+var currentSave:int = 1
 
 var pathToIDCache:Dictionary = {}
 var IDToPathCache:Dictionary = {}

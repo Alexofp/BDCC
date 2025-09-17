@@ -17,6 +17,7 @@ func saveData():
 		"currentChildUniqueID_DONT_TOUCH": GlobalRegistry.currentChildUniqueID,
 		"currentNPCUniqueID_DONT_TOUCH": GlobalRegistry.currentNPCUniqueID,
 		"currentTFID_DONT_TOUCH": GlobalRegistry.currentTFID,
+		"currentSave": GlobalRegistry.currentSave,
 	}
 	
 	data["player"] = GM.main.getOriginalPC().saveData()
@@ -44,6 +45,7 @@ func loadData(data: Dictionary):
 	GlobalRegistry.currentChildUniqueID = SAVE.loadVar(data, "currentChildUniqueID_DONT_TOUCH", 0)
 	GlobalRegistry.currentNPCUniqueID = SAVE.loadVar(data, "currentNPCUniqueID_DONT_TOUCH", 0)
 	GlobalRegistry.currentTFID = SAVE.loadVar(data, "currentTFID_DONT_TOUCH", 0)
+	GlobalRegistry.currentSave = SAVE.loadVar(data, "currentSave", 1)
 	
 	GM.main.getOriginalPC().loadData(data["player"])
 	
@@ -138,6 +140,7 @@ func loadGameRelative(_name):
 	loadGame("user://saves/"+_name+".save")
 	
 func saveGameRelative(_name):
+	GlobalRegistry.currentSave += 1
 	saveGame("user://saves/"+_name+".save")
 	
 func loadGame(_path):
@@ -205,6 +208,12 @@ func loadVar(data, key, nullvalue = null):
 		Log.printerr("Warning: loaded value is null while the default value isn't. Is that correct? "+Util.getStackFunction())
 		
 	return data[key]
+
+func canQuickLoad() -> bool:
+	var d := File.new()
+	if(!d.file_exists("user://saves/quicksave.save")):
+		return false
+	return true
 
 func recursiveQuickSaveMakeBackup(currentI = 1):
 	var quickSaveName = "quicksave"
@@ -296,9 +305,9 @@ func customSavePathComparison(a, b):
 func getSavesSortedByDate():
 	var savesPaths = getAllSavePaths()
 	var sortedSavePaths = []
-	var file = File.new()
+	#var file = File.new()
 	for path in savesPaths:
-		var fileModifTime = file.get_modified_time(path)
+		var fileModifTime = Util.getFileModifiedTime(path)#file.get_modified_time(path)
 		sortedSavePaths.append([path, fileModifTime])
 	sortedSavePaths.sort_custom(self, "customSavePathComparison")
 	

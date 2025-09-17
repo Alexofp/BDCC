@@ -371,7 +371,7 @@ func _run():
 
 		saynn("Artica obediently complied, her breathing is deep and slow as she is focussing entirely on your hypnotic tone.")
 
-		saynn("[say=pc]What matters is that you're here, in my embrace.. Let your mind[/say]")
+		saynn("[say=pc]What matters is that you're here, in my embrace.. Let your mind.[/say]")
 
 		saynn("Sneakily, your fingers retrieve a metal chastity cage.. and start unlocking it. The thing consists of two parts, a cockring-like one and the cage itself that slots into the first one. Carefully, you start pulling the cockring through Artica's hard drippy shaft.")
 

@@ -3,7 +3,7 @@
 [ext_resource path="res://UI/LabeledProgressBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/SkillsUI/SkillUITab.gd" type="Script" id=2]
 [ext_resource path="res://UI/SkillsUI/PerksTierContainer.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=4]
+[ext_resource path="res://Game/UI/Util/SmartScrollContainer.gd" type="Script" id=4]
 
 [sub_resource type="Gradient" id=1]
 resource_local_to_scene = true
@@ -21,7 +21,7 @@ script = ExtResource( 4 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 margin_right = 1280.0
-margin_bottom = 212.0
+margin_bottom = 230.0
 size_flags_horizontal = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/VBoxContainer"]
@@ -78,7 +78,7 @@ text = "Skill perks:"
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 margin_top = 102.0
 margin_right = 1280.0
-margin_bottom = 212.0
+margin_bottom = 230.0
 
 [node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
 margin_right = 638.0
@@ -103,7 +103,7 @@ margin_bottom = 96.0
 [node name="PanelContainer2" type="PanelContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer"]
 margin_left = 642.0
 margin_right = 1280.0
-margin_bottom = 110.0
+margin_bottom = 128.0
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -112,7 +112,7 @@ size_flags_vertical = 3
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 631.0
-margin_bottom = 103.0
+margin_bottom = 121.0
 
 [node name="PerkNameLabel" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer"]
 margin_right = 624.0
@@ -155,18 +155,19 @@ fit_content_height = true
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer"]
 margin_top = 74.0
 margin_right = 624.0
-margin_bottom = 94.0
+margin_bottom = 114.0
+rect_min_size = Vector2( 0, 40 )
 
 [node name="UnlockPerkButton" type="Button" parent="ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer"]
 margin_right = 310.0
-margin_bottom = 20.0
+margin_bottom = 40.0
 size_flags_horizontal = 3
 text = "Learn"
 
 [node name="TogglePerkButton" type="Button" parent="ScrollContainer/VBoxContainer/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer"]
 margin_left = 314.0
 margin_right = 624.0
-margin_bottom = 20.0
+margin_bottom = 40.0
 size_flags_horizontal = 3
 text = "Toggle perk on/off"
 

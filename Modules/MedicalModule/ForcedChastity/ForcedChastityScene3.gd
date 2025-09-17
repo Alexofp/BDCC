@@ -97,7 +97,7 @@ func _run():
 
 		saynn("It’s like your prostate has had enough and is becoming less sensitive. The pleasurable feeling goes away, replaced with discomfort of something big stretching your ass. Strong waves wash over your body, causing it to desperately try to push the dildo out. You squirm more but not because you like it, you just can’t help but not to.")
 
-		saynn("[say=pc]H-hgh.. That’s enough.. I don’t like it[/say]")
+		saynn("[say=pc]H-hgh.. That’s enough.. I don’t like it.[/say]")
 
 		saynn("Eliza squints at you and keeps her paw on the mug. She gets up and walks up to you.")
 

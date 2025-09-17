@@ -2,7 +2,7 @@
 
 [ext_resource path="res://UI/LaunchScreen/LaunchScreen.gd" type="Script" id=1]
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=2]
-[ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=3]
+[ext_resource path="res://Game/UI/Util/SmartScrollContainer.gd" type="Script" id=3]
 [ext_resource path="res://UI/LaunchScreen/LaunchModEntry.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=5]
 [ext_resource path="res://UI/ModBrowser/ModBrowser.tscn" type="PackedScene" id=6]

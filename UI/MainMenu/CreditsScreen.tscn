@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://UI/MainMenu/CreditsScreen.gd" type="Script" id=2]
 [ext_resource path="res://Fonts/Titillium-Bold.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://Game/UI/Util/SmartScrollContainer.gd" type="Script" id=4]
+[ext_resource path="res://Game/UI/Buttons/BetterButton.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -28,6 +30,7 @@ margin_right = 1280.0
 margin_bottom = 616.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource( 4 )
 
 [node name="ScrollVBox" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
 margin_right = 1280.0
@@ -140,23 +143,28 @@ margin_bottom = 720.0
 rect_min_size = Vector2( 0, 100 )
 columns = 5
 
-[node name="CloseButton" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="CloseButton" parent="VBoxContainer/GridContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 256.0
 margin_bottom = 26.0
-size_flags_horizontal = 3
 text = "Close"
+myTooltipDesc = "Close this screen"
+myShortcutKey = "1"
 
-[node name="SupportRahiButton" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="SupportRahiButton" parent="VBoxContainer/GridContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 260.0
 margin_right = 515.0
 margin_bottom = 26.0
-hint_tooltip = "In case you like my work and wanna support me <3"
-size_flags_horizontal = 3
 text = "Support Rahi"
+myTooltipDesc = "Open Rahi's subscribestar"
+myShortcutKey = "2"
 
 [connection signal="meta_clicked" from="VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer/RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]
 [connection signal="meta_clicked" from="VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer/ContributorsLabel" to="." method="_on_RichTextLabel_meta_clicked"]
 [connection signal="meta_clicked" from="VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer/RichTextLabel2" to="." method="_on_RichTextLabel_meta_clicked"]
 [connection signal="meta_clicked" from="VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer/DonationsLabel" to="." method="_on_RichTextLabel_meta_clicked"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/SupportRahiButton" to="." method="_on_SupportRahiButton_pressed"]
+[connection signal="pressedActually" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
+[connection signal="pressedActually" from="VBoxContainer/GridContainer/SupportRahiButton" to="." method="_on_SupportRahiButton_pressed"]

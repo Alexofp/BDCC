@@ -6,56 +6,61 @@ signal on_rollback_button
 signal onDevComButton
 var buttons: Array = []
 var buttonsCountPerPage: int = 15
-var optionButtonScene: PackedScene = preload("res://Game/SceneOptionButton.tscn")
-onready var optionButtonsContainer = $HBoxContainer/VBoxContainer2/HBoxContainer/GridContainer
+#var optionButtonScene: PackedScene = preload("res://Game/UI/Buttons/SceneOptionButton.tscn")
+var optionButtonScene: PackedScene = preload("res://Game/UI/Buttons/BetterButton.tscn")
+onready var optionButtonsContainer = $"%ButtonGridContainer"
 var currentPage:int = 0
 var options: Dictionary = {}
 var extraOptions: Dictionary = {}
-var optionsCurrentID = 0
+var optionsCurrentID:int = 0
 var buttonsNeedUpdating:bool = false
 var extraButtonsNeedUpdating:bool = false
-onready var nextPageButton = $HBoxContainer/VBoxContainer2/HBoxContainer/NextPageButton
-onready var prevPageButton = $HBoxContainer/VBoxContainer2/HBoxContainer/PrevPageButton
-onready var optionTooltip = $CanvasLayer/TooltipDisplay
-onready var textOutput = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer/RichTextLabel
-onready var mapAndTimePanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/MapAndTimePanel
-onready var playerPanel = $HBoxContainer/Panel/MarginContainer/PlayerPanel
-onready var scrollPanel = $HBoxContainer/VBoxContainer2/ScrollContainer
-onready var mainGameScreen = $HBoxContainer/VBoxContainer2
-onready var ingameMenuScreen = $HBoxContainer/InGameMenu
-onready var skillsScreen = $HBoxContainer/SkillsUI
-onready var skillsButton = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3/SkillsButton
-onready var debugScreen = $HBoxContainer/DebugPanel
-onready var debugPanelButton = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3/DebugMenu
-onready var rollbackButton = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer/RollbackButton
+onready var nextPageButton = $"%NextPageButton"
+onready var prevPageButton = $"%PrevPageButton"
+onready var textOutput = $"%TextOutput"
+onready var mapAndTimePanel = $"%MapAndTimePanel"
+onready var playerPanel = $"%PlayerPanel"
+onready var scrollPanel = $"%MainScrollContainer"
+onready var mainGameScreen = $"%MainScreenBoxContainer"
+onready var ingameMenuScreen = $"%InGameMenu"
+onready var skillsScreen = $"%SkillsUI"
+onready var skillsButton = $"%SkillsButton"
+onready var save_button = $"%SaveButton"
+onready var load_button = $"%LoadButton"
+onready var debugScreen = $"%DebugPanel"
+onready var debugPanelButton = $"%DebugMenuButton"
+onready var rollbackButton = $"%RollbackButton"
 var uiTextboxScene = preload("res://UI/UITextbox.tscn")
 var uiTextboxBigScene = preload("res://UI/UITextboxBig.tscn")
-onready var textcontainer = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer
-onready var smartCharacterPanel = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/SmartCharacterPanel
-onready var devCommentaryPanel = $HBoxContainer/DevCommentary
-onready var sceneArtWorkRect = $HBoxContainer/VBoxContainer2/ScrollContainer/VBoxContainer/SceneArtWorkRect
-onready var fullArtWorkRect = $FullArtworkRect
-onready var uniquePanelSpot = $HBoxContainer/VBoxContainer2/UniquePanelSpot
+onready var textcontainer = $"%TextAreaContainer"
+onready var smartCharacterPanel = $"%SmartCharacterPanel"
+onready var devCommentaryPanel = $"%DevCommentary"
+onready var sceneArtWorkRect = $"%SceneArtWorkRect"
+onready var fullArtWorkRect = $"%FullArtworkRect"
+onready var uniquePanelSpot = $"%UniquePanelSpot"
 onready var extra_buttons_grid = $"%ExtraButtonsGrid"
 var textboxes: Dictionary = {}
 var gameParser: GameParser
 var sayParser: SayParser
-onready var hornyMessage = $MessageSystem
-var isInBigAnswersMode = false
+var isInBigAnswersMode:bool = false
+
+onready var translate_box = $"%TranslateBox"
 
 func _exit_tree():
 	GM.ui = null
+	OPTIONS.setSupportsVertical(true)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	GM.ui = self
+	#OPTIONS.setSupportsVertical(false)
 	
 	if(!OPTIONS.isDebugPanelEnabled()):
 		debugPanelButton.visible = false
 		debugPanelButton.disabled = true
 	
 	if(!AutoTranslation.shouldTranslate()):
-		$HBoxContainer/VBoxContainer2/Panel/TranslateBox.visible = false
+		translate_box.visible = false
 	
 	manualTranslateButton.visible = false
 	
@@ -78,6 +83,8 @@ func _ready():
 	var _i = 0
 	for n in buttonsCountPerPage:
 		var newbutton = optionButtonScene.instance()
+		newbutton.allowDoubleTabSetting = true
+		newbutton.instantTooltip = true
 		buttons.append(newbutton)
 		optionButtonsContainer.add_child(newbutton)
 		
@@ -87,15 +94,15 @@ func _ready():
 		
 	if(!OPTIONS.isRollbackEnabled()):
 		rollbackButton.visible = false
-		
+	
+	load_button.disabled = true
 	updateButtons()
 	#setBigAnswersMode(true)
 	
 	if(OS.has_touchscreen_ui_hint()):
 		textOutput.selection_enabled = false
+	setIsRightHandedLayout(OPTIONS.isUILayoutRightHanded())
 	
-	hornyMessage.visible = true
-		
 func say(text: String):
 	#textOutput.append_bbcode(gameParser.executeString(sayParser.processString(text)))
 	textOutput.bbcode_text += gameParser.executeString(sayParser.processString(text))
@@ -121,7 +128,7 @@ func clearButtons():
 	currentPage = 0
 	updateButtons()
 	clearExtraButtons()
-	_on_option_button_tooltip_end()
+	#_on_option_button_tooltip_end()
 		
 func addButtonAt(place, text: String, tooltip: String = "", method: String = "", args = []):
 	options[place] = [true, text, tooltip, method, args]
@@ -190,12 +197,14 @@ func updateExtraButtons():
 		
 		var theOptionEntry:Array = extraOptions[_indx]
 		var newButton = optionButtonScene.instance()
-		newButton.text = theOptionEntry[1]
 		extra_buttons_grid.add_child(newButton)
+		newButton.allowDoubleTabSetting = true
+		newButton.instantTooltip = true
+		newButton.setButtonText(theOptionEntry[1])
 		newButton.setShortcutPhysicalScancode(KEY_1+_indx, true)
 		var _some = newButton.connect("pressedActually", self, "_on_extra_option_button", [_indx])
-		var _some2 = newButton.connect("mouse_entered", self, "_on_extra_option_button_tooltip", [_indx])
-		var _some3 = newButton.connect("mouse_exited", self, "_on_option_button_tooltip_end")
+		var _some2 = newButton.connect("mouse_entered", self, "_on_extra_option_button_tooltip", [_indx, newButton])
+		var _some3 = newButton.connect("mouse_exited", self, "_on_option_button_tooltip_end", [newButton])
 
 func setBigAnswersMode(newmode):
 	if(!isInBigAnswersMode && newmode):
@@ -220,10 +229,6 @@ func setBigAnswersMode(newmode):
 			button.visible = true
 	isInBigAnswersMode = newmode
 
-onready var save_button = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer2/SaveButton
-onready var skills_button = $HBoxContainer/Panel2/MarginContainer/VBoxContainer/HBoxContainer3/SkillsButton
-
-
 func updateButtons():
 	checkPageButtons()
 	
@@ -238,14 +243,17 @@ func updateButtons():
 			save_button.disabled = true
 		
 		if(GM.main.isInDungeon()):
-			skills_button.disabled = true
+			skillsButton.disabled = true
 		else:
-			skills_button.disabled = false
+			skillsButton.disabled = false
+		
+		if(load_button.disabled && SAVE.canQuickLoad()):
+			load_button.disabled = false
 		
 	for i in buttonsCountPerPage:
 		var button:Button = buttons[i]
-		button.disabled = true
-		button.text = ""
+		button.setIsDisabled(true)
+		button.setButtonText("")
 		if(button.is_connected("pressedActually", self, "_on_option_button")):
 			button.disconnect("pressedActually", self, "_on_option_button")
 		if(button.is_connected("mouse_entered", self, "_on_option_button_tooltip")):
@@ -263,17 +271,17 @@ func updateButtons():
 			
 		var option = options[index]
 		var button:Button = buttons[i]
-		button.text = option[1]
-		button.disabled = !option[0]
+		button.setButtonText(option[1])
+		button.setIsDisabled(!option[0])
 		if(AutoTranslation.shouldTranslateButtons && !showOriginalCheckbox.pressed):
 			if(!button.disabled && option.size() > 5):
-				button.text = option[5]
+				button.setButtonText(option[5])
 			if(button.disabled && option.size() > 3):
-				button.text = option[3]
+				button.setButtonText(option[3])
 		#button.set_meta("game_option", index)
 		var _some = button.connect("pressedActually", self, "_on_option_button", [index])
-		var _some2 = button.connect("mouse_entered", self, "_on_option_button_tooltip", [index])
-		var _some3 = button.connect("mouse_exited", self, "_on_option_button_tooltip_end")
+		var _some2 = button.connect("mouse_entered", self, "_on_option_button_tooltip", [index, button])
+		var _some3 = button.connect("mouse_exited", self, "_on_option_button_tooltip_end", [button])
 
 
 func _on_extra_option_button(index):
@@ -286,30 +294,28 @@ func _on_option_button(index):
 	
 	emit_signal("on_option_button", option[3], option[4])
 	
-func _on_extra_option_button_tooltip(index):
+func _on_extra_option_button_tooltip(index, _button):
 	var option = extraOptions[index]
 	if(option[2] == ""):
 		return
-	optionTooltip.set_is_active(true)
-	optionTooltip.set_text(option[1], option[2])
+	GlobalTooltip.showTooltip(_button, option[1], option[2])
 	
-func _on_option_button_tooltip(index):
+func _on_option_button_tooltip(index, _button):
 	var option = options[index]
 	if(option[2] == ""):
 		return
-	optionTooltip.set_is_active(true)
 	if(!AutoTranslation.shouldTranslateButtons || showOriginalCheckbox.pressed):
-		optionTooltip.set_text(option[1], option[2])
+		GlobalTooltip.showTooltip(_button, option[1], option[2])
 	else:
 		if(option[0] && option.size() > 6):
-			optionTooltip.set_text(option[5], option[6])
+			GlobalTooltip.showTooltip(_button, option[5], option[6])
 		elif(!option[0]&& option.size() > 4):
-			optionTooltip.set_text(option[3], option[4])
+			GlobalTooltip.showTooltip(_button, option[3], option[4])
 		else:
-			optionTooltip.set_text(option[1], option[2])
+			GlobalTooltip.showTooltip(_button, option[1], option[2])
 
-func _on_option_button_tooltip_end():
-	optionTooltip.set_is_active(false)
+func _on_option_button_tooltip_end(_button):
+	GlobalTooltip.hideTooltip(_button)
 
 func checkPageButtons():
 	if(currentPage > 0):
@@ -420,6 +426,8 @@ func loadingSavefileFinished():
 
 func _on_SaveButton_pressed():
 	SAVE.makeQuickSave()
+	if(load_button.disabled && SAVE.canQuickLoad()):
+		load_button.disabled = false
 
 func _on_LoadButton_pressed():
 	SAVE.loadQuickSave()
@@ -530,9 +538,9 @@ func _on_RollbackButton_pressed():
 var savedOriginalText = ""
 var savedTranslatedText = ""
 var currentTranslationTask = 0
-onready var translateStatusLabel = $HBoxContainer/VBoxContainer2/Panel/TranslateBox/TranslateStatusLabel
-onready var showOriginalCheckbox = $HBoxContainer/VBoxContainer2/Panel/TranslateBox/ShowOriginalCheckbox
-onready var manualTranslateButton = $HBoxContainer/VBoxContainer2/Panel/TranslateBox/ManualTranslateButton
+onready var translateStatusLabel = $"%TranslateStatusLabel"
+onready var showOriginalCheckbox = $"%ShowOriginalCheckbox"
+onready var manualTranslateButton = $"%ManualTranslateButton"
 func translateText(manualButton = false):
 	if(AutoTranslation.shouldTranslate()):
 		showOriginalCheckbox.disabled = true
@@ -610,7 +618,9 @@ func _on_MapAndTimePanel_onDevComButton():
 	
 	
 
-onready var devComLabel = $HBoxContainer/DevCommentary/ScrollContainer/DevComLabel
+onready var devComLabel = $"%DevComLabel"
+onready var full_art_label = $"%FullArtLabel"
+
 func showDevCommentary(thetext):
 	hideAllScreens()
 	devCommentaryPanel.visible = true
@@ -626,16 +636,16 @@ func clearSceneArtwork():
 	sceneArtWorkRect.textures = null
 	sceneArtWorkRect.visible = false
 	fullArtWorkRect.textures = null
-	$FullArtworkRect/Label.text = ""
+	full_art_label.text = ""
 
 func setSceneArtWork(imageData):
 	if(imageData == null || !(imageData is Dictionary) || !OPTIONS.shouldShowSceneArt()):
 		pass
 	else:
 		if(imageData.has("artist") && imageData["artist"] != ""):
-			$FullArtworkRect/Label.text = "Art by "+str(imageData["artist"])
+			full_art_label.text = "Art by "+str(imageData["artist"])
 		else:
-			$FullArtworkRect/Label.text = ""
+			full_art_label.text = ""
 		fullArtWorkRect.textures = imageData["imagePath"]
 		sceneArtWorkRect.textures = imageData["imagePath"]
 		if(imageData.has("imageHeight")):
@@ -651,9 +661,6 @@ func _on_OpenFullArtWorkButton_pressed():
 func _on_CloseFullArtWork_pressed():
 	fullArtWorkRect.visible = false
 
-func showHornyMessage(theMessage: String):
-	hornyMessage.showMessageOnScreen(theMessage)
-
 func getCurrentPage() -> int:
 	return currentPage
 
@@ -667,3 +674,38 @@ func setCurrentPage(newCurrentPage:int):
 	currentPage = newCurrentPage
 	
 	updateButtons()
+
+func _on_SwitchButtonsSideButton_pressed():
+	OPTIONS.toggleUILayoutRightHanded()
+	setIsRightHandedLayout(OPTIONS.isUILayoutRightHanded())
+
+func setIsRightHandedLayout(_isRighthanded:bool):
+	if(OPTIONS.getUILayoutFinal() == OPTIONS.LAYOUT_TOUCH_VERTICAL):
+		var side_menu_buttons = $"%SideMenuButtons"
+		var thePar:Control = side_menu_buttons.get_parent()
+		if(!_isRighthanded):
+			thePar.move_child(side_menu_buttons, thePar.get_child_count()-1)
+		else:
+			thePar.move_child(side_menu_buttons, 0)
+	if(OPTIONS.getUILayoutFinal() == OPTIONS.LAYOUT_TOUCH_HORIZONTAL):
+		var rightPanel = $"%RightPanel"
+		var rightPanelPar:Control = rightPanel.get_parent()
+		
+		var mapPar:Control = mapAndTimePanel.get_parent()
+		
+		var menuButtonsContainer = $"%MenuButtonsContainer"
+		var thePar:Control = menuButtonsContainer.get_parent()
+		if(_isRighthanded):
+			thePar.move_child(menuButtonsContainer, thePar.get_child_count()-1)
+			rightPanelPar.move_child(rightPanel, 0)
+			mapPar.move_child(mapAndTimePanel, 0)
+			mapPar.move_child(smartCharacterPanel, 0)
+		else:
+			thePar.move_child(menuButtonsContainer, 0)
+			rightPanelPar.move_child(rightPanel, rightPanelPar.get_child_count()-1)
+			mapPar.move_child(mapAndTimePanel, mapPar.get_child_count()-1)
+			mapPar.move_child(smartCharacterPanel, mapPar.get_child_count()-1)
+
+func _on_SwitchLayoutHorizontalButton_pressed():
+	OPTIONS.toggleUILayoutRightHanded()
+	setIsRightHandedLayout(OPTIONS.isUILayoutRightHanded())

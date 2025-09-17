@@ -7,7 +7,7 @@ func getName():
 	return "Splotched"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/SkinsByAuthor/AverageAce/SplotchedSkin/SplotchedSkin.png")
+	return load("res://Player/Player3D/SkinsByAuthor/AverageAce/SplotchedSkin/SplotchedSkin.png")
 
 func getFittingSkinTypes():
 	return {

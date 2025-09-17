@@ -7,13 +7,13 @@ var showedModDialog = false
 
 func _ready():
 	if(OS.get_name() in ["Android", "iOS", "HTML5"]):
-		$VBoxContainer/GridContainer/ModsFolderButton.disabled = true
+		$VBoxContainer/GridContainer/ModsFolderButton.setIsDisabled(true)
 	else:
-		$VBoxContainer/GridContainer/RemoveModsButton.disabled = true
+		$VBoxContainer/GridContainer/RemoveModsButton.setIsDisabled(true)
 
 	if(OS.get_name() == "Android"):
-		$VBoxContainer/GridContainer/ModsFolderButton.disabled = true
-		$VBoxContainer/GridContainer/RemoveModsButton.disabled = true
+		$VBoxContainer/GridContainer/ModsFolderButton.setIsDisabled(true)
+		$VBoxContainer/GridContainer/RemoveModsButton.setIsDisabled(true)
 
 	if OS.get_name() == "HTML5" and OS.has_feature("JavaScript"):
 		_define_js()
@@ -144,19 +144,19 @@ func _on_AddModButton_pressed():
 			$ModAcceptDialog.visible = true
 	else:
 		if(OS.get_name() == "Android"):
-			var has_permissions: bool = false
-						
-			while not has_permissions:
-				#var permissions = OS.get_granted_permissions()
-				var permissions: Array = OS.get_granted_permissions() #for Godot 3 branch
-				
-				if not permissions.has("android.permission.READ_EXTERNAL_STORAGE") \
-					or not permissions.has("android.permission.WRITE_EXTERNAL_STORAGE"):
-					var _ok = OS.request_permissions()
-					#await get_tree().create_timer(1).timeout
-					yield(get_tree().create_timer(1), "timeout") #for Godot 3 branch
-				else:
-					has_permissions = true
+#			var has_permissions: bool = false
+#
+#			while not has_permissions:
+#				#var permissions = OS.get_granted_permissions()
+#				var permissions: Array = OS.get_granted_permissions() #for Godot 3 branch
+#
+#				if not permissions.has("android.permission.READ_EXTERNAL_STORAGE") \
+#					or not permissions.has("android.permission.WRITE_EXTERNAL_STORAGE"):
+#					var _ok = OS.request_permissions()
+#					#await get_tree().create_timer(1).timeout
+#					yield(get_tree().create_timer(1), "timeout") #for Godot 3 branch
+#				else:
+#					has_permissions = true
 					
 			var d = Directory.new()
 			var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)

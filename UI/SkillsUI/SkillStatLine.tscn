@@ -5,6 +5,7 @@
 [node name="SkillStatLine" type="HBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 50 )
 script = ExtResource( 1 )
 
 [node name="Label" type="Label" parent="."]
@@ -15,20 +16,23 @@ text = "Strength: 10"
 
 [node name="PlusButton" type="Button" parent="."]
 margin_left = 81.0
-margin_right = 109.0
+margin_right = 131.0
 margin_bottom = 720.0
+rect_min_size = Vector2( 50, 0 )
 text = "+1"
 
 [node name="PlusFiveButton" type="Button" parent="."]
-margin_left = 113.0
-margin_right = 141.0
+margin_left = 135.0
+margin_right = 185.0
 margin_bottom = 720.0
+rect_min_size = Vector2( 50, 0 )
 text = "+5"
 
 [node name="PlusTenButton" type="Button" parent="."]
-margin_left = 145.0
-margin_right = 181.0
+margin_left = 189.0
+margin_right = 239.0
 margin_bottom = 720.0
+rect_min_size = Vector2( 50, 0 )
 text = "+10"
 
 [connection signal="mouse_entered" from="." to="." method="_on_SkillStatLine_mouse_entered"]

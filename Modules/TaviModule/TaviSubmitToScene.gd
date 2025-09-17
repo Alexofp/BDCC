@@ -14,7 +14,7 @@ func _run():
 
 		saynn("You can hear her growling like she is about to lash out at you.")
 
-		saynn("[say=tavi]Breath the outside air[/say]")
+		saynn("[say=tavi]Breath the outside air.[/say]")
 
 		saynn("Seems like it won’t be that easy.")
 
@@ -69,7 +69,7 @@ func _run():
 
 		saynn("[say=pc]Yes, Miss..[/say]")
 
-		saynn("[say=tavi]it’s far from me forgiving you[/say]")
+		saynn("[say=tavi]it’s far from me forgiving you.[/say]")
 
 		saynn("You give Tavi a confused look. She smiles and suddenly pushes her leg into your chest, causing you to collapse back onto your back. Painful.")
 
@@ -81,7 +81,7 @@ func _run():
 
 		saynn("You shake your head and Tavi smiles. Then she raises one of her legs and puts it on your face, her wet with your saliva green toe pads rubbing against your cheeks. You let out a cute squeak but let her do it, your hands land on her ankle and hold to it. Tavi licks her lips.")
 
-		saynn("[say=tavi]That’s what I like to see, a submissive little cutie laying under my foot and enjoying {pc.himself}. Open your mouth for me[/say]")
+		saynn("[say=tavi]That’s what I like to see, a submissive little cutie laying under my foot and enjoying {pc.himself}. Open your mouth for me.[/say]")
 
 		saynn("You do as she orders you and she sneaks a few of her toes inside.")
 

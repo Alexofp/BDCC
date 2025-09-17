@@ -900,8 +900,8 @@ func doMilkCharacterCustom(theChar:BaseCharacter, bodypartSlot, howMuch:float = 
 	
 	return fluidsGot
 
-func processMilkCharacterCustom(theChar, bodypartSlot, addBounty:bool = true):
-	var fluidsGot:Dictionary = doMilkCharacterCustom(theChar, bodypartSlot, 1.0, true)
+func processMilkCharacterCustom(theChar, bodypartSlot, addBounty:bool = true, amount:float = 1.0):
+	var fluidsGot:Dictionary = doMilkCharacterCustom(theChar, bodypartSlot, amount, true)
 	var totalFluid:float = 0.0
 	for fluidType in fluidsGot:
 		totalFluid += fluidsGot[fluidType]

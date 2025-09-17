@@ -4,6 +4,7 @@ signal onInteractButtonPressed(item)
 signal onItemSelected(item)
 onready var itemNameLabel = $HBoxContainer/Control/Info/Label
 onready var itemTextureRect = $HBoxContainer/Control/Info/TextureRect
+onready var select_button = $HBoxContainer/Control/SelectButton
 
 var item: ItemBase
 var isSelected = false
@@ -139,12 +140,12 @@ func setSelected(isNewSelected):
 var showingTooltip = false
 func _on_SelectButton_mouse_entered():
 	showingTooltip = true
-	GlobalTooltip.showTooltip(item.getStackName(), item.getVisibleDescription(), false, true)
+	GlobalTooltip.showTooltip(select_button, item.getStackName(), item.getVisibleDescription(), false, true)
 
 func _on_SelectButton_mouse_exited():
 	if(showingTooltip):
 		showingTooltip = false
-		GlobalTooltip.hideTooltip()
+		GlobalTooltip.hideTooltip(select_button)
 
 func showUseButton(isShow):
 	$HBoxContainer/HBoxContainer.visible = isShow

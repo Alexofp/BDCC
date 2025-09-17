@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=1]
+[ext_resource path="res://Game/UI/Util/SmartScrollContainer.gd" type="Script" id=1]
 [ext_resource path="res://UI/DebugUI/SceneInfoPanel.gd" type="Script" id=2]
 
 [node name="SceneInfoPanel" type="Control"]

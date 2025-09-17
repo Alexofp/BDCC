@@ -7,7 +7,7 @@ func getName():
 	return "Spotted Gothic"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/SkinsByAuthor/AverageAce/SpottedGothicSkin/SpottedGothicSkin.png")
+	return load("res://Player/Player3D/SkinsByAuthor/AverageAce/SpottedGothicSkin/SpottedGothicSkin.png")
 
 func getFittingSkinTypes():
 	return {

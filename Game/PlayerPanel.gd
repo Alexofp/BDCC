@@ -6,7 +6,6 @@ onready var creditsLabel = $CreditsLabel
 #onready var camera = $ViewportContainer/Viewport/Camera2D
 onready var camera3d = $ViewportWrapper/Viewport/Camera
 onready var stage3d = $ViewportWrapper/Viewport/Stage3D
-onready var tooltip = $CanvasLayer/TooltipDisplay
 onready var viewport = $ViewportWrapper/Viewport
 #onready var viewport = $ViewportContainer/Viewport
 onready var staminaBar = $StaminaBar
@@ -92,10 +91,15 @@ func _gui_input(event: InputEvent):
 			previousPosition = event.position
 		else:
 			draggingCamera = false
-	elif draggingCamera and event is InputEventMouseMotion:
+	elif touch_points.size() <= 1 && draggingCamera && event is InputEventMouseMotion:
 		var delta = previousPosition - event.position
 		camera3d.translate(Vector3(delta.x * camera3d.size / 500.0, -delta.y * camera3d.size / 500.0, 0.0))
 		previousPosition = event.position
+
+	if event is InputEventScreenTouch:
+		_handle_touch(event)
+	elif event is InputEventScreenDrag:
+		_handle_drag(event)
 
 func _on_ViewportContainer_mouse_exited():
 	mouseInsideViewport = false
@@ -111,3 +115,51 @@ func getStage3d() -> Stage3D:
 
 func _on_ViewportWrapper_gui_input(event):
 	_gui_input(event)
+
+
+
+
+var touch_points: Dictionary = {}
+
+func _handle_touch(event: InputEventScreenTouch):
+	if event.pressed:
+		touch_points[event.index] = event.position
+	else:
+		if(touch_points.has(event.index)):
+			touch_points.erase(event.index)
+
+func _handle_drag(event: InputEventScreenDrag):
+	#if touch_points.size() == 1:
+		#print(touch_points)
+		#offset -= event.relative / zoom.x
+		#touch_points[event.index] = event.position
+		#touch_points[1] = Vector2(0.0, 0.0)
+
+	if touch_points.size() == 2:
+		var pivot_point: Vector2
+		
+		# Find the index of the other finger
+		var pivot_index:int = -1
+		for fingerIndex in touch_points:
+			if(fingerIndex != event.index):
+				pivot_index = fingerIndex
+				break
+		if(pivot_index < 0):
+			return
+		pivot_point = touch_points[pivot_index]
+		
+		var old_point: Vector2 = touch_points[event.index]
+		var new_point: Vector2 = event.position
+
+		var old_vector: Vector2 = old_point - pivot_point
+		var new_vector: Vector2 = new_point - pivot_point
+		
+		var delta_scale = new_vector.length() / old_vector.length()
+		camera3d.size *= delta_scale
+		#world.zoomRaw(delta_scale)
+		touch_points[event.index] = new_point
+		
+		var drag_vector: Vector2 = event.relative
+		#offset -= drag_vector / 2 * zoom
+		var offsetTranslate :Vector2 = drag_vector# / 2.0 * camera3d.zoom
+		camera3d.translate(Vector3(offsetTranslate.x * camera3d.size / 500.0, -offsetTranslate.y * camera3d.size / 500.0, 0.0))

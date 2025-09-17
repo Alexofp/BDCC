@@ -128,7 +128,7 @@ func _run():
 
 		saynn("[say=rahi]You get punished.. meow..[/say]")
 
-		saynn("[say=pc]But.. uh. What about when talking with other inmates. You don’t have to use the number with them[/say]")
+		saynn("[say=pc]But.. uh. What about when talking with other inmates. You don’t have to use the number with them.[/say]")
 
 		saynn("[say=rahi]Well.. They usually call her kitty or kitten. She likes kitty. Meow..[/say]")
 

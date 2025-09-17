@@ -175,7 +175,7 @@ func _run():
 
 			saynn("She starts stroking your cock at a quick pace, making your breath deep and fast, little noises of pleasure escape from your mouth.")
 
-			saynn("[say=pc]I really like your touch!.. Ow.. Your touch, Mistress[/say]")
+			saynn("[say=pc]I really like your touch!.. Ow.. Your touch, Mistress.[/say]")
 
 			saynn("Your brain quickly reacted to the uncomfortable feeling that returned and fixed the mistake. Eliza grabs your chin with her free hand and looks you into the eyes.")
 

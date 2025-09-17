@@ -259,7 +259,7 @@ func _run():
 		
 	if(state == "occupationmenupool"):
 		var npclist = npclistScene.instance()
-		GM.ui.addCustomControl("npclist", npclist)
+		GM.ui.addFullScreenCustomControl("npclist", npclist)
 		var _ok = npclist.connect("onMeetNpcButton", self, "doMeetNpc")
 		
 		var characterIDS = GM.main.getDynamicCharacterIDsFromPool(pickedPoolToShow)

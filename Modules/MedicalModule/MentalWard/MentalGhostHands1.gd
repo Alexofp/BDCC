@@ -109,7 +109,7 @@ func _run():
 
 		saynn("You hear Eliza’s chuckle but you still can’t see her. As far as you’re concerned, you’re alone in this room.")
 
-		saynn("[say=eliza]Ghosts you say? Very interesting~. Let me conduct an experiment[/say]")
+		saynn("[say=eliza]Ghosts you say? Very interesting~. Let me conduct an experiment.[/say]")
 
 		addButton("Continue", "Spooky", "continue")
 

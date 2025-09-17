@@ -32,7 +32,7 @@ func _run():
 		addButton("No", "On second thought..", "no")
 
 	if(state == "no"):
-		saynn("[say=pc]It seems kinda dangerous. I think I will pass[/say]")
+		saynn("[say=pc]It seems kinda dangerous. I think I will pass.[/say]")
 
 		saynn("Eliza shrugs and quickly destroys the form.")
 

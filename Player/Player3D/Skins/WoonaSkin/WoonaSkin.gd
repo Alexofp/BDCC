@@ -7,7 +7,7 @@ func getName():
 	return "Anger"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/Skins/WoonaSkin/woonaSkin.png")
+	return load("res://Player/Player3D/Skins/WoonaSkin/woonaSkin.png")
 
 func getFittingSkinTypes():
 	return {

@@ -7,7 +7,7 @@ func getName():
 	return "Geometric"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/Skins/GeometricSkin/geometricSkin.png")
+	return load("res://Player/Player3D/Skins/GeometricSkin/geometricSkin.png")
 
 func getFittingSkinTypes():
 	return {

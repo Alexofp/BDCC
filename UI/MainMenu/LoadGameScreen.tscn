@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://UI/MainMenu/SaveGameElement.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/MainMenu/LoadGameScreen.gd" type="Script" id=3]
+[ext_resource path="res://Game/UI/Buttons/BetterButton.tscn" type="PackedScene" id=4]
 
 [node name="LoadGameScreen" type="Control"]
 anchor_right = 1.0
@@ -72,32 +73,40 @@ margin_bottom = 720.0
 rect_min_size = Vector2( 0, 100 )
 columns = 5
 
-[node name="CloseButton" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="CloseButton" parent="VBoxContainer/GridContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 254.0
 margin_bottom = 26.0
-size_flags_horizontal = 3
 text = "Close"
+myShortcutKey = "1"
 
-[node name="DeleteButton" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="DeleteButton" parent="VBoxContainer/GridContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 258.0
 margin_right = 512.0
 margin_bottom = 26.0
-size_flags_horizontal = 3
 text = "Delete Save"
+myShortcutKey = "2"
 
-[node name="ImportButton" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="ImportButton" parent="VBoxContainer/GridContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 516.0
 margin_right = 770.0
 margin_bottom = 26.0
-size_flags_horizontal = 3
 text = "Import Save"
+myShortcutKey = "3"
 
-[node name="SavesButton" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="SavesButton" parent="VBoxContainer/GridContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 774.0
 margin_right = 1027.0
 margin_bottom = 26.0
-size_flags_horizontal = 3
 text = "Saves folder"
+myShortcutKey = "4"
 
 [node name="ExportSaveDialog" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -141,9 +150,9 @@ window_title = "Save exported"
 dialog_text = "Your save was exported to:"
 
 [connection signal="visibility_changed" from="." to="." method="_on_LoadGameScreen_visibility_changed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/DeleteButton" to="." method="_on_DeleteButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/ImportButton" to="." method="_on_ImportButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/SavesButton" to="." method="_on_SavesButton_pressed"]
+[connection signal="pressedActually" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
+[connection signal="pressedActually" from="VBoxContainer/GridContainer/DeleteButton" to="." method="_on_DeleteButton_pressed"]
+[connection signal="pressedActually" from="VBoxContainer/GridContainer/ImportButton" to="." method="_on_ImportButton_pressed"]
+[connection signal="pressedActually" from="VBoxContainer/GridContainer/SavesButton" to="." method="_on_SavesButton_pressed"]
 [connection signal="file_selected" from="ExportSaveDialog" to="." method="_on_ExportSaveDialog_file_selected"]
 [connection signal="file_selected" from="ImportSaveDialog" to="." method="_on_ImportSaveDialog_file_selected"]

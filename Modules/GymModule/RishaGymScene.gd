@@ -52,7 +52,7 @@ func _run():
 	if(state == "nah"):
 		saynn("[say=pc]Nah, you better find someone else.[/say]")
 
-		saynn("[say=risha]Well then don’t fucking waste my time, fucktoy[/say]")
+		saynn("[say=risha]Well then don’t fucking waste my time, fucktoy.[/say]")
 		
 		if(getCharacter("risha").isVisiblyPregnant()):
 			saynn("Risha holds her gravid stomach as she lays back onto the bend and starts lifting heavy weights. She is growling as she quickly picks up the pace and starts to consistently push her body. You stare at her and her stored equipment a little longer and decide to leave her be.")
@@ -300,7 +300,7 @@ func _run():
 		if(getCharacter("risha").isHeavilyPregnant()):
 			saynn("Her heavily pregnant tummy is pressed against your face as her buff arms bend around it to hold you down around her cock.")
 		
-		saynn("[say=risha]Grr.. I told you to shut up, fucktoy[/say]")
+		saynn("[say=risha]Grr.. I told you to shut up, fucktoy.[/say]")
 
 		saynn("Your fingers are still lodged into her cunt, you feel her pussy clenching and squirting juices all over your hand as her cock starts shooting many waves of hot cum down your throat. The barbs make sure pulling out at this moment would be a very painful thing so you sit still and allow the dickgirl to force feed you her semen. This orgasm seems very powerful for her, she is groaning and squirming a lot, moans escape one after another until you drain her balls completely.")
 
@@ -355,7 +355,7 @@ func _run():
 
 		saynn("She then spreads open your slit with her digits and checks how wet you are. Having your arms restrained to this frame brings some discomfort but you also feel quite.. excited. Warm feeling rushes throughout your body while Risha focuses on rubbing your little sensitive clit, you are swaying your hips while your snatch gets wet from your juices.")
 
-		saynn("[say=risha]What an eager whore, I will enjoy breeding you[/say]")
+		saynn("[say=risha]What an eager whore, I will enjoy breeding you.[/say]")
 
 		saynn("Risha doesn’t waste time for too long, she guides her barbed feline cock and presses it against your pussy, its tip sliding up and down along your petals. You arch your back and struggle against the metal bar as the cat’s soft spikes are brushing against your soft flesh.")
 

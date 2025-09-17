@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Game/Datapacks/UI/DatapackMenu.gd" type="Script" id=2]
+[ext_resource path="res://Game/UI/Buttons/BetterButton.tscn" type="PackedScene" id=3]
 
 [node name="DatapackMenu" type="Control"]
 anchor_right = 1.0
@@ -17,13 +18,17 @@ anchor_bottom = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Label" type="Label" parent="DatapackViewer/VBoxContainer"]
+[node name="Control" type="Control" parent="DatapackViewer/VBoxContainer"]
 margin_right = 1280.0
-margin_bottom = 20.0
+
+[node name="Label" type="Label" parent="DatapackViewer/VBoxContainer"]
+margin_top = 4.0
+margin_right = 1280.0
+margin_bottom = 24.0
 text = "You can enable or disable  datapacks from inside the in-game menu (Pause menu -> Datapacks)"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="DatapackViewer/VBoxContainer"]
-margin_top = 24.0
+margin_top = 28.0
 margin_right = 1280.0
 margin_bottom = 616.0
 size_flags_horizontal = 3
@@ -31,7 +36,7 @@ size_flags_vertical = 3
 
 [node name="DatapackItemList" type="ItemList" parent="DatapackViewer/VBoxContainer/HBoxContainer"]
 margin_right = 850.0
-margin_bottom = 592.0
+margin_bottom = 588.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
@@ -39,37 +44,41 @@ size_flags_stretch_ratio = 2.0
 [node name="VBoxContainer" type="VBoxContainer" parent="DatapackViewer/VBoxContainer/HBoxContainer"]
 margin_left = 854.0
 margin_right = 1280.0
-margin_bottom = 592.0
+margin_bottom = 588.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="NewDatapackButton" type="Button" parent="DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer"]
 margin_right = 426.0
-margin_bottom = 26.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 30 )
 text = "New datapack"
 
 [node name="EditDatapackButton" type="Button" parent="DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 30.0
+margin_top = 34.0
 margin_right = 426.0
-margin_bottom = 56.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 0, 30 )
 text = "Edit datapack"
 
 [node name="DeleteDatapackButton" type="Button" parent="DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 60.0
+margin_top = 68.0
 margin_right = 426.0
-margin_bottom = 86.0
+margin_bottom = 98.0
+rect_min_size = Vector2( 0, 30 )
 text = "Delete datapack"
 
 [node name="ExportDatapackButton" type="Button" parent="DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 90.0
+margin_top = 102.0
 margin_right = 426.0
-margin_bottom = 116.0
+margin_bottom = 132.0
+rect_min_size = Vector2( 0, 30 )
 text = "Export datapack"
 
 [node name="DatapackDescLabel" type="RichTextLabel" parent="DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 120.0
+margin_top = 136.0
 margin_right = 426.0
-margin_bottom = 592.0
+margin_bottom = 588.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
@@ -81,39 +90,49 @@ margin_bottom = 720.0
 rect_min_size = Vector2( 0, 100 )
 columns = 5
 
-[node name="CloseButton" type="Button" parent="DatapackViewer/VBoxContainer/GridContainer"]
+[node name="CloseButton" parent="DatapackViewer/VBoxContainer/GridContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 253.0
 margin_bottom = 26.0
-size_flags_horizontal = 3
 text = "Close"
+myShortcutKey = "1"
 
-[node name="UpdateButton" type="Button" parent="DatapackViewer/VBoxContainer/GridContainer"]
+[node name="UpdateButton" parent="DatapackViewer/VBoxContainer/GridContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 257.0
 margin_right = 510.0
 margin_bottom = 26.0
-size_flags_horizontal = 3
 text = "Reload packs"
+myShortcutKey = "2"
 
-[node name="DatapackBrowserButton" type="Button" parent="DatapackViewer/VBoxContainer/GridContainer"]
+[node name="DatapackBrowserButton" parent="DatapackViewer/VBoxContainer/GridContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 514.0
 margin_right = 767.0
 margin_bottom = 26.0
-size_flags_horizontal = 3
 text = "DATAPACK BROWSER"
+myShortcutKey = "3"
 
-[node name="DatapackFolderButton" type="Button" parent="DatapackViewer/VBoxContainer/GridContainer"]
+[node name="DatapackFolderButton" parent="DatapackViewer/VBoxContainer/GridContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 771.0
 margin_right = 1024.0
 margin_bottom = 26.0
-size_flags_horizontal = 3
 text = "Datapacks folder"
+myShortcutKey = "4"
 
-[node name="DatapackWikiButton" type="Button" parent="DatapackViewer/VBoxContainer/GridContainer"]
+[node name="DatapackWikiButton" parent="DatapackViewer/VBoxContainer/GridContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 1028.0
 margin_right = 1280.0
 margin_bottom = 26.0
-size_flags_horizontal = 3
 text = "Datapacks wiki"
+myShortcutKey = "5"
 
 [node name="ImportPackButton" type="Button" parent="DatapackViewer/VBoxContainer/GridContainer"]
 visible = false
@@ -197,10 +216,10 @@ autowrap = true
 [connection signal="pressed" from="DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer/DeleteDatapackButton" to="." method="_on_DeleteDatapackButton_pressed"]
 [connection signal="pressed" from="DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer/ExportDatapackButton" to="." method="_on_ExportDatapackButton_pressed"]
 [connection signal="meta_clicked" from="DatapackViewer/VBoxContainer/HBoxContainer/VBoxContainer/DatapackDescLabel" to="." method="_on_DatapackDescLabel_meta_clicked"]
-[connection signal="pressed" from="DatapackViewer/VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
-[connection signal="pressed" from="DatapackViewer/VBoxContainer/GridContainer/UpdateButton" to="." method="_on_UpdateButton_pressed"]
-[connection signal="pressed" from="DatapackViewer/VBoxContainer/GridContainer/DatapackBrowserButton" to="." method="_on_DatapackBrowserButton_pressed"]
-[connection signal="pressed" from="DatapackViewer/VBoxContainer/GridContainer/DatapackFolderButton" to="." method="_on_DatapackFolderButton_pressed"]
-[connection signal="pressed" from="DatapackViewer/VBoxContainer/GridContainer/DatapackWikiButton" to="." method="_on_DatapackWikiButton_pressed"]
+[connection signal="pressedActually" from="DatapackViewer/VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
+[connection signal="pressedActually" from="DatapackViewer/VBoxContainer/GridContainer/UpdateButton" to="." method="_on_UpdateButton_pressed"]
+[connection signal="pressedActually" from="DatapackViewer/VBoxContainer/GridContainer/DatapackBrowserButton" to="." method="_on_DatapackBrowserButton_pressed"]
+[connection signal="pressedActually" from="DatapackViewer/VBoxContainer/GridContainer/DatapackFolderButton" to="." method="_on_DatapackFolderButton_pressed"]
+[connection signal="pressedActually" from="DatapackViewer/VBoxContainer/GridContainer/DatapackWikiButton" to="." method="_on_DatapackWikiButton_pressed"]
 [connection signal="confirmed" from="DatapackViewer/NewPackConfirmationDialog" to="." method="_on_NewPackConfirmationDialog_confirmed"]
 [connection signal="confirmed" from="ConfirmDeleteDatapack" to="." method="_on_ConfirmDeleteDatapack_confirmed"]

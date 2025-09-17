@@ -7,7 +7,7 @@ func getName():
 	return "Ferocious"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/Skins/FerriSkin/ferriSkin.png")
+	return load("res://Player/Player3D/Skins/FerriSkin/ferriSkin.png")
 
 func getFittingSkinTypes():
 	return {

@@ -11,7 +11,7 @@ func _ready():
 	updateSaves()
 	
 	if(OS.get_name() == "Android"):
-		$VBoxContainer/GridContainer/SavesButton.disabled = true
+		$VBoxContainer/GridContainer/SavesButton.visible = false
 	
 	if(OS.get_name() == "HTML5"):
 		$VBoxContainer/GridContainer/SavesButton.visible = false
@@ -68,22 +68,22 @@ func onExportButtonClicked(savePath: String):
 		return
 	
 	if(OS.get_name() == "Android"):
-		var has_permissions: bool = false
-		while not has_permissions:
-			#var permissions = OS.get_granted_permissions()
-			var permissions: Array = OS.get_granted_permissions() #for Godot 3 branch
-			
-			if not permissions.has("android.permission.READ_EXTERNAL_STORAGE") \
-				or not permissions.has("android.permission.WRITE_EXTERNAL_STORAGE"):
-				var _ok = OS.request_permissions()
-				#await get_tree().create_timer(1).timeout
-				yield(get_tree().create_timer(1), "timeout") #for Godot 3 branch
-			else:
-				has_permissions = true
+#		var has_permissions: bool = false
+#		while not has_permissions:
+#			#var permissions = OS.get_granted_permissions()
+#			var permissions: Array = OS.get_granted_permissions() #for Godot 3 branch
+#
+#			if not permissions.has("android.permission.READ_EXTERNAL_STORAGE") \
+#				or not permissions.has("android.permission.WRITE_EXTERNAL_STORAGE"):
+#				var _ok = OS.request_permissions()
+#				#await get_tree().create_timer(1).timeout
+#				yield(get_tree().create_timer(1), "timeout") #for Godot 3 branch
+#			else:
+#				has_permissions = true
 		
 		var d = Directory.new()
 		var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
-		var finalDir = externalDir.plus_file("BDCCSaves")
+		var finalDir = externalDir.plus_file("BDCCSaves/")
 		d.make_dir_recursive(finalDir)
 		var finalPath = finalDir.plus_file(savePath.get_file())
 		d.copy(savePath, finalPath)
@@ -178,19 +178,19 @@ func _on_ImportButton_pressed():
 		updateSaves()
 	else:
 		if(OS.get_name() == "Android"):
-			var has_permissions: bool = false
-						
-			while not has_permissions:
-				#var permissions = OS.get_granted_permissions()
-				var permissions: Array = OS.get_granted_permissions() #for Godot 3 branch
-				
-				if not permissions.has("android.permission.READ_EXTERNAL_STORAGE") \
-					or not permissions.has("android.permission.WRITE_EXTERNAL_STORAGE"):
-					var _ok = OS.request_permissions()
-					#await get_tree().create_timer(1).timeout
-					yield(get_tree().create_timer(1), "timeout") #for Godot 3 branch
-				else:
-					has_permissions = true
+#			var has_permissions: bool = false
+#
+#			while not has_permissions:
+#				#var permissions = OS.get_granted_permissions()
+#				var permissions: Array = OS.get_granted_permissions() #for Godot 3 branch
+#
+#				if not permissions.has("android.permission.READ_EXTERNAL_STORAGE") \
+#					or not permissions.has("android.permission.WRITE_EXTERNAL_STORAGE"):
+#					var _ok = OS.request_permissions()
+#					#await get_tree().create_timer(1).timeout
+#					yield(get_tree().create_timer(1), "timeout") #for Godot 3 branch
+#				else:
+#					has_permissions = true
 		
 			var d = Directory.new()
 			var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)

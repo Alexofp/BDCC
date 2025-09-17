@@ -2,8 +2,9 @@
 
 [ext_resource path="res://UI/DebugUI/FlagsPanel.gd" type="Script" id=1]
 [ext_resource path="res://UI/DebugUI/FlagPanelEntry.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Game/SmartScrollContainer.gd" type="Script" id=3]
+[ext_resource path="res://Game/UI/Util/SmartScrollContainer.gd" type="Script" id=3]
 [ext_resource path="res://UI/DebugUI/FlagEditWindow.tscn" type="PackedScene" id=4]
+
 
 [node name="FlagsPanel" type="Control"]
 anchor_right = 1.0

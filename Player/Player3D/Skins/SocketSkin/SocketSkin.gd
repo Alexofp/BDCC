@@ -7,7 +7,7 @@ func getName():
 	return "Socket"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/Skins/SocketSkin/SocketSkin.png")
+	return load("res://Player/Player3D/Skins/SocketSkin/SocketSkin.png")
 
 func getFittingSkinTypes():
 	return {

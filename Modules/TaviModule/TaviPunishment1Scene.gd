@@ -16,7 +16,7 @@ func _run():
 		if(!GM.pc.isFullyNaked()):
 			saynn("Tavi then tugs off all the layers of your clothing, exposing the butt. Each time you would try to stop her she slaps your arms away.")
 
-		saynn("[say=tavi]Hands behind your back, no covering anything, slut[/say]")
+		saynn("[say=tavi]Hands behind your back, no covering anything, slut.[/say]")
 
 		if(GM.pc.hasTail()):
 			saynn("You hear her strict tone and do as she says, saying no would probably only make it worse. You lay still and await for your faith. Tavi also grabs your wagging tail and pulls it out of the way to make sure you won’t use it to protect yourself.")
@@ -25,7 +25,7 @@ func _run():
 
 		saynn("She puts one hand on your back so you don’t fidget much and then rubs your butt for a bit before suddenly delivering a strong smack to it, so strong that it sends a wave of shivering through your body. It hurts, you yelp and try to escape from her grasp but she pulls you back and quickly gives you another spank, you barely manage to keep your arms crossed behind your back.")
 
-		saynn("[say=tavi]Bad pet, very. Learn to take a punishment[/say]")
+		saynn("[say=tavi]Bad pet, very. Learn to take a punishment.[/say]")
 
 		saynn("You brace for the next strike, closing your eyes and tilting your head down. But Tavi teases you, gently groping your ass and letting her palm slide along its surface back and forth in a circle before suddenly giving you a spank, then another, and another. Tavi holds you tight as she gives you a series of firm slaps on the ass, each one causing your butt cheeks to become redder and the feline doesn’t seem to want to stop anytime soon. You cry from pain and try to kick and struggle, the stings are so strong that you start to disobey and cover your butt with your hands but Tavi keeps delivering strikes and slapping your palms away. You stick your tongue out and moan from pain that quickly reaches its peak.")
 

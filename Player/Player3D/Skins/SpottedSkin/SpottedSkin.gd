@@ -7,7 +7,7 @@ func getName():
 	return "Spotted"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/Skins/SpottedSkin/SpottedSkin.png")
+	return load("res://Player/Player3D/Skins/SpottedSkin/SpottedSkin.png")
 
 func getFittingSkinTypes():
 	return {

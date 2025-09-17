@@ -1,0 +1,518 @@
+[gd_scene load_steps=37 format=2]
+
+[ext_resource path="res://UI/RichTextBoxEffects/cuss_richtexteffect.tres" type="RichTextEffect" id=1]
+[ext_resource path="res://UI/RichTextBoxEffects/console_richtexteffect.tres" type="RichTextEffect" id=2]
+[ext_resource path="res://UI/RichTextBoxEffects/corrupt_richtexteffect.tres" type="RichTextEffect" id=3]
+[ext_resource path="res://UI/RichTextBoxEffects/ghost_richtexteffect.tres" type="RichTextEffect" id=4]
+[ext_resource path="res://UI/RichTextBoxEffects/matrix_richtexteffect.tres" type="RichTextEffect" id=5]
+[ext_resource path="res://UI/RichTextBoxEffects/pulse_richtexteffect.tres" type="RichTextEffect" id=6]
+[ext_resource path="res://GlobalTheme.tres" type="Theme" id=8]
+[ext_resource path="res://Game/UI/GameUI.gd" type="Script" id=9]
+[ext_resource path="res://UI/FontResources/Normal/BoldFont.tres" type="DynamicFont" id=10]
+[ext_resource path="res://UI/FontResources/Normal/NormalFont.tres" type="DynamicFont" id=11]
+[ext_resource path="res://UI/FontResources/Normal/BoldItalicsFont.tres" type="DynamicFont" id=12]
+[ext_resource path="res://UI/FontResources/Normal/ItalicsFont.tres" type="DynamicFont" id=13]
+[ext_resource path="res://UI/SkillsUI/SkillsUI.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Game/UI/MapAndTimePanel.tscn" type="PackedScene" id=15]
+[ext_resource path="res://UI/DebugUI/DebugPanel.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Game/PlayerPanel.tscn" type="PackedScene" id=17]
+[ext_resource path="res://UI/MainMenu/InGameMenu.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Game/UI/CharacterPanel/SmartCharacterPanel.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Game/UI/Util/SmartScrollContainer.gd" type="Script" id=21]
+[ext_resource path="res://UI/LayeredSprite.gd" type="Script" id=22]
+[ext_resource path="res://Images/UI/expand.png" type="Texture" id=23]
+[ext_resource path="res://Images/UI/expandHover.png" type="Texture" id=24]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+
+[sub_resource type="InputEventAction" id=29]
+action = "gameui_quicksave"
+
+[sub_resource type="ShortCut" id=16]
+shortcut = SubResource( 29 )
+
+[sub_resource type="InputEventAction" id=30]
+action = "gameui_quickload"
+
+[sub_resource type="ShortCut" id=18]
+shortcut = SubResource( 30 )
+
+[sub_resource type="InputEventAction" id=31]
+action = "gameui_skills"
+
+[sub_resource type="ShortCut" id=10]
+shortcut = SubResource( 31 )
+
+[sub_resource type="InputEventAction" id=32]
+action = "gameui_menu"
+
+[sub_resource type="ShortCut" id=8]
+shortcut = SubResource( 32 )
+
+[sub_resource type="InputEventAction" id=33]
+action = "gameui_prevpage"
+
+[sub_resource type="ShortCut" id=26]
+shortcut = SubResource( 33 )
+
+[sub_resource type="InputEventAction" id=34]
+action = "gameui_nextpage"
+
+[sub_resource type="ShortCut" id=28]
+shortcut = SubResource( 34 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
+corner_radius_top_left = 16
+corner_radius_bottom_left = 16
+
+[node name="GameUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -2.82843
+margin_bottom = -2.82843
+theme = ExtResource( 8 )
+script = ExtResource( 9 )
+
+[node name="MainLayout" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="LeftPanel" type="Panel" parent="MainLayout"]
+margin_right = 260.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 260, 0 )
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+custom_styles/panel = SubResource( 1 )
+
+[node name="Margin" type="MarginContainer" parent="MainLayout/LeftPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 12.0
+margin_right = -12.0
+margin_bottom = -12.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBox" type="VBoxContainer" parent="MainLayout/LeftPanel/Margin"]
+margin_right = 236.0
+margin_bottom = 696.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SmartCharacterPanel" parent="MainLayout/LeftPanel/Margin/VBox" instance=ExtResource( 19 )]
+unique_name_in_owner = true
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 236.0
+margin_bottom = 328.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="MainLayout/LeftPanel/Margin/VBox"]
+margin_top = 332.0
+margin_right = 236.0
+margin_bottom = 342.0
+rect_min_size = Vector2( 0, 10 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.01
+
+[node name="MapAndTimePanel" parent="MainLayout/LeftPanel/Margin/VBox" instance=ExtResource( 15 )]
+unique_name_in_owner = true
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 346.0
+margin_right = 236.0
+margin_bottom = 606.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MainLayout/LeftPanel/Margin/VBox"]
+margin_top = 610.0
+margin_right = 236.0
+margin_bottom = 636.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveButton" type="Button" parent="MainLayout/LeftPanel/Margin/VBox/HBoxContainer2"]
+unique_name_in_owner = true
+margin_right = 116.0
+margin_bottom = 26.0
+hint_tooltip = "Quick save (F5)"
+size_flags_horizontal = 3
+shortcut_in_tooltip = false
+shortcut = SubResource( 16 )
+text = "Q.save"
+
+[node name="LoadButton" type="Button" parent="MainLayout/LeftPanel/Margin/VBox/HBoxContainer2"]
+unique_name_in_owner = true
+margin_left = 120.0
+margin_right = 236.0
+margin_bottom = 26.0
+hint_tooltip = "Quick load (F9)"
+size_flags_horizontal = 3
+shortcut_in_tooltip = false
+shortcut = SubResource( 18 )
+text = "Q.load"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MainLayout/LeftPanel/Margin/VBox"]
+margin_top = 640.0
+margin_right = 236.0
+margin_bottom = 666.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SkillsButton" type="Button" parent="MainLayout/LeftPanel/Margin/VBox/HBoxContainer3"]
+unique_name_in_owner = true
+margin_right = 95.0
+margin_bottom = 26.0
+hint_tooltip = "Spend the stat points and look at your skills (X)"
+size_flags_horizontal = 3
+shortcut_in_tooltip = false
+shortcut = SubResource( 10 )
+text = "Skills"
+
+[node name="MenuButton" type="Button" parent="MainLayout/LeftPanel/Margin/VBox/HBoxContainer3"]
+unique_name_in_owner = true
+margin_left = 99.0
+margin_right = 195.0
+margin_bottom = 26.0
+hint_tooltip = "Open the menu (C)"
+size_flags_horizontal = 3
+shortcut_in_tooltip = false
+shortcut = SubResource( 8 )
+text = "Menu"
+
+[node name="DebugMenuButton" type="Button" parent="MainLayout/LeftPanel/Margin/VBox/HBoxContainer3"]
+unique_name_in_owner = true
+margin_left = 199.0
+margin_right = 236.0
+margin_bottom = 26.0
+hint_tooltip = "Open the debug/cheats menu"
+shortcut_in_tooltip = false
+text = "DG"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainLayout/LeftPanel/Margin/VBox"]
+margin_top = 670.0
+margin_right = 236.0
+margin_bottom = 696.0
+
+[node name="RollbackButton" type="Button" parent="MainLayout/LeftPanel/Margin/VBox/HBoxContainer"]
+unique_name_in_owner = true
+margin_right = 236.0
+margin_bottom = 26.0
+hint_tooltip = "Rollback the game's state back"
+size_flags_horizontal = 3
+shortcut_in_tooltip = false
+text = "Rollback"
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MainLayout"]
+margin_left = 264.0
+margin_right = 269.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 5, 0 )
+
+[node name="MainScreenBoxContainer" type="VBoxContainer" parent="MainLayout"]
+unique_name_in_owner = true
+margin_left = 273.0
+margin_right = 983.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel" type="Control" parent="MainLayout/MainScreenBoxContainer"]
+margin_right = 710.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 30 )
+
+[node name="TranslateBox" type="HBoxContainer" parent="MainLayout/MainScreenBoxContainer/Panel"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TranslateStatusLabel" type="Label" parent="MainLayout/MainScreenBoxContainer/Panel/TranslateBox"]
+unique_name_in_owner = true
+margin_top = 5.0
+margin_bottom = 25.0
+
+[node name="ShowOriginalCheckbox" type="CheckBox" parent="MainLayout/MainScreenBoxContainer/Panel/TranslateBox"]
+unique_name_in_owner = true
+margin_left = 4.0
+margin_right = 146.0
+margin_bottom = 30.0
+text = "Show original"
+
+[node name="ManualTranslateButton" type="Button" parent="MainLayout/MainScreenBoxContainer/Panel/TranslateBox"]
+unique_name_in_owner = true
+margin_left = 150.0
+margin_right = 242.0
+margin_bottom = 30.0
+text = "Translate"
+
+[node name="MainScrollContainer" type="ScrollContainer" parent="MainLayout/MainScreenBoxContainer"]
+unique_name_in_owner = true
+margin_top = 34.0
+margin_right = 710.0
+margin_bottom = 674.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 21 )
+
+[node name="TextAreaContainer" type="VBoxContainer" parent="MainLayout/MainScreenBoxContainer/MainScrollContainer"]
+unique_name_in_owner = true
+margin_right = 710.0
+margin_bottom = 640.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SceneArtWorkRect" type="TextureRect" parent="MainLayout/MainScreenBoxContainer/MainScrollContainer/TextAreaContainer"]
+unique_name_in_owner = true
+margin_right = 710.0
+size_flags_horizontal = 3
+expand = true
+stretch_mode = 6
+script = ExtResource( 22 )
+
+[node name="OpenFullArtWorkButton" type="TextureButton" parent="MainLayout/MainScreenBoxContainer/MainScrollContainer/TextAreaContainer/SceneArtWorkRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture_normal = ExtResource( 23 )
+texture_hover = ExtResource( 24 )
+expand = true
+stretch_mode = 2
+
+[node name="TextOutput" type="RichTextLabel" parent="MainLayout/MainScreenBoxContainer/MainScrollContainer/TextAreaContainer"]
+unique_name_in_owner = true
+margin_top = 4.0
+margin_right = 710.0
+margin_bottom = 29.0
+focus_mode = 2
+mouse_filter = 1
+size_flags_horizontal = 3
+custom_fonts/bold_italics_font = ExtResource( 12 )
+custom_fonts/italics_font = ExtResource( 13 )
+custom_fonts/bold_font = ExtResource( 10 )
+custom_fonts/normal_font = ExtResource( 11 )
+bbcode_enabled = true
+fit_content_height = true
+selection_enabled = true
+custom_effects = [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 2 ), ExtResource( 1 ), ExtResource( 3 ) ]
+
+[node name="UniquePanelSpot" type="MarginContainer" parent="MainLayout/MainScreenBoxContainer"]
+unique_name_in_owner = true
+visible = false
+margin_top = 358.0
+margin_right = 710.0
+margin_bottom = 678.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ExtraButtonsGrid" type="GridContainer" parent="MainLayout/MainScreenBoxContainer"]
+unique_name_in_owner = true
+margin_top = 678.0
+margin_right = 710.0
+margin_bottom = 678.0
+size_flags_horizontal = 3
+columns = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainLayout/MainScreenBoxContainer"]
+margin_top = 682.0
+margin_right = 710.0
+margin_bottom = 708.0
+
+[node name="PrevPageButton" type="Button" parent="MainLayout/MainScreenBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_right = 23.0
+margin_bottom = 26.0
+shortcut_in_tooltip = false
+shortcut = SubResource( 26 )
+text = "<"
+
+[node name="ButtonGridContainer" type="GridContainer" parent="MainLayout/MainScreenBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 27.0
+margin_right = 683.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 5
+
+[node name="NextPageButton" type="Button" parent="MainLayout/MainScreenBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 687.0
+margin_right = 710.0
+margin_bottom = 26.0
+shortcut_in_tooltip = false
+shortcut = SubResource( 28 )
+text = ">"
+
+[node name="Control" type="Control" parent="MainLayout/MainScreenBoxContainer"]
+margin_top = 712.0
+margin_right = 710.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 0, 8 )
+
+[node name="InGameMenu" parent="MainLayout" instance=ExtResource( 18 )]
+unique_name_in_owner = true
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 652.0
+margin_right = 1027.0
+margin_bottom = 720.0
+
+[node name="SkillsUI" parent="MainLayout" instance=ExtResource( 14 )]
+unique_name_in_owner = true
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 652.0
+margin_right = 1027.0
+margin_bottom = 720.0
+
+[node name="DevCommentary" type="VBoxContainer" parent="MainLayout"]
+unique_name_in_owner = true
+visible = false
+margin_left = 652.0
+margin_right = 1027.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MainLayout/DevCommentary"]
+margin_right = 375.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainLayout/DevCommentary"]
+margin_top = 24.0
+margin_right = 375.0
+margin_bottom = 616.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 21 )
+
+[node name="DevComLabel" type="RichTextLabel" parent="MainLayout/DevCommentary/ScrollContainer"]
+unique_name_in_owner = true
+margin_right = 375.0
+margin_bottom = 592.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/bold_italics_font = ExtResource( 12 )
+custom_fonts/italics_font = ExtResource( 13 )
+custom_fonts/bold_font = ExtResource( 10 )
+custom_fonts/normal_font = ExtResource( 11 )
+bbcode_enabled = true
+fit_content_height = true
+
+[node name="GridContainer" type="GridContainer" parent="MainLayout/DevCommentary"]
+margin_top = 620.0
+margin_right = 375.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 0, 100 )
+columns = 5
+
+[node name="CloseButton" type="Button" parent="MainLayout/DevCommentary/GridContainer"]
+margin_right = 75.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "Close"
+
+[node name="DebugPanel" parent="MainLayout" instance=ExtResource( 16 )]
+unique_name_in_owner = true
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 652.0
+margin_right = 1027.0
+margin_bottom = 720.0
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="MainLayout"]
+margin_left = 987.0
+margin_right = 992.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 5, 0 )
+
+[node name="RightPanel" type="Panel" parent="MainLayout"]
+margin_left = 996.0
+margin_right = 1280.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 240, 0 )
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+custom_styles/panel = SubResource( 6 )
+
+[node name="Margin" type="MarginContainer" parent="MainLayout/RightPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 12.0
+margin_top = 12.0
+margin_right = -12.0
+margin_bottom = -12.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PlayerPanel" parent="MainLayout/RightPanel/Margin" instance=ExtResource( 17 )]
+unique_name_in_owner = true
+margin_right = 354.0
+margin_bottom = 696.0
+
+[node name="FullArtworkRect" type="TextureRect" parent="."]
+unique_name_in_owner = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand = true
+stretch_mode = 6
+script = ExtResource( 22 )
+
+[node name="ColorRect" type="ColorRect" parent="FullArtworkRect"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.419608 )
+
+[node name="CloseFullArtWork" type="Button" parent="FullArtworkRect"]
+margin_left = 20.0
+margin_top = 18.8284
+margin_right = 78.0
+margin_bottom = 44.8284
+rect_min_size = Vector2( 100, 40 )
+text = "Close"
+
+[node name="FullArtLabel" type="Label" parent="FullArtworkRect"]
+unique_name_in_owner = true
+margin_left = 20.0
+margin_top = 70.0
+margin_right = 71.0
+margin_bottom = 90.0
+
+[connection signal="onDevComButton" from="MainLayout/LeftPanel/Margin/VBox/MapAndTimePanel" to="." method="_on_MapAndTimePanel_onDevComButton"]
+[connection signal="pressed" from="MainLayout/LeftPanel/Margin/VBox/HBoxContainer2/SaveButton" to="." method="_on_SaveButton_pressed"]
+[connection signal="pressed" from="MainLayout/LeftPanel/Margin/VBox/HBoxContainer2/LoadButton" to="." method="_on_LoadButton_pressed"]
+[connection signal="pressed" from="MainLayout/LeftPanel/Margin/VBox/HBoxContainer3/SkillsButton" to="." method="_on_SkillsButton_pressed"]
+[connection signal="pressed" from="MainLayout/LeftPanel/Margin/VBox/HBoxContainer3/MenuButton" to="." method="_on_MenuButton_pressed"]
+[connection signal="pressed" from="MainLayout/LeftPanel/Margin/VBox/HBoxContainer3/DebugMenuButton" to="." method="_on_DebugMenu_pressed"]
+[connection signal="pressed" from="MainLayout/LeftPanel/Margin/VBox/HBoxContainer/RollbackButton" to="." method="_on_RollbackButton_pressed"]
+[connection signal="pressed" from="MainLayout/MainScreenBoxContainer/Panel/TranslateBox/ShowOriginalCheckbox" to="." method="_on_ShowOriginalCheckbox_pressed"]
+[connection signal="pressed" from="MainLayout/MainScreenBoxContainer/Panel/TranslateBox/ManualTranslateButton" to="." method="_on_ManualTranslateButton_pressed"]
+[connection signal="pressed" from="MainLayout/MainScreenBoxContainer/MainScrollContainer/TextAreaContainer/SceneArtWorkRect/OpenFullArtWorkButton" to="." method="_on_OpenFullArtWorkButton_pressed"]
+[connection signal="pressed" from="MainLayout/MainScreenBoxContainer/HBoxContainer/PrevPageButton" to="." method="_on_PrevPageButton_pressed"]
+[connection signal="pressed" from="MainLayout/MainScreenBoxContainer/HBoxContainer/NextPageButton" to="." method="_on_NextPageButton_pressed"]
+[connection signal="onResumeButtonPressed" from="MainLayout/InGameMenu" to="." method="showGameScreen"]
+[connection signal="onClosePressed" from="MainLayout/SkillsUI" to="." method="showGameScreen"]
+[connection signal="meta_clicked" from="MainLayout/DevCommentary/ScrollContainer/DevComLabel" to="." method="_on_DevComLabel_meta_clicked"]
+[connection signal="pressed" from="MainLayout/DevCommentary/GridContainer/CloseButton" to="." method="showGameScreen"]
+[connection signal="pressed" from="FullArtworkRect/CloseFullArtWork" to="." method="_on_CloseFullArtWork_pressed"]

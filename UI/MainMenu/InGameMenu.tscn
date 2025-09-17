@@ -46,29 +46,34 @@ size_flags_horizontal = 3
 custom_constants/separation = 20
 
 [node name="ResumeButton" type="Button" parent="MainMenu/MainMenuCenter/VBoxContainer"]
+unique_name_in_owner = true
 margin_right = 107.0
 margin_bottom = 26.0
 text = "Resume"
 
-[node name="SaveGameButton2" type="Button" parent="MainMenu/MainMenuCenter/VBoxContainer"]
+[node name="SaveGameButton" type="Button" parent="MainMenu/MainMenuCenter/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 46.0
 margin_right = 107.0
 margin_bottom = 72.0
 text = "Save Game"
 
 [node name="LoadGameButton" type="Button" parent="MainMenu/MainMenuCenter/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 92.0
 margin_right = 107.0
 margin_bottom = 118.0
 text = "Load Game"
 
 [node name="DatapacksButton" type="Button" parent="MainMenu/MainMenuCenter/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 138.0
 margin_right = 107.0
 margin_bottom = 164.0
 text = "Datapacks"
 
 [node name="MainMenuButton" type="Button" parent="MainMenu/MainMenuCenter/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 184.0
 margin_right = 107.0
 margin_bottom = 210.0
@@ -81,7 +86,7 @@ visible = false
 [connection signal="onClosePressed" from="LoadGameScreen" to="." method="_on_LoadGameScreen_onClosePressed"]
 [connection signal="onClosePressed" from="SaveGameScreen" to="." method="_on_SaveGameScreen_onClosePressed"]
 [connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
-[connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/SaveGameButton2" to="." method="_on_SaveGameButton2_pressed"]
+[connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/SaveGameButton" to="." method="_on_SaveGameButton2_pressed"]
 [connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
 [connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/DatapacksButton" to="." method="_on_DatapacksButton_pressed"]
 [connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]

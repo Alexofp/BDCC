@@ -7,7 +7,7 @@ func getName():
 	return "Simple Spotted"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/SkinsByAuthor/AverageAce/SimpleSpottedSkin/SimpleSpottedSkin.png")
+	return load("res://Player/Player3D/SkinsByAuthor/AverageAce/SimpleSpottedSkin/SimpleSpottedSkin.png")
 
 func getFittingSkinTypes():
 	return {

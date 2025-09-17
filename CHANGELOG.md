@@ -5,6 +5,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.1.11] - 2025-09-17
+### Added
+- The game's UI has been refactored to support the new (optional) touch-friendly UI layouts! New (optional) layouts: [horizontal left-handed](https://github.com/user-attachments/assets/74722e3b-6d01-453e-a17b-72ada6528896), [horizontal right-handed](https://github.com/user-attachments/assets/aa5c0e77-c47b-4717-9899-b1b9e0e56e57) and [vertical](https://github.com/user-attachments/assets/930deadc-f6f9-4630-bbee-fc9eba4ddd04). (The current 'normal' layout is kept as is) Android version will automatically pick the new horizontal touch-friendly layout. But it is possible to override this in the settings.
+- Better options screen. It is now divided into 4 tabs rather than one giant list.
+- On Android, you can now pinch the screen to zoom in/out. Works with the doll window and the minimap.
+- Android version now has a better app icon.
+
+### Changed
+- Skin textures now have texture compression enabled (this increased the game's filesize but also drastically lowered the VRAM usage by almost 5x). Built-in skins are also now dynamically loaded when needed rather than loaded into memory at all times. This should lower the game's VRAM usage by a lot. Sorry if something broke. (A note for modders: the compression takes like 10 minutes when you open the game in the godot editor for the first time, don't be scared)
+- The default save name now includes the current save number. (Example: 'Rahi - Save 1 - Medical wing') (Inspired by shadowlin21's [Pull request](https://github.com/Alexofp/BDCC/pull/219))
+- The rollback feature now uses a separate thread to save the game's state, allowing for a smoother experience. (Might introduce problems, can be disabled in the settings)
+
+### Fixed
+- Everywhere where time is displayed (latest release date, save date), the correct timezone is now used, making the time correct.
+- Tooltips shouldn't 'stick' as much anymore.
+- Quick load button is now disabled if there is no quicksave present
+- Export/import save buttons should now work on the Android version again.
+- Milking Eliza now should add fluids towards the chemistry lab/bounties.
+- Strapon sex shouldn't softlock anymore with dom npcs.
+
 ## [0.1.10] - 2025-09-04
 ### Added
 - Player slavery system! You can now be sold on the Blacktail Market yourself, which will trigger one of the 2 new soft bad ends (with more to come hopefully, these are really hard to make x3). There are 3 ways to trigger the player slavery: a certain new event near the underground arena, a 50/50 chance if you get found unconscious, or losing an ambush.
@@ -597,7 +617,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.10...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.11...main
+[0.1.11]: https://github.com/Alexofp/BDCC/compare/0.1.10...0.1.11
 [0.1.10]: https://github.com/Alexofp/BDCC/compare/0.1.9...0.1.10
 [0.1.9]: https://github.com/Alexofp/BDCC/compare/0.1.8...0.1.9
 [0.1.8]: https://github.com/Alexofp/BDCC/compare/0.1.7...0.1.8

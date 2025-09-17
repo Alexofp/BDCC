@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://UI/MainMenu/SaveGameElement.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/MainMenu/SaveGameScreen.gd" type="Script" id=3]
+[ext_resource path="res://Game/UI/Buttons/BetterButton.tscn" type="PackedScene" id=4]
 
 [node name="SaveGameScreen" type="Control"]
 anchor_right = 1.0
@@ -90,21 +91,25 @@ margin_bottom = 720.0
 rect_min_size = Vector2( 0, 100 )
 columns = 5
 
-[node name="CloseButton" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="CloseButton" parent="VBoxContainer/GridContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 256.0
 margin_bottom = 26.0
-size_flags_horizontal = 3
 text = "Close"
+myShortcutKey = "1"
 
-[node name="DeleteButton" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="DeleteButton" parent="VBoxContainer/GridContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 260.0
 margin_right = 515.0
 margin_bottom = 26.0
-size_flags_horizontal = 3
 text = "Delete Save"
+myShortcutKey = "2"
 
 [connection signal="visibility_changed" from="." to="." method="_on_LoadGameScreen_visibility_changed"]
 [connection signal="text_changed" from="VBoxContainer/ScrollContainer/ScrollVBox/HBoxContainer/SaveFileNameInput" to="." method="_on_SaveFileNameInput_text_changed"]
 [connection signal="pressed" from="VBoxContainer/ScrollContainer/ScrollVBox/HBoxContainer/SaveButton" to="." method="_on_SaveButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/GridContainer/DeleteButton" to="." method="_on_DeleteButton_pressed"]
+[connection signal="pressedActually" from="VBoxContainer/GridContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
+[connection signal="pressedActually" from="VBoxContainer/GridContainer/DeleteButton" to="." method="_on_DeleteButton_pressed"]

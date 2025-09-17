@@ -170,7 +170,8 @@ func _run():
 				playAnimation(StageScene.Solo, animToPlay)
 		
 		var game = minigameScene.instance()
-		GM.ui.addCustomControl("minigame", game)
+		GM.ui.addFullScreenCustomControl("minigame", game)
+		#GM.ui.addCustomControl("minigame", game)
 		if(OPTIONS.isHardStruggleEnabled()):
 			game.setHardStruggleEnabled(true)
 		if(GM.pc.hasPerk(Perk.BDSMInstantEscape) && game.has_method("instantEscapePerk")):

@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Game/GameUI.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game/Pregnancy/ChildSystem.gd" type="Script" id=2]
 [ext_resource path="res://Game/MainScene.gd" type="Script" id=3]
 [ext_resource path="res://Events/EventSystem.gd" type="Script" id=4]
@@ -10,10 +9,6 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
-
-[node name="GameUI" parent="." instance=ExtResource( 1 )]
-margin_top = 0.0
-margin_bottom = 0.0
 
 [node name="EventSystem" type="Node" parent="."]
 script = ExtResource( 4 )
@@ -27,7 +22,3 @@ script = ExtResource( 2 )
 [node name="Characters" type="Node" parent="."]
 
 [node name="DynamicCharacters" type="Node" parent="."]
-
-[connection signal="onDevComButton" from="GameUI" to="." method="_on_GameUI_onDevComButton"]
-[connection signal="on_option_button" from="GameUI" to="." method="_on_GameUI_on_option_button"]
-[connection signal="on_rollback_button" from="GameUI" to="." method="_on_GameUI_on_rollback_button"]

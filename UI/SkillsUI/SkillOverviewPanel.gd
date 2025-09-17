@@ -37,12 +37,13 @@ func updateInfo():
 		levelBar.setProgressBarValue(0)
 	else:
 		levelBar.setTextLeft(skill.getVisibleName() +" level "+str(skill.getLevel()))
-		levelBar.setText(""+str(skill.getExperience())+" / "+str(skill.getRequiredExperienceNextLevel())+" exp," +" "+str(learnedPerkCount)+"/"+str(totalPerkCount)+" perks"+", free points: "+str(GM.pc.getSkillsHolder().getFreePerkPoints(skillID)))
+		levelBar.setText(""+str(skill.getExperience())+" / "+str(skill.getRequiredExperienceNextLevel())+" exp, free points: "+str(GM.pc.getSkillsHolder().getFreePerkPoints(skillID)))
 		levelBar.setProgressBarValue(skill.getLevelProgress())
 	#freePerksLabel.text = "Free perk points: "+str(GM.pc.getSkillsHolder().getFreePerkPoints(skillID))
 
 	#learnedPerksLabel.text = "Learned perks: "+str(learnedPerkCount)+"/"+str(totalPerkCount)
 	#perksButton.text = "Free perk points: "+str(GM.pc.getSkillsHolder().getFreePerkPoints(skillID))
+	perksButton.text = "Perks ("+str(learnedPerkCount)+"/"+str(totalPerkCount)+")"
 
 func _on_PerksButton_pressed():
 	emit_signal("perksButton", skillID)
