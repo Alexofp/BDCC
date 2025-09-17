@@ -7,7 +7,7 @@ func getName():
 	return "Neon kid"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/Skins/KidlatSkin/KidlatSkin.png")
+	return load("res://Player/Player3D/Skins/KidlatSkin/KidlatSkin.png")
 
 func getFittingSkinTypes():
 	return {

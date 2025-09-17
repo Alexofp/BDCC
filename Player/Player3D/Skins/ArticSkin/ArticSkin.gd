@@ -7,7 +7,7 @@ func getName():
 	return "Artic"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/Skins/ArticSkin/articSkin.png")
+	return load("res://Player/Player3D/Skins/ArticSkin/articSkin.png")
 
 func getFittingSkinTypes():
 	return {

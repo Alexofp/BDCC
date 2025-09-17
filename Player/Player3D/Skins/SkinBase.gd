@@ -9,7 +9,7 @@ func getName():
 	return "Error"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/Skins/EmptySkin/EmptySkin.png")
+	return load("res://Player/Player3D/Skins/EmptySkin/EmptySkin.png")
 
 func getFittingSkinTypes():
 	return {}

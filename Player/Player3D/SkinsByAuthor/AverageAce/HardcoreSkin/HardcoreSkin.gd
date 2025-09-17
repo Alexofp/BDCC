@@ -7,7 +7,7 @@ func getName():
 	return "Hardcore"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/SkinsByAuthor/AverageAce/HardcoreSkin/HardcoreSkin.png")
+	return load("res://Player/Player3D/SkinsByAuthor/AverageAce/HardcoreSkin/HardcoreSkin.png")
 
 func getFittingSkinTypes():
 	return {

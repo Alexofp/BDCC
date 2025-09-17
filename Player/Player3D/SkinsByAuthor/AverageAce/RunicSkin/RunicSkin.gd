@@ -7,7 +7,7 @@ func getName():
 	return "Runic"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/SkinsByAuthor/AverageAce/RunicSkin/RunicSkin.png")
+	return load("res://Player/Player3D/SkinsByAuthor/AverageAce/RunicSkin/RunicSkin.png")
 
 func getFittingSkinTypes():
 	return {

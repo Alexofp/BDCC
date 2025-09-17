@@ -7,7 +7,7 @@ func getName():
 	return "Lux"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/Skins/LuxeSkin/luxeSkin.png")
+	return load("res://Player/Player3D/Skins/LuxeSkin/luxeSkin.png")
 
 func getFittingSkinTypes():
 	return {

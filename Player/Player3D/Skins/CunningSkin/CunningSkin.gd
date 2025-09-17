@@ -7,7 +7,7 @@ func getName():
 	return "Cunning"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/Skins/CunningSkin/SimpleSkin.png")
+	return load("res://Player/Player3D/Skins/CunningSkin/SimpleSkin.png")
 
 func getFittingSkinTypes():
 	return {

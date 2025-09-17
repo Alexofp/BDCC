@@ -7,7 +7,7 @@ func getName():
 	return "Dappled"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/SkinsByAuthor/AverageAce/DappledSkin/Dappled_f_s.png")
+	return load("res://Player/Player3D/SkinsByAuthor/AverageAce/DappledSkin/Dappled_f_s.png")
 
 func getFittingSkinTypes():
 	return {

@@ -7,7 +7,7 @@ func getName():
 	return "Cybernetic"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/SkinsByAuthor/AverageAce/CyberneticSkin/CyberneticSkin.png")
+	return load("res://Player/Player3D/SkinsByAuthor/AverageAce/CyberneticSkin/CyberneticSkin.png")
 
 func getFittingSkinTypes():
 	return {

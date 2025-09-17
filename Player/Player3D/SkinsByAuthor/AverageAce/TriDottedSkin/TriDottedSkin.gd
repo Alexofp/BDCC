@@ -7,7 +7,7 @@ func getName():
 	return "Tri-Dotted"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/SkinsByAuthor/AverageAce/TriDottedSkin/TriDottedSkin.png")
+	return load("res://Player/Player3D/SkinsByAuthor/AverageAce/TriDottedSkin/TriDottedSkin.png")
 
 func getFittingSkinTypes():
 	return {

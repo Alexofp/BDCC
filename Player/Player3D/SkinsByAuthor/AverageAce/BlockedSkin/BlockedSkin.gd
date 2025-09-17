@@ -7,7 +7,7 @@ func getName():
 	return "Blocked"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/SkinsByAuthor/AverageAce/BlockedSkin/BlockedSkin.png")
+	return load("res://Player/Player3D/SkinsByAuthor/AverageAce/BlockedSkin/BlockedSkin.png")
 
 func getFittingSkinTypes():
 	return {

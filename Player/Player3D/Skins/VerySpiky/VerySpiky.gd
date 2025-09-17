@@ -7,7 +7,7 @@ func getName():
 	return "Very Spiky"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/Skins/VerySpiky/veryspiky.png")
+	return load("res://Player/Player3D/Skins/VerySpiky/veryspiky.png")
 
 func getFittingSkinTypes():
 	return {

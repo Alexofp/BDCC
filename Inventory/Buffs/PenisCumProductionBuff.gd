@@ -9,7 +9,7 @@ func initBuff(_args):
 	amount = _args[0]
 
 func getVisibleDescription():
-	var text = str(amount)
+	var text = str(Util.roundF(amount, 1))
 	if(amount > 0):
 		text = "+"+text
 	return "Cum production "+text+"%"

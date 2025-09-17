@@ -7,7 +7,7 @@ func getName():
 	return "Sphinx"
 
 func getPatternTexture():
-	return preload("res://Player/Player3D/SkinsByAuthor/AverageAce/SphinxCatSkin/SphinxCatSkin.png")
+	return load("res://Player/Player3D/SkinsByAuthor/AverageAce/SphinxCatSkin/SphinxCatSkin.png")
 
 func getFittingSkinTypes():
 	return {
