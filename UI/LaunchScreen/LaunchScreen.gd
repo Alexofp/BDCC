@@ -4,7 +4,10 @@ onready var modDescriptionLabel = $VBoxContainer/HBoxContainer/VBoxContainer/Pan
 onready var modVList = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/ModList
 onready var modFileList = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ModFileList
 onready var modDisableButton = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/ModDisableButton
+onready var debug_button = $"%DebugButton"
+onready var building_pck_panel = $"%BuildingPCKPanel"
 
+onready var troubleshooting_screen = $"%TroubleshootingScreen"
 
 var launchModEntryScene = preload("res://UI/LaunchScreen/LaunchModEntry.tscn")
 
@@ -25,19 +28,24 @@ func _ready():
 	#var diag:DialogueParser = DialogueParser.new()
 	#print(diag.getLexems("Hello world. How;are|you. Hey, [[mean=fucker|bitch;kind=bro;person]]. Meow."))
 	#print(diag.processString("Hello,_[[asd]]meow", {kind=true,mean=true}, {BITCH=["bitch", "stupid-bitch", "stupid-stupid-bitch"]}))
-
+	troubleshooting_screen.visible = false
+	building_pck_panel.visible = false
 	
 	if(GlobalTheme != null):
 		if(OS.has_touchscreen_ui_hint()):
 			GlobalTheme.rename_stylebox("scrollTouch", "scroll", "VScrollBar")
 	
 	var rawModList = GlobalRegistry.getRawModList()
-	if(GlobalRegistry.hasModSupport() && OS.get_name() == "Android" && (rawModList.size() > 0) || OPTIONS.shouldShowModdedLauncher()):
+	if(GlobalRegistry.hasModSupport() && OS.get_name() == "Android" && (rawModList.size() > 0 || OPTIONS.shouldShowModdedLauncher())):
 		if(Util.readFile(pckversionPath) != GlobalRegistry.getGameVersionString()):
-			generateBDCCpckFile()
+			yield(generateBDCCpckFile(), "completed")
 			rawModList = GlobalRegistry.getRawModList()
 			
 	var SHOW_THIS_SCREEN_ANYWAY = false # DON'T FORGET TO CHANGE TO false BEFORE SHIPPING
+	
+	if(GlobalRegistry.doesLoadLockFileExist()): # Game crashed during loading last time
+		SHOW_THIS_SCREEN_ANYWAY = true
+		debug_button["custom_colors/font_color"] = Color.yellow
 	
 	if(OS.get_name() == "Android" || SHOW_THIS_SCREEN_ANYWAY):
 		$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/TestButton.visible = true
@@ -337,10 +345,13 @@ func _on_RichTextLabel_meta_clicked(meta):
 
 
 func _on_TestButton_pressed():
-	generateBDCCpckFile()
+	yield(generateBDCCpckFile(), "completed")
 	checkModOrderAndFillData(GlobalRegistry.getRawModList())
 	
 func generateBDCCpckFile():
+	building_pck_panel.visible = true
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
 	var packer = PCKPacker.new()
 	
 	var modsFolder = GlobalRegistry.getModsFolder()
@@ -353,6 +364,7 @@ func generateBDCCpckFile():
 	packer.flush()
 	
 	Util.writeFile(pckversionPath, GlobalRegistry.getGameVersionString())
+	building_pck_panel.visible = false
 
 const ignorePaths = {
 	"res://.git": true,
@@ -433,3 +445,10 @@ func _input(event):
 func _on_ResetGRCacheButton_pressed():
 	GlobalRegistry.resetRegistryCache(true)
 	$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/ResetGRCacheButton.disabled = true
+
+
+func _on_TroubleshootingScreen_onClose():
+	troubleshooting_screen.visible = false
+
+func _on_DebugButton_pressed():
+	troubleshooting_screen.visible = true
