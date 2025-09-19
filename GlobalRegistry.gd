@@ -3,7 +3,7 @@ extends Node
 var game_version_major = 0
 var game_version_minor = 1
 var game_version_revision = 11
-var game_version_suffix = ""
+var game_version_suffix = "fix1"
 
 var contributorsCredits:Dictionary = {
 	"Max-Maxou": [
@@ -513,6 +513,7 @@ func getDonationDataString():
 const totalStages = 19.0
 
 func registerEverything():
+	createLoadLockFile()
 	var start = OS.get_ticks_usec()
 	loadRegistryCacheFromFile()
 	
@@ -728,6 +729,7 @@ func registerEverything():
 	var worker_time = (end-start)/1000000.0
 	Log.print("GlobalRegistry fully initialized in: %s seconds" % [worker_time])
 	isInitialized = true
+	deleteLoadLockFile()
 	emit_signal("loadingFinished")
 	
 # The point is that it will still generate unique ids even after saving/loading
@@ -2815,3 +2817,19 @@ func loadRegistryCacheFromFile():
 	save_game.close()
 	fillBaseCacheFields()
 
+const loadLockPath = "user://loadlock.lockfile" # Game creates this file when it starts loading. Then deletes it when it finishes loading. If this file exists -> the game crashed during the previous loading
+
+func doesLoadLockFileExist() -> bool:
+	var f:File = File.new()
+	return f.file_exists(loadLockPath)
+
+func createLoadLockFile():
+	var file = File.new()
+	file.open(loadLockPath, File.WRITE)
+	#file.store_string(content)
+	file.close()
+
+func deleteLoadLockFile():
+	if(doesLoadLockFileExist()):
+		var d:Directory = Directory.new()
+		d.remove(loadLockPath)

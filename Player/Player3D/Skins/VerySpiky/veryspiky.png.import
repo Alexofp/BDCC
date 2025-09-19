@@ -2,23 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/veryspiky.png-d2743230ff2b3c2e48e79d03d0315b57.s3tc.stex"
-path.etc2="res://.import/veryspiky.png-d2743230ff2b3c2e48e79d03d0315b57.etc2.stex"
-path.etc="res://.import/veryspiky.png-d2743230ff2b3c2e48e79d03d0315b57.etc.stex"
-path.pvrtc="res://.import/veryspiky.png-d2743230ff2b3c2e48e79d03d0315b57.pvrtc.stex"
+path="res://.import/veryspiky.png-d2743230ff2b3c2e48e79d03d0315b57.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2", "etc", "pvrtc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Player/Player3D/Skins/VerySpiky/veryspiky.png"
-dest_files=[ "res://.import/veryspiky.png-d2743230ff2b3c2e48e79d03d0315b57.s3tc.stex", "res://.import/veryspiky.png-d2743230ff2b3c2e48e79d03d0315b57.etc2.stex", "res://.import/veryspiky.png-d2743230ff2b3c2e48e79d03d0315b57.etc.stex", "res://.import/veryspiky.png-d2743230ff2b3c2e48e79d03d0315b57.pvrtc.stex" ]
+dest_files=[ "res://.import/veryspiky.png-d2743230ff2b3c2e48e79d03d0315b57.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/lossy_quality=0.8
 compress/hdr_mode=0
 compress/bptc_ldr=0

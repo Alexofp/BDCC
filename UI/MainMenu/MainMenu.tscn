@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Game/UI/Util/SmartScrollContainer.gd" type="Script" id=9]
 [ext_resource path="res://UI/AutoTranslatorMenu/AutoTranslatorMenu.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Game/UI/Buttons/BetterButton.tscn" type="PackedScene" id=11]
+[ext_resource path="res://UI/TroubleshootingScreen/TroubleshootingScreen.tscn" type="PackedScene" id=12]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.207843, 0.133333, 0.364706, 1 )
@@ -441,16 +442,27 @@ text = "Datapacks"
 myTooltipDesc = "Manage or create datapacks"
 myShortcutKey = "S"
 
-[node name="QuitButton" parent="MainHBox/CenterAreaVBox/MainVBox/GridContainer" instance=ExtResource( 11 )]
+[node name="TroubleshootingButton" parent="MainHBox/CenterAreaVBox/MainVBox/GridContainer" instance=ExtResource( 11 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 304.0
 margin_top = 60.0
 margin_right = 452.0
 margin_bottom = 86.0
+text = "Troubleshooting"
+myTooltipDesc = "Troubleshoot problems with the game"
+myShortcutKey = "D"
+
+[node name="QuitButton" parent="MainHBox/CenterAreaVBox/MainVBox/GridContainer" instance=ExtResource( 11 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 456.0
+margin_top = 60.0
+margin_right = 603.0
+margin_bottom = 86.0
 text = "Quit"
 myTooltipDesc = "See you space cowboy..."
-myShortcutKey = "D"
+myShortcutKey = "F"
 
 [node name="DevToolsScreen" type="VBoxContainer" parent="MainHBox/CenterAreaVBox"]
 unique_name_in_owner = true
@@ -547,6 +559,16 @@ margin_right = 300.0
 margin_bottom = 56.0
 text = "Interaction Creator"
 myShortcutKey = "W"
+
+[node name="TroubleshootingScreen" parent="MainHBox/CenterAreaVBox" instance=ExtResource( 12 )]
+unique_name_in_owner = true
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 360.0
+margin_right = 754.0
+margin_bottom = 720.0
+size_flags_vertical = 3
 
 [node name="LoadGameScreen" parent="MainHBox/CenterAreaVBox" instance=ExtResource( 4 )]
 unique_name_in_owner = true
@@ -679,6 +701,7 @@ unique_name_in_owner = true
 [connection signal="pressedActually" from="MainHBox/CenterAreaVBox/MainVBox/GridContainer/ModsButton" to="." method="_on_ModsButton_pressed"]
 [connection signal="pressedActually" from="MainHBox/CenterAreaVBox/MainVBox/GridContainer/AutoTranslatorButton" to="." method="_on_AutoTranslatorButton_pressed"]
 [connection signal="pressedActually" from="MainHBox/CenterAreaVBox/MainVBox/GridContainer/DatapackButton" to="." method="_on_DatapackButton_pressed"]
+[connection signal="pressedActually" from="MainHBox/CenterAreaVBox/MainVBox/GridContainer/TroubleshootingButton" to="." method="_on_TroubleshootingButton_pressedActually"]
 [connection signal="pressedActually" from="MainHBox/CenterAreaVBox/MainVBox/GridContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
 [connection signal="pressedActually" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/DevClose" to="." method="_on_DevClose_pressed"]
 [connection signal="pressedActually" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/DevSceneConverter2" to="." method="_on_DevSceneConverter2_pressed"]
@@ -688,6 +711,7 @@ unique_name_in_owner = true
 [connection signal="pressedActually" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/DevSceneConverter" to="." method="_on_DevSceneConverter_pressed"]
 [connection signal="pressed" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/SexActivityCreator" to="." method="_on_SexActivityCreator_pressed"]
 [connection signal="pressedActually" from="MainHBox/CenterAreaVBox/DevToolsScreen/GridContainer/InteractionCreator" to="." method="_on_InteractionCreator_pressed"]
+[connection signal="onClose" from="MainHBox/CenterAreaVBox/TroubleshootingScreen" to="." method="_on_TroubleshootingScreen_onClose"]
 [connection signal="onClosePressed" from="MainHBox/CenterAreaVBox/LoadGameScreen" to="." method="switchToMainMenu"]
 [connection signal="onClosePressed" from="MainHBox/CenterAreaVBox/OptionsScreen" to="." method="switchToMainMenu"]
 [connection signal="onClosePressed" from="MainHBox/CenterAreaVBox/CreditsScreen" to="." method="switchToMainMenu"]

@@ -20,6 +20,8 @@ onready var auto_translator_button = $"%AutoTranslatorButton"
 onready var center_area_v_box = $"%CenterAreaVBox"
 onready var vertical_bottom_spacer = $"%VerticalBottomSpacer"
 
+onready var troubleshooting_screen = $"%TroubleshootingScreen"
+
 onready var vertical_github_release_box = $"%VerticalGithubReleaseBox"
 onready var vertical_github_release_label = $"%VerticalGithubReleaseLabel"
 var verticalModsStr:String = ""
@@ -82,6 +84,7 @@ func hideAllMenus():
 	devToolsScreen.visible = false
 	modsMenu.visible = false
 	autoTranslatorMenu.visible = false
+	troubleshooting_screen.visible = false
 	
 	updateSidePanelsVisibility()
 
@@ -191,7 +194,7 @@ func updateSidePanelsVisibility():
 	var isVert:bool = OPTIONS.isVerticalOrientation()
 	
 	var shouldBeVis:bool = true
-	if(devToolsScreen.visible):
+	if(devToolsScreen.visible || troubleshooting_screen.visible):
 		shouldBeVis = false
 	if(OPTIONS.isVerticalOrientation()):
 		shouldBeVis = false
@@ -294,3 +297,12 @@ func _on_InteractionCreator_pressed():
 
 func _on_QuitButton_pressed():
 	get_tree().quit()
+
+func _on_TroubleshootingButton_pressedActually():
+	hideAllMenus()
+	troubleshooting_screen.visible = true
+	updateSidePanelsVisibility()
+
+func _on_TroubleshootingScreen_onClose():
+	hideAllMenus()
+	MainVBox.visible = true

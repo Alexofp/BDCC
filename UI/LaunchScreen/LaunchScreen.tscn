@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://UI/LaunchScreen/LaunchScreen.gd" type="Script" id=1]
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://UI/LaunchScreen/LaunchModEntry.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=5]
 [ext_resource path="res://UI/ModBrowser/ModBrowser.tscn" type="PackedScene" id=6]
+[ext_resource path="res://UI/TroubleshootingScreen/TroubleshootingScreen.tscn" type="PackedScene" id=7]
 
 [sub_resource type="DynamicFont" id=3]
 size = 38
@@ -36,6 +37,16 @@ margin_bottom = 48.0
 custom_fonts/font = SubResource( 3 )
 text = "Modded BDCC Launcher"
 align = 1
+
+[node name="DebugButton" type="Button" parent="VBoxContainer/Label"]
+unique_name_in_owner = true
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -268.0
+margin_top = -5.0
+margin_right = -22.0
+margin_bottom = 41.0
+text = "TROUBLESHOOTING"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 52.0
@@ -206,7 +217,7 @@ text = "Play (modded)"
 margin_top = 648.0
 margin_right = 851.0
 margin_bottom = 668.0
-text = "This screen appeared because you have mods. If the game crashes on start, test without mods"
+text = "If the game crashes on start, test without mods or press the TROUBLESHOOTING button"
 align = 1
 autowrap = true
 
@@ -224,6 +235,32 @@ dialog_autowrap = true
 [node name="ModBrowser" parent="." instance=ExtResource( 6 )]
 visible = false
 
+[node name="TroubleshootingScreen" parent="." instance=ExtResource( 7 )]
+unique_name_in_owner = true
+visible = false
+
+[node name="BuildingPCKPanel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -290.0
+margin_top = -83.0
+margin_right = 290.0
+margin_bottom = 83.0
+
+[node name="Label" type="Label" parent="BuildingPCKPanel"]
+margin_left = 7.0
+margin_top = 61.0
+margin_right = 573.0
+margin_bottom = 104.0
+text = "Building BDCC.pck
+Please wait.."
+align = 1
+
+[connection signal="pressed" from="VBoxContainer/Label/DebugButton" to="." method="_on_DebugButton_pressed"]
 [connection signal="meta_clicked" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/WarningLabel" to="." method="_on_RichTextLabel_meta_clicked"]
 [connection signal="meta_clicked" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/ModDisableButton" to="." method="_on_ModDisableButton_pressed"]
@@ -238,3 +275,4 @@ visible = false
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/WithModsButton" to="." method="_on_WithModsButton_pressed"]
 [connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_confirmed"]
 [connection signal="closePressed" from="ModBrowser" to="." method="_on_ModBrowser_closePressed"]
+[connection signal="onClose" from="TroubleshootingScreen" to="." method="_on_TroubleshootingScreen_onClose"]

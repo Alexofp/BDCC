@@ -82,6 +82,29 @@ static func getFilesInFolder(folder):
 		Log.printerr("An error occurred when trying to access the path "+folder)
 	return result
 
+static func getFilesInFoldersRecursive(folder: String, ignoreBaseDir = false):
+	var result = []
+	
+	var dir = Directory.new()
+	if dir.open(folder) == OK:
+		dir.list_dir_begin(true)
+		var file_name = dir.get_next()
+		while file_name != "":
+			if dir.current_is_dir():
+				var full_path = folder.plus_file(file_name)
+				result.append_array(getFilesInFoldersRecursive(full_path, false))
+				#print("Found directory: " + file_name)
+			else:
+				if(!ignoreBaseDir):
+					var full_path = folder.plus_file(file_name)
+					result.append(full_path)
+				pass
+			file_name = dir.get_next()
+	else:
+		Log.printerr("An error occurred when trying to access the path "+folder)
+	
+	return result
+
 # https://godotengine.org/qa/20058/elegant-way-to-create-string-from-array-items
 static func join(arr: Array, separator: String = "") -> String:
 	var output = ""

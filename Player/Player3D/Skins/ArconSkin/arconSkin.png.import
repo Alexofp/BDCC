@@ -2,22 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/arconSkin.png-f6d6f1613f61643d4b4c4b51d052ff11.s3tc.stex"
-path.etc2="res://.import/arconSkin.png-f6d6f1613f61643d4b4c4b51d052ff11.etc2.stex"
-path.etc="res://.import/arconSkin.png-f6d6f1613f61643d4b4c4b51d052ff11.etc.stex"
+path="res://.import/arconSkin.png-f6d6f1613f61643d4b4c4b51d052ff11.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Player/Player3D/Skins/ArconSkin/arconSkin.png"
-dest_files=[ "res://.import/arconSkin.png-f6d6f1613f61643d4b4c4b51d052ff11.s3tc.stex", "res://.import/arconSkin.png-f6d6f1613f61643d4b4c4b51d052ff11.etc2.stex", "res://.import/arconSkin.png-f6d6f1613f61643d4b4c4b51d052ff11.etc.stex" ]
+dest_files=[ "res://.import/arconSkin.png-f6d6f1613f61643d4b4c4b51d052ff11.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/lossy_quality=0.8
 compress/hdr_mode=0
 compress/bptc_ldr=0

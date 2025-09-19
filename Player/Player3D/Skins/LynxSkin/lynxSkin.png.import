@@ -2,22 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/lynxSkin.png-fc0979c0a54d190d24f5cf27352e7495.s3tc.stex"
-path.etc2="res://.import/lynxSkin.png-fc0979c0a54d190d24f5cf27352e7495.etc2.stex"
-path.etc="res://.import/lynxSkin.png-fc0979c0a54d190d24f5cf27352e7495.etc.stex"
+path="res://.import/lynxSkin.png-fc0979c0a54d190d24f5cf27352e7495.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2", "etc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Player/Player3D/Skins/LynxSkin/lynxSkin.png"
-dest_files=[ "res://.import/lynxSkin.png-fc0979c0a54d190d24f5cf27352e7495.s3tc.stex", "res://.import/lynxSkin.png-fc0979c0a54d190d24f5cf27352e7495.etc2.stex", "res://.import/lynxSkin.png-fc0979c0a54d190d24f5cf27352e7495.etc.stex" ]
+dest_files=[ "res://.import/lynxSkin.png-fc0979c0a54d190d24f5cf27352e7495.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/lossy_quality=0.8
 compress/hdr_mode=0
 compress/bptc_ldr=0

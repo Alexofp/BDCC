@@ -1,0 +1,313 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://UI/TroubleshootingScreen/TroubleshootingScreen.gd" type="Script" id=1]
+
+[node name="TroubleshootingScreen" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="MainHBox" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 7.0
+margin_bottom = 7.0
+
+[node name="CenterContainer" type="CenterContainer" parent="MainHBox"]
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainHBox/CenterContainer"]
+margin_left = 565.0
+margin_top = 227.0
+margin_right = 714.0
+margin_bottom = 493.0
+
+[node name="DebugInfoButton" type="Button" parent="MainHBox/CenterContainer/VBoxContainer"]
+margin_right = 149.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_vertical = 3
+text = "DEBUG INFO"
+
+[node name="ViewLogsButton" type="Button" parent="MainHBox/CenterContainer/VBoxContainer"]
+margin_top = 54.0
+margin_right = 149.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_vertical = 3
+text = "View log"
+
+[node name="ManageFilesButton" type="Button" parent="MainHBox/CenterContainer/VBoxContainer"]
+margin_top = 108.0
+margin_right = 149.0
+margin_bottom = 158.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_vertical = 3
+text = "Manage files"
+
+[node name="ResetRenderButton" type="Button" parent="MainHBox/CenterContainer/VBoxContainer"]
+margin_top = 162.0
+margin_right = 149.0
+margin_bottom = 212.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_vertical = 3
+text = "Reset render settings"
+
+[node name="CloseButton" type="Button" parent="MainHBox/CenterContainer/VBoxContainer"]
+margin_top = 216.0
+margin_right = 149.0
+margin_bottom = 266.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_vertical = 3
+text = "Close"
+
+[node name="DebugPanelContainer" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DebugPanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1273.0
+margin_bottom = 713.0
+
+[node name="DebugTextEdit" type="TextEdit" parent="DebugPanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 1266.0
+margin_bottom = 598.0
+size_flags_vertical = 3
+
+[node name="SaveDebugToFileButton" type="Button" parent="DebugPanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 602.0
+margin_right = 1266.0
+margin_bottom = 652.0
+rect_min_size = Vector2( 0, 50 )
+text = "SAVE TO FILE"
+
+[node name="CloseDebugButton" type="Button" parent="DebugPanelContainer/VBoxContainer"]
+margin_top = 656.0
+margin_right = 1266.0
+margin_bottom = 706.0
+rect_min_size = Vector2( 0, 50 )
+text = "Close"
+
+[node name="ViewLogsContainer" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="HBoxContainer" parent="ViewLogsContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1273.0
+margin_bottom = 713.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ViewLogsContainer/VBoxContainer"]
+margin_right = 327.0
+margin_bottom = 706.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="CloseLogsButton" type="Button" parent="ViewLogsContainer/VBoxContainer/VBoxContainer"]
+margin_right = 327.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+text = "CLOSE"
+
+[node name="LogsItemList" type="ItemList" parent="ViewLogsContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 54.0
+margin_right = 327.0
+margin_bottom = 706.0
+size_flags_vertical = 3
+
+[node name="LogTextEdit" type="TextEdit" parent="ViewLogsContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_left = 331.0
+margin_right = 1266.0
+margin_bottom = 706.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ManageFilesContainer" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="HBoxContainer" parent="ManageFilesContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1273.0
+margin_bottom = 713.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ManageFilesContainer/VBoxContainer"]
+margin_right = 631.0
+margin_bottom = 706.0
+size_flags_horizontal = 3
+
+[node name="FilterFileLineEdit" type="LineEdit" parent="ManageFilesContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 631.0
+margin_bottom = 24.0
+placeholder_text = "filter.."
+
+[node name="ManageFileList" type="ItemList" parent="ManageFilesContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 28.0
+margin_right = 631.0
+margin_bottom = 706.0
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ManageFilesContainer/VBoxContainer"]
+margin_left = 635.0
+margin_right = 1266.0
+margin_bottom = 706.0
+size_flags_horizontal = 3
+
+[node name="CloseFilesButton" type="Button" parent="ManageFilesContainer/VBoxContainer/VBoxContainer2"]
+margin_right = 631.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+text = "CLOSE"
+
+[node name="FileInfoLabel" type="RichTextLabel" parent="ManageFilesContainer/VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+margin_top = 54.0
+margin_right = 631.0
+margin_bottom = 528.0
+size_flags_vertical = 3
+
+[node name="EditFileContentsButton" type="Button" parent="ManageFilesContainer/VBoxContainer/VBoxContainer2"]
+margin_top = 532.0
+margin_right = 631.0
+margin_bottom = 582.0
+rect_min_size = Vector2( 0, 50 )
+text = "Edit file contents"
+clip_text = true
+
+[node name="HSeparator2" type="HSeparator" parent="ManageFilesContainer/VBoxContainer/VBoxContainer2"]
+margin_top = 586.0
+margin_right = 631.0
+margin_bottom = 590.0
+
+[node name="ExportFileButton" type="Button" parent="ManageFilesContainer/VBoxContainer/VBoxContainer2"]
+margin_top = 594.0
+margin_right = 631.0
+margin_bottom = 644.0
+rect_min_size = Vector2( 0, 50 )
+text = "Export file to
+documents folder"
+clip_text = true
+
+[node name="HSeparator" type="HSeparator" parent="ManageFilesContainer/VBoxContainer/VBoxContainer2"]
+margin_top = 648.0
+margin_right = 631.0
+margin_bottom = 652.0
+
+[node name="DeleteFileButton" type="Button" parent="ManageFilesContainer/VBoxContainer/VBoxContainer2"]
+margin_top = 656.0
+margin_right = 631.0
+margin_bottom = 706.0
+rect_min_size = Vector2( 0, 50 )
+custom_colors/font_color = Color( 1, 0.0941176, 0.0941176, 1 )
+text = "DELETE FILE"
+
+[node name="EditFileContainer" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EditFileContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1273.0
+margin_bottom = 713.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EditFileContainer/VBoxContainer"]
+margin_right = 1266.0
+margin_bottom = 40.0
+
+[node name="SaveFileEditButton" type="Button" parent="EditFileContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_right = 100.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 100, 40 )
+text = "SAVE"
+
+[node name="CancelFileEditButton" type="Button" parent="EditFileContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+margin_left = 104.0
+margin_right = 204.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 100, 40 )
+text = "CANCEL"
+
+[node name="FileTextEdit" type="TextEdit" parent="EditFileContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 44.0
+margin_right = 1266.0
+margin_bottom = 706.0
+size_flags_vertical = 3
+
+[node name="AlertWindowDialog" type="WindowDialog" parent="."]
+unique_name_in_owner = true
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -188.5
+margin_top = -73.5
+margin_right = 188.5
+margin_bottom = 73.5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AlertWindowDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="AlertLabel" type="Label" parent="AlertWindowDialog/VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 377.0
+margin_bottom = 103.0
+size_flags_vertical = 7
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+
+[node name="ConfirmAlertButton" type="Button" parent="AlertWindowDialog/VBoxContainer"]
+margin_top = 107.0
+margin_right = 377.0
+margin_bottom = 147.0
+rect_min_size = Vector2( 0, 40 )
+text = "OK"
+
+[connection signal="pressed" from="MainHBox/CenterContainer/VBoxContainer/DebugInfoButton" to="." method="_on_DebugInfoButton_pressed"]
+[connection signal="pressed" from="MainHBox/CenterContainer/VBoxContainer/ViewLogsButton" to="." method="_on_ViewLogsButton_pressed"]
+[connection signal="pressed" from="MainHBox/CenterContainer/VBoxContainer/ManageFilesButton" to="." method="_on_ManageFilesButton_pressed"]
+[connection signal="pressed" from="MainHBox/CenterContainer/VBoxContainer/ResetRenderButton" to="." method="_on_ResetRenderButton_pressed"]
+[connection signal="pressed" from="MainHBox/CenterContainer/VBoxContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
+[connection signal="pressed" from="DebugPanelContainer/VBoxContainer/SaveDebugToFileButton" to="." method="_on_SaveDebugToFileButton_pressed"]
+[connection signal="pressed" from="DebugPanelContainer/VBoxContainer/CloseDebugButton" to="." method="_on_CloseDebugButton_pressed"]
+[connection signal="pressed" from="ViewLogsContainer/VBoxContainer/VBoxContainer/CloseLogsButton" to="." method="_on_CloseLogsButton_pressed"]
+[connection signal="item_selected" from="ViewLogsContainer/VBoxContainer/VBoxContainer/LogsItemList" to="." method="_on_LogsItemList_item_selected"]
+[connection signal="text_changed" from="ManageFilesContainer/VBoxContainer/VBoxContainer/FilterFileLineEdit" to="." method="_on_FilterFileLineEdit_text_changed"]
+[connection signal="item_selected" from="ManageFilesContainer/VBoxContainer/VBoxContainer/ManageFileList" to="." method="_on_ManageFileList_item_selected"]
+[connection signal="pressed" from="ManageFilesContainer/VBoxContainer/VBoxContainer2/CloseFilesButton" to="." method="_on_CloseFilesButton_pressed"]
+[connection signal="pressed" from="ManageFilesContainer/VBoxContainer/VBoxContainer2/EditFileContentsButton" to="." method="_on_EditFileContentsButton_pressed"]
+[connection signal="pressed" from="ManageFilesContainer/VBoxContainer/VBoxContainer2/ExportFileButton" to="." method="_on_ExportFileButton_pressed"]
+[connection signal="pressed" from="ManageFilesContainer/VBoxContainer/VBoxContainer2/DeleteFileButton" to="." method="_on_DeleteFileButton_pressed"]
+[connection signal="pressed" from="EditFileContainer/VBoxContainer/HBoxContainer/SaveFileEditButton" to="." method="_on_SaveFileEditButton_pressed"]
+[connection signal="pressed" from="EditFileContainer/VBoxContainer/HBoxContainer/CancelFileEditButton" to="." method="_on_CancelFileEditButton_pressed"]
+[connection signal="pressed" from="AlertWindowDialog/VBoxContainer/ConfirmAlertButton" to="." method="_on_ConfirmAlertButton_pressed"]

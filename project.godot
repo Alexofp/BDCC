@@ -2237,6 +2237,10 @@ window_fullscreen={
  ]
 }
 
+[logging]
+
+file_logging/enable_file_logging=true
+
 [physics]
 
 common/enable_pause_aware_picking=true
