@@ -200,3 +200,21 @@ func _on_CancelFileEditButton_pressed():
 
 func _on_FilterFileLineEdit_text_changed(_new_text):
 	updateManageFileList()
+
+func showAlert(_text:String):
+	if(alert_window_dialog.visible):
+		alert_label.text += "\n"+_text
+	else:
+		alert_window_dialog.popup_centered()
+		alert_label.text = _text
+
+func _on_ResetRenderButton_pressed():
+	OPTIONS.resetRenderSettings()
+	showAlert("Restart the game for this to have an effect.")
+
+onready var alert_window_dialog = $"%AlertWindowDialog"
+onready var alert_label = $"%AlertLabel"
+
+func _on_ConfirmAlertButton_pressed():
+	alert_window_dialog.visible = false
+	alert_label.text = ""

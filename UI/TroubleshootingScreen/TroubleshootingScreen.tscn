@@ -22,13 +22,13 @@ margin_bottom = 720.0
 size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainHBox/CenterContainer"]
-margin_left = 592.0
-margin_top = 254.0
-margin_right = 687.0
-margin_bottom = 466.0
+margin_left = 565.0
+margin_top = 227.0
+margin_right = 714.0
+margin_bottom = 493.0
 
 [node name="DebugInfoButton" type="Button" parent="MainHBox/CenterContainer/VBoxContainer"]
-margin_right = 95.0
+margin_right = 149.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_vertical = 3
@@ -36,7 +36,7 @@ text = "DEBUG INFO"
 
 [node name="ViewLogsButton" type="Button" parent="MainHBox/CenterContainer/VBoxContainer"]
 margin_top = 54.0
-margin_right = 95.0
+margin_right = 149.0
 margin_bottom = 104.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_vertical = 3
@@ -44,16 +44,24 @@ text = "View log"
 
 [node name="ManageFilesButton" type="Button" parent="MainHBox/CenterContainer/VBoxContainer"]
 margin_top = 108.0
-margin_right = 95.0
+margin_right = 149.0
 margin_bottom = 158.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_vertical = 3
 text = "Manage files"
 
-[node name="CloseButton" type="Button" parent="MainHBox/CenterContainer/VBoxContainer"]
+[node name="ResetRenderButton" type="Button" parent="MainHBox/CenterContainer/VBoxContainer"]
 margin_top = 162.0
-margin_right = 95.0
+margin_right = 149.0
 margin_bottom = 212.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_vertical = 3
+text = "Reset render settings"
+
+[node name="CloseButton" type="Button" parent="MainHBox/CenterContainer/VBoxContainer"]
+margin_top = 216.0
+margin_right = 149.0
+margin_bottom = 266.0
 rect_min_size = Vector2( 0, 50 )
 size_flags_vertical = 3
 text = "Close"
@@ -132,6 +140,7 @@ size_flags_vertical = 3
 
 [node name="ManageFilesContainer" type="PanelContainer" parent="."]
 unique_name_in_owner = true
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -251,9 +260,43 @@ margin_right = 1266.0
 margin_bottom = 706.0
 size_flags_vertical = 3
 
+[node name="AlertWindowDialog" type="WindowDialog" parent="."]
+unique_name_in_owner = true
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -188.5
+margin_top = -73.5
+margin_right = 188.5
+margin_bottom = 73.5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AlertWindowDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="AlertLabel" type="Label" parent="AlertWindowDialog/VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 377.0
+margin_bottom = 103.0
+size_flags_vertical = 7
+align = 1
+valign = 1
+autowrap = true
+clip_text = true
+
+[node name="ConfirmAlertButton" type="Button" parent="AlertWindowDialog/VBoxContainer"]
+margin_top = 107.0
+margin_right = 377.0
+margin_bottom = 147.0
+rect_min_size = Vector2( 0, 40 )
+text = "OK"
+
 [connection signal="pressed" from="MainHBox/CenterContainer/VBoxContainer/DebugInfoButton" to="." method="_on_DebugInfoButton_pressed"]
 [connection signal="pressed" from="MainHBox/CenterContainer/VBoxContainer/ViewLogsButton" to="." method="_on_ViewLogsButton_pressed"]
 [connection signal="pressed" from="MainHBox/CenterContainer/VBoxContainer/ManageFilesButton" to="." method="_on_ManageFilesButton_pressed"]
+[connection signal="pressed" from="MainHBox/CenterContainer/VBoxContainer/ResetRenderButton" to="." method="_on_ResetRenderButton_pressed"]
 [connection signal="pressed" from="MainHBox/CenterContainer/VBoxContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
 [connection signal="pressed" from="DebugPanelContainer/VBoxContainer/SaveDebugToFileButton" to="." method="_on_SaveDebugToFileButton_pressed"]
 [connection signal="pressed" from="DebugPanelContainer/VBoxContainer/CloseDebugButton" to="." method="_on_CloseDebugButton_pressed"]
@@ -267,3 +310,4 @@ size_flags_vertical = 3
 [connection signal="pressed" from="ManageFilesContainer/VBoxContainer/VBoxContainer2/DeleteFileButton" to="." method="_on_DeleteFileButton_pressed"]
 [connection signal="pressed" from="EditFileContainer/VBoxContainer/HBoxContainer/SaveFileEditButton" to="." method="_on_SaveFileEditButton_pressed"]
 [connection signal="pressed" from="EditFileContainer/VBoxContainer/HBoxContainer/CancelFileEditButton" to="." method="_on_CancelFileEditButton_pressed"]
+[connection signal="pressed" from="AlertWindowDialog/VBoxContainer/ConfirmAlertButton" to="." method="_on_ConfirmAlertButton_pressed"]
