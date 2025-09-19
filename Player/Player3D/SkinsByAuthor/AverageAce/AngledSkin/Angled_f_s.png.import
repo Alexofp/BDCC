@@ -2,23 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Angled_f_s.png-b242fd48b6d2f0d94039fabc54331089.s3tc.stex"
-path.etc2="res://.import/Angled_f_s.png-b242fd48b6d2f0d94039fabc54331089.etc2.stex"
-path.etc="res://.import/Angled_f_s.png-b242fd48b6d2f0d94039fabc54331089.etc.stex"
-path.pvrtc="res://.import/Angled_f_s.png-b242fd48b6d2f0d94039fabc54331089.pvrtc.stex"
+path="res://.import/Angled_f_s.png-b242fd48b6d2f0d94039fabc54331089.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2", "etc", "pvrtc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Player/Player3D/SkinsByAuthor/AverageAce/AngledSkin/Angled_f_s.png"
-dest_files=[ "res://.import/Angled_f_s.png-b242fd48b6d2f0d94039fabc54331089.s3tc.stex", "res://.import/Angled_f_s.png-b242fd48b6d2f0d94039fabc54331089.etc2.stex", "res://.import/Angled_f_s.png-b242fd48b6d2f0d94039fabc54331089.etc.stex", "res://.import/Angled_f_s.png-b242fd48b6d2f0d94039fabc54331089.pvrtc.stex" ]
+dest_files=[ "res://.import/Angled_f_s.png-b242fd48b6d2f0d94039fabc54331089.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/lossy_quality=0.8
 compress/hdr_mode=0
 compress/bptc_ldr=0

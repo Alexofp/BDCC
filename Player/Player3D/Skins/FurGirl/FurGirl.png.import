@@ -2,23 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/FurGirl.png-8c266c7f5aed5e77d38e3f37f3c9e9af.s3tc.stex"
-path.etc2="res://.import/FurGirl.png-8c266c7f5aed5e77d38e3f37f3c9e9af.etc2.stex"
-path.etc="res://.import/FurGirl.png-8c266c7f5aed5e77d38e3f37f3c9e9af.etc.stex"
-path.pvrtc="res://.import/FurGirl.png-8c266c7f5aed5e77d38e3f37f3c9e9af.pvrtc.stex"
+path="res://.import/FurGirl.png-8c266c7f5aed5e77d38e3f37f3c9e9af.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2", "etc", "pvrtc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Player/Player3D/Skins/FurGirl/FurGirl.png"
-dest_files=[ "res://.import/FurGirl.png-8c266c7f5aed5e77d38e3f37f3c9e9af.s3tc.stex", "res://.import/FurGirl.png-8c266c7f5aed5e77d38e3f37f3c9e9af.etc2.stex", "res://.import/FurGirl.png-8c266c7f5aed5e77d38e3f37f3c9e9af.etc.stex", "res://.import/FurGirl.png-8c266c7f5aed5e77d38e3f37f3c9e9af.pvrtc.stex" ]
+dest_files=[ "res://.import/FurGirl.png-8c266c7f5aed5e77d38e3f37f3c9e9af.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/lossy_quality=0.8
 compress/hdr_mode=0
 compress/bptc_ldr=0

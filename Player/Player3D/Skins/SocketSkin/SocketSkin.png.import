@@ -2,23 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/SocketSkin.png-a477805fdf075c23a060c2f792ef6695.s3tc.stex"
-path.etc2="res://.import/SocketSkin.png-a477805fdf075c23a060c2f792ef6695.etc2.stex"
-path.etc="res://.import/SocketSkin.png-a477805fdf075c23a060c2f792ef6695.etc.stex"
-path.pvrtc="res://.import/SocketSkin.png-a477805fdf075c23a060c2f792ef6695.pvrtc.stex"
+path="res://.import/SocketSkin.png-a477805fdf075c23a060c2f792ef6695.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2", "etc", "pvrtc" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Player/Player3D/Skins/SocketSkin/SocketSkin.png"
-dest_files=[ "res://.import/SocketSkin.png-a477805fdf075c23a060c2f792ef6695.s3tc.stex", "res://.import/SocketSkin.png-a477805fdf075c23a060c2f792ef6695.etc2.stex", "res://.import/SocketSkin.png-a477805fdf075c23a060c2f792ef6695.etc.stex", "res://.import/SocketSkin.png-a477805fdf075c23a060c2f792ef6695.pvrtc.stex" ]
+dest_files=[ "res://.import/SocketSkin.png-a477805fdf075c23a060c2f792ef6695.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/lossy_quality=0.8
 compress/hdr_mode=0
 compress/bptc_ldr=0
