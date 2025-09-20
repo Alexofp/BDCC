@@ -234,6 +234,9 @@ var drugDenEventRefs:Dictionary = {}
 var playerSlaveryDefs:Dictionary = {}
 var specialRelationships:Dictionary = {}
 var specialRelationshipRefs:Dictionary = {}
+var npcOwnerRefs:Dictionary = {}
+var npcOwners:Dictionary = {}
+var npcOwnerEvents:Dictionary = {}
 
 var bodypartStorageNode
 
@@ -655,6 +658,9 @@ func registerEverything():
 	
 	registerPlayerSlaveryDefFolder("res://Game/PlayerSlavery/ScenarioDefs/")
 	registerSpecialRelantionshipFolder("res://Game/InteractionSystem/Relationship/SpecialRelationships/")
+	
+	registerNpcOwnerTypeFolder("res://Game/PlayerSlaverySoft/OwnerTypes/")
+	registerNpcOwnerEventFolder("res://Game/PlayerSlaverySoft/OwnerEvents/")
 	
 	registerInteractionFolder("res://Game/InteractionSystem/Interactions/")
 	registerGlobalTaskFolder("res://Game/InteractionSystem/GlobalTasks/")
@@ -2756,6 +2762,59 @@ func getSpecialRelationshipRef(id: String):
 		
 func getSpecialRelationships():
 	return specialRelationshipRefs
+
+
+
+func registerNpcOwnerType(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	npcOwners[object.id] = loadedClass
+	npcOwnerRefs[object.id] = object
+
+func registerNpcOwnerTypeFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerNpcOwnerType(scriptPath)
+
+func createNpcOwnerType(id: String):
+	if(npcOwners.has(id)):
+		return npcOwners[id].new()
+	else:
+		Log.printerr("ERROR: npc owner type with the id "+id+" wasn't found")
+		return null
+
+func getNpcOwnerTypeRef(id: String):
+	if(npcOwnerRefs.has(id)):
+		return npcOwnerRefs[id]
+	else:
+		Log.printerr("ERROR: npc owner type with the id "+id+" wasn't found")
+		return null
+		
+func getNpcOwnerTypes():
+	return npcOwnerRefs
+
+
+func registerNpcOwnerEvent(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	npcOwnerEvents[object.id] = loadedClass
+
+func registerNpcOwnerEventFolder(folder: String):
+	var scripts = getScriptsInFolder(folder)
+	for scriptPath in scripts:
+		registerNpcOwnerEvent(scriptPath)
+
+func createNpcOwnerEvent(id: String):
+	if(npcOwnerEvents.has(id)):
+		return npcOwnerEvents[id].new()
+	else:
+		Log.printerr("ERROR: npc owner event with the id "+id+" wasn't found")
+		return null
+
+func getNpcOwnerEvents():
+	return npcOwnerEvents
 
 
 
