@@ -23,6 +23,8 @@ func _on_DebugInfoButton_pressed():
 	debug_panel_container.visible = true
 	
 	debugText = "IF YOUR GAME IS CRASHING, SAVE THIS TEXT AND SEND IT TO RAHI\n"
+	debugText += "Game version: "+GlobalRegistry.getGameVersionString()+"\n"
+	debugText += "Platform: "+OS.get_name()+"\n"
 	debugText += "User files:\n"
 	var userFiles:Array =  Util.getFilesInFoldersRecursive("user://")
 	for filePath in userFiles:

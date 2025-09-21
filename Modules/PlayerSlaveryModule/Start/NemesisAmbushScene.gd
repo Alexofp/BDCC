@@ -144,7 +144,7 @@ func _run():
 			"Don't be stupid. It's three against one.",
 		])+"[/say]")
 		
-		saynn("Something tells you they won't give you a bondage to help stop the blood..")
+		saynn("Something tells you they won't give you a bandage to help stop the blood..")
 		
 		addButton("Continue", "See what happens next", "show_others")
 	
