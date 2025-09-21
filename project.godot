@@ -1039,6 +1039,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Pregnancy/NpcGender.gd"
 }, {
+"base": "Object",
+"class": "NpcOwnerActionType",
+"language": "GDScript",
+"path": "res://Game/PlayerSlaverySoft/NpcOwnerActionType.gd"
+}, {
 "base": "Reference",
 "class": "NpcOwnerBase",
 "language": "GDScript",
@@ -1981,6 +1986,7 @@ _global_script_class_icons={
 "NpcFinder": "",
 "NpcGen": "",
 "NpcGender": "",
+"NpcOwnerActionType": "",
 "NpcOwnerBase": "",
 "NpcOwnerEventBase": "",
 "NpcOwnerEventRunner": "",
