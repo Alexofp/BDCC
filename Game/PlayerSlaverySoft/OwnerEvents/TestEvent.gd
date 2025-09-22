@@ -7,11 +7,13 @@ func onStart(_args:Array):
 	setState("start")
 
 func start():
-	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(ROLE_OWNER)})
+	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_OWNER)})
 	saynn("Test!")
+	talk(C_OWNER, "Meow meow.")
 	#if(onlyOnce()):
 	#	sayAppend("[color=red]OW[/color]")
 	#	GM.pc.addPain(10)
+	addInfluence(0.01)
 	
 	addButton("Pet", "Pet the cat", "pet")
 	addButton("Pet 2", "Pet the cat but better", "setState", ["petted"])
@@ -32,7 +34,7 @@ func start_fightResult(_didWin:bool):
 		setState("weWon")
 
 func weWon():
-	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(ROLE_OWNER), npcAction="kneel"})
+	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_OWNER), npcAction="kneel"})
 	saynn("YAY! YOU WON!")
 	addButton("Back", "Go back", "setState", ["start"])
 

@@ -14,6 +14,13 @@ func getInteractEvents() -> Array:
 		
 	]
 
+func addInfluence(_am:float):
+	influence += _am
+	influence = clamp(influence, 0.0, 1.0)
+
+func getInfluence() -> float:
+	return influence
+
 func saveData() -> Dictionary:
 	return {}
 

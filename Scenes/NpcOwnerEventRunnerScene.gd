@@ -3,8 +3,10 @@ extends SceneBase
 var runner:NpcOwnerEventRunner = NpcOwnerEventRunner.new()
 
 func _initScene(_args = []):
+	var theEventID:String = _args[1] if _args.size() > 1 else "FuckInStocks"#"TestEvent"
+	
 	runner.setOwnerID(_args[0] if _args.size() > 0 else "nova")
-	runner.runEvent(_args[1] if _args.size() > 1 else "TestEvent", _args[2] if _args.size() > 2 else [])
+	runner.runEvent(theEventID, _args[2] if _args.size() > 2 else [])
 	
 func _init():
 	sceneID = "NpcOwnerEventRunnerScene"
@@ -54,6 +56,9 @@ func _react_scene_end(_tag, _result):
 
 func resolveCustomCharacterName(_charID):
 	return runner.resolveCustomCharacterName(_charID)
+
+func supportsShowingPawns() -> bool:
+	return true
 
 func saveData():
 	var data = .saveData()

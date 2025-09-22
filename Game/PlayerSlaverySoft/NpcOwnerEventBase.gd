@@ -1,18 +1,31 @@
 extends Reference
 class_name NpcOwnerEventBase
 
-const ROLE_PC = -1
-const ROLE_OWNER = -2
-const ROLE_EXTRA1 = 0
-const ROLE_EXTRA2 = 1
-const ROLE_EXTRA3 = 2
-const ROLE_EXTRA4 = 3
+const LOC_STOCKS = "main_punishment_spot"
+const LOC_SLUTWALL = "fight_slutwall"
+
+const C_PC = -1
+const C_OWNER = -2
+const C_EXTRA1 = 0
+const C_EXTRA2 = 1
+const C_EXTRA3 = 2
+const C_EXTRA4 = 3
 
 const AliasToRole = {
-	"npc2": ROLE_EXTRA1,
-	"npc3": ROLE_EXTRA2,
-	"npc4": ROLE_EXTRA3,
-	"npc5": ROLE_EXTRA4,
+	"pc": C_PC,
+	"npc": C_OWNER,
+	"npc2": C_EXTRA1,
+	"npc3": C_EXTRA2,
+	"npc4": C_EXTRA3,
+	"npc5": C_EXTRA4,
+}
+const RoleToAlias = {
+	C_PC: "pc",
+	C_OWNER: "npc",
+	C_EXTRA1: "npc2",
+	C_EXTRA2: "npc3",
+	C_EXTRA3: "npc4",
+	C_EXTRA4: "npc5",
 }
 
 var id:String = "error"
@@ -32,9 +45,9 @@ func removeRole(_role:int):
 	roles.erase(_role)
 
 func getRoleID(_role:int) -> String:
-	if(_role == ROLE_PC):
+	if(_role == C_PC):
 		return "pc"
-	if(_role == ROLE_OWNER):
+	if(_role == C_OWNER):
 		return getRunner().getOwnerID()
 	if(!roles.has(_role)):
 		Log.printerr("The npc owner event "+str(id)+" is using a role "+str(_role)+" that wasn't defined!")
@@ -57,6 +70,12 @@ func resolveCustomCharacterName(_charID):
 	if(AliasToRole.has(_charID)):
 		return getRoleID(AliasToRole[_charID])
 
+func convertRoleToAlias(_role:int) -> String:
+	if(RoleToAlias.has(_role)):
+		return RoleToAlias[_role]
+	Log.printerr("Wrong role: "+str(_role))
+	return "npc"
+
 func getOwnerID() -> String:
 	return getRunner().getOwnerID()
 
@@ -77,7 +96,7 @@ func getRunner():
 func onStart(_args:Array):
 	pass
 
-func runEvent(_tag:String, _id:String, _args:Array):
+func runEvent(_tag:String, _id:String, _args:Array = []):
 	getRunner().runEvent(_id, _args, _tag)
 
 func runCurrentState():
@@ -95,6 +114,8 @@ func doAction(_actionID:String, _args:Array) -> Array:
 		return [NpcOwnerActionType.NOTHING]
 	if(_actionID == "startFight"):
 		return [NpcOwnerActionType.START_FIGHT, _args]
+	if(_actionID == "startSex"):
+		return [NpcOwnerActionType.START_SEX, _args]
 	
 	if(!has_method(state+"_do")):
 		Log.printerr("Npc Event "+str(id)+" has no '_do()' function for the state '"+str(state)+"'!")
@@ -123,8 +144,47 @@ func saynn(_text:String):
 func sayAppend(_text:String):
 	getRunner().sayAppend(_text)
 
+func addInfluence(_am:float, _appendText:bool = true):
+	if(!onlyOnce()):
+		return
+	var npcOwner := getNpcOwner()
+	if(!npcOwner):
+		if(_appendText):
+			if(_am > 0.0):
+				sayAppend("[color=#00CC00](Influence increased)[/color]")
+			if(_am < 0.0):
+				sayAppend("[color=red](Influence decreased)[/color]")
+		return
+	var oldValue:float = npcOwner.getInfluence()
+	npcOwner.addInfluence(_am)
+	var newValue:float = npcOwner.getInfluence()
+	if(_appendText):
+		if(newValue > oldValue):
+			sayAppend("[color=#00CC00](Influence increased)[/color]")
+		if(newValue < oldValue):
+			sayAppend("[color=red](Influence decreased)[/color]")
+
+func addInfluenceObey():
+	addInfluence(0.01)
+
+func getInfluence() -> float:
+	var npcOwner := getNpcOwner()
+	if(!npcOwner):
+		return 0.5
+	return npcOwner.getInfluence()
+
+func setLocation(_loc:String):
+	GM.pc.setLocation(_loc)
+	aimCamera(_loc)
+
+func talk(_role:int, _text:String):
+	saynn("[say="+convertRoleToAlias(_role)+"]"+_text+"[/say]")
+
 func addButton(_name:String, _desc:String, _action:String, _args:Array = []):
 	getRunner().addButton(self, _name, _desc, _action, _args)
+
+func addContinue(_action:String, _args:Array = []):
+	addButton("Continue", "See what happens next..", _action, _args)
 
 func endEvent(_args:Array = []):
 	getRunner().removeEndedEvent(self, _args)
