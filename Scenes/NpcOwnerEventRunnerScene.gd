@@ -3,7 +3,7 @@ extends SceneBase
 var runner:NpcOwnerEventRunner = NpcOwnerEventRunner.new()
 
 func _initScene(_args = []):
-	var theEventID:String = _args[1] if _args.size() > 1 else "FuckInStocks"#"TestEvent"
+	var theEventID:String = _args[1] if _args.size() > 1 else "Fuck"#"FuckInStocks"#"TestEvent"
 	
 	runner.setOwnerID(_args[0] if _args.size() > 0 else "nova")
 	runner.runEvent(theEventID, _args[2] if _args.size() > 2 else [])
@@ -13,8 +13,8 @@ func _init():
 
 func _run():
 	if(state == ""):
-		setCharactersEasyList(runner.getAllInvolvedCharIDs())
 		runner.run()
+		setCharactersEasyList(runner.getAllInvolvedCharIDs())
 		saynn(runner.getFinalText())
 		
 		var theActions := runner.getFinalActions()
@@ -53,7 +53,9 @@ func _react_scene_end(_tag, _result):
 		var sexResult = _result[0]
 		
 		runner.notifySexResult(sexResult)
-
+	if(runner.shouldEnd()):
+		endScene()
+	
 func resolveCustomCharacterName(_charID):
 	return runner.resolveCustomCharacterName(_charID)
 

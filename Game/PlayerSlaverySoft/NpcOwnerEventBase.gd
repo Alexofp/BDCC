@@ -14,27 +14,35 @@ const C_EXTRA4 = 3
 const AliasToRole = {
 	"pc": C_PC,
 	"npc": C_OWNER,
-	"npc2": C_EXTRA1,
-	"npc3": C_EXTRA2,
-	"npc4": C_EXTRA3,
-	"npc5": C_EXTRA4,
+	"npc1": C_EXTRA1,
+	"npc2": C_EXTRA2,
+	"npc3": C_EXTRA3,
+	"npc4": C_EXTRA4,
 }
 const RoleToAlias = {
 	C_PC: "pc",
 	C_OWNER: "npc",
-	C_EXTRA1: "npc2",
-	C_EXTRA2: "npc3",
-	C_EXTRA3: "npc4",
-	C_EXTRA4: "npc5",
+	C_EXTRA1: "npc1",
+	C_EXTRA2: "npc2",
+	C_EXTRA3: "npc3",
+	C_EXTRA4: "npc4",
 }
 
 var id:String = "error"
+var reactsToTags:Array = []
+
 var state:String = "start"
 var tag:String = ""
+var subResult:int = 0
 
 var roles:Dictionary = {} # indx -> char id
 
+var pretext:String = ""
+
 var runner:WeakRef
+
+const SUB_CONTINUE = 0
+const SUB_END = 1
 
 func involveCharID(_role:int, _charID:String):
 	roles[_role] = _charID
@@ -123,9 +131,9 @@ func doAction(_actionID:String, _args:Array) -> Array:
 	call(state+"_do", _actionID, _args)
 	return [NpcOwnerActionType.NOTHING]
 
-func reactEnded(_tag:String, _args:Array):
+func reactEnded(_event, _tag:String, _args:Array):
 	if(has_method(state+"_eventResult")):
-		call(state+"_eventResult", _tag, _args)
+		call(state+"_eventResult", _event, _tag, _args)
 
 func notifyFightResult(_didWin:bool):
 	if(has_method(state+"_fightResult")):
@@ -143,6 +151,11 @@ func saynn(_text:String):
 
 func sayAppend(_text:String):
 	getRunner().sayAppend(_text)
+
+func sayPretext():
+	if(pretext.empty()):
+		return
+	saynn(pretext)
 
 func addInfluence(_am:float, _appendText:bool = true):
 	if(!onlyOnce()):
@@ -166,6 +179,9 @@ func addInfluence(_am:float, _appendText:bool = true):
 
 func addInfluenceObey():
 	addInfluence(0.01)
+
+func addInfluenceResist():
+	addInfluence(-0.01)
 
 func getInfluence() -> float:
 	var npcOwner := getNpcOwner()
@@ -195,14 +211,60 @@ func onlyOnce() -> bool: # Returns false if we're refreshing the same state
 func getNpcOwner() -> NpcOwnerBase:
 	return getRunner().getNpcOwner()
 
+func getSubEventScore(_event, _tag:String, _args:Array) -> float:
+	return 0.0
+
+func trySubEventStart(_event, _tag:String, _args:Array) -> bool:
+	return true
+
+func checkSubEvent(_tag:String, _pretext:String, _args:Array) -> bool:
+	var eventIDsWithTag:Array = GlobalRegistry.getNpcOwnerEventIDsByTag(_tag)
+	if(eventIDsWithTag.empty()):
+		return false
+	
+	var possible:Array = []
+	#var totalScore:float = 0.0
+	for eventID in eventIDsWithTag:
+		var theEvent = GlobalRegistry.createNpcOwnerEvent(eventID)
+		var theScore:float = theEvent.getSubEventScore(self, _tag, _args)
+		if(theScore <= 0.0 || !RNG.chance(theScore*100.0)):
+			continue
+		possible.append([theEvent, theScore])
+		#totalScore += theScore
+	
+	#if(totalScore < 1.0 && !RNG.chance(totalScore*100.0)):
+	#	return false
+	
+	while(!possible.empty()):
+		var someEvent = RNG.grabWeightedPairs(possible)
+		someEvent.setEventRunner(getRunner())
+		someEvent.tag = _tag
+		someEvent.pretext = _pretext
+		if(someEvent.trySubEventStart(self, _tag, _args)):
+			getRunner().eventStack.append(someEvent)
+			return true
+		
+	return false
+
+func setSubResult(_r:int):
+	subResult = _r
+
+func getSubResult() -> int:
+	return subResult
+
+func shouldEndParent() -> bool:
+	return subResult > 0
+
 func saveData() -> Dictionary:
 	return {
 		state = state,
 		tag = tag,
 		roles = roles,
+		subResult = subResult,
 	}
 
 func loadData(_data:Dictionary):
 	state = SAVE.loadVar(_data, "state", "start")
 	tag = SAVE.loadVar(_data, "tag", "")
 	roles = SAVE.loadVar(_data, "roles", {})
+	subResult = SAVE.loadVar(_data, "subResult", 0)

@@ -53,6 +53,8 @@ func _run():
 	else:
 		addButtonAt(13, "Tasks", "Look at your tasks", "tasks")
 	addButtonAt(14, "Inventory", "Look at your inventory", "inventory")
+	
+	#addButtonAt(5, "NPC owner test", "TEST BUTTON", "npcOwnerTest")
 	#addButtonAt(5, "Sex Test", "Sex test", "sextest")
 	#addExtraButtonAt(4, "Sex Test", "Sex test", "sextest")
 	#addButtonAt(7, "Slave Test", "Slave test", "slavetest")
@@ -117,6 +119,13 @@ func _react(_action: String, _args):
 		runScene("StrugglingScene")
 	if(_action == "me"):
 		runScene("MeScene")
+	if(_action == "npcOwnerTest"):
+		var someNPC:String = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [], InmateGenerator.new(), {})
+		var thePawn:CharacterPawn = GM.main.IS.spawnPawnIfNeeded(someNPC)
+		thePawn.setLocation(GM.pc.getLocation())
+		GM.main.RS.startSpecialRelantionship("SoftSlavery", someNPC)
+		runScene("NpcOwnerEventRunnerScene", [someNPC])
+		
 	if(_action == "sextest"):
 		#runScene("GenericSexScene", ["pc", ["socket"]])
 		#runScene("GenericSexScene", [["rahi", "nova"], ["risha"]])

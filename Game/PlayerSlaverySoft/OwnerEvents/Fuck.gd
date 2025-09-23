@@ -1,30 +1,24 @@
 extends NpcOwnerEventBase
 
 func _init():
-	id = "FuckInStocks"
+	id = "Fuck"
 
 func onStart(_args:Array):
 	setState("start")
 
 func start():
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_OWNER)})
-	saynn("FUCK IN STOCKS!")
-	talk(C_OWNER, "I'M GONNA FUCK YOU IN STOCKS!")
+	saynn("FUCK!")
+	talk(C_OWNER, "I'M GONNA FUCK YOU!")
 	
 	addButton("Obey", "Allow them to do it", "obey")
 	addButton("Resist!", "You're not gonna let them do it", "resist")
 
-
-
-#func shouldEndAfterSubEvent(_args:Array) -> bool:
-#	return true
-
 func start_do(_id:String, _args:Array):
 	if(_id == "obey"):
-		setLocation(LOC_STOCKS)
-		if(checkSubEvent("lockedInStocks", "You were about to be locked into stocks by {npc.name}..", [])):
+		if(checkSubEvent("fuck", "You were about to be fucked by {npc.name}..", [])):
 			return
-		setState("inStocks")
+		setState("obey")
 	if(_id == "resist"):
 		runEvent("resist", "ResistGeneric")
 
@@ -33,25 +27,24 @@ func start_eventResult(_event, _id:String, _args:Array):
 		if(_event.shouldEndParent()):
 			endEvent()
 			return
-		setState("inStocks")
-	if(_id == "lockedInStocks"):
+		setState("obey")
+	if(_id == "fuck"):
 		if(_event.shouldEndParent()):
 			endEvent()
 			return
-		setState("inStocks")
+		setState("obey")
 	
-func inStocks():
-	playAnimation(StageScene.StocksSexOral, "tease", {npc=getRoleID(C_OWNER)})
+func obey():
+	playAnimation(StageScene.Duo, "kneel", {npc=getRoleID(C_OWNER)})
 	
-	saynn("YOU OBEY!")
+	saynn("YOU OBEY AND SUBMIT!")
 	addInfluenceObey()
-	saynn("YOU GET LOCKED IN STOCKS BY {npc.you}!")
-	addButton("Continue", "See what happens next", "startSex", [getRoleID(C_OWNER), "pc", SexType.StocksSex])
+	addButton("Continue", "See what happens next", "startSex", [getRoleID(C_OWNER), "pc"])
 	
-func inStocks_sexResult(_sexResult:SexEngineResult):
+func obey_sexResult(_sexResult:SexEngineResult):
 	setState("afterSex")
 
 func afterSex():
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_OWNER)})
-	saynn("AFTER SEX, YOU GET UNLOCKED FROM STOCKS!")
+	saynn("AFTER SEX, YOU GET LET GO!")
 	addContinue("endEvent")

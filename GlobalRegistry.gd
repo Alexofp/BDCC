@@ -237,6 +237,7 @@ var specialRelationshipRefs:Dictionary = {}
 var npcOwnerRefs:Dictionary = {}
 var npcOwners:Dictionary = {}
 var npcOwnerEvents:Dictionary = {}
+var npcOwnerEventIDsByTag:Dictionary = {}
 
 var bodypartStorageNode
 
@@ -661,6 +662,7 @@ func registerEverything():
 	
 	registerNpcOwnerTypeFolder("res://Game/PlayerSlaverySoft/OwnerTypes/")
 	registerNpcOwnerEventFolder("res://Game/PlayerSlaverySoft/OwnerEvents/")
+	registerNpcOwnerEventFolder("res://Game/PlayerSlaverySoft/SubEvents/")
 	
 	registerInteractionFolder("res://Game/InteractionSystem/Interactions/")
 	registerGlobalTaskFolder("res://Game/InteractionSystem/GlobalTasks/")
@@ -2800,6 +2802,11 @@ func registerNpcOwnerEvent(path: String):
 	var object = loadedClass.new()
 	
 	npcOwnerEvents[object.id] = loadedClass
+	for tagID in object.reactsToTags:
+		if(!npcOwnerEventIDsByTag.has(tagID)):
+			npcOwnerEventIDsByTag[tagID] = [object.id]
+		else:
+			npcOwnerEventIDsByTag[tagID].append(object.id)
 
 func registerNpcOwnerEventFolder(folder: String):
 	var scripts = getScriptsInFolder(folder)
@@ -2816,6 +2823,10 @@ func createNpcOwnerEvent(id: String):
 func getNpcOwnerEvents():
 	return npcOwnerEvents
 
+func getNpcOwnerEventIDsByTag(_tag:String) -> Array:
+	if(!npcOwnerEventIDsByTag.has(_tag)):
+		return []
+	return npcOwnerEventIDsByTag[_tag]
 
 
 

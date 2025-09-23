@@ -14,7 +14,10 @@ func getOwnerID() -> String:
 	return ownerID
 
 func getNpcOwner() -> NpcOwnerBase:
-	return GM.main.RS.getSpecialRelationship(ownerID)
+	var theSlavery = GM.main.RS.getSpecialRelationship(ownerID)
+	if(theSlavery && theSlavery.id == "SoftSlavery"):
+		return theSlavery.npcOwner
+	return null
 
 func getAllInvolvedCharIDs() -> Array:
 	if(eventStack.empty()):
@@ -32,6 +35,7 @@ func runEvent(_id:String, _args:Array = [], _tag:String = ""):
 	var theEvent = GlobalRegistry.createNpcOwnerEvent(_id)
 	if(!theEvent):
 		return
+	theEvent.tag = _tag
 	eventStack.append(theEvent)
 	theEvent.setEventRunner(self)
 	theEvent.onStart(_args)
@@ -44,7 +48,7 @@ func removeEndedEvent(_event, _args:Array):
 	eventStack.erase(_event)
 	if(!eventStack.empty()):
 		var newCurrent = eventStack.back()
-		newCurrent.reactEnded(eventTag, _args)
+		newCurrent.reactEnded(_event, eventTag, _args)
 
 func getCurrentEvent():
 	if(eventStack.empty()):
