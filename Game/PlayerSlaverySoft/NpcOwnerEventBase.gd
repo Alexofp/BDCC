@@ -5,11 +5,11 @@ const LOC_STOCKS = "main_punishment_spot"
 const LOC_SLUTWALL = "fight_slutwall"
 
 const C_PC = -1
-const C_OWNER = -2
-const C_EXTRA1 = 0
-const C_EXTRA2 = 1
-const C_EXTRA3 = 2
-const C_EXTRA4 = 3
+const C_OWNER = 0
+const C_EXTRA1 = 1
+const C_EXTRA2 = 2
+const C_EXTRA3 = 3
+const C_EXTRA4 = 4
 
 const AliasToRole = {
 	"pc": C_PC,
@@ -46,6 +46,11 @@ const SUB_END = 1
 
 func involveCharID(_role:int, _charID:String):
 	roles[_role] = _charID
+	if(_charID != "pc"):
+		var thePawn:CharacterPawn = GM.main.IS.getPawn(_charID)
+		if(thePawn):
+			thePawn.setLocation(GM.pc.getLocation())
+			GM.main.IS.startInteraction("InNpcOwnerEvent", {main=_charID})
 
 func removeRole(_role:int):
 	if(!roles.has(_role)):
@@ -190,8 +195,15 @@ func getInfluence() -> float:
 	return npcOwner.getInfluence()
 
 func setLocation(_loc:String):
-	GM.pc.setLocation(_loc)
+	#GM.pc.setLocation(_loc)
 	aimCamera(_loc)
+	getRunner().setLocation(_loc)
+
+func getPawnsNear(maxDepth:int, maxDist:float=-1.0) -> Array:
+	return GM.main.IS.getPawnsNear(GM.pc.getLocation(), maxDepth, maxDist)
+
+func getPawnIDsNear(maxDepth:int, maxDist:float=-1.0) -> Array:
+	return GM.main.IS.getPawnIDsNear(GM.pc.getLocation(), maxDepth, maxDist)
 
 func talk(_role:int, _text:String):
 	saynn("[say="+convertRoleToAlias(_role)+"]"+_text+"[/say]")
@@ -216,6 +228,9 @@ func getSubEventScore(_event, _tag:String, _args:Array) -> float:
 
 func trySubEventStart(_event, _tag:String, _args:Array) -> bool:
 	return true
+
+func involveOwner():
+	involveCharID(C_OWNER, getOwnerID())
 
 func checkSubEvent(_tag:String, _pretext:String, _args:Array) -> bool:
 	var eventIDsWithTag:Array = GlobalRegistry.getNpcOwnerEventIDsByTag(_tag)
@@ -242,6 +257,7 @@ func checkSubEvent(_tag:String, _pretext:String, _args:Array) -> bool:
 		someEvent.pretext = _pretext
 		if(someEvent.trySubEventStart(self, _tag, _args)):
 			getRunner().eventStack.append(someEvent)
+			someEvent.involveOwner()
 			return true
 		
 	return false

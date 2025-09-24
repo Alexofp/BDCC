@@ -147,7 +147,7 @@ func getSmallDescriptionWithRelationship() -> String:
 	if(GM.main && GM.main.RS):
 		var specialText:Array = GM.main.RS.getSpecialTextAndColor(getID())
 		if(specialText.size() >= 2):
-			result += "\n([color=#"+specialText[1].to_html(false)+"]"+specialText[0]+"[/color])"
+			result += "\n([color=#"+specialText[1].to_html(false)+"]"+specialText[0]+"[/color])"+(specialText[2] if specialText.size() > 2 else "")
 	return result
 	
 func getBasePainThreshold() -> int:

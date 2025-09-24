@@ -228,6 +228,13 @@ func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _conte
 			if(triggerTalkReactEvents("main")):
 				return
 		
+		if(_pawn.isPlayer()):
+			var theMainPawn := getRolePawn("main")
+			var theSpecialRelationship := theMainPawn.getSpecialRelationship()
+			if(theSpecialRelationship && theSpecialRelationship.id == "SoftSlavery" && theSpecialRelationship.npcOwner):
+				GM.main.runScene("NpcOwnerEventRunnerScene", [theMainPawn.charID, "Talk", []])
+				return
+				
 		startInteraction("Talking", {starter=_pawn.charID, reacter=getRoleID("main")})
 	if(_id == "grab_and_fuck"):
 		startInteraction("Talking", {starter=_pawn.charID, reacter=getRoleID("main")}, {grab_and_fuck=true})

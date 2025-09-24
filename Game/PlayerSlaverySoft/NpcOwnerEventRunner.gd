@@ -19,10 +19,42 @@ func getNpcOwner() -> NpcOwnerBase:
 		return theSlavery.npcOwner
 	return null
 
+#Checks only the 'current' event
 func getAllInvolvedCharIDs() -> Array:
 	if(eventStack.empty()):
 		return []
 	return eventStack.back().getAllInvolvedCharIDs()
+
+#Checks all the events
+func getAllEventsInvolvedCharIDs() -> Array:
+	if(eventStack.empty()):
+		return []
+	var result:Array = [getOwnerID()]
+	for theEvent in eventStack:
+		for roleIndx in theEvent.roles:
+			var roleCharID:String = theEvent.roles[roleIndx]
+			if(!result.has(roleCharID)):
+				result.append(roleCharID)
+	return result
+
+#Checks all the events
+func isCharIDInvolvedAllEvents(_charID:String) -> bool:
+	if(_charID == getOwnerID()):
+		return true
+	for theEvent in eventStack:
+		for roleIndx in theEvent.roles:
+			if(theEvent.roles[roleIndx] == _charID):
+				return true
+	return false
+
+func setLocation(_loc:String):
+	GM.pc.setLocation(_loc)
+	var allInvolvedCharIDs:Array = getAllEventsInvolvedCharIDs()
+	for theCharID in allInvolvedCharIDs:
+		var thePawn:CharacterPawn = GM.main.IS.getPawn(theCharID)
+		if(!thePawn):
+			continue
+		thePawn.setLocation(_loc)
 
 func resolveCustomCharacterName(_charID):
 	if(_charID == "npc"):
@@ -38,6 +70,7 @@ func runEvent(_id:String, _args:Array = [], _tag:String = ""):
 	theEvent.tag = _tag
 	eventStack.append(theEvent)
 	theEvent.setEventRunner(self)
+	theEvent.involveOwner()
 	theEvent.onStart(_args)
 
 func removeEvent(_event):

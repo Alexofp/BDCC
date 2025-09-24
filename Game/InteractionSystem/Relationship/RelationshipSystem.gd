@@ -279,7 +279,7 @@ func getSpecialTextAndColor(_charID:String) -> Array:
 	if(!hasSpecialRelationship(_charID)):
 		return []
 	var theShip = special[_charID]
-	return [theShip.getCategoryName(), theShip.getCategoryColor()]
+	return [theShip.getCategoryName(), theShip.getCategoryColor(), theShip.getExtraCategoryText()]
 
 func stopSpecialRelationship(_charID:String, callOnEnd:bool = true, addCooldown:bool = true):
 	if(!hasSpecialRelationship(_charID)):

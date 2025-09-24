@@ -32,6 +32,7 @@ func inStocks():
 	addButton("Continue", "See what happens next", "startSex", [[getRoleID(C_OWNER), getRoleID(C_EXTRA1)], "pc", SexType.StocksSex])
 	
 func inStocks_sexResult(_sexResult:SexEngineResult):
+	setSubResult(SUB_END)
 	setState("afterSex")
 
 func afterSex():

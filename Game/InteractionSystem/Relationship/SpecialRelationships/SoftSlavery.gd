@@ -17,6 +17,11 @@ func getMapTag() -> String:
 func getCategoryColor() -> Color:
 	return Color.darkorchid
 
+func getExtraCategoryText() -> String:
+	if(npcOwner):
+		return npcOwner.getExtraCategoryText()
+	return ""
+
 func checkSocialEventShouldStartActor(_charActor:String, _charTarget:String, _eventID:int, _args:Array) -> Array:
 	return [false]
 
@@ -27,13 +32,18 @@ func onSocialEvent(_charActor:String, _charTarget:String, _eventID:int, _args:Ar
 	pass
 
 func onStart(_args:Array):
+	var allPossibleOwnerTypes = GlobalRegistry.getNpcOwnerTypes()
+	npcOwner = GlobalRegistry.createNpcOwnerType(RNG.pick(allPossibleOwnerTypes))
+	npcOwner.setRelationship(self)
+	
 	showMessage(getChar().getName()+" became your [b][color=red]Owner[/color][/b]!")
 
 func onEnd():
 	showMessage(getChar().getName()+" is no longer your Owner!")
 
 func onNewDay():
-	pass
+	if(npcOwner):
+		npcOwner.onNewDay()
 
 func getCooldown() -> int:
 	return 0

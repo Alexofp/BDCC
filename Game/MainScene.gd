@@ -1754,6 +1754,14 @@ func isCharacterInAnySexEngine(_charID:String) -> bool:
 	
 	return false
 
+func isCharacterInAnyNPCEvent(_charID:String) -> bool:
+	for scene in sceneStack:
+		if(scene.sceneID == "NpcOwnerEventRunnerScene"):
+			if(scene.runner && scene.runner.isCharIDInvolvedAllEvents(_charID)):
+				return true
+	
+	return false
+
 func updateCharacterUntilNow(charID):
 	var character = getCharacter(charID)
 	if(character != null):

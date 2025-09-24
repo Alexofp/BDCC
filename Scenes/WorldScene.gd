@@ -124,7 +124,7 @@ func _react(_action: String, _args):
 		var thePawn:CharacterPawn = GM.main.IS.spawnPawnIfNeeded(someNPC)
 		thePawn.setLocation(GM.pc.getLocation())
 		GM.main.RS.startSpecialRelantionship("SoftSlavery", someNPC)
-		runScene("NpcOwnerEventRunnerScene", [someNPC])
+		#runScene("NpcOwnerEventRunnerScene", [someNPC])
 		
 	if(_action == "sextest"):
 		#runScene("GenericSexScene", ["pc", ["socket"]])
