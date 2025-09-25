@@ -456,6 +456,13 @@ func _react(_action: String, _args):
 		transferAllItems(getCharacter("TempAmbushStash"), GM.pc)
 		endScene()
 		GM.main.RS.stopSpecialRelationship(npcMain)
+		
+		if(RNG.chance(100)): #TODO: This should be configurable
+			processTime(RNG.randi_range(60, 180)*60)
+			GM.main.RS.startSpecialRelantionship("SoftSlavery", npcMain)
+			runScene("NpcOwnerEventRunnerScene", [npcMain, "Intro", ["ambush"]])
+			return
+		
 		runScene(getModule("PlayerSlaveryModule").getSlaveryStartScene())
 		return
 	if(_action == "startPunish"):

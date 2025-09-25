@@ -1480,6 +1480,12 @@ func getDebugActions():
 			"args": [
 			],
 		},
+		{
+			"id": "startSoftSlavery",
+			"name": "Start soft slavery",
+			"args": [
+			],
+		},
 	]
 
 func doDebugAction(id, args = {}):
@@ -1640,7 +1646,10 @@ func doDebugAction(id, args = {}):
 		
 	if(id == "spyRandom"):
 		runScene("SpyOnPawnScene")
-		
+	
+	if(id == "startSoftSlavery"):
+		runScene("SoftSlaveryQuickStartScene")
+	
 	if(id == "duplicateAndEnslave"):
 		var theNpcID = args["npcID"]
 		#if(args["cnpcID"] != ""):

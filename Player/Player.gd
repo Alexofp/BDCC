@@ -971,3 +971,9 @@ func onSexEvent(_event : SexEvent):
 	
 	if(GM.main != null && GM.main.SCI != null):
 		GM.main.SCI.handleSexEvent(_event)
+		
+	if(GM.main && GM.main.RS):
+		for ownerID in GM.main.RS.special:
+			var theSpecialRelationship = GM.main.RS.special[ownerID]
+			if(theSpecialRelationship.id == "SoftSlavery" && theSpecialRelationship.npcOwner):
+				theSpecialRelationship.npcOwner.handleSexEvent(_event)

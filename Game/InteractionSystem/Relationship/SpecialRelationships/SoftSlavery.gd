@@ -32,8 +32,13 @@ func onSocialEvent(_charActor:String, _charTarget:String, _eventID:int, _args:Ar
 	pass
 
 func onStart(_args:Array):
-	var allPossibleOwnerTypes = GlobalRegistry.getNpcOwnerTypes()
-	npcOwner = GlobalRegistry.createNpcOwnerType(RNG.pick(allPossibleOwnerTypes))
+	var theNpcTypeID:String = ""
+	if(_args.size() > 0):
+		theNpcTypeID = _args[0]
+	else:
+		var allPossibleOwnerTypes = GlobalRegistry.getNpcOwnerTypes()
+		theNpcTypeID = RNG.pick(allPossibleOwnerTypes)
+	npcOwner = GlobalRegistry.createNpcOwnerType(theNpcTypeID)
 	npcOwner.setRelationship(self)
 	
 	showMessage(getChar().getName()+" became your [b][color=red]Owner[/color][/b]!")

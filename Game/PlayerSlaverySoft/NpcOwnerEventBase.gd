@@ -3,6 +3,13 @@ class_name NpcOwnerEventBase
 
 const LOC_STOCKS = "main_punishment_spot"
 const LOC_SLUTWALL = "fight_slutwall"
+const LOC_NEARCHECKPOINT = "hall_mainentrance"
+const LOC_ELEVATOR = "hall_elevator"
+const LOC_CELLBLOCK_MIDDLE = "cellblock_nearcells"
+const LOC_CELLBLOCK_GENERAL = "cellblock_orange_nearcell"
+const LOC_CELLBLOCK_HIGHSEC = "cellblock_red_nearcell"
+const LOC_CELLBLOCK_LILAC = "cellblock_lilac_nearcell"
+
 
 const C_PC = -1
 const C_OWNER = 0
@@ -119,12 +126,13 @@ func runCurrentState():
 	call(state)
 
 func doAction(_actionID:String, _args:Array) -> Array:
+	var howMuchToPass := howMuchTimeToPass(_actionID, _args)
 	if(_actionID == "setState"):
 		setState(_args[0])
-		return [NpcOwnerActionType.NOTHING]
+		return [NpcOwnerActionType.NOTHING, howMuchToPass]
 	if(_actionID == "endEvent"):
 		endEvent(_args)
-		return [NpcOwnerActionType.NOTHING]
+		return [NpcOwnerActionType.NOTHING, howMuchToPass]
 	if(_actionID == "startFight"):
 		return [NpcOwnerActionType.START_FIGHT, _args]
 	if(_actionID == "startSex"):
@@ -132,9 +140,12 @@ func doAction(_actionID:String, _args:Array) -> Array:
 	
 	if(!has_method(state+"_do")):
 		Log.printerr("Npc Event "+str(id)+" has no '_do()' function for the state '"+str(state)+"'!")
-		return [NpcOwnerActionType.NOTHING]
+		return [NpcOwnerActionType.NOTHING, howMuchToPass]
 	call(state+"_do", _actionID, _args)
-	return [NpcOwnerActionType.NOTHING]
+	return [NpcOwnerActionType.NOTHING, howMuchToPass]
+
+func howMuchTimeToPass(_actionID:String, _args:Array) -> int:
+	return 60
 
 func reactEnded(_event, _tag:String, _args:Array):
 	if(has_method(state+"_eventResult")):
@@ -178,9 +189,12 @@ func addInfluence(_am:float, _appendText:bool = true):
 	var newValue:float = npcOwner.getInfluence()
 	if(_appendText):
 		if(newValue > oldValue):
-			sayAppend("[color=#00CC00](Influence increased)[/color]")
+			sayAppend("[color=#00CC00](Influence increased to "+str(Util.roundF(newValue*100.0, 1))+"%)[/color]")
 		if(newValue < oldValue):
-			sayAppend("[color=red](Influence decreased)[/color]")
+			if(newValue > 0.0):
+				sayAppend("[color=red](Influence decreased to "+str(Util.roundF(newValue*100.0, 1))+"%)[/color]")
+			else:
+				sayAppend("[color=red](Influence decreased to "+str(Util.roundF(newValue*100.0, 1))+"%. The owner will lose their influence over you if you sleep)[/color]")
 
 func addInfluenceObey():
 	addInfluence(0.01)

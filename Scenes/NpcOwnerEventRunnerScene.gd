@@ -35,7 +35,10 @@ func _react(_action: String, _args):
 			
 		var runnerAction:int = runnerActionEntry[0]
 		
-		if(runnerAction == NpcOwnerActionType.START_FIGHT):
+		if(runnerAction == NpcOwnerActionType.NOTHING):
+			if(runnerActionEntry.size() > 1):
+				processTime(runnerActionEntry[1])
+		elif(runnerAction == NpcOwnerActionType.START_FIGHT):
 			runScene("FightScene", runnerActionEntry[1], "fight_scene")
 		elif(runnerAction == NpcOwnerActionType.START_SEX):
 			runScene("GenericSexScene", runnerActionEntry[1], "sex_scene")

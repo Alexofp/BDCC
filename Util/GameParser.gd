@@ -376,6 +376,12 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		if(object.isSlaveToPlayer()):
 			return object.getNpcSlavery().getSlaveTypeName().to_lower()
 		return "slave"
+		
+	if(_command in ["npcSlave"] && _args.size() == 0):
+		var theSpecial = GM.main.RS.getSpecialRelationship(object.getID())
+		if(theSpecial && theSpecial.id=="SoftSlavery" && theSpecial.npcOwner):
+			return theSpecial.npcOwner.getPCName()
+		return "slave"
 	
 	if(_command in ["foot"] && _args.size() == 0):
 		var isDigi = object.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsDigi)

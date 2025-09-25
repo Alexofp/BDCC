@@ -8,38 +8,43 @@ func onStart(_args:Array):
 
 func start():
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_OWNER)})
-	saynn("Test!")
+	saynn("TALKING EVENT!")
 	talk(C_OWNER, "Meow meow.")
-	#if(onlyOnce()):
-	#	sayAppend("[color=red]OW[/color]")
-	#	GM.pc.addPain(10)
-	addInfluence(0.01)
 	
-	addButton("Pet", "Pet the cat", "pet")
-	addButton("Pet 2", "Pet the cat but better", "setState", ["petted"])
-	addButton("Stop it!", "Stop the petting", "end")
-	addButton("Fight!", "Wagh", "startFight", [getOwnerID()])
+	var theNpcOwner := getNpcOwner()
+	if(theNpcOwner):
+		saynn("{npc.name} is your owner!\n- Slavery level: "+str(theNpcOwner.level)+"\n"+"- Influence: "+str(Util.roundF(theNpcOwner.influence*100.0, 1))+"%")
+		
+		if(theNpcOwner.hasGivenPCTasks()):
+			saynn("You have been given tasks that you need to complete:\n"+theNpcOwner.getQuestProgressText())
+		
+	addButton("Attack!", "Attack your owner", "startFight", [getOwnerID()])
+	addButton("Tasks!", "Get some test tasks", "getTasks")
+	addButton("Leave", "You have finished talking with your owner", "endEvent")
 
 func start_do(_id:String, _args:Array):
-	if(_id == "end"):
-		endEvent()
-	if(_id == "pet"):
-		setState("petted")
-		#runEvent(id, args)
-
-#func start_eventResult(_id:String, _args:Array)
-
+	if(_id == "getTasks"):
+		var theNpcOwner := getNpcOwner()
+		if(theNpcOwner):
+			theNpcOwner.generateTasks(3)
+	
 func start_fightResult(_didWin:bool):
 	if(_didWin):
-		setState("weWon")
+		setState("pcWon")
+	else:
+		setState("pcLost")
 
-func weWon():
+func pcWon():
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_OWNER), npcAction="kneel"})
 	saynn("YAY! YOU WON!")
-	addButton("Back", "Go back", "setState", ["start"])
-
-func petted():
-	saynn("You pet the cat.")
-	saynn("The cat purrs.")
 	
-	addButton("Back", "Go back", "setState", ["start"])
+	addInfluence(-1.0)
+	
+	addContinue("endEvent")
+
+func pcLost():
+	saynn("YOU LOST THE FIGHT.")
+	
+	saynn("YOU PROBABLY SHOULD BE PUNISHED.")
+	
+	addContinue("endEvent")

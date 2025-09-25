@@ -55,6 +55,8 @@ func _run():
 	addButtonAt(14, "Inventory", "Look at your inventory", "inventory")
 	
 	#addButtonAt(5, "NPC owner test", "TEST BUTTON", "npcOwnerTest")
+	#addButtonAt(8, "Nemesis test", "TEST BUTTON", "triggerNemesis")
+	
 	#addButtonAt(5, "Sex Test", "Sex test", "sextest")
 	#addExtraButtonAt(4, "Sex Test", "Sex test", "sextest")
 	#addButtonAt(7, "Slave Test", "Slave test", "slavetest")
@@ -124,6 +126,14 @@ func _react(_action: String, _args):
 		var thePawn:CharacterPawn = GM.main.IS.spawnPawnIfNeeded(someNPC)
 		thePawn.setLocation(GM.pc.getLocation())
 		GM.main.RS.startSpecialRelantionship("SoftSlavery", someNPC)
+		#runScene("NpcOwnerEventRunnerScene", [someNPC])
+	if(_action == "triggerNemesis"):
+		var someNPC:String = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [], InmateGenerator.new(), {})
+		var thePawn:CharacterPawn = GM.main.IS.spawnPawnIfNeeded(someNPC)
+		thePawn.setLocation(GM.pc.getLocation())
+		GM.main.RS.startSpecialRelantionship("Nemesis", someNPC)
+		var theRelationship = GM.main.RS.getSpecialRelationship(someNPC)
+		theRelationship.gonnaAmbush = true
 		#runScene("NpcOwnerEventRunnerScene", [someNPC])
 		
 	if(_action == "sextest"):
