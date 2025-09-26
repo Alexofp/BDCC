@@ -13,13 +13,20 @@ func start():
 	
 	var theNpcOwner := getNpcOwner()
 	if(theNpcOwner):
-		saynn("{npc.name} is your owner!\n- Slavery level: "+str(theNpcOwner.level)+"\n"+"- Influence: "+str(Util.roundF(theNpcOwner.influence*100.0, 1))+"%")
+		var theText:String = "{npc.name} is your owner!"
+		for textLine in theNpcOwner.getOwnerInfo():
+			theText += "\n- "+textLine
+		
+		#saynn("{npc.name} is your owner!\n- Slavery level: "+str(theNpcOwner.level)+"\n"+"- Influence: "+str(Util.roundF(theNpcOwner.influence*100.0, 1))+"%")
+		
+		saynn(theText)
 		
 		if(theNpcOwner.hasGivenPCTasks()):
 			saynn("You have been given tasks that you need to complete:\n"+theNpcOwner.getQuestProgressText())
 		
 	addButton("Attack!", "Attack your owner", "startFight", [getOwnerID()])
 	addButton("Tasks!", "Get some test tasks", "getTasks")
+	addButton("Punish!", "Get punished for testing", "getPunished")
 	addButton("Leave", "You have finished talking with your owner", "endEvent")
 
 func start_do(_id:String, _args:Array):
@@ -27,6 +34,8 @@ func start_do(_id:String, _args:Array):
 		var theNpcOwner := getNpcOwner()
 		if(theNpcOwner):
 			theNpcOwner.generateTasks(3)
+	if(_id == "getPunished"):
+		runEvent("punishment", "Punish")
 	
 func start_fightResult(_didWin:bool):
 	if(_didWin):

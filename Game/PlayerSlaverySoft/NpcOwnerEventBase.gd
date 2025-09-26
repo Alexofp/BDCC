@@ -9,7 +9,7 @@ const LOC_CELLBLOCK_MIDDLE = "cellblock_nearcells"
 const LOC_CELLBLOCK_GENERAL = "cellblock_orange_nearcell"
 const LOC_CELLBLOCK_HIGHSEC = "cellblock_red_nearcell"
 const LOC_CELLBLOCK_LILAC = "cellblock_lilac_nearcell"
-
+const LOC_MED_COUNTER = "med_lobbymain"
 
 const C_PC = -1
 const C_OWNER = 0
@@ -17,6 +17,8 @@ const C_EXTRA1 = 1
 const C_EXTRA2 = 2
 const C_EXTRA3 = 3
 const C_EXTRA4 = 4
+
+const E_PUNISH = "punish"
 
 const AliasToRole = {
 	"pc": C_PC,
@@ -284,6 +286,9 @@ func getSubResult() -> int:
 
 func shouldEndParent() -> bool:
 	return subResult > 0
+
+func stopRunner():
+	getRunner().stopRunner()
 
 func saveData() -> Dictionary:
 	return {

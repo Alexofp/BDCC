@@ -6,6 +6,7 @@ var ownerID:String = ""
 var eventStack:Array = []
 var texts:Array = []
 var buttons:Array = []
+var shouldStop:bool = false
 
 func setOwnerID(_charID:String):
 	ownerID = _charID
@@ -115,7 +116,7 @@ func getFinalActions() -> Array:
 	return buttons
 
 func shouldEnd() -> bool:
-	return eventStack.empty()
+	return eventStack.empty() || shouldStop
 
 func doAction(_action:Array) -> Array:
 	if(eventStack.empty()):
@@ -129,6 +130,9 @@ func notifyFightResult(_didWin:bool):
 func notifySexResult(_sexResult:SexEngineResult):
 	getCurrentEvent().notifySexResult(_sexResult)
 
+func stopRunner():
+	shouldStop = true
+
 func saveData() -> Dictionary:
 	var eventsData:Array = []
 	for event in eventStack:
@@ -140,10 +144,12 @@ func saveData() -> Dictionary:
 	return {
 		ownerID = ownerID,
 		eventStack = eventsData,
+		shouldStop = shouldStop,
 	}
 
 func loadData(_data:Dictionary):
 	ownerID = SAVE.loadVar(_data, "ownerID", "")
+	shouldStop = SAVE.loadVar(_data, "shouldStop", false)
 	
 	eventStack.clear()
 	var eventsData:Array = SAVE.loadVar(_data, "eventStack", [])

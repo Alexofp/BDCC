@@ -49,6 +49,8 @@ func onEnd():
 func onNewDay():
 	if(npcOwner):
 		npcOwner.onNewDay()
+	else:
+		stopMe()
 
 func getCooldown() -> int:
 	return 0
@@ -59,6 +61,9 @@ func processInteractionActionGenericScore(_scoreType:String, _value:float) -> fl
 func saveData() -> Dictionary:
 	var data := .saveData()
 	
+	if(npcOwner):
+		data["ownerType"] = npcOwner.id
+		data["npcOwner"] = npcOwner.saveData()
 	#data["gonnaAmbush"] = gonnaAmbush
 	#data["reason"] = reason
 	#data["anger"] = anger
@@ -68,6 +73,12 @@ func saveData() -> Dictionary:
 func loadData(_data:Dictionary):
 	.loadData(_data)
 	
+	var theOwnerType:String = SAVE.loadVar(_data, "ownerType", "")
+	if(theOwnerType.empty() || !GlobalRegistry.getNpcOwnerTypeRef(theOwnerType)):
+		return
+	npcOwner = GlobalRegistry.createNpcOwnerType(theOwnerType)
+	npcOwner.setRelationship(self)
+	npcOwner.loadData(SAVE.loadVar(_data, "npcOwner", {}))
 	#gonnaAmbush = SAVE.loadVar(_data, "gonnaAmbush", false)
 	#reason = SAVE.loadVar(_data, "reason", NemesisReason.Generic)
 	#anger = SAVE.loadVar(_data, "anger", 0.0)

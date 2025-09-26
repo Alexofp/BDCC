@@ -5,12 +5,14 @@ var id:String = "error"
 
 var level:int = 1
 var influence:float = 0.5
-var charID:String = ""
+var charID:String = "" #no sync
 
 var shouldAppoach:bool = false
 
 var hasTasks:bool = false
 var tasks:Array = []
+
+var punishAmount:int = 0
 
 func setRelationship(_softSlavery):
 	charID = _softSlavery.charID
@@ -158,8 +160,70 @@ func getQuestProgressText() -> String:
 func hasGivenPCTasks() -> bool:
 	return hasTasks
 
+func getPunishAmount() -> int:
+	return punishAmount
+
+func addPunishAmount(_am:int=1):
+	punishAmount += 1
+	if(punishAmount < 0):
+		punishAmount = 0
+
+func onPunish():
+	punishAmount += 1
+
+func getOwnerInfo() -> Array:
+	var result:Array = []
+	
+	result.append("Level: "+str(level))
+	result.append("Influence: "+str(Util.roundF(influence*100.0, 1))+"%")
+	result.append("Punishments: "+str(punishAmount))
+	
+	return result
+
+func getOwnerInfoString() -> String:
+	return Util.join(getOwnerInfo(), "\n")
+
+func shouldPunishWeak() -> bool:
+	return punishAmount <= 1
+
+func shouldPunishStrong() -> bool:
+	return punishAmount == 2
+
+func shouldPunishGetRidOf() -> bool:
+	return punishAmount >= 3
+
 func saveData() -> Dictionary:
-	return {}
+	var tasksData:Array = []
+	for task in tasks:
+		var taskData = {
+			"id": task.id,
+			"data": task.saveData()
+		}
+		tasksData.append(taskData)
+	
+	return {
+		l = level,
+		i = influence,
+		sa = shouldAppoach,
+		ht = hasTasks,
+		t = tasksData,
+		pa = punishAmount,
+	}
 
 func loadData(_data:Dictionary):
-	pass
+	level = SAVE.loadVar(_data, "l", 0)
+	influence = SAVE.loadVar(_data, "i", 0.5)
+	shouldAppoach = SAVE.loadVar(_data, "sa", false)
+	hasTasks = SAVE.loadVar(_data, "ht", false)
+	punishAmount = SAVE.loadVar(_data, "pa", 0)
+	
+	tasks.clear()
+	var tasksData:Array = SAVE.loadVar(_data, "tasks", [])
+	for taskData in tasksData:
+		var taskID = SAVE.loadVar(taskData, "id", "")
+		var taskObj:NpcBreakTaskBase = GlobalRegistry.createSlaveBreakTask(taskID)
+		if(taskObj == null):
+			continue
+		taskObj.loadData(SAVE.loadVar(taskData, "data", {}))
+		var _ok = taskObj.connect("onTaskCompleted", self, "onSlutTaskCompleted")
+		tasks.append(taskObj)

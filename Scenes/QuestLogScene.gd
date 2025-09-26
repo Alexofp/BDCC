@@ -44,8 +44,11 @@ func _run():
 					if(!showedNpcOwnerThing):
 						saynn("[i]Owner tasks:[/i]")
 						showedNpcOwnerThing = true
-						
-					sayn("[b]"+getCharacter(ownerID).getName()+" tasks:[/b]")
+					
+					var theOwner = getCharacter(ownerID)
+					if(!theOwner):
+						continue
+					sayn("[b]"+theOwner.getName()+" tasks:[/b]")
 					var theTaskLines := theNpcOwner.getQuestProgressArray()
 					for textLine in theTaskLines:
 						sayn("* "+textLine)

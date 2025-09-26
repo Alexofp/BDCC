@@ -59,7 +59,23 @@ func getEffectDesc():
 		if(npcSlave.isReadyToBeLeveledUp()):
 			result += "\n\n[color=yellow]Slave level-up progress:[/color]\n"
 			result += npcSlave.getLevelupTaskProgressText()
-
+	
+	if(character.isPlayer()):
+		for ownerID in GM.main.RS.special:
+			var theSpecialRelationship = GM.main.RS.special[ownerID]
+			if(theSpecialRelationship.id == "SoftSlavery" && theSpecialRelationship.npcOwner):
+				var theNpcOwner:NpcOwnerBase = theSpecialRelationship.npcOwner
+				if(theNpcOwner.hasTasks && !theNpcOwner.tasks.empty()):
+					var isQuestCompleted:bool = theNpcOwner.isEverythingCompleted()
+					var theOwner = GlobalRegistry.getCharacter(ownerID)
+					if(!theOwner):
+						continue
+					
+					result += "\n\n[color="+("yellow" if !isQuestCompleted else "green")+"]"+theOwner.getName()+" tasks:[/color]\n"
+					result += theNpcOwner.getQuestProgressText()
+					if(isQuestCompleted):
+						result += "\nReady to be reported!"
+	
 	return result
 
 func getEffectImage():
