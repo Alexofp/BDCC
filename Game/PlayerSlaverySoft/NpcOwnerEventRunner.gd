@@ -108,6 +108,9 @@ func sayAppend(_text:String):
 
 func addButton(_event, _name:String, _desc:String, _action:String, _args:Array = []):
 	buttons.append([_name, _desc, _action, _args])
+	
+func addDisabledButton(_event, _name:String, _desc:String):
+	buttons.append([_name, _desc])
 
 func getFinalText() -> String:
 	return Util.join(texts, "\n\n")

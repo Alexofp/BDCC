@@ -40,6 +40,7 @@ func onStart(_args:Array):
 		theNpcTypeID = RNG.pick(allPossibleOwnerTypes)
 	npcOwner = GlobalRegistry.createNpcOwnerType(theNpcTypeID)
 	npcOwner.setRelationship(self)
+	npcOwner.onStart()
 	
 	showMessage(getChar().getName()+" became your [b][color=red]Owner[/color][/b]!")
 

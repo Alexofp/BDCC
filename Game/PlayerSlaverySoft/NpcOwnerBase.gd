@@ -3,16 +3,20 @@ class_name NpcOwnerBase
 
 var id:String = "error"
 
-var level:int = 1
+var level:int = 0
 var influence:float = 0.5
 var charID:String = "" #no sync
 
-var shouldAppoach:bool = false
+var shouldAppoach:bool = true #TODO: Switch to false before ship
 
 var hasTasks:bool = false
 var tasks:Array = []
 
 var punishAmount:int = 0
+var pcName:String = "slave"
+
+func onStart():
+	pickNewName()
 
 func setRelationship(_softSlavery):
 	charID = _softSlavery.charID
@@ -28,14 +32,14 @@ func endSlavery():
 func getVisibleName() -> String:
 	return "Fill me!"
 
-func getInteractEvents() -> Array:
-	return [
-		
-	]
+func getApproachSubEventID() -> String:
+	return "aMean" # a stands for Approach
 
 func addInfluence(_am:float):
 	influence += _am
 	influence = clamp(influence, 0.0, 1.0)
+	if(influence >= 1.0):
+		doLevelUp()
 
 func getInfluence() -> float:
 	return influence
@@ -46,10 +50,55 @@ func getExtraCategoryText() -> String:
 	theText += "\nInfluence: "+str(Util.roundF(influence*100.0, 1))+"%"
 	return theText
 
+func getMaxLevel() -> int:
+	return 3
+
+func getLevel() -> int:
+	return level
+
+func doLevelUp():
+	if(level >= getMaxLevel()):
+		return
+	if(punishAmount > 0):
+		punishAmount -= 1
+	influence = 0.5
+	level += 1
+	var oldPCName:String = getPCName()
+	pickNewName()
+	var newPCName:String = getPCName()
+	addMessage(getOwnerName()+"'s influence level over you has increased to '"+str(level)+"'!"+((" You are now a '"+newPCName+"'.") if newPCName != oldPCName else ""))
+
+func pickNewName():
+	pcName = RNG.pick(getPossiblePCNamesForLevel(level))
+
+func getOwner() -> BaseCharacter:
+	return GlobalRegistry.getCharacter(charID)
+
+func getOwnerName() -> String:
+	var theOwner := getOwner()
+	if(!theOwner):
+		return "Error!"
+	return theOwner.getName()
+
+func addMessage(_text:String):
+	GM.main.addMessage(_text)
+
+func getPossiblePCNamesForLevel(_level:int) -> Array:
+	return ["slave"]
+
+func getPossiblePCNames() -> Array:
+	var allNames:Array = []
+	for _i in getMaxLevel():
+		var theNames:Array = getPossiblePCNamesForLevel(_i)
+		for theName in theNames:
+			if(!allNames.has(theName)):
+				allNames.append(theName)
+	return allNames
+
 func getPCName() -> String:
-	if(true):
-		return "pet"
-	return "slave"
+	#if(true):
+	#	return "pet"
+	return pcName
 
 func shouldOwnerApproachPC() -> bool:
 	return shouldAppoach
@@ -57,13 +106,17 @@ func shouldOwnerApproachPC() -> bool:
 #[id, args]
 func getApproachEvent() -> Array:
 	shouldAppoach = false
-	return ["FuckInStocks", []]
+	return ["Approach", []]
 
 func onNewDay():
 	shouldAppoach = true
 	if(influence <= 0.0):
 		endSlavery()
 		return
+	
+	if(influence >= 1.0):
+		if(punishAmount > 0):
+			punishAmount -= 1
 	
 	checkIfTasksGotCompleted()
 
@@ -208,6 +261,7 @@ func saveData() -> Dictionary:
 		ht = hasTasks,
 		t = tasksData,
 		pa = punishAmount,
+		pn = pcName,
 	}
 
 func loadData(_data:Dictionary):
@@ -216,6 +270,7 @@ func loadData(_data:Dictionary):
 	shouldAppoach = SAVE.loadVar(_data, "sa", false)
 	hasTasks = SAVE.loadVar(_data, "ht", false)
 	punishAmount = SAVE.loadVar(_data, "pa", 0)
+	pcName = SAVE.loadVar(_data, "pn", "slave")
 	
 	tasks.clear()
 	var tasksData:Array = SAVE.loadVar(_data, "tasks", [])

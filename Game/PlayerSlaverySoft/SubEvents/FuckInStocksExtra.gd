@@ -2,7 +2,7 @@ extends NpcOwnerEventBase
 
 func _init():
 	id = "FuckInStocksExtra"
-	reactsToTags = ["lockedInStocks"]
+	reactsToTags = ["FuckInStocks"]
 
 func getSubEventScore(_event, _tag:String, _args:Array) -> float:
 	return 1.0

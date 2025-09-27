@@ -187,9 +187,11 @@ func addInfluence(_am:float, _appendText:bool = true):
 				sayAppend("[color=red](Influence decreased)[/color]")
 		return
 	var oldValue:float = npcOwner.getInfluence()
+	var oldLevel:int = npcOwner.getLevel()
 	npcOwner.addInfluence(_am)
+	var newLevel:int = npcOwner.getLevel()
 	var newValue:float = npcOwner.getInfluence()
-	if(_appendText):
+	if(_appendText && oldLevel == newLevel):
 		if(newValue > oldValue):
 			sayAppend("[color=#00CC00](Influence increased to "+str(Util.roundF(newValue*100.0, 1))+"%)[/color]")
 		if(newValue < oldValue):
@@ -198,11 +200,11 @@ func addInfluence(_am:float, _appendText:bool = true):
 			else:
 				sayAppend("[color=red](Influence decreased to "+str(Util.roundF(newValue*100.0, 1))+"%. The owner will lose their influence over you if you sleep)[/color]")
 
-func addInfluenceObey():
-	addInfluence(0.01)
+func addInfluenceObey(_mult:float = 1.0):
+	addInfluence(0.33 * max(_mult, 0.0))
 
-func addInfluenceResist():
-	addInfluence(-0.01)
+func addInfluenceResist(_mult:float = 1.0):
+	addInfluence(-0.15 * max(_mult, 1.0))
 
 func getInfluence() -> float:
 	var npcOwner := getNpcOwner()
@@ -227,6 +229,9 @@ func talk(_role:int, _text:String):
 func addButton(_name:String, _desc:String, _action:String, _args:Array = []):
 	getRunner().addButton(self, _name, _desc, _action, _args)
 
+func addDisabledButton(_name:String, _desc:String):
+	getRunner().addDisabledButton(self, _name, _desc)
+
 func addContinue(_action:String, _args:Array = []):
 	addButton("Continue", "See what happens next..", _action, _args)
 
@@ -240,7 +245,7 @@ func getNpcOwner() -> NpcOwnerBase:
 	return getRunner().getNpcOwner()
 
 func getSubEventScore(_event, _tag:String, _args:Array) -> float:
-	return 0.0
+	return 1.0
 
 func trySubEventStart(_event, _tag:String, _args:Array) -> bool:
 	return true

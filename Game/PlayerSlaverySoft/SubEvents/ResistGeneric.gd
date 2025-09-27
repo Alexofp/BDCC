@@ -32,4 +32,11 @@ func pcLost():
 	playAnimation(StageScene.Duo, "kneel", {npc=getOwnerID()})
 	
 	saynn("YOU LOST!")
-	addContinue("endEvent") #TODO: Run a punishment event instead?
+	addContinue("startPunish")
+
+func pcLost_do(_id:String, _args:Array):
+	if(_id == "startPunish"):
+		runEvent("punishment", "Punish")
+
+func pcLost_eventResult(_event, _tag:String, _args:Array):
+	endEvent()

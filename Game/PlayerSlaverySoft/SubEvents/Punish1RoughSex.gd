@@ -24,7 +24,7 @@ func start():
 	var theChar = GlobalRegistry.getCharacter(getOwnerID())
 	if(theChar):
 		theChar.addEffect("SexAngry", [100])
-	addContinue("startSex", [getOwnerID(), "pc"])
+	addContinue("startSex", [getOwnerID(), "pc", SexType.DefaultSex, {SexMod.DisableDynamicJoiners:true}])
 
 func start_sexResult(_sex:SexEngineResult):
 	setState("afterSex")
