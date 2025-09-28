@@ -42,7 +42,7 @@ var reactsToTags:Array = []
 
 var state:String = "start"
 var tag:String = ""
-var subResult:int = 0
+var subResult:int = SUB_END
 
 var roles:Dictionary = {} # indx -> char id
 
@@ -50,8 +50,10 @@ var pretext:String = ""
 
 var runner:WeakRef
 
-const SUB_CONTINUE = 0
-const SUB_END = 1
+var eventWeight:float = 1.0 # no sync
+
+const SUB_END = 0
+const SUB_CONTINUE = 1
 
 func involveCharID(_role:int, _charID:String):
 	roles[_role] = _charID
@@ -150,6 +152,10 @@ func howMuchTimeToPass(_actionID:String, _args:Array) -> int:
 	return 60
 
 func reactEnded(_event, _tag:String, _args:Array):
+	if(_event && _event.shouldEndParent()):
+		endEvent()
+		return
+	
 	if(has_method(state+"_eventResult")):
 		call(state+"_eventResult", _event, _tag, _args)
 
@@ -226,6 +232,12 @@ func getPawnIDsNear(maxDepth:int, maxDist:float=-1.0) -> Array:
 func talk(_role:int, _text:String):
 	saynn("[say="+convertRoleToAlias(_role)+"]"+_text+"[/say]")
 
+func talkOwner(_text:String):
+	talk(C_OWNER, _text)
+
+func talkPC(_text:String):
+	talk(C_PC, _text)
+
 func addButton(_name:String, _desc:String, _action:String, _args:Array = []):
 	getRunner().addButton(self, _name, _desc, _action, _args)
 
@@ -245,7 +257,7 @@ func getNpcOwner() -> NpcOwnerBase:
 	return getRunner().getNpcOwner()
 
 func getSubEventScore(_event, _tag:String, _args:Array) -> float:
-	return 1.0
+	return eventWeight
 
 func trySubEventStart(_event, _tag:String, _args:Array) -> bool:
 	return true
@@ -290,10 +302,16 @@ func getSubResult() -> int:
 	return subResult
 
 func shouldEndParent() -> bool:
-	return subResult > 0
+	return subResult == SUB_END
 
 func stopRunner():
 	getRunner().stopRunner()
+
+func runResist():
+	runEvent("resist", "ResistGeneric")
+
+func runPunishment():
+	runEvent("punishment", "Punish")
 
 func saveData() -> Dictionary:
 	return {

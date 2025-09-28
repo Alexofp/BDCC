@@ -35,7 +35,7 @@ func start_do(_id:String, _args:Array):
 		if(theNpcOwner):
 			theNpcOwner.generateTasks(3)
 	if(_id == "getPunished"):
-		runEvent("punishment", "Punish")
+		runPunishment()
 	
 func start_fightResult(_didWin:bool):
 	if(_didWin):

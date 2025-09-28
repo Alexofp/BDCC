@@ -5,6 +5,8 @@ var creditsAmount:int = 10
 func _init():
 	id = "GiveCredits"
 	reactsToTags = ["aMean"]
+	
+	eventWeight = 0.5
 
 func start():
 	if(onlyOnce()):
@@ -19,7 +21,7 @@ func start():
 	else:
 		addDisabledButton("Obey", "You don't have enough!")
 	addButton("Resist", "They are not gonna take your credits", "resist")
-	addButton("I'm short", "Say that you don't have enough", "not_enough")
+	addButton("I'm short", "Say that you don't have enough", "setState", ["amShort"])
 
 func start_do(_id:String, _args:Array):
 	if(_id == "obey"):
@@ -28,12 +30,9 @@ func start_do(_id:String, _args:Array):
 		GM.pc.addCredits(-creditsAmount)
 		setState("obey")
 	if(_id == "resist"):
-		runEvent("resist", "ResistGeneric")
+		runResist()
 
 func start_eventResult(_event, _id:String, _args:Array):
-	if(_event.shouldEndParent()):
-		endEvent()
-		return
 	if(_id == "resist"):
 		setState("obey")
 
@@ -44,6 +43,26 @@ func obey():
 	
 	addInfluenceObey()
 	addContinue("endEvent")
+
+func amShort():
+	saynn("YOU TELL THEM THAT YOU'RE SHORT ON CREDITS!")
+	
+	talk(C_OWNER, "BULLSHIT.")
+	
+	saynn("LOOKS LIKE {npc.he} {npc.isAre} GONNA PUNISH YOU!")
+	
+	addButton("Accept", "Let the punishment happen", "accept")
+	addButton("Resist", "Resist the punishment", "resist")
+
+func amShort_do(_id:String, _args:Array):
+	if(_id == "accept"):
+		runPunishment()
+	if(_id == "resist"):
+		runResist()
+
+func amShort_eventResult(_event, _id:String, _args:Array):
+	if(_id == "resist"):
+		setState("obey")
 
 func saveData() -> Dictionary:
 	var data := .saveData()

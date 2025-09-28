@@ -26,18 +26,12 @@ func start_do(_id:String, _args:Array):
 			return
 		setState("inStocks")
 	if(_id == "resist"):
-		runEvent("resist", "ResistGeneric")
+		runResist()
 
 func start_eventResult(_event, _id:String, _args:Array):
 	if(_id == "resist"):
-		if(_event.shouldEndParent()):
-			endEvent()
-			return
 		setState("inStocks")
 	if(_id == "lockedInStocks"):
-		if(_event.shouldEndParent()):
-			endEvent()
-			return
 		setState("inStocks")
 	
 func inStocks():

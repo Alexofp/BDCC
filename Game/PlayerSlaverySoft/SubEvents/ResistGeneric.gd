@@ -17,7 +17,6 @@ func start():
 func start_fightResult(_didWin:bool):
 	if(_didWin):
 		setState("pcWon")
-		setSubResult(SUB_END)
 	else:
 		setState("pcLost")
 

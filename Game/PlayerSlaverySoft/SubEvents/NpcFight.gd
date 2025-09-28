@@ -8,6 +8,7 @@ func _init():
 
 func onStart(_args:Array):
 	setState("start")
+	setSubResult(SUB_CONTINUE)
 	
 	involveCharID(C_EXTRA1, _args[0])
 	involveCharID(C_EXTRA2, _args[1])

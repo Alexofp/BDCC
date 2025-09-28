@@ -20,18 +20,12 @@ func start_do(_id:String, _args:Array):
 			return
 		setState("obey")
 	if(_id == "resist"):
-		runEvent("resist", "ResistGeneric")
+		runResist()
 
 func start_eventResult(_event, _id:String, _args:Array):
 	if(_id == "resist"):
-		if(_event.shouldEndParent()):
-			endEvent()
-			return
 		setState("obey")
 	if(_id == "fuck"):
-		if(_event.shouldEndParent()):
-			endEvent()
-			return
 		setState("obey")
 	
 func obey():
