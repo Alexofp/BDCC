@@ -19,11 +19,16 @@ func _run():
 		
 		var theActions := runner.getFinalActions()
 		for actionEntry in theActions:
-			if(actionEntry.size() > 1):
-				addButton(actionEntry[0], actionEntry[1], "doAction", [actionEntry])
-			else:
+			var theEntrySize:int = actionEntry.size()
+			if(theEntrySize == 2):
 				addDisabledButton(actionEntry[0], actionEntry[1])
-		print("Meow")
+			elif(theEntrySize == 3):
+				addDisabledButtonAt(actionEntry[2], actionEntry[0], actionEntry[1])
+			elif(theEntrySize == 4):
+				addButton(actionEntry[0], actionEntry[1], "doAction", [actionEntry])
+			elif(theEntrySize == 5):
+				addButtonAt(actionEntry[4], actionEntry[0], actionEntry[1], "doAction", [actionEntry])
+				
 		#addButton("Leave", "Job well done", "endthescene")
 
 func _react(_action: String, _args):

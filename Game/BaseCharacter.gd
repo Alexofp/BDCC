@@ -3688,3 +3688,20 @@ func doSwallow(_fluidID:String, _amount:float) -> Dictionary:
 	if(resultMessage != null && resultMessage != ""):
 		return {text=resultMessage}
 	return {text=""}
+
+func calculatePowerScore(ignoreCurrentState:bool = false) -> float:
+	var finalScore:float = 0.0
+	
+	finalScore += painThreshold() * 0.01
+	finalScore += lustThreshold() * 0.01
+	finalScore += getMaxStamina() * 0.005
+	
+	finalScore += getLevel() * 0.1
+	finalScore += _getAttacks().size() * 0.1
+	
+	if(!ignoreCurrentState):
+		finalScore *= (1.0 - getPainLevel()*0.9)
+		finalScore *= (1.0 - getLustLevel()*0.8)
+		finalScore *= (1.0 - getStaminaLevel()*0.5)
+	
+	return finalScore

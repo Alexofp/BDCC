@@ -12,7 +12,7 @@ func start(_pawns:Dictionary, _args:Dictionary):
 func init_text():
 	saynn("{main.You} {main.youAre} talking..")
 	
-	if(!GM.main.isCharacterInAnySexEngine(getCharIDByRole("main"))):
+	if(!GM.main.isCharacterInAnyNPCEvent(getCharIDByRole("main"))):
 		addAction("go", "Go!", "Time to go", "default", 1.0, 30, {})
 	else:
 		addAction("wait", "Wait", "Maybe something will happen..", "default", 1.0, 60, {})

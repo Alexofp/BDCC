@@ -10,6 +10,8 @@ const LOC_CELLBLOCK_GENERAL = "cellblock_orange_nearcell"
 const LOC_CELLBLOCK_HIGHSEC = "cellblock_red_nearcell"
 const LOC_CELLBLOCK_LILAC = "cellblock_lilac_nearcell"
 const LOC_MED_COUNTER = "med_lobbymain"
+const LOC_BATHROOM1 = "main_bathroom1"
+const LOC_BATHROOM2 = "main_bathroom2"
 
 const C_PC = -1
 const C_OWNER = 0
@@ -19,6 +21,7 @@ const C_EXTRA3 = 3
 const C_EXTRA4 = 4
 
 const E_PUNISH = "punish"
+const E_PARADE_TO = "paradeTo"
 
 const AliasToRole = {
 	"pc": C_PC,
@@ -50,17 +53,22 @@ var pretext:String = ""
 
 var runner:WeakRef
 
-var eventWeight:float = 1.0 # no sync
+var eventWeight:float = 1.0 # no save
+var cachedTarget:String = "" # no save
+var cachedPath:Array = [] # no save
 
 const SUB_END = 0
 const SUB_CONTINUE = 1
 
-func involveCharID(_role:int, _charID:String):
+func involveCharID(_role:int, _charID:String, satisfySocial:bool = true):
 	roles[_role] = _charID
 	if(_charID != "pc"):
 		var thePawn:CharacterPawn = GM.main.IS.getPawn(_charID)
 		if(thePawn):
+			if(satisfySocial):
+				thePawn.satisfySocial()
 			thePawn.setLocation(GM.pc.getLocation())
+			GM.main.IS.stopInteractionsForPawnID(_charID)
 			GM.main.IS.startInteraction("InNpcOwnerEvent", {main=_charID})
 
 func removeRole(_role:int):
@@ -102,6 +110,9 @@ func convertRoleToAlias(_role:int) -> String:
 
 func getOwnerID() -> String:
 	return getRunner().getOwnerID()
+
+func getOwner() -> BaseCharacter:
+	return GlobalRegistry.getCharacter(getRunner().getOwnerID())
 
 func getAllInvolvedCharIDs() -> Array:
 	return [getRunner().getOwnerID()] + roles.values()
@@ -155,7 +166,7 @@ func reactEnded(_event, _tag:String, _args:Array):
 	if(_event && _event.shouldEndParent()):
 		endEvent()
 		return
-	
+		
 	if(has_method(state+"_eventResult")):
 		call(state+"_eventResult", _event, _tag, _args)
 
@@ -223,11 +234,64 @@ func setLocation(_loc:String):
 	aimCamera(_loc)
 	getRunner().setLocation(_loc)
 
+func getLocation() -> String:
+	return GM.pc.getLocation()
+
+func canGetTo(theTarget:String) -> bool:
+	if(theTarget == getLocation()):
+		return true
+	cachedTarget = theTarget
+	cachedPath = GM.world.calculatePath(getLocation(), cachedTarget)
+	if(cachedPath.size() <= 0):
+		return false
+	return true
+
+func goTowards(theTarget:String, tpOnNoPath:bool = false):
+	if(getLocation() == theTarget):
+		cachedTarget = ""
+		cachedPath = []
+		return true
+	
+	if(cachedTarget != theTarget):
+		cachedTarget = theTarget
+		cachedPath = GM.world.calculatePath(getLocation(), cachedTarget)
+		
+		if(cachedPath.size() <= 0):
+			if(tpOnNoPath):
+				setLocation(theTarget)
+				return true
+			cachedTarget = ""
+			return false
+	
+	if(cachedTarget == theTarget):
+		if(cachedPath.size() > 1 && getLocation() == cachedPath[0]):
+			setLocation(cachedPath[1])
+			cachedPath.remove(0)
+		else:
+			cachedPath = GM.world.calculatePath(getLocation(), cachedTarget)
+	
+	if(getLocation() == theTarget):
+		cachedTarget = ""
+		cachedPath = []
+		return true
+	return false
+
 func getPawnsNear(maxDepth:int, maxDist:float=-1.0) -> Array:
 	return GM.main.IS.getPawnsNear(GM.pc.getLocation(), maxDepth, maxDist)
 
 func getPawnIDsNear(maxDepth:int, maxDist:float=-1.0) -> Array:
 	return GM.main.IS.getPawnIDsNear(GM.pc.getLocation(), maxDepth, maxDist)
+
+func getFreePawnsNear(maxDepth:int, maxDist:float=-1.0, minSocial:float = 0.5) -> Array:
+	var result:Array = []
+	var thePawns := getPawnsNear(maxDepth, maxDist)
+	for thePawn in thePawns:
+		if(!thePawn.canInterrupt()):
+			continue
+		if(thePawn.getSocial() < minSocial):
+			continue
+		result.append(thePawn)
+	return result
 
 func talk(_role:int, _text:String):
 	saynn("[say="+convertRoleToAlias(_role)+"]"+_text+"[/say]")
@@ -243,6 +307,12 @@ func addButton(_name:String, _desc:String, _action:String, _args:Array = []):
 
 func addDisabledButton(_name:String, _desc:String):
 	getRunner().addDisabledButton(self, _name, _desc)
+
+func addButtonAt(_indx:int, _name:String, _desc:String, _action:String, _args:Array = []):
+	getRunner().addButtonAt(self, _indx, _name, _desc, _action, _args)
+
+func addDisabledButtonAt(_indx:int, _name:String, _desc:String):
+	getRunner().addDisabledButtonAt(self, _indx, _name, _desc)
 
 func addContinue(_action:String, _args:Array = []):
 	addButton("Continue", "See what happens next..", _action, _args)
@@ -307,11 +377,30 @@ func shouldEndParent() -> bool:
 func stopRunner():
 	getRunner().stopRunner()
 
+func getRolePawn(_role:int) -> CharacterPawn:
+	var theCharID:String = getRoleID(_role)
+	var thePawn := GM.main.IS.getPawn(theCharID)
+	if(thePawn):
+		return thePawn
+	return null
+
+func makeRoleExhausted(role:int):
+	var pawn = getRolePawn(role)
+	if(pawn == null):
+		return
+	pawn.makeExhausted()
+
 func runResist():
 	runEvent("resist", "ResistGeneric")
 
 func runPunishment():
 	runEvent("punishment", "Punish")
+
+func runParadeTo(_loc:String):
+	runEvent("paradeTo", "ParadeTo", [_loc])
+
+func runNpcFight(_char1:String, _char2:String):
+	runEvent("npcFight", "NpcFight", [_char1, _char2])
 
 func saveData() -> Dictionary:
 	return {

@@ -45,7 +45,7 @@ func afterBodywriting():
 	
 	if(enough):
 		talkOwner("ALRIGHT, THAT'S ENOUGH.")
-		addContinue("endEvent")
+		addContinueCheckExtra()
 		return
 	
 	addContinue("setState", ["tryWriting"])
@@ -82,7 +82,7 @@ func fineEnough():
 		talkOwner("Alright, screw you then.")
 	else:
 		talkOwner("Alright, that's enough then.")
-	addContinue("endEvent")
+	addContinueCheckExtra()
 
 func fightOrMark():
 	talkPC("No.")
@@ -108,7 +108,7 @@ func pleaseFineEnough():
 	talkOwner("What a {npc.npcSlave}, begging me.")
 	saynn("YOUR OWNER PUTS THE MARKER AWAY.")
 	talkOwner("Fine, that's enough then.")
-	addContinue("endEvent")
+	addContinueCheckExtra()
 
 func beggingStart():
 	if(markedAmount == 0):
@@ -156,7 +156,7 @@ func begGiveCreditsPaid():
 	addInfluenceObey(0.5)
 	saynn("SATISFIED WITH THE CREDITS, YOUR OWNER PUTS THE MARKER AWAY.")
 	talkOwner("NOW GET LOST.")
-	addContinue("endEvent")
+	addContinueCheckExtra()
 
 func begGiveCreditsMarked():
 	playAnimation(StageScene.Duo, "kneel", {npc=getOwnerID(), bodyState={naked=true}})
@@ -191,7 +191,7 @@ func begKissFootKiss():
 	addInfluenceObey(0.5)
 	saynn("AS YOU FINISH WORSHIPPING {npc.his} {npc.feet}, YOUR OWNER PUTS THE MARKER AWAY.")
 	talkOwner("NOW GET LOST.")
-	addContinue("endEvent")
+	addContinueCheckExtra()
 
 func begKissFootMarked():
 	playAnimation(StageScene.Duo, "kneel", {npc=getOwnerID(), bodyState={naked=true}})
@@ -232,7 +232,7 @@ func begHumiliateSelfAdmit():
 	addInfluenceObey(0.5)
 	saynn("YOUR OWNER PUTS THE MARKER AWAY.")
 	talkOwner("NOW GET LOST.")
-	addContinue("endEvent")
+	addContinueCheckExtra()
 
 func begHumiliateSelfMarked():
 	playAnimation(StageScene.Duo, "kneel", {npc=getOwnerID(), bodyState={naked=true}})
@@ -249,6 +249,97 @@ func incMarked():
 	if(RNG.chance(markedAmount*10.0)):
 		enough = true
 
+func addContinueCheckExtra(justGoChance:float = 70.0):
+	if(RNG.chance(justGoChance)):
+		addContinue("endEvent")
+	else:
+		addContinue("setState", [RNG.pick(["notDoneYetCum", "notDoneYetPerm"])])
+
+func notDoneYetPerm():
+	talkOwner("Actually, you know what? I'm not done with you just yet.")
+	saynn("Your owner pulls out a leash..")
+	addButton("Obey", "Let your owner do anything with you..", "go")
+	addButton("Resist", "That's enough!", "resist")
+
+func notDoneYetPerm_do(_id:String, _args:Array):
+	if(_id == "go"):
+		runParadeTo(RNG.pick([LOC_STOCKS]))
+	if(_id == "resist"):
+		runResist()
+
+func notDoneYetPerm_eventResult(_event, _tag:String, _args:Array):
+	setState("aboutToPermWriting")
+
+func aboutToPermWriting():
+	playAnimation(StageScene.StocksSexOral, "tease", {npc=getRoleID(C_OWNER), bodyState={naked=true}})
+
+	saynn("YOUR OWNER LOCKS YOU INTO STOCKS.")
+	talkOwner("THIS IS TO MAKE SURE YOU DON'T RUN AWAY.")
+	saynn("AFTER THAT, {npc.he} {npc.verb('pull')} out a [b]permanent[/b] marker!")
+	
+	addContinue("getMarked")
+
+func aboutToPermWriting_do(_id:String, _args:Array):
+	GM.pc.addBodywritingRandom(true)
+	setState("afterGetPermMarked")
+
+func afterGetPermMarked():
+	playAnimation(StageScene.StocksSexOral, "tease", {npc=getRoleID(C_OWNER), bodyState={naked=true}})
+	saynn("Your owner scribbles something on you with a permanent marker!")
+	talkOwner("Now this is a mark.")
+	addInfluenceObey(0.3)
+	saynn("After some time, your owner decides to finally let you go.")
+	addContinue("endEvent")
+
+func notDoneYetCum():
+	talkOwner("Actually, you know what? I'm not done with you just yet.")
+	saynn("Your owner pulls out a leash..")
+	addButton("Obey", "Let your owner do anything with you..", "go")
+	addButton("Resist", "That's enough!", "resist")
+
+func notDoneYetCum_do(_id:String, _args:Array):
+	if(_id == "go"):
+		runParadeTo(RNG.pick([LOC_BATHROOM1, LOC_BATHROOM2]))
+	if(_id == "resist"):
+		runResist()
+
+func notDoneYetCum_eventResult(_event, _tag:String, _args:Array):
+	setState("cumMarkUrinal")
+
+func cumMarkUrinal():
+	playAnimation(StageScene.UrinalPeeing, "idle", {npc=getOwnerID(), bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+	var theOwner := getOwner()
+	if(theOwner.hasReachablePenis()):
+		saynn("Your owner cuffs you up to a urinal and pulls {npc.his} {npc.penis} out, already gently stroking it!")
+	elif(theOwner.hasVagina()):
+		saynn("Your owner cuffs you up to a urinal and exposes {npc.his} pussy, already gently rubbing it!")
+	talkOwner("Gonna mark you real good.")
+	addContinue("getMarked")
+
+func cumMarkUrinal_do(_id:String, _args:Array):
+	if(_id == 'getMarked'):
+		var theOwner := getOwner()
+		if(theOwner.hasReachablePenis()):
+			GM.pc.cummedOnBy(getOwnerID(), FluidSource.Penis)
+		elif(theOwner.hasVagina()):
+			GM.pc.cummedOnBy(getOwnerID(), FluidSource.Vagina)
+		setState("cumMarkUrinalMarked")
+
+func cumMarkUrinalMarked():
+	var theOwner := getOwner()
+	if(theOwner.hasReachablePenis()):
+		playAnimation(StageScene.UrinalPeeing, "stroke", {npc=getOwnerID(), npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+	else:
+		playAnimation(StageScene.UrinalPeeing, "peefemale", {npc=getOwnerID(), npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
+	
+	saynn("YOUR OWNER MARKS YOU!")
+	talkOwner("Good {npc.npcSlave}.")
+	addInfluenceObey(0.3)
+	
+	saynn("After some time, your owner lets you go.")
+	talkOwner("SEE YOU AROUND.")
+	addContinue("endEvent")
+	
 func saveData() -> Dictionary:
 	var data := .saveData()
 	

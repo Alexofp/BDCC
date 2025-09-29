@@ -68,6 +68,9 @@ func onDelete():
 	if(pawnType != null):
 		pawnType.onPawnDeleted(self)
 
+func getCharID() -> String:
+	return charID
+
 func getChar() -> BaseCharacter:
 	if(charID == ""):
 		return null
@@ -506,22 +509,7 @@ func calculatePowerScore(ignoreCurrentState:bool = false) -> float:
 	var theChar:BaseCharacter = getChar()
 	if(theChar == null):
 		return 0.0
-	
-	var finalScore:float = 0.0
-	
-	finalScore += theChar.painThreshold() * 0.01
-	finalScore += theChar.lustThreshold() * 0.01
-	finalScore += theChar.getMaxStamina() * 0.005
-	
-	finalScore += theChar.getLevel() * 0.1
-	finalScore += theChar._getAttacks().size() * 0.1
-	
-	if(!ignoreCurrentState):
-		finalScore *= (1.0 - theChar.getPainLevel()*0.9)
-		finalScore *= (1.0 - theChar.getLustLevel()*0.8)
-		finalScore *= (1.0 - theChar.getStaminaLevel()*0.5)
-	
-	return finalScore
+	return theChar.calculatePowerScore(ignoreCurrentState)
 
 func getHowMuchLikesPawn(otherPawn, isClamped:bool = false) -> float:
 	var theChar:BaseCharacter = getChar()

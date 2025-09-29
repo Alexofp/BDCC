@@ -909,7 +909,16 @@ func setLocation(newLoc:String):
 			continue
 		thePawn.setLocation(location)
 
-func goTowards(theTarget:String):
+func canGetTo(theTarget:String) -> bool:
+	if(theTarget == getLocation()):
+		return true
+	cachedTarget = theTarget
+	cachedPath = GM.world.calculatePath(getLocation(), cachedTarget)
+	if(cachedPath.size() <= 0):
+		return false
+	return true
+
+func goTowards(theTarget:String, tpOnNoPath:bool = false):
 	if(getLocation() == theTarget):
 		cachedTarget = ""
 		cachedPath = []
@@ -918,17 +927,20 @@ func goTowards(theTarget:String):
 	if(cachedTarget != theTarget):
 		cachedTarget = theTarget
 		cachedPath = GM.world.calculatePath(getLocation(), cachedTarget)
-		if(cachedPath.size() > 0):
-			cachedPath.remove(0)
-		#print(getLocation(), " ", cachedTarget, " ", cachedPath)
+		
 		if(cachedPath.size() <= 0):
+			if(tpOnNoPath):
+				setLocation(theTarget)
+				return true
 			cachedTarget = ""
 			return false
 	
 	if(cachedTarget == theTarget):
-		if(cachedPath.size() > 0):
-			setLocation(cachedPath[0])
+		if(cachedPath.size() > 1 && getLocation() == cachedPath[0]):
+			setLocation(cachedPath[1])
 			cachedPath.remove(0)
+		else:
+			cachedPath = GM.world.calculatePath(getLocation(), cachedTarget)
 	
 	if(getLocation() == theTarget):
 		cachedTarget = ""

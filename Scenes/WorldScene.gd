@@ -126,7 +126,7 @@ func _react(_action: String, _args):
 		var thePawn:CharacterPawn = GM.main.IS.spawnPawnIfNeeded(someNPC)
 		thePawn.setLocation(GM.pc.getLocation())
 		GM.main.RS.startSpecialRelantionship("SoftSlavery", someNPC)
-		#runScene("NpcOwnerEventRunnerScene", [someNPC])
+		runScene("NpcOwnerEventRunnerScene", [someNPC, "ParadeTo", ["yard_novaspot"]])
 	if(_action == "triggerNemesis"):
 		var someNPC:String = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [], InmateGenerator.new(), {})
 		var thePawn:CharacterPawn = GM.main.IS.spawnPawnIfNeeded(someNPC)

@@ -21,10 +21,12 @@ func start():
 
 func start_do(_id:String, _args:Array):
 	if(_id == "obey"):
-		setLocation(LOC_STOCKS)
-		if(checkSubEvent("FuckInStocks", "You were about to be locked into stocks by {npc.name}..", [])):
-			return
-		setState("inStocks")
+		runParadeTo(LOC_STOCKS)
+		
+		#setLocation(LOC_STOCKS)
+		#if(checkSubEvent("FuckInStocks", "You were about to be locked into stocks by {npc.name}..", [])):
+		#	return
+		#setState("inStocks")
 	if(_id == "resist"):
 		runResist()
 
@@ -33,6 +35,9 @@ func start_eventResult(_event, _id:String, _args:Array):
 		setState("inStocks")
 	if(_id == "lockedInStocks"):
 		setState("inStocks")
+	if(_id == "paradeTo"):
+		setState("inStocks")
+		checkSubEvent("FuckInStocks", "You were about to be locked into stocks by {npc.name}..", [])
 	
 func inStocks():
 	playAnimation(StageScene.StocksSexOral, "tease", {npc=getRoleID(C_OWNER)})

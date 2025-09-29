@@ -112,6 +112,12 @@ func addButton(_event, _name:String, _desc:String, _action:String, _args:Array =
 func addDisabledButton(_event, _name:String, _desc:String):
 	buttons.append([_name, _desc])
 
+func addButtonAt(_event, _indx:int, _name:String, _desc:String, _action:String, _args:Array = []):
+	buttons.append([_name, _desc, _action, _args, _indx])
+	
+func addDisabledButtonAt(_event, _indx:int, _name:String, _desc:String):
+	buttons.append([_name, _desc, _indx])
+
 func getFinalText() -> String:
 	return Util.join(texts, "\n\n")
 
