@@ -13,6 +13,9 @@ const LOC_MED_COUNTER = "med_lobbymain"
 const LOC_BATHROOM1 = "main_bathroom1"
 const LOC_BATHROOM2 = "main_bathroom2"
 
+const LOCS_PARADE = ["main_punishment_spot", "main_hallroom1", "hall_canteen", "main_hallroom4", "main_hallroom8", "hall_ne_corner", "gym_nearbathroom", "yard_deadend1", "yard_deadend2", "yard_waterfall", "yard_vaulthere", "yard_firstroom", "med_lobbymain", "med_lobbyse", "eng_workshop", "main_shower1"]
+const LOCS_YARD = ["gym_nearbathroom", "yard_deadend1", "yard_deadend2", "yard_waterfall", "yard_vaulthere", "yard_firstroom"]
+
 const C_PC = -1
 const C_OWNER = 0
 const C_EXTRA1 = 1
@@ -54,6 +57,7 @@ var pretext:String = ""
 var runner:WeakRef
 
 var eventWeight:float = 1.0 # no save
+var eventMinLevel:int = 0 # no save
 var cachedTarget:String = "" # no save
 var cachedPath:Array = [] # no save
 
@@ -64,6 +68,12 @@ func involveCharID(_role:int, _charID:String, satisfySocial:bool = true):
 	roles[_role] = _charID
 	if(_charID != "pc"):
 		var thePawn:CharacterPawn = GM.main.IS.getPawn(_charID)
+		if(!thePawn):
+			var theChar:BaseCharacter = GlobalRegistry.getCharacter(_charID)
+			if(!theChar || !theChar.isDynamicCharacter()):
+				return
+			thePawn = GM.main.IS.spawnPawnIfNeeded(_charID)
+			
 		if(thePawn):
 			if(satisfySocial):
 				thePawn.satisfySocial()
@@ -153,11 +163,15 @@ func doAction(_actionID:String, _args:Array) -> Array:
 	if(_actionID == "startSex"):
 		return [NpcOwnerActionType.START_SEX, _args]
 	
-	if(!has_method(state+"_do")):
+	var theDoState:String = getDoState()
+	if(!has_method(theDoState+"_do")):
 		Log.printerr("Npc Event "+str(id)+" has no '_do()' function for the state '"+str(state)+"'!")
 		return [NpcOwnerActionType.NOTHING, howMuchToPass]
-	call(state+"_do", _actionID, _args)
+	call(theDoState+"_do", _actionID, _args)
 	return [NpcOwnerActionType.NOTHING, howMuchToPass]
+
+func getDoState() -> String:
+	return state
 
 func howMuchTimeToPass(_actionID:String, _args:Array) -> int:
 	return 60
@@ -327,6 +341,9 @@ func getNpcOwner() -> NpcOwnerBase:
 	return getRunner().getNpcOwner()
 
 func getSubEventScore(_event, _tag:String, _args:Array) -> float:
+	var theLevel:int = _event.getNpcOwner().getLevel()
+	if(theLevel < eventMinLevel):
+		return 0.0
 	return eventWeight
 
 func trySubEventStart(_event, _tag:String, _args:Array) -> bool:
@@ -401,6 +418,75 @@ func runParadeTo(_loc:String):
 
 func runNpcFight(_char1:String, _char2:String):
 	runEvent("npcFight", "NpcFight", [_char1, _char2])
+
+func getDebugActions():
+	return [
+		{
+			"id": "setLevel",
+			"name": "Set level",
+			"args": [
+				{
+					"id": "level",
+					"name": "Level",
+					"type": "number",
+					"value": 3,
+				},
+			],
+		},
+		{
+			"id": "addInfluence",
+			"name": "Add influence",
+			"args": [
+				{
+					"id": "howMuch",
+					"name": "How much",
+					"type": "number",
+					"value": 50,
+				},
+			],
+		},
+		{
+			"id": "resetPunish",
+			"name": "Reset punishment counter",
+			"args": [
+			],
+		},
+		{
+			"id": "endEvent",
+			"name": "End event",
+			"args": [
+			],
+		},
+		{
+			"id": "stopSoftSlavery",
+			"name": "Stop soft slavery",
+			"args": [
+			],
+		},
+	]
+
+func doDebugAction(_id, _args = {}):
+	if(_id == "setLevel"):
+		var theNpcOwner := getNpcOwner()
+		if(theNpcOwner):
+			theNpcOwner.setLevel(_args["level"])
+	if(_id == "addInfluence"):
+		var theNpcOwner := getNpcOwner()
+		if(theNpcOwner):
+			theNpcOwner.addInfluence(float(_args["howMuch"])/100.0)
+	if(_id == "resetPunish"):
+		var theNpcOwner := getNpcOwner()
+		if(theNpcOwner):
+			theNpcOwner.punishAmount = 0
+		GM.main.addMessage("Punishment counter reset to 0")
+	if(_id == "stopSoftSlavery"):
+		var theNpcOwner := getNpcOwner()
+		if(theNpcOwner):
+			theNpcOwner.endSlavery()
+		stopRunner()
+	if(_id == "endEvent"):
+		stopRunner()
+	pass
 
 func saveData() -> Dictionary:
 	return {

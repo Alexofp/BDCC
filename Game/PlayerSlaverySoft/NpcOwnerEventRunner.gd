@@ -142,6 +142,16 @@ func notifySexResult(_sexResult:SexEngineResult):
 func stopRunner():
 	shouldStop = true
 
+func getDebugActions() -> Array:
+	if(eventStack.empty()):
+		return []
+	return eventStack.back().getDebugActions()
+
+func doDebugAction(_id, _args = {}):
+	if(eventStack.empty()):
+		return
+	eventStack.back().doDebugAction(_id, _args)
+
 func saveData() -> Dictionary:
 	var eventsData:Array = []
 	for event in eventStack:

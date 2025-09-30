@@ -6,7 +6,7 @@ func _init():
 	id = "GiveCredits"
 	reactsToTags = ["aMean"]
 	
-	eventWeight = 0.5
+	eventWeight = 0.25
 
 func start():
 	if(onlyOnce()):

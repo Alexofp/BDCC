@@ -7,7 +7,7 @@ func _init():
 	id = "Marking"
 	reactsToTags = ["aMean"]
 	
-	eventWeight = 1000.0
+	eventWeight = 0.5
 
 func start():
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_OWNER)})

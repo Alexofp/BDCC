@@ -56,13 +56,23 @@ func getMaxLevel() -> int:
 func getLevel() -> int:
 	return level
 
+func setLevel(_level:int):
+	level = _level
+	if(level < 0):
+		level = 0
+	if(level > getMaxLevel()):
+		level = getMaxLevel()
+	onLevelUp()
+
 func doLevelUp():
 	if(level >= getMaxLevel()):
 		return
 	if(punishAmount > 0):
 		punishAmount -= 1
+	setLevel(level + 1)
+
+func onLevelUp():
 	influence = 0.5
-	level += 1
 	var oldPCName:String = getPCName()
 	pickNewName()
 	var newPCName:String = getPCName()

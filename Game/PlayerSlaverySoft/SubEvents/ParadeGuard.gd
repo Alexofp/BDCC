@@ -3,7 +3,7 @@ extends NpcOwnerEventBase
 func _init():
 	id = "ParadeGuard"
 	reactsToTags = [E_PARADE_TO]
-	eventWeight = 0.2
+	eventWeight = 0.1
 
 func trySubEventStart(_event, _tag:String, _args:Array) -> bool:
 	if(_args.empty()):

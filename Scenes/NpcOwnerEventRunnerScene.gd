@@ -73,6 +73,16 @@ func resolveCustomCharacterName(_charID):
 func supportsShowingPawns() -> bool:
 	return true
 
+func getDebugActions():
+	return runner.getDebugActions()
+
+func doDebugAction(_id, _args = {}):
+	runner.doDebugAction(_id, _args)
+	if(_id == "stopSoftSlavery"):
+		endScene()
+	if(_id == "endEvent"):
+		endScene()
+
 func saveData():
 	var data = .saveData()
 	
