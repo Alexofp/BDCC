@@ -6,9 +6,6 @@ func _init():
 func onStart(_args:Array):
 	setState("start")
 
-	if(GlobalRegistry.getCharacter(getOwnerID()).isDynamicCharacter()):
-		GM.main.IS.spawnPawnIfNeeded(getOwnerID())
-
 func start():
 	playAnimation(StageScene.HangingDuo, "stand", {npc=getOwnerID()})
 	saynn("YOU WAKE UP HANGING IN SOMEONE'S CELL (OR ROOM).")

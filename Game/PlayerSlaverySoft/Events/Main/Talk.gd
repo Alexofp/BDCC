@@ -31,9 +31,9 @@ func start():
 			else:
 				addDisabledButton(actionEntry[0], actionEntry[1])
 	
-	addButton("Attack!", "Attack your owner", "startFight", [getOwnerID()])
-	addButton("Tasks!", "Get some test tasks", "getTasks")
-	addButton("Punish!", "Get punished for testing", "getPunished")
+	#addButton("Attack!", "Attack your owner", "startFight", [getOwnerID()])
+	#addButton("Tasks!", "Get some test tasks", "getTasks")
+	#addButton("Punish!", "Get punished for testing", "getPunished")
 	addButton("Leave", "You have finished talking with your owner", "endEvent")
 
 func start_do(_id:String, _args:Array):

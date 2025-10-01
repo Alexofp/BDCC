@@ -5,6 +5,7 @@ func _init():
 
 func onStart(_args:Array):
 	setState("start")
+	setSubResult(SUB_END)
 	
 	var approachSubEventID:String = "aMean"
 	var theOwner := getNpcOwner()

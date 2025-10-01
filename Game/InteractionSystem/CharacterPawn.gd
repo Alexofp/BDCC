@@ -620,6 +620,8 @@ func canGrabAndFuck() -> bool:
 	return true
 
 func isOnALeash() -> bool:
+	if(isPlayer() && GM.main.checkPCOnALeash()):
+		return true
 	if(currentInteraction == null):
 		return false
 	if(currentInteraction.isRoleOnALeash(currentInteraction.getRoleForPawn(self))):

@@ -152,6 +152,11 @@ func doDebugAction(_id, _args = {}):
 		return
 	eventStack.back().doDebugAction(_id, _args)
 
+func isPlayerOnALeash() -> bool:
+	if(eventStack.empty()):
+		return false
+	return eventStack.back().isPlayerOnALeash()
+
 func saveData() -> Dictionary:
 	var eventsData:Array = []
 	for event in eventStack:

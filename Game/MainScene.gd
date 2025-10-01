@@ -2061,3 +2061,14 @@ func stopPlayerSlavery():
 	PS.onSlaveryEnd()
 	PSH.givePlayerItemsBack()
 	PS = null
+
+func checkPCOnALeash() -> bool: # Maybe I could expand this onto other pawn reactions
+	var theCurrentScene = getCurrentScene()
+	if(theCurrentScene):
+		if(theCurrentScene.sceneID == "ParadedOnALeashScene"):
+			return true
+		if(theCurrentScene.sceneID == "NpcOwnerEventRunnerScene"):
+			if(theCurrentScene.runner.isPlayerOnALeash()):
+				return true
+	return false
+	

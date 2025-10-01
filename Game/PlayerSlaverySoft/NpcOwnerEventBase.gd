@@ -108,6 +108,14 @@ func getChar(_role:int) -> BaseCharacter:
 func playAnimation(theSceneID, theActionID, args = {}):
 	GM.main.playAnimation(theSceneID, theActionID, args)
 
+func playStand(_roleNpc:int = C_OWNER, _rolePC:int=C_PC,_leashedBy:bool = false):
+	var theNpc:String = getRoleID(_roleNpc)
+	var thePC:String = getRoleID(_rolePC)
+	if(!_leashedBy):
+		GM.main.playAnimation(StageScene.Duo, "stand", {pc=thePC, npc=theNpc})
+	else:
+		GM.main.playAnimation(StageScene.Duo, "stand", {pc=thePC, npc=theNpc, bodyState={leashedBy=theNpc}})
+
 func resolveCustomCharacterName(_charID):
 	if(AliasToRole.has(_charID)):
 		return getRoleID(AliasToRole[_charID])
@@ -487,6 +495,9 @@ func doDebugAction(_id, _args = {}):
 	if(_id == "endEvent"):
 		stopRunner()
 	pass
+
+func isPlayerOnALeash() -> bool:
+	return false
 
 func saveData() -> Dictionary:
 	return {

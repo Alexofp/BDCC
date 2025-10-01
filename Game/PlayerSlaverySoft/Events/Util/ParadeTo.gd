@@ -60,6 +60,9 @@ func walking_do(_id:String, _args:Array):
 		
 		checkSubEvent(E_PARADE_TO, "You were being paraded by your owner..", [getFreePawnsNear(2)])
 
+func isPlayerOnALeash() -> bool:
+	return true
+
 func saveData() -> Dictionary:
 	var data:Dictionary = .saveData()
 	data["targetLoc"] = targetLoc

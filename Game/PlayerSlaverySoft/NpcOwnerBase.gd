@@ -15,6 +15,8 @@ var tasks:Array = []
 var punishAmount:int = 0
 var pcName:String = "slave"
 
+var interactedToday:bool = false
+
 func onStart():
 	pickNewName()
 
@@ -79,7 +81,7 @@ func onLevelUp():
 	addMessage(getOwnerName()+"'s influence level over you has increased to '"+str(level)+"'!"+((" You are now a '"+newPCName+"'.") if newPCName != oldPCName else ""))
 
 func pickNewName():
-	pcName = RNG.pick(getPossiblePCNamesForLevel(level))
+	setPCName(RNG.pick(getPossiblePCNamesForLevel(level)))
 
 func getOwner() -> BaseCharacter:
 	return GlobalRegistry.getCharacter(charID)
@@ -106,9 +108,10 @@ func getPossiblePCNames() -> Array:
 	return allNames
 
 func getPCName() -> String:
-	#if(true):
-	#	return "pet"
 	return pcName
+
+func setPCName(_newName:String):
+	pcName = _newName
 
 func shouldOwnerApproachPC() -> bool:
 	return shouldAppoach
@@ -119,7 +122,8 @@ func getApproachEvent() -> Array:
 	return ["Approach", []]
 
 func onNewDay():
-	shouldAppoach = true
+	interactedToday = false
+	shouldAppoach = true #TODO: BETTER LOGIC HERE
 	if(influence <= 0.0):
 		endSlavery()
 		return
@@ -255,6 +259,12 @@ func shouldPunishStrong() -> bool:
 func shouldPunishGetRidOf() -> bool:
 	return punishAmount >= 3
 
+func didInteractWithToday() -> bool:
+	return interactedToday
+
+func markInteractedWithToday():
+	interactedToday = true
+
 func talkAction(_name:String, _desc:String, _id:String, _args:Array=[]):
 	return [_name, _desc, _id, _args]
 	
@@ -264,12 +274,36 @@ func talkActionDisabled(_name:String, _desc:String):
 
 func getTalkActions(_event) -> Array:
 	var result:Array = []
-	result.append(talkAction("Test!", "Test action!", "doHeck"))
+	
+	if(!didInteractWithToday()):
+		result.append(talkAction("Submit", "Ask your owner to do something with you. You can only do this once per day.", "submit"))
+		result.append(talkAction("Attack!", "Try to get rid of your owner's influence.", "attack"))
+	else:
+		result.append(talkActionDisabled("Submit", "Your owner doesn't feel like doing anything with you today anymore."))
+		result.append(talkActionDisabled("Attack!", "You have already interacted with your owner today."))
+	
+	if(getLevel() >= 3):
+		result.append(talkAction("Change name", "(Influence level 3) Ask your owner to change how they call you", "changeName"))
+	if(getLevel() >= getMaxLevel()):
+		if(getInfluence() >= 1.0):
+			result.append(talkAction("Ask freedom", "(Influence level MAX + Max Influence) Ask your owner if they can let you go", "askFreedom"))
+		else:
+			result.append(talkActionDisabled("Ask freedom", "Requires max influence"))
 	return result
 
 func doTalkAction(_event, _actionID:String, _args:Array):
-	if(_actionID == "doHeck"):
-		_event.runParadeTo("main_punishment_spot")
+	if(_actionID == "changeName"):
+		_event.runEvent("", "ChangeSlaveName")
+	if(_actionID == "askFreedom"):
+		_event.runEvent("", "AskFreedom")
+	if(_actionID == "submit"):
+		shouldAppoach = false
+		markInteractedWithToday()
+		_event.runEvent("", "Approach", ["interact"])
+	if(_actionID == "attack"):
+		shouldAppoach = false
+		markInteractedWithToday()
+		_event.runEvent("", "AttackOwner", ["interact"])
 
 func saveData() -> Dictionary:
 	var tasksData:Array = []
@@ -288,6 +322,7 @@ func saveData() -> Dictionary:
 		t = tasksData,
 		pa = punishAmount,
 		pn = pcName,
+		it = interactedToday,
 	}
 
 func loadData(_data:Dictionary):
@@ -297,6 +332,7 @@ func loadData(_data:Dictionary):
 	hasTasks = SAVE.loadVar(_data, "ht", false)
 	punishAmount = SAVE.loadVar(_data, "pa", 0)
 	pcName = SAVE.loadVar(_data, "pn", "slave")
+	interactedToday = SAVE.loadVar(_data, "it", false)
 	
 	tasks.clear()
 	var tasksData:Array = SAVE.loadVar(_data, "tasks", [])
