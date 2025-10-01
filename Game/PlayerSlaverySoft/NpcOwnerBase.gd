@@ -255,6 +255,22 @@ func shouldPunishStrong() -> bool:
 func shouldPunishGetRidOf() -> bool:
 	return punishAmount >= 3
 
+func talkAction(_name:String, _desc:String, _id:String, _args:Array=[]):
+	return [_name, _desc, _id, _args]
+	
+func talkActionDisabled(_name:String, _desc:String):
+	return [_name, _desc]
+
+
+func getTalkActions(_event) -> Array:
+	var result:Array = []
+	result.append(talkAction("Test!", "Test action!", "doHeck"))
+	return result
+
+func doTalkAction(_event, _actionID:String, _args:Array):
+	if(_actionID == "doHeck"):
+		_event.runParadeTo("main_punishment_spot")
+
 func saveData() -> Dictionary:
 	var tasksData:Array = []
 	for task in tasks:

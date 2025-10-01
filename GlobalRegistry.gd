@@ -661,8 +661,7 @@ func registerEverything():
 	registerSpecialRelantionshipFolder("res://Game/InteractionSystem/Relationship/SpecialRelationships/")
 	
 	registerNpcOwnerTypeFolder("res://Game/PlayerSlaverySoft/OwnerTypes/")
-	registerNpcOwnerEventFolder("res://Game/PlayerSlaverySoft/OwnerEvents/")
-	registerNpcOwnerEventFolder("res://Game/PlayerSlaverySoft/SubEvents/")
+	registerNpcOwnerEventFolder("res://Game/PlayerSlaverySoft/Events/")
 	
 	registerInteractionFolder("res://Game/InteractionSystem/Interactions/")
 	registerGlobalTaskFolder("res://Game/InteractionSystem/GlobalTasks/")
@@ -2809,7 +2808,7 @@ func registerNpcOwnerEvent(path: String):
 			npcOwnerEventIDsByTag[tagID].append(object.id)
 
 func registerNpcOwnerEventFolder(folder: String):
-	var scripts = getScriptsInFolder(folder)
+	var scripts = getScriptsInFoldersRecursive(folder)
 	for scriptPath in scripts:
 		registerNpcOwnerEvent(scriptPath)
 

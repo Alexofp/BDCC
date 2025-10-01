@@ -24,6 +24,13 @@ func start():
 		if(theNpcOwner.hasGivenPCTasks()):
 			saynn("You have been given tasks that you need to complete:\n"+theNpcOwner.getQuestProgressText())
 		
+		var theTalkActions := theNpcOwner.getTalkActions(self)
+		for actionEntry in theTalkActions:
+			if(actionEntry.size() > 2):
+				addButton(actionEntry[0], actionEntry[1], "doTalkAction", actionEntry)
+			else:
+				addDisabledButton(actionEntry[0], actionEntry[1])
+	
 	addButton("Attack!", "Attack your owner", "startFight", [getOwnerID()])
 	addButton("Tasks!", "Get some test tasks", "getTasks")
 	addButton("Punish!", "Get punished for testing", "getPunished")
@@ -36,6 +43,10 @@ func start_do(_id:String, _args:Array):
 			theNpcOwner.generateTasks(3)
 	if(_id == "getPunished"):
 		runPunishment()
+	if(_id == "doTalkAction"):
+		var theNpcOwner := getNpcOwner()
+		if(theNpcOwner):
+			theNpcOwner.doTalkAction(self, _args[2], _args[3])
 	
 func start_fightResult(_didWin:bool):
 	if(_didWin):
