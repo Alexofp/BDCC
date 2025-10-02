@@ -58,6 +58,7 @@ var runner:WeakRef
 
 var eventWeight:float = 1.0 # no save
 var eventMinLevel:int = 0 # no save
+var eventMaxLevel:int = 999 # no save
 var cachedTarget:String = "" # no save
 var cachedPath:Array = [] # no save
 
@@ -197,6 +198,15 @@ func notifyFightResult(_didWin:bool):
 		call(state+"_fightResult", _didWin)
 
 func notifySexResult(_sexResult:SexEngineResult):
+	if(_sexResult.hasSub("pc") && _sexResult.isSubUnconscious("pc")):
+		if(has_method(state+"_sexResultUncon")):
+			call(state+"_sexResultUncon", _sexResult)
+		else:
+			endEvent()
+			stopRunner()
+			GM.main.IS.startInteraction("Unconscious", {main="pc"})
+		return
+	
 	if(has_method(state+"_sexResult")):
 		call(state+"_sexResult", _sexResult)
 
@@ -352,6 +362,8 @@ func getSubEventScore(_event, _tag:String, _args:Array) -> float:
 	var theLevel:int = _event.getNpcOwner().getLevel()
 	if(theLevel < eventMinLevel):
 		return 0.0
+	if(theLevel > eventMaxLevel):
+		return 0.0
 	return eventWeight
 
 func trySubEventStart(_event, _tag:String, _args:Array) -> bool:
@@ -497,6 +509,68 @@ func doDebugAction(_id, _args = {}):
 	pass
 
 func isPlayerOnALeash() -> bool:
+	return false
+
+func canGetToStocks() -> bool:
+	var room = GM.world.getRoomByID(getLocation())
+	if(room == null):
+		return false
+	var floorID:String = room.getFloorID()
+	
+	return (floorID in ["Cellblock", "MainHall"])
+
+func canGetToSlutwall() -> bool:
+	var room = GM.world.getRoomByID(getLocation())
+	if(room == null):
+		return false
+	var floorID:String = room.getFloorID()
+	
+	if(!GM.main.getFlag("FightClubModule.BulldogBypassed")):
+		return false
+	
+	return (floorID in ["FightClubFloor", "MainHall", "Cellblock"])
+
+func findOwnerFriend(fromSamePool:bool = true, skiplist:Array = []) -> String:
+	var thePool:String = CharacterPool.Inmates
+	
+	if(!fromSamePool):
+		thePool = RNG.pick(CharacterPool.getPrisonPopulationPools())
+	else:
+		var theOwner := getOwner()
+		if(theOwner.isInmate()):
+			thePool = CharacterPool.Inmates
+		if(theOwner.isGuard()):
+			thePool = CharacterPool.Guards
+		if(theOwner.isNurse()):
+			thePool = CharacterPool.Nurses
+		if(theOwner.isEngineer()):
+			thePool = CharacterPool.Engineers
+	
+	for _i in range(5):
+		if(!fromSamePool):
+			thePool = RNG.pick(CharacterPool.getPrisonPopulationPools())
+		
+		var theConds:Array = []
+		if(!skiplist.empty()):
+			theConds.append([NpcCon.AvoidIDs, skiplist])
+		
+		var someNPC:String = NpcFinder.grabNpcIDFromPool(thePool, theConds)
+		
+		if(someNPC == "" || isInvolved(someNPC)):
+			continue
+		
+		return someNPC
+	
+	return ""
+
+func isInvolved(_charID:String) -> bool:
+	if(_charID == "pc"):
+		return true
+	if(_charID == getOwnerID()):
+		return true
+	for theRole in roles:
+		if(roles[theRole] == _charID):
+			return true
 	return false
 
 func saveData() -> Dictionary:

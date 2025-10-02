@@ -12,7 +12,7 @@ var timesLeft:int = 4
 func _init():
 	id = "ParadedAround"
 	reactsToTags = ["aMean"]
-	eventWeight = 10000.0
+	eventWeight = 1.0
 
 func start():
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_OWNER)})
