@@ -56,6 +56,12 @@ func stopMe():
 	if(theRelationship == self):
 		GM.main.RS.stopSpecialRelationship(charID)
 
+func canEnslaveReason(_isKidnap:bool) -> Array:
+	return [true, ""]
+
+func canTalkWithPlayer() -> bool:
+	return true
+
 func showMessage(_text:String):
 	GM.main.addMessage(_text)
 

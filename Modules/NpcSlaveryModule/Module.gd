@@ -54,6 +54,36 @@ func getSlavesSpace() -> int:
 func canEnslave():
 	return getSlavesSpace()
 
+func canKidnapCharacterReason(character) -> Array:
+	var theSpecialRelationship:SpecialRelationshipBase = GM.main.RS.getSpecialRelationship(character.getID())
+	if(theSpecialRelationship):
+		var theSpecialCanInfo:Array = theSpecialRelationship.canEnslaveReason(true)
+		if(!theSpecialCanInfo[0]):
+			return [theSpecialCanInfo[0], theSpecialCanInfo[1]]
+	
+	var enslaveQuest:NpcEnslavementQuest = character.getEnslaveQuest()
+	if(!enslaveQuest):
+		return [false, "They are not prepared for this!"] # Shouldn't see this
+	if(!enslaveQuest.isEverythingCompleted()):
+		return [false, "They are not ready to be kidnapped"]
+		
+	return [true]
+
+func canStartEnslavingCharacterReason(character) -> Array:
+	var theSpecialRelationship:SpecialRelationshipBase = GM.main.RS.getSpecialRelationship(character.getID())
+	if(theSpecialRelationship):
+		var theSpecialCanInfo:Array = theSpecialRelationship.canEnslaveReason(false)
+		if(!theSpecialCanInfo[0]):
+			return [theSpecialCanInfo[0], theSpecialCanInfo[1]]
+	
+	var pcRestraintsPreventChoking:bool = GM.pc.hasBlockedHands() || GM.pc.hasBoundArms()
+	if(pcRestraintsPreventChoking):
+		return [false, "You can't do that with restraints on your arms.."]
+	if(!character.getInventory().hasEquippedItemWithTag(ItemTag.AllowsEnslaving)):
+		return [false, "They need to be wearing a collar for you to be able to enslave them"]
+	
+	return [true]
+
 func getSlaves():
 	return GM.main.getDynamicCharacterIDsFromPool(CharacterPool.Slaves)
 

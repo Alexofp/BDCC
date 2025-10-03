@@ -32,6 +32,10 @@ func onSocialEvent(_charActor:String, _charTarget:String, _eventID:int, _args:Ar
 	pass
 
 func onStart(_args:Array):
+	var theChar := getChar()
+	if(theChar.hasEnslaveQuest()):
+		theChar.setEnslaveQuest(null)
+	
 	var theNpcTypeID:String = ""
 	if(_args.size() > 0):
 		theNpcTypeID = _args[0]
@@ -42,7 +46,7 @@ func onStart(_args:Array):
 	npcOwner.setRelationship(self)
 	npcOwner.onStart()
 	
-	showMessage(getChar().getName()+" became your [b][color=red]Owner[/color][/b]!")
+	showMessage(theChar.getName()+" became your [b][color=red]Owner[/color][/b]!")
 
 func onEnd():
 	showMessage(getChar().getName()+" is no longer your Owner!")
@@ -58,6 +62,12 @@ func getCooldown() -> int:
 
 func processInteractionActionGenericScore(_scoreType:String, _value:float) -> float:
 	return _value
+
+func canEnslaveReason(_isKidnap:bool) -> Array:
+	return [false, "You can't enslave your owner! That'd be strange!"]
+
+func canTalkWithPlayer() -> bool: # Owners 'talk' with the player through npc owner events
+	return false
 
 func saveData() -> Dictionary:
 	var data := .saveData()

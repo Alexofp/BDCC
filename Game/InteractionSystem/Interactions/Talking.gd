@@ -23,6 +23,13 @@ func start(_pawns:Dictionary, _args:Dictionary):
 	if(_args.has("grab_and_fuck") && _args["grab_and_fuck"]):
 		setState("grabbed_about_to_fuck", "reacter")
 	else:
+		if(getRolePawn("starter").isPlayer()): # A hack-ish way to ensure that the owner npc talk event always gets executed
+			var theSpecialRelationship := getRolePawn("reacter").getSpecialRelationship()
+			if(theSpecialRelationship && theSpecialRelationship.id == "SoftSlavery"):
+				stopMe()
+				GM.main.runScene("NpcOwnerEventRunnerScene", [getRolePawn("reacter").charID, "Talk", []])
+				return
+		
 		setState("", "starter")
 		sendSocialEvent("starter", "reacter", SocialEventType.GotTalkedTo)
 

@@ -11,9 +11,9 @@ func trySubEventStart(_event, _tag:String, _args:Array) -> bool:
 	var npcOwner := getNpcOwner()
 	if(!npcOwner):
 		return false
-	if(npcOwner.shouldPunishGetRidOf()):
-		return true
-	return false
+	if(!npcOwner.shouldPunishGetRidOf()):
+		return false
+	return true
 	
 func start():
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_OWNER), bodyState={leashedBy=getOwnerID()}})

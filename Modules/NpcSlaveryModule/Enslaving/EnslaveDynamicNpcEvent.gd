@@ -18,11 +18,12 @@ func run(_triggerID, _args):
 		return
 		
 	if(character.hasEnslaveQuest()):
-		var enslaveQuest:NpcEnslavementQuest = character.getEnslaveQuest()
-		if(enslaveQuest.isEverythingCompleted()):
+		var canKidnapInfo:Array = getModule("NpcSlaveryModule").canKidnapCharacterReason(character)
+		
+		if(canKidnapInfo[0]):
 			addButton("Kidnap!", "Try to kidnap them into your cell", "dokidnap", [_args[0]])
 		else:
-			addDisabledButton("Kidnap!", "They are not ready to be kidnapped")
+			addDisabledButton("Kidnap!", canKidnapInfo[1] if canKidnapInfo.size() > 1 else "They are not ready to be kidnapped")
 	else:
 		if(!getModule("NpcSlaveryModule").canEnslave()):
 			if(_triggerID == Trigger.DefeatedDynamicNPC):
@@ -30,15 +31,12 @@ func run(_triggerID, _args):
 			return
 		
 		if(!character.hasEnslaveQuest() ):
-			var pcRestraintsPreventChoking:bool = GM.pc.hasBlockedHands() || GM.pc.hasBoundArms()
-			if(!pcRestraintsPreventChoking && character.getInventory().hasEquippedItemWithTag(ItemTag.AllowsEnslaving)):
+			var canEnslaveInfo:Array = getModule("NpcSlaveryModule").canStartEnslavingCharacterReason(character)
+			
+			if(canEnslaveInfo[0]):
 				addButton("Enslave!", "Try to enslave them", "doenslave", [_args[0]])
 			else:
-				if(_triggerID == Trigger.DefeatedDynamicNPC):
-					if(pcRestraintsPreventChoking):
-						addDisabledButton("Enslave!", "You can't do that with restraints on your arms..")
-					else:
-						addDisabledButton("Enslave!", "They need to be wearing a collar for you to be able to enslave them")
+				addDisabledButton("Enslave!", canEnslaveInfo[1] if canEnslaveInfo.size() > 1 else "You can't enslave them currently..")
 		
 
 func getPriority():

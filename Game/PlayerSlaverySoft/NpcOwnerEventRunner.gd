@@ -39,8 +39,8 @@ func getAllEventsInvolvedCharIDs() -> Array:
 	return result
 
 #Checks all the events
-func isCharIDInvolvedAllEvents(_charID:String) -> bool:
-	if(_charID == getOwnerID()):
+func isCharIDInvolvedAllEvents(_charID:String, ownerAlways:bool = true) -> bool:
+	if(ownerAlways && _charID == getOwnerID()):
 		return true
 	for theEvent in eventStack:
 		for roleIndx in theEvent.roles:
@@ -80,6 +80,16 @@ func removeEvent(_event):
 func removeEndedEvent(_event, _args:Array):
 	var eventTag:String = _event.tag
 	eventStack.erase(_event)
+	
+	for _role in _event.roles:
+		var theCharID:String = _event.roles[_role]
+		if(isCharIDInvolvedAllEvents(theCharID, false)):
+			continue
+		var thePawn := GM.main.IS.getPawn(theCharID)
+		if(thePawn):
+			if(thePawn.getInteraction() && thePawn.getInteraction().id == "InNpcOwnerEvent"):
+				thePawn.getInteraction().stopMe()
+	
 	if(!eventStack.empty()):
 		var newCurrent = eventStack.back()
 		newCurrent.reactEnded(_event, eventTag, _args)
@@ -141,6 +151,14 @@ func notifySexResult(_sexResult:SexEngineResult):
 
 func stopRunner():
 	shouldStop = true
+
+func onRunnerStop():
+	var theInvolvedNPCs := getAllEventsInvolvedCharIDs()
+	for theCharID in theInvolvedNPCs:
+		var thePawn := GM.main.IS.getPawn(theCharID)
+		if(thePawn):
+			if(thePawn.getInteraction() && thePawn.getInteraction().id == "InNpcOwnerEvent"):
+				thePawn.getInteraction().stopMe()
 
 func getDebugActions() -> Array:
 	if(eventStack.empty()):

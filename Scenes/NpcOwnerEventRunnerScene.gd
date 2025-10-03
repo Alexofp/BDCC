@@ -76,6 +76,10 @@ func supportsShowingPawns() -> bool:
 func getDebugActions():
 	return runner.getDebugActions()
 
+func _onSceneEnd():
+	if(runner):
+		runner.onRunnerStop()
+
 func doDebugAction(_id, _args = {}):
 	runner.doDebugAction(_id, _args)
 	if(_id == "stopSoftSlavery"):

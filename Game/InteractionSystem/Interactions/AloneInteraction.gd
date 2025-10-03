@@ -200,6 +200,9 @@ func isDoingTask(_taskID:String) -> bool:
 func getInterruptActions(_pawn:CharacterPawn) -> Array:
 	if(getRolePawn("main").isPlayer() && !getRolePawn("main").canBeInterrupted()): # Fixes the problem where talking interactions were getting queued up while you were walking a leashed slave around
 		return []
+	if(getRolePawn("main").isPlayer() && _pawn.getSpecialRelationship() && !_pawn.getSpecialRelationship().canTalkWithPlayer()):
+		return []
+	
 	var result:Array = []
 	result.append({
 		id = "talk",
@@ -228,12 +231,12 @@ func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _conte
 			if(triggerTalkReactEvents("main")):
 				return
 		
-		if(_pawn.isPlayer()):
-			var theMainPawn := getRolePawn("main")
-			var theSpecialRelationship := theMainPawn.getSpecialRelationship()
-			if(theSpecialRelationship && theSpecialRelationship.id == "SoftSlavery" && theSpecialRelationship.npcOwner):
-				GM.main.runScene("NpcOwnerEventRunnerScene", [theMainPawn.charID, "Talk", []])
-				return
+#		if(_pawn.isPlayer()):
+#			var theMainPawn := getRolePawn("main")
+#			var theSpecialRelationship := theMainPawn.getSpecialRelationship()
+#			if(theSpecialRelationship && theSpecialRelationship.id == "SoftSlavery" && theSpecialRelationship.npcOwner):
+#				GM.main.runScene("NpcOwnerEventRunnerScene", [theMainPawn.charID, "Talk", []])
+#				return
 				
 		startInteraction("Talking", {starter=_pawn.charID, reacter=getRoleID("main")})
 	if(_id == "grab_and_fuck"):
