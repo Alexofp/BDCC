@@ -9,7 +9,7 @@ func onStart(_args:Array):
 func start():
 	playStand()
 	saynn("You ask your owner if {npc.he} can let you go.")
-	talk(C_OWNER, "I guess I can. No point in me bugging you any further, you already know that you are my {npc.npcSlave}. Do you really want that though?")
+	talkModularOwnerToPC("SoftSlaveryAskedFreedom") #"I guess I can. No point in me bugging you any further, you already know that you are my {npc.npcSlave}. Do you really want that though?"
 	saynn("Do your want {npc.name} to stop being your owner?")
 	
 	addButton("CANCEL", "You changed your mind", "endEvent")
@@ -21,7 +21,7 @@ func start_do(_id:String, _args:Array):
 	
 func committed():
 	saynn("You tell your owner that you do want that.")
-	talk(C_OWNER, "Alright, well. Go away then.")
+	talkModularOwnerToPC("SoftSlaveryAskedFreedomEND") #Alright, well. Go away then.
 	saynn("That was easy..")
 	addContinue("doEndEveything")
 

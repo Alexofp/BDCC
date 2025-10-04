@@ -382,6 +382,11 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		if(theSpecial && theSpecial.id=="SoftSlavery" && theSpecial.npcOwner):
 			return theSpecial.npcOwner.getPCName()
 		return "slave"
+	if(_command in ["cellRoom", "cell"] && _args.size() == 0):
+		if(object.isStaff()):
+			return "room"
+		else:
+			return "cell"
 	
 	if(_command in ["foot"] && _args.size() == 0):
 		var isDigi = object.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsDigi)

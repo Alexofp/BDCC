@@ -8,8 +8,8 @@ func onStart(_args:Array):
 
 func start():
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_OWNER)})
-	saynn("TALKING EVENT!")
-	talk(C_OWNER, "Meow meow.")
+	saynn("You approach your owner.")
+	talkModularOwnerToPC("SoftSlaveryTalkStart") #What do you want, {npc.npcSlave}?
 	
 	var theNpcOwner := getNpcOwner()
 	if(theNpcOwner):
@@ -35,6 +35,8 @@ func start():
 	#addButton("Tasks!", "Get some test tasks", "getTasks")
 	#addButton("Punish!", "Get punished for testing", "getPunished")
 	addButton("Leave", "You have finished talking with your owner", "endEvent")
+
+
 
 func start_do(_id:String, _args:Array):
 	if(_id == "getTasks"):

@@ -17,6 +17,8 @@ var pcName:String = "slave"
 
 var interactedToday:bool = false
 
+var eventHistory:Array = [] # keeps last 2 events so we don't repeat as often
+
 func onStart():
 	pickNewName()
 
@@ -323,6 +325,7 @@ func saveData() -> Dictionary:
 		pa = punishAmount,
 		pn = pcName,
 		it = interactedToday,
+		eh = eventHistory,
 	}
 
 func loadData(_data:Dictionary):
@@ -333,6 +336,7 @@ func loadData(_data:Dictionary):
 	punishAmount = SAVE.loadVar(_data, "pa", 0)
 	pcName = SAVE.loadVar(_data, "pn", "slave")
 	interactedToday = SAVE.loadVar(_data, "it", false)
+	eventHistory = SAVE.loadVar(_data, "eh", [])
 	
 	tasks.clear()
 	var tasksData:Array = SAVE.loadVar(_data, "tasks", [])

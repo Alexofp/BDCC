@@ -9,7 +9,7 @@ func onStart(_args:Array):
 func start():
 	playStand()
 	saynn("You ask your owner if {npc.he} can start calling you differently.")
-	talk(C_OWNER, "How should I call my {npc.npcSlave} then?")
+	talkModularOwnerToPC("SoftSlaveryChangeName") #"How should I call my {npc.npcSlave} then?"
 	saynn("Choose your new nickname.")
 	
 	addButton("CANCEL", "You changed your mind", "endEvent")
@@ -27,5 +27,5 @@ func start_do(_id:String, _args:Array):
 	
 func afterNamed():
 	saynn("You tell your owner which name you would like {npc.him} to use.")
-	talk(C_OWNER, "Alright. You will now be my {npc.npcSlave}.")
+	talkModularOwnerToPC("SoftSlaveryChangeNameEND") #Alright. You will now be my {npc.npcSlave}.
 	addContinue("endEvent")

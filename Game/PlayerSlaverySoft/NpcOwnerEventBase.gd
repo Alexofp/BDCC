@@ -12,6 +12,7 @@ const LOC_CELLBLOCK_LILAC = "cellblock_lilac_nearcell"
 const LOC_MED_COUNTER = "med_lobbymain"
 const LOC_BATHROOM1 = "main_bathroom1"
 const LOC_BATHROOM2 = "main_bathroom2"
+const LOC_SOLITARY = "solitary_cell"
 
 const LOCS_PARADE = ["main_punishment_spot", "main_hallroom1", "hall_canteen", "main_hallroom4", "main_hallroom8", "hall_ne_corner", "gym_nearbathroom", "yard_deadend1", "yard_deadend2", "yard_waterfall", "yard_vaulthere", "yard_firstroom", "med_lobbymain", "med_lobbyse", "eng_workshop", "main_shower1"]
 const LOCS_YARD = ["gym_nearbathroom", "yard_deadend1", "yard_deadend2", "yard_waterfall", "yard_vaulthere", "yard_firstroom"]
@@ -97,6 +98,9 @@ func getRoleID(_role:int) -> String:
 		return ""
 	return roles[_role]
 
+func hasRole(_role:int) -> bool:
+	return roles.has(_role)
+
 func charID(_role:int) -> String:
 	return getRoleID(_role)
 
@@ -109,7 +113,7 @@ func getChar(_role:int) -> BaseCharacter:
 func playAnimation(theSceneID, theActionID, args = {}):
 	GM.main.playAnimation(theSceneID, theActionID, args)
 
-func playStand(_roleNpc:int = C_OWNER, _rolePC:int=C_PC,_leashedBy:bool = false):
+func playStand(_leashedBy:bool = false, _roleNpc:int = C_OWNER, _rolePC:int=C_PC):
 	var theNpc:String = getRoleID(_roleNpc)
 	var thePC:String = getRoleID(_rolePC)
 	if(!_leashedBy):
@@ -132,6 +136,24 @@ func getOwnerID() -> String:
 
 func getOwner() -> BaseCharacter:
 	return GlobalRegistry.getCharacter(getRunner().getOwnerID())
+
+func isOwnerStaff() -> bool:
+	var theOwner := getOwner()
+	if(theOwner && theOwner.isStaff()):
+		return true
+	return false
+
+func getOwnerHomeLoc() -> String:
+	var theOwner := getOwner()
+	if(!theOwner):
+		return LOC_CELLBLOCK_MIDDLE
+	if(theOwner.isStaff()):
+		return LOC_SOLITARY
+	if(theOwner.isLilac()):
+		return LOC_CELLBLOCK_LILAC
+	if(theOwner.isHighSecInmate()):
+		return LOC_CELLBLOCK_HIGHSEC
+	return LOC_CELLBLOCK_GENERAL
 
 func getAllInvolvedCharIDs() -> Array:
 	return [getRunner().getOwnerID()] + roles.values()
@@ -334,6 +356,12 @@ func talkOwner(_text:String):
 func talkPC(_text:String):
 	talk(C_PC, _text)
 
+func talkModular(_roleTalk, _roleTarget, _lineID:String):
+	talk(_roleTalk, ModularDialogue.generate(_lineID, {main=getRoleID(_roleTalk), target=getRoleID(_roleTarget)}))
+
+func talkModularOwnerToPC(_lineID:String):
+	talkModular(C_OWNER, C_PC, _lineID)
+
 func addButton(_name:String, _desc:String, _action:String, _args:Array = []):
 	getRunner().addButton(self, _name, _desc, _action, _args)
 
@@ -372,10 +400,15 @@ func trySubEventStart(_event, _tag:String, _args:Array) -> bool:
 func involveOwner():
 	involveCharID(C_OWNER, getOwnerID())
 
-func checkSubEvent(_tag:String, _pretext:String, _args:Array) -> bool:
+func checkSubEvent(_tag:String, _pretext:String, _args:Array, _checkHistory:bool = false) -> bool:
 	var eventIDsWithTag:Array = GlobalRegistry.getNpcOwnerEventIDsByTag(_tag)
 	if(eventIDsWithTag.empty()):
 		return false
+	
+	var theHistory:Array = []
+	var theNpcOwner := getNpcOwner()
+	if(_checkHistory && theNpcOwner):
+		theHistory = theNpcOwner.eventHistory
 	
 	var possible:Array = []
 	#var totalScore:float = 0.0
@@ -384,6 +417,10 @@ func checkSubEvent(_tag:String, _pretext:String, _args:Array) -> bool:
 		var theScore:float = theEvent.getSubEventScore(self, _tag, _args)
 		if(theScore <= 0.0 || !RNG.chance(theScore*100.0)):
 			continue
+		if(_checkHistory && theHistory.has(eventID)):
+			theScore = theScore*0.01
+			if(theScore > 0.01):
+				theScore = 0.01
 		possible.append([theEvent, theScore])
 		#totalScore += theScore
 	
@@ -396,6 +433,11 @@ func checkSubEvent(_tag:String, _pretext:String, _args:Array) -> bool:
 		someEvent.tag = _tag
 		someEvent.pretext = _pretext
 		if(someEvent.trySubEventStart(self, _tag, _args)):
+			if(_checkHistory):
+				theHistory.append(someEvent.id)
+				while(theHistory.size() > 2):
+					theHistory.pop_front()
+			
 			getRunner().eventStack.append(someEvent)
 			someEvent.involveOwner()
 			return true

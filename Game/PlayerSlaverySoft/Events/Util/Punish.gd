@@ -6,7 +6,7 @@ func _init():
 func onStart(_args:Array):
 	setState("start")
 	
-	if(checkSubEvent(E_PUNISH, "", [])):
+	if(checkSubEvent(E_PUNISH, "", [], true)):
 		var theOwner := getNpcOwner()
 		if(theOwner):
 			theOwner.onPunish()
