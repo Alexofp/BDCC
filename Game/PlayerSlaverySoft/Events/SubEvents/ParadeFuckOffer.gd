@@ -7,7 +7,7 @@ func _init():
 	reactsToTags = [E_PARADE_TO]
 	eventWeight = 0.1
 
-func trySubEventStart(_event, _tag:String, _args:Array) -> bool:
+func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> bool:
 	if(_args.empty()):
 		return false
 	var thePawns:Array = _args[0]

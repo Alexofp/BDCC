@@ -7,7 +7,7 @@ func _init():
 	reactsToTags = ["aMean"]
 	eventWeight = 100000.0
 
-func trySubEventStart(_event, _tag:String, _args:Array) -> bool:
+func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> bool:
 	var theFriend := findOwnerFriend()
 	if(theFriend.empty()):
 		return false

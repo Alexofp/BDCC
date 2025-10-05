@@ -1486,11 +1486,32 @@ func getDebugActions():
 			"args": [
 			],
 		},
+		{
+			"id": "makefriend",
+			"name": "Make a friend",
+			"args": [
+			],
+		},
 	]
 
 func doDebugAction(id, args = {}):
 	print(id, " ", args)
 	
+	if(id == "makefriend"):
+		for _i in range(10):
+			var randID:String = RNG.pick(dynamicCharacters)
+			if(RS.hasSpecialRelationship(randID)):
+				continue
+			if(RS.getAffection(randID, "pc") >= 0.5):
+				continue
+			var theChar:BaseCharacter = getCharacter(randID)
+			if(!theChar || theChar.hasEnslaveQuest() || theChar.isSlaveToPlayer()):
+				continue
+			RS.addAffection(randID, "pc", 2.0)
+			return
+			#
+			
+		return
 	if(id == "addBodywritings"):
 		var theAm:int = args["amount"]
 		for _i in range(theAm):

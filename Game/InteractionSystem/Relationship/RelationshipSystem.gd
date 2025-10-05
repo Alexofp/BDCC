@@ -157,6 +157,8 @@ func addAffection(char1:String, char2:String, howMuch:float, showMessage:bool = 
 				if(showMessage):
 					GM.main.addMessage("Affection between "+char1Name+" and "+char2Name+" has decreased from "+oldStr+"% to "+affStr+"%")
 	checkRemoveEntry(char1, char2)
+	
+	sendSocialEvent(char1, char2, SocialEventType.AffectionChange, [diff, oldAff])
 
 func addLust(char1:String, char2:String, howMuch:float, showMessage:bool = false, showPCMessage:bool = true):
 	var theEntry := getEntry(char1, char2)
@@ -197,6 +199,8 @@ func addLust(char1:String, char2:String, howMuch:float, showMessage:bool = false
 				if(showMessage):
 					GM.main.addMessage("Lust between "+char1Name+" and "+char2Name+" has decreased from "+oldStr+"% to "+affStr+"%")
 	checkRemoveEntry(char1, char2)
+	
+	sendSocialEvent(char1, char2, SocialEventType.LustChange, [diff, oldAff])
 
 func removeAllEntriesOf(char1:String):
 	if(!entries.has(char1)):
@@ -316,6 +320,16 @@ func halfSpecialRelationshipCooldown(_shipID:String, _charID:String):
 		cooldowns[_shipID].erase(_charID)
 	else:
 		cooldowns[_shipID][_charID] = currentAmount
+
+func getAllCharIDsWithSpecialRelationship(_id:String) -> Array:
+	var result:Array = []
+	
+	for theCharID in special:
+		var theRelationship = special[theCharID]
+		if(theRelationship.id == _id):
+			result.append(theCharID)
+	
+	return result
 
 func saveData():
 	var specialData:Array = []

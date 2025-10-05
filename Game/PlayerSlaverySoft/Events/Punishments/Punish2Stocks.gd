@@ -9,7 +9,7 @@ func _init():
 func getSubEventScore(_event, _tag:String, _args:Array) -> float:
 	return 1.0
 
-func trySubEventStart(_event, _tag:String, _args:Array) -> bool:
+func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> bool:
 	var npcOwner := getNpcOwner()
 	if(!npcOwner):
 		return false

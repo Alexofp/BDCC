@@ -102,10 +102,14 @@ func playAnimation():
 	GM.main.playAnimation(animData[0], animData[1], animData[2] if animData.size() > 2 else {})
 
 func calcFinalActionScore(actionEntry:Dictionary) -> float:
+	if(actionEntry.has("finalScore")):
+		return actionEntry["finalScore"]
 	var score:float = actionEntry["score"] if actionEntry.has("score") else 0.0
 	var scoreType = actionEntry["scoreType"] if actionEntry.has("scoreType") else "default"
 	
-	return score * getScoreTypeValue(scoreType)
+	var theFinalScore:float = score * getScoreTypeValue(scoreType)
+	actionEntry["finalScore"] = theFinalScore
+	return theFinalScore
 
 func addAction(theid:String, name:String, desc:String, _scoreType:String, score, time:int, extraFields:Dictionary = {}):
 	var finalDic:Dictionary = {
@@ -1880,6 +1884,32 @@ func hasMissingCharacters() -> bool:
 		if(getRolePawn(involvedPawnRole) == null):
 			return true
 	return false
+
+func getActionsRelativeChanceInfo() -> Array:
+	var result:Array = []
+	
+	var totalScore:float = 0.0
+	var actionAndScore:Array = []
+	for actionEntry in actionBuffer:
+		if(actionEntry.has("disabled") && actionEntry["disabled"]):
+			continue
+		var theFinalScore:float = calcFinalActionScore(actionEntry)
+		if(theFinalScore <= 0.0):
+			continue
+		totalScore += theFinalScore
+		actionAndScore.append([actionEntry["name"], theFinalScore])
+	
+	if(actionAndScore.empty()):
+		return []
+	
+	for theEntryPair in actionAndScore:
+		var relativeScore:float = theEntryPair[1] / totalScore
+		var theChanceStr:String = str(Util.roundF(relativeScore*100.0, 1))+"%"
+		
+		result.append(theEntryPair[0]+": "+theChanceStr)
+	
+	return result
+	
 
 func saveData():
 	var data = {

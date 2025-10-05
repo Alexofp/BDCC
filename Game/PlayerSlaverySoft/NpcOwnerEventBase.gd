@@ -26,6 +26,7 @@ const C_EXTRA4 = 4
 
 const E_PUNISH = "punish"
 const E_PARADE_TO = "paradeTo"
+const E_PROTECT = "protect"
 
 const AliasToRole = {
 	"pc": C_PC,
@@ -394,11 +395,14 @@ func getSubEventScore(_event, _tag:String, _args:Array) -> float:
 		return 0.0
 	return eventWeight
 
-func trySubEventStart(_event, _tag:String, _args:Array) -> bool:
+func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> bool:
 	return true
 
 func involveOwner():
 	involveCharID(C_OWNER, getOwnerID())
+
+func checkProtect(_pretext:String) -> bool:
+	return checkSubEvent("protect", _pretext, [])
 
 func checkSubEvent(_tag:String, _pretext:String, _args:Array, _checkHistory:bool = false) -> bool:
 	var eventIDsWithTag:Array = GlobalRegistry.getNpcOwnerEventIDsByTag(_tag)
@@ -427,12 +431,13 @@ func checkSubEvent(_tag:String, _pretext:String, _args:Array, _checkHistory:bool
 	#if(totalScore < 1.0 && !RNG.chance(totalScore*100.0)):
 	#	return false
 	
+	var _context:Dictionary = {}
 	while(!possible.empty()):
 		var someEvent = RNG.grabWeightedPairs(possible)
 		someEvent.setEventRunner(getRunner())
 		someEvent.tag = _tag
 		someEvent.pretext = _pretext
-		if(someEvent.trySubEventStart(self, _tag, _args)):
+		if(someEvent.trySubEventStart(self, _tag, _args, _context)):
 			if(_checkHistory):
 				theHistory.append(someEvent.id)
 				while(theHistory.size() > 2):
@@ -614,6 +619,64 @@ func isInvolved(_charID:String) -> bool:
 		if(roles[theRole] == _charID):
 			return true
 	return false
+
+func getFreeFriendsIDs(_addToContext:bool = true, _context:Dictionary = {}) -> Array:
+	if(_addToContext && _context.has("FreeFriends")):
+		return _context["FreeFriends"]
+	var result:Array = []
+	
+	var allFriendIDs:Array = GM.main.RS.getAllCharIDsWithSpecialRelationship("Friend")
+	for theCharID in allFriendIDs:
+		if(isInvolved(theCharID)):
+			continue
+		var thePawn := GM.main.IS.getPawn(theCharID)
+		if(thePawn && !thePawn.canBeInterrupted()):
+			continue
+		result.append(theCharID)
+	
+	if(_addToContext):
+		_context["FreeFriends"] = result
+	return result
+
+func getFreeFriendsIDsNearby(_addToContext:bool = true, _context:Dictionary = {}) -> Array:
+	if(_addToContext && _context.has("FreeFriendsNear")):
+		return _context["FreeFriendsNear"]
+	var result:Array = []
+	
+	var ourLoc:String = getLocation()
+	
+	var allFriendIDs:Array = GM.main.RS.getAllCharIDsWithSpecialRelationship("Friend")
+	for theCharID in allFriendIDs:
+		if(isInvolved(theCharID)):
+			continue
+		var thePawn := GM.main.IS.getPawn(theCharID)
+		if(!thePawn || !thePawn.canBeInterrupted()):
+			continue
+		
+		var theDist:float = GM.world.simpleDistance(thePawn.getLocation(), ourLoc)
+		if(theDist > getNearbyCheckDist()):
+			continue
+		result.append(theCharID)
+	
+	if(_addToContext):
+		_context["FreeFriendsNear"] = result
+	return result
+
+# How close do friends need to be so they can protect you
+func getNearbyCheckDist() -> float:
+	return 3.0
+	#return 5.0
+
+# How likely is it that you will be saved by a friend who isn't even nearby
+func getNearbyCheckAllChance() -> float:
+	#return 100.0
+	return 3.0
+
+func didPCCancelHelp() -> bool:
+	return getRunner().didPCCancelHelp()
+
+func setPCCancelledHelp(_val:bool):
+	getRunner().setPCCancelledHelp(_val)
 
 func saveData() -> Dictionary:
 	return {

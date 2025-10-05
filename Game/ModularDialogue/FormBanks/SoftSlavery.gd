@@ -18,5 +18,11 @@ func getForms() -> Dictionary:
 		"SoftSlaveryAskedFreedomEND": form("Alright, well. Go away then.", {main=CHAR, target=CHAR}),
 		
 		"SoftSlaveryTalkStart": form("What do you want, {npc.npcSlave}?", {main=CHAR, target=CHAR}),
+		
+		"SoftSlaveryProtectedByFriendStart": form("Hey, what are you doing with {pc.name}?", {main=CHAR, target=CHAR}),
+		"SoftSlaveryProtectedByFriendResponse": form("It's none of your business. Step aside.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryProtectedByFriendAllGoodResp": form("Alright. Whatever then.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryProtectedByFriendLost": form("Now go away while you still can.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryProtectedByFriendWonThank": form("You're welcome.", {main=CHAR, target=CHAR}),
 		#"SoftSlavery": form("", {main=CHAR, target=CHAR}),
 	}

@@ -24,7 +24,11 @@ func start_do(_id:String, _args:Array):
 		#TODO: calculate power and compare. Same as how pawns work
 		
 		var char1FightScore:float = getChar(C_EXTRA1).calculatePowerScore()
+		if(getRoleID(C_EXTRA1) == getOwnerID()):
+			char1FightScore *= 2.0
 		var char2FightScore:float = getChar(C_EXTRA2).calculatePowerScore()
+		if(getRoleID(C_EXTRA2) == getOwnerID()):
+			char2FightScore *= 2.0
 		var randTable:Array = [
 			[true, char1FightScore*char1FightScore],
 			[false, char2FightScore*char2FightScore],

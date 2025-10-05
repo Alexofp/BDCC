@@ -7,7 +7,7 @@ func _init():
 func getSubEventScore(_event, _tag:String, _args:Array) -> float:
 	return 1.0
 
-func trySubEventStart(_event, _tag:String, _args:Array) -> bool:
+func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> bool:
 	if(RNG.chance(50)):
 		setState("sfight")
 	involveCharID(C_EXTRA1, "risha")

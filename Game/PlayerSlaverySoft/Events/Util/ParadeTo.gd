@@ -35,6 +35,7 @@ func doWalk() -> bool:
 func start_do(_id:String, _args:Array):
 	if(_id == "walk"):
 		setState("walking")
+		
 		doWalk()
 
 func walking():
@@ -58,10 +59,19 @@ func walking_do(_id:String, _args:Array):
 	if(_id == "walk"):
 		doWalk()
 		
+		if(checkProtect("You were being pulled by a leash..")):
+			return
+		
 		checkSubEvent(E_PARADE_TO, "You were being paraded by your owner..", [getFreePawnsNear(2)])
 
 func isPlayerOnALeash() -> bool:
 	return true
+
+func getNearbyCheckDist() -> float:
+	return 2.0
+
+func getNearbyCheckAllChance() -> float:
+	return 3.0
 
 func saveData() -> Dictionary:
 	var data:Dictionary = .saveData()

@@ -8,6 +8,8 @@ var texts:Array = []
 var buttons:Array = []
 var shouldStop:bool = false
 
+var pcCancelledHelp:bool = false
+
 func setOwnerID(_charID:String):
 	ownerID = _charID
 
@@ -175,6 +177,12 @@ func isPlayerOnALeash() -> bool:
 		return false
 	return eventStack.back().isPlayerOnALeash()
 
+func didPCCancelHelp() -> bool:
+	return pcCancelledHelp
+
+func setPCCancelledHelp(_val:bool):
+	pcCancelledHelp = _val
+
 func saveData() -> Dictionary:
 	var eventsData:Array = []
 	for event in eventStack:
@@ -187,11 +195,13 @@ func saveData() -> Dictionary:
 		ownerID = ownerID,
 		eventStack = eventsData,
 		shouldStop = shouldStop,
+		pcCancelledHelp = pcCancelledHelp,
 	}
 
 func loadData(_data:Dictionary):
 	ownerID = SAVE.loadVar(_data, "ownerID", "")
 	shouldStop = SAVE.loadVar(_data, "shouldStop", false)
+	pcCancelledHelp = SAVE.loadVar(_data, "pcCancelledHelp", false)
 	
 	eventStack.clear()
 	var eventsData:Array = SAVE.loadVar(_data, "eventStack", [])

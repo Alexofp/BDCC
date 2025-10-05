@@ -7,7 +7,7 @@ func _init():
 	reactsToTags = ["aMean"]
 	eventWeight = 1.0
 
-func trySubEventStart(_event, _tag:String, _args:Array) -> bool:
+func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> bool:
 	if(getOwner().isStaff()):
 		return false
 	if(!canGetToSlutwall()):
