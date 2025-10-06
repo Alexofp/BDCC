@@ -662,6 +662,66 @@ func getFreeFriendsIDsNearby(_addToContext:bool = true, _context:Dictionary = {}
 		_context["FreeFriendsNear"] = result
 	return result
 
+func getFreeNemesisIDs(_addToContext:bool = true, _context:Dictionary = {}) -> Array:
+	if(_addToContext && _context.has("FreeNemesis")):
+		return _context["FreeNemesis"]
+	
+	var result:Array = []
+	var allFriendIDs:Array = GM.main.RS.getAllCharIDsWithSpecialRelationship("Nemesis")
+	for theCharID in allFriendIDs:
+		if(isInvolved(theCharID)):
+			continue
+		var thePawn := GM.main.IS.getPawn(theCharID)
+		if(thePawn && !thePawn.canBeInterrupted()):
+			continue
+		result.append(theCharID)
+	
+	if(_addToContext):
+		_context["FreeNemesis"] = result
+	return result
+
+func getFreeOwnerIDsNearby(_addToContext:bool = true, _context:Dictionary = {}) -> Array:
+	if(_addToContext && _context.has("FreeOwnersNear")):
+		return _context["FreeOwnersNear"]
+	var result:Array = []
+	
+	var ourLoc:String = getLocation()
+	
+	var allFriendIDs:Array = GM.main.RS.getAllCharIDsWithSpecialRelationship("SoftSlavery")
+	for theCharID in allFriendIDs:
+		if(isInvolved(theCharID)):
+			continue
+		var thePawn := GM.main.IS.getPawn(theCharID)
+		if(!thePawn || !thePawn.canBeInterrupted()):
+			continue
+		
+		var theDist:float = GM.world.simpleDistance(thePawn.getLocation(), ourLoc)
+		if(theDist > getNearbyCheckDist()):
+			continue
+		result.append(theCharID)
+	
+	if(_addToContext):
+		_context["FreeOwnersNear"] = result
+	return result
+
+func getFreeOwnerIDs(_addToContext:bool = true, _context:Dictionary = {}) -> Array:
+	if(_addToContext && _context.has("FreeOwners")):
+		return _context["FreeOwners"]
+	
+	var result:Array = []
+	var allFriendIDs:Array = GM.main.RS.getAllCharIDsWithSpecialRelationship("SoftSlavery")
+	for theCharID in allFriendIDs:
+		if(isInvolved(theCharID)):
+			continue
+		var thePawn := GM.main.IS.getPawn(theCharID)
+		if(thePawn && !thePawn.canBeInterrupted()):
+			continue
+		result.append(theCharID)
+	
+	if(_addToContext):
+		_context["FreeOwners"] = result
+	return result
+
 # How close do friends need to be so they can protect you
 func getNearbyCheckDist() -> float:
 	return 3.0
@@ -677,6 +737,31 @@ func didPCCancelHelp() -> bool:
 
 func setPCCancelledHelp(_val:bool):
 	getRunner().setPCCancelledHelp(_val)
+
+func ownerFetish(_fetishID:String) -> float:
+	var theChar := getOwner()
+	if(!theChar):
+		return 0.0
+	var theFetishHolder:FetishHolder = theChar.getFetishHolder()
+	if(!theFetishHolder):
+		return 0.0
+	return theFetishHolder.getFetishValue(_fetishID)
+
+func ownerPersonality(_pers:String) -> float:
+	var theChar := getOwner()
+	if(!theChar):
+		return 0.0
+	var thePersonality:Personality = theChar.getPersonality()
+	if(!thePersonality):
+		return 0.0
+	return thePersonality.getStat(_pers)
+
+func smartChance(_theChance:float, neverChance:float = 15.0, alwaysChance:float = 85.0) -> bool:
+	if(_theChance < neverChance):
+		return false
+	if(_theChance > alwaysChance):
+		return true
+	return RNG.chance(_theChance)
 
 func saveData() -> Dictionary:
 	return {

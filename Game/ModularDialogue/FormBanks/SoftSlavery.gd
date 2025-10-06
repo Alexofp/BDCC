@@ -24,5 +24,22 @@ func getForms() -> Dictionary:
 		"SoftSlaveryProtectedByFriendAllGoodResp": form("Alright. Whatever then.", {main=CHAR, target=CHAR}),
 		"SoftSlaveryProtectedByFriendLost": form("Now go away while you still can.", {main=CHAR, target=CHAR}),
 		"SoftSlaveryProtectedByFriendWonThank": form("You're welcome.", {main=CHAR, target=CHAR}),
-		#"SoftSlavery": form("", {main=CHAR, target=CHAR}),
+		
+		"SoftSlaveryChokeOutStart": form("I'm so fucking mad. I need a toy to abuse and you seem good enough, {npc.npcSlave}.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryChokeOutEndured": form("I feel so much better. Thanks, {npc.npcSlave}.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryChokeOutPCWon": form("Ugh. Why are you such a bitch?", {main=CHAR, target=CHAR}),
+		"SoftSlaveryChokeOutPCLost": form("Such a weak {npc.npcSlave}. Can't even take some fucking abuse.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryChokeOutPCLostSex": form("Get over here.", {main=CHAR, target=CHAR}),
+		
+		"SoftSlaveryFuckStart": form("I wanna fuck my {npc.npcSlave}. Come here.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryFuckResultGood": form("Not bad for a {npc.npcSlave}. I will be back when I'm horny again.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryFuckResultOkay": form("That was okay. Can't you moan a little louder, {npc.npcSlave}? I will be back when I'm horny again.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryFuckResultBad": form("That was awful. Are you trying to make me mad, {npc.npcSlave}? Whatever, I will be back soon.", {main=CHAR, target=CHAR}),
+		
+		"SoftSlaveryFuckNemesisApproach": form("Well-well-well, what do we have here?", {main=CHAR, target=CHAR}),
+		"SoftSlaveryFuckNemesisAsk": form("What's your problem?", {main=CHAR, target=CHAR}),
+		"SoftSlaveryFuckNemesisAnswer": form("Your slave crossed me. Wanna punish {pc.him} together?", {main=CHAR, target=CHAR}),
+		"SoftSlaveryFuckNemesisYes": form("Sure. Let's do it.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryFuckNemesisNo": form("No. {pc.He} {pc.isAre} mine.", {main=CHAR, target=CHAR}),
+		"SoftSlavery": form("", {main=CHAR, target=CHAR}),
 	}
