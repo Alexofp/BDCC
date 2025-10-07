@@ -5,7 +5,8 @@ var sexSatisfaction:float = 1.0
 func _init():
 	id = "FuckInSlutwall"
 	reactsToTags = ["aMean"]
-	eventWeight = 1.0
+	eventWeight = 0.6
+	eventMinLevel = 0
 
 func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> bool:
 	if(getOwner().isStaff()):
@@ -16,8 +17,8 @@ func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> 
 
 func start():
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_OWNER)})
-	saynn("FUCK IN SLUTWALL!")
-	talk(C_OWNER, "I'M GONNA FUCK YOU IN A SLUTWALL!")
+	saynn("Your owner approaches you, leash in {npc.his} hand!")
+	talkModularOwnerToPC("SoftSlaverySlutwallStart")
 	
 	addButton("Obey", "Allow them to do it", "obey")
 	addButton("Resist!", "You're not gonna let them do it", "resist")
@@ -36,9 +37,9 @@ func start_eventResult(_event, _id:String, _args:Array):
 func inStocks():
 	playAnimation(StageScene.SlutwallSex, "tease", {npc=getRoleID(C_OWNER)})
 	
-	saynn("YOU OBEY!")
-	saynn("YOU GET LOCKED IN THE SLUTWALL BY {npc.you}!")
-	addButton("Continue", "See what happens next", "startSex", [getRoleID(C_OWNER), "pc", SexType.SlutwallSex, {SexMod.DisableDynamicJoiners:true}])
+	saynn("You obey fully and let {npc.name} lock you into the slutwall!")
+	talkModularOwnerToPC("SoftSlaverySlutwallLocked")
+	addContinue("startSex", [getRoleID(C_OWNER), "pc", SexType.SlutwallSex, {SexMod.DisableDynamicJoiners:true}])
 	
 func inStocks_sexResult(_sexResult:SexEngineResult):
 	sexSatisfaction = _sexResult.getAverageDomSatisfaction()
@@ -46,9 +47,18 @@ func inStocks_sexResult(_sexResult:SexEngineResult):
 
 func afterSex():
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_OWNER)})
-	saynn("AFTER SEX, YOU GET UNLOCKED FROM THE SLUTWALL!")
+	saynn("After the sex, your owner is nice enough to unlock you!")
 	
-	addInfluenceObey(sexSatisfaction)
+	if(sexSatisfaction < 0.5):
+		talkModularOwnerToPC("SoftSlaveryFuckResultBad") #"That was awful. Are you trying to make me mad, {npc.npcSlave}? Whatever, I will be back soon."
+	elif(sexSatisfaction < 0.8):
+		talkModularOwnerToPC("SoftSlaveryFuckResultOkay") #"That was okay. Can't you moan a little louder, {npc.npcSlave}? I will be back when I'm horny again."
+	else:
+		talkModularOwnerToPC("SoftSlaveryFuckResultGood") #"Not bad for a {npc.npcSlave}. I will be back when I'm horny again."
+	if(sexSatisfaction > 0.4):
+		addInfluenceObey(sexSatisfaction)
+	else:
+		addInfluenceResist(1.0-sexSatisfaction)
 	
 	addContinue("endEvent")
 

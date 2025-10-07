@@ -357,6 +357,9 @@ func talkOwner(_text:String):
 func talkPC(_text:String):
 	talk(C_PC, _text)
 
+func getModularDialogue(_roleTalk, _roleTarget, _lineID:String) -> String:
+	return ModularDialogue.generate(_lineID, {main=getRoleID(_roleTalk), target=getRoleID(_roleTarget)})
+
 func talkModular(_roleTalk, _roleTarget, _lineID:String):
 	talk(_roleTalk, ModularDialogue.generate(_lineID, {main=getRoleID(_roleTalk), target=getRoleID(_roleTarget)}))
 
@@ -749,6 +752,24 @@ func ownerFetish(_fetishID:String) -> float:
 
 func ownerPersonality(_pers:String) -> float:
 	var theChar := getOwner()
+	if(!theChar):
+		return 0.0
+	var thePersonality:Personality = theChar.getPersonality()
+	if(!thePersonality):
+		return 0.0
+	return thePersonality.getStat(_pers)
+
+func fetish(_role:int, _fetishID:String) -> float:
+	var theChar = GlobalRegistry.getCharacter(getRoleID(_role))
+	if(!theChar):
+		return 0.0
+	var theFetishHolder:FetishHolder = theChar.getFetishHolder()
+	if(!theFetishHolder):
+		return 0.0
+	return theFetishHolder.getFetishValue(_fetishID)
+
+func personality(_role:int, _pers:String) -> float:
+	var theChar = GlobalRegistry.getCharacter(getRoleID(_role))
 	if(!theChar):
 		return 0.0
 	var thePersonality:Personality = theChar.getPersonality()

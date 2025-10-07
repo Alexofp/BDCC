@@ -41,5 +41,25 @@ func getForms() -> Dictionary:
 		"SoftSlaveryFuckNemesisAnswer": form("Your slave crossed me. Wanna punish {pc.him} together?", {main=CHAR, target=CHAR}),
 		"SoftSlaveryFuckNemesisYes": form("Sure. Let's do it.", {main=CHAR, target=CHAR}),
 		"SoftSlaveryFuckNemesisNo": form("No. {pc.He} {pc.isAre} mine.", {main=CHAR, target=CHAR}),
+		
+		"SoftSlaveryFuckJealousStart": form("Hey! That is my slave! The fuck are you doing with {pc.him}?", {main=CHAR, target=CHAR}),
+		"SoftSlaveryFuckJealousFight": form("Huh? Go fuck yourself. This slave is my {npc.npcSlave}.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryFuckJealousOwnerWon": form("This is my {npc.npcSlave}. Do you understand that now?", {main=CHAR, target=CHAR}),
+		"SoftSlaveryFuckJealousOwnerWonFuck": form("Shouldn't have come here. Now you're gonna be my fucktoy too.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryFuckJealousOwnerLostOffer": form("Hey! Hear me out. How about we.. share this {npc.npcSlave} together?", {main=CHAR, target=CHAR}),
+		"SoftSlaveryFuckJealousOwnerLostOffer2": form("It's the slave's fault that {pc.he} didn't tell us about each other, right? So why not punish {pc.him} instead?", {main=CHAR, target=CHAR}),
+		"SoftSlaveryFuckJealousOwnerLostOfferAgree": form("You might be right.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryFuckJealousOwnerLostOfferAgree2": form("Let's have some fun.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryFuckJealousOwnerLostOfferNope": form("Huh. You're funny. I think I will just fuck both of you.", {main=CHAR, target=CHAR}),
+		
+		"SoftSlaverySlutwallStart": form("Today I feel like fucking you in the slutwall. Stay still while I leash you.", {main=CHAR, target=CHAR}),
+		"SoftSlaverySlutwallLocked": form("Let's have some fun.", {main=CHAR, target=CHAR}),
+		
+		"SoftSlaveryStocksStart": form("I decided what I wanna do. I'm gonna fuck you in the stocks while everyone is watching. Stay still.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryStocksLocked": form("Let's have some fun.", {main=CHAR, target=CHAR}),
+		
+		"SoftSlaveryGiveCreditsStart": form("I'm short on credits, I need exactly <CREDITS> right now. Be a good {npc.npcSlave} and give them to me.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryGiveCreditsTake": form("Thanks. Good {npc.npcSlave}.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryGiveCreditsShort": form("Bullshit. Guess I will just have to punish you.", {main=CHAR, target=CHAR}),
 		"SoftSlavery": form("", {main=CHAR, target=CHAR}),
 	}

@@ -6,15 +6,16 @@ func _init():
 	id = "GiveCredits"
 	reactsToTags = ["aMean"]
 	
-	eventWeight = 0.25
+	eventMaxLevel = 1
+	eventWeight = 0.5
 
 func start():
 	if(onlyOnce()):
 		creditsAmount = RNG.randi_range(5, 10)
 	
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_OWNER)})
-	saynn("CREDITS!")
-	talk(C_OWNER, "I'M SHORT! GIVE ME "+str(creditsAmount)+" CREDITS!")
+	saynn("Your owner approaches you, {npc.his} eyes shine with a need for something.")
+	talkOwner(getModularDialogue(C_OWNER, C_PC, "SoftSlaveryGiveCreditsStart").replace("<CREDITS>", str(creditsAmount)))
 	
 	if(GM.pc.getCredits() >= creditsAmount):
 		addButton("Obey", "Allow them to take your credits", "obey")
@@ -25,7 +26,7 @@ func start():
 
 func start_do(_id:String, _args:Array):
 	if(_id == "obey"):
-		if(checkSubEvent("GiveCredits", "You were about to let {npc.him} take your credits..", [])):
+		if(checkSubEvent("GiveCredits", "You were about to let {npc.name} take your credits..", [])):
 			return
 		GM.pc.addCredits(-creditsAmount)
 		setState("obey")
@@ -33,23 +34,19 @@ func start_do(_id:String, _args:Array):
 		runResist()
 
 func start_eventResult(_event, _id:String, _args:Array):
-	if(_id == "resist"):
-		setState("obey")
+	GM.pc.addCredits(-creditsAmount)
+	setState("obey")
 
 func obey():
-	saynn("YOU OBEY AND LET THEM TAKE THE CREDITS!")
-	
-	talk(C_OWNER, "GOOD {npc.npcSlave}.")
-	
+	saynn("You obey let your owner take your credits.")
+	talkModularOwnerToPC("SoftSlaveryGiveCreditsTake")
 	addInfluenceObey()
 	addContinue("endEvent")
 
 func amShort():
-	saynn("YOU TELL THEM THAT YOU'RE SHORT ON CREDITS!")
-	
-	talk(C_OWNER, "BULLSHIT.")
-	
-	saynn("LOOKS LIKE {npc.he} {npc.isAre} GONNA PUNISH YOU!")
+	saynn("You tell your owner that you're short on credits.")
+	talkModularOwnerToPC("SoftSlaveryGiveCreditsShort")
+	saynn("Looks {npc.he} {npc.isAre} gonna punish you.")
 	
 	addButton("Accept", "Let the punishment happen", "accept")
 	addButton("Resist", "Resist the punishment", "resist")

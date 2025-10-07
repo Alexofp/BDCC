@@ -2,7 +2,7 @@ extends NpcOwnerEventBase
 
 func _init():
 	id = "ProtectedByFriend"
-	reactsToTags = [E_PROTECT, "fuck"]
+	reactsToTags = [E_PROTECT, "fuck", "GiveCredits"]
 	eventWeight = 1.0
 
 func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> bool:
