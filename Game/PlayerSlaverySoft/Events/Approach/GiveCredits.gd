@@ -6,7 +6,8 @@ func _init():
 	id = "GiveCredits"
 	reactsToTags = ["aMean"]
 	
-	eventMaxLevel = 1
+	eventMaxLevel = 0
+	eventMaxLevel = 2
 	eventWeight = 0.5
 
 func start():

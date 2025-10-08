@@ -50,7 +50,7 @@ func getInfluence() -> float:
 
 func getExtraCategoryText() -> String:
 	var theText:String = "\n"
-	theText += "Level: "+str(level)
+	theText += "Level: "+str(level)+(" (max level)" if getLevel() >= getMaxLevel() else "")
 	theText += "\nInfluence: "+str(Util.roundF(influence*100.0, 1))+"%"
 	return theText
 
