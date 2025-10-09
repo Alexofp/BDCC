@@ -55,6 +55,7 @@ var subResult:int = SUB_END
 var roles:Dictionary = {} # indx -> char id
 
 var pretext:String = ""
+var sexLimits:Array = []
 
 var runner:WeakRef
 
@@ -193,6 +194,47 @@ func doAction(_actionID:String, _args:Array) -> Array:
 	if(_actionID == "startFight"):
 		return [NpcOwnerActionType.START_FIGHT, _args]
 	if(_actionID == "startSex"):
+		if(_args.size() == 2):
+			_args.append(SexType.DefaultSex)
+		if(_args.size() == 3):
+			_args.append({})
+		var sexArgs:Dictionary = _args[3]
+		if(!sexArgs.has(SexMod.DisabledGoals)):
+			sexArgs[SexMod.DisabledGoals] = {}
+		var disabledSexGoals:Dictionary = sexArgs[SexMod.DisabledGoals]
+		
+		for sexLimitID in sexLimits:
+			if(sexLimitID == "condomsOnly"):
+				sexArgs[SexMod.MustUseCondoms] = true
+			elif(sexLimitID == "noPullout"):
+				sexArgs[SexMod.DomNoPullingOut] = true
+			elif(sexLimitID == "noBondage"):
+				sexArgs[SexMod.BondageDisabled] = true
+			elif(sexLimitID == "noRimming"):
+				disabledSexGoals[SexGoal.RimSub] = true
+				disabledSexGoals[SexGoal.RimmingReceive] = true
+			elif(sexLimitID == "noFeetplay"):
+				disabledSexGoals[SexGoal.DoFeetplay] = true
+			elif(sexLimitID == "noJoiners"):
+				sexArgs[SexMod.DisableDynamicJoiners] = true
+			elif(sexLimitID == "noBottom"):
+				disabledSexGoals[SexGoal.ChokeSexAnal] = true
+				disabledSexGoals[SexGoal.ChokeSexVaginal] = true
+				disabledSexGoals[SexGoal.FuckAnal] = true
+				disabledSexGoals[SexGoal.FuckVaginal] = true
+				disabledSexGoals[SexGoal.StraponAnal] = true
+				disabledSexGoals[SexGoal.StraponVaginal] = true
+			elif(sexLimitID == "noTopping"):
+				disabledSexGoals[SexGoal.ChokeReceiveAnal] = true
+				disabledSexGoals[SexGoal.ChokeReceiveVaginal] = true
+				disabledSexGoals[SexGoal.ReceiveAnal] = true
+				disabledSexGoals[SexGoal.ReceiveVaginal] = true
+				disabledSexGoals[SexGoal.ReceiveStraponAnal] = true
+				disabledSexGoals[SexGoal.ReceiveStraponVaginal] = true
+			elif(sexLimitID == "noMilking"):
+				disabledSexGoals[SexGoal.MilkWithBreastPump] = true
+				disabledSexGoals[SexGoal.MilkWithPenisPump] = true
+		
 		return [NpcOwnerActionType.START_SEX, _args]
 	
 	var theDoState:String = getDoState()
@@ -212,7 +254,10 @@ func reactEnded(_event, _tag:String, _args:Array):
 	if(_event && _event.shouldEndParent()):
 		endEvent()
 		return
-		
+	
+	if(_event.id == "SetOwnerLimits"):
+		sexLimits = _event.sexLimits
+	
 	if(has_method(state+"_eventResult")):
 		call(state+"_eventResult", _event, _tag, _args)
 
@@ -490,6 +535,10 @@ func runNpcFight(_char1:String, _char2:String):
 	runEvent("npcFight", "NpcFight", [_char1, _char2])
 
 func getDebugActions():
+	var allEventsWithNames:Array = []
+	for theEventID in GlobalRegistry.getNpcOwnerEvents():
+		allEventsWithNames.append([theEventID, theEventID])
+	
 	return [
 		{
 			"id": "setLevel",
@@ -533,9 +582,32 @@ func getDebugActions():
 			"args": [
 			],
 		},
+		{
+			"id": "runEvent",
+			"name": "Run event",
+			"args": [
+				{
+					"id": "event",
+					"name": "Event",
+					"type": "list",
+					"value": allEventsWithNames[0][0] if allEventsWithNames.size() > 0 else "",
+					"values": allEventsWithNames,
+				},
+			],
+		},
 	]
 
 func doDebugAction(_id, _args = {}):
+	if(_id == "runEvent"):
+		var someEvent = GlobalRegistry.createNpcOwnerEvent(_args["event"])
+		someEvent.setEventRunner(getRunner())
+		someEvent.tag = ""
+		someEvent.pretext = ""
+		if(someEvent.trySubEventStart(self, "", [], {})):
+			getRunner().eventStack.append(someEvent)
+			someEvent.involveOwner()
+		else:
+			GM.main.addMessage("Failed to start the event")
 	if(_id == "setLevel"):
 		var theNpcOwner := getNpcOwner()
 		if(theNpcOwner):
@@ -784,12 +856,22 @@ func smartChance(_theChance:float, neverChance:float = 15.0, alwaysChance:float 
 		return true
 	return RNG.chance(_theChance)
 
+func getOwnerLevel() -> int:
+	var theNpcOwner := getNpcOwner()
+	if(!theNpcOwner):
+		return 0
+	return theNpcOwner.getLevel()
+
+func canSetLimits() -> bool:
+	return getOwnerLevel() >= 1
+
 func saveData() -> Dictionary:
 	return {
 		state = state,
 		tag = tag,
 		roles = roles,
 		subResult = subResult,
+		sexLimits = sexLimits,
 	}
 
 func loadData(_data:Dictionary):
@@ -797,3 +879,4 @@ func loadData(_data:Dictionary):
 	tag = SAVE.loadVar(_data, "tag", "")
 	roles = SAVE.loadVar(_data, "roles", {})
 	subResult = SAVE.loadVar(_data, "subResult", 0)
+	sexLimits = SAVE.loadVar(_data, "sexLimits", [])

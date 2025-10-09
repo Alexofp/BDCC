@@ -341,14 +341,19 @@ func getActions(_indx:int):
 				
 		if(getState() in ["subabouttocum"] || (getState() == "fucking" && getSubInfo().isReadyToCum() && !getSubInfo().canDoActions())):
 			var scoreToCumInside:float = 1.0
+			var scoreToPullOut:float = 1.0
+			
+			if(getSexEngine().domNoPullingOut):
+				scoreToPullOut = 0.0
+			
 			var hasKnot:bool = getSub().bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)
 			if(hasKnot):
 				scoreToCumInside *= 0.5
 				
 				addAction("letsubknotinside", scoreToCumInside, "Knot!", "Try to force the knot into your "+RNG.pick(usedBodypartNames), {A_PRIORITY: 1001})
-				
+			
 			addAction("letsubcuminside", scoreToCumInside, "Cum inside", "Let the sub cum inside you", {A_PRIORITY: 1001})
-			addAction("makesubcumoutside", 1.0, "Pull out", "Stop riding the sub", {A_PRIORITY: 1001})
+			addAction("makesubcumoutside", scoreToPullOut, "Pull out", "Stop riding the sub", {A_PRIORITY: 1001})
 		
 		if(!(state in ["knotting"])):
 			addAction("stop", getStopScore(), "Stop riding", "Stop the sex activity")

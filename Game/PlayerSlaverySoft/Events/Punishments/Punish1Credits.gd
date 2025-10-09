@@ -18,12 +18,18 @@ func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> 
 func start():
 	playAnimation(StageScene.Duo, "hurt", {npc=getOwnerID(), npcAction="shove"})
 	sayPretext()
-	saynn("YOUR OWNER SHOVES YOU AND THEN PRESS SOME KIND OF HACKED CHIP AGAINST YOUR COLLAR!")
-	talk(C_OWNER, "I WILL TAKE SOME OF YOUR CREDITS.")
+	if(isOwnerStaff()):
+		saynn("{npc.name} shoves you and then presses some kind of device against your collar!")
+	else:
+		saynn("{npc.name} shoves you and then presses some kind of hacked chip against your collar!")
+	talkModularOwnerToPC("SoftSlaveryPunishCredits")
+	saynn("Your collar beeps as some of your credits get forcefully withdrawn from your inmate accounts..")
+	talkModularOwnerToPC("SoftSlaveryPunishCredits2")
 	
-	saynn("YOUR COLLAR BEEPS.. LEAVING YOUR INMATE ACCOUNT WITH LESS CREDITS THAT IT HAD BEFORE.")
-	
-	talk(C_OWNER, "IF I DON'T GET YOUR OBEDIENCE, I WILL AT LEAST HAVE YOUR CREDITS.")
+	if(onlyOnce()):
+		var credAmount:int = RNG.randi_range(5, 10)
+		GM.pc.addCredits(-credAmount)
+		GM.main.addMessage("You lost "+str(credAmount)+" credits!")
 	
 	addContinue("endEvent")
 	

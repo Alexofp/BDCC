@@ -22,14 +22,22 @@ func start():
 	
 	addButton("Obey", "Allow them to do it", "obey")
 	addButton("Resist!", "You're not gonna let them do it", "resist")
+	if(canSetLimits()):
+		addButton("Yes, but..", "Obey but put limits to what your owner can do to you during sex", "yesbut")
+	else:
+		addDisabledButton("Yes, but..", "Your relationship hasn't progressed far enough for you to be able to set limits")
 
 func start_do(_id:String, _args:Array):
 	if(_id == "obey"):
 		runParadeTo(LOC_SLUTWALL)
 	if(_id == "resist"):
 		runResist()
+	if(_id == "yesbut"):
+		runEvent("yesbut", "SetOwnerLimits")
 
 func start_eventResult(_event, _id:String, _args:Array):
+	if(_id == "yesbut"):
+		runParadeTo(LOC_SLUTWALL)
 	if(_id == "paradeTo"):
 		setState("inStocks")
 		checkSubEvent("FuckInSlutwall", "You were about to be locked into the slutwall by {npc.name}..", [])

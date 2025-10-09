@@ -1060,6 +1060,11 @@ _global_script_classes=[ {
 "path": "res://Game/PlayerSlaverySoft/NpcOwnerEventRunner.gd"
 }, {
 "base": "Object",
+"class": "NpcOwnerSexLimits",
+"language": "GDScript",
+"path": "res://Game/PlayerSlaverySoft/NpcOwnerSexLimits.gd"
+}, {
+"base": "Object",
 "class": "NpcRank",
 "language": "GDScript",
 "path": "res://Characters/Dynamic/NpcRank.gd"
@@ -1990,6 +1995,7 @@ _global_script_class_icons={
 "NpcOwnerBase": "",
 "NpcOwnerEventBase": "",
 "NpcOwnerEventRunner": "",
+"NpcOwnerSexLimits": "",
 "NpcRank": "",
 "NpcSlave": "",
 "NurseGenerator": "",

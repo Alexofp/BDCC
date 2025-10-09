@@ -390,7 +390,7 @@ func getActions(_indx:int):
 					condomScore = 1.0
 				
 				var scoreToCumInside:float = max(condomScore, getDomInfo().fetishScore({Fetish.Breeding: 1.0}) + 0.5 - 20.0*float(gonnaCumOutside))
-				if(getSub().hasPerk(Perk.FertilitySubmissiveAndBreedable)):
+				if(getSub().hasPerk(Perk.FertilitySubmissiveAndBreedable) || getSexEngine().domNoPullingOut):
 					scoreToCumInside = 1.0
 				
 				var hasKnot:bool = getDom().bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)

@@ -23,6 +23,8 @@ var disabledGoals:Dictionary = {}
 var bondageDisabled:bool = false
 var subMustGoUnconscious:bool = false
 var noDynamicJoiners:bool = false
+var domNoPullingOut:bool = false
+var mustUseCondoms:bool = false
 
 var pcAllowsDomAutonomy:bool = false
 var pcAllowsDynJoiners:bool = false
@@ -97,6 +99,10 @@ func initSexType(theSexType, args:Dictionary = {}):
 		subMustGoUnconscious = args[SexMod.SubMustGoUnconscious]
 	if(args.has(SexMod.DisableDynamicJoiners)):
 		noDynamicJoiners = args[SexMod.DisableDynamicJoiners]
+	if(args.has(SexMod.DomNoPullingOut)):
+		domNoPullingOut = args[SexMod.DomNoPullingOut]
+	if(args.has(SexMod.MustUseCondoms)):
+		mustUseCondoms = args[SexMod.MustUseCondoms]
 		
 	if(sexType != null):
 		sexType.setSexEngine(self)
@@ -1663,6 +1669,8 @@ func saveData():
 		"participatedDoms": participatedDoms,
 		"pcAllowsDynJoiners": pcAllowsDynJoiners,
 		"noDynamicJoiners": noDynamicJoiners,
+		"domNoPullingOut": domNoPullingOut,
+		"mustUseCondoms": mustUseCondoms,
 	}
 	if(sexType != null):
 		data["sexTypeID"] = sexType.id
@@ -1702,6 +1710,8 @@ func loadData(data):
 	participatedDoms = SAVE.loadVar(data, "participatedDoms", {})
 	pcAllowsDynJoiners = SAVE.loadVar(data, "pcAllowsDynJoiners", false)
 	noDynamicJoiners = SAVE.loadVar(data, "noDynamicJoiners", false)
+	domNoPullingOut = SAVE.loadVar(data, "domNoPullingOut", false)
+	mustUseCondoms = SAVE.loadVar(data, "mustUseCondoms", false)
 	
 	var sexTypeID = SAVE.loadVar(data, "sexTypeID", SexType.DefaultSex)
 	var theSexType = GlobalRegistry.createSexType(sexTypeID)
