@@ -14,6 +14,7 @@ var tasks:Array = []
 
 var punishAmount:int = 0
 var pcName:String = "slave"
+var freedomPrice:int = 1000
 
 var interactedToday:bool = false
 
@@ -21,7 +22,10 @@ var eventHistory:Array = [] # keeps last 2 events so we don't repeat as often
 
 func onStart():
 	pickNewName()
-
+	# Initial influence depends on the subbyness
+	influence = clamp(0.1 + getOwner().getPersonality().getStat(PersonalityStat.Subby)*0.8, 0.1, 0.9)
+	freedomPrice = generateFreedomPrice()
+	
 func setRelationship(_softSlavery):
 	charID = _softSlavery.charID
 
@@ -286,11 +290,11 @@ func getTalkActions(_event) -> Array:
 	
 	if(getLevel() >= 3):
 		result.append(talkAction("Change name", "(Influence level 3) Ask your owner to change how they call you", "changeName"))
-	if(getLevel() >= getMaxLevel()):
-		if(getInfluence() >= 1.0):
-			result.append(talkAction("Ask freedom", "(Influence level MAX + Max Influence) Ask your owner if they can let you go", "askFreedom"))
-		else:
-			result.append(talkActionDisabled("Ask freedom", "Requires max influence"))
+	#if(getLevel() >= getMaxLevel()):
+	#	if(getInfluence() >= 1.0):
+	result.append(talkAction("Ask freedom", "Ask your owner if they can let you go", "askFreedom"))
+	#	else:
+	#		result.append(talkActionDisabled("Ask freedom", "Requires max influence"))
 	return result
 
 func doTalkAction(_event, _actionID:String, _args:Array):
@@ -306,6 +310,31 @@ func doTalkAction(_event, _actionID:String, _args:Array):
 		shouldAppoach = false
 		markInteractedWithToday()
 		_event.runEvent("", "AttackOwner", ["interact"])
+
+func generateFreedomPrice() -> int:
+	return RNG.randi_range(500, 2000)
+
+# Automatically gets scaled down
+func getFullFreedomPrice() -> int:
+	return freedomPrice
+
+func calcFreedomPrice() -> int:
+	if(getLevel() >= getMaxLevel() && getInfluence() >= 1.0):
+		return 0 # Free at max level and 100% influence
+	
+	var theMaxValue:float = float(getMaxLevel() + 1)
+	var outMaxValue:float = theMaxValue*theMaxValue
+	if(outMaxValue <= 0.0):
+		return 0
+	
+	var theValue:float = float(getLevel()) + getInfluence()
+	var invertedValue:float = max(float(getMaxLevel()+1) - theValue, 0.0)
+	
+	var outResult:float = (invertedValue * invertedValue) / outMaxValue * getFullFreedomPrice()
+	
+	return int(ceil(outResult))
+	
+	
 
 func saveData() -> Dictionary:
 	var tasksData:Array = []
@@ -326,6 +355,7 @@ func saveData() -> Dictionary:
 		pn = pcName,
 		it = interactedToday,
 		eh = eventHistory,
+		fp = freedomPrice,
 	}
 
 func loadData(_data:Dictionary):
@@ -337,6 +367,7 @@ func loadData(_data:Dictionary):
 	pcName = SAVE.loadVar(_data, "pn", "slave")
 	interactedToday = SAVE.loadVar(_data, "it", false)
 	eventHistory = SAVE.loadVar(_data, "eh", [])
+	freedomPrice = SAVE.loadVar(_data, "fp", 1000)
 	
 	tasks.clear()
 	var tasksData:Array = SAVE.loadVar(_data, "tasks", [])

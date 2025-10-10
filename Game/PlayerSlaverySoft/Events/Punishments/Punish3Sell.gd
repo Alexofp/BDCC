@@ -18,12 +18,22 @@ func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> 
 func start():
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_OWNER)})
 	sayPretext()
-	saynn("GONNA SELL!")
-	talk(C_OWNER, "SORRYYY!")
+	saynn("Your owner gives you a very mean look!")
+	talkModularOwnerToPC("SoftSlaveryPunishSell")
+	saynn("Sounds like you're about to get your freedom back?")
+	
+	addContinue("setState", ["flashed"])
+
+func flashed():
+	playAnimation(StageScene.Sleeping, "sleep")
+	saynn("Suddenly, you see a bright flash! So bright it feels like it pierces straight through you!")
+	saynn("An agonizing headache makes your head spin.. and then you collapse.")
+	saynn("The landing wasn't the softest. You feel your consciousness slipping away..")
+	talkModularOwnerToPC("SoftSlaveryPunishSell2")
 	
 	addContinue("getSold")
 
-func start_do(_id:String, _args:Array):
+func flashed_do(_id:String, _args:Array):
 	var npcOwner := getNpcOwner()
 	if(npcOwner):
 		npcOwner.endSlavery()

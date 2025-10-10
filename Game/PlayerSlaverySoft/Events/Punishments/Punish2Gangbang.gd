@@ -8,15 +8,13 @@ var gaveupSearching:bool = false
 func _init():
 	id = "Punish2Gangbang"
 	reactsToTags = [E_PUNISH]
-
-func getSubEventScore(_event, _tag:String, _args:Array) -> float:
-	return 1000000.0
+	eventWeight = 1.0
 
 func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> bool:
 	var npcOwner := getNpcOwner()
 	if(!npcOwner):
 		return false
-	if(!npcOwner.shouldPunishStrong()): #TODO: fix back
+	if(!npcOwner.shouldPunishStrong()):
 		return false
 	if(GM.main.isVeryLate()):
 		return false
@@ -25,9 +23,9 @@ func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> 
 func start():
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_OWNER), bodyState={leashedBy=getOwnerID()}})
 	sayPretext()
-	saynn("GONNA GANGBANG!")
-	talk(C_OWNER, "LET'S GO GET SOME PEOPLE!")
-	saynn("YOUR OWNER CLICKS A LEASH TO YOUR COLLAR.")
+	saynn("{npc.name} clicks a leash to your collar.")
+	talkModularOwnerToPC("SoftSlaveryPunishGB")
+	saynn("Looks like your owner wants to find some people to gangbang you with..")
 	addContinue("go")
 	
 func getParadeTarget() -> String:
@@ -43,9 +41,12 @@ func start_do(_id:String, _args:Array):
 func searching():
 	playAnimation(StageScene.Duo, "walk", {npc=getOwnerID(), npcAction="walk", flipNPC=true, bodyState={leashedBy=getOwnerID()}})
 	
-	saynn("YOU ARE BEING WALKED AROUND!")
+	saynn("You are being walked around by a strict leash!")
 	
-	addContinue("go")
+	addButtonAt(6, "Walk", "See where your owner will bring you..", "go")
+	addDisabledButtonAt(10, "Leashed", "You are leashed")
+	addDisabledButtonAt(11, "Leashed", "You are leashed")
+	addDisabledButtonAt(12, "Leashed", "You are leashed")
 
 func searching_do(_id:String, _args:Array):
 	if(_id == "go"):
@@ -78,30 +79,33 @@ func doGo():
 func cancel_sex():
 	playStand(true)
 	
-	saynn("EVENTUALLY, YOUR OWNER GIVES UP.")
-	talkOwner("WHATEVER. YOU'RE LUCKY THERE IS NO ONE TO FUCK YOU.")
+	saynn("Eventually, {npc.name} decides to give up.")
+	talkModularOwnerToPC("SoftSlaveryPunishGBGiveup")
 	addInfluenceResist(0.5)
-	saynn("INDEED, YOU GOT OFF EASY.")
+	saynn("Looks like you got off easy!")
 	addContinue("endEvent")
 
 func invite():
 	playAnimation(StageScene.Duo, "stand", {pc=getOwnerID(), npc=getRoleID(C_EXTRA4)})
 	
-	saynn("APPROACH!")
-	talkOwner("DO YOU WANNA HELP ME PUNISH THIS {npc.npcSlave}?")
+	saynn("Your owner approaches someone!")
+	talkModularOwnerToPC("SoftSlaveryPunishGBOffer")
 	
+	#TODO: make these chances depend on personality
 	if(RNG.chance(50)):
-		talk(C_EXTRA4, "SURE.")
-		talkOwner("FOLLOW ME THEN.")
+		saynn("The new person is eyeing you out.")
+		talkModular(C_EXTRA4, C_OWNER, "SoftSlaveryPunishGBSure")
+		talkModularOwnerToPC("SoftSlaveryPunishGBFollow")
 		addContinue("add")
 	elif(RNG.chance(33)):
-		talk(C_EXTRA4, "UMM.. CAN YOU MAYBE PUNISH ME TOO?")
+		talkModular(C_EXTRA4, C_OWNER, "SoftSlaveryPunishGBSubOffer")
 		if(roles.has(C_EXTRA3)):
-			talkOwner("REALLY? WE ALREADY HAVE AN EXTRA SUBBY BITCH.")
-			talk(C_EXTRA4, "Aww..")
+			talkModularOwnerToPC("SoftSlaveryPunishGBSubOfferNo")
+			talkModular(C_EXTRA4, C_OWNER, "SoftSlaveryPunishGBSubOfferNoAw")
 			addContinue("notadd")
 		else:
-			talkOwner("I GUESS. FOLLOW US.")
+			saynn("{npc.name} tilts {npc.his} head.")
+			talkModularOwnerToPC("SoftSlaveryPunishGBSubOfferYes")
 			addContinue("addsub")
 	else:
 		talk(C_EXTRA4, "NO.")
@@ -154,8 +158,8 @@ func getFreeSlot() -> int:
 func about_to_sex():
 	playAnimation(StageScene.Solo, "stand")
 	
-	saynn("SEX IS ABOUT TO START.")
-	talkOwner("SHOULD BE ENOUGH TO TEACH YOU.")
+	saynn("{npc.name} stops. Looks like the gang has been assembled..")
+	talkModularOwnerToPC("SoftSlaveryPunishGBStart")
 	
 	var theDoms:Array = [getOwnerID()]
 	if(hasRole(C_EXTRA1)):
@@ -174,7 +178,7 @@ func about_to_sex_sexResult(_sex:SexEngineResult):
 func afterSex():
 	playAnimation(StageScene.GivingBirth, "idle")
 	
-	saynn("THE SEX HAS ENDED!")
+	saynn("The gangbang has ended!")
 	
 	addContinue("endEvent")
 

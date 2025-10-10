@@ -15,6 +15,7 @@ func getForms() -> Dictionary:
 		"SoftSlaveryAttackWon": form("And now.. I'm gonna punish you.", {main=CHAR, target=CHAR}),
 		
 		"SoftSlaveryAskedFreedom": form("I guess I can. No point in me bugging you any further, you already know that you are my {npc.npcSlave}. Do you really want that though?", {main=CHAR, target=CHAR}),
+		"SoftSlaveryAskedFreedomPay": form("I'm willing to let you go. But only if you pay me <CREDITS> first.", {main=CHAR, target=CHAR}),
 		"SoftSlaveryAskedFreedomEND": form("Alright, well. Go away then.", {main=CHAR, target=CHAR}),
 		
 		"SoftSlaveryTalkStart": form("What do you want, {npc.npcSlave}?", {main=CHAR, target=CHAR}),
@@ -103,5 +104,31 @@ func getForms() -> Dictionary:
 		
 		"SoftSlaveryPunishCredits": form("I will take some of that.", {main=CHAR, target=CHAR}),
 		"SoftSlaveryPunishCredits2": form("If I can't have your obedience, I will at least have some of your credits. Obey or I will have to do something much worse.", {main=CHAR, target=CHAR}),
+		
+		"SoftSlaveryPunishRipClothes": form("That's enough for you? Yeah? Obey or I will have to do something much worse.", {main=CHAR, target=CHAR}),
+		
+		"SoftSlaveryPunishRoughSex": form("Fuck it. If you don't wanna obey, I will make you.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryPunishRoughSexPCWon": form("Ugh.. I'm not done with you.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryPunishRoughSexEnded": form("Obey next time. Or I will have to do something much worse.", {main=CHAR, target=CHAR}),
+		
+		"SoftSlaveryPunishSlutwall": form("Follow or I will break your legs and pull you along the floor.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryPunishSlutwallLock": form("I'm sick of you. Gonna find someone else to use you.", {main=CHAR, target=CHAR}),
+		
+		"SoftSlaveryPunishStocks": form("Follow or I will break your legs and pull you along the floor.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryPunishStocksLock": form("I'm sick of you. Gonna find someone else to use you.", {main=CHAR, target=CHAR}),
+		
+		"SoftSlaveryPunishSell": form("I'm just so sick of you. I'm done. I hate you. I don't want to see you ever again.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryPunishSell2": form("I will let someone else deal with your bullshit.", {main=CHAR, target=CHAR}),
+		
+		"SoftSlaveryPunishGB": form("I'm so getting annoyed with you. Let's see how you will like a whole ass gangbang.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryPunishGBGiveup": form("Whatever. You're lucky there is not enough people around.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryPunishGBOffer": form("Hey. Do you wanna help me punish this {npc.npcSlave}?", {main=CHAR, target=CHAR}),
+		"SoftSlaveryPunishGBSure": form("Sure. I can do that.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryPunishGBFollow": form("Follow then.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryPunishGBSubOffer": form("Mmm.. maybe you can punish me too?", {main=CHAR, target=CHAR}),
+		"SoftSlaveryPunishGBSubOfferYes": form("I guess we could use some extra fuckmeat.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryPunishGBSubOfferNo": form("We already have an extra bitch.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryPunishGBSubOfferNoAw": form("Aw.. Oh well.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryPunishGBStart": form("Time to teach you a lesson.", {main=CHAR, target=CHAR}),
 		"SoftSlavery": form("", {main=CHAR, target=CHAR}),
 	}

@@ -1,5 +1,7 @@
 extends NpcOwnerEventBase
 
+var sexSatisfaction:float = 1.0
+
 func _init():
 	id = "Punish1RoughSex"
 	reactsToTags = [E_PUNISH]
@@ -16,20 +18,34 @@ func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> 
 	return true
 	
 func start():
-	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_OWNER)})
+	playAnimation(StageScene.SexLowDoggy, "tease", {pc=getOwnerID()})
 	sayPretext()
-	saynn("ROUGH SEX GONNA HAPPEN!")
-	talk(C_OWNER, "ROUGH SEX!")
+	saynn("{npc.name} grabs and pins you into the floor!")
+	talkModularOwnerToPC("SoftSlaveryPunishRoughSex")
 	
 	var theChar = GlobalRegistry.getCharacter(getOwnerID())
 	if(theChar):
 		theChar.addEffect("SexAngry", [100])
-	addContinue("startSex", [getOwnerID(), "pc", SexType.DefaultSex, {SexMod.DisableDynamicJoiners:true}])
+	addContinue("startSex", [getOwnerID(), "pc", SexType.DefaultSex, {SexMod.DisableDynamicJoiners:true,SexMod.DomNoPullingOut:true}])
 
 func start_sexResult(_sex:SexEngineResult):
-	setState("afterSex")
+	sexSatisfaction = _sex.getAverageDomSatisfaction()
+	if(_sex.didSubsWin()):
+		setState("pcWon")
+	else:
+		setState("afterSex")
 
 func afterSex():
-	saynn("SEX HAS ENDED!")
-	
+	playAnimation(StageScene.SexStart, "start", {pc=getOwnerID()})
+	saynn("The rough sex has ended!")
+	talkModularOwnerToPC("SoftSlaveryPunishRoughSexEnded")
+	saynn("Looks like the punishment is over..")
+	addContinue("endEvent")
+
+func pcWon():
+	playAnimation(StageScene.Duo, "stand", {npc=getOwnerID(), npcAction="defeat"})
+	saynn("You managed to fight back against your owner!")
+	addInfluenceResist()
+	talkModularOwnerToPC("SoftSlaveryPunishRoughSexPCWon") #Ugh.. I'm not done with you
+	saynn("Looks like the punishment is over..")
 	addContinue("endEvent")

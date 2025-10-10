@@ -603,7 +603,11 @@ func doDebugAction(_id, _args = {}):
 		someEvent.setEventRunner(getRunner())
 		someEvent.tag = ""
 		someEvent.pretext = ""
-		if(someEvent.trySubEventStart(self, "", [], {})):
+		if(someEvent.reactsToTags.empty()):
+			getRunner().eventStack.append(someEvent)
+			someEvent.involveOwner()
+			someEvent.onStart([])
+		elif(someEvent.trySubEventStart(self, "", [], {})):
 			getRunner().eventStack.append(someEvent)
 			someEvent.involveOwner()
 		else:
