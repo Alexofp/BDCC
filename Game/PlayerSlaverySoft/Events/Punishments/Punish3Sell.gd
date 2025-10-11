@@ -2,7 +2,7 @@ extends NpcOwnerEventBase
 
 func _init():
 	id = "Punish3Sell"
-	reactsToTags = [E_PUNISH]
+	reactsToTags = [E_PUNISH_GET_RID_OF]
 
 func getSubEventScore(_event, _tag:String, _args:Array) -> float:
 	return 1.0
@@ -10,8 +10,6 @@ func getSubEventScore(_event, _tag:String, _args:Array) -> float:
 func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> bool:
 	var npcOwner := getNpcOwner()
 	if(!npcOwner):
-		return false
-	if(!npcOwner.shouldPunishGetRidOf()):
 		return false
 	return true
 	

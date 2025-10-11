@@ -1,10 +1,8 @@
 extends NpcOwnerEventBase
 
-# Make it so the npc finds someone first? Then leaves you be?
-
 func _init():
 	id = "Punish2Slutwall"
-	reactsToTags = [E_PUNISH]
+	reactsToTags = [E_PUNISH_STRONG]
 
 func getSubEventScore(_event, _tag:String, _args:Array) -> float:
 	return 1.0
@@ -12,8 +10,6 @@ func getSubEventScore(_event, _tag:String, _args:Array) -> float:
 func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> bool:
 	var npcOwner := getNpcOwner()
 	if(!npcOwner):
-		return false
-	if(!npcOwner.shouldPunishStrong()):
 		return false
 	if(!canGetToSlutwall()):
 		return false
@@ -36,7 +32,6 @@ func inStocks():
 	
 	saynn("You get brought into the underground arena area and get shoved into the slutwall!")
 	talkModularOwnerToPC("SoftSlaveryPunishSlutwallLock")
-	#TODO: The owner gets somebody
 	addContinue("startStocks")
 
 func inStocks_do(_id:String, _args:Array):

@@ -4,7 +4,7 @@ var damageTexts:Array = []
 
 func _init():
 	id = "Punish1RipsClothes"
-	reactsToTags = [E_PUNISH]
+	reactsToTags = [E_PUNISH_WEAK]
 
 func getSubEventScore(_event, _tag:String, _args:Array) -> float:
 	return 1.0
@@ -12,8 +12,6 @@ func getSubEventScore(_event, _tag:String, _args:Array) -> float:
 func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> bool:
 	var npcOwner := getNpcOwner()
 	if(!npcOwner):
-		return false
-	if(!npcOwner.shouldPunishWeak()):
 		return false
 	if(!GM.pc.canDamageClothes()):
 		return false

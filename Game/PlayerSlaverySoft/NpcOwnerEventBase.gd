@@ -24,7 +24,9 @@ const C_EXTRA2 = 2
 const C_EXTRA3 = 3
 const C_EXTRA4 = 4
 
-const E_PUNISH = "punish"
+const E_PUNISH_WEAK = "punish_weak"
+const E_PUNISH_STRONG = "punish_strong"
+const E_PUNISH_GET_RID_OF = "punish_getridof"
 const E_PARADE_TO = "paradeTo"
 const E_PROTECT = "protect"
 
@@ -531,8 +533,8 @@ func runPunishment():
 func runParadeTo(_loc:String):
 	runEvent("paradeTo", "ParadeTo", [_loc])
 
-func runNpcFight(_char1:String, _char2:String):
-	runEvent("npcFight", "NpcFight", [_char1, _char2])
+func runNpcFight(_char1:String, _char2:String, _sceneTag:String = "npcFight"):
+	runEvent(_sceneTag, "NpcFight", [_char1, _char2])
 
 func getDebugActions():
 	var allEventsWithNames:Array = []

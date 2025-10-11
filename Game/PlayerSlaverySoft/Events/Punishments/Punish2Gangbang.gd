@@ -7,14 +7,12 @@ var gaveupSearching:bool = false
 
 func _init():
 	id = "Punish2Gangbang"
-	reactsToTags = [E_PUNISH]
+	reactsToTags = [E_PUNISH_STRONG]
 	eventWeight = 1.0
 
 func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> bool:
 	var npcOwner := getNpcOwner()
 	if(!npcOwner):
-		return false
-	if(!npcOwner.shouldPunishStrong()):
 		return false
 	if(GM.main.isVeryLate()):
 		return false
@@ -91,13 +89,15 @@ func invite():
 	saynn("Your owner approaches someone!")
 	talkModularOwnerToPC("SoftSlaveryPunishGBOffer")
 	
-	#TODO: make these chances depend on personality
-	if(RNG.chance(50)):
+	var agreeChance:float = 50.0 - personality(C_EXTRA4, PersonalityStat.Subby)*20.0 + personality(C_EXTRA4, PersonalityStat.Mean)*30.0
+	var subInsteadChance:float = 10.0 + personality(C_EXTRA4, PersonalityStat.Subby)*200.0
+	
+	if(smartChance(agreeChance)):
 		saynn("The new person is eyeing you out.")
 		talkModular(C_EXTRA4, C_OWNER, "SoftSlaveryPunishGBSure")
 		talkModularOwnerToPC("SoftSlaveryPunishGBFollow")
 		addContinue("add")
-	elif(RNG.chance(33)):
+	elif(smartChance(subInsteadChance)):
 		talkModular(C_EXTRA4, C_OWNER, "SoftSlaveryPunishGBSubOffer")
 		if(roles.has(C_EXTRA3)):
 			talkModularOwnerToPC("SoftSlaveryPunishGBSubOfferNo")
@@ -108,8 +108,8 @@ func invite():
 			talkModularOwnerToPC("SoftSlaveryPunishGBSubOfferYes")
 			addContinue("addsub")
 	else:
-		talk(C_EXTRA4, "NO.")
-		talkOwner("SCREW YOU THEN.")
+		talkModular(C_EXTRA4, C_OWNER, "SoftSlaveryPunishGBNo")
+		talkModularOwnerToPC("SoftSlaveryPunishGBNoReact")
 		addContinue("notadd")
 	
 
@@ -156,7 +156,7 @@ func getFreeSlot() -> int:
 	return -999
 
 func about_to_sex():
-	playAnimation(StageScene.Solo, "stand")
+	playAnimation(StageScene.GivingBirth, "idle")
 	
 	saynn("{npc.name} stops. Looks like the gang has been assembled..")
 	talkModularOwnerToPC("SoftSlaveryPunishGBStart")
@@ -177,8 +177,8 @@ func about_to_sex_sexResult(_sex:SexEngineResult):
 
 func afterSex():
 	playAnimation(StageScene.GivingBirth, "idle")
-	
 	saynn("The gangbang has ended!")
+	talkModularOwnerToPC("SoftSlaveryPunishGBEnd")
 	
 	addContinue("endEvent")
 

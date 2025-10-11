@@ -112,7 +112,7 @@ func getForms() -> Dictionary:
 		"SoftSlaveryPunishRoughSexEnded": form("Obey next time. Or I will have to do something much worse.", {main=CHAR, target=CHAR}),
 		
 		"SoftSlaveryPunishSlutwall": form("Follow or I will break your legs and pull you along the floor.", {main=CHAR, target=CHAR}),
-		"SoftSlaveryPunishSlutwallLock": form("I'm sick of you. Gonna find someone else to use you.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryPunishSlutwallLock": form("Enjoy being used.", {main=CHAR, target=CHAR}),
 		
 		"SoftSlaveryPunishStocks": form("Follow or I will break your legs and pull you along the floor.", {main=CHAR, target=CHAR}),
 		"SoftSlaveryPunishStocksLock": form("I'm sick of you. Gonna find someone else to use you.", {main=CHAR, target=CHAR}),
@@ -129,6 +129,9 @@ func getForms() -> Dictionary:
 		"SoftSlaveryPunishGBSubOfferYes": form("I guess we could use some extra fuckmeat.", {main=CHAR, target=CHAR}),
 		"SoftSlaveryPunishGBSubOfferNo": form("We already have an extra bitch.", {main=CHAR, target=CHAR}),
 		"SoftSlaveryPunishGBSubOfferNoAw": form("Aw.. Oh well.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryPunishGBNo": form("I will pass.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryPunishGBNoReact": form("Well screw you then.", {main=CHAR, target=CHAR}),
 		"SoftSlaveryPunishGBStart": form("Time to teach you a lesson.", {main=CHAR, target=CHAR}),
+		"SoftSlaveryPunishGBEnd": form("You're on very thin ice from now on, {npc.npcSlave}.", {main=CHAR, target=CHAR}),
 		"SoftSlavery": form("", {main=CHAR, target=CHAR}),
 	}

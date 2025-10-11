@@ -256,15 +256,6 @@ func getOwnerInfo() -> Array:
 func getOwnerInfoString() -> String:
 	return Util.join(getOwnerInfo(), "\n")
 
-func shouldPunishWeak() -> bool:
-	return punishAmount <= 1
-
-func shouldPunishStrong() -> bool:
-	return punishAmount == 2
-
-func shouldPunishGetRidOf() -> bool:
-	return punishAmount >= 3
-
 func didInteractWithToday() -> bool:
 	return interactedToday
 
