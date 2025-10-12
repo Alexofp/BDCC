@@ -268,7 +268,7 @@ func notifyFightResult(_didWin:bool):
 		call(state+"_fightResult", _didWin)
 
 func notifySexResult(_sexResult:SexEngineResult):
-	if(_sexResult.hasSub("pc") && _sexResult.isSubUnconscious("pc")):
+	if(_sexResult.getSexType() != SexType.DefaultSex && _sexResult.hasSub("pc") && _sexResult.isSubUnconscious("pc")):
 		if(has_method(state+"_sexResultUncon")):
 			call(state+"_sexResultUncon", _sexResult)
 		else:

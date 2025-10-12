@@ -8,9 +8,9 @@ func onStart(_args:Array):
 
 func start():
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_OWNER)})
-	saynn("YOU RESIST!")
-	#addInfluenceResist()
-	talk(C_OWNER, "I'M GONNA FUCK YOU UP!")
+	saynn("You resist your owner's action!")
+	talkModularOwnerToPC("SoftSlaveryResist") #"Really, {npc.npcSlave}? Is that how you wanna do this?"
+	saynn("Looks like you're gonna have to fight {npc.him}.")
 	
 	addButton("Fight", "Start the fight", "startFight", [getOwnerID()])
 
@@ -22,7 +22,7 @@ func start_fightResult(_didWin:bool):
 
 func pcWon():
 	playAnimation(StageScene.Duo, "stand", {npc=getOwnerID(), npcAction="kneel"})
-	saynn("YOU WON!")
+	saynn("You won the fight! Your owner's influence over you has been reduced.")
 	addInfluenceResist()
 	
 	addContinue("endEvent")
@@ -30,7 +30,8 @@ func pcWon():
 func pcLost():
 	playAnimation(StageScene.Duo, "kneel", {npc=getOwnerID()})
 	
-	saynn("YOU LOST!")
+	saynn("You lost the fight.")
+	saynn("{npc.name} is about to punish you..")
 	addContinue("startPunish")
 
 func pcLost_do(_id:String, _args:Array):

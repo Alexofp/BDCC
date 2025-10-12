@@ -19,27 +19,27 @@ func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> 
 func start():
 	playAnimation(StageScene.Duo, "stand", {pc=getOwnerID(), npc=getRoleID(C_EXTRA1)})
 	sayPretext()
-	saynn("SOMEONE STOPS YOU.")
-	talk(C_EXTRA1, "THAT'S A NICE SLAVE YOU HAVE THERE. CAN I FUCK {pc.him}?")
+	saynn("{npc1.name} stands in the way.")
+	talkModular(C_EXTRA1, C_OWNER, "SoftSlaveryParadeFuckOffer")
 	
 	if(RNG.chance(50)):
 		setSubResult(SUB_CONTINUE)
 		if(RNG.chance(50)):
-			talkOwner("YOU KNOW WHAT? SURE.")
+			talkModularOwnerToPC("SoftSlaveryParadeFuckOfferYes")
 			addContinue("startSex", [getRoleID(C_EXTRA1), "pc", SexType.DefaultSex, {SexMod.DisableDynamicJoiners:true, SexMod.BondageDisabled:true}])
 		else:
 			isThreesome = true
-			talkOwner("YOU KNOW WHAT? SURE. I WILL JOIN.")
+			talkModularOwnerToPC("SoftSlaveryParadeFuckOfferYesThree")
 			addContinue("startSex", [[getOwnerID(), getRoleID(C_EXTRA1)], "pc", SexType.DefaultSex, {SexMod.DisableDynamicJoiners:true, SexMod.BondageDisabled:true}])
 	else:
-		talkOwner("GO FUCK YOURSELF INSTEAD.")
+		talkModularOwnerToPC("SoftSlaveryParadeFuckOfferNo")
 		if(RNG.chance(50)):
 			setSubResult(SUB_CONTINUE)
-			talk(C_EXTRA1, "WHATEVER THEN.")
+			talkModular(C_EXTRA1, C_OWNER, "SoftSlaveryParadeFuckOfferNo2")
 			addContinue("endEvent")
 		else:
-			talk(C_EXTRA1, "I GUESS I WILL HAVE TO MESS YOU UP FIRST THEN.")
-			saynn("LOOKS LIKE THEY'RE ABOUT TO FIGHT!")
+			talkModular(C_EXTRA1, C_OWNER, "SoftSlaveryParadeFuckOfferFight")
+			saynn("Looks like something is gonna happen!")
 			addContinue("fight")
 
 func start_do(_id:String, _args:Array):
@@ -58,8 +58,8 @@ func start_eventResult(_event, _tag:String, _args:Array):
 
 func afterSex():
 	playAnimation(StageScene.Duo, "stand", {npc=getOwnerID(), bodyState={leashedBy=getOwnerID()}})
-	saynn("AFTER THE SEX, your owner clicks the leash to your collar again.")
-	talkOwner("GOOD LITTLE SLUT.")
+	saynn("After the sex, your owner clicks the leash to your collar again.")
+	talkModularOwnerToPC("SoftSlaveryParadeFuckOfferGood")
 	addInfluenceObey(0.3)
 	addContinue("endEvent")
 
@@ -67,21 +67,21 @@ func ownerWon():
 	playAnimation(StageScene.Duo, "stand", {npc=getOwnerID(), bodyState={leashedBy=getOwnerID()}})
 	
 	saynn("Your owner clicks the leash to your collar again.")
-	talkOwner("You're not getting rid of me so easily.")
+	talkModularOwnerToPC("SoftSlaveryParadeFuckOfferWon")
 	addInfluenceObey(0.2)
 	addContinue("endEvent")
 
 func ownerLost():
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_EXTRA1)})
 	
-	saynn("YOU GET APPROACHED.")
+	saynn("After the fight, you get approached by {npc1.name}.")
 	
 	isThreesome = RNG.chance(50)
 	if(!isThreesome):
-		talk(C_EXTRA1, "YOU'RE MINE NOW. YOUR WEAK OWNER CAN WATCH.")
+		talkModular(C_EXTRA1, C_PC, "SoftSlaveryParadeFuckOfferLostWatch")
 		addContinue("startSex", [getRoleID(C_EXTRA1), "pc", SexType.DefaultSex, {SexMod.DisableDynamicJoiners:true}])
 	else:
-		talk(C_EXTRA1, "YOU'RE MINE NOW. I WILL FUCK BOTH OF YOU.")
+		talkModular(C_EXTRA1, C_PC, "SoftSlaveryParadeFuckOfferLostBoth")
 		addContinue("startSex", [getRoleID(C_EXTRA1), ["pc", getOwnerID()], SexType.DefaultSex, {SexMod.DisableDynamicJoiners:true}])
 	
 func ownerLost_sexResult(_sex:SexEngineResult):
@@ -90,8 +90,8 @@ func ownerLost_sexResult(_sex:SexEngineResult):
 func afterLostSex():
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_EXTRA1)})
 	
-	saynn("YOUR OWNER IS STILL RECOVERING AFTER THAT LOSS, GIVING YOU TIME TO LEAVE.")
-	addInfluenceResist(0.5)
+	saynn("{npc.name} is still recovering after that defeat, giving you time to leave.")
+	addInfluenceResist(0.8)
 	addContinue("endEvent")
 
 func saveData() -> Dictionary:

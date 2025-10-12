@@ -19,17 +19,17 @@ func start():
 	playAnimation(StageScene.Duo, "stand", {pc=getOwnerID(), npc=getRoleID(C_EXTRA1)})
 	sayPretext()
 	saynn("A guard stops you and your owner.")
-	talk(C_EXTRA1, "Hey, what is happening here?")
+	talkModular(C_EXTRA1, C_OWNER, "SoftSlaveryParadeGuard")
 	
 	if(getRolePawn(C_OWNER).isStaff() && RNG.chance(50)):
 		setSubResult(SUB_CONTINUE)
-		talk(C_OWNER, "I'm punishing this inmate.")
-		talk(C_EXTRA1, "Carry on then.")
+		talkModularOwnerToPC("SoftSlaveryParadeGuardPunish")
+		talkModular(C_EXTRA1, C_OWNER, "SoftSlaveryParadeGuardPunish2")
 		addContinue("endEvent")
 		return
 	
-	talk(C_OWNER, "That's not your problem.")
-	talk(C_EXTRA1, "Really?")
+	talkModularOwnerToPC("SoftSlaveryParadeGuardProblem")
+	talkModular(C_EXTRA1, C_OWNER, "SoftSlaveryParadeGuardProblem2")
 	saynn("Looks like they're about to fight..")
 	
 	addContinue("fight")
@@ -49,7 +49,7 @@ func ownerWon():
 	playAnimation(StageScene.Duo, "stand", {npc=getOwnerID(), bodyState={leashedBy=getOwnerID()}})
 	
 	saynn("Your owner clicks the leash to your collar again.")
-	talkOwner("You're not getting rid of me so easily.")
+	talkModularOwnerToPC("SoftSlaveryParadeGuardWon")
 	addInfluenceObey(0.2)
 	addContinue("endEvent")
 
@@ -57,6 +57,6 @@ func ownerLost():
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_EXTRA1)})
 	
 	saynn("The guard frees you.")
-	talk(C_EXTRA1, "Go away now.")
+	talkModular(C_EXTRA1, C_OWNER, "SoftSlaveryParadeGuardLost")
 	addInfluenceResist(0.4)
 	addContinue("endEvent")

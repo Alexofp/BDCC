@@ -361,6 +361,7 @@ func checkIfDomsNeedMoreGoals():
 
 func doFastSex() -> SexEngineResult:
 	var newResult:SexEngineResult = SexEngineResult.new()
+	newResult.sexType = getSexTypeID()
 	
 	for subID in subs:
 		GM.main.updateCharacterUntilNow(subID)
@@ -1133,6 +1134,8 @@ func endSex():
 	if(sexEnded):
 		return
 	sexResult.clear()
+	sexResult.sexType = getSexTypeID()
+	
 	sexResult.subsWon = true
 	for domID in doms:
 		var domInfo = doms[domID]
