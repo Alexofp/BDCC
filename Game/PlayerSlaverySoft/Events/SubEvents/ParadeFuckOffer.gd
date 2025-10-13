@@ -22,9 +22,12 @@ func start():
 	saynn("{npc1.name} stands in the way.")
 	talkModular(C_EXTRA1, C_OWNER, "SoftSlaveryParadeFuckOffer")
 	
-	if(RNG.chance(50)):
+	var allowSexChance:float = 50.0 + ownerPersonality(PersonalityStat.Subby)*40.0 + ownerPersonality(PersonalityStat.Naive)*20.0
+	
+	if(RNG.chance(allowSexChance)):
 		setSubResult(SUB_CONTINUE)
-		if(RNG.chance(50)):
+		var threesomeChance:float = 50.0 + ownerPersonality(PersonalityStat.Impatient)*40.0
+		if(RNG.chance(threesomeChance)):
 			talkModularOwnerToPC("SoftSlaveryParadeFuckOfferYes")
 			addContinue("startSex", [getRoleID(C_EXTRA1), "pc", SexType.DefaultSex, {SexMod.DisableDynamicJoiners:true, SexMod.BondageDisabled:true}])
 		else:
@@ -32,8 +35,10 @@ func start():
 			talkModularOwnerToPC("SoftSlaveryParadeFuckOfferYesThree")
 			addContinue("startSex", [[getOwnerID(), getRoleID(C_EXTRA1)], "pc", SexType.DefaultSex, {SexMod.DisableDynamicJoiners:true, SexMod.BondageDisabled:true}])
 	else:
+		var npcFightChance:float = 50.0 - personality(C_EXTRA1, PersonalityStat.Coward) * 40.0 + personality(C_EXTRA1, PersonalityStat.Mean) * 20.0 - personality(C_EXTRA1, PersonalityStat.Subby) * 20.0
+		
 		talkModularOwnerToPC("SoftSlaveryParadeFuckOfferNo")
-		if(RNG.chance(50)):
+		if(smartChance(npcFightChance)):
 			setSubResult(SUB_CONTINUE)
 			talkModular(C_EXTRA1, C_OWNER, "SoftSlaveryParadeFuckOfferNo2")
 			addContinue("endEvent")
