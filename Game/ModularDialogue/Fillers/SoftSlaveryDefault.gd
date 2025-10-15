@@ -803,3 +803,681 @@ func getText(_id:String, _args:Dictionary):
 			"You liked it, didn't you? Hah.",
 			"Yes.. good.. wear it proudly, slut.",
 		]
+
+	if(_id == "SoftSlaveryParadeAroundStart"):
+		return [
+			"I wanna parade you around the prison. And show off my {npc.npcSlave}.",
+			"I'm taking you out for everyone to see. Let me leash you and don't cause trouble.",
+			"It's time to walk you around the prison and let others look. Show your neck, {npc.npcSlave}.",
+			"I'm leashing you. We're doing a little walk around the prison for the others to see.",
+			"I need your neck. I'm gonna parade you around the prison today.",
+		]
+	if(_id == "SoftSlaveryParadeAroundFirst"):
+		return [
+			"Like it so far? We're just getting started.",
+			"How do you feel, {npc.npcSlave}? We're only at the first stop.",
+			"See their eyes looking at you? This is only the beginning.",
+			"Enjoying the attention? There's plenty more, we're just getting started.",
+			"This is only the warm-up. Keep up, {npc.npcSlave}.",
+		]
+	if(_id == "SoftSlaveryParadeAroundMore"):
+		return [
+			"Good. Let's continue.",
+			"Another stop. We're not done yet.",
+			"Take a short breather and let's go.",
+			"Are you tired yet? There is still more spots to show you off at.",
+			"Ready to continue? Not enough people have seen you yet.",
+			"See their eyes? They're looking at you. Let's continue.",
+			"I bet you like being paraded around like that.",
+			"It's pretty fun to show off my {npc.npcSlave} like that, not gonna lie.",
+		]
+	if(_id == "SoftSlaveryParadeAroundLast"):
+		return [
+			"One more time. I want everyone to see you.",
+			"This is the last round. Make it memorable.",
+			"Final one. Show that you're proud.",
+			"One last stop. Don't slow down.",
+			"Last spot left. Don't embarrass me now.",
+			"We're nearly done. Don't hide anything.",
+		]
+	if(_id == "SoftSlaveryParadeAroundFree"):
+		return [
+			"Perfect. You're free for now, {npc.npcSlave}.",
+			"Alright. For the moment, you're free.",
+			"You did as told. Go. But don't stray far, {npc.npcSlave}.",
+			"That's enough for today. You're free until I find you again.",
+			"Good. Off with you. And remember your place.",
+			"You're done for now. Keep out of trouble.",
+			"You're free until I need you again.",
+		]
+	if(_id == "SoftSlaveryParadeAroundEatGagged"):
+		return [
+			"Too bad you can't eat, {npc.npcSlave}. I will though.",
+			"Can't bite? I'll eat for the both of us.",
+			"You'll wait while I eat. That's the rule.",
+			"Sit and watch me eat. Maybe later you'll get something.",
+		]
+	if(_id == "SoftSlaveryParadeAroundEat"):
+		return [
+			"Let's take a break. Enjoy your meal, {npc.npcSlave}.",
+			"Sit down and eat what's given to you.",
+			"Time for a short rest. Eat your portion.",
+			"Here's your food. Don't waste it.",
+			"Eat now. We'll be moving again soon.",
+		]
+	if(_id == "SoftSlaveryParadeAroundPlatform"):
+		return [
+			"Gonna lock you into one of these if you don't behave.",
+			"Stocks are pretty fun, don't you think? Yeah.",
+			"This is where you will end up if you don't behave.",
+			"Misbehave and I will shove you into one of these.",
+			"Do you like public use, {npc.npcSlave}? Hah.",
+		]
+	if(_id == "SoftSlaveryParadeAroundShower"):
+		return [
+			"Can't let you stay messy all the time.",
+			"You're due for a wash. Don't struggle.",
+			"I want you to be presentable. A quick wash it is.",
+			"Stand under the water. I'm washing you.",
+		]
+
+	if(_id == "SoftSlaveryThreesomeStart"):
+		return [
+			"I brought a friend today. You're gonna service both of us.",
+			"Got company. You'll be pleasing two masters today. Understand?",
+			"Double the trouble for you today. We're gonna use you together.",
+			"I brought a friend today. Make sure we're both satisfied.",
+		]
+	if(_id == "SoftSlaveryPunishCredits"):
+		return [
+			"I will take some of that.",
+			"Consider this a tax for your disobedience.",
+			"This is mine now. Call it a lesson fee.",
+			"Payment for my trouble. Don't make me take more.",
+			"Your credits look better in my pocket.",
+			"This should cover my frustration.",
+			"Not enough to buy your freedom, but it might buy my mercy.",
+		]
+	if(_id == "SoftSlaveryPunishCredits2"):
+		return [
+			"If I can't have your obedience, I will at least have some of your credits. Obey or I will have to do something much worse.",
+			"Obey or it will get much worse for you.",
+			"This is nothing. Obey or I will have to start punishing you for real.",
+			"Next time I will take more than credits.",
+		]
+	if(_id == "SoftSlaveryPunishRipClothes"):
+		return [
+			"That's enough for you? Yeah? Obey or I will have to do something much worse.",
+			"Had your fun? Now start obeying before I really lose my temper.",
+			"Did you enjoy your little rebellion? You want something much worse? Start obeying.",
+			"Still feel brave? Next time I'll give you something real to cry about.",
+			"Finished with being a brat? Good. Now start obeying or suffer the consequences.",
+			"Got it out of your system? Start obeying.",
+		]
+	if(_id == "SoftSlaveryPunishRoughSex"):
+		return [
+			"Fuck it. If you don't wanna obey, I will make you.",
+			"Fine. We'll do this the hard way.",
+			"You had your chance. Now you'll learn the hard way.",
+			"Disobedience earns punishment. Don't fucking struggle.",
+			"You chose pain. And I will not disappoint.",
+			"Your resistance just made this much worse for you.",
+			"Should have obeyed. Now you'll pay the price.",
+			"You just ran out of choices. Welcome to your consequences, {npc.npcSlave}.",
+			"Fine. We'll do this the hard way. Your body will obey even if your mind won't.",
+			"You're going to learn your place one way or another.",
+			"I enjoy breaking stubborn ones like you. Makes the victory sweeter.",
+			"Think you can say no to me? Let's see how long that attitude lasts.",
+			"Every time you fight back, I'll just get rougher. Your choice.",
+			"You exist for my pleasure. Time for a reminder.",
+		]
+	if(_id == "SoftSlaveryPunishRoughSexPCWon"):
+		return [
+			"Ugh.. I'm not done with you.",
+			"This isn't over. Not by a long shot.",
+			"You'll pay for that. Mark my words..",
+			"Enjoy your moment. It won't last. I'm still your owner.",
+			"You just made everything worse for yourself.",
+			"Big mistake. Huge.",
+			"This changes nothing. You're still mine.",
+		]
+	if(_id == "SoftSlaveryPunishRoughSexEnded"):
+		return [
+			"Obey next time. Or I will have to do something much worse.",
+			"Let that be a lesson. Next time will be worse.",
+			"Consider yourself warned. My patience has limits.",
+			"That was a taste. Next time I won't hold back.",
+			"Remember this feeling. It gets much worse.",
+			"You got off easy. Don't make me prove it.",
+			"That was your free lesson. The next one costs.",
+			"Let that be a lesson. My patience has limits.",
+			"Remember how this felt. It can always get worse.",
+			"That was just a taste of what disobedience earns you.",
+			"I hope you learned something today. For your sake.",
+			"Your body belongs to me. Don't make me remind you again.",
+			"This was mercy compared to what comes next.",
+			"I own every inch of you. Time you started acting like it.",
+		]
+	if(_id == "SoftSlaveryPunishSlutwall"):
+		return [
+			"Follow or I will break your legs and pull you along the floor.",
+			"Walk to the slutwall yourself or I'll drag you there by the leash.",
+			"Move your feet or I'll make sure you can't.",
+			"Follow nicely or I'll break something and you'll follow anyway.",
+			"The slutwall awaits. You can go willingly or unwillingly.",
+			"Come along quietly or I'll give you real reason to scream.",
+			"Don't make this harder than it has to be. Walk.",
+		]
+	if(_id == "SoftSlaveryPunishSlutwallLock"):
+		return [
+			"Enjoy being used.",
+			"Enjoy all the free public use, slut.",
+			"Make yourself useful for once.",
+			"Finally serving your purpose as a free cum dumpster.",
+			"This is what you're good for. Being fucked for free.",
+			"Welcome to your new function. Try to be bratty now.",
+			"At least you're good for something.",
+			"This is all you're worth.",
+			"Embrace your purpose, {npc.npcSlave}.",
+		]
+
+	if(_id == "SoftSlaveryPunishStocks"):
+		return [
+			"Follow or I will break your legs and pull you along the floor.",
+			"Move it, or I'll drag you by your hair.",
+			"Walk or I'll make you crawl the whole way.",
+			"Come quietly or I'll chain you and make you walk on your knees.",
+			"Either you walk to the stocks on your own, or I'll carry you there broken.",
+		]
+	if(_id == "SoftSlaveryPunishStocksLock"):
+		return [
+			"I'm sick of you. Gonna find someone else to use you.",
+			"You're worthless to me right now. Let's see if others find you more entertaining.",
+			"Since you refuse to serve me properly, you'll serve as a fucktoy anyone who wants you.",
+			"Your defiance earns you public use. Hope you enjoy being everyone's toy.",
+			"Too stubborn? Let's see how you handle being public property for a bit.",
+			"If you won't be my obedient slave, you'll be everyone's whore.",
+			"Time to make you useful to someone, since you're useless to me.",
+			"Your body's still good for something.. even if it's just being a public fucktoy.",
+			"Since you can't behave, you'll learn your place under strangers.",
+		]
+	if(_id == "SoftSlaveryPunishStocksAsk"):
+		return [
+			"Is {pc.he} free to use?",
+			"This one available for a quick fuck?",
+			"Is your whore open for fucking?",
+			"Mind if I use your fucktoy?",
+			"Your slave looks like {pc.he} needs some attention. Can I?",
+			"Can I have a turn with your slave?",
+			"This slave available for use?",
+		]
+	if(_id == "SoftSlaveryPunishStocksAskNope"):
+		return [
+			"Nope. <CREDITS> credits first and then you can do whatever you want with {pc.him}.",
+			"Not for free. <CREDITS> credits first.",
+			"Everything has a price. <CREDITS> and {pc.he} {pc.isAre} all yours.",
+			"<CREDITS> credits and you can break {pc.him} however you like.",
+			"Pay <CREDITS> credits and use {pc.him} as your personal toy.",
+			"Not giving {pc.him} away. <CREDITS> credits for a single use.",
+		]
+	if(_id == "SoftSlaveryPunishStocksAskNoBuy"):
+		return [
+			"What if I don't wanna pay?",
+			"I'm not paying for used goods.",
+			"Too expensive for damaged property.",
+			"That's more than this slave is worth.",
+			"Not paying that for your disobedient whore.",
+			"Your slave isn't worth that much.",
+			"Your price is too high for broken merchandise.",
+			"This one looks used up already. Why pay?",
+			"I'd rather take {pc.him} by force than pay.",
+		]
+	if(_id == "SoftSlaveryPunishStocksAskNoBuy2"):
+		return [
+			"Go away then.",
+			"Then fuck off, cheapskate.",
+			"No credits, no fuck. Simple. Go away.",
+			"Then stop wasting my time. Go away.",
+			"Get lost if you can't pay.",
+			"Poor people shouldn't bother slave owners. Go away.",
+			"Come back when you have real credits.",
+			"Then you get nothing. Leave.",
+		]
+	if(_id == "SoftSlaveryPunishStocksAskNoBuy3"):
+		return [
+			"I don't wanna do that either.",
+			"I'm not leaving empty-handed.",
+			"Maybe I'll just take what I want.",
+			"Your slave looks tempting enough to fuck you up.",
+			"I think I'll help myself anyway.",
+			"Your property looks like it needs proper use.",
+			"Maybe I'll use {pc.him} and let you watch.",
+			"I don't take no for an answer.",
+			"This slave's going to get used one way or another.",
+		]
+	if(_id == "SoftSlaveryPunishStocksAskSure"):
+		return [
+			"Sure.",
+			"Fine by me.",
+			"There you go.",
+			"Here. Should be enough.",
+			"Should be good.",
+		]
+	if(_id == "SoftSlaveryPunishStocksAfterSex"):
+		return [
+			"You better obey next time. I'm serious. Thanks for being such a good whore. Enjoy your stay.",
+			"See how much better life is when you're useful? Now stay put and think about your place.",
+			"That's what you're good for. Remember this feeling next time you consider disobedience.",
+			"You served your purpose well. Maybe being a public use slut suits you better?",
+			"See? You can be obedient when properly motivated. Enjoy the stocks.",
+			"You finally found something you're good at. Public use slut.",
+			"Good whore. Now stay locked up and think about how much better obedience feels.",
+		]
+	if(_id == "SoftSlaveryPunishStocksAfterBadSex"):
+		return [
+			"That sucked. Give me my credits back.",
+			"Worst fuck I've ever paid for. Refund me.",
+			"Your slave is terrible. I want my money back.",
+			"This whore isn't worth the credits. Return them.",
+			"Your slave fights too much. Not worth the price.",
+			"This one's broken. Give me my credits back.",
+			"Waste of good creds. Your whore is useless.",
+			"Terrible fucking service. I demand a refund.",
+		]
+	if(_id == "SoftSlaveryPunishStocksAfterBadSex2"):
+		return [
+			"That's not how it works. You used my {npc.npcSlave}, now go away.",
+			"No refunds. You got what you paid for.",
+			"You used my {npc.npcSlave}. No refunds.",
+			"My slave served you. Deal with it.",
+			"You paid for access, not satisfaction.",
+		]
+	if(_id == "SoftSlaveryPunishStocksOwnerLost"):
+		return [
+			"Pathetic display.",
+			"You fight like a slave yourself.",
+			"Is that the best you can manage?",
+			"All that struggle for nothing.",
+			"You're even weaker than I thought.",
+			"All that anger, so little strength.",
+		]
+	if(_id == "SoftSlaveryPunishStocksOwnerLost2"):
+		return [
+			"Much better. Enjoy yourself. Both of you.",
+			"Two slaves, both in stocks. Much better.",
+			"Both slaves are now in stocks. That's the way things always should have been.",
+			"Learn your place alongside your slave. Doormat.",
+		]
+	if(_id == "SoftSlaveryPunishStocksOwnerLost3"):
+		return [
+			"Much better. And now your little slave will watch as I punish you.",
+			"Good. Now your property gets to see what happens to disobedient owners.",
+			"Perfect. Your slave will learn from your mistakes.",
+			"Much better. Your slave will remember this.",
+			"Good. Your whore gets to see proper punishment.",
+		]
+	if(_id == "SoftSlaveryPunishStocksOwnerWon"):
+		return [
+			"Learn your place.",
+			"You're so weak. Learn your place.",
+			"Pathetic display. Learn your place.",
+			"You're dumb and weak. Learn your place.",
+		]
+	if(_id == "SoftSlaveryPunishStocksOwnerWon2"):
+		return [
+			"You as well. You are on some very thin ice, {npc.npcSlave}.",
+		]
+	if(_id == "SoftSlaveryPunishStocksOwnerWon3"):
+		return [
+			"And now you're gonna learn your place.",
+			"You're so weak. And now you're gonna learn your place.",
+			"Pathetic display. And now you're gonna learn your place.",
+			"You're dumb and weak. And now you're gonna learn your place.",
+		]
+	if(_id == "SoftSlaveryPunishStocksOwnerWon4"):
+		return [
+			"And you watch. You are on some very thin ice, {npc.npcSlave}.",
+			"Pay attention, slave. This is what happens to disobedient bitches.",
+		]
+
+	if(_id == "SoftSlaveryPunishSell"):
+		return [
+			"I'm just so sick of you. I'm done. I hate you. I don't want to see you ever again.",
+			"I've had enough of your disobedience. You're not gonna be my problem anymore.",
+			"You've failed me for the last time. I'm getting rid of you.",
+			"I wanted to break you, but you're not even worth the effort. Goodbye.",
+			"You could have been good, but you're just broken. I'm done with you.",
+		]
+	if(_id == "SoftSlaveryPunishSell2"):
+		return [
+			"I will let someone else deal with your bullshit.",
+			"Maybe someone else can handle your attitude. I doubt it.",
+			"Enjoy your new life. I hope they're stricter than I was.",
+			"Let's see how long you last with someone who won't tolerate your nonsense.",
+			"You're not my problem anymore. Someone else can try to tame you.",
+			"Good luck with your new life. They won't be as patient as I was.",
+			"Someone else can deal with your disobedience now. I'm washing my hands of you.",
+		]
+
+
+	if(_id == "SoftSlaveryPunishGB"):
+		return [
+			"I'm so getting annoyed with you. Let's see how you will like a whole ass gangbang.",
+			"You've been disobedient. Time to be used by everyone as punishment.",
+			"Think you're too good to listen? Let's see how you like being gangbanged in the public.",
+			"Your mouth has been saying no too often. Time to find some use for all your holes.",
+			"Bad slaves get shared. You're about to become a public gangbang whore.",
+			"I'm tired of your attitude. Maybe being passed around will improve it.",
+			"You need to remember your place. A good gangbang should remind you.",
+			"Disobedience earns you extra cocks down all of your holes. Hope you're ready for your punishment.",
+		]
+	if(_id == "SoftSlaveryPunishGBGiveup"):
+		return [
+			"Whatever. You're lucky there is not enough people around.",
+			"Damn, nobody wants to fuck you? Even as punishment? Pathetic.",
+			"Can't even find enough people who want your holes. What does that say about you?",
+			"Nobody's interested in punishing you today. Consider yourself lucky.",
+			"Too bad, seems like you're not even worth gangbanging right now.",
+		]
+	if(_id == "SoftSlaveryPunishGBOffer"):
+		return [
+			"Hey. Do you wanna help me punish this {npc.npcSlave}?",
+			"Interested in breaking in my disobedient {npc.npcSlave}?",
+			"Want to help teach my {npc.npcSlave} {pc.his} place?",
+			"Care to join in punishing this useless {npc.npcSlave}?",
+			"My {npc.npcSlave} needs correction. Want to help?",
+			"This {npc.npcSlave} needs to be reminded they're just holes. Interested?",
+			"Want to use my {npc.npcSlave} as punishment? {pc.He} {pc.isAre} been naughty.",
+			"Care to join a gangbang? My {npc.npcSlave} deserves it.",
+			"My {npc.npcSlave} needs to be put in {pc.his} place. Want to help?",
+		]
+	if(_id == "SoftSlaveryPunishGBSure"):
+		return [
+			"Sure. I can do that.",
+			"Always happy to fuck a whore.",
+			"Would love to.",
+			"Count me in.",
+			"Gladly.",
+		]
+	if(_id == "SoftSlaveryPunishGBFollow"):
+		return [
+			"Follow then.",
+			"This way. Let's find a good spot.",
+			"Follow me.",
+			"Come along.",
+			"Follow me. Let's get this gangbang started soon.",
+		]
+	if(_id == "SoftSlaveryPunishGBSubOffer"):
+		return [
+			"Mmm.. maybe you can punish me too?",
+			"I'd rather be the one getting used, actually.",
+			"Could I join as another hole to be filled?",
+			"Would you mind if I was on the receiving end instead?",
+			"I'm more interested in being the one getting gangbanged.",
+			"Actually, I'd prefer to be the punishment toy.",
+			"Mind if I switch places with your {npc.npcSlave}? Or an extra..",
+			"I'd rather be the one taking all the cocks.",
+			"Could I be the one getting punished instead? Or at least be an extra.",
+			"I want to be the gangbang slut, not one of the participants.",
+		]
+	if(_id == "SoftSlaveryPunishGBSubOfferYes"):
+		return [
+			"I guess we could use some extra fuckmeat.",
+			"Fine by me. The more holes the better.",
+			"Sure, why not? Two sluts are better than one.",
+			"Excellent. Double the fun for everyone.",
+			"Perfect. We'll use both of you then.",
+			"Works for me. More bodies to play with.",
+			"Great. You can be the bonus hole.",
+			"Alright. The more the merrier when it comes to gangbangs.",
+			"Good thinking. We'll break in both of you.",
+			"Why not? Plenty of cocks to go around.",
+		]
+	if(_id == "SoftSlaveryPunishGBSubOfferNo"):
+		return [
+			"We already have an extra bitch.",
+			"No thanks, we've got enough holes to fill.",
+			"This is about punishing my {npc.npcSlave}, not you.",
+			"We don't need another slut right now.",
+			"Sorry, this punishment is reserved for my {npc.npcSlave}.",
+			"We're focused on correcting one bitch at a time.",
+			"We've got all the fuckmeat we need.",
+		]
+	if(_id == "SoftSlaveryPunishGBSubOfferNoAw"):
+		return [
+			"Aw.. Oh well.",
+			"That's too bad. Maybe next time.",
+			"Damn. I really wanted to be used.",
+			"Too bad. I love being gangbang material.",
+			"Disappointing. I enjoy being punished.",
+			"Oh well. Maybe I'll find another gangbang.",
+			"Shame. Nothing better than being used by multiple people.",
+		]
+	if(_id == "SoftSlaveryPunishGBNo"):
+		return [
+			"I will pass.",
+			"Not interested, thanks.",
+			"No thanks, not my thing.",
+			"I'll sit this one out.",
+			"Not today.",
+			"I'd rather not participate.",
+			"No, I'm good.",
+			"Not for me, thanks.",
+			"I'll pass on that.",
+		]
+	if(_id == "SoftSlaveryPunishGBNoReact"):
+		return [
+			"Well screw you then.",
+			"Your loss.",
+			"Fine. More for the rest of us.",
+			"Suit yourself.",
+			"Whatever. We don't need you.",
+			"Too bad for you.",
+			"Your choice. We'll find someone else.",
+			"Fine. We'll manage without you.",
+			"No problem. Plenty of others want to have fun.",
+		]
+	if(_id == "SoftSlaveryPunishGBStart"):
+		return [
+			"Time to teach you a lesson.",
+			"Let the punishment begin.",
+			"Ready to learn your place?",
+			"This is what disobedience earns you.",
+			"Hope you're ready for your punishment.",
+			"This will remind you who owns you.",
+			"Let's see how many cocks you can take.",
+		]
+	if(_id == "SoftSlaveryPunishGBEnd"):
+		return [
+			"You're on very thin ice from now on, {npc.npcSlave}.",
+			"Remember this feeling the next time you think about disobeying.",
+			"Let that be a lesson about who owns these holes.",
+			"Next time it will be worse. Remember that.",
+			"Hope you enjoyed your punishment. There's more where that came from.",
+			"Think about this the next time you consider saying no.",
+			"Your body belongs to me. Never forget that again.",
+			"This is just a taste of what happens to disobedient slaves.",
+			"Remember this gangbang every time you think about misbehaving.",
+			"Your holes are mine to share. Don't make me do this again.",
+		]
+
+	if(_id == "SoftSlaveryResist"):
+		return [
+			"Really, {npc.npcSlave}? Is that how you wanna do this?",
+			"Think you can resist me, {npc.npcSlave}? How adorable.",
+			"So you want to do this the hard way? Fine by me.",
+			"Resisting? You'll regret that choice.",
+			"You're actually trying to fight back? How pathetic.",
+			"This is your idea of a good time? Getting beaten into submission?",
+			"You think you have a choice here? How cute.",
+			"You want to play rough? Let's play rough then.",
+			"This rebellion of yours is going to end painfully.",
+		]
+	if(_id == "SoftSlaveryFuckInStocksExtra"):
+		return [
+			"Hey! I wanna fuck them too.",
+			"Mind if I join in? Looks like fun.",
+			"Can I get a turn with that fucktoy?",
+			"Room for one more? I'd love to use those holes.",
+			"Think your fucktoy can handle two of us?",
+		]
+	if(_id == "SoftSlaveryFuckInStocksExtraYes"):
+		return [
+			"Sure, let's do it. Help me lock {pc.him} in.",
+			"Good idea. Help me secure my {npc.npcSlave}.",
+			"Perfect timing. Let's make sure {pc.he} can't escape.",
+			"Glad you asked. Help me get {pc.him} properly restrained.",
+			"Sure thing. Let's double team this bitch.",
+			"Works for me. Help me make sure {pc.he} {pc.isAre} completely helpless.",
+		]
+	if(_id == "SoftSlaveryFuckInStocksExtraNo"):
+		return [
+			"No. This is my {npc.npcSlave}, fuck off.",
+			"Get lost. I don't share my property.",
+			"This {npc.npcSlave} is mine alone. Find your own.",
+			"No way. I'm not sharing my {npc.npcSlave} with you.",
+			"Beat it. This {npc.npcSlave} is for me to use.",
+			"Piss off. My {npc.npcSlave}, my rules.",
+			"No sharing. This {npc.npcSlave} belongs to me.",
+			"Find your own {npc.npcSlave}. This one's taken.",
+			"Get your own. This one's mine.",
+			"Back off. This {npc.npcSlave} is mine to use.",
+			"Not interested in sharing. Go away.",
+			"This is a private session. Fuck off.",
+		]
+	if(_id == "SoftSlaveryFuckInStocksExtraNo2"):
+		return [
+			"Really? I wasn't asking.",
+			"Too bad. I'm taking what I want.",
+			"Your opinion doesn't matter. Step aside.",
+			"I wasn't requesting permission.",
+			"This isn't a negotiation.",
+			"Watch me take what I want.",
+			"I don't care what you think.",
+			"Try and stop me then.",
+			"This is happening whether you like it or not.",
+			"I think I'll help myself anyway.",
+			"You can't stop me from having some fun.",
+		]
+	if(_id == "SoftSlaveryFuckInStocksExtraFree"):
+		return [
+			"You're free, for now.",
+			"Alright, that's enough for today. You can go.",
+			"Get out of here. I'm done with you for now.",
+			"That's all the attention you get today. Now go.",
+			"Run along. We'll continue this another time.",
+			"Go on, get out of here. I've had my fun.",
+			"Consider this session over. Now disappear.",
+			"You're free to go. For now.",
+			"Get lost. I'll find you when I want you again.",
+		]
+	if(_id == "SoftSlaveryFuckInStocksExtraFreeLost"):
+		return [
+			"You are still my {npc.npcOwner}, understand?",
+			"Don't think this changes anything. You're still mine.",
+			"Remember who really owns you, {npc.npcSlave}.",
+			"This was just a temporary loan. You still belong to me.",
+			"Don't get any ideas. You're still my property.",
+			"Nothing's changed. You're still my {npc.npcSlave}.",
+			"You still answer to me, understand?",
+			"This doesn't change your status as my property.",
+			"You're still mine, just with some extra miles now.",
+		]
+
+	if(_id == "SoftSlaveryParadeFuckOffer"):
+		return [
+			"That's a nice slave you have here. Can I fuck {pc.him}?",
+			"What a delicious looking piece of fuckmeat. Mind if I use {pc.him}?",
+			"That slave looks like they need a good fucking. Can I use {pc.him}?",
+			"Your property looks quite tempting. Care to share?",
+			"I've been watching your slave. I want to break them in properly. May I?",
+			"That whore is begging for it with those eyes. Let me have a turn using {pc.him}.",
+			"What a pretty toy you have. Mind if I play with it?",
+			"That slave looks underused. Can I fix that for you?",
+			"I need to relieve some stress. Your slave will do nicely.",
+		]
+	if(_id == "SoftSlaveryParadeFuckOfferYes"):
+		return [
+			"You know what? Sure. Make that slut squirm.",
+			"Go ahead. {pc.He} could use some raw fucking.",
+			"Be my guest. Show {pc.him} what a real fucking feels like.",
+			"Fine by me. Just don't break {pc.him} completely.",
+			"Sure, why not? {pc.He} {pc.verb('exist')} to be used anyway.",
+			"Absolutely. Make sure everyone hears {pc.his} scream.",
+			"Yes. Remind {pc.him} of {pc.his} place.",
+			"Go on. I enjoy watching my property get used.",
+			"Please do. The more humiliation, the better.",
+			"Of course. Public use builds character in slaves.",
+		]
+	if(_id == "SoftSlaveryParadeFuckOfferYesThree"):
+		return [
+			"You know what? Sure. I will join as well.",
+			"Actually, I think I'll participate too. Make it a party.",
+			"Good idea. I could use some stress relief myself.",
+			"Perfect. I'll show you how to properly handle my property.",
+			"Fine, but I'm taking charge. Watch and learn.",
+			"Yes, and I'll demonstrate the proper way to use {pc.him}.",
+		]
+	if(_id == "SoftSlaveryParadeFuckOfferNo"):
+		return [
+			"No. You can only watch.",
+			"Not interested. Find your own toy.",
+			"Absolutely not. My property isn't free to use.",
+			"Fuck off. This {npc.npcSlave} is mine alone.",
+			"No chance. I don't share my {npc.npcSlave}. Just watch.",
+			"Get lost. I don't let strangers touch what's mine.",
+			"No. You can watch.",
+			"No way. Watch, don't touch.",
+		]
+	if(_id == "SoftSlaveryParadeFuckOfferNo2"):
+		return [
+			"Fine.",
+			"Whatever.",
+			"Your loss.",
+			"Suit yourself.",
+			"Cheap bastard.",
+			"Missed opportunity.",
+			"Pathetic.",
+			"Figures.",
+			"Waste of time.",
+			"Keep your trash then.",
+		]
+	if(_id == "SoftSlaveryParadeFuckOfferGood"):
+		return [
+			"Good little slut. Let's continue.",
+			"Well used and properly broken. Just how I like you.",
+			"See? You were made for this. Now move along.",
+			"Good. Now move along.",
+			"Let's continue now.",
+			"Okay. Time to move.",
+			"I haven't finished walking you around.",
+		]
+	if(_id == "SoftSlaveryParadeFuckOfferFight"):
+		return [
+			"I see. You just need someone to teach you a lesson.",
+			"Wrong answer. Time to show you how things work around here.",
+			"So that's how it is? Fine. I'll take what I want by force.",
+			"Big mistake. Now I'm going to enjoy breaking both of you.",
+			"You'll regret that decision. Prepare to lose everything.",
+			"Resistance? How cute. Time to make you regret it.",
+		]
+	if(_id == "SoftSlaveryParadeFuckOfferWon"):
+		return [
+			"You're not getting rid of me so easily.",
+			"Another fool who thought they could take what's mine.",
+			"Let that be a lesson for others. Nobody touches my property but me.",
+			"Another stupid asshole defeated. Let's go.",
+			"They thought they could take you? How adorable.",
+		]
+	if(_id == "SoftSlaveryParadeFuckOfferLostWatch"):
+		return [
+			"You're mine now. Your stupid owner can watch.",
+			"I can fuck you now. Your owner gets front row seats to your humiliation.",
+			"I won. And so I will fuck you.",
+		]
+	if(_id == "SoftSlaveryParadeFuckOfferLostBoth"):
+		return [
+			"You're mine now. Actually.. I will fuck both of you.",
+			"Two for the price of one. I will fuck both of you.",
+			"Perfect. I two fucktoys for me to use.",
+		]

@@ -157,7 +157,7 @@ func getForms() -> Dictionary:
 		"SoftSlaveryFuckInStocksExtraNo": form("No. This is my {npc.npcSlave}, fuck off.", {main=CHAR, target=CHAR}),
 		"SoftSlaveryFuckInStocksExtraNo2": form("Really? I wasn't asking.", {main=CHAR, target=CHAR}),
 		"SoftSlaveryFuckInStocksExtraFree": form("You're free, for now.", {main=CHAR, target=CHAR}),
-		"SoftSlaveryFuckInStocksExtraFreeLost": form("You are still my {npc.npcOwner}, understand?", {main=CHAR, target=CHAR}),
+		"SoftSlaveryFuckInStocksExtraFreeLost": form("You are still my {npc.npcSlave}, understand?", {main=CHAR, target=CHAR}),
 		
 		"SoftSlaveryParadeFuckOffer": form("That's a nice slave you have here. Can I fuck {pc.him}?", {main=CHAR, target=CHAR}),
 		"SoftSlaveryParadeFuckOfferYes": form("You know what? Sure. Make that slut squirm.", {main=CHAR, target=CHAR}),
