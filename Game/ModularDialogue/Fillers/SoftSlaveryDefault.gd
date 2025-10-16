@@ -193,21 +193,33 @@ func getText(_id:String, _args:Dictionary):
 			"Finally awake. Listen closely now.",
 			"Open your eyes and show me you're breathing.",
 			"Good, you're awake. Stay that way.",
+			"Finally awake, I see.",
+			"Eyes open already? Perfect.",
+			"Good, you're awake. Was starting to get bored.",
+			"Sleeping beauty finally decided to join us.",
+			"There you are. I was wondering how long you'd stay out.",
 		]
 	if(_id == "SoftSlaveryIntro2"):
 		return [
 			"From this point on, you are now my {main.npcSlave}. Understand?",
 			"Listen carefully, {main.npcSlave}. You are now mine. Do you hear me?",
-			"You are my {main.npcSlave} now. Learn your place and don't forget it.",
-			"You're no longer free. You're mine, {main.npcSlave}.",
+			"You are my {main.npcSlave} now. Learn your place and don't forget it. Hear me?",
+			"You're no longer free. You're mine, {main.npcSlave}. Understand?",
+			"Listen carefully, {main.npcSlave}. You are now mine. Do you hear me?",
+			"Let's make this clear from the start. You belong to me now. You are my {npc.npcSlave}. Hear me?",
+			"Your old life is over. You're my {npc.npcSlave} now. Do you understand that?",
 		]
 	if(_id == "SoftSlaveryIntro3"):
 		return [
 			"You will do as I say. Otherwise, we will have a problem.",
 			"Do as I order and nothing will happen. Refuse, and you'll regret it.",
-			"Obey me without question. That's how you'll stay out of trouble.",
+			"Obey me without question. That's how you'll stay out of trouble. I will punish you if I have to.",
 			"Try to resist and you'll find out why you shouldn't.",
-			"I don't tolerate disobedience. Understand?",
+			"I don't tolerate disobedience. I will punish you if I have to.",
+			"This means that you will do exactly what I tell to do. Or I will punish you.",
+			"Every command I give, you obey. Unless you enjoy getting punished.",
+			"Your only job is to obey me. Fail, and you'll be punished.",
+			"Say no to me, and I'll break you until you beg to say yes.",
 		]
 	if(_id == "SoftSlaveryIntroEND"):
 		return [
@@ -215,9 +227,12 @@ func getText(_id:String, _args:Dictionary):
 			"I'll be watching you. Don't forget who owns you.",
 			"I'll check on you from time to time. You're mine, don't forget.",
 			"I will be seeing you regularly. Remember your place.",
-			"You'll live under my watch. Keep that in mind.",
+			"I will check on you every so often. Keep that in mind.",
 			"I will stop by. Make sure you behave.",
 			"There is no escaping me. I'll check in on you every few days.",
+			"No point in hiding, I will find you, every few days. You're mine now, remember that.",
+			"You'll see me often. Each time, expect to serve me in some way.",
+			"I'll be checking my {npc.npcSlave} frequently. Make sure you're ready to be used.",
 		]
 
 	if(_id == "SoftSlaveryChangeName"):
@@ -1480,4 +1495,84 @@ func getText(_id:String, _args:Dictionary):
 			"You're mine now. Actually.. I will fuck both of you.",
 			"Two for the price of one. I will fuck both of you.",
 			"Perfect. I two fucktoys for me to use.",
+		]
+
+	if(_id == "SoftSlaveryParadeGuard"):
+		return [
+			"Hey. What is happening here?",
+			"Hold it right there. Explain this.",
+			"You there. What do you think you're doing?",
+			"Stop. This requires an explanation.",
+			"Is that inmate supposed to be leashed like that?",
+			"Wait. Why is the inmate leashed. I need answers.",
+			"Explain yourself. Now. Why {pc.isAre} {pc.he} leashed.",
+			"This doesn't look right. What's going on?",
+			"Hold up. I need to know what this is about.",
+		]
+	if(_id == "SoftSlaveryParadeGuardPunish"):
+		return [
+			"I'm punishing this inmate.",
+			"Just administering some discipline to this one.",
+			"This is corrective action for a problematic inmate.",
+			"Teaching this inmate a lesson in obedience.",
+			"Standard procedure for difficult cases like this.",
+			"This one needs to learn {pc.his} place.",
+			"Just making sure this inmate understands {pc.his} role.",
+		]
+	if(_id == "SoftSlaveryParadeGuardPunish2"):
+		return [
+			"Carry on then.",
+			"Very well. Proceed.",
+			"Okay. Continue with your duties.",
+			"Alright then, don't let me stop you.",
+			"Fine. Just keep it moving.",
+			"Right. Carry on.",
+			"Sure. I'll leave you to it.",
+			"Good. {pc.He} probably {pc.verb('deserve')} it.",
+		]
+	if(_id == "SoftSlaveryParadeGuardProblem"):
+		return [
+			"That's none of your business.",
+			"Fuck off, this doesn't concern you.",
+			"Mind your own fucking business.",
+			"Step aside, guard. This is private.",
+			"You don't want to get involved in this.",
+			"Back off before you regret it.",
+			"This is between me and my property.",
+			"Not your problem. Walk away.",
+			"I don't answer to you.",
+			"Get lost. {pc.He} {pc.isAre} mine.",
+		]
+	if(_id == "SoftSlaveryParadeGuardProblem2"):
+		return [
+			"Really?",
+			"You really want to do this?",
+			"So that's how it's going to be?",
+			"You're making a big mistake.",
+			"That wasn't the right answer.",
+			"You just signed your own trouble.",
+			"Big words for someone about to get hurt.",
+			"You shouldn't have said that.",
+			"Alright. Now you've done it.",
+		]
+	if(_id == "SoftSlaveryParadeGuardWon"):
+		return [
+			"You're not getting rid of me so easily.",
+			"That's what happens when you mess with what's mine.",
+			"Now where were we? Oh right, let's go.",
+			"Let that be a lesson to anyone who tries to mess with me.",
+			"Come along, {npc.npcSlave}. We're not done here.",
+			"Time to continue, {npc.npcSlave}.",
+			"Now that the interruption is dealt with, back to business.",
+		]
+	if(_id == "SoftSlaveryParadeGuardLost"):
+		return [
+			"Go away, inmate.",
+			"Consider yourself lucky. Now get out of here.",
+			"You're free to go. Don't let me catch you like this again.",
+			"Run along now. You've been given a second chance.",
+			"Get moving before I change my mind.",
+			"You're dismissed. Don't make me regret this.",
+			"Go on, get out of my sight.",
+			"Consider this your lucky day. Now disappear.",
 		]

@@ -80,6 +80,9 @@ func removeEvent(_event):
 	eventStack.erase(_event)
 
 func removeEndedEvent(_event, _args:Array):
+	if(!eventStack.has(_event)):
+		return
+	_event.onEventEnd()
 	var eventTag:String = _event.tag
 	eventStack.erase(_event)
 	

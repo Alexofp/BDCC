@@ -19,3 +19,8 @@ func onStart(_args:Array):
 
 func start_eventResult(_event, _tag:String, _args:Array):
 	endEvent()
+
+func onEventEnd():
+	var theNpcOwner := getNpcOwner()
+	if(theNpcOwner):
+		theNpcOwner.checkNextApproachDay()

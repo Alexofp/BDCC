@@ -7,7 +7,7 @@ var level:int = 0
 var influence:float = 0.5
 var charID:String = "" #no sync
 
-var shouldAppoach:bool = true #TODO: Switch to false before ship
+var nextApproachDay:int = 0
 
 var hasTasks:bool = false
 var tasks:Array = []
@@ -120,16 +120,16 @@ func setPCName(_newName:String):
 	pcName = _newName
 
 func shouldOwnerApproachPC() -> bool:
-	return shouldAppoach
+	return GM.main.getDays() >= nextApproachDay
 
 #[id, args]
 func getApproachEvent() -> Array:
-	shouldAppoach = false
-	return ["Approach", []]
+	#shouldAppoach = false
+	return ["Approach", [true]]
 
 func onNewDay():
 	interactedToday = false
-	shouldAppoach = true #TODO: BETTER LOGIC HERE
+	#shouldAppoach = true
 	if(influence <= 0.0):
 		endSlavery()
 		return
@@ -137,6 +137,9 @@ func onNewDay():
 	if(influence >= 1.0):
 		if(punishAmount > 0):
 			punishAmount -= 1
+	
+	if(GM.main.getDays() == nextApproachDay):
+		GM.main.addMessage(getOwnerName()+", your owner, wants to approach you today.")
 	
 	checkIfTasksGotCompleted()
 
@@ -294,11 +297,9 @@ func doTalkAction(_event, _actionID:String, _args:Array):
 	if(_actionID == "askFreedom"):
 		_event.runEvent("", "AskFreedom")
 	if(_actionID == "submit"):
-		shouldAppoach = false
 		markInteractedWithToday()
 		_event.runEvent("", "Approach", ["interact"])
 	if(_actionID == "attack"):
-		shouldAppoach = false
 		markInteractedWithToday()
 		_event.runEvent("", "AttackOwner", ["interact"])
 
@@ -325,7 +326,23 @@ func calcFreedomPrice() -> int:
 	
 	return int(ceil(outResult))
 	
+func checkNextApproachDay(_doAnnounce:bool = true):
+	#var oldNextApproachDay:int = nextApproachDay
+	if(GM.main.getDays() < nextApproachDay):
+		return
+	if(getLevel() <= 0):
+		nextApproachDay = GM.main.getDays() + 2
+	elif(getLevel() <= 1):
+		nextApproachDay = GM.main.getDays() + RNG.randi_range(2, 3)
+	elif(getLevel() <= 2):
+		nextApproachDay = GM.main.getDays() + RNG.randi_range(2, 5)
+	else:
+		nextApproachDay = GM.main.getDays() + RNG.randi_range(2, 6)
 	
+	if(nextApproachDay > GM.main.getDays()):
+		if(_doAnnounce):
+			var dayDiff:int = nextApproachDay - GM.main.getDays()
+			GM.main.addMessage(getOwnerName()+" will check on you in "+str(dayDiff)+" day"+("s" if dayDiff != 1 else ""))
 
 func saveData() -> Dictionary:
 	var tasksData:Array = []
@@ -339,7 +356,7 @@ func saveData() -> Dictionary:
 	return {
 		l = level,
 		i = influence,
-		sa = shouldAppoach,
+		nad = nextApproachDay,
 		ht = hasTasks,
 		t = tasksData,
 		pa = punishAmount,
@@ -352,7 +369,7 @@ func saveData() -> Dictionary:
 func loadData(_data:Dictionary):
 	level = SAVE.loadVar(_data, "l", 0)
 	influence = SAVE.loadVar(_data, "i", 0.5)
-	shouldAppoach = SAVE.loadVar(_data, "sa", false)
+	nextApproachDay = SAVE.loadVar(_data, "nad", 0)
 	hasTasks = SAVE.loadVar(_data, "ht", false)
 	punishAmount = SAVE.loadVar(_data, "pa", 0)
 	pcName = SAVE.loadVar(_data, "pn", "slave")

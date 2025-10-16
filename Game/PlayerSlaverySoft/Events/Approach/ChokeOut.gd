@@ -31,7 +31,7 @@ func start_sexResultUncon(_sex:SexEngineResult):
 	setState("afterSexUncon")
 
 func afterSex():
-	playAnimation(StageScene.SexStart, "start", {npc=getOwnerID()})
+	playAnimation(StageScene.SexStart, "start", {pc=getOwnerID()})
 	saynn("You've have managed to endure the onslaught!")
 	saynn("Your owner is not so mad anymore.")
 	talkModularOwnerToPC("SoftSlaveryChokeOutEndured") #"I feel so much better. Thanks, {npc.npcSlave}."

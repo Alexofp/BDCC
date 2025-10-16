@@ -42,4 +42,8 @@ func nearcellblock():
 	saynn("After a brief.. introduction.. your new owner clicks a leash to your collar and walks you back to the cellblock.")
 	talkModularOwnerToPC("SoftSlaveryIntroEND")# I will be checking on you ever so often. Don't forget who you belong to.
 	saynn("Looks like {npc.he} {npc.is}n't gonna keep you in {npc.his} {npc.cell} all day long.. it's not like you can escape this place anyway.")
+	if(onlyOnce()):
+		var theNpcOwner := getNpcOwner()
+		if(theNpcOwner):
+			theNpcOwner.checkNextApproachDay()
 	addContinue("endEvent")

@@ -16,7 +16,7 @@ func start():
 	
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_OWNER)})
 	saynn("Your owner approaches you, {npc.his} eyes shine with a need for something.")
-	talkOwner(getModularDialogue(C_OWNER, C_PC, "SoftSlaveryGiveCreditsStart").replace("<CREDITS>", str(creditsAmount)))
+	talkOwner(getModularDialogue(C_OWNER, C_PC, "SoftSlaveryGiveCreditsStart").replace("<CREDITS>", str(creditsAmount)+" credits"))
 	
 	if(GM.pc.getCredits() >= creditsAmount):
 		addButton("Obey", "Allow them to take your credits", "obey")
