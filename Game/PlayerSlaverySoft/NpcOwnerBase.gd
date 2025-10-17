@@ -41,7 +41,7 @@ func getVisibleName() -> String:
 	return "Fill me!"
 
 func getApproachSubEventID() -> String:
-	return "aMean" # a stands for Approach
+	return "approach"
 
 func addInfluence(_am:float):
 	influence += _am
@@ -89,6 +89,12 @@ func onLevelUp():
 func pickNewName():
 	setPCName(RNG.pick(getPossiblePCNamesForLevel(level)))
 
+func hasTrait(_traitID:String) -> bool:
+	return false
+
+func getEventTags() -> Dictionary:
+	return {}
+
 func getOwner() -> BaseCharacter:
 	return GlobalRegistry.getCharacter(charID)
 
@@ -105,13 +111,13 @@ func getPossiblePCNamesForLevel(_level:int) -> Array:
 	return ["slave"]
 
 func getPossiblePCNames() -> Array:
-	var allNames:Array = []
+	var allNames:Dictionary = {}
 	for _i in getMaxLevel():
 		var theNames:Array = getPossiblePCNamesForLevel(_i)
 		for theName in theNames:
 			if(!allNames.has(theName)):
-				allNames.append(theName)
-	return allNames
+				allNames[theName] = true
+	return allNames.keys()
 
 func getPCName() -> String:
 	return pcName

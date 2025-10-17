@@ -11,9 +11,10 @@ var isFirst:bool = true
 
 func _init():
 	id = "ParadedAround"
-	reactsToTags = ["aMean"]
+	reactsToTags = [E_APPROACH]
 	eventWeight = 1.0
 	eventMinLevel = 0
+	eventTags = {NOET.ShowingOff:1.0, NOET.BDSM: 0.5}
 
 func start():
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_OWNER)})

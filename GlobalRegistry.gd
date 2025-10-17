@@ -238,6 +238,7 @@ var npcOwnerRefs:Dictionary = {}
 var npcOwners:Dictionary = {}
 var npcOwnerEvents:Dictionary = {}
 var npcOwnerEventIDsByTag:Dictionary = {}
+var npcOwnerTraits:Dictionary = {}
 
 var bodypartStorageNode
 
@@ -662,6 +663,7 @@ func registerEverything():
 	
 	registerNpcOwnerTypeFolder("res://Game/PlayerSlaverySoft/OwnerTypes/")
 	registerNpcOwnerEventFolder("res://Game/PlayerSlaverySoft/Events/")
+	registerNpcOwnerTraitFolder("res://Game/PlayerSlaverySoft/OwnerTraits/")
 	
 	registerInteractionFolder("res://Game/InteractionSystem/Interactions/")
 	registerGlobalTaskFolder("res://Game/InteractionSystem/GlobalTasks/")
@@ -2826,6 +2828,31 @@ func getNpcOwnerEventIDsByTag(_tag:String) -> Array:
 	if(!npcOwnerEventIDsByTag.has(_tag)):
 		return []
 	return npcOwnerEventIDsByTag[_tag]
+
+
+func registerNpcOwnerTrait(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	npcOwnerTraits[object.id] = object
+
+func registerNpcOwnerTraitFolder(folder: String):
+	var scripts = getScriptsInFoldersRecursive(folder)
+	for scriptPath in scripts:
+		registerNpcOwnerTrait(scriptPath)
+
+func getNpcOwnerTrait(id: String):
+	if(npcOwnerTraits.has(id)):
+		return npcOwnerTraits[id]
+	else:
+		Log.printerr("ERROR: npc owner trait with the id "+id+" wasn't found")
+		return null
+
+func getNpcOwnerTraits():
+	return npcOwnerTraits
+
+
+
 
 
 

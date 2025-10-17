@@ -4,9 +4,10 @@ var sexSatisfaction:float = 1.0
 
 func _init():
 	id = "Fuck"
-	reactsToTags = ["aMean"]
+	reactsToTags = [E_APPROACH]
 	eventWeight = 1.0
 	eventMinLevel = 0
+	eventTags = {NOET.OwnerSex: 1.0}
 
 func start():
 	playAnimation(StageScene.Grope, "tease", {npc=getOwnerID()})

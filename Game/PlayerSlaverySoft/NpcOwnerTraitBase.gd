@@ -17,3 +17,9 @@ func getPossiblePCNamesForLevel(_npcOwner, _level:int) -> Array:
 # Relative chance that the owner will develop this trait
 func getTraitScore(_npcOwner) -> float:
 	return 1.0
+
+func getTraitExclusiveType() -> String:
+	return ""
+
+func getTraits(_npcOwner) -> Dictionary:
+	return {}

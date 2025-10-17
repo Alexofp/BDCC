@@ -5,10 +5,11 @@ var enough:bool = false
 
 func _init():
 	id = "Marking"
-	reactsToTags = ["aMean"]
+	reactsToTags = [E_APPROACH]
 	
 	eventMinLevel = 2
 	eventWeight = 0.5
+	eventTags = {NOET.BDSM: 1.0}
 
 func start():
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_OWNER)})

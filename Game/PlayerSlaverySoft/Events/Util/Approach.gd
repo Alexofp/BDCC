@@ -7,7 +7,7 @@ func onStart(_args:Array):
 	setState("start")
 	setSubResult(SUB_END)
 	
-	var approachSubEventID:String = "aMean"
+	var approachSubEventID:String = E_APPROACH
 	var theOwner := getNpcOwner()
 	if(theOwner):
 		approachSubEventID = theOwner.getApproachSubEventID()

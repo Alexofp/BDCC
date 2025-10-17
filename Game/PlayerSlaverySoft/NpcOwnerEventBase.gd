@@ -24,6 +24,7 @@ const C_EXTRA2 = 2
 const C_EXTRA3 = 3
 const C_EXTRA4 = 4
 
+const E_APPROACH = "approach"
 const E_PUNISH_WEAK = "punish_weak"
 const E_PUNISH_STRONG = "punish_strong"
 const E_PUNISH_GET_RID_OF = "punish_getridof"
@@ -61,6 +62,7 @@ var sexLimits:Array = []
 
 var runner:WeakRef
 
+var eventTags:Dictionary = {}# no save
 var eventWeight:float = 1.0 # no save
 var eventMinLevel:int = 0 # no save
 var eventMaxLevel:int = 999 # no save
@@ -465,18 +467,33 @@ func checkSubEvent(_tag:String, _pretext:String, _args:Array, _checkHistory:bool
 	if(eventIDsWithTag.empty()):
 		return false
 	
+	var theRunner = getRunner()
 	var theHistory:Array = []
 	var theNpcOwner := getNpcOwner()
 	if(_checkHistory && theNpcOwner):
 		theHistory = theNpcOwner.eventHistory
+	
+	var theTags:Dictionary = {}
+	if(theNpcOwner):
+		theTags = theNpcOwner.getEventTags()
 	
 	var possible:Array = []
 	#var totalScore:float = 0.0
 	for eventID in eventIDsWithTag:
 		var theEvent = GlobalRegistry.createNpcOwnerEvent(eventID)
 		var theScore:float = theEvent.getSubEventScore(self, _tag, _args)
+		
+		var theEventTags:Dictionary = theEvent.getEventTags(theRunner)
+		for eventTag in theEventTags:
+			if(theTags.has(eventTag)):
+				#var eventTagMult:float = theEventTags[eventTag]
+				var ownerTagMult:float = theTags[eventTag]
+				
+				theScore *= ownerTagMult #TODO: Handle negative values somehow?
+			
 		if(theScore <= 0.0 || !RNG.chance(theScore*100.0)):
 			continue
+			
 		if(_checkHistory && theHistory.has(eventID)):
 			theScore = theScore*0.01
 			if(theScore > 0.01):
@@ -876,6 +893,9 @@ func getOwnerLevel() -> int:
 
 func canSetLimits() -> bool:
 	return getOwnerLevel() >= 1
+
+func getEventTags(_runner) -> Dictionary:
+	return eventTags
 
 func saveData() -> Dictionary:
 	return {

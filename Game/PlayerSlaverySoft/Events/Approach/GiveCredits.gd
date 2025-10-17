@@ -4,11 +4,12 @@ var creditsAmount:int = 10
 
 func _init():
 	id = "GiveCredits"
-	reactsToTags = ["aMean"]
+	reactsToTags = [E_APPROACH]
 	
 	eventMaxLevel = 0
 	eventMaxLevel = 2
 	eventWeight = 0.5
+	eventTags = {NOET.Mean: 1.0}
 
 func start():
 	if(onlyOnce()):
