@@ -21,5 +21,5 @@ func getTraitScore(_npcOwner) -> float:
 func getTraitExclusiveType() -> String:
 	return ""
 
-func getTraits(_npcOwner) -> Dictionary:
+func getEventTags(_npcOwner) -> Dictionary:
 	return {}

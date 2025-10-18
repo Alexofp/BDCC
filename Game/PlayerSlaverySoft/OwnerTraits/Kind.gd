@@ -1,13 +1,13 @@
 extends NpcOwnerTraitBase
 
 func _init():
-	id = "Mean"
+	id = "Kind"
 
 func getVisibleName() -> String:
-	return "Mean"
+	return "Kind"
 
 func getVisibleDescription() -> String:
-	return "The owner is more likely to do mean things to you."
+	return "The owner is less likely to do mean things to you."
 
 func getPossiblePCNamesForLevel(_npcOwner, _level:int) -> Array:
 	var ownerHasVagina:bool = _npcOwner.getOwner().hasVagina()
@@ -21,12 +21,12 @@ func getPossiblePCNamesForLevel(_npcOwner, _level:int) -> Array:
 
 func getTraitScore(_npcOwner) -> float:
 	var personality:Personality = _npcOwner.getOwner().getPersonality()
-	return personality.getStat(PersonalityStat.Mean)*2.0
+	return -personality.getStat(PersonalityStat.Mean)*2.0
 
 func getTraitExclusiveType() -> String:
 	return "meanness"
 
 func getEventTags(_npcOwner) -> Dictionary:
 	return {
-		NOET.Mean: 3.0,
+		NOET.Mean: 0.2,
 	}

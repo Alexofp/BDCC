@@ -62,7 +62,7 @@ var sexLimits:Array = []
 
 var runner:WeakRef
 
-var eventTags:Dictionary = {}# no save
+var eventTags:Dictionary = {}# no save, extra weight based on owner's tags (added to eventWeight if the owner has the tags)
 var eventWeight:float = 1.0 # no save
 var eventMinLevel:int = 0 # no save
 var eventMaxLevel:int = 999 # no save
@@ -462,7 +462,7 @@ func involveOwner():
 func checkProtect(_pretext:String) -> bool:
 	return checkSubEvent("protect", _pretext, [])
 
-func checkSubEvent(_tag:String, _pretext:String, _args:Array, _checkHistory:bool = false) -> bool:
+func checkSubEvent(_tag:String, _pretext:String, _args:Array, _checkHistory:bool = false, _checkDesperate:bool = false) -> bool:
 	var eventIDsWithTag:Array = GlobalRegistry.getNpcOwnerEventIDsByTag(_tag)
 	if(eventIDsWithTag.empty()):
 		return false
@@ -473,25 +473,34 @@ func checkSubEvent(_tag:String, _pretext:String, _args:Array, _checkHistory:bool
 	if(_checkHistory && theNpcOwner):
 		theHistory = theNpcOwner.eventHistory
 	
-	var theTags:Dictionary = {}
+	var theNpcOwnerTags:Dictionary = {}
 	if(theNpcOwner):
-		theTags = theNpcOwner.getEventTags()
+		theNpcOwnerTags = theNpcOwner.getEventTags()
 	
 	var possible:Array = []
+	var possibleDesperate:Array = []
 	#var totalScore:float = 0.0
+	#var finalMult:float = 1.0
 	for eventID in eventIDsWithTag:
 		var theEvent = GlobalRegistry.createNpcOwnerEvent(eventID)
 		var theScore:float = theEvent.getSubEventScore(self, _tag, _args)
 		
 		var theEventTags:Dictionary = theEvent.getEventTags(theRunner)
 		for eventTag in theEventTags:
-			if(theTags.has(eventTag)):
-				#var eventTagMult:float = theEventTags[eventTag]
-				var ownerTagMult:float = theTags[eventTag]
+			if(theNpcOwnerTags.has(eventTag)):
+				var eventTagMult:float = theEventTags[eventTag]
+				var ownerTagMult:float = theNpcOwnerTags[eventTag]
 				
-				theScore *= ownerTagMult #TODO: Handle negative values somehow?
+				var scoreStuff:float = 1.0-((1.0 - ownerTagMult)*eventTagMult)
+				theScore *= scoreStuff
 			
-		if(theScore <= 0.0 || !RNG.chance(theScore*100.0)):
+		#theScore *= finalMult
+			
+		if(theScore <= 0.0):
+			continue
+		if(theScore < 1.0 && !RNG.chance(theScore*100.0)):
+			if(_checkDesperate):
+				possibleDesperate.append([theEvent, theScore])
 			continue
 			
 		if(_checkHistory && theHistory.has(eventID)):
@@ -503,6 +512,8 @@ func checkSubEvent(_tag:String, _pretext:String, _args:Array, _checkHistory:bool
 	
 	#if(totalScore < 1.0 && !RNG.chance(totalScore*100.0)):
 	#	return false
+	if(possible.empty() && !possibleDesperate.empty()):
+		possible = possibleDesperate
 	
 	var _context:Dictionary = {}
 	while(!possible.empty()):

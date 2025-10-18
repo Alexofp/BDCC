@@ -11,7 +11,7 @@ func onStart(_args:Array):
 	var theOwner := getNpcOwner()
 	if(theOwner):
 		approachSubEventID = theOwner.getApproachSubEventID()
-	if(checkSubEvent(approachSubEventID, "", [], true)):
+	if(checkSubEvent(approachSubEventID, "", [], true, true)):
 		pass
 	else:
 		assert(false, "Couldn't find any events")

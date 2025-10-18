@@ -17,13 +17,13 @@ var pcName:String = "slave"
 var freedomPrice:int = 1000
 
 var interactedToday:bool = false
+var daysAmount:int = 0
 
 var eventHistory:Array = [] # keeps last 2 events so we don't repeat as often
 
 func onStart():
 	pickNewName()
-	# Initial influence depends on the subbyness
-	influence = clamp(0.1 + getOwner().getPersonality().getStat(PersonalityStat.Subby)*0.8, 0.1, 0.9)
+	influence = 0.5#clamp(0.1 + getOwner().getPersonality().getStat(PersonalityStat.Subby)*0.8, 0.1, 0.9)
 	freedomPrice = generateFreedomPrice()
 	
 func setRelationship(_softSlavery):
@@ -104,6 +104,17 @@ func getOwnerName() -> String:
 		return "Error!"
 	return theOwner.getName()
 
+func getRelationshipFullInfo() -> Array:
+	var result:Array = [
+		"Owner level: "+str(getLevel())+"/"+str(getMaxLevel()),
+		"Influence: "+str(Util.roundF(getInfluence()*100.0, 1))+"%",
+		"Punishment points: "+str(punishAmount),
+		"Days enslaved: "+str(daysAmount),
+		"Slave's nickname: "+getPCName(),
+	]
+	
+	return result
+
 func addMessage(_text:String):
 	GM.main.addMessage(_text)
 
@@ -134,6 +145,7 @@ func getApproachEvent() -> Array:
 	return ["Approach", [true]]
 
 func onNewDay():
+	daysAmount += 1
 	interactedToday = false
 	#shouldAppoach = true
 	if(influence <= 0.0):
@@ -295,6 +307,8 @@ func getTalkActions(_event) -> Array:
 	result.append(talkAction("Ask freedom", "Ask your owner if they can let you go", "askFreedom"))
 	#	else:
 	#		result.append(talkActionDisabled("Ask freedom", "Requires max influence"))
+	result.append(talkAction("Relationship", "See how your slavery relationship is progressing", "info"))
+	
 	return result
 
 func doTalkAction(_event, _actionID:String, _args:Array):
@@ -308,6 +322,8 @@ func doTalkAction(_event, _actionID:String, _args:Array):
 	if(_actionID == "attack"):
 		markInteractedWithToday()
 		_event.runEvent("", "AttackOwner", ["interact"])
+	if(_actionID == "info"):
+		_event.runEvent("", "RelationshipInfo")
 
 func generateFreedomPrice() -> int:
 	return RNG.randi_range(500, 2000)
@@ -349,6 +365,9 @@ func checkNextApproachDay(_doAnnounce:bool = true):
 		if(_doAnnounce):
 			var dayDiff:int = nextApproachDay - GM.main.getDays()
 			GM.main.addMessage(getOwnerName()+" will check on you in "+str(dayDiff)+" day"+("s" if dayDiff != 1 else ""))
+
+func debugCanPickTraits() -> bool:
+	return false
 
 func saveData() -> Dictionary:
 	var tasksData:Array = []

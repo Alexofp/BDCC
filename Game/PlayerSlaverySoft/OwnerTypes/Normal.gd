@@ -18,12 +18,12 @@ func getEventTags() -> Dictionary:
 	var theTags:Dictionary = {}
 	for traitID in traits:
 		var theTrait:NpcOwnerTraitBase = GlobalRegistry.getNpcOwnerTrait(traitID)
-		var theTraitTags:Dictionary = theTrait.getTraits(self)
+		var theTraitTags:Dictionary = theTrait.getEventTags(self)
 		for theTag in theTraitTags:
 			if(!theTags.has(theTag)):
 				theTags[theTag] = theTraitTags[theTag]
 			else:
-				theTags[theTag] *= theTraitTags[theTag]
+				theTags[theTag] = (theTraitTags[theTag] * theTags[theTag])
 	return theTags
 
 func hasTrait(_traitID:String) -> bool:
@@ -64,9 +64,25 @@ func addRandomTrait(_announce:bool = true) -> bool:
 	return true
 
 func addRandomTraitChecked(_announce:bool = true) -> bool:
-	if(traits.size() >= 3):
+	if(traits.size() >= getMaxAmountOfTraits()):
 		return false
 	return addRandomTrait(_announce)
+
+func addTrait(traitID:String):
+	var theTrait:NpcOwnerTraitBase = GlobalRegistry.getNpcOwnerTrait(traitID)
+	if(!theTrait):
+		return
+	if(traits.has(traitID)):
+		return
+	traits.append(traitID)
+
+func removeTrait(traitID:String):
+	if(!traits.has(traitID)):
+		return
+	traits.erase(traitID)
+
+func getMaxAmountOfTraits() -> int:
+	return 2
 
 func getPossiblePCNamesForLevel(_level:int) -> Array:
 	var result:Array = .getPossiblePCNamesForLevel(_level)
@@ -76,6 +92,38 @@ func getPossiblePCNamesForLevel(_level:int) -> Array:
 			continue
 		result.append_array(theTrait.getPossiblePCNamesForLevel(self, _level))
 	return result
+
+func getRelationshipFullInfo() -> Array:
+	var theInfo := .getRelationshipFullInfo()
+	if(!traits.empty()):
+		theInfo.append("")
+		var traitNames:Array = []
+		var traitNamesDescs:Array = []
+		for traitID in traits:
+			var theTrait:NpcOwnerTraitBase = GlobalRegistry.getNpcOwnerTrait(traitID)
+			if(!theTrait):
+				continue
+			traitNames.append(theTrait.getVisibleName())
+			traitNamesDescs.append(" - "+theTrait.getVisibleName()+": "+theTrait.getVisibleDescription())
+		theInfo.append("Traits: "+Util.join(traitNames, ", "))
+		theInfo.append("")
+		theInfo.append_array(traitNamesDescs)
+	return theInfo
+
+func getExtraCategoryText() -> String:
+	var theText:String = .getExtraCategoryText()
+	if(!traits.empty()):
+		var traitNames:Array = []
+		for traitID in traits:
+			var theTrait:NpcOwnerTraitBase = GlobalRegistry.getNpcOwnerTrait(traitID)
+			if(!theTrait):
+				continue
+			traitNames.append(theTrait.getVisibleName())
+		theText += "\nTraits: "+Util.join(traitNames, ", ")
+	return theText
+
+func debugCanPickTraits() -> bool:
+	return true
 
 func saveData() -> Dictionary:
 	var data := .saveData()
