@@ -513,9 +513,9 @@ func getText(_id:String, _args:Dictionary):
 	if(_id == "SoftSlaveryFuckJealousOwnerLostOffer2"):
 		return [
 			"It's the slave's fault that {pc.he} didn't tell us about each other, right? So why not punish {pc.him} instead?",
-			"The slave didn't tell us about each other. So let's punish {npc.him} for it. Yeah?",
-			"That bitch slave never told me that {npc.he} {npc.has} another fucking owner. Wanna punish {npc.him} for that?",
-			"The slave kept secrets. So let's make {npc.him} regret that?",
+			"The slave didn't tell us about each other. So let's punish {pc.him} for it. Yeah?",
+			"That bitch slave never told me that {pc.he} {pc.has} another fucking owner. Wanna punish {pc.him} for that?",
+			"The slave kept secrets. So let's make {pc.him} regret that?",
 		]
 	if(_id == "SoftSlaveryFuckJealousOwnerLostOfferAgree"):
 		return [
