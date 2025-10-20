@@ -1391,12 +1391,8 @@ func getText(_id:String, _args:Dictionary):
 			"You are still my {npc.npcOwner}, understand?",
 			"Don't think this changes anything. You're still mine.",
 			"Remember who really owns you, {npc.npcSlave}.",
-			"This was just a temporary loan. You still belong to me.",
-			"Don't get any ideas. You're still my property.",
 			"Nothing's changed. You're still my {npc.npcSlave}.",
 			"You still answer to me, understand?",
-			"This doesn't change your status as my property.",
-			"You're still mine, just with some extra miles now.",
 		]
 
 	if(_id == "SoftSlaveryParadeFuckOffer"):
@@ -1494,7 +1490,7 @@ func getText(_id:String, _args:Dictionary):
 		return [
 			"You're mine now. Actually.. I will fuck both of you.",
 			"Two for the price of one. I will fuck both of you.",
-			"Perfect. I two fucktoys for me to use.",
+			"Perfect. Two fucktoys for me to use.",
 		]
 
 	if(_id == "SoftSlaveryParadeGuard"):
