@@ -145,10 +145,10 @@ func pickBodyAttributes(character:DynamicCharacter, _args = {}):
 		character.npcFeminity = RNG.randi_range(0, 50)
 	if(character.getGender() == Gender.Female):
 		character.npcThickness = RNG.randi_range(0, 110)
-		character.npcFeminity = RNG.randi_range(25, 75)
+		character.npcFeminity = RNG.randi_range(50, 100)
 	if(character.getGender() == Gender.Androgynous):
 		character.npcThickness = RNG.randi_range(0, 100)
-		character.npcFeminity = RNG.randi_range(50, 100)
+		character.npcFeminity = RNG.randi_range(25, 75)
 	if(character.getGender() == Gender.Other):
 		character.npcThickness = RNG.randi_range(0, 100)
 		character.npcFeminity = RNG.randi_range(0, 100)
