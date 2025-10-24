@@ -445,6 +445,17 @@ func onlyOnce() -> bool: # Returns false if we're refreshing the same state
 func getNpcOwner() -> NpcOwnerBase:
 	return getRunner().getNpcOwner()
 
+func sayTaskInfo():
+	var theNpcOwner := getNpcOwner()
+	if(!theNpcOwner):
+		return
+	var result:Array = []
+	result.append_array(theNpcOwner.getQuestProgressArray())
+	
+	if(result.empty()):
+		return
+	saynn(Util.join(result, "\n"))
+
 func getSubEventScore(_event, _tag:String, _args:Array) -> float:
 	var theLevel:int = _event.getNpcOwner().getLevel()
 	if(theLevel < eventMinLevel):

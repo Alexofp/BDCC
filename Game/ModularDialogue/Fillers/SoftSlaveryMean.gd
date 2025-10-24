@@ -217,7 +217,6 @@ func getText(_id:String, _args:Dictionary):
 			"Listen the fuck up, {npc.npcSlave}. You. Are. Mine. Do you hear me?",
 			"Your freedom is gone, {npc.npcSlave}. You're my thing to use. Clear?",
 			"Let's get this through your thick skull, {npc.npcSlave}. You belong to me now. Hear me?",
-			"Let's make this fucking simple. My {npc.npcSlave}. Do you hear me?",
 			"Your life is mine now, fucker. You're my {npc.npcSlave}. Do you understand that?",
 			"Listen the fuck up, {npc.npcSlave}. You belong to me now. Every last inch of you. Got it?",
 			"Your life is fucking over. You're my {npc.npcSlave} now, you pathetic excuse. Hear me?",

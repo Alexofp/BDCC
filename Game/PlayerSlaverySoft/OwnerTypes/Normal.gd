@@ -125,6 +125,19 @@ func getExtraCategoryText() -> String:
 func debugCanPickTraits() -> bool:
 	return true
 
+func checkSkipPunishment() -> bool:
+	if(skipPunishCooldown > 0):
+		return false
+	
+	for traitID in traits:
+		var theTrait = GlobalRegistry.getNpcOwnerTrait(traitID)
+		if(!theTrait):
+			continue
+		var theChance:float = theTrait.getSkipPunishmentChance()
+		if(theChance > 0.0 && RNG.chance(theChance)):
+			return true
+	return false
+
 func saveData() -> Dictionary:
 	var data := .saveData()
 	

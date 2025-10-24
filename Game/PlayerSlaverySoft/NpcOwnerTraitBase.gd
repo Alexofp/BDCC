@@ -23,3 +23,6 @@ func getTraitExclusiveType() -> String:
 
 func getEventTags(_npcOwner) -> Dictionary:
 	return {}
+
+func getSkipPunishmentChance() -> float:
+	return 0.0

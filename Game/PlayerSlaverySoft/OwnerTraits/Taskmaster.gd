@@ -1,35 +1,32 @@
 extends NpcOwnerTraitBase
 
 func _init():
-	id = "Kind"
+	id = "Taskmaster"
 
 func getVisibleName() -> String:
-	return "Kind"
+	return "Taskmaster"
 
 func getVisibleDescription() -> String:
-	return "The owner is a bit less likely to do mean things to you. They might also decide not to punish you."
+	return "Your owner really likes to give you tasks to do."
 
 func getPossiblePCNamesForLevel(_npcOwner, _level:int) -> Array:
 	#var ownerHasVagina:bool = _npcOwner.getOwner().hasVagina()
 	if(_level <= 1):
-		return ["pet", "dear", "sweetie", "cupcake"]
+		return ["servant"]
 	if(_level <= 2):
-		return ["softie", "hun", "pearl", "snowdrop", "sweetheart"]
-	return ["angel", "bunny", "flower", "love", "starlight"]
+		return ["asset"]
+	return ["proxy"]
 
 func getTraitScore(_npcOwner) -> float:
 	var personality:Personality = _npcOwner.getOwner().getPersonality()
-	return -personality.getStat(PersonalityStat.Mean)*2.0
+	var fetishHolder:FetishHolder = _npcOwner.getOwner().getFetishHolder()
+	return -personality.getStat(PersonalityStat.Naive) - personality.getStat(PersonalityStat.Impatient) + fetishHolder.getFetish(Fetish.Rigging)
 
 func getTraitExclusiveType() -> String:
-	return "meanness"
+	return "tasks"
 
 func getEventTags(_npcOwner) -> Dictionary:
 	return {
-		NOET.Mean: 0.5,
+		NOET.Tasks: 3.0,
 	}
 
-func getSkipPunishmentChance() -> float:
-	return 50.0
-
-#bunny kitty doll brat servant

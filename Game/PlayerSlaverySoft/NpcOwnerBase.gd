@@ -21,6 +21,8 @@ var daysAmount:int = 0
 
 var eventHistory:Array = [] # keeps last 2 events so we don't repeat as often
 
+var skipPunishCooldown:int = 0
+
 # Used inside the SoftSlavery special relationship to pick the most fitting owner type. If 2 owner types have the same priority, random will be picked
 func getStartPriority(_enslaverChar) -> int:
 	return 0
@@ -166,9 +168,12 @@ func onNewDay():
 	if(GM.main.getDays() == nextApproachDay):
 		GM.main.addMessage(getOwnerName()+", your owner, wants to approach you today.")
 	
+	if(skipPunishCooldown > 0):
+		skipPunishCooldown -= 1
+	
 	checkIfTasksGotCompleted()
 
-func generateTasks(howManyTasks = 2):
+func generateTasks(howManyTasks:int = 2):
 	hasTasks = true
 	tasks.clear()
 	var theChar = GM.pc
@@ -269,8 +274,14 @@ func addPunishAmount(_am:int=1):
 	if(punishAmount < 0):
 		punishAmount = 0
 
+func checkSkipPunishment() -> bool:
+	return false
+
 func onPunish():
 	punishAmount += 1
+
+func onSkipPunish():
+	skipPunishCooldown = 10
 
 func getOwnerInfo() -> Array:
 	var result:Array = []
@@ -396,6 +407,7 @@ func saveData() -> Dictionary:
 		it = interactedToday,
 		eh = eventHistory,
 		fp = freedomPrice,
+		spc = skipPunishCooldown,
 	}
 
 func loadData(_data:Dictionary):
@@ -408,6 +420,7 @@ func loadData(_data:Dictionary):
 	interactedToday = SAVE.loadVar(_data, "it", false)
 	eventHistory = SAVE.loadVar(_data, "eh", [])
 	freedomPrice = SAVE.loadVar(_data, "fp", 1000)
+	skipPunishCooldown = SAVE.loadVar(_data, "spc", 0)
 	
 	tasks.clear()
 	var tasksData:Array = SAVE.loadVar(_data, "tasks", [])

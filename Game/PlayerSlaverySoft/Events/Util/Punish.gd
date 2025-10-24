@@ -9,6 +9,12 @@ func onStart(_args:Array):
 	if(checkProtect("You were about to be punished by your owner..")):
 		return
 	
+	var theNpcOwner := getNpcOwner()
+	if(theNpcOwner.checkSkipPunishment()):
+		theNpcOwner.onSkipPunish()
+		setState("punishSkip")
+		return
+	
 	if(!checkRunPunish()):
 		endEvent()
 
@@ -37,3 +43,12 @@ func checkRunPunish() -> bool:
 		theOwner.onPunish()
 		return true
 	return false
+
+
+func punishSkip():
+	playStand()
+	
+	saynn("{npc.name} was about to punish you.. but decided against it at the last moment.")
+	talkModularOwnerToPC("SoftSlaveryPunishSkip")
+	saynn("Looks like you are free for now!")
+	addContinue("endEvent")

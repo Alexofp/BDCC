@@ -7,3 +7,4 @@ const Sharing = "sharing" #This event includes the pc being fucked by non-owner 
 const OwnerSex = "ownersex" #This event includes owner fucking PC
 const BDSM = "bdsm" #This event includes bdsm elements (restraints, stocks/slutwall, bodywritings, etc)
 const ShowingOff = "showingoff" #This event includes the owner showing off their slave to others
+const Tasks = "tasks" #This event includes the owner giving their slave some task or tasks
