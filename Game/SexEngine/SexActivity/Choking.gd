@@ -174,15 +174,29 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 		
 	if(_actionID == "escape"):
 		if(RNG.chance(getResistChance(SUB_0, DOM_0, RESIST_NECK_FOCUS, 20.0, 0.0))):
+			var didFullyEscape:bool = false
 			if(getState() == ""):
 				endActivity()
 				failGoal(SexGoal.Choke)
+				didFullyEscape = true
 			elif(getState() == "choking"):
-				setState("")
+				if(RNG.chance(50)):
+					endActivity()
+					failGoal(SexGoal.Choke)
+					didFullyEscape = true
+				else:
+					setState("")
 			elif(getState() == "hardchoking"):
-				setState("choking")
+				if(RNG.chance(10)):
+					endActivity()
+					failGoal(SexGoal.Choke)
+					didFullyEscape = true
+				elif(RNG.chance(50)):
+					setState("choking")
+				else:
+					setState("")
 			
-			addText("{sub.You} {sub.youVerb('manage')} to make {dom.youHim} relax {dom.yourHis} grasp on your neck!")
+			addText("{sub.You} {sub.youVerb('manage')} to make {dom.youHim}"+(" [b]FULLY[/b]" if didFullyEscape else "")+" relax {dom.yourHis} grasp on your neck!")
 			reactSub(SexReaction.ActivelyResisting, [100])
 		else:
 			addTextPick([
