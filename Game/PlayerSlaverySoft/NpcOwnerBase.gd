@@ -21,6 +21,10 @@ var daysAmount:int = 0
 
 var eventHistory:Array = [] # keeps last 2 events so we don't repeat as often
 
+# Used inside the SoftSlavery special relationship to pick the most fitting owner type. If 2 owner types have the same priority, random will be picked
+func getStartPriority(_enslaverChar) -> int:
+	return 0
+
 func onStart():
 	pickNewName()
 	influence = 0.5#clamp(0.1 + getOwner().getPersonality().getStat(PersonalityStat.Subby)*0.8, 0.1, 0.9)
@@ -44,10 +48,13 @@ func getApproachSubEventID() -> String:
 	return "approach"
 
 func addInfluence(_am:float):
+	if(_am != 0.0):
+		GM.main.RS.addAffection(charID, "pc", _am * 0.25)
 	influence += _am
 	influence = clamp(influence, 0.0, 1.0)
 	if(influence >= 1.0):
 		doLevelUp()
+	
 
 func getInfluence() -> float:
 	return influence

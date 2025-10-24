@@ -40,8 +40,20 @@ func onStart(_args:Array):
 	if(_args.size() > 0):
 		theNpcTypeID = _args[0]
 	else:
-		var allPossibleOwnerTypes = GlobalRegistry.getNpcOwnerTypes()
-		theNpcTypeID = RNG.pick(allPossibleOwnerTypes)
+		var currentPriority:int = -9999
+		var currentPossibleList:Array = []
+		
+		for ownerTypeID in GlobalRegistry.getNpcOwnerTypes():
+			var theOwnerType = GlobalRegistry.getNpcOwnerTypeRef(ownerTypeID)
+			var thePrio:int = theOwnerType.getStartPriority(theChar)
+			
+			if(thePrio > currentPriority):
+				currentPriority = thePrio
+				currentPossibleList = [ownerTypeID]
+			elif(thePrio == currentPriority):
+				currentPossibleList.append(ownerTypeID)
+		
+		theNpcTypeID = RNG.pick(currentPossibleList) if !currentPossibleList.empty() else "Normal"
 	npcOwner = GlobalRegistry.createNpcOwnerType(theNpcTypeID)
 	npcOwner.setRelationship(self)
 	npcOwner.onStart()
