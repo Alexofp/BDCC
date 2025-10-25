@@ -21,7 +21,7 @@ func start():
 	saynn("{npc1.name} approaches you and your owner!")
 	talkModular(C_EXTRA1, C_OWNER, "SoftSlaveryFuckInStocksExtra")
 	
-	var ownerRejectChance:float = 50.0 + ownerPersonality(PersonalityStat.Mean)*50.0
+	var ownerRejectChance:float = 50.0 + ownerPersonality(PersonalityStat.Mean)*50.0 + 100.0*getOwnerNOM(NOM.NoSharing) - 100.0*getOwnerNOM(NOM.Sharing)
 	if(!smartChance(ownerRejectChance)):
 		talkModularOwnerToPC("SoftSlaveryFuckInStocksExtraYes")
 		saynn("Double trouble..")

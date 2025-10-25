@@ -23,6 +23,7 @@ func start():
 	talkModular(C_EXTRA1, C_OWNER, "SoftSlaveryParadeFuckOffer")
 	
 	var allowSexChance:float = 50.0 + ownerPersonality(PersonalityStat.Subby)*40.0 + ownerPersonality(PersonalityStat.Naive)*20.0
+	allowSexChance += -200.0*getOwnerNOM(NOM.NoSharing) + 30.0*getOwnerNOM(NOM.Sharing)
 	
 	if(RNG.chance(allowSexChance)):
 		setSubResult(SUB_CONTINUE)

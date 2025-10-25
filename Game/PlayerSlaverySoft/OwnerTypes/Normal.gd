@@ -138,6 +138,31 @@ func checkSkipPunishment() -> bool:
 			return true
 	return false
 
+func getNOMs() -> Dictionary:
+	var result:Dictionary = {}
+	for traitID in traits:
+		var theTrait = GlobalRegistry.getNpcOwnerTrait(traitID)
+		if(!theTrait):
+			continue
+		var theTraitNoms:Dictionary = theTrait.getNOMs(self)
+		for theNom in theTraitNoms:
+			if(!result.has(theNom)):
+				result[theNom] = theTraitNoms[theNom]
+			else:
+				result[theNom] += theTraitNoms[theNom]
+	return result
+	
+func getNOM(_nom:String) -> float:
+	var result:float = 0.0
+	for traitID in traits:
+		var theTrait = GlobalRegistry.getNpcOwnerTrait(traitID)
+		if(!theTrait):
+			continue
+		var theTraitNoms:Dictionary = theTrait.getNOMs(self)
+		if(theTraitNoms.has(_nom)):
+			result += theTraitNoms[_nom]
+	return clamp(result, 0.0, 1.0)
+
 func saveData() -> Dictionary:
 	var data := .saveData()
 	

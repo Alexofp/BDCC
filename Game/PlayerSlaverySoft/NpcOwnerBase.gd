@@ -387,6 +387,13 @@ func checkNextApproachDay(_doAnnounce:bool = true):
 func debugCanPickTraits() -> bool:
 	return false
 
+# Check the NOM.gd file
+func getNOM(_nom:String) -> float:
+	return 0.0
+
+func getNOMs() -> Dictionary:
+	return {}
+
 func saveData() -> Dictionary:
 	var tasksData:Array = []
 	for task in tasks:

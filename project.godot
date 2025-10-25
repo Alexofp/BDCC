@@ -999,6 +999,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/PlayerSlaverySoft/NOET.gd"
 }, {
+"base": "Object",
+"class": "NOM",
+"language": "GDScript",
+"path": "res://Game/PlayerSlaverySoft/NOM.gd"
+}, {
 "base": "InmateGenerator",
 "class": "NakedSlaveGenerator",
 "language": "GDScript",
@@ -1993,6 +1998,7 @@ _global_script_class_icons={
 "MyBoneAttachment": "",
 "MyProjectSettings": "",
 "NOET": "",
+"NOM": "",
 "NakedSlaveGenerator": "",
 "NemesisReason": "",
 "NovaModule": "",

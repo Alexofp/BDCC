@@ -456,6 +456,12 @@ func sayTaskInfo():
 		return
 	saynn(Util.join(result, "\n"))
 
+func getOwnerNOM(_nom:String) -> float:
+	var theNpcOwner := getNpcOwner()
+	if(theNpcOwner):
+		return 0.0
+	return theNpcOwner.getNOM(_nom)
+
 func getSubEventScore(_event, _tag:String, _args:Array) -> float:
 	var theLevel:int = _event.getNpcOwner().getLevel()
 	if(theLevel < eventMinLevel):

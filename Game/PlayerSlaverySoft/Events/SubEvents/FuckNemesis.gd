@@ -24,7 +24,7 @@ func start():
 	
 	saynn("Your owner thinks about it for a little bit..")
 	
-	if(smartChance(50.0+ownerPersonality(PersonalityStat.Subby)*70.0)):
+	if(smartChance(50.0+ownerPersonality(PersonalityStat.Subby)*70.0 - 200.0*getOwnerNOM(NOM.NoSharing) + 30.0*getOwnerNOM(NOM.Sharing))):
 		setSubResult(SUB_END)
 		talkModular(C_OWNER, C_EXTRA1, "SoftSlaveryFuckNemesisYes") #Sure
 		saynn("Your nemesis smiles as {npc1.he} {npc1.verb('approach', 'approaches')} you..")

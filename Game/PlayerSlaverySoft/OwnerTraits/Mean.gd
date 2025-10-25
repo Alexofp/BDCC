@@ -30,3 +30,8 @@ func getEventTags(_npcOwner) -> Dictionary:
 	return {
 		NOET.Mean: 3.0,
 	}
+
+func getNOMs(_npcOwner) -> Dictionary:
+	return {
+		NOM.Mean: 1.0,
+	}

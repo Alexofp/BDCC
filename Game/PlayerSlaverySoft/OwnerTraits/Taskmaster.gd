@@ -7,7 +7,7 @@ func getVisibleName() -> String:
 	return "Taskmaster"
 
 func getVisibleDescription() -> String:
-	return "Your owner really likes to give you tasks to do."
+	return "The owner really likes to give their slave tasks to do."
 
 func getPossiblePCNamesForLevel(_npcOwner, _level:int) -> Array:
 	#var ownerHasVagina:bool = _npcOwner.getOwner().hasVagina()
@@ -20,7 +20,7 @@ func getPossiblePCNamesForLevel(_npcOwner, _level:int) -> Array:
 func getTraitScore(_npcOwner) -> float:
 	var personality:Personality = _npcOwner.getOwner().getPersonality()
 	var fetishHolder:FetishHolder = _npcOwner.getOwner().getFetishHolder()
-	return -personality.getStat(PersonalityStat.Naive) - personality.getStat(PersonalityStat.Impatient) + fetishHolder.getFetish(Fetish.Rigging)
+	return -personality.getStat(PersonalityStat.Naive) - personality.getStat(PersonalityStat.Impatient) + max(fetishHolder.getFetish(Fetish.Rigging), 0.0)
 
 func getTraitExclusiveType() -> String:
 	return "tasks"

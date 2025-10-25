@@ -27,12 +27,12 @@ func start_do(_id:String, _args:Array):
 		incMarked()
 		setState("afterBodywriting")
 	if(_id == "no"):
-		if(smartChance(max(10.0 - ownerPersonality(PersonalityStat.Mean)*80.0, 10.0), 0.0)):
+		if(smartChance(max(10.0 - ownerPersonality(PersonalityStat.Mean)*80.0, 10.0)+getOwnerNOM(NOM.Kind)*30.0, 0.0)):
 			setState("fineEnough")
 		else:
 			setState("fightOrMark")
 	if(_id == "pleaseno"):
-		if(smartChance(max(20.0 - ownerPersonality(PersonalityStat.Mean)*80.0, 20.0), 0.0)):
+		if(smartChance(max(20.0 - ownerPersonality(PersonalityStat.Mean)*80.0, 20.0)+getOwnerNOM(NOM.Kind)*30.0, 0.0)):
 			setState("pleaseFineEnough")
 		else:
 			setState("beggingStart")
@@ -75,12 +75,12 @@ func tryWriting_do(_id:String, _args:Array):
 		incMarked()
 		setState("afterBodywriting")
 	if(_id == "no"):
-		if(RNG.chance(markedAmount*10.0)):
+		if(RNG.chance(markedAmount*10.0+getOwnerNOM(NOM.Kind)*30.0)):
 			setState("fineEnough")
 		else:
 			setState("fightOrMark")
 	if(_id == "pleaseno"):
-		if(RNG.chance(markedAmount*10.0)):
+		if(RNG.chance(markedAmount*10.0+getOwnerNOM(NOM.Kind)*30.0)):
 			setState("pleaseFineEnough")
 		else:
 			setState("beggingStart")
@@ -275,7 +275,7 @@ func incMarked():
 	GM.main.addMessage("You have a received a '"+BodyWritings.getWritingText(theWritingID)+"' writing on your "+BodyWritingsZone.getZoneVisibleName(zone))
 
 func addContinueCheckExtra():
-	var extraChance:float = 50.0 - ownerPersonality(PersonalityStat.Subby)*30.0
+	var extraChance:float = 50.0 - ownerPersonality(PersonalityStat.Subby)*30.0+getOwnerNOM(NOM.Mean)*40.0
 	if(GM.pc.hasBodywritings()):
 		extraChance *= 0.9
 	
