@@ -64,6 +64,8 @@ func getFormIDs() -> Array:
 		"ProstitutionUsual",
 		"ProstitutionServiceDom",
 		"ProstitutionPricySlut",
+		"ProstitutionClientAskForDomSlut",
+		"ProstitutionClientAskForSubSlut",
 		"ProstitutionDenied",
 		"ProstitutionDeniedWhatever",
 		"ProstitutionAccept",
@@ -703,6 +705,28 @@ func getText(_id:String, _args:Dictionary):
 			"You’re paying for the best fuck of your life. "+creds+" credits.",
 			"I don’t come cheap, but once you’re done, you’ll understand why. "+creds+".",
 			"It costs extra to fuck the best, and that’s me. "+creds+" credits.",
+		]
+	if(_id == "ProstitutionClientAskForDomSlut"):
+		return [
+			"Unless you put some actual effort into making me feel good, it ain't worth my time.",
+			"You expect me to pay while I do all the work? Nah, whore, think again.",
+			"Don't see why I should listen to sluts like you. Prove you can pleasure me.",
+			"Has it even crossed your mind that I might want to bottom for you? Filthy whore.",
+			"I'm paying you for your effort. Start putting some, you bottom slut.",
+			"Your body isn't worth a single cred. Break a sweat pleasuring me.",
+			"Your whore body alone ain't making it worth. Start putting it to use.",
+			"It seems that my budget for basic whores has dried up.",
+		]
+	if(_id == "ProstitutionClientAskForSubSlut"):
+		return [
+			"You ain't having your way, brat. Start with offering yourself to me.",
+			"Get on your knees, then we'll talk.",
+			"Bend over before you speak to me, whore.",
+			"You're a little bitch for me to use. That's all you'll ever be.",
+			"All that pretense yet you're nothing but a bottom slut. Start acting like one.",
+			"Drop the act and surrender your body to me.",
+			"Do you seriously expect that to catch my attention? Kneel.",
+			"Do I look like a fucking glory hole? Bend over.",
 		]
 	if(_id == "ProstitutionDenied"):
 		return [

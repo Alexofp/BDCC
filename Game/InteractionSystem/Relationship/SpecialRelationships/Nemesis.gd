@@ -135,7 +135,9 @@ func processInteractionActionGenericScore(_scoreType:String, _value:float) -> fl
 		return _value*2.0
 	elif(_scoreType == "attack"):
 		return _value*3.0
-	elif(_scoreType == "agreeSexWithSlut"):
+	elif(_scoreType == "agreeSexWithSubSlut"):
+		return _value*1.0
+	elif(_scoreType == "agreeSexWithDomSlut"):
 		return _value*1.0
 	elif(_scoreType == "talk"):
 		return _value*0.01

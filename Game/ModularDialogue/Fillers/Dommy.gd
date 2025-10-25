@@ -64,6 +64,8 @@ func getFormIDs() -> Array:
 		"ProstitutionUsual",
 		"ProstitutionServiceDom",
 		"ProstitutionPricySlut",
+		"ProstitutionClientAskForDomSlut",
+		"ProstitutionClientAskForSubSlut",
 		"ProstitutionDenied",
 		"ProstitutionDeniedWhatever",
 		"ProstitutionAccept",
@@ -688,6 +690,30 @@ func getText(_id:String, _args:Dictionary):
 			"Expensive? Maybe. Worth it? Definitely. "+creds+" credits.",
 			"You’ll love it, sweet thing. "+creds+" credits.",
 			"Pleasure like mine comes at a price. "+creds+" credits.",
+		]
+	if(_id == "ProstitutionClientAskForDomSlut"):
+		return [
+			"A little unusual for me, but.. I'd like you to be in charge this time.",
+			"I'm a little exhausted.. Perhaps you could have your way with me?",
+			"I have a feeling you'd like to be in charge.. Don't disappoint me, hun~.",
+			"Huff.. You should dominate me. I know you want to~.",
+			"Be a good service pet, and serve me.",
+			"I'm curious what you have in store for me, hun~.",
+			"Would you help me get comfortable?~",
+			"You're rather cute~.. Would you like to have your way with me?",
+			"I'd like to see what a cutie like you can do.. When nothing holds you back..",
+		]
+	if(_id == "ProstitutionClientAskForSubSlut"):
+		return [
+			"Hun, I'd like to be the one showing you around~.",
+			"Maybe another time. I'm looking for someone really submissive~.",
+			"Nah cutie, I'm looking for someone to fill up. You'd like that, wouldn't you~.",
+			"Heh sweetie, I think I have something better for you~.",
+			"I think you belong beneath me, sweetie.",
+			"Acting so confident, yet all I see is a pet begging to be forced into its place~.",
+			"There are better ways to use a plaything like you, dear~.",
+			"Act like you belong to me, sweet thing.",
+			"I want to see how obedient you'd be when I'm in control.",
 		]
 	if(_id == "ProstitutionDenied"):
 		return [

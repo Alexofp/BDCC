@@ -61,6 +61,8 @@ func getFormIDs() -> Array:
 		"ProstitutionUsual",
 		"ProstitutionServiceDom",
 		"ProstitutionPricySlut",
+		"ProstitutionClientAskForDomSlut",
+		"ProstitutionClientAskForSubSlut",
 		"ProstitutionDenied",
 		"ProstitutionDeniedWhatever",
 		"ProstitutionAccept",
@@ -694,6 +696,30 @@ func getText(_id:String, _args:Dictionary):
 			"I cost more, but you’ll see why, "+creds+" credits.",
 			"It’s not cheap, but it’s worth it, "+creds+" credits.",
 			"I’m the best you’ll get, "+creds+" credits.",
+		]
+	if(_id == "ProstitutionClientAskForDomSlut"):
+		return [
+			"I'd like to see you being the one in control.",
+			"Not really interested, sorry. Unless.. you'd be the one in charge?",
+			"Not quite what I'm looking for, sorry.. I need a service dom.",
+			"Huff.. I want to see all the ways you'd try to get me off..",
+			"There is something else on my mind, and.. it gets increasingly difficult to ignore... I'd really like to submit to you.",
+			"Hmff.. Would you like to have your way with me?",
+			"I'm curious what you'd do to me, given the chance..",
+			"Not really feeling like being in control.. But I could see myself entrusting my body to you.. Hmffh.",
+		]
+	if(_id == "ProstitutionClientAskForSubSlut"):
+		return [
+			"I'd like to be in charge, if you don't mind.",
+			"That's a tempting offer.. Though, I'd like you to submit to me instead.",
+			"Not quite what I was expecting.. Would you submit to me instead?",
+			"I'll pass. Unless.. there's an offer that involves you being on all fours..",
+			"Do you have any other offers on the table? I'd prefer it was you. On the table, that is..",
+			"I need to pin you down so bad... Sorry, where was I again..",
+			"Seeing you this dominant only increases my desire to bend you over..",
+			"Would you like to be an obedient playtoy for me?",
+			"How about I use you to satisfy all my needs?",
+			"I crave to bend you over the first crate or piece of furniture that I can find.",
 		]
 	if(_id == "ProstitutionDenied"):
 		return [
