@@ -500,30 +500,24 @@ func getScoreTypeValueGenericInternal(_scoreType:String, curPawn:CharacterPawn, 
 		finalScore *= dirToPawn.getWhoreRepMult()
 		
 		return finalScore
-	elif(_scoreType == "agreeSexWithSlut"):
+	elif(_scoreType == "agreeSexWithSubSlut"):
 		var affection:float = GM.main.RS.getAffection(curID, dirToID)
 		var lust:float = GM.main.RS.getLust(curID, dirToID)
 		var dommyness:float = curPawn.scorePersonalityMax({PersonalityStat.Subby: -1.0})
-		var theirDommyness:float = dirToPawn.scorePersonalityMax({PersonalityStat.Subby: -1.0})
 		#var naiveness = curPawn.scorePersonalityMax({PersonalityStat.Naive: 1.0})
 		var meanness = curPawn.scorePersonalityMax({PersonalityStat.Mean: 1.0})
 		var isInHeat = GlobalRegistry.getCharacter(curID).isInHeat()
 		var anger:float = curPawn.getAngerClamped()
 		var theirSlutScore:float = dirToPawn.calculateSlutScore()
 		#var slutScore:float = curPawn.calculateSlutScore()
-		var isDomSlut:bool = (call("isSlutDom") if has_method("isSlutDom") else false)
 		
 		var finalScore:float = 0.2
 		
 		finalScore += theirSlutScore
 		
-		if(isDomSlut):
-			finalScore *= (1.0 + theirDommyness)
-			finalScore *= (1.0 - anger*0.5)
-		else:
-			finalScore *= (1.0 + dommyness)
-			finalScore *= (1.0 + abs(meanness)*0.2)
-			finalScore *= (1.0 + anger*0.3)
+		finalScore *= (1.0 + dommyness)
+		finalScore *= (1.0 + abs(meanness)*0.2)
+		finalScore *= (1.0 + anger*0.3)
 		
 		finalScore *= (1.0 + lust*lust*0.5)
 		finalScore *= (1.0 + affection*affection*0.3)
@@ -532,10 +526,34 @@ func getScoreTypeValueGenericInternal(_scoreType:String, curPawn:CharacterPawn, 
 			finalScore *= 1.5
 		
 		finalScore *= dirToPawn.getSlutSkillMod()
-		if(!isDomSlut):
-			finalScore *= dirToPawn.getWhoreRepMult()
-		else:
-			finalScore *= dirToPawn.getAlphaRepMult()
+		finalScore *= dirToPawn.getWhoreRepMult()
+		
+		return finalScore
+	elif(_scoreType == "agreeSexWithDomSlut"):
+		var affection:float = GM.main.RS.getAffection(curID, dirToID)
+		var lust:float = GM.main.RS.getLust(curID, dirToID)
+		var theirDommyness:float = dirToPawn.scorePersonalityMax({PersonalityStat.Subby: -1.0})
+		#var naiveness = curPawn.scorePersonalityMax({PersonalityStat.Naive: 1.0})
+		var isInHeat = GlobalRegistry.getCharacter(curID).isInHeat()
+		var anger:float = curPawn.getAngerClamped()
+		var theirSlutScore:float = dirToPawn.calculateSlutScore()
+		#var slutScore:float = curPawn.calculateSlutScore()
+		
+		var finalScore:float = 0.2
+		
+		finalScore += theirSlutScore
+		
+		finalScore *= (1.0 + theirDommyness)
+		finalScore *= (1.0 - anger*0.5)
+		
+		finalScore *= (1.0 + lust*lust*0.5)
+		finalScore *= (1.0 + affection*affection*0.3)
+		
+		if(isInHeat):
+			finalScore *= 1.5
+		
+		finalScore *= dirToPawn.getSlutSkillMod()
+		finalScore *= dirToPawn.getAlphaRepMult()
 		
 		return finalScore
 		
