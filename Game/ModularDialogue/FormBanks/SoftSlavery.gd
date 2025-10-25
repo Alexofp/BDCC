@@ -179,5 +179,7 @@ func getForms() -> Dictionary:
 		"SoftSlaveryParadeGuardLost": form("Go away, inmate.", {main=CHAR, target=CHAR}, "main", "target"),
 		
 		"SoftSlaveryPunishSkip": form("You're lucky that I'm feeling kind today, {npc.npcSlave}.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryTaskSlutGive": form("I want you to do something very slutty for me, {npc.npcSlave}.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryTaskCheck": form("It better be done the next time I check on you.", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlavery": form("", {main=CHAR, target=CHAR}, "main", "target"),
 	}

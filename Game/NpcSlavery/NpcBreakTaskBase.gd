@@ -16,6 +16,9 @@ func getSlaveTypeWeights(_isSlaveLevelup):
 func getSlutlockWeight() -> float:
 	return 0.0
 
+func getNpcOwnerWeight(_npcOwner) -> float:
+	return getSlutlockWeight()
+
 func isPossibleForPC(_pc, _npc, _isSlaveLevelup):
 	return true
 
@@ -117,6 +120,10 @@ func scaledRangeWithDifficulty(minv:int, maxv:int, _difficulty:float):
 
 func getSexGoalWeightModifier(_sexGoalID:String) -> float:
 	return 0.0
+
+func getNpcOwnerDialogueLines() -> Array:
+	return [
+	]
 
 func saveData():
 	var data = {

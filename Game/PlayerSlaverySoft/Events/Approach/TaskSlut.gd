@@ -6,8 +6,6 @@ func _init():
 	id = "TaskSlut"
 	reactsToTags = [E_APPROACH]
 	
-	eventMinLevel = 0
-	eventMaxLevel = 2
 	eventWeight = 0.5
 	eventTags = {NOET.Tasks: 1.0}
 
@@ -15,14 +13,28 @@ func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> 
 	var theNpcOwner := getNpcOwner()
 	if(!theNpcOwner.tasks.empty()):
 		return false
-	theNpcOwner.generateTasks()
+	theNpcOwner.generateTasks(RNG.randi_range(2, 5))
+	GM.main.addMessage("Tasks menu updated.")
 	return true
 
 func start():
 	playStand()
-	saynn("YOUR OWNER GIVES YOU TASKS!")
+	saynn("YOUR OWNER APPROACHES YOU!")
+	
+	talkModularOwnerToPC("SoftSlaveryTaskSlutGive")
+	
+	saynn("YOUR OWNER STARTS LISTING TASKS.")
 	
 	sayTaskInfo()
+	
+	#Random line based on a random task
+	sayOwnerRandomTaskLine()
+	
+	saynn("YOUR OWNER SMILES.")
+	
+	talkModularOwnerToPC("SoftSlaveryTaskCheck")
+	
+	saynn("Looks like you only have a few days to complete these..")
 	
 	addButton("Okay", "Agree to the tasks", "endEvent")
 	#addButton("Different?", "Ask the owner to give you different tasks", "askDifferent")

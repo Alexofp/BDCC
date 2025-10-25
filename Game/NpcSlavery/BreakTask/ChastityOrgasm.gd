@@ -39,6 +39,15 @@ func getTaskString():
 func getTaskHint(_isSlaveLevelup):
 	return "Force them to orgasm while they are wearing a chastity cage"
 
+func getNpcOwnerDialogueLines() -> Array:
+	return [
+		"Time for a challenge. I want you to cum in your chastity cage.",
+		"Prove your devotion. Orgasm while you're still locked up.",
+		"You don't need to be free to climax. Make yourself cum in chastity.",
+		"Your cage shouldn't stop you. I want to see you orgasm through it.",
+		"A true slut can cum even when caged. Show me you're a true slut.",
+	]
+
 func getSexGoalWeightModifier(_sexGoalID:String) -> float:
 	if(_sexGoalID == SexGoal.FuckAnal):
 		return 3.0

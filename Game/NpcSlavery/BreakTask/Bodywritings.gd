@@ -37,6 +37,15 @@ func getTaskString():
 func getTaskHint(_isSlaveLevelup):
 	return "Draw dirty things on them!"
 
+func getNpcOwnerDialogueLines() -> Array:
+	return [
+		"Your skin is looking too clean. Go get it marked up.",
+		"I want you covered in ink. Get some lewd writings on you.",
+		"You're a canvas. Go have someone paint some filthy words on you.",
+		"Your body should advertise your purpose. Get it written on.",
+		"Go get some bodywritings. Make sure they're appropriately slutty.",
+	]
+
 func getBodywritingsAmount(_npc) -> int:
 	var theNpc:BaseCharacter = _npc
 	if(theNpc.hasEffect(StatusEffect.HasBodyWritings)):

@@ -35,6 +35,15 @@ func getTaskString():
 func getTaskHint(_isSlaveLevelup):
 	return "Choke them during sex"
 
+func getNpcOwnerDialogueLines() -> Array:
+	return [
+		"I want your throat bruised. Get yourself choked properly.",
+		"You need to feel owned. Go get choked during sex.",
+		"Your air is a privilege. Find someone to choke you until you see stars.",
+		"A good fuck includes a hand on your throat. Go get choked.",
+		"Show me you can take it. Get choked until you're dizzy.",
+	]
+
 func getSexGoalWeightModifier(_sexGoalID:String) -> float:
 	if(_sexGoalID == SexGoal.Choke):
 		return 3.0

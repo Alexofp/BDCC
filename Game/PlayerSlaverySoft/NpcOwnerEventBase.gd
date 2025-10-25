@@ -456,6 +456,17 @@ func sayTaskInfo():
 		return
 	saynn(Util.join(result, "\n"))
 
+func sayOwnerRandomTaskLine():
+	var theNpcOwner := getNpcOwner()
+	if(!theNpcOwner):
+		return
+	var possible:Array = []
+	for task in theNpcOwner.tasks:
+		possible.append_array(task.getNpcOwnerDialogueLines())
+	if(possible.empty()):
+		return
+	talkOwner(RNG.pick(possible))
+
 func getOwnerNOM(_nom:String) -> float:
 	var theNpcOwner := getNpcOwner()
 	if(theNpcOwner):

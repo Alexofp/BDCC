@@ -11,6 +11,7 @@ var nextApproachDay:int = 0
 
 var hasTasks:bool = false
 var tasks:Array = []
+var tasksCompletedReminded:bool = false
 
 var punishAmount:int = 0
 var pcName:String = "slave"
@@ -175,6 +176,7 @@ func onNewDay():
 
 func generateTasks(howManyTasks:int = 2):
 	hasTasks = true
+	tasksCompletedReminded = false
 	tasks.clear()
 	var theChar = GM.pc
 	if(theChar == null):
@@ -193,7 +195,7 @@ func generateTasks(howManyTasks:int = 2):
 		#if(!taskRef.isPossibleForPC(GM.pc, theChar, _isSlaveLevelup)):
 		#	continue
 		
-		var taskWeight = taskRef.getSlutlockWeight()
+		var taskWeight:float = taskRef.getNpcOwnerWeight(self)
 		
 		weightMap.append([taskRef, taskWeight])
 	
@@ -219,11 +221,11 @@ func isEverythingCompleted():
 	return true
 
 func onSlutTaskCompleted(_theTask):
-#	if(!canRemoveReminded && isEverythingCompleted()):
-#		canRemoveReminded = true
-#
-#		if(GM.main != null):
-#			GM.main.addMessage("One of your SlutLocks beeps and turns green!")
+	if(!tasksCompletedReminded && isEverythingCompleted()):
+		tasksCompletedReminded = true
+
+		if(GM.main != null):
+			GM.main.addMessage("You have completed the tasks that "+getOwnerName()+" gave you!")
 	pass
 
 func handleSexEvent(sexEvent:SexEvent):
@@ -264,7 +266,7 @@ func getQuestProgressText() -> String:
 	return Util.join(getQuestProgressArray(), "\n")
 
 func hasGivenPCTasks() -> bool:
-	return hasTasks
+	return !tasks.empty()
 
 func getPunishAmount() -> int:
 	return punishAmount
@@ -415,6 +417,7 @@ func saveData() -> Dictionary:
 		eh = eventHistory,
 		fp = freedomPrice,
 		spc = skipPunishCooldown,
+		tcr = tasksCompletedReminded,
 	}
 
 func loadData(_data:Dictionary):
@@ -428,9 +431,10 @@ func loadData(_data:Dictionary):
 	eventHistory = SAVE.loadVar(_data, "eh", [])
 	freedomPrice = SAVE.loadVar(_data, "fp", 1000)
 	skipPunishCooldown = SAVE.loadVar(_data, "spc", 0)
+	tasksCompletedReminded = SAVE.loadVar(_data, "tcr", false)
 	
 	tasks.clear()
-	var tasksData:Array = SAVE.loadVar(_data, "tasks", [])
+	var tasksData:Array = SAVE.loadVar(_data, "t", [])
 	for taskData in tasksData:
 		var taskID = SAVE.loadVar(taskData, "id", "")
 		var taskObj:NpcBreakTaskBase = GlobalRegistry.createSlaveBreakTask(taskID)
