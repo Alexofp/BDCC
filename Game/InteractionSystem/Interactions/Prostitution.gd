@@ -413,7 +413,7 @@ func slut_won_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func slut_won_kick_text():
-	saynn("{main.You} {main.youVerb('decide')} to just kick {client.name} away from {main.yourHis} working spot..")
+	saynn("{main.You} {main.youVerb('decide')} to just kick {client.you} away from {main.yourHis} working spot..")
 
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
 
