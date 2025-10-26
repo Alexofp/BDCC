@@ -8,12 +8,15 @@ func getSlaveTypeWeights(_isSlaveLevelup):
 		SlaveType.All : 0.4,
 	}
 
+func getNpcOwnerWeight(_npcOwner) -> float:
+	return 0.2
+
 func isPossibleFor(_npc, _isSlaveLevelup):
+	if(!_npc.hasBodypart(BodypartSlot.Breasts)):
+		return false
 	if(_npc.hasSmallBreasts()):
 		return false
 	if(!_npc.isLactating()):
-		return false
-	if(!_npc.hasBodypart(BodypartSlot.Breasts)):
 		return false
 	return true
 
@@ -45,6 +48,9 @@ func onSexEvent(_npc, _event:SexEvent):
 
 func getTaskString():
 	return "Milk with breast pump: "+getProgressStringFluids()
+
+func getTaskStringSlutLock():
+	return "Get milked with a breast pump: "+getProgressStringFluids()
 
 func getTaskHint(_isSlaveLevelup):
 	return "Put a breastpump on them and collect this much milk!"

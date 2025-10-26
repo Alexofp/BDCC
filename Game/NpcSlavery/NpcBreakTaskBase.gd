@@ -2,6 +2,8 @@ extends Reference
 class_name NpcBreakTaskBase
 
 var id = "Error"
+var taskPools:Array = [NpcTaskPool.Normal]
+
 var taskIsCompleted = false
 var currentAmount = 0
 var needAmount = 1
@@ -51,6 +53,9 @@ func onSexEvent(_npc, _event:SexEvent):
 	return false
 
 func onSexEnded(_npc, _contex = {}):
+	pass
+
+func onInteractionEvent(_eventID:String, _args:Dictionary):
 	pass
 
 func getTaskString():

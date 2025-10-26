@@ -653,6 +653,7 @@ func registerEverything():
 	
 	registerSpeechModifiersFolder("res://Game/SpeechModifiers/")
 	registerSlaveBreakTaskFolder("res://Game/NpcSlavery/BreakTask/")
+	registerSlaveBreakTaskFolder("res://Game/PlayerSlaverySoft/ExtraTasks/")
 	registerSlaveTypeFolder("res://Game/NpcSlavery/SlaveType/")
 	registerSlaveActionFolder("res://Game/NpcSlavery/SlaveActions/")
 	registerSlaveEventFolder("res://Game/NpcSlavery/SlaveEvents/")

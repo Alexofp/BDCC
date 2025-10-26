@@ -428,10 +428,6 @@ func isSlaveToPlayer():
 func getNpcSlavery() -> NpcSlave:
 	return getChar().getNpcSlavery()
 
-func sendSlaveryActivityEvent(_eventID:String, _args:Dictionary):
-	if(isSlaveToPlayer()):
-		getNpcSlavery().onInteractionEvent(_eventID, _args)
-
 func getSlutSkillMod() -> float:
 	if(!isSlaveToPlayer()):
 		return 1.0

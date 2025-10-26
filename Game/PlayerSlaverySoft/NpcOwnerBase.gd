@@ -174,7 +174,7 @@ func onNewDay():
 	
 	checkIfTasksGotCompleted()
 
-func generateTasks(howManyTasks:int = 2):
+func generateTasks(howManyTasks:int = 2, taskPool:String = NpcTaskPool.Normal):
 	hasTasks = true
 	tasksCompletedReminded = false
 	tasks.clear()
@@ -182,14 +182,16 @@ func generateTasks(howManyTasks:int = 2):
 	if(theChar == null):
 		return
 	
-	var weightMap = []
-	var _isSlaveLevelup = false
-	var difficultyMin = 1.0
-	var difficultyMax = 2.0
+	var weightMap:Array = []
+	var _isSlaveLevelup:bool = false
+	var difficultyMin:float = 1.0
+	var difficultyMax:float = 2.0
 	
 	for taskID in GlobalRegistry.getSlaveBreakTaskRefs():
 		var taskRef:NpcBreakTaskBase = GlobalRegistry.getSlaveBreakTaskRef(taskID)
 		
+		if(!taskRef.taskPools.has(taskPool)):
+			continue
 		if(!taskRef.isPossibleForSlutlock(theChar)):
 			continue
 		#if(!taskRef.isPossibleForPC(GM.pc, theChar, _isSlaveLevelup)):
@@ -237,6 +239,10 @@ func onSexEnded(_contex = {}):
 	var theChar = GM.pc
 	for task in tasks:
 		task.onSexEnded(theChar, _contex)
+
+func onInteractionEvent(_eventID:String, _args:Dictionary):
+	for task in tasks:
+		task.onInteractionEvent(_eventID, _args)
 
 func clearTasks():
 	tasks = []

@@ -1089,6 +1089,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/NpcSlavery/NpcSlave.gd"
 }, {
+"base": "Object",
+"class": "NpcTaskPool",
+"language": "GDScript",
+"path": "res://Game/NpcSlavery/NpcTaskPool.gd"
+}, {
 "base": "CharacterGeneratorBase",
 "class": "NurseGenerator",
 "language": "GDScript",
@@ -2016,6 +2021,7 @@ _global_script_class_icons={
 "NpcOwnerTraitBase": "",
 "NpcRank": "",
 "NpcSlave": "",
+"NpcTaskPool": "",
 "NurseGenerator": "",
 "NurseryTaskBase": "",
 "Orifice": "",

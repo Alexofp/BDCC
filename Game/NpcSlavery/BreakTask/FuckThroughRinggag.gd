@@ -8,6 +8,9 @@ func getSlaveTypeWeights(_isSlaveLevelup):
 		SlaveType.All : 0.1,
 	}
 
+func getNpcOwnerWeight(_npcOwner) -> float:
+	return 0.1
+
 func isPossibleFor(_npc, _isSlaveLevelup):
 	return true
 
@@ -34,6 +37,9 @@ func onSexEvent(_npc, _event:SexEvent):
 
 func getTaskString():
 	return "Fuck through ring-gag"
+
+func getTaskStringSlutLock():
+	return "Get face-fucked through ring-gag"
 
 func getTaskHint(_isSlaveLevelup):
 	return "Put a ring-gag into their mouth and use your penis or strapon to fuck their throat"

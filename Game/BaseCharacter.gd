@@ -2810,6 +2810,15 @@ func applyBodypartsSkinData(theSkinData):
 			if(bodypartSkinData.has("b")):
 				bodypart.pickedBColor = bodypartSkinData["b"]
 
+func sendInteractionEvent(_eventID:String, _args:Dictionary):
+	if(isSlaveToPlayer()):
+		getNpcSlavery().onInteractionEvent(_eventID, _args)
+	if(isPlayer()):
+		for ownerID in GM.main.RS.special:
+			var theSpecialRelationship = GM.main.RS.special[ownerID]
+			if(theSpecialRelationship.id == "SoftSlavery" && theSpecialRelationship.npcOwner):
+				theSpecialRelationship.npcOwner.onInteractionEvent(_eventID, _args)
+
 func sendSexEvent(event):
 	onSexEvent(event)
 

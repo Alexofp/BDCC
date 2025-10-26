@@ -14,7 +14,14 @@ func getSlutlockWeight() -> float:
 func isPossibleFor(_npc, _isSlaveLevelup):
 	if(_npc.getFetishHolder().getFetishValue(Fetish.AnalSexReceiving) < 0.0):
 		return false
-	if(!_npc.hasReachablePenis()):
+	if(!_npc.hasReachablePenis() && !_npc.isWearingChastityCage()):
+		return false
+	return true
+
+func isPossibleForSlutlock(_npc):
+	if(!_npc.canZoneOrgasm(BodypartSlot.Anus) && !_npc.hasReachableVagina()):
+		return false
+	if(!_npc.hasReachablePenis() && !_npc.isWearingChastityCage()):
 		return false
 	return true
 

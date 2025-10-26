@@ -1797,9 +1797,9 @@ func findProstitutionTargetsNearby(_ignoreList:Array = []) -> Array:
 	return result
 
 func sendSlaveryActivityEvent(_role:String, _eventID:String, _args:Dictionary):
-	var thePawn = getRolePawn(_role)
-	if(thePawn != null):
-		thePawn.sendSlaveryActivityEvent(_eventID, _args)
+	var theChar = getRoleChar(_role)
+	if(theChar != null):
+		theChar.sendInteractionEvent(_eventID, _args)
 
 func shouldBeStoppedOnNewDay() -> bool:
 	for role in involvedPawns:
