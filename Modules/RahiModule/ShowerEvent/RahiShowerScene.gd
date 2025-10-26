@@ -238,7 +238,7 @@ func _run():
 
 		saynn("[say=rahi]S-she is.. c-close..[/say]")
 
-		saynn("Already, huh. You can feel her soft inner walls clenching around your shaft, her legs shivering. The running water hides it but inside she is wet and fully aroused. Your hips smaking against her butt makes it jiggle with each thrust, her breasts are bouncing up and down as you pound at her cervix, slowly stretching it open too. You feel like you’re close too..")
+		saynn("Already, huh. You can feel her soft inner walls clenching around your shaft, her legs shivering. The running water hides it but inside she is wet and fully aroused. Your hips smacking against her butt makes it jiggle with each thrust, her breasts are bouncing up and down as you pound at her cervix, slowly stretching it open too. You feel like you’re close too..")
 	
 		if(!usedCondom):
 			addButton("Cum inside", "Breed the needy kitty", "cum_inside")

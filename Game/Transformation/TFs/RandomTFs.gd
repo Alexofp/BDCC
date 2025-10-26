@@ -16,7 +16,7 @@ func getPillName() -> String:
 
 func getUnlockData() -> Dictionary:
 	return {
-		eliza = "Interesti-.. wait.. The heck is this. Wow. Wow! It's changing! Like.. the molecular structure of this drug is changing as we speak. I honestly have no idea if this is even safe to injest.. it could do anything. It's not even a drug at that point, it's just a concentrated dose of 'Unstable mutagen'.",
+		eliza = "Interesti-.. wait.. The heck is this. Wow. Wow! It's changing! Like.. the molecular structure of this drug is changing as we speak. I honestly have no idea if this is even safe to ingest.. it could do anything. It's not even a drug at that point, it's just a concentrated dose of 'Unstable mutagen'.",
 	}
 
 func getPillDatabaseDesc() -> String:
