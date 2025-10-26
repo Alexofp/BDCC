@@ -62,6 +62,9 @@ func canEnslaveReason(_isKidnap:bool) -> Array:
 func canTalkWithPlayer() -> bool:
 	return true
 
+func shouldPreferToSpawnPawn() -> bool:
+	return false
+
 func showMessage(_text:String):
 	GM.main.addMessage(_text)
 

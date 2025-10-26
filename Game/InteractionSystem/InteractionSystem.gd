@@ -527,6 +527,22 @@ func calculatePawnDistribution() -> Dictionary:
 	
 	return result
 
+func trySpawnSpecialRelationshipPawn() -> bool:
+	var allSpecial:Dictionary = GM.main.RS.special
+	if(allSpecial.empty()):
+		return false
+	
+	#for _i in range(5):
+	var theRandomSpecialCharID:String = RNG.pick(allSpecial)
+	if(usedCharIDsToday.has(theRandomSpecialCharID)):
+		#continue
+		return false
+	var theRelationship:SpecialRelationshipBase = allSpecial[theRandomSpecialCharID]
+	if(theRelationship.shouldPreferToSpawnPawn()):
+		spawnPawn(theRandomSpecialCharID)
+		return true
+	
+	return false
 
 func trySpawnPawn(specificPawnType = null):
 	var randomPawnType = specificPawnType
@@ -597,6 +613,8 @@ func checkAddNewPawns():
 	if(!RNG.chance(chanceToAddNew)):
 		return
 	
+	if(trySpawnSpecialRelationshipPawn()):
+		return
 	trySpawnPawn()
 
 func updatePCLocation():

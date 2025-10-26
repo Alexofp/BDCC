@@ -81,6 +81,11 @@ func canEnslaveReason(_isKidnap:bool) -> Array:
 func canTalkWithPlayer() -> bool: # Owners 'talk' with the player through npc owner events
 	return false
 
+func shouldPreferToSpawnPawn() -> bool:
+	if(npcOwner):
+		return npcOwner.shouldPreferToSpawnPawn()
+	return false
+
 func saveData() -> Dictionary:
 	var data := .saveData()
 	

@@ -406,6 +406,9 @@ func getFreePawnsNear(maxDepth:int, maxDist:float=-1.0, minSocial:float = 0.5) -
 func talk(_role:int, _text:String):
 	saynn("[say="+convertRoleToAlias(_role)+"]"+_text+"[/say]")
 
+func talkCharID(_charID:String, _text:String):
+	saynn("[say="+_charID+"]"+_text+"[/say]")
+
 func talkOwner(_text:String):
 	talk(C_OWNER, _text)
 

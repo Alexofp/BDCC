@@ -396,6 +396,9 @@ func getNOM(_nom:String) -> float:
 func getNOMs() -> Dictionary:
 	return {}
 
+func shouldPreferToSpawnPawn() -> bool:
+	return shouldOwnerApproachPC()
+
 func saveData() -> Dictionary:
 	var tasksData:Array = []
 	for task in tasks:

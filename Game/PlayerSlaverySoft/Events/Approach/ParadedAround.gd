@@ -88,11 +88,31 @@ func checkUniqueTarget(_target:String):
 		setState("pCanteen")
 	if(_target in ["main_hallroom1"]):
 		setState("pVendomat")
+	if(_target in ["med_lobbymain"]):
+		if(GM.pc.getPainLevel() > 0.4):
+			setState("pMedical")
 
 func getDoState() -> String:
-	if(state in ["pShower", "pStocksTease", "pCanteen", "pVendomat"]):
+	if(state in ["pShower", "pStocksTease", "pCanteen", "pVendomat", "pMedical"]):
 		return "paraded"
 	return .getDoState()
+
+func pMedical():
+	playAnimation(StageScene.Duo, "stand", {npc="eliza"})
+	saynn("{npc.name} brings you down to the medical wing.")
+	talkOwner("My {npc.npcSlave} isn't doing too well.")
+	talkCharID("eliza", "Oh, I have something that can help.")
+	saynn("The feline doctor walks up to you and feeds you a little pill!")
+	talkCharID("eliza", "This should help~.")
+	saynn("Your owner nods and pulls you away from the counter.")
+	
+	if(onlyOnce()):
+		GM.pc.addPain(-100)
+		GM.pc.addStamina(150)
+		GM.main.addMessage("You feel better!")
+	
+	paradedOutcome()
+	
 
 func pVendomat():
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_OWNER)})

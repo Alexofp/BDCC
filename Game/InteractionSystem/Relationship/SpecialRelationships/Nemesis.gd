@@ -149,6 +149,9 @@ func processInteractionActionGenericScore(_scoreType:String, _value:float) -> fl
 func getReason() -> int:
 	return reason
 
+func shouldPreferToSpawnPawn() -> bool:
+	return gonnaAmbush
+
 func saveData() -> Dictionary:
 	var data := .saveData()
 	
