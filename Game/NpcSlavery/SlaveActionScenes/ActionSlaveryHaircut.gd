@@ -8,6 +8,7 @@ var colorPickerScene = preload("res://UI/ColorPickerWidget.tscn")
 var rememberedColor = Color.white
 
 var isAlreadyAtBathroom = false
+var savedPage:int = 0
 
 func _initScene(_args = []):
 	npcID = _args[0]
@@ -26,6 +27,7 @@ func _init():
 
 func _run():
 	if(state == ""):
+		savedPage = 0
 		addCharacter(npcID)
 		if(!isAlreadyAtBathroom):
 			aimCameraAndSetLocName("main_bathroom1")
@@ -51,19 +53,35 @@ func _run():
 		addButton("Done", "Enough tinkering", "endthescene")
 
 	if(state == "changepartskinmenu"):
+		saynn("Pick the haircut style that you want to see on your slave")
+
 		var bodypart = npc.getBodypart(BodypartSlot.Hair)
-		addButton("Back", "Go back", "")
+		addButton("BACK", "Go back", "")
 		
 		if(bodypart.hasCustomSkinPattern()):
-			addButton("Default", "Use the default skin pattern", "changepartskinmenu_select", [null])
+			var defaultSkinIsActive:bool = (bodypart.pickedSkin == null)
+			var defaultSkinName:String = ("[Default] " if(defaultSkinIsActive) else "Default")
+			var defaultSkinDesc:String = "Currently using the default skin pattern" if(defaultSkinIsActive) else "Use the default skin pattern"
+			addButton(defaultSkinName, defaultSkinDesc, "changepartskinmenu_select", [null])
 			for skinID in GlobalRegistry.getPartSkins(bodypart.id):
-				var theSkin = GlobalRegistry.getPartSkin(bodypart.id, skinID)
-				addButton(theSkin.getName(), "Pick this skin"+theSkin.getExtraDesc(), "changepartskinmenu_select", [skinID])
+				var theSkin:PartSkinBase = GlobalRegistry.getPartSkin(bodypart.id, skinID)
+				var theSkinIsActive:bool = (bodypart.pickedSkin == skinID)
+				var theSkinName:String = (("["+theSkin.getName()+"]") if theSkinIsActive else theSkin.getName())
+				var theSkinDesc:String = "This is the currently selected skin" if(theSkinIsActive) else "Pick this skin"
+				addButton(theSkinName, theSkinDesc+theSkin.getExtraDesc(), "changepartskinmenu_select", [skinID])
 		else:
-			addButton("Same as base", "Inherit the skin from the base", "changepartskinmenu_select", [null])
+			var inheritedSkinIsActive = (bodypart.pickedSkin == null)
+			var inheritedSkinName = ("[Same as base] " if(inheritedSkinIsActive) else "Same as base")
+			var inheritedSkinDesc = "Currently inheriting the skin from the base" if(inheritedSkinIsActive) else "Inherit the skin from the base"
+			addButton(inheritedSkinName, inheritedSkinDesc, "changepartskinmenu_select", [null])
 			for skinID in GlobalRegistry.getSkinsAllKeys():
-				var theSkin = GlobalRegistry.getSkin(skinID)
-				addButton(theSkin.getName(), "Pick this skin"+theSkin.getExtraDesc(), "changepartskinmenu_select", [skinID])
+				var theSkin:SkinBase = GlobalRegistry.getSkin(skinID)
+				var theSkinIsActive:bool = (bodypart.pickedSkin == skinID)
+				var theSkinName:String = (("["+theSkin.getName()+"]") if theSkinIsActive else theSkin.getName())
+				var theSkinDesc:String = "This is the currently selected skin" if(theSkinIsActive) else "Pick this skin"
+				addButton(theSkinName, theSkinDesc+theSkin.getExtraDesc(), "changepartskinmenu_select", [skinID])
+		if(savedPage != 0):
+			GM.ui.setCurrentPage(savedPage)
 
 
 	if(state == "changehaircutmenu"):
@@ -71,13 +89,24 @@ func _run():
 		
 		addButton("BACK", "This one is good", "")
 
+		var activeHaircutBodypartId:String = ""
+		if(npc.hasBodypart(BodypartSlot.Hair)):
+			var theHaircut:Bodypart = npc.getBodypart(BodypartSlot.Hair)
+			activeHaircutBodypartId = theHaircut.id
+
 		for bodypartID in GlobalRegistry.getBodypartsIdsBySlot(BodypartSlot.Hair):
 			var bodypart:Bodypart = GlobalRegistry.getBodypartRef(bodypartID)
+			var theHaircutIsActive:bool = (bodypart.id == activeHaircutBodypartId)
+			var theHaircutName:String = (("["+bodypart.getName()+"]") if theHaircutIsActive else bodypart.getName())
+			var theHaircutDesc:String = "This is your slave's current haircut" if(theHaircutIsActive) else "Change your slave's haircut to this one"
 			
-			addButton(bodypart.getName(), "Change your slave's hair to this one", "changehair", [bodypartID])
+			addButton(theHaircutName, theHaircutDesc, "changehair", [bodypartID])
+
+		if(savedPage != 0):
+			GM.ui.setCurrentPage(savedPage)
 
 	if(state == "changehair"):
-		saynn("You humm as you work on your hair, using the instant hair grower and scissors to shape the way your hair looks")
+		saynn("You humm as you work on your slave's hair, using the instant hair grower and scissors to shape the way {npc.his} hair looks")
 
 		addButton("Continue", "See what happens next", "changehaircutmenu")
 
@@ -126,12 +155,12 @@ func _react(_action: String, _args):
 		return
 		
 	if(_action == "changepartskinmenu_select"):
+		savedPage = GM.ui.getCurrentPage()
 		var bodypart = npc.getBodypart(BodypartSlot.Hair)
 		if(_args.size() > 0 && _args[0] == null):
 			bodypart.pickedSkin = null
 		else:
 			bodypart.pickedSkin = _args[0]
-		setState("")
 		npc.updateAppearance()
 		return
 		
@@ -156,6 +185,8 @@ func _react(_action: String, _args):
 		whichColorIsEdited = _args[0]
 	
 	if(_action == "changehair"):
+		savedPage = GM.ui.getCurrentPage()
+
 		var savedRColor = Color.white
 		var savedGColor = Color.white
 		var savedBColor = Color.white
@@ -205,6 +236,7 @@ func saveData():
 	data["npcID"] = npcID
 	data["whichColorIsEdited"] = whichColorIsEdited
 	data["isAlreadyAtBathroom"] = isAlreadyAtBathroom
+	data["savedPage"] = savedPage
 
 	return data
 	
@@ -215,3 +247,4 @@ func loadData(data):
 	npc = GlobalRegistry.getCharacter(npcID)
 	whichColorIsEdited = SAVE.loadVar(data, "whichColorIsEdited", 0)
 	isAlreadyAtBathroom = SAVE.loadVar(data, "isAlreadyAtBathroom", false)
+	savedPage = SAVE.loadVar(data, "savedPage", 0)
