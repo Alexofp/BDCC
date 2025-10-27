@@ -55,6 +55,15 @@ func getTaskStringSlutLock():
 func getTaskHint(_isSlaveLevelup):
 	return "Put a breastpump on them and collect this much milk!"
 
+func getNpcOwnerDialogueLines() -> Array:
+	return [
+		"Find someone who will get you milked with a breast pump.",
+		"Your udders need pumping. Get someone to do it.",
+		"I want your tits swollen and milked with a pump by someone.",
+		"Go find someone to milk you with a breast pump until you're dry.",
+		"Time to milk those tits. Find someone who will do it.",
+	]
+
 func getSexGoalWeightModifier(_sexGoalID:String) -> float:
 	if(_sexGoalID == SexGoal.MilkWithBreastPump):
 		return 3.0

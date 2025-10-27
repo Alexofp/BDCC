@@ -13,31 +13,21 @@ func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> 
 	var theNpcOwner := getNpcOwner()
 	if(!theNpcOwner.tasks.empty()):
 		return false
-	theNpcOwner.generateTasks(1, NpcTaskPool.Prostitution)
+	theNpcOwner.generateTasks(1, 1.0, 2.0, NpcTaskPool.Prostitution)
 	GM.main.addMessage("Tasks menu updated.")
 	return true
 
 func start():
 	playStand()
-	saynn("YOUR OWNER APPROACHES YOU!")
-	
-	talkModularOwnerToPC("SoftSlaveryTaskSlutGive")
-	
-	saynn("YOUR OWNER STARTS LISTING TASKS.")
-	
+	saynn("{npc.name} approaches you.")
+	talkModularOwnerToPC("SoftSlaveryTaskProstitutionGive")
+	saynn("Your owner gives you a task.")
 	sayTaskInfo()
-	
-	#Random line based on a random task
 	sayOwnerRandomTaskLine()
-	
-	saynn("YOUR OWNER SMILES.")
-	
+	saynn("{npc.He} {npc.verb('nod')}.")
 	talkModularOwnerToPC("SoftSlaveryTaskCheck")
-	
-	saynn("Looks like you only have a few days to complete these..")
-	
+	saynn("Looks like you only have a few days to complete it..")
 	addButton("Okay", "Agree to the tasks", "endEvent")
-	#addButton("Different?", "Ask the owner to give you different tasks", "askDifferent")
 
 func start_do(_id:String, _args:Array):
 	if(_id == "resist"):

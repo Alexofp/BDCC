@@ -63,6 +63,14 @@ func getTaskStringSlutLock():
 func getTaskHint(_isSlaveLevelup):
 	return "Fuck all their orifices at least once using your cock or with a strapon"
 
+func getNpcOwnerDialogueLines() -> Array:
+	return [
+		"All your holes need fucking. Don't come back until each one's been used.",
+		"Your holes should all be stretched by the time I see you.",
+		"Every hole of yours deserves some attention. Get them all fucked.",
+		"I want all your holes properly used before I find you."
+	]
+
 func getTotalHoles(_npc):
 	var result = 1 # Oral
 	if(_npc.hasReachableVagina()):

@@ -44,13 +44,26 @@ func onSexEvent(_npc, _event:SexEvent):
 
 func getTaskString():
 	var species = GlobalRegistry.getSpecies(speciesID)
-	var speciesName = "Unknown"
+	var speciesName:String = "Unknown"
 	if(species != null):
 		speciesName = species.getVisibleName()
 	return "Have sex with "+str(speciesName)+" species"
 
 func getTaskHint(_isSlaveLevelup):
 	return "Find someone of the right species"
+
+func getNpcOwnerDialogueLines() -> Array:
+	var species = GlobalRegistry.getSpecies(speciesID)
+	var speciesName:String = "Unknown"
+	if(species != null):
+		speciesName = species.getVisibleName()
+	
+	return [
+		"Find some "+speciesName+" to fuck you. I don't care how.",
+		"I want your next partner to be a "+speciesName+". Make it happen.",
+		"Go get fucked by a "+speciesName+". They'll enjoy you.",
+		"I want you used by a "+speciesName+". Don't ask why.",
+	]
 
 func saveData():
 	var data = .saveData()

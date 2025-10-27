@@ -44,6 +44,14 @@ func getTaskStringSlutLock():
 func getTaskHint(_isSlaveLevelup):
 	return "Put a ring-gag into their mouth and use your penis or strapon to fuck their throat"
 
+func getNpcOwnerDialogueLines() -> Array:
+	return [
+		"Go get your throat used. Someone will certainly want to do that with a ring-gag.",
+		"Find someone to fuck that pretty face of yours through a gag.",
+		"I want you to get your face properly used. And by properly I mean through a ring-gag.",
+		"I want you back with a sore throat and a used ring-gag.",
+	]
+
 func getSexGoalWeightModifier(_sexGoalID:String) -> float:
 	if(_sexGoalID == SexGoal.FuckOral):
 		return 2.0

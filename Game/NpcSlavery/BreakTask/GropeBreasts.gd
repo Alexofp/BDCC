@@ -38,6 +38,14 @@ func getTaskStringSlutLock():
 func getTaskHint(_isSlaveLevelup):
 	return "Grope their breasts for this long"
 
+func getNpcOwnerDialogueLines() -> Array:
+	return [
+		"Your tits need some attention. Go get them groped.",
+		"Go get your tits groped by strangers.",
+		"I want you to have lots of different hands on those tits before I find you again.",
+		"Your tits look lonely. Get them groped.",
+	]
+
 func getSexGoalWeightModifier(_sexGoalID:String) -> float:
 	if(_sexGoalID == SexGoal.GropeBreasts):
 		return 3.0

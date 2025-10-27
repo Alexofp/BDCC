@@ -14,8 +14,22 @@ func getNpcOwnerWeight(_npcOwner) -> float:
 func isPossibleFor(_npc, _isSlaveLevelup):
 	return true
 
+func getWhoreRepMult(_npc) -> float:
+	var rep:ReputationPlaceholder = _npc.getReputation()
+	if(!rep):
+		return 1.0
+	var whoreLevel:int = rep.getRepLevel(RepStat.Whore)
+	if(whoreLevel <= 1):
+		return 1.0
+	
+	var finalValue:float = 1.0
+	finalValue += sqrt(float(whoreLevel * 2))
+	return finalValue
+
 func generateFor(_npc, _isSlaveLevelup, _difficulty = 1.0):
-	needAmount = scaledRangeWithDifficulty(3, 6, _difficulty)
+	var _whoreMult:float = getWhoreRepMult(_npc)
+	
+	needAmount = scaledRangeWithDifficulty(5, 20, _difficulty*_whoreMult)
 
 #func onSexEvent(_npc, _event:SexEvent):
 #	if(_event.getType() == SexEvent.Choking):
@@ -35,7 +49,10 @@ func getTaskStringSlutLock():
 
 func getNpcOwnerDialogueLines() -> Array:
 	return [
-		"PROSTITUION PROSTITUION PROSTITUION.",
+		"It's time for you to earn your keep. I want you to earn credits by selling your body.",
+		"Your body is my business. Get out there and start earning credits by selling your holes.",
+		"Time to make you work your body. Start earning credits by whoring your body out.",
+		"Put that slutty body to work and earn some credits.",
 	]
 #
 #func getSexGoalWeightModifier(_sexGoalID:String) -> float:

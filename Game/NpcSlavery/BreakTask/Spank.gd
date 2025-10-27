@@ -33,6 +33,15 @@ func getTaskString():
 func getTaskHint(_isSlaveLevelup):
 	return "Spank their butt during sex, any spank will do"
 
+func getNpcOwnerDialogueLines() -> Array:
+	return [
+		"Your ass needs some color. Go get it reddened.",
+		"Find someone to put handprints on your cheeks.",
+		"I want your ass sore and marked when I find you.",
+		"Your backside deserves some attention. Get it spanked hard.",
+		"Go get your ass slapped until it's nice and warm.",
+	]
+
 func getSexGoalWeightModifier(_sexGoalID:String) -> float:
 	if(_sexGoalID == SexGoal.SpankSub):
 		return 3.0

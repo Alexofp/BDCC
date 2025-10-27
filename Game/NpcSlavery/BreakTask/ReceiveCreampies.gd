@@ -41,6 +41,14 @@ func getTaskString():
 func getTaskHint(_isSlaveLevelup):
 	return "Cum inside their pussy or ass. If you don't have a penis, you can use a loaded strapon! Worst case, just spit cum into it."
 
+func getNpcOwnerDialogueLines() -> Array:
+	return [
+		"I want to see someone's seed dripping from your hole"+("s" if GM.pc.hasVagina() else "")+".",
+		"Go get creampied, slut.",
+		"Your insides should be painted white by the time I find you.",
+		"Your hole"+("s need" if GM.pc.hasVagina() else " needs")+" to be properly bred.",
+	]
+
 func getSexGoalWeightModifier(_sexGoalID:String) -> float:
 	if(_sexGoalID == SexGoal.FuckVaginal):
 		return 3.0

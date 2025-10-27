@@ -51,6 +51,14 @@ func getTaskStringSlutLock():
 func getTaskHint(_isSlaveLevelup):
 	return "Put a penis pump on them and collect this much seed!"
 
+func getNpcOwnerDialogueLines() -> Array:
+	return [
+		"Your cock needs milking. Find someone who will do it.",
+		"Go get your cock milked by someone.",
+		"I want your balls to be milked dry. Find a stranger who will do it.",
+		"Find someone who will put a penis pump on you and milk your balls dry.",
+	]
+
 func getSexGoalWeightModifier(_sexGoalID:String) -> float:
 	if(_sexGoalID == SexGoal.MilkWithPenisPump):
 		return 3.0

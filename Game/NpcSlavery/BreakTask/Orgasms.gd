@@ -32,3 +32,9 @@ func getTaskStringSlutLock():
 
 func getTaskHint(_isSlaveLevelup):
 	return "Force them to orgasm during sex"
+
+func getNpcOwnerDialogueLines() -> Array:
+	return [
+		"Find someone that will make you orgasm. Hard.",
+		"Find someone to make you cum hard.",
+	]

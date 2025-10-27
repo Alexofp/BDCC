@@ -174,7 +174,7 @@ func onNewDay():
 	
 	checkIfTasksGotCompleted()
 
-func generateTasks(howManyTasks:int = 2, taskPool:String = NpcTaskPool.Normal):
+func generateTasks(howManyTasks:int = 2, difficultyMin:float = 1.0, difficultyMax:float = 2.0, taskPool:String = NpcTaskPool.Normal):
 	hasTasks = true
 	tasksCompletedReminded = false
 	tasks.clear()
@@ -184,8 +184,6 @@ func generateTasks(howManyTasks:int = 2, taskPool:String = NpcTaskPool.Normal):
 	
 	var weightMap:Array = []
 	var _isSlaveLevelup:bool = false
-	var difficultyMin:float = 1.0
-	var difficultyMax:float = 2.0
 	
 	for taskID in GlobalRegistry.getSlaveBreakTaskRefs():
 		var taskRef:NpcBreakTaskBase = GlobalRegistry.getSlaveBreakTaskRef(taskID)

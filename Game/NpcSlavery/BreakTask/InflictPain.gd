@@ -34,3 +34,11 @@ func getTaskString():
 
 func getTaskHint(_isSlaveLevelup):
 	return "Make them receive pain during sex"
+
+func getNpcOwnerDialogueLines() -> Array:
+	return [
+		"Next time I see you, your body better have bruises.",
+		"Go earn some bruises. I wanna see them.",
+		"Go earn some bruises like a true painslut.",
+		"Don't show me yourself until you got enough bruises."
+	]
