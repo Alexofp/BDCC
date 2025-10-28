@@ -934,7 +934,10 @@ func getOwnerLevel() -> int:
 	return theNpcOwner.getLevel()
 
 func canSetLimits() -> bool:
-	return getOwnerLevel() >= 1
+	var theOwner := getNpcOwner()
+	if(!theOwner):
+		return false
+	return theOwner.canSetLimits()
 
 func getEventTags(_runner) -> Dictionary:
 	return eventTags

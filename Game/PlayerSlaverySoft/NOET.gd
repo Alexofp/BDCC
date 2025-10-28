@@ -9,3 +9,4 @@ const BDSM = "BDSM" #This event includes bdsm elements (restraints, stocks/slutw
 const ShowingOff = "ShowingOff" #This event includes the owner showing off their slave to others
 const Tasks = "Tasks" #This event includes the owner giving their slave some task or tasks
 const Prostitution = "Prostitution" #This event includes sex in exchange for credits
+const Credits = "Credits" #This event includes manipulation of player's credits

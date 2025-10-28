@@ -8,6 +8,7 @@ var influence:float = 0.5
 var charID:String = "" #no sync
 
 var nextApproachDay:int = 0
+var nextApproachOverride:int = 0 # 0 means disabled
 
 var hasTasks:bool = false
 var tasks:Array = []
@@ -371,19 +372,28 @@ func calcFreedomPrice() -> int:
 	var outResult:float = (invertedValue * invertedValue) / outMaxValue * getFullFreedomPrice()
 	
 	return int(ceil(outResult))
-	
+
+func canChooseApproachDays() -> bool:
+	return getLevel() >= getMaxLevel()
+
+func getDaysBeforeNextApproach() -> int:
+	if(nextApproachOverride > 0):
+		return nextApproachOverride
+	var theLevel:int = getLevel()
+	if(theLevel <= 0):
+		return 2
+	elif(theLevel <= 1):
+		return RNG.randi_range(2, 3)
+	elif(theLevel <= 2):
+		return RNG.randi_range(2, 5)
+	else:
+		return RNG.randi_range(2, 6)
+
 func checkNextApproachDay(_doAnnounce:bool = true):
 	#var oldNextApproachDay:int = nextApproachDay
 	if(GM.main.getDays() < nextApproachDay):
 		return
-	if(getLevel() <= 0):
-		nextApproachDay = GM.main.getDays() + 2
-	elif(getLevel() <= 1):
-		nextApproachDay = GM.main.getDays() + RNG.randi_range(2, 3)
-	elif(getLevel() <= 2):
-		nextApproachDay = GM.main.getDays() + RNG.randi_range(2, 5)
-	else:
-		nextApproachDay = GM.main.getDays() + RNG.randi_range(2, 6)
+	nextApproachDay = GM.main.getDays() + getDaysBeforeNextApproach()
 	
 	if(nextApproachDay > GM.main.getDays()):
 		if(_doAnnounce):
@@ -402,6 +412,9 @@ func getNOMs() -> Dictionary:
 
 func shouldPreferToSpawnPawn() -> bool:
 	return shouldOwnerApproachPC()
+
+func canSetLimits() -> bool:
+	return getLevel() >= 2
 
 func saveData() -> Dictionary:
 	var tasksData:Array = []

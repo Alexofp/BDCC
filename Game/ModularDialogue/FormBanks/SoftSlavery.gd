@@ -182,5 +182,23 @@ func getForms() -> Dictionary:
 		"SoftSlaveryTaskSlutGive": form("I want you to do something very slutty for me, {npc.npcSlave}.", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryTaskProstitutionGive": form("I have a task for you, {npc.npcSlave}.", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryTaskCheck": form("It better be done the next time I check on you.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryCheckTaskFail": form("I get a very strong feeling that you didn't do what I asked you to do. Gonna have to punish you then.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryCheckTaskGood": form("Good job. You've done exactly as I've asked.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryCheckTaskGood2": form("You're free for now, I will find you when I need you.", {main=CHAR, target=CHAR}, "main", "target"),
+
+		"SoftSlaveryGB": form("Today I'm wanna do a gangbang on you with whoever else I can find. You might even earn some credits.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryGBGiveup": form("Oh well, looks like this isn't happening today. Maybe some other time.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryGBOffer": form("Hey. Do you wanna join to gangbang my {npc.npcSlave}? For a fair price.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryGBSure": form("Sure. Sounds good.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryGBFollow": form("Follow then.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryGBSubOffer": form("Mmm.. maybe I can be gangbanged too? I can pay.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryGBSubOfferYes": form("I guess we could use some extra fuckmeat.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryGBSubOfferNo": form("We already have an extra slut.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryGBSubOfferNoAw": form("Aw.. Oh well.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryGBNo": form("I will pass.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryGBNoReact": form("Well screw you then.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryGBStart": form("Time to have some fun.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryGBEnd": form("Feeling satisfied, yet? There you go. This is your share, {npc.npcSlave}.", {main=CHAR, target=CHAR}, "main", "target"),
+
 		"SoftSlavery": form("", {main=CHAR, target=CHAR}, "main", "target"),
 	}

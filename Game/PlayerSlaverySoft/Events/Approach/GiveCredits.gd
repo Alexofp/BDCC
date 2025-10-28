@@ -9,7 +9,7 @@ func _init():
 	eventMinLevel = 0
 	eventMaxLevel = 2
 	eventWeight = 0.5
-	eventTags = {NOET.Mean: 1.0}
+	eventTags = {NOET.Mean: 0.5, NOET.Credits: 1.0}
 
 func start():
 	if(onlyOnce()):
