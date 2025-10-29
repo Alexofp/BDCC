@@ -11,7 +11,7 @@ func _init():
 
 func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> bool:
 	var theNpcOwner := getNpcOwner()
-	if(!theNpcOwner.tasks.empty()):
+	if(theNpcOwner.hasGivenPCAnyTasks()):
 		return false
 	theNpcOwner.generateTasks(1, 1.0, 2.0, NpcTaskPool.Prostitution)
 	GM.main.addMessage("Tasks menu updated.")

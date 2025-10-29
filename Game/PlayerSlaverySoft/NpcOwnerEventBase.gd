@@ -448,16 +448,39 @@ func onlyOnce() -> bool: # Returns false if we're refreshing the same state
 func getNpcOwner() -> NpcOwnerBase:
 	return getRunner().getNpcOwner()
 
-func sayTaskInfo():
+func getTaskInfo(_introText:String = "") -> String:
 	var theNpcOwner := getNpcOwner()
 	if(!theNpcOwner):
-		return
-	var result:Array = []
+		return ""
+	var result:Array = [_introText] if !_introText.empty() else []
 	result.append_array(theNpcOwner.getQuestProgressArray())
 	
 	if(result.empty()):
+		return ""
+	return Util.join(result, "\n")
+
+func sayTaskInfo(_introText:String = ""):
+	var theInfo := getTaskInfo(_introText)
+	if(theInfo.empty()):
 		return
-	saynn(Util.join(result, "\n"))
+	saynn(theInfo)
+
+func getOwnerTaskInfo(_introText:String = "") -> String:
+	var theNpcOwner := getNpcOwner()
+	if(!theNpcOwner):
+		return ""
+	var result:Array = [_introText] if !_introText.empty() else []
+	result.append_array(theNpcOwner.getOwnerQuestProgressArray())
+	
+	if(result.empty()):
+		return ""
+	return Util.join(result, "\n")
+
+func sayOwnerTaskInfo(_introText:String = ""):
+	var theInfo := getOwnerTaskInfo(_introText)
+	if(theInfo.empty()):
+		return
+	saynn(theInfo)
 
 func sayOwnerRandomTaskLine():
 	var theNpcOwner := getNpcOwner()

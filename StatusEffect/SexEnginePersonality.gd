@@ -65,7 +65,7 @@ func getEffectDesc():
 			var theSpecialRelationship = GM.main.RS.special[ownerID]
 			if(theSpecialRelationship.id == "SoftSlavery" && theSpecialRelationship.npcOwner):
 				var theNpcOwner:NpcOwnerBase = theSpecialRelationship.npcOwner
-				if(theNpcOwner.hasTasks && !theNpcOwner.tasks.empty()):
+				if(theNpcOwner.hasGivenPCTasks()):
 					var isQuestCompleted:bool = theNpcOwner.isEverythingCompleted()
 					var theOwner = GlobalRegistry.getCharacter(ownerID)
 					if(!theOwner):
@@ -74,7 +74,18 @@ func getEffectDesc():
 					result += "\n\n[color="+("yellow" if !isQuestCompleted else "green")+"]"+theOwner.getName()+" tasks:[/color]\n"
 					result += theNpcOwner.getQuestProgressText()
 					if(isQuestCompleted):
-						result += "\nReady to be reported!"
+						result += "\nYour owner will be satisfied!"
+	
+	var specialRelationship = GM.main.RS.getSpecialRelationship(character.getID())
+	if(specialRelationship && specialRelationship.id == "SoftSlavery"):
+		var theNpcOwner:NpcOwnerBase = specialRelationship.npcOwner
+		if(theNpcOwner.hasGivenPCOwnerTasks()):
+			var isQuestCompleted:bool = theNpcOwner.isEveryOwnerTaskCompleted()
+			
+			result += "\n\n[color="+("yellow" if !isQuestCompleted else "green")+"]"+character.getName()+" needs:[/color]\n"
+			result += theNpcOwner.getOwnerQuestProgressText()
+			if(isQuestCompleted):
+				result += "\nYour owner is satisfied!"
 	
 	return result
 

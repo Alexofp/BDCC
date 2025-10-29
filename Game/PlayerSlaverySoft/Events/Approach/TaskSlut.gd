@@ -11,7 +11,7 @@ func _init():
 
 func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> bool:
 	var theNpcOwner := getNpcOwner()
-	if(!theNpcOwner.tasks.empty()):
+	if(theNpcOwner.hasGivenPCAnyTasks()):
 		return false
 	genTasks()
 	return true

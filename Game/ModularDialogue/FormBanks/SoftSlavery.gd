@@ -185,6 +185,9 @@ func getForms() -> Dictionary:
 		"SoftSlaveryCheckTaskFail": form("I get a very strong feeling that you didn't do what I asked you to do. Gonna have to punish you then.", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryCheckTaskGood": form("Good job. You've done exactly as I've asked.", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryCheckTaskGood2": form("You're free for now, I will find you when I need you.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryTaskFuckOwner": form("I'm feeling a bit.. subby today. Which means that you're gonna make me feel good, {npc.npcSlave}. Right now.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryTaskFuckOwnerGood": form("That felt good.. really good. Thanks.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryTaskFuckOwnerBad": form("Really? Did you even try? I will have to punish you for this.", {main=CHAR, target=CHAR}, "main", "target"),
 
 		"SoftSlaveryGB": form("Today I'm wanna do a gangbang on you with whoever else I can find. You might even earn some credits.", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryGBGiveup": form("Oh well, looks like this isn't happening today. Maybe some other time.", {main=CHAR, target=CHAR}, "main", "target"),

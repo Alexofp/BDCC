@@ -10,9 +10,10 @@ var charID:String = "" #no sync
 var nextApproachDay:int = 0
 var nextApproachOverride:int = 0 # 0 means disabled
 
-var hasTasks:bool = false
 var tasks:Array = []
 var tasksCompletedReminded:bool = false
+var ownerTasks:Array = []
+var ownerTasksCompletedReminded:bool = false
 
 var punishAmount:int = 0
 var pcName:String = "slave"
@@ -174,9 +175,9 @@ func onNewDay():
 		skipPunishCooldown -= 1
 	
 	checkIfTasksGotCompleted()
+	checkIfOwnerTasksGotCompleted()
 
 func generateTasks(howManyTasks:int = 2, difficultyMin:float = 1.0, difficultyMax:float = 2.0, taskPool:String = NpcTaskPool.Normal):
-	hasTasks = true
 	tasksCompletedReminded = false
 	tasks.clear()
 	var theChar = GM.pc
@@ -204,18 +205,53 @@ func generateTasks(howManyTasks:int = 2, difficultyMin:float = 1.0, difficultyMa
 		var theTaskRef:NpcBreakTaskBase = RNG.grabWeightedPairs(weightMap)
 		var theTask:NpcBreakTaskBase = GlobalRegistry.createSlaveBreakTask(theTaskRef.id)
 		
-		#var _ok = theTask.connect("onTaskCompleted", self, "onBreakTaskCompleted")
 		theTask.generateFor(theChar, _isSlaveLevelup, RNG.randf_rangeX2(difficultyMin, difficultyMax))
 		tasks.append(theTask)
+		var _ok = theTask.connect("onTaskCompleted", self, "onSlutTaskCompleted")
 		howManyTasks -= 1
-		
-	for task in tasks:
-	#tasks = NpcBreakTaskBase.generateTasksFor(theChar, slaveType, false, tasksAmount, difficultyMin, difficultyMax)
-	#for task in tasks:
-		var _ok = task.connect("onTaskCompleted", self, "onSlutTaskCompleted")
 
-func isEverythingCompleted():
+func generateOwnerTasks(howManyTasks:int = 2, difficultyMin:float = 1.0, difficultyMax:float = 2.0, taskPool:String = NpcTaskPool.Normal):
+	ownerTasksCompletedReminded = false
+	ownerTasks.clear()
+	var theChar = getOwner()
+	if(theChar == null):
+		return
+	
+	var weightMap:Array = []
+	var _isSlaveLevelup:bool = false
+	
+	for taskID in GlobalRegistry.getSlaveBreakTaskRefs():
+		var taskRef:NpcBreakTaskBase = GlobalRegistry.getSlaveBreakTaskRef(taskID)
+		
+		if(!taskRef.taskPools.has(taskPool)):
+			continue
+		if(!taskRef.isPossibleFor(theChar, _isSlaveLevelup)):
+			continue
+		if(!taskRef.isPossibleForPC(GM.pc, theChar, _isSlaveLevelup)):
+			continue
+		
+		var taskWeight:float = taskRef.getNpcOwnerWeight(self)
+		
+		weightMap.append([taskRef, taskWeight])
+	
+	while(howManyTasks > 0 && weightMap.size() > 0):
+		var theTaskRef:NpcBreakTaskBase = RNG.grabWeightedPairs(weightMap)
+		var theTask:NpcBreakTaskBase = GlobalRegistry.createSlaveBreakTask(theTaskRef.id)
+		
+		theTask.generateFor(theChar, _isSlaveLevelup, RNG.randf_rangeX2(difficultyMin, difficultyMax))
+		ownerTasks.append(theTask)
+		var _ok = theTask.connect("onTaskCompleted", self, "onOwnerTaskCompleted")
+		howManyTasks -= 1
+
+func isEverythingCompleted() -> bool:
 	for task in tasks:
+		if(!task.isCompleted()):
+			return false
+	
+	return true
+
+func isEveryOwnerTaskCompleted() -> bool:
+	for task in ownerTasks:
 		if(!task.isCompleted()):
 			return false
 	
@@ -224,20 +260,30 @@ func isEverythingCompleted():
 func onSlutTaskCompleted(_theTask):
 	if(!tasksCompletedReminded && isEverythingCompleted()):
 		tasksCompletedReminded = true
-
 		if(GM.main != null):
 			GM.main.addMessage("You have completed the tasks that "+getOwnerName()+" gave you!")
-	pass
+
+func onOwnerTaskCompleted(_theTask):
+	if(!ownerTasksCompletedReminded && isEveryOwnerTaskCompleted()):
+		ownerTasksCompletedReminded = true
+		if(GM.main != null):
+			GM.main.addMessage("You have completed the tasks that "+getOwnerName()+" gave you!")
 
 func handleSexEvent(sexEvent:SexEvent):
 	var theChar = GM.pc
 	for task in tasks:
 		task.onSexEvent(theChar, sexEvent)
+	var theOwner = getOwner()
+	for task in ownerTasks:
+		task.onSexEvent(theOwner, sexEvent)
 
 func onSexEnded(_contex = {}):
 	var theChar = GM.pc
 	for task in tasks:
 		task.onSexEnded(theChar, _contex)
+	var theOwner = getOwner()
+	for task in ownerTasks:
+		task.onSexEnded(theOwner, _contex)
 
 func onInteractionEvent(_eventID:String, _args:Dictionary):
 	for task in tasks:
@@ -245,16 +291,23 @@ func onInteractionEvent(_eventID:String, _args:Dictionary):
 
 func clearTasks():
 	tasks = []
-	hasTasks = false
+
+func clearOwnerTasks():
+	ownerTasks = []
 
 func checkIfTasksGotCompleted():
 	var theChar = GM.pc
 	for task in tasks:
 		task.checkIfCompletedFor(theChar)
 
+func checkIfOwnerTasksGotCompleted():
+	var theChar = getOwner()
+	for task in ownerTasks:
+		task.checkIfCompletedFor(theChar)
+
 func getQuestProgressArray() -> Array:
 	var theChar = GM.pc
-	var result = []
+	var result:Array = []
 	
 	for task in tasks:
 		var taskString = task.getTaskStringSlutLock()
@@ -270,8 +323,32 @@ func getQuestProgressArray() -> Array:
 func getQuestProgressText() -> String:
 	return Util.join(getQuestProgressArray(), "\n")
 
+func getOwnerQuestProgressArray() -> Array:
+	var theChar = getOwner()
+	var result:Array = []
+	
+	for task in ownerTasks:
+		var taskString = task.getTaskString()
+		if(task.isCompleted()):
+			result.append("[color=green]"+str(taskString)+"[/color]")
+		elif(theChar == null || task.isPossibleForSlutlock(theChar)):
+			result.append("[color=red]"+str(taskString)+"[/color]")
+		else:
+			result.append("[color=red]"+str(taskString)+" (Impossible)[/color]")
+	
+	return result
+		
+func getOwnerQuestProgressText() -> String:
+	return Util.join(getOwnerQuestProgressArray(), "\n")
+
 func hasGivenPCTasks() -> bool:
 	return !tasks.empty()
+
+func hasGivenPCOwnerTasks() -> bool:
+	return !ownerTasks.empty()
+
+func hasGivenPCAnyTasks() -> bool:
+	return hasGivenPCTasks() || hasGivenPCOwnerTasks()
 
 func getPunishAmount() -> int:
 	return punishAmount
@@ -424,13 +501,20 @@ func saveData() -> Dictionary:
 			"data": task.saveData()
 		}
 		tasksData.append(taskData)
+	var ownerTasksData:Array = []
+	for task in ownerTasks:
+		var taskData = {
+			"id": task.id,
+			"data": task.saveData()
+		}
+		ownerTasksData.append(taskData)
 	
 	return {
 		l = level,
 		i = influence,
 		nad = nextApproachDay,
-		ht = hasTasks,
 		t = tasksData,
+		ot = ownerTasksData,
 		pa = punishAmount,
 		pn = pcName,
 		it = interactedToday,
@@ -438,13 +522,13 @@ func saveData() -> Dictionary:
 		fp = freedomPrice,
 		spc = skipPunishCooldown,
 		tcr = tasksCompletedReminded,
+		otcr = ownerTasksCompletedReminded,
 	}
 
 func loadData(_data:Dictionary):
 	level = SAVE.loadVar(_data, "l", 0)
 	influence = SAVE.loadVar(_data, "i", 0.5)
 	nextApproachDay = SAVE.loadVar(_data, "nad", 0)
-	hasTasks = SAVE.loadVar(_data, "ht", false)
 	punishAmount = SAVE.loadVar(_data, "pa", 0)
 	pcName = SAVE.loadVar(_data, "pn", "slave")
 	interactedToday = SAVE.loadVar(_data, "it", false)
@@ -452,6 +536,7 @@ func loadData(_data:Dictionary):
 	freedomPrice = SAVE.loadVar(_data, "fp", 1000)
 	skipPunishCooldown = SAVE.loadVar(_data, "spc", 0)
 	tasksCompletedReminded = SAVE.loadVar(_data, "tcr", false)
+	ownerTasksCompletedReminded = SAVE.loadVar(_data, "otcr", false)
 	
 	tasks.clear()
 	var tasksData:Array = SAVE.loadVar(_data, "t", [])
@@ -463,3 +548,14 @@ func loadData(_data:Dictionary):
 		taskObj.loadData(SAVE.loadVar(taskData, "data", {}))
 		var _ok = taskObj.connect("onTaskCompleted", self, "onSlutTaskCompleted")
 		tasks.append(taskObj)
+	
+	ownerTasks.clear()
+	var ownerTasksData:Array = SAVE.loadVar(_data, "ot", [])
+	for taskData in ownerTasksData:
+		var taskID = SAVE.loadVar(taskData, "id", "")
+		var taskObj:NpcBreakTaskBase = GlobalRegistry.createSlaveBreakTask(taskID)
+		if(taskObj == null):
+			continue
+		taskObj.loadData(SAVE.loadVar(taskData, "data", {}))
+		var _ok = taskObj.connect("onTaskCompleted", self, "onOwnerTaskCompleted")
+		ownerTasks.append(taskObj)
