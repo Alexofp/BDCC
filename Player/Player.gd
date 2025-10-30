@@ -977,3 +977,13 @@ func onSexEvent(_event : SexEvent):
 			var theSpecialRelationship = GM.main.RS.special[ownerID]
 			if(theSpecialRelationship.id == "SoftSlavery" && theSpecialRelationship.npcOwner):
 				theSpecialRelationship.npcOwner.handleSexEvent(_event)
+
+func isSlaveTo(_charID:String) -> bool:
+	if(!GM.main || !GM.main.RS):
+		return false
+	var theSpecial = GM.main.RS.getSpecialRelationship(_charID)
+	if(!theSpecial):
+		return false
+	if(theSpecial.id == "SoftSlavery"):
+		return true
+	return false

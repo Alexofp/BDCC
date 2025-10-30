@@ -202,6 +202,10 @@ func getForms() -> Dictionary:
 		"SoftSlaveryGBNoReact": form("Well screw you then.", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryGBStart": form("Time to have some fun.", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryGBEnd": form("Feeling satisfied, yet? There you go. This is your share, {npc.npcSlave}.", {main=CHAR, target=CHAR}, "main", "target"),
+		
+		"SoftSlaveryLockRestraint": form("Today I feel like locking something onto you.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryLockRestraint2": form("Which one do you like the most, I'm generous enough to let you choose.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryLockRestraint3": form("I will keep the key. Don't try to struggle it off, {npc.npcSlave}.", {main=CHAR, target=CHAR}, "main", "target"),
 
 		"SoftSlavery": form("", {main=CHAR, target=CHAR}, "main", "target"),
 	}

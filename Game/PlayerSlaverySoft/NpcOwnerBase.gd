@@ -19,6 +19,9 @@ var punishAmount:int = 0
 var pcName:String = "slave"
 var freedomPrice:int = 1000
 
+var keyholderSatisfaction:float = 0.0 # If hits 1.0, the owner will be willing to unlock the sub
+var lockedByOwner:bool = false
+
 var interactedToday:bool = false
 var daysAmount:int = 0
 
@@ -59,7 +62,8 @@ func addInfluence(_am:float):
 	influence = clamp(influence, 0.0, 1.0)
 	if(influence >= 1.0):
 		doLevelUp()
-	
+	if(_am > 0.0 && hasOwnerLock()):
+		addKeyholderSatisfaction(_am * 0.4)
 
 func getInfluence() -> float:
 	return influence
@@ -124,6 +128,8 @@ func getRelationshipFullInfo() -> Array:
 		"Days enslaved: "+str(daysAmount),
 		"Slave's nickname: "+getPCName(),
 	]
+	if(hasOwnerLock()):
+		result.append("Keyholder satisfaction: "+str(Util.roundF(keyholderSatisfaction*100.0, 1))+"%")
 	
 	return result
 
@@ -160,7 +166,7 @@ func onNewDay():
 	daysAmount += 1
 	interactedToday = false
 	#shouldAppoach = true
-	if(influence <= 0.0):
+	if(influence <= 0.0 || !getOwner()):
 		endSlavery()
 		return
 	
@@ -173,6 +179,12 @@ func onNewDay():
 	
 	if(skipPunishCooldown > 0):
 		skipPunishCooldown -= 1
+	
+	if(hasOwnerLock()):
+		if(keyholderSatisfaction < 1.0):
+			addInfluence(0.15 + getOwner().getPersonality().getStat(PersonalityStat.Subby)*0.1)
+	else:
+		keyholderSatisfaction = 0.0
 	
 	checkIfTasksGotCompleted()
 	checkIfOwnerTasksGotCompleted()
@@ -411,6 +423,12 @@ func getTalkActions(_event) -> Array:
 	#		result.append(talkActionDisabled("Ask freedom", "Requires max influence"))
 	result.append(talkAction("Relationship", "See how your slavery relationship is progressing", "info"))
 	
+	if(hasOwnerLock()):
+		if(!didInteractWithToday()):
+			result.append(talkAction("Beg unlock", "Beg your owner to unlock you.", "begUnlock"))
+		else:
+			result.append(talkActionDisabled("Beg unlock", "You have already interacted with your owner today."))
+		
 	return result
 
 func doTalkAction(_event, _actionID:String, _args:Array):
@@ -426,6 +444,9 @@ func doTalkAction(_event, _actionID:String, _args:Array):
 		_event.runEvent("", "AttackOwner", ["interact"])
 	if(_actionID == "info"):
 		_event.runEvent("", "RelationshipInfo")
+	if(_actionID == "begUnlock"):
+		markInteractedWithToday()
+		_event.runEvent("", "BegUnlock")
 
 func generateFreedomPrice() -> int:
 	return RNG.randi_range(500, 2000)
@@ -493,6 +514,35 @@ func shouldPreferToSpawnPawn() -> bool:
 func canSetLimits() -> bool:
 	return getLevel() >= 2
 
+func getKeyholderSatisfaction() -> float:
+	return keyholderSatisfaction
+
+func addKeyholderSatisfaction(_val:float, _announcesCanUnlock:bool = true):
+	var wasReady:bool = (keyholderSatisfaction >= 1.0)
+	keyholderSatisfaction += _val
+	keyholderSatisfaction = clamp(keyholderSatisfaction, 0.0, 1.0)
+	if(!wasReady && keyholderSatisfaction >= 1.0 && _announcesCanUnlock):
+		GM.main.addMessage(getOwnerName()+" is ready to unlock you.")
+
+func checkReadyToUnlockOwnerLock() -> bool:
+	if(keyholderSatisfaction >= 1.0):
+		return true
+	return false
+
+# Does the pc have anything locked by the owner
+func hasOwnerLock() -> bool:
+	return GM.pc.hasKeyholderLocksFrom(charID)
+
+func unlockOwnerLock() -> int:
+	setMustHaveOwnerLock(false)
+	return GM.pc.unlockAllKeyholderLocksFrom(charID)
+
+func setMustHaveOwnerLock(_l:bool):
+	lockedByOwner = _l
+
+func rememberMustHaveOwnerLock() -> bool:
+	return lockedByOwner
+
 func saveData() -> Dictionary:
 	var tasksData:Array = []
 	for task in tasks:
@@ -523,6 +573,8 @@ func saveData() -> Dictionary:
 		spc = skipPunishCooldown,
 		tcr = tasksCompletedReminded,
 		otcr = ownerTasksCompletedReminded,
+		ks = keyholderSatisfaction,
+		lbo = lockedByOwner,
 	}
 
 func loadData(_data:Dictionary):
@@ -537,6 +589,8 @@ func loadData(_data:Dictionary):
 	skipPunishCooldown = SAVE.loadVar(_data, "spc", 0)
 	tasksCompletedReminded = SAVE.loadVar(_data, "tcr", false)
 	ownerTasksCompletedReminded = SAVE.loadVar(_data, "otcr", false)
+	keyholderSatisfaction = SAVE.loadVar(_data, "ks", 0.0)
+	lockedByOwner = SAVE.loadVar(_data, "lbo", false)
 	
 	tasks.clear()
 	var tasksData:Array = SAVE.loadVar(_data, "t", [])
