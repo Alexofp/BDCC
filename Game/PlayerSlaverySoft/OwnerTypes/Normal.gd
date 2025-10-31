@@ -66,7 +66,21 @@ func addRandomTrait(_announce:bool = true) -> bool:
 func addRandomTraitChecked(_announce:bool = true) -> bool:
 	if(traits.size() >= getMaxAmountOfTraits()):
 		return false
-	return addRandomTrait(_announce)
+	
+	var traitAmount:int = traits.size()
+	var newTraitChance:float = 100.0
+	if(traitAmount <= 0):
+		newTraitChance = 100.0
+	elif(traitAmount == 1):
+		newTraitChance = 50.0
+	elif(traitAmount == 2):
+		newTraitChance = 30.0
+	else:
+		newTraitChance = 10.0
+	
+	if(RNG.chance(newTraitChance)):
+		return addRandomTrait(_announce)
+	return false
 
 func addTrait(traitID:String):
 	var theTrait:NpcOwnerTraitBase = GlobalRegistry.getNpcOwnerTrait(traitID)
@@ -82,7 +96,7 @@ func removeTrait(traitID:String):
 	traits.erase(traitID)
 
 func getMaxAmountOfTraits() -> int:
-	return 2
+	return 3
 
 func getPossiblePCNamesForLevel(_level:int) -> Array:
 	var result:Array = .getPossiblePCNamesForLevel(_level)

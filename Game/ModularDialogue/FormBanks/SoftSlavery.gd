@@ -206,6 +206,12 @@ func getForms() -> Dictionary:
 		"SoftSlaveryLockRestraint": form("Today I feel like locking something onto you.", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryLockRestraint2": form("Which one do you like the most, I'm generous enough to let you choose.", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryLockRestraint3": form("I will keep the key. Don't try to struggle it off, {npc.npcSlave}.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryOfferGearUnlock": form("You've been locked for quite a while. Ready to be unlocked?", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryOfferGearUnlock2": form("There you go, much better, right? I'm not done with you yet though.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryOfferGearUnlockKeep": form("Keep it? Sure, why not. It fits you.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryOfferGearUnlockKeep2": form("Now, I still wanna do something else with you.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryNoticedNoGear": form("Wait. Didn't I lock something onto you? I'm pretty sure I did. Where is it, {npc.npcSlave}?", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryNoticedNoGear2": form("You know what that means. I will have to punish you.", {main=CHAR, target=CHAR}, "main", "target"),
 
 		"SoftSlavery": form("", {main=CHAR, target=CHAR}, "main", "target"),
 	}

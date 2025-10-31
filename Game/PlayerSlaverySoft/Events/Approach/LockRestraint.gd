@@ -103,7 +103,7 @@ func start_do(_id:String, _args:Array):
 		elif(pickedLock == "cage"):
 			theItem = GlobalRegistry.createItem("ChastityCage")
 		elif(pickedLock == "cageflat"):
-			theItem = GlobalRegistry.createItem("ChastityCagePermanent")
+			theItem = GlobalRegistry.createItem("ChastityCageFlat")
 		
 		if(theItem):
 			GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(theItem)

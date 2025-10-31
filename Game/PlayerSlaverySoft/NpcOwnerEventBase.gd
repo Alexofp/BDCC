@@ -638,7 +638,7 @@ func getDebugActions():
 					"id": "level",
 					"name": "Level",
 					"type": "number",
-					"value": 3,
+					"value": 5,
 				},
 			],
 		},

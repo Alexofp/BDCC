@@ -1,34 +1,36 @@
 extends NpcOwnerTraitBase
 
 func _init():
-	id = "Subby"
+	id = "Dominant"
 
 func getVisibleName() -> String:
-	return "Subby"
+	return "Dominant"
 
 func getVisibleDescription() -> String:
-	return "The owner can occasionally submit to you."
+	return "The owner is extra dominant and will be more eager to lock the slave up."
 
 func getPossiblePCNamesForLevel(_npcOwner, _level:int) -> Array:
 	if(_level <= 1):
-		return ["softy"]
+		return ["sub"]
 	if(_level == 2):
-		return ["light"]
-	return ["world"]
+		return ["servant"]
+	return ["submissive"]
 
 func getTraitScore(_npcOwner) -> float:
 	var personality:Personality = _npcOwner.getOwner().getPersonality()
-	return personality.getStat(PersonalityStat.Subby)*2.0
+	return -personality.getStat(PersonalityStat.Subby)*2.0
 
 func getTraitExclusiveType() -> String:
 	return "subbyness"
 
 func getEventTags(_npcOwner) -> Dictionary:
 	return {
-		NOET.SubbyOwner: 3.0,
+		NOET.BDSM: 2.0,
+		NOET.Bondage: 3.0,
+		NOET.Tasks: 2.0,
 	}
 
 func getNOMs(_npcOwner) -> Dictionary:
 	return {
-		NOM.Subby: 1.0,
+		NOM.Dominant: 1.0,
 	}

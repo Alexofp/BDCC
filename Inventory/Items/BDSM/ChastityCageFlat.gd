@@ -1,13 +1,13 @@
 extends ItemBase
 
 func _init():
-	id = "ChastityCage"
+	id = "ChastityCageFlat"
 
 func getVisibleName():
-	return "Chastity Cage"
+	return "Flat Cage"
 	
 func getDescription():
-	return "Prevents the ability to use your penis."
+	return "Prevents the ability to use your penis. This one features a flat ergonomic design."
 
 func getClothingSlot():
 	return InventorySlot.Penis
@@ -25,13 +25,13 @@ func getTakeOffScene():
 	return "RestraintTakeOffNopeScene"
 
 func getPrice():
-	return 10
+	return 20
 
 func canSell():
 	return true
 
 func getTags():
-	return [ItemTag.BDSMRestraint, ItemTag.CanBeForcedByGuards, ItemTag.ChastityCage, ItemTag.SoldByTheAnnouncer, ItemTag.CanBeForcedInStocks]
+	return [ItemTag.BDSMRestraint, ItemTag.ChastityCage]
 
 func isRestraint():
 	return true
@@ -46,11 +46,23 @@ func getForcedOnMessage(isPlayer = true):
 	else:
 		return getAStackNameCapitalize()+" was locked onto {receiver.nameS} penis, making it useless!"
 
-func updateDoll(doll: Doll3D):
-	doll.setState("cock", "caged")
+func getRiggedParts(_character):
+	return {
+		"chastity_cage": "res://Inventory/RiggedModels/FlatCage/FlatCage.tscn",
+	}
 
-func getAIForceItemWeight(_whoForcesNpc, _targetNpc):
-	return 0.2
+func getHidesParts(_character):
+	return {
+		BodypartSlot.Penis: true,
+	}
+
+func shouldBeVisibleOnDoll(_character, _doll):
+	if(!_character.isBodypartCovered(BodypartSlot.Penis) || _doll.isForcedExposed(BodypartSlot.Penis)):
+		return true
+	return false
+
+func isImportant():
+	return true
 
 func getInventoryImage():
-	return "res://Images/Items/bdsm/chastity_cage.png"
+	return "res://Images/Items/bdsm/flatcage.png"

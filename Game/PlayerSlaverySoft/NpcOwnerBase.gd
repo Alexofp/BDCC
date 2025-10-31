@@ -21,6 +21,7 @@ var freedomPrice:int = 1000
 
 var keyholderSatisfaction:float = 0.0 # If hits 1.0, the owner will be willing to unlock the sub
 var lockedByOwner:bool = false
+var ownerOfferedUnlock:bool = false
 
 var interactedToday:bool = false
 var daysAmount:int = 0
@@ -55,10 +56,22 @@ func getVisibleName() -> String:
 func getApproachSubEventID() -> String:
 	return "approach"
 
+func getInfluenceMod(_am:float) -> float:
+	if(_am <= 0.0):
+		return _am
+	
+	var theLevel := getLevel()
+	if(theLevel <= 0):
+		return _am
+	var levelF:float = float(theLevel)
+	var theMod:float = pow(levelF-1.0, 1.5)*0.5 + 1.5
+	_am /= theMod
+	return _am
+
 func addInfluence(_am:float):
 	if(_am != 0.0):
 		GM.main.RS.addAffection(charID, "pc", _am * 0.25)
-	influence += _am
+	influence += getInfluenceMod(_am)
 	influence = clamp(influence, 0.0, 1.0)
 	if(influence >= 1.0):
 		doLevelUp()
@@ -75,32 +88,59 @@ func getExtraCategoryText() -> String:
 	return theText
 
 func getMaxLevel() -> int:
-	return 3
+	return 5
 
 func getLevel() -> int:
 	return level
 
 func setLevel(_level:int):
+	influence = 0.5
 	level = _level
 	if(level < 0):
 		level = 0
 	if(level > getMaxLevel()):
 		level = getMaxLevel()
-	onLevelUp()
 
 func doLevelUp():
 	if(level >= getMaxLevel()):
 		return
+	setLevel(level + 1)
+	onLevelUp()
+
+func lowerPunishAmount():
 	if(punishAmount > 0):
 		punishAmount -= 1
-	setLevel(level + 1)
 
 func onLevelUp():
-	influence = 0.5
+	if(punishAmount > 0):
+		punishAmount -= 1
 	var oldPCName:String = getPCName()
-	pickNewName()
+	if(shouldPickNewNameOnLevelUp()):
+		pickNewName()
 	var newPCName:String = getPCName()
 	addMessage(getOwnerName()+"'s influence level over you has increased to '"+str(level)+"'!"+((" You are now a '"+newPCName+"'.") if newPCName != oldPCName else ""))
+	onNewLevelUnlockAnnounce()
+	
+# 0 1 2 3 4 5
+# level 1 = sex event
+# level 2 = set limits
+# level 3 = pick name
+# level 4 = pick approach frequency
+# level 5 = ?
+func onNewLevelUnlockAnnounce():
+	if(level == 1):
+		addMessage("You can now ask your owner to have sex with you!")
+	if(level == 2):
+		addMessage("You can now set sex limits for your owner in certain events!")
+	if(level == 3):
+		addMessage("You can now pick the nickname that "+getOwnerName()+" will use to call you!")
+	if(level == 4):
+		addMessage("You can now pick how often "+getOwnerName()+" will approach you (check their Relationship talk menu)!")
+
+func shouldPickNewNameOnLevelUp() -> bool:
+	if(getLevel() <= 3):
+		return true
+	return false
 
 func pickNewName():
 	setPCName(RNG.pick(getPossiblePCNamesForLevel(level)))
@@ -185,6 +225,7 @@ func onNewDay():
 			addInfluence(0.15 + getOwner().getPersonality().getStat(PersonalityStat.Subby)*0.1)
 	else:
 		keyholderSatisfaction = 0.0
+		ownerOfferedUnlock = false
 	
 	checkIfTasksGotCompleted()
 	checkIfOwnerTasksGotCompleted()
@@ -382,9 +423,10 @@ func onSkipPunish():
 func getOwnerInfo() -> Array:
 	var result:Array = []
 	
-	result.append("Level: "+str(level))
+	result.append("Level: "+str(level)+(" (Max level)" if getLevel() >= getMaxLevel() else ""))
 	result.append("Influence: "+str(Util.roundF(influence*100.0, 1))+"%")
-	result.append("Punishments: "+str(punishAmount))
+	if(punishAmount > 0):
+		result.append("Punishment counter: "+str(punishAmount))
 	
 	return result
 
@@ -408,14 +450,14 @@ func getTalkActions(_event) -> Array:
 	var result:Array = []
 	
 	if(!didInteractWithToday()):
-		result.append(talkAction("Submit", "Ask your owner to do something with you. You can only do this once per day.", "submit"))
+		result.append(talkAction("Submit", "Ask your owner to do something with you. You can only do this once per day. Removes 1 punishment point if you doing it willingly.", "submit"))
 		result.append(talkAction("Attack!", "Try to get rid of your owner's influence.", "attack"))
 	else:
 		result.append(talkActionDisabled("Submit", "Your owner doesn't feel like doing anything with you today anymore."))
 		result.append(talkActionDisabled("Attack!", "You have already interacted with your owner today."))
 	
 	if(getLevel() >= 3):
-		result.append(talkAction("Change name", "(Influence level 3) Ask your owner to change how they call you", "changeName"))
+		result.append(talkAction("Change name", "Ask your owner to change how they call you", "changeName"))
 	#if(getLevel() >= getMaxLevel()):
 	#	if(getInfluence() >= 1.0):
 	result.append(talkAction("Ask freedom", "Ask your owner if they can let you go", "askFreedom"))
@@ -437,6 +479,7 @@ func doTalkAction(_event, _actionID:String, _args:Array):
 	if(_actionID == "askFreedom"):
 		_event.runEvent("", "AskFreedom")
 	if(_actionID == "submit"):
+		lowerPunishAmount()
 		markInteractedWithToday()
 		_event.runEvent("", "Approach", ["interact"])
 	if(_actionID == "attack"):
@@ -472,7 +515,7 @@ func calcFreedomPrice() -> int:
 	return int(ceil(outResult))
 
 func canChooseApproachDays() -> bool:
-	return getLevel() >= getMaxLevel()
+	return getLevel() >= 4
 
 func getDaysBeforeNextApproach() -> int:
 	if(nextApproachOverride > 0):
@@ -480,9 +523,9 @@ func getDaysBeforeNextApproach() -> int:
 	var theLevel:int = getLevel()
 	if(theLevel <= 0):
 		return 2
-	elif(theLevel <= 1):
-		return RNG.randi_range(2, 3)
 	elif(theLevel <= 2):
+		return RNG.randi_range(2, 3)
+	elif(theLevel <= 4):
 		return RNG.randi_range(2, 5)
 	else:
 		return RNG.randi_range(2, 6)
@@ -559,7 +602,7 @@ func saveData() -> Dictionary:
 		}
 		ownerTasksData.append(taskData)
 	
-	return {
+	return { #Short names so the saves are smaller
 		l = level,
 		i = influence,
 		nad = nextApproachDay,
@@ -575,6 +618,7 @@ func saveData() -> Dictionary:
 		otcr = ownerTasksCompletedReminded,
 		ks = keyholderSatisfaction,
 		lbo = lockedByOwner,
+		oou = ownerOfferedUnlock,
 	}
 
 func loadData(_data:Dictionary):
@@ -591,6 +635,7 @@ func loadData(_data:Dictionary):
 	ownerTasksCompletedReminded = SAVE.loadVar(_data, "otcr", false)
 	keyholderSatisfaction = SAVE.loadVar(_data, "ks", 0.0)
 	lockedByOwner = SAVE.loadVar(_data, "lbo", false)
+	ownerOfferedUnlock = SAVE.loadVar(_data, "oou", false)
 	
 	tasks.clear()
 	var tasksData:Array = SAVE.loadVar(_data, "t", [])

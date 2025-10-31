@@ -6,6 +6,7 @@ const Kind = "Kind" #This event is kind
 const Sharing = "Sharing" #This event includes the pc being fucked by non-owner npcs
 const OwnerSex = "OwnerSex" #This event includes owner fucking PC
 const BDSM = "BDSM" #This event includes bdsm elements (restraints, stocks/slutwall, bodywritings, etc)
+const Bondage = "Bondage" #This event is heavily themed around bondage
 const ShowingOff = "ShowingOff" #This event includes the owner showing off their slave to others
 const Tasks = "Tasks" #This event includes the owner giving their slave some task or tasks
 const Prostitution = "Prostitution" #This event includes sex in exchange for credits
