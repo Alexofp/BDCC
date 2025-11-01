@@ -439,10 +439,10 @@ func didInteractWithToday() -> bool:
 func markInteractedWithToday():
 	interactedToday = true
 
-func talkAction(_name:String, _desc:String, _id:String, _args:Array=[]):
+func talkAction(_name:String, _desc:String, _id:String, _args:Array=[]) -> Array:
 	return [_name, _desc, _id, _args]
 	
-func talkActionDisabled(_name:String, _desc:String):
+func talkActionDisabled(_name:String, _desc:String) -> Array:
 	return [_name, _desc]
 
 
@@ -456,14 +456,13 @@ func getTalkActions(_event) -> Array:
 		result.append(talkActionDisabled("Submit", "Your owner doesn't feel like doing anything with you today anymore."))
 		result.append(talkActionDisabled("Attack!", "You have already interacted with your owner today."))
 	
+	result.append(talkAction("Ask freedom", "Ask your owner if they can let you go", "askFreedom"))
+	result.append(talkAction("Relationship", "See how your slavery relationship is progressing", "info"))
+	
+	if(getLevel() >= 1):
+		result.append(talkAction("Ask sex", "Ask your owner to fuck you!", "askSex"))
 	if(getLevel() >= 3):
 		result.append(talkAction("Change name", "Ask your owner to change how they call you", "changeName"))
-	#if(getLevel() >= getMaxLevel()):
-	#	if(getInfluence() >= 1.0):
-	result.append(talkAction("Ask freedom", "Ask your owner if they can let you go", "askFreedom"))
-	#	else:
-	#		result.append(talkActionDisabled("Ask freedom", "Requires max influence"))
-	result.append(talkAction("Relationship", "See how your slavery relationship is progressing", "info"))
 	
 	if(hasOwnerLock()):
 		if(!didInteractWithToday()):
@@ -490,6 +489,8 @@ func doTalkAction(_event, _actionID:String, _args:Array):
 	if(_actionID == "begUnlock"):
 		markInteractedWithToday()
 		_event.runEvent("", "BegUnlock")
+	if(_actionID == "askSex"):
+		_event.runEvent("", "AskSex")
 
 func generateFreedomPrice() -> int:
 	return RNG.randi_range(500, 2000)

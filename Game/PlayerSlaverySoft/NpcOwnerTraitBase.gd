@@ -29,3 +29,15 @@ func getNOMs(_npcOwner) -> Dictionary:
 
 func getSkipPunishmentChance() -> float:
 	return 0.0
+
+func talkAction(_name:String, _desc:String, _id:String, _args:Array=[]) -> Array:
+	return [_name, _desc, _id, _args]
+	
+func talkActionDisabled(_name:String, _desc:String) -> Array:
+	return [_name, _desc]
+
+func getTalkActions(_npcOwner, _event) -> Array:
+	return []
+
+func doTalkAction(_npcOwner, _event, _actionID:String, _args:Array):
+	pass

@@ -177,6 +177,26 @@ func getNOM(_nom:String) -> float:
 			result += theTraitNoms[_nom]
 	return clamp(result, 0.0, 1.0)
 
+func getTalkActions(_event) -> Array:
+	var theActions:Array = .getTalkActions(_event)
+	
+	for traitID in traits:
+		var theTrait = GlobalRegistry.getNpcOwnerTrait(traitID)
+		if(!theTrait):
+			continue
+		theActions.append_array(theTrait.getTalkActions(self, _event))
+	
+	return theActions
+
+func doTalkAction(_event, _actionID:String, _args:Array):
+	.doTalkAction(_event, _actionID, _args)
+	
+	for traitID in traits:
+		var theTrait = GlobalRegistry.getNpcOwnerTrait(traitID)
+		if(!theTrait):
+			continue
+		theTrait.doTalkAction(self, _event, _actionID, _args)
+
 func saveData() -> Dictionary:
 	var data := .saveData()
 	

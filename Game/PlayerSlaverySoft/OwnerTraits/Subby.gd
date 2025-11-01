@@ -32,3 +32,12 @@ func getNOMs(_npcOwner) -> Dictionary:
 	return {
 		NOM.Subby: 1.0,
 	}
+
+func getTalkActions(_npcOwner, _event) -> Array:
+	return [
+		talkAction("Fuck owner", "(Subby trait) Ask if your owner wants to be fucked!", "subby_fuckowner")
+	]
+
+func doTalkAction(_npcOwner, _event, _actionID:String, _args:Array):
+	if(_actionID == "subby_fuckowner"):
+		_event.runEvent("", "AskFuckOwner")
