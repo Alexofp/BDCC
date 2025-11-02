@@ -1791,7 +1791,7 @@ func getText(_id:String, _args:Dictionary):
 			"Now, I still wanna do something else with you.",
 			"Since you're staying locked, let's put that restrained body to use.",
 			"Now let's do what else I have in mind.",
-			"Now let's explore what else we can do while you're restrained.",
+			"Now let's see what we can do while you're restrained.",
 			"Now that you're staying locked, let's do something else.",
 			"Good decision. Now let me enjoy my bound property."
 		]

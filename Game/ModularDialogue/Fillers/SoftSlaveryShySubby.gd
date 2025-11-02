@@ -1474,3 +1474,260 @@ func getText(_id:String, _args:Dictionary):
 			"Please leave, inmate. You can go.",
 			"You can go now, inmate. You're free.",
 		]
+
+
+	if(_id == "SoftSlaveryGB"):
+		return [
+			"Um.. I was thinking we could have a gangbang with you today.. and anyone who's interested. You might even get some credits, {npc.npcSlave}.",
+			"I'm.. trying to arrange a gangbang for you. I hope you're okay with being shared.. You could earn a little, {npc.npcSlave}.",
+			"Your body is going to be the center of attention today.. a gangbang. You might get some credits from it, {npc.npcSlave}.",
+			"I thought.. we could try to earn some credits with your body today. I'm organizing a gangbang.. if you don't mind, my {npc.npcSlave}.",
+			"You're going to be the main focus today.. for everyone. I hope that's okay. You could earn something from it, my {npc.npcSlave}.",
+		]
+	if(_id == "SoftSlaveryGBGiveup"):
+		return [
+			"Oh.. I guess it's not happening today. Maybe some other day..",
+			"It seems like.. no one is available right now. Sorry.",
+			"Nobody seems interested today.. that's a shame.",
+		]
+	if(_id == "SoftSlaveryGBOffer"):
+		return [
+			"Um, excuse me.. would you like to join a gangbang for my {npc.npcSlave}? It's for a fair price..",
+			"Hi.. are you interested in using my slave? I'm putting together a gangbang..",
+			"Maybe.. you'd like to gangbang my {npc.npcSlave}? {pc.He} {pc.isAre} available right now..",
+			"I'm looking for people for a gangbang with my {npc.npcSlave}.. if you're interested? Won't cost you much.",
+			"My {npc.npcSlave} could use some.. gangbanging. Would you like to be part of it?",
+			"Interested in some fun? My {npc.npcSlave} is up for a gangbang..",
+			"Um.. I need people to help use my {npc.npcSlave}. {pc.He} can handle a few partners..",
+		]
+	if(_id == "SoftSlaveryGBSure"):
+		return [
+			"Okay.. that sounds alright.",
+			"Yes, I'll join..",
+			"I think so.. I could use the distraction.",
+			"Um, yes.. whenever you're ready.",
+			"Okay..",
+			"Alright, I'll come..",
+			"That sounds.. nice, yes.",
+			"Mhm.. okay. Let's try.",
+		]
+	if(_id == "SoftSlaveryGBFollow"):
+		return [
+			"Please follow me..",
+			"This way.. we should find a spot.",
+			"Follow me, please..",
+			"Come with me..",
+			"Follow me.. we can start soon.",
+		]
+	if(_id == "SoftSlaveryGBSubOffer"):
+		return [
+			"Um.. maybe I could be the one gangbanged instead? I can pay..",
+			"I think.. I'd rather be the one used, actually. I can pay even.",
+			"Could I maybe.. be an extra hole? I, uh, can pay.",
+			"Would it be okay if I was on the receiving end? Even if it costs me..",
+			"I'm more comfortable being the one getting gangbanged.. I can pay.",
+			"I'd prefer to be the one taking all the.. attention. I can pay even.",
+			"Maybe I could be fucked instead? Or just an extra. I can pay!",
+			"I want to be the gangbang slut.. not one of the users. I have credits.",
+		]
+	if(_id == "SoftSlaveryGBSubOfferYes"):
+		return [
+			"I guess we could use another person..",
+			"Okay.. the more the merrier, I suppose.",
+			"Um, why not? There's room for another.",
+			"Alright.. get ready to be used.",
+			"Okay by me.. you'll take what we give.",
+			"That works.. another person to join.",
+			"Sure.. I hope you can handle it.",
+			"Okay.. you'll be used too.",
+		]
+	if(_id == "SoftSlaveryGBSubOfferNo"):
+		return [
+			"We already have enough people..",
+			"No thank you, we have enough participants.",
+			"We don't need another person right now..",
+			"We have all the people we need..",
+		]
+	if(_id == "SoftSlaveryGBSubOfferNoAw"):
+		return [
+			"Aw.. okay then.",
+			"That's too bad.. maybe next time.",
+			"Alright then..",
+			"Okay.. I'll find someone else to use me.",
+			"Okay.. I'll just watch then.",
+			"Alright.. maybe I can join another time.",
+		]
+	if(_id == "SoftSlaveryGBNo"):
+		return [
+			"I'll pass..",
+			"Not really interested..",
+			"No thank you..",
+			"I'll sit this one out..",
+			"Not for me today..",
+			"Maybe another time..",
+			"I'll pass for now..",
+			"It's not really my thing..",
+			"No, I'm okay..",
+			"Not right now..",
+		]
+	if(_id == "SoftSlaveryGBNoReact"):
+		return [
+			"Oh, okay then..",
+			"That's your choice..",
+			"Okay.. more for others, I guess.",
+			"Okay then..",
+			"Missing out, but that's okay..",
+			"Your decision.. we'll have fun anyway.",
+			"Okay.. we'll find someone else.",
+			"That's alright.. plenty of others.",
+		]
+	if(_id == "SoftSlaveryGBStart"):
+		return [
+			"Time to start.. I hope this is okay.",
+			"Is everyone ready? We can begin..",
+			"Time to put this {npc.npcSlave} to use..",
+			"Let's see how much you can take..",
+			"I hope you're ready for this..",
+			"Time to earn your keep..",
+			"Let's see what this {npc.npcSlave} can handle..",
+			"Everyone can take a turn.. please be careful.",
+		]
+	if(_id == "SoftSlaveryGBEnd"):
+		return [
+			"Was that.. satisfying? Here's your share, {npc.npcSlave}.",
+			"Did everyone have enough? Good. Here's your part, {npc.npcSlave}.",
+			"That was.. wow. You earned this, {npc.npcSlave}.",
+			"I hope it wasn't too much. Here's your cut.",
+			"You did well today. This is yours, {npc.npcSlave}.",
+			"You handled that well. Here's your share.",
+			"Is everyone done? Okay. This is for you, {npc.npcSlave}.",
+			"That was quite intense. You've earned this, {npc.npcSlave}.",
+			"You did good. Here's your cut for being cooperative.",
+			"You served well. This is your reward, {npc.npcSlave}.",
+		]
+
+
+	if(_id == "SoftSlaveryLockRestraint"):
+		return [
+			"I was thinking.. maybe I could put something on you today.",
+			"I kind of want to see you in some restraints..",
+			"Your body looks.. bare. Maybe I should lock something onto you.",
+			"I was thinking.. Maybe you need some bondage.. I want to put something on you.",
+			"I own you.. so I think I'll lock something on you. I want to.",
+			"Your body looks like it needs some.. accessories."
+		]
+	if(_id == "SoftSlaveryLockRestraint2"):
+		return [
+			"Which one do you prefer? I'll let you choose..",
+			"Tell me which toy you'd like me to lock on you..",
+			"Which one makes you feel.. things? You don't have to hide it.",
+			"You can pick one.. I'm letting you choose.",
+		]
+	if(_id == "SoftSlaveryLockRestraint3"):
+		return [
+			"I'll keep the key.. Please don't try to remove it, {npc.npcSlave}.",
+			"I have the only key.. Please don't try to escape.",
+			"I have the key.. Don't think about getting free, okay?",
+			"The key is with me.. I hope the restraint is comfortable.",
+			"It will stay on for a while.. I hope you get used to it.",
+		]
+	if(_id == "SoftSlaveryOfferGearUnlock"):
+		return [
+			"You've been locked up for a while.. Ready to be free?",
+			"Has that gear been on too long? Do you want it off?",
+			"Are you tired of being restrained? Maybe I can free you.. for now.",
+			"Is the metal uncomfortable? Do you need relief?",
+			"Have you been good? Maybe you deserve some freedom from the bondage..",
+		]
+	if(_id == "SoftSlaveryOfferGearUnlock2"):
+		return [
+			"There.. that feels better, right? But I'm not finished with you yet..",
+			"Freedom must feel nice.. but now I wanna do something else with you.",
+			"Enjoy that feeling.. I want to do something else now.",
+		]
+	if(_id == "SoftSlaveryOfferGearUnlockKeep"):
+		return [
+			"Keep it? Okay.. it does suit you.",
+			"You want to stay locked? That's.. nice.",
+			"You enjoy being restrained? I thought you might..",
+			"You like being locked up? Good.. it's where you should be.",
+			"You prefer the restraints? Maybe you're accepting this..",
+			"Keep the gear on? I'm glad my property knows its place..",
+			"Stay locked up? You're becoming a good slave..",
+		]
+	if(_id == "SoftSlaveryOfferGearUnlockKeep2"):
+		return [
+			"Now, I still want to do something else with you..",
+			"Now let's do what I had in mind..",
+			"Now let's see what we can do while you're like this..",
+			"Now that you're staying locked, let's do something..",
+			"Good choice.. now let me enjoy my bound property."
+		]
+	if(_id == "SoftSlaveryNoticedNoGear"):
+		return [
+			"Wait.. Didn't I lock something on you? I'm sure I did. Where is it, {npc.npcSlave}?",
+			"You're not wearing what I locked onto you.. Can you explain, {npc.npcSlave}?",
+			"I don't see the gear I put on you.. Where did it go, {npc.npcSlave}?",
+			"You're supposed to be restrained.. Where is my stuff, {npc.npcSlave}?",
+			"You're missing something.. Where are your locks?",
+			"Someone isn't wearing their restraints.. Can you explain?"
+		]
+	if(_id == "SoftSlaveryNoticedNoGear2"):
+		return [
+			"You know what this means.. I have to punish you.",
+			"This means.. I need to punish you.",
+			"You've earned a punishment, {npc.npcSlave}.",
+			"Time for a punishment.."
+		]
+
+	if(_id == "SoftSlaveryAskSex"):
+		return [
+			"Okay.. but please get on your knees first.",
+			"Alright.. let's do this. Please kneel.",
+			"Okay.. but I might not be very good. Please kneel.",
+			"Good {npc.npcSlave}.. Now assume the position.",
+			"You'll take what I give.. okay? Now kneel.",
+		]
+	if(_id == "SoftSlaveryAskFuckOwner"):
+		return [
+			"Um.. okay. But only because I want to..",
+			"Alright.. but please make it good.",
+			"Don't get too used to this.. but yes.",
+			"Please don't disappoint me, {npc.npcSlave}.",
+			"Okay.. try to impress me, my {npc.npcSlave}.",
+			"Interesting.. try your best, please.",
+			"You have permission.. please don't make me regret this.",
+		]
+	if(_id == "SoftSlaveryAskFuckOwnerBad"):
+		return [
+			"That was.. not very good. Even I can do better..",
+			"Not great.. You can't really take charge well.",
+			"Not very good.. Don't expect to be on top again.",
+			"That was awkward to experience.. You're not good at this.",
+			"Do you know what you're doing? It doesn't seem like it..",
+			"Please don't ask to top again after that..",
+			"Wow.. That was.. not good.",
+		]
+	if(_id == "SoftSlaveryAskFuckOwnerOkay"):
+		return [
+			"That was okay, I guess.. Are you sure about topping?",
+			"Not bad, but not great either.. You need practice.",
+			"Not terrible, but not impressive either..",
+			"You didn't completely embarrass yourself, I suppose..",
+			"Passable.. Maybe you can improve.",
+			"Not the worst I've had, but not the best..",
+			"You weren't completely useless.. surprising.",
+			"You managed okay.. but don't get too proud.",
+		]
+	if(_id == "SoftSlaveryAskFuckOwnerGood"):
+		return [
+			"Not bad.. that helped. Thanks, {npc.npcSlave}.",
+			"Surprisingly good.. You can ask to do that again sometime.",
+			"Well done.. You actually know how to use your body.",
+			"Impressive.. I might let you take charge more often.",
+			"You earned your keep today.. Good job.",
+			"You pleased me.. Well done, {npc.npcSlave}.",
+			"That was good service.. Well done.",
+			"You did better than I expected.. I'm satisfied.",
+			"Finally, you show some skill.. Good.",
+		]

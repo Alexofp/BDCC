@@ -11,10 +11,10 @@ func getVisibleDescription() -> String:
 
 func getPossiblePCNamesForLevel(_npcOwner, _level:int) -> Array:
 	if(_level <= 1):
-		return ["sub"]
+		return ["sub", "pet"]
 	if(_level == 2):
-		return ["servant"]
-	return ["submissive"]
+		return ["servant", "dear"]
+	return ["submissive", "love"]
 
 func getTraitScore(_npcOwner) -> float:
 	var personality:Personality = _npcOwner.getOwner().getPersonality()
