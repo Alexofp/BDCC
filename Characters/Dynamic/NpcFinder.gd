@@ -65,6 +65,11 @@ static func npcSatisfiesCondition(character:BaseCharacter, conInfo):
 	elif(conditionID == NpcCon.HasReachableAnus):
 		if(!character.hasReachableAnus()):
 			return false
+	elif(conditionID == NpcCon.NotInStocksOrEquivalent):
+		var characterInventory:Inventory = character.getInventory()
+
+		if( characterInventory.hasItemIDEquipped("StocksStatic") || characterInventory.hasItemIDEquipped("SlutwallStatic") ):
+			return false
 	return true
 
 static func npcCanBeUsedAtAll(character:BaseCharacter, allConditions):

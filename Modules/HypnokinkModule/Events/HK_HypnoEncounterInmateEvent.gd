@@ -11,7 +11,7 @@ func react(_triggerID, _args):
 	if(_args.size() > 0):
 		encounterLevel = _args[0]
 	
-	var idToUse = grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [], InmateGenerator.new(), {NpcGen.Level: encounterLevel})
+	var idToUse = grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.NotInStocksOrEquivalent]], InmateGenerator.new(), {NpcGen.Level: encounterLevel})
 	
 	if(idToUse == null || idToUse == ""):
 		return false
