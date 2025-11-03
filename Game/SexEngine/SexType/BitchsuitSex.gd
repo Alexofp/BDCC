@@ -14,6 +14,8 @@ func getDefaultAnimation():
 	if(theSubIDs.empty()):
 		return [StageScene.Solo, "stand", {pc=theDomIDs[0]}]
 	if(theDomIDs.empty()):
-		return [StageScene.PuppySolo, "stand", {pc=theSubIDs[0]}]
+		return [StageScene.PuppySolo, "stand" if !isUnconscious(theSubIDs[0]) else "sad", {pc=theSubIDs[0]}]
 	
-	return [StageScene.PuppyDuo, "stand", {pc=theDomIDs[0], npc=theSubIDs[0]}]
+	if(isUnconscious(theSubIDs[0])):
+		return [StageScene.PuppySexStart, "sad", {pc=theDomIDs[0], npc=theSubIDs[0]}]
+	return [StageScene.PuppySexStart, "start", {pc=theDomIDs[0], npc=theSubIDs[0]}]

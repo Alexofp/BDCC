@@ -43,6 +43,7 @@ func getSupportedSexTypes():
 	return {
 		SexType.DefaultSex: true,
 		SexType.SlutwallSex: true,
+		SexType.BitchsuitSex: true,
 	}
 
 const POSE_DEFAULT = "POSE_DEFAULT"
@@ -802,6 +803,15 @@ func getSubResistChance(baseChance:float, domAngerRemoval:float) -> float:
 
 func getAnimation():
 	var shouldUncon = getSubInfo().isUnconscious()
+	
+	if(getSexType() == SexType.BitchsuitSex):
+		if(state in [""]):
+			return [StageScene.PuppySexCowgirl, "tease", {npc=SUB_0, pc=DOM_0}]
+		if(state in ["knotting", "inside"]):
+			return [StageScene.PuppySexCowgirl, "inside", {npc=SUB_0, pc=DOM_0}]
+		if(getSubInfo().isCloseToCumming() || (isStraponSex() && getDomInfo().isCloseToCumming())):
+			return [StageScene.PuppySexCowgirl, "fast", {npc=SUB_0, pc=DOM_0}]
+		return [StageScene.PuppySexCowgirl, "sex", {npc=SUB_0, pc=DOM_0}]
 	
 	if(getSexType() == SexType.SlutwallSex):
 		if(state in [""]):

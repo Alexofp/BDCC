@@ -680,6 +680,7 @@ func registerEverything():
 	
 	if(true):
 		var start2 = OS.get_ticks_usec()
+		registerStageSceneFolder("res://Player/StageScene3D/Scenes3/")
 		registerStageSceneFolder("res://Player/StageScene3D/Scenes2/")
 		registerStageSceneFolder("res://Player/StageScene3D/Scenes/")
 		var end2 = OS.get_ticks_usec()
