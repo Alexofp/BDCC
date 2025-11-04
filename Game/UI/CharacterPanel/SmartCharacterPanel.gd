@@ -48,6 +48,10 @@ func removeCharacter(charID:String):
 	
 	updateVisibility()
 
+func reloadArtworkImages():
+	for charID in characters:
+		artworkPanel.addCharacter(charID, characters[charID])
+
 func updateData():
 	artworkPanel.updateMainCharacter()
 	charactersPanel.updateStatuses()
