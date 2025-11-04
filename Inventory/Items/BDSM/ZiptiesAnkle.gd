@@ -31,8 +31,8 @@ func getSellPrice():
 
 func getUnriggedParts(_character):
 	return {
-		"ankle.L": ["res://Inventory/UnriggedModels/ZipTies/ZipTiesModel.tscn"],
-		"ankle.R": ["res://Inventory/UnriggedModels/ZipTies/ZipTiesModel.tscn"],
+		"ankle.L": ["res://Inventory/UnriggedModels/ZipTies/AnkleZipTiesModel.tscn"],
+		"ankle.R": ["res://Inventory/UnriggedModels/ZipTies/AnkleZipTiesModel.tscn"],
 	}
 
 func getForcedOnMessage(isPlayer = true):
@@ -40,6 +40,9 @@ func getForcedOnMessage(isPlayer = true):
 		return "Some zip ties were forced onto your legs, forcing you to waddle or hop around!"
 	else:
 		return "Some zip ties were forced onto {receiver.nameS} legs, forcing {receiver.him} to waddle or hop around!"
+
+func getChains():
+	return [["cableshort", "ankle.L", "ankle.R"]]
 
 func getInventoryImage():
 	return "res://Images/Items/bdsm/ZipTies.png"
