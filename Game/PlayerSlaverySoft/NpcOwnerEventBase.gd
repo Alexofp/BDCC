@@ -29,6 +29,7 @@ const E_PUNISH_WEAK = "punish_weak"
 const E_PUNISH_STRONG = "punish_strong"
 const E_PUNISH_GET_RID_OF = "punish_getridof"
 const E_PARADE_TO = "paradeTo"
+const E_WALKIES_TO = "walkiesTo"
 const E_PROTECT = "protect"
 
 const AliasToRole = {
@@ -620,6 +621,9 @@ func runPunishment():
 
 func runParadeTo(_loc:String):
 	runEvent("paradeTo", "ParadeTo", [_loc])
+
+func runWalkiesTo(_loc:String):
+	runEvent("walkiesTo", "WalkiesTo", [_loc])
 
 func runNpcFight(_char1:String, _char2:String, _sceneTag:String = "npcFight"):
 	runEvent(_sceneTag, "NpcFight", [_char1, _char2])

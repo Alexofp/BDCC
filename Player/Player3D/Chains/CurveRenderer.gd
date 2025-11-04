@@ -58,7 +58,7 @@ func _process(_delta):
 	curve.set_point_in(1, (mid_point_sagged - anchor_point) * flex)
 	curve.set_point_position(1, anchor_point)
 	
-	var points = curve.tessellate(3, 20)
+	var points = curve.tessellate()
 	
 	#turn curve into a strip by offsetting the points by half-width in each direction
 	var camera_normal = Vector3(0,0,1)

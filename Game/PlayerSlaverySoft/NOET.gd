@@ -12,3 +12,4 @@ const Tasks = "Tasks" #This event includes the owner giving their slave some tas
 const Prostitution = "Prostitution" #This event includes sex in exchange for credits
 const Credits = "Credits" #This event includes manipulation of player's credits
 const SubbyOwner = "SubbyOwner" #This event involves the owner being subby
+const Petplay = "Petplay" #This event involves the player being a pet

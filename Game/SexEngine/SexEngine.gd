@@ -103,6 +103,12 @@ func initSexType(theSexType, args:Dictionary = {}):
 		domNoPullingOut = args[SexMod.DomNoPullingOut]
 	if(args.has(SexMod.MustUseCondoms)):
 		mustUseCondoms = args[SexMod.MustUseCondoms]
+	if(args.has(SexMod.SubsStartNaked) && args[SexMod.SubsStartNaked]):
+		for subID in subs:
+			getSubInfo(subID).getChar().lustStateFullyUndress()
+	if(args.has(SexMod.DomsStartNaked) && args[SexMod.DomsStartNaked]):
+		for domID in doms:
+			getDomInfo(domID).getChar().lustStateFullyUndress()
 		
 	if(sexType != null):
 		sexType.setSexEngine(self)
