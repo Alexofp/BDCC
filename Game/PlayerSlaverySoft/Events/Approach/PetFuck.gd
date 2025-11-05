@@ -25,7 +25,7 @@ func start():
 func start_do(_id:String, _args:Array):
 	if(_id == "obey"):
 		setState("obey")
-		checkSubEvent("fuck", "You were about to be restrained by {npc.name}..", [])
+		#checkSubEvent("fuck", "You were about to be restrained by {npc.name}..", [])
 	if(_id == "resist"):
 		runResist()
 	if(_id == "yesbut"):

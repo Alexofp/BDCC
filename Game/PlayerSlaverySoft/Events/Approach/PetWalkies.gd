@@ -3,11 +3,15 @@ extends NpcOwnerEventBase
 var timesLeft:int = 3
 var isFirst:bool = true
 
+var wantsTrick:String = "" #bark down sit paw roll
+var pcPickedTrick:String = ""
+
 #possible unique interactions:
 # simons says but with puppy tricks (sit, lay down, give paw, etc)
 # Eliza checking the puppy
 # Find-bring ball?
 # Just belly rubs?
+# Do X (but you are presented with all of the options)
 
 func _init():
 	id = "PetWalkies"
@@ -56,6 +60,7 @@ func preparedPuppy_do(_id:String, _args:Array):
 		setState("paraded")
 		var theTarget := getParadeTarget()
 		runWalkiesTo(theTarget)
+		checkUniqueTarget(theTarget)
 
 func paraded():
 	#playAnimation(StageScene.PuppyDuo, "stand", {pc=getOwnerID(), npcBodyState={naked=true, leashedBy=getOwnerID()}})
@@ -88,7 +93,7 @@ func paraded_do(_id:String, _args:Array):
 		timesLeft -= 1
 		var theTarget := getParadeTarget()
 		runWalkiesTo(theTarget)
-		#checkUniqueTarget(theTarget)
+		checkUniqueTarget(theTarget)
 	if(_id == "resist"):
 		runResist()
 
@@ -96,21 +101,24 @@ func paraded_do(_id:String, _args:Array):
 #Unique stuff
 func checkUniqueTarget(_target:String):
 	if(RNG.chance(0)):
+		setState("paraded")
 		return
-	if(_target in ["main_shower1", "main_shower2"]):
-		setState("pShower")
-	if(_target in ["main_punishment_spot"]):
-		setState("pStocksTease")
-	if(_target in ["hall_canteen"]):
-		setState("pCanteen")
-	if(_target in ["main_hallroom1"]):
-		setState("pVendomat")
-	if(_target in ["med_lobbymain"]):
-		if(GM.pc.getPainLevel() > 0.4):
-			setState("pMedical")
-
+#	if(_target in ["main_shower1", "main_shower2"]):
+#		setState("pShower")
+#	if(_target in ["main_punishment_spot"]):
+#		setState("pStocksTease")
+#	if(_target in ["hall_canteen"]):
+#		setState("pCanteen")
+#	if(_target in ["main_hallroom1"]):
+#		setState("pVendomat")
+#	if(_target in ["med_lobbymain"]):
+#		if(GM.pc.getPainLevel() > 0.4):
+#			setState("pMedical")
+	setState("simpleTrick")
+	
 func getDoState() -> String:
-	if(state in ["pShower", "pStocksTease", "pCanteen", "pVendomat", "pMedical"]):
+	if(state in ["pShower", "pStocksTease", "pCanteen", "pVendomat", "pMedical",
+		"simpleTrickCorrect", "simpleTrickWrong"]):
 		return "paraded"
 	return .getDoState()
 
@@ -179,10 +187,69 @@ func pShower():
 	
 	paradedOutcome()
 
+func simpleTrick():
+	if(onlyOnce()):
+		wantsTrick = RNG.pick([
+			"bark", "down", "sit", "paw", "roll",
+		])
+	
+	if(wantsTrick == "bark"):
+		talkOwner("Bark for me.")
+	elif(wantsTrick == "down"):
+		talkOwner("Lie down.")
+	elif(wantsTrick == "sit"):
+		talkOwner("Sit.")
+	elif(wantsTrick == "paw"):
+		talkOwner("Give paw.")
+	elif(wantsTrick == "roll"):
+		talkOwner("Roll over.")
+	saynn("Looks like {npc.name} wants you to do something..")
+	
+	var possible:Array = [
+		["Bark", "bark"], ["Lie down", "down"], ["Sit", "sit"], ["Raise paw", "paw"], ["Roll", "roll"],
+	]
+	possible.shuffle()
+	for buttonEntry in possible:
+		addButton(buttonEntry[0], "Do this!", "doTrick", [buttonEntry[1]])
+
+func simpleTrick_do(_id:String, _args:Array):
+	if(_id == "doTrick"):
+		pcPickedTrick = _args[0]
+		if(pcPickedTrick == wantsTrick):
+			setState("simpleTrickCorrect")
+		else:
+			setState("simpleTrickWrong")
+
+func playTrickAnim(theTrick:String):
+	if(theTrick == "bark"):
+		playAnimation(StageScene.PuppySexStart, "start", {pc=getOwnerID(), npcBodyState={naked=true}})
+	elif(theTrick == "down"):
+		playAnimation(StageScene.PuppyDuo, "stand", {pc=getOwnerID(), npcAction="sad", npcBodyState={naked=true}})
+	elif(theTrick == "sit"):
+		playAnimation(StageScene.PuppyDuo, "stand", {pc=getOwnerID(), npcAction="sit", npcBodyState={naked=true}})
+	elif(theTrick == "paw"):
+		playAnimation(StageScene.PuppyDuo, "stand", {pc=getOwnerID(), npcAction="paw", npcBodyState={naked=true}})
+	elif(theTrick == "roll"):
+		playAnimation(StageScene.PuppyDuo, "stand", {pc=getOwnerID(), npcAction="sad", npcBodyState={naked=true}})
+	
+func simpleTrickCorrect():
+	playTrickAnim(pcPickedTrick)
+	saynn("CORRECT!")
+	addInfluenceObey(0.2)
+	paradedOutcome()
+
+func simpleTrickWrong():
+	playTrickAnim(pcPickedTrick)
+	saynn("WRONG!")
+	#addInfluenceObey(0.2)
+	paradedOutcome()
+
 func saveData() -> Dictionary:
 	var data := .saveData()
 	data["timesLeft"] = timesLeft
 	data["isFirst"] = isFirst
+	data["wantsTrick"] = wantsTrick
+	data["pcPickedTrick"] = pcPickedTrick
 	return data
 
 func loadData(_data:Dictionary):
@@ -190,3 +257,5 @@ func loadData(_data:Dictionary):
 	
 	timesLeft = SAVE.loadVar(_data, "timesLeft", 3)
 	isFirst = SAVE.loadVar(_data, "isFirst", true)
+	wantsTrick = SAVE.loadVar(_data, "wantsTrick", "")
+	pcPickedTrick = SAVE.loadVar(_data, "pcPickedTrick", "")
