@@ -6,6 +6,10 @@ var isFirst:bool = true
 var wantsTrick:String = "" #bark down sit paw roll
 var pcPickedTrick:String = ""
 
+var trickQueue:Array = []
+
+var didComplicatedEvent:bool = false
+
 #possible unique interactions:
 # simons says but with puppy tricks (sit, lay down, give paw, etc)
 # Eliza checking the puppy
@@ -114,6 +118,15 @@ func checkUniqueTarget(_target:String):
 #	if(_target in ["med_lobbymain"]):
 #		if(GM.pc.getPainLevel() > 0.4):
 #			setState("pMedical")
+	if(!didComplicatedEvent):
+		if(timesLeft != 2 && (RNG.chance(30.0) || timesLeft==0 )):
+			didComplicatedEvent = true
+			setState(RNG.pick([
+				"simonsSaysTricks",
+			]))
+			return
+		
+	
 	setState("simpleTrick")
 	
 func getDoState() -> String:
@@ -188,10 +201,12 @@ func pShower():
 	paradedOutcome()
 
 func simpleTrick():
+	playAnimation(StageScene.PuppyDuo, "stand", {pc=getOwnerID(), npcBodyState={naked=true}})
 	if(onlyOnce()):
 		wantsTrick = RNG.pick([
 			"bark", "down", "sit", "paw", "roll",
 		])
+	saynn("Your owner stops and turns towards you.")
 	
 	if(wantsTrick == "bark"):
 		talkOwner("Bark for me.")
@@ -231,17 +246,158 @@ func playTrickAnim(theTrick:String):
 		playAnimation(StageScene.PuppyDuo, "stand", {pc=getOwnerID(), npcAction="paw", npcBodyState={naked=true}})
 	elif(theTrick == "roll"):
 		playAnimation(StageScene.PuppyDuo, "stand", {pc=getOwnerID(), npcAction="sad", npcBodyState={naked=true}})
+
+func generateTrickQueue(_size:int) -> Array:
+	var result:Array = []
+	var possible:Array = ["bark", "down", "sit", "paw", "roll"]
+	var lastTrick:String = ""
+	
+	while(_size > 0):
+		var nextTrick:String = RNG.pick(possible)
+		if(nextTrick == lastTrick):
+			nextTrick = RNG.pick(possible)
+		result.append(nextTrick)
+		lastTrick = nextTrick
+		_size -= 1
+	
+	return result
+
+func trickToTrickName(_trick:String) -> String:
+	if(_trick == "bark"):
+		return "bark"
+	if(_trick == "down"):
+		return "lie down"
+	if(_trick == "sit"):
+		return "sit"
+	if(_trick == "paw"):
+		return "give paw"
+	if(_trick == "roll"):
+		return "roll over"
+	return "ERROR?"
+
+func trickToText(theTrick:String) -> String:
+	if(theTrick == "bark"):
+		return "You bark a few times loudly!"
+	elif(theTrick == "down"):
+		return "You lie down on the cold ground and wait for an acknowledgement."
+	elif(theTrick == "sit"):
+		return "You push your front paws off of the ground and sit your butt down."
+	elif(theTrick == "paw"):
+		return "You raise your paw and wait for your owner to shake it."
+	elif(theTrick == "roll"):
+		return "You flop sideways onto the floor and then roll to your other side as best as you can."
+	return "ERROR?"
+	
+func trickResultToText(theTrick:String, _isCorrect:bool) -> String:
+	if(theTrick == "bark"):
+		if(_isCorrect):
+			return "Your owner smiles and pats you."
+		else:
+			return "Your owner crosses {npc.his} arms and furrows {npc.his} brows."
+	elif(theTrick == "down"):
+		if(_isCorrect):
+			return "Your owner nods and gestures for you to get up."
+		else:
+			return "Your owner shakes {npc.his} head."
+	elif(theTrick == "sit"):
+		if(_isCorrect):
+			return "Your owner admires your agility."
+		else:
+			return "Your owner shakes {npc.his} head."
+	elif(theTrick == "paw"):
+		if(_isCorrect):
+			return "Your owner smiles and shakes your paw!"
+		else:
+			return "Your owner refuses to shake your paw."
+	elif(theTrick == "roll"):
+		if(_isCorrect):
+			return "Your owner nods and gives your back a stroke."
+		else:
+			return "Your owner sighs and flicks your snout."
+	if(_isCorrect):
+		return "Your owner nods."
+	else:
+		return "Your owner shakes {npc.his} head."
 	
 func simpleTrickCorrect():
 	playTrickAnim(pcPickedTrick)
-	saynn("CORRECT!")
+	saynn(trickToText(pcPickedTrick))
+	saynn(trickResultToText(pcPickedTrick, true))
+	talkModularOwnerToPC("SoftSlaveryWalkiesCorrect") # Correct. Good puppy.
 	addInfluenceObey(0.2)
+	saynn("You wait for what's next.")
 	paradedOutcome()
 
 func simpleTrickWrong():
 	playTrickAnim(pcPickedTrick)
-	saynn("WRONG!")
+	saynn(trickToText(pcPickedTrick))
+	saynn(trickResultToText(pcPickedTrick, false))
+	talkModularOwnerToPC("SoftSlaveryWalkiesWrong") # Nope. Wrong.
+	saynn("Oh well. You wait for what's next.")
 	#addInfluenceObey(0.2)
+	paradedOutcome()
+
+func simonsSaysTricks():
+	playAnimation(StageScene.PuppyDuo, "stand", {pc=getOwnerID(), npcBodyState={naked=true}})
+	if(onlyOnce()):
+		trickQueue = generateTrickQueue(RNG.randi_range(3, 5))
+		pcPickedTrick = ""
+	
+	saynn("Your owner turns towards you.")
+	talkOwner("Let's do something more complicated, I wanna test my puppy.")
+	saynn("You tilt your head.")
+	talkOwner("I will say a list of tricks and you will do them, in the same order.")
+	saynn("Your ears perk, listening carefully..")
+	
+	var theTricks:Array = []
+	for theTrick in trickQueue:
+		theTricks.append(trickToTrickName(theTrick))
+	talkOwner("I want you to do this: "+Util.humanReadableList(theTricks, "and then")+".")
+	addContinue("setState", ["simonsSaysTricksDo"])
+	
+func simonsSaysTricksDo():
+	if(pcPickedTrick == ""):
+		saynn("Your owner finished listing what tricks {npc.he} {npc.verb('want')} you to perform and just watches now.")
+	else:
+		playTrickAnim(pcPickedTrick)
+		saynn(trickToText(pcPickedTrick))
+		saynn(trickResultToText(pcPickedTrick, true))
+	
+	var possible:Array = [
+		["Bark", "bark"], ["Lie down", "down"], ["Sit", "sit"], ["Raise paw", "paw"], ["Roll", "roll"],
+	]
+	for buttonEntry in possible:
+		addButton(buttonEntry[0], "Do this!", "doTrick", [buttonEntry[1]])
+
+func simonsSaysTricksDo_do(_id:String, _args:Array):
+	var theTrick:String = _args[0]
+	pcPickedTrick = theTrick
+	
+	if(pcPickedTrick == trickQueue.front()):
+		trickQueue.pop_front()
+		if(trickQueue.empty()):
+			setState("simonsSaysTricksDoGood")
+		else:
+			setState("simonsSaysTricksDo")
+	else:
+		setState("simonsSaysTricksDoFailed")
+
+func simonsSaysTricksDoFailed():
+	playTrickAnim(pcPickedTrick)
+	saynn(trickToText(pcPickedTrick))
+	saynn(trickResultToText(pcPickedTrick, false))
+	talkModularOwnerToPC("SoftSlaveryWalkiesWrong") # Nope. Wrong.
+	saynn("Oh well. You wait for what's next.")
+	#addInfluenceObey(0.2)
+	paradedOutcome()
+
+func simonsSaysTricksDoGood():
+	playTrickAnim(pcPickedTrick)
+	saynn(trickToText(pcPickedTrick))
+	saynn(trickResultToText(pcPickedTrick, true))
+	talkModularOwnerToPC("SoftSlaveryWalkiesCorrect") # Correct. Good puppy.
+	addInfluenceObey(0.4)
+	saynn("You get lots of headpats for getting it right!")
 	paradedOutcome()
 
 func saveData() -> Dictionary:
@@ -250,6 +406,8 @@ func saveData() -> Dictionary:
 	data["isFirst"] = isFirst
 	data["wantsTrick"] = wantsTrick
 	data["pcPickedTrick"] = pcPickedTrick
+	data["trickQueue"] = trickQueue
+	data["didComplicatedEvent"] = didComplicatedEvent
 	return data
 
 func loadData(_data:Dictionary):
@@ -259,3 +417,5 @@ func loadData(_data:Dictionary):
 	isFirst = SAVE.loadVar(_data, "isFirst", true)
 	wantsTrick = SAVE.loadVar(_data, "wantsTrick", "")
 	pcPickedTrick = SAVE.loadVar(_data, "pcPickedTrick", "")
+	trickQueue = SAVE.loadVar(_data, "trickQueue", [])
+	didComplicatedEvent = SAVE.loadVar(_data, "didComplicatedEvent", false)

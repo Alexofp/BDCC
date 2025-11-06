@@ -220,6 +220,20 @@ func getForms() -> Dictionary:
 		"SoftSlaveryAskFuckOwnerGood": form("Not bad, that scratched the itch. Thanks, {npc.npcSlave}.", {main=CHAR, target=CHAR}, "main", "target"),
 		
 		"SoftSlaveryPetFuck": form("I wanna have some fun with my {npc.npcSlave}. Hold this while I secure this bitchsuit on you.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryPetWalkies": form("It's walkies time. Let's get you prepared, {npc.npcSlave}.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryPetWalkiesReady": form("Ready? Try to keep up, puppy.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryWalkiesCorrect": form("Correct. Good puppy.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryWalkiesWrong": form("Nope. Wrong.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryWalkiesBark": form("What a cute puppy. Can you bark for me?", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryWalkiesPet": form("What a cute puppy. Can I pat you?", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryWalkiesGoodPuppy": form("Good puppy.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryWalkiesGoodPuppySex": form("Are you gonna be a good puppy and let me fuck you?", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryWalkiesBadPuppy": form("Stupid mut.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryWalkiesBadPuppyObey": form("You need to obey more, {npc.npcSlave}.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryWalkiesLostNotDone": form("Whatever. We're not done walking around yet.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryWalkiesBiteProtect": form("This is my {npc.npcSlave}. Fuck off.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryWalkiesBiteBad": form("Ow. Control your mut better.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryWalkiesBiteAttack": form("Ow. I will make you suffer for this.", {main=CHAR, target=CHAR}, "main", "target"),
 
 		"SoftSlavery": form("", {main=CHAR, target=CHAR}, "main", "target"),
 	}
