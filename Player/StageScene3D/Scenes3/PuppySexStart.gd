@@ -64,7 +64,7 @@ func playAnimation(animID, _args = {}):
 	if(animID == "start"):
 		state_machine.travel("PuppySexStart_1-loop")
 		state_machine2.travel("PuppySexStart_2-loop")
-	if(animID == "pat"):
+	if(animID == "pat" || animID == "pet"):
 		state_machine.travel("PuppySexStartPat_1-loop")
 		state_machine2.travel("PuppySexStartPat_2-loop")
 	if(animID == "sad"):

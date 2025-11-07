@@ -234,6 +234,12 @@ func getForms() -> Dictionary:
 		"SoftSlaveryWalkiesBiteProtect": form("This is my {npc.npcSlave}. Fuck off.", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryWalkiesBiteBad": form("Ow. Control your mut better.", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryWalkiesBiteAttack": form("Ow. I will make you suffer for this.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryWalkiesBall": form("I wanna play fetch with you, {npc.npcSlave}.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryWalkiesBall2": form("Go get the ball!", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryWalkiesPraise": form("Good puppy. What a good puppy.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryWalkiesBallTooFarFake": form("Couldn't find the ball? It's because it's in my hand, you silly pup.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryWalkiesBallTooFar": form("Where do you think you're going? What a silly pup, did you get lost trying to find the ball?", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryWalkiesNoBallFound": form("You're sad because you couldn't find my ball? That's because I did a fake throw. Such a silly puppy.", {main=CHAR, target=CHAR}, "main", "target"),
 
 		"SoftSlavery": form("", {main=CHAR, target=CHAR}, "main", "target"),
 	}
