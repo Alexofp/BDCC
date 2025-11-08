@@ -219,7 +219,7 @@ func getForms() -> Dictionary:
 		"SoftSlaveryAskFuckOwnerOkay": form("That was okay, I guess. Are you sure you're able to top?", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryAskFuckOwnerGood": form("Not bad, that scratched the itch. Thanks, {npc.npcSlave}.", {main=CHAR, target=CHAR}, "main", "target"),
 		
-		"SoftSlaveryPetFuck": form("I wanna have some fun with my {npc.npcSlave}. Hold this while I secure this bitchsuit on you.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryPetFuck": form("I wanna have some fun with my {npc.npcSlave}. Hold still while I secure this bitchsuit on you.", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryPetWalkies": form("It's walkies time. Let's get you prepared, {npc.npcSlave}.", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryPetWalkiesReady": form("Ready? Try to keep up, puppy.", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryWalkiesCorrect": form("Correct. Good puppy.", {main=CHAR, target=CHAR}, "main", "target"),
