@@ -1754,3 +1754,193 @@ func getText(_id:String, _args:Dictionary):
 			"You did better than I expected.. I'm satisfied.",
 			"Finally, you show some skill.. Good.",
 		]
+
+
+	if(_id == "SoftSlaveryPetFuck"):
+		return [
+			"I was thinking.. maybe we could.. um.. have some time together. I have this bitchsuit.. if that's okay.",
+			"I'd like to be close to you.. if you'll let me. I have this bichsuit that will make it more fun..",
+			"Could we maybe.. try this? I will put these puppy restraints on you.. and then we can have some fun.",
+			"Maybe we could use these restraints.. if that's alright with you. It will be fun I think.",
+			"If it's okay.. I'd like to spend some time with you like this.. wearing these..",
+			"I thought maybe.. we could try this? The restraints leave everything accessible.. for me.",
+		]
+	if(_id == "SoftSlaveryPetWalkies"):
+		return [
+			"Maybe we could.. go for a walk together? Walkies. You just need to wear this.",
+			"I was hoping we could take a walk.. if that's alright with you. You just have to wear this.",
+			"Would you like to go for a walk with me? I will put these puppy restraints on you..",
+			"Maybe I can give you some walkies.. It will be very fun if you wear this bitchsuit.",
+		]
+	if(_id == "SoftSlaveryPetWalkiesReady"):
+		return [
+			"Ready? I'll try to go slow.. if you need me to..",
+			"All set? Please stay close to me..",
+			"Ready to go? We can take our time..",
+			"Ready? Good puppy.. you can follow me..",
+			"All geared up? We don't have to rush..",
+			"Ready? Try not to fall..",
+			"All good? Please be careful..",
+		]
+	if(_id == "SoftSlaveryWalkiesCorrect"):
+		return [
+			"That's correct.. good puppy.",
+			"You did it.. what a good puppy.",
+			"Good doggy.. you did so well.",
+			"That's correct.. you're learning all the tricks.",
+			"Good.. very good.",
+			"Good puppy.",
+			"Correct.. well done.",
+			"You're being such an obedient pet.",
+			"Good doggy.",
+		]
+	if(_id == "SoftSlaveryWalkiesWrong"):
+		return [
+			"Um.. not quite right..",
+			"You made a little mistake.. that's okay..",
+			"Not exactly.. but you tried..",
+			"That was a bit wrong.. but it's alright..",
+			"Not quite.. silly puppy..",
+			"Good try but not quite.. maybe we can practice more..",
+		]
+	if(_id == "SoftSlaveryWalkiesBark"):
+		return [
+			"You're a cute puppy.. could you bark for me?",
+			"Such a pretty pup.. would you bark like one?",
+			"You're a cute pet.. could you bark?",
+			"Cute.. could I hear you bark?",
+			"That's a cute pet.. do you know how to bark?",
+			"So cute.. could you bark?",
+		]
+	if(_id == "SoftSlaveryWalkiesPet"):
+		return [
+			"You're a cute puppy.. could I pat you?",
+			"Such a nice pup.. may I pet you?",
+			"Such an obedient pet.. would you mind if I gave you a pat?",
+			"Oh.. a puppy! Could I pet you?",
+			"Oh.. would you let me pet you?",
+			"Such a well-behaved pet.. may I pat?",
+		]
+	if(_id == "SoftSlaveryWalkiesGoodPuppy"):
+		return [
+			"Good puppy..",
+			"Good pup..",
+			"Such an obedient pet..",
+			"Good doggo..",
+			"Very cute..",
+			"Such an adorable puppy..",
+			"Adorable..",
+			"Very nice..",
+			"Such a good doggo..",
+			"Such a good puppy..",
+		]
+	if(_id == "SoftSlaveryWalkiesGoodPuppySex"):
+		return [
+			"Would you be a good puppy and let me use you?",
+			"Would you be a good pup and let me play with you?",
+			"Could you be a good pup and allow me to play with you?",
+			"Would you be obedient and let me have fun with you?",
+			"Are you feeling.. um.. needy, pup? Maybe I could help..",
+		]
+	if(_id == "SoftSlaveryWalkiesBadPuppy"):
+		return [
+			"Bad puppy..",
+			"Bad dog..",
+			"Bad doggo..",
+		]
+	if(_id == "SoftSlaveryWalkiesBadPuppyObey"):
+		return [
+			"You should try to obey more, {npc.npcSlave}..",
+			"Maybe you could learn to obey better, {npc.npcSlave}..",
+			"Your obedience could use some work, {npc.npcSlave}..",
+			"Maybe you could learn to submit more..",
+		]
+	if(_id == "SoftSlaveryWalkiesLostNotDone"):
+		return [
+			"Maybe we could.. keep walking? If that's okay..",
+			"Could we continue on our way? Yeah.. we should..",
+			"Doesn't change anything.. we can keep going..",
+			"You're still my pet.. we can keep walking..",
+		]
+	if(_id == "SoftSlaveryWalkiesBiteProtect"):
+		return [
+			"This is my {npc.npcSlave}.. please don't bother us..",
+			"Please don't.. this pup is with me..",
+			"Maybe you should go.. this pup is mine..",
+			"Please don't touch my pet..",
+			"Could you please leave us alone?",
+			"This puppy is with me.. please back away..",
+			"Please go.. I care for this pet..",
+		]
+	if(_id == "SoftSlaveryWalkiesBiteBad"):
+		return [
+			"Ow.. your pet needs more training..",
+			"Ouch.. your dog needs more training..",
+			"Ouch.. Your pet needs better discipline..",
+			"Ow.. your pet need more punishments..",
+			"Ow.. your pup could use more training..",
+			"Ouch.. your puppy could learn better manners..",
+		]
+	if(_id == "SoftSlaveryWalkiesBiteAttack"):
+		return [
+			"Ow.. that wasn't very nice.. I will have to do something about it.",
+			"That wasn't kind of you.. I will have to do something about it.",
+			"Ow.. that wasn't necessary.. I will have to punish you I think.",
+			"That wasn't very good, puppy.. I will have to do something about it.",
+			"That wasn't very pleasant.. I will have to do something about it.",
+		]
+	if(_id == "SoftSlaveryWalkiesBall"):
+		return [
+			"Maybe we could play fetch together, pup.. I have a ball.",
+			"Let's play fetch, puppy.. I have a ball.",
+			"Time for fetch, puppy.. I have a ball right here..",
+			"Do you like playing with balls? We could play fetch..",
+			"Fetch time.. I hope you like to fetch balls..",
+			"Let's see you fetch like a good dog..",
+			"I'd like to play fetch with you, pup..",
+			"Let's play fetch together.. I mean.. I throw.. you fetch.",
+		]
+	if(_id == "SoftSlaveryWalkiesBall2"):
+		return [
+			"Go get the ball..",
+			"Don't look at me.. go get it.",
+			"Go get it, pup? Yeah.",
+			"Could you retrieve the ball, pup?",
+			"Fetch it, pet?",
+			"Would you get my ball, puppy?",
+		]
+	if(_id == "SoftSlaveryWalkiesPraise"):
+		return [
+			"Good puppy.. what a good puppy..",
+			"Good doggy.. such a good doggy..",
+			"Amazing.. you did well..",
+			"Good pet.. you make me happy..",
+			"Wonderful puppy.. so obedient..",
+			"Good doggy.. I'm proud of you..",
+		]
+	if(_id == "SoftSlaveryWalkiesBallTooFarFake"):
+		return [
+			"Couldn't find the ball? It's because it's in my hand.. sorry for confusing you..",
+			"Looking for this? I never threw it.. sorry, pup..",
+			"Still searching? The ball's right here.. in my hand..",
+			"Can't find it? That's because I didn't throw it.. sorry..",
+			"Still looking? I've had the ball the whole time.. sorry.. I just had to.",
+			"Confused? Aw.. I fake-threw it.. sorry about that.. It was fun watching you though.",
+		]
+	if(_id == "SoftSlaveryWalkiesBallTooFar"):
+		return [
+			"Where are you going? The ball didn't go that far, silly pup..",
+			"Getting lost? The ball isn't that far away..",
+			"Where are you wandering off to? The ball's closer than that..",
+			"Getting disoriented? The ball's nowhere near there..",
+			"Lost already? What a silly pup..",
+			"Wandering off? You're a bit lost, puppy..",
+		]
+	if(_id == "SoftSlaveryWalkiesNoBallFound"):
+		return [
+			"You're sad because you couldn't find the ball? That's because I did a fake throw.. sorry for confusing you.. It was fun to watch you..",
+			"Aw.. I never actually threw it.. sorry but it was very fun to watch you try to find it.",
+			"Can't find it? That's because I never actually threw it.. sorry.. It was very fun watching you be confused.",
+			"Couldn't find the ball? It's because it's in my hand.. sorry.. I just had to.",
+			"Couldn't find it? I've had the ball the whole time.. sorry about that.. It was too fun.",
+		]
