@@ -240,6 +240,10 @@ func getForms() -> Dictionary:
 		"SoftSlaveryWalkiesBallTooFarFake": form("Couldn't find the ball? It's because it's in my hand, you silly pup.", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryWalkiesBallTooFar": form("Where do you think you're going? What a silly pup, did you get lost trying to find the ball?", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryWalkiesNoBallFound": form("You're sad because you couldn't find my ball? That's because I did a fake throw. Such a silly puppy.", {main=CHAR, target=CHAR}, "main", "target"),
+		
+		"SoftSlaveryCuddle": form("Hey, I don't wanna do anything with you. Let's just go cuddle together.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryCuddle2": form("And now, we cuddle.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryCuddleEnd": form("Thanks for being a good cuddle slut. Gonna check on you some other day.", {main=CHAR, target=CHAR}, "main", "target"),
 
 		"SoftSlavery": form("", {main=CHAR, target=CHAR}, "main", "target"),
 	}
