@@ -11,7 +11,7 @@ func getVisibleDescription() -> String:
 
 func getPossiblePCNamesForLevel(_npcOwner, _level:int) -> Array:
 	if(_level <= 1):
-		return ["softy"]
+		return ["softy", "servant"]
 	if(_level == 2):
 		return ["light"]
 	return ["world"]

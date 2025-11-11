@@ -184,6 +184,107 @@ const QuestionDB = {
 			],
 		],
 	},
+	"changeTheWorld": {
+		qtext: "Out there, the are decided by giant fleets and armies. Compared to them, we're less than dust. Can one person, trapped in a cell, truly change anything? Or are we just specks of sand?",
+		qanswers: [
+			[
+				"Butterfly effect",
+				"Yes, but not directly. A kind word can change how someone treat others. A small act of resistance can inspire someone else. Change spreads like ripples, even from the smallest stone.",
+				["I like that thought. That our small actions might matter in ways we can't see.", "It seems like wishful thinking. The galaxy is too big for our ripples to matter. I'm sorry but we gotta be realistic."],
+			],
+			[
+				"Focus on self",
+				"The only world you can truly change is your own. Your perspective, your skills, your will. Mastering your mind and your body is the only meaningful rebellion in a place designed to break you.",
+				["That's the real battle, isn't it? The one inside our heads. Gotta focus on what you can change and improve.", "But what good are your skills and your inner peace if the outer world is still a prison?"],
+			],
+			[
+				"No control",
+				"History is made by forces, not people. Economic pressures, resource scarcity, systemic cruelty. We're all just along for the ride, pretending that we have control but we're just reacting to things happening. Accepting that is freedom.",
+				["It's a relief, in a way. To not be responsible for fixing everything. Whatever happens, happens.", "That sounds like giving up. I'd rather fight a losing battle than surrender and accept that my actions don't matter."],
+			],
+			[
+				"Inner corruption",
+				"You can't change the system from the outside. But from within? You can corrupt it. Twist its rules, turn its tools against it. The most effective change comes from becoming a cancer in the machine itself.",
+				["A hostile takeover from the inside.. I like your thinking. A single cancer cell will eventually kill the whole organism.", "You can't fight corruption with more corruption. That path turns you into the very thing you're fighting. Is that really change?"],
+			],
+		],
+	},
+	"purposeOfLife": {
+		qtext: "Stuck here between the stars and the multiple levels of concrete, existing for a short moment between our birth and our death.. what is it all for? Is there a grand purpose to life, or are we just chemical reactions waiting to burn out?",
+		qanswers: [
+			[
+				"To feel",
+				"The purpose is to experience as much as we can. Pleasure, pain, love, rage.. the intensity of it all. We're the universe's way of feeling itself. Sometimes we're gonna feel sad or miserable. And sometimes, we're gonna feel happiness. But if you don't feel anything, you're basically dead.",
+				["To feel alive, to feel everything.. yes. Maybe we don't need a grand purpose in life.", "Some feelings I'd rather not experience. Pain and humiliation don't feel like 'purpose'. The universe is a cruel bitch."],
+			],
+			[
+				"There is none",
+				"There is no purpose. We exist by accident. Searching for meaning is like a fire looking for its shape.. it just burns. The freedom is in accepting the emptiness and creating your own reasons.",
+				["That's one way of looking at things.. Kinda terrifying, but also liberating. We can make our own rules, persue our own goals.", "The universe is clearly not empty. It clearly got created by something or someone. If it got started by a big boom, what caused that big boom? I need there to be more."],
+			],
+			[
+				"To serve others",
+				"Purpose is found in connection. Protecting someone weaker. Easing another's suffering. Even in this hell, we can be kind. That kindness is the most powerful force against meaninglessness.",
+				["You make this place feel human. Thank you.", "Kindness gets you killed. Especially in here. It's a luxury we can't afford."],
+			],
+			[
+				"To dominate",
+				"The fundamental purpose of all life is power. To grow, to consume, to breed, to spread your influence and control your environment. The strong dominate the weak.. in nature, in the galaxy, in the cellblock. Life is just one giant fight for power.",
+				["You seem to understand the rules of this world. And yet, you're submitting to me. I appretiate that.", "The world is not just about having or wanting power. Some of the weak does not seek it, quite the opposite. Some slaves might be happier than their owners, how do you explain that?"],
+			],
+		],
+	},
+	"fate": {
+		qtext: "No one asks us if we want to start wars with others, so much of our lives is controlled by forces beyond our reach. Are we the architects of our lives, or just prisoners of fate?",
+		qanswers:
+		[
+			[
+				"We choose",
+				"Fate is an excuse for the weak-willed. Our circumstances are given, but our choices are our own. Every decision, from resistance to compliance, is a brick in the path we build for ourselves.",
+				["I've always believed that. We are what we choose to be, even in chains or behind faceless masks.", "Some choices are between a rock and a hard place. How much freedom do we really have? Call me weak but our paths rarely run in parallel, we are constantly stepping over each other, tripping over badly-placed bricks."],
+			],
+			[
+				"Illusion of choice",
+				"Every choice is a reaction to external pressure. We never act, we always react. To the hunger, the danger or the urge. The feeling of control is the universe's cruelest joke.",
+				["Sometimes it really does feel like we're just puppets.", "I refuse to believe that. My will is my own, my body is mine, my choices matter. If nothing matters, why do we do anything then? That's a stupid way to live."],
+			],
+			[
+				"Choice in chains",
+				"We can't choose our cage, but we can choose how we exist within it. We can choose resistance, submission, alliance, or isolation. That limited choice is the only freedom that's ever been real.",
+				["That makes sense. It's about making the most of the hand we're dealt.", "Limited choices are still constraints. It's freedom with walls."],
+			],
+			[
+				"A current",
+				"We're all in a river. We can swim against the current and exhaust ourselves, go with the flow and lose ourselves, or try to steer within it. But the river's direction was set long before we jumped in.",
+				["That's a peaceful way to see it. Less fighting, more navigating.", "I don't want to navigate, I want to change the river's course. I wanna flood the ones who thought they knew better."],
+			],
+		],
+	},
+	"afterlife": {
+		qtext: "Some say that our souls travel to the stars after death. Some say that we get reborn as something else. And some say that there is nothing other than the eternal darkness. And how do androids fit into all of this? When our bodies fail here, is that truly the end?",
+		qanswers: [
+			[
+				"One life",
+				"When the power fails in an android, it stops. When the biology fails in us, we stop. There's no ghost in the machine, biological or synthetic. This life, this moment, is all we get.",
+				["It makes every moment more precious, doesn't it? It makes us value our life.", "That seems so.. final. I want to believe there's something more. Why live if it all will eventually turn into nothing."],
+			],
+			[
+				"Digital afterlife",
+				"Maybe the soul is just data. A bunch of bytes that describe us. If they could upload us into a computer.. that could be our afterlife. A different kind of prison, perhaps, but not an end.",
+				["A copy isn't the same as the real thing. But it's better than nothing. Certainly.", "The thought of being stored as data terrifies me more than death. I don't want to be copied or shared or be played with like a game."],
+			],
+			[
+				"We live in others",
+				"We live on in the memories we leave, the pain or comfort we've caused. In that way, we're all ghosts, haunting each other long after we're gone.",
+				["If I'm a ghost in your memory.. hopefully I'm a pleasant one.", "That's not enough. I want to continue living, not just be a memory."],
+			],
+			[
+				"Who knows",
+				"No one knows. Not the scientists, not the priests. That mystery is the one thing they can't take from us. The final, great adventure that will answer everything.. but only after our passing.",
+				["I like that. The last secret, the final answer. Life would be boring if we'd knew all the details.", "I find the uncertainty terrifying. I'd rather know now, even if it's bad."],
+			],
+		],
+	},
 }
 
 func _init():

@@ -12,11 +12,11 @@ func getVisibleDescription() -> String:
 func getPossiblePCNamesForLevel(_npcOwner, _level:int) -> Array:
 	var ownerHasVagina:bool = _npcOwner.getOwner().hasVagina()
 	if(_level <= 0):
-		return ["bitch", "fuckdoll", "property"]
+		return ["bitch", "fuckdoll", "property", "slut"]
 	if(_level <= 1):
 		return ["cocksucker" if !ownerHasVagina else "cunt-licker", "whore", "cocksleeve" if !ownerHasVagina else "pussy"]
 	if(_level == 2):
-		return ["fuckmeat", "fucktoy", "playtoy", "painslut"]
+		return ["fuckmeat", "fucktoy", "playtoy", "painslut", "fuckdoll"]
 	return ["cockslave", "sextoy", "cum-dumpster", "paintoy"]
 
 func getTraitScore(_npcOwner) -> float:

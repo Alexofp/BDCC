@@ -12,10 +12,10 @@ func getVisibleDescription() -> String:
 func getPossiblePCNamesForLevel(_npcOwner, _level:int) -> Array:
 	#var ownerHasVagina:bool = _npcOwner.getOwner().hasVagina()
 	if(_level <= 1):
-		return ["thing", "possession", "property"]
+		return ["thing", "possession", "property", "bitch"]
 	if(_level <= 2):
-		return ["treasure", "prize"]
-	return ["obsession", "love"]
+		return ["treasure", "prize", "toy"]
+	return ["obsession", "love", "sweetie"]
 
 func getTraitScore(_npcOwner) -> float:
 	var personality:Personality = _npcOwner.getOwner().getPersonality()
