@@ -176,6 +176,17 @@ func getRelationshipFullInfo() -> Array:
 	
 	return result
 
+func getBigDescription() -> String:
+	var theTexts:Array = ["This is your owner. You belong to your owner. Owners will occasionally approach and do something with you, as long as they have influence over you.\n"]
+	theTexts.append_array(getRelationshipFullInfo())
+	if(hasGivenPCTasks()):
+		theTexts.append("")
+		theTexts.append("Tasks that your owner gave you:")
+		theTexts.append_array(getQuestProgressArray())
+	
+
+	return Util.join(theTexts, "\n")
+
 func addMessage(_text:String):
 	GM.main.addMessage(_text)
 

@@ -115,6 +115,10 @@ func _run():
 		if(!getFlag("Game_PickedStartingPerks", false)):
 			addButton("Pick Perks!", "Pick your starting perks. You can only do this once", "pickstartingperks")
 		#addButton("[debug] Struggle", "Test the struggle minigame", "teststruggle")
+		if(GM.main.RS.special.empty()):
+			addDisabledButton("Relationships", "You don't have any special relationships with others")
+		else:
+			addButton("Relationships", "Look at all the special relationships that you have", "specialMenu")
 		if(GM.main.isInDungeon()):
 			addButton("Tasks", "Look at your tasks", "tasks")
 		
@@ -267,6 +271,9 @@ func _react(_action: String, _args):
 		setFlag("Game_PickedStartingPerks", true)
 		runScene("PickStartingPerksScene")
 		setState("")
+		return
+	if(_action == "specialMenu"):
+		runScene("SpecialRelationshipsScene")
 		return
 	
 	setState(_action)

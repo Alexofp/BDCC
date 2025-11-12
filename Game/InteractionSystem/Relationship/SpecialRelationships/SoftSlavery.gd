@@ -14,6 +14,9 @@ func getCategoryName() -> String:
 func getMapTag() -> String:
 	return "O"
 
+func getBigDescription() -> String:
+	return (npcOwner.getBigDescription() if npcOwner else "")
+
 func getCategoryColor() -> Color:
 	return Color.darkorchid
 

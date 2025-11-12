@@ -19,6 +19,9 @@ func getCategoryColor() -> Color:
 func getExtraCategoryText() -> String:
 	return ""
 
+func getBigDescription() -> String:
+	return ""
+
 # Gets called when we are NOT in a special relationship. We are the actor
 func checkSocialEventShouldStartActor(_charActor:String, _charTarget:String, _eventID:int, _args:Array) -> Array:
 	return [false]

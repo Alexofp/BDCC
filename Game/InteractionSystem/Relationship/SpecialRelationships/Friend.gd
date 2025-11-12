@@ -6,6 +6,9 @@ func _init():
 func getVisibleName() -> String:
 	return "Friend"
 
+func getBigDescription() -> String:
+	return "Friends are less likely to do something mean with you and are more likely to help you if you are stuck in a pickle. Friends might also occasionally try to protect you from your owners."
+
 func getCategoryColor() -> Color:
 	return Color.greenyellow
 

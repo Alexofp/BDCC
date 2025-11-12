@@ -29,6 +29,9 @@ const SocialEventMinimalAffection = { #default is 1.0
 func _init():
 	id = "Nemesis"
 
+func getBigDescription() -> String:
+	return "Nemeses will actively try to do mean things to you if they get the chance. Nemeses might also try to ambush you."
+
 func getVisibleName() -> String:
 	return "Nemesis"
 
