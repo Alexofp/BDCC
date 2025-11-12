@@ -6,8 +6,8 @@ func _init():
 	id = "TaskProstitution"
 	reactsToTags = [E_APPROACH]
 	
-	eventWeight = 0.5
-	eventTags = {NOET.Tasks: 0.5, NOET.Prostitution: 1.0}
+	eventWeight = 0.1
+	eventTagWeightOverrides = {NOET.Tasks: 0.5, NOET.Prostitution: 1.0}
 
 func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> bool:
 	var theNpcOwner := getNpcOwner()

@@ -1,36 +1,40 @@
 extends NpcOwnerTraitBase
 
 func _init():
-	id = "Possessive"
+	id = "Asexual"
 
 func getVisibleName() -> String:
-	return "Possessive"
+	return "Asexual"
 
 func getVisibleDescription() -> String:
-	return "The owner is way less likely to let others fuck their slave."
+	return "The owner is much less likely to have sex with you. Doesn't affect their chance to share you."
 
 func getPossiblePCNamesForLevel(_npcOwner, _level:int) -> Array:
 	#var ownerHasVagina:bool = _npcOwner.getOwner().hasVagina()
 	if(_level <= 1):
-		return ["thing", "possession", "property", "bitch"]
+		return ["cupcake"]
 	if(_level <= 2):
-		return ["treasure", "prize", "toy"]
-	return ["obsession", "love", "sweetie"]
+		return ["servant", "dear"]
+	return ["sweetie", "flower","hun"]
 
 func getTraitScore(_npcOwner) -> float:
 	var personality:Personality = _npcOwner.getOwner().getPersonality()
-	return 0.5 - personality.getStat(PersonalityStat.Coward)*1.0 - personality.getStat(PersonalityStat.Naive)*1.0 + max(-personality.getStat(PersonalityStat.Subby)*2.0, 0.0)
+	return -personality.getStat(PersonalityStat.Impatient)*1.0
 
 func getTraitExclusiveType() -> String:
-	return "sharing"
+	return "ownersex"
+
+func getEventTags(_npcOwner) -> Dictionary:
+	return {
+		#NOET.Kind: 1.0,
+	}
 
 func getEventWeightMults(_npcOwner) -> Dictionary:
 	return {
-		NOET.Sharing: 0.01,
+		NOET.OwnerSex: 0.1,
 	}
 
 func getNOMs(_npcOwner) -> Dictionary:
 	return {
-		NOM.NoSharing: 1.0,
+		NOM.Asexual: 1.0,
 	}
-

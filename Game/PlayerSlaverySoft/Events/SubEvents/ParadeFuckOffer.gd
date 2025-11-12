@@ -28,7 +28,8 @@ func start():
 	if(RNG.chance(allowSexChance)):
 		setSubResult(SUB_CONTINUE)
 		var threesomeChance:float = 50.0 + ownerPersonality(PersonalityStat.Impatient)*40.0
-		if(RNG.chance(threesomeChance)):
+		threesomeChance -= getOwnerNOM(NOM.Asexual)*40.0
+		if(!RNG.chance(threesomeChance)):
 			talkModularOwnerToPC("SoftSlaveryParadeFuckOfferYes")
 			addContinue("startSex", [getRoleID(C_EXTRA1), "pc", SexType.DefaultSex, {SexMod.DisableDynamicJoiners:true, SexMod.BondageDisabled:true}])
 		else:

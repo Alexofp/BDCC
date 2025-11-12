@@ -292,7 +292,7 @@ func _init():
 	reactsToTags = [E_APPROACH]
 	eventWeight = 0.5
 	eventMinLevel = 0
-	eventTags = {NOET.Kind: 1.0}
+	eventTagWeightOverrides = {NOET.Kind: 2.0}
 
 func start():
 	playAnimation(StageScene.Grope, "tease", {npc=getOwnerID()})

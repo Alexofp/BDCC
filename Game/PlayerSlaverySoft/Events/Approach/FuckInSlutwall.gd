@@ -7,7 +7,7 @@ func _init():
 	reactsToTags = [E_APPROACH]
 	eventWeight = 0.6
 	eventMinLevel = 0
-	eventTags = {NOET.OwnerSex: 1.0, NOET.BDSM: 1.0, NOET.ShowingOff:1.0}
+	eventTagWeightOverrides = {NOET.OwnerSex: 1.5, NOET.BDSM: 2.0, NOET.ShowingOff:1.0}
 
 func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> bool:
 	if(getOwner().isStaff()):

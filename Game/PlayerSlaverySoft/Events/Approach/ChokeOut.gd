@@ -7,7 +7,7 @@ func _init():
 	reactsToTags = [E_APPROACH]
 	eventWeight = 1.0
 	eventMinLevel = 1
-	eventTags = {NOET.Mean: 1.0, NOET.OwnerSex: 0.5}
+	eventTagWeightOverrides = {NOET.Mean: 3.0, NOET.OwnerSex: 1.0}
 
 func start():
 	playAnimation(StageScene.Choking, "idle", {pc=getRoleID(C_OWNER)})

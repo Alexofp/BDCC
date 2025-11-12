@@ -151,6 +151,9 @@ func hasTrait(_traitID:String) -> bool:
 func getEventTags() -> Dictionary:
 	return {}
 
+func getEventWeightMults() -> Dictionary:
+	return {}
+
 func getOwner() -> BaseCharacter:
 	return GlobalRegistry.getCharacter(charID)
 

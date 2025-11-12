@@ -39,7 +39,7 @@ func checkRunPunish() -> bool:
 	else:
 		theTag = E_PUNISH_GET_RID_OF
 	
-	if(checkSubEvent(theTag, "", [], true)):
+	if(checkSubEvent(theTag, "", [])):
 		theOwner.onPunish()
 		return true
 	return false

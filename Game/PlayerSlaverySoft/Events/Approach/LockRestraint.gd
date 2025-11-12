@@ -7,8 +7,8 @@ func _init():
 	id = "LockRestraint"
 	reactsToTags = [E_APPROACH]
 	eventMinLevel = 0
-	eventWeight = 0.5
-	eventTags = {NOET.BDSM: 1.0}
+	eventWeight = 0.25
+	eventTagWeightOverrides = {NOET.BDSM: 1.0}
 
 func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> bool:
 	var npcOwner := getNpcOwner()

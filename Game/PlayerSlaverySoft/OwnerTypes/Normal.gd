@@ -23,6 +23,18 @@ func getEventTags() -> Dictionary:
 			if(!theTags.has(theTag)):
 				theTags[theTag] = theTraitTags[theTag]
 			else:
+				theTags[theTag] = max(theTraitTags[theTag], theTags[theTag])
+	return theTags
+
+func getEventWeightMults() -> Dictionary:
+	var theTags:Dictionary = {}
+	for traitID in traits:
+		var theTrait:NpcOwnerTraitBase = GlobalRegistry.getNpcOwnerTrait(traitID)
+		var theTraitTags:Dictionary = theTrait.getEventWeightMults(self)
+		for theTag in theTraitTags:
+			if(!theTags.has(theTag)):
+				theTags[theTag] = theTraitTags[theTag]
+			else:
 				theTags[theTag] = (theTraitTags[theTag] * theTags[theTag])
 	return theTags
 

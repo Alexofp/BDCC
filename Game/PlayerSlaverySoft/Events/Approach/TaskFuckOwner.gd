@@ -6,9 +6,9 @@ var resultText:String = ""
 func _init():
 	id = "TaskFuckOwner"
 	reactsToTags = [E_APPROACH]
-	eventWeight = 0.5
+	eventWeight = 0.0
 	eventMinLevel = 0
-	eventTags = {NOET.SubbyOwner: 1.0, NOET.Tasks: 0.5}
+	eventTagWeightOverrides = {NOET.Tasks: 0.0, NOET.SubbyOwner: 2.0}
 
 func getSubEventScore(_event, _tag:String, _args:Array) -> float:
 	if(_event.ownerPersonality(PersonalityStat.Subby) < 0.0):

@@ -26,9 +26,9 @@ func getTraitExclusiveType() -> String:
 
 func getEventTags(_npcOwner) -> Dictionary:
 	return {
-		NOET.Sharing: 1.5,
-		NOET.Credits: 1.5,
-		NOET.Prostitution: 3.0,
+		NOET.Sharing: 1.0,
+		NOET.Credits: 1.0,
+		NOET.Prostitution: 1.0,
 	}
 
 func getNOMs(_npcOwner) -> Dictionary:

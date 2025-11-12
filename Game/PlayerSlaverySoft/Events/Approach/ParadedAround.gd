@@ -14,7 +14,7 @@ func _init():
 	reactsToTags = [E_APPROACH]
 	eventWeight = 1.0
 	eventMinLevel = 0
-	eventTags = {NOET.ShowingOff:1.0, NOET.BDSM: 0.5}
+	eventTagWeightOverrides = {NOET.BDSM: 1.5, NOET.ShowingOff:2.0}
 
 func start():
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_OWNER)})

@@ -9,7 +9,7 @@ func _init():
 	
 	eventMinLevel = 2
 	eventWeight = 0.5
-	eventTags = {NOET.BDSM: 1.0}
+	eventTagWeightOverrides = {NOET.BDSM: 1.5}
 
 func start():
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_OWNER)})

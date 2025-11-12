@@ -10,8 +10,8 @@ var earnedCredits:int = 0
 func _init():
 	id = "Gangbang"
 	reactsToTags = [E_APPROACH]
-	eventWeight = 0.5
-	eventTags = {NOET.OwnerSex: 1.0, NOET.Sharing: 1.0}
+	eventWeight = 0.3
+	eventTagWeightOverrides = {NOET.OwnerSex: 0.6, NOET.Sharing: 1.5}
 
 func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> bool:
 	var npcOwner := getNpcOwner()

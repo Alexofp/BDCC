@@ -63,7 +63,7 @@ var sexLimits:Array = []
 
 var runner:WeakRef
 
-var eventTags:Dictionary = {}# no save, extra weight based on owner's tags (added to eventWeight if the owner has the tags)
+var eventTagWeightOverrides:Dictionary = {}# no save
 var eventWeight:float = 1.0 # no save
 var eventMinLevel:int = 0 # no save
 var eventMaxLevel:int = 999 # no save
@@ -501,12 +501,15 @@ func getOwnerNOM(_nom:String) -> float:
 	return theNpcOwner.getNOM(_nom)
 
 func getSubEventScore(_event, _tag:String, _args:Array) -> float:
+	return eventWeight
+
+func canEventBeUsedAsSubEvent(_event) -> bool:
 	var theLevel:int = _event.getNpcOwner().getLevel()
 	if(theLevel < eventMinLevel):
-		return 0.0
+		return false
 	if(theLevel > eventMaxLevel):
-		return 0.0
-	return eventWeight
+		return false
+	return true
 
 func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> bool:
 	return true
@@ -529,15 +532,19 @@ func checkSubEvent(_tag:String, _pretext:String, _args:Array, _checkHistory:bool
 		theHistory = theNpcOwner.eventHistory
 	
 	var theNpcOwnerTags:Dictionary = {}
+	var theEventWeightMults:Dictionary = {}
 	if(theNpcOwner):
 		theNpcOwnerTags = theNpcOwner.getEventTags()
-	
+		theEventWeightMults = theNpcOwner.getEventWeightMults()
+		
 	var possible:Array = []
-	var possibleDesperate:Array = []
+	#var possibleDesperate:Array = []
 	#var totalScore:float = 0.0
 	#var finalMult:float = 1.0
 	for eventID in eventIDsWithTag:
 		var theEvent = GlobalRegistry.createNpcOwnerEvent(eventID)
+		if(!theEvent.canEventBeUsedAsSubEvent(self)):
+			continue
 		var theScore:float = theEvent.getSubEventScore(self, _tag, _args)
 		
 		var theEventTags:Dictionary = theEvent.getEventTags(theRunner)
@@ -546,16 +553,17 @@ func checkSubEvent(_tag:String, _pretext:String, _args:Array, _checkHistory:bool
 				var eventTagMult:float = theEventTags[eventTag]
 				var ownerTagMult:float = theNpcOwnerTags[eventTag]
 				
-				var scoreStuff:float = 1.0-((1.0 - ownerTagMult)*eventTagMult)
-				theScore *= scoreStuff
-			
-		#theScore *= finalMult
-			
+				var newPossibleScore:float = eventTagMult * ownerTagMult
+				if(newPossibleScore > theScore):
+					theScore = newPossibleScore
+		
+		for eventTag in theEventTags:
+			if(theEventWeightMults.has(eventTag)):
+				theScore *= theEventWeightMults[eventTag]
+		
 		if(theScore <= 0.0):
 			continue
-		if(theScore < 1.0 && !RNG.chance(theScore*100.0)):
-			if(_checkDesperate):
-				possibleDesperate.append([theEvent, theScore])
+		if(!_checkDesperate && theScore < 1.0 && !RNG.chance(theScore*100.0)):
 			continue
 			
 		if(_checkHistory && theHistory.has(eventID)):
@@ -567,8 +575,10 @@ func checkSubEvent(_tag:String, _pretext:String, _args:Array, _checkHistory:bool
 	
 	#if(totalScore < 1.0 && !RNG.chance(totalScore*100.0)):
 	#	return false
-	if(possible.empty() && !possibleDesperate.empty()):
-		possible = possibleDesperate
+	#if(possible.empty() && !possibleDesperate.empty()):
+	#	possible = possibleDesperate
+	
+	#print(possible)
 	
 	var _context:Dictionary = {}
 	while(!possible.empty()):
@@ -967,7 +977,10 @@ func canSetLimits() -> bool:
 	return theOwner.canSetLimits()
 
 func getEventTags(_runner) -> Dictionary:
-	return eventTags
+	return eventTagWeightOverrides
+
+func _to_string() -> String:
+	return "[E:"+id+"]"
 
 func saveData() -> Dictionary:
 	return {

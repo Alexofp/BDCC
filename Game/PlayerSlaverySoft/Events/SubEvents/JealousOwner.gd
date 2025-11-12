@@ -57,7 +57,10 @@ func ownerWon():
 	addInfluenceObey(0.2)
 	saynn("Your second owner grunts.")
 	talk(C_EXTRA1, "Whatever.")
-	if(smartChance(50.0 + ownerPersonality(PersonalityStat.Mean)*50.0)):
+	
+	var haveSexChance:float = 50.0 + ownerPersonality(PersonalityStat.Mean)*50.0
+	haveSexChance -= getOwnerNOM(NOM.Asexual)*200.0
+	if(smartChance(haveSexChance)):
 		saynn("As the defeated owner tries to leave, {npc.name} grabs and holds {npc1.him} still!")
 		talkModularOwnerToPC("SoftSlaveryFuckJealousOwnerWonFuck")
 		addInfluenceObey()

@@ -26,9 +26,9 @@ var moveAmount:int = 0
 func _init():
 	id = "PetWalkies"
 	reactsToTags = [E_APPROACH]
-	eventWeight = 0.5
+	eventWeight = 0.2
 	eventMinLevel = 0
-	eventTags = {NOET.Petplay: 1.0}
+	eventTagWeightOverrides = {NOET.Petplay: 2.0}
 
 func start():
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_OWNER)})

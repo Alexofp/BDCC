@@ -21,7 +21,13 @@ func getTraitScore(_npcOwner) -> float:
 func getTraitExclusiveType() -> String:
 	return ""
 
+# Which tags does this trait bring
 func getEventTags(_npcOwner) -> Dictionary:
+	return {}
+
+# Events with tags that are used here are multiplied by the provided values
+# NOET.Mean: 0.3, # Means that 'Mean' events will happen 70% less often
+func getEventWeightMults(_npcOwner) -> Dictionary:
 	return {}
 
 func getNOMs(_npcOwner) -> Dictionary:

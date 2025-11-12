@@ -6,8 +6,8 @@ func _init():
 	id = "TaskSlut"
 	reactsToTags = [E_APPROACH]
 	
-	eventWeight = 0.5
-	eventTags = {NOET.Tasks: 1.0}
+	eventWeight = 0.4
+	eventTagWeightOverrides = {NOET.Tasks: 1.0}
 
 func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> bool:
 	var theNpcOwner := getNpcOwner()

@@ -26,6 +26,11 @@ func getTraitExclusiveType() -> String:
 
 func getEventTags(_npcOwner) -> Dictionary:
 	return {
+		NOET.Kind: 1.0,
+	}
+
+func getEventWeightMults(_npcOwner) -> Dictionary:
+	return {
 		NOET.Mean: 0.5,
 	}
 

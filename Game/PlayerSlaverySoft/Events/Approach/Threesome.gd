@@ -6,8 +6,8 @@ func _init():
 	id = "Threesome"
 	reactsToTags = [E_APPROACH]
 	eventMinLevel = 2
-	eventWeight = 1.0
-	eventTags = {NOET.Sharing: 1.0, NOET.OwnerSex: 0.5}
+	eventWeight = 0.6
+	eventTagWeightOverrides = {NOET.OwnerSex: 0.9, NOET.Sharing: 2.0}
 
 func trySubEventStart(_event, _tag:String, _args:Array, _context:Dictionary) -> bool:
 	var theFriend := findOwnerFriend()
