@@ -25,6 +25,9 @@ func getExtraCategoryText() -> String:
 		return npcOwner.getExtraCategoryText()
 	return ""
 
+func canMeetThroughRelationshipMenu() -> bool:
+	return npcOwner.canMeetThroughRelationshipMenu() if npcOwner else false
+
 func checkSocialEventShouldStartActor(_charActor:String, _charTarget:String, _eventID:int, _args:Array) -> Array:
 	return [false]
 

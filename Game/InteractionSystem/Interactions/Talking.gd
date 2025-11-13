@@ -27,7 +27,7 @@ func start(_pawns:Dictionary, _args:Dictionary):
 			var theSpecialRelationship := getRolePawn("reacter").getSpecialRelationship()
 			if(theSpecialRelationship && theSpecialRelationship.id == "SoftSlavery"):
 				stopMe()
-				GM.main.runScene("NpcOwnerEventRunnerScene", [getRolePawn("reacter").charID, "Talk", []])
+				GM.main.runScene("NpcOwnerEventRunnerScene", [getRolePawn("reacter").charID, "ApproachOrTalk", []])
 				return
 		
 		setState("", "starter")

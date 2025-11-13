@@ -19,6 +19,29 @@ func start():
 			addButton("Frequency", "Set how often should your owner approach you", "setState", ["approachMenu"])
 		else:
 			addDisabledButton("Frequency", "Your dynamic hasn't progressed far enough..")
+		if(theNpcOwner.canChooseToDisableSleepTogether()):
+			addButton("Sleep together", "Choose if you want to sleep together with your owner", "setState", ["sleepTogetherMenu"])
+		else:
+			addDisabledButton("Sleep together", "Your dynamic hasn't progressed far enough..")
+
+func sleepTogetherMenu():
+	saynn("Do you want to sleep together with your owner?")
+	
+	var curSelText:String = "Random"
+	if(getNpcOwner().isSleepTogetherDisabled()):
+		curSelText = "Never"
+	if(getNpcOwner().isSleepTogetherAlways()):
+		curSelText = "Always"
+	saynn("Current selection: "+curSelText)
+	
+	addButton("Back", "Enough choosing", "setState", ["start"])
+	addButton("Random", "Owner will sometimes sleep with you", "setSleep", [0])
+	addButton("Never", "Owner will never sleep with you", "setSleep", [1])
+	addButton("Always", "Owner will always try to sleep with you", "setSleep", [2])
+
+func sleepTogetherMenu_do(_id:String, _args:Array):
+	if(_id == "setSleep"):
+		getNpcOwner().sleepTogetherOption = _args[0]
 
 func approachMenu():
 	addButton("Back", "Enough choosing", "setState", ["start"])

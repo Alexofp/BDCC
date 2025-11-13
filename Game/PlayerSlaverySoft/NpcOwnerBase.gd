@@ -18,6 +18,7 @@ var ownerTasksCompletedReminded:bool = false
 var punishAmount:int = 0
 var pcName:String = "slave"
 var freedomPrice:int = 1000
+var sleepTogetherOption:int = 0 # 0 = random, 1 = disabled, 2 = always
 
 var keyholderSatisfaction:float = 0.0 # If hits 1.0, the owner will be willing to unlock the sub
 var lockedByOwner:bool = false
@@ -215,6 +216,31 @@ func shouldOwnerApproachPC() -> bool:
 func getApproachEvent() -> Array:
 	#shouldAppoach = false
 	return ["Approach", [true]]
+
+func canMeetThroughRelationshipMenu() -> bool:
+	return true
+
+func checkShouldSleepTogether() -> bool:
+	if(isSleepTogetherDisabled()):
+		return false
+	if(isSleepTogetherAlways()):
+		return true
+	if(level <= 0):
+		return RNG.chance(10)
+	if(level <= 1):
+		return RNG.chance(15)
+	if(level <= 2):
+		return RNG.chance(20)
+	return RNG.chance(25)
+
+func canChooseToDisableSleepTogether() -> bool:
+	return level >= 5
+
+func isSleepTogetherDisabled() -> bool:
+	return sleepTogetherOption == 1
+
+func isSleepTogetherAlways() -> bool:
+	return sleepTogetherOption == 2
 
 func onNewDay():
 	daysAmount += 1
@@ -634,6 +660,7 @@ func saveData() -> Dictionary:
 		ks = keyholderSatisfaction,
 		lbo = lockedByOwner,
 		oou = ownerOfferedUnlock,
+		sto = sleepTogetherOption,
 	}
 
 func loadData(_data:Dictionary):
@@ -651,6 +678,7 @@ func loadData(_data:Dictionary):
 	keyholderSatisfaction = SAVE.loadVar(_data, "ks", 0.0)
 	lockedByOwner = SAVE.loadVar(_data, "lbo", false)
 	ownerOfferedUnlock = SAVE.loadVar(_data, "oou", false)
+	sleepTogetherOption = SAVE.loadVar(_data, "sto", 0)
 	
 	tasks.clear()
 	var tasksData:Array = SAVE.loadVar(_data, "t", [])

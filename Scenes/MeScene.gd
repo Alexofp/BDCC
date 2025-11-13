@@ -273,6 +273,7 @@ func _react(_action: String, _args):
 		setState("")
 		return
 	if(_action == "specialMenu"):
+		endScene()
 		runScene("SpecialRelationshipsScene")
 		return
 	

@@ -12,6 +12,9 @@ func getBigDescription() -> String:
 func getCategoryColor() -> Color:
 	return Color.greenyellow
 
+func canMeetThroughRelationshipMenu() -> bool:
+	return true
+
 func checkSocialEventShouldStartActor(_charActor:String, _charTarget:String, _eventID:int, _args:Array) -> Array:
 	return checkSocialEventShouldStartTarget(_charTarget, _charActor, _eventID, _args)
 

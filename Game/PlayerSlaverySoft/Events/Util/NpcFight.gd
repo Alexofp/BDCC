@@ -16,19 +16,28 @@ func onStart(_args:Array):
 func start():
 	playAnimation(StageScene.Duo, "stand", {pc=getRoleID(C_EXTRA1), npc=getRoleID(C_EXTRA2)})
 	saynn("{npc1.name} and {npc2.name} prepare to fight!")
+
+	var char1FightScore:float = calcPowerScoreOf(C_EXTRA1)
+	var char2FightScore:float = calcPowerScoreOf(C_EXTRA2)
+	char1FightScore *= char1FightScore
+	char2FightScore *= char2FightScore
+	var theChar1Chance:float = char1FightScore / (char1FightScore + char2FightScore)
+	saynn("{npc1.name}'s chance to win: "+str(Util.roundF(theChar1Chance*100.0, 1))+"%\n{npc2.name}'s chance to win: "+str(Util.roundF((1.0-theChar1Chance)*100.0, 1)))
 	
 	addContinue("doFight")
+
+func calcPowerScoreOf(_role:int) -> float:
+	var charFightScore:float = getChar(_role).calculatePowerScore()
+	if(getRoleID(_role) == getOwnerID()):
+		charFightScore *= 2.0
+	return max(charFightScore, 1.0)
 
 func start_do(_id:String, _args:Array):
 	if(_id == "doFight"):
 		#TODO: calculate power and compare. Same as how pawns work
 		
-		var char1FightScore:float = getChar(C_EXTRA1).calculatePowerScore()
-		if(getRoleID(C_EXTRA1) == getOwnerID()):
-			char1FightScore *= 2.0
-		var char2FightScore:float = getChar(C_EXTRA2).calculatePowerScore()
-		if(getRoleID(C_EXTRA2) == getOwnerID()):
-			char2FightScore *= 2.0
+		var char1FightScore:float = calcPowerScoreOf(C_EXTRA1)
+		var char2FightScore:float = calcPowerScoreOf(C_EXTRA2)
 		var randTable:Array = [
 			[true, char1FightScore*char1FightScore],
 			[false, char2FightScore*char2FightScore],
