@@ -71,6 +71,10 @@ static func npcCanBeUsedAtAll(character:BaseCharacter, allConditions):
 	if(character.shouldBeExcludedFromEncounters()):
 		if(!hasCond(allConditions, NpcCon.IgnoreDisabledEncountersSetting)):
 			return false
+	if(!hasCond(allConditions, NpcCon.AllowBusy)):
+		var thePawn:CharacterPawn = GM.main.IS.getPawn(character.getID())
+		if(thePawn && !thePawn.canBeInterrupted()):
+			return false
 	return true
 
 static func hasCond(allConditions, conditionID):
@@ -83,7 +87,7 @@ static func grabNpcIDFromPool(poolID, _conditions = []):
 	if(!(_conditions is Array) || _conditions == null):
 		_conditions = []
 	
-	var characters = GM.main.getDynamicCharacterIDsFromPool(poolID)
+	var characters:Array = GM.main.getDynamicCharacterIDsFromPool(poolID)
 	
 	if(characters.size() > 0):
 		if(_conditions.size() == 0):
