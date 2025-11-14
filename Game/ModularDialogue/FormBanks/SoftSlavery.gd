@@ -2,6 +2,10 @@ extends DialogueFormBank
 
 func getForms() -> Dictionary:
 	return {
+		"SoftSlaveryOffer": form("Hey. Wanna become my slave? I could use one.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryOfferYes": form("Good choice. Follow me.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryIntro1Willing": form("Now let's talk.", {main=CHAR, target=CHAR}, "main", "target"),
+		
 		"SoftSlaveryIntro1": form("You're up? Good.", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryIntro2": form("Hey. From this point on, you are now my {main.npcSlave}. Understand?", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryIntro3": form("You will do as I say. Otherwise, we will have a problem.", {main=CHAR, target=CHAR}, "main", "target"),

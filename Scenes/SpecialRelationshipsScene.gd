@@ -19,7 +19,7 @@ func _run():
 				continue
 			var theColor:Color = theSpecial.getCategoryColor()
 			var theCharTypeName:String = CharacterType.getName(theChar.getCharType())
-			saynn(theChar.getName()+" - "+theCharTypeName+" - [color=#"+theColor.to_html(false)+"]"+theSpecial.getCategoryName()+"[/color]")
+			sayn(theChar.getName()+" - "+theCharTypeName+" - [color=#"+theColor.to_html(false)+"]"+theSpecial.getCategoryName()+"[/color]")
 			
 			addButton(theChar.getName(), "Look at this relationship", "lookAt", [charID])
 	

@@ -1178,6 +1178,18 @@ func scoreLust(role1:String, role2:String) -> float:
 		return 0.0
 	return getRolePawn(role1).scoreLust(getRoleID(role2))
 
+func getLust(role1:String, role2:String) -> float:
+	if(!involvedPawns.has(role1) || !involvedPawns.has(role2)):
+		Log.printerr("Bad roles found")
+		return 0.0
+	return GM.main.RS.getLust(getRoleID(role1), getRoleID(role2))
+
+func getAffection(role1:String, role2:String) -> float:
+	if(!involvedPawns.has(role1) || !involvedPawns.has(role2)):
+		Log.printerr("Bad roles found")
+		return 0.0
+	return GM.main.RS.getAffection(getRoleID(role1), getRoleID(role2))
+
 func affectAffection(role1:String, role2:String, howMuch:float):
 	if(!involvedPawns.has(role1) || !involvedPawns.has(role2)):
 		Log.printerr("Bad roles found")

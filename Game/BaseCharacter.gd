@@ -2971,6 +2971,11 @@ func getEnslaveQuest() -> NpcEnslavementQuest:
 func isSlaveToPlayer():
 	return false
 
+func isSlaveTo(_charID:String) -> bool:
+	if(_charID == "pc"):
+		return isSlaveToPlayer()
+	return false
+
 func getNpcSlavery() -> NpcSlave:
 	return null
 

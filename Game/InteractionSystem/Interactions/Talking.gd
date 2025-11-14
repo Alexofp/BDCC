@@ -34,6 +34,9 @@ func start(_pawns:Dictionary, _args:Dictionary):
 		sendSocialEvent("starter", "reacter", SocialEventType.GotTalkedTo)
 
 func init_text():
+	var theStarter:BaseCharacter = getRoleChar("starter")
+	var theReacter:BaseCharacter = getRoleChar("reacter")
+	
 	if(!notFirst):
 		saynn("{starter.name} approaches {reacter.you}.")
 		notFirst=true
@@ -44,7 +47,7 @@ func init_text():
 		saynn("{starter.name} is standing near {reacter.you}.")
 	saynn("{reacter.Your} affection with {starter.you} is "+getAffectionString("starter", "reacter")+".\nLust is "+getLustString("starter", "reacter")+".")
 
-	if(!getRoleChar("starter").isGagged() && getRolePawn("reacter").canSocial()):
+	if(!theStarter.isGagged() && getRolePawn("reacter").canSocial()):
 		if(!isNemesisTo("reacter", "starter")):
 			addAction("chat", "Chat", "Chat about stuff", "talk", 1.0, 30, {})
 		else:
@@ -66,24 +69,43 @@ func init_text():
 	else:
 		addDisabledAction("Offer sex", "You can't start sex like this..")
 	addAction("offerself", "Offer self", "Offer them to fuck you", "sexSub", 0.2, 60, {})
-	if(getRoleChar("starter").getInventory().hasRemovableRestraintsNoLockedSmartlocks()):
+	if(theStarter.getInventory().hasRemovableRestraintsNoLockedSmartlocks()):
 		if(getRolePawn("starter").getAffection(getRolePawn("reacter")) >= 0.5 && getRolePawn("reacter").canSocial()):
 			addAction("ask_help_restraints", "Ask for help", "Ask for help with your restraints..", "help", 0.0, 60, {})
 		else:
 			addDisabledAction("Ask for help", "Affection must be above 50% before asking for help with restraints.." if getRolePawn("reacter").canSocial() else "They are clearly not in a mood to help you..")
-	if(getRoleChar("reacter").getInventory().hasRemovableRestraintsNoLockedSmartlocks()):
-		if(getRoleChar("starter").getStamina() > 0 && !getRoleChar("starter").hasBlockedHands() && !getRoleChar("starter").hasBoundArms()):
+	if(theReacter.getInventory().hasRemovableRestraintsNoLockedSmartlocks()):
+		if(theStarter.getStamina() > 0 && !theStarter.hasBlockedHands() && !theStarter.hasBoundArms()):
 			addAction("help_with_restraints", "Help with restraints", "Help them with restraints!", "help", 0.2, 60, {})
 		else:
 			addDisabledAction("Help with restraints", "You can't help them with restraints in your current state..")
-	if(getRoleChar("starter").hasKeyholderLocksFrom(getRoleID("reacter"))):
+	if(theStarter.hasKeyholderLocksFrom(getRoleID("reacter"))):
 		if(getRolePawn("reacter").canSocial()):
 			addAction("ask_for_key", "Ask for a key..", "They have locked a smart-locked restraint onto you. Might as well ask for a key..", "help", 1.0, 60, {})
 		else:
 			addDisabledAction("Ask for a key..", "They don't seem to be in a chatty mood..")
+
+	# npc to pc only
+	if(!theStarter.isPlayer() && theReacter.isPlayer()):
+		if(!GM.main.RS.hasSpecialRelationship(theStarter.getID())):
+			#TODO: BETTER SCORE FUNCTION
+			addAction("enslave_npcOwner", "Enslave!", "They are subby enough.. and you are Alpha enough too..", "default", 1.0, 60, {})
+	
+	# pc to npc only
+	if(theStarter.isPlayer() && !theReacter.isPlayer()):
+		if(!GM.main.RS.hasSpecialRelationship(theReacter.getID())):
+			if(getLust("starter", "reacter") >= 0.75 || getAffection("starter", "reacter") <= -0.75):
+				if(getRolePawn("reacter").canSocial()):
+					addAction("enslave_ask_to_be", "Ask to become slave", "Ask this character to [b]ENSLAVE you[/b]", "default", 0.0, 60, {})
+				else:
+					addDisabledAction("Ask to become slave", "They don't seem to be in a chatty mood..")
+			else:
+				addDisabledAction("Ask to become slave", "To ask to become this character's slave, either the lust between you two must be above 75% OR affection needs to be below -75%.")
+
 	addAction("leave", "Leave", "Enough chatting around.", "default", 0.01 if didAmount <= 0 else 0.5*sqrt(float(didAmount)), 30, {})
 	if(getRolePawn("starter").canEnslaveForFree(getRolePawn("reacter"))):
 		addAction("enslave_free", "Enslave!", "They are subby enough.. and you are Alpha enough too..", "default", 0.0, 60, {})
+	
 
 	triggerTalkRunEvents("reacter")
 
@@ -121,7 +143,82 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 		setState("about_to_leave", "starter")
 	if(_id == "enslave_free"):
 		setState("about_to_kidnap", "starter")
+	if(_id == "enslave_npcOwner"):
+		setState("npcEnslaveOffer", "reacter")
+	if(_id == "enslave_ask_to_be"):
+		setState("npcEnslaveOfferFromPC", "reacter")
 
+func npcEnslaveOfferFromPC_text():
+	saynn("You ask {reacter.name} if you could become {reacter.his} slave!")
+	
+	addAction("yes", "Agree", "Agree to enslave them.", "default", 1.0, 60, {})
+	addAction("no", "Decline", "You don't wanna enslave them.", "default", 0.1, 60, {})
+
+func npcEnslaveOfferFromPC_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "yes"):
+		setState("npcEnslaveOfferFromPC_yes", "starter")
+	if(_id == "no"):
+		setState("npcEnslaveOfferFromPC_no", "starter")
+
+func npcEnslaveOfferFromPC_yes_text():
+	saynn("{reacter.name} agreed to enslave you!")
+	#TODO: SOME LINE HERE
+	saynn("Time to see what happens next..")
+	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
+
+func npcEnslaveOfferFromPC_yes_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		var theCharID:String = getRoleID("reacter")
+		stopMe()
+		GM.main.RS.startSpecialRelantionship("SoftSlavery", theCharID)
+		runScene("NpcOwnerEventRunnerScene", [theCharID, "Intro", ["willing"]])
+		pass
+
+func npcEnslaveOfferFromPC_no_text():
+	saynn("{reacter.name} declined your offer!")
+	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
+
+func npcEnslaveOfferFromPC_no_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		getRolePawn("reacter").satisfySocial()
+		setState("", "starter")
+
+func npcEnslaveOffer_text():
+	saynn("{starter.name} makes you a sudden offer!")
+	sayLine("starter", "SoftSlaveryOffer", {main="starter", target="reacter"})
+	saynn("Looks like {starter.he} {starter.isAre} offering to [b]enslave you[/b]..")
+	
+	addAction("yes", "Agree", "Agree to be enslaved.", "default", 0.0, 60, {})
+	addAction("no", "NO!", "You don't wanna become a slave.", "default", 1.0, 60, {})
+
+func npcEnslaveOffer_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "yes"):
+		setState("playerAgreedToBeEnslaved", "starter")
+	if(_id == "no"):
+		didAmount += 1
+		gotDenied = true
+		setState("playerDoesntWantToBeEnslaved", "reacter")
+
+func playerDoesntWantToBeEnslaved_text():
+	saynn("You decline {starter.name}'s offer!")
+	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
+
+func playerDoesntWantToBeEnslaved_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		setState("", "starter")
+
+func playerAgreedToBeEnslaved_text():
+	saynn("You [b]agree[/b] to be enslaved!")
+	sayLine("starter", "SoftSlaveryOfferYes", {main="starter", target="reacter"})
+	saynn("Time to see what happens next..")
+	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
+
+func playerAgreedToBeEnslaved_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		var theCharID:String = getRoleID("starter")
+		stopMe()
+		GM.main.RS.startSpecialRelantionship("SoftSlavery", theCharID)
+		runScene("NpcOwnerEventRunnerScene", [theCharID, "Intro", ["willing"]])
 
 func about_to_leave_text():
 	saynn("{starter.name} decides to leave..")
