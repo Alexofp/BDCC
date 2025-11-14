@@ -249,6 +249,7 @@ func _ready():
 	Console.addCommand("clearflag", self, "consoleClearFlag", ["flagID"], "Resets the game flag, be very careful")
 	Console.addCommand("setmoduleflag", self, "consoleSetModuleFlagBool", ["moduleID", "flagID", "trueOrFalse"], "Changes the game flag, be very careful")
 	Console.addCommand("clearmoduleflag", self, "consoleClearModuleFlag", ["moduleID", "flagID"], "Resets the game flag, be very careful")
+	Console.addCommand("become", self, "consoleBecome", ["charID"], "Become another character")
 	#Console.addCommand("ae", self, "consoleAnimationEditor", [], "Animation editor")
 	applyAllWorldEdits()
 	
@@ -1758,10 +1759,42 @@ func consoleSetModuleFlagBool(moduleID, flagID, valuestr):
 func consoleClearFlag(flagID):
 	clearFlag(flagID)
 	Console.printLine("Flag cleared")
-	
+
 func consoleClearModuleFlag(moduleID, flagID):
 	clearModuleFlag(moduleID, flagID)
 	Console.printLine("Flag cleared")
+
+func consoleBecome(charID):
+	if charID == "pc":
+		return
+	var character = getCharacter(charID)
+	if character == null:
+		Log.printerr("ERROR: character with the id "+charID+" wasn't found")
+		return
+	if character == GM.pc:
+		return
+	# Hyper specialized code for the player
+	GM.pc.getTFHolder().undoAllTransformations()
+	GM.pc.setGender(character.getGender())
+	GM.pc.setPronounGender(character.getPronounGender())
+	GM.pc.setSpecies(character.getSpecies())
+	GM.pc.pickedSkin = character.pickedSkin
+	GM.pc.pickedSkinRColor = character.pickedSkinRColor
+	GM.pc.pickedSkinGColor = character.pickedSkinGColor
+	GM.pc.pickedSkinBColor = character.pickedSkinBColor
+	GM.pc.setThickness(character.getThickness())
+	GM.pc.setFemininity(character.getFemininity())
+	for slot in BodypartSlot.getAll():
+		if character.hasBodypart(slot):
+			var charBodypart = character.getBodypart(slot)
+			var playerBodypart = GM.pc.getBodypart(slot)
+			if playerBodypart == null or charBodypart.id != playerBodypart.id:
+				playerBodypart = GlobalRegistry.createBodypart(charBodypart.id)
+				GM.pc.giveBodypart(playerBodypart)
+			playerBodypart.loadData(charBodypart.saveData())
+		else:
+			GM.pc.removeBodypart(slot)
+	GM.pc.updateAppearance()
 
 func _on_GameUI_on_rollback_button():
 	rollbacker.rollback()
