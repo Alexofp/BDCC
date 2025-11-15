@@ -21,7 +21,10 @@ func getPossiblePCNamesForLevel(_npcOwner, _level:int) -> Array:
 
 func getTraitScore(_npcOwner) -> float:
 	var personality:Personality = _npcOwner.getOwner().getPersonality()
-	return personality.getStat(PersonalityStat.Mean)*2.0
+	var theMean:float = personality.getStat(PersonalityStat.Mean)
+	if(theMean <= 0.0):
+		return 0.0
+	return max(theMean, 0.2)
 
 func getTraitExclusiveType() -> String:
 	return "meanness"

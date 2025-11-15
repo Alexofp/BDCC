@@ -18,7 +18,13 @@ func getPossiblePCNamesForLevel(_npcOwner, _level:int) -> Array:
 
 func getTraitScore(_npcOwner) -> float:
 	var personality:Personality = _npcOwner.getOwner().getPersonality()
-	return max(personality.getStat(PersonalityStat.Brat)*1.0, 0.0)-personality.getStat(PersonalityStat.Subby)*1.0
+	var fetishHolder:FetishHolder = _npcOwner.getOwner().getFetishHolder()
+	
+	var riggingFetish:float = fetishHolder.getFetish(Fetish.Rigging)
+	var theBrat:float = max(personality.getStat(PersonalityStat.Brat), 0.0)
+	var theSubby:float = personality.getStat(PersonalityStat.Subby)
+	
+	return clamp(riggingFetish + theBrat - theSubby, 0.2, 1.0)
 
 func getTraitExclusiveType() -> String:
 	return "pet"

@@ -18,7 +18,10 @@ func getPossiblePCNamesForLevel(_npcOwner, _level:int) -> Array:
 
 func getTraitScore(_npcOwner) -> float:
 	var personality:Personality = _npcOwner.getOwner().getPersonality()
-	return personality.getStat(PersonalityStat.Subby)*2.0
+	var theSubby:float = personality.getStat(PersonalityStat.Subby)
+	if(theSubby <= 0.0):
+		return 0.0
+	return max(theSubby, 0.2)
 
 func getTraitExclusiveType() -> String:
 	return "subbyness"

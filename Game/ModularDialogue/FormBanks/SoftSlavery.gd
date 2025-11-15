@@ -4,6 +4,10 @@ func getForms() -> Dictionary:
 	return {
 		"SoftSlaveryOffer": form("Hey. Wanna become my slave? I could use one.", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryOfferYes": form("Good choice. Follow me.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryPCOffer": form("Do you need a slave by any chance? I can serve.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryPCOfferYes": form("Yes, I could use a slave like you. Follow me.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryPCOfferNo": form("No, I'm not looking for a slave.", {main=CHAR, target=CHAR}, "main", "target"),
+		
 		"SoftSlaveryIntro1Willing": form("Now let's talk.", {main=CHAR, target=CHAR}, "main", "target"),
 		
 		"SoftSlaveryIntro1": form("You're up? Good.", {main=CHAR, target=CHAR}, "main", "target"),

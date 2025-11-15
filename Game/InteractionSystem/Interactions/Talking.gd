@@ -87,14 +87,30 @@ func init_text():
 
 	# npc to pc only
 	if(!theStarter.isPlayer() && theReacter.isPlayer()):
-		if(!GM.main.RS.hasSpecialRelationship(theStarter.getID())):
-			#TODO: BETTER SCORE FUNCTION
-			addAction("enslave_npcOwner", "Enslave!", "They are subby enough.. and you are Alpha enough too..", "default", 1.0, 60, {})
+		if(!GM.main.RS.hasSpecialRelationship(theStarter.getID()) && RNG.chance(20)):
+			var theAffection:float = getAffection("starter", "reacter")
+			var theLust:float = getLust("starter", "reacter")
+			var offerEnslaveScore:float = -0.04
+			if(theAffection > 0.3 || gotDenied):
+				offerEnslaveScore = 0.0
+			else:
+				offerEnslaveScore -= theAffection*0.02
+				offerEnslaveScore += theLust*0.03
+				offerEnslaveScore += scoreExposed("reacter")*0.04
+				offerEnslaveScore += (-scorePersonality("starter", {PersonalityStat.Subby:1.0})+1.0)*0.5*0.03
+				offerEnslaveScore += (scorePersonality("starter", {PersonalityStat.Mean:1.0})+1.0)*0.5*0.01
+				offerEnslaveScore += (-scorePersonality("starter", {PersonalityStat.Coward:1.0})+1.0)*0.5*0.01
+				
+				offerEnslaveScore = min(offerEnslaveScore, 0.05)
+				offerEnslaveScore += getRolePawn("starter").getAnger()*0.02
+				
+				offerEnslaveScore *= 5.0 # To even out the 20% chance
+				addAction("enslave_npcOwner", "Offer to enslave", "They are subby enough.. and you are Alpha enough too..", "default", offerEnslaveScore, 60, {})
 	
 	# pc to npc only
 	if(theStarter.isPlayer() && !theReacter.isPlayer()):
-		if(!GM.main.RS.hasSpecialRelationship(theReacter.getID())):
-			if(getLust("starter", "reacter") >= 0.75 || getAffection("starter", "reacter") <= -0.75):
+		if(!theStarter.isSlaveTo(theReacter.getID())):
+			if(true || getLust("starter", "reacter") >= 0.75 || getAffection("starter", "reacter") <= -0.75):
 				if(getRolePawn("reacter").canSocial()):
 					addAction("enslave_ask_to_be", "Ask to become slave", "Ask this character to [b]ENSLAVE you[/b]", "default", 0.0, 60, {})
 				else:
@@ -150,9 +166,24 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func npcEnslaveOfferFromPC_text():
 	saynn("You ask {reacter.name} if you could become {reacter.his} slave!")
+	sayLine("starter", "SoftSlaveryPCOffer", {main="starter", target="reacter"})
 	
-	addAction("yes", "Agree", "Agree to enslave them.", "default", 1.0, 60, {})
-	addAction("no", "Decline", "You don't wanna enslave them.", "default", 0.1, 60, {})
+	var theAffection:float = getAffection("starter", "reacter")
+	var theLust:float = getLust("starter", "reacter")
+	var offerEnslaveScore:float = 0.5
+	
+	offerEnslaveScore -= theAffection*0.3
+	offerEnslaveScore += theLust*0.3
+	offerEnslaveScore += scoreExposed("starter")*0.3
+	offerEnslaveScore += (-scorePersonality("reacter", {PersonalityStat.Subby:1.0})+1.0)*0.5*0.2
+	offerEnslaveScore += (scorePersonality("reacter", {PersonalityStat.Mean:1.0})+1.0)*0.5*0.2
+	offerEnslaveScore += (-scorePersonality("reacter", {PersonalityStat.Coward:1.0})+1.0)*0.5*0.2
+	offerEnslaveScore += getRolePawn("reacter").getAnger()*0.5
+	
+	offerEnslaveScore = max(offerEnslaveScore, 0.3)
+	
+	addAction("yes", "Agree", "Agree to enslave them.", "default", offerEnslaveScore, 60, {})
+	addAction("no", "Decline", "You don't wanna enslave them.", "default", 1.0, 60, {})
 
 func npcEnslaveOfferFromPC_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "yes"):
@@ -162,7 +193,7 @@ func npcEnslaveOfferFromPC_do(_id:String, _args:Dictionary, _context:Dictionary)
 
 func npcEnslaveOfferFromPC_yes_text():
 	saynn("{reacter.name} agreed to enslave you!")
-	#TODO: SOME LINE HERE
+	sayLine("reacter", "SoftSlaveryPCOfferYes", {main="reacter", target="starter"})
 	saynn("Time to see what happens next..")
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
 
@@ -176,6 +207,7 @@ func npcEnslaveOfferFromPC_yes_do(_id:String, _args:Dictionary, _context:Diction
 
 func npcEnslaveOfferFromPC_no_text():
 	saynn("{reacter.name} declined your offer!")
+	sayLine("reacter", "SoftSlaveryPCOfferNo", {main="reacter", target="starter"})
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
 
 func npcEnslaveOfferFromPC_no_do(_id:String, _args:Dictionary, _context:Dictionary):
@@ -197,6 +229,9 @@ func npcEnslaveOffer_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "no"):
 		didAmount += 1
 		gotDenied = true
+		getRolePawn("starter").afterFailedSocialInteraction()
+		affectAffection("starter", "reacter", -0.1)
+		affectLust("starter", "reacter", -0.05)
 		setState("playerDoesntWantToBeEnslaved", "reacter")
 
 func playerDoesntWantToBeEnslaved_text():

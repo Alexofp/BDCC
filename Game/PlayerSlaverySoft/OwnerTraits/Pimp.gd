@@ -7,7 +7,7 @@ func getVisibleName() -> String:
 	return "Pimp"
 
 func getVisibleDescription() -> String:
-	return "The owner is way more likely to let others fuck their slave."
+	return "The owner is way more likely to let others fuck their slave. The owner is also much more eager to make the slave do prostitution."
 
 func getPossiblePCNamesForLevel(_npcOwner, _level:int) -> Array:
 	#var ownerHasVagina:bool = _npcOwner.getOwner().hasVagina()
@@ -19,7 +19,11 @@ func getPossiblePCNamesForLevel(_npcOwner, _level:int) -> Array:
 
 func getTraitScore(_npcOwner) -> float:
 	var personality:Personality = _npcOwner.getOwner().getPersonality()
-	return 0.5 + personality.getStat(PersonalityStat.Brat)*1.0 - personality.getStat(PersonalityStat.Naive)*1.0 + max(-personality.getStat(PersonalityStat.Subby)*2.0, 0.0)
+	var theBrat:float = personality.getStat(PersonalityStat.Brat)
+	var theNaive:float = personality.getStat(PersonalityStat.Naive)
+	var theDommy:float = max(-personality.getStat(PersonalityStat.Subby)*2.0, 0.0)
+	
+	return clamp(0.1 + theBrat*0.3 - theNaive + theDommy, 0.2, 1.0)
 
 func getTraitExclusiveType() -> String:
 	return "sharing"

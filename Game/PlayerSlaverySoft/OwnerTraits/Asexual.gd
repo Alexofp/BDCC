@@ -19,7 +19,18 @@ func getPossiblePCNamesForLevel(_npcOwner, _level:int) -> Array:
 
 func getTraitScore(_npcOwner) -> float:
 	var personality:Personality = _npcOwner.getOwner().getPersonality()
-	return -personality.getStat(PersonalityStat.Impatient)*1.0
+	var fetishHolder:FetishHolder = _npcOwner.getOwner().getFetishHolder()
+	
+	var sexFetishes:float = 0.0
+	sexFetishes += fetishHolder.getFetish(Fetish.AnalSexGiving) + fetishHolder.getFetish(Fetish.AnalSexReceiving)
+	sexFetishes += fetishHolder.getFetish(Fetish.VaginalSexGiving) + fetishHolder.getFetish(Fetish.VaginalSexReceiving)
+	sexFetishes += fetishHolder.getFetish(Fetish.OralSexGiving) + fetishHolder.getFetish(Fetish.OralSexReceiving)
+	
+	var sexFetishesMod:float = 0.0
+	if(sexFetishes <= 0.0):
+		sexFetishesMod += 0.9
+	
+	return 0.01 + (-personality.getStat(PersonalityStat.Impatient)+1.0)*0.1 + sexFetishesMod
 
 func getTraitExclusiveType() -> String:
 	return "ownersex"

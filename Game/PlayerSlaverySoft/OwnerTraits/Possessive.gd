@@ -19,7 +19,11 @@ func getPossiblePCNamesForLevel(_npcOwner, _level:int) -> Array:
 
 func getTraitScore(_npcOwner) -> float:
 	var personality:Personality = _npcOwner.getOwner().getPersonality()
-	return 0.5 - personality.getStat(PersonalityStat.Coward)*1.0 - personality.getStat(PersonalityStat.Naive)*1.0 + max(-personality.getStat(PersonalityStat.Subby)*2.0, 0.0)
+	var theCoward:float = personality.getStat(PersonalityStat.Coward)
+	var theNaive:float = personality.getStat(PersonalityStat.Naive)
+	var theDommy:float = max(-personality.getStat(PersonalityStat.Subby)*2.0, 0.0)
+	
+	return clamp(-theCoward - theNaive + theDommy, 0.2, 1.0)
 
 func getTraitExclusiveType() -> String:
 	return "sharing"
