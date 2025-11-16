@@ -18,6 +18,14 @@ func canBeUsed(_id:String, _args:Dictionary, _form) -> bool:
 
 func getFormIDs() -> Array:
 	return [
+		"SoftSlaveryOffer",
+		"SoftSlaveryOfferYes",
+		"SoftSlaveryPCOffer",
+		"SoftSlaveryPCOfferYes",
+		"SoftSlaveryPCOfferNo",
+		
+		"SoftSlaveryIntro1Willing",
+		
 		"SoftSlaveryIntro1",
 		"SoftSlaveryIntro2",
 		"SoftSlaveryIntro3",
@@ -250,6 +258,66 @@ func getFormIDs() -> Array:
 	]
 
 func getText(_id:String, _args:Dictionary):
+	if(_id == "SoftSlaveryOffer"):
+		return [
+			"Um.. excuse me.. I was wondering if maybe.. you'd consider being mine?",
+			"I-I know it's a lot to ask but.. would you maybe want to serve me? Be my slave?..",
+			"I get a little lonely sometimes.. maybe you could keep me company? You know.. be my prison bitch? If you want..",
+			"If it's not too much trouble.. would you let me enslave you?.. I could use a prison bitch..",
+			"You seem really nice.. and I was thinking maybe I could look after someone like you.. Wanna be my slave?",
+			"I don't usually ask for things but.. could you be my special someone? My special.. slave?",
+			"If you're not too busy.. would you consider belonging to me? You know.. be my prison bitch?",
+		]
+	if(_id == "SoftSlaveryOfferYes"):
+		return [
+			"Oh! Thank you.. please come with me.",
+			"Really? I'm so glad.. this way, please.",
+			"I promise I'll be good to you.. follow me?",
+			"I'll try to be a good owner for you.. come along.",
+			"I'm really happy you said yes.. let's go somewhere quiet.",
+			"This means a lot to me.. please follow.",
+			"I hope I can make you happy.. come with me?",
+			"Thank you for trusting me.. let's go.",
+		]
+	if(_id == "SoftSlaveryPCOffer"):
+		return [
+			"Um.. if you're not too busy.. could I maybe become your slave?",
+			"I know it's forward but.. would you consider making me your slave?",
+			"If you have room for a slave.. I'd like to be yours..",
+			"I was hoping maybe.. you could be my owner? If that's okay..",
+			"I don't want to be any trouble but.. I'd feel safe with you. Want me to be your slave?",
+			"Would it be too much to ask.. to become your slave?",
+			"I think I'd be happy serving someone like you.. if you'd have me..",
+			"Could I.. um.. be your special person? You know.. your slave?",
+			"I was wondering if.. maybe you'd want me? To be your slave I mean..",
+		]
+	if(_id == "SoftSlaveryPCOfferYes"):
+		return [
+			"I'd like that very much.. please come with me.",
+			"I was hoping you'd ask.. let's go somewhere private.",
+			"I'd be happy to have you.. follow me?",
+			"This makes me really happy.. please come along.",
+			"I'll do my best to take good care of you.. this way.",
+			"I'd love to have you with me.. come with me?",
+			"Nothing would make me happier.. please follow.",
+		]
+	if(_id == "SoftSlaveryPCOfferNo"):
+		return [
+			"No.. sorry..",
+			"Sorry.. I can't.",
+			"Sorry.. not now..",
+			"No.. my bad..",
+		]
+	if(_id == "SoftSlaveryIntro1Willing"):
+		return [
+			"Let's do this..",
+			"Um.. if you're ready..",
+			"Hope you're comfortable..",
+			"Right.. yes.",
+			"There we go..",
+			"Hm.. good..",
+		]
+	
 	if(_id == "SoftSlaveryIntro1"):
 		return [
 			"Um.. you're awake?",

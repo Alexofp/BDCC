@@ -2,6 +2,14 @@ extends DialogueFiller
 
 func getFormIDs() -> Array:
 	return [
+		"SoftSlaveryOffer",
+		"SoftSlaveryOfferYes",
+		"SoftSlaveryPCOffer",
+		"SoftSlaveryPCOfferYes",
+		"SoftSlaveryPCOfferNo",
+		
+		"SoftSlaveryIntro1Willing",
+		
 		"SoftSlaveryIntro1",
 		"SoftSlaveryIntro2",
 		"SoftSlaveryIntro3",
@@ -234,6 +242,70 @@ func getFormIDs() -> Array:
 	]
 
 func getText(_id:String, _args:Dictionary):
+	if(_id == "SoftSlaveryOffer"):
+		return [
+			"Hey. Wanna become my slave? I could use one.",
+			"You look like you'd make for a good slave. What do you say?",
+			"I need someone to serve me. Want to be my prison slave?",
+			"How'd you like to be my personal slave? I promise I'll use you well.",
+			"You seem like you need an owner. I could take good care of a slave such as yourself.",
+			"Looking for an owner? I could use a slave.",
+			"You look like you'd obey well. Want to be my slave?",
+			"I need a new toy. Wanna volunteer to be my personal slave?",
+		]
+	if(_id == "SoftSlaveryOfferYes"):
+		return [
+			"Good choice. Follow me.",
+			"Smart decision. Come with me.",
+			"Excellent. You won't regret this.. much. Follow.",
+			"I knew you'd agree. Let's go.",
+			"Good. I'll enjoy training you. Come.",
+			"Welcome to your new life. Don't fall behind.",
+			"Excellent. I've been needing someone to use.",
+			"I'll take good care of you.. Follow.",
+		]
+	if(_id == "SoftSlaveryPCOffer"):
+		return [
+			"Do you need a slave by any chance? I can serve.",
+			"I'm looking for an owner. Would you take me?",
+			"Could you use a slave? I'm available.",
+			"I want to serve someone. Would you own me?",
+			"Need someone to obey your every command? I volunteer.",
+			"I'd make a good slave for you. Interested?",
+			"Would you consider making me your property? I wanna be a prison bitch..",
+			"I'm offering myself to be your slave. What do you say?",
+			"I need an owner. Would you take me as your slave?",
+		]
+	if(_id == "SoftSlaveryPCOfferYes"):
+		return [
+			"Yes, I could use a slave like you. Follow me.",
+			"Perfect timing. I was just thinking I needed some property.",
+			"Glad you asked. I accept. Come with me.",
+			"Excellent. I've been looking for someone to play with.",
+			"Yes. I think we'll have fun together.. follow.",
+			"I accept your offer. Let's get you prepared.",
+			"Good. I could use someone to serve my needs.",
+			"Yes. I'll enjoy making you mine. Come.",
+		]
+	if(_id == "SoftSlaveryPCOfferNo"):
+		return [
+			"No, I'm not looking for a slave.",
+			"I don't need any slaves right now.",
+			"Not interested in owning anyone at the moment.",
+			"I'll pass. Not in the market for slaves.",
+			"No thanks. I prefer being alone.",
+		]
+	if(_id == "SoftSlaveryIntro1Willing"):
+		return [
+			"Now let's talk.",
+			"Good.",
+			"Perfect.",
+			"Let's go over the rules.",
+			"Time for your first lesson in obedience.",
+			"Now we discuss how you'll serve me.",
+			"Let me explain your new purpose.",
+		]
+	
 	if(_id == "SoftSlaveryIntro1"):
 		return [
 			"You're up? Good.",

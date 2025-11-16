@@ -16,6 +16,14 @@ func canBeUsed(_id:String, _args:Dictionary, _form) -> bool:
 
 func getFormIDs() -> Array:
 	return [
+		"SoftSlaveryOffer",
+		"SoftSlaveryOfferYes",
+		"SoftSlaveryPCOffer",
+		"SoftSlaveryPCOfferYes",
+		"SoftSlaveryPCOfferNo",
+		
+		"SoftSlaveryIntro1Willing",
+		
 		"SoftSlaveryIntro1",
 		"SoftSlaveryIntro2",
 		"SoftSlaveryIntro3",
@@ -248,6 +256,63 @@ func getFormIDs() -> Array:
 	]
 
 func getText(_id:String, _args:Dictionary):
+	if(_id == "SoftSlaveryOffer"):
+		return [
+			"You look like you belong in chains. Wanna be my slave?",
+			"I need a prison bitch. You'll do. Don't keep me waiting.",
+			"How about you make yourself useful and become my slave?",
+			"You look desperate for an owner. I suppose I could tolerate you.",
+			"Let's not waste my time. Do you want to be my slave? I could use a good prison bitch.",
+			"You have 'doormat' written all over you. Want to prove me right? I could use an obedient prison bitch.",
+		]
+	if(_id == "SoftSlaveryOfferYes"):
+		return [
+			"Good. Now move it.",
+			"Took you long enough. Don't lag behind.",
+			"Good. Maybe you're not a complete waste. Follow.",
+			"About time. Try to keep up.",
+			"Your life just got a lot more interesting. For me, anyway. Follow.",
+			"Excellent. I was getting bored. Try to be amusing.",
+			"Don't make me regret this. Follow.",
+		]
+	if(_id == "SoftSlaveryPCOffer"):
+		return [
+			"Do you need a prison bitch by any chance?",
+			"I'm looking for an owner. You look like you might fit that position.",
+			"Could you use a prison bitch? I'm available.",
+			"I want to serve someone. Wanna own me? I might bite you if you say no.",
+			"Need someone to obey you? I could pretend to be your slave if you treat me well enough.",
+			"I'd make for a good prison bitch. No, the best one. Interested?",
+			"I'm offering myself to be your slave. What do you say, fucker? Are you happy?",
+			"I need an owner. Would you take me as your prison bitch? You fucking better.",
+		]
+	if(_id == "SoftSlaveryPCOfferYes"):
+		return [
+			"Fine. I could use something to torment. Follow me.",
+			"Lucky for you, I'm in a good mood. Come.",
+			"Good. I need a slave. Don't disappoint me.",
+			"Sure. This might be mildly entertaining. Follow.",
+			"Okay. But you'll regret it if you're more trouble than you're worth.",
+			"Alright. I could use a prison bitch. You'll do. Come.",
+		]
+	if(_id == "SoftSlaveryPCOfferNo"):
+		return [
+			"No. I have standards.",
+			"Absolutely not. The thought is repulsive.",
+			"Don't insult me with such an offer.",
+			"I'd rather be alone than be seen with you as my slave.",
+			"Pass. I don't collect garbage.",
+		]
+	if(_id == "SoftSlaveryIntro1Willing"):
+		return [
+			"Welcome to your new life.",
+			"Let's begin. Listen closely.",
+			"Time for you to learn your place.",
+			"Now you'll find out what you're really good for.",
+			"Let me spell out your miserable new existence for you.",
+			"This is the only time I explain anything.",
+		]
+	
 	if(_id == "SoftSlaveryIntro1"):
 		return [
 			"Finally awake, you fucker?",

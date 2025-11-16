@@ -16,6 +16,14 @@ func canBeUsed(_id:String, _args:Dictionary, _form) -> bool:
 
 func getFormIDs() -> Array:
 	return [
+		"SoftSlaveryOffer",
+		"SoftSlaveryOfferYes",
+		"SoftSlaveryPCOffer",
+		"SoftSlaveryPCOfferYes",
+		"SoftSlaveryPCOfferNo",
+		
+		"SoftSlaveryIntro1Willing",
+		
 		"SoftSlaveryIntro1",
 		"SoftSlaveryIntro2",
 		"SoftSlaveryIntro3",
@@ -248,6 +256,70 @@ func getFormIDs() -> Array:
 	]
 
 func getText(_id:String, _args:Dictionary):
+	if(_id == "SoftSlaveryOffer"):
+		return [
+			"I've decided I want you as my slave. You should be honored. You just have to say yes.",
+			"You have the look of someone who belongs on their knees. Wanna be my slave?",
+			"I'm in the mood for a new pet. You'll do nicely. What do you say?",
+			"How would you like the privilege of being my personal slave? I promise to keep you busy.",
+			"You seem lost without an owner. I'm feeling generous enough to take you in. What do you say, pretty thing?",
+			"I'm claiming you as my property. Any objections?",
+			"You look like you were born to serve me. Ready to accept your place?",
+			"I'm in need of a new plaything. You've caught my eye. Wanna volunteer yourself to me?",
+		]
+	if(_id == "SoftSlaveryOfferYes"):
+		return [
+			"Excellent. Follow.",
+			"Wise choice. Follow me.",
+			"Good pet. You won't regret this.. much. Now come.",
+			"I was hoping you'd say that. Let's not waste any more time.",
+			"Splendid. I'm going to enjoy this. Follow me.",
+			"Perfect. I've been craving someone to use. Don't fall behind.",
+			"I'll take very good care of you.. Now move.",
+		]
+	if(_id == "SoftSlaveryPCOffer"):
+		return [
+			"Do you have room for a slave? I'm eager to serve.",
+			"I'm looking for a proper owner. Would you do me the honor?",
+			"Could you use a devoted slave? I'm yours for the taking.",
+			"I want to serve at your feet. Would you make me yours?",
+			"Need someone to worship your every command? I humbly volunteer.",
+			"I'd make a perfect slave for you. May I have the privilege?",
+			"Would you consider making me your property? I yearn to be your prison bitch..",
+			"I'm offering myself to be your slave. Will you have me?",
+			"I need a strong owner. Would you take me as your slave?",
+		]
+	if(_id == "SoftSlaveryPCOfferYes"):
+		return [
+			"Yes, I suppose I could take you under my wing. Follow me.",
+			"Your timing is impeccable. I was just thinking I needed some new property.",
+			"Glad you know your place. I accept. Come.",
+			"Excellent. I've been looking for a new toy to play with.",
+			"Yes. I think we'll have lots of fun together.. don't fall behind.",
+			"I accept your offer. Let's get properly introduced.",
+			"Good. I could use someone to attend to my every need.",
+			"Yes. I'll enjoy molding you into my perfect pet. Now come.",
+		]
+	if(_id == "SoftSlaveryPCOfferNo"):
+		return [
+			"No, I have no need for a slave like you.",
+			"I'm not currently collecting pets. Try someone else.",
+			"Not interested in owning you.",
+			"I'll pass.",
+			"No thanks. I prefer my solitude.",
+		]
+	if(_id == "SoftSlaveryIntro1Willing"):
+		return [
+			"Welcome to your new life. Try not to disappoint me.",
+			"Now..",
+			"Good. Very good.",
+			"Perfect. Time to begin.",
+			"Let's go over how you'll please me.",
+			"Time for your first lesson in devotion.",
+			"Now we discuss your new purpose.",
+			"Let me explain exactly what I expect.",
+		]
+	
 	if(_id == "SoftSlaveryIntro1"):
 		return [
 			"Finally awake? Good.",
