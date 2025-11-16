@@ -92,6 +92,9 @@ func shouldPreferToSpawnPawn() -> bool:
 		return npcOwner.shouldPreferToSpawnPawn()
 	return false
 
+func shouldHaveAuraOfDominance() -> bool:
+	return npcOwner.shouldHaveAuraOfDominance()
+
 func saveData() -> Dictionary:
 	var data := .saveData()
 	

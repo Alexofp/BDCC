@@ -107,6 +107,9 @@ func personality(_pers:String) -> float:
 func affection(_otherCharID:String) -> float:
 	return getAffection(charID, _otherCharID)
 
+func shouldHaveAuraOfDominance() -> bool:
+	return false
+
 func saveData() -> Dictionary:
 	return {
 		id = id,

@@ -166,6 +166,7 @@ var statusEffects: Dictionary = {}
 var statusEffectsRefs: Dictionary = {}
 var statusEffectsCheckedForPC: Array = []
 var statusEffectsCheckedForNPC: Array = []
+var statusEffectsCheckedOnFightStart:Array = []
 var allSpecies: Dictionary = {}
 var items: Dictionary = {}
 var itemsRefs: Dictionary = {}
@@ -1060,6 +1061,8 @@ func registerStatusEffect(path: String):
 		statusEffectsCheckedForPC.append(effectObject)
 	if(effectObject.alwaysCheckedForNPCs):
 		statusEffectsCheckedForNPC.append(effectObject)
+	if(effectObject.subscribeCheckOnFightStart):
+		statusEffectsCheckedOnFightStart.append(effectObject)
 	#effectObject.queue_free()
 
 func registerStatusEffectFolder(folder: String):
@@ -1101,6 +1104,9 @@ func getStatusEffectsAlwaysCheckedForPC():
 func getStatusEffectsAlwaysCheckedForNPC():
 	return statusEffectsCheckedForNPC
 
+func getStatusEffectsCheckedOnFightStart() -> Array:
+	return statusEffectsCheckedOnFightStart
+
 static func sortRegisteredStatusEffectsByPriority_sortFunc(a, b):
 	if a.priorityDuringChecking > b.priorityDuringChecking:
 		return true
@@ -1109,6 +1115,7 @@ static func sortRegisteredStatusEffectsByPriority_sortFunc(a, b):
 func sortRegisteredStatusEffectsByPriority():
 	statusEffectsCheckedForPC.sort_custom(self, "sortRegisteredStatusEffectsByPriority_sortFunc")
 	statusEffectsCheckedForNPC.sort_custom(self, "sortRegisteredStatusEffectsByPriority_sortFunc")
+	statusEffectsCheckedOnFightStart.sort_custom(self, "sortRegisteredStatusEffectsByPriority_sortFunc")
 
 func sortPlayerAttacks_sortFunc(a, b):
 	if getAttack(a).attackPriority > getAttack(b).attackPriority:

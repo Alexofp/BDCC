@@ -627,6 +627,9 @@ func setMustHaveOwnerLock(_l:bool):
 func rememberMustHaveOwnerLock() -> bool:
 	return lockedByOwner
 
+func shouldHaveAuraOfDominance() -> bool:
+	return true
+
 func saveData() -> Dictionary:
 	var tasksData:Array = []
 	for task in tasks:

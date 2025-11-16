@@ -7,14 +7,14 @@ func getVisibleName() -> String:
 	return "Subby"
 
 func getVisibleDescription() -> String:
-	return "The owner can occasionally submit to you."
+	return "The owner can occasionally submit to you. They will also not have an 'Aura of dominance' during fights."
 
 func getPossiblePCNamesForLevel(_npcOwner, _level:int) -> Array:
 	if(_level <= 1):
 		return ["softy", "servant"]
 	if(_level == 2):
-		return ["light"]
-	return ["world"]
+		return ["light", "cutie"]
+	return ["world", "sweetie"]
 
 func getTraitScore(_npcOwner) -> float:
 	var personality:Personality = _npcOwner.getOwner().getPersonality()
@@ -44,3 +44,6 @@ func getTalkActions(_npcOwner, _event) -> Array:
 func doTalkAction(_npcOwner, _event, _actionID:String, _args:Array):
 	if(_actionID == "subby_fuckowner"):
 		_event.runEvent("", "AskFuckOwner")
+
+func shouldPreventAuraOfDominance() -> bool:
+	return true

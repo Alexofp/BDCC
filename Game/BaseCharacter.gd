@@ -2853,6 +2853,11 @@ func onFightStart(_contex = {}):
 			continue
 		var effect = statusEffects[effectID]
 		effect.onFightStart(_contex)
+	
+	for effectRef in GlobalRegistry.getStatusEffectsCheckedOnFightStart():
+		var theRes:Array = effectRef.checkOnFightStart(self, _contex)
+		if(theRes.size() > 0 && theRes[0]):
+			addEffect(effectRef.id, theRes[1] if theRes.size() > 1 else [])
 
 func processBattleTurnContex(_contex = {}):
 	processBattleTurn() # Legacy

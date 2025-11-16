@@ -209,6 +209,15 @@ func doTalkAction(_event, _actionID:String, _args:Array):
 			continue
 		theTrait.doTalkAction(self, _event, _actionID, _args)
 
+func shouldHaveAuraOfDominance() -> bool:
+	for traitID in traits:
+		var theTrait = GlobalRegistry.getNpcOwnerTrait(traitID)
+		if(!theTrait):
+			continue
+		if(theTrait.shouldPreventAuraOfDominance()):
+			return false
+	return true
+
 func saveData() -> Dictionary:
 	var data := .saveData()
 	

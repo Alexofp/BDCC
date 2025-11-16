@@ -36,6 +36,9 @@ func getNOMs(_npcOwner) -> Dictionary:
 func getSkipPunishmentChance() -> float:
 	return 0.0
 
+func shouldPreventAuraOfDominance() -> bool:
+	return false
+
 func talkAction(_name:String, _desc:String, _id:String, _args:Array=[]) -> Array:
 	return [_name, _desc, _id, _args]
 	

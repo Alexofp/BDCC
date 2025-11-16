@@ -110,7 +110,7 @@ func init_text():
 	# pc to npc only
 	if(theStarter.isPlayer() && !theReacter.isPlayer()):
 		if(!theStarter.isSlaveTo(theReacter.getID())):
-			if(true || getLust("starter", "reacter") >= 0.75 || getAffection("starter", "reacter") <= -0.75):
+			if(getLust("starter", "reacter") >= 0.75 || getAffection("starter", "reacter") <= -0.75):
 				if(getRolePawn("reacter").canSocial()):
 					addAction("enslave_ask_to_be", "Ask to become slave", "Ask this character to [b]ENSLAVE you[/b]", "default", 0.0, 60, {})
 				else:
