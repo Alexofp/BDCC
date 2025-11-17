@@ -230,6 +230,9 @@ func _ready():
 		add_child(newWorldFloor)
 		newWorldFloor.add_child(mapObject)
 	
+		if(mapObject.get("canMeetNPCs")):
+			newWorldFloor.canMeetNPCs = mapObject.canMeetNPCs
+	
 	for f in get_children():
 		if(f.has_method("getRooms")):
 			if(floorDict.has(f.id)):
@@ -718,6 +721,19 @@ func hasWallsNearby(locID:String) -> bool:
 		if(!canGo(theRoom.getFloorID(), theRoom.getCell(), dir)):
 			return true
 	return false
+
+func canMeetOnFloor(floorID:String) -> bool:
+	var theFloor = floorDict[floorID] if floorDict.has(floorID) else null
+	if(theFloor && theFloor.canMeetNPCs):
+		return true
+	
+	return false
+
+func canMeetInLoc(_loc:String) -> bool:
+	var theRoom = getRoomByID(_loc)
+	if(!theRoom):
+		return false
+	return canMeetOnFloor(theRoom.getFloorID())
 
 func saveData():
 	var data = {}

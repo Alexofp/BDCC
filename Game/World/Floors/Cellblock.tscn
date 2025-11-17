@@ -6,6 +6,7 @@
 
 [node name="Cellblock" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+canMeetNPCs = true
 
 [node name="CellblockRoom" parent="." index="0" instance=ExtResource( 2 )]
 roomName = "Corridor"

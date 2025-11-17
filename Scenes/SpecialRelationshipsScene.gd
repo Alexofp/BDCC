@@ -51,9 +51,9 @@ func _run():
 					addDisabledButton("Meet", "You need to be on the same floor!")
 				elif(!thePawn.canBeInterrupted()):
 					addDisabledButton("Meet", "They are busy with something!")
-				elif(!isLocSafeToMeetAt(theLoc)):
+				elif(!isLocSafe(theLoc)):
 					addDisabledButton("Meet", "Their location isn't safe!")
-				elif(!isLocSafeToMeetAt(thePCLoc)):
+				elif(!isLocSafe(thePCLoc)):
 					addDisabledButton("Meet", "Your current location isn't safe! Escape the danger first!")
 				else:
 					addButton("Meet", "Go meet them!", "doMeet")
@@ -61,27 +61,16 @@ func _run():
 				var theLoc:String = GM.pc.getLocation()
 				if(!isFloorSafeToMeetAt(theLoc)):
 					addDisabledButton("Meet", "You can't meet them on this floor!")
-				elif(!isLocSafeToMeetAt(theLoc)):
+				elif(!isLocSafe(theLoc)):
 					addDisabledButton("Meet", "Your current location isn't safe!")
 				else:
 					addButton("Meet", "Go meet them!", "doMeet")
 
-func isLocSafeToMeetAt(_loc:String) -> bool:
-	var theRoom:GameRoom = GM.world.getRoomByID(_loc)
-	if(!theRoom):
-		return false
-	
+func isLocSafe(_loc:String) -> bool:
 	return GM.world.isLocSafe(_loc)
 
 func isFloorSafeToMeetAt(_loc:String) -> bool:
-	var theRoom:GameRoom = GM.world.getRoomByID(_loc)
-	if(!theRoom):
-		return false
-	var floorID:String = theRoom.getFloorID()
-	#TODO: Make this a generic function?
-	if(floorID in ["Cellblock", "MainHall", "Medical", "MiningFloor"]):
-		return true
-	return false
+	return GM.world.canMeetInLoc(_loc)
 
 func isOnSameFloor(_loc1:String, _loc2:String) -> bool:
 	var theRoom1:GameRoom = GM.world.getRoomByID(_loc1)

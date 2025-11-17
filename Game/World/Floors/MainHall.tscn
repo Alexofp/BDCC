@@ -6,6 +6,7 @@
 
 [node name="MainHall" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+canMeetNPCs = true
 
 [node name="MainHallRoom" parent="." index="0" instance=ExtResource( 2 )]
 self_modulate = Color( 1, 0.6, 0.6, 1 )

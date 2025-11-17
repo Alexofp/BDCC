@@ -6,6 +6,7 @@
 
 [node name="MiningFloor" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+canMeetNPCs = true
 
 [node name="MiningRoom" parent="." index="0" groups=["zone_engpatrol", "zone_poi"] instance=ExtResource( 2 )]
 self_modulate = Color( 0.7, 0.7, 0.7, 1 )
