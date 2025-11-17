@@ -113,6 +113,6 @@ func setIsDisabled(_dis:bool):
 
 func checkDisabled():
 	if(disabled):
-		button_label["custom_colors/font_color"] = Color.darkgray
+		button_label["custom_colors/font_color"] = Color(0.44, 0.44, 0.44)
 	else:
 		button_label["custom_colors/font_color"] = Color.white
