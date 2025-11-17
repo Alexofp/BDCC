@@ -755,16 +755,14 @@ func getActionsForCharID(_charID:String, isForMenu:bool = false) -> Array:
 	if(_isDom):
 		_charInfo = getDomInfo(_charID)
 	
-	if(isForMenu && _isPC && _isSub && _charInfo && _charInfo.canDoActions()):
-		var forcedObedienceLevel = GM.pc.getForcedObedienceLevel()
-		if(RNG.chance(forcedObedienceLevel*100.0)):
-			result.append({
-				id = "obey",
-				name = "OBEY",
-				desc = "You have lost control of your body..",
-				priority = 999,
-			})
-			return result
+	if(isForMenu && _isPC && _isSub && _charInfo && _charInfo.canDoActions() && _charInfo.shouldFullyObey()):
+		result.append({
+			id = "obey",
+			name = "OBEY",
+			desc = "You have lost control of your body..",
+			priority = 999,
+		})
+		return result
 	
 	if(_isPC && isForMenu):
 		result.append({
@@ -977,11 +975,7 @@ func processScene():
 func doAction(_actionInfo:Dictionary):
 	if(_actionInfo["id"] == "obey"):
 		clearOutputRaw()
-		if(isSub("pc")):
-			getSubInfo("pc").setObeyMode(true)
 		doFullTurn(true)
-		if(isSub("pc")):
-			getSubInfo("pc").setObeyMode(false)
 	if(_actionInfo["id"] == "auto"):
 		clearOutputRaw()
 		doFullTurn(true)

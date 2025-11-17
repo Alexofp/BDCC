@@ -513,6 +513,9 @@ func doFetishChangeCalculation() -> Dictionary:
 	return {messages=messages}
 		
 
+func shouldFullyObey() -> bool:
+	return false
+
 func saveData():
 	var data = {
 		"charID": charID,

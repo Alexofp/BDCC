@@ -166,10 +166,15 @@ func processTurn():
 		if(getChar().getBuffsHolder().hasBuff(Buff.ActiveResistanceInSexBuff)):
 			resistance = Util.moveNumberTowards(resistance, 1.0, 0.1)
 	
-	var forcedObedience = clamp(getChar().getForcedObedienceLevel(), 0.0, 1.0)
+	obeyMode = false
+	
+	var forcedObedience:float = clamp(getChar().getForcedObedienceLevel(), 0.0, 1.0)
 	if(forcedObedience > 0.0):
 		resistance = clamp(resistance, 0.0, 1.0 - forcedObedience)
 		fear = clamp(fear, 0.0, 1.0 - forcedObedience)
+		
+		if(getChar().isPlayer()): # AI will just choose obedient actions on its own
+			obeyMode = RNG.chance(forcedObedience*100.0)
 	
 	.processTurn()
 	resistanceFull += resistance
@@ -292,9 +297,6 @@ func isResistingNewFetishes(_fetishID:String) -> bool:
 		if(getChar().getLustLevel() <= 0.8):
 			return true
 	return false
-
-func setObeyMode(_newObey:bool):
-	obeyMode = _newObey
 
 func shouldFullyObey() -> bool:
 	if(obeyMode):
