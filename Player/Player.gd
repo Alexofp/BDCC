@@ -906,17 +906,6 @@ func setFemininity(_newF:int):
 	pickedFemininity = _newF
 	updateAppearance()
 
-func canStartSex() -> bool:
-	if(hasBoundArms()):
-		return false
-	if(hasBlockedHands()):
-		return false
-	if(hasBoundLegs()):
-		return false
-	if(isOralBlocked()):
-		return false
-	return true
-
 func getReputation():
 	return reputation
 

@@ -68,7 +68,10 @@ func init_text():
 		addAction("offersex", "Offer sex", "Offer to fuck them", "sexDom", 0.2, 60, {})
 	else:
 		addDisabledAction("Offer sex", "You can't start sex like this..")
-	addAction("offerself", "Offer self", "Offer them to fuck you", "sexSub", 0.2, 60, {})
+	if(roleCanStartSex("reacter")):
+		addAction("offerself", "Offer self", "Offer them to fuck you", "sexSub", 0.2, 60, {})
+	else:
+		addDisabledAction("Offer self", "They can't start sex like this..")
 	if(theStarter.getInventory().hasRemovableRestraintsNoLockedSmartlocks()):
 		if(getRolePawn("starter").getAffection(getRolePawn("reacter")) >= 0.5 && getRolePawn("reacter").canSocial()):
 			addAction("ask_help_restraints", "Ask for help", "Ask for help with your restraints..", "help", 0.0, 60, {})

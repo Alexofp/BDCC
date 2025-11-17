@@ -1951,6 +1951,14 @@ func hasBuff(buffID):
 	return buffsHolder.hasBuff(buffID)
 
 func canStartSex() -> bool:
+	if(hasBoundArms()):
+		return false
+	if(hasBlockedHands()):
+		return false
+	#if(hasBoundLegs()): # Means there are chains around ankles but its fine
+	#	return false
+	#if(isOralBlocked()):
+	#	return false
 	return true
 
 func invCanEquipSlot(slot):
