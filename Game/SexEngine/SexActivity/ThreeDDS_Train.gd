@@ -4,6 +4,7 @@ var usedBodypart:String = S_VAGINA
 var usedFetish:String = Fetish.VaginalSexGiving
 var usedBodypart2:String = S_VAGINA
 var usedFetish2:String = Fetish.VaginalSexGiving
+var straponTimer:int = 0
 
 func _init():
 	id = "ThreeDDS_Train"
@@ -178,6 +179,11 @@ func sex_processTurn():
 #	else:
 	doProcessFuckExtra(DOM_0, SUB_0, usedBodypart)
 	doProcessFuckExtra(SUB_0, DOM_1, usedBodypart2)
+	
+	if(isWearingStrapon(DOM_0) && isWearingStrapon(SUB_0) && !getSub().canZoneOrgasm(usedBodypart)): # If sub can't cum, just have some fun
+		straponTimer += 1
+		if(straponTimer > 5 && RNG.chance(5.0*straponTimer)):
+			satisfyGoals()
 
 func getActions(_indx:int):
 	if(_indx == DOM_0 || _indx == DOM_1):
@@ -347,6 +353,7 @@ func saveData():
 	
 	data["usedBodypart"] = usedBodypart
 	data["usedBodypart2"] = usedBodypart2
+	data["straponTimer"] = straponTimer
 
 	return data
 	
@@ -357,3 +364,4 @@ func loadData(data):
 	usedFetish = Fetish.VaginalSexGiving if (usedBodypart == S_VAGINA) else Fetish.AnalSexGiving
 	usedBodypart2 = SAVE.loadVar(data, "usedBodypart2", S_VAGINA)
 	usedFetish2 = Fetish.VaginalSexGiving if (usedBodypart2 == S_VAGINA) else Fetish.AnalSexGiving
+	straponTimer = SAVE.loadVar(data, "straponTimer", 0)

@@ -142,7 +142,7 @@ func _run():
 		elif(GM.pc.isFullyNaked() && !GM.pc.hasVagina()):
 			saynn("All the while the guy forces you to spread your legs more, exposing your {pc.analStretch} tailhole! He lubes it up with his spit and gives your ass a smack before watching you squirm.")
 
-		saynn("Fuck, you’re feeling kinda excited, you stick your tongue out and give the barbed member a little lick, tasting his pre. All the while the guy behind slides his cock between your {pc.thick} buns, teasing. You wish they would start fucking you already, your legs are spread and mouth is slightly opened while you are bend forward with cocks on both sides.")
+		saynn("Fuck, you’re feeling kinda excited, you stick your tongue out and give the barbed member a little lick, tasting his pre. All the while the guy behind slides his cock between your {pc.thick} buns, teasing. You wish they would start fucking you already, your legs are spread and mouth is slightly opened while you are bent forward with cocks on both sides.")
 
 		# (if has pussy)
 		if(GM.pc.hasVagina()):
@@ -150,7 +150,7 @@ func _run():
 
 			saynn("You’d happily let out a pleasure noise but your mouth is busy while the both guys ares fucking your holes. The feline cock testing your gag reflex and scratching at the throat walls with its soft barbs while the knotted one gets rammed deeper down your sex with each thrust, causing you to bounce between the two dicks.")
 
-			saynn("You hold onto the cat before and eagerly treat his cock with your tongue and lips, your ass gets smacked again but you don’t even care, that only adds to the sensations. You blush seeing others watch you being spitroasted.")
+			saynn("You hold onto the cat before you and eagerly treat his cock with your tongue and lips, your ass gets smacked again but you don’t even care, that only adds to the sensations. You blush seeing others watch you being spitroasted.")
 
 			# (if has cock)
 			if(GM.pc.hasPenis()):
@@ -162,7 +162,7 @@ func _run():
 
 			saynn("You’d happily let out a pleasure noise but your mouth is busy while the both guys ares fucking your holes. The feline cock testing your gag reflex and scratching at the throat walls with its soft barbs while the knotted one gets rammed deeper down your ass with each thrust, causing you to bounce between the two dicks.")
 
-			saynn("You hold onto the cat before and eagerly treat his cock with your tongue and lips, your ass gets smacked again but you don’t even care, that only adds to the sensations. You blush seeing others watch you being spitroasted.")
+			saynn("You hold onto the cat before you and eagerly treat his cock with your tongue and lips, your ass gets smacked again but you don’t even care, that only adds to the sensations. You blush seeing others watch you being spitroasted.")
 
 			# (if has cock)
 			if(GM.pc.hasPenis()):

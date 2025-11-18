@@ -39,9 +39,25 @@ func isActivityImpossibleShouldStop() -> bool:
 	return false
 
 func getTags(_indx:int) -> Array:
+	if(state == "sex"):
+		if(_indx == DOM_0):
+			if(subFocus == BodypartSlot.Vagina):
+				return [SexActivityTag.HavingSex, SexActivityTag.MouthUsed, SexActivityTag.VaginaUsed]
+			if(subFocus == BodypartSlot.Penis):
+				return [SexActivityTag.HavingSex, SexActivityTag.MouthUsed, SexActivityTag.PenisUsed, SexActivityTag.PenisInside]
+		if(_indx == SUB_0):
+			if(domFocus == BodypartSlot.Vagina):
+				return [SexActivityTag.HavingSex, SexActivityTag.PreventsSubTeasing, SexActivityTag.MouthUsed, SexActivityTag.VaginaUsed]
+			if(domFocus == BodypartSlot.Penis):
+				return [SexActivityTag.HavingSex, SexActivityTag.PreventsSubTeasing, SexActivityTag.MouthUsed, SexActivityTag.PenisUsed, SexActivityTag.PenisInside]
+	
 	if(_indx == DOM_0):
+		if(subFocus == BodypartSlot.Penis):
+			return [SexActivityTag.HavingSex, SexActivityTag.MouthUsed, SexActivityTag.PenisUsed]
 		return [SexActivityTag.HavingSex, SexActivityTag.MouthUsed]
 	if(_indx == SUB_0):
+		if(domFocus == BodypartSlot.Penis):
+			return [SexActivityTag.HavingSex, SexActivityTag.PreventsSubTeasing, SexActivityTag.MouthUsed, SexActivityTag.PenisUsed]
 		return [SexActivityTag.HavingSex, SexActivityTag.PreventsSubTeasing, SexActivityTag.MouthUsed]
 	return []
 

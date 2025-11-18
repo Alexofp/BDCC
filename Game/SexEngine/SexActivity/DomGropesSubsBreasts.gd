@@ -169,7 +169,7 @@ func getActions(_indx:int):
 	if(_indx == SUB_0):
 		addAction("pullaway", getResistScore(SUB_0), "Resist groping", "Try to pull away", {A_CHANCE: getResistChance(SUB_0, DOM_0, RESIST_BREASTS_FOCUS, 30.0, 25.0)})
 		if(isReadyToCumHandled(SUB_0)):
-			addAction("cum", 1.0, "Cum!", "You gonna cum.", {A_PRIORITY:1001})
+			addAction("cum", 1.0, "Cum!", "You're gonna cum.", {A_PRIORITY:1001})
 		
 func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "startstrokecock"):

@@ -114,7 +114,7 @@ func getActions(_indx:int):
 	if(_indx == SUB_0):
 		addAction("moo", fetish(SUB_0, Fetish.Lactation)*0.3, "Moo", "Do the cute noise")
 		if(isReadyToCumHandled(SUB_0)):
-			addAction("cum", 1.0, "Cum!", "You gonna cum.", {A_PRIORITY: 1001})
+			addAction("cum", 1.0, "Cum!", "You're gonna cum.", {A_PRIORITY: 1001})
 
 func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "stopMilking"):

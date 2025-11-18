@@ -3,6 +3,7 @@ extends SexActivityBase
 var sub0Hole:String = S_VAGINA
 var sub1Hole:String = S_VAGINA
 var domFocus:int = SUB_0
+var straponTimer:int = 0
 
 func _init():
 	id = "ThreeDSS_Buttstack"
@@ -192,6 +193,11 @@ func sex_processTurn():
 	
 	doProcessFuck(DOM_0, domFocus, getCurrentHole(), " in a buttstack position")
 	doProcessFuckExtra(DOM_0, domFocus, getCurrentHole())
+
+	if(isWearingStrapon(DOM_0) && !getDomOrSub(domFocus).canZoneOrgasm(getCurrentHole())): # If sub can't cum, just have some fun
+		straponTimer += 1
+		if(straponTimer > 5 && RNG.chance(5.0*straponTimer)):
+			satisfyGoals()
 
 func getActions(_indx:int):
 	if(_indx == DOM_0):
@@ -395,6 +401,7 @@ func saveData():
 	data["sub0Hole"] = sub0Hole
 	data["sub1Hole"] = sub1Hole
 	data["domFocus"] = domFocus
+	data["straponTimer"] = straponTimer
 
 	return data
 	
@@ -404,3 +411,4 @@ func loadData(data):
 	sub0Hole = SAVE.loadVar(data, "sub0Hole", S_ANUS)
 	sub1Hole = SAVE.loadVar(data, "sub1Hole", S_ANUS)
 	domFocus = SAVE.loadVar(data, "domFocus", SUB_0)
+	straponTimer = SAVE.loadVar(data, "straponTimer", 0)
