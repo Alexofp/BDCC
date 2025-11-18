@@ -402,7 +402,7 @@ func getText(_id:String, _args:Dictionary):
 			"That leash looks good in your hands. Keep a tight grip.",
 			"That’s how you keep a worthless little slut in line. Good job.",
 			"Look at you, leading that cute little slut around like a proper pet.",
-			"That leash suits them.. but you wear the control even better.",
+			"That leash suits {target.him}.. but you wear the control even better.",
 			"Looks like you’ve trained your little slut well. Impressive.",
 		]
 	if(_id == "ReactFUCKING_SOMEONE"):

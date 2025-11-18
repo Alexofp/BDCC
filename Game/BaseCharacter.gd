@@ -507,6 +507,18 @@ func formatSay(text):
 	
 	return "[color="+color+"]\""+text+"\"[/color]"
 
+func theyre():
+	var gender = getPronounGender()
+	
+	if(gender == Gender.Male):
+		return "he's"
+	if(gender == Gender.Female):
+		return "she's"
+	if(gender == Gender.Androgynous):
+		return "they're"
+	if(gender == Gender.Other):
+		return "it's"
+
 func heShe():
 	var gender = getPronounGender()
 	

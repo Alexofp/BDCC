@@ -33,7 +33,7 @@ func canBeUsed(_id:String, _args:Dictionary, _form) -> bool:
 func getText(_id:String, _args:Dictionary):
 	if(_id == "AttackStart"):
 		return [
-			"I don't care that I got your pregnant.",
+			"I don't care that I got you pregnant.",
 		]
 	if(_id == "GuardFrisk"):
 		return [
