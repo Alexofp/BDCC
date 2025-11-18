@@ -77,10 +77,7 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 	if(object == null):
 		return "[color=red]!RUNTIME ERROR NO CHARACTER FOUND "+_obj+"."+_command+" "+str(_args)+"![/color]"
 	if(_command == "theyre" && _args.size() == 0):
-		if(object.isPlayer()):
-			return "you're"
-		else:
-			return object.theyre()
+		return object.theyre()
 	if(_command == "name" && _args.size() == 0):
 		return object.getName()		
 	if(_command == "nameS" && _args.size() == 0):
