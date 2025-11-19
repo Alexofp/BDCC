@@ -257,13 +257,21 @@ func _run():
 
 
 	if(state == "give_apple"):
+		var apples = GM.pc.getInventory().getAllOf("appleitem")
+		var pcStoleApple = false
+		for apple in apples: # if at least one apple is illegal, present that one to tavi
+			if !apple.isLegal:
+				pcStoleApple = true
+				break
+		
+		
 		saynn("You walk up to Tavi and offer her the shiny apple.")
 
 		saynn("[say=pc]Here, Miss, like you wanted.[/say]")
 
 		saynn("She grabs it, holds it, even breathes on it but then gives it back.")
 
-		saynn("[say=tavi]Good. Keep it. Bet you went through some things to get it.[/say]")
+		saynn("[say=tavi]Good. Keep it. " + ("Bet you went through some things to get it." if pcStoleApple else "Even though you took the easy way to get it.") + "[/say]")
 
 		saynn("Her words leave you confused. She watches your reaction with great interest.")
 
@@ -281,10 +289,7 @@ func _run():
 
 		saynn("[say=pc]I wanna be a good pet for my Miss..[/say]")
 
-		if(GM.pc.getGender() == Gender.Male):
-			saynn("[say=tavi]Good boy~. Keep the apple.[/say]")
-		else:
-			saynn("[say=tavi]Good girl~. Keep the apple.[/say]")
+		saynn("[say=tavi]Good {pc.boy}~. Keep the apple.[/say]")
 
 		saynn("[say=pc]Thank you, Miss..[/say]")
 
