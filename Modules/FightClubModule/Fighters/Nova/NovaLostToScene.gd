@@ -39,7 +39,7 @@ func _run():
 		if(!GM.pc.isFullyNaked()):
 			saynn("She {pc.undressMessageS}, leaving you completely naked!")
 
-		saynn("She produces quite a few bdsm restraints and lays them out before you. Firstly, she restraints your arms behind your back with some sturdy metal cuffs. You don’t resist and let her do it, holding your arms like she asks you to and waiting for her to be done. Then she does the same but with your ankles, cuffing them together so you can’t even walk or spread your legs.")
+		saynn("She produces quite a few BDSM restraints and lays them out before you. Firstly, she restraints your arms behind your back with some sturdy metal cuffs. You don’t resist and let her do it, holding your arms like she asks you to and waiting for her to be done. Then she does the same but with your ankles, cuffing them together so you can’t even walk or spread your legs.")
 
 		saynn("[say=pc]Using your personal cuffs on me?[/say]")
 

@@ -271,7 +271,7 @@ func _run():
 		
 		saynn("You step into your cell and take a look around.")
 
-		saynn("The bed is awfully stiff, a single pillow and a blanket is all you get with it. Walls made out of solid metal with orange accents everywhere. A simple stool to sit on. Suddenly, you begin to feel the effects of an ftl jump, you feel extremely tired. Between sleeping naked and in your inmate clothes you pick the latter and just get into the bed. Yeah, your back won’t like any of this. But you push all the thoughts away and try to get some sleep. Not that much time passes before you slip into the darkness.")
+		saynn("The bed is awfully stiff, a single pillow and a blanket is all you get with it. Walls made out of solid metal with orange accents everywhere. A simple stool to sit on. Suddenly, you begin to feel the effects of an FTL jump, you feel extremely tired. Between sleeping naked and in your inmate clothes you pick the latter and just get into the bed. Yeah, your back won’t like any of this. But you push all the thoughts away and try to get some sleep. Not that much time passes before you slip into the darkness.")
 
 		addButton("Wake up", "", "wake_up")
 
