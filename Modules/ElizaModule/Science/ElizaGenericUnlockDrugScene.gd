@@ -31,7 +31,7 @@ func _run():
 		else:
 			saynn("You find Eliza and bring her into the lab.")
 
-		saynn("A strange-looking pill in your hand peaks her interest. She puts on her latex gloves and grabs it.")
+		saynn("A strange-looking pill in your hand piques her interest. She puts on her latex gloves and grabs it.")
 
 		saynn("[say=eliza]Alright, let's see what it does![/say]")
 
