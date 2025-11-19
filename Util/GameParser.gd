@@ -48,7 +48,7 @@ func callFuncWrapper(_command: String, _args: Array):
 	
 	return "[color=red]!RUNTIME ERROR NO COMMAND FOUND "+_command+" "+str(_args)+"![/color]"
 	
-func callObjectFunc(_obj: String, _command: String, _args: Array, overrides: Dictionary = {}):
+func callObjectFunc(_obj: String, _command: String, _args: Array, overrides: Dictionary = {}) -> String:
 	if(overrides.has(_obj)):
 		_obj = overrides[_obj]
 	
@@ -57,13 +57,13 @@ func callObjectFunc(_obj: String, _command: String, _args: Array, overrides: Dic
 		shouldBeUpperCase = true
 		_command[0] = _command[0].to_lower()
 	
-	var result = callObjectFuncWrapper(_obj, _command, _args)
-	if((result is String) && shouldBeUpperCase && result.length() > 0):
+	var result:String = callObjectFuncWrapper(_obj, _command, _args)
+	if(shouldBeUpperCase && result.length() > 0):
 		result[0] = result[0].to_upper()
 	
 	return result
 	
-func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
+func callObjectFuncWrapper(_obj: String, _command: String, _args: Array) -> String:
 	var resolvedName = GM.main.resolveCustomCharacterName(_obj)
 	if(resolvedName != null):
 		_obj = resolvedName
@@ -78,6 +78,25 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		return "[color=red]!RUNTIME ERROR NO CHARACTER FOUND "+_obj+"."+_command+" "+str(_args)+"![/color]"
 	if(_command == "theyre" && _args.size() == 0):
 		return object.theyre()
+	if(_command in ["youre", "youreTheyre"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "you're"
+		else:
+			return object.theyre()
+	if(_command in ["doesDo", "does"] && _args.size() == 0):
+		return object.doesDo()
+	if(_command == "youDo" && _args.size() == 0):
+		if(object.isPlayer()):
+			return "do"
+		else:
+			return object.doesDo()
+	if(_command in ["doesntDont", "doesnt"] && _args.size() == 0):
+		return object.doesntDont()
+	if(_command == "youDont" && _args.size() == 0):
+		if(object.isPlayer()):
+			return "don't"
+		else:
+			return object.doesntDont()
 	if(_command == "name" && _args.size() == 0):
 		return object.getName()		
 	if(_command == "nameS" && _args.size() == 0):

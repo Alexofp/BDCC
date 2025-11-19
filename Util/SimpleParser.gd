@@ -274,5 +274,5 @@ func executeString(text: String, overrides: Dictionary = {}):
 func callFunc(_command: String, _args: Array):
 	return "!callFunc "+_command+" "+str(_args)+"!"
 	
-func callObjectFunc(_obj: String, _command: String, _args: Array, _overrides: Dictionary = {}):
+func callObjectFunc(_obj: String, _command: String, _args: Array, _overrides: Dictionary = {}) -> String:
 	return "!callObjectFunc "+_obj+"."+_command+" "+str(_args)+"!"

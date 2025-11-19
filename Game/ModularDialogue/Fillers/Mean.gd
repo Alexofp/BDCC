@@ -198,7 +198,7 @@ func getText(_id:String, _args:Dictionary):
 	if(_id == "GuardCaughtOffLimits"):
 		return [
 			"What’s a filthy [[SLUT]] like you doing sneaking around here?",
-			"Look what we have here – a sneaky little [[SLUT]] thinking {inmate.he} can go wherever {inmate.he} wants.",
+			"Look what we have here – a sneaky little [[SLUT]] thinking {inmate.he} can go wherever {inmate.he} {inmate.verb('want')}.",
 			"You think you’re clever, [[SLUT]]? This area’s off-limits to sluts like you.",
 			"Another day, another [[SLUT]] trying to step out of line.",
 			"Did you lose your way, you dumb [[SLUT]]? This is no place for a little bitch like you.",
@@ -366,7 +366,7 @@ func getText(_id:String, _args:Dictionary):
 		]
 	if(_id == "ReactON_A_LEASH"):
 		return [
-			"Look at this pathetic bitch, being led around like the dumb whore {target.he} is.",
+			"Look at this pathetic bitch, being led around like the dumb whore {target.he} {target.isAre}.",
 			"Got yourself a new owner, slut? Lost count of them yet?",
 			"Leashed up like the obedient slave you are. How fitting.",
 			"Such a good little pet, doing everything your master tells you.",
@@ -400,8 +400,8 @@ func getText(_id:String, _args:Dictionary):
 	if(_id == "ReactLEASHING_SOMEONE"):
 		return [
 			"Got yourself a little pet slut, huh? What a cute little bitch.",
-			"Look at you, dragging that whore around like {target.he} belongs to you.",
-			"Taking your slut for a walk? Make sure {target.he} doesn’t run off to get fucked.",
+			"Look at you, dragging that whore around like {target.he} {target.verb('belong')} to you.",
+			"Taking your slut for a walk? Make sure {target.he} {target.doesnt} run off to get fucked.",
 			"Who’s the pathetic whore on the leash today? Lucky them.",
 			"Nice leash. Really showing off who’s in control here, huh?",
 			"Dragging your slut around like {target.theyre} your prized fucktoy. Good job.",
@@ -409,7 +409,7 @@ func getText(_id:String, _args:Dictionary):
 			"Oh, holding on nice and tight, I see. Keep that whore in line.",
 			"Leashes are perfect for handling dumb sluts like that.",
 			"That’s how you handle a worthless little whore—keep them on a leash.",
-			"Look at you, parading that bitch around like the good pet {target.he} is.",
+			"Look at you, parading that bitch around like the good pet {target.he} {target.isAre}.",
 		]
 	if(_id == "ReactFUCKING_SOMEONE"):
 		return [

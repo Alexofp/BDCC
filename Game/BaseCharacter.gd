@@ -507,7 +507,7 @@ func formatSay(text):
 	
 	return "[color="+color+"]\""+text+"\"[/color]"
 
-func theyre():
+func theyre() -> String:
 	var gender = getPronounGender()
 	
 	if(gender == Gender.Male):
@@ -518,8 +518,35 @@ func theyre():
 		return "they're"
 	if(gender == Gender.Other):
 		return "it's"
+	return "theyre():BAD_GENDER"
 
-func heShe():
+func doesntDont() -> String:
+	var gender = getPronounGender()
+	
+	if(gender == Gender.Male):
+		return "doesn't"
+	if(gender == Gender.Female):
+		return "doesn't"
+	if(gender == Gender.Androgynous):
+		return "don't"
+	if(gender == Gender.Other):
+		return "doesn't"
+	return "doesntDont():BAD_GENDER"
+
+func doesDo() -> String:
+	var gender = getPronounGender()
+	
+	if(gender == Gender.Male):
+		return "does"
+	if(gender == Gender.Female):
+		return "does"
+	if(gender == Gender.Androgynous):
+		return "do"
+	if(gender == Gender.Other):
+		return "does"
+	return "doesDo():BAD_GENDER"
+
+func heShe() -> String:
 	var gender = getPronounGender()
 	
 	if(gender == Gender.Male):
@@ -530,8 +557,9 @@ func heShe():
 		return "they"
 	if(gender == Gender.Other):
 		return "it"
+	return "heShe():BAD_GENDER"
 		
-func hisHer():
+func hisHer() -> String:
 	var gender = getPronounGender()
 	
 	if(gender == Gender.Male):
@@ -542,8 +570,9 @@ func hisHer():
 		return "their"
 	if(gender == Gender.Other):
 		return "its"
+	return "hisHer():BAD_GENDER"
 		
-func himHer():
+func himHer() -> String:
 	var gender = getPronounGender()
 	
 	if(gender == Gender.Male):
@@ -554,8 +583,9 @@ func himHer():
 		return "them"
 	if(gender == Gender.Other):
 		return "it"
+	return "himHer():BAD_GENDER"
 
-func isAre():
+func isAre() -> String:
 	var gender = getPronounGender()
 	
 	if(gender == Gender.Male):
@@ -566,8 +596,9 @@ func isAre():
 		return "are"
 	if(gender == Gender.Other):
 		return "is"
+	return "himHer():BAD_GENDER"
 
-func hasHave():
+func hasHave() -> String:
 	var gender = getPronounGender()
 	
 	if(gender == Gender.Male):
@@ -578,8 +609,9 @@ func hasHave():
 		return "have"
 	if(gender == Gender.Other):
 		return "has"
+	return "hasHave():BAD_GENDER"
 
-func himselfHerself():
+func himselfHerself() -> String:
 	var gender = getPronounGender()
 	
 	if(gender == Gender.Male):
@@ -590,11 +622,12 @@ func himselfHerself():
 		return "themself"
 	if(gender == Gender.Other):
 		return "itself"
+	return "himselfHerself():BAD_GENDER"
 
-func verbS(verbWithNoS, verbWithS = null):
+func verbS(verbWithNoS:String, verbWithS:String = "") -> String:
 	var gender = getPronounGender()
 	
-	if(verbWithS == null):
+	if(verbWithS == ""):
 		verbWithS = verbWithNoS + "s"
 	
 	if(gender == Gender.Male):
@@ -605,6 +638,7 @@ func verbS(verbWithNoS, verbWithS = null):
 		return verbWithNoS
 	if(gender == Gender.Other):
 		return verbWithS
+	return "verbS():BAD_GENDER"
 
 func getPenisSizeString() -> String:
 	if(!hasBodypart(BodypartSlot.Penis) && !isWearingStrapon()):
