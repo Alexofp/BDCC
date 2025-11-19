@@ -430,7 +430,6 @@ func getText(_id:String, _args:Dictionary):
 			"Finally making yourself useful by leaving. Now fuck off. It was fun knowing you.",
 		]
 
-	#TODO: Unique lines?
 	if(_id == "SoftSlaveryTalkStart"):
 		return [
 			"What the fuck do you want, {npc.npcSlave}?",

@@ -34,8 +34,6 @@ func calcPowerScoreOf(_role:int) -> float:
 
 func start_do(_id:String, _args:Array):
 	if(_id == "doFight"):
-		#TODO: calculate power and compare. Same as how pawns work
-		
 		var char1FightScore:float = calcPowerScoreOf(C_EXTRA1)
 		var char2FightScore:float = calcPowerScoreOf(C_EXTRA2)
 		var randTable:Array = [

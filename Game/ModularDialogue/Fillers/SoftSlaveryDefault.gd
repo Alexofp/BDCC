@@ -435,7 +435,6 @@ func getText(_id:String, _args:Dictionary):
 			"Go on, get out of my sight."
 		]
 
-	#TODO: Unique lines?
 	if(_id == "SoftSlaveryTalkStart"):
 		return [
 			"What do you want, {npc.npcSlave}?",

@@ -2373,8 +2373,7 @@ func addTimedBuffs(buffs: Array, seconds:int):
 		addTimedBuff(newbuff, seconds)
 
 func addTimedBuffTurns(newbuff:BuffBase, turns:int):
-	#TODO: need a better way to check if a character is in a fight
-	if(!GM.main.supportsBattleTurns()):
+	if(!isInAFight()):
 		return
 	
 	for oldbuffEntry in timedBuffsTurns:
@@ -2387,12 +2386,14 @@ func addTimedBuffTurns(newbuff:BuffBase, turns:int):
 	timedBuffsTurns.append([newbuff, turns])
 
 func addTimedBuffsTurns(buffs: Array, turns:int):
-	#TODO: need a better way to check if a character is in a fight
-	if(!GM.main.supportsBattleTurns()):
+	if(!isInAFight()):
 		return
 	
 	for newbuff in buffs:
 		addTimedBuffTurns(newbuff, turns)
+
+func isInAFight() -> bool:
+	return GM.main.isCharIDFighting(getID())
 
 func updateNonBattleEffects():
 	buffsHolder.calculateBuffs()

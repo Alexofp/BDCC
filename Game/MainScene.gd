@@ -458,7 +458,16 @@ func getCurrentFightScene():
 			return scene
 	return null
 
-func supportsSexEngine():
+func isCharIDFighting(_charID:String) -> bool:
+	for scene in sceneStack:
+		if(scene.sceneID == "FightScene"):
+			if(_charID == "pc"): # Might have to be changed if I add npc vs npc fights
+				return true
+			if(scene.enemyID == _charID):
+				return true
+	return false
+
+func supportsSexEngine() -> bool:
 	for scene in sceneStack:
 		if(scene.supportsSexEngine()):
 			return true
