@@ -520,6 +520,19 @@ func theyre() -> String:
 		return "it's"
 	return "theyre():BAD_GENDER"
 
+func theyve() -> String:
+	var gender = getPronounGender()
+	
+	if(gender == Gender.Male):
+		return "he's"
+	if(gender == Gender.Female):
+		return "she's"
+	if(gender == Gender.Androgynous):
+		return "they've"
+	if(gender == Gender.Other):
+		return "it's"
+	return "theyve():BAD_GENDER"
+
 func doesntDont() -> String:
 	var gender = getPronounGender()
 	
@@ -584,6 +597,19 @@ func himHer() -> String:
 	if(gender == Gender.Other):
 		return "it"
 	return "himHer():BAD_GENDER"
+
+func wasWere() -> String:
+	var gender = getPronounGender()
+	
+	if(gender == Gender.Male):
+		return "was"
+	if(gender == Gender.Female):
+		return "was"
+	if(gender == Gender.Androgynous):
+		return "were"
+	if(gender == Gender.Other):
+		return "was"
+	return "wasWere():BAD_GENDER"
 
 func isAre() -> String:
 	var gender = getPronounGender()
