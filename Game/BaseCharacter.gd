@@ -536,27 +536,19 @@ func theyve() -> String:
 func doesntDont() -> String:
 	var gender = getPronounGender()
 	
-	if(gender == Gender.Male):
-		return "doesn't"
-	if(gender == Gender.Female):
+	if(gender in [Gender.Male,Gender.Female,Gender.Other]):
 		return "doesn't"
 	if(gender == Gender.Androgynous):
 		return "don't"
-	if(gender == Gender.Other):
-		return "doesn't"
 	return "doesntDont():BAD_GENDER"
 
 func doesDo() -> String:
 	var gender = getPronounGender()
 	
-	if(gender == Gender.Male):
-		return "does"
-	if(gender == Gender.Female):
+	if(gender in [Gender.Male,Gender.Female,Gender.Other]):
 		return "does"
 	if(gender == Gender.Androgynous):
 		return "do"
-	if(gender == Gender.Other):
-		return "does"
 	return "doesDo():BAD_GENDER"
 
 func heShe() -> String:
@@ -614,27 +606,19 @@ func wasWere() -> String:
 func isAre() -> String:
 	var gender = getPronounGender()
 	
-	if(gender == Gender.Male):
-		return "is"
-	if(gender == Gender.Female):
+	if(gender in [Gender.Male,Gender.Female,Gender.Other]):
 		return "is"
 	if(gender == Gender.Androgynous):
 		return "are"
-	if(gender == Gender.Other):
-		return "is"
 	return "himHer():BAD_GENDER"
 
 func hasHave() -> String:
 	var gender = getPronounGender()
 	
-	if(gender == Gender.Male):
-		return "has"
-	if(gender == Gender.Female):
+	if(gender in [Gender.Male,Gender.Female,Gender.Other]):
 		return "has"
 	if(gender == Gender.Androgynous):
 		return "have"
-	if(gender == Gender.Other):
-		return "has"
 	return "hasHave():BAD_GENDER"
 
 func himselfHerself() -> String:
@@ -656,14 +640,10 @@ func verbS(verbWithNoS:String, verbWithS:String = "") -> String:
 	if(verbWithS == ""):
 		verbWithS = verbWithNoS + "s"
 	
-	if(gender == Gender.Male):
-		return verbWithS
-	if(gender == Gender.Female):
+	if(gender in [Gender.Male,Gender.Female,Gender.Other]):
 		return verbWithS
 	if(gender == Gender.Androgynous):
 		return verbWithNoS
-	if(gender == Gender.Other):
-		return verbWithS
 	return "verbS():BAD_GENDER"
 
 func getPenisSizeString() -> String:

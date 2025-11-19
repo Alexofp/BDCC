@@ -434,7 +434,7 @@ func getUpgrades():
 				"Sell a pregnant slave",#2
 				"Sell a slave that has submitted to you",#3
 				"Sell a completely mindbroken slave",#4
-				"Sell a slave with at least 5 pieces of bdsm equipment",#5
+				"Sell a slave with at least 5 pieces of BDSM equipment",#5
 				"Sell a slave with slave level 15 or more",#6
 			],
 			descs = [
