@@ -68,7 +68,7 @@ func _run():
 
 		saynn("The guy is pretty assertive in how he talks, you feel intimidated just listening to him. The guard goes through his notes.")
 
-		saynn("[say=jaxontau]Chances of successful impregnation are pretty much zero, the reproductive cells suffered too much dna-related damage.[/say]")
+		saynn("[say=jaxontau]Chances of successful impregnation are pretty much zero, the reproductive cells suffered too much DNA-related damage.[/say]")
 
 		saynn("[say=directortau]Useless as a breeder too.[/say]")
 

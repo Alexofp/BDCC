@@ -151,7 +151,7 @@ func _run():
 
 		saynn("She looks at her paw, at her digits, then wiggles them a bit before looking back at you.")
 
-		saynn("[say=tavi]I was born in a lab. I don’t have a father or a mother, I’m basically a clone with random dna. That’s why. Satisfying enough?[/say]")
+		saynn("[say=tavi]I was born in a lab. I don’t have a father or a mother, I’m basically a clone with random DNA. That’s why. Satisfying enough?[/say]")
 
 		saynn("You hum to yourself, trying to comprehend that. Lab-made feline, huh.")
 
@@ -231,7 +231,7 @@ func _run():
 
 		saynn("Tavi gently caresses your chin while trying to make eye contact with you.")
 
-		saynn("[say=pc]Maybe.. But what's then.. Transport shuttles can’t even do an ftl jump, the big ship is just gonna destroy us.[/say]")
+		saynn("[say=pc]Maybe.. But what's then.. Transport shuttles can’t even do an FTL jump, the big ship is just gonna destroy us.[/say]")
 
 		saynn("[say=tavi]All I need is a computer with access to extranet~ I know people that would be very happy to know the coordinates of this station, in exchange for pulling us out. It’s all about information and the right people, cutie. Look at me.[/say]")
 

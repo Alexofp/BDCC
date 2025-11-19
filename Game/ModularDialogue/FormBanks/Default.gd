@@ -96,7 +96,7 @@ func getForms() -> Dictionary:
 		"TalkSexOfferSelf": form("Hey, wanna fuck me maybe?", {main=CHAR, target=CHAR}, "main", "target"),
 		"TalkSexOfferSelfAccept": form("Sure, I can fuck you real good.", {main=CHAR, target=CHAR}, "main", "target"),
 		"TalkSexOfferSelfDeny": form("I'd rather not.", {main=CHAR, target=CHAR}, "main", "target"),
-		"TalkGrabAndFuck": form("You're not going anywhere until I have some fun with you, bdsm slut.", {main=CHAR, target=CHAR}, "main", "target"),
+		"TalkGrabAndFuck": form("You're not going anywhere until I have some fun with you, BDSM slut.", {main=CHAR, target=CHAR}, "main", "target"),
 		"TalkAboutToKidnap": form("You are mine now. Understand?", {main=CHAR, target=CHAR}, "main", "target"),
 		"TalkAboutToKidnapReact": form("O.. O-Okay..", {main=CHAR, target=CHAR}, "main", "target"),
 	}
