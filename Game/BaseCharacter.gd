@@ -593,14 +593,10 @@ func himHer() -> String:
 func wasWere() -> String:
 	var gender = getPronounGender()
 	
-	if(gender == Gender.Male):
-		return "was"
-	if(gender == Gender.Female):
+	if(gender in [Gender.Male,Gender.Female,Gender.Other]):
 		return "was"
 	if(gender == Gender.Androgynous):
 		return "were"
-	if(gender == Gender.Other):
-		return "was"
 	return "wasWere():BAD_GENDER"
 
 func isAre() -> String:
