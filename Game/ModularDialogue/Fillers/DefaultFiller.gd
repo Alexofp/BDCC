@@ -272,7 +272,7 @@ func getText(_id:String, _args:Dictionary):
 		]
 	if(_id == "ReactBODYWRITINGS"):
 		return [
-			"Only a desperate slut would let someone scribble all over her body.",
+			"Only a desperate slut would let someone scribble all over {target.his} body.",
 			"Those scribbles match your reputation perfectly.",
 			"Letting everyone know what you are? Smart, slut.",
 			"I bet you begged for every word written on you.",
@@ -361,7 +361,7 @@ func getText(_id:String, _args:Dictionary):
 			"That’s where you belong, whore - under someone, getting fucked.",
 			"Such a good little whore, taking it in front of everyone.",
 			"Fucking in public? Guess you don’t care who watches.",
-			"Nice, a free show! Keep fucking her like the slut she is.",
+			"Nice, a free show! Keep fucking {target.him} like the slut {target.he} {target.isAre}.",
 			"That’s it, slut. Let everyone see what a whore you are.",
 			"Such a desperate whore, getting fucked out in public.",
 			"Not even trying to hide it? What a shameless slut.",
@@ -379,7 +379,7 @@ func getText(_id:String, _args:Dictionary):
 	if(_id == "ReactLEASHING_SOMEONE"):
 		return [
 			"Got yourself a pet slut, huh? How cute.",
-			"Look at you, parading that bitch around like she’s yours.",
+			"Look at you, parading that bitch around like {target.theyre} yours.",
 			"Taking your little whore for a walk? How sweet.",
 			"So, who's on the leash today?",
 			"What a sight..",
@@ -388,8 +388,8 @@ func getText(_id:String, _args:Dictionary):
 			"Oh wow, what a tight grip..",
 			"Leashes are nice..",
 			"That’s how you handle a worthless whore.",
-			"Look at you, leading that bitch around like the good pet they are.",
-			"That leash suits them.",
+			"Look at you, leading that bitch around like the good pet {target.he} {target.isAre}.",
+			"That leash suits {target.him}.",
 			"Looks like you’ve tamed that little slut well.",
 		]
 	if(_id == "ReactFUCKING_SOMEONE"):
