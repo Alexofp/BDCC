@@ -152,7 +152,7 @@ func _run():
 		saynn("You are shaking, guards words enrage you even more and as you swing the weapon, suddenly you feel a powerful shock going through you. The officer switched the mode of his gun to the taser and took a shot. Suddenly your every single muscle begins to tense, the pain is unbearable. You cry in agony and collapse to the floor. The officer slowly approaches you, still aiming his gun and kicks the baton away. He then crouches near you.")
 	
 	if(state == "losttorisha" || state == "wonrisha"):
-		saynn("[say=captain]Such a silly person you are. What did you think was gonna happen? Even if you would have won, what would you do? There are no ships here, the only ones that arrive bring new inmates and leave. Are you sure you can beat up every single guard here? You’re stuck here on this rock for the rest of your life. Do you wanna make that life miserable for yourself? Don’t be silly, you just arrived, don’t make me space you.[/say]")
+		saynn("[say=captain]Such a silly person you are. What did you think was gonna happen? " + ("Even if you would have won, what would you do?" if state=="losttorisha" else "Even though you won, what now?") + " There are no ships here, the only ones that arrive bring new inmates and leave. Are you sure you can beat up every single guard here? You’re stuck here on this rock for the rest of your life. Do you wanna make that life miserable for yourself? Don’t be silly, you just arrived, don’t make me space you.[/say]")
 		
 		saynn("[say=pc]Ugh.. fuck you..[/say]")
 		
@@ -167,7 +167,7 @@ func _run():
 	if(state == "getgagged"):
 		saynn("He then stands up and gestures the guard")
 		
-		saynn("[say=captain]Looks like {pc.he} needs some help to get up.[/say]")
+		saynn("[say=captain]Looks like {pc.he} {pc.youVerb('need')} some help to get up.[/say]")
 		
 		saynn("The guard obeys and drags you to the bin where she forcibly undresses you and then shoves you into the shower room")
 		
@@ -231,7 +231,7 @@ func _run():
 		
 		saynn("The captain is done with typing in some info and the machine begins to work. Firstly, it produces something that looks like an inmate uniform. It consists of a shirt and shorts. Both are mostly made out of thick black cloth but there are some {pc.inmateColor} accent lines. It also has a number on it. “P-{pc.inmateNumber}”")
 		
-		saynn("[say=captain]You’re not {pc.name} anymore. Now you’re an inmate number {pc.inmateNumber}, {pc.inmateType} block. Put it on.[/say]")
+		saynn("[say=captain]You’re not {pc.name} anymore. Now you’re inmate number {pc.inmateNumber}, {pc.inmateType} block. Put it on.[/say]")
 		
 		saynn("[say=pc]Whatever you say.[/say]")
 		

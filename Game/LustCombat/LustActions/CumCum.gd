@@ -31,11 +31,30 @@ func doAction(_lustState: LustCombatState, _args):
 		text += "\n\n"
 	
 	if(pc.hasPenis()):
+		var ejacPlace : String = "all over the floor"
+		var condom:ItemBase = pc.getWornCondom()
+		var broke : bool = false
+		if(condom != null):
+			ejacPlace = "into your condom"
+			var breakChance:float = condom.getCondomBreakChance()
+			broke = (RNG.chance(breakChance)) # condom broke
+			if(broke):
+				condom.destroyMe()
+			else:
+				pc.cumInItem(condom)
+		var ppump = pc.getWornPenisPump()
+		if(ppump!=null):
+			ejacPlace = "into the penis pump"
+			pc.cumInItem(ppump)
+			var penis:BodypartPenis = pc.getBodypart(BodypartSlot.Penis)
+			penis.getFluidProduction().drain()
+		
+		
 		if(_lustState.isDoingActivity(LustActivity.StrokingCock)):
-			text += "You stroke yourself just past the orgasm until your {pc.cock} starts throbbing and shooting ropes of hot sticky {pc.cum} all over the floor. You feel your balls being drained as each second the shaft erupts again and again."
+			text += "You stroke yourself just past the orgasm until your {pc.cock} starts throbbing and " + ("shooting ropes of hot sticky {pc.cum} " if pc.getWornChastityCage()==null else "squirting strings of {pc.cum} weakly through its cage ") + ejacPlace+"." + (" The condom breaks, pouring its contents onto the floor." if broke else "") + " You feel your balls being drained as each second the shaft erupts again and again."
 			text += "\n\n"
 		else:
-			text += "Your {pc.cock} starts throbbing and shooting ropes of hot sticky {pc.cum} all over the floor without you even stroking it. You feel your balls being drained until you’re completely spent."
+			text += "Your {pc.cock} starts throbbing and " + ("shooting ropes of hot sticky {pc.cum} " if pc.getWornChastityCage()==null else "squirting strings of {pc.cum} weakly through its cage ") + ejacPlace+" without you even stroking it." + (" The condom breaks, pouring its contents onto the floor." if broke else "") + " You feel your balls being drained until you’re completely spent."
 			text += "\n\n"
 	
 	if(pc.canBeMilked() && _lustState.isDoingActivity(LustActivity.GropingChest)):

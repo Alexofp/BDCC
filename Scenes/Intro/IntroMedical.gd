@@ -102,7 +102,7 @@ func _run():
 
 		saynn("[say=eliza]Strong antibiotics with a long term effect. Will protect you from most STDs.[/say]")
 
-		saynn("You take the offered pill and toss it into your mouth. You don’t really feel any different after it. The doc quickly gives you a visual checkup and puts some data into her tablet.")
+		saynn("You take the offered pill and toss it into your mouth, washing it down with the glass of water. You don’t really feel any different after it. The doc quickly gives you a visual checkup and puts some data into her tablet.")
 
 		# (if red)
 		if(GM.pc.getInmateType() == InmateType.HighSec):
@@ -222,7 +222,7 @@ func _run():
 
 		saynn("[say=eliza]That inmate is with me.[/say]")
 
-		saynn("One of them nods and lets you two pass freely. When you exit the checkpoint, you are presented to a huge open room, about 20x20 meters. The walls seem to be made out of dark concrete but there are massive metal pillars there and there which make the design not as dull. The middle is taken mostly by a huge raised platform with stairs connecting it to the lower level.")
+		saynn("One of them nods and lets you two pass freely. When you exit the checkpoint, you are presented to a huge open room, about 20x20 meters. The walls seem to be made out of dark concrete but there are massive metal pillars here and there which make the design not as dull. The middle is taken mostly by a huge raised platform with stairs connecting it to the lower level.")
 
 		saynn("[say=eliza]This is the main hall.[/say]")
 		
@@ -237,7 +237,7 @@ func _run():
 
 		saynn("One particular stare steals your attention. One of the reds. It’s clearly a female feline, a very tall one, about 2 meters. Her unusual fur is mostly purple with a toxic-green pattern added to it, cunning eyes are of different colors, green and red. She is standing by herself, away from everyone, arms crossed, eyes are staring at you, the lips form a very subtle smile. As the doctor leads you somewhere, that inmate stays silent, just watching you.")
 
-		saynn("The doctor leads you to some stairs to the lower floor where all the cells are. She finds the orange block and quickly checks her tablet.")
+		saynn("The doctor leads you to some stairs to the lower floor where all the cells are. She finds the {pc.inmateColor} block and quickly checks her tablet.")
 		
 		addButton("Follow", "Follow the leash", "followtocell")
 
@@ -300,7 +300,7 @@ func _run():
 
 		saynn("[say=eliza]What happened? Don’t feel like fighting anymore? Body betraying you? What a shame.[/say]")
 
-		saynn("She puts the spent syringe away and rushes towards you. One her paw pins you to the bed while another extends its claws and slips into your shorts! You feel her sharp claws painfully poking against the sensitive skin of your balls as she has them in a tight grip.")
+		saynn("She puts the spent syringe away and rushes towards you. One of her paws pins you to the bed while another extends its claws and slips into your shorts! You feel her sharp claws painfully poking against the sensitive skin of your balls as she has them in a tight grip.")
 
 		saynn("[say=eliza]Do you need me to explain what will happen to them if I continue?[/say]")
 
@@ -363,7 +363,7 @@ func _run():
 
 		saynn("[say=eliza]Not the one that I would pick. But I respect your choice~.[/say]")
 
-		saynn("The kitty cat puts the other cage away and returns you. She carefully lowers herself before your {pc.dick} and proceeds to push your balls through the first part of the cage, the cock ring. Cold metal touches your skin and makes you squirm slightly. Doctor’s touch is soft though, her fingers working on your dick and balls cause you to get a slight erection, something that makes you blush even more.")
+		saynn("The kitty cat puts the other cage away and returns to you. She carefully lowers herself before your {pc.dick} and proceeds to push your balls through the first part of the cage, the cock ring. Cold metal touches your skin and makes you squirm slightly. Doctor’s touch is soft though, her fingers working on your dick and balls cause you to get a slight erection, something that makes you blush even more.")
 
 		saynn("[say=eliza]Huh~. I’d offer a cock pump to help but for the sake of the experiment I can’t allow that~.[/say]")
 
@@ -397,12 +397,12 @@ func _run():
 
 		saynn("[say=pc]Are you serious?[/say]")
 
-		saynn("[say=eliza]Dead serious. You’ve given a chance to help push global science forward. Many would have killed for that chance. I would be grateful if I were you. And since you picked nothing.. flat one is closer to nothing. Good choice~[/say]")
+		saynn("[say=eliza]Dead serious. You’ve been given a chance to help push global science forward. Many would have killed for that chance. I would be grateful if I were you. And since you picked nothing.. flat one is closer to nothing. Good choice~[/say]")
 
 		# (same from here)
 
 	if(state in ["flat_one", "neither"]):
-		saynn("The kitty cat puts the other cage away and returns you. She carefully lowers herself before your {pc.dick} and proceeds to push your balls through the first part of the cage, the cock ring. Cold metal touches your skin and makes you squirm slightly. Doctor’s touch is soft though, her fingers working on your dick and balls cause you to get a slight erection, something that makes you blush even more.")
+		saynn("The kitty cat puts the other cage away and returns to you. She carefully lowers herself before your {pc.dick} and proceeds to push your balls through the first part of the cage, the cock ring. Cold metal touches your skin and makes you squirm slightly. Doctor’s touch is soft though, her fingers working on your dick and balls cause you to get a slight erection, something that makes you blush even more.")
 
 		saynn("[say=eliza]Huh~. I’d offer a cock pump to help but for the sake of the experiment I can’t allow that~.[/say]")
 
@@ -436,7 +436,7 @@ func _run():
 
 		saynn("[say=eliza]That’s it. I will be checking on the progress of this experiment every so often~[/say]")
 
-		saynn("And after all of that, Eliza produces a somewhat chain.")
+		saynn("And after all of that, Eliza produces a somewhat long chain.")
 
 		saynn("[say=eliza]I will escort you to the cellblock now.[/say]")
 
