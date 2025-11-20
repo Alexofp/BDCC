@@ -1093,7 +1093,7 @@ func cummedInAnusByAdvanced(characterID, advancedData:Dictionary={}, sourceType 
 func cummedInMouthByAdvanced(characterID, advancedData:Dictionary={}, sourceType = null, amountToTransfer = 1.0):
 	return cummedInBodypartByAdvanced(BodypartSlot.Head, characterID, advancedData, sourceType, amountToTransfer)
 
-func rubsVaginasWith(characterID, chanceToStealCum = 100, showMessages = true):
+func rubsVaginasWith(characterID, chanceToStealCum = 100, showMessages:bool = true):
 	if(!RNG.chance(chanceToStealCum) || !OPTIONS.isContentEnabled(ContentType.CumStealing)):
 		return
 	
@@ -1143,7 +1143,7 @@ func getOrificePreventedFromRecovering(orificeType):
 func getOrificeBlocked(orificeType):
 	return buffsHolder.getOrificeBlocked(orificeType)
 
-func gotOrificeStretchedWith(bodypartSlot, insertionSize, showMessages = true, stretchMult = 1.0):
+func gotOrificeStretchedWith(bodypartSlot, insertionSize, showMessages:bool = true, stretchMult = 1.0):
 	if(!hasBodypart(bodypartSlot)):
 		return
 	var thebodypart = getBodypart(bodypartSlot)
@@ -1157,7 +1157,7 @@ func gotOrificeStretchedWith(bodypartSlot, insertionSize, showMessages = true, s
 	if(newLooseness > oldLooseness && showMessages):
 		emit_signal("orificeBecomeMoreLoose", thebodypart.getOrificeName(), newLooseness, oldLooseness)
 
-func gotOrificeStretchedBy(bodypartSlot, characterID, showMessages = true, stretchMult = 1.0):
+func gotOrificeStretchedBy(bodypartSlot, characterID, showMessages:bool = true, stretchMult = 1.0):
 	if(!hasBodypart(bodypartSlot)):
 		return
 	
@@ -1201,7 +1201,7 @@ func getPenetrateChance(bodypartSlot, insertionSize):
 	
 	return max(500.0 / (5.0 + diff), 30.0)
 
-func getPenetrateChanceBy(bodypartSlot, characterID, isKnotting = false):
+func getPenetrateChanceBy(bodypartSlot, characterID, isKnotting:bool = false):
 	var ch = GlobalRegistry.getCharacter(characterID)
 	assert(ch != null)
 	if(isKnotting && hasPerk(Perk.CumUniqueBiology)):
@@ -1211,7 +1211,7 @@ func getPenetrateChanceBy(bodypartSlot, characterID, isKnotting = false):
 func getKnottingChanceBy(bodypartSlot, characterID):
 	return getPenetrateChanceBy(bodypartSlot, characterID, true)
 
-func gotFuckedBy(bodypartSlot, characterID, showMessages = true, fireSexEvent = true):
+func gotFuckedBy(bodypartSlot, characterID, showMessages:bool = true, fireSexEvent:bool = true):
 	if(!hasBodypart(bodypartSlot)):
 		return
 	
@@ -1229,16 +1229,16 @@ func gotFuckedBy(bodypartSlot, characterID, showMessages = true, fireSexEvent = 
 		ch.sendSexEvent(event)
 		sendSexEvent(event)
 
-func gotVaginaFuckedBy(characterID, showMessages = true):
+func gotVaginaFuckedBy(characterID, showMessages:bool = true):
 	return gotFuckedBy(BodypartSlot.Vagina, characterID, showMessages)
 
-func gotAnusFuckedBy(characterID, showMessages = true):
+func gotAnusFuckedBy(characterID, showMessages:bool = true):
 	return gotFuckedBy(BodypartSlot.Anus, characterID, showMessages)
 
-func gotThroatFuckedBy(characterID, showMessages = true):
+func gotThroatFuckedBy(characterID, showMessages:bool = true):
 	return gotFuckedBy(BodypartSlot.Head, characterID, showMessages)
 
-func getExposure():
+func getExposure() -> float:
 	return buffsHolder.getExposure()
 
 func makeNipplesSore():
@@ -1256,11 +1256,11 @@ func removeNippleSoreness():
 func getBaseFertility() -> float:
 	return 1.0
 
-func getFertility():
+func getFertility() -> float:
 	if(hasPerk(Perk.StartInfertile)):
 		return 0.0
 	
-	var value = getBaseFertility()
+	var value:float = getBaseFertility()
 	
 	value += buffsHolder.getFertility()
 	
@@ -1271,11 +1271,11 @@ func getFertility():
 func getBaseVirility() -> float:
 	return 1.0
 
-func getVirility():
+func getVirility() -> float:
 	if(hasPerk(Perk.StartMaleInfertility)):
 		return 0.0
 	
-	var value = getBaseFertility()
+	var value:float = getBaseFertility()
 	
 	value += buffsHolder.getVirility()
 	
@@ -1286,20 +1286,20 @@ func getVirility():
 func getBaseEggsMod() -> float:
 	return 1.0
 
-func getEggsBonusMod():
-	var value = getBaseEggsMod()
+func getEggsBonusMod() -> float:
+	var value:float = getBaseEggsMod()
 	
 	value += buffsHolder.getEggsBonusMod()
 	
 	return value
 	
-func getMinEggsAmount():
-	var value = buffsHolder.getMinEggsAmount()
+func getMinEggsAmount() -> int:
+	var value:int = buffsHolder.getMinEggsAmount()
 	
-	return max(value, 1) 
+	return Util.maxi(value, 1) 
 
-func getCrossSpeciesCompatibility():
-	var value = 0.0
+func getCrossSpeciesCompatibility() -> float:
+	var value:float = 0.0
 	
 	value += buffsHolder.getCrossSpeciesCompatibility()
 	
@@ -1315,7 +1315,7 @@ func onFluidObsorb(orificeType, cumType, howMuch, fluidDNA):
 func getMenstrualCycle():
 	return menstrualCycle
 
-func isPregnant():
+func isPregnant() -> bool:
 	if(menstrualCycle != null):
 		return menstrualCycle.isPregnant()
 	return false
@@ -1325,27 +1325,27 @@ func isPregnantFrom(_charID:String) -> bool:
 		return menstrualCycle.isPregnantFrom(_charID)
 	return false
 
-func isVisiblyPregnant():
+func isVisiblyPregnant() -> bool:
 	if(menstrualCycle != null):
 		return menstrualCycle.isVisiblyPregnant()
 	return false
 
-func isVisiblyPregnantFromPlayer():
+func isVisiblyPregnantFromPlayer() -> bool:
 	if(menstrualCycle != null):
 		return menstrualCycle.isVisiblyPregnantFromPlayer()
 	return false
 
-func isHeavilyPregnant():
+func isHeavilyPregnant() -> bool:
 	if(menstrualCycle != null):
 		return menstrualCycle.getPregnancyProgress() > 0.66
 	return false
 
-func isReadyToGiveBirth():
+func isReadyToGiveBirth() -> bool:
 	if(menstrualCycle != null):
 		return menstrualCycle.isReadyToGiveBirth()
 	return false
 
-func giveBirth():
+func giveBirth() -> Array:
 	if(menstrualCycle == null):
 		return []
 	
@@ -1356,10 +1356,10 @@ func giveBirth():
 	
 	return bornChildren
 
-func giveBirthWithNotification():
+func giveBirthWithNotification() -> Array:
 	return giveBirth()
 
-func forceOvulate():
+func forceOvulate() -> bool:
 	if(menstrualCycle != null):
 		return menstrualCycle.forceOvulate()
 	return false
@@ -1368,35 +1368,35 @@ func forceIntoHeat():
 	if(menstrualCycle != null):
 		menstrualCycle.forceIntoHeat()
 
-func forceImpregnateBy(otherCharacterID):
+func forceImpregnateBy(otherCharacterID) -> bool:
 	if(menstrualCycle != null):
 		return menstrualCycle.forceImpregnateBy(otherCharacterID)
 	return false
 
-func getPregnancyProgress():
+func getPregnancyProgress() -> float:
 	if(menstrualCycle != null):
 		return menstrualCycle.getPregnancyProgress()
 	return 0.0
 
-func getPregnancyLitterSize():
+func getPregnancyLitterSize() -> int:
 	if(menstrualCycle != null):
 		return menstrualCycle.getLitterSize()
 	return 0
 
-func isInHeat():
+func isInHeat() -> bool:
 	if(menstrualCycle != null):
 		return menstrualCycle.isInHeat()
 	return false
 
 func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
-	var amountPerOrifice = {}
+	var amountPerOrifice:Dictionary = {}
 	for egg in _impregnatedEggCells:
 		if(!amountPerOrifice.has(egg.getOrifice())):
 			amountPerOrifice[egg.getOrifice()] = 0
 		amountPerOrifice[egg.getOrifice()] += 1
 	
 	# This is meh
-	var mapping = {
+	var mapping:Dictionary = {
 		OrificeType.Vagina: BodypartSlot.Vagina,
 		OrificeType.Anus: BodypartSlot.Anus,
 		OrificeType.Throat: BodypartSlot.Head,
@@ -1406,7 +1406,7 @@ func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
 		if(!amountPerOrifice.has(orificeType)):
 			continue
 		
-		var amountToStretch = sqrt(amountPerOrifice[orificeType]) * 30.0
+		var amountToStretch:float = sqrt(amountPerOrifice[orificeType]) * 30.0
 		
 		gotOrificeStretchedWith(mapping[orificeType], amountToStretch)
 

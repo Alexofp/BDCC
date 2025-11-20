@@ -7,10 +7,10 @@ var isimpregnated = false
 var motherID:String = ""
 var fatherID:String = ""
 var causerID:String = ""
-var progress = 0.0
-var motherSpecies = []
-var resultSpecies = []
-var resultGender = NpcGender.Male
+var progress:float = 0.0
+var motherSpecies:Array = []
+var resultSpecies:Array = []
+var resultGender:String = NpcGender.Male
 var monozygotic: int = 1
 var fetusReadyForBirth := false
 
@@ -42,23 +42,23 @@ func setMonozygotic(): #check if the egg splits
 	else:
 		monozygotic = 2 #EGG_MONOZYGOTIC_LEVEL["Twins"]
 
-func setMother(newmotherID, newmotherSpecies):
+func setMother(newmotherID:String, newmotherSpecies:Array):
 	motherID = newmotherID
 	motherSpecies = newmotherSpecies
 
-func getMotherID():
+func getMotherID() -> String:
 	return motherID
 
-func getFatherID():
+func getFatherID() -> String:
 	return fatherID
 
 func setCauserID(newcauser:String):
 	causerID = newcauser
 
-func setOrifice(orif):
+func setOrifice(orif:int):
 	orificeType = orif
 
-func getOrifice():
+func getOrifice() -> int:
 	return orificeType
 
 func getCycle():
@@ -85,8 +85,8 @@ func getGestationTime() -> int:
 	#return 60*60*24*7
 
 func getTimeUntilReadyForBirth() -> int:
-	var gestationTime = getGestationTime()
-	var currentProgress = min(1.0, getProgress())
+	var gestationTime := getGestationTime()
+	var currentProgress := min(1.0, getProgress())
 	return int(gestationTime * (1.0 - currentProgress))
 
 func processTime(seconds):
@@ -106,16 +106,16 @@ func processTime(seconds):
 		if(progress > 2.5):
 			progress = 2.5
 
-func fetusIsReadyForBirth():
+func fetusIsReadyForBirth() -> bool:
 	return fetusReadyForBirth
 
-func getProgress():
+func getProgress() -> float:
 	return progress
 
-func canImpregnate():
+func canImpregnate() -> bool:
 	return !isimpregnated
 
-func isImpregnated():
+func isImpregnated() -> bool:
 	return isimpregnated
 
 func impregnatedBy(fluidDNA):
@@ -141,16 +141,16 @@ func impregnatedBy(fluidDNA):
 
 	print("EGGCELL IMPREGNATED BY "+str(fatherID)+", species: "+str(resultSpecies)+", gender: "+NpcGender.getVisibleName(resultGender), ", division: ", monozygotic, "" if causerID == "" else (" CAUSER: "+causerID))
 
-func tryImpregnate(fluidDNA, amountML, eggMultiplier = 1.0, fertility = 1.0, crossSpeciesCompatibility = 0.0):
+func tryImpregnate(fluidDNA, amountML:float, eggMultiplier:float = 1.0, fertility:float = 1.0, crossSpeciesCompatibility:float = 0.0) -> bool:
 	if(!canImpregnate()):
 		return false
 	
-	var virility = fluidDNA.getVirility()
+	var virility:float = fluidDNA.getVirility()
 	
 	if(!GlobalRegistry.characterExists(fluidDNA.getCharacterID())):
 		return false
 	
-	var crossSpeciesMod = SpeciesCompatibility.pregnancyChanceMod(motherSpecies, fluidDNA.getSpecies())
+	var crossSpeciesMod:float = SpeciesCompatibility.pregnancyChanceMod(motherSpecies, fluidDNA.getSpecies())
 	if(crossSpeciesCompatibility > 0.0):
 		crossSpeciesMod = min(crossSpeciesCompatibility, crossSpeciesMod)
 	if(crossSpeciesCompatibility < 0.0):
@@ -159,7 +159,7 @@ func tryImpregnate(fluidDNA, amountML, eggMultiplier = 1.0, fertility = 1.0, cro
 	virility = max(virility, 0.0)
 	fertility = max(fertility, 0.0)
 	
-	var finalChance = amountML * crossSpeciesMod * 5.0 * eggMultiplier * virility * fertility * OPTIONS.getImpregnationChanceModifier()
+	var finalChance:float = amountML * crossSpeciesMod * 5.0 * eggMultiplier * virility * fertility * OPTIONS.getImpregnationChanceModifier()
 	#print(finalChance)
 	
 	if(RNG.chance(finalChance)):
@@ -168,7 +168,7 @@ func tryImpregnate(fluidDNA, amountML, eggMultiplier = 1.0, fertility = 1.0, cro
 		return true
 	return false
 
-func saveData():
+func saveData() -> Dictionary:
 	var data = {
 		"lifeSpan": lifeSpan,
 		"orificeType": orificeType,
@@ -186,7 +186,7 @@ func saveData():
 	
 	return data
 
-func loadData(data):
+func loadData(data:Dictionary):
 	lifeSpan = SAVE.loadVar(data, "lifeSpan", 0)
 	orificeType = SAVE.loadVar(data, "orificeType", OrificeType.Vagina)
 	isimpregnated = SAVE.loadVar(data, "isimpregnated", false)
