@@ -29,11 +29,12 @@ func _run():
 
 	if(state == "pickpronouns"):
 		say("Pick your character's pronouns. This can be changed at any point")
-		addButton("Same as gender", "Use your gender's pronouns", "setpronouns", [null])
-		addButton("Male", "He/his", "setpronouns", [Gender.Male])
-		addButton("Female", "She/her", "setpronouns", [Gender.Female])
-		addButton("Androgynous", "They/their", "setpronouns", [Gender.Androgynous])
-		addButton("Other", "It/its", "setpronouns", [Gender.Other])
+
+		addButton("Derive from gender", "Automatically adjust pronouns based on gender", "setpronouns", [null])
+		addButton("he/his", "Choose masculine pronouns", "setpronouns", [Gender.Male])
+		addButton("she/her", "Choose feminine pronouns", "setpronouns", [Gender.Female])
+		addButton("they/their", "Choose androgynous or neutral pronouns", "setpronouns", [Gender.Androgynous])
+		addButton("it/its", "Choose neutral pronouns", "setpronouns", [Gender.Other])
 		addButton("back", "Back to picking gender", "pickgender")
 
 	if(state == "pickspecies"):
