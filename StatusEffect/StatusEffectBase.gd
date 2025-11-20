@@ -5,6 +5,7 @@ var id = "badstatuseffect"
 var isBattleOnly:bool = false
 var isSexEngineOnly:bool = false
 var subscribeCheckOnFightStart:bool = false
+var removedOnDungeonStart:bool = false
 
 var alwaysCheckedForPlayer:bool = false
 var alwaysCheckedForNPCs:bool = false
