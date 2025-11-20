@@ -150,17 +150,17 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array) -> Stri
 		return object.getInmateColorString()		
 	if(_command == "say" && _args.size() == 1):
 		return object.formatSay(str(_args[0]))
-	if((_command == "she" || _command == "he" || _command == "heShe") && _args.size() == 0):
+	if((_command in ["she", "he", "heShe"]) && _args.size() == 0):
 		return object.heShe()
-	if((_command == "his" || _command == "her" || _command == "hisHer") && _args.size() == 0):
+	if((_command in ["his", "her", "hisHer"]) && _args.size() == 0):
 		return object.hisHer()
-	if((_command == "him" || _command == "himHer") && _args.size() == 0):
+	if((_command in ["him", "himHer"]) && _args.size() == 0):
 		return object.himHer()
-	if((_command == "is" || _command == "are" || _command == "isAre") && _args.size() == 0):
+	if((_command in ["is", "are", "isAre"]) && _args.size() == 0):
 		return object.isAre()
-	if((_command == "has" || _command == "have" || _command == "hasHave") && _args.size() == 0):
+	if((_command in ["has", "have", "hasHave"]) && _args.size() == 0):
 		return object.hasHave()
-	if((_command == "himself" || _command == "herself" || _command == "himselfHerself") && _args.size() == 0):
+	if((_command in ["himself", "herself", "himselfHerself"]) && _args.size() == 0):
 		return object.himselfHerself()
 	if(_command in ["verbS", "verb"]):
 		if(_args.size() == 1):

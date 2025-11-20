@@ -184,7 +184,7 @@ func _run():
 			saynn("[say=eliza]There is a lot of that around here. Makes me wonder why you focussed on him.[/say]")
 
 		elif (tellChoice == "bdsm"):
-			saynn("[say=pc]Alex knows how to do bdsm properly.[/say]")
+			saynn("[say=pc]Alex knows how to do BDSM properly.[/say]")
 
 			saynn("Eliza raises a brow.")
 
