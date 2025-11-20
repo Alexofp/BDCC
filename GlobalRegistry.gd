@@ -894,8 +894,8 @@ func getBodypartRef(id: String):
 func getBodypartRefs():
 	return bodyparts
 
-func getBodypartsIdsBySlot(_slot):
-	var result = []
+func getBodypartsIdsBySlot(_slot:String) -> Array:
+	var result:Array = []
 	for bodypartID in bodyparts:
 		var bodypart = bodyparts[bodypartID]
 		if(bodypart.getSlot() == _slot):

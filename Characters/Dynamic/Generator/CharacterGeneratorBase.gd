@@ -75,59 +75,13 @@ func pickSkinAndColors(character:DynamicCharacter, _args = {}):
 	character.applyRandomSkinAndColors()
 
 func createBodyparts(character:DynamicCharacter, _args = {}):
-	var theSpecies = character.npcSpecies
+	var theSpecies:Array = character.npcSpecies
 	for bodypartSlot in BodypartSlot.getAll():
-		var possible = []
-		var fullWeight = 0.0
-		#if(!BodypartSlot.isEssential(bodypartSlot)):
-		#	possible.append([null, 1.0])
+		var possible := Bodypart.findPossibleBodypartIDs(bodypartSlot, character, theSpecies, character.npcGeneratedGender)
+		var fullWeight:float = 0.0
+		for pairs in possible:
+			fullWeight += max(0.0, pairs[1])
 		
-		var allbodypartsIDs = GlobalRegistry.getBodypartsIdsBySlot(bodypartSlot)
-		for bodypartID in allbodypartsIDs:
-			var bodypart = GlobalRegistry.getBodypartRef(bodypartID)
-			var supportedSpecies = bodypart.getCompatibleSpecies()
-			
-			var hasInSupported = false
-			var hasInAllowed = false
-			
-			for supported in supportedSpecies:
-				if((supported in theSpecies) || supported == Species.AnyNPC): # || supported == Species.Any
-					hasInSupported = true
-					break
-				
-			for playerSpecie in theSpecies:
-				var speciesObject = GlobalRegistry.getSpecies(playerSpecie)
-				if(bodypartID in speciesObject.getAllowedBodyparts()):
-					hasInAllowed = true
-					break
-			
-			if(hasInSupported || hasInAllowed):
-				var weight = bodypart.npcGenerationWeight(character)
-				if(weight != null && weight > 0.0):
-					possible.append([bodypartID, weight])
-					fullWeight += weight
-
-		# Adding the default bodypart of this species into the mix
-		for specie in theSpecies:
-			var speciesObject = GlobalRegistry.getSpecies(specie)
-			var bodypartID = speciesObject.getDefaultForSlotForNpcGender(bodypartSlot, character.npcGeneratedGender)
-			var alreadyHasInPossible = false
-			for possibleEntry in possible:
-				if(possibleEntry[0] == bodypartID):
-					alreadyHasInPossible = true
-					break
-			if(alreadyHasInPossible):
-				continue
-			if(bodypartID == null):
-				possible.append([null, 1.0])
-				fullWeight += 1.0
-				continue
-			var bodypart = GlobalRegistry.getBodypartRef(bodypartID)
-			var weight = bodypart.npcGenerationWeight(character)
-			if(weight != null && weight > 0.0):
-				possible.append([bodypartID, weight])
-				fullWeight += weight
-
 		#print(bodypartSlot, " ", possible) # Uncomment for debug
 		if(possible.size() > 0):
 			if(!RNG.chance(fullWeight * 100.0)):
