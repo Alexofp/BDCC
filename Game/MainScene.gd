@@ -536,7 +536,11 @@ func loadData(data):
 	encounterSettings.loadData(SAVE.loadVar(data, "encounterSettings", {}))
 	GM.GES.loadData(SAVE.loadVar(data, "gameExtenders", {}))
 	loadedDatapacks = SAVE.loadVar(data, "loadedDatapacks", {})
-	datapackCharacters = SAVE.loadVar(data, "datapackCharacters", {})
+	var newDatapackCharacters:Dictionary = SAVE.loadVar(data, "datapackCharacters", {})
+	datapackCharacters.clear()
+	for datapackID in newDatapackCharacters:
+		var fixedDatapackID:String = Util.stripBadCharactersFromID(datapackID)
+		datapackCharacters[fixedDatapackID] = newDatapackCharacters[datapackID]
 	IS.loadData(SAVE.loadVar(data, "interactionSystem", {}))
 	RS.loadData(SAVE.loadVar(data, "relationshipSystem", {}))
 	SAB.loadData(SAVE.loadVar(data, "auctionBidders", {}))

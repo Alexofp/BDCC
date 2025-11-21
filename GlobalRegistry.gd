@@ -256,15 +256,15 @@ signal donationDataUpdated
 signal loadingUpdate(percent, whatsnext)
 signal loadingFinished
 
-var modsSupport = false
-var loadedMods = []
+var modsSupport:bool = false
+var loadedMods:Array = []
 
-var isInitialized = false
+var isInitialized:bool = false
 
-func hasModSupport():
+func hasModSupport() -> bool:
 	return modsSupport
 
-func getLoadedMods():
+func getLoadedMods() -> Array:
 	return loadedMods
 	
 func getModsFolder() -> String:
@@ -316,6 +316,7 @@ func getRawModList():
 func checkModSupport():
 	# If we're in editor we have to do this silly thing
 	# read more here: https://github.com/godotengine/godot/issues/19815
+	# fixed in 4.x but still a problem in 3.x: https://github.com/godotengine/godot/issues/111433
 	if(OS.has_feature("editor")):
 		var _haveBase = ProjectSettings.load_resource_pack("res://BDCC.pck")
 		if(!_haveBase):
@@ -324,7 +325,7 @@ func checkModSupport():
 	else:
 		modsSupport = true
 
-func loadModOrder(theModOrder):
+func loadModOrder(theModOrder:Array):
 	for modEntry in theModOrder:
 		if(modEntry["disabled"]):
 			continue
@@ -332,34 +333,8 @@ func loadModOrder(theModOrder):
 		var _ok = ProjectSettings.load_resource_pack(modEntry["path"])
 		if(_ok):
 			loadedMods.append(modEntry["name"])
-
-func loadMods():
-	var modsFolder = "user://mods"
-	if(OS.get_name() == "Android"):
-		#var permissions: Array = OS.get_granted_permissions() #for Godot 3 branch
-		#if permissions.has("android.permission.READ_EXTERNAL_STORAGE"):
-		var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
-		var finalDir = externalDir.plus_file("BDCCMods")
-		modsFolder = finalDir
-		var _ok = Directory.new().make_dir(modsFolder)
-	
-	var dir = Directory.new()
-	if dir.open(modsFolder) == OK:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			if dir.current_is_dir():
-				pass
-			else:
-				if(file_name.get_extension() in ["pck", "zip"]):
-					var full_path = modsFolder.plus_file(file_name)
-					#print("Registered mod: " + full_path)
-					var _ok = ProjectSettings.load_resource_pack(full_path)
-					if(_ok):
-						loadedMods.append(file_name)
-			file_name = dir.get_next()
-	else:
-		Log.printerr("An error occurred when trying to access the path "+modsFolder)
+	if(!loadedMods.empty()):
+		Log.print("Loaded mods ("+str(loadedMods.size())+"): "+str(loadedMods))
 
 const CACHE_SCENE = "scene"
 const CACHE_CHAR = "char"
@@ -434,7 +409,6 @@ func _init():
 	gles2Mode = (OS.get_current_video_driver() == OS.VIDEO_DRIVER_GLES2)
 	
 	checkModSupport()
-	#loadMods()
 	
 	bodypartStorageNode = Node.new()
 	add_child(bodypartStorageNode)
@@ -2409,6 +2383,7 @@ func loadDatapacksFromFolder(folder: String):
 				var newDatapack:Datapack = Datapack.new()
 				newDatapack.loadedPath = possiblePackPath
 				newDatapack.loadFromResource(newPackResource)
+				newDatapack.id = Util.stripBadCharactersFromID(newDatapack.id)
 				
 				if(datapacks.has(newDatapack.id)):
 					Log.printerr("ERROR: Datapack id collision, two or more datapacks have the same id '"+str(newDatapack.id)+"'")

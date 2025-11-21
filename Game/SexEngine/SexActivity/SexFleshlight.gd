@@ -66,7 +66,7 @@ func getCheckTagsSub() -> Array:
 	return [SexActivityTag.HavingSex]
 
 func startActivity(_args):
-	addText("Change me.")
+	addText("{dom.You} {dom.youVerb('whip')} out a portal fleshlight and bring it close to {sub.your} {sub.penisShort}!")
 
 func processTurn():
 	return
