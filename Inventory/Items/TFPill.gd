@@ -29,7 +29,20 @@ func getInventoryGroupName() -> String:
 	return "Transformation pills"
 
 func getDescription():
-	return "A pill that lacks any labels or instructions. Who knows what it will do..\n[color=#"+Color.cyan.to_html()+"]This pill might have some kind of transformative effect on your body.[/color]"+("\n\n[color=#"+Color.cyan.to_html()+"]Pill settings:\n"+configDesc+"[/color]" if configDesc != "" else "")
+	var theDesc:String = "A pill that lacks any labels or instructions. Who knows what it will do..\n"
+	if(tfID == "" || !GM.main.SCI.isTransformationUnlocked(tfID)):
+		theDesc += "[color=#"+Color.cyan.to_html()+"]This pill might have some kind of transformative effect on your body.[/color]"
+	else:
+		var theTF:TFBase = GlobalRegistry.getTransformationRef(tfID)
+		if(theTF):
+			theDesc += "[color=#"+Color.cyan.to_html()+"]Transformation effect: [/color]"+theTF.getName()
+		else:
+			theDesc += "[color=#"+Color.cyan.to_html()+"]Transformation effect: [/color]"+"ERROR!"
+	
+	if(!configDesc.empty()):
+		theDesc += ("\n\n[color=#"+Color.cyan.to_html()+"]Pill settings:\n"+configDesc+"[/color]")
+	
+	return theDesc
 
 func canUseInCombat():
 	return true
