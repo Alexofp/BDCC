@@ -123,7 +123,7 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array) -> Stri
 			return "you"
 		else:
 			return object.himHer()
-	if(_command in ["hisYour", "hisYou", "yourHis", "youHis"] && _args.size() == 0):
+	if(_command in ["hisYour", "hisYou", "yourHis", "yourTheir", "youHis"] && _args.size() == 0):
 		if(object.isPlayer()):
 			return "your"
 		else:
@@ -133,6 +133,16 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array) -> Stri
 			return "your"
 		else:
 			return object.getName()+"'s"
+	if(_command in ["yours"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "yours"
+		else:
+			return object.getName()+"'s"
+	if(_command in ["hisYours", "yoursHis", "yoursTheirs"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "yours"
+		else:
+			return object.hisHers()
 	if(_command in ["youWere"] && _args.size() == 0):
 		if(object.isPlayer()):
 			return "were"
@@ -184,8 +194,10 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array) -> Stri
 		return object.formatSay(str(_args[0]))
 	if((_command in ["she", "he", "heShe"]) && _args.size() == 0):
 		return object.heShe()
-	if((_command in ["his", "her", "hisHer"]) && _args.size() == 0):
+	if((_command in ["their", "his", "her", "hisHer"]) && _args.size() == 0):
 		return object.hisHer()
+	if((_command in ["theirs", "hers", "hisHers"]) && _args.size() == 0):
+		return object.hisHers()
 	if((_command in ["him", "himHer"]) && _args.size() == 0):
 		return object.himHer()
 	if((_command in ["was", "were", "wasWere"]) && _args.size() == 0):

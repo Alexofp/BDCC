@@ -577,6 +577,19 @@ func hisHer() -> String:
 		return "its"
 	return "hisHer():BAD_GENDER"
 		
+func hisHers() -> String:
+	var gender = getPronounGender()
+	
+	if(gender == Gender.Male):
+		return "his"
+	if(gender == Gender.Female):
+		return "hers"
+	if(gender == Gender.Androgynous):
+		return "theirs"
+	if(gender == Gender.Other):
+		return "its"
+	return "hisHers():BAD_GENDER"
+		
 func himHer() -> String:
 	var gender = getPronounGender()
 	
