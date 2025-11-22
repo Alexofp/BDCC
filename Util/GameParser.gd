@@ -200,7 +200,7 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array) -> Stri
 		return object.hasHave()
 	if((_command in ["hasnt", "havent", "hasntHavent"]) && _args.size() == 0):
 		return object.hasHave() + "n't"
-	if((_command in ["himself", "herself", "himselfHerself"]) && _args.size() == 0):
+	if((_command in ["himself", "herself", "himselfHerself", "themself", "itself"]) && _args.size() == 0):
 		return object.himselfHerself()
 	if(_command in ["verbS", "verb"]):
 		if(_args.size() == 1):

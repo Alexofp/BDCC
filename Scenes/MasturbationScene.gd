@@ -20,9 +20,9 @@ func _run():
 		if(GM.pc.getLocation() == GM.pc.getCellLocation()):
 			#(if in cell)
 			if(RNG.chance(50)):
-				saynn("You look around, the cell seems to be mostly secluded, you should be safe as long as nobody peeks through the reinforced window. But that thought only sparks up more desire in you. You feel kinda horny, maybe it’s a good time to blow some steam off..")
+				saynn("You look around, the cell seems to be mostly secluded, you should be safe as long as nobody peeks through the reinforced window. But that thought only sparks up more desire in you. You feel kinda horny, maybe it’s a good time to blow some steam off...")
 			else:
-				saynn("You’re standing in your cell, alone. There are lots of inmates outside but nobody seems to be paying attention to the cell’s window so you should be safe as long as you’re careful. Maybe you can expose yourself a bit without anyone noticing here..")
+				saynn("You’re standing in your cell, alone. There are lots of inmates outside but nobody seems to be paying attention to the cell’s window so you should be safe as long as you’re careful. Maybe you can expose yourself a bit without anyone noticing here...")
 		elif(!lustCombatState.isInPublic()):
 			#(if in private place)
 			if(RNG.chance(50)):
@@ -30,29 +30,29 @@ func _run():
 			
 				saynn("[say=pc]Anyone here?[/say]")
 			else:
-				saynn("Horny thoughts invade your mind as you stand in this room. It’s a public place but right now there is no one around so it’s your chance. And even if somebody walks in on you, maybe it’s not such a bad thing..")
+				saynn("Horny thoughts invade your mind as you stand in this room. It’s a public place but right now there is no one around so it’s your chance. And even if somebody walks in on you, maybe it’s not such a bad thing...")
 				
-				saynn("[say=pc]Some privacy. good..[/say]")
+				saynn("[say=pc]Some privacy. good...[/say]")
 		else:
 			#(if in public place)
 			if(GM.pc.getSkillLevel(Skill.Exhibitionism) < 1):
-				saynn("You look around, there are people around, lots of them in fact. Doing something lewd would surely get somebody’s attention.. But you are feeling kinda horny, the idea of teasing yourself in public sounds so hot right now.. Just gotta make sure to not get noticed.. You walk around a bit, trying to find a better spot, making sure not to catch too many eyes. Hands travel along your curves, your face is blushing red already..")
+				saynn("You look around, there are people around, lots of them in fact. Doing something lewd would surely get somebody’s attention... But you are feeling kinda horny, the idea of teasing yourself in public sounds so hot right now... Just gotta make sure to not get noticed... You walk around a bit, trying to find a better spot, making sure not to catch too many eyes. Hands travel along your curves, your face is blushing red already...")
 				
 				if(GM.pc.getExposedPrivates().size() > 0):
-					saynn("Your face only gets more flustered as you try to cover your exposed privates as best you can. [b]You're not brave enough to do anything sexual.[/b]")
+					saynn("Your face only gets more flustered as you try to cover your exposed privates as best you can. [b]You’re not brave enough to do anything sexual.[/b]")
 				
 				saynn(RNG.pick([
-					"[say=pc]What am I doing..[/say]",
-					"[say=pc]Should I stop.. But..[/say]",
-					"[say=pc]I’m gonna get caught.. I can’t..[/say]",
+					"[say=pc]What am I doing...[/say]",
+					"[say=pc]Should I stop... But...[/say]",
+					"[say=pc]I’m gonna get caught... I can’t...[/say]",
 				]))
 			elif(GM.pc.getSkillLevel(Skill.Exhibitionism) < 2):
-				saynn("It’s a public place, you see people around, doing their things. You wonder how much you can get away with, the idea of exposing yourself crosses your mind and you can’t resist it, you feel aroused already. If you’re careful, people shouldn’t even notice you.. Maybe you do want them to notice.. You don’t really wanna hide and decide to stay mostly in the open, so risky..")
+				saynn("It’s a public place, you see people around, doing their things. You wonder how much you can get away with, the idea of exposing yourself crosses your mind and you can’t resist it, you feel aroused already. If you’re careful, people shouldn’t even notice you... Maybe you do want them to notice... You don’t really wanna hide and decide to stay mostly in the open, so risky...")
 				
 				saynn(RNG.pick([
-					"[say=pc]I can’t believe myself..[/say]",
-					"[say=pc]Why do I want this so much..[/say]",
-					"[say=pc]Why does it feel so nice..[/say]",
+					"[say=pc]I can’t believe myself...[/say]",
+					"[say=pc]Why do I want this so much...[/say]",
+					"[say=pc]Why does it feel so nice...[/say]",
 				]))
 			else:
 				saynn("The thought of doing something lewd in public excites you immensely. There are people around but you don’t even mind them, you’re so horny!")
@@ -60,9 +60,9 @@ func _run():
 				saynn("You’re so tempted to start exposing yourself, maybe more than that. After all the practice you feel very confident in showing off your body. Your cheeks blush red, you can’t wait to get started.")
 				
 				saynn(RNG.pick([
-					"[say=pc]I so wanna touch myself..[/say]",
-					"[say=pc]Everyone’s watching.. Good.[/say]",
-					"[say=pc]Wonder how long will it take before I get noticed~[/say]",
+					"[say=pc]I so wanna touch myself...[/say]",
+					"[say=pc]Everyone’s watching... Good.[/say]",
+					"[say=pc]Wonder how long will it take before I get noticed~.[/say]",
 				]))
 			
 	if(state == "doLustAction"):
@@ -88,13 +88,13 @@ func _run():
 			if(visibility >= 1.0):
 				sayn("\nVisibility: You are visible to everyone!")
 			elif(visibility >= 0.9):
-				sayn("\nVisibility: You're pretty sure people are watching you..")
+				sayn("\nVisibility: You’re pretty sure people are watching you...")
 			elif(visibility >= 0.6):
-				sayn("\nVisibility: You have a feeling that you are being watched..")
+				sayn("\nVisibility: You have a feeling that you are being watched...")
 			elif(visibility >= 0.3):
 				sayn("\nVisibility: You think no one watches you")
 			else:
-				sayn("\nVisibility: You're pretty sure no one sees you")
+				sayn("\nVisibility: You’re pretty sure no one sees you")
 			
 			var danger = lustCombatState.getDanger()
 			if(danger > 0.0):
@@ -110,7 +110,7 @@ func _run():
 	if(state == "lustCombatAboutToCum"):
 		saynn(savedActionText)
 		
-		saynn("You're about to cum..")
+		saynn("You’re about to cum...")
 		
 		var lustCombatState:LustCombatState = GM.pc.getLustCombatState()
 		addLustActionsButtons(lustCombatState, lustCombatState.getOrgasmActionsSorted())
@@ -118,8 +118,8 @@ func _run():
 	if(state == "lustCombatAfterCame"):
 		saynn(savedActionText)
 		
-		addButton("Continue", "You're not done yet", "")
-		addButton("Stop", "That's enough for now..", "endthescene")
+		addButton("Continue", "You’re not done yet", "")
+		addButton("Stop", "That’s enough for now...", "endthescene")
 
 func addLustActionsButtons(lustCombatState:LustCombatState, theActions):
 	for actionData in theActions:
@@ -128,7 +128,7 @@ func addLustActionsButtons(lustCombatState:LustCombatState, theActions):
 		if(!lustAction.shouldShow(lustCombatState, actionData)):
 			continue
 		var canDo = lustAction.canDo(lustCombatState, actionData)
-		var reasonWhyCant = "You can't do this right now"
+		var reasonWhyCant = "You can’t do this right now"
 		if(canDo is Array):
 			if(canDo.size() > 1):
 				reasonWhyCant = canDo[1]
@@ -204,8 +204,8 @@ func spottedMessages():
 				"Your heart races, you swear you saw someone’s eyes watching you.",
 				"You look around frantically, constantly checking if someone sees you.",
 				"You can’t believe that you are doing this, you feel like you could be spotted at any second.",
-				"What if someone is watching?.. Just thinking about it makes you more aroused.",
-				"You wonder how far you can push this before being spotted..",
+				"What if someone is watching...? Just thinking about it makes you more aroused.",
+				"You wonder how far you can push this before being spotted...",
 			]
 			
 			spottedText = RNG.pick(barks)
@@ -235,7 +235,7 @@ func spottedMessages():
 						spottedText += "\n\n"
 						spottedText += RNG.pick([
 							"[sayMale]Look at {pc.him}, should we go help?[/sayMale]",
-							"[sayMale]Wow, {pc.he} is making me want to fuck {pc.him}.[/sayMale]",
+							"[sayMale]Wow, {pc.he} {pc.isAre} making me want to fuck {pc.him}.[/sayMale]",
 							"[sayFemale]The boys can do whatever they want with that ass, {pc.his} face is mine~.[/sayFemale]",
 						])
 					3:
@@ -243,7 +243,7 @@ func spottedMessages():
 						spottedText += "\n\n"
 						spottedText += RNG.pick([
 							"[sayFemale]H-hey, you can’t do that![/sayFemale]",
-							"[sayFemale]Um-m.. my bad.[/sayFemale]",
+							"[sayFemale]Um-m... my bad.[/sayFemale]",
 						])
 					4:
 						spottedText = "An inmate creeps closer to you and watches you play with yourself, smiling."
@@ -253,8 +253,8 @@ func spottedMessages():
 						spottedText += RNG.pick([
 							"[sayMale]I wanna fuck {pc.him} first![/sayMale]",
 							"[sayMale]That ass is so {pc.thick}, makes me wanna stretch it.[/sayMale]",
-							"[sayMale]Hey, look at that slut whoring herself out![/sayMale]",
-							"[sayFemale]Sweetie, why don’t you lick me out.[/sayFemale]",
+							"[sayMale]Hey, look at that slut whoring {pc.herself} out![/sayMale]",
+							"[sayFemale]Sweetie, why don’t you lick me out?[/sayFemale]",
 							"[sayFemale]What a slut![/sayFemale]",
 						])
 			if(randomPop == WorldPopulation.Guards):
@@ -280,7 +280,7 @@ func spottedMessages():
 						spottedText += RNG.pick([
 							"[sayFemale]Are you a lilac? That would explain it.[/sayFemale]",
 							"[sayFemale]Someone begs to be punished.[/sayFemale]",
-							"[sayFemale]Hey, don’t complain later when people will start passing you around.[/sayFemale]",
+							"[sayFemale]Hey, don’t complain later when people start passing you around.[/sayFemale]",
 							"[sayFemale]Someone’s horny, huh~?[/sayFemale]",
 						])
 					5:
