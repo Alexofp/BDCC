@@ -35,6 +35,28 @@ const OUTPUT_TEXT = 0
 const OUTPUT_SAY = 1
 const OUTPUT_SEPARATOR = 2
 
+var allPossibleGoalsToBeg:Dictionary = {} # A cache, no save
+
+func calcAllPossibleGoalsToBeg():
+	allPossibleGoalsToBeg.clear()
+
+	var allactivities:Dictionary = GlobalRegistry.getSexActivityReferences()
+	
+	for activityID in allactivities:
+		var activityRef = allactivities[activityID]
+		
+		var activityGoals:Dictionary = activityRef.getGoals()
+		var supportedSexTypes:Dictionary = activityRef.getSupportedSexTypes()
+		if(!areSexTypesSupported(supportedSexTypes) || activityGoals.empty()):
+			continue
+		
+		for goalID in activityGoals:
+			if(allPossibleGoalsToBeg.has(goalID)):
+				continue
+			var theGoalRef = GlobalRegistry.getSexGoal(goalID)
+			if(theGoalRef && theGoalRef.canBegFor()):
+				allPossibleGoalsToBeg[goalID] = true
+
 func clearOutputRaw():
 	outputRaw.clear()
 
@@ -113,6 +135,8 @@ func initSexType(theSexType, args:Dictionary = {}):
 	if(sexType != null):
 		sexType.setSexEngine(self)
 		sexType.initArgs(args)
+	
+	calcAllPossibleGoalsToBeg()
 
 func getSexTypeID() -> String:
 	if(sexType == null):
@@ -1756,3 +1780,5 @@ func loadData(data):
 		activityObject.loadData(SAVE.loadVar(activityInfo, "data", {}))
 		
 		activities.append(activityObject)
+	
+	calcAllPossibleGoalsToBeg()

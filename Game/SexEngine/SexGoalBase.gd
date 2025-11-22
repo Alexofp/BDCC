@@ -46,4 +46,23 @@ func sendSexEvent(_sexEngine, type, _sourceInfo, _targetInfo, data = {}):
 	if(_sourceInfo.getChar() != _targetInfo.getChar()):
 		_targetInfo.getChar().sendSexEvent(newSexEvent)
 
+func canBegFor() -> bool:
+	return false
 
+func getBegName() -> String:
+	return getVisibleName()
+
+func getBegDesc() -> String:
+	return "Ask the dom to do this to you!"
+
+func getBegMessage() -> String:
+	return "{sub.You} {sub.youVerb('offer')} {dom.you} to do '"+getVisibleName()+"' to {sub.youHim}."
+
+func getBegDialogue() -> String:
+	return "Please?"
+
+func getBegAgreeDialogue() -> String:
+	return "Sure."
+
+func getBegDenyDialogue() -> String:
+	return "Nope."

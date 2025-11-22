@@ -50,3 +50,12 @@ func doFastSex(_sexEngine, _domInfo, _subInfo, _data):
 	
 	if(RNG.chance(20) || sub.hasTallymarks() || (_sexEngine.getSexTypeID() in [SexType.StocksSex, SexType.SlutwallSex])):
 		sub.addTallymarkCrotch()
+
+func canBegFor() -> bool:
+	return true
+
+func getBegName() -> String:
+	return "Offer pussy"
+
+func getBegDesc() -> String:
+	return "Offer the dom to fuck your pussy!"

@@ -953,6 +953,59 @@ func progressGoalFailed(goalid, args = []):
 		for theSubInfo in subs:
 			getSexEngine().progressGoalFailed(theDomInfo, goalid, theSubInfo, args)
 
+func replaceRandomGoalSmart(_domIndx:int, _subIndx:int, _goalID:String) -> bool:
+	var theInfo = getDomOrSubInfo(_domIndx)
+	var theInfo2 = getDomOrSubInfo(_subIndx)
+	var theEngine := getSexEngine()
+	var theGoal:SexGoalBase = GlobalRegistry.getSexGoal(_goalID)
+	if(!theInfo || !theGoal || !(theInfo is SexDomInfo) || !theInfo2 || !(theInfo2 is SexSubInfo)):
+		return false
+	var theDomInfo:SexDomInfo = theInfo
+	var theSubInfo:SexSubInfo = theInfo2
+	
+	var domGoalsGoalToIndx:Dictionary = {}
+	var _i:int = 0
+	for goalEntry in theDomInfo.goals:
+		if(goalEntry[1] != theSubInfo.getCharID() || goalEntry[0] == _goalID):
+			_i += 1
+			continue
+		domGoalsGoalToIndx[goalEntry[0]] = _i
+		#domGoalsList.append(goalEntry[0])
+		_i += 1
+	
+	if(domGoalsGoalToIndx.empty()):
+		var theGoalData = theGoal.generateData(getSexEngine(), theDomInfo, theSubInfo)
+		theDomInfo.goals.append([_goalID, theSubInfo.getCharID(), theGoalData])
+		print("NO GOALS FOUND TO REPLACE. JUST ADDED A NEW GOAL.")
+		return true
+	
+	# We go through each activity that involves the two chars
+	# We get the goals of those activities
+	# We go through dom goals. If one of those goals is satisfied by the activity, we replace that goal specifically
+	
+	for theActivity in theEngine.activities:
+		if(!theActivity.doms.has(theDomInfo) || !theActivity.subs.has(theSubInfo)):
+			continue
+		
+		var theGoals:Dictionary = theActivity.getGoals()
+		for theActivityGoalID in theGoals:
+			if(domGoalsGoalToIndx.has(theActivityGoalID)):
+				var goalIndxToRemove:int = domGoalsGoalToIndx[theActivityGoalID]
+				theDomInfo.goals.remove(goalIndxToRemove)
+				var theGoalData = theGoal.generateData(getSexEngine(), theDomInfo, theSubInfo)
+				theDomInfo.goals.append([_goalID, theSubInfo.getCharID(), theGoalData])
+				print("REPLACED THE CURRENT GOAL AND ADDED A NEW ONE.")
+				return true
+	
+	#Remove random goal
+	var goalIndxToRemove:int = RNG.pick(domGoalsGoalToIndx.values())
+	theDomInfo.goals.remove(goalIndxToRemove)
+	
+	var theGoalData = theGoal.generateData(getSexEngine(), theDomInfo, theSubInfo)
+	theDomInfo.goals.append([_goalID, theSubInfo.getCharID(), theGoalData])
+	print("REMOVED RANDOM GOAL AND ADDED A NEW ONE.")
+	return true
+
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	return tagsNotBusy(_sexEngine, _domInfo, _subInfo) && !hasActivity(_sexEngine, id, _domInfo, _subInfo)
 
