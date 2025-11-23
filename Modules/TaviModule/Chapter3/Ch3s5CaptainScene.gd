@@ -12,7 +12,7 @@ func _run():
 
 		saynn("Tavi straightens her posture and takes a step back, standing just in front of you now. The captain points at two of the guards and gestures them towards Alex. They quickly grab the broken engineer and pull him out of the room. There is a small pool of blood where he was.")
 
-		saynn("[say=pc]How the hell did you know about this.[/say]")
+		saynn("[say=pc]How the hell did you know about this?[/say]")
 
 		saynn("You'd understand if you were spotted by a patrol or something. But this isn't just a patrol, much more than that.")
 
@@ -52,7 +52,7 @@ func _run():
 
 		saynn("[say=captain]I said pointless.[/say]")
 
-		saynn("Captain shakes his head and gets up before stepping around the blood, still holding his hands behind his back. He is not that far from you two now.. You notice a drug vile hidden in Tavi's paw.. she is slowly unscrewing the lid with her claw..")
+		saynn("Captain shakes his head and gets up before stepping around the blood, still holding his hands behind his back. He is not that far from you two now.. You notice a drug vial hidden in Tavi's paw.. she is slowly unscrewing the lid with her claw..")
 
 		saynn("[say=tavi]You're right, captain.[/say]")
 
@@ -76,7 +76,7 @@ func _run():
 
 		saynn("Tavi whispers..")
 
-		saynn("[say=tavi]..oh no..[/say]")
+		saynn("[say=tavi]..Oh no..[/say]")
 
 		addButton("Continue", "See what happens next", "nova_bully_tavi")
 	if(state == "nova_bully_tavi"):
@@ -88,7 +88,7 @@ func _run():
 
 		saynn("[say=nova]Do what~?[/say]")
 
-		saynn("Husky holds her personalized stun baton, this one had seen some battles based on all the scratches.")
+		saynn("Husky holds her personalized stun baton, this one has seen some battles based on all the scratches.")
 
 		saynn("[say=tavi]Humiliating me won't end well for you.[/say]")
 
@@ -96,7 +96,7 @@ func _run():
 
 		saynn("Tavi frowns, her free paw extends its claws. Her other paw still holds the vial that she needs to somehow hide. You try to intervene by stepping forward and blocking Tavi from Nova but the husky stops you by pointing her weapon.")
 
-		saynn("[say=nova]Stay there, cutie, I will get to you after I'm done with your friend~[/say]")
+		saynn("[say=nova]Stay there, cutie, I will get to you after I'm done with your friend~.[/say]")
 
 		saynn("[say=tavi]What do you want, Nova?[/say]")
 
@@ -114,7 +114,7 @@ func _run():
 
 		saynn("As soon as Nova takes another step, Tavi lowers her paws a bit, spooking the guard. Having the bluespace transmitter disabled allows her to do that.")
 
-		saynn("[say=nova]You're always been a huge brat, Tavi.[/say]")
+		saynn("[say=nova]You've always been a huge brat, Tavi.[/say]")
 
 		addButton("Continue", "See what happens next", "tavi_defeat")
 	if(state == "tavi_defeat"):
@@ -137,7 +137,7 @@ func _run():
 
 		saynn("[say=nova]You were so happy being my little cutie, Tavi. What happened? Listen. It's okay to be weak sometimes, mommy will help you get through tough times. That's what mommies are for.[/say]")
 
-		saynn("Tavi's eyes get watery. Is that tears? But she desperately continues trying to sink her claws into Nova's neck. She suddenly uses her other paw to scratch the guard's cheek, leaving a few bleeding wounds. Nova yelps.")
+		saynn("Tavi's eyes get watery. Are those tears? But she desperately continues trying to sink her claws into Nova's neck. She suddenly uses her other paw to scratch the guard's cheek, leaving a few bleeding wounds. Nova yelps.")
 
 		saynn("[say=tavi]Look what you made me do..[/say]")
 
@@ -145,13 +145,13 @@ func _run():
 
 		saynn("[say=nova]Is that how you wanna act? Tavi's all grown up now? Such a brave girl.[/say]")
 
-		saynn("She shoves Tavi back slightly and raises her weapon, about to strike. Tavi braces A few seconds of silence.")
+		saynn("She shoves Tavi back slightly and raises her weapon, about to strike. Tavi braces herself. A few seconds of silence.")
 
 		saynn("[say=nova]So all of that was for nothing. All the things we did together. Might as well be forgotten. That's it I guess.[/say]")
 
 		saynn("Nova chooses not to strike and lowers her weapon instead. She then turns around and proceeds to step away. You notice a few tears forming under her eyes too.")
 
-		saynn("[say=tavi]..wait. Nova![/say]")
+		saynn("[say=tavi]..Wait. Nova![/say]")
 
 		saynn("[say=nova]There is nothing left for me to say.[/say]")
 
@@ -180,7 +180,7 @@ func _run():
 
 		saynn("Nova chuckles as her paws produce some cuffs before locking them around your hands.")
 
-		saynn("[say=nova]Humiliation~? Is it really a humiliation if we both were enjoying it? Do you need a mommy by the way~?[/say]")
+		saynn("[say=nova]Humiliation~? Is it really humiliation if we both were enjoying it? Do you need a mommy by the way~?[/say]")
 
 		saynn("[say=pc]I'm fine for now. I have bigger problems for now it seems.[/say]")
 
@@ -256,7 +256,7 @@ func _run():
 
 		saynn("[say=nova]Aww, really?[/say]")
 
-		saynn("First guard approaches you..")
+		saynn("The first guard approaches you..")
 
 		addButton("Fight", "Start the fight", "first_fight")
 	if(state == "lost_to_guard"):
