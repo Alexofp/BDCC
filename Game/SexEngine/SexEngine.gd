@@ -51,7 +51,7 @@ func calcAllPossibleGoalsToBeg():
 			continue
 		
 		for goalID in activityGoals:
-			if(allPossibleGoalsToBeg.has(goalID)):
+			if(allPossibleGoalsToBeg.has(goalID) || !GlobalRegistry.hasSexGoal(goalID)):
 				continue
 			var theGoalRef = GlobalRegistry.getSexGoal(goalID)
 			if(theGoalRef && theGoalRef.canBegFor()):

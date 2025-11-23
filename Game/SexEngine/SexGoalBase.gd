@@ -55,10 +55,10 @@ func getBegName() -> String:
 func getBegDesc() -> String:
 	return "Ask the dom to do this to you!"
 
-func getBegMessage() -> String:
-	return "{sub.You} {sub.youVerb('offer')} {dom.you} to do '"+getVisibleName()+"' to {sub.youHim}."
+func getBegMessage(_sexEngine, _domInfo, _subInfo) -> String:
+	return "{sub.You} {sub.youVerb('beg')} {dom.you} to '"+getVisibleName()+"'."
 
-func getBegDialogue() -> String:
+func getBegDialogue(_sexEngine, _domInfo, _subInfo) -> String:
 	return "Please?"
 
 func getBegAgreeDialogue() -> String:
@@ -66,3 +66,6 @@ func getBegAgreeDialogue() -> String:
 
 func getBegDenyDialogue() -> String:
 	return "Nope."
+
+func getBegDomFetishes() -> Dictionary:
+	return {}

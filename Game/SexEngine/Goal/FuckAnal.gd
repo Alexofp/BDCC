@@ -52,3 +52,40 @@ func doFastSex(_sexEngine, _domInfo, _subInfo, _data):
 	
 	if(RNG.chance(20) || sub.hasTallymarks() || (_sexEngine.getSexTypeID() in [SexType.StocksSex, SexType.SlutwallSex])):
 		sub.addTallymarkButt()
+
+func canBegFor() -> bool:
+	return true
+
+func getBegName() -> String:
+	return "Offer ass"
+
+func getBegDesc() -> String:
+	return "Beg the dom to fuck your ass!"
+
+func getBegMessage(_sexEngine, _domInfo, _subInfo) -> String:
+	var _isBusy:bool = _sexEngine.hasTag(_subInfo.charID, SexActivityTag.HavingSex)
+	var _hasBlockedArms:bool = _subInfo.getChar().hasBlockedHands() || _subInfo.getChar().hasBoundArms()
+	var _isHoleFree:bool = (_subInfo.getChar().getFirstItemThatCoversBodypart(BodypartSlot.Anus) == null)
+
+	if(!_isBusy && !_hasBlockedArms && _isHoleFree):
+		return "{sub.You} {sub.youVerb('spread')} {sub.yourHis} {sub.anusStretch} tailhole for {dom.you}."
+	
+	return "{sub.You} {sub.youVerb('beg')} {dom.you} to use {sub.yourHis} {sub.anusStretch} tailhole."
+
+func getBegDialogue(_sexEngine, _domInfo, _subInfo) -> String:
+	return RNG.pick([
+		"Please, I need you inside my ass.",
+		"Fuck my ass, I'm begging you.",
+		"I need to feel you in my tight hole, please.",
+		"Use my ass, it's all for you.",
+		"I'm begging for your cock in my ass.",
+		"Don't make me wait, please fill my ass.",
+		"I'll be so good for you if you just fuck my ass.",
+		"Please, I need it in my ass so badly.",
+		"Stretch my ass open, I need it.",
+	])
+
+func getBegDomFetishes() -> Dictionary:
+	return {
+		Fetish.AnalSexGiving: 1.0,
+	}

@@ -1998,6 +1998,9 @@ func getSexGoal(id: String):
 		Log.printerr("ERROR: sex goal with the id "+id+" wasn't found")
 		return null
 
+func hasSexGoal(_id:String) -> bool:
+	return sexGoals.has(_id)
+
 func getSexGoals():
 	return sexGoals
 

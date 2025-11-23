@@ -58,4 +58,29 @@ func getBegName() -> String:
 	return "Offer pussy"
 
 func getBegDesc() -> String:
-	return "Offer the dom to fuck your pussy!"
+	return "Beg the dom to fuck your pussy!"
+
+func getBegMessage(_sexEngine, _domInfo, _subInfo) -> String:
+	var _isBusy:bool = _sexEngine.hasTag(_subInfo.charID, SexActivityTag.HavingSex)
+	var _hasBlockedArms:bool = _subInfo.getChar().hasBlockedHands() || _subInfo.getChar().hasBoundArms()
+	var _isVagFree:bool = (_subInfo.getChar().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) == null)
+
+	if(!_isBusy && !_hasBlockedArms && _isVagFree):
+		return "{sub.You} {sub.youVerb('spread')} {sub.yourHis} {sub.vaginaStretch} pussy."
+	
+	return "{sub.You} {sub.youVerb('beg')} {dom.you} to use {sub.yourHis} {sub.vaginaStretch} pussy."
+
+func getBegDialogue(_sexEngine, _domInfo, _subInfo) -> String:
+	return RNG.pick([
+		"Please, I need to feel you inside my pussy.",
+		"Fuck my pussy, I'm begging you.",
+		"I need your cock in my pussy so badly.",
+		"Use my pussy, it's yours to take.",
+		"I'll be so good for you, just please fuck my pussy.",
+		"Let me feel you deep inside my pussy, please.",
+	])
+
+func getBegDomFetishes() -> Dictionary:
+	return {
+		Fetish.VaginalSexGiving: 1.0,
+	}
