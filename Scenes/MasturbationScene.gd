@@ -204,7 +204,7 @@ func spottedMessages():
 				"Your heart races, you swear you saw someone’s eyes watching you.",
 				"You look around frantically, constantly checking if someone sees you.",
 				"You can’t believe that you are doing this, you feel like you could be spotted at any second.",
-				"What if someone is watching..? Just thinking about it makes you more aroused.",
+				"What if someone is watching?.. Just thinking about it makes you more aroused.",
 				"You wonder how far you can push this before being spotted..",
 			]
 			

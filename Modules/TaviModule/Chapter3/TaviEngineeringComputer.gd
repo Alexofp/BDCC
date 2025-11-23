@@ -154,7 +154,7 @@ var tutorialData = [
 	["help cat", "Now try to figure out how to use the cat command", "Select 'help', then select 'cat' and press Send"],
 	["cat 1", "Use the cat command to output the contents of the first file", "Select 'cat', then switch to the numpad and select '1' before pressing Send"],
 	["connect 127.0.10", "Try to connect to the door that leads to the bluespace transmitter", "Select 'connect', then switch to the numpad and use it to type '127.0.10'. Then press Send"],
-	["help", "You connected to a new server. Figure out what commands it support", "Type 'help' and press Send"],
+	["help", "You connected to a new server. Figure out what commands it supports", "Type 'help' and press Send"],
 	["help mode", "Figure out how to use the mode command", "Select 'help', then select 'mode' and press Send"],
 	["mode 9", "Switch the door to the maintenance mode", "Select 'mode', then switch to the numpad and select 9 before pressing Send"],
 ]

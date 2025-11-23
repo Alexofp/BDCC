@@ -203,7 +203,7 @@ func _run():
 
 		saynn("You become so horny from this that you want more.")
 
-		saynn("[say=pc]Can Miss Tavi.. mark her pet..?[/say]")
+		saynn("[say=pc]Can Miss Tavi.. mark her pet?..[/say]")
 
 		saynn("Tavi’s face expression quickly changes, she looks very pleasantly surprised.")
 
@@ -397,7 +397,7 @@ func _run():
 
 		saynn("You’re too terrified to even move..")
 
-		addButton("Continue", "Is that it..?", "continue6")
+		addButton("Continue", "Is that it?..", "continue6")
 
 	if(state == "continue6"):
 		removeCharacter("tavi")
@@ -447,7 +447,7 @@ func _run():
 
 		saynn("[say=tavi]THE FIRST SNAP HAS TRAPPED YOUR SPIRIT. THE SECOND SNAP WILL TRAP YOUR BODY. AND THE LAST SNAP WILL TRAP YOUR SOUL.[/say]")
 
-		saynn("The first out of three snaps already happened, you’re not looking good. But maybe you want it..? Maybe being her eternal servant isn’t such a bad idea.. No, that can’t be right..")
+		saynn("The first out of three snaps already happened, you’re not looking good. But maybe you want it?.. Maybe being her eternal servant isn’t such a bad idea.. No, that can’t be right..")
 
 		addButton("Continue", "See what happens next", "continue7")
 
@@ -758,7 +758,7 @@ func _run():
 
 		saynn("Tavi seems normal, you don’t find any horns, wings or hoofs on her.")
 
-		saynn("[say=pc]A-are the drugs okay..?[/say]")
+		saynn("[say=pc]A-are the drugs okay?..[/say]")
 
 		saynn("[say=tavi]Yeah, of course they are. I have them safe. I thought your heart stopped, cutie..[/say]")
 
