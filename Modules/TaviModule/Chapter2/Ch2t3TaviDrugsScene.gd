@@ -54,7 +54,7 @@ func _run():
 
 		saynn("[say=tavi]Never seen a drug like this. Sure it’s the right one? The one that can melt minds apparently.[/say]")
 
-		saynn("[say=pc]It must be. These vials were stored in a special crate. What else can it be.[/say]")
+		saynn("[say=pc]It must be. These vials were stored in a special crate. What else can it be?[/say]")
 
 		saynn("Tavi scratches her feline nose for a bit, thinking.")
 
@@ -113,7 +113,7 @@ func _run():
 
 		saynn("[say=tavi]Good. Yeah, you saved me, thank you. But don’t forget your place.[/say]")
 
-		saynn("She let’s go of your collar.")
+		saynn("She lets go of your collar.")
 
 		saynn("[say=tavi]Now we just need to somehow get to the transmitter and send a message directly from there.[/say]")
 
@@ -136,13 +136,13 @@ func _run():
 
 		saynn("You obey and rub your nose into the girl’s crotch before inhaling deeply and smelling her nice scent. Tavi chuckles and gets a better grasp on your head before proceeding to slide her butt back and forth, grinding your face with her crotch and leaving you starved for oxygen.")
 
-		saynn("[say=tavi]Such a good little toy, letting me use their face any way I want~.[/say]")
+		saynn("[say=tavi]Such a good little toy, letting me use {pc.his} face any way I want~.[/say]")
 
 		saynn("After some teasing she pulls you away from her crotch.")
 
 		saynn("[say=tavi]Take off my shorts.[/say]")
 
-		saynn("Instinctevely you try to reach for her shorts with your hands but she smacks them away again.")
+		saynn("Instinctively you try to reach for her shorts with your hands but she smacks them away again.")
 
 		saynn("[say=tavi]No~.[/say]")
 
@@ -157,13 +157,13 @@ func _run():
 		})
 		addCharacter("tavi", ["naked"])
 
-		saynn("You move your head to the short’s ribbon and open your mouth before carefully grabbing it with your teeth.Tavi giggles while you are pulling down her shorts, revealing her careful neat flower of a bright green color, just like the spots on her body. Your mouth starts to make saliva just from looking at it.")
+		saynn("You move your head to the short’s ribbon and open your mouth before carefully grabbing it with your teeth. Tavi giggles while you are pulling down her shorts, revealing her careful neat flower of a bright green color, just like the spots on her body. Your mouth starts to make saliva just from looking at it.")
 
 		saynn("[say=tavi]Lick~. But no penetration with your tongue. Got it?[/say]")
 
 		saynn("You nod and swallow audibly before exposing your tongue and getting to work. At first, you just play with her clit, circling around and pushing at it with the tip of your organ. Tavi moans softly and giggles soon after, she just idly sits on the crate with her legs spread, letting you do all the work. She clearly does like it, her folds become more moist and start to produce more of the nice female scent.")
 
-		saynn("Your tongue slides down to the girl’s pussy lips and gives them a good lick, gathering most of the wetness. Each time your tongue touches Tavi’s sensitive petals, you feel her shivering and squirming under you. To see her like that is so arousing. Such a nice change of pace unlike that time when she was grinding your face.")
+		saynn("Your tongue slides down to the girl’s pussy lips and gives them a good lick, gathering most of the wetness. Each time your tongue touches Tavi’s sensitive petals, you feel her shivering and squirming above you. To see her like that is so arousing. Such a nice change of pace unlike that time when she was grinding your face.")
 
 		saynn("[say=tavi]Pretty good~..[/say]")
 
@@ -203,7 +203,7 @@ func _run():
 
 		saynn("You become so horny from this that you want more.")
 
-		saynn("[say=pc]Can Miss Tavi.. mark her pet?..[/say]")
+		saynn("[say=pc]Can Miss Tavi.. mark her pet..?[/say]")
 
 		saynn("Tavi’s face expression quickly changes, she looks very pleasantly surprised.")
 
@@ -219,7 +219,7 @@ func _run():
 
 		saynn("[say=tavi]Ah~.. Yeah~. I love marking my pets.[/say]")
 
-		saynn("She is pissing on you for at least half a minute, it seems she had a full bladder saved up for this very moment. Even though the smell is gross and nothing about this is sexy.. it’s still kinda is.. the idea of giving up control so much, idea of letting someone mark you like you are their property.. It's arousing..")
+		saynn("She is pissing on you for at least half a minute, it seems she had a full bladder saved up for this very moment. Even though the smell is gross and nothing about this is sexy.. it still kinda is.. the idea of giving up control so much, the idea of letting someone mark you like you are their property.. It’s arousing..")
 
 		saynn("Eventually the flow dies down. You feel the piss dripping down from your chin, so warm..")
 
@@ -265,7 +265,7 @@ func _run():
 
 		saynn("[say=tavi]Talk to me, cutie.[/say]")
 
-		saynn("You look at Tavi. Everything seems normal. You watch her screw the lead back on.. for a while already. It’s like the world is.. slowing down. But you are disconnected from it. And your brain really doesn’t like it. Oops.. there goes your consciousness.")
+		saynn("You look at Tavi. Everything seems normal. You watch her screw the lid back on.. for a while already. It’s like the world is.. slowing down. But you are disconnected from it. And your brain really doesn’t like it. Oops.. there goes your consciousness.")
 
 		saynn("Darkness.. Scary darkness. And yet, it’s very calming.")
 
@@ -312,14 +312,14 @@ func _run():
 
 		saynn("You crawl back away from the crazy bitch and grab onto the wall behind you. You sit down by supporting yourself against it. You notice.. lots of broken glass near the crates. And the red drug.. spilled onto the floor.. You must have broken them somehow when losing consciousness.")
 
-		saynn("[say=tavi]You killed us both. But that won’t stop me from murdering you first. And I will surely enjoy breaking your mind and your every bone. Like a little sheep that you are.[/say]")
+		saynn("[say=tavi]You killed us both. But that won’t stop me from murdering you first. And I will surely enjoy breaking your mind and your every bone. Like the little sheep that you are.[/say]")
 
 		saynn("Tavi’s evil eyes flash brightly as her paws extend some quite impressive sharp claws. They must have grown more since the last time you saw them.")
 
 		addButton("Run", "You’re in no shape to fight her", "run")
 
 	if(state == "run"):
-		saynn("Tavi is not being reasonable, It’s like she snapped after losing the drugs. You must escape before she does get to you.")
+		saynn("Tavi is not being reasonable, it’s like she snapped after losing the drugs. You must escape before she does get to you.")
 
 		saynn("[say=tavi]You’re still alive? What a pathetic display.[/say]")
 
@@ -397,7 +397,7 @@ func _run():
 
 		saynn("You’re too terrified to even move..")
 
-		addButton("Continue", "Is that it?..", "continue6")
+		addButton("Continue", "Is that it..?", "continue6")
 
 	if(state == "continue6"):
 		removeCharacter("tavi")
@@ -435,14 +435,7 @@ func _run():
 		saynn("Her voice sounds demonic, a deep evil echo follows behind. It’s like your soul is vibrating together with her laugh. Tavi looks hot, literally.. But this can’t be real. It must be a dream!")
 
 		saynn("[say=pc]T-this is insane.. It must be the drug. I’m under the influence, none of this is real![/say]")
-
-		# (if has clothing)
-		if(!GM.pc.isFullyNaked()):
-			saynn("Two giant wings sprawl from behind Tavi’s back. She hops towards you with their help and pins you into the floor with her hoof. The hoof that starts burning any clothes that you are wearing, leaving you quite exposed. Her green flames don’t seem to be hurting you though.")
-
-		# (else)
-		else:
-			saynn("Two giant wings sprawl from behind Tavi’s back. She hops towards you with their help and pins you into the floor with her hoof. Your naked chest looks like it’s on fire but her green flames don’t seem to be hurting you though.")
+		saynn("Two giant wings sprawl from behind Tavi’s back. She hops towards you with their help and pins you into the floor with her hoof." +   ( " The hoof that starts burning any clothes that you are wearing, leaving you quite exposed. Her green flames don’t seem to be hurting you though." if(!GM.pc.isFullyNaked())   else " Your naked chest looks like it’s on fire but her green flames don’t seem to be hurting you though.")   )
 
 		saynn("[say=tavi]Haha. You think this is just a dream? But who says that you will wake up? SILLY THING.[/say]")
 
@@ -450,19 +443,16 @@ func _run():
 
 		saynn("[say=tavi]I WILL ENSLAVE YOUR SOUL. AND YOU WILL SERVE YOUR MISS HERE FOREVER, IN MY REALM.[/say]")
 
-		saynn("She grabs onto your inmate collar and effortlessly breaks it in half too before tossing it away. She then snaps her fingers and some kind of magic collar takes its place. It looks like a red ritual pentagram that’s guarding a red magic ring around your neck and it feels quite solid despite how it might look. You tug on it and realize that it's not going anywhere.")
+		saynn("She grabs onto your inmate collar and effortlessly breaks it in half too before tossing it away. She then snaps her fingers and some kind of magic collar takes its place. It looks like a red ritual pentagram that’s guarding a red magic ring around your neck and it feels quite solid despite how it might look. You tug on it and realize that it’s not going anywhere.")
 
 		saynn("[say=tavi]THE FIRST SNAP HAS TRAPPED YOUR SPIRIT. THE SECOND SNAP WILL TRAP YOUR BODY. AND THE LAST SNAP WILL TRAP YOUR SOUL.[/say]")
 
-		saynn("The first out of three snaps already happened, you’re not looking good. But maybe you want it?.. Maybe being her eternal servant isn’t such a bad idea.. No, that can’t be right..")
+		saynn("The first out of three snaps already happened, you’re not looking good. But maybe you want it..? Maybe being her eternal servant isn’t such a bad idea.. No, that can’t be right..")
 
 		addButton("Continue", "See what happens next", "continue7")
 
 	if(state == "continue7"):
-		if(getFlag("TaviModule.ch2DrugsPickedFuta")):
-			saynn("Tavi pulls her hoof away from your chest and takes a step back, her massive hard horsecock sways a lot from each movement.")
-		else:
-			saynn("Tavi pulls her hoof away from your chest and takes a step back.")
+		saynn("Tavi pulls her hoof away from your chest and takes a step back"+ (", her massive hard horsecock sways a lot from each movement" if(getFlag("TaviModule.ch2DrugsPickedFuta")) else "") +".")
 		
 		saynn("[say=tavi]Now. On your knees, servant.[/say]")
 
@@ -476,7 +466,7 @@ func _run():
 
 		saynn("[say=pc]S-sorr..ry..[/say]")
 
-		saynn("Demonic Tavi approaches you and plops her flared member onto your forehead, letting it drip hot glowing precum onto your head and back.")
+		saynn("Demonic Tavi approaches you and " + ("plops her flared member onto your forehead, letting it drip hot glowing precum" if(getFlag("TaviModule.ch2DrugsPickedFuta")) else "lets her slit drip hot girlcum") + " onto your head and back.")
 
 		saynn("[say=tavi]Sorry who?[/say]")
 
@@ -506,7 +496,7 @@ func _run():
 			npcBodyState={naked=true,caged=true},
 		})
 
-		saynn("Tavi tilts her head slightly before moving her cock back and shoving it into your face, letting you see the inflated glands on its flared tip. And the scent it.. so arousing. You nuzzle the offered cock and give it a little smooch.")
+		saynn("Tavi tilts her head slightly before moving her cock back and shoving it into your face, letting you see the inflated glands on its flared tip. And the scent it’s.. so arousing. You nuzzle the offered cock and give it a little smooch.")
 
 		# (if has cock)
 		if(GM.pc.hasPenis()):
@@ -518,7 +508,7 @@ func _run():
 
 		saynn("[say=tavi]You will be corrupted by this cock. Gradually. Day after day of constant breeding will make you start craving for it. For its seed.[/say]")
 
-		saynn("Tavi makes a gesture with her hand and the collar starts pulling your head onto her shaft. It’s too big to take without your jaw getting dislocated but your lips are pressing against its hole and feel as dickgirl’s precum starts oozing past them and dripping onto your tongue.")
+		saynn("Tavi makes a gesture with her hand and the collar starts pulling your head onto her shaft. It’s too big to take without your jaw getting dislocated but your lips are pressing against its hole and feel as the dickgirl’s precum starts oozing past them and dripping onto your tongue.")
 
 		saynn("[say=tavi]You will swallow anything that my cock leaks into your mouth like a good servant.[/say]")
 
@@ -574,7 +564,7 @@ func _run():
 
 			saynn("You notice a nice glowing bump on your belly already, Tavi’s dick is shining through your flesh. She doesn’t stop there, already beginning to pull her horsedick out just to ram it deep inside you again, smashing your cervix and forcing another moan out of you.")
 
-			saynn("[say=tavi]Nothing stops me. I will turn you into my breeding stock. You're gonna give birth to so many imps. Enough to conquer the world.[/say]")
+			saynn("[say=tavi]Nothing stops me. I will turn you into my breeding stock. You’re gonna give birth to so many imps. Enough to conquer the world.[/say]")
 
 			saynn("Fuck it feels good, your pussy gets really tight around her veiny cock but she continues to push through and stretching your hole out while pounding it hard. Her huge balls slap against your crotch while she quickly picks up the pace and increases the onslaught.")
 
@@ -606,7 +596,7 @@ func _run():
 
 			saynn("You notice a nice glowing bump on your belly already, Tavi’s dick is shining through. She doesn’t stop there, already beginning to pull her horsedick out just to ram it deep inside you again, smashing your pleasure spot and forcing another moan out of you.")
 
-			saynn("[say=tavi]Nothing stops me. I will turn you into my breeding stock. You gonna give birth to so many imps.[/say]")
+			saynn("[say=tavi]Nothing stops me. I will turn you into my breeding stock. You’re gonna give birth to so many imps.[/say]")
 
 			saynn("What does she mean by that? But fuck it feels good, your ring gets really tight around her veiny cock but she continues to push through and stretching your hole out while pounding it hard. Her huge balls slap against your crotch while she quickly picks up the pace and increases the onslaught.")
 
@@ -714,8 +704,6 @@ func _run():
 
 		saynn("A low growly purring escapes from the demonical cat. She pats you once.")
 
-		saynn("[say=tavi]You will make such.. a great.. slave..[/say]")
-
 
 	if(state == "shake_head"):
 		setFlag("TaviModule.ch2DrugsSaidYesToDemonTavi", false)
@@ -727,11 +715,11 @@ func _run():
 
 		saynn("A low growly purring escapes from the demonical cat. She scriches you under your chin while you look at her with your terrified eyes.")
 
-		saynn("[say=tavi]You will make such.. a great.. slave..[/say]")
-
 		# (same from here)
 	
 	if(state in ["nod", "shake_head"]):
+		saynn("[say=tavi]You will make such.. a great.. slave..[/say]")
+		
 		saynn("Time starts to slow down.. Is that the adrenaline?.. Wait.. What.. The prison walls! You see them rising up from lava, displacing it. And Tavi sees them too, she quickly gets mad.")
 
 		saynn("[say=tavi]What?! This is impossible! Well, it doesn’t matter now. It’s too late for this.[/say]")
@@ -746,7 +734,7 @@ func _run():
 
 		saynn("Tavi rips that chain with ease but another two catch her other hand. And before she can wind up a kick, the chains yank the demonic Tavi away from you into more chains that wrap around her every limb, including the tail and her horns. All the while the prison keeps rebuilding itself around you.")
 
-		saynn("[say=tavi]I WILL FIND YOU. THIS ISN’T OVER. NOT IN A SLIGHTEST.[/say]")
+		saynn("[say=tavi]I WILL FIND YOU. THIS ISN’T OVER. NOT IN THE SLIGHTEST.[/say]")
 
 		saynn("Tavi starts laughing hysterically while ripping more chains into shreds just for them to be replaced by new ones.")
 
@@ -770,7 +758,7 @@ func _run():
 
 		saynn("Tavi seems normal, you don’t find any horns, wings or hoofs on her.")
 
-		saynn("[say=pc]A-are the drugs okay?..[/say]")
+		saynn("[say=pc]A-are the drugs okay..?[/say]")
 
 		saynn("[say=tavi]Yeah, of course they are. I have them safe. I thought your heart stopped, cutie..[/say]")
 
@@ -797,7 +785,7 @@ func _run():
 
 		saynn("[say=tavi]Well. At least we know these are the right drugs. You think a full dose of these would pacify the captain?[/say]")
 
-		saynn("[say=pc]If he will see what I saw.. And no one helps him.. He is screwed.. Do you wanna kill him though?[/say]")
+		saynn("[say=pc]If he sees what I saw.. And no one helps him.. He is screwed.. Do you wanna kill him though?[/say]")
 
 		saynn("Tavi looks away for a second while resting her chin on your shoulder.")
 
@@ -842,7 +830,7 @@ func _run():
 
 		saynn("[say=tavi]My juices will gradually corrupt your mind. Get you addicted to me. You won’t be able to live a day without worshiping my body~.[/say]")
 
-		saynn("You look up at Tavi and gather more of her female fluids before audibly swallowing it all. Tavi tastes.. so sweet. Better than other pussy.. You feel her juices numbing your pain away, instead replacing it with.. a desire. Your mind is racing wild, you keep playing with Tavi’s clit and lapping at her pussy lips while she purrs with a low demonic tone.")
+		saynn("You look up at Tavi and gather more of her female fluids before audibly swallowing it all. Tavi tastes.. so sweet. Better than any other pussy.. You feel her juices numbing your pain away, instead replacing it with.. a desire. Your mind is racing wild, you keep playing with Tavi’s clit and lapping at her pussy lips while she purrs with a low demonic tone.")
 
 		addButton("Continue", "See what happens next", "continue11")
 
@@ -853,7 +841,7 @@ func _run():
 			npcBodyState={hard=true},
 		})
 		
-		saynn("[say=tavi]Enough~[/say]")
+		saynn("[say=tavi]Enough~.[/say]")
 
 		saynn("Tavi pulls your head away from her slit just so she can press her burning hoof into your chest and make you fall onto your back. It was rough but it didn’t hurt, strangely enough. Your Miss puts her hoof onto your {pc.cock} and gently presses it into your belly. Having your cock under her hoof feels a bit humiliating.. but also so nice, you can’t stop leaking pre.")
 
@@ -940,7 +928,7 @@ func _run():
 
 		saynn("[say=tavi]My juices will gradually corrupt your mind. Get you addicted to me. You won’t be able to live a day without worshiping my body~.[/say]")
 
-		saynn("You look up at Tavi and gather more of her female fluids before audibly swallowing it all. Tavi tastes.. so sweet. Better than other pussy.. You feel her juices numbing your pain away, instead replacing it with.. a desire. Your mind is racing wild, you keep playing with Tavi’s clit and lapping at her pussy lips while she purrs with a low demonic tone.")
+		saynn("You look up at Tavi and gather more of her female fluids before audibly swallowing it all. Tavi tastes.. so sweet. Better than any other pussy.. You feel her juices numbing your pain away, instead replacing it with.. a desire. Your mind is racing wild, you keep playing with Tavi’s clit and lapping at her pussy lips while she purrs with a low demonic tone.")
 
 		saynn("All the while Tavi’s tail shifts down to your chest and tickles your {pc.breasts} before poking each nipple, teasing you until you squirm. Such a bratty tail.")
 
@@ -979,11 +967,11 @@ func _run():
 
 		saynn("Tavi pulls your head away from her slit just so she can press her burning hoof into your chest and make you fall onto your back. It was rough but it didn’t hurt, strangely enough. After that, she pulls her hoof away and straddles you, slowly lowering herself onto your head until your cheeks are trapped between her girly thighs. Her gorgeous pussy is right there.. you can smell the inviting slit but unable to reach it with your tongue, instead just breathing warmly and feeling it drip juices onto your face.")
 
-		saynn("[say=tavi]You're gonna be my personal pussy licker, servant.[/say]")
+		saynn("[say=tavi]You’re gonna be my personal pussy licker, servant.[/say]")
 
 		saynn("[say=pc]Yes, Miss Tavi.. Please..[/say]")
 
-		saynn("You hear Tavi chuckle at your begging attempts before she suddenly pushes her gorgeous moist slit into your face when sitting on it. You quickly continue pleasuring Tavi’s flower, dragging your tongue over her sex and rubbing the clit with the tip.")
+		saynn("You hear Tavi chuckle at your begging attempts before she suddenly pushes her gorgeous moist slit onto your face when sitting on it. You quickly continue pleasuring Tavi’s flower, dragging your tongue over her sex and rubbing the clit with the tip.")
 
 		saynn("At the same time you feel Tavi’s demon tail creeping down to your crotch. It pokes your inner thighs a few times, asking you to spread your legs but you close them shut instead.")
 
@@ -1005,7 +993,7 @@ func _run():
 		else:
 			saynn("The tail is acting more bold now that it has Tavi’s protection, the pointy tip finds your {pc.analStretch} tailhole and rubs against it, a very unusual feeling. But it feels nice, the tail plays with your ring before prodding a few times at it. Oh no, is it gonna do it? You can’t even react fast enough before the tail stretches your star open wide and slips inside you.")
 
-			saynn("Little muffled noises begin to escape from you while the tail explores your insides. It finds the  pleasure spot and presses at it a few times, making you clench your whole body as a huge spike of pleasure washes over it.")
+			saynn("Little muffled noises begin to escape from you while the tail explores your insides. It finds the pleasure spot and presses at it a few times, making you clench your whole body as a huge spike of pleasure washes over it.")
 
 		# (end)
 
@@ -1051,11 +1039,11 @@ func _run():
 		
 		# (if has pussy)
 		if(GM.pc.hasVagina()):
-			saynn("The tail quickly brings you over the line, you try to arch your back and moan but Tavi has you pinned into the floor. Not being able to squirm only makes you cum harder, your slit clenches around the flexible demon tail and squirts from overstimulation.")
+			saynn("The tail quickly brings you over the line, you try to arch your back and moan but Tavi has you pinned onto the floor. Not being able to squirm only makes you cum harder, your slit clenches around the flexible demon tail and squirts from overstimulation.")
 
 		# (else)
 		else:
-			saynn("The tail quickly brings you over the line, you try to arch your back and moan but Tavi has you pinned into the floor. Not being able to squirm only makes you cum harder, your tailhole clenches around the flexible demon tail and pulsates from overstimulation.")
+			saynn("The tail quickly brings you over the line, you try to arch your back and moan but Tavi has you pinned onto the floor. Not being able to squirm only makes you cum harder, your tailhole clenches around the flexible demon tail and pulsates from overstimulation.")
 
 		# (if has cock)
 		if(GM.pc.hasPenis()):
@@ -1069,7 +1057,7 @@ func _run():
 
 		saynn("[say=pc]T-thank you, Miss Tavi.. It was a pleasure..[/say]")
 
-		saynn("[say=tavi]Oh, I’m not done grinding your face yet, I will return to it very soon~[/say]")
+		saynn("[say=tavi]Oh, I’m not done grinding your face yet, I will return to it very soon~.[/say]")
 
 		saynn("Tavi slowly raises herself before taking a step back. You look like a wet mess. But you love being Tavi’s wet mess.")
 

@@ -28,7 +28,7 @@ func getTrainText(_npc, _skillLevel):
 	if(_skillLevel == 5):
 		return "Bending over or spreading your legs is easy. You teach your slave how to do this in the most sexual way possible. How to give any onlookers only a short glance of your private bits, enough to draw them in without putting them off."
 	if(_skillLevel == 6):
-		return "You tell your slut that sometimes {npc.he} will have to fit an entire horsecock. So better start training your throat as early as possible. You help your slave to get rid of {npc.his} useless gag reflex... just to start training {npc.him} how to purposefully trigger it for that tight squeeze and hot wet noises. Some people just like it messy."
+		return "You tell your slut that sometimes {npc.he} will have to fit an entire horsecock. So better start training your throat as early as possible. You help your slave to get rid of {npc.his} useless gag reflex.. just to start training {npc.him} how to purposefully trigger it for that tight squeeze and hot wet noises. Some people just like it messy."
 	if(_skillLevel == 7):
 		return "You’re not training a slut for nothing, you will expect profits from {npc.him}. So now comes the lesson about how to pull the most amount of creds out of others, how to haggle and be greedy without going so far as to never get a client or end up abused for free."
 	if(_skillLevel == 8):
@@ -44,7 +44,7 @@ func getTrainText(_npc, _skillLevel):
 	if(_skillLevel == 13):
 		return "Safety first. Which is why you finally decide to teach your slut how to take even the biggest cocks without hurting {npc.himself}. But if your holes are too loose, the pleasure won’t be as good, so you teach your slut how to purposefully clench and milk cocks for every last drop. Condoms are also important, probably."
 	if(_skillLevel == 14):
-		return "You explain your slut that some clients know exactly what they want. With them, you just have to bend over and moan like a good slut. But some will be a little more... subby and nervous. So you show your slut when and how {npc.he} should take control of the scene and how to make squirm even the most shy cuties."
+		return "You explain your slut that some clients know exactly what they want. With them, you just have to bend over and moan like a good slut. But some will be a little more.. subby and nervous. So you show your slut when and how {npc.he} should take control of the scene and how to make squirm even the most shy cuties."
 	if(_skillLevel == 15):
 		return "There is not much new you can teach your slave. {npc.He} {npc.isAre} pretty much a perfect slut now! But you still go through some old lessons and practice the art of being a whore with {npc.him}."
 		

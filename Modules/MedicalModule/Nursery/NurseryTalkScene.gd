@@ -131,14 +131,14 @@ func _run():
 
 		saynn("The nurse looks at your inmate number and starts punching buttons on her old clicky keyboard.")
 
-		saynn("[say=nurse]Let me see... inmate number... {pc.inmateNumber}. Yes, you went through one during your intake process. It was done by... Doctor Quinn.[/say]")
+		saynn("[say=nurse]Let me see.. inmate number.. {pc.inmateNumber}. Yes, you went through one during your intake process. It was done by.. Doctor Quinn.[/say]")
 
 		saynn("You remember being injected with something. But that was for something else. Did Dr. Quinn lie to you?")
 
 		saynn("[say=pc]What [i]exactly[/i] did I get?[/say]")
 
-		saynn("[say=nurse]Well... I’m not [i]supposed[/i] to tell an inmate like you... but you know, with the amount of crazy and belligerent inmates I have to deal with when they suddenly show and start yelling about a ’certain’ fight they lost or what’s happening to them. It makes my job rather difficult.[/say]")
-		saynn("[say=nurse]And I just so happen to let the information slip in the hopes it makes my job slightly easier...[/say]")
+		saynn("[say=nurse]Well.. I’m not [i]supposed[/i] to tell an inmate like you.. but you know, with the amount of crazy and belligerent inmates I have to deal with when they suddenly show and start yelling about a ’certain’ fight they lost or what’s happening to them. It makes my job rather difficult.[/say]")
+		saynn("[say=nurse]And I just so happen to let the information slip in the hopes it makes my job slightly easier..[/say]")
 		
 		saynn("She motions to lean in closer so she can quickly whisper the answer to you.")
 		
@@ -153,7 +153,7 @@ func _run():
 		saynn("The nurse pushes you away and returns to her normal voice.")
 		saynn("[say=nurse]That should be everything, inmate.[/say]")
 
-		saynn("Curious... You rub your chin and look down at your belly.")
+		saynn("Curious.. You rub your chin and look down at your belly.")
 
 		addButton("Continue", "That’s nice", "")
 
@@ -161,9 +161,9 @@ func _run():
 		saynn("[say=pc]So, what’s it like working here?[/say]")
 		saynn("The nurse looks up at you with tired eyes, clearly mulling over how she should answer your question.")
 		saynn("[say=nurse]I work Labor and Delivery in a prison with already violent and degenerate inmates. A lot of inmates do not handle pregnancy well. Do you need more to get the idea?[/say]")
-		saynn("[say=pc]Uh, No thanks, I get it...[/say]")
+		saynn("[say=pc]Uh, No thanks, I get it..[/say]")
 		saynn("[say=nurse]It’s certainly not everyone that comes through here, but I can tell you I’ve seen the worst fights in this place.[/say]")
-		saynn("The nurse returns to her computer work while you mull over her words...")
+		saynn("The nurse returns to her computer work while you mull over her words..")
 
 		addButton("Continue", "", "")
 	if(state == "children"):
@@ -276,7 +276,7 @@ func _run():
 
 		saynn("The nurse helps you get settled, putting one of those heart monitors on your finger while another gets wrapped around your bare stomach. She continues to work but since she doesn’t do anything directly to you again you lose all interest.")
 
-		saynn("[say=nurse]All set, get some good rest...[/say]")
+		saynn("[say=nurse]All set, get some good rest..[/say]")
 
 		saynn("That feels very questionable to you but you already feel the drug effects. You lay down on the bed and try to get some rest. It feels very warm down there, it’s like your womb is sucking all the energy out of you.")
 
@@ -288,7 +288,7 @@ func _run():
 
 		saynn("Welcome to day "+str(GM.main.getDays())+" of your sentence.")
 
-		saynn("As you open your eyes... you see your own huge belly. Your eyes widen as you give it a explorative touch, and you blink in surprise when you feel it, amazed at just how fast this must have happened. There is no denying it, you are ready to give birth. You can barely sit down.")
+		saynn("As you open your eyes.. you see your own huge belly. Your eyes widen as you give it a explorative touch, and you blink in surprise when you feel it, amazed at just how fast this must have happened. There is no denying it, you are ready to give birth. You can barely sit down.")
 
 		saynn("Unsure of what to really do aside from listen to the beeping heart montiors, you simply cradle your large middle with both hands, and simply wait for whatever nurse to show up.")
 
@@ -320,11 +320,11 @@ func _run():
 		
 		saynn("Once your waters break everyone gets settled in. You follow the instructions the main delivery nurse gives you as nature takes its course. And ’Nature’ means incredible pain and discomfort.")
 		
-		saynn("It feels like many hours as you work to push out your offspring, gradually stretching yourself out... Life certainly isn’t easy and you feel like you’re about to pass out...")
+		saynn("It feels like many hours as you work to push out your offspring, gradually stretching yourself out.. Life certainly isn’t easy and you feel like you’re about to pass out..")
 		
 		# (if more than one child)
 		if(bornChildAmount > 1):
-			saynn("But things aren’t always that easy. Even after giving birth to the first child your belly only deflates slightly, still feeling the pain of contractions and the protesting movement of your remaining progeny, you’re clearly not done yet. Huffing and groaning as the pain continues...")
+			saynn("But things aren’t always that easy. Even after giving birth to the first child your belly only deflates slightly, still feeling the pain of contractions and the protesting movement of your remaining progeny, you’re clearly not done yet. Huffing and groaning as the pain continues..")
 
 		addButton("Continue", "See what happens", "continue1")
 
