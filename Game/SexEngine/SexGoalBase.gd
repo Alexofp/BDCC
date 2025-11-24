@@ -62,10 +62,23 @@ func getBegDialogue(_sexEngine, _domInfo, _subInfo) -> String:
 	return "Please?"
 
 func getBegAgreeDialogue() -> String:
-	return "Sure."
+	return RNG.pick([
+		"Sure.",
+		"Sounds good.",
+		"Alright, let's do it.",
+		"Hm. Okay, let's do it.",
+		"Sure, let's see.",
+		"Why not, let's do it.",
+		"Okay, I hear you.",
+	])
 
 func getBegDenyDialogue() -> String:
-	return "Nope."
+	return RNG.pick([
+		"Nope. I don't want to.",
+		"I don't want to do that.",
+		"No, I'm not doing that.",
+		"No. Just no.",
+	])
 
 func getBegDomFetishes() -> Dictionary:
 	return {}

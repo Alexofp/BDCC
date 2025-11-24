@@ -121,6 +121,9 @@ func getDomAgreeGoalChance(_sexEngine:SexEngine, _domInfo:SexDomInfo, _subInfo:S
 	
 	var theChance:float = (maxFetishScore+1.0) * 50.0 * (1.0+theAffection) * (1.0 - theAnger*0.5)
 	
+	if(theChance < 15.0):
+		return 0.0
+	
 	if(_subInfo.getChar().isGagged()):
 		theChance *= 0.8
 	
