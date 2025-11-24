@@ -62,7 +62,12 @@ func setButtonText(_text:String):
 	updateButtonText()
 
 func updateButtonText():
-	button_label.text = myButtonText
+	if(rect_size.y < 45.0):
+		text = myButtonText
+		button_label.text = ""
+	else:
+		text = ""
+		button_label.text = myButtonText
 
 func setShortcutPhysicalScancode(code:int, reqControl:bool = false):
 	var newShortcut = ShortCut.new()
