@@ -31,6 +31,9 @@ func canBegFor() -> bool:
 func getBegName() -> String:
 	return "Choke me!"
 
+func getBegCategory() -> Array:
+	return BegCategoryChoking
+
 func getBegDesc() -> String:
 	return "Beg the dom to choke your neck!"
 

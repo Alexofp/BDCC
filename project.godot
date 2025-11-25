@@ -1014,6 +1014,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/InteractionSystem/Relationship/NemesisReason.gd"
 }, {
+"base": "ComputerBase",
+"class": "NetworkedComputerBase",
+"language": "GDScript",
+"path": "res://Game/Computer/NetworkedComputerBase.gd"
+}, {
 "base": "Module",
 "class": "NovaModule",
 "language": "GDScript",
@@ -2006,6 +2011,7 @@ _global_script_class_icons={
 "NOM": "",
 "NakedSlaveGenerator": "",
 "NemesisReason": "",
+"NetworkedComputerBase": "",
 "NovaModule": "",
 "NpcBreakTaskBase": "",
 "NpcCon": "",

@@ -45,6 +45,9 @@ func canBegFor() -> bool:
 func getBegName() -> String:
 	return "Ride me (vag)"
 
+func getBegCategory() -> Array:
+	return BegCategorySex
+
 func getBegDesc() -> String:
 	return "Beg the dom to ride your cock with their pussy!"
 

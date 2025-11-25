@@ -37,6 +37,9 @@ func getBegName() -> String:
 func getBegDesc() -> String:
 	return "Beg the dom to spank your ass!"
 
+func getBegCategory() -> Array:
+	return BegCategoryExotic
+
 func getBegMessage(_sexEngine, _domInfo, _subInfo) -> String:
 	var _isBusy:bool = _sexEngine.hasTag(_subInfo.charID, SexActivityTag.HavingSex)
 	#var _hasBlockedArms:bool = _subInfo.getChar().hasBlockedHands() || _subInfo.getChar().hasBoundArms()

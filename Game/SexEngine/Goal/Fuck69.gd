@@ -81,6 +81,9 @@ func canBegFor() -> bool:
 func getBegName() -> String:
 	return "Offer 69"
 
+func getBegCategory() -> Array:
+	return BegCategorySex
+
 func getBegDesc() -> String:
 	return "Beg the dom to do 69 with you!"
 

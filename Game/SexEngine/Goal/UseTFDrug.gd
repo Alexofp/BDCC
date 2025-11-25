@@ -31,6 +31,9 @@ func canBegFor() -> bool:
 func getBegName() -> String:
 	return "Transform me"
 
+func getBegCategory() -> Array:
+	return BegCategoryExotic
+
 func getBegDesc() -> String:
 	return "Beg the dom to feed you any transformational drug!"
 

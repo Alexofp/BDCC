@@ -25,6 +25,9 @@ func canBegFor() -> bool:
 func getBegName() -> String:
 	return "Milk me!"
 
+func getBegCategory() -> Array:
+	return BegCategoryExotic
+
 func getBegDesc() -> String:
 	return "Beg the dom to milk your breasts with a breast pump!"
 

@@ -38,3 +38,30 @@ func doFastSex(_sexEngine, _domInfo, _subInfo, _data):
 	
 	sendSexEvent(_sexEngine, SexEvent.UniqueOrgasm, _domInfo, _subInfo, {orgasmType=UniqueOrgasm.Feet})
 
+func canBegFor() -> bool:
+	return true
+
+func getBegName() -> String:
+	return "Pawjob"
+
+func getBegCategory() -> Array:
+	return BegCategoryExotic
+
+func getBegDesc() -> String:
+	return "Beg the dom to give you a pawjob!"
+
+func getBegMessage(_sexEngine, _domInfo, _subInfo) -> String:
+	return "{sub.You} {sub.youVerb('beg')} {dom.you} to give {sub.youHim} a pawjob."
+
+func getBegDialogue(_sexEngine, _domInfo, _subInfo) -> String:
+	return RNG.pick([
+		"Let me feel your soft {dom.feet} stroking my cock, please?",
+		"I'd do anything to have your {dom.feet} stroking my cock.",
+		"Your {dom.feet} look so perfect, please let me get pleasure from them.",
+		"Could you.. use your {dom.feet} to get me off? Please?",
+	])
+
+func getBegDomFetishes() -> Dictionary:
+	return {
+		Fetish.FeetplayGiving: 1.0,
+	}

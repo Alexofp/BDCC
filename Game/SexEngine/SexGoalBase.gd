@@ -52,6 +52,13 @@ func canBegFor() -> bool:
 func getBegName() -> String:
 	return getVisibleName()
 
+const BegCategoryDefault = ["Beg"]
+const BegCategoryChoking = ["Beg", "Choking"]
+const BegCategoryExotic = ["Beg", "Exotic"]
+const BegCategorySex = ["Beg", "Sex"]
+func getBegCategory() -> Array:
+	return BegCategoryDefault
+
 func getBegDesc() -> String:
 	return "Ask the dom to do this to you!"
 
