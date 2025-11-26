@@ -51,6 +51,8 @@ func updateButtonSize():
 		var minButtonSize:float = OPTIONS.getUiButtonSize()
 		if(minButtonSize > 0):
 			rect_min_size = Vector2(0, 20 + minButtonSize * 16)
+		else:
+			rect_min_size = Vector2(0.0, 0.0)
 	else:
 		rect_min_size = Vector2(0.0, 0.0)
 	if(OPTIONS.isTouchFriendlyUI()):

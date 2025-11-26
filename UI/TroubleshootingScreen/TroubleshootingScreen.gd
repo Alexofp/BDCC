@@ -22,7 +22,7 @@ var debugText:String = ""
 func _on_DebugInfoButton_pressed():
 	debug_panel_container.visible = true
 	
-	debugText = "IF YOUR GAME IS CRASHING, SAVE THIS TEXT AND SEND IT TO RAHI\n"
+	debugText = "IF YOUR GAME IS CRASHING, SAVE THIS TEXT AND SEND IT TO RAHI. ATTACH A SAVE IF CAN\n"
 	debugText += "Game version: "+GlobalRegistry.getGameVersionString()+"\n"
 	debugText += "Platform: "+OS.get_name()+"\n"
 	debugText += "Mods: "+str(GlobalRegistry.loadedMods)+"\n"

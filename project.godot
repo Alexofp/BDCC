@@ -2178,6 +2178,7 @@ config/name="BDCC"
 run/main_scene="res://UI/LaunchScreen/LaunchScreen.tscn"
 config/project_settings_override="user://override.cfg"
 run/flush_stdout_on_print=true
+run/delta_sync_after_draw=true
 boot_splash/image="res://Images/Splash/splash.png"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0.145098, 0.145098, 0.501961, 1 )
