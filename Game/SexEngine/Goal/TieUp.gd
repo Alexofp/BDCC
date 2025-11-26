@@ -56,3 +56,33 @@ func doFastSex(_sexEngine, _domInfo, _subInfo, _data):
 		
 			sub.getInventory().forceEquipByStoreOtherUnlessRestraint(GlobalRegistry.createItem(randomRestraintID), dom)
 			sendSexEvent(_sexEngine, SexEvent.BondageGearForced, _domInfo, _subInfo, {itemID=randomRestraintID})
+
+func canBegFor() -> bool:
+	return true
+
+func getBegName() -> String:
+	return "Tie me up"
+
+func getBegCategory() -> Array:
+	return BegCategoryExotic
+
+func getBegDesc() -> String:
+	return "Beg the dom to make you wear bondage gear!"
+
+func getBegMessage(_sexEngine, _domInfo, _subInfo) -> String:
+	return "{sub.You} {sub.youVerb('beg')} {dom.you} to make {sub.youHim} wear bondage gear."
+
+func getBegDialogue(_sexEngine, _domInfo, _subInfo) -> String:
+	return RNG.pick([
+		"I'm begging you, let me wear bondage gear. I want to be bound and completely helpless.",
+		"Could you please lock stuff onto me? I need to feel completely helpless.",
+		"Please, I want to be your bound toy. Will you put bondage gear on me?",
+		"If you have any bondage gear.. you can lock it on me.. please?",
+		"I could use some cuffs.. or ropes.. anything really.",
+		"I love bondage gear.. make me wear as much as you want of it.",
+	])
+
+func getBegDomFetishes() -> Dictionary:
+	return {
+		Fetish.Rigging: 1.0,
+	}

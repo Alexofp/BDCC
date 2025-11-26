@@ -111,5 +111,5 @@ func getBegDialogue(_sexEngine, _domInfo, _subInfo) -> String:
 
 func getBegDomFetishes() -> Dictionary:
 	return {
-		Fetish.OralSexGiving: 1.0,
+		Fetish.OralSexReceiving: 1.0,
 	}

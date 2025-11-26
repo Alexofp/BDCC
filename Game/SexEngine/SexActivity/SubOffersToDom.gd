@@ -107,19 +107,19 @@ func getDomAgreeGoalChance(_sexEngine:SexEngine, _domInfo:SexDomInfo, _subInfo:S
 	var theFetishes:Dictionary = _sexGoal.getBegDomFetishes()
 	var _domFetishHolder:FetishHolder = _domInfo.getChar().getFetishHolder()
 	
-	var maxFetishScore:float = -1.0
+	var minFetishScore:float = 1.0
 	if(theFetishes.empty()):
-		maxFetishScore = 1.0
+		minFetishScore = 1.0
 	else:
 		for fetishID in theFetishes:
 			var theVal:float = _domFetishHolder.getFetish(fetishID)
-			if(theVal > maxFetishScore):
-				maxFetishScore = theVal
+			if(theVal < minFetishScore):
+				minFetishScore = theVal
 	
 	var theAffection:float = GM.main.RS.getAffection(_domInfo.getCharID(), _subInfo.getCharID())
 	var theAnger:float = _domInfo.getAngerScore()
 	
-	var theChance:float = (maxFetishScore+1.0) * 50.0 * (1.0+theAffection) * (1.0 - theAnger*0.5)
+	var theChance:float = (minFetishScore+1.0) * 50.0 * (1.0+theAffection) * (1.0 - theAnger*0.5)
 	
 	if(theChance < 15.0):
 		return 0.0
