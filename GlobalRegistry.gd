@@ -258,6 +258,7 @@ signal loadingFinished
 
 var modsSupport:bool = false
 var loadedMods:Array = []
+var tempCurrentModOrder:Array = []
 
 var isInitialized:bool = false
 
