@@ -683,6 +683,9 @@ func getInventoryGroupID() -> String:
 func getInventoryGroupName() -> String:
 	return getVisibleName()
 
+func getSexEngineSubcategory() -> Array:
+	return []
+
 func getDatapackEditVars():
 	var result = {}
 	if(canDye()):

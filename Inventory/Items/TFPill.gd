@@ -28,6 +28,9 @@ func getVisibleName():
 func getInventoryGroupName() -> String:
 	return "Transformation pills"
 
+func getSexEngineSubcategory() -> Array:
+	return ["TF pills"]
+
 func getDescription():
 	var theDesc:String = "A pill that lacks any labels or instructions. Who knows what it will do..\n"
 	if(tfID == "" || !GM.main.SCI.isTransformationUnlocked(tfID)):
