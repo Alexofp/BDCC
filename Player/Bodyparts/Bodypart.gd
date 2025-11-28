@@ -485,6 +485,8 @@ static func findPossibleBodypartIDs(bodypartSlot:String, acharacter, theSpecies:
 	var allAllowed:Dictionary = {} # Contains all bodyparts that are 'allowed' by the list of species
 	for playerSpecie in theSpecies:
 		var speciesObject = GlobalRegistry.getSpecies(playerSpecie)
+		if(!speciesObject):
+			continue
 		var theAllowed:Array = speciesObject.getAllowedBodypartsForNPCGender(theActualNpcGender)
 		for allowedBodypartID in theAllowed:
 			allAllowed[allowedBodypartID] = true

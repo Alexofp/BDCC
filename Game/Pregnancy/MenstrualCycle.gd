@@ -208,8 +208,8 @@ func ovulate():
 	
 	#print(getCharacter().getName() + " OVULATED")
 	
-	var motherSpecies = getCharacter().getSpecies()
-	var possibleEggAmounts = []
+	var motherSpecies:Array = getCharacter().getSpecies()
+	var possibleEggAmounts:Array = []
 	for specie in motherSpecies:
 		var speciesObject = GlobalRegistry.getSpecies(specie)
 		if speciesObject == null:

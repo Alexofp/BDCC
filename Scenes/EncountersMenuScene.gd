@@ -237,6 +237,8 @@ func _run():
 		var species = pickedSpeciesToChange
 		var encounterSettings:EncounterSettings = GM.main.getEncounterSettings()
 		var speciesObject:Species = GlobalRegistry.getSpecies(species)
+		if(!speciesObject):
+			speciesObject = GlobalRegistry.getSpecies(Species.Canine)
 		var speciesName = speciesObject.getVisibleName()
 		saynn("The current chance for "+speciesName+" is "+str(Util.roundF(encounterSettings.getSpeciesWeight(species)*100.0, 1))+"%")
 

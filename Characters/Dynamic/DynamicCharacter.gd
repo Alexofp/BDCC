@@ -2,7 +2,7 @@ extends Character
 class_name DynamicCharacter
 
 var npcName = "BAD NAME"
-var npcSpecies = ["canine"]
+var npcSpecies:Array = ["canine"]
 var npcGeneratedGender = NpcGender.Male
 var npcSmallDescription = "One of the generated characters"
 var npcThickness = 50
@@ -442,6 +442,14 @@ func loadData(data):
 	consciousness = SAVE.loadVar(data, "consciousness", 1.0)
 	npcName = SAVE.loadVar(data, "npcName", "Error")
 	npcSpecies = SAVE.loadVar(data, "npcSpecies", ["canine"])
+	if(!npcSpecies.empty()):
+		var specAm:int = npcSpecies.size()
+		for _i in range(npcSpecies.size()):
+			var _irev:int = specAm - _i - 1
+			if(!GlobalRegistry.getSpecies(npcSpecies[_irev])):
+				npcSpecies.remove(_irev)
+		if(npcSpecies.empty()):
+			npcSpecies = ["canine"]
 	if(data.has("npcCustomSpeciesName")):
 		npcCustomSpeciesName = SAVE.loadVar(data, "npcCustomSpeciesName", "")
 	else:

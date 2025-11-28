@@ -555,7 +555,7 @@ func _on_HTTPRequestMods_request_completed(_result: int, _response_code: int, _h
 		setBusyPanel("[center]Bad broken mod list.[/center]", true)
 		return
 	var modsData:Dictionary = modsDataA
-	print(modsData)
+	#print(modsData)
 
 	var reportLink:String = modsData["report_link"] if modsData.has("report_link") else "https://github.com/Alexofp/BDCCMods/issues"
 	var _theModsList:Dictionary = modsData["mods"] if (modsData.has("mods") && (modsData["mods"] is Dictionary)) else {}

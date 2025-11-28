@@ -77,3 +77,7 @@ func setBodypartSlot(newSlot:String):
 
 func isPartEffect() -> bool:
 	return slot != ""
+
+# Checked once during loading
+func isEffectBadShouldRemove() -> bool:
+	return false

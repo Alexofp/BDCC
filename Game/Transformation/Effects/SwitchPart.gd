@@ -115,6 +115,11 @@ func generateTransformText(_result:Dictionary):
 	#else:
 	#	addText("This shouldn't happen")
 
+func isEffectBadShouldRemove() -> bool:
+	if(!newPartID.empty() && !GlobalRegistry.bodyparts.has(newPartID)):
+		return true
+	return false
+
 func saveData() -> Dictionary:
 	var data:Dictionary = .saveData()
 	

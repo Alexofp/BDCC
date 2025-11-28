@@ -431,8 +431,10 @@ func loadData(_data:Dictionary):
 		if(newEffect == null):
 			continue
 		newEffect.setHolder(self)
-		effects.append(newEffect)
 		newEffect.loadData(SAVE.loadVar(effectLine, "data", {}))
+		if(newEffect.isEffectBadShouldRemove()):
+			continue
+		effects.append(newEffect)
 	
 	transformations.clear()
 	var tfData:Array = SAVE.loadVar(_data, "tfs", [])
@@ -444,5 +446,7 @@ func loadData(_data:Dictionary):
 		if(newTF == null):
 			continue
 		newTF.setHolder(self)
-		transformations.append(newTF)
 		newTF.loadData(SAVE.loadVar(tfLine, "data", {}))
+		if(newTF.shouldCancelItself()):
+			continue
+		transformations.append(newTF)

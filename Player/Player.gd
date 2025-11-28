@@ -351,16 +351,19 @@ func resetBodypartsToDefaultFor(speciesIds):
 		pickedFemininity = 50
 	
 	#var speciesIds = getSpecies()
-	var myspecies = []
+	var myspecies:Array = []
 	for specieID in speciesIds:
-		myspecies.append(GlobalRegistry.getSpecies(specieID))
+		var theSpeciesObj = GlobalRegistry.getSpecies(specieID)
+		if(!theSpeciesObj):
+			continue
+		myspecies.append(theSpeciesObj)
 	if(myspecies.size() == 0):
 		return
 	resetSlots()
 	var allslots = BodypartSlot.getAll()
 	
 	for slot in allslots:
-		var choices = []
+		var choices:Array = []
 		
 		for specie in myspecies:
 			var bodypartID = specie.getDefaultForSlot(slot, getGender())

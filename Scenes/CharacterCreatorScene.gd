@@ -168,7 +168,7 @@ func _run():
 				
 			for playerSpecie in playerSpecies:
 				var speciesObject = GlobalRegistry.getSpecies(playerSpecie)
-				if(bodypartID in speciesObject.getAllowedBodyparts()):
+				if(speciesObject && (bodypartID in speciesObject.getAllowedBodyparts())):
 					hasInAllowed = true
 					break
 			

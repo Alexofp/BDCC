@@ -1129,8 +1129,8 @@ func getSpecies(id: String):
 		return null
 	return allSpecies[id]
 
-func getAllPlayableSpecies():
-	var result = {}
+func getAllPlayableSpecies() -> Dictionary:
+	var result:Dictionary = {}
 	for speciesID in allSpecies:
 		if(allSpecies[speciesID].isPlayable()):
 			result[speciesID] = allSpecies[speciesID]

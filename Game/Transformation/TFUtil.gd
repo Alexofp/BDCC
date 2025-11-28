@@ -2,14 +2,20 @@ extends Object
 class_name TFUtil
 
 static func getRandomColorsForSpecies(species:Array) -> Array:
-	if(species.empty()):
-		species = [Species.Canine]
-	
 	if(species.size() > 1 && species.has(Species.Human)):
 		species = species.duplicate()
 		species.erase(Species.Human)
+
+	var possibleSpecies:Array = []
+	for speciesID in species:
+		var theSpeciesObj = GlobalRegistry.getSpecies(speciesID)
+		if(theSpeciesObj):
+			possibleSpecies.append(theSpeciesObj)
 	
-	var skinColors = GlobalRegistry.getSpecies(RNG.pick(species)).generateSkinColors()
+	if(possibleSpecies.empty()):
+		possibleSpecies = [GlobalRegistry.getSpecies(Species.Canine)]
+	
+	var skinColors = RNG.pick(possibleSpecies).generateSkinColors()
 	return skinColors
 	
 
@@ -17,6 +23,8 @@ static func getRandomSkinForSpecies(species:Array) -> String:
 	var possibleSkins:Array = []
 	for speciesOne in species:
 		var theSpecies = GlobalRegistry.getSpecies(speciesOne)
+		if(!theSpecies):
+			continue
 		var skinType = theSpecies.getSkinType()
 		if(species.size() > 1 && speciesOne == Species.Human):
 			skinType = SkinType.SkinAndFur

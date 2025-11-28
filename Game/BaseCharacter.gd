@@ -2798,14 +2798,17 @@ func getSkinData():
 func applyRandomColors():
 	var species = getSpecies()
 	if(species.size() > 0):
-		var skinColors = GlobalRegistry.getSpecies(RNG.pick(species)).generateSkinColors()
+		var randomSpecies = GlobalRegistry.getSpecies(RNG.pick(species))
+		if(!randomSpecies):
+			return
+		var skinColors = randomSpecies.generateSkinColors()
 		pickedSkinRColor = skinColors[0]
 		pickedSkinGColor = skinColors[1]
 		pickedSkinBColor = skinColors[2]
 
 func applyRandomSkin():
-	var species = getSpecies()
-	var possibleSkins = []
+	var species:Array = getSpecies()
+	var possibleSkins:Array = []
 	for speciesOne in species:
 		var theSpecies = GlobalRegistry.getSpecies(speciesOne)
 		if(!theSpecies):
@@ -3549,10 +3552,13 @@ func applyTFBodypart(bodypartSlot, data:Dictionary):
 	if(!hasBodypart(bodypartSlot)):
 		if(!data.has("bodypartID") || data["bodypartID"] == null || data["bodypartID"] == ""):
 			return
-		giveBodypart(GlobalRegistry.createBodypart(data["bodypartID"]), false)
-		getBodypart(bodypartSlot).generateRandomColors(self)
-		getBodypart(bodypartSlot).generateRandomSkinIfCan(self)
-		getBodypart(bodypartSlot).applyTFData(data)
+		var newBodypart = GlobalRegistry.createBodypart(data["bodypartID"])
+		if(!newBodypart):
+			return
+		giveBodypart(newBodypart, false)
+		newBodypart.generateRandomColors(self)
+		newBodypart.generateRandomSkinIfCan(self)
+		newBodypart.applyTFData(data)
 		return
 	
 	if(!data.has("bodypartID")):
@@ -3567,9 +3573,12 @@ func applyTFBodypart(bodypartSlot, data:Dictionary):
 		return
 	
 	var savedData = currentPart.saveDataForTF()
-	giveBodypart(GlobalRegistry.createBodypart(data["bodypartID"]), false)
-	getBodypart(bodypartSlot).loadDataForTF(savedData)
-	getBodypart(bodypartSlot).applyTFData(data)
+	var newBodypart = GlobalRegistry.createBodypart(data["bodypartID"])
+	if(!newBodypart):
+		return
+	giveBodypart(newBodypart, false)
+	newBodypart.loadDataForTF(savedData)
+	newBodypart.applyTFData(data)
 
 func saveOriginalTFData() -> Dictionary:
 	return {}
