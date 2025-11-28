@@ -197,15 +197,23 @@ func processBusyAllInteractions(howManySeconds:int):
 	if(howManySeconds <= 0):
 		return
 	GM.PROFILE.start("processBusyAllInteractions("+str(howManySeconds)+")")
+	GM.PROFILE.start("globalTasks")
 	for taskID in globalTasks:
 		var task = globalTasks[taskID]
 		task.processTime(howManySeconds)
+	GM.PROFILE.finish("globalTasks")
+	GM.PROFILE.start("pawns")
 	for pawnID in pawns:
 		var pawn = pawns[pawnID]
 		pawn.processTime(howManySeconds)
+	GM.PROFILE.finish("pawns")
+	GM.PROFILE.start("interactions")
 	for interaction in interactions:
+		GM.PROFILE.start(interaction.id)
 		interaction.busyActionSeconds -= howManySeconds
 		interaction.processTime(howManySeconds)
+		GM.PROFILE.finish(interaction.id, 0.1)
+	GM.PROFILE.finish("interactions")
 	GM.PROFILE.finish("processBusyAllInteractions("+str(howManySeconds)+")")
 
 func getClosestInteraction() -> PawnInteractionBase:
