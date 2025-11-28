@@ -359,12 +359,14 @@ func _on_GameUI_on_option_button(method, args):
 	pickOption(method, args)
 	
 func pickOption(method, args):
+	GM.PROFILE.start("pickOption")
 	rollbacker.notifyMadeChoice()
 	
 	IS.resetExtraText()
 	GM.main.clearMessages()
 	GlobalTooltip.resetTooltips()
 	
+	GM.PROFILE.start("react")
 	if(GM.ES.checkButtonInput(method, args)):
 		pass
 		
@@ -372,13 +374,16 @@ func pickOption(method, args):
 		sceneStack.back().react(method, args)
 		#if(sceneStack.back().react(method, args)):
 		#	return
+	GM.PROFILE.finish("react")
 
 	allowExecuteOnce = true # For 'run code once' code block
 	runCurrentScene()
 	
 	rollbacker.pushRollbackState()
+	GM.PROFILE.finish("pickOption")
 	
 func runCurrentScene():
+	GM.PROFILE.start("runCurrentScene")
 	if(sceneStack.size() > 0):
 		sceneStack.back().run()
 		
@@ -391,6 +396,7 @@ func runCurrentScene():
 		GM.ui.translateText()
 	updateStuff()
 	allowExecuteOnce = false
+	GM.PROFILE.finish("runCurrentScene")
 
 func reRun():
 	runCurrentScene()
@@ -676,6 +682,7 @@ func processTime(_seconds):
 	stopProcessingUnusedCharacters()
 
 func doTimeProcess(_seconds):
+	GM.PROFILE.start("doTimeProcess")
 	# This splits long sleeping times into 1 hour chunks
 	if(!PS):
 		IS.processTime(_seconds)
@@ -703,6 +710,7 @@ func doTimeProcess(_seconds):
 		hoursPassed(hoursPassed)
 	
 	emit_signal("time_passed", _seconds)
+	GM.PROFILE.finish("doTimeProcess")
 
 func hoursPassed(howMuch):
 	GM.pc.hoursPassed(howMuch)

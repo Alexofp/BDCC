@@ -25,6 +25,7 @@ const optionsFilepath = "user://options.json"
 var fetchNewRelease = true
 var fullscreen:bool = false
 var fpsLimit:int = 0
+var profilerEnabled:bool = false
 var webTextInputFallback:bool = false
 # Pregnancy options
 var menstrualCycleLengthDays: int
@@ -101,6 +102,7 @@ var genderNamesOverrides = {}
 func resetToDefaults():
 	fetchNewRelease = true
 	fpsLimit = 0
+	profilerEnabled = false
 	webTextInputFallback = false
 	menstrualCycleLengthDays = 7
 	eggCellLifespanHours = 48
@@ -1364,6 +1366,7 @@ func saveData():
 		"blockCatcherPanelHeight": blockCatcherPanelHeight,
 		"webTextInputFallback": webTextInputFallback,
 		"fullscreen": fullscreen,
+		"profilerEnabled": profilerEnabled,
 	}
 	
 	return data
@@ -1427,6 +1430,7 @@ func loadData(data):
 	blockCatcherPanelHeight = loadVar(data, "blockCatcherPanelHeight", 16)
 	webTextInputFallback = loadVar(data, "webTextInputFallback", false)
 	fullscreen = loadVar(data, "fullscreen", false)
+	profilerEnabled = loadVar(data, "profilerEnabled", false)
 
 func saveToFile():
 	var saveData = saveData()
@@ -1490,6 +1494,9 @@ func getImagePackOrder():
 func isFullscreen() -> bool:
 	return fullscreen
 
+func shouldProfile() -> bool:
+	return profilerEnabled
+
 func shouldUseFallbackTextInputs() -> bool:
 	return webTextInputFallback
 
@@ -1498,6 +1505,11 @@ func _process(_delta:float):
 		OS.window_fullscreen = !OS.window_fullscreen
 		fullscreen = OS.window_fullscreen
 		saveToFile()
+
+func toggleShouldProfile():
+	profilerEnabled = !profilerEnabled
+	GM.createProfiler()
+	saveToFile()
 
 func _ready() -> void:
 	get_viewport().connect("gui_focus_changed", self, "_on_focus_changed")

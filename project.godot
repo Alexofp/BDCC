@@ -989,6 +989,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Player3D/Parts/MyBoneAttachment.gd"
 }, {
+"base": "MyProfilerBase",
+"class": "MyProfiler",
+"language": "GDScript",
+"path": "res://Util/Profiler/MyProfiler.gd"
+}, {
+"base": "Reference",
+"class": "MyProfilerBase",
+"language": "GDScript",
+"path": "res://Util/Profiler/MyProfilerBase.gd"
+}, {
 "base": "Reference",
 "class": "MyProjectSettings",
 "language": "GDScript",
@@ -2006,6 +2016,8 @@ _global_script_class_icons={
 "ModEntry": "",
 "Module": "",
 "MyBoneAttachment": "",
+"MyProfiler": "",
+"MyProfilerBase": "",
 "MyProjectSettings": "",
 "NOET": "",
 "NOM": "",
@@ -2178,7 +2190,6 @@ config/name="BDCC"
 run/main_scene="res://UI/LaunchScreen/LaunchScreen.tscn"
 config/project_settings_override="user://override.cfg"
 run/flush_stdout_on_print=true
-run/delta_sync_after_draw=true
 boot_splash/image="res://Images/Splash/splash.png"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0.145098, 0.145098, 0.501961, 1 )

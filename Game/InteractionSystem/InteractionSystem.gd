@@ -107,6 +107,7 @@ func _init():
 func processTime(_howMuch:int):
 	if(GM.main.isInDungeon()): # No pawn activity while in a dungeon
 		return
+	GM.PROFILE.start("IS.processTime")
 #	var toUpdate:Array = getInteractionsThatNeedToProcessed()
 #	while(toUpdate.size() > 0):
 #		for interact in toUpdate:
@@ -154,6 +155,7 @@ func processTime(_howMuch:int):
 	#	theinteraction.isNew = false
 	#print(pawnsByLoc)
 	#print(interactions)
+	GM.PROFILE.finish("IS.processTime")
 	pass
 
 func decideNextAction(interaction, _context:Dictionary = {}):
@@ -194,6 +196,7 @@ func decideNextAction(interaction, _context:Dictionary = {}):
 func processBusyAllInteractions(howManySeconds:int):
 	if(howManySeconds <= 0):
 		return
+	GM.PROFILE.start("processBusyAllInteractions("+str(howManySeconds)+")")
 	for taskID in globalTasks:
 		var task = globalTasks[taskID]
 		task.processTime(howManySeconds)
@@ -203,6 +206,7 @@ func processBusyAllInteractions(howManySeconds:int):
 	for interaction in interactions:
 		interaction.busyActionSeconds -= howManySeconds
 		interaction.processTime(howManySeconds)
+	GM.PROFILE.finish("processBusyAllInteractions("+str(howManySeconds)+")")
 
 func getClosestInteraction() -> PawnInteractionBase:
 	var result = null
