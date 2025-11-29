@@ -9,6 +9,7 @@ func _init():
 
 func canDoTask(_pawn:CharacterPawn) -> bool:
 	return (_pawn.isGuard() || shouldIgnoreCharType(_pawn)) && !_pawn.isSlaveToPlayer()
+	#return (_pawn.isGuard()) && !_pawn.isSlaveToPlayer()
 
 func configureGoal(_pawn:CharacterPawn, _goal):
 	_goal.zone = patrolZone

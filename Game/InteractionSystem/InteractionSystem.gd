@@ -124,30 +124,31 @@ func processTime(_howMuch:int):
 			var _ok = reactCooldowns.erase(pawnID)
 
 	#print(pawns)
-	var maxProcesses:int = 100
-	if(maxProcesses < pawns.size()*2):
-		maxProcesses = pawns.size() * 2
+#	var maxProcesses:int = 100
+#	if(maxProcesses < pawns.size()*2):
+#		maxProcesses = pawns.size() * 2
+#
+#	var interaction:PawnInteractionBase = getClosestInteraction()
+#	while(interaction != null && _howMuch > 0):
+#		var interactionBusySecs:int = interaction.busyActionSeconds
+#		if(_howMuch < interactionBusySecs):
+#			break
+#
+#		if(interactionBusySecs > 0):
+#			processBusyAllInteractions(interactionBusySecs)
+#			_howMuch -= interactionBusySecs
+#		interaction.doCurrentAction()
+#
+#		if(!interaction.wasDeleted && !interaction.getCurrentPawn().isPlayer()):
+#			decideNextAction(interaction)
+#
+#		maxProcesses -= 1
+#		if(maxProcesses <= 0):
+#			print("[Interaction System] HIT THE MAX PROCESS LIMIT")
+#			break
+#		interaction = getClosestInteraction()
 	
-	var interaction:PawnInteractionBase = getClosestInteraction()
-	while(interaction != null && _howMuch > 0):
-		var interactionBusySecs:int = interaction.busyActionSeconds
-		if(_howMuch < interactionBusySecs):
-			break
-		
-		if(interactionBusySecs > 0):
-			processBusyAllInteractions(interactionBusySecs)
-			_howMuch -= interactionBusySecs
-		interaction.doCurrentAction()
-		
-		if(!interaction.wasDeleted && !interaction.getCurrentPawn().isPlayer()):
-			decideNextAction(interaction)
-		
-		maxProcesses -= 1
-		if(maxProcesses <= 0):
-			print("[Interaction System] HIT THE MAX PROCESS LIMIT")
-			break
-		interaction = getClosestInteraction()
-		
+	#TODO: Call this function many times if _howMuch > 60
 	processBusyAllInteractions(_howMuch)
 	
 	checkAddNewPawns()
@@ -193,6 +194,18 @@ func decideNextAction(interaction, _context:Dictionary = {}):
 	var selectedAction = RNG.pickWeightedPairs(possibleActions)#actions[0]
 	interaction.setPickedAction(selectedAction, _context)
 
+var internalTick:int = 0
+func calcSpreadTickAmountForInteractions() -> int:
+	var amountOfInteractions:int = interactions.size()
+	
+	var amTicks:int = int(ceil(float(amountOfInteractions) / 40.0))
+	if(amTicks < 1):
+		amTicks = 1
+	elif(amTicks > 5):
+		amTicks = 5
+
+	return amTicks
+
 func processBusyAllInteractions(howManySeconds:int):
 	if(howManySeconds <= 0):
 		return
@@ -208,11 +221,48 @@ func processBusyAllInteractions(howManySeconds:int):
 		pawn.processTime(howManySeconds)
 	GM.PROFILE.finish("pawns")
 	GM.PROFILE.start("interactions")
-	for interaction in interactions:
+	var howManyTicks:int = calcSpreadTickAmountForInteractions()
+	var howManyToProcess:int = int(ceil(float(interactions.size()) / float(howManyTicks)))
+	
+	var interactionsCopy:Array = interactions.duplicate() # Duplicate because we will might be deleting them while iterating over them
+
+	for _i in range(howManyToProcess):
+		var _indx:int = _i * howManyTicks + internalTick
+		if(_indx >= interactionsCopy.size()):
+			continue
+		
+		var interaction:PawnInteractionBase = interactionsCopy[_indx]
 		GM.PROFILE.start(interaction.id)
-		interaction.busyActionSeconds -= howManySeconds
-		interaction.processTime(howManySeconds)
+		
+		var finalHowManySeconds:int = howManySeconds * howManyTicks
+		
+		interaction.busyActionSeconds -= finalHowManySeconds
+		interaction.processTime(finalHowManySeconds)
+
+		if(interaction.busyActionSeconds <= 0 && !interaction.isBeingSpied() && !interaction.isWaitingForScene()):
+			interaction.doCurrentAction()
+			if(!interaction.wasDeleted && !interaction.getCurrentPawn().isPlayer()):
+				decideNextAction(interaction)
 		GM.PROFILE.finish(interaction.id, 0.1)
+		
+	print("PROCESSED: "+str(howManyToProcess))
+
+#	for interaction in interactionsCopy:
+#		#GM.PROFILE.start(interaction.id)
+#		interaction.busyActionSeconds -= howManySeconds
+#		interaction.processTime(howManySeconds)
+#
+#		if(interaction.busyActionSeconds <= 0 && !interaction.isBeingSpied() && !interaction.isWaitingForScene()):
+#			interaction.doCurrentAction()
+#			if(!interaction.wasDeleted && !interaction.getCurrentPawn().isPlayer()):
+#				decideNextAction(interaction)
+#
+#		#GM.PROFILE.finish(interaction.id, 0.1)
+	
+	internalTick += 1
+	if(internalTick >= howManyTicks):
+		internalTick = 0
+	
 	GM.PROFILE.finish("interactions")
 	GM.PROFILE.finish("processBusyAllInteractions("+str(howManySeconds)+")")
 

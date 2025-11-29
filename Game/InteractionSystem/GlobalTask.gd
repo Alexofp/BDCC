@@ -22,6 +22,7 @@ func canDoTaskFinal(_pawn:CharacterPawn) -> bool:
 	if(!_pawn.canBeInterrupted()):
 		return false
 	
+	#TODO: THIS LINE IS SLOW, FIX ME
 	if(getAllAssignedPawns().size() >= getMaxAssigned(GM.main.IS.getMaxPawnCount())):
 		return false
 	

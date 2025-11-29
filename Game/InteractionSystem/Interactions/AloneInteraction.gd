@@ -51,6 +51,7 @@ func getGoalsWithScores(aboveKeepScore:bool = true) -> Array:
 		keepScore = goal.getKeepScore()
 		keepScore = pawn.getProcessedGoalScore(goal.id, keepScore, true)
 	
+	#GM.PROFILE.start("ALONE GOALS")
 	var possibleNew := []
 	for goalID in goals:
 		if(goal != null && goalID == goal.id):
@@ -61,16 +62,21 @@ func getGoalsWithScores(aboveKeepScore:bool = true) -> Array:
 		newScore = pawn.getProcessedGoalScore(goalID, newScore, false)
 		if(newScore > keepScore || goal == null):
 			possibleNew.append([goalID, newScore])
+	#GM.PROFILE.finish("ALONE GOALS")
 	
+	#GM.PROFILE.start("GLOBAL TASKS")
 	for globalTaskID in GM.main.IS.getGlobalTasks():
+		GM.PROFILE.start(globalTaskID)
 		var globalTask:GlobalTask = GM.main.IS.getGlobalTask(globalTaskID)
 		
 		if(!globalTask.canDoTaskFinal(pawn)):
+			GM.PROFILE.finish(globalTaskID)
 			continue
 		
 		var goalID = globalTask.getGoalID(pawn)
 		var newgoal = InteractionGoal.create(goalID)
 		if(newgoal == null):
+			GM.PROFILE.finish(globalTaskID)
 			continue
 		
 		globalTask.configureGoalFinal(pawn, newgoal)
@@ -78,6 +84,9 @@ func getGoalsWithScores(aboveKeepScore:bool = true) -> Array:
 		newScore = pawn.getProcessedGoalScore(goalID, newScore, false)
 		if(newScore > keepScore || newgoal == null):
 			possibleNew.append([newgoal, newScore])
+		GM.PROFILE.finish(globalTaskID)
+	#GM.PROFILE.finish("GLOBAL TASKS")
+	
 	return possibleNew
 
 func calculateBestGoal():
