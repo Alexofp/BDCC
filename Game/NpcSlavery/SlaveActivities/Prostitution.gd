@@ -51,7 +51,7 @@ func onPawnDeleted(_pawn):
 		GM.main.addMessage("Your slave "+getChar().getName()+" is no longer doing prostitution..")
 
 func onInteractionChanged(_newInteraction):
-	if(_newInteraction != null && _newInteraction.id == "Unconscious" && _newInteraction.getRoleCharID("main") == getCharID()):
+	if(_newInteraction != null && _newInteraction.id == "Unconscious" && _newInteraction.getCharIDByRole("main") == getCharID()):
 		stopActivity()
 		GM.main.addMessage("Your slave "+getChar().getName()+" got beaten up unconscious and is no longer doing prostitution..")
 
