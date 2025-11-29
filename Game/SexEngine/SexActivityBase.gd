@@ -1347,7 +1347,10 @@ func applyTallymarkIfNeeded(bodypartSlot:String):
 	#if(getDom().isPlayer()):
 	#	return null
 	
-	var chanceToAdd = 0.0
+	if(getSub().isPlayer() && GM.main.getEncounterSettings().isGoalDisabledForSubPC(SexGoal.DrawTallymarkOnSub)):
+		return
+
+	var chanceToAdd:float = 0.0
 	var domBodywritingsScale: float = (getDomInfo(0).fetishScore({Fetish.Bodywritings: 1.0}) + 1.0)/2.0 # makes it a [0.0-1.0] value
 	
 	if(getSub().hasTallymarks() || getSexType() in [SexType.SlutwallSex, SexType.StocksSex]):

@@ -17,6 +17,8 @@ const ReceiveStraponVaginal = "ReceiveStraponVaginal"
 const ReceiveStraponAnal = "ReceiveStraponAnal"
 
 const TieUp = "TieUp"
+const DrawTextOnSub = "DrawTextOnSub"
+const DrawTallymarkOnSub = "DrawTallymarkOnSub"
 const Choke = "Choke"
 const ChokeSexVaginal = "ChokeSexVaginal"
 const ChokeSexAnal = "ChokeSexAnal"
