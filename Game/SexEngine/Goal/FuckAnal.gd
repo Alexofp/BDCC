@@ -51,7 +51,8 @@ func doFastSex(_sexEngine, _domInfo, _subInfo, _data):
 		sendSexEvent(_sexEngine, SexEvent.BodyWritingAdded, _domInfo, _subInfo, {zone=zone,writingID=writingID})
 	
 	if(RNG.chance(20) || sub.hasTallymarks() || (_sexEngine.getSexTypeID() in [SexType.StocksSex, SexType.SlutwallSex])):
-		sub.addTallymarkButt()
+		if(!sub.isPlayer() || !GM.main.getEncounterSettings().isGoalDisabledForSubPC(SexGoal.DrawTallymarkOnSub)):
+			sub.addTallymarkButt()
 
 func canBegFor() -> bool:
 	return true
