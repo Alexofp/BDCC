@@ -69,7 +69,7 @@ func doFastSex(_sexEngine, _domInfo, _subInfo, _data):
 		sendSexEvent(_sexEngine, SexEvent.BodyWritingAdded, _domInfo, _subInfo, {zone=zone,writingID=writingID})
 	
 	if(RNG.chance(20) || sub.hasTallymarks() || (_sexEngine.getSexTypeID() in [SexType.StocksSex, SexType.SlutwallSex])):
-		if(!sub.isPlayer() || !GM.main.getEncounterSettings().isGoalDisabledForSubPC(SexGoal.DrawTallymarkOnSub)):
+		if(!sub.isPlayer() || !GM.main.getEncounterSettings().isGoalDisabledForSubPC(SexGoal.AddTallymarks)):
 			sub.addTallymarkFace()
 
 

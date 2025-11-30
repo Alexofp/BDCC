@@ -1347,7 +1347,7 @@ func applyTallymarkIfNeeded(bodypartSlot:String):
 	#if(getDom().isPlayer()):
 	#	return null
 	
-	if(getSub().isPlayer() && GM.main.getEncounterSettings().isGoalDisabledForSubPC(SexGoal.DrawTallymarkOnSub)):
+	if(getSub().isPlayer() && GM.main.getEncounterSettings().isGoalDisabledForSubPC(SexGoal.AddTallymarks)):
 		return
 
 	var chanceToAdd:float = 0.0

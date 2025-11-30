@@ -1,18 +1,15 @@
 extends SexGoalBase
 
 func _init():
-	id = SexGoal.DrawTextOnSub
+	id = SexGoal.AddBodywritings
 
 func getVisibleName():
-	return "Draw on body (Text)"
+	return "Add bodywritings"
 
 func isPossible(_sexEngine, _domInfo, _subInfo, _data):
 	if(_domInfo.getChar().hasBoundArms() || _domInfo.getChar().hasBlockedHands()):
 		return false
 	return true
-
-func getTags(_indx:int) -> Array:
-	return [SexActivityTag.HandsUsed]
 
 func getSubGoals(_sexEngine, _domInfo, _subInfo, _data):
 	return {
@@ -38,13 +35,13 @@ func canBegFor() -> bool:
 	return true
 
 func getBegName() -> String:
-	return "Write on my body"
+	return "Ask for bodywritings"
 
 func getBegCategory() -> Array:
 	return BegCategoryExotic
 
 func getBegDesc() -> String:
-	return "Beg the dom to write on your body!"
+	return "Beg the dom to write something on your body!"
 
 func getBegMessage(_sexEngine, _domInfo, _subInfo) -> String:
 	return "{sub.You} {sub.youVerb('beg')} {dom.you} to write on {sub.yourHis} body."

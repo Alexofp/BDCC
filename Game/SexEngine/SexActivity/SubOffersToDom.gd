@@ -71,6 +71,8 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 		var theBegDesc:String = theGoalRef.getBegDesc()
 		var theScore:float = 0.3 * clamp(fetishMod+0.5, 0.0, 1.0) * amountOfGoalsMod
 		var theChance:float = getDomAgreeGoalChance(_sexEngine, _domInfo, _subInfo, theGoalRef) if isSubPC else 0.0
+		if(theChance <= 0.0):
+			continue
 		addStartAction([goalID], theBegName, theBegDesc, theScore, {A_CATEGORY: theGoalRef.getBegCategory(), A_CHANCE: theChance})
 
 func startActivity(_args):
