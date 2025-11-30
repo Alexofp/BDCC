@@ -98,7 +98,9 @@ func _react(_action: String, _args):
 		return _room._onButton(keyid)
 	
 	if(_action == "go"):
+		#GM.PROFILE.start("playAnimation")
 		playAnimation(StageScene.Solo, "walk")
+		#GM.PROFILE.finish("playAnimation")
 		#playAnimation(StageScene.MilkingStallDuo, "start", {bodyState={chains=[["normal", "neck", "scene", "toppipe"], ["short", "neck", "scene", "bottompipe"]]}})
 		#playAnimation(StageScene.MilkingStallSolo, "cum", {bodyState={chains=[["hoseshort", "breastpump", "scene", "milktank"], ["hoseshort", "penisPump", "scene", "milktank"], ["short", "neck", "scene", "bottompipe"]]}})
 		#playAnimation(StageScene.PuppySolo, "walk")
@@ -110,6 +112,7 @@ func _react(_action: String, _args):
 		
 		if(!GM.main.checkTFs()):
 			GM.main.showLog()
+		return
 			
 	if(_action == "giveupdungeon"):
 		runScene("DrugDenGiveUpScene")

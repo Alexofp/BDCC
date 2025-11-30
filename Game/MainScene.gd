@@ -36,7 +36,7 @@ var PS:PlayerSlaveryBase
 var PSH:PlayerSlaveryHolder = PlayerSlaveryHolder.new()
 
 var staticCharacters = {}
-var charactersToUpdate = {}
+var charactersToUpdate:Array = []
 var dynamicCharacters = {}
 var dynamicCharactersPools = {}
 
@@ -660,18 +660,52 @@ func getTimeCap():
 func isVeryLate():
 	return timeOfDay >= getTimeCap()
 
+const MAX_STOP_PROCESS_CHAR_CHECK = 10
+
+var internal_stopProcShift:int = 0
+
 func stopProcessingUnusedCharacters():
-	for charID in charactersToUpdate.keys():
-		var character = getCharacter(charID)
-		if(character != null):
+	# Process this in batches?
+	
+	GM.PROFILE.start("stopProcessingUnusedCharacters")
+	var charAm:int = charactersToUpdate.size()
+	
+	var batchesAmount:int = int(ceil(float(charAm) / float(MAX_STOP_PROCESS_CHAR_CHECK)))
+	if(internal_stopProcShift >= batchesAmount):
+		internal_stopProcShift = 0
+	
+	#Log.print("internal_stopProcShift: "+str(internal_stopProcShift))
+	for _i in range(MAX_STOP_PROCESS_CHAR_CHECK):
+		var _ii:int = _i * batchesAmount + internal_stopProcShift
+		var _indx:int = charAm - _ii - 1
+		if(_indx < 0 || _indx >= charAm):
+			continue
+		var charID:String = charactersToUpdate[_indx]
+		
+		var character:BaseCharacter = getCharacter(charID)
+		if(character):
 			character.updateNonBattleEffects()
-		if(character == null || !character.shouldBeUpdated()):
+		if(!character || !character.shouldBeUpdated()):
 			print("STOPPED PROCESSING: "+str(charID))
-			charactersToUpdate.erase(charID)
-			if(character != null):
+			charactersToUpdate.remove(_indx)
+			if(character):
 				character.onStoppedProcessing()
-		elif(character != null && !characterIsVisible(charID)):
-			character.updateNonBattleEffects()
+		#elif(character && !characterIsVisible(charID)):
+		#	character.updateNonBattleEffects()
+	
+	internal_stopProcShift += 1
+	GM.PROFILE.finish("stopProcessingUnusedCharacters")
+#	for charID in charactersToUpdate.keys():
+#		var character = getCharacter(charID)
+#		if(character != null):
+#			character.updateNonBattleEffects()
+#		if(character == null || !character.shouldBeUpdated()):
+#			print("STOPPED PROCESSING: "+str(charID))
+#			charactersToUpdate.erase(charID)
+#			if(character != null):
+#				character.onStoppedProcessing()
+#		elif(character != null && !characterIsVisible(charID)):
+#			character.updateNonBattleEffects()
 
 func processTime(_seconds):
 	_seconds = int(round(_seconds))
@@ -683,22 +717,30 @@ func processTime(_seconds):
 
 func doTimeProcess(_seconds):
 	GM.PROFILE.start("doTimeProcess")
-	# This splits long sleeping times into 1 hour chunks
 	if(!PS):
 		IS.processTime(_seconds)
+		#GM.PROFILE.start("SCI.processTime")
 		SCI.processTime(_seconds)
+		#GM.PROFILE.finish("SCI.processTime")
 	
+	GM.PROFILE.start("CHARACTERS.processTime")
+	# This splits long sleeping times into 1 hour chunks
 	var copySeconds = _seconds
 	while(copySeconds > 0):
 		var clippedSeconds = min(60*60, copySeconds)
+		#GM.PROFILE.start("GM.pc.processTime")
 		GM.pc.processTime(clippedSeconds)
+		#GM.PROFILE.finish("GM.pc.processTime")
 		
 		for characterID in charactersToUpdate:
 			var character = getCharacter(characterID)
 			if(character != null):
+				#GM.PROFILE.start(characterID+".processTime")
 				character.processTime(clippedSeconds)
+				#GM.PROFILE.finish(characterID+".processTime")
 		
 		copySeconds -= clippedSeconds
+	GM.PROFILE.finish("CHARACTERS.processTime")
 	
 	GM.ui.onTimePassed(_seconds)
 	
@@ -1854,7 +1896,7 @@ func updateCharacterUntilNow(charID):
 
 func startUpdatingCharacter(charID):
 	if(!charactersToUpdate.has(charID)):
-		charactersToUpdate[charID] = true
+		charactersToUpdate.append(charID)
 		print("BEGAN PROCESSING "+str(charID))
 		var character = getCharacter(charID)
 		if(character != null):

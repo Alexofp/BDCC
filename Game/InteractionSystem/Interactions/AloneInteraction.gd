@@ -39,7 +39,7 @@ func _init():
 func processTime(_howMuch:int):
 	nextGoalTestIn -= _howMuch
 	if(nextGoalTestIn <= 0):
-		nextGoalTestIn = 200
+		nextGoalTestIn = 300
 		calculateBestGoal()
 
 func getGoalsWithScores(aboveKeepScore:bool = true) -> Array:
@@ -66,17 +66,17 @@ func getGoalsWithScores(aboveKeepScore:bool = true) -> Array:
 	
 	#GM.PROFILE.start("GLOBAL TASKS")
 	for globalTaskID in GM.main.IS.getGlobalTasks():
-		GM.PROFILE.start(globalTaskID)
+		#GM.PROFILE.start(globalTaskID)
 		var globalTask:GlobalTask = GM.main.IS.getGlobalTask(globalTaskID)
 		
 		if(!globalTask.canDoTaskFinal(pawn)):
-			GM.PROFILE.finish(globalTaskID)
+			#GM.PROFILE.finish(globalTaskID)
 			continue
 		
 		var goalID = globalTask.getGoalID(pawn)
 		var newgoal = InteractionGoal.create(goalID)
 		if(newgoal == null):
-			GM.PROFILE.finish(globalTaskID)
+			#GM.PROFILE.finish(globalTaskID)
 			continue
 		
 		globalTask.configureGoalFinal(pawn, newgoal)
@@ -84,7 +84,7 @@ func getGoalsWithScores(aboveKeepScore:bool = true) -> Array:
 		newScore = pawn.getProcessedGoalScore(goalID, newScore, false)
 		if(newScore > keepScore || newgoal == null):
 			possibleNew.append([newgoal, newScore])
-		GM.PROFILE.finish(globalTaskID)
+		#GM.PROFILE.finish(globalTaskID)
 	#GM.PROFILE.finish("GLOBAL TASKS")
 	
 	return possibleNew
@@ -120,15 +120,35 @@ func switchGoalTo(goalID:String):
 	var newGoal:InteractionGoalBase = InteractionGoal.create(goalID)
 	return switchGoalToObject(newGoal)
 	
-func switchGoalToObject(newGoal):
+func switchGoalToObject(newGoal:InteractionGoalBase):
 	if(newGoal == null):
 		return false
-	newGoal.pawnID = getRolePawn("main").charID
+	var thePawn := getRolePawn("main")
+	if(goal):
+		if(!goal.globalTask.empty()):
+			var theGlobalTask:GlobalTask = GM.main.IS.getGlobalTask(goal.globalTask)
+			if(theGlobalTask):
+				theGlobalTask.onPawnStoppedDoingTask(thePawn)
+	
+	newGoal.pawnID = thePawn.charID
 	newGoal.interaction = self
 	goal = newGoal
 	goal.onGoalStart()
+	
+	if(!goal.globalTask.empty()):
+		var theGlobalTask:GlobalTask = GM.main.IS.getGlobalTask(goal.globalTask)
+		if(theGlobalTask):
+			theGlobalTask.onPawnStartedDoingTask(thePawn)
 	#print("NEW GOAL FOR PAWN "+str(newGoal.pawnID)+": "+str(newGoal.id))
 	return true
+
+func onStopped():
+	var thePawn := getRolePawn("main")
+	if(goal):
+		if(!goal.globalTask.empty()):
+			var theGlobalTask:GlobalTask = GM.main.IS.getGlobalTask(goal.globalTask)
+			if(theGlobalTask):
+				theGlobalTask.onPawnStoppedDoingTask(thePawn)
 
 func start(_pawns:Dictionary, _args:Dictionary):
 	doInvolvePawn("main", _pawns["main"])
