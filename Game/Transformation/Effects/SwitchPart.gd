@@ -23,7 +23,13 @@ func applyEffect(_data:Dictionary) -> Dictionary:
 		# Adding missing fields
 		var partRef:Bodypart = GlobalRegistry.getBodypartRef(newPartID)
 		if(partRef != null):
-			assert(partRef.getSlot() == getBodypartSlot(), "WRONG BODYPART SLOT!")
+			if(partRef.getSlot() != getBodypartSlot()):
+				var theTF = getTF()
+				var theErrorText:String = "SOMETHING WENT WRONG WITH SwitchPart EFFECT! partRef.getSlot()="+str(partRef.getSlot())+", getBodypartSlot()="+str(getBodypartSlot())+" Transformation id = "+(theTF.id if theTF else "NULL")+" data="+str(_data)
+				Log.error(theErrorText)
+				return {
+					bigError = theErrorText,
+				}
 			var tfData:Dictionary = partRef.saveOriginalTFData()
 			for tfDataField in tfData:
 				if(!_data.has(tfDataField)):
@@ -68,6 +74,10 @@ func applyEffect(_data:Dictionary) -> Dictionary:
 	}
 
 func generateTransformText(_result:Dictionary):
+	if(_result.has("bigError")):
+		addText(str(_result["bigError"]))
+		return
+	
 	var oldPartID = (_result["oldPartID"] if _result.has("oldPartID") else null)
 	var hadPartBefore:bool = (oldPartID != null && oldPartID != "")
 	var hasPartNow:bool = (newPartID != "")

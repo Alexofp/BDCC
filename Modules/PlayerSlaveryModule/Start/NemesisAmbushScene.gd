@@ -195,7 +195,7 @@ func _run():
 		addButton("Continue", "See what happens next", "show_others")
 	
 	if(state == "canteendrugged_lust"):
-		playAnimation(StageScene.Duo, "sit")
+		playAnimation(StageScene.Solo, "sit")
 	
 		saynn("You're busy finishing your meal..")
 		

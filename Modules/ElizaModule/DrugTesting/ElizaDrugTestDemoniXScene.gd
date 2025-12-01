@@ -85,7 +85,7 @@ func _run():
 		addButton("Continue", "See what happens next", "eliza_naked")
 	if(state == "eliza_naked"):
 		playAnimation(StageScene.SexOralForced, "tease", {pc="elizaDemon", npc="pc", bodyState={naked=true, hard=true}, npcBodyState={hard=true}})
-		saynn("Her labcoat, her top, her pencil shirt, all fall down to the floor. All that's left on her is the fancy black lingerie. Her alluring curves, her gorgeous six-pack, her busty chest, wide hips and a firm ass, it's all out on display.")
+		saynn("Her labcoat, her top, her pencil skirt, all fall down to the floor. All that's left on her is the fancy black lingerie. Her alluring curves, her gorgeous six-pack, her busty chest, wide hips and a firm ass, it's all out on display.")
 
 		saynn("[say=eliza]Liberating.[/say]")
 
@@ -118,7 +118,7 @@ func _run():
 
 		saynn("[say=eliza]Hmm~..[/say]")
 
-		saynn("Her tail loosens slightly, allowing you more movement as you lap at her, your tongue exploring every inch of her slit with eager desperation, drawing little circles around her sensitive clit and traveling along the counters of her drippy lips. Quinn throws her head back, a low throaty growl escaping her as she pushes her crotch into your face, enjoying your licks.")
+		saynn("Her tail loosens slightly, allowing you more movement as you lap at her, your tongue exploring every inch of her slit with eager desperation, drawing little circles around her sensitive clit and traveling along the contours of her drippy lips. Quinn throws her head back, a low throaty growl escaping her as she pushes her crotch into your face, enjoying your licks.")
 
 		saynn("[say=eliza]Better than I expected. Maybe you're not entirely useless after all.[/say]")
 
@@ -204,7 +204,7 @@ func _run():
 
 		saynn("[say=eliza]Really~?[/say]")
 
-		saynn("Her clawed paws reach for her clothing.. and begin stripping it. Her labcoat, her top, her pencil shirt, all fall down to the floor. Even her fancy black lingerie doesn't survive it and experience the same fate.")
+		saynn("Her clawed paws reach for her clothing.. and begin stripping it. Her labcoat, her top, her pencil skirt, all fall down to the floor. Even her fancy black lingerie doesn't survive it and experience the same fate.")
 
 		saynn("Her alluring curves, her gorgeous six-pack, her busty chest, wide hips and a firm ass, it's all out on display.. as well as her moist demon pussy. The scent of her arousal is making your head spin slightly even from a distance.")
 

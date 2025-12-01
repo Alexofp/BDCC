@@ -259,7 +259,7 @@ func doProgress(_context:Dictionary) -> Dictionary:
 			step = nextStep,
 			effects = [
 				charEffect("fem", "AddFemininity", [-10]),
-				partEffect("addvag", BodypartSlot.Vagina, "SwitchPart", [newPartID]),
+				partEffect("addpenis", BodypartSlot.Penis, "SwitchPart", [newPartID]),
 			]
 		}
 	

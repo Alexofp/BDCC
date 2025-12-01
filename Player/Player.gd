@@ -104,7 +104,9 @@ func setLocation(newRoomID:String):
 func getLocation():
 	return location
 	
-func isInSecludedLocation():
+func isInSecludedLocation() -> bool:
+	if(GM.main.isInDungeon()):
+		return true
 	if(GM.world == null):
 		return false
 	var cell:GameRoom = GM.world.getRoomByID(location)

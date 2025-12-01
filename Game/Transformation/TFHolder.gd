@@ -391,6 +391,12 @@ func shouldSaveData() -> bool:
 	
 	return false
 
+func findTFByUniqueID(_uid:int):
+	for tf in transformations:
+		if(tf.uniqueID == _uid):
+			return tf
+	return null
+
 func saveData() -> Dictionary:
 	var effectsData:Array = []
 	for effect in effects:

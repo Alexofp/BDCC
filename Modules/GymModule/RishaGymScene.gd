@@ -407,7 +407,7 @@ func _run():
 			npcBodyState={exposedCrotch=true,hard=true,},
 		})
 		
-		saynn("You begin to trash against the restraints and make loud pleasure noises, your whole body squirms and shivers as you struggle to stay still. Though Risha’s hands hold your ass nice and tight, she keeps shoving her cock in and out even through your climax. Your fuckhole got so overstimulated that you squirt juices all over the bench.")
+		saynn("You begin to thrash against the restraints and make loud pleasure noises, your whole body squirms and shivers as you struggle to stay still. Though Risha’s hands hold your ass nice and tight, she keeps shoving her cock in and out even through your climax. Your fuckhole got so overstimulated that you squirt juices all over the bench.")
 
 		# (if has cock)
 		if(GM.pc.isWearingChastityCage()):
