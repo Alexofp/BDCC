@@ -462,6 +462,9 @@ func getNurseryTasks() -> Array:
 func peekNurseryTasks() -> Array:
 	return nurseryTasks
 
+func didGenerateNurseryTasksToday() -> bool:
+	return generatedTasks
+
 func removeNurseryTask(_task):
 	if(nurseryTasks.has(_task)):
 		nurseryTasks.erase(_task)

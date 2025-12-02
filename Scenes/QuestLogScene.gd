@@ -94,10 +94,15 @@ func _run():
 			sayn("")
 		
 		addButton("Close", "Close the quest log", "endthescene")
+		if(getFlag("ElizaModule.s0hap")):
+			addButton("Bounties", "Try to remember which bounties you can still do", "bounties")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
+		return
+	if(_action == "bounties"):
+		runScene("NurseryBountyBoardScene", [true])
 		return
 
 func _react_scene_end(_tag, _result):

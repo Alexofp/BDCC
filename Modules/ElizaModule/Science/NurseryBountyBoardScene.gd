@@ -1,20 +1,32 @@
 extends SceneBase
 
 var donateText:String = ""
+var recallMode:bool = false
 
 func _init():
 	sceneID = "NurseryBountyBoardScene"
+
+func _initScene(_args = []):
+	if(_args.size() > 0 && _args[0]):
+		recallMode = true
 
 func _run():
 	if(state == ""):
 		playAnimation(StageScene.Solo, "stand")
 		
-		var nurseryTasks:Array = GM.main.SCI.getNurseryTasks()
+		var nurseryTasks:Array = GM.main.SCI.getNurseryTasks() if !recallMode else GM.main.SCI.peekNurseryTasks()
 		
-		saynn("You're standing in front of a holographic bounty board. It scans your collar.. and shows you these tasks:")
+		if(!recallMode):
+			saynn("You're standing in front of a holographic bounty board. It scans your collar.. and shows you these tasks:")
 		
 		if(nurseryTasks.empty()):
-			saynn("- No tasks left, come back tomorrow, inmate!")
+			if(recallMode):
+				if(GM.main.SCI.didGenerateNurseryTasksToday()):
+					saynn("You can't remember any bounties that you haven't yet completed.. You should probably check the bounty board tomorrow.")
+				else:
+					saynn("You don't know which bounties does the bounty board have. You should go check it down in the nursery!")
+			else:
+				saynn("- No tasks left, come back tomorrow, inmate!")
 		else:
 			for taskA in nurseryTasks:
 				var task:NurseryTaskBase = taskA
@@ -27,7 +39,7 @@ func _run():
 				sayn("Reward: "+task.getRewardString())
 				saynn(task.getDeadlineString())
 		
-		if(getFlag("ElizaModule.s1hap", false)):
+		if(getFlag("ElizaModule.s1hap", false) && GM.main.SCI.didGenerateNurseryTasksToday()):
 			sayn("- SPECIAL BOUNTY")
 			var charIDWithDrug:String = GM.main.SCI.getRandomNpcIDForStrangeDrug()
 			if(charIDWithDrug == "" || getCharacter(charIDWithDrug) == null):
@@ -39,11 +51,14 @@ func _run():
 				sayn("Reward: Safer enviroment for everyone")
 				saynn("Last day before task expires")
 		
-		saynn("Near the board there is a machine that can accept any fluid container. A note says that the container will be fully emptied and then given back.")
-		
-		addButton("Donate", "Choose a fluid container with fluids that you want to donate", "choose_donate")
-		addButtonWithChecks("Reroll (1 credit)", "Pay 1 credit to reroll all the bounties", "do_reroll", [], [[ButtonChecks.HasCredits, 1]])
-		addButton("Leave", "Time to go", "endthescene")
+		if(recallMode):
+			addButton("Back", "Enough remembering", "endthescene")
+		else:
+			saynn("Near the board there is a machine that can accept any fluid container. A note says that the container will be fully emptied and then given back.")
+			
+			addButton("Donate", "Choose a fluid container with fluids that you want to donate", "choose_donate")
+			addButtonWithChecks("Reroll (1 credit)", "Pay 1 credit to reroll all the bounties", "do_reroll", [], [[ButtonChecks.HasCredits, 1]])
+			addButton("Leave", "Time to go", "endthescene")
 	
 	if(state == "do_reroll"):
 		saynn("You press a button and all the tasks disappear.. just like a single credit from your inmate account.")
@@ -134,6 +149,7 @@ func saveData():
 	var data = .saveData()
 
 	data["donateText"] = donateText
+	data["recallMode"] = recallMode
 
 	return data
 
@@ -141,3 +157,4 @@ func loadData(data):
 	.loadData(data)
 
 	donateText = SAVE.loadVar(data, "donateText", "")
+	recallMode = SAVE.loadVar(data, "recallMode", false)
