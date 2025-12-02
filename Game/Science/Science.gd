@@ -1017,6 +1017,7 @@ func doPCShowerRaw(fluidObjs:Array):
 
 func doPCShower():
 	doPCShowerRaw([GM.pc.getFluids()])
+	GM.pc.afterTakingAShower()
 
 func doPCShowerInside():
 	var fluidObjs:Array = []

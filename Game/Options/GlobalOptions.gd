@@ -263,6 +263,8 @@ func isRollbackEnabled():
 	return rollbackEnabled
 
 func isRollbackThreadEnabled() -> bool:
+	if(OS.get_name() == "HTML5"): # Doesn't work on web, no thread support?
+		return false
 	return rollbackThread
 
 func getRollbackSlotsAmount():
@@ -965,7 +967,7 @@ func getChangeableOptions():
 				},
 				{
 					"name": "Separate thread",
-					"description": "If checked, the game will save the game's rollback state in a separate thread. Should result in a smoother gameplay but might lead to all sorts of strange bugs. Disable if the game is crashing randomly.",
+					"description": "If checked, the game will save the game's rollback state in a separate thread. Should result in a smoother gameplay but might lead to all sorts of strange bugs. Disable if the game is crashing randomly. Doesn't do anything in the HTML5 version.",
 					"id": "rollbackThread",
 					"type": "checkbox",
 					"value": rollbackThread,

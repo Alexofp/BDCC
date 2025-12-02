@@ -2175,12 +2175,6 @@ func afterSexEnded(sexInfo):
 		if(isPlayer()):
 			addStamina(buffsHolder.getCustom(BuffAttribute.StaminaRecoverAfterSex))
 			addSkillExperience(Skill.SexSlave, 30)
-	if(!isPlayer()):
-		addLust(-getLust())
-		addPain(-getPain())
-		addStamina(getMaxStamina())
-	consciousness = 1.0
-	arousal = 0.0
 		
 	for effectID in statusEffects.keys():
 		var effect = statusEffects[effectID]
@@ -2203,6 +2197,14 @@ func afterSexEnded(sexInfo):
 		var resultText = sexInfo.affectPersonality(personality, fetishHolder)
 		if(resultText != null && resultText != ""):
 			GM.main.addMessage(resultText)
+	
+	if(!isPlayer()):
+		addLust(-getLust())
+		addPain(-getPain())
+		addStamina(getMaxStamina())
+
+	consciousness = 1.0
+	arousal = 0.0
 		
 	updateAppearance()
 
@@ -3770,18 +3772,19 @@ func cancelPregnancy():
 		return
 	menstrualCycle.cancelPregnancy()
 
-func doSwallow(_fluidID:String, _amount:float) -> Dictionary:
+func doSwallow(_fluidID:String, _amount:float, _swallowEvent:bool = true) -> Dictionary:
 	var fluidObject:FluidBase = GlobalRegistry.getFluid(_fluidID)
 	if(fluidObject == null):
 		return {text=""}
 
 	var resultMessage = fluidObject.onSwallow(self, _amount)
 	
-	var event := SexEventHelper.create(SexEvent.SwallowFluid, getID(), getID(), {
-		loadSize = _amount,
-		fluidID = _fluidID,
-	})
-	sendSexEvent(event)
+	if(_swallowEvent):
+		var event := SexEventHelper.create(SexEvent.SwallowFluid, getID(), getID(), {
+			loadSize = _amount,
+			fluidID = _fluidID,
+		})
+		sendSexEvent(event)
 	
 	if(resultMessage != null && resultMessage != ""):
 		return {text=resultMessage}

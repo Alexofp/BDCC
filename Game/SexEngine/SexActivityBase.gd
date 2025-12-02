@@ -2010,7 +2010,7 @@ func doDeepthroatTurnDom():
 			var extraMessages = []
 			var fluidByAmount = strapon.getFluids().getFluidAmountByType()
 			for fluidID in fluidByAmount:
-				var swallowData:Dictionary = getSub().doSwallow(fluidID, fluidByAmount[fluidID])
+				var swallowData:Dictionary = getSub().doSwallow(fluidID, fluidByAmount[fluidID], false)
 				if(swallowData.has("text") && swallowData["text"] != ""):
 					extraMessages.append(swallowData["text"])
 			
