@@ -2,8 +2,8 @@ extends Node
 
 var game_version_major = 0
 var game_version_minor = 1
-var game_version_revision = 11
-var game_version_suffix = "fix1"
+var game_version_revision = 12
+var game_version_suffix = ""
 
 var contributorsCredits:Dictionary = {
 	"Max-Maxou": [
@@ -91,6 +91,7 @@ var contributorsCredits:Dictionary = {
 		"[url=https://github.com/Alexofp/BDCC/pull/186]#5[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/189]#6[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/197]#7[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/224]#8[/url]",
 	],
 	"Friskygote": [
 		"[url=https://github.com/Alexofp/BDCC/pull/120]#1[/url]",
@@ -126,6 +127,16 @@ var contributorsCredits:Dictionary = {
 		"[url=https://github.com/Alexofp/BDCC/pull/181]#8[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/187]#9[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/192]#10[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/227]#11[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/228]#12[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/231]#13[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/232]#14[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/242]#15[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/244]#16[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/246]#17[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/249]#18[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/250]#19[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/251]#20[/url]",
 	],
 	"CheeseyCake92": [
 		"[url=https://github.com/Alexofp/BDCC/pull/158]#1[/url]",
@@ -134,6 +145,9 @@ var contributorsCredits:Dictionary = {
 		"code",
 		"[url=https://github.com/Alexofp/BDCC/pull/215]#1[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/216]#2[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/230]#3[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/237]#4[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/239]#5[/url]",
 	],
 	"moon-halo-xviii": [
 		"[url=https://github.com/Alexofp/BDCC/pull/196]#1[/url]",
@@ -141,6 +155,14 @@ var contributorsCredits:Dictionary = {
 	],
 	"MarsDDDDD": [
 		"[url=https://github.com/Alexofp/BDCC/pull/211]#1[/url]",
+	],
+	"Selinoccino": [
+		"[url=https://github.com/Alexofp/BDCC/pull/240]#1[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/241]#2[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/243]#3[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/245]#4[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/247]#5[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/248]#6[/url]",
 	],
 }
 
