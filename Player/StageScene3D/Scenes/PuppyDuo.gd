@@ -61,12 +61,20 @@ func playAnimation(animID, _args = {}):
 	else:
 		$Chair.visible = false
 	
+	var dollX:float = 1.5
 	if(_args.has("flipNPC") && _args["flipNPC"]):
 		doll2.scale.x = abs(doll2.scale.x)
-		doll.transform.origin.x = 2.0
+		dollX = 2.0
 	else:
-		doll2.scale.x = -abs(doll2.scale.x)#
-		doll.transform.origin.x = 1.5
+		doll2.scale.x = -abs(doll2.scale.x)
+	
+	if(_args.has("flipPC") && _args["flipPC"]):
+		doll.scale.x = -abs(doll.scale.x)
+		dollX = 2.0
+	else:
+		doll.scale.x = abs(doll.scale.x)
+	
+	doll.transform.origin.x = dollX
 	
 	updateSubAnims()
 	

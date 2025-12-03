@@ -10,6 +10,7 @@ func _init():
 
 func canDoTask(_pawn:CharacterPawn) -> bool:
 	if(!_pawn.isNurse() && !shouldIgnoreCharType(_pawn)):
+	#if(!_pawn.isNurse()):
 		return false
 	
 	if(pawnIDHasSavior.size() >= allUnconPawns.size()):

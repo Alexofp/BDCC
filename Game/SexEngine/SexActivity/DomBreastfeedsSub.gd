@@ -185,7 +185,7 @@ func getActions(_indx:int):
 			var praiseScore:float = -getDomInfo().getAngerScore() + max(0.0, fetish(DOM_0, Fetish.Lactation)*0.5 - personality(DOM_0, PersonalityStat.Subby)*0.5)
 			addAction("praise", praiseScore, "Praise", "Tell them how well they do")
 		if(isReadyToCumHandled(DOM_0)):
-			addAction("cum", 1.0, "Cum!", "You gonna cum.", {A_PRIORITY: 1001})
+			addAction("cum", 1.0, "Cum!", "You're gonna cum.", {A_PRIORITY: 1001})
 		
 		var stopScore:float = 1.0
 		var breasts:BodypartBreasts = getDom().getBodypart(BodypartSlot.Breasts)

@@ -462,6 +462,9 @@ func getNurseryTasks() -> Array:
 func peekNurseryTasks() -> Array:
 	return nurseryTasks
 
+func didGenerateNurseryTasksToday() -> bool:
+	return generatedTasks
+
 func removeNurseryTask(_task):
 	if(nurseryTasks.has(_task)):
 		nurseryTasks.erase(_task)
@@ -1014,6 +1017,7 @@ func doPCShowerRaw(fluidObjs:Array):
 
 func doPCShower():
 	doPCShowerRaw([GM.pc.getFluids()])
+	GM.pc.afterTakingAShower()
 
 func doPCShowerInside():
 	var fluidObjs:Array = []

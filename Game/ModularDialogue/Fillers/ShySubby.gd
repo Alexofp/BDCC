@@ -64,6 +64,8 @@ func getFormIDs() -> Array:
 		"ProstitutionUsual",
 		"ProstitutionServiceDom",
 		"ProstitutionPricySlut",
+		"ProstitutionClientAskForDomSlut",
+		"ProstitutionClientAskForSubSlut",
 		"ProstitutionDenied",
 		"ProstitutionDeniedWhatever",
 		"ProstitutionAccept",
@@ -649,6 +651,28 @@ func getText(_id:String, _args:Dictionary):
 		return [
 			"I-I’m a bit pricey, but you’ll enjoy it.. I think.. Just "+creds+" credits..",
 			"I-I cost a little more, but I’m worth it.. I think.. "+creds+" credits.",
+		]
+	if(_id == "ProstitutionClientAskForDomSlut"):
+		return [
+			"Um.. I want to k-kneel for you and.. and..",
+			"W-Would you show me how it's done..?",
+			"I-I'm not really interested, sorry.. U-Unless.. you'd take control..?",
+			"O-Oh.. I'm not that good of a dom.. But.. m-maybe you would be..?",
+			"Mmhf.. I-I'll be honest.. I want you t-to pin me down.. real bad..",
+			"Um.. I w-wouldn't know what to do with you.. But.. I could be y-your plaything?",
+			"Uh.. I really want you.. b-but.. I'm more of a sub..",
+			"W-Would you have.. something else on offer..? For a plaything like me..",
+			"I-I want you to bend me over.. T-There, I s-said it..",
+			"Gosh, I need you in me...",
+		]
+	if(_id == "ProstitutionClientAskForSubSlut"):
+		return [
+			"W-Would it be too rude if.. I asked t-to be the one in charge..?",
+			"Actually.. I-I'm.. looking for s-someone who will obey my commands..",
+			"I-I.. Um.. I need a playtoy all for m-myself..",
+			"Uhm.. I was w-wondering.. Would you sub for me instead?.. I have t-the creds..",
+			"Hhh.. So hot.. Y-You look like you would be an obedient little thing..",
+			"H-Huff.. I really like the offer, b-but.. Would you mind if we switched it around?",
 		]
 	if(_id == "ProstitutionDenied"):
 		return [

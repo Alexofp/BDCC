@@ -110,7 +110,7 @@ func _run():
 			saynn("She is clearly not a fan.")
 
 		else:
-			saynn("Artica looks down at her pregnant belly.. and tilts her head at you.")
+			saynn("Artica looks down at her belly.. and tilts her head at you.")
 
 			saynn("[say=pc]I'd rather not knock you up..[/say]")
 

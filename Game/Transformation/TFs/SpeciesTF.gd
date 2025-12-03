@@ -103,7 +103,7 @@ func hasAnySlotsLeftToTranform() -> bool:
 	var allowsRemoving:bool = allowsRemovingParts()
 	var slotsLeft:Array = getSlotsLeft()
 	for bodypartSlot in slotsLeft:
-		var possiblePartIDs:Dictionary = Bodypart.findPossibleBodypartIDsDict(bodypartSlot, theChar, newSpecies)
+		var possiblePartIDs:Dictionary = Bodypart.findPossibleBodypartIDsDict(bodypartSlot, theChar, newSpecies, null, true)
 		if(!allowsRemoving && possiblePartIDs.has("") && theChar.hasBodypart(bodypartSlot)):
 			possiblePartIDs.erase("")
 		if(possiblePartIDs.empty()):
@@ -140,7 +140,7 @@ func doProgress(_context:Dictionary) -> Dictionary:
 	while(theSlots.size() > 0):
 		var bodypartSlot = theSlots.pop_front()
 		
-		var possiblePartIDs:Dictionary = Bodypart.findPossibleBodypartIDsDict(bodypartSlot, theChar, newSpecies)
+		var possiblePartIDs:Dictionary = Bodypart.findPossibleBodypartIDsDict(bodypartSlot, theChar, newSpecies, null, true)
 		if(!allowsRemoving && possiblePartIDs.has("") && theChar.hasBodypart(bodypartSlot)):
 			possiblePartIDs.erase("")
 		if(possiblePartIDs.empty()):

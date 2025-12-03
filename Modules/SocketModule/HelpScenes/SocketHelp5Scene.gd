@@ -1147,7 +1147,7 @@ func _run():
 
 		saynn("[say=socket]h-h..[/say]")
 
-		saynn("She is still just snoring quietly so you act more brave, your hands slide down her back and land on her round butt, your digis sink into the fur.")
+		saynn("She is still just snoring quietly so you act more brave, your hands slide down her back and land on her round butt, your digits sink into the fur.")
 
 		saynn("The fennec doesn't seem to mind you kneading her rear.. so you do it more and more, groping and squeezing her round forms..")
 

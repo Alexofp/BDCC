@@ -510,7 +510,7 @@ func _react(_action: String, _args):
 		if(battleState == "win"):
 			var loot = enemyCharacter.getLoot(battleName)
 			
-			if(GM.pc.hasKeyholderLocksFrom(enemyID)):
+			if(GM.pc.hasKeyholderLocksFrom(enemyID) && !GM.pc.isSlaveTo(enemyID)):
 				if(!loot.has("items")):
 					loot["items"] = []
 				var theKey = GlobalRegistry.createItem("KeyholderKeyUnlock")

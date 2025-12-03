@@ -47,6 +47,7 @@ func getSupportedSexTypes():
 		SexType.DefaultSex: true,
 		SexType.StocksSex: true,
 		SexType.SlutwallSex: true,
+		SexType.BitchsuitSex: true,
 	}
 
 func isStocksSex() -> bool:
@@ -57,6 +58,8 @@ func getPoseDescriptor() -> String:
 		return " in stocks"
 	if(getSexType() == SexType.SlutwallSex):
 		return " in the slutwall"
+	if(getSexType() == SexType.BitchsuitSex):
+		return " on all fours"
 	if(currentPose == POSE_ALLFOURS):
 		return " on all fours"
 	if(currentPose == POSE_FULLNELSON):
@@ -390,7 +393,7 @@ func getActions(_indx:int):
 					condomScore = 1.0
 				
 				var scoreToCumInside:float = max(condomScore, getDomInfo().fetishScore({Fetish.Breeding: 1.0}) + 0.5 - 20.0*float(gonnaCumOutside))
-				if(getSub().hasPerk(Perk.FertilitySubmissiveAndBreedable)):
+				if(getSub().hasPerk(Perk.FertilitySubmissiveAndBreedable) || getSexEngine().domNoPullingOut):
 					scoreToCumInside = 1.0
 				
 				var hasKnot:bool = getDom().bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)
@@ -789,12 +792,24 @@ func getSubResistChance(baseChance:float, domAngerRemoval:float) -> float:
 		theChance *= 0.8
 	if(isStocksSex() || getSexType() == SexType.SlutwallSex):
 		theChance *= 0.5
+	if(getSexType() == SexType.BitchsuitSex):
+		theChance *= 0.3
 	if(currentPose == POSE_FULLNELSON):
 		theChance *= 0.5
 	
 	return max(theChance, 5.0)
 
 func getAnimation():
+	if(getSexType() == SexType.BitchsuitSex):
+		if(state in [""]):
+			return [StageScene.PuppySexAllFours, "tease", {pc=DOM_0, npc=SUB_0}]
+		if(state in ["aftercumminginside", "knotting"]):
+			return [StageScene.PuppySexAllFours, "inside", {pc=DOM_0, npc=SUB_0}]
+		if(getDomInfo().isCloseToCumming() || (isStraponSex() && getSubInfo().isCloseToCumming())):
+			return [StageScene.PuppySexAllFours, "fast", {pc=DOM_0, npc=SUB_0}]
+			
+		return [StageScene.PuppySexAllFours, "sex", {pc=DOM_0, npc=SUB_0}]
+
 	if(getSexType() == SexType.SlutwallSex):
 		if(state in [""]):
 			return [StageScene.SlutwallSex, "tease", {npc=DOM_0, pc=SUB_0}]

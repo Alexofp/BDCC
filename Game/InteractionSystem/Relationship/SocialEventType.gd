@@ -21,6 +21,9 @@ const EscapedSlavery = 11 # Target escaped Actor's slavery
 const ForcedUnconscious = 12
 const GotWounded = 13 # Target got wounded by Actor
 
+const AffectionChange = 14
+const LustChange = 15
+
 # How much does this event make the target hate the actor.
 # 1.0 = fight loss
 # 0.2 = rude talk

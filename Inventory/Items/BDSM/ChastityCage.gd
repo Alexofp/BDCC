@@ -7,7 +7,7 @@ func getVisibleName():
 	return "Chastity Cage"
 	
 func getDescription():
-	return "Prevents the ability to use your penis"
+	return "Prevents the ability to use your penis."
 
 func getClothingSlot():
 	return InventorySlot.Penis

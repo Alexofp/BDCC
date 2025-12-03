@@ -30,7 +30,7 @@ func getEditVars():
 	return {
 		"id": {
 			name = "ID",
-			type = "string",
+			type = "stringID",
 			value = id,
 			noSave = true,
 		},
@@ -101,7 +101,10 @@ func getEditVars():
 
 func applyEditVar(varid, value):
 	if(varid == "id"):
-		id = value
+		if(value != ""):
+			id = value
+		else:
+			return true
 	if(varid == "name"):
 		name = value
 	if(varid == "author"):

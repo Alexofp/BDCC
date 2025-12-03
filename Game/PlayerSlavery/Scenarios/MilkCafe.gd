@@ -722,15 +722,17 @@ func getDoorDamageText() -> String:
 	if(padlockDamage < 1.0):
 		return "The padlock is barely holding."
 	return "The padlock is broken."
-		
 
-func main_state():
+func resetAllGear():
 	removeStrapon(C_PC)
 	removeStrapon(C_GIRL)
 	removeBreastPump(C_COW)
 	removePenisPump(C_BULL)
 	removeBreastPump(C_PC)
 	removePenisPump(C_PC)
+
+func main_state():
+	resetAllGear()
 	if(!GM.pc.hasEffect(StatusEffect.PSMilkCafeProduction)):
 		GM.pc.addEffect(StatusEffect.PSMilkCafeProduction)
 	aimCamera(L_CENTER)
@@ -854,6 +856,7 @@ func lateCheck() -> bool:
 	return false
 
 func triggerEventMaybe():
+	resetAllGear()
 	if(lateCheck()):
 		return
 	

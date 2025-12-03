@@ -5,7 +5,8 @@ var rollbackStates:Array = []
 var currentChoice = 0
 var rollbacking:bool = false
 
-var madeChoice:bool = false
+var needsExtraRollback:bool = true
+var hasPointlessRollback:bool = false
 
 var usesThread:bool = false
 var saveThread:Thread
@@ -22,9 +23,9 @@ func onDestroy():
 func notifyMadeChoice():
 	if(usesThread && saveThread.is_active()):
 		saveThread.wait_to_finish()
-	madeChoice = true
 	
-	if(OPTIONS.isRollbackEnabled() && rollbackStates.size() == 0):
+	if(OPTIONS.isRollbackEnabled() && needsExtraRollback):
+		needsExtraRollback = false
 		pushRollbackState_THREAD()
 
 func pushRollbackState():
@@ -43,6 +44,8 @@ func pushRollbackState():
 		saveThread.start(self, "pushRollbackState_THREAD")
 	else:
 		pushRollbackState_THREAD()
+	hasPointlessRollback = true
+
 
 func pushRollbackState_THREAD():
 	var newdata = SAVE.saveData().duplicate(true)
@@ -55,9 +58,9 @@ func pushRollbackState_THREAD():
 func canRollback():
 	if(GM.main != null && !GM.main.canRollback()):
 		return false
-	if(madeChoice && rollbackStates.size() > 0):
+	if(rollbackStates.size() > 0):
 		return true
-	return (rollbackStates.size() > 0 && !madeChoice) || (rollbackStates.size() > 1 && madeChoice)
+	return false
 
 func clear():
 	rollbackStates.clear()
@@ -68,9 +71,14 @@ func rollback():
 	if(!canRollback()):
 		return
 	
-	if(madeChoice):
-		madeChoice = false
+	if(hasPointlessRollback):
+		hasPointlessRollback = false
 		rollbackStates.pop_back()
+	needsExtraRollback = true
+	
+	if(rollbackStates.empty()):
+		Log.error("Something went wrong, rollbacker doesn't have a state to rollback to.")
+		return
 	
 	Log.print("ROLLBACK")
 	rollbacking = true

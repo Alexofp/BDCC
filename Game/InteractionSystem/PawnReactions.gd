@@ -27,7 +27,7 @@ static func doReact(_pawnTarget, _pawnReacts):
 	var _pc:BaseCharacter = _pawnTarget.getChar()
 	var _npc:BaseCharacter = _pawnReacts.getChar()
 	var _rep:ReputationPlaceholder = _pc.getReputation()
-	var possible = []
+	var possible:Array = []
 	
 	var exposure:float = _pc.getExposure()
 	var chance:float = 10.0 + exposure * 10.0

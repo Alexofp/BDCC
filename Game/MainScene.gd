@@ -8,18 +8,18 @@ onready var dynamicCharactersNode = $DynamicCharacters
 var sceneStack: Array = []
 var messages: Array = []
 var logMessages: Array = []
-var currentDay = 0
-var timeOfDay = 6*60*60 # seconds since 00:00
-var flags = {}
+var currentDay:int = 0
+var timeOfDay:int = 6*60*60 # seconds since 00:00
+var flags:Dictionary = {}
 var flagsCache = null
-var moduleFlags = {}
-var datapackFlags = {}
+var moduleFlags:Dictionary = {}
+var datapackFlags:Dictionary = {}
 var playerScene = preload("res://Player/Player.gd")
 var overriddenPlayerScene = preload("res://Player/OverriddenPlayer.gd")
 var overridenPC
 var originalPC
-var roomMemories = {}
-var lootedRooms = {}
+var roomMemories:Dictionary = {}
+var lootedRooms:Dictionary = {}
 var rollbacker:Rollbacker
 var encounterSettings:EncounterSettings
 var currentlyTestingScene = false
@@ -35,13 +35,13 @@ var DrugDenRun:DrugDen
 var PS:PlayerSlaveryBase
 var PSH:PlayerSlaveryHolder = PlayerSlaveryHolder.new()
 
-var staticCharacters = {}
-var charactersToUpdate = {}
-var dynamicCharacters = {}
-var dynamicCharactersPools = {}
+var staticCharacters:Dictionary = {}
+var charactersToUpdate:Array = []
+var dynamicCharacters:Dictionary = {}
+var dynamicCharactersPools:Dictionary = {}
 
-var loadedDatapacks = {}
-var datapackCharacters = {}
+var loadedDatapacks:Dictionary = {}
+var datapackCharacters:Dictionary = {}
 
 signal time_passed(_secondsPassed)
 signal saveLoadingFinished
@@ -249,6 +249,7 @@ func _ready():
 	Console.addCommand("clearflag", self, "consoleClearFlag", ["flagID"], "Resets the game flag, be very careful")
 	Console.addCommand("setmoduleflag", self, "consoleSetModuleFlagBool", ["moduleID", "flagID", "trueOrFalse"], "Changes the game flag, be very careful")
 	Console.addCommand("clearmoduleflag", self, "consoleClearModuleFlag", ["moduleID", "flagID"], "Resets the game flag, be very careful")
+	Console.addCommand("become", self, "consoleBecome", ["charID"], "Become another character")
 	#Console.addCommand("ae", self, "consoleAnimationEditor", [], "Animation editor")
 	applyAllWorldEdits()
 	
@@ -358,12 +359,14 @@ func _on_GameUI_on_option_button(method, args):
 	pickOption(method, args)
 	
 func pickOption(method, args):
+	GM.PROFILE.start("pickOption")
 	rollbacker.notifyMadeChoice()
 	
 	IS.resetExtraText()
 	GM.main.clearMessages()
 	GlobalTooltip.resetTooltips()
 	
+	GM.PROFILE.start("react")
 	if(GM.ES.checkButtonInput(method, args)):
 		pass
 		
@@ -371,13 +374,16 @@ func pickOption(method, args):
 		sceneStack.back().react(method, args)
 		#if(sceneStack.back().react(method, args)):
 		#	return
+	GM.PROFILE.finish("react")
 
 	allowExecuteOnce = true # For 'run code once' code block
 	runCurrentScene()
 	
 	rollbacker.pushRollbackState()
+	GM.PROFILE.finish("pickOption")
 	
 func runCurrentScene():
+	GM.PROFILE.start("runCurrentScene")
 	if(sceneStack.size() > 0):
 		sceneStack.back().run()
 		
@@ -390,6 +396,7 @@ func runCurrentScene():
 		GM.ui.translateText()
 	updateStuff()
 	allowExecuteOnce = false
+	GM.PROFILE.finish("runCurrentScene")
 
 func reRun():
 	runCurrentScene()
@@ -457,7 +464,16 @@ func getCurrentFightScene():
 			return scene
 	return null
 
-func supportsSexEngine():
+func isCharIDFighting(_charID:String) -> bool:
+	for scene in sceneStack:
+		if(scene.sceneID == "FightScene"):
+			if(_charID == "pc"): # Might have to be changed if I add npc vs npc fights
+				return true
+			if(scene.enemyID == _charID):
+				return true
+	return false
+
+func supportsSexEngine() -> bool:
 	for scene in sceneStack:
 		if(scene.supportsSexEngine()):
 			return true
@@ -526,7 +542,11 @@ func loadData(data):
 	encounterSettings.loadData(SAVE.loadVar(data, "encounterSettings", {}))
 	GM.GES.loadData(SAVE.loadVar(data, "gameExtenders", {}))
 	loadedDatapacks = SAVE.loadVar(data, "loadedDatapacks", {})
-	datapackCharacters = SAVE.loadVar(data, "datapackCharacters", {})
+	var newDatapackCharacters:Dictionary = SAVE.loadVar(data, "datapackCharacters", {})
+	datapackCharacters.clear()
+	for datapackID in newDatapackCharacters:
+		var fixedDatapackID:String = Util.stripBadCharactersFromID(datapackID)
+		datapackCharacters[fixedDatapackID] = newDatapackCharacters[datapackID]
 	IS.loadData(SAVE.loadVar(data, "interactionSystem", {}))
 	RS.loadData(SAVE.loadVar(data, "relationshipSystem", {}))
 	SAB.loadData(SAVE.loadVar(data, "auctionBidders", {}))
@@ -634,24 +654,58 @@ func getMessages():
 func clearMessages():
 	messages = []
 
-func getTimeCap():
+func getTimeCap() -> int:
 	return 23 * 60 * 60
 
-func isVeryLate():
+func isVeryLate() -> bool:
 	return timeOfDay >= getTimeCap()
 
+const MAX_STOP_PROCESS_CHAR_CHECK = 10
+
+var internal_stopProcShift:int = 0
+
 func stopProcessingUnusedCharacters():
-	for charID in charactersToUpdate.keys():
-		var character = getCharacter(charID)
-		if(character != null):
+	# Process this in batches?
+	
+	GM.PROFILE.start("stopProcessingUnusedCharacters")
+	var charAm:int = charactersToUpdate.size()
+	
+	var batchesAmount:int = int(ceil(float(charAm) / float(MAX_STOP_PROCESS_CHAR_CHECK)))
+	if(internal_stopProcShift >= batchesAmount):
+		internal_stopProcShift = 0
+	
+	#Log.print("internal_stopProcShift: "+str(internal_stopProcShift))
+	for _i in range(MAX_STOP_PROCESS_CHAR_CHECK):
+		var _ii:int = _i * batchesAmount + internal_stopProcShift
+		var _indx:int = charAm - _ii - 1
+		if(_indx < 0 || _indx >= charAm):
+			continue
+		var charID:String = charactersToUpdate[_indx]
+		
+		var character:BaseCharacter = getCharacter(charID)
+		if(character):
 			character.updateNonBattleEffects()
-		if(character == null || !character.shouldBeUpdated()):
+		if(!character || !character.shouldBeUpdated()):
 			print("STOPPED PROCESSING: "+str(charID))
-			charactersToUpdate.erase(charID)
-			if(character != null):
+			charactersToUpdate.remove(_indx)
+			if(character):
 				character.onStoppedProcessing()
-		elif(character != null && !characterIsVisible(charID)):
-			character.updateNonBattleEffects()
+		#elif(character && !characterIsVisible(charID)):
+		#	character.updateNonBattleEffects()
+	
+	internal_stopProcShift += 1
+	GM.PROFILE.finish("stopProcessingUnusedCharacters")
+#	for charID in charactersToUpdate.keys():
+#		var character = getCharacter(charID)
+#		if(character != null):
+#			character.updateNonBattleEffects()
+#		if(character == null || !character.shouldBeUpdated()):
+#			print("STOPPED PROCESSING: "+str(charID))
+#			charactersToUpdate.erase(charID)
+#			if(character != null):
+#				character.onStoppedProcessing()
+#		elif(character != null && !characterIsVisible(charID)):
+#			character.updateNonBattleEffects()
 
 func processTime(_seconds):
 	_seconds = int(round(_seconds))
@@ -661,36 +715,50 @@ func processTime(_seconds):
 	doTimeProcess(_seconds)
 	stopProcessingUnusedCharacters()
 
-func doTimeProcess(_seconds):
-	# This splits long sleeping times into 1 hour chunks
+func doTimeProcess(_seconds:int):
+	if(_seconds < 0):
+		Log.printerr("doTimeProcess() called with a negative amount of seconds! _seconds="+str(_seconds))
+		return
+	
+	GM.PROFILE.start("doTimeProcess")
 	if(!PS):
 		IS.processTime(_seconds)
+		#GM.PROFILE.start("SCI.processTime")
 		SCI.processTime(_seconds)
+		#GM.PROFILE.finish("SCI.processTime")
 	
-	var copySeconds = _seconds
+	GM.PROFILE.start("CHARACTERS.processTime")
+	# This splits long sleeping times into 1 hour chunks
+	var copySeconds := _seconds
 	while(copySeconds > 0):
 		var clippedSeconds = min(60*60, copySeconds)
+		#GM.PROFILE.start("GM.pc.processTime")
 		GM.pc.processTime(clippedSeconds)
+		#GM.PROFILE.finish("GM.pc.processTime")
 		
 		for characterID in charactersToUpdate:
 			var character = getCharacter(characterID)
 			if(character != null):
+				#GM.PROFILE.start(characterID+".processTime")
 				character.processTime(clippedSeconds)
+				#GM.PROFILE.finish(characterID+".processTime")
 		
 		copySeconds -= clippedSeconds
+	GM.PROFILE.finish("CHARACTERS.processTime")
 	
 	GM.ui.onTimePassed(_seconds)
 	
-	var oldHours = int((timeOfDay - _seconds) / 60 / 60)
-	var newHours = int(timeOfDay / 60 / 60)
-	var hoursPassed = newHours - oldHours
+	var oldHours := int((timeOfDay - _seconds) / 60 / 60)
+	var newHours := int(timeOfDay / 60 / 60)
+	var hoursPassed := newHours - oldHours
 
 	if(hoursPassed > 0):
 		hoursPassed(hoursPassed)
 	
 	emit_signal("time_passed", _seconds)
+	GM.PROFILE.finish("doTimeProcess")
 
-func hoursPassed(howMuch):
+func hoursPassed(howMuch:int):
 	GM.pc.hoursPassed(howMuch)
 	
 	for characterID in charactersToUpdate:
@@ -706,11 +774,11 @@ func hoursPassed(howMuch):
 	
 	RS.hoursPassed(howMuch)
 
-func processTimeUntil(newseconds):
+func processTimeUntil(newseconds:int):
 	if(timeOfDay >= newseconds):
 		return
 	
-	var timeDiff = newseconds - timeOfDay
+	var timeDiff := newseconds - timeOfDay
 	
 	timeOfDay = newseconds
 	doTimeProcess(timeDiff)
@@ -1480,11 +1548,38 @@ func getDebugActions():
 			"args": [
 			],
 		},
+		{
+			"id": "startSoftSlavery",
+			"name": "Start soft slavery",
+			"args": [
+			],
+		},
+		{
+			"id": "makefriend",
+			"name": "Make a friend",
+			"args": [
+			],
+		},
 	]
 
 func doDebugAction(id, args = {}):
 	print(id, " ", args)
 	
+	if(id == "makefriend"):
+		for _i in range(10):
+			var randID:String = RNG.pick(dynamicCharacters)
+			if(RS.hasSpecialRelationship(randID)):
+				continue
+			if(RS.getAffection(randID, "pc") >= 0.5):
+				continue
+			var theChar:BaseCharacter = getCharacter(randID)
+			if(!theChar || theChar.hasEnslaveQuest() || theChar.isSlaveToPlayer()):
+				continue
+			RS.addAffection(randID, "pc", 2.0)
+			return
+			#
+			
+		return
 	if(id == "addBodywritings"):
 		var theAm:int = args["amount"]
 		for _i in range(theAm):
@@ -1640,7 +1735,10 @@ func doDebugAction(id, args = {}):
 		
 	if(id == "spyRandom"):
 		runScene("SpyOnPawnScene")
-		
+	
+	if(id == "startSoftSlavery"):
+		runScene("SoftSlaveryQuickStartScene")
+	
 	if(id == "duplicateAndEnslave"):
 		var theNpcID = args["npcID"]
 		#if(args["cnpcID"] != ""):
@@ -1728,10 +1826,42 @@ func consoleSetModuleFlagBool(moduleID, flagID, valuestr):
 func consoleClearFlag(flagID):
 	clearFlag(flagID)
 	Console.printLine("Flag cleared")
-	
+
 func consoleClearModuleFlag(moduleID, flagID):
 	clearModuleFlag(moduleID, flagID)
 	Console.printLine("Flag cleared")
+
+func consoleBecome(charID):
+	if charID == "pc":
+		return
+	var character = getCharacter(charID)
+	if character == null:
+		Log.printerr("ERROR: character with the id "+charID+" wasn't found")
+		return
+	if character == GM.pc:
+		return
+	# Hyper specialized code for the player
+	GM.pc.getTFHolder().undoAllTransformations()
+	GM.pc.setGender(character.getGender())
+	GM.pc.setPronounGender(character.getPronounGender())
+	GM.pc.setSpecies(character.getSpecies())
+	GM.pc.pickedSkin = character.pickedSkin
+	GM.pc.pickedSkinRColor = character.pickedSkinRColor
+	GM.pc.pickedSkinGColor = character.pickedSkinGColor
+	GM.pc.pickedSkinBColor = character.pickedSkinBColor
+	GM.pc.setThickness(character.getThickness())
+	GM.pc.setFemininity(character.getFemininity())
+	for slot in BodypartSlot.getAll():
+		if character.hasBodypart(slot):
+			var charBodypart = character.getBodypart(slot)
+			var playerBodypart = GM.pc.getBodypart(slot)
+			if playerBodypart == null or charBodypart.id != playerBodypart.id:
+				playerBodypart = GlobalRegistry.createBodypart(charBodypart.id)
+				GM.pc.giveBodypart(playerBodypart)
+			playerBodypart.loadData(charBodypart.saveData())
+		else:
+			GM.pc.removeBodypart(slot)
+	GM.pc.updateAppearance()
 
 func _on_GameUI_on_rollback_button():
 	rollbacker.rollback()
@@ -1754,6 +1884,14 @@ func isCharacterInAnySexEngine(_charID:String) -> bool:
 	
 	return false
 
+func isCharacterInAnyNPCEvent(_charID:String) -> bool:
+	for scene in sceneStack:
+		if(scene.sceneID == "NpcOwnerEventRunnerScene"):
+			if(scene.runner && scene.runner.isCharIDInvolvedAllEvents(_charID)):
+				return true
+	
+	return false
+
 func updateCharacterUntilNow(charID):
 	var character = getCharacter(charID)
 	if(character != null):
@@ -1762,7 +1900,7 @@ func updateCharacterUntilNow(charID):
 
 func startUpdatingCharacter(charID):
 	if(!charactersToUpdate.has(charID)):
-		charactersToUpdate[charID] = true
+		charactersToUpdate.append(charID)
 		print("BEGAN PROCESSING "+str(charID))
 		var character = getCharacter(charID)
 		if(character != null):
@@ -2044,3 +2182,14 @@ func stopPlayerSlavery():
 	PS.onSlaveryEnd()
 	PSH.givePlayerItemsBack()
 	PS = null
+
+func checkPCOnALeash() -> bool: # Maybe I could expand this onto other pawn reactions
+	var theCurrentScene = getCurrentScene()
+	if(theCurrentScene):
+		if(theCurrentScene.sceneID == "ParadedOnALeashScene"):
+			return true
+		if(theCurrentScene.sceneID == "NpcOwnerEventRunnerScene"):
+			if(theCurrentScene.runner.isPlayerOnALeash()):
+				return true
+	return false
+	

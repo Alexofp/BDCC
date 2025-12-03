@@ -461,7 +461,7 @@ func _run():
 
 		saynn("Her pussy grips around the strapon so tight that you can't even move it, Rahi moans passionately and squirts girlcum all over the ground until she is completely spent.")
 
-		saynn("After you've done fucking Rahi's pussy, you pull out and collapse nearby, panting slightly. Your pet is quite exhausted too but the puppy restraints allow her to just.. stand. Her stretched pussy is still pulsing weakly.")
+		saynn("After you're done fucking Rahi's pussy, you pull out and collapse nearby, panting slightly. Your pet is quite exhausted too but the puppy restraints allow her to just.. stand. Her stretched pussy is still pulsing weakly.")
 
 		saynn("[say=pc]You make for such a good breeding bitch.[/say]")
 
@@ -617,7 +617,10 @@ func _run():
 		addButton("Continue", "See what happens next", "returntocell")
 	if(state == "shower1"):
 		playAnimation(StageScene.PuppySexOral, "tease", {npc="rahi", npcBodyState={naked=true}, bodyState={naked=true}})
-		saynn("You walk into the dressing room and prepare, taking off any clothes until you are naked. Luckily, Rahi is already naked, so you just take her leash and walk into the space where all the showerheads are. Your pet carefully peeks her muzzle from behind the corner first, seeing if anyone is there. But luckily, everyone seems to be busy.")
+		if(GM.pc.isFullyNaked()):
+			saynn("You walk into the dressing room and look around. Both, Rahi and you, are already naked, so you just take her leash and walk into the space where all the showerheads are. Your pet carefully peeks her muzzle from behind the corner first, seeing if anyone is there. But luckily, everyone seems to be busy.")
+		else:
+			saynn("You walk into the dressing room and prepare, taking off any clothes until you are naked. Luckily, Rahi is already naked, so you just take her leash and walk into the space where all the showerheads are. Your pet carefully peeks her muzzle from behind the corner first, seeing if anyone is there. But luckily, everyone seems to be busy.")
 
 		saynn("You bring her under one of the showers and show Rahi a little bar of soap that you have saved just for this occasion. She barks softly at you and braces for water, shivering slightly.")
 

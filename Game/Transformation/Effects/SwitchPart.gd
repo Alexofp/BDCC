@@ -23,7 +23,13 @@ func applyEffect(_data:Dictionary) -> Dictionary:
 		# Adding missing fields
 		var partRef:Bodypart = GlobalRegistry.getBodypartRef(newPartID)
 		if(partRef != null):
-			assert(partRef.getSlot() == getBodypartSlot(), "WRONG BODYPART SLOT!")
+			if(partRef.getSlot() != getBodypartSlot()):
+				var theTF = getTF()
+				var theErrorText:String = "SOMETHING WENT WRONG WITH SwitchPart EFFECT! partRef.getSlot()="+str(partRef.getSlot())+", getBodypartSlot()="+str(getBodypartSlot())+" Transformation id = "+(theTF.id if theTF else "NULL")+" data="+str(_data)
+				Log.error(theErrorText)
+				return {
+					bigError = theErrorText,
+				}
 			var tfData:Dictionary = partRef.saveOriginalTFData()
 			for tfDataField in tfData:
 				if(!_data.has(tfDataField)):
@@ -68,6 +74,10 @@ func applyEffect(_data:Dictionary) -> Dictionary:
 	}
 
 func generateTransformText(_result:Dictionary):
+	if(_result.has("bigError")):
+		addText(str(_result["bigError"]))
+		return
+	
 	var oldPartID = (_result["oldPartID"] if _result.has("oldPartID") else null)
 	var hadPartBefore:bool = (oldPartID != null && oldPartID != "")
 	var hasPartNow:bool = (newPartID != "")
@@ -114,6 +124,11 @@ func generateTransformText(_result:Dictionary):
 			addText("An unusual sensation courses through {npc.yourHis} body as {npc.yourHis} "+slotName+" begin"+("s" if shouldHaveS else "")+" to shift and change! The familiar contours start to dissolve and reshape, morphing into something different. Gradually, the new "+slotName+" emerge"+("s" if shouldHaveS else "")+", taking on a more defined form. The process is quite painful and uncomfortable, but eventually "+("it settles" if shouldHaveS else "they settle")+" into "+("its" if shouldHaveS else "their")+" final appearance. {npc.YouHe} now {npc.youVerb('have', 'has')} "+bodypartRefNow.getAVulgarName()+".")
 	#else:
 	#	addText("This shouldn't happen")
+
+func isEffectBadShouldRemove() -> bool:
+	if(!newPartID.empty() && !GlobalRegistry.bodyparts.has(newPartID)):
+		return true
+	return false
 
 func saveData() -> Dictionary:
 	var data:Dictionary = .saveData()

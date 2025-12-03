@@ -8,6 +8,9 @@ func getSlaveTypeWeights(_isSlaveLevelup):
 		SlaveType.All : 0.4,
 	}
 
+func getNpcOwnerWeight(_npcOwner) -> float:
+	return 0.4
+
 func isPossibleFor(_npc, _isSlaveLevelup):
 	if(_npc.hasSmallBreasts()):
 		return false
@@ -29,8 +32,19 @@ func onSexEvent(_npc, _event:SexEvent):
 func getTaskString():
 	return "Grope breasts: "+getProgressString("times")
 
+func getTaskStringSlutLock():
+	return "Get tits groped: "+getProgressString("times")
+
 func getTaskHint(_isSlaveLevelup):
 	return "Grope their breasts for this long"
+
+func getNpcOwnerDialogueLines() -> Array:
+	return [
+		"Your tits need some attention. Go get them groped.",
+		"Go get your tits groped by strangers.",
+		"I want you to have lots of different hands on those tits before I find you again.",
+		"Your tits look lonely. Get them groped.",
+	]
 
 func getSexGoalWeightModifier(_sexGoalID:String) -> float:
 	if(_sexGoalID == SexGoal.GropeBreasts):

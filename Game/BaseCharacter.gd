@@ -147,7 +147,7 @@ func getSmallDescriptionWithRelationship() -> String:
 	if(GM.main && GM.main.RS):
 		var specialText:Array = GM.main.RS.getSpecialTextAndColor(getID())
 		if(specialText.size() >= 2):
-			result += "\n([color=#"+specialText[1].to_html(false)+"]"+specialText[0]+"[/color])"
+			result += "\n([color=#"+specialText[1].to_html(false)+"]"+specialText[0]+"[/color])"+(specialText[2] if specialText.size() > 2 else "")
 	return result
 	
 func getBasePainThreshold() -> int:
@@ -507,7 +507,51 @@ func formatSay(text):
 	
 	return "[color="+color+"]\""+text+"\"[/color]"
 
-func heShe():
+func theyre() -> String:
+	var gender = getPronounGender()
+	
+	if(gender == Gender.Male):
+		return "he's"
+	if(gender == Gender.Female):
+		return "she's"
+	if(gender == Gender.Androgynous):
+		return "they're"
+	if(gender == Gender.Other):
+		return "it's"
+	return "theyre():BAD_GENDER"
+
+func theyve() -> String:
+	var gender = getPronounGender()
+	
+	if(gender == Gender.Male):
+		return "he's"
+	if(gender == Gender.Female):
+		return "she's"
+	if(gender == Gender.Androgynous):
+		return "they've"
+	if(gender == Gender.Other):
+		return "it's"
+	return "theyve():BAD_GENDER"
+
+func doesntDont() -> String:
+	var gender = getPronounGender()
+	
+	if(gender in [Gender.Male,Gender.Female,Gender.Other]):
+		return "doesn't"
+	if(gender == Gender.Androgynous):
+		return "don't"
+	return "doesntDont():BAD_GENDER"
+
+func doesDo() -> String:
+	var gender = getPronounGender()
+	
+	if(gender in [Gender.Male,Gender.Female,Gender.Other]):
+		return "does"
+	if(gender == Gender.Androgynous):
+		return "do"
+	return "doesDo():BAD_GENDER"
+
+func heShe() -> String:
 	var gender = getPronounGender()
 	
 	if(gender == Gender.Male):
@@ -518,8 +562,9 @@ func heShe():
 		return "they"
 	if(gender == Gender.Other):
 		return "it"
+	return "heShe():BAD_GENDER"
 		
-func hisHer():
+func hisHer() -> String:
 	var gender = getPronounGender()
 	
 	if(gender == Gender.Male):
@@ -530,8 +575,22 @@ func hisHer():
 		return "their"
 	if(gender == Gender.Other):
 		return "its"
+	return "hisHer():BAD_GENDER"
 		
-func himHer():
+func hisHers() -> String:
+	var gender = getPronounGender()
+	
+	if(gender == Gender.Male):
+		return "his"
+	if(gender == Gender.Female):
+		return "hers"
+	if(gender == Gender.Androgynous):
+		return "theirs"
+	if(gender == Gender.Other):
+		return "its"
+	return "hisHers():BAD_GENDER"
+		
+func himHer() -> String:
 	var gender = getPronounGender()
 	
 	if(gender == Gender.Male):
@@ -542,32 +601,36 @@ func himHer():
 		return "them"
 	if(gender == Gender.Other):
 		return "it"
+	return "himHer():BAD_GENDER"
 
-func isAre():
+func wasWere() -> String:
 	var gender = getPronounGender()
 	
-	if(gender == Gender.Male):
-		return "is"
-	if(gender == Gender.Female):
+	if(gender in [Gender.Male,Gender.Female,Gender.Other]):
+		return "was"
+	if(gender == Gender.Androgynous):
+		return "were"
+	return "wasWere():BAD_GENDER"
+
+func isAre() -> String:
+	var gender = getPronounGender()
+	
+	if(gender in [Gender.Male,Gender.Female,Gender.Other]):
 		return "is"
 	if(gender == Gender.Androgynous):
 		return "are"
-	if(gender == Gender.Other):
-		return "is"
+	return "himHer():BAD_GENDER"
 
-func hasHave():
+func hasHave() -> String:
 	var gender = getPronounGender()
 	
-	if(gender == Gender.Male):
-		return "has"
-	if(gender == Gender.Female):
+	if(gender in [Gender.Male,Gender.Female,Gender.Other]):
 		return "has"
 	if(gender == Gender.Androgynous):
 		return "have"
-	if(gender == Gender.Other):
-		return "has"
+	return "hasHave():BAD_GENDER"
 
-func himselfHerself():
+func himselfHerself() -> String:
 	var gender = getPronounGender()
 	
 	if(gender == Gender.Male):
@@ -578,21 +641,19 @@ func himselfHerself():
 		return "themself"
 	if(gender == Gender.Other):
 		return "itself"
+	return "himselfHerself():BAD_GENDER"
 
-func verbS(verbWithNoS, verbWithS = null):
+func verbS(verbWithNoS:String, verbWithS:String = "") -> String:
 	var gender = getPronounGender()
 	
-	if(verbWithS == null):
+	if(verbWithS == ""):
 		verbWithS = verbWithNoS + "s"
 	
-	if(gender == Gender.Male):
-		return verbWithS
-	if(gender == Gender.Female):
+	if(gender in [Gender.Male,Gender.Female,Gender.Other]):
 		return verbWithS
 	if(gender == Gender.Androgynous):
 		return verbWithNoS
-	if(gender == Gender.Other):
-		return verbWithS
+	return "verbS():BAD_GENDER"
 
 func getPenisSizeString() -> String:
 	if(!hasBodypart(BodypartSlot.Penis) && !isWearingStrapon()):
@@ -1045,7 +1106,7 @@ func cummedInAnusByAdvanced(characterID, advancedData:Dictionary={}, sourceType 
 func cummedInMouthByAdvanced(characterID, advancedData:Dictionary={}, sourceType = null, amountToTransfer = 1.0):
 	return cummedInBodypartByAdvanced(BodypartSlot.Head, characterID, advancedData, sourceType, amountToTransfer)
 
-func rubsVaginasWith(characterID, chanceToStealCum = 100, showMessages = true):
+func rubsVaginasWith(characterID, chanceToStealCum = 100, showMessages:bool = true):
 	if(!RNG.chance(chanceToStealCum) || !OPTIONS.isContentEnabled(ContentType.CumStealing)):
 		return
 	
@@ -1095,7 +1156,7 @@ func getOrificePreventedFromRecovering(orificeType):
 func getOrificeBlocked(orificeType):
 	return buffsHolder.getOrificeBlocked(orificeType)
 
-func gotOrificeStretchedWith(bodypartSlot, insertionSize, showMessages = true, stretchMult = 1.0):
+func gotOrificeStretchedWith(bodypartSlot, insertionSize, showMessages:bool = true, stretchMult = 1.0):
 	if(!hasBodypart(bodypartSlot)):
 		return
 	var thebodypart = getBodypart(bodypartSlot)
@@ -1109,7 +1170,7 @@ func gotOrificeStretchedWith(bodypartSlot, insertionSize, showMessages = true, s
 	if(newLooseness > oldLooseness && showMessages):
 		emit_signal("orificeBecomeMoreLoose", thebodypart.getOrificeName(), newLooseness, oldLooseness)
 
-func gotOrificeStretchedBy(bodypartSlot, characterID, showMessages = true, stretchMult = 1.0):
+func gotOrificeStretchedBy(bodypartSlot, characterID, showMessages:bool = true, stretchMult = 1.0):
 	if(!hasBodypart(bodypartSlot)):
 		return
 	
@@ -1153,7 +1214,7 @@ func getPenetrateChance(bodypartSlot, insertionSize):
 	
 	return max(500.0 / (5.0 + diff), 30.0)
 
-func getPenetrateChanceBy(bodypartSlot, characterID, isKnotting = false):
+func getPenetrateChanceBy(bodypartSlot, characterID, isKnotting:bool = false):
 	var ch = GlobalRegistry.getCharacter(characterID)
 	assert(ch != null)
 	if(isKnotting && hasPerk(Perk.CumUniqueBiology)):
@@ -1163,7 +1224,7 @@ func getPenetrateChanceBy(bodypartSlot, characterID, isKnotting = false):
 func getKnottingChanceBy(bodypartSlot, characterID):
 	return getPenetrateChanceBy(bodypartSlot, characterID, true)
 
-func gotFuckedBy(bodypartSlot, characterID, showMessages = true, fireSexEvent = true):
+func gotFuckedBy(bodypartSlot, characterID, showMessages:bool = true, fireSexEvent:bool = true):
 	if(!hasBodypart(bodypartSlot)):
 		return
 	
@@ -1181,16 +1242,16 @@ func gotFuckedBy(bodypartSlot, characterID, showMessages = true, fireSexEvent = 
 		ch.sendSexEvent(event)
 		sendSexEvent(event)
 
-func gotVaginaFuckedBy(characterID, showMessages = true):
+func gotVaginaFuckedBy(characterID, showMessages:bool = true):
 	return gotFuckedBy(BodypartSlot.Vagina, characterID, showMessages)
 
-func gotAnusFuckedBy(characterID, showMessages = true):
+func gotAnusFuckedBy(characterID, showMessages:bool = true):
 	return gotFuckedBy(BodypartSlot.Anus, characterID, showMessages)
 
-func gotThroatFuckedBy(characterID, showMessages = true):
+func gotThroatFuckedBy(characterID, showMessages:bool = true):
 	return gotFuckedBy(BodypartSlot.Head, characterID, showMessages)
 
-func getExposure():
+func getExposure() -> float:
 	return buffsHolder.getExposure()
 
 func makeNipplesSore():
@@ -1208,11 +1269,11 @@ func removeNippleSoreness():
 func getBaseFertility() -> float:
 	return 1.0
 
-func getFertility():
+func getFertility() -> float:
 	if(hasPerk(Perk.StartInfertile)):
 		return 0.0
 	
-	var value = getBaseFertility()
+	var value:float = getBaseFertility()
 	
 	value += buffsHolder.getFertility()
 	
@@ -1223,11 +1284,11 @@ func getFertility():
 func getBaseVirility() -> float:
 	return 1.0
 
-func getVirility():
+func getVirility() -> float:
 	if(hasPerk(Perk.StartMaleInfertility)):
 		return 0.0
 	
-	var value = getBaseFertility()
+	var value:float = getBaseFertility()
 	
 	value += buffsHolder.getVirility()
 	
@@ -1238,20 +1299,20 @@ func getVirility():
 func getBaseEggsMod() -> float:
 	return 1.0
 
-func getEggsBonusMod():
-	var value = getBaseEggsMod()
+func getEggsBonusMod() -> float:
+	var value:float = getBaseEggsMod()
 	
 	value += buffsHolder.getEggsBonusMod()
 	
 	return value
 	
-func getMinEggsAmount():
-	var value = buffsHolder.getMinEggsAmount()
+func getMinEggsAmount() -> int:
+	var value:int = buffsHolder.getMinEggsAmount()
 	
-	return max(value, 1) 
+	return Util.maxi(value, 1) 
 
-func getCrossSpeciesCompatibility():
-	var value = 0.0
+func getCrossSpeciesCompatibility() -> float:
+	var value:float = 0.0
 	
 	value += buffsHolder.getCrossSpeciesCompatibility()
 	
@@ -1267,7 +1328,7 @@ func onFluidObsorb(orificeType, cumType, howMuch, fluidDNA):
 func getMenstrualCycle():
 	return menstrualCycle
 
-func isPregnant():
+func isPregnant() -> bool:
 	if(menstrualCycle != null):
 		return menstrualCycle.isPregnant()
 	return false
@@ -1277,27 +1338,27 @@ func isPregnantFrom(_charID:String) -> bool:
 		return menstrualCycle.isPregnantFrom(_charID)
 	return false
 
-func isVisiblyPregnant():
+func isVisiblyPregnant() -> bool:
 	if(menstrualCycle != null):
 		return menstrualCycle.isVisiblyPregnant()
 	return false
 
-func isVisiblyPregnantFromPlayer():
+func isVisiblyPregnantFromPlayer() -> bool:
 	if(menstrualCycle != null):
 		return menstrualCycle.isVisiblyPregnantFromPlayer()
 	return false
 
-func isHeavilyPregnant():
+func isHeavilyPregnant() -> bool:
 	if(menstrualCycle != null):
 		return menstrualCycle.getPregnancyProgress() > 0.66
 	return false
 
-func isReadyToGiveBirth():
+func isReadyToGiveBirth() -> bool:
 	if(menstrualCycle != null):
 		return menstrualCycle.isReadyToGiveBirth()
 	return false
 
-func giveBirth():
+func giveBirth() -> Array:
 	if(menstrualCycle == null):
 		return []
 	
@@ -1308,10 +1369,10 @@ func giveBirth():
 	
 	return bornChildren
 
-func giveBirthWithNotification():
+func giveBirthWithNotification() -> Array:
 	return giveBirth()
 
-func forceOvulate():
+func forceOvulate() -> bool:
 	if(menstrualCycle != null):
 		return menstrualCycle.forceOvulate()
 	return false
@@ -1320,35 +1381,35 @@ func forceIntoHeat():
 	if(menstrualCycle != null):
 		menstrualCycle.forceIntoHeat()
 
-func forceImpregnateBy(otherCharacterID):
+func forceImpregnateBy(otherCharacterID) -> bool:
 	if(menstrualCycle != null):
 		return menstrualCycle.forceImpregnateBy(otherCharacterID)
 	return false
 
-func getPregnancyProgress():
+func getPregnancyProgress() -> float:
 	if(menstrualCycle != null):
 		return menstrualCycle.getPregnancyProgress()
 	return 0.0
 
-func getPregnancyLitterSize():
+func getPregnancyLitterSize() -> int:
 	if(menstrualCycle != null):
 		return menstrualCycle.getLitterSize()
 	return 0
 
-func isInHeat():
+func isInHeat() -> bool:
 	if(menstrualCycle != null):
 		return menstrualCycle.isInHeat()
 	return false
 
 func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
-	var amountPerOrifice = {}
+	var amountPerOrifice:Dictionary = {}
 	for egg in _impregnatedEggCells:
 		if(!amountPerOrifice.has(egg.getOrifice())):
 			amountPerOrifice[egg.getOrifice()] = 0
 		amountPerOrifice[egg.getOrifice()] += 1
 	
 	# This is meh
-	var mapping = {
+	var mapping:Dictionary = {
 		OrificeType.Vagina: BodypartSlot.Vagina,
 		OrificeType.Anus: BodypartSlot.Anus,
 		OrificeType.Throat: BodypartSlot.Head,
@@ -1358,7 +1419,7 @@ func onGivingBirth(_impregnatedEggCells: Array, _newkids: Array):
 		if(!amountPerOrifice.has(orificeType)):
 			continue
 		
-		var amountToStretch = sqrt(amountPerOrifice[orificeType]) * 30.0
+		var amountToStretch:float = sqrt(amountPerOrifice[orificeType]) * 30.0
 		
 		gotOrificeStretchedWith(mapping[orificeType], amountToStretch)
 
@@ -1951,6 +2012,14 @@ func hasBuff(buffID):
 	return buffsHolder.hasBuff(buffID)
 
 func canStartSex() -> bool:
+	if(hasBoundArms()):
+		return false
+	if(hasBlockedHands()):
+		return false
+	#if(hasBoundLegs()): # Means there are chains around ankles but its fine
+	#	return false
+	#if(isOralBlocked()):
+	#	return false
 	return true
 
 func invCanEquipSlot(slot):
@@ -2106,12 +2175,6 @@ func afterSexEnded(sexInfo):
 		if(isPlayer()):
 			addStamina(buffsHolder.getCustom(BuffAttribute.StaminaRecoverAfterSex))
 			addSkillExperience(Skill.SexSlave, 30)
-	if(!isPlayer()):
-		addLust(-getLust())
-		addPain(-getPain())
-		addStamina(getMaxStamina())
-	consciousness = 1.0
-	arousal = 0.0
 		
 	for effectID in statusEffects.keys():
 		var effect = statusEffects[effectID]
@@ -2134,6 +2197,14 @@ func afterSexEnded(sexInfo):
 		var resultText = sexInfo.affectPersonality(personality, fetishHolder)
 		if(resultText != null && resultText != ""):
 			GM.main.addMessage(resultText)
+	
+	if(!isPlayer()):
+		addLust(-getLust())
+		addPain(-getPain())
+		addStamina(getMaxStamina())
+
+	consciousness = 1.0
+	arousal = 0.0
 		
 	updateAppearance()
 
@@ -2319,8 +2390,7 @@ func addTimedBuffs(buffs: Array, seconds:int):
 		addTimedBuff(newbuff, seconds)
 
 func addTimedBuffTurns(newbuff:BuffBase, turns:int):
-	#TODO: need a better way to check if a character is in a fight
-	if(!GM.main.supportsBattleTurns()):
+	if(!isInAFight()):
 		return
 	
 	for oldbuffEntry in timedBuffsTurns:
@@ -2333,12 +2403,14 @@ func addTimedBuffTurns(newbuff:BuffBase, turns:int):
 	timedBuffsTurns.append([newbuff, turns])
 
 func addTimedBuffsTurns(buffs: Array, turns:int):
-	#TODO: need a better way to check if a character is in a fight
-	if(!GM.main.supportsBattleTurns()):
+	if(!isInAFight()):
 		return
 	
 	for newbuff in buffs:
 		addTimedBuffTurns(newbuff, turns)
+
+func isInAFight() -> bool:
+	return GM.main.isCharIDFighting(getID())
 
 func updateNonBattleEffects():
 	buffsHolder.calculateBuffs()
@@ -2728,14 +2800,17 @@ func getSkinData():
 func applyRandomColors():
 	var species = getSpecies()
 	if(species.size() > 0):
-		var skinColors = GlobalRegistry.getSpecies(RNG.pick(species)).generateSkinColors()
+		var randomSpecies = GlobalRegistry.getSpecies(RNG.pick(species))
+		if(!randomSpecies):
+			return
+		var skinColors = randomSpecies.generateSkinColors()
 		pickedSkinRColor = skinColors[0]
 		pickedSkinGColor = skinColors[1]
 		pickedSkinBColor = skinColors[2]
 
 func applyRandomSkin():
-	var species = getSpecies()
-	var possibleSkins = []
+	var species:Array = getSpecies()
+	var possibleSkins:Array = []
 	for speciesOne in species:
 		var theSpecies = GlobalRegistry.getSpecies(speciesOne)
 		if(!theSpecies):
@@ -2810,6 +2885,15 @@ func applyBodypartsSkinData(theSkinData):
 			if(bodypartSkinData.has("b")):
 				bodypart.pickedBColor = bodypartSkinData["b"]
 
+func sendInteractionEvent(_eventID:String, _args:Dictionary):
+	if(isSlaveToPlayer()):
+		getNpcSlavery().onInteractionEvent(_eventID, _args)
+	if(isPlayer()):
+		for ownerID in GM.main.RS.special:
+			var theSpecialRelationship = GM.main.RS.special[ownerID]
+			if(theSpecialRelationship.id == "SoftSlavery" && theSpecialRelationship.npcOwner):
+				theSpecialRelationship.npcOwner.onInteractionEvent(_eventID, _args)
+
 func sendSexEvent(event):
 	onSexEvent(event)
 
@@ -2844,6 +2928,11 @@ func onFightStart(_contex = {}):
 			continue
 		var effect = statusEffects[effectID]
 		effect.onFightStart(_contex)
+	
+	for effectRef in GlobalRegistry.getStatusEffectsCheckedOnFightStart():
+		var theRes:Array = effectRef.checkOnFightStart(self, _contex)
+		if(theRes.size() > 0 && theRes[0]):
+			addEffect(effectRef.id, theRes[1] if theRes.size() > 1 else [])
 
 func processBattleTurnContex(_contex = {}):
 	processBattleTurn() # Legacy
@@ -2960,6 +3049,11 @@ func getEnslaveQuest() -> NpcEnslavementQuest:
 	return null
 
 func isSlaveToPlayer():
+	return false
+
+func isSlaveTo(_charID:String) -> bool:
+	if(_charID == "pc"):
+		return isSlaveToPlayer()
 	return false
 
 func getNpcSlavery() -> NpcSlave:
@@ -3460,10 +3554,13 @@ func applyTFBodypart(bodypartSlot, data:Dictionary):
 	if(!hasBodypart(bodypartSlot)):
 		if(!data.has("bodypartID") || data["bodypartID"] == null || data["bodypartID"] == ""):
 			return
-		giveBodypart(GlobalRegistry.createBodypart(data["bodypartID"]), false)
-		getBodypart(bodypartSlot).generateRandomColors(self)
-		getBodypart(bodypartSlot).generateRandomSkinIfCan(self)
-		getBodypart(bodypartSlot).applyTFData(data)
+		var newBodypart = GlobalRegistry.createBodypart(data["bodypartID"])
+		if(!newBodypart):
+			return
+		giveBodypart(newBodypart, false)
+		newBodypart.generateRandomColors(self)
+		newBodypart.generateRandomSkinIfCan(self)
+		newBodypart.applyTFData(data)
 		return
 	
 	if(!data.has("bodypartID")):
@@ -3478,9 +3575,12 @@ func applyTFBodypart(bodypartSlot, data:Dictionary):
 		return
 	
 	var savedData = currentPart.saveDataForTF()
-	giveBodypart(GlobalRegistry.createBodypart(data["bodypartID"]), false)
-	getBodypart(bodypartSlot).loadDataForTF(savedData)
-	getBodypart(bodypartSlot).applyTFData(data)
+	var newBodypart = GlobalRegistry.createBodypart(data["bodypartID"])
+	if(!newBodypart):
+		return
+	giveBodypart(newBodypart, false)
+	newBodypart.loadDataForTF(savedData)
+	newBodypart.applyTFData(data)
 
 func saveOriginalTFData() -> Dictionary:
 	return {}
@@ -3672,19 +3772,37 @@ func cancelPregnancy():
 		return
 	menstrualCycle.cancelPregnancy()
 
-func doSwallow(_fluidID:String, _amount:float) -> Dictionary:
+func doSwallow(_fluidID:String, _amount:float, _swallowEvent:bool = true) -> Dictionary:
 	var fluidObject:FluidBase = GlobalRegistry.getFluid(_fluidID)
 	if(fluidObject == null):
 		return {text=""}
 
 	var resultMessage = fluidObject.onSwallow(self, _amount)
 	
-	var event := SexEventHelper.create(SexEvent.SwallowFluid, getID(), getID(), {
-		loadSize = _amount,
-		fluidID = _fluidID,
-	})
-	sendSexEvent(event)
+	if(_swallowEvent):
+		var event := SexEventHelper.create(SexEvent.SwallowFluid, getID(), getID(), {
+			loadSize = _amount,
+			fluidID = _fluidID,
+		})
+		sendSexEvent(event)
 	
 	if(resultMessage != null && resultMessage != ""):
 		return {text=resultMessage}
 	return {text=""}
+
+func calculatePowerScore(ignoreCurrentState:bool = false) -> float:
+	var finalScore:float = 0.0
+	
+	finalScore += painThreshold() * 0.01
+	finalScore += lustThreshold() * 0.01
+	finalScore += getMaxStamina() * 0.005
+	
+	finalScore += getLevel() * 0.1
+	finalScore += _getAttacks().size() * 0.1
+	
+	if(!ignoreCurrentState):
+		finalScore *= (1.0 - getPainLevel()*0.9)
+		finalScore *= (1.0 - getLustLevel()*0.8)
+		finalScore *= (1.0 - getStaminaLevel()*0.5)
+	
+	return finalScore

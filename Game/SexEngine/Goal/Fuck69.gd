@@ -69,8 +69,38 @@ func doFastSex(_sexEngine, _domInfo, _subInfo, _data):
 		sendSexEvent(_sexEngine, SexEvent.BodyWritingAdded, _domInfo, _subInfo, {zone=zone,writingID=writingID})
 	
 	if(RNG.chance(20) || sub.hasTallymarks() || (_sexEngine.getSexTypeID() in [SexType.StocksSex, SexType.SlutwallSex])):
-		sub.addTallymarkFace()
+		if(!sub.isPlayer() || !GM.main.getEncounterSettings().isGoalDisabledForSubPC(SexGoal.AddTallymarks)):
+			sub.addTallymarkFace()
 
 
 func getGoalDefaultWeight():
 	return 1.0
+
+func canBegFor() -> bool:
+	return true
+
+func getBegName() -> String:
+	return "Offer 69"
+
+func getBegCategory() -> Array:
+	return BegCategorySex
+
+func getBegDesc() -> String:
+	return "Beg the dom to do 69 with you!"
+
+func getBegMessage(_sexEngine, _domInfo, _subInfo) -> String:
+	return "{sub.You} {sub.youVerb('beg')} to do sixty-nine with {dom.you}."
+
+func getBegDialogue(_sexEngine, _domInfo, _subInfo) -> String:
+	return RNG.pick([
+		"Please, let me taste you while you taste me.",
+		"Let me worship you, please.",
+		"I'll be so good for you, just let me get my mouth on you.",
+		"Please, I want us to lose ourselves in each other.",
+		"Let me show you how much I want you, please.",
+	])
+
+func getBegDomFetishes() -> Dictionary:
+	return {
+		Fetish.OralSexGiving: 1.0,
+	}

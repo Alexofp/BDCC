@@ -29,11 +29,11 @@ func _run():
 
 		saynn("Tavi shows up behind and stops in front of you, the bright smile is still shining on her face as she is eyeing out her next prey. She closes her arms too to mimic the guard’s stance.")
 
-		saynn("[say=tavi]Two versus one, I really don’t like your chances. We just came to chat with our great captain, how about you just let us through. Save your health~. What’s left of it anyways.[/say]")
+		saynn("[say=tavi]Two versus one, I really don’t like your chances. We just came to chat with our great captain, how about you just let us through? Save your health~. What’s left of it anyways.[/say]")
 
 		saynn("The guard keeps staring at Tavi with an emotionless expression, his prosthetic eyes scan her uniform.")
 
-		saynn("[say=skar]Inmate number 12429. A.k.a Tavi. Completed countless assasination contracts, has many records of hacking terminals, exploiting zero-day AlphaOS vulnerabilities in order to steal data and then using it for blackmailing and/or illegally obtaining wealth. Has unproven ties to the full destruction of a research space station “Exodus”.[/say]")
+		saynn("[say=skar]Inmate number 12429. A.k.a Tavi. Completed countless assasination contracts, has many records of hacking terminals, exploiting zero-day AlphaOS vulnerabilities in order to steal data and then using it for blackmailing and/or illegally obtaining wealth. Has unproven ties to the full destruction of the research space station “Exodus”.[/say]")
 
 		saynn("Tavi growls at that sudden description, she gives you a quick look and turns her head back to the guy. She walks up very close to the guard and grabs onto his chest armor piece.")
 
@@ -43,11 +43,11 @@ func _run():
 
 		saynn("Tavi growls at his cheeky altitude, she frowns and seems to be ready to sink her claws into his flesh. But then she suddenly changes her expression and takes a step back, her growling is now replaced with giggling. The smile shines brightly on her face.")
 
-		saynn("[say=tavi]I’m just trying to make this world a better place, why can’t I have some fun while doing so~.[/say]")
+		saynn("[say=tavi]I’m just trying to make this world a better place, why can’t I have some fun while doing so~?[/say]")
 
 		saynn("[say=skar]By killing people?[/say]")
 
-		saynn("[say=tavi]My paws are totally clean, officer. How can you blame me if all these people suddenly decided to kill themselves or each other. Ah, this digital century is truly wonderful.[/say]")
+		saynn("[say=tavi]My paws are totally clean, officer. How can you blame me if all these people suddenly decided to kill themselves or each other? Ah, this digital age is truly wonderful.[/say]")
 
 		saynn("Tavi raises her paws and starts slowly circling around the guy, checking him out from all directions.")
 
@@ -55,7 +55,7 @@ func _run():
 
 		saynn("You hear a quiet growling coming from the guard, he grabs his stun baton and squeezes the handle. Tavi stops in front of him.")
 
-		saynn("[say=tavi]We’re similar. But we’re also the exact opposites. I fight my own wars, you fight the wars of other people. But you know, we still both ended up in this prison. Isn’t that kinda funny~?[/say]")
+		saynn("[say=tavi]We’re similar. But we’re also exact opposites. I fight my own wars, you fight the wars of other people. But you know, we still both ended up in this prison. Isn’t that kinda funny~?[/say]")
 
 		saynn("At that moment, the guard lunges forward and tries to strike the red with his weapon. She, of course, expects it and swiftly gets out of the way, instead leaving a few scratch marks on the guard’s face while doing so. He grunts and covers his wounds.")
 
@@ -99,7 +99,7 @@ func _run():
 
 		saynn("[say=tavi]Let’s go then.[/say]")
 
-		addButton("Follow", "Enter the captain's office", "captainsoffice")
+		addButton("Follow", "Enter the captain’s office", "captainsoffice")
 
 
 func _react(_action: String, _args):

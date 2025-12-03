@@ -24,8 +24,8 @@ func getBestAttackIDsWeighted(_enemy):
 	
 	for attackID in attacks:
 		var attack: Attack = GlobalRegistry.getAttack(attackID)
-		if(attack == null):
-			assert(false, "Bad attack: "+attackID)
+		if(!attack):
+			continue
 		if(!attack.canDoWhileStunned() && character.hasEffect(StatusEffect.Stunned)):
 			continue
 			

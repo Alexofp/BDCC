@@ -38,3 +38,33 @@ func doFastSex(_sexEngine, _domInfo, _subInfo, _data):
 		dom.addEffect(StatusEffect.SoreNipplesAfterMilking)
 	
 	sendSexEvent(_sexEngine, SexEvent.BreastFeeding, _subInfo, _domInfo, {madeLactate=madeLactate, loadSize=howMuchCollected, targetIsDom=true})
+
+func canBegFor() -> bool:
+	return true
+
+func getBegName() -> String:
+	return "Breastfeed me"
+
+func getBegCategory() -> Array:
+	return BegCategoryExotic
+
+func getBegDesc() -> String:
+	return "Beg the dom to feed you with their milky tits!"
+
+func getBegMessage(_sexEngine, _domInfo, _subInfo) -> String:
+	return "{sub.You} {sub.youVerb('beg')} {dom.you} to breastfeed {sub.youHim} with {dom.yourHis} {dom.breasts}."
+
+func getBegDialogue(_sexEngine, _domInfo, _subInfo) -> String:
+	return RNG.pick([
+		"Please, I need to taste you. Let me suckle on your tits.",
+		"I'm so hungry for you.. please, feed me your milk.",
+		"Let me be your good little pet and drink from your tits.",
+		"Please, let me latch onto your nips and suckle. I need that so badly.",
+		"I'm begging you, press your gorgeous tits against my mouth and feed me.",
+		"Nothing would make me happier than being breastfed by you. Please?",
+	])
+
+func getBegDomFetishes() -> Dictionary:
+	return {
+		Fetish.Lactation: 1.0,
+	}

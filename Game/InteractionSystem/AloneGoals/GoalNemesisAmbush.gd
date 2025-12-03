@@ -4,6 +4,8 @@ func getScore(_pawn:CharacterPawn) -> float:
 	var nemesis := _pawn.getSpecialRelationship()
 	if(!nemesis):
 		return 0.0
+	if(!canReachPC()):
+		return 0.0
 	if(nemesis && nemesis.id == "Nemesis"):
 		if(nemesis.gonnaAmbush):
 			return 100.0

@@ -34,6 +34,12 @@ margin_right = 203.0
 margin_bottom = 20.0
 text = "Clear console"
 
+[node name="ProfileButton" type="Button" parent="PanelContainer/HBoxContainer"]
+margin_left = 207.0
+margin_right = 310.0
+margin_bottom = 20.0
+text = "Toggle profiler"
+
 [node name="ConsoleRichLabel" type="RichTextLabel" parent="PanelContainer"]
 margin_top = 24.0
 margin_right = 1280.0
@@ -68,4 +74,5 @@ selection_enabled = true
 [connection signal="visibility_changed" from="." to="." method="_on_DebugConsole_visibility_changed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/CloseButton" to="." method="_on_CloseButton_pressed"]
 [connection signal="pressed" from="PanelContainer/HBoxContainer/ClearButton" to="." method="_on_ClearButton_pressed"]
+[connection signal="pressed" from="PanelContainer/HBoxContainer/ProfileButton" to="." method="_on_ProfileButton_pressed"]
 [connection signal="text_entered" from="PanelContainer/ConsoleInput" to="." method="_on_ConsoleInput_text_entered"]

@@ -44,6 +44,14 @@ func getTaskString():
 func getTaskHint(_isSlaveLevelup):
 	return "Cum or squirt on them"
 
+func getNpcOwnerDialogueLines() -> Array:
+	return [
+		"I want to see you covered in cum from head to toe.",
+		"Come back dripping with cum all over your body.",
+		"Get as many loads on you as possible.",
+		"I want to see you covered in fresh cum."
+	]
+
 func getSexGoalWeightModifier(_sexGoalID:String) -> float:
 	if(_sexGoalID == SexGoal.FuckOral):
 		return 3.0

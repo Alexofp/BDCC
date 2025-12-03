@@ -577,6 +577,9 @@ func getAnimPlayer():
 func getAnimPlayer2():
 	return $DollSkeleton2/AnimationPlayer
 
+func getAnimPlayer3():
+	return $DollSkeleton3/AnimationPlayer
+
 func setArmsCuffed(newcuffed):
 	armsCuffed = newcuffed
 	
@@ -819,6 +822,8 @@ var normalChainScene = preload("res://Player/Player3D/Chains/NormalChain.tscn")
 var shortChainScene = preload("res://Player/Player3D/Chains/ShortChain.tscn")
 var hoseChainScene = preload("res://Player/Player3D/Chains/HoseChain.tscn")
 var hoseShortChainScene = preload("res://Player/Player3D/Chains/HoseChainShort.tscn")
+var cableChainScene = preload("res://Player/Player3D/Chains/CableChain.tscn")
+var cableShortChainScene = preload("res://Player/Player3D/Chains/CableChainShort.tscn")
 				
 func createChainScene(chainType:String):
 	if(chainType == "normal"):
@@ -829,6 +834,10 @@ func createChainScene(chainType:String):
 		return hoseChainScene.instance()
 	if(chainType == "hoseshort"):
 		return hoseShortChainScene.instance()
+	if(chainType == "cable"):
+		return cableChainScene.instance()
+	if(chainType == "cableshort"):
+		return cableShortChainScene.instance()
 	if(chainType.ends_with(".tscn")):
 		return GlobalRegistry.instanceCached(chainType)
 	

@@ -117,6 +117,10 @@ func processTurn():
 #	var evilness = personality.getStat(PersonalityStat.Evilness)
 #	anger = Util.moveNumberTowards(anger, evilness, 0.01)
 
+	var forcedAnger:float = getChar().getCustomAttribute(BuffAttribute.AngerInSex)
+	if(forcedAnger > 0.0 && anger < forcedAnger):
+		anger = Util.moveNumberTowards(anger, forcedAnger, 0.1)
+	
 	.processTurn()
 	angerFull += anger
 

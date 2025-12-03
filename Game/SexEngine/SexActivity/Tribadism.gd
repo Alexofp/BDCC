@@ -134,11 +134,11 @@ func grinding_getActions(_indx:int):
 	if(_indx == DOM_0):
 		addAction("moanDom", 0.3, "Moan", "Show how much you enjoy it.")
 		if(isReadyToCum(DOM_0) && isHandlingOrgasms(DOM_0)):
-			addAction("cumDom", 1.0, "Cum!", "You gonna cum.", {A_PRIORITY:1001})
+			addAction("cumDom", 1.0, "Cum!", "You're gonna cum.", {A_PRIORITY:1001})
 	if(_indx == SUB_0):
 		addAction("moanSub", getComplyScore(SUB_0)/3.0, "Moan", "Show how much you enjoy it.")
 		if(isReadyToCum(SUB_0) && isHandlingOrgasms(SUB_0)):
-			addAction("cumSub", 1.0, "Cum!", "You gonna cum.", {A_PRIORITY:1001})
+			addAction("cumSub", 1.0, "Cum!", "You're gonna cum.", {A_PRIORITY:1001})
 
 func grinding_doAction(_indx:int, _action:String, _actionDict:Dictionary):
 	if(_action == "moanDom"):

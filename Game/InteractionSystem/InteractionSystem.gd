@@ -81,7 +81,9 @@ func loadData(_data):
 	
 	for taskID in globalTasks:
 		globalTasks[taskID].resetTask()
-
+	
+	recalculateAllAssignedGlobalTasks()
+	
 func getMaxPawnCount() -> int:
 	var settingsValue:int = OPTIONS.getSandboxPawnCount()
 	if(GM.main.getDays() <= 1):
@@ -107,13 +109,8 @@ func _init():
 func processTime(_howMuch:int):
 	if(GM.main.isInDungeon()): # No pawn activity while in a dungeon
 		return
-#	var toUpdate:Array = getInteractionsThatNeedToProcessed()
-#	while(toUpdate.size() > 0):
-#		for interact in toUpdate:
-#			pass
-#
-#		toUpdate = getInteractionsThatNeedToProcessed()
-	#var currentTime:int = GM.main.getTime()
+	GM.PROFILE.start("IS.processTime")
+
 	for pawnID in pawns:
 		var pawn:CharacterPawn = pawns[pawnID]
 		pawn.checkAloneInteraction()
@@ -122,38 +119,21 @@ func processTime(_howMuch:int):
 		if(reactCooldowns[pawnID] <= 0):
 			var _ok = reactCooldowns.erase(pawnID)
 
-	#print(pawns)
-	var maxProcesses:int = 100
-	if(maxProcesses < pawns.size()*2):
-		maxProcesses = pawns.size() * 2
+	# Slices the passed time into 60 second simulation ticks
+	# Only does 10 of them at max to help perfomance
+	var _timeCopy:int = _howMuch
+	var didSimulations:int = 0
+	while(_timeCopy > 0 && didSimulations < 10):
+		var timeslice:int = Util.mini(60, _timeCopy)
+		_timeCopy -= timeslice
+		didSimulations += 1
+		processBusyAllInteractions(timeslice)
 	
-	var interaction:PawnInteractionBase = getClosestInteraction()
-	while(interaction != null && _howMuch > 0):
-		var interactionBusySecs:int = interaction.busyActionSeconds
-		if(_howMuch < interactionBusySecs):
-			break
-		
-		if(interactionBusySecs > 0):
-			processBusyAllInteractions(interactionBusySecs)
-			_howMuch -= interactionBusySecs
-		interaction.doCurrentAction()
-		
-		if(!interaction.wasDeleted && !interaction.getCurrentPawn().isPlayer()):
-			decideNextAction(interaction)
-		
-		maxProcesses -= 1
-		if(maxProcesses <= 0):
-			print("[Interaction System] HIT THE MAX PROCESS LIMIT")
-			break
-		interaction = getClosestInteraction()
-		
-	processBusyAllInteractions(_howMuch)
+	processBusyAllInteractions(_timeCopy)
 	
 	checkAddNewPawns()
-	#for theinteraction in interactions:
-	#	theinteraction.isNew = false
-	#print(pawnsByLoc)
-	#print(interactions)
+
+	GM.PROFILE.finish("IS.processTime")
 	pass
 
 func decideNextAction(interaction, _context:Dictionary = {}):
@@ -191,18 +171,80 @@ func decideNextAction(interaction, _context:Dictionary = {}):
 	var selectedAction = RNG.pickWeightedPairs(possibleActions)#actions[0]
 	interaction.setPickedAction(selectedAction, _context)
 
+var internalTick:int = 0
+func calcSpreadTickAmountForInteractions() -> int:
+	var amountOfInteractions:int = interactions.size()
+	
+	var amTicks:int = int(ceil(float(amountOfInteractions) / 40.0))
+	if(amTicks < 1):
+		amTicks = 1
+	elif(amTicks > 5):
+		amTicks = 5
+
+	return amTicks
+
 func processBusyAllInteractions(howManySeconds:int):
 	if(howManySeconds <= 0):
 		return
+	GM.PROFILE.start("processBusyAllInteractions("+str(howManySeconds)+")")
+	GM.PROFILE.start("globalTasks")
+	var theMaxPawnCount:int = getMaxPawnCount()
 	for taskID in globalTasks:
 		var task = globalTasks[taskID]
 		task.processTime(howManySeconds)
+		task.maxAssignedCached = task.getMaxAssigned(theMaxPawnCount)
+		#task.sanityCheckPawns()
+	GM.PROFILE.finish("globalTasks")
+	GM.PROFILE.start("pawns")
 	for pawnID in pawns:
-		var pawn = pawns[pawnID]
+		var pawn:CharacterPawn = pawns[pawnID]
 		pawn.processTime(howManySeconds)
-	for interaction in interactions:
-		interaction.busyActionSeconds -= howManySeconds
-		interaction.processTime(howManySeconds)
+	GM.PROFILE.finish("pawns")
+	GM.PROFILE.start("interactions")
+	var howManyTicks:int = calcSpreadTickAmountForInteractions()
+	var howManyToProcess:int = int(ceil(float(interactions.size()) / float(howManyTicks)))
+	
+	var interactionsCopy:Array = interactions.duplicate() # Duplicate because we will might be deleting them while iterating over them
+
+	for _i in range(howManyToProcess):
+		var _indx:int = _i * howManyTicks + internalTick
+		if(_indx >= interactionsCopy.size()):
+			continue
+		
+		var interaction:PawnInteractionBase = interactionsCopy[_indx]
+		GM.PROFILE.start(interaction.id)
+		
+		var finalHowManySeconds:int = howManySeconds * howManyTicks
+		
+		interaction.busyActionSeconds -= finalHowManySeconds
+		interaction.processTime(finalHowManySeconds)
+
+		if(interaction.busyActionSeconds <= 0 && !interaction.isBeingSpied() && !interaction.isWaitingForScene()):
+			interaction.doCurrentAction()
+			if(!interaction.wasDeleted && !interaction.getCurrentPawn().isPlayer()):
+				decideNextAction(interaction)
+		GM.PROFILE.finish(interaction.id, 1.0)
+		
+	#print("PROCESSED: "+str(howManyToProcess))
+
+#	for interaction in interactionsCopy:
+#		#GM.PROFILE.start(interaction.id)
+#		interaction.busyActionSeconds -= howManySeconds
+#		interaction.processTime(howManySeconds)
+#
+#		if(interaction.busyActionSeconds <= 0 && !interaction.isBeingSpied() && !interaction.isWaitingForScene()):
+#			interaction.doCurrentAction()
+#			if(!interaction.wasDeleted && !interaction.getCurrentPawn().isPlayer()):
+#				decideNextAction(interaction)
+#
+#		#GM.PROFILE.finish(interaction.id, 0.1)
+	
+	internalTick += 1
+	if(internalTick >= howManyTicks):
+		internalTick = 0
+	
+	GM.PROFILE.finish("interactions")
+	GM.PROFILE.finish("processBusyAllInteractions("+str(howManySeconds)+")")
 
 func getClosestInteraction() -> PawnInteractionBase:
 	var result = null
@@ -479,6 +521,26 @@ func stopInteractionsForPawnID(charID:String):
 func stopInteractionsForPawn(pawn):
 	stopInteractionsForPawnID(pawn.charID)
 
+# very slow
+func recalculateAllAssignedGlobalTasks():
+	for taskID in globalTasks:
+		var theTask:GlobalTask = globalTasks[taskID]
+		theTask.assigned.clear()
+		theTask.assignedCached = 0
+	
+	for pawnID in pawns:
+		var thePawn:CharacterPawn = getPawn(pawnID)
+		var theInteraction:PawnInteractionBase = thePawn.getInteraction()
+		if(theInteraction && theInteraction.id == "AloneInteraction"):
+			var theGoal:InteractionGoalBase = theInteraction.goal
+			if(theGoal):
+				var theGlobalTaskID:String = theGoal.globalTask
+				if(!theGlobalTaskID.empty() && globalTasks.has(theGlobalTaskID)):
+					var theTask:GlobalTask = globalTasks[theGlobalTaskID]
+					theTask.assigned.append(pawnID)
+					theTask.assignedCached += 1
+			
+
 func checkOnMeetInteractions(pawn1, pawn2, pawn2Moved:bool):
 	for interacitonID in GlobalRegistry.getInteractions():
 		var interaction:PawnInteractionBase = GlobalRegistry.getInteractionRef(interacitonID)
@@ -527,6 +589,22 @@ func calculatePawnDistribution() -> Dictionary:
 	
 	return result
 
+func trySpawnSpecialRelationshipPawn() -> bool:
+	var allSpecial:Dictionary = GM.main.RS.special
+	if(allSpecial.empty()):
+		return false
+	
+	#for _i in range(5):
+	var theRandomSpecialCharID:String = RNG.pick(allSpecial)
+	if(usedCharIDsToday.has(theRandomSpecialCharID)):
+		#continue
+		return false
+	var theRelationship:SpecialRelationshipBase = allSpecial[theRandomSpecialCharID]
+	if(theRelationship.shouldPreferToSpawnPawn()):
+		spawnPawn(theRandomSpecialCharID)
+		return true
+	
+	return false
 
 func trySpawnPawn(specificPawnType = null):
 	var randomPawnType = specificPawnType
@@ -597,6 +675,8 @@ func checkAddNewPawns():
 	if(!RNG.chance(chanceToAddNew)):
 		return
 	
+	if(trySpawnSpecialRelationshipPawn()):
+		return
 	trySpawnPawn()
 
 func updatePCLocation():

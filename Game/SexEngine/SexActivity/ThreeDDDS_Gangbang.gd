@@ -1,5 +1,7 @@
 extends SexActivityBase
 
+var straponTimer:int = 0
+
 func _init():
 	id = "ThreeDDDS_Gangbang"
 	
@@ -154,6 +156,11 @@ func sex_processTurn():
 	else:
 		doProcessFuckExtra(DOM_0, SUB_0, S_VAGINA)
 		doProcessFuckExtra(DOM_1, SUB_0, S_ANUS)
+
+	if(isWearingStrapon(DOM_0) && isWearingStrapon(DOM_1) && isWearingStrapon(DOM_2) && !( (getSub().hasReachableVagina() && getSub().canZoneOrgasm(BodypartSlot.Vagina)) || getSub().canZoneOrgasm(BodypartSlot.Anus) ) ): # If sub can't cum, just have some fun
+		straponTimer += 1
+		if(straponTimer > 5 && RNG.chance(3.0*straponTimer)):
+			satisfyGoals()
 
 func getHoleFor(_indx:int) -> String:
 	if(_indx == DOM_0):
@@ -329,11 +336,11 @@ func getOrgasmHandlePriority(_indx:int) -> int:
 func saveData():
 	var data = .saveData()
 	
-	#data["tick"] = tick
+	data["straponTimer"] = straponTimer
 
 	return data
 	
 func loadData(data):
 	.loadData(data)
 	
-	#tick = SAVE.loadVar(data, "tick", 0)
+	straponTimer = SAVE.loadVar(data, "straponTimer", 0)

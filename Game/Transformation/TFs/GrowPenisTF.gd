@@ -75,7 +75,7 @@ func doProgress(_context:Dictionary) -> Dictionary:
 			}
 		
 		return {}
-	var possiblePartIDs:Dictionary = Bodypart.findPossibleBodypartIDsDict(BodypartSlot.Penis, theChar, theChar.getSpecies(), NpcGender.Male)
+	var possiblePartIDs:Dictionary = Bodypart.findPossibleBodypartIDsDict(BodypartSlot.Penis, theChar, theChar.getSpecies(), NpcGender.Male, true)
 	if(possiblePartIDs.has("")):
 		possiblePartIDs.erase("")
 	if(possiblePartIDs.empty()):

@@ -140,9 +140,10 @@ func start():
 	GM.pc.getSkillsHolder().addPerk(Perk.StartMaleInfertility) # No babies while in a dungen
 	GM.pc.getSkillsHolder().addPerk(Perk.StartInfertile)
 	
-	GM.pc.removeEffect(StatusEffect.WorkOut)
-	GM.pc.removeEffect(StatusEffect.WorkOutLight)
-	GM.pc.removeEffect(StatusEffect.Yoga)
+	for effectID in GM.pc.statusEffects.keys():
+		var theEffect:StatusEffectBase = GM.pc.getEffect(effectID)
+		if(theEffect && theEffect.removedOnDungeonStart):
+			GM.pc.removeEffect(effectID)
 	
 	for eventID in GlobalRegistry.getDrugDenEvents():
 		var theEvent = GlobalRegistry.getDrugDenEventRef(eventID)

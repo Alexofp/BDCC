@@ -94,6 +94,7 @@ func checkModOrderAndFillData(rawModList):
 	ensureBDCCIsFirst()
 	updateModList()
 	updateSelectedEntry()
+	GlobalRegistry.tempCurrentModOrder = currentModOrder
 
 func saveOrderIntoFile(saveData):
 	var save_game = File.new()
@@ -168,6 +169,7 @@ func _on_WithModsButton_pressed():
 	
 	GlobalRegistry.loadModOrder(currentModOrder)
 	#GlobalRegistry.registerEverything()
+	GlobalRegistry.tempCurrentModOrder = []
 	var _ok = get_tree().change_scene("res://UI/LoadingScreen.tscn")#"res://UI/MainMenu/MainMenu.tscn"
 
 func _on_NoModsButton_pressed():
@@ -178,6 +180,7 @@ func _on_NoModsButton_pressed():
 	
 	#GlobalRegistry.loadModOrder(currentModOrder)
 	#GlobalRegistry.registerEverything()
+	GlobalRegistry.tempCurrentModOrder = []
 	var _ok = get_tree().change_scene("res://UI/LoadingScreen.tscn")#"res://UI/MainMenu/MainMenu.tscn"
 
 func onModEntryClicked(entry):
@@ -202,7 +205,11 @@ func updateSelectedEntry():
 	modDisableButton.text = "Enable" if(selectedEntry['disabled']) else "Disable"
 
 	
-	var desc = ""
+	var desc:String = ""
+	
+	if(selectedEntry.has("broken") && selectedEntry["broken"]):
+		desc += "( This mod is reported to be broken or cause huge issues on this game version. It's best to disable/delete it. )\n\n"
+	
 	desc += "Mod name: "+selectedEntry["name"]+"\n"
 	desc += "Full path: "+selectedEntry["path"]+"\n"
 	
@@ -452,3 +459,124 @@ func _on_TroubleshootingScreen_onClose():
 
 func _on_DebugButton_pressed():
 	troubleshooting_screen.visible = true
+
+func isOurVersionAffection(_modVersion:String) -> bool:
+	var theGameVersion:String = GlobalRegistry.getGameVersionStringNoSuffix()
+	
+	if(theGameVersion == _modVersion):
+		return true
+	
+	var theSplit:Array = _modVersion.split(".")
+	if(theSplit.size() != 3): #Bad version string
+		return false
+	
+	var modMajor:int = int(theSplit[0])
+	var modMinor:int = int(theSplit[1])
+	var modRevision:int = int(theSplit[2])
+	
+	if(GlobalRegistry.game_version_major < modMajor):
+		return false
+	if(GlobalRegistry.game_version_minor < modMinor):
+		return false
+	if(GlobalRegistry.game_version_revision < modRevision):
+		return false
+	return true
+
+func getFileSize(_path:String) -> int:
+	var file := File.new()
+	if(file.open(_path, File.READ) != OK):
+		return 0
+	var theSize := file.get_len()
+	file.close()
+	return theSize
+
+func checkBrokenModEntry(modEntry:Dictionary, brokenEntry:Dictionary) -> bool:
+	#var theName:String = modEntry["name"]
+	var thePath:String = modEntry["path"]
+
+	var theSinceField:String = brokenEntry["since"] if (brokenEntry.has("since") && (brokenEntry["since"] is String)) else ""
+	var theBadSizesField:Array = brokenEntry["badsizes"] if (brokenEntry.has("badsizes") && (brokenEntry["badsizes"] is Array)) else []
+	
+	var hasSinceVersion:bool = !theSinceField.empty()
+	var hasSizes:bool = !theBadSizesField.empty()
+	
+	if(hasSinceVersion && !isOurVersionAffection(theSinceField)):
+		return false
+	
+	if(hasSizes):
+		var ourModSize:int = getFileSize(thePath)
+		for theSize in theBadSizesField:
+			if(theSize == ourModSize):
+				return true
+		return false
+	
+	return true
+
+onready var busy_panel = $"%BusyPanel"
+onready var busy_label = $"%BusyLabel"
+onready var busy_close_button = $"%BusyCloseButton"
+onready var http_request_mods:HTTPRequest = $"%HTTPRequestMods"
+
+func setBusyPanel(_text:String, _canClose:bool = false):
+	if(_text.empty()):
+		busy_panel.visible = false
+		return
+	
+	busy_panel.visible = true
+	busy_label.bbcode_text = _text
+	busy_close_button.visible = _canClose
+
+func _on_CheckBrokenModsButton_pressed():
+	setBusyPanel("[center]Checking mods..[/center]")
+	
+	var error:int = http_request_mods.request("https://raw.githubusercontent.com/Alexofp/BDCCMods/main/outdated_mods.json")
+	if error != OK:
+		setBusyPanel("[center]An error occurred in the HTTP request.[/center]", true)
+		return
+	
+func _on_BusyCloseButton_pressed():
+	busy_panel.visible = false
+
+func _on_BusyLabel_meta_clicked(meta):
+	var _ok = OS.shell_open(meta)
+
+func _on_HTTPRequestMods_request_completed(_result: int, _response_code: int, _headers: PoolStringArray, _body: PoolByteArray):
+	if _result != HTTPRequest.RESULT_SUCCESS:
+		setBusyPanel("[center]Couldn't download a broken mods list from github.[/center]", true)
+		return
+	
+	var jsonResult = JSON.parse(_body.get_string_from_utf8())
+	if(jsonResult.error != OK):
+		setBusyPanel("[center]Failed to parse broken mods list from github.[/center]", true)
+		return
+	
+	var modsDataA = jsonResult.result
+	if(!(modsDataA is Dictionary)):
+		setBusyPanel("[center]Bad broken mod list.[/center]", true)
+		return
+	var modsData:Dictionary = modsDataA
+	#print(modsData)
+
+	var reportLink:String = modsData["report_link"] if modsData.has("report_link") else "https://github.com/Alexofp/BDCCMods/issues"
+	var _theModsList:Dictionary = modsData["mods"] if (modsData.has("mods") && (modsData["mods"] is Dictionary)) else {}
+	
+	var amBroken:int = 0
+	
+	for modEntry in currentModOrder:
+		var theName:String = modEntry["name"]
+		#var thePath:String = modEntry["path"]
+		
+		if(!_theModsList.has(theName) || !(_theModsList[theName] is Dictionary)):
+			continue
+		
+		var theBrokenEntry:Dictionary = _theModsList[theName]
+		
+		if(checkBrokenModEntry(modEntry, theBrokenEntry)):
+			modEntry["broken"] = true
+			amBroken += 1
+		
+	setBusyPanel("FOUND "+str(amBroken)+" BROKEN MOD"+("S" if amBroken != 1 else "")+"\n\nIf you wanna report a broken mod, go here: [url="+reportLink+"]"+reportLink+"[/url]", true)
+	if(amBroken > 0):
+		updateModList()
+		updateSelectedEntry()
+	

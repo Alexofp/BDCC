@@ -16,6 +16,15 @@ func getMapTag() -> String:
 func getCategoryColor() -> Color:
 	return Color.white
 
+func getExtraCategoryText() -> String:
+	return ""
+
+func getBigDescription() -> String:
+	return ""
+
+func canMeetThroughRelationshipMenu() -> bool:
+	return false
+
 # Gets called when we are NOT in a special relationship. We are the actor
 func checkSocialEventShouldStartActor(_charActor:String, _charTarget:String, _eventID:int, _args:Array) -> Array:
 	return [false]
@@ -53,6 +62,15 @@ func stopMe():
 	if(theRelationship == self):
 		GM.main.RS.stopSpecialRelationship(charID)
 
+func canEnslaveReason(_isKidnap:bool) -> Array:
+	return [true, ""]
+
+func canTalkWithPlayer() -> bool:
+	return true
+
+func shouldPreferToSpawnPawn() -> bool:
+	return false
+
 func showMessage(_text:String):
 	GM.main.addMessage(_text)
 
@@ -88,6 +106,9 @@ func personality(_pers:String) -> float:
 
 func affection(_otherCharID:String) -> float:
 	return getAffection(charID, _otherCharID)
+
+func shouldHaveAuraOfDominance() -> bool:
+	return false
 
 func saveData() -> Dictionary:
 	return {

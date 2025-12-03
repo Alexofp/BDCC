@@ -8,6 +8,9 @@ func getSlaveTypeWeights(_isSlaveLevelup):
 		SlaveType.All : 0.4,
 	}
 
+func getNpcOwnerWeight(_npcOwner) -> float:
+	return 0.2
+
 func isPossibleFor(_npc, _isSlaveLevelup):
 	if(!_npc.hasReachablePenis()):
 		return false
@@ -42,8 +45,19 @@ func onSexEvent(_npc, _event:SexEvent):
 func getTaskString():
 	return "Milk with penis pump: "+getProgressStringFluids()
 
+func getTaskStringSlutLock():
+	return "Get milked with a penis pump: "+getProgressStringFluids()
+
 func getTaskHint(_isSlaveLevelup):
 	return "Put a penis pump on them and collect this much seed!"
+
+func getNpcOwnerDialogueLines() -> Array:
+	return [
+		"Your cock needs milking. Find someone who will do it.",
+		"Go get your cock milked by someone.",
+		"I want your balls to be milked dry. Find a stranger who will do it.",
+		"Find someone who will put a penis pump on you and milk your balls dry.",
+	]
 
 func getSexGoalWeightModifier(_sexGoalID:String) -> float:
 	if(_sexGoalID == SexGoal.MilkWithPenisPump):

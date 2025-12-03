@@ -8,9 +8,11 @@ var ES: EventSystem
 var QS: QuestSystem
 var CS: ChildSystem
 var GES: GameExtenderSystem
+var PROFILE: MyProfilerBase
 
 func _init():
 	GES = GameExtenderSystem.new()
+	createProfiler()
 
 func _ready():
 	var directory = Directory.new()
@@ -20,3 +22,8 @@ func _ready():
 	directory.make_dir("user://custom_skins")
 	directory.make_dir("user://datapacks")
 
+func createProfiler():
+	if(OPTIONS.shouldProfile()):
+		PROFILE = MyProfiler.new()
+	else:
+		PROFILE = MyProfilerBase.new()

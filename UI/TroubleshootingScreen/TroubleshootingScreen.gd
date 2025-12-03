@@ -22,7 +22,13 @@ var debugText:String = ""
 func _on_DebugInfoButton_pressed():
 	debug_panel_container.visible = true
 	
-	debugText = "IF YOUR GAME IS CRASHING, SAVE THIS TEXT AND SEND IT TO RAHI\n"
+	debugText = "IF YOUR GAME IS CRASHING, SAVE THIS TEXT AND SEND IT TO RAHI. ATTACH A SAVE IF CAN\n"
+	debugText += "Game version: "+GlobalRegistry.getGameVersionString()+"\n"
+	debugText += "Platform: "+OS.get_name()+"\n"
+	if(GlobalRegistry.isInitialized):
+		debugText += "Mods: "+str(GlobalRegistry.loadedMods)+"\n"
+	else:
+		debugText += "Mod order: "+str(loadFromTempList(GlobalRegistry.tempCurrentModOrder))+"\n"
 	debugText += "User files:\n"
 	var userFiles:Array =  Util.getFilesInFoldersRecursive("user://")
 	for filePath in userFiles:
@@ -218,3 +224,15 @@ onready var alert_label = $"%AlertLabel"
 func _on_ConfirmAlertButton_pressed():
 	alert_window_dialog.visible = false
 	alert_label.text = ""
+
+func loadFromTempList(_ar:Array) -> Array:
+	var result:Array = []
+	
+	for entry in _ar:
+		if(entry.has("disabled") && entry["disabled"]):
+			continue
+		if(!entry.has("name")):
+			continue
+		result.append(entry["name"])
+	
+	return result

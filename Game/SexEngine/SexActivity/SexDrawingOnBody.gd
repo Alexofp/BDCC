@@ -13,6 +13,7 @@ func _init():
 
 func getGoals():
 	return {
+		SexGoal.AddBodywritings: 1.0,
 	}
 
 func getSupportedSexTypes():
@@ -20,9 +21,12 @@ func getSupportedSexTypes():
 		SexType.DefaultSex: true,
 		SexType.StocksSex: true,
 		SexType.SlutwallSex: true,
+		SexType.BitchsuitSex: true,
 	}
 
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
+	if(_subInfo.getChar().isPlayer() && GM.main.getEncounterSettings().isGoalDisabledForSubPC(SexGoal.AddBodywritings)):
+		return 0.0
 	return _domInfo.fetishScore({Fetish.Bodywritings: 0.05}) * (1.0 + _domInfo.personalityScore({PersonalityStat.Mean: 0.3}))
 
 func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
@@ -95,6 +99,7 @@ func abouttodraw_processTurn():
 	var writingID:String = BodyWritings.getRandomWritingIDForZone(zone) if customWritingID == "" else customWritingID
 	getSub().addBodywriting(zone, writingID, isPermanent)
 	sendSexEvent(SexEvent.BodyWritingAdded, DOM_0, SUB_0, {zone=zone,writingID=writingID,isPermanent=isPermanent})
+	satisfyGoal(SexGoal.AddBodywritings)
 	
 	addText("{dom.You} drew [b]'"+str(BodyWritings.getWritingText(writingID))+"'[/b] on {sub.yourHis} "+BodyWritingsZone.getZoneVisibleName(zone)+(" with a [b]PERMANENT[/b] marker" if isPermanent else "")+".")
 	react(SexReaction.AfterDrawingOnBody, [100.0, 50.0])

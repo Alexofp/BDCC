@@ -199,7 +199,7 @@ func doProgress(_context:Dictionary) -> Dictionary:
 		switchedhair = true
 		
 		var theChar = getChar()
-		var possiblePartIDs:Dictionary = Bodypart.findPossibleBodypartIDsDict(BodypartSlot.Hair, theChar, theChar.getSpecies(), NpcGender.Female)
+		var possiblePartIDs:Dictionary = Bodypart.findPossibleBodypartIDsDict(BodypartSlot.Hair, theChar, theChar.getSpecies(), NpcGender.Female, true)
 		if(possiblePartIDs.empty()):
 			return {}
 		var newPartID:String = RNG.pickWeightedDict(possiblePartIDs)

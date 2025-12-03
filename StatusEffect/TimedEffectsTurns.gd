@@ -42,6 +42,22 @@ func getEffectDesc():
 	#return "For the next "+str(time)+" turns:"
 	return Util.join(theTexts, "\n")
 
+func getVisisbleDescription():
+	var theTexts:Array = []
+	var theBuffsByTurns:Dictionary = character.getSortedBuffsDataByTime(character.timedBuffsTurns)
+	
+	for theTurns in theBuffsByTurns:
+		theTexts.append("Expire in "+str(theTurns)+" "+("turns" if theTurns != 1 else "turn:"))
+		
+		var theBuffs:Array = theBuffsByTurns[theTurns]
+		
+		var theBuffNames:Array = []
+		for theBuff in theBuffs:
+			theBuffNames.append("[color=#"+theBuff.getBuffColor().to_html(false)+"]" + theBuff.getVisibleDescription() + "[/color]")
+		theTexts.append(Util.join(theBuffNames, "\n"))
+	
+	return Util.join(theTexts, "\n")
+
 func getEffectImage():
 	return "res://Images/StatusEffects/medicines.png"
 

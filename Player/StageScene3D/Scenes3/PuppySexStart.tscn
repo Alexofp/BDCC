@@ -1,0 +1,156 @@
+[gd_scene load_steps=31 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes3/PuppySexStart.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=522]
+animation = "PuppySexStartPat_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=512]
+animation = "PuppySexStart_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=513]
+animation = "PuppySexStart_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=514]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=515]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=523]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=524]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=510]
+states/PuppySexStartPat_1-loop/node = SubResource( 522 )
+states/PuppySexStartPat_1-loop/position = Vector2( 593, 136 )
+states/PuppySexStart_1-loop/node = SubResource( 513 )
+states/PuppySexStart_1-loop/position = Vector2( 360, 65 )
+"states/PuppySexStart_1-loop 2/node" = SubResource( 512 )
+"states/PuppySexStart_1-loop 2/position" = Vector2( 300, 170 )
+transitions = [ "PuppySexStart_1-loop", "PuppySexStart_1-loop 2", SubResource( 514 ), "PuppySexStart_1-loop 2", "PuppySexStart_1-loop", SubResource( 515 ), "PuppySexStart_1-loop", "PuppySexStartPat_1-loop", SubResource( 523 ), "PuppySexStartPat_1-loop", "PuppySexStart_1-loop", SubResource( 524 ) ]
+start_node = "PuppySexStart_1-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=511]
+graph_offset = Vector2( -189.156, 41.0513 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 510 )
+nodes/StateMachine/position = Vector2( 193.215, 107.109 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=460]
+
+[sub_resource type="AnimationNodeAnimation" id=192]
+animation = "PuppyLegs-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=193]
+animation = "PuppyArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=194]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeBlend2" id=195]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Foot.L", "Doll3D/Skeleton:Foot.R", "Doll3D/Skeleton:LegDown.L", "Doll3D/Skeleton:LegDown.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=525]
+animation = "PuppySexStartPat_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=516]
+animation = "PuppySexStartSad_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=517]
+animation = "PuppySexStart_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=518]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=519]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=526]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=527]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=520]
+states/PuppySexStartPat_2-loop/node = SubResource( 525 )
+states/PuppySexStartPat_2-loop/position = Vector2( 595, 153 )
+states/PuppySexStartSad_2-loop/node = SubResource( 516 )
+states/PuppySexStartSad_2-loop/position = Vector2( 268, 170 )
+states/PuppySexStart_2-loop/node = SubResource( 517 )
+states/PuppySexStart_2-loop/position = Vector2( 407, 72 )
+transitions = [ "PuppySexStart_2-loop", "PuppySexStartSad_2-loop", SubResource( 518 ), "PuppySexStartSad_2-loop", "PuppySexStart_2-loop", SubResource( 519 ), "PuppySexStart_2-loop", "PuppySexStartPat_2-loop", SubResource( 526 ), "PuppySexStartPat_2-loop", "PuppySexStart_2-loop", SubResource( 527 ) ]
+start_node = "PuppySexStart_2-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=521]
+graph_offset = Vector2( -201.069, -43.4734 )
+nodes/Animation/node = SubResource( 193 )
+nodes/Animation/position = Vector2( -40, 200 )
+"nodes/Animation 2/node" = SubResource( 192 )
+"nodes/Animation 2/position" = Vector2( 220, 260 )
+nodes/PuppyArms/node = SubResource( 194 )
+nodes/PuppyArms/position = Vector2( 220, 60 )
+nodes/PuppyLegs/node = SubResource( 195 )
+nodes/PuppyLegs/position = Vector2( 440, 80 )
+nodes/StateMachine/node = SubResource( 520 )
+nodes/StateMachine/position = Vector2( 0, 40 )
+nodes/output/position = Vector2( 660, 120 )
+node_connections = [ "PuppyArms", 0, "StateMachine", "PuppyArms", 1, "Animation", "PuppyLegs", 0, "PuppyArms", "PuppyLegs", 1, "Animation 2", "output", 0, "PuppyLegs" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=479]
+
+[node name="PuppySexStart" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.317465, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30331, -0.120824, 0 )
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30331, -0.120824, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 511 )
+anim_player = NodePath("../Doll3D/DollSkeleton3/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 460 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 521 )
+anim_player = NodePath("../Doll3D2/DollSkeleton3/AnimationPlayer")
+parameters/PuppyArms/blend_amount = 1.0
+parameters/PuppyLegs/blend_amount = 1.0
+parameters/StateMachine/playback = SubResource( 479 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]
+[editable path="Doll3D/DollSkeleton3"]
+[editable path="Doll3D2"]
+[editable path="Doll3D2/DollSkeleton"]
+[editable path="Doll3D2/DollSkeleton2"]
+[editable path="Doll3D2/DollSkeleton3"]

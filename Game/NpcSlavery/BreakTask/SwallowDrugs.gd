@@ -41,4 +41,10 @@ func getTaskStringSlutLock():
 func getTaskHint(_isSlaveLevelup):
 	return "Make them take any kind of drug during sex!"
 
+func getNpcOwnerDialogueLines() -> Array:
+	return [
+		"Take whatever they give you and don't complain.",
+		"Swallow what you're offered, mhm?.",
+		"Swallow whatever pills they offer you.",
+	]
 

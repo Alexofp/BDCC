@@ -1,13 +1,14 @@
 extends PawnInteractionBase
 
-var jobTime = 0
-var minTime = 0
-var askCreds = 0
-var askType = ""
-var slutDom = false
-var clientSatisfaction = 0.0
-var lastClientID = ""
-var clientApproached = false
+var jobTime:int = 0
+var minTime:int = 0
+var askCreds:int = 0
+var askType:String = ""
+var slutDom:bool = false
+var clientSatisfaction:float = 0.0
+var lastClientID:String = ""
+var clientApproached:bool = false
+var clientRequestedAskType:String = ""
 
 func _init():
 	id = "Prostitution"
@@ -22,8 +23,8 @@ func init_text():
 	saynn("{main.You} {main.youAre} standing near a wall, {main.yourHis} leg pressed up against it..")
 
 	addAction("search", "Find clients", "Actively seek out clients", "default", 0.5, 60, {})
-	addAction("wait", "Just wait", "Just wait until someone decides to approache you", "default", 1.0, 180, {})
-	addAction("stop", "Stop", "Enough whooring..", "default", (0.2 if (jobTime > (60*30)) else 0.01) if minTime <= 0 else (0.2 if (jobTime > minTime) else 0.0), 0, {})
+	addAction("wait", "Just wait", "Just wait until someone decides to approach you", "default", 1.0, 180, {})
+	addAction("stop", "Stop", "Enough whoring..", "default", (0.2 if (jobTime > (60*30)) else 0.01) if minTime <= 0 else (0.2 if (jobTime > minTime) else 0.0), 0, {})
 
 func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "search"):
@@ -33,6 +34,7 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 			lastClientID = pawnID
 			doInvolvePawn("client", pawnID)
 			clientApproached = false
+			clientRequestedAskType = ""
 			setState("found_client", "main")
 			return
 		setState("", "main")
@@ -43,23 +45,60 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func found_client_text():
-	if(!clientApproached):
-		saynn("{main.name} calls {client.you} to get closer..")
+	if(clientRequestedAskType == ""):
+		if(!clientApproached):
+			saynn("{main.You} {main.youVerb('call')} {client.you} to get closer..")
+		else:
+			saynn("{client.You} {client.youVerb('approach', 'approaches')} {main.you}..")
+		sayLine("main", "ProstitutionStart", {main="main", target="client"})
+		sayLine("client", "ProstitutionOffer", {main="client", target="main"})
 	else:
-		saynn("{client.name} approaches {main.you}..")
-	sayLine("main", "ProstitutionStart", {main="main", target="client"})
-	sayLine("client", "ProstitutionOffer", {main="client", target="main"})
+		var clientIsMean:bool = getRolePawn("client").scorePersonalityMax({PersonalityStat.Mean: 1.0}) > 0.4
+		var askRole:String = "Dom" if(clientRequestedAskType == "service") else "Sub"
+		if(clientIsMean):
+			saynn(RNG.pick([
+				"{client.You} {client.youVerb('demand')} that {main.you} {main.youVerb('think')} {main.yourHis} situation over..",
+				"{client.You} {client.youVerb('move')} one intimidating step closer towards {main.you}, visibly riled by {main.yourHis} assumption..",
+			]))
+		else:
+			var client_playfully:String = RNG.pick(["assertively", "bluntly", "boldly", "playfully", "pleadingly", "teasingly"])
+			saynn(RNG.pick([
+				"{client.You} "+client_playfully+" {client.youVerb('gesture')} at {main.you}, wondering if {main.youHe} would have a different offer for {client.youHim}..",
+				"{client.You} {client.youVerb('think')} over {main.your} offer, but eventually {client.youVerb('decide')} to ask if {main.youHe} would be open to something else..",
+			]))
+		sayLine("client", "ProstitutionClientAskFor"+askRole+"Slut", {main="client", target="main"})
+		if(getRoleChar("main").isPlayer()):
+			saynn("Looks like {client.name} wants you to be "+("a service dom" if(clientRequestedAskType == "service") else "the sub")+"..")
 
-	addAction("usual", "Usual", "Let them fuck you any way they want for relatively cheap..", "sexSub", 1.0, 60, {})
-	if(roleCanStartSex("main") && hasRepLevelPC("main", RepStat.Whore, 4)):
-		addAction("service", "Service Dom", "You will be in charge. It takes more effort.. so you will be taking more credits", "sexDom", 1.0, 60, {})
+	var ACTION_NAME_USUAL:String = "Usual"
+	var ACTION_NAME_SERVICE_DOM:String = "Service Dom"
+	var ACTION_NAME_PRICY_SLUT:String = "Pricy slut"
+	var ACTION_DESC_CLIENT_NOT_INTERESTED:String = "The client is not interested in this.."
+	if(clientRequestedAskType in ["", "usual"]):
+		if(roleCanStartSex("client")):
+			addAction("usual", ACTION_NAME_USUAL, "Let them fuck you any way they want for relatively cheap..", "sexSub", 1.0, 60, {})
+		else:
+			addDisabledAction(ACTION_NAME_USUAL, "They can't be a dom with their restraints..")
 	else:
-		addDisabledAction("Service Dom", "You can't be a service dom with your restraints.." if !roleCanStartSex("main") else "Your whore reputation is not high enough for this..")
-	if(hasRepLevelPC("main", RepStat.Whore, 8)):
-		addAction("pricy_slut", "Pricy slut", "Ask for a lot of credits to let them fuck you.. You will have to really satisfy them though..", "resist", 1.0, 60, {})
+		addDisabledAction(ACTION_NAME_USUAL, ACTION_DESC_CLIENT_NOT_INTERESTED)
+	if(clientRequestedAskType in ["", "service"]):
+		if(roleCanStartSex("main") && hasRepLevelPC("main", RepStat.Whore, 4)):
+			addAction("service", ACTION_NAME_SERVICE_DOM, "You will be in charge. It takes more effort.. so you will be taking more credits", "sexDom", 1.0, 60, {})
+		else:
+			addDisabledAction(ACTION_NAME_SERVICE_DOM, "You can't be a service dom with your restraints.." if !roleCanStartSex("main") else "Your whore reputation is not high enough for this..")
 	else:
-		addDisabledAction("Pricy slut", "Your whore reputation is not high enough for this..")
-	addAction("cancel", "Cancel", "You changed your mind, you don't wanna service them", "default", 0.0, 60, {})
+		addDisabledAction(ACTION_NAME_SERVICE_DOM, ACTION_DESC_CLIENT_NOT_INTERESTED)
+	if(clientRequestedAskType in ["", "usual"]):
+		if(roleCanStartSex("client") && hasRepLevelPC("main", RepStat.Whore, 8)):
+			addAction("pricy_slut", ACTION_NAME_PRICY_SLUT, "Ask for a lot of credits to let them fuck you.. You will have to really satisfy them though..", "resist", 1.0, 60, {})
+		else:
+			addDisabledAction(ACTION_NAME_PRICY_SLUT, "They can't be a dom with their restraints.." if !roleCanStartSex("client") else "Your whore reputation is not high enough for this..")
+	else:
+		addDisabledAction(ACTION_NAME_PRICY_SLUT, ACTION_DESC_CLIENT_NOT_INTERESTED)
+	if(clientRequestedAskType == ""):
+		addAction("cancel", "Cancel", "You changed your mind, you don't wanna service them", "default", 0.0, 60, {})
+	else:
+		addAction("refuse_opposite_role_request", "Refuse", "You're not interested in being a "+("service dom" if(clientRequestedAskType == "service") else "sub")+" for them.", "default", 0.0, 60, {})
 
 func found_client_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "usual"):
@@ -80,22 +119,76 @@ func found_client_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "cancel"):
 		setState("cancelled_service", "main")
 		affectAffection("client", "main", -0.05)
+	if(_id == "refuse_opposite_role_request"):
+		setState("opposite_role_request_denied", "main")
+		affectAffection("client", "main", -0.02)
 
 
 func giving_offer_text():
-	saynn("{main.name} winks.")
+	if(clientRequestedAskType == ""):
+		var teaseActions:Array = []
+		var main_playfully:String = RNG.pick(["naughtily", "playfully", "seductively", "teasingly"])
+		if(askType == "service"):
+			# not wearing any restraints that would prohibit being a dom
+			teaseActions.append_array([
+				"{main.You} "+main_playfully+" {main.youVerb('fiddle')} with a chain in {main.yourHis} hands.",
+			])
+		else:
+			teaseActions.append_array([
+				"{main.You} "+main_playfully+" {main.youVerb('sway')} {main.yourHis} hips next to {client.you}.",
+			])
+			if(getRoleChar("main").bodypartHasTrait(BodypartSlot.Tail, PartTrait.TailFlexible)):
+				teaseActions.append_array([
+					"{main.You} {main.youVerb('turn')} around and "+main_playfully+" {main.youVerb('raise')} {main.yourHis} tail for a brief moment. What a tease.",
+				])
+		if(!getRoleChar("main").isBlindfolded()):
+			teaseActions.append_array([
+				"{main.You} {main.youVerb('wink')} at {client.you}.",
+				"{main.You} {main.youVerb('give')} {client.you} a lustful gaze.",
+			])
+		if(!getRoleChar("main").isGagged()):
+			teaseActions.append_array([
+				"{main.You} "+main_playfully+" {main.youVerb('lick')} over {main.yourHis} "+RNG.pick(["upper", "lower"])+" lip.",
+			])
+		if(!getRoleChar("main").hasBoundArms() && !getRoleChar("main").hasBlockedHands()):
+			teaseActions.append_array([
+				"{main.You} "+main_playfully+" {main.youVerb('brush', 'brushes')} {main.yourHis} hand over {main.yourHis} "+("crotch" if(askType == "service") else "butt")+".",
+			])
+			if(getRoleChar("main").hasNonFlatBreasts()):
+				teaseActions.append_array([
+					"{main.You} {main.youVerb('give')} {main.yourHis} breasts a slow, teasing squeeze.",
+				])
+		if(teaseActions.size() > 0):
+			saynn(RNG.pick(teaseActions))
+	else:
+		saynn(RNG.pick([
+			"{main.You} {main.youVerb('think')} for a little bit.",
+			"{main.You} {main.youVerb('ponder')} for a moment.",
+		]))
 	if(askType=="usual"):
 		sayLine("main", "ProstitutionUsual", {main="main", target="client"}, {credits=askCreds})
 	elif(askType=="service"):
 		sayLine("main", "ProstitutionServiceDom", {main="main", target="client"}, {credits=askCreds})
-		saynn("Looks like {main.name} is offering to be a dom..")
+		if(!getRoleChar("main").isPlayer() && (clientRequestedAskType == "")):
+			saynn("Looks like {main.name} is offering to be a dom..")
 	elif(askType=="pricy"):
 		sayLine("main", "ProstitutionPricySlut", {main="main", target="client"}, {credits=askCreds})
 
 	if(!getRolePawn("client").isPlayer() || GM.pc.getCredits() >= askCreds):
-		addAction("agree", "Agree", "Give them the credits and do the thing", "agreeSexWithSlut", 1.0, 60, {})
+		var scoreType:String = "agreeSexWithDomSlut" if(slutDom) else "agreeSexWithSubSlut"
+		addAction("agree", "Agree", "Give them the credits and do the thing", scoreType, 1.0, 60, {})
 	else:
 		addDisabledAction("Agree", "You don't have enough credits..")
+	if(clientRequestedAskType == ""):
+		var ACTION_NAME_REQUEST_SUB_SLUT:String = "I need a sub"
+		var ACTION_NAME_REQUEST_DOM_SLUT:String = "I need a dom"
+		if(roleCanStartSex("client" if(slutDom) else "main")):
+			var scoreTypeOppositeRole:String = "agreeSexWithSubSlut" if(slutDom) else "agreeSexWithDomSlut"
+			addAction("request_opposite_role", (ACTION_NAME_REQUEST_SUB_SLUT if(slutDom) else ACTION_NAME_REQUEST_DOM_SLUT), "Refuse to "+("sub to" if(slutDom) else "dom")+" them, but express interest in "+("domming them instead" if(slutDom) else "a service dom"), scoreTypeOppositeRole, 0.5, 60, {})
+		elif(slutDom):
+			addDisabledAction(ACTION_NAME_REQUEST_SUB_SLUT, "You can't dom them with those restraints..")
+		else:
+			addDisabledAction(ACTION_NAME_REQUEST_DOM_SLUT, "They can't be a service dom with those restraints..")
 	addAction("deny", "Deny", "You'd rather not..", "default", 1.0, 60, {})
 	if(false):
 		addAction("haggle", "Haggle", "The slut clearly doesn't deserve that much.. Try to haggle", "default", 1.0, 60, {})
@@ -108,6 +201,9 @@ func giving_offer_do(_id:String, _args:Dictionary, _context:Dictionary):
 			GM.pc.addCredits(askCreds)
 		setState("offer_accepted", "main")
 		sendSlaveryActivityEvent("main", "slutPaid", {credits=askCreds})
+	if(_id == "request_opposite_role"):
+		clientRequestedAskType = "usual" if(slutDom) else "service"
+		setState("found_client", "main")
 	if(_id == "deny"):
 		setState("offer_denied", "main")
 		sendSocialEvent("client", "main", SocialEventType.GotRefused)
@@ -130,7 +226,7 @@ func offer_denied_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func offer_accepted_text():
-	saynn("{client.name} hands {main.you} the creds.")
+	saynn("{client.You} {client.youVerb('hand')} {main.you} the creds.")
 	sayLine("client", "ProstitutionAccept", {main="client", target="main"})
 	saynn("Time for the fun part..")
 
@@ -148,7 +244,7 @@ func offer_accepted_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func about_to_sex_text():
 	saynn("The pair gets out of the way of others..")
-	saynn("{main.name} pulls {client.you} closer for some sexy time..")
+	saynn("{main.You} {main.youVerb('pull')} {client.you} closer for some sexy time..")
 
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {start_sex=["main" if slutDom else "client", "client" if slutDom else "main", SexType.DefaultSex, {SexMod.BondageDisabled: !slutDom}],})
 
@@ -167,7 +263,7 @@ func about_to_sex_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func after_sex_text():
 	saynn("The sex has ended..")
-	saynn("Client's satisfaction is.. "+str(Util.roundF(clientSatisfaction*100.0, 1))+"%")
+	saynn(("Your" if(getRoleChar("client").isPlayer()) else "Client's")+" satisfaction is.. "+str(Util.roundF(clientSatisfaction*100.0, 1))+"%")
 
 	addAction("leave", "Leave", "That was alright", "default", (clientSatisfaction if (askType!="pricy") else (clientSatisfaction/2.0)), 60, {})
 	addAction("demand_creds_back", "Demand creds back", "That sucked, the slut should give you the credits back", "default", (0.05 if clientSatisfaction > 0.9 else (1.0 if clientSatisfaction <= 0.5 else 0.4)), 60, {})
@@ -184,7 +280,7 @@ func after_sex_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func client_leaving_text():
-	saynn("{client.name} is leaving, satisfied.")
+	saynn("{client.You} {client.youAre} leaving, satisfied.")
 
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
 
@@ -196,7 +292,7 @@ func client_leaving_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func client_demands_credits_text():
 	sayLine("client", "ProstitutionDemandCreds", {main="client", target="main"})
-	saynn("The client is clearly angry..")
+	saynn(("You are" if(getRoleChar("client").isPlayer()) else "The client is")+" clearly angry..")
 
 	addAction("return_creds", "Return creds", "You won't be missing them anyway", "surrender", 1.0, 60, {})
 	addAction("refuse", "Refuse", "", "fight", 1.0, 60, {})
@@ -218,8 +314,8 @@ func client_demands_credits_do(_id:String, _args:Dictionary, _context:Dictionary
 
 
 func client_got_credits_back_text():
-	saynn("{main.name} huffs but hands {client.you} the credits back.")
-	saynn("The client nods and leaves.")
+	saynn("{main.You} {main.youVerb('huff')} but {main.youVerb('hand')} {client.you} the credits back.")
+	saynn("You nod and leave." if(getRoleChar("client").isPlayer()) else "The client nods and leaves.")
 
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
 
@@ -244,7 +340,7 @@ func slut_refused_creds_back_do(_id:String, _args:Dictionary, _context:Dictionar
 
 
 func client_leaving_grumbly_text():
-	saynn("{client.name} grumbles.. but leaves eventually.")
+	saynn("{client.You} {client.youVerb('grumble')}.. but {client.youVerb('leave')} eventually.")
 
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
 
@@ -255,7 +351,7 @@ func client_leaving_grumbly_do(_id:String, _args:Dictionary, _context:Dictionary
 
 
 func client_attacked_slut_text():
-	saynn("{client.name} decides to attack {main.you}!")
+	saynn("{client.You} {client.youVerb('decide')} to attack {main.you}!")
 	sayLine("client", "AttackStart", {main="client", target="main"})
 
 	addAction("fight", "Fight", "Time to fight back..", "default", 1.0, 600, {start_fight=["client", "main"],})
@@ -280,7 +376,7 @@ func client_attacked_slut_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func client_won_text():
-	saynn("{client.You} won! {main.Name} is on the floor, unable to continue fighting..")
+	saynn("{client.You} won! {main.You} {main.youAre} on the floor, unable to continue fighting..")
 	saynn("{client.You} {client.youVerb('take')} the credits back from the slut..")
 
 	addAction("leave", "Leave", "Time to go..", "default", 0.2, 60, {})
@@ -294,7 +390,7 @@ func client_won_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func client_won_leave_text():
-	saynn("After taking the credits back, {client.name} just leaves..")
+	saynn("After taking the credits back, {client.you} just {client.youVerb('leave')}..")
 
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
 
@@ -304,7 +400,7 @@ func client_won_leave_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func slut_won_text():
-	saynn("{main.You} won! {client.Name} is on the floor, unable to continue fighting..")
+	saynn("{main.You} won! {client.You} {client.youAre} on the floor, unable to continue fighting..")
 
 	addAction("kick_them_away", "Kick them away", "Kick the trash away", "default", 0.4, 60, {})
 	addAction("punish", "Punish", "Make them regret it", "punishMean", 1.0, 60, {})
@@ -317,7 +413,7 @@ func slut_won_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func slut_won_kick_text():
-	saynn("{main.name} decides to just kick {client.name} away from {main.his} working spot..")
+	saynn("{main.You} {main.youVerb('decide')} to just kick {client.you} away from {main.yourHis} working spot..")
 
 	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
 
@@ -371,6 +467,23 @@ func cancelled_service_do(_id:String, _args:Dictionary, _context:Dictionary):
 		setState("", "main")
 
 
+func opposite_role_request_denied_text():
+	saynn("{main.You} {main.youVerb('shake')} {main.yourHis} head.")
+	saynn(RNG.pick([
+		"It seems that {client.you} will have to look elsewhere..",
+		"{client.You} {client.youVerb('walk')} away, a little disappointed..",
+	]))
+
+	addAction("continue", "Continue", "See what happens next..", "default", 1.0, 60, {})
+
+func opposite_role_request_denied_do(_id:String, _args:Dictionary, _context:Dictionary):
+	if(_id == "continue"):
+		getRolePawn("main").satisfySocial()
+		getRolePawn("client").satisfySocial()
+		doRemoveRole("client")
+		setState("", "main")
+
+
 func getInterruptActions(_pawn:CharacterPawn) -> Array:
 	var result:Array = []
 	if(getPawnCount() == 1):
@@ -389,6 +502,7 @@ func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _conte
 	if(_id == "approach"):
 		doInvolvePawn("client", _pawn.charID)
 		clientApproached = true
+		clientRequestedAskType = ""
 		setState("found_client", "main")
 
 
@@ -427,6 +541,7 @@ func saveData():
 	data["clientSatisfaction"] = clientSatisfaction
 	data["lastClientID"] = lastClientID
 	data["clientApproached"] = clientApproached
+	data["clientReqAskType"] = clientRequestedAskType
 	return data
 
 func loadData(_data):
@@ -440,4 +555,5 @@ func loadData(_data):
 	clientSatisfaction = SAVE.loadVar(_data, "clientSatisfaction", 0.0)
 	lastClientID = SAVE.loadVar(_data, "lastClientID", "")
 	clientApproached = SAVE.loadVar(_data, "clientApproached", false)
+	clientRequestedAskType = SAVE.loadVar(_data, "clientReqAskType", "")
 

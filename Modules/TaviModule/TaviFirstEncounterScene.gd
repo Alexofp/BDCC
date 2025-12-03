@@ -398,7 +398,7 @@ func _run():
 
 		saynn("[say=tavi]Ah~.. Ready to swallow, my pet? Open your mouth for me.. mhm~[/say]")
 
-		saynn("You obediently do it, your face is all covered in Tavi’s wetness already but she is clearly not done. She grinds herself close to her climax, moaning and panting heavily before raising her body slightly, giving you more breathing room. She then pins your head to the floor with one hand while pleasuring herself with the other. Her digits are mostly focused on her clit, she quickly rubs it from side to side, causing her legs to begin shaking and her whole body shivering. Only a few seconds pass before the waves of pleasure hit her body. She cums hard, arching her back and letting out some very passionate moans while her pussy contracts in an uneven rhythm. She was stimulated so much, her slit suddenly squirts, covering your face with her transplant girlcum with some landing into your mouth.")
+		saynn("You obediently do it, your face is all covered in Tavi’s wetness already but she is clearly not done. She grinds herself close to her climax, moaning and panting heavily before raising her body slightly, giving you more breathing room. She then pins your head to the floor with one hand while pleasuring herself with the other. Her digits are mostly focused on her clit, she quickly rubs it from side to side, causing her legs to begin shaking and her whole body shivering. Only a few seconds pass before the waves of pleasure hit her body. She cums hard, arching her back and letting out some very passionate moans while her pussy contracts in an uneven rhythm. She was stimulated so much, her slit suddenly squirts, covering your face with her transparent girlcum, with some landing into your mouth.")
 
 
 		if(GM.pc.hasPenis()):

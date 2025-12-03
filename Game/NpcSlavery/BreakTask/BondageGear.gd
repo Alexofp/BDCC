@@ -11,6 +11,9 @@ func getSlaveTypeWeights(_isSlaveLevelup):
 		SlaveType.All : 0.6,
 	}
 
+func getNpcOwnerWeight(_npcOwner) -> float:
+	return 0.2
+
 func isPossibleFor(_npc, _isSlaveLevelup):
 	if(_npc.getInventory().getEquppedRemovableRestraints().size() >= 3):
 		return false
@@ -37,8 +40,20 @@ func onSexEvent(_npc, _event:SexEvent):
 func getTaskString():
 	return "Force BDSM gear on: "+getProgressString()
 
+func getTaskStringSlutLock():
+	return "Get locked into BDSM gear: "+getProgressString()
+
 func getTaskHint(_isSlaveLevelup):
 	return "Put different restraints on them during sex. If there is no space, remove something first."
+
+func getNpcOwnerDialogueLines() -> Array:
+	return [
+		"I want you locked in gear during your next fuck. Don't be shy.",
+		"Your next partner should get to use some toys on you. Get yourself locked up.",
+		"You look best when you're restrained. Go get put in some bondage gear.",
+		"Find someone to tie you up properly before they use you.",
+		"Get yourself into some BDSM gear.",
+	]
 
 func getSexGoalWeightModifier(_sexGoalID:String) -> float:
 	if(_sexGoalID == SexGoal.TieUp):

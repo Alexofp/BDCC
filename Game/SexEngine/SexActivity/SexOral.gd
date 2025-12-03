@@ -20,6 +20,7 @@ func getSupportedSexTypes():
 	return {
 		SexType.DefaultSex: true,
 		SexType.StocksSex: true,
+		SexType.BitchsuitSex: true,
 	}
 
 func isStocksSex() -> bool:
@@ -150,6 +151,7 @@ func getActions(_indx:int):
 				if(!getSub().isOralBlocked()):
 					var asktolickScore:float = lustyEnough*(1.0 - getDomInfo().getAngerScore() - 0.9 * float(getDom().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) != null))
 					addAction("asktolick", asktolickScore, "Order to lick", "Ask the sub to lick your pussy")
+				
 				var startgrindfaceScore:float = lustyEnough * (0.1 + getDomInfo().getAngerScore() - 0.9 * float(getDom().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) != null))
 				addAction("startgrindface", startgrindfaceScore, "Grind face", "Grind their face with your pussy")
 		if(state in ["blowjob"]):
@@ -577,6 +579,18 @@ func getSubBiteChance(baseChance:float, domAngerRemoval:float) -> float:
 	return max(theChance, 5.0)
 
 func getAnimation():
+	if(getSexType() == SexType.BitchsuitSex):
+		if(state in ["", "askingtolick"]):
+			return [StageScene.PuppySexOral, "tease", {pc=DOM_0, npc=SUB_0}]
+		if(state in ["licking", "grinding"]):
+			return [StageScene.PuppySexOral, "grind", {pc=DOM_0, npc=SUB_0}]
+		if(state in ["blowjob", "deepthroat"]):
+			if(getDomInfo().isCloseToCumming() || (isStraponSex() && getSubInfo().isCloseToCumming())):
+				return [StageScene.PuppySexOral, "fast", {pc=DOM_0, npc=SUB_0}]
+			return [StageScene.PuppySexOral, "sex", {pc=DOM_0, npc=SUB_0}]
+			
+		return [StageScene.PuppySexOral, "tease", {pc=DOM_0, npc=SUB_0}]
+	
 	if(isStocksSex()):
 		if(state in ["", "askingtolick"]):
 			return [StageScene.StocksSexOral, "tease", {npc=DOM_0, pc=SUB_0}]

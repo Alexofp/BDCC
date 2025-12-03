@@ -48,7 +48,7 @@ func callFuncWrapper(_command: String, _args: Array):
 	
 	return "[color=red]!RUNTIME ERROR NO COMMAND FOUND "+_command+" "+str(_args)+"![/color]"
 	
-func callObjectFunc(_obj: String, _command: String, _args: Array, overrides: Dictionary = {}):
+func callObjectFunc(_obj: String, _command: String, _args: Array, overrides: Dictionary = {}) -> String:
 	if(overrides.has(_obj)):
 		_obj = overrides[_obj]
 	
@@ -57,13 +57,13 @@ func callObjectFunc(_obj: String, _command: String, _args: Array, overrides: Dic
 		shouldBeUpperCase = true
 		_command[0] = _command[0].to_lower()
 	
-	var result = callObjectFuncWrapper(_obj, _command, _args)
-	if((result is String) && shouldBeUpperCase && result.length() > 0):
+	var result:String = callObjectFuncWrapper(_obj, _command, _args)
+	if(shouldBeUpperCase && result.length() > 0):
 		result[0] = result[0].to_upper()
 	
 	return result
 	
-func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
+func callObjectFuncWrapper(_obj: String, _command: String, _args: Array) -> String:
 	var resolvedName = GM.main.resolveCustomCharacterName(_obj)
 	if(resolvedName != null):
 		_obj = resolvedName
@@ -76,6 +76,34 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		
 	if(object == null):
 		return "[color=red]!RUNTIME ERROR NO CHARACTER FOUND "+_obj+"."+_command+" "+str(_args)+"![/color]"
+	if(_command == "theyre" && _args.size() == 0):
+		return object.theyre()
+	if(_command in ["youre", "youreTheyre"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "you're"
+		else:
+			return object.theyre()
+	if(_command in "theyve" && _args.size() == 0):
+		return object.theyve()
+	if(_command in ["youve", "youveTheyve"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "you've"
+		else:
+			return object.theyve()
+	if(_command in ["doesDo", "does"] && _args.size() == 0):
+		return object.doesDo()
+	if(_command == "youDo" && _args.size() == 0):
+		if(object.isPlayer()):
+			return "do"
+		else:
+			return object.doesDo()
+	if(_command in ["doesntDont", "doesnt"] && _args.size() == 0):
+		return object.doesntDont()
+	if(_command == "youDont" && _args.size() == 0):
+		if(object.isPlayer()):
+			return "don't"
+		else:
+			return object.doesntDont()
 	if(_command == "name" && _args.size() == 0):
 		return object.getName()		
 	if(_command == "nameS" && _args.size() == 0):
@@ -95,7 +123,7 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 			return "you"
 		else:
 			return object.himHer()
-	if(_command in ["hisYour", "hisYou", "yourHis", "youHis"] && _args.size() == 0):
+	if(_command in ["hisYour", "hisYou", "yourHis", "yourTheir", "youHis"] && _args.size() == 0):
 		if(object.isPlayer()):
 			return "your"
 		else:
@@ -105,11 +133,46 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 			return "your"
 		else:
 			return object.getName()+"'s"
+	if(_command in ["yours"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "yours"
+		else:
+			return object.getName()+"'s"
+	if(_command in ["hisYours", "yoursHis", "yoursTheirs"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "yours"
+		else:
+			return object.hisHers()
+	if(_command in ["youWere"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "were"
+		else:
+			return object.wasWere()
+	if(_command in ["youWerent"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "weren't"
+		else:
+			return object.wasWere() + "n't"
 	if(_command in ["youAre"] && _args.size() == 0):
 		if(object.isPlayer()):
 			return "are"
 		else:
 			return object.isAre()
+	if(_command in ["youArent"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "aren't"
+		else:
+			return object.isAre() + "n't"
+	if(_command == "youHave" && _args.size() == 0):
+		if(object.isPlayer()):
+			return "have"
+		else:
+			return object.hasHave()
+	if(_command == "youHavent" && _args.size() == 0):
+		if(object.isPlayer()):
+			return "haven't"
+		else:
+			return object.hasHave() + "n't"
 	if(_command == "youVerb"):
 		if(object.isPlayer()):
 			return str(_args[0])
@@ -129,17 +192,27 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		return object.getInmateColorString()		
 	if(_command == "say" && _args.size() == 1):
 		return object.formatSay(str(_args[0]))
-	if((_command == "she" || _command == "he" || _command == "heShe") && _args.size() == 0):
+	if((_command in ["she", "he", "heShe"]) && _args.size() == 0):
 		return object.heShe()
-	if((_command == "his" || _command == "her" || _command == "hisHer") && _args.size() == 0):
+	if((_command in ["their", "his", "her", "hisHer"]) && _args.size() == 0):
 		return object.hisHer()
-	if((_command == "him" || _command == "himHer") && _args.size() == 0):
+	if((_command in ["theirs", "hers", "hisHers"]) && _args.size() == 0):
+		return object.hisHers()
+	if((_command in ["him", "himHer"]) && _args.size() == 0):
 		return object.himHer()
-	if((_command == "is" || _command == "are" || _command == "isAre") && _args.size() == 0):
+	if((_command in ["was", "were", "wasWere"]) && _args.size() == 0):
+		return object.wasWere()
+	if((_command in ["wasnt", "werent", "wasntWerent"]) && _args.size() == 0):
+		return object.wasWere() + "n't"
+	if((_command in ["is", "are", "isAre"]) && _args.size() == 0):
 		return object.isAre()
-	if((_command == "has" || _command == "have" || _command == "hasHave") && _args.size() == 0):
+	if((_command in ["isnt", "arent", "isntArent"]) && _args.size() == 0):
+		return object.isAre() + "n't"
+	if((_command in ["has", "have", "hasHave"]) && _args.size() == 0):
 		return object.hasHave()
-	if((_command == "himself" || _command == "herself" || _command == "himselfHerself") && _args.size() == 0):
+	if((_command in ["hasnt", "havent", "hasntHavent"]) && _args.size() == 0):
+		return object.hasHave() + "n't"
+	if((_command in ["himself", "herself", "himselfHerself", "themself", "itself"]) && _args.size() == 0):
 		return object.himselfHerself()
 	if(_command in ["verbS", "verb"]):
 		if(_args.size() == 1):
@@ -376,6 +449,17 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array):
 		if(object.isSlaveToPlayer()):
 			return object.getNpcSlavery().getSlaveTypeName().to_lower()
 		return "slave"
+		
+	if(_command in ["npcSlave"] && _args.size() == 0):
+		var theSpecial = GM.main.RS.getSpecialRelationship(object.getID())
+		if(theSpecial && theSpecial.id=="SoftSlavery" && theSpecial.npcOwner):
+			return theSpecial.npcOwner.getPCName()
+		return "slave"
+	if(_command in ["cellRoom", "cell"] && _args.size() == 0):
+		if(object.isStaff()):
+			return "room"
+		else:
+			return "cell"
 	
 	if(_command in ["foot"] && _args.size() == 0):
 		var isDigi = object.bodypartHasTrait(BodypartSlot.Legs, PartTrait.LegsDigi)

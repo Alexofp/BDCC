@@ -1,5 +1,6 @@
 extends PanelContainer
 
+onready var profile_button:Button = $PanelContainer/HBoxContainer/ProfileButton
 onready var consoleLabel = $PanelContainer/ConsoleRichLabel
 signal consoleClosed
 
@@ -32,3 +33,10 @@ func _on_DebugConsole_visibility_changed():
 		consoleLabel.bbcode_text = savedText
 		$PanelContainer/ConsoleInput.grab_focus()
 		$PanelContainer/HelpLabel.bbcode_text = "Console commands:\n"+Console.getCommandsHelp()
+
+func _on_ProfileButton_pressed():
+	OPTIONS.toggleShouldProfile()
+	if(OPTIONS.shouldProfile()):
+		printLine("Perfomance profiler enabled")
+	else:
+		printLine("Perfomance profiler disabled")
