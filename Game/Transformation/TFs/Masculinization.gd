@@ -190,7 +190,7 @@ func doProgress(_context:Dictionary) -> Dictionary:
 		switchedhair = true
 		
 		var theChar = getChar()
-		var possiblePartIDs:Dictionary = Bodypart.findPossibleBodypartIDsDict(BodypartSlot.Hair, theChar, theChar.getSpecies(), NpcGender.Male)
+		var possiblePartIDs:Dictionary = Bodypart.findPossibleBodypartIDsDict(BodypartSlot.Hair, theChar, theChar.getSpecies(), NpcGender.Male, true)
 		if(possiblePartIDs.empty()):
 			return {}
 		var newPartID:String = RNG.pickWeightedDict(possiblePartIDs)
@@ -230,7 +230,7 @@ func doProgress(_context:Dictionary) -> Dictionary:
 		removedVag = true
 		
 		var theChar = getChar()
-		var possiblePartIDs:Dictionary = Bodypart.findPossibleBodypartIDsDict(BodypartSlot.Penis, theChar, theChar.getSpecies(), NpcGender.Male)
+		var possiblePartIDs:Dictionary = Bodypart.findPossibleBodypartIDsDict(BodypartSlot.Penis, theChar, theChar.getSpecies(), NpcGender.Male, true)
 		if(possiblePartIDs.has("")):
 			possiblePartIDs.erase("")
 		if(possiblePartIDs.empty()):
@@ -249,7 +249,7 @@ func doProgress(_context:Dictionary) -> Dictionary:
 		removedVag = true
 		
 		var theChar = getChar()
-		var possiblePartIDs:Dictionary = Bodypart.findPossibleBodypartIDsDict(BodypartSlot.Penis, theChar, theChar.getSpecies(), NpcGender.Male)
+		var possiblePartIDs:Dictionary = Bodypart.findPossibleBodypartIDsDict(BodypartSlot.Penis, theChar, theChar.getSpecies(), NpcGender.Male, true)
 		if(possiblePartIDs.has("")):
 			possiblePartIDs.erase("")
 		if(possiblePartIDs.empty()):

@@ -215,12 +215,12 @@ func _run():
 			resultTable += "[/table][/font]"
 			sayn(resultTable)
 					
-			var other = calculateAmount(false)
-			if(other > 0):
-				sayn("")
-				saynn("- Unrelated records found "+str(calculateAmount(false))+":")
-			
-				printChildren(false)
+		var other:int = calculateAmount(false)
+		if(other > 0):
+			sayn("")
+			saynn("- Unrelated records found "+str(other)+":")
+		
+			printChildren(false)
 			
 		var archivedNPCAmount:int = GM.CS.getArchiveChildCountNonPC()
 		if(archivedNPCAmount > 0):
@@ -248,7 +248,6 @@ func _run():
 			resultTable += "[/table][/font]"
 			sayn(resultTable)
 			
-		
 		addButton("Continue", "That’s nice", "")
 		
 		

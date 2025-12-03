@@ -31,7 +31,7 @@ func start_do(_id:String, _args:Array):
 
 func start_eventResult(_event, _id:String, _args:Array):
 	if(_id == "yesbut"):
-		runParadeTo(LOC_SLUTWALL)
+		runParadeTo(LOC_STOCKS)
 	if(_id == "paradeTo"):
 		setState("inStocks")
 		checkSubEvent("FuckInStocks", "You were about to be locked into stocks by {npc.name}..", [])

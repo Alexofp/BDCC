@@ -123,7 +123,7 @@ func getAllowedBodyparts():
 	return []
 
 # Same as getAllowedBodyparts() but gets used in npc generation and transformation logic
-func getAllowedBodypartsForNPCGender(_npcGender:String) -> Array:
+func getAllowedBodypartsForNPCGender(_npcGender:String, _isTF:bool) -> Array:
 	var result:Array = getAllDefaultBodypartIDsForNPCGender(_npcGender)
 	
 	result.append_array(getAllowedBodyparts())

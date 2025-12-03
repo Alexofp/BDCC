@@ -326,7 +326,8 @@ func addInfluence(_am:float, _appendText:bool = true):
 				else:
 					sayAppend("[color=red](Influence decreased to "+str(Util.roundF(newValue*100.0, 1))+"%. The owner will lose their influence over you if you sleep)[/color]")
 		elif(newLevel > oldLevel):
-			sayAppend("[color=#00CC00](Influence level increased. Influence is now at "+str(Util.roundF(newValue*100.0, 1))+"%)[/color]")
+			#sayAppend("[color=#00CC00](Influence level increased. Influence is now at "+str(Util.roundF(newValue*100.0, 1))+"%)[/color]")
+			sayAppend("[color=#00CC00](Influence level increased!)[/color]")
 		
 func addInfluenceObey(_mult:float = 1.0):
 	addInfluence(0.33 * max(_mult, 0.0))

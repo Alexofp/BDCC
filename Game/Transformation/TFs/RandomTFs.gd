@@ -126,7 +126,7 @@ func doProgress(_context:Dictionary) -> Dictionary:
 		}
 	if(nextStep == "hair"):
 		var theChar = getChar()
-		var possiblePartIDs:Dictionary = Bodypart.findPossibleBodypartIDsDict(BodypartSlot.Hair, theChar, theChar.getSpecies(), theChar.calculateNpcGender())
+		var possiblePartIDs:Dictionary = Bodypart.findPossibleBodypartIDsDict(BodypartSlot.Hair, theChar, theChar.getSpecies(), theChar.calculateNpcGender(), true)
 		if(theChar.hasBodypart(BodypartSlot.Hair)):
 			var currentPart:String = theChar.getBodypart(BodypartSlot.Hair).id
 			if(possiblePartIDs.has(currentPart)):

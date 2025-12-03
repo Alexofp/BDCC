@@ -69,15 +69,20 @@ func getInfluenceMod(_am:float) -> float:
 	_am /= theMod
 	return _am
 
-func addInfluence(_am:float):
-	if(_am != 0.0):
+func addInfluence(_am:float, _affectAffection:bool = true) -> bool:
+	var oldVal:float = getInfluence()
+	if(_am != 0.0 && _affectAffection):
 		GM.main.RS.addAffection(charID, "pc", _am * 0.25)
 	influence += getInfluenceMod(_am)
+	if(_am > 0.0 && influence > 0.95):
+		influence += 0.06 # A little push
 	influence = clamp(influence, 0.0, 1.0)
+	
 	if(influence >= 1.0):
 		doLevelUp()
 	if(_am > 0.0 && hasOwnerLock()):
 		addKeyholderSatisfaction(_am * 0.4)
+	return abs(getInfluence() - oldVal) > 0.001
 
 func getInfluence() -> float:
 	return influence
@@ -262,7 +267,9 @@ func onNewDay():
 	
 	if(hasOwnerLock()):
 		if(keyholderSatisfaction < 1.0):
-			addInfluence(0.15 + getOwner().getPersonality().getStat(PersonalityStat.Subby)*0.1)
+			if(addInfluence(0.03 + getOwner().getPersonality().getStat(PersonalityStat.Subby)*0.02, false)):
+				GM.main.addMessage(getOwnerName()+"'s influence over you has increased slightly because of the restraints.")
+			
 	else:
 		keyholderSatisfaction = 0.0
 		ownerOfferedUnlock = false

@@ -8,18 +8,18 @@ onready var dynamicCharactersNode = $DynamicCharacters
 var sceneStack: Array = []
 var messages: Array = []
 var logMessages: Array = []
-var currentDay = 0
-var timeOfDay = 6*60*60 # seconds since 00:00
-var flags = {}
+var currentDay:int = 0
+var timeOfDay:int = 6*60*60 # seconds since 00:00
+var flags:Dictionary = {}
 var flagsCache = null
-var moduleFlags = {}
-var datapackFlags = {}
+var moduleFlags:Dictionary = {}
+var datapackFlags:Dictionary = {}
 var playerScene = preload("res://Player/Player.gd")
 var overriddenPlayerScene = preload("res://Player/OverriddenPlayer.gd")
 var overridenPC
 var originalPC
-var roomMemories = {}
-var lootedRooms = {}
+var roomMemories:Dictionary = {}
+var lootedRooms:Dictionary = {}
 var rollbacker:Rollbacker
 var encounterSettings:EncounterSettings
 var currentlyTestingScene = false
@@ -35,13 +35,13 @@ var DrugDenRun:DrugDen
 var PS:PlayerSlaveryBase
 var PSH:PlayerSlaveryHolder = PlayerSlaveryHolder.new()
 
-var staticCharacters = {}
+var staticCharacters:Dictionary = {}
 var charactersToUpdate:Array = []
-var dynamicCharacters = {}
-var dynamicCharactersPools = {}
+var dynamicCharacters:Dictionary = {}
+var dynamicCharactersPools:Dictionary = {}
 
-var loadedDatapacks = {}
-var datapackCharacters = {}
+var loadedDatapacks:Dictionary = {}
+var datapackCharacters:Dictionary = {}
 
 signal time_passed(_secondsPassed)
 signal saveLoadingFinished
@@ -654,10 +654,10 @@ func getMessages():
 func clearMessages():
 	messages = []
 
-func getTimeCap():
+func getTimeCap() -> int:
 	return 23 * 60 * 60
 
-func isVeryLate():
+func isVeryLate() -> bool:
 	return timeOfDay >= getTimeCap()
 
 const MAX_STOP_PROCESS_CHAR_CHECK = 10
@@ -715,7 +715,11 @@ func processTime(_seconds):
 	doTimeProcess(_seconds)
 	stopProcessingUnusedCharacters()
 
-func doTimeProcess(_seconds):
+func doTimeProcess(_seconds:int):
+	if(_seconds < 0):
+		Log.printerr("doTimeProcess() called with a negative amount of seconds! _seconds="+str(_seconds))
+		return
+	
 	GM.PROFILE.start("doTimeProcess")
 	if(!PS):
 		IS.processTime(_seconds)
@@ -725,7 +729,7 @@ func doTimeProcess(_seconds):
 	
 	GM.PROFILE.start("CHARACTERS.processTime")
 	# This splits long sleeping times into 1 hour chunks
-	var copySeconds = _seconds
+	var copySeconds := _seconds
 	while(copySeconds > 0):
 		var clippedSeconds = min(60*60, copySeconds)
 		#GM.PROFILE.start("GM.pc.processTime")
@@ -744,9 +748,9 @@ func doTimeProcess(_seconds):
 	
 	GM.ui.onTimePassed(_seconds)
 	
-	var oldHours = int((timeOfDay - _seconds) / 60 / 60)
-	var newHours = int(timeOfDay / 60 / 60)
-	var hoursPassed = newHours - oldHours
+	var oldHours := int((timeOfDay - _seconds) / 60 / 60)
+	var newHours := int(timeOfDay / 60 / 60)
+	var hoursPassed := newHours - oldHours
 
 	if(hoursPassed > 0):
 		hoursPassed(hoursPassed)
@@ -754,7 +758,7 @@ func doTimeProcess(_seconds):
 	emit_signal("time_passed", _seconds)
 	GM.PROFILE.finish("doTimeProcess")
 
-func hoursPassed(howMuch):
+func hoursPassed(howMuch:int):
 	GM.pc.hoursPassed(howMuch)
 	
 	for characterID in charactersToUpdate:
@@ -770,11 +774,11 @@ func hoursPassed(howMuch):
 	
 	RS.hoursPassed(howMuch)
 
-func processTimeUntil(newseconds):
+func processTimeUntil(newseconds:int):
 	if(timeOfDay >= newseconds):
 		return
 	
-	var timeDiff = newseconds - timeOfDay
+	var timeDiff := newseconds - timeOfDay
 	
 	timeOfDay = newseconds
 	doTimeProcess(timeDiff)

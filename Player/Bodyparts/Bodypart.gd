@@ -478,7 +478,7 @@ func generateRandomSkinIfCan(_dynamicCharacter):
 func generateRandomColors(_dynamicCharacter):
 	pass
 
-static func findPossibleBodypartIDs(bodypartSlot:String, acharacter, theSpecies:Array, customNpcGender=null) -> Array:
+static func findPossibleBodypartIDs(bodypartSlot:String, acharacter, theSpecies:Array, customNpcGender=null, _isTF:bool = false) -> Array:
 	var theActualNpcGender:String = acharacter.calculateNpcGender() if customNpcGender==null else customNpcGender
 	var possible:Array = []
 
@@ -487,7 +487,7 @@ static func findPossibleBodypartIDs(bodypartSlot:String, acharacter, theSpecies:
 		var speciesObject = GlobalRegistry.getSpecies(playerSpecie)
 		if(!speciesObject):
 			continue
-		var theAllowed:Array = speciesObject.getAllowedBodypartsForNPCGender(theActualNpcGender)
+		var theAllowed:Array = speciesObject.getAllowedBodypartsForNPCGender(theActualNpcGender, _isTF)
 		for allowedBodypartID in theAllowed:
 			allAllowed[allowedBodypartID] = true
 	
@@ -513,8 +513,8 @@ static func findPossibleBodypartIDs(bodypartSlot:String, acharacter, theSpecies:
 	return possible
 
 # Used for transformation logic
-static func findPossibleBodypartIDsDict(bodypartSlot:String, acharacter, theSpecies:Array, customNpcGender=null) -> Dictionary:
-	var idsAr:Array = findPossibleBodypartIDs(bodypartSlot, acharacter, theSpecies, customNpcGender)
+static func findPossibleBodypartIDsDict(bodypartSlot:String, acharacter, theSpecies:Array, customNpcGender=null, _isTF:bool = false) -> Dictionary:
+	var idsAr:Array = findPossibleBodypartIDs(bodypartSlot, acharacter, theSpecies, customNpcGender, _isTF)
 	var result:Dictionary = {}
 	
 	for idEntry in idsAr:
