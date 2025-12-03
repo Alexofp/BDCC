@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://UI/LaunchScreen/LaunchScreen.gd" type="Script" id=1]
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=2]
@@ -13,6 +13,9 @@ size = 38
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 5 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 0.47451 )
 
 [node name="LaunchScreen" type="Control"]
 anchor_right = 1.0
@@ -47,6 +50,14 @@ margin_top = -5.0
 margin_right = -22.0
 margin_bottom = 41.0
 text = "TROUBLESHOOTING"
+
+[node name="CheckBrokenModsButton" type="Button" parent="VBoxContainer/Label"]
+unique_name_in_owner = true
+margin_left = 20.0
+margin_top = -5.0
+margin_right = 266.0
+margin_bottom = 41.0
+text = "Check online broken mods list"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 52.0
@@ -260,7 +271,51 @@ text = "Building BDCC.pck
 Please wait.."
 align = 1
 
+[node name="BusyPanel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 4 )
+
+[node name="CenterContainer" type="CenterContainer" parent="BusyPanel"]
+margin_right = 1280.0
+margin_bottom = 720.0
+
+[node name="PanelContainer" type="PanelContainer" parent="BusyPanel/CenterContainer"]
+margin_left = 490.0
+margin_top = 353.0
+margin_right = 790.0
+margin_bottom = 367.0
+rect_min_size = Vector2( 300, 0 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BusyPanel/CenterContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 293.0
+margin_bottom = 58.0
+
+[node name="BusyLabel" type="RichTextLabel" parent="BusyPanel/CenterContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_right = 286.0
+margin_bottom = 21.0
+bbcode_enabled = true
+bbcode_text = "[center]Checking mods..[/center]"
+text = "Checking mods.."
+fit_content_height = true
+
+[node name="BusyCloseButton" type="Button" parent="BusyPanel/CenterContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 25.0
+margin_right = 286.0
+margin_bottom = 51.0
+text = "OK"
+
+[node name="HTTPRequestMods" type="HTTPRequest" parent="."]
+unique_name_in_owner = true
+
 [connection signal="pressed" from="VBoxContainer/Label/DebugButton" to="." method="_on_DebugButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/Label/CheckBrokenModsButton" to="." method="_on_CheckBrokenModsButton_pressed"]
 [connection signal="meta_clicked" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/WarningLabel" to="." method="_on_RichTextLabel_meta_clicked"]
 [connection signal="meta_clicked" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/ModDisableButton" to="." method="_on_ModDisableButton_pressed"]
@@ -276,3 +331,6 @@ align = 1
 [connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_ConfirmationDialog_confirmed"]
 [connection signal="closePressed" from="ModBrowser" to="." method="_on_ModBrowser_closePressed"]
 [connection signal="onClose" from="TroubleshootingScreen" to="." method="_on_TroubleshootingScreen_onClose"]
+[connection signal="meta_clicked" from="BusyPanel/CenterContainer/PanelContainer/VBoxContainer/BusyLabel" to="." method="_on_BusyLabel_meta_clicked"]
+[connection signal="pressed" from="BusyPanel/CenterContainer/PanelContainer/VBoxContainer/BusyCloseButton" to="." method="_on_BusyCloseButton_pressed"]
+[connection signal="request_completed" from="HTTPRequestMods" to="." method="_on_HTTPRequestMods_request_completed"]

@@ -53,6 +53,14 @@ func getTaskString():
 func getTaskHint(_isSlaveLevelup):
 	return "Force them to swallow this much fluids."
 
+func getNpcOwnerDialogueLines() -> Array:
+	return [
+		"I want you swallowing every last drop you're given.",
+		"Go drink as much cum as you can get.",
+		"Every load you're offered should go straight down your throat.",
+		"I want you full of swallowed cum when I next find you.",
+	]
+
 func getSexGoalWeightModifier(_sexGoalID:String) -> float:
 	if(_sexGoalID == SexGoal.FuckOral):
 		return 3.0

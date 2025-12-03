@@ -35,6 +35,25 @@ func _run():
 		sideQuests.sort_custom(MyQuestSorter, "sort_descending")
 		completedQuests.sort_custom(MyQuestSorter, "sort_descending")
 		
+		var showedNpcOwnerThing:bool = false
+		for ownerID in GM.main.RS.special:
+			var theSpecialRelationship = GM.main.RS.special[ownerID]
+			if(theSpecialRelationship.id == "SoftSlavery" && theSpecialRelationship.npcOwner):
+				var theNpcOwner:NpcOwnerBase = theSpecialRelationship.npcOwner
+				if(theNpcOwner.hasGivenPCTasks()):
+					if(!showedNpcOwnerThing):
+						saynn("[i]Owner tasks:[/i]")
+						showedNpcOwnerThing = true
+					
+					var theOwner = getCharacter(ownerID)
+					if(!theOwner):
+						continue
+					sayn("[b]"+theOwner.getName()+" tasks:[/b]")
+					var theTaskLines := theNpcOwner.getQuestProgressArray()
+					for textLine in theTaskLines:
+						sayn("* "+textLine)
+					sayn("")
+		
 		saynn("[i]Main tasks:[/i]")
 		
 		if(mainQuests.size() == 0):
@@ -75,10 +94,15 @@ func _run():
 			sayn("")
 		
 		addButton("Close", "Close the quest log", "endthescene")
+		if(getFlag("ElizaModule.s0hap")):
+			addButton("Bounties", "Try to remember which bounties you can still do", "bounties")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
+		return
+	if(_action == "bounties"):
+		runScene("NurseryBountyBoardScene", [true])
 		return
 
 func _react_scene_end(_tag, _result):

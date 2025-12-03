@@ -164,7 +164,7 @@ func loadGame(_path):
 func switchToGameAndLoad(_path):
 	var _ok = get_tree().change_scene("res://Game/MainScene.tscn")
 	yield(get_tree(),"idle_frame")
-	loadGame(_path)
+	call_deferred("loadGame", _path)
 
 func switchToGameAndResumeLatestSave():
 	var saves: Array = getSavesSortedByDate()
@@ -172,7 +172,7 @@ func switchToGameAndResumeLatestSave():
 		return
 	var _ok = get_tree().change_scene("res://Game/MainScene.tscn")
 	yield(get_tree(),"idle_frame")
-	loadGame(saves[0])
+	call_deferred("loadGame", saves[0])
 
 func getLoadedSavefileVersion():
 	return loadedSavefileVersion

@@ -1924,7 +1924,7 @@ func _run():
 
 		saynn("You.. caught between a pair of irresistible girls.. with irresistible cocks.. find yourself completely helpless.. as soon as you try to move your arm or leg, they are quick to wrestle it back into place.")
 
-		saynn("Something tells you that Eliza's strapon won't fill in your mouth.. Your subby eyes look up at her.. pleading to not be too rough..")
+		saynn("Something tells you that Eliza's strapon won't fit in your mouth.. Your subby eyes look up at her.. pleading to not be too rough..")
 
 		saynn("[say=elizaMom]Get ready, sweetie.[/say]")
 

@@ -3,6 +3,7 @@ extends StatusEffectBase
 func _init():
 	id = StatusEffect.WorkOutLight
 	isBattleOnly = false
+	removedOnDungeonStart = true
 	
 func initArgs(_args = []):
 	if(_args.size() > 0):

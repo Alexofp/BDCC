@@ -19,6 +19,7 @@ func getSupportedSexTypes():
 		SexType.DefaultSex: true,
 		#SexType.StocksSex: true,
 		#SexType.SlutwallSex: true,
+		SexType.BitchsuitSex: true,
 	}
 
 func isActivityImpossibleShouldStop() -> bool:

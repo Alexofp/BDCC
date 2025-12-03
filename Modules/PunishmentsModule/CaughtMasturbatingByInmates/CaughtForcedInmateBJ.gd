@@ -12,7 +12,7 @@ func _run():
 		#playAnimation(StageScene.Duo, "stand", {npc="inmateMale"})
 
 	if(state == ""):
-		saynn("You feel somebody approaching you from behind. It was too late though, he unceremoniously grabs you by the hair by the hair and pulls you down onto your knees before shoving his knotted cock into your face. His grasp is pretty painful, you wince and let out an annoyed noise.")
+		saynn("You feel somebody approaching you from behind. It was too late though, he unceremoniously grabs you by the hair and pulls you down onto your knees before shoving his knotted cock into your face. His grasp is pretty painful, you wince and let out an annoyed noise.")
 
 		saynn("[say=inmateMale]Quit whining and open your fucking mouth already.[/say]")
 

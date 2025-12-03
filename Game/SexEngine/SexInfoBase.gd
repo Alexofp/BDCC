@@ -291,24 +291,24 @@ func personalityScore(personalityStats = {}, addscore = 0.0):
 	
 	return result
 
-func remember(keyid, value = true):
+func remember(keyid:String, value = true):
 	memory[keyid] = value
 
-func hasMemory(keyid):
+func hasMemory(keyid:String):
 	if(memory.has(keyid)):
 		return true
 	return false
 
-func getMemory(keyid, defaultValue = null):
+func getMemory(keyid:String, defaultValue = null):
 	if(!memory.has(keyid)):
 		return defaultValue
 	return memory[keyid]
 
-func increaseMemory(keyid):
+func increaseMemory(keyid:String, _am:int = 1):
 	if(!memory.has(keyid)):
 		memory[keyid] = 0
 	
-	memory[keyid] += 1
+	memory[keyid] += _am
 
 func getSexEndInfo():
 	var texts = []
@@ -512,6 +512,9 @@ func doFetishChangeCalculation() -> Dictionary:
 	
 	return {messages=messages}
 		
+
+func shouldFullyObey() -> bool:
+	return false
 
 func saveData():
 	var data = {

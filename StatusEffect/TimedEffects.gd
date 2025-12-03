@@ -42,6 +42,22 @@ func getEffectDesc():
 #	return "For the next "+Util.getTimeStringHumanReadable(time)+":"
 	return Util.join(theTexts, "\n")
 
+func getVisisbleDescription():
+	var theTexts:Array = []
+	var theBuffsBySeconds:Dictionary = character.getSortedBuffsDataByTime(character.timedBuffs)
+	
+	for theTime in theBuffsBySeconds:
+		theTexts.append("Expire in "+str(Util.getTimeStringHumanReadable(theTime))+":")
+		
+		var theBuffs:Array = theBuffsBySeconds[theTime]
+		
+		var theBuffNames:Array = []
+		for theBuff in theBuffs:
+			theBuffNames.append("[color=#"+theBuff.getBuffColor().to_html(false)+"]" + theBuff.getVisibleDescription() + "[/color]")
+		theTexts.append(Util.join(theBuffNames, "\n"))
+	
+	return Util.join(theTexts, "\n")
+
 func getEffectImage():
 	return "res://Images/StatusEffects/overdose.png"
 

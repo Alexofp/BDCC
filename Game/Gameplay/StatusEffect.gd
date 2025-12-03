@@ -13,6 +13,7 @@ const Blocking = "Blocking"
 const Defocussing = "Defocussing"
 const PrimedAttack = "PrimedAttack"
 const DrugStrong = "DrugStrong"
+const AuraOfDominance = "AuraOfDominance"
 
 # Sex engine effects
 const SexEngineLikes = "SexEngineLikes"

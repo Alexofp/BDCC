@@ -53,6 +53,10 @@ func _run():
 	else:
 		addButtonAt(13, "Tasks", "Look at your tasks", "tasks")
 	addButtonAt(14, "Inventory", "Look at your inventory", "inventory")
+	
+	#addButtonAt(5, "NPC owner test", "TEST BUTTON", "npcOwnerTest")
+	#addButtonAt(8, "Nemesis test", "TEST BUTTON", "triggerNemesis")
+	
 	#addButtonAt(5, "Sex Test", "Sex test", "sextest")
 	#addExtraButtonAt(4, "Sex Test", "Sex test", "sextest")
 	#addButtonAt(7, "Slave Test", "Slave test", "slavetest")
@@ -94,7 +98,9 @@ func _react(_action: String, _args):
 		return _room._onButton(keyid)
 	
 	if(_action == "go"):
+		#GM.PROFILE.start("playAnimation")
 		playAnimation(StageScene.Solo, "walk")
+		#GM.PROFILE.finish("playAnimation")
 		#playAnimation(StageScene.MilkingStallDuo, "start", {bodyState={chains=[["normal", "neck", "scene", "toppipe"], ["short", "neck", "scene", "bottompipe"]]}})
 		#playAnimation(StageScene.MilkingStallSolo, "cum", {bodyState={chains=[["hoseshort", "breastpump", "scene", "milktank"], ["hoseshort", "penisPump", "scene", "milktank"], ["short", "neck", "scene", "bottompipe"]]}})
 		#playAnimation(StageScene.PuppySolo, "walk")
@@ -106,6 +112,7 @@ func _react(_action: String, _args):
 		
 		if(!GM.main.checkTFs()):
 			GM.main.showLog()
+		return
 			
 	if(_action == "giveupdungeon"):
 		runScene("DrugDenGiveUpScene")
@@ -117,6 +124,22 @@ func _react(_action: String, _args):
 		runScene("StrugglingScene")
 	if(_action == "me"):
 		runScene("MeScene")
+	if(_action == "npcOwnerTest"):
+		var someNPC:String = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [], InmateGenerator.new(), {})
+		var thePawn:CharacterPawn = GM.main.IS.spawnPawnIfNeeded(someNPC)
+		thePawn.setLocation(GM.pc.getLocation())
+		GM.main.RS.startSpecialRelantionship("SoftSlavery", someNPC)
+		runScene("NpcOwnerEventRunnerScene", [someNPC, "ParadeTo", ["yard_novaspot"]])
+		#runScene("NpcOwnerEventRunnerScene", [someNPC, "Punish2Gangbang"])
+	if(_action == "triggerNemesis"):
+		var someNPC:String = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [], InmateGenerator.new(), {})
+		var thePawn:CharacterPawn = GM.main.IS.spawnPawnIfNeeded(someNPC)
+		thePawn.setLocation(GM.pc.getLocation())
+		GM.main.RS.startSpecialRelantionship("Nemesis", someNPC)
+		var theRelationship = GM.main.RS.getSpecialRelationship(someNPC)
+		theRelationship.gonnaAmbush = true
+		#runScene("NpcOwnerEventRunnerScene", [someNPC])
+		
 	if(_action == "sextest"):
 		#runScene("GenericSexScene", ["pc", ["socket"]])
 		#runScene("GenericSexScene", [["rahi", "nova"], ["risha"]])
@@ -127,9 +150,10 @@ func _react(_action: String, _args):
 		#runScene("GenericSexScene", [["pc"], ["rahi", "socket"]])
 		#runScene("GenericSexScene", [["avy"], ["rahi"]])
 		#runScene("GenericSexScene", ["rahi", "pc", SexType.DefaultSex, {SexMod.SubsStartUnconscious: true}])
+		runScene("GenericSexScene", ["pc", "rahi", SexType.BitchsuitSex, {}])
 		
 		#runScene("GenericSexScene", [NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true}), "socket", SexType.SlutwallSex])
-		runScene("GenericSexScene", [NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true}), "avy"])
+		#runScene("GenericSexScene", [NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true}), "avy"])
 		#getCharacter("socket").addEffect("SexSpacedOut")
 		#runScene("GenericSexScene", ["rahi", "pc", SexType.SlutwallSex])
 		#GM.pc.getInventory().addItem(GlobalRegistry.createItem("BreastPump"))
@@ -242,6 +266,12 @@ func runInteraction():
 			else:
 				addButton(action["name"], action["desc"], "pick_interaction_action", [interaction, action])
 	else:
+		var theRelativeActionsInfo:Array = interaction.getActionsRelativeChanceInfo()
+		if(theRelativeActionsInfo.size() > 1):
+			var curPawn := interaction.getCurrentPawn()
+			if(curPawn):
+				saynn(curPawn.getChar().getName()+"'s actions:\n"+Util.join(theRelativeActionsInfo, "\n"))
+		
 		addButton("Continue", "See what happens next", "progress_interaction")
 	
 	return true

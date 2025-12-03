@@ -44,7 +44,7 @@ func _run():
 		
 		saynn("[say=pc]I’m ready, Miss Tavi. You have a plan?[/say]")
 
-		saynn("You walk just beside Tavi. You two exit her little hideout and traverse the catwalk towards the engineering block.")
+		saynn("You walk just beside Tavi. You two exit her little hideout and traverse the catwalk towards the Engineering block.")
 
 		saynn("[say=tavi]Plan? We get to the bluespace transmitter and send a message to the Syndicate. Risky move but we have no other choice.[/say]")
 
@@ -112,7 +112,7 @@ func _run():
 
 		saynn("[say=kait]Why?! Because I wanted my input to be heard? We could have been a great team! We could have worked together! But no! You didn’t trust me with anything![/say]")
 
-		saynn("Kait tries to shove Tavi again but this time her paws get caught. Tavi gracefully wrenches them behind the snow leopard’s back and then gets a grasp on her hair, causing the feline to hiss from pain. Tavi switches to a more intimidating tone now that is in control.")
+		saynn("Kait tries to shove Tavi again but this time her paws get caught. Tavi gracefully wrenches them behind the snow leopard’s back and then gets a grasp on her hair, causing the feline to hiss from pain. Tavi switches to a more intimidating tone now that she is in control.")
 
 		saynn("[say=tavi]Don’t lie, pussy cat. I trusted you completely. But someone must have the final say. Always. Otherwise your little team is gonna collapse under its own disagreements. And I’m sorry, pussy cat. But I am more experienced than you.[/say]")
 
@@ -259,7 +259,7 @@ func _run():
 	if(state == "follow"):
 		aimCameraAndSetLocName("eng_bay_corridor")
 		
-		saynn("You and Tavi pass the entrance of the engineering corridor. Metal walls here have orange trim to them and many supports that you can use to hide behind. The door that leads to the secure corridor seems to be unguarded.")
+		saynn("You and Tavi pass the entrance of the Engineering corridor. Metal walls here have orange trim to them and many supports that you can use to hide behind. The door that leads to the secure corridor seems to be unguarded.")
 
 		saynn("[say=tavi]That’s the one?[/say]")
 
@@ -361,7 +361,7 @@ func _run():
 
 		saynn("[sayMale]You said you saw something glowing? That ain’t it, chief.[/sayMale]")
 
-		saynn("[sayMale]Whatever, man. Hey! The fuck is your problem. This area is off limits for bitches like you.[/sayMale]")
+		saynn("[sayMale]Whatever, man. Hey! The fuck is your problem? This area is off limits for bitches like you.[/sayMale]")
 
 		saynn("They begin to slowly approach you, one has a shock remote in his hand.")
 
@@ -377,7 +377,7 @@ func _run():
 
 		saynn("The one with the remote chuckles before spitting to the side.")
 
-		saynn("[sayMale]I’m only wondering how many cocks can you take at once.[/sayMale]")
+		saynn("[sayMale]I’m only wondering how many cocks you can take at once.[/sayMale]")
 
 		saynn("[say=pc]Less than you I’m pretty sure. A big pussy like you can take a lot.[/say]")
 
@@ -537,7 +537,7 @@ func _run():
 
 		saynn("You’re not sure what to do with this glimpse of hope. A few seconds feel like forever..")
 
-		saynn("Luckily, she turns around and starts creeping towards the guys, making sure to not make any noise, using her feline gracefulness to her advantage. You stall a little bit longer while the guy takes his time producing some make-shift cuffs out of zip ties.")
+		saynn("Luckily, she turns around and starts creeping towards the guys, making sure to not make any noise, using her feline gracefulness to her advantage. You stall a little bit longer while the guy takes his time producing some makeshift cuffs out of zip ties.")
 
 		saynn("[say=pc]Do you have to do that?[/say]")
 

@@ -989,10 +989,30 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Player/Player3D/Parts/MyBoneAttachment.gd"
 }, {
+"base": "MyProfilerBase",
+"class": "MyProfiler",
+"language": "GDScript",
+"path": "res://Util/Profiler/MyProfiler.gd"
+}, {
+"base": "Reference",
+"class": "MyProfilerBase",
+"language": "GDScript",
+"path": "res://Util/Profiler/MyProfilerBase.gd"
+}, {
 "base": "Reference",
 "class": "MyProjectSettings",
 "language": "GDScript",
 "path": "res://Game/Options/MyProjectSettings.gd"
+}, {
+"base": "Object",
+"class": "NOET",
+"language": "GDScript",
+"path": "res://Game/PlayerSlaverySoft/NOET.gd"
+}, {
+"base": "Object",
+"class": "NOM",
+"language": "GDScript",
+"path": "res://Game/PlayerSlaverySoft/NOM.gd"
 }, {
 "base": "InmateGenerator",
 "class": "NakedSlaveGenerator",
@@ -1003,6 +1023,11 @@ _global_script_classes=[ {
 "class": "NemesisReason",
 "language": "GDScript",
 "path": "res://Game/InteractionSystem/Relationship/NemesisReason.gd"
+}, {
+"base": "ComputerBase",
+"class": "NetworkedComputerBase",
+"language": "GDScript",
+"path": "res://Game/Computer/NetworkedComputerBase.gd"
 }, {
 "base": "Module",
 "class": "NovaModule",
@@ -1040,6 +1065,36 @@ _global_script_classes=[ {
 "path": "res://Game/Pregnancy/NpcGender.gd"
 }, {
 "base": "Object",
+"class": "NpcOwnerActionType",
+"language": "GDScript",
+"path": "res://Game/PlayerSlaverySoft/NpcOwnerActionType.gd"
+}, {
+"base": "Reference",
+"class": "NpcOwnerBase",
+"language": "GDScript",
+"path": "res://Game/PlayerSlaverySoft/NpcOwnerBase.gd"
+}, {
+"base": "Reference",
+"class": "NpcOwnerEventBase",
+"language": "GDScript",
+"path": "res://Game/PlayerSlaverySoft/NpcOwnerEventBase.gd"
+}, {
+"base": "Reference",
+"class": "NpcOwnerEventRunner",
+"language": "GDScript",
+"path": "res://Game/PlayerSlaverySoft/NpcOwnerEventRunner.gd"
+}, {
+"base": "Object",
+"class": "NpcOwnerSexLimits",
+"language": "GDScript",
+"path": "res://Game/PlayerSlaverySoft/NpcOwnerSexLimits.gd"
+}, {
+"base": "Reference",
+"class": "NpcOwnerTraitBase",
+"language": "GDScript",
+"path": "res://Game/PlayerSlaverySoft/NpcOwnerTraitBase.gd"
+}, {
+"base": "Object",
 "class": "NpcRank",
 "language": "GDScript",
 "path": "res://Characters/Dynamic/NpcRank.gd"
@@ -1048,6 +1103,11 @@ _global_script_classes=[ {
 "class": "NpcSlave",
 "language": "GDScript",
 "path": "res://Game/NpcSlavery/NpcSlave.gd"
+}, {
+"base": "Object",
+"class": "NpcTaskPool",
+"language": "GDScript",
+"path": "res://Game/NpcSlavery/NpcTaskPool.gd"
 }, {
 "base": "CharacterGeneratorBase",
 "class": "NurseGenerator",
@@ -1956,9 +2016,14 @@ _global_script_class_icons={
 "ModEntry": "",
 "Module": "",
 "MyBoneAttachment": "",
+"MyProfiler": "",
+"MyProfilerBase": "",
 "MyProjectSettings": "",
+"NOET": "",
+"NOM": "",
 "NakedSlaveGenerator": "",
 "NemesisReason": "",
+"NetworkedComputerBase": "",
 "NovaModule": "",
 "NpcBreakTaskBase": "",
 "NpcCon": "",
@@ -1966,8 +2031,15 @@ _global_script_class_icons={
 "NpcFinder": "",
 "NpcGen": "",
 "NpcGender": "",
+"NpcOwnerActionType": "",
+"NpcOwnerBase": "",
+"NpcOwnerEventBase": "",
+"NpcOwnerEventRunner": "",
+"NpcOwnerSexLimits": "",
+"NpcOwnerTraitBase": "",
 "NpcRank": "",
 "NpcSlave": "",
+"NpcTaskPool": "",
 "NurseGenerator": "",
 "NurseryTaskBase": "",
 "Orifice": "",
@@ -2117,6 +2189,7 @@ _global_script_class_icons={
 config/name="BDCC"
 run/main_scene="res://UI/LaunchScreen/LaunchScreen.tscn"
 config/project_settings_override="user://override.cfg"
+run/flush_stdout_on_print=true
 boot_splash/image="res://Images/Splash/splash.png"
 boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0.145098, 0.145098, 0.501961, 1 )

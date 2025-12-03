@@ -2570,7 +2570,7 @@ func _run():
 		playAnimation(StageScene.GivingBirth, "idle", {pc="mirri"})
 		saynn("[say=pc]You asked for it, bitch.[/say]")
 
-		saynn("As you get up and head for her wardrobe of bdsm restraints, Mirri turns herself to her back, her feline eyes curious to see what you're up to.")
+		saynn("As you get up and head for her wardrobe of BDSM restraints, Mirri turns herself to her back, her feline eyes curious to see what you're up to.")
 
 		saynn("[say=mirri]Ow, my butt..[/say]")
 

@@ -12,9 +12,20 @@ func getSlutlockWeight() -> float:
 	return 0.2
 
 func isPossibleFor(_npc, _isSlaveLevelup):
+	if(!_npc.hasPenis()):
+		return false
 	if(_npc.getFetishHolder().getFetishValue(Fetish.AnalSexReceiving) < 0.0):
 		return false
-	if(!_npc.hasReachablePenis()):
+	if(!_npc.hasReachablePenis() && !_npc.isWearingChastityCage()):
+		return false
+	return true
+
+func isPossibleForSlutlock(_npc):
+	if(!_npc.hasPenis()):
+		return false
+	if(!_npc.canZoneOrgasm(BodypartSlot.Anus) && !_npc.hasReachableVagina()):
+		return false
+	if(!_npc.hasReachablePenis() && !_npc.isWearingChastityCage()):
 		return false
 	return true
 
@@ -38,6 +49,15 @@ func getTaskString():
 
 func getTaskHint(_isSlaveLevelup):
 	return "Force them to orgasm while they are wearing a chastity cage"
+
+func getNpcOwnerDialogueLines() -> Array:
+	return [
+		"Time for a challenge. I want you to cum in your chastity cage.",
+		"Prove your devotion. Orgasm while you're still locked up.",
+		"You don't need to be free to climax. Make yourself cum in chastity.",
+		"Your cage shouldn't stop you. I want to see you orgasm through it.",
+		"A true slut can cum even when caged. Show me you're a true slut.",
+	]
 
 func getSexGoalWeightModifier(_sexGoalID:String) -> float:
 	if(_sexGoalID == SexGoal.FuckAnal):

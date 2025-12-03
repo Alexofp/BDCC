@@ -70,6 +70,8 @@ func getForms() -> Dictionary:
 		"ProstitutionUsual": form("The usual, {X} credits.", {main=CHAR, target=CHAR, credits=VAR}, "main", "target"), # Whore offering her 'usual'
 		"ProstitutionServiceDom": form("I can be in charge and make you feel real good, {X} credits.", {main=CHAR, target=CHAR, credits=VAR}, "main", "target"), # Whore offering to be a dominant during the sex
 		"ProstitutionPricySlut": form("I'm expensive. But I'm worth it, baby, just {X} credits.", {main=CHAR, target=CHAR, credits=VAR}, "main", "target"), # Whore is trying to get more credits out of a client
+		"ProstitutionClientAskForDomSlut": form("I'd like to see you being the one in control.", {main=CHAR, target=CHAR}, "main", "target"), # Client asks if sub slut would dom instead
+		"ProstitutionClientAskForSubSlut": form("I'd like to be in charge, if you don't mind.", {main=CHAR, target=CHAR}, "main", "target"), # Client asks if dom slut would sub instead
 		"ProstitutionDenied": form("I'd rather not.", {main=CHAR, target=CHAR}, "main", "target"), # Client denying the whore (sometimes in a rude way)
 		"ProstitutionDeniedWhatever": form("Whatever then, your loss.", {main=CHAR, target=CHAR}, "main", "target"), # Whore being annoyed that the client has denied her
 		"ProstitutionAccept": form("Alright, let's see what you can do.", {main=CHAR, target=CHAR}, "main", "target"), # Client agreeing to the whore's services
@@ -94,7 +96,7 @@ func getForms() -> Dictionary:
 		"TalkSexOfferSelf": form("Hey, wanna fuck me maybe?", {main=CHAR, target=CHAR}, "main", "target"),
 		"TalkSexOfferSelfAccept": form("Sure, I can fuck you real good.", {main=CHAR, target=CHAR}, "main", "target"),
 		"TalkSexOfferSelfDeny": form("I'd rather not.", {main=CHAR, target=CHAR}, "main", "target"),
-		"TalkGrabAndFuck": form("You're not going anywhere until I have some fun with you, bdsm slut.", {main=CHAR, target=CHAR}, "main", "target"),
+		"TalkGrabAndFuck": form("You're not going anywhere until I have some fun with you, BDSM slut.", {main=CHAR, target=CHAR}, "main", "target"),
 		"TalkAboutToKidnap": form("You are mine now. Understand?", {main=CHAR, target=CHAR}, "main", "target"),
 		"TalkAboutToKidnapReact": form("O.. O-Okay..", {main=CHAR, target=CHAR}, "main", "target"),
 	}

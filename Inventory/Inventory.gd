@@ -826,7 +826,7 @@ func loadData(data):
 		var itemLoadedData = SAVE.loadVar(loadedItem, "data", {})
 		
 		var newItem: ItemBase = GlobalRegistry.createItem(id, false)
-		if(newItem == null):
+		if(!newItem):
 			Log.printerr("ITEM WITH ID "+str(id)+" WASN'T FOUND IN REGISTRY")
 			continue
 		if(uniqueID == null || uniqueID == ""):
@@ -845,7 +845,7 @@ func loadData(data):
 		var itemLoadedData = SAVE.loadVar(loadedItem, "data", {})
 		
 		var newItem: ItemBase = GlobalRegistry.createItem(id, false)
-		if(newItem == null):
+		if(!newItem):
 			Log.printerr("ITEM WITH ID "+str(id)+" WASN'T FOUND IN REGISTRY")
 			continue
 		if(uniqueID == null || uniqueID == ""):
@@ -879,7 +879,7 @@ func loadDataNPC(data, npc):
 		var itemLoadedData = SAVE.loadVar(loadedItem, "data", {})
 		
 		var newItem: ItemBase = GlobalRegistry.createItem(id, false)
-		if(newItem == null):
+		if(!newItem):
 			Log.printerr("ITEM WITH ID "+str(id)+" WASN'T FOUND IN REGISTRY")
 			continue
 		newItem.uniqueID = uniqueID

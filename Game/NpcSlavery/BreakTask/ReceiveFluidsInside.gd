@@ -43,6 +43,15 @@ func getTaskString():
 func getTaskHint(_isSlaveLevelup):
 	return "Cum or spit inside their pussy/ass."
 
+func getNpcOwnerDialogueLines() -> Array:
+	return [
+		"I want to see someone's seed dripping from your hole"+("s" if GM.pc.hasVagina() else "")+".",
+		"Find someone to leave their load deep inside you.",
+		"I want you leaking someone's cum.",
+		"Your insides should be swimming in fresh cum.",
+		"Find a cock to pump its seed deep into you.",
+	]
+
 func getSexGoalWeightModifier(_sexGoalID:String) -> float:
 	if(_sexGoalID == SexGoal.FuckAnal):
 		return 3.0

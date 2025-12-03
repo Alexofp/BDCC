@@ -144,6 +144,7 @@ func _on_HTTPRequest_request_completed(result, _response_code, _headers, body):
 
 	if(!(releasesData is Array)):
 		Log.printerr("[MainMenu] Bad data from github")
+		Log.printerr(body.get_string_from_utf8())
 		setGithubLabelStr("Latest github release: Error", "")
 		return
 		

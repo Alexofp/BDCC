@@ -33,6 +33,7 @@ func _run():
 		if(interaction.getCurrentActionText() != ""):
 			saynn(interaction.getCurrentActionText())
 		
+		interaction.actionBuffer = []
 		saynn(interaction.getOutputTextFinal())
 		
 		if(GM.main.isDebuggingIS):
@@ -40,6 +41,12 @@ func _run():
 			saynn(Util.join(pawn.getDebugInfo(), "\n"))
 		
 		addButtonAt(14, "End", "Enough spying", "endthescene")
+		
+		var theRelativeActionsInfo:Array = interaction.getActionsRelativeChanceInfo()
+		if(theRelativeActionsInfo.size() > 1):
+			var curPawn := interaction.getCurrentPawn()
+			if(curPawn):
+				saynn(curPawn.getChar().getName()+"'s actions:\n"+Util.join(theRelativeActionsInfo, "\n"))
 		
 		addButton("Continue", "See what happens next", "progress_interaction")
 	

@@ -39,7 +39,7 @@ func _init():
 func processTime(_howMuch:int):
 	nextGoalTestIn -= _howMuch
 	if(nextGoalTestIn <= 0):
-		nextGoalTestIn = 200
+		nextGoalTestIn = 300
 		calculateBestGoal()
 
 func getGoalsWithScores(aboveKeepScore:bool = true) -> Array:
@@ -51,6 +51,7 @@ func getGoalsWithScores(aboveKeepScore:bool = true) -> Array:
 		keepScore = goal.getKeepScore()
 		keepScore = pawn.getProcessedGoalScore(goal.id, keepScore, true)
 	
+	#GM.PROFILE.start("ALONE GOALS")
 	var possibleNew := []
 	for goalID in goals:
 		if(goal != null && goalID == goal.id):
@@ -61,16 +62,21 @@ func getGoalsWithScores(aboveKeepScore:bool = true) -> Array:
 		newScore = pawn.getProcessedGoalScore(goalID, newScore, false)
 		if(newScore > keepScore || goal == null):
 			possibleNew.append([goalID, newScore])
+	#GM.PROFILE.finish("ALONE GOALS")
 	
+	#GM.PROFILE.start("GLOBAL TASKS")
 	for globalTaskID in GM.main.IS.getGlobalTasks():
+		#GM.PROFILE.start(globalTaskID)
 		var globalTask:GlobalTask = GM.main.IS.getGlobalTask(globalTaskID)
 		
 		if(!globalTask.canDoTaskFinal(pawn)):
+			#GM.PROFILE.finish(globalTaskID)
 			continue
 		
 		var goalID = globalTask.getGoalID(pawn)
 		var newgoal = InteractionGoal.create(goalID)
 		if(newgoal == null):
+			#GM.PROFILE.finish(globalTaskID)
 			continue
 		
 		globalTask.configureGoalFinal(pawn, newgoal)
@@ -78,6 +84,9 @@ func getGoalsWithScores(aboveKeepScore:bool = true) -> Array:
 		newScore = pawn.getProcessedGoalScore(goalID, newScore, false)
 		if(newScore > keepScore || newgoal == null):
 			possibleNew.append([newgoal, newScore])
+		#GM.PROFILE.finish(globalTaskID)
+	#GM.PROFILE.finish("GLOBAL TASKS")
+	
 	return possibleNew
 
 func calculateBestGoal():
@@ -111,15 +120,35 @@ func switchGoalTo(goalID:String):
 	var newGoal:InteractionGoalBase = InteractionGoal.create(goalID)
 	return switchGoalToObject(newGoal)
 	
-func switchGoalToObject(newGoal):
+func switchGoalToObject(newGoal:InteractionGoalBase):
 	if(newGoal == null):
 		return false
-	newGoal.pawnID = getRolePawn("main").charID
+	var thePawn := getRolePawn("main")
+	if(goal):
+		if(!goal.globalTask.empty()):
+			var theGlobalTask:GlobalTask = GM.main.IS.getGlobalTask(goal.globalTask)
+			if(theGlobalTask):
+				theGlobalTask.onPawnStoppedDoingTask(thePawn)
+	
+	newGoal.pawnID = thePawn.charID
 	newGoal.interaction = self
 	goal = newGoal
 	goal.onGoalStart()
+	
+	if(!goal.globalTask.empty()):
+		var theGlobalTask:GlobalTask = GM.main.IS.getGlobalTask(goal.globalTask)
+		if(theGlobalTask):
+			theGlobalTask.onPawnStartedDoingTask(thePawn)
 	#print("NEW GOAL FOR PAWN "+str(newGoal.pawnID)+": "+str(newGoal.id))
 	return true
+
+func onStopped():
+	var thePawn := getRolePawn("main")
+	if(goal):
+		if(!goal.globalTask.empty()):
+			var theGlobalTask:GlobalTask = GM.main.IS.getGlobalTask(goal.globalTask)
+			if(theGlobalTask):
+				theGlobalTask.onPawnStoppedDoingTask(thePawn)
 
 func start(_pawns:Dictionary, _args:Dictionary):
 	doInvolvePawn("main", _pawns["main"])
@@ -200,6 +229,9 @@ func isDoingTask(_taskID:String) -> bool:
 func getInterruptActions(_pawn:CharacterPawn) -> Array:
 	if(getRolePawn("main").isPlayer() && !getRolePawn("main").canBeInterrupted()): # Fixes the problem where talking interactions were getting queued up while you were walking a leashed slave around
 		return []
+	if(getRolePawn("main").isPlayer() && _pawn.getSpecialRelationship() && !_pawn.getSpecialRelationship().canTalkWithPlayer()):
+		return []
+	
 	var result:Array = []
 	result.append({
 		id = "talk",
@@ -227,8 +259,9 @@ func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _conte
 		if(_pawn.isPlayer()):
 			if(triggerTalkReactEvents("main")):
 				return
-		
+				
 		startInteraction("Talking", {starter=_pawn.charID, reacter=getRoleID("main")})
+		#startInteraction("Talking", {reacter=_pawn.charID, starter=getRoleID("main")})
 	if(_id == "grab_and_fuck"):
 		startInteraction("Talking", {starter=_pawn.charID, reacter=getRoleID("main")}, {grab_and_fuck=true})
 

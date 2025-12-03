@@ -118,8 +118,27 @@ func getDefaultForSlotForNpcGender(slot, npcgender):
 	return getDefaultForSlot(slot, normalGender)
 
 # Allows to pick these bodyparts even if they're from another species. Useful for mods
+# This function is only used in the character creator
 func getAllowedBodyparts():
 	return []
+
+# Same as getAllowedBodyparts() but gets used in npc generation and transformation logic
+func getAllowedBodypartsForNPCGender(_npcGender:String, _isTF:bool) -> Array:
+	var result:Array = getAllDefaultBodypartIDsForNPCGender(_npcGender)
+	
+	result.append_array(getAllowedBodyparts())
+	
+	return result
+
+func getAllDefaultBodypartIDsForNPCGender(_npcGender:String) -> Array:
+	var result:Array = []
+	
+	for bodypartSlot in BodypartSlot.getAll():
+		var bodypartIDOrNull = getDefaultForSlotForNpcGender(bodypartSlot, _npcGender)
+		if((bodypartIDOrNull is String) && !bodypartIDOrNull.empty()):
+			result.append(bodypartIDOrNull)
+	
+	return result
 
 func isPlayable():
 	return false

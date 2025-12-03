@@ -6,6 +6,7 @@ var npcMain:String = ""
 var npcExtra1:String = ""
 var npcExtra2:String = ""
 var nemesisReason:int = NemesisReason.Generic
+var willSoftSlavery:bool = false
 
 func _initScene(_args = []):
 	ambushPlace = _args[0]
@@ -59,7 +60,9 @@ func _reactInit():
 			addMessage("Looks like they only managed to add one piece of bondage gear onto you..")
 		else:
 			addMessage("You got some bondage gear forced onto you..")
-		
+	
+	willSoftSlavery = RNG.chance(75)
+	
 	setState(ambushType)
 
 func resolveCustomCharacterName(_charID):
@@ -144,7 +147,7 @@ func _run():
 			"Don't be stupid. It's three against one.",
 		])+"[/say]")
 		
-		saynn("Something tells you they won't give you a bondage to help stop the blood..")
+		saynn("Something tells you they won't give you a bandage to help stop the blood..")
 		
 		addButton("Continue", "See what happens next", "show_others")
 	
@@ -192,7 +195,7 @@ func _run():
 		addButton("Continue", "See what happens next", "show_others")
 	
 	if(state == "canteendrugged_lust"):
-		playAnimation(StageScene.Duo, "sit")
+		playAnimation(StageScene.Solo, "sit")
 	
 		saynn("You're busy finishing your meal..")
 		
@@ -299,6 +302,8 @@ func _run():
 			saynn("You feel incredibly tired because of the drug.")
 		if(ambushType == "cellbondage"):
 			saynn("Since they went through your pockets, you won't be able to use most items: your weapons and drugs.")
+		
+		sayOutcomeIfFail()
 		
 		addButton("Fight", "You'd rather fight", "first_fight")
 		addButton("Submit", "See what happens..", "do_submit")
@@ -456,6 +461,13 @@ func _react(_action: String, _args):
 		transferAllItems(getCharacter("TempAmbushStash"), GM.pc)
 		endScene()
 		GM.main.RS.stopSpecialRelationship(npcMain)
+		
+		if(willSoftSlavery):
+			processTime(RNG.randi_range(60, 180)*60)
+			GM.main.RS.startSpecialRelantionship("SoftSlavery", npcMain)
+			runScene("NpcOwnerEventRunnerScene", [npcMain, "Intro", ["ambush"]])
+			return
+		
 		runScene(getModule("PlayerSlaveryModule").getSlaveryStartScene())
 		return
 	if(_action == "startPunish"):
@@ -509,6 +521,12 @@ func _react_scene_end(_tag, _result):
 		else:
 			setState("lost_fight")
 
+func sayOutcomeIfFail():
+	if(willSoftSlavery):
+		saynn("If you lose or submit, you will probably [b]become {npc.name}'s prison bitch[/b]..")
+	else:
+		saynn("If you lose or submit, you will probably be [b]sold off on an auction[/b]..")
+
 func saveData():
 	var data = .saveData()
 	
@@ -518,6 +536,7 @@ func saveData():
 	data["npcExtra1"] = npcExtra1
 	data["npcExtra2"] = npcExtra2
 	data["nemesisReason"] = nemesisReason
+	data["willSoftSlavery"] = willSoftSlavery
 	
 	return data
 	
@@ -530,6 +549,7 @@ func loadData(data):
 	npcExtra1 = SAVE.loadVar(data, "npcExtra1", "")
 	npcExtra2 = SAVE.loadVar(data, "npcExtra2", "")
 	nemesisReason = SAVE.loadVar(data, "nemesisReason", NemesisReason.Generic)
+	willSoftSlavery = SAVE.loadVar(data, "willSoftSlavery", false)
 
 
 

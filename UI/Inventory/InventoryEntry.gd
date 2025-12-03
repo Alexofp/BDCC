@@ -25,6 +25,8 @@ func _ready():
 	setSelected(false)
 
 func setItem(theItem:ItemBase, theMode):
+	if(!theItem):
+		Log.printerr("InventoryEntry has received a bad item: "+str(theItem))
 	isFightMode = (theMode == "fight")
 	isBuy = (theMode == "buy")
 	isSell = (theMode == "sell")
@@ -139,6 +141,8 @@ func setSelected(isNewSelected):
 
 var showingTooltip = false
 func _on_SelectButton_mouse_entered():
+	if(!item):
+		return
 	showingTooltip = true
 	GlobalTooltip.showTooltip(select_button, item.getStackName(), item.getVisibleDescription(), false, true)
 

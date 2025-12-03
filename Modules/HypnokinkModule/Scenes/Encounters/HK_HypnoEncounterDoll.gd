@@ -292,7 +292,7 @@ func _run():
 			
 		# (subby version)
 		if(npcVariation == "subby"):
-			saynn("{npc.He} wraps {npc.his} arms around you" + (" and {npc.verb('nuzzle')} your chest}." if GM.pc.hasBoundArms() else ". As {npc.he} {npc.verb('nuzzle')} your chest, you return the hug."))
+			saynn("{npc.He} wraps {npc.his} arms around you" + (" and {npc.verb('nuzzle')} your chest." if GM.pc.hasBoundArms() else ". As {npc.he} {npc.verb('nuzzle')} your chest, you return the hug."))
 			
 			saynn("[say=npc]"+RNG.pick([
 				"Mmm~",
@@ -506,7 +506,7 @@ func _run():
 		
 		saynn("With your hands secured out of reach, you can only desperately moan and hump the air as "+cumDesc+".")
 		saynn("[say=pc]A-aah... Hff...[/say]")
-		saynn("The orgasm is physically unsatisfying with no stimulation or sensation. But to your submissively obedient mind, the pleasure of cumming when commanded is the best feeling imaginable. Even the humiliation of is has you pleased and blushing.")
+		saynn("The orgasm is physically unsatisfying with no stimulation or sensation. But to your submissively obedient mind, the pleasure of cumming when commanded is the best feeling imaginable. Even the humiliation of it has you pleased and blushing.")
 		
 		if(!(npcVariation in ["mean", "kind", "subby"])):
 			saynn("[say=npc]"+RNG.pick([

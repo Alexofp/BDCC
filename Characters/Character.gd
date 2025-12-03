@@ -535,24 +535,28 @@ func processUntilTime(theday:int, theseconds:int):
 	if(lastUpdatedDay == theday && lastUpdatedSecond >= theseconds):
 		return
 	
-	var secondsDiff = 0
+	var secondsDiff:int = 0
 	
-	var dayDiff = theday - lastUpdatedDay
+	var dayDiff:int = theday - lastUpdatedDay
 	if(dayDiff == 0):
 		secondsDiff = theseconds - lastUpdatedSecond
 	else:
 		secondsDiff = 24*60*60*dayDiff - lastUpdatedSecond + theseconds
-		
-	var oldHours = int(float(lastUpdatedSecond) / 60 / 60) + lastUpdatedDay*24
+	
+	if(secondsDiff < 0):
+		Log.error("processUntilTime() trying to process "+str(getID())+" for a negative amount of seconds ("+str(secondsDiff)+")")
+		return
+	
+	var oldHours:int = int(float(lastUpdatedSecond) / 60 / 60) + lastUpdatedDay*24
 	
 	print("PROCESSED "+str(getID())+" FOR "+str(secondsDiff)+" SECONDS")
-	var oneWeekSeconds = 7*24*60*60
-	var oneDaySeconds = 24*60*60
-	var oneHourSeconds = 60*60
-	var processedWeeks = 0
+	var oneWeekSeconds:int = 7*24*60*60
+	var oneDaySeconds:int = 24*60*60
+	var oneHourSeconds:int = 60*60
+	var processedWeeks:int = 0
 	
 	# Processing entire days, then hours, then the rest
-	var secondsToProcess = secondsDiff
+	var secondsToProcess:int = secondsDiff
 	while(secondsToProcess > oneWeekSeconds):
 		if(processedWeeks < 8): # After 2 months we stop processing to not lag as much
 			processTime(oneWeekSeconds)
@@ -567,8 +571,8 @@ func processUntilTime(theday:int, theseconds:int):
 	processTime(secondsToProcess)
 	
 	
-	var newHours = int(float(theseconds) / 60 / 60) + theday*24
-	var hoursPassed = newHours - oldHours
+	var newHours:int = int(float(theseconds) / 60 / 60) + theday*24
+	var hoursPassed:int = newHours - oldHours
 	
 	if(hoursPassed > 0):
 		print("and also for "+str(hoursPassed)+" hours")

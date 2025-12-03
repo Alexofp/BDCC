@@ -237,6 +237,8 @@ func _run():
 		var species = pickedSpeciesToChange
 		var encounterSettings:EncounterSettings = GM.main.getEncounterSettings()
 		var speciesObject:Species = GlobalRegistry.getSpecies(species)
+		if(!speciesObject):
+			speciesObject = GlobalRegistry.getSpecies(Species.Canine)
 		var speciesName = speciesObject.getVisibleName()
 		saynn("The current chance for "+speciesName+" is "+str(Util.roundF(encounterSettings.getSpeciesWeight(species)*100.0, 1))+"%")
 
@@ -343,24 +345,16 @@ func _run():
 		addButton("+15%", "Change the personality stat", "changepersonalitystatby", [0.15])
 		
 func doMeetNpc(ID, occupation):
-	var room = GM.world.getRoomByID(GM.pc.getLocation())
-	var floorID = room.getFloorID()
+	var pcLoc:String = GM.pc.getLocation()
 	if(GM.main.IS.hasPawn(ID)):
 		GM.ui.getCustomControl("npclist").sendPopupMessage("This person is already somewhere in the prison\nYou can find them by exploring around")
 		return
 	
-	var canFind:bool = false
-	if(occupation == "Inmates" && (floorID in ["MainHall", "Cellblock", "FightClubFloor"])):
-		canFind = true
-	if(occupation == "Guards" && (floorID in ["MainHall", "Cellblock"])):
-		canFind = true
-	if(occupation == "Engineers" && (floorID in ["MiningFloor"])):
-		canFind = true
-	if(occupation == "Nurses" && (floorID in ["Medical"])):
-		canFind = true
-	
-	if(!canFind):
-		GM.ui.getCustomControl("npclist").sendPopupMessage("You look around but can't seem to find them here\nTry looking somewhere else..")
+	if(!GM.world.isLocSafe(pcLoc)):
+		GM.ui.getCustomControl("npclist").sendPopupMessage("This location isn't safe, you can't meet anyone here!")
+		return
+	if(!GM.world.canMeetInLoc(pcLoc)):
+		GM.ui.getCustomControl("npclist").sendPopupMessage("You can't meet anyone on this floor!")
 		return
 	
 	if(occupation in ["Inmates", "Guards", "Engineers", "Nurses"]):

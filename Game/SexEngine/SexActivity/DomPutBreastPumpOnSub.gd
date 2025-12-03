@@ -22,6 +22,7 @@ func getSupportedSexTypes():
 	return {
 		SexType.DefaultSex: true,
 		SexType.StocksSex: true,
+		SexType.BitchsuitSex: true,
 	}
 
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
@@ -162,7 +163,7 @@ func getActions(_indx:int):
 		addAction("moo", fetish(SUB_0, Fetish.Lactation)*0.3, "Moo", "Do the cute noise", {A_PRIORITY: 0})
 
 		if(isReadyToCumHandled(SUB_0)):
-			addAction("cum", 1.0, "Cum!", "You gonna cum.", {A_PRIORITY: 1001})
+			addAction("cum", 1.0, "Cum!", "You're gonna cum.", {A_PRIORITY: 1001})
 	
 func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "stopMilking"):

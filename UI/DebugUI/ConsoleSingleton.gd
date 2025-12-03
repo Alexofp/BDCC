@@ -88,6 +88,7 @@ func getCommandsHelp():
 	var result = ""
 	for command_name in commands:
 		var command = commands[command_name]
-		result += command_name + " - args=" + str(command["params"])+" - " + str(command["description"])+"\n"
+		if(command["object"].get_ref() != null):
+			result += command_name + " - args=" + str(command["params"])+" - " + str(command["description"])+"\n"
 		
 	return result

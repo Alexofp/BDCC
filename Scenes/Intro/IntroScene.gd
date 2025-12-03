@@ -21,7 +21,7 @@ func _run():
 
 		saynn("[say=intro_detective]Come in and take a seat.[/say]")
 
-		saynn("You look at him, the [b]guy has clear canine features[/b] and a wolf mane, behind him is a fluffy tail. [b]You decide to step inside[/b]. It’s a well-lit small room with just a table, two metal chairs and a security camera in the corner. Panic is still there, the guy pushes you in slightly and locks the door behind before sitting down on one of the chairs himself and watching you.")
+		saynn("You look at him, the [b]guy has clear canine features[/b] and a wolf mane, behind him is a fluffy tail. [b]You decide to step inside[/b]. It’s a well-lit small room with just a table, two metal chairs and a security camera in the corner. Panic is still there, the guy pushes you in slightly and locks the door behind him before sitting down on one of the chairs himself and watching you.")
 
 		addButton("Take a seat", "Well, what else is there to do", "take_a_sit")
 
@@ -210,7 +210,7 @@ func _run():
 
 		saynn("[say=pc]I made the world better, okay? I shouldn’t even be here, I’m not a danger to anyone, I got my revenge.[/say]")
 
-		saynn("[say=intro_detective]Violence only causes more violence. What will you do if someone will try to get revenge for the person you murdered? Have a nice chit-chat? Hating someone doesn’t give you the right to end their life, we’re not animals.[/say]")
+		saynn("[say=intro_detective]Violence only causes more violence. What will you do if someone tries to get revenge for the person you murdered? Have a nice chit-chat? Hating someone doesn’t give you the right to end their life, we’re not animals.[/say]")
 
 		saynn("[say=pc]Whatever you say, I don’t like you.[/say]")
 
@@ -271,7 +271,7 @@ func _run():
 
 		saynn("The officer stops reading and guides his attention towards you.")
 
-		saynn("[say=intro_detective]This is a trial. The judges made their decision. Soon you will be repositioned into the facility called Broken Dreams Correctional Center where you will be serving the punishment. Your sentence is…[/say]")
+		saynn("[say=intro_detective]This is a trial. The judges made their decision. Soon you will be relocated into the facility called Broken Dreams Correctional Center where you will be serving the punishment. Your sentence is…[/say]")
 
 		saynn("He looks at the tablet again and takes a short pause.")
 

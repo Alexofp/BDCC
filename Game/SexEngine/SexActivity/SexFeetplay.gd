@@ -16,6 +16,12 @@ func getGoals():
 		SexGoal.DoFeetplay: 1.0,
 	}
 
+func getSupportedSexTypes():
+	return {
+		SexType.DefaultSex: true,
+		SexType.BitchsuitSex: true,
+	}
+
 func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	return .canStartActivity(_sexEngine, _domInfo, _subInfo)
 
@@ -112,7 +118,8 @@ func getActions(_indx:int):
 		if(state in [""]):
 			addAction("stompchest", getDomInfo().getSadisticActionStore(), "Stomp", "Stomp on their chest!")
 		if(state in [""]):
-			addAction("pinhead", 1.0 - (float(didTeasing) * 1.0), "Pin head", "Move your feet to their head")
+			if(getSexType() == SexType.DefaultSex):
+				addAction("pinhead", 1.0 - (float(didTeasing) * 1.0), "Pin head", "Move your feet to their head")
 		if(state in [""]):
 			if(getSub().hasReachableVagina()):
 				addAction("rubpussy", 0.5, "Rub pussy", "Start rubbing their pussy with your feet")
@@ -349,6 +356,11 @@ func loadData(_data):
 	waitTimer = SAVE.loadVar(_data, "waitTimer", 0)
 
 func getAnimation():
+	if(getSexType() == SexType.BitchsuitSex):
+		if(state in ["rubpussy", "rubpenis"]):
+			return [StageScene.PuppyFeetCrotch, "crotch", {pc=DOM_0, npc=SUB_0}]
+		return [StageScene.PuppyPinned, "pinned", {pc=DOM_0, npc=SUB_0}]
+	
 	if(state == ""):
 		return [StageScene.SexFeetPlay, "pin", {pc=DOM_0, npc=SUB_0}]
 	if(state == "onhead"):

@@ -1,0 +1,216 @@
+[gd_scene load_steps=49 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/StageScene3D/Scenes3/PuppySexCowgirl.gd" type="Script" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=446]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=447]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=480]
+animation = "PuppySexCowgirlFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=481]
+animation = "PuppySexCowgirlInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=482]
+animation = "PuppySexCowgirlTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=474]
+animation = "PuppySexCowgirl_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=483]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=484]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=485]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=486]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=487]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=488]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=489]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=490]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=491]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=492]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=493]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=494]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=475]
+states/PuppySexCowgirlFast_1-loop/node = SubResource( 480 )
+states/PuppySexCowgirlFast_1-loop/position = Vector2( 842, 185 )
+states/PuppySexCowgirlInside_1-loop/node = SubResource( 481 )
+states/PuppySexCowgirlInside_1-loop/position = Vector2( 281, 169 )
+states/PuppySexCowgirlTease_1-loop/node = SubResource( 482 )
+states/PuppySexCowgirlTease_1-loop/position = Vector2( 547, 56 )
+states/PuppySexCowgirl_1-loop/node = SubResource( 474 )
+states/PuppySexCowgirl_1-loop/position = Vector2( 554, 324 )
+transitions = [ "PuppySexCowgirlTease_1-loop", "PuppySexCowgirlInside_1-loop", SubResource( 483 ), "PuppySexCowgirlInside_1-loop", "PuppySexCowgirlTease_1-loop", SubResource( 484 ), "PuppySexCowgirlTease_1-loop", "PuppySexCowgirl_1-loop", SubResource( 485 ), "PuppySexCowgirl_1-loop", "PuppySexCowgirlTease_1-loop", SubResource( 486 ), "PuppySexCowgirlTease_1-loop", "PuppySexCowgirlFast_1-loop", SubResource( 487 ), "PuppySexCowgirlFast_1-loop", "PuppySexCowgirlTease_1-loop", SubResource( 488 ), "PuppySexCowgirlInside_1-loop", "PuppySexCowgirlFast_1-loop", SubResource( 489 ), "PuppySexCowgirlFast_1-loop", "PuppySexCowgirlInside_1-loop", SubResource( 490 ), "PuppySexCowgirl_1-loop", "PuppySexCowgirlFast_1-loop", SubResource( 491 ), "PuppySexCowgirlFast_1-loop", "PuppySexCowgirl_1-loop", SubResource( 492 ), "PuppySexCowgirl_1-loop", "PuppySexCowgirlInside_1-loop", SubResource( 493 ), "PuppySexCowgirlInside_1-loop", "PuppySexCowgirl_1-loop", SubResource( 494 ) ]
+start_node = "PuppySexCowgirlTease_1-loop"
+graph_offset = Vector2( 37, -7 )
+
+[sub_resource type="AnimationNodeBlendTree" id=448]
+graph_offset = Vector2( -302.785, -40.8907 )
+nodes/Animation/node = SubResource( 446 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 447 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 475 )
+nodes/StateMachine/position = Vector2( 160, 80 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=460]
+
+[sub_resource type="AnimationNodeAnimation" id=192]
+animation = "PuppyLegs-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=193]
+animation = "PuppyArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=194]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeBlend2" id=195]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Foot.L", "Doll3D/Skeleton:Foot.R", "Doll3D/Skeleton:LegDown.L", "Doll3D/Skeleton:LegDown.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=495]
+animation = "PuppySexCowgirlFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=496]
+animation = "PuppySexCowgirlInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=497]
+animation = "PuppySexCowgirlTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=476]
+animation = "PuppySexCowgirl_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=498]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=499]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=500]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=501]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=502]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=503]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=504]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=505]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=506]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=507]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=508]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=509]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=477]
+states/PuppySexCowgirlFast_2-loop/node = SubResource( 495 )
+states/PuppySexCowgirlFast_2-loop/position = Vector2( 731, 172 )
+states/PuppySexCowgirlInside_2-loop/node = SubResource( 496 )
+states/PuppySexCowgirlInside_2-loop/position = Vector2( 215, 172 )
+states/PuppySexCowgirlTease_2-loop/node = SubResource( 497 )
+states/PuppySexCowgirlTease_2-loop/position = Vector2( 449, 44 )
+states/PuppySexCowgirl_2-loop/node = SubResource( 476 )
+states/PuppySexCowgirl_2-loop/position = Vector2( 449, 306 )
+transitions = [ "PuppySexCowgirlTease_2-loop", "PuppySexCowgirlInside_2-loop", SubResource( 498 ), "PuppySexCowgirlInside_2-loop", "PuppySexCowgirlTease_2-loop", SubResource( 499 ), "PuppySexCowgirlTease_2-loop", "PuppySexCowgirl_2-loop", SubResource( 500 ), "PuppySexCowgirl_2-loop", "PuppySexCowgirlTease_2-loop", SubResource( 501 ), "PuppySexCowgirlTease_2-loop", "PuppySexCowgirlFast_2-loop", SubResource( 502 ), "PuppySexCowgirlFast_2-loop", "PuppySexCowgirlTease_2-loop", SubResource( 503 ), "PuppySexCowgirlInside_2-loop", "PuppySexCowgirlFast_2-loop", SubResource( 504 ), "PuppySexCowgirlFast_2-loop", "PuppySexCowgirlInside_2-loop", SubResource( 505 ), "PuppySexCowgirlInside_2-loop", "PuppySexCowgirl_2-loop", SubResource( 506 ), "PuppySexCowgirl_2-loop", "PuppySexCowgirlInside_2-loop", SubResource( 507 ), "PuppySexCowgirl_2-loop", "PuppySexCowgirlFast_2-loop", SubResource( 508 ), "PuppySexCowgirlFast_2-loop", "PuppySexCowgirl_2-loop", SubResource( 509 ) ]
+start_node = "PuppySexCowgirlTease_2-loop"
+graph_offset = Vector2( -55, -27 )
+
+[sub_resource type="AnimationNodeBlendTree" id=478]
+graph_offset = Vector2( -201.069, -43.4734 )
+nodes/Animation/node = SubResource( 193 )
+nodes/Animation/position = Vector2( -40, 200 )
+"nodes/Animation 2/node" = SubResource( 192 )
+"nodes/Animation 2/position" = Vector2( 220, 260 )
+nodes/PuppyArms/node = SubResource( 194 )
+nodes/PuppyArms/position = Vector2( 220, 60 )
+nodes/PuppyLegs/node = SubResource( 195 )
+nodes/PuppyLegs/position = Vector2( 440, 80 )
+nodes/StateMachine/node = SubResource( 477 )
+nodes/StateMachine/position = Vector2( -26.0692, 40.5266 )
+nodes/output/position = Vector2( 660, 120 )
+node_connections = [ "PuppyArms", 0, "StateMachine", "PuppyArms", 1, "Animation", "PuppyLegs", 0, "PuppyArms", "PuppyLegs", 1, "Animation 2", "output", 0, "PuppyLegs" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=479]
+
+[node name="PuppySexCowgirl" instance=ExtResource( 2 )]
+script = ExtResource( 4 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.317465, -1.77462 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.37103, -0.120824, 0 )
+
+[node name="Doll3D2" parent="." index="2" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, 1.37103, -0.120824, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 448 )
+anim_player = NodePath("../Doll3D/DollSkeleton3/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 460 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 478 )
+anim_player = NodePath("../Doll3D2/DollSkeleton3/AnimationPlayer")
+parameters/PuppyArms/blend_amount = 1.0
+parameters/PuppyLegs/blend_amount = 1.0
+parameters/StateMachine/playback = SubResource( 479 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]
+[editable path="Doll3D/DollSkeleton3"]
+[editable path="Doll3D2"]
+[editable path="Doll3D2/DollSkeleton"]
+[editable path="Doll3D2/DollSkeleton2"]
+[editable path="Doll3D2/DollSkeleton3"]

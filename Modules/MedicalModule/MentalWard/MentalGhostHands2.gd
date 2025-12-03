@@ -182,7 +182,7 @@ func _run():
 
 		saynn("The paws let go of the hair and instead land on your {pc.breasts}, giving them a slight massage "+str("giving little streams of milk from your nipples" if GM.pc.canBeMilked() else "")+" while the cock starts exploring and stretching your insides. You rest your face against the cold wall while the cock hammers at your pleasure point and tries to break into the womb. Your slit leaks juices all over it, coating the shaft like lube. But very quickly, your inner walls begin to clench around it, showing that you are close and also making Eliza moan from pleasure too as the other end of her strapon shifts inside her.")
 
-		addButton("Cum!", "You gonna cum", "cum!")
+		addButton("Cum!", "You're gonna cum", "cum!")
 
 	if(state == "cum!"):
 		saynn("The last thrusts get very close, you let your tongue out and drool while the disembodied dick fucks you rough. Its knot starts to slip past your folds, stretching them very wide in the process. And sure enough, one last thrust was enough for the whole cock to slip inside and break into your babymaker. You hear the doctor’s moans and a second later you cum too, your body starts shaking and shivering while squirting all over the floor. All the while the strapon stuffs your womb with a huge load of warm cum lube, making you feel full without the danger of getting pregnant, hopefully.")
@@ -229,7 +229,7 @@ func _run():
 
 		saynn("The paws let go of the hair and instead land on your {pc.breasts}, giving them a slight massage "+str("giving little streams of milk from your nipples" if GM.pc.canBeMilked() else "")+"while the cock starts exploring and stretching your insides. You rest your face against the cold wall while the cock hammers at your pleasure point and tries to slide deeper each time. The shaft is prelubed which allows it to fuck you nice and fast. But very quickly, your inner walls begin to clench around it, showing that you are close and also making Eliza moan from pleasure too as the other end of her strapon shifts inside her.")
 
-		addButton("Cum!", "You gonna cum", "cum!1")
+		addButton("Cum!", "You're gonna cum", "cum!1")
 
 	if(state == "cum!1"):
 		saynn("The last thrusts get very close, you let your tongue out and drool while the disembodied dick fucks you rough. Its knot starts to slip past your star, stretching it very wide in the process. And sure enough, one last thrust was enough for the whole cock to slip inside your butt. You hear the doctor’s moans and a second later you cum too, your body starts shaking and shivering, legs barely support you. All the while the strapon stuffs your fuckhole with a huge load of warm cum lube, making you feel full.")

@@ -80,7 +80,7 @@ func _run():
 
 		saynn("His voice is so deep and soothing, your only thought is that he would do great on radio. The guy bows to you and starts unbuttoning his uniform shirt, clearly in a hurry.")
 
-		saynn("[say=announcer]Bulldog, let them in when you think they are worthy.[/say]")
+		saynn("[say=announcer]Bulldog, let {pc.him} in when you think {pc.he} {pc.isAre} worthy.[/say]")
 
 		saynn("And with that, the human starts heading deeper into the darkness. The bulldog blocks the path and closes the hatch behind him. He crosses his arms again and gazes at you.")
 

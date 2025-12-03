@@ -18,6 +18,7 @@ func getSupportedSexTypes():
 		SexType.DefaultSex: true,
 		SexType.StocksSex: true,
 		SexType.SlutwallSex: true,
+		SexType.BitchsuitSex: true,
 	}
 
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
@@ -31,7 +32,10 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 		return []
 	
 	if(!_sexEngine.hasTag(_domInfo.charID, SexActivityTag.PenisInside) && dom.hasReachablePenis()):
-		var wearCondomScore:float = getActivityScoreCustomGoals({SexGoal.SubOptionalCondomOnDom: 1.0}, _sexEngine, _domInfo, _subInfo) * (_domInfo.fetishScore({Fetish.Condoms:1.0}) - _domInfo.fetishScore({Fetish.Breeding:1.0}))
+		var wearCondomMult:float = (_domInfo.fetishScore({Fetish.Condoms:1.0}) - _domInfo.fetishScore({Fetish.Breeding:1.0}))
+		if(_sexEngine.mustUseCondoms):
+			wearCondomMult = 2.0
+		var wearCondomScore:float = getActivityScoreCustomGoals({SexGoal.SubOptionalCondomOnDom: 1.0}, _sexEngine, _domInfo, _subInfo) * wearCondomMult
 		if(!dom.getInventory().hasSlotEquipped(InventorySlot.Penis) && dom.getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
 			addStartAction(["dom"], "Wear condom", "Put on your best condom", wearCondomScore, {A_CATEGORY: ["Wear"]})
 		if(dom.getWornCondom() != null && dom.getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
@@ -42,7 +46,10 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 			
 		
 	if(!_sexEngine.hasTag(_subInfo.charID, SexActivityTag.PenisInside) && sub.hasReachablePenis()):
-		var condomOnSubScore:float = getActivityScoreCustomGoals({SexGoal.SubOptionalCondomOnSub: 1.0}, _sexEngine, _domInfo, _subInfo) * (_domInfo.fetishScore({Fetish.Condoms:1.0}) - _domInfo.fetishScore({Fetish.BeingBred:1.0}))
+		var condomOnSubMult:float = (_domInfo.fetishScore({Fetish.Condoms:1.0}) - _domInfo.fetishScore({Fetish.BeingBred:1.0}))
+		if(_sexEngine.mustUseCondoms):
+			condomOnSubMult = 2.0
+		var condomOnSubScore:float = getActivityScoreCustomGoals({SexGoal.SubOptionalCondomOnSub: 1.0}, _sexEngine, _domInfo, _subInfo) * condomOnSubMult
 		if(!sub.getInventory().hasSlotEquipped(InventorySlot.Penis) && sub.getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):
 			addStartAction(["sub"], "Put condom on sub", "Put on your best condom on the sub", condomOnSubScore, {A_CATEGORY: ["Wear"]})
 		if(sub.getWornCondom() != null && sub.getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null):

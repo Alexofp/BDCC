@@ -77,3 +77,13 @@ func setBodypartSlot(newSlot:String):
 
 func isPartEffect() -> bool:
 	return slot != ""
+
+# Checked once during loading
+func isEffectBadShouldRemove() -> bool:
+	return false
+
+func getTF():
+	var theHolder = getHolder()
+	if(!theHolder):
+		return null
+	return theHolder.findTFByUniqueID(tfID)

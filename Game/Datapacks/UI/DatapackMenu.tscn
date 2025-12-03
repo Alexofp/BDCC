@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=1]
 [ext_resource path="res://Game/Datapacks/UI/DatapackMenu.gd" type="Script" id=2]
 [ext_resource path="res://Game/UI/Buttons/BetterButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game/Datapacks/Util/LineEditIDFilter.gd" type="Script" id=4]
 
 [node name="DatapackMenu" type="Control"]
 anchor_right = 1.0
@@ -165,13 +166,14 @@ size_flags_vertical = 3
 margin_right = 529.0
 margin_bottom = 66.0
 text = "Enter an id for your new datapack
-Make sure that it's unique, id colissions will lead to only one pack being loaded"
+Make sure that it's unique, id collisions will lead to only one pack being loaded"
 autowrap = true
 
 [node name="NewPackIDLineEdit" type="LineEdit" parent="DatapackViewer/NewPackConfirmationDialog/VBoxContainer"]
 margin_top = 70.0
 margin_right = 529.0
 margin_bottom = 100.0
+script = ExtResource( 4 )
 
 [node name="AlertDialog" type="AcceptDialog" parent="."]
 anchor_left = 0.5

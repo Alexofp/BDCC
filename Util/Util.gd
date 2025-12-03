@@ -284,7 +284,7 @@ static func stripBadCharactersFromID(path: String) -> String:
 	for character in path:
 		var c:String = character.to_lower()
 		if(letters_chars.has(c) || numbers_chars.has(c) || ["_"].has(c)):
-			newPath += c
+			newPath += character
 	
 	return newPath
 

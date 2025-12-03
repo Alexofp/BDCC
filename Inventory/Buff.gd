@@ -85,6 +85,7 @@ const ForcedObedienceBuff = "ForcedObedienceBuff"
 const RestEffectivenessBuff = "RestEffectivenessBuff"
 const SpacedOutInSexBuff = "SpacedOutInSexBuff"
 const ActiveResistanceInSexBuff = "ActiveResistanceInSexBuff"
+const ActiveAngerInSexBuff = "ActiveAngerInSexBuff"
 
 const FetishGainBuff = "FetishGainBuff"
 const FetishSpecificGainBuff = "FetishSpecificGainBuff"

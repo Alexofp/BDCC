@@ -53,7 +53,7 @@ func _run():
 
 		saynn("You pull him out of sight behind one of the sharp rocks, giving you plenty of time to deal with him.")
 
-		saynn("[say=psricky]What? You're some kind of hero? I bought you, far and square. You're my property, my asset! Nothing stops me from disassembling you all and selling piece by piece. But I didn't! This is how you repay me, you.. stupid bitch?[/say]")
+		saynn("[say=psricky]What? You're some kind of hero? I bought you, fair and square. You're my property, my asset! Nothing stops me from disassembling you all and selling piece by piece. But I didn't! This is how you repay me, you.. stupid bitch?[/say]")
 
 		saynn("You tap on the trigger.. causing the drill to do half a spin, catching Ricky's jacket and ripping it to shreds. His holster gets caught up and snapped too, his scratched revolver hitting the ground.")
 

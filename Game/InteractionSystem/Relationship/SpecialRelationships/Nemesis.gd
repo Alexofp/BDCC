@@ -29,6 +29,9 @@ const SocialEventMinimalAffection = { #default is 1.0
 func _init():
 	id = "Nemesis"
 
+func getBigDescription() -> String:
+	return "Nemeses will actively try to do mean things to you if they get the chance. Nemeses might also try to ambush you."
+
 func getVisibleName() -> String:
 	return "Nemesis"
 
@@ -135,7 +138,9 @@ func processInteractionActionGenericScore(_scoreType:String, _value:float) -> fl
 		return _value*2.0
 	elif(_scoreType == "attack"):
 		return _value*3.0
-	elif(_scoreType == "agreeSexWithSlut"):
+	elif(_scoreType == "agreeSexWithSubSlut"):
+		return _value*1.0
+	elif(_scoreType == "agreeSexWithDomSlut"):
 		return _value*1.0
 	elif(_scoreType == "talk"):
 		return _value*0.01
@@ -146,6 +151,9 @@ func processInteractionActionGenericScore(_scoreType:String, _value:float) -> fl
 
 func getReason() -> int:
 	return reason
+
+func shouldPreferToSpawnPawn() -> bool:
+	return gonnaAmbush
 
 func saveData() -> Dictionary:
 	var data := .saveData()

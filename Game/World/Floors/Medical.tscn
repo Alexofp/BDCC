@@ -6,6 +6,7 @@
 
 [node name="Medical" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+canMeetNPCs = true
 
 [node name="MedRoom" parent="." index="0" groups=["zone_poi"] instance=ExtResource( 2 )]
 roomName = "Med Lobby"

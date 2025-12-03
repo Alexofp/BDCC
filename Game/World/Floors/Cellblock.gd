@@ -53,7 +53,7 @@ func _on_CellblockRoom11_onPreEnter(room):
 	if(GM.pc.getLocation() == GM.pc.getCellLocation()):
 		room.roomDescription = "Your cell is nothing special. An automatic door that can be opened and closed remotely and an armored window that anyone can see through. Walls are made out of some metal, using a spoon on them would only leave a visible scratch. Everything is well lit at least."
 		room.roomDescription += "\n\n"
-		room.roomDescription += "One stiff-looking bed in the corner and a chair is all you get. You can rest here or hide something so you don't lose it during the personal searches."
+		room.roomDescription += "One stiff-looking bed in the corner and a stool is all you get. You can rest here or hide something so you don't lose it during the personal searches."
 		
 		room.roomName = "My cell"
 		

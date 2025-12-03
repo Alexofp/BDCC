@@ -115,6 +115,10 @@ func _run():
 		if(!getFlag("Game_PickedStartingPerks", false)):
 			addButton("Pick Perks!", "Pick your starting perks. You can only do this once", "pickstartingperks")
 		#addButton("[debug] Struggle", "Test the struggle minigame", "teststruggle")
+		if(GM.main.RS.special.empty()):
+			addDisabledButton("Relationships", "You don't have any special relationships with others")
+		else:
+			addButton("Relationships", "Look at all the special relationships that you have", "specialMenu")
 		if(GM.main.isInDungeon()):
 			addButton("Tasks", "Look at your tasks", "tasks")
 		
@@ -133,8 +137,9 @@ func _run():
 		addButton("Continue", "Good", "")
 
 	if(state == "pickgender"):
-		say("Pick your character's gender. This will affect the color of your speech and how others treat you. This can be changed at any point")
-		
+		saynn("Pick your character's gender. This will affect the color of your speech and how others treat you.")
+		saynn("Current gender: [color="+GM.pc.getChatColor()+"]"+Gender.genderToString(GM.pc.getGender()).capitalize()+"[/color]")
+
 		addButton("Male", "You're a guy", "setgender", [Gender.Male])
 		addButton("Female", "You're a girl", "setgender", [Gender.Female])
 		addButton("Androgynous", "Somewhere in between", "setgender", [Gender.Androgynous])
@@ -142,13 +147,15 @@ func _run():
 		addButton("back", "Keep your current gender", "")
 
 	if(state == "pickpronouns"):
-		say("Pick your character's pronouns. This can be changed at any point")
-		addButton("Same as gender", "Use your gender's pronouns", "setpronouns", [null])
-		addButton("Male", "He/his", "setpronouns", [Gender.Male])
-		addButton("Female", "She/her", "setpronouns", [Gender.Female])
-		addButton("Androgynous", "They/their", "setpronouns", [Gender.Androgynous])
-		addButton("Other", "It/its", "setpronouns", [Gender.Other])
-		addButton("back", "Keep your pronouns", "")
+		saynn("Pick your character's pronouns.")
+		saynn("Current pronouns: "+GM.pc.heShe()+"/"+GM.pc.hisHer()+(" (derived from gender)" if(GM.pc.pronounsGender == null) else ""))
+
+		addButton("Derive from gender", "Automatically adjust pronouns based on gender", "setpronouns", [null])
+		addButton("he/his", "Choose masculine pronouns", "setpronouns", [Gender.Male])
+		addButton("she/her", "Choose feminine pronouns", "setpronouns", [Gender.Female])
+		addButton("they/their", "Choose androgynous or neutral pronouns", "setpronouns", [Gender.Androgynous])
+		addButton("it/its", "Choose neutral pronouns", "setpronouns", [Gender.Other])
+		addButton("back", "Keep your current pronouns", "")
 	
 	if(state == "wait"):
 		saynn("Choose how long do you want wait.")
@@ -267,6 +274,10 @@ func _react(_action: String, _args):
 		setFlag("Game_PickedStartingPerks", true)
 		runScene("PickStartingPerksScene")
 		setState("")
+		return
+	if(_action == "specialMenu"):
+		endScene()
+		runScene("SpecialRelationshipsScene")
 		return
 	
 	setState(_action)

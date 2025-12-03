@@ -104,7 +104,9 @@ func setLocation(newRoomID:String):
 func getLocation():
 	return location
 	
-func isInSecludedLocation():
+func isInSecludedLocation() -> bool:
+	if(GM.main.isInDungeon()):
+		return true
 	if(GM.world == null):
 		return false
 	var cell:GameRoom = GM.world.getRoomByID(location)
@@ -351,16 +353,19 @@ func resetBodypartsToDefaultFor(speciesIds):
 		pickedFemininity = 50
 	
 	#var speciesIds = getSpecies()
-	var myspecies = []
+	var myspecies:Array = []
 	for specieID in speciesIds:
-		myspecies.append(GlobalRegistry.getSpecies(specieID))
+		var theSpeciesObj = GlobalRegistry.getSpecies(specieID)
+		if(!theSpeciesObj):
+			continue
+		myspecies.append(theSpeciesObj)
 	if(myspecies.size() == 0):
 		return
 	resetSlots()
 	var allslots = BodypartSlot.getAll()
 	
 	for slot in allslots:
-		var choices = []
+		var choices:Array = []
 		
 		for specie in myspecies:
 			var bodypartID = specie.getDefaultForSlot(slot, getGender())
@@ -906,17 +911,6 @@ func setFemininity(_newF:int):
 	pickedFemininity = _newF
 	updateAppearance()
 
-func canStartSex() -> bool:
-	if(hasBoundArms()):
-		return false
-	if(hasBlockedHands()):
-		return false
-	if(hasBoundLegs()):
-		return false
-	if(isOralBlocked()):
-		return false
-	return true
-
 func getReputation():
 	return reputation
 
@@ -971,3 +965,19 @@ func onSexEvent(_event : SexEvent):
 	
 	if(GM.main != null && GM.main.SCI != null):
 		GM.main.SCI.handleSexEvent(_event)
+		
+	if(GM.main && GM.main.RS):
+		for ownerID in GM.main.RS.special:
+			var theSpecialRelationship = GM.main.RS.special[ownerID]
+			if(theSpecialRelationship.id == "SoftSlavery" && theSpecialRelationship.npcOwner):
+				theSpecialRelationship.npcOwner.handleSexEvent(_event)
+
+func isSlaveTo(_charID:String) -> bool:
+	if(!GM.main || !GM.main.RS):
+		return false
+	var theSpecial = GM.main.RS.getSpecialRelationship(_charID)
+	if(!theSpecial):
+		return false
+	if(theSpecial.id == "SoftSlavery"):
+		return true
+	return false

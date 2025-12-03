@@ -41,6 +41,15 @@ func getTaskStringSlutLock():
 func getTaskHint(_isSlaveLevelup):
 	return "Squeeze their breasts until the milk starts coming out"
 
+func getNpcOwnerDialogueLines() -> Array:
+	return [
+		"Those tits aren't just for show. Get them stimulated until you lactate.",
+		"I want milk from you. Find someone to work your tits until you leak.",
+		"Your purpose is to feed. Get your nipples played with until you lactate.",
+		"It's time your breasts served a function. Get them milked.",
+		"You'll be a proper dairy cow. Go get stimulated until you start lactating.",
+	]
+
 func getSexGoalWeightModifier(_sexGoalID:String) -> float:
 	if(_sexGoalID == SexGoal.BreastFeedOnSub):
 		return 1.0

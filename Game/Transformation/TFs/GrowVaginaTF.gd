@@ -57,7 +57,7 @@ func doProgress(_context:Dictionary) -> Dictionary:
 	var theChar:BaseCharacter = getChar()
 	if(theChar.hasVagina()):
 		return {}
-	var possiblePartIDs:Dictionary = Bodypart.findPossibleBodypartIDsDict(BodypartSlot.Vagina, theChar, theChar.getSpecies(), NpcGender.Female)
+	var possiblePartIDs:Dictionary = Bodypart.findPossibleBodypartIDsDict(BodypartSlot.Vagina, theChar, theChar.getSpecies(), NpcGender.Female, true)
 	if(possiblePartIDs.has("")):
 		possiblePartIDs.erase("")
 	if(possiblePartIDs.empty()):

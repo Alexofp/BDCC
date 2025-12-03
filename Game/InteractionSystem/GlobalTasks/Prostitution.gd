@@ -10,6 +10,7 @@ func getMaxAssigned(_maxPawnCount:int) -> int:
 
 func canDoTask(_pawn:CharacterPawn) -> bool:
 	return _pawn.isInmate() || shouldIgnoreCharType(_pawn)
+	#return _pawn.isInmate()
 
 func configureGoal(_pawn:CharacterPawn, _goal):
 	#_goal.zone = patrolZone

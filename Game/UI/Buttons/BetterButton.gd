@@ -51,6 +51,8 @@ func updateButtonSize():
 		var minButtonSize:float = OPTIONS.getUiButtonSize()
 		if(minButtonSize > 0):
 			rect_min_size = Vector2(0, 20 + minButtonSize * 16)
+		else:
+			rect_min_size = Vector2(0.0, 0.0)
 	else:
 		rect_min_size = Vector2(0.0, 0.0)
 	if(OPTIONS.isTouchFriendlyUI()):
@@ -62,7 +64,12 @@ func setButtonText(_text:String):
 	updateButtonText()
 
 func updateButtonText():
-	button_label.text = myButtonText
+	if(rect_size.y < 45.0):
+		text = myButtonText
+		button_label.text = ""
+	else:
+		text = ""
+		button_label.text = myButtonText
 
 func setShortcutPhysicalScancode(code:int, reqControl:bool = false):
 	var newShortcut = ShortCut.new()
@@ -113,6 +120,6 @@ func setIsDisabled(_dis:bool):
 
 func checkDisabled():
 	if(disabled):
-		button_label["custom_colors/font_color"] = Color.darkgray
+		button_label["custom_colors/font_color"] = Color(0.44, 0.44, 0.44)
 	else:
 		button_label["custom_colors/font_color"] = Color.white

@@ -1,8 +1,8 @@
 extends StatusEffectBase
 
-var savedChars = {}
-var streak = 0
-var addedBuffs = {}
+var savedChars:Dictionary = {}
+var streak:int = 0
+var addedBuffs:Dictionary = {}
 
 func addRandomBuff():
 	var randomBuff = RNG.pick([
@@ -21,6 +21,7 @@ func addRandomBuff():
 func _init():
 	id = StatusEffect.CumWhoreStreak
 	isBattleOnly = false
+	removedOnDungeonStart = true
 
 func initArgs(_args = []):
 	if(_args.size() > 0):

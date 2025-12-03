@@ -70,6 +70,8 @@ func updateInventory():
 	if(theItemsGrouped is Array):
 		var newItemsGrouped = {}
 		for item in theItemsGrouped:
+			if(!item):
+				continue
 			if(!newItemsGrouped.has(item.id)):
 				newItemsGrouped[item.id] = [item]
 			else:
@@ -82,6 +84,8 @@ func updateInventory():
 		var lastItems = {}
 		for itemKey in theItemsGrouped:
 			var item = theItemsGrouped[itemKey][0]
+			if(!item):
+				continue
 			var actions = item.getPossibleActions()
 			if(actions.size() == 1):
 				newOrder[itemKey] = theItemsGrouped[itemKey]
@@ -97,14 +101,15 @@ func updateInventory():
 		
 		if(theItems.size() == 1):
 			var item = theItems[0]
-			var entry = inventoryEntry.instance()
-			itemListContainer.add_child(entry)
-			itemEntries.append(entry)
-			filterEnteries.append(entry)
-			entry.setItem(item, currentMode)
-			
-			entry.connect("onInteractButtonPressed", self, "onEntryInteractButtonPressed")
-			entry.connect("onItemSelected", self, "onEntrySelected")
+			if(item):
+				var entry = inventoryEntry.instance()
+				itemListContainer.add_child(entry)
+				itemEntries.append(entry)
+				filterEnteries.append(entry)
+				entry.setItem(item, currentMode)
+				
+				entry.connect("onInteractButtonPressed", self, "onEntryInteractButtonPressed")
+				entry.connect("onItemSelected", self, "onEntrySelected")
 		else:
 			var newGroupEntry = inventoryGroupEntry.instance()
 			itemListContainer.add_child(newGroupEntry)
@@ -114,6 +119,8 @@ func updateInventory():
 			newGroupEntry.connect("onInteractButtonPressed", self, "onGroupEntryInteractButtonPressed")
 			# add entry to some group entries maybe here
 			for item in theItems:
+				if(!item):
+					continue
 				var entry = inventoryEntry.instance()
 				newGroupEntry.addEntry(entry)
 				entry.setItem(item, currentMode)

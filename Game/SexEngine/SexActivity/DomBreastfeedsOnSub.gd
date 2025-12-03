@@ -205,7 +205,7 @@ func getActions(_indx:int):
 			addAction("moan", moanScore, "Moan", "Show how much you like it")
 		
 		if(isReadyToCumHandled(SUB_0)):
-			addAction("cum", 1.0, "Cum!", "You gonna cum.", {A_PRIORITY: 1001})
+			addAction("cum", 1.0, "Cum!", "You're gonna cum.", {A_PRIORITY: 1001})
 		
 func doAction(_indx:int, _actionID:String, _action:Dictionary):
 	if(_actionID == "knead"):

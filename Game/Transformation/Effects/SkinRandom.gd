@@ -40,7 +40,15 @@ func applyEffect(_data:Dictionary) -> Dictionary:
 	return {
 		success = true,
 	}
-	
+
+func isEffectBadShouldRemove() -> bool:
+	if(!pickedSkin.empty() && !GlobalRegistry.getSkin(pickedSkin)):
+		return true
+	for speciesID in species:
+		if(!GlobalRegistry.getSpecies(speciesID)):
+			return true
+	return false
+
 func saveData() -> Dictionary:
 	var data:Dictionary = .saveData()
 	

@@ -51,7 +51,11 @@ func getPawn() -> CharacterPawn:
 func getInteraction():
 	return interaction
 
-
+func canReachPC() -> bool:
+	var room = GM.world.getRoomByID(GM.pc.getLocation())
+	if(room == null || room.isOfflimitsForInmates()):
+		return false
+	return true
 
 func getLocation() -> String:
 	return getInteraction().getLocation()

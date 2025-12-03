@@ -141,7 +141,7 @@ func _run():
 
 		saynn("She begins by filling a vial with some milk and carefully placing it into a little centrifuge. After pressing a button, the centrifuge begins to spin furiously.")
 
-		saynn("[say=eliza]First, we extra the protein strands from the milk.. Casein, specifically. See it as a.. binding agent.[/say]")
+		saynn("[say=eliza]First, we extract the protein strands from the milk.. Casein, specifically. See it as a.. binding agent.[/say]")
 
 		saynn("As the centrifuge spins, you notice how the milk begins to separate into distinct layers. After that's done, Quinn carefully siphons off the protein-rich layer into its own beaker.")
 

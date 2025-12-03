@@ -16,6 +16,8 @@ func moveToPos(thePos:Vector2):
 			global_position, thePos + Vector2(RNG.randi_range(-16, 16), RNG.randi_range(-16, 16)), 0.5,
 			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	move_tween.start()
+	
+	#global_position = thePos + Vector2(RNG.randi_range(-16, 16), RNG.randi_range(-16, 16))
 
 func setPawnTexture(theText):
 	if(theText == RoomStuff.PawnTexture.Fem):

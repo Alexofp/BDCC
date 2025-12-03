@@ -9,8 +9,11 @@ func _init():
 	if Directory.new().dir_exists(portable_dir):
 		call_deferred("delayedLogPrint", "Using portable save directory: " + portable_dir)
 
-		if !Directory.new().dir_exists(portable_dir.plus_file("/Godot/app_userdata/BDCC")):
-			Directory.new().make_dir_recursive(portable_dir.plus_file("/Godot/app_userdata/BDCC"))
+		var portable_dir_suffix = "/Godot/app_userdata/BDCC"
+		if OS.get_name() == "X11":
+			portable_dir_suffix = "/.local/share/godot/app_userdata/BDCC"
+		if !Directory.new().dir_exists(portable_dir.plus_file(portable_dir_suffix)):
+			Directory.new().make_dir_recursive(portable_dir.plus_file(portable_dir_suffix))
 		
 		if OS.has_environment("APPDATA"):
 			OS.set_environment("APPDATA", portable_dir)  # Windows

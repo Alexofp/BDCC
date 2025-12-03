@@ -18,11 +18,11 @@ func react(_triggerID, _args):
 		return
 	
 	if(WorldPopulation.Inmates in GM.pc.getLocationPopulation()):
-		var baseChance = 0.5 + min(100.0, HypnokinkUtil.getSuggestibleStacks(GM.pc)) * 0.1
+		var baseChance:float = 0.5 + min(100.0, HypnokinkUtil.getSuggestibleStacks(GM.pc)) * 0.01
 		baseChance *= GM.pc.getEncounterChanceModifierInmates()
 		
 		if(RNG.chance(baseChance) || isLookingForTrouble):
-			GM.main.setFlag("HypnokinkModule.HypnoEncounterCooldown", RNG.randi_range(5, 10))
+			GM.main.setFlag("HypnokinkModule.HypnoEncounterCooldown", RNG.randi_range(10, 60))
 			
 			var encounterLevel = RNG.randi_range(0, Util.maxi(0, GM.pc.getLevel() + RNG.randi_range(-1, 1)))
 			encounterLevel = Util.maxi(encounterLevel, 0)

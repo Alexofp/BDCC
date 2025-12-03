@@ -4,7 +4,6 @@
 [ext_resource path="res://Game/UI/Util/SmartScrollContainer.gd" type="Script" id=2]
 [ext_resource path="res://Fonts/Titillium-Regular.otf" type="DynamicFontData" id=3]
 
-
 [sub_resource type="DynamicFont" id=1]
 size = 38
 outline_size = 2

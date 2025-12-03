@@ -2,11 +2,13 @@ extends Reference
 class_name StatusEffectBase
 
 var id = "badstatuseffect"
-var isBattleOnly = false
-var isSexEngineOnly = false
+var isBattleOnly:bool = false
+var isSexEngineOnly:bool = false
+var subscribeCheckOnFightStart:bool = false
+var removedOnDungeonStart:bool = false
 
-var alwaysCheckedForPlayer = false
-var alwaysCheckedForNPCs = false
+var alwaysCheckedForPlayer:bool = false
+var alwaysCheckedForNPCs:bool = false
 var priorityDuringChecking = 0
 
 var character
@@ -131,3 +133,21 @@ func onSexEnded(_contex = {}):
 
 func isDrugEffect() -> bool:
 	return false
+
+# Only gets called if subscribeCheckOnFightStart = true
+# Should return an array with 1 or 2 elements
+# First element = true/false. If true, this status effect will be applied on a fight start
+# Second element = args that will be passed to initArgs() (optional)
+func checkOnFightStart(_npc, _context:Dictionary) -> Array:
+	return [false, []]
+
+func contextGetEnemyID(_context:Dictionary) -> String:
+	if(_context.has("enemyID")):
+		return _context["enemyID"]
+	return ""
+
+func contextGetEnemy(_context:Dictionary):
+	var theEnemyID:String = contextGetEnemyID(_context)
+	if(theEnemyID.empty()):
+		return null
+	return GlobalRegistry.getCharacter(theEnemyID)
