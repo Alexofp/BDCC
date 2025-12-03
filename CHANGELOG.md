@@ -5,6 +5,60 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.1.12] - 2025-12-03
+### Added
+- A 'soft slavery' system for the player! The player character can now get enslaved by one of the dynamic npcs on the prison. A few ways to trigger this: the npc might just offer to make you their prison bitch, you might ask to become one, a very-likely outcome of losing a nemesis ambush. Or you can just use a new debug action. You can have multiple owners.
+- When enslaved, your owner will approach you once every few days to do something with you (an event). Each time you submit, their influence over you will increase. Fighting back will decrease the influence until they stop being your owner.
+- Resisting your owner will make them punish you. If you get punished too much, your owner might to get rid of you, selling you off or giving you away to a certain someone.
+- As your owner gains influence levels, they will develop 'owner traits'. There are 9 possible owner traits in total, they will affect what things the owners will do to you. You, the player, will also gradually unlock stuff like ability to change your nickname or ability to set limits.
+- You can also make friends! If you earn enough affection with someone, they will become your friend. Friends are more likely to help you overall and they will also sometimes try to protect you from your owner.
+- Added begging inside sex engine. As a sub, you can now beg the doms to do something specific with you. They might decide to agree or ignore you.
+- You can now see relative chances of the NPC's actions during interactions with them.
+- The 'Me' menu has a 'Relationships' button that allows you to see all your friends, owners and nemesis. It's also an easy way to meet them.
+- The modded BDCC launcher now has a button to check if you have any outdated mods that are known to crash the game on the new version. The list of mods that broke can be updated by me so please report them!
+
+### Changed
+- Perfomance optimizations for pawns. The game should especially run better with high pawn counts (above 40).
+- One-line buttons should fit more text (like before the touch UI update)
+- Debug info from the troubleshooting screen should be more useful hopefully.
+- Escaping getting choked should be easier in the sex engine.
+- The requirements of starting sex engine scenes got lessened. You now only need free arms/hands.
+- Timed buffs status effect shows buffs in a better format.
+- TF pill descriptions got improved.
+- Refactored the code that picks bodyparts. Should make the lives of modders easier.
+- You can now use the task list to view the nursery bounties.
+
+### Fixed
+- Game should crash less when mods are removed. Game should crash less overall too.
+- Dynamic npcs that are stuck in stocks or otherwise busy will not appear in scenes.
+- Text color of the disabled buttons should be more obvious (like before the touch UI update)
+- A lot of typos got fixed.
+- Datapack IDs are now forcibly stripped of any bad letters.
+- Rollbacker fixed, shouldn't rollback twice in certain conditions anymore.
+- Threesomes with npcs wearing strapons shouldn't have a chance to softlock anymore.
+
+### Contributions
+- [Fixed a crash when loading a save for some players](https://github.com/Alexofp/BDCC/pull/224) (by CKRainbow)
+- [Fix femininity values for generated dynamic npcs](https://github.com/Alexofp/BDCC/pull/227) (by keerifox)
+- [Prostitution interaction got updated with dom/sub requests](https://github.com/Alexofp/BDCC/pull/228) (by keerifox)
+- [Fix portable mode on Linux](https://github.com/Alexofp/BDCC/pull/230) (by Fox2Code)
+- [Fix some typos](https://github.com/Alexofp/BDCC/pull/231) (by keerifox)
+- [Haircut menu quality-of-life changes](https://github.com/Alexofp/BDCC/pull/232) (by keerifox)
+- [Add GM.ui.getCharactersPanel().reloadArtworkImages() API](https://github.com/Alexofp/BDCC/pull/237) (by Fox2Code)
+- [Add "become" console command](https://github.com/Alexofp/BDCC/pull/239) (by Fox2Code)
+- [Fixed some misgendering and a small typo](https://github.com/Alexofp/BDCC/pull/240) (by Selinoccino)
+- [Consistency fixes](https://github.com/Alexofp/BDCC/pull/241) (by Selinoccino)
+- [Capitalizations, minor changes & one slight text variation](https://github.com/Alexofp/BDCC/pull/243) (by Selinoccino)
+- [Add macros (they've, were/weren't, aren't, have/haven't etc.)](https://github.com/Alexofp/BDCC/pull/242) (by keerifox)
+- [Pronoun selection tweaks](https://github.com/Alexofp/BDCC/pull/244) (by keerifox)
+- [Minor changes, misgendering & verb fixes, punctuation & spelling changes](https://github.com/Alexofp/BDCC/pull/245) (by Selinoccino)
+- [Macros: yours/theirs (possessive pronoun)](https://github.com/Alexofp/BDCC/pull/246) (by keerifox)
+- [Grammar and spelling and stuff, again](https://github.com/Alexofp/BDCC/pull/247) (by Selinoccino)
+- [Computer hacking minigame rewrite and update](https://github.com/Alexofp/BDCC/pull/248) (by Selinoccino)
+- [Group TF pills in sex engine](https://github.com/Alexofp/BDCC/pull/249) (by keerifox)
+- [Fix crash upon slave going unconscious while tasked with sex work](https://github.com/Alexofp/BDCC/pull/250) (by keerifox)
+- [Ability to forbid NPCs from adding bodywritings/tallymarks. Ability to beg for bodywritings](https://github.com/Alexofp/BDCC/pull/251) (by keerifox)
+
 ## [0.1.11] - 2025-09-17
 ### Added
 - The game's UI has been refactored to support the new (optional) touch-friendly UI layouts! New (optional) layouts: [horizontal left-handed](https://github.com/user-attachments/assets/74722e3b-6d01-453e-a17b-72ada6528896), [horizontal right-handed](https://github.com/user-attachments/assets/aa5c0e77-c47b-4717-9899-b1b9e0e56e57) and [vertical](https://github.com/user-attachments/assets/930deadc-f6f9-4630-bbee-fc9eba4ddd04). (The current 'normal' layout is kept as is) Android version will automatically pick the new horizontal touch-friendly layout. But it is possible to override this in the settings.
@@ -617,7 +671,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.11...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.12...main
+[0.1.12]: https://github.com/Alexofp/BDCC/compare/0.1.11...0.1.12
 [0.1.11]: https://github.com/Alexofp/BDCC/compare/0.1.10...0.1.11
 [0.1.10]: https://github.com/Alexofp/BDCC/compare/0.1.9...0.1.10
 [0.1.9]: https://github.com/Alexofp/BDCC/compare/0.1.8...0.1.9
