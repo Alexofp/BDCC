@@ -83,7 +83,7 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array) -> Stri
 			return "you're"
 		else:
 			return object.theyre()
-	if(_command in "theyve" && _args.size() == 0):
+	if(_command == "theyve" && _args.size() == 0):
 		return object.theyve()
 	if(_command in ["youve", "youveTheyve"] && _args.size() == 0):
 		if(object.isPlayer()):
