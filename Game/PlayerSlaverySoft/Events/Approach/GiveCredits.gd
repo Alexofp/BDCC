@@ -40,7 +40,7 @@ func start_eventResult(_event, _id:String, _args:Array):
 	setState("obey")
 
 func obey():
-	saynn("You obey let your owner take your credits.")
+	saynn("You obey and let your owner take your credits.")
 	talkModularOwnerToPC("SoftSlaveryGiveCreditsTake")
 	addInfluenceObey()
 	addContinue("endEvent")

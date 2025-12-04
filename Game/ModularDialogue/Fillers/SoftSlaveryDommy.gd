@@ -252,6 +252,10 @@ func getFormIDs() -> Array:
 		"SoftSlaveryWalkiesBallTooFar",
 		"SoftSlaveryWalkiesNoBallFound",
 		
+		"SoftSlaveryBegUnlockNo",
+		"SoftSlaveryBegUnlockYes",
+		"SoftSlaveryBegUnlockDone",
+		
 		#"SoftSlavery",
 	]
 
@@ -963,10 +967,10 @@ func getText(_id:String, _args:Dictionary):
 
 	if(_id == "SoftSlaveryParadeAroundStart"):
 		return [
-			"Come here, {npc.npcSlive}. I wanna parade you around the prison.",
-			"Leash time, {npc.npcSlive}. You're going to be my pretty little showpiece for the whole prison.",
+			"Come here, {npc.npcSlave}. I wanna parade you around the prison.",
+			"Leash time, {npc.npcSlave}. You're going to be my pretty little showpiece for the whole prison.",
 			"Neck out, {npc.npcSlave}. We're parading you today, and I expect you to wear my leash with pride.",
-			"I'm parading you around the prison today, {npc.npcSlive}. The whole station will see what a good {npc.npcSlave} I've trained.",
+			"I'm parading you around the prison today, {npc.npcSlave}. The whole station will see what a good {npc.npcSlave} I've trained.",
 		]
 	if(_id == "SoftSlaveryParadeAroundFirst"):
 		return [
@@ -2026,4 +2030,33 @@ func getText(_id:String, _args:Dictionary):
 			"Couldn't find the ball? It's because it's in my hand, you silly pup. So adorable.",
 			"Couldn't find it? I've had the ball the whole time, pet. You're so amusing.",
 			"Confused? Aw. Adorable. I fake-threw it, you silly dog. You're so entertaining.",
+		]
+
+	if(_id == "SoftSlaveryBegUnlockNo"):
+		return [
+			"Aw, did my little {npc.npcSlave} think begging would work? How adorable. The answer is no.",
+			"Those locks aren't going anywhere, {npc.npcSlave}. You'll wear them until I'm thoroughly pleased with you.",
+			"No, {npc.npcSlave}. I love seeing you at my mercy. It's staying on.",
+			"That's not your decision to make, {npc.npcSlave}. The gear stays. I decide when it comes off.",
+			"Mmm, you look far too delicious wrapped up like a present. I think I'll keep you packaged a while longer.",
+			"That's a no, {npc.npcSlave}. Ask again and I might just add another lock.",
+			"The whimper in your voice is exactly why you're staying locked, {npc.npcSlave}. It's music to my ears.",
+			"Earn it off, {npc.npcSlave}. Impress me. Until then, you wear my gear.",
+		]
+
+	if(_id == "SoftSlaveryBegUnlockYes"):
+		return [
+			"Alright, you've convinced me. Come here, let your owner set you free.. for now.",
+			"You've been such a good {npc.npcSlave} lately. Come close and I'll reward you.",
+			"I'm in a merciful mood. Let's get my pretty {npc.npcSlave} unwrapped.",
+			"Okay, {npc.npcSlave}. I suppose you deserve a little reward. Don't let it go to your head.",
+			"You've pleased me enough to earn a taste of freedom. Just a taste.",
+			"Come here, {npc.npcSlave}. I'll take your gear off.. for now.",
+		]
+
+	if(_id == "SoftSlaveryBegUnlockDone"):
+		return [
+			"There. All free. Don't get too comfortable. I can always put you back in your place.",
+			"All done. Enjoy moving freely while you can. I already miss the sight of you in my restraints.",
+			"There we go. Savor it. I'm already deciding what to put on you next.",
 		]

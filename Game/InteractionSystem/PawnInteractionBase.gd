@@ -40,6 +40,9 @@ func shouldRunOnMeet(_pawn1, _pawn2, _pawn2Moved:bool):
 func getOutputText() -> String:
 	return "Something something"
 
+func shouldHideRelativeActionChances() -> bool:
+	return false
+
 func getOutputTextFinal() -> String:
 	textBuffer.clear()
 	var methodName:String = (state if state != "" else "init")+"_text"

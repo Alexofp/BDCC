@@ -38,7 +38,7 @@ func _run():
 		var showedNpcOwnerThing:bool = false
 		for ownerID in GM.main.RS.special:
 			var theSpecialRelationship = GM.main.RS.special[ownerID]
-			if(theSpecialRelationship.id == "SoftSlavery" && theSpecialRelationship.npcOwner):
+			if(theSpecialRelationship && theSpecialRelationship.id == "SoftSlavery" && theSpecialRelationship.npcOwner):
 				var theNpcOwner:NpcOwnerBase = theSpecialRelationship.npcOwner
 				if(theNpcOwner.hasGivenPCTasks()):
 					if(!showedNpcOwnerThing):

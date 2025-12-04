@@ -31,6 +31,10 @@ func onSocialEvent(_charActor:String, _charTarget:String, _eventID:int, _args:Ar
 	if(eventBadness >= 1.0):
 		if(_eventID == SocialEventType.GotImpregnated && _charTarget == charID && fetish(Fetish.BeingBred) >= 0.0):
 			return
+		if(_eventID == SocialEventType.ForcedUnconscious && _charTarget == charID && fetish(Fetish.UnconsciousSex) >= 0.2):
+			return
+		if(_eventID == SocialEventType.AwfulSex):
+			return
 		stopMe()
 		return
 	

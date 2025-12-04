@@ -69,7 +69,9 @@ func found_client_text():
 		sayLine("client", "ProstitutionClientAskFor"+askRole+"Slut", {main="client", target="main"})
 		if(getRoleChar("main").isPlayer()):
 			saynn("Looks like {client.name} wants you to be "+("a service dom" if(clientRequestedAskType == "service") else "the sub")+"..")
-
+	
+	var haveAnyOptions:bool = false
+	
 	var ACTION_NAME_USUAL:String = "Usual"
 	var ACTION_NAME_SERVICE_DOM:String = "Service Dom"
 	var ACTION_NAME_PRICY_SLUT:String = "Pricy slut"
@@ -77,6 +79,7 @@ func found_client_text():
 	if(clientRequestedAskType in ["", "usual"]):
 		if(roleCanStartSex("client")):
 			addAction("usual", ACTION_NAME_USUAL, "Let them fuck you any way they want for relatively cheap..", "sexSub", 1.0, 60, {})
+			haveAnyOptions = true
 		else:
 			addDisabledAction(ACTION_NAME_USUAL, "They can't be a dom with their restraints..")
 	else:
@@ -84,6 +87,7 @@ func found_client_text():
 	if(clientRequestedAskType in ["", "service"]):
 		if(roleCanStartSex("main") && hasRepLevelPC("main", RepStat.Whore, 4)):
 			addAction("service", ACTION_NAME_SERVICE_DOM, "You will be in charge. It takes more effort.. so you will be taking more credits", "sexDom", 1.0, 60, {})
+			haveAnyOptions = true
 		else:
 			addDisabledAction(ACTION_NAME_SERVICE_DOM, "You can't be a service dom with your restraints.." if !roleCanStartSex("main") else "Your whore reputation is not high enough for this..")
 	else:
@@ -91,14 +95,15 @@ func found_client_text():
 	if(clientRequestedAskType in ["", "usual"]):
 		if(roleCanStartSex("client") && hasRepLevelPC("main", RepStat.Whore, 8)):
 			addAction("pricy_slut", ACTION_NAME_PRICY_SLUT, "Ask for a lot of credits to let them fuck you.. You will have to really satisfy them though..", "resist", 1.0, 60, {})
+			haveAnyOptions = true
 		else:
 			addDisabledAction(ACTION_NAME_PRICY_SLUT, "They can't be a dom with their restraints.." if !roleCanStartSex("client") else "Your whore reputation is not high enough for this..")
 	else:
 		addDisabledAction(ACTION_NAME_PRICY_SLUT, ACTION_DESC_CLIENT_NOT_INTERESTED)
 	if(clientRequestedAskType == ""):
-		addAction("cancel", "Cancel", "You changed your mind, you don't wanna service them", "default", 0.0, 60, {})
+		addAction("cancel", "Cancel", "You changed your mind, you don't wanna service them", "default", 0.0 if haveAnyOptions else 1.0, 60, {})
 	else:
-		addAction("refuse_opposite_role_request", "Refuse", "You're not interested in being a "+("service dom" if(clientRequestedAskType == "service") else "sub")+" for them.", "default", 0.0, 60, {})
+		addAction("refuse_opposite_role_request", "Refuse", "You're not interested in being a "+("service dom" if(clientRequestedAskType == "service") else "sub")+" for them.", "default", 0.0 if haveAnyOptions else 1.0, 60, {})
 
 func found_client_do(_id:String, _args:Dictionary, _context:Dictionary):
 	if(_id == "usual"):

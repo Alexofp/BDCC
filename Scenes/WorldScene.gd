@@ -266,12 +266,13 @@ func runInteraction():
 			else:
 				addButton(action["name"], action["desc"], "pick_interaction_action", [interaction, action])
 	else:
-		var theRelativeActionsInfo:Array = interaction.getActionsRelativeChanceInfo()
-		if(theRelativeActionsInfo.size() > 1):
-			var curPawn := interaction.getCurrentPawn()
-			if(curPawn):
-				saynn(curPawn.getChar().getName()+"'s actions:\n"+Util.join(theRelativeActionsInfo, "\n"))
-		
+		if(OPTIONS.shouldSeePawnActionChances() && !interaction.shouldHideRelativeActionChances()):
+			var theRelativeActionsInfo:Array = interaction.getActionsRelativeChanceInfo()
+			if(theRelativeActionsInfo.size() > 1):
+				var curPawn := interaction.getCurrentPawn()
+				if(curPawn):
+					saynn(curPawn.getChar().getName()+"'s actions:\n"+Util.join(theRelativeActionsInfo, "\n"))
+			
 		addButton("Continue", "See what happens next", "progress_interaction")
 	
 	return true
