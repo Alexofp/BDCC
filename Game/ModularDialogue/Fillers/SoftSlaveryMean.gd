@@ -252,6 +252,10 @@ func getFormIDs() -> Array:
 		"SoftSlaveryWalkiesBallTooFar",
 		"SoftSlaveryWalkiesNoBallFound",
 		
+		"SoftSlaveryBegUnlockNo",
+		"SoftSlaveryBegUnlockYes",
+		"SoftSlaveryBegUnlockDone",
+		
 		#"SoftSlavery",
 	]
 
@@ -2097,4 +2101,31 @@ func getText(_id:String, _args:Dictionary):
 			"Couldn't find the ball? It's because it's in my hand, you dumb pup.",
 			"Couldn't find it? I've had the ball the whole time, you silly dog.",
 			"Confused? You're so silly. I fake-threw it, you dumb dog.",
+		]
+
+	if(_id == "SoftSlaveryBegUnlockNo"):
+		return [
+			"Fuck no. Did you actually think I'd say yes?",
+			"You think I give a shit about your comfort? The locks stay, {npc.npcSlave}.",
+			"Not a chance. I love seeing you struggle in that gear, {npc.npcSlave}.",
+			"That shit's permanent until I'm bored of it. Deal with it, {npc.npcSlave}.",
+			"You look perfect trapped and useless. Why would I change that?",
+			"Ask again and I'll add another lock. Try me, {npc.npcSlave}.",
+			"Your suffering is my entertainment. The gear stays.",
+			"It's not coming off, {npc.npcSlave}. Consider it your uniform for the time being.",
+		]
+	if(_id == "SoftSlaveryBegUnlockYes"):
+		return [
+			"Ugh, fine. My amusement's wearing thin anyway. Come here.",
+			"Maybe I'll take it off, alright.",
+			"I guess you earned a break, {npc.npcSlave}.",
+			"Guess I'll unlock you. I've had my share of fun.",
+		]
+	if(_id == "SoftSlaveryBegUnlockDone"):
+		return [
+			"There. Don't enjoy it too much. It won't last.",
+			"All done. You look pathetic without any bondage gear, honestly.",
+			"Temporary freedom. I'll have you locked back up before you know it.",
+			"Enjoy the feeling while it lasts, {npc.npcSlave}. My patience is short.",
+			"Don't get used to it. I'm already thinking about what I can lock on you the next time.",
 		]

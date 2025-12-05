@@ -497,7 +497,7 @@ func getTalkActions(_event) -> Array:
 	var result:Array = []
 	
 	if(!didInteractWithToday()):
-		result.append(talkAction("Submit", "Ask your owner to do something with you. You can only do this once per day. Removes 1 punishment point if you doing it willingly.", "submit"))
+		result.append(talkAction("Submit", "Ask your owner to do something with you. You can only do this once per day. Removes 1 punishment point if you're doing it willingly.", "submit"))
 		result.append(talkAction("Attack!", "Try to get rid of your owner's influence.", "attack"))
 	else:
 		result.append(talkActionDisabled("Submit", "Your owner doesn't feel like doing anything with you today anymore."))
@@ -671,6 +671,8 @@ func saveData() -> Dictionary:
 		lbo = lockedByOwner,
 		oou = ownerOfferedUnlock,
 		sto = sleepTogetherOption,
+		eda = daysAmount,
+		nao = nextApproachOverride,
 	}
 
 func loadData(_data:Dictionary):
@@ -689,6 +691,8 @@ func loadData(_data:Dictionary):
 	lockedByOwner = SAVE.loadVar(_data, "lbo", false)
 	ownerOfferedUnlock = SAVE.loadVar(_data, "oou", false)
 	sleepTogetherOption = SAVE.loadVar(_data, "sto", 0)
+	daysAmount = SAVE.loadVar(_data, "eda", 0)
+	nextApproachOverride = SAVE.loadVar(_data, "nao", 0)
 	
 	tasks.clear()
 	var tasksData:Array = SAVE.loadVar(_data, "t", [])

@@ -252,6 +252,10 @@ func getForms() -> Dictionary:
 		"SoftSlaveryCuddle": form("Hey, I don't wanna do anything with you. Let's just go cuddle together.", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryCuddle2": form("And now, we cuddle.", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryCuddleEnd": form("Thanks for being a good cuddle slut. Gonna check on you some other day.", {main=CHAR, target=CHAR}, "main", "target"),
+		
+		"SoftSlaveryBegUnlockNo": form("Cute. But not today.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryBegUnlockYes": form("Alright. It's time to unlock you.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryBegUnlockDone": form("There you go. Enjoy being free, for now.", {main=CHAR, target=CHAR}, "main", "target"),
 
 		"SoftSlavery": form("", {main=CHAR, target=CHAR}, "main", "target"),
 	}

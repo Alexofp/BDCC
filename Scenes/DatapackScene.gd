@@ -15,7 +15,11 @@ func setDatapackAndSceneIDs(newDatapackID, newSceneID):
 	datapackSceneID = newSceneID
 	
 	datapack = GlobalRegistry.getDatapack(datapackID)
+	if(!datapack):
+		return
 	datapackScene = datapack.getScene(datapackSceneID)
+	if(!datapackScene):
+		return
 	
 	codeContex = DatapackSceneCodeContext.new()
 	codeContex.setScene(self)
@@ -45,10 +49,11 @@ func _run():
 		addButton("Close", "Close this scene", "endthescene")
 		return
 	
-	codeContex.run()
+	if(codeContex):
+		codeContex.run()
 
 func _react(_action: String, _args):
-	if(codeContex.react(_action, _args)):
+	if(codeContex && codeContex.react(_action, _args)):
 		return
 	
 	if(_action == "endthescene"):
@@ -58,7 +63,8 @@ func _react(_action: String, _args):
 	setState(_action)
 
 func _react_scene_end(_tag, _result):
-	codeContex.reactSceneEnd(_tag, _result)
+	if(codeContex):
+		codeContex.reactSceneEnd(_tag, _result)
 
 func getSceneCreator():
 	if(datapack == null):
@@ -75,7 +81,7 @@ func saveData():
 	
 	data["datapackID"] = datapackID
 	data["datapackSceneID"] = datapackSceneID
-	data["codeContex"] = codeContex.saveData()
+	data["codeContex"] = codeContex.saveData() if codeContex else {}
 
 	return data
 	
@@ -86,7 +92,11 @@ func loadData(data):
 	datapackSceneID = SAVE.loadVar(data, "datapackSceneID", "")
 
 	datapack = GlobalRegistry.getDatapack(datapackID)
-	datapackScene = datapack.getScene(datapackSceneID)
+	datapackScene = null
+	if(datapack):
+		datapackScene = datapack.getScene(datapackSceneID)
+	if(!datapackScene):
+		return
 
 	codeContex = DatapackSceneCodeContext.new()
 	codeContex.setScene(self)

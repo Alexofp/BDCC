@@ -995,6 +995,10 @@ func saveData() -> Dictionary:
 func loadData(_data:Dictionary):
 	state = SAVE.loadVar(_data, "state", "start")
 	tag = SAVE.loadVar(_data, "tag", "")
-	roles = SAVE.loadVar(_data, "roles", {})
+	var theRoles:Dictionary = SAVE.loadVar(_data, "roles", {})
+	roles.clear()
+	for roleIDStr in theRoles:
+		var theRoleIDInt:int = int(roleIDStr)
+		roles[theRoleIDInt] = theRoles[roleIDStr]
 	subResult = SAVE.loadVar(_data, "subResult", 0)
 	sexLimits = SAVE.loadVar(_data, "sexLimits", [])

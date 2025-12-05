@@ -67,6 +67,6 @@ func ownerLost():
 	playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_EXTRA1)})
 	
 	saynn("Your friend manages to save you! And so you thank {npc1.him} for the efforts.")
-	talkModular(C_EXTRA1, "pc", "SoftSlaveryProtectedByFriendWonThank") # You are welcome
+	talkModular(C_EXTRA1, C_PC, "SoftSlaveryProtectedByFriendWonThank") # You are welcome
 	addInfluenceResist(0.5)
 	addContinue("endEvent")

@@ -43,6 +43,7 @@ var maxKeepNPCKids:int = 30
 var sandboxPawnCount:int = 30
 var sandboxBreeding:String = "rare" # normal reduced rare veryrare never
 var sandboxNpcLeveling:float = 1.0
+var sandboxSeeChances:bool = true
 
 # Difficulty options
 var hardStruggleEnabled: bool = false
@@ -152,6 +153,7 @@ func resetToDefaults():
 	sandboxPawnCount = 30
 	sandboxBreeding = "rare"
 	sandboxNpcLeveling = 1.0
+	sandboxSeeChances = true
 	blockCatcherPanelHeight = 8
 	
 	enabledContent.clear()
@@ -335,6 +337,9 @@ func getSandboxOffscreenBreedingMult() -> float:
 	
 	return 1.0
 
+func shouldSeePawnActionChances() -> bool:
+	return sandboxSeeChances
+
 func getInventoryIconSize():
 	if(inventoryIconsSize == "small"):
 		return 32
@@ -405,6 +410,14 @@ func getChangeableOptions():
 						[1.5, "150%"],
 						[2.0, "200%"],
 					],
+					"tab": TAB_GAMEPLAY,
+				},
+				{
+					"name": "Visible chances of pawn's actions",
+					"description": "Enable the display of relative chances of pawn's actions during interactions with them.",
+					"id": "sandboxSeeChances",
+					"type": "checkbox",
+					"value": sandboxSeeChances,
 					"tab": TAB_GAMEPLAY,
 				},
 			],
@@ -1067,6 +1080,8 @@ func applyOption(categoryID, optionID, value):
 			sandboxBreeding = value
 		if(optionID == "sandboxNpcLeveling"):
 			sandboxNpcLeveling = value
+		if(optionID == "sandboxSeeChances"):
+			sandboxSeeChances = value
 	
 	if(categoryID == "jigglephysics"):
 		if(optionID == "jigglePhysicsBreastsEnabled"):
@@ -1365,6 +1380,7 @@ func saveData():
 		"sandboxPawnCount": sandboxPawnCount,
 		"sandboxBreeding": sandboxBreeding,
 		"sandboxNpcLeveling": sandboxNpcLeveling,
+		"sandboxSeeChances": sandboxSeeChances,
 		"blockCatcherPanelHeight": blockCatcherPanelHeight,
 		"webTextInputFallback": webTextInputFallback,
 		"fullscreen": fullscreen,
@@ -1429,6 +1445,7 @@ func loadData(data):
 	sandboxPawnCount = loadVar(data, "sandboxPawnCount", 30)
 	sandboxBreeding = loadVar(data, "sandboxBreeding", "rare")
 	sandboxNpcLeveling = loadVar(data, "sandboxNpcLeveling", 1.0)
+	sandboxSeeChances = loadVar(data, "sandboxSeeChances", true)
 	blockCatcherPanelHeight = loadVar(data, "blockCatcherPanelHeight", 16)
 	webTextInputFallback = loadVar(data, "webTextInputFallback", false)
 	fullscreen = loadVar(data, "fullscreen", false)
