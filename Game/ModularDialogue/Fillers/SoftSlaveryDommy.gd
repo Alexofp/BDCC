@@ -703,7 +703,7 @@ func getText(_id:String, _args:Dictionary):
 		return [
 			"To me, {npc.npcSlave}. The slutwall is where you belong today. Don't make me repeat myself.",
 			"The slutwall is calling for you, my little pet. Hold still while I leash my good {npc.npcSlave}.",
-			"Come here, {npc.npcSlave}. Your owner going to use you in the slutwall today. Struggle and you'll regret it.",
+			"Come here, {npc.npcSlave}. Your owner is going to use you in the slutwall today. Struggle and you'll regret it.",
 			"You're going to be my perfect little fucktoy in the slutwall today. Present your neck, {npc.npcSlave}.",
 			"I own this pretty body, and today I'm using it in the slutwall. Be still, {npc.npcSlave}.",
 			"Be a good {npc.npcSlave} and come willingly to the slutwall. It's easier if you obey.",
@@ -1605,7 +1605,7 @@ func getText(_id:String, _args:Dictionary):
 		]
 	if(_id == "SoftSlaveryGBOffer"):
 		return [
-			"Wanna gangbang my {npc.npcSlave}. For a fair price.",
+			"Wanna gangbang my {npc.npcSlave}? For a fair price.",
 			"My {npc.npcSlave} wants to be gangbanged. Are you interested in participating?",
 			"I am forming a party to use my {npc.npcSlave}. Do you wish to join? For a price.",
 			"Wanna join me to gangbang my {npc.npcSlave}? It will only cost you a fair amount of credits.",

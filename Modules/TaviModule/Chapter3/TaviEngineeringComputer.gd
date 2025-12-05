@@ -4,15 +4,15 @@ func _init():
 	id = "TaviEngineeringComputer"
 	
 	# create local server & files
-	var locals = Server.new("",["connect"])
+	var locals = NetworkedComputerServer.new("",["connect"])
 	locals.addFile(newCompFile("readme.txt","Useful shit:\n1[cuss]27.0.69[/cuss] - Server with some porn, I know you would find it eventually, you degenerates\n127.0.10 - bluespace transmitter door, don't touch it unless you were told to\n\nDon't bug me about how to connect to these, RTFM. Or type 'help connect' if you never worked with a terminal before.","",true,1))
 	locals.addFile(newCompFile("forum.html","...**[corrupt]corrupted data[/corrupt]**...\n\n<message>Why the fuck are we using such outdated hardware?</message>\n<message>If it works, don't fix it. It's a piece of shit but you're not gonna play doom on it, this machine supports telnet and that's all we need.</message>\n<message>The fuck is telnet?</message>\n<message>It's what we used before bluespace got discovered. Just read the fucking readme already.</message>\n\n...**[corrupt]more corrupted data[/corrupt]**...","",false,2))
 	
 	# door server
-	var doors = Server.new("127.0.10",["mode","disconnect","help"],"Door status: LOCKED\nLast maintenance: [cuss]9999999[/cuss] days ago",false)
+	var doors = NetworkedComputerServer.new("127.0.10",["mode","disconnect","help"],"Door status: LOCKED\nLast maintenance: [cuss]9999999[/cuss] days ago",false)
 	
 	# horny server
-	var hornys = Server.new("127.0.69",["disconnect"],"Welcome to horny bread's secret lair. We have a strict NO PANTS policy. Please enjoy yourself!\nTo see what commands this server supports type 'help'",true)
+	var hornys = NetworkedComputerServer.new("127.0.69",["disconnect"],"Welcome to horny bread's secret lair. We have a strict NO PANTS policy. Please enjoy yourself!\nTo see what commands this server supports type 'help'",true)
 	hornys.addFile(newCompFile("porn.png",Util.readFile("res://Images/asciiporn/taviquest/porn.txt"),"res://Fonts/smallconsolefont.tres",true,1))
 	hornys.addFile(newCompFile("sex.png",Util.readFile("res://Images/asciiporn/taviquest/sex.txt"),"res://Fonts/smallconsolefont.tres",true,2))
 	hornys.addFile(newCompFile("mouwse.png",Util.readFile("res://Images/asciiporn/taviquest/mouwse.txt"),"res://Fonts/smallconsolefont.tres",true,3))
@@ -51,8 +51,8 @@ var tutorialData = [
 	["help mode", "Figure out how to use the mode command", "Select 'help', then select 'mode' and press Send"],
 	["mode 9", "Switch the door to the maintenance mode", "Select 'mode', then switch to the numpad and select 9 before pressing Send"],
 ]
-var currentTutorialStep = 0
-var shouldSpoilHint = false
+var currentTutorialStep:int = 0
+var shouldSpoilHint:bool = false
 
 func getTutorial():
 	if(currentTutorialStep >= tutorialData.size()):
@@ -85,7 +85,7 @@ func saveData():
 	
 	data["connectedTo"] = connectedTo
 	data["currentTutorialStep"] = currentTutorialStep
-	data["shouldSpoilHint"] = currentTutorialStep
+	data["shouldSpoilHint"] = shouldSpoilHint
 	
 	return data
 	

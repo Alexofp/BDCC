@@ -192,7 +192,7 @@ func saveData():
 	
 	data["connectedTo"] = connectedTo
 	data["currentTutorialStep"] = currentTutorialStep
-	data["shouldSpoilHint"] = currentTutorialStep
+	data["shouldSpoilHint"] = shouldSpoilHint
 	
 	return data
 	

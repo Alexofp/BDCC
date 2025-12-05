@@ -200,6 +200,8 @@ func about_to_sex_sexResult(_sex:SexEngineResult):
 		var minExtra:float = pow(sexSatisfaction, 0.3)*10.0
 		var maxExtra:float = pow(sexSatisfaction, 0.5)*20.0
 		earnedCredits = RNG.randi_range(5, 10) + int(RNG.randf_range(minExtra, maxExtra))
+	if(earnedCredits > 0):
+		GM.pc.addCredits(earnedCredits)
 	setState("afterSex")
 
 func afterSex():

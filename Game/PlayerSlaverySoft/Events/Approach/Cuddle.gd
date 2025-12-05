@@ -10,8 +10,8 @@ const qanswers = "answers"
 
 const QuestionDB = {
 	"consent": {
-		qtext = "In a place where 'no' is often a luxury we can't afford, what does consent even mean? Is a 'yes' given to avoid a worse punishment still a real 'yes'?",
-		qanswers = [
+		qtext: "In a place where 'no' is often a luxury we can't afford, what does consent even mean? Is a 'yes' given to avoid a worse punishment still a real 'yes'?",
+		qanswers: [
 			[
 				"Survival tool",
 				"In this place, consent is a currency, not a principle. A 'yes' under threat is still a strategic choice. It means you're smart enough to navigate the hellscape, not that you're willing.", 
@@ -329,15 +329,17 @@ func cuddling_do(_id:String, _args:Array):
 func askedQuestion():
 	saynn("You spend some time together.. just resting..")
 	saynn("Eventually, {npc.name} decides to ask you a question.")
-	var theEntry: Dictionary = QuestionDB[questionID]
-	talkOwner(theEntry[qtext])
+	var theEntry: Dictionary = QuestionDB[questionID] if QuestionDB.has(questionID) else {}
+	talkOwner(theEntry[qtext] if theEntry.has(qtext) else ("BAD QUESTION DB ENTRY: "+str(questionID)))
 	saynn("How do you wanna answer?")
 	
-	var theAnswers:Array = theEntry[qanswers]
+	var theAnswers:Array = theEntry[qanswers] if theEntry.has(qanswers) else []
 	var _i:int = 0
 	for theAnswer in theAnswers:
 		addButton(theAnswer[0], theAnswer[1], "pickAnswer", [_i])
 		_i += 1
+	if(theAnswers.empty()):
+		addButton("Close", "Let the dev know!", "endEvent")
 	
 	#addContinue("endEvent")
 
