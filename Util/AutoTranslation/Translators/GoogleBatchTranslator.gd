@@ -133,7 +133,7 @@ func translate(_targetLanguage, _inputText):
 			var someresult = []
 			for asdf in somestuff:
 				if(asdf[0] != null && asdf[0] != ""):
-					print("A:"+str(asdf[0])+":A")
+					#print("A:"+str(asdf[0])+":A")
 					someresult.append(asdf[0])
 			var bestResult = joinSkipNewLines(someresult, " ")
 			#print("START:"+bestResult+":END")
@@ -148,8 +148,13 @@ func translate(_targetLanguage, _inputText):
 		
 		
 	var body = theData[3]
-	print(body.get_string_from_utf8())
-	var jsonResult = JSON.parse(body.get_string_from_utf8())
+	#print(body.get_string_from_utf8())
+	var theResultText:String = body.get_string_from_utf8()
+	if(theResultText.empty()):
+		theResult["error"] = true
+		theResult["errorMessage"] = "Empty response"
+		return theResult
+	var jsonResult = JSON.parse(theResultText)
 	if(jsonResult.error != OK):
 		theResult["error"] = true
 		theResult["errorMessage"] = "Couldn't parse json data"

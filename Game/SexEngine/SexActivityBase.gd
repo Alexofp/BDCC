@@ -320,8 +320,8 @@ func stimulate(_indxActor:int, _slotActor:String, _indxTarget:int, _slotTarget:S
 		arousalAdd = 0.3
 	
 	if(_intensity == I_TEASE):
-		infoActor.addArousalForeplay(arousalAdd*0.25 + fetishScoreActor*0.05)
-		infoTarget.addArousalForeplay(arousalAdd*0.25 + fetishScoreTarget*0.05)
+		infoActor.addArousalForeplay(arousalAdd*0.25 + max(fetishScoreActor, -0.5)*0.05)
+		infoTarget.addArousalForeplay(arousalAdd*0.25 + max(fetishScoreTarget, -0.5)*0.05)
 	elif(_intensity == I_LOW):
 		infoActor.stimulateArousalZone(arousalAdd*0.5, _slotActor, 0.5)
 		infoTarget.stimulateArousalZone(arousalAdd*0.5, _slotTarget, 0.5)

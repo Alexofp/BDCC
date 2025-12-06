@@ -102,11 +102,16 @@ func translate(_targetLanguage, _inputText):
 		theResult["errorMessage"] = "HTTP request wasn't successful"
 		return theResult
 		
-	var theText:String = theData[3].get_string_from_utf8()
+	var theResultText:String = theData[3].get_string_from_utf8()
 	newreq.queue_free()
 
 	#print(body.get_string_from_utf8())
-	var jsonResult = JSON.parse(theText)
+	#var theResultText:String = body.get_string_from_utf8()
+	if(theResultText.empty()):
+		theResult["error"] = true
+		theResult["errorMessage"] = "Empty response"
+		return theResult
+	var jsonResult = JSON.parse(theResultText)
 	if(jsonResult.error != OK):
 		theResult["error"] = true
 		theResult["errorMessage"] = "Couldn't parse json data"

@@ -50,7 +50,7 @@ func start_eventResult(_event, _tag:String, _args:Array):
 		setState("ownerLost")
 
 func ownerWon():
-	playAnimation(StageScene.SexStart, "start", {pc=getRoleID(C_EXTRA1), npc=getOwnerID()})
+	playAnimation(StageScene.SexStart, "start", {npc=getRoleID(C_EXTRA1), pc=getOwnerID()})
 	
 	saynn("Your owner has won.. against your other owner!")
 	talkModularOwnerToPC("SoftSlaveryFuckJealousOwnerWon")
@@ -75,7 +75,7 @@ func ownerWon_sexResult(_sexResult:SexEngineResult):
 
 func ownerLost():
 	if(!instantSurrender):
-		playAnimation(StageScene.SexStart, "start", {npc=getRoleID(C_EXTRA1), pc=getOwnerID()})
+		playAnimation(StageScene.SexStart, "start", {pc=getRoleID(C_EXTRA1), npc=getOwnerID()})
 		saynn("Your owner has lost.. to your other owner!")
 	else:
 		playAnimation(StageScene.Duo, "stand", {npc=getRoleID(C_EXTRA1), pc=getOwnerID()})

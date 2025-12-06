@@ -11,7 +11,7 @@ const defaultCmds : Array = ["help","ls","cat"] # these are always available unl
 
 var localCmds : Dictionary = {} # key is string for command, value is description for help; these are for each separate server/script/whatever
 
-class Server:
+class NetworkedComputerServer:
 	var ip : String = "0.0.0.0" # empty string is always local computer
 	var enterText : String = "this is the message that shows on connect!"
 	var supportedCmds : Array = [] # only these are enabled per server
@@ -39,15 +39,15 @@ class Server:
 		self.username = un
 		self.adminPassword = pw
 		self.adminCommands = adcmds
-	func addFile(f:CompFile):
+	func addFile(f:ComputerFile):
 		if files.has(f): # no duplicates
 			return
 		files.append(f)
-	func addPrivateFile(f:CompFile):
+	func addPrivateFile(f:ComputerFile):
 		if privateFiles.has(f): # no duplicates
 			return
 		privateFiles.append(f)
-	func getFile(f:CompFile):
+	func getFile(f:ComputerFile):
 		var idx = -1
 		idx = files.find(f)
 		if idx==-1:
@@ -77,7 +77,7 @@ class Server:
 					return f
 		return null
 
-class CompFile:
+class ComputerFile:
 	var name : String = "file.exe"
 	var catData : String = "" # prints when catted
 	var canDownload : bool = true # it'd be nice to be able to download most files, esp. pngs
@@ -86,8 +86,8 @@ class CompFile:
 	
 	var method : String = "" # method to call if file is .exe (requires localCmd_ prefix for method, added automatically; eg. to call open, method="open" and calls localCmd_open())
 
-func newCompFile(n:String,cat:String="it's a file!",f:String="",down:bool=true,i=-1,meth:String="") -> CompFile:
-	var nf = CompFile.new()
+func newCompFile(n:String,cat:String="it's a file!",f:String="",down:bool=true,i=-1,meth:String="") -> ComputerFile:
+	var nf = ComputerFile.new()
 	nf.name = n
 	nf.catData = cat
 	nf.canDownload = down
@@ -100,7 +100,7 @@ func newCompFile(n:String,cat:String="it's a file!",f:String="",down:bool=true,i
 	nf.method = meth
 	return nf
 
-func getServer(ip:String="") -> Server:
+func getServer(ip:String="") -> NetworkedComputerServer:
 	return servers.get(ip,null)
 
 func ls(_args:Array=[]):
@@ -123,7 +123,7 @@ func cat(_args:Array=[]):
 		return "'cat' command expects 1 argument"
 	if _args[0] in ["tuna", "tunya"]:
 		return "cat program thanks you for tunya :3"
-	var currentServer : Server = getServer(connectedTo)
+	var currentServer : NetworkedComputerServer = getServer(connectedTo)
 	if !currentServer:
 		return "ERROR: no connected server"
 	if !str(_args[0]).is_valid_integer(): # invalid arg
@@ -190,7 +190,7 @@ func disconnectComputer(_args:Array=[]):
 	if !connectedTo: # not connected anyway
 		return "Not connected to anything"
 	
-	var currentServer : Server = getServer(connectedTo)
+	var currentServer : NetworkedComputerServer = getServer(connectedTo)
 	if currentServer:
 		currentServer.loggedin = false
 		for key in currentServer.disconnectData.keys():
@@ -201,7 +201,7 @@ func disconnectComputer(_args:Array=[]):
 	return "Disconnecting... Success"
 
 func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):
-	var currentServer : Server = getServer(connectedTo)
+	var currentServer : NetworkedComputerServer = getServer(connectedTo)
 	if !currentServer:
 		return "ERROR: no connected server"
 	
@@ -233,43 +233,30 @@ func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):
 	learnCommand("help")
 	return "Error, unknown command. Use 'help' to list all available commands"
 
-func getServersData():
-	var sd = {} # servers data, ip:{...data...}, ...
-	for server in servers:
-		if !server.data.empty():
-			sd[server.ip]=server.data
+func getServersData() -> Dictionary:
+	var sd:Dictionary = {} # servers data, ip:{...data...}, ...
+	for serverID in servers:
+		var server:NetworkedComputerServer = servers[serverID]
+		if(!server):
+			continue
+		if(!server.data.empty()):
+			sd[server.ip] = server.data
 	return sd
 
 func saveData():
-	#var data = .saveData()
+	var data = .saveData()
 	
-	#data["waitTimer"] = waitTimer
+	data["serversData"] = getServersData()
 
-	return {
-		"learnedCommands": learnedCommands,
-		"lastOutput": lastOutput,
-		"lastCommand": lastCommand,
-		"isIntro": isIntro,
-		"ended": ended,
-		"endedFail": endedFail,
-		"endedArgs": endedArgs,
-		"serversData": getServersData(),
-	}
+	return data
 	
 func loadData(_data):
-	learnedCommands = SAVE.loadVar(_data, "learnedCommands", [])
-	lastOutput = SAVE.loadVar(_data, "lastOutput", "")
-	lastCommand = SAVE.loadVar(_data, "lastCommand", "")
-	isIntro = SAVE.loadVar(_data, "isIntro", false)
-	ended = SAVE.loadVar(_data, "ended", false)
-	endedFail = SAVE.loadVar(_data, "endedFail", false)
-	endedArgs = SAVE.loadVar(_data, "endedArgs", null)
+	.loadData(_data)
 	
-	var sd = SAVE.loadVar(_data, "serversData", {})
-	for ip in sd.keys():
-		if servers.has(ip):
-			servers[ip].data = sd[ip]
-	#.loadData(data)
+	var sd:Dictionary = SAVE.loadVar(_data, "serversData", {})
+	for ip in sd:
+		if(!servers.has(ip)):
+			continue
+		servers[ip].data = sd[ip]
 	
-	#waitTimer = SAVE.loadVar(data, "waitTimer", 0)
-	pass
+	
