@@ -52,6 +52,13 @@ func getCharacterCreatorDesc():
 func getCompatibleSpecies():
 	return []
 
+func getCompatibleSpeciesFinal() -> Array:
+	var theSpecies = getCompatibleSpecies()
+	if(!(theSpecies is Array)):
+		Log.printerr(id+".getCompatibleSpecies() RETURNS BAD VALUE ("+str(theSpecies)+"), SUPPOSED TO BE AN ARRAY")
+		return []
+	return theSpecies
+
 func getSpeciesScores() -> Dictionary:
 	var result:Dictionary = {}
 	
@@ -68,7 +75,7 @@ func getSpeciesScores() -> Dictionary:
 	elif(theLimbSlot in [BodypartSlot.Hair]):
 		scoreToAdd = 0.23
 	
-	for theSpecies in getCompatibleSpecies():
+	for theSpecies in getCompatibleSpeciesFinal():
 		result[theSpecies] = scoreToAdd
 	
 	return result
@@ -494,7 +501,7 @@ static func findPossibleBodypartIDs(bodypartSlot:String, acharacter, theSpecies:
 	var allbodypartsIDs = GlobalRegistry.getBodypartsIdsBySlot(bodypartSlot)
 	for bodypartID in allbodypartsIDs:
 		var bodypart = GlobalRegistry.getBodypartRef(bodypartID)
-		var supportedSpecies:Array = bodypart.getCompatibleSpecies()
+		var supportedSpecies:Array = bodypart.getCompatibleSpeciesFinal()
 		
 		var hasInSupported:bool = false
 		var hasInAllowed:bool = allAllowed.has(bodypartID)

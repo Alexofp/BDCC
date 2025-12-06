@@ -156,7 +156,9 @@ func _run():
 		var allbodypartsIDs = GlobalRegistry.getBodypartsIdsBySlot(pickingBodypartType)
 		for bodypartID in allbodypartsIDs:
 			var bodypart = GlobalRegistry.getBodypartRef(bodypartID)
-			var supportedSpecies = bodypart.getCompatibleSpecies()
+			if(!bodypart):
+				continue
+			var supportedSpecies:Array = bodypart.getCompatibleSpeciesFinal()
 			
 			var hasInSupported = false || debugMode
 			var hasInAllowed = false
@@ -168,7 +170,7 @@ func _run():
 				
 			for playerSpecie in playerSpecies:
 				var speciesObject = GlobalRegistry.getSpecies(playerSpecie)
-				if(speciesObject && (bodypartID in speciesObject.getAllowedBodyparts())):
+				if(speciesObject && (bodypartID in speciesObject.getAllowedBodypartsFinal())):
 					hasInAllowed = true
 					break
 			
