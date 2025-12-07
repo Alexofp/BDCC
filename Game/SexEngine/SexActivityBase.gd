@@ -1226,6 +1226,9 @@ func getAnimationFinal():
 				theDict[field] = getDomOrSubID(theDict[field])
 	return theAnim
 
+func hasAnimsToPlay() -> bool:
+	return getAnimationFinal() != null
+
 func isSub(_charID:String) -> bool:
 	for theSubInfo in subs:
 		if(theSubInfo.getCharID() == _charID):

@@ -96,6 +96,7 @@ func getActions(_indx:int):
 	if(_indx == SUB_0):
 		addAction("pullaway", getResistScore(SUB_0), "Pull away", "Try to pull away", {
 			A_CHANCE: getResistChance(SUB_0, DOM_0, RESIST_LEGS_FOCUS, 30.0, 25.0),
+			A_PRIORITY: 2,
 		})
 
 func doAction(_indx:int, _action:String, _actionDict:Dictionary):
@@ -120,7 +121,7 @@ func doAction(_indx:int, _action:String, _actionDict:Dictionary):
 
 func init_getActions(_indx:int):
 	if(_indx == DOM_0):
-		addAction("startgrinding", 1.0, "Start grinding", "Begin to rub kitties together!")
+		addAction("startgrinding", 1.0, "Start grinding", "Begin to rub kitties together!", {A_PRIORITY: 4})
 
 func init_doAction(_indx:int, _action:String, _actionDict:Dictionary):
 	if(_action == "startgrinding"):
@@ -132,11 +133,11 @@ func init_doAction(_indx:int, _action:String, _actionDict:Dictionary):
 
 func grinding_getActions(_indx:int):
 	if(_indx == DOM_0):
-		addAction("moanDom", 0.3, "Moan", "Show how much you enjoy it.")
+		addAction("moanDom", 0.3, "Moan", "Show how much you enjoy it.", {A_PRIORITY: 3})
 		if(isReadyToCum(DOM_0) && isHandlingOrgasms(DOM_0)):
 			addAction("cumDom", 1.0, "Cum!", "You're gonna cum.", {A_PRIORITY:1001})
 	if(_indx == SUB_0):
-		addAction("moanSub", getComplyScore(SUB_0)/3.0, "Moan", "Show how much you enjoy it.")
+		addAction("moanSub", getComplyScore(SUB_0)/3.0, "Moan", "Show how much you enjoy it.", {A_PRIORITY: 3})
 		if(isReadyToCum(SUB_0) && isHandlingOrgasms(SUB_0)):
 			addAction("cumSub", 1.0, "Cum!", "You're gonna cum.", {A_PRIORITY:1001})
 

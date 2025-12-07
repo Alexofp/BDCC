@@ -110,7 +110,7 @@ func _run():
 			saynn("[say=pc]Sure. But you should focus on this, kitty.[/say]")
 
 		else:
-			if (RNG.change(50)):
+			if (RNG.chance(50)):
 				saynn("[say=rahi]She is so glad you're here.. Even after all the times she gave birth already..[/say]")
 
 			else:

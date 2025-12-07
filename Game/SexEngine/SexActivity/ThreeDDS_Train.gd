@@ -200,9 +200,9 @@ func getActions(_indx:int):
 			addAction("pullOut", getStopScore(), "Pull out", "Pull your member out." if _indx == DOM_0 else "Pull away from the sub's cock.")
 		
 		if(state == ""):
-			addAction("rub", 1.0 if !isReadyToPenetrate(_indx) else 0.4, "Rub", "Rub your cock against them" if isDom0 else "Rub yourself against their cock")
+			addAction("rub", 1.0 if !isReadyToPenetrate(_indx) else 0.4, "Rub", "Rub your cock against them" if isDom0 else "Rub yourself against their cock", {A_PRIORITY: 4})
 			if(isReadyToFuck(DOM_0) && isReadyToFuck(SUB_0) && !checkActiveDomPC(_indx) && hasBodypartUncovered(DOM_1, usedBodypart2)):
-				addAction("penetrate", 1.0, "Penetrate" if isDom0 else ("Envelop cock"), "Try to start fucking them!" if isDom0 else ("Get the sub's cock inside you"))
+				addAction("penetrate", 1.0, "Penetrate" if isDom0 else ("Envelop cock"), "Try to start fucking them!" if isDom0 else ("Get the sub's cock inside you"), {A_PRIORITY: 5})
 			#addAction("switch", 0.0, "Switch positions", "Switch positions with the dom")
 		if(state == "sex" && !checkActiveDomPC(_indx)):
 			var pauseScore:float = 0.0
@@ -210,7 +210,7 @@ func getActions(_indx:int):
 				pauseScore = getPauseSexScore(_indx, SUB_0, usedBodypart)
 			else:
 				pauseScore = getPauseSexScore(_indx, SUB_0, S_PENIS, usedBodypart2)
-			addAction("pause", pauseScore, "Slow down", "Pause the fucking")
+			addAction("pause", pauseScore, "Slow down", "Pause the fucking", {A_PRIORITY: 1})
 		if(state == "sex" && (isReadyToCumHandled(DOM_0) || isStrapon(DOM_0)) && (isReadyToCumHandled(SUB_0) || isStrapon(SUB_0))):
 			if(!isStrapon(_indx if isDom0 else SUB_0) && !checkActiveDomPC(_indx)):
 				addAction("cum", 1.0, "Cum inside", "Cum inside them!" if isDom0 else "Let the sub cum inside you!", {A_PRIORITY: 1001})
@@ -220,7 +220,7 @@ func getActions(_indx:int):
 			addAction("domcumstrapon", 1.0, "Cum!", "You're about to cum", {A_PRIORITY: 1001})
 		
 	if(_indx == SUB_0):
-		addAction("pullaway", getResistScore(SUB_0), "Pull away", "Try to pull away", {A_CHANCE: getSubResistChance(30.0, 25.0)})
+		addAction("pullaway", getResistScore(SUB_0), "Pull away", "Try to pull away", {A_CHANCE: getSubResistChance(30.0, 25.0), A_PRIORITY: 2})
 		#if(state == "sex"):
 		#	if(isReadyToCumHandled(SUB_0)):
 		#		addAction("subcum", 1.0, "Cum!", "You're about to cum!", {A_PRIORITY: 1001})
