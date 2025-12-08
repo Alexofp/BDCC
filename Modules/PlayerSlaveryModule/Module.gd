@@ -27,6 +27,9 @@ func _init():
 		
 		"res://Modules/PlayerSlaveryModule/Start/NemesisAmbushScene.gd",
 		"res://Modules/PlayerSlaveryModule/Util/NpcOwnerSleepTogetherScene.gd",
+		
+		"res://Modules/PlayerSlaveryModule/Tentacles/PSTentaclesStart.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/PSTentaclesWalker.gd",
 		]
 	characters = [
 		"res://Modules/PlayerSlaveryModule/ShaftMiner/PSRicky.gd",
