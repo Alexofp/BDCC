@@ -129,7 +129,7 @@ func getVisisbleDescription():
 	
 	var buffs = getBuffs()
 	if(!(buffs is Array)):
-		Log.printerr(id+".getBuffs() RETURNS A BAD VALUE ("+str(text)+"), MUST BE AN ARRAY.")
+		Log.printerr(id+".getBuffs() RETURNS A BAD VALUE ("+str(buffs)+"), MUST BE AN ARRAY.")
 		buffs = []
 	if(buffs.size() > 0):
 		for buff in buffs:
