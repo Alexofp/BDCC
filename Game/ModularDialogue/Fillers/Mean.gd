@@ -203,7 +203,7 @@ func getText(_id:String, _args:Dictionary):
 			"Another day, another [[SLUT]] trying to step out of line.",
 			"Did you lose your way, you dumb [[SLUT]]? This is no place for a little bitch like you.",
 			"What’s a little [[SLUT]] like you doing in a place like this? Trying to get some attention?",
-			"I see we have a nosy little [[SLUT]] here, trying to see what {imate.theyre} not supposed to.",
+			"I see we have a nosy little [[SLUT]] here, trying to see what {inmate.theyre} not supposed to.",
 			"Did you think I wouldn’t catch you, you useless piece of trash?",
 			"How stupid can you be? This area is off-limits, and you’re too dumb to know that?",
 			"You’ve got to be the dumbest inmate here. Trespassing? Really?",
