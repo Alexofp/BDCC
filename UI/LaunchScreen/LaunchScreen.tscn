@@ -164,9 +164,28 @@ margin_right = 280.0
 margin_bottom = 26.0
 text = "Move down"
 
-[node name="DeleteModButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer"]
+[node name="colorizeEntryButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer"]
 margin_left = 284.0
-margin_right = 410.0
+margin_right = 364.0
+margin_bottom = 26.0
+text = "Colorize"
+
+[node name="renameEntry" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer"]
+visible = false
+margin_left = 498.0
+margin_right = 510.0
+margin_bottom = 26.0
+text = "Rename separator"
+
+[node name="addSeparator" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer"]
+margin_left = 368.0
+margin_right = 556.0
+margin_bottom = 26.0
+text = "Add separator below"
+
+[node name="DeleteModButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer"]
+margin_left = 560.0
+margin_right = 686.0
 margin_bottom = 26.0
 text = "DELETE MOD"
 
@@ -314,6 +333,89 @@ text = "OK"
 [node name="HTTPRequestMods" type="HTTPRequest" parent="."]
 unique_name_in_owner = true
 
+[node name="colorizePanel" type="Panel" parent="."]
+visible = false
+self_modulate = Color( 0, 0, 0, 0.498039 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="vb" type="VBoxContainer" parent="colorizePanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="modName" type="Label" parent="colorizePanel/vb"]
+margin_top = 52.0
+margin_right = 1280.0
+margin_bottom = 72.0
+text = "Color for modname"
+align = 1
+
+[node name="ColorPicker" type="ColorPicker" parent="colorizePanel/vb"]
+margin_left = 4.0
+margin_top = 80.0
+margin_right = 1284.0
+margin_bottom = 642.0
+alignment = 1
+edit_alpha = false
+
+[node name="hb" type="HBoxContainer" parent="colorizePanel/vb"]
+margin_top = 642.0
+margin_right = 1280.0
+margin_bottom = 668.0
+custom_constants/separation = 32
+alignment = 1
+
+[node name="confirmColor" type="Button" parent="colorizePanel/vb/hb"]
+margin_left = 550.0
+margin_right = 630.0
+margin_bottom = 26.0
+text = "Confirm"
+
+[node name="cancel" type="Button" parent="colorizePanel/vb/hb"]
+margin_left = 662.0
+margin_right = 730.0
+margin_bottom = 26.0
+text = "Cancel"
+
+[node name="renamePanel" type="Panel" parent="."]
+visible = false
+self_modulate = Color( 0, 0, 0, 0.498039 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="vb" type="VBoxContainer" parent="renamePanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="LineEdit" type="LineEdit" parent="renamePanel/vb"]
+margin_top = 330.0
+margin_right = 1280.0
+margin_bottom = 360.0
+align = 1
+clear_button_enabled = true
+placeholder_text = "New name..."
+
+[node name="hb" type="HBoxContainer" parent="renamePanel/vb"]
+margin_top = 364.0
+margin_right = 1280.0
+margin_bottom = 390.0
+custom_constants/separation = 32
+alignment = 1
+
+[node name="confirmRename" type="Button" parent="renamePanel/vb/hb"]
+margin_left = 550.0
+margin_right = 630.0
+margin_bottom = 26.0
+text = "Confirm"
+
+[node name="cancel" type="Button" parent="renamePanel/vb/hb"]
+margin_left = 662.0
+margin_right = 730.0
+margin_bottom = 26.0
+text = "Cancel"
+
 [connection signal="pressed" from="VBoxContainer/Label/DebugButton" to="." method="_on_DebugButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/Label/CheckBrokenModsButton" to="." method="_on_CheckBrokenModsButton_pressed"]
 [connection signal="meta_clicked" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/WarningLabel" to="." method="_on_RichTextLabel_meta_clicked"]
@@ -321,6 +423,9 @@ unique_name_in_owner = true
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/ModDisableButton" to="." method="_on_ModDisableButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/MoveUpButton" to="." method="_on_MoveUpButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/MoveDownButton" to="." method="_on_MoveDownButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/colorizeEntryButton" to="." method="_on_colorizeEntryButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/renameEntry" to="." method="_on_renameEntry_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/addSeparator" to="." method="_on_addSeparator_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/DeleteModButton" to="." method="_on_DeleteModButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/TestButton" to="." method="_on_TestButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/ResetGRCacheButton" to="." method="_on_ResetGRCacheButton_pressed"]
@@ -334,3 +439,8 @@ unique_name_in_owner = true
 [connection signal="meta_clicked" from="BusyPanel/CenterContainer/PanelContainer/VBoxContainer/BusyLabel" to="." method="_on_BusyLabel_meta_clicked"]
 [connection signal="pressed" from="BusyPanel/CenterContainer/PanelContainer/VBoxContainer/BusyCloseButton" to="." method="_on_BusyCloseButton_pressed"]
 [connection signal="request_completed" from="HTTPRequestMods" to="." method="_on_HTTPRequestMods_request_completed"]
+[connection signal="color_changed" from="colorizePanel/vb/ColorPicker" to="." method="_on_ColorPicker_color_changed"]
+[connection signal="pressed" from="colorizePanel/vb/hb/confirmColor" to="." method="_on_confirmColor_pressed"]
+[connection signal="pressed" from="colorizePanel/vb/hb/cancel" to="colorizePanel" method="hide"]
+[connection signal="pressed" from="renamePanel/vb/hb/confirmRename" to="." method="_on_confirmRename_pressed"]
+[connection signal="pressed" from="renamePanel/vb/hb/cancel" to="renamePanel" method="hide"]

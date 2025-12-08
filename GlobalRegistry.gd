@@ -350,7 +350,7 @@ func checkModSupport():
 
 func loadModOrder(theModOrder:Array):
 	for modEntry in theModOrder:
-		if(modEntry["disabled"]):
+		if(modEntry.get("disabled",true) or modEntry.get("isSeparator",false)):
 			continue
 		
 		var _ok = ProjectSettings.load_resource_pack(modEntry["path"])

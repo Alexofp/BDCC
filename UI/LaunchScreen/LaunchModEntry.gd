@@ -8,6 +8,11 @@ signal onSelected(modEntry)
 
 func setModEntry(modEntry):
 	label.text = modEntry["name"]
+	label.add_color_override("font_color",modEntry.get("color",Color("#ffffff")))
+	if modEntry.get("isSeparator"):
+		label.text = "-- "+label.text+" --"
+		storedEntry = modEntry
+		return
 	if(modEntry["disabled"]):
 		label.text += " (disabled)"
 	if(modEntry.has("broken") && modEntry["broken"]):

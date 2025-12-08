@@ -4,6 +4,8 @@ onready var modDescriptionLabel = $VBoxContainer/HBoxContainer/VBoxContainer/Pan
 onready var modVList = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/ModList
 onready var modFileList = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ModFileList
 onready var modDisableButton = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/ModDisableButton
+onready var renameButton = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/renameEntry
+onready var addSeparatorButton = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/addSeparator
 onready var debug_button = $"%DebugButton"
 onready var building_pck_panel = $"%BuildingPCKPanel"
 
@@ -24,6 +26,8 @@ var startedPlaying:bool = false # Used to prevent the bug where you sometimes do
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$renamePanel.hide()
+	$colorizePanel.hide()
 	#randomize()
 	#var diag:DialogueParser = DialogueParser.new()
 	#print(diag.getLexems("Hello world. How;are|you. Hey, [[mean=fucker|bitch;kind=bro;person]]. Meow."))
@@ -68,7 +72,10 @@ func checkModOrderAndFillData(rawModList):
 	var finalOrder = []
 	var theFile = File.new()
 	for modEntry in loadedOrder:
-		if(!theFile.file_exists(modEntry["path"])):
+		if modEntry.get("isSeparator",false):
+			finalOrder.append(modEntry)
+			continue
+		elif(!theFile.file_exists(modEntry["path"])):
 			continue
 		
 		finalOrder.append(modEntry)
@@ -76,7 +83,7 @@ func checkModOrderAndFillData(rawModList):
 	for modPath in rawModList:
 		var foundMod = false
 		for loadedModEntry in loadedOrder:
-			if(loadedModEntry["path"] == modPath):
+			if(loadedModEntry.get("path","") == modPath or loadedModEntry.get("isSeparator",false)):
 				foundMod = true
 				break
 		if(foundMod):
@@ -86,6 +93,7 @@ func checkModOrderAndFillData(rawModList):
 			path = modPath,
 			name = modPath.get_file(),
 			disabled = false,
+			color="#ffffff"
 		}
 		finalOrder.append(modEntry)
 	
@@ -102,10 +110,18 @@ func saveOrderIntoFile(saveData):
 	
 	var finalData = []
 	for modEntry in saveData:
-		finalData.append({
-			"path": modEntry["path"],
-			"disabled": modEntry["disabled"],
-		})
+		if modEntry.get("isSeparator",false):
+			finalData.append({
+				"isSeparator":true,
+				"name":modEntry.get("name","Separator"),
+				"color":modEntry.get("color","#ffffff")
+			})
+		else:
+			finalData.append({
+				"path": modEntry["path"],
+				"disabled": modEntry["disabled"],
+				"color":modEntry.get("color","#ffffff")
+			})
 	
 	save_game.store_line(JSON.print(finalData, "\t", true))
 	
@@ -133,18 +149,28 @@ func loadOrderFromFile():
 	for modEntry in saveData:
 		if(!(modEntry is Dictionary)):
 			return []
-		if(!modEntry.has("path") || !modEntry.has("disabled")):
+		var isSep = modEntry.get("isSeparator",false)
+		if( (!modEntry.has("path") || !modEntry.has("disabled")) && !isSep):
 			return []
-		if(!(modEntry["path"] is String) || !(modEntry["disabled"] is bool)):
+		if((!(modEntry.get("path",null) is String) || !(modEntry.get("disabled",null) is bool)) && !isSep):
 			return []
 			
 	var result = []
 	for loadedModEntry in saveData:
-		var modEntry = {
-			path = loadedModEntry["path"],
-			name = loadedModEntry["path"].get_file(),
-			disabled = loadedModEntry["disabled"],
-		}
+		var modEntry
+		if loadedModEntry.get("isSeparator",false):
+			modEntry = {
+				name = loadedModEntry.get("name","Separator"),
+				color = loadedModEntry.get("color","#ffffff"),
+				isSeparator = true,
+			}
+		else:
+			modEntry = {
+				path = loadedModEntry["path"],
+				name = loadedModEntry["path"].get_file(),
+				disabled = loadedModEntry["disabled"],
+				color = loadedModEntry.get("color","#ffffff")
+			}
 		result.append(modEntry)
 	
 	return result
@@ -202,6 +228,14 @@ func updateSelectedEntry():
 		
 		modDescriptionLabel.bbcode_text = "No mod selected"
 		return
+	
+	if selectedEntry.get("isSeparator",false):
+		renameButton.show()
+		addSeparatorButton.hide()
+		return
+	renameButton.hide()
+	addSeparatorButton.show()
+	
 	modDisableButton.text = "Enable" if(selectedEntry['disabled']) else "Disable"
 
 	
@@ -210,7 +244,7 @@ func updateSelectedEntry():
 	if(selectedEntry.has("broken") && selectedEntry["broken"]):
 		desc += "( This mod is reported to be broken or cause huge issues on this game version. It's best to disable/delete it. )\n\n"
 	
-	desc += "Mod name: "+selectedEntry["name"]+"\n"
+	desc += "Mod name: [color="+str(selectedEntry.get("color","#ffffff"))+"]"+selectedEntry["name"]+"[/color]\n"
 	desc += "Full path: "+selectedEntry["path"]+"\n"
 	
 	desc += "\n"
@@ -233,6 +267,8 @@ func tryToPopulateFilesList():
 	
 	if(selectedEntry == null):
 		return ""
+	if selectedEntry.get("isSeparator",false):
+		return
 	var zipToLoad = selectedEntry["path"]
 	if(zipToLoad.get_file() == "BDCC.pck"):
 		return "This file is required for mods to function on Android version. On other platforms this file is Not required and will be disabled automatically"
@@ -278,7 +314,8 @@ func tryToPopulateFilesList():
 func _on_ModDisableButton_pressed():
 	if(selectedEntry == null or selectedEntry["name"] == "BDCC.pck"):
 		return
-	
+	if selectedEntry.get("isSeparator",false):
+		return
 	selectedEntry["disabled"] = !selectedEntry["disabled"]
 	updateModList()
 	updateSelectedEntry()
@@ -316,7 +353,7 @@ func ensureBDCCIsFirst():
 	for _i in range(currentModOrder.size()):
 		if(currentModOrder[_i]["name"] == "BDCC.pck"):
 			var entry = currentModOrder[_i]
-			if(OS.get_name() != "Android"):
+			if(OS.get_name() != "Android") && !entry.get("isSeparator",false):
 				entry["disabled"] = true
 			else:
 				entry["disabled"] = false
@@ -331,15 +368,17 @@ func _on_DeleteModButton_pressed():
 		return
 	
 	$ConfirmationDialog.visible = true
-	$ConfirmationDialog.dialog_text = "Remove mod?\n"+str(selectedEntry["path"])
+	var n = (str(selectedEntry["path"]) if !selectedEntry.get("isSeparator",false) else str(selectedEntry.get("name","Separator")))
+	$ConfirmationDialog.dialog_text = "Remove mod?\n"+n
 
 
 func _on_ConfirmationDialog_confirmed():
 	if(selectedEntry == null):
 		return
 	
-	var theFile = Directory.new()
-	theFile.remove(selectedEntry["path"])
+	if !selectedEntry.get("isSeparator",false):
+		var theFile = Directory.new()
+		theFile.remove(selectedEntry["path"])
 	currentModOrder.erase(selectedEntry)
 	selectedEntry = null
 	
@@ -492,6 +531,8 @@ func getFileSize(_path:String) -> int:
 
 func checkBrokenModEntry(modEntry:Dictionary, brokenEntry:Dictionary) -> bool:
 	#var theName:String = modEntry["name"]
+	if modEntry.get("isSeparator",false):
+		return false
 	var thePath:String = modEntry["path"]
 
 	var theSinceField:String = brokenEntry["since"] if (brokenEntry.has("since") && (brokenEntry["since"] is String)) else ""
@@ -580,3 +621,72 @@ func _on_HTTPRequestMods_request_completed(_result: int, _response_code: int, _h
 		updateModList()
 		updateSelectedEntry()
 	
+
+
+func _on_confirmColor_pressed():
+	if(selectedEntry == null or selectedEntry["name"] == "BDCC.pck"):
+		return
+	var color : Color = $colorizePanel/vb/ColorPicker.color
+	selectedEntry["color"] = color.to_html(false)
+	saveOrderIntoFile(currentModOrder)
+	updateModList()
+	updateSelectedEntry()
+	$colorizePanel.hide()
+
+
+func _on_colorizeEntryButton_pressed():
+	if(selectedEntry == null or selectedEntry["name"] == "BDCC.pck"):
+		return
+	$colorizePanel.show()
+	var color = Color(selectedEntry.get("color","#ffffff"))
+	$colorizePanel/vb/modName.text = "Color for "+selectedEntry["name"]
+	$colorizePanel/vb/modName.add_color_override("font_color",color)
+	$colorizePanel/vb/ColorPicker.color = color
+
+
+func _on_ColorPicker_color_changed(color):
+	$colorizePanel/vb/modName.add_color_override("font_color",color)
+
+
+
+
+func _on_renameEntry_pressed():
+	if(selectedEntry == null or selectedEntry["name"] == "BDCC.pck"):
+		return
+	if !selectedEntry.get("isSeparator",false):
+		return
+	$renamePanel.show()
+	$renamePanel/vb/LineEdit.clear()
+	
+
+
+func _on_confirmRename_pressed():
+	if(selectedEntry == null or selectedEntry["name"] == "BDCC.pck"):
+		return
+	if !selectedEntry.get("isSeparator",false):
+		return
+	var n = $renamePanel/vb/LineEdit.text.json_escape()
+	n = (n if n else "Separator")
+	selectedEntry["name"]=n
+	updateModList()
+	updateSelectedEntry()
+	$renamePanel.hide()
+
+
+func _on_addSeparator_pressed():
+	if(selectedEntry == null):
+		return
+	var currentIndex = currentModOrder.find(selectedEntry)
+	var newIndex = currentIndex + 1
+	var newEntry = {
+			"name":"Separator",
+			"isSeparator":true,
+		}
+	if(newIndex >= currentModOrder.size()):
+		currentModOrder.append(newEntry)
+		updateModList()
+		return
+	
+	currentModOrder.insert(newIndex, newEntry)
+	saveOrderIntoFile(currentModOrder)
+	updateModList()
