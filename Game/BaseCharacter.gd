@@ -1431,6 +1431,8 @@ func hasPenis():
 func hasReachablePenis():
 	if(buffsHolder.hasBuff(Buff.ChastityPenisBuff)):
 		return false
+	if(isWearingStrapon()): # Strapons go over the penis, blocking it
+		return false
 	return hasPenis()
 
 func hasVagina():

@@ -218,11 +218,10 @@ func getActions(_indx:int):
 				addAction("switchHole", 0.0, "Switch to "+("pussy" if getCurrentHole() == S_ANUS else "anal"), "Switch which hole you are targeting")
 		if(state == "sex"):
 			addAction("pause", getPauseSexScore(_indx, domFocus, getCurrentHole()), "Slow down", "Pause the fucking", {A_PRIORITY: 1})
-		if(state == "sex"):
-			if(isReadyToCumHandled(_indx) && !isStrapon(_indx)):
-				addAction("cum", 0.0 if canSwitchTarget() else 1.0, "Cum inside", "Cum inside them!", {A_PRIORITY: 1001})
-				if(canSwitchTarget()):
-					addAction("cumShare", 1.0, "Share load", "Cum inside both of them!", {A_PRIORITY: 1001})
+		if(state == "sex" && isReadyToCumHandled(_indx) && !isStrapon(_indx)):
+			addAction("cum", 0.0 if canSwitchTarget() else 1.0, "Cum inside", "Cum inside them!", {A_PRIORITY: 1001})
+			if(canSwitchTarget()):
+				addAction("cumShare", 1.0, "Share load", "Cum inside both of them!", {A_PRIORITY: 1001})
 		elif(state == "sex" && isReadyToCumHandled(domFocus) && !canDoActions(domFocus)):
 			addAction("subcum", 1.0, "Sub orgasm!", "They are about to cum!", {A_PRIORITY: 1001})
 		elif(state == "sex" && isStrapon(_indx) && isReadyToCumHandled(_indx)):

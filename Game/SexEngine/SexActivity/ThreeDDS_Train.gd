@@ -211,9 +211,8 @@ func getActions(_indx:int):
 			else:
 				pauseScore = getPauseSexScore(_indx, SUB_0, S_PENIS, usedBodypart2)
 			addAction("pause", pauseScore, "Slow down", "Pause the fucking", {A_PRIORITY: 1})
-		if(state == "sex" && (isReadyToCumHandled(DOM_0) || isStrapon(DOM_0)) && (isReadyToCumHandled(SUB_0) || isStrapon(SUB_0))):
-			if(!isStrapon(_indx if isDom0 else SUB_0) && !checkActiveDomPC(_indx)):
-				addAction("cum", 1.0, "Cum inside", "Cum inside them!" if isDom0 else "Let the sub cum inside you!", {A_PRIORITY: 1001})
+		if(state == "sex" && (isReadyToCumHandled(DOM_0) || isStrapon(DOM_0)) && (isReadyToCumHandled(SUB_0) || isStrapon(SUB_0)) && !isStrapon(_indx if isDom0 else SUB_0)):
+			addAction("cum", 1.0, "Cum inside", "Cum inside them!" if isDom0 else "Let the sub cum inside you!", {A_PRIORITY: 1001})
 		#elif(state == "sex" && isReadyToCumHandled(SUB_0) && !canDoActions(SUB_0) && !checkActiveDomPC(_indx)):
 		#	addAction("subcum", 1.0, "Sub orgasm!", "They are about to cum!", {A_PRIORITY: 1001})
 		elif(state == "sex" && (isStrapon(_indx) || _indx == DOM_1) && isReadyToCumHandled(_indx)):
