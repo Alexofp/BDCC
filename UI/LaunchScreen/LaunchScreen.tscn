@@ -80,14 +80,28 @@ margin_bottom = 661.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
+[node name="orderhb" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
 margin_right = 411.0
-margin_bottom = 20.0
+margin_bottom = 30.0
+custom_constants/separation = 12
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/orderhb"]
+margin_top = 5.0
+margin_right = 89.0
+margin_bottom = 25.0
 text = "Mod order"
 align = 1
 
+[node name="search" type="LineEdit" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/orderhb"]
+margin_left = 101.0
+margin_right = 411.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+placeholder_text = "Search..."
+
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer"]
-margin_top = 24.0
+margin_top = 34.0
 margin_right = 411.0
 margin_bottom = 654.0
 size_flags_horizontal = 3
@@ -96,7 +110,7 @@ script = ExtResource( 3 )
 
 [node name="ModList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer"]
 margin_right = 411.0
-margin_bottom = 630.0
+margin_bottom = 620.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -316,6 +330,7 @@ unique_name_in_owner = true
 
 [connection signal="pressed" from="VBoxContainer/Label/DebugButton" to="." method="_on_DebugButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/Label/CheckBrokenModsButton" to="." method="_on_CheckBrokenModsButton_pressed"]
+[connection signal="text_changed" from="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/orderhb/search" to="." method="_on_search_text_changed"]
 [connection signal="meta_clicked" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/WarningLabel" to="." method="_on_RichTextLabel_meta_clicked"]
 [connection signal="meta_clicked" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/ModDisableButton" to="." method="_on_ModDisableButton_pressed"]
