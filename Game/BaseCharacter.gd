@@ -950,6 +950,9 @@ func giveBodypart(bodypart: Bodypart, emitSignal = true):
 		emit_signal("bodypart_changed")
 
 func giveBodypartUnlessSame(bodypart: Bodypart):
+	if(bodypart == null):
+		Log.printerr("Trying to give a null bodypart to "+str(self))
+		return
 	var slot = bodypart.getSlot()
 	if(bodyparts.has(slot) && bodyparts[slot] != null):
 		if(bodypart.id == bodyparts[slot].id):

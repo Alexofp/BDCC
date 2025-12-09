@@ -88,8 +88,10 @@ func createBodyparts(character:DynamicCharacter, _args = {}):
 				continue
 			
 			var bodypartID = RNG.pickWeightedPairs(possible)
-			if(bodypartID != null):
+			if(bodypartID != null && bodypartID != ""):
 				var bodypart = GlobalRegistry.createBodypart(bodypartID)
+				if(!bodypart):
+					continue
 				character.giveBodypartUnlessSame(bodypart)
 				bodypart.generateDataFor(character)
 

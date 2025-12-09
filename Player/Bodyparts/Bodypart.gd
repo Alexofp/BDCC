@@ -498,6 +498,7 @@ static func findPossibleBodypartIDs(bodypartSlot:String, acharacter, theSpecies:
 		for allowedBodypartID in theAllowed:
 			allAllowed[allowedBodypartID] = true
 	
+	var maxScore:float = 0.0
 	var allbodypartsIDs = GlobalRegistry.getBodypartsIdsBySlot(bodypartSlot)
 	for bodypartID in allbodypartsIDs:
 		var bodypart = GlobalRegistry.getBodypartRef(bodypartID)
@@ -516,7 +517,13 @@ static func findPossibleBodypartIDs(bodypartSlot:String, acharacter, theSpecies:
 			var weight = bodypart.npcGenerationWeight(acharacter)
 			if(weight != null && weight > 0.0):
 				possible.append([bodypartID, weight])
-
+				if(weight > maxScore):
+					maxScore = weight
+	
+	# If we don't have any bodyparts that are guranteed to be picked (weight >= 1.0), we insert an optional empty bodypart
+	if(maxScore < 1.0 && !BodypartSlot.isEssential(bodypartSlot)):
+		possible.append(["", 1.0])
+	
 	return possible
 
 # Used for transformation logic
