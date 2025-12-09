@@ -163,7 +163,6 @@ func updateModList():
 		newEntry.setModEntry(modEntry,modEntryIdx)
 		newEntry.connect("onSelected", self, "onModEntryClicked")
 		newEntry.connect("weMoved",self,"modEntryDroppedData")
-#		newEntry.connect("mouse_exited",self,"_onModEntryNodeGuiEvent",[newEntry])
 		
 		if(modEntry == selectedEntry):
 			newEntry.makeActive()
@@ -180,7 +179,10 @@ func modEntryDroppedData(ar:Array=[]):
 	currentModOrder.insert(ar[0],entry1)
 	currentModOrder.insert(ar[1],entry2)
 	saveOrderIntoFile(currentModOrder)
-	updateModList()
+	
+	# visual
+	modVList.get_child(ar[0]).myidx = ar[0]
+	modVList.get_child(ar[1]).myidx = ar[1]
 
 func _on_WithModsButton_pressed():
 	if(startedPlaying):
@@ -317,16 +319,16 @@ func _on_MoveUpButton_pressed():
 	currentModOrder.insert(newIndex, selectedEntry)
 	
 	ensureBDCCIsFirst()
-#	updateModList()
+	
 	var modNodeC = modVList.get_child_count()
 	if modNodeC<currentIndex:
 		return
 	var node = modVList.get_child(currentIndex)
 	if node:
 		modVList.move_child(node,newIndex)
-		node.updIdx(-1)
+		node.myidx = newIndex
 	var otherNode = modVList.get_child(currentIndex)
-	otherNode.updIdx(+1)
+	otherNode.myidx = currentIndex
 
 
 func _on_MoveDownButton_pressed():
@@ -340,16 +342,16 @@ func _on_MoveDownButton_pressed():
 	currentModOrder.remove(currentIndex)
 	currentModOrder.insert(newIndex, selectedEntry)
 	
-#	updateModList()
+	
 	var modNodeC = modVList.get_child_count()
 	if modNodeC<currentIndex:
 		return
 	var node = modVList.get_child(currentIndex)
 	if node:
 		modVList.move_child(node,newIndex)
-		node.updIdx(+1)
+		node.myidx = newIndex
 	var otherNode = modVList.get_child(currentIndex)
-	otherNode.updIdx(-1)
+	otherNode.myidx = currentIndex
 
 func ensureBDCCIsFirst():
 	for _i in range(currentModOrder.size()):
@@ -627,7 +629,6 @@ func getNodeWithEntry(modEntry={}):
 	return null
 
 func sortModEntryNodes():
-#	var modNodesCount = modVList.get_child_count()
 	var orderSize = currentModOrder.size()
 	for idx in orderSize:
 		var entry = currentModOrder[idx]

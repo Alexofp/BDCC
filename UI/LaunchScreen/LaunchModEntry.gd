@@ -3,26 +3,27 @@ extends PanelContainer
 onready var label:Label = $HBoxContainer/Label
 
 var storedEntry = null
-var myidx = -100
+var myidx = -100 setget setMyIdx
 
 signal weMoved(ar)
 signal onSelected(modEntry)
 
-func setModEntry(modEntry,idx=-100):
-	if idx>=0:
-		myidx = idx
-	label.text = (str(myidx+1)+": " if myidx>=0 else "?")+modEntry["name"]
-	if(modEntry["disabled"]):
-		label.text += " (disabled)"
-	if(modEntry.has("broken") && modEntry["broken"]):
-		label.text = "(BROKEN) "+label.text
-		label["custom_colors/font_color"] = Color.red
-		
-	storedEntry = modEntry
+func setMyIdx(nv):
+	myidx = nv
+	var col = Color.white
+	if storedEntry:
+		label.text = str(nv+1) + ": "+storedEntry["name"] + (" (disabled)" if storedEntry.get("disabled",false) else "")
+		if storedEntry.get("broken",false):
+			col = Color.red
+			label.text = "(BROKEN) "+label.text
+	else:
+		label.text = str(nv+1)+" NO ENTRY!!!!"
+	label["custom_colors/font_color"] = col
 
-func updIdx(change:int=-100):
-	myidx+=change
-	label.text = str(myidx+1)+": "+(storedEntry["name"] if storedEntry else "NO ENTRY!!!!")
+func setModEntry(modEntry,idx=-100):
+	storedEntry = modEntry
+	if idx>=0:
+		self.myidx = idx # to call setter
 
 func _on_TextureButton_pressed():
 	emit_signal("onSelected", storedEntry)
