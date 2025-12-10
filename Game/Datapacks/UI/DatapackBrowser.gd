@@ -278,7 +278,7 @@ func _on_RichTextLabel_meta_clicked(meta):
 				onModEntrySelected(datapackEntry)
 				return
 		return
-	var _ok = OS.shell_open(meta)
+	var _ok = Util.fixed_shell_open(meta)
 
 
 var cachedPreviewTextures = {}

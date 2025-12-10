@@ -714,4 +714,4 @@ func _on_Duplicate_pressed():
 
 
 func _on_TutorialButton_pressed():
-	var _ok = OS.shell_open("https://github.com/Alexofp/BDCC/wiki/Datapack-scene-creator-tutorial")
+	var _ok = Util.fixed_shell_open("https://github.com/Alexofp/BDCC/wiki/Datapack-scene-creator-tutorial")

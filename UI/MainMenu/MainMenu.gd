@@ -120,7 +120,7 @@ func _on_CreditsButton_pressed():
 
 
 func _on_GithubButton_pressed():
-	var _ok = OS.shell_open("https://github.com/Alexofp/BDCC")
+	var _ok = Util.fixed_shell_open("https://github.com/Alexofp/BDCC")
 
 func getNewRelease():
 	var error = http_request.request("https://api.github.com/repos/Alexofp/BDCC/releases")
@@ -175,7 +175,7 @@ func _on_HTTPRequest_request_completed(result, _response_code, _headers, body):
 	setGithubLabelStr("Latest github release: Nothing found", "")
 
 func _on_GithubReleasesButton_pressed():
-	var _ok = OS.shell_open("https://github.com/Alexofp/BDCC/releases")
+	var _ok = Util.fixed_shell_open("https://github.com/Alexofp/BDCC/releases")
 
 
 func _on_DevClose_pressed():
@@ -220,14 +220,14 @@ func _on_DevLikesGenerator_pressed():
 
 
 func _on_DiscordButton_pressed():
-	var _ok = OS.shell_open("https://discord.gg/7UGYBvQrc3")
+	var _ok = Util.fixed_shell_open("https://discord.gg/7UGYBvQrc3")
 	
 func _on_ChangelogButton_pressed():
-	var _ok = OS.shell_open("https://github.com/Alexofp/BDCC/blob/main/CHANGELOG.md")
+	var _ok = Util.fixed_shell_open("https://github.com/Alexofp/BDCC/blob/main/CHANGELOG.md")
 
 
 func _on_DonationsLabel_meta_clicked(meta):
-	var _ok = OS.shell_open(meta)
+	var _ok = Util.fixed_shell_open(meta)
 
 
 func _on_DevCharCreator_pressed():
