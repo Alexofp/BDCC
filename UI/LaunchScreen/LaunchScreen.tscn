@@ -93,7 +93,8 @@ margin_bottom = 25.0
 text = "Mod order"
 align = 1
 
-[node name="search" type="LineEdit" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/orderhb"]
+[node name="SearchLineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/orderhb"]
+unique_name_in_owner = true
 margin_left = 101.0
 margin_right = 411.0
 margin_bottom = 30.0
@@ -202,7 +203,8 @@ margin_right = 30.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 
-[node name="TestButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="BuildPCKButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 margin_left = 34.0
 margin_right = 174.0
 margin_bottom = 50.0
@@ -215,6 +217,7 @@ margin_bottom = 50.0
 text = "Reset GR cache"
 
 [node name="OpenModsFolder" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 margin_left = 323.0
 margin_right = 442.0
 margin_bottom = 50.0
@@ -330,14 +333,14 @@ unique_name_in_owner = true
 
 [connection signal="pressed" from="VBoxContainer/Label/DebugButton" to="." method="_on_DebugButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/Label/CheckBrokenModsButton" to="." method="_on_CheckBrokenModsButton_pressed"]
-[connection signal="text_changed" from="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/orderhb/search" to="." method="_on_search_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/orderhb/SearchLineEdit" to="." method="_on_search_text_changed"]
 [connection signal="meta_clicked" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/WarningLabel" to="." method="_on_RichTextLabel_meta_clicked"]
 [connection signal="meta_clicked" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/RichTextLabel" to="." method="_on_RichTextLabel_meta_clicked"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/ModDisableButton" to="." method="_on_ModDisableButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/MoveUpButton" to="." method="_on_MoveUpButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/MoveDownButton" to="." method="_on_MoveDownButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/DeleteModButton" to="." method="_on_DeleteModButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/TestButton" to="." method="_on_TestButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/BuildPCKButton" to="." method="_on_TestButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/ResetGRCacheButton" to="." method="_on_ResetGRCacheButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/OpenModsFolder" to="." method="_on_OpenModsFolder_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/ModBrowserButton" to="." method="_on_ModBrowserButton_pressed"]

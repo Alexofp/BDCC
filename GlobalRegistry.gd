@@ -312,8 +312,8 @@ func getDatapacksFolder() -> String:
 		var _ok = Directory.new().make_dir(modsFolder)
 	return modsFolder
 	
-func getRawModList():
-	var result = []
+func getRawModList() -> Array:
+	var result:Array = []
 	
 	var modsFolder = getModsFolder()
 	

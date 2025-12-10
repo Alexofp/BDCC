@@ -3,29 +3,28 @@ extends PanelContainer
 onready var label:Label = $HBoxContainer/Label
 
 var storedEntry = null
-var myidx = -100 setget setMyIdx
+var entryIndex:int = -1
 
-signal weMoved(ar)
+signal onDragOntoAnotherEntry(ar)
 signal onSelected(modEntry)
 
-func setMyIdx(nv):
-	myidx = nv
-	var col = Color.white
-	var dis = false
-	if storedEntry:
-		dis = storedEntry.get("disabled",false)
-		label.text = str(nv+1) + ": "+storedEntry["name"] + (" (disabled)" if dis else "")
-		if storedEntry.get("broken",false):
-			col = Color.red
-			label.text = "(BROKEN) "+label.text
-	else:
-		label.text = str(nv+1)+" NO ENTRY!!!!"
-	label.add_color_override("font_color",col.darkened(int(dis)*0.3))
-
-func setModEntry(modEntry,idx=-100):
+func setModEntry(modEntry):
 	storedEntry = modEntry
-	if idx>=0:
-		self.myidx = idx # to call setter
+	updateEntry()
+
+func updateEntry():
+	if(!storedEntry):
+		return
+	var theTextColor:Color = Color.white
+	label.text = storedEntry["name"]
+	if(storedEntry.has("broken") && storedEntry["broken"]):
+		label.text = "(BROKEN) "+label.text
+		theTextColor = Color.red
+	if(storedEntry.has("disabled") && storedEntry["disabled"]):
+		label.text += " (disabled)"
+		theTextColor = theTextColor.darkened(0.3)
+		
+	label["custom_colors/font_color"] = theTextColor
 
 func _on_TextureButton_pressed():
 	emit_signal("onSelected", storedEntry)
@@ -68,13 +67,11 @@ func drop_data(_position, data):
 	var origin = data.get("origin",null)
 	if !origin:
 		return
-	if origin==self or origin.myidx==myidx:
+	if origin==self or origin.entryIndex==entryIndex:
 		return
-	var newidx = origin.myidx
-	var neworiginidx = myidx
-	origin.setModEntry(storedEntry,neworiginidx)
-	setModEntry(data["entry"],newidx)
-	emit_signal("weMoved",[newidx,neworiginidx])
+	var newidx = origin.entryIndex
+	var neworiginidx = entryIndex
+	emit_signal("onDragOntoAnotherEntry",[newidx,neworiginidx])
 
 func can_drop_data(_position, data):
 	return typeof(data)==TYPE_DICTIONARY
