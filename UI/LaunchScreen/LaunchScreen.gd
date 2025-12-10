@@ -4,6 +4,9 @@ onready var modDescriptionLabel = $VBoxContainer/HBoxContainer/VBoxContainer/Pan
 onready var modVList = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/ModList
 onready var modFileList = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ModFileList
 onready var modDisableButton = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/ModDisableButton
+onready var searchBar = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/orderhb/search
+onready var modCountLabel = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/orderhb/Label
+
 onready var debug_button = $"%DebugButton"
 onready var building_pck_panel = $"%BuildingPCKPanel"
 
@@ -151,15 +154,35 @@ func loadOrderFromFile():
 
 func updateModList():
 	Util.delete_children(modVList)
-	
-	for modEntry in currentModOrder:
+	var modsCount = currentModOrder.size()
+	modCountLabel.text = "Mod order"+(" ("+str(modsCount)+")" if modsCount else "")
+	for modEntryIdx in modsCount: # need the idx, save processing power (hopefully?)
+		var modEntry = currentModOrder[modEntryIdx]
 		var newEntry = launchModEntryScene.instance()
 		modVList.add_child(newEntry)
-		newEntry.setModEntry(modEntry)
+		newEntry.setModEntry(modEntry,modEntryIdx)
 		newEntry.connect("onSelected", self, "onModEntryClicked")
+		newEntry.connect("weMoved",self,"modEntryDroppedData")
 		
 		if(modEntry == selectedEntry):
 			newEntry.makeActive()
+	
+	showSearched()
+
+func modEntryDroppedData(ar:Array=[]):
+	if ar.size()!=2:
+		return
+	ar.sort()
+	var entry1 = currentModOrder.pop_at(ar[1])
+	var entry2 = currentModOrder.pop_at(ar[0])
+	
+	currentModOrder.insert(ar[0],entry1)
+	currentModOrder.insert(ar[1],entry2)
+	saveOrderIntoFile(currentModOrder)
+	
+	# visual
+	modVList.get_child(ar[0]).myidx = ar[0]
+	modVList.get_child(ar[1]).myidx = ar[1]
 
 func _on_WithModsButton_pressed():
 	if(startedPlaying):
@@ -296,7 +319,16 @@ func _on_MoveUpButton_pressed():
 	currentModOrder.insert(newIndex, selectedEntry)
 	
 	ensureBDCCIsFirst()
-	updateModList()
+	
+	var modNodeC = modVList.get_child_count()
+	if modNodeC<currentIndex:
+		return
+	var node = modVList.get_child(currentIndex)
+	if node:
+		modVList.move_child(node,newIndex)
+		node.myidx = newIndex
+	var otherNode = modVList.get_child(currentIndex)
+	otherNode.myidx = currentIndex
 
 
 func _on_MoveDownButton_pressed():
@@ -310,7 +342,16 @@ func _on_MoveDownButton_pressed():
 	currentModOrder.remove(currentIndex)
 	currentModOrder.insert(newIndex, selectedEntry)
 	
-	updateModList()
+	
+	var modNodeC = modVList.get_child_count()
+	if modNodeC<currentIndex:
+		return
+	var node = modVList.get_child(currentIndex)
+	if node:
+		modVList.move_child(node,newIndex)
+		node.myidx = newIndex
+	var otherNode = modVList.get_child(currentIndex)
+	otherNode.myidx = currentIndex
 
 func ensureBDCCIsFirst():
 	for _i in range(currentModOrder.size()):
@@ -580,3 +621,49 @@ func _on_HTTPRequestMods_request_completed(_result: int, _response_code: int, _h
 		updateModList()
 		updateSelectedEntry()
 	
+
+func getNodeWithEntry(modEntry={}):
+	for launchModEntry in modVList.get_children():
+		if launchModEntry.get("storedEntry")==modEntry:
+			return launchModEntry
+	return null
+
+func sortModEntryNodes():
+	var orderSize = currentModOrder.size()
+	for idx in orderSize:
+		var entry = currentModOrder[idx]
+		var node = getNodeWithEntry(entry)
+		if !node: # doesn't exist? make it
+			var newEntry = launchModEntryScene.instance()
+			modVList.add_child(newEntry)
+			newEntry.setModEntry(entry,idx)
+			newEntry.connect("onSelected", self, "onModEntryClicked")
+			
+			if(entry == selectedEntry):
+				newEntry.makeActive()
+			continue
+		
+		# exists, sort
+		modVList.move_child(node,idx)
+		
+	
+
+func _on_search_text_changed(new_text:String):
+	showSearched(new_text)
+
+func showSearched(searchQuery=searchBar.text):
+	var selIdx = -100 # other idxs can never be negative
+	if selectedEntry:
+		selIdx = currentModOrder.find(selectedEntry)
+	for nodeIdx in modVList.get_child_count():
+		var node = modVList.get_child(nodeIdx)
+		var stentry = node.get("storedEntry")
+		if !searchQuery.strip_edges():
+			node.show()
+			continue
+		if !stentry:
+			node.hide()
+			continue
+		var stext : String = searchQuery.to_lower()
+		var entryname = stentry.get("name","").to_lower()
+		node.visible = stext in entryname or stext.similarity(entryname)>=0.75 or entryname.begins_with(stext) or (abs(selIdx-nodeIdx)<2)
