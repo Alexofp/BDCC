@@ -11,14 +11,16 @@ signal onSelected(modEntry)
 func setMyIdx(nv):
 	myidx = nv
 	var col = Color.white
+	var dis = false
 	if storedEntry:
-		label.text = str(nv+1) + ": "+storedEntry["name"] + (" (disabled)" if storedEntry.get("disabled",false) else "")
+		dis = storedEntry.get("disabled",false)
+		label.text = str(nv+1) + ": "+storedEntry["name"] + (" (disabled)" if dis else "")
 		if storedEntry.get("broken",false):
 			col = Color.red
 			label.text = "(BROKEN) "+label.text
 	else:
 		label.text = str(nv+1)+" NO ENTRY!!!!"
-	label["custom_colors/font_color"] = col
+	label.add_color_override("font_color",col.darkened(int(dis)*0.3))
 
 func setModEntry(modEntry,idx=-100):
 	storedEntry = modEntry
@@ -41,7 +43,7 @@ func _notification(what):
 		drop_data(rect_position,get_viewport().gui_get_drag_data())
 
 func get_drag_data(_position):
-	if !storedEntry:
+	if !storedEntry or !Rect2(Vector2.ZERO,rect_size).has_point(_position) or get_viewport().gui_get_drag_data():
 		return
 	var data = {"entry":storedEntry,"origin":self}
 	set_drag_preview(getPreview())
@@ -49,10 +51,15 @@ func get_drag_data(_position):
 
 func getPreview():
 	var lp = Control.new()
+	var panel = PanelContainer.new()
 	var l = Label.new()
 	l.text = label.text
-	lp.rect_min_size = Vector2(150,20)
-	lp.add_child(l)
+	lp.rect_min_size = rect_size
+	panel.size_flags_horizontal = panel.SIZE_EXPAND_FILL
+	panel.size_flags_vertical = panel.SIZE_EXPAND_FILL
+	lp.add_child(panel)
+	l.add_color_override("font_color",label.get_color("font_color"))
+	panel.add_child(l)
 	return lp
 
 func drop_data(_position, data):
@@ -70,6 +77,4 @@ func drop_data(_position, data):
 	emit_signal("weMoved",[newidx,neworiginidx])
 
 func can_drop_data(_position, data):
-	if typeof(data)!=TYPE_DICTIONARY:
-		return false
-	return true
+	return typeof(data)==TYPE_DICTIONARY
