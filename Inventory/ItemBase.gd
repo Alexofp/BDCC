@@ -86,6 +86,9 @@ func getDescription():
 	
 func getVisisbleDescription():
 	var text = getDescription()
+	if(!(text is String)):
+		Log.printerr(id+".getDescription() RETURNS A BAD VALUE ("+str(text)+"), MUST BE A STRING.")
+		text = ""
 	if(itemState != null):
 		var extraDesc = itemState.getExtraDescription()
 		if(extraDesc != null && extraDesc != ""):
@@ -125,6 +128,9 @@ func getVisisbleDescription():
 			text += "\n" + "[color=#"+buff.getBuffColor().to_html(false)+"]" + buff.getVisibleDescription() + "[/color]"
 	
 	var buffs = getBuffs()
+	if(!(buffs is Array)):
+		Log.printerr(id+".getBuffs() RETURNS A BAD VALUE ("+str(buffs)+"), MUST BE AN ARRAY.")
+		buffs = []
 	if(buffs.size() > 0):
 		for buff in buffs:
 			text += "\n" + "[color=#"+buff.getBuffColor().to_html(false)+"]" + buff.getVisibleDescription() + "[/color]"

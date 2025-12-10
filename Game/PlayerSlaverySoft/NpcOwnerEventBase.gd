@@ -402,6 +402,8 @@ func getFreePawnsNear(maxDepth:int, maxDist:float=-1.0, minSocial:float = 0.5) -
 			continue
 		if(thePawn.getSocial() < minSocial):
 			continue
+		if(isInvolved(thePawn.getID())):
+			continue
 		result.append(thePawn)
 	return result
 

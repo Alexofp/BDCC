@@ -1256,8 +1256,8 @@ func getActivityWithMaxAnimPriorityFor(_charID:String, skipOptional:bool = false
 		if(skipOptional && activity.isAnimOptional()):
 			continue
 		
-		var animInfo = activity.getAnimationFinal()
-		if(animInfo == null):
+		var hasAnims:bool = activity.hasAnimsToPlay()
+		if(!hasAnims):
 			continue
 		if(activity.getAnimationPriority() > foundPriority || foundActivity == null):
 			#foundAnimInfo = animInfo

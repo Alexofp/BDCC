@@ -1525,6 +1525,19 @@ func getDebugActions():
 			],
 		},
 		{
+			"id": "startSlaveryFast",
+			"name": "Start Player Slavery FAST",
+			"args": [
+				{
+					"id": "slaveryID",
+					"name": "Slavery id",
+					"type": "list",
+					"value": GlobalRegistry.getPlayerSlaveryDefs().keys().front(),
+					"values": TFUtil.getPlayerSlaveryStartList(),
+				},
+			],
+		},
+		{
 			"id": "stopSlavery",
 			"name": "Stop Player Slavery",
 			"args": [
@@ -1604,6 +1617,13 @@ func doDebugAction(id, args = {}):
 		#runScene("PlayerSlaveryPickScene")
 		runScene(GlobalRegistry.getModule("PlayerSlaveryModule").getSlaveryStartScene())
 		#startPlayerSlavery(args["slaveryID"], true)
+	if(id == "startSlaveryFast"):
+		if(PS):
+			return
+		#PSH.storePlayersItems()
+		#runScene("PlayerSlaveryPickScene")
+		#runScene(GlobalRegistry.getModule("PlayerSlaveryModule").getSlaveryStartScene())
+		startPlayerSlavery(args["slaveryID"], true)
 	if(id == "stopSlavery"):
 		if(PS):
 			stopPlayerSlavery()

@@ -498,3 +498,6 @@ func getAnimation():
 			return [StageScene.Spanking, "fastonce", {pc=DOM_0, npc=SUB_0}]
 		
 		return [StageScene.Spanking, "tease", {pc=DOM_0, npc=SUB_0}]
+
+func hasAnimsToPlay() -> bool:
+	return true

@@ -11,6 +11,9 @@ func getVisibleName() -> String:
 func getVisibleDesc() -> String:
 	return "Fill me"
 
+func isVisibleAtAll() -> bool:
+	return true
+
 func canBeChosen() -> bool:
 	return true
 

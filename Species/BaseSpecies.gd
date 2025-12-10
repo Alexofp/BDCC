@@ -122,11 +122,19 @@ func getDefaultForSlotForNpcGender(slot, npcgender):
 func getAllowedBodyparts():
 	return []
 
+# Safe wrapper, legacy reasons
+func getAllowedBodypartsFinal() -> Array:
+	var theResult = getAllowedBodyparts()
+	if(!(theResult is Array)):
+		Log.printerr(id+".getAllowedBodyparts() RETURNS A BAD VALUE ("+str(theResult)+"), NEEDS TO BE AN ARRAY")
+		return []
+	return theResult
+
 # Same as getAllowedBodyparts() but gets used in npc generation and transformation logic
 func getAllowedBodypartsForNPCGender(_npcGender:String, _isTF:bool) -> Array:
 	var result:Array = getAllDefaultBodypartIDsForNPCGender(_npcGender)
 	
-	result.append_array(getAllowedBodyparts())
+	result.append_array(getAllowedBodypartsFinal())
 	
 	return result
 

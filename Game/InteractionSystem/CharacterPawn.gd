@@ -709,3 +709,6 @@ func getPawnRelationshipTextAndColor() -> Array:
 
 func getSpecialRelationship() -> SpecialRelationshipBase:
 	return GM.main.RS.getSpecialRelationship(charID)
+
+func getID() -> String:
+	return charID

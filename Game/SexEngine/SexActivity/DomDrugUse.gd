@@ -212,7 +212,7 @@ func startActivity(_args):
 			return
 		
 		var text = RNG.pick([
-			"{dom.You} {dom.youVerb('produce')} "+pcCanSeeText(drugInfo["usedName"])+" and {dom.youAre} about to {dom.youVerb('put')} it into {dom.yourHis} mouth.",
+			"{dom.You} {dom.youVerb('produce')} "+pcCanSeeText(drugInfo["usedName"])+" and {dom.youAre} about to put it into {dom.yourHis} mouth.",
 		])
 		if(_isCanApply):
 			text = RNG.pick([

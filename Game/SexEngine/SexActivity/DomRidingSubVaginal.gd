@@ -314,10 +314,10 @@ func getActions(_indx:int):
 				addAction("stopmakeout", 0.01, "Stop kissing", "Enough sharing fluids!")
 		
 		if(state == "" || state == "inside"):
-			addAction("rub", 1.0 - getStopScore(), "Rub", "Rub your "+RNG.pick(usedBodypartNames)+" against their "+getDickName())
+			addAction("rub", 1.0 - getStopScore(), "Rub", "Rub your "+RNG.pick(usedBodypartNames)+" against their "+getDickName(), {A_PRIORITY: 4})
 		if(state == ""):
 			if(getDom().getFirstItemThatCoversBodypart(usedBodypart) == null && getSub().getFirstItemThatCoversBodypart(BodypartSlot.Penis) == null && getSubInfo().isReadyToPenetrate()):
-				addAction("envelop", 1.0, "Envelop "+getDickName("cock"), "Try to get this "+getDickName("cock")+" inside you")
+				addAction("envelop", 1.0, "Envelop "+getDickName("cock"), "Try to get this "+getDickName("cock")+" inside you", {A_PRIORITY: 5})
 					
 			if(getDomInfo().getChar().hasBodypart(otherHoleBodypart) && !getSexEngine().hasTag(getDomID(), otherHoleTag)):
 				var switchholeScore:float = 5.0 * (-getDomInfo().goalsScore(getGoals(), getSubID()) + getDomInfo().goalsScore({otherGoal: 1.0}, getSubID()))
@@ -329,7 +329,7 @@ func getActions(_indx:int):
 
 		if(state in ["fucking"]):
 			var moanScore:float = max(0.1, getDomInfo().fetishScore({fetishReceiving: 1.0}) + getDomInfo().personalityScore({PersonalityStat.Subby: 1.0}))
-			addAction("moan", moanScore, "Moan", "Show how much you like it")
+			addAction("moan", moanScore, "Moan", "Show how much you like it", {A_PRIORITY: 4})
 
 			addAction("slowdown", getPauseSexScore(DOM_0, SUB_0, S_PENIS, usedBodypart), "Slow down", "Stop fucking for a second..")
 			
@@ -338,7 +338,7 @@ func getActions(_indx:int):
 				var straponForceKnotScore:float = 0.01
 				if(domArousal > 0.8):
 					straponForceKnotScore = 0.5
-				addAction("straponForceKnot", straponForceKnotScore, "Force knot in", "Try to force their knot inside you!")
+				addAction("straponForceKnot", straponForceKnotScore, "Force knot in", "Try to force their knot inside you!", {A_PRIORITY: 3})
 				
 		if(getState() in ["subabouttocum"] || (getState() == "fucking" && getSubInfo().isReadyToCum() && !getSubInfo().canDoActions())):
 			var scoreToCumInside:float = 1.0
@@ -375,7 +375,7 @@ func getActions(_indx:int):
 			
 	if(_indx == SUB_0):
 		if(state in [""]):
-			addAction("rubSub", getSubInfo().getComplyScore()/2.0, "Tease", "Rub your dick against their "+RNG.pick(usedBodypartNames))
+			addAction("rubSub", getSubInfo().getComplyScore()/2.0, "Tease", "Rub your dick against their "+RNG.pick(usedBodypartNames), {A_PRIORITY: 4})
 
 		if(state in ["fucking"]):
 			if(isReadyToCumHandled(SUB_0) && isStraponSex()):
@@ -386,7 +386,7 @@ func getActions(_indx:int):
 				var cuminsideScore:float = getResistScore(SUB_0) + fetish(SUB_0, Fetish.Breeding)*0.5
 				addAction("cuminside", cuminsideScore, "Cum inside", "Cum inside their "+RNG.pick(usedBodypartNames), {A_PRIORITY: 1001})
 			var moanSubScore:float = max(0.1, getSubInfo().fetishScore({fetishGiving: 0.5}) + getSubInfo().personalityScore({PersonalityStat.Subby: 0.5}))
-			addAction("moanSub", moanSubScore, "Moan", "Show how much you like it")
+			addAction("moanSub", moanSubScore, "Moan", "Show how much you like it", {A_PRIORITY: 2})
 			
 		if(state in ["fucking", "", "inside"]):
 			addAction("throwoff", getResistScore(SUB_0), "Throw them off", "Resist their attempts to ride you", {A_CHANCE: getSubResistChance(30.0, 25.0)})

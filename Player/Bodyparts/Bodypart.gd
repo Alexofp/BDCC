@@ -52,6 +52,13 @@ func getCharacterCreatorDesc():
 func getCompatibleSpecies():
 	return []
 
+func getCompatibleSpeciesFinal() -> Array:
+	var theSpecies = getCompatibleSpecies()
+	if(!(theSpecies is Array)):
+		Log.printerr(id+".getCompatibleSpecies() RETURNS BAD VALUE ("+str(theSpecies)+"), SUPPOSED TO BE AN ARRAY")
+		return []
+	return theSpecies
+
 func getSpeciesScores() -> Dictionary:
 	var result:Dictionary = {}
 	
@@ -68,7 +75,7 @@ func getSpeciesScores() -> Dictionary:
 	elif(theLimbSlot in [BodypartSlot.Hair]):
 		scoreToAdd = 0.23
 	
-	for theSpecies in getCompatibleSpecies():
+	for theSpecies in getCompatibleSpeciesFinal():
 		result[theSpecies] = scoreToAdd
 	
 	return result
@@ -491,10 +498,11 @@ static func findPossibleBodypartIDs(bodypartSlot:String, acharacter, theSpecies:
 		for allowedBodypartID in theAllowed:
 			allAllowed[allowedBodypartID] = true
 	
+	var maxScore:float = 0.0
 	var allbodypartsIDs = GlobalRegistry.getBodypartsIdsBySlot(bodypartSlot)
 	for bodypartID in allbodypartsIDs:
 		var bodypart = GlobalRegistry.getBodypartRef(bodypartID)
-		var supportedSpecies:Array = bodypart.getCompatibleSpecies()
+		var supportedSpecies:Array = bodypart.getCompatibleSpeciesFinal()
 		
 		var hasInSupported:bool = false
 		var hasInAllowed:bool = allAllowed.has(bodypartID)
@@ -509,7 +517,13 @@ static func findPossibleBodypartIDs(bodypartSlot:String, acharacter, theSpecies:
 			var weight = bodypart.npcGenerationWeight(acharacter)
 			if(weight != null && weight > 0.0):
 				possible.append([bodypartID, weight])
-
+				if(weight > maxScore):
+					maxScore = weight
+	
+	# If we don't have any bodyparts that are guranteed to be picked (weight >= 1.0), we insert an optional empty bodypart
+	if(maxScore < 1.0 && !BodypartSlot.isEssential(bodypartSlot)):
+		possible.append(["", 1.0])
+	
 	return possible
 
 # Used for transformation logic

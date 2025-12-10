@@ -85,6 +85,7 @@ func _react(_action: String, _args):
 		
 		if(GM.pc.getCredits() < 5):
 			setState("notEnough")
+			return
 		else:
 			GM.pc.addCredits(-5)
 			
@@ -132,6 +133,7 @@ func _react(_action: String, _args):
 		
 		if(GM.pc.getCredits() < 10):
 			setState("notEnough")
+			return
 		else:
 			GM.pc.addCredits(-10)
 			

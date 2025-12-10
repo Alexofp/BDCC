@@ -15,7 +15,7 @@ func getPossibleSlaveries(includeTrivial:bool = false) -> Array:
 		if(!includeTrivial && playerSlaveryDef.isTrivial()):
 			continue
 		
-		if(playerSlaveryDef.canBeChosen()):
+		if(playerSlaveryDef.isVisibleAtAll() && playerSlaveryDef.canBeChosen()):
 			result.append(slaveryID)
 	
 	return result

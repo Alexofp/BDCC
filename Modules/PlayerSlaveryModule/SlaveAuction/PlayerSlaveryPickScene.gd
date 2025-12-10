@@ -26,6 +26,9 @@ func _run():
 		for slaveryID in GlobalRegistry.getPlayerSlaveryDefs():
 			var thePlayerSlaveryDef:PlayerSlaveryDef = GlobalRegistry.getPlayerSlaveryDef(slaveryID)
 			
+			if(!thePlayerSlaveryDef.isVisibleAtAll()):
+				continue
+			
 			if(thePlayerSlaveryDef.canBeChosen()):
 				addButton(thePlayerSlaveryDef.getVisibleName(), thePlayerSlaveryDef.getVisibleDesc(), "doStartSlavery", [slaveryID])
 			else:

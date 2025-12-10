@@ -174,22 +174,23 @@ func getActions(_indx:int):
 			addAction("pullOut", getStopScore(), "Pull out", "Pull your member out")
 		
 		if(state == ""):
-			addAction("rub", 1.0 if !isReadyToPenetrate(_indx) else 0.4, "Rub", "Rub your cock against them")
+			addAction("rub", 1.0 if !isReadyToPenetrate(_indx) else 0.4, "Rub", "Rub your cock against them", {A_PRIORITY: 4})
 			if(isReadyToFuck(DOM_0) && isReadyToFuck(DOM_1) && !checkActiveDomPC(_indx) && hasBodypartUncovered(SUB_0, usedBodypart)):
-				addAction("penetrate", 1.0, "Penetrate", "Try to start fucking them!")
+				addAction("penetrate", 1.0, "Penetrate", "Try to start fucking them!", {A_PRIORITY: 5})
 			addAction("switch", 0.0, "Switch positions", "Switch positions with the dom")
 		if(state == "sex" && !checkActiveDomPC(_indx)):
-			addAction("pause", getPauseSexScore(_indx, SUB_0, usedBodypart if _indx == DOM_0 else S_MOUTH), "Slow down", "Pause the fucking")
-		if(state == "sex" && (isReadyToCumHandled(DOM_0) || isStrapon(DOM_0)) && (isReadyToCumHandled(DOM_1) || isStrapon(DOM_1))):
+			addAction("pause", getPauseSexScore(_indx, SUB_0, usedBodypart if _indx == DOM_0 else S_MOUTH), "Slow down", "Pause the fucking", {A_PRIORITY: 1})
+		
+		if(state == "sex" && isStrapon(_indx) && isReadyToCumHandled(_indx)):
+			addAction("cum" if !checkActiveDomPC(_indx) else "domcumstrapon", 1.0, "Cum!", "You're about to cum", {A_PRIORITY: 1001})
+		elif(state == "sex" && (isReadyToCumHandled(DOM_0) || isStrapon(DOM_0)) && (isReadyToCumHandled(DOM_1) || isStrapon(DOM_1))):
 			if(!isStrapon(_indx) && !checkActiveDomPC(_indx)):
 				addAction("cum", 1.0, "Cum inside", "Cum inside them!", {A_PRIORITY: 1001})
 		elif(state == "sex" && isReadyToCumHandled(SUB_0) && !canDoActions(SUB_0) && !checkActiveDomPC(_indx)):
 			addAction("subcum", 1.0, "Sub orgasm!", "They are about to cum!", {A_PRIORITY: 1001})
-		elif(state == "sex" && isStrapon(_indx) && isReadyToCumHandled(_indx)):
-			addAction("domcumstrapon", 1.0, "Cum!", "You're about to cum", {A_PRIORITY: 1001})
 		
 	if(_indx == SUB_0):
-		addAction("pullaway", getSubInfo().getResistScore(), "Pull away", "Try to pull away", {A_CHANCE: getSubResistChance(30.0, 25.0)})
+		addAction("pullaway", getSubInfo().getResistScore(), "Pull away", "Try to pull away", {A_CHANCE: getSubResistChance(30.0, 25.0), A_PRIORITY: 2})
 		if(state == "sex"):
 			if(isReadyToCumHandled(SUB_0)):
 				addAction("subcum", 1.0, "Cum!", "You're about to cum!", {A_PRIORITY: 1001})
@@ -200,9 +201,9 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "cum"):
 		stimulate(DOM_0, S_PENIS, SUB_0, usedBodypart, I_HIGH, usedFetish)
 		var orgAmount:int = 0
-		if(isReadyToCumHandled(DOM_0) && !isStrapon(DOM_0)):
+		if(isReadyToCumHandled(DOM_0)):
 			orgAmount += 1
-		if(isReadyToCumHandled(DOM_1) && !isStrapon(DOM_1)):
+		if(isReadyToCumHandled(DOM_1)):
 			orgAmount += 1
 		if(isReadyToCumHandled(SUB_0)):
 			orgAmount += 1
@@ -213,12 +214,16 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			addText("[b]Triple orgasm![/b]")
 		if(isReadyToCumHandled(SUB_0)):
 			cumGeneric(SUB_0, DOM_0)
-		if(isReadyToCumHandled(DOM_0) && !isStrapon(DOM_0)):
-			cumInside(DOM_0, SUB_0, usedBodypart)
-			#doProcessCumInside(DOM_0, SUB_0, usedBodypart, false)
-		if(isReadyToCumHandled(DOM_1) && !isStrapon(DOM_1)):
-			cumInside(DOM_1, SUB_0, S_MOUTH)
-			#getDomInfo(1).cum()
+		if(isReadyToCumHandled(DOM_0)):
+			if(!isStrapon(DOM_0)):
+				cumInside(DOM_0, SUB_0, usedBodypart)
+			else:
+				cumGeneric(DOM_0, DOM_0)
+		if(isReadyToCumHandled(DOM_1)):
+			if(!isStrapon(DOM_1)):
+				cumInside(DOM_1, SUB_0, S_MOUTH)
+			else:
+				cumGeneric(DOM_1, DOM_1)
 		satisfyGoals()
 		state = "inside"
 		return
