@@ -4,7 +4,7 @@ func _init():
 	sceneID = "PSTentaclesWalker"
 
 func _run():
-	var tentacles = GM.main.PS
+	var tentacles:PlayerSlaveryTentacles = GM.main.PS
 	
 	if(state == ""):
 		playAnimation(StageScene.Solo, "stand")
@@ -45,7 +45,7 @@ func _run():
 		
 
 func _react(_action: String, _args):
-	var tentacles = GM.main.PS
+	var tentacles:PlayerSlaveryTentacles = GM.main.PS
 	
 	if(_action == "endthescene"):
 		endScene()
@@ -57,16 +57,24 @@ func _react(_action: String, _args):
 		aimCameraAndSetLocName(GM.pc.location)
 		#GM.ES.triggerReact(Trigger.EnteringRoom, [GM.pc.location, _args[1]])
 		
+		tentacles.processTurn()
+		
 		var eventInfo:Array = tentacles.checkEvent(self, GM.pc.getLocation())
 		if(!eventInfo.empty()):
 			runScene(eventInfo[0], eventInfo[1] if eventInfo.size() > 1 else [])
 			return
-		
-		if(!GM.main.checkTFs()):
+		elif(!GM.main.checkTFs()):
 			GM.main.showLog()
+			return
+		
+		tentacles.afterWalkCheck()
+			
 		return
 	if(_action == "doAction"):
 		tentacles.doAction(self, _args)
 		return
 
 	setState(_action)
+
+func supportsShowingPawns() -> bool:
+	return true

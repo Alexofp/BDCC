@@ -211,7 +211,10 @@ func addNextButton(method: String, args = []):
 func addButton(text: String, tooltip: String = "", method: String = "", args = []):
 	GM.ui.addButton(text, tooltip, method, args)
 	#emit_signal("addButton", text, method, tooltip)
-	
+
+func addContinue(method: String = "", args = []):
+	addButton("Continue", "See what happens next", method, args)
+
 func addDisabledButton(text: String, tooltip: String = ""):
 	GM.ui.addDisabledButton(text, tooltip)
 	#emit_signal("addDisabledButton", text, tooltip)

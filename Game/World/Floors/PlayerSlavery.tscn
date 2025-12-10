@@ -602,44 +602,72 @@ position = Vector2( 256, 576 )
 roomName = "Bio-lab"
 roomColor = 3
 
-[node name="PSTentaclesRoom25" parent="." index="80" instance=ExtResource( 1 )]
+[node name="PSTentaclesRoom27" parent="." index="80" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 1, 1 )
+position = Vector2( 320, 576 )
+roomName = "Bio-lab"
+roomColor = 3
+
+[node name="PSTentaclesRoom28" parent="." index="81" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 1, 1 )
+position = Vector2( 384, 576 )
+roomName = "Bio-lab"
+roomColor = 3
+
+[node name="PSTentaclesRoom29" parent="." index="82" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 1, 1 )
+position = Vector2( 448, 576 )
+roomName = "Bio-lab"
+roomColor = 3
+
+[node name="PSTentaclesRoom30" parent="." index="83" instance=ExtResource( 1 )]
+self_modulate = Color( 0.7, 0.7, 1, 1 )
+position = Vector2( 512, 576 )
+roomName = "Bio-lab"
+roomID = "pstent_scientist_1"
+roomColor = 3
+
+[node name="PSTentaclesRoom25" parent="." index="84" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( -192, 640 )
 roomName = "Bio-lab"
 roomColor = 3
 
-[node name="PSTentaclesRoom26" parent="." index="81" instance=ExtResource( 1 )]
+[node name="PSTentaclesRoom26" parent="." index="85" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 64, 384 )
 roomName = "Bio-lab"
+roomID = "pstent_scientist_2"
 roomColor = 3
 
-[node name="PSTentaclesRoom3" parent="." index="82" instance=ExtResource( 1 )]
+[node name="PSTentaclesRoom3" parent="." index="86" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 0, 640 )
 roomName = "Bio-lab"
 roomColor = 3
 
-[node name="PSTentaclesRoom4" parent="." index="83" instance=ExtResource( 1 )]
+[node name="PSTentaclesRoom4" parent="." index="87" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 128, 576 )
 roomName = "Bio-lab"
 roomColor = 3
 
-[node name="PSTentaclesRoom5" parent="." index="84" instance=ExtResource( 1 )]
+[node name="PSTentaclesRoom5" parent="." index="88" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 0, 704 )
 roomName = "Bio-lab"
+roomID = "pstent_entrance"
 roomSprite = 3
 roomColor = 3
 
-[node name="PSTentaclesRoom6" parent="." index="85" instance=ExtResource( 1 )]
+[node name="PSTentaclesRoom6" parent="." index="89" instance=ExtResource( 1 )]
 self_modulate = Color( 0.7, 0.7, 1, 1 )
 position = Vector2( 192, 576 )
 roomName = "Bio-lab"
+roomID = "pstent_scientists"
 roomColor = 3
 
-[node name="PSTentaclesRoom7" parent="." index="86" instance=ExtResource( 1 )]
+[node name="PSTentaclesRoom7" parent="." index="90" instance=ExtResource( 1 )]
 position = Vector2( 64, 640 )
 roomName = "Bio-lab"
 roomID = "pstent_play"
@@ -647,61 +675,61 @@ canWest = false
 canNorth = false
 gridColor = 5
 
-[node name="PSTentaclesRoom8" parent="." index="87" instance=ExtResource( 1 )]
+[node name="PSTentaclesRoom8" parent="." index="91" instance=ExtResource( 1 )]
 position = Vector2( 64, 704 )
 roomName = "Bio-lab"
 canWest = false
 
-[node name="PSTentaclesRoom9" parent="." index="88" instance=ExtResource( 1 )]
+[node name="PSTentaclesRoom9" parent="." index="92" instance=ExtResource( 1 )]
 position = Vector2( 64, 768 )
 roomName = "Bio-lab"
 roomID = "pstent_fridge"
 canWest = false
 roomSprite = 6
 
-[node name="PSTentaclesRoom10" parent="." index="89" instance=ExtResource( 1 )]
+[node name="PSTentaclesRoom10" parent="." index="93" instance=ExtResource( 1 )]
 position = Vector2( 128, 768 )
 roomName = "Bio-lab"
 roomID = "pstent_bed"
 roomSprite = 10
 
-[node name="PSTentaclesRoom11" parent="." index="90" instance=ExtResource( 1 )]
+[node name="PSTentaclesRoom11" parent="." index="94" instance=ExtResource( 1 )]
 position = Vector2( 128, 704 )
 roomName = "Bio-lab"
 roomID = "pstent_middle"
 gridColor = 6
 
-[node name="PSTentaclesRoom12" parent="." index="91" instance=ExtResource( 1 )]
+[node name="PSTentaclesRoom12" parent="." index="95" instance=ExtResource( 1 )]
 position = Vector2( 128, 640 )
 roomName = "Bio-lab"
 canNorth = false
 
-[node name="PSTentaclesRoom13" parent="." index="92" instance=ExtResource( 1 )]
+[node name="PSTentaclesRoom13" parent="." index="96" instance=ExtResource( 1 )]
 position = Vector2( 192, 640 )
 roomName = "Bio-lab"
 roomID = "pstent_important"
 canNorth = false
 roomSprite = 4
 
-[node name="PSTentaclesRoom14" parent="." index="93" instance=ExtResource( 1 )]
+[node name="PSTentaclesRoom14" parent="." index="97" instance=ExtResource( 1 )]
 position = Vector2( 192, 704 )
 roomName = "Bio-lab"
 
-[node name="PSTentaclesRoom15" parent="." index="94" instance=ExtResource( 1 )]
+[node name="PSTentaclesRoom15" parent="." index="98" instance=ExtResource( 1 )]
 position = Vector2( 192, 768 )
 roomName = "Bio-lab"
 
-[node name="PSTentaclesRoom16" parent="." index="95" instance=ExtResource( 1 )]
+[node name="PSTentaclesRoom16" parent="." index="99" instance=ExtResource( 1 )]
 position = Vector2( 256, 768 )
 roomName = "Bio-lab"
 
-[node name="PSTentaclesRoom17" parent="." index="96" instance=ExtResource( 1 )]
+[node name="PSTentaclesRoom17" parent="." index="100" instance=ExtResource( 1 )]
 position = Vector2( 256, 704 )
 roomName = "Bio-lab"
 roomID = "pstent_shower"
 roomSprite = 7
 
-[node name="PSTentaclesRoom18" parent="." index="97" instance=ExtResource( 1 )]
+[node name="PSTentaclesRoom18" parent="." index="101" instance=ExtResource( 1 )]
 position = Vector2( 256, 640 )
 roomName = "Bio-lab"
 canNorth = false

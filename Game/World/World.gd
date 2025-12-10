@@ -429,7 +429,7 @@ func deleteEntity(_theID:String):
 	entities[_theID].queue_free()
 	entities.erase(_theID)
 
-func createEntity(theID:String, theTexture:Texture, loc:String):
+func createEntity(theID:String, theTexture:Texture, loc:String, _inMiddle:bool = false):
 	if(entities.has(theID)):
 		entities[theID].queue_free()
 		var _ok = entities.erase(theID)
@@ -441,7 +441,9 @@ func createEntity(theID:String, theTexture:Texture, loc:String):
 	newWorldEntity.loc = loc
 	newWorldEntity.id = theID
 	newWorldEntity.floorid = roomFloor.id
-	newWorldEntity.global_position = getRoomByID(loc).global_position + Vector2(RNG.randf_range(-16.0, 16.0), RNG.randf_range(-16.0, 16.0))
+	newWorldEntity.global_position = getRoomByID(loc).global_position
+	if(!_inMiddle):
+		newWorldEntity.global_position += Vector2(RNG.randf_range(-16.0, 16.0), RNG.randf_range(-16.0, 16.0))
 	newWorldEntity.setTexture(theTexture)
 	entities[theID] = newWorldEntity
 

@@ -5,10 +5,10 @@ func _init():
 
 func _run():
 	if(state == ""):
-		if(true):
-			saynn("NOT DONE")
-			addButton("Continue", "See what happens next", "stop_ps")
-			return
+#		if(true):
+#			saynn("NOT DONE")
+#			addButton("Continue", "See what happens next", "stop_ps")
+#			return
 		
 		aimCameraAndSetLocName("pstent_bed")
 		GM.pc.setLocation("pstent_bed")
