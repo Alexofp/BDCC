@@ -13,6 +13,11 @@ func setStage(_st:int):
 
 var growStage:int = STAGE_INTRO
 
+const STAT_ANGER = 0
+const STAT_AGILITY = 1
+const STAT_MIND = 2
+const STAT_LUST = 3
+
 const LOC_BED = "pstent_bed"
 const LOC_FRIDGE = "pstent_fridge"
 const LOC_IMPORTANT = "pstent_important"
@@ -71,8 +76,10 @@ func action(_name:String, _desc:String, _sceneID:String, _args:Array = []):
 func getActions(_loc:String) -> Array:
 	var theActions:Array = []
 	
-	if(_loc == LOC_IMPORTANT):
-		theActions.append(action("MEOW", "TEST ACTION", "MeScene"))
+	#if(_loc == LOC_IMPORTANT):
+	#	theActions.append(action("MEOW", "TEST ACTION", "MeScene"))
+	if(_loc == LOC_BED && growStage == STAGE_EGG):
+		theActions.append(action("Rest", "Get some rest", "PSTentacles1EggInteract"))
 	
 	return theActions
 
@@ -82,7 +89,7 @@ func doAction(_scene, _action:Array):
 func checkEvent(_scene, _loc:String) -> Array:
 	if(_loc == LOC_IMPORTANT):
 		var theSci := getPendingScientistScene()
-		if(!theSci.empty()):
+		if(!theSci.empty() && didScientistsApproach()):
 			return [theSci]
 	
 	if(_loc == LOC_SHOWER):

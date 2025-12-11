@@ -24,3 +24,15 @@ func _react(_action: String, _args):
 
 func supportsShowingPawns() -> bool:
 	return true
+
+func saveData():
+	var data = .saveData()
+	
+	#data["ambushType"] = ambushType
+	
+	return data
+	
+func loadData(data):
+	.loadData(data)
+	
+	#ambushType = SAVE.loadVar(data, "ambushType", "")
