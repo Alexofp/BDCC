@@ -4,8 +4,9 @@ class_name PlayerSlaveryTentacles
 const STAGE_INTRO = 0
 const STAGE_EGG = 1
 const STAGE_TINY = 2
-const STAGE_SMALL = 3
-const STAGE_NORMAL = 4
+const STAGE_TINY_AFTERTEST = 3
+const STAGE_SMALL = 4
+const STAGE_NORMAL = 5
 
 func setStage(_st:int):
 	growStage = _st
@@ -45,6 +46,8 @@ var anger:int = 0
 var agility:int = 0
 var mind:int = 0
 var lust:int = 0
+ 
+var monsterName:String = "tentacles"
 
 func _init():
 	id = "Tentacles"
@@ -80,6 +83,8 @@ func getActions(_loc:String) -> Array:
 	#	theActions.append(action("MEOW", "TEST ACTION", "MeScene"))
 	if(_loc == LOC_BED && growStage == STAGE_EGG):
 		theActions.append(action("Rest", "Get some rest", "PSTentacles1EggInteract"))
+	if(_loc == LOC_BED && growStage == STAGE_TINY):
+		theActions.append(action("Rest", "Get some rest", "PSTentacles2SmallInteract"))
 	
 	return theActions
 
@@ -169,6 +174,40 @@ func goToSlow(_startLoc:String, theTargetLoc:String) -> String:
 		return theTargetLoc
 	
 	return path[0]
+
+func setStat(_statID:int, _val:int):
+	if(_statID == STAT_ANGER):
+		anger = _val
+	if(_statID == STAT_AGILITY):
+		agility = _val
+	if(_statID == STAT_MIND):
+		mind = _val
+	if(_statID == STAT_LUST):
+		lust = _val
+
+func getStat(_statID:int) -> int:
+	if(_statID == STAT_ANGER):
+		return anger
+	if(_statID == STAT_AGILITY):
+		return agility
+	if(_statID == STAT_MIND):
+		return mind
+	if(_statID == STAT_LUST):
+		return lust
+	return 0
+
+func incStat(_statID:int) -> bool:
+	var theStat := getStat(_statID)
+	var theOldStat := theStat
+	theStat += 1
+	if(theStat < 0):
+		theStat = 0
+	if(theStat > 5):
+		theStat = 5
+	setStat(_statID, theStat)
+	if(theStat == theOldStat):
+		return false
+	return true
 
 func saveData() -> Dictionary:
 	return {}

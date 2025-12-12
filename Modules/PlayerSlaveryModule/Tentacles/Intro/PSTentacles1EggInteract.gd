@@ -140,8 +140,10 @@ func _react(_action: String, _args):
 			addMessage("MIND INCREASE")
 		elif(whichStat == PlayerSlaveryTentacles.STAT_LUST):
 			addMessage("LUST INCREASE")
-		
-	
+			
+		if(whichStat > 0):
+			_tentacles.incStat(whichStat)
+		_tentacles.setStage(_tentacles.STAGE_TINY)
 	#if(_action == "guards_leave_egg"):
 	#	_tentacles.setStage(_tentacles.STAGE_EGG)
 	
