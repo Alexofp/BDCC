@@ -722,6 +722,8 @@ roomName = "Bio-lab"
 [node name="PSTentaclesRoom16" parent="." index="99" instance=ExtResource( 1 )]
 position = Vector2( 256, 768 )
 roomName = "Bio-lab"
+roomID = "pstent_window"
+roomSprite = 4
 
 [node name="PSTentaclesRoom17" parent="." index="100" instance=ExtResource( 1 )]
 position = Vector2( 256, 704 )

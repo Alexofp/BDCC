@@ -64,10 +64,10 @@ func _react(_action: String, _args):
 			runScene(eventInfo[0], eventInfo[1] if eventInfo.size() > 1 else [])
 			return
 		elif(!GM.main.checkTFs()):
-			GM.main.showLog()
-			return
+			if(GM.main.showLog()):
+				return
 		
-		tentacles.afterWalkCheck()
+			tentacles.afterWalkCheck()
 			
 		return
 	if(_action == "doAction"):

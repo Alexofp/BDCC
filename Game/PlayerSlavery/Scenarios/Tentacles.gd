@@ -11,6 +11,20 @@ const STAGE_NORMAL = 5
 func setStage(_st:int):
 	growStage = _st
 	updateIcons()
+func getDebugStages() -> Array:
+	return [
+		[STAGE_INTRO, "INTRO"],
+		[STAGE_EGG, "EGG"],
+		[STAGE_TINY, "TINY"],
+		[STAGE_TINY_AFTERTEST, "TINY (AFTER REST)"],
+		[STAGE_SMALL, "SMALL"],
+		[STAGE_NORMAL, "NORMAL"],
+	]
+func addSkipActions(_scene:SceneBase):
+	for entry in getDebugStages():
+		_scene.addButton(entry[1], "SKIP TO THIS STAGE", "skipStage", [entry[0]])
+func doSkipAction(_stage:int):
+	setStage(_stage)
 
 var growStage:int = STAGE_INTRO
 
@@ -25,6 +39,7 @@ const LOC_IMPORTANT = "pstent_important"
 const LOC_SHOWER = "pstent_shower"
 const LOC_PLAY = "pstent_play"
 const LOC_MIDDLE = "pstent_middle"
+const LOC_WINDOW = "pstent_window"
 
 const LOC_ENTRANCE = "pstent_entrance"
 
@@ -35,11 +50,22 @@ const LOC_SCIENTIST_2 = "pstent_scientist_2"
 const IconDudeMasc = preload("res://Images/WorldPawns/masc.png")
 const IconDudeFem = preload("res://Images/WorldPawns/fem.png")
 const IconEgg = preload("res://Images/WorldEntities/Egg.png")
+const IconEggNest = preload("res://Images/WorldEntities/EggNest.png")
 
+var monsterLoc:String = LOC_MIDDLE
+var monsterTarget:String = LOC_IMPORTANT
 var scientist1Loc:String = LOC_SCIENTIST_1
 var scientist2Loc:String = LOC_SCIENTIST_2
 
+var eventTarget:String = LOC_MIDDLE
+var eventScene:String = ""
+var eventArgs:Array = []
+
 # mood
+var hunger:float = 0.0
+var play:float = 0.0
+var social:float = 0.0
+var sex:float = 0.0
 
 # personality
 var anger:int = 0
@@ -65,13 +91,26 @@ func getStartScene() -> String:
 	return "PSTentaclesStart"
 
 func getPCViewDistance() -> float:
-	return 70.0
+	return 100.0
+
+func isSmallOrNormal() -> bool:
+	return growStage in [STAGE_SMALL, STAGE_NORMAL]
+
+func satisfySocial():
+	social = 0.0
 
 func getText(_loc:String) -> String:
-	if(_loc == LOC_IMPORTANT):
-		return "Test test TEST TEST"
+	var Ar:Array = []
+	if(isSmallOrNormal()):
+		Ar.append("hunger: "+str(Util.roundF(hunger*100.0, 1))+"%")
+		Ar.append("play: "+str(Util.roundF(play*100.0, 1))+"%")
+		Ar.append("social: "+str(Util.roundF(social*100.0, 1))+"%")
+		Ar.append("sex: "+str(Util.roundF(sex*100.0, 1))+"%")
 	
-	return ""
+	if(_loc == LOC_IMPORTANT):
+		Ar.append("Test test TEST TEST")
+	
+	return Util.join(Ar, "\n")
 
 func action(_name:String, _desc:String, _sceneID:String, _args:Array = []):
 	return [_name, _desc, _sceneID, _args]
@@ -79,16 +118,29 @@ func action(_name:String, _desc:String, _sceneID:String, _args:Array = []):
 func getActions(_loc:String) -> Array:
 	var theActions:Array = []
 	
+	if(isSmallOrNormal()):
+		if(eventScene != ""):
+			if(eventTarget == monsterLoc && _loc == eventTarget):
+				theActions.append(action("Monster", "See what's up", "doEvent"))
+	
 	#if(_loc == LOC_IMPORTANT):
 	#	theActions.append(action("MEOW", "TEST ACTION", "MeScene"))
 	if(_loc == LOC_BED && growStage == STAGE_EGG):
 		theActions.append(action("Rest", "Get some rest", "PSTentacles1EggInteract"))
 	if(_loc == LOC_BED && growStage == STAGE_TINY):
 		theActions.append(action("Rest", "Get some rest", "PSTentacles2SmallInteract"))
+	if(_loc == LOC_FRIDGE):
+		theActions.append(action("Fridge", "Open the fridge", "PSTentaclesFridge"))
 	
 	return theActions
 
 func doAction(_scene, _action:Array):
+	if(_action[2] == "doEvent"):
+		GM.main.runScene(eventScene, eventArgs)
+		eventScene = ""
+		eventTarget = ""
+		eventArgs = []
+		return
 	GM.main.runScene(_action[2], _action[3])
 
 func checkEvent(_scene, _loc:String) -> Array:
@@ -129,6 +181,10 @@ func setScientistsLoc(_loc:String):
 	scientist2Loc = _loc
 	updateIcons()
 
+func setMonsterLoc(_loc:String):
+	monsterLoc = _loc
+	updateIcons()
+
 func createIcons():
 	GM.world.createEntity("ps_scientist1", IconDudeFem, scientist1Loc)
 	GM.world.createEntity("ps_scientist2", IconDudeMasc, scientist2Loc)
@@ -141,13 +197,26 @@ func deleteIcons():
 func updateIcons():
 	GM.world.moveEntity("ps_scientist1", scientist1Loc)
 	GM.world.moveEntity("ps_scientist2", scientist2Loc)
-	if(growStage == STAGE_EGG):
+	if(growStage in [STAGE_EGG]):
 		if(!GM.world.hasEntity("ps_egg")):
 			GM.world.createEntity("ps_egg", IconEgg, LOC_MIDDLE, true)
 	else:
-		if(GM.world.hasEntity("ps_egg")):
-			GM.world.deleteEntity("ps_egg")
-		
+		GM.world.deleteEntity("ps_egg")
+	
+	if(growStage in [STAGE_SMALL]):
+		if(!GM.world.hasEntity("ps_nest")):
+			GM.world.createEntity("ps_nest", IconEggNest, LOC_MIDDLE, true)
+		if(!GM.world.hasEntity("ps_small")):
+			GM.world.createEntity("ps_small", IconEgg, monsterLoc, true)
+		else:
+			GM.world.moveEntity("ps_small", monsterLoc)
+	else:
+		GM.world.deleteEntity("ps_nest")
+		GM.world.deleteEntity("ps_small")
+
+func hasEvent() -> bool:
+	return !eventScene.empty()
+
 func processTurn():
 	if(shouldScientistsApproach()):
 		scientist1Loc = goToSlow(scientist1Loc, LOC_SCIENTISTS)
@@ -156,7 +225,25 @@ func processTurn():
 		scientist1Loc = goToSlow(scientist1Loc, LOC_SCIENTIST_1)
 		scientist2Loc = goToSlow(scientist2Loc, LOC_SCIENTIST_2)
 	
+	if(isSmallOrNormal()):
+		social += 0.2
+		
+		if(!hasEvent()):
+			if(social >= 1.0):
+				setEvent(LOC_WINDOW, "PSTentaclesWindowSmall")
+		
+		if(!eventTarget.empty()):
+			monsterLoc = goToSlow(monsterLoc, eventTarget)
+		elif(monsterLoc == monsterTarget):
+			#TODO: Better locs?
+			monsterTarget = RNG.pick([LOC_BED, LOC_FRIDGE, LOC_IMPORTANT, LOC_PLAY, LOC_SHOWER, LOC_WINDOW])
+		else:
+			monsterLoc = goToSlow(monsterLoc, monsterTarget)
+		
 	updateIcons()
+
+func doTurn():
+	processTurn()
 
 func afterWalkCheck():
 	if(didScientistsApproach() && !getPendingScientistScene().empty()):
@@ -208,6 +295,18 @@ func incStat(_statID:int) -> bool:
 	if(theStat == theOldStat):
 		return false
 	return true
+
+func getTentaclesCharID() -> String:
+	return "rahi"
+func getScientist1CharID() -> String:
+	return "nova"
+func getScientist2CharID() -> String:
+	return "risha"
+
+func setEvent(_targetLoc:String, _scene:String, _args:Array = []):
+	eventTarget = _targetLoc
+	eventScene = _scene
+	eventArgs = _args
 
 func saveData() -> Dictionary:
 	return {}
