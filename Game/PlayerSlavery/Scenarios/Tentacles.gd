@@ -51,21 +51,28 @@ const IconDudeMasc = preload("res://Images/WorldPawns/masc.png")
 const IconDudeFem = preload("res://Images/WorldPawns/fem.png")
 const IconEgg = preload("res://Images/WorldEntities/Egg.png")
 const IconEggNest = preload("res://Images/WorldEntities/EggNest.png")
+const IconWarning = preload("res://Images/WorldEntities/warning.png")
 
 var monsterLoc:String = LOC_MIDDLE
 var monsterTarget:String = LOC_IMPORTANT
 var scientist1Loc:String = LOC_SCIENTIST_1
 var scientist2Loc:String = LOC_SCIENTIST_2
 
-var eventTarget:String = LOC_MIDDLE
+var eventTarget:String = ""
 var eventScene:String = ""
 var eventArgs:Array = []
+var eventGiveupTimer:int = 0
+
+const EVENT_HUNGRY = 0
+const EVENT_LEWD = 1
+const EVENT_WINDOW = 2
+const EVENT_PLAY = 3
 
 # mood
-var hunger:float = 0.0
-var play:float = 0.0
-var social:float = 0.0
-var sex:float = 0.0
+var eventNeed:int = 0
+var lastEventType:int = -1
+var isAngry:bool = false
+var angryReason:String = ""
 
 # personality
 var anger:int = 0
@@ -96,16 +103,17 @@ func getPCViewDistance() -> float:
 func isSmallOrNormal() -> bool:
 	return growStage in [STAGE_SMALL, STAGE_NORMAL]
 
-func satisfySocial():
-	social = 0.0
+func satisfyEventNeed():
+	eventNeed = 0
 
 func getText(_loc:String) -> String:
 	var Ar:Array = []
 	if(isSmallOrNormal()):
-		Ar.append("hunger: "+str(Util.roundF(hunger*100.0, 1))+"%")
-		Ar.append("play: "+str(Util.roundF(play*100.0, 1))+"%")
-		Ar.append("social: "+str(Util.roundF(social*100.0, 1))+"%")
-		Ar.append("sex: "+str(Util.roundF(sex*100.0, 1))+"%")
+		Ar.append("eventNeed: "+str(eventNeed))
+		Ar.append("anger: "+str(anger))
+		Ar.append("agility: "+str(agility))
+		Ar.append("mind: "+str(mind))
+		Ar.append("lust: "+str(lust))
 	
 	if(_loc == LOC_IMPORTANT):
 		Ar.append("Test test TEST TEST")
@@ -137,20 +145,36 @@ func getActions(_loc:String) -> Array:
 func doAction(_scene, _action:Array):
 	if(_action[2] == "doEvent"):
 		GM.main.runScene(eventScene, eventArgs)
+		satisfyEventNeed()
 		eventScene = ""
 		eventTarget = ""
 		eventArgs = []
+		eventGiveupTimer = 0
+		GM.main.processTime(60*60)
 		return
 	GM.main.runScene(_action[2], _action[3])
 
 func checkEvent(_scene, _loc:String) -> Array:
+	if(isSmallOrNormal() && isAngry):
+		if(_loc == monsterLoc):
+			isAngry = false
+			incStat(STAT_ANGER)
+			return ["PSTentaclesAngrySmall"]
+	
+	if(isSmallOrNormal()):
+		if(hasEvent() && eventTarget == "pc"):
+			if(_loc == monsterLoc):
+				doAction(_scene, ["", "", "doEvent"])
+				return []
+				#theActions.append(action("Monster", "See what's up", "doEvent"))
+	
 	if(_loc == LOC_IMPORTANT):
 		var theSci := getPendingScientistScene()
 		if(!theSci.empty() && didScientistsApproach()):
 			return [theSci]
 	
-	if(_loc == LOC_SHOWER):
-		return ["MeScene"]
+	#if(_loc == LOC_SHOWER):
+	#	return ["MeScene"]
 	return []
 
 func shouldScientistsApproach() -> bool:
@@ -209,13 +233,55 @@ func updateIcons():
 		if(!GM.world.hasEntity("ps_small")):
 			GM.world.createEntity("ps_small", IconEgg, monsterLoc, true)
 		else:
-			GM.world.moveEntity("ps_small", monsterLoc)
+			GM.world.moveEntity("ps_small", monsterLoc, true)
 	else:
 		GM.world.deleteEntity("ps_nest")
 		GM.world.deleteEntity("ps_small")
+	
+	if(isSmallOrNormal()):
+		if(shouldDisplayWarningAboveMonster()):
+			if(!GM.world.hasEntity("ps_warning")):
+				GM.world.createEntity("ps_warning", IconWarning, monsterLoc, true, Vector2(0.0, -20.0))
+			else:
+				GM.world.moveEntity("ps_warning", monsterLoc, true, Vector2(0.0, -20.0))
+		else:
+			GM.world.deleteEntity("ps_warning")
+
+func shouldDisplayWarningAboveMonster() -> bool:
+	if(isSmallOrNormal()):
+		if(eventScene != ""):
+			if(eventTarget == monsterLoc):
+				return true
+	return false
+
+func getAngryReason() -> String:
+	if(angryReason.empty()):
+		return "didn't spend time with it"
+	return angryReason
 
 func hasEvent() -> bool:
 	return !eventScene.empty()
+
+func getPossibleEvents() -> Array:
+	var possible:Array = []
+	var weights:Array = []
+	
+	possible.append([EVENT_WINDOW, LOC_WINDOW, "PSTentaclesWindowSmall", [], "didn't spend time with it"])
+	weights.append(1.0)
+	possible.append([EVENT_HUNGRY, LOC_FRIDGE, "PSTentaclesFeedSmall", [], "didn't feed it"])
+	weights.append(1.0)
+	possible.append([EVENT_LEWD, "pc", "PSTentaclesLewdSmall", [], "didn't play with it"])
+	weights.append(1.0)
+	possible.append([EVENT_PLAY, LOC_IMPORTANT, "PSTentaclesPlaySmall", [], "didn't play with it"])
+	weights.append(1.0)
+	
+	var thePS:int = possible.size()
+	for _i in range(thePS):
+		var _indx:int = thePS - 1 - _i
+		if(possible[_indx][0] == lastEventType):
+			possible.erase(_indx)
+			weights.erase(_indx)
+	return [possible, weights]
 
 func processTurn():
 	if(shouldScientistsApproach()):
@@ -226,21 +292,43 @@ func processTurn():
 		scientist2Loc = goToSlow(scientist2Loc, LOC_SCIENTIST_2)
 	
 	if(isSmallOrNormal()):
-		social += 0.2
+		if(!hasEvent() && !isAngry):
+			eventNeed += 1
+			if(eventNeed >= 7 && RNG.chance(10 + (eventNeed-7)*10 )):
+				eventNeed = 0
+				
+				var theAllEventsAndWeights := getPossibleEvents()
+				if(!theAllEventsAndWeights.empty()):
+					var theAllEvents:Array = theAllEventsAndWeights[0]
+					var theAllWeights:Array = theAllEventsAndWeights[1]
+					
+					var theRandomEvent:Array = RNG.pickWeighted(theAllEvents, theAllWeights)
+				
+					angryReason = theRandomEvent[4]
+					setEvent(theRandomEvent[0], theRandomEvent[1], theRandomEvent[2], theRandomEvent[3])
 		
-		if(!hasEvent()):
-			if(social >= 1.0):
-				setEvent(LOC_WINDOW, "PSTentaclesWindowSmall")
-		
-		if(!eventTarget.empty()):
-			monsterLoc = goToSlow(monsterLoc, eventTarget)
+		if(isAngry):
+			monsterLoc = goToSlow(monsterLoc, GM.pc.getLocation())
+		elif(!eventTarget.empty()):
+			if(monsterLoc == eventTarget):
+				eventGiveupTimer += 1
+				if(eventGiveupTimer >= 6 && RNG.chance(33)):
+					clearEvent()
+					setAngryAtPC()
+					#incStat(STAT_ANGER) #TODO: Replace with scene
+			else:
+				monsterLoc = goToSlow(monsterLoc, eventTarget)
 		elif(monsterLoc == monsterTarget):
 			#TODO: Better locs?
 			monsterTarget = RNG.pick([LOC_BED, LOC_FRIDGE, LOC_IMPORTANT, LOC_PLAY, LOC_SHOWER, LOC_WINDOW])
 		else:
-			monsterLoc = goToSlow(monsterLoc, monsterTarget)
+			if(!monsterTarget.empty()):
+				monsterLoc = goToSlow(monsterLoc, monsterTarget)
 		
 	updateIcons()
+
+func setAngryAtPC():
+	isAngry = true
 
 func doTurn():
 	processTurn()
@@ -250,6 +338,11 @@ func afterWalkCheck():
 		GM.main.addMessage("You hear knocking on the glass..")
 
 func goToSlow(_startLoc:String, theTargetLoc:String) -> String:
+	if(theTargetLoc == "pc"):
+		theTargetLoc = GM.pc.getLocation()
+	if(theTargetLoc.empty()):
+		Log.printerr("EMPTY TARGET LOC")
+		return _startLoc
 	if(_startLoc == theTargetLoc):
 		return theTargetLoc
 	
@@ -303,10 +396,18 @@ func getScientist1CharID() -> String:
 func getScientist2CharID() -> String:
 	return "risha"
 
-func setEvent(_targetLoc:String, _scene:String, _args:Array = []):
+func setEvent(_eventType:int, _targetLoc:String, _scene:String, _args:Array = []):
+	lastEventType = _eventType
 	eventTarget = _targetLoc
 	eventScene = _scene
 	eventArgs = _args
+	eventGiveupTimer = 0
+
+func clearEvent():
+	eventTarget = ""
+	eventScene = ""
+	eventArgs = []
+	eventGiveupTimer = 0
 
 func saveData() -> Dictionary:
 	return {}

@@ -38,6 +38,10 @@ func _init():
 		"res://Modules/PlayerSlaveryModule/Tentacles/Generic/PSTentaclesFridge.gd",
 		
 		"res://Modules/PlayerSlaveryModule/Tentacles/Small/PSTentaclesWindowSmall.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Small/PSTentaclesAngrySmall.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Small/PSTentaclesFeedSmall.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Small/PSTentaclesLewdSmall.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Small/PSTentaclesPlaySmall.gd",
 		]
 	characters = [
 		"res://Modules/PlayerSlaveryModule/ShaftMiner/PSRicky.gd",

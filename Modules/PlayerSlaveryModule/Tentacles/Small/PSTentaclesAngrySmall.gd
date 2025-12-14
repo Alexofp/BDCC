@@ -1,10 +1,11 @@
 extends SceneBase
 
 func _init():
-	sceneID = "PSTentaclesWindowSmall"
+	sceneID = "PSTentaclesAngrySmall"
 
 func _reactInit():
 	addCharacter(GM.main.PS.getTentaclesCharID())
+	GM.pc.addPain(10)
 
 func resolveCustomCharacterName(_charID):
 	if(_charID == "ten"):
@@ -18,11 +19,9 @@ func _run():
 	var _tentacles:PlayerSlaveryTentacles = GM.main.PS
 
 	if(state == ""):
-		saynn("You stare at the window.")
+		saynn("THE TENTACLE MONSTER BONKS YOU! OW!")
 
-		addButton("Chat", "Do chat", "doChat")
-	if(state == "doChat"):
-		saynn("You chat.")
+		saynn("IT SEEMS TO BE ANGRY BECAUSE YOU "+str(_tentacles.getAngryReason())+".")
 
 		addButton("Continue", "See what happens next", "endthescene")
 
@@ -32,8 +31,5 @@ func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
 		return
-
-	if(_action == "doChat"):
-		_tentacles.incStat(PlayerSlaveryTentacles.STAT_MIND)
 
 	setState(_action)

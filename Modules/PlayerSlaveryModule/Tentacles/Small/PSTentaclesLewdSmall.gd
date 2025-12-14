@@ -1,7 +1,7 @@
 extends SceneBase
 
 func _init():
-	sceneID = "PSTentaclesWindowSmall"
+	sceneID = "PSTentaclesLewdSmall"
 
 func _reactInit():
 	addCharacter(GM.main.PS.getTentaclesCharID())
@@ -18,11 +18,16 @@ func _run():
 	var _tentacles:PlayerSlaveryTentacles = GM.main.PS
 
 	if(state == ""):
-		saynn("You stare at the window.")
+		saynn("The monster touches you.")
 
-		addButton("Chat", "Do chat", "doChat")
-	if(state == "doChat"):
-		saynn("You chat.")
+		addButton("Rub", "Rub its tentacles", "doRub")
+		addButton("Shoo", "Go away", "dontFeed")
+	if(state == "doRub"):
+		saynn("YOU RUB TENTACLES!")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "dontFeed"):
+		saynn("YOU SHOO!")
 
 		addButton("Continue", "See what happens next", "endthescene")
 
@@ -33,7 +38,10 @@ func _react(_action: String, _args):
 		endScene()
 		return
 
-	if(_action == "doChat"):
-		_tentacles.incStat(PlayerSlaveryTentacles.STAT_MIND)
+	if(_action == "doRub"):
+		_tentacles.incStat(_tentacles.STAT_LUST)
+
+	if(_action == "dontFeed"):
+		_tentacles.incStat(_tentacles.STAT_ANGER)
 
 	setState(_action)
