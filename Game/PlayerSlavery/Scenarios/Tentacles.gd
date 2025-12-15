@@ -6,11 +6,14 @@ const STAGE_EGG = 1
 const STAGE_TINY = 2
 const STAGE_TINY_AFTERTEST = 3
 const STAGE_SMALL = 4
-const STAGE_NORMAL = 5
+const STAGE_SMALL_ENDDAY = 5
+const STAGE_NORMAL = 6
 
 func setStage(_st:int):
 	growStage = _st
-	updateIcons()
+	
+	clearEvent()
+	updateIcons(true)
 func getDebugStages() -> Array:
 	return [
 		[STAGE_INTRO, "INTRO"],
@@ -18,6 +21,7 @@ func getDebugStages() -> Array:
 		[STAGE_TINY, "TINY"],
 		[STAGE_TINY_AFTERTEST, "TINY (AFTER REST)"],
 		[STAGE_SMALL, "SMALL"],
+		[STAGE_SMALL_ENDDAY, "STAGE_SMALL_ENDDAY"],
 		[STAGE_NORMAL, "NORMAL"],
 	]
 func addSkipActions(_scene:SceneBase):
@@ -52,6 +56,9 @@ const IconDudeFem = preload("res://Images/WorldPawns/fem.png")
 const IconEgg = preload("res://Images/WorldEntities/Egg.png")
 const IconEggNest = preload("res://Images/WorldEntities/EggNest.png")
 const IconWarning = preload("res://Images/WorldEntities/warning.png")
+const IconTentacles = preload("res://Images/WorldEntities/Tentacles.png")
+const IconTentaclesTiny = preload("res://Images/WorldEntities/TentaclesTiny.png")
+const IconTentaclesSmall = preload("res://Images/WorldEntities/TentaclesSmall.png")
 
 var monsterLoc:String = LOC_MIDDLE
 var monsterTarget:String = LOC_IMPORTANT
@@ -68,6 +75,8 @@ const EVENT_LEWD = 1
 const EVENT_WINDOW = 2
 const EVENT_PLAY = 3
 
+var daysNormal:int = 0
+
 # mood
 var eventNeed:int = 0
 var lastEventType:int = -1
@@ -81,6 +90,21 @@ var mind:int = 0
 var lust:int = 0
  
 var monsterName:String = "tentacles"
+const MONSTER_NAMES = [
+	"Tentacles",
+	"Monster",
+	"Sprout",
+	"Viney",
+	"Bloom",
+	"Twine",
+	"Gropey",
+	"Hugs",
+	"Snugglethorn",
+	"Knotweed",
+	"Beast",
+	"N'Gorroth",
+	"Whispers",
+]
 
 func _init():
 	id = "Tentacles"
@@ -99,6 +123,10 @@ func getStartScene() -> String:
 
 func getPCViewDistance() -> float:
 	return 100.0
+
+func doNewDay():
+	clearEvent()
+	daysNormal += 1
 
 func isSmallOrNormal() -> bool:
 	return growStage in [STAGE_SMALL, STAGE_NORMAL]
@@ -137,8 +165,12 @@ func getActions(_loc:String) -> Array:
 		theActions.append(action("Rest", "Get some rest", "PSTentacles1EggInteract"))
 	if(_loc == LOC_BED && growStage == STAGE_TINY):
 		theActions.append(action("Rest", "Get some rest", "PSTentacles2SmallInteract"))
+	if(_loc == LOC_BED && growStage == STAGE_TINY_AFTERTEST):
+		theActions.append(action("Sleep", "Get some rest", "PSTentaclesTinySleep"))
 	if(_loc == LOC_FRIDGE):
 		theActions.append(action("Fridge", "Open the fridge", "PSTentaclesFridge"))
+	if(_loc == LOC_BED && growStage == STAGE_SMALL_ENDDAY):
+		theActions.append(action("Sleep", "Get some rest", "PSTentaclesSmallSleep"))
 	
 	return theActions
 
@@ -155,6 +187,16 @@ func doAction(_scene, _action:Array):
 	GM.main.runScene(_action[2], _action[3])
 
 func checkEvent(_scene, _loc:String) -> Array:
+	if(growStage == STAGE_SMALL):
+		if(GM.main.getTime() > 10*60*60):
+			return ["PSTentaclesSmallEndOfDay"]
+	
+	if(growStage == STAGE_NORMAL):
+		if(GM.main.getTime() > 10*60*60):
+			if(daysNormal >= 1):
+				return ["PSTentaclesEndingScene"]
+			return ["PSTentaclesNormalSleep"]
+	
 	if(isSmallOrNormal() && isAngry):
 		if(_loc == monsterLoc):
 			isAngry = false
@@ -218,7 +260,12 @@ func deleteIcons():
 	GM.world.deleteEntity("ps_scientist1")
 	GM.world.deleteEntity("ps_scientist2")
 
-func updateIcons():
+func getMonsterIcon():
+	if(growStage >= STAGE_NORMAL):
+		return IconTentacles
+	return IconTentaclesSmall
+
+func updateIcons(_force:bool = false):
 	GM.world.moveEntity("ps_scientist1", scientist1Loc)
 	GM.world.moveEntity("ps_scientist2", scientist2Loc)
 	if(growStage in [STAGE_EGG]):
@@ -227,15 +274,27 @@ func updateIcons():
 	else:
 		GM.world.deleteEntity("ps_egg")
 	
-	if(growStage in [STAGE_SMALL]):
+	#Nest
+	if(growStage >= STAGE_TINY):
 		if(!GM.world.hasEntity("ps_nest")):
 			GM.world.createEntity("ps_nest", IconEggNest, LOC_MIDDLE, true)
-		if(!GM.world.hasEntity("ps_small")):
-			GM.world.createEntity("ps_small", IconEgg, monsterLoc, true)
+	else:
+		GM.world.deleteEntity("ps_nest")
+	
+	#Tiny version
+	if(growStage in [STAGE_TINY, STAGE_TINY_AFTERTEST]):
+		if(!GM.world.hasEntity("ps_tiny") || _force):
+			GM.world.createEntity("ps_tiny", IconTentaclesTiny, monsterLoc, true)
+	else:
+		GM.world.deleteEntity("ps_tiny")
+	
+	#Small/Normal version
+	if(growStage in [STAGE_SMALL, STAGE_SMALL_ENDDAY, STAGE_NORMAL]):
+		if(!GM.world.hasEntity("ps_small") || _force):
+			GM.world.createEntity("ps_small", getMonsterIcon(), monsterLoc, true)
 		else:
 			GM.world.moveEntity("ps_small", monsterLoc, true)
 	else:
-		GM.world.deleteEntity("ps_nest")
 		GM.world.deleteEntity("ps_small")
 	
 	if(isSmallOrNormal()):
@@ -408,6 +467,16 @@ func clearEvent():
 	eventScene = ""
 	eventArgs = []
 	eventGiveupTimer = 0
+	isAngry = false
+
+func addMonsterNameButtons(_scene:SceneBase):
+	for theName in MONSTER_NAMES:
+		_scene.addButton(theName, "Pick this name!", "pickName", [theName])
+
+func setMonsterName(_n:String):
+	monsterName = _n
+func getMonsterName() -> String:
+	return monsterName
 
 func saveData() -> Dictionary:
 	return {}

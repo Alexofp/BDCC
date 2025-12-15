@@ -45,6 +45,10 @@ func callFuncWrapper(_command: String, _args: Array):
 		return str(Util.roundF(GM.main.getFlag("TaviModule.Ch6Corruption", 1.0)*100.0, 1))+"%"
 	if(_command == "jackiButt"):
 		return GlobalRegistry.getModule("JackiModule").getButtTightness()
+	if(_command == "psTentacles"):
+		if(GM.main.PS && GM.main.PS.has_method("getMonsterName")):
+			return GM.main.PS.getMonsterName()
+		return "tentacles"
 	
 	return "[color=red]!RUNTIME ERROR NO COMMAND FOUND "+_command+" "+str(_args)+"![/color]"
 	

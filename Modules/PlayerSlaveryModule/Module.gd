@@ -34,14 +34,20 @@ func _init():
 		"res://Modules/PlayerSlaveryModule/Tentacles/Intro/PSTentaclesEggIntro.gd",
 		"res://Modules/PlayerSlaveryModule/Tentacles/Intro/PSTentacles1EggInteract.gd",
 		"res://Modules/PlayerSlaveryModule/Tentacles/Intro/PSTentacles2SmallInteract.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Intro/PSTentaclesTinySleep.gd",
 		
 		"res://Modules/PlayerSlaveryModule/Tentacles/Generic/PSTentaclesFridge.gd",
-		
 		"res://Modules/PlayerSlaveryModule/Tentacles/Small/PSTentaclesWindowSmall.gd",
 		"res://Modules/PlayerSlaveryModule/Tentacles/Small/PSTentaclesAngrySmall.gd",
 		"res://Modules/PlayerSlaveryModule/Tentacles/Small/PSTentaclesFeedSmall.gd",
 		"res://Modules/PlayerSlaveryModule/Tentacles/Small/PSTentaclesLewdSmall.gd",
 		"res://Modules/PlayerSlaveryModule/Tentacles/Small/PSTentaclesPlaySmall.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Small/PSTentaclesSmallEndOfDay.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Small/PSTentaclesSmallSleep.gd",
+		
+		"res://Modules/PlayerSlaveryModule/Tentacles/Normal/PSTentaclesNormalSleep.gd",
+		
+		"res://Modules/PlayerSlaveryModule/Tentacles/Normal/PSTentaclesEndingScene.gd",
 		]
 	characters = [
 		"res://Modules/PlayerSlaveryModule/ShaftMiner/PSRicky.gd",
