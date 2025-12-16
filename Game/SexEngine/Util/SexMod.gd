@@ -11,3 +11,6 @@ const DomsStartNaked = "DomsStartNaked"
 
 const DomNoPullingOut = "domNoPullout"
 const MustUseCondoms = "mustUseCondoms"
+
+const DisableTFPills = "noTFPills"
+const NoViolence = "noViolence"

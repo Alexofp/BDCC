@@ -40,6 +40,8 @@ func getPossibleDrugsInfo(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 	var thedrugs:Array = []
 	if(_domInfo.getChar().isPlayer()):
 		for item in GM.pc.getInventory().getItemsWithTag(ItemTag.SexEngineDrug):
+			if(_sexEngine.disableTFPills && ItemTag.TFItem in item.getTags()):
+				continue
 			if(item.has_method("getSexEngineInfo")):
 				thedrugs.append({
 					id = item.id,
@@ -50,6 +52,8 @@ func getPossibleDrugsInfo(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 	
 	for itemID in GlobalRegistry.getItemIDsByTag(ItemTag.SexEngineDrug):
 		var item = GlobalRegistry.getItemRef(itemID)
+		if(_sexEngine.disableTFPills && ItemTag.TFItem in item.getTags()):
+			continue
 		if(item.has_method("getSexEngineInfo")):
 			thedrugs.append({
 				id = itemID,
@@ -62,6 +66,8 @@ func getPossibleCanApplyInfo(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subIn
 	var thedrugs:Array = []
 	for itemID in GlobalRegistry.getItemIDsByTag(ItemTag.SexEngineCanApply):
 		var item = GlobalRegistry.getItemRef(itemID)
+		if(_sexEngine.disableTFPills && ItemTag.TFItem in item.getTags()):
+			continue
 		if(item.has_method("getSexEngineInfo")):
 			thedrugs.append({
 				id = itemID,

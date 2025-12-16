@@ -25,6 +25,8 @@ var subMustGoUnconscious:bool = false
 var noDynamicJoiners:bool = false
 var domNoPullingOut:bool = false
 var mustUseCondoms:bool = false
+var disableTFPills:bool = false
+var noViolence:bool = false
 
 var pcAllowsDomAutonomy:bool = false
 var pcAllowsDynJoiners:bool = false
@@ -131,7 +133,10 @@ func initSexType(theSexType, args:Dictionary = {}):
 	if(args.has(SexMod.DomsStartNaked) && args[SexMod.DomsStartNaked]):
 		for domID in doms:
 			getDomInfo(domID).getChar().lustStateFullyUndress()
-		
+	if(args.has(SexMod.DisableTFPills)):
+		disableTFPills = args[SexMod.DisableTFPills]
+	if(args.has(SexMod.NoViolence)):
+		noViolence = args[SexMod.NoViolence]
 	if(sexType != null):
 		sexType.setSexEngine(self)
 		sexType.initArgs(args)
@@ -817,6 +822,8 @@ func getActionsForCharID(_charID:String, isForMenu:bool = false) -> Array:
 		
 		for activity in activities:
 			if(activity.hasEnded):
+				continue
+			if(noViolence && "Violence" in activity.activityCategory):
 				continue
 			var activityActions:Array = activity.getActionsForCharID(_charID)
 			for actionEntry in activityActions:
