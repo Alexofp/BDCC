@@ -627,7 +627,7 @@ func showDevCommentary(thetext):
 	devComLabel.bbcode_text = thetext
 
 func _on_DevComLabel_meta_clicked(meta):
-	var _ok = OS.shell_open(meta)
+	var _ok = Util.fixed_shell_open(meta)
 
 func isShowingDevCommentary():
 	return devCommentaryPanel.visible

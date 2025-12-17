@@ -207,4 +207,4 @@ func _on_ImportSaveDialog_file_selected(path: String):
 
 
 func _on_SavesButton_pressed():
-	var _ok = OS.shell_open(ProjectSettings.globalize_path("user://saves/"))
+	var _ok = Util.fixed_shell_open(ProjectSettings.globalize_path("user://saves/"))

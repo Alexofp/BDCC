@@ -348,7 +348,7 @@ func _on_ConfirmationDialog_confirmed():
 
 
 func _on_RichTextLabel_meta_clicked(meta):
-	var _ok = OS.shell_open(meta)
+	var _ok = Util.fixed_shell_open(meta)
 
 
 func _on_TestButton_pressed():
@@ -429,7 +429,7 @@ func _on_ModBrowser_closePressed():
 
 
 func _on_OpenModsFolder_pressed():
-	var _ok = OS.shell_open(ProjectSettings.globalize_path("user://mods"))
+	var _ok = Util.fixed_shell_open(ProjectSettings.globalize_path("user://mods"))
 
 func _input(event):
 	if(event.is_action_pressed("ui_down")):
@@ -538,7 +538,7 @@ func _on_BusyCloseButton_pressed():
 	busy_panel.visible = false
 
 func _on_BusyLabel_meta_clicked(meta):
-	var _ok = OS.shell_open(meta)
+	var _ok = Util.fixed_shell_open(meta)
 
 func _on_HTTPRequestMods_request_completed(_result: int, _response_code: int, _headers: PoolStringArray, _body: PoolByteArray):
 	if _result != HTTPRequest.RESULT_SUCCESS:

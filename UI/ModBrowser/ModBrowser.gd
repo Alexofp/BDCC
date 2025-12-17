@@ -197,7 +197,7 @@ func _on_CloseButton_pressed():
 
 
 func _on_RichTextLabel_meta_clicked(meta):
-	var _ok = OS.shell_open(meta)
+	var _ok = Util.fixed_shell_open(meta)
 
 
 func _on_ModSearch_text_changed(new_text: String):
