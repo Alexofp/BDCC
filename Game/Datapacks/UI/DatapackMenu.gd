@@ -178,7 +178,7 @@ func _on_DatapackFolderButton_pressed():
 	if(OS.get_name() == "Android"):
 		showAlert("Datapacks on android are loaded from \"Documents/BDCCMods/Datapacks\"\nCreate that folder if it doesn't exist.")
 	else:
-		var _ok = OS.shell_open(ProjectSettings.globalize_path("user://datapacks"))
+		var _ok = Util.fixed_shell_open(ProjectSettings.globalize_path("user://datapacks"))
 
 var datapackBrowserScene = preload("res://Game/Datapacks/UI/DatapackBrowser.tscn")
 func _on_DatapackBrowserButton_pressed():
@@ -196,10 +196,10 @@ func onMenuPopped():
 	reloadAndUpdatePacks()
 
 func _on_DatapackDescLabel_meta_clicked(meta):
-	var _ok = OS.shell_open(meta)
+	var _ok = Util.fixed_shell_open(meta)
 
 func _on_DatapackWikiButton_pressed():
-	var _ok = OS.shell_open("https://github.com/Alexofp/BDCC/wiki/Datapacks")
+	var _ok = Util.fixed_shell_open("https://github.com/Alexofp/BDCC/wiki/Datapacks")
 
 
 func _on_ExportDatapackButton_pressed():

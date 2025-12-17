@@ -196,7 +196,7 @@ func useTar():
 	Util.removeDirectory(newModFolder)
 	
 	if(!(OS.get_name() in ["Android", "iOS", "HTML5"])):
-		var _ok2 = OS.shell_open(ProjectSettings.globalize_path("user://exported_mods/"))
+		var _ok2 = Util.fixed_shell_open(ProjectSettings.globalize_path("user://exported_mods/"))
 	
 func gatherFiles():
 	var modName = "new_mod"
@@ -232,7 +232,7 @@ func gatherFiles():
 		directory.copy(file, newPath)
 	
 	if(!(OS.get_name() in ["Android", "iOS", "HTML5"])):
-		var _ok = OS.shell_open(ProjectSettings.globalize_path(newModFolder))
+		var _ok = Util.fixed_shell_open(ProjectSettings.globalize_path(newModFolder))
 	
 func makePCKFile():
 	var directory = Directory.new( )
@@ -259,7 +259,7 @@ func makePCKFile():
 	packer.flush()
 
 	if(!(OS.get_name() in ["Android", "iOS", "HTML5"])):
-		var _ok = OS.shell_open(ProjectSettings.globalize_path("user://exported_mods"))
+		var _ok = Util.fixed_shell_open(ProjectSettings.globalize_path("user://exported_mods"))
 
 
 func _on_Tree_multi_selected(_item, _column, _selected):
