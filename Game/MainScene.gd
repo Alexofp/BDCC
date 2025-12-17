@@ -1573,6 +1573,25 @@ func getDebugActions():
 			"args": [
 			],
 		},
+		{
+			"id": "becomeNPC",
+			"name": "Become NPC",
+			"args": [
+				{
+					"id": "npcID",
+					"name": "NPC ID",
+					"value": "pc",
+					"type": "smartlist",
+					"npc": true,
+				},
+				{
+					"id": "cnpcID",
+					"name": "Custom ID",
+					"value": "",
+					"type": "string",
+				},
+			],
+		},
 	]
 
 func doDebugAction(id, args = {}):
@@ -1742,7 +1761,7 @@ func doDebugAction(id, args = {}):
 			runScene("ChangeSkinScene", [args["cnpcID"], true])
 		else:
 			runScene("ChangeSkinScene", [args["npcID"], true])
-			
+	
 	if(id == "lactatePC"):
 		GM.pc.induceLactation()
 		GM.pc.getBodypart(BodypartSlot.Breasts).getFluidProduction().fillPercent(1.0)
@@ -1816,7 +1835,14 @@ func doDebugAction(id, args = {}):
 		GlobalRegistry.getModule("NpcSlaveryModule").makeSurePCHasSlaveSpace()
 		runScene("KidnapDynamicNpcScene", [dynamicCharacter.getID()])
 		# runScene("EnslaveDynamicNpcScene", [npcID])
-		
+	
+	if(id == "becomeNPC"):
+		if(args["cnpcID"] != ""):
+			consoleBecome(args["cnpcID"])
+		else:
+			consoleBecome(args["npcID"])
+	
+
 func consoleSetFlagBool(flagID, valuestr):
 	var value = false
 	if(valuestr in ["true", "TRUE", "True", "1"]):
