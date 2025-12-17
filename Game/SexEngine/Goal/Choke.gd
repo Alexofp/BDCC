@@ -7,7 +7,7 @@ func getVisibleName():
 	return "Choke sub"
 
 func isPossible(_sexEngine, _domInfo, _subInfo, _data):
-	if(_subInfo.isUnconscious()):
+	if(_sexEngine.noViolence || _subInfo.isUnconscious()):
 		return false
 	if(_domInfo.getChar().hasBoundArms() || _domInfo.getChar().hasBlockedHands()):
 		return false

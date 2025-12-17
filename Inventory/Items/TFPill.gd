@@ -138,6 +138,7 @@ func getTags():
 		#ItemTag.SoldByMedicalVendomat,
 		ItemTag.SexEngineDrug,
 		ItemTag.KeptAfterDrugDenRun,
+		ItemTag.TFItem,
 		]
 
 func getBuyAmount():
