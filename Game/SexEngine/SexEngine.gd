@@ -1705,6 +1705,8 @@ func saveData():
 		"noDynamicJoiners": noDynamicJoiners,
 		"domNoPullingOut": domNoPullingOut,
 		"mustUseCondoms": mustUseCondoms,
+		"disableTFPills": disableTFPills,
+		"noViolence": noViolence,
 	}
 	if(sexType != null):
 		data["sexTypeID"] = sexType.id
@@ -1746,6 +1748,8 @@ func loadData(data):
 	noDynamicJoiners = SAVE.loadVar(data, "noDynamicJoiners", false)
 	domNoPullingOut = SAVE.loadVar(data, "domNoPullingOut", false)
 	mustUseCondoms = SAVE.loadVar(data, "mustUseCondoms", false)
+	disableTFPills = SAVE.loadVar(data, "disableTFPills", false)
+	noViolence = SAVE.loadVar(data, "noViolence", false)
 	
 	var sexTypeID = SAVE.loadVar(data, "sexTypeID", SexType.DefaultSex)
 	var theSexType = GlobalRegistry.createSexType(sexTypeID)
