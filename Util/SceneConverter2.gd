@@ -330,8 +330,8 @@ func _on_Button_pressed():
 	result.append("")
 	
 	result.append("func _react(_action: String, _args):")
-	if(!runLines.empty()):
-		for line in runLines:
+	if(!reactLines.empty()):
+		for line in reactLines:
 			result.append("\t"+line)
 		result.append("")
 	result.append('\tif(_action == "endthescene"):')

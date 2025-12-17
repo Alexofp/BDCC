@@ -3,6 +3,7 @@ class_name PlayerSlaveryTentacles
 
 var interact1:String = "" #touch listen kick rub
 var interact2:String = ""
+var interact3:String = ""
 
 const STAGE_INTRO = 0
 const STAGE_EGG = 1

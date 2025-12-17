@@ -1,15 +1,16 @@
 extends SceneBase
 
-var statAnger:int = 0
-var statAgility:int = 0
-var statMind:int = 0
-var statLust:int = 0
+var statAnger = 0
+var statAgility = 0
+var statMind = 0
+var statLust = 0
 
 func _init():
 	sceneID = "PSTentacles1EggInteract"
 
 func _reactInit():
-	addCharacter(GM.main.PS.getTentaclesCharID())
+	#addCharacter(GM.main.PS.getTentaclesCharID())
+	pass
 
 func resolveCustomCharacterName(_charID):
 	if(_charID == "ten"):
@@ -111,6 +112,10 @@ func _run():
 		saynn("[say=sci2]Actually, the chance of it getting to us is statistically insignificant. We're isolated in a safe environment, behind multiple layers of reinforced materials. Even the air to your cell is circulated through a completely disconnected vent system.[/say]")
 
 		saynn("It's easy to do evil things if you have an evil fortress.")
+
+		saynn("[say=sci2]I would tell you about all of the advanced materials that were used to create this testing chamber.. but I doubt you would understand any of it. This information is just way too..[/say]")
+
+		saynn("This scientist suddenly gets shushed by another.")
 
 		saynn("[say=sci1]Go poke it already. We did some calculations, the egg is safe.[/say]")
 
@@ -293,49 +298,212 @@ func _run():
 		saynn("You pull the egg out of the fridge.. It's extremely cold to the touch.. and yet.. somehow it is still twitching from your touches. Fuck.")
 
 		addButton("Continue", "See what happens next", "gottaProvoke")
+	if(state == "2_lamp"):
+		saynn("You grab a lamp that was sitting in the corner of your cell and aim it directly at the egg!")
+
+		saynn("[say=pc]Will this be enough?[/say]")
+
+		saynn("[say=sci1]Worth a try.[/say]")
+
+		saynn("The lamp helps to see all the little veins that the egg has.. Being basked in light makes them pump.. whatever it is that they're pumping.. faster.")
+
+		saynn("[say=sci2]The process will take a few hours. We're gonna take a pause here.[/say]")
+
+		saynn("[say=sci1]And you can take a nap.[/say]")
+
+		saynn("[say=pc]A pause? You're gonna monitor this thing while I'm sleeping, right?[/say]")
+
+		saynn("You don't get an answer, the scientists are probably already enjoying their coffee.")
+
+		addButton("Sleep", "Go sleep!", "2lampSleep")
+	if(state == "2lampSleep"):
+		saynn("You take a nap.. the comfy bed helps avoid thinking about everything else.")
+
+		saynn("[say=sci1]Alright, we're back.[/say]")
+
+		saynn("[say=sci2]And it is time for the next test.[/say]")
+
+		saynn("You get off the bed and approach the egg.. It's hard to say.. but it looks like it casts a bigger shadow now.")
+
+		saynn("[say=pc]What is it now?[/say]")
+
+		saynn("[say=sci2]According to all the data that we have, the specimen is nearing its emergence point.[/say]")
+
+		saynn("[say=pc]Emergence?[/say]")
+
+		saynn("You hear a quiet sigh.")
+
+		saynn("[say=sci2]It's about to hatch.[/say]")
+
+		saynn("[say=pc]Really?[/say]")
+
+		saynn("[say=sci1]We have a controlled environment, you have nothing to worry about.[/say]")
+
+		saynn("These words only make you more worried.")
+
+		addButton("Continue", "See what happens next", "gottaProvoke")
+	if(state == "2_shower"):
+		aimCameraAndSetLocName("pstent_shower")
+		# (( egg shower anim?
+		saynn("Carefully, you lift the egg from its nest.. The thing is heavier than it looks.")
+
+		saynn("After that, you gently place it under the shower head.. and turn on the warm water.")
+
+		saynn("A stream of wetness begins streaming down the curves of the egg. There is no obvious reaction from it.. so maybe it's okay?")
+
+		saynn("[say=pc]That should warm it up.[/say]")
+
+		saynn("[say=sci1]Probably. Don't set the stream too strong.[/say]")
+
+		saynn("[say=pc]Or it might kill it?[/say]")
+
+		saynn("[say=sci1]No, the water bill.[/say]")
+
+		saynn("Of course, obviously.")
+
+		saynn("[say=sci2]You have earned a break, test subject. We will be back soon. You may rest for now.[/say]")
+
+		saynn("Well.. Time to try to take a nap then.")
+
+		addButton("Sleep", "Go sleep!", "2showerSleep")
+	if(state == "2showerSleep"):
+		aimCameraAndSetLocName("pstent_middle")
+		# (( anim egg
+		saynn("You take a nap.. the comfy bed helps avoid thinking about everything else.")
+
+		saynn("[say=sci1]Alright, we're back.[/say]")
+
+		saynn("[say=sci2]And it is time for the next test.[/say]")
+
+		saynn("You get off the bed and take the egg from under the running water.. it's hard to say but it feels heavier in your hands. You set it back in its nest.")
+
+		saynn("[say=pc]What is it now?[/say]")
+
+		saynn("[say=sci2]According to all the data that we have, the specimen is nearing its emergence point.[/say]")
+
+		saynn("[say=pc]Emergence?[/say]")
+
+		saynn("You hear a quiet sigh.")
+
+		saynn("[say=sci2]It's about to hatch.[/say]")
+
+		saynn("[say=pc]Really?[/say]")
+
+		saynn("[say=sci1]We have a controlled environment, you have nothing to worry about.[/say]")
+
+		saynn("These words only make you more worried.")
+
+		addButton("Continue", "See what happens next", "gottaProvoke")
+	if(state == "2_cuddle"):
+		# (( cuddle with egg anim??
+		aimCameraAndSetLocName("pstent_bed")
+		saynn("The egg is feeling so cold.. there is obviously only one solution to this!")
+
+		saynn("You wrap your arms around it and pick it up! A concerned voice instantly travels through the intercom.")
+
+		saynn("[say=sci1]What are you doing?[/say]")
+
+		saynn("[say=pc]I'm warming it up! With my body![/say]")
+
+		saynn("You walk up to your bed and lie down, the egg still in your arms.")
+
+		saynn("[say=sci1]..you really gonna do that?.. kh.. who's decision was it to pick {pc.him}?[/say]")
+
+		saynn("[say=sci2]Yours.[/say]")
+
+		saynn("[say=sci1]Well, you should have stopped me.[/say]")
+
+		saynn("[say=sci2]The price to usefulness ratio was the best.[/say]")
+
+		saynn("[say=sci1]But do you see what {pc.he} {pc.isAre} doing? {pc.he} {pc.isAre} hugging the fucking alien egg thing..[/say]")
+
+		saynn("[say=sci2]Well.. actually.. It's a good way to keep it warm.[/say]")
+
+		saynn("While they're busy yapping at each other, you're just busy cuddling the cute little egg..")
+
+		saynn("[say=sci1]Alright.. fine.. Do whatever, test subject. Cuddle it, hug it, hump it.. just keep it warm and safe. We will be back in a few hours.[/say]")
+
+		saynn("You nod and embrace the egg tighter.")
+
+		addButton("Sleep", "Sleep with the egg!", "2cuddleSleep")
+	if(state == "2cuddleSleep"):
+		aimCameraAndSetLocName("pstest_middle")
+		# (( egg anim
+		saynn("You enjoy the egg's company for a while.. until the intercom makes you snap out of your dreams.")
+
+		saynn("[say=sci1]Alright, we're back. You can put the egg down already.[/say]")
+
+		saynn("You yawn as you get off your bed and gently place the egg back in its nest.")
+
+		saynn("[say=sci2]And it is time for the next test.[/say]")
+
+		saynn("You get off the bed and take the egg from under the running water.. it's hard to say but it feels heavier in your hands. You set it back in its nest.")
+
+		saynn("[say=pc]What is it now?[/say]")
+
+		saynn("[say=sci2]According to all the data that we have, the specimen is nearing its emergence point.[/say]")
+
+		saynn("[say=pc]Emergence?[/say]")
+
+		saynn("You hear a quiet sigh.")
+
+		saynn("[say=sci2]It's about to hatch.[/say]")
+
+		saynn("[say=pc]Really?[/say]")
+
+		saynn("[say=sci1]We have a controlled environment, you have nothing to worry about.[/say]")
+
+		saynn("You feel a bit excited actually..")
+
+		addButton("Continue", "See what happens next", "gottaProvoke")
+	if(state == "gottaProvoke"):
+		# (( egg anim
+		aimCameraAndSetLocName("pstent_middle")
+		GM.pc.setLocation("pstent_middle")
+		saynn("[say=sci2]The egg is hatching.. but you might want to.. accelerate the process a bit.[/say]")
+
+		saynn("[say=pc]What do you mean?[/say]")
+
+		saynn("[say=sci2]Provoke it in some way.[/say]")
+
+		saynn("Sounds dangerous..")
+
+		addButton("Peel it open", "Carefully peel the outer layer off.. revealing what's inside", "3_peel")
+		addButton("Just observe", "You'd rather just let it do its thing", "3_watch")
+		addButton("Embrace it!", "Embrace the egg and use your warmth to accelerate the process", "3_embrace")
+		addButton("Hold it shut", "Do the opposite and hold the egg shut for as long as possible!", "3_holdshut")
+	if(state == "3_peel"):
+		saynn("Alright.. well.. time to help it do its thing.")
+
+		saynn("You get closer to the egg and begin to carefully peel off its outer layers..")
+
+		saynn("It takes some effort.. but once you get going, it becomes easier and easier.")
+
+		saynn("Your heart is beating in your chest.. you can feel the egg squirming under your touch..")
+
+		saynn("Eventually.. it happens..")
+
+		addButton("Continue", "See what happens next", "revealTentacles")
+	if(state == "revealTentacles"):
+		# (( Anim with tiny tentacles
+		addCharacter(_tentacles.getTentaclesCharID())
+		saynn("Three small, green tentacles slowly uncurl. They are slick and slimy, glistening in the light.")
+
+		saynn("You can see them wiggling softly in the air.. feeling the new world. There are no eyes or an obvious mouth.. it looks more like a.. fancy plant. Completely harmless.")
+
+		saynn("[say=sci1]So that's how it looks. Hm, a bit on the weak side.[/say]")
+
+		saynn("[say=sci2]Incredible.[/say]")
+
+		saynn("The tentacles feel the nest underneath next.. then they touch the cold concrete floor and scan the surroundings.")
+
+		saynn("UNIQUE TEXT HERE")
+
+		saynn("[say=sci2]Now, test subject, please allow it to rest. We will do further testing later.[/say]")
+
+		saynn("Well.. you're not sure how to feel. At least it's not some blood-hungry creature.")
+
 		addButton("Continue", "See what happens next", "endthescene")
-
-func _react(_action: String, _args):
-	var _tentacles:PlayerSlaveryTentacles = GM.main.PS
-	
-	if(_action in ["1_kick", "2_fridge", "3_holdshut"]):
-		statAnger += 1
-	if(_action in ["1_touch", "2_shower", "3_watch"]):
-		statAgility += 1
-	if(_action in ["1_listen", "2_aimlamp", "3_peel"]):
-		statMind += 1
-	if(_action in ["1_rub", "2_cuddle", "3_embrace"]):
-		statLust += 1
-	
-	if(_action == "2fridgeSleep"):
-		GM.main.StartNewDay()
-	
-	if(_action == "revealTentacles"):
-		var whichStat:int = getBiggestStat()
-		
-		if(whichStat < 0):
-			addMessage("NO BIGGEST STAT")
-		elif(whichStat == PlayerSlaveryTentacles.STAT_ANGER):
-			addMessage("ANGER INCREASE")
-		elif(whichStat == PlayerSlaveryTentacles.STAT_AGILITY):
-			addMessage("AGILITY INCREASE")
-		elif(whichStat == PlayerSlaveryTentacles.STAT_MIND):
-			addMessage("MIND INCREASE")
-		elif(whichStat == PlayerSlaveryTentacles.STAT_LUST):
-			addMessage("LUST INCREASE")
-			
-		if(whichStat > 0):
-			_tentacles.incStat(whichStat)
-		_tentacles.setStage(_tentacles.STAGE_TINY)
-	#if(_action == "guards_leave_egg"):
-	#	_tentacles.setStage(_tentacles.STAGE_EGG)
-	
-	if(_action == "endthescene"):
-		endScene()
-		return
-
-	setState(_action)
-
 func supportsShowingPawns() -> bool:
 	return true
 
@@ -369,20 +537,68 @@ func getBiggestStat() -> int:
 		return -1
 	
 	return biggestStat
+
+
+func _react(_action: String, _args):
+	var _tentacles:PlayerSlaveryTentacles = GM.main.PS
 	
+	if(_action in ["1_kick", "2_fridge", "3_holdshut"]):
+		statAnger += 1
+	if(_action in ["1_touch", "2_shower", "3_watch"]):
+		statAgility += 1
+	if(_action in ["1_listen", "2_aimlamp", "3_peel"]):
+		statMind += 1
+	if(_action in ["1_rub", "2_cuddle", "3_embrace"]):
+		statLust += 1
+
+	if(_action == "endthescene"):
+		endScene()
+		return
+
+	if(_action == "2fridgeSleep"):
+		GM.main.StartNewDay()
+
+	if(_action == "2lampSleep"):
+		GM.main.StartNewDay()
+
+	if(_action == "2showerSleep"):
+		GM.main.StartNewDay()
+
+	if(_action == "2cuddleSleep"):
+		GM.main.StartNewDay()
+
+	if(_action == "revealTentacles"):
+		var whichStat:int = getBiggestStat()
+		if(whichStat < 0):
+			addMessage("NO BIGGEST STAT")
+		elif(whichStat == PlayerSlaveryTentacles.STAT_ANGER):
+			addMessage("ANGER INCREASE")
+		elif(whichStat == PlayerSlaveryTentacles.STAT_AGILITY):
+			addMessage("AGILITY INCREASE")
+		elif(whichStat == PlayerSlaveryTentacles.STAT_MIND):
+			addMessage("MIND INCREASE")
+		elif(whichStat == PlayerSlaveryTentacles.STAT_LUST):
+			addMessage("LUST INCREASE")
+					
+		if(whichStat > 0):
+			_tentacles.incStat(whichStat)
+		_tentacles.setStage(_tentacles.STAGE_TINY)
+
+	setState(_action)
+
 func saveData():
 	var data = .saveData()
-	
+
 	data["statAnger"] = statAnger
 	data["statAgility"] = statAgility
 	data["statMind"] = statMind
 	data["statLust"] = statLust
-	
+
 	return data
-	
+
 func loadData(data):
 	.loadData(data)
-	
+
 	statAnger = SAVE.loadVar(data, "statAnger", 0)
 	statAgility = SAVE.loadVar(data, "statAgility", 0)
 	statMind = SAVE.loadVar(data, "statMind", 0)
