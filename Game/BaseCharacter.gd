@@ -1720,6 +1720,11 @@ func softUpdateDoll(doll: Doll3D):
 	else:
 		doll.setState("legstype", "")
 	updateLeaking(doll)
+		
+	if(bodypartHasTrait(BodypartSlot.Arms, PartTrait.ArmsBuff)):
+		doll.setState("armstype", "buff")
+	else:
+		doll.setState("armstype", "")
 	
 	if(isReadyToPenetrate()):
 		doll.setState("cock", "")
