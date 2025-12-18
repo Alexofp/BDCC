@@ -4,6 +4,7 @@ var statAnger = 0
 var statAgility = 0
 var statMind = 0
 var statLust = 0
+var whichStat = -1
 
 func _init():
 	sceneID = "PSTentacles1EggInteract"
@@ -479,9 +480,29 @@ func _run():
 
 		saynn("It takes some effort.. but once you get going, it becomes easier and easier.")
 
-		saynn("Your heart is beating in your chest.. you can feel the egg squirming under your touch..")
+		saynn("Your heart is beating in your chest.. you can feel the egg squirming under your touch.. You can hear something.. some kind of noise that's echoing around the cell..")
 
 		saynn("Eventually.. it happens..")
+
+		addButton("Continue", "See what happens next", "revealTentacles")
+	if(state == "3_watch"):
+		saynn("The scientists said that the process is already happening.. so you might as well just sit and watch.")
+
+		saynn("It takes some time.. but eventually it begins..")
+
+		saynn("A thin, hairline crack appears on the surface. The egg begins to shake, just a slight tremble at first.. But the shaking grows stronger, making it rock gently on the floor. A soft, wet crackling noise comes from within..")
+
+		saynn("There is a moment of quiet. Then, all at once, the egg breaks open in two halves..")
+
+		addButton("Continue", "See what happens next", "revealTentacles")
+	if(state == "3_embrace"):
+		saynn("Whatever it is that's inside, you are gonna give it the best welcome possible!")
+
+		saynn("Without any hesitation, you wrap your arms around the egg, pulling it close against your chest.")
+
+		saynn("As you hold it tight, the egg begins to shake. A deep, low sound comes from inside, like a soft rumble.")
+
+		saynn("Then, slowly, the egg begins to open up..")
 
 		addButton("Continue", "See what happens next", "revealTentacles")
 	if(state == "revealTentacles"):
@@ -493,11 +514,94 @@ func _run():
 
 		saynn("[say=sci1]So that's how it looks. Hm, a bit on the weak side.[/say]")
 
-		saynn("[say=sci2]Incredible.[/say]")
+		saynn("[say=sci2]Incredible. I think it looks kinda cute.[/say]")
 
 		saynn("The tentacles feel the nest underneath next.. then they touch the cold concrete floor and scan the surroundings.")
 
-		saynn("UNIQUE TEXT HERE")
+		if (whichStat == _tentacles.STAT_ANGER):
+			saynn("Eventually, they detect you.. and instantly whip your arm away. Luckily, it didn't hurt much at all.")
+
+			saynn("All at once, the tentacles coil back, stiff and sharp. Their soft tips point straight at you.")
+
+			saynn("[say=pc]What?[/say]")
+
+			saynn("[say=sci1]Looks like it's angry at you.[/say]")
+
+			saynn("[say=pc]What did I do?[/say]")
+
+			saynn("The tentacles vibrate ever so slightly.. like a cobra's tail would.")
+
+			saynn("[say=pc]I can easily rip you apart, you know that?[/say]")
+
+			saynn("[say=sci2]A premature termination of such a specimen is gonna bring severe consequences![/say]")
+
+			saynn("Fine.. looks like you will have to live with it. As you calm down.. so does the little plant-like monster.")
+
+		elif (whichStat == _tentacles.STAT_AGILITY):
+			saynn("Eventually, they detect you.. one of the tentacles gracefully waves towards your direction.")
+
+			saynn("[say=pc]Uh.. hi?[/say]")
+
+			saynn("The same tentacle reaches out.. and pokes you hand.")
+
+			saynn("[say=pc]You're not gonna kill me?[/say]")
+
+			saynn("To be fair, it probably can't.. even if it tried.")
+
+			saynn("You decide to offer it your hand.. and watch as it uses another tentacle to wrap it around your wrist.")
+
+			saynn("[say=sci2]Even though it just hatched, the specimen already shows remarkable levels of agility.[/say]")
+
+			saynn("[say=sci1]Interesting.[/say]")
+
+			saynn("You gently shake the tentacle off. At least it seems friendly enough.")
+
+		elif (whichStat == _tentacles.STAT_MIND):
+			saynn("They turn toward you. There is no obvious hostility.. no anger.. Only a deep, unsettling stillness. It's like it studies you.")
+
+			saynn("You feel something. Not a touch, but.. a pressure. A faint, cool sensation that washes all over you. You blink, and for a split second, your vision gets all blurry.. You don't understand what's happening..")
+
+			saynn("All the while the tentacles just twitch gently, in perfect unison.")
+
+			saynn("Eventually, the weird feeling fades away. You blink a few more times.")
+
+			saynn("[say=sci1]Why is it not doing anything?[/say]")
+
+			saynn("[say=sci2]Perhaps it doesn't want to. Hm.. I'm detecting some interference.. Never mind, it's fine now.[/say]")
+
+			saynn("You silently stare at the tentacles.")
+
+		elif (whichStat == _tentacles.STAT_LUST):
+			saynn("Eventually, the three slick, green tentacles detect you.. They sway gently in your direction. A soft, sweet smell fills the air around them, like warm honey. From their glistening tips, a clear, shimmering fluid begins to bead and drip, falling in slow, heavy drops.")
+
+			saynn("They brush against the air near you, then lightly tap against your arm. The touch is cool and slick, but it lingers. They slide along your skin with a curious, tender slowness, leaving behind a faint, tingling coolness and a trail of that sweet scent.")
+
+			saynn("One tentacle curls loosely around your wrist, not to hold you, but simply to rest there, pulsing softly. The creature makes a low, contented hum, a sound that vibrates through its tendrils.")
+
+			saynn("[say=sci1]It looks like it likes you.[/say]")
+
+			saynn("[say=pc]It sure does..[/say]")
+
+			saynn("You let it play with your arm for a bit longer.. but the scientists cut your fun time short.")
+
+		else:
+			saynn("Eventually, they detect you.. one of the tentacles awkwardly waves towards your direction.")
+
+			saynn("[say=pc]Uh.. hi?[/say]")
+
+			saynn("The same tentacle tries to reach out.. but misses your arm.")
+
+			saynn("[say=pc]You're not gonna kill me?[/say]")
+
+			saynn("To be fair, it probably can't.. even if it tried.")
+
+			saynn("You decide to offer it your hand.. and watch as it tries to use one of its tendrils to wrap around your wrist. It struggles a bit so you help it.")
+
+			saynn("[say=sci1]It seems to be quite weak.[/say]")
+
+			saynn("[say=sci2]Indeed, perhaps it didn't get the full treatment that it needed during incubation. Or maybe it got the wrong treatment. Still, it should be able to catch up, assuming no further disruptions.[/say]")
+
+			saynn("You gently shake the tentacle off. At least it seems friendly enough.")
 
 		saynn("[say=sci2]Now, test subject, please allow it to rest. We will do further testing later.[/say]")
 
@@ -546,7 +650,7 @@ func _react(_action: String, _args):
 		statAnger += 1
 	if(_action in ["1_touch", "2_shower", "3_watch"]):
 		statAgility += 1
-	if(_action in ["1_listen", "2_aimlamp", "3_peel"]):
+	if(_action in ["1_listen", "2_lamp", "3_peel"]):
 		statMind += 1
 	if(_action in ["1_rub", "2_cuddle", "3_embrace"]):
 		statLust += 1
@@ -555,31 +659,56 @@ func _react(_action: String, _args):
 		endScene()
 		return
 
+	if(_action == "1_touch"):
+		_tentacles.interact1 = "touch"
+
+	if(_action == "1_listen"):
+		_tentacles.interact1 = "listen"
+
+	if(_action == "1_kick"):
+		_tentacles.interact1 = "kick"
+
+	if(_action == "1_rub"):
+		_tentacles.interact1 = "rub"
+
+	if(_action == "2_fridge"):
+		_tentacles.interact2 = "fridge"
+
+	if(_action == "2_lamp"):
+		_tentacles.interact2 = "lamp"
+
+	if(_action == "2_shower"):
+		_tentacles.interact2 = "shower"
+
+	if(_action == "2_cuddle"):
+		_tentacles.interact2 = "cuddle"
+
 	if(_action == "2fridgeSleep"):
-		GM.main.StartNewDay()
+		GM.main.startNewDay()
 
 	if(_action == "2lampSleep"):
-		GM.main.StartNewDay()
+		GM.main.startNewDay()
 
 	if(_action == "2showerSleep"):
-		GM.main.StartNewDay()
+		GM.main.startNewDay()
 
 	if(_action == "2cuddleSleep"):
-		GM.main.StartNewDay()
+		GM.main.startNewDay()
+
+	if(_action == "3_peel"):
+		_tentacles.interact3 = "peel"
+
+	if(_action == "3_watch"):
+		_tentacles.interact3 = "watch"
+
+	if(_action == "3_embrace"):
+		_tentacles.interact3 = "embrace"
+
+	if(_action == "3_holdshut"):
+		_tentacles.interact3 = "holdshut"
 
 	if(_action == "revealTentacles"):
-		var whichStat:int = getBiggestStat()
-		if(whichStat < 0):
-			addMessage("NO BIGGEST STAT")
-		elif(whichStat == PlayerSlaveryTentacles.STAT_ANGER):
-			addMessage("ANGER INCREASE")
-		elif(whichStat == PlayerSlaveryTentacles.STAT_AGILITY):
-			addMessage("AGILITY INCREASE")
-		elif(whichStat == PlayerSlaveryTentacles.STAT_MIND):
-			addMessage("MIND INCREASE")
-		elif(whichStat == PlayerSlaveryTentacles.STAT_LUST):
-			addMessage("LUST INCREASE")
-					
+		whichStat = getBiggestStat()		
 		if(whichStat > 0):
 			_tentacles.incStat(whichStat)
 		_tentacles.setStage(_tentacles.STAGE_TINY)
@@ -593,6 +722,7 @@ func saveData():
 	data["statAgility"] = statAgility
 	data["statMind"] = statMind
 	data["statLust"] = statLust
+	data["whichStat"] = whichStat
 
 	return data
 
@@ -603,3 +733,4 @@ func loadData(data):
 	statAgility = SAVE.loadVar(data, "statAgility", 0)
 	statMind = SAVE.loadVar(data, "statMind", 0)
 	statLust = SAVE.loadVar(data, "statLust", 0)
+	whichStat = SAVE.loadVar(data, "whichStat", -1)

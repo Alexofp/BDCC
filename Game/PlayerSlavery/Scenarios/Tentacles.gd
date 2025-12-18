@@ -2,8 +2,8 @@ extends PlayerSlaveryBase
 class_name PlayerSlaveryTentacles
 
 var interact1:String = "" #touch listen kick rub
-var interact2:String = ""
-var interact3:String = ""
+var interact2:String = "" #fridge shower lamp cuddle
+var interact3:String = "" #holdshut watch peel embrace
 
 const STAGE_INTRO = 0
 const STAGE_EGG = 1
@@ -439,17 +439,36 @@ func getStat(_statID:int) -> int:
 		return lust
 	return 0
 
-func incStat(_statID:int) -> bool:
+func getStatName(_statID:int) -> String:
+	if(_statID == STAT_ANGER):
+		return "Anger"
+	if(_statID == STAT_AGILITY):
+		return "Agility"
+	if(_statID == STAT_MIND):
+		return "Mind" # Also Psychic bond
+	if(_statID == STAT_LUST):
+		return "Lust"
+	return "ERROR?"
+
+#TODO: Change showMessage to false before ship
+func incStat(_statID:int, showMessage:bool = true) -> bool:
+	if(_statID <= 0):
+		return false
 	var theStat := getStat(_statID)
 	var theOldStat := theStat
 	theStat += 1
 	if(theStat < 0):
 		theStat = 0
-	if(theStat > 5):
-		theStat = 5
+	if(growStage <= STAGE_NORMAL):
+		if(theStat > 5):
+			theStat = 5
 	setStat(_statID, theStat)
 	if(theStat == theOldStat):
 		return false
+	
+	if(showMessage):
+		GM.main.addMessage(getMonsterName()+"'s "+getStatName(_statID)+" got increased!")
+	
 	return true
 
 func getTentaclesCharID() -> String:
