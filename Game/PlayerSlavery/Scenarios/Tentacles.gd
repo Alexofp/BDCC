@@ -5,6 +5,10 @@ var interact1:String = "" #touch listen kick rub
 var interact2:String = "" #fridge shower lamp cuddle
 var interact3:String = "" #holdshut watch peel embrace
 
+var interactTiny1:String = "" #chicken meat milk broc
+var interactTiny2:String = "" #
+var interactTiny3:String = "" #
+
 const STAGE_INTRO = 0
 const STAGE_EGG = 1
 const STAGE_TINY = 2
