@@ -2168,7 +2168,7 @@ func cumInItem(theItem, sourceType = FluidSource.Penis, amountToTransfer = 1.0):
 				theItem.markLastUser(getName())
 			var returnValue = penis.getFluids().transferTo(theItem, amountToTransfer)
 			return returnValue
-	elif sourceType == FluidSource.Pissing:
+	elif(sourceType == FluidSource.Pissing):
 		if(theItem.has_method("markLastUser")):
 			theItem.markLastUser(getName())
 		var returnValue = peeProduction.getFluids().transferTo(theItem, amountToTransfer)

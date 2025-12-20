@@ -9,18 +9,18 @@ func _init(character):
 func getCapacity() -> float:
     var mult: float = 1.0
     var pc = getCharacter()
-    if pc != null:
+    if(pc != null):
         mult += pc.getCustomAttribute(BuffAttribute.PissCapacityMult)
 
     return 500 * mult
 
 func getProductionSpeedPerHour() -> float:
-    if !shouldProduce():
+    if(!shouldProduce()):
         return 0.0
 
     var mult = 1.0
     var pc = getCharacter()
-    if pc != null:
+    if(pc != null):
         mult += pc.getCustomAttribute(BuffAttribute.PissProductionMult)
     
     # The variance is arbitrary. It just felt weird always producing
