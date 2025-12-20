@@ -323,6 +323,7 @@ func processTime(_secondsPassed):
 		if(bodypart == null || !is_instance_valid(bodypart)):
 			continue
 		bodypart.processTime(_secondsPassed)
+	peeProduction.processTime(_secondsPassed)
 	
 	processTimedBuffs(_secondsPassed)
 	

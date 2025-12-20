@@ -245,6 +245,8 @@ func processTime(_secondsPassed):
 		if(bodypart == null || !is_instance_valid(bodypart)):
 			continue
 		bodypart.processTime(_secondsPassed)
+
+	peeProduction.processTime(_secondsPassed)
 	
 	if(intoxication > 0.0):
 		intoxication -= _secondsPassed / 30000.0
