@@ -31,5 +31,8 @@ func getProductionSpeedPerHour() -> float:
 func getFluidSource():
     return FluidSource.Pissing
 
+func getFluidType():
+    return "Piss"
+
 func getCharacter():
     return pisser
