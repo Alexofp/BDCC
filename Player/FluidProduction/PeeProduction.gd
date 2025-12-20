@@ -26,7 +26,6 @@ func getProductionSpeedPerHour() -> float:
     # The variance is arbitrary. It just felt weird always producing
     # 100ml per hour.
     var produced = (100 + RNG.randf_range(-30, 30)) * mult
-    print("produced " + str(produced) + " piss")
     return produced
 
 func getFluidSource():
