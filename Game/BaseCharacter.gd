@@ -1063,6 +1063,9 @@ func cummedInBodypartByAdvanced(bodypartSlot, characterID, advancedData:Dictiona
 		var fluids = strapon.getFluids()
 		if(fluids != null):
 			resultAmount = fluids.transferTo(thebodypart, amountToTransfer, 0.0, getID())
+	elif(sourceType == FluidSource.Pissing):
+		var thebodypart = getBodypart(bodypartSlot)
+		ch.peeProduction.getFluids().transferTo(thebodypart, amountToTransfer, 100.0)
 	else:
 		var thebodypart = getBodypart(bodypartSlot)
 		resultAmount = ch.getFluidAmount(sourceType) * amountToTransfer
