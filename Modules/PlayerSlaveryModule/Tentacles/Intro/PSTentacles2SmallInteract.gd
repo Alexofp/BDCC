@@ -223,6 +223,130 @@ func _run():
 		saynn("[say=sci1]Are you done feeding it? We have work to do.[/say]")
 
 		addButton("Continue", "See what happens next", "needMusic")
+	if(state == "needMusic"):
+		# (( tiny idle anim
+		aimCameraAndSetLocName("pstent_middle")
+		saynn("[say=sci2]We wanna test how the specimen will react to a different atmosphere.[/say]")
+
+		saynn("[say=pc]You mean void? Pretty sure it will kill it.[/say]")
+
+		saynn("[say=sci2]No.[/say]")
+
+		saynn("An armed guard steps into your cell and hands you something.")
+
+		saynn("[say=sci2]This is a device that is capable of interacting with your cell's speakers and lights.[/say]")
+
+		saynn("You take a closer look.. indeed.. It looks like a remote with a few buttons on it.")
+
+		saynn("[say=sci2]The specimen possesses no obvious eyes or ears. We wanna see if it can still somehow see or hear.[/say]")
+
+		if (_tentacles.interact1 == "listen"):
+			saynn("[say=pc]Didn't I tell you that it can hear me already?[/say]")
+
+			saynn("[say=sci1]First of all, it was an egg. But most importantly, you have no science degree, why would we listen to your baseless assumptions?[/say]")
+
+			saynn("You roll your eyes.")
+
+		saynn("What music do you wanna play for the tentacles?")
+
+		addButton("Heavy metal", "Play some heavy metal", "2_metal")
+		addButton("Soothing ambient", "Play some very calming ambient", "2_ambient")
+		addButton("Drum'n'Bass", "Play some electronic music", "2_dnb")
+		addButton("Smooth jazz", "Play something smooth and intimate", "2_jazz")
+	if(state == "2_metal"):
+		# ((tiny dance anim?
+		saynn("You choose one of the heavy metal music tracks.. and suddenly the whole cell lights up red.. almost like it's an emergency.")
+
+		saynn("The first thunderous guitar chord hits like a physical blow, a wave of pure noise that vibrates the air in your chest.")
+
+		saynn("The small creature recoils as if struck. Its three tentacles jerk back, coiling into tight, defensive knots. The raw, screaming vocals rip through the room while the red lights begin to flash.")
+
+		saynn("Eventually, the tentacles uncurl themselves and adapt to the insane music. They begin to thrash, whipping against the concrete in a frantic, angry rhythm that matches the pounding drums.")
+
+		saynn("[say=sci2]That's.. certainly a choice.[/say]")
+
+		saynn("[say=sci1]What?[/say]")
+
+		saynn("[say=sci2]I SAID.. IT'S A CHOICE.[/say]")
+
+		saynn("[say=sci1]I still can't hear you.[/say]")
+
+		saynn("You let the track play out.. hoping that it would end faster than you losing your hearing. The tentacles seem to continue thrashing even after the last chord.. looks like you're got them into the right mood.")
+
+		saynn("[say=sci2]Finally.. peace..[/say]")
+
+		saynn("[say=sci1]Did this prove anything?[/say]")
+
+		saynn("[say=sci2]Well.. it can hear. But maybe it was just getting startled by the whole cell vibrating.[/say]")
+
+		saynn("[say=sci1]I regret letting this test subject choose anything.[/say]")
+
+		addButton("Continue", "See what happens next", "timeToTest")
+	if(state == "2_ambient"):
+		# ((tiny slow dance anim?
+		saynn("You find some smooth, soothing ambient music.. and decide to turn it on.")
+
+		saynn("The first soft, calming note drifts through the air of the cell. The harsh lab lights seem to be switching towards a warm hue.")
+
+		saynn("The three tentacles stay still for a bit, almost like they're listening.. After that, they simply begin to sway, a slow, graceful dance in time with the peaceful rhythm.")
+
+		saynn("Their movements become purposeful, smooth. The slick surfaces glisten as they weave intricate, gentle patterns in the air, tracing the shapes of the melodies they hear. Their tips move with a curiosity, exploring the vibrations in the air itself.")
+
+		saynn("A soft, harmonious hum, almost below hearing, resonates from their core, harmonizing with something inside you..")
+
+		saynn("[say=sci2]The test proves their hearing ability. Interesting. Makes me wonder why would a plant-like specimen evolve such a trait.[/say]")
+
+		saynn("[say=sci1]This doesn't matter to us right now.[/say]")
+
+		saynn("Eventually, the track ends.. and the cell's lighting returns back to normal.")
+
+		addButton("Continue", "See what happens next", "timeToTest")
+	if(state == "2_dnb"):
+		# ((tiny dance anim?
+		saynn("You see a drum'n'bass option.. and decide to pick it! The cell's lighting gets all dim..")
+
+		saynn("The first sound that fills the room is a precise thump-thump-thump of a deep drum. It's followed instantly by a fast, intricate pattern of sharp, electronic hi-hats, each one spawning a little flash of light. The sound is rapid, clean, and full of energy.")
+
+		saynn("The plant freezes for some time.. Then, a twitch. A single green tentacle jerks in time with the next bass hit. Another joins it, tapping the air.")
+
+		saynn("Suddenly, it's moving. The three tentacles aren't just randomly thrashing.. It feels like they're following the melody. They curl and weave around each other in a blur of a dance, moving so fast they almost seem to leave after-images in the flashing light.")
+
+		saynn("They vibrate with the sub-bass, whip with the snares, and slice precise patterns to the rapid percussion. It's learning the beat and is clearly trying to match it.. And you do too, the music is just begging for you to move your butt in tact with it..")
+
+		saynn("[say=sci2]Fascinating reaction. The specimen is extremely energetic.[/say]")
+
+		saynn("[say=pc]It's got good taste in music.[/say]")
+
+		saynn("Eventually, the track ends.. and the cell's lighting returns back to normal.")
+
+		addButton("Continue", "See what happens next", "timeToTest")
+	if(state == "2_jazz"):
+		# ((tiny slow dance anim?
+		saynn("You pick an option that you like the most..")
+
+		saynn("[say=sci2]Deploying smooth jazz.[/say]")
+
+		saynn("A moment later, the cell is bathed in a soft, warm light. A gentle bassline begins to thump, slow and deep as a heartbeat. A smooth saxophone winds its way through the air, lazy and sweet like honey.")
+
+		saynn("The three tentacles pick up on the melody and begin their slow, hypnotic sway. They follow the curl of the saxophone's notes and shine under the intimate glow.")
+
+		saynn("One tentacle extends toward you, not to strike, but to dance. It brushes the air just inches from your ankle, inviting you to join. Another curls loosely around its own length, caressing itself in time with the bass.")
+
+		saynn("[say=sci2]Fascinating reaction.[/say]")
+
+		saynn("Eventually, the track ends.. and the cell's lighting returns back to normal.")
+
+		addButton("Continue", "See what happens next", "timeToTest")
+	if(state == "timeToTest"):
+		# (( tiny idle anim
+		saynn("[say=sci2]We don't have much time before our break so let's be quick.[/say]")
+
+		saynn("The doors to your cell open.. revealing a few armed guards who bring in some things.")
+
+		saynn("[say=sci2]Here are a few tests you could do. You may pick one of them and see if the specimen will complete it.[/say]")
+
+		saynn("How do you wanna test the tentacles?")
+
 func supportsShowingPawns() -> bool:
 	return true
 
@@ -288,6 +412,18 @@ func _react(_action: String, _args):
 
 	if(_action == "1_broc"):
 		_tentacles.interactTiny1 = "broc"
+
+	if(_action == "2_metal"):
+		_tentacles.interactTiny2 = "metal"
+
+	if(_action == "2_ambient"):
+		_tentacles.interactTiny2 = "ambient"
+
+	if(_action == "2_dnb"):
+		_tentacles.interactTiny2 = "dnb"
+
+	if(_action == "2_jazz"):
+		_tentacles.interactTiny2 = "jazz"
 
 	setState(_action)
 

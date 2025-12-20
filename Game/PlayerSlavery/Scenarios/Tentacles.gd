@@ -6,7 +6,7 @@ var interact2:String = "" #fridge shower lamp cuddle
 var interact3:String = "" #holdshut watch peel embrace
 
 var interactTiny1:String = "" #chicken meat milk broc
-var interactTiny2:String = "" #
+var interactTiny2:String = "" #metal ambient dnb jazz
 var interactTiny3:String = "" #
 
 const STAGE_INTRO = 0
