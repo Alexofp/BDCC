@@ -7,7 +7,7 @@ var interact3:String = "" #holdshut watch peel embrace
 
 var interactTiny1:String = "" #chicken meat milk broc
 var interactTiny2:String = "" #metal ambient dnb jazz
-var interactTiny3:String = "" #
+var interactTiny3:String = "" #puzzle toy ladder onahole
 
 const STAGE_INTRO = 0
 const STAGE_EGG = 1

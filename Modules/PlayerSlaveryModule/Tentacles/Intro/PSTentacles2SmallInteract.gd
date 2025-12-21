@@ -347,6 +347,156 @@ func _run():
 
 		saynn("How do you wanna test the tentacles?")
 
+		addButton("Puzzle", "Offer the tentacles a logic puzzle", "3_puzzle")
+		addButton("Evil robot", "Give it an evil-looking robot toy to play with", "3_toy")
+		addButton("Small ladder", "Let the tentacles climb a small ladder", "3_ladder")
+		addButton("Onahole", "Give it a sextoy and see what it will do with it", "3_onahole")
+	if(state == "3_puzzle"):
+		saynn("One of the things that were brought by guards seems to be a logic puzzle.. It looks like a box with differently-shaped holes in it.. square, circle, triangle and some others. And there are also objects of the same shapes that you are supposed to push through these holes.")
+
+		saynn("[say=pc]Alright.. Should be simple enough. Try to figure out what to do.[/say]")
+
+		saynn("You offer this box and all the other objects to the tentacles.")
+
+		saynn("At first, they just poke it.. But then one of the tentacles wraps around a cube and curiously lifts it, feeling its weight. Then it lifts the other objects as well, one by one.")
+
+		saynn("After trying every object, the monster decides to bonk the big box with a small cube!")
+
+		saynn("[say=pc]Nope, try again.[/say]")
+
+		saynn("It bonks the box again.. but now it keeps sliding the cube along the top surface.. back and forth for some time.. until the cube finds a correctly-shaped hole and falls through it.")
+
+		saynn("[say=pc]Good job.[/say]")
+
+		saynn("The tentacles grab a second object.. a cylinder.. and start doing the same thing, grinding the object across the surface with all the holes.. This time it doesn't get so lucky because it's holding the cylinder the wrong way.")
+
+		saynn("Eventually it gives up and throws the cylinder away.")
+
+		saynn("[say=sci1]Looks like it failed.[/say]")
+
+		saynn("[say=pc]It did one![/say]")
+
+		saynn("[say=sci2]The specimen does seem to possess the ability to do basic logic puzzles. Further training might improve the results.[/say]")
+
+		saynn("[say=sci1]It's just brute-forcing the puzzle, there is no logic here, it's a plant. And so it's as dumb as any plant.[/say]")
+
+		saynn("You furrow your brows.. but then you hear another object finding its hole. The triangle-shaped one.")
+
+		saynn("[say=pc]See?[/say]")
+
+		saynn("You really wanna pat the tentacles.. but you're not sure how.")
+
+		saynn("[say=sci2]Despite being plant-based, it seems to possess a lot of the same traits as we do. Learning is one of them. At least that is my current theory.[/say]")
+
+		saynn("[say=sci1]I will need to see more than theory.[/say]")
+
+		saynn("You put the box away.")
+
+		addButton("Continue", "See what happens next", "afterAll")
+	if(state == "3_toy"):
+		saynn("One of the things that were brought is a little humanoid robot.. It looks like it has cool red armor with a slick but also slightly intimidating design. The helmet has 4 robotic eyes.. and its hand is holding a weapon.")
+
+		saynn("[say=pc]Isn't that a toy?[/say]")
+
+		saynn("[say=sci1]It's more than a toy! Watch.[/say]")
+
+		saynn("The robot's systems kick into life.. making it stand up. The 4 robotic eyes light up with a scary green color.")
+
+		saynn("[say=sci2]Full remote control. Composite materials that mimic the ones used in the real space rigs. Advanced gyroscopes and motors that allow for high-frequency stabilization and locomotion. 4 cameras attached to a bluespace receiver, allowing for near-infinite precision and range of operation. A battery pack that will last you at least a week. Completed with a small 5 to 1 replica of an AlphaCorp standard issue laser rifle.[/say]")
+
+		saynn("You shrug. The tentacles don't seem to be very interested in the robot either, even when it walks past it a few times.")
+
+		saynn("[say=pc]Fancy toy, sure.[/say]")
+
+		saynn("[say=sci1]I will show you, fancy.[/say]")
+
+		saynn("Suddenly, the robot raises its laser rifle and aims it at the tentacle monster.")
+
+		saynn("[say=pc]Hey![/say]")
+
+		saynn("Before you can do anything, a thin, searing bolt of red energy flashes through the air and strikes the center mass of the tentacle monster.")
+
+		saynn("The effect is instant. A pained, sizzling sound fills the air, and the smell of burnt, sweet plant matter. The three green tentacles snap straight out, throbbing with shock and agony.")
+
+		saynn("Then, only a few moments later, they act..")
+
+		saynn("One tentacle whips forward, wrapping around the rifle's barrel with a crushing grip. You're momentarily deafened by a sharp crack of composite materials breaking.. until the robot's weapon is ripped from its hand, sparks spraying from its ruined housing.")
+
+		saynn("The other two tentacles strike like angry snakes. They wrap around the robot's legs and yank hard. The advanced gyroscopes whine in protest.. until they fail. The robot crashes onto its back with a heavy metallic thud.")
+
+		saynn("It tries to push itself up, its four green eyes flashing.. but it doesn't get the chance. All three tentacles coil around its torso and neck in a furious, squeezing embrace. What comes next is a sickening screech of tearing metal and a final, spectacular shower of white sparks.. until the robot's head gets violently ripped from its body.")
+
+		saynn("The headless body goes limp. The tentacles, slick with robot fluid and glowing with fury, hold the spoils of war for a few seconds.. before just tossing the head aside..")
+
+		saynn("[say=sci2]Ooh.. wow..[/say]")
+
+		saynn("[say=sci1]What the.. That prototype cost us millions of credits![/say]")
+
+		saynn("The tentacles awkwardly climb into its nest and coil around the wounded one.")
+
+		saynn("[say=pc]So much for composite materials and advanced gyroscopes.[/say]")
+
+		saynn("You can't help but to smile hearing all the grumbling that comes through the intercom.")
+
+		saynn("[say=sci2]..try to remain calm..[/say]")
+
+		saynn("[say=sci1]..no.. did you see what that stupid thing did?[/say]")
+
+		saynn("[say=sci2]..yeah.. but try to recontextualize everything that happened..[/say]")
+
+		saynn("[say=sci1]..grr.. fine.[/say]")
+
+		saynn("All the while the guards walk into the cell and remove the remains of the robot.. being careful to avoid the nest as far as they can.")
+
+		saynn("[say=sci1]Okay. Test is over.[/say]")
+
+		addButton("Continue", "See what happens next", "afterAll")
+	if(state == "3_ladder"):
+		saynn("The tentacles probably wouldn't be able to handle a full obstacle course.. they can't even move around still.. but maybe they can try to climb a single thing.")
+
+		saynn("You find a little triangle-shaped ladder.. and place it against the monster.")
+
+		saynn("At first, the tentacles don't seem to have much interest in it. They brush lightly against the bars of it.. until one of them decides to wrap around them and push. The ladder seems to be too heavy for it to move..")
+
+		saynn("[say=pc]Don't push it. Pull.[/say]")
+
+		saynn("You watch it struggle with the ladder.. until it suddenly does what you say and pulls itself closer to it by pulling on the bars. The tentacles manage to lift themselves off of the nest and climb a few horizontal metal bars.")
+
+		saynn("[say=sci2]Hm. The specimen seems to possess a very intricate muscle system.[/say]")
+
+		saynn("Makes you wonder if these muscles can be trained the same way..")
+
+		saynn("After some time, the monster gets too tired to hang off of the horizontal bars and so it returns back to the nest.")
+
+		addButton("Continue", "See what happens next", "afterAll")
+	if(state == "3_onahole"):
+		saynn("A certain.. toy.. catches your eyes. A limbless onahole sextoy.. completed with 2 tight holes, a pussy and a butthole.. very lewd.")
+
+		saynn("[say=pc]Ohh.. I like this.[/say]")
+
+		saynn("[say=sci2]We wanted to see how it will react to.. normal anatomy of a person.[/say]")
+
+		saynn("You hold the toy for a moment, feeling its strange, soft texture. Nothing about this anatomy is normal.. Still, you place it carefully on the floor in front of the three green tentacles.")
+
+		saynn("At first, they are still. Then, one slick tip slowly extends, tapping the silicone surface. It prods, testing the toy. The tentacle draws back, then prods again, a little harder. The other two tentacles join, their tips now gently exploring the curves and ridges of the onahole.")
+
+		saynn("They trace the outlines of the two holes, circling them again and again. A low, interested hum vibrates from the monster.")
+
+		saynn("Then, the exploring stops. One of the tips presses firmly against the pussy hole. With a soft, wet sound, it pushes inside. The tentacle slides in smoothly, deeper and deeper, its slick surface shining with a fresh coat of clear, slippery fluid..")
+
+		saynn("Seeing this, the other two tentacles sway with an undying interest. One quickly seeks out the second hole, sliding in with the same wet ease. The third tentacle, with no hole left, wraps tightly around the toy's exterior, squeezing it as the other two keep it stuffed full.")
+
+		saynn("They thrust ever so slightly.. a slow, instinctive rhythm that grows faster over time.")
+
+		saynn("[say=sci1]It seems to be quite horny, for sure.[/say]")
+
+		saynn("[say=sci2]Not sure if such a term can be applied to this kind of specimen.[/say]")
+
+		saynn("After the tentacles are done.. fucking.. the onahole, you grab it and put it away.. its holes are still leaking lube-like juice.")
+
+		saynn("Seeing all of this.. makes you excited.. for some reason..")
+
+		addButton("Continue", "See what happens next", "afterAll")
 func supportsShowingPawns() -> bool:
 	return true
 
@@ -391,7 +541,7 @@ func _react(_action: String, _args):
 		statAgility += 1
 	if(_action in ["1_broc", "2_ambient", "3_puzzle"]):
 		statMind += 1
-	if(_action in ["1_milk", "2_jazz", "3_self"]):
+	if(_action in ["1_milk", "2_jazz", "3_onahole"]):
 		statLust += 1
 
 	if(_action == "endthescene"):
@@ -424,6 +574,21 @@ func _react(_action: String, _args):
 
 	if(_action == "2_jazz"):
 		_tentacles.interactTiny2 = "jazz"
+
+	if(_action == "3_puzzle"):
+		_tentacles.interactTiny3 = "puzzle"
+
+	if(_action == "3_toy"):
+		_tentacles.interactTiny3 = "toy"
+
+	if(_action == "3_ladder"):
+		_tentacles.interactTiny3 = "ladder"
+
+	if(_action == "3_onahole"):
+		_tentacles.interactTiny3 = "onahole"
+
+	if(_action == "afterAll"):
+		processTime(2*60*60)
 
 	setState(_action)
 
