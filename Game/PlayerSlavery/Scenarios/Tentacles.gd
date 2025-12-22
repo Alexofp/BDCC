@@ -475,6 +475,12 @@ func incStat(_statID:int, showMessage:bool = true) -> bool:
 	
 	return true
 
+func train(_statID:int) -> bool:
+	return incStat(_statID)
+
+func trainNothing() -> bool:
+	return true
+
 func getTentaclesCharID() -> String:
 	return "rahi"
 func getScientist1CharID() -> String:
@@ -504,6 +510,27 @@ func setMonsterName(_n:String):
 	monsterName = _n
 func getMonsterName() -> String:
 	return monsterName
+
+func getBiggestStat() -> int:
+	var biggestStat:int = STAT_ANGER
+	var biggestStatNumber:int = -1
+	if(anger > biggestStatNumber):
+		biggestStatNumber = anger
+		biggestStat = STAT_ANGER
+	if(agility > biggestStatNumber):
+		biggestStatNumber = agility
+		biggestStat = STAT_AGILITY
+	if(mind > biggestStatNumber):
+		biggestStatNumber = mind
+		biggestStat = STAT_MIND
+	if(lust > biggestStatNumber):
+		biggestStatNumber = lust
+		biggestStat = STAT_LUST
+	return biggestStat
+
+func talk(_scene:SceneBase, _text:String):
+	#TODO: Hide/scamble depending on mind value
+	_scene.saynn("[say="+getTentaclesCharID()+"]"+_text+"[/say]")
 
 func saveData() -> Dictionary:
 	return {}

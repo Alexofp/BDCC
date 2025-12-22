@@ -4,6 +4,7 @@ var statAnger = 0
 var statAgility = 0
 var statMind = 0
 var statLust = 0
+var whichStat = -1
 
 func _init():
 	sceneID = "PSTentacles2SmallInteract"
@@ -41,6 +42,8 @@ func _run():
 	if(state == "doRest"):
 		playAnimation(StageScene.GivingBirth, "idle", {pc="pc"})
 		aimCameraAndSetLocName("pstent_bed")
+		addCharacter(_tentacles.getScientist1CharID())
+		addCharacter(_tentacles.getScientist2CharID())
 		saynn("Despite all of the thoughts, you manage to get some rest.")
 
 		saynn("[say=sci1]Open your eyes, test subject.[/say]")
@@ -65,6 +68,7 @@ func _run():
 	if(state == "doGetup"):
 		# (( sad tiny tentacles anim
 		aimCameraAndSetLocName("pstent_middle")
+		addCharacter(_tentacles.getTentaclesCharID())
 		saynn("You get up and take a look at the tentacles..")
 
 		saynn("They look.. pretty bad actually. Even a few hours were enough to make them look all dry and weak. They can barely sway.")
@@ -497,6 +501,58 @@ func _run():
 		saynn("Seeing all of this.. makes you excited.. for some reason..")
 
 		addButton("Continue", "See what happens next", "afterAll")
+	if(state == "afterAll"):
+		# (( Tiny idle anim
+		saynn("The testing seems to be.. over.. at least for now.")
+
+		saynn("[say=sci2]You may get some rest now, test subject. We need time to go through all the data.[/say]")
+
+		saynn("[say=sci1]I need coffee. As much as I can stuff into myself.[/say]")
+
+		saynn("[say=sci2]Want me to do a capacity measurement? We can calculate exactly how much..[/say]")
+
+		saynn("[say=sci1]No. One more word and I will 3d-print a coffee-buttplug just for you.[/say]")
+
+		saynn("[say=sci2]Actually, there is a chance that it might improve my performance![/say]")
+
+		saynn("[say=sci1]Right, I will need to make a gag first.[/say]")
+
+		if (whichStat == _tentacles.STAT_ANGER):
+			saynn("The tentacles are looking in your direction.. standing tall like snakes. Each time you catch their glance, the tendrils vibrate ever so much.")
+
+			saynn("They sure seem pretty.. agitated.. after everything.")
+
+		elif (whichStat == _tentacles.STAT_AGILITY):
+			saynn("The tentacles are just resting too now, not even swaying around or curling around each other. Looks like all the exercising has tired them out.")
+
+		elif (whichStat == _tentacles.STAT_MIND):
+			saynn("The tentacles are just curiously looking around. The talking camera has piqued its interest for a bit.. but the constant arguing quickly tires it out.")
+
+			saynn("[say=pc]They're getting boring, aren't they?[/say]")
+
+			saynn("One of the tentacles nods after your words.. or maybe it was just swaying..")
+
+		elif (whichStat == _tentacles.STAT_LUST):
+			saynn("The tentacles are just staring at you.. their pointy tips are wet with some kind of transparent fluid.. probably their nectar. It smells nice.. very nice..")
+
+		else:
+			saynn("The tentacles are just idly swaying around. They don't seem to be interested in anything in particular. Your tests just left them confused. Maybe they just need more training..")
+
+		saynn("[say=sci2]Anyway.. have a good rest.[/say]")
+
+		saynn("The voices become quiet.")
+
+		saynn("[say=sci1]..{pc.he} {pc.isAre} just a disposable test subject, why are you wishing {pc.him} anything.[/say]")
+
+		saynn("[say=sci2]..uh.. I guess you're right.[/say]")
+
+		saynn("The camera looks at you again.")
+
+		saynn("[say=sci2]Scratch my last words.[/say]")
+
+		saynn("You sigh. Time to go rest.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 func supportsShowingPawns() -> bool:
 	return true
 
@@ -589,6 +645,10 @@ func _react(_action: String, _args):
 
 	if(_action == "afterAll"):
 		processTime(2*60*60)
+		whichStat = getBiggestStat()		
+		if(whichStat > 0):
+			_tentacles.incStat(whichStat)
+		_tentacles.setStage(_tentacles.STAGE_TINY_AFTERTEST)
 
 	setState(_action)
 
@@ -599,6 +659,7 @@ func saveData():
 	data["statAgility"] = statAgility
 	data["statMind"] = statMind
 	data["statLust"] = statLust
+	data["whichStat"] = whichStat
 
 	return data
 
@@ -609,3 +670,4 @@ func loadData(data):
 	statAgility = SAVE.loadVar(data, "statAgility", 0)
 	statMind = SAVE.loadVar(data, "statMind", 0)
 	statLust = SAVE.loadVar(data, "statLust", 0)
+	whichStat = SAVE.loadVar(data, "whichStat", -1)

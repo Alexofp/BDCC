@@ -678,6 +678,7 @@ gridColor = 5
 [node name="PSTentaclesRoom8" parent="." index="91" instance=ExtResource( 1 )]
 position = Vector2( 64, 704 )
 roomName = "Bio-lab"
+roomID = "pstent_left"
 canWest = false
 
 [node name="PSTentaclesRoom9" parent="." index="92" instance=ExtResource( 1 )]
