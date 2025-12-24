@@ -115,8 +115,6 @@ func _run():
 		saynn("Seeing you in the spot of a window.. makes them finally give up.")
 
 		addButton("Continue", "See what happens next", "endthescene")
-		saynn("The tentacle monster has stopped near a window. Its tentacles are wiping the cold, squeaky surface.")
-
 	if(state == "1"):
 		saynn("You approach the tentacles.. and find them basically glued to the window. They're not trying to smash it or anything.. but somehow you have doubts about them even realizing that there is solid glass there.")
 
@@ -338,6 +336,165 @@ func _run():
 		saynn("They're getting smarter.. bit by bit..")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "4"):
+		saynn("You find the tentacle monster near the window.")
+
+		saynn("It's not really doing anything.. it's just.. sitting? Tentacles can't really sit.. but these ones feel like they do.")
+
+		saynn("Their pointy green tips are touching the glass.. just tips.")
+
+		saynn("It's like they're staring into the deep abyss of space..")
+
+		addButton("Explain", "Tell the tentacles that there is an obvious window here", "4_explain")
+		addButton("Space", "Talk about what's out there.. behind the glass", "4_space")
+		addButton("Distract", "Use your body to try to distract them away from the window", "4_distract")
+	if(state == "4_explain"):
+		saynn("They keep staring at that stupid window.. It looks like they just can't figure it out!")
+
+		saynn("[say=pc]Hey. There is glass there. You can't get through it, you know?[/say]")
+
+		saynn("The tentacles stay still..")
+
+		saynn("You knock on the window, sending vibrations through it and causing the green tips to recoil back.")
+
+		saynn("[say=pc]It's solid. Even if it looks transparent. You understand?[/say]")
+
+		saynn("The tentacles just leave, tired of your explanation.")
+
+		saynn("Maybe they already know that there is glass there? Why do they keep staring at it then..")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "4_space"):
+		saynn("You decide to join the tentacles and stare through the window.. at all the vast empty space.. littered with little dots.")
+
+		saynn("[say=pc]This is outer space, what's behind the window.[/say]")
+
+		saynn("One of the tentacles looks at you.")
+
+		saynn("[say=pc]You're a curious mind, aren't you?[/say]")
+
+		saynn("The tentacle nods. Makes you chuckle softly.")
+
+		saynn("[say=pc]It looks pretty. But it's deadly for us, sadly. There is no air out there.[/say]")
+
+		saynn("You look down at the tentacles who seem saddened by that revelation.")
+
+		saynn("[say=pc]Even if you don't need oxygen to live.. the lack of pressure is gonna make all the water inside you start boiling in mere minutes. You probably don't want that.[/say]")
+
+		saynn("The tentacles tilt down. You offer them some gentle pats.")
+
+		saynn("[say=pc]But the world is bigger than.. this cell.. Much bigger. There are entire planets that can be explored by you or me.[/say]")
+
+		_tentacles.talk("Planets.. We've never been on planets before.. We wish to visit them one day.")
+		saynn("Huh? You tilt your head.")
+
+		saynn("Interesting..")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "4_distract"):
+		saynn("It keeps starting at that window.. and you don't like that.")
+
+		saynn("[say=pc]Hey.. uh.. If you wanna be entertained, why not touch me a bit?[/say]")
+
+		saynn("You lean against the window, proudly showcasing the curves of your {pc.masc} body.")
+
+		saynn("[say=pc]Don't be shy, you can explore me.[/say]")
+
+		if (GM.pc.hasReachableVagina()):
+			saynn("The tentacles don't seem very interested.. so you catch one and slip it down between your legs, letting it rub against your {pc.vaginaStretch} pussy..")
+
+		else:
+			saynn("The tentacles don't seem very interested.. so you catch one and slip it down between your legs, letting it rub against your {pc.analStretch} tailhole..")
+
+		saynn("Sadly, the tentacles still don't seem very engaged.. they just pull away from you and the window..")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "5"):
+		saynn("The tentacles are resting near the big reinforced window that your cell has.")
+
+		saynn("Their green pointy tips are watching the empty black void that's littered with little colorful dots.")
+
+		addButton("Stars", "Talk about the little dots that the tentacles see", "5_stars")
+		addButton("World", "Talk about the world", "5_world")
+		addButton("Void", "Talk about the empty black void", "5_void")
+	if(state == "5_stars"):
+		saynn("You point at the little bright dots.")
+
+		saynn("[say=pc]See those?[/say]")
+
+		saynn("One of the tentacles nods.")
+
+		saynn("[say=pc]Those are stars. Each dot is a single star.[/say]")
+
+		_tentacles.talk("Stars.. Stars make us curious. Very.")
+		saynn("You bring your hands close to form an invisible sphere between your palms.")
+
+		saynn("[say=pc]They look small because they're so far away.. but they're actually huge. They look like spheres.. and they're extremely bright. So bright that we can see them all the way from here.[/say]")
+
+		_tentacles.talk("We wanna visit stars.. Yes. Stars make us excited.")
+		saynn("The tentacles seem excited..")
+
+		saynn("[say=pc]Hold your horses. You probably wanna explore one of them.. but that's impossible. The stars are just pure balls of light and energy. You will turn into ash long before you get anywhere near them.[/say]")
+
+		saynn("The tendrils droop. Your words have instantly killed that excitement in them. Aw.")
+
+		saynn("[say=pc]There are plenty of normal planets to explore, don't worry. A lot of the world sucks.. but not all of it.[/say]")
+
+		_tentacles.talk("We will treasure that knowledge. Thank you, friend.")
+		saynn("You nod..")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "5_world"):
+		saynn("You look around.")
+
+		saynn("[say=pc]You have never been outside of this cell.. Your whole view of this world comes from this one room.. and this window.[/say]")
+
+		saynn("Some of the tentacles look up at you.")
+
+		saynn("[say=pc]The world is huge.. infinitely so. I can't even describe it to you. Not because you wouldn't understand.. but because I don't understand it fully myself.[/say]")
+
+		_tentacles.talk("Curious. We wanna know everything.")
+		saynn("You shrug.")
+
+		saynn("[say=pc]On the other hand.. Some people are okay with that. There is a certain sense of comfort in always being in the same place I guess. Home, job, shop. Some people just don't need more than that.[/say]")
+
+		saynn("The tentacles sway curiously.")
+
+		saynn("[say=pc]Home.. home is this place.. kinda. Where you sleep is usually your home.[/say]")
+
+		saynn("You see the tendrils looking at their nest.")
+
+		saynn("[say=pc]Job.. A job is where you come every day to do work. Our job.. we don't really have one right now. But for some people it gives them a sense of purpose in life.[/say]")
+
+		_tentacles.talk("Purpose.. We don't know if we have a purpose.")
+		saynn("[say=pc]And shop.. is where you come to get new things. Not for free, hah.. You gotta work at your job first. And then you come home to sleep. Everything is connected like that..[/say]")
+
+		_tentacles.talk("Eternal cycle.. Is this what life is all about?")
+		saynn("You watch the tentacles trying to communicate.. and just pet them.")
+
+		saynn("[say=pc]Don't worry about it. There is more to life than that.[/say]")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "5_void"):
+		saynn("[say=pc]The black stuff that you see between all the dots.. that's called void. It's the opposite of something.. it's literally nothing.[/say]")
+
+		saynn("The tentacles direct their curious tips towards you.")
+
+		saynn("[say=pc]Yeah. This cell has air.. but behind the glass.. you would suffocate in seconds.[/say]")
+
+		_tentacles.talk("We have been staring at danger this entire time. We are now afraid of void..")
+		saynn("[say=pc]Yeah, it sounds bad.. but we have developed ways of getting around in void. Spaceships. We might be in one right now.. but who knows.. this is probably a space station if I'd take a guess. It's safe here.[/say]")
+
+		saynn("You look around.. your gaze catches a camera.")
+
+		saynn("[say=pc]I think so, at least..[/say]")
+
+		_tentacles.talk("Space station.. safe.. Good.")
+		saynn("[say=pc]So yeah.. void can be pretty. It's very calming, don't you agree?[/say]")
+
+		saynn("The tentacles nod.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	var _tentacles:PlayerSlaveryTentacles = GM.main.PS
@@ -383,6 +540,24 @@ func _react(_action: String, _args):
 		_tentacles.train(_tentacles.STAT_ANGER)
 
 	if(_action == "3_letit"):
+		_tentacles.train(_tentacles.STAT_MIND)
+
+	if(_action == "4_explain"):
+		_tentacles.trainNothing()
+
+	if(_action == "4_space"):
+		_tentacles.train(_tentacles.STAT_MIND)
+
+	if(_action == "4_distract"):
+		_tentacles.trainNothing()
+
+	if(_action == "5_stars"):
+		_tentacles.train(_tentacles.STAT_MIND)
+
+	if(_action == "5_world"):
+		_tentacles.train(_tentacles.STAT_MIND)
+
+	if(_action == "5_void"):
 		_tentacles.train(_tentacles.STAT_MIND)
 
 	setState(_action)

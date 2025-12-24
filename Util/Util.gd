@@ -829,3 +829,61 @@ static func tryFixColor(_colorVal, allowNull:bool = true):
 		return Color(rVal, gVal, bVal)
 	else:
 		return Color(_colorVal)
+
+static func shuffleWordLetters(_sentence:String, _chance:float) -> String:
+	if(_chance <= 0.0):
+		return _sentence
+	var theWords:Array = []
+	var curWord:String = ""
+	
+	for letter in _sentence:
+		var lc:String = letter.to_lower()
+		if(letters_chars.has(lc)):
+			curWord += letter
+		else:
+			if(!curWord.empty()):
+				theWords.append(curWord)
+				curWord = ""
+			theWords.append(letter)
+	if(!curWord.empty()):
+		theWords.append(curWord)
+		curWord = ""
+	
+	var finalString:String = ""
+	
+	for theWord in theWords:
+		var theWordLen:int = theWord.length()
+		
+		if(theWordLen <= 1):
+			finalString += theWord
+			continue
+		
+		for _i in range(theWordLen):
+			if(!RNG.chance(_chance)):
+				continue
+			var theC:String = theWord[_i]
+			if((_i+1) >= (theWordLen-1)):
+				continue
+			var newIndx:int = RNG.randi_range(_i+1, theWordLen-1) # replace it with one of the next letters. Means the words are more likely to start with the corrent letters
+			
+			theWord[_i] = theWord[newIndx]
+			theWord[newIndx] = theC
+		
+		finalString += theWord
+		
+	return finalString
+
+static func replaceLettersRandomly(_sentence:String, _chance:float, _newLetters:Array = ["#@$%&"]) -> String:
+	if(_chance <= 0.0):
+		return _sentence
+	var finalString:String = ""
+	for letter in _sentence:
+		var lc:String = letter.to_lower()
+		if(letters_chars.has(lc)):
+			if(RNG.chance(_chance)):
+				finalString += RNG.pick(_newLetters)
+			else:
+				finalString += letter
+		else:
+			finalString += letter
+	return finalString
