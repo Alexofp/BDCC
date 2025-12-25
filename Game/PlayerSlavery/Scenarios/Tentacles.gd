@@ -335,12 +335,12 @@ func getPossibleEvents() -> Array:
 	
 	possible.append([EVENT_WINDOW, LOC_WINDOW, "PSTentaclesWindowSmall", [], "didn't spend time with it"])
 	weights.append(1.0)
-	possible.append([EVENT_HUNGRY, LOC_FRIDGE, "PSTentaclesFeedSmall", [], "didn't feed it"])
-	weights.append(1.0)
+	#possible.append([EVENT_HUNGRY, LOC_FRIDGE, "PSTentaclesFeedSmall", [], "didn't feed it"])
+	#weights.append(1.0)
 	#possible.append([EVENT_LEWD, "pc", "PSTentaclesLewdSmall", [], "didn't play with it"])
 	#weights.append(1.0)
-	#possible.append([EVENT_PLAY, LOC_IMPORTANT, "PSTentaclesPlaySmall", [], "didn't play with it"])
-	#weights.append(1.0)
+	possible.append([EVENT_PLAY, LOC_IMPORTANT, "PSTentaclesPlaySmall", [], "didn't play with it"])
+	weights.append(1.0)
 	
 	var thePS:int = possible.size()
 	for _i in range(thePS):
@@ -530,6 +530,8 @@ func getBiggestStat() -> int:
 
 
 func talk(_text:String):
+	if(mind < 5):
+		return
 	var _scene:SceneBase = GM.main.getCurrentScene()
 	#TODO: Hide/scamble depending on mind value
 	_text = Util.shuffleWordLetters(_text, 50.0)
