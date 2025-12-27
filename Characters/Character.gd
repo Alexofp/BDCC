@@ -123,6 +123,8 @@ func saveData():
 	data["lastUpdatedDay"] = lastUpdatedDay
 	data["lastUpdatedSecond"] = lastUpdatedSecond
 	data["pregnancyWaitTimer"] = pregnancyWaitTimer
+
+	data["peeProduction"] = peeProduction.saveData()
 	
 	return data
 
@@ -172,6 +174,8 @@ func loadData(data):
 	lastUpdatedDay = SAVE.loadVar(data, "lastUpdatedDay", -1)
 	lastUpdatedSecond = SAVE.loadVar(data, "lastUpdatedSecond", -1)
 	pregnancyWaitTimer = SAVE.loadVar(data, "pregnancyWaitTimer", 0)
+
+	peeProduction.loadData(SAVE.loadVar(data, "peeProduction", {}))
 	
 	updateNonBattleEffects()
 
@@ -323,6 +327,7 @@ func processTime(_secondsPassed):
 		if(bodypart == null || !is_instance_valid(bodypart)):
 			continue
 		bodypart.processTime(_secondsPassed)
+	peeProduction.processTime(_secondsPassed)
 	
 	processTimedBuffs(_secondsPassed)
 	

@@ -245,6 +245,8 @@ func processTime(_secondsPassed):
 		if(bodypart == null || !is_instance_valid(bodypart)):
 			continue
 		bodypart.processTime(_secondsPassed)
+
+	peeProduction.processTime(_secondsPassed)
 	
 	if(intoxication > 0.0):
 		intoxication -= _secondsPassed / 30000.0
@@ -436,6 +438,8 @@ func saveData():
 	data["personality"] = personality.saveData()
 	data["reputation"] = reputation.saveData()
 	data["tfHolder"] = tfHolder.saveData()
+
+	data["peeProduction"] = peeProduction.saveData()
 	
 	return data
 
@@ -495,7 +499,9 @@ func loadData(data):
 	personality.loadData(SAVE.loadVar(data, "personality", {}))
 	reputation.loadData(SAVE.loadVar(data, "reputation", {}))
 	tfHolder.loadData(SAVE.loadVar(data, "tfHolder", {}))
-		
+
+	peeProduction.loadData(SAVE.loadVar(data, "peeProduction", {}))
+
 	updateNonBattleEffects()
 	emit_signal("bodypart_changed")
 	

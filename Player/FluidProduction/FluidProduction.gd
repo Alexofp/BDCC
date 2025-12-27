@@ -95,6 +95,8 @@ func fillPercent(howMuch:float):
 	fluids.addFluid(getFluidType(), toAdd, character.getFluidDNA(getFluidSource()))
 
 func getBodypart():
+	if(bodypart == null):
+		return null
 	return bodypart.get_ref()
 
 func getCharacter():

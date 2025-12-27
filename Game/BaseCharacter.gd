@@ -35,6 +35,9 @@ var bodyparts: Dictionary
 var processingBodyparts: Array
 var bodypartStorageNode
 
+# pee is not attached to a bodypart but we track it anyway
+var peeProduction: PeeProduction
+
 # Combat stats
 var initialDodgeChance = 0
 var fightingState = "" # dodge, block, defocus
@@ -80,6 +83,8 @@ func _ready():
 	personality = Personality.new()
 	personality.setCharacter(self)
 	bodyFluids = Fluids.new()
+
+	peeProduction = PeeProduction.new(self)
 
 func getID():
 	assert(false, "Getting an ID of a baseCharacter class")
@@ -848,7 +853,7 @@ func getFluidAmount(fluidSource):
 	if(fluidSource == FluidSource.Strapon):
 		return RNG.randf_range(100.0, 500.0)
 	if(fluidSource == FluidSource.Pissing):
-		return RNG.randf_range(100.0, 500.0)
+		return peeProduction.getFluidAmount()
 	if(fluidSource == FluidSource.Breasts):
 		if(hasBodypart(BodypartSlot.Breasts)):
 			var breasts:BodypartBreasts = getBodypart(BodypartSlot.Breasts)
@@ -1058,6 +1063,9 @@ func cummedInBodypartByAdvanced(bodypartSlot, characterID, advancedData:Dictiona
 		var fluids = strapon.getFluids()
 		if(fluids != null):
 			resultAmount = fluids.transferTo(thebodypart, amountToTransfer, 0.0, getID())
+	elif(sourceType == FluidSource.Pissing):
+		var thebodypart = getBodypart(bodypartSlot)
+		ch.peeProduction.getFluids().transferTo(thebodypart, amountToTransfer, 100.0)
 	else:
 		var thebodypart = getBodypart(bodypartSlot)
 		resultAmount = ch.getFluidAmount(sourceType) * amountToTransfer
@@ -2163,6 +2171,11 @@ func cumInItem(theItem, sourceType = FluidSource.Penis, amountToTransfer = 1.0):
 				theItem.markLastUser(getName())
 			var returnValue = penis.getFluids().transferTo(theItem, amountToTransfer)
 			return returnValue
+	elif(sourceType == FluidSource.Pissing):
+		if(theItem.has_method("markLastUser")):
+			theItem.markLastUser(getName())
+		var returnValue = peeProduction.getFluids().transferTo(theItem, amountToTransfer)
+		return returnValue
 	else:
 		return theItem.getFluids().addFluid(getFluidType(sourceType), getFluidAmount(sourceType) * amountToTransfer, getFluidDNA(sourceType))
 
