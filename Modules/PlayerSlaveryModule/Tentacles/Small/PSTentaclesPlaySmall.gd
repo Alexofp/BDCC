@@ -80,6 +80,235 @@ func _run():
 		saynn("You just gotta do this more often.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "a1"):
+		saynn("You offer the tentacles to do some armwrestling.. tentacle-wrestling.")
+
+		saynn("They're strong enough to move around so they probably have some strength in them.")
+
+		saynn("You catch the strongest-looking tentacle and set your elbow on one of the nearby tables.")
+
+		saynn("It looks like the monster is ready.")
+
+		saynn("[say=pc]Alright, let's see if you have some more strength in you now. Go.[/say]")
+
+		saynn("You apply some pressure and immediately start winning.. it doesn't look like a single tentacle is strong enough at all.")
+
+		saynn("[say=pc]Use more of.. you.[/say]")
+
+		saynn("A few more tentacles wrap around your palm, trying to bring it down the opposite way from where you're pulling.")
+
+		saynn("With the usage of extra tentacles, it sure feels a bit stronger.. but you're still only using about half of your strength.")
+
+		addButton("Win!", "Show the tentacles their place by winning the armwrestling match", "a1_win")
+		addButton("Lose", "Give up the match and let the tentacles win", "a1_lose")
+		addButton("Keep it going", "Apply just enough strength to prevent the tentacles from winning", "a1_keep")
+	if(state == "a1_win"):
+		saynn("The tentacles clearly won't be able to win this match.. so you take the lead and overpower them with ease, bringing the whole set of the strongest tentacles down to the table surface.")
+
+		saynn("[say=pc]That's how you do it.[/say]")
+
+		saynn("The monster feels your smug aura and whips your butt for it.")
+
+		saynn("Luckily, it didn't hurt that much. But that also means that the tentacles didn't really get any stronger.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "a1_lose"):
+		saynn("Maybe the tentacles just need some encouragement.")
+
+		saynn("You relax your hand and let the multiple tentacles overpower you. You lose!")
+
+		saynn("[say=pc]Aw. Good job, you're so strong![/say]")
+
+		if (_tentacles.mind <= 3):
+			saynn("The tentacles aren't smart enough to see through your act.. so they sway happily.. But they didn't actually get any stronger from this.")
+
+		else:
+			saynn("The tentacles are smart enough to see that something is fishy. You get multiple stern looks from their tips.")
+
+			_tentacles.talk("We understand what you did. No need for that.")
+			saynn("[say=pc]What? I lose, fair and square.[/say]")
+
+			saynn("The tentacles sway annoyed.. and slither away. Looks like they didn't get any stronger from this.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "a1_keep"):
+		saynn("You decide to apply a small amount of your strength.. enough to keep the tentacles from winning.. but not enough to win yourself.")
+
+		saynn("It doesn't take too long before the tentacles fail to keep up the pressure and lose anyway.")
+
+		saynn("Still, it was a good workout for them!")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "a2"):
+		saynn("You offer the tentacles to do some armwrestling.. tentacle-wrestling.")
+
+		saynn("They're strong enough to move around so they probably have some strength in them.")
+
+		saynn("You know that they're not the strongest so you catch a few of the most strong ones and set your elbow on the nearby table.")
+
+		saynn("[say=pc]Show me your gains.[/say]")
+
+		saynn("It looks like the monster is ready.")
+
+		saynn("[say=pc]Go.[/say]")
+
+		saynn("You decide to apply a small amount of your strength.. enough to keep the tentacles from winning.. but not enough to win yourself.")
+
+		saynn("Why? Well, the reason becomes obvious soon.")
+
+		saynn("You start panting.. the constant pressure from the tentacles does add up eventually. It starts taking more and more of your strength to keep your hand where it is. All the while, the tentacles stay a constant force, sometimes sneakily switching the used tentacles.")
+
+		saynn("By this point, you're not even sure if you can win this match. Your hand is shaking, your muscles are screaming for more oxygen, making you hungrily grab air with your mouth.")
+
+		saynn("[say=pc]Uh.. draw?[/say]")
+
+		_tentacles.talk("A draw would leave both of us unsatisfied.")
+		saynn("The tentacles keep pushing.. and so you start losing, your hand getting overpowered.")
+
+		saynn("That is, until the pool of untouched tentacles runs out. All of them are extremely tired by now.. and so you get a sudden victory! Completely out of nowhere.")
+
+		saynn("[say=pc]Phew.. that was a good one.[/say]")
+
+		saynn("Both of you have gotten a great workout.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "a3"):
+		saynn("You offer the tentacles to do some armwrestling.. tentacle-wrestling.")
+
+		saynn("You know that they're not the strongest so you catch a few of the most thick-looking ones and set your elbow on the nearby table.")
+
+		saynn("[say=pc]Prove me you're not a weakling.[/say]")
+
+		saynn("It looks like the monster is ready.")
+
+		saynn("[say=pc]Go.[/say]")
+
+		saynn("Oof, the sudden pull almost catches you off-guard. These tentacles sure have gotten stronger.")
+
+		saynn("Only using half of your strength isn't enough, you gotta put all of it into this. You grab the table with your other hand and use it as support.")
+
+		saynn("The tentacles keep pushing, their collective pressure gradually wearing you down. A quiet growl starts escaping your lips, adrenaline starts pumping through your blood!")
+
+		saynn("You're managing to keep your hand roughly in the middle.. but it sure takes all of what you've got.")
+
+		saynn("Eventually, the tentacles start giving in! They're slipping, their strength running out fast.")
+
+		if (_tentacles.lust < 3):
+			saynn("That's when one of the sneaky ones quietly reaches out.. and suddenly tickles your armpit!")
+
+			saynn("[say=pc]AH![/say]")
+
+		else:
+			if (GM.pc.hasReachableVagina()):
+				saynn("That's when one of the sneaky ones quietly reaches out.. and suddenly starts rubbing your pussy!")
+
+				saynn("[say=pc]Ah..[/say]")
+
+			elif (GM.pc.hasReachablePenis() || GM.pc.isWearingChastityCage()):
+				saynn("That's when one of the sneaky ones quietly reaches out.. and suddenly starts stroking your {pc.penis}!")
+
+				saynn("[say=pc]Ah.[/say]")
+
+			else:
+				saynn("That's when one of the sneaky ones quietly reaches out.. and suddenly starts rubbing your tailhole!")
+
+				saynn("[say=pc]Ah..[/say]")
+
+		saynn("This one trick was enough for you to lose your grip and lose the match! The tentacles bring your hand down to the table's surface and pin it!")
+
+		saynn("[say=pc]Wow. That was so unfair.[/say]")
+
+		saynn("The cheeky tentacles are swaying happily.")
+
+		saynn("[say=pc]Alright, you win this one. But you're not allowed to do this from now on.[/say]")
+
+		saynn("They nod and set your hand free.")
+
+		if (_tentacles.mind > 3):
+			saynn("These tentacles are sure quite smart to be able to come up with this plan.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "a4"):
+		saynn("You offer the tentacles to do some armwrestling.. tentacle-wrestling.")
+
+		saynn("You know that they're not the strongest so you catch a few of the most thick-looking ones and set your elbow on the nearby table.")
+
+		saynn("[say=pc]Prove me you're not a weakling.[/say]")
+
+		saynn("It looks like the monster is ready.")
+
+		saynn("[say=pc]Go.[/say]")
+
+		saynn("Your hand hits the table faster than you can say..")
+
+		saynn("[say=pc]Wow![/say]")
+
+		saynn("The strength of the multiple tentacles almost dislocates your shoulder! The tentacles win this one, fair and square.")
+
+		saynn("[say=pc]Ow. Holy..[/say]")
+
+		saynn("They're bobbing happily. Maybe trying to fight many of them at once was a mistake.. especially now.")
+
+		saynn("[say=pc]Give me your strongest one.[/say]")
+
+		saynn("The thickest tentacle of them all lands on the table.")
+
+		saynn("[say=pc]Alright..[/say]")
+
+		saynn("You grab the tendril's tip.. and push your elbow into the sturdy metal surface below it. Knowing what it's capable of, you pre-flex your muscles.")
+
+		saynn("[say=pc]Go.[/say]")
+
+		saynn("And so the fight rages on. Your hand and the thick tendril are locked together, trying to subdue each other. The metal table groans under the sudden strain.")
+
+		saynn("For a full minute, neither of you budge an inch. Your arm's muscles are tensed up beyond belief. Your breath quickens fast. All the while, the tentacle is doing fine..")
+
+		saynn("[say=pc]Come.. on..[/say]")
+
+		saynn("Slowly, the balance begins to shift. Not instantly.. bit by bit. Your forearm begins to tremble, the burn in your bicep turning into a full-on fire.")
+
+		saynn("You push with everything you have left, a final desperate rally that wins you about twenty degrees.. but the tentacle absorbs it soon after and continues its steady, patient advance.")
+
+		saynn("Your fingers start to curl open, your wrist bending more and more. The fight leaves your muscles strained hard. With a final, gentle yet undeniable pressure, the back of your hand kisses the cool metal.")
+
+		saynn("[say=pc]Ah..[/say]")
+
+		saynn("The tentacle wins!")
+
+		saynn("Your arm.. is aching from all the abuse that it went through. A shocked laugh escapes your lips.")
+
+		saynn("[say=pc]Now I'm the weak one here, huh?[/say]")
+
+		saynn("You offer a nod of respect to the victorious tendril. It was a fair fight.. as fair as it could be.")
+
+		_tentacles.talk("Thank you for training our strength.")
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "a5"):
+		saynn("You offer the tentacles to do some armwrestling.. tentacle-wrestling.")
+
+		saynn("You know that you're gonna lose. But still.. maybe you can put up somewhat of a challenge.")
+
+		saynn("[say=pc]Let's do this.[/say]")
+
+		saynn("The monster offers you one of its tentacles.. not even the strongest one. You grab its tip and press your elbow into the table.")
+
+		saynn("[say=pc]Go.[/say]")
+
+		saynn("You were bracing for the worst.. but that doesn't happen. Instead, the tentacle just freezes your hand in place. As you try to put more strength into it, the tendril meets your efforts and nullifies them with ease.")
+
+		saynn("[say=pc]Is that all you've got?[/say]")
+
+		saynn("Slowly, deliberately, the tentacle begins to press. It's a smooth, controlled descent, the tendril lowering your hand onto the table. You grunt, you brace, you try to twist, but your resistance is meaningless. Your arm is guided down with the sheer force of a hydraulic press.")
+
+		saynn("The back of your hand touches the cool surface. The tentacle won!")
+
+		saynn("[say=pc]Ah..[/say]")
+
+		saynn("You slump back, your arm throbbing. The tentacles are offering you a slow clap.")
+
+		saynn("They have gotten quite strong, haven't they? And so fast, too.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 		# (( a0 - total fail
 		# (( a1 - still fail
 		# (( a2 - neutral for a while but loses
@@ -478,7 +707,9 @@ func _react(_action: String, _args):
 			possible.append("a4")
 		if(_tentacles.agility >= 5):
 			possible.append("a5")
-		_tentacles.train(_tentacles.STAT_AGILITY)
+		
+		if(_tentacles.agility != 1):
+			_tentacles.train(_tentacles.STAT_AGILITY)
 		
 		if(possible.size() > 0):
 			setState(RNG.pick(possible))
@@ -486,6 +717,15 @@ func _react(_action: String, _args):
 
 	if(_action == "say_shoo"):
 		_tentacles.trainNothing()
+
+	if(_action == "a1_win"):
+		_tentacles.train(_tentacles.STAT_ANGER)
+
+	if(_action == "a1_lose"):
+		_tentacles.trainNothing()
+
+	if(_action == "a1_keep"):
+		_tentacles.train(_tentacles.STAT_AGILITY)
 
 	if(_action == "p1_explain"):
 		_tentacles.trainNothing()
