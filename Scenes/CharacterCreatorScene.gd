@@ -348,10 +348,11 @@ func _react(_action: String, _args):
 	if(_action == "setbodypart"):
 		savedPage = GM.ui.getCurrentPage()
 
-		var savedRColor = Color.white
-		var savedGColor = Color.white
-		var savedBColor = Color.white
+		var savedRColor = null
+		var savedGColor = null
+		var savedBColor = null
 		var savedSkinId = null
+		var playerHadBodypartInSlot:bool = false
 		if(GM.pc.hasBodypart(pickingBodypartType)):
 			var playerBodypart:Bodypart = GM.pc.getBodypart(pickingBodypartType)
 			savedRColor = playerBodypart.pickedRColor
@@ -359,15 +360,17 @@ func _react(_action: String, _args):
 			savedBColor = playerBodypart.pickedBColor
 			if(!playerBodypart.hasCustomSkinPattern()):
 				savedSkinId = playerBodypart.pickedSkin
+			playerHadBodypartInSlot = true
 
 		var newBodypartId = _args[0]
 		var newBodypart = GlobalRegistry.createBodypart(newBodypartId)
 		if(newBodypart != null):
-			newBodypart.pickedRColor = savedRColor
-			newBodypart.pickedGColor = savedGColor
-			newBodypart.pickedBColor = savedBColor
-			if(!newBodypart.hasCustomSkinPattern()):
-				newBodypart.pickedSkin = savedSkinId
+			if(playerHadBodypartInSlot):
+				newBodypart.pickedRColor = savedRColor
+				newBodypart.pickedGColor = savedGColor
+				newBodypart.pickedBColor = savedBColor
+				if(!newBodypart.hasCustomSkinPattern()):
+					newBodypart.pickedSkin = savedSkinId
 			GM.pc.giveBodypartUnlessSame(newBodypart)
 
 		return
