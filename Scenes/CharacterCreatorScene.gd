@@ -157,7 +157,7 @@ func _run():
 		if(!BodypartSlot.isEssential(pickingBodypartType)):
 			var bodypartIsMissing:bool = (playerBodypart == null)
 			var nothingBodypartName:String = "[Nothing]" if(bodypartIsMissing) else "Nothing"
-			var nothingBodypartDesc:String = "This is the currently selected option" if(bodypartIsMissing) else "Remove it"
+			var nothingBodypartDesc:String = "This is the currently selected option" if(bodypartIsMissing) else "Remove the bodypart.\n\nNOTE: This resets the colors and skin of the bodypart."
 			addButton(nothingBodypartName, nothingBodypartDesc, "removebodypart", [pickingBodypartType])
 			
 		var allbodypartsIDs = GlobalRegistry.getBodypartsIdsBySlot(pickingBodypartType)
@@ -348,10 +348,28 @@ func _react(_action: String, _args):
 	if(_action == "setbodypart"):
 		savedPage = GM.ui.getCurrentPage()
 
-		var bodypartID = _args[0]
-		var bodypart = GlobalRegistry.createBodypart(bodypartID)
-		
-		GM.pc.giveBodypart(bodypart)
+		var savedRColor = Color.white
+		var savedGColor = Color.white
+		var savedBColor = Color.white
+		var savedSkinId = null
+		if(GM.pc.hasBodypart(pickingBodypartType)):
+			var playerBodypart:Bodypart = GM.pc.getBodypart(pickingBodypartType)
+			savedRColor = playerBodypart.pickedRColor
+			savedGColor = playerBodypart.pickedGColor
+			savedBColor = playerBodypart.pickedBColor
+			if(!playerBodypart.hasCustomSkinPattern()):
+				savedSkinId = playerBodypart.pickedSkin
+
+		var newBodypartId = _args[0]
+		var newBodypart = GlobalRegistry.createBodypart(newBodypartId)
+		if(newBodypart != null):
+			newBodypart.pickedRColor = savedRColor
+			newBodypart.pickedGColor = savedGColor
+			newBodypart.pickedBColor = savedBColor
+			if(!newBodypart.hasCustomSkinPattern()):
+				newBodypart.pickedSkin = savedSkinId
+			GM.pc.giveBodypartUnlessSame(newBodypart)
+
 		return
 		
 	if(_action == "pick2species"):
