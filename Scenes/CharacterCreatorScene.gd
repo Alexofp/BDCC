@@ -5,6 +5,7 @@ var pickedFirstSpeciesHybrid = ""
 var pickedAttribID = ""
 var bodyPickedAttribID = ""
 var debugMode = false
+var savedPage:int = 0
 
 var colorPickerScene = preload("res://UI/ColorPickerWidget.tscn")
 
@@ -70,6 +71,7 @@ func _run():
 		addButton("back", "Back", "pickhybrid1")
 
 	if(state == "pickedspecies"):
+		savedPage = 0
 		playAnimation(StageScene.Solo, "stand", {bodyState={naked=true,hard=true}})
 		
 		if(debugMode):
@@ -135,14 +137,16 @@ func _run():
 		
 		addButton("Back", "go back", "pickedspecies")
 		
+		var playerBodypart = null
+		
 		if(GM.pc.hasBodypart(pickingBodypartType)):
-			var bodypart = GM.pc.getBodypart(pickingBodypartType)
+			playerBodypart = GM.pc.getBodypart(pickingBodypartType)
 			
-			sayn("Currently selected: "+bodypart.getCharacterCreatorName())
-			for curAttrib in bodypart.getAttributesText():
+			sayn("Currently selected: "+playerBodypart.getCharacterCreatorName())
+			for curAttrib in playerBodypart.getAttributesText():
 				sayn(curAttrib[0]+": "+str(curAttrib[1]))
 			
-			var attribOptions = bodypart.getPickableAttributes()
+			var attribOptions = playerBodypart.getPickableAttributes()
 			if(attribOptions.size() > 0):
 				addButton("Change current", "Change the attributes of the current bodypart instead of creating a new one", "bodypartAttributes")
 			
@@ -151,7 +155,10 @@ func _run():
 		var playerSpecies: Array = GM.pc.getSpecies()
 			
 		if(!BodypartSlot.isEssential(pickingBodypartType)):
-			addButton("Nothing", "remove it", "removebodypart", [pickingBodypartType])
+			var bodypartIsMissing:bool = (playerBodypart == null)
+			var nothingBodypartName:String = "[Nothing]" if(bodypartIsMissing) else "Nothing"
+			var nothingBodypartDesc:String = "This is the currently selected option" if(bodypartIsMissing) else "Remove it"
+			addButton(nothingBodypartName, nothingBodypartDesc, "removebodypart", [pickingBodypartType])
 			
 		var allbodypartsIDs = GlobalRegistry.getBodypartsIdsBySlot(pickingBodypartType)
 		for bodypartID in allbodypartsIDs:
@@ -175,7 +182,13 @@ func _run():
 					break
 			
 			if(hasInSupported || hasInAllowed):
-				addButton(bodypart.getCharacterCreatorName(), bodypart.getCharacterCreatorDesc(), "setbodypart", [bodypart.id])
+				var bodypartIsActive:bool = (playerBodypart != null) && (playerBodypart.id == bodypart.id)
+				var bodypartName:String = ("["+bodypart.getCharacterCreatorName()+"]" if(bodypartIsActive) else bodypart.getCharacterCreatorName())
+				var bodypartDesc:String = ("This is the currently selected bodypart" if(bodypartIsActive) else bodypart.getCharacterCreatorDesc())
+				addButton(bodypartName, bodypartDesc, "setbodypart", [bodypart.id])
+
+		if(savedPage != 0):
+			GM.ui.setCurrentPage(savedPage)
 
 	if(state == "bodypartAttributes"):
 		playAnimation(StageScene.Solo, "stand", {bodyState={naked=true,hard=true}})
@@ -325,26 +338,20 @@ func _react(_action: String, _args):
 			pickingBodypartType = _args[0]
 	
 	if(_action == "removebodypart"):
+		savedPage = GM.ui.getCurrentPage()
+
 		var bodypartSlot = _args[0]
 
 		GM.pc.removeBodypart(bodypartSlot)
-		
-		setState("pickedspecies")
 		return
 	
 	if(_action == "setbodypart"):
+		savedPage = GM.ui.getCurrentPage()
+
 		var bodypartID = _args[0]
 		var bodypart = GlobalRegistry.createBodypart(bodypartID)
 		
 		GM.pc.giveBodypart(bodypart)
-		
-		var pickableOptions = bodypart.getPickableAttributes()
-		if(pickableOptions.size() == 0):
-			setState("pickedspecies")
-		else:
-			setState("bodypartAttributes")
-		
-		
 		return
 		
 	if(_action == "pick2species"):
@@ -369,6 +376,7 @@ func saveData():
 	data["pickedAttribID"] = pickedAttribID
 	data["bodyPickedAttribID"] = bodyPickedAttribID
 	data["debugMode"] = debugMode
+	data["savedPage"] = savedPage
 	
 	return data
 	
@@ -380,3 +388,4 @@ func loadData(data):
 	pickedAttribID = SAVE.loadVar(data, "pickedAttribID", "")
 	bodyPickedAttribID = SAVE.loadVar(data, "bodyPickedAttribID", "")
 	debugMode = SAVE.loadVar(data, "debugMode", false)
+	savedPage = SAVE.loadVar(data, "savedPage", 0)
