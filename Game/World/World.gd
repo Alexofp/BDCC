@@ -175,7 +175,7 @@ func addTransitions(floorIDs:Array = []):
 	if(floorIDs.empty()):
 		floorIDs = cells.keys()
 	
-	for floorid in cells:
+	for floorid in floorIDs:
 		var floorcells = cells[floorid]
 		for pos in floorcells:
 			var _room = floorcells[pos]
