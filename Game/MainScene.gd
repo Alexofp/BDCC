@@ -251,8 +251,6 @@ func _ready():
 	Console.addCommand("clearmoduleflag", self, "consoleClearModuleFlag", ["moduleID", "flagID"], "Resets the game flag, be very careful")
 	Console.addCommand("become", self, "consoleBecome", ["charID"], "Become another character")
 	#Console.addCommand("ae", self, "consoleAnimationEditor", [], "Animation editor")
-	applyAllWorldEdits()
-	GM.world.addTransitions()
 	
 func startNewGame():
 	GlobalRegistry.currentSave = 1
