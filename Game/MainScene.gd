@@ -252,6 +252,7 @@ func _ready():
 	Console.addCommand("become", self, "consoleBecome", ["charID"], "Become another character")
 	#Console.addCommand("ae", self, "consoleAnimationEditor", [], "Animation editor")
 	applyAllWorldEdits()
+	GM.world.addTransitions()
 	
 func startNewGame():
 	GlobalRegistry.currentSave = 1
@@ -422,6 +423,7 @@ func loadingSavefileFinished():
 	reRun()
 	
 	applyAllWorldEdits()
+	GM.world.addTransitions()
 	
 	if(!rollbacker.rollbacking):
 		WHS.clearHistory()

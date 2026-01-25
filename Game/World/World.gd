@@ -248,7 +248,6 @@ func _ready():
 				
 				registerRoom(f.id, cell)
 	
-	addTransitions()
 	#print(roomDict)
 	#aimCamera("ScriptedRoom")#"cellblock_orange_playercell")
 
