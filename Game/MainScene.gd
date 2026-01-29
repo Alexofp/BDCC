@@ -422,8 +422,8 @@ func loadingSavefileFinished():
 	
 	applyAllWorldEdits()
 	GM.world.addTransitions()
-	GM.world.resetCamera()
-	GM.pc.checkLocation(true)
+	GM.world.resetCamera(true)
+	GM.pc.checkLocation()
 	
 	if(!rollbacker.rollbacking):
 		WHS.clearHistory()
@@ -555,7 +555,6 @@ func loadData(data):
 	SCI.loadData(SAVE.loadVar(data, "science", {}))
 	PSH.loadData(SAVE.loadVar(data, "playerSlaveryHolder", {}))
 		
-	
 	var scenes = SAVE.loadVar(data, "scenes", [])
 	
 	for scene in sceneStack:
