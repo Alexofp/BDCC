@@ -566,6 +566,8 @@ func loadData(data):
 		var id = SAVE.loadVar(sceneData, "id", "error")
 		
 		var scene = GlobalRegistry.createScene(id)
+		if(scene == null):
+			break
 		add_child(scene)
 		sceneStack.append(scene)
 		print("Starting scene "+id)
