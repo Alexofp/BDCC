@@ -420,9 +420,6 @@ func loadingSavefileFinished():
 	#	GM.ui.getStage3d().resetToNothing()
 	reRun()
 	
-	applyAllWorldEdits()
-	GM.world.addTransitions()
-	
 	if(!rollbacker.rollbacking):
 		WHS.clearHistory()
 	IS.updatePCLocation()
@@ -606,6 +603,8 @@ func loadData(data):
 	#GM.world.updatePawns(IS)
 	#GM.world.setPawnsShowed(canShowPawns())
 
+	applyAllWorldEdits()
+	GM.world.addTransitions()
 	GM.pc.checkLocation()
 
 func saveCharactersData():
