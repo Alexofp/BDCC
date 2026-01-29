@@ -147,6 +147,28 @@ func isSmallOrNormal() -> bool:
 func isNormal() -> bool:
 	return growStage in [STAGE_NORMAL]
 
+func isTiny() -> bool:
+	return growStage in [STAGE_TINY, STAGE_TINY_AFTERTEST]
+
+func isSmalll() -> bool:
+	return growStage in [STAGE_SMALL, STAGE_SMALL_ENDDAY]
+
+func getTentaclesMeetAnim() -> Array:
+	if(growStage == STAGE_INTRO):
+		return []
+	if(growStage in [STAGE_EGG]):
+		return [StageScene.SoloBigEgg, "stand", {}]
+	if(growStage in [STAGE_TINY]):
+		return [StageScene.TentaclesDuo, "idle", {tentaclesSizeTiny=true, plant=true, tentaclesLess=true}]
+	if(growStage in [STAGE_TINY_AFTERTEST]):
+		return [StageScene.TentaclesDuo, "sleep", {tentaclesSizeTiny=true, plant=true, instantSleep=true, tentaclesLess=true}]
+	if(growStage == STAGE_SMALL):
+		return [StageScene.TentaclesDuo, "idle", {tentaclesSizeSmall=true, plant=true}]
+	if(growStage == STAGE_SMALL_ENDDAY):
+		return [StageScene.TentaclesDuo, "sleep", {tentaclesSizeSmall=true, plant=true, instantSleep=true}]
+	
+	return [StageScene.TentaclesDuo, "idle", {plant=true}]
+
 func prepareForSex():
 	var theChar:BaseCharacter = GlobalRegistry.getCharacter(getTentaclesCharID())
 	if(!theChar):
@@ -232,12 +254,12 @@ func doAction(_scene, _action:Array):
 
 func checkEvent(_scene, _loc:String) -> Array:
 	if(growStage == STAGE_SMALL):
-		if(GM.main.getTime() > 10*60*60):
+		if(GM.main.getTime() > 20*60*60):
 			return ["PSTentaclesSmallEndOfDay"]
 	
 	if(growStage == STAGE_NORMAL):
-		if(GM.main.getTime() > 10*60*60):
-			if(daysNormal >= 1):
+		if(GM.main.getTime() > 20*60*60):
+			if(daysNormal >= 2):
 				return ["PSTentaclesEndingScene"]
 			return ["PSTentaclesNormalSleep"]
 	
@@ -294,6 +316,9 @@ func setScientistsLoc(_loc:String):
 func setMonsterLoc(_loc:String):
 	monsterLoc = _loc
 	updateIcons()
+
+func getMonsterLoc() -> String:
+	return monsterLoc
 
 func createIcons():
 	GM.world.createEntity("ps_scientist1", IconDudeFem, scientist1Loc)
@@ -371,10 +396,10 @@ func getPossibleEvents() -> Array:
 	
 	possible.append([EVENT_WINDOW, LOC_WINDOW, "PSTentaclesWindowSmall", [], "didn't spend time with it"])
 	weights.append(1.0)
-	#possible.append([EVENT_HUNGRY, LOC_FRIDGE, "PSTentaclesFeedSmall", [], "didn't feed it"])
-	#weights.append(1.0)
-	#possible.append([EVENT_LEWD, "pc", "PSTentaclesLewdSmall", [], "didn't play with it"])
-	#weights.append(1.0)
+	possible.append([EVENT_HUNGRY, LOC_FRIDGE, "PSTentaclesFeedSmall", [], "didn't feed it"])
+	weights.append(1.0)
+	possible.append([EVENT_LEWD, "pc", "PSTentaclesLewdSmall", [], "didn't play with it"])
+	weights.append(1.0)
 	possible.append([EVENT_PLAY, LOC_IMPORTANT, "PSTentaclesPlaySmall", [], "didn't play with it"])
 	weights.append(1.0)
 	

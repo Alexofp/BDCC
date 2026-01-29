@@ -10,7 +10,7 @@ func _reactInit():
 	var possible:Array = []
 	
 	if(_tentacles.mind <= 0):
-		possible.append("0watch")
+		possible.append("0")
 	if(_tentacles.mind == 1):
 		possible.append("1")
 	if(_tentacles.mind == 2):
@@ -45,7 +45,7 @@ func _run():
 		saynn("You chat.")
 
 		addButton("Continue", "See what happens next", "endthescene")
-	if(state == "0watch"):
+	if(state == "0"):
 		# ((small idle
 		saynn("The tentacle monster bumps into the huge glass window.. Luckily, the reinforced glass isn't so easy to crack.")
 
@@ -433,7 +433,7 @@ func _run():
 		saynn("[say=pc]They look small because they're so far away.. but they're actually huge. They look like spheres.. and they're extremely bright. So bright that we can see them all the way from here.[/say]")
 
 		_tentacles.talk("We wanna visit stars.. Yes. Stars make us excited.")
-		saynn("The tentacles seem excited..")
+		saynn("It's really hard to understand them.. but it still feels surreal to be talking with a plant. They wiggle with excitement.")
 
 		saynn("[say=pc]Hold your horses. You probably wanna explore one of them.. but that's impossible. The stars are just pure balls of light and energy. You will turn into ash long before you get anywhere near them.[/say]")
 
@@ -468,6 +468,8 @@ func _run():
 		saynn("[say=pc]Job.. A job is where you come every day to do work. Our job.. we don't really have one right now. But for some people it gives them a sense of purpose in life.[/say]")
 
 		_tentacles.talk("Purpose.. We don't know if we have a purpose.")
+		saynn("It's really hard to understand them.. but it still feels surreal to be talking with a plant.")
+
 		saynn("[say=pc]And shop.. is where you come to get new things. Not for free, hah.. You gotta work at your job first. And then you come home to sleep. Everything is connected like that..[/say]")
 
 		_tentacles.talk("Eternal cycle.. Is this what life is all about?")
@@ -484,7 +486,9 @@ func _run():
 		saynn("[say=pc]Yeah. This cell has air.. but behind the glass.. you would suffocate in seconds.[/say]")
 
 		_tentacles.talk("We have been staring at danger this entire time. We are now afraid of void..")
-		saynn("[say=pc]Yeah, it sounds bad.. but we have developed ways of getting around in void. Spaceships. We might be in one right now.. but who knows.. this is probably a space station if I'd take a guess. It's safe here.[/say]")
+		saynn("It's really hard to understand them.. but it still feels surreal to be talking with a plant.")
+
+		saynn("[say=pc]It sounds bad.. but we have developed ways of getting around in void. Spaceships. We might be in one right now.. but who knows.. this is probably a space station if I'd take a guess. It's safe here.[/say]")
 
 		saynn("You look around.. your gaze catches a camera.")
 
@@ -496,6 +500,149 @@ func _run():
 		saynn("The tentacles nod.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "6"):
+		saynn("The tentacles are resting near the big reinforced window that your cell has.")
+
+		saynn("Their green pointy tips are watching the empty black void that's littered with little colorful dots.")
+
+		_tentacles.talk("We.. we are tired of this place.")
+		saynn("{psTentacles} can talk.. somehow.. but it's still really hard to understand them.")
+
+		saynn("[say=pc]Can you try to speak.. a little clearer?[/say]")
+
+		saynn("The tentacles turn towards you.")
+
+		_tentacles.talk("We.. can try.. to speak.. slower.. Does this help?")
+		saynn("You tilt your head, really stressing your ears. It all sounds like gibberish to you.")
+
+		addButton("Teach", "Give the tentacles some language lessons", "6_teach")
+		addButton("Deep conversation", "Try to connect with the tentacles on another level", "6_deep")
+		addButton("Give up", "This is not worth it", "6_giveup")
+	if(state == "6_teach"):
+		saynn("You clap your hands together, a teacher getting to work.")
+
+		saynn("[say=pc]Alright, let's start simple..[/say]")
+
+		saynn("You start with basics, teaching {psTentacles} the alphabet, each letter one at a time.")
+
+		saynn("[say=pc]One by one, they don't mean much.. but together, they form words..[/say]")
+
+		saynn("Next, you teach the basic structure of a sentence.. Verbs, nouns, adjectives.")
+
+		saynn("The tentacles sway, their tips focussed on you.")
+
+		saynn("You do your best, pointing at objects around you and gesturing, miming actions.")
+
+		saynn("[say=pc]This is a subject. This is a verb. This is an object. See?[/say]")
+
+		saynn("The tentacles seem to follow along, their swaying almost looks like nodding.")
+
+		saynn("Satisfied, you lean against one of the walls.")
+
+		saynn("[say=pc]Okay, let's try again now. Tell me what you were talking about before. Use your words.[/say]")
+
+		saynn("One thick tendril rises.. and a strained mental voice echoes in your head.")
+
+		_tentacles.talk("We.. grew tired of this small isolated space.")
+		saynn("You can only sigh and throw your head back.")
+
+		saynn("To your ears, everything that they try to say is just a cascade of beautiful.. but impossible noises. You can understand none of it.")
+
+		saynn("You slump, on the verge of giving up.")
+
+		saynn("It looks like.. the problem was never their vocabulary or grasp of rules.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "6_deep"):
+		_tentacles.doAnim("idle", {npcAction="kneel"})
+		saynn("Maybe the words.. the sounds.. maybe they're not the answer.")
+
+		saynn("Correcting the tentacles feels like a pointless idea. They know all the words already.. but you just can't understand them. Maybe the problem isn't in them..")
+
+		saynn("You slowly sink to your knees and reach your hand out.. not to grab.. but to simply make contact. Your palm is resting softly on one of the tentacles.")
+
+		saynn("You have no idea what you're doing. But, for some reason, it feels like you gotta do it.")
+
+		saynn("[say=pc]Show me.[/say]")
+
+		saynn("You close your eyes. You don't try to speak. Instead.. you try to listen.. with a part of yourself you rarely use.")
+
+		saynn("You think of the window.. of the stars.. of the feeling of being caged. You push towards the feeling.. a very hollow feeling.")
+
+		saynn("For a moment, nothing. Then, a warmth starts spreading under your hand. It travels up your arm. Some kind of presence, gentle and curious, brushing against the edges of your own consciousness.")
+
+		saynn("You don't resist. You allow your mind to open up to the intrusion..")
+
+		saynn("For a split second, the whole world dissolves into a single sensation. You don't hear words.. You experience them.")
+
+		saynn("The vast, cold blackness of space. A deep, resonant feeling of homesickness. A shimmering barrier. Profound sorrow.")
+
+		_tentacles.talk("You.. You hear the silence too.. Just like we do.")
+		saynn("It's your own internal monologue.. but the thought isn't yours. It's theirs.. translated perfectly through your bond. They were never speaking any languages.. They were speaking minds..")
+
+		saynn("Tears well in your closed eyes. It's not sadness.. It's an overwhelming relief.. of being finally, truly understood.")
+
+		saynn("[say=pc]Yes. I hear it. I'm sorry you're trapped.[/say]")
+
+		saynn("You share a clear image.. the two of you.. not as prisoner and monster.. but two trapped voices instead.")
+
+		_tentacles.talk("Together. Less silent.")
+		saynn("You open your eyes.. your vision is a bit blurry. But soon the focus returns.")
+
+		saynn("And even as you retract your hand away from the tentacle.. you can still feel the bond.")
+
+		saynn("[say=pc]You can speak in my head?[/say]")
+
+		_tentacles.talk("We always were trying to. But now you helped us to find the right language. Thank you, friend.")
+		saynn("This plant.. can read your mind. Huh. Maybe you don't even have to say anything?")
+
+		_tentacles.talk("Yes.")
+		saynn("That is.. fascinating.")
+
+		saynn("You raise a brow and look around. The walls of your cell seem quite thick.. but maybe they can still be penetrated.. in a different way.")
+
+		_tentacles.talk("We.. need some rest before we try something like that.")
+		saynn("That's fair.")
+
+		saynn("You let {psTentacles} rest.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "6_giveup"):
+		saynn("It's not worth it.")
+
+		saynn("The tentacles are just repeating random noises that they heard from you.. like a parrot.")
+
+		saynn("They're just simply too dumb.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "7"):
+		saynn("The tentacles are hanging around near the window.")
+
+		saynn("[say=pc]Hey there.[/say]")
+
+		_tentacles.talk("We greet you.")
+		saynn("They're near the window.. so they probably wanna stress their mind a bit.. and maybe yours too.")
+
+		saynn("[say=pc]Anything that you wanna do.. In particular?[/say]")
+
+		_tentacles.talk("Anything that would help us get out of here.")
+		saynn("Right..")
+
+		saynn("You lean against the wall and start thinking about it.")
+
+		saynn("The tentacles can read your mind. And they don't even have to touch you in order to be able to do it.")
+
+		_tentacles.talk("We're not sure if we can read anyone's mind.")
+		saynn("Being not sure is okay. Means that it might be possible.")
+
+		_tentacles.talk("Alternatively.. We might just talk with you more?")
+		saynn("Practice would never hurt. But who knows.. maybe this kind of practice can.")
+
+		saynn("You get a feeling that either approach would help here.")
+
+		addButton("Other minds", "Tell the tentacles to read other minds of this bio lab", "7_other")
+		addButton("Cuddle", "Spent time together and practice that way", "7_cuddle")
+		addButton("Not now", "You don't wanna do either", "7_notnow")
 
 func _react(_action: String, _args):
 	var _tentacles:PlayerSlaveryTentacles = GM.main.PS
@@ -560,5 +707,23 @@ func _react(_action: String, _args):
 
 	if(_action == "5_void"):
 		_tentacles.train(_tentacles.STAT_MIND)
+
+	if(_action == "6_teach"):
+		_tentacles.trainNothing()
+
+	if(_action == "6_deep"):
+		_tentacles.train(_tentacles.STAT_MIND)
+
+	if(_action == "6_giveup"):
+		_tentacles.trainNothing()
+
+	if(_action == "7_other"):
+		_tentacles.train(_tentacles.STAT_MIND)
+
+	if(_action == "7_cuddle"):
+		_tentacles.train(_tentacles.STAT_MIND)
+
+	if(_action == "7_notnow"):
+		_tentacles.trainNothing()
 
 	setState(_action)

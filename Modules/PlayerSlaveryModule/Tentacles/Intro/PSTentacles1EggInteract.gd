@@ -518,7 +518,7 @@ func _run():
 		addButton("Continue", "See what happens next", "revealTentacles")
 	if(state == "revealTentacles"):
 		# (( Anim with tiny tentacles
-		playAnimation(StageScene.TentaclesDuo, "idle", {tentaclesSizeTiny=true, plant=true, instantSleep=true})
+		playAnimation(StageScene.TentaclesDuo, "idle", {tentaclesSizeTiny=true, plant=true, instantSleep=true, tentaclesLess=true})
 		addCharacter(_tentacles.getTentaclesCharID())
 		saynn("Three small, green tentacles slowly uncurl. They are slick and slimy, glistening in the light.")
 

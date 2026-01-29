@@ -20,6 +20,9 @@ func _run():
 	var _tentacles:PlayerSlaveryTentacles = GM.main.PS
 
 	if(state == ""):
+		GM.pc.setLocation(_tentacles.getMonsterLoc())
+		aimCameraAndSetLocName(_tentacles.getMonsterLoc())
+		
 		biggestStat = _tentacles.getBiggestStat()
 		if (biggestStat == _tentacles.STAT_ANGER):
 			saynn("It's getting late.. The tentacle monster is looking quite tired too.. even if it doesn't show it.")
@@ -35,6 +38,8 @@ func _run():
 
 		addButton("Rest", "Time to rest!", "before_rest")
 	if(state == "before_rest"):
+		playAnimation(StageScene.TentaclesDuo, "idle", {plant=true,tentaclesSizeSmall=true})
+		
 		saynn("Before resting, you gotta get the tentacles back into their spot.")
 
 		saynn("[say=pc]Why don't you go back to your nest.. uh..[/say]")
@@ -47,6 +52,9 @@ func _run():
 		if (false):
 			addButton("PICKNAME", "YOU SHOULDNT SEE THIS", "pickName")
 	if(state == "pickName"):
+		removeCharacter(_tentacles.getTentaclesCharID())
+		addCharacter(_tentacles.getTentaclesCharID())
+		playAnimation(StageScene.TentaclesDuo, "sleep", {plant=true,tentaclesSizeSmall=true})
 		aimCameraAndSetLocName(_tentacles.LOC_MIDDLE)
 		GM.pc.setLocation(_tentacles.LOC_MIDDLE)
 		saynn("[say=pc]How about.. {psTentacles}?[/say]")
@@ -78,6 +86,10 @@ func _run():
 
 		addButton("Window", "Go approach it", "window")
 	if(state == "window"):
+		removeCharacter(_tentacles.getTentaclesCharID())
+		addCharacter(_tentacles.getScientist1CharID())
+		addCharacter(_tentacles.getScientist2CharID())
+		playAnimation(StageScene.Duo, "stand", {pc=_tentacles.getScientist1CharID(), npc=_tentacles.getScientist2CharID()})
 		aimCameraAndSetLocName(_tentacles.LOC_IMPORTANT)
 		GM.pc.setLocation(_tentacles.LOC_IMPORTANT)
 		saynn("You approach the reinforced window. On the other side you see two familiar scientists standing under the sterile corridor lights.")

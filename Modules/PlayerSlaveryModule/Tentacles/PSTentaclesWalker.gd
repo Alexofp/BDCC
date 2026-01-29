@@ -7,14 +7,16 @@ func _run():
 	var tentacles:PlayerSlaveryTentacles = GM.main.PS
 	
 	if(state == ""):
-		playAnimation(StageScene.Solo, "stand")
-		saynn("WALKING AROUND!")
-		
-
+		saynn("You're free to wander around your cell.")
 		var roomID:String = GM.pc.location
 		var _roomInfo = GM.world.getRoomByID(roomID)
 		aimCameraAndSetLocName(roomID)
-
+		
+		if(tentacles.getMonsterLoc() == roomID && !tentacles.hasEvent()):
+			var theAnimInfo:Array = tentacles.getTentaclesMeetAnim()
+			if(theAnimInfo.size() >= 3):
+				playAnimation(theAnimInfo[0], theAnimInfo[1], theAnimInfo[2])
+		
 		var theText:String = tentacles.getText(roomID)
 		if(!theText.empty()):
 			saynn(theText)
