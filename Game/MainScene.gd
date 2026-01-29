@@ -565,6 +565,9 @@ func loadData(data):
 		var id = SAVE.loadVar(sceneData, "id", "error")
 		
 		var scene = GlobalRegistry.createScene(id)
+		if(scene == null):
+			# If a scene doesn't exist, abort so the game is at least playable
+			break
 		add_child(scene)
 		sceneStack.append(scene)
 		print("Starting scene "+id)
