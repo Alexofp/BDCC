@@ -339,10 +339,6 @@ func aimCamera(roomID, instantly = false):
 	if(instantly):
 		camera.reset_smoothing()
 
-func resetCamera(instant:bool = false):
-	if(lastAimedRoomID != null && lastAimedRoomID != ""):
-		aimCamera(lastAimedRoomID, instant)
-
 func zoomIn(mult:float = 1.0):
 	camera.zoom *= 1.1 * mult
 	updateDarknessSize()
@@ -756,3 +752,5 @@ func loadData(data):
 		camera.zoom = Vector2(SAVE.loadVar(data, "zoomx", 1.0), SAVE.loadVar(data, "zoomy", 1.0))
 	
 	updateDarknessSize()
+	if(lastAimedRoomID != null && lastAimedRoomID != ""):
+		aimCamera(lastAimedRoomID, true)
