@@ -11,166 +11,81 @@ func getExpressionsFromText(text: String):
 	var currentText = ""
 	
 	var inExpr = false
-	var inString = false
-	var inString2 = false
-	var escapedCharacter = false
+	var inString = false   # For single quotes
+	var inString2 = false  # For double quotes
+	var escaped = false
 	
 	for letter in text:
-		if(escapedCharacter):
-			if(inExpr):
+		# 1. Handle Escaped Characters
+		if escaped:
+			if inExpr:
 				currentExpr += letter
 			else:
 				currentText += letter
-			escapedCharacter = false
+			escaped = false
 			continue
 		
-		if(!escapedCharacter && !inExpr && letter == "\\"):
-			escapedCharacter = true
-			#currentExpr += letter
+		# 2. Check for the Escape Slash
+		if letter == "\\":
+			escaped = true
+			if inExpr: currentExpr += letter # Keep slash inside expressions
 			continue
 		
-		if(!inExpr && letter == '{'):
-			inExpr = true
+		# 3. Inside Expression Logic
+		if inExpr:
+			# Handle Quote States
+			if letter in ["'", "’", "‘"]:
+				if not inString2: inString = !inString
+			elif letter == "\"":
+				if not inString: inString2 = !inString2
 			
-			if(currentText != ""):
-				result.append(["text", currentText])
-				currentText = ""
-			continue
-		
-		if(!escapedCharacter && inExpr && letter == "\\"):
-			escapedCharacter = true
-			currentExpr += letter
-			continue
-		
-		if(!inString && inExpr && letter in ["'", "’", "‘"]):
-			inString = true
-		else:
-			if(inString && inExpr && letter in ["'", "’", "‘"]):
-				inString = false
+			# Check for Closing Brace (only if not inside a string)
+			if letter == '}' and not inString and not inString2:
+				result.append(["expr", currentExpr])
+				currentExpr = ""
+				inExpr = false
+			else:
+				currentExpr += letter
 				
-		if(!inString2 && inExpr && letter == "\""):
-			inString2 = true
+		# 4. Outside Expression (Plain Text) Logic
 		else:
-			if(inString2 && inExpr && letter == "\""):
-				inString2 = false
-		
-		if(inExpr && !inString && !inString2 && letter == '}'):
-			result.append(["expr", currentExpr])
-			currentExpr = ""
-			inString = false
-			inString2 = false
-			escapedCharacter = false
-			inExpr = false
-			continue
-		
-		if(inExpr):
-			currentExpr += letter
-		else:
-			currentText += letter
+			if letter == '{':
+				if not currentText.empty():
+					result.append(["text", currentText])
+					currentText = ""
+				inExpr = true
+			else:
+				currentText += letter
 	
-	if(currentText != ""):
+	# 5. Flush remaining text
+	if not currentText.empty():
 		result.append(["text", currentText])
 	
 	return result
 
-#input pc.say('meow', 123)
-#output [ [WORD, "pc"], [DOT], [WORD, "say"], [OPENBRACKET], [STRING, "meow"], [COMMA], [NUMBER, 123], [CLOSEBRACKET], [EOF] ]
-func getLexems(text: String):
+var regex = RegEx.new()
+
+func _init():
+	# Pattern captures: Words/IDs, Strings (single/double), Numbers, and Symbols
+	regex.compile("([a-zA-Z_][a-zA-Z0-9_:]*)|'([^']*)'|\"([^\"]*)\"|(-?\\d+\\.?\\d*)|([(),.])")
+
+func getLexems(text: String) -> Array:
 	var tokens = []
+	for result in regex.search_all(text):
+		if result.get_string(1): # WORD
+			tokens.append([Token.WORD, result.get_string(1)])
+		elif result.get_string(2) or result.get_string(3): # STRING
+			tokens.append([Token.STRING, result.get_string(2) + result.get_string(3)])
+		elif result.get_string(4): # NUMBER
+			var n = result.get_string(4)
+			tokens.append([Token.NUMBER, n.to_float() if "." in n else n.to_int()])
+		elif result.get_string(5): # SYMBOLS
+			match result.get_string(5):
+				"(": tokens.append([Token.OPENBRACKET])
+				")": tokens.append([Token.CLOSEBRACKET])
+				".": tokens.append([Token.DOT])
+				",": tokens.append([Token.COMMA])
 	
-	var pos = 0
-	var textLen = text.length()
-	
-	while pos < textLen:
-		if(Util.spaceCharacters.has(text[pos])):
-			pos += 1
-		elif(Util.digits.has(text[pos]) || text[pos] == '-'):
-			var number = text[pos]
-			pos += 1
-			var hasDot = false
-			
-			while pos < textLen:
-				if(text[pos] == '.' && !hasDot):
-					hasDot = true
-					number += text[pos]
-					pos += 1
-				elif(Util.digits.has(text[pos])):
-					number += text[pos]
-					pos += 1
-				else:
-					break
-			
-			if(number == '-'):
-				number = '0'
-			var numberActual
-			if(hasDot):
-				numberActual = float(number)
-			else:
-				numberActual = int(number)
-			
-			tokens.append([Token.NUMBER, numberActual])
-		elif(Util.asciiletters.has(text[pos])):
-			var word = text[pos]
-			pos += 1
-			
-			while pos < textLen:
-				if(Util.asciiletters.has(text[pos]) || Util.digits.has(text[pos]) || text[pos] == "_" || text[pos] == ":"):
-					word += text[pos]
-					pos += 1
-				else:
-					break
-			
-			tokens.append([Token.WORD, word])
-		elif(text[pos] == "'"):
-			var string = ""
-			pos += 1
-			
-			while pos < textLen:
-				if(text[pos] == "'"):
-					pos += 1
-					break
-				
-				if(text[pos] == '\\' && (pos+1)<textLen && text[pos+1] == '\''):
-					string += '\''
-					pos += 2
-				else:
-					string += text[pos]
-					pos += 1
-				
-			tokens.append([Token.STRING, string])
-		elif(text[pos] == "\""):
-			var string = ""
-			pos += 1
-			
-			while pos < textLen:
-				if(text[pos] == "\""):
-					pos += 1
-					break
-				
-				if(text[pos] == '\\' && (pos+1)<textLen && text[pos+1] == '"'):
-					string += '"'
-					pos += 2
-				else:
-					string += text[pos]
-					pos += 1
-				
-			tokens.append([Token.STRING, string])
-		elif(text[pos] == "("):
-			tokens.append([Token.OPENBRACKET])
-			pos += 1
-		elif(text[pos] == ")"):
-			tokens.append([Token.CLOSEBRACKET])
-			pos += 1
-		elif(text[pos] == "."):
-			tokens.append([Token.DOT])
-			pos += 1
-		elif(text[pos] == ","):
-			tokens.append([Token.COMMA])
-			pos += 1
-		
-		else:
-			pos += 1
-		
 	tokens.append([Token.EOF])
 	return tokens
 
