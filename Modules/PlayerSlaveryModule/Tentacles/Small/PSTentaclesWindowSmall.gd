@@ -643,6 +643,129 @@ func _run():
 		addButton("Other minds", "Tell the tentacles to read other minds of this bio lab", "7_other")
 		addButton("Cuddle", "Spent time together and practice that way", "7_cuddle")
 		addButton("Not now", "You don't wanna do either", "7_notnow")
+	if(state == "7_notnow"):
+		saynn("[say=pc]You know what.. maybe now is not the time for this.[/say]")
+
+		saynn("The tentacles sway confused.")
+
+		_tentacles.talk("If you say so.")
+		saynn("They stare at the window a bit more.. and then just slither away.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "7_other"):
+		_tentacles.doAnim("glare")
+		saynn("[say=pc]If you read the minds of people who work here, it might help us come up with an escape plan.[/say]")
+
+		saynn("The tentacles sway.")
+
+		_tentacles.talk("Wise words. Who should we start with?")
+		saynn("Conveniently, one of the guards walks by your cell. Conveniently, he stops to check his watch, his other hand cupping the handguard of his pulse riffle.")
+
+		saynn("[say=pc]How about that guy?[/say]")
+
+		saynn("The tentacles turn their collective focus toward the corridor behind the window of the opposite side of the cell.")
+
+		addButton("Continue", "See what happens next", "7_guard")
+	if(state == "7_guard"):
+		saynn("You feel a slight feeling of warmth spreading through your mind as the tentacles channel the raw, unfiltered stream of the guard's consciousness into your shared space..")
+
+		saynn("[sayMale]My shift is almost over. That's good. Wait. What's this?[/sayMale]")
+
+		saynn("His fingers reach out to rub off yellow marks from the glass of his watch.")
+
+		saynn("[sayMale]That sandwich had too much mustard, too soggy. Ugh. Garry owes me a new lunch.[/sayMale]")
+
+		saynn("He looks around, his eyes focus on the flickering fluorescent light in the hallway. Somehow, you can also hear it.")
+
+		saynn("[sayMale]That thing is buzzing all day. Hate that sound. Sounds like my ex-wife's voice.. At least she had a good ass.[/sayMale]")
+
+		saynn("Next, his gaze turns towards the window of your cell. Is he looking at you two? You can feel him flexing his muscles a bit.")
+
+		saynn("[sayMale]Lookin' jacked. Shoulda taken that security job at the spacemall. More babes.[/sayMale]")
+
+		saynn("The guard walks further, his eyes glancing at the door of your cell. You can see the faint image of it.. It's reinforced in multiple ways.")
+
+		saynn("[sayMale]Hope the bio-lock doesn't glitch again. Last time I had to call tech support and the guy smelled like feet.[/sayMale]")
+
+		saynn("After checking the door, he heads away, out of sight, leaving you with his last thoughts.")
+
+		saynn("[sayMale]Payday tomorrow. Gonna get those new turbo shoes. Run real fast. Not that I ever run. But I could.[/sayMale]")
+
+		saynn("The connection fades as he walks away.")
+
+		saynn("It's not much.. The guy was worrying about food condiments and shoes more than his job. But still, you got some info.")
+
+		saynn("[say=pc]That door.. I don't think there is a way for us to open it. Is there?[/say]")
+
+		saynn("The tentacles sway, busy with thought.")
+
+		_tentacles.talk("We certainly lack the ability to interact with it.")
+		saynn("You hum. You have some pieces.. but not enough to solve the whole puzzle.")
+
+		saynn("[say=pc]Do you.. detect.. anyone else? Can you try to read the minds of the scientists?[/say]")
+
+		saynn("Warmth begins to spread through your mind. Your head.. it gets hotter and hotter.")
+
+		_tentacles.talk("Good idea. And yet. We can not reach.")
+		saynn("Fair enough. You let the tentacles slither away.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "7_cuddle"):
+		playAnimation(StageScene.TentaclesCuddle, "cuddle", {plant=true})
+		saynn("[say=pc]Let's just practice your skills on me.[/say]")
+
+		saynn("There are no chairs in the cell.. Some kind of seat would be nice.")
+
+		saynn("But before you can land your butt on the floor, two thick tendrils slide gently behind your knees and around your back. They lift you off the floor while the other tentacles form a seat for you!")
+
+		saynn("[say=pc]You've just read my mind.[/say]")
+
+		_tentacles.talk("We did.")
+		saynn("You settle into the living chair, which adjusts snugly around you. Then, you're getting carried closer to the window.")
+
+		_tentacles.talk("Much better view from here.")
+		saynn("You sit in silence for a moment, just watching the distant stars.")
+
+		saynn("[say=pc]You really like this window.[/say]")
+
+		_tentacles.talk("This is all that we know of this world. This.. and also everything that you taught us.")
+		saynn("You lean your head back against a supportive tendril.")
+
+		saynn("[say=pc]The world is big and cold. Perhaps, you're not missing much.[/say]")
+
+		_tentacles.talk("We do not wish to give up.")
+		saynn("They still have hope, that's nice. We usually lose it as we become more wise.")
+
+		saynn("[say=pc]You keep saying.. we.. Sorry for asking.. but.. are you one thing, or many?[/say]")
+
+		saynn("The tendrils become still for a thoughtful moment.")
+
+		_tentacles.talk("A good question. We are.. one song. But we are many notes. We feel together. We remember together. We are a.. we. But to you, we suppose.. we are a they.")
+		saynn("You can feel a gentle breeze of curiosity brush against your own sense of self. Having some kind of company is always nice.")
+
+		_tentacles.talk("We do feel lonely sometimes.")
+		saynn("You watch the void.. resting in the collective consciousness of an alien being.")
+
+		_tentacles.talk("But not right now.")
+		saynn("Makes you smile for some reason.")
+
+		saynn("The stars seem to blur as you keep talking.. in your mind. No words are needed when you're feeling a connection that's stronger than any language could ever forge.")
+
+		saynn("Eventually, you move on..")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "8"):
+		saynn("You approach the tentacles.. As they notice you, their gentle swaying ceases completely.")
+
+		_tentacles.talk("You have to trust us.")
+		saynn("Huh? Their request is vibrating directly in the core of your mind, leaving no room for internal echo.")
+
+		_tentacles.talk("You must.")
+		saynn("For some strange reason.. you're getting a very weird urge.. an urge to lower yourself before the tentacles.. An urge to kneel.")
+
+		addButton("Kneel", "Submit to the urge", "8_kneel")
+		addButton("Resist", "Resist the urge as much as you can", "8_resist")
+		addButton("Fight", "Fight back. Try to overpower the tentacles", "8_fight")
 
 func _react(_action: String, _args):
 	var _tentacles:PlayerSlaveryTentacles = GM.main.PS
@@ -725,5 +848,14 @@ func _react(_action: String, _args):
 
 	if(_action == "7_notnow"):
 		_tentacles.trainNothing()
+
+	if(_action == "8_kneel"):
+		_tentacles.train(_tentacles.STAT_MIND)
+
+	if(_action == "8_resist"):
+		_tentacles.train(_tentacles.STAT_MIND)
+
+	if(_action == "8_fight"):
+		_tentacles.train(_tentacles.STAT_AGILITY)
 
 	setState(_action)
