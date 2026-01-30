@@ -283,6 +283,7 @@ func getNewUniqueSceneID(blockedIDS=[]) -> int:
 	return result
 
 func runScene(id, _args = [], parentSceneUniqueID = -1):
+	GM.world.set("lastAimedRoomID", GM.pc.getLocation())
 	var scene = GlobalRegistry.createScene(id)
 	assert(scene != null, "SCENE WITH ID "+str(id)+" IS NOT FOUND. MAKE SURE IT WAS REGISTERED INSIDE THE MODULE.")
 	scene.uniqueSceneID = getNewUniqueSceneID([parentSceneUniqueID])
@@ -606,6 +607,9 @@ func loadData(data):
 	applyAllWorldEdits()
 	GM.world.addTransitions()
 	GM.pc.checkLocation()
+	var lastAimedLocation = GM.world.get("lastAimedRoomID")
+	if(lastAimedLocation != null && lastAimedLocation != ""):
+		GM.world.aimCamera(lastAimedLocation, true)
 
 func saveCharactersData():
 	var data = {}
