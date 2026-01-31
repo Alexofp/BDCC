@@ -761,11 +761,138 @@ func _run():
 		saynn("Huh? Their request is vibrating directly in the core of your mind, leaving no room for internal echo.")
 
 		_tentacles.talk("You must.")
-		saynn("For some strange reason.. you're getting a very weird urge.. an urge to lower yourself before the tentacles.. An urge to kneel.")
+		saynn("For some strange reason.. you're getting a very weird urge.. an urge to lower yourself before the tentacles.. A desire to kneel.")
 
 		addButton("Kneel", "Submit to the urge", "8_kneel")
 		addButton("Resist", "Resist the urge as much as you can", "8_resist")
-		addButton("Fight", "Fight back. Try to overpower the tentacles", "8_fight")
+	if(state == "8_kneel"):
+		_tentacles.doAnim("glare", {npcAction="kneel"})
+		saynn("Your knees feel weaker and weaker. And rather than fight it, you decide to let the insistent desire take over.")
+
+		saynn("You take a long breath.. and just watch.. becoming a passenger behind your own eyes. Your legs bend smoothly, lowering you first to one knee.. then to both.. onto the cool floor of the cell. Your hands get carefully placed on your thighs, your chin gets lowered, a sign of complete and total submission.")
+
+		saynn("You still see.. and feel everything.. but you don't control anything.. just a passive observer of your own body's actions. Your body is no longer yours..")
+
+		saynn("A single, slender tendril approaches. You feel gently tap, once, against your forehead.")
+
+		_tentacles.talk("Look at us.")
+		saynn("Your head lifts, against your own will, to look up. The hypnotic sway of the tentacles intensifies the control. You feel.. good.. very good. So good that you wanna moan.")
+
+		_tentacles.talk("Should we tug.. at your strings.")
+		saynn("Somehow, you get a slight bit of control back. But only for a single decision.")
+
+		addButton("Let it", "Allow the tentacles to tug at your strings.. whatever that means", "8_letit")
+		addButton("Enough", "The tentacles proved that they can control your mind.. that's enough", "8_enough")
+	if(state == "8_enough"):
+		_tentacles.doAnim("glare", {npcAction="stand"})
+		saynn("Whatever control you have.. you use it to exhort one thought.. enough.")
+
+		saynn("And the tentacles listen, giving you back the reins to your body.")
+
+		saynn("[say=pc]Hah..[/say]")
+
+		saynn("You gasp.. because you can. And then slowly get up to your feet.")
+
+		saynn("[say=pc]You.. you were controlling my mind.[/say]")
+
+		_tentacles.talk("Our power grows.. we can feel it.")
+		saynn("Good thing you're on the same side as them..")
+
+		_tentacles.talk("We do not wish to hurt you. Your intentions seem pure.")
+		saynn("Can't hide anything from them.")
+
+		saynn("[say=pc]I'm glad that you're getting stronger.[/say]")
+
+		_tentacles.talk("We still require a bit of.. practice. After we rest.")
+		saynn("You nod.. you need some time to recover too.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "8_letit"):
+		playAnimation(StageScene.Zonked, "cum", {pcCum=true, hideNPC=true, bodyState={naked=true, hard=true}})
+		saynn("A detached part of your mind agrees to anything that the tentacles want to propose..")
+
+		saynn("Moments later, an impulse of intense, artificial pleasure spikes near your crotch.. quickly spreading throughout the rest of your body, catching every nerve. You start panting.. fast.. and then it happens.")
+
+		if (GM.pc.hasReachableVagina()):
+			saynn("Your back arches. A hot gush of your juices hit the floor as your pussy clenches around nothing, squirting wildly in helpless pulses. You let out a choked, silent gasp, your body twitching from the immense uncontrollable pleasure waves that crash over you.. again and again.. As soon as one of your orgasms stops, another one starts..")
+
+			saynn("At some point your body is physically unable to sit upright anymore. You collapse onto the floor.. and squirm hard as your pussy keeps pulsing and clenching, shooting fountains of juices until there is no wetness left.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("Your back arches. A hot, thick rope of {pc.cum} hits the floor as your dick twitches and jumps, shooting wildly in helpless pulses. You let out a choked, silent gasp, your body jerking from the immense uncontrollable pleasure waves that crash over you.. again and again.. As soon as one of your orgasms stops, another one starts..")
+
+			saynn("At some point your body is physically unable to stay upright anymore. You collapse onto the floor.. and twitch hard as your {ps.penis} keeps pulsing and throbbing, shooting strings of seed until there is nothing left.")
+
+		elif (GM.pc.isWearingChastityCage()):
+			saynn("Your back arches. Your poor caged up dick twitches in its little prison.. until the pressure becomes too much to endure. A hot, thick rope of {pc.cum} hits the floor, your locked cock shooting wildly in helpless pulses. You let out a choked, silent gasp, your body jerking from the immense uncontrollable pleasure waves that crash over you.. again and again.. As soon as one of your orgasms stops, another one starts..")
+
+			saynn("At some point your body is physically unable to stay upright anymore. You collapse onto the floor.. and twitch hard as your {ps.penis} keeps pulsing and throbbing, shooting weak strings of seed until there is nothing left.")
+
+		else:
+			saynn("Your back arches. Your whole body squirms as a massive orgasm overtakes you. A chocked, silent gasp leaves your lips, your body jerking from the immense uncontrollable pleasure waves that crash over you.. again and again.. As soon as one of your orgasms stops, another one starts..")
+
+			saynn("At some point your body is physically unable to stay upright anymore. You collapse onto the floor.. and keep cumming.. until you just can't anymore.")
+
+		addButton("Continue", "See what happens next", "8_aftercum")
+	if(state == "8_aftercum"):
+		playAnimation(StageScene.Zonked, "tease", {hideNPC=true, bodyState={naked=true, hard=true}})
+		saynn("When it's all over, the tentacles finally give the reins of your body back to your mind.")
+
+		saynn("[say=pc]Ah..[/say]")
+
+		_tentacles.talk("We hope.. you enjoyed it.")
+		saynn("All you can do is nod a little.. still busy panting like hell.")
+
+		_tentacles.talk("Our power grows.. we can feel it.")
+		saynn("Good thing you're on the same side as them..")
+
+		_tentacles.talk("We do not wish to hurt you. Your intentions seem pure.")
+		saynn("Right, they can read your mind..")
+
+		saynn("After some time, you finally recover after that powerful orgasm. The monster offers you a hand.. a tentacle.. that you use to help get up back to your feet.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "8_resist"):
+		saynn("Your knees feel weaker and weaker. You can feel your body refusing to listen.. starting to fold. A deep, primal part of you is screaming that you should kneel.. that you should obey.. to be safe. Your control is slipping fast.")
+
+		saynn("No. If it wants to try to control your mind, you will make it work for it.")
+
+		saynn("And so you grit your teeth, tensing your muscles hard, forcing them to listen. A cold sweat appears on your skin. The tentacles' presence in your mind is intoxicatingly strong..")
+
+		_tentacles.talk("It is easier. Just surrender.")
+		saynn("But you're not gonna give up so easily. Bring it on.")
+
+		saynn("Images flood your consciousness.. The relief of giving in.. the warm approval of the tentacles.. the end of the constant struggle. It's all so terribly seductive.")
+
+		saynn("You cling to the sharp, bright spark of your own anger, your own defiance. You smile while gritting your teeth.")
+
+		saynn("[say=pc]Try.. me..[/say]")
+
+		saynn("One of the tentacles reaches near your eyes.. and starts swaying with a hypnotic rhythm, increasing the pressure. You try to close your eyes.. but the onslaught is relentless.")
+
+		saynn("You let out a choked gasp. One knee touches the cold floor..")
+
+		saynn("Get up.")
+
+		saynn("You pour every single bit of you into trying to maintain control. There is not enough mind power to look after everything. As soon as you focus on your feelings, your body starts to give in. You catch yourself.. and focus on every single passing moment.")
+
+		saynn("For a terrifying second, the two forces balance each other perfectly. The fight of a whole collective mind against your individual will.")
+
+		saynn("Just when you feel like you're about to lose control.. the pressure shatters.")
+
+		saynn("You surge upward, stumbling back, your breath ragged as if you've just ran a marathon. Your body is your own again.. trembling with adrenaline.")
+
+		saynn("The tentacles seem a little upset after losing.")
+
+		_tentacles.talk("This was great training for us. Still, why didn't you submit to us? You've wasted so much more energy this way.")
+		saynn("You catch your breath and look at them.")
+
+		saynn("[say=pc]You think others won't try to break free? I've resisted because I was able to.[/say]")
+
+		_tentacles.talk("We.. understand.")
+		saynn("Looks like the tentacles are slightly exhausted too. They slither away.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	var _tentacles:PlayerSlaveryTentacles = GM.main.PS
@@ -854,8 +981,10 @@ func _react(_action: String, _args):
 
 	if(_action == "8_resist"):
 		_tentacles.train(_tentacles.STAT_MIND)
+		_tentacles.train(_tentacles.STAT_ANGER)
 
-	if(_action == "8_fight"):
-		_tentacles.train(_tentacles.STAT_AGILITY)
+	if(_action == "8_letit"):
+		GM.pc.orgasmFrom("pc")
+		_tentacles.train(_tentacles.STAT_LUST)
 
 	setState(_action)

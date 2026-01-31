@@ -604,6 +604,11 @@ func talk(_text:String):
 	var _scene:SceneBase = GM.main.getCurrentScene()
 	#TODO: Hide/scamble depending on mind value
 	
+	# 1-6 GIBBERISH
+	# 7 - Rare
+	# 8 - Very rare
+	# 9-10 - perfect
+	
 	var _theText:String = processTalkText(_text)
 	if(_theText.empty()):
 		return
