@@ -89,87 +89,51 @@ func getLexems(text: String) -> Array:
 	tokens.append([Token.EOF])
 	return tokens
 
-# barebone interpetator with skipped AST generation
-# no error handling but it's enough for me
-func runLexems(lexems, overrides: Dictionary = {}):
+func runLexems(lexems: Array, overrides: Dictionary = {}):
 	var pos = 0
 	
-	if(lexems[pos][0] == Token.EOF):
+	# Early exit for empty input
+	if lexems[pos][0] == Token.EOF:
 		return ""
 	
-	if(lexems[pos][0] == Token.WORD):
-		var first = lexems[pos][1]
+	# 1. Parse the first identifier
+	var first = lexems[pos][1]
+	pos += 1
+	
+	var second = ""
+	var is_object_call = false
+	
+	# 2. Check for dot access: "obj.cmd"
+	if lexems[pos][0] == Token.DOT:
+		is_object_call = true
 		pos += 1
-		if(lexems[pos][0] == Token.EOF):
-			return [true, callFunc(first, [])]
-		elif(lexems[pos][0] == Token.OPENBRACKET):
+		if lexems[pos][0] == Token.WORD:
+			second = lexems[pos][1]
 			pos += 1
-			var arguments = []
 			
-			if(lexems[pos][0] == Token.CLOSEBRACKET):
-				pos += 1
-				if(lexems[pos][0] == Token.EOF):
-					return [true, callFunc(first, arguments)]
-			
-			elif(lexems[pos][0] == Token.STRING || lexems[pos][0] == Token.NUMBER):
+	# 3. Parse arguments if brackets exist: "(arg1, arg2)"
+	var arguments = []
+	if lexems[pos][0] == Token.OPENBRACKET:
+		pos += 1
+		while lexems[pos][0] != Token.CLOSEBRACKET and lexems[pos][0] != Token.EOF:
+			# Collect valid data types
+			if lexems[pos][0] in [Token.STRING, Token.NUMBER]:
 				arguments.append(lexems[pos][1])
-				pos += 1
-				
-				if(lexems[pos][0] == Token.COMMA):
-					while(lexems[pos][0] == Token.COMMA):
-						pos += 1
-						
-						if(lexems[pos][0] == Token.STRING || lexems[pos][0] == Token.NUMBER):
-							arguments.append(lexems[pos][1])
-						pos += 1
-						
-						if(lexems[pos][0] == Token.CLOSEBRACKET):
-							pos += 1
-							if(lexems[pos][0] == Token.EOF):
-								return [true, callFunc(first, arguments)]
-				elif(lexems[pos][0] == Token.CLOSEBRACKET):
-					pos += 1
-					if(lexems[pos][0] == Token.EOF):
-						return [true, callFunc(first, arguments)]
 			
-		elif(lexems[pos][0] == Token.DOT):
 			pos += 1
-			if(lexems[pos][0] == Token.WORD):
-				var second = lexems[pos][1]
+			# Skip comma separator if present
+			if lexems[pos][0] == Token.COMMA:
 				pos += 1
-				
-				if(lexems[pos][0] == Token.EOF):
-					return [true, callObjectFunc(first, second, [], overrides)]
-				elif(lexems[pos][0] == Token.OPENBRACKET):
-					pos += 1
-					var arguments = []
-					
-					if(lexems[pos][0] == Token.CLOSEBRACKET):
-						pos += 1
-						if(lexems[pos][0] == Token.EOF):
-							return [true, callObjectFunc(first, second, arguments, overrides)]
-					
-					elif(lexems[pos][0] == Token.STRING || lexems[pos][0] == Token.NUMBER):
-						arguments.append(lexems[pos][1])
-						pos += 1
-						
-						if(lexems[pos][0] == Token.COMMA):
-							while(lexems[pos][0] == Token.COMMA):
-								pos += 1
-								
-								if(lexems[pos][0] == Token.STRING || lexems[pos][0] == Token.NUMBER):
-									arguments.append(lexems[pos][1])
-								pos += 1
-								
-								if(lexems[pos][0] == Token.CLOSEBRACKET):
-									pos += 1
-									if(lexems[pos][0] == Token.EOF):
-										return [true, callObjectFunc(first, second, arguments, overrides)]
-						elif(lexems[pos][0] == Token.CLOSEBRACKET):
-							pos += 1
-							if(lexems[pos][0] == Token.EOF):
-								return [true, callObjectFunc(first, second, arguments, overrides)]
-	return [false, "Error while executing the expression"]
+		
+		# Move past the closing bracket
+		if lexems[pos][0] == Token.CLOSEBRACKET:
+			pos += 1
+
+	# 4. Final execution dispatch
+	if is_object_call:
+		return [true, callObjectFunc(first, second, arguments, overrides)]
+	
+	return [true, callFunc(first, arguments)]
 			
 func executeString(text: String, overrides: Dictionary = {}):
 	var expressions = getExpressionsFromText(text)
