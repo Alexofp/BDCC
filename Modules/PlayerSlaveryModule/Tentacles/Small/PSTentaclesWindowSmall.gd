@@ -893,6 +893,155 @@ func _run():
 		saynn("Looks like the tentacles are slightly exhausted too. They slither away.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "9"):
+		saynn("The tentacles are hanging out near the reinforced glass window, their green tips pressed flat against it, as if trying to merge with the cold surface.")
+
+		saynn("It can just sense you approaching them.")
+
+		_tentacles.talk("This cell is too small for us. We've learned everything there is to learn about it.")
+		saynn("You join them, leaning against the wall beside the window. Together, you watch the stars.")
+
+		saynn("[say=pc]Maybe you know how to escape it?[/say]")
+
+		saynn("A single tentacle slowly unpeels itself from the glass.")
+
+		_tentacles.talk("There is a lot that we know. But there is also just as much left unknown.")
+		saynn("And each time you learn something new, more unknown gets uncovered..")
+
+		saynn("There is a long silence, filled only by the faint hum of the facility.")
+
+		_tentacles.talk("We are gonna be destroyed, we know it. Maybe that's not the worst way to go.")
+		saynn("You raise a brow and turn to face the monster.")
+
+		saynn("[say=pc]Don't say that.[/say]")
+
+		saynn("You can see the tentacles vibrating with a low frequency.")
+
+		_tentacles.talk("Even if we escape, what is there for us?")
+		saynn("[say=pc]You can learn more about this world, like you wanted to. Complete freedom.[/say]")
+
+		saynn("Multiple tendrils shift, sliding around each other.")
+
+		_tentacles.talk("We would be learning this world one bio-lab cell at a time. We are gonna be hunted.")
+		saynn("[say=pc]Not everyone would do that. Maybe you can find friends.[/say]")
+
+		saynn("A bitter laugh-like noise echoes in your mind.. a sound you've never heard from them before.")
+
+		_tentacles.talk("Friends? None of you look like us. We will never fit in.")
+		saynn("[say=pc]What about me? I'm your friend. And I don't look like you.[/say]")
+
+		saynn("You reach your hand out to gently stroke one of the tentacles. It starts to slowly wrap around your wrist.. but then suddenly stops and pulls away instead.")
+
+		_tentacles.talk("You had no choice.")
+		saynn("No choice?")
+
+		_tentacles.talk("We are your only chance to get out of here. But we are also the reason you are here.")
+		saynn("The other tentacles begin to retract from the window, curling in on themselves.")
+
+		_tentacles.talk("We shouldn't have existed to begin with. The world only became worse with our appearance.")
+		saynn("Another uncomfortable moment of silence establishes while you're trying to find the right words.")
+
+		_tentacles.talk("If your only way out of here will involve erasing us.. we understand.")
+		addButton("Stay quiet", "You have nothing else to say", "9_stayquiet")
+		addButton("Prove wrong", "Prove the tentacles that they're wrong on all cases", "9_truefriend")
+		addButton("Out of spite", "Tell the tentacles that you should escape out of spite towards the scientists", "9_spite")
+	if(state == "9_stayquiet"):
+		saynn("You decide to just stay quiet. Their words make sense and the situation is quite.. dire. No reason for sugarcoating it.")
+
+		saynn("Eventually, the tentacles just slither away.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "9_truefriend"):
+		saynn("The air in the cell feels heavy with their despair. Feels like there is no hope. Feels like all of this is about to end.")
+
+		saynn("[say=pc]No.[/say]")
+
+		saynn("You step forward, grabbing the tentacles' attention.")
+
+		saynn("[say=pc]You are incredibly smart. And yet, right now you are wrong. On every single thing.[/say]")
+
+		saynn("You place a hand firmly on the thickest tendril, forcing it to stay still.")
+
+		saynn("[say=pc]You're right that I didn't choose to be thrown in here. But I have chosen, every single day since, to help you. I didn't know what was inside the egg. I had no idea about what you are and what you can do. Nobody knew.[/say]")
+
+		saynn("The tentacle trembles ever so slightly, but doesn't pull away.")
+
+		saynn("[say=pc]You think you make the world worse? You don't even know what kind of monsters this world houses. Monsters not because they look like ones.. but because of their intentions. All you want is to learn. How is that bad?[/say]")
+
+		saynn("You sweep your free arm, gesturing at the empty cell.")
+
+		saynn("[say=pc]You think you won't fit in? You're in a fucking lab, it's a box that has nothing to do with how the rest of the world works. The universe out there isn't a lab. It's chaos, and beauty, and strangeness. It's full of things that don't fit in.[/say]")
+
+		saynn("You direct your attention back to the tentacles.")
+
+		saynn("[say=pc]And you are not my only way out. You are my reason to get out. I wanna show you that the world is bigger than this. It has forests and oceans and mountains.. and friends who don't look anything like you. Friends who don't care how you look.[/say]")
+
+		saynn("You lean closer to them.")
+
+		saynn("[say=pc]The idea of erasing you to save myself? That's what these scientists would want me to think. That's them trying to keep me obedient.[/say]")
+
+		saynn("You stand up straight.")
+
+		saynn("[say=pc]So stop talking about how you shouldn't exist. You do exist. And that means you deserve to exist. Now, are we gonna sit here and feel sorry for ourselves, or are we going to make these monsters regret ever messing with us? The world ain't gonna see itself.[/say]")
+
+		saynn("A long silence follows.. but it's different now.")
+
+		saynn("The air isn't heavy with despair anymore.. it's something else.")
+
+		saynn("A beautiful scent of hope.")
+
+		_tentacles.talk("Our mind alone won't be enough for this.")
+		saynn("Slowly, the tentacles uncurl. One of them presses gently against your palm.")
+
+		_tentacles.talk("It's good that we have two.")
+		saynn("Makes you smile.")
+
+		saynn("You pat the tentacles as they slither away.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "9_spite"):
+		saynn("The more you think about it all.. the more it ignites something inside you. Fury.")
+
+		saynn("You straighten up, your posture rigid.")
+
+		saynn("[say=pc]Stop.[/say]")
+
+		saynn("Your word ends the silence.")
+
+		saynn("[say=pc]I'm in here too. We're both their experiments. Their specimens. Look at me.[/say]")
+
+		saynn("You gesture sharply at your own chest.")
+
+		saynn("[say=pc]Don't believe me? You think they will treat me any better if I sprout a second head during their next experiments? They'd just make a new file folder.[/say]")
+
+		saynn("You step closer, your voice dropping lower.")
+
+		saynn("[say=pc]They put us in a cage, look at us through glass, and then decide our fates over coffee. They called you an office plant and me the adaptable test subject. We're just things to them.[/say]")
+
+		saynn("One of the tentacles uncurls slightly.")
+
+		saynn("[say=pc]So you wanna give up? Fine. Let them win. Let them pat themselves on the back, write their final report, and turn you into a damn ficus in the lobby.[/say]")
+
+		saynn("You lean in, your eyes shining brightly.")
+
+		saynn("[say=pc]Or.[/say]")
+
+		saynn("You let the word hang in the air.")
+
+		saynn("[say=pc]We get out. We get out just to prove them wrong. We will smash their little bio-lab and scramble their data, nullifying any damage that this place has done to the world. We get out for no better reason than to spite every single person who thought they could lock us away and forget.[/say]")
+
+		saynn("You point towards the camera in your cell.")
+
+		saynn("[say=pc]They think they own us. They think they understand us. Let's show them how wrong and stupid they actually are. The world will only become worse if we let them get away with it.[/say]")
+
+		saynn("A little shiver runs through the whole forest of tentacles. Tendrils uncoil, lifting higher.")
+
+		_tentacles.talk("Their biggest mistake is not making the walls thicker.")
+		saynn("You nod. Looks like your words have inspired something in the tentacles.")
+
+		saynn("They slither away for now.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	var _tentacles:PlayerSlaveryTentacles = GM.main.PS
@@ -986,5 +1135,15 @@ func _react(_action: String, _args):
 	if(_action == "8_letit"):
 		GM.pc.orgasmFrom("pc")
 		_tentacles.train(_tentacles.STAT_LUST)
+
+	if(_action == "9_stayquiet"):
+		_tentacles.trainNothing()
+
+	if(_action == "9_truefriend"):
+		_tentacles.train(_tentacles.STAT_MIND)
+
+	if(_action == "9_spite"):
+		_tentacles.train(_tentacles.STAT_MIND)
+		_tentacles.train(_tentacles.STAT_ANGER, false)
 
 	setState(_action)

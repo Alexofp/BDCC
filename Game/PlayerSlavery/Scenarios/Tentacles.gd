@@ -536,7 +536,7 @@ func incStat(_statID:int, showMessage:bool = true) -> bool:
 	
 	return true
 
-func train(_statID:int) -> bool:
+func train(_statID:int, _passTime:bool = true) -> bool:
 	return incStat(_statID)
 
 func trainNothing() -> bool:
