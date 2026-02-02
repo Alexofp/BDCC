@@ -19,8 +19,18 @@ func _reactInit():
 		possible.append("3")
 	if(_tentacles.mind == 4):
 		possible.append("4")
-	if(_tentacles.mind >= 5):
+	if(_tentacles.mind == 5):
 		possible.append("5")
+	if(_tentacles.mind == 6):
+		possible.append("6")
+	if(_tentacles.mind == 7):
+		possible.append("7")
+	if(_tentacles.mind == 8):
+		possible.append("8")
+	if(_tentacles.mind == 9):
+		possible.append("9")
+	if(_tentacles.mind == 10):
+		possible.append("10")
 	
 	if(possible.size() > 0):
 		setState(RNG.pick(possible))
@@ -1042,6 +1052,133 @@ func _run():
 		saynn("They slither away for now.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "10"):
+		saynn("The tentacles are resting near the window.")
+
+		_tentacles.talk("We've been doing calculations..")
+		saynn("[say=pc]About how to escape?[/say]")
+
+		saynn("Some tentacles nod.")
+
+		saynn("[say=pc]Can't you just mind-control everyone? Get us a pilot who will fly us out of here?[/say]")
+
+		_tentacles.talk("The process of.. overpowering.. someone's will is quite taxing.")
+		saynn("You bet.")
+
+		_tentacles.talk("In theory.. we possess enough mental power for a few minds.")
+		saynn("Theory is good.. in theory.")
+
+		_tentacles.talk("The rest will destroy us with their weapons.")
+		saynn("That's less ideal.")
+
+		saynn("[say=pc]Is there nothing we can do? Can we train your mind further?[/say]")
+
+		saynn("The tentacles sway ever so slightly, their combined consciousness busy with thinking.")
+
+		_tentacles.talk("We have reached the limit of our mental power capacity. Further training would only provide highly-diminishing returns.")
+		saynn("There is gotta be something..")
+
+		_tentacles.talk("But our other characteristics might still be improved.")
+		saynn("Hm.. Indeed, intellect alone isn't too helpful. But if you combine it with something else.. like strength or agility..")
+
+		_tentacles.talk("Then our possible range of actions increases exponentially.")
+		saynn("And this, in turn, will decrease your chance of failure. Interesting.")
+
+		_tentacles.talk("Is there something else you wanted to do, friend?")
+		addButton("All good", "The limit of the tentacles' mind has been reached. Got it", "10_allgood")
+		addButton("Mind control me!", "(Lewd) Tell the tentacles to play with your mind a bit", "10_mindcontrol")
+	if(state == "10_allgood"):
+		saynn("You shake your head.")
+
+		saynn("[say=pc]I understood everything.[/say]")
+
+		saynn("The tentacles give the stars a short extra glance.. and then slither away.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "10_mindcontrol"):
+		saynn("You ponder for a moment.")
+
+		saynn("[say=pc]Well.. we can still practice, right?[/say]")
+
+		saynn("The tentacles are still..")
+
+		_tentacles.talk("We are listening.")
+		saynn("A feeling of playful curiosity ripples through your body. And the tentacles can certainly pick up on it.")
+
+		saynn("[say=pc]Well.. why not practice on..[/say]")
+
+		saynn("Before you even finish that sentence.. you begin to notice something. Your hand lifts on its own, your fingers trailing down the side of your neck, catching the tight metal collar and gently tugging on it, messing with your breathing.")
+
+		saynn("[say=pc]Mmhm..[/say]")
+
+		_tentacles.talk("You wanna do as I ask, right?")
+		saynn("Such a direct question. It makes you want to stall for a bit longer.")
+
+		saynn("[say=pc]Well.. it depends.[/say]")
+
+		saynn("Your own hand lifts even higher, thumb resting under the chin while the rest of your digits are brushing over your own lips.. all on their own.")
+
+		_tentacles.talk("Is that so? You're not gonna obey me unconditionally?")
+		saynn("[say=pc]I..[/say]")
+
+		saynn("As you open your mouth to say something, two of your digits sneak past your teeth to rest on your tongue. All the while, your other hand gets stolen from you as well.. it gently raises, following the curves of your {pc.masc} belly before cupping your {pc.breasts}.")
+
+		saynn("[say=pc]Mm..[/say]")
+
+		saynn("A feeling of warmth spreads throughout your whole body. A soft muffled gasp escapes your lips.. a sound that you're not sure if was done by your will.")
+
+		saynn("You begin kissing and suckling on your own fingers.. while your other palm squeezes your chest, the touch sends a jolt of sensation directly into your trapped consciousness.")
+
+		if (GM.pc.hasReachableVagina()):
+			saynn("More and more muffled noises of pleasure leave your occupied mouth, your pussy getting coated with a slick layer of your juices.")
+
+		elif (GM.pc.hasReachablePenis()):
+			saynn("More and more muffled noises of pleasure leave your occupied mouth, your cock getting hard, the tip gaining a shy drop of your pre.")
+
+		elif (GM.pc.isWearingChastityCage()):
+			saynn("More and more muffled noises of pleasure leave your occupied mouth, your cock trying to get hard in its cage, the tip gaining a shy drop of your pre.")
+
+		else:
+			saynn("More and more muffled noises of pleasure leave your occupied mouth, your body getting aroused fast.")
+
+		_tentacles.talk("Wanna say something?")
+		saynn("Suddenly, your hands stop. Your digits retract out of your mouth and leave your chest be.")
+
+		saynn("You look down at yourself.. and see your belly moving from your deep breathing. Unsure, you move your tongue a bit.. and feel it responding. At least that part isn't stolen from you.")
+
+		saynn("[say=pc]Well..[/say]")
+
+		saynn("The tentacles do an equivalent of rolling their eyes.. by making you roll yours.")
+
+		saynn("[say=pc]My bad. Of course I wanna say something to you.[/say]")
+
+		saynn("You didn't say none of that.. Well.. you did.. but it wasn't by your own will. Or was it? If no one is disagreeing.. then.. Why are we fighting it?")
+
+		saynn("[say=pc]I wanna show my complete submission to you.[/say]")
+
+		saynn("Your bratty side.. what's left of it.. is screaming to not make it so easy for them. And yet, your body refuses to listen. Your every thought gets gradually corrupted.. switched for different ones.")
+
+		saynn("Submission? Yes. Submission is good.")
+
+		saynn("Kneeling is a good way to show that you belong to the tentacles..")
+
+		addButton("Kneel", "Kneel before the tentacles", "10_kneel")
+	if(state == "10_kneel"):
+		_tentacles.doAnim("glare", {npcAction="kneel"})
+		saynn("Gradually, you lower yourself down to your knees. Your chin is low, your eyes look at the floor before your.. owner. Yes, owner.")
+
+		saynn("[say=pc]I belong to you, my owner..[/say]")
+
+		saynn("Yes, that felt good to say it. It felt.. right.")
+
+		saynn("One of the tentacles, the most thin one, reaches out towards your collar, its flexible tip grabbing the leashing point.. forming a leash of sorts.")
+
+		_tentacles.talk("Look up at us.")
+		saynn("You obey, raising your chin to look at your owner. Instinctively, you straighten your posture more and put your hands on your legs.")
+
+		saynn("[say=pc]Of course, owner..[/say]")
+
+		_tentacles.talk("That's a good.. pet. So obedient.")
 
 func _react(_action: String, _args):
 	var _tentacles:PlayerSlaveryTentacles = GM.main.PS
@@ -1145,5 +1282,11 @@ func _react(_action: String, _args):
 	if(_action == "9_spite"):
 		_tentacles.train(_tentacles.STAT_MIND)
 		_tentacles.train(_tentacles.STAT_ANGER, false)
+
+	if(_action == "10_allgood"):
+		_tentacles.trainNothing()
+
+	if(_action == "10_mindcontrol"):
+		_tentacles.trainNothing()
 
 	setState(_action)
