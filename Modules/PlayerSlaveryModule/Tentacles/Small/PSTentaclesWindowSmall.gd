@@ -1164,7 +1164,7 @@ func _run():
 
 		addButton("Kneel", "Kneel before the tentacles", "10_kneel")
 	if(state == "10_kneel"):
-		_tentacles.doAnim("glare", {npcAction="kneel"})
+		_tentacles.doAnim("glare", {npcAction="kneel", bodyState={naked=true,hard=true}})
 		saynn("Gradually, you lower yourself down to your knees. Your chin is low, your eyes look at the floor before your.. owner. Yes, owner.")
 
 		saynn("[say=pc]I belong to you, my owner..[/say]")
@@ -1178,7 +1178,58 @@ func _run():
 
 		saynn("[say=pc]Of course, owner..[/say]")
 
-		_tentacles.talk("That's a good.. pet. So obedient.")
+		saynn("The many tentacles loom over you while your mind is ecstatic from being able to do what it always wanted to do.. to serve.")
+
+		_tentacles.talk("Good. Now, use your words. Tell us what you are.")
+		saynn("Of course you know who you are, it's obvious.")
+
+		saynn("[say=pc]I am yours. Your pet. Your plaything. Your property.[/say]")
+
+		saynn("Another wave of warmth touches your every nerve. The tentacle that holds your collar increases its grip and tension, making the back of your collar create extra pressure on your neck.")
+
+		_tentacles.talk("And what do you want from your owner?")
+		saynn("That question already has an answer in your mind as well..")
+
+		saynn("[say=pc]I want to please you. I want your touch. I want your approval.[/say]")
+
+		_tentacles.talk("Show us your desire.")
+		if (GM.pc.hasReachablePenis()):
+			saynn("Your hands begin to move again.. but slower now. They slide down your body, following its curves. One hand reaches between your legs, your digits wrapping around your hard cock and proceeding to stroke it. The other drifts back to your chest, fingers pinching and rolling your hard nipple.")
+
+		elif (GM.pc.isWearingChastityCage()):
+			saynn("Your hands begin to move again.. but slower now. They slide down your body, following its curves. One hand reaches between your legs, your digits wrapping around your chastity cage.. and tugging on it. The other drifts back to your chest, fingers pinching and rolling your hard nipple.")
+
+		elif (GM.pc.hasReachableVagina()):
+			saynn("Your hands begin to move again.. but slower now. They slide down your body, following its curves. One hand reaches between your legs, your digits finding your clit and proceeding to play with it. The other drifts back to your chest, fingers pinching and rolling your hard nipple.")
+
+		else:
+			saynn("Your hands begin to move again.. but slower now. They slide down your body, following its curves. One hand reaches between your legs, rubbing your crotch. The other drifts back to your chest, fingers pinching and rolling your hard nipple.")
+
+		saynn("[say=pc]Ah..[/say]")
+
+		saynn("You moan and arch your back, presenting yourself proudly to your owner.")
+
+		_tentacles.talk("That's a good.. pet. So obedient. You did enough, thank you.")
+		saynn("The praise is like a drug. It makes you want to continue serving.. to obey every command that your owner would issue to you.. forever.")
+
+		saynn("The tentacles let go of your collar.")
+
+		saynn("[say=pc]Owner?..[/say]")
+
+		saynn("They just stay silent.. and wait.")
+
+		saynn("That eternal desire of servitude.. eventually begins to fade. You blink a few times.. and suddenly realize how clouded your mind really was.")
+
+		saynn("[say=pc]Oh.[/say]")
+
+		saynn("You truly believed it.. that the tentacles were your owner.. owners?")
+
+		_tentacles.talk("Did you enjoy it?")
+		saynn("[say=pc]It was.. certainly a unique experience.[/say]")
+
+		saynn("You slowly get up.. hide your aroused private bits. Gotta focus on escaping this place.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	var _tentacles:PlayerSlaveryTentacles = GM.main.PS

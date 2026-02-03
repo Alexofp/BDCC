@@ -310,13 +310,6 @@ func _run():
 		saynn("They have gotten quite strong, haven't they? And so fast, too.")
 
 		addButton("Continue", "See what happens next", "endthescene")
-		# (( a0 - total fail
-		# (( a1 - still fail
-		# (( a2 - neutral for a while but loses
-		# (( a3 - wins because tickles or lusts
-		# (( a4 - can win somewhat easily
-		# (( a5 - can win easily with one tentacle
-		# (( aa - can lift you
 	if(state == "p0"):
 		saynn("You get tentacles' attention and bring them to the box that has lots of differently-shaped holes in it.. along with separate objects of the same shapes.")
 
@@ -660,6 +653,106 @@ func _run():
 		saynn("[say=pc]Wait, wait. This is a different thing.[/say]")
 
 		saynn("You try to explain the rules of chess.. but the board is ruined anyway..")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "a6"):
+		_tentacles.doAnim("glare", {npcAction="shove"})
+		saynn("Arm-wrestling.. Now that the tentacles are even bigger, you're pretty sure that you can't win no matter how much you try. You just have to use a different strategy, there is no other way.")
+
+		saynn("What if you just wrestle the tentacles into submission. That's gotta work.")
+
+		saynn("With no better plan.. you wait until the tentacles aren't paying attention.. and strike!")
+
+		saynn("You launch yourself at the cluster of tentacles, wrapping your arms around the most thick ones and trying to pin them to the floor. The tentacles barely register, your weight.. it feels like you're trying to wrestle a street lamp. They're just flexing a bit before setting you back on your feet with a gentle push.")
+
+		_tentacles.talk("What is this action? We are ready to grab your arm.")
+		saynn("Undeterred, you pivot slightly, spotting a few slender tendrils. You dive towards them, managing to grab two of them, pinning them against the floor with your body weight!")
+
+		saynn("[say=pc]Got you![/say]")
+
+		saynn("The thin tentacles squirm for a moment.. and then go limp, submitting. A victory has been achieved!")
+
+		_tentacles.talk("Is this the new way to train our strength? We understand.")
+		saynn("Something tells you that this isn't over yet..")
+
+		addButton("Continue", "See what happens next", "6_neck")
+	if(state == "6_neck"):
+		playAnimation(StageScene.TentaclesChoke, "chokefast", {plant=true})
+		saynn("A thicker, stronger tentacle.. one of the ones that you tried to tackle first.. slides around your waist. Another loops around your upper chest. With terrifying ease, they lift you straight off the ground.")
+
+		saynn("Then.. a third tendril wraps firmly around your neck.. with that same casual grip..")
+
+		saynn("[say=pc]Wait.. Ghh. That's my neck! Neck is important.[/say]")
+
+		saynn("The pressure isn't crushing.. but it's certainly there, making your breathing particularly hard. Your feet kick uselessly in the air.")
+
+		saynn("[say=pc]Air! Don't cut off my air![/say]")
+
+		saynn("You gesture frantically at your throat with your hands.. which also get grabbed by the tentacles into a tight hold.")
+
+		saynn("The corners of your vision begin to fade into darkness.")
+
+		saynn("[say=pc]Blood! You're cutting out the bloodflow! You won! Gh.. fully..[/say]")
+
+		_tentacles.talk("Victory.")
+		addButton("Continue", "See what happens next", "6_fall")
+	if(state == "6_fall"):
+		_tentacles.doAnim("idle", {npcAction="defeat"})
+		saynn("All at once, the tentacles finally let go. With no support, you drop to the floor.. ouch.")
+
+		saynn("You cough and rub your neck.")
+
+		saynn("[say=pc]How am I even gonna train you further?[/say]")
+
+		saynn("You'd need someone who is stronger.. but that'd be hard to find.. especially here.")
+
+		saynn("The tentacles, satisfied with their victory, slither away.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "a7"):
+		_tentacles.doAnim("glare")
+		saynn("The moment you approach the tentacles, the air itself in the cell changes.. it gets tense.")
+
+		saynn("The tentacles are ready, they're eagerly awaiting this training session. The armwrestling isn't even on your mind anymore. How to survive is.")
+
+		_tentacles.talk("Is it time to train?")
+		saynn("[say=pc]Nope. Not now. We're taking a break.[/say]")
+
+		saynn("You start stepping away.. a strategic retreat. You don't even make it two steps.")
+
+		addButton("Continue", "See what happens next", "7_grab")
+	if(state == "7_grab"):
+		playAnimation(StageScene.TentaclesSex, "tease", {plant=true})
+		saynn("A single tendril snaps out, catching your wrist in an instant.")
+
+		saynn("[say=pc]I know that you're stronger![/say]")
+
+		_tentacles.talk("We wish to train. Sorry, friend.")
+		saynn("Another tentacles join, catching your leg and wrapping around your torso this time! Together, they lift you off the floor.")
+
+		saynn("[say=pc]Ah! Just don't grab my neck.[/say]")
+
+		saynn("The rest of the tentacles join, each one grabbing one of your limbs. It'd be kinda fun.. if it wasn't scary.")
+
+		saynn("Together, all the tentacles begin moving you around the cell, slithering across the floor. At the same time, they also start lifting you higher before lowering you back down.. repeating that motion.")
+
+		saynn("It's like.. they're using your whole body as a dumbbell.")
+
+		saynn("[say=pc]Am I really just a piece of gym equipment now to you?[/say]")
+
+		saynn("Looks like you are.. Up. Down. Up. Down. If anyone is watching you through the security camera, they're probably enjoying the show right now.")
+
+		saynn("[say=pc]You're strong. Can I get down now?[/say]")
+
+		saynn("The tentacles hit one of the walls while slithering around.. leaving a dent in it. Huh.")
+
+		saynn("[say=pc]There could be space behind any wall, be careful.[/say]")
+
+		saynn("They test their own strength and coordination for a bit more.. before finally lowering you down to the floor.")
+
+		saynn("[say=pc]Uh.[/say]")
+
+		saynn("Lifting a single person means they're strong.. but it feels like they still need more training to be able to fight the whole bio-lab worth of armed guards. Hopefully it will all be worth it.")
 
 		addButton("Continue", "See what happens next", "endthescene")
 
