@@ -755,6 +755,100 @@ func _run():
 		saynn("Lifting a single person means they're strong.. but it feels like they still need more training to be able to fight the whole bio-lab worth of armed guards. Hopefully it will all be worth it.")
 
 		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "a8"):
+		saynn("You were thinking about offering a friendly match of armwrestling.. but it looks like the tentacles want another big workout. They sure got strong fast. Makes sense since they don't have the same physiology as you.")
+
+		saynn("The many tentacles already begin reaching towards you.. probably to lift you.")
+
+		saynn("[say=pc]Wait![/say]")
+
+		saynn("The thick green tips pause for a second.")
+
+		saynn("You look around for the heaviest thing in the room. Your bed.. isn't exactly heavy.. the shower.. you'd rather not have it ripped out of the wall.. the fridge.. huh.")
+
+		saynn("This might be the perfect object. You point at the fridge behind you.")
+
+		saynn("[say=pc]I bet you wouldn't lift that.[/say]")
+
+		_tentacles.talk("We can certainly try.")
+		saynn("The tentacles take up the offered challenge, their attention shifts from you to the large fridge humming in the corner.")
+
+		saynn("They slither up to you and inspect it.. by putting its green slimy tendrils all over it.. like its some kind of adult cartoon.")
+
+		saynn("Then, they commit.")
+
+		saynn("Thick tentacles wrap around the base and sides. With a loud creak from the floor tiles, the fridge gets lifted a few inches off the ground.")
+
+		saynn("[say=pc]Okay, that's something.[/say]")
+
+		saynn("That thing was stocked full.. and yet they lifted it. They don't seem to be done either.. They begin to move it, raising it first.. before lowering it back down. The fridge's internals hum louder as they get tested against the shifting gravity.. Luckily the power cord seems to be long enough for the fridge to almost reach the ceiling.")
+
+		saynn("The tentacles keep going through with their new workout routine while you just watch them. You get a feeling.. that if the tentacles would chuck that thing somewhere.. it might do some serious damage.")
+
+		saynn("There aren't really any visible muscles in the tentacles.. none that you can see anyway. They just get thicker as they become stronger.. more agile.")
+
+		saynn("[say=pc]Maybe that's enough?[/say]")
+
+		saynn("They keep going a bit longer.. and then place the fridge back in its place.")
+
+		saynn("Despite all of that, they don't really look tired. They just slither off to somewhere else.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "a9"):
+		saynn("It looks like the tentacles could use another workout. Considering how crazy-strong they've gotten, saying no to them would be a big mistake on your part.")
+
+		saynn("You see a fridge in the corner of your cell.. and decide to climb it.")
+
+		saynn("[say=pc]There is no way you'd lift the fridge now.[/say]")
+
+		saynn("The tentacles see that and instantly understand what to do. They slither up to the fridge, slip its strongest tendrils underneath it and get a good grip.. before proceeding to try to lift it.")
+
+		saynn("With a low sound of the metal being stressed, the entire unit.. with you on top.. begins to rise smoothly into the air. You grip the edges, trying not to fall off.")
+
+		saynn("[say=pc]Really?[/say]")
+
+		saynn("They don't stop and wrap more tentacles around the fridge. Then they just proceed to raise and lower the whole contraption.. Gradually, they get more comfortable with the weight.")
+
+		saynn("They try to raise it as high as they can.. but find their limit. Huh. It looks like the tentacles have reached their top shape. They're as strong as they can be. Any extra training would just lead to diminishing returns.")
+
+		_tentacles.talk("We.. we are ready.")
+		saynn("[say=pc]Alright. Hm.[/say]")
+
+		saynn("The tentacles keep going for a bit longer.. while you just sit on the edge.")
+
+		saynn("[say=pc]You should be able to smash everything in here now, I bet. But would that be enough?[/say]")
+
+		saynn("You will have to think about it.")
+
+		saynn("After the tentacles get bored, they lower the fridge and set it down into its spot. The tendrils let go and retreat.")
+
+		saynn("They certainly seem as dense as they can be too. Any extra thickness would just lead to loss of agility.")
+
+		saynn("After that workout, they just slither away.")
+
+		addButton("Continue", "See what happens next", "endthescene")
+	if(state == "a10"):
+		saynn("The tentacles have already reached peak levels of strength and agility.. but you decide to offer them a match of arm-wrestling anyway.")
+
+		saynn("The tentacles offer you their weakest tendril.. And watch as you try to idly bend it to your side of the table.")
+
+		saynn("There is no point in this.. This is a bigger workout for you rather than them. Still, it gives you some time to think about stuff.")
+
+		saynn("[say=pc]That reinforced glass.. I bet you can smash it now.[/say]")
+
+		saynn("The tentacles get tired of your attempts. They grab you and put you on top of the fridge. And then they start lifting the fridge.. while you're sitting on top.")
+
+		saynn("[say=pc]Yeah, with this. They sure made a huge mistake leaving the fridge like that. But I think we will need more than just raw power.[/say]")
+
+		saynn("The tentacles go through their routine, raising and lowering the fridge until they get satisfied. There is no obvious change in them while they do this, any new gains are barely visible.")
+
+		saynn("[say=pc]You probably wouldn't hurt a fly.. unless I make you really angry.[/say]")
+
+		saynn("After the tendrils get bored, they just put the fridge back where it was.. In the obvious dent in the floor.")
+
+		saynn("You hop off the fridge and watch the tentacles slither away.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	var _tentacles:PlayerSlaveryTentacles = GM.main.PS
@@ -799,8 +893,18 @@ func _react(_action: String, _args):
 			possible.append("a3")
 		if(_tentacles.agility == 4):
 			possible.append("a4")
-		if(_tentacles.agility >= 5):
+		if(_tentacles.agility == 5):
 			possible.append("a5")
+		if(_tentacles.agility == 6):
+			possible.append("a6")
+		if(_tentacles.agility == 7):
+			possible.append("a7")
+		if(_tentacles.agility == 8):
+			possible.append("a8")
+		if(_tentacles.agility == 9):
+			possible.append("a9")
+		if(_tentacles.agility == 10):
+			possible.append("a10")
 		
 		if(_tentacles.agility != 1):
 			_tentacles.train(_tentacles.STAT_AGILITY)
