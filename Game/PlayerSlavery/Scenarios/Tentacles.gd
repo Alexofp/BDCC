@@ -259,7 +259,7 @@ func checkEvent(_scene, _loc:String) -> Array:
 	
 	if(growStage == STAGE_NORMAL):
 		if(GM.main.getTime() > 20*60*60):
-			if(daysNormal >= 2):
+			if(daysNormal >= 1):
 				return ["PSTentaclesEndingScene"]
 			return ["PSTentaclesNormalSleep"]
 	

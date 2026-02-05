@@ -160,6 +160,7 @@ func _react(_action: String, _args):
 
 	if(_action == "doSleep"):
 		GM.main.startNewDay()
+		_tentacles.clearEvent()
 		_tentacles.setStage(_tentacles.STAGE_NORMAL)
 
 	setState(_action)
