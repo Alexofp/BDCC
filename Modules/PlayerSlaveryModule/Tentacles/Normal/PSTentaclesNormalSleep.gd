@@ -188,8 +188,8 @@ func _run():
 
 		addButton("Continue", "See what happens next", "grabsSyr")
 	if(state == "grabsSyr"):
-		addCharacter(GM.main.PS.getScientist1CharID())
-		addCharacter(GM.main.PS.getScientist2CharID())
+		removeCharacter(GM.main.PS.getScientist1CharID())
+		removeCharacter(GM.main.PS.getScientist2CharID())
 		playAnimation(StageScene.Solo, "stand")
 		saynn("You approach the opened case and grab the auto-injector syringe. The yellow fluid inside is glowing faintly.")
 
