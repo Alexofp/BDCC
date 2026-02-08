@@ -89,6 +89,8 @@ var daysNormal:int = 0
 
 var didRubLustEvent:bool = false
 
+var flagInjectForced:bool = false # Was the inject ending forced because the pc has run out of time
+
 # mood
 var eventNeed:int = 0
 var lastEventType:int = -1
