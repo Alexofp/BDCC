@@ -54,6 +54,7 @@ const LOC_SHOWER = "pstent_shower"
 const LOC_PLAY = "pstent_play"
 const LOC_MIDDLE = "pstent_middle"
 const LOC_WINDOW = "pstent_window"
+const LOC_DOOR = "pstent_left"
 
 const LOC_ENTRANCE = "pstent_entrance"
 
@@ -204,16 +205,58 @@ func satisfyEventNeed():
 
 func getText(_loc:String) -> String:
 	var Ar:Array = []
+	
+	#if(_loc == LOC_IMPORTANT):
+	#	Ar.append("Test test TEST TEST")
+	
+	if(_loc == LOC_PLAY):
+		if(growStage >= STAGE_TINY):
+			Ar.append("There is a table here with a single chair. Near the table there are a few boxes with stuff.")
+		else:
+			Ar.append("There is a table here with a single chair.")
+	
+	if(_loc == LOC_WINDOW):
+		Ar.append("There is a reinforced window here. It gives you a great view of the infinite void.")
+	
+	if(_loc == LOC_SHOWER):
+		Ar.append("The wall has a shower head installed. The shower drain keeps the rest of the floor dry.")
+	
+	if(_loc == LOC_FRIDGE):
+		Ar.append("There is a fridge here!")
+	
+	if(_loc == LOC_IMPORTANT):
+		Ar.append("There is a window here that leads into some corridor.")
+	
+	if(_loc == LOC_DOOR):
+		Ar.append("There is a highly-reinforced sealed door here. Above it is a security camera that always tracks your movement.")
+	
+	if(_loc == LOC_BED):
+		Ar.append("You're standing near your bed.")
+		
+	if(_loc == LOC_MIDDLE):
+		if(growStage == STAGE_EGG):
+			Ar.append("You're standing near a very weird egg.")
+		if(growStage == STAGE_TINY):
+			Ar.append("You're standing near 3 tiny green tentacles that are swaying in their nest.")
+		if(growStage == STAGE_TINY_AFTERTEST):
+			Ar.append("You're standing near 3 tiny green tentacles. They seem to be sleeping in their nest.")
+		if(growStage == STAGE_SMALL):
+			if(monsterLoc != LOC_MIDDLE):
+				Ar.append("The tentacles' nest is still here. Currently it's empty.")
+		if(growStage == STAGE_SMALL_ENDDAY):
+			Ar.append("You're standing near small green tentacles. They seem to be sleeping in their nest.")
+		
+		if(growStage in [STAGE_NORMAL]):
+			if(monsterLoc != LOC_MIDDLE):
+				Ar.append("The tentacles' nest is still here. Currently it's empty.")
+		
 	if(isSmallOrNormal()):
 		Ar.append("eventNeed: "+str(eventNeed))
 		Ar.append("anger: "+str(anger))
 		Ar.append("agility: "+str(agility))
 		Ar.append("mind: "+str(mind))
 		Ar.append("lust: "+str(lust))
-	
-	if(_loc == LOC_IMPORTANT):
-		Ar.append("Test test TEST TEST") #TODO: REMOVE BEFORE SHIP
-	
+		
 	return Util.join(Ar, "\n")
 
 func action(_name:String, _desc:String, _sceneID:String, _args:Array = []):
@@ -409,8 +452,8 @@ func getPossibleEvents() -> Array:
 	for _i in range(thePS):
 		var _indx:int = thePS - 1 - _i
 		if(possible[_indx][0] == lastEventType):
-			possible.erase(_indx)
-			weights.erase(_indx)
+			possible.remove(_indx)
+			weights.remove(_indx)
 	return [possible, weights]
 
 func processTurn():
@@ -526,7 +569,7 @@ func incStat(_statID:int, showMessage:bool = true) -> bool:
 	theStat += 1
 	if(theStat < 0):
 		theStat = 0
-	if(growStage <= STAGE_NORMAL):
+	if(growStage < STAGE_NORMAL):
 		if(theStat > 5):
 			theStat = 5
 	setStat(_statID, theStat)
@@ -539,9 +582,11 @@ func incStat(_statID:int, showMessage:bool = true) -> bool:
 	return true
 
 func train(_statID:int, _passTime:bool = true) -> bool:
+	GM.main.processTime(60*60)
 	return incStat(_statID)
 
 func trainNothing() -> bool:
+	GM.main.processTime(60*60)
 	return true
 
 func getTentaclesCharID() -> String:
@@ -628,6 +673,9 @@ func doAnimDuo(_anim:String, _otherArgs:Dictionary = {}):
 		theArgs[argID] = _otherArgs[argID]
 	
 	GM.main.getCurrentScene().playAnimation(StageScene.TentaclesDuo, _anim, theArgs)
+
+func doAnim(_anim:String, _otherArgs:Dictionary = {}):
+	doAnimDuo(_anim, _otherArgs)
 
 func saveData() -> Dictionary:
 	return {}

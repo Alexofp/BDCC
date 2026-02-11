@@ -28,7 +28,7 @@ func _run():
 		playAnimation(StageScene.Sleeping, "sleep", {pc="pc"})
 		saynn("It's not easy to do so while the weird egg is in the same room as you.. but you try to get some rest. It helps that the bed is actually quite comfy.")
 
-		saynn("Some time passes.. You almost doze off.. but then the intercom kicks in..")
+		saynn("Some time passes.. You almost doze off.. but then the intercom kicks in again..")
 
 		addButton("Continue", "See what happens next", "scientists_order")
 	if(state == "scientists_order"):
@@ -37,7 +37,7 @@ func _run():
 		playAnimation(StageScene.GivingBirth, "idle", {pc="pc"})
 		saynn("[say=sci1]Alright, we're back. You're still alive? That's better than what I expected.[/say]")
 
-		saynn("You look around. The voice comes from one of the cameras that is now staring at you.")
+		saynn("You look around. The voice comes from the security camera that is staring at you.")
 
 		saynn("[say=sci2]Yes, it seems the egg didn't hatch yet. But I think we're ready to do the first tests.[/say]")
 
@@ -404,6 +404,7 @@ func _run():
 		addButton("Continue", "See what happens next", "gottaProvoke")
 	if(state == "2_cuddle"):
 		# (( cuddle with egg anim??
+		GM.pc.setLocation("pstent_bed")
 		playAnimation(StageScene.SoloBigEgg, "kneel")
 		
 		aimCameraAndSetLocName("pstent_bed")
@@ -438,6 +439,7 @@ func _run():
 		addButton("Sleep", "Sleep with the egg!", "2cuddleSleep")
 	if(state == "2cuddleSleep"):
 		aimCameraAndSetLocName("pstest_middle")
+		GM.pc.setLocation("pstest_middle")
 		# (( egg anim
 		playAnimation(StageScene.SoloBigEgg, "stand")
 		saynn("You enjoy the egg's company for a while.. until the intercom makes you snap out of your dreams.")
@@ -484,6 +486,19 @@ func _run():
 		addButton("Just observe", "You'd rather just let it do its thing", "3_watch")
 		addButton("Embrace it!", "Embrace the egg and use your warmth to accelerate the process", "3_embrace")
 		addButton("Hold it shut", "Do the opposite and hold the egg shut for as long as possible!", "3_holdshut")
+	if(state == "3_holdshut"):
+		saynn("You're not gonna let it hatch, no way.")
+		
+		saynn("Swiftly, you put your hands on the egg's top petals that form the cross-shaped crease and start putting pressure on them!")
+		
+		saynn("The egg is squirming, you can feel it. A soft, wet crackling noise comes from within.. Whatever is inside is probably quite angry now. More and more cracks appear all throughout it.")
+		
+		saynn("You do your best to try to keep the shell of the egg intact.. but eventually the green chunks themselves begin to split and fall off.")
+		
+		saynn("As much as you try, you just can't hold the egg together anymore.")
+		
+		addButton("Continue", "See what happens next", "revealTentacles")
+		
 	if(state == "3_peel"):
 		saynn("Alright.. well.. time to help it do its thing.")
 

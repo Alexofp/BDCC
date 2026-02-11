@@ -25,19 +25,21 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {pc=GM.main.PS.getScientist1CharID(), npc=GM.main.PS.getScientist2CharID()})
 		saynn("You approach the reinforced window, curious about the noise. On the other side of the thick glass is a brightly lit corridor.. and two figures who are watching you with great interest.")
 
-		saynn("On the right is a wolf with sharp, intelligent eyes. He sips from a steaming mug, his calculating gaze flicking over you.. before he says something to his companion.")
+		saynn("On the right is a wolf with sharp, intelligent eyes. He sips from a steaming mug, his calculating gaze flicking over you.. before he says something to his colleague.")
 
 		saynn("The female cat beside him nods, her attention is split before you and her fancy glowing datapad.")
 
-		saynn("Both of them wear crisp white lab coats over their clothes.")
+		saynn("Both of them wear white labcoats over their clothes.")
 
 		saynn("The intercom lets itself be known by spewing out some static.")
 
 		saynn("[say=sci1]Welcome to our little paradise.[/say]")
 
-		saynn("You just can't escape them. The smooth voice, too..")
+		saynn("You just can't escape them. No matter how much you try.")
 
-		saynn("[say=sci2]We made sure that your vitals are in good condition after the transportation procedure. You might feel residual dizziness or disorientation, but..[/say]")
+		saynn("[say=sci1]I hope you don't mind that we skip the friendly introductions. You don't need to know our names. We don't care to know yours.[/say]")
+
+		saynn("[say=sci2]We did make sure that your vitals are in good condition after the transportation procedure though. You might feel residual dizziness or disorientation, but..[/say]")
 
 		saynn("Her voice doesn't seem to be as assertive.. so you cut her off.")
 
@@ -47,7 +49,7 @@ func _run():
 
 		saynn("[say=sci1]Don't make the mistake of interrupting a lady. You're not in a position to do so.[/say]")
 
-		saynn("He turns his head towards the cat to make sure she is alright. The lady blushes ever so slightly, her hand reaching out to adjust her already-perfect glasses.")
+		saynn("He turns his head towards the cat to make sure she is alright. The lady smiles back and lowers her gaze for a second, her hand reaching out to adjust her already-perfect glasses.")
 
 		saynn("[say=pc]What position am I in then?[/say]")
 
@@ -63,35 +65,35 @@ func _run():
 
 		saynn("The cat taps on her datapad, bringing some random schematics.")
 
-		saynn("[say=sci2]If you want to know what we do.. This bio-lab is specialized on research that normally would be considered.. unethical. It's not as bad as you might think it is, I can assure you. As long as you do what we tell you to do, you will not be in any danger.[/say]")
+		saynn("[say=sci2]If you want to know what we do.. This bio-lab is specialized on research that normally would be considered.. off-limits. It's not as bad as you might think it is, I can assure you. Nothing unethical. As long as you do what we tell you to do, you will not be in any danger.[/say]")
 
 		saynn("You sure don't like the sound of that.")
 
-		saynn("[say=pc]You're running an illegal bio-lab. You are in constant danger already.[/say]")
+		saynn("[say=pc]You're running an illegal bio-lab. You are in a constant danger already.[/say]")
 
-		saynn("[say=sci2]Actually, it's more nuanced than that. The demand for the scientific work that we do is incredibly high. And the unique positioning of our bio-lab allows us to not be.. constrained.. by any governing organization.[/say]")
+		saynn("[say=sci2]Actually, it's more nuanced than that. The demand for the scientific work that we do is incredibly high. And the unique positioning of our facility allows us to not be.. constrained.. by any governing organization.[/say]")
 
-		saynn("[say=sci1]Let me dumb it down for you. Nobody wants to murder the chicken. But they won't say no to chicken meat.[/say]")
+		saynn("[say=sci1]Let me dumb it down for you. Nobody wants to murder the chicken. But they won't say no to chicken meat. There is no nuance, the world needs us, actually.[/say]")
 
-		saynn("These scientists can do what they want.. as long as they do the messy work. And now you're stuck here with them.")
+		saynn("These scientists can do what they want.. as long as they do the messy stuff that no one else is willing to deal with. And now you're stuck here with them.")
 
 		saynn("[say=pc]Great.[/say]")
 
-		saynn("[say=sci1]You basically have a bomb collar around your neck already, what do you have to lose?[/say]")
+		saynn("[say=sci1]You basically have a bomb collar strapped around your neck already, what do you have to lose?[/say]")
 
 		saynn("Your hand reaches to tug on your inmate collar.. They sure didn't bother trying to take it off it seems.")
 
-		saynn("[say=pc]You could have helped with it.[/say]")
+		saynn("[say=pc]Why didn't you take it off?[/say]")
 
 		saynn("[say=sci1]That's just extra risk. As long as you can do your job, I don't care what kinky shit you're into.[/say]")
 
-		saynn("You sigh.")
+		saynn("You can only sigh.")
 
 		saynn("[say=pc]Job?[/say]")
 
 		saynn("[say=sci2]Our current focus is a newly acquired specimen. Its behavioral matrix has some missing entries that we would like to fill. That's all you need to know for now.[/say]")
 
-		saynn("Specimen? Your confused stare gets an explanation fast.")
+		saynn("Specimen? Your confusion doesn't last for long.")
 
 		addButton("Continue", "See what happens next", "guards_step_in")
 	if(state == "guards_step_in"):
@@ -109,7 +111,7 @@ func _run():
 
 		saynn("Soon, another few guards show up, bringing.. some kind of round object with them, on a special flat bed cart.")
 
-		saynn("They bring the cart into the middle of the room.. and press some button on it that gently lowers it down onto the floor and unloads it.")
+		saynn("They bring the cart into the middle of the room.. and press some button on it that gently lowers the weird object down onto the floor.. complete with a little round pedestal.")
 
 		saynn("After the guards are gone, the door gets sealed again, trapping you with the.. so called.. specimen.")
 
@@ -128,11 +130,11 @@ func _run():
 
 		saynn("Soon it becomes obvious what it is.")
 
-		saynn("[say=pc]It's a fucking egg.[/say]")
+		saynn("[say=pc]It's a fucking alien egg.[/say]")
 
 		saynn("Even though you only thought about your choice of words for a few moments, you couldn't be more correct.")
 
-		saynn("You're standing near an egg. It's not just a normal egg. This one is huge, spotting an unnatural toxic-green color.. unnatural for eggs.")
+		saynn("You're standing near an egg. It's not just a normal egg. This one is huge, spotting an unnatural toxic-green color.. unnatural for normal eggs.")
 
 		saynn("It's resting in.. some kind of gross nest. This nest is composed of multiple purple.. tendrils? They're covered in weird green goo. The whole composition is quite.. nerve-racking.")
 

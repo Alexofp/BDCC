@@ -185,6 +185,7 @@ func _react(_action: String, _args):
 	if(_action == "pickName"):
 		_tentacles.setMonsterName(_args[0])
 		_tentacles.setStage(_tentacles.STAGE_SMALL_ENDDAY)
+		_tentacles.setMonsterLoc(_tentacles.LOC_MIDDLE)
 
 	setState(_action)
 
