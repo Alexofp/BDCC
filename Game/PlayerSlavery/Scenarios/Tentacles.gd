@@ -92,6 +92,8 @@ var didRubLustEvent:bool = false
 
 var flagInjectForced:bool = false # Was the inject ending forced because the pc has run out of time
 
+var preferEvent:int = -1
+
 # mood
 var eventNeed:int = 0
 var lastEventType:int = -1
@@ -278,8 +280,14 @@ func getActions(_loc:String) -> Array:
 		theActions.append(action("Rest", "Get some rest", "PSTentacles2SmallInteract"))
 	if(_loc == LOC_BED && growStage == STAGE_TINY_AFTERTEST):
 		theActions.append(action("Sleep", "Get some rest", "PSTentaclesTinySleep"))
+	if(_loc == LOC_SHOWER):
+		theActions.append(action("Shower", "Take a shower", "PSTentaclesShower"))
+	if(_loc == LOC_WINDOW):
+		if(getCurrentEvent() != EVENT_WINDOW):
+			theActions.append(action("Window", "Look at the view", "PSTentaclesWindowAlone"))
 	if(_loc == LOC_FRIDGE):
-		theActions.append(action("Fridge", "Open the fridge", "PSTentaclesFridge"))
+		if(getCurrentEvent() != EVENT_HUNGRY):
+			theActions.append(action("Fridge", "Open the fridge", "PSTentaclesFridge"))
 	if(_loc == LOC_BED && growStage == STAGE_SMALL_ENDDAY):
 		theActions.append(action("Sleep", "Get some rest", "PSTentaclesSmallSleep"))
 	
@@ -440,13 +448,13 @@ func getPossibleEvents() -> Array:
 	var weights:Array = []
 	
 	possible.append([EVENT_WINDOW, LOC_WINDOW, "PSTentaclesWindowSmall", [], "didn't spend time with it"])
-	weights.append(1.0)
+	weights.append(1.0 if preferEvent != EVENT_WINDOW else 2.0)
 	possible.append([EVENT_HUNGRY, LOC_FRIDGE, "PSTentaclesFeedSmall", [], "didn't feed it"])
-	weights.append(1.0)
+	weights.append(1.0 if preferEvent != EVENT_HUNGRY else 2.0)
 	possible.append([EVENT_LEWD, "pc", "PSTentaclesLewdSmall", [], "didn't play with it"])
-	weights.append(1.0)
+	weights.append(1.0 if preferEvent != EVENT_LEWD else 2.0)
 	possible.append([EVENT_PLAY, LOC_IMPORTANT, "PSTentaclesPlaySmall", [], "didn't play with it"])
-	weights.append(1.0)
+	weights.append(1.0 if preferEvent != EVENT_PLAY else 2.0)
 	
 	var thePS:int = possible.size()
 	for _i in range(thePS):
@@ -603,6 +611,11 @@ func setEvent(_eventType:int, _targetLoc:String, _scene:String, _args:Array = []
 	eventArgs = _args
 	eventGiveupTimer = 0
 
+func getCurrentEvent() -> int:
+	if(!eventScene.empty()):
+		return lastEventType
+	return -1
+
 func clearEvent():
 	eventTarget = ""
 	eventScene = ""
@@ -676,6 +689,23 @@ func doAnimDuo(_anim:String, _otherArgs:Dictionary = {}):
 
 func doAnim(_anim:String, _otherArgs:Dictionary = {}):
 	doAnimDuo(_anim, _otherArgs)
+
+func setPrefer(_eventType:int):
+	if(_eventType == preferEvent):
+		return
+	preferEvent = _eventType
+	
+	if(preferEvent == EVENT_LEWD):
+		GM.main.addMessage("The tentacles will now prefer to be lusty..")
+	if(preferEvent == EVENT_PLAY):
+		GM.main.addMessage("The tentacles will now prefer to be active..")
+	if(preferEvent == EVENT_WINDOW):
+		GM.main.addMessage("The tentacles will now prefer to be mindful..")
+	if(preferEvent == -1):
+		GM.main.addMessage("The tentacles forgot the preference towards any activity that they had..")
+
+func getPrefer() -> int:
+	return preferEvent
 
 func saveData() -> Dictionary:
 	return {}
