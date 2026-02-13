@@ -182,6 +182,8 @@ func _run():
 
 		saynn("[say=sci1]Shut your mouth. It is necessary. And you.[/say]")
 
+		saynn("He looks at his colleague.")
+
 		saynn("[say=sci1]You have time.. until we finish our coffee break. Apparently I also have to have a short talk with my assistant.[/say]")
 
 		saynn("Knowing them.. you probably have a few more hours.")

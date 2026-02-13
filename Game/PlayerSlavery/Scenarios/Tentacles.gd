@@ -38,6 +38,7 @@ func addSkipActions(_scene:SceneBase):
 	for entry in getDebugStages():
 		_scene.addButton(entry[1], "SKIP TO THIS STAGE", "skipStage", [entry[0]])
 func doSkipAction(_stage:int):
+	GM.pc.setLocation(LOC_BED)
 	setStage(_stage)
 
 var growStage:int = STAGE_INTRO
@@ -89,6 +90,7 @@ const EVENT_PLAY = 3
 var daysNormal:int = 0
 
 var didRubLustEvent:bool = false
+var didFirstSexEvent:bool = false
 
 var flagInjectForced:bool = false # Was the inject ending forced because the pc has run out of time
 
@@ -285,6 +287,9 @@ func getActions(_loc:String) -> Array:
 	if(_loc == LOC_WINDOW):
 		if(getCurrentEvent() != EVENT_WINDOW):
 			theActions.append(action("Window", "Look at the view", "PSTentaclesWindowAlone"))
+	if(_loc == LOC_PLAY):
+		if(getCurrentEvent() != EVENT_PLAY):
+			theActions.append(action("Yoga", "Maybe you could do some yoga here", "PSTentaclesTableAlone"))
 	if(_loc == LOC_FRIDGE):
 		if(getCurrentEvent() != EVENT_HUNGRY):
 			theActions.append(action("Fridge", "Open the fridge", "PSTentaclesFridge"))
@@ -319,7 +324,7 @@ func checkEvent(_scene, _loc:String) -> Array:
 	if(isSmallOrNormal() && isAngry):
 		if(_loc == monsterLoc):
 			isAngry = false
-			incStat(STAT_ANGER)
+			#incStat(STAT_ANGER)
 			return ["PSTentaclesAngrySmall"]
 	
 	if(isSmallOrNormal()):
@@ -443,23 +448,37 @@ func getAngryReason() -> String:
 func hasEvent() -> bool:
 	return !eventScene.empty()
 
+func getEventExtraWeight(_eventID:int) -> float:
+	if(_eventID == EVENT_WINDOW):
+		return max((mind - 3)*0.2, 0.0)
+	if(_eventID == EVENT_LEWD):
+		return max((lust - 3)*0.2, 0.0)
+	if(_eventID == EVENT_PLAY):
+		return max((agility - 3)*0.2, 0.0)
+	
+	return 0.0
+
 func getPossibleEvents() -> Array:
 	var possible:Array = []
 	var weights:Array = []
 	
+	var lewdEventScene:String = "PSTentaclesLewdSmall"
+	if(!didFirstSexEvent && isNormal()):
+		lewdEventScene = "PSTentaclesFirstSex"
+	
 	possible.append([EVENT_WINDOW, LOC_WINDOW, "PSTentaclesWindowSmall", [], "didn't spend time with it"])
-	weights.append(1.0 if preferEvent != EVENT_WINDOW else 2.0)
+	weights.append((1.0 if preferEvent != EVENT_WINDOW else 2.0) + getEventExtraWeight(EVENT_WINDOW))
 	possible.append([EVENT_HUNGRY, LOC_FRIDGE, "PSTentaclesFeedSmall", [], "didn't feed it"])
-	weights.append(1.0 if preferEvent != EVENT_HUNGRY else 2.0)
-	possible.append([EVENT_LEWD, "pc", "PSTentaclesLewdSmall", [], "didn't play with it"])
-	weights.append(1.0 if preferEvent != EVENT_LEWD else 2.0)
+	weights.append((1.0 if preferEvent != EVENT_HUNGRY else 2.0) + getEventExtraWeight(EVENT_HUNGRY))
+	possible.append([EVENT_LEWD, "pc", lewdEventScene, [], "didn't play with it"])
+	weights.append((1.0 if preferEvent != EVENT_LEWD else 2.0) + getEventExtraWeight(EVENT_LEWD))
 	possible.append([EVENT_PLAY, LOC_IMPORTANT, "PSTentaclesPlaySmall", [], "didn't play with it"])
-	weights.append(1.0 if preferEvent != EVENT_PLAY else 2.0)
+	weights.append((1.0 if preferEvent != EVENT_PLAY else 2.0) + getEventExtraWeight(EVENT_PLAY))
 	
 	var thePS:int = possible.size()
 	for _i in range(thePS):
 		var _indx:int = thePS - 1 - _i
-		if(possible[_indx][0] == lastEventType):
+		if(possible[_indx][0] == lastEventType && RNG.chance(150.0 - weights[_indx]*50.0)):
 			possible.remove(_indx)
 			weights.remove(_indx)
 	return [possible, weights]
@@ -496,7 +515,7 @@ func processTurn():
 				if(eventGiveupTimer >= 6 && RNG.chance(33)):
 					clearEvent()
 					setAngryAtPC()
-					#incStat(STAT_ANGER) #TODO: Replace with scene
+					#incStat(STAT_ANGER)
 			else:
 				monsterLoc = goToSlow(monsterLoc, eventTarget)
 		elif(monsterLoc == monsterTarget):
@@ -568,9 +587,8 @@ func getStatName(_statID:int) -> String:
 		return "Lust"
 	return "ERROR?"
 
-#TODO: Change showMessage to false before ship
 func incStat(_statID:int, showMessage:bool = true) -> bool:
-	if(_statID <= 0):
+	if(_statID < 0):
 		return false
 	var theStat := getStat(_statID)
 	var theOldStat := theStat
@@ -590,8 +608,15 @@ func incStat(_statID:int, showMessage:bool = true) -> bool:
 	return true
 
 func train(_statID:int, _passTime:bool = true) -> bool:
-	GM.main.processTime(60*60)
+	if(_passTime):
+		GM.main.processTime(60*60)
 	return incStat(_statID)
+
+func trainUntilFive(_statID:int, _passTime:bool = true):
+	if(_passTime):
+		GM.main.processTime(60*60)
+	while(getStat(_statID) < 5):
+		incStat(_statID)
 
 func trainNothing() -> bool:
 	GM.main.processTime(60*60)
