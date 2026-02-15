@@ -179,7 +179,22 @@ func _run():
 
 		addButton("Give sponge", "Give each tentacle a sponge so that their wiping becomes useful!", "2_sponge")
 		addButton("Explain", "Tell them that this is a window and that the tentacles can't go through it", "2_window")
+		addButton("Gently knock", "Gently knock on the glass and see what happens", "2_knock")
 		addButton("Block window", "Stand in front of the window and see what the tentacles will do", "2_block")
+	if(state == "2_knock"):
+		saynn("You gently tap on the glass.. but with no intention of getting their attention. You just tap on it..")
+
+		saynn("This makes the glass vibrate ever so slightly.. and the tentacles feel it.")
+
+		saynn("You keep tapping.. while they stop wiping the glass and instead start to explore this interesting surface. One of the tentacles gently taps on the glass by itself.. creating more of those small vibrations.")
+
+		saynn("[say=pc]Now you're getting it.[/say]")
+
+		saynn("They might not see it.. but they certainly feel that something is in the way now.")
+
+		saynn("Satisfied with their new discovery, they just slither away.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "2_sponge"):
 		saynn("[say=pc]Hm..[/say]")
 
@@ -1264,6 +1279,9 @@ func _react(_action: String, _args):
 
 	if(_action == "2_window"):
 		_tentacles.trainNothing()
+
+	if(_action == "2_knock"):
+		_tentacles.train(_tentacles.STAT_MIND)
 
 	if(_action == "2_block"):
 		_tentacles.train(_tentacles.STAT_LUST)
