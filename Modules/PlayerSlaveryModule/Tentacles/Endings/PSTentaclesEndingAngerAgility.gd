@@ -88,6 +88,14 @@ func _run():
 	if(state == "show_stuff"):
 		saynn("You don't even need to point anymore, the tentacles just proceed to ravage through the bio-lab on its own.. while you stay behind.")
 
+		saynn("Actually, you decide to split when you notice small colorful signs that are placed on the walls of each intersection. The ones that you were interested in.. say 'docks'.")
+
+		saynn("You run. And you were right.. As soon as you arrive, you see quick glimpses of the two scientists who were trying to board the escape pods.")
+
+		saynn("A few shots from your plasma rifle has made them quickly reconsider. They stop trying to pry the airlocks open.. and instead run somewhere deeper into the bio-lab. Perfect.")
+
+		saynn("After that, you trace your steps back and find the monster. It's not hard to find.. You just have to follow the path of blood and destruction.")
+
 		saynn("During your exploration, you find more reinforced windows.. a whole row of them, each leaving into a separate containment cell.. just like yours. There are.. things.. inside them. Some have humanoid shapes.. some are just nothing but twisted forms.")
 
 		saynn("Security doors close in front of you.. but the tentacles just smash through them, their rage can only be matched by their raw strength.")
@@ -104,9 +112,11 @@ func _run():
 
 		addButton("Continue", "See what happens next", "pleading")
 	if(state == "pleading"):
-		saynn("At last, you reach some kind of room.. a room that has gone full lockdown mode a long time ago already, all of its doors and windows are sealed shut.")
+		addCharacter(GM.main.PS.getScientist1CharID())
+		addCharacter(GM.main.PS.getScientist2CharID())
+		saynn("At last, you reach some kind of room.. a room that has gone full lockdown mode, all of its doors and windows are sealed shut.")
 
-		saynn("This.. certainly piques your interest. The tentacles are waiting for you to show the next target. They might not be the smartest.. but it looks like they do understand that they won't be able to get out of here without your help.")
+		saynn("This.. certainly piques your interest. The tentacles are waiting for you to show the next target. They might not be the smartest.. but it looks like they do understand that they won't be able to get out of here without your help now.")
 
 		saynn("You knock on the metal and nod towards the enraged tentacles.")
 
@@ -122,7 +132,7 @@ func _run():
 
 		saynn("The initiative is on your side.. so you just stare at the camera silently, your head tilted ever so slightly to the side, your plasma rifle resting on your shoulder.")
 
-		saynn("[say=sci1]A ship! We have a spaceship! An escape pod! We will let you take it! Just.. Just call them off![/say]")
+		saynn("[say=sci1]There is a way out! An escape pod! We will let you take it! Just.. Just call them off![/say]")
 
 		saynn("You continue to say nothing. The banging that's happening behind you is enough of a statement.")
 
@@ -130,15 +140,275 @@ func _run():
 
 		saynn("[say=sci2]Please.. I didn't.. I never wanted to.. I was just doing my.. please..[/say]")
 
-		saynn("The girl's pleading.. It makes you sigh.")
+		saynn("The girl's pleading.. It makes you sigh. Are you really gonna have to kill her too? Technically, it'd be the monster who will do it..")
 
-		addButton("Continue", "See what happens next", "endthescene")
+		saynn("The doors finally get torn open.")
+
+		addButton("Continue", "See what happens next", "theTalk")
+	if(state == "theTalk"):
+		saynn("You and the tentacles step inside some kind of lab. There is lots of expensive-looking science equipment around.. a fridge.. a separate compartment with beds.. a bathroom.. and also a few computers. The sight reminded you of your own cell that you had here for some reason.")
+
+		saynn("[say=pc]So that's how you live. Pretty miserable.[/say]")
+
+		saynn("Both scientists are hiding under one of the tables. Pathetic really. Your tentacle monster sees them too.. but you gesture to them to stay still and guard the only way out of this room.")
+
+		saynn("Slowly, you approach the table, making each step echo in their ears. You can hear them shuffling around in there. You are still holding your rifle.. just in case they try to do something stupid.")
+
+		saynn("You knock on the table.")
+
+		saynn("[say=pc]Up.[/say]")
+
+		saynn("[say=sci1]Listen..[/say]")
+
+		saynn("[say=pc]Up, I said.[/say]")
+
+		saynn("The scientists scramble to get from under the table. The guy is holding something in your view.. a piece of paper.")
+
+		saynn("[say=sci1]These are codes.. To launch the escape pod.. Let's talk about it, please.[/say]")
+
+		saynn("The wolf looks.. scared. Even the girl is not shivering as much.")
+
+		saynn("[say=pc]Leave them on the table.[/say]")
+
+		saynn("He starts lowering the codes onto a flat surface of the table.. but then stops.")
+
+		saynn("[say=sci1]Please.. Spare me at least.[/say]")
+
+		saynn("[say=sci2]Hey.. uh-h.. um-m.. wait-t..[/say]")
+
+		saynn("Ohh. Makes your blood boil, your hands tensing up.")
+
+		saynn("[say=sci1]If I destroy these, you will be stuck here forever.[/say]")
+
+		saynn("[say=pc]And you will be dead.[/say]")
+
+		saynn("The way you said it.. leaves some rome for interpretation. But sparing him was never a thing that you even considered. And the wolf knows it well.")
+
+		saynn("Suddenly, he rips the paper into many pieces.")
+
+		saynn("[say=sci1]Only I know the codes now! I will input them myself if you spare me! Only I can control the pod! If your.. thing.. wants blood, kill her! She is just as responsible as me![/say]")
+
+		saynn("The other scientist looks frozen from shock.")
+
+		saynn("The whole room becomes almost silent.. only the heavy breathing and the shuffling of the tentacles can be heard.")
+
+		saynn("[say=pc]No.[/say]")
+
+		addButton("Continue", "See what happens next", "guy_dead")
+	if(state == "guy_dead"):
+		removeCharacter(GM.main.PS.getScientist1CharID())
+		saynn("Hearing that and seeing you raise the rifle, the wolf dashes towards the exit out of pure desperation.")
+
+		saynn("A thick tentacle catches him mid-sprint, wrapping around his legs and lifting him into the air.")
+
+		saynn("He dangles, kicking, growling, squirming.. as another tendril wraps around his chest. The squeeze is slow.. and very painful. His ribs crack one by one, piercing his own internal organs.. until his struggling stops.. and his body goes limp.")
+
+		saynn("The tentacles then just throw him to the side.")
+
+		saynn("The female's eyes are full of horror, she takes a few steps back, away from the madness. Sadly, there is a wall behind her. She hugs it for her dear life.")
+
+		saynn("[say=sci2]Wh-h.. wha..[/say]")
+
+		saynn("You sit your butt on the very corner of the table, rifle in your lap.")
+
+		saynn("[say=pc]Why did you decide to do this?[/say]")
+
+		saynn("[say=sci2]Hh.. uh.. someone had to..[/say]")
+
+		saynn("[say=pc]Why was that 'someone' you?[/say]")
+
+		saynn("[say=sci2]I was good with numbers.. I loved biology.. I loved science..[/say]")
+
+		saynn("[say=pc]Why this bio-lab?[/say]")
+
+		saynn("[say=sci2]I wanted to help people..[/say]")
+
+		saynn("[say=pc]Why. This. Bio-lab? Why not something else?[/say]")
+
+		saynn("[say=sci2]I didn't know about..[/say]")
+
+		saynn("[say=pc]Bullshit.[/say]")
+
+		saynn("[say=sci2]I wanted to help people.. I thought this would be the best way..[/say]")
+
+		saynn("[say=pc]But you ended up creating monsters. You knew about all the unethical shit that was happening here. Why didn't you stop while you could?[/say]")
+
+		saynn("[say=sci2]I.. I guess I did know.. I.. just.. I couldn't..[/say]")
+
+		saynn("[say=pc]Why?[/say]")
+
+		saynn("[say=sci2]I.. I needed credits.. I got talked into this.. He was very.. persuasive.[/say]")
+
+		saynn("[say=pc]Greed and cock? That can't be all of it, there is no way. Tell me that isn't all of it. Tell me that you got blackmailed.. Tell me that you got forced to do this. Please, just say..[/say]")
+
+		saynn("She cuts you off.")
+
+		saynn("[say=sci2]I ended up really liking this job..[/say]")
+
+		saynn("Tears start streaming down her cheeks.")
+
+		saynn("You stay quiet. Shooting her right now would be a weird kind of mercy.")
+
+		saynn("[say=pc]Was he telling the truth? About the codes?[/say]")
+
+		saynn("[say=sci2]No.. The escape pods automatically become available during code red.. But sadly.. the airlock got.. a little stuck.[/say]")
+
+		saynn("Ain't karma a bitch.")
+
+		saynn("[say=pc]I see.[/say]")
+
+		saynn("Time to stop this.")
+
+		saynn("You look behind you and get the tentacles' attention. You point at all the computers and equipment in the lab. The tentacles are quick to start smashing it all to pieces.")
+
+		saynn("[say=sci2]Wait.. You're not gonna destroy all of it, are you?[/say]")
+
+		saynn("Suddenly, she dashes towards one of the computers, protecting it with herself.")
+
+		saynn("[say=pc]If you wanna help us, be my guest. Otherwise, get the fuck out of the way.[/say]")
+
+		saynn("[say=sci2]This is all precious information. This is how you can rule the world.. This knowledge can give you power over anything and everything.. If lost.. It might not ever be recovered.[/say]")
+
+		saynn("[say=pc]I'm sure there will be enough evil people to re-discover it. Get out of the way, this is your last chance.[/say]")
+
+		saynn("The cat steps away from the computer.. but as soon as the monster approaches it.. she suddenly whips out an injector and pounces at it!")
+
+		saynn("You pull the trigger.")
+
+		addButton("Continue", "See what happens next", "girl_injured")
+	if(state == "girl_injured"):
+		saynn("The injector shatters as it hits the floor, some kind of yellow fluid spilling out of it.")
+
+		saynn("A sharp feline scream echoes in your ears. She grabs onto her right paw.. what's left of it anyway.")
+
+		saynn("[say=sci2]AHH![/say]")
+
+		saynn("You pull her back by her labcoat as the tentacles smash the last computer, turning it into a bunch of scrap metal. You weren't aiming for her hand.. just a case of blind luck.")
+
+		saynn("The feline is rolling around on the floor, screaming, unable to contain the pain. Her stump isn't bleeding.. The molten plasma has neatly cauterized everything.")
+
+		saynn("[say=sci2]IT HURTS! MY PAW![/say]")
+
+		saynn("There was a medkit attached to one of the walls. You grab the strongest painkiller that it has.. and inject the girl with it. The effect is immediate.")
+
+		saynn("[say=sci2]HHh.. hkhhh.. khh.. You.. destroyed.. my hand..[/say]")
+
+		saynn("[say=pc]Get a prosthetic. And stop doing dumb shit. You only have one paw left.[/say]")
+
+		saynn("And with that.. you head out of this room.. being careful as to not to step into any mess.. organic or not.")
+
+		addButton("Continue", "See what happens next", "docks")
+	if(state == "docks"):
+		removeCharacter(GM.main.PS.getScientist2CharID())
+		saynn("You head back into the docks.. but now with the tentacles.")
+
+		saynn("Looks like there is only one escape pod left.. the one that has gotten stuck.")
+
+		saynn("The tentacles help you by forcibly spreading the doors open.")
+
+		saynn("The pod.. is clearly too small for the tentacles. There is only space for two normal-sized people.")
+
+		saynn("[say=pc]Well..[/say]")
+
+		saynn("They might not be the smartest.. but they seem to understand.")
+
+		saynn("Suddenly, bolts of plasma start flying past you. The rest of the guards are here.")
+
+		saynn("The tentacles roar into the fight, leaving you be.")
+
+		saynn("Looks like you won't get to say your goodbyes. Oh well.. what can you do..")
+
+		saynn("You let the tentacles have their fun.. as you board the escape pod and press a button that would launch it..")
+
+		addButton("Continue", "See what happens next", "in_space")
+	if(state == "in_space"):
+		removeCharacter(GM.main.PS.getTentaclesCharID())
+		saynn("You're drifting through space.. the fuel has long run-out. Your pod has a way of sending an SOS signal.. but that's about it.")
+
+		saynn("Suddenly, your collar starts beeping.. faster and faster.. until it suddenly sends a shock so strong that you black out.")
+
+		addButton("Continue", "See what happens next", "near_detective")
+	if(state == "near_detective"):
+		removeCharacter(GM.main.PS.getScientist1CharID())
+		removeCharacter(GM.main.PS.getScientist2CharID())
+		removeCharacter(_tentacles.getTentaclesCharID())
+		addCharacter("intro_detective")
+		playAnimation(StageScene.Solo, "sit")
+		aimCameraAndSetLocName("intro_interogation")
+		saynn("You wake up.. what feels like seconds later.. cuffed to a chair.")
+
+		saynn("It's not the first time you've been in this place.")
+
+		saynn("[say=intro_detective]Name is Jake, IIPF, threat assessment division.[/say]")
+
+		saynn("[say=pc]Yeah, I remember you.[/say]")
+
+		saynn("He raises a brow at you.")
+
+		saynn("[say=pc]I've been naughty, I know.[/say]")
+
+		saynn("He puts his glasses on and reads something off of an old-school wooden tablet.")
+
+		saynn("[say=intro_detective]Let's see. You have a single case of felony escape. Hm. But it's a big one. Help me understand, how and why did it happen? You can start with the how.[/say]")
+
+		saynn("Jake looks over his glasses at you, awaiting.")
+
+		saynn("[say=pc]Do you wanna hear my story? How I was used as a test subject in an illegal bio-lab? And what happened next?[/say]")
+
+		saynn("[say=intro_detective]My job is not to listen to fan fiction. It's to assess the level of risk. How likely is it that you're gonna try to pull this stunt again. So help me help you, will you?[/say]")
+
+		saynn("You're not really sure what to say anymore. You can try to explain that you were held in a cell.. but he will probably not care. And telling him about what you did with the lab will probably put a few extra charges on you. Might as well try to play his game then.")
+
+		saynn("[say=pc]This won't happen again, I can assure you.[/say]")
+
+		saynn("Jake tilts his head ever slightly.. while you put your most innocent eyes.")
+
+		saynn("[say=intro_detective]I see.[/say]")
+
+		addButton("Continue", "See what happens next", "fastforward")
+	if(state == "fastforward"):
+		removeCharacter("intro_detective")
+		GM.pc.setLocation(GM.pc.getCellLocation())
+		aimCameraAndSetLocName(GM.pc.getCellLocation())
+		addCharacter("risha")
+		playAnimation(StageScene.Duo, "stand", {npc="risha"})
+		saynn("Next moment you know it.. you're being flown back to your concrete home.. first class, as usual.")
+
+		saynn("The BDCC guards meet you and walk you to your cell.. where Risha is already waiting for you.")
+
+		saynn("[say=risha]Here is your stupid crap.[/say]")
+
+		saynn("[say=pc]What a warm welcome.[/say]")
+
+		saynn("[say=risha]You know what's warm? My cock. Wanna welcome it?[/say]")
+
+		saynn("Looks like you weren't gone long enough for her to start missing you.")
+
+		saynn("[say=pc]I'm good.[/say]")
+
+		saynn("[say=risha]No. You're a slut. C'mon, I ain't got all day.[/say]")
+
+		saynn("You fetch your stupid crap off of her hands.. and watch her leave.")
+
+		saynn("From one paradise to another.")
+
+		addButton("Continue", "You had your fun", "doEndSlavery")
 
 func _react(_action: String, _args):
 	var _tentacles:PlayerSlaveryTentacles = GM.main.PS
 
 	if(_action == "endthescene"):
 		endScene()
+		return
+
+	if(_action == "fastforward"):
+		processTime(60*42)
+
+	if(_action == "doEndSlavery"):
+		endScene()
+		GM.main.endCurrentScene()
+		GM.main.stopPlayerSlavery()
+		GM.pc.setLocation(GM.pc.getCellLocation())
 		return
 
 	setState(_action)
