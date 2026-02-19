@@ -370,7 +370,7 @@ func _run():
 
 		saynn("She nods.. subtly.")
 
-		saynn("Well.. it was time to leave.")
+		saynn("Well.. it was time to leave. The tentacles stay to destroy every single computer and piece of science equipment in the room.. before following you.")
 
 		addButton("Continue", "See what happens next", "docks")
 	if(state == "docks"):
