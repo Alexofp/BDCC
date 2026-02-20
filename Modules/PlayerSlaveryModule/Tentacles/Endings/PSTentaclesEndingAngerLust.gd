@@ -166,17 +166,334 @@ func _run():
 
 		saynn("[say=sci2]Please.. I didn't.. I never wanted to.. I was just doing my.. please..[/say]")
 
-		saynn("The girl's pleading.. It makes you smile a bit. She thinks you're coming to kill them.")
+		saynn("The girl's pleading.. It makes you smile a bit. She thinks you're coming to kill them. So silly.")
 
 		saynn("The doors finally get torn open.")
 
 		addButton("Continue", "See what happens next", "theTalk")
+	if(state == "theTalk"):
+		aimCameraAndSetLocName("pstent_lastroom")
+		playAnimation(StageScene.Duo, "stand", {pc=GM.main.PS.getScientist1CharID(), npc=GM.main.PS.getScientist2CharID()})
+		saynn("You and the tentacles step inside some kind of lab. There is lots of expensive-looking science equipment around.. a fridge.. a separate compartment with beds.. a bathroom.. and also a few computers. The sight reminded you of your own cell that you had here for some reason.")
+
+		saynn("[say=pc]So that's how you live. Pretty miserable.[/say]")
+
+		saynn("Both scientists are hiding under one of the tables. Pathetic really. Your tentacles see them too.. but you gesture to them to stay still and guard the only way out of this room.")
+
+		saynn("Slowly, you approach the table, making each step echo in their ears. You can hear them shuffling around in there. You are still holding your rifle.. just in case they try to do something stupid.")
+
+		saynn("You knock on the table.")
+
+		saynn("[say=pc]Up.[/say]")
+
+		saynn("[say=sci1]Listen..[/say]")
+
+		saynn("[say=pc]Up, I said.[/say]")
+
+		saynn("The scientists scramble to get from under the table. The guy is holding something in your view.. a piece of paper.")
+
+		saynn("[say=sci1]These are codes.. To launch the escape pod.. Let's talk about it, please.[/say]")
+
+		saynn("The wolf looks.. scared. Even the girl is not shivering as much.")
+
+		saynn("[say=pc]Leave them on the table.[/say]")
+
+		saynn("He starts lowering the codes onto a flat surface of the table.. but then stops.")
+
+		saynn("[say=sci1]Please.. Spare me at least.[/say]")
+
+		saynn("[say=sci2]Hey.. uh-h.. um-m.. wait-t..[/say]")
+
+		saynn("The way he throws her under the bus.. makes you angry. But she isn't innocent either, that's for sure.")
+
+		saynn("[say=sci1]If I destroy these, you will be stuck here forever.[/say]")
+
+		saynn("Should you obey these fuckers one more time? Nah. That's not why you came here.")
+
+		saynn("[say=pc]You can shove that paper up your ass.[/say]")
+
+		saynn("He really gets caught off-guard.")
+
+		saynn("[say=pc]Oh? You think I care about getting out of here? My {psTentacles} here fucked a lot of holes today.. But it is still horny. I think it wants one of your butts~. Ain't that right?[/say]")
+
+		saynn("The tentacles sway eagerly, some of their green tips are swollen and dripping juices profusely..")
+
+		saynn("Now.. who is it gonna be..")
+
+		addButton("Guy", "Make the tentacles fuck the guy!", "fuck_guy")
+		addButton("Girl", "Make the tentacles fuck the girl!", "fuck_girl")
+		addButton("Both", "Make the tentacles fuck the guy first.. and then fuck the girl too..", "fuck_both")
+	if(state == "fuck_girl"):
+		saynn("Seeing that the things aren't looking good for him, the wolf just sets off, dashing towards the exit. His foot almost leaves the lab.. almost.")
+
+		saynn("A tendril wraps around his other ankle, yanking him back and pinning him into the wall. He struggles.. but fails to do anything.")
+
+		saynn("[say=sci1]Let me go! Let me..[/say]")
+
+		saynn("The tentacle gets tired quickly of his annoying voice too and shoves itself inside his mouth, gagging him that way.")
+
+		saynn("The real target of the tentacles was the girl.. Carefully, the tentacles approach her. She is shivering.. but doesn't pull away.")
+
+		saynn("[say=sci2]Hey.. uh.. I w-will do anything if you tell it to.. ah!..[/say]")
+
+		saynn("The multiple tentacles grab onto her labcoat and rip it off of her. Her skirt and the top are next.. revealing a surprisingly sexy lace black bra and panties beneath. Sadly, those have to be torn into pieces as well.")
+
+		saynn("[say=sci2]My underwear.. ah..[/say]")
+
+		saynn("[say=pc]The tentacles think you don't need it. Who am I to say no to them?[/say]")
+
+		saynn("[say=sci2]Huff..[/say]")
+
+		saynn("The girl is trying to cover herself.. but the tentacles pull her hands away, revealing her cute perky tits and the pink slit between her legs. She actually seems to be dry, the fear probably destroying any bits of lust that she might have had..")
+
+		saynn("[say=sci2]Stop, please. I will do anything! Really.. Just don't..[/say]")
+
+		saynn("[say=pc]Too late for pleading. You could have just not locked me in with that cutie. Now you will have to endure the consequences.[/say]")
+
+		saynn("Suddenly the tentacles pull the girl up by her waist, legs and arms. A thick, shiny tendril presses between her legs and starts teasing her pussy folds. She tries to clamp her legs shut.. but the tendrils are quick to forcefully spread them again.")
+
+		saynn("[say=sci2]Ah..[/say]")
+
+		saynn("Another one presses against her mouth. The girl desperately tries to keep her lips shut.. but the tip of the tentacles eventually manages to slip past her teeth, forcing itself in.")
+
+		saynn("She gags, tears stream down her cheeks. But it looks like the rest of her body is responding, her slit getting all wet from the stimulation.")
+
+		saynn("[say=sci2]Mhh-h.. mhh-..[/say]")
+
+		saynn("The tendril in her mouth begins to move, slowly fucking her throat while she chokes and whimpers. Below, another tentacle joins the first, prodding her tight-looking tailhole.")
+
+		saynn("[say=sci2]Mphh!! Mphhh!.. MPHHH![/say]")
+
+		saynn("She clearly tries her best to clench.. but her shamefully-wet pussy and her tight asshole eventually get stretched enough for the tentacles to slide inside her!")
+
+		saynn("Her hips desperately try to buck away.. but there is nothing to go. Some tentacles hold her helpless while other ones start pounding into all three holes at once. Her protests turn into weak whimpers.. and then into muffled moans.")
+
+		saynn("[say=sci2]Mmh.. mm.. hh..[/say]")
+
+		saynn("One particularly clever tendril snakes up to her clit, flicking and circling it.. which makes her girl arch her back, her eyes rolling back.")
+
+		saynn("A wet, desperate cry escapes around the tendril in her throat as her first orgasm rips through her. She shakes hard.. cumming.. while the tentacles just keep pushing, keep fucking her. Their lust.. and their anger.. seem bottomless.")
+
+		saynn("Some of the tendrils begin to look different. Something is moving inside them, creating visible bumps. That bump hits the girl's pussy.. and starts stretching her folds even wider.")
+
+		saynn("[say=sci2]MHh!.. HH-hhmh!..[/say]")
+
+		saynn("Then, the first egg gets pushed into her cunt.")
+
+		saynn("Her eyes go wide. She tries to let out a cry but the tentacles in her mouth muffles it. Seeing that her belly has gotten slightly more bumpy.. the tentacle has probably stuffed the egg directly into her womb.")
+
+		saynn("And then another.. And another..")
+
+		saynn("Her belly begins to look more round, a very-visible bulge forming as eggs get shoved inside her pussy. The same happens in her ass too, her guts getting stuffed with the same eggs. She looks pregnant by now.. her stomach round.")
+
+		saynn("[say=sci2]Mmmph! MMMPH-![/say]")
+
+		saynn("She is cumming again, overloaded, overstimulated, still getting fucked by the tentacles who are now also using her as its breeder.")
+
+		saynn("And that's now even the end of it. Suddenly, all of the tendrils begin to pulse.. before shooting a stream of nectar out of their tips, covering the feline with it. The tentacles that were inside her do that too, now pumping her holes full of that stuff, filling all of the empty space between the eggs..")
+
+		saynn("[say=pc]Wow.[/say]")
+
+		saynn("By the end of it, the girl.. just moans softly..")
+
+		saynn("The tentacles slowly withdraw, making sure not to spill too much juice.. before setting the girl onto the floor.. She is covered in fluids, her belly is swollen, her holes are all gaping..")
+
+		saynn("[say=sci2]Ah.. hh-h..[/say]")
+
+		saynn("[say=pc]It really looks like you enjoyed it. Hah.[/say]")
+
+		addButton("Continue", "See what happens next", "after_all_sex")
+	if(state == "fuck_guy"):
+		saynn("Seeing that the things aren't looking good for him, the wolf just sets off, dashing towards the exit. His foot almost leaves the lab.. almost.")
+
+		saynn("A tendril wraps around his other ankle, yanking him back. Another one coils around his waist, lifting him clean off the floor. He tries to kick.. tries to struggle.. but the tentacles are fueled by anger.")
+
+		saynn("[say=sci1]Let me go! Let me..[/say]")
+
+		saynn("His labcoat gets ripped off, buttons scattering across the floor. The rest of the cloth gets shredded too.. leaving the wolf suspended in the air naked, sheath and tight asshole out on display for everyone.")
+
+		saynn("[say=sci1]Stop it, now! You f-fucking.. monster.[/say]")
+
+		saynn("A thick, slick tendril presses against his lips.. and then forces itself inside when the guy was about to say something else, turning his speech into a muffled series of noises.")
+
+		saynn("Another tentacles slithers between his legs, rubbing his sheath until the canine cock starts poking out of it, probably against the scientist's will. Another one presses against his tight anal entrance, circling, lubricating him with some slick, warm juices.")
+
+		saynn("He managed to wiggle his head free from the mouth tentacle.")
+
+		saynn("[say=sci1]No-no-no! Don't you fucking-.. AH![/say]")
+
+		saynn("He gasps as the tip pushes inside, stretching his tailhole wide. He claws at the tentacles holding him.. but they don't budge, instead smacking his ass each time. His throat doesn't stay free for long too as the same tentacle as before forces itself past his teeth again.")
+
+		saynn("[say=sci1]MMhh-h!.. mhh!..[/say]")
+
+		saynn("The tentacles start fucking him raw, pounding his asshole and his throat, powered by pure hatred. The guy is still trying to resist.. to break free.. but his body seems to enjoy some of it, his cock getting fully erect.. and now twitching and leaking pre..")
+
+		saynn("[say=sci1]Mhh.. mhh-h..[/say]")
+
+		saynn("He gets pounded more and more.. his little inner pleasure spot keeps getting hammered.. until he suddenly cums. His body spasms, his body clenching around the invading tentacles as his knotted cock starts spilling onto the floor, dribbling lines of his seed..")
+
+		saynn("A broken muffled moan slips from his throat.")
+
+		saynn("The tentacles seem very lusty though.. they keep fucking him even while he is cumming, pushing through his clenching, overstimulating his poor holes, now drawing whimpers rather than moans from him.")
+
+		saynn("Then something happens.. You notice that the tentacle that's fucking him has grown in one of the spots.. it gained a little orb of sorts. That orb has started traveling through the tentacle, getting closer and closer to the guy's tailhole.")
+
+		saynn("He certainly feels it.. He feels something fat pressing against his ass, trying to stretch it further.")
+
+		saynn("[say=pc]MHH-HH! MHHMM!..[/say]")
+
+		saynn("Despite his attempts, the first egg manages to stretch him out enough.. before getting stuffed inside. Kinky.")
+
+		saynn("His belly gets slightly more bumpy as his whole body arches, his cock keeps dribbling seed weakly..")
+
+		saynn("Another egg follows soon.. Then another..")
+
+		saynn("Each one makes him squirm and moan into the mouth tentacle, his spent cock still twitching.. but now only leaking transparent stuff.. His stomach has swelled visibly.. making him look pregnant.. In a way, he is.")
+
+		saynn("Even after that, the tentacles weren't.. done. You can see them begin to pulse.. all of them.")
+
+		saynn("Then, seconds later, the poor wolf gets showered in some kind of sticky nectar. The tentacles that were inside him begin to pump him full of it, filling the empty space between all of the eggs to the brim.")
+
+		saynn("[say=pc]That's what you get.[/say]")
+
+		saynn("The wolf.. just whimpers weakly. He seems completely spaced out.. broken. Good.")
+
+		saynn("The tentacles slowly withdraw, making sure not to spill too much juice.. before setting the guy onto the floor.. He is covered in fluids, his belly is swollen, his asshole is gaping.. He stares blankly at the ceiling.")
+
+		saynn("[say=sci1]I.. I..[/say]")
+
+		saynn("[say=pc]I know. You're a breeding stock for tentacles. Don't bother explaining.[/say]")
+
+		addButton("Continue", "See what happens next", "after_all_sex")
+	if(state == "after_all_sex"):
+		_tentacles.doAnim("idle")
+		saynn("All is done. You got your revenge. It feels good.")
+
+		saynn("You notice a paper. Oh yeah, that's the paper that the wolf was threatening you with. He didn't end up tearing it apart it seems. You pick it up.. and find that it was just some random stupid report.")
+
+		saynn("[say=pc]Oh, fuck you.[/say]")
+
+		saynn("Every word of his, it's all a lie. A pathetic attempt at escaping with his life. Whatever, he can keep living in his stupid world.")
+
+		saynn("You point at all of the computers and lab equipment around you.. And the tentacles begin destroying it all. This probably won't solve the core issue.. but it made you feel better.")
+
+		saynn("Time to leave.")
+
+		addButton("Continue", "See what happens next", "docks")
+	if(state == "docks"):
+		removeCharacter(GM.main.PS.getScientist2CharID())
+		aimCameraAndSetLocName("pstent_scientist_1")
+		saynn("You head back into the docks.. but now with the tentacles.")
+
+		saynn("Looks like there is only one escape pod left.. the one that has gotten stuck when the scientists were trying to board it.")
+
+		saynn("The tentacles help you by forcibly spreading the doors open.")
+
+		saynn("The pod.. is clearly too small for the tentacles. There is only space for two normal-sized people.")
+
+		saynn("[say=pc]Well..[/say]")
+
+		saynn("They might not be the smartest.. but they seem to understand.")
+
+		saynn("Suddenly, bolts of plasma start flying past you. The rest of the guards are here.")
+
+		saynn("The tentacles roar into the fight, leaving you be.")
+
+		saynn("Looks like you won't get to say your goodbyes. Oh well.. what can you do..")
+
+		saynn("You let the tentacles have their fun.. as you board the escape pod and press a button that would launch it..")
+
+		addButton("Continue", "See what happens next", "in_space")
+	if(state == "in_space"):
+		removeCharacter(GM.main.PS.getTentaclesCharID())
+		aimCameraAndSetLocName("pstent_escapepod")
+		playAnimation(StageScene.Solo, "sit")
+		saynn("You're drifting through space.. the fuel has long run-out. Your pod has a way of sending an SOS signal.. but that's about it.")
+
+		saynn("Suddenly, your collar starts beeping.. faster and faster.. until it suddenly sends a shock so strong that you black out.")
+
+		addButton("Continue", "See what happens next", "near_detective")
+	if(state == "near_detective"):
+		removeCharacter(GM.main.PS.getScientist1CharID())
+		removeCharacter(GM.main.PS.getScientist2CharID())
+		removeCharacter(_tentacles.getTentaclesCharID())
+		addCharacter("intro_detective")
+		playAnimation(StageScene.Solo, "sit")
+		aimCameraAndSetLocName("intro_interogation")
+		saynn("You wake up.. what feels like seconds later.. cuffed to a chair.")
+
+		saynn("It's not the first time you've been in this place.")
+
+		saynn("[say=intro_detective]Name is Jake, IIPF, threat assessment division.[/say]")
+
+		saynn("[say=pc]Yeah, I remember you.[/say]")
+
+		saynn("He raises a brow at you.")
+
+		saynn("[say=pc]I've been naughty, I know.[/say]")
+
+		saynn("He puts his glasses on and reads something off of an old-school wooden tablet.")
+
+		saynn("[say=intro_detective]Let's see. You have a single case of felony escape. Hm. But it's a big one. Help me understand, how and why did it happen? You can start with the how.[/say]")
+
+		saynn("Jake looks over his glasses at you, awaiting.")
+
+		saynn("[say=pc]Do you wanna hear my story? How I was used as a test subject in an illegal bio-lab? And what happened next?[/say]")
+
+		saynn("[say=intro_detective]My job is not to listen to fan fiction. It's to assess the level of risk. How likely is it that you're gonna try to pull this stunt again. So help me help you, will you?[/say]")
+
+		saynn("You're not really sure what to say anymore. You can try to explain that you were held in a cell.. but he will probably not care. And telling him about what you did with the lab will probably put a few extra charges on you. Might as well try to play his game then.")
+
+		saynn("[say=pc]This won't happen again, I can assure you.[/say]")
+
+		saynn("Jake tilts his head ever slightly.. while you put your most innocent eyes.")
+
+		saynn("[say=intro_detective]I see.[/say]")
+
+		addButton("Continue", "See what happens next", "fastforward")
+	if(state == "fastforward"):
+		removeCharacter("intro_detective")
+		GM.pc.setLocation(GM.pc.getCellLocation())
+		aimCameraAndSetLocName(GM.pc.getCellLocation())
+		addCharacter("risha")
+		playAnimation(StageScene.Duo, "stand", {npc="risha"})
+		saynn("Next moment you know it.. you're being flown back to your concrete home.. first class, as usual.")
+
+		saynn("The BDCC guards meet you and walk you to your cell.. where Risha is already waiting for you.")
+
+		saynn("[say=risha]Here is your stupid crap.[/say]")
+
+		saynn("[say=pc]What a warm welcome.[/say]")
+
+		saynn("[say=risha]You know what's warm? My cock. Wanna welcome it?[/say]")
+
+		saynn("Looks like you weren't gone long enough for her to start missing you.")
+
+		saynn("[say=pc]I'm good.[/say]")
+
+		saynn("[say=risha]No. You're a slut. C'mon, I ain't got all day.[/say]")
+
+		saynn("You fetch your stupid crap off of her hands.. and watch her leave.")
+
+		saynn("From one paradise to another.")
+
+		addButton("Continue", "You had your fun", "doEndSlavery")
 
 func _react(_action: String, _args):
 	var _tentacles:PlayerSlaveryTentacles = GM.main.PS
 
 	if(_action == "endthescene"):
 		endScene()
+		return
+
+	if(_action == "fastforward"):
+		processTime(60*42)
+
+	if(_action == "doEndSlavery"):
+		endScene()
+		GM.main.endCurrentScene()
+		GM.main.stopPlayerSlavery()
+		GM.pc.setLocation(GM.pc.getCellLocation())
 		return
 
 	setState(_action)
