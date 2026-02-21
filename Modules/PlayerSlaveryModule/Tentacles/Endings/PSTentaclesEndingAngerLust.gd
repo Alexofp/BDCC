@@ -1,5 +1,7 @@
 extends SceneBase
 
+var choseBoth = false
+
 func _init():
 	sceneID = "PSTentaclesEndingAngerLust"
 
@@ -224,15 +226,20 @@ func _run():
 		addButton("Girl", "Make the tentacles fuck the girl!", "fuck_girl")
 		addButton("Both", "Make the tentacles fuck the guy first.. and then fuck the girl too..", "fuck_both")
 	if(state == "fuck_girl"):
-		saynn("Seeing that the things aren't looking good for him, the wolf just sets off, dashing towards the exit. His foot almost leaves the lab.. almost.")
+		playAnimation(StageScene.TentaclesBondage, "start", {pc=GM.main.PS.getScientist2CharID(), plant=true, bodyState={naked=true,hard=true}})
+		if (!choseBoth):
+			saynn("Seeing that the things aren't looking good for him, the wolf just sets off, dashing towards the exit. His foot almost leaves the lab.. almost.")
 
-		saynn("A tendril wraps around his other ankle, yanking him back and pinning him into the wall. He struggles.. but fails to do anything.")
+			saynn("A tendril wraps around his other ankle, yanking him back and pinning him into the wall. He struggles.. but fails to do anything.")
 
-		saynn("[say=sci1]Let me go! Let me..[/say]")
+			saynn("[say=sci1]Let me go! Let me..[/say]")
 
-		saynn("The tentacle gets tired quickly of his annoying voice too and shoves itself inside his mouth, gagging him that way.")
+			saynn("The tentacle gets tired quickly of his annoying voice too and shoves itself inside his mouth, gagging him that way.")
 
-		saynn("The real target of the tentacles was the girl.. Carefully, the tentacles approach her. She is shivering.. but doesn't pull away.")
+			saynn("The real target of the tentacles was the girl.. Carefully, the tentacles approach her. She is shivering.. but doesn't pull away.")
+
+		else:
+			saynn("Now that the wolf is.. taken care of. The tentacles direct their attention towards the girl.")
 
 		saynn("[say=sci2]Hey.. uh.. I w-will do anything if you tell it to.. ah!..[/say]")
 
@@ -250,6 +257,9 @@ func _run():
 
 		saynn("[say=pc]Too late for pleading. You could have just not locked me in with that cutie. Now you will have to endure the consequences.[/say]")
 
+		addButton("Continue", "See what happens next", "fuck_girl_fuck")
+	if(state == "fuck_girl_fuck"):
+		playAnimation(StageScene.TentaclesSex, "sex", {pc=GM.main.PS.getScientist2CharID(), plant=true, bodyState={naked=true,hard=true}})
 		saynn("Suddenly the tentacles pull the girl up by her waist, legs and arms. A thick, shiny tendril presses between her legs and starts teasing her pussy folds. She tries to clamp her legs shut.. but the tendrils are quick to forcefully spread them again.")
 
 		saynn("[say=sci2]Ah..[/say]")
@@ -274,6 +284,9 @@ func _run():
 
 		saynn("A wet, desperate cry escapes around the tendril in her throat as her first orgasm rips through her. She shakes hard.. cumming.. while the tentacles just keep pushing, keep fucking her. Their lust.. and their anger.. seem bottomless.")
 
+		addButton("Continue", "See what happens next", "girl_fuck_cum")
+	if(state == "girl_fuck_cum"):
+		playAnimation(StageScene.TentaclesSex, "fast", {pc=GM.main.PS.getScientist2CharID(), cum=true, plant=true, bodyState={naked=true,hard=true}})
 		saynn("Some of the tendrils begin to look different. Something is moving inside them, creating visible bumps. That bump hits the girl's pussy.. and starts stretching her folds even wider.")
 
 		saynn("[say=sci2]MHh!.. HH-hhmh!..[/say]")
@@ -304,11 +317,18 @@ func _run():
 
 		addButton("Continue", "See what happens next", "after_all_sex")
 	if(state == "fuck_guy"):
+		playAnimation(StageScene.TentaclesChoke, "sextease", {pc=_tentacles.getScientist1CharID(), plant=true, bodyState={naked=true, hard=true}})
+		if (choseBoth):
+			saynn("Why choose one of them.. when you can have your revenge on both? Yes.")
+
 		saynn("Seeing that the things aren't looking good for him, the wolf just sets off, dashing towards the exit. His foot almost leaves the lab.. almost.")
 
 		saynn("A tendril wraps around his other ankle, yanking him back. Another one coils around his waist, lifting him clean off the floor. He tries to kick.. tries to struggle.. but the tentacles are fueled by anger.")
 
 		saynn("[say=sci1]Let me go! Let me..[/say]")
+
+		if (choseBoth):
+			saynn("Looks like the wolf is first. The girl can wait.")
 
 		saynn("His labcoat gets ripped off, buttons scattering across the floor. The rest of the cloth gets shredded too.. leaving the wolf suspended in the air naked, sheath and tight asshole out on display for everyone.")
 
@@ -322,6 +342,9 @@ func _run():
 
 		saynn("[say=sci1]No-no-no! Don't you fucking-.. AH![/say]")
 
+		addButton("Continue", "See what happens next", "guy_fuck_fuck")
+	if(state == "guy_fuck_fuck"):
+		playAnimation(StageScene.TentaclesChoke, "sex", {pc=_tentacles.getScientist1CharID(), plant=true, pcCum=true, bodyState={naked=true, hard=true}})
 		saynn("He gasps as the tip pushes inside, stretching his tailhole wide. He claws at the tentacles holding him.. but they don't budge, instead smacking his ass each time. His throat doesn't stay free for long too as the same tentacle as before forces itself past his teeth again.")
 
 		saynn("[say=sci1]MMhh-h!.. mhh!..[/say]")
@@ -342,6 +365,9 @@ func _run():
 
 		saynn("[say=pc]MHH-HH! MHHMM!..[/say]")
 
+		addButton("Continue", "See what happens next", "guy_fuck_cum")
+	if(state == "guy_fuck_cum"):
+		playAnimation(StageScene.TentaclesChoke, "fast", {pc=_tentacles.getScientist1CharID(), plant=true, cum=true, pcCum=true, bodyState={naked=true, hard=true}})
 		saynn("Despite his attempts, the first egg manages to stretch him out enough.. before getting stuffed inside. Kinky.")
 
 		saynn("His belly gets slightly more bumpy as his whole body arches, his cock keeps dribbling seed weakly..")
@@ -364,7 +390,10 @@ func _run():
 
 		saynn("[say=pc]I know. You're a breeding stock for tentacles. Don't bother explaining.[/say]")
 
-		addButton("Continue", "See what happens next", "after_all_sex")
+		if (choseBoth):
+			addButton("Continue", "See what happens next", "fuck_girl")
+		else:
+			addButton("Continue", "See what happens next", "after_all_sex")
 	if(state == "after_all_sex"):
 		_tentacles.doAnim("idle")
 		saynn("All is done. You got your revenge. It feels good.")
@@ -381,6 +410,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "docks")
 	if(state == "docks"):
+		removeCharacter(GM.main.PS.getScientist1CharID())
 		removeCharacter(GM.main.PS.getScientist2CharID())
 		aimCameraAndSetLocName("pstent_scientist_1")
 		saynn("You head back into the docks.. but now with the tentacles.")
@@ -486,6 +516,47 @@ func _react(_action: String, _args):
 		endScene()
 		return
 
+	if(_action == "fuck_both"):
+		choseBoth = true
+		setState("fuck_guy")
+		return
+
+	if(_action == "girl_fuck_cum"):
+		var theChar = getCharacter(_tentacles.getScientist2CharID())
+		var theTentacles = getCharacter(_tentacles.getTentaclesCharID())
+		var theMenstrualCycle:MenstrualCycle = theChar.getMenstrualCycle()
+		for _i in range(7):
+			theMenstrualCycle.addTentacleEgg(_tentacles.getTentaclesCharID(), TentacleEggType.Plant, 12*60*60, OrificeType.Vagina)
+		for _i in range(5):
+			theMenstrualCycle.addTentacleEgg(_tentacles.getTentaclesCharID(), TentacleEggType.Plant, 12*60*60, OrificeType.Anus)
+		for _i in range(3):
+			theMenstrualCycle.addTentacleEgg(_tentacles.getTentaclesCharID(), TentacleEggType.Plant, 12*60*60, OrificeType.Throat)
+		theTentacles.fillBalls(RNG.randf_range(0.5, 1.0))
+		theChar.cummedInVaginaBy(_tentacles.getTentaclesCharID())
+		theTentacles.fillBalls(RNG.randf_range(0.5, 1.0))
+		theChar.cummedInAnusBy(_tentacles.getTentaclesCharID())
+		theTentacles.fillBalls(RNG.randf_range(0.5, 1.0))
+		theChar.cummedInMouthBy(_tentacles.getTentaclesCharID())
+		theTentacles.fillBalls(RNG.randf_range(0.5, 1.0))
+		theChar.cummedOnBy(_tentacles.getTentaclesCharID())
+
+	if(_action == "guy_fuck_cum"):
+		var theChar = getCharacter(_tentacles.getScientist1CharID())
+		var theTentacles = getCharacter(_tentacles.getTentaclesCharID())
+		var theMenstrualCycle:MenstrualCycle = theChar.getMenstrualCycle()
+		for _i in range(11):
+			theMenstrualCycle.addTentacleEgg(_tentacles.getTentaclesCharID(), TentacleEggType.Plant, 12*60*60, OrificeType.Anus)
+		for _i in range(3):
+			theMenstrualCycle.addTentacleEgg(_tentacles.getTentaclesCharID(), TentacleEggType.Plant, 12*60*60, OrificeType.Throat)
+		theTentacles.fillBalls(RNG.randf_range(0.5, 1.0))
+		theChar.cummedInVaginaBy(_tentacles.getTentaclesCharID())
+		theTentacles.fillBalls(RNG.randf_range(0.5, 1.0))
+		theChar.cummedInAnusBy(_tentacles.getTentaclesCharID())
+		theTentacles.fillBalls(RNG.randf_range(0.5, 1.0))
+		theChar.cummedInMouthBy(_tentacles.getTentaclesCharID())
+		theTentacles.fillBalls(RNG.randf_range(0.5, 1.0))
+		theChar.cummedOnBy(_tentacles.getTentaclesCharID())
+
 	if(_action == "fastforward"):
 		processTime(60*42)
 
@@ -497,3 +568,15 @@ func _react(_action: String, _args):
 		return
 
 	setState(_action)
+
+func saveData():
+	var data = .saveData()
+
+	data["choseBoth"] = choseBoth
+
+	return data
+
+func loadData(data):
+	.loadData(data)
+
+	choseBoth = SAVE.loadVar(data, "choseBoth", false)
