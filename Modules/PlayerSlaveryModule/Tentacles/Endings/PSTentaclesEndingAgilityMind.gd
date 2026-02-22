@@ -44,7 +44,7 @@ func _run():
 
 		saynn("He steps inside, armored from toes to the tip of his head. You can't even see his eyes behind an advanced-looking helmet.")
 
-		saynn("The tentacles don't move.. and don't strike. And so you do the same, seeing what will happen next.")
+		saynn("The tentacles don't move.. and don't strike. And so you do the same, curious what will happen next.")
 
 		saynn("[say=pc]Does the camera see us?[/say]")
 
@@ -60,49 +60,109 @@ func _run():
 
 		saynn("While you are busy with the shower, the tentacles use their agility to reach towards the security camera. The tentacle carefully wraps around it.. and forcefully turns it left and right a few times, making the inner turning motor screech.. and then overheat and seize working. The camera is now staring at a wall.. forever.")
 
-		_tentacles.talk("This will give us about five minutes before the alarm happens.")
+		_tentacles.talk("We have about five minutes before they raise the alarm.")
 		saynn("You nod.. and follow the tentacles as they squeeze through the opened door.")
 
 		addButton("Continue", "See what happens next", "corridor")
 	if(state == "corridor"):
-		saynn("You and {psTentacles} step into the corridor. The tendrils admire the different environment that they're not in.. but not for long.")
+		saynn("You and {psTentacles} slip through the open door into the corridor. For a moment, the tendrils pause, admiring the new environment that they're in. It's not that different from being in the cell.. but it's still different.")
 
-		saynn("The sound of boots approaching makes you hug the opposite wall.")
+		saynn("The sound of boots approaching makes you hug the opposite wall. There is not much to hide behind so the tentacles do the same, pressing themselves against the concrete.")
 
 		_tentacles.talk("Tshh.")
-		saynn("The guard steps into view from the left corridor.")
+		saynn("The guard steps into view from the left corridor, looking forward. He stops and checks his plasma rifle.")
 
-		saynn("In a sudden motion, he turns his head to the right, his whole body doing an ever so visible spasm.. before the tentacles take over.")
+		saynn("He looks left, about to continue his patrol.. but then decides to check his right too.. His body convulsed for a split second.. before going still. His eyes calm down and just glaze over.")
 
-		saynn("The guard just looks at you for a bit.. and then casually walks the other way, continuing his patrol.")
+		saynn("The guard blinks, looks directly at you and the tentacles.. and then just causally turns and continues his patrol in the opposite direction, the sounds of his boots fading into silence.")
 
 		_tentacles.talk("He might remember us if he thinks about it long enough.")
 		saynn("Another ticking bomb..")
 
-		saynn("After the guard has walked out of view, the tentacles start slithering forward. You follow their steps closely.")
+		saynn("You move. Corridor after corridor, the tentacles slither ahead, their movements aren't exactly silent.. but they don't need to be. When a camera appears in sight, a tendril would already be there, wrapping around its frame and twisting with surgical precision until the motor inside it dies.")
 
-		saynn("Corridor after corridor, the tentacles are careful about avoiding the gazes of all the cameras.. occasionally stopping to break their turning motors. Any lone guards or pairs of them conveniently turn away when you approach.")
+		saynn("Any lone guards or pairs of them conveniently turn away at the last second. Maybe training them to be strong and smart was the best decision you could have made.")
 
 		_tentacles.talk("The camera person has begun writing a report.")
-		saynn("[say=pc]Can't you stop him?[/say]")
+		saynn("[say=pc]Can you stop him?[/say]")
 
 		_tentacles.talk("Too far.")
 		saynn("You nod.")
 
 		saynn("During your exploration, you find more reinforced windows.. a whole row of them, each leaving into a separate containment cell.. just like yours. There are.. things.. inside them. Some have humanoid shapes.. some are just nothing but twisted forms.")
 
-		saynn("You find closed security doors in front of you. But one of the guards is nice enough to open them for you before turning away. Feels almost too easy.")
+		saynn("A security door blocks your path, red light glowing. But before you start looking for other options, a guard appears. He approaches the control panel and lets it scan his face.. which opens the door. He walks away without even looking at you. Feels almost too easy.")
 
 		saynn("[say=sci1]Hello. I'm getting a report from the monitoring team. Apparently some of the cameras are malfunctioning. I'm raising the code to code yellow, just in case. Please make sure that every specimen is secured in its cell while we wait for the maintenance team to arrive.[/say]")
 
 		saynn("Time is running out..")
 
-		saynn("You follow the tentacles until you reach some kind of checkpoint. You peek your head to look at it from behind the corner.. and see quite a few guards.")
+		saynn("You move faster, following the tentacles until you reach some kind of checkpoint. You peek your head to look at it from behind the corner.. and see quite a few guards. They're all alert now too, eyes sharp, hands on their weapons.")
 
 		_tentacles.talk("Too many for us to control.")
-		saynn("Well.. gotta try a different route then.")
+		saynn("You start pulling back, searching for a different route.. but then..")
 
-		saynn("But before you can leave.. you begin to hear more boots coming your way..")
+		saynn("Boots. Behind you. Coming fast.")
+
+		saynn("Nowhere to run now. You only have your fists.. but you still ready yourself for a fight..")
+
+		addButton("Continue", "See what happens next", "yoinked_vents")
+	if(state == "yoinked_vents"):
+		saynn("Suddenly, one of the thick tentacles wraps around you and pulls you up into a ventilation shaft that they have just discovered. As they pull you in, another tentacle puts the ventilation grate back into its place from the inside.")
+
+		saynn("The many guards just run past you, none of them spotting anything suspicious. Phew.")
+
+		saynn("You begin crawling through the vent. It's tight here. Very cramped. The tentacles have to spread themselves along a big distance.. and they still barely fit, really straining the metal. Having high agility helps them though.")
+
+		saynn("[say=pc]Cozy..[/say]")
+
+		_tentacles.talk("They're about to find the naked guard.")
+		saynn("You focus and crawl in silence, only hearing the sound of your breathing now. The vent system seems to go on forever..")
+
+		saynn("And then.. suddenly.. the metal begins screeching.")
+
+		saynn("Moments later, the vent floor gives way.")
+
+		saynn("The tentacles fall first, crashing into another corridor. You land onto them, the thick tentacles catching you.")
+
+		saynn("A guard stands a few meters away. His eyes go wide, his hand instantly moves to his radio.")
+
+		saynn("[say=pc]Stop him![/say]")
+
+		saynn("The guard's digit presses the transmit button, causing it to beep. He opens his mouth.. and then freezes.")
+
+		saynn("His thumb carefully releases the button.. but then a crackling voice emerges from the radio.")
+
+		saynn("[say=sci2]Johnson? Report. What's your status? Johnson, do you copy?[/say]")
+
+		saynn("Saying nothing now will cause an alarm.")
+
+		saynn("The guard presses the button of the radio again and starts talking, smooth and calm.")
+
+		saynn("[sayMale]All clear here. Just checking the corridor. No issues so far.[/sayMale]")
+
+		saynn("A pause. The radio crackles.")
+
+		saynn("[say=sci2]Copy that. Stay alert. We have a possible breach.[/say]")
+
+		saynn("[sayMale]Understood.. actually.. I see something now.[/sayMale]")
+
+		saynn("You raise a brow, a slight feeling of anxiety setting in.")
+
+		saynn("[say=sci2]What is it?[/say]")
+
+		saynn("[sayMale]I see a broken vent in my sector. No signs of any intruder.[/sayMale]")
+
+		saynn("A small pause.")
+
+		saynn("[say=sci2]Copy. We will redirect some guards and secure the perimeter. If you see anything else suspicious, report it immediately.[/say]")
+
+		saynn("[sayMale]Copy. Out.[/sayMale]")
+
+		saynn("The guard turns away as the tentacles slither past.. at a very fast pace. You follow behind.")
+
+		_tentacles.talk("That has bought us some time.")
+		saynn("The whole facility is hunting you. You are always one mistake away.. But it looks like you are getting close to something..")
 
 
 func _react(_action: String, _args):
