@@ -273,7 +273,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "fuck_girl_fuck")
 	if(state == "fuck_girl_fuck"):
-		playAnimation(StageScene.TentaclesSex, "sex", {pc=GM.main.PS.getScientist2CharID(), plant=true, bodyState={naked=true,hard=true}})
+		playAnimation(StageScene.TentaclesCuddle, "sex", {pc=GM.main.PS.getScientist2CharID(), plant=true, bodyState={naked=true,hard=true}})
 		saynn("After they've done with her clothes, the tentacles lift her.. not roughly.. but smoothly. She still gasps as she is suspended above the floor, her limbs carefully held by the tendrils. A thick, shiny one presses between her thighs.. gently rubbing against her slit.. letting her feel its warmth and a slight pulsing.")
 
 		saynn("[say=sci2]Ah..[/say]")
@@ -302,7 +302,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "girl_fuck_cum")
 	if(state == "girl_fuck_cum"):
-		playAnimation(StageScene.TentaclesSex, "fast", {pc=GM.main.PS.getScientist2CharID(), cum=true, plant=true, bodyState={naked=true,hard=true}})
+		playAnimation(StageScene.TentaclesCuddle, "fast", {pc=GM.main.PS.getScientist2CharID(), cum=true, plant=true, bodyState={naked=true,hard=true}})
 		saynn("Some of the tendrils begin to look different. Something is moving inside them, creating visible bumps. That bump hits the girl's pussy.. and starts stretching her folds even wider.")
 
 		saynn("[say=sci2]Mmm?.. mmh-..[/say]")
@@ -335,49 +335,51 @@ func _run():
 
 		addButton("Continue", "See what happens next", "after_all_sex")
 	if(state == "fuck_guy"):
-		playAnimation(StageScene.TentaclesChoke, "sextease", {pc=_tentacles.getScientist1CharID(), plant=true, bodyState={naked=true, hard=true}})
+		playAnimation(StageScene.TentaclesSex, "tease", {pc=_tentacles.getScientist1CharID(), plant=true, bodyState={naked=true, hard=true}})
 		if (choseBoth):
-			saynn("Why choose one of them.. when you can have your revenge on both? Yes.")
+			saynn("Why choose one of them.. when you can have your fun with both? Yes.")
 
 		saynn("Seeing that the things aren't looking good for him, the wolf just sets off, dashing towards the exit. His foot almost leaves the lab.. almost.")
 
-		saynn("A tendril wraps around his other ankle, yanking him back. Another one coils around his waist, lifting him clean off the floor. He tries to kick.. tries to struggle.. but the tentacles are fueled by anger.")
+		saynn("A tendril wraps around his other ankle, yanking him back. Another one coils around his waist, lifting him clean off the floor. He tries to kick.. tries to struggle.. but the tentacles just keep grabbing him again, the strength feels limitless.")
 
 		saynn("[say=sci1]Let me go! Let me..[/say]")
 
 		if (choseBoth):
 			saynn("Looks like the wolf is first. The girl can wait.")
 
-		saynn("His labcoat gets ripped off, buttons scattering across the floor. The rest of the cloth gets shredded too.. leaving the wolf suspended in the air naked, sheath and tight asshole out on display for everyone.")
+		saynn("Despite their strength, the tentacles avoid ripping any of his clothes off, instead just carefully unbuttoning his labcoat and slipping it off of him. The tendrils have enough dexterity to unbutton his shirt too, then pulling it and his pants off soon after, leaving the wolf suspended in the air naked, sheath and pulsing, tight asshole out on display.")
 
 		saynn("[say=sci1]Stop it, now! You f-fucking.. monster.[/say]")
 
-		saynn("A thick, slick tendril presses against his lips.. and then forces itself inside when the guy was about to say something else, turning his speech into a muffled series of noises.")
+		saynn("A tentacle reaches up to his lips.. not forcing itself.. just resting there, waiting. When the guy opens his mouth to curse again, that tentacle suddenly slips inside, filling his mouth, turning his speech into a muffled series of noises.")
 
-		saynn("Another tentacles slithers between his legs, rubbing his sheath until the canine cock starts poking out of it, probably against the scientist's will. Another one presses against his tight anal entrance, circling, lubricating him with some slick, warm juices.")
+		saynn("Other tendrils explore him. One coils between his legs, gently stroking his sheath until his cock emerges from it, getting harder and harder. Another presses against his tailhole.. gently circling and prodding it, lubricating the anal star with warm, slick juices that make him shiver.")
 
-		saynn("He managed to wiggle his head free from the mouth tentacle.")
+		saynn("He manages to pull his mouth free.")
 
-		saynn("[say=sci1]No-no-no! Don't you fucking-.. AH![/say]")
+		saynn("[say=sci1]No-no-no! Don't you.. ah..[/say]")
 
 		addButton("Continue", "See what happens next", "guy_fuck_fuck")
 	if(state == "guy_fuck_fuck"):
-		playAnimation(StageScene.TentaclesChoke, "sex", {pc=_tentacles.getScientist1CharID(), plant=true, pcCum=true, bodyState={naked=true, hard=true}})
-		saynn("He gasps as the tip pushes inside, stretching his tailhole wide. He claws at the tentacles holding him.. but they don't budge, instead smacking his ass each time. His throat doesn't stay free for long too as the same tentacle as before forces itself past his teeth again.")
+		playAnimation(StageScene.TentaclesSex, "sex", {pc=_tentacles.getScientist1CharID(), plant=true, pcCum=true, bodyState={naked=true, hard=true}})
+		saynn("He gasps as the tip of the tentacle starts to bury itself inside his tailhole. Slowly. Deliberately. Stretching him open inch by inch, letting him feel every moment of it. He grunts and claws at the other tendrils.. but they're strong enough to withstand any onslaught, absorbing his struggles.")
 
-		saynn("[say=sci1]MMhh-h!.. mhh!..[/say]")
+		saynn("[say=sci1]Ah!.. mhh..[/say]")
 
-		saynn("The tentacles start fucking him raw, pounding his asshole and his throat, powered by pure hatred. The guy is still trying to resist.. to break free.. but his body seems to enjoy some of it, his cock getting fully erect.. and now twitching and leaking pre..")
+		saynn("His throat doesn't stay empty for long as the tentacle fills it again, gagging him.")
+
+		saynn("And now, all of them begin to move inside him. Not exactly pounding his holes.. but still sliding inside, gently stretching him further, looking for angles that make him squirm the most. The one in his mouth matches the rhythm of the others, sliding in and out, making a small bulge appear on his throat each time.")
+
+		saynn("His cock, fully hard now, leaks pre onto the floor below, each thrust making his shaft twitch from pleasure..")
 
 		saynn("[say=sci1]Mhh.. mhh-h..[/say]")
 
-		saynn("He gets pounded more and more.. his little inner pleasure spot keeps getting hammered.. until he suddenly cums. His body spasms, his body clenching around the invading tentacles as his knotted cock starts spilling onto the floor, dribbling lines of his seed..")
+		saynn("Their rhythm builds, becoming faster, more intense. The tentacle inside his tailhole finds that special little pleasure spot and keeps stimulating it each time, kneading and massaging it, making his knotted pulse harder..")
 
-		saynn("A broken muffled moan slips from his throat.")
+		saynn("Until he suddenly cums.. His inner walls clench around the invading tentacle, his cock throbbing and shooting ropes of seed onto the floor. The tentacles don't stop.. they keep fucking him, drawing out more spasms, adding extra shivers, extending his pleasure until he is whimpering rather than moaning.")
 
-		saynn("The tentacles seem very lusty though.. they keep fucking him even while he is cumming, pushing through his clenching, overstimulating his poor holes, now drawing whimpers rather than moans from him.")
-
-		saynn("Then something happens.. You notice that the tentacle that's fucking him has grown in one of the spots.. it gained a little orb of sorts. That orb has started traveling through the tentacle, getting closer and closer to the guy's tailhole.")
+		saynn("Then you notice something.. There is a bump in the form of an orb appearing in the tentacle that's in his butt.. That bump begins to travel slowly towards his stretched hole.")
 
 		saynn("He certainly feels it.. He feels something fat pressing against his ass, trying to stretch it further.")
 
@@ -385,10 +387,8 @@ func _run():
 
 		addButton("Continue", "See what happens next", "guy_fuck_cum")
 	if(state == "guy_fuck_cum"):
-		playAnimation(StageScene.TentaclesChoke, "fast", {pc=_tentacles.getScientist1CharID(), plant=true, cum=true, pcCum=true, bodyState={naked=true, hard=true}})
-		saynn("Despite his attempts, the first egg manages to stretch him out enough.. before getting stuffed inside. Kinky.")
-
-		saynn("His belly gets slightly more bumpy as his whole body arches, his cock keeps dribbling seed weakly..")
+		playAnimation(StageScene.TentaclesSex, "fast", {pc=_tentacles.getScientist1CharID(), plant=true, cum=true, pcCum=true, bodyState={naked=true, hard=true}})
+		saynn("You're pretty sure that the tentacles are trying to stuff him with eggs. The first one is being pressed against his back entrance, the tentacles gradually working it in.. until his body accepts it, the egg slipping inside with a wet pop. His belly swells slightly, his cock dribbles more seed.")
 
 		saynn("Another egg follows soon.. Then another..")
 
@@ -400,13 +400,13 @@ func _run():
 
 		saynn("[say=pc]That's what you get.[/say]")
 
-		saynn("The wolf.. just whimpers weakly. He seems completely spaced out.. broken. Good.")
+		saynn("The wolf.. just keeps squirming, little whimpers escape his lips, his mouth open. He got overstimulated.")
 
 		saynn("The tentacles slowly withdraw, making sure not to spill too much juice.. before setting the guy onto the floor.. He is covered in fluids, his belly is swollen, his asshole is gaping.. He stares blankly at the ceiling.")
 
 		saynn("[say=sci1]I.. I..[/say]")
 
-		saynn("[say=pc]I know. You're a breeding stock for tentacles. Don't bother explaining.[/say]")
+		saynn("[say=pc]I know. You're a breeding stock for tentacles. I see who you are.[/say]")
 
 		if (choseBoth):
 			addButton("Continue", "See what happens next", "fuck_girl")
@@ -414,7 +414,7 @@ func _run():
 			addButton("Continue", "See what happens next", "after_all_sex")
 	if(state == "after_all_sex"):
 		_tentacles.doAnim("idle")
-		saynn("All is done. You got your revenge. It feels good.")
+		saynn("All is done. Hopefully the scientists have learned their lesson.")
 
 		saynn("You notice a paper. Oh yeah, that's the paper that the wolf was threatening you with. He didn't end up tearing it apart it seems. You pick it up.. and find that it was just some random stupid report.")
 
