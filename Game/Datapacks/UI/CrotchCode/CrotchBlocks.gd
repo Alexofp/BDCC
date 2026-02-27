@@ -187,6 +187,8 @@ static func getAll():
 		"NpcGetPCRep",
 		"NpcAffectRelationship2",
 		"NpcGetRelationship2",
+		"NpcIsSpecies",
+		"NpcIsHybrid",
 		
 		"TFCanHas",
 		"TFStartTF",
