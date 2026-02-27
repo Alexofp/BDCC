@@ -99,7 +99,7 @@ func updateInfo():
 	
 	if(isFightMode):
 		var possibleActions = item.getPossibleActions()
-		if(possibleActions.size() == 1 && canDoAction(possibleActions[0])):
+		if(possibleActions.size() == 1 && canDoAction(possibleActions[0]) && item.canUseInCombat()):
 			showUseButton(true)
 		else:
 			showUseButton(false)
