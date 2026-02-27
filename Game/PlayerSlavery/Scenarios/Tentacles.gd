@@ -271,8 +271,11 @@ func getActions(_loc:String) -> Array:
 	
 	if(isSmallOrNormal()):
 		if(eventScene != ""):
-			if(eventTarget == monsterLoc && _loc == eventTarget):
-				theActions.append(action("Monster", "See what's up", "doEvent"))
+			if(eventTarget == monsterLoc && _loc == eventTarget && getCurrentEvent() < 0):
+				theActions.append(action(getMonsterName(), "Approach your tentacles.. and think about the options that you have.", "PSTentaclesEndingChoice", [false]))
+	
+	if(isNormal() && daysNormal >= 1 && _loc == monsterLoc):
+		theActions.append(action("Rest", "Get some rest", "PSTentacles1EggInteract"))
 	
 	#if(_loc == LOC_IMPORTANT):
 	#	theActions.append(action("MEOW", "TEST ACTION", "MeScene"))
@@ -318,7 +321,7 @@ func checkEvent(_scene, _loc:String) -> Array:
 	if(growStage == STAGE_NORMAL):
 		if(GM.main.getTime() > 20*60*60):
 			if(daysNormal >= 1):
-				return ["PSTentaclesEndingScene"]
+				return ["PSTentaclesEndingChoice"]
 			return ["PSTentaclesNormalSleep"]
 	
 	if(isSmallOrNormal() && isAngry):

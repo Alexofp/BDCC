@@ -53,6 +53,7 @@ func _init():
 		
 		"res://Modules/PlayerSlaveryModule/Tentacles/Normal/PSTentaclesEndingScene.gd",
 		"res://Modules/PlayerSlaveryModule/Tentacles/Normal/PSTentaclesInjectEnding.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Normal/PSTentaclesEndingChoice.gd",
 		
 		"res://Modules/PlayerSlaveryModule/Tentacles/Endings/PSTentaclesEndingAngerAgility.gd",
 		"res://Modules/PlayerSlaveryModule/Tentacles/Endings/PSTentaclesEndingAngerMind.gd",

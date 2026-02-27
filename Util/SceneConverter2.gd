@@ -195,7 +195,7 @@ func _on_Button_pressed():
 			if(commandID in ["reactSceneEnd", "onSceneEnd"] && splittedStuff.size() > 0):
 				var theSceneId = splittedStuff[0].strip_edges()
 				sceneReacts[theSceneId] = theCode
-			if(commandID in ["initScene"]):
+			if(commandID in ["initScene", "initArgs"]):
 				initSceneLines = theCode
 			if(commandID in ["reactInit"]):
 				reactInitLines = theCode
