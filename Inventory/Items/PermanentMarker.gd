@@ -9,8 +9,8 @@ func getVisibleName():
 func getDescription():
 	return "A single-use marker that is loaded with special ink that is almost impossible to remove."
 
-#func canUseInCombat():
-#	return true
+func canUseInCombat():
+	return false
 #
 #func useInCombat(_attacker, _receiver):
 #	removeXOrDestroy(getAmount())
