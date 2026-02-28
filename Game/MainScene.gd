@@ -282,11 +282,12 @@ func getNewUniqueSceneID(blockedIDS=[]) -> int:
 		result += 1
 	return result
 
-func runScene(id, _args = [], parentSceneUniqueID = -1):
+func runScene(id, _args = [], parentSceneUniqueID = -1,tag:String=""):
 	GM.world.lastAimedRoomID = GM.pc.getLocation()
 	var scene = GlobalRegistry.createScene(id)
 	assert(scene != null, "SCENE WITH ID "+str(id)+" IS NOT FOUND. MAKE SURE IT WAS REGISTERED INSIDE THE MODULE.")
 	scene.uniqueSceneID = getNewUniqueSceneID([parentSceneUniqueID])
+	scene.sceneTag = tag
 	if(parentSceneUniqueID >= 0):
 		scene.parentSceneUniqueID = parentSceneUniqueID
 	add_child(scene)
@@ -1354,6 +1355,18 @@ func getDebugActions():
 					"type": "string",
 					"value": "",
 				},
+				{
+					"id": "sceneTag",
+					"name": "Scene tag",
+					"value": "",
+					"type": "string",
+				},
+				{
+					"id": "sceneArgs",
+					"name": "Scene arguments (must start and end with brackets)",
+					"value": "",
+					"type": "string",
+				},
 			]
 		},
 		{
@@ -1631,61 +1644,61 @@ func doDebugAction(id, args = {}):
 			#
 			
 		return
-	if(id == "addBodywritings"):
+	elif(id == "addBodywritings"):
 		var theAm:int = args["amount"]
 		for _i in range(theAm):
 			GM.pc.addBodywritingRandom()
 		GM.pc.updateAppearance()
-	if(id == "clearBodywritings"):
+	elif(id == "clearBodywritings"):
 		GM.pc.clearBodywritings(true, true)
 		GM.pc.updateAppearance()
-	if(id == "forceProgressTFs"):
+	elif(id == "forceProgressTFs"):
 		GM.pc.getTFHolder().forceProgressAll()
-	if(id == "accelerateTFs"):
+	elif(id == "accelerateTFs"):
 		GM.pc.getTFHolder().accelerateAllFull()
-	if(id == "startTF"):
+	elif(id == "startTF"):
 		if(!GM.pc.getTFHolder().canStartTransformation(args["tfid"])):
 			addMessage(args["tfid"] +" transformation is currently not possible.")
 		else:
 			GM.pc.getTFHolder().startTransformation(args["tfid"])
-	if(id == "startSlavery"):
+	elif(id == "startSlavery"):
 		if(PS):
 			return
 		#PSH.storePlayersItems()
 		#runScene("PlayerSlaveryPickScene")
 		runScene(GlobalRegistry.getModule("PlayerSlaveryModule").getSlaveryStartScene())
 		#startPlayerSlavery(args["slaveryID"], true)
-	if(id == "startSlaveryFast"):
+	elif(id == "startSlaveryFast"):
 		if(PS):
 			return
 		#PSH.storePlayersItems()
 		#runScene("PlayerSlaveryPickScene")
 		#runScene(GlobalRegistry.getModule("PlayerSlaveryModule").getSlaveryStartScene())
 		startPlayerSlavery(args["slaveryID"], true)
-	if(id == "stopSlavery"):
+	elif(id == "stopSlavery"):
 		if(PS):
 			stopPlayerSlavery()
 			GM.pc.setLocation(GM.pc.getCellLocation())
 			while(sceneStack.size() > 1):
 				endCurrentScene()
-	if(id == "undoTFs"):
+	elif(id == "undoTFs"):
 		GM.pc.undoAllTransformations()
-	if(id == "applyTFs"):
+	elif(id == "applyTFs"):
 		GM.pc.makeAllTransformationsPermanent()
-	if(id == "toggleISDebug"):
+	elif(id == "toggleISDebug"):
 		isDebuggingIS = !isDebuggingIS
 		if(isDebuggingIS):
 			addMessage("Interaction System debug info is now Enabled")
 		else:
 			addMessage("Interaction System debug info is now Disabled")
 	
-	if(id == "addRep"):
+	elif(id == "addRep"):
 		GM.pc.getReputation().addRep(args["rep"], args["amount"])
 	
-	if(id == "setRep"):
+	elif(id == "setRep"):
 		GM.pc.getReputation().setLevel(args["rep"], args["level"])
 	
-	if(id == "forceSmartlock"):
+	elif(id == "forceSmartlock"):
 		if(GM.main.dynamicCharacters.size() == 0):
 			return
 		var tryAmount = 100
@@ -1704,12 +1717,12 @@ func doDebugAction(id, args = {}):
 			break
 			
 		
-	if(id == "damageClothes"):
+	elif(id == "damageClothes"):
 		GM.pc.damageClothes()
-	if(id == "repairClothes"):
+	elif(id == "repairClothes"):
 		GM.pc.repairAllClothes()
 	
-	if(id == "healPC"):
+	elif(id == "healPC"):
 		GM.pc.addPain(-GM.pc.painThreshold())
 		GM.pc.addLust(-GM.pc.lustThreshold())
 		GM.pc.addStamina(GM.pc.getMaxStamina())
@@ -1718,40 +1731,43 @@ func doDebugAction(id, args = {}):
 		#	var newItem = GlobalRegistry.createItem(itemID)
 		#	GM.pc.getInventory().addItem(newItem)
 	
-	if(id == "addPain"):
+	elif(id == "addPain"):
 		GM.pc.addPain(args["amount"])
 	
-	if(id == "addLust"):
+	elif(id == "addLust"):
 		GM.pc.addLust(args["amount"])
 		
-	if(id == "addStamina"):
+	elif(id == "addStamina"):
 		GM.pc.addStamina(args["amount"])
 		
-	if(id == "addCredits"):
+	elif(id == "addCredits"):
 		GM.pc.addCredits(args["amount"])
 	
-	if(id == "addExp"):
+	elif(id == "addExp"):
 		GM.pc.addExperience(args["amount"])
 	
-	if(id == "addSkillExp"):
+	elif(id == "addSkillExp"):
 		GM.pc.addSkillExperience(args["skillID"], args["amount"])
 	
-	if(id == "resetPCPerks"):
+	elif(id == "resetPCPerks"):
 		GM.pc.getSkillsHolder().resetPickedPerks()
 	
-	if(id == "resetPCStats"):
+	elif(id == "resetPCStats"):
 		GM.pc.getSkillsHolder().resetStats()
 	
-	if(id == "characterCreator"):
+	elif(id == "characterCreator"):
 		runScene("CharacterCreatorScene", [true])
 	
-	if(id == "runScene"):
-		runScene(args["sceneID"])
+	elif(id == "runScene"):
+		var scargs = str2var(args["sceneArgs"])
+		if typeof(scargs)!=TYPE_ARRAY: # invalid args
+			scargs = []
+		runScene(args["sceneID"],scargs,-1,args["sceneTag"])
 	
-	if(id == "removePCRestraints"):
+	elif(id == "removePCRestraints"):
 		GM.pc.removeAllRestraints()
 	
-	if(id == "giveItem"):
+	elif(id == "giveItem"):
 		if(!args.has("itemID") || args["itemID"] == null):
 			return
 		
@@ -1769,35 +1785,35 @@ func doDebugAction(id, args = {}):
 				args["amount"] -= 1
 			Log.print("Item "+item.getStackName()+" added to player")
 		
-	if(id == "openConsole"):
+	elif(id == "openConsole"):
 		Console.toggleConsole()
 	
-	if(id == "animBrowser"):
+	elif(id == "animBrowser"):
 		runScene("SimpleAnimPlayerScene")
 
-	if(id == "skinEditor"):
+	elif(id == "skinEditor"):
 		if(args["cnpcID"] != ""):
 			runScene("ChangeSkinScene", [args["cnpcID"], true])
 		else:
 			runScene("ChangeSkinScene", [args["npcID"], true])
 	
-	if(id == "lactatePC"):
+	elif(id == "lactatePC"):
 		GM.pc.induceLactation()
 		GM.pc.getBodypart(BodypartSlot.Breasts).getFluidProduction().fillPercent(1.0)
 		
-	if(id == "enslaveRandom"):
+	elif(id == "enslaveRandom"):
 		var npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [], InmateGenerator.new(), {})
 		GlobalRegistry.getModule("NpcSlaveryModule").makeSurePCHasSlaveSpace()
 		runScene("KidnapDynamicNpcScene", [npcID])
 		# runScene("EnslaveDynamicNpcScene", [npcID])
 		
-	if(id == "spyRandom"):
+	elif(id == "spyRandom"):
 		runScene("SpyOnPawnScene")
 	
-	if(id == "startSoftSlavery"):
+	elif(id == "startSoftSlavery"):
 		runScene("SoftSlaveryQuickStartScene")
 	
-	if(id == "duplicateAndEnslave"):
+	elif(id == "duplicateAndEnslave"):
 		var theNpcID = args["npcID"]
 		#if(args["cnpcID"] != ""):
 		#	theNpcID = args["cnpcID"]
@@ -1855,7 +1871,7 @@ func doDebugAction(id, args = {}):
 		runScene("KidnapDynamicNpcScene", [dynamicCharacter.getID()])
 		# runScene("EnslaveDynamicNpcScene", [npcID])
 	
-	if(id == "becomeNPC"):
+	elif(id == "becomeNPC"):
 		if(args["cnpcID"] != ""):
 			consoleBecome(args["cnpcID"])
 		else:
