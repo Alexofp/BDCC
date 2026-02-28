@@ -3823,10 +3823,10 @@ func getDrugsInfluenceAmount() -> int:
 	
 	return result
 
-func cancelPregnancy():
+func cancelPregnancy(_cancelNormalPregnancy:bool = true, _deleteBigEggs:bool = true):
 	if(!menstrualCycle):
 		return
-	menstrualCycle.cancelPregnancy()
+	menstrualCycle.cancelPregnancy(_cancelNormalPregnancy, _deleteBigEggs)
 
 func doSwallow(_fluidID:String, _amount:float, _swallowEvent:bool = true) -> Dictionary:
 	var fluidObject:FluidBase = GlobalRegistry.getFluid(_fluidID)

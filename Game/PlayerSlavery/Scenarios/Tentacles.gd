@@ -131,7 +131,14 @@ func _init():
 
 func onSlaveryStart():
 	createIcons()
-	pass
+	var theSci1 = GlobalRegistry.getCharacter(getScientist1CharID())
+	if(theSci1):
+		theSci1.afterTakingAShower()
+		theSci1.cancelPregnancy()
+	var theSci2 = GlobalRegistry.getCharacter(getScientist2CharID())
+	if(theSci2):
+		theSci2.afterTakingAShower()
+		theSci2.cancelPregnancy()
 
 func onSlaveryEnd():
 	deleteIcons()
@@ -628,9 +635,9 @@ func trainNothing() -> bool:
 func getTentaclesCharID() -> String:
 	return "psplantTentacles"
 func getScientist1CharID() -> String:
-	return "nova"
+	return "psTentSci1"
 func getScientist2CharID() -> String:
-	return "risha"
+	return "psTentSci2"
 
 func setEvent(_eventType:int, _targetLoc:String, _scene:String, _args:Array = []):
 	lastEventType = _eventType

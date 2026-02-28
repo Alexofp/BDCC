@@ -624,9 +624,12 @@ func giveBirth() -> Array:
 	
 	return result
 
-func cancelPregnancy():
-	impregnatedEggCells.clear()
-	cycleProgress = 1.0
-	noticedVisiblyPregnant = false
-	noticedHeavyIntoPregnancy = false
-	noticedReadyToGiveBirth = false
+func cancelPregnancy(_cancelNormalPregnancy:bool = true, _deleteBigEggs:bool = true):
+	if(_cancelNormalPregnancy):
+		impregnatedEggCells.clear()
+		cycleProgress = 1.0
+		noticedVisiblyPregnant = false
+		noticedHeavyIntoPregnancy = false
+		noticedReadyToGiveBirth = false
+	if(_deleteBigEggs):
+		bigEggs.clear()
