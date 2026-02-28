@@ -320,11 +320,13 @@ func switchToFloor(floorID):
 		else:
 			floorObject.visible = false
 
-func aimCamera(roomID, instantly = false):
+func aimCamera(roomID, instantly:bool = false) -> bool:
+	if(!(roomID is String)): # getRoomByID expects a string
+		return false
 	var room = getRoomByID(roomID)
 	
 	if(!room):
-		return
+		return false
 		
 	switchToFloor(room.getFloorID())
 		
@@ -338,6 +340,7 @@ func aimCamera(roomID, instantly = false):
 	lastAimedRoomID = roomID
 	if(instantly):
 		camera.reset_smoothing()
+	return true
 
 func zoomIn(mult:float = 1.0):
 	camera.zoom *= 1.1 * mult
