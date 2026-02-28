@@ -1,32 +1,30 @@
 extends ComputerBase
 class_name NetworkedComputerBase
 
-var connectedTo = ""
-
-var nextFreeId = 0
+var connectedTo = "" # ip, empty is local computer
 
 var servers : Dictionary = {} # key is ip, value is server class instance
 
-const defaultCmds : Array = ["help","ls","cat"] # these are always available unless otherwise specified and built into all computers
+const defaultCmds : Array = ["help","ls","cat","login"] # these are always available unless otherwise specified and built into all computers
 
 var localCmds : Dictionary = {} # key is string for command, value is description for help; these are for each separate server/script/whatever
 
 class NetworkedComputerServer:
 	var ip : String = "0.0.0.0" # empty string is always local computer
 	var enterText : String = "this is the message that shows on connect!"
-	var supportedCmds : Array = [] # only these are enabled per server
-	var adminCommands : Array = [] # and these if logged in
+	var supportedCmds : Array = [] # only these are enabled per server, includes defaultCmds by default
+	var adminCommands : Array = [] # cmds here are available only if logged in
 	
 	var username : String = "admin"
 	var adminPassword : String = "uwuwowo" # can be empty str to disable admin stuff
 	var loggedin : bool = false
 	
-	var files : Array = [] # uses CompFiles
+	var files : Array = [] # uses CompFiles, sorted
 	var privateFiles : Array = [] # same, require login
-	var data : Dictionary = {} # for per-server variables, such as transferring credits in the safe script or setting an admin password
-	var disconnectData : Dictionary = {} # upon disconnection, keys that are found here and in data will be set to their values in here (eg. log out on disconnect)
+	var data : Dictionary = {} # for per-server variables, such as transferring credits in the safe script
+	var disconnectData : Dictionary = {} # upon disconnection, keys that are found here as well as in the data dictionary will be set to their values in here (eg. log out on disconnect)
 	
-	
+	var nextAvailableId : int = 0 # unique per server now, makes more sense & easier to deal with
 	
 	func _init(i:String,cmds:Array=[],txt="server",defs:bool=true,d:Dictionary={},dd:Dictionary={},un:String="admin",pw:String="",adcmds:Array=[]):
 		self.ip = i
@@ -39,42 +37,57 @@ class NetworkedComputerServer:
 		self.username = un
 		self.adminPassword = pw
 		self.adminCommands = adcmds
-	func addFile(f:ComputerFile):
-		if files.has(f): # no duplicates
+	
+	func saveData() -> Dictionary:
+		return {
+			"nextAvailableId":nextAvailableId,
+			"data":data,
+			"loggedin":loggedin,
+			
+		}
+	
+	func loadData(d:Dictionary) -> void:
+		data = d.get("data",{})
+		nextAvailableId = d.get("nextAvailableId",0)
+		loggedin = d.get("loggedin",false)
+	
+	
+	
+	func hasFileWithId(id:int=nextAvailableId,private:bool=false) -> bool:
+		return ComputerFileSorting.findFileIdxWithIdStrict(self,id,private) != -1
+		
+	
+	func addFile(f:ComputerFile) -> void:
+		var insertIdx = ComputerFileSorting.findFileIdxWithObjStrict(self,f)
+		if insertIdx != -1: # no duplicates
 			return
-		files.append(f)
-	func addPrivateFile(f:ComputerFile):
-		if privateFiles.has(f): # no duplicates
+		files.insert(insertIdx,f)
+	
+	func addPrivateFile(f:ComputerFile) -> void:
+		var insertIdx = ComputerFileSorting.findFileIdxWithObjStrict(self,f,true)
+		if insertIdx==-1: # no duplicates
 			return
-		privateFiles.append(f)
-	func getFile(f:ComputerFile):
-		var idx = -1
-		idx = files.find(f)
-		if idx==-1:
-			if loggedin:
-				idx = privateFiles.find(f)
-				if idx==-1:
-					return null
-				return privateFiles[idx]
-			else:
-				return null
-		return files[idx]
-	func getFileFromName(n:String=""):
-		for f in files:
-			if f.name==n:
-				return f
+		privateFiles.insert(insertIdx,f)
+	
+	func getFileFromName(n:String="") -> ComputerFile:
 		if loggedin:
 			for f in privateFiles:
 				if f.name==n:
 					return f
-	func getFileFromId(i:int=0):
 		for f in files:
-			if f.id==i:
+			if f.name==n:
 				return f
+		return null
+		
+	func getFileFromId(i:int=0) -> ComputerFile:
 		if loggedin:
 			for f in privateFiles:
 				if f.id==i:
 					return f
+		for f in files:
+			if f.id==i:
+				return f
+		
 		return null
 
 class ComputerFile:
@@ -86,22 +99,95 @@ class ComputerFile:
 	
 	var method : String = "" # method to call if file is .exe (requires localCmd_ prefix for method, added automatically; eg. to call open, method="open" and calls localCmd_open())
 
+class ComputerFileSorting:
+	static func sortComputerFileObjects(a:ComputerFile, b:ComputerFile):
+		return a.id < b.id
+	
+	static func sortComputerFileIds(a, b): # sucks, but it should work. can compare both computerFiles as args or ids
+		if a is ComputerFile:
+			a = a.id
+		if b is ComputerFile:
+			b = b.id
+		return a < b
+	
+	static func findFileIdxWithId(server:NetworkedComputerServer,id:int,private:bool=false) -> int: # returns current idx or insertion idx
+		var array = server.privateFiles if private else server.files
+		var idx = array.bsearch_custom(id,ComputerFileSorting,"sortComputerFileIds")
+		return idx
+	
+	static func findFileIdxWithIdStrict(server:NetworkedComputerServer,id:int,private:bool=false) -> int: # returns current idx or -1 if file doesn't exist
+		var array = server.privateFiles if private else server.files
+		var idx = findFileIdxWithId(server,id)
+		if array.size()<=idx: # outta bounds
+			return -1
+		if array[idx].id!=id: # would return insertion idx
+			return -1
+		return idx
+	
+	
+	static func findFileIdxWithObj(server:NetworkedComputerServer,obj:ComputerFile,private:bool=false) -> int: # returns current idx or insertion idx
+		var array = server.privateFiles if private else server.files
+		var idx = array.bsearch_custom(obj,ComputerFileSorting,"sortComputerFileObjects")
+		return idx
+	
+	static func findFileIdxWithObjStrict(server:NetworkedComputerServer,obj:ComputerFile,private:bool=false) -> int: # returns current idx or -1 if file doesn't exist
+		var array = server.privateFiles if private else server.files
+		var idx = findFileIdxWithObj(server,obj)
+		if array.size()<=idx: # outta bounds
+			return -1
+		if array[idx]!=obj: # would return insertion idx
+			return -1
+		return idx
+
+
+
+
+# returns compfile. note that this doesn't assign an id if specified id is -1!
 func newCompFile(n:String,cat:String="it's a file!",f:String="",down:bool=true,i=-1,meth:String="") -> ComputerFile:
 	var nf = ComputerFile.new()
 	nf.name = n
 	nf.catData = cat
 	nf.canDownload = down
-	if i!=-1:
-		nf.id = i
-	else:
-		nf.id = nextFreeId
-		nextFreeId += 1
+	nf.id = i
 	nf.catFont = f
 	nf.method = meth
 	return nf
 
+
+
+# add a file to server as a public/private file, setting a new id if i==-1. keeps file array sorted, which is necessary
+func addFileToServer(server:NetworkedComputerServer,file:ComputerFile,private:bool=false) -> void:
+	if !server: # just in case
+		Log.printerr("tried to add file with name %s (id %s) to a non-existent server!" % [file.name,file.id])
+		return
+	
+	if file.id==-1: # assign new
+		while ComputerFileSorting.findFileIdxWithIdStrict(server,server.nextAvailableId,private)!=-1: # in case we stumble upon file with id it shouldn't have, such as in cases of custom ids
+			server.nextAvailableId += 1
+		
+		file.id = server.nextAvailableId
+	
+	var newIdx = ComputerFileSorting.findFileIdxWithObj(server,file,private)
+	(server.privateFiles if private else server.files).insert(newIdx,file)
+
 func getServer(ip:String="") -> NetworkedComputerServer:
 	return servers.get(ip,null)
+
+func login(_args):
+	if _args.size()!=1:
+		return "'login' command expects 1 argument"
+	var currentServer = getServer(connectedTo)
+	if !currentServer:
+		return "no current server"
+	if currentServer.loggedin:
+		return "Already logged in"
+	if !currentServer.adminPassword:
+		return "This server doesn't support log-ins"
+	if currentServer.adminPassword==_args[0]:
+		currentServer.loggedin=true
+		return "Logged in as admin successfully. Welcome, "+currentServer.username
+	
+	return "Error, wrong password"
 
 func ls(_args:Array=[]):
 	var currentServer = getServer(connectedTo)
@@ -110,6 +196,7 @@ func ls(_args:Array=[]):
 	if(_args.size() == 0):
 		var fs = currentServer.files.duplicate()
 		if currentServer.loggedin:
+			print("logged")
 			fs.append_array(currentServer.privateFiles)
 		var txt = "Found files:" + ("\n(none)" if fs.size()==0 else "")
 		for file in fs:
@@ -142,6 +229,7 @@ func help(_args:Array=[]):
 		"connect":"This command lets you connect to the remote server by using its ip.\nSyntax 'connect <IP>'. An example of an ip is 127.0.1",
 		"tunya":"What are you doing? Give the tunya to the cat!",
 		"disconnect":"Closes the connection",
+		"login":"Allows you to login as an admin. Syntax: login <password>",
 	} # descriptions for each cmd
 	
 	var currentServer = getServer(connectedTo)
@@ -217,6 +305,8 @@ func reactToCommand(_command:String, _args:Array, _commandStringRaw:String):
 				return ls(_args)
 			"connect":
 				return connectComputer(_args)
+			"login":
+				return login(_args)
 	
 	if has_method("localCmd_"+_command): # this is for local cmds
 		print(_command)
@@ -239,24 +329,26 @@ func getServersData() -> Dictionary:
 		var server:NetworkedComputerServer = servers[serverID]
 		if(!server):
 			continue
-		if(!server.data.empty()):
-			sd[server.ip] = server.data
+		
+		sd[server.ip] = server.saveData()
 	return sd
 
 func saveData():
 	var data = .saveData()
 	
 	data["serversData"] = getServersData()
+	data["connectedTo"]=connectedTo
 
 	return data
 	
 func loadData(_data):
 	.loadData(_data)
 	
+	connectedTo = SAVE.loadVar(_data, "connectedTo", "")
 	var sd:Dictionary = SAVE.loadVar(_data, "serversData", {})
 	for ip in sd:
 		if(!servers.has(ip)):
 			continue
-		servers[ip].data = sd[ip]
+		servers[ip].loadData(sd[ip])
 	
 	
