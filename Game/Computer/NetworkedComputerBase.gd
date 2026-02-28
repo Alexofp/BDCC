@@ -196,7 +196,6 @@ func ls(_args:Array=[]):
 	if(_args.size() == 0):
 		var fs = currentServer.files.duplicate()
 		if currentServer.loggedin:
-			print("logged")
 			fs.append_array(currentServer.privateFiles)
 		var txt = "Found files:" + ("\n(none)" if fs.size()==0 else "")
 		for file in fs:
