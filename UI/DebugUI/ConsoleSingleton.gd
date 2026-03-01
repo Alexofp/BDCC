@@ -34,17 +34,15 @@ func quit():
 func help():
 	printLine(getCommandsHelp())
 
-func _input(event : InputEvent):
-	if (event is InputEventKey):
-		if (event.pressed && event.physical_scancode == 96):
-			if (event.pressed):
-				toggleConsole()
-				get_tree().set_input_as_handled()
-		elif (event.pressed && event.physical_scancode == KEY_ESCAPE && control.visible):
-			if (event.pressed):
-				toggleConsole()
-				get_tree().set_input_as_handled()
-				
+func _unhandled_key_input(event):
+	if (event.is_action_pressed("toggle_debug_console")):
+		toggleConsole()
+		get_tree().set_input_as_handled()
+	elif (event.is_action_pressed("close_debug_console") && control.visible):
+		toggleConsole()
+		get_tree().set_input_as_handled()
+	
+
 func toggleConsole():
 	control.visible = !control.visible
 
