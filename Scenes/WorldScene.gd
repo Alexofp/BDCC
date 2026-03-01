@@ -110,7 +110,7 @@ func _react(_action: String, _args):
 		aimCamera(GM.pc.location)
 		GM.ES.triggerReact(Trigger.EnteringRoom, [GM.pc.location, _args[1]])
 		
-		if(!GM.main.checkTFs()):
+		if(!GM.main.checkExtraScenes()):
 			GM.main.showLog()
 		return
 			
@@ -151,7 +151,11 @@ func _react(_action: String, _args):
 		#runScene("GenericSexScene", [["avy"], ["rahi"]])
 		#runScene("GenericSexScene", ["rahi", "pc", SexType.DefaultSex, {SexMod.SubsStartUnconscious: true}])
 		#runScene("GenericSexScene", ["pc", "rahi", SexType.BitchsuitSex, {}])
-		runScene("GenericSexScene", ["pc", "rahi", SexType.TentaclesSex, {}])
+		
+		#var theCycle:MenstrualCycle = GM.pc.getMenstrualCycle()
+		#if(theCycle):
+		#	theCycle.addTentacleEgg("", TentacleEggType.Plant, 100, OrificeType.Vagina)
+		runScene("GenericSexScene", ["pc", "nova", SexType.TentaclesSex, {}])
 		#runScene("GenericSexScene", ["nova", "pc", SexType.TentaclesSex, {}])
 		
 		#runScene("GenericSexScene", [NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true}), "socket", SexType.SlutwallSex])

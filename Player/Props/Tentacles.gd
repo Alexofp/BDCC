@@ -53,5 +53,5 @@ func setSceneOptions(_args:Dictionary):
 	else:
 		setBig()
 	
-	#setPlant() #TODO: REMOVE BEFORE SHIP
+	#setPlant()
 	#setTiny()

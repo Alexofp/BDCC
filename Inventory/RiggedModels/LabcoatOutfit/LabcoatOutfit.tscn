@@ -20,7 +20,7 @@
 [ext_resource path="res://Inventory/RiggedModels/LabcoatOutfit/legup.png" type="Texture" id=19]
 [ext_resource path="res://Inventory/RiggedModels/LabcoatOutfit/digileg.png" type="Texture" id=20]
 
-[sub_resource type="SpatialMaterial" id=1]
+[sub_resource type="SpatialMaterial" id=75]
 resource_name = "arm.png.001"
 flags_transparent = true
 vertex_color_use_as_albedo = true
@@ -38,7 +38,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 2194903,
 "index_count": 6,
-"material": SubResource( 1 ),
+"material": SubResource( 75 ),
 "primitive": 4,
 "skeleton_aabb": [ AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.144165, 4.38865, 0.405854, 0.64, 2.56, 1.00136e-05 ) ],
 "vertex_count": 4
@@ -132,7 +132,7 @@ surfaces/0 = {
 "blend_shape_data": [  ],
 "format": 2194903,
 "index_count": 6,
-"material": SubResource( 1 ),
+"material": SubResource( 75 ),
 "primitive": 4,
 "skeleton_aabb": [ AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( 0, 0, 0, -1, -1, -1 ), AABB( -0.244165, 4.38865, -0.339218, 0.64, 2.56, 1.00136e-05 ) ],
 "vertex_count": 4

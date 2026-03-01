@@ -1,6 +1,8 @@
 extends PlayerSlaveryBase
 class_name PlayerSlaveryTentacles
 
+const DEBUG_ENABLED = true #TODO: Switch to false before ship
+
 var interact1:String = "" #touch listen kick rub
 var interact2:String = "" #fridge shower lamp cuddle
 var interact3:String = "" #holdshut watch peel embrace
@@ -35,6 +37,9 @@ func getDebugStages() -> Array:
 		[STAGE_NORMAL, "NORMAL"],
 	]
 func addSkipActions(_scene:SceneBase):
+	if(!DEBUG_ENABLED):
+		return
+	
 	for entry in getDebugStages():
 		_scene.addButton(entry[1], "SKIP TO THIS STAGE", "skipStage", [entry[0]])
 func doSkipAction(_stage:int):
@@ -91,6 +96,7 @@ var daysNormal:int = 0
 
 var didRubLustEvent:bool = false
 var didFirstSexEvent:bool = false
+var window9hap:bool = false
 
 var flagInjectForced:bool = false # Was the inject ending forced because the pc has run out of time
 
@@ -125,6 +131,78 @@ const MONSTER_NAMES = [
 	"N'Gorroth",
 	"Whispers",
 ]
+
+func saveData() -> Dictionary:
+	return {
+		interact1 = interact1,
+		interact2 = interact2,
+		interact3 = interact3,
+		interactTiny1 = interactTiny1,
+		interactTiny2 = interactTiny2,
+		interactTiny3 = interactTiny3,
+		noticedEgged = noticedEgged,
+		growStage = growStage,
+		monsterLoc = monsterLoc,
+		monsterTarget = monsterTarget,
+		scientist1Loc = scientist1Loc,
+		scientist2Loc = scientist2Loc,
+		eventTarget = eventTarget,
+		eventScene = eventScene,
+		eventArgs = eventArgs,
+		eventGiveupTimer = eventGiveupTimer,
+		daysNormal = daysNormal,
+		didRubLustEvent = didRubLustEvent,
+		didFirstSexEvent = didFirstSexEvent,
+		window9hap = window9hap,
+		flagInjectForced = flagInjectForced,
+		preferEvent = preferEvent,
+		eventNeed = eventNeed,
+		lastEventType = lastEventType,
+		isAngry = isAngry,
+		angryReason = angryReason,
+		anger = anger,
+		agility = agility,
+		mind = mind,
+		lust = lust,
+		monsterName = monsterName,
+	}
+
+func loadData(_data:Dictionary):
+	interact1 = SAVE.loadVar(_data, "interact1", "")
+	interact2 = SAVE.loadVar(_data, "interact2", "")
+	interact3 = SAVE.loadVar(_data, "interact3", "")
+	interactTiny1 = SAVE.loadVar(_data, "interactTiny1", "")
+	interactTiny2 = SAVE.loadVar(_data, "interactTiny2", "")
+	interactTiny3 = SAVE.loadVar(_data, "interactTiny3", "")
+	noticedEgged = SAVE.loadVar(_data, "noticedEgged", false)
+	growStage = SAVE.loadVar(_data, "growStage", STAGE_INTRO)
+	monsterLoc = SAVE.loadVar(_data, "monsterLoc", LOC_MIDDLE)
+	monsterTarget = SAVE.loadVar(_data, "monsterTarget", LOC_IMPORTANT)
+	scientist1Loc = SAVE.loadVar(_data, "scientist1Loc", LOC_SCIENTIST_1)
+	scientist2Loc = SAVE.loadVar(_data, "scientist2Loc", LOC_SCIENTIST_2)
+	eventTarget = SAVE.loadVar(_data, "eventTarget", "")
+	eventScene = SAVE.loadVar(_data, "eventScene", "")
+	eventGiveupTimer = SAVE.loadVar(_data, "eventGiveupTimer", 0)
+	daysNormal = SAVE.loadVar(_data, "daysNormal", 0)
+	didRubLustEvent = SAVE.loadVar(_data, "didRubLustEvent", false)
+	didFirstSexEvent = SAVE.loadVar(_data, "didFirstSexEvent", false)
+	window9hap = SAVE.loadVar(_data, "window9hap", false)
+	flagInjectForced = SAVE.loadVar(_data, "flagInjectForced", false)
+	preferEvent = SAVE.loadVar(_data, "preferEvent", -1)
+	eventNeed = SAVE.loadVar(_data, "eventNeed", 0)
+	lastEventType = SAVE.loadVar(_data, "lastEventType", -1)
+	isAngry = SAVE.loadVar(_data, "isAngry", false)
+	angryReason = SAVE.loadVar(_data, "angryReason", "")
+	anger = SAVE.loadVar(_data, "anger", 0)
+	agility = SAVE.loadVar(_data, "agility", 0)
+	mind = SAVE.loadVar(_data, "mind", 0)
+	lust = SAVE.loadVar(_data, "lust", 0)
+	monsterName = SAVE.loadVar(_data, "monsterName", "")
+	
+	createIcons()
+	prepareForSex()
+	pass
+
 
 func _init():
 	id = "Tentacles"
@@ -697,7 +775,7 @@ func talk(_text:String):
 	if(mind < 5):
 		return
 	var _scene:SceneBase = GM.main.getCurrentScene()
-	#TODO: Hide/scamble depending on mind value
+	# Hides/scambles text depending on mind value
 	
 	# 1-6 GIBBERISH
 	# 7 - Rare
@@ -742,11 +820,3 @@ func setPrefer(_eventType:int):
 func getPrefer() -> int:
 	return preferEvent
 
-func saveData() -> Dictionary:
-	return {}
-
-func loadData(_data:Dictionary):
-	
-	createIcons()
-	prepareForSex()
-	pass

@@ -31,7 +31,7 @@ func _run():
 		saynn("The harsh lights around you start turning into soft, glowing orbs. The sounds of boots on metal are fading into a distant, echoing hum. The last thing you feel is someone's grip on your shoulders as you start losing the fight against gravity..")
 
 		addButton("Continue", "See where your fate takes you next", "wakeup")
-		_tentacles.addSkipActions(self) #TODO: REMOVE BEFORE SHIP
+		_tentacles.addSkipActions(self)
 		if (false):
 			addButton("Meow", "You shouldn't see this", "skipStage")
 	if(state == "wakeup"):

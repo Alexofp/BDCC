@@ -919,54 +919,61 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "9"):
-		saynn("The tentacles are hanging out near the reinforced glass window, their green tips pressed flat against it, as if trying to merge with the cold surface.")
+		if (!_tentacles.window9hap):
+			saynn("The tentacles are hanging out near the reinforced glass window, their green tips pressed flat against it, as if trying to merge with the cold surface.")
 
-		saynn("It can just sense you approaching them.")
+			saynn("It can just sense you approaching them.")
 
-		_tentacles.talk("This cell is too small for us. We've learned everything there is to learn about it.")
-		saynn("You join them, leaning against the wall beside the window. Together, you watch the stars.")
+			_tentacles.talk("This cell is too small for us. We've learned everything there is to learn about it.")
+			saynn("You join them, leaning against the wall beside the window. Together, you watch the stars.")
 
-		saynn("[say=pc]Maybe you know how to escape it?[/say]")
+			saynn("[say=pc]Maybe you know how to escape it?[/say]")
 
-		saynn("A single tentacle slowly unpeels itself from the glass.")
+			saynn("A single tentacle slowly unpeels itself from the glass.")
 
-		_tentacles.talk("There is a lot that we know. But there is also just as much left unknown.")
-		saynn("And each time you learn something new, more unknown gets uncovered..")
+			_tentacles.talk("There is a lot that we know. But there is also just as much left unknown.")
+			saynn("And each time you learn something new, more unknown gets uncovered..")
 
-		saynn("There is a long silence, filled only by the faint hum of the facility.")
+			saynn("There is a long silence, filled only by the faint hum of the facility.")
 
-		_tentacles.talk("We are gonna be destroyed, we know it. Maybe that's not the worst way to go.")
-		saynn("You raise a brow and turn to face the monster.")
+			_tentacles.talk("We are gonna be destroyed, we know it. Maybe that's not the worst way to go.")
+			saynn("You raise a brow and turn to face the monster.")
 
-		saynn("[say=pc]Don't say that.[/say]")
+			saynn("[say=pc]Don't say that.[/say]")
 
-		saynn("You can see the tentacles vibrating with a low frequency.")
+			saynn("You can see the tentacles vibrating with a low frequency.")
 
-		_tentacles.talk("Even if we escape, what is there for us?")
-		saynn("[say=pc]You can learn more about this world, like you wanted to. Complete freedom.[/say]")
+			_tentacles.talk("Even if we escape, what is there for us?")
+			saynn("[say=pc]You can learn more about this world, like you wanted to. Complete freedom.[/say]")
 
-		saynn("Multiple tendrils shift, sliding around each other.")
+			saynn("Multiple tendrils shift, sliding around each other.")
 
-		_tentacles.talk("We would be learning this world one bio-lab cell at a time. We are gonna be hunted.")
-		saynn("[say=pc]Not everyone would do that. Maybe you can find friends.[/say]")
+			_tentacles.talk("We would be learning this world one bio-lab cell at a time. We are gonna be hunted.")
+			saynn("[say=pc]Not everyone would do that. Maybe you can find friends.[/say]")
 
-		saynn("A bitter laugh-like noise echoes in your mind.. a sound you've never heard from them before.")
+			saynn("A bitter laugh-like noise echoes in your mind.. a sound you've never heard from them before.")
 
-		_tentacles.talk("Friends? None of you look like us. We will never fit in.")
-		saynn("[say=pc]What about me? I'm your friend. And I don't look like you.[/say]")
+			_tentacles.talk("Friends? None of you look like us. We will never fit in.")
+			saynn("[say=pc]What about me? I'm your friend. And I don't look like you.[/say]")
 
-		saynn("You reach your hand out to gently stroke one of the tentacles. It starts to slowly wrap around your wrist.. but then suddenly stops and pulls away instead.")
+			saynn("You reach your hand out to gently stroke one of the tentacles. It starts to slowly wrap around your wrist.. but then suddenly stops and pulls away instead.")
 
-		_tentacles.talk("You had no choice.")
-		saynn("No choice?")
+			_tentacles.talk("You had no choice.")
+			saynn("No choice?")
 
-		_tentacles.talk("We are your only chance to get out of here. But we are also the reason you are here.")
-		saynn("The other tentacles begin to retract from the window, curling in on themselves.")
+			_tentacles.talk("We are your only chance to get out of here. But we are also the reason you are here.")
+			saynn("The other tentacles begin to retract from the window, curling in on themselves.")
 
-		_tentacles.talk("We shouldn't have existed to begin with. The world only became worse with our appearance.")
-		saynn("Another uncomfortable moment of silence establishes while you're trying to find the right words.")
+			_tentacles.talk("We shouldn't have existed to begin with. The world only became worse with our appearance.")
+			saynn("Another uncomfortable moment of silence establishes while you're trying to find the right words.")
 
-		_tentacles.talk("If your only way out of here will involve erasing us.. we understand.")
+			_tentacles.talk("If your only way out of here will involve erasing us.. we understand.")
+		else:
+			saynn("The tentacles are hanging out near the reinforced glass window, their green tips pressed flat against it, as if trying to merge with the cold surface.")
+
+			_tentacles.talk("If your only way out of here will involve erasing us.. we understand.")
+			saynn("Looks like they are consumed by their negative thoughts again.")
+
 		addButton("Stay quiet", "You have nothing else to say", "9_stayquiet")
 		addButton("Prove wrong", "Prove the tentacles that they're wrong on all cases", "9_truefriend")
 		addButton("Out of spite", "Tell the tentacles that you should escape out of spite towards the scientists", "9_spite")
@@ -1344,13 +1351,16 @@ func _react(_action: String, _args):
 
 	if(_action == "9_stayquiet"):
 		_tentacles.trainNothing()
+		_tentacles.window9hap = true
 
 	if(_action == "9_truefriend"):
 		_tentacles.train(_tentacles.STAT_MIND)
+		_tentacles.window9hap = true
 
 	if(_action == "9_spite"):
 		_tentacles.train(_tentacles.STAT_MIND)
 		_tentacles.train(_tentacles.STAT_ANGER, false)
+		_tentacles.window9hap = true
 
 	if(_action == "10_allgood"):
 		_tentacles.trainNothing()

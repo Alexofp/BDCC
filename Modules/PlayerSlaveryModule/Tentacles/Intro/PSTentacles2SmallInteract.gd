@@ -42,6 +42,7 @@ func _run():
 	if(state == "doRest"):
 		playAnimation(StageScene.GivingBirth, "idle", {pc="pc"})
 		aimCameraAndSetLocName("pstent_bed")
+		GM.pc.setLocation("pstent_bed")
 		addCharacter(_tentacles.getScientist1CharID())
 		addCharacter(_tentacles.getScientist2CharID())
 		saynn("Despite all of the thoughts, you manage to get some rest.")
@@ -69,6 +70,7 @@ func _run():
 		# (( sad tiny tentacles anim
 		playAnimation(StageScene.TentaclesDuo, "sleep", {tentaclesLess=true, tentaclesSizeTiny=true, plant=true, instantSleep=true})
 		aimCameraAndSetLocName("pstent_middle")
+		GM.pc.setLocation("pstent_middle")
 		addCharacter(_tentacles.getTentaclesCharID())
 		saynn("You get up and take a look at the tentacles..")
 
@@ -94,6 +96,7 @@ func _run():
 	if(state == "doCheckFridge"):
 		playAnimation(StageScene.Solo, "stand")
 		aimCameraAndSetLocName("pstent_fridge")
+		GM.pc.setLocation("pstent_fridge")
 		saynn("It's a plant.. at least it looks like one.. kinda.. So maybe it just needs to be watered.")
 
 		saynn("You open the fridge and look for a water bottle. Your eye gets caught by a different one that was filled with something white.. The label says 'Milk'.. But who knows what's inside it. You ignore it. Eventually you do manage something that looks water-y..")
@@ -131,6 +134,7 @@ func _run():
 		playAnimation(StageScene.TentaclesDuo, "eat", {tentaclesLess=true, tentaclesSizeTiny=true, plant=true, instantSleep=true})
 		
 		aimCameraAndSetLocName("pstent_middle")
+		GM.pc.setLocation("pstent_middle")
 		saynn("You see some chicken.. and decide to feed it to the tentacles.")
 
 		saynn("Carefully, you place it under the weak tentacle.. and watch as it begins to wrap around it. The tentacle then uses its tip to dig into the cooked chicken meat!")
@@ -155,6 +159,7 @@ func _run():
 		playAnimation(StageScene.TentaclesDuo, "eat", {tentaclesLess=true, tentaclesSizeTiny=true, plant=true, instantSleep=true})
 		
 		aimCameraAndSetLocName("pstent_middle")
+		GM.pc.setLocation("pstent_middle")
 		saynn("For whatever reason, there is a stake there.. a completely raw, uncooked stake.")
 
 		saynn("You ain't gonna eat it yourself anyway.. so you just grab it and toss it to the tentacles.")
@@ -183,6 +188,7 @@ func _run():
 		playAnimation(StageScene.TentaclesDuo, "dance", {tentaclesLess=true, tentaclesSizeTiny=true, plant=true, instantSleep=true})
 		
 		aimCameraAndSetLocName("pstent_middle")
+		GM.pc.setLocation("pstent_middle")
 		saynn("You grab the strange milk bottle. You open it and bring your nose to it..")
 
 		saynn("Ooh.. hah.. It hits very strongly. Either this milk went bad.. or it's not milk at all.")
@@ -213,6 +219,7 @@ func _run():
 		playAnimation(StageScene.TentaclesDuo, "eat", {tentaclesLess=true, tentaclesSizeTiny=true, plant=true, instantSleep=true})
 		
 		aimCameraAndSetLocName("pstent_middle")
+		GM.pc.setLocation("pstent_middle")
 		saynn("You see broccoli.. and now, for some reason, you can't get rid of a certain thought anymore. You grab it and close the fridge.")
 
 		saynn("[say=pc]Feeding plants.. to a plant.. is that cannibalism?[/say]")
@@ -241,6 +248,7 @@ func _run():
 		playAnimation(StageScene.TentaclesDuo, "idle", {tentaclesLess=true, tentaclesSizeTiny=true, plant=true})
 		
 		aimCameraAndSetLocName("pstent_middle")
+		GM.pc.setLocation("pstent_middle")
 		saynn("[say=sci2]We wanna test how the specimen will react to a different atmosphere.[/say]")
 
 		saynn("[say=pc]You mean void? Pretty sure it will kill it.[/say]")

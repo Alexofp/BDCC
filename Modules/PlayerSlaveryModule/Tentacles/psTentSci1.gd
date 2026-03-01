@@ -9,11 +9,11 @@ func _init():
 	pickedSkinBColor=Color("ffe1d8d0")
 	npcSkinData={
 	"hair": {"skin": "sockethairoverlap","r": Color("ff493a2d"),"g": Color("ff473628"),"b": Color("ffad9178"),},
-	"ears": {"g": Color("ff5e5cf2"),},
-	"arms": {"skin": "VerySpiky","b": Color("ff5553fe"),},
-	"penis": {"skin": "bodymodcanine","g": Color("ff5e5cf2"),"b": Color("ff24235c"),},
-	"tail": {"skin": "LuxeSkin","b": Color("ff5755fe"),},
-	"legs": {"skin": "LuxeSkin","b": Color("ff4c48ff"),},
+	"ears": {"g": Color("fffe6a23"),},
+	"arms": {"skin": "AngledSkin","b": Color("fffe6a23"),},
+	"penis": {"skin": "bodymodcanine","g": Color("fffe6a23"),"b": Color("ff1c00ff"),},
+	"tail": {"skin": "LuxeSkin",},
+	"legs": {"skin": "LuxeSkin","b": Color("fffe6a23"),},
 	}
 	
 	npcHasMenstrualCycle = true
@@ -59,4 +59,4 @@ func createBodyparts():
 	giveBodypartUnlessSame(GlobalRegistry.createBodypart("digilegs"))
 
 func getDefaultEquipment():
-	return ["OfficialClothesRed"]
+	return ["LabcoatOutfitMale"]
