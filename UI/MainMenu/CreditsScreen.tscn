@@ -33,19 +33,19 @@ size_flags_vertical = 3
 script = ExtResource( 4 )
 
 [node name="ScrollVBox" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
-margin_right = 1280.0
-margin_bottom = 616.0
+margin_right = 1268.0
+margin_bottom = 738.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
-margin_right = 1280.0
+margin_right = 1268.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 0, 20 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
 margin_top = 24.0
-margin_right = 1280.0
+margin_right = 1268.0
 margin_bottom = 45.0
 bbcode_enabled = true
 bbcode_text = "Credits"
@@ -54,35 +54,44 @@ fit_content_height = true
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
 margin_top = 49.0
-margin_right = 1280.0
+margin_right = 1268.0
 margin_bottom = 53.0
 
 [node name="ContentContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/ScrollVBox"]
 margin_top = 57.0
-margin_right = 1280.0
-margin_bottom = 549.0
+margin_right = 1268.0
+margin_bottom = 738.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer"]
-margin_right = 1280.0
-margin_bottom = 315.0
+margin_right = 1268.0
+margin_bottom = 504.0
 custom_fonts/bold_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[center]This game is very early in its development. If you are reading this - thank you!
 
-Project started by [url= https://www.furaffinity.net/user/rahi/][color=#FF6A00]Rahi[/color] aka Alexofp on 01.08.2021
+Project started by [url=https://www.furaffinity.net/user/rahi/][color=#FF6A00]Rahi[/color][/url] aka Alexofp on 01.08.2021
 Active development began on 28.12.2021
 
-Huge thanks to [url=https://www.furaffinity.net/user/enti123][color=#00B6FF]Ferri[/color] for playtesting the earliest versions and supporting me [color=red]<3[/color]
-Thanks to [url=https://www.furaffinity.net/user/mekyro][color=#D375FF]Mekyro[/color] for creating [color=red][url=https://discord.gg/9z8CsDKeRB]RRDC[/url][/color], the inspiration of this game
+Huge thanks to [url=https://www.furaffinity.net/user/enti123][color=#00B6FF]Ferri[/color][/url] for playtesting the earliest versions and supporting me [color=red]<3[/color]
+Thanks to [url=https://www.furaffinity.net/user/mekyro][color=#D375FF]Mekyro[/color][/url] for creating [color=red][url=https://discord.gg/9z8CsDKeRB]RRDC[/url][/color], the inspiration of this game
 Thanks to [url=https://www.furaffinity.net/user/bl4ckw0lf/][color=#E24646]Jacki Northstar[/color][/url] for letting me use her character
 Thanks to [color=#90A9F4]Nova Dawfort[/color] for letting me use her character ^^
 Thanks to [url=https://www.furaffinity.net/user/sompurr/][color=#AE6ED8]Sompurr[/color][/url] for letting me use [color=#FFC700]Socket[/color] and her art
 Thanks to [url=https://www.furaffinity.net/user/Artica/][color=#15eff2]Artica[/color][/url] for letting me use her character
 Thanks to [url=https://linktr.ee/nuxtakidlat][color=#AE6ED8]Nuxta [/color][color=#15eff2]Kidlat[/color][/url] for letting me use her character
 
-Thanks to [color=#0059FF]Godot team[/color] for creating the engine that this game is running on
+[url=https://discord.gg/9z8CsDKeRB]RRDC ([color=red]Red Rock[/color] Detention Center)[/url] is a place in second life,
+please check it out if you like roleplaying, it's amazing!
+Without it, this game wouldn't exist.
+The whole concept of a kinky sci-fi prison that has multiple types of
+inmates and staff co-existing together came from RRDC.
+I took that concept in its entirety and filled it with the stories of
+my characters (and made a game out of it).
+Thank you [url=https://www.furaffinity.net/user/mekyro][color=#D375FF]Mekyro[/color][/url]!
+
+Thanks to [url=https://godotengine.org/][color=#0059FF]Godot team[/color][/url] for creating the engine that this game is running on
 [/center]"
 text = "This game is very early in its development. If you are reading this - thank you!
 
@@ -97,23 +106,32 @@ Thanks to Sompurr for letting me use Socket and her art
 Thanks to Artica for letting me use her character
 Thanks to Nuxta Kidlat for letting me use her character
 
+RRDC (Red Rock Detention Center) is a place in second life,
+please check it out if you like roleplaying, it's amazing!
+Without it, this game wouldn't exist.
+The whole concept of a kinky sci-fi prison that has multiple types of
+inmates and staff co-existing together came from RRDC.
+I took that concept in its entirety and filled it with the stories of
+my characters (and made a game out of it).
+Thank you Mekyro!
+
 Thanks to Godot team for creating the engine that this game is running on
 "
 fit_content_height = true
 
 [node name="ContributorsLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer"]
 unique_name_in_owner = true
-margin_top = 325.0
-margin_right = 1280.0
-margin_bottom = 346.0
+margin_top = 514.0
+margin_right = 1268.0
+margin_bottom = 535.0
 custom_fonts/bold_font = SubResource( 1 )
 bbcode_enabled = true
 fit_content_height = true
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer"]
-margin_top = 356.0
-margin_right = 1280.0
-margin_bottom = 461.0
+margin_top = 545.0
+margin_right = 1268.0
+margin_bottom = 650.0
 custom_fonts/bold_font = SubResource( 1 )
 bbcode_enabled = true
 bbcode_text = "[center]
@@ -129,9 +147,9 @@ Thanks to everyone else who I probably forgot..
 fit_content_height = true
 
 [node name="DonationsLabel" type="RichTextLabel" parent="VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer"]
-margin_top = 471.0
-margin_right = 1280.0
-margin_bottom = 492.0
+margin_top = 660.0
+margin_right = 1268.0
+margin_bottom = 681.0
 custom_fonts/bold_font = SubResource( 1 )
 bbcode_enabled = true
 fit_content_height = true

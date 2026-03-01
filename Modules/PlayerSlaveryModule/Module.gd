@@ -72,6 +72,8 @@ func _init():
 		"res://Modules/PlayerSlaveryModule/MilkCafe/PSMilkOfficer.gd",
 		"res://Modules/PlayerSlaveryModule/Start/TempAmbushStash.gd",
 		"res://Modules/PlayerSlaveryModule/Tentacles/PSPlantTentacles.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/psTentSci1.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/psTentSci2.gd",
 	]
 	items = []
 	events = [
