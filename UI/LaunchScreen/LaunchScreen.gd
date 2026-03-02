@@ -176,6 +176,7 @@ func updateModList():
 		newEntry.entryIndex = modEntryIdx
 		newEntry.setModEntry(modEntry)
 		newEntry.connect("onSelected", self, "onModEntryClicked")
+		newEntry.connect("onDoubleClicked", self, "toggleModEntryDisabled")
 		newEntry.connect("onDragOntoAnotherEntry",self,"modEntryDroppedData")
 		launchModEntries.append(newEntry)
 	
@@ -312,14 +313,16 @@ func tryToPopulateFilesList():
 		modFileList.add_item("Couldn't load any files")
 	return "Failed to load info"
 
-
-func _on_ModDisableButton_pressed():
-	if(selectedEntry == null or selectedEntry["name"] == "BDCC.pck"):
+func toggleModEntryDisabled(entry:Dictionary=selectedEntry) -> void:
+	if(entry == null or entry["name"] == "BDCC.pck"):
 		return
 	
-	selectedEntry["disabled"] = !selectedEntry["disabled"]
+	entry["disabled"] = !entry["disabled"]
 	updateModList()
 	updateSelectedEntry()
+
+func _on_ModDisableButton_pressed():
+	toggleModEntryDisabled(selectedEntry)
 
 
 func _on_MoveUpButton_pressed():
