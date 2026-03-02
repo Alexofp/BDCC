@@ -117,8 +117,9 @@ var lust:int = 0
 const DEFAULT_MONSTER_NAME = "Monster"
 var monsterName:String = ""
 const MONSTER_NAMES = [
-	"Tentacles",
+	"Anomaly",
 	"Monster",
+	"Beast",
 	"Sprout",
 	"Viney",
 	"Bloom",
@@ -127,10 +128,66 @@ const MONSTER_NAMES = [
 	"Hugs",
 	"Snugglethorn",
 	"Knotweed",
-	"Beast",
 	"N'Gorroth",
 	"Whispers",
+	"Squeezebois",
+	"Wrigglers",
 ]
+
+const STAT_DESCRIPTIONS = {
+	STAT_ANGER: [
+		"Passive",
+		"Calm",
+		"Neutral",
+		"Grumpy",
+		"Irritated",
+		"Annoyed",
+		"Agitated",
+		"Hostile",
+		"Aggressive",
+		"Furious",
+		"Bloodthirsty",
+	],
+	STAT_AGILITY: [
+		"Puny",
+		"Fragile",
+		"Weak",
+		"Frail",
+		"Fit",
+		"Steady",
+		"Nimble",
+		"Swift",
+		"Jacked",
+		"Powerful",
+		"Unstoppable",
+	],
+	STAT_MIND: [
+		"Thoughtless",
+		"Silly",
+		"Dummy",
+		"Simple",
+		"Aware",
+		"Curious",
+		"Smart",
+		"Clever",
+		"Intelligent",
+		"Genius",
+		"Transcendent",
+	],
+	STAT_LUST: [
+		"Frigid",
+		"Cold",
+		"Shy",
+		"Timid",
+		"Curious",
+		"Warm",
+		"Eager",
+		"Needy",
+		"Hungry",
+		"Horny",
+		"Insatiable",
+	],
+}
 
 func saveData() -> Dictionary:
 	return {
@@ -339,12 +396,17 @@ func getText(_loc:String) -> String:
 			if(monsterLoc != LOC_MIDDLE):
 				Ar.append("The tentacles' nest is still here. Currently it's empty.")
 		
-	if(isSmallOrNormal()):
+	if(isSmallOrNormal() && DEBUG_ENABLED):
 		Ar.append("eventNeed: "+str(eventNeed))
 		Ar.append("anger: "+str(anger))
 		Ar.append("agility: "+str(agility))
 		Ar.append("mind: "+str(mind))
 		Ar.append("lust: "+str(lust))
+	if(isSmallOrNormal()):
+		if(GM.pc.getLocation() == monsterLoc):
+			Ar.append("")
+			Ar.append(getMonsterName()+" is near.")
+			Ar.append_array(getStatDescriptions())
 		
 	return Util.join(Ar, "\n")
 
@@ -356,11 +418,11 @@ func getActions(_loc:String) -> Array:
 	
 	if(isSmallOrNormal()):
 		if(eventScene != ""):
-			if(eventTarget == monsterLoc && _loc == eventTarget && getCurrentEvent() < 0):
-				theActions.append(action(getMonsterName(), "Approach your tentacles.. and think about the options that you have.", "PSTentaclesEndingChoice", [false]))
+			if(eventTarget == monsterLoc && _loc == eventTarget):
+				theActions.append(action(getMonsterName(), "See what's up", "doEvent"))
 	
-	if(isNormal() && daysNormal >= 1 && _loc == monsterLoc):
-		theActions.append(action("Rest", "Get some rest", "PSTentacles1EggInteract"))
+	if(isNormal() && daysNormal >= 1 && _loc == monsterLoc && getCurrentEvent() < 0):
+		theActions.append(action(getMonsterName(), "Approach your tentacles.. and think about the options that you have.", "PSTentaclesEndingChoice", [false]))
 	
 	#if(_loc == LOC_IMPORTANT):
 	#	theActions.append(action("MEOW", "TEST ACTION", "MeScene"))
@@ -820,3 +882,29 @@ func setPrefer(_eventType:int):
 func getPrefer() -> int:
 	return preferEvent
 
+func internal_clampStat(_stat:int) -> int:
+	if(_stat < 0):
+		return 0
+	if(_stat > 10):
+		return 10
+	return _stat
+
+func internal_processStatText(_statID:int, _stat:int) -> String:
+	var theText:String = STAT_DESCRIPTIONS[_statID][_stat]
+	if(_stat == 10):
+		theText = theText.to_upper()
+	return theText
+
+func getStatDescriptions() -> Array:
+	var theAngerIndex:int = internal_clampStat(anger)
+	var theAgilityIndex:int = internal_clampStat(agility)
+	var theMindIndex:int = internal_clampStat(mind)
+	var theLustIndex:int = internal_clampStat(lust)
+	
+	return [
+		"Anger: "+internal_processStatText(STAT_ANGER, theAngerIndex),
+		"Agility: "+internal_processStatText(STAT_AGILITY, theAgilityIndex),
+		"Mind: "+internal_processStatText(STAT_MIND, theMindIndex),
+		"Lust: "+internal_processStatText(STAT_LUST, theLustIndex),
+	]
+	
