@@ -201,12 +201,8 @@ func _on_PopupMenu_index_pressed(index):
 	if(index == 0):
 		doSelfdelete()
 
-var lastRightClick = 0
 func _on_CrotchBlock_gui_input(event):
 	if event is InputEventMouseButton:
-		if event.pressed and event.button_index == BUTTON_RIGHT:
-			if((Time.get_ticks_msec() - lastRightClick) < 400.0):
-				editor.onUserChangeMade()
-				doSelfdelete(true)
-			else:
-				lastRightClick = Time.get_ticks_msec()
+		if event.pressed && event.doubleclick && event.button_index == BUTTON_RIGHT:
+			editor.onUserChangeMade()
+			doSelfdelete(true)

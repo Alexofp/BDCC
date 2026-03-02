@@ -7,6 +7,7 @@ var entryIndex:int = -1
 
 signal onDragOntoAnotherEntry(ar)
 signal onSelected(modEntry)
+signal onDoubleClicked(modEntry)
 
 func setModEntry(modEntry):
 	storedEntry = modEntry
@@ -25,9 +26,6 @@ func updateEntry():
 		theTextColor = theTextColor.darkened(0.3)
 		
 	label["custom_colors/font_color"] = theTextColor
-
-func _on_TextureButton_pressed():
-	emit_signal("onSelected", storedEntry)
 
 func makeActive():
 	$Panel.visible = true
@@ -53,9 +51,9 @@ func getPreview():
 	var panel = PanelContainer.new()
 	var l = Label.new()
 	l.text = label.text
+	panel.add_stylebox_override("panel",preload("res://UI/LaunchScreen/LaunchModEntryPanel.tres"))
 	lp.rect_min_size = rect_size
-	panel.size_flags_horizontal = panel.SIZE_EXPAND_FILL
-	panel.size_flags_vertical = panel.SIZE_EXPAND_FILL
+	panel.rect_min_size = rect_size
 	lp.add_child(panel)
 	l.add_color_override("font_color",label.get_color("font_color"))
 	panel.add_child(l)
@@ -75,3 +73,15 @@ func drop_data(_position, data):
 
 func can_drop_data(_position, data):
 	return typeof(data)==TYPE_DICTIONARY
+
+
+func _on_LaunchModEntry_gui_input(event):
+	if(not event is InputEventMouseButton):
+		return
+	if(event.button_index != BUTTON_LEFT): # fix scrolling up/down causing a new entry to be selected
+		return
+	if(event.doubleclick):
+		emit_signal("onDoubleClicked", storedEntry)
+		return # avoid double select, mostly for performance reasons
+	if(event.pressed):
+		emit_signal("onSelected", storedEntry)
