@@ -9,6 +9,7 @@ const DisableDynamicJoiners = "noDynamicJoiners"
 const SubsStartNaked = "SubsStartNaked"
 const DomsStartNaked = "DomsStartNaked"
 const DisableDomTalking = "DisableDomTalking"
+const PCControlsDoms = "pcControlsDoms"
 
 const DomNoPullingOut = "domNoPullout"
 const MustUseCondoms = "mustUseCondoms"

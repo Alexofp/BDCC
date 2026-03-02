@@ -28,6 +28,7 @@ var mustUseCondoms:bool = false
 var disableTFPills:bool = false
 var noViolence:bool = false
 var domsNoTalking:bool = false
+var pcControlsDoms:bool = false
 
 var pcAllowsDomAutonomy:bool = false
 var pcAllowsDynJoiners:bool = false
@@ -145,6 +146,8 @@ func initSexType(theSexType, args:Dictionary = {}):
 		domsNoTalking = args[SexMod.DisableDomTalking]
 	if(args.has(SexMod.NoViolence)):
 		noViolence = args[SexMod.NoViolence]
+	if(args.has(SexMod.PCControlsDoms)):
+		pcControlsDoms = args[SexMod.PCControlsDoms]
 	if(sexType != null):
 		sexType.setSexEngine(self)
 		sexType.initArgs(args)
@@ -388,7 +391,7 @@ func generateGoals():
 		if(generateGoalsFor(domID, amountToGenerate)):
 			generatedAnyGoals = true
 
-	if(!isDom("pc") && !generatedAnyGoals && !doms.empty()):
+	if(!isDom("pc") && !generatedAnyGoals && !doms.empty() && !pcControlsDoms):
 		addTextRaw("Dom couldn't decide what to do with the sub, none of their fetishes apply.")
 		talkText(RNG.pick(doms), "You are a lucky slut.")
 
@@ -692,7 +695,7 @@ func processAIActions(isDom:bool = true, processPlayerToo:bool = false):
 		var theinfo:SexInfoBase = peopleToCheck[personID]
 		if(!theinfo.canDoActions()):
 			continue
-		if(personID == "pc" && !processPlayerToo):
+		if((personID == "pc" || (pcControlsDoms && isDom(personID))) && !processPlayerToo):
 			continue
 		
 		var actionsScores:Array= []
@@ -773,7 +776,7 @@ func start():
 		var character = GlobalRegistry.getCharacter(subID)
 		character.onSexStarted({sexEngine=self,isDom=false})
 	
-	if(!isDom("pc")):
+	if(!isDom("pc") && !pcControlsDoms):
 		processAIActions(true)
 		processAIActions(false)
 		processTurn()
@@ -783,9 +786,12 @@ func start():
 func getActionsForCharID(_charID:String, isForMenu:bool = false) -> Array:
 	var result:Array = []
 	
-	var _isPC:bool = (_charID == "pc")
+	if(pcControlsDoms && _charID == "pc"): # Please forgive me, sex engine
+		_charID = doms.keys()[0]
+	
 	var _isSub:bool = isSub(_charID)
 	var _isDom:bool = isDom(_charID)
+	var _isPC:bool = (_charID == "pc") || (_isDom && pcControlsDoms)
 	var _charInfo:SexInfoBase
 	if(_isSub):
 		_charInfo = getSubInfo(_charID)
@@ -798,6 +804,7 @@ func getActionsForCharID(_charID:String, isForMenu:bool = false) -> Array:
 			name = "OBEY",
 			desc = "You have lost control of your body..",
 			priority = 999,
+			user = _charID,
 		})
 		return result
 	
@@ -807,6 +814,7 @@ func getActionsForCharID(_charID:String, isForMenu:bool = false) -> Array:
 			name = "Continue",
 			desc = "Just continue doing what you're doing",
 			priority = 999,
+			user = _charID,
 		})
 	
 	if(!_charInfo): # We're not participating in this sex
@@ -826,6 +834,7 @@ func getActionsForCharID(_charID:String, isForMenu:bool = false) -> Array:
 					desc = "Leave the scene",
 					score = 1.0,
 					priority = 0,
+					user = _charID,
 				})
 		
 		for activity in activities:
@@ -845,6 +854,7 @@ func getActionsForCharID(_charID:String, isForMenu:bool = false) -> Array:
 					category = actionEntry["category"] if actionEntry.has("category") else [],
 					priority = actionEntry["priority"] if actionEntry.has("priority") else 0,
 					action = actionEntry,
+					user = _charID,
 				})
 			
 			if(!activity.isInvolved(_charID) && (_charID != "pc" || activity.isInvolved(getPCTarget()))):
@@ -860,6 +870,7 @@ func getActionsForCharID(_charID:String, isForMenu:bool = false) -> Array:
 						category = actionEntry["category"] if actionEntry.has("category") else [],
 						priority = actionEntry["priority"] if actionEntry.has("priority") else 0,
 						args = actionEntry["args"] if actionEntry.has("args") else [],
+						user = _charID,
 					})
 				
 				
@@ -921,6 +932,7 @@ func getActionsForCharID(_charID:String, isForMenu:bool = false) -> Array:
 					desc = actionEntry["desc"] if actionEntry.has("desc") else "Start new activity.",
 					priority = actionEntry["category"] if actionEntry.has("priority") else 0,
 					score = actionEntry["score"] if actionEntry.has("score") else 0.0,
+					user = _charID,
 				})
 	
 	var importantActions:Array = []
@@ -945,7 +957,7 @@ func sortActionsByPriority(a, b):
 func getPCTarget() -> String:
 	var canChooseDoms:bool = true
 	var canChooseSubs:bool = true
-	if(isDom("pc")):
+	if(isDom("pc") || pcControlsDoms):
 		canChooseDoms = false
 		canChooseSubs = true
 	if(isSub("pc")):
@@ -970,11 +982,11 @@ func getPCTarget() -> String:
 
 func switchPCTarget():
 	var idList:Array = []
-	if(isDom("pc")):
+	if(isDom("pc") || pcControlsDoms):
 		idList = subs.keys()
 	if(isSub("pc")):
 		idList = doms.keys()
-	if(!isDom("pc") && !isSub("pc")):
+	if(!isDom("pc") && !isSub("pc") && !pcControlsDoms):
 		idList = (doms.keys() + subs.keys())
 	
 	var theTarget:String = getPCTarget()
@@ -988,7 +1000,7 @@ func switchPCTarget():
 
 
 func canSwitchPCTarget() -> bool:
-	if(isDom("pc")):
+	if(isDom("pc") || pcControlsDoms):
 		if(subs.size() >= 2):
 			return true
 	elif(isSub("pc")):
@@ -1012,6 +1024,7 @@ func processScene():
 	doFullTurn()
 
 func doAction(_actionInfo:Dictionary):
+	var theUser:String = _actionInfo.get("user", "pc")
 	if(_actionInfo["id"] == "obey"):
 		clearOutputRaw()
 		doFullTurn(true)
@@ -1025,20 +1038,20 @@ func doAction(_actionInfo:Dictionary):
 		clearOutputRaw()
 		var activity = getActivityWithUniqueID(_actionInfo["activityID"])
 		if(activity):
-			doActivityAction("pc", activity, _actionInfo["action"])
+			doActivityAction(theUser, activity, _actionInfo["action"])
 		doFullTurn()
 	if(_actionInfo["id"] == "start"):
 		clearOutputRaw()
-		if(isDom("pc")):
-			startActivity(_actionInfo["activityID"], "pc", _actionInfo["target"], _actionInfo["args"])
+		if(isDom(theUser)):
+			startActivity(_actionInfo["activityID"], theUser, _actionInfo["target"], _actionInfo["args"])
 		else:
-			startActivity(_actionInfo["activityID"], _actionInfo["target"], "pc", _actionInfo["args"])
+			startActivity(_actionInfo["activityID"], _actionInfo["target"], theUser, _actionInfo["args"])
 		doFullTurn()
 	if(_actionInfo["id"] == "joinAction"):
 		clearOutputRaw()
 		var activity = getActivityWithUniqueID(_actionInfo["activityID"])
 		if(activity):
-			doJoinAction("pc", activity, _actionInfo["args"] if _actionInfo.has("args") else [])
+			doJoinAction(theUser, activity, _actionInfo["args"] if _actionInfo.has("args") else [])
 		doFullTurn()
 
 func isAllowedAsRole(_activityID:String, _indx:int, _sexInfo:SexInfoBase, skipTagCheck:bool, _args:Array = []) -> bool:
@@ -1103,6 +1116,8 @@ func hasActivityWithInfo(id:String, _info:SexInfoBase) -> bool:
 
 func sexShouldEnd() -> bool:
 	if(isDom("pc") && getDomInfo("pc").canDoActions()):
+		return false
+	if(pcControlsDoms && getDomInfo(doms.keys()[0]).canDoActions()):
 		return false
 		
 	if(subMustGoUnconscious):
@@ -1527,6 +1542,8 @@ func shouldFindDynamicJoiners() -> bool:
 		return false
 	if(isSub("pc") && !GM.main.encounterSettings.shouldSubThreesomesBeEnabled()):
 		return false
+	if(pcControlsDoms): # Gets weird fast, better to just disable
+		return false
 	return true
 
 func toggleDynamicJoiners():
@@ -1696,6 +1713,14 @@ func getRevealedPartsAmount(_charID:String) -> int:
 		return 0
 	return revealedBodyparts[_charID].size()
 
+func canEndSexAnyTime() -> bool:
+	if(isDom("pc")):
+		return true
+	if(pcControlsDoms):
+		return true
+	
+	return false
+
 func saveData():
 	var data = {
 		"revealedBodyparts": revealedBodyparts,
@@ -1716,6 +1741,7 @@ func saveData():
 		"disableTFPills": disableTFPills,
 		"domsNoTalking": domsNoTalking,
 		"noViolence": noViolence,
+		"pcControlsDoms": pcControlsDoms,
 	}
 	if(sexType != null):
 		data["sexTypeID"] = sexType.id
@@ -1760,6 +1786,7 @@ func loadData(data):
 	disableTFPills = SAVE.loadVar(data, "disableTFPills", false)
 	domsNoTalking = SAVE.loadVar(data, "domsNoTalking", false)
 	noViolence = SAVE.loadVar(data, "noViolence", false)
+	pcControlsDoms = SAVE.loadVar(data, "pcControlsDoms", false)
 	
 	var sexTypeID = SAVE.loadVar(data, "sexTypeID", SexType.DefaultSex)
 	var theSexType = GlobalRegistry.createSexType(sexTypeID)

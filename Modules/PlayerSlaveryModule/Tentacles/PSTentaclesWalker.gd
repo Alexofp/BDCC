@@ -65,7 +65,7 @@ func _react(_action: String, _args):
 		if(!eventInfo.empty()):
 			runScene(eventInfo[0], eventInfo[1] if eventInfo.size() > 1 else [])
 			return
-		elif(!GM.main.checkExtraScenes(true, false)):
+		elif(!GM.main.checkExtraScenes(true, true)):
 			if(GM.main.showLog()):
 				return
 		

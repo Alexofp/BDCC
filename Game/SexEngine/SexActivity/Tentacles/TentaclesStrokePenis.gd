@@ -7,6 +7,21 @@ const POSE_CUDDLE = 0
 const POSE_BONDAGE = 1
 const POSE_GROPE = 2
 
+const POSES = {
+	POSE_CUDDLE: {
+		name = "Cuddling",
+	},
+	POSE_BONDAGE: {
+		name = "Bondage",
+	},
+	POSE_GROPE: {
+		name = "Standing",
+	},
+}
+
+func getAvaiablePoses() -> Array:
+	return [POSE_CUDDLE, POSE_BONDAGE, POSE_GROPE]
+
 func _init():
 	id = "TentaclesStrokePenis"
 	
@@ -130,6 +145,14 @@ func getActions(_indx:int):
 		if(getState() != ""):
 			addAction("pause", getPauseSexScore(DOM_0, SUB_0, S_PENIS, S_HANDS), "Pause", "Pause the stroking")
 		
+		for pose in getAvaiablePoses():
+			if(pose == altPose):
+				continue
+			if(!POSES.has(pose)):
+				continue
+			var poseName:String = POSES[pose]["name"]
+			addAction("switchpose", 0.0, poseName, "Change pose", {A_CATEGORY: ["Switch pose"], A_ARGS: [pose]})
+		
 		addAction("stop", getStopScore() - (10.0 if shouldShowCumAnim else 0.0), "Stop sex", "Stop the sex activity")
 	
 	if(_indx == SUB_0):
@@ -189,7 +212,11 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			genitalsText = "exposed "+Util.humanReadableList(exposedThings)
 			
 		addText("The tentacle pulls away from {sub.yourHis} "+genitalsText+".")
-
+	if(_id == "switchpose"):
+		var newPose:int = _action["args"][0]
+		addText("{dom.You} {dom.youVerb('switch', 'switches')} pose!")
+		altPose = newPose
+		return
 	if(_id == "pullaway"):
 		var successChance:float = getResistChance(SUB_0, DOM_0, RESIST_ORAL_FOCUS, 30.0, 25.0)
 		if(RNG.chance(successChance)):

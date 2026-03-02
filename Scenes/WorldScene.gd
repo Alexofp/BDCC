@@ -155,7 +155,7 @@ func _react(_action: String, _args):
 		#var theCycle:MenstrualCycle = GM.pc.getMenstrualCycle()
 		#if(theCycle):
 		#	theCycle.addTentacleEgg("", TentacleEggType.Plant, 100, OrificeType.Vagina)
-		runScene("GenericSexScene", ["pc", "nova", SexType.TentaclesSex, {}])
+		runScene("GenericSexScene", ["psplantTentacles", "nova", SexType.TentaclesSex, {SexMod.PCControlsDoms:true}])
 		#runScene("GenericSexScene", ["nova", "pc", SexType.TentaclesSex, {}])
 		
 		#runScene("GenericSexScene", [NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true}), "socket", SexType.SlutwallSex])
