@@ -20,6 +20,7 @@ func _run():
 	if(state == ""):
 		_tentacles.doAnim("idle")
 		aimCameraAndSetLocName("pstent_important")
+		_tentacles.setMonsterLoc("pstent_important")
 		saynn("The tentacles are about as good as they're gonna be. You train everything you could with them. It's time to try to put you.. and them.. to the test.")
 
 		saynn("You look around.. The door into your cell seems impenetrable. And even the window.. the one that the scientists were looking at you from.. you're fairly certain that breaking it would take way too long.")

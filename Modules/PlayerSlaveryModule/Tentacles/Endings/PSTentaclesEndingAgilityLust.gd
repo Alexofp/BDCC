@@ -22,6 +22,8 @@ func _run():
 	if(state == ""):
 		_tentacles.doAnim("idle")
 		aimCameraAndSetLocName("pstent_important")
+		_tentacles.setMonsterLoc("pstent_important")
+		
 		saynn("They made a huge mistake, trapping you here with that monster. And it's time to make them regret that decision.")
 
 		saynn("You look around.. The door into your cell is probably too strong. Breaking it would take way too long. But the window.. the one that the scientists were looking at you from.. that one seems like a good target.")
@@ -65,6 +67,7 @@ func _run():
 		addButton("Continue", "See what happens next", "in_corridor")
 	if(state == "in_corridor"):
 		aimCameraAndSetLocName("pstent_scientists")
+		_tentacles.setMonsterLoc("pstent_scientists")
 		saynn("You and tentacles get through the broken window, out into the corridor. Finally, you can breathe again.")
 
 		saynn("The surprises don't end here as you begin to hear boots pounding against the concrete flooring..")
@@ -96,6 +99,8 @@ func _run():
 		addButton("Continue", "See what happens next", "corridor")
 	if(state == "corridor"):
 		aimCameraAndSetLocName("pstent_entrance")
+		_tentacles.setMonsterLoc("pstent_entrance")
+		_tentacles.setScientistsLoc("pstent_lastroom")
 		saynn("You've never shot anything like what you're holding.. but you don't need to be accurate with it anyway.")
 
 		saynn("More guards appear from all the corners. You catch their attention and pin them down by shooting plasma bolts in their rough direction.")
@@ -118,7 +123,9 @@ func _run():
 
 		addButton("Continue", "See what happens next", "show_stuff")
 	if(state == "show_stuff"):
-		aimCameraAndSetLocName("pstent_scientist_2")
+		aimCameraAndSetLocName("pstent_scientist_1")
+		_tentacles.setMonsterLoc("pstent_scientist_1")
+		_tentacles.setScientistsLoc("pstent_lastroom")
 		saynn("The tentacles proceed to explore the bio-lab on their own.. while you stay behind.")
 
 		saynn("You shortly realize that your pace isn't fast enough. You decide to split when you notice small colorful signs that are placed on the walls of each intersection. The ones that you were interested in.. say 'docks'.")
@@ -150,6 +157,8 @@ func _run():
 		addCharacter(GM.main.PS.getScientist1CharID())
 		addCharacter(GM.main.PS.getScientist2CharID())
 		aimCameraAndSetLocName("pstent_near_lastroom")
+		_tentacles.setMonsterLoc("pstent_near_lastroom")
+		_tentacles.setScientistsLoc("pstent_lastroom")
 		saynn("At last, you reach some kind of room.. a room that has gone full lockdown mode, all of its doors and windows are sealed shut.")
 
 		saynn("This.. certainly piques your interest. The tentacles are waiting for you to show the next target. They might not be the smartest.. but it looks like they do understand that they won't be able to get out of here without your help.")
@@ -185,6 +194,8 @@ func _run():
 		addButton("Continue", "See what happens next", "theTalk")
 	if(state == "theTalk"):
 		aimCameraAndSetLocName("pstent_lastroom")
+		_tentacles.setMonsterLoc("pstent_lastroom")
+		_tentacles.setScientistsLoc("pstent_lastroom")
 		playAnimation(StageScene.Duo, "stand", {pc=GM.main.PS.getScientist1CharID(), npc=GM.main.PS.getScientist2CharID()})
 		saynn("You and the tentacles step inside some kind of lab. There is lots of expensive-looking science equipment around.. a fridge.. a separate compartment with beds.. a bathroom.. and also a few computers. The sight reminded you of your own cell that you had here for some reason.")
 
@@ -430,7 +441,8 @@ func _run():
 	if(state == "docks"):
 		removeCharacter(GM.main.PS.getScientist1CharID())
 		removeCharacter(GM.main.PS.getScientist2CharID())
-		aimCameraAndSetLocName("pstent_scientist_1")
+		aimCameraAndSetLocName("pstent_scientist_2")
+		_tentacles.setMonsterLoc("pstent_scientist_2")
 		saynn("You head back into the docks.. but now with the tentacles.")
 
 		saynn("Looks like there is only one escape pod left.. the one that has gotten stuck when the scientists were trying to board it.")

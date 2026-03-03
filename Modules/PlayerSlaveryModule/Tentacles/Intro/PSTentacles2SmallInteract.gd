@@ -317,7 +317,7 @@ func _run():
 
 		saynn("The three tentacles stay still for a bit, almost like they're listening.. After that, they simply begin to sway, a slow, graceful dance in time with the peaceful rhythm.")
 
-		saynn("Their movements become purposeful, smooth. The slick surfaces glisten as they weave intricate, gentle patterns in the air, tracing the shapes of the melodies they hear. Their tips move with a curiosity, exploring the vibrations in the air itself.")
+		saynn("Their movements are slow.. smooth. The slick tendrils shine slightly as they do gentle patterns in the air, tracing the shapes of the melodies they hear. Their movement is full of curiosity.")
 
 		saynn("A soft, harmonious hum, almost below hearing, resonates from their core, harmonizing with something inside you..")
 

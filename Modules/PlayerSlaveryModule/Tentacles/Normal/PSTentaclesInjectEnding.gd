@@ -21,6 +21,7 @@ func _run():
 	var _tentacles:PlayerSlaveryTentacles = GM.main.PS
 
 	if(state == ""):
+		aimCameraAndSetLocName(_tentacles.getMonsterLoc())
 		biggestStat = _tentacles.getBiggestStat()
 		flagInjectForced = _tentacles.flagInjectForced
 		if (!flagInjectForced):
@@ -86,6 +87,8 @@ func _run():
 
 			addButton("Inject", "Inject the tentacles with the drug", "lustinject")
 	if(state == "choke"):
+		aimCameraAndSetLocName(_tentacles.LOC_DOOR)
+		
 		playAnimation(StageScene.TentaclesChoke, "chokefast", {plant=true})
 		saynn("Eventually, the tentacles get a good grip on you and pull you into the air. They slam you against one of the walls, making some of your ribs crack. A wave of pain rushing through your whole body.")
 
@@ -125,6 +128,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "choke_talk")
 	if(state == "choke_talk"):
+		aimCameraAndSetLocName(_tentacles.LOC_IMPORTANT)
 		addCharacter(GM.main.PS.getScientist1CharID())
 		addCharacter(GM.main.PS.getScientist2CharID())
 		playAnimation(StageScene.Duo, "kneel", {pc="pc", npc=GM.main.PS.getScientist1CharID()})
@@ -235,6 +239,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "mindtalk")
 	if(state == "mindtalk"):
+		aimCameraAndSetLocName(_tentacles.LOC_IMPORTANT)
 		addCharacter(GM.main.PS.getScientist1CharID())
 		addCharacter(GM.main.PS.getScientist2CharID())
 		playAnimation(StageScene.Duo, "kneel", {pc="pc", npc=GM.main.PS.getScientist1CharID()})

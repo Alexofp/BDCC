@@ -77,6 +77,17 @@ const IconTentacles = preload("res://Images/WorldEntities/Tentacles.png")
 const IconTentaclesTiny = preload("res://Images/WorldEntities/TentaclesTiny.png")
 const IconTentaclesSmall = preload("res://Images/WorldEntities/TentaclesSmall.png")
 
+const GradientAnger:Gradient = preload("res://Game/PlayerSlavery/Scenarios/Tentacles/GradientAnger.tres")
+const GradientAgility:Gradient = preload("res://Game/PlayerSlavery/Scenarios/Tentacles/GradientAgility.tres")
+const GradientMind:Gradient = preload("res://Game/PlayerSlavery/Scenarios/Tentacles/GradientMind.tres")
+const GradientLust:Gradient = preload("res://Game/PlayerSlavery/Scenarios/Tentacles/GradientLust.tres")
+const STAT_TO_GRADIENT:Dictionary = {
+	STAT_ANGER: GradientAnger,
+	STAT_AGILITY: GradientAgility,
+	STAT_MIND: GradientMind,
+	STAT_LUST: GradientLust,
+}
+
 var monsterLoc:String = LOC_MIDDLE
 var monsterTarget:String = LOC_IMPORTANT
 var scientist1Loc:String = LOC_SCIENTIST_1
@@ -456,7 +467,7 @@ func doAction(_scene, _action:Array):
 		eventTarget = ""
 		eventArgs = []
 		eventGiveupTimer = 0
-		GM.main.processTime(60*60)
+		#GM.main.processTime(60*60)
 		return
 	GM.main.runScene(_action[2], _action[3])
 
@@ -748,6 +759,8 @@ func incStat(_statID:int, showMessage:bool = true) -> bool:
 	if(growStage < STAGE_NORMAL):
 		if(theStat > 5):
 			theStat = 5
+			if(showMessage):
+				GM.main.addMessage(getMonsterName()+"'s "+getStatName(_statID)+" has reached the today's limit.")
 	setStat(_statID, theStat)
 	if(theStat == theOldStat):
 		return false
@@ -757,19 +770,21 @@ func incStat(_statID:int, showMessage:bool = true) -> bool:
 	
 	return true
 
+const TRAIN_MINUTES = 60
+
 func train(_statID:int, _passTime:bool = true) -> bool:
 	if(_passTime):
-		GM.main.processTime(60*60)
+		GM.main.processTime(TRAIN_MINUTES*60)
 	return incStat(_statID)
 
 func trainUntilFive(_statID:int, _passTime:bool = true):
 	if(_passTime):
-		GM.main.processTime(60*60)
+		GM.main.processTime(TRAIN_MINUTES*60)
 	while(getStat(_statID) < 5):
 		incStat(_statID)
 
 func trainNothing() -> bool:
-	GM.main.processTime(60*60)
+	GM.main.processTime(TRAIN_MINUTES*60)
 	return true
 
 func getTentaclesCharID() -> String:
@@ -829,8 +844,19 @@ func getBiggestStat() -> int:
 func processTalkText(_text:String) -> String:
 	if(mind < 5):
 		return ""
-	_text = Util.shuffleWordLetters(_text, 50.0)
-	_text = Util.replaceLettersRandomly(_text, 20.0)
+	var theMod:float = 1.0
+	if(mind <= 6):
+		theMod = 1.0
+	elif(mind <= 7):
+		theMod = 0.3
+	elif(mind <= 8):
+		theMod = 0.2
+	elif(mind <= 9):
+		theMod = 0.0
+	else:
+		theMod = 0.0
+	_text = Util.shuffleWordLetters(_text, 50.0*theMod)
+	_text = Util.replaceLettersRandomly(_text, 20.0*theMod)
 	return _text
 
 func talk(_text:String):
@@ -847,7 +873,7 @@ func talk(_text:String):
 	var _theText:String = processTalkText(_text)
 	if(_theText.empty()):
 		return
-	_scene.saynn("[say="+getTentaclesCharID()+"]"+_text+"[/say]")
+	_scene.saynn("[say="+getTentaclesCharID()+"]"+_theText+"[/say]")
 
 func doAnimDuo(_anim:String, _otherArgs:Dictionary = {}):
 	var theArgs:Dictionary = {plant=true}
@@ -890,10 +916,13 @@ func internal_clampStat(_stat:int) -> int:
 	return _stat
 
 func internal_processStatText(_statID:int, _stat:int) -> String:
+	var theF:float = float(_stat)/10.0
+	var theColor:Color = STAT_TO_GRADIENT[_statID].interpolate(theF)
+	
 	var theText:String = STAT_DESCRIPTIONS[_statID][_stat]
 	if(_stat == 10):
 		theText = theText.to_upper()
-	return theText
+	return "[color=#"+theColor.to_html(false)+"]"+theText+"[/color]"
 
 func getStatDescriptions() -> Array:
 	var theAngerIndex:int = internal_clampStat(anger)
@@ -901,10 +930,21 @@ func getStatDescriptions() -> Array:
 	var theMindIndex:int = internal_clampStat(mind)
 	var theLustIndex:int = internal_clampStat(lust)
 	
+	var preferText:String = ""
+	if(preferEvent == EVENT_LEWD):
+		preferText = "The tentacles prefer to be lusty"
+	if(preferEvent == EVENT_PLAY):
+		preferText = "The tentacles prefer to be active"
+	if(preferEvent == EVENT_WINDOW):
+		preferText = "The tentacles prefer to be mindful"
+	if(preferEvent == -1):
+		preferText = "The tentacles don't have a preference towards anything"
+	
 	return [
 		"Anger: "+internal_processStatText(STAT_ANGER, theAngerIndex),
 		"Agility: "+internal_processStatText(STAT_AGILITY, theAgilityIndex),
 		"Mind: "+internal_processStatText(STAT_MIND, theMindIndex),
 		"Lust: "+internal_processStatText(STAT_LUST, theLustIndex),
+		preferText,
 	]
 	

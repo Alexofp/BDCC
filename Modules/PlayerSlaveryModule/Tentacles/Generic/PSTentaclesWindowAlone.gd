@@ -6,6 +6,7 @@ func _init():
 func _reactInit():
 	#addCharacter(GM.main.PS.getTentaclesCharID())
 	processTime(60*10)
+	GM.pc.addLust(-20)
 	pass
 
 func resolveCustomCharacterName(_charID):

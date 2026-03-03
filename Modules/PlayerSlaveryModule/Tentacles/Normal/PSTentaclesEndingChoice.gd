@@ -55,27 +55,27 @@ func _run():
 		if (_tentacles.getStat(_tentacles.STAT_ANGER) >= 10 && _tentacles.getStat(_tentacles.STAT_AGILITY) >= 10):
 			addButton("Murder spree", "Your tentacles are angry and strong enough for you to order them to murder everyone!", "ending_angeragility")
 		else:
-			addDisabledButton("Murder spree", "Your tentacles are either not angry enough or not smart enough")
+			addDisabledButton("Murder spree", "Your tentacles are either not angry enough (Anger "+str(_tentacles.anger)+"/10) or not strong enough (Agility "+str(_tentacles.agility)+"/10)")
 		if (_tentacles.getStat(_tentacles.STAT_ANGER) >= 10 && _tentacles.getStat(_tentacles.STAT_MIND) >= 10):
 			addButton("Puppet master", "Your tentacles are angry and smart enough for you to order them to murder everyone!", "ending_angermind")
 		else:
-			addDisabledButton("Puppet master", "Your tentacles are either not angry enough or not smart enough")
+			addDisabledButton("Puppet master", "Your tentacles are either not angry enough (Anger "+str(_tentacles.anger)+"/10) or not smart enough (Mind "+str(_tentacles.mind)+"/10)")
 		if (_tentacles.getStat(_tentacles.STAT_ANGER) >= 10 && _tentacles.getStat(_tentacles.STAT_LUST) >= 10):
 			addButton("Breeding grounds", "Your tentacles are angry and lusty enough for you to order them to fuck everyone!", "ending_angerlust")
 		else:
-			addDisabledButton("Breeding grounds", "Your tentacles are either not angry enough or not lusty enough")
+			addDisabledButton("Breeding grounds", "Your tentacles are either not angry enough (Anger "+str(_tentacles.anger)+"/10) or not lusty enough (Lust "+str(_tentacles.lust)+"/10)")
 		if (_tentacles.getStat(_tentacles.STAT_AGILITY) >= 10 && _tentacles.getStat(_tentacles.STAT_MIND) >= 10):
 			addButton("Silent escape", "Your tentacles are strong and smart enough for you to try to escape this biolab silently..", "ending_agilitymind")
 		else:
-			addDisabledButton("Silent escape", "Your tentacles are either not strong enough or not smart enough")
+			addDisabledButton("Silent escape", "Your tentacles are either not strong enough (Agility "+str(_tentacles.agility)+"/10) or not smart enough (Mind "+str(_tentacles.mind)+"/10)")
 		if (_tentacles.getStat(_tentacles.STAT_AGILITY) >= 10 && _tentacles.getStat(_tentacles.STAT_LUST) >= 10):
 			addButton("Hunt and snare", "Your tentacles are strong and lusty enough for you to make them escape by fucking everyone!", "ending_agilitylust")
 		else:
-			addDisabledButton("Hunt and snare", "Your tentacles are either not strong enough or not lusty enough")
+			addDisabledButton("Hunt and snare", "Your tentacles are either not strong enough (Agility "+str(_tentacles.agility)+"/10) or not lusty enough (Lust "+str(_tentacles.lust)+"/10)")
 		if (_tentacles.getStat(_tentacles.STAT_MIND) >= 10 && _tentacles.getStat(_tentacles.STAT_LUST) >= 10):
 			addButton("Pleasure slaves", "Your tentacles are smart and lusty enough to mindcontrol everyone into sex slaves!", "ending_mindlust")
 		else:
-			addDisabledButton("Pleasure slaves", "Your tentacles are either not smart enough or not lusty enough")
+			addDisabledButton("Pleasure slaves", "Your tentacles are either not smart enough (Mind "+str(_tentacles.mind)+"/10) or not lusty enough (Lust "+str(_tentacles.lust)+"/10)")
 
 func _react(_action: String, _args):
 	var _tentacles:PlayerSlaveryTentacles = GM.main.PS

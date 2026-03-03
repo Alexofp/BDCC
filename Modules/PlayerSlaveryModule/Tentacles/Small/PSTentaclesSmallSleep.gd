@@ -20,6 +20,7 @@ func _run():
 	var _tentacles:PlayerSlaveryTentacles = GM.main.PS
 
 	if(state == ""):
+		playAnimation(StageScene.Sleeping, "sleep")
 		biggestStat = _tentacles.getBiggestStat()
 		if (biggestStat == _tentacles.STAT_ANGER):
 			saynn("You climb into your bed and prepare to sleep.")
@@ -106,8 +107,8 @@ func _run():
 
 		addButton("Sleep", "Time to sleep", "doSleep")
 	if(state == "doSleep"):
+		_tentacles.doAnim("idle")
 		if (biggestStat == _tentacles.STAT_ANGER):
-			playAnimation(StageScene.Solo, "stand")
 			saynn("A new day arrives..")
 
 			saynn("As you get up and look at the tentacles.. You realize that they have gotten bigger! They barely fit in their nest now.. there is no way they'd grow further.")
@@ -115,7 +116,6 @@ func _run():
 			saynn("They seem to be just as mean as before.")
 
 		elif (biggestStat == _tentacles.STAT_AGILITY):
-			playAnimation(StageScene.Solo, "stand")
 			saynn("A new day arrives..")
 
 			saynn("As you get up and look at the tentacles.. You realize that they have gotten bigger! They barely fit in their nest now.. there is no way they'd grow further.")
@@ -123,7 +123,6 @@ func _run():
 			saynn("But they can probably get stronger and more agile yet.. all that mass is useless without muscles to lift it.")
 
 		elif (biggestStat == _tentacles.STAT_MIND):
-			playAnimation(StageScene.Solo, "stand")
 			saynn("A new day arrives..")
 
 			saynn("As you get up and look at the tentacles.. You realize that they have gotten bigger! They barely fit in their nest now.. there is no way they'd grow further.")

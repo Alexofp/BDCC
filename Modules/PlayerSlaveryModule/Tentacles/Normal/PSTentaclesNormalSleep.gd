@@ -20,6 +20,7 @@ func _run():
 	var _tentacles:PlayerSlaveryTentacles = GM.main.PS
 
 	if(state == ""):
+		aimCameraAndSetLocName(_tentacles.getMonsterLoc())
 		biggestStat = _tentacles.getBiggestStat()
 		saynn("It's late now.. the lights of the bio-lab begin to dim, forcing you to start winding down, no matter if you want it or not.")
 
@@ -54,6 +55,9 @@ func _run():
 
 		addButton("Bed", "Get into the bed", "goBed")
 	if(state == "goBed"):
+		aimCameraAndSetLocName(_tentacles.LOC_BED)
+		GM.pc.setLocation(_tentacles.LOC_BED)
+		_tentacles.setMonsterLoc(_tentacles.LOC_MIDDLE)
 		if (biggestStat == _tentacles.STAT_ANGER):
 			playAnimation(StageScene.Sleeping, "sleep", {pc="pc"})
 			saynn("You get into your bed and prepare to sleep.")
@@ -91,6 +95,9 @@ func _run():
 
 		addButton("Window", "Go approach the window", "talk_sci")
 	if(state == "talk_sci"):
+		_tentacles.tpScientistsWindow()
+		aimCameraAndSetLocName(_tentacles.LOC_IMPORTANT)
+		GM.pc.setLocation(_tentacles.LOC_IMPORTANT)
 		addCharacter(GM.main.PS.getScientist1CharID())
 		addCharacter(GM.main.PS.getScientist2CharID())
 		playAnimation(StageScene.Duo, "stand", {pc=GM.main.PS.getScientist1CharID(), npc=GM.main.PS.getScientist2CharID()})
@@ -190,11 +197,15 @@ func _run():
 
 		addButton("Continue", "See what happens next", "grabsSyr")
 	if(state == "grabsSyr"):
+		aimCameraAndSetLocName(_tentacles.LOC_DOOR)
+		GM.pc.setLocation(_tentacles.LOC_DOOR)
 		removeCharacter(GM.main.PS.getScientist1CharID())
 		removeCharacter(GM.main.PS.getScientist2CharID())
 		playAnimation(StageScene.Solo, "stand")
 		saynn("You approach the opened case and grab the auto-injector syringe. The yellow fluid inside is glowing faintly.")
-
+		
+		saynn("Injecting the tentacles with it will strip them of any kind of consciousness.. if you'd to believe the scientists.")
+		
 		addButton("Do it now", "Inject it into the tentacles and be done with it", "doItNow")
 		addButton("Postpone it", "Maybe there is something else you can do..", "postpone")
 	if(state == "postpone"):

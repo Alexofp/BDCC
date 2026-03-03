@@ -92,6 +92,7 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {pc=_tentacles.getScientist1CharID(), npc=_tentacles.getScientist2CharID()})
 		aimCameraAndSetLocName(_tentacles.LOC_IMPORTANT)
 		GM.pc.setLocation(_tentacles.LOC_IMPORTANT)
+		_tentacles.tpScientistsWindow()
 		saynn("You approach the reinforced window. On the other side you see two familiar scientists standing under the sterile corridor lights.")
 
 		saynn("[say=sci1]You're still alive. Color me surprised.[/say]")

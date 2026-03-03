@@ -873,7 +873,7 @@ static func shuffleWordLetters(_sentence:String, _chance:float) -> String:
 		
 	return finalString
 
-static func replaceLettersRandomly(_sentence:String, _chance:float, _newLetters:Array = ["#@$%&"]) -> String:
+static func replaceLettersRandomly(_sentence:String, _chance:float, _newLetters:Array = ["#", "@", "$", "%", "&"]) -> String:
 	if(_chance <= 0.0):
 		return _sentence
 	var finalString:String = ""
