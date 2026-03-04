@@ -22,6 +22,8 @@ func _run():
 	if(state == ""):
 		_tentacles.doAnim("idle")
 		aimCameraAndSetLocName("pstent_important")
+		_tentacles.setMonsterLoc("pstent_important")
+		_tentacles.setScientistsLoc("pstent_lastroom")
 		saynn("They made a huge mistake, trapping you here with those tentacles. And it's time to make them regret that decision.")
 
 		saynn("You look around.. The door into your cell seems impenetrable. And even the window.. the one that the scientists were looking at you from.. you're fairly certain that breaking it would take way too long.")
@@ -66,6 +68,7 @@ func _run():
 		addButton("Continue", "See what happens next", "friendlyfire")
 	if(state == "friendlyfire"):
 		aimCameraAndSetLocName("pstent_entrance")
+		_tentacles.setMonsterLoc("pstent_entrance")
 		saynn("You step foot into the corridor and watch as the door shuts behind you. Your old cell begins to fill with some kind of gas. Luckily, you're not there anymore. Poor guy though.")
 
 		saynn("You're not out of the woods yet though as you begin to hear boots approaching you fast.")
@@ -120,7 +123,8 @@ func _run():
 
 		addButton("Continue", "See what happens next", "show_stuff")
 	if(state == "show_stuff"):
-		aimCameraAndSetLocName("pstent_scientist_2")
+		aimCameraAndSetLocName("pstent_scientist_1")
+		_tentacles.setMonsterLoc("pstent_scientist_1")
 		saynn("The tentacles proceed to explore the bio-lab on their own.. while you stay behind.")
 
 		_tentacles.talk("We can feel the scientists trying to escape. They're in the docks, we can't reach them in time.")
@@ -165,6 +169,7 @@ func _run():
 		addCharacter(GM.main.PS.getScientist1CharID())
 		addCharacter(GM.main.PS.getScientist2CharID())
 		aimCameraAndSetLocName("pstent_near_lastroom")
+		_tentacles.setMonsterLoc("pstent_near_lastroom")
 		saynn("At last, you reach some kind of room.. a room that has gone full lockdown mode, all of its doors and windows are sealed shut.")
 
 		saynn("This.. certainly piques your interest.")
@@ -204,6 +209,7 @@ func _run():
 		addButton("Continue", "See what happens next", "theTalk")
 	if(state == "theTalk"):
 		aimCameraAndSetLocName("pstent_lastroom")
+		_tentacles.setMonsterLoc("pstent_lastroom")
 		playAnimation(StageScene.Duo, "stand", {pc=GM.main.PS.getScientist1CharID(), npc=GM.main.PS.getScientist2CharID()})
 		saynn("You and the tentacles step inside some kind of lab. There is lots of expensive-looking science equipment around.. a fridge.. a separate compartment with beds.. a bathroom.. and also a few computers. The sight reminded you of your own cell that you had here for some reason.")
 
@@ -505,7 +511,8 @@ func _run():
 		addButton("Continue", "See what happens next", "docks")
 	if(state == "docks"):
 		removeCharacter(GM.main.PS.getScientist2CharID())
-		aimCameraAndSetLocName("pstent_scientist_1")
+		aimCameraAndSetLocName("pstent_scientist_2")
+		_tentacles.setMonsterLoc("pstent_scientist_2")
 		_tentacles.doAnim("idle")
 		saynn("You head back into the docks.. but now with the tentacles.")
 
@@ -662,6 +669,9 @@ func _react(_action: String, _args):
 		GM.main.stopPlayerSlavery()
 		GM.pc.setLocation(GM.pc.getCellLocation())
 		return
+
+	if(_action == "near_detective"):
+		_tentacles.strippedByDetective()
 
 	setState(_action)
 

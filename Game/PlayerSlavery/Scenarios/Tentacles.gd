@@ -120,10 +120,10 @@ var isAngry:bool = false
 var angryReason:String = ""
 
 # personality
-var anger:int = 0
-var agility:int = 0
-var mind:int = 0
-var lust:int = 0
+var anger:int = 10
+var agility:int = 10
+var mind:int = 10
+var lust:int = 10
  
 const DEFAULT_MONSTER_NAME = "Monster"
 var monsterName:String = ""
@@ -948,3 +948,13 @@ func getStatDescriptions() -> Array:
 		preferText,
 	]
 	
+func strippedByDetective():
+	GM.pc.getInventory().clearSlot(InventorySlot.Body)
+
+func doJog():
+	var theLoc:String = RNG.pick([
+		LOC_BED, LOC_FRIDGE, LOC_IMPORTANT, LOC_SHOWER, LOC_PLAY, LOC_MIDDLE, LOC_WINDOW, LOC_DOOR,
+	])
+	GM.pc.setLocation(theLoc)
+	setMonsterLoc(theLoc)
+	GM.main.getCurrentScene().aimCameraAndSetLocName(theLoc)

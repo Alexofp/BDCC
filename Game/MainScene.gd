@@ -1362,7 +1362,7 @@ func getDebugActions():
 				},
 				{
 					"id": "sceneArgs",
-					"name": "Scene arguments (must start and end with brackets)",
+					"name": "Scene arguments\n(must start and end\nwith brackets)",
 					"value": "",
 					"type": "string",
 				},

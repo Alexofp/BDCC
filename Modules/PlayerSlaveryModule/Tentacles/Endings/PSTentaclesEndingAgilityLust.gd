@@ -23,6 +23,7 @@ func _run():
 		_tentacles.doAnim("idle")
 		aimCameraAndSetLocName("pstent_important")
 		_tentacles.setMonsterLoc("pstent_important")
+		_tentacles.setScientistsLoc("pstent_lastroom")
 		
 		saynn("They made a huge mistake, trapping you here with that monster. And it's time to make them regret that decision.")
 
@@ -98,8 +99,8 @@ func _run():
 
 		addButton("Continue", "See what happens next", "corridor")
 	if(state == "corridor"):
-		aimCameraAndSetLocName("pstent_entrance")
-		_tentacles.setMonsterLoc("pstent_entrance")
+		#aimCameraAndSetLocName("pstent_entrance")
+		#_tentacles.setMonsterLoc("pstent_entrance")
 		_tentacles.setScientistsLoc("pstent_lastroom")
 		saynn("You've never shot anything like what you're holding.. but you don't need to be accurate with it anyway.")
 
@@ -596,6 +597,9 @@ func _react(_action: String, _args):
 		GM.main.stopPlayerSlavery()
 		GM.pc.setLocation(GM.pc.getCellLocation())
 		return
+
+	if(_action == "near_detective"):
+		_tentacles.strippedByDetective()
 
 	setState(_action)
 

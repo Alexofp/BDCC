@@ -76,6 +76,45 @@ func _run():
 			if (_tentacles.lust >= 5 && _tentacles.isNormal()):
 				addButton("Submit", "(Sex) Let the tentacles do whatever they want with you!", "8")
 		addButton("Shoo!", "Tell the tentacles to stop", "say_shoo")
+		addButton("Run!", "The tentacles seem to be interested in you.. why not use that to make them move around more!", "do_jog")
+	if(state == "do_jog"):
+		if (_tentacles.agility <= 2):
+			saynn("You can sense that they're interested in you.. maybe even lusty for you a bit. But before they can touch you.. you start jogging in place.")
+
+			saynn("[say=pc]Wanna touch me? You will have to catch me first.[/say]")
+
+			saynn("You start a slow jog around the cell. The tentacles pause at first.. clearly confused.. but then attempt to follow.")
+
+			saynn("It's almost sad. They slither forward, their movements uncoordinated and sluggish. One tentacle trips over itself, tangling into a knot. Another drags heavily, barely keeping up. By the time you've made one lap, they've moved maybe a few meters.")
+
+			saynn("[say=pc]..Okay.. Lots of work ahead of us.[/say]")
+
+			saynn("A tentacle finally reaches you, clearly tired. It weakly pats your ankle.. before giving up. Looks like its lust has been replaced by exhaustion.")
+
+		elif (_tentacles.agility <= 4):
+			saynn("They clearly wanna touch you.. but you dodge to the side and begin jogging!")
+
+			saynn("[say=pc]I won't let you touch me so easily. Try to keep up with me first.[/say]")
+
+			saynn("They try to chase you.. sort of. Despite them being somewhat strong by now, their movements are still awkward, knocking into the bed and the fridge all the time.. and also into each other too. One overshoots a corner and smacks into the shower. Another tries to cut you off and swipe your leg.. but miscalculates and ends up hitting the floor.")
+
+			saynn("Still, they're trying. They're not even close.. but they're trying.")
+
+			_tentacles.talk("You.. play.. difficult..")
+			saynn("[say=pc]Move those tendrils, c'mon.[/say]")
+
+			saynn("After a few laps, you decide to stop it there. The tentacles eventually catch up.. and just rest against your legs. Their lust is replaced with exhaustion.")
+
+		elif (_tentacles.agility <= 6):
+			saynn("123")
+
+		elif (_tentacles.agility <= 8):
+			saynn("123")
+
+		else:
+			saynn("123")
+
+		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "say_shoo"):
 		playAnimation(StageScene.Solo, "stand")
 		saynn("You shoo the tentacle away from you.")
@@ -380,6 +419,10 @@ func _react(_action: String, _args):
 
 	if(_action == "say_shoo"):
 		_tentacles.trainNothing()
+
+	if(_action == "do_jog"):
+		_tentacles.train(_tentacles.STAT_AGILITY)
+		_tentacles.doJog()
 
 	if(_action == "6_cum"):
 		GM.pc.orgasmFrom("pc")
