@@ -227,7 +227,7 @@ func onInventoryItemSelected(item: ItemBase):
 		else:
 			addButton("Put on", item.getVisisbleDescription(), "puton", [item.getUniqueID()])
 	
-	if(!item.canUseInCombat() && fightMode):
+	if(fightMode && !item.canUseInCombat()):
 		addDisabledButton("Can't use!","You can't use this item in combat")
 		return
 	
