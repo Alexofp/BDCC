@@ -78,6 +78,10 @@ func _run():
 		addButton("Shoo!", "Tell the tentacles to stop", "say_shoo")
 		addButton("Run!", "The tentacles seem to be interested in you.. why not use that to make them move around more!", "do_jog")
 	if(state == "do_jog"):
+		if (_tentacles.agility <= 8):
+			_tentacles.doAnim("idle", {npcAction="jog"})
+		else:
+			playAnimation(StageScene.TentaclesCuddle, "cuddle", {plant=true})
 		if (_tentacles.agility <= 2):
 			saynn("You can sense that they're interested in you.. maybe even lusty for you a bit. But before they can touch you.. you start jogging in place.")
 
@@ -106,13 +110,69 @@ func _run():
 			saynn("After a few laps, you decide to stop it there. The tentacles eventually catch up.. and just rest against your legs. Their lust is replaced with exhaustion.")
 
 		elif (_tentacles.agility <= 6):
-			saynn("123")
+			saynn("The tentacles have obvious intentions, their tips reaching to touch you.. and so you decide to use that opportunity and start jogging instead, avoiding their grasp.")
+
+			saynn("[say=pc]Chase me if you want me.[/say]")
+
+			saynn("They see you trying to escape.. and set off after you. Not exactly graceful.. but somewhat fast.. for a bunch of tentacles. They manage to weave around most of the obstacles, avoiding the bed, the fridge and the table. One of the tendril nearly catches your ankle.. but you manage to hop at the last moment.")
+
+			saynn("You laugh, genuinely surprised.")
+
+			saynn("[say=pc]Hey, you almost got me.[/say]")
+
+			saynn("The tentacles then try to predict your path and set an ambush. They're not that hard to spot.. so you pivot and leave them grasping empty air. Still, it wasn't the worst attempt.")
+
+			saynn("After a few laps around the cell, you decide to end it there. The tentacles eventually catch up and wrap their tips around your ankles and wrists, holding you still.")
+
+			saynn("[say=pc]What are you gonna do now?[/say]")
+
+			_tentacles.talk("We.. will get you.. one day.")
+			saynn("They give your rear a small smack.. and seem to be done with you for now, too tired to continue.")
 
 		elif (_tentacles.agility <= 8):
-			saynn("123")
+			saynn("The tentacles are radiating heat and desire.. and that makes you want to play with them. Rather than giving in, you begin jogging away, doing circles around the cell.")
+
+			saynn("[say=pc]Let's see if you really want me.[/say]")
+
+			saynn("The tentacles.. see what you're doing.. and suddenly rush into motion. You don't know what changed.. but they suddenly got very coordinated.. very fluid.. very hungry. The tentacles almost grab your ankles, forcing you to dodge left and right. Then two more appear in front of you, making you leap over them.")
+
+			_tentacles.talk("You cannot.. escape..")
+			saynn("This isn't a simple jog anymore.. you really have to run now. It's a full blown chase.")
+
+			saynn("Your heart starts to pound even though you're grinning. Suddenly you feel a tentacle brushing against your shoulder.. and another rubbing against your hip.. teasing you. They can almost grab you.")
+
+			saynn("[say=pc]Eek![/say]")
+
+			saynn("You make it two more laps around the cell.. before you start getting out of breath. And then.. the tentacles manage to corner you. They have certainly gotten faster..")
+
+			saynn("One of the tendrils reaches out.. and brushes you under your chin.")
+
+			_tentacles.talk("We caught you.")
+			saynn("A little shiver spreads throughout your body as more tentacles join the first one, touching you in various places..")
+
+			saynn("But then they suddenly boop you on the nose and slither away!")
 
 		else:
-			saynn("123")
+			saynn("You know what the tentacles want.. but you're not gonna let them have it so easily! Before they can even react, you're already running.")
+
+			saynn("[say=pc]Too slow, you silly.. ah![/say]")
+
+			saynn("You don't even finish the sentence..")
+
+			saynn("The tentacles.. they're just everywhere. A tendril wraps around your ankle mid-step.. not hard enough to trip.. but just enough to make you stumble. Another catches your wrist as you start flailing, completely destroying your balance and causing you to collapse.")
+
+			saynn("But before you can hit the ground, three more have already coiled around your waist, catching you.. keeping you lifted above the floor.")
+
+			saynn("You are floating above the floor, held by many tentacles, your attempt to run away got cut short in only a few seconds.")
+
+			saynn("[say=pc]Okay.. That's not fair.[/say]")
+
+			saynn("You can just feel the tentacles pulsing with smug satisfaction, their tips pressing gently against your warm skin, stroking your hips and thighs.")
+
+			_tentacles.talk("We're simply faster than you now.")
+			saynn("You allow yourself to rest in their embrace. The tentacles are now not just strong.. but also fast. Hopefully this will help.")
+
+			saynn("After cuddling you for a bit, the tentacles finally let you down onto the floor.")
 
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "say_shoo"):

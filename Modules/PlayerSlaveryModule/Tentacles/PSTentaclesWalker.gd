@@ -80,3 +80,9 @@ func _react(_action: String, _args):
 
 func supportsShowingPawns() -> bool:
 	return true
+
+func getDebugActions():
+	return GM.main.PS.getDebugActions()
+
+func doDebugAction(id, args = {}):
+	GM.main.PS.doDebugAction(id, args)

@@ -120,10 +120,10 @@ var isAngry:bool = false
 var angryReason:String = ""
 
 # personality
-var anger:int = 10
-var agility:int = 10
-var mind:int = 10
-var lust:int = 10
+var anger:int = 0
+var agility:int = 0
+var mind:int = 0
+var lust:int = 0
  
 const DEFAULT_MONSTER_NAME = "Monster"
 var monsterName:String = ""
@@ -418,7 +418,11 @@ func getText(_loc:String) -> String:
 			Ar.append("")
 			Ar.append(getMonsterName()+" is near.")
 			Ar.append_array(getStatDescriptions())
-		
+	
+	if(isNormal() && daysNormal >= 1):
+		var timeLeft:int = getEndOfDayTime() - GM.main.getTime()
+		Ar.append(""+Util.getTimeStringHumanReadable(timeLeft)+" left until the scientists return.")
+	
 	return Util.join(Ar, "\n")
 
 func action(_name:String, _desc:String, _sceneID:String, _args:Array = []):
@@ -471,13 +475,16 @@ func doAction(_scene, _action:Array):
 		return
 	GM.main.runScene(_action[2], _action[3])
 
+func getEndOfDayTime() -> int:
+	return 20*60*60
+
 func checkEvent(_scene, _loc:String) -> Array:
 	if(growStage == STAGE_SMALL):
-		if(GM.main.getTime() > 20*60*60):
+		if(GM.main.getTime() > getEndOfDayTime()):
 			return ["PSTentaclesSmallEndOfDay"]
 	
 	if(growStage == STAGE_NORMAL):
-		if(GM.main.getTime() > 20*60*60):
+		if(GM.main.getTime() > getEndOfDayTime()):
 			if(daysNormal >= 1):
 				return ["PSTentaclesEndingChoice"]
 			return ["PSTentaclesNormalSleep"]
@@ -958,3 +965,66 @@ func doJog():
 	GM.pc.setLocation(theLoc)
 	setMonsterLoc(theLoc)
 	GM.main.getCurrentScene().aimCameraAndSetLocName(theLoc)
+
+func getDebugActions():
+	return [
+		{
+			"id": "setAnger",
+			"name": "Set Anger",
+			"args": [
+				{
+					"id": "amount",
+					"name": "Value",
+					"type": "number",
+					"value": 10,
+				},
+			]
+		},
+		{
+			"id": "setAgility",
+			"name": "Set Agility",
+			"args": [
+				{
+					"id": "amount",
+					"name": "Value",
+					"type": "number",
+					"value": 10,
+				},
+			]
+		},
+		{
+			"id": "setMind",
+			"name": "Set Mind",
+			"args": [
+				{
+					"id": "amount",
+					"name": "Value",
+					"type": "number",
+					"value": 10,
+				},
+			]
+		},
+		{
+			"id": "setLust",
+			"name": "Set Lust",
+			"args": [
+				{
+					"id": "amount",
+					"name": "Value",
+					"type": "number",
+					"value": 10,
+				},
+			]
+		},
+	]
+
+func doDebugAction(id, args = {}):
+	#print(id, " ", args)
+	if(id == "setAnger"):
+		anger = args["amount"]
+	if(id == "setAgility"):
+		agility = args["amount"]
+	if(id == "setMind"):
+		mind = args["amount"]
+	if(id == "setLust"):
+		lust = args["amount"]
