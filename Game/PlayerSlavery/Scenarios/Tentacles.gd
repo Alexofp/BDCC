@@ -102,6 +102,7 @@ const EVENT_HUNGRY = 0
 const EVENT_LEWD = 1
 const EVENT_WINDOW = 2
 const EVENT_PLAY = 3
+const EVENT_BREAK = 4
 
 var daysNormal:int = 0
 
@@ -909,6 +910,8 @@ func setPrefer(_eventType:int):
 		GM.main.addMessage("The tentacles will now prefer to be active..")
 	if(preferEvent == EVENT_WINDOW):
 		GM.main.addMessage("The tentacles will now prefer to be mindful..")
+	if(preferEvent == EVENT_BREAK):
+		GM.main.addMessage("The tentacles will now prefer to be destructive..")
 	if(preferEvent == -1):
 		GM.main.addMessage("The tentacles forgot the preference towards any activity that they had..")
 

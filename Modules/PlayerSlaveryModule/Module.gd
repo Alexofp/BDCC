@@ -48,6 +48,7 @@ func _init():
 		"res://Modules/PlayerSlaveryModule/Tentacles/Small/PSTentaclesPlaySmall.gd",
 		"res://Modules/PlayerSlaveryModule/Tentacles/Small/PSTentaclesSmallEndOfDay.gd",
 		"res://Modules/PlayerSlaveryModule/Tentacles/Small/PSTentaclesSmallSleep.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Small/PSTentaclesBreakStuff.gd",
 		
 		"res://Modules/PlayerSlaveryModule/Tentacles/Normal/PSTentaclesNormalSleep.gd",
 		

@@ -249,8 +249,9 @@ func _run():
 		addButton("Shower", "Use warm water to warm the egg up", "2_shower")
 		addButton("Use your body", "Bring the egg into the bed and cuddle it with your whole body!", "2_cuddle")
 	if(state == "2_fridge"):
+		aimCameraAndSetLocName("pstent_fridge")
 		playAnimation(StageScene.Solo, "shove")
-		saynn("Warmth? You will show it warmth!")
+		saynn("Warmth? Yeah, you know just the spot.")
 
 		saynn("You grab the egg and quickly shove it into the fridge before closing it shut!")
 
@@ -282,6 +283,7 @@ func _run():
 
 		addButton("Sleep", "Go sleep!", "2fridgeSleep")
 	if(state == "2fridgeSleep"):
+		aimCameraAndSetLocName("pstent_middle")
 		playAnimation(StageScene.SoloBigEgg, "stand")
 		saynn("You wake up and open the fridge..")
 
@@ -736,7 +738,7 @@ func _react(_action: String, _args):
 
 	if(_action == "revealTentacles"):
 		whichStat = getBiggestStat()		
-		if(whichStat > 0):
+		if(whichStat >= 0):
 			_tentacles.incStat(whichStat)
 		_tentacles.setStage(_tentacles.STAGE_TINY)
 

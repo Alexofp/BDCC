@@ -681,7 +681,7 @@ func _react(_action: String, _args):
 	if(_action == "afterAll"):
 		processTime(2*60*60)
 		whichStat = getBiggestStat()		
-		if(whichStat > 0):
+		if(whichStat >= 0):
 			_tentacles.incStat(whichStat)
 		_tentacles.setStage(_tentacles.STAGE_TINY_AFTERTEST)
 
