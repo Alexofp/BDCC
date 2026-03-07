@@ -52,6 +52,28 @@ func _run():
 			else:
 				saynn("The tentacles dart toward the fridge like furious snakes and begin to strike it. Within seconds, they're already battering it from every angle, the sounds echoing off the walls. The fridge rocks on its base..")
 
+		elif (eventKind == "door"):
+			if (anger <= 2):
+				saynn("The tentacles stop near the reinforced door. They seem to be interested in it. One of the tendrils extends and taps it gently. When nothing happens, it taps it again.. a little harder. The door doesn't react.")
+
+			elif (anger <= 4):
+				saynn("The tentacles notice the reinforced door and approach it. A few of them press against the cold surface and start exploring it, probably looking for any handles or buttons.")
+
+				saynn("When they don't find anything, they just start pushing on the door.. but it doesn't budge. They try striking it.. which makes a loud noise.. but leaves no marks.")
+
+			elif (anger <= 6):
+				saynn("The tentacles throw themselves at the door, looking irritated. They start striking it.. thump.. thump.. thump. Each hit makes a sound but leaves no obvious marks. Above the tendrils, there is a security camera that's watching them.. the tentacles try to hit it too but can't quite reach it.")
+
+				saynn("Clearly, the tendrils wanna let their anger out on something.")
+
+			elif (anger <= 8):
+				saynn("The tentacles approach the reinforced door and start letting their anger out on it. They furiously smash it.. but the metal doesn't dent, absorbing every hit. One tentacles glances up at the security camera and lashes out at it, actually smacking it.")
+
+				saynn("They don't seem to be happy at all.")
+
+			else:
+				saynn("The tentacles approach the reinforced door.. and start attacking it with everything they have. The tendrils whip against the metal surface again and again..")
+
 		addButton("Watch", "Just watch them do it", "doWatch")
 		addButton("Stop", "Stop them from doing this", "doStop")
 		addButton("Encourage", "Tell them that they're doing a good job!", "doEncourage")
@@ -94,7 +116,36 @@ func _run():
 					saynn("The tentacles have gotten extremely mean and angry by now. Hitting fridges is clearly not enough for them anymore. Maybe you will be able to direct their rage to the bio-lab itself..")
 
 		elif (eventKind == "door"):
-			pass
+			if (anger <= 2):
+				saynn("The tentacles give the door a few more taps. They try hitting it harder.. but nothing happens. After a moment, they seem to lose interest and slither away, looking quite frustrated.")
+
+			elif (anger <= 4):
+				saynn("The tentacles continue to strike the door, sending loud metal bangs to echo around the cell. But the door itself doesn't get damaged in any way.. its armor seems to be too thick.")
+
+				saynn("They keep at it for some time before getting tired and giving up. Still, they got a great outlet for their anger.")
+
+			elif (anger <= 6):
+				saynn("The tentacles start delivering a few solid cracks against the reinforced surface.. nothing.. not even a scratch. The monster tries again, even harder this time. Still nothing.")
+
+				saynn("The lack of any damage really makes the tentacles mad. They slam the door once more and then just slither away.")
+
+			elif (anger <= 8):
+				saynn("The tentacles prepare.. and then slam the door with full force! This kind of impact would have destroyed anything else.. but it only left a small scratch on the metal. Still, it's enough to fuel the tentacles' rage. They throw themselves at the door again, trying to break through.. fruitlessly.")
+
+				saynn("You look around and see a guard watching through one of the windows. He sees your monster trying to break the door.. but doesn't do anything about it. Maybe he knows that it's indestructible..")
+
+				saynn("Eventually, the tentacles give up and slither away.")
+
+			else:
+				saynn("The tentacles pull back.. and then slam the door so hard that the whole cell shakes. Dust rains from the ceiling.. all of the furniture moving slightly.")
+
+				saynn("This impact.. does actually leave a small dent in the metal. And so the tentacles continue putting their full force into each hit, striking the door again and again.. leaving scratches and dents all over it.")
+
+				saynn("Still.. at this rate.. this will probably take years. You gotta do something else.")
+
+				if (anger >= 10):
+					saynn("The tentacles have gotten extremely mean and angry by now. Hitting the door is clearly not enough for them anymore. Maybe you will be able to use their rage somehow..")
+
 		addButton("Continue", "See what happens next", "endthescene")
 	if(state == "doStop"):
 		if (anger <= 1):

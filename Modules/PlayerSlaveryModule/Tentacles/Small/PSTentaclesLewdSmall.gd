@@ -508,6 +508,7 @@ func _react_scene_end(_tag, _result):
 	if(_tag == "tentaclesSex"):
 		var _tentacles:PlayerSlaveryTentacles = GM.main.PS
 		_tentacles.train(_tentacles.STAT_LUST)
+		_tentacles.train(_tentacles.STAT_LUST, false)
 		if(!_tentacles.noticedEgged && GM.pc.isEggStuffedBy(_tentacles.getTentaclesCharID())):
 			setState("8_afterEgged")
 			_tentacles.noticedEgged = true

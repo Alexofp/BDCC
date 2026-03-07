@@ -1,7 +1,7 @@
 extends PlayerSlaveryBase
 class_name PlayerSlaveryTentacles
 
-const DEBUG_ENABLED = true #TODO: Switch to false before ship
+const DEBUG_ENABLED = false
 
 var interact1:String = "" #touch listen kick rub
 var interact2:String = "" #fridge shower lamp cuddle
@@ -457,7 +457,7 @@ func getActions(_loc:String) -> Array:
 		if(getCurrentEvent() != EVENT_PLAY):
 			theActions.append(action("Yoga", "Maybe you could do some yoga here", "PSTentaclesTableAlone"))
 	if(_loc == LOC_FRIDGE):
-		if(getCurrentEvent() != EVENT_HUNGRY):
+		if(getCurrentEvent() != EVENT_HUNGRY && getCurrentEvent() != EVENT_BREAK):
 			theActions.append(action("Fridge", "Open the fridge", "PSTentaclesFridge"))
 	if(_loc == LOC_BED && growStage == STAGE_SMALL_ENDDAY):
 		theActions.append(action("Sleep", "Get some rest", "PSTentaclesSmallSleep"))
@@ -619,11 +619,21 @@ func hasEvent() -> bool:
 
 func getEventExtraWeight(_eventID:int) -> float:
 	if(_eventID == EVENT_WINDOW):
+		if(mind >= 10):
+			return -0.5
 		return max((mind - 3)*0.2, 0.0)
 	if(_eventID == EVENT_LEWD):
+		if(lust >= 10):
+			return 0.0
 		return max((lust - 3)*0.2, 0.0)
 	if(_eventID == EVENT_PLAY):
+		if(agility >= 10):
+			return 0.0
 		return max((agility - 3)*0.2, 0.0)
+	if(_eventID == EVENT_BREAK):
+		if(anger >= 10):
+			return -0.5
+		return max((anger - 3)*0.2, 0.0)
 	
 	return 0.0
 
@@ -643,6 +653,8 @@ func getPossibleEvents() -> Array:
 	weights.append((1.0 if preferEvent != EVENT_LEWD else 2.0) + getEventExtraWeight(EVENT_LEWD))
 	possible.append([EVENT_PLAY, LOC_IMPORTANT, "PSTentaclesPlaySmall", [], "didn't play with it"])
 	weights.append((1.0 if preferEvent != EVENT_PLAY else 2.0) + getEventExtraWeight(EVENT_PLAY))
+	possible.append([EVENT_BREAK, RNG.pick([LOC_FRIDGE, LOC_DOOR]), "PSTentaclesBreakStuff", [], "didn't approach it"])
+	weights.append((1.0 if preferEvent != EVENT_BREAK else 2.0) + getEventExtraWeight(EVENT_PLAY))
 	
 	var thePS:int = possible.size()
 	for _i in range(thePS):
@@ -663,7 +675,7 @@ func processTurn():
 	if(isSmallOrNormal()):
 		if(!hasEvent() && !isAngry):
 			eventNeed += 1
-			if(eventNeed >= 7 && RNG.chance(10 + (eventNeed-7)*10 )):
+			if(eventNeed >= 4 && RNG.chance(10 + (eventNeed-4)*10 )):
 				eventNeed = 0
 				
 				var theAllEventsAndWeights := getPossibleEvents()
@@ -764,11 +776,14 @@ func incStat(_statID:int, showMessage:bool = true) -> bool:
 	theStat += 1
 	if(theStat < 0):
 		theStat = 0
-	if(growStage < STAGE_NORMAL):
-		if(theStat > 5):
-			theStat = 5
-			if(showMessage):
-				GM.main.addMessage(getMonsterName()+"'s "+getStatName(_statID)+" has reached the today's limit.")
+	var statLimit:int = 5
+	if(isNormal()):
+		statLimit = 10
+	
+	if(theStat > statLimit):
+		theStat = statLimit
+		if(showMessage):
+			GM.main.addMessage(getMonsterName()+"'s "+getStatName(_statID)+" has reached the"+("" if statLimit > 5 else " today's")+" limit.")
 	setStat(_statID, theStat)
 	if(theStat == theOldStat):
 		return false
@@ -947,6 +962,8 @@ func getStatDescriptions() -> Array:
 		preferText = "The tentacles prefer to be active"
 	if(preferEvent == EVENT_WINDOW):
 		preferText = "The tentacles prefer to be mindful"
+	if(preferEvent == EVENT_BREAK):
+		preferText = "The tentacles prefer to be destructive"
 	if(preferEvent == -1):
 		preferText = "The tentacles don't have a preference towards anything"
 	
