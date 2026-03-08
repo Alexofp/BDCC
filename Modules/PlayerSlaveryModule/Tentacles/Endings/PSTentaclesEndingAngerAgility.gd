@@ -432,6 +432,7 @@ func _react(_action: String, _args):
 
 	if(_action == "fastforward"):
 		processTime(60*42)
+		GM.main.PSH.unlockEndingAddMessage("Tentacles", "murder")
 	
 	if(_action == "near_detective"):
 		_tentacles.strippedByDetective()
