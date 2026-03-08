@@ -1,10 +1,13 @@
 extends Node
 class_name Bodypart
 
-var id
+var id:String
 var limbSlot
-var visibleName
-var needsProcessing = false
+var visibleName:String
+
+var author:String
+
+var needsProcessing:bool = false
 
 var orifice: Orifice = null
 var fluidProduction: FluidProduction = null
@@ -48,6 +51,17 @@ func getCharacterCreatorName():
 
 func getCharacterCreatorDesc():
 	return "Change to this"
+
+func getCharacterCreatorDescFinal(_isActive:bool) -> String:
+	if(_isActive):
+		return "This is the currently selected bodypart"+(("\n[i]Created by:[/i] "+author) if !author.empty() else "")
+	
+	var theDescRaw:String = str(getCharacterCreatorDesc())
+	if(!author.empty()):
+		if(!theDescRaw.empty()):
+			theDescRaw += "\n"
+		theDescRaw += "[i]Created by:[/i] "+author
+	return theDescRaw
 
 func getCompatibleSpecies():
 	return []

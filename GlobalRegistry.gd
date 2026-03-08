@@ -164,6 +164,9 @@ var contributorsCredits:Dictionary = {
 		"[url=https://github.com/Alexofp/BDCC/pull/247]#5[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/248]#6[/url]",
 	],
+	"SongJo": [
+		"42 great haircuts",
+	],
 }
 
 var gles2Mode:bool = false
@@ -871,9 +874,11 @@ func registerSceneFolder(folder: String):
 	else:
 		Log.printerr("An error occurred when trying to access the path "+folder)
 
-func registerBodypart(path: String):
+func registerBodypart(path: String, _authorOverride:String = ""):
 	var bodypart = load(path)
 	var bodypartObject = bodypart.new()
+	if(!_authorOverride.empty()):
+		bodypartObject.author = _authorOverride
 	bodyparts[bodypartObject.id] = bodypartObject
 	bodypartStorageNode.add_child(bodypartObject)
 

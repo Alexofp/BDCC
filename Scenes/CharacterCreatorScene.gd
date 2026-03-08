@@ -184,7 +184,7 @@ func _run():
 			if(hasInSupported || hasInAllowed):
 				var bodypartIsActive:bool = (playerBodypart != null) && (playerBodypart.id == bodypart.id)
 				var bodypartName:String = ("["+bodypart.getCharacterCreatorName()+"]" if(bodypartIsActive) else bodypart.getCharacterCreatorName())
-				var bodypartDesc:String = ("This is the currently selected bodypart" if(bodypartIsActive) else bodypart.getCharacterCreatorDesc())
+				var bodypartDesc:String = bodypart.getCharacterCreatorDescFinal(bodypartIsActive)
 				addButton(bodypartName, bodypartDesc, "setbodypart", [bodypart.id])
 
 		if(savedPage != 0):

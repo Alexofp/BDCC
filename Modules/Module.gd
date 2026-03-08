@@ -47,6 +47,12 @@ func getRegisterName() -> String:
 		return id+" module by "+str(author)
 	return id+" module"
 
+func getAuthorName() -> String:
+	var theStrAuthor:String = str(author)
+	if(theStrAuthor == "Rahi" || theStrAuthor == "no author"):
+		return ""
+	return theStrAuthor
+
 func preInit(): # Called before anything gets registered
 	pass
 
@@ -54,6 +60,8 @@ func postInit(): # Called after everything is registered
 	pass
 
 func register():
+	var theAuthorName:String = getAuthorName()
+	
 	for scene in scenes:
 		GlobalRegistry.registerScene(scene, author)
 	
@@ -73,7 +81,7 @@ func register():
 		GlobalRegistry.registerAttack(attack)
 		
 	for bodypart in bodyparts:
-		GlobalRegistry.registerBodypart(bodypart)
+		GlobalRegistry.registerBodypart(bodypart, theAuthorName)
 	
 	for specie in species:
 		GlobalRegistry.registerSpecies(specie)
