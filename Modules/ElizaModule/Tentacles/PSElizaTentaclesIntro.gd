@@ -1,6 +1,6 @@
 extends SceneBase
 
-var slaveryVariant = false
+var articaVariant = false
 var isEgged = false
 
 func _init():
@@ -11,7 +11,7 @@ func _run():
 		isEgged = GM.pc.isEggStuffed()
 		saynn("You open your eyes.. and immediately feel that something is different. No, it's not the ceiling of your cell, that's for sure.")
 
-		saynn("A scent.. you can smell an expensive perfume.")
+		saynn("A scent.. there is a certain scent in the air. An expensive perfume.")
 
 		addButton("Look around", "See what's happening", "eliza_intro")
 	if(state == "eliza_intro"):
@@ -27,53 +27,81 @@ func _run():
 
 		saynn("Your quick reaction makes her smile.. She uncrosses her legs.. and crosses them the other way.")
 
-		saynn("[say=eliza]If I needed you for something, you'd already be in the medical~.[/say]")
+		saynn("[say=eliza]If I needed you for something, you'd already be in medical~.[/say]")
 
 		saynn("That's probably fair. Still, she certainly has a reason behind why she is here.")
 
-		saynn("[say=eliza]Did you enjoy your little adventure?[/say]")
+		if (articaVariant):
+			saynn("[say=eliza]You remember those sweet snacks? The ones that got.. produced.. by that cute patient? I did so much work since then that I don't remember exactly when and who.[/say]")
 
-		saynn("[say=pc]Adventure?[/say]")
+			saynn("You're pretty sure she is talking about Artica.")
 
-		saynn("She nods and fixes her glasses before pulling up some files on her datapad.")
+			saynn("[say=pc]Depends. Why?[/say]")
 
-		saynn("[say=eliza]Yes, your last escape attempt. I thought that you were just pregnant when you.. arrived.. the other day. I saw the round belly and didn't even bother to check.[/say]")
+			saynn("She chuckles softly.")
 
-		if (isEgged):
-			saynn("Your hand instinctively lands on your belly.. a belly that is still very round.")
+			saynn("[say=eliza]Relax, I didn't come here to confiscate them~. Well..[/say]")
 
-		elif (GM.pc.isVisiblyPregnant()):
-			saynn("Your hand instinctively lands on your belly.. a belly that is still round.. but for a different reason.")
+			saynn("Her quick glance to the side is slightly concerning.")
 
 		else:
-			saynn("Your hand instinctively lands on your belly.. a belly that is currently flat actually.")
+			saynn("[say=eliza]Did you enjoy your little adventure?[/say]")
 
-		saynn("[say=eliza]I had nothing better to do today so I decided to check your x-ray. I was surprised. Pleasantly surprised~.[/say]")
+			saynn("[say=pc]Adventure?[/say]")
+
+			saynn("She nods and fixes her glasses before pulling up some files on her datapad.")
+
+			saynn("[say=eliza]Yes, your last escape attempt. I thought that you were just pregnant when you.. arrived.. the other day. I saw the round belly and didn't even bother to check.[/say]")
+
+			if (isEgged):
+				saynn("Your hand instinctively lands on your belly.. a belly that is still very round.")
+
+			elif (GM.pc.isVisiblyPregnant()):
+				saynn("Your hand instinctively lands on your belly.. a belly that is still round.. but for a different reason.")
+
+			else:
+				saynn("Your hand instinctively lands on your belly.. a belly that is currently flat actually.")
+
+			saynn("[say=eliza]I had nothing better to do today so I decided to check your x-ray. I was surprised. Pleasantly surprised~.[/say]")
 
 		addButton("Continue", "See what happens next", "eliza_stands")
 	if(state == "eliza_stands"):
 		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		saynn("The feline stands up, smooths her skirt.. and steps closer to you.")
 
-		if (isEgged):
-			saynn("[say=eliza]You're stuffed. Full of tentacle eggs. Aren't you, patient~?[/say]")
+		if (articaVariant):
+			saynn("[say=eliza]I think I can do something fun with those snacks. They're still eggs, you know~.[/say]")
+
+			saynn("You hum. She is being so secretive about it.")
+
+			saynn("[say=pc]Where are you heading with this?[/say]")
+
+			saynn("She eyes your lips and licks hers.")
+
+			saynn("[say=eliza]I.. I think I have a great use for them~.[/say]")
+
+			saynn("[say=pc]Use?[/say]")
 
 		else:
-			saynn("[say=eliza]You're stuffed.. Well.. you WERE stuffed.. full of tentacle eggs. weren't you, patient~? I hope you kept some of them~.[/say]")
+			if (isEgged):
+				saynn("[say=eliza]You're stuffed. Full of tentacle eggs. Aren't you, patient~?[/say]")
 
-		saynn("It's hard to hide the blush.")
+			else:
+				saynn("[say=eliza]You're stuffed.. Well.. you WERE stuffed.. full of tentacle eggs. weren't you, patient~? I hope you kept some of them~.[/say]")
 
-		saynn("[say=pc]Where are you heading with this?[/say]")
+			saynn("It's hard to hide the blush.")
 
-		saynn("She eyes your round belly and licks her lips.")
+			saynn("[say=pc]Where are you heading with this?[/say]")
 
-		saynn("[say=eliza]I.. I think I have a great use for them~.[/say]")
+			saynn("She eyes your"+str(" round" if isEgged else "")+" belly and licks her lips.")
 
-		saynn("[say=pc]Use?[/say]")
+			saynn("[say=eliza]I.. I think I have a great use for them~.[/say]")
+
+			saynn("[say=pc]Use?[/say]")
 
 		saynn("She nods and traces her clawed digit over your chin, ending it with a boop on your nose.")
 
-		saynn("[say=eliza]Yes. Bring me some. When you can. Don't make me wait though~.[/say]")
+		saynn("[say=eliza]Yes. Bring me some. When you can. Don't make me wait though, I don't like waiting.[/say]")
 
 		saynn("[say=pc]Why would I do that? I can just eat them instead of all the slop that we, inmates, get here.[/say]")
 
@@ -103,7 +131,7 @@ func _react(_action: String, _args):
 func saveData():
 	var data = .saveData()
 
-	data["slaveryVariant"] = slaveryVariant
+	data["articaVariant"] = articaVariant
 	data["isEgged"] = isEgged
 
 	return data
@@ -111,5 +139,5 @@ func saveData():
 func loadData(data):
 	.loadData(data)
 
-	slaveryVariant = SAVE.loadVar(data, "slaveryVariant", false)
+	articaVariant = SAVE.loadVar(data, "articaVariant", false)
 	isEgged = SAVE.loadVar(data, "isEgged", false)
