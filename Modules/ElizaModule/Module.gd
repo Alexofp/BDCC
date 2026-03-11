@@ -30,6 +30,8 @@ func getFlags():
 		"tfcan_catgirl": flag(FlagType.Bool),
 		"tfcan_cocks": flag(FlagType.Bool),
 		"tfcan_felinecock": flag(FlagType.Bool),
+		
+		"tent_eggs": flag(FlagType.Number),
 	}
 
 func _init():
@@ -68,6 +70,7 @@ func _init():
 		
 		"res://Modules/ElizaModule/Tentacles/PSElizaTentaclesIntro.gd",
 		"res://Modules/ElizaModule/Tentacles/PSElizaTentaclesFirstEgg.gd",
+		"res://Modules/ElizaModule/Tentacles/PSElizaTentaclesGiveEgg.gd",
 		]
 	characters = [
 		"res://Modules/ElizaModule/DrugTesting/ElizaDemon.gd",
@@ -104,3 +107,19 @@ func canSexEliza() -> bool:
 
 func canTFEliza() -> bool:
 	return getFlag("ElizaModule.tfcan_catgirl", false) || getFlag("ElizaModule.tfcan_felinecock", false) || getFlag("ElizaModule.tfcan_hucow", false) || getFlag("ElizaModule.tfcan_demon", false) || getFlag("ElizaModule.tfcan_species", false) || getFlag("ElizaModule.tfcan_cocks", false)
+
+func getTentaclesCost() -> int:
+	var eggAm:int = getFlag("ElizaModule.tent_eggs", 0)
+	var thePrice:float = 1000.0
+	for _i in eggAm:
+		thePrice *= 0.75
+	
+	return int(thePrice)
+
+func getTentaclesCostStr() -> String:
+	var theCost:int = getTentaclesCost()
+	
+	return str(theCost)+" credit"+("s" if theCost != 1 else "")
+
+func addTentacleEgg():
+	increaseFlag("ElizaModule.tent_eggs")

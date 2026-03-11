@@ -24,6 +24,7 @@ func _run():
 		addButton("Follow", "See where she brings you", "in_lab")
 	if(state == "in_lab"):
 		aimCameraAndSetLocName("med_researchlab")
+		GM.pc.setLocation("med_researchlab")
 		saynn("The feline brings you into the lab.")
 
 		saynn("[say=eliza]Let's begin![/say]")
@@ -168,8 +169,63 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		saynn("And then.. the egg explodes.")
 
-		saynn("Green shell fragments fly across the chamber.. together with torn bits of green limbs. Thick, viscous fluid sprays in all directions, painting the whole room in it in an instant.")
+		saynn("Green shell fragments fly across the chamber.. together with torn bits of weirdly-deformed chunks of whatever. Thick, viscous fluid sprays in all directions, painting the whole room in the most nasty-looking green color imaginable.")
 
+		saynn("That testing chamber.. It now looks like a room straight out of a horror movie.")
+
+		saynn("Eliza stares.. her ears go flat.. her tail flops onto the floor.")
+
+		saynn("[say=eliza]..aw..[/say]")
+
+		saynn("She lowers the remote, her voice intonation sad.")
+
+		saynn("[say=eliza]That was.. disappointing..[/say]")
+
+		saynn("[say=pc]Look on the bright side, we're still alive.[/say]")
+
+		saynn("[say=eliza]I guess so.. I will order the nurses to clean it up.. They're used to worse stuff.[/say]")
+
+		saynn("She turns away from the glass, her paws pulling out a datapad and then tapping furiously on it.")
+
+		saynn("[say=eliza]But this isn't over. Yes. Of course. I just need more eggs. Fresh ones. Untouched by radiation and my stupidity.[/say]")
+
+		saynn("[say=pc]You want to try again? After that?[/say]")
+
+		saynn("Her sadness fades under her sly little smile.")
+
+		saynn("[say=eliza]Of course. That's how you learn.[/say]")
+
+		saynn("Her green eyes are sparking. You watch behind her as poor nurses enter the testing chamber.. and all collectively sigh.. before getting to work.")
+
+		saynn("[say=eliza]We have some DNA now. I can let a bluespace super-computer guess the rest of the structure based on it. Cross-reference it with the other specimens, brute-force the optimal result.. but that gets expensive fast. Very fast. And very expensive.[/say]")
+
+		saynn("[say=pc]How expensive?[/say]")
+
+		saynn("She taps her chin with a claw.")
+
+		saynn("[say=eliza]About a thousand credits.[/say]")
+
+		saynn("Ooh. That's a lot of rock smashing. Roughly three years of it.")
+
+		saynn("[say=eliza]But! Based on this sample.. Each egg will roughly contain 25% of the DNA that we need to make a perfect specimen.[/say]")
+
+		saynn("[say=pc]Sounds like we only need 4 eggs.[/say]")
+
+		saynn("She smiles.")
+
+		saynn("[say=eliza]You'd think so, wouldn't you? But that's not how the math works out. A lot of the data gets overlapped with the old existing data. But we only need unique bits that we haven't seen yet.[/say]")
+
+		saynn("[say=pc]So-o-o?[/say]")
+
+		saynn("[say=eliza]So bring me more eggs. As many as you can. Each one will lower the cost.[/say]")
+
+		saynn("You nod. You watch behind her as the nurses get themselves all dirty with the green stuff. But they barely cleared anything.")
+
+		saynn("[say=eliza]See you around~. I trust you will find a way out.[/say]")
+
+		saynn("Just like that, she lets you be.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -184,6 +240,7 @@ func _react(_action: String, _args):
 
 	if(_action == "egg_boom"):
 		processTime(3*60)
+		addMessage("Task updated!")
 
 	setState(_action)
 
