@@ -71,6 +71,7 @@ func _init():
 		"res://Modules/ElizaModule/Tentacles/PSElizaTentaclesIntro.gd",
 		"res://Modules/ElizaModule/Tentacles/PSElizaTentaclesFirstEgg.gd",
 		"res://Modules/ElizaModule/Tentacles/PSElizaTentaclesGiveEgg.gd",
+		"res://Modules/ElizaModule/Tentacles/PSElizaTentaclesBorn.gd",
 		]
 	characters = [
 		"res://Modules/ElizaModule/DrugTesting/ElizaDemon.gd",
