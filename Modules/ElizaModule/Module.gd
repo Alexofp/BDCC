@@ -32,6 +32,7 @@ func getFlags():
 		"tfcan_felinecock": flag(FlagType.Bool),
 		
 		"tent_eggs": flag(FlagType.Number),
+		"tent_name": flag(FlagType.Text),
 	}
 
 func _init():
@@ -76,6 +77,7 @@ func _init():
 	characters = [
 		"res://Modules/ElizaModule/DrugTesting/ElizaDemon.gd",
 		"res://Modules/ElizaModule/Chapter1/ElizaMom.gd",
+		"res://Modules/ElizaModule/Tentacles/PCTentacles.gd",
 	]
 	items = []
 	events = [

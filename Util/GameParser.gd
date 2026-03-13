@@ -49,6 +49,10 @@ func callFuncWrapper(_command: String, _args: Array):
 		if(GM.main.PS && GM.main.PS.has_method("getMonsterName")):
 			return GM.main.PS.getMonsterName()
 		return "tentacles"
+	if(_command == "pcTentacles"):
+		if(GM.main):
+			return GM.main.getCharacter("PCTentacles").getName()
+		return "tentacles"
 	
 	return "[color=red]!RUNTIME ERROR NO COMMAND FOUND "+_command+" "+str(_args)+"![/color]"
 	
