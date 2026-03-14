@@ -406,8 +406,118 @@ func _run():
 
 		saynn("[say=eliza]Mhhh!.. mHHhh-h~!..[/say]")
 
-		saynn("But then.. something changes..")
+		saynn("But then.. something new begins to happen.")
 
+		saynn("The tentacle in her pussy grows a little orb-shaped bump near the base. That bump.. starts traveling along the tendril, getting closer to the doctor's sensitive folds. Soon, it presses against them.")
+
+		saynn("[say=eliza]Mmhh-?[/say]")
+
+		saynn("She tries to look down at it.. but the tentacle in her mouth forces her to keep her neck straight. All the while, that bump starts putting more and more pressure onto Eliza's sex.. kinda like a knot of canine cock would do.")
+
+		addButton("Continue", "See what happens next", "eliza_gets_stuffed")
+	if(state == "eliza_gets_stuffed"):
+		playAnimation(StageScene.TentaclesSex, "fast", {pc="eliza", cum=true, plant=true, bodyState={naked=true}})
+		saynn("Then.. with a sudden push.. the tentacle forces that orb down Eliza's slit, stretching her wide for a few seconds. The bump disappears inside her without a trace.")
+
+		saynn("[say=eliza]MMhhHH-!..[/say]")
+
+		saynn("[say=pc]It just stuffed something into you.[/say]")
+
+		saynn("[say=eliza]Mhhh-h!.. ff-u..ck.. ffh..[/say]")
+
+		saynn("Eliza arches back.. her slit pulsing around the tentacle that keeps fucking her. And soon, a second bump reaches her folds.. before forcing itself inside. Kitty's pussy shoots a bit of juice as it gets stretched extremely wide again.")
+
+		saynn("[say=eliza]HHhmh!..[/say]")
+
+		saynn("You can't help but to notice Eliza's belly getting bigger as this is happening. There is no denying it.. the tentacles are stuffing her with their eggs.")
+
+		saynn("[say=pc]It's just putting its eggs inside you, relax~.[/say]")
+
+		saynn("Her eyes visibly enlarge, her ears perk high. Eliza suddenly starts trying to free herself, wiggling her butt while desperately flailing her arms. Loud muffled noises of protest escape her lips..")
+
+		saynn("[say=eliza]MHHh! HHHph! NHhh-..[/say]")
+
+		saynn("It doesn't take long before her terrified eyes roll up from another orgasm. Her holes all clench hard around the tendrils.. before another egg gets forcefully stuffed inside her womb.")
+
+		saynn("[say=eliza]Mhhh-h..[/say]")
+
+		saynn("You notice that the tentacle in her ass also starts trying to stuff eggs inside her. The first one goes extremely slowly.. the egg stretching her poor tight asshole bit by bit.. until the girl's anal star gives up and swallows the egg. Another egg follows fast.. before her tailhole even has time to close up.")
+
+		saynn("[say=eliza]Nhh-h.m..mhh..[/say]")
+
+		saynn("The poor kitty is cumming and moaning into the tentacle while her belly swells big, making her look pregnant.")
+
+		saynn("You watch with fascination as Eliza's womb and guts find space for more and more of these orbs. She has given up resisting by now, her body squirming only from the multiple orgasms, her eyes looking spaced out already.")
+
+		saynn("And that's when the nectar comes..")
+
+		saynn("Suddenly, the tentacles start throbbing wildly. Thick, warm cum-like nectar gets pumped into Eliza's pussy and her ass, filling all of the empty space between the eggs and inflating her belly even further.")
+
+		saynn("More nectar sprays from other tendrils, showering the feline's belly, her nice tits and her cute face.")
+
+		saynn("When Eliza can't receive any more of that stuff inside, it begins to overflow, streaming down from her holes onto her inner thighs.")
+
+		saynn("The tentacles begin slowing down..")
+
+		addButton("Continue", "See what happens next", "eliza_flops")
+	if(state == "eliza_flops"):
+		playAnimation(StageScene.TentaclesSleepOn, "sleep", {pc="eliza", bodyState={naked=true}})
+		saynn("When the tendrils finally finish with Eliza, they gently pull their tips out of her holes and carefully lower her onto themselves, offering a cozy embrace instead.")
+
+		saynn("Eliza just lies there.. breathing in short, broken gasps. Her belly is huge.. nectar is dripping out of her stretched holes, pooling beneath her. Her eyes are half-closed, unfocused.")
+
+		saynn("[say=pc]Are you okay?[/say]")
+
+		saynn("After a long moment.. she suddenly lets out a soft giggle.")
+
+		saynn("[say=eliza]..hah..[/say]")
+
+		saynn("She tries to say something else.. but it comes out as a moan, her hand reaching out to pat her swollen belly slightly.")
+
+		saynn("[say=eliza]..I'm so fucking full..[/say]")
+
+		saynn("She doesn't seem mad at you.. at least currently. But that's probably because she got fucked silly.")
+
+		saynn("[say=pc]Thank you for bringing me this plant.[/say]")
+
+		saynn("[say=eliza]..you're.. welcome..[/say]")
+
+		saynn("The tentacles begin to gently gather her clothes. They help her to sit up, moving her like she is a doll. Then, they guide her arms and head through her blouse and pull her pencil skirt back over her hips. They even manage her bra and panties on.. all of the mess still dripping from her fur and used holes. The labcoat is last, covering up most of it..")
+
+		saynn("She reaches for her messy ponytail.. but the tendrils are quicker, fixing all of the loose strands and redoing the tail for her. So nice of them.")
+
+		addButton("Continue", "See what happens next", "eliza_after_everything_getup")
+	if(state == "eliza_after_everything_getup"):
+		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
+		saynn("Eliza gets up.. with the help of the tendrils and your hand. Her legs shake a bit and she grabs onto you, her sense of balance thrown off by the huge belly.")
+
+		saynn("[say=eliza]Gotta.. gotta walk.. normal people walk.. I'm normal..[/say]")
+
+		saynn("She takes a step.. and instantly grabs onto you again.")
+
+		saynn("[say=eliza]Ah..[/say]")
+
+		saynn("[say=pc]You should go get a shower.[/say]")
+
+		saynn("[say=eliza]..you're an asshole.. I should..[/say]")
+
+		saynn("She takes another step.. then another.")
+
+		saynn("Slowly, she waddles towards the exit of your cell.")
+
+		saynn("The tentacles wave their tips as she steps out.")
+
+		addButton("Continue", "See what happens next", "after_sex_alone")
+	if(state == "after_sex_alone"):
+		removeCharacter("eliza")
+		playAnimation(StageScene.TentaclesDuo, "idle", {plant=true})
+		saynn("And now.. you're left alone.. with your tentacles.")
+
+		saynn("They seem to just be vibing now, swaying left and right.")
+
+		saynn("Your cell is now a bit more lively than before. Nice.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 func addTentacleNameButtons():
 	for theName in PlayerSlaveryTentacles.MONSTER_NAMES:
 		addButton(theName, "Pick this name!", "pick_name", [theName])
@@ -446,6 +556,34 @@ func _react(_action: String, _args):
 
 	if(_action == "sudden_more_sex"):
 		processTime(5*60)
+
+	if(_action == "eliza_gets_stuffed"):
+		processTime(3*60)
+		var theChar = getCharacter("eliza")
+		var theTentacles = getCharacter("PCTentacles")
+		var theMenstrualCycle:MenstrualCycle = theChar.getMenstrualCycle()
+		for _i in range(8):
+			theMenstrualCycle.addTentacleEgg("PCTentacles", TentacleEggType.Plant, 12*60*60, OrificeType.Vagina)
+		for _i in range(6):
+			theMenstrualCycle.addTentacleEgg("PCTentacles", TentacleEggType.Plant, 12*60*60, OrificeType.Anus)
+		theTentacles.fillBalls(RNG.randf_range(0.5, 1.0))
+		theChar.cummedInVaginaBy("PCTentacles")
+		theTentacles.fillBalls(RNG.randf_range(0.5, 1.0))
+		theChar.cummedInAnusBy("PCTentacles")
+		theTentacles.fillBalls(RNG.randf_range(0.5, 1.0))
+		theChar.cummedInMouthBy("PCTentacles")
+		theTentacles.fillBalls(RNG.randf_range(0.5, 1.0))
+		theChar.cummedOnBy("PCTentacles")
+
+	if(_action == "eliza_flops"):
+		processTime(3*60)
+
+	if(_action == "eliza_after_everything_getup"):
+		processTime(5*60)
+
+	if(_action == "after_sex_alone"):
+		getCharacter("eliza").afterTakingAShower()
+		setFlag("ElizaModule.tent_eliza", true)
 
 	setState(_action)
 

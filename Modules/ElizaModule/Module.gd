@@ -33,6 +33,7 @@ func getFlags():
 		
 		"tent_eggs": flag(FlagType.Number),
 		"tent_name": flag(FlagType.Text),
+		"tent_eliza": flag(FlagType.Bool),
 	}
 
 func _init():
