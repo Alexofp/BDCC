@@ -13,11 +13,11 @@ func getDescription():
 	if(whoGaveBirth != ""):
 		var theChar = GlobalRegistry.getCharacter(whoGaveBirth)
 		if(theChar == null):
-			byWho = "\nThis egg was laid by someone unknown.."
+			byWho = "\n\nThis egg was laid by someone unknown.."
 		elif(whoGaveBirth == "pc"):
-			byWho = "\nThis egg was laid by you!"
+			byWho = "\n\nThis egg was laid by you!"
 		else:
-			byWho = "\nThis egg was laid by "+str(theChar.getName())
+			byWho = "\n\nThis egg was laid by "+str(theChar.getName())
 	
 	return "A very nutrious seed with an incredibly sweet taste. Eating it will remove 50 pain and add 50 stamina.. but also add 20 lust."+byWho
 

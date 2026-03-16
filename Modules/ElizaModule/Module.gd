@@ -31,9 +31,14 @@ func getFlags():
 		"tfcan_cocks": flag(FlagType.Bool),
 		"tfcan_felinecock": flag(FlagType.Bool),
 		
+		"tent_returnedegged": flag(FlagType.Bool),
+		"tent_started": flag(FlagType.Bool),
+		"tent_firstegg": flag(FlagType.Bool),
+		"tent_born": flag(FlagType.Bool),
 		"tent_eggs": flag(FlagType.Number),
 		"tent_name": flag(FlagType.Text),
 		"tent_eliza": flag(FlagType.Bool),
+		"tent_elizaAnnoy": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -90,9 +95,11 @@ func _init():
 		"res://Modules/ElizaModule/Chapter0/ElizaQuestEvent.gd",
 		"res://Modules/ElizaModule/Chapter0/ElizaQuestReactEvent.gd",
 		"res://Modules/ElizaModule/Science/GetStrangePillFromDefeatedNPCEvent.gd",
+		"res://Modules/ElizaModule/Tentacles/PSElizaTentaclesEvent.gd",
 	]
 	quests = [
 		"res://Modules/ElizaModule/Chapter0/ElizaQuest.gd",
+		"res://Modules/ElizaModule/Tentacles/PSElizaTentaclesQuest.gd",
 	]
 
 func resetFlagsOnNewDay():

@@ -268,8 +268,11 @@ func _react(_action: String, _args):
 
 	if(_action == "after_birth_cuddle"):
 		processTime(5*60)
+		getCharacter("eliza").cancelPregnancy(false, true)
 
 	if(_action == "about_to_leave"):
 		processTime(3*60)
+		GM.pc.getInventory().addItemID("PlantEggEliza")
+		addMessage("You received a tentacle egg!")
 
 	setState(_action)

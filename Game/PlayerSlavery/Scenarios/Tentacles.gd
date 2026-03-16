@@ -289,8 +289,20 @@ func onSlaveryStart():
 
 func onSlaveryEnd():
 	deleteIcons()
-	pass
-
+	var theSci1 = GlobalRegistry.getCharacter(getScientist1CharID())
+	if(theSci1):
+		theSci1.afterTakingAShower()
+		theSci1.cancelPregnancy()
+	var theSci2 = GlobalRegistry.getCharacter(getScientist2CharID())
+	if(theSci2):
+		theSci2.afterTakingAShower()
+		theSci2.cancelPregnancy()
+	
+	if(GM.pc.isEggStuffed()):
+		GM.main.setFlag("ElizaModule.tent_returnedegged", true)
+	else:
+		GM.main.setFlag("ElizaModule.tent_returnedegged", false)
+	
 # Gets called after onSlaveryStart()
 func getStartScene() -> String:
 	return "PSTentaclesStart"

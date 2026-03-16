@@ -3,6 +3,9 @@ extends SceneBase
 var articaVariant = false
 var isEgged = false
 
+func _initScene(_args = []):
+	articaVariant = _args[0] if _args.size() > 0 else false
+
 func _init():
 	sceneID = "PSElizaTentaclesIntro"
 
@@ -125,6 +128,7 @@ func _react(_action: String, _args):
 
 	if(_action == "eliza_stands"):
 		processTime(5*60)
+		addMessage("New task added!")
 
 	setState(_action)
 

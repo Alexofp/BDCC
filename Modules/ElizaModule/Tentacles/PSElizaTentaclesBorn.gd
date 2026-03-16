@@ -251,7 +251,7 @@ func _run():
 		addTentacleNameButtons()
 		if (false):
 			addButton("Ignore", "you shouldn't see this", "pick_name")
-	if(state == "pick_name"):
+	if(state == "picked_name"):
 		removeCharacter("PCTentacles")
 		addCharacter("PCTentacles")
 		saynn("[say=pc]I think.. {pcTentacles} is a good name.[/say]")
@@ -461,7 +461,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "eliza_flops")
 	if(state == "eliza_flops"):
-		playAnimation(StageScene.TentaclesSleepOn, "sleep", {pc="eliza", bodyState={naked=true}})
+		playAnimation(StageScene.TentaclesSleepOn, "sleep", {pc="eliza", plant=true, bodyState={naked=true}})
 		saynn("When the tendrils finally finish with Eliza, they gently pull their tips out of her holes and carefully lower her onto themselves, offering a cozy embrace instead.")
 
 		saynn("Eliza just lies there.. breathing in short, broken gasps. Her belly is huge.. nectar is dripping out of her stretched holes, pooling beneath her. Her eyes are half-closed, unfocused.")
@@ -562,7 +562,7 @@ func _react(_action: String, _args):
 		var theChar = getCharacter("eliza")
 		var theTentacles = getCharacter("PCTentacles")
 		var theMenstrualCycle:MenstrualCycle = theChar.getMenstrualCycle()
-		for _i in range(8):
+		for _i in range(9):
 			theMenstrualCycle.addTentacleEgg("PCTentacles", TentacleEggType.Plant, 12*60*60, OrificeType.Vagina)
 		for _i in range(6):
 			theMenstrualCycle.addTentacleEgg("PCTentacles", TentacleEggType.Plant, 12*60*60, OrificeType.Anus)
@@ -580,10 +580,19 @@ func _react(_action: String, _args):
 
 	if(_action == "eliza_after_everything_getup"):
 		processTime(5*60)
+		
+	if(_action == "just_let_leave"):
+		addMessage("Task completed!")
+		addExperienceToPlayer(100)
+		
+	if(_action == "after_sex_alone"):
+		addMessage("Task completed! You feel like you should take a rest..")
+		addExperienceToPlayer(100)
 
 	if(_action == "after_sex_alone"):
 		getCharacter("eliza").afterTakingAShower()
 		setFlag("ElizaModule.tent_eliza", true)
+		setFlag("MedicalModule.Eliza_BusyDays", 1)
 
 	setState(_action)
 

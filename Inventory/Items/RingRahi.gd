@@ -7,7 +7,7 @@ func getVisibleName():
 	return "Ring of Eternal Love"
 	
 func getDescription():
-	return "A simple metal ring. But it means a lot to you. Engraved on it are the words \"To Remember. Forever and Always\""
+	return "A simple metal ring. But it means a lot to you. Engraved on it are the words \"To Remember. Forever and Always.\"\n\n\"[i]I do...[/i]\"\n"
 
 func getClothingSlot():
 	return InventorySlot.Ring
