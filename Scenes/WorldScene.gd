@@ -57,7 +57,7 @@ func _run():
 	#addButtonAt(5, "NPC owner test", "TEST BUTTON", "npcOwnerTest")
 	#addButtonAt(8, "Nemesis test", "TEST BUTTON", "triggerNemesis")
 	
-	addButtonAt(5, "Sex Test", "Sex test", "sextest")
+	#addButtonAt(5, "Sex Test", "Sex test", "sextest")
 	#addExtraButtonAt(4, "Sex Test", "Sex test", "sextest")
 	#addButtonAt(7, "Slave Test", "Slave test", "slavetest")
 	#addButtonAt(7, "Computer test", "Computer test", "comptest")

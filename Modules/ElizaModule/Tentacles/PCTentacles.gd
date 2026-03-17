@@ -70,3 +70,30 @@ func getCustomAttribute(id):
 		return 100.0
 	
 	return .getCustomAttribute(id)
+
+func prepareForSex():
+	pass
+
+#func prepareForSex():
+#	var thePers:Personality = personality
+#	var theFetishHolder:FetishHolder = fetishHolder
+#
+#	var theMean:float = 0.0 + anger*1.5 - lust
+#	thePers.setStat(PersonalityStat.Mean, clamp(theMean*0.1, -1.0, 1.0))
+#	var theDom:float = -5.0 + mind + anger*0.5
+#	thePers.setStat(PersonalityStat.Subby, -clamp(theDom*0.1, -1.0, 1.0))
+#	var thePerceptive:float = -10.0 + mind*2.0
+#	thePers.setStat(PersonalityStat.Naive, -clamp(thePerceptive*0.1, -1.0, 1.0))
+#	var theBrave:float = -5.0 + agility*1.5
+#	thePers.setStat(PersonalityStat.Coward, -clamp(theBrave*0.1, -1.0, 1.0))
+#	var thePatience:float = -5.0 + mind
+#	thePers.setStat(PersonalityStat.Impatient, -clamp(thePatience*0.1, -1.0, 1.0))
+#
+#	var theChoke:float = -5.0 + 3.0*anger
+#	theFetishHolder.setFetish(Fetish.Choking, clamp(theChoke*0.1, 0.0, 1.0))
+#	var theUncon:float = -5.0 + 2.0*anger
+#	theFetishHolder.setFetish(Fetish.UnconsciousSex, clamp(theUncon*0.1, -0.5, 1.0))
+#	var theSadism:float = 0.0 + 2.0*anger + agility*0.5 - mind*0.5
+#	theFetishHolder.setFetish(Fetish.Sadism, clamp(theSadism*0.1, -0.5, 1.0))
+#	var theEx:float = 2.5 + mind*1.5
+#	theFetishHolder.setFetish(Fetish.Exhibitionism, clamp(theEx*0.1, -0.5, 1.0))

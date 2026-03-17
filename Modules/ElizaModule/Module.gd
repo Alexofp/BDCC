@@ -39,6 +39,9 @@ func getFlags():
 		"tent_name": flag(FlagType.Text),
 		"tent_eliza": flag(FlagType.Bool),
 		"tent_elizaAnnoy": flag(FlagType.Bool),
+		
+		"tent_mood": flag(FlagType.Text), # "" mean kind lusty
+		"tent_neurolink": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -80,6 +83,7 @@ func _init():
 		"res://Modules/ElizaModule/Tentacles/PSElizaTentaclesGiveEgg.gd",
 		"res://Modules/ElizaModule/Tentacles/PSElizaTentaclesBorn.gd",
 		"res://Modules/ElizaModule/Tentacles/PSElizaEggedUpAnnoyed.gd",
+		"res://Modules/ElizaModule/Tentacles/PSPCTentaclesScene.gd",
 		]
 	characters = [
 		"res://Modules/ElizaModule/DrugTesting/ElizaDemon.gd",
@@ -96,6 +100,7 @@ func _init():
 		"res://Modules/ElizaModule/Chapter0/ElizaQuestReactEvent.gd",
 		"res://Modules/ElizaModule/Science/GetStrangePillFromDefeatedNPCEvent.gd",
 		"res://Modules/ElizaModule/Tentacles/PSElizaTentaclesEvent.gd",
+		"res://Modules/ElizaModule/Tentacles/PSPCTentaclesEvent.gd",
 	]
 	quests = [
 		"res://Modules/ElizaModule/Chapter0/ElizaQuest.gd",
@@ -135,3 +140,6 @@ func getTentaclesCostStr() -> String:
 
 func addTentacleEgg():
 	increaseFlag("ElizaModule.tent_eggs")
+
+func hasAccessToTentacles() -> bool:
+	return getFlag("ElizaModule.tent_born", false)
