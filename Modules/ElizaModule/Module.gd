@@ -143,3 +143,8 @@ func addTentacleEgg():
 
 func hasAccessToTentacles() -> bool:
 	return getFlag("ElizaModule.tent_born", false)
+
+func isScienceUpgradeVisible(_upgradeID:String) -> bool:
+	if(_upgradeID == "tentNeuroLink"):
+		return hasAccessToTentacles()
+	return true

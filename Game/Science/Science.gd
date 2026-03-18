@@ -354,9 +354,37 @@ var upgradesInfo:Dictionary = {
 		cost = 250,
 		requiredUpgrades = ["milkingBetter3", "tanksUpgrade4", "advPlasticBottle", "configurableDrugs", "strangepill", "bluespaceStash"],
 	},
+	
+	"tentNeuroLink": {
+		name = "Neuro-Link",
+		desc = "Unlocks a recipe for a special device that will let you temporarily gain control of a tentacle monster.",
+		cost = 80,
+		requiredUpgrades = [],
+		items = {
+			"TentNeuroLink": {
+				fluids = {
+					"IvyNectar": 6700.0, # :D
+				},
+			},
+		},
+		moduleCheck = "ElizaModule", # ElizaModule is gonna be asked to check if this upgrade is visible
+	},
+
 }
+var cachedSpecialUpgradeIDs:Array # all of the upgrade IDs that have a moduleCheck defined
+var specialUpgradeIDCacheDirty:bool = true
+
+func calculateSpecialUpgradeIDs():
+	cachedSpecialUpgradeIDs.clear()
+	for upgradeID in upgradesInfo:
+		if(upgradesInfo[upgradeID].has("moduleCheck")):
+			cachedSpecialUpgradeIDs.append(upgradeID)
 
 func isUpgradeVisible(upgradeID:String) -> bool:
+	if(specialUpgradeIDCacheDirty):
+		calculateSpecialUpgradeIDs()
+		specialUpgradeIDCacheDirty = false
+
 	if(!upgradesInfo.has(upgradeID)):
 		return false
 	var theInfo:Dictionary = upgradesInfo[upgradeID]
@@ -365,6 +393,12 @@ func isUpgradeVisible(upgradeID:String) -> bool:
 	for otherUpgradeID in theInfo["requiredUpgrades"]:
 		if(!hasUpgrade(otherUpgradeID)):
 			return false
+	
+	if(theInfo.has("moduleCheck")):
+		var theModule = GlobalRegistry.getModule(theInfo["moduleCheck"])
+		if(theModule && !theModule.isScienceUpgradeVisible(upgradeID)):
+			return false
+	
 	return true
 
 func unlockUpgrade(upgradeID:String):
@@ -375,7 +409,20 @@ func getUpgrades() -> Dictionary:
 	return upgradesInfo
 
 func getTotalUpgradeCount() -> int:
-	return upgradesInfo.size()
+	if(specialUpgradeIDCacheDirty):
+		calculateSpecialUpgradeIDs()
+		specialUpgradeIDCacheDirty = false
+	
+	# Substract the special hidden upgrades if they're not supposed to be visible
+	var result:int = upgradesInfo.size()
+	for upgradeID in cachedSpecialUpgradeIDs:
+		var theInfo:Dictionary = upgradesInfo[upgradeID]
+		if(theInfo.has("moduleCheck")):
+			var theModule = GlobalRegistry.getModule(theInfo["moduleCheck"])
+			if(theModule && !theModule.isScienceUpgradeVisible(upgradeID)):
+				result -= 1
+			
+	return result
 
 func getUpgradeCount() -> int:
 	return upgrades.size()
@@ -801,6 +848,12 @@ func getCraftableItems() -> Dictionary:
 	
 	if(result.has("TFPill")):
 		result["TFPill"]["science"] = 10 + madeStrangePills * 5
+	
+	# It only makes sense to craft one neuro-link. Prevent the player from crafting many
+	# Yes, you can craft a second one if you store the first one in a stash. Keep it as a token item, idk
+	if(result.has("TentNeuroLink")):
+		if(GM.pc.getInventory().hasItemID("TentNeuroLink") || GM.main.getFlag("ElizaModule.tent_neurolink", false)):
+			result.erase("TentNeuroLink")
 	
 	return result
 

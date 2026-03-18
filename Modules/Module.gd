@@ -176,6 +176,9 @@ func increaseFlag(flagID, addvalue = 1):
 func getRandomSceneFor(_sceneType):
 	return []
 
+func isScienceUpgradeVisible(_upgradeID:String) -> bool:
+	return true
+
 func getFlags():
 	return {}
 	

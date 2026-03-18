@@ -46,9 +46,108 @@ func _run():
 			addButton("Offer slave", "(Sex) Offer the tentacles one of your slaves for them to have fun with", "pick_slave_menu")
 		addButton("Mood", "Interact with the tentacles to change their mood", "mood_menu")
 		if (!hasNeuro):
-			addDisabledButton("Neuro-link", "You need to unlock and create a neutro-link device in the bio-lab first..")
+			if (GM.pc.getInventory().hasItemID("TentNeuroLink")):
+				addButton("Neuro-Link", "Inject the tentacles with the Neuro-Link chip", "doInjectNeuro")
+			else:
+				addDisabledButton("Neuro-Link", "You need to unlock and create a Neuro-Link chip in the bio-lab first..")
 		addButton("Change name", "Change how you call the tentacles", "name_menu")
 		addButton("Leave", "Leave the tentacles be", "endthescene")
+	if(state == "doInjectNeuro"):
+		playAnimation(StageScene.TentaclesDuo, "glare", {plant=true})
+		saynn("You approach {pcTentacles}, trying to keep the injector out of sight.")
+
+		saynn("But it still looks like it is suspecting something. The green tips are all glaring at you. So you decide to just show the injector and explain what it does.")
+
+		saynn("[say=pc]This.. This is an upgrade for you. It will.. expand the horizons of what's possible.[/say]")
+
+		saynn("You get a little closer and attempt to inject one of the tendrils.. but it is quick to dodge out of the way and smack you away.")
+
+		saynn("It clearly doesn't trust you.")
+
+		saynn("[say=pc]Fine.. It will apparently let me control you temporarily. That's the truth. I think it sounds fun, doesn't it?[/say]")
+
+		saynn("The tentacles all look at each other, silently deliberating.")
+
+		saynn("[say=pc]What do you think? I can promise not to abuse this power.. if it will even work at all.[/say]")
+
+		saynn("Most of the tentacles focus on the main, the most thick, tendril. It stays still for a few seconds, watching you. For some reason, you feel.. warmth.. spreading, starting from your head.")
+
+		saynn("The tentacle.. it's reading your mind? It's probably scanning it to figure out your intentions.")
+
+		saynn("As it does it.. the green tips get all drippy and wet.. much more than before.")
+
+		saynn("The thick tentacle slowly reaches towards you. It stops near your head.. and does a small nod.")
+
+		saynn("It knows what you're gonna do.")
+
+		saynn("Slowly, you bring the injector up to it.. and inject it, the tool making a quiet hissing noise.")
+
+		saynn("After you've done that.. you realize that the injector still has something in it. Oh yeah, the receiver.")
+
+		saynn("You've gone this far.. might as well finish it.")
+
+		saynn("You bring the injector up to the back of your neck.. and inject yourself next.")
+
+		saynn("For a moment, nothing happens.")
+
+		saynn("And then.. the whole world splinters.")
+
+		saynn("You feel a throbbing headache that's unlike anything you've ever felt before. It's like your mind is expanding.. but way too fast for your likings. You stagger, catching yourself against the wall. Your vision gets all blurry.. you senses begin to see colors that don't exist.. sounds that don't make any sense..")
+
+		saynn("[say=pc]Argh..[/say]")
+
+		saynn("It stays like that for about a minute.. but eventually the pain subsides and your cell comes back into focus.")
+
+		saynn("The tentacles are watching you, their tips curious.")
+
+		saynn("[say=PCTentacles]Do you hear us?[/say]")
+
+		saynn("What? Oh wow.")
+
+		saynn("[say=pc]Yeah.. I think so.[/say]")
+
+		saynn("[say=PCTentacles]Good. But do you feel us?[/say]")
+
+		saynn("You blink and think about it for a second.")
+
+		saynn("Oh.")
+
+		saynn("You feel a calm breeze. But it's not touching you.. it's touching the extension of you. You realize that you can feel each individual tendril. They're all there.. in the back of your mind.")
+
+		saynn("You think about lifting the thick tentacle up.. And, without any conscious effort, it does so.")
+
+		saynn("You think about releasing it. And so it obeys.")
+
+		saynn("You reach one of the tentacles forward and touch yourself, the tip brushing against the bottom of your chin. It's a surreal feeling.. you feel both touches.")
+
+		saynn("[say=pc]I can control you.. I can actually control you. I can make you do anything.[/say]")
+
+		saynn("[say=PCTentacles]You can. But you won't.[/say]")
+
+		saynn("Right.. You gotta control yourself too.")
+
+		saynn("[say=pc]Are you able to take control over me?[/say]")
+
+		saynn("[say=PCTentacles]We might be able to. But we won't. Because we are grateful. Without you, there won't be us.[/say]")
+
+		saynn("You close your eyes and focus. And there they are.. the many minds of the tentacles.. their thoughts. Curiosity. Affection. Trust.. Hunger.")
+
+		saynn("[say=pc]So.. Can I control you when I bring some-..[/say]")
+
+		saynn("[say=PCTentacles]Please, be our guest. We wish to impregnate as many lifeforms of your kind as possible.[/say]")
+
+		saynn("They sure are horny fuckers.")
+
+		if (getFlag("ElizaModule.tent_eliza")):
+			saynn("[say=PCTentacles]And thank you for offering us.. Eliza.. that is her name. Right. She was a great host for our eggs, we thoroughly enjoyed her company.[/say]")
+
+			saynn("You nod.")
+
+			saynn("[say=pc]For her it was more of a.. acquired taste.. it seems.[/say]")
+
+		saynn("And just like that.. you all learned something new.")
+
+		addButton("Continue", "See what happens next", "")
 	if(state == "name_menu"):
 		saynn("How do you wanna name your tentacles?")
 
@@ -128,9 +227,9 @@ func _run():
 
 		addButton("Continue", "Let the tentacles have fun with your slave on their own", "start_slave_sex")
 		if (hasNeuro):
-			addButton("Neuro-link", "Use the neuro-link device to control the tentacles while they're having fun with your slave", "start_slave_sex_neuro")
+			addButton("Neuro-Link", "Use the Neuro-Link device to control the tentacles while they're having fun with your slave", "start_slave_sex_neuro")
 		else:
-			addDisabledButton("Neuro-link", "You need to unlock and create a neutro-link device in the bio-lab first..")
+			addDisabledButton("Neuro-Link", "You need to unlock and create a Neuro-Link device in the bio-lab first..")
 	if(state == "after_sex_slave"):
 		saynn("After that sex, you grab your slave and put {slave.him} back on a leash..")
 
@@ -156,6 +255,12 @@ func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
 		return
+
+	if(_action == "doInjectNeuro"):
+		processTime(20*60)
+		setFlag("ElizaModule.tent_neurolink", true)
+		GM.pc.getInventory().removeXOfOrDestroy("TentNeuroLink", 1)
+		addMessage("You can now choose to control the tentacles before the sex starts!")
 
 	if(_action == "pick_name"):
 		setFlag("ElizaModule.tent_name", _args[0])
