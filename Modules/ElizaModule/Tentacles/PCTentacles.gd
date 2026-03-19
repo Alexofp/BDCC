@@ -85,16 +85,18 @@ func prepareForSex():
 		theFetishHolder.setFetish(Fetish.VaginalSexGiving, 0.25)
 		theFetishHolder.setFetish(Fetish.OralSexGiving, 0.0)
 		theFetishHolder.setFetish(Fetish.OralSexReceiving, 0.25)
+		theFetishHolder.setFetish(Fetish.Breeding, 0.5)
 		thePers.setStat(PersonalityStat.Mean, 1.0)
 	elif(theMood == "kind"):
 		theFetishHolder.setFetish(Fetish.Choking, -1.0)
 		theFetishHolder.setFetish(Fetish.UnconsciousSex, -1.0)
 		theFetishHolder.setFetish(Fetish.Sadism, -1.0)
 		theFetishHolder.setFetish(Fetish.Exhibitionism, 1.0)
-		theFetishHolder.setFetish(Fetish.AnalSexGiving, 0.0)
-		theFetishHolder.setFetish(Fetish.VaginalSexGiving, 0.0)
-		theFetishHolder.setFetish(Fetish.OralSexGiving, 0.0)
-		theFetishHolder.setFetish(Fetish.OralSexReceiving, 0.0)
+		theFetishHolder.setFetish(Fetish.AnalSexGiving, -0.25)
+		theFetishHolder.setFetish(Fetish.VaginalSexGiving, -0.25)
+		theFetishHolder.setFetish(Fetish.OralSexGiving, 0.5)
+		theFetishHolder.setFetish(Fetish.OralSexReceiving, 0.5)
+		theFetishHolder.setFetish(Fetish.Breeding, -1.0)
 		thePers.setStat(PersonalityStat.Mean, -1.0)
 	elif(theMood == "lusty"):
 		theFetishHolder.setFetish(Fetish.Choking, 0.25)
@@ -105,6 +107,7 @@ func prepareForSex():
 		theFetishHolder.setFetish(Fetish.VaginalSexGiving, 1.0)
 		theFetishHolder.setFetish(Fetish.OralSexGiving, 1.0)
 		theFetishHolder.setFetish(Fetish.OralSexReceiving, 1.0)
+		theFetishHolder.setFetish(Fetish.Breeding, 1.0)
 		thePers.setStat(PersonalityStat.Mean, 0.0)
 	else:
 		theFetishHolder.setFetish(Fetish.Choking, 0.0)
@@ -115,4 +118,14 @@ func prepareForSex():
 		theFetishHolder.setFetish(Fetish.VaginalSexGiving, 0.5)
 		theFetishHolder.setFetish(Fetish.OralSexGiving, 0.5)
 		theFetishHolder.setFetish(Fetish.OralSexReceiving, 0.5)
+		theFetishHolder.setFetish(Fetish.Breeding, 0.2)
 		thePers.setStat(PersonalityStat.Mean, -0.1)
+
+func tentaclesProcessTalk(_text:String) -> String:
+	if(!GM.main.getFlag("ElizaModule.tent_neurolink", false)):
+		return ""
+	return _text
+
+func loadData(data):
+	.loadData(data)
+	prepareForSex()

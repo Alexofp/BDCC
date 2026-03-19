@@ -179,7 +179,7 @@ func getActions(_indx:int):
 			if(isStuffing):
 				addAction("stopStuff", 0.0, "Stop egg-stuffing", "Enough stuffing eggs into the sub")
 			else:
-				var theStartScore:float = getDomInfo().getArousal()
+				var theStartScore:float = getDomInfo().getArousal()*fetish(DOM_0, Fetish.Breeding)
 				if(theStartScore < 0.4):
 					theStartScore = 0.0
 				addAction("startStuff", theStartScore, "Start egg-stuffing", "Start stuffing eggs into the sub's fuckhole!")

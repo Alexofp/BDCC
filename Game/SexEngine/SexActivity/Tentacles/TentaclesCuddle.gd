@@ -51,13 +51,13 @@ func addSoftSlaveryTentaclesTalk(_text:String):
 	#	addTextRaw("\n\n[say="+getDomID()+"]"+_text+"[/say]\n\n")
 	#	return
 	
-	var currentSlavery = GM.main.PS
-	if(!currentSlavery || currentSlavery.id != "Tentacles"):
+	var theTentaclesChar := getDom()
+	if(theTentaclesChar && theTentaclesChar.has_method("tentaclesProcessTalk")):
+		_text = theTentaclesChar.tentaclesProcessTalk(_text)
+	
+	if(_text.empty()):
 		return
-	var _newText:String = currentSlavery.processTalkText(_text)
-	if(_newText.empty()):
-		return
-	addTextRaw("\n\n[say="+getDomID()+"]"+_newText+"[/say]\n\n")
+	addTextRaw("\n\n[say="+getDomID()+"]"+_text+"[/say]\n\n")
 
 func processTurn():
 	waitTimer += 1

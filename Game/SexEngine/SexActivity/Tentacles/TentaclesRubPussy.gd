@@ -114,7 +114,7 @@ func getActions(_indx:int):
 		#if(getSub().hasVagina()):
 		#	addAction("rubclit", 0.2, "Rub clit", "Play with the their clit a bit")
 		if(getState() == ""):
-			if(getSub().hasReachablePenis()):
+			if(getSub().hasReachableVagina()):
 				if(hasBodypartUncovered(SUB_0, S_VAGINA)):
 					addAction("startHandjob", getContinueSexScore(DOM_0, SUB_0, S_VAGINA, S_HANDS) - getStopScore(), "Rub pussy", "Start rubbing their pussy")
 			#if(getSub().hasReachableVagina()):

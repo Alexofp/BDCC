@@ -68,3 +68,9 @@ func getCustomAttribute(id):
 		return 100.0
 	
 	return .getCustomAttribute(id)
+
+func tentaclesProcessTalk(_text:String) -> String:
+	var currentSlavery = GM.main.PS
+	if(!currentSlavery || currentSlavery.id != "Tentacles"):
+		return ""
+	return currentSlavery.processTalkText(_text)

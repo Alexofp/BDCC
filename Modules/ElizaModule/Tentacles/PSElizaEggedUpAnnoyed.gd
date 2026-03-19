@@ -114,7 +114,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "egg_birth")
 	if(state == "egg_birth"):
-		playAnimation(StageScene.EggLaying, "15", {pc="eliza", bodyState={exposedCrotch=true}})
+		playAnimation(StageScene.EggLaying, "15", {pc="eliza", npc="pc", bodyState={exposedCrotch=true}})
 		saynn("Eliza's body tenses again, her back arching hard. Her claws dig into the concrete as another moan escapes her.")
 
 		saynn("[say=eliza]Mhh.. ahh..[/say]")
@@ -183,7 +183,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "after_birth_cuddle")
 	if(state == "after_birth_cuddle"):
-		playAnimation(StageScene.Cuddling, "idle", {pc="pc", npc="eliza", bodyState={}, npcBodyState={exposedCrotch=true}})
+		#playAnimation(StageScene.Cuddling, "idle", {pc="pc", npc="eliza", bodyState={}, npcBodyState={exposedCrotch=true}})
 		saynn("Eliza just rests in your embrace, still trying to recover her breath. Her fur down there.. her inner thighs are all damp. She just keeps rubbing her belly.. until one of the tentacles decides to help with that, causing the feline to flinch away.")
 
 		saynn("[say=eliza]Nope!.. I've made enough little tentacle monsters for one life..[/say]")
