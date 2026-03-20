@@ -55,6 +55,22 @@ func hasOrifice(orificeType:int) -> bool:
 	
 	return false
 
+func isOrificeBlocked(orificeType:int) -> bool:
+	if(character == null):
+		return false
+	
+	if(orificeType == OrificeType.Vagina):
+		if(getCharacter().buffsHolder.hasBuff(Buff.BlocksVaginaLeakingBuff)):
+			return true
+	if(orificeType == OrificeType.Anus):
+		if(getCharacter().buffsHolder.hasBuff(Buff.BlocksAnusLeakingBuff)):
+			return true
+	if(orificeType == OrificeType.Throat):
+		if(getCharacter().isOralBlocked()):
+			return true
+	
+	return false
+
 func hasAnyWomb() -> bool:
 	for orificeType in OrificeType.getAll():
 		if(hasWombIn(orificeType)):
@@ -446,12 +462,19 @@ func getTimeUntilNextEggLaying() -> int:
 			theTime = theNewTime
 	return theTime
 
-func getEggsToBeLaid(_time:int = 30*60) -> Array:
+func getEggsToBeLaid(_time:int = 30*60, _onlyUnplugged:bool = true) -> Array:
 	var result:Array = []
 	
 	for egg in bigEggs:
 		var theEggTime:int = egg.getTimeUntilReadyToBeLaid()
 		if(theEggTime <= _time):
+			if(_onlyUnplugged):
+				var theOrifice:int = egg.orificeType
+				if(theOrifice == OrificeType.Throat):
+					theOrifice = OrificeType.Anus
+				if(isOrificeBlocked(theOrifice)):
+					continue
+			
 			result.append(egg)
 
 	return result
@@ -554,6 +577,36 @@ func speedUpPregnancy():
 		#eggCell.processTime(60*60*24)
 		eggCell.progress = 1.0
 
+# {type=TentacleEggType.Plant, laidBy=charID, orifice=OrificeType.Anus/Vagina, slot=BodypartSlot.Anus/Vagina, data=OPTIONAL}
+func laySingleEgg(_time:int = 0) -> Dictionary:
+	if(bigEggs.empty()):
+		return {}
+	var theChar = getCharacter()
+	if(!theChar):
+		return {}
+	var readyEggs:Array = getEggsToBeLaid(_time)
+	if(readyEggs.empty()):
+		return {}
+	var randomEgg = RNG.pick(readyEggs)
+	
+	return layEggSpecific(randomEgg)
+
+func layEggSpecific(_egg:EggCell) -> Dictionary:
+	if(!bigEggs.has(_egg)):
+		return {}
+	bigEggs.erase(_egg)
+	
+	var theData:Dictionary = {}
+	
+	var result:Dictionary = {
+		type = _egg.tentacleEggType,
+		laidBy = character.getID() if character else "",
+		orifice = _egg.orificeType,
+		slot = BodypartSlot.toBodypart(_egg.orificeType),
+		data = theData,
+	}
+	return result
+
 func layEggs(_time:int = 30*60, _isAtNursery:bool = false) -> Array:
 	if(bigEggs.empty()):
 		return []
@@ -633,3 +686,13 @@ func cancelPregnancy(_cancelNormalPregnancy:bool = true, _deleteBigEggs:bool = t
 		noticedReadyToGiveBirth = false
 	if(_deleteBigEggs):
 		bigEggs.clear()
+
+func getEggStuffedOrifices() -> Array:
+	var theStuffed:Dictionary = {}
+	
+	for theEgg in bigEggs:
+		if(!theStuffed.has(theEgg.orificeType)):
+			theStuffed[theEgg.orificeType] = true
+	
+	return theStuffed.keys()
+		

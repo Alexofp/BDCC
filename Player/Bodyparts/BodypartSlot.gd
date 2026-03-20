@@ -43,7 +43,7 @@ static func getVisibleName(slot: String):
 	elif(slot == Head):
 		return "Head"
 	else:
-		return "Error"
+		return slot
 
 static func getVisibleNameNoCap(slot: String):
 	if(slot == Horns):
@@ -71,7 +71,7 @@ static func getVisibleNameNoCap(slot: String):
 	elif(slot == Head):
 		return "head"
 	else:
-		return "error"
+		return slot
 
 static func getSlotChildName(slot: String):
 	if(slot == Head):

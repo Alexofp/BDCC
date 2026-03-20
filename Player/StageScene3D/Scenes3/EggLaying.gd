@@ -13,6 +13,7 @@ onready var doll2 = $Doll3D2
 
 var eggsLeft:int = 0
 var didAtLeastOneEgg:bool = false
+var shouldAutoFlop:bool = true
 
 func _init():
 	id = StageScene.EggLaying
@@ -66,6 +67,9 @@ func playAnimation(animID, _args = {}):
 	if(_args.has("pcCum") && _args["pcCum"]):
 		startCumPenis(doll)
 	
+	if(_args.has("shouldAutoFlop")):
+		shouldAutoFlop = _args["shouldAutoFlop"]
+	
 	var state_machine:AnimationNodeStateMachinePlayback = animationTree["parameters/StateMachine/playback"]
 	var state_machine2:AnimationNodeStateMachinePlayback = animationTree2["parameters/StateMachine/playback"]
 	
@@ -79,9 +83,10 @@ func playAnimation(animID, _args = {}):
 	if(animID == "after"):
 		state_machine.travel("EggLayingAfter-loop")
 		state_machine2.travel("EggLayingAfter_2-loop")
+		eggsLeft = 0
 	var theInt:int = int(animID)
 	if(theInt > 0 || animID == "0"):
-		eggsLeft = theInt
+		eggsLeft += theInt
 
 func canTransitionTo(_actionID, _args = []):
 	var firstDoll = "pc"
@@ -112,7 +117,7 @@ func _on_StartEggTimer_timeout():
 	if(state_machine.get_current_node() == "EggLayingDo-loop"):
 		return
 	if(eggsLeft <= 0):
-		if(didAtLeastOneEgg && state_machine.get_current_node() != "EggLayingAfter-loop"):
+		if(shouldAutoFlop && didAtLeastOneEgg && state_machine.get_current_node() != "EggLayingAfter-loop"):
 			state_machine.travel("EggLayingAfter-loop")
 			state_machine2.travel("EggLayingAfter_2-loop")
 		return

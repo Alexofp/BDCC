@@ -1164,8 +1164,7 @@ func checkTFs() -> bool:
 	return false
 
 func checkLayEggs() -> bool:
-	var mensCycle:MenstrualCycle = GM.pc.getMenstrualCycle()
-	if(mensCycle && mensCycle.isReadyToLayEggs()):
+	if(GM.pc.isReadyToLayEggs()):
 		runScene("PlayerWantsToLayEggsScene")
 		return true
 	return false

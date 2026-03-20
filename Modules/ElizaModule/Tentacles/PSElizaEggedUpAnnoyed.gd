@@ -183,6 +183,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "after_birth_cuddle")
 	if(state == "after_birth_cuddle"):
+		playAnimation(StageScene.EggLaying, "after", {pc="eliza", npc="pc", bodyState={exposedCrotch=true}})
 		#playAnimation(StageScene.Cuddling, "idle", {pc="pc", npc="eliza", bodyState={}, npcBodyState={exposedCrotch=true}})
 		saynn("Eliza just rests in your embrace, still trying to recover her breath. Her fur down there.. her inner thighs are all damp. She just keeps rubbing her belly.. until one of the tentacles decides to help with that, causing the feline to flinch away.")
 

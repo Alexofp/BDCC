@@ -57,7 +57,7 @@ func _run():
 	#addButtonAt(5, "NPC owner test", "TEST BUTTON", "npcOwnerTest")
 	#addButtonAt(8, "Nemesis test", "TEST BUTTON", "triggerNemesis")
 	
-	#addButtonAt(5, "Sex Test", "Sex test", "sextest")
+	addButtonAt(5, "Sex Test", "Sex test", "sextest")
 	#addExtraButtonAt(4, "Sex Test", "Sex test", "sextest")
 	#addButtonAt(7, "Slave Test", "Slave test", "slavetest")
 	#addButtonAt(7, "Computer test", "Computer test", "comptest")
@@ -151,11 +151,12 @@ func _react(_action: String, _args):
 		#runScene("GenericSexScene", [["avy"], ["rahi"]])
 		#runScene("GenericSexScene", ["rahi", "pc", SexType.DefaultSex, {SexMod.SubsStartUnconscious: true}])
 		#runScene("GenericSexScene", ["pc", "rahi", SexType.BitchsuitSex, {}])
+		runScene("GenericSexScene", ["pc", "rahi"])
 		
 		#var theCycle:MenstrualCycle = GM.pc.getMenstrualCycle()
 		#if(theCycle):
 		#	theCycle.addTentacleEgg("", TentacleEggType.Plant, 100, OrificeType.Vagina)
-		runScene("GenericSexScene", ["psplantTentacles", "nova", SexType.TentaclesSex, {SexMod.PCControlsDoms:true}])
+		#runScene("GenericSexScene", ["psplantTentacles", "nova", SexType.TentaclesSex, {SexMod.PCControlsDoms:true}])
 		#runScene("GenericSexScene", ["nova", "pc", SexType.TentaclesSex, {}])
 		
 		#runScene("GenericSexScene", [NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true}), "socket", SexType.SlutwallSex])
