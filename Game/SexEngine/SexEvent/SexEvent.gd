@@ -140,7 +140,7 @@ const PenisPumpMilked = "PenisPumpMilked"
 # Source = Who was the cause
 # Target = Who came
 #data:
-# orgasmType = How the target came (feet, spank, trib, breasts, rim)
+# orgasmType = How the target came (feet, spank, trib, breasts, rim, egglaying)
 const UniqueOrgasm = "UniqueOrgasm"
 
 # Only gets called in sex engine

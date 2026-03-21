@@ -2978,6 +2978,20 @@ I’m dripping, keep licking that cunt!"
 },
 "together": false
 },
+"EggsStolen": {
+"chance": 100.0,
+"chances": "",
+"lines": {
+0: [ {
+"condition": "",
+"lines": "My eggs! Give it back.
+Hey, those are mine!
+I laid that.. it's mine!"
+} ],
+1: [  ]
+},
+"together": false
+},
 "FeetplayAskToKiss": {
 "chance": 100.0,
 "chances": "",

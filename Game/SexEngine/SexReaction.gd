@@ -124,6 +124,8 @@ enum {
 	ThreesomeRideGrind,
 	
 	PainStrongGeneric,
+	
+	EggsStolen,
 }
 
 static func getAllStrings():
@@ -250,4 +252,6 @@ static func getAllStrings():
 		"ThreesomeRideGrind",
 		
 		"PainStrongGeneric",
+		
+		"EggsStolen",
 	]

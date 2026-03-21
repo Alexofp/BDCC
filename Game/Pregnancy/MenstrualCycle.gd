@@ -366,6 +366,9 @@ func isReadyToLayEggs() -> bool:
 			return true
 	return false
 
+func isReadyToLayEggsActually() -> bool:
+	return isReadyToLayEggs() && !getEggsToBeLaid().empty()
+
 func hasEggsInOrifice(_orifice:int, _onlyTentacle:bool = false) -> bool:
 	for egg in bigEggs:
 		if(egg.orificeType == _orifice):
@@ -578,34 +581,33 @@ func speedUpPregnancy():
 		eggCell.progress = 1.0
 
 # {type=TentacleEggType.Plant, laidBy=charID, orifice=OrificeType.Anus/Vagina, slot=BodypartSlot.Anus/Vagina, data=OPTIONAL}
-func laySingleEgg(_time:int = 0) -> Dictionary:
+func laySingleEgg(_time:int = 0) -> EggLaid:
 	if(bigEggs.empty()):
-		return {}
+		return null
 	var theChar = getCharacter()
 	if(!theChar):
-		return {}
+		return null
 	var readyEggs:Array = getEggsToBeLaid(_time)
 	if(readyEggs.empty()):
-		return {}
+		return null
 	var randomEgg = RNG.pick(readyEggs)
 	
 	return layEggSpecific(randomEgg)
 
-func layEggSpecific(_egg:EggCell) -> Dictionary:
+func layEggSpecific(_egg:EggCell) -> EggLaid:
 	if(!bigEggs.has(_egg)):
-		return {}
+		return null
 	bigEggs.erase(_egg)
 	
 	var theData:Dictionary = {}
 	
-	var result:Dictionary = {
-		type = _egg.tentacleEggType,
-		laidBy = character.getID() if character else "",
-		orifice = _egg.orificeType,
-		slot = BodypartSlot.toBodypart(_egg.orificeType),
-		data = theData,
-	}
-	return result
+	var newEgg := EggLaid.new()
+	newEgg.type = _egg.tentacleEggType
+	newEgg.laidBy = getCharacter().getID() if getCharacter() else ""
+	newEgg.orifice = _egg.orificeType
+	newEgg.data = theData
+	
+	return newEgg
 
 func layEggs(_time:int = 30*60, _isAtNursery:bool = false) -> Array:
 	if(bigEggs.empty()):

@@ -14,6 +14,7 @@ onready var doll2 = $Doll3D2
 var eggsLeft:int = 0
 var didAtLeastOneEgg:bool = false
 var shouldAutoFlop:bool = true
+var eggs:Array = []
 
 func _init():
 	id = StageScene.EggLaying
@@ -69,6 +70,12 @@ func playAnimation(animID, _args = {}):
 	
 	if(_args.has("shouldAutoFlop")):
 		shouldAutoFlop = _args["shouldAutoFlop"]
+	
+	if(_args.has("deleteEggs") && _args["deleteEggs"]):
+		for theEgg in eggs:
+			theEgg.queue_free()
+		eggs.clear()
+		eggsLeft = 0
 	
 	var state_machine:AnimationNodeStateMachinePlayback = animationTree["parameters/StateMachine/playback"]
 	var state_machine2:AnimationNodeStateMachinePlayback = animationTree2["parameters/StateMachine/playback"]
@@ -137,6 +144,7 @@ func _on_EggTimer_timeout():
 	newEgg.apply_central_impulse(Vector3( RNG.randf_range(-3.0, -1.0), RNG.randf_range(-1.0, 1.0), 0.0 ))
 	
 	squirt_egg_particles.emitting = true
+	eggs.append(newEgg)
 
 func getVarOptions():
 	var options = .getVarOptions()

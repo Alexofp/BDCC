@@ -550,6 +550,11 @@ _global_script_classes=[ {
 "path": "res://Game/Pregnancy/EggCell.gd"
 }, {
 "base": "Reference",
+"class": "EggLaid",
+"language": "GDScript",
+"path": "res://Game/Pregnancy/EggLaid.gd"
+}, {
+"base": "Reference",
 "class": "EncounterSettings",
 "language": "GDScript",
 "path": "res://Game/SexEngine/EncounterSettings.gd"
@@ -1943,6 +1948,7 @@ _global_script_class_icons={
 "DynCharExtraSettings": "",
 "DynamicCharacter": "",
 "EggCell": "",
+"EggLaid": "",
 "EncounterSettings": "",
 "EngineerGenerator": "",
 "EngineerLoot": "",
