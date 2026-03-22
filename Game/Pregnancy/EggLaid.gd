@@ -9,6 +9,23 @@ var data:Dictionary
 func getName() -> String:
 	return getNameByEggType(type)
 
+func getEggDescription() -> String:
+	var byWho:String = ""
+	if(laidBy != ""):
+		var theChar = GlobalRegistry.getCharacter(laidBy)
+		if(theChar == null):
+			byWho = "\n\nThis egg was laid by someone unknown.."
+		elif(laidBy == "pc"):
+			byWho = "\n\nThis egg was laid by you!"
+		else:
+			byWho = "\n\nThis egg was laid by "+str(theChar.getName())
+	
+	if(type == TentacleEggType.Plant):
+		return "Plant egg"+byWho
+	if(type == TentacleEggType.Latex):
+		return "An egg that is made out of latex. Doesn't have much use.. but it can be sold probably."+byWho
+	return "Unknown egg"+byWho
+
 static func getNameByEggType(_type:int) -> String:
 	if(_type == TentacleEggType.Plant):
 		return "Plant egg"
@@ -22,7 +39,15 @@ func createItem() -> ItemBase:
 		theEgg.whoGaveBirth = laidBy
 		return theEgg
 	
-	return null
+	var genericEgg = GlobalRegistry.createItem("EggGeneric")
+	genericEgg.setEggLaid(self)
+	return genericEgg
+
+func canSellEgg() -> bool:
+	return true
+
+func getEggSellPrice() -> int:
+	return 5
 
 func getOrifice() -> int:
 	return orifice
@@ -44,6 +69,24 @@ static func generateOneLineList(_eggs:Array) -> String:
 		
 		theTexts.append(getNameByEggType(theEggType)+" x"+str(theAm))
 	return Util.humanReadableList(theTexts)
+
+# Returns either an egg type or a color, used for the egg prop
+func getEggColorType():
+	if(type == TentacleEggType.Plant):
+		return type
+	if(type == TentacleEggType.Latex):
+		return type
+	return Color.white
+
+func getEggItemImagePath() -> String:
+	if(type == TentacleEggType.Plant):
+		return "res://Images/Items/medical/egg-shell.png"
+	if(type == TentacleEggType.Latex):
+		return "res://Images/Items/medical/egg-latex.png"
+	return "res://Images/Items/medical/egg.png"
+
+func getEggItemColor() -> Color:
+	return Color.white
 
 func saveData() -> Dictionary:
 	return {

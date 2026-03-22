@@ -2,6 +2,7 @@ extends SexActivityBase
 
 var shouldDoFlopAnim:bool = false
 var shouldDoEggAnim:bool = false
+var eggTypeOrColor
 var shouldDeleteEggs:bool = false
 
 var eggsOut:Array = [] #Array of EggLaid
@@ -50,13 +51,14 @@ func startActivity(_args):
 	#react(SexReaction.AboutToBeatUp)
 
 func processTurn():
-	#addText("MEOW")
-	
 	var eggsLeftAm:int = getSub().menstrualCycle.getEggsToBeLaid().size()
 	var eggsOutAm:int = eggsOut.size()
 	
-	if(eggsOutAm):
-		addText("{sub.You} {sub.youHave} laid "+str(eggsOutAm)+" egg"+("s" if eggsOutAm != 1 else "")+".")
+	if(eggsOutAm > 0):
+		if(eggsLeftAm > 0):
+			addText("{sub.You} {sub.youHave} laid "+str(eggsOutAm)+" egg"+("s" if eggsOutAm != 1 else "")+". {sub.YouHe} can still lay "+str(eggsLeftAm)+" more egg"+("s" if eggsLeftAm != 1 else "")+".")
+		else:
+			addText("{sub.You} {sub.youHave} laid "+str(eggsOutAm)+" egg"+("s" if eggsOutAm != 1 else "")+".")
 	if(eggsLeftAm <= 0):
 		if(getSub().isEggStuffed()):
 			addText("There are no eggs left that {sub.you} can lay currently..")
@@ -71,7 +73,7 @@ func getActions(_indx:int):
 		
 		#if(true || getSub().isReadyToLayEggs()):
 		if(hasBodypartUncovered(SUB_0, BodypartSlot.Anus)):
-			addAction("egg", 1.0 if getSub().menstrualCycle.isReadyToLayEggsActually() else 0.0, "Help lay", "Help them to lay an egg!", {A_PRIORITY: 5})
+			addAction("egg", 1.0 if getSub().menstrualCycle.isReadyToLayEggsCanContinue() else 0.0, "Help lay", "Help them to lay an egg!", {A_PRIORITY: 5})
 		addAction("addegg", 1.0, "ADD EGG", "ADD TEST EGG PLEASE REMOVE ME!", {A_PRIORITY: 3})
 		if(!eggsOut.empty()):
 			addAction("stealeggs", 0.0, "Steal eggs!", "Steal all of the eggs that they have currently laid", {A_PRIORITY: 4})
@@ -86,7 +88,7 @@ func getActions(_indx:int):
 func doAction(_indx:int, _actionID:String, _action:Dictionary):
 	if(_actionID == "addegg"):
 		var theMenstrualCycle:MenstrualCycle = getSub().getMenstrualCycle()
-		var theTentacleType:int = TentacleEggType.Plant
+		var theTentacleType:int = RNG.pick([TentacleEggType.Plant, TentacleEggType.Latex, TentacleEggType.NONE])
 		var theEggTime:int = 0
 		var theOrifice:int = OrificeType.Vagina
 		theMenstrualCycle.addTentacleEgg(getDomID(), theTentacleType, theEggTime, theOrifice)
@@ -110,17 +112,27 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 		react(SexReaction.EggsStolen, [100.0], [SUB_0])
 	
 	if(_actionID == "egg"):
-		shouldDoEggAnim = true
+		eggTypeOrColor = TentacleEggType.Plant
 		
-		if(!getSub().menstrualCycle.isReadyToLayEggsActually()):
+		if(!getSub().menstrualCycle.isReadyToLayEggsCanContinue()):
 			shouldDoFlopAnim = true
-		
+			
 		var anEgg:EggLaid = getSub().menstrualCycle.laySingleEgg()
 		if(!anEgg):
 			addText("{sub.You} {sub.youVerb('try', 'tries')} to lay an egg but nothing comes out..")
+			moan(SUB_0)
 			return
 		
-		addText("{sub.You} {sub.youVerb('lay', 'lays')} a "+anEgg.getName()+" with {dom.your} help!")
+		shouldDoEggAnim = true
+		
+		eggTypeOrColor = anEgg.getEggColorType()
+		addTextPick([
+			"{dom.You} {dom.youVerb('support')} {sub.you} as a "+anEgg.getName()+" slides out of {sub.yourHis} "+getNameHole(SUB_0, anEgg.getBodypart())+", landing softly onto the floor below.",
+			"{dom.You} {dom.youVerb('help')} {sub.you}. The "+anEgg.getName()+" emerges slowly, {sub.yourHis} "+getNameHole(SUB_0, anEgg.getBodypart())+" stretching around it before releasing it with a wet pop.",
+			"{dom.You} {dom.youVerb('hold')} {sub.you} as {sub.youHe} {sub.youVerb('strain')} {sub.yourHis} "+getNameHole(SUB_0, anEgg.getBodypart())+" muscles. A soft grunt escapes {sub.youHim} as the "+anEgg.getName()+" finally comes out, dropping with a quiet plop.",
+		])
+		moan(SUB_0)
+		
 		eggsOut.append(anEgg)
 		getSubInfo().addLust(20)
 		getSubInfo().addArousal(0.1) # Just a little help
@@ -166,7 +178,7 @@ func getAnimation():
 	shouldDeleteEggs = false
 	if(shouldDoEggAnim):
 		shouldDoEggAnim = false
-		return [StageScene.EggLaying, "1", {pc=SUB_0, npc=DOM_0, shouldAutoFlop=shouldDoFlopAnim, deleteEggs=remShouldDeleteEggs}]
+		return [StageScene.EggLaying, "egg", {pc=SUB_0, npc=DOM_0, eggQueue=[eggTypeOrColor], shouldAutoFlop=shouldDoFlopAnim, deleteEggs=remShouldDeleteEggs}]
 	return [StageScene.EggLaying, "idle" if !shouldDoFlopAnim else "after", {pc=SUB_0, npc=DOM_0, shouldAutoFlop=shouldDoFlopAnim, deleteEggs=remShouldDeleteEggs}]
 
 func hasAnimsToPlay() -> bool:

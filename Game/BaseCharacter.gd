@@ -1351,15 +1351,9 @@ func isEggStuffed() -> bool:
 		return menstrualCycle.isEggStuffed()
 	return false
 
-func isReadyToLayEggs(_ignorePlugged:bool = false) -> bool:
+func isReadyToLayEggs(_checkIfPlugged:bool = true) -> bool:
 	if(menstrualCycle != null):
-		var theRes:bool = menstrualCycle.isReadyToLayEggs()
-		
-		# If we're plugged, we don't wanna lay eggs
-		if(theRes && !_ignorePlugged && getEggStuffedHoles(true).empty()):
-			return false
-		
-		return theRes
+		return menstrualCycle.isReadyToLayEggs(_checkIfPlugged)
 	return false
 
 func getEggStuffedHoles(_onlyUnplugged:bool = false) -> Array:

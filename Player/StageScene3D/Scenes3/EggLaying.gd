@@ -12,6 +12,7 @@ onready var doll = $Doll3D
 onready var doll2 = $Doll3D2
 
 var eggsLeft:int = 0
+var eggTypeQueue:Array = []
 var didAtLeastOneEgg:bool = false
 var shouldAutoFlop:bool = true
 var eggs:Array = []
@@ -94,6 +95,11 @@ func playAnimation(animID, _args = {}):
 	var theInt:int = int(animID)
 	if(theInt > 0 || animID == "0"):
 		eggsLeft += theInt
+	
+	if(_args.has("eggQueue")):
+		eggTypeQueue.append_array(_args["eggQueue"])
+		eggsLeft = eggTypeQueue.size()
+		
 
 func canTransitionTo(_actionID, _args = []):
 	var firstDoll = "pc"
@@ -138,6 +144,16 @@ func _on_StartEggTimer_timeout():
 func _on_EggTimer_timeout():
 	var newEgg:RigidBody = EggPropScene.instance()
 	add_child(newEgg)
+	if(!eggTypeQueue.empty()):
+		var theEggTypeOrColor = eggTypeQueue.pop_front()
+		if(theEggTypeOrColor is int):
+			if(theEggTypeOrColor == TentacleEggType.Latex):
+				newEgg.setLatex()
+			else:
+				newEgg.setPlant()
+		elif(theEggTypeOrColor is Color):
+			newEgg.setWhite(theEggTypeOrColor)
+	
 	newEgg.global_position = egg_spawner_node.global_position + Vector3(0.0, 0.0, -RNG.randf_range(0.0, 0.2))
 	newEgg.global_rotation = egg_spawner_node.global_rotation
 	
