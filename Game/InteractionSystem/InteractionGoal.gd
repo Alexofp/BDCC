@@ -14,6 +14,7 @@ const RepairClothes = "RepairClothes"
 const Leave = "Leave"
 const Struggle = "Struggle"
 const GiveBirth = "GiveBirth"
+const LayEggs = "LayEggs"
 const HangoutAt = "HangoutAt"
 const SlaveLeave = "SlaveLeave"
 const SlaveGiveCredits = "SlaveGiveCredits"
@@ -22,10 +23,10 @@ const GetHealed = "GetHealed"
 const NpcOwnerApproach = "NpcOwnerApproach"
 
 static func getAll():
-	return [Wander, Eat, Hangout, WorkMine, Patrol, POI, Save, Prostitute, Shower, RepairClothes, Leave, Struggle, GiveBirth, HangoutAt, SlaveLeave, SlaveGiveCredits]
+	return [Wander, Eat, Hangout, WorkMine, Patrol, POI, Save, Prostitute, Shower, RepairClothes, Leave, Struggle, GiveBirth, LayEggs, HangoutAt, SlaveLeave, SlaveGiveCredits]
 
 static func getAllAlone():
-	return [Wander, Eat, Hangout, WorkMine, POI, Shower, RepairClothes, Leave, Struggle, GiveBirth, SlaveLeave, SlaveGiveCredits, Prostitute, NemesisAmbush, GetHealed, NpcOwnerApproach]
+	return [Wander, Eat, Hangout, WorkMine, POI, Shower, RepairClothes, Leave, Struggle, GiveBirth, LayEggs, SlaveLeave, SlaveGiveCredits, Prostitute, NemesisAmbush, GetHealed, NpcOwnerApproach]
 
 static func create(theID:String):
 	var newGoal

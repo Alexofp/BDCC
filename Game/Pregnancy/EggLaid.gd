@@ -33,6 +33,12 @@ static func getNameByEggType(_type:int) -> String:
 		return "Latex egg"
 	return "Unknown egg"
 
+func handleNursery() -> bool:
+	if(type == TentacleEggType.NONE):
+		#TODO: add to the child database?
+		return true
+	return false
+
 func createItem() -> ItemBase:
 	if(type == TentacleEggType.Plant):
 		var theEgg = GlobalRegistry.createItem("PlantEgg")
@@ -54,6 +60,44 @@ func getOrifice() -> int:
 
 func getBodypart() -> String:
 	return OrificeType.toBodypart(orifice)
+
+static func canCombineForReportType(_eggType:int) -> bool:
+	if(_eggType == TentacleEggType.Latex):
+		return true
+	if(_eggType == TentacleEggType.Plant):
+		return true
+	return false
+
+func canCombineForReport() -> bool:
+	return canCombineForReportType(type)
+
+func generateReportLine() -> String:
+	return ""
+
+static func generateEggReport(_eggs:Array) -> Array:
+	var result:Array = []
+	
+	var eggAmountByType:Dictionary = {}
+	var eggNameByType:Dictionary = {}
+	for theEgg in _eggs:
+		if(theEgg.canCombineForReport()):
+			if(!eggAmountByType.has(theEgg.type)):
+				eggAmountByType[theEgg.type] = 1
+				eggNameByType[theEgg.type] = theEgg.getName()
+			else:
+				eggAmountByType[theEgg.type] += 1
+			continue
+		
+		var theReport:String = theEgg.generateReportLine()
+		result.append("- 1x"+theEgg.getName()+((": "+theReport) if !theReport.empty() else ""))
+	
+	for eggType in eggAmountByType:
+		var theAm:int = eggAmountByType[eggType]
+		var theName:String = eggNameByType[eggType]
+		
+		result.append("- "+str(theAm)+"x"+theName)
+	
+	return result
 
 static func generateOneLineList(_eggs:Array) -> String:
 	var theDict:Dictionary = {}

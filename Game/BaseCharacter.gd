@@ -1356,17 +1356,22 @@ func isReadyToLayEggs(_checkIfPlugged:bool = true) -> bool:
 		return menstrualCycle.isReadyToLayEggs(_checkIfPlugged)
 	return false
 
-func getEggStuffedHoles(_onlyUnplugged:bool = false) -> Array:
+func layEggsWithNotificationIfNeeded():
+	if(!menstrualCycle):
+		return
+	menstrualCycle.layEggs()
+
+func getEggStuffedHoles(_checkIfPlugged:bool = true) -> Array:
 	if(!menstrualCycle):
 		return []
 	var theEggStuffedOrifices:Array = menstrualCycle.getEggStuffedOrifices()
 	
 	var result:Array = []
 	if(theEggStuffedOrifices.has(OrificeType.Throat) || theEggStuffedOrifices.has(OrificeType.Anus)):
-		if(!_onlyUnplugged || !buffsHolder.hasBuff(Buff.BlocksAnusLeakingBuff)):
+		if(!_checkIfPlugged || (_checkIfPlugged && !buffsHolder.hasBuff(Buff.BlocksAnusLeakingBuff))):
 			result.append(BodypartSlot.Anus) # throat eggs also come out of the butt
 	if(theEggStuffedOrifices.has(OrificeType.Vagina)):
-		if(!_onlyUnplugged || !buffsHolder.hasBuff(Buff.BlocksVaginaLeakingBuff)):
+		if(!_checkIfPlugged || (_checkIfPlugged && !buffsHolder.hasBuff(Buff.BlocksVaginaLeakingBuff))):
 			result.append(BodypartSlot.Vagina)
 	return result
 
