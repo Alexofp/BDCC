@@ -19,3 +19,5 @@ const NoViolence = "noViolence"
 
 const TentacleMonsterType = "TentacleMonsterType"
 const TentacleEggTime = "TentacleEggTime"
+
+const HelpEggsMode = "HelpEggsMode"

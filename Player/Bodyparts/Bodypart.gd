@@ -404,6 +404,9 @@ func getCharacter():
 func hasWomb():
 	return false
 
+func shouldOvulateWithBigEggs() -> bool:
+	return false
+
 func updateAppearance():
 	if(character != null && getCharacter() != null):
 		getCharacter().updateAppearance()

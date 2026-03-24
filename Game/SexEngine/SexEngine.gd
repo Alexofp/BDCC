@@ -29,6 +29,7 @@ var disableTFPills:bool = false
 var noViolence:bool = false
 var domsNoTalking:bool = false
 var pcControlsDoms:bool = false
+var helpEggsMode:bool = false
 
 var pcAllowsDomAutonomy:bool = false
 var pcAllowsDynJoiners:bool = false
@@ -148,6 +149,8 @@ func initSexType(theSexType, args:Dictionary = {}):
 		noViolence = args[SexMod.NoViolence]
 	if(args.has(SexMod.PCControlsDoms)):
 		pcControlsDoms = args[SexMod.PCControlsDoms]
+	if(args.has(SexMod.HelpEggsMode)):
+		helpEggsMode = args[SexMod.HelpEggsMode]
 	if(sexType != null):
 		sexType.setSexEngine(self)
 		sexType.initArgs(args)
@@ -775,6 +778,9 @@ func start():
 	for subID in subs:
 		var character = GlobalRegistry.getCharacter(subID)
 		character.onSexStarted({sexEngine=self,isDom=false})
+	
+	if(helpEggsMode):
+		startActivity("EggLayingHelp", doms.keys()[0], subs.keys()[0], [])
 	
 	if(!isDom("pc") && !pcControlsDoms):
 		processAIActions(true)

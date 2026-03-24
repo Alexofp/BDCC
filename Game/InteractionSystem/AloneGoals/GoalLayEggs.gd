@@ -23,7 +23,7 @@ func getActions() -> Array:
 			desc = "Do something",
 			score = 1.0,
 			args = {},
-			time = 3600, # 1 hour
+			time = 7200, # 2 hours
 		},
 	]
 
@@ -33,9 +33,7 @@ func doAction(_id:String, _args:Dictionary):
 		completeGoal()
 
 func getAnimData() -> Array:
-	if(getLocation() != "medical_nursery"):
-		return [StageScene.Solo, "walk", {pc="main"}]
 	return [StageScene.EggLaying, "idle", {pc="main", bodyState={naked=true}}]
 
 func getActivityIcon():
-	return RoomStuff.PawnActivity.GiveBirth
+	return RoomStuff.PawnActivity.LayEggs

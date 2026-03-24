@@ -14,7 +14,7 @@ var resultGender:String = NpcGender.Male
 var monozygotic: int = 1
 var fetusReadyForBirth := false
 
-var bigEgg:bool = false # Is this eggCell actually a big egg
+var bigEgg:bool = false # If true, this egg will turn into a big egg when impregnated
 var tentacleEggType:int = TentacleEggType.NONE # Did this egg come from a tentacle monster
 # Tentacle eggs don't get born as children, they instead become fruits (if egg was a plant one)
 
@@ -175,7 +175,7 @@ func impregnatedBy(fluidDNA):
 		resultGender = GM.main.getEncounterSettings().generateGender()
 	else:
 		resultGender = NpcGender.generate()
-
+	
 	print("EGGCELL IMPREGNATED BY "+str(fatherID)+", species: "+str(resultSpecies)+", gender: "+NpcGender.getVisibleName(resultGender), ", division: ", monozygotic, "" if causerID == "" else (" CAUSER: "+causerID))
 
 func tryImpregnate(fluidDNA, amountML:float, eggMultiplier:float = 1.0, fertility:float = 1.0, crossSpeciesCompatibility:float = 0.0) -> bool:

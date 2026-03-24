@@ -27,15 +27,19 @@ func hasWombIn(orificeType:int) -> bool:
 	if(character == null):
 		return false
 		
-	if(orificeType == OrificeType.Vagina):
-		if(getCharacter().hasBodypart(BodypartSlot.Vagina) && getCharacter().getBodypart(BodypartSlot.Vagina).hasWomb()):
-			return true
-	if(orificeType == OrificeType.Anus):
-		if(getCharacter().hasBodypart(BodypartSlot.Anus) && getCharacter().getBodypart(BodypartSlot.Anus).hasWomb()):
-			return true
-	if(orificeType == OrificeType.Throat):
-		if(getCharacter().hasBodypart(BodypartSlot.Head) && getCharacter().getBodypart(BodypartSlot.Head).hasWomb()):
-			return true
+	var theBodypartSlot:String = OrificeType.toBodypart(orificeType)
+	if(getCharacter().hasBodypart(theBodypartSlot) && getCharacter().getBodypart(theBodypartSlot).hasWomb()):
+		return true
+	
+	return false
+
+func shouldOvulateWithBigEggs(orificeType:int) -> bool:
+	if(character == null):
+		return false
+	
+	var theBodypartSlot:String = OrificeType.toBodypart(orificeType)
+	if(getCharacter().hasBodypart(theBodypartSlot) && getCharacter().getBodypart(theBodypartSlot).shouldOvulateWithBigEggs()):
+		return true
 	
 	return false
 
@@ -43,15 +47,9 @@ func hasOrifice(orificeType:int) -> bool:
 	if(character == null):
 		return false
 		
-	if(orificeType == OrificeType.Vagina):
-		if(getCharacter().hasBodypart(BodypartSlot.Vagina)):
-			return true
-	if(orificeType == OrificeType.Anus):
-		if(getCharacter().hasBodypart(BodypartSlot.Anus)):
-			return true
-	if(orificeType == OrificeType.Throat):
-		if(getCharacter().hasBodypart(BodypartSlot.Head)):
-			return true
+	var theBodypartSlot:String = OrificeType.toBodypart(orificeType)
+	if(getCharacter().hasBodypart(theBodypartSlot)):
+		return true
 	
 	return false
 
@@ -205,9 +203,8 @@ func processTime(seconds:int):
 			emit_signal("readyToGiveBirthOnce")
 
 	if(hasAnyBigEggs):
-		#TODO: Ready to lay eggs check?
 		for bigEgg in bigEggs:
-			bigEgg.processTime(seconds * pregnancySpeed)
+			bigEgg.processTime(seconds * pregnancySpeed)# * 9999999.9
 	
 	for orificeType in eggCells:
 		for egg in eggCells[orificeType]:
@@ -240,7 +237,11 @@ func forceImpregnateBy(npcID:String):
 	
 	for orificeType in eggCells:
 		for egg in eggCells[orificeType]:
-			impregnatedEggCells.append(egg)
+			if(egg.bigEgg):
+				bigEggs.append(egg)
+			else:
+				impregnatedEggCells.append(egg)
+			
 		eggCells[orificeType].clear()
 	
 	if(howMuchImpregnated <= 0):
@@ -264,6 +265,7 @@ func ovulate():
 	for orifice in OrificeType.getAll():
 		if(!hasWombIn(orifice)):
 			continue
+		var ovulatingWithBigEggs := shouldOvulateWithBigEggs(orifice)
 		
 		var ch = getCharacter()
 		var amountOfEggs:int = RNG.pickWeightedPairs(possibleEggAmounts)
@@ -279,6 +281,8 @@ func ovulate():
 			var egg := createEggCell()
 			egg.setOrifice(orifice)
 			egg.setMother(getCharacter().getID(), motherSpecies)
+			if(ovulatingWithBigEggs):
+				egg.bigEgg = true
 			eggCells[orifice].append(egg)
 	
 func removeEgg(egg:EggCell):
@@ -300,8 +304,10 @@ func obsorbCum(_cumType, amountML:float, fluidDNA, orificeType:int = OrificeType
 		var egg = RNG.pick(eggCells[orificeType])
 		if(egg.tryImpregnate(fluidDNA, amountML, eggAmountMult, fertility, crossSpeciesCompatibility)):
 			eggCells[orificeType].erase(egg)
-			#TODO: is egg big check. Put into big eggs then
-			impregnatedEggCells.append(egg)
+			if(egg.bigEgg):
+				bigEggs.append(egg)
+			else:
+				impregnatedEggCells.append(egg)
 
 func isEggStuffed() -> bool:
 	return !bigEggs.empty()
@@ -315,22 +321,36 @@ func isEggStuffedBy(_charID:String) -> bool:
 			return true
 	return false
 
-func isPregnantFromPlayer() -> bool:
-	if(!isPregnant()):
+func isPregnantFromPlayer(_normalPreg:bool = true, _bigEggPreg:bool = true) -> bool:
+	if(!isPregnant() && !isEggStuffed()):
 		return false
 	
-	for egg in impregnatedEggCells:
-		if(egg.getFatherID() == "pc" || egg.getMotherID() == "pc"):
-			return true
+	if(_normalPreg):
+		for egg in impregnatedEggCells:
+			if(egg.getFatherID() == "pc" || egg.getMotherID() == "pc"):
+				return true
+	if(_bigEggPreg):
+		for egg in bigEggs:
+			if(!egg.isimpregnated || egg.tentacleEggType != TentacleEggType.NONE):
+				continue
+			if(egg.getFatherID() == "pc" || egg.getMotherID() == "pc"):
+				return true
 	return false
 
-func isPregnantFrom(_charID:String) -> bool:
-	if(!isPregnant()):
+func isPregnantFrom(_charID:String, _normalPreg:bool = true, _bigEggPreg:bool = true) -> bool:
+	if(!isPregnant() && !isEggStuffed()):
 		return false
 	
-	for egg in impregnatedEggCells:
-		if(egg.getFatherID() == _charID || egg.getMotherID() == _charID):
-			return true
+	if(_normalPreg):
+		for egg in impregnatedEggCells:
+			if(egg.getFatherID() == _charID || egg.getMotherID() == _charID):
+				return true
+	if(_bigEggPreg):
+		for egg in bigEggs:
+			if(!egg.isimpregnated || egg.tentacleEggType != TentacleEggType.NONE):
+				continue
+			if(egg.getFatherID() == _charID || egg.getMotherID() == _charID):
+				return true
 	return false
 
 func getPregnancyProgress() -> float:
@@ -339,8 +359,9 @@ func getPregnancyProgress() -> float:
 		var newProgress = egg.getProgress()
 		if(newProgress > maxProgress):
 			maxProgress = newProgress
-	#if(maxProgress > 0.0):
-	#	print("PREGNANCY: "+str(maxProgress))
+	
+	# Does this needs a big eggs progress value?
+	
 	return maxProgress
 
 func getPregnancyProgressDoll() -> float:
@@ -406,10 +427,35 @@ func addTentacleEgg(_charID:String, _tentacleType:int, _growTime:int, _orifice:i
 	bigEggs.append(egg)
 	return true
 
+# Only used for doll pregnant belly calculation at the moment
 func getLitterSize() -> int:
 	return impregnatedEggCells.size()
 
-func getRoughLitterEstimateString(veryAccurate = false) -> String:
+func getRoughLitterEstimateMinMax(_ar:Array, veryAccurate:bool = false) -> Array:
+	var trueValue := _ar.size()
+	
+	var fullProgress:float = 0.0
+	for egg in _ar:
+		fullProgress += clamp(egg.getProgress(), 0.0, 1.0)
+	var averageProgress = 0.0
+	if(_ar.size() > 0):
+		averageProgress = fullProgress / _ar.size()
+	
+	var disp:int = 3 + int(trueValue/2)
+	if(veryAccurate):
+		disp = disp / 2
+	var minValue = RNG.randi_range(trueValue - int(disp * (1.0 - averageProgress)), trueValue)
+	minValue = Util.maxi(0, minValue)
+	var maxValueMin = trueValue + int(disp * (1.0 - averageProgress))
+	var maxValue = 0
+	if (maxValueMin > trueValue):
+		maxValue = RNG.randi_range(trueValue, maxValueMin)
+	else:
+		maxValue = RNG.randi_range(maxValueMin, trueValue)
+	
+	return [minValue, maxValue]
+
+func getRoughLitterEstimateString(veryAccurate:bool = false) -> String:
 	var trueValue := impregnatedEggCells.size()
 	
 	var fullProgress:float = 0.0
@@ -431,7 +477,6 @@ func getRoughLitterEstimateString(veryAccurate = false) -> String:
 	else:
 		maxValue = RNG.randi_range(maxValueMin, trueValue)
 		
-
 	if(minValue == maxValue):
 		if(maxValue == 1):
 			return "1 kid"
@@ -589,6 +634,9 @@ func speedUpPregnancy():
 		var eggCell: EggCell = egg
 		#eggCell.progress = 0.99
 		#eggCell.processTime(60*60*24)
+		eggCell.progress = 1.0
+	for egg in bigEggs:
+		var eggCell: EggCell = egg
 		eggCell.progress = 1.0
 
 # {type=TentacleEggType.Plant, laidBy=charID, orifice=OrificeType.Anus/Vagina, slot=BodypartSlot.Anus/Vagina, data=OPTIONAL}

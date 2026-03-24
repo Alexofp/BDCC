@@ -34,7 +34,7 @@ func canStartActivity(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: Sex
 	if(!_domInfo.getChar().isPlayer()):
 		return false
 	
-	if(false && !_subInfo.getChar().isReadyToLayEggs()): #TODO: remove false
+	if(!_subInfo.getChar().isReadyToLayEggs()):
 		return false
 	
 	return .canStartActivity(_sexEngine, _domInfo, _subInfo)
@@ -97,6 +97,7 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 	if(_actionID == "stealeggs"):
 		shouldDeleteEggs = true
 		
+		var theAmToSteal:int = eggsOut.size()
 		var theListStr:String = EggLaid.generateOneLineList(eggsOut)
 		addText("{dom.You} picked up "+theListStr+"!")
 		
@@ -110,6 +111,7 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 		# Hey, those are mine!
 		getSubInfo().addResistance(1.0)
 		react(SexReaction.EggsStolen, [100.0], [SUB_0])
+		GM.main.RS.addAffection(getSubID(), getDomID(), -0.02*theAmToSteal)
 	
 	if(_actionID == "egg"):
 		eggTypeOrColor = TentacleEggType.Plant
@@ -133,6 +135,11 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 		])
 		moan(SUB_0)
 		
+		if(getSub().isReadyToLayEggs()):
+			GM.main.RS.addAffection(getSubID(), getDomID(), 0.01)
+		else:
+			GM.main.RS.addAffection(getSubID(), getDomID(), 0.05)
+		
 		eggsOut.append(anEgg)
 		getSubInfo().addLust(20)
 		getSubInfo().addArousal(0.1) # Just a little help
@@ -143,7 +150,13 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 		addText("{dom.You} {dom.youVerb('have', 'has')} stopped helping {sub.you}.")
 	
 	if(_actionID == "escape"):
-		if(RNG.chance(getResistChance(SUB_0, DOM_0, RESIST_LEGS_FOCUS, 20.0, 0.0))):
+		var canEscapeAtAll:bool = true
+		if(!eggsOut.empty()):
+			canEscapeAtAll = false
+		elif(getSub().isReadyToLayEggs()):
+			canEscapeAtAll = false
+		
+		if(canEscapeAtAll && RNG.chance(getResistChance(SUB_0, DOM_0, RESIST_LEGS_FOCUS, 20.0, 0.0))):
 			addText("{sub.You} {sub.youVerb('pull')} away from {dom.you}.")
 			getDomInfo().addAnger(0.3)
 			if(state != ""):

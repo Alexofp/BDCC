@@ -37,6 +37,9 @@ enum {
 	# Anus
 	AnusWomb,
 	
+	# Vagina/Anus
+	LaysEggs,
+	
 	TRAITCOUNT,
 }
 
@@ -75,6 +78,9 @@ const traitNames = [
 	
 	# Anus
 	"AnusWomb",
+	
+	# Vagina/Anus
+	"LaysEggs",
 ]
 
 static func textToTrait(trait):
