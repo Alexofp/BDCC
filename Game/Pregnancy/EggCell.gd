@@ -211,6 +211,19 @@ func setBigEgg(_big:bool):
 func setTentacleEggType(_type:int):
 	tentacleEggType = _type
 
+func makeChilds() -> Array:
+	var result:Array = []
+	for x in monozygotic:
+		var newChild: Child = Child.new()
+		newChild.generateUniqueID()
+		newChild.loadFromEggCell(self)
+		newChild.generateName()
+		newChild.setBirthday(GM.main.getDays())
+		newChild.setBornFromMonozygoticStatus(monozygotic)
+	
+		result.append(newChild)
+	return result
+
 func saveData() -> Dictionary:
 	var data:Dictionary = {
 		"lifeSpan": lifeSpan,

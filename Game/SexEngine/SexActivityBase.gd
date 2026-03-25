@@ -1852,6 +1852,20 @@ func doSpitCumIntoHoleSub(bodypartSlot = BodypartSlot.Vagina):
 		fetishAffect(SUB_0, Fetish.Breeding, 3.0)
 		fetishAffect(DOM_0, Fetish.BeingBred, 3.0)
 
+func hasOvipositorPenis(_indx:int) -> bool:
+	var theChar:BaseCharacter = getDomOrSub(_indx)
+	if(theChar):
+		return false
+	var theStrapon = theChar.getWornStrapon()
+	if(theStrapon):
+		if(theStrapon.has_method("getStraponTraits")):
+			return theStrapon.getStraponTraits().get(PartTrait.Ovipositor, false)
+		return false
+	if(!theChar.hasPenis()):
+		return false
+	return theChar.getBodypart(BodypartSlot.Penis).hasTrait(PartTrait.Ovipositor)
+	
+
 func isWearingStrapon(_indx:int) -> bool:
 	var theChar:BaseCharacter = getDomOrSub(_indx)
 	if(!theChar):

@@ -1356,10 +1356,12 @@ func isReadyToLayEggs(_checkIfPlugged:bool = true) -> bool:
 		return menstrualCycle.isReadyToLayEggs(_checkIfPlugged)
 	return false
 
-func layEggsWithNotificationIfNeeded():
+func layEggsByNPCWithNotificationIfNeeded():
 	if(!menstrualCycle):
 		return
-	menstrualCycle.layEggs()
+	var laidEggs := menstrualCycle.layEggs()
+	for theEgg in laidEggs:
+		theEgg.handleDisposalByNPC()
 
 func getEggStuffedHoles(_checkIfPlugged:bool = true) -> Array:
 	if(!menstrualCycle):

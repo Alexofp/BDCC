@@ -29,7 +29,7 @@ func getActions() -> Array:
 
 func doAction(_id:String, _args:Dictionary):
 	if(_id == "giveBirth"):
-		getPawn().getChar().layEggsWithNotificationIfNeeded()
+		getPawn().getChar().layEggsByNPCWithNotificationIfNeeded()
 		completeGoal()
 
 func getAnimData() -> Array:

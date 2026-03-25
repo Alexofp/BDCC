@@ -83,7 +83,7 @@ func getFatherName():
 		return "unknown"
 	return rememberedFatherName + " (forgotten)"
 
-func loadFromEggCell(egg: EggCell):
+func loadFromEggCell(egg):
 	gender = egg.resultGender
 	species = egg.resultSpecies
 	setMotherID(egg.motherID)

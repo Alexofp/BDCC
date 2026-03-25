@@ -50,6 +50,10 @@ func startActivity(_args):
 	addText("{dom.You} {dom.youVerb('prepare')} to help {sub.you} lay eggs!")
 	#react(SexReaction.AboutToBeatUp)
 
+func onActivityEnd():
+	for theEgg in eggsOut:
+		theEgg.handleDisposalByNPC()
+
 func processTurn():
 	var eggsLeftAm:int = getSub().menstrualCycle.getEggsToBeLaid().size()
 	var eggsOutAm:int = eggsOut.size()
@@ -127,7 +131,7 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 		
 		shouldDoEggAnim = true
 		
-		eggTypeOrColor = anEgg.getEggColorType()
+		eggTypeOrColor = anEgg.getEggColorOrType()
 		addTextPick([
 			"{dom.You} {dom.youVerb('support')} {sub.you} as a "+anEgg.getName()+" slides out of {sub.yourHis} "+getNameHole(SUB_0, anEgg.getBodypart())+", landing softly onto the floor below.",
 			"{dom.You} {dom.youVerb('help')} {sub.you}. The "+anEgg.getName()+" emerges slowly, {sub.yourHis} "+getNameHole(SUB_0, anEgg.getBodypart())+" stretching around it before releasing it with a wet pop.",

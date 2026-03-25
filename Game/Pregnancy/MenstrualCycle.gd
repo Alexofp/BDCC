@@ -272,7 +272,8 @@ func ovulate():
 		amountOfEggs = Util.maxi(ch.getMinEggsAmount(), int(ceil(amountOfEggs * ch.getEggsBonusMod())))
 		if(ch.hasPerk(Perk.FertilityBetterOvulation) && amountOfEggs < 10):
 			amountOfEggs += RNG.randi_range(0, 4) #otherwise species with low base eggs like humans, won't get much bonus
-			
+		
+		#amountOfEggs = 10 #TODO: REMOVE THIS LINE
 		print(ch.getName(), " OVULATED WITH "+str(amountOfEggs)+" AMOUNT OF EGGS")
 		#print(ch.getName(), " Bonus eggs modifier: ", ch.getEggsBonusMod() *100, "%")
 		#print(ch.getName(), " AMOUNT OF Min eggs: ", ch.getMinEggsAmount())
@@ -495,14 +496,14 @@ func getTimeUntilReadyForBirth() -> int:
 			maxTime = newMaxTime
 	return int(ceil(maxTime / getPregnancySpeed()))
 
-func getEggQueue(_time:int = 30*60) -> Array:
-	var result:Array = []
-	var theEggs := getEggsToBeLaid(_time)
-	
-	for theEgg in theEggs:
-		result.append(theEgg.getEggColorType())
-	
-	return result
+#func getEggQueue(_time:int = 30*60) -> Array:
+#	var result:Array = []
+#	var theEggs := getEggsToBeLaid(_time)
+#
+#	for theEgg in theEggs:
+#		result.append(theEgg.getEggColorType())
+#
+#	return result
 
 func getAmountOfEggsReadyToBeLaid(_time:int = 30*60) -> int:
 	return getEggsToBeLaid(_time).size()
@@ -658,13 +659,14 @@ func layEggSpecific(_egg:EggCell) -> EggLaid:
 		return null
 	bigEggs.erase(_egg)
 	
-	var theData:Dictionary = {}
+	var theData:Dictionary = _egg.saveData() if _egg.tentacleEggType == TentacleEggType.NONE else {}
 	
 	var newEgg := EggLaid.new()
 	newEgg.type = _egg.tentacleEggType
 	newEgg.laidBy = getCharacter().getID() if getCharacter() else ""
 	newEgg.orifice = _egg.orificeType
 	newEgg.data = theData
+	newEgg.onCreated(_egg)
 	
 	return newEgg
 
@@ -704,17 +706,7 @@ func giveBirth() -> Array:
 	var result:Array = []
 	
 	for egg in impregnatedEggCells:
-		var eggCell: EggCell = egg
-		
-		for x in eggCell.monozygotic:
-			var newChild: Child = Child.new()
-			newChild.generateUniqueID()
-			newChild.loadFromEggCell(eggCell)
-			newChild.generateName()
-			newChild.setBirthday(GM.main.getDays())
-			newChild.setBornFromMonozygoticStatus(eggCell.monozygotic)
-		
-			result.append(newChild)
+		result.append_array(egg.makeChilds())
 	
 	if(getCharacter() != null):
 		getCharacter().onGivingBirth(impregnatedEggCells, result)

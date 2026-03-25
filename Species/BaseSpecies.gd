@@ -192,3 +192,16 @@ func supportsMane():
 
 func calculateScoreForSpeciesCalculations(_npc) -> float:
 	return 1.0
+
+func generateEggType(_laidEgg:EggLaid) -> int:
+	#return TentacleEggType.Latex # Will make your species lay latex eggs
+	return TentacleEggType.NONE
+
+func generateEggColor(_laidEgg:EggLaid) -> Color:
+	return Color.white
+
+func onEggLaid(_laidEgg:EggLaid, _eggCell:EggCell):
+	pass
+
+func getEggInventorySpritePath(_laidEgg:EggLaid) -> String:
+	return "res://Images/Items/medical/egg.png"
