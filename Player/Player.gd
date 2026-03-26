@@ -849,7 +849,7 @@ func useWorstCondom():
 	return bestChance
 
 func onPlayerVisiblyPregnant():
-	GM.main.addLogMessage("Uh oh", "You notice that your belly is more inflated that normally. You can't deny it anymore, you are pregnant..")
+	GM.main.addLogMessage("Uh oh", "You notice that your belly is more inflated that normal. You can't deny it anymore, you are pregnant..")
 
 func onPlayerReadyToGiveBirth():
 	GM.main.addLogMessage("It's time..", "Your belly is so swollen, it's hard to walk! You feel ready to give birth, maybe it's time to visit the nursery.")

@@ -422,9 +422,15 @@ func updateNonBattleEffects():
 func onCharacterVisiblyPregnant():
 	pregnancyWaitTimer = 0
 	if(getMenstrualCycle() != null):
-		if(getMenstrualCycle().isPregnantFromPlayer()):
+		var isPCPreg:bool = getMenstrualCycle().isPregnantFromPlayer(true, false)
+		var isPCEgg:bool = getMenstrualCycle().isPregnantFromPlayer(false, true)
+		
+		if(isPCPreg || isPCEgg):
 			GM.pc.addSkillExperience(Skill.Breeder, 50)
-			GM.main.addLogMessage("News", "You just received news that "+getName()+" is pregnant with your children.")
+			if(isPCPreg):
+				GM.main.addLogMessage("News", "You just received news that "+getName()+" is pregnant with your children.")
+			elif(isPCEgg):
+				GM.main.addLogMessage("News", "You just received news that "+getName()+"'s eggs got fertilized by you.")
 			if(isDynamicCharacter()):
 				GM.main.WHS.addEvent(WHEvent.Impregnated, "pc", getID())
 				GM.main.RS.sendSocialEvent("pc", getID(), SocialEventType.GotImpregnated)

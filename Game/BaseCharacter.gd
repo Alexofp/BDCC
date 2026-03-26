@@ -1350,6 +1350,11 @@ func isEggStuffed() -> bool:
 	if(menstrualCycle != null):
 		return menstrualCycle.isEggStuffed()
 	return false
+	
+func isEggStuffedWithOffspring() -> bool:
+	if(menstrualCycle != null):
+		return menstrualCycle.isEggStuffedWithOffspring()
+	return false
 
 func isReadyToLayEggs(_checkIfPlugged:bool = true) -> bool:
 	if(menstrualCycle != null):
@@ -1359,6 +1364,12 @@ func isReadyToLayEggs(_checkIfPlugged:bool = true) -> bool:
 func layEggsByNPCWithNotificationIfNeeded():
 	if(!menstrualCycle):
 		return
+		
+	if(getMenstrualCycle().isPregnantFromPlayer(false, true)):
+		GM.main.addLogMessage("News", "You just received news that "+getName()+" laid the eggs containing your offspring! The eggs were brought to the nursery.")
+	else:
+		GM.main.addLogMessage("News", "Rumors spread fast. You just received news that "+getName()+" has laid eggs!")
+	
 	var laidEggs := menstrualCycle.layEggs()
 	for theEgg in laidEggs:
 		theEgg.handleDisposalByNPC()
@@ -1451,9 +1462,9 @@ func forceImpregnateBy(otherCharacterID) -> bool:
 		return menstrualCycle.forceImpregnateBy(otherCharacterID)
 	return false
 
-func getPregnancyProgress() -> float:
+func getPregnancyProgress(_normalPreg:bool = true, _bigEggPreg:bool = false) -> float:
 	if(menstrualCycle != null):
-		return menstrualCycle.getPregnancyProgress()
+		return menstrualCycle.getPregnancyProgress(_normalPreg, _bigEggPreg)
 	return 0.0
 
 func getPregnancyProgressDoll() -> float:

@@ -158,8 +158,8 @@ func getPregnancySpeed() -> float:
 func processTime(seconds:int):
 	var theCharacter = getCharacter()
 	
-	if(isPregnant()):
-		var thePregnancyProgress := getPregnancyProgress()
+	if(isPregnant() || isEggStuffedWithOffspring()):
+		var thePregnancyProgress := getPregnancyProgress(true, true)
 		
 		if(theCharacter != null && thePregnancyProgress > 0.05 && !theCharacter.hasPerk(Perk.FertilityBetterOvulationV3)):
 			cycleProgress = 1.0
@@ -255,12 +255,15 @@ func ovulate():
 	
 	var motherSpecies:Array = getCharacter().getSpecies()
 	var possibleEggAmounts:Array = []
+	var possibleBigEggAmounts:Array = []
 	for specie in motherSpecies:
 		var speciesObject = GlobalRegistry.getSpecies(specie)
 		if speciesObject == null:
 			possibleEggAmounts.append_array([[1, 10.0],[2, 1.0]])
+			possibleBigEggAmounts.append_array([[5, 10.0],[5, 1.0]])
 		else:
 			possibleEggAmounts.append_array(speciesObject.getEggCellOvulationAmount())
+			possibleBigEggAmounts.append_array(speciesObject.getEggsOvulationAmount())
 	
 	for orifice in OrificeType.getAll():
 		if(!hasWombIn(orifice)):
@@ -268,7 +271,7 @@ func ovulate():
 		var ovulatingWithBigEggs := shouldOvulateWithBigEggs(orifice)
 		
 		var ch = getCharacter()
-		var amountOfEggs:int = RNG.pickWeightedPairs(possibleEggAmounts)
+		var amountOfEggs:int = RNG.pickWeightedPairs(possibleEggAmounts) if !ovulatingWithBigEggs else RNG.pickWeightedPairs(possibleBigEggAmounts)
 		amountOfEggs = Util.maxi(ch.getMinEggsAmount(), int(ceil(amountOfEggs * ch.getEggsBonusMod())))
 		if(ch.hasPerk(Perk.FertilityBetterOvulation) && amountOfEggs < 10):
 			amountOfEggs += RNG.randi_range(0, 4) #otherwise species with low base eggs like humans, won't get much bonus
@@ -313,6 +316,12 @@ func obsorbCum(_cumType, amountML:float, fluidDNA, orificeType:int = OrificeType
 func isEggStuffed() -> bool:
 	return !bigEggs.empty()
 
+func isEggStuffedWithOffspring() -> bool:
+	for theEgg in bigEggs:
+		if(theEgg.isimpregnated && theEgg.tentacleEggType == TentacleEggType.NONE):
+			return true
+	return false
+
 func isPregnant() -> bool:
 	return !impregnatedEggCells.empty()
 
@@ -354,14 +363,20 @@ func isPregnantFrom(_charID:String, _normalPreg:bool = true, _bigEggPreg:bool = 
 				return true
 	return false
 
-func getPregnancyProgress() -> float:
-	var maxProgress = 0.0
-	for egg in impregnatedEggCells:
-		var newProgress = egg.getProgress()
-		if(newProgress > maxProgress):
-			maxProgress = newProgress
+func getPregnancyProgress(_normalPreg:bool = true, _bigEggPreg:bool = false) -> float:
+	var maxProgress:float = 0.0
+	if(_normalPreg):
+		for egg in impregnatedEggCells:
+			var newProgress:float = egg.getProgress()
+			if(newProgress > maxProgress):
+				maxProgress = newProgress
 	
-	# Does this needs a big eggs progress value?
+	if(_bigEggPreg):
+		for egg in bigEggs:
+			if(egg.tentacleEggType == TentacleEggType.NONE && egg.isimpregnated):
+				var newProgress:float = egg.getProgress()
+				if(newProgress > maxProgress):
+					maxProgress = newProgress
 	
 	return maxProgress
 
@@ -546,6 +561,8 @@ func isVisiblyEggStuffed() -> bool:
 
 func isVisiblyPregnant() -> bool:
 	if(getPregnancyProgress() >= 0.20):
+		return true
+	if(isEggStuffedWithOffspring()):
 		return true
 	return false
 	

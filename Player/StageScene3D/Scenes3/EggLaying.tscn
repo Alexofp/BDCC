@@ -170,7 +170,7 @@ initial_velocity = 6.76
 initial_velocity_random = 0.29
 scale_amount = 3.0
 scale_amount_random = 1.0
-color = Color( 0, 0.278431, 0, 1 )
+color = Color( 0.988235, 0.952941, 0.913725, 0.239216 )
 hue_variation = 0.03
 hue_variation_random = 1.0
 

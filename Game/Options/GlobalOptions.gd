@@ -38,6 +38,7 @@ var bellyMaxSizeModifier: float = 1.0
 var optimizeChilds:bool = true
 var maxKeepPCKids:int = 50
 var maxKeepNPCKids:int = 30
+var bigEggsGrowthMult:float = 2.0
 
 # Sandbox options
 var sandboxPawnCount:int = 30
@@ -107,6 +108,7 @@ func resetToDefaults():
 	webTextInputFallback = false
 	menstrualCycleLengthDays = 7
 	eggCellLifespanHours = 48
+	bigEggsGrowthMult = 2.0
 	playerPregnancyTimeDays = 5
 	npcPregnancyTimeDays = 5
 	bellySizeDependsOnLitterSize = false
@@ -189,7 +191,10 @@ func getMenstrualCycleLengthDays():
 
 func getEggCellLifespanHours():
 	return eggCellLifespanHours
-	
+
+func getBigEggsGrowthMult() -> float:
+	return bigEggsGrowthMult
+
 func getPlayerPregnancyTimeDays():
 	return playerPregnancyTimeDays
 	
@@ -464,6 +469,24 @@ func getChangeableOptions():
 					"id": "impregnationChanceModifier",
 					"type": "int",
 					"value": impregnationChanceModifier,
+					"tab": TAB_GAMEPLAY,
+				},
+				{
+					"name": "Big eggs growth multiplier",
+					"description": "How much faster should the big eggs develop compared to the normal pregnancy. Big eggs are the ones that you have to lay.",
+					"id": "bigEggsGrowthMult",
+					"type": "list",
+					"value": bigEggsGrowthMult,
+					"values": [
+						[0.25, "25%"],
+						[0.5, "50%"],
+						[1.0, "100% (same as egg cells)"],
+						[1.5, "150%"],
+						[2.0, "200% (default)"],
+						[3.0, "300%"],
+						[4.0, "400%"],
+						[5.0, "500%"],
+					],
 					"tab": TAB_GAMEPLAY,
 				},
 				{
@@ -1133,6 +1156,8 @@ func applyOption(categoryID, optionID, value):
 			maxKeepPCKids = value
 		if(optionID == "maxKeepNPCKids"):
 			maxKeepNPCKids = value
+		if(optionID == "bigEggsGrowthMult"):
+			bigEggsGrowthMult = value
 	
 	if categoryID == "difficulty":
 		if optionID == "hardStruggleEnabled":
@@ -1330,6 +1355,7 @@ func saveData():
 		"fetchNewRelease": fetchNewRelease,
 		"menstrualCycleLengthDays": menstrualCycleLengthDays,
 		"eggCellLifespanHours": eggCellLifespanHours,
+		"bigEggsGrowthMult": bigEggsGrowthMult,
 		"playerPregnancyTimeDays": playerPregnancyTimeDays,
 		"npcPregnancyTimeDays": npcPregnancyTimeDays,
 		"impregnationChanceModifier": impregnationChanceModifier,
@@ -1395,6 +1421,7 @@ func loadData(data):
 	fpsLimit = loadVar(data, "fpsLimit", 0)
 	menstrualCycleLengthDays = loadVar(data, "menstrualCycleLengthDays", 7)
 	eggCellLifespanHours = loadVar(data, "eggCellLifespanHours", 48)
+	bigEggsGrowthMult = loadVar(data, "bigEggsGrowthMult", 2.0)
 	playerPregnancyTimeDays = loadVar(data, "playerPregnancyTimeDays", 5)
 	npcPregnancyTimeDays = loadVar(data, "npcPregnancyTimeDays", 5)
 	impregnationChanceModifier = loadVar(data, "impregnationChanceModifier", 100)

@@ -3,7 +3,7 @@ class_name EggCell
 
 var lifeSpan: int # seconds
 var orificeType: int = OrificeType.Vagina
-var isimpregnated = false
+var isimpregnated:bool = false
 var motherID:String = ""
 var fatherID:String = ""
 var causerID:String = ""
@@ -76,14 +76,15 @@ func removeMe():
 
 # Seconds
 func getGestationTime() -> int:
+	var bigEggsMult:float = 1.0 if !bigEgg else OPTIONS.getBigEggsGrowthMult()
 	if(motherID == "pc"):
 		var pcPregTime:int = OPTIONS.getPlayerPregnancyTimeDays()
 		pcPregTime = Util.maxi(pcPregTime, 1)
-		return 60*60*24*pcPregTime
+		return int(float(60*60*24*pcPregTime)/bigEggsMult)
 	else:
 		var npcPregTime:int = OPTIONS.getNPCPregnancyTimeDays()
 		npcPregTime = Util.maxi(npcPregTime, 1)
-		return 60*60*24*npcPregTime
+		return int(float(60*60*24*npcPregTime)/bigEggsMult)
 	
 	#return 60*60*24*7
 

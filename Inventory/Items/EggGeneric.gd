@@ -11,6 +11,11 @@ func getVisibleName():
 func setEggLaid(_egg:EggLaid):
 	egg = _egg
 
+func isOffspringEgg() -> bool:
+	if(egg):
+		return egg.isOffspringEgg()
+	return false
+
 func getDescription():
 	if(!egg):
 		return ""

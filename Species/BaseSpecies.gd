@@ -158,6 +158,14 @@ func getEggCellOvulationAmount():
 		[2, 1.0],
 	]
 
+func getEggsOvulationAmount() -> Array:
+	var result:Array = getEggCellOvulationAmount()
+	for theEntry in result:
+		if(theEntry[0] < 10):
+			theEntry[0] *= 3
+			theEntry[0] = Util.mini(theEntry[0], 10)
+	return result
+
 # How often is this species will show up in procedural encounters. 0 = never, 0-1 = less often, 1 = default chance, >1 = more often
 func npcGenerationWeight():
 	if(!isPlayable() || id == "error"):
@@ -198,7 +206,8 @@ func generateEggType(_laidEgg:EggLaid) -> int:
 	return TentacleEggType.NONE
 
 func generateEggColor(_laidEgg:EggLaid) -> Color:
-	return Color.white
+	#return Color.white
+	return ColorUtils.generateNaturalEggColor()
 
 func onEggLaid(_laidEgg:EggLaid, _eggCell:EggCell):
 	pass

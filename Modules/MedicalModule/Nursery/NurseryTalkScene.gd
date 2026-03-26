@@ -100,7 +100,12 @@ func _run():
 		else:
 			addDisabledButton("Induce birth", "You need to be pregnant to do that")
 			addDisabledButton("Give birth", "You need to be pregnant to do that")
-			
+		
+		if(GM.pc.getInventory().hasAnyOffspringEggs()):
+			addButton("Give eggs", "Give away all your offspring eggs so that they can be added into the database.", "give_eggs")
+		else:
+			addDisabledButton("Give eggs", "You don't have any offspring eggs.")
+		
 		addButton("Leave", "Time to go", "endthescene")
 		GM.ES.triggerRun(Trigger.TalkingToNPC, ["nurse"])
 
@@ -412,6 +417,32 @@ func _react(_action: String, _args):
 		
 	if(_action == "endthescene"):
 		endScene()
+		return
+	
+	if(_action == "give_eggs"):
+		var theEggs:Array = GM.pc.getInventory().getOffspringEggs()
+		
+		var pcFatherAm:int = 0
+		var pcOtherAm:int = 0
+		var addedAm:int = 0
+		for theEgg in theEggs:
+			if(!theEgg.egg):
+				continue
+			
+			if(theEgg.egg.isPCFather()):
+				pcFatherAm += 1
+			else:
+				pcOtherAm += 1
+			if(theEgg.egg.addSelfToNursery()):
+				addedAm += 1
+			GM.pc.getInventory().removeItem(theEgg)
+		
+		addMessage(str(addedAm)+" egg"+("s" if addedAm != 1 else "")+" got added to the database!")
+		
+		if(pcFatherAm > 0):
+			GM.pc.addSkillExperience(Skill.Breeder, 10*pcFatherAm)
+		if(pcOtherAm > 0):
+			GM.pc.addSkillExperience(Skill.Fertility, 10*pcOtherAm)
 		return
 	
 	setState(_action)

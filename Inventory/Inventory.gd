@@ -786,6 +786,21 @@ func removeTFPillWithEffect(tfID:String):
 				item.removeXOrDestroy(1)
 				return
 
+func hasAnyOffspringEggs() -> bool:
+	for item in items:
+		if(item.id == "EggGeneric"):
+			if(item.isOffspringEgg()):
+				return true
+	return false
+
+func getOffspringEggs() -> Array:
+	var result:Array = []
+	for item in items:
+		if(item.id == "EggGeneric"):
+			if(item.isOffspringEgg()):
+				result.append(item)
+	return result
+
 func saveData():
 	var data = {}
 	

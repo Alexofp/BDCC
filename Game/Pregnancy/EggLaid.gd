@@ -36,12 +36,24 @@ func getEggDescription() -> String:
 	var resultGender:String = data.get("resultGender", NpcGender.Male)
 	var speciesArray:Array = data.get("resultSpecies", [])
 	
+	result += "Nursery will accept this egg.\n\n"
+	
 	result += "Species: "+Util.getSpeciesName(speciesArray)
 	result += "\nMother: "+internal_charName(motherID)
 	result += "\nFather: "+internal_charName(fatherID)
 	result += "\nGender: "+NpcGender.getVisibleNameColored(resultGender)
 	
 	return result+byWho
+
+func isPCMother() -> bool:
+	if(data.empty()):
+		return false
+	return data.get("motherID", "") == "pc"
+
+func isPCFather() -> bool:
+	if(data.empty()):
+		return false
+	return data.get("fatherID", "") == "pc"
 
 func internal_charName(_charID:String) -> String:
 	var theCharacter = GlobalRegistry.getCharacter(_charID)
@@ -87,7 +99,12 @@ func createItem():
 	genericEgg.setEggLaid(self)
 	return genericEgg
 
+func isOffspringEgg() -> bool:
+	return type == TentacleEggType.NONE && !data.empty()
+
 func canSellEgg() -> bool:
+	if(isOffspringEgg()):
+		return false
 	return true
 
 func getEggSellPrice() -> int:
@@ -165,28 +182,30 @@ func tryGetMainSpecies():
 	return GlobalRegistry.getSpecies(theSpeciesID)
 
 func onCreated(_egg:EggCell):
+	generateEggTypeAndColor()
+	
 	if(type == TentacleEggType.NONE):
 		var theSpecies = tryGetMainSpecies()
 		if(theSpecies):
 			theSpecies.onEggLaid(self, _egg)
 
-# Returns either an egg type or a color, used for the egg prop
+func generateEggTypeAndColor():
+	if(type == TentacleEggType.Plant):
+		laidType = type
+	elif(type == TentacleEggType.Latex):
+		laidType =  type
+	else:
+		var theSpecies = tryGetMainSpecies()
+		if(theSpecies):
+			laidType = theSpecies.generateEggType(self)
+			laidColor = theSpecies.generateEggColor(self)
+		else:
+			laidType = TentacleEggType.NONE
+
 func getEggColor() -> Color:
 	return laidColor
 
 func getEggLaidType() -> int:
-	if(laidType < 0):
-		if(type == TentacleEggType.Plant):
-			laidType = type
-		elif(type == TentacleEggType.Latex):
-			laidType =  type
-		else:
-			var theSpecies = tryGetMainSpecies()
-			if(theSpecies):
-				laidType = theSpecies.generateEggType(self)
-				laidColor = theSpecies.generateEggColor(self)
-			else:
-				laidType = TentacleEggType.NONE
 	return laidType
 
 static func getEggQueue(_eggs:Array) -> Array:
@@ -241,5 +260,5 @@ func loadData(_data:Dictionary):
 	laidBy = SAVE.loadVar(_data, "laidBy", "")
 	orifice = SAVE.loadVar(_data, "orifice", OrificeType.Anus)
 	data = SAVE.loadVar(_data, "data", {})
-	laidType = SAVE.loadVar(_data, "laidColor", -1)
+	laidType = SAVE.loadVar(_data, "laidType", -1)
 	laidColor = Color("#"+SAVE.loadVar(_data, "laidColor", ""))
