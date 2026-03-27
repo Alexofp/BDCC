@@ -113,4 +113,33 @@ func canDye():
 
 func getStraponTraits() -> Dictionary:
 	return {
+		PartTrait.Ovipositor: true, #TODO: Remove me
+	}
+
+func canStuffEggInto(_targetChar, _bodypart:String) -> bool:
+	var theWearer = getWearer()
+	
+	if(!_targetChar || !_targetChar.getMenstrualCycle()):
+		return false
+	
+	if(theWearer && theWearer.isEggStuffed()):
+		return true
+	
+	return false
+
+func doStuffEggInto(_targetChar, _bodypart:String) -> Dictionary:
+	var theWearer = getWearer()
+	
+	var ourMenstrualCycle:MenstrualCycle = theWearer.getMenstrualCycle()
+	var targetMenstrualCycle:MenstrualCycle = _targetChar.getMenstrualCycle()
+	if(!ourMenstrualCycle || !targetMenstrualCycle):
+		return {success = false}
+	
+	var theEgg:EggCell = ourMenstrualCycle.transferAnyBigEggTo(targetMenstrualCycle, OrificeType.fromBodypart(_bodypart))
+	if(!theEgg):
+		return {success = false}
+	
+	return {
+		success = true,
+		text = "!MEOW MEOW!"#"{<USER>.You} An egg got stuffed into {<TARGET>.your} hole.",
 	}

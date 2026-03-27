@@ -685,6 +685,7 @@ func layEggSpecific(_egg:EggCell) -> EggLaid:
 	newEgg.data = theData
 	newEgg.onCreated(_egg)
 	
+	resetNotifications()
 	return newEgg
 
 func layEggs(_time:int = 30*60, _isAtNursery:bool = false, _layAll:bool = false) -> Array:
@@ -716,6 +717,12 @@ func giveEggItems(_laidEggs:Array, _isAtNursery:bool = false):
 func generateLayEggsReport(_eggs:Array, _isAtNursery:bool = false) -> String:
 	return Util.join(EggLaid.generateEggReport(_eggs), "\n")
 
+func resetNotifications():
+	noticedVisiblyPregnant = isVisiblyPregnant()
+	if(!noticedVisiblyPregnant):
+		noticedHeavyIntoPregnancy = false
+		noticedReadyToGiveBirth = false
+
 func giveBirth() -> Array:
 	if(impregnatedEggCells.size() <= 0):
 		return []
@@ -730,9 +737,7 @@ func giveBirth() -> Array:
 	
 	impregnatedEggCells.clear()
 	cycleProgress = 1.0
-	noticedVisiblyPregnant = false
-	noticedHeavyIntoPregnancy = false
-	noticedReadyToGiveBirth = false
+	resetNotifications()
 	
 	return result
 
@@ -740,11 +745,10 @@ func cancelPregnancy(_cancelNormalPregnancy:bool = true, _deleteBigEggs:bool = t
 	if(_cancelNormalPregnancy):
 		impregnatedEggCells.clear()
 		cycleProgress = 1.0
-		noticedVisiblyPregnant = false
-		noticedHeavyIntoPregnancy = false
-		noticedReadyToGiveBirth = false
 	if(_deleteBigEggs):
 		bigEggs.clear()
+	
+	resetNotifications()
 
 func getEggStuffedOrifices() -> Array:
 	var theStuffed:Dictionary = {}
@@ -754,4 +758,47 @@ func getEggStuffedOrifices() -> Array:
 			theStuffed[theEgg.orificeType] = true
 	
 	return theStuffed.keys()
-		
+
+func transferSpecificEggTo(_eggCell:EggCell, _otherCycle, _orificeTarget:int) -> bool:
+	if(!_otherCycle):
+		return false
+	
+	var theEggType:int = 0
+	if(impregnatedEggCells.has(_eggCell)):
+		impregnatedEggCells.erase(_eggCell)
+		theEggType = 1
+	elif(bigEggs.has(_eggCell)):
+		bigEggs.erase(_eggCell)
+		theEggType = 2
+	else:
+		return false
+	
+	_eggCell.orificeType = _orificeTarget
+	
+	if(theEggType == 1):
+		_otherCycle.impregnatedEggCells.append(_eggCell)
+	elif(theEggType == 2):
+		_otherCycle.bigEggs.append(_eggCell)
+	else:
+		return false
+	
+	_otherCycle.resetNotifications() # No need to trigger the notification
+	return true
+
+func transferAnyBigEggTo(_otherCycle, _targetOrifice:int, _orificeFilter:Array = []) -> EggCell:
+	var hasFilter:bool = !_orificeFilter.empty()
+	
+	var pickedEgg:EggCell
+	if(hasFilter):
+		var theEggs:Array = bigEggs.duplicate()
+		theEggs.shuffle()
+		for theEgg in theEggs:
+			if(theEgg.orificeType in _orificeFilter):
+				pickedEgg = theEgg
+				break
+	else:
+		pickedEgg = RNG.pick(bigEggs)
+	
+	if(transferSpecificEggTo(pickedEgg, _otherCycle, _targetOrifice)):
+		return pickedEgg
+	return null

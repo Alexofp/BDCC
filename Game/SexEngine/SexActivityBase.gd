@@ -3382,3 +3382,57 @@ func stuffTentacleEggRandomHole(_indx:int, _addMessage:bool = true, _tentacleInd
 	var theHole:String = RNG.pick(possibleHoles)
 	
 	return stuffTentacleEgg(_indx, theHole, _addMessage, _tentacleIndx)
+
+func canStuffEggInto(_roleMain:int, _roleTarget:int, _bodypart:String) -> bool:
+	var _main := getDomOrSub(_roleMain)
+	var _target := getDomOrSub(_roleTarget)
+	if(!_main || !_target):
+		return false
+	
+	var theStrapon :ItemBase = _main.getWornStrapon()
+	if(theStrapon):
+		if(theStrapon.has_method("getStraponTraits") && theStrapon.has_method("canStuffEggInto")):
+			if(theStrapon.getStraponTraits().get(PartTrait.Ovipositor, false)):
+				return theStrapon.canStuffEggInto(_target, _bodypart)
+		return false
+
+	if(!_main.hasPenis()):
+		return false
+	var thePenis:BodypartPenis = _main.getBodypart(BodypartSlot.Penis)
+	if(thePenis.hasTrait(PartTrait.Ovipositor) && thePenis.has_method("canStuffEggInto")):
+		return thePenis.canStuffEggInto(_target, _bodypart)
+	return false
+
+func doStuffEggInto(_roleMain:int, _roleTarget:int, _bodypart:String, _showMessage:bool = true) -> Dictionary:
+	var _main := getDomOrSub(_roleMain)
+	var _target := getDomOrSub(_roleTarget)
+	if(!_main || !_target):# || !_target.isDynamicCharacter()):
+		return {success = false}
+	
+	var theStrapon :ItemBase = _main.getWornStrapon()
+	if(theStrapon):
+		if(theStrapon.has_method("getStraponTraits") && theStrapon.has_method("canStuffEggInto") && theStrapon.has_method("doStuffEggInto")):
+			if(theStrapon.getStraponTraits().get(PartTrait.Ovipositor, false)):
+				if(theStrapon.canStuffEggInto(_target, _bodypart)):
+					var theResult:Dictionary = theStrapon.doStuffEggInto(_target, _bodypart)
+					if(!theResult.get("success", false)):
+						return {success = false}
+					
+					if(_showMessage && !theResult.get("text", "").empty()):
+						addTextRaw(theResult["text"])
+					
+					return theResult
+		return {success = false}
+	
+	if(!_main.hasPenis()):
+		return {success = false}
+	var thePenis:BodypartPenis = _main.getBodypart(BodypartSlot.Penis)
+	if(thePenis.hasTrait(PartTrait.Ovipositor) && thePenis.has_method("canStuffEggInto") && thePenis.has_method("doStuffEggInto")):
+		if(thePenis.canStuffEggInto(_target, _bodypart)):
+			var theResult:Dictionary = thePenis.doStuffEggInto(_target, _bodypart)
+			if(!theResult.get("success", false)):
+				return {success = false}
+			
+			if(_showMessage && !theResult.get("text", "").empty()):
+				addTextRaw(theResult["text"])
+	return {success = false}

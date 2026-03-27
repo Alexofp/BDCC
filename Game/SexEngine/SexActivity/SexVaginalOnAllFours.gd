@@ -378,6 +378,8 @@ func getActions(_indx:int):
 			addAction("stop", getStopScore(), "Stop fuck", "Stop fucking")
 		if(state in ["fucking"]):
 			addAction("slowdown", getPauseSexScore(DOM_0, SUB_0, usedBodypart), "Slow down", "Stop fucking for a second..", {A_PRIORITY: 1})
+			if(canStuffEggInto(DOM_0, SUB_0, usedBodypart)):
+				addAction("stuffegg", 0.0, "STUFF EGG", "Stuff an egg into them..", {A_PRIORITY: 2})
 			
 			if(isStraponSex() && getDom().bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)):
 				var subArousal:float = getSubInfo().getArousal()
@@ -443,6 +445,8 @@ func getActions(_indx:int):
 				addAction("subcum", 1.0, "Cum!", "You're about to cum!", {A_PRIORITY: 1001})
 		
 func doAction(_indx:int, _id:String, _action:Dictionary):
+	if(_id == "stuffegg"):
+		doStuffEggInto(DOM_0, SUB_0, usedBodypart)
 	if(_id == "straponForceKnot"):
 		# Need a tryKnot func?
 		#if(tryPenetrate())

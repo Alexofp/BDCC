@@ -152,13 +152,17 @@ func _react(_action: String, _args):
 		#runScene("GenericSexScene", ["rahi", "pc", SexType.DefaultSex, {SexMod.SubsStartUnconscious: true}])
 		#runScene("GenericSexScene", ["pc", "rahi", SexType.BitchsuitSex, {}])
 		
+		GM.pc.giveBodypartUnlessSame(GlobalRegistry.createBodypart("vaginaEggs"))
 		GM.pc.menstrualCycle.newCycle()
 		GM.pc.menstrualCycle.forceIntoHeat()
 		GM.pc.menstrualCycle.forceOvulate()
-		getCharacter("nova").fillBalls(1.0)
-		GM.pc.cummedInVaginaBy("nova")
+		#getCharacter("nova").fillBalls(1.0)
+		#GM.pc.cummedInVaginaBy("nova")
+		GM.pc.menstrualCycle.forceImpregnateBy("nova")
+		GM.pc.removeBodypart(BodypartSlot.Penis)
+		GM.pc.getInventory().addItem(GlobalRegistry.createItem("Strapon"))
 		
-		#runScene("GenericSexScene", ["pc", "rahi"])
+		runScene("GenericSexScene", ["pc", "rahi"])
 		
 		#var theCycle:MenstrualCycle = GM.pc.getMenstrualCycle()
 		#if(theCycle):
