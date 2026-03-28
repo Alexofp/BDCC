@@ -2,7 +2,7 @@ extends Reference
 class_name LightInventory
 # Just a simple item storage. No equipped items support. Also is a reference instead of a node
 
-var items = []
+var items:Array = []
 
 func addItem(item: Reference):
 	if(item.currentInventory != null):
@@ -18,23 +18,23 @@ func addItem(item: Reference):
 	items.append(item)
 	item.currentInventory = self
 
-func hasItem(item):
+func hasItem(item) -> bool:
 	return items.has(item)
 
-func hasItemID(itemID: String):
+func hasItemID(itemID: String) -> bool:
 	for item in items:
 		if(item.id == itemID):
 			return true
 	return false
 
-func getItems():
+func getItems() -> Array:
 	return items
 
-func getAllItems():
+func getAllItems() -> Array:
 	return items
 
-func getAllOf(itemID: String):
-	var result = []
+func getAllOf(itemID: String) -> Array:
+	var result:Array = []
 	
 	for item in items:
 		if(item.id == itemID):
@@ -48,7 +48,7 @@ func getFirstOf(itemID: String):
 			return item
 	return null
 
-func hasItemWithUniqueID(uniqueID: String):
+func hasItemWithUniqueID(uniqueID: String) -> bool:
 	for item in items:
 		if(item.uniqueID == uniqueID):
 			return true
@@ -67,18 +67,18 @@ func removeItem(item):
 		return item
 	return null
 
-func removeXFromItemOrDelete(item, amount):
+func removeXFromItemOrDelete(item, amount:int):
 	assert(items.has(item))
 	
 	item.removeXOrDestroy(amount)
 
-func getAmountOf(itemID):
+func getAmountOf(itemID:String) -> int:
 	var item = getFirstOf(itemID)
 	if(item == null):
 		return 0
 	return item.amount
 
-func hasXOf(itemID, amount):
+func hasXOf(itemID:String, amount:int) -> bool:
 	var item = getFirstOf(itemID)
 	if(item == null):
 		return false
@@ -87,15 +87,15 @@ func hasXOf(itemID, amount):
 	else:
 		return false
 
-func removeXOfOrDestroy(itemID, amount):
+func removeXOfOrDestroy(itemID:String, amount:int):
 	var item = getFirstOf(itemID)
 	if(item == null):
 		return
 	
 	item.removeXOrDestroy(amount)
 
-func getAllCombatUsableItems():
-	var result = []
+func getAllCombatUsableItems() -> Array:
+	var result:Array = []
 	
 	for item in items:
 		if(item.canUseInCombat()):
@@ -113,21 +113,27 @@ func removeItemsList(itemsToDelete: Array):
 	for item in itemsToDelete:
 		removeItem(item)
 
-func getItemsWithTag(tag):
-	var result = []
+func getItemsWithTag(tag:String) -> Array:
+	var result:Array = []
 	for item in items:
 		if(item.hasTag(tag)):
 			result.append(item)
 	return result
 
-func isEmpty():
+func isEmpty() -> bool:
 	return items.empty()
 
 func getCharacter():
 	return null
 
-func saveData():
-	var data = {}
+func getTotalAmountOfItemsWithStack() -> int:
+	var result:int = 0
+	for theItem in items:
+		result += theItem.getAmount()
+	return result
+
+func saveData() -> Dictionary:
+	var data:Dictionary = {}
 	
 	data["items"] = []
 	
@@ -142,14 +148,14 @@ func saveData():
 		
 	return data
 	
-func loadData(data):
+func loadData(data:Dictionary):
 	clear()
-	var loadedItems = SAVE.loadVar(data, "items", [])
+	var loadedItems:Array = SAVE.loadVar(data, "items", [])
 	
 	for loadedItem in loadedItems:
-		var id = SAVE.loadVar(loadedItem, "id", "")
+		var id:String = SAVE.loadVar(loadedItem, "id", "")
 		var uniqueID = SAVE.loadVar(loadedItem, "uniqueID", "")
-		var itemLoadedData = SAVE.loadVar(loadedItem, "data", {})
+		var itemLoadedData:Dictionary = SAVE.loadVar(loadedItem, "data", {})
 		
 		var newItem: ItemBase = GlobalRegistry.createItem(id, false)
 		if(!newItem):

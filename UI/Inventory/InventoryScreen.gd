@@ -21,6 +21,7 @@ var currentMode = ""
 var isBuy = false
 var isSell = false
 var isLoot = false
+var shouldGroup:bool = true
 
 var shouldGrabInput = true
 
@@ -67,16 +68,25 @@ func updateInventory():
 	#	return
 	
 	var theItemsGrouped = itemsByGroup#inventory.getItemsAndEquippedItemsTogetherGrouped()
-	if(theItemsGrouped is Array):
-		var newItemsGrouped = {}
-		for item in theItemsGrouped:
-			if(!item):
-				continue
-			if(!newItemsGrouped.has(item.id)):
-				newItemsGrouped[item.id] = [item]
-			else:
-				newItemsGrouped[item.id].append(item)
-		theItemsGrouped = newItemsGrouped
+	if(shouldGroup):
+		if(theItemsGrouped is Array):
+			var newItemsGrouped = {}
+			for item in theItemsGrouped:
+				if(!item):
+					continue
+				if(!newItemsGrouped.has(item.id)):
+					newItemsGrouped[item.id] = [item]
+				else:
+					newItemsGrouped[item.id].append(item)
+			theItemsGrouped = newItemsGrouped
+	else:
+		if(theItemsGrouped is Array):
+			var newItemsGrouped = {}
+			for item in theItemsGrouped:
+				if(!item):
+					continue
+				newItemsGrouped[item.id+"__"+str(item.uniqueID)] = [item]
+			theItemsGrouped = newItemsGrouped
 	
 	# Items that we can use are first while in combat
 	if(currentMode == "fight"):

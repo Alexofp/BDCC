@@ -416,6 +416,20 @@ func hasEggsInOrifice(_orifice:int, _onlyTentacle:bool = false) -> bool:
 			return true
 	return false
 
+func addImpregnatedEggCell(egg:EggCell, _orifice:int) -> bool:
+	if(!hasOrifice(_orifice)):
+		return false
+	egg.cycle = weakref(self)
+	egg.setOrifice(_orifice)
+	#egg.setMother(getCharacter().getID(), getCharacter().getSpecies())
+	egg.isimpregnated = true
+	
+	if(egg.bigEgg):
+		bigEggs.append(egg)
+	else:
+		impregnatedEggCells.append(egg)
+	return true
+
 func addTentacleEgg(_charID:String, _tentacleType:int, _growTime:int, _orifice:int) -> bool:
 	if(!hasOrifice(_orifice)):
 		return false

@@ -113,21 +113,16 @@ func canDye():
 
 func getStraponTraits() -> Dictionary:
 	return {
-		PartTrait.Ovipositor: true, #TODO: Remove me
 	}
 
 func canStuffEggInto(_targetChar, _bodypart:String) -> bool:
-	var theWearer = getWearer()
-	
-	if(!_targetChar || !_targetChar.getMenstrualCycle()):
-		return false
-	
-	if(theWearer && theWearer.isEggStuffed()):
-		return true
-	
 	return false
 
 func doStuffEggInto(_targetChar, _bodypart:String) -> Dictionary:
+	return {success = false}
+
+
+func doStuffEggIntoTransfer(_targetChar, _bodypart:String) -> Dictionary:
 	var theWearer = getWearer()
 	
 	var ourMenstrualCycle:MenstrualCycle = theWearer.getMenstrualCycle()
@@ -143,3 +138,14 @@ func doStuffEggInto(_targetChar, _bodypart:String) -> Dictionary:
 		success = true,
 		text = "!MEOW MEOW!"#"{<USER>.You} An egg got stuffed into {<TARGET>.your} hole.",
 	}
+
+func canStuffEggIntoTransfer(_targetChar, _bodypart:String) -> bool:
+	var theWearer = getWearer()
+	
+	if(!_targetChar || !_targetChar.getMenstrualCycle()):
+		return false
+	
+	if(theWearer && theWearer.isEggStuffed()):
+		return true
+	
+	return false

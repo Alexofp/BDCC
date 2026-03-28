@@ -69,6 +69,12 @@ func getTags():
 func getItemCategory():
 	return ItemCategory.Generic
 
+func createEggCellForOviposition() -> EggCell:
+	var theEggCell := egg.createEggCell()
+	if(theEggCell):
+		theEggCell.progress = 0.5 # Half of the normal pregnancy
+	return theEggCell
+
 func saveData():
 	var data = .saveData()
 	
