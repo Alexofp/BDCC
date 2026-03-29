@@ -92,7 +92,7 @@ func getActions(_indx:int):
 func doAction(_indx:int, _actionID:String, _action:Dictionary):
 	if(_actionID == "addegg"):
 		var theMenstrualCycle:MenstrualCycle = getSub().getMenstrualCycle()
-		var theTentacleType:int = RNG.pick([TentacleEggType.Plant, TentacleEggType.Latex, TentacleEggType.NONE])
+		var theTentacleType:int = RNG.pick([BigEggType.Plant, BigEggType.Latex, BigEggType.Fertilized])
 		var theEggTime:int = 0
 		var theOrifice:int = OrificeType.Vagina
 		theMenstrualCycle.addTentacleEgg(getDomID(), theTentacleType, theEggTime, theOrifice)
@@ -118,7 +118,7 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 		GM.main.RS.addAffection(getSubID(), getDomID(), -0.02*theAmToSteal)
 	
 	if(_actionID == "egg"):
-		eggTypeOrColor = TentacleEggType.Plant
+		eggTypeOrColor = BigEggType.Plant
 		
 		if(!getSub().menstrualCycle.isReadyToLayEggsCanContinue()):
 			shouldDoFlopAnim = true

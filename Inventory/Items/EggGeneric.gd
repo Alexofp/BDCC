@@ -56,6 +56,9 @@ func canSell():
 	return false
 
 func canCombine():
+	if(egg.data.empty()):
+		return true
+	
 	return false
 #
 #func tryCombine(_otherItem):
@@ -72,7 +75,10 @@ func getItemCategory():
 func createEggCellForOviposition() -> EggCell:
 	var theEggCell := egg.createEggCell()
 	if(theEggCell):
-		theEggCell.progress = 0.5 # Half of the normal pregnancy
+		if(theEggCell.isImpregnated()):
+			theEggCell.progress = 0.5 # Half of the normal pregnancy
+		else:
+			theEggCell.lifeSpan = Util.maxi(theEggCell.lifeSpan, 6*60*60) # 6 hours at least
 	return theEggCell
 
 func saveData():

@@ -111,8 +111,7 @@ func doStuffEggInto(_targetChar, _bodypart:String) -> Dictionary:
 		return {success = false}
 	
 	var theEggCell:EggCell = theRandomEgg.createEggCellForOviposition()
-	#TODO: Set the target char as a host?
-	targetMenstrualCycle.addImpregnatedEggCell(theEggCell, OrificeType.fromBodypart(_bodypart))
+	targetMenstrualCycle.injectEggCell(theEggCell, OrificeType.fromBodypart(_bodypart))
 	
 	if(theRandomEgg.getAmount() <= 1):
 		eggInv.removeItem(theRandomEgg)

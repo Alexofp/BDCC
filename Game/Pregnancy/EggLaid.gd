@@ -1,7 +1,7 @@
 extends Reference
 class_name EggLaid
 
-var type:int = TentacleEggType.Plant
+var type:int = BigEggType.Plant
 var laidBy:String = "" # The character id of the character that laid this egg
 var orifice:int = OrificeType.Anus # What orifice has this egg originally came from
 var data:Dictionary
@@ -22,10 +22,12 @@ func getEggDescription() -> String:
 		else:
 			byWho = "\n\nThis egg was laid by "+str(theChar.getName())
 	
-	if(type == TentacleEggType.Plant):
+	if(type == BigEggType.Plant):
 		return "Plant egg"+byWho
-	if(type == TentacleEggType.Latex):
+	if(type == BigEggType.Latex):
 		return "An egg that is made out of latex. Doesn't have much use.. but it can be sold probably."+byWho
+	if(type == BigEggType.Unfertilized):
+		return "This egg wasn't fertilized. It contains no DNA and is therefore useless."+byWho
 	
 	if(data.empty()):
 		return "Unknown egg"+byWho
@@ -62,35 +64,38 @@ func internal_charName(_charID:String) -> String:
 	return theCharacter.getName()
 
 static func getNameByEggType(_type:int) -> String:
-	if(_type == TentacleEggType.Plant):
+	if(_type == BigEggType.Plant):
 		return "Plant egg"
-	if(_type == TentacleEggType.Latex):
+	if(_type == BigEggType.Latex):
 		return "Latex egg"
+	if(_type == BigEggType.Unfertilized):
+		return "Unfertilized egg"
 	return "Offspring egg"
 
 func addSelfToNursery() -> bool:
 	var theEggCell := createEggCell()
-	if(!theEggCell):
+	if(!theEggCell || !theEggCell.isImpregnated()):
 		return false
 	var bornChildren := theEggCell.makeChilds()
 	for child in bornChildren:
+		child.setLaidByID(laidBy)
 		GM.CS.addChild(child)
 	return true
 
 func handleNursery() -> bool:
-	if(type == TentacleEggType.NONE):
+	if(type == BigEggType.Fertilized):
 		addSelfToNursery()
 		return true
 	return false
 
 func handleDisposalByNPC() -> bool:
-	if(type == TentacleEggType.NONE):
+	if(type == BigEggType.Fertilized):
 		addSelfToNursery()
 		return true
 	return false
 
 func createItem():
-	if(type == TentacleEggType.Plant):
+	if(type == BigEggType.Plant):
 		var theEgg = GlobalRegistry.createItem("PlantEgg")
 		theEgg.whoGaveBirth = laidBy
 		return theEgg
@@ -100,7 +105,7 @@ func createItem():
 	return genericEgg
 
 func isOffspringEgg() -> bool:
-	return type == TentacleEggType.NONE && !data.empty()
+	return type == BigEggType.Fertilized && !data.empty()
 
 func canSellEgg() -> bool:
 	if(isOffspringEgg()):
@@ -117,9 +122,11 @@ func getBodypart() -> String:
 	return OrificeType.toBodypart(orifice)
 
 static func canCombineForReportType(_eggType:int) -> bool:
-	if(_eggType == TentacleEggType.Latex):
+	if(_eggType == BigEggType.Latex):
 		return true
-	if(_eggType == TentacleEggType.Plant):
+	if(_eggType == BigEggType.Plant):
+		return true
+	if(_eggType == BigEggType.Unfertilized):
 		return true
 	return false
 
@@ -182,25 +189,13 @@ func tryGetMainSpecies():
 	return GlobalRegistry.getSpecies(theSpeciesID)
 
 func onCreated(_egg:EggCell):
-	generateEggTypeAndColor()
+	laidType = _egg.laidType
+	laidColor = _egg.laidColor
 	
-	if(type == TentacleEggType.NONE):
+	if(type == BigEggType.Fertilized):
 		var theSpecies = tryGetMainSpecies()
 		if(theSpecies):
 			theSpecies.onEggLaid(self, _egg)
-
-func generateEggTypeAndColor():
-	if(type == TentacleEggType.Plant):
-		laidType = type
-	elif(type == TentacleEggType.Latex):
-		laidType =  type
-	else:
-		var theSpecies = tryGetMainSpecies()
-		if(theSpecies):
-			laidType = theSpecies.generateEggType(self)
-			laidColor = theSpecies.generateEggColor(self)
-		else:
-			laidType = TentacleEggType.NONE
 
 func getEggColor() -> Color:
 	return laidColor
@@ -217,18 +212,22 @@ static func getEggQueue(_eggs:Array) -> Array:
 	return result
 
 func getEggColorOrType():
-	if(laidType == TentacleEggType.Plant):
+	if(laidType == BigEggType.Plant):
 		return laidType
-	elif(laidType == TentacleEggType.Latex):
+	elif(laidType == BigEggType.Latex):
 		return laidType
+	elif(laidType == BigEggType.Unfertilized):
+		return Color.whitesmoke
 	else:
 		return laidColor
 
 func getEggItemImagePath() -> String:
-	if(type == TentacleEggType.Plant):
+	if(type == BigEggType.Plant):
 		return "res://Images/Items/medical/egg-shell.png"
-	if(type == TentacleEggType.Latex):
+	if(type == BigEggType.Latex):
 		return "res://Images/Items/medical/egg-latex.png"
+	if(type == BigEggType.Unfertilized):
+		return "res://Images/Items/medical/egg.png"
 	var theSpecies = tryGetMainSpecies()
 	if(theSpecies):
 		return theSpecies.getEggInventorySpritePath(self)
@@ -240,7 +239,13 @@ func getEggItemColor() -> Color:
 
 func createEggCell() -> EggCell:
 	if(data.empty()):
-		return null
+		var newEggCell := EggCell.new()
+		newEggCell.bigEgg = true
+		newEggCell.bigEggType = type
+		newEggCell.orificeType = orifice
+		newEggCell.laidType = laidType
+		newEggCell.laidColor = laidColor
+		return newEggCell
 	var theEggCell := EggCell.new()
 	theEggCell.loadData(data)
 	return theEggCell
@@ -256,7 +261,7 @@ func saveData() -> Dictionary:
 	}
 
 func loadData(_data:Dictionary):
-	type = SAVE.loadVar(_data, "type", TentacleEggType.Plant)
+	type = SAVE.loadVar(_data, "type", BigEggType.Plant)
 	laidBy = SAVE.loadVar(_data, "laidBy", "")
 	orifice = SAVE.loadVar(_data, "orifice", OrificeType.Anus)
 	data = SAVE.loadVar(_data, "data", {})

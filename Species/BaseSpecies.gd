@@ -202,8 +202,8 @@ func calculateScoreForSpeciesCalculations(_npc) -> float:
 	return 1.0
 
 func generateEggType(_laidEgg:EggLaid) -> int:
-	#return TentacleEggType.Latex # Will make your species lay latex eggs
-	return TentacleEggType.NONE
+	#return BigEggType.Latex # Will make your species lay latex eggs
+	return BigEggType.Fertilized
 
 func generateEggColor(_laidEgg:EggLaid) -> Color:
 	#return Color.white

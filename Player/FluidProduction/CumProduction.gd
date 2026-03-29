@@ -3,13 +3,16 @@ class_name CumProduction
 
 func getCapacity() -> float:
 	var penis = getBodypart()
-	var lenCM = penis.getLength()
-	
-	var mult = 1.0
 	var pc = getCharacter()
+	
+	var mult:float = 1.0
 	if(pc != null):
 		mult += pc.getCustomAttribute(BuffAttribute.PenisBallsVolume)
 	
+	if(penis && penis.has_method("getOverrideCumCapacity")):
+		return penis.getOverrideCumCapacity(mult)
+	
+	var lenCM:float = penis.getLength()
 	return max(round((50.0 + pow(lenCM, 2.0)) * mult), 0.0)
 
 func getProductionSpeedPerHour() -> float:

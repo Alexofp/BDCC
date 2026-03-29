@@ -296,6 +296,15 @@ func removeEgg(egg:EggCell):
 	#print("EGG DIED")
 	
 func obsorbCum(_cumType, amountML:float, fluidDNA, orificeType:int = OrificeType.Vagina):
+	if(!bigEggs.empty()):
+		var egg = RNG.pick(bigEggs)
+		if(egg.bigEggType == BigEggType.Unfertilized && egg.orificeType == orificeType && !egg.isimpregnated):
+			var theMotherChar = getCharacter()
+			egg.setMother(theMotherChar.getID(), theMotherChar.getSpecies())
+			egg.bigEggType = BigEggType.Fertilized
+			egg.impregnatedBy(fluidDNA)
+			return
+
 	if(!hasWombIn(orificeType)):
 		return
 	
@@ -318,7 +327,7 @@ func isEggStuffed() -> bool:
 
 func isEggStuffedWithOffspring() -> bool:
 	for theEgg in bigEggs:
-		if(theEgg.isimpregnated && theEgg.tentacleEggType == TentacleEggType.NONE):
+		if(theEgg.isimpregnated && theEgg.bigEggType == BigEggType.Fertilized):
 			return true
 	return false
 
@@ -341,7 +350,7 @@ func isPregnantFromPlayer(_normalPreg:bool = true, _bigEggPreg:bool = true) -> b
 				return true
 	if(_bigEggPreg):
 		for egg in bigEggs:
-			if(!egg.isimpregnated || egg.tentacleEggType != TentacleEggType.NONE):
+			if(!egg.isimpregnated || egg.bigEggType != BigEggType.Fertilized):
 				continue
 			if(egg.getFatherID() == "pc" || egg.getMotherID() == "pc"):
 				return true
@@ -357,7 +366,7 @@ func isPregnantFrom(_charID:String, _normalPreg:bool = true, _bigEggPreg:bool = 
 				return true
 	if(_bigEggPreg):
 		for egg in bigEggs:
-			if(!egg.isimpregnated || egg.tentacleEggType != TentacleEggType.NONE):
+			if(!egg.isimpregnated || egg.bigEggType != BigEggType.Fertilized):
 				continue
 			if(egg.getFatherID() == _charID || egg.getMotherID() == _charID):
 				return true
@@ -373,7 +382,7 @@ func getPregnancyProgress(_normalPreg:bool = true, _bigEggPreg:bool = false) -> 
 	
 	if(_bigEggPreg):
 		for egg in bigEggs:
-			if(egg.tentacleEggType == TentacleEggType.NONE && egg.isimpregnated):
+			if(egg.bigEggType == BigEggType.Fertilized && egg.isimpregnated):
 				var newProgress:float = egg.getProgress()
 				if(newProgress > maxProgress):
 					maxProgress = newProgress
@@ -411,23 +420,24 @@ func isReadyToLayEggsCanContinue(_checkIfPlugged:bool = true) -> bool:
 func hasEggsInOrifice(_orifice:int, _onlyTentacle:bool = false) -> bool:
 	for egg in bigEggs:
 		if(egg.orificeType == _orifice):
-			if(_onlyTentacle && egg.tentacleEggType == TentacleEggType.NONE):
+			if(_onlyTentacle && egg.bigEggType == BigEggType.Fertilized):
 				continue
 			return true
 	return false
 
-func addImpregnatedEggCell(egg:EggCell, _orifice:int) -> bool:
+func injectEggCell(egg:EggCell, _orifice:int) -> bool:
 	if(!hasOrifice(_orifice)):
 		return false
 	egg.cycle = weakref(self)
 	egg.setOrifice(_orifice)
 	#egg.setMother(getCharacter().getID(), getCharacter().getSpecies())
-	egg.isimpregnated = true
+	#egg.isimpregnated = true
 	
 	if(egg.bigEgg):
 		bigEggs.append(egg)
 	else:
 		impregnatedEggCells.append(egg)
+	resetNotifications()
 	return true
 
 func addTentacleEgg(_charID:String, _tentacleType:int, _growTime:int, _orifice:int) -> bool:
@@ -451,7 +461,7 @@ func addTentacleEgg(_charID:String, _tentacleType:int, _growTime:int, _orifice:i
 		egg.resultGender = NpcGender.generate()
 	
 	egg.bigEgg = true
-	egg.tentacleEggType = _tentacleType
+	egg.bigEggType = _tentacleType
 	egg.lifeSpan = _growTime
 	
 	bigEggs.append(egg)
@@ -537,7 +547,7 @@ func getTimeUntilReadyForBirth() -> int:
 func getAmountOfEggsReadyToBeLaid(_time:int = 30*60) -> int:
 	return getEggsToBeLaid(_time).size()
 
-func delayEggs(_time:int = 3*60*60):
+func delayEggs(_time:int = 6*60*60):
 	for egg in bigEggs:
 		egg.delayEgg(_time)
 
@@ -671,7 +681,7 @@ func speedUpPregnancy():
 		var eggCell: EggCell = egg
 		eggCell.progress = 1.0
 
-# {type=TentacleEggType.Plant, laidBy=charID, orifice=OrificeType.Anus/Vagina, slot=BodypartSlot.Anus/Vagina, data=OPTIONAL}
+# {type=BigEggType.Plant, laidBy=charID, orifice=OrificeType.Anus/Vagina, slot=BodypartSlot.Anus/Vagina, data=OPTIONAL}
 func laySingleEgg(_time:int = 0) -> EggLaid:
 	if(bigEggs.empty()):
 		return null
@@ -690,10 +700,10 @@ func layEggSpecific(_egg:EggCell) -> EggLaid:
 		return null
 	bigEggs.erase(_egg)
 	
-	var theData:Dictionary = _egg.saveData() if _egg.tentacleEggType == TentacleEggType.NONE else {}
+	var theData:Dictionary = _egg.saveData() if _egg.bigEggType == BigEggType.Fertilized else {}
 	
 	var newEgg := EggLaid.new()
-	newEgg.type = _egg.tentacleEggType
+	newEgg.type = _egg.bigEggType
 	newEgg.laidBy = getCharacter().getID() if getCharacter() else ""
 	newEgg.orifice = _egg.orificeType
 	newEgg.data = theData

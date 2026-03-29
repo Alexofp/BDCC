@@ -537,11 +537,11 @@ func _react(_action: String, _args):
 		var theTentacles = getCharacter(_tentacles.getTentaclesCharID())
 		var theMenstrualCycle:MenstrualCycle = theChar.getMenstrualCycle()
 		for _i in range(7):
-			theMenstrualCycle.addTentacleEgg(_tentacles.getTentaclesCharID(), TentacleEggType.Plant, 12*60*60, OrificeType.Vagina)
+			theMenstrualCycle.addTentacleEgg(_tentacles.getTentaclesCharID(), BigEggType.Plant, 12*60*60, OrificeType.Vagina)
 		for _i in range(5):
-			theMenstrualCycle.addTentacleEgg(_tentacles.getTentaclesCharID(), TentacleEggType.Plant, 12*60*60, OrificeType.Anus)
+			theMenstrualCycle.addTentacleEgg(_tentacles.getTentaclesCharID(), BigEggType.Plant, 12*60*60, OrificeType.Anus)
 		for _i in range(3):
-			theMenstrualCycle.addTentacleEgg(_tentacles.getTentaclesCharID(), TentacleEggType.Plant, 12*60*60, OrificeType.Throat)
+			theMenstrualCycle.addTentacleEgg(_tentacles.getTentaclesCharID(), BigEggType.Plant, 12*60*60, OrificeType.Throat)
 		theTentacles.fillBalls(RNG.randf_range(0.5, 1.0))
 		theChar.cummedInVaginaBy(_tentacles.getTentaclesCharID())
 		theTentacles.fillBalls(RNG.randf_range(0.5, 1.0))
@@ -556,9 +556,9 @@ func _react(_action: String, _args):
 		var theTentacles = getCharacter(_tentacles.getTentaclesCharID())
 		var theMenstrualCycle:MenstrualCycle = theChar.getMenstrualCycle()
 		for _i in range(11):
-			theMenstrualCycle.addTentacleEgg(_tentacles.getTentaclesCharID(), TentacleEggType.Plant, 12*60*60, OrificeType.Anus)
+			theMenstrualCycle.addTentacleEgg(_tentacles.getTentaclesCharID(), BigEggType.Plant, 12*60*60, OrificeType.Anus)
 		for _i in range(3):
-			theMenstrualCycle.addTentacleEgg(_tentacles.getTentaclesCharID(), TentacleEggType.Plant, 12*60*60, OrificeType.Throat)
+			theMenstrualCycle.addTentacleEgg(_tentacles.getTentaclesCharID(), BigEggType.Plant, 12*60*60, OrificeType.Throat)
 		theTentacles.fillBalls(RNG.randf_range(0.5, 1.0))
 		theChar.cummedInVaginaBy(_tentacles.getTentaclesCharID())
 		theTentacles.fillBalls(RNG.randf_range(0.5, 1.0))

@@ -108,6 +108,24 @@ func getCharacter():
 func setCauserID(_charID:String):
 	fluids.setCauserID(_charID)
 
+func canProduceEggs() -> bool:
+	return false
+
+func getEggsAmount() -> int:
+	return 0
+
+func getMaxEggsCapacity() -> int:
+	return 0
+
+func getEggProductionSpeed() -> float:
+	return 1.0 / 3600.0
+
+func useEgg() -> bool:
+	return false
+
+func getNextEggProgress() -> float:
+	return 0.0
+
 func saveData():
 	var data = {
 		"fluids": fluids.saveData(),
@@ -127,6 +145,12 @@ func getTooltipInfo():
 		result.append_array(fluids.getContentsHumanReadableArray())
 	else:
 		result.append("- Empty")
+		
+	if(canProduceEggs()):
+		result.append("Eggs: "+ str(getEggsAmount())+"/"+str(getMaxEggsCapacity()))
+		var theEggProg:float = getNextEggProgress()
+		if(theEggProg > 0.0):
+			result.append("New egg: "+ str(Util.roundF(theEggProg*100.0, 1))+"%")
 	return result
 
 func getAttributesText():
@@ -140,5 +164,8 @@ func getAttributesText():
 	if(!fluids.isEmpty()):
 		result.append(["Contents", ""])
 		result.append_array(fluids.getContentsHumanReadablePairsArray())
-
+	
+	if(canProduceEggs()):
+		result.append(["Eggs", str(getEggsAmount())+"/"+str(getMaxEggsCapacity())])
+	
 	return result

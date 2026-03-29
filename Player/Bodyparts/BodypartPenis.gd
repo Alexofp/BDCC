@@ -7,10 +7,13 @@ var fluidType:String = "Cum"
 
 func _init():
 	limbSlot = LimbTypes.Penis
-	fluidProduction = CumProduction.new()
-	fluidProduction.bodypart = weakref(self)
+	initFluidProduction()
 	setupSensitiveZone()
 	needsProcessing = true
+
+func initFluidProduction():
+	fluidProduction = CumProduction.new()
+	fluidProduction.bodypart = weakref(self)
 
 func setupSensitiveZone():
 	sensitiveZone = preload("res://Player/SensitiveZone/SensitivePenis.gd").new()

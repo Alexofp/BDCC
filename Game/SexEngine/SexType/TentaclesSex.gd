@@ -1,6 +1,6 @@
 extends SexTypeBase
 
-var tentacleType:int = TentacleEggType.Plant
+var tentacleType:int = BigEggType.Plant
 var eggTime:int = 12*60*60
 
 func _init():
@@ -41,7 +41,7 @@ func getDefaultAnimation():
 	return [StageScene.TentaclesGangbang, "tease", {pc=theSubIDs[0]}]
 
 func processAnimationArgs(_args:Dictionary):
-	if(tentacleType == TentacleEggType.Plant):
+	if(tentacleType == BigEggType.Plant):
 		_args["plant"] = true
 	
 	var sexEngine = getSexEngine()
@@ -57,5 +57,5 @@ func saveData():
 	}
 
 func loadData(_data):
-	tentacleType = SAVE.loadVar(_data, "tentacleType", TentacleEggType.Plant)
+	tentacleType = SAVE.loadVar(_data, "tentacleType", BigEggType.Plant)
 	eggTime = SAVE.loadVar(_data, "eggTime", 12*60*60)

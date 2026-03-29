@@ -147,7 +147,7 @@ func _on_EggTimer_timeout():
 	if(!eggTypeQueue.empty()):
 		var theEggTypeOrColor = eggTypeQueue.pop_front()
 		if(theEggTypeOrColor is int):
-			if(theEggTypeOrColor == TentacleEggType.Latex):
+			if(theEggTypeOrColor == BigEggType.Latex):
 				newEgg.setLatex()
 			else:
 				newEgg.setPlant()

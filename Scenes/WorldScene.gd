@@ -159,14 +159,14 @@ func _react(_action: String, _args):
 		#getCharacter("nova").fillBalls(1.0)
 		#GM.pc.cummedInVaginaBy("nova")
 		GM.pc.menstrualCycle.forceImpregnateBy("nova")
-		GM.pc.removeBodypart(BodypartSlot.Penis)
+		#GM.pc.removeBodypart(BodypartSlot.Penis)
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("Strapon"))
 		
 		runScene("GenericSexScene", ["pc", "rahi"])
 		
 		#var theCycle:MenstrualCycle = GM.pc.getMenstrualCycle()
 		#if(theCycle):
-		#	theCycle.addTentacleEgg("", TentacleEggType.Plant, 100, OrificeType.Vagina)
+		#	theCycle.addTentacleEgg("", BigEggType.Plant, 100, OrificeType.Vagina)
 		#runScene("GenericSexScene", ["psplantTentacles", "nova", SexType.TentaclesSex, {SexMod.PCControlsDoms:true}])
 		#runScene("GenericSexScene", ["nova", "pc", SexType.TentaclesSex, {}])
 		

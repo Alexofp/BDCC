@@ -63,7 +63,7 @@ func getItemCategory():
 func createEggCellForOviposition() -> EggCell:
 	var newEggCell := EggCell.new()
 	newEggCell.lifeSpan = 12*60*60 # 12 hours before having to lay it
-	newEggCell.tentacleEggType = TentacleEggType.Plant
+	newEggCell.bigEggType = BigEggType.Plant
 	newEggCell.bigEgg = true
 	return newEggCell
 

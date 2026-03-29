@@ -15,8 +15,10 @@ var monozygotic: int = 1
 var fetusReadyForBirth := false
 
 var bigEgg:bool = false # If true, this egg will turn into a big egg when impregnated
-var tentacleEggType:int = TentacleEggType.NONE # Did this egg come from a tentacle monster
-# Tentacle eggs don't get born as children, they instead become fruits (if egg was a plant one)
+# Big egg stuff
+var bigEggType:int = BigEggType.Fertilized # Did this egg come from a tentacle monster
+var laidType:int = BigEggType.Fertilized # For big eggs, the type of the egg
+var laidColor:Color = Color.white # for big eggs
 
 var cycle = null
 
@@ -95,12 +97,12 @@ func getTimeUntilReadyForBirth() -> int:
 
 func processTime(seconds:float): #seconds is float because pregnancy speed is float
 	var ispeed:int = int(ceil(seconds))
-	if(!isimpregnated):
+	if(!bigEgg):
 		lifeSpan -= ispeed
 		if(lifeSpan < 0):
 			removeMe()
 	else:
-		if(tentacleEggType == TentacleEggType.NONE):
+		if(bigEggType == BigEggType.Fertilized):
 			var newProgress: float = float(seconds) / getGestationTime()
 			
 			if((progress + newProgress) >= 1.0):
@@ -117,7 +119,7 @@ func processTime(seconds:float): #seconds is float because pregnancy speed is fl
 				lifeSpan = 0
 
 func delayEgg(_time:int):
-	if(tentacleEggType == TentacleEggType.NONE):
+	if(bigEggType == BigEggType.Fertilized):
 		var theGestTime := getGestationTime()
 		var adjustedTime:float = float(_time) / float(theGestTime)
 		progress = clamp(1.0 - adjustedTime, 0.0, 1.0)
@@ -128,7 +130,7 @@ func delayEgg(_time:int):
 		fetusReadyForBirth = false
 
 func getTimeUntilReadyToBeLaid() -> int:
-	if(tentacleEggType == TentacleEggType.NONE):
+	if(bigEggType == BigEggType.Fertilized):
 		var theGestTime := getGestationTime()
 		var progressLeft:float = 1.0 - progress
 		return int(theGestTime * progressLeft)
@@ -136,14 +138,14 @@ func getTimeUntilReadyToBeLaid() -> int:
 		return lifeSpan
 
 func fetusIsReadyForBirth() -> bool:
-	if(tentacleEggType != TentacleEggType.NONE): # Tentacle eggs work differnetly
+	if(bigEggType != BigEggType.Fertilized): # Tentacle eggs work differnetly
 		return false
 	if(bigEgg): # Big eggs need to be laid
 		return false
 	return fetusReadyForBirth
 
 func isReadyToBeLaid() -> bool:
-	if(bigEgg || (tentacleEggType != TentacleEggType.NONE)):
+	if(bigEgg || (bigEggType != BigEggType.Fertilized)):
 		return fetusReadyForBirth
 	return false
 
@@ -177,7 +179,29 @@ func impregnatedBy(fluidDNA):
 	else:
 		resultGender = NpcGender.generate()
 	
+	if(bigEgg):
+		generateEggTypeAndColor()
+	
 	print("EGGCELL IMPREGNATED BY "+str(fatherID)+", species: "+str(resultSpecies)+", gender: "+NpcGender.getVisibleName(resultGender), ", division: ", monozygotic, "" if causerID == "" else (" CAUSER: "+causerID))
+
+func tryGetMainSpeciesID() -> String:
+	if(resultSpecies.empty()):
+		return ""
+	return resultSpecies[0]
+
+func tryGetMainSpecies():
+	var theSpeciesID:String = tryGetMainSpeciesID()
+	if(theSpeciesID.empty()):
+		return null
+	return GlobalRegistry.getSpecies(theSpeciesID)
+
+func generateEggTypeAndColor():
+	var theSpecies = tryGetMainSpecies()
+	if(theSpecies):
+		laidType = theSpecies.generateEggType(self)
+		laidColor = theSpecies.generateEggColor(self)
+	else:
+		laidType = BigEggType.Fertilized
 
 func tryImpregnate(fluidDNA, amountML:float, eggMultiplier:float = 1.0, fertility:float = 1.0, crossSpeciesCompatibility:float = 0.0) -> bool:
 	if(!canImpregnate()):
@@ -209,8 +233,8 @@ func tryImpregnate(fluidDNA, amountML:float, eggMultiplier:float = 1.0, fertilit
 func setBigEgg(_big:bool):
 	bigEgg = _big
 
-func setTentacleEggType(_type:int):
-	tentacleEggType = _type
+func setBigEggType(_type:int):
+	bigEggType = _type
 
 func makeChilds() -> Array:
 	var result:Array = []
@@ -242,8 +266,10 @@ func saveData() -> Dictionary:
 	}
 	if(bigEgg):
 		data["bigEgg"] = bigEgg
-	if(tentacleEggType != TentacleEggType.NONE):
-		data["tentacleEggType"] = tentacleEggType
+		data["laidType"] = laidType
+		data["laidColor"] = laidColor.to_html(false)
+	if(bigEggType != BigEggType.Fertilized):
+		data["bigEggType"] = bigEggType
 	
 	return data
 
@@ -263,5 +289,8 @@ func loadData(data:Dictionary):
 	
 	if(data.has("bigEgg")):
 		bigEgg = SAVE.loadVar(data, "bigEgg", false)
-	if(data.has("tentacleEggType")):
-		tentacleEggType = SAVE.loadVar(data, "tentacleEggType", TentacleEggType.NONE)
+		if(bigEgg):
+			laidType = SAVE.loadVar(data, "laidType", -1)
+			laidColor = Color("#"+SAVE.loadVar(data, "laidColor", "FFFFFF"))
+	if(data.has("bigEggType")):
+		bigEggType = SAVE.loadVar(data, "bigEggType", BigEggType.Fertilized)

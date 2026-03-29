@@ -22,6 +22,9 @@ var pickedBColor = null
 func _init():
 	pass
 
+func initFluidProduction():
+	pass
+
 func setupSensitiveZone():
 	pass
 

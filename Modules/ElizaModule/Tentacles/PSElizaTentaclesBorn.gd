@@ -563,9 +563,9 @@ func _react(_action: String, _args):
 		var theTentacles = getCharacter("PCTentacles")
 		var theMenstrualCycle:MenstrualCycle = theChar.getMenstrualCycle()
 		for _i in range(9):
-			theMenstrualCycle.addTentacleEgg("PCTentacles", TentacleEggType.Plant, 12*60*60, OrificeType.Vagina)
+			theMenstrualCycle.addTentacleEgg("PCTentacles", BigEggType.Plant, 12*60*60, OrificeType.Vagina)
 		for _i in range(6):
-			theMenstrualCycle.addTentacleEgg("PCTentacles", TentacleEggType.Plant, 12*60*60, OrificeType.Anus)
+			theMenstrualCycle.addTentacleEgg("PCTentacles", BigEggType.Plant, 12*60*60, OrificeType.Anus)
 		theTentacles.fillBalls(RNG.randf_range(0.5, 1.0))
 		theChar.cummedInVaginaBy("PCTentacles")
 		theTentacles.fillBalls(RNG.randf_range(0.5, 1.0))
