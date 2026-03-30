@@ -4,6 +4,7 @@ var eggInv:LightInventory = LightInventory.new()
 
 func _init():
 	id = "StraponOvi"
+	clothesColor = Color("#0C470C")
 
 func getVisibleName():
 	return "Ovipositor"
@@ -39,8 +40,11 @@ func getRiggedParts(_character):
 	if(itemState.isRemoved()):
 		return null
 	return {
-		"strapon": "res://Inventory/RiggedModels/Strapons/CaninecockStrapon.tscn",
+		"strapon": "res://Inventory/RiggedModels/Strapons/OvicockStrapon.tscn",
 	}
+
+func getStraponLength():
+	return 25.0
 
 func getCasualName():
 	return "ovipositor strapon"
@@ -56,7 +60,7 @@ func generateFluids():
 	fluids.setCapacity(250.0)
 
 func getInventoryImage():
-	return "res://Images/Items/strapons/canine.png"
+	return "res://Images/Items/strapons/ovi.png"
 
 func getStraponTraits() -> Dictionary:
 	return {

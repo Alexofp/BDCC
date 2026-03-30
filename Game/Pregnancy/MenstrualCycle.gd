@@ -296,7 +296,9 @@ func removeEgg(egg:EggCell):
 	#print("EGG DIED")
 	
 func obsorbCum(_cumType, amountML:float, fluidDNA, orificeType:int = OrificeType.Vagina):
-	if(!bigEggs.empty()):
+	var fertility:float = getCharacter().getFertility()
+	var virility:float = fluidDNA.getVirility()
+	if(fertility > 0.0 && virility > 0.0 && !bigEggs.empty()):
 		var egg = RNG.pick(bigEggs)
 		if(egg.bigEggType == BigEggType.Unfertilized && egg.orificeType == orificeType && !egg.isimpregnated):
 			var theMotherChar = getCharacter()
@@ -308,7 +310,6 @@ func obsorbCum(_cumType, amountML:float, fluidDNA, orificeType:int = OrificeType
 	if(!hasWombIn(orificeType)):
 		return
 	
-	var fertility = getCharacter().getFertility()
 	var crossSpeciesCompatibility = getCharacter().getCrossSpeciesCompatibility()
 	
 	if(eggCells.has(orificeType) && eggCells[orificeType].size() > 0):

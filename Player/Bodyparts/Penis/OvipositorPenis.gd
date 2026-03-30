@@ -20,7 +20,10 @@ func getLewdAdjective():
 	return RNG.pick(["ovipositor"])
 
 func getDoll3DScene():
-	return "res://Player/Player3D/Parts/Penis/CaninePenis/CaninePenis.tscn"
+	return "res://Player/Player3D/Parts/Penis/OvipositorPenis/OvipositorPenis.tscn"
+
+func getPenisScale():
+	return max(0.1 + (lengthCM - 5.0) / 21.0, 0.3)
 
 func getTraits():
 	return {
@@ -29,6 +32,9 @@ func getTraits():
 
 func getVulgarName() -> String:
 	return "ovipositor cock"
+
+func shouldUseBigPump():
+	return true
 
 func canStuffEggInto(_targetChar, _bodypart:String) -> bool:
 	if(fluidProduction.getEggsAmount() <= 0):

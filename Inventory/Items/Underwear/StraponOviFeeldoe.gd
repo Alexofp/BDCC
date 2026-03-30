@@ -2,7 +2,7 @@ extends "res://Inventory/Items/Underwear/Strapon.gd"
 
 func _init():
 	id = "StraponOviFeeldoe"
-	clothesColor = Color(0.69, 0.08, 0.08)
+	clothesColor = Color("#61C71B")
 
 func getVisibleName():
 	return "Ovipositor (feeldoe)"
@@ -16,7 +16,7 @@ func getRiggedParts(_character):
 	if(itemState.isRemoved()):
 		return null
 	return {
-		"strapon": "res://Inventory/RiggedModels/Strapons/FeeldoeStrapon.tscn",
+		"strapon": "res://Inventory/RiggedModels/Strapons/OviFeeldoeStrapon.tscn",
 	}
 
 func getStraponPleasureForDom():
@@ -36,7 +36,10 @@ func generateFluids():
 	fluids.setCapacity(1000.0)
 
 func getInventoryImage():
-	return "res://Images/Items/strapons/feeldoe.png"
+	return "res://Images/Items/strapons/ovifeeldoe.png"
+
+func getInventoryImageColor():
+	return clothesColor
 
 func getStraponTraits() -> Dictionary:
 	return {
