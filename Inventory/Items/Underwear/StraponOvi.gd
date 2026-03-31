@@ -109,11 +109,12 @@ func doStuffEggInto(_targetChar, _bodypart:String) -> Dictionary:
 	var theEggWeightMap:Dictionary = {}
 	for theEggItem in eggInv.getItems():
 		theEggWeightMap[theEggItem] = float(theEggItem.getAmount())
-		
+	
 	var theRandomEgg = RNG.pickWeightedDict(theEggWeightMap)
 	if(!theRandomEgg || !theRandomEgg.has_method("createEggCellForOviposition")):
 		return {success = false}
 	
+	var theEggName:String = theRandomEgg.getAStackNameCapitalize()
 	var theEggCell:EggCell = theRandomEgg.createEggCellForOviposition()
 	targetMenstrualCycle.injectEggCell(theEggCell, OrificeType.fromBodypart(_bodypart))
 	
@@ -122,7 +123,15 @@ func doStuffEggInto(_targetChar, _bodypart:String) -> Dictionary:
 	else:
 		theRandomEgg.removeXOrDestroy(1)
 	
+	var theHole:String = "down {<TARGET>.your} hole"
+	if(_bodypart == BodypartSlot.Vagina):
+		theHole = "into {<TARGET>.your} pussy"
+	if(_bodypart == BodypartSlot.Anus):
+		theHole = "into {<TARGET>.your} anus"
+	if(_bodypart == BodypartSlot.Head):
+		theHole = "down {<TARGET>.your} throat"
+	
 	return {
 		success = true,
-		text = "!MEOW MEOW!"#"{<USER>.You} An egg got stuffed into {<TARGET>.your} hole.",
+		text = theEggName+" gets [b]stuffed "+theHole+"[/b] by {<USER>.your} ovipositor.",
 	}

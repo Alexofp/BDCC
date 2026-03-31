@@ -171,7 +171,10 @@ func getActions(_indx:int):
 		if(getState() in ["licking", "tonguefucking"]):
 			if(getDom().hasEffect(StatusEffect.HasCumInsideMouth) && getSub().getFirstItemThatCoversBodypart(BodypartSlot.Vagina) == null && !getDom().isOralBlocked() && OPTIONS.isContentEnabled(ContentType.CumStealing)):
 				addAction("spitcumintosubspussy", 0.01 + getDomInfo().fetishScore({Fetish.Breeding: 0.1}), "Spit cum into pussy", "Force some cum into their slit")
-
+		
+		if(getState() == "blowjob"):
+			addEggStuffReceiveButton(DOM_0, SUB_0, BodypartSlot.Head)
+		
 		if(getState() in ["subabouttocum", "subabouttocumcock", "subabouttocumHandjob"] || ((getState() in ["licking", "tonguefucking", "lickingcock", "blowjob", "handjob"]) && getSubInfo().isReadyToCum() && !getSubInfo().canDoActions())):
 			addAction("letsubcuminside", 1.0, "Inside", "Let the sub cum inside your mouth", {A_PRIORITY: 1001})
 			addAction("letsubcumoutside", 1.0, "Facial", "Let the sub cum on you", {A_PRIORITY: 1001})
@@ -192,6 +195,8 @@ func getActions(_indx:int):
 					addAction("cumondom", 1.0, "Cum!", "Cum without letting the dom know", {A_PRIORITY: 1001})
 
 func doAction(_indx:int, _id:String, _action:Dictionary):
+	if(_id == "stuffegg"):
+		doReceiveEggFrom(DOM_0, SUB_0, BodypartSlot.Head)
 	if(_id == "spitcumintosubspussy"):
 		doSpitCumIntoHoleDom(BodypartSlot.Vagina)
 	if(_id == "makesubcumavoidmess"):

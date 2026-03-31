@@ -176,6 +176,9 @@ func getActions(_indx:int):
 	if(_indx == DOM_0 || _indx == DOM_1 || _indx == DOM_2):
 		addAction("stop", getStopScore(), "Stop Gangbang", "Stop the gangbang")
 		
+		if(state == "inside" || state == "sex"):
+			addEggStuffButton(_indx, SUB_0, getHoleFor(_indx))
+		
 		if(state == "inside" && !checkActiveDomPC(_indx)):
 			addAction("fuckMore", getContinueSexScore(_indx, SUB_0, getHoleFor(_indx))-getStopScore(), "Continue fucking", "Start fucking them again")
 			addAction("pullOut", getStopScore(), "Pull out", "Pull your member out")
@@ -202,6 +205,8 @@ func getActions(_indx:int):
 			if(isReadyToCumHandled(SUB_0)):
 				addAction("subcum", 1.0, "Cum!", "You're about to cum!", {A_PRIORITY: 1001})
 func doAction(_indx:int, _id:String, _action:Dictionary):
+	if(_id == "stuffegg"):
+		doStuffEggInto(_indx, SUB_0, getHoleFor(_indx))
 	if(_id == "switch"):
 		addText("{<DOM>.You} {<DOM>.youVerb('decide')} to switch spots.".replace("<DOM>", indxToTextID(_indx)))
 		switchDoms(_indx, (_indx + 1) if _indx < 2 else 0)

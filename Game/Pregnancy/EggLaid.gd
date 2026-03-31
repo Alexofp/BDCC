@@ -72,6 +72,15 @@ static func getNameByEggType(_type:int) -> String:
 		return "Unfertilized egg"
 	return "Offspring egg"
 
+static func getANameByEggType(_type:int) -> String:
+	if(_type == BigEggType.Plant):
+		return "A plant egg"
+	if(_type == BigEggType.Latex):
+		return "A latex egg"
+	if(_type == BigEggType.Unfertilized):
+		return "An unfertilized egg"
+	return "An offspring egg"
+
 func addSelfToNursery() -> bool:
 	var theEggCell := createEggCell()
 	if(!theEggCell || !theEggCell.isImpregnated()):

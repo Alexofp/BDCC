@@ -296,7 +296,9 @@ func removeEgg(egg:EggCell):
 	#print("EGG DIED")
 	
 func obsorbCum(_cumType, amountML:float, fluidDNA, orificeType:int = OrificeType.Vagina):
-	var fertility:float = getCharacter().getFertility()
+	var theCharacter = getCharacter()
+	
+	var fertility:float = theCharacter.getFertility()
 	var virility:float = fluidDNA.getVirility()
 	if(fertility > 0.0 && virility > 0.0 && !bigEggs.empty()):
 		var egg = RNG.pick(bigEggs)
@@ -305,12 +307,16 @@ func obsorbCum(_cumType, amountML:float, fluidDNA, orificeType:int = OrificeType
 			egg.setMother(theMotherChar.getID(), theMotherChar.getSpecies())
 			egg.bigEggType = BigEggType.Fertilized
 			egg.impregnatedBy(fluidDNA)
+			
+			var theSexEngine = GM.main.getSexEngineForCharacterID(theCharacter.getID())
+			if(theSexEngine): # Huge hack but ehh
+				theSexEngine.notifyBigEggGotFertilizedFor(theCharacter, egg)
 			return
 
 	if(!hasWombIn(orificeType)):
 		return
 	
-	var crossSpeciesCompatibility = getCharacter().getCrossSpeciesCompatibility()
+	var crossSpeciesCompatibility = theCharacter.getCrossSpeciesCompatibility()
 	
 	if(eggCells.has(orificeType) && eggCells[orificeType].size() > 0):
 		var eggAmountMult = sqrt(float(eggCells[orificeType].size()))

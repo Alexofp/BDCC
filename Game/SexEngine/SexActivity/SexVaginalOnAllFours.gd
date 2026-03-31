@@ -366,6 +366,8 @@ func fucking_processTurn():
 		if(straponTimer > 5 && RNG.chance(5.0*straponTimer)):
 			satisfyGoals()
 
+
+
 func getActions(_indx:int):
 	if(_indx == DOM_0):
 		if(state in [""]):
@@ -376,10 +378,11 @@ func getActions(_indx:int):
 				var switchholeScore:float = 5.0 * (-getDomInfo().goalsScore(getGoals(), getSubID()) + getDomInfo().goalsScore({otherGoal: 1.0}, getSubID()))
 				addAction("switchhole", switchholeScore, "Switch hole", "Switch to the sub's "+RNG.pick(otherHoleNames))
 			addAction("stop", getStopScore(), "Stop fuck", "Stop fucking")
+		
+		if(state in ["fucking", "inside"]):
+			addEggStuffButton(DOM_0, SUB_0, usedBodypart)
 		if(state in ["fucking"]):
 			addAction("slowdown", getPauseSexScore(DOM_0, SUB_0, usedBodypart), "Slow down", "Stop fucking for a second..", {A_PRIORITY: 1})
-			if(canStuffEggInto(DOM_0, SUB_0, usedBodypart)):
-				addAction("stuffegg", 0.0, "STUFF EGG", "Stuff an egg into them..", {A_PRIORITY: 2})
 			
 			if(isStraponSex() && getDom().bodypartHasTrait(BodypartSlot.Penis, PartTrait.PenisKnot)):
 				var subArousal:float = getSubInfo().getArousal()

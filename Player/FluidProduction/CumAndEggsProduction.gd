@@ -3,8 +3,11 @@ extends CumProduction
 var eggs:int = 0
 var eggProgress:float = 0.0
 
-var maxEggs:int = 5
+var maxEggs:int = 10
 var eggsPerHour:float = 1.0
+
+var eggsSlowStart:int = 5 # if eggs > eggsSlowStart, the production of eggs will start slowing down
+var eggsPerHourSlow:float = 0.1
 
 # Eggs stuff
 func getEggsAmount() -> int:
@@ -17,7 +20,14 @@ func canProduceEggs() -> bool:
 	return true
 
 func getEggProductionSpeed() -> float:
-	return eggsPerHour / 3600.0
+	var theSpeed:float = eggsPerHour
+	if(eggs > eggsSlowStart):
+		var ratio:float = float(eggs - eggsSlowStart)/float(maxEggs - eggsSlowStart)
+		ratio = clamp(ratio, 0.0, 1.0)
+		
+		theSpeed = eggsPerHour * (1.0 - ratio) + eggsPerHourSlow * ratio
+		
+	return theSpeed / 3600.0
 
 func getNextEggProgress() -> float:
 	return eggProgress

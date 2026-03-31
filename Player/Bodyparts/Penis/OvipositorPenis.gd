@@ -10,8 +10,10 @@ func initFluidProduction():
 	fluidProduction = preload("res://Player/FluidProduction/CumAndEggsProduction.gd").new()
 	fluidProduction.bodypart = weakref(self)
 	
-	fluidProduction.maxEggs = 5
+	fluidProduction.maxEggs = 10
 	fluidProduction.eggsPerHour = 1.0
+	fluidProduction.eggsSlowStart = 3
+	fluidProduction.eggsPerHourSlow = 0.1
 
 func getCompatibleSpecies():
 	return [Species.Any]
@@ -58,7 +60,15 @@ func doStuffEggInto(_targetChar, _bodypart:String) -> Dictionary:
 	
 	targetMenstrualCycle.injectEggCell(unfertilizedEggCell, OrificeType.fromBodypart(_bodypart))
 	
+	var theHole:String = "down {<TARGET>.your} hole"
+	if(_bodypart == BodypartSlot.Vagina):
+		theHole = "into {<TARGET>.your} pussy"
+	if(_bodypart == BodypartSlot.Anus):
+		theHole = "into {<TARGET>.your} anus"
+	if(_bodypart == BodypartSlot.Head):
+		theHole = "down {<TARGET>.your} throat"
+	
 	return {
 		success = true,
-		text = "!MEOW MEOW!"#"{<USER>.You} An egg got stuffed into {<TARGET>.your} hole.",
+		text = "An unfertilized egg gets [b]stuffed "+theHole+"[/b] by {<USER>.your} ovipositor.",
 	}

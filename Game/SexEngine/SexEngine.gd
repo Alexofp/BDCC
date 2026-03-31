@@ -1727,6 +1727,10 @@ func canEndSexAnyTime() -> bool:
 	
 	return false
 
+func notifyBigEggGotFertilizedFor(_char:BaseCharacter, _eggCell:EggCell):
+	var theEggName:String = EggLaid.getANameByEggType(_eggCell.bigEggType)
+	addTextRaw("[b]"+theEggName+" got fertilized![/b]")
+
 func saveData():
 	var data = {
 		"revealedBodyparts": revealedBodyparts,

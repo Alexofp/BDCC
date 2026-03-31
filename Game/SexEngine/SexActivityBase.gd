@@ -3383,10 +3383,28 @@ func stuffTentacleEggRandomHole(_indx:int, _addMessage:bool = true, _tentacleInd
 	
 	return stuffTentacleEgg(_indx, theHole, _addMessage, _tentacleIndx)
 
+func addEggStuffButton(_roleMain:int, _roleTarget:int, _bodypart:String) -> bool:
+	if(canStuffEggInto(_roleMain, _roleTarget, _bodypart)):
+		addAction("stuffegg", 0.0, "Stuff egg", "Stuff an egg into them..", {A_PRIORITY: 2})
+		return true
+	return false
+
+func addEggStuffReceiveButton(_roleMain:int, _roleTarget:int, _bodypart:String) -> bool:
+	if(canStuffEggInto(_roleTarget, _roleMain, _bodypart)):
+		addAction("stuffegg", 0.0, "Receive egg", "Make them stuff an egg into you..", {A_PRIORITY: 2})
+		return true
+	return false
+
 func canStuffEggInto(_roleMain:int, _roleTarget:int, _bodypart:String) -> bool:
 	var _main := getDomOrSub(_roleMain)
 	var _target := getDomOrSub(_roleTarget)
+	return canStuffEggIntoRaw(_main, _target, _bodypart)
+
+func canStuffEggIntoRaw(_main:BaseCharacter, _target:BaseCharacter, _bodypart:String) -> bool:
 	if(!_main || !_target):
+		return false
+	
+	if(!_target.hasBodypart(_bodypart)):
 		return false
 	
 	var theStrapon :ItemBase = _main.getWornStrapon()
@@ -3403,6 +3421,9 @@ func canStuffEggInto(_roleMain:int, _roleTarget:int, _bodypart:String) -> bool:
 		return thePenis.canStuffEggInto(_target, _bodypart)
 	return false
 
+func doReceiveEggFrom(_roleMain:int, _roleTarget:int, _bodypart:String, _showMessage:bool = true) -> Dictionary:
+	return doStuffEggInto(_roleTarget, _roleMain, _bodypart, _showMessage)
+	
 func doStuffEggInto(_roleMain:int, _roleTarget:int, _bodypart:String, _showMessage:bool = true) -> Dictionary:
 	var _main := getDomOrSub(_roleMain)
 	var _target := getDomOrSub(_roleTarget)

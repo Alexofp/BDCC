@@ -1962,6 +1962,13 @@ func isCharacterInAnySexEngine(_charID:String) -> bool:
 				return true
 	return false
 
+func getSexEngineForCharacterID(_charID:String) -> SexEngine:
+	for scene in sceneStack:
+		if(scene.sceneID == "GenericSexScene"):
+			if(scene.sexEngine && scene.sexEngine.isInvolved(_charID)):
+				return scene.sexEngine
+	return null
+
 func isCharacterInAnyScene(_charID:String, _excludeWorldScene:bool = true) -> bool:
 	for scene in sceneStack:
 		if(_excludeWorldScene && scene.sceneID == "WorldScene"):
