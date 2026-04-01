@@ -68,7 +68,11 @@ func doStuffEggInto(_targetChar, _bodypart:String) -> Dictionary:
 	if(_bodypart == BodypartSlot.Head):
 		theHole = "down {<TARGET>.your} throat"
 	
+	var theTextLine:String = "An unfertilized egg gets [b]stuffed "+theHole+"[/b] by {<USER>.your} ovipositor."
+	theTextLine = theTextLine.replace("<TARGET>", _targetChar.getID())
+	theTextLine = theTextLine.replace("<USER>", getCharacter().getID())
+	
 	return {
 		success = true,
-		text = "An unfertilized egg gets [b]stuffed "+theHole+"[/b] by {<USER>.your} ovipositor.",
+		text = theTextLine,
 	}

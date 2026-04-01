@@ -358,7 +358,7 @@ var upgradesInfo:Dictionary = {
 	"tentNeuroLink": {
 		name = "Neuro-Link",
 		desc = "Unlocks a recipe for a special device that will let you temporarily gain control of a tentacle monster.",
-		cost = 80,
+		cost = 50,
 		requiredUpgrades = [],
 		items = {
 			"TentNeuroLink": {
@@ -368,6 +368,34 @@ var upgradesInfo:Dictionary = {
 			},
 		},
 		moduleCheck = "ElizaModule", # ElizaModule is gonna be asked to check if this upgrade is visible
+	},
+	"oviStrapons": {
+		name = "Ovipositor strapons",
+		desc = "Unlocks 2 prototype strapons that are capable of doing oviposition! You will be able to buy them from the medical vendomat.",
+		cost = 30,
+		requiredUpgrades = [],
+		moduleCheck = "ElizaModule",
+	},
+	"eggPills": {
+		name = "Egg pills",
+		desc = "Unlocks two new pills: first one dramatically accelerates egg development, while the other one constructs a shell around any fetus, transforming live birth into egg-laying.",
+		cost = 20,
+		requiredUpgrades = [],
+		items = {
+			"EggGrowthPill": {
+				fluids = {
+					"IvyNectar": 500.0,
+					"Cum": 100.0,
+				},
+			},
+			"EggBigEggsPill": {
+				fluids = {
+					"IvyNectar": 1000.0,
+					"GirlCum": 150.0,
+				},
+			},
+		},
+		moduleCheck = "ElizaModule",
 	},
 
 }

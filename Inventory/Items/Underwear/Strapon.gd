@@ -143,9 +143,12 @@ func doStuffEggIntoTransfer(_targetChar, _bodypart:String) -> Dictionary:
 	if(_bodypart == BodypartSlot.Head):
 		theHole = "down {<TARGET>.your} throat"
 	
+	var theTextLine:String = theEggName+" gets [b]stuffed "+theHole+"[/b] by {<USER>.your} ovipositor."
+	theTextLine = theTextLine.replace("<TARGET>", _targetChar.getID())
+	theTextLine = theTextLine.replace("<USER>", getWearer().getID())
 	return {
 		success = true,
-		text = theEggName+" gets [b]stuffed "+theHole+"[/b] by {<USER>.your} ovipositor.",
+		text = theTextLine,
 	}
 
 func canStuffEggIntoTransfer(_targetChar, _bodypart:String) -> bool:

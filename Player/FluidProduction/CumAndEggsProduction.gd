@@ -53,6 +53,9 @@ func useEgg() -> bool:
 	eggs -= 1
 	return true
 
+func boostEggProduction():
+	eggs = maxEggs
+
 func saveData():
 	var data:Dictionary = .saveData()
 	data["eggs"] = eggs

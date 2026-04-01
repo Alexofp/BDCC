@@ -22,6 +22,13 @@ func getRiggedParts(_character):
 func getStraponPleasureForDom():
 	return 0.5
 
+func updateDoll(doll: Doll3D):
+	doll.setPenisScale(1.1)
+	doll.setBallsScale(1.0)
+
+func getStraponLength():
+	return 22.0
+
 func getCasualName():
 	return "feeldoe strapon"
 
@@ -51,3 +58,9 @@ func canStuffEggInto(_targetChar, _bodypart:String) -> bool:
 
 func doStuffEggInto(_targetChar, _bodypart:String) -> Dictionary:
 	return doStuffEggIntoTransfer(_targetChar, _bodypart)
+
+func getTags():
+	var theTags:Array= .getTags()
+	if(GM.main != null && GM.main.SCI != null && GM.main.SCI.hasUpgrade("oviStrapons")):
+		theTags.append(ItemTag.SoldByMedicalVendomat)
+	return theTags

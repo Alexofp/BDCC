@@ -833,3 +833,25 @@ func transferAnyBigEggTo(_otherCycle, _targetOrifice:int, _orificeFilter:Array =
 	if(transferSpecificEggTo(pickedEgg, _otherCycle, _targetOrifice)):
 		return pickedEgg
 	return null
+
+func boostBigEggs():
+	for theEgg in bigEggs:
+		if(theEgg.bigEggType == BigEggType.Fertilized):
+			theEgg.progress = 1.0
+		else:
+			theEgg.lifeSpan = 0
+
+func turnImpregnatedEggsIntoBigEggs():
+	var eggAm:int = impregnatedEggCells.size()
+	
+	for _i in eggAm:
+		var _indx:int = eggAm - _i - 1
+		var theEggCell:EggCell = impregnatedEggCells[_indx]
+		
+		theEggCell.bigEgg = true
+		theEggCell.bigEggType = BigEggType.Fertilized
+		theEggCell.generateEggTypeAndColor()
+		
+		impregnatedEggCells.remove(_indx)
+		bigEggs.append(theEggCell)
+		

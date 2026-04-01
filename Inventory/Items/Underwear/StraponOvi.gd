@@ -43,8 +43,12 @@ func getRiggedParts(_character):
 		"strapon": "res://Inventory/RiggedModels/Strapons/OvicockStrapon.tscn",
 	}
 
+func updateDoll(doll: Doll3D):
+	doll.setPenisScale(1.1)
+	doll.setBallsScale(1.0)
+
 func getStraponLength():
-	return 25.0
+	return 22.0
 
 func getCasualName():
 	return "ovipositor strapon"
@@ -83,6 +87,12 @@ func getMaxOvipositorEggAmount() -> int:
 
 func getCurrentOvipositorEggAmount() -> int:
 	return eggInv.getTotalAmountOfItemsWithStack()
+
+func getTags():
+	var theTags:Array= .getTags()
+	if(GM.main != null && GM.main.SCI != null && GM.main.SCI.hasUpgrade("oviStrapons")):
+		theTags.append(ItemTag.SoldByMedicalVendomat)
+	return theTags
 
 func saveData():
 	var theData:Dictionary = .saveData()
@@ -131,7 +141,10 @@ func doStuffEggInto(_targetChar, _bodypart:String) -> Dictionary:
 	if(_bodypart == BodypartSlot.Head):
 		theHole = "down {<TARGET>.your} throat"
 	
+	var theTextLine:String = theEggName+" gets [b]stuffed "+theHole+"[/b] by {<USER>.your} ovipositor."
+	theTextLine = theTextLine.replace("<TARGET>", _targetChar.getID())
+	theTextLine = theTextLine.replace("<USER>", getWearer().getID())
 	return {
 		success = true,
-		text = theEggName+" gets [b]stuffed "+theHole+"[/b] by {<USER>.your} ovipositor.",
+		text = theTextLine,
 	}

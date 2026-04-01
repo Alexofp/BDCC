@@ -3383,15 +3383,15 @@ func stuffTentacleEggRandomHole(_indx:int, _addMessage:bool = true, _tentacleInd
 	
 	return stuffTentacleEgg(_indx, theHole, _addMessage, _tentacleIndx)
 
-func addEggStuffButton(_roleMain:int, _roleTarget:int, _bodypart:String) -> bool:
+func addEggStuffButton(_roleMain:int, _roleTarget:int, _bodypart:String, _actionID:String = "stuffegg") -> bool:
 	if(canStuffEggInto(_roleMain, _roleTarget, _bodypart)):
-		addAction("stuffegg", 0.0, "Stuff egg", "Stuff an egg into them..", {A_PRIORITY: 2})
+		addAction(_actionID, max(fetish(_roleMain, Fetish.Breeding)*0.2, 0.02 + personality(_roleMain, PersonalityStat.Mean)*0.05), "Stuff egg", "Stuff an egg into them..", {A_PRIORITY: 2})
 		return true
 	return false
 
-func addEggStuffReceiveButton(_roleMain:int, _roleTarget:int, _bodypart:String) -> bool:
+func addEggStuffReceiveButton(_roleMain:int, _roleTarget:int, _bodypart:String, _actionID:String = "stuffegg") -> bool:
 	if(canStuffEggInto(_roleTarget, _roleMain, _bodypart)):
-		addAction("stuffegg", 0.0, "Receive egg", "Make them stuff an egg into you..", {A_PRIORITY: 2})
+		addAction(_actionID, fetish(_roleMain, Fetish.BeingBred)*0.2, "Receive egg", "Make them stuff an egg into you..", {A_PRIORITY: 2})
 		return true
 	return false
 

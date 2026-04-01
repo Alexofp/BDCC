@@ -78,7 +78,7 @@ func getActions(_indx:int):
 		#if(true || getSub().isReadyToLayEggs()):
 		if(hasBodypartUncovered(SUB_0, BodypartSlot.Anus)):
 			addAction("egg", 1.0 if getSub().menstrualCycle.isReadyToLayEggsCanContinue() else 0.0, "Help lay", "Help them to lay an egg!", {A_PRIORITY: 5})
-		addAction("addegg", 1.0, "ADD EGG", "ADD TEST EGG PLEASE REMOVE ME!", {A_PRIORITY: 3})
+		#addAction("addegg", 1.0, "ADD EGG", "ADD TEST EGG PLEASE REMOVE ME!", {A_PRIORITY: 3})
 		if(!eggsOut.empty()):
 			addAction("stealeggs", 0.0, "Steal eggs!", "Steal all of the eggs that they have currently laid", {A_PRIORITY: 4})
 		
@@ -112,10 +112,20 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 					continue
 				GM.pc.getInventory().addItem(theEggItem)
 		eggsOut.clear()
-		# Hey, those are mine!
-		getSubInfo().addResistance(1.0)
-		react(SexReaction.EggsStolen, [100.0], [SUB_0])
-		GM.main.RS.addAffection(getSubID(), getDomID(), -0.02*theAmToSteal)
+		
+		var angerChance:float = 50.0 + fetish(SUB_0, Fetish.BeingBred)*100.0
+		angerChance -= personality(SUB_0, PersonalityStat.Subby)*50.0
+		angerChance -= personality(SUB_0, PersonalityStat.Coward)*30.0
+		if(getSub().isSlaveToPlayer()):
+			angerChance *= 0.5
+		
+		if(angerChance >= 100.0 || RNG.chance(angerChance)):
+			# Hey, those are mine!
+			getSubInfo().addResistance(1.0)
+			react(SexReaction.EggsStolen, [100.0], [SUB_0])
+			GM.main.RS.addAffection(getSubID(), getDomID(), -0.02*theAmToSteal)
+		else:
+			addText("{sub.You} {sub.youVerb('don', 'doesn')}'t seem to mind much.")
 	
 	if(_actionID == "egg"):
 		eggTypeOrColor = BigEggType.Plant

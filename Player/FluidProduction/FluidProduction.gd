@@ -126,6 +126,9 @@ func useEgg() -> bool:
 func getNextEggProgress() -> float:
 	return 0.0
 
+func boostEggProduction():
+	pass
+
 func saveData():
 	var data = {
 		"fluids": fluids.saveData(),

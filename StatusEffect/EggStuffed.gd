@@ -34,7 +34,7 @@ func getEffectDesc():
 	
 	if(unpluggedHoles.empty()):
 		return "You are stuffed with "+str(eggAm)+" egg"+("s" if eggAm != 1 else "")+"..."
-	return "You are stuffed with "+str(eggAm)+" egg"+("s" if eggAm != 1 else "")+".. "+Util.getTimeStringHumanReadable(theTimeUntilEggs)+" left until you will want to lay "+("them." if eggAm != 1 else "it.")+helpfulPlugMessage
+	return "You are stuffed with "+str(eggAm)+" egg"+("s" if eggAm != 1 else "")+".. "+Util.getTimeStringHumanReadable(theTimeUntilEggs)+" left until you will want to lay "+("the first one." if eggAm != 1 else "it.")+helpfulPlugMessage
 
 func getEffectImage():
 	return "res://Images/StatusEffects/mother.png"
