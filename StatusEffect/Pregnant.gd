@@ -9,7 +9,7 @@ func _init():
 	priorityDuringChecking = 90
 	
 func shouldApplyTo(_npc):
-	if(_npc.isVisiblyPregnant() && _npc.isPregnant()):
+	if(_npc.isVisiblyPregnant() && _npc.isPregnant(true, false)):
 		return true
 	return false
 

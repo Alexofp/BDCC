@@ -9,6 +9,7 @@ var motherID: String
 var fatherID: String
 var causerID: String
 var laidByID:String = "" # For big eggs
+var bigEgg:bool = false
 var rememberedMotherName: String = "" # Required in case the character gets deleted
 var rememberedFatherName: String = ""
 var uniqueID: int
@@ -55,6 +56,7 @@ func setFatherID(newfather):
 
 func setLaidByID(_charID:String):
 	laidByID = _charID
+	bigEgg = true if !_charID.empty() else false
 
 func getLaidByID() -> String:
 	return laidByID
@@ -111,6 +113,7 @@ func saveData():
 		"rememberedFatherName": rememberedFatherName,
 		"causerID": causerID,
 		"laidByID": laidByID,
+		"bigEgg": bigEgg,
 	}
 	
 	return data
@@ -132,3 +135,5 @@ func loadData(data):
 		causerID = SAVE.loadVar(data, "causerID", "")
 	if(data.has("laidByID")):
 		laidByID = SAVE.loadVar(data, "laidByID", "")
+	if(data.has("bigEgg")):
+		bigEgg = SAVE.loadVar(data, "bigEgg", false)

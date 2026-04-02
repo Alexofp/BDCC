@@ -11,9 +11,9 @@ func initFluidProduction():
 	fluidProduction.bodypart = weakref(self)
 	
 	fluidProduction.maxEggs = 10
-	fluidProduction.eggsPerHour = 1.0
-	fluidProduction.eggsSlowStart = 3
-	fluidProduction.eggsPerHourSlow = 0.1
+	fluidProduction.eggsPerHour = 0.5
+	fluidProduction.eggsSlowStart = 1
+	fluidProduction.eggsPerHourSlow = 0.05
 
 func getCompatibleSpecies():
 	return [Species.Any]

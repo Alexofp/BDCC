@@ -1388,9 +1388,9 @@ func getEggStuffedHoles(_checkIfPlugged:bool = true) -> Array:
 			result.append(BodypartSlot.Vagina)
 	return result
 
-func isPregnant() -> bool:
+func isPregnant(_normalPreg:bool = true, _bigEggPreg:bool = true) -> bool:
 	if(menstrualCycle != null):
-		return menstrualCycle.isPregnant()
+		return menstrualCycle.isPregnant(_normalPreg, _bigEggPreg)
 	return false
 
 func isPregnantFrom(_charID:String) -> bool:

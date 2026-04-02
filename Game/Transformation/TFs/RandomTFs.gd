@@ -148,7 +148,7 @@ func doProgress(_context:Dictionary) -> Dictionary:
 		bodypartSlots.erase(BodypartSlot.Body)
 		
 		var slot = RNG.pick(bodypartSlots)
-		var possiblePartIDs:Array = GlobalRegistry.getBodypartsIdsBySlot(slot)#Bodypart.findPossibleBodypartIDsDict(BodypartSlot.Penis, theChar, theChar.getSpecies(), NpcGender.Male)
+		var possiblePartIDs:Array = GlobalRegistry.getBodypartsIdsBySlotForTF(slot)#Bodypart.findPossibleBodypartIDsDict(BodypartSlot.Penis, theChar, theChar.getSpecies(), NpcGender.Male)
 		if(possiblePartIDs.has("")):
 			possiblePartIDs.erase("")
 		if(slot in [BodypartSlot.Penis, BodypartSlot.Vagina, BodypartSlot.Horns, BodypartSlot.Tail]):

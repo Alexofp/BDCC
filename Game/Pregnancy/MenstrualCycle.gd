@@ -110,13 +110,13 @@ func forceIntoHeat():
 	cycleProgress = 0.36
 
 func forceOvulate() -> bool:
-	if(ovulatedThisCycle || isPregnant() || isEggStuffed()):
+	if(ovulatedThisCycle || isPregnant(true, false) || isEggStuffed()):
 		return false
 	ovulate()
 	return true
 
 func shouldOvulate() -> bool:
-	if(!ovulatedThisCycle && cycleProgress >= willOvulateAt && !isEggStuffed() && (!isPregnant() || isEligibleForProlongedPregnancy())):
+	if(!ovulatedThisCycle && cycleProgress >= willOvulateAt && !isEggStuffed() && (!isPregnant(true, false) || isEligibleForProlongedPregnancy())):
 		return true
 	return false
 
@@ -158,10 +158,12 @@ func getPregnancySpeed() -> float:
 func processTime(seconds:int):
 	var theCharacter = getCharacter()
 	
-	if(isPregnant() || isEggStuffedWithOffspring()):
+	var isNormalPreg:bool = isPregnant(true, false)
+	var isBigEggPreg:bool = isEggStuffedWithOffspring()
+	if(isNormalPreg || isBigEggPreg):
 		var thePregnancyProgress := getPregnancyProgress(true, true)
 		
-		if(theCharacter != null && thePregnancyProgress > 0.05 && !theCharacter.hasPerk(Perk.FertilityBetterOvulationV3)):
+		if(isNormalPreg && theCharacter != null && thePregnancyProgress > 0.05 && !theCharacter.hasPerk(Perk.FertilityBetterOvulationV3)):
 			cycleProgress = 1.0
 		
 		if(!noticedVisiblyPregnant && isVisiblyPregnant()):
@@ -173,7 +175,7 @@ func processTime(seconds:int):
 			emit_signal("heavyIntoPregnancy")
 
 	if(!hasAnyWomb()):
-		cycleProgress = 0.0	
+		cycleProgress = 0.0
 	elif(!isPregnant() || (theCharacter != null && theCharacter.hasPerk(Perk.FertilityBetterOvulationV3))):
 		var add:float = float(seconds)/float(getCycleLength())
 		
@@ -338,8 +340,12 @@ func isEggStuffedWithOffspring() -> bool:
 			return true
 	return false
 
-func isPregnant() -> bool:
-	return !impregnatedEggCells.empty()
+func isPregnant(_normalPreg:bool = true, _bigEggPreg:bool = true) -> bool:
+	if(_bigEggPreg && isEggStuffedWithOffspring()):
+		return true
+	if(_normalPreg):
+		return !impregnatedEggCells.empty()
+	return false
 
 func isEggStuffedBy(_charID:String) -> bool:
 	for egg in bigEggs:
@@ -348,7 +354,7 @@ func isEggStuffedBy(_charID:String) -> bool:
 	return false
 
 func isPregnantFromPlayer(_normalPreg:bool = true, _bigEggPreg:bool = true) -> bool:
-	if(!isPregnant() && !isEggStuffed()):
+	if(!isPregnant()):
 		return false
 	
 	if(_normalPreg):
@@ -364,7 +370,7 @@ func isPregnantFromPlayer(_normalPreg:bool = true, _bigEggPreg:bool = true) -> b
 	return false
 
 func isPregnantFrom(_charID:String, _normalPreg:bool = true, _bigEggPreg:bool = true) -> bool:
-	if(!isPregnant() && !isEggStuffed()):
+	if(!isPregnant()):
 		return false
 	
 	if(_normalPreg):

@@ -190,7 +190,9 @@ func _run():
 			else:
 				saynn("- Total records found "+str(calculateAmount(true))+":")
 				# (Your children here)
-				printChildren(true)
+				
+				var pcChilds := GM.CS.getChildrenRelatedTo("pc")
+				outputChildrenRecords(pcChilds)
 			
 		var archivedAmount:int = GM.CS.getArchiveChildCountMotherOrFather("pc")
 		if(archivedAmount <= 0 && !(OPTIONS.getMaxKeepPCKids() > 0 || !OPTIONS.shouldOptimizeKids())):
@@ -225,7 +227,8 @@ func _run():
 			sayn("")
 			saynn("- Unrelated records found "+str(other)+":")
 		
-			printChildren(false)
+			var theOtherChilds := GM.CS.getChildrenNotRelatedTo("pc")
+			outputChildrenRecords(theOtherChilds)
 			
 		var archivedNPCAmount:int = GM.CS.getArchiveChildCountNonPC()
 		if(archivedNPCAmount > 0):
@@ -345,9 +348,16 @@ func _run():
 		saynn("You only get to spend a few minutes with your "+childStr+" before you have to go.")
 
 		addButton("Leave", "Time to go", "endthescene")
-
-func calculateAmount(pcKids = true):
-	var amount = 0
+	
+	if(state == "give_eggs"):
+		saynn("You hand the nurse all of the offspring eggs that you had.")
+		
+		saynn(bornChildString)
+		
+		addButton("Continue", "See what happens next", "")
+	
+func calculateAmount(pcKids:bool = true) -> int:
+	var amount:int = 0
 	
 	for ch in GM.CS.getChildren():
 		var child: Child = ch
@@ -358,41 +368,8 @@ func calculateAmount(pcKids = true):
 		amount += 1
 	return amount
 
-func printChildren(pcKids = true):
-	var resultTable = "[font=res://Fonts/normalconsolefont.tres][table=7][cell]Name[/cell][cell]Gender[/cell][cell]Species[/cell][cell]Age[/cell][cell]Mother[/cell][cell]Father[/cell][cell]Extra[/cell]"
-	
-	for ch in GM.CS.getChildren():
-		var child: Child = ch
-		if(pcKids && child.fatherID != "pc" && child.motherID != "pc"):
-			continue
-		if(!pcKids && (child.fatherID == "pc" || child.motherID == "pc")):
-			continue
-		
-		var birthDay = child.birthDay
-		var daysPassed = GM.main.getDays() - birthDay
-		var yearsOld:int = daysPassed / 365
-		var daysOld:int = daysPassed - yearsOld * 365
-		var ageStr = str(daysOld)+" days"
-		if(daysOld == 1):
-			ageStr = str(daysOld)+" day"
-		
-		if(yearsOld < 1):
-			pass
-		elif(yearsOld == 1):	
-			ageStr = "1 year "+ageStr
-		else:
-			ageStr = str(yearsOld)+" years "+ageStr
-		
-		resultTable += "[cell]"+child.name+"[/cell]"
-		resultTable += "[cell]"+"[color="+NpcGender.getColorString(child.gender)+"]"+ NpcGender.getVisibleName(child.gender)+"[/color]"+"[/cell]"
-		resultTable += "[cell]"+Util.getSpeciesName(child.species)+"[/cell]"
-		resultTable += "[cell]"+ageStr+"[/cell]"
-		resultTable += "[cell]"+child.getMotherName()+"[/cell]"
-		resultTable += "[cell]"+child.getFatherName()+"[/cell]"
-		resultTable += "[cell]"+child.getMonozygotic()+"[/cell]"
-		
-	resultTable += "[/table][/font]"
-	sayn(resultTable)
+func outputChildrenRecords(_childs:Array):
+	sayn(GM.CS.getChildBigReportString(_childs))
 
 func _react(_action: String, _args):
 	if(_action == "sleep"):
@@ -420,7 +397,9 @@ func _react(_action: String, _args):
 		return
 	
 	if(_action == "give_eggs"):
+		processTime(10*60)
 		var theEggs:Array = GM.pc.getInventory().getOffspringEggs()
+		var allNewChilds:Array = []
 		
 		var pcFatherAm:int = 0
 		var pcOtherAm:int = 0
@@ -433,9 +412,13 @@ func _react(_action: String, _args):
 				pcFatherAm += 1
 			else:
 				pcOtherAm += 1
-			if(theEgg.egg.addSelfToNursery()):
+			var theChilds:Array = theEgg.egg.addSelfToNursery()
+			if(!theChilds.empty()):
+				allNewChilds.append_array(theChilds)
 				addedAm += 1
 			GM.pc.getInventory().removeItem(theEgg)
+		
+		bornChildString = GM.CS.getChildBigReportString(allNewChilds)
 		
 		addMessage(str(addedAm)+" egg"+("s" if addedAm != 1 else "")+" got added to the database!")
 		
@@ -443,7 +426,7 @@ func _react(_action: String, _args):
 			GM.pc.addSkillExperience(Skill.Breeder, 10*pcFatherAm)
 		if(pcOtherAm > 0):
 			GM.pc.addSkillExperience(Skill.Fertility, 10*pcOtherAm)
-		return
+		#return
 	
 	setState(_action)
 

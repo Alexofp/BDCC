@@ -571,7 +571,7 @@ func afterSleeping(restoreStats:bool = true):
 	for statusEffectID in statusEffects:
 		statusEffects[statusEffectID].onSleeping()
 	
-	if(isPregnant() && getPregnancyProgress() <= 0.5 && RNG.chance(30)):
+	if(isPregnant(true, false) && getPregnancyProgress() <= 0.5 && RNG.chance(30)):
 		GM.main.addLogMessage("Nausea", "You wake up and feel kinda nauseous.")
 		addEffect(StatusEffect.PregnancySickness)
 

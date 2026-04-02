@@ -117,7 +117,12 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 		angerChance -= personality(SUB_0, PersonalityStat.Subby)*50.0
 		angerChance -= personality(SUB_0, PersonalityStat.Coward)*30.0
 		if(getSub().isSlaveToPlayer()):
-			angerChance *= 0.5
+			var thePCSlave = getSub().getNpcSlavery()
+			var theAngerMult:float = (1.0-thePCSlave.getObedience())
+			theAngerMult = max(theAngerMult, thePCSlave.getSpoiling())
+			if(thePCSlave.isMindBroken()):
+				theAngerMult = 0.0
+			angerChance *= theAngerMult
 		
 		if(angerChance >= 100.0 || RNG.chance(angerChance)):
 			# Hey, those are mine!
@@ -157,6 +162,7 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 		eggsOut.append(anEgg)
 		getSubInfo().addLust(20)
 		getSubInfo().addArousal(0.1) # Just a little help
+		fetishAffect(SUB_0, Fetish.BeingBred, 10.0)
 		stimulate(DOM_0, S_HANDS, SUB_0, anEgg.getBodypart(), I_HIGH, Fetish.Breeding, SPEED_MEDIUM)
 		
 	if(_actionID == "stop"):

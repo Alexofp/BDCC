@@ -24,3 +24,9 @@ func getTraits():
 		PartTrait.AnusWomb: true,
 		PartTrait.LaysEggs: true,
 	}
+
+func getTransformGrowMessage(_context:Dictionary) -> String:
+	return .getTransformGrowMessage(_context)+" This one is special too.. in some way.."
+
+func getTransformMorphMessage(_context:Dictionary) -> String:
+	return .getTransformMorphMessage(_context)+" This one is special too.. in some way.."

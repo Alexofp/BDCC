@@ -14,15 +14,30 @@ func addChild(child):
 func getChildren() -> Array:
 	return children
 
-func getChildrenOf(charID) -> Array:
-	var result = []
+func getChildrenOf(charID:String) -> Array:
+	var result:Array = []
 	for child in children:
 		if((child.getMotherID() == charID) || (child.getFatherID() == charID)):
 			result.append(child)
 	return result
 
-func getChildrenAmountOf(charID) -> int:
-	var result = 0
+func getChildrenRelatedTo(charID:String) -> Array:
+	var result:Array = []
+	for child in children:
+		if((child.getMotherID() == charID) || (child.getFatherID() == charID) || (child.getLaidByID() == charID)):
+			result.append(child)
+	return result
+
+func getChildrenNotRelatedTo(charID:String) -> Array:
+	var result:Array = []
+	for child in children:
+		if((child.getMotherID() == charID) || (child.getFatherID() == charID) || (child.getLaidByID() == charID)):
+			continue
+		result.append(child)
+	return result
+
+func getChildrenAmountOf(charID:String) -> int:
+	var result:int = 0
 	for child in children:
 		if((child.getMotherID() == charID) || (child.getFatherID() == charID)):
 			result += 1
@@ -30,8 +45,8 @@ func getChildrenAmountOf(charID) -> int:
 	result += getArchiveChildCountMotherOrFather(charID)
 	return result
 
-func getChildrenAmountOfOnlyMother(charID) -> int:
-	var result = 0
+func getChildrenAmountOfOnlyMother(charID:String) -> int:
+	var result:int = 0
 	for child in children:
 		if(child.getMotherID() == charID):
 			result += 1
@@ -39,8 +54,8 @@ func getChildrenAmountOfOnlyMother(charID) -> int:
 	result += getArchiveChildCountMotherID(charID)
 	return result
 
-func getChildrenAmountOfOnlyFather(charID) -> int:
-	var result = 0
+func getChildrenAmountOfOnlyFather(charID:String) -> int:
+	var result:int = 0
 	for child in children:
 		if(child.getFatherID() == charID):
 			result += 1
@@ -49,16 +64,16 @@ func getChildrenAmountOfOnlyFather(charID) -> int:
 	return result
 
 # Get array of children created by both firstCharID and secondCharID regardless of their role (excluding archived children)
-func getSharedChildren(firstCharID, secondCharID) -> Array:
-	var result = []
+func getSharedChildren(firstCharID:String, secondCharID:String) -> Array:
+	var result:Array = []
 	for child in children:
 		if(((child.getMotherID() == firstCharID) && (child.getFatherID() == secondCharID)) || ((child.getFatherID() == firstCharID) && (child.getMotherID() == secondCharID))):
 			result.append(child)
 	return result
 
 # Get amount of children created by both firstCharID and secondCharID regardless of their role
-func getSharedChildrenAmount(firstCharID, secondCharID) -> int:
-	var result = 0
+func getSharedChildrenAmount(firstCharID:String, secondCharID:String) -> int:
+	var result:int = 0
 	for child in children:
 		if(((child.getMotherID() == firstCharID) && (child.getFatherID() == secondCharID)) || ((child.getFatherID() == firstCharID) && (child.getMotherID() == secondCharID))):
 			result += 1
@@ -67,16 +82,16 @@ func getSharedChildrenAmount(firstCharID, secondCharID) -> int:
 	return result
 
 # Get amount of children where firstCharID was a father and secondCharID was a mother
-func getSharedChildrenAmountFatherMother(firstCharID, secondCharID) -> int:
-	var result = 0
+func getSharedChildrenAmountFatherMother(firstCharID:String, secondCharID:String) -> int:
+	var result:int = 0
 	for child in children:
 		if((child.getFatherID() == firstCharID) && (child.getMotherID() == secondCharID)):
 			result += 1
 	result += getArchiveChildCount(secondCharID, firstCharID)
 	return result
 
-func getChildBirthInfoString(childs) -> String:
-	var bornChildString = ""
+func getChildBirthInfoString(childs:Array) -> String:
+	var bornChildString:String = ""
 	
 	for child in childs:
 		var fatherObject = GlobalRegistry.getCharacter(child.fatherID)
@@ -91,6 +106,62 @@ func getChildBirthInfoString(childs) -> String:
 		
 		bornChildString += "[color="+NpcGender.getColorString(child.gender)+"]"+ NpcGender.getVisibleName(child.gender)+"[/color]"+" - "+Util.getSpeciesName(child.species)+" - "+"Mother: "+motherName+" - "+"Father: "+fatherName+"\n"
 	return bornChildString
+
+func getChildBigReportString(_childs:Array) -> String:
+	var resultTable:String = "[font=res://Fonts/normalconsolefont.tres][table=7]"
+	resultTable += "[cell]Name[/cell]"
+	resultTable += "[cell]Gender[/cell]"
+	resultTable += "[cell]Species[/cell]"
+	resultTable += "[cell]Age[/cell]"
+	resultTable += "[cell]Mother[/cell]"
+	resultTable += "[cell]Father[/cell]"
+	resultTable += "[cell]Extra[/cell]"
+	
+	for ch in _childs:
+		var child: Child = ch
+		#if(pcKids && child.fatherID != "pc" && child.motherID != "pc"):
+		#	continue
+		#if(!pcKids && (child.fatherID == "pc" || child.motherID == "pc")):
+		#	continue
+		
+		var birthDay:int = child.birthDay
+		var daysPassed:int = GM.main.getDays() - birthDay
+		var yearsOld:int = daysPassed / 365
+		var daysOld:int = daysPassed - yearsOld * 365
+		#var ageStr = str(daysOld)+" days"
+		#if(daysOld == 1):
+		#	ageStr = str(daysOld)+" day"
+		var ageStr:String = str(daysOld)+"d"
+		
+		if(yearsOld < 1):
+			pass
+		#elif(yearsOld == 1):
+		#	ageStr = "1 year "+ageStr
+		else:
+			#ageStr = str(yearsOld)+" years "+ageStr
+			ageStr = str(yearsOld)+"y "+ageStr
+		
+		var theExtras:Array = []
+		var theMono:String = child.getMonozygotic()
+		if(!theMono.empty()):
+			theExtras.append(theMono)
+		if(child.bigEgg):
+			theExtras.append("Egg")
+		if(!child.laidByID.empty()):
+			var theLaidByChar = GlobalRegistry.getCharacter(child.laidByID)
+			if(theLaidByChar):
+				theExtras.append("Laid by "+theLaidByChar.getName())
+		
+		resultTable += "[cell]"+child.name+"[/cell]"
+		resultTable += "[cell]"+"[color="+NpcGender.getColorString(child.gender)+"]"+ NpcGender.getVisibleName(child.gender)+"[/color]"+"[/cell]"
+		resultTable += "[cell]"+Util.getSpeciesName(child.species)+"[/cell]"
+		resultTable += "[cell]"+ageStr+"[/cell]"
+		resultTable += "[cell]"+child.getMotherName()+"[/cell]"
+		resultTable += "[cell]"+child.getFatherName()+"[/cell]"
+		resultTable += "[cell]"+Util.join(theExtras, ", ")+"[/cell]"
+		
+	resultTable += "[/table][/font]"
+	return resultTable
 
 func shouldOptimize() -> bool:
 	return OPTIONS.shouldOptimizeKids()

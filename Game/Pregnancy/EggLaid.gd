@@ -81,15 +81,15 @@ static func getANameByEggType(_type:int) -> String:
 		return "An unfertilized egg"
 	return "An offspring egg"
 
-func addSelfToNursery() -> bool:
+func addSelfToNursery() -> Array:
 	var theEggCell := createEggCell()
 	if(!theEggCell || !theEggCell.isImpregnated()):
-		return false
+		return []
 	var bornChildren := theEggCell.makeChilds()
 	for child in bornChildren:
 		child.setLaidByID(laidBy)
 		GM.CS.addChild(child)
-	return true
+	return bornChildren
 
 func handleNursery() -> bool:
 	if(type == BigEggType.Fertilized):

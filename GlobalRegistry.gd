@@ -906,6 +906,16 @@ func getBodypartsIdsBySlot(_slot:String) -> Array:
 			result.append(bodypartID)
 	return result
 
+func getBodypartsIdsBySlotForTF(_slot:String) -> Array:
+	var result:Array = []
+	for bodypartID in bodyparts:
+		var bodypart = bodyparts[bodypartID]
+		if(bodypart.shouldBeExcludedFromTFPick()):
+			continue
+		if(bodypart.getSlot() == _slot):
+			result.append(bodypartID)
+	return result
+
 func registerBodypartFolder(folder: String):
 	var dir = Directory.new()
 	if dir.open(folder) == OK:

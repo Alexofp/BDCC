@@ -519,7 +519,7 @@ static func findPossibleBodypartIDs(bodypartSlot:String, acharacter, theSpecies:
 			allAllowed[allowedBodypartID] = true
 	
 	var maxScore:float = 0.0
-	var allbodypartsIDs = GlobalRegistry.getBodypartsIdsBySlot(bodypartSlot)
+	var allbodypartsIDs = GlobalRegistry.getBodypartsIdsBySlot(bodypartSlot) if !_isTF else GlobalRegistry.getBodypartsIdsBySlotForTF(bodypartSlot)
 	for bodypartID in allbodypartsIDs:
 		var bodypart = GlobalRegistry.getBodypartRef(bodypartID)
 		var supportedSpecies:Array = bodypart.getCompatibleSpeciesFinal()
@@ -586,3 +586,7 @@ func setFluidsCauserID(_charID:String):
 	var _fluids = getFluids()
 	if(_fluids != null):
 		_fluids.setCauserID(_charID)
+
+# If true, this bodypart won't be able to generate for some TFs
+func shouldBeExcludedFromTFPick() -> bool:
+	return false
