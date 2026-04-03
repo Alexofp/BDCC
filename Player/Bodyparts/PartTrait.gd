@@ -29,6 +29,7 @@ enum {
 	HairOvereye,
 	HairShort,
 	HairLong,
+	HairVeryShort,
 	
 	# Breasts
 	BreastsMale,
@@ -73,6 +74,7 @@ const traitNames = [
 	"HairOvereye",
 	"HairShort",
 	"HairLong",
+	"HairVeryShort",
 	
 	# Breasts
 	"BreastsMale",

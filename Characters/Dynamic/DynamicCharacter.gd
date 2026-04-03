@@ -509,20 +509,31 @@ func loadData(data):
 	resetSlots()
 	var loadedBodyparts = SAVE.loadVar(data, "bodyparts", {})
 	for slot in loadedBodyparts:
-		if(loadedBodyparts[slot] == null):
+		var isSlotEssential:bool = BodypartSlot.isEssential(slot)
+		if(loadedBodyparts[slot] == null && !isSlotEssential):
 			bodyparts[slot] = null
 			continue
-		var id = SAVE.loadVar(loadedBodyparts[slot], "id", "errorbad")
-		var bodypart = GlobalRegistry.createBodypart(id)
-		if(bodypart == null):
-			var replacementID = BodypartSlot.findReplacement(slot, id, getSpecies(), getGender())
+		var thePartEntry:Dictionary = loadedBodyparts[slot] if loadedBodyparts[slot] != null else {}
+		
+		var thePartID:String = SAVE.loadVar(thePartEntry, "id", "")
+		var bodypart
+		
+		if(thePartID.empty() || !GlobalRegistry.getBodypartRef(thePartID)):
+			var replacementID = BodypartSlot.findReplacement(slot, thePartID, getSpecies(), getGender())
 			if(replacementID == null || replacementID == ""):
 				Log.printerr("Couldn't find an replacement bodypart for slot "+str(slot))
 				continue
 			bodypart = GlobalRegistry.createBodypart(replacementID)
+		else:
+			bodypart = GlobalRegistry.createBodypart(thePartID)
+		
+		if(!bodypart):
+			Log.printerr("Something went very wrong while trying to give "+str(getID())+" a bodypart for the slot: "+slot)
+			continue
 			
 		giveBodypart(bodypart, false)
-		bodypart.loadData(SAVE.loadVar(loadedBodyparts[slot], "data", {}))
+		if(!thePartEntry.empty()):
+			bodypart.loadData(SAVE.loadVar(thePartEntry, "data", {}))
 	checkSkins(true)
 	
 	if(data.has("statusEffects")):

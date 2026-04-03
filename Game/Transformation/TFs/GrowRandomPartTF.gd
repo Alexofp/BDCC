@@ -97,6 +97,8 @@ func doProgress(_context:Dictionary) -> Dictionary:
 		for theSlot in allSlots:
 			if(theSlot == BodypartSlot.Body && GlobalRegistry.getBodypartsIdsBySlotForTF(theSlot).size() == 1):
 				continue
+			if(theSlot == BodypartSlot.Hair):
+				continue
 			possibleSlots.append(theSlot)
 		
 		var pickedRandomSlot:String = RNG.pick(possibleSlots)
