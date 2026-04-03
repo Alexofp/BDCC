@@ -350,7 +350,7 @@ func processTime(_secondsPassed):
 	GM.GES.callGameExtenders(ExtendGame.npcProcessTime, [self, _secondsPassed])
 	#lastUpdatedDay = GM.main.getDays()
 	#lastUpdatedSecond = GM.main.getTime()
-	lastUpdatedSecond += _secondsPassed
+	#lastUpdatedSecond += _secondsPassed
 	if(isReadyToGiveBirth()):
 		pregnancyWaitTimer += _secondsPassed
 		if(shouldGiveBirth()):
@@ -536,6 +536,7 @@ func checkOldWayOfUpdating(theday:int, theseconds:int):
 		lastUpdatedDay = theday
 		lastUpdatedSecond = theseconds
 
+const DAY_SECONDS := 24*60*60
 func processUntilTime(theday:int, theseconds:int):
 	if(lastUpdatedDay < 0):
 		lastUpdatedDay = theday
@@ -552,7 +553,11 @@ func processUntilTime(theday:int, theseconds:int):
 	if(dayDiff == 0):
 		secondsDiff = theseconds - lastUpdatedSecond
 	else:
-		secondsDiff = 24*60*60*dayDiff - lastUpdatedSecond + theseconds
+		secondsDiff += DAY_SECONDS - lastUpdatedSecond # The rest of the old day
+		secondsDiff += theseconds # The seconds of the new day
+		if(dayDiff > 1):
+			secondsDiff += DAY_SECONDS * (dayDiff - 1) # The skipped days in between
+		#secondsDiff = 24*60*60*dayDiff - lastUpdatedSecond + theseconds
 	
 	if(secondsDiff < 0):
 		Log.error("processUntilTime() trying to process "+str(getID())+" for a negative amount of seconds ("+str(secondsDiff)+")")

@@ -737,6 +737,8 @@ func doTimeProcess(_seconds:int):
 		var clippedSeconds = min(60*60, copySeconds)
 		#GM.PROFILE.start("GM.pc.processTime")
 		GM.pc.processTime(clippedSeconds)
+		#GM.pc.lastUpdatedSecond = timeOfDay
+		#GM.pc.lastUpdatedDay = currentDay
 		#GM.PROFILE.finish("GM.pc.processTime")
 		
 		for characterID in charactersToUpdate:
@@ -744,6 +746,8 @@ func doTimeProcess(_seconds:int):
 			if(character != null):
 				#GM.PROFILE.start(characterID+".processTime")
 				character.processTime(clippedSeconds)
+				character.lastUpdatedSecond = timeOfDay # This makes sure the npc update time is correct
+				character.lastUpdatedDay = currentDay
 				#GM.PROFILE.finish(characterID+".processTime")
 		
 		copySeconds -= clippedSeconds
@@ -838,14 +842,14 @@ func getVisibleTime():
 func getFormattedTimeFromSeconds(howManySeconds:int):
 	return Util.getTimeStringHHMM(howManySeconds)
 
-func getTime():
+func getTime() -> int:
 	return timeOfDay
 
-func getDays():
+func getDays() -> int:
 	return currentDay
 
-func getTimeInGlobalSeconds():
-	return int(currentDay * 24 * 60 * 60) + int(timeOfDay)
+func getTimeInGlobalSeconds() -> int:
+	return currentDay*24*60*60 + timeOfDay
 
 func setFlag(flagID, value):
 	# Handling "ModuleID.FlagID" here
@@ -1985,7 +1989,7 @@ func isCharacterInAnyNPCEvent(_charID:String) -> bool:
 	
 	return false
 
-func updateCharacterUntilNow(charID):
+func updateCharacterUntilNow(charID:String):
 	var character = getCharacter(charID)
 	if(character != null):
 		character.processUntilTime(currentDay, timeOfDay)
