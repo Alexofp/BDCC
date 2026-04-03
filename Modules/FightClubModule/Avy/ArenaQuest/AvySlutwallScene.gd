@@ -301,7 +301,7 @@ func _run():
 		saynn("You add a tally mark on Avy's ass, as a reminder of how many times she was used.")
 
 		addButton("Continue", "That was fun", "main")
-		addButtonWithChecks("Piss inside", "Might as well relief yourself too", "anal_pee", [], [[ButtonChecks.ContentEnabled, ContentType.Watersports]])
+		addButtonWithChecks("Piss inside", "Might as well relieve yourself too", "anal_pee", [], [[ButtonChecks.ContentEnabled, ContentType.Watersports]])
 	if(state == "anal_pee"):
 		playAnimation(StageScene.SlutwallSex, "inside", {pc="avy", bodyState={naked=true, hard=true, caged=isCaged}, npcBodyState={exposedCrotch=true, hard=true}})
 		saynn("Hmm.. After cumming inside Avy you already begin to feel like you wanna pee. But why go anywhere if you got such a nice toilet in here already.")

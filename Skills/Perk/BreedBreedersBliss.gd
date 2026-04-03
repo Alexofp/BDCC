@@ -9,7 +9,7 @@ func getVisibleName():
 	return "Breeder's Bliss"
 
 func getVisibleDescription():
-	return "Heat is the prime state for breeding. Orgasming inside someone's pussy while they are in heat will relief 20 pain and give you 20 stamina back!"
+	return "Heat is the prime state for breeding. Orgasming inside someone's pussy while they are in heat will relieve 20 pain and give you 20 stamina back!"
 
 func getSkillTier():
 	return 0

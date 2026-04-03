@@ -51,11 +51,11 @@ func run(_triggerID, _args):
 			addDisabledButton("Mirror (Slave)", "Slave level 3+ required to do this")
 		
 		if(npcSlavery.getActivityID() == "Walkies" && npcSlavery.getActivity().petWants == "pee"):
-			addButton("Urinals (Pet)", "Help your puppy relief themselves", "start_pee", [npcID])
+			addButton("Urinals (Pet)", "Help your puppy relieve themselves", "start_pee", [npcID])
 
 	if(locName in peeSpots):
 		if(npcSlavery.getActivityID() == "Walkies" && npcSlavery.getActivity().petWants == "pee"):
-			addButton("Bushes (Pet)", "Help your puppy relief themselves", "start_pee", [npcID])
+			addButton("Bushes (Pet)", "Help your puppy relieve themselves", "start_pee", [npcID])
 
 	if(locName in playSpots):
 		if(npcSlavery.getActivityID() == "Walkies" && npcSlavery.getActivity().petWants == "play"):
