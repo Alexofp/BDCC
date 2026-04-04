@@ -1539,6 +1539,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/SexEngine/SexSubInfo.gd"
 }, {
+"base": "Node",
+"class": "SexToyBackend",
+"language": "GDScript",
+"path": "res://Util/SexToySupport/SexToyBackend.gd"
+}, {
+"base": "Reference",
+"class": "SexToyVibrator",
+"language": "GDScript",
+"path": "res://Util/SexToySupport/SexToyVibrator.gd"
+}, {
 "base": "Object",
 "class": "SexType",
 "language": "GDScript",
@@ -2146,6 +2156,8 @@ _global_script_class_icons={
 "SexReactionHandler": "",
 "SexStance": "",
 "SexSubInfo": "",
+"SexToyBackend": "",
+"SexToyVibrator": "",
 "SexType": "",
 "SexTypeBase": "",
 "SexVoice": "",
@@ -2232,6 +2244,7 @@ GlobalTooltip="*res://Game/UI/Tooltip/TooltipSystem.tscn"
 AutoTranslation="*res://Util/AutoTranslation/AutoTranslation.gd"
 CrotchFavBlocks="*res://Game/Datapacks/UI/CrotchCode/Util/CrotchFavBlocks.gd"
 ModularDialogue="*res://Game/ModularDialogue/ModularDialogue.gd"
+SexToyManager="*res://Util/SexToySupport/SexToyManager.gd"
 
 [debug]
 

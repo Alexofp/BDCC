@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Util/SexToySupport/Backends/ButtplugIO/ButtplugIO.gd" type="Script" id=1]
+
+[node name="ButtplugIO" type="Node"]
+script = ExtResource( 1 )
+
+[node name="TestTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="TestTimer" to="." method="_on_TestTimer_timeout"]
