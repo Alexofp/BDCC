@@ -40,6 +40,12 @@ func isReady() -> bool:
 func processRare(_dt:float):
 	pass
 
+func provideToy(_toy) -> bool:
+	return SexToyManager.provideToy(self, _toy)
+
+func vibrate(_toy, _strength:float):
+	pass
+
 func saveData() -> Dictionary:
 	return {
 		enabled = enabled,

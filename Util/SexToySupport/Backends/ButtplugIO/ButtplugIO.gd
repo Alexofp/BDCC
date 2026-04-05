@@ -106,7 +106,51 @@ func processButtplugIOMessage(_message:Dictionary):
 		
 		test_timer.start()
 		return
-
+	
+	if(_message.has("DeviceList")):
+		var theDevicesList:Dictionary = _message["DeviceList"]
+		var theDevices:Dictionary = theDevicesList.get("Devices", {})
+		
+		for deviceStrIndx in theDevices:
+			var theDevice:Dictionary = theDevices[deviceStrIndx]
+			
+			var _deviceName:String = theDevice.get("DeviceName", "Unknown device")
+			var _timingGap:float = theDevice.get("DeviceMessageTimingGap", 0.0)
+			
+			var theFeatures:Dictionary = theDevice.get("DeviceFeatures", {})
+			for featureStrIndx in theFeatures:
+				var theFeature:Dictionary = theFeatures[featureStrIndx]
+				
+				var _featureDesc:String = theFeature.get("FeatureDescription", "Unknown")
+				
+				# This is not anything that we can control
+				if(!theFeature.has("Output")):
+					continue
+				
+				var theOutput:Dictionary = theFeature.get("Output", {})
+				
+				# It's a vibrating toy
+				if(theOutput.has("Vibrate")):
+					var _minMaxValues:Array = theOutput["Vibrate"].get("Value", [0, 1])
+					
+					var newToy := SexToyVibrator.new()
+					newToy.setBackend(id, _deviceName+"_"+_featureDesc, "vib"+featureStrIndx)
+					
+					var toyData:Dictionary = {
+						minValue = float(_minMaxValues[0]),
+						maxValue = float(_minMaxValues[1]),
+						device = str(deviceStrIndx),
+						feature = str(featureStrIndx),
+					}
+					
+					#newToy.minValue = float(_minMaxValues[0])
+					#newToy.maxValue = float(_minMaxValues[1])
+					newToy.backendData = toyData
+					
+					provideToy(newToy)
+					
+				
+	
 func onSocketConnected(_protocol):
 	if(DEBUG_BUTTPLUGIO):
 		logDebug("Connected to server!")
@@ -187,12 +231,32 @@ func logError(_text:String):
 func _on_TestTimer_timeout():
 	logDebug("!!!TEST TIMER!!!")
 
+#	sendToButtplugIO("OutputCmd", {
+#			"DeviceIndex": 0,
+#			"FeatureIndex": 0,
+#			"Command": {
+#				"Vibrate": {
+#					"Value": 10000,
+#				}
+#			}
+#		})
+
+func vibrate(_toy, _strength:float):
+	var toyData:Dictionary = _toy.backendData
+	
+	var minValue:float = float(toyData.get("minValue", 0.0))
+	var maxValue:float = float(toyData.get("maxValue", 1.0))
+	var device:int = int(toyData.get("device", "0"))
+	var feature:int = int(toyData.get("feature", "0"))
+	
+	var finalValue:int = int(round(Util.remapValue(_strength, 0.0, 1.0, minValue, maxValue)))
+	
 	sendToButtplugIO("OutputCmd", {
-			"DeviceIndex": 0,
-			"FeatureIndex": 0,
+			"DeviceIndex": device,
+			"FeatureIndex": feature,
 			"Command": {
 				"Vibrate": {
-					"Value": 10000,
+					"Value": finalValue,
 				}
 			}
 		})
