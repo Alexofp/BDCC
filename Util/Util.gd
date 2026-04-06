@@ -666,16 +666,16 @@ static func replaceIfNotNull(thestring, whattoreplace, replacewith):
 		return thestring
 	return thestring.replace(whattoreplace, replacewith)
 
-static func readFile(path):
-	var file = File.new()
-	var content = ""
+static func readFile(path:String) -> String:
+	var file := File.new()
+	var content:String = ""
 	if file.open(path, file.READ) == OK:
 		content = file.get_as_text()
 	file.close()
 	return content
 
-static func writeFile(path, content):
-	var file = File.new()
+static func writeFile(path:String, content:String):
+	var file := File.new()
 	file.open(path, File.WRITE)
 	file.store_string(content)
 	file.close()

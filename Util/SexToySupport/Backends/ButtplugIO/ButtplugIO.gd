@@ -27,6 +27,12 @@ onready var test_timer = $"%TestTimer"
 func _init():
 	id = "ButtplugIO"
 
+func getName() -> String:
+	return "ButtplugIO"
+
+func getDesc() -> String:
+	return "BUTTPLUG IO, GOOD API."
+
 func _ready():
 	set_process(false)
 	# Connect base signals to get notified of connection open, close, and errors.
@@ -108,6 +114,7 @@ func processButtplugIOMessage(_message:Dictionary):
 		return
 	
 	if(_message.has("DeviceList")):
+		var theNewToys:Array = []
 		var theDevicesList:Dictionary = _message["DeviceList"]
 		var theDevices:Dictionary = theDevicesList.get("Devices", {})
 		
@@ -134,7 +141,7 @@ func processButtplugIOMessage(_message:Dictionary):
 					var _minMaxValues:Array = theOutput["Vibrate"].get("Value", [0, 1])
 					
 					var newToy := SexToyVibrator.new()
-					newToy.setBackend(id, _deviceName+"_"+_featureDesc, "vib"+featureStrIndx)
+					newToy.setBackend(id, _deviceName, _featureDesc, "vib"+featureStrIndx)
 					
 					var toyData:Dictionary = {
 						minValue = float(_minMaxValues[0]),
@@ -147,8 +154,9 @@ func processButtplugIOMessage(_message:Dictionary):
 					#newToy.maxValue = float(_minMaxValues[1])
 					newToy.backendData = toyData
 					
-					provideToy(newToy)
-					
+					#provideToy(newToy)
+					theNewToys.append(newToy)
+		setToys(theNewToys)
 				
 	
 func onSocketConnected(_protocol):
@@ -260,3 +268,8 @@ func vibrate(_toy, _strength:float):
 				}
 			}
 		})
+
+func scanForToys():
+	if(connectionStatus >= STATUS_CONNECTED):
+		scanForDevices()
+		sendToButtplugIO("RequestDeviceList")

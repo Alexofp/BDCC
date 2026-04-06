@@ -8,10 +8,18 @@ var toys:Array
 var groups:Dictionary
 
 const BackendsFolder := "res://Util/SexToySupport/Backends/"
+const TOY_SETTINGS_FILE := "user://toySettings.json"
 
 var rareTimer:float = 0.0
 
-func _ready():
+var lastUniqueID:int = 0
+
+var saveTimer:float = 0.0
+
+signal onToyListChange
+
+func _ready(): # Move this into some special method that gets called after loading the data?
+	
 	for groupIndx in SexToyGroup.ALL:
 		var newGroup := SexToyGroupInstance.new()
 		newGroup.id = groupIndx
@@ -20,6 +28,9 @@ func _ready():
 	#if(true):
 	#	return
 	loadBackendByFolderName("ButtplugIO")
+	
+	loadFromFile()
+	saveToFile()
 
 func setEnabled(_e:bool):
 	enabled = _e
@@ -46,15 +57,72 @@ func _process(_delta:float):
 	
 	for groupIndx in groups:
 		groups[groupIndx].process(_delta)
+	
+	if(saveTimer > 0.0):
+		saveTimer -= _delta
+		if(saveTimer <= 0.0):
+			saveToFile()
+
+func markShouldSave():
+	if(saveTimer <= 0.0):
+		saveTimer = 3.0
+	else:
+		saveTimer = min(3.0, saveTimer)
 
 func provideToy(_backend, _toy) -> bool:
 	for theToy in toys:
 		if(theToy.isSameAs(_toy)):
+			theToy.backendData = _toy.backendData
 			return false
 	
+	_toy.uniqueID = generateUniqueID()
 	Log.print("NEW TOY ADDED: "+str(_toy.backendDeviceToyID))
 	toys.append(_toy)
+	markShouldSave()
+	emit_signal("onToyListChange")
 	return true
+
+func provideToyGet(_backend, _toy):
+	for theToy in toys:
+		if(theToy.isSameAs(_toy)):
+			theToy.backendData = _toy.backendData
+			return theToy
+	
+	_toy.uniqueID = generateUniqueID()
+	Log.print("NEW TOY ADDED: "+str(_toy.backendDeviceToyID))
+	toys.append(_toy)
+	markShouldSave()
+	#emit_signal("onToyListChange")
+	return _toy
+
+func setToys(_backend, _toys:Array):
+	if(!_backend.enabled):
+		_toys = []
+	var _backendID:String = _backend.id
+	
+	var _shouldUpdate:bool = false
+	var _oldAm:int = toys.size()
+	
+	var allCurrentToys:Array = getToysByBackend(_backendID, false)
+	var needToFind:int = allCurrentToys.size()
+	for theToy in allCurrentToys:
+		theToy.missing = true
+	for theToy in _toys:
+		var theNewToy = provideToyGet(_backend, theToy)
+		if(theNewToy && theNewToy.missing):
+			theNewToy.missing = false
+			_shouldUpdate = true
+			needToFind -= 1
+	if(needToFind > 0):
+		_shouldUpdate = true
+	
+	if(_oldAm != toys.size()):
+		_shouldUpdate = true
+	
+	if(_shouldUpdate):
+		markShouldSave()
+		emit_signal("onToyListChange")
+		#saveToFile()
 
 # More of a test method
 func triggerVibrateAllToys(_intensity:float):
@@ -71,15 +139,76 @@ func getGroup(_groupID:int) -> SexToyGroupInstance:
 func getToysByGroupAndType(_group:int, _type:int, _onlyAvailable:bool = true) -> Array:
 	var result:Array = []
 	for theToy in toys:
-		#TODO: Check if the toy is available
+		if(_onlyAvailable && theToy.isMissing()):
+			continue
 		if(theToy.type == _type && theToy.group == _group):
 			result.append(theToy)
 	return result
 
+func getToysByBackend(_backendID:String, _onlyAvailable:bool = true) -> Array:
+	var result:Array = []
+	for theToy in toys:
+		if(_onlyAvailable && theToy.isMissing()):
+			continue
+		if(theToy.backendID == _backendID):
+			result.append(theToy)
+	return result
+
+func generateUniqueID() -> int:
+	lastUniqueID += 1
+	return lastUniqueID
+	
+func saveToFile():
+	Util.writeFile(TOY_SETTINGS_FILE, JSON.print(saveData(), "\t", true))
+
+func loadFromFile():
+	var theStr := Util.readFile(TOY_SETTINGS_FILE)
+	if(theStr.empty()):
+		return
+		
+	var jsonResult := JSON.parse(theStr)
+	if(jsonResult.error != OK):
+		Log.printerr("SexToyManager: Error while loading the options file, the file is not a valid json")
+		return
+	var saveData = jsonResult.result
+	loadData(saveData)
+
 func saveData() -> Dictionary:
+	var toysData:Array = []
+	for theToy in toys:
+		toysData.append({
+			type = theToy.type,
+			data = theToy.saveData(),
+		})
+	var backendsData:Dictionary = {}
+	for theBackendID in backends:
+		var theBackend = backends[theBackendID]
+		backendsData[theBackend.id] = theBackend.saveData()
+	
 	return {
 		enabled = enabled,
+		lastUniqueID = lastUniqueID,
+		toys = toysData,
+		backends = backendsData,
 	}
 
 func loadData(_data:Dictionary):
 	enabled = SAVE.loadVar(_data, "enabled", false)
+	lastUniqueID = SAVE.loadVar(_data, "lastUniqueID", 0)
+	
+	toys.clear()
+	var toysData:Array = SAVE.loadVar(_data, "toys", [])
+	for theToyEntry in toysData:
+		var theType:int = SAVE.loadVar(theToyEntry, "type", SexToyType.Unknown)
+		if(theType == SexToyType.Vibrator):
+			var theToy := SexToyVibrator.new()
+			theToy.loadData(SAVE.loadVar(theToyEntry, "data", {}))
+			theToy.missing = true
+			toys.append(theToy)
+	
+	var backendsData:Dictionary = SAVE.loadVar(_data, "backends", {})
+	for theBackendID in backends:
+		var ourBackend = backends[theBackendID]
+		if(!backendsData.has(ourBackend.id)):
+			continue
+		ourBackend.loadData(backendsData[ourBackend.id])

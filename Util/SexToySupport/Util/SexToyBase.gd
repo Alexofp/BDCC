@@ -3,22 +3,33 @@ class_name SexToyBase
 
 # It's more of a 'feature' of a toy. Each vibration motor will get its own SexToyBase basically
 
-var id:int = 0
+var uniqueID:int = 0
 var name:String = "Some toy feature"
 var type:int = SexToyType.Unknown
 
 var backendID:String = "" #ButtplugIO
 var backendDevice:String # "some toy name"
+var backendFeature:String # "some motor"
 var backendDeviceToyID:String # could be index like 0. Must always be a string
 
-# Vibrator settings
-var group:int = SexToyGroup.Main # Which group is this vibrator assigned to
+var group:int = SexToyGroup.Main # Which group is this toy assigned to
+var missing:bool = false
 
-var backendData:Dictionary # Data that the backend has decided to store for this device
+var backendData:Dictionary # Data that the backend has decided to store for this device. This one gets saved and loaded!
+var backendDataNoSave:Dictionary # Same but this one doesn't get saved/loaded
 
-func setBackend(_backendID:String, _backendDevice:String, _backendDeviceToyID:String):
+func getName() -> String:
+	return name
+
+func getNameInList() -> String:
+	if(!missing):
+		return getName()
+	return getName()+" (missing)"
+
+func setBackend(_backendID:String, _backendDevice:String, _backendFeature:String, _backendDeviceToyID:String):
 	backendID = _backendID
 	backendDevice = _backendDevice
+	backendFeature = _backendFeature
 	backendDeviceToyID = _backendDeviceToyID
 
 func isSameAs(_otherToy) -> bool:
@@ -30,7 +41,36 @@ func isSameAs(_otherToy) -> bool:
 		return false
 	if(backendDeviceToyID != _otherToy.backendDeviceToyID):
 		return false
-	if(backendData != _otherToy.backendData):
+	if(backendFeature != _otherToy.backendFeature):
 		return false
+	#if(backendData != _otherToy.backendData):
+	#	return false
 	
 	return true
+
+func isMissing() -> bool:
+	return missing
+
+func saveData() -> Dictionary:
+	return {
+		uniqueID = uniqueID,
+		name = name,
+		type = type,
+		backendID = backendID,
+		backendDevice = backendDevice,
+		backendFeature = backendFeature,
+		backendDeviceToyID = backendDeviceToyID,
+		group = group,
+		backendData = backendData,
+	}
+func loadData(_data:Dictionary):
+	uniqueID = SAVE.loadVar(_data, "uniqueID", 0)
+	name = SAVE.loadVar(_data, "name", "Some toy feature")
+	type = SAVE.loadVar(_data, "type", SexToyType.Unknown)
+	backendID = SAVE.loadVar(_data, "backendID", "")
+	backendDevice = SAVE.loadVar(_data, "backendDevice", "")
+	backendFeature = SAVE.loadVar(_data, "backendFeature", "")
+	backendDeviceToyID = SAVE.loadVar(_data, "backendDeviceToyID", "")
+	group = SAVE.loadVar(_data, "group", SexToyGroup.Main)
+	backendData = SAVE.loadVar(_data, "backendData", {})
+	pass
