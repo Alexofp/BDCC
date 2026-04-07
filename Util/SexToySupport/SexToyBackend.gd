@@ -4,7 +4,8 @@ class_name SexToyBackend
 # Provides toys and ways of interacting with them
 
 var id:String = "FILL ME"
-var enabled:bool = false
+var enabled:bool = false # wants to be enabled
+var enabledActually:bool = false
 
 signal devicesChanged
 
@@ -16,26 +17,71 @@ func getDesc() -> String:
 
 func setEnabled(_e:bool):
 	enabled = _e
-	if(enabled):
-		scanForToys()
-	else:
-		setToys([])
+	updateEnabled()
+
+# If we want to be enabled and we're also -actually- enabled
+func isEnabledActually() -> bool:
+	return enabledActually
+
+func updateEnabled():
+	var isMangerEnabled:bool = SexToyManager.isEnabled()
+	
+	if(isMangerEnabled && enabled && !enabledActually):
+		enabledActually = true
+		onEnabled()
+	if((!isMangerEnabled || !enabled) && enabledActually):
+		enabledActually = false
+		onDisabled()
+
+func onEnabled():
+	# Start the toy finding process
+	# scanForToys()
+	pass
+
+func onDisabled():
+	setToys([])
 
 func getSettings() -> Dictionary:
 	return {
-		"test": {
-			
-		},
+#		"name": {
+#			name = "Name",
+#			type = "string",
+#			value = name,
+#		},
+#		"skinImage": {
+#			name = "Skin",
+#			type = "image",
+#			value = skinImage.getImage(),
+#		},
+#		"skinTypeWeights": {
+#			name = "Skin type weights (0 = never, 1.0 = normal, >1.0 = more often)",
+#			type = "skinTypeWeights",
+#			value = skinTypeWeights,
+#		},
 	}
 
-func getSettingValue(_settingID:String):
-	return null
+func applySetting(_varid:String, _value):
+#	if(varid == "name"):
+#		name = value
+#	if(varid == "skinImage"):
+#		skinImage.setImage(value)
+#		return true
+#	if(varid == "skinTypeWeights"):
+#		skinTypeWeights = value
+	
+	return false # If true, the whole panel refreshes
 
-func setSettingValue(_settingID:String, _value):
-	pass
+func getActions() -> Array:
+	return [["rescan", "Rescan for toys"]]
+
+func doAction(_id:String):
+	if(!isEnabledActually()):
+		return
+	if(_id == "rescan"):
+		scanForToys()
 
 func getNameInList() -> String:
-	if(enabled):
+	if(enabledActually):
 		return getName()
 	return getName()+" (disabled)"
 
@@ -73,6 +119,5 @@ func saveData() -> Dictionary:
 	}
 
 func loadData(_data:Dictionary):
-	var newEnabled:bool = SAVE.loadVar(_data, "enabled", false)
-
-	setEnabled(newEnabled)
+	enabled = SAVE.loadVar(_data, "enabled", false)
+	pass

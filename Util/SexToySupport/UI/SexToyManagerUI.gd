@@ -10,6 +10,11 @@ onready var backend_desc = $"%BackendDesc"
 onready var enable_back_end_check_box = $"%EnableBackEndCheckBox"
 onready var test_toy_button = $"%TestToyButton"
 onready var test_toy_slider = $"%TestToySlider"
+onready var backend_pack_variables = $"%BackendPackVariables"
+onready var enable_manager_checkbox = $"%EnableManagerCheckbox"
+onready var backend_actions_list = $"%BackendActionsList"
+onready var back_end_info_label = $"%BackEndInfoLabel"
+onready var toy_pack_variables = $"%ToyPackVariables"
 
 var selectedSomething
 var isBackendSelected:bool = false
@@ -21,6 +26,8 @@ signal onClosePressed
 var backends:Array
 
 func _ready():
+	enable_manager_checkbox.set_pressed_no_signal(SexToyManager.isEnabled())
+	
 	backends = SexToyManager.backends.values()
 	updateBackendList()
 	updateToyList()
@@ -53,8 +60,12 @@ func updateToyOrBackendPanel():
 		var theBackend:SexToyBackend = selectedSomething
 		enable_back_end_check_box.set_pressed_no_signal(theBackend.enabled)
 		backend_desc.bbcode_text = theBackend.getDesc()
+		
+		backend_pack_variables.setVariables(selectedSomething.getSettings())
+		updateBackendActionsList()
+		
 	elif(!isBackendSelected && selectedSomething):
-		pass
+		toy_pack_variables.setVariables(selectedSomething.getSettings())
 
 func _on_CloseButton_pressed():
 	SexToyManager.saveToFile()
@@ -115,3 +126,49 @@ func _process(_delta:float):
 	if(isTestingToy):
 		if(!isBackendSelected && selectedSomething):
 			selectedSomething.vibrate(test_toy_slider.value)
+	
+	if(selectedSomething && (selectedSomething is SexToyBackend)):
+		back_end_info_label.text = Util.join(selectedSomething.getInfo(), "\n")
+	
+func _on_BackendPackVariables_onVariableChange(id, value):
+	if(selectedSomething && (selectedSomething is SexToyBackend)):
+		if(selectedSomething.applySetting(id, value)):
+			updateToyOrBackendPanel()
+
+func _on_EnableManagerCheckbox_pressed():
+	SexToyManager.setEnabled(enable_manager_checkbox.pressed)
+	updateBackendList()
+	updateToyList()
+
+func updateBackendActionsList():
+	if(selectedSomething && (selectedSomething is SexToyBackend)):
+		Util.delete_children(backend_actions_list)
+		
+		var theActions:Array = selectedSomething.getActions()
+		for theActionEntry in theActions:
+			var newButton:Button = Button.new()
+			newButton.text = theActionEntry[1]
+			backend_actions_list.add_child(newButton)
+			newButton.connect("pressed", self, "onBackendAction", [theActionEntry[0]])
+
+func onBackendAction(_action:String):
+	if(selectedSomething && (selectedSomething is SexToyBackend)):
+		selectedSomething.doAction(_action)
+		updateToyOrBackendPanel()
+
+
+func _on_BackendDesc_meta_clicked(meta):
+	var _ok = Util.fixed_shell_open(meta)
+
+func _on_ToyPackVariables_onVariableChange(id, value):
+	if(selectedSomething && (selectedSomething is SexToyBase)):
+		if(selectedSomething.applySetting(id, value)):
+			updateToyOrBackendPanel()
+			updateToyList()
+
+func _on_ForgetToyButton_pressed():
+	if(selectedSomething && (selectedSomething is SexToyBase)):
+		SexToyManager.toys.erase(selectedSomething)
+		selectedSomething = null
+		updateToyOrBackendPanel()
+		updateToyList()

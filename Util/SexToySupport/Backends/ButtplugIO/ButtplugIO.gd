@@ -10,19 +10,29 @@ extends SexToyBackend
 const STATUS_DISCONNECTED := 0
 const STATUS_CONNECTING := 1
 const STATUS_CONNECTED := 2
-const STATUS_TO_TEXT:Array = ["Disconnected", "Connecting", "Connected"]
+const STATUS_TO_TEXT:Array = ["Disconnected", "Connecting...", "Connected"]
 
 const DEBUG_BUTTPLUGIO := true
 
-var websocketURL:String = "ws://127.0.0.1:12345"
+const DEFAULT_WEBSOCKET_URL := "127.0.0.1:12345"
+
+var websocketURL:String = DEFAULT_WEBSOCKET_URL
 var _client = WebSocketClient.new()
 var connectionStatus:int = STATUS_DISCONNECTED
 var messageID:int = 1
+
+var scanTimer:float = 0.0
+var lastErrors:Array
 
 onready var test_timer = $"%TestTimer"
 
 #signal device_found(device)
 #signal device_removed(device)
+
+func getInfo() -> Array:
+	return [
+		"Status: "+str(STATUS_TO_TEXT[connectionStatus]),
+	] + lastErrors
 
 func _init():
 	id = "ButtplugIO"
@@ -31,7 +41,34 @@ func getName() -> String:
 	return "ButtplugIO"
 
 func getDesc() -> String:
-	return "BUTTPLUG IO, GOOD API."
+	return """Buttplug.IO
+
+Quick how-to:
+1. Download Intiface Central App from [url=https://intiface.com/#intiface-central]https://intiface.com/#intiface-central[/url]
+2. Launch it. Connect your toys to it. Press the big 'Launch Server' button that looks like a play icon
+3. Enable Buttplug.IO backend here
+4. Your toys should show up
+
+Only the toys that can 'vibrate' are supported.
+"""
+
+func getSettings() -> Dictionary:
+	return {
+		"websocketURL": {
+			name = "Websocket URL",
+			type = "string",
+			value = websocketURL,
+		},
+	}
+
+func applySetting(_varid:String, _value):
+	if(_varid == "websocketURL"):
+		websocketURL = _value
+		if(websocketURL.empty()):
+			websocketURL = DEFAULT_WEBSOCKET_URL
+			return true
+	
+	return false
 
 func _ready():
 	set_process(false)
@@ -44,9 +81,18 @@ func _ready():
 	# Alternatively, you could check get_peer(1).get_available_packets() in a loop.
 	_client.connect("data_received", self, "onButtplugIOData")
 	
+	#connectToServer()
+
+func onEnabled():
 	connectToServer()
 
+func onDisabled():
+	setToys([])
+	disconnectFromServer()
+	set_process(false)
+
 func connectToServer() -> bool:
+	lastErrors = []
 	if(connectionStatus != STATUS_DISCONNECTED):
 		#_client.disconnect_from_host()
 		return true # Already connected or connecting
@@ -54,7 +100,7 @@ func connectToServer() -> bool:
 	connectionStatus = STATUS_CONNECTING
 	if(DEBUG_BUTTPLUGIO):
 		logDebug("Connecting to server at %s" % websocketURL)
-	var err = _client.connect_to_url(websocketURL)
+	var err = _client.connect_to_url("ws://"+websocketURL)
 	if err != OK:
 		logError("Unable to connect")
 		set_process(false)
@@ -67,6 +113,7 @@ func disconnectFromServer():
 	if(connectionStatus == STATUS_DISCONNECTED):
 		return
 	_client.disconnect_from_host()
+	connectionStatus = STATUS_DISCONNECTED
 
 func onButtplugIOData():
 	var msg = _client.get_peer(1).get_packet().get_string_from_utf8()
@@ -182,23 +229,6 @@ func onSocketClosed(_clean:bool):
 	_client.disconnect_from_host()
 	if(DEBUG_BUTTPLUGIO):
 		logDebug("Socket closed. Clean="+str(_clean))
-	
-#	for device in get_children():
-#		emit_signal("device_removed", device)
-#		device.queue_free()
-
-#func _add_device(info):
-#	var d = ButtplugDevice.new(info, self)
-#	d.name = "%d" % d.device_index
-#	add_child(d)
-#	emit_signal("device_found", d)
-#
-#func _remove_device(info):
-#	var idx = info.DeviceIndex
-#	for device in get_children():
-#		if device.device_index == idx:
-#			emit_signal("device_removed", device)
-#			device.queue_free()
 
 func sendToButtplugIO(command:String, body:Dictionary = {}):
 	body["Id"] = messageID
@@ -219,11 +249,17 @@ func stopScan():
 
 func scanForDevices():
 	startScan()
-	yield(get_tree().create_timer(30.0), "timeout")
-	stopScan()
+	scanTimer = 30.0
+	#yield(get_tree().create_timer(30.0), "timeout")
+	#stopScan()
 
 func _process(_delta:float):
 	_client.poll() # Must be called every frame for a WebSocket
+	
+	if(scanTimer > 0.0):
+		scanTimer -= _delta
+		if(scanTimer <= 0.0):
+			stopScan()
 
 func onError(msg):
 	logError(str(msg))
@@ -235,6 +271,7 @@ func logDebug(_text:String):
 
 func logError(_text:String):
 	Log.printerr("[Buttplug.IO] "+str(_text))
+	lastErrors.append(_text)
 
 func _on_TestTimer_timeout():
 	logDebug("!!!TEST TIMER!!!")
@@ -273,3 +310,13 @@ func scanForToys():
 	if(connectionStatus >= STATUS_CONNECTED):
 		scanForDevices()
 		sendToButtplugIO("RequestDeviceList")
+
+func saveData() -> Dictionary:
+	var theData := .saveData()
+	theData["websocketURL"] = websocketURL
+	return theData
+
+func loadData(_data:Dictionary):
+	.loadData(_data)
+	
+	websocketURL = SAVE.loadVar(_data, "websocketURL", DEFAULT_WEBSOCKET_URL)

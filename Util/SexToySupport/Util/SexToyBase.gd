@@ -51,6 +51,28 @@ func isSameAs(_otherToy) -> bool:
 func isMissing() -> bool:
 	return missing
 
+func getSettings() -> Dictionary:
+	return {
+		"name": {
+			name = "Name",
+			type = "string",
+			value = name,
+		},
+	}
+
+func applySetting(_varid:String, _value):
+	if(_varid == "name"):
+		name = _value
+		return true
+	
+	return false
+
+func getSettingsFinal() -> Dictionary:
+	return getSettings()
+
+func applySettingFinal(_varid:String, _value):
+	return applySetting(_varid, _value)
+
 func saveData() -> Dictionary:
 	return {
 		uniqueID = uniqueID,

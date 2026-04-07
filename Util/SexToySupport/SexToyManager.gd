@@ -28,12 +28,18 @@ func _ready(): # Move this into some special method that gets called after loadi
 	#if(true):
 	#	return
 	loadBackendByFolderName("ButtplugIO")
+	loadBackendByFolderName("XToysApp")
 	
 	loadFromFile()
-	saveToFile()
+	#saveToFile()
 
 func setEnabled(_e:bool):
 	enabled = _e
+	updateEnabled()
+	
+func updateEnabled():
+	for backendID in backends:
+		backends[backendID].updateEnabled()
 
 func addBackend(_backend):
 	add_child(_backend)
@@ -157,7 +163,10 @@ func getToysByBackend(_backendID:String, _onlyAvailable:bool = true) -> Array:
 func generateUniqueID() -> int:
 	lastUniqueID += 1
 	return lastUniqueID
-	
+
+func isEnabled() -> bool:
+	return enabled
+
 func saveToFile():
 	Util.writeFile(TOY_SETTINGS_FILE, JSON.print(saveData(), "\t", true))
 
@@ -212,3 +221,4 @@ func loadData(_data:Dictionary):
 		if(!backendsData.has(ourBackend.id)):
 			continue
 		ourBackend.loadData(backendsData[ourBackend.id])
+		ourBackend.updateEnabled()

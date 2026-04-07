@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Util/SexToySupport/UI/SexToyManagerUI.gd" type="Script" id=1]
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=2]
+[ext_resource path="res://Game/Datapacks/UI/PackVariables.tscn" type="PackedScene" id=3]
 
 [node name="SexToyManagerUI" type="Control"]
 anchor_right = 1.0
@@ -37,6 +38,7 @@ margin_right = 1272.0
 margin_bottom = 42.0
 
 [node name="EnableManagerCheckbox" type="CheckBox" parent="TabContainer/Toy Settings/VBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
 margin_right = 246.0
 margin_bottom = 28.0
 text = "Enable sex toy integration"
@@ -70,7 +72,7 @@ allow_reselect = true
 margin_top = 123.0
 margin_right = 292.0
 margin_bottom = 143.0
-text = "Found toys"
+text = "Found toy features"
 
 [node name="ToyItemList" type="ItemList" parent="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -105,17 +107,44 @@ margin_right = 976.0
 margin_bottom = 28.0
 text = "Enabled"
 
-[node name="BackendDesc" type="RichTextLabel" parent="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2/BackendPanel"]
+[node name="BackendPackVariables" parent="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2/BackendPanel" instance=ExtResource( 3 )]
 unique_name_in_owner = true
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_top = 32.0
 margin_right = 976.0
-margin_bottom = 314.0
-rect_min_size = Vector2( 0, 50 )
-size_flags_vertical = 3
+margin_bottom = 58.0
+addSeparators = false
+
+[node name="BackendDesc" type="RichTextLabel" parent="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2/BackendPanel"]
+unique_name_in_owner = true
+margin_top = 62.0
+margin_right = 976.0
+margin_bottom = 83.0
 size_flags_stretch_ratio = 0.2
 bbcode_enabled = true
 bbcode_text = "Asd"
 text = "Asd"
+fit_content_height = true
+
+[node name="PanelContainer" type="PanelContainer" parent="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2/BackendPanel"]
+margin_top = 87.0
+margin_right = 976.0
+margin_bottom = 121.0
+
+[node name="BackEndInfoLabel" type="Label" parent="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2/BackendPanel/PanelContainer"]
+unique_name_in_owner = true
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 969.0
+margin_bottom = 27.0
+autowrap = true
+
+[node name="BackendActionsList" type="HFlowContainer" parent="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2/BackendPanel"]
+unique_name_in_owner = true
+margin_top = 125.0
+margin_right = 976.0
+margin_bottom = 125.0
 
 [node name="ToyPanel" type="VBoxContainer" parent="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2"]
 unique_name_in_owner = true
@@ -124,9 +153,18 @@ margin_right = 976.0
 margin_bottom = 632.0
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2/ToyPanel"]
+[node name="ToyPackVariables" parent="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2/ToyPanel" instance=ExtResource( 3 )]
+unique_name_in_owner = true
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_right = 976.0
 margin_bottom = 26.0
+addSeparators = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2/ToyPanel"]
+margin_top = 30.0
+margin_right = 976.0
+margin_bottom = 56.0
 
 [node name="Label" type="Label" parent="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2/ToyPanel/HBoxContainer"]
 margin_right = 69.0
@@ -152,6 +190,16 @@ size_flags_vertical = 1
 max_value = 1.0
 step = 0.01
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2/ToyPanel"]
+margin_top = 60.0
+margin_right = 976.0
+margin_bottom = 86.0
+
+[node name="ForgetToyButton" type="Button" parent="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2/ToyPanel/HBoxContainer2"]
+margin_right = 100.0
+margin_bottom = 26.0
+text = "Forget toy"
+
 [node name="Gameplay Triggers" type="Control" parent="TabContainer"]
 unique_name_in_owner = true
 visible = false
@@ -163,8 +211,13 @@ margin_right = 110.0
 margin_bottom = 36.0
 text = "Close"
 
+[connection signal="pressed" from="TabContainer/Toy Settings/VBoxContainer/HBoxContainer2/EnableManagerCheckbox" to="." method="_on_EnableManagerCheckbox_pressed"]
 [connection signal="item_selected" from="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/VBoxContainer/BackendsItemList" to="." method="_on_BackendsItemList_item_selected"]
 [connection signal="item_selected" from="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/VBoxContainer/ToyItemList" to="." method="_on_ToyItemList_item_selected"]
 [connection signal="pressed" from="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2/BackendPanel/EnableBackEndCheckBox" to="." method="_on_EnableBackEndCheckBox_pressed"]
+[connection signal="onVariableChange" from="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2/BackendPanel/BackendPackVariables" to="." method="_on_BackendPackVariables_onVariableChange"]
+[connection signal="meta_clicked" from="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2/BackendPanel/BackendDesc" to="." method="_on_BackendDesc_meta_clicked"]
+[connection signal="onVariableChange" from="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2/ToyPanel/ToyPackVariables" to="." method="_on_ToyPackVariables_onVariableChange"]
 [connection signal="pressed" from="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2/ToyPanel/HBoxContainer/TestToyButton" to="." method="_on_TestToyButton_pressed"]
+[connection signal="pressed" from="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2/ToyPanel/HBoxContainer2/ForgetToyButton" to="." method="_on_ForgetToyButton_pressed"]
 [connection signal="pressed" from="CloseButton" to="." method="_on_CloseButton_pressed"]
