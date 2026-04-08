@@ -110,6 +110,8 @@ func startTestingToy():
 	selectedSomething.vibrate(test_toy_slider.value)
 
 func stopTestingToy():
+	#if(true):
+	#	return
 	if(!isTestingToy):
 		return
 	isTestingToy = false

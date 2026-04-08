@@ -4,7 +4,7 @@ class_name CurveEditorCustom
 
 var _curve: Curve
 
-const ASPECT_RATIO: float = 6.0 / 13.0
+const ASPECT_RATIO: float = 2.0 / 13.0
 const MIN_X: float = 0.0
 const MAX_X: float = 1.0
 

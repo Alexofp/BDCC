@@ -43,6 +43,8 @@ func getName() -> String:
 func getDesc() -> String:
 	return """Buttplug.IO
 
+Read the full instruction [url=https://github.com/Alexofp/BDCC/wiki/Sex-toy-integration-(Buttplug.IO,-XToys.app)]on the BDCC wiki[/url]
+
 Quick how-to:
 1. Download Intiface Central App from [url=https://intiface.com/#intiface-central]https://intiface.com/#intiface-central[/url]
 2. Launch it. Connect your toys to it. Press the big 'Launch Server' button that looks like a play icon
@@ -172,6 +174,7 @@ func processButtplugIOMessage(_message:Dictionary):
 			var _timingGap:float = theDevice.get("DeviceMessageTimingGap", 0.0)
 			
 			var theFeatures:Dictionary = theDevice.get("DeviceFeatures", {})
+			var _group:int = 0
 			for featureStrIndx in theFeatures:
 				var theFeature:Dictionary = theFeatures[featureStrIndx]
 				
@@ -189,6 +192,12 @@ func processButtplugIOMessage(_message:Dictionary):
 					
 					var newToy := SexToyVibrator.new()
 					newToy.setBackend(id, _deviceName, _featureDesc, "vib"+featureStrIndx)
+					newToy.name = _deviceName
+					if(_featureDesc.empty()):
+						newToy.name += " (Vibrator "+str(int(featureStrIndx)+1)+")"
+					else:
+						newToy.name += " ("+_featureDesc+")"
+					newToy.group = _group
 					
 					var toyData:Dictionary = {
 						minValue = float(_minMaxValues[0]),
@@ -203,6 +212,9 @@ func processButtplugIOMessage(_message:Dictionary):
 					
 					#provideToy(newToy)
 					theNewToys.append(newToy)
+					_group += 1
+					if(_group > 1):
+						_group = 0
 		setToys(theNewToys)
 				
 	

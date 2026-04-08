@@ -52,11 +52,21 @@ func isMissing() -> bool:
 	return missing
 
 func getSettings() -> Dictionary:
+	var theGroupsValues:Array = []
+	for theGroup in SexToyGroup.ALL:
+		theGroupsValues.append([theGroup, SexToyGroup.getName(theGroup)])
+	
 	return {
 		"name": {
 			name = "Name",
 			type = "string",
 			value = name,
+		},
+		"group": {
+			name = "Group",
+			type = "selector",
+			value = group,
+			values = theGroupsValues,
 		},
 	}
 
@@ -64,6 +74,8 @@ func applySetting(_varid:String, _value):
 	if(_varid == "name"):
 		name = _value
 		return true
+	if(_varid == "group"):
+		group = _value
 	
 	return false
 

@@ -9,7 +9,10 @@ const DEFAULT_WEBHOOK := "CHANGE_ME"
 var webhookID:String = DEFAULT_WEBHOOK
 
 var lastErrors:Array
-onready var http_request = $"%HTTPRequest"
+
+var requestQueue:Dictionary = {}
+const REQUEST_TIME_DELAY = 0.1 # 10 requests a second max
+var requestTimer:float = 0.0
 
 #signal device_found(device)
 #signal device_removed(device)
@@ -28,8 +31,15 @@ func getName() -> String:
 func getDesc() -> String:
 	return """XToys.App
 
-Quick how-to:
+Read the full instruction [url=https://github.com/Alexofp/BDCC/wiki/Sex-toy-integration-(Buttplug.IO,-XToys.app)]on the BDCC wiki[/url]
 
+Quick how-to:
+1. Enable this backend. 4 toy features will appear, one for each group.
+2. Download [url=https://xtoys.app/]xtoys.app[/url] onto your smartphone, register and connect your toys to it.
+3. Load (and start) this script: [url=https://xtoys.app/scripts/-OpcaiGlTFy0Tw-AA23D]https://xtoys.app/scripts/-OpcaiGlTFy0Tw-AA23D[/url] or search for the one called "BDCC" (by Rahi)
+4. The script will give you a "Webhook ID". Copy it here, into the Webhook ID field (below the Enabled).
+5. Inside the xtoys app, connect the output variables of the script (groups) to your toys.
+6. Test the groups here to make sure everything is working.
 """
 
 func getSettings() -> Dictionary:
@@ -56,11 +66,14 @@ func _ready():
 
 func onEnabled():
 	var theToys:Array = []
-	var newToy := SexToyVibrator.new()
-	newToy.setBackend(id, "some", "", "1")
-	var toyData:Dictionary = {}
-	newToy.backendData = toyData
-	theToys.append(newToy)
+	for theGroup in SexToyGroup.ALL:
+		var newToy := SexToyVibrator.new()
+		newToy.setBackend(id, "some", "", str(theGroup + 1))
+		var toyData:Dictionary = {}
+		newToy.backendData = toyData
+		newToy.group = theGroup
+		newToy.name = "XToys ("+SexToyGroup.getName(theGroup)+" group)"
+		theToys.append(newToy)
 	
 	setToys(theToys)
 	set_process(true)
@@ -70,9 +83,6 @@ func onDisabled():
 	#disconnectFromServer()
 	set_process(false)
 
-
-func _process(_delta:float):
-	pass
 
 func logDebug(_text:String):
 	if(!DEBUG_XTOYSAPP):
@@ -95,23 +105,39 @@ func logError(_text:String):
 
 var bufferedRequest:Dictionary
 var isRequesting:bool = false
-func doXToysRequest(_data:Dictionary):
-	if(!isRequesting):
-		isRequesting = true
-		http_request.request(
+func doXToysRequest(_requestID:String, _data:Dictionary):
+	if(!requestQueue.has(_requestID)):
+		requestQueue[_requestID] = _data
+	else:
+		requestQueue[_requestID].merge(_data, true)
+
+func _process(_delta:float):
+	if(requestTimer > 0.0):
+		requestTimer -= _delta
+	
+	if(requestTimer <= 0.0 && !requestQueue.empty()):
+		var theRequestID:String = requestQueue.keys().front()
+		var _data:Dictionary = requestQueue[theRequestID]
+		
+		var newHttpRequest := HTTPRequest.new()
+		add_child(newHttpRequest)
+		newHttpRequest.connect("request_completed", self, "deleteRequestAfterDone", [newHttpRequest])
+		newHttpRequest.request(
 			"https://webhook.xtoys.app/"+webhookID, ["Content-Type: application/json"], true, HTTPClient.METHOD_POST,
 			JSON.print(_data)
 		)
-		logDebug("Sent: "+str(_data))
-		bufferedRequest.clear()
-	else:
-		for someField in _data:
-			bufferedRequest[someField] = _data[someField]
+		if(DEBUG_XTOYSAPP):
+			logDebug("Sent: "+str(_data))
+		requestTimer = REQUEST_TIME_DELAY
+		requestQueue.erase(theRequestID)
 
 func vibrate(_toy, _strength:float):
-	doXToysRequest({
-		action = "set",
-		v1 = _strength,
+	var theGroup:int = _toy.group
+	var theGroupVarName:String = "v"+str(theGroup+1)
+	
+	doXToysRequest("set", {
+		"action": "set",
+		theGroupVarName: _strength,
 	})
 
 func scanForToys():
@@ -127,7 +153,5 @@ func loadData(_data:Dictionary):
 	
 	webhookID = SAVE.loadVar(_data, "webhookID", DEFAULT_WEBHOOK)
 
-func _on_HTTPRequest_request_completed(_result, _response_code, _headers, _body):
-	isRequesting = false
-	if(!bufferedRequest.empty()):
-		doXToysRequest(bufferedRequest)
+func deleteRequestAfterDone(_result, _response_code, _headers, _body, _request:HTTPRequest):
+	_request.queue_free()
