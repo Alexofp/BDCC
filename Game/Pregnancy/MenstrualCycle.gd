@@ -110,15 +110,19 @@ func forceIntoHeat():
 	cycleProgress = 0.36
 
 func forceOvulate() -> bool:
-	if(ovulatedThisCycle || isPregnant(true, false) || isEggStuffed()):
+	if(ovulatedThisCycle || isPregnant()):
 		return false
 	ovulate()
 	return true
 
 func shouldOvulate() -> bool:
-	if(!ovulatedThisCycle && cycleProgress >= willOvulateAt && !isEggStuffed() && (!isPregnant(true, false) || isEligibleForProlongedPregnancy())):
-		return true
-	return false
+	if(ovulatedThisCycle):
+		return false
+	if(cycleProgress < willOvulateAt):
+		return false
+	if(isPregnant() && !isEligibleForProlongedPregnancy()):
+		return false
+	return true
 
 func setCharacter(ch):
 	character = weakref(ch)
@@ -158,12 +162,11 @@ func getPregnancySpeed() -> float:
 func processTime(seconds:int):
 	var theCharacter = getCharacter()
 	
-	var isNormalPreg:bool = isPregnant(true, false)
-	var isBigEggPreg:bool = isEggStuffedWithOffspring()
-	if(isNormalPreg || isBigEggPreg):
+	var isPreg:bool = isPregnant()
+	if(isPreg):
 		var thePregnancyProgress := getPregnancyProgress(true, true)
 		
-		if(isNormalPreg && theCharacter != null && thePregnancyProgress > 0.05 && !theCharacter.hasPerk(Perk.FertilityBetterOvulationV3)):
+		if(theCharacter != null && thePregnancyProgress > 0.05 && !theCharacter.hasPerk(Perk.FertilityBetterOvulationV3)):
 			cycleProgress = 1.0
 		
 		if(!noticedVisiblyPregnant && isVisiblyPregnant()):
@@ -672,6 +675,8 @@ func loadData(data):
 			egg.loadData(eggD)
 			bigEggs.append(egg)
 	
+	resetNotifications()
+	
 func getRoughChanceOfBecomingPregnant() -> float:
 	if(isVisiblyPregnant()):
 		return 0.0
@@ -861,3 +866,10 @@ func turnImpregnatedEggsIntoBigEggs():
 		impregnatedEggCells.remove(_indx)
 		bigEggs.append(theEggCell)
 		
+func getDebugInfo() -> String:
+	var result:Array = []
+	
+	result.append("Cycle: "+str(Util.roundF(cycleProgress*100.0, 1))+"%")
+	result.append("Should ovulate: "+str(shouldOvulate()))
+	
+	return Util.join(result, "\n")

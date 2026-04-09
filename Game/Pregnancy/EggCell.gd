@@ -97,29 +97,30 @@ func getTimeUntilReadyForBirth() -> int:
 
 func processTime(seconds:float): #seconds is float because pregnancy speed is float
 	var ispeed:int = int(ceil(seconds))
+	
+	if(isimpregnated):
+		var newProgress: float = float(seconds) / getGestationTime()
+		
+		if((progress + newProgress) >= 1.0):
+			fetusReadyForBirth = true
+		
+		progress += newProgress
+		if(progress > 2.5):
+			progress = 2.5
+		return
+	
 	if(!bigEgg):
 		lifeSpan -= ispeed
 		if(lifeSpan < 0):
 			removeMe()
-	else:
-		if(bigEggType == BigEggType.Fertilized):
-			var newProgress: float = float(seconds) / getGestationTime()
-			
-			if((progress + newProgress) >= 1.0):
-				fetusReadyForBirth = true
-			
-			progress += newProgress
-			if(progress > 2.5):
-				progress = 2.5
-
-		else: # Tentacle eggs
-			lifeSpan -= ispeed # Lifespan is the grow time for tentacle eggs
-			if(lifeSpan <= 0):
-				fetusReadyForBirth = true
-				lifeSpan = 0
+	else: # Tentacle/Unfertilized eggs
+		lifeSpan -= ispeed # Lifespan is the grow time for tentacle eggs
+		if(lifeSpan <= 0):
+			fetusReadyForBirth = true
+			lifeSpan = 0
 
 func delayEgg(_time:int):
-	if(bigEggType == BigEggType.Fertilized):
+	if(isimpregnated):
 		var theGestTime := getGestationTime()
 		var adjustedTime:float = float(_time) / float(theGestTime)
 		progress = clamp(1.0 - adjustedTime, 0.0, 1.0)
@@ -130,7 +131,7 @@ func delayEgg(_time:int):
 		fetusReadyForBirth = false
 
 func getTimeUntilReadyToBeLaid() -> int:
-	if(bigEggType == BigEggType.Fertilized):
+	if(isimpregnated):
 		var theGestTime := getGestationTime()
 		var progressLeft:float = 1.0 - progress
 		return int(theGestTime * progressLeft)
@@ -138,14 +139,12 @@ func getTimeUntilReadyToBeLaid() -> int:
 		return lifeSpan
 
 func fetusIsReadyForBirth() -> bool:
-	if(bigEggType != BigEggType.Fertilized): # Tentacle eggs work differnetly
-		return false
 	if(bigEgg): # Big eggs need to be laid
 		return false
 	return fetusReadyForBirth
 
 func isReadyToBeLaid() -> bool:
-	if(bigEgg || (bigEggType != BigEggType.Fertilized)):
+	if(bigEgg):
 		return fetusReadyForBirth
 	return false
 
