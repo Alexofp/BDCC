@@ -522,8 +522,8 @@ func _draw():
 	var max_edge: Vector2 = get_world_pos(Vector2(rect_size.x, 0))
 	
 	# FIXME: Get editor theme colors, not GraphEdit, can't find how to get them
-	var grid_color_primary: Color = Color.green*Color(1, 1, 1, 0.25)#get_theme_color(&"mono_color", &"Editor") * Color(1, 1, 1, 0.25)
-	var grid_color: Color = Color.red*Color(1, 1, 1, 0.1)#get_theme_color(&"mono_color", &"Editor") * Color(1, 1, 1, 0.1)
+	var grid_color_primary: Color = Color.whitesmoke*Color(1, 1, 1, 0.25)#get_theme_color(&"mono_color", &"Editor") * Color(1, 1, 1, 0.25)
+	var grid_color: Color = Color.gray*Color(1, 1, 1, 0.1)#get_theme_color(&"mono_color", &"Editor") * Color(1, 1, 1, 0.1)
 	
 	var grid_steps: Vector2 = Vector2(4, 2)
 	var step_size: Vector2 = Vector2(1, (_curve.max_value - _curve.min_value)) / grid_steps
@@ -586,7 +586,7 @@ func _draw():
 	
 	draw_set_transform_matrix(Transform2D())
 	
-	var point_color: Color = Color.aqua#get_theme_color(&"font_color", &"Editor")
+	var point_color: Color = Color.cyan#get_theme_color(&"font_color", &"Editor")
 	# Change this if you want to a different color for the hovered point
 	var hovered_point_color: Color = point_color
 	

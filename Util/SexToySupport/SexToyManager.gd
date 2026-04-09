@@ -2,6 +2,8 @@ extends Node
 
 var enabled:bool = false
 
+var gameplay:SexToyGameplay
+
 var backends:Dictionary
 var toys:Array
 
@@ -32,6 +34,8 @@ func _ready(): # Move this into some special method that gets called after loadi
 	
 	loadFromFile()
 	#saveToFile()
+	
+	gameplay = SexToyGameplay.new()
 
 func setEnabled(_e:bool):
 	enabled = _e
