@@ -5,6 +5,7 @@ var vibPattern:Array
 var patternCopy:Array
 var vibLevel:float = 0.0
 var looping:bool = false
+var intensity:float = 1.0
 
 func playPattern(_pat:Array, _looping:bool = false):
 	vibPattern = _pat.duplicate()
@@ -33,7 +34,7 @@ func process(_dt:float):
 	if(looping && vibPattern.empty()):
 		vibPattern = patternCopy.duplicate()
 	
-	vibLevel = newVibLevel
+	vibLevel = newVibLevel * intensity
 
 func getValue() -> float:
 	return vibLevel
@@ -42,3 +43,9 @@ func shouldBeRemoved() -> bool:
 	if(looping):
 		return false
 	return vibPattern.empty()
+
+func setIntensity(_i:float):
+	intensity = _i
+
+func getIntensity() -> float:
+	return intensity

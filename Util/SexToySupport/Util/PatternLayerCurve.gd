@@ -5,6 +5,7 @@ var curve:Curve
 var progress:float = 0.0
 var looping:bool = false
 var time:float = 1.0
+var intensity:float = 1.0
 
 func playCurve(_curve:Curve, _time:float, _looping:bool = false):
 	looping = _looping
@@ -23,7 +24,7 @@ func process(_dt:float):
 			progress -= 1.0
 
 func getValue() -> float:
-	return curve.interpolate_baked(clamp(progress, 0.0, 1.0))
+	return curve.interpolate_baked(clamp(progress, 0.0, 1.0)) * intensity
 
 func shouldBeRemoved() -> bool:
 	if(!curve):
@@ -31,3 +32,9 @@ func shouldBeRemoved() -> bool:
 	if(looping):
 		return false
 	return progress >= 1.0
+
+func setIntensity(_i:float):
+	intensity = _i
+
+func getIntensity() -> float:
+	return intensity

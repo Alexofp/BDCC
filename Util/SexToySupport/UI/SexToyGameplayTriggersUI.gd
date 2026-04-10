@@ -2,10 +2,12 @@ extends Control
 
 onready var triggers_item_list = $"%TriggersItemList"
 onready var effect_list = $"%EffectList"
-onready var inverted_passive_checkbox = $"%InvertedPassiveCheckbox"
 onready var trigger_name_label = $"%TriggerNameLabel"
+onready var passive_h_box = $"%PassiveHBox"
+onready var start_from_label = $"%StartFromLabel"
+onready var start_from_h_slider = $"%StartFromHSlider"
 
-var selectedTrigger:int = -1
+var selectedTrigger:int = 0
 
 var effectUIEntryScene = preload("res://Util/SexToySupport/UI/SexToyEffectUIEntry.tscn")
 
@@ -14,6 +16,7 @@ func _ready():
 		var theTriggerName:String = SexToyTrigger.getName(theTriggerID)
 		triggers_item_list.add_item(theTriggerName)
 	
+	triggers_item_list.select(selectedTrigger)
 	updateSelectedTrigger()
 
 func _on_TriggersItemList_item_selected(_index:int):
@@ -31,9 +34,12 @@ func updateSelectedTrigger():
 	if(!theTriggerEntry):
 		return
 	
-	inverted_passive_checkbox.set_pressed_no_signal(theTriggerEntry.inverted)
-	inverted_passive_checkbox.visible = theTriggerEntry.isPassive()
-	trigger_name_label.text = SexToyTrigger.getDesc(selectedTrigger, theTriggerEntry.inverted)
+	passive_h_box.visible = theTriggerEntry.isPassive()
+	if(passive_h_box.visible):
+		updateStartFromSlider()
+	#inverted_passive_checkbox.set_pressed_no_signal(theTriggerEntry.inverted)
+	#inverted_passive_checkbox.visible = theTriggerEntry.isPassive()
+	trigger_name_label.text = SexToyTrigger.getDesc(selectedTrigger)
 	
 	var _i:int = 0
 	for theEffect in theTriggerEntry.effects:
@@ -43,6 +49,13 @@ func updateSelectedTrigger():
 		newEffectUIEntry.setEntry(_i+1, theEffect)
 		newEffectUIEntry.connect("onDeleteButton", self, "onDeleteEffectButton")
 		_i += 1
+
+func updateStartFromSlider():
+	var theEntry := getCurrentTrigger()
+	if(!theEntry):
+		return
+	start_from_h_slider.value = theEntry.startFrom
+	start_from_label.text = "Start from "+str(Util.roundF(theEntry.startFrom*100.0, 0))+"%"
 
 func _on_AddNewEffectButton_pressed():
 	if(selectedTrigger < 0 || selectedTrigger >= SexToyTrigger.TOTAL_AMOUNT):
@@ -80,9 +93,22 @@ func onDeleteEffectButton(_entry:SexToyEffectEntry):
 	theTrigger.checkShouldBeRemoved()
 	updateSelectedTrigger()
 
-func _on_InvertedPassiveCheckbox_pressed():
+#func _on_InvertedPassiveCheckbox_pressed():
+#	var theTrigger := getCurrentTrigger()
+#	if(!theTrigger || !theTrigger.isPassive()):
+#		return
+#	theTrigger.inverted = inverted_passive_checkbox.pressed
+#	updateSelectedTrigger()
+
+func _on_StartFromHSlider_value_changed(_value:float):
 	var theTrigger := getCurrentTrigger()
-	if(!theTrigger || !theTrigger.isPassive()):
+	if(!theTrigger):
 		return
-	theTrigger.inverted = inverted_passive_checkbox.pressed
-	updateSelectedTrigger()
+	theTrigger.startFrom = _value
+	updateStartFromSlider()
+
+func _on_TestEffectButton_pressed():
+	var theTrigger := getCurrentTrigger()
+	if(!theTrigger):
+		return
+	theTrigger.triggerTest()

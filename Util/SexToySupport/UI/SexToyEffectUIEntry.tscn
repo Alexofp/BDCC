@@ -136,6 +136,8 @@ margin_left = 78.0
 margin_right = 964.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "asd"
 
 [node name="Label2" type="Label" parent="SexToyEffectVBox/SequenceEffect/HBoxContainer"]
 margin_left = 968.0
@@ -146,6 +148,7 @@ text = "]"
 
 [node name="SimpleEffect" type="VBoxContainer" parent="SexToyEffectVBox"]
 unique_name_in_owner = true
+visible = false
 margin_top = 76.0
 margin_right = 972.0
 margin_bottom = 112.0
@@ -198,10 +201,9 @@ scrollable = false
 
 [node name="CurveEffect" type="VBoxContainer" parent="SexToyEffectVBox"]
 unique_name_in_owner = true
-visible = false
-margin_top = 162.0
+margin_top = 76.0
 margin_right = 972.0
-margin_bottom = 258.0
+margin_bottom = 172.0
 
 [node name="Label" type="Label" parent="SexToyEffectVBox/CurveEffect"]
 margin_right = 972.0
@@ -236,7 +238,10 @@ margin_bottom = 24.0
 step = 0.1
 allow_greater = true
 
+[connection signal="pressed" from="SexToyEffectVBox/HBoxContainer3/TestEffectButton" to="." method="_on_TestEffectButton_pressed"]
 [connection signal="pressed" from="SexToyEffectVBox/HBoxContainer3/DeleteEffectButton" to="." method="_on_DeleteEffectButton_pressed"]
 [connection signal="item_selected" from="SexToyEffectVBox/HBoxContainer/EffectTypeOptionButton" to="." method="_on_EffectTypeOptionButton_item_selected"]
+[connection signal="text_changed" from="SexToyEffectVBox/SequenceEffect/HBoxContainer/SequenceLineEdit" to="." method="_on_SequenceLineEdit_text_changed"]
 [connection signal="value_changed" from="SexToyEffectVBox/SimpleEffect/HBoxContainer/IntensitySlider" to="." method="_on_IntensitySlider_value_changed"]
 [connection signal="value_changed" from="SexToyEffectVBox/SimpleEffect/HBoxContainer2/TimeSlider" to="." method="_on_TimeSlider_value_changed"]
+[connection signal="value_changed" from="SexToyEffectVBox/CurveEffect/HBoxContainer/CurveDurationSpinBox" to="." method="_on_CurveDurationSpinBox_value_changed"]

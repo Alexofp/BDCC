@@ -57,7 +57,7 @@ size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer"]
 margin_right = 976.0
-margin_bottom = 280.0
+margin_bottom = 282.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
@@ -80,36 +80,52 @@ margin_bottom = 26.0
 custom_colors/font_color = Color( 0.839216, 1, 0.980392, 1 )
 text = "Test trigger"
 
-[node name="InvertedPassiveCheckbox" type="CheckBox" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="PassiveHBox" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 unique_name_in_owner = true
 margin_top = 30.0
 margin_right = 976.0
-margin_bottom = 58.0
-text = "Inverted"
+margin_bottom = 50.0
+
+[node name="StartFromLabel" type="Label" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PassiveHBox"]
+unique_name_in_owner = true
+margin_right = 103.0
+margin_bottom = 20.0
+text = "Start from %"
+
+[node name="StartFromHSlider" type="HSlider" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PassiveHBox"]
+unique_name_in_owner = true
+margin_left = 107.0
+margin_right = 976.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 62.0
+margin_top = 54.0
 margin_right = 976.0
-margin_bottom = 82.0
+margin_bottom = 74.0
 text = "Trigger these effects:"
 align = 1
 
 [node name="EffectList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 unique_name_in_owner = true
-margin_top = 86.0
+margin_top = 78.0
 margin_right = 976.0
-margin_bottom = 226.0
+margin_bottom = 228.0
 
 [node name="SexToyEffectUIEntry" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/EffectList" instance=ExtResource( 3 )]
-margin_bottom = 140.0
+margin_bottom = 150.0
 
 [node name="AddNewEffectButton" type="Button" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 230.0
+margin_top = 232.0
 margin_right = 976.0
-margin_bottom = 280.0
+margin_bottom = 282.0
 rect_min_size = Vector2( 0, 50 )
 text = "Add new effect"
 
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/VBoxContainer/TriggersItemList" to="." method="_on_TriggersItemList_item_selected"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/InvertedPassiveCheckbox" to="." method="_on_InvertedPassiveCheckbox_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/TestEffectButton" to="." method="_on_TestEffectButton_pressed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PassiveHBox/StartFromHSlider" to="." method="_on_StartFromHSlider_value_changed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/AddNewEffectButton" to="." method="_on_AddNewEffectButton_pressed"]

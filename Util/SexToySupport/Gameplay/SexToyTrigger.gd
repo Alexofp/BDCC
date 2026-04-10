@@ -26,7 +26,7 @@ enum {
 const NAMES:Array = [
 	["Lust (passive)", "The higher your character's lust is, the stronger the effects will be.", "The lower your character's lust is, the stronger the effects will be."],
 	["Pain (passive)", "The higher your character's pain is, the stronger the effects will be.", "The lower your character's pain is, the stronger the effects will be."],
-	["Stamina (passive)", "The higher your character's stamina is, the stronger the effects will be.", "The lower your character's stamina is, the stronger the effects will be."],
+	["Exhaustion (passive)", "The lower your character's stamina is, the stronger the effects will be.", "The higher your character's stamina is, the stronger the effects will be."],
 	["Arousal (passive)", "The higher your character's arousal is, the stronger the effects will be.", "The lower your character's arousal is, the stronger the effects will be."],
 	
 	["Pain Gain", "Trigger effects when your character receives pain."],
@@ -43,12 +43,12 @@ static func getName(_trigger:int) -> String:
 		return "UNKNOWN:"+str(_trigger)
 	return NAMES[_trigger][0]
 
-static func getDesc(_trigger:int, _invert:bool = false) -> String:
+static func getDesc(_trigger:int) -> String:
 	if(_trigger < 0 || _trigger >= NAMES.size()):
 		return "UNKNOWN:"+str(_trigger)
 	if(!isPassive(_trigger)):
 		return NAMES[_trigger][1]
-	return NAMES[_trigger][1 if !_invert else 2]
+	return NAMES[_trigger][1]
 
 static func isPassive(_trigger:int) -> bool:
 	if(_trigger == Lust):

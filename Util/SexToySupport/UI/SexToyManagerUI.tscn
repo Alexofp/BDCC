@@ -205,9 +205,9 @@ text = "Forget toy"
 visible = false
 
 [node name="CloseButton" type="Button" parent="."]
-margin_right = 110.0
+margin_right = 139.0
 margin_bottom = 36.0
-text = "Close"
+text = "Save & Close"
 
 [connection signal="pressed" from="TabContainer/Toy Settings/VBoxContainer/HBoxContainer2/EnableManagerCheckbox" to="." method="_on_EnableManagerCheckbox_pressed"]
 [connection signal="item_selected" from="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/VBoxContainer/BackendsItemList" to="." method="_on_BackendsItemList_item_selected"]

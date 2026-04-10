@@ -15,6 +15,8 @@ func vibrate(_intensity:float):
 	# Simple cache to save against poking the backend too much
 	if(abs(cachedVibrate - _intensity) < 0.01):
 		return
+	if(_intensity < 0.01):
+		_intensity = 0.0
 	cachedVibrate = _intensity
 	
 	var theBackend = SexToyManager.backends[backendID]

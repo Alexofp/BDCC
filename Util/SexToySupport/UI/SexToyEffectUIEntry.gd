@@ -52,6 +52,7 @@ func updateUI():
 		return
 	
 	#toy_group_option_button.select(entry.group)
+	#print(entry.groups)
 	for _i in groupCheckboxes.size():
 		groupCheckboxes[_i].set_pressed_no_signal(entry.groups.has(_i))
 	effect_type_option_button.select(entry.type)
@@ -111,3 +112,35 @@ func _on_TimeSlider_value_changed(value:float):
 	var theValue:Vector2 = entry.getSimple()
 	entry.setSimple(theValue.x, value)
 	updateSimpleEffectText()
+
+func _on_SequenceLineEdit_text_changed(_new_text:String):
+	var didFail:bool = false
+	var theArStr:String = "["+sequence_line_edit.text+"]"
+	var theJsonRes := JSON.parse(theArStr)
+	if(!theJsonRes || theJsonRes.error != OK):
+		didFail = true
+	else:
+		var theVal = theJsonRes.result
+		if(!(theVal is Array)):
+			didFail = true
+		elif(theVal.size() % 2 != 0):
+			didFail = true
+		else:
+			for theNum in theVal:
+				if(!(theNum is float)):
+					didFail = true
+					break
+		
+		if(!didFail):
+			entry.sequence = theVal
+		
+	if(didFail):
+		sequence_line_edit["custom_colors/font_color"] = Color.red
+	else:
+		sequence_line_edit["custom_colors/font_color"] = Color.white
+
+func _on_TestEffectButton_pressed():
+	entry.trigger(100, false)
+
+func _on_CurveDurationSpinBox_value_changed(value:float):
+	entry.curveTime = value

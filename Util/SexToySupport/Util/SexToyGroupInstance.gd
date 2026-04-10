@@ -6,7 +6,6 @@ class_name SexToyGroupInstance
 
 # Handles stuff like patterns
 var id:int = SexToyGroup.Main
-
 var vibration:SexToyPatternLayered = SexToyPatternLayered.new()
 
 func vibratePattern(_pat:Array, _layer:int = 0, _looping:bool = false):
@@ -24,3 +23,9 @@ func process(_dt:float):
 		var theToys:Array = SexToyManager.getToysByGroupAndType(id, SexToyType.Vibrator)
 		for theToy in theToys:
 			theToy.vibrate(vibLevel)
+
+func setIntensity(_i:float):
+	vibration.setIntensity(_i)
+
+func getIntensity() -> float:
+	return vibration.getIntensity()

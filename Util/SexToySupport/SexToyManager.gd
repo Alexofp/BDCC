@@ -32,10 +32,11 @@ func _ready(): # Move this into some special method that gets called after loadi
 	loadBackendByFolderName("ButtplugIO")
 	loadBackendByFolderName("XToysApp")
 	
+	gameplay = SexToyGameplay.new()
+	
 	loadFromFile()
 	#saveToFile()
 	
-	gameplay = SexToyGameplay.new()
 
 func setEnabled(_e:bool):
 	enabled = _e
@@ -72,7 +73,9 @@ func _process(_delta:float):
 		saveTimer -= _delta
 		if(saveTimer <= 0.0):
 			saveToFile()
-
+	
+	gameplay.processGameplay(_delta)
+	
 func markShouldSave():
 	if(saveTimer <= 0.0):
 		saveTimer = 3.0
@@ -203,6 +206,7 @@ func saveData() -> Dictionary:
 		lastUniqueID = lastUniqueID,
 		toys = toysData,
 		backends = backendsData,
+		gameplay = gameplay.saveData(),
 	}
 
 func loadData(_data:Dictionary):
@@ -226,3 +230,5 @@ func loadData(_data:Dictionary):
 			continue
 		ourBackend.loadData(backendsData[ourBackend.id])
 		ourBackend.updateEnabled()
+	
+	gameplay.loadData(SAVE.loadVar(_data, "gameplay", {}))
