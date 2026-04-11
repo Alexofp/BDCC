@@ -46,8 +46,26 @@ align = 1
 unique_name_in_owner = true
 margin_top = 24.0
 margin_right = 292.0
-margin_bottom = 664.0
+margin_bottom = 634.0
 size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 638.0
+margin_right = 292.0
+margin_bottom = 664.0
+
+[node name="ExportConfigButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_right = 144.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "Export config"
+
+[node name="LoadConfigButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 148.0
+margin_right = 292.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "Import"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer"]
 margin_left = 296.0
@@ -57,7 +75,7 @@ size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer"]
 margin_right = 976.0
-margin_bottom = 282.0
+margin_bottom = 336.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
@@ -113,19 +131,94 @@ align = 1
 unique_name_in_owner = true
 margin_top = 78.0
 margin_right = 976.0
-margin_bottom = 228.0
+margin_bottom = 282.0
 
 [node name="SexToyEffectUIEntry" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/EffectList" instance=ExtResource( 3 )]
-margin_bottom = 150.0
+margin_bottom = 204.0
 
 [node name="AddNewEffectButton" type="Button" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 232.0
+margin_top = 286.0
 margin_right = 976.0
-margin_bottom = 282.0
+margin_bottom = 336.0
 rect_min_size = Vector2( 0, 50 )
 text = "Add new effect"
 
+[node name="InfoAcceptDialog" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 313.0
+margin_top = 40.0
+margin_right = -313.0
+margin_bottom = -40.0
+window_title = "Trigger Config Export"
+dialog_autowrap = true
+
+[node name="ExportTextEdit" type="TextEdit" parent="InfoAcceptDialog"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -42.0
+wrap_enabled = true
+
+[node name="CopyExportTextButton" type="Button" parent="InfoAcceptDialog/ExportTextEdit"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -100.0
+margin_top = -34.0
+text = "Copy"
+
+[node name="ConfigImportDialog" type="ConfirmationDialog" parent="."]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 313.0
+margin_top = 42.0
+margin_right = -313.0
+margin_bottom = -42.0
+window_title = "Import Config"
+
+[node name="ImportTextEdit" type="TextEdit" parent="ConfigImportDialog"]
+unique_name_in_owner = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -42.0
+wrap_enabled = true
+
+[node name="PasteTextButton" type="Button" parent="ConfigImportDialog/ImportTextEdit"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -100.0
+margin_top = -34.0
+text = "Paste"
+
+[node name="InfoFinalAcceptDialog" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -160.0
+margin_top = -35.0
+margin_right = 160.0
+margin_bottom = 35.0
+
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/VBoxContainer/TriggersItemList" to="." method="_on_TriggersItemList_item_selected"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/ExportConfigButton" to="." method="_on_ExportConfigButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/LoadConfigButton" to="." method="_on_LoadConfigButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/TestEffectButton" to="." method="_on_TestEffectButton_pressed"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PassiveHBox/StartFromHSlider" to="." method="_on_StartFromHSlider_value_changed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/AddNewEffectButton" to="." method="_on_AddNewEffectButton_pressed"]
+[connection signal="pressed" from="InfoAcceptDialog/ExportTextEdit/CopyExportTextButton" to="." method="_on_CopyExportTextButton_pressed"]
+[connection signal="confirmed" from="ConfigImportDialog" to="." method="_on_ConfigImportDialog_confirmed"]
+[connection signal="pressed" from="ConfigImportDialog/ImportTextEdit/PasteTextButton" to="." method="_on_PasteTextButton_pressed"]

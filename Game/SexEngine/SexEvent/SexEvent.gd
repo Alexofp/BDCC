@@ -178,7 +178,7 @@ var data:Dictionary = {}
 var isSexEngine:bool = false
 var sexEngine
 
-func getType():
+func getType() -> String:
 	return type
 
 func getSourceChar():

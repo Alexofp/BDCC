@@ -6,10 +6,17 @@ var effects:Array = [] #Array[SexToyEffectEntry]
 var startFrom:float = 0.2
 var didPlayPassive:bool = false
 
-func trigger():
-	var _isPassive := SexToyTrigger.isPassive(type)
+func trigger(_args:Array = []):
+	if(type == SexToyTrigger.OnPainGain && getArg(_args, 0, 0) <= 0):
+		return
+	if(type == SexToyTrigger.OnLustGain && getArg(_args, 0, 0) <= 0):
+		return
+	if(type == SexToyTrigger.OnArousalGain && getArg(_args, 0, 0.0) <= 0.0):
+		return
+	
+	#var _isPassive := SexToyTrigger.isPassive(type)
 	for effectEntry in effects:
-		effectEntry.trigger(type, _isPassive)
+		effectEntry.trigger(type, false)
 
 func triggerTest():
 	for effectEntry in effects:
@@ -17,8 +24,12 @@ func triggerTest():
 
 func triggerPassive(_value:float):
 	var finalIntensity:float = 0.0
-	if(_value >= startFrom):
-		finalIntensity = Util.remapValue(_value, 0.2, 1.0, 0.0, 1.0)
+	#if(_value >= startFrom):
+	#	finalIntensity = Util.remapValue(_value, startFrom, 1.0, 0.0, 1.0)
+	if(_value < startFrom):
+		finalIntensity = 0.0
+	else:
+		finalIntensity = _value
 	
 	if(!didPlayPassive && finalIntensity > 0.0):
 		didPlayPassive = true
@@ -32,6 +43,11 @@ func triggerPassive(_value:float):
 		if(_value < startFrom || _value <= 0.0):
 			theGroupInstance.vibration.stopLayer(type)
 			didPlayPassive = false
+
+func getArg(_args:Array, _i:int, _default = null):
+	if(_i >= _args.size()):
+		return _default
+	return _args[_i]
 
 func shouldBeRemoved() -> bool:
 	return effects.empty()

@@ -17,6 +17,8 @@ enum {
 	OnArousalGain,
 	OnOrgasm,
 	OnHoleStretchedPainfully,
+	OnWounded,
+	OnLoseConsciousness,
 	OnFightDefeat,
 	OnFightWin,
 	
@@ -34,6 +36,8 @@ const NAMES:Array = [
 	["Arousal Gain", "Trigger effects when your character receives arousal."],
 	["Orgasm", "Trigger effects when your character orgasms."],
 	["Hole Stretched Painfully", "Trigger effects when one of your character's holes gets stretched painfully."],
+	["Wounded", "Trigger effects when you get the 'Wounded' status effect."],
+	["Lose Consciousness", "Trigger effects when you fully lose your consciousness during sex."],
 	["Fight Defeat", "Trigger effects when your character loses a fight."],
 	["Fight Win", "Trigger effects when your character wins a fight."],
 ]

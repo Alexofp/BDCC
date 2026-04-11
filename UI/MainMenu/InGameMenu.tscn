@@ -39,9 +39,9 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MainMenuCenter"]
 margin_left = 620.0
-margin_top = 271.0
+margin_top = 248.0
 margin_right = 727.0
-margin_bottom = 481.0
+margin_bottom = 504.0
 size_flags_horizontal = 3
 custom_constants/separation = 20
 
@@ -72,11 +72,18 @@ margin_right = 107.0
 margin_bottom = 164.0
 text = "Datapacks"
 
-[node name="MainMenuButton" type="Button" parent="MainMenu/MainMenuCenter/VBoxContainer"]
+[node name="SexToyManagerButton" type="Button" parent="MainMenu/MainMenuCenter/VBoxContainer"]
 unique_name_in_owner = true
 margin_top = 184.0
 margin_right = 107.0
 margin_bottom = 210.0
+text = "Buttplug.io"
+
+[node name="MainMenuButton" type="Button" parent="MainMenu/MainMenuCenter/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 230.0
+margin_right = 107.0
+margin_bottom = 256.0
 text = "Main Menu"
 
 [node name="DatapackIngameMenu" parent="." instance=ExtResource( 5 )]
@@ -89,5 +96,6 @@ visible = false
 [connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/SaveGameButton" to="." method="_on_SaveGameButton2_pressed"]
 [connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
 [connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/DatapacksButton" to="." method="_on_DatapacksButton_pressed"]
+[connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/SexToyManagerButton" to="." method="_on_SexToyManagerButton_pressed"]
 [connection signal="pressed" from="MainMenu/MainMenuCenter/VBoxContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
 [connection signal="onClosePressed" from="DatapackIngameMenu" to="." method="_on_DatapackIngameMenu_onClosePressed"]

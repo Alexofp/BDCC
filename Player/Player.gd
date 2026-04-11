@@ -89,6 +89,24 @@ func _ready():
 func getID():
 	return "pc"
 
+func addPain(_p: int):
+	var initialPain := pain
+	.addPain(_p)
+	if(SexToyManager.enabled && initialPain != pain):
+		SexToyManager.sendTrigger(SexToyTrigger.OnPainGain, [pain-initialPain])
+
+func addLust(_l: int):
+	var initialLust := lust
+	.addLust(_l)
+	if(SexToyManager.enabled && initialLust != lust):
+		SexToyManager.sendTrigger(SexToyTrigger.OnLustGain, [lust-initialLust])
+
+func addArousal(adda:float):
+	var initialArousal := arousal
+	.addArousal(adda)
+	if(SexToyManager.enabled && initialArousal != arousal):
+		SexToyManager.sendTrigger(SexToyTrigger.OnArousalGain, [arousal-initialArousal])
+
 func setLocation(newRoomID:String):
 	if(newRoomID == location):
 		return
@@ -876,6 +894,7 @@ func doPainfullyStretchHole(_bodypart, _who = "pc") -> bool:
 		
 		addEffect(StatusEffect.StretchedPainfullyPussy, [1])
 		emit_signal("holePainfullyStretched", _bodypart, _who)
+		SexToyManager.sendTrigger(SexToyTrigger.OnHoleStretchedPainfully, [_bodypart])
 		return true
 	if(_bodypart == BodypartSlot.Anus && hasBodypart(_bodypart)):
 		if(hasEffect(StatusEffect.LubedUp)):
@@ -883,12 +902,14 @@ func doPainfullyStretchHole(_bodypart, _who = "pc") -> bool:
 		
 		addEffect(StatusEffect.StretchedPainfullyAnus, [1])
 		emit_signal("holePainfullyStretched", _bodypart, _who)
+		SexToyManager.sendTrigger(SexToyTrigger.OnHoleStretchedPainfully, [_bodypart])
 		return true
 	return false
 
 func doWound(_who = "pc") -> bool:
 	addEffect(StatusEffect.Wounded, [1])
 	emit_signal("gotWoundedBy", _who)
+	SexToyManager.sendTrigger(SexToyTrigger.OnWounded)
 	return true
 
 func getEncounterChanceModifierStaff():
@@ -980,6 +1001,9 @@ func onSexEvent(_event : SexEvent):
 			var theSpecialRelationship = GM.main.RS.special[ownerID]
 			if(theSpecialRelationship.id == "SoftSlavery" && theSpecialRelationship.npcOwner):
 				theSpecialRelationship.npcOwner.handleSexEvent(_event)
+
+	if(SexToyManager.enabled):
+		SexToyManager.sendSexEvent(_event)
 
 func isSlaveTo(_charID:String) -> bool:
 	if(!GM.main || !GM.main.RS):

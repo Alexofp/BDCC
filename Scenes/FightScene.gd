@@ -442,9 +442,11 @@ func _react(_action: String, _args):
 			var won = checkEnd()
 			if(won == "lost"):
 				setState("lost")
+				onPCLose()
 				return
 			if(won == "win"):
 				setState("win")
+				onPCWin()
 				return
 		
 		var attack: Attack = GlobalRegistry.getAttack(savedAIAttackID)
@@ -471,6 +473,7 @@ func _react(_action: String, _args):
 		whatHappened = "You give up the fight willingly and submit to your enemy\n"
 		battleState = "lost"
 		playAnimation(StageScene.Solo, "kneel")
+		onPCSubmit()
 		return
 	
 	if(_action == "endbattle"):
@@ -862,8 +865,19 @@ func afterTurnChecks():
 	var won = checkEnd()
 	if(won == "lost"):
 		setState("lost")
+		onPCLose()
 	if(won == "win"):
 		setState("win")
+		onPCWin()
+
+func onPCWin():
+	SexToyManager.sendTrigger(SexToyTrigger.OnFightWin)
+
+func onPCLose():
+	SexToyManager.sendTrigger(SexToyTrigger.OnFightDefeat)
+
+func onPCSubmit():
+	pass
 
 func checkEnd():
 	if(enemySurrendered):

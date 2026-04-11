@@ -6,18 +6,31 @@ onready var trigger_name_label = $"%TriggerNameLabel"
 onready var passive_h_box = $"%PassiveHBox"
 onready var start_from_label = $"%StartFromLabel"
 onready var start_from_h_slider = $"%StartFromHSlider"
+onready var info_accept_dialog = $"%InfoAcceptDialog"
+onready var export_text_edit = $"%ExportTextEdit"
+onready var config_import_dialog = $"%ConfigImportDialog"
+onready var import_text_edit = $"%ImportTextEdit"
+onready var info_final_accept_dialog = $"%InfoFinalAcceptDialog"
 
 var selectedTrigger:int = 0
 
 var effectUIEntryScene = preload("res://Util/SexToySupport/UI/SexToyEffectUIEntry.tscn")
 
 func _ready():
+	updateSelectedTrigger()
+
+func updateTriggersList():
+	var theGameplay:SexToyGameplay = SexToyManager.gameplay
+	triggers_item_list.clear()
 	for theTriggerID in SexToyTrigger.TOTAL_AMOUNT:
 		var theTriggerName:String = SexToyTrigger.getName(theTriggerID)
+		if(theGameplay.triggers.has(theTriggerID)):
+			var theTrigger:SexToyTriggerEntry = theGameplay.triggers[theTriggerID]
+			var efAm:int = theTrigger.effects.size()
+			if(efAm > 0):
+				theTriggerName += " ("+str(efAm)+" effect"+("s" if efAm != 1 else "")+")"
 		triggers_item_list.add_item(theTriggerName)
-	
 	triggers_item_list.select(selectedTrigger)
-	updateSelectedTrigger()
 
 func _on_TriggersItemList_item_selected(_index:int):
 	if(_index < 0 || _index >= SexToyTrigger.TOTAL_AMOUNT):
@@ -26,6 +39,7 @@ func _on_TriggersItemList_item_selected(_index:int):
 	updateSelectedTrigger()
 
 func updateSelectedTrigger():
+	updateTriggersList()
 	Util.delete_children(effect_list)
 	var gameplay:SexToyGameplay = SexToyManager.gameplay
 	#if(!gameplay.triggers.has(selectedTrigger)):
@@ -112,3 +126,26 @@ func _on_TestEffectButton_pressed():
 	if(!theTrigger):
 		return
 	theTrigger.triggerTest()
+
+func _on_ExportConfigButton_pressed():
+	info_accept_dialog.popup_centered()
+	export_text_edit.text = JSON.print(SexToyManager.gameplay.saveData(), "", true)
+
+func _on_CopyExportTextButton_pressed():
+	OS.clipboard = export_text_edit.text
+
+func _on_PasteTextButton_pressed():
+	import_text_edit.text = OS.clipboard
+
+func _on_LoadConfigButton_pressed():
+	config_import_dialog.popup_centered()
+
+func _on_ConfigImportDialog_confirmed():
+	var theJsonResult := JSON.parse(import_text_edit.text)
+	if(!theJsonResult || theJsonResult.error != OK || !(theJsonResult.result is Dictionary)):
+		info_final_accept_dialog.dialog_text = "Bad config. Make sure it looks like JSON."
+		info_final_accept_dialog.popup_centered()
+		return
+	
+	SexToyManager.gameplay.loadData(theJsonResult.result)
+	updateSelectedTrigger()

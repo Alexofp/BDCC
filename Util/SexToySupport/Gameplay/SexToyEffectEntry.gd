@@ -39,11 +39,11 @@ func saveData() -> Dictionary:
 		groups = groups,
 	}
 	if(type == SexToyEffect.SIMPLE):
-		theData["sequence"] = sequence
+		theData["seq"] = sequence
 	elif(type == SexToyEffect.SEQUENCE):
-		theData["sequence"] = sequence
+		theData["seq"] = sequence
 	else:
-		theData["curveTime"] = curveTime
+		theData["ct"] = curveTime
 		theData["curve"] = saveCurve(curve)
 	
 	return theData
@@ -55,9 +55,9 @@ func loadData(_data:Dictionary):
 	for theI in newGroups:
 		groups.append(int(theI)) # Json numbers are floats, gotta convert them into ints
 	if(type == SexToyEffect.SIMPLE || type == SexToyEffect.SEQUENCE):
-		sequence = SAVE.loadVar(_data, "sequence", [1.0, 2.5])
+		sequence = SAVE.loadVar(_data, "seq", [1.0, 2.5])
 	elif(type == SexToyEffect.CURVE):
-		curveTime = SAVE.loadVar(_data, "curveTime", 10.0)
+		curveTime = SAVE.loadVar(_data, "ct", 10.0)
 		curve = loadCurve(SAVE.loadVar(_data, "curve", {}))
 
 func saveCurve(_curve:Curve) -> Dictionary:
@@ -67,11 +67,15 @@ func saveCurve(_curve:Curve) -> Dictionary:
 	var pointAm:int = _curve.get_point_count()
 	for _i in pointAm:
 		var thePos:Vector2 = _curve.get_point_position(_i)
-		thePoints.append([
-			thePos.x, thePos.y,
-			_curve.get_point_left_tangent(_i), _curve.get_point_right_tangent(_i),
-			_curve.get_point_left_mode(_i), _curve.get_point_right_mode(_i), 
-		])
+		var thePointArray:Array = [Util.roundF(thePos.x, 3), Util.roundF(thePos.y, 3)]
+		var hasCustomTangets:bool = (_curve.get_point_left_mode(_i) != 0 || _curve.get_point_right_mode(_i) != 0)
+		if(_curve.get_point_left_tangent(_i) != 0.0 || hasCustomTangets):
+			thePointArray.append(_curve.get_point_left_tangent(_i))
+			thePointArray.append(_curve.get_point_right_tangent(_i))
+			if(hasCustomTangets):
+				thePointArray.append(_curve.get_point_left_mode(_i))
+				thePointArray.append(_curve.get_point_right_mode(_i))
+		thePoints.append(thePointArray)
 	return {
 		points = thePoints,
 	}
@@ -83,9 +87,10 @@ func loadCurve(_data:Dictionary) -> Curve:
 	var theCurve := Curve.new()
 	var thePoints:Array = SAVE.loadVar(_data, "points", [])
 	for thePointEntry in thePoints:
-		if(thePointEntry.size() < 6):
+		if(thePointEntry.size() < 2):
 			continue
+		var theArAm:int = thePointEntry.size() 
 		var thePos:Vector2 = Vector2(thePointEntry[0], thePointEntry[1])
-		theCurve.add_point(thePos, thePointEntry[2], thePointEntry[3], int(thePointEntry[4]), int(thePointEntry[5]))
+		theCurve.add_point(thePos, thePointEntry[2] if theArAm > 2 else 0.0, thePointEntry[3] if theArAm > 3 else 0.0, int(thePointEntry[4]) if theArAm > 4 else 0, int(thePointEntry[5]) if theArAm > 5 else 0)
 	
 	return theCurve

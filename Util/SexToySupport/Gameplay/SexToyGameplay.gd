@@ -6,6 +6,20 @@ class_name SexToyGameplay
 var triggers:Dictionary = {} # trigger indx = 
 var inGame:bool = false
 
+func sendSexEvent(_event:SexEvent):
+	var _type:String = _event.getType()
+	var _isTargetPC:bool = (_event.getTargetCharID() == "pc")
+	var _isActorPC:bool = (_event.getSourceCharID() == "pc")
+	
+	if(_type == SexEvent.Orgasmed && _isTargetPC):
+		sendTrigger(SexToyTrigger.OnOrgasm)
+
+func sendTrigger(_triggerID:int, _args:Array = []):
+	if(!triggers.has(_triggerID)):
+		return
+	var theTrigger:SexToyTriggerEntry = triggers[_triggerID]
+	theTrigger.trigger(_args)
+
 func processGameplay(_dt:float):
 	if((GM.pc && is_instance_valid(GM.pc)) && !inGame):
 		#Log.print("IN GAMEEEE")
@@ -70,3 +84,4 @@ func loadData(_data:Dictionary):
 		if(newTriggerEntry.type < 0 || newTriggerEntry.type >= SexToyTrigger.TOTAL_AMOUNT):
 			continue
 		triggers[newTriggerEntry.type] = newTriggerEntry
+	

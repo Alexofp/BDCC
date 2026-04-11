@@ -41,6 +41,7 @@ func _ready(): # Move this into some special method that gets called after loadi
 func setEnabled(_e:bool):
 	enabled = _e
 	updateEnabled()
+	set_process(enabled)
 	
 func updateEnabled():
 	for backendID in backends:
@@ -59,6 +60,10 @@ func loadBackendByFolderName(_folder:String):
 	addBackend(theScene.instance())
 
 func _process(_delta:float):
+	if(!enabled):
+		set_process(enabled)
+		return
+	
 	rareTimer += _delta
 	if(rareTimer > 1.0):
 		rareTimer = 0.0
@@ -174,6 +179,16 @@ func generateUniqueID() -> int:
 func isEnabled() -> bool:
 	return enabled
 
+func sendSexEvent(_event:SexEvent):
+	if(!enabled):
+		return
+	gameplay.sendSexEvent(_event)
+
+func sendTrigger(_triggerID:int, _args:Array = []):
+	if(!enabled):
+		return
+	gameplay.sendTrigger(_triggerID, _args)
+
 func saveToFile():
 	Util.writeFile(TOY_SETTINGS_FILE, JSON.print(saveData(), "\t", true))
 
@@ -232,3 +247,4 @@ func loadData(_data:Dictionary):
 		ourBackend.updateEnabled()
 	
 	gameplay.loadData(SAVE.loadVar(_data, "gameplay", {}))
+	set_process(enabled)
