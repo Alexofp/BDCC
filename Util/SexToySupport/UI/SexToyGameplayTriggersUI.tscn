@@ -75,7 +75,7 @@ size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer"]
 margin_right = 976.0
-margin_bottom = 336.0
+margin_bottom = 368.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
@@ -120,26 +120,56 @@ size_flags_vertical = 1
 max_value = 1.0
 step = 0.01
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="ScaleWithValue" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+unique_name_in_owner = true
 margin_top = 54.0
 margin_right = 976.0
-margin_bottom = 74.0
+margin_bottom = 82.0
+
+[node name="ScaleWithValueCheckbox" type="CheckBox" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ScaleWithValue"]
+unique_name_in_owner = true
+margin_right = 164.0
+margin_bottom = 28.0
+text = "Scale with value"
+
+[node name="ScaleWithValueLabel" type="Label" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ScaleWithValue"]
+unique_name_in_owner = true
+margin_left = 168.0
+margin_top = 4.0
+margin_right = 296.0
+margin_bottom = 24.0
+text = "Max at xxx pain"
+
+[node name="ScaleWithValueSlider" type="HSlider" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ScaleWithValue"]
+unique_name_in_owner = true
+margin_left = 300.0
+margin_right = 976.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 86.0
+margin_right = 976.0
+margin_bottom = 106.0
 text = "Trigger these effects:"
 align = 1
 
 [node name="EffectList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
 unique_name_in_owner = true
-margin_top = 78.0
+margin_top = 110.0
 margin_right = 976.0
-margin_bottom = 282.0
+margin_bottom = 314.0
 
 [node name="SexToyEffectUIEntry" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/EffectList" instance=ExtResource( 3 )]
 margin_bottom = 204.0
 
 [node name="AddNewEffectButton" type="Button" parent="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 286.0
+margin_top = 318.0
 margin_right = 976.0
-margin_bottom = 336.0
+margin_bottom = 368.0
 rect_min_size = Vector2( 0, 50 )
 text = "Add new effect"
 
@@ -218,6 +248,8 @@ margin_bottom = 35.0
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/LoadConfigButton" to="." method="_on_LoadConfigButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/TestEffectButton" to="." method="_on_TestEffectButton_pressed"]
 [connection signal="value_changed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/PassiveHBox/StartFromHSlider" to="." method="_on_StartFromHSlider_value_changed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ScaleWithValue/ScaleWithValueCheckbox" to="." method="_on_ScaleWithValueCheckbox_pressed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/ScaleWithValue/ScaleWithValueSlider" to="." method="_on_ScaleWithValueSlider_value_changed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer/AddNewEffectButton" to="." method="_on_AddNewEffectButton_pressed"]
 [connection signal="pressed" from="InfoAcceptDialog/ExportTextEdit/CopyExportTextButton" to="." method="_on_CopyExportTextButton_pressed"]
 [connection signal="confirmed" from="ConfigImportDialog" to="." method="_on_ConfigImportDialog_confirmed"]

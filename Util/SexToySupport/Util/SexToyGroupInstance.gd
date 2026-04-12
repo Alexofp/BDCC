@@ -29,3 +29,9 @@ func setIntensity(_i:float):
 
 func getIntensity() -> float:
 	return vibration.getIntensity()
+
+func setOverride(_ov:bool, _val:float):
+	vibration.setOverride(_ov, _val)
+
+func setPaused(_ov:bool):
+	vibration.setPaused(_ov)

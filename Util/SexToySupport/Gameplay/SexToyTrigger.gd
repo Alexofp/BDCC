@@ -64,3 +64,23 @@ static func isPassive(_trigger:int) -> bool:
 	if(_trigger == Arousal):
 		return true
 	return false
+
+static func supportsScaleWithValue(_trigger:int) -> bool:
+	if(_trigger == OnPainGain):
+		return true
+	if(_trigger == OnLustGain):
+		return true
+	if(_trigger == OnArousalGain):
+		return true
+	
+	return false
+
+static func supportsScaleWithValueTexts(_trigger:int) -> Array:
+	if(_trigger == OnPainGain):
+		return ["Scale with pain gain", "pain"]
+	if(_trigger == OnLustGain):
+		return ["Scale with lust gain", "lust"]
+	if(_trigger == OnArousalGain):
+		return ["Scale with arousal gain", "arousal %"]
+	
+	return []

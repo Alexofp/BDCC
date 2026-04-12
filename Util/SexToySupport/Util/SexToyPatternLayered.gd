@@ -5,6 +5,11 @@ var value:float = 0.0
 var layers:Dictionary
 var intensity:float = 1.0
 
+var override:bool = false
+var overrideValue:float = 0.0
+
+var paused:bool = false
+
 func playPatternArray(_pattern:Array, _layer:int, _looping:bool = false):
 	var newPattern := PatternLayerArray.new()
 	newPattern.playPattern(_pattern, _looping)
@@ -33,7 +38,11 @@ func process(_dt:float) -> bool:
 		layers.erase(theIndx)
 	
 	newValue = clamp(newValue*intensity, 0.0, 1.0)
-	if(abs(value - newValue) > 0.01):
+	if(override):
+		newValue = overrideValue
+	if(paused):
+		newValue = 0.0
+	if(abs(value - newValue) > 0.01 || (newValue == 0.0 && newValue != value)):
 		value = newValue
 		if(value < 0.01):
 			value = 0.0
@@ -61,3 +70,10 @@ func hasLayer(_layer:int) -> bool:
 func stopLayer(_layer:int):
 	if(layers.has(_layer)):
 		layers.erase(_layer)
+
+func setOverride(_ov:bool, _val:float):
+	override = _ov
+	overrideValue = _val
+
+func setPaused(_ov:bool):
+	paused = _ov

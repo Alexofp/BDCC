@@ -154,18 +154,25 @@ margin_right = 976.0
 margin_bottom = 632.0
 size_flags_vertical = 3
 
+[node name="ToyMissingLabel" type="Label" parent="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2/ToyPanel"]
+unique_name_in_owner = true
+margin_right = 976.0
+margin_bottom = 20.0
+text = "( This toy is reported as missing by the backend )"
+
 [node name="ToyPackVariables" parent="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2/ToyPanel" instance=ExtResource( 3 )]
 unique_name_in_owner = true
 anchor_right = 0.0
 anchor_bottom = 0.0
+margin_top = 24.0
 margin_right = 976.0
-margin_bottom = 26.0
+margin_bottom = 50.0
 addSeparators = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2/ToyPanel"]
-margin_top = 30.0
+margin_top = 54.0
 margin_right = 976.0
-margin_bottom = 56.0
+margin_bottom = 80.0
 
 [node name="Label" type="Label" parent="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2/ToyPanel/HBoxContainer"]
 margin_right = 69.0
@@ -192,9 +199,9 @@ max_value = 1.0
 step = 0.01
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2/ToyPanel"]
-margin_top = 60.0
+margin_top = 84.0
 margin_right = 976.0
-margin_bottom = 86.0
+margin_bottom = 110.0
 
 [node name="ForgetToyButton" type="Button" parent="TabContainer/Toy Settings/VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer2/ToyPanel/HBoxContainer2"]
 margin_right = 100.0

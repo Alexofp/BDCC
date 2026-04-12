@@ -15,6 +15,7 @@ onready var enable_manager_checkbox = $"%EnableManagerCheckbox"
 onready var backend_actions_list = $"%BackendActionsList"
 onready var back_end_info_label = $"%BackEndInfoLabel"
 onready var toy_pack_variables = $"%ToyPackVariables"
+onready var toy_missing_label = $"%ToyMissingLabel"
 
 var selectedSomething
 var isBackendSelected:bool = false
@@ -65,6 +66,7 @@ func updateToyOrBackendPanel():
 		updateBackendActionsList()
 		
 	elif(!isBackendSelected && selectedSomething):
+		toy_missing_label.visible = selectedSomething.isMissing()
 		toy_pack_variables.setVariables(selectedSomething.getSettings())
 
 func _on_CloseButton_pressed():

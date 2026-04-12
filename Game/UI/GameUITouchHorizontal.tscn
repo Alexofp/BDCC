@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://UI/RichTextBoxEffects/cuss_richtexteffect.tres" type="RichTextEffect" id=1]
 [ext_resource path="res://UI/RichTextBoxEffects/console_richtexteffect.tres" type="RichTextEffect" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://UI/RichTextBoxEffects/ghost_richtexteffect.tres" type="RichTextEffect" id=4]
 [ext_resource path="res://UI/RichTextBoxEffects/matrix_richtexteffect.tres" type="RichTextEffect" id=5]
 [ext_resource path="res://UI/RichTextBoxEffects/pulse_richtexteffect.tres" type="RichTextEffect" id=6]
+[ext_resource path="res://Util/SexToySupport/UI/SexToySmallPanel.tscn" type="PackedScene" id=7]
 [ext_resource path="res://GlobalTheme.tres" type="Theme" id=8]
 [ext_resource path="res://Game/UI/GameUI.gd" type="Script" id=9]
 [ext_resource path="res://UI/FontResources/Normal/BoldFont.tres" type="DynamicFont" id=10]
@@ -161,15 +162,15 @@ margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Panel" type="Control" parent="MainLayout/MainScreenBoxContainer"]
+[node name="Panel" type="HBoxContainer" parent="MainLayout/MainScreenBoxContainer"]
 margin_right = 874.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
 
 [node name="TranslateBox" type="HBoxContainer" parent="MainLayout/MainScreenBoxContainer/Panel"]
 unique_name_in_owner = true
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_right = 242.0
+margin_bottom = 30.0
 
 [node name="TranslateStatusLabel" type="Label" parent="MainLayout/MainScreenBoxContainer/Panel/TranslateBox"]
 unique_name_in_owner = true
@@ -189,6 +190,10 @@ margin_left = 150.0
 margin_right = 242.0
 margin_bottom = 30.0
 text = "Translate"
+
+[node name="SexToySmallPanel" parent="MainLayout/MainScreenBoxContainer/Panel" instance=ExtResource( 7 )]
+margin_left = 246.0
+margin_right = 305.0
 
 [node name="MainScrollContainer" type="ScrollContainer" parent="MainLayout/MainScreenBoxContainer"]
 unique_name_in_owner = true

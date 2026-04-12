@@ -9,7 +9,7 @@ var curveTime:float = 10.0
 
 var sequence:Array = [1.0, 2.5] # [strength, time, strength, time, strength, time]
 
-func trigger(_layer:int, _shouldLoop:bool):
+func trigger(_layer:int, _shouldLoop:bool, _intensity:float = 1.0):
 	for groupID in groups:
 		if(!SexToyManager.groups.has(groupID)):
 			continue
@@ -22,6 +22,7 @@ func trigger(_layer:int, _shouldLoop:bool):
 			theGroup.vibratePattern(sequence, _layer, _shouldLoop)
 		elif(type == SexToyEffect.CURVE):
 			theGroup.vibrateCurve(curve, curveTime, _layer, _shouldLoop)
+		theGroup.vibration.setLayerIntensity(_layer, _intensity)
 
 func getSimple() -> Vector2: #[strength time]
 	if(sequence.empty()):

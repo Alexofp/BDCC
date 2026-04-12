@@ -187,20 +187,31 @@ func processButtplugIOMessage(_message:Dictionary):
 				var theOutput:Dictionary = theFeature.get("Output", {})
 				
 				# It's a vibrating toy
-				if(theOutput.has("Vibrate")):
-					var _minMaxValues:Array = theOutput["Vibrate"].get("Value", [0, 1])
+				for theVibrateType in ["Oscillate", "Rotate", "Vibrate", "Constrict", "Spray"]:
+					if(!theOutput.has(theVibrateType)):
+						continue
+					
+					var theFeatureName:String = theVibrateType
+					if(theFeatureName == "Vibrate"):
+						theFeatureName = "Vibrator"
+					elif(theFeatureName == "Rotate"):
+						theFeatureName = "Rotator"
+					
+					var _minMaxValues:Array = theOutput[theVibrateType].get("Value", [0, 1])
 					
 					var newToy := SexToyVibrator.new()
 					newToy.setBackend(id, _deviceName, _featureDesc, "vib"+featureStrIndx)
 					newToy.name = _deviceName
 					if(_featureDesc.empty()):
-						newToy.name += " (Vibrator "+str(int(featureStrIndx)+1)+")"
+						newToy.name += " ("+theFeatureName+" "+str(int(featureStrIndx)+1)+")"
 					else:
 						newToy.name += " ("+_featureDesc+")"
 					newToy.group = _group
 					
 					var toyData:Dictionary = {
-						minValue = float(_minMaxValues[0]),
+						#minValue = float(_minMaxValues[0]),
+						sendType = theVibrateType,
+						minValue = 0.0,
 						maxValue = float(_minMaxValues[1]),
 						device = str(deviceStrIndx),
 						feature = str(featureStrIndx),
@@ -215,6 +226,8 @@ func processButtplugIOMessage(_message:Dictionary):
 					_group += 1
 					if(_group > 1):
 						_group = 0
+					break
+						
 		setToys(theNewToys)
 				
 	
@@ -301,6 +314,7 @@ func _on_TestTimer_timeout():
 func vibrate(_toy, _strength:float):
 	var toyData:Dictionary = _toy.backendData
 	
+	var sendType:String = toyData.get("sendType", "Vibrate")
 	var minValue:float = float(toyData.get("minValue", 0.0))
 	var maxValue:float = float(toyData.get("maxValue", 1.0))
 	var device:int = int(toyData.get("device", "0"))
@@ -312,7 +326,7 @@ func vibrate(_toy, _strength:float):
 			"DeviceIndex": device,
 			"FeatureIndex": feature,
 			"Command": {
-				"Vibrate": {
+				sendType: {
 					"Value": finalValue,
 				}
 			}

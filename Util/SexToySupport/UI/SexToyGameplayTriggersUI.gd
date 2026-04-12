@@ -11,6 +11,10 @@ onready var export_text_edit = $"%ExportTextEdit"
 onready var config_import_dialog = $"%ConfigImportDialog"
 onready var import_text_edit = $"%ImportTextEdit"
 onready var info_final_accept_dialog = $"%InfoFinalAcceptDialog"
+onready var scale_with_value = $"%ScaleWithValue"
+onready var scale_with_value_checkbox = $"%ScaleWithValueCheckbox"
+onready var scale_with_value_label = $"%ScaleWithValueLabel"
+onready var scale_with_value_slider = $"%ScaleWithValueSlider"
 
 var selectedTrigger:int = 0
 
@@ -51,6 +55,11 @@ func updateSelectedTrigger():
 	passive_h_box.visible = theTriggerEntry.isPassive()
 	if(passive_h_box.visible):
 		updateStartFromSlider()
+	scale_with_value.visible = SexToyTrigger.supportsScaleWithValue(selectedTrigger)
+	if(scale_with_value.visible):
+		updateScaleWithValueSlider()
+		scale_with_value_slider.value = theTriggerEntry.scaleMaxAt
+	
 	#inverted_passive_checkbox.set_pressed_no_signal(theTriggerEntry.inverted)
 	#inverted_passive_checkbox.visible = theTriggerEntry.isPassive()
 	trigger_name_label.text = SexToyTrigger.getDesc(selectedTrigger)
@@ -71,6 +80,19 @@ func updateStartFromSlider():
 	start_from_h_slider.value = theEntry.startFrom
 	start_from_label.text = "Start from "+str(Util.roundF(theEntry.startFrom*100.0, 0))+"%"
 
+
+func updateScaleWithValueSlider():
+	var theEntry := getCurrentTrigger()
+	if(!theEntry):
+		return
+	var theTexts:Array = SexToyTrigger.supportsScaleWithValueTexts(selectedTrigger)
+	scale_with_value_checkbox.set_pressed_no_signal(theEntry.scaleWithValue)
+	scale_with_value_checkbox.text = theTexts[0] if theTexts.size() > 0 else "Error?"
+	start_from_h_slider.value = theEntry.scaleWithValue
+	scale_with_value_label.text = "Max at "+str(Util.roundF(theEntry.scaleMaxAt*100.0, 0))+" "+(theTexts[1] if theTexts.size() > 1 else "Error?")
+	scale_with_value_label.visible = theEntry.scaleWithValue
+	scale_with_value_slider.visible = theEntry.scaleWithValue
+	
 func _on_AddNewEffectButton_pressed():
 	if(selectedTrigger < 0 || selectedTrigger >= SexToyTrigger.TOTAL_AMOUNT):
 		return
@@ -149,3 +171,17 @@ func _on_ConfigImportDialog_confirmed():
 	
 	SexToyManager.gameplay.loadData(theJsonResult.result)
 	updateSelectedTrigger()
+
+func _on_ScaleWithValueCheckbox_pressed():
+	var theTrigger := getCurrentTrigger()
+	if(!theTrigger):
+		return
+	theTrigger.scaleWithValue = scale_with_value_checkbox.pressed
+	updateScaleWithValueSlider()
+
+func _on_ScaleWithValueSlider_value_changed(_value:float):
+	var theTrigger := getCurrentTrigger()
+	if(!theTrigger):
+		return
+	theTrigger.scaleMaxAt = scale_with_value_slider.value
+	updateScaleWithValueSlider()
