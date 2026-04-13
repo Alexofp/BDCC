@@ -30,6 +30,7 @@ func _ready(): # Move this into some special method that gets called after loadi
 	#if(true):
 	#	return
 	loadBackendByFolderName("ButtplugIO")
+	loadBackendByFolderName("LovenseConnect")
 	loadBackendByFolderName("XToysApp")
 	
 	gameplay = SexToyGameplay.new()
@@ -94,7 +95,7 @@ func provideToy(_backend, _toy) -> bool:
 			return false
 	
 	_toy.uniqueID = generateUniqueID()
-	Log.print("NEW TOY ADDED: "+str(_toy.backendDeviceToyID))
+	#Log.print("NEW TOY ADDED: "+str(_toy.backendDeviceToyID))
 	toys.append(_toy)
 	markShouldSave()
 	emit_signal("onToyListChange")
@@ -107,7 +108,7 @@ func provideToyGet(_backend, _toy):
 			return theToy
 	
 	_toy.uniqueID = generateUniqueID()
-	Log.print("NEW TOY ADDED: "+str(_toy.backendDeviceToyID))
+	#Log.print("NEW TOY ADDED: "+str(_toy.backendDeviceToyID))
 	toys.append(_toy)
 	markShouldSave()
 	#emit_signal("onToyListChange")

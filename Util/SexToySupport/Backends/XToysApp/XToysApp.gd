@@ -2,7 +2,7 @@ extends SexToyBackend
 
 # Based on https://github.com/Alexofp/BDCC/pull/83
 
-const DEBUG_XTOYSAPP := true
+const DEBUG_XTOYSAPP := false
 
 const DEFAULT_WEBHOOK := "CHANGE_ME"
 

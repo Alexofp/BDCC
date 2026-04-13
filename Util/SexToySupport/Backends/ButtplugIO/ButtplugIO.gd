@@ -12,7 +12,7 @@ const STATUS_CONNECTING := 1
 const STATUS_CONNECTED := 2
 const STATUS_TO_TEXT:Array = ["Disconnected", "Connecting...", "Connected"]
 
-const DEBUG_BUTTPLUGIO := true
+const DEBUG_BUTTPLUGIO := false
 
 const DEFAULT_WEBSOCKET_URL := "127.0.0.1:12345"
 
@@ -23,8 +23,6 @@ var messageID:int = 1
 
 var scanTimer:float = 0.0
 var lastErrors:Array
-
-onready var test_timer = $"%TestTimer"
 
 #signal device_found(device)
 #signal device_removed(device)
@@ -51,7 +49,7 @@ Quick how-to:
 3. Enable Buttplug.IO backend here
 4. Your toys should show up
 
-Only the toys that can 'vibrate' are supported.
+Not every toy type is supported.
 """
 
 func getSettings() -> Dictionary:
@@ -159,7 +157,6 @@ func processButtplugIOMessage(_message:Dictionary):
 		scanForDevices()
 		sendToButtplugIO("RequestDeviceList")
 		
-		test_timer.start()
 		return
 	
 	if(_message.has("DeviceList")):
@@ -298,8 +295,6 @@ func logError(_text:String):
 	Log.printerr("[Buttplug.IO] "+str(_text))
 	lastErrors.append(_text)
 
-func _on_TestTimer_timeout():
-	logDebug("!!!TEST TIMER!!!")
 
 #	sendToButtplugIO("OutputCmd", {
 #			"DeviceIndex": 0,
