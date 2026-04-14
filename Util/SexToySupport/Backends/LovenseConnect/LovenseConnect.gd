@@ -122,7 +122,9 @@ func vibrate(_toy, _strength:float):
 		strength_i = 0
 	if(strength_i > theMaxValue):
 		strength_i = theMaxValue
-	#strength_i = clamp(strength_i, 0, 20)
+		
+	if(theMaxValue >= 10.0 && _strength > 0.0 && strength_i <= 0):
+		strength_i = 1 # Make sure we don't round down to zero if the _strength is > 0.0
 
 	var payload:Dictionary = {
 		"command": "Function",

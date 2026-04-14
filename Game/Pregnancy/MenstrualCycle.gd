@@ -711,6 +711,9 @@ func laySingleEgg(_time:int = 0) -> EggLaid:
 		return null
 	var randomEgg = RNG.pick(readyEggs)
 	
+	if(theChar.isPlayer()):
+		SexToyManager.sendTrigger(SexToyTrigger.OnGivingBirth, [1])
+	
 	return layEggSpecific(randomEgg)
 
 func layEggSpecific(_egg:EggCell) -> EggLaid:
@@ -745,6 +748,10 @@ func layEggs(_time:int = 30*60, _isAtNursery:bool = false, _layAll:bool = false)
 		if(!theLaidEgg):
 			continue
 		result.append(theLaidEgg)
+	
+	if(_isPc && !result.empty()):
+		SexToyManager.sendTrigger(SexToyTrigger.OnGivingBirth, [result.size()])
+	
 	return result
 
 func giveEggItems(_laidEggs:Array, _isAtNursery:bool = false):

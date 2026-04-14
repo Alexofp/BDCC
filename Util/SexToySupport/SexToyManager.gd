@@ -20,6 +20,8 @@ var saveTimer:float = 0.0
 
 signal onToyListChange
 
+const DEFAULT_GAMEPLAY_CONFIG := {"triggers":[{"effects":[{"ct":69,"curve":{"points":[[0,0],[0.094,0],[0.112,0.403],[0.126,0.394],[0.153,0.109],[0.193,0],[0.219,0.706],[0.24,0.782],[0.254,0],[0.448,0],[0.463,0.545],[0.488,0.564],[0.5,0.109],[0.529,0],[0.55,0.668],[0.573,0.81],[0.587,0],[0.749,0],[0.759,0.735],[0.777,0.82],[0.801,0.176],[0.817,0],[0.829,0.621],[0.855,0.735],[0.869,0],[1,0]]},"groups":[0],"type":2}],"sf":0.5,"type":0},{"effects":[{"groups":[1],"seq":[0.5,2.5],"type":0}],"type":17},{"effects":[{"ct":5,"curve":{"points":[[0,0],[0.116,1],[0.196,1],[0.311,0.46],[0.393,0.441],[0.471,0.716],[0.541,0.744],[0.64,0.337],[0.735,0.299],[0.808,0.649],[0.902,0.659],[1,0]]},"groups":[0,1],"type":2}],"type":15},{"effects":[{"groups":[0],"seq":[1,2.5],"type":0}],"type":16},{"effects":[{"ct":5,"curve":{"points":[[0,0],[0.013,1],[0.07,1],[0.097,0.441],[0.144,0.45],[0.179,1],[0.24,1],[0.274,0.147],[0.316,1],[0.343,1],[0.383,0.536],[0.435,0.735],[0.483,0.896],[0.532,0.318],[0.569,0.28],[0.594,0.839],[0.661,1],[0.698,0.233],[0.766,0.195],[0.804,0.81],[0.869,0.242],[1,0]]},"groups":[0,1],"type":2}],"type":7},{"effects":[{"groups":[0,1],"seq":[1,0.8],"type":0}],"type":9},{"effects":[{"groups":[0,1],"seq":[1,0.8],"type":0}],"type":10},{"effects":[{"ct":5,"curve":{"points":[[0,0],[0.134,1],[0.32,0],[0.425,0.375],[0.544,0],[0.649,0.63],[0.767,0],[0.874,0.364],[1,0]]},"groups":[0,1],"type":2}],"type":14},{"effects":[{"groups":[1],"seq":[0.5,1],"type":0}],"sm":0.2,"type":4},{"effects":[{"groups":[0,1],"seq":[0.7,2.5],"type":0}],"sf":0.01,"type":3}]}
+
 func _ready(): # Move this into some special method that gets called after loading the data?
 	
 	for groupIndx in SexToyGroup.ALL:
@@ -196,6 +198,7 @@ func saveToFile():
 func loadFromFile():
 	var theStr := Util.readFile(TOY_SETTINGS_FILE)
 	if(theStr.empty()):
+		gameplay.loadData(DEFAULT_GAMEPLAY_CONFIG) # Give the player a default gameplay config on the first load
 		return
 		
 	var jsonResult := JSON.parse(theStr)

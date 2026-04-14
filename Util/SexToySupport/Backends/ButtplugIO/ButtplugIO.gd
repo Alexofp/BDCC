@@ -24,6 +24,10 @@ var messageID:int = 1
 var scanTimer:float = 0.0
 var lastErrors:Array
 
+var requestQueue:Dictionary = {}
+const REQUEST_TIME_DELAY = 0.05 # 20 requests a second max
+var requestTimer:float = 0.0
+
 #signal device_found(device)
 #signal device_removed(device)
 
@@ -283,6 +287,18 @@ func _process(_delta:float):
 		if(scanTimer <= 0.0):
 			stopScan()
 
+	if(requestTimer > 0.0):
+		requestTimer -= _delta
+	
+	if(requestTimer <= 0.0 && !requestQueue.empty()):
+		var theRequestID:String = requestQueue.keys().front()
+		var _data:Dictionary = requestQueue[theRequestID]
+		
+		sendToButtplugIO("OutputCmd", _data)
+		
+		requestTimer = REQUEST_TIME_DELAY
+		requestQueue.erase(theRequestID)
+
 func onError(msg):
 	logError(str(msg))
 
@@ -316,8 +332,12 @@ func vibrate(_toy, _strength:float):
 	var feature:int = int(toyData.get("feature", "0"))
 	
 	var finalValue:int = int(round(Util.remapValue(_strength, 0.0, 1.0, minValue, maxValue)))
+	if(maxValue >= 10.0 && _strength > 0.0 && finalValue <= 0):
+		finalValue = 1 # Make sure we don't round down to zero if the _strength is > 0.0
 	
-	sendToButtplugIO("OutputCmd", {
+	var queueKey:String = sendType+"_"+str(device)+"_"+str(feature)
+	
+	pushToButtplugOutputQueue(queueKey, {
 			"DeviceIndex": device,
 			"FeatureIndex": feature,
 			"Command": {
@@ -326,6 +346,9 @@ func vibrate(_toy, _strength:float):
 				}
 			}
 		})
+
+func pushToButtplugOutputQueue(_key:String, _payload:Dictionary):
+	requestQueue[_key] = _payload
 
 func scanForToys():
 	if(connectionStatus >= STATUS_CONNECTED):

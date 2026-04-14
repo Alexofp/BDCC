@@ -232,6 +232,16 @@ margin_left = -100.0
 margin_top = -34.0
 text = "Paste"
 
+[node name="LoadDefaultConfigButton" type="Button" parent="ConfigImportDialog/ImportTextEdit"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -205.0
+margin_top = -34.0
+margin_right = -105.0
+text = "Default"
+
 [node name="InfoFinalAcceptDialog" type="AcceptDialog" parent="."]
 unique_name_in_owner = true
 anchor_left = 0.5
@@ -254,3 +264,4 @@ margin_bottom = 35.0
 [connection signal="pressed" from="InfoAcceptDialog/ExportTextEdit/CopyExportTextButton" to="." method="_on_CopyExportTextButton_pressed"]
 [connection signal="confirmed" from="ConfigImportDialog" to="." method="_on_ConfigImportDialog_confirmed"]
 [connection signal="pressed" from="ConfigImportDialog/ImportTextEdit/PasteTextButton" to="." method="_on_PasteTextButton_pressed"]
+[connection signal="pressed" from="ConfigImportDialog/ImportTextEdit/LoadDefaultConfigButton" to="." method="_on_LoadDefaultConfigButton_pressed"]

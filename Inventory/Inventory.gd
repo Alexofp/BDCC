@@ -285,6 +285,12 @@ func equipItem(item):
 	item.currentInventory = self
 	#add_child(item)
 	emit_signal("equipped_items_changed")
+	
+	if(SexToyManager.enabled && item.isRestraint()):
+		var theChar = getCharacter()
+		if(theChar && theChar.isPlayer()):
+			SexToyManager.sendTrigger(SexToyTrigger.OnBondageLocked)
+	
 	return true
 
 func unequipItem(item):

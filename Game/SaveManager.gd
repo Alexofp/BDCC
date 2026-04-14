@@ -201,7 +201,7 @@ func loadVar(data, key, nullvalue = null):
 		Log.warning("Warning: Save doesn't have key "+key+". Using "+str(nullvalue)+" as default value. "+Util.getStackFunction())
 		return nullvalue
 		
-	if(nullvalue != null && typeof(data[key]) != typeof(nullvalue) && !(typeof(data[key]) == TYPE_REAL && typeof(nullvalue) == TYPE_INT)):
+	if(nullvalue != null && typeof(data[key]) != typeof(nullvalue) && !(typeof(data[key]) == TYPE_REAL && typeof(nullvalue) == TYPE_INT) && !(typeof(data[key]) == TYPE_INT && typeof(nullvalue) == TYPE_REAL)):
 		Log.printerr("Warning: value mismatch when loading a save. Key '"+key+"' has type "+Util.variantTypeToString(typeof(data[key]))+" and default value has type "+Util.variantTypeToString(typeof(nullvalue))+". Is that an error? "+Util.getStackFunction())
 		
 	if(data[key] == null && nullvalue != null):

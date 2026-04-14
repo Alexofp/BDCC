@@ -13,6 +13,15 @@ func sendSexEvent(_event:SexEvent):
 	
 	if(_type == SexEvent.Orgasmed && _isTargetPC):
 		sendTrigger(SexToyTrigger.OnOrgasm)
+	
+	if(_type == SexEvent.HolePenetrated && _isTargetPC && _event.isSexEngine):
+		if(_event.getField("hole", BodypartSlot.Anus) == BodypartSlot.Head):
+			sendTrigger(SexToyTrigger.OnThroatPenetrated)
+		else:
+			sendTrigger(SexToyTrigger.OnHolePenetrated)
+
+	if(_type == SexEvent.HolePenetrated && _isActorPC && _event.isSexEngine):
+		sendTrigger(SexToyTrigger.OnPenetratingSomeone)
 
 func sendTrigger(_triggerID:int, _args:Array = []):
 	if(!triggers.has(_triggerID)):

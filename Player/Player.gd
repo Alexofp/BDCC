@@ -921,7 +921,7 @@ func getEncounterChanceModifierInmates():
 func giveBirth():
 	var bornChildren = .giveBirth()
 	
-	var bornChildAmount = bornChildren.size()
+	var bornChildAmount:int = bornChildren.size()
 	addSkillExperience(Skill.Fertility, 90 + Util.mini(210, bornChildAmount * 10))
 	if(hasPerk(Perk.FertilityMotherOfTheYear)):
 		addEffect(StatusEffect.MaternalGlow)
@@ -930,6 +930,9 @@ func giveBirth():
 		addCredits(paycheck)
 		
 		GM.main.addMessage("AlphaCorp has transferred "+str(paycheck)+" credits to you for being a good mother.")
+	
+	if(bornChildAmount > 0):
+		SexToyManager.sendTrigger(SexToyTrigger.OnGivingBirth, [bornChildAmount])
 	
 	return bornChildren
 
