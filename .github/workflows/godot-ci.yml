@@ -2,7 +2,7 @@ name: "godot-ci export"
 on: push
 
 env:
-  GODOT_VERSION: 3.6.2
+  GODOT_VERSION: 3.6
   EXPORT_NAME: BDCC
 
 jobs:
