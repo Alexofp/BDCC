@@ -1167,7 +1167,7 @@ func getRecovarableItemsAfterSex() -> Array:
 func canKeepItemsAfterSex():
 	return getRecovarableItemsAfterSex().size() > 0
 
-func keepItemsAfterSex(onlyAlwaysKept = false):
+func keepItemsAfterSex(onlyAlwaysKept:bool = false):
 	if(trackedItems.has("pc")):
 		var newPCTracked = []
 		
@@ -1190,29 +1190,34 @@ func keepItemsAfterSex(onlyAlwaysKept = false):
 				
 		trackedItems["pc"] = newPCTracked
 
-func endSex():
-	if(sexEnded):
-		return
-	sexResult.clear()
-	sexResult.sexType = getSexTypeID()
+func generateSexResult() -> SexEngineResult:
+	var theResult := SexEngineResult.new()
+	theResult.sexType = getSexTypeID()
 	
-	sexResult.subsWon = true
+	theResult.subsWon = true
 	for domID in doms:
 		var domInfo = doms[domID]
 		if(!domInfo.getIsDown()):
-			sexResult.subsWon = false
+			theResult.subsWon = false
 		
 		var newDomResult:SexEngineResultDom = SexEngineResultDom.new()
 		newDomResult.grabInfo(self, domInfo)
 		
-		sexResult.doms[domID] = newDomResult
+		theResult.doms[domID] = newDomResult
 
 	for subID in subs:
 		var subInfo = subs[subID]
 		var newSubResult:SexEngineResultSub = SexEngineResultSub.new()
 		newSubResult.grabInfo(self, subInfo)
 		
-		sexResult.subs[subID] = newSubResult
+		theResult.subs[subID] = newSubResult
+
+	return theResult
+
+func endSex():
+	if(sexEnded):
+		return
+	sexResult = generateSexResult()
 	
 	sexEnded = true
 	var texts:Array = ["The sex scene has ended!"]
@@ -1226,12 +1231,7 @@ func endSex():
 		var domInfo = doms[domID]
 		
 		# Lets us loot used condoms
-		var theCondom = domInfo.getChar().getWornCondom()
-		if(theCondom != null):
-			if(theCondom.getFluids() != null):
-				if(!theCondom.getFluids().isEmpty()):
-					theCondom.destroyMe()
-					saveCondomToLootIfPerk(theCondom)
+		checkRemoveUsedCondom(domInfo)
 			
 		domInfo.getChar().afterSexEnded(domInfo)
 		domInfo.getChar().onSexEnded({sexEngine=self,isDom=true,sexFullResult=sexResult,sexResult=sexResult.doms[domID]})
@@ -1251,18 +1251,21 @@ func endSex():
 			texts.append(Util.join(sexEndInfo, "\n"))
 		
 		# Lets us loot used condoms
-		var theCondom = subInfo.getChar().getWornCondom()
-		if(theCondom != null):
-			if(theCondom.getFluids() != null):
-				if(!theCondom.getFluids().isEmpty()):
-					theCondom.destroyMe()
-					saveCondomToLootIfPerk(theCondom)
+		checkRemoveUsedCondom(subInfo)
 		
 		subInfo.getChar().afterSexEnded(subInfo)
 		subInfo.getChar().onSexEnded({sexEngine=self,isDom=false,sexFullResult=sexResult,sexResult=sexResult.subs[subID]})
 
 	addOutputSeparator()
 	addTextRaw(Util.join(texts, "\n"))
+
+func checkRemoveUsedCondom(_info):
+	var theCondom = _info.getChar().getWornCondom()
+	if(theCondom != null):
+		if(theCondom.getFluids() != null):
+			if(!theCondom.getFluids().isEmpty()):
+				theCondom.destroyMe()
+				saveCondomToLootIfPerk(theCondom)
 
 func hasSexEnded():
 	return sexEnded
@@ -1573,17 +1576,18 @@ func removeDynamicJoiner(_charID:String):
 	var theDomInfo:SexDomInfo = doms[_charID]
 	var theCharacter:BaseCharacter = theDomInfo.getChar()
 	
+	var theCurrentResult := generateSexResult() # Temporary sex result at the moment of this joiner quitting
+	
+	checkRemoveUsedCondom(theDomInfo)
+	theDomInfo.getChar().afterSexEnded(theDomInfo)
+	theDomInfo.getChar().onSexEnded({sexEngine=self,isDom=true,sexFullResult=theCurrentResult,sexResult=theCurrentResult.doms[_charID]})
+	
+	# Technically should also call keepItemsAfterSex(true) but sub pc can't put anything on doms anyway
+	
 	stopActivitiesThatInvolveCharID(_charID)
 	doms.erase(_charID)
 	
 	addTextRaw("[b]Dominant leaves.[/b] "+theCharacter.getName()+" has left.")
-	
-	# The InSex interaction should handle this
-	#var sexLoc:String = getLocation()
-	#if(theCharacter.isDynamicCharacter() && sexLoc != ""):
-	#	var thePawn = GM.main.IS.spawnPawn(_charID)
-	#	if(thePawn):
-	#		thePawn.setLocation(sexLoc)
 
 func addDynamicDomParticipant(_charID:String):
 	if(doms.has(_charID) || subs.has(_charID)):
