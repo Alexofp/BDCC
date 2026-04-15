@@ -88,7 +88,7 @@ func _notification(what: int) -> void:
 			#	set_selected_index(-1)
 			#	update() # queue_redraw()
 
-		EditorSettings.NOTIFICATION_EDITOR_SETTINGS_CHANGED, NOTIFICATION_THEME_CHANGED:
+		10000, NOTIFICATION_THEME_CHANGED:
 			var gizmo_scale: int = 1 # EditorInterface.get_editor_settings().get_setting(
 					# "interface/touchscreen/scale_gizmo_handles")
 			var theme_scale = 1.0#get_theme_default_base_scale()
