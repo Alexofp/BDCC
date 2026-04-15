@@ -282,6 +282,7 @@ func processTurn():
 		endActivity()
 		if(getState() == "offering"):
 			addText("{sub.You} ignored {dom.your} offer.")
+			getDomInfo().addAnger(0.25)
 			return
 		
 		if(getState() in ["forcing", "forcingCanApply"]):
@@ -487,7 +488,7 @@ func generatePillVariants(theItemID:String):
 	pillVariants = []
 	
 	if(theItemID == "TFPill"):
-		for _i in range(3):
+		for _i in 3:
 			var newTFID:String = TFUtil.generateTFIDForAPill(pillVariants)
 			if(newTFID != ""):
 				pillVariants.append(newTFID)
