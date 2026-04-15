@@ -400,7 +400,6 @@ func get_offset_without_collision(current_index: int, offset: float, prioritize_
 
 
 func add_point(pos: Vector2) -> void:
-	# TODO: UndoRedo
 	var new_idx: int = _curve.add_point(pos)
 	set_selected_index(new_idx)
 	
@@ -409,7 +408,6 @@ func add_point(pos: Vector2) -> void:
 
 
 func remove_point(index: int) -> void:
-	# TODO: UndoRedo
 	#var cur_pos: Vector2 = _curve.get_point_position(index)
 	#var old_pos: Vector2 = initial_grab_pos if grabbing == GrabMode.MOVE else cur_pos
 
@@ -437,7 +435,6 @@ func set_point_position(index: int, pos: Vector2) -> void:
 	_curve.set_point_offset(initial_grab_index, pos.x)
 	set_selected_index(index)
 
-	# TODO UndoRedo
 
 
 func set_point_tangents(index: int, left: float, right: float) -> void:
@@ -455,7 +452,6 @@ func set_point_tangents(index: int, left: float, right: float) -> void:
 	_curve.set_point_right_tangent(index, right)
 	set_selected_index(index)
 	
-	# TODO: UndoRedo
 
 
 func set_point_left_tangent(index: int, tangent: float) -> void:
@@ -463,7 +459,6 @@ func set_point_left_tangent(index: int, tangent: float) -> void:
 		return
 
 	_curve.set_point_left_tangent(index, initial_grab_left_tangent)
-	# TODO: UndoRedo
 	
 	_curve.set_point_left_tangent(index, tangent)
 	set_selected_index(index)
@@ -473,7 +468,6 @@ func set_point_right_tangent(index: int, tangent: float) -> void:
 		return
 
 	_curve.set_point_right_tangent(index, initial_grab_right_tangent)
-	# TODO: UndoRedo
 
 	_curve.set_point_right_tangent(index, tangent)
 	set_selected_index(index)
@@ -492,7 +486,6 @@ func toggle_linear(index: int, tangent: int) -> void:
 	else:
 		_curve.set_point_right_mode(index, mode)
 		
-	# TODO: UndoRedo
 
 
 func set_selected_index(index: int) -> void:

@@ -281,7 +281,6 @@ func ovulate():
 		if(ch.hasPerk(Perk.FertilityBetterOvulation) && amountOfEggs < 10):
 			amountOfEggs += RNG.randi_range(0, 4) #otherwise species with low base eggs like humans, won't get much bonus
 		
-		#amountOfEggs = 10 #TODO: REMOVE THIS LINE
 		print(ch.getName(), " OVULATED WITH "+str(amountOfEggs)+" AMOUNT OF EGGS")
 		#print(ch.getName(), " Bonus eggs modifier: ", ch.getEggsBonusMod() *100, "%")
 		#print(ch.getName(), " AMOUNT OF Min eggs: ", ch.getMinEggsAmount())

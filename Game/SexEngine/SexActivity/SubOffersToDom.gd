@@ -64,7 +64,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 		if(!theFetishes.empty()):
 			for fetishID in theFetishes:
 				var subFetishID:String = Fetish.getOppositeFetish(fetishID)
-				fetishMod = max(fetishMod, _subFetishHolder.getFetish(subFetishID))
+				fetishMod = min(fetishMod, _subFetishHolder.getFetish(subFetishID))
 		else:
 			fetishMod = 1.0
 			

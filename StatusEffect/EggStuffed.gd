@@ -43,4 +43,24 @@ func getIconColor():
 	return IconColorDarkPurple
 
 func getBuffs():
-	return [] #TODO: Debuffs for having many eggs in you?
+	var theMenstrualCycle:MenstrualCycle = character.getMenstrualCycle()
+	if(!theMenstrualCycle):
+		return []
+	var eggAm:int = theMenstrualCycle.bigEggs.size()
+	var modifier:float = 1
+	if(character.hasPerk(Perk.FertilityBroodmother)): 
+		modifier = 0.5
+	
+	if(eggAm <= 3): # 1 - 3 = nothing
+		return []
+	if(eggAm <= 6): # 4 - 6
+		return [
+			buff(Buff.MaxStaminaBuff, [int(-2.0 * eggAm * modifier)]),
+		]
+	
+	# 7 - 20
+	var theEggCap:float = float(eggAm) if eggAm < 20 else 20.0
+	return [
+		buff(Buff.MaxStaminaBuff, [int(-2.0 * theEggCap * modifier)]),
+		buff(Buff.DodgeChanceBuff, [int(-1.0 * theEggCap * modifier)]),
+	]

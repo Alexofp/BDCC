@@ -712,7 +712,6 @@ func processTurn():
 			else:
 				monsterLoc = goToSlow(monsterLoc, eventTarget)
 		elif(monsterLoc == monsterTarget):
-			#TODO: Better locs?
 			monsterTarget = RNG.pick([LOC_BED, LOC_FRIDGE, LOC_IMPORTANT, LOC_PLAY, LOC_SHOWER, LOC_WINDOW])
 		else:
 			if(!monsterTarget.empty()):

@@ -29,7 +29,7 @@ func isStocksSex() -> bool:
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	if(_subInfo.getChar().isPlayer() && GM.main.getEncounterSettings().isGoalDisabledForSubPC(SexGoal.TieUp)):
 		return 0.0
-	var mult = 1.0
+	var mult := 1.0
 	# Inmates don't have much bdsm gear
 	if(_domInfo.getChar().getCharacterType() == CharacterType.Inmate):
 		mult = 0.1
@@ -43,7 +43,7 @@ func getTags(_indx:int) -> Array:
 	return []
 
 func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
-	var actions = []
+	var actions:Array = []
 	var dom:BaseCharacter = _domInfo.getChar()
 	var sub:BaseCharacter = _subInfo.getChar()
 	
@@ -58,7 +58,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 		if(_sexEngine.isBondageDisabled()):
 			return
 		
-		var itemTagToUse = ItemTag.CanBeForcedByGuards
+		var itemTagToUse:int = ItemTag.CanBeForcedByGuards
 		if(_sexEngine.getSexTypeID() == SexType.StocksSex):#(isStocksSex()):
 			itemTagToUse = ItemTag.CanBeForcedInStocks
 		
@@ -71,9 +71,12 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 					if(!item.hasBuff(Buff.RingGagBuff)):
 						continue
 			
+			if(item.hasTag(ItemTag.ChastityCage) && (_sexEngine.hasTag(_subInfo.charID, SexActivityTag.PenisInside) || _sexEngine.hasTag(_subInfo.charID, SexActivityTag.PenisUsed))):
+				continue
+			
 			usableItems.append(item)
 		
-	var countsByItemID = {}
+	var countsByItemID:Dictionary = {}
 	if(_domInfo.getChar().isPlayer()):
 		for item in usableItems:
 			if(!countsByItemID.has(item.id)):
