@@ -223,9 +223,9 @@ func getActions(_indx:int):
 		
 	if(_indx == SUB_0):
 		addAction("pullaway", getResistScore(SUB_0), "Pull away", "Try to pull away", {A_CHANCE: getSubResistChance(30.0, 25.0), A_PRIORITY: 2})
-		#if(state == "sex"):
-		#	if(isReadyToCumHandled(SUB_0)):
-		#		addAction("subcum", 1.0, "Cum!", "You're about to cum!", {A_PRIORITY: 1001})
+		if(state == "sex"):
+			if(isStrapon(DOM_0) && isReadyToCumHandled(SUB_0)):
+				addAction("subcum", 1.0, "Cum!", "You're about to cum!", {A_PRIORITY: 1001})
 func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "stuffegg"):
 		doStuffEggInto(DOM_0, SUB_0, usedBodypart)
@@ -236,11 +236,11 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		stimulate(DOM_0, S_PENIS, SUB_0, usedBodypart, I_HIGH, usedFetish)
 		stimulate(SUB_0, S_PENIS, DOM_1, usedBodypart2, I_HIGH, usedFetish2)
 		var orgAmount:int = 0
-		if(isReadyToCumHandled(DOM_0) && !isStrapon(DOM_0)):
+		if(isReadyToCumHandled(DOM_0)):
 			orgAmount += 1
 		if(isReadyToCumHandled(DOM_1)):
 			orgAmount += 1
-		if(isReadyToCumHandled(SUB_0) && !isStrapon(SUB_0)):
+		if(isReadyToCumHandled(SUB_0)):
 			orgAmount += 1
 			
 		if(orgAmount == 2):
@@ -249,11 +249,17 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			addText("[b]Triple orgasm![/b]")
 		if(isReadyToCumHandled(DOM_1)):
 			cumGeneric(DOM_1, DOM_1)
-		if(isReadyToCumHandled(DOM_0) && !isStrapon(DOM_0)):
-			cumInside(DOM_0, SUB_0, usedBodypart)
+		if(isReadyToCumHandled(DOM_0)):
+			if(!isStrapon(DOM_0)):
+				cumInside(DOM_0, SUB_0, usedBodypart)
+			else:
+				cumGeneric(DOM_0, SUB_0)
 			#doProcessCumInside(DOM_0, SUB_0, usedBodypart, false)
-		if(isReadyToCumHandled(SUB_0) && !isStrapon(SUB_0)):
-			cumInside(SUB_0, DOM_1, usedBodypart2)
+		if(isReadyToCumHandled(SUB_0)):
+			if(!isStrapon(SUB_0)):
+				cumInside(SUB_0, DOM_1, usedBodypart2)
+			else:
+				cumGeneric(SUB_0, DOM_0)
 			#getDomInfo(1).cum()
 		satisfyGoals()
 		state = "inside"
@@ -312,8 +318,12 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			getDomInfo(1).addAnger(0.1)
 			return
 	if(_id == "subcum"):
-		cumGeneric(SUB_0, DOM_0)
-		
+		#cumGeneric(SUB_0, DOM_0)
+		if(!isStrapon(SUB_0)):
+			cumInside(SUB_0, DOM_1, usedBodypart2)
+		else:
+			cumGeneric(SUB_0, DOM_0)
+			
 		var shouldGoals:bool = false
 		if(isStrapon(DOM_0)):
 			cumInside(DOM_0, SUB_0, usedBodypart)

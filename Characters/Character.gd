@@ -518,7 +518,7 @@ func shouldBeUpdated():
 	if(GM.main.characterIsVisible(getID())):
 		return true
 	
-	if(hasEffect(StatusEffect.HasCumInsideAnus) || hasEffect(StatusEffect.HasCumInsideMouth) || hasEffect(StatusEffect.HasCumInsideVagina)):
+	if(hasEffect(StatusEffect.HasCumInsideAnus) || hasEffect(StatusEffect.HasCumInsideMouth) || hasEffect(StatusEffect.HasCumInsideVagina) || hasEffect(StatusEffect.CoveredInCum)):
 		return true
 	
 	if(isPregnant()):

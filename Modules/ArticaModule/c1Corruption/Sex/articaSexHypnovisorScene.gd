@@ -426,7 +426,10 @@ func _run():
 		addButton("Continue", "See what happens next", "nova_sniff_balls")
 	if(state == "nova_sniff_balls"):
 		playAnimation(StageScene.SexOral, "tease", {pc="nova", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
-		saynn("Nova unzips her undersuit, exposing her own sheath that has a hard red rocket peeking out of it already. Artica is quick to push her snout into it and start licking the tip, making Nova get nice and hard while her own member is locked tight in its cage..")
+		if(getCharacter("artica").isWearingChastityCage()):
+			saynn("Nova unzips her undersuit, exposing her own sheath that has a hard red rocket peeking out of it already. Artica is quick to push her snout into it and start licking the tip, making Nova get nice and hard while her own member is already dripping pre onto the floor..")
+		else:
+			saynn("Nova unzips her undersuit, exposing her own sheath that has a hard red rocket peeking out of it already. Artica is quick to push her snout into it and start licking the tip, making Nova get nice and hard while her own member is locked tight in its cage..")
 
 		saynn("You're just watching Artica's adventures from a far away, making sure she doesn't get into trouble.")
 

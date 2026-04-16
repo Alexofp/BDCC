@@ -306,7 +306,7 @@ func _run():
 
 		saynn("It seems that your touch, coupled with the many eyes staring at her, brings an immense amount of pleasure to her. You can feel her orgasm building up.. her body is squirming under you, her panting gets faster, her inner walls clenching around your digits.. until there is no going back.")
 
-		saynn("As Rahi reaches the peak, she lets out a loud slutty scream, her body convulsing with pleasure. You hold your pinned into the window, still forcing your digits up her spasming pussy, overstimulating your kitty until she squirts all over your hand. Some inmates outside seem to be bringing themselves over the edge too.")
+		saynn("As Rahi reaches the peak, she lets out a loud slutty scream, her body convulsing with pleasure. You hold her pinned into the window, still forcing your digits up her spasming pussy, overstimulating your kitty until she squirts all over your hand. Some inmates outside seem to be bringing themselves over the edge too.")
 
 		saynn("[say=rahi]Ah.. S-She is.. Nya-a.. while everyone is w-watching..[/say]")
 

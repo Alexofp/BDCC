@@ -477,6 +477,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			getDomInfo().addAnger(0.3)
 			endActivity()
 			addText("{sub.You} {sub.youVerb('manage', 'managed')} to make {dom.youHim} screw up the applying process!")
+			return
 		
 		getDomInfo().addAnger(0.1)
 		if(usedUniqueItemID != ""):

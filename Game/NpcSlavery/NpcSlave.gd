@@ -361,7 +361,7 @@ func getMindreaderInfo():
 		"Fear: "+slaveStatToString(getFear()),
 		"Tiredness: "+str(Util.roundF(tiredness/5.0*100.0, 2))+"%",
 		"Unhappiness: "+str(Util.roundF(unhappiness/40.0*100.0, 2))+"%",
-		"Neediness: "+str(Util.roundF(neediness/10.0, 2))+"%",
+		"Neediness: "+str(Util.roundF(neediness/1.0, 2))+"%",
 	]
 	return Util.join(result, "\n")
 
