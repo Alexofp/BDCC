@@ -1975,7 +1975,8 @@ func about_to_be_milked_by_girl_do(_id:String, _args:Array):
 		else:
 			saynn("Sofie grunts as she leaves. Sadly, her skin is thick enough to break the shiv.")
 			useShiv()
-		setState("main")
+		#setState("main")
+		addContinue("setState", ["main"])
 	
 func about_to_be_milked_by_girl_fightResult(_didPCWin:bool):
 	if(_didPCWin):

@@ -174,6 +174,10 @@ func getFormIDs() -> Array:
 		"SoftSlaveryPunishGBStart",
 		"SoftSlaveryPunishGBEnd",
 		
+		"SoftSlaveryPunishLockRestraint",
+		"SoftSlaveryPunishLockRestraint2",
+		"SoftSlaveryPunishLockRestraint3",
+		
 		"SoftSlaveryResist",
 		
 		"SoftSlaveryFuckInStocksExtra",
@@ -1372,6 +1376,31 @@ func getText(_id:String, _args:Dictionary):
 			"You're on very thin ice from now on, {npc.npcSlave}..",
 			"This is what happens to disobedient slaves..",
 			"Your holes are mine to share.. please don't make me do this again..",
+		]
+
+	if(_id == "SoftSlaveryPunishLockRestraint"):
+		return [
+			"I'm.. I'm really not happy with you. So this goes on. Don't argue.",
+			"You left me no choice.. I have to lock this on you. It's your own fault.",
+			"This is happening.. um.. because you've been bad. So just accept it.",
+			"I don't want to hear a single word. This stays on until I say so. Got it?",
+			"You really pissed me off.. so now you get to feel this every time you move.",
+		]
+	if(_id == "SoftSlaveryPunishLockRestraint2"):
+		return [
+			"Don't.. um.. don't even think about removing it. I'll know. And it'll be worse.",
+			"Try taking it off and see what happens.. I swear I'll make you regret it.",
+			"Keep it on. If I find it off.. you're not going to like what comes next.",
+			"I'm serious.. no removing it. Or I'll have to do something really humiliating to you.",
+			"That lock stays shut. If you break it.. I'll break something of yours. Understood?",
+		]
+	if(_id == "SoftSlaveryPunishLockRestraint3"):
+		return [
+			"I'm.. I'm almost out of patience with you. No more fuck-ups.",
+			"You're pushing me too far.. I don't want to get really mean, but you're asking for it.",
+			"Last warning. I mean it. Next time I probably won't be this.. um.. nice about it.",
+			"Keep testing me and I'll do more.. probably.",
+			"You're so close to making me lose my temper.. and you won't enjoy that version of me.",
 		]
 
 	if(_id == "SoftSlaveryResist"):

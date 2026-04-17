@@ -158,6 +158,10 @@ func getFormIDs() -> Array:
 		"SoftSlaveryPunishGBStart",
 		"SoftSlaveryPunishGBEnd",
 		
+		"SoftSlaveryPunishLockRestraint",
+		"SoftSlaveryPunishLockRestraint2",
+		"SoftSlaveryPunishLockRestraint3",
+		
 		"SoftSlaveryResist",
 		
 		"SoftSlaveryFuckInStocksExtra",
@@ -1442,6 +1446,35 @@ func getText(_id:String, _args:Dictionary):
 			"This is just a taste of what happens to disobedient slaves.",
 			"Remember this gangbang every time you think about misbehaving.",
 			"Your holes are mine to share. Don't make me do this again.",
+		]
+		
+	if(_id == "SoftSlaveryPunishLockRestraint"):
+		return [
+			"You fucked up. And now you will have to wear it.",
+			"Since you can't behave, I have to punish you with this.",
+			"There. It's locked. Maybe now you'll think twice before disobeying.",
+			"Every time you feel that weight, remember why it's there.",
+			"You brought this on yourself. Don't you dare complain.",
+			"Let's see how long it takes for you to regret what you did.",
+			"That's it. That's what you get. Enjoy."
+		]
+	if(_id == "SoftSlaveryPunishLockRestraint2"):
+		return [
+			"If you dare to take it off before I allow you, I will have to punish you again.",
+			"Touch that lock without my permission and it will get worse for you.",
+			"I will know if you tamper with it. Do it and the punishment will get worse.",
+			"Try taking it off. See if I don't make you wear something worse.",
+			"That stays exactly where I put it until I say otherwise. Understood?",
+			"Try to remove it and we move to something far less comfortable."
+		]
+	if(_id == "SoftSlaveryPunishLockRestraint3"):
+		return [
+			"You are on some very thin ice right now, you really better start behaving now.",
+			"I'm losing my patience with you. Test me again and see what happens.",
+			"You're lucky I'm being this merciful. Don't make me regret it.",
+			"Another slip and we escalate. No more chances after this one.",
+			"I suggest you start remembering who's in charge here. Quickly.",
+			"Your behaviour. Fix it, or I will fix it for you."
 		]
 
 	if(_id == "SoftSlaveryResist"):

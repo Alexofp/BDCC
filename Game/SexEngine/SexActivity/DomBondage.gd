@@ -49,6 +49,8 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	
 	var usableItems:Array = []
 	
+	var _isSubPC:bool = _subInfo.getChar().isPlayer()
+	
 	if(_domInfo.getChar().isPlayer()):
 		if(_subInfo.getChar().isDynamicCharacter()):
 			usableItems = dom.getInventory().getAllCombatUsableRestraints()
@@ -57,6 +59,10 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	else:
 		if(_sexEngine.isBondageDisabled()):
 			return
+		if(_isSubPC):
+			if(GM.main.getEncounterSettings().isGoalDisabledForSubPC(SexGoal.TieUp)):
+				return
+			
 		
 		var itemTagToUse:int = ItemTag.CanBeForcedByGuards
 		if(_sexEngine.getSexTypeID() == SexType.StocksSex):#(isStocksSex()):
@@ -73,6 +79,9 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 			
 			if(item.hasTag(ItemTag.ChastityCage) && (_sexEngine.hasTag(_subInfo.charID, SexActivityTag.PenisInside) || _sexEngine.hasTag(_subInfo.charID, SexActivityTag.PenisUsed))):
 				continue
+			
+			if(_isSubPC && item.hasTag(ItemTag.Hypnovisor) && GM.main.getEncounterSettings().isGoalDisabledForSubPC(SexGoal.Hypnotize)):
+				return
 			
 			usableItems.append(item)
 		
@@ -133,20 +142,22 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	return actions
 
 func startActivity(_args):
-	getSubInfo().addResistance(getSubInfo().fetishScore({Fetish.Bondage: -0.5})+0.3-getSubInfo().personalityScore({PersonalityStat.Subby: 0.2}))
-	getSubInfo().addLust(getSubInfo().fetishScore({Fetish.Bondage: 1.0}) * 20)
+	var theAction:String = _args[0]
+	if(theAction != "rem"):
+		getSubInfo().addResistance(getSubInfo().fetishScore({Fetish.Bondage: -0.5})+0.3-getSubInfo().personalityScore({PersonalityStat.Subby: 0.2}))
+		getSubInfo().addLust(getSubInfo().fetishScore({Fetish.Bondage: 1.0}) * 20)
 	
-	if(_args[0] == "pc"):
+	if(theAction == "pc"):
 		pcUniqueID = _args[1]
 		
 		var item = getDom().getInventory().getItemByUniqueID(pcUniqueID)
 		addText("{dom.You} {dom.youVerb('attempt')} to force "+str(item.getAStackName())+" onto {sub.you}!")
-	if(_args[0] == "npc"):
+	if(theAction == "npc"):
 		npcItemID = _args[1]
 	
 		var item = GlobalRegistry.getItemRef(npcItemID)
 		addText("{dom.You} {dom.youVerb('attempt')} to force "+str(item.getAStackName())+" onto {sub.you}!")
-	if(_args[0] == "rem"):
+	if(theAction == "rem"):
 		endActivity()
 		var itemUniqueID = _args[1]
 		var item:ItemBase = getSub().getInventory().getItemByUniqueID(itemUniqueID)

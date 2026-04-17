@@ -43,3 +43,6 @@ func getUnriggedParts(_character):
 		
 func getInventoryImage():
 	return "res://Modules/HypnokinkModule/Items/HypnoVisor/hypnoVisor_inv.png"
+
+func isRestraintShouldKeep() -> bool:
+	return true

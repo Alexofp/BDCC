@@ -172,6 +172,10 @@ func getFormIDs() -> Array:
 		"SoftSlaveryPunishGBStart",
 		"SoftSlaveryPunishGBEnd",
 		
+		"SoftSlaveryPunishLockRestraint",
+		"SoftSlaveryPunishLockRestraint2",
+		"SoftSlaveryPunishLockRestraint3",
+		
 		"SoftSlaveryResist",
 		
 		"SoftSlaveryFuckInStocksExtra",
@@ -1445,6 +1449,35 @@ func getText(_id:String, _args:Dictionary):
 			"Your body is my property to use and share. Never forget that again.",
 			"Remember this moment the next time you think about misbehaving.",
 			"Let this remind you that you're nothing but fuckmeat.",
+		]
+
+	if(_id == "SoftSlaveryPunishLockRestraint"):
+		return [
+			"You fucked up. And now you will have to wear it.",
+			"You're getting locked up like the stupid brat you are.",
+			"Act like a stupid brat, get treated like one.",
+			"There. Now every time you move, you'll remember who owns your worthless ass.",
+			"You're lucky I'm even bothering to lock you instead of just throwing you out.",
+			"I hope it digs into your skin. That's the point, you dumb slut.",
+			"You wanted to act out? Fine. Now you get to wear my fucking property tag until I'm bored of your misery.",
+		]
+	if(_id == "SoftSlaveryPunishLockRestraint2"):
+		return [
+			"Touch that lock and I swear.. Just try me.",
+			"I will know if you fuck with it.",
+			"That lock comes off when I fucking say so. Not when your pathetic whining gets loud enough.",
+			"You remove that before I allow it and I'll do something worse. Understood?",
+			"Don't even breathe on that lock wrong. Next time I won't be so generous.",
+			"Your only job now is to wear that lock and shut the fuck up.",
+		]
+	if(_id == "SoftSlaveryPunishLockRestraint3"):
+		return [
+			"I'm two seconds from making this permanent. One more fucking whimper and that lock stays for a month.",
+			"You're pushing me, {npc.npcSlave}. And I don't get pushed. Correct your attitude or I'll correct it for you.",
+			"This is your warning. I see one more stupid move and that restraint becomes the least of your problems.",
+			"Keep testing me and you'll find out exactly how creative I can be. Now fucking behave.",
+			"That look on your face tells me you still don't get it. I'm done playing nice.",
+			"You're burning through my patience. Next time I won't warn you, {npc.npcSlave}. I'll just break you.",
 		]
 
 	if(_id == "SoftSlaveryResist"):

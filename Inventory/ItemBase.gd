@@ -405,6 +405,9 @@ func isImportant():
 func isRestraint():
 	return restraintData != null
 
+func isRestraintShouldKeep() -> bool:
+	return false
+
 func generateRestraintData():
 	pass
 

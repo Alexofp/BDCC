@@ -84,7 +84,7 @@ func start():
 	var theLockInfo := getLockNameDesc(pickedLock)
 	saynn("{npc.name} forces [b]"+theLockInfo[0]+"[/b] onto you and locks it with a [b]key[/b] before putting it away.")
 	talkModularOwnerToPC("SoftSlaveryPunishLockRestraint") # You fucked up. And now you will have to wear it.
-	saynn("Looks like you must choose something..")
+	saynn("Looks like you don't get a choice in this..")
 	talkModularOwnerToPC("SoftSlaveryPunishLockRestraint2") # If you dare to take it off before I allow you, I will have to punish you again.
 	saynn("The restraint sits extremely tightly.. there is no easy way to unlock it without a key.")
 	talkModularOwnerToPC("SoftSlaveryPunishLockRestraint3") # You are on some very thin ice right now, you really better start behaving now.

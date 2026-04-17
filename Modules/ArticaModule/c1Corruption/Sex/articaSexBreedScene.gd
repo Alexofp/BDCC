@@ -330,7 +330,7 @@ func _run():
 		playAnimation(StageScene.Cuddling, "idle", {pc="pc", npc="artica", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		if (!condomUsed):
 			if (isStraponSex):
-				saynn("After such a rough fuck, it's nice to just touch the fluff sometimes. You pull Artica into your embrace and cuddle with her. "+str("Her stuffed cyan cunt is dripping her own seed onto your bed.." if straponHasArticaCum else "")+""+str("Her stuffed cyan cunt is dripping someone's seed onto your bed.." if straponHasArticaCum else "")+"")
+				saynn("After such a rough fuck, it's nice to just touch the fluff sometimes. You pull Artica into your embrace and cuddle with her. "+str("Her stuffed cyan cunt is dripping her own seed onto your bed.." if straponHasArticaCum else "")+""+str("Her stuffed cyan cunt is dripping someone's seed onto your bed.." if (straponHasCum && !straponHasArticaCum) else "")+"")
 
 			else:
 				saynn("After such a rough fuck, it's nice to just touch the fluff sometimes. You pull Artica into your embrace and cuddle with her. Her stuffed cyan cunt is dripping your seed onto your bed..")

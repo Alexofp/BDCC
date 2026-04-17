@@ -172,6 +172,10 @@ func getFormIDs() -> Array:
 		"SoftSlaveryPunishGBStart",
 		"SoftSlaveryPunishGBEnd",
 		
+		"SoftSlaveryPunishLockRestraint",
+		"SoftSlaveryPunishLockRestraint2",
+		"SoftSlaveryPunishLockRestraint3",
+		
 		"SoftSlaveryResist",
 		
 		"SoftSlaveryFuckInStocksExtra",
@@ -1376,6 +1380,37 @@ func getText(_id:String, _args:Dictionary):
 			"Next time you disobey, the punishment will be far less pleasant.",
 			"Think about this every time you consider saying no to me.",
 			"Your purpose is to serve. Don't make me reinforce this lesson again.",
+		]
+
+	if(_id == "SoftSlaveryPunishLockRestraint"):
+		return [
+			"You fucked up. And now you will have to wear it.",
+			"Looks like someone earned a new accessory. Isn't it pretty?",
+			"Aww, did you think I would just let it slip? Cute. But no.",
+			"Congratulations. You just played yourself. This is your reward.",
+			"You wanted my attention? You've got it. Now here is your punishment.",
+			"Bad choices earn you shiny rewards. Go on, test it.",
+			"I love it when you test me. Gives me an excuse to do things like this.",
+			"You're lucky I like you. Otherwise this would be a lot worse.",
+			"Let's see if this helps you remember who's in charge."
+		]
+	if(_id == "SoftSlaveryPunishLockRestraint2"):
+		return [
+			"I dare you to try taking it off. No really. I dare you.",
+			"That lock stays on until I say so. Touch it and find out what happens next.",
+			"You can take it off whenever you want. Just know I'll enjoy putting it back on ten times worse.",
+			"I'll know if you mess with it. And I'll be so.. disappointed. You don't want that.",
+			"Try me and take it off. I'm bored anyway.",
+			"Remove it without permission and I'll give you something even heavier. Your choice, sweetheart.",
+			"You're smart enough to leave it alone. Right? Right."
+		]
+	if(_id == "SoftSlaveryPunishLockRestraint3"):
+		return [
+			"One more cute little mistake and I'm gonna be much more mean. Still feeling playful?",
+			"You're adorable when you push your luck. Pity for you, I'm not in a forgiving mood.",
+			"Keep testing me. I'll just keep adding more locks. Or do something else.",
+			"Smile all you want. That lock isn't coming off early.",
+			"You're dancing on the line, and I've got scissors for that line.",
 		]
 
 	if(_id == "SoftSlaveryResist"):

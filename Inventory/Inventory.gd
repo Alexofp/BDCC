@@ -354,7 +354,7 @@ func forceEquipStoreOtherUnlessRestraint(item):
 	
 	if(hasSlotEquipped(slot)):
 		var storedItem = removeItemFromSlot(slot)
-		if(!storedItem.isRestraint() || storedItem.isImportant()):
+		if(!storedItem.isRestraint() || storedItem.isImportant() || storedItem.isRestraintShouldKeep()):
 			addItem(storedItem)
 	
 	return equipItem(item)
