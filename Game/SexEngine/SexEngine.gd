@@ -327,7 +327,15 @@ func getActivityWithUniqueID(uniqueID:int):
 			return activity
 	return null
 
-func generateGoalsFor(domID:String, amountToGenerate:int) -> bool:
+func generateGoalsFor(domID:String, amountToGenerate:int, _fallbackToLowerFetishValue:bool = true) -> bool:
+	if(internal_generateGoalsFor(domID, amountToGenerate)):
+		return true
+	if(!_fallbackToLowerFetishValue):
+		return false
+	# Fallback where we try to generate goals that the dom might dislike a bit
+	return internal_generateGoalsFor(domID, amountToGenerate, -0.26)
+
+func internal_generateGoalsFor(domID:String, amountToGenerate:int, _minFetishValue:float = 0.0) -> bool:
 	if(domID == "pc"):
 		return false
 	
@@ -346,7 +354,7 @@ func generateGoalsFor(domID:String, amountToGenerate:int) -> bool:
 		if(sub.hasPerk(Perk.FertilitySubmissiveAndBreedable)):
 			breedingGoalsAmount += 1
 		
-		var goalsToAdd = dom.getFetishHolder().getGoals(self, sub)
+		var goalsToAdd = dom.getFetishHolder().getGoals(self, sub, _minFetishValue)
 		if(goalsToAdd != null):
 			for goal in goalsToAdd:
 				if(disabledGoals.has(goal[0])):

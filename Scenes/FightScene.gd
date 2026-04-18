@@ -703,7 +703,7 @@ func aiTurn():
 		if(struggleData.has("stamina") && struggleData["stamina"] != 0):
 			addStamina = struggleData["stamina"]
 		
-		var struggleText = GM.ui.processString(struggleData["text"], {"user":"attacker"})
+		var struggleText = GM.ui.processString(struggleData["text"], {"user": enemyID})
 		enemyText += struggleText + "\n\n"
 		
 		if(damage > 0.0):

@@ -2318,6 +2318,9 @@ func getWornPenisPump():
 			return item
 	return null
 
+func isWearingPenisPump() -> bool:
+	return getWornPenisPump() != null
+
 func isWearingCondom():
 	return getWornCondom() != null
 	

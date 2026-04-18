@@ -36,22 +36,22 @@ func startActivity(_args):
 	pass
 
 func init_processTurn():
-	addText("{dom.You} {dom.youVerb('hold')} {sub.you} pinned to the floor with {dom.yourHis} foot.")
+	addText("{dom.You} {dom.youVerb('hold')} {sub.you} pinned to the floor with {dom.yourHis} {dom.foot}.")
 
 func onhead_processTurn():
 	if(RNG.chance(50)):
 		teasingTimes += 1
 	stimulate(DOM_0, S_LEGS, SUB_0, S_MOUTH, I_TEASE, Fetish.FeetplayGiving, SPEED_SLOW)
 	#affectSub(getSubInfo().fetishScore({Fetish.FeetplayReceiving: 1.0})+0.0, 0.02, -0.01, -0.005)
-	addText("{dom.You} {dom.youVerb('hold')} {dom.yourHis} foot on {sub.your} head.")
+	addText("{dom.You} {dom.youVerb('hold')} {dom.yourHis} {dom.foot} on {sub.your} head.")
 
 func kissingfeet_processTurn():
 	addTextPick([
-		"{sub.You} {sub.youAre} sucking on {dom.your} foot!",
-		"{sub.You} {sub.youAre} licking {dom.your} foot.",
-		"{sub.You} {sub.youAre} licking {dom.your} foot while it is in {sub.yourHis} mouth.",
-		"{sub.You} {sub.youAre} idly sucking on {dom.your} toes while they are in {sub.yourHis} mouth.",
-		"{sub.You} {sub.youAre} thrusting {sub.yourHis} tongue between {dom.your} toes."
+		"{sub.You} {sub.youAre} sucking on {dom.your} {dom.foot}!",
+		"{sub.You} {sub.youAre} licking {dom.your} {dom.foot}.",
+		"{sub.You} {sub.youAre} licking {dom.your} {dom.foot} while it is in {sub.yourHis} mouth.",
+		"{sub.You} {sub.youAre} idly sucking on {dom.your} {dom.toes} while they are in {sub.yourHis} mouth.",
+		"{sub.You} {sub.youAre} thrusting {sub.yourHis} tongue between {dom.your} {dom.toes}."
 	])
 	stimulate(DOM_0, S_LEGS, SUB_0, S_MOUTH, I_TEASE, Fetish.FeetplayGiving)
 	#affectDom(getDomInfo().fetishScore({Fetish.FeetplayGiving: 1.0})+0.3, 0.05, -0.01)
@@ -100,7 +100,7 @@ func rubpenis_processTurn():
 		react(SexReaction.FeetplayRubbingPenis, [20, 10])
 
 func onheadwaitingforanswer_processTurn():
-	var text:String = "{dom.You} {dom.youVerb('hold')} {sub.you} pinned to the floor with {dom.yourHis} foot while waiting for {sub.youHim}."
+	var text:String = "{dom.You} {dom.youVerb('hold')} {sub.you} pinned to the floor with {dom.yourHis} {dom.foot} while waiting for {sub.youHim}."
 	waitTimer += 1
 	if(waitTimer > 4):
 		state = "onhead"
@@ -124,7 +124,7 @@ func getActions(_indx:int):
 			if(getSub().hasReachableVagina()):
 				addAction("rubpussy", 0.5, "Rub pussy", "Start rubbing their pussy with your feet")
 		if(state in [""]):
-			if(getSub().hasReachablePenis() || getSub().isWearingChastityCage()):
+			if(getSub().hasReachablePenis() || getSub().isWearingChastityCage() || getSub().isWearingPenisPump()):
 				addAction("rubpenis", 0.5, "Rub penis", "Start rubbing their dick with your feet")
 		if(state in ["", "onhead", "kissingfeet", "rubpussy", "rubpenis", "onheadwaitingforanswer"]):
 			addAction("stop", getStopScore(), "Stop feetplay", "Enough humiliation")
@@ -176,7 +176,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		return
 	if(_id == "pinhead"):
 		state = "onhead"
-		addText("{dom.You} {dom.youVerb('move')} {dom.yourHis} foot to {sub.you} head!")
+		addText("{dom.You} {dom.youVerb('move')} {dom.yourHis} {dom.foot} to {sub.you} head!")
 		affectSub(getSubInfo().fetishScore({Fetish.FeetplayReceiving: 1.0})-0.1, 0.03, -0.05, -0.02)
 		getDomInfo().addArousalForeplay(0.1)
 		affectDom(getDomInfo().fetishScore({Fetish.FeetplayGiving: 1.0})+0.5, 0.1, 0.0)
@@ -188,21 +188,21 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		return
 	if(_id == "rubpussy"):
 		state = "rubpussy"
-		addText("{dom.You} {dom.youVerb('move')} {dom.yourHis} foot to {sub.your} crotch and {dom.youVerb('begin')} rubbing {sub.yourHis} pussy!")
+		addText("{dom.You} {dom.youVerb('move')} {dom.yourHis} {dom.foot} to {sub.your} crotch and {dom.youVerb('begin')} rubbing {sub.yourHis} pussy!")
 		getSubInfo().addArousalForeplay(0.05)
 		affectSub(getSubInfo().fetishScore({Fetish.FeetplayReceiving: 1.0})+0.3, 0.1, -0.02, -0.01)
 		return
 	if(_id == "rubpenis"):
 		state = "rubpenis"
-		addText("{dom.You} {dom.youVerb('move')} {dom.yourHis} foot down to {sub.your} crotch and {dom.youVerb('start')} rubbing {sub.yourHis} dick!")
+		addText("{dom.You} {dom.youVerb('move')} {dom.yourHis} {dom.foot} down to {sub.your} crotch and {dom.youVerb('start')} rubbing {sub.yourHis} dick!")
 		getSubInfo().addArousalForeplay(0.05)
 		affectSub(getSubInfo().fetishScore({Fetish.FeetplayReceiving: 1.0})+0.3, 0.1, -0.02, -0.01)
 		return
 	if(_id == "asktolick"):
 		addTextPick([
-			"{dom.You} {dom.youVerb('order')} {sub.you} to start licking {dom.yourHis} foot!",
-			"{dom.You} {dom.youVerb('order')} {sub.you} to start sucking {dom.yourHis} foot!",
-			"{dom.You} {dom.youVerb('order')} {sub.you} to start worshipping {dom.yourHis} foot!"
+			"{dom.You} {dom.youVerb('order')} {sub.you} to start licking {dom.yourHis} {dom.foot}!",
+			"{dom.You} {dom.youVerb('order')} {sub.you} to start sucking {dom.yourHis} {dom.foot}!",
+			"{dom.You} {dom.youVerb('order')} {sub.you} to start worshipping {dom.yourHis} {dom.foot}!"
 		])
 		state = "onheadwaitingforanswer"
 		react(SexReaction.FeetplayAskToKiss, [100.0, 40.0])
@@ -243,11 +243,11 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		return
 	if(_id == "stop"):
 		endActivity()
-		addText("{dom.You} {dom.youVerb('stop')} pinning {sub.you} with {dom.yourHis} foot.")
+		addText("{dom.You} {dom.youVerb('stop')} pinning {sub.you} with {dom.yourHis} {dom.foot}.")
 		return
 
 	if(_id == "startsuck"):
-		addText("{sub.You} {sub.youVerb('open')} {sub.yourHis} mouth and start sucking on {dom.your} foot!")
+		addText("{sub.You} {sub.youVerb('open')} {sub.yourHis} mouth and start sucking on {dom.your} {dom.foot}!")
 		state = "kissingfeet"
 		affectDom(getDomInfo().fetishScore({Fetish.FeetplayReceiving: 1.0})+0.1, 0.1, -0.05)
 		reactSub(SexReaction.AgreeGeneric)
@@ -275,13 +275,13 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		var text:String = ""
 		if(RNG.chance(getSubResistChance(50.0, 25.0))):
 			state = ""
-			text += "{sub.You} {sub.youVerb('manage')} to bite {dom.your} foot hard!"
+			text += "{sub.You} {sub.youVerb('manage')} to bite {dom.your} {dom.foot} hard!"
 			getDomInfo().addPain(5)
 			sendSexEvent(SexEvent.PainInflicted, SUB_0, DOM_0, {pain=5,isDefense=true,intentional=true})
 			getDomInfo().addAnger(0.3)
 			react(SexReaction.PainGeneric)
 		else:
-			text += "{sub.You} {sub.youVerb('try', 'tries')} to bite {dom.yourHis} foot."
+			text += "{sub.You} {sub.youVerb('try', 'tries')} to bite {dom.yourHis} {dom.foot}."
 			getDomInfo().addAnger(0.1)
 		addText(text)
 		reactSub(SexReaction.ActivelyResisting, [50])
@@ -379,6 +379,6 @@ func isActivityImpossibleShouldStop() -> bool:
 		if(!getSub().hasReachableVagina()):
 			return true
 	if(state == "rubpenis"):
-		if(!getSub().hasReachablePenis() && !getSub().isWearingChastityCage()):
+		if(!getSub().hasReachablePenis() && !getSub().isWearingChastityCage() && !getSub().isWearingPenisPump()):
 			return true
 	return false

@@ -54,7 +54,7 @@ func addFetish(fetishID:String, theVal:float):
 func getFetishes() -> Dictionary:
 	return fetishMap
 
-func getGoals(_sexEngine, _sub) -> Array:
+func getGoals(_sexEngine, _sub, _minValue:float = 0.0) -> Array:
 	var result:Array = []
 	
 	for fetishID in GlobalRegistry.getFetishes():
@@ -62,7 +62,7 @@ func getGoals(_sexEngine, _sub) -> Array:
 		if(fetishMap.has(fetishID)):
 			fetishInterestValue = fetishMap[fetishID]
 		
-		if(fetishInterestValue >= 0.0):
+		if(fetishInterestValue >= _minValue):
 			var fetish:FetishBase = GlobalRegistry.getFetish(fetishID)
 			var goals = fetish.getGoals(_sexEngine, self, getCharacter(), _sub)
 			

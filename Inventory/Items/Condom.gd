@@ -40,7 +40,10 @@ func getItemCategory():
 func useInCombat(_attacker, _receiver):
 	removeXOrDestroy(1)
 	
-	_attacker.getInventory().addItem(GlobalRegistry.createItem("UsedCondom"))
+	var theCondomItem = GlobalRegistry.createItem("UsedCondom")
+	if(theCondomItem):
+		theCondomItem.breakChance = getCondomBreakChance()
+		_attacker.getInventory().addItem(theCondomItem)
 	
 	return _attacker.getName() + " takes one of the condoms out of its package and then stretches it with "+_attacker.hisHer()+" fingers."
 
