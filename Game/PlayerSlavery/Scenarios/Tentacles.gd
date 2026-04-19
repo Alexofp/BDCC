@@ -804,7 +804,7 @@ func incStat(_statID:int, showMessage:bool = true) -> bool:
 	
 	return true
 
-const TRAIN_MINUTES = 60
+const TRAIN_MINUTES = 80
 
 func train(_statID:int, _passTime:bool = true) -> bool:
 	if(_passTime):
@@ -818,7 +818,7 @@ func trainUntilFive(_statID:int, _passTime:bool = true):
 		incStat(_statID)
 
 func trainNothing() -> bool:
-	GM.main.processTime(TRAIN_MINUTES*60)
+	GM.main.processTime(TRAIN_MINUTES*30) # Less punishing
 	return true
 
 func getTentaclesCharID() -> String:

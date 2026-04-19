@@ -137,6 +137,8 @@ var contributorsCredits:Dictionary = {
 		"[url=https://github.com/Alexofp/BDCC/pull/249]#18[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/250]#19[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/251]#20[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/268]#21[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/269]#22[/url]",
 	],
 	"CheeseyCake92": [
 		"[url=https://github.com/Alexofp/BDCC/pull/158]#1[/url]",
@@ -148,6 +150,8 @@ var contributorsCredits:Dictionary = {
 		"[url=https://github.com/Alexofp/BDCC/pull/230]#3[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/237]#4[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/239]#5[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/264]#6[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/265]#7[/url]",
 	],
 	"moon-halo-xviii": [
 		"[url=https://github.com/Alexofp/BDCC/pull/196]#1[/url]",
@@ -163,9 +167,30 @@ var contributorsCredits:Dictionary = {
 		"[url=https://github.com/Alexofp/BDCC/pull/245]#4[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/247]#5[/url]",
 		"[url=https://github.com/Alexofp/BDCC/pull/248]#6[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/281]#7[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/282]#8[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/284]#9[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/285]#10[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/287]#11[/url]",
 	],
 	"SongJo": [
 		"42 great haircuts",
+	],
+	"Meepyneepy": [
+		"[url=https://github.com/Alexofp/BDCC/pull/259]#1[/url]",
+	],
+	"Mari": [
+		"[url=https://github.com/Alexofp/BDCC/pull/266]#1[/url]",
+	],
+	"FrivolousBorks": [
+		"[url=https://github.com/Alexofp/BDCC/pull/267]#1[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/271]#2[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/274]#3[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/275]#4[/url]",
+		"[url=https://github.com/Alexofp/BDCC/pull/278]#5[/url]",
+	],
+	"Ferricyanide": [
+		"[url=https://github.com/Alexofp/BDCC/pull/280]#1[/url]",
 	],
 }
 
@@ -491,7 +516,7 @@ func onDonationDataRequest(result, _response_code, _headers, body):
 	cachedDonationData = donationData
 	emit_signal("donationDataUpdated")
 
-func getDonationDataString():
+func getDonationDataString(_tightGrouping:bool = false):
 	var theData
 	if(cachedDonationData == null):
 		theData = cachedLocalDonationData
@@ -504,14 +529,20 @@ func getDonationDataString():
 	if(theData == null || !validateDonationData(theData)):
 		return ""
 	
-	var newText = "[center][b][url=https://subscribestar.adult/rahi]SubscribeStar[/url][/b]\nCompiled "+str(theData["dateString"])+"\n\n"
+	var newText:String = "[center][b][url=https://subscribestar.adult/rahi]SubscribeStar[/url][/b]\nCompiled "+str(theData["dateString"])+"\n\n"
 	
 	for tierName in theData["tiers"]:
 		if(!theData["entries"].has(tierName)):
 			continue
 		newText += "[b]"+tierName+" tier[/b]\n"
-		for entry in theData["entries"][tierName]:
-			newText += entry["nickname"]+"\n"
+		if(!_tightGrouping):
+			for entry in theData["entries"][tierName]:
+				newText += entry["nickname"]+"\n"
+		else:
+			var theNames:Array = []
+			for entry in theData["entries"][tierName]:
+				theNames.append(entry["nickname"])
+			newText += Util.join(theNames, ", ")+"\n"
 		newText += "\n"
 	newText += "Thank you [color=red]<3[/color][/center]"
 	return newText

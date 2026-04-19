@@ -77,7 +77,7 @@ func _run():
 
 		saynn("[say=sci2]You're up, test subject. Good.[/say]")
 
-		saynn("[say=pc]You were here? Why didn't you wake up earlier?[/say]")
+		saynn("[say=pc]You were here? Why didn't you wake me up earlier?[/say]")
 
 		saynn("[say=sci2]We wanted to see what it would do to you.[/say]")
 

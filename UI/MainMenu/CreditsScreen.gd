@@ -5,7 +5,7 @@ signal onClosePressed
 onready var contributors_label = $"%ContributorsLabel"
 
 func _ready():
-	$VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer/DonationsLabel.bbcode_text = GlobalRegistry.getDonationDataString()
+	$VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer/DonationsLabel.bbcode_text = GlobalRegistry.getDonationDataString(true)
 	var _ok = GlobalRegistry.connect("donationDataUpdated", self, "updateDonationData")
 
 	var contributorText:String = ""
@@ -15,7 +15,7 @@ func _ready():
 	contributors_label.bbcode_text = "[center]Contributors:"+contributorText+"[/center]"
 
 func updateDonationData():
-	$VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer/DonationsLabel.bbcode_text = GlobalRegistry.getDonationDataString()
+	$VBoxContainer/ScrollContainer/ScrollVBox/ContentContainer/DonationsLabel.bbcode_text = GlobalRegistry.getDonationDataString(true)
 
 func _on_CloseButton_pressed():
 	emit_signal("onClosePressed")

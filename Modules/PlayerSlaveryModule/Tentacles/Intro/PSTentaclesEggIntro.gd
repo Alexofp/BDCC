@@ -91,7 +91,7 @@ func _run():
 
 		saynn("[say=pc]Job?[/say]")
 
-		saynn("[say=sci2]Our current focus is a newly acquired specimen. Its behavioral matrix has some missing entries that we would like to fill. That's all you need to know for now.[/say]")
+		saynn("[say=sci2]Our current focus is a newly acquired specimen. Our database has some missing entries that we would like to fill. That's all you need to know for now.[/say]")
 
 		saynn("Specimen? Your confusion doesn't last for long.")
 

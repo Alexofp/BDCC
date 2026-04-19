@@ -206,7 +206,7 @@ func _run():
 		
 		saynn("Injecting the tentacles with it will strip them of any kind of consciousness.. if you'd to believe the scientists.")
 		
-		addButton("Do it now", "Inject it into the tentacles and be done with it", "doItNow")
+		addButton("Do it now", "Inject it into the tentacles and be done with it", "doItNow_sure")
 		addButton("Postpone it", "Maybe there is something else you can do..", "postpone")
 	if(state == "postpone"):
 		saynn("Nah. You don't wanna do this.")
@@ -216,7 +216,12 @@ func _run():
 		saynn("The tentacles have woken up by now.. They're just going through their normal routine.. seemingly unaware that this might be their last day of existence.")
 
 		addButton("Continue", "See what happens next", "endthescene")
-
+	if(state == "doItNow_sure"):
+		saynn("You squeeze the injector in your hand.")
+		saynn("Are you sure?")
+		addButton("Yes", "Inject the tentacles with the drug that will make them mindless", "doItNow")
+		addButton("No", "Maybe there is something else you can do..", "postpone")
+		
 func _react(_action: String, _args):
 	var _tentacles:PlayerSlaveryTentacles = GM.main.PS
 
