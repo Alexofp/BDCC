@@ -41,6 +41,7 @@ func _react(_action: String, _args):
 	if(_action == "begin_stuff"):
 		GM.pc.addCredits(-getModule("ElizaModule").getTentaclesCost())
 		runScene("PSElizaTentaclesBorn")
+		setFlag("ElizaModule.tent_born", true)
 		endScene()
 		return
 
