@@ -158,6 +158,8 @@ func getActions(_indx:int):
 			var forcedeepthroatScore:float = fetish(DOM_0, Fetish.OralSexReceiving, -0.4) / 6.0
 			addAction("forcedeepthroat", forcedeepthroatScore, "Force to deepthroat", "Make that slut deepthroat you")
 		if(state in ["blowjob", "deepthroat"]):
+			addEggStuffButton(DOM_0, SUB_0, BodypartSlot.Head)
+			
 			if(isReadyToCumHandled(DOM_0) && isStraponSex()):
 				addAction("domstraponcum", 1.0, "Cum!", "You're about to cum..", {A_PRIORITY: 1001})
 			
@@ -211,6 +213,9 @@ func getActions(_indx:int):
 
 
 func doAction(_indx:int, _id:String, _action:Dictionary):
+	if(_id == "stuffegg"):
+		doStuffEggInto(DOM_0, SUB_0, BodypartSlot.Head)
+		return
 	if(_id == "domstraponcum"):
 		getDom().cumOnFloor()
 		getDomInfo().cum()

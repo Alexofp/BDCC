@@ -586,6 +586,8 @@ func talkText(_indx1:int, _text:String):
 	var theInfo := getDomOrSubInfo(_indx1)
 	if(theInfo.isUnconscious()):
 		return
+	if(_indx1 >= 0 && getSexEngine().domsNoTalking):
+		return
 	addOutputRaw([SexEngine.OUTPUT_SAY, theInfo.getCharID(), processText(_text)])
 
 func react(_reactionID:int, _chances:Array = [100.0, 100.0], _actors:Array = [DOM_0, SUB_0], _args:Array = []):
@@ -903,6 +905,9 @@ func getSupportedSexTypes():
 
 func getSexType():
 	return getSexEngine().getSexTypeID()
+
+func isTentaclesSex() -> bool:
+	return getSexType() == SexType.TentaclesSex
 
 func satisfyGoals():
 	var goalData = getGoals()
@@ -1847,6 +1852,20 @@ func doSpitCumIntoHoleSub(bodypartSlot = BodypartSlot.Vagina):
 		fetishAffect(SUB_0, Fetish.Breeding, 3.0)
 		fetishAffect(DOM_0, Fetish.BeingBred, 3.0)
 
+func hasOvipositorPenis(_indx:int) -> bool:
+	var theChar:BaseCharacter = getDomOrSub(_indx)
+	if(theChar):
+		return false
+	var theStrapon = theChar.getWornStrapon()
+	if(theStrapon):
+		if(theStrapon.has_method("getStraponTraits")):
+			return theStrapon.getStraponTraits().get(PartTrait.Ovipositor, false)
+		return false
+	if(!theChar.hasPenis()):
+		return false
+	return theChar.getBodypart(BodypartSlot.Penis).hasTrait(PartTrait.Ovipositor)
+	
+
 func isWearingStrapon(_indx:int) -> bool:
 	var theChar:BaseCharacter = getDomOrSub(_indx)
 	if(!theChar):
@@ -2257,7 +2276,7 @@ func getNameHole(_indx:int, _hole:String) -> String:
 	if(_hole == S_ANUS):
 		return RNG.pick(["anus", "tailhole", "backdoor", "star", "anal ring"])
 	if(_hole == S_MOUTH):
-		return RNG.pick(["mouth", "face", "throat"])
+		return RNG.pick(["mouth", "throat"])
 	return "[color=red]error[/color]"
 
 func getNameHoleGeneric(_hole:String) -> String:
@@ -2266,7 +2285,7 @@ func getNameHoleGeneric(_hole:String) -> String:
 	if(_hole == S_ANUS):
 		return RNG.pick(["anus", "tailhole", "backdoor", "star", "anal ring"])
 	if(_hole == S_MOUTH):
-		return RNG.pick(["mouth", "face", "throat"])
+		return RNG.pick(["mouth", "throat"])
 	return "[color=red]error[/color]"
 
 func doProcessFuck(_indxTop:int, _indxBottom:int, _hole:String, _poseDescriptor:String = ""):
@@ -2706,7 +2725,153 @@ func cumInsideShare(_indxWho:int, _indxTarget1:int, _hole1:String, _indxTarget2:
 			target2Info.addResistance(1.0)
 			target2Info.addFear(0.1)
 	theInfo.cum()
+
+func cumInsideNoText(_indxWho:int, _indxTarget:int, _hole:String, _extra:Dictionary = {}) -> Dictionary:
+	var theChar:BaseCharacter = getDomOrSub(_indxWho)
+	var target:BaseCharacter = getDomOrSub(_indxTarget)
+	if(!theChar.hasPenis() && !theChar.isWearingStrapon()):
+		return {}
+	if(!target.hasBodypart(_hole)):
+		return {}
+
+	var tryKnot:bool = _extra["tryKnot"] if _extra.has("tryKnot") else false
+	#var isRiding:bool = _extra["isRiding"] if _extra.has("isRiding") else false
+	#var isDeepthroat:bool = _extra["isDeepthroat"] if _extra.has("isDeepthroat") else false
+
+	if(theChar.isWearingStrapon()):
+		if(_hole == S_VAGINA):
+			fetishAffect(_indxWho, Fetish.StraponSexVaginal, 3.0)
+			fetishAffect(_indxTarget, Fetish.VaginalSexReceiving, 3.0)
+		if(_hole == S_ANUS):
+			fetishAffect(_indxWho, Fetish.StraponSexAnal, 3.0)
+			fetishAffect(_indxTarget, Fetish.AnalSexReceiving, 3.0)
+		
+		var strapon = theChar.getWornStrapon()
+		if(strapon.getFluids() != null && !strapon.getFluids().isEmpty()):
+			var straponHasCum:bool = strapon.getFluids().hasVirileFluids()
+			target.cummedInBodypartByAdvanced(_hole, theChar.getID())
+			
+			if(straponHasCum && target.hasWombIn(_hole) && target.getFertility() > 0.1):
+				fetishAffect(_indxWho, Fetish.Breeding, 5.0)
+				fetishAffect(_indxTarget, Fetish.BeingBred, 5.0)
+		return {}
 	
+	if(_hole in [S_VAGINA, S_ANUS]):
+		var topInfo:SexInfoBase = getDomOrSubInfo(_indxWho)
+		var topChar:BaseCharacter = topInfo.getChar()
+		#var topStrapon:bool = topChar.isWearingStrapon()
+		var bottomInfo:SexInfoBase = getDomOrSubInfo(_indxTarget)
+		var bottomChar:BaseCharacter = bottomInfo.getChar()
+
+		var condomBroke:bool = false
+		var knotSuccess:bool = false
+		var didCumInside:bool = false
+		var handledCum:bool = false
+		var shouldStretchPainfully:bool = false
+
+		if(_hole == S_VAGINA):
+			fetishAffect(_indxWho, Fetish.VaginalSexGiving, 3.0)
+			fetishAffect(_indxTarget, Fetish.VaginalSexReceiving, 3.0)
+		if(_hole == S_ANUS):
+			fetishAffect(_indxWho, Fetish.AnalSexGiving, 3.0)
+			fetishAffect(_indxTarget, Fetish.AnalSexReceiving, 3.0)
+
+		if(tryKnot):
+			var freeRoom:float = bottomChar.getPenetrationFreeRoomBy(_hole, topChar.getID())
+			var chanceToPain:float = -freeRoom * 5.0
+			if(topInfo.isAngry()):
+				chanceToPain *= 2.0
+			if(RNG.chance(10)):
+				chanceToPain *= 1.5
+			if(RNG.chance(chanceToPain)):
+				shouldStretchPainfully = true
+
+			#isTryingToKnot = true
+			bottomChar.gotOrificeStretchedBy(_hole, topChar.getID(), true, 0.5)
+			if(RNG.chance(bottomChar.getKnottingChanceBy(_hole, topChar.getID()))):
+				knotSuccess = true
+		
+		var condom:ItemBase = topChar.getWornCondom()
+		if(condom != null):
+			var breakChance:float = condom.getCondomBreakChance()
+			condomBroke = topChar.shouldCondomBreakWhenFucking(bottomChar, breakChance)
+			if(condomBroke):
+				condom.destroyMe()
+				didCumInside = true
+				fetishUp(_indxWho, Fetish.Condoms, -20.0)
+				fetishUp(_indxTarget, Fetish.Condoms, -30.0)
+			else:
+				fetishAffect(_indxWho, Fetish.Condoms, 5.0)
+				fetishAffect(_indxTarget, Fetish.Condoms, 5.0)
+				handledCum = true
+				
+				var loadSize = topChar.cumInItem(condom)
+				topInfo.cum()
+				bottomInfo.addArousalSex(0.2)
+				sendSexEvent(SexEvent.FilledCondomInside, _indxWho, _indxTarget, {hole=_hole,loadSize=loadSize,knotted=knotSuccess})
+		
+		if(!handledCum):
+			didCumInside = true
+			if(bottomChar.hasWombIn(_hole) && getDomOrSub(_indxWho).getFertility() > 0.1 && getDomOrSub(_indxTarget).getVirility() > 0.1):
+				fetishAffect(_indxWho, Fetish.Breeding, 5.0)
+				fetishAffect(_indxTarget, Fetish.BeingBred, 5.0)
+				
+				if(bottomInfo is SexSubInfo):
+					var beingBredScore:float = bottomInfo.fetishScore({Fetish.BeingBred: 1.0})
+					if(beingBredScore < 0.0):
+						bottomInfo.addResistance(1.0)
+						bottomInfo.addFear(0.1)
+			bottomChar.cummedInBodypartByAdvanced(_hole, topInfo.getCharID(), {knotted=knotSuccess,condomBroke=condomBroke})
+			topInfo.cum()
+			bottomInfo.addArousalSex(0.2)
+
+		if(shouldStretchPainfully):
+			doStretch(_indxWho, _indxTarget, _hole)
+		
+		return {
+			text="",
+			didCumInside=didCumInside,
+			condomBroke=condomBroke,
+			knotSuccess=knotSuccess
+		}
+	if(_hole == S_MOUTH):
+		var topInfo:SexInfoBase = getDomOrSubInfo(_indxWho)
+		var topChar:BaseCharacter = topInfo.getChar()
+		#var topStrapon:bool = topChar.isWearingStrapon()
+		var bottomInfo:SexInfoBase = getDomOrSubInfo(_indxTarget)
+		var bottomChar:BaseCharacter = bottomInfo.getChar()
+		
+		fetishAffect(_indxWho, Fetish.OralSexReceiving, 3.0)
+		fetishAffect(_indxTarget, Fetish.OralSexGiving, 3.0)
+		
+		var condomBroke:bool = false
+		var condom:ItemBase = topChar.getWornCondom()
+		if(condom != null):
+			var breakChance:float = condom.getCondomBreakChance()
+			condomBroke = topChar.shouldCondomBreakWhenFucking(bottomChar, breakChance)
+			if(condomBroke):
+				condom.destroyMe()
+				fetishUp(_indxWho, Fetish.Condoms, -20.0)
+				fetishUp(_indxTarget, Fetish.Condoms, -30.0)
+			else:
+				fetishAffect(_indxWho, Fetish.Condoms, 5.0)
+				fetishAffect(_indxTarget, Fetish.Condoms, 5.0)
+				topChar.cumInItem(condom)
+				topInfo.cum()
+				return {}
+		if(bottomInfo is SexSubInfo):
+			var beingBredScore:float = bottomInfo.fetishScore({Fetish.OralSexGiving: 1.0})
+			if(beingBredScore < 0.0):
+				bottomInfo.addResistance(1.0)
+				bottomInfo.addFear(0.1)
+		bottomChar.cummedInBodypartByAdvanced(BodypartSlot.Head, topInfo.getCharID(), {condomBroke=condomBroke})
+		topInfo.cum()
+		
+		#return getSexEngine().combineData({text=text}, applyTallymarkIfNeededData(BodypartSlot.Head))
+		return {}
+	
+	return {}
+
 func cumInside(_indxWho:int, _indxTarget:int, _hole:String, _extra:Dictionary = {}) -> Dictionary:
 	#var theInfo:SexInfoBase = getDomOrSubInfo(_indxWho)
 	var theChar:BaseCharacter = getDomOrSub(_indxWho)
@@ -3176,3 +3341,121 @@ func rubWithFeet(_indxWho:int, _indxTarget:int, _hole:String):
 				" {sub.You} can't hold back much longer!"
 			])
 	addTextRaw(text.replace("{dom.", "{"+theChar.getID()+".").replace("{sub.", "{"+target.getID()+"."))
+
+func stuffTentacleEgg(_indx:int, _hole:String, _addMessage:bool = true, _tentacleIndx:int=DOM_0) -> bool:
+	var theChar:BaseCharacter = getDomOrSub(_indx)
+	if(!theChar):
+		return false
+	var theMenstrualCycle:MenstrualCycle = theChar.getMenstrualCycle()
+	if(!theMenstrualCycle):
+		return false
+	var theSexType = getSexEngine().getSexType()
+	if(theSexType.id != SexType.TentaclesSex):
+		return false
+	var theTentacleType:int = theSexType.tentacleType
+	var theEggTime:int = theSexType.eggTime
+	var theOrifice:int = OrificeType.fromBodypart(_hole)
+	if(theOrifice < 0):
+		return false
+	var theResult:bool = theMenstrualCycle.addTentacleEgg(getDomOrSubID(_tentacleIndx), theTentacleType, theEggTime, theOrifice)
+	
+	if(theResult && _addMessage):
+		var theHoleName:String = "somewhere"
+		if(_hole == S_VAGINA):
+			theHoleName = "into {<TARGET>.your} vagina"
+		elif(_hole == S_ANUS):
+			theHoleName = "down {<TARGET>.your} "+RNG.pick(["tailhole", "asshole"])
+		elif(_hole == S_MOUTH):
+			theHoleName = "down {<TARGET>.your} throat"
+		addTextRaw("[b]An egg gets stuffed "+(theHoleName.replace("<TARGET>", theChar.getID()))+"![/b]")
+	
+	return theResult
+	
+func stuffTentacleEggRandomHole(_indx:int, _addMessage:bool = true, _tentacleIndx:int=DOM_0) -> bool:
+	var possibleHoles:Array = [BodypartSlot.Anus, BodypartSlot.Anus, BodypartSlot.Head] # Anus is 2x as likely to be picked
+	if(getDomOrSub(_indx).hasReachableVagina()):
+		possibleHoles.append(BodypartSlot.Vagina) # Vagina is 4x time as likely to be picked
+		possibleHoles.append(BodypartSlot.Vagina)
+		possibleHoles.append(BodypartSlot.Vagina)
+		possibleHoles.append(BodypartSlot.Vagina)
+	
+	var theHole:String = RNG.pick(possibleHoles)
+	
+	return stuffTentacleEgg(_indx, theHole, _addMessage, _tentacleIndx)
+
+func addEggStuffButton(_roleMain:int, _roleTarget:int, _bodypart:String, _actionID:String = "stuffegg") -> bool:
+	if(canStuffEggInto(_roleMain, _roleTarget, _bodypart)):
+		addAction(_actionID, max(fetish(_roleMain, Fetish.Breeding)*0.2, 0.02 + personality(_roleMain, PersonalityStat.Mean)*0.05), "Stuff egg", "Stuff an egg into them..", {A_PRIORITY: 2})
+		return true
+	return false
+
+func addEggStuffReceiveButton(_roleMain:int, _roleTarget:int, _bodypart:String, _actionID:String = "stuffegg") -> bool:
+	if(canStuffEggInto(_roleTarget, _roleMain, _bodypart)):
+		addAction(_actionID, fetish(_roleMain, Fetish.BeingBred)*0.2, "Receive egg", "Make them stuff an egg into you..", {A_PRIORITY: 2})
+		return true
+	return false
+
+func canStuffEggInto(_roleMain:int, _roleTarget:int, _bodypart:String) -> bool:
+	var _main := getDomOrSub(_roleMain)
+	var _target := getDomOrSub(_roleTarget)
+	return canStuffEggIntoRaw(_main, _target, _bodypart)
+
+func canStuffEggIntoRaw(_main:BaseCharacter, _target:BaseCharacter, _bodypart:String) -> bool:
+	if(!_main || !_target):
+		return false
+	if(!_target.isDynamicCharacter()): # Static characters don't know how to handle it, sorry
+		return false
+	
+	if(!_target.hasBodypart(_bodypart)):
+		return false
+	
+	var theStrapon :ItemBase = _main.getWornStrapon()
+	if(theStrapon):
+		if(theStrapon.has_method("getStraponTraits") && theStrapon.has_method("canStuffEggInto")):
+			if(theStrapon.getStraponTraits().get(PartTrait.Ovipositor, false)):
+				return theStrapon.canStuffEggInto(_target, _bodypart)
+		return false
+
+	if(!_main.hasPenis()):
+		return false
+	var thePenis:BodypartPenis = _main.getBodypart(BodypartSlot.Penis)
+	if(thePenis.hasTrait(PartTrait.Ovipositor) && thePenis.has_method("canStuffEggInto")):
+		return thePenis.canStuffEggInto(_target, _bodypart)
+	return false
+
+func doReceiveEggFrom(_roleMain:int, _roleTarget:int, _bodypart:String, _showMessage:bool = true) -> Dictionary:
+	return doStuffEggInto(_roleTarget, _roleMain, _bodypart, _showMessage)
+	
+func doStuffEggInto(_roleMain:int, _roleTarget:int, _bodypart:String, _showMessage:bool = true) -> Dictionary:
+	var _main := getDomOrSub(_roleMain)
+	var _target := getDomOrSub(_roleTarget)
+	if(!_main || !_target):# || !_target.isDynamicCharacter()):
+		return {success = false}
+	
+	var theStrapon :ItemBase = _main.getWornStrapon()
+	if(theStrapon):
+		if(theStrapon.has_method("getStraponTraits") && theStrapon.has_method("canStuffEggInto") && theStrapon.has_method("doStuffEggInto")):
+			if(theStrapon.getStraponTraits().get(PartTrait.Ovipositor, false)):
+				if(theStrapon.canStuffEggInto(_target, _bodypart)):
+					var theResult:Dictionary = theStrapon.doStuffEggInto(_target, _bodypart)
+					if(!theResult.get("success", false)):
+						return {success = false}
+					
+					if(_showMessage && !theResult.get("text", "").empty()):
+						addTextRaw(theResult["text"])
+					
+					return theResult
+		return {success = false}
+	
+	if(!_main.hasPenis()):
+		return {success = false}
+	var thePenis:BodypartPenis = _main.getBodypart(BodypartSlot.Penis)
+	if(thePenis.hasTrait(PartTrait.Ovipositor) && thePenis.has_method("canStuffEggInto") && thePenis.has_method("doStuffEggInto")):
+		if(thePenis.canStuffEggInto(_target, _bodypart)):
+			var theResult:Dictionary = thePenis.doStuffEggInto(_target, _bodypart)
+			if(!theResult.get("success", false)):
+				return {success = false}
+			
+			if(_showMessage && !theResult.get("text", "").empty()):
+				addTextRaw(theResult["text"])
+	return {success = false}

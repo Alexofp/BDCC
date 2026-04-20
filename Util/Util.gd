@@ -148,14 +148,14 @@ static func getTimeStringHumanReadable(t):
 	var _hours = floor(fmod(t/3600.0, 24.0))
 	var _days = floor(t/(3600.0*24.0))
 	
-	var result = ""
+	var result:String = ""
 	if(_days > 0):
 		result += str(_days)+" days "
 	if(_hours > 0):
 		result += str(_hours)+"h "
 	if(_minutes > 0):
 		result += str(_minutes)+"m "
-	if(_seconds > 0):
+	if(_seconds > 0 || result.empty()):
 		result += str(_seconds)+"s "
 	return result.trim_suffix(" ")
 
@@ -666,16 +666,16 @@ static func replaceIfNotNull(thestring, whattoreplace, replacewith):
 		return thestring
 	return thestring.replace(whattoreplace, replacewith)
 
-static func readFile(path):
-	var file = File.new()
-	var content = ""
+static func readFile(path:String) -> String:
+	var file := File.new()
+	var content:String = ""
 	if file.open(path, file.READ) == OK:
 		content = file.get_as_text()
 	file.close()
 	return content
 
-static func writeFile(path, content):
-	var file = File.new()
+static func writeFile(path:String, content:String):
+	var file := File.new()
 	file.open(path, File.WRITE)
 	file.store_string(content)
 	file.close()
@@ -751,13 +751,14 @@ static func sanitizePlayerEnteredString(inputStr:String, emptyStr:String=""):
 		return emptyStr
 	return inputStr
 
-static func remapValue(theValue:float, minValue:float, maxValue:float, newMinValue:float, newMaxValue:float):
+static func remapValue(theValue:float, minValue:float, maxValue:float, newMinValue:float, newMaxValue:float) -> float:
 	if(minValue == maxValue):
-		assert(false, "remapValue got bad min and max values")
+		#assert(false, "remapValue got bad min and max values")
+		Log.error("remapValue got bad min and max values")
 		return 0.0
-	var percentage = (theValue - minValue) / (maxValue - minValue)
+	var percentage:float = (theValue - minValue) / (maxValue - minValue)
 	
-	var remappedValue = newMinValue + percentage * (newMaxValue - newMinValue)
+	var remappedValue:float = newMinValue + percentage * (newMaxValue - newMinValue)
 	return remappedValue
 
 static func ease_in_out(value:float):
@@ -829,3 +830,61 @@ static func tryFixColor(_colorVal, allowNull:bool = true):
 		return Color(rVal, gVal, bVal)
 	else:
 		return Color(_colorVal)
+
+static func shuffleWordLetters(_sentence:String, _chance:float) -> String:
+	if(_chance <= 0.0):
+		return _sentence
+	var theWords:Array = []
+	var curWord:String = ""
+	
+	for letter in _sentence:
+		var lc:String = letter.to_lower()
+		if(letters_chars.has(lc)):
+			curWord += letter
+		else:
+			if(!curWord.empty()):
+				theWords.append(curWord)
+				curWord = ""
+			theWords.append(letter)
+	if(!curWord.empty()):
+		theWords.append(curWord)
+		curWord = ""
+	
+	var finalString:String = ""
+	
+	for theWord in theWords:
+		var theWordLen:int = theWord.length()
+		
+		if(theWordLen <= 1):
+			finalString += theWord
+			continue
+		
+		for _i in range(theWordLen):
+			if(!RNG.chance(_chance)):
+				continue
+			var theC:String = theWord[_i]
+			if((_i+1) >= (theWordLen-1)):
+				continue
+			var newIndx:int = RNG.randi_range(_i+1, theWordLen-1) # replace it with one of the next letters. Means the words are more likely to start with the corrent letters
+			
+			theWord[_i] = theWord[newIndx]
+			theWord[newIndx] = theC
+		
+		finalString += theWord
+		
+	return finalString
+
+static func replaceLettersRandomly(_sentence:String, _chance:float, _newLetters:Array = ["#", "@", "$", "%", "&"]) -> String:
+	if(_chance <= 0.0):
+		return _sentence
+	var finalString:String = ""
+	for letter in _sentence:
+		var lc:String = letter.to_lower()
+		if(letters_chars.has(lc)):
+			if(RNG.chance(_chance)):
+				finalString += RNG.pick(_newLetters)
+			else:
+				finalString += letter
+		else:
+			finalString += letter
+	return finalString

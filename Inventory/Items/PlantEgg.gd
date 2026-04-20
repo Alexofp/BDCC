@@ -13,11 +13,11 @@ func getDescription():
 	if(whoGaveBirth != ""):
 		var theChar = GlobalRegistry.getCharacter(whoGaveBirth)
 		if(theChar == null):
-			byWho = "\nThis egg was laid by someone unknown.."
+			byWho = "\n\nThis egg was laid by someone unknown.."
 		elif(whoGaveBirth == "pc"):
-			byWho = "\nThis egg was laid by you!"
+			byWho = "\n\nThis egg was laid by you!"
 		else:
-			byWho = "\nThis egg was laid by "+str(theChar.getName())
+			byWho = "\n\nThis egg was laid by "+str(theChar.getName())
 	
 	return "A very nutrious seed with an incredibly sweet taste. Eating it will remove 50 pain and add 50 stamina.. but also add 20 lust."+byWho
 
@@ -59,6 +59,13 @@ func getTags():
 
 func getItemCategory():
 	return ItemCategory.Medical
+
+func createEggCellForOviposition() -> EggCell:
+	var newEggCell := EggCell.new()
+	newEggCell.lifeSpan = 12*60*60 # 12 hours before having to lay it
+	newEggCell.bigEggType = BigEggType.Plant
+	newEggCell.bigEgg = true
+	return newEggCell
 
 func saveData():
 	var data = .saveData()

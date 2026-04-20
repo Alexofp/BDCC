@@ -51,6 +51,9 @@ func getLines(_reaction:int, _role:int, _args:Array):
 	addLines(["Fuck you!"])
 
 func say(_indx:int, _args:Array):
+	if(_indx >= 0 && sexEngineTemp.domsNoTalking):
+		return
+	
 	activityIndxTemp = _indx
 	tempInfo = activityTemp.getDomOrSubInfo(activityIndxTemp)
 	getLines(idTemp, indxTemp, _args)

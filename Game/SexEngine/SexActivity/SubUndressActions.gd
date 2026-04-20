@@ -9,6 +9,12 @@ func _init():
 	activityDesc = "Take off something."
 	activityCategory = ["Undress"]
 
+func getSupportedSexTypes():
+	return {
+		SexType.DefaultSex: true,
+		SexType.TentaclesSex: true,
+	}
+
 func getGoals():
 	return {
 	}

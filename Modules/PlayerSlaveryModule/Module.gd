@@ -30,6 +30,38 @@ func _init():
 		
 		"res://Modules/PlayerSlaveryModule/Tentacles/PSTentaclesStart.gd",
 		"res://Modules/PlayerSlaveryModule/Tentacles/PSTentaclesWalker.gd",
+		
+		"res://Modules/PlayerSlaveryModule/Tentacles/Intro/PSTentaclesEggIntro.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Intro/PSTentacles1EggInteract.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Intro/PSTentacles2SmallInteract.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Intro/PSTentaclesTinySleep.gd",
+		
+		"res://Modules/PlayerSlaveryModule/Tentacles/Normal/PSTentaclesFirstSex.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Generic/PSTentaclesTableAlone.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Generic/PSTentaclesWindowAlone.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Generic/PSTentaclesShower.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Generic/PSTentaclesFridge.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Small/PSTentaclesWindowSmall.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Small/PSTentaclesAngrySmall.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Small/PSTentaclesFeedSmall.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Small/PSTentaclesLewdSmall.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Small/PSTentaclesPlaySmall.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Small/PSTentaclesSmallEndOfDay.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Small/PSTentaclesSmallSleep.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Small/PSTentaclesBreakStuff.gd",
+		
+		"res://Modules/PlayerSlaveryModule/Tentacles/Normal/PSTentaclesNormalSleep.gd",
+		
+		"res://Modules/PlayerSlaveryModule/Tentacles/Normal/PSTentaclesEndingScene.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Normal/PSTentaclesInjectEnding.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Normal/PSTentaclesEndingChoice.gd",
+		
+		"res://Modules/PlayerSlaveryModule/Tentacles/Endings/PSTentaclesEndingAngerAgility.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Endings/PSTentaclesEndingAngerMind.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Endings/PSTentaclesEndingAngerLust.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Endings/PSTentaclesEndingAgilityMind.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Endings/PSTentaclesEndingAgilityLust.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/Endings/PSTentaclesEndingMindLust.gd",
 		]
 	characters = [
 		"res://Modules/PlayerSlaveryModule/ShaftMiner/PSRicky.gd",
@@ -40,6 +72,9 @@ func _init():
 		"res://Modules/PlayerSlaveryModule/MilkCafe/PSMilkGuy.gd",
 		"res://Modules/PlayerSlaveryModule/MilkCafe/PSMilkOfficer.gd",
 		"res://Modules/PlayerSlaveryModule/Start/TempAmbushStash.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/PSPlantTentacles.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/psTentSci1.gd",
+		"res://Modules/PlayerSlaveryModule/Tentacles/psTentSci2.gd",
 	]
 	items = []
 	events = [

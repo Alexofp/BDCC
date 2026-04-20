@@ -37,6 +37,7 @@ func getTooltipInfo():
 			text += "Cycle phase: "+str(CycleStage.getVisibleActionName(menstrualCycle.getCurrentStage()))
 			text += "\nBreed chance: "+str(Util.roundF(menstrualCycle.getRoughChanceOfBecomingPregnant(), 1))+"%"
 			text += "\nFertility: "+str(Util.roundF(theChar.getFertility()*100.0, 1))+"%"
+			#text += "\n"+menstrualCycle.getDebugInfo()
 	return text
 
 func getOrificeName():

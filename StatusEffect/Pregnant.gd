@@ -9,7 +9,7 @@ func _init():
 	priorityDuringChecking = 90
 	
 func shouldApplyTo(_npc):
-	if(_npc.menstrualCycle != null && _npc.menstrualCycle.isVisiblyPregnant()):
+	if(_npc.isVisiblyPregnant() && _npc.isPregnant(true, false)):
 		return true
 	return false
 
@@ -17,13 +17,13 @@ func getEffectName():
 	return "Pregnant"
 
 func getEffectDesc():
-	var progress = character.getPregnancyProgress()
+	var progress:float = character.getPregnancyProgress()
 	
-	var timeLeftText = ""
+	var timeLeftText:String = ""
 	if(character.getMenstrualCycle() != null):
 		timeLeftText = " "+Util.getTimeStringHumanReadable(character.getMenstrualCycle().getTimeUntilReadyForBirth())+" until ready for birth."
 	
-	var addText = ""
+	var addText:String = ""
 	if(progress <= 0.33):
 		addText = "First trimester. You have a slight belly, your body slowly adjusts."+timeLeftText
 	elif(progress <= 0.66):
@@ -33,16 +33,16 @@ func getEffectDesc():
 	else:
 		addText = "Third trimester. Lactation. You experience shortness of breath, your belly is really dragging you down."+timeLeftText
 	
-	var hasFirstPerk = GM.pc.hasPerk(Perk.FertilityBellySize)
-	var hasSecondPerk = GM.pc.hasPerk(Perk.BreedExtraTooltipInfo)
+	var hasFirstPerk:bool = GM.pc.hasPerk(Perk.FertilityBellySize)
+	var hasSecondPerk:bool = GM.pc.hasPerk(Perk.BreedExtraTooltipInfo)
 	if((hasFirstPerk || hasSecondPerk) && character.getMenstrualCycle() != null):
-		var kidAmount = character.getMenstrualCycle().getRoughLitterEstimateString(hasFirstPerk && hasSecondPerk)
+		var kidAmount:String = character.getMenstrualCycle().getRoughLitterEstimateString(hasFirstPerk && hasSecondPerk)
 		addText += "\n\nYou think there are "+str(kidAmount)+" in this belly"
 	
 	return "You're visibly pregnant.. "+addText
 
 func getEffectImage():
-	var progress = character.getPregnancyProgress()
+	var progress:float = character.getPregnancyProgress()
 	if(progress <= 0.33):
 		return "res://Images/StatusEffects/impregnation.png"
 	
@@ -52,8 +52,8 @@ func getIconColor():
 	return IconColorDarkPurple
 
 func getBuffs():
-	var progress = character.getPregnancyProgress()
-	var modifier = 1
+	var progress:float = character.getPregnancyProgress()
+	var modifier:float = 1
 	if(character.hasPerk(Perk.FertilityBroodmother)): 
 		modifier = 0.5
 		
@@ -66,10 +66,10 @@ func getBuffs():
 		]
 	elif(progress <= 0.66):
 		return [
-			buff(Buff.MaxStaminaBuff, [-10 * modifier]),
+			buff(Buff.MaxStaminaBuff, [int(-10 * modifier)]),
 		]
 	else:
 		return [
-			buff(Buff.MaxStaminaBuff, [-30 * modifier]),
-			buff(Buff.DodgeChanceBuff, [-20 * modifier]),
+			buff(Buff.MaxStaminaBuff, [int(-30 * modifier)]),
+			buff(Buff.DodgeChanceBuff, [int(-20 * modifier)]),
 		]

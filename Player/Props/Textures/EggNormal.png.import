@@ -1,0 +1,35 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/EggNormal.png-dd5e9aeb7564c0d2665a1c1d38e22dd2.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://Player/Props/Textures/EggNormal.png"
+dest_files=[ "res://.import/EggNormal.png-dd5e9aeb7564c0d2665a1c1d38e22dd2.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=1
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=0
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+process/normal_map_invert_y=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0

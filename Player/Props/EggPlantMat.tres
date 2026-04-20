@@ -1,0 +1,20 @@
+[gd_resource type="SpatialMaterial" load_steps=5 format=2]
+
+[ext_resource path="res://Player/Props/Textures/EggSmallRoughness.png" type="Texture" id=1]
+[ext_resource path="res://Player/Props/Textures/EggSmallNormal.png" type="Texture" id=2]
+[ext_resource path="res://Player/Props/Textures/EggSmallColor.png" type="Texture" id=3]
+
+[sub_resource type="SpatialMaterial" id=8]
+params_cull_mode = 1
+params_grow = true
+params_grow_amount = 0.1
+albedo_color = Color( 0, 0, 0, 1 )
+
+[resource]
+next_pass = SubResource( 8 )
+params_diffuse_mode = 4
+albedo_texture = ExtResource( 3 )
+roughness_texture = ExtResource( 1 )
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = ExtResource( 2 )

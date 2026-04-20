@@ -5,6 +5,48 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [0.2.0] - 2026-04-20
+### Added
+- New player slavery scenario that is focused around tentacles. The scenario is about growing your very own tentacle monster! Features a lot of replayability (it has like 6 or 7 endings, depending on if you include the bad one). Even if you don't like tentacles, you can still enjoy it, all the lewds are completely optional.
+- Sex toy integration! The game can now trigger your real life sex toys! There are 3 supported backends: Buttplug.io, Lovense Connect app and XToys.App. The last one should even support e-stim toys if you have any. I've built a panel where you can choose what in-game events trigger toys and how, EVERYTHING is highly customizable. Press the 'Buttplug.io' button in the main menu to get started.
+- A new little quest with Eliza Quinn that is all about tentacles as well. It can be triggered in 2 ways: complete the new slavery scenario and return egg-stuffed to the prison. Alternatively, you can complete Artica's sub-plot about tentacles (this one doesn't require you to submit to the tentacles). If you sleep, the new quest should trigger.
+- A reward for this quest: Your own personal tentacle monster for your cell! Have fun with it yourself, offer your slaves to it or use it to punish someone. This update is mostly about tentacles and eggs, yes..
+- The tentacles are now supported by the sex engine. I've animated a lot of new sex scenes with them! You can also unlock an upgrade for your tentacles that will let you take control over them during sex!
+- Oviposition mechanic! Pretty much an alternative way to get 'pregnant'. But with some differences. Instead of giving birth, you have to lay eggs (or help others lay them). The eggs are actual items. Tentacle eggs you can just eat (like before) but offspring eggs you have to bring to the nursery yourself (the database been updated to show the person who laid the eggs).
+- New bodyparts that support oviposition: vagina (lays eggs), cloaca (anus that lays eggs), ovipositor penis. Ovipositor penis passively generates unfertilized eggs that then can be stuffed and fertilized inside someone. Npcs don't generate with these new bodyparts by default.
+- New Transformation pill. This pill just grows you a random bodypart. Its power lies in the ability to 'configure' it to grow any specific bodypart (including the new bodyparts, nudge-nudge).
+- 2 new ovipositor strapons! You can unlock them after completing the new quest. These strapons can stuff eggs into others! The first strapon can be loaded with eggs manually.. and the second one can transfer them directly from your egg-stuffed holes!
+- 2 new egg-related pills that can be unlocked after completing the new quest. The first one speeds up the growth of eggs greatly. The second one can 'convert' any live birth into an egg-laying!
+
+### Changed
+- Hypnovisors will no longer be deleted if the scene decides to put a blindfold on your character.
+- Your character will no longer beg the dom for stuff during sex if they are hypnotized.
+- Disabling the 'Hypnotize' sex goal should make it so doms no longer put hypnovisors on you.
+
+### Fixed
+- Hopefully completely fixed the many 'Npc has been processed for negative amount of seconds' errors.
+- Fixed dynamic joiners leaving sex without putting back their clothes on.
+- Hopefully reduced the z-fighting at high breast-size/thickness levels (can still happen, I tried my best, mistakes have been made in the past, we should learn to live with them..)
+- Fixed a bunch of reported typos and bugs. Probably added some new ones, probably broke some mods..
+
+### Contributions
+- A hair mod by SongJo is now integrated into the base game. This mod adds 42 new haircuts!
+- [Search and drag&drop support for the modded launcher](https://github.com/Alexofp/BDCC/pull/258) (by Selinoccino)
+- [Fix for buttons that open folders on MacOSX](https://github.com/Alexofp/BDCC/pull/259) (by Meepyneepy)
+- [NoTF and NoViolence modifers for the sex engine](https://github.com/Alexofp/BDCC/pull/264) (by Fox2Code)
+- [BecomeNPC Debug action](https://github.com/Alexofp/BDCC/pull/265) (by Fox2Code)
+- [Modding: Support for detecting if the character has buff arms](https://github.com/Alexofp/BDCC/pull/266) (by Mari)
+- [Pee production instead of hard-coded values](https://github.com/Alexofp/BDCC/pull/267) (by FrivolousBorks)
+- [Character creator: allow quick switching between bodyparts](https://github.com/Alexofp/BDCC/pull/268) (by keerifox)
+- [Modding: Make room transitions form after WorldEdits are applied](https://github.com/Alexofp/BDCC/pull/275) (by FrivolousBorks)
+- [Added more links in the credits screen](https://github.com/Alexofp/BDCC/pull/280) (by Ferricyanide)
+- [Modding: Make it so location saves correctly for rooms added by World Edits](https://github.com/Alexofp/BDCC/pull/278) (by FrivolousBorks)
+- [Datapack scenes: Species-related code blocks](https://github.com/Alexofp/BDCC/pull/281) (by Selinoccino)
+- [No inappropriate item use in fights](https://github.com/Alexofp/BDCC/pull/282) (by Selinoccino)
+- [Computer hacking minigame improvements](https://github.com/Alexofp/BDCC/pull/284) (by Selinoccino)
+- [Quality of life changes](https://github.com/Alexofp/BDCC/pull/285) (by Selinoccino)
+
+## [Unreleased]
 ## [0.1.12] - 2025-12-03
 ### Added
 - A 'soft slavery' system for the player! The player character can now get enslaved by one of the dynamic npcs on the prison. A few ways to trigger this: the npc might just offer to make you their prison bitch, you might ask to become one, a very-likely outcome of losing a nemesis ambush. Or you can just use a new debug action. You can have multiple owners.
@@ -671,7 +713,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Turn-based fighting
 - Initial player customization
 
-[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.1.12...main
+[Unreleased]: https://github.com/Alexofp/BDCC/compare/0.2.0...main
+[0.2.0]: https://github.com/Alexofp/BDCC/compare/0.1.12...0.2.0
 [0.1.12]: https://github.com/Alexofp/BDCC/compare/0.1.11...0.1.12
 [0.1.11]: https://github.com/Alexofp/BDCC/compare/0.1.10...0.1.11
 [0.1.10]: https://github.com/Alexofp/BDCC/compare/0.1.9...0.1.10

@@ -158,6 +158,10 @@ func getForms() -> Dictionary:
 		"SoftSlaveryPunishGBStart": form("Time to teach you a lesson.", {main=CHAR, target=CHAR}, "main", "target"),
 		"SoftSlaveryPunishGBEnd": form("You're on very thin ice from now on, {npc.npcSlave}.", {main=CHAR, target=CHAR}, "main", "target"),
 		
+		"SoftSlaveryPunishLockRestraint": form("You fucked up. And now you will have to wear it.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryPunishLockRestraint2": form("If you dare to take it off before I allow you, I will have to punish you again.", {main=CHAR, target=CHAR}, "main", "target"),
+		"SoftSlaveryPunishLockRestraint3": form("You are on some very thin ice right now, you really better start behaving now.", {main=CHAR, target=CHAR}, "main", "target"),
+		
 		"SoftSlaveryResist": form("Really, {npc.npcSlave}? Is that how you wanna do this?", {main=CHAR, target=CHAR}, "main", "target"),
 		
 		"SoftSlaveryFuckInStocksExtra": form("Hey! I wanna fuck them too.", {main=CHAR, target=CHAR}, "main", "target"),

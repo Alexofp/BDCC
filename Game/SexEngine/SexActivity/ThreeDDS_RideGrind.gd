@@ -159,6 +159,10 @@ func sex_processTurn():
 	react(SexReaction.ThreesomeRideGrind, [10.0, 10.0, 10.0], [DOM_0, SUB_0, DOM_1])
 
 func getActions(_indx:int):
+	if(_indx == DOM_0):
+		if(state == "sex" || state == "inside"):
+			addEggStuffReceiveButton(DOM_0, SUB_0, usedBodypart)
+	
 	if(_indx == DOM_0 || _indx == DOM_1):
 		var isDom0:bool = (_indx == DOM_0)
 		addAction("stop", getStopScore(), "Stop ride&grind", "Stop the threesome")
@@ -199,6 +203,8 @@ func getActions(_indx:int):
 		#	if(isReadyToCumHandled(SUB_0)):
 		#		addAction("subcum", 1.0, "Cum!", "You're about to cum!", {A_PRIORITY: 1001})
 func doAction(_indx:int, _id:String, _action:Dictionary):
+	if(_id == "stuffegg"):
+		doReceiveEggFrom(DOM_0, SUB_0, usedBodypart)
 	if(_id == "switch"):
 		addText("{<DOM>.You} {<DOM>.youVerb('decide')} to switch spots.".replace("<DOM>", indxToTextID(_indx)))
 		switchDoms(0, 1)

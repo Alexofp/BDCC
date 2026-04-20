@@ -100,3 +100,6 @@ func getAIForceItemWeight(_whoForcesNpc, _targetNpc):
 		return 0.0
 	var hypnosisValue = _whoForcesNpc.getFetishHolder().getFetishValue(Fetish.HypnosisHypnotist)
 	return hypnosisValue * 1.0
+
+func isRestraintShouldKeep() -> bool:
+	return true

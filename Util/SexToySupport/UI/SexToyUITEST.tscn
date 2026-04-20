@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Util/SexToySupport/UI/SexToyUITEST.gd" type="Script" id=1]
+[ext_resource path="res://Util/SexToySupport/UI/CurveEditor.gd" type="Script" id=2]
+
+[node name="SexToyUITEST" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="VibButton" type="Button" parent="."]
+margin_left = 121.0
+margin_top = 90.0
+margin_right = 262.0
+margin_bottom = 140.0
+text = "Vib"
+
+[node name="StopButton" type="Button" parent="."]
+margin_left = 284.0
+margin_top = 93.0
+margin_right = 425.0
+margin_bottom = 143.0
+text = "Stop Vib"
+
+[node name="CurveEditorCustom" type="Control" parent="."]
+margin_left = 603.0
+margin_top = 180.0
+margin_right = 1135.0
+margin_bottom = 573.0
+script = ExtResource( 2 )
+
+[connection signal="pressed" from="VibButton" to="." method="_on_VibButton_pressed"]
+[connection signal="pressed" from="StopButton" to="." method="_on_StopButton_pressed"]

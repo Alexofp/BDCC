@@ -42,7 +42,7 @@ func _run():
 			addButtonAt(0, "SEND", "Send the command", "sendkeyboard")
 			addButtonAt(14, "COMMANDS", "Switch to the commands", "buttons")
 		
-		if(inputMode == "buttons"):
+		elif(inputMode == "buttons"):
 			saynn("> "+ getCurrentCommandString())
 			#for key in TextTransitionSettings.transitions:
 			#	TextTransitionSettings.transitions[key].fade_in()
@@ -62,7 +62,7 @@ func _run():
 			for command in words:
 				addButton(command, "Type this", "add", [command])
 			
-		if(inputMode == "numpad"):
+		elif(inputMode == "numpad"):
 			saynn("> "+getCurrentCommandString())
 			
 			addButtonAt(1, "7", "Type this", "addnumpad", ["7"])
@@ -88,7 +88,7 @@ func _run():
 
 		#addButton("Leave", "Job well done", "endthescene")
 
-	if(state == "finished"):
+	elif(state == "finished"):
 		if(computer.getLastCommand() != ""):
 			saynn("> "+computer.getLastCommand())
 		if(shouldPlayFancyAnimationForText):

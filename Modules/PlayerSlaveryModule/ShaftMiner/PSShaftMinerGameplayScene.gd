@@ -390,7 +390,7 @@ func _react(_action: String, _args):
 		doTurn(true)
 		GM.main.PS.prevPCLoc = GM.pc.getLocation()
 		
-		if(!GM.main.checkTFs()):
+		if(!GM.main.checkExtraScenes()):
 			GM.main.showLog()
 		
 		if(GM.main.PS.shouldDoFirstSlaveOfferEvent()):

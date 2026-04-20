@@ -7,6 +7,8 @@ func getVisibleName():
 	return "Choke-Fuck anally"
 
 func isPossible(_sexEngine, _domInfo, _subInfo, _data):
+	if(_sexEngine.noViolence):
+		return false
 	if(!_domInfo.getChar().hasReachablePenis() || !_subInfo.getChar().hasReachableAnus()):
 		return false
 	if(_domInfo.getChar().hasBoundArms() || _domInfo.getChar().hasBlockedHands()):

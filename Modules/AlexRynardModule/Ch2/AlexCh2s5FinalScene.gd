@@ -485,7 +485,7 @@ func _run():
 		playAnimation(StageScene.Duo, "walk", {pc="avy", npc="pc", npcAction="walk", flipNPC=true, bodyState={naked=true, hard=true, leashedBy="pc"}})
 		saynn("Avy doesn't dare to resist as much, the wooden horse has drained most of her will to push back, allowing you to easily parade her around the station on a leash.")
 
-		saynn("You, Alex and Avy enter the medical lobby. Avy asks Eliza if you can use the milking.. And of course Eliza gives the go-ahead.")
+		saynn("You, Alex and Avy enter the medical lobby. Alex asks Eliza if you can use the milking room.. And of course Eliza gives the go-ahead.")
 
 		saynn("Time to make that slut useful.")
 

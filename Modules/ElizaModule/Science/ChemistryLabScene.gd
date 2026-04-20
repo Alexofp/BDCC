@@ -516,7 +516,7 @@ func _run():
 			saynn("Pick a new setting for this option!")
 			
 			for valueEntry in option["values"]:
-				addButton(valueEntry[1], "Set the setting to this value", "set_value_configure", [valueEntry[0]])
+				addButton(valueEntry[1], valueEntry[2] if valueEntry.size() > 2 else "Set the setting to this value", "set_value_configure", [valueEntry[0]])
 			
 		addButton("BACK", "You changed your mind!", "configuring_drug")
 		

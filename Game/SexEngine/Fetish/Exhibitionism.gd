@@ -14,6 +14,9 @@ func getVisibleName():
 func getGoals(_sexEngine, _domFetishHolder, _dom, _sub):
 	var possible = []
 	
+	if(_sexEngine.getSexTypeID() == SexType.TentaclesSex):
+		possible.append(SexGoal.Cuddle)
+	
 	return possible
 
 func getDynamicChangeThreshold() -> float:

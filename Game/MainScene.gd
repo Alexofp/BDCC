@@ -251,7 +251,6 @@ func _ready():
 	Console.addCommand("clearmoduleflag", self, "consoleClearModuleFlag", ["moduleID", "flagID"], "Resets the game flag, be very careful")
 	Console.addCommand("become", self, "consoleBecome", ["charID"], "Become another character")
 	#Console.addCommand("ae", self, "consoleAnimationEditor", [], "Animation editor")
-	applyAllWorldEdits()
 	
 func startNewGame():
 	GlobalRegistry.currentSave = 1
@@ -283,10 +282,11 @@ func getNewUniqueSceneID(blockedIDS=[]) -> int:
 		result += 1
 	return result
 
-func runScene(id, _args = [], parentSceneUniqueID = -1):
+func runScene(id, _args = [], parentSceneUniqueID = -1,tag:String=""):
 	var scene = GlobalRegistry.createScene(id)
 	assert(scene != null, "SCENE WITH ID "+str(id)+" IS NOT FOUND. MAKE SURE IT WAS REGISTERED INSIDE THE MODULE.")
 	scene.uniqueSceneID = getNewUniqueSceneID([parentSceneUniqueID])
+	scene.sceneTag = tag
 	if(parentSceneUniqueID >= 0):
 		scene.parentSceneUniqueID = parentSceneUniqueID
 	add_child(scene)
@@ -420,8 +420,6 @@ func loadingSavefileFinished():
 	#if(GM.ui != null):
 	#	GM.ui.getStage3d().resetToNothing()
 	reRun()
-	
-	applyAllWorldEdits()
 	
 	if(!rollbacker.rollbacking):
 		WHS.clearHistory()
@@ -603,7 +601,12 @@ func loadData(data):
 	#GM.world.updatePawns(IS)
 	#GM.world.setPawnsShowed(canShowPawns())
 
+	applyAllWorldEdits()
+	GM.world.addTransitions()
 	GM.pc.checkLocation()
+	if(!GM.world.aimCamera(GM.world.lastAimedRoomID, true)):
+		GM.world.aimCamera(GM.pc.getLocation(), true) # backup
+	
 
 func saveCharactersData():
 	var data = {}
@@ -734,6 +737,8 @@ func doTimeProcess(_seconds:int):
 		var clippedSeconds = min(60*60, copySeconds)
 		#GM.PROFILE.start("GM.pc.processTime")
 		GM.pc.processTime(clippedSeconds)
+		#GM.pc.lastUpdatedSecond = timeOfDay
+		#GM.pc.lastUpdatedDay = currentDay
 		#GM.PROFILE.finish("GM.pc.processTime")
 		
 		for characterID in charactersToUpdate:
@@ -741,6 +746,8 @@ func doTimeProcess(_seconds:int):
 			if(character != null):
 				#GM.PROFILE.start(characterID+".processTime")
 				character.processTime(clippedSeconds)
+				character.lastUpdatedSecond = timeOfDay # This makes sure the npc update time is correct
+				character.lastUpdatedDay = currentDay
 				#GM.PROFILE.finish(characterID+".processTime")
 		
 		copySeconds -= clippedSeconds
@@ -835,14 +842,14 @@ func getVisibleTime():
 func getFormattedTimeFromSeconds(howManySeconds:int):
 	return Util.getTimeStringHHMM(howManySeconds)
 
-func getTime():
+func getTime() -> int:
 	return timeOfDay
 
-func getDays():
+func getDays() -> int:
 	return currentDay
 
-func getTimeInGlobalSeconds():
-	return int(currentDay * 24 * 60 * 60) + int(timeOfDay)
+func getTimeInGlobalSeconds() -> int:
+	return currentDay*24*60*60 + timeOfDay
 
 func setFlag(flagID, value):
 	# Handling "ModuleID.FlagID" here
@@ -1153,11 +1160,26 @@ func showLog():
 		return true
 	return false
 
-func checkTFs():
+func checkTFs() -> bool:
 	var tfHolder = GM.pc.getTFHolder()
 	if(tfHolder != null && tfHolder.hasPendingTransformations()):
 		runScene("PlayerTFScene")
 		return true
+	return false
+
+func checkLayEggs() -> bool:
+	if(GM.pc.isReadyToLayEggs()):
+		runScene("PlayerWantsToLayEggsScene")
+		return true
+	return false
+
+func checkExtraScenes(_checkTFs:bool = true, _checkLayEggs:bool = true) -> bool:
+	if(_checkTFs):
+		if(checkTFs()):
+			return true
+	if(_checkLayEggs):
+		if(checkLayEggs()):
+			return true
 	return false
 
 func getLogMessages():
@@ -1334,6 +1356,18 @@ func getDebugActions():
 					"name": "Scene ID",
 					"type": "string",
 					"value": "",
+				},
+				{
+					"id": "sceneTag",
+					"name": "Scene tag",
+					"value": "",
+					"type": "string",
+				},
+				{
+					"id": "sceneArgs",
+					"name": "Scene arguments\n(must start and end\nwith brackets)",
+					"value": "",
+					"type": "string",
 				},
 			]
 		},
@@ -1573,6 +1607,25 @@ func getDebugActions():
 			"args": [
 			],
 		},
+		{
+			"id": "becomeNPC",
+			"name": "Become NPC",
+			"args": [
+				{
+					"id": "npcID",
+					"name": "NPC ID",
+					"value": "pc",
+					"type": "smartlist",
+					"npc": true,
+				},
+				{
+					"id": "cnpcID",
+					"name": "Custom ID",
+					"value": "",
+					"type": "string",
+				},
+			],
+		},
 	]
 
 func doDebugAction(id, args = {}):
@@ -1593,61 +1646,61 @@ func doDebugAction(id, args = {}):
 			#
 			
 		return
-	if(id == "addBodywritings"):
+	elif(id == "addBodywritings"):
 		var theAm:int = args["amount"]
 		for _i in range(theAm):
 			GM.pc.addBodywritingRandom()
 		GM.pc.updateAppearance()
-	if(id == "clearBodywritings"):
+	elif(id == "clearBodywritings"):
 		GM.pc.clearBodywritings(true, true)
 		GM.pc.updateAppearance()
-	if(id == "forceProgressTFs"):
+	elif(id == "forceProgressTFs"):
 		GM.pc.getTFHolder().forceProgressAll()
-	if(id == "accelerateTFs"):
+	elif(id == "accelerateTFs"):
 		GM.pc.getTFHolder().accelerateAllFull()
-	if(id == "startTF"):
+	elif(id == "startTF"):
 		if(!GM.pc.getTFHolder().canStartTransformation(args["tfid"])):
 			addMessage(args["tfid"] +" transformation is currently not possible.")
 		else:
 			GM.pc.getTFHolder().startTransformation(args["tfid"])
-	if(id == "startSlavery"):
+	elif(id == "startSlavery"):
 		if(PS):
 			return
 		#PSH.storePlayersItems()
 		#runScene("PlayerSlaveryPickScene")
 		runScene(GlobalRegistry.getModule("PlayerSlaveryModule").getSlaveryStartScene())
 		#startPlayerSlavery(args["slaveryID"], true)
-	if(id == "startSlaveryFast"):
+	elif(id == "startSlaveryFast"):
 		if(PS):
 			return
 		#PSH.storePlayersItems()
 		#runScene("PlayerSlaveryPickScene")
 		#runScene(GlobalRegistry.getModule("PlayerSlaveryModule").getSlaveryStartScene())
 		startPlayerSlavery(args["slaveryID"], true)
-	if(id == "stopSlavery"):
+	elif(id == "stopSlavery"):
 		if(PS):
 			stopPlayerSlavery()
 			GM.pc.setLocation(GM.pc.getCellLocation())
 			while(sceneStack.size() > 1):
 				endCurrentScene()
-	if(id == "undoTFs"):
+	elif(id == "undoTFs"):
 		GM.pc.undoAllTransformations()
-	if(id == "applyTFs"):
+	elif(id == "applyTFs"):
 		GM.pc.makeAllTransformationsPermanent()
-	if(id == "toggleISDebug"):
+	elif(id == "toggleISDebug"):
 		isDebuggingIS = !isDebuggingIS
 		if(isDebuggingIS):
 			addMessage("Interaction System debug info is now Enabled")
 		else:
 			addMessage("Interaction System debug info is now Disabled")
 	
-	if(id == "addRep"):
+	elif(id == "addRep"):
 		GM.pc.getReputation().addRep(args["rep"], args["amount"])
 	
-	if(id == "setRep"):
+	elif(id == "setRep"):
 		GM.pc.getReputation().setLevel(args["rep"], args["level"])
 	
-	if(id == "forceSmartlock"):
+	elif(id == "forceSmartlock"):
 		if(GM.main.dynamicCharacters.size() == 0):
 			return
 		var tryAmount = 100
@@ -1666,12 +1719,12 @@ func doDebugAction(id, args = {}):
 			break
 			
 		
-	if(id == "damageClothes"):
+	elif(id == "damageClothes"):
 		GM.pc.damageClothes()
-	if(id == "repairClothes"):
+	elif(id == "repairClothes"):
 		GM.pc.repairAllClothes()
 	
-	if(id == "healPC"):
+	elif(id == "healPC"):
 		GM.pc.addPain(-GM.pc.painThreshold())
 		GM.pc.addLust(-GM.pc.lustThreshold())
 		GM.pc.addStamina(GM.pc.getMaxStamina())
@@ -1680,40 +1733,43 @@ func doDebugAction(id, args = {}):
 		#	var newItem = GlobalRegistry.createItem(itemID)
 		#	GM.pc.getInventory().addItem(newItem)
 	
-	if(id == "addPain"):
+	elif(id == "addPain"):
 		GM.pc.addPain(args["amount"])
 	
-	if(id == "addLust"):
+	elif(id == "addLust"):
 		GM.pc.addLust(args["amount"])
 		
-	if(id == "addStamina"):
+	elif(id == "addStamina"):
 		GM.pc.addStamina(args["amount"])
 		
-	if(id == "addCredits"):
+	elif(id == "addCredits"):
 		GM.pc.addCredits(args["amount"])
 	
-	if(id == "addExp"):
+	elif(id == "addExp"):
 		GM.pc.addExperience(args["amount"])
 	
-	if(id == "addSkillExp"):
+	elif(id == "addSkillExp"):
 		GM.pc.addSkillExperience(args["skillID"], args["amount"])
 	
-	if(id == "resetPCPerks"):
+	elif(id == "resetPCPerks"):
 		GM.pc.getSkillsHolder().resetPickedPerks()
 	
-	if(id == "resetPCStats"):
+	elif(id == "resetPCStats"):
 		GM.pc.getSkillsHolder().resetStats()
 	
-	if(id == "characterCreator"):
+	elif(id == "characterCreator"):
 		runScene("CharacterCreatorScene", [true])
 	
-	if(id == "runScene"):
-		runScene(args["sceneID"])
+	elif(id == "runScene"):
+		var scargs = str2var(args["sceneArgs"])
+		if typeof(scargs)!=TYPE_ARRAY: # invalid args
+			scargs = []
+		runScene(args["sceneID"],scargs,-1,args["sceneTag"])
 	
-	if(id == "removePCRestraints"):
+	elif(id == "removePCRestraints"):
 		GM.pc.removeAllRestraints()
 	
-	if(id == "giveItem"):
+	elif(id == "giveItem"):
 		if(!args.has("itemID") || args["itemID"] == null):
 			return
 		
@@ -1731,35 +1787,35 @@ func doDebugAction(id, args = {}):
 				args["amount"] -= 1
 			Log.print("Item "+item.getStackName()+" added to player")
 		
-	if(id == "openConsole"):
+	elif(id == "openConsole"):
 		Console.toggleConsole()
 	
-	if(id == "animBrowser"):
+	elif(id == "animBrowser"):
 		runScene("SimpleAnimPlayerScene")
 
-	if(id == "skinEditor"):
+	elif(id == "skinEditor"):
 		if(args["cnpcID"] != ""):
 			runScene("ChangeSkinScene", [args["cnpcID"], true])
 		else:
 			runScene("ChangeSkinScene", [args["npcID"], true])
-			
-	if(id == "lactatePC"):
+	
+	elif(id == "lactatePC"):
 		GM.pc.induceLactation()
 		GM.pc.getBodypart(BodypartSlot.Breasts).getFluidProduction().fillPercent(1.0)
 		
-	if(id == "enslaveRandom"):
+	elif(id == "enslaveRandom"):
 		var npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [], InmateGenerator.new(), {})
 		GlobalRegistry.getModule("NpcSlaveryModule").makeSurePCHasSlaveSpace()
 		runScene("KidnapDynamicNpcScene", [npcID])
 		# runScene("EnslaveDynamicNpcScene", [npcID])
 		
-	if(id == "spyRandom"):
+	elif(id == "spyRandom"):
 		runScene("SpyOnPawnScene")
 	
-	if(id == "startSoftSlavery"):
+	elif(id == "startSoftSlavery"):
 		runScene("SoftSlaveryQuickStartScene")
 	
-	if(id == "duplicateAndEnslave"):
+	elif(id == "duplicateAndEnslave"):
 		var theNpcID = args["npcID"]
 		#if(args["cnpcID"] != ""):
 		#	theNpcID = args["cnpcID"]
@@ -1816,7 +1872,14 @@ func doDebugAction(id, args = {}):
 		GlobalRegistry.getModule("NpcSlaveryModule").makeSurePCHasSlaveSpace()
 		runScene("KidnapDynamicNpcScene", [dynamicCharacter.getID()])
 		# runScene("EnslaveDynamicNpcScene", [npcID])
-		
+	
+	elif(id == "becomeNPC"):
+		if(args["cnpcID"] != ""):
+			consoleBecome(args["cnpcID"])
+		else:
+			consoleBecome(args["npcID"])
+	
+
 func consoleSetFlagBool(flagID, valuestr):
 	var value = false
 	if(valuestr in ["true", "TRUE", "True", "1"]):
@@ -1901,7 +1964,21 @@ func isCharacterInAnySexEngine(_charID:String) -> bool:
 		if(scene.sceneID == "GenericSexScene"):
 			if(scene.sexEngine && scene.sexEngine.isInvolved(_charID)):
 				return true
-	
+	return false
+
+func getSexEngineForCharacterID(_charID:String) -> SexEngine:
+	for scene in sceneStack:
+		if(scene.sceneID == "GenericSexScene"):
+			if(scene.sexEngine && scene.sexEngine.isInvolved(_charID)):
+				return scene.sexEngine
+	return null
+
+func isCharacterInAnyScene(_charID:String, _excludeWorldScene:bool = true) -> bool:
+	for scene in sceneStack:
+		if(_excludeWorldScene && scene.sceneID == "WorldScene"):
+			continue
+		if(scene.hasCharacter(_charID)):
+			return true
 	return false
 
 func isCharacterInAnyNPCEvent(_charID:String) -> bool:
@@ -1912,7 +1989,7 @@ func isCharacterInAnyNPCEvent(_charID:String) -> bool:
 	
 	return false
 
-func updateCharacterUntilNow(charID):
+func updateCharacterUntilNow(charID:String):
 	var character = getCharacter(charID)
 	if(character != null):
 		character.processUntilTime(currentDay, timeOfDay)

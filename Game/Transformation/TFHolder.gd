@@ -397,6 +397,22 @@ func findTFByUniqueID(_uid:int):
 			return tf
 	return null
 
+# Makes sure the ogParts dict doesn't have any broken parts
+func checkOrigParts():
+	var toRemove:Array = []
+	for theSlot in originalParts:
+		if(!BodypartSlot.isEssential(theSlot)):
+			continue
+		var theEntry:Dictionary = originalParts[theSlot]
+		
+		if(theEntry.empty() || theEntry.get("bodypartID", null) == null):
+			toRemove.append(theSlot)
+	
+	for theSlot in toRemove:
+		originalParts.erase(theSlot)
+		affectedParts.erase(theSlot)
+		Log.printerr("(TFHolder) Fixing original essential part that somehow became null. Char="+getChar().getID()+" Slot="+theSlot)
+	
 func saveData() -> Dictionary:
 	var effectsData:Array = []
 	for effect in effects:
@@ -426,6 +442,7 @@ func loadData(_data:Dictionary):
 	originalParts = SAVE.loadVar(_data, "ogParts", {})
 	originalCharData = SAVE.loadVar(_data, "ogChar", {})
 	affectedParts = SAVE.loadVar(_data, "affParts", {})
+	checkOrigParts()
 	
 	effects.clear()
 	var effectsData:Array = SAVE.loadVar(_data, "effects", [])

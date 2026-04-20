@@ -142,7 +142,7 @@ func _run():
 
 		saynn("[say=luxe]I feel like I'm making it nice and clear. You are not gonna be my apprentice. And you are not gonna be the head of this family.[/say]")
 
-		saynn("Mirri stiffens and clenches her fists, his mean eyes twitching. Her ears flattening.")
+		saynn("Mirri stiffens and clenches her fists, her mean eyes twitching. Her ears flattening.")
 
 		saynn("[say=mirri]Why? Because my fur is not all black? Because I'm annoying?[/say]")
 
@@ -196,7 +196,7 @@ func _run():
 
 		saynn("[say=luxe]YOU ARE A LIVING PROOF OF MY FAILURE. MY WEAKNESS. I HATE YOU MORE THAN ANYTHING.[/say]")
 
-		saynn("His golden fur tips instantly come to life, tiny embers dancing in the air near them. His claws dig into his calms as he makes himself stop, lowering his voice in an instant.. but even at a quiet growl, his words cut just as deep.")
+		saynn("His golden fur tips instantly come to life, tiny embers dancing in the air near them. His claws dig into his palms as he makes himself stop, lowering his voice in an instant.. but even at a quiet growl, his words cut just as deep.")
 
 		saynn("[say=luxe]And I want you gone.[/say]")
 

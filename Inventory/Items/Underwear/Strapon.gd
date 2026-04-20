@@ -114,3 +114,50 @@ func canDye():
 func getStraponTraits() -> Dictionary:
 	return {
 	}
+
+func canStuffEggInto(_targetChar, _bodypart:String) -> bool:
+	return false
+
+func doStuffEggInto(_targetChar, _bodypart:String) -> Dictionary:
+	return {success = false}
+
+
+func doStuffEggIntoTransfer(_targetChar, _bodypart:String) -> Dictionary:
+	var theWearer = getWearer()
+	
+	var ourMenstrualCycle:MenstrualCycle = theWearer.getMenstrualCycle()
+	var targetMenstrualCycle:MenstrualCycle = _targetChar.getMenstrualCycle()
+	if(!ourMenstrualCycle || !targetMenstrualCycle):
+		return {success = false}
+	
+	var theEgg:EggCell = ourMenstrualCycle.transferAnyBigEggTo(targetMenstrualCycle, OrificeType.fromBodypart(_bodypart))
+	if(!theEgg):
+		return {success = false}
+	var theEggName:String = EggLaid.getNameByEggType(theEgg.bigEggType)
+	
+	var theHole:String = "down {<TARGET>.your} hole"
+	if(_bodypart == BodypartSlot.Vagina):
+		theHole = "into {<TARGET>.your} pussy"
+	if(_bodypart == BodypartSlot.Anus):
+		theHole = "into {<TARGET>.your} anus"
+	if(_bodypart == BodypartSlot.Head):
+		theHole = "down {<TARGET>.your} throat"
+	
+	var theTextLine:String = theEggName+" gets [b]stuffed "+theHole+"[/b] by {<USER>.your} ovipositor."
+	theTextLine = theTextLine.replace("<TARGET>", _targetChar.getID())
+	theTextLine = theTextLine.replace("<USER>", getWearer().getID())
+	return {
+		success = true,
+		text = theTextLine,
+	}
+
+func canStuffEggIntoTransfer(_targetChar, _bodypart:String) -> bool:
+	var theWearer = getWearer()
+	
+	if(!_targetChar || !_targetChar.getMenstrualCycle()):
+		return false
+	
+	if(theWearer && theWearer.isEggStuffed()):
+		return true
+	
+	return false

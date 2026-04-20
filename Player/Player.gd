@@ -89,6 +89,24 @@ func _ready():
 func getID():
 	return "pc"
 
+func addPain(_p: int):
+	var initialPain := pain
+	.addPain(_p)
+	if(SexToyManager.enabled && initialPain != pain):
+		SexToyManager.sendTrigger(SexToyTrigger.OnPainGain, [pain-initialPain])
+
+func addLust(_l: int):
+	var initialLust := lust
+	.addLust(_l)
+	if(SexToyManager.enabled && initialLust != lust):
+		SexToyManager.sendTrigger(SexToyTrigger.OnLustGain, [lust-initialLust])
+
+func addArousal(adda:float):
+	var initialArousal := arousal
+	.addArousal(adda)
+	if(SexToyManager.enabled && initialArousal != arousal):
+		SexToyManager.sendTrigger(SexToyTrigger.OnArousalGain, [arousal-initialArousal])
+
 func setLocation(newRoomID:String):
 	if(newRoomID == location):
 		return
@@ -245,6 +263,8 @@ func processTime(_secondsPassed):
 		if(bodypart == null || !is_instance_valid(bodypart)):
 			continue
 		bodypart.processTime(_secondsPassed)
+
+	peeProduction.processTime(_secondsPassed)
 	
 	if(intoxication > 0.0):
 		intoxication -= _secondsPassed / 30000.0
@@ -436,6 +456,8 @@ func saveData():
 	data["personality"] = personality.saveData()
 	data["reputation"] = reputation.saveData()
 	data["tfHolder"] = tfHolder.saveData()
+
+	data["peeProduction"] = peeProduction.saveData()
 	
 	return data
 
@@ -495,7 +517,9 @@ func loadData(data):
 	personality.loadData(SAVE.loadVar(data, "personality", {}))
 	reputation.loadData(SAVE.loadVar(data, "reputation", {}))
 	tfHolder.loadData(SAVE.loadVar(data, "tfHolder", {}))
-		
+
+	peeProduction.loadData(SAVE.loadVar(data, "peeProduction", {}))
+
 	updateNonBattleEffects()
 	emit_signal("bodypart_changed")
 	
@@ -565,7 +589,7 @@ func afterSleeping(restoreStats:bool = true):
 	for statusEffectID in statusEffects:
 		statusEffects[statusEffectID].onSleeping()
 	
-	if(isPregnant() && getPregnancyProgress() <= 0.5 && RNG.chance(30)):
+	if(isPregnant(true, false) && getPregnancyProgress() <= 0.5 && RNG.chance(30)):
 		GM.main.addLogMessage("Nausea", "You wake up and feel kinda nauseous.")
 		addEffect(StatusEffect.PregnancySickness)
 
@@ -843,7 +867,10 @@ func useWorstCondom():
 	return bestChance
 
 func onPlayerVisiblyPregnant():
-	GM.main.addLogMessage("Uh oh", "You notice that your belly is more inflated that normally. You can't deny it anymore, you are pregnant..")
+	if(isEggStuffedWithOffspring()): # Unique message?
+		GM.main.addLogMessage("Uh oh", "You notice that your belly is more inflated that normal. You can't deny it anymore, you are pregnant..")
+	else:
+		GM.main.addLogMessage("Uh oh", "You notice that your belly is more inflated that normal. You can't deny it anymore, you are pregnant..")
 
 func onPlayerReadyToGiveBirth():
 	GM.main.addLogMessage("It's time..", "Your belly is so swollen, it's hard to walk! You feel ready to give birth, maybe it's time to visit the nursery.")
@@ -867,6 +894,7 @@ func doPainfullyStretchHole(_bodypart, _who = "pc") -> bool:
 		
 		addEffect(StatusEffect.StretchedPainfullyPussy, [1])
 		emit_signal("holePainfullyStretched", _bodypart, _who)
+		SexToyManager.sendTrigger(SexToyTrigger.OnHoleStretchedPainfully, [_bodypart])
 		return true
 	if(_bodypart == BodypartSlot.Anus && hasBodypart(_bodypart)):
 		if(hasEffect(StatusEffect.LubedUp)):
@@ -874,12 +902,14 @@ func doPainfullyStretchHole(_bodypart, _who = "pc") -> bool:
 		
 		addEffect(StatusEffect.StretchedPainfullyAnus, [1])
 		emit_signal("holePainfullyStretched", _bodypart, _who)
+		SexToyManager.sendTrigger(SexToyTrigger.OnHoleStretchedPainfully, [_bodypart])
 		return true
 	return false
 
 func doWound(_who = "pc") -> bool:
 	addEffect(StatusEffect.Wounded, [1])
 	emit_signal("gotWoundedBy", _who)
+	SexToyManager.sendTrigger(SexToyTrigger.OnWounded)
 	return true
 
 func getEncounterChanceModifierStaff():
@@ -891,7 +921,7 @@ func getEncounterChanceModifierInmates():
 func giveBirth():
 	var bornChildren = .giveBirth()
 	
-	var bornChildAmount = bornChildren.size()
+	var bornChildAmount:int = bornChildren.size()
 	addSkillExperience(Skill.Fertility, 90 + Util.mini(210, bornChildAmount * 10))
 	if(hasPerk(Perk.FertilityMotherOfTheYear)):
 		addEffect(StatusEffect.MaternalGlow)
@@ -900,6 +930,9 @@ func giveBirth():
 		addCredits(paycheck)
 		
 		GM.main.addMessage("AlphaCorp has transferred "+str(paycheck)+" credits to you for being a good mother.")
+	
+	if(bornChildAmount > 0):
+		SexToyManager.sendTrigger(SexToyTrigger.OnGivingBirth, [bornChildAmount])
 	
 	return bornChildren
 
@@ -971,6 +1004,9 @@ func onSexEvent(_event : SexEvent):
 			var theSpecialRelationship = GM.main.RS.special[ownerID]
 			if(theSpecialRelationship.id == "SoftSlavery" && theSpecialRelationship.npcOwner):
 				theSpecialRelationship.npcOwner.handleSexEvent(_event)
+
+	if(SexToyManager.enabled):
+		SexToyManager.sendSexEvent(_event)
 
 func isSlaveTo(_charID:String) -> bool:
 	if(!GM.main || !GM.main.RS):

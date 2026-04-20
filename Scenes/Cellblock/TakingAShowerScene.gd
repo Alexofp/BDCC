@@ -60,10 +60,10 @@ func _run():
 		playAnimation(StageScene.Solo, "stand")
 		aimCamera(GM.pc.location)
 		
-		saynn("You turn off the water and go grab a towel to rub yourself dry")
+		saynn("You turn off the water and go grab a towel to rub yourself dry.")
 		
 		if(!GM.pc.isFullyNaked()):
-			saynn("Then you open your locker and put your clothing back on, ready to leave")
+			saynn("Then you open your locker and put your clothing back on, ready to leave.")
 		
 		addButton("Continue", "Feeling fresh", "endthescene")
 

@@ -7,7 +7,7 @@ func getVisibleName():
 	return "Ring of Triumph"
 	
 func getDescription():
-	return "A golden ring adorned with intricate engravings depicting a victorious warrior with two fallen foes kneeling by their sides. It emanates an aura of power and accomplishment."
+	return "A golden ring adorned with intricate engravings depicting a victorious warrior with two fallen foes kneeling by their sides. It emanates an aura of power and accomplishment.\n\n\"[i]Huh. I think it's safe to assume.. that our arena has a new Grand Champion![/i] \"\n"
 
 func getClothingSlot():
 	return InventorySlot.Ring

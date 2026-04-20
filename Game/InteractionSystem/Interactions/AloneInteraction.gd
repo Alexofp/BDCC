@@ -227,12 +227,27 @@ func isDoingTask(_taskID:String) -> bool:
 	return (goal.globalTask == _taskID)
 
 func getInterruptActions(_pawn:CharacterPawn) -> Array:
-	if(getRolePawn("main").isPlayer() && !getRolePawn("main").canBeInterrupted()): # Fixes the problem where talking interactions were getting queued up while you were walking a leashed slave around
+	var mainIsPlayer:bool = getRolePawn("main").isPlayer()
+	if(mainIsPlayer && !getRolePawn("main").canBeInterrupted()): # Fixes the problem where talking interactions were getting queued up while you were walking a leashed slave around
 		return []
-	if(getRolePawn("main").isPlayer() && _pawn.getSpecialRelationship() && !_pawn.getSpecialRelationship().canTalkWithPlayer()):
+	if(mainIsPlayer && _pawn.getSpecialRelationship() && !_pawn.getSpecialRelationship().canTalkWithPlayer()):
 		return []
 	
 	var result:Array = []
+	
+	
+	if(!mainIsPlayer && goal && goal.id == InteractionGoal.LayEggs):
+		result.append({
+			id = "helpEggs",
+			name = "Help lay eggs",
+			desc = "Help them lay their eggs!",
+			score = 0.0,
+			scoreType = "approach",
+			scoreRole = "main",
+			args = {},
+		})
+		return result
+	
 	result.append({
 		id = "talk",
 		name = "Talk",
@@ -264,7 +279,9 @@ func doInterruptAction(_pawn:CharacterPawn, _id:String, _args:Dictionary, _conte
 		#startInteraction("Talking", {reacter=_pawn.charID, starter=getRoleID("main")})
 	if(_id == "grab_and_fuck"):
 		startInteraction("Talking", {starter=_pawn.charID, reacter=getRoleID("main")}, {grab_and_fuck=true})
-
+	if(_id == "helpEggs"):
+		startInteraction("HelpLayEggs", {main=_pawn.charID, target=getRoleID("main")})
+	
 func canRoleBeInterrupted(_role:String) -> bool:
 	return true
 	

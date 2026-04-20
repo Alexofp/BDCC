@@ -48,6 +48,12 @@ const FilledCondomInside = "FilledCondomInside"
 # loadSize = how much cum
 const StraponCreampied = "StraponCreampied"
 
+# Source = Person who peed
+# Target = Person who was peed inside of
+# hole = Which BodypartSlot was peed into
+# loadSize = how much pee
+const PeedInside = "PeedInside"
+
 # Source = Person who did it
 # Target = Who received the cum
 #data:
@@ -134,7 +140,7 @@ const PenisPumpMilked = "PenisPumpMilked"
 # Source = Who was the cause
 # Target = Who came
 #data:
-# orgasmType = How the target came (feet, spank, trib, breasts, rim)
+# orgasmType = How the target came (feet, spank, trib, breasts, rim, egglaying)
 const UniqueOrgasm = "UniqueOrgasm"
 
 # Only gets called in sex engine
@@ -172,7 +178,7 @@ var data:Dictionary = {}
 var isSexEngine:bool = false
 var sexEngine
 
-func getType():
+func getType() -> String:
 	return type
 
 func getSourceChar():

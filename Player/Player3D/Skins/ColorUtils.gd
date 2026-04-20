@@ -167,3 +167,23 @@ static func generate3ColorsFromMainColor(primaryColor: Color):
 	tertiaryColor.v += RNG.randf_range(0.1, 0.3)
 	
 	return [primaryColor, secondaryColor, tertiaryColor]
+
+const NaturalEggColors:Array = [
+	"FFF4E5", "F7DED0", "FFF0E1", # White
+	"F8B7AD", "C76461", "D17270", # Red
+	"A43A1A", "7E2720", "AD4219", # Brown
+	"FEE082", "FFDC7F", "EDBD3E", # Yellow
+	"DDD86C", "E0E07E", "DCEA95", # Green
+	"43C3E7", "98EFFB", "01A2A3", # Cyan
+	"A6B9EA", "B1B9ED", "4365AE", # Blue
+	"4A617B", "364357", "363A3D", # Black
+]
+
+static func generateNaturalEggColor() -> Color:
+	var someColor:Color = Color("#"+RNG.pick(NaturalEggColors))
+	
+	someColor.h += RNG.randf_range(-0.02, 0.02)
+	someColor.s += RNG.randf_range(-0.1, 0.1)
+	someColor.v += RNG.randf_range(-0.1, 0.1)
+	
+	return someColor

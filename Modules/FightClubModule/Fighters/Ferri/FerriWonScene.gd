@@ -116,7 +116,7 @@ func _run():
 
 		saynn("[say=pc]Gonna leave you like this, have fun, pup~[/say]")
 
-		saynn("Ferri’s eyes suddenly open wide again as she sees you climb over the fence. Then she looks around and sees many hungry inmates that are only stopped by the confines of the arena. You sure she will escape somehow, shouldn’t have been so eager to bite you.")
+		saynn("Ferri’s eyes suddenly open wide again as she sees you climb over the fence. Then she looks around and sees many hungry inmates that are only stopped by the confines of the arena. You're sure she will escape somehow, shouldn’t have been so eager to bite you.")
 
 		# (scene ends)
 

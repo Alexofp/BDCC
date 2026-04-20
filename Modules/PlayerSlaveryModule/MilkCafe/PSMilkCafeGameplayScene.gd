@@ -996,7 +996,7 @@ func _react(_action: String, _args):
 			GM.pc.freeMouthDeleteAll(true)
 			setState(result["end"])
 		else:
-			if(!GM.main.checkTFs()):
+			if(!GM.main.checkExtraScenes()):
 				GM.main.showLog()
 		return
 

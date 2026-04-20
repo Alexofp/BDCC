@@ -462,6 +462,9 @@ func addSlaveButtons():
 		var character = getCharacter(slaveID)
 		addDisabledButton(character.getName(), notFit[slaveID])
 
+func startNewGB():
+	pickPool = pickedSlaves.duplicate()
+
 func getNextNPC():
 	var result = RNG.grab(pickPool)
 	if(pickPool.size() <= 0):
@@ -482,6 +485,8 @@ func nextGang():
 		setState(nextSceneType+"_tease")
 	else:
 		setState(nextSceneType+"_sex")
+	if(pickPool.size() < 3): # Not enough for a gb, refresh the pool
+		startNewGB()
 	npc1 = getNextNPC()
 	if(nextSceneType in ["dp", "spit", "gang"]):
 		npc2 = getNextNPC()

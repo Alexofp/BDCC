@@ -326,7 +326,10 @@ func getActions(_indx:int):
 		if(state in ["fucking", "knotting"]):
 			if(isReadyToCumHandled(DOM_0)):
 				addAction("domcum", 1.0, "Cum!", "You're about to cum!", {A_PRIORITY: 1001})
-
+		
+		if(state in ["fucking", "knotting", "inside"]):
+			addEggStuffReceiveButton(DOM_0, SUB_0, usedBodypart)
+		
 		if(state in ["fucking"]):
 			var moanScore:float = max(0.1, getDomInfo().fetishScore({fetishReceiving: 1.0}) + getDomInfo().personalityScore({PersonalityStat.Subby: 1.0}))
 			addAction("moan", moanScore, "Moan", "Show how much you like it", {A_PRIORITY: 4})
@@ -392,6 +395,8 @@ func getActions(_indx:int):
 			addAction("throwoff", getResistScore(SUB_0), "Throw them off", "Resist their attempts to ride you", {A_CHANCE: getSubResistChance(30.0, 25.0)})
 
 func doAction(_indx:int, _id:String, _action:Dictionary):
+	if(_id == "stuffegg"):
+		doReceiveEggFrom(DOM_0, SUB_0, usedBodypart)
 	if(_id == "straponForceKnot"):
 		# Need a tryKnot func?
 		#if(tryPenetrate())

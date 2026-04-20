@@ -42,10 +42,7 @@ func playAnimation(animID, _args = {}):
 
 	updateSubAnims()
 	
-	if(_args.has("plant") && _args["plant"]):
-		tentacles.setPlant()
-	else:
-		tentacles.setLatex()
+	tentacles.setSceneOptions(_args)
 	
 	if(_args.has("cum") && _args["cum"] && !(animID in ["tease"])):
 		startCumInsideSolo(doll, 1.0)

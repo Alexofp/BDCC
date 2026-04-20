@@ -3,7 +3,7 @@ class_name EggCell
 
 var lifeSpan: int # seconds
 var orificeType: int = OrificeType.Vagina
-var isimpregnated = false
+var isimpregnated:bool = false
 var motherID:String = ""
 var fatherID:String = ""
 var causerID:String = ""
@@ -14,18 +14,23 @@ var resultGender:String = NpcGender.Male
 var monozygotic: int = 1
 var fetusReadyForBirth := false
 
+var bigEgg:bool = false # If true, this egg will turn into a big egg when impregnated
+# Big egg stuff
+var bigEggType:int = BigEggType.Fertilized # Did this egg come from a tentacle monster
+var laidType:int = BigEggType.Fertilized # For big eggs, the type of the egg
+var laidColor:Color = Color.white # for big eggs
+
+var cycle = null
 
 func _init():
 	#lifeSpan = 60*60*24*2 + RNG.randi_range(-60*60*12, 60*60*24)
 	var optionsLifespan:int = OPTIONS.getEggCellLifespanHours()
 	optionsLifespan = Util.maxi(optionsLifespan, 1)
 	#warning-ignore:integer_division
-	var minRange = int(optionsLifespan / 4)
+	var minRange:int = int(optionsLifespan / 4)
 	#warning-ignore:integer_division
-	var maxRange = int(optionsLifespan / 2)
+	var maxRange:int = int(optionsLifespan / 2)
 	lifeSpan = 60*60*optionsLifespan + RNG.randi_range(-60*60*minRange, 60*60*maxRange)
-
-var cycle = null
 
 func setMonozygotic(): #check if the egg splits
 	var chance = RNG.randf_range(0.00, 100.00)
@@ -73,14 +78,15 @@ func removeMe():
 
 # Seconds
 func getGestationTime() -> int:
+	var bigEggsMult:float = 1.0 if !bigEgg else OPTIONS.getBigEggsGrowthMult()
 	if(motherID == "pc"):
 		var pcPregTime:int = OPTIONS.getPlayerPregnancyTimeDays()
 		pcPregTime = Util.maxi(pcPregTime, 1)
-		return 60*60*24*pcPregTime
+		return int(float(60*60*24*pcPregTime)/bigEggsMult)
 	else:
 		var npcPregTime:int = OPTIONS.getNPCPregnancyTimeDays()
 		npcPregTime = Util.maxi(npcPregTime, 1)
-		return 60*60*24*npcPregTime
+		return int(float(60*60*24*npcPregTime)/bigEggsMult)
 	
 	#return 60*60*24*7
 
@@ -89,12 +95,8 @@ func getTimeUntilReadyForBirth() -> int:
 	var currentProgress := min(1.0, getProgress())
 	return int(gestationTime * (1.0 - currentProgress))
 
-func processTime(seconds):
-	
-	if(!isimpregnated):
-		lifeSpan -= seconds
-		if(lifeSpan < 0):
-			removeMe()
+func processTime(seconds:float): #seconds is float because pregnancy speed is float
+	var ispeed:int = int(ceil(seconds))
 	
 	if(isimpregnated):
 		var newProgress: float = float(seconds) / getGestationTime()
@@ -105,9 +107,46 @@ func processTime(seconds):
 		progress += newProgress
 		if(progress > 2.5):
 			progress = 2.5
+		return
+	
+	if(!bigEgg):
+		lifeSpan -= ispeed
+		if(lifeSpan < 0):
+			removeMe()
+	else: # Tentacle/Unfertilized eggs
+		lifeSpan -= ispeed # Lifespan is the grow time for tentacle eggs
+		if(lifeSpan <= 0):
+			fetusReadyForBirth = true
+			lifeSpan = 0
+
+func delayEgg(_time:int):
+	if(isimpregnated):
+		var theGestTime := getGestationTime()
+		var adjustedTime:float = float(_time) / float(theGestTime)
+		progress = clamp(1.0 - adjustedTime, 0.0, 1.0)
+	else:
+		if(lifeSpan < _time):
+			lifeSpan = _time
+	if(_time > 0):
+		fetusReadyForBirth = false
+
+func getTimeUntilReadyToBeLaid() -> int:
+	if(isimpregnated):
+		var theGestTime := getGestationTime()
+		var progressLeft:float = 1.0 - progress
+		return int(theGestTime * progressLeft)
+	else:
+		return lifeSpan
 
 func fetusIsReadyForBirth() -> bool:
+	if(bigEgg): # Big eggs need to be laid
+		return false
 	return fetusReadyForBirth
+
+func isReadyToBeLaid() -> bool:
+	if(bigEgg):
+		return fetusReadyForBirth
+	return false
 
 func getProgress() -> float:
 	return progress
@@ -138,8 +177,30 @@ func impregnatedBy(fluidDNA):
 		resultGender = GM.main.getEncounterSettings().generateGender()
 	else:
 		resultGender = NpcGender.generate()
-
+	
+	if(bigEgg):
+		generateEggTypeAndColor()
+	
 	print("EGGCELL IMPREGNATED BY "+str(fatherID)+", species: "+str(resultSpecies)+", gender: "+NpcGender.getVisibleName(resultGender), ", division: ", monozygotic, "" if causerID == "" else (" CAUSER: "+causerID))
+
+func tryGetMainSpeciesID() -> String:
+	if(resultSpecies.empty()):
+		return ""
+	return resultSpecies[0]
+
+func tryGetMainSpecies():
+	var theSpeciesID:String = tryGetMainSpeciesID()
+	if(theSpeciesID.empty()):
+		return null
+	return GlobalRegistry.getSpecies(theSpeciesID)
+
+func generateEggTypeAndColor():
+	var theSpecies = tryGetMainSpecies()
+	if(theSpecies):
+		laidType = theSpecies.generateEggType(self)
+		laidColor = theSpecies.generateEggColor(self)
+	else:
+		laidType = BigEggType.Fertilized
 
 func tryImpregnate(fluidDNA, amountML:float, eggMultiplier:float = 1.0, fertility:float = 1.0, crossSpeciesCompatibility:float = 0.0) -> bool:
 	if(!canImpregnate()):
@@ -168,8 +229,27 @@ func tryImpregnate(fluidDNA, amountML:float, eggMultiplier:float = 1.0, fertilit
 		return true
 	return false
 
+func setBigEgg(_big:bool):
+	bigEgg = _big
+
+func setBigEggType(_type:int):
+	bigEggType = _type
+
+func makeChilds() -> Array:
+	var result:Array = []
+	for x in monozygotic:
+		var newChild: Child = Child.new()
+		newChild.generateUniqueID()
+		newChild.loadFromEggCell(self)
+		newChild.generateName()
+		newChild.setBirthday(GM.main.getDays())
+		newChild.setBornFromMonozygoticStatus(monozygotic)
+	
+		result.append(newChild)
+	return result
+
 func saveData() -> Dictionary:
-	var data = {
+	var data:Dictionary = {
 		"lifeSpan": lifeSpan,
 		"orificeType": orificeType,
 		"isimpregnated": isimpregnated,
@@ -183,6 +263,12 @@ func saveData() -> Dictionary:
 		"monozygotic": monozygotic,
 		"fetusReadyForBirth": fetusReadyForBirth
 	}
+	if(bigEgg):
+		data["bigEgg"] = bigEgg
+		data["laidType"] = laidType
+		data["laidColor"] = laidColor.to_html(false)
+	if(bigEggType != BigEggType.Fertilized):
+		data["bigEggType"] = bigEggType
 	
 	return data
 
@@ -199,3 +285,11 @@ func loadData(data:Dictionary):
 	resultGender = SAVE.loadVar(data, "resultGender", NpcGender.Male)
 	monozygotic = SAVE.loadVar(data, "monozygotic", 1)
 	fetusReadyForBirth = SAVE.loadVar(data, "fetusReadyForBirth", false)
+	
+	if(data.has("bigEgg")):
+		bigEgg = SAVE.loadVar(data, "bigEgg", false)
+		if(bigEgg):
+			laidType = SAVE.loadVar(data, "laidType", -1)
+			laidColor = Color("#"+SAVE.loadVar(data, "laidColor", "FFFFFF"))
+	if(data.has("bigEggType")):
+		bigEggType = SAVE.loadVar(data, "bigEggType", BigEggType.Fertilized)

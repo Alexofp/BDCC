@@ -1,0 +1,182 @@
+[gd_scene load_steps=42 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/Props/Tentacles.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Player/StageScene3D/Scenes3/TentaclesDuo.gd" type="Script" id=5]
+[ext_resource path="res://Player/StageScene3D/Scenes/DollSoloAndCuffsTree.tres" type="AnimationNodeBlendTree" id=6]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=29]
+
+[sub_resource type="AnimationNodeAnimation" id=42]
+animation = "TentDance-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=48]
+animation = "TentDanceFast-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=53]
+animation = "TentEat-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=39]
+animation = "TentGlare-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=28]
+animation = "TentIdle-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=33]
+animation = "TentIdleToSleep"
+
+[sub_resource type="AnimationNodeAnimation" id=45]
+animation = "TentPoke-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=30]
+animation = "TentSleep-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=36]
+animation = "TentSleepToIdle"
+
+[sub_resource type="AnimationNodeAnimation" id=56]
+animation = "TentWhip"
+
+[sub_resource type="AnimationNodeAnimation" id=57]
+animation = "TentWhip2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+xfade_time = 0.8
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=35]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=38]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=40]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=41]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=44]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=49]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=50]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=51]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=52]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=54]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=55]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=58]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=59]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=60]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=61]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachine" id=26]
+states/TentDance-loop/node = SubResource( 42 )
+states/TentDance-loop/position = Vector2( 441, 342 )
+states/TentDanceFast-loop/node = SubResource( 48 )
+states/TentDanceFast-loop/position = Vector2( 569, 235 )
+states/TentEat-loop/node = SubResource( 53 )
+states/TentEat-loop/position = Vector2( -2, 65 )
+states/TentGlare-loop/node = SubResource( 39 )
+states/TentGlare-loop/position = Vector2( 95, 195 )
+states/TentIdle-loop/node = SubResource( 28 )
+states/TentIdle-loop/position = Vector2( 277, 85 )
+states/TentIdleToSleep/node = SubResource( 33 )
+states/TentIdleToSleep/position = Vector2( 576, 29 )
+states/TentPoke-loop/node = SubResource( 45 )
+states/TentPoke-loop/position = Vector2( 229, 288 )
+states/TentSleep-loop/node = SubResource( 30 )
+states/TentSleep-loop/position = Vector2( 904, 93 )
+states/TentSleepToIdle/node = SubResource( 36 )
+states/TentSleepToIdle/position = Vector2( 567, 131 )
+states/TentWhip/node = SubResource( 56 )
+states/TentWhip/position = Vector2( -182, 258 )
+states/TentWhip2/node = SubResource( 57 )
+states/TentWhip2/position = Vector2( -2, 317 )
+transitions = [ "TentIdle-loop", "TentIdleToSleep", SubResource( 34 ), "TentIdleToSleep", "TentSleep-loop", SubResource( 35 ), "TentSleep-loop", "TentSleepToIdle", SubResource( 37 ), "TentSleepToIdle", "TentIdle-loop", SubResource( 38 ), "TentGlare-loop", "TentIdle-loop", SubResource( 40 ), "TentIdle-loop", "TentGlare-loop", SubResource( 41 ), "TentIdle-loop", "TentDance-loop", SubResource( 43 ), "TentDance-loop", "TentIdle-loop", SubResource( 44 ), "TentIdle-loop", "TentPoke-loop", SubResource( 46 ), "TentPoke-loop", "TentIdle-loop", SubResource( 47 ), "TentIdle-loop", "TentDanceFast-loop", SubResource( 49 ), "TentDanceFast-loop", "TentIdle-loop", SubResource( 50 ), "TentDance-loop", "TentDanceFast-loop", SubResource( 51 ), "TentDanceFast-loop", "TentDance-loop", SubResource( 52 ), "TentEat-loop", "TentIdle-loop", SubResource( 54 ), "TentIdle-loop", "TentEat-loop", SubResource( 55 ), "TentWhip", "TentGlare-loop", SubResource( 58 ), "TentGlare-loop", "TentWhip", SubResource( 59 ), "TentWhip2", "TentGlare-loop", SubResource( 60 ), "TentGlare-loop", "TentWhip2", SubResource( 61 ) ]
+start_node = "TentIdle-loop"
+graph_offset = Vector2( -362, -17 )
+
+[sub_resource type="AnimationNodeBlendTree" id=27]
+graph_offset = Vector2( -3, 68 )
+nodes/StateMachine/node = SubResource( 26 )
+nodes/StateMachine/position = Vector2( 411.566, 154.942 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "StateMachine" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=23]
+
+[node name="TentaclesDuo" instance=ExtResource( 2 )]
+transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.038, 0, 0 )
+script = ExtResource( 5 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1.528, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196641, 11.7165 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -3.028, 0, 0 )
+
+[node name="Tentacles" parent="." index="2" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.104, -1.84 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = ExtResource( 6 )
+anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
+parameters/AnimationNodeStateMachine/playback = SubResource( 29 )
+parameters/CuffsBlend/blend_amount = 0
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 27 )
+anim_player = NodePath("../Tentacles/TentaclesAnims3/AnimationPlayer")
+parameters/StateMachine/playback = SubResource( 23 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]
+[editable path="Doll3D/DollSkeleton3"]
+[editable path="Tentacles"]
+[editable path="Tentacles/TentaclesAnims3"]
+[editable path="Tentacles/TentaclesTiny"]

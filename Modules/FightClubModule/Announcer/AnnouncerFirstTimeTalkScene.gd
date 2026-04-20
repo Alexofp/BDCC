@@ -22,7 +22,7 @@ func _run():
 		saynn("[say=announcer]Had any problems with our guard?[/say]")
 
 		# (if just payed)
-		if(!getFlag("FightClubModule.BulldogBeatenUp") || !getFlag("FightClubModule.BulldogSeduced")):
+		if(!getFlag("FightClubModule.BulldogBeatenUp") && !getFlag("FightClubModule.BulldogSeduced")):
 			saynn("[say=pc]Well, I had to pay him quite a bit.[/say]")
 
 			saynn("The announcer chuckles.")

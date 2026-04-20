@@ -8,6 +8,8 @@ var birthDay: int
 var motherID: String
 var fatherID: String
 var causerID: String
+var laidByID:String = "" # For big eggs
+var bigEgg:bool = false
 var rememberedMotherName: String = "" # Required in case the character gets deleted
 var rememberedFatherName: String = ""
 var uniqueID: int
@@ -52,6 +54,13 @@ func setFatherID(newfather):
 	if(character != null):
 		rememberedFatherName = character.getName()
 
+func setLaidByID(_charID:String):
+	laidByID = _charID
+	bigEgg = true if !_charID.empty() else false
+
+func getLaidByID() -> String:
+	return laidByID
+
 func setCauserID(newcauser:String):
 	causerID = newcauser
 
@@ -83,7 +92,7 @@ func getFatherName():
 		return "unknown"
 	return rememberedFatherName + " (forgotten)"
 
-func loadFromEggCell(egg: EggCell):
+func loadFromEggCell(egg):
 	gender = egg.resultGender
 	species = egg.resultSpecies
 	setMotherID(egg.motherID)
@@ -103,6 +112,8 @@ func saveData():
 		"rememberedMotherName": rememberedMotherName,
 		"rememberedFatherName": rememberedFatherName,
 		"causerID": causerID,
+		"laidByID": laidByID,
+		"bigEgg": bigEgg,
 	}
 	
 	return data
@@ -122,3 +133,7 @@ func loadData(data):
 	rememberedFatherName = SAVE.loadVar(data, "rememberedFatherName", "")
 	if(data.has("causerID")):
 		causerID = SAVE.loadVar(data, "causerID", "")
+	if(data.has("laidByID")):
+		laidByID = SAVE.loadVar(data, "laidByID", "")
+	if(data.has("bigEgg")):
+		bigEgg = SAVE.loadVar(data, "bigEgg", false)

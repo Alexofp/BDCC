@@ -1,0 +1,307 @@
+[gd_scene load_steps=80 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/Props/Tentacles.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Player/StageScene3D/Scenes3/TentaclesChoke.gd" type="Script" id=5]
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=4]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=56]
+animation = "TentChokeFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=57]
+animation = "TentChokeSexFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=58]
+animation = "TentChokeSexInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=59]
+animation = "TentChokeSexTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=60]
+animation = "TentChokeSex_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=61]
+animation = "TentChokeTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=62]
+animation = "TentChoke_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=63]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=64]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=65]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=66]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=67]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=68]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=69]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=70]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=71]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=72]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=73]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=74]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=75]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=76]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=77]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=78]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=79]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=80]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=81]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=82]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=83]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=84]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=85]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=86]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=87]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=88]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=89]
+states/TentChokeFast_1-loop/node = SubResource( 56 )
+states/TentChokeFast_1-loop/position = Vector2( 357, 239 )
+states/TentChokeSexFast_1-loop/node = SubResource( 57 )
+states/TentChokeSexFast_1-loop/position = Vector2( 907, 360 )
+states/TentChokeSexInside_1-loop/node = SubResource( 58 )
+states/TentChokeSexInside_1-loop/position = Vector2( 680, 216 )
+states/TentChokeSexTease_1-loop/node = SubResource( 59 )
+states/TentChokeSexTease_1-loop/position = Vector2( 925, -34 )
+states/TentChokeSex_1-loop/node = SubResource( 60 )
+states/TentChokeSex_1-loop/position = Vector2( 907, 118 )
+states/TentChokeTease_1-loop/node = SubResource( 61 )
+states/TentChokeTease_1-loop/position = Vector2( 357, 58 )
+states/TentChoke_1-loop/node = SubResource( 62 )
+states/TentChoke_1-loop/position = Vector2( 357, 150 )
+transitions = [ "TentChokeTease_1-loop", "TentChokeSexTease_1-loop", SubResource( 63 ), "TentChokeSexTease_1-loop", "TentChokeTease_1-loop", SubResource( 64 ), "TentChokeTease_1-loop", "TentChoke_1-loop", SubResource( 65 ), "TentChoke_1-loop", "TentChokeTease_1-loop", SubResource( 66 ), "TentChoke_1-loop", "TentChokeFast_1-loop", SubResource( 67 ), "TentChokeFast_1-loop", "TentChoke_1-loop", SubResource( 68 ), "TentChokeSexTease_1-loop", "TentChokeSexInside_1-loop", SubResource( 69 ), "TentChokeSexInside_1-loop", "TentChokeSexTease_1-loop", SubResource( 70 ), "TentChokeSexInside_1-loop", "TentChokeSex_1-loop", SubResource( 71 ), "TentChokeSex_1-loop", "TentChokeSexInside_1-loop", SubResource( 72 ), "TentChokeSex_1-loop", "TentChokeSexFast_1-loop", SubResource( 73 ), "TentChokeSexFast_1-loop", "TentChokeSex_1-loop", SubResource( 74 ), "TentChokeSexTease_1-loop", "TentChokeSex_1-loop", SubResource( 75 ), "TentChokeSex_1-loop", "TentChokeSexTease_1-loop", SubResource( 76 ), "TentChokeSexFast_1-loop", "TentChokeSexInside_1-loop", SubResource( 77 ), "TentChokeSexInside_1-loop", "TentChokeSexFast_1-loop", SubResource( 78 ), "TentChoke_1-loop", "TentChokeSex_1-loop", SubResource( 79 ), "TentChokeSex_1-loop", "TentChoke_1-loop", SubResource( 80 ), "TentChokeFast_1-loop", "TentChokeSexFast_1-loop", SubResource( 81 ), "TentChokeSexFast_1-loop", "TentChokeFast_1-loop", SubResource( 82 ), "TentChoke_1-loop", "TentChokeSexInside_1-loop", SubResource( 83 ), "TentChokeSexInside_1-loop", "TentChoke_1-loop", SubResource( 84 ), "TentChokeFast_1-loop", "TentChokeSexInside_1-loop", SubResource( 85 ), "TentChokeSexInside_1-loop", "TentChokeFast_1-loop", SubResource( 86 ), "TentChokeSexInside_1-loop", "TentChokeTease_1-loop", SubResource( 87 ), "TentChokeTease_1-loop", "TentChokeSexInside_1-loop", SubResource( 88 ) ]
+start_node = "TentChokeTease_1-loop"
+graph_offset = Vector2( 197, 99 )
+
+[sub_resource type="AnimationNodeBlendTree" id=90]
+graph_offset = Vector2( -255.273, 49.2016 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 89 )
+nodes/StateMachine/position = Vector2( 160, 140 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=91]
+
+[sub_resource type="AnimationNodeAnimation" id=92]
+animation = "TentChokeFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=93]
+animation = "TentChokeSexFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=94]
+animation = "TentChokeSexInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=95]
+animation = "TentChokeSexTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=96]
+animation = "TentChokeSex_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=97]
+animation = "TentChokeTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=98]
+animation = "TentChoke_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=99]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=100]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=101]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=102]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=103]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=104]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=105]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=106]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=107]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=108]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=109]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=110]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=111]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=112]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=113]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=114]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=115]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=116]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=117]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=118]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=119]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=120]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=121]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=122]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=123]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=124]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=125]
+states/TentChokeFast_2-loop/node = SubResource( 92 )
+states/TentChokeFast_2-loop/position = Vector2( 158, 344 )
+states/TentChokeSexFast_2-loop/node = SubResource( 93 )
+states/TentChokeSexFast_2-loop/position = Vector2( 798, 314 )
+states/TentChokeSexInside_2-loop/node = SubResource( 94 )
+states/TentChokeSexInside_2-loop/position = Vector2( 464, 256 )
+states/TentChokeSexTease_2-loop/node = SubResource( 95 )
+states/TentChokeSexTease_2-loop/position = Vector2( 788, 58 )
+states/TentChokeSex_2-loop/node = SubResource( 96 )
+states/TentChokeSex_2-loop/position = Vector2( 853, 207 )
+states/TentChokeTease_2-loop/node = SubResource( 97 )
+states/TentChokeTease_2-loop/position = Vector2( 272, 51 )
+states/TentChoke_2-loop/node = SubResource( 98 )
+states/TentChoke_2-loop/position = Vector2( 88, 157 )
+transitions = [ "TentChokeTease_2-loop", "TentChoke_2-loop", SubResource( 99 ), "TentChoke_2-loop", "TentChokeTease_2-loop", SubResource( 100 ), "TentChoke_2-loop", "TentChokeFast_2-loop", SubResource( 101 ), "TentChokeFast_2-loop", "TentChoke_2-loop", SubResource( 102 ), "TentChoke_2-loop", "TentChokeSex_2-loop", SubResource( 103 ), "TentChokeSex_2-loop", "TentChoke_2-loop", SubResource( 104 ), "TentChokeFast_2-loop", "TentChokeSexFast_2-loop", SubResource( 105 ), "TentChokeSexFast_2-loop", "TentChokeFast_2-loop", SubResource( 106 ), "TentChokeSex_2-loop", "TentChokeSexFast_2-loop", SubResource( 107 ), "TentChokeSexFast_2-loop", "TentChokeSex_2-loop", SubResource( 108 ), "TentChokeSexInside_2-loop", "TentChokeSex_2-loop", SubResource( 109 ), "TentChokeSex_2-loop", "TentChokeSexInside_2-loop", SubResource( 110 ), "TentChokeSexFast_2-loop", "TentChokeSexInside_2-loop", SubResource( 111 ), "TentChokeSexInside_2-loop", "TentChokeSexFast_2-loop", SubResource( 112 ), "TentChokeFast_2-loop", "TentChokeSexInside_2-loop", SubResource( 113 ), "TentChokeSexInside_2-loop", "TentChokeFast_2-loop", SubResource( 114 ), "TentChokeSexInside_2-loop", "TentChoke_2-loop", SubResource( 115 ), "TentChoke_2-loop", "TentChokeSexInside_2-loop", SubResource( 116 ), "TentChokeTease_2-loop", "TentChokeSexInside_2-loop", SubResource( 117 ), "TentChokeSexInside_2-loop", "TentChokeTease_2-loop", SubResource( 118 ), "TentChokeTease_2-loop", "TentChokeSexTease_2-loop", SubResource( 119 ), "TentChokeSexTease_2-loop", "TentChokeTease_2-loop", SubResource( 120 ), "TentChokeSexTease_2-loop", "TentChokeSex_2-loop", SubResource( 121 ), "TentChokeSex_2-loop", "TentChokeSexTease_2-loop", SubResource( 122 ), "TentChokeSexInside_2-loop", "TentChokeSexTease_2-loop", SubResource( 123 ), "TentChokeSexTease_2-loop", "TentChokeSexInside_2-loop", SubResource( 124 ) ]
+start_node = "TentChokeTease_2-loop"
+graph_offset = Vector2( -95, 24 )
+
+[sub_resource type="AnimationNodeBlendTree" id=126]
+graph_offset = Vector2( -75, 73 )
+nodes/StateMachine/node = SubResource( 125 )
+nodes/StateMachine/position = Vector2( 390, 144 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "StateMachine" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=23]
+
+[node name="TentaclesChoke" instance=ExtResource( 2 )]
+transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.038, 0, 0 )
+script = ExtResource( 5 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1.528, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.328, 11.717 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.55809, 0, 0 )
+
+[node name="Tentacles" parent="." index="2" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.55809, 0, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 90 )
+anim_player = NodePath("../Doll3D/DollSkeleton3/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 91 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 126 )
+anim_player = NodePath("../Tentacles/TentaclesAnims3/AnimationPlayer")
+parameters/StateMachine/playback = SubResource( 23 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]
+[editable path="Doll3D/DollSkeleton3"]
+[editable path="Tentacles"]
+[editable path="Tentacles/TentaclesAnims3"]
+[editable path="Tentacles/TentaclesTiny"]

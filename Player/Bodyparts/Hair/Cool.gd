@@ -12,5 +12,5 @@ func getDoll3DScene():
 
 func getTraits():
 	return {
-		PartTrait.HairShort: true,
+		PartTrait.HairVeryShort: true,
 	}

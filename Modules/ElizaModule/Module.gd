@@ -30,6 +30,18 @@ func getFlags():
 		"tfcan_catgirl": flag(FlagType.Bool),
 		"tfcan_cocks": flag(FlagType.Bool),
 		"tfcan_felinecock": flag(FlagType.Bool),
+		
+		"tent_returnedegged": flag(FlagType.Bool),
+		"tent_started": flag(FlagType.Bool),
+		"tent_firstegg": flag(FlagType.Bool),
+		"tent_born": flag(FlagType.Bool),
+		"tent_eggs": flag(FlagType.Number),
+		"tent_name": flag(FlagType.Text),
+		"tent_eliza": flag(FlagType.Bool),
+		"tent_elizaAnnoy": flag(FlagType.Bool),
+		
+		"tent_mood": flag(FlagType.Text), # "" mean kind lusty
+		"tent_neurolink": flag(FlagType.Bool),
 	}
 
 func _init():
@@ -65,10 +77,19 @@ func _init():
 		"res://Modules/ElizaModule/DrugTesting/ElizaDrugTestHybridScene.gd",
 		"res://Modules/ElizaModule/DrugTesting/ElizaDrugTestSpeciesScene.gd",
 		"res://Modules/ElizaModule/DrugTesting/ElizaDrugTestHuCowScene.gd",
+		
+		"res://Modules/ElizaModule/Tentacles/PSElizaTentaclesIntro.gd",
+		"res://Modules/ElizaModule/Tentacles/PSElizaTentaclesFirstEgg.gd",
+		"res://Modules/ElizaModule/Tentacles/PSElizaTentaclesGiveEgg.gd",
+		"res://Modules/ElizaModule/Tentacles/PSElizaTentaclesBorn.gd",
+		"res://Modules/ElizaModule/Tentacles/PSElizaEggedUpAnnoyed.gd",
+		"res://Modules/ElizaModule/Tentacles/PSPCTentaclesScene.gd",
+		"res://Modules/ElizaModule/Tentacles/PSPCTentaclesPunish.gd",
 		]
 	characters = [
 		"res://Modules/ElizaModule/DrugTesting/ElizaDemon.gd",
 		"res://Modules/ElizaModule/Chapter1/ElizaMom.gd",
+		"res://Modules/ElizaModule/Tentacles/PCTentacles.gd",
 	]
 	items = []
 	events = [
@@ -79,9 +100,12 @@ func _init():
 		"res://Modules/ElizaModule/Chapter0/ElizaQuestEvent.gd",
 		"res://Modules/ElizaModule/Chapter0/ElizaQuestReactEvent.gd",
 		"res://Modules/ElizaModule/Science/GetStrangePillFromDefeatedNPCEvent.gd",
+		"res://Modules/ElizaModule/Tentacles/PSElizaTentaclesEvent.gd",
+		"res://Modules/ElizaModule/Tentacles/PSPCTentaclesEvent.gd",
 	]
 	quests = [
 		"res://Modules/ElizaModule/Chapter0/ElizaQuest.gd",
+		"res://Modules/ElizaModule/Tentacles/PSElizaTentaclesQuest.gd",
 	]
 
 func resetFlagsOnNewDay():
@@ -101,3 +125,27 @@ func canSexEliza() -> bool:
 
 func canTFEliza() -> bool:
 	return getFlag("ElizaModule.tfcan_catgirl", false) || getFlag("ElizaModule.tfcan_felinecock", false) || getFlag("ElizaModule.tfcan_hucow", false) || getFlag("ElizaModule.tfcan_demon", false) || getFlag("ElizaModule.tfcan_species", false) || getFlag("ElizaModule.tfcan_cocks", false)
+
+func getTentaclesCost() -> int:
+	var eggAm:int = getFlag("ElizaModule.tent_eggs", 0)
+	var thePrice:float = 1000.0
+	for _i in eggAm:
+		thePrice *= 0.75
+	
+	return int(thePrice)
+
+func getTentaclesCostStr() -> String:
+	var theCost:int = getTentaclesCost()
+	
+	return str(theCost)+" credit"+("s" if theCost != 1 else "")
+
+func addTentacleEgg():
+	increaseFlag("ElizaModule.tent_eggs")
+
+func hasAccessToTentacles() -> bool:
+	return getFlag("ElizaModule.tent_born", false)
+
+func isScienceUpgradeVisible(_upgradeID:String) -> bool:
+	#if(_upgradeID == "tentNeuroLink"):
+	#	return hasAccessToTentacles()
+	return hasAccessToTentacles()

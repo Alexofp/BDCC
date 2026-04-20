@@ -1,10 +1,13 @@
 extends Node
 class_name Bodypart
 
-var id
+var id:String
 var limbSlot
-var visibleName
-var needsProcessing = false
+var visibleName:String
+
+var author:String
+
+var needsProcessing:bool = false
 
 var orifice: Orifice = null
 var fluidProduction: FluidProduction = null
@@ -17,6 +20,9 @@ var pickedGColor = null
 var pickedBColor = null
 
 func _init():
+	pass
+
+func initFluidProduction():
 	pass
 
 func setupSensitiveZone():
@@ -48,6 +54,17 @@ func getCharacterCreatorName():
 
 func getCharacterCreatorDesc():
 	return "Change to this"
+
+func getCharacterCreatorDescFinal(_isActive:bool) -> String:
+	if(_isActive):
+		return "This is the currently selected bodypart"+(("\n[i]Created by:[/i] "+author) if !author.empty() else "")
+	
+	var theDescRaw:String = str(getCharacterCreatorDesc())
+	if(!author.empty()):
+		if(!theDescRaw.empty()):
+			theDescRaw += "\n"
+		theDescRaw += "[i]Created by:[/i] "+author
+	return theDescRaw
 
 func getCompatibleSpecies():
 	return []
@@ -390,6 +407,9 @@ func getCharacter():
 func hasWomb():
 	return false
 
+func shouldOvulateWithBigEggs() -> bool:
+	return false
+
 func updateAppearance():
 	if(character != null && getCharacter() != null):
 		getCharacter().updateAppearance()
@@ -499,7 +519,7 @@ static func findPossibleBodypartIDs(bodypartSlot:String, acharacter, theSpecies:
 			allAllowed[allowedBodypartID] = true
 	
 	var maxScore:float = 0.0
-	var allbodypartsIDs = GlobalRegistry.getBodypartsIdsBySlot(bodypartSlot)
+	var allbodypartsIDs = GlobalRegistry.getBodypartsIdsBySlot(bodypartSlot) if !_isTF else GlobalRegistry.getBodypartsIdsBySlotForTF(bodypartSlot)
 	for bodypartID in allbodypartsIDs:
 		var bodypart = GlobalRegistry.getBodypartRef(bodypartID)
 		var supportedSpecies:Array = bodypart.getCompatibleSpeciesFinal()
@@ -566,3 +586,7 @@ func setFluidsCauserID(_charID:String):
 	var _fluids = getFluids()
 	if(_fluids != null):
 		_fluids.setCauserID(_charID)
+
+# If true, this bodypart won't be able to generate for some TFs
+func shouldBeExcludedFromTFPick() -> bool:
+	return false

@@ -19,6 +19,7 @@ func getSupportedSexTypes():
 		SexType.StocksSex: true,
 		SexType.SlutwallSex: true,
 		SexType.BitchsuitSex: true,
+		SexType.TentaclesSex: true,
 	}
 
 func isStocksSex() -> bool:

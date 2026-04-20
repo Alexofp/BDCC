@@ -60,7 +60,8 @@ func setEnabled(newEnabled):
 
 var easingIn = 10
 func _physics_process(delta) -> void:
-
+	#if(true):
+	#	return
 		
 	# Note:
 	# Local space = local to the bone
@@ -132,6 +133,7 @@ func _physics_process(delta) -> void:
 
 	# The axis+angle to rotate on, in local-to-bone space
 	var bone_rotate_axis: Vector3 = bone_forward_local.cross(diff_vec_local)
+	bone_rotate_axis.x = 0.0 #BDCC: This line -MAYBE- fixes the clipping at high thickness/breast size/pregnancy 
 	var bone_rotate_angle: float = acos(bone_forward_local.dot(diff_vec_local))
 
 	if bone_rotate_axis.length() < 1e-3:
@@ -143,7 +145,12 @@ func _physics_process(delta) -> void:
 	var bone_rotate_axis_obj: Vector3 = bone_transf_obj.basis.xform(bone_rotate_axis).normalized()
 	var bone_new_transf_obj: Transform = Transform(bone_transf_obj.basis.rotated(bone_rotate_axis_obj, bone_rotate_angle), bone_transf_obj.origin)
 
+	#if(true):
+	#	return
+
 	skeleton.set_bone_global_pose_override(bone_id, bone_new_transf_obj, 0.5, true)
+
+
 
 	# Orient this object to the jigglebone
 	global_transform.basis = (skeleton.global_transform * skeleton.get_bone_global_pose(bone_id)).basis

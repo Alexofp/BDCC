@@ -1,0 +1,223 @@
+[gd_scene load_steps=56 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/Props/Tentacles.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Player/StageScene3D/Scenes3/TentaclesGangbang.gd" type="Script" id=5]
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=4]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=113]
+animation = "TentGangFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=114]
+animation = "TentGangInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=115]
+animation = "TentGangTeaseDef_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=116]
+animation = "TentGangTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=117]
+animation = "TentGang_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=118]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=119]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=120]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=121]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=122]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=123]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=124]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=125]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=126]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=127]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=128]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=129]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=130]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=131]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=132]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=133]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=134]
+states/TentGangFast_1-loop/node = SubResource( 113 )
+states/TentGangFast_1-loop/position = Vector2( 558, 275 )
+states/TentGangInside_1-loop/node = SubResource( 114 )
+states/TentGangInside_1-loop/position = Vector2( 372, 162 )
+states/TentGangTeaseDef_1-loop/node = SubResource( 115 )
+states/TentGangTeaseDef_1-loop/position = Vector2( 762, 50 )
+states/TentGangTease_1-loop/node = SubResource( 116 )
+states/TentGangTease_1-loop/position = Vector2( 448, 50 )
+states/TentGang_1-loop/node = SubResource( 117 )
+states/TentGang_1-loop/position = Vector2( 729, 175 )
+transitions = [ "TentGangTeaseDef_1-loop", "TentGangTease_1-loop", SubResource( 118 ), "TentGangTease_1-loop", "TentGangTeaseDef_1-loop", SubResource( 119 ), "TentGangTease_1-loop", "TentGangInside_1-loop", SubResource( 120 ), "TentGangInside_1-loop", "TentGangTease_1-loop", SubResource( 121 ), "TentGangTease_1-loop", "TentGang_1-loop", SubResource( 122 ), "TentGang_1-loop", "TentGangTease_1-loop", SubResource( 123 ), "TentGangInside_1-loop", "TentGang_1-loop", SubResource( 124 ), "TentGang_1-loop", "TentGangInside_1-loop", SubResource( 125 ), "TentGangInside_1-loop", "TentGangFast_1-loop", SubResource( 126 ), "TentGangFast_1-loop", "TentGangInside_1-loop", SubResource( 127 ), "TentGangFast_1-loop", "TentGang_1-loop", SubResource( 128 ), "TentGang_1-loop", "TentGangFast_1-loop", SubResource( 129 ), "TentGang_1-loop", "TentGangTeaseDef_1-loop", SubResource( 130 ), "TentGangTeaseDef_1-loop", "TentGang_1-loop", SubResource( 131 ), "TentGangInside_1-loop", "TentGangTeaseDef_1-loop", SubResource( 132 ), "TentGangTeaseDef_1-loop", "TentGangInside_1-loop", SubResource( 133 ) ]
+start_node = "TentGangTease_1-loop"
+graph_offset = Vector2( -16, 26 )
+
+[sub_resource type="AnimationNodeBlendTree" id=135]
+graph_offset = Vector2( -255.273, 25.2778 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 134 )
+nodes/StateMachine/position = Vector2( 180, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=91]
+
+[sub_resource type="AnimationNodeAnimation" id=136]
+animation = "TentGangFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=137]
+animation = "TentGangInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=138]
+animation = "TentGangTeaseDef_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=139]
+animation = "TentGangTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=140]
+animation = "TentGang_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=141]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=142]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=143]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=144]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=145]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=146]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=147]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=148]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=149]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=150]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=151]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=152]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=153]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=154]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=155]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=156]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=157]
+states/TentGangFast_2-loop/node = SubResource( 136 )
+states/TentGangFast_2-loop/position = Vector2( 528, 286 )
+states/TentGangInside_2-loop/node = SubResource( 137 )
+states/TentGangInside_2-loop/position = Vector2( 378, 193 )
+states/TentGangTeaseDef_2-loop/node = SubResource( 138 )
+states/TentGangTeaseDef_2-loop/position = Vector2( 691, 100 )
+states/TentGangTease_2-loop/node = SubResource( 139 )
+states/TentGangTease_2-loop/position = Vector2( 369, 100 )
+states/TentGang_2-loop/node = SubResource( 140 )
+states/TentGang_2-loop/position = Vector2( 715, 193 )
+transitions = [ "TentGangTease_2-loop", "TentGangTeaseDef_2-loop", SubResource( 141 ), "TentGangTeaseDef_2-loop", "TentGangTease_2-loop", SubResource( 142 ), "TentGangTease_2-loop", "TentGangInside_2-loop", SubResource( 143 ), "TentGangInside_2-loop", "TentGangTease_2-loop", SubResource( 144 ), "TentGangTease_2-loop", "TentGang_2-loop", SubResource( 145 ), "TentGang_2-loop", "TentGangTease_2-loop", SubResource( 146 ), "TentGangTeaseDef_2-loop", "TentGangInside_2-loop", SubResource( 147 ), "TentGangInside_2-loop", "TentGangTeaseDef_2-loop", SubResource( 148 ), "TentGangInside_2-loop", "TentGang_2-loop", SubResource( 149 ), "TentGang_2-loop", "TentGangInside_2-loop", SubResource( 150 ), "TentGangTeaseDef_2-loop", "TentGang_2-loop", SubResource( 151 ), "TentGang_2-loop", "TentGangTeaseDef_2-loop", SubResource( 152 ), "TentGangInside_2-loop", "TentGangFast_2-loop", SubResource( 153 ), "TentGangFast_2-loop", "TentGangInside_2-loop", SubResource( 154 ), "TentGangFast_2-loop", "TentGang_2-loop", SubResource( 155 ), "TentGang_2-loop", "TentGangFast_2-loop", SubResource( 156 ) ]
+start_node = "TentGangTease_2-loop"
+graph_offset = Vector2( -47, -40 )
+
+[sub_resource type="AnimationNodeBlendTree" id=158]
+graph_offset = Vector2( -49.0134, 3.47107 )
+nodes/StateMachine/node = SubResource( 157 )
+nodes/StateMachine/position = Vector2( 400, 140 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "StateMachine" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=23]
+
+[node name="TentaclesGangbang" instance=ExtResource( 2 )]
+transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.038, 0, 0 )
+script = ExtResource( 5 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1.528, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.328, 11.717 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.753913, 0, 0 )
+
+[node name="Tentacles" parent="." index="2" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.753913, 0, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 135 )
+anim_player = NodePath("../Doll3D/DollSkeleton3/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 91 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 158 )
+anim_player = NodePath("../Tentacles/TentaclesAnims3/AnimationPlayer")
+parameters/StateMachine/playback = SubResource( 23 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]
+[editable path="Doll3D/DollSkeleton3"]
+[editable path="Tentacles"]
+[editable path="Tentacles/TentaclesAnims3"]
+[editable path="Tentacles/TentaclesTiny"]

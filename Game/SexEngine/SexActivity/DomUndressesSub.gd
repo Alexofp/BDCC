@@ -23,6 +23,7 @@ func getSupportedSexTypes():
 		SexType.StocksSex: true,
 		SexType.SlutwallSex: true,
 		SexType.BitchsuitSex: true,
+		SexType.TentaclesSex: true,
 	}
 
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):

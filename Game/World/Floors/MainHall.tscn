@@ -546,7 +546,7 @@ self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -128, 64 )
 roomName = "Main hall"
 roomID = "main_hallroom1"
-roomDescription = "The corners of the main hall contain an open and barebones common area, along with a large angled pillar supporting the raised platform in the center of this hangar-sized room."
+roomDescription = "The corners of the main hall contain open and barebones common areas. One large angled pillar supports the raised platform in the center of this hangar-sized room."
 roomSprite = 6
 roomColor = 8
 population = 3
@@ -596,7 +596,7 @@ self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( -128, 320 )
 roomName = "Main hall"
 roomID = "main_hallroom4"
-roomDescription = "The corners of the main hall contain an open and barebones common area, along with a large angled pillar supporting the raised platform in the center of this hangar-sized room."
+roomDescription = "The corners of the main hall contain open and barebones common areas. One large angled pillar supports the raised platform in the center of this hangar-sized room."
 roomColor = 8
 population = 3
 
@@ -605,7 +605,7 @@ self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, 320 )
 roomName = "Main hall"
 roomID = "main_hallroom8"
-roomDescription = "The corners of the main hall contain an open and barebones common area, along with a large angled pillar supporting the raised platform in the center of this hangar-sized room."
+roomDescription = "The corners of the main hall contain open and barebones common areas. One large angled pillar supports the raised platform in the center of this hangar-sized room."
 roomColor = 8
 population = 3
 
@@ -636,7 +636,7 @@ self_modulate = Color( 0.7, 0.7, 0.7, 1 )
 position = Vector2( 128, 64 )
 roomName = "Main hall"
 roomID = "hall_ne_corner"
-roomDescription = "The corners of the main hall contain an open and barebones common area, along with a large angled pillar supporting the raised platform in the center of this hangar-sized room."
+roomDescription = "The corners of the main hall contain open and barebones common areas. One large angled pillar supports the raised platform in the center of this hangar-sized room."
 roomColor = 8
 population = 3
 

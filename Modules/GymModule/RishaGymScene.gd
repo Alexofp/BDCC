@@ -272,7 +272,7 @@ func _run():
 
 		saynn("[say=risha]Sure, slut. Just make me cum.[/say]")
 
-		saynn("Two of your digits spread her needy pussy, spawning a few strings of her juices between the petals. Then you use the third digit to prod at her pussy hole until it gives in, surprisingly easy. You other hand still slides over her shaft while the second now playfully fingers her cunt. You feel how big of an effect it has on Risha, her legs start to shift and shake slightly, she raises her chin high and lets out a few lusty moans as you pleasure her both sets of bits.")
+		saynn("Two of your digits spread her needy pussy, spawning a few strings of her juices between the petals. Then you use the third digit to prod at her pussy hole until it gives in, surprisingly easy. Your other hand still slides over her shaft while the second now playfully fingers her cunt. You feel how big of an effect it has on Risha, her legs start to shift and shake slightly, she raises her chin high and lets out a few lusty moans as you pleasure her both sets of bits.")
 
 		saynn("[say=pc]I think somebody is enjoying this way too much~[/say]")
 

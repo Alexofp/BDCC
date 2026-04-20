@@ -15,6 +15,12 @@ func getGoals():
 		SexGoal.BreastFeedOnSub: 1.0,
 	}
 
+func getSupportedSexTypes():
+	return {
+		SexType.DefaultSex: true,
+		SexType.TentaclesSex: true,
+	}
+
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	return 0.0
 
@@ -29,9 +35,14 @@ func getTags(_indx:int) -> Array:
 	return []
 
 func startActivity(_args):
-	addTextPick([
-		"{dom.You} {dom.youVerb('lean')} close to {sub.your} {sub.breasts}, {dom.yourHis} lips hovering near {sub.yourHis}"+getThroughClothingTextCustom(SUB_0, S_BREASTS, " clothed")+" nipples.",
-	])
+	if(isTentaclesSex()):
+		addTextPick([
+			"The tentacles grab and lift {sub.you}, one of the thick tentacles begins to hover near {sub.yourHis}"+getThroughClothingTextCustom(SUB_0, S_BREASTS, " clothed")+" nipples."
+		])
+	else:
+		addTextPick([
+			"{dom.You} {dom.youVerb('lean')} close to {sub.your} {sub.breasts}, {dom.yourHis} lips hovering near {sub.yourHis}"+getThroughClothingTextCustom(SUB_0, S_BREASTS, " clothed")+" nipples.",
+		])
 	
 	stimulateBreasts(DOM_0, SUB_0, S_MOUTH, I_TEASE)
 	#affectSub(subInfo.fetishScore({Fetish.Lactation: 1.0}), 0.1, -0.1, -0.01)
@@ -47,20 +58,36 @@ func getExtraSubText(hasMilk:bool) -> String:
 	var result:Array = []
 	
 	if(hasMilk && RNG.chance(30)):
-		result.append(RNG.pick([
-			"Lonely drops of {sub.milk} stream down {dom.yourHis} lips.",
-			"{sub.YourHis} nipples are leaking {sub.milk}.",
-			"{sub.YourHis} nipples are quite leaky.",
-			"{sub.YourHis} hard nips are leaking {sub.milk}.",
-			"{sub.YourHis} breasts seem to be full of {sub.milk}.",
-		]))
+		if(isTentaclesSex()):
+			result.append(RNG.pick([
+				"Lonely drops of {sub.milk} stream down {sub.yourHis} {sub.breasts}.",
+				"{sub.YourHis} nipples are leaking {sub.milk}.",
+				"{sub.YourHis} nipples are quite leaky.",
+				"{sub.YourHis} hard nips are leaking {sub.milk}.",
+				"{sub.YourHis} breasts seem to be full of {sub.milk}.",
+			]))
+		else:
+			result.append(RNG.pick([
+				"Lonely drops of {sub.milk} stream down {dom.yourHis} lips.",
+				"{sub.YourHis} nipples are leaking {sub.milk}.",
+				"{sub.YourHis} nipples are quite leaky.",
+				"{sub.YourHis} hard nips are leaking {sub.milk}.",
+				"{sub.YourHis} breasts seem to be full of {sub.milk}.",
+			]))
 		
 	if(!hasMilk && RNG.chance(20)):
-		result.append(RNG.pick([
-			" {sub.YourHis} nipples are being stimulated.",
-			" {sub.YourHis} nipples are hard from feeling {dom.yourHis} lips.",
-			" {sub.YourHis} nipples are hard from being rubbed.",
-		]))
+		if(isTentaclesSex()):
+			result.append(RNG.pick([
+				" {sub.YourHis} nipples are being stimulated.",
+				" {sub.YourHis} nipples are hard from being pumped so much.",
+				" {sub.YourHis} nipples are hard from being rubbed.",
+			]))
+		else:
+			result.append(RNG.pick([
+				" {sub.YourHis} nipples are being stimulated.",
+				" {sub.YourHis} nipples are hard from feeling {dom.yourHis} lips.",
+				" {sub.YourHis} nipples are hard from being rubbed.",
+			]))
 		
 	if(getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking) && RNG.chance(50)):
 		result.append(RNG.pick([
@@ -85,13 +112,24 @@ func feeding_processTurn():
 	var fluids:Fluids = breasts.getFluids()
 	
 	if(milkProduciton.getFluidAmount() < 5.0):
-		var text:String = RNG.pick([
-			"{dom.You} {dom.youVerb('try', 'tries')} to feed on {sub.your} breasts but no milk comes out.",
-			"{dom.You} {dom.youVerb('suckle')} on {sub.your} nipples but no milk comes out.",
-			"{dom.You} {dom.youVerb('suckle')} on {sub.your} nipples, chasing the aftertaste of {sub.yourHis} milk.",
-			"{dom.You} {dom.youVerb('lick')} and {dom.youVerb('put')} pressure on {sub.your} nipples, trying to milk them.",
-		])
-		text += getExtraSubText(false)
+		var text:String
+		if(isTentaclesSex()):
+			text = RNG.pick([
+				"The tentacles pump and knead at {sub.your} breasts, but no milk gets pulled out.",
+				"The tentacle tighten rhythmically around {sub.your} chest, suckling at {sub.your} nipples but only fruitlessly.",
+				"Slick tendrils work over {sub.your} each nipple, pressing and pulling in an attempt to extract milk.",
+				"The tentacles pump and kneed {sub.your} {sub.breasts}, relentless suction tugs at {sub.yourHis} nipples.",
+				"The tentacles keep trying to milk {sub.you}, pulsing around {sub.yourHis} {sub.breasts}.",
+			])
+			text += getExtraSubText(false)
+		else:
+			text = RNG.pick([
+				"{dom.You} {dom.youVerb('try', 'tries')} to feed on {sub.your} breasts but no milk comes out.",
+				"{dom.You} {dom.youVerb('suckle')} on {sub.your} nipples but no milk comes out.",
+				"{dom.You} {dom.youVerb('suckle')} on {sub.your} nipples, chasing the aftertaste of {sub.yourHis} milk.",
+				"{dom.You} {dom.youVerb('lick')} and {dom.youVerb('put')} pressure on {sub.your} nipples, trying to milk them.",
+			])
+			text += getExtraSubText(false)
 		
 		if(getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)):
 			getSubInfo().addPain(1)
@@ -115,9 +153,14 @@ func feeding_processTurn():
 		
 		if(!noticedSore && getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)):
 			noticedSore = true
-			text += RNG.pick([
-				" {sub.Your} nipples started to feel [b]sore[/b] after {dom.yourHis} attempts.",
-			])
+			if(isTentaclesSex()):
+				text += RNG.pick([
+					" {sub.Your} nipples started to feel [b]sore[/b] after all the attemps at milking.",
+				])
+			else:
+				text += RNG.pick([
+					" {sub.Your} nipples started to feel [b]sore[/b] after {dom.yourHis} attempts.",
+				])
 		
 		sendSexEvent(SexEvent.BreastFeeding, DOM_0, SUB_0, {madeLactate=suddenlyLactating, loadSize=0.0, targetIsDom=false})
 		
@@ -148,12 +191,19 @@ func feeding_processTurn():
 				if(swallowData.has("text") && swallowData["text"] != ""):
 					extraMessages.append(swallowData["text"])
 		
-		var text = RNG.pick([
-			"{dom.You} actively {dom.youVerb('feed')} on {sub.your} leaky nipples, consuming "+howMuchCollectedStr+".",
-			"{dom.You} {dom.youVerb('suckle')} on {sub.your} nipples, feeling a taste of {sub.milk} on {dom.yourHis} tongue, consuming "+howMuchCollectedStr+" of it.",
-			"{dom.You} {dom.youVerb('breastfeed')} on {sub.your} {sub.breasts}, consuming "+howMuchCollectedStr+".",
-			
-		])
+		var text:String
+		if(isTentaclesSex()):
+			text = RNG.pick([
+				"Tentacles milk {sub.your} breasts, their suckling tips drawing out and consuming "+howMuchCollectedStr+" of {sub.yourHis} {sub.milk}.",
+				"Tentacles stimulate {sub.your} milky nips with a pulsating rhythm, collecting "+howMuchCollectedStr+" of {sub.milk}.",
+				"Tentacles feed on {sub.your} perky nips, kneading and milking them, collecting "+howMuchCollectedStr+" of {sub.milk} in the process.",
+			])
+		else:
+			text = RNG.pick([
+				"{dom.You} actively {dom.youVerb('feed')} on {sub.your} leaky nipples, consuming "+howMuchCollectedStr+".",
+				"{dom.You} {dom.youVerb('suckle')} on {sub.your} nipples, feeling a taste of {sub.milk} on {dom.yourHis} tongue, consuming "+howMuchCollectedStr+" of it.",
+				"{dom.You} {dom.youVerb('breastfeed')} on {sub.your} {sub.breasts}, consuming "+howMuchCollectedStr+".",
+			])
 		if(extraMessages.size() > 0):
 			text += " "+Util.join(extraMessages)
 		text += getExtraSubText(true)
@@ -211,12 +261,20 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 	if(_actionID == "knead"):
 		if(getSub().canBeMilked()):
 			kneadBonus += 2
-			addTextPick([
-				"{dom.You} {dom.youVerb('knead')} {sub.yourHis} {sub.breasts} and the flow of {sub.milk} increases!",
-				"{dom.You} {dom.youVerb('knead')} {sub.yourHis} {sub.breasts} at the same time as breastfeeding.",
-				"{dom.You} {dom.youVerb('knead')} {sub.yourHis} {sub.breasts}.",
-				"{dom.You} {dom.youVerb('massage')} {sub.yourHis} {sub.breasts}.",
-			])
+			if(isTentaclesSex()):
+				addTextPick([
+					"The tentacles wrap around {sub.yourHis} {sub.breasts} and knead them, trying to increase the flow of {sub.milk}.",
+					"The tentacles grope and massage {sub.yourHis} {sub.breasts}.",
+					"The tentacles knead {sub.yourHis} {sub.breasts} while also pumping them.",
+					"The tentacles knead {sub.yourHis} {sub.breasts}.",
+				])
+			else:
+				addTextPick([
+					"{dom.You} {dom.youVerb('knead')} {sub.yourHis} {sub.breasts} and the flow of {sub.milk} increases!",
+					"{dom.You} {dom.youVerb('knead')} {sub.yourHis} {sub.breasts} at the same time as breastfeeding.",
+					"{dom.You} {dom.youVerb('knead')} {sub.yourHis} {sub.breasts}.",
+					"{dom.You} {dom.youVerb('massage')} {sub.yourHis} {sub.breasts}.",
+				])
 				
 			if(RNG.chance(10) && getSub().isLactating() && !getSub().hasEffect(StatusEffect.SoreNipplesAfterMilking)):
 				var breasts:BodypartBreasts = getSub().getBodypart(BodypartSlot.Breasts)
@@ -237,11 +295,18 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 			#affectSub(subInfo.fetishScore({Fetish.Lactation: 1.0}), 0.1, -0.1, -0.01)
 			#affectDom(domInfo.fetishScore({Fetish.Lactation: 1.0}), 0.1, -0.03)
 		else:
-			addTextPick([
-				"{dom.You} {dom.youVerb('knead')} {sub.yourHis} {sub.breasts}, stimulating them.",
-				"{dom.You} {dom.youVerb('massage')} {sub.yourHis} {sub.breasts}, stimulating them.",
-				"{dom.You} {dom.youVerb('knead')} {sub.yourHis} {sub.breasts} with {dom.yourHis} hands.",
-			])
+			if(isTentaclesSex()):
+				addTextPick([
+					"The tentacles wrap around {sub.yourHis} {sub.breasts} and knead them, adding extra stimulation.",
+					"Extra tentacles join to massage {sub.yourHis} {sub.breasts}, stimulating them.",
+					"The tentacles knead {sub.yourHis} {sub.breasts}, occasionalyl squeezing them hard.",
+				])
+			else:
+				addTextPick([
+					"{dom.You} {dom.youVerb('knead')} {sub.yourHis} {sub.breasts}, stimulating them.",
+					"{dom.You} {dom.youVerb('massage')} {sub.yourHis} {sub.breasts}, stimulating them.",
+					"{dom.You} {dom.youVerb('knead')} {sub.yourHis} {sub.breasts} with {dom.yourHis} hands.",
+				])
 			stimulateBreasts(DOM_0, SUB_0, S_HANDS, I_NORMAL)
 			#subInfo.stimulateArousalZone(0.2, BodypartSlot.Breasts, 1.0)
 			#affectSub(subInfo.fetishScore({Fetish.Lactation: 1.0}), 0.02, -0.1, -0.01)
@@ -259,7 +324,10 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 				])
 	if(_actionID == "startfeed"):
 		setState("feeding")
-		addText("{dom.You} began actively feeding on {sub.your} {sub.breasts}!")
+		if(isTentaclesSex()):
+			addText("The tentacles begin actively feeding on {sub.your} {sub.breasts}!")
+		else:
+			addText("{dom.You} began actively feeding on {sub.your} {sub.breasts}!")
 		
 		stimulateBreasts(DOM_0, SUB_0, S_MOUTH, I_TEASE)
 		#affectSub(subInfo.fetishScore({Fetish.Lactation: 1.0}), 0.02, -0.1, -0.01)
@@ -285,7 +353,10 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 	if(_actionID == "pullaway"):
 		var successChance:float = getResistChance(SUB_0, DOM_0, RESIST_BREASTS_FOCUS, 30.0, 25.0)
 		if(RNG.chance(successChance)):
-			addText("{sub.You} {sub.youVerb('pull')} away from {dom.your} lips.")
+			if(isTentaclesSex()):
+				addText("{sub.You} {sub.youVerb('pull')} away from the hungry tentacles.")
+			else:
+				addText("{sub.You} {sub.youVerb('pull')} away from {dom.your} lips.")
 			getDomInfo().addAnger(0.3)
 			if(getState() != ""):
 				setState("")
@@ -293,7 +364,10 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 				failGoals()
 				endActivity()
 		else:
-			addText("{sub.You} {sub.youVerb('try', 'tries')} to pull away from {dom.you} but {sub.youVerb('fail')}.")
+			if(isTentaclesSex()):
+				addText("{sub.You} {sub.youVerb('try', 'tries')} to pull away from the tentacles but {sub.youVerb('fail')}.")
+			else:
+				addText("{sub.You} {sub.youVerb('try', 'tries')} to pull away from {dom.you} but {sub.youVerb('fail')}.")
 			getDomInfo().addAnger(0.1)
 			reactSub(SexReaction.ActivelyResisting, [50])
 	if(_actionID == "moan"):
@@ -307,11 +381,18 @@ func doAction(_indx:int, _actionID:String, _action:Dictionary):
 				"{sub.youVerb('let')} out a muffled noise of pleasure",
 			])
 		
-		addTextPick([
-			"{sub.You} "+moanText+" while breastfeeding {dom.you}!",
-			"{sub.You} "+moanText+" while having {sub.yourHis} nipples fed on!",
-			"{sub.You} "+moanText+" eagerly!",
-		])
+		if(isTentaclesSex()):
+			addTextPick([
+				"{sub.You} "+moanText+" while getting milked by tentacles!",
+				"{sub.You} "+moanText+" while having {sub.yourHis} nipples fed on by tentacles!",
+				"{sub.You} "+moanText+" eagerly!",
+			])
+		else:
+			addTextPick([
+				"{sub.You} "+moanText+" while breastfeeding {dom.you}!",
+				"{sub.You} "+moanText+" while having {sub.yourHis} nipples fed on!",
+				"{sub.You} "+moanText+" eagerly!",
+			])
 		moan(SUB_0)
 #		getDomInfo().addAnger(-0.02)
 #		getDomInfo().addLust(5)
@@ -326,6 +407,11 @@ func getAnimationPriority():
 	return 1
 
 func getAnimation():
+	if(isTentaclesSex()):
+		if(state in [""]):
+			return [StageScene.TentaclesCuddle, "breaststease", {pc=SUB_0}]
+		return [StageScene.TentaclesCuddle, "breasts", {pc=SUB_0}]
+	
 	if(state in [""]):
 		return [StageScene.BreastFeeding, "tease", {npc=DOM_0, pc=SUB_0}]
 	return [StageScene.BreastFeeding, "feed", {npc=DOM_0, pc=SUB_0}]

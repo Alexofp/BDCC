@@ -54,6 +54,8 @@ func setPawnActivityIcon(theIcon):
 		icon_2.texture = preload("res://Images/WorldPawnActivity/struggle.png")
 	elif(theIcon == RoomStuff.PawnActivity.GiveBirth):
 		icon_2.texture = preload("res://Images/WorldPawnActivity/givebirth.png")
+	elif(theIcon == RoomStuff.PawnActivity.LayEggs):
+		icon_2.texture = preload("res://Images/WorldPawnActivity/layeggs.png")
 	else:
 		icon_2.texture = null
 

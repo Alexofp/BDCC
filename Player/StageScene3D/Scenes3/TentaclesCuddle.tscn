@@ -1,0 +1,308 @@
+[gd_scene load_steps=75 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/Props/Tentacles.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Player/StageScene3D/Scenes3/TentaclesCuddle.gd" type="Script" id=5]
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=4]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=92]
+animation = "TentCuddleBreastsTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=93]
+animation = "TentCuddleBreasts_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=94]
+animation = "TentCuddleFuckFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=95]
+animation = "TentCuddleFuck_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=96]
+animation = "TentCuddleInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=97]
+animation = "TentCuddleStrokeFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=98]
+animation = "TentCuddleStroke_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=158]
+animation = "TentCuddleTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=99]
+animation = "TentCuddle_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=100]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=101]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=102]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=103]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=104]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=105]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=106]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=107]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=110]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=111]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=112]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=113]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=114]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=115]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=159]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=160]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=161]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=162]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=163]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=164]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=118]
+states/TentCuddleBreastsTease_1-loop/node = SubResource( 92 )
+states/TentCuddleBreastsTease_1-loop/position = Vector2( 235, 142 )
+states/TentCuddleBreasts_1-loop/node = SubResource( 93 )
+states/TentCuddleBreasts_1-loop/position = Vector2( 211, 248 )
+states/TentCuddleFuckFast_1-loop/node = SubResource( 94 )
+states/TentCuddleFuckFast_1-loop/position = Vector2( 625, 397 )
+states/TentCuddleFuck_1-loop/node = SubResource( 95 )
+states/TentCuddleFuck_1-loop/position = Vector2( 645, 279 )
+states/TentCuddleInside_1-loop/node = SubResource( 96 )
+states/TentCuddleInside_1-loop/position = Vector2( 382, 313 )
+states/TentCuddleStrokeFast_1-loop/node = SubResource( 97 )
+states/TentCuddleStrokeFast_1-loop/position = Vector2( 918, 190 )
+states/TentCuddleStroke_1-loop/node = SubResource( 98 )
+states/TentCuddleStroke_1-loop/position = Vector2( 720, 121 )
+states/TentCuddleTease_1-loop/node = SubResource( 158 )
+states/TentCuddleTease_1-loop/position = Vector2( 498, 193 )
+states/TentCuddle_1-loop/node = SubResource( 99 )
+states/TentCuddle_1-loop/position = Vector2( 459, 38 )
+transitions = [ "TentCuddle_1-loop", "TentCuddleBreastsTease_1-loop", SubResource( 100 ), "TentCuddleBreastsTease_1-loop", "TentCuddle_1-loop", SubResource( 101 ), "TentCuddleBreastsTease_1-loop", "TentCuddleBreasts_1-loop", SubResource( 102 ), "TentCuddleBreasts_1-loop", "TentCuddleBreastsTease_1-loop", SubResource( 103 ), "TentCuddle_1-loop", "TentCuddleStroke_1-loop", SubResource( 104 ), "TentCuddleStroke_1-loop", "TentCuddle_1-loop", SubResource( 105 ), "TentCuddleStroke_1-loop", "TentCuddleStrokeFast_1-loop", SubResource( 106 ), "TentCuddleStrokeFast_1-loop", "TentCuddleStroke_1-loop", SubResource( 107 ), "TentCuddleFuck_1-loop", "TentCuddleInside_1-loop", SubResource( 110 ), "TentCuddleInside_1-loop", "TentCuddleFuck_1-loop", SubResource( 111 ), "TentCuddleFuck_1-loop", "TentCuddleFuckFast_1-loop", SubResource( 112 ), "TentCuddleFuckFast_1-loop", "TentCuddleFuck_1-loop", SubResource( 113 ), "TentCuddleInside_1-loop", "TentCuddleFuckFast_1-loop", SubResource( 114 ), "TentCuddleFuckFast_1-loop", "TentCuddleInside_1-loop", SubResource( 115 ), "TentCuddle_1-loop", "TentCuddleTease_1-loop", SubResource( 159 ), "TentCuddleTease_1-loop", "TentCuddle_1-loop", SubResource( 160 ), "TentCuddleTease_1-loop", "TentCuddleInside_1-loop", SubResource( 161 ), "TentCuddleInside_1-loop", "TentCuddleTease_1-loop", SubResource( 162 ), "TentCuddleTease_1-loop", "TentCuddleFuck_1-loop", SubResource( 163 ), "TentCuddleFuck_1-loop", "TentCuddleTease_1-loop", SubResource( 164 ) ]
+start_node = "TentCuddle_1-loop"
+graph_offset = Vector2( -15, 114 )
+
+[sub_resource type="AnimationNodeBlendTree" id=119]
+graph_offset = Vector2( -237.273, 70.2016 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 118 )
+nodes/StateMachine/position = Vector2( 180, 120 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=91]
+
+[sub_resource type="AnimationNodeAnimation" id=120]
+animation = "TentCuddleBreastsTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=121]
+animation = "TentCuddleBreastsBig_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=122]
+animation = "TentCuddleBreasts_2-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=123]
+sync = true
+
+[sub_resource type="AnimationNodeBlendTree" id=124]
+graph_offset = Vector2( -444, 29 )
+nodes/Animation/node = SubResource( 122 )
+nodes/Animation/position = Vector2( -280, 80 )
+"nodes/Animation 2/node" = SubResource( 121 )
+"nodes/Animation 2/position" = Vector2( -300, 200 )
+nodes/BreastSize/node = SubResource( 123 )
+nodes/BreastSize/position = Vector2( 80, 100 )
+node_connections = [ "BreastSize", 0, "Animation", "BreastSize", 1, "Animation 2", "output", 0, "BreastSize" ]
+
+[sub_resource type="AnimationNodeAnimation" id=128]
+animation = "TentCuddleFuckFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=129]
+animation = "TentCuddleFuck_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=130]
+animation = "TentCuddleInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=131]
+animation = "TentCuddleStrokeFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=132]
+animation = "TentCuddleStroke_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=151]
+animation = "TentCuddleTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=125]
+animation = "TentCuddle_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=133]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=134]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=135]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=136]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=141]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=142]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=143]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=144]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=145]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=146]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=147]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=148]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=149]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=150]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=152]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=153]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=154]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=155]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=156]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=157]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=126]
+states/TentCuddleBreastsTease_2-loop/node = SubResource( 120 )
+states/TentCuddleBreastsTease_2-loop/position = Vector2( 208, 83 )
+states/TentCuddleBreasts_2-loop/node = SubResource( 124 )
+states/TentCuddleBreasts_2-loop/position = Vector2( 172, 173 )
+states/TentCuddleFuckFast_2-loop/node = SubResource( 128 )
+states/TentCuddleFuckFast_2-loop/position = Vector2( 639, 513 )
+states/TentCuddleFuck_2-loop/node = SubResource( 129 )
+states/TentCuddleFuck_2-loop/position = Vector2( 662, 295 )
+states/TentCuddleInside_2-loop/node = SubResource( 130 )
+states/TentCuddleInside_2-loop/position = Vector2( 345, 377 )
+states/TentCuddleStrokeFast_2-loop/node = SubResource( 131 )
+states/TentCuddleStrokeFast_2-loop/position = Vector2( 893, 173 )
+states/TentCuddleStroke_2-loop/node = SubResource( 132 )
+states/TentCuddleStroke_2-loop/position = Vector2( 759, 40 )
+states/TentCuddleTease_2-loop/node = SubResource( 151 )
+states/TentCuddleTease_2-loop/position = Vector2( 497, 179 )
+states/TentCuddle_2-loop/node = SubResource( 125 )
+states/TentCuddle_2-loop/position = Vector2( 465, -4 )
+transitions = [ "TentCuddle_2-loop", "TentCuddleBreastsTease_2-loop", SubResource( 133 ), "TentCuddleBreastsTease_2-loop", "TentCuddle_2-loop", SubResource( 134 ), "TentCuddleBreastsTease_2-loop", "TentCuddleBreasts_2-loop", SubResource( 135 ), "TentCuddleBreasts_2-loop", "TentCuddleBreastsTease_2-loop", SubResource( 136 ), "TentCuddleFuck_2-loop", "TentCuddleInside_2-loop", SubResource( 141 ), "TentCuddleInside_2-loop", "TentCuddleFuck_2-loop", SubResource( 142 ), "TentCuddleInside_2-loop", "TentCuddleFuckFast_2-loop", SubResource( 143 ), "TentCuddleFuckFast_2-loop", "TentCuddleInside_2-loop", SubResource( 144 ), "TentCuddleFuck_2-loop", "TentCuddleFuckFast_2-loop", SubResource( 145 ), "TentCuddleFuckFast_2-loop", "TentCuddleFuck_2-loop", SubResource( 146 ), "TentCuddleStroke_2-loop", "TentCuddle_2-loop", SubResource( 147 ), "TentCuddle_2-loop", "TentCuddleStroke_2-loop", SubResource( 148 ), "TentCuddleStroke_2-loop", "TentCuddleStrokeFast_2-loop", SubResource( 149 ), "TentCuddleStrokeFast_2-loop", "TentCuddleStroke_2-loop", SubResource( 150 ), "TentCuddle_2-loop", "TentCuddleTease_2-loop", SubResource( 152 ), "TentCuddleTease_2-loop", "TentCuddle_2-loop", SubResource( 153 ), "TentCuddleTease_2-loop", "TentCuddleFuck_2-loop", SubResource( 154 ), "TentCuddleFuck_2-loop", "TentCuddleTease_2-loop", SubResource( 155 ), "TentCuddleTease_2-loop", "TentCuddleInside_2-loop", SubResource( 156 ), "TentCuddleInside_2-loop", "TentCuddleTease_2-loop", SubResource( 157 ) ]
+start_node = "TentCuddle_2-loop"
+graph_offset = Vector2( -47, -76 )
+
+[sub_resource type="AnimationNodeBlendTree" id=127]
+graph_offset = Vector2( 112, -158 )
+nodes/StateMachine/node = SubResource( 126 )
+nodes/StateMachine/position = Vector2( 480, 186 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "StateMachine" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=23]
+
+[node name="TentaclesCuddle" instance=ExtResource( 2 )]
+transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.038, 0, 0 )
+script = ExtResource( 5 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1.528, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.328, 11.717 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.16928, 0, 0 )
+
+[node name="Tentacles" parent="." index="2" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.16928, 0, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 119 )
+anim_player = NodePath("../Doll3D/DollSkeleton3/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 91 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 127 )
+anim_player = NodePath("../Tentacles/TentaclesAnims3/AnimationPlayer")
+parameters/StateMachine/playback = SubResource( 23 )
+parameters/StateMachine/TentCuddleBreasts_2-loop/BreastSize/blend_amount = 0.5
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]
+[editable path="Doll3D/DollSkeleton3"]
+[editable path="Tentacles"]
+[editable path="Tentacles/TentaclesAnims3"]
+[editable path="Tentacles/TentaclesTiny"]

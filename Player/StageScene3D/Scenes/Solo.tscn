@@ -7,7 +7,7 @@
 [ext_resource path="res://Player/Props/chair.png" type="Texture" id=5]
 [ext_resource path="res://Player/StageScene3D/Scenes/DollSoloAndCuffsTree.tres" type="AnimationNodeBlendTree" id=6]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=2]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
 [node name="Solo" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -17,7 +17,7 @@ script = ExtResource( 2 )
 [node name="AnimationTree" type="AnimationTree" parent="." index="1"]
 tree_root = ExtResource( 6 )
 anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
-parameters/AnimationNodeStateMachine/playback = SubResource( 2 )
+parameters/AnimationNodeStateMachine/playback = SubResource( 1 )
 parameters/CuffsBlend/blend_amount = 0.0
 
 [node name="Sprite3D" type="Sprite3D" parent="." index="2"]
@@ -49,3 +49,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.104177, 0.477503 )
 [editable path="Doll3D"]
 [editable path="Doll3D/DollSkeleton"]
 [editable path="Doll3D/DollSkeleton2"]
+[editable path="Doll3D/DollSkeleton3"]

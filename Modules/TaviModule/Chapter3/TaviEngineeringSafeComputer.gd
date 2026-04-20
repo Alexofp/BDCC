@@ -5,8 +5,8 @@ func _init():
 	
 	# create local server & files
 	var locals = NetworkedComputerServer.new("",["connect","quit"])
-	locals.addFile(newCompFile("safe.txt","The safe has a few credit chips that we confiscated from the inmates. Somehow they found a way to duplicate them which caused all sorts of problems. Hopefully there are no more of them going around.\n\nThe safe's ip is 127.0.24\nYou should know the admin's password. If you forgot it - you will have to hack it.\nGood luck","",true,1))
-	locals.addFile(newCompFile("forum.html","...**[corrupt]corrupted data[/corrupt]**...\n\n<message>Hey guys. What do I do if I forgot my password to one of the servers and I can't login anymore?</message>\n<message>lol noob</message>\n<message>I had such problem. But I just remembered the password one day</message>\n<message>I heard there is a program that can bruteforce password, check this server 127.0.55</message>\n<message>Thanks for the answers guys, real helpful. And I'm not gonna download some shady crap.</message>\n<message>Oh, btw, the ip's last 2 numbers are [corrupt]53[/corrupt], not 55.</message>\n\n...**[corrupt]more corrupted data[/corrupt]**...","",true,2))
+	addFileToServer(locals,newCompFile("safe.txt","The safe has a few credit chips that we confiscated from the inmates. Somehow they found a way to duplicate them which caused all sorts of problems. Hopefully there are no more of them going around.\n\nThe safe's ip is 127.0.24\nYou should know the admin's password. If you forgot it - you will have to hack it.\nGood luck","",true,1))
+	addFileToServer(locals,newCompFile("forum.html","...**[corrupt]corrupted data[/corrupt]**...\n\n<message>Hey guys. What do I do if I forgot my password to one of the servers and I can't login anymore?</message>\n<message>lol noob</message>\n<message>I had such problem. But I just remembered the password one day</message>\n<message>I heard there is a program that can bruteforce password, check this server 127.0.55</message>\n<message>Thanks for the answers guys, real helpful. And I'm not gonna download some shady crap.</message>\n<message>Oh, btw, the ip's last 2 numbers are [corrupt]53[/corrupt], not 55.</message>\n\n...**[corrupt]more corrupted data[/corrupt]**...","",true,2))
 	
 	# create safe server
 	var safes = NetworkedComputerServer.new("127.0.24",["login","open","disconnect","help"],"Safe server status: Operational.\nDoor status: Closed",false,{},{},"Bob","5327")
@@ -14,11 +14,11 @@ func _init():
 	
 	# create public server & files
 	var publics = NetworkedComputerServer.new("127.0.53",["login","wget","disconnect"],"Logged in as guest. Welcome to our public server, feel free to share anything you want.\nAlso, feel free to donate, we only have 10 credits out of a 100 that we need for hosting",true,{"credits":10},{},"xxxDark-Masterxxx","42069",["withdraw"])
-	publics.addFile(newCompFile("brute.exe","Error, unable to display a binary file","font",true,1,"brute"))
-	publics.addFile(newCompFile("forum.html","<message>Guys, how do I use the brute.exe program?</message>\n<message>Super simple. [cuss]Download it from the server[/cuss] using wget [cuss]and then run like so[/cuss] 'brute.exe SERVER_IP'. [cuss]It will try to bruteforce the password[/cuss].</message>","font",true,2))
-	publics.addPrivateFile(newCompFile("babe.png",Util.readFile("res://Images/asciiporn/taviquest/babe.txt"),"res://Fonts/smallconsolefont.tres",true,69))
-	publics.addPrivateFile(newCompFile("petplay.png",Util.readFile("res://Images/asciiporn/taviquest/petplay.txt"),"res://Fonts/smallconsolefont.tres",true,123))
-	publics.addPrivateFile(newCompFile("brutev2.exe","Error, unable to display a binary file","font",true,420,"brutev2"))
+	addFileToServer(publics,newCompFile("brute.exe","Error, unable to display a binary file","font",true,1,"brute"))
+	addFileToServer(publics,newCompFile("forum.html","<message>Guys, how do I use the brute.exe program?</message>\n<message>Super simple. [cuss]Download it from the server[/cuss] using wget [cuss]and then run like so[/cuss] 'brute.exe SERVER_IP'. [cuss]It will try to bruteforce the password[/cuss].</message>","font",true,2))
+	addFileToServer(publics,newCompFile("babe.png",Util.readFile("res://Images/asciiporn/taviquest/babe.txt"),"res://Fonts/smallconsolefont.tres",true,69),true)
+	addFileToServer(publics,newCompFile("petplay.png",Util.readFile("res://Images/asciiporn/taviquest/petplay.txt"),"res://Fonts/smallconsolefont.tres",true,123),true)
+	addFileToServer(publics,newCompFile("brutev2.exe","Error, unable to display a binary file","font",true,420,"brutev2"),true)
 	
 	# add servers
 	servers = {
@@ -29,7 +29,6 @@ func _init():
 	
 	# set cmds
 	localCmds["open"]="Opens the safe"
-	localCmds["login"]="Allows you to login as an admin. Syntax: login <password>"
 	localCmds["withdraw"]="Transfers credits to your console where you can withdraw them."
 	localCmds["wget"]="Download a file from the server. Syntax 'wget <FILE INDEX>' where file index is a [b]number[/b] that can be obtained by using the ls command"
 
@@ -38,6 +37,8 @@ func localCmd_wget(_args):
 		return "'wget' command expects 0 arguments"
 	if !str(_args[0]).is_valid_integer():
 		return "Invalid index"
+	if connectedTo=="": # can't download our own files
+		return "Can't download from local server"
 	var currentServer : NetworkedComputerServer = getServer(connectedTo)
 	if !currentServer:
 		return "no current server"
@@ -50,11 +51,10 @@ func localCmd_wget(_args):
 	if _args[0].get_extension() in blacklist:
 		return "Error, unable to download "+file.get_extension()+" files"
 	
-	if getServer("").getFileFromName(_args[0]):
+	if getServer("").getFileFromName(file.name):
 		return "You already have this file"
-	var nid = getServer("").files.size()+1+getServer("").privateFiles.size() # new id
-	var nf = newCompFile(file.name,file.catData,file.catFont,file.canDownload,nid,file.method)
-	getServer("").addFile(nf)
+	var nf = newCompFile(file.name,file.catData,file.catFont,file.canDownload,-1,file.method)
+	addFileToServer(getServer(""),nf)
 	if file.method: # for executables
 		learnCommand(file.method)
 	return "Downloading "+file.name+"... Success!"
@@ -74,20 +74,6 @@ func localCmd_open(_args):
 func localCmd_quit(_args):
 	markFinishedFail()
 	return "Shutting down.."
-
-func localCmd_login(_args):
-	if _args.size()!=1:
-		return "'login' command expects 1 argument"
-	var currentServer = getServer(connectedTo)
-	if !currentServer:
-		return "no current server"
-	if currentServer.loggedin:
-		return "Already logged in"
-	if currentServer.adminPassword==_args[0]:
-		currentServer.loggedin=true
-		return "Logged in as admin successfully. Welcome, "+currentServer.username
-	else:
-		return "Error, wrong password"
 
 func localCmd_brute(_args):
 	if(_args.size() == 1):

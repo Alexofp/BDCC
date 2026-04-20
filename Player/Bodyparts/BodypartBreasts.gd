@@ -8,11 +8,14 @@ var fluidType:String = "Milk"
 
 func _init():
 	limbSlot = LimbTypes.Breasts
-	fluidProduction = Lactation.new()
-	fluidProduction.bodypart = weakref(self)
+	initFluidProduction()
 	setupSensitiveZone()
 	needsProcessing = true
-	
+
+func initFluidProduction():
+	fluidProduction = Lactation.new()
+	fluidProduction.bodypart = weakref(self)
+
 func setupSensitiveZone():
 	sensitiveZone = preload("res://Player/SensitiveZone/SensitiveBreasts.gd").new()
 	sensitiveZone.setBodypart(self)

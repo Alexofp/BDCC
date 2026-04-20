@@ -307,3 +307,13 @@ func _on_TroubleshootingButton_pressedActually():
 func _on_TroubleshootingScreen_onClose():
 	hideAllMenus()
 	MainVBox.visible = true
+
+func _on_SexToysButton_pressedActually():
+	main_h_box.visible = false
+	var theMenu = load("res://Util/SexToySupport/UI/SexToyManagerUI.tscn").instance()
+	theMenu.connect("onClosePressed", self, "onMenuClosePressed", [theMenu])
+	add_child(theMenu)
+
+func onMenuClosePressed(_menu):
+	_menu.queue_free()
+	main_h_box.visible = true

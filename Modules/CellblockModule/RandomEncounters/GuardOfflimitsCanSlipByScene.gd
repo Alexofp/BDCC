@@ -32,10 +32,10 @@ func resolveCustomCharacterName(_charID):
 func _run():
 	if(state == ""):
 		addCharacter(npcID)
-		playAnimation(StageScene.Duo, "stand", {npc=npcID})
+		playAnimation(StageScene.Duo, "stand", {npc=npcID, flipNPC=true, npcAction="stand", further=true})
 
 	if(state == ""):
-		saynn("While carefully stepping through the area you spot one of the guards. You caught {npc.him} at a very good moment because {npc.His} back is turned away so you can try to just sneak past.")
+		saynn("While carefully stepping through the area you spot one of the guards. You caught {npc.him} at a very good moment because {npc.his} back is turned away so you can try to just sneak past.")
 		
 		if(sawBefore):
 			saynn("It's hard to tell from where you are but you think you saw {npc.him} before.")
@@ -51,8 +51,10 @@ func _run():
 		
 		addButton("Confront", "Grab their attention", "confront")
 		addButton("Sneak past", "Success chance: "+str(Util.roundF(getSlipByChance(), 1))+"%. Try to avoid them", "sneak_past")
-		
+
 	if(state in ["confront", "spotted", "spottedstealing"]):
+		playAnimation(StageScene.Duo, "stand", {npc=npcID})
+
 		if(state == "confront"):
 			saynn("You decide not to hide in the shadows and openly confront the guard. You step towards {npc.him} and get {npc.his} attention.")
 		elif(state == "spotted"):
@@ -218,6 +220,8 @@ func _run():
 		addButton("Leave", "Just leave before anyone else sees you", "endthescene")
 		
 	if(state == "cuff_fail"):
+		playAnimation(StageScene.Duo, "stand", {npc=npcID})
+
 		saynn("You sneak up behind the guard and suddenly grab {npc.him} by the neck while your other hand searches through {npc.his} equipment.")
 		
 		saynn("[say=npc]"+RNG.pick([

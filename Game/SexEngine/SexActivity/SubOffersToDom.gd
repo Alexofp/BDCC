@@ -19,6 +19,7 @@ func getSupportedSexTypes():
 		SexType.StocksSex: true,
 		#SexType.SlutwallSex: true,
 		#SexType.BitchsuitSex: true,
+		SexType.TentaclesSex: true,
 	}
 
 func isStocksSex() -> bool:
@@ -42,6 +43,8 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 		return
 	if(!isSubPC && _subInfo.isResistingSlightly()):
 		return
+	if(isSubPC && _subInfo.shouldFullyObey()): # Shouldn't beg if hypnotized
+		return
 	
 	for theTag in TagsThatPreventBegging:
 		if(_sexEngine.hasTag(_subInfo.charID, theTag)):
@@ -63,7 +66,7 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 		if(!theFetishes.empty()):
 			for fetishID in theFetishes:
 				var subFetishID:String = Fetish.getOppositeFetish(fetishID)
-				fetishMod = max(fetishMod, _subFetishHolder.getFetish(subFetishID))
+				fetishMod = min(fetishMod, _subFetishHolder.getFetish(subFetishID))
 		else:
 			fetishMod = 1.0
 			

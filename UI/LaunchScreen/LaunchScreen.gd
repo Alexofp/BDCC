@@ -4,6 +4,11 @@ onready var modDescriptionLabel = $VBoxContainer/HBoxContainer/VBoxContainer/Pan
 onready var modVList = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/ModList
 onready var modFileList = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/ModFileList
 onready var modDisableButton = $VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer2/VBoxContainer/HFlowContainer/ModDisableButton
+onready var modCountLabel = $VBoxContainer/HBoxContainer/PanelContainer/VBoxContainer/orderhb/Label
+onready var build_pck_button = $"%BuildPCKButton"
+onready var open_mods_folder = $"%OpenModsFolder"
+onready var search_line_edit = $"%SearchLineEdit"
+
 onready var debug_button = $"%DebugButton"
 onready var building_pck_panel = $"%BuildingPCKPanel"
 
@@ -11,16 +16,19 @@ onready var troubleshooting_screen = $"%TroubleshootingScreen"
 
 var launchModEntryScene = preload("res://UI/LaunchScreen/LaunchModEntry.tscn")
 
-var currentModOrder = []
+var currentModOrder:Array = []
 var selectedEntry = null
+var launchModEntries:Array = []
 
 export(Resource) var GlobalTheme
 
 const modOrderPath = "user://modOrder.json"
 const pckversionPath = "user://bdccpckversion.txt"
-var foundBDCC = false
+var foundBDCC:bool = false
 
 var startedPlaying:bool = false # Used to prevent the bug where you sometimes double-tap the play button on mobile
+
+var SHOW_THIS_SCREEN_ANYWAY:bool = false # DON'T FORGET TO CHANGE TO false BEFORE SHIPPING
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,25 +43,23 @@ func _ready():
 		if(OS.has_touchscreen_ui_hint()):
 			GlobalTheme.rename_stylebox("scrollTouch", "scroll", "VScrollBar")
 	
-	var rawModList = GlobalRegistry.getRawModList()
+	var rawModList := GlobalRegistry.getRawModList()
 	if(GlobalRegistry.hasModSupport() && OS.get_name() == "Android" && (rawModList.size() > 0 || OPTIONS.shouldShowModdedLauncher())):
 		if(Util.readFile(pckversionPath) != GlobalRegistry.getGameVersionString()):
 			yield(generateBDCCpckFile(), "completed")
 			rawModList = GlobalRegistry.getRawModList()
-			
-	var SHOW_THIS_SCREEN_ANYWAY = false # DON'T FORGET TO CHANGE TO false BEFORE SHIPPING
-	
+
 	if(GlobalRegistry.doesLoadLockFileExist()): # Game crashed during loading last time
 		SHOW_THIS_SCREEN_ANYWAY = true
 		debug_button["custom_colors/font_color"] = Color.yellow
 	
 	if(OS.get_name() == "Android" || SHOW_THIS_SCREEN_ANYWAY):
-		$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/TestButton.visible = true
+		build_pck_button.visible = true
 	else:
-		$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/TestButton.visible = false
+		build_pck_button.visible = false
 	
 	if(OS.get_name() in ["Android", "HTML5"]):
-		$VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/OpenModsFolder.visible = false
+		open_mods_folder.visible = false
 	
 	if(!SHOW_THIS_SCREEN_ANYWAY && !OPTIONS.shouldShowModdedLauncher()):
 		if(!GlobalRegistry.hasModSupport() || rawModList.size() == 0):
@@ -63,9 +69,9 @@ func _ready():
 	checkModOrderAndFillData(rawModList)
 
 func checkModOrderAndFillData(rawModList):
-	var loadedOrder = loadOrderFromFile()
+	var loadedOrder:Array = loadOrderFromFile()
 	
-	var finalOrder = []
+	var finalOrder:Array = []
 	var theFile = File.new()
 	for modEntry in loadedOrder:
 		if(!theFile.file_exists(modEntry["path"])):
@@ -111,7 +117,7 @@ func saveOrderIntoFile(saveData):
 	
 	save_game.close()
 
-func loadOrderFromFile():
+func loadOrderFromFile() -> Array:
 	var save_game = File.new()
 	if not save_game.file_exists(modOrderPath):
 		print("LaunchScreen: No mod order is found")
@@ -138,7 +144,7 @@ func loadOrderFromFile():
 		if(!(modEntry["path"] is String) || !(modEntry["disabled"] is bool)):
 			return []
 			
-	var result = []
+	var result:Array = []
 	for loadedModEntry in saveData:
 		var modEntry = {
 			path = loadedModEntry["path"],
@@ -150,16 +156,52 @@ func loadOrderFromFile():
 	return result
 
 func updateModList():
-	Util.delete_children(modVList)
+	var theFilterText:String = search_line_edit.text.to_lower()
+	var hasFilterText:bool = !theFilterText.empty()
 	
-	for modEntry in currentModOrder:
+	launchModEntries.clear()
+	Util.delete_children(modVList)
+	var modsCount:int = currentModOrder.size()
+	modCountLabel.text = "Mod order"+(" ("+str(modsCount)+")" if modsCount else "")
+	for modEntryIdx in range(modsCount): # need the idx, save processing power (hopefully?)
+		var modEntry:Dictionary = currentModOrder[modEntryIdx]
+		var theModName:String = modEntry["name"]
+		var theSearchName:String = theModName.to_lower()
+		
+		if(hasFilterText && !(theFilterText in theSearchName)):
+			continue
+		
 		var newEntry = launchModEntryScene.instance()
 		modVList.add_child(newEntry)
+		newEntry.entryIndex = modEntryIdx
 		newEntry.setModEntry(modEntry)
 		newEntry.connect("onSelected", self, "onModEntryClicked")
+		newEntry.connect("onDoubleClicked", self, "toggleModEntryDisabled")
+		newEntry.connect("onDragOntoAnotherEntry",self,"modEntryDroppedData")
+		launchModEntries.append(newEntry)
+	
+	updateModListSelection()
+
+
+func updateModListSelection():
+	for theEntry in launchModEntries:
+		if(theEntry.storedEntry == selectedEntry):
+			theEntry.makeActive()
+		else:
+			theEntry.makeInactive()
+
+func modEntryDroppedData(ar:Array=[]):
+	if ar.size()!=2:
+		return
+	ar.sort()
+	
+	var entry1 = currentModOrder.pop_at(ar[1])
+	var entry2 = currentModOrder.pop_at(ar[0])
+	currentModOrder.insert(ar[0],entry1)
+	currentModOrder.insert(ar[1],entry2)
 		
-		if(modEntry == selectedEntry):
-			newEntry.makeActive()
+	ensureBDCCIsFirst()
+	updateModList()
 
 func _on_WithModsButton_pressed():
 	if(startedPlaying):
@@ -168,7 +210,6 @@ func _on_WithModsButton_pressed():
 	saveOrderIntoFile(currentModOrder)
 	
 	GlobalRegistry.loadModOrder(currentModOrder)
-	#GlobalRegistry.registerEverything()
 	GlobalRegistry.tempCurrentModOrder = []
 	var _ok = get_tree().change_scene("res://UI/LoadingScreen.tscn")#"res://UI/MainMenu/MainMenu.tscn"
 
@@ -178,14 +219,12 @@ func _on_NoModsButton_pressed():
 	startedPlaying = true
 	saveOrderIntoFile(currentModOrder)
 	
-	#GlobalRegistry.loadModOrder(currentModOrder)
-	#GlobalRegistry.registerEverything()
 	GlobalRegistry.tempCurrentModOrder = []
 	var _ok = get_tree().change_scene("res://UI/LoadingScreen.tscn")#"res://UI/MainMenu/MainMenu.tscn"
 
 func onModEntryClicked(entry):
 	selectedEntry = entry
-	updateModList()
+	updateModListSelection()
 	updateSelectedEntry()
 
 func updateSelectedEntry():
@@ -274,14 +313,16 @@ func tryToPopulateFilesList():
 		modFileList.add_item("Couldn't load any files")
 	return "Failed to load info"
 
-
-func _on_ModDisableButton_pressed():
-	if(selectedEntry == null or selectedEntry["name"] == "BDCC.pck"):
+func toggleModEntryDisabled(entry:Dictionary=selectedEntry) -> void:
+	if(entry == null or entry["name"] == "BDCC.pck"):
 		return
 	
-	selectedEntry["disabled"] = !selectedEntry["disabled"]
+	entry["disabled"] = !entry["disabled"]
 	updateModList()
 	updateSelectedEntry()
+
+func _on_ModDisableButton_pressed():
+	toggleModEntryDisabled(selectedEntry)
 
 
 func _on_MoveUpButton_pressed():
@@ -566,6 +607,11 @@ func _on_HTTPRequestMods_request_completed(_result: int, _response_code: int, _h
 		var theName:String = modEntry["name"]
 		#var thePath:String = modEntry["path"]
 		
+#		if(true): # Uncomment to test how broken mods look
+#			modEntry["broken"] = true
+#			amBroken += 1
+#			continue
+		
 		if(!_theModsList.has(theName) || !(_theModsList[theName] is Dictionary)):
 			continue
 		
@@ -580,3 +626,12 @@ func _on_HTTPRequestMods_request_completed(_result: int, _response_code: int, _h
 		updateModList()
 		updateSelectedEntry()
 	
+
+func getNodeWithEntry(modEntry={}):
+	for launchModEntry in modVList.get_children():
+		if launchModEntry.get("storedEntry")==modEntry:
+			return launchModEntry
+	return null
+
+func _on_search_text_changed(_new_text:String):
+	updateModList()

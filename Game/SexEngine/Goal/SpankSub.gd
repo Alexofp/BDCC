@@ -7,7 +7,7 @@ func getVisibleName():
 	return "Spank sub"
 
 func isPossible(_sexEngine, _domInfo, _subInfo, _data):
-	if(_subInfo.isUnconscious()):
+	if(_sexEngine.noViolence || _subInfo.isUnconscious()):
 		return false
 	if(_subInfo.getConsciousness() <= 0.5):
 		return false

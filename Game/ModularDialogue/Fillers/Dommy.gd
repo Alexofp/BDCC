@@ -145,7 +145,6 @@ func getText(_id:String, _args:Dictionary):
 			"Fine. I give up.",
 			"I'm not dumb. I know I can't win.",
 			"I surrender. But not because I'm weak.",
-			"On your knees if you're surrendering, whore!",
 			"Fine, I’ll give up.. Maybe.",
 			"You know you're nothing, don’t you? This means nothing..",
 		]

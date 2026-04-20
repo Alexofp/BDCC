@@ -29,7 +29,7 @@ func isStocksSex() -> bool:
 func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
 	if(_subInfo.getChar().isPlayer() && GM.main.getEncounterSettings().isGoalDisabledForSubPC(SexGoal.TieUp)):
 		return 0.0
-	var mult = 1.0
+	var mult := 1.0
 	# Inmates don't have much bdsm gear
 	if(_domInfo.getChar().getCharacterType() == CharacterType.Inmate):
 		mult = 0.1
@@ -43,11 +43,13 @@ func getTags(_indx:int) -> Array:
 	return []
 
 func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexSubInfo):
-	var actions = []
+	var actions:Array = []
 	var dom:BaseCharacter = _domInfo.getChar()
 	var sub:BaseCharacter = _subInfo.getChar()
 	
 	var usableItems:Array = []
+	
+	var _isSubPC:bool = _subInfo.getChar().isPlayer()
 	
 	if(_domInfo.getChar().isPlayer()):
 		if(_subInfo.getChar().isDynamicCharacter()):
@@ -57,8 +59,12 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	else:
 		if(_sexEngine.isBondageDisabled()):
 			return
+		if(_isSubPC):
+			if(GM.main.getEncounterSettings().isGoalDisabledForSubPC(SexGoal.TieUp)):
+				return
+			
 		
-		var itemTagToUse = ItemTag.CanBeForcedByGuards
+		var itemTagToUse:int = ItemTag.CanBeForcedByGuards
 		if(_sexEngine.getSexTypeID() == SexType.StocksSex):#(isStocksSex()):
 			itemTagToUse = ItemTag.CanBeForcedInStocks
 		
@@ -71,9 +77,15 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 					if(!item.hasBuff(Buff.RingGagBuff)):
 						continue
 			
+			if(item.hasTag(ItemTag.ChastityCage) && (_sexEngine.hasTag(_subInfo.charID, SexActivityTag.PenisInside) || _sexEngine.hasTag(_subInfo.charID, SexActivityTag.PenisUsed))):
+				continue
+			
+			if(_isSubPC && item.hasTag(ItemTag.Hypnovisor) && GM.main.getEncounterSettings().isGoalDisabledForSubPC(SexGoal.Hypnotize)):
+				return
+			
 			usableItems.append(item)
 		
-	var countsByItemID = {}
+	var countsByItemID:Dictionary = {}
 	if(_domInfo.getChar().isPlayer()):
 		for item in usableItems:
 			if(!countsByItemID.has(item.id)):
@@ -130,20 +142,22 @@ func getStartActions(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo: SexS
 	return actions
 
 func startActivity(_args):
-	getSubInfo().addResistance(getSubInfo().fetishScore({Fetish.Bondage: -0.5})+0.3-getSubInfo().personalityScore({PersonalityStat.Subby: 0.2}))
-	getSubInfo().addLust(getSubInfo().fetishScore({Fetish.Bondage: 1.0}) * 20)
+	var theAction:String = _args[0]
+	if(theAction != "rem"):
+		getSubInfo().addResistance(getSubInfo().fetishScore({Fetish.Bondage: -0.5})+0.3-getSubInfo().personalityScore({PersonalityStat.Subby: 0.2}))
+		getSubInfo().addLust(getSubInfo().fetishScore({Fetish.Bondage: 1.0}) * 20)
 	
-	if(_args[0] == "pc"):
+	if(theAction == "pc"):
 		pcUniqueID = _args[1]
 		
 		var item = getDom().getInventory().getItemByUniqueID(pcUniqueID)
 		addText("{dom.You} {dom.youVerb('attempt')} to force "+str(item.getAStackName())+" onto {sub.you}!")
-	if(_args[0] == "npc"):
+	if(theAction == "npc"):
 		npcItemID = _args[1]
 	
 		var item = GlobalRegistry.getItemRef(npcItemID)
 		addText("{dom.You} {dom.youVerb('attempt')} to force "+str(item.getAStackName())+" onto {sub.you}!")
-	if(_args[0] == "rem"):
+	if(theAction == "rem"):
 		endActivity()
 		var itemUniqueID = _args[1]
 		var item:ItemBase = getSub().getInventory().getItemByUniqueID(itemUniqueID)

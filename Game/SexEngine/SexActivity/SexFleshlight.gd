@@ -136,12 +136,20 @@ func getActions(_indx:int):
 		if(state == "sex"):
 			addAction("pause", 0.0, "Pause stroking", "Give the sub some rest.")
 		
+		if(state == "inside" || state == "sex"):
+			if(canStuffEggIntoRaw(getSub(), GlobalRegistry.getCharacter(targetID), targetHole)):
+				addAction("stuffegg", 0.0, "Stuff egg", "Make the sub stuff an egg into them..", {A_PRIORITY: 2})
+		
 	if(_indx == SUB_0):
 		addAction("pullaway", getSubInfo().getResistScore(), "Pull away", "Try to pull away", {A_CHANCE: getSubResistChance(30.0, 25.0)})
 		if(isReadyToCumHandled(SUB_0)):
 			addAction("subcum", 1.0, "Orgasm!", "You are about to cum!", {A_PRIORITY: 1001})
 
 func doAction(_indx:int, _id:String, _action:Dictionary):
+	if(_id == "stuffegg"):
+		doStuffEggInto(SUB_0, getTargetIndx(), targetHole)
+		clearTargetIndx()
+		return
 	if(_id == "stop"):
 		endActivity()
 		addText("{dom.You} pulled away.")

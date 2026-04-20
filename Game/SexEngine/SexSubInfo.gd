@@ -91,6 +91,8 @@ func getConsciousness() -> float:
 	return getChar().getConsciousness()
 	
 func addConsciousness(newcon):
+	var isCon:bool = (getConsciousness() > 0.0)
+	
 	getChar().addConsciousness(newcon)
 	if(newcon < 0.0):
 		if(getConsciousness() < 0.5):
@@ -103,6 +105,9 @@ func addConsciousness(newcon):
 				addFrustration(abs(newcon))
 			else:
 				addSatisfaction(abs(newcon))
+	
+	if(isCon && charID == "pc" && getConsciousness() <= 0.0):
+		SexToyManager.sendTrigger(SexToyTrigger.OnLoseConsciousness)
 	
 func addFear(addfear):
 	if(getConsciousness() <= 1.0 && addfear > 0.0):

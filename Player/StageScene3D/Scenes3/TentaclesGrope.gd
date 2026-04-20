@@ -1,0 +1,107 @@
+extends BaseStageScene3D
+
+onready var animationTree = $AnimationTree
+onready var animationTree2 = $AnimationTree2
+onready var doll = $Doll3D
+#onready var doll2 = $Doll3D2
+onready var tentacles = $Tentacles
+
+func _init():
+	id = StageScene.TentaclesGrope
+
+func _ready():
+	animationTree.anim_player = animationTree.get_path_to(doll.getAnimPlayer3())
+	animationTree.active = true
+	animationTree2.anim_player = animationTree2.get_path_to(tentacles.animation_player3)
+	#animationTree2.anim_player = animationTree2.get_path_to(doll2.getAnimPlayer())
+	animationTree2.active = true
+
+func updateSubAnims():
+	pass
+#	if(doll.getArmsCuffed()):
+#		animationTree["parameters/CuffsBlend/blend_amount"] = 1.0
+#	else:
+#		animationTree["parameters/CuffsBlend/blend_amount"] = 0.0
+
+# StageScene.Duo, "kneel", {npc="nova", pc="pc"}
+func playAnimation(animID, _args = {}):
+	#var fullAnimID = animID
+	#if(animID is Array):
+	#	animID = animID[0]
+	
+	var firstDoll = "pc"
+	if(_args.has("pc")):
+		firstDoll = _args["pc"]
+	doll.prepareCharacter(firstDoll)
+
+	#doll.forceSlotToBeVisible(BodypartSlot.Penis)
+	
+	if(_args.has("bodyState")):
+		doll.applyBodyState(_args["bodyState"])
+	else:
+		doll.applyBodyState({})
+
+	updateSubAnims()
+	
+	tentacles.setSceneOptions(_args)
+	
+	#if(_args.has("cum") && _args["cum"] && !(animID in ["tease"])):
+	#	startCumInsideSolo(doll, 1.0)
+		#startCumInside(doll2, doll)
+		#startCumInside(doll, doll3)
+	if(_args.has("pcCum") && _args["pcCum"]):
+		startCumPenis(doll)
+	
+	var state_machine = animationTree["parameters/StateMachine/playback"]
+	var state_machine2:AnimationNodeStateMachinePlayback = animationTree2["parameters/StateMachine/playback"]
+
+	#if(animID != "tease" && animID != "teasedef"):
+	#	if(doll.getState("mouth") in ["", null]):
+	#		doll.setTemporaryState("mouth", "open")
+
+	if(animID == "tease"):
+		state_machine.travel("TentGropeTease_1-loop")
+		state_machine2.travel("TentGropeTease_2-loop")
+	if(animID == "grope"):
+		state_machine.travel("TentGrope_1-loop")
+		state_machine2.travel("TentGrope_2-loop")
+	if(animID == "gropefast"):
+		state_machine.travel("TentGropeFast_1-loop")
+		state_machine2.travel("TentGropeFast_2-loop")
+	elif(animID == "stroke"):
+		state_machine.travel("TentGropeStroke_1-loop")
+		state_machine2.travel("TentGropeStroke_2-loop")
+	elif(animID == "strokefast"):
+		state_machine.travel("TentGropeStrokeFast_1-loop")
+		state_machine2.travel("TentGropeStrokeFast_2-loop")
+	elif(animID == "cum"):
+		state_machine.travel("TentGropeCum_1-loop")
+		state_machine2.travel("TentGropeCum_2-loop")
+
+
+func canTransitionTo(_actionID, _args = []):
+	var firstDoll = "pc"
+	if(_args.has("pc")):
+		firstDoll = _args["pc"]
+
+	if(doll.getCharacterID() != firstDoll):
+		return false
+	return true
+
+func getSupportedStates():
+	return ["tease", "grope", "gropefast", "stroke", "strokefast", "cum"]
+
+func getVarNpcs():
+	return ["pc"]
+
+func getVarOptions():
+	var options = .getVarOptions()
+	
+	options["plant"] = {
+		type = "bool",
+	}
+	#options["cum"] = {
+	#	type = "bool",
+	#}
+	
+	return options

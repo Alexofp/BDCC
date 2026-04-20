@@ -206,7 +206,7 @@ func processBusyAllInteractions(howManySeconds:int):
 	
 	var interactionsCopy:Array = interactions.duplicate() # Duplicate because we will might be deleting them while iterating over them
 
-	for _i in range(howManyToProcess):
+	for _i in howManyToProcess:
 		var _indx:int = _i * howManyTicks + internalTick
 		if(_indx >= interactionsCopy.size()):
 			continue
@@ -594,7 +594,7 @@ func trySpawnSpecialRelationshipPawn() -> bool:
 	if(allSpecial.empty()):
 		return false
 	
-	#for _i in range(5):
+	#for _i in 5:
 	var theRandomSpecialCharID:String = RNG.pick(allSpecial)
 	if(usedCharIDsToday.has(theRandomSpecialCharID)):
 		#continue
@@ -650,7 +650,7 @@ func spawnMorningWave():
 		var share:float = float(pawnDistribution[charType]) / totalDistAm
 		var am:int = int(round(share * howManyToSpawn))
 		
-		for _i in range(am):
+		for _i in am:
 			trySpawnPawn(charType)
 	
 	#print("THERE ARE NOW "+str(getPawnCount())+" PAWNS")

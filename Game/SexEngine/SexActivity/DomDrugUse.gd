@@ -40,6 +40,8 @@ func getPossibleDrugsInfo(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 	var thedrugs:Array = []
 	if(_domInfo.getChar().isPlayer()):
 		for item in GM.pc.getInventory().getItemsWithTag(ItemTag.SexEngineDrug):
+			if(_sexEngine.disableTFPills && ItemTag.TFItem in item.getTags()):
+				continue
 			if(item.has_method("getSexEngineInfo")):
 				thedrugs.append({
 					id = item.id,
@@ -50,6 +52,8 @@ func getPossibleDrugsInfo(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 	
 	for itemID in GlobalRegistry.getItemIDsByTag(ItemTag.SexEngineDrug):
 		var item = GlobalRegistry.getItemRef(itemID)
+		if(_sexEngine.disableTFPills && ItemTag.TFItem in item.getTags()):
+			continue
 		if(item.has_method("getSexEngineInfo")):
 			thedrugs.append({
 				id = itemID,
@@ -62,6 +66,8 @@ func getPossibleCanApplyInfo(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subIn
 	var thedrugs:Array = []
 	for itemID in GlobalRegistry.getItemIDsByTag(ItemTag.SexEngineCanApply):
 		var item = GlobalRegistry.getItemRef(itemID)
+		if(_sexEngine.disableTFPills && ItemTag.TFItem in item.getTags()):
+			continue
 		if(item.has_method("getSexEngineInfo")):
 			thedrugs.append({
 				id = itemID,
@@ -276,6 +282,7 @@ func processTurn():
 		endActivity()
 		if(getState() == "offering"):
 			addText("{sub.You} ignored {dom.your} offer.")
+			getDomInfo().addAnger(0.25)
 			return
 		
 		if(getState() in ["forcing", "forcingCanApply"]):
@@ -470,6 +477,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			getDomInfo().addAnger(0.3)
 			endActivity()
 			addText("{sub.You} {sub.youVerb('manage', 'managed')} to make {dom.youHim} screw up the applying process!")
+			return
 		
 		getDomInfo().addAnger(0.1)
 		if(usedUniqueItemID != ""):
@@ -481,7 +489,7 @@ func generatePillVariants(theItemID:String):
 	pillVariants = []
 	
 	if(theItemID == "TFPill"):
-		for _i in range(3):
+		for _i in 3:
 			var newTFID:String = TFUtil.generateTFIDForAPill(pillVariants)
 			if(newTFID != ""):
 				pillVariants.append(newTFID)

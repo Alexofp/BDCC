@@ -38,6 +38,9 @@ func generateFluids():
 func getInventoryImage():
 	return "res://Images/Items/strapons/feeldoe.png"
 
+func getInventoryImageColor():
+	return clothesColor
+
 func getStraponTraits() -> Dictionary:
 	return {
 		PartTrait.PenisKnot: true,

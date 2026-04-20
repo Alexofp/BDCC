@@ -1,0 +1,192 @@
+[gd_scene load_steps=46 format=2]
+
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=3]
+[ext_resource path="res://Player/Props/Tentacles.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Player/StageScene3D/Scenes3/TentaclesDeepthroat.gd" type="Script" id=5]
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "CuffedArms-loop"
+
+[sub_resource type="AnimationNodeBlend2" id=4]
+filter_enabled = true
+filters = [ "Doll3D/Skeleton:Arm.L", "Doll3D/Skeleton:Arm.R", "Doll3D/Skeleton:ForeArm.L", "Doll3D/Skeleton:ForeArm.R", "Doll3D/Skeleton:Hand.L", "Doll3D/Skeleton:Hand.R" ]
+
+[sub_resource type="AnimationNodeAnimation" id=113]
+animation = "TentDeepFast_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=114]
+animation = "TentDeepInside_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=115]
+animation = "TentDeepTease_1-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=116]
+animation = "TentDeep_1-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=117]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=118]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=119]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=120]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=121]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=122]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=123]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=124]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=125]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=126]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=127]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=128]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=129]
+states/TentDeepFast_1-loop/node = SubResource( 113 )
+states/TentDeepFast_1-loop/position = Vector2( 437, 254 )
+states/TentDeepInside_1-loop/node = SubResource( 114 )
+states/TentDeepInside_1-loop/position = Vector2( 257, 144 )
+states/TentDeepTease_1-loop/node = SubResource( 115 )
+states/TentDeepTease_1-loop/position = Vector2( 429, 55 )
+states/TentDeep_1-loop/node = SubResource( 116 )
+states/TentDeep_1-loop/position = Vector2( 616, 154 )
+transitions = [ "TentDeepTease_1-loop", "TentDeepInside_1-loop", SubResource( 117 ), "TentDeepInside_1-loop", "TentDeepFast_1-loop", SubResource( 118 ), "TentDeepInside_1-loop", "TentDeepTease_1-loop", SubResource( 119 ), "TentDeepFast_1-loop", "TentDeepInside_1-loop", SubResource( 120 ), "TentDeepInside_1-loop", "TentDeep_1-loop", SubResource( 121 ), "TentDeep_1-loop", "TentDeepInside_1-loop", SubResource( 122 ), "TentDeepTease_1-loop", "TentDeepFast_1-loop", SubResource( 123 ), "TentDeepFast_1-loop", "TentDeepTease_1-loop", SubResource( 124 ), "TentDeepTease_1-loop", "TentDeep_1-loop", SubResource( 125 ), "TentDeep_1-loop", "TentDeepTease_1-loop", SubResource( 126 ), "TentDeep_1-loop", "TentDeepFast_1-loop", SubResource( 127 ), "TentDeepFast_1-loop", "TentDeep_1-loop", SubResource( 128 ) ]
+start_node = "TentDeepTease_1-loop"
+
+[sub_resource type="AnimationNodeBlendTree" id=130]
+graph_offset = Vector2( -102.736, 100.243 )
+nodes/Animation/node = SubResource( 3 )
+nodes/Animation/position = Vector2( 140, 280 )
+nodes/CuffsBlend/node = SubResource( 4 )
+nodes/CuffsBlend/position = Vector2( 440, 160 )
+nodes/StateMachine/node = SubResource( 129 )
+nodes/StateMachine/position = Vector2( 200, 140 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "CuffsBlend", 0, "StateMachine", "CuffsBlend", 1, "Animation", "output", 0, "CuffsBlend" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=91]
+
+[sub_resource type="AnimationNodeAnimation" id=132]
+animation = "TentDeepFast_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=133]
+animation = "TentDeepInside_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=134]
+animation = "TentDeepTease_2-loop"
+
+[sub_resource type="AnimationNodeAnimation" id=135]
+animation = "TentDeep_2-loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=136]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=137]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=138]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=139]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=140]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=141]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=142]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=143]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=144]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=145]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=146]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=147]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachine" id=148]
+states/TentDeepFast_2-loop/node = SubResource( 132 )
+states/TentDeepFast_2-loop/position = Vector2( 507, 256 )
+states/TentDeepInside_2-loop/node = SubResource( 133 )
+states/TentDeepInside_2-loop/position = Vector2( 288, 146 )
+states/TentDeepTease_2-loop/node = SubResource( 134 )
+states/TentDeepTease_2-loop/position = Vector2( 498, 68 )
+states/TentDeep_2-loop/node = SubResource( 135 )
+states/TentDeep_2-loop/position = Vector2( 699, 146 )
+transitions = [ "TentDeepTease_2-loop", "TentDeepInside_2-loop", SubResource( 136 ), "TentDeepInside_2-loop", "TentDeepTease_2-loop", SubResource( 137 ), "TentDeepInside_2-loop", "TentDeepFast_2-loop", SubResource( 138 ), "TentDeepFast_2-loop", "TentDeepInside_2-loop", SubResource( 139 ), "TentDeepFast_2-loop", "TentDeep_2-loop", SubResource( 140 ), "TentDeep_2-loop", "TentDeepFast_2-loop", SubResource( 141 ), "TentDeepTease_2-loop", "TentDeep_2-loop", SubResource( 142 ), "TentDeep_2-loop", "TentDeepTease_2-loop", SubResource( 143 ), "TentDeepTease_2-loop", "TentDeepFast_2-loop", SubResource( 144 ), "TentDeepFast_2-loop", "TentDeepTease_2-loop", SubResource( 145 ), "TentDeepInside_2-loop", "TentDeep_2-loop", SubResource( 146 ), "TentDeep_2-loop", "TentDeepInside_2-loop", SubResource( 147 ) ]
+start_node = "TentDeepTease_2-loop"
+graph_offset = Vector2( -78, -30 )
+
+[sub_resource type="AnimationNodeBlendTree" id=131]
+graph_offset = Vector2( -75, -20 )
+nodes/StateMachine/node = SubResource( 148 )
+nodes/StateMachine/position = Vector2( 398, 168 )
+nodes/output/position = Vector2( 680, 180 )
+node_connections = [ "output", 0, "StateMachine" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=23]
+
+[node name="TentaclesDeepthroat" instance=ExtResource( 2 )]
+transform = Transform( 0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -0.038, 0, 0 )
+script = ExtResource( 5 )
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="0"]
+transform = Transform( 1.528, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.328, 11.717 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Doll3D" parent="." index="1" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.55809, 0, 0 )
+
+[node name="Tentacles" parent="." index="2" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.55809, 0, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource( 130 )
+anim_player = NodePath("../Doll3D/DollSkeleton3/AnimationPlayer")
+parameters/CuffsBlend/blend_amount = 0
+parameters/StateMachine/playback = SubResource( 91 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource( 131 )
+anim_player = NodePath("../Tentacles/TentaclesAnims3/AnimationPlayer")
+parameters/StateMachine/playback = SubResource( 23 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]
+[editable path="Doll3D/DollSkeleton3"]
+[editable path="Tentacles"]
+[editable path="Tentacles/TentaclesAnims3"]
+[editable path="Tentacles/TentaclesTiny"]

@@ -43,7 +43,7 @@ func _run():
 		saynn(sexEngine.getFinalOutput())
 		
 		if(!sexEngine.hasSexEnded()):
-			if(sexEngine.isDom("pc")):
+			if(sexEngine.canEndSexAnyTime()):
 				addExtraButtonAt(4, "END SEX", "Enough fun for now", "stopsex")
 			else:
 				addExtraButtonAt(4, "QUICK SEX", "Simulate the sex for a while until it ends", "simulatesex")

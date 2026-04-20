@@ -16,7 +16,10 @@ func updateSubAnims():
 		animationTree["parameters/CuffsBlend/blend_amount"] = 1.0
 	else:
 		animationTree["parameters/CuffsBlend/blend_amount"] = 0.0
-	
+
+func doTheFlipThing() -> bool:
+	return true
+
 func playAnimation(animID, _args = {}):
 	var fullAnimID = animID
 	if(animID is Array):
@@ -32,7 +35,7 @@ func playAnimation(animID, _args = {}):
 	else:
 		doll.applyBodyState({})
 	
-	if(OPTIONS.shouldSoloDollLookRight()):
+	if(doTheFlipThing() && OPTIONS.shouldSoloDollLookRight()):
 		doll.scale.x = -abs(doll.scale.x)
 		flipper.scale.x = -abs(flipper.scale.x)
 	else:

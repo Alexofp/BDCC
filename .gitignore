@@ -14,3 +14,7 @@ logs/
 /.idea/
 /*.iml
 *.blend1
+
+# Substance painter files
+*.spp
+*.assbin

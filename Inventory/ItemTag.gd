@@ -44,6 +44,8 @@ enum {
 	
 	KeptAfterDrugDenRun,
 	
+	TFItem,
+	
 	ITEMTAGCOUNT,
 }
 
@@ -89,6 +91,8 @@ const tagNames = [
 	"ImaginaryRestraint",
 	
 	"KeptAfterDrugDenRun",
+	
+	"TFItem",
 ]
 
 static func nameToTag(tagName):

@@ -203,6 +203,9 @@ func getActions(_indx:int):
 	if(_indx == DOM_0):
 		addAction("stop", getStopScore(), "Stop Buttstack", "Stop the threesome")
 		
+		if(state in ["inside", "sex"]):
+			addEggStuffButton(DOM_0, domFocus, getCurrentHole())
+		
 		if(state == "inside"):
 			addAction("fuckMore", getContinueSexScore(_indx, domFocus, getCurrentHole())-getStopScore(), "Continue fucking", "Start fucking them again")
 			addAction("pullOut", getStopScore(), "Pull out", "Pull your member out")
@@ -234,6 +237,8 @@ func getActions(_indx:int):
 				addAction("subcum", 1.0, "Cum!", "You're about to cum!", {A_PRIORITY: 1001})
 
 func doAction(_indx:int, _id:String, _action:Dictionary):
+	if(_id == "stuffegg"):
+		doStuffEggInto(DOM_0, domFocus, getCurrentHole())
 	if(_id == "switch"):
 		
 		if(domFocus == SUB_0):

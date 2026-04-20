@@ -14,7 +14,7 @@ const Anus = "anus"
 const Tail = "tail"
 const Legs = "legs"
 
-static func getAll():
+static func getAll() -> Array:
 	return [Head, Hair, Ears, Horns, Body, Arms, Breasts, Penis, Vagina, Anus, Tail, Legs]
 
 static func getVisibleName(slot: String):
@@ -43,7 +43,7 @@ static func getVisibleName(slot: String):
 	elif(slot == Head):
 		return "Head"
 	else:
-		return "Error"
+		return slot
 
 static func getVisibleNameNoCap(slot: String):
 	if(slot == Horns):
@@ -71,7 +71,7 @@ static func getVisibleNameNoCap(slot: String):
 	elif(slot == Head):
 		return "head"
 	else:
-		return "error"
+		return slot
 
 static func getSlotChildName(slot: String):
 	if(slot == Head):
@@ -100,7 +100,7 @@ static func getSlotChildName(slot: String):
 		return "butt"
 	return "body"
 
-static func isEssential(slot):
+static func isEssential(slot:String) -> bool:
 	if(slot == Horns):
 		return false
 	if(slot == Tail):

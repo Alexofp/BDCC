@@ -110,7 +110,7 @@ func _react(_action: String, _args):
 		aimCamera(GM.pc.location)
 		GM.ES.triggerReact(Trigger.EnteringRoom, [GM.pc.location, _args[1]])
 		
-		if(!GM.main.checkTFs()):
+		if(!GM.main.checkExtraScenes()):
 			GM.main.showLog()
 		return
 			
@@ -150,7 +150,25 @@ func _react(_action: String, _args):
 		#runScene("GenericSexScene", [["pc"], ["rahi", "socket"]])
 		#runScene("GenericSexScene", [["avy"], ["rahi"]])
 		#runScene("GenericSexScene", ["rahi", "pc", SexType.DefaultSex, {SexMod.SubsStartUnconscious: true}])
-		runScene("GenericSexScene", ["pc", "rahi", SexType.BitchsuitSex, {}])
+		#runScene("GenericSexScene", ["pc", "rahi", SexType.BitchsuitSex, {}])
+		
+		GM.pc.giveBodypartUnlessSame(GlobalRegistry.createBodypart("vaginaEggs"))
+		GM.pc.menstrualCycle.newCycle()
+		GM.pc.menstrualCycle.forceIntoHeat()
+		GM.pc.menstrualCycle.forceOvulate()
+		#getCharacter("nova").fillBalls(1.0)
+		#GM.pc.cummedInVaginaBy("nova")
+		GM.pc.menstrualCycle.forceImpregnateBy("nova")
+		#GM.pc.removeBodypart(BodypartSlot.Penis)
+		GM.pc.getInventory().addItem(GlobalRegistry.createItem("Strapon"))
+		
+		runScene("GenericSexScene", ["pc", "rahi"])
+		
+		#var theCycle:MenstrualCycle = GM.pc.getMenstrualCycle()
+		#if(theCycle):
+		#	theCycle.addTentacleEgg("", BigEggType.Plant, 100, OrificeType.Vagina)
+		#runScene("GenericSexScene", ["psplantTentacles", "nova", SexType.TentaclesSex, {SexMod.PCControlsDoms:true}])
+		#runScene("GenericSexScene", ["nova", "pc", SexType.TentaclesSex, {}])
 		
 		#runScene("GenericSexScene", [NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true}), "socket", SexType.SlutwallSex])
 		#runScene("GenericSexScene", [NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Inmates, [[NpcCon.HasPenis], [NpcCon.NoChastity]], InmateGenerator.new(), {NpcGen.HasPenis: true, NpcGen.NoChastity: true}), "avy"])

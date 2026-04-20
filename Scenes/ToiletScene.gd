@@ -15,7 +15,7 @@ func _run():
 	if(state == "fillmenu"):
 		saynn("How do you wanna fill something?")
 		
-		if(GM.main.getTimeInGlobalSeconds() >= (getFlag("LastTimePeed", 0) + 60*60*4)):
+		if(GM.pc.getFluidAmount(FluidSource.Pissing) >= 100):
 			if(GM.pc.isWearingPortalPanties()):
 				addDisabledButton("Pee into..", "Your portal panties prevent you from peeing into containers")
 			elif(GM.pc.getInventory().getItemsWithTag(ItemTag.CanPeeInto).size() == 0):

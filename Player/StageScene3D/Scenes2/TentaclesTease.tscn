@@ -105,4 +105,6 @@ parameters/StateMachine/playback = SubResource( 23 )
 [editable path="Doll3D"]
 [editable path="Doll3D/DollSkeleton"]
 [editable path="Doll3D/DollSkeleton2"]
+[editable path="Doll3D/DollSkeleton3"]
 [editable path="Tentacles"]
+[editable path="Tentacles/TentaclesAnims3"]

@@ -40,3 +40,8 @@ func _on_ProfileButton_pressed():
 		printLine("Perfomance profiler enabled")
 	else:
 		printLine("Perfomance profiler disabled")
+
+
+func _on_ConsoleInput_gui_input(event):
+	if event is InputEventKey: # hacky but should work and allow toggling the console, and keep the typed character if need be
+		Console._unhandled_key_input(event)

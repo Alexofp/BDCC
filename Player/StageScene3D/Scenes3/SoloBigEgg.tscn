@@ -1,0 +1,115 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/StageScene3D/Scenes3/SoloBigEgg.gd" type="Script" id=2]
+[ext_resource path="res://Player/Player3D/Doll3D.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player/Props/platform.png" type="Texture" id=4]
+[ext_resource path="res://Player/Props/chair.png" type="Texture" id=5]
+[ext_resource path="res://Player/StageScene3D/Scenes/DollSoloAndCuffsTree.tres" type="AnimationNodeBlendTree" id=6]
+[ext_resource path="res://Player/Props/TentacleEgg.glb" type="PackedScene" id=7]
+[ext_resource path="res://Player/Props/Textures/EggSmallColor.png" type="Texture" id=8]
+[ext_resource path="res://Player/Props/Textures/EggRoughness.png" type="Texture" id=9]
+[ext_resource path="res://Player/Props/Textures/EggNormal.png" type="Texture" id=10]
+[ext_resource path="res://Player/Props/TentacleNest.glb" type="PackedScene" id=11]
+[ext_resource path="res://Player/Props/Textures/TentacleNest_DefaultMaterial_BaseColor.png" type="Texture" id=12]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
+
+[sub_resource type="SpatialMaterial" id=3]
+params_cull_mode = 1
+params_grow = true
+params_grow_amount = 0.1
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=2]
+next_pass = SubResource( 3 )
+params_diffuse_mode = 4
+albedo_texture = ExtResource( 8 )
+roughness_texture = ExtResource( 9 )
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = ExtResource( 10 )
+
+[sub_resource type="SpatialMaterial" id=5]
+params_diffuse_mode = 4
+albedo_texture = ExtResource( 12 )
+roughness_texture = ExtResource( 9 )
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = ExtResource( 10 )
+
+[sub_resource type="SpatialMaterial" id=6]
+params_cull_mode = 1
+params_grow = true
+params_grow_amount = 0.03
+albedo_color = Color( 0, 0, 0, 1 )
+
+[node name="SoloBigEgg" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Doll3D" parent="." index="0" instance=ExtResource( 3 )]
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -1.61256, 0, 0 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="1"]
+tree_root = ExtResource( 6 )
+anim_player = NodePath("../Doll3D/DollSkeleton/AnimationPlayer")
+parameters/AnimationNodeStateMachine/playback = SubResource( 1 )
+parameters/CuffsBlend/blend_amount = 0.0
+
+[node name="Sprite3D" type="Sprite3D" parent="." index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.196641, -1.77462 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 1022, 62 )
+
+[node name="Flipper" type="Spatial" parent="." index="3"]
+unique_name_in_owner = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.61256, 0, 0 )
+
+[node name="Chair" type="Sprite3D" parent="Flipper" index="0"]
+unique_name_in_owner = true
+transform = Transform( -1, 0, 0, 0, 1, 0, 0, 0, 1, -1.058, 1.928, 0.069 )
+texture = ExtResource( 5 )
+
+[node name="FarLeft" type="Position3D" parent="Flipper" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.18997, 5.39323, 1.77914 )
+
+[node name="FarRight" type="Position3D" parent="Flipper" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.19, 5.393, 1.779 )
+
+[node name="Above" type="Position3D" parent="Flipper" index="3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.2541, 1.779 )
+
+[node name="Floor" type="Position3D" parent="Flipper" index="4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.104177, 0.477503 )
+
+[node name="TentacleEgg" parent="." index="4" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82881, 1.66774, 0 )
+
+[node name="TentacleEgg" parent="TentacleEgg" index="0"]
+material/0 = SubResource( 2 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="." index="5"]
+transform = Transform( 0.556841, 0.745054, -0.367182, 0.339808, 0.199035, 0.919193, 0.757931, -0.636615, -0.142345, 0, 0.929249, 0 )
+light_energy = 0.5
+
+[node name="DirectionalLight2" type="DirectionalLight" parent="." index="6"]
+transform = Transform( 0.316087, 0.789819, -0.525618, -0.574674, 0.600213, 0.556322, 0.754877, 0.126213, 0.643608, 3.3539, 0.792482, -0.0333176 )
+light_energy = 0.169
+light_specular = 0.0
+
+[node name="TentacleNest" parent="." index="7" instance=ExtResource( 11 )]
+transform = Transform( 1.228, 0, 0, 0, 1.228, 0, 0, 0, 1.228, 1.87194, 1.83752, 0.187143 )
+
+[node name="TentacleNest" parent="TentacleNest" index="0"]
+material/0 = SubResource( 5 )
+
+[node name="TentacleNestOutline" parent="TentacleNest" index="1"]
+material/0 = SubResource( 6 )
+
+[editable path="Doll3D"]
+[editable path="Doll3D/DollSkeleton"]
+[editable path="Doll3D/DollSkeleton2"]
+[editable path="Doll3D/DollSkeleton3"]
+[editable path="TentacleEgg"]
+[editable path="TentacleNest"]

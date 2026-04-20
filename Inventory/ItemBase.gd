@@ -235,9 +235,10 @@ func getPossibleActions():
 	]
 	
 func saveData():
-	var data = {}
+	var data:Dictionary = {}
 	
-	data["amount"] = amount
+	if(amount != 1):
+		data["amount"] = amount
 	
 	if(restraintData != null):
 		data["restraintData"] = restraintData.saveData()
@@ -254,7 +255,10 @@ func saveData():
 	return data
 	
 func loadData(_data):
-	amount = SAVE.loadVar(_data, "amount", 1)
+	if(_data.has("amount")):
+		amount = SAVE.loadVar(_data, "amount", 1)
+	else:
+		amount = 1
 	
 	if(restraintData != null):
 		restraintData.loadData(SAVE.loadVar(_data, "restraintData", {}))
@@ -400,6 +404,9 @@ func isImportant():
 
 func isRestraint():
 	return restraintData != null
+
+func isRestraintShouldKeep() -> bool:
+	return false
 
 func generateRestraintData():
 	pass

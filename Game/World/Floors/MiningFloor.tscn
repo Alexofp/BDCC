@@ -33,7 +33,7 @@ self_modulate = Color( 1, 1, 0.7, 1 )
 position = Vector2( -128, 0 )
 roomName = "Engineering lobby"
 roomID = "eng_lobby"
-roomDescription = "This cave looks the same as all the others except the strapped together grated and carved rock floors of the mines become a much more established looking industrial steel plating on the ground. All the wall lights bored into the rock make this place a fair bit brighter than the rest of the minshafts, with wires and pipes in the trailing the ceiling above. If you squint, you can even see the tether hooks for a zero-gravity environment.
+roomDescription = "This cave looks the same as all the others except the strapped together grated and carved rock floors of the mines become a much more established looking industrial steel plating on the ground. All the wall lights bored into the rock make this place a fair bit brighter than the rest of the mineshafts, with wires and pipes in the trailing the ceiling above. If you squint, you can even see the tether hooks for a zero-gravity environment.
 
 In the reletive silence, you can hear the low rumble of heavy machinery through the rock walls."
 roomColor = 6

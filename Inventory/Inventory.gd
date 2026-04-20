@@ -285,6 +285,12 @@ func equipItem(item):
 	item.currentInventory = self
 	#add_child(item)
 	emit_signal("equipped_items_changed")
+	
+	if(SexToyManager.enabled && item.isRestraint()):
+		var theChar = getCharacter()
+		if(theChar && theChar.isPlayer()):
+			SexToyManager.sendTrigger(SexToyTrigger.OnBondageLocked)
+	
 	return true
 
 func unequipItem(item):
@@ -348,7 +354,7 @@ func forceEquipStoreOtherUnlessRestraint(item):
 	
 	if(hasSlotEquipped(slot)):
 		var storedItem = removeItemFromSlot(slot)
-		if(!storedItem.isRestraint() || storedItem.isImportant()):
+		if(!storedItem.isRestraint() || storedItem.isImportant() || storedItem.isRestraintShouldKeep()):
 			addItem(storedItem)
 	
 	return equipItem(item)
@@ -785,6 +791,21 @@ func removeTFPillWithEffect(tfID:String):
 			if(theTFID == tfID):
 				item.removeXOrDestroy(1)
 				return
+
+func hasAnyOffspringEggs() -> bool:
+	for item in items:
+		if(item.id == "EggGeneric"):
+			if(item.isOffspringEgg()):
+				return true
+	return false
+
+func getOffspringEggs() -> Array:
+	var result:Array = []
+	for item in items:
+		if(item.id == "EggGeneric"):
+			if(item.isOffspringEgg()):
+				result.append(item)
+	return result
 
 func saveData():
 	var data = {}

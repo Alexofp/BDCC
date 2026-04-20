@@ -102,6 +102,7 @@ func _init():
 		InterestTopic.NoCock: Interest.KindaLikes,
 		InterestTopic.HasCockOnly: Interest.KindaLikes,
 	}
+	npcHasMenstrualCycle = true
 	
 func _getName():
 	if(GM.main != null):
