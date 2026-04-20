@@ -259,6 +259,9 @@ func startNewGame():
 		scene.queue_free()
 	sceneStack = []
 	
+	applyAllWorldEdits()
+	GM.world.addTransitions()
+	
 	runScene("IntroScene")
 	#runScene("FightScene", ["testchar"])
 	#runScene("FightScene", ["tavi"])
