@@ -1,9 +1,9 @@
 extends Node
 
 var game_version_major = 0
-var game_version_minor = 1
-var game_version_revision = 12
-var game_version_suffix = "fix4"
+var game_version_minor = 2
+var game_version_revision = 0
+var game_version_suffix = ""
 
 var contributorsCredits:Dictionary = {
 	"Max-Maxou": [
@@ -191,6 +191,9 @@ var contributorsCredits:Dictionary = {
 	],
 	"Ferricyanide": [
 		"[url=https://github.com/Alexofp/BDCC/pull/280]#1[/url]",
+	],
+	"Zsar": [
+		"[url=https://github.com/Alexofp/BDCC/pull/293]#1[/url]",
 	],
 }
 
