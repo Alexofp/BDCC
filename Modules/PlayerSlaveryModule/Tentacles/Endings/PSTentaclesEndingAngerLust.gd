@@ -373,7 +373,7 @@ func _run():
 
 		saynn("He certainly feels it.. He feels something fat pressing against his ass, trying to stretch it further.")
 
-		saynn("[say=pc]MHH-HH! MHHMM!..[/say]")
+		saynn("[say=sci1]MHH-HH! MHHMM!..[/say]")
 
 		addButton("Continue", "See what happens next", "guy_fuck_cum")
 	if(state == "guy_fuck_cum"):

@@ -121,10 +121,10 @@ states/TentCuddle_1-loop/node = SubResource( 99 )
 states/TentCuddle_1-loop/position = Vector2( 459, 38 )
 transitions = [ "TentCuddle_1-loop", "TentCuddleBreastsTease_1-loop", SubResource( 100 ), "TentCuddleBreastsTease_1-loop", "TentCuddle_1-loop", SubResource( 101 ), "TentCuddleBreastsTease_1-loop", "TentCuddleBreasts_1-loop", SubResource( 102 ), "TentCuddleBreasts_1-loop", "TentCuddleBreastsTease_1-loop", SubResource( 103 ), "TentCuddle_1-loop", "TentCuddleStroke_1-loop", SubResource( 104 ), "TentCuddleStroke_1-loop", "TentCuddle_1-loop", SubResource( 105 ), "TentCuddleStroke_1-loop", "TentCuddleStrokeFast_1-loop", SubResource( 106 ), "TentCuddleStrokeFast_1-loop", "TentCuddleStroke_1-loop", SubResource( 107 ), "TentCuddleFuck_1-loop", "TentCuddleInside_1-loop", SubResource( 110 ), "TentCuddleInside_1-loop", "TentCuddleFuck_1-loop", SubResource( 111 ), "TentCuddleFuck_1-loop", "TentCuddleFuckFast_1-loop", SubResource( 112 ), "TentCuddleFuckFast_1-loop", "TentCuddleFuck_1-loop", SubResource( 113 ), "TentCuddleInside_1-loop", "TentCuddleFuckFast_1-loop", SubResource( 114 ), "TentCuddleFuckFast_1-loop", "TentCuddleInside_1-loop", SubResource( 115 ), "TentCuddle_1-loop", "TentCuddleTease_1-loop", SubResource( 159 ), "TentCuddleTease_1-loop", "TentCuddle_1-loop", SubResource( 160 ), "TentCuddleTease_1-loop", "TentCuddleInside_1-loop", SubResource( 161 ), "TentCuddleInside_1-loop", "TentCuddleTease_1-loop", SubResource( 162 ), "TentCuddleTease_1-loop", "TentCuddleFuck_1-loop", SubResource( 163 ), "TentCuddleFuck_1-loop", "TentCuddleTease_1-loop", SubResource( 164 ) ]
 start_node = "TentCuddle_1-loop"
-graph_offset = Vector2( -15, 114 )
+graph_offset = Vector2( -43, 69 )
 
 [sub_resource type="AnimationNodeBlendTree" id=119]
-graph_offset = Vector2( -237.273, 70.2016 )
+graph_offset = Vector2( -70.9313, -35.7245 )
 nodes/Animation/node = SubResource( 3 )
 nodes/Animation/position = Vector2( 140, 280 )
 nodes/CuffsBlend/node = SubResource( 4 )
@@ -260,10 +260,10 @@ states/TentCuddle_2-loop/node = SubResource( 125 )
 states/TentCuddle_2-loop/position = Vector2( 465, -4 )
 transitions = [ "TentCuddle_2-loop", "TentCuddleBreastsTease_2-loop", SubResource( 133 ), "TentCuddleBreastsTease_2-loop", "TentCuddle_2-loop", SubResource( 134 ), "TentCuddleBreastsTease_2-loop", "TentCuddleBreasts_2-loop", SubResource( 135 ), "TentCuddleBreasts_2-loop", "TentCuddleBreastsTease_2-loop", SubResource( 136 ), "TentCuddleFuck_2-loop", "TentCuddleInside_2-loop", SubResource( 141 ), "TentCuddleInside_2-loop", "TentCuddleFuck_2-loop", SubResource( 142 ), "TentCuddleInside_2-loop", "TentCuddleFuckFast_2-loop", SubResource( 143 ), "TentCuddleFuckFast_2-loop", "TentCuddleInside_2-loop", SubResource( 144 ), "TentCuddleFuck_2-loop", "TentCuddleFuckFast_2-loop", SubResource( 145 ), "TentCuddleFuckFast_2-loop", "TentCuddleFuck_2-loop", SubResource( 146 ), "TentCuddleStroke_2-loop", "TentCuddle_2-loop", SubResource( 147 ), "TentCuddle_2-loop", "TentCuddleStroke_2-loop", SubResource( 148 ), "TentCuddleStroke_2-loop", "TentCuddleStrokeFast_2-loop", SubResource( 149 ), "TentCuddleStrokeFast_2-loop", "TentCuddleStroke_2-loop", SubResource( 150 ), "TentCuddle_2-loop", "TentCuddleTease_2-loop", SubResource( 152 ), "TentCuddleTease_2-loop", "TentCuddle_2-loop", SubResource( 153 ), "TentCuddleTease_2-loop", "TentCuddleFuck_2-loop", SubResource( 154 ), "TentCuddleFuck_2-loop", "TentCuddleTease_2-loop", SubResource( 155 ), "TentCuddleTease_2-loop", "TentCuddleInside_2-loop", SubResource( 156 ), "TentCuddleInside_2-loop", "TentCuddleTease_2-loop", SubResource( 157 ) ]
 start_node = "TentCuddle_2-loop"
-graph_offset = Vector2( -47, -76 )
+graph_offset = Vector2( -121, -40 )
 
 [sub_resource type="AnimationNodeBlendTree" id=127]
-graph_offset = Vector2( 112, -158 )
+graph_offset = Vector2( 212.878, 132.574 )
 nodes/StateMachine/node = SubResource( 126 )
 nodes/StateMachine/position = Vector2( 480, 186 )
 nodes/output/position = Vector2( 680, 180 )

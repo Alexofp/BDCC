@@ -15,9 +15,9 @@ func canUseInCombat():
 func useInCombat(_attacker, _receiver):
 	removeXOrDestroy(1)
 	
-	var theCycle = _attacker.turnImpregnatedEggsIntoBigEggs()
+	var theCycle = _attacker.getMenstrualCycle()
 	if(theCycle):
-		theCycle.boostBigEggs()
+		theCycle.turnImpregnatedEggsIntoBigEggs()
 	
 	return "You swallow the Ovicapsin pill!"
 

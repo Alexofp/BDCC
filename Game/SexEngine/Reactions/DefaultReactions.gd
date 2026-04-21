@@ -672,7 +672,7 @@ func getLines(_reaction:int, _role:int, _args:Array):
 						"Take your "+_args[0]+" off for me.",
 						"Strip your "+_args[0]+" off, nice and slow.",
 						"I want to see you without your "+_args[0]+".",
-						"Get your "+_args[0]+" off me.",
+						"Get your "+_args[0]+" off for me.",
 					])
 
 		SexReaction.ForceUndress:

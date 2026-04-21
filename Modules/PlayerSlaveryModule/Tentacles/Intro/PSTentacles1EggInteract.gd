@@ -450,10 +450,6 @@ func _run():
 
 		saynn("You yawn as you get off your bed and gently place the egg back in its nest.")
 
-		saynn("[say=sci2]And it is time for the next test.[/say]")
-
-		saynn("You get off the bed and take the egg from under the running water.. it's hard to say but it feels heavier in your hands. You set it back in its nest.")
-
 		saynn("[say=pc]What is it now?[/say]")
 
 		saynn("[say=sci2]According to all the data that we have, the specimen is nearing its emergence point.[/say]")

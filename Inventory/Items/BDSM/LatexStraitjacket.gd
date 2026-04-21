@@ -17,6 +17,7 @@ func getBuffs():
 	return [
 		buff(Buff.BlockedHandsBuff),
 		buff(Buff.RestrainedArmsBuff),
+		buff(Buff.ChastityVaginaBuff),
 		]
 
 func getTags():
