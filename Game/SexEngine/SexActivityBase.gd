@@ -3385,13 +3385,51 @@ func stuffTentacleEggRandomHole(_indx:int, _addMessage:bool = true, _tentacleInd
 
 func addEggStuffButton(_roleMain:int, _roleTarget:int, _bodypart:String, _actionID:String = "stuffegg") -> bool:
 	if(canStuffEggInto(_roleMain, _roleTarget, _bodypart)):
-		addAction(_actionID, max(fetish(_roleMain, Fetish.Breeding)*0.2, 0.02 + personality(_roleMain, PersonalityStat.Mean)*0.05), "Stuff egg", "Stuff an egg into them..", {A_PRIORITY: 2})
+		var theMainInfo := getDomOrSubInfo(_roleMain)
+		var theTargetInfo := getDomOrSubInfo(_roleTarget)
+		var theArousal:float = theMainInfo.getArousal()
+		var theTargetLust:float = theTargetInfo.getChar().getLustLevel()
+		var theBreedFetish:float = fetish(_roleMain, Fetish.Breeding)
+		var thePersMean:float = personality(_roleMain, PersonalityStat.Mean)
+		
+		var theEggScore:float = -0.2
+		theEggScore += theTargetLust*0.2
+		theEggScore += max((theBreedFetish+0.2)*0.5, 0.0)
+		theEggScore += max(thePersMean*0.2, 0.0)
+		if(theBreedFetish > -0.5):
+			theEggScore = max(theEggScore, 0.1)
+		
+		theEggScore *= theArousal*2.0
+		
+		if(theArousal < 0.3):
+			theArousal *= 0.1
+		
+		addAction(_actionID, theEggScore, "Stuff egg", "Stuff an egg into them..", {A_PRIORITY: 2})
 		return true
 	return false
 
 func addEggStuffReceiveButton(_roleMain:int, _roleTarget:int, _bodypart:String, _actionID:String = "stuffegg") -> bool:
 	if(canStuffEggInto(_roleTarget, _roleMain, _bodypart)):
-		addAction(_actionID, fetish(_roleMain, Fetish.BeingBred)*0.2, "Receive egg", "Make them stuff an egg into you..", {A_PRIORITY: 2})
+		var theMainInfo := getDomOrSubInfo(_roleMain)
+		var theTargetInfo := getDomOrSubInfo(_roleTarget)
+		var theArousal:float = theMainInfo.getArousal()
+		var theTargetLust:float = theTargetInfo.getChar().getLustLevel()
+		var theBreedFetish:float = fetish(_roleMain, Fetish.BeingBred)
+		var thePersMean:float = personality(_roleMain, PersonalityStat.Mean)
+		
+		var theEggScore:float = -0.2
+		theEggScore += theTargetLust*0.2
+		theEggScore += max((theBreedFetish+0.2)*0.5, 0.0)
+		theEggScore += max(thePersMean*0.2, 0.0)
+		if(theBreedFetish > -0.5):
+			theEggScore = max(theEggScore, 0.1)
+		
+		theEggScore *= theArousal*2.0
+		
+		if(theArousal < 0.3):
+			theArousal *= 0.1
+
+		addAction(_actionID, theEggScore, "Receive egg", "Make them stuff an egg into you..", {A_PRIORITY: 2})
 		return true
 	return false
 

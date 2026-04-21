@@ -44,7 +44,7 @@ func getCharacter():
 func calculateBuffs():
 	assert(npc != null)
 	
-	var newbuffs = []
+	var newbuffs:Array = []
 	
 	var items = npc.getInventory().getAllEquippedItems()
 	for slot in items:

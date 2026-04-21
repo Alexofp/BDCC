@@ -236,4 +236,4 @@ func loadData(data):
 	for theEggEntry in eggData:
 		var theEgg:EggLaid = EggLaid.new()
 		theEgg.loadData(theEggEntry)
-	
+		eggsOut.append(theEgg)
