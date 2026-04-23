@@ -17,6 +17,7 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "hall_canteen")
 	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "main_laundry")
 	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "med_lobbymain")
+	es.addTrigger(self, Trigger.EnteringRoomWithSlave, "med_researchlab")
 	for theSpot in peeSpots:
 		es.addTrigger(self, Trigger.EnteringRoomWithSlave, theSpot)
 	for theSpot in playSpots:
@@ -83,10 +84,25 @@ func run(_triggerID, _args):
 		if(theChar.hasEffect(StatusEffect.Wounded) || theChar.hasEffect(StatusEffect.StretchedPainfullyAnus) || theChar.hasEffect(StatusEffect.StretchedPainfullyPussy)):
 			addButton("Heal", "Ask the doctors to heal your slave", "doHeal", [theChar])
 	
+	if(locName == "med_researchlab"):
+		if(GM.main.SCI.hasUpgrade("shower1")):
+			var hasCumOnBody:bool = theChar.hasEffect(StatusEffect.CoveredInCum)
+			var hasCumInside:bool = theChar.hasEffect(StatusEffect.HasCumInsideAnus) || theChar.hasEffect(StatusEffect.HasCumInsideVagina) || theChar.hasEffect(StatusEffect.HasCumInsideMouth)
+			
+			if(hasCumOnBody):
+				addButton("Biolab shower", "Make the slave take the special shower that will collect the fluids", "doBioShower", [theChar])
+			if(GM.main.SCI.hasUpgrade("shower2") && hasCumInside):
+				addButton("Biolab shower (+inside)", "Make the slave take the special shower that will collect the fluids. Including the fluids inside their holes", "doBioShowerInside", [theChar])
+	
 func getPriority():
 	return 0
 
 func onButton(_method, _args):
+	if(_method == "doBioShower"):
+		GM.main.SCI.doNPCShower(_args[0])
+	if(_method == "doBioShowerInside"):
+		GM.main.SCI.doNPCShower(_args[0])
+		GM.main.SCI.doNPCShowerInside(_args[0])
 	if(_method == "do_repair_clothes"):
 		GM.pc.addCredits(-5)
 		_args[0].repairAllClothes()

@@ -53,6 +53,7 @@ func keepsSlaveIDBusy(_charID):
 	return false
 
 func hoursPassed(_howMuch):
+	# Doesn't use pawns because it was coded before pawns.
 	if(currentHelpingTask != ""):
 		var otherSlave:BaseCharacter = GlobalRegistry.getCharacter(currentTargetID)
 		
@@ -62,8 +63,14 @@ func hoursPassed(_howMuch):
 			return
 		
 		if(currentHelpingTask == "wash"):
-			otherSlave.afterTakingAShower()
-			GM.main.addMessage(getChar().getName()+" just washed your slave named "+otherSlave.getName()+" in the shower")
+			if(GM.main.SCI.hasUpgrade("shower1")):
+				GM.main.addMessage(getChar().getName()+" just washed your slave named "+otherSlave.getName()+" in the Biolab shower")
+				GM.main.SCI.doNPCShower(otherSlave)
+				if(GM.main.SCI.hasUpgrade("shower2") && otherSlave.isPregnant()):
+					GM.main.SCI.doNPCShowerInside(otherSlave)
+			else:
+				GM.main.addMessage(getChar().getName()+" just washed your slave named "+otherSlave.getName()+" in the shower")
+				otherSlave.afterTakingAShower()
 			getSlave().addExperience(10)
 		if(currentHelpingTask == "birth"):
 			if(otherSlave.isReadyToGiveBirth()):

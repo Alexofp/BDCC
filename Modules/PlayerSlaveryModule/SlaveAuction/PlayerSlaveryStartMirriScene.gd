@@ -124,7 +124,7 @@ func _run():
 
 			saynn("You hear a click.. followed by a bright flash.")
 
-		elif (mirriTimes == 2):
+		else:
 			saynn("You push yourself to your feet, back against the wall, muscles disobeying slightly. As your sight adjusts, you begin to see Mirri clearly. Half-naked catgirl, the usual..")
 
 			saynn("[say=mirri]I love you~. You know that?[/say]")

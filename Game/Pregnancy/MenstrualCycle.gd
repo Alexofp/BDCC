@@ -421,14 +421,16 @@ func isReadyToGiveBirth() -> bool:
 	else:
 		return false
 
+# Checks if we should START laying eggs?
 func isReadyToLayEggs(_checkIfPlugged:bool = true) -> bool:
 	for egg in bigEggs:
 		if(egg.isReadyToBeLaid()):
-			if(_checkIfPlugged && isOrificeBlocked(egg.orificeType)):
+			if(_checkIfPlugged && isOrificeBlocked(egg.orificeType if egg.orificeType != OrificeType.Throat else OrificeType.Anus)):
 				continue
 			return true
 	return false
 
+# Checks if there are eggs we can STILL lay (<30 minutes)
 func isReadyToLayEggsCanContinue(_checkIfPlugged:bool = true) -> bool:
 	return !getEggsToBeLaid(30*60, _checkIfPlugged).empty()
 
@@ -464,7 +466,7 @@ func addTentacleEgg(_charID:String, _tentacleType:int, _growTime:int, _orifice:i
 	egg.setOrifice(_orifice)
 	egg.setMother(getCharacter().getID(), getCharacter().getSpecies())
 	
-	egg.isimpregnated = true
+	egg.isimpregnated = false
 	egg.fatherID = _charID
 	#causerID = fluidDNA.getCauserID()
 	
@@ -475,6 +477,10 @@ func addTentacleEgg(_charID:String, _tentacleType:int, _growTime:int, _orifice:i
 	else:
 		egg.resultGender = NpcGender.generate()
 	
+	egg.laidType = _tentacleType
+	if(_tentacleType == BigEggType.Unfertilized):
+		#egg.laidType = BigEggType.Fertilized
+		egg.laidColor = Color.whitesmoke
 	egg.bigEgg = true
 	egg.bigEggType = _tentacleType
 	egg.lifeSpan = _growTime
