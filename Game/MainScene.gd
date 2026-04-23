@@ -1629,10 +1629,65 @@ func getDebugActions():
 				},
 			],
 		},
+		{
+			"id": "stuffEgg",
+			"name": "Stuff Egg",
+			"args": [
+				{
+					"id": "eggType",
+					"name": "Egg type",
+					"type": "list",
+					"value": BigEggType.Plant,
+					"values": [
+						[BigEggType.Plant, "Plant egg"],
+						[BigEggType.Unfertilized, "Unfertilized egg"],
+						[BigEggType.Latex, "Latex egg (unused)"],
+					],
+				},
+				{
+					"id": "hole",
+					"name": "Which hole",
+					"type": "list",
+					"value": BodypartSlot.Anus,
+					"values": [
+						[BodypartSlot.Anus, "Anus"],
+						[BodypartSlot.Vagina, "Vagina"],
+						[BodypartSlot.Head, "Throat"],
+					],
+				},
+				{
+					"id": "time",
+					"name": "Seconds until lay",
+					"type": "number",
+					"value": 12*60*60,
+				},
+			],
+		},
+		{
+			"id": "accelerateEggs",
+			"name": "Accelerate eggs",
+			"args": [
+			],
+		},
 	]
 
 func doDebugAction(id, args = {}):
 	print(id, " ", args)
+	
+	if(id == "accelerateEggs"):
+		var theCycle = GM.pc.getMenstrualCycle()
+		if(theCycle):
+			theCycle.boostBigEggs()
+		return
+	if(id == "stuffEgg"):
+		var theMenstrualCycle:MenstrualCycle = GM.pc.getMenstrualCycle()
+		if(!theMenstrualCycle):
+			return
+		var theTentacleType:int = args["eggType"]
+		var theEggTime:int = int(args["time"])
+		var theOrifice:int = OrificeType.fromBodypart(args["hole"])
+		var _theResult:bool = theMenstrualCycle.addTentacleEgg("pc", theTentacleType, theEggTime, theOrifice)
+		return
 	
 	if(id == "makefriend"):
 		for _i in range(10):

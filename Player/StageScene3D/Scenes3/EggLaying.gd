@@ -11,7 +11,8 @@ onready var animationTree2 = $AnimationTree2
 onready var doll = $Doll3D
 onready var doll2 = $Doll3D2
 
-var eggsLeft:int = 0
+#var eggsLeft:int = 0
+var currentlyLaying
 var eggTypeQueue:Array = []
 var didAtLeastOneEgg:bool = false
 var shouldAutoFlop:bool = true
@@ -76,7 +77,8 @@ func playAnimation(animID, _args = {}):
 		for theEgg in eggs:
 			theEgg.queue_free()
 		eggs.clear()
-		eggsLeft = 0
+		eggTypeQueue.clear()
+		#eggsLeft = 0
 	
 	var state_machine:AnimationNodeStateMachinePlayback = animationTree["parameters/StateMachine/playback"]
 	var state_machine2:AnimationNodeStateMachinePlayback = animationTree2["parameters/StateMachine/playback"]
@@ -91,15 +93,20 @@ func playAnimation(animID, _args = {}):
 	if(animID == "after"):
 		state_machine.travel("EggLayingAfter-loop")
 		state_machine2.travel("EggLayingAfter_2-loop")
-		eggsLeft = 0
+		#eggsLeft = 0
+		eggTypeQueue.clear()
 	var theInt:int = int(animID)
 	if(theInt > 0 || animID == "0"):
-		eggsLeft += theInt
+		#eggsLeft += theInt
+		for _i in theInt:
+			eggTypeQueue.append(BigEggType.Plant)
 	
 	if(_args.has("eggQueue")):
 		eggTypeQueue.append_array(_args["eggQueue"])
-		eggsLeft = eggTypeQueue.size()
-		
+		#eggsLeft = eggTypeQueue.size()
+	
+	#print("Queue: "+str(eggTypeQueue))
+	
 
 func canTransitionTo(_actionID, _args = []):
 	var firstDoll = "pc"
@@ -129,30 +136,34 @@ func _on_StartEggTimer_timeout():
 	
 	if(state_machine.get_current_node() == "EggLayingDo-loop"):
 		return
-	if(eggsLeft <= 0):
+	if(eggTypeQueue.empty()):
 		if(shouldAutoFlop && didAtLeastOneEgg && state_machine.get_current_node() != "EggLayingAfter-loop"):
 			state_machine.travel("EggLayingAfter-loop")
 			state_machine2.travel("EggLayingAfter_2-loop")
 		return
 	
-	eggsLeft -= 1
+	currentlyLaying = eggTypeQueue.pop_front()
+	#eggsLeft -= 1
 	didAtLeastOneEgg = true
 	state_machine.travel("EggLayingDo-loop")
 	state_machine2.travel("EggLayingDo_2-loop")
 	egg_timer.start(1.45)
 
 func _on_EggTimer_timeout():
+	if(currentlyLaying == null):
+		return
 	var newEgg:RigidBody = EggPropScene.instance()
 	add_child(newEgg)
-	if(!eggTypeQueue.empty()):
-		var theEggTypeOrColor = eggTypeQueue.pop_front()
-		if(theEggTypeOrColor is int):
-			if(theEggTypeOrColor == BigEggType.Latex):
-				newEgg.setLatex()
-			else:
-				newEgg.setPlant()
-		elif(theEggTypeOrColor is Color):
-			newEgg.setWhite(theEggTypeOrColor)
+	#if(!eggTypeQueue.empty()):
+	var theEggTypeOrColor = currentlyLaying#eggTypeQueue.pop_front()
+	if(theEggTypeOrColor is int):
+		if(theEggTypeOrColor == BigEggType.Latex):
+			newEgg.setLatex()
+		else:
+			newEgg.setPlant()
+	elif(theEggTypeOrColor is Color):
+		newEgg.setWhite(theEggTypeOrColor)
+	currentlyLaying = null
 	
 	newEgg.global_position = egg_spawner_node.global_position + Vector3(0.0, 0.0, -RNG.randf_range(0.0, 0.2))
 	newEgg.global_rotation = egg_spawner_node.global_rotation

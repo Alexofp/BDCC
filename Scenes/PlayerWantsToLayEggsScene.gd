@@ -4,6 +4,7 @@ var eggsToLay:int = 0
 var eggReport:String = ""
 var eggQueue:Array = []
 var eggs:Array
+var lastBodypartToLayEgg:String
 
 func _init():
 	sceneID = "PlayerWantsToLayEggsScene"
@@ -52,7 +53,7 @@ func _run():
 	if(state == "layOne"):
 		playAnimation(StageScene.EggLaying, "eggs", {eggQueue=eggQueue, shouldAutoFlop=false, bodyState={naked=true}})
 		
-		var stuffedHoles := GM.pc.getEggStuffedHoles()
+		var stuffedHoles := [lastBodypartToLayEgg] if !lastBodypartToLayEgg.empty() else []
 		var stuffedHolesTexts:Array = []
 		for theHole in stuffedHoles:
 			stuffedHolesTexts.append(BodypartSlot.getVisibleNameNoCap(theHole))
@@ -67,6 +68,8 @@ func _run():
 		#	saynn("You grunt and moan as two eggs slide out of your "+Util.humanReadableList(stuffedHolesTexts)+", one after another, really stretching you out in the process..")
 		#else:
 		#	saynn("You grunt and moan as multiple eggs slide out of your "+Util.humanReadableList(stuffedHolesTexts)+", one after another, really stretching you out in the process..")
+		
+		saynn("You laid "+str(eggs.size())+" egg"+("s" if eggs.size() != 1 else "")+"!")
 		
 		addButton("Continue", "See what happens next", "layOne")
 		addButton("Skip", "See them all at once", "skipToEnd")
@@ -136,9 +139,10 @@ func _react(_action: String, _args):
 		var menstrualCycle:MenstrualCycle = GM.pc.getMenstrualCycle()
 		if(menstrualCycle):
 			#eggsToLay = menstrualCycle.getAmountOfEggsReadyToBeLaid()
-			eggs.append_array(menstrualCycle.layEggs())
-			eggsToLay += eggs.size()
-			eggQueue = EggLaid.getEggQueue(eggs)#menstrualCycle.getEggQueue()
+			var newEggs := menstrualCycle.layEggs()
+			eggs.append_array(newEggs)
+			eggsToLay += newEggs.size()
+			eggQueue = EggLaid.getEggQueue(newEggs)#menstrualCycle.getEggQueue()
 			eggReport = menstrualCycle.generateLayEggsReport(eggs)
 			menstrualCycle.giveEggItems(eggs)
 	
@@ -152,8 +156,13 @@ func _react(_action: String, _args):
 				eggs.append(theLaidEgg)
 				eggsToLay += 1
 				eggQueue = EggLaid.getEggQueue([theLaidEgg])
+				lastBodypartToLayEgg = OrificeType.toBodypart(theLaidEgg.orifice)
+				if(lastBodypartToLayEgg == BodypartSlot.Head):
+					lastBodypartToLayEgg = BodypartSlot.Anus
 				setState("layOne")
 				return
+			else:
+				lastBodypartToLayEgg = BodypartSlot.Anus
 		
 		eggQueue = []
 		eggReport = menstrualCycle.generateLayEggsReport(eggs)
@@ -181,6 +190,7 @@ func saveData():
 	
 	data["eggsToLay"] = eggsToLay
 	data["eggReport"] = eggReport
+	data["lastBodypartToLayEgg"] = lastBodypartToLayEgg
 	var eggsData:Array = []
 	for theEgg in eggs:
 		eggsData.append(theEgg.saveData())
@@ -193,6 +203,7 @@ func loadData(data):
 	
 	eggsToLay = SAVE.loadVar(data, "eggsToLay", 0)
 	eggReport = SAVE.loadVar(data, "eggReport", "")
+	lastBodypartToLayEgg = SAVE.loadVar(data, "lastBodypartToLayEgg", "")
 	
 	eggs.clear()
 	var eggsData:Array = SAVE.loadVar(data, "eggs", [])

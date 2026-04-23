@@ -1107,6 +1107,17 @@ func doPCShowerInside():
 			fluidObjs.append(GM.pc.getBodypart(bodypartSlot).getFluids())
 	doPCShowerRaw(fluidObjs)
 
+func doNPCShower(_npc):
+	doPCShowerRaw([_npc.getFluids()])
+	_npc.afterTakingAShower()
+
+func doNPCShowerInside(_npc):
+	var fluidObjs:Array = []
+	for bodypartSlot in [BodypartSlot.Head, BodypartSlot.Vagina, BodypartSlot.Anus]:
+		if(_npc.hasBodypart(bodypartSlot)):
+			fluidObjs.append(_npc.getBodypart(bodypartSlot).getFluids())
+	doPCShowerRaw(fluidObjs)
+
 func findRandomNpcIDForStrangeDrug() -> String:
 	var tries:int = 10
 	while(tries > 0):

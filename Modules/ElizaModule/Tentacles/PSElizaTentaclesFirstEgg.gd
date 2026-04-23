@@ -67,7 +67,7 @@ func _run():
 
 		saynn("[say=pc]Shoot.[/say]")
 
-		saynn("[say=eliza]The more they are exposed to air, the more damaged their DNA becomes. I guess shining bright lasers as it didn't help either.[/say]")
+		saynn("[say=eliza]The more they are exposed to air, the more damaged their DNA becomes. I guess shining bright lasers at it didn't help either.[/say]")
 
 		saynn("Sounds like overall it was a failure..")
 

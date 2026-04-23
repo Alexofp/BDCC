@@ -29,12 +29,17 @@ func getEffectDesc():
 	for theHole in unpluggedHoles:
 		unpluggedHolesTexts.append(BodypartSlot.getVisibleNameNoCap(theHole))
 	var helpfulPlugMessage:String = ""
-	if(unpluggedHoles.size() > 0):
+	if(false && unpluggedHoles.size() > 0): # Disabled, players can figure it out themselves
 		helpfulPlugMessage = " Plug your "+Util.humanReadableList(unpluggedHolesTexts)+" if you don't want that."
 	
 	if(unpluggedHoles.empty()):
 		return "You are stuffed with "+str(eggAm)+" egg"+("s" if eggAm != 1 else "")+"..."
-	return "You are stuffed with "+str(eggAm)+" egg"+("s" if eggAm != 1 else "")+".. "+Util.getTimeStringHumanReadable(theTimeUntilEggs)+" left until you will want to lay "+("the first one." if eggAm != 1 else "it.")+helpfulPlugMessage
+	var timeLeftString:String
+	if(theTimeUntilEggs > 0):
+		timeLeftString = Util.getTimeStringHumanReadable(theTimeUntilEggs)+" left until you will want to lay "+("the first one." if eggAm != 1 else "it.")
+	else:
+		timeLeftString = "You wanna lay "+("the first one" if eggAm != 1 else "it")+" NOW!"
+	return "You are stuffed with "+str(eggAm)+" egg"+("s" if eggAm != 1 else "")+".. "+timeLeftString+helpfulPlugMessage
 
 func getEffectImage():
 	return "res://Images/StatusEffects/mother.png"

@@ -108,6 +108,10 @@ func createItem():
 		var theEgg = GlobalRegistry.createItem("PlantEgg")
 		theEgg.whoGaveBirth = laidBy
 		return theEgg
+	if(type == BigEggType.Latex):
+		var theEgg = GlobalRegistry.createItem("LatexEgg")
+		theEgg.whoGaveBirth = laidBy
+		return theEgg
 	
 	var genericEgg = GlobalRegistry.createItem("EggGeneric")
 	genericEgg.setEggLaid(self)
