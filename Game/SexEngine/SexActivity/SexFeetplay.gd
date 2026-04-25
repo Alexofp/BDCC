@@ -67,13 +67,10 @@ func rubpussy_processTurn():
 	
 	if(isReadyToCum(SUB_0) && !getSubInfo().canDoActions()):
 		satisfyGoals()
-		getSub().cummedOnBy(getSubID(), FluidSource.Vagina)
-		if(getSub().hasReachablePenis() || getSub().isWearingChastityCage()):
-			getSub().cummedOnBy(getSubID(), FluidSource.Penis, 0.3)
-		getSubInfo().cum()
-		state = ""
+		getSub().cummedOnBy(getSubID(), FluidSource.Vagina, 0.7)
 		addText("{sub.Your} pussy is squirting all over {sub.yourHis} thighs as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!")
-		sendSexEvent(SexEvent.UniqueOrgasm, DOM_0, SUB_0, {orgasmType=UniqueOrgasm.Feet})
+		cumOnSelf(SUB_0, DOM_0, UniqueOrgasm.Feet, "", SexReaction.FeetplayCumPussy)
+		state = ""
 	else:
 		react(SexReaction.FeetplayRubbingPussy, [20, 10])
 
@@ -84,18 +81,8 @@ func rubpenis_processTurn():
 	
 	if(getSubInfo().isReadyToCum() && !getSubInfo().canDoActions()):
 		satisfyGoals()
-		getSub().cummedOnBy(getSubID(), FluidSource.Penis)
-		if(getSub().hasReachableVagina()):
-			getSub().cummedOnBy(getSubID(), FluidSource.Vagina, 0.3)
-		getSubInfo().cum()
+		cumOnSelf(SUB_0, DOM_0, UniqueOrgasm.Feet, " in such a humiliating way", SexReaction.FeetplayCumPenis)
 		state = ""
-		var howCumText = "is shooting {sub.cum} all over {sub.yourHis} belly"
-		if(getSub().isWearingCondom()):
-			howCumText = "is filling {sub.yourHis} condom full"
-		if(getSub().getWornPenisPump() != null):
-			howCumText = "is filling {sub.yourHis} penis pump full"
-		addText("{sub.Your} cock "+howCumText+" as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!")
-		sendSexEvent(SexEvent.UniqueOrgasm, DOM_0, SUB_0, {orgasmType=UniqueOrgasm.Feet})
 	else:
 		react(SexReaction.FeetplayRubbingPenis, [20, 10])
 
@@ -297,30 +284,15 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		return
 	if(_id == "cumpussy"):
 		satisfyGoals()
-		getSub().cummedOnBy(getSubID(), FluidSource.Vagina)
-		if(getSub().hasReachablePenis() || getSub().isWearingChastityCage()):
-			getSub().cummedOnBy(getSubID(), FluidSource.Penis, 0.3)
-		getSubInfo().cum()
-		state = ""
+		getSub().cummedOnBy(getSubID(), FluidSource.Vagina, 0.7)
 		addText("{sub.Your} pussy is squirting all over {sub.yourHis} thighs as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!")
-		sendSexEvent(SexEvent.UniqueOrgasm, DOM_0, SUB_0, {orgasmType=UniqueOrgasm.Feet})
-		react(SexReaction.FeetplayCumPussy)
+		cumOnSelf(SUB_0, DOM_0, UniqueOrgasm.Feet, "", SexReaction.FeetplayCumPussy)
+		state = ""
 		return
 	if(_id == "cumpenis"):
 		satisfyGoals()
-		getSub().cummedOnBy(getSubID(), FluidSource.Penis)
-		if(getSub().hasReachableVagina()):
-			getSub().cummedOnBy(getSubID(), FluidSource.Vagina, 0.3)
-		getSubInfo().cum()
+		cumOnSelf(SUB_0, DOM_0, UniqueOrgasm.Feet, " in such a humiliating way", SexReaction.FeetplayCumPenis)
 		state = ""
-		var howCumText = "is shooting {sub.cum} all over {sub.yourHis} belly"
-		if(getSub().isWearingCondom()):
-			howCumText = "is filling {sub.yourHis} condom full"
-		if(getSub().getWornPenisPump() != null):
-			howCumText = "is filling {sub.yourHis} penis pump full"
-		addText("{sub.Your} cock "+howCumText+" as {sub.youHe} {sub.youVerb('orgasm')} in such a humiliating way!")
-		sendSexEvent(SexEvent.UniqueOrgasm, DOM_0, SUB_0, {orgasmType=UniqueOrgasm.Feet})
-		react(SexReaction.FeetplayCumPenis)
 		return
 
 func getSubResistChance(baseChance:float, domAngerRemoval:float) -> float:

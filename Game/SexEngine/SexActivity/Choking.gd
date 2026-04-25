@@ -34,6 +34,8 @@ func getActivityBaseScore(_sexEngine: SexEngine, _domInfo: SexDomInfo, _subInfo:
 		return -1.0
 	if(_sexEngine.hasGoal(_domInfo, SexGoal.SubMakeUnconscious, _subInfo)):
 		return 1.5
+	if(_subInfo.getChar().isPlayer() && GM.main.encounterSettings.isGoalDisabledForSubPC(SexGoal.Choke)):
+		return 0.0 # Stops the npcs from randomly choking the pc if the pc has the goal disabled
 	return _domInfo.getIsAngryScore() * 1.0 * max(0.1, 0.1 + _domInfo.personalityScore({PersonalityStat.Mean: 1.0})) - _subInfo.getAboutToPassOutScore() * _domInfo.fetishScore({Fetish.UnconsciousSex: -1.0})
 
 func getTags(_indx:int) -> Array:

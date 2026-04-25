@@ -2204,30 +2204,44 @@ func afterOrgasm(_isSexEngine = false):
 	for zone in getSensitiveZones():
 		zone.onOrgasm()
 
+# Sorry
+func cumPenisSpecialCases(_characterID: String = "") -> Array:
+	if(!hasBodypart(BodypartSlot.Penis)):
+		return [SexCumSpecialCase.NOTHING, 0.0]
+	var penis:BodypartPenis = getBodypart(BodypartSlot.Penis)
+	var production: FluidProduction = penis.getFluidProduction()
+	if(!production):
+		return [SexCumSpecialCase.NOTHING, 0.0]
+	if(getWornCondom() != null):
+		return [SexCumSpecialCase.CONDOM, cumInItem(getWornCondom())]
+	if(getWornPenisPump() != null):
+		var result = cumInItem(getWornPenisPump()) # Collect some into the penis pump
+		var returnValue = penis.getFluidProduction().drain() # Waste the rest
+		
+		if(_characterID != ""):
+			var event = SexEventHelper.create(SexEvent.PenisPumpMilked, _characterID, getID(), {
+				loadSize = result,
+			})
+			sendSexEvent(event)
+			if(_characterID != getID()):
+				var otherChar = GlobalRegistry.getCharacter(_characterID)
+				if(otherChar != null):
+					otherChar.sendSexEvent(event)
+		return [SexCumSpecialCase.PUMP, result + returnValue]
+	return [SexCumSpecialCase.NOTHING, 0.0]
+
 func cumOnFloor(_characterID: String = ""):
-	if(hasBodypart(BodypartSlot.Penis)):
-		var penis:BodypartPenis = getBodypart(BodypartSlot.Penis)
-		var production: FluidProduction = penis.getFluidProduction()
-		if(production != null):
-			if(getWornCondom() != null):
-				return cumInItem(getWornCondom())
-			if(getWornPenisPump() != null):
-				var result = cumInItem(getWornPenisPump()) # Collect some into the penis pump
-				var returnValue = penis.getFluidProduction().drain() # Waste the rest
-				
-				if(_characterID != ""):
-					var event = SexEventHelper.create(SexEvent.PenisPumpMilked, _characterID, getID(), {
-						loadSize = result,
-					})
-					sendSexEvent(event)
-					if(_characterID != getID()):
-						var otherChar = GlobalRegistry.getCharacter(_characterID)
-						if(otherChar != null):
-							otherChar.sendSexEvent(event)
-				return result + returnValue
-			
-			var returnValue = penis.getFluidProduction().drain()
-			return returnValue
+	var theSpecialCase:Array = cumPenisSpecialCases(_characterID)
+	if(theSpecialCase[0] != SexCumSpecialCase.NOTHING):
+		return theSpecialCase[1]
+
+	if(!hasBodypart(BodypartSlot.Penis)):
+		return 0.0
+	var penis:BodypartPenis = getBodypart(BodypartSlot.Penis)
+	var production: FluidProduction = penis.getFluidProduction()
+	if(!production):
+		return 0.0
+	return production.drain()
 
 func cumInItem(theItem, sourceType = FluidSource.Penis, amountToTransfer = 1.0):
 	if(theItem.getFluids() == null):

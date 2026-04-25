@@ -312,24 +312,24 @@ func _run():
 		_tentacles.doAnimDuo("idle")
 		saynn("As you approach the tentacles, you see them grabbing the handle of the fridge and opening it!")
 
-		saynn("They then look inside.. and notice a raw, uncooked stake. And, for some reason, they want it.")
+		saynn("They then look inside.. and notice a raw, uncooked steak. And, for some reason, they want it.")
 
 		saynn("Maybe letting them feel what real meat tastes like isn't the best idea..")
 
-		addButton("Allow it", "Allow them to eat the stake!", "3_allow")
+		addButton("Allow it", "Allow them to eat the steak!", "3_allow")
 		addButton("Deny", "Prevent them from eating the meat!", "3_deny")
 	if(state == "3_allow"):
 		_tentacles.doAnimDuo("eat")
 		saynn("..or maybe letting them get familiar with the taste of meat is exactly what you want.")
 
 		if (_tentacles.agility >= 5):
-			saynn("You just watch as the tentacles grab the stake.. and then easily rip it apart before squeezing and absorbing all the juices and blood. Wow. They didn't even leave any bones.")
+			saynn("You just watch as the tentacles grab the steak.. and then easily rip it apart before squeezing and absorbing all the juices and blood. Wow. They didn't even leave any bones.")
 
 		elif (_tentacles.agility >= 3):
-			saynn("You just watch as the tentacles grab the stake.. and then dig into the meat with its hungry pointy tips, squeezing all the juices and blood out of it before absorbing it.")
+			saynn("You just watch as the tentacles grab the steak.. and then dig into the meat with its hungry pointy tips, squeezing all the juices and blood out of it before absorbing it.")
 
 		else:
-			saynn("You just watch as the tentacles try to awkwardly pull the stake out. It takes quite a few tentacles to hold it above the floor.. while the rest dig into the meat and begin absorbing it.")
+			saynn("You just watch as the tentacles try to awkwardly pull the steak out. It takes quite a few tentacles to hold it above the floor.. while the rest dig into the meat and begin absorbing it.")
 
 			saynn("Some time later, they finally finished their meal! The blood is still dripping from the tips..")
 
