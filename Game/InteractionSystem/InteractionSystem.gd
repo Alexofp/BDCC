@@ -86,12 +86,12 @@ func loadData(_data):
 	
 func getMaxPawnCount() -> int:
 	var settingsValue:int = OPTIONS.getSandboxPawnCount()
-	if(GM.main.getDays() <= 1):
-		return Util.mini(10, settingsValue)
-	elif(GM.main.getDays() <= 2):
-		return Util.mini(15, settingsValue)
-	elif(GM.main.getDays() <= 5): # First 5 days have reduced amount of pawns
-		return Util.mini(20, settingsValue)
+#	if(GM.main.getDays() <= 1):
+#		return Util.mini(10, settingsValue)
+#	elif(GM.main.getDays() <= 2):
+#		return Util.mini(15, settingsValue)
+#	elif(GM.main.getDays() <= 5): # First 5 days have reduced amount of pawns
+#		return Util.mini(20, settingsValue)
 	return settingsValue
 
 func TEST_DELETE_ME():

@@ -35,7 +35,9 @@ func getEffectDesc():
 	if(unpluggedHoles.empty()):
 		return "You are stuffed with "+str(eggAm)+" egg"+("s" if eggAm != 1 else "")+"..."
 	var timeLeftString:String
-	if(theTimeUntilEggs > 0):
+	if(theTimeUntilEggs >= 10000000):
+		timeLeftString = ""
+	elif(theTimeUntilEggs > 0):
 		timeLeftString = Util.getTimeStringHumanReadable(theTimeUntilEggs)+" left until you will want to lay "+("the first one." if eggAm != 1 else "it.")
 	else:
 		timeLeftString = "You wanna lay "+("the first one" if eggAm != 1 else "it")+" NOW!"

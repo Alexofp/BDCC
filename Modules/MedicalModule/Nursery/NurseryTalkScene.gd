@@ -90,7 +90,7 @@ func _run():
 			else:
 				addButton("Database", "Take a look at your children", "database")
 		
-		if(GM.pc.isVisiblyPregnant()):
+		if(GM.pc.isPregnant(true, false) && GM.pc.isVisiblyPregnant()):
 			if(!GM.pc.isReadyToGiveBirth()):
 				addButton("Induce birth", "Ask to speed up the process", "induce_birth")
 				addDisabledButton("Give birth", "Too early for this")

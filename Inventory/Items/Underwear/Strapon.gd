@@ -34,6 +34,7 @@ func getPuttingOnStringLong(withS):
 func getPrice():
 	return 10
 
+# If you're changing these, keep in mind that StraponOvi and StraponOviFeeldoe don't inherit these
 func getTags():
 	if(id == "Strapon"):
 		return [

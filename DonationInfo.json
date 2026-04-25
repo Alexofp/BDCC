@@ -1,5 +1,5 @@
 {
-	"dateString": "23 of Apr 2026",
+	"dateString": "25 of Apr 2026",
 	"entries": {
 		"$1.00": [
 			{
@@ -33,22 +33,22 @@
 				"nickname": "KibblesAndBitz8"
 			},
 			{
-				"nickname": "DraconicSkyLord"
+				"nickname": "User#2f9a87dc"
 			},
 			{
 				"nickname": "Echo5555"
 			},
 			{
-				"nickname": "User#2f9a87dc"
+				"nickname": "DraconicSkyLord"
 			},
 			{
-				"nickname": "cornboi"
+				"nickname": "Fawksiii"
 			},
 			{
 				"nickname": "Valymarr"
 			},
 			{
-				"nickname": "Fawksiii"
+				"nickname": "cornboi"
 			},
 			{
 				"nickname": "WinterTorchlight"
@@ -66,19 +66,19 @@
 				"nickname": "ObedientCat"
 			},
 			{
-				"nickname": "User#4a71d7d9"
+				"nickname": "ozxecho"
 			},
 			{
-				"nickname": "ozxecho"
+				"nickname": "User#4a71d7d9"
 			},
 			{
 				"nickname": "badassgrunt"
 			},
 			{
-				"nickname": "Swift_Assassin"
+				"nickname": "PedroDeziTrezzi"
 			},
 			{
-				"nickname": "PedroDeziTrezzi"
+				"nickname": "Swift_Assassin"
 			},
 			{
 				"nickname": "Daniel Luptak"
@@ -105,10 +105,16 @@
 				"nickname": "Jäger"
 			},
 			{
+				"nickname": "User#7efdb5ce"
+			},
+			{
 				"nickname": "User#ad554713"
 			},
 			{
-				"nickname": "User#7efdb5ce"
+				"nickname": "CrispyBearcon"
+			},
+			{
+				"nickname": "EMPMaster98"
 			},
 			{
 				"nickname": "Chackalack"
@@ -120,31 +126,25 @@
 				"nickname": "Natemare"
 			},
 			{
-				"nickname": "EMPMaster98"
-			},
-			{
-				"nickname": "CrispyBearcon"
-			},
-			{
-				"nickname": "User#035049b5"
-			},
-			{
-				"nickname": "LocktheRed"
+				"nickname": "sleepingcrows"
 			},
 			{
 				"nickname": "Hotheaddragon"
 			},
 			{
-				"nickname": "sleepingcrows"
+				"nickname": "LocktheRed"
+			},
+			{
+				"nickname": "User#035049b5"
 			},
 			{
 				"nickname": "DRAChe_"
 			},
 			{
-				"nickname": "GenericGrunt"
+				"nickname": "lupossv"
 			},
 			{
-				"nickname": "lupossv"
+				"nickname": "GenericGrunt"
 			},
 			{
 				"nickname": "Zaxon Rapial"
@@ -156,28 +156,16 @@
 				"nickname": "Crazy M554"
 			},
 			{
-				"nickname": "Syndrome"
-			},
-			{
-				"nickname": "elriGay"
+				"nickname": "BabyLa"
 			},
 			{
 				"nickname": "Ham Sandwich Heaven"
 			},
 			{
-				"nickname": "BabyLa"
+				"nickname": "Syndrome"
 			},
 			{
-				"nickname": "Dami Confrey"
-			},
-			{
-				"nickname": "naggafin"
-			},
-			{
-				"nickname": "Kegorator"
-			},
-			{
-				"nickname": "femi"
+				"nickname": "elriGay"
 			},
 			{
 				"nickname": "some random dude"
@@ -186,16 +174,28 @@
 				"nickname": "User#3440861c"
 			},
 			{
-				"nickname": "Humoi"
+				"nickname": "femi"
 			},
 			{
-				"nickname": "Jack4"
+				"nickname": "Kegorator"
+			},
+			{
+				"nickname": "naggafin"
+			},
+			{
+				"nickname": "Dami Confrey"
+			},
+			{
+				"nickname": "baconman"
 			},
 			{
 				"nickname": "User#af0dc557"
 			},
 			{
-				"nickname": "baconman"
+				"nickname": "Jack4"
+			},
+			{
+				"nickname": "Humoi"
 			},
 			{
 				"nickname": "Deltawolf"
@@ -204,25 +204,25 @@
 				"nickname": "Johnny Mind"
 			},
 			{
+				"nickname": "User#f40a6e57"
+			},
+			{
+				"nickname": "Stareyespup"
+			},
+			{
 				"nickname": "Mertix"
 			},
 			{
 				"nickname": "JokoHoko"
 			},
 			{
-				"nickname": "Stareyespup"
-			},
-			{
-				"nickname": "User#f40a6e57"
-			},
-			{
 				"nickname": "joeshoem"
 			},
 			{
-				"nickname": "Keplin"
+				"nickname": "Joshua P Smith"
 			},
 			{
-				"nickname": "Joshua P Smith"
+				"nickname": "Keplin"
 			},
 			{
 				"nickname": "Vibrant Emotion"
@@ -231,22 +231,13 @@
 				"nickname": "ItoNull"
 			},
 			{
-				"nickname": "fishboy#c42cd47a"
-			},
-			{
 				"nickname": "User#a12d105d"
 			},
 			{
-				"nickname": "RubyOnyx"
-			},
-			{
-				"nickname": "lordragon"
+				"nickname": "fishboy#c42cd47a"
 			},
 			{
 				"nickname": "User#84b7dcde"
-			},
-			{
-				"nickname": "BloodLord"
 			},
 			{
 				"nickname": "User#f25ff0cc"
@@ -258,10 +249,19 @@
 				"nickname": "jh4p"
 			},
 			{
-				"nickname": "AstraDisastra"
+				"nickname": "RubyOnyx"
+			},
+			{
+				"nickname": "BloodLord"
+			},
+			{
+				"nickname": "lordragon"
 			},
 			{
 				"nickname": "LadyWinters"
+			},
+			{
+				"nickname": "AstraDisastra"
 			},
 			{
 				"nickname": "User#a4249384"
@@ -273,13 +273,7 @@
 				"nickname": "User#951a193d"
 			},
 			{
-				"nickname": "Tristan Leo Roberts"
-			},
-			{
 				"nickname": "DevilsAdvocate"
-			},
-			{
-				"nickname": "Akanu"
 			},
 			{
 				"nickname": "Alex Red"
@@ -288,37 +282,52 @@
 				"nickname": "Bazzal"
 			},
 			{
+				"nickname": "Akanu"
+			},
+			{
 				"nickname": "Crystal07"
 			},
 			{
-				"nickname": "StalkingWeasel"
-			},
-			{
-				"nickname": "Kittymint"
-			},
-			{
-				"nickname": "ObiWanCornObi"
-			},
-			{
-				"nickname": "Kalloi"
+				"nickname": "Tristan Leo Roberts"
 			},
 			{
 				"nickname": "MaidenShadow"
 			},
 			{
-				"nickname": "User#6c1e4ae0"
-			},
-			{
 				"nickname": "HwaRyu"
 			},
 			{
-				"nickname": "DBkrest"
+				"nickname": "User#6c1e4ae0"
+			},
+			{
+				"nickname": "ObiWanCornObi"
+			},
+			{
+				"nickname": "Kittymint"
+			},
+			{
+				"nickname": "Kalloi"
+			},
+			{
+				"nickname": "StalkingWeasel"
+			},
+			{
+				"nickname": "ObliviousWord"
+			},
+			{
+				"nickname": "Quaarus"
+			},
+			{
+				"nickname": "GMan"
 			},
 			{
 				"nickname": "Nicole_Evermore"
 			},
 			{
-				"nickname": "indiegames"
+				"nickname": "Trinitor117"
+			},
+			{
+				"nickname": "DBkrest"
 			},
 			{
 				"nickname": "StReYn1076"
@@ -327,16 +336,7 @@
 				"nickname": "User#f55d751f"
 			},
 			{
-				"nickname": "ObliviousWord"
-			},
-			{
-				"nickname": "Trinitor117"
-			},
-			{
-				"nickname": "Quaarus"
-			},
-			{
-				"nickname": "GMan"
+				"nickname": "indiegames"
 			},
 			{
 				"nickname": "Fenrir#0349"
@@ -348,25 +348,31 @@
 				"nickname": "User#42fd6267"
 			},
 			{
-				"nickname": "User#8818b7c1"
-			},
-			{
 				"nickname": "TheVoyeur"
 			},
 			{
 				"nickname": "TheDwiin"
 			},
 			{
-				"nickname": "johnny25#38a67013"
+				"nickname": "Caveman1"
 			},
 			{
-				"nickname": "Caveman1"
+				"nickname": "User#8818b7c1"
+			},
+			{
+				"nickname": "johnny25#38a67013"
 			},
 			{
 				"nickname": "lordoftheharvest"
 			},
 			{
+				"nickname": "Darktoon"
+			},
+			{
 				"nickname": "User#5bb470ac"
+			},
+			{
+				"nickname": "JBGeitz"
 			},
 			{
 				"nickname": "User#94c27731"
@@ -375,25 +381,10 @@
 				"nickname": "joe"
 			},
 			{
-				"nickname": "JBGeitz"
-			},
-			{
 				"nickname": "Sopleb"
 			},
 			{
-				"nickname": "Darktoon"
-			},
-			{
 				"nickname": "User#2159d330"
-			},
-			{
-				"nickname": "anonrando"
-			},
-			{
-				"nickname": "fir#fa7ac0f5"
-			},
-			{
-				"nickname": "Theomachy_Wulf"
 			},
 			{
 				"nickname": "User#e30f5f10"
@@ -402,10 +393,19 @@
 				"nickname": "Dragonmaster1225"
 			},
 			{
+				"nickname": "Theomachy_Wulf"
+			},
+			{
+				"nickname": "fir#fa7ac0f5"
+			},
+			{
+				"nickname": "anonrando"
+			},
+			{
 				"nickname": "HANAMIアリス"
 			},
 			{
-				"nickname": "no22"
+				"nickname": "Arziros"
 			},
 			{
 				"nickname": "Jonas Schön"
@@ -417,43 +417,52 @@
 				"nickname": "User#ad75c6da"
 			},
 			{
-				"nickname": "Axel4004"
+				"nickname": "MarkTrolic"
 			},
 			{
-				"nickname": "Carlos"
+				"nickname": "no22"
 			},
 			{
 				"nickname": "User#8f78ce63"
 			},
 			{
-				"nickname": "MarkTrolic"
+				"nickname": "Carlos"
 			},
 			{
-				"nickname": "Arziros"
-			},
-			{
-				"nickname": "User#d62eb2ac"
-			},
-			{
-				"nickname": "User#1d68fc48"
-			},
-			{
-				"nickname": "black void dragon"
-			},
-			{
-				"nickname": "User#422f06c3"
-			},
-			{
-				"nickname": "User#2ddf37cf"
-			},
-			{
-				"nickname": "Scraptoon"
+				"nickname": "Axel4004"
 			},
 			{
 				"nickname": "User#eb116483"
 			},
 			{
+				"nickname": "Scraptoon"
+			},
+			{
+				"nickname": "User#2ddf37cf"
+			},
+			{
+				"nickname": "black void dragon"
+			},
+			{
+				"nickname": "User#1d68fc48"
+			},
+			{
+				"nickname": "User#d62eb2ac"
+			},
+			{
+				"nickname": "User#422f06c3"
+			},
+			{
 				"nickname": "Xos"
+			},
+			{
+				"nickname": "CorruptedFem22"
+			},
+			{
+				"nickname": "Mik121"
+			},
+			{
+				"nickname": "DBSSD"
 			},
 			{
 				"nickname": "ocvcrimsonclaw"
@@ -462,7 +471,7 @@
 				"nickname": "User#95aea931"
 			},
 			{
-				"nickname": "DBSSD"
+				"nickname": "wispy"
 			},
 			{
 				"nickname": "User#895a54e1"
@@ -471,22 +480,19 @@
 				"nickname": "User#4f215170"
 			},
 			{
+				"nickname": "LionessX28"
+			},
+			{
 				"nickname": "FAFT"
 			},
 			{
 				"nickname": "meowmeowmew"
 			},
 			{
-				"nickname": "User#8e3dc307"
-			},
-			{
 				"nickname": "Isaac2124"
 			},
 			{
-				"nickname": "LionessX28"
-			},
-			{
-				"nickname": "wispy"
+				"nickname": "User#8e3dc307"
 			}
 		],
 		"$10.00": [
@@ -521,10 +527,10 @@
 				"nickname": "JackLightZ"
 			},
 			{
-				"nickname": "Growler"
+				"nickname": "Hunter265870"
 			},
 			{
-				"nickname": "Hunter265870"
+				"nickname": "Growler"
 			},
 			{
 				"nickname": "Sayonix"
@@ -542,19 +548,19 @@
 				"nickname": "Luna the prussian"
 			},
 			{
-				"nickname": "Bobthebobr"
-			},
-			{
 				"nickname": "Masaki Akira"
 			},
 			{
-				"nickname": "User#ba7a7924"
+				"nickname": "Bobthebobr"
+			},
+			{
+				"nickname": "DerKrault"
 			},
 			{
 				"nickname": "Ro3ger"
 			},
 			{
-				"nickname": "DerKrault"
+				"nickname": "User#ba7a7924"
 			},
 			{
 				"nickname": "User#722a23ab"
@@ -569,13 +575,13 @@
 				"nickname": "Crystal_hunter"
 			},
 			{
-				"nickname": "Blitzox"
+				"nickname": "Wyvernclaw00"
 			},
 			{
 				"nickname": "Emperor_Jukebox"
 			},
 			{
-				"nickname": "Wyvernclaw00"
+				"nickname": "Blitzox"
 			},
 			{
 				"nickname": "Fox2Code"
@@ -584,10 +590,10 @@
 				"nickname": "User#d74b7dcd"
 			},
 			{
-				"nickname": "ProtossMan"
+				"nickname": "Rat, Of The Rubber Room"
 			},
 			{
-				"nickname": "Rat, Of The Rubber Room"
+				"nickname": "ProtossMan"
 			},
 			{
 				"nickname": "Cyberwolfz2077"
@@ -596,25 +602,25 @@
 				"nickname": "User#d25dc023"
 			},
 			{
-				"nickname": "flutteryyh"
-			},
-			{
 				"nickname": "fairyfreak11"
 			},
 			{
 				"nickname": "LucariosRevenge"
 			},
 			{
-				"nickname": "User#71fd3a85"
+				"nickname": "flutteryyh"
 			},
 			{
-				"nickname": "RPMaster"
+				"nickname": "ObsideonStar"
 			},
 			{
 				"nickname": "DogZ99"
 			},
 			{
-				"nickname": "ObsideonStar"
+				"nickname": "RPMaster"
+			},
+			{
+				"nickname": "User#71fd3a85"
 			},
 			{
 				"nickname": "Something Lurks"
@@ -638,40 +644,43 @@
 				"nickname": "4PPL35"
 			},
 			{
-				"nickname": "Ravn"
+				"nickname": "Leficent"
 			},
 			{
-				"nickname": "EllieGemini"
+				"nickname": "Ravn"
 			},
 			{
 				"nickname": "Traitor"
 			},
 			{
+				"nickname": "EllieGemini"
+			},
+			{
 				"nickname": "Sylvanos"
 			},
 			{
-				"nickname": "Leficent"
+				"nickname": "BabaKot"
 			},
 			{
 				"nickname": "User#0e506d35"
 			},
 			{
-				"nickname": "skeck"
-			},
-			{
 				"nickname": "dove of light"
 			},
 			{
-				"nickname": "TharonHusky"
-			},
-			{
-				"nickname": "wildtamaskan"
+				"nickname": "skeck"
 			},
 			{
 				"nickname": "User#b82a5e5f"
 			},
 			{
-				"nickname": "BabaKot"
+				"nickname": "wildtamaskan"
+			},
+			{
+				"nickname": "TharonHusky"
+			},
+			{
+				"nickname": "Shadowhound125"
 			},
 			{
 				"nickname": "J-man82"
@@ -683,7 +692,7 @@
 				"nickname": "F1R3B4T"
 			},
 			{
-				"nickname": "Shadowhound125"
+				"nickname": "surrealdeal"
 			},
 			{
 				"nickname": "User#c8d13d78"
@@ -695,34 +704,22 @@
 				"nickname": "TheFox333"
 			},
 			{
-				"nickname": "surrealdeal"
-			},
-			{
 				"nickname": "LUNA SHARK"
 			},
 			{
 				"nickname": "Priscilla354"
 			},
 			{
-				"nickname": "Ronin#3f0b7f70"
-			},
-			{
-				"nickname": "User#769be46d"
-			},
-			{
 				"nickname": "Adeagus#133788e"
+			},
+			{
+				"nickname": "Ronin#3f0b7f70"
 			},
 			{
 				"nickname": "ElusiveOne"
 			},
 			{
-				"nickname": "FrivolousBorks"
-			},
-			{
-				"nickname": "Nutcracker321"
-			},
-			{
-				"nickname": "patrick smith"
+				"nickname": "User#769be46d"
 			},
 			{
 				"nickname": "User#a2dd7c88"
@@ -731,28 +728,31 @@
 				"nickname": "User#d1e47655"
 			},
 			{
-				"nickname": "agfred"
-			},
-			{
 				"nickname": "Rudi1319"
 			},
 			{
-				"nickname": "Sashamoon"
+				"nickname": "patrick smith"
 			},
 			{
-				"nickname": "JazzKat"
+				"nickname": "Nutcracker321"
+			},
+			{
+				"nickname": "agfred"
+			},
+			{
+				"nickname": "FrivolousBorks"
 			},
 			{
 				"nickname": "User#ceb025d3"
 			},
 			{
+				"nickname": "JazzKat"
+			},
+			{
 				"nickname": "Donshadowwolf"
 			},
 			{
-				"nickname": "User#7d408bb1"
-			},
-			{
-				"nickname": "bad wolf gaming"
+				"nickname": "Sashamoon"
 			},
 			{
 				"nickname": "User#4e7fba0e"
@@ -761,13 +761,19 @@
 				"nickname": "User#b6c1c40b"
 			},
 			{
+				"nickname": "bad wolf gaming"
+			},
+			{
 				"nickname": "TayMan001"
 			},
 			{
-				"nickname": "LordZenx21"
+				"nickname": "User#7d408bb1"
 			},
 			{
 				"nickname": "TeamLoad"
+			},
+			{
+				"nickname": "LordZenx21"
 			}
 		],
 		"$3.00": [
@@ -793,13 +799,13 @@
 				"nickname": "David115"
 			},
 			{
-				"nickname": "Eceny"
+				"nickname": "Coupil"
 			},
 			{
 				"nickname": "ShamanSliph"
 			},
 			{
-				"nickname": "Coupil"
+				"nickname": "Eceny"
 			},
 			{
 				"nickname": "Tre351ed"
@@ -811,40 +817,40 @@
 				"nickname": "Conga_Soldier"
 			},
 			{
-				"nickname": "Drev"
-			},
-			{
 				"nickname": "kieran"
 			},
 			{
 				"nickname": "Sammy907ak"
 			},
 			{
-				"nickname": "Alia123465"
+				"nickname": "Drev"
 			},
 			{
-				"nickname": "MrUnowen"
+				"nickname": "Alia123465"
 			},
 			{
 				"nickname": "NobodiesGarden"
 			},
 			{
-				"nickname": "BlazingAngel151"
+				"nickname": "MrUnowen"
 			},
 			{
 				"nickname": "Hugothehippo"
 			},
 			{
-				"nickname": "Mykar"
+				"nickname": "BlazingAngel151"
 			},
 			{
 				"nickname": "srxdcfyguhjk"
 			},
 			{
-				"nickname": "User#68590f89"
+				"nickname": "Mykar"
 			},
 			{
 				"nickname": "User#c4fd2953"
+			},
+			{
+				"nickname": "User#68590f89"
 			},
 			{
 				"nickname": "J0hn Doe"
@@ -870,16 +876,16 @@
 				"nickname": "Blazewolf"
 			},
 			{
-				"nickname": "Jax"
-			},
-			{
 				"nickname": "Arrx"
 			},
 			{
-				"nickname": "redlightbeast"
+				"nickname": "Jax"
 			},
 			{
 				"nickname": "Bergermeister"
+			},
+			{
+				"nickname": "redlightbeast"
 			},
 			{
 				"nickname": "Desseus"
@@ -900,22 +906,22 @@
 				"nickname": "PerturbedPotato"
 			},
 			{
-				"nickname": "Valik21"
+				"nickname": "StarfallDragon"
 			},
 			{
-				"nickname": "Paul Goodridge"
+				"nickname": "Valik21"
 			},
 			{
 				"nickname": "AngryJard"
 			},
 			{
-				"nickname": "StarfallDragon"
-			},
-			{
-				"nickname": "User#75abd9b8"
+				"nickname": "Paul Goodridge"
 			},
 			{
 				"nickname": "Bloxborne"
+			},
+			{
+				"nickname": "User#75abd9b8"
 			},
 			{
 				"nickname": "User#d66bd3f6"
@@ -933,13 +939,13 @@
 				"nickname": "User#d770549c"
 			},
 			{
-				"nickname": "Amaract"
+				"nickname": "Bombay!"
 			},
 			{
 				"nickname": "killzone1123"
 			},
 			{
-				"nickname": "Bombay!"
+				"nickname": "Amaract"
 			},
 			{
 				"nickname": "bobthecheese"
@@ -963,22 +969,22 @@
 				"nickname": "Just Some Dude"
 			},
 			{
+				"nickname": "Funtice"
+			},
+			{
 				"nickname": "Sauvagess"
 			},
 			{
 				"nickname": "Nyx069"
 			},
 			{
-				"nickname": "Funtice"
-			},
-			{
 				"nickname": "User#f6f59c84"
 			},
 			{
-				"nickname": "Blaz3"
+				"nickname": "Jbde"
 			},
 			{
-				"nickname": "Jbde"
+				"nickname": "Blaz3"
 			},
 			{
 				"nickname": "Lemon-Aids"
@@ -990,25 +996,25 @@
 				"nickname": "Death"
 			},
 			{
+				"nickname": "Kanarazuzu"
+			},
+			{
 				"nickname": "McPattySnapper"
 			},
 			{
 				"nickname": "Cøyøte"
 			},
 			{
-				"nickname": "Kanarazuzu"
-			},
-			{
 				"nickname": "ClapHands"
-			},
-			{
-				"nickname": "k0lt"
 			},
 			{
 				"nickname": "Sharkk91"
 			},
 			{
 				"nickname": "Phoenix#9ad26021"
+			},
+			{
+				"nickname": "k0lt"
 			},
 			{
 				"nickname": "Sjlvertongue"
@@ -1023,19 +1029,19 @@
 				"nickname": "Zeela"
 			},
 			{
-				"nickname": "tvakah"
-			},
-			{
 				"nickname": "JoveW"
 			},
 			{
 				"nickname": "B3stBoy"
 			},
 			{
+				"nickname": "NekoTheGreat"
+			},
+			{
 				"nickname": "User#a3b0ce2a"
 			},
 			{
-				"nickname": "NekoTheGreat"
+				"nickname": "tvakah"
 			},
 			{
 				"nickname": "EternalSub"
@@ -1047,7 +1053,7 @@
 				"nickname": "Disgraced111"
 			},
 			{
-				"nickname": "XpLoSiiVEs"
+				"nickname": "0ooLavioo0"
 			},
 			{
 				"nickname": "User#1214e91f"
@@ -1056,43 +1062,43 @@
 				"nickname": "User#f5390574"
 			},
 			{
-				"nickname": "Nickey68"
+				"nickname": "XpLoSiiVEs"
 			},
 			{
 				"nickname": "Drummer485"
 			},
 			{
-				"nickname": "Doogem777"
-			},
-			{
-				"nickname": "FoxxiMoxxiSins"
+				"nickname": "Nickey68"
 			},
 			{
 				"nickname": "Hermoš"
 			},
 			{
+				"nickname": "Doogem777"
+			},
+			{
 				"nickname": "rockinbacon"
+			},
+			{
+				"nickname": "FoxxiMoxxiSins"
 			},
 			{
 				"nickname": "User#6b9ddfe5"
 			},
 			{
-				"nickname": "0ooLavioo0"
+				"nickname": "User#3abab383"
 			},
 			{
 				"nickname": "User#9672352b"
 			},
 			{
+				"nickname": "Fox McClaud"
+			},
+			{
 				"nickname": "GrayGhost111"
 			},
 			{
-				"nickname": "User#3abab383"
-			},
-			{
 				"nickname": "nascence"
-			},
-			{
-				"nickname": "Fox McClaud"
 			}
 		]
 	},
@@ -1102,5 +1108,5 @@
 		"$3.00",
 		"$1.00"
 	],
-	"unixTime": 1776958089
+	"unixTime": 1777136056
 }

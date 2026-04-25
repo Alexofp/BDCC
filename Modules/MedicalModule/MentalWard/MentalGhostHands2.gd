@@ -127,7 +127,7 @@ func _run():
 		# (choices are Mouth, Pussy, Ass)
 
 		addButton("Mouth", "Take the strapon down your throat", "mouth")
-		addButtonWithChecks("Pussy", "Take the strapon down your sex", "pussy", [], [ButtonChecks.HasReachableVagina])
+		addButtonWithChecks("Pussy", "Take the strapon down your sex", "pussy", [], [ButtonChecks.HasVagina]) # HasVagina instead of HasReachableVagina because the straitjacket will always block the vagina
 		addButton("Ass", "Take the strapon down your butt", "ass")
 #ACEPREGEXPAC - Eliza ghost hands 2nd scene gets additional lines
 

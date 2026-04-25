@@ -60,7 +60,10 @@ func doStuffEggInto(_targetChar, _bodypart:String) -> Dictionary:
 	return doStuffEggIntoTransfer(_targetChar, _bodypart)
 
 func getTags():
-	var theTags:Array= .getTags()
+	var theTags:Array= [
+		ItemTag.Strapon,
+		#ItemTag.SoldByTheAnnouncer,
+	]
 	if(GM.main != null && GM.main.SCI != null && GM.main.SCI.hasUpgrade("oviStrapons")):
 		theTags.append(ItemTag.SoldByMedicalVendomat)
 	return theTags

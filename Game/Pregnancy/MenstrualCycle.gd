@@ -69,6 +69,11 @@ func isOrificeBlocked(orificeType:int) -> bool:
 	
 	return false
 
+func isOrificeBlockedForEggs(orificeType:int) -> bool:
+	if(orificeType == OrificeType.Throat):
+		orificeType = OrificeType.Anus
+	return isOrificeBlocked(orificeType)
+
 func hasAnyWomb() -> bool:
 	for orificeType in OrificeType.getAll():
 		if(hasWombIn(orificeType)):
@@ -425,7 +430,7 @@ func isReadyToGiveBirth() -> bool:
 func isReadyToLayEggs(_checkIfPlugged:bool = true) -> bool:
 	for egg in bigEggs:
 		if(egg.isReadyToBeLaid()):
-			if(_checkIfPlugged && isOrificeBlocked(egg.orificeType if egg.orificeType != OrificeType.Throat else OrificeType.Anus)):
+			if(_checkIfPlugged && isOrificeBlockedForEggs(egg.orificeType)):
 				continue
 			return true
 	return false
@@ -574,9 +579,11 @@ func delayEggs(_time:int = 6*60*60):
 
 func getTimeUntilNextEggLaying() -> int:
 	if(bigEggs.empty()):
-		return 0
-	var theTime:int = bigEggs[0].getTimeUntilReadyToBeLaid()
+		return 10000000
+	var theTime:int = 10000000#bigEggs[0].getTimeUntilReadyToBeLaid()
 	for egg in bigEggs:
+		if(isOrificeBlockedForEggs(egg.orificeType)):
+			continue
 		var theNewTime:int = egg.getTimeUntilReadyToBeLaid()
 		if(theNewTime < theTime):
 			theTime = theNewTime
@@ -590,9 +597,7 @@ func getEggsToBeLaid(_time:int = 30*60, _ignoreIfPlugged:bool = true) -> Array:
 		if(theEggTime <= _time):
 			if(_ignoreIfPlugged):
 				var theOrifice:int = egg.orificeType
-				if(theOrifice == OrificeType.Throat):
-					theOrifice = OrificeType.Anus
-				if(isOrificeBlocked(theOrifice)):
+				if(isOrificeBlockedForEggs(theOrifice)):
 					continue
 			
 			result.append(egg)

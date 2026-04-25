@@ -187,7 +187,7 @@ func getActions(_indx:int):
 		if(state == "sex" && isStrapon(_indx) && isReadyToCumHandled(_indx)):
 			addAction("cum" if !checkActiveDomPC(_indx) else "domcumstrapon", 1.0, "Cum!", "You're about to cum", {A_PRIORITY: 1001})
 		elif(state == "sex" && (isReadyToCumHandled(DOM_0) || isStrapon(DOM_0)) && (isReadyToCumHandled(DOM_1) || isStrapon(DOM_1))):
-			if(!isStrapon(_indx) && !checkActiveDomPC(_indx)):
+			if(!isStrapon(_indx) && !checkActiveDomPCUnlessStrapon(_indx)):
 				addAction("cum", 1.0, "Cum inside", "Cum inside them!", {A_PRIORITY: 1001})
 		elif(state == "sex" && isReadyToCumHandled(SUB_0) && !canDoActions(SUB_0) && !checkActiveDomPC(_indx)):
 			addAction("subcum", 1.0, "Sub orgasm!", "They are about to cum!", {A_PRIORITY: 1001})

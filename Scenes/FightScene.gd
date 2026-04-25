@@ -139,7 +139,8 @@ func _run():
 			usableItems = GM.pc.getInventory().getAllCombatUsableRestraints()
 		else:
 			usableItems = GM.pc.getInventory().getAllCombatUsableRestraintsForStaticNpc()
-		var countsByItemID = {}
+		var countsByItemID:Dictionary = {}
+		var hasAtLeastOneUsableByItemID:Dictionary = {}
 		if(isInCategory):
 			var newUsable = []
 			for item in usableItems:
@@ -156,6 +157,10 @@ func _run():
 			usableItems = newUsable
 		else:
 			for item in usableItems:
+				var itemSlot:String = item.getClothingSlot()
+				var theCanEquipResult:Array = canEquipRestraintOntoEnemySlotOrReason(itemSlot)
+				if(theCanEquipResult[0]):
+					hasAtLeastOneUsableByItemID[item.id] = true
 				if(!countsByItemID.has(item.id)):
 					countsByItemID[item.id] = 1
 					countsByUniqueRestraint[item] = 1
@@ -169,18 +174,20 @@ func _run():
 				if(itemRef == null):
 					continue
 				
-				addButton(str(countsByItemID[categoryID])+"x"+itemRef.getVisibleName(), itemRef.getCombatDescription(), "openrestraintscategory", [categoryID])
+				if(hasAtLeastOneUsableByItemID.has(categoryID)):
+					addButton(str(countsByItemID[categoryID])+"x"+itemRef.getVisibleName(), itemRef.getCombatDescription(), "openrestraintscategory", [categoryID])
+				else:
+					addDisabledButton(str(countsByItemID[categoryID])+"x"+itemRef.getVisibleName(), "Can't force this item onto the enemy")
 				
 		for item in usableItems:
 			if(!isInCategory && countsByItemID.has(item.id) && countsByItemID[item.id] > 1):
 				continue
 			
-			var itemSlot = item.getClothingSlot()
+			var itemSlot:String = item.getClothingSlot()
+			var theCanEquipResult:Array = canEquipRestraintOntoEnemySlotOrReason(itemSlot)
 			
-			if(!enemyCharacter.invCanEquipSlot(itemSlot)):
-				addDisabledButton(item.getVisibleName(), "Unable to force this restraint on them")
-			elif(enemyCharacter.getInventory().hasSlotEquipped(itemSlot) && enemyCharacter.getInventory().getEquippedItem(itemSlot).isRestraint()):
-				addDisabledButton(item.getVisibleName(), "They are wearing this type of restraint already")
+			if(!theCanEquipResult[0]):
+				addDisabledButton(item.getVisibleName(), theCanEquipResult[1])
 			else:
 				var restraintData:RestraintData = item.getRestraintData()
 				if(restraintData == null):
@@ -195,9 +202,10 @@ func _run():
 				if(isInCategory):
 					buttonName = "Level "+str(restraintData.getLevel())
 				var buttonDesc = "Restraint level: "+str(restraintData.getLevel()) + "\n" + "Success chance: "+ str(Util.roundF(chanceToForce*100.0, 1))+"%" + "\n\n" + item.getCombatDescription()
-				if(countsByUniqueRestraint.has(item)):
-					buttonDesc = "Amount: " + str(countsByUniqueRestraint[item]) + "\n" + buttonDesc
-				addButton(buttonName, buttonDesc, "forcerestraint", [item])
+				var theAmount:int = countsByUniqueRestraint[item] if countsByUniqueRestraint.has(item) else 1
+				if(theAmount > 0):
+					buttonDesc = "Amount: " + str(theAmount) + "\n" + buttonDesc
+				addButton((str(theAmount)+"x" if theAmount > 1 else "")+buttonName, buttonDesc, "forcerestraint", [item])
 			
 		addButton("Back", "Back to fighting", "closerestraintsmenu")
 	
@@ -1078,3 +1086,10 @@ func doDebugAction(_id, _args = {}):
 
 func supportsShowingPawns() -> bool:
 	return true
+
+func canEquipRestraintOntoEnemySlotOrReason(itemSlot:String) -> Array:
+	if(!enemyCharacter.invCanEquipSlot(itemSlot)):
+		return [false, "Unable to force this restraint on them"]
+	elif(enemyCharacter.getInventory().hasSlotEquipped(itemSlot) && enemyCharacter.getInventory().getEquippedItem(itemSlot).isRestraint()):
+		return [false, "They are wearing this type of restraint already"]
+	return [true, ""]

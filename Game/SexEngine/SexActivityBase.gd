@@ -1260,6 +1260,11 @@ func checkActiveDomPC(_indx:int) -> bool:
 		_i += 1
 	return false
 
+func checkActiveDomPCUnlessStrapon(_indx:int) -> bool:
+	if(GM.pc.isWearingStrapon()): # Hack-ish but it should work fine
+		return false
+	return checkActiveDomPC(_indx)
+
 func affectSub(howmuch:float, lustMod, resistanceMod, fearMod):
 	if(lustMod != 0.0):
 		getSub().addLust(int(round(howmuch * lustMod * 100.0)))
@@ -2685,7 +2690,41 @@ func addTextTopBottom(_theText:String, _indxTop:int, _indxBottom:int):
 	var bottomInfo:SexInfoBase = getDomOrSubInfo(_indxBottom)
 	_theText=_theText.replace("<TOP>", topInfo.getCharID()).replace("<BOTTOM>", bottomInfo.getCharID())
 	addTextRaw(_theText)
+
+# Doesn't output any text
+func cumOnSelf(_indxWho:int, _indxCauser:int, uniqueOrgasm:String = "", extraOrgasmText:String = " in such a humiliating way", orgasmReaction:int = SexReaction.OrgasmGeneric):
+	var theInfo:SexInfoBase = getDomOrSubInfo(_indxWho)
+	var causerInfo:SexInfoBase = getDomOrSubInfo(_indxCauser)
+	var theChar := theInfo.getChar()
 	
+	var theSpecialCase:Array = theChar.cumPenisSpecialCases(causerInfo.getCharID() if causerInfo != theInfo else "")
+
+	#theChar.cumOnFloor(causerInfo.getCharID() if causerInfo != theInfo else "")
+	theInfo.cum(causerInfo if causerInfo != theInfo else null)
+
+	if(theChar.hasPenis()):
+		var howCumText := "is shooting {<SUB>.cum} all over {<SUB>.yourHis} belly"
+		if(theSpecialCase[0] == SexCumSpecialCase.CONDOM):
+			howCumText = "is filling {<SUB>.yourHis} condom full"
+		if(theSpecialCase[0] == SexCumSpecialCase.PUMP):
+			howCumText = "is filling {<SUB>.yourHis} penis pump full"
+		var _theText := "{<SUB>.Your} cock "+howCumText+" as {<SUB>.youHe} {<SUB>.youVerb('orgasm')}"+extraOrgasmText+"!" # in such a humiliating way
+		if(theSpecialCase[0] == SexCumSpecialCase.NOTHING):
+			theChar.cummedOnBy(theChar.getID(), FluidSource.Penis)
+		_theText =_theText.replace("<SUB>", theInfo.getCharID()).replace("<DOM>", causerInfo.getCharID())
+		addTextRaw(_theText)
+
+	if(theChar.hasReachableVagina()):
+		theChar.cummedOnBy(theChar.getID(), FluidSource.Vagina, 0.3)
+
+	if(uniqueOrgasm != ""):
+		sendSexEvent(SexEvent.UniqueOrgasm, _indxCauser, _indxWho, {orgasmType=uniqueOrgasm})
+	if(orgasmReaction >= 0):
+		react(orgasmReaction, [100.0, 100.0] if causerInfo != theInfo else [100.0], [_indxWho, _indxCauser] if causerInfo != theInfo else [_indxWho], [uniqueOrgasm])
+	
+	if(theChar.getWornPenisPump() != null):
+		fetishAffect(_indxWho, Fetish.SeedMilking, 3.0)
+
 func cumGeneric(_indxWho:int, _indxCauser:int, uniqueOrgasm:String = "", extraOrgasmText:String = "", orgasmReaction:int = SexReaction.OrgasmGeneric):
 	var theInfo:SexInfoBase = getDomOrSubInfo(_indxWho)
 	var causerInfo:SexInfoBase = getDomOrSubInfo(_indxCauser)

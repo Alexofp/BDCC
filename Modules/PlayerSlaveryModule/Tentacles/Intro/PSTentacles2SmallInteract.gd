@@ -126,7 +126,7 @@ func _run():
 		saynn("You open the fridge again and look at the contents..")
 
 		addButton("Cooked chicken", "Feed it some chicken meet", "1_chicken")
-		addButton("Raw meat", "Feed it a whole stake", "1_meat")
+		addButton("Raw meat", "Feed it a whole steak", "1_meat")
 		addButton("'Milk'", "Feed it that suspicious white fluid", "1_milk")
 		addButton("Broccoli", "Feed it some broccoli", "1_broc")
 	if(state == "1_chicken"):
@@ -160,7 +160,7 @@ func _run():
 		
 		aimCameraAndSetLocName("pstent_middle")
 		GM.pc.setLocation("pstent_middle")
-		saynn("For whatever reason, there is a stake there.. a completely raw, uncooked stake.")
+		saynn("For whatever reason, there is a steak there.. a completely raw, uncooked steak.")
 
 		saynn("You ain't gonna eat it yourself anyway.. so you just grab it and toss it to the tentacles.")
 
