@@ -14,6 +14,7 @@ func _init():
 	
 	scenes = [
 			"res://Modules/KaitModule/Chapter1/DomCh1s1AgreeScene.gd",
+			"res://Modules/KaitModule/Chapter1/DomCh1RahiRecScene.gd",
 		]
 	characters = [
 	]
