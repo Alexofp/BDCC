@@ -594,7 +594,7 @@ func getEggsToBeLaid(_time:int = 30*60, _ignoreIfPlugged:bool = true) -> Array:
 	
 	for egg in bigEggs:
 		var theEggTime:int = egg.getTimeUntilReadyToBeLaid()
-		if(theEggTime <= _time):
+		if(theEggTime <= _time || egg.fetusReadyForBirth):
 			if(_ignoreIfPlugged):
 				var theOrifice:int = egg.orificeType
 				if(isOrificeBlockedForEggs(theOrifice)):
