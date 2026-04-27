@@ -101,7 +101,7 @@ func _run():
 		addCharacter(GM.main.PS.getScientist1CharID())
 		addCharacter(GM.main.PS.getScientist2CharID())
 		playAnimation(StageScene.Duo, "stand", {pc=GM.main.PS.getScientist1CharID(), npc=GM.main.PS.getScientist2CharID()})
-		saynn("You approach the window and see the two scientists. Their bodies are outlined by the harsh, cold lights. The guy holds a steaming mug and the girl is clutching a table to her chest. They're classy as always.")
+		saynn("You approach the window and see the two scientists. Their bodies are outlined by the harsh, cold lights. The guy holds a steaming mug and the girl is clutching a tablet to her chest. They're classy as always.")
 
 		saynn("The intercom kicks in with a sharp pop.")
 
@@ -189,7 +189,7 @@ func _run():
 
 		saynn("[say=sci1]Shut your mouth. It is necessary. And you.[/say]")
 
-		saynn("He looks at his colleague.")
+		saynn("He look at you.")
 
 		saynn("[say=sci1]You have time.. until we finish our coffee break. Apparently I also have to have a short talk with my assistant.[/say]")
 

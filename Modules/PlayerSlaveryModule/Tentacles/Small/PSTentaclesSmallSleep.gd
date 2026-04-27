@@ -73,7 +73,7 @@ func _run():
 
 			_tentacles.talk("Thank you, we feel better.")
 		else:
-			saynn("You climb into your bed.. and start preparing for sleep. The tentacles are watching you do so.. they're really starring. They're trying to be sneaky about it.. but you can feel their attention.")
+			saynn("You climb into your bed.. and start preparing for sleep. The tentacles are watching you do so.. they're really staring. They're trying to be sneaky about it.. but you can feel their attention.")
 
 			saynn("When they notice your stare, the tendrils pretend that they're not doing anything, just swaying aimlessly. Kinda cute.")
 
