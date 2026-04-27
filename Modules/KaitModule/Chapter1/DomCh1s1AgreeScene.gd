@@ -28,7 +28,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "near_hideout")
 	if(state == "near_hideout"):
-		aimCameraAndSetLocName("hideout_enter")
+		aimCameraAndSetLocName("fight_announcer")
 		saynn("Behind the raised platform, there is a doorframe, half-hidden in shadow. Kait walks through it and invites you to follow.")
 
 		saynn("You do.")

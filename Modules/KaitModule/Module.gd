@@ -26,3 +26,15 @@ func _init():
 
 func resetFlagsOnNewDay():
 	pass
+
+func incKaitSubmission():
+	pass
+
+func incKaitLove():
+	pass
+
+func incAvySubmission():
+	pass
+
+func incAvyLove():
+	pass
