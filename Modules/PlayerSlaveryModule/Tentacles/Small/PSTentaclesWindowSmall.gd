@@ -798,7 +798,7 @@ func _run():
 
 		saynn("You still see.. and feel everything.. but you don't control anything.. just a passive observer of your own body's actions. Your body is no longer yours..")
 
-		saynn("A single, slender tendril approaches. You feel gently tap, once, against your forehead.")
+		saynn("A single, slender tendril approaches. You feel it gently tap, once, against your forehead.")
 
 		_tentacles.talk("Look at us.")
 		saynn("Your head lifts, against your own will, to look up. The hypnotic sway of the tentacles intensifies the control. You feel.. good.. very good. So good that you wanna moan.")
@@ -846,12 +846,12 @@ func _run():
 		elif (GM.pc.hasReachablePenis()):
 			saynn("Your back arches. A hot, thick rope of {pc.cum} hits the floor as your dick twitches and jumps, shooting wildly in helpless pulses. You let out a choked, silent gasp, your body jerking from the immense uncontrollable pleasure waves that crash over you.. again and again.. As soon as one of your orgasms stops, another one starts..")
 
-			saynn("At some point your body is physically unable to stay upright anymore. You collapse onto the floor.. and twitch hard as your {ps.penis} keeps pulsing and throbbing, shooting strings of seed until there is nothing left.")
+			saynn("At some point your body is physically unable to stay upright anymore. You collapse onto the floor.. and twitch hard as your {pc.penis} keeps pulsing and throbbing, shooting strings of seed until there is nothing left.")
 
 		elif (GM.pc.isWearingChastityCage()):
 			saynn("Your back arches. Your poor caged up dick twitches in its little prison.. until the pressure becomes too much to endure. A hot, thick rope of {pc.cum} hits the floor, your locked cock shooting wildly in helpless pulses. You let out a choked, silent gasp, your body jerking from the immense uncontrollable pleasure waves that crash over you.. again and again.. As soon as one of your orgasms stops, another one starts..")
 
-			saynn("At some point your body is physically unable to stay upright anymore. You collapse onto the floor.. and twitch hard as your {ps.penis} keeps pulsing and throbbing, shooting weak strings of seed until there is nothing left.")
+			saynn("At some point your body is physically unable to stay upright anymore. You collapse onto the floor.. and twitch hard as your {pc.penis} keeps pulsing and throbbing, shooting weak strings of seed until there is nothing left.")
 
 		else:
 			saynn("Your back arches. Your whole body squirms as a massive orgasm overtakes you. A chocked, silent gasp leaves your lips, your body jerking from the immense uncontrollable pleasure waves that crash over you.. again and again.. As soon as one of your orgasms stops, another one starts..")

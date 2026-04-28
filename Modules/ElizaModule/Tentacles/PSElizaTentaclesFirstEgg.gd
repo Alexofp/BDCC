@@ -57,7 +57,7 @@ func _run():
 
 		saynn("[say=eliza]Listen.. I don't wanna. I wanna grow my own from scratch. We.. are gonna grow our own~. The perfect tentacles.[/say]")
 
-		saynn("The machine suddenly beeps! Eliza learns towards the computer screen that's now full of graphs and numbers.")
+		saynn("The machine suddenly beeps! Eliza leans towards the computer screen that's now full of graphs and numbers.")
 
 		saynn("[say=eliza]Hm.. Mhmm.. uh.. mhm mhm.. mm-m..[/say]")
 

@@ -2484,7 +2484,7 @@ func _run():
 		addButton("Continue", "See what happens next", "futa_sex_cum")
 	if(state == "futa_sex_cum"):
 		playAnimation(StageScene.SexMatingPress, "inside", {pc="eliza", npc="pc", pcCum=true, npcCum=true, bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
-		saynn("When your pussy pushes her over the edge, Eliza slams into you for the final time, ramming her member as deep as your "+str("slit" if !isAnal else "ass")+" allows"+str(", her knot stretching you wide and slipping inside" if isKnot else "")+". Her cock starts to throb in time with her racing heartbeat."+str(" Her barbs are stiff like needles, preventing her from pulling out.." if isBarbs else "")+""+str(" The flat tip of her cock flares up inside you, becoming even more fat." if isHorse else "")+"")
+		saynn("When your "+str("pussy" if !isAnal else "asshole")+" pushes her over the edge, Eliza slams into you for the final time, ramming her member as deep as your "+str("slit" if !isAnal else "ass")+" allows"+str(", her knot stretching you wide and slipping inside" if isKnot else "")+". Her cock starts to throb in time with her racing heartbeat."+str(" Her barbs are stiff like needles, preventing her from pulling out.." if isBarbs else "")+""+str(" The flat tip of her cock flares up inside you, becoming even more fat." if isHorse else "")+"")
 
 		saynn("[say=eliza]Cum for me-..[/say]")
 

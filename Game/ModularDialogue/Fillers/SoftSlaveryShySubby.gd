@@ -477,7 +477,7 @@ func getText(_id:String, _args:Dictionary):
 		return [
 			"Okay.. I see.. sorry..",
 			"Ohhh. Right. That makes sense.",
-			"Okay, I won't both you two.",
+			"Okay, I won't bother you two.",
 			"Sorry.. I'm sorry..",
 		]
 	if(_id == "SoftSlaveryProtectedByFriendLost"):
