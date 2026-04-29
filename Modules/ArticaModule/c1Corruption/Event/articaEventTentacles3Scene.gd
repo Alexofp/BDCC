@@ -236,7 +236,7 @@ func _react(_action: String, _args):
 	if(_action == "tentacles_grow"):
 		processTime(5*60)
 
-	if(_action == "See if Artica will manage to endure this.. artica_tentaclessex"):
+	if(_action == "artica_tentaclessex"):
 		processTime(5*60)
 
 	if(_action == "artica_tentaclessex_fast"):

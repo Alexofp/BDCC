@@ -388,7 +388,7 @@ func _run():
 
 		saynn("You leave another little kiss and then open your mouth, letting your tongue slide out to lap at the taste.. and to tease the sensitive tip.")
 
-		saynn("Feeling a bit more bold, you catch the tip of your lips and let a small part of it into your mouth, your tongue now licking around it and playing with it.")
+		saynn("Feeling a bit more bold, you catch the tip with your lips and let a small part of it into your mouth, your tongue now licking around it and playing with it.")
 
 		saynn("That deep kiss triggers something..")
 
@@ -411,7 +411,7 @@ func _run():
 		playAnimation(StageScene.TentaclesDeepthroat, "inside", {plant=true, bodyState={naked=true, hard=true}})
 		saynn("As your reflex starts making you gag and choke on it, the tension inside the tentacle begins to rise. The movements become more urgent, less controlled. Then, with a powerful, shuddering thrust, it locks itself deep in your throat.. and begins to pulse hard.")
 
-		saynn("Thick, warm, honey-lick fluid gets pumped directly into your stomach. Each throbbing pulse is a flood of sweet juices, filling you with a spreading, heavy warmth. The tentacle continues to twitch and pump, ensuring every last drop is deposited deep inside you.. until your belly feels full.")
+		saynn("Thick, warm, honey-like fluid gets pumped directly into your stomach. Each throbbing pulse is a flood of sweet juices, filling you with a spreading, heavy warmth. The tentacle continues to twitch and pump, ensuring every last drop is deposited deep inside you.. until your belly feels full.")
 
 		saynn("Finally, spent, it slowly retracts, sliding back out of your throat with a wet pop. As it happens, you instantly start coughing and gasping for air.. the tentacle leaving you panting hard.")
 

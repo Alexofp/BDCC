@@ -428,7 +428,7 @@ func _run():
 
 		saynn("[say=sci2]The price to usefulness ratio was the best.[/say]")
 
-		saynn("[say=sci1]But do you see what {pc.he} {pc.isAre} doing? {pc.he} {pc.isAre} hugging the fucking alien egg thing..[/say]")
+		saynn("[say=sci1]But do you see what {pc.he} {pc.isAre} doing? {pc.He} {pc.isAre} hugging the fucking alien egg thing..[/say]")
 
 		saynn("[say=sci2]Well.. actually.. It's a good way to keep it warm.[/say]")
 

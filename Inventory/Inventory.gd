@@ -63,7 +63,7 @@ func addXOfItemID(itemID:String, amount:int):
 func hasItem(item):
 	return items.has(item)
 
-func hasItemID(itemID: String):
+func hasItemID(itemID: String) -> bool:
 	for item in items:
 		if(item.id == itemID):
 			return true
@@ -175,7 +175,7 @@ func removeItem(item):
 		return item
 	return null
 
-func removeFirstOf(itemID):
+func removeFirstOf(itemID:String):
 	var theItem = getFirstOf(itemID)
 	if(theItem != null):
 		removeItem(theItem)
@@ -187,20 +187,20 @@ func removeXFromItemOrDelete(item, amount:int):
 	
 	item.removeXOrDestroy(amount)
 
-func getAmountOf(itemID):
+func getAmountOf(itemID:String) -> int:
 	var item = getFirstOf(itemID)
 	if(item == null):
 		return 0
 	return item.amount
 
-func getUniqueAmountOf(itemID):
-	var result = 0
+func getUniqueAmountOf(itemID:String) -> int:
+	var result := 0
 	for item in items:
 		if(item.id == itemID):
 			result += 1
 	return result
 
-func hasXOf(itemID, amount):
+func hasXOf(itemID:String, amount:int) -> bool:
 	var item = getFirstOf(itemID)
 	if(item == null):
 		return false
@@ -209,21 +209,21 @@ func hasXOf(itemID, amount):
 	else:
 		return false
 
-func getXOfTotal(itemID):
-	var result = 0
+func getXOfTotal(itemID:String) -> int:
+	var result := 0
 	for item in items:
 		if(item.id == itemID):
 			result += item.amount
 	return result
 
-func hasXOfTotal(itemID, amount):
+func hasXOfTotal(itemID:String, amount:int) -> bool:
 	var itemTotal = getXOfTotal(itemID)
 	
 	if(itemTotal >= amount):
 		return true
 	return false
 
-func removeXOfOrDestroy(itemID, amount):
+func removeXOfOrDestroy(itemID:String, amount:int):
 	var item = getFirstOf(itemID)
 	if(item == null):
 		return
@@ -271,7 +271,7 @@ func equipItem(item):
 	if(hasItem(item)):
 		removeItem(item)
 	
-	var slot = item.getClothingSlot()
+	var slot:String = item.getClothingSlot()
 	
 	if(equippedItems.has(slot)):
 		Log.printerr("Trying to equip an item to slot "+str(slot)+" when there is already an item")
@@ -333,7 +333,7 @@ func unequipSlotRemoveIfRestraint(slot):
 		return true
 
 func forceEquipRemoveOther(item):
-	var slot = item.getClothingSlot()
+	var slot:String = item.getClothingSlot()
 	
 	if(hasSlotEquipped(slot)):
 		removeItemFromSlot(slot)
@@ -341,7 +341,7 @@ func forceEquipRemoveOther(item):
 	return equipItem(item)
 
 func forceEquipStoreOther(item):
-	var slot = item.getClothingSlot()
+	var slot:String = item.getClothingSlot()
 	
 	if(hasSlotEquipped(slot)):
 		var storedItem = removeItemFromSlot(slot)
@@ -350,7 +350,7 @@ func forceEquipStoreOther(item):
 	return equipItem(item)
 
 func forceEquipStoreOtherUnlessRestraint(item):
-	var slot = item.getClothingSlot()
+	var slot:String = item.getClothingSlot()
 	
 	if(hasSlotEquipped(slot)):
 		var storedItem = removeItemFromSlot(slot)
@@ -612,7 +612,7 @@ func forceRestraintsWithTag(tag, amount = 1):
 	for itemID in itemIDs:
 		var potentialItem = GlobalRegistry.getItemRef(itemID)
 		
-		var slot = potentialItem.getClothingSlot()
+		var slot:String = potentialItem.getClothingSlot()
 		if(slot == null || !canEquipSlot(slot)):
 			continue
 		
@@ -637,7 +637,7 @@ func forceRestraintsList(_itemIDs:Array, maxAmount:int=-1) -> Array:
 	for itemID in _itemIDs:
 		var potentialItem = GlobalRegistry.getItemRef(itemID)
 		
-		var slot = potentialItem.getClothingSlot()
+		var slot:String = potentialItem.getClothingSlot()
 		if(slot == null || !canEquipSlot(slot)):
 			continue
 		
@@ -674,7 +674,7 @@ func getRestraintsThatCanBeForcedDuringSex(tag):
 	for itemID in itemIDs:
 		var potentialItem = GlobalRegistry.getItemRef(itemID)
 		
-		var slot = potentialItem.getClothingSlot()
+		var slot:String = potentialItem.getClothingSlot()
 		if(slot == null || !canEquipSlot(slot)):
 			continue
 

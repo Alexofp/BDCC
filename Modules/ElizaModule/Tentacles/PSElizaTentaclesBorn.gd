@@ -298,7 +298,7 @@ func _run():
 
 		saynn("[say=eliza]Tell them to let go![/say]")
 
-		saynn("One of the tentacles sneaks under her skirt and rubs against her inner thighs.. before finding a particularly sensitive spot")
+		saynn("One of the tentacles sneaks under her skirt and rubs against her inner thighs.. before finding a particularly sensitive spot.")
 
 		saynn("[say=eliza]Easy! Easy.. ah! Tell them to stop..[/say]")
 
@@ -412,7 +412,7 @@ func _run():
 
 		saynn("[say=eliza]Mmhh-?[/say]")
 
-		saynn("She tries to look down at it.. but the tentacle in her mouth forces her to keep her neck straight. All the while, that bump starts putting more and more pressure onto Eliza's sex.. kinda like a knot of canine cock would do.")
+		saynn("She tries to look down at it.. but the tentacle in her mouth forces her to keep her neck straight. All the while, that bump starts putting more and more pressure onto Eliza's sex.. kinda like the knot of canine cock would do.")
 
 		addButton("Continue", "See what happens next", "eliza_gets_stuffed")
 	if(state == "eliza_gets_stuffed"):

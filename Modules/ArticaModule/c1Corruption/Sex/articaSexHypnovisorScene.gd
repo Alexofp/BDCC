@@ -217,7 +217,7 @@ func _run():
 		if (isCaged):
 			playAnimation(StageScene.Zonked, "rubcum", {pc="artica", npc="pc", pcCum=true, bodyState={naked=true, hard=true}})
 		else:
-			playAnimation(StageScene.Zonked, "rubcum", {pc="artica", npc="pc", pcCum=true, bodyState={naked=true, hard=true}})
+			playAnimation(StageScene.Zonked, "strokecum", {pc="artica", npc="pc", pcCum=true, bodyState={naked=true, hard=true}})
 		saynn("Then, with a cute moan, pent-up Artica suddenly throws her head back, her {artica.penis} erupting in a torrent of hot, sticky cum that splatters across her tits and stomach. Each pulse is sending waves of pleasure through her body, her toes curling in ecstasy, her needy pussy gushing with girlcum!")
 
 		saynn("Completely spent, Artica lays panting on the floor, her body covered in her own cum as she enjoys the afterglow of her orgasm.")

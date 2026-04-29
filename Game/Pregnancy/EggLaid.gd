@@ -261,6 +261,7 @@ func createEggCell() -> EggCell:
 		return newEggCell
 	var theEggCell := EggCell.new()
 	theEggCell.loadData(data)
+	theEggCell.fetusReadyForBirth = false # Reset their 'ready-for-birth' status
 	return theEggCell
 
 func saveData() -> Dictionary:

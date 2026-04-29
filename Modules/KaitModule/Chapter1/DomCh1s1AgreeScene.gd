@@ -1,5 +1,8 @@
 extends SceneBase
 
+var knowsRahi = false
+var enslavedRahi = false
+
 func _init():
 	sceneID = "DomCh1s1AgreeScene"
 
@@ -25,7 +28,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "near_hideout")
 	if(state == "near_hideout"):
-		aimCameraAndSetLocName("hideout_enter")
+		aimCameraAndSetLocName("fight_announcer")
 		saynn("Behind the raised platform, there is a doorframe, half-hidden in shadow. Kait walks through it and invites you to follow.")
 
 		saynn("You do.")
@@ -195,7 +198,7 @@ func _run():
 
 		saynn("Kait swipes the dust away from her face and then rubs her snout.")
 
-		saynn("[say=kait]Pff. Once we have this base of operations set up, we can start grinding over the details. Don't be a doubter, I've had enough of those already.[/say]")
+		saynn("[say=kait]Pff. Once we have this base of operations set up, we can start grinding over the details. Don't be a doubter, I've had enough of it already.[/say]")
 
 		saynn("Maybe there is a good reason to be one with her.")
 
@@ -227,11 +230,11 @@ func _run():
 
 		saynn("You were about to assume a combat stance.. but then her expression softens, rage fading away.")
 
-		saynn("[say=kait]Listen.. well.. At least I'm trying, okay? If you wanna sit on your ass all day, be my guest. I want this collar off. I wanna be free.[/say]")
+		saynn("[say=kait]Listen.. well.. At least I'm trying, okay? If you wanna sit on your ass all day, be my guest. I wanna be free.[/say]")
 
 		saynn("Kitty bares her fangs.")
 
-		saynn("[say=kait]And I wanna make them regret..[/say]")
+		saynn("[say=kait]But not before I make them regret..[/say]")
 
 		saynn("Maybe there is some spirit in this one.")
 
@@ -241,30 +244,40 @@ func _run():
 
 		addButton("Continue", "See what happens next", "ans_comes_in")
 	if(state == "ans_comes_in"):
-		playAnimation(StageScene.Duo, "stand", {npc="announcer", pc="avy"})
+		playAnimation(StageScene.Duo, "stand", {npc="kait", pc="avy"})
 		addCharacter("announcer")
 		addCharacter("avy")
-		saynn("Announcer steps into the dark room.. followed by another person.. Avy.")
+		saynn("Announcer steps into the dark room first, cane tapping softly against the metal floor.")
+
+		saynn("Right behind him comes another shape. Avy, the mean dark fox who you can barely see.")
 
 		saynn("[say=avy]What a shithole, wow.[/say]")
 
-		saynn("Kait instantly puffs up and blocks the way for the pair.")
+		saynn("It's hard to mistake her for anyone else though.")
+
+		saynn("Kait instantly puffs up and blocks the way for the pair, her brows furrowed.")
 
 		saynn("[say=kait]Ans? Why did you bring her?[/say]")
 
-		saynn("The feline's voice sounds concerned, her tail spazzing out.")
+		saynn("The feline's voice raises in pitch, her tail wagging behind.")
+
+		saynn("The Announcer rolls his shoulders and leans against the cane.")
 
 		saynn("[say=announcer]I trust her. She is a good fighter.[/say]")
 
 		saynn("[say=kait]No, she is not.. She is also a total bitch.[/say]")
 
-		saynn("[say=avy]Wow, look who's talking. You're pretty mouthy for a doormat.[/say]")
+		saynn("Avy's ears twitch, she lets out a low growl and strides forward until she pretty much bumps foreheads with Kait. The cat is half-a-head smaller though.")
 
-		saynn("Kait growls, her claws extending.")
+		saynn("[say=avy]Wow, look who's talking. You're pretty mouthy for a weakling.[/say]")
+
+		saynn("Kait growls, her claws extending, tail lashing. All the while, Avy is smiling.")
 
 		saynn("[say=kait]I know how you've gotten so high on the fighter list.[/say]")
 
 		saynn("[say=avy]Because I'm a good fighter, just like how Ans said. The best one even. Much better than you.[/say]")
+
+		saynn("The situation gets tense fast as they start shoving each other back with increasing power.")
 
 		saynn("[say=announcer]Ladies..[/say]")
 
@@ -272,87 +285,140 @@ func _run():
 
 		saynn("[say=avy]Why shouldn't I smash you against the wall?[/say]")
 
+		saynn("Fangs flash, the claws are out. The growling is bouncing off the metal walls.")
+
+		addButton("Continue", "See what happens next", "fake_out")
+	if(state == "fake_out"):
+		playAnimation(StageScene.Duo, "stand", {npc="announcer", pc="avy"})
+		saynn("Then a sharp crack.")
+
 		saynn("[say=announcer]Babes![/say]")
 
-		saynn("He stomps his cane against the cold floor.")
+		saynn("Ans lowers his cane.")
 
 		saynn("[say=announcer]Let's all take a pill of chill. You will have faces to scratch and walls to smash against. For now, endure each other. Focus.[/say]")
+
+		saynn("The girls give each other some more sharp glances.. and then both take a step back. A small one, just enough.")
 
 		saynn("[say=avy]I heard you had no plan.[/say]")
 
 		saynn("[say=announcer]Then our first step is to come up with a plan.[/say]")
 
+		saynn("Kait looks around and sighs.")
+
 		saynn("[say=kait]Right.. Well.. We need more hands and heads. {pc.Name} is right.[/say]")
 
-		saynn("[say=avy]No. Our top priority must be cleaning this shithole up. Before I cough my lungs out.[/say]")
+		saynn("[say=avy]No. Our top priority must be cleaning this shithole up. Before I break my leg and then cough my lungs out.[/say]")
 
 		saynn("[say=announcer]Both of those sound actionable. Perfect, girls.[/say]")
 
-		saynn("[say=avy]Actionable? How exactly are you planning to trick bitches into following you, huh?[/say]")
+		saynn("Avy tilts her head at you all.")
 
-		saynn("[say=kait]I was thinking.. we ask them. And if they say no.. we ask them again but a little rougher.[/say]")
+		saynn("[say=avy]Actionable? How exactly are you planning to trick bitches into following you, huh? Go around asking people? This prison is full of spineless brats. We will have to break them.[/say]")
 
-		saynn("[say=avy]The prison is full of spineless brats, trust me. We will have to break them. We will need rooms for that.[/say]")
+		saynn("The guy taps the cane against the floor idly, thinking.")
 
-		saynn("[say=announcer]Alright. Gotta do what we gotta do. I'm sure we can assemble something here.[/say]")
+		saynn("[say=announcer]I hear you. We gotta do what we gotta do. I'm sure we can assemble something here that will help with that.[/say]")
 
-		saynn("[say=avy]We still need to know who is good and who's completely useless.[/say]")
+		saynn("He sounds like he believes in the goal.. even if he is not exactly thrilled by the situation.")
 
-		saynn("[say=announcer]For sure, we gotta prioritize.[/say]")
+		saynn("[say=avy]Useless ones will weigh us down.[/say]")
+
+		saynn("Kait hums and scritches her chin.")
 
 		saynn("[say=kait]If we can get our paws on a datapad with the personnel database..[/say]")
 
 		saynn("[say=avy]The thing will get remotely wiped in seconds, you dumb cat. Even if you do it stealthily.[/say]")
 
+		saynn("Kait's ears go flat for a second.")
+
 		saynn("[say=kait]Propose something then. Right now you're the useless one here.[/say]")
 
 		saynn("[say=avy]I don't fucking know, it's a dumb plan to begin with.[/say]")
 
-		saynn("[say=announcer]Listen. I have an idea. What if we.. print it?[/say]")
+		saynn("A datapad.")
 
-		saynn("[say=kait]Print it? You wanna print multiple thousands of records? And how?[/say]")
+		saynn("That little rectangular thing they all seem to use for everything important. It probably would not control much on its own.. But it might indeed be useful if it can pull up records, names, locations, plans..")
 
-		saynn("[say=announcer]We get access to a console. We sort the records by.. the length of the crime list. And we print the top hundred or so?[/say]")
+		saynn("[say=announcer]We can still try it. Are any of us good thieves?[/say]")
 
-		saynn("[say=avy]Exclude me too first, because I'd be the first on that list.[/say]")
+		saynn("[say=kait]Not really.[/say]")
 
-		saynn("[say=kait]Hm.. That could actually work. Do you know any consoles we can get to?[/say]")
+		saynn("[say=avy]I can beat up a guard and take it.[/say]")
 
-		saynn("[say=announcer]No. Not on this floor. Command Deck has a bunch of offices. But we would need at least a staff badge to get there.[/say]")
+		saynn("[say=pc]I could try but I might get caught.[/say]")
 
-		saynn("[say=kait]Right.. We need to steal a badge then. Does anyone know a good thief?[/say]")
+		saynn("Ans hums.")
 
-		saynn("[say=avy]I do, in fact, know one. Name is Rahi.[/say]")
+		saynn("[say=announcer]Too risky. Does anyone know a good thief then?[/say]")
+
+		saynn("Avy's eyes light up.")
+
+		saynn("[say=avy]I do, in fact, know one. Name is.. uh.. Rahi.[/say]")
 
 		saynn("[say=kait]Who the heck is Rahi?[/say]")
 
-		saynn("[say=avy]She usually wastes her time on the bench near the stocks. Total doormat. But can steal your wet panties in a split second.[/say]")
+		knowsRahi = getFlag("RahiModule.Rahi_AskedName", false)
+		enslavedRahi = getFlag("RahiModule.rahi5SceneHappened", false)
+		if (enslavedRahi):
+			saynn("Oh yeah, you know her. You know her very well in fact.")
 
-		saynn("[say=kait]I don't have any panties.[/say]")
+		elif (knowsRahi):
+			saynn("That name sounds familiar..")
 
-		saynn("[say=avy]See? We break her in. And make her yoink that badge for us.[/say]")
+		else:
+			saynn("You can't say that you know who that is either.")
+
+		saynn("[say=avy]Usually wastes her time on the bench near the stocks. Total doormat. We break her in. And make her work for us.[/say]")
+
+		if (enslavedRahi):
+			saynn("She is not exactly a bench cat anymore.. but that doesn't change much.")
 
 		saynn("[say=announcer]Perfect. Someone should go and start recruiting her. While the rest of us clean this place up.[/say]")
 
-		saynn("[say=pc]I can go grab and bring her.[/say]")
+		if (enslavedRahi):
+			saynn("Obviously, since Rahi belongs to you already, you should be the one who talks with her.")
 
-		saynn("[say=announcer]Sounds like a plan. We will need a special space.. for persuading her.[/say]")
+		else:
+			saynn("Since you don't exactly have a passion for cleaning.. might as well do the other task.")
 
-		saynn("[say=pc]You think she won't just agree?[/say]")
+		saynn("[say=pc]I will go grab and bring her.[/say]")
 
-		saynn("[say=announcer]She might. But gotta make sure that her heart and mind is with us, not just her leash.[/say]")
+		saynn("[say=announcer]Sounds like a plan. We will need a special space.. where we can talk with her.[/say]")
+
+		saynn("Who knows, maybe a creepy dark maintenance tunnel is exactly the right place for that?")
+
+		saynn("[say=pc]You think she won't just join us?[/say]")
+
+		saynn("[say=announcer]Gotta make sure her heart and mind is with us, not just her leash.[/say]")
+
+		if (enslavedRahi):
+			saynn("That will be easy, you already know it.")
+
+		else:
+			saynn("If she is just as weak as she is described, that shouldn't be too hard.")
 
 		saynn("[say=avy]Like I said, we gotta break her in.[/say]")
 
+		saynn("Ans nods towards her.")
+
 		saynn("[say=announcer]Thanks, Avy.[/say]")
+
+		saynn("This makes the foxy raise her chin high and glare at the cat again.")
 
 		saynn("[say=avy]See? I'm mega useful.[/say]")
 
+		saynn("Kait rolls her eyes, her tail is still unhappy.")
+
 		saynn("[say=kait]Whatever, one strike and you're out.[/say]")
 
-		saynn("[say=avy]One strike and you're gonna be out, slut.[/say]")
+		saynn("[say=avy]One strike and you're gonna be out, lilac slut.[/say]")
+
+		saynn("Kait's fists are clenched again.. but Ans is quick to lower them for her.")
 
 		saynn("[say=announcer]Let's start cleaning up.[/say]")
+
+		saynn("And for you, it's time to pay that Rahi a visit.")
 
 		addButton("Continue", "See what happens next", "endthescene")
 
@@ -373,4 +439,22 @@ func _react(_action: String, _args):
 	if(_action == "ans_comes_in"):
 		processTime(5*60)
 
+	if(_action == "fake_out"):
+		processTime(5*60)
+		addMessage("Task added!")
+
 	setState(_action)
+
+func saveData():
+	var data = .saveData()
+
+	data["knowsRahi"] = knowsRahi
+	data["enslavedRahi"] = enslavedRahi
+
+	return data
+
+func loadData(data):
+	.loadData(data)
+
+	knowsRahi = SAVE.loadVar(data, "knowsRahi", false)
+	enslavedRahi = SAVE.loadVar(data, "enslavedRahi", false)

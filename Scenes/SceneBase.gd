@@ -384,6 +384,41 @@ func isSpyingOnInteractionsWith(_charID:String):
 func supportsShowingPawns() -> bool:
 	return false
 
+# Just a quick function, spawns an item out of nowhere
+func putOn(_charID:String, _itemID:String):
+	var theCharacter := getCharacter(_charID)
+	if(!theCharacter):
+		return null
+	var theItem = GlobalRegistry.createItem(_itemID)
+	if(!theItem):
+		return null
+	theCharacter.getInventory().forceEquipStoreOtherUnlessRestraint(theItem)
+	return theItem
+
+# Deletes the item!
+func putOff(_charID:String, _itemID:String):
+	var theCharacter := getCharacter(_charID)
+	if(!theCharacter):
+		return null
+	var theCurItem:ItemBase = theCharacter.getInventory().getEquippedItemByID(_itemID)
+	if(!theCurItem):
+		return null
+	theCharacter.getInventory().removeEquippedItem(theCurItem)
+	return theCurItem
+
+func clearSlot(_charID:String, _slot:String):
+	var theCharacter := getCharacter(_charID)
+	if(!theCharacter):
+		return
+	theCharacter.getInventory().clearSlot(_slot)
+
+# Quickly removes some item id from the player's inventory
+func removeItemID(_itemID:String, _am:int = 1):
+	GM.pc.getInventory().removeXOfOrDestroy(_itemID, _am)
+
+func hasItemID(_itemID:String) -> bool:
+	return GM.pc.getInventory().hasItemID(_itemID)
+
 func saveData():
 	var data = {}
 	data["state"] = state

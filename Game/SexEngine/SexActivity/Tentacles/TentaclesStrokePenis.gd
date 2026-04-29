@@ -104,8 +104,8 @@ func handjob_processTurn():
 		addText(RNG.pick([
 			"{sub.You} {sub.youAre} about to cum!",
 			"{sub.You} {sub.youAre} being kept on edge.",
-			"{sub.You} {sub.penisShort} is twitching and throbbing.",
-			"{sub.You} {sub.penisShort} is leaking pre a lot.",
+			"{sub.Your} {sub.penisShort} is twitching and throbbing.",
+			"{sub.Your} {sub.penisShort} is leaking pre a lot.",
 			"{sub.You} {sub.youAre} barely keeping {sub.yourself} from cumming.",
 			"{sub.You} reached {sub.yourHis} peak!",
 		]))
