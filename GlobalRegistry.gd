@@ -293,6 +293,7 @@ var npcOwners:Dictionary = {}
 var npcOwnerEvents:Dictionary = {}
 var npcOwnerEventIDsByTag:Dictionary = {}
 var npcOwnerTraits:Dictionary = {}
+var recruits:Dictionary = {}
 
 var bodypartStorageNode
 
@@ -643,6 +644,7 @@ func registerEverything():
 		registerSceneFolder("res://Scenes/Mineshaft/")
 		registerSceneFolder("res://Game/NpcSlavery/SlaveActionScenes/")
 		registerSceneFolder("res://Game/NpcSlavery/SlaveActionScenes/Prostitution/")
+		registerSceneFolder("res://Game/DomRoute/RecruitScenes/")
 		
 		var end2 = OS.get_ticks_usec()
 		var worker_time2 = (end2-start2)/1000000.0
@@ -710,6 +712,7 @@ func registerEverything():
 	registerTransformationsFolder("res://Game/Transformation/TFs/")
 	registerTransformationEffectsFolder("res://Game/Transformation/Effects/")
 	registerNurseryTaskFolder("res://Game/Science/NurseryTasks/")
+	registerRecruitFolder("res://Game/DomRoute/Recruits/")
 	
 	emit_signal("loadingUpdate", 11.0/totalStages, "Sex scenes")
 	yield(get_tree(), "idle_frame")
@@ -2911,6 +2914,29 @@ func getNpcOwnerTrait(id: String):
 
 func getNpcOwnerTraits():
 	return npcOwnerTraits
+
+
+func registerRecruit(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	recruits[object.id] = loadedClass
+
+func registerRecruitFolder(folder: String):
+	var scripts = getScriptsInFoldersRecursive(folder)
+	for scriptPath in scripts:
+		registerRecruit(scriptPath)
+
+func createRecruit(id: String):
+	if(recruits.has(id)):
+		return recruits[id].new()
+	else:
+		Log.printerr("ERROR: recruit with the id "+id+" wasn't found")
+		return null
+
+func getRecruits():
+	return recruits
+
 
 
 

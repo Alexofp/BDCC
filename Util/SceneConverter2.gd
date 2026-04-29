@@ -8,6 +8,7 @@ var currentRun = ""
 var tabAmount = 0
 var reacts = {}
 var sceneID = "TestScene"
+var sceneParent:String = "SceneBase"
 var sceneReacts = {}
 var trackedVariables = {}
 var initSceneLines = []
@@ -33,6 +34,7 @@ func reset():
 	currentRun = ""
 	tabAmount = 0
 	sceneID = "TestScene"
+	sceneParent = "SceneBase"
 	sceneReacts = {}
 	trackedVariables = {}
 	initSceneLines.clear()
@@ -87,6 +89,10 @@ func _on_Button_pressed():
 		
 		if(line.begins_with("sceneID=")):
 			sceneID = line.substr(8).strip_edges()
+			_i += 1
+			continue
+		if(line.begins_with("extends=")):
+			sceneParent = line.substr(8).strip_edges()
 			_i += 1
 			continue
 		
@@ -279,7 +285,7 @@ func _on_Button_pressed():
 		_i += 1
 	
 	
-	result.append("extends SceneBase")
+	result.append("extends "+sceneParent)
 	result.append("")
 	
 	if(!trackedVariables.empty()):
