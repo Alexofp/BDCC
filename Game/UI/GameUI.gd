@@ -163,14 +163,14 @@ func clearExtraButtons():
 	extraOptions.clear()
 	updateExtraButtons()
 
-func addExtraButton(text: String, tooltip: String = "", method: String = "", args = []):
+func addExtraButton(text: String, tooltip: String = "", method: String = "", args = [], _enabled:bool = true):
 	var _i:int = 0
 	while(extraOptions.has(_i)):
 		_i += 1
-	addExtraButtonAt(_i, text, tooltip, method, args)
+	addExtraButtonAt(_i, text, tooltip, method, args, _enabled)
 
-func addExtraButtonAt(_indx:int, text: String, tooltip: String = "", method: String = "", args = []):
-	extraOptions[_indx] = [true, text, tooltip, method, args]
+func addExtraButtonAt(_indx:int, text: String, tooltip: String = "", method: String = "", args = [], _enabled:bool = true):
+	extraOptions[_indx] = [_enabled, text, tooltip, method, args]
 	queueExtraUpdate()
 
 func queueExtraUpdate():
@@ -201,6 +201,7 @@ func updateExtraButtons():
 		newButton.allowDoubleTabSetting = true
 		newButton.instantTooltip = true
 		newButton.setButtonText(theOptionEntry[1])
+		newButton.setIsDisabled(!theOptionEntry[0])
 		newButton.setShortcutPhysicalScancode(KEY_1+_indx, true)
 		var _some = newButton.connect("pressedActually", self, "_on_extra_option_button", [_indx])
 		var _some2 = newButton.connect("mouse_entered", self, "_on_extra_option_button_tooltip", [_indx, newButton])

@@ -34,6 +34,7 @@ var SCI:Science = Science.new()
 var DrugDenRun:DrugDen
 var PS:PlayerSlaveryBase
 var PSH:PlayerSlaveryHolder = PlayerSlaveryHolder.new()
+var RCS:RecruitSystem = RecruitSystem.new()
 
 var staticCharacters:Dictionary = {}
 var charactersToUpdate:Array = []
@@ -505,6 +506,7 @@ func saveData():
 	data["auctionBidders"] = SAB.saveData()
 	data["science"] = SCI.saveData()
 	data["playerSlaveryHolder"] = PSH.saveData()
+	data["recruitSystem"] = RCS.saveData()
 	data["drugDen"] = DrugDenRun.saveData() if DrugDenRun != null else null
 	if(PS):
 		data["playerSlavery"] = {
@@ -553,7 +555,8 @@ func loadData(data):
 	SAB.loadData(SAVE.loadVar(data, "auctionBidders", {}))
 	SCI.loadData(SAVE.loadVar(data, "science", {}))
 	PSH.loadData(SAVE.loadVar(data, "playerSlaveryHolder", {}))
-		
+	RCS = RecruitSystem.new() # To reset all the state
+	RCS.loadData(SAVE.loadVar(data, "recruitSystem", {}))
 	
 	var scenes = SAVE.loadVar(data, "scenes", [])
 	
@@ -1669,11 +1672,33 @@ func getDebugActions():
 			"args": [
 			],
 		},
+		{
+			"id": "startRecruit",
+			"name": "Start recruit",
+			"args": [
+				{
+					"id": "who",
+					"name": "Who",
+					"type": "list",
+					"value": GM.main.RCS.recruits.keys()[0],
+					"values": GM.main.RCS.getDebugActionOptions(),
+				},
+			],
+		},
 	]
 
 func doDebugAction(id, args = {}):
 	print(id, " ", args)
 	
+	if(id == "startRecruit"):
+		if(GM.main.RCS.hasCurrent()):
+			addMessage("Can't start a recruiting scene. Already recruiting someone!")
+			return
+		
+		GM.main.RCS.setCurrent(args["who"], true)
+		runScene("RecruitStartScene")
+		# Set loc?
+		return
 	if(id == "accelerateEggs"):
 		var theCycle = GM.pc.getMenstrualCycle()
 		if(theCycle):

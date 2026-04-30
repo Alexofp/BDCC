@@ -3,6 +3,7 @@ class_name RecruitBase
 
 var id:String = ""
 var difficulty:int = RecruitDifficulty.Easy
+var charID:String = ""
 
 # To save
 var history:Array = [] # [["loving", "sex", "bondage"], ["strict", "painplay", "anal"], ...]
@@ -28,7 +29,7 @@ func getExtraChoices(_choices:Array) -> Array:
 	return [
 		{
 			id = "condom",
-			name = "Use condom",
+			name = "Condom",
 			desc = "Something mew mew",
 			options = [
 				["no", "No condom", "Don't use a condom"],
@@ -41,6 +42,14 @@ func getExtraChoices(_choices:Array) -> Array:
 
 func isCombinationPossible(_choices:Array, _extras:Dictionary) -> Array:
 	return [true, ""]
+
+func isCombinationPossibleFinal(_choices:Array, _extras:Dictionary) -> Array:
+	var theExtras := getExtraChoices(_choices)
+	for theExtra in theExtras:
+		var theID:String = theExtra["id"]
+		if(!_extras.has(theID)):
+			return [false, "'"+theExtra["name"]+"' option needs to be selected."]
+	return isCombinationPossible(_choices, _extras)
 
 func getSceneToPlay(_choices:Array, _extras:Dictionary) -> String:
 	return ""
@@ -67,6 +76,12 @@ func needsToBeSaved() -> bool:
 	if(completed || !history.empty()):
 		return true
 	return false
+
+func getPresenterCharID() -> String:
+	return "kait"
+
+func getPresenterDialogue() -> String:
+	return "Want me to do it?"
 
 func saveData() -> Dictionary:
 	return {

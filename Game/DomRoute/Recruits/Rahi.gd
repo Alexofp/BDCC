@@ -2,6 +2,7 @@ extends RecruitBase
 
 func _init():
 	id = "Rahi"
+	charID = "rahi"
 	difficulty = RecruitDifficulty.VeryEasy
 	choices = [
 		{
@@ -40,8 +41,7 @@ func getExtraChoices(_choices:Array) -> Array:
 	var result:Array = []
 	if(_choices[1] == "sex"):
 		if(GM.pc.hasReachablePenis()):
-			result.append([
-				{
+			result.append({
 					id = "condom",
 					name = "Use condom",
 					desc = "Something mew mew",
@@ -50,8 +50,7 @@ func getExtraChoices(_choices:Array) -> Array:
 						["worst", "Worst condom", "Use the worst condom you have"],
 						["best", "Best condom", "Use the best condom you have"],
 					],
-				},
-			])
+				})
 		else:
 			# Strapon
 			pass

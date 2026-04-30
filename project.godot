@@ -1335,9 +1335,9 @@ _global_script_classes=[ {
 "path": "res://Game/DomRoute/Util/RecruitSceneBase.gd"
 }, {
 "base": "Reference",
-"class": "RecuitSystem",
+"class": "RecruitSystem",
 "language": "GDScript",
-"path": "res://Game/DomRoute/RecuitSystem.gd"
+"path": "res://Game/DomRoute/RecruitSystem.gd"
 }, {
 "base": "Reference",
 "class": "RelationshipEntry",
@@ -2220,7 +2220,7 @@ _global_script_class_icons={
 "RecruitContext": "",
 "RecruitDifficulty": "",
 "RecruitSceneBase": "",
-"RecuitSystem": "",
+"RecruitSystem": "",
 "RelationshipEntry": "",
 "RelationshipSystem": "",
 "RepStat": "",

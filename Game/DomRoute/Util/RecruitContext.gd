@@ -1,7 +1,9 @@
 extends Reference
 class_name RecruitContext
 
+var charID:String = "" # recruit id
 var choices:Array = [] # indicies
+var choiceIDs:Array = [] # ids
 var choiceByID:Dictionary = {} # id = id
 var perfect:bool = false
 var success:bool = false
@@ -18,7 +20,21 @@ func t3(_choiceIndx:int, _text1:String, _text2:String, _text3:String) -> String:
 	return _text1
 
 func saveData() -> Dictionary:
-	return {}
+	return {
+		charID = charID,
+		choices = choices,
+		choiceIDs = choiceIDs,
+		choiceByID = choiceByID,
+		perfect = perfect,
+		success = success,
+		extras = extras,
+	}
 
 func loadData(_data:Dictionary):
-	pass
+	charID = SAVE.loadVar(_data, "charID", "")
+	choices = SAVE.loadVar(_data, "choices", [])
+	choiceIDs = SAVE.loadVar(_data, "choiceIDs", [])
+	choiceByID = SAVE.loadVar(_data, "choiceByID", {})
+	perfect = SAVE.loadVar(_data, "perfect", false)
+	success = SAVE.loadVar(_data, "success", false)
+	extras = SAVE.loadVar(_data, "extras", {})
