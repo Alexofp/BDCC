@@ -42,6 +42,11 @@ func getDebugActionOptions() -> Array:
 		result.append([recruitID, recruitID])
 	return result
 
+func submitContext(_context:RecruitContext):
+	var theRecruit = getRecruit()
+	if(theRecruit):
+		theRecruit.onContext(_context)
+
 func saveData() -> Dictionary:
 	var recData:Dictionary = {}
 	for recruitID in recruits:

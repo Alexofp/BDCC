@@ -3,6 +3,8 @@ extends SceneBase
 var choices:Array = [] # indicies
 var extra:Dictionary = {} # id = indx
 var selectedExtra:int = 0
+var didPlanYourself:bool = false
+var lastContext:RecruitContext = RecruitContext.new()
 
 func _init():
 	sceneID = "RecruitStartScene"
@@ -28,6 +30,9 @@ func _run():
 	if(state == ""):
 		if(_hasPresenter):
 			addCharacter(_presenterID)
+			playAnimation(StageScene.Duo, "stand", {npc=_presenterID})
+		else:
+			playAnimation(StageScene.Solo, "stand")
 		
 		saynn("You are standing near the cell where {npc.name} is held.")
 		
@@ -35,6 +40,8 @@ func _run():
 			saynn("{presenter.name} is guarding the entrance.")
 		
 		saynn("What do you wanna do?")
+		
+		saynn(_recruit.getHistoryString())
 		
 		addButton("Plan", "Make a plan and execute it", "plan")
 		addButton("Talk", "Go have a chat with them!", "talk")
@@ -79,6 +86,16 @@ func _run():
 			else:
 				saynn("Can't do this plan: "+theCanStart[1])
 		addButtonAt(14, "Cancel", "You changed your mind!", "")
+		
+		saynn(_recruit.getHistoryString())
+	
+	if(state == "readyToDoPlan"):
+		saynn("You have prepared the plan.")
+		var thePresenterName:String = getCharacter(_recruit.getPresenterCharID()).getName()
+		if(_hasPresenter):
+			saynn("[say="+_recruit.getPresenterCharID()+"]"+_recruit.getPresenterDialogue()+"[/say]")
+		addButton("You", "Execute the plan yourself", "startThePlan")
+		addButton(thePresenterName, "(Skip scene) Let "+thePresenterName+" do the plan, avoiding the need for you to see it", "helperStartsThePlan")
 	
 	if(state == "extraMenu"):
 		saynn("Pick the value!")
@@ -91,7 +108,32 @@ func _run():
 		for theOption in theOptions:
 			addButton(theOption[1], theOption[2], "pickExtra", [_i])
 			_i += 1
+	
+	if(state == "afterPlan"):
+		saynn("The plan is completed.")
 		
+		saynn(_recruit.getColorStringForChoices(lastContext.choiceIDs))
+		
+		if(lastContext.perfect):
+			saynn("It went perfect!")
+		elif(lastContext.success):
+			saynn("Success! Not everything was perfect but it was good enough.")
+		else:
+			saynn("That wasn't it..")
+		
+		# Start the next story scene
+		# If replay more, just end it?
+		if(lastContext.success):
+			addButton("Continue", "See what happens next", "endthescene")
+		addButton("Try again", "Try a different plan!", "")
+	
+	if(state == "helperDoesThings"):
+		playAnimation(StageScene.Solo, "stand")
+		saynn("You tell {presenter.name} to carry out the plan.")
+		
+		saynn("After some time, {presenter.he} returns..")
+		
+		addButton("Continue", "See what happens next", "afterPlan")
 	
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -115,7 +157,22 @@ func _react(_action: String, _args):
 			choices[_args[0]] = 0
 		checkExtras()
 		return
-		
+	
+	if(_action == "startThePlan" || _action == "helperStartsThePlan"):
+		didPlanYourself = (_action == "startThePlan")
+		var _recruit:RecruitBase = GM.main.RCS.getRecruit()
+		var theContext:RecruitContext = _recruit.createContext(getChoicesIDs(), getExtraWithIDs())
+		var theSceneID:String = _recruit.getSceneToPlay(getChoicesIDs(), getExtraWithIDs())
+		GM.main.RCS.submitContext(theContext)
+		if(didPlanYourself):
+			runScene(theSceneID, [theContext], "planScene")
+			setState("afterPlan")
+		else:
+			setState("helperDoesThings")
+			
+		lastContext = theContext
+		return
+	
 	setState(_action)
 
 func makeSureChoicesFilled():
@@ -185,11 +242,8 @@ func saveData():
 	data["selectedExtra"] = selectedExtra
 	data["choices"] = choices
 	data["extra"] = extra
-#	data["statAnger"] = statAnger
-#	data["statAgility"] = statAgility
-#	data["statMind"] = statMind
-#	data["statLust"] = statLust
-#	data["whichStat"] = whichStat
+	data["didPlanYourself"] = didPlanYourself
+	data["lastContext"] = lastContext.saveData()
 
 	return data
 
@@ -199,9 +253,7 @@ func loadData(data):
 	selectedExtra = SAVE.loadVar(data, "selectedExtra", 0)
 	choices = SAVE.loadVar(data, "choices", [])
 	extra = SAVE.loadVar(data, "extra", {})
-#	statAnger = SAVE.loadVar(data, "statAnger", 0)
-#	statAgility = SAVE.loadVar(data, "statAgility", 0)
-#	statMind = SAVE.loadVar(data, "statMind", 0)
-#	statLust = SAVE.loadVar(data, "statLust", 0)
-#	whichStat = SAVE.loadVar(data, "whichStat", -1)
+	didPlanYourself = SAVE.loadVar(data, "didPlanYourself", false)
+	lastContext.loadData(SAVE.loadVar(data, "lastContext", {}))
+	
 	makeSureChoicesFilled()

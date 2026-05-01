@@ -52,7 +52,7 @@ func isCombinationPossibleFinal(_choices:Array, _extras:Dictionary) -> Array:
 	return isCombinationPossible(_choices, _extras)
 
 func getSceneToPlay(_choices:Array, _extras:Dictionary) -> String:
-	return ""
+	return "PlaceholderRecruitScene"
 
 # Happens during story after the breaking
 func getStorySceneSuccess() -> String:
@@ -82,6 +82,143 @@ func getPresenterCharID() -> String:
 
 func getPresenterDialogue() -> String:
 	return "Want me to do it?"
+
+#var recruitID:String = ""
+#var choices:Array = [] # indicies
+#var choiceIDs:Array = [] # ids
+#var choiceByID:Dictionary = {} # id = id
+#var perfect:bool = false
+#var success:bool = false
+#var extras:Dictionary = {}
+
+# Also checks if the plan was good
+func createContext(_choices:Array, _extras:Dictionary) -> RecruitContext:
+	var theContext := RecruitContext.new()
+	theContext.charID = charID
+	theContext.recruitID = id
+	theContext.choiceIDs = _choices.duplicate()
+	var _i:int = 0
+	for theChoiceID in _choices:
+		var ourChoice:Dictionary = choices[_i]
+		var theOptions:Array = ourChoice["options"]
+		var _ii:int = 0
+		for theOptionEntry in theOptions:
+			if(theOptionEntry[0] == theChoiceID):
+				theContext.choices.append(_ii)
+				break
+			_ii += 1
+		_i += 1
+	
+	_i = 0
+	for theChoiceID in _choices:
+		var ourChoice:Dictionary = choices[_i]
+		theContext.choiceByID[ourChoice["id"]] = theChoiceID
+		_i += 1
+	
+	theContext.extras = _extras
+	
+	var hasAnyReds:bool = false
+	var yellowAmount:int = 0
+	
+	_i = 0
+	for theChoiceID in _choices:
+		var ourChoice:Dictionary = choices[_i]
+		var theOptions:Array = ourChoice["options"]
+		for theOptionEntry in theOptions:
+			if(theOptionEntry[0] == theChoiceID):
+				var theRes:int = theOptionEntry[3]
+				if(theRes == RecruitChoiceResult.Red):
+					hasAnyReds = true
+				elif(theRes == RecruitChoiceResult.Yellow):
+					yellowAmount += 1
+				break
+		_i += 1
+	
+	var allowedYellow := RecruitDifficulty.getDifficultyYellowAmount(difficulty)
+	var hasTooManyYellows:bool = yellowAmount > allowedYellow
+	
+	if(hasAnyReds || hasTooManyYellows):
+		theContext.success = false
+		theContext.perfect = false
+	else:
+		theContext.success = true
+		theContext.perfect = (yellowAmount == 0)
+	
+	return theContext
+
+func getResultsForChoices(_choices:Array) -> Array:
+	var result:Array = []
+	var _i:int = 0
+	for theChoiceID in _choices:
+		var ourChoice:Dictionary = choices[_i]
+		var theOptions:Array = ourChoice["options"]
+		if(theChoiceID is int):
+			var theOptionEntry:Array = theOptions[theChoiceID]
+			var theRes:int = theOptionEntry[3]
+			result.append(theRes)
+			_i += 1
+			continue
+		
+		for theOptionEntry in theOptions:
+			if(theOptionEntry[0] == theChoiceID):
+				var theRes:int = theOptionEntry[3]
+				result.append(theRes)
+				break
+		_i += 1
+	return result
+
+func getResultsAndNamesForChoices(_choices:Array) -> Array:
+	var result:Array = []
+	var _i:int = 0
+	for theChoiceID in _choices:
+		var ourChoice:Dictionary = choices[_i]
+		var theOptions:Array = ourChoice["options"]
+		if(theChoiceID is int):
+			var theOptionEntry:Array = theOptions[theChoiceID]
+			var theRes:int = theOptionEntry[3]
+			result.append([theRes, theOptionEntry[1]])
+			_i += 1
+			continue
+		
+		for theOptionEntry in theOptions:
+			if(theOptionEntry[0] == theChoiceID):
+				var theRes:int = theOptionEntry[3]
+				result.append([theRes, theOptionEntry[1]])
+				break
+		_i += 1
+	return result
+
+func getColorStringForChoices(_choices:Array) -> String:
+	var theStuff := getResultsAndNamesForChoices(_choices)
+	var result:Array = []
+	for theEntry in theStuff:
+		var theColor:Color = RecruitChoiceResult.getColor(theEntry[0])
+		result.append("[color=#"+theColor.to_html(false)+"]"+theEntry[1]+"[/color]")
+	
+	return Util.join(result, " - ")
+
+func getStringForChoices(_choices:Array) -> String:
+	var theStuff := getResultsAndNamesForChoices(_choices)
+	var result:Array = []
+	for theEntry in theStuff:
+		result.append(theEntry[1])
+	
+	return Util.join(result, " - ")
+
+func onContext(_context:RecruitContext):
+	history.erase(_context.choices)
+	history.append(_context.choices)
+	while(history.size() > 10):
+		history.pop_front()
+
+func getHistoryString() -> String:
+	if(history.empty()):
+		return ""
+	var result:Array = ["Previous plans:"]
+	for theEntry in history:
+		result.append(getColorStringForChoices(theEntry))
+	
+	return Util.join(result, "\n")
 
 func saveData() -> Dictionary:
 	return {

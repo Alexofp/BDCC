@@ -1,5 +1,7 @@
 extends RecruitSceneBase
 
+var textWidgetScene = preload("res://UI/TextOutputWidget.tscn")
+
 func _init():
 	sceneID = "PlaceholderRecruitScene"
 
@@ -10,11 +12,17 @@ func _run():
 		
 		saynn("This is a placeholder recruit scene. Continue will end the scene.")
 		
-		sayn("Chararacter id: "+str(RC.charID))
-		sayn("Choices: "+str(RC.choiceIDs))
-		sayn("Extras: "+str(RC.extras))
-		sayn("Success: "+str(RC.success))
-		sayn("Perfect: "+str(RC.perfect))
+		var textEdit = textWidgetScene.instance()
+		GM.ui.addCustomControl("textedit", textEdit)
+		
+		var outputText:Array = []
+		outputText.append("Chararacter id: "+str(RC.charID))
+		outputText.append("Choices: "+str(RC.choiceIDs))
+		outputText.append("Extras: "+str(RC.extras))
+		outputText.append("Success: "+str(RC.success))
+		outputText.append("Perfect: "+str(RC.perfect))
+		
+		textEdit.setText("\t"+Util.join(outputText, "\n\t"))
 		
 		addButton("Continue", "See what happens next", "endthescene")
 
