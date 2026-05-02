@@ -212,18 +212,6 @@ physics_material_override = SubResource( 468 )
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody2" index="0"]
 shape = SubResource( 467 )
 
-[node name="DirectionalLight" type="DirectionalLight" parent="." index="9"]
-transform = Transform( 0.695888, -0.364608, 0.618709, 0, 0.861532, 0.507704, -0.71815, -0.353305, 0.59953, 0, 0.929249, 0 )
-light_energy = 0.5
-light_specular = 0.0
-
-[node name="DirectionalLight2" type="DirectionalLight" parent="." index="10"]
-transform = Transform( 0.0626221, -0.291273, -0.954588, 0.486793, 0.843892, -0.225563, 0.87127, -0.450562, 0.194636, -5.96046e-08, 0.929249, 0 )
-visible = false
-light_color = Color( 0.168627, 0.317647, 0.709804, 1 )
-light_energy = 2.0
-light_specular = 0.0
-
 [connection signal="timeout" from="StartEggTimer" to="." method="_on_StartEggTimer_timeout"]
 [connection signal="timeout" from="EggTimer" to="." method="_on_EggTimer_timeout"]
 

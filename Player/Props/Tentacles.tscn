@@ -13,22 +13,12 @@ script = ExtResource( 3 )
 software_skinning_transform_normals = false
 material/0 = ExtResource( 2 )
 
-[node name="DirectionalLight" type="DirectionalLight" parent="." index="2"]
-transform = Transform( 1, 0, 0, 0, 0.279611, -0.960113, 0, 0.960113, 0.279611, -5.65823, 2.77926, 0 )
-light_color = Color( 0.419608, 0.439216, 1, 1 )
-light_energy = 3.0
-
-[node name="DirectionalLight2" type="DirectionalLight" parent="." index="3"]
-transform = Transform( -0.999544, 0.00844135, -0.0289854, -0.0301896, -0.279484, 0.959676, 0, 0.960113, 0.279611, -5.65823, 6.16915, 0 )
-light_color = Color( 1, 0.964706, 0.784314, 1 )
-light_energy = 3.0
-
-[node name="TentaclesAnims3" parent="." index="4" instance=ExtResource( 4 )]
+[node name="TentaclesAnims3" parent="." index="2" instance=ExtResource( 4 )]
 
 [node name="AnimationPlayer" parent="TentaclesAnims3" index="0"]
 root_node = NodePath("../..")
 
-[node name="TentaclesTiny" parent="." index="5" instance=ExtResource( 5 )]
+[node name="TentaclesTiny" parent="." index="3" instance=ExtResource( 5 )]
 
 [node name="TentacleTiny" parent="TentaclesTiny/TentaclesArmature/Skeleton" index="0"]
 skeleton = NodePath("../../../../TentaclesArmature/Skeleton")
