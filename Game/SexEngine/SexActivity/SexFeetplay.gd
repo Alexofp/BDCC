@@ -308,7 +308,8 @@ func getSubResistChance(baseChance:float, domAngerRemoval:float) -> float:
 	
 func getOrgasmHandlePriority(_indx:int) -> int:
 	if(_indx == SUB_0):
-		return 10
+		if(state in ["rubpussy", "rubpenis"]):
+			return 10
 	return -1
 
 func saveData():
