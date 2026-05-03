@@ -8,6 +8,8 @@ func registerTriggers(es):
 	es.addTrigger(self, Trigger.WakeUpInCell)
 
 func react(_triggerID, _args):
+	if(_triggerID == Trigger.TalkingToNPC):
+		return false
 	if(getFlag("ElizaModule.tent_returnedegged", false) || getFlag("ArticaModule.gaveBirthToEggs", false)):
 		if(!getFlag("ElizaModule.tent_started", false)):
 			setFlag("ElizaModule.tent_started", true)

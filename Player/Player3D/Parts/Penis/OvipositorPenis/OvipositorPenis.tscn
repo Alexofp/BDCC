@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Player/Player3D/Parts/Part3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player3D/Parts/Penis/OvipositorPenis/penisOvi_pattern.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Player/Player3D/Parts/PartState.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Player/Player3D/Parts/Penis/OvipositorPenis/penisOvi_condomoverlay.png" type="Texture" id=7]
 [ext_resource path="res://Player/Player3D/Parts/MeshWithPattern.gd" type="Script" id=8]
+[ext_resource path="res://Player/Player3D/Parts/Penis/OvipositorPenis/penisOvi_limp_pattern.png" type="Texture" id=9]
 [ext_resource path="res://Player/Player3D/Parts/Penis/OvipositorPenis/penisOviSheath.png" type="Texture" id=10]
 [ext_resource path="res://Player/Player3D/Parts/Penis/OvipositorPenis/penisOvi.png" type="Texture" id=12]
 
@@ -336,7 +337,7 @@ skeleton = NodePath("../../PartState")
 material/0 = SubResource( 22 )
 script = ExtResource( 8 )
 bodypartSlot = "penis"
-customSkinPattern = ExtResource( 2 )
+customSkinPattern = ExtResource( 9 )
 custonSkinVariant = "limp"
 
 [node name="PartState3" parent="PartStatePicker" index="3" instance=ExtResource( 6 )]
@@ -350,7 +351,7 @@ skeleton = NodePath("../../PartState")
 material/0 = SubResource( 23 )
 script = ExtResource( 8 )
 bodypartSlot = "penis"
-customSkinPattern = ExtResource( 2 )
+customSkinPattern = ExtResource( 9 )
 custonSkinVariant = "limp"
 
 [node name="Cage" type="MeshInstance" parent="PartStatePicker/PartState3" index="1"]

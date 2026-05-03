@@ -1,0 +1,25 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=2]
+
+[ext_resource path="res://Player/Props/FakeDirectionalLightsNormalMapShader.tres" type="Shader" id=3]
+
+[sub_resource type="SpatialMaterial" id=8]
+params_cull_mode = 1
+params_grow = true
+params_grow_amount = 0.1
+albedo_color = Color( 0, 0, 0, 1 )
+
+[resource]
+next_pass = SubResource( 8 )
+shader = ExtResource( 3 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/normal_intensity = 0.292
+shader_param/light_direction_1 = Vector3( -1.005, -0.926, -1.081 )
+shader_param/light_color_1 = Color( 1, 1, 1, 1 )
+shader_param/light_intensity_1 = 2.0
+shader_param/light_direction_2 = Vector3( 1.34, -1, -0.729 )
+shader_param/light_color_2 = Color( 1, 1, 1, 1 )
+shader_param/light_intensity_2 = 0.4
+shader_param/ambient_color = Color( 1, 1, 1, 1 )
+shader_param/ambient_intensity = 0.2

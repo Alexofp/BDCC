@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Player/StageScene3D/BaseStageScene3D.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/StageScene3D/Scenes3/SoloBigEgg.gd" type="Script" id=2]
@@ -8,10 +8,11 @@
 [ext_resource path="res://Player/StageScene3D/Scenes/DollSoloAndCuffsTree.tres" type="AnimationNodeBlendTree" id=6]
 [ext_resource path="res://Player/Props/TentacleEgg.glb" type="PackedScene" id=7]
 [ext_resource path="res://Player/Props/Textures/EggSmallColor.png" type="Texture" id=8]
-[ext_resource path="res://Player/Props/Textures/EggRoughness.png" type="Texture" id=9]
 [ext_resource path="res://Player/Props/Textures/EggNormal.png" type="Texture" id=10]
 [ext_resource path="res://Player/Props/TentacleNest.glb" type="PackedScene" id=11]
 [ext_resource path="res://Player/Props/Textures/TentacleNest_DefaultMaterial_BaseColor.png" type="Texture" id=12]
+[ext_resource path="res://Player/Props/FakeDirectionalLightsNormalMapShader.tres" type="Shader" id=13]
+[ext_resource path="res://Player/Props/Textures/TentacleNest_DefaultMaterial_Normal.png" type="Texture" id=14]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
@@ -21,22 +22,40 @@ params_grow = true
 params_grow_amount = 0.1
 albedo_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=8]
 next_pass = SubResource( 3 )
-params_diffuse_mode = 4
-albedo_texture = ExtResource( 8 )
-roughness_texture = ExtResource( 9 )
-normal_enabled = true
-normal_scale = 0.5
-normal_texture = ExtResource( 10 )
+shader = ExtResource( 13 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/normal_intensity = 0.388
+shader_param/light_direction_1 = Vector3( 0.639, -1, -0.395 )
+shader_param/light_color_1 = Color( 1, 1, 1, 1 )
+shader_param/light_intensity_1 = 2.0
+shader_param/light_direction_2 = Vector3( -0.041, -0.09, 0 )
+shader_param/light_color_2 = Color( 1, 1, 1, 1 )
+shader_param/light_intensity_2 = 1.0
+shader_param/ambient_color = Color( 1, 1, 1, 1 )
+shader_param/ambient_intensity = 0.2
+shader_param/texture_albedo = ExtResource( 8 )
+shader_param/texture_normal = ExtResource( 10 )
 
-[sub_resource type="SpatialMaterial" id=5]
-params_diffuse_mode = 4
-albedo_texture = ExtResource( 12 )
-roughness_texture = ExtResource( 9 )
-normal_enabled = true
-normal_scale = 0.5
-normal_texture = ExtResource( 10 )
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 13 )
+shader_param/albedo = Color( 1, 1, 1, 1 )
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/uv1_offset = Vector3( 0, 0, 0 )
+shader_param/normal_intensity = 1.0
+shader_param/light_direction_1 = Vector3( -0.658, -1, 0 )
+shader_param/light_color_1 = Color( 1, 1, 1, 1 )
+shader_param/light_intensity_1 = 2.0
+shader_param/light_direction_2 = Vector3( 1.317, -1, -0.792 )
+shader_param/light_color_2 = Color( 1, 1, 1, 1 )
+shader_param/light_intensity_2 = 2.0
+shader_param/ambient_color = Color( 1, 1, 1, 1 )
+shader_param/ambient_intensity = 0.2
+shader_param/texture_albedo = ExtResource( 12 )
+shader_param/texture_normal = ExtResource( 14 )
 
 [sub_resource type="SpatialMaterial" id=6]
 params_cull_mode = 1
@@ -87,22 +106,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.104177, 0.477503 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82881, 1.66774, 0 )
 
 [node name="TentacleEgg" parent="TentacleEgg" index="0"]
-material/0 = SubResource( 2 )
+material/0 = SubResource( 8 )
 
-[node name="DirectionalLight" type="DirectionalLight" parent="." index="5"]
-transform = Transform( 0.556841, 0.745054, -0.367182, 0.339808, 0.199035, 0.919193, 0.757931, -0.636615, -0.142345, 0, 0.929249, 0 )
-light_energy = 0.5
-
-[node name="DirectionalLight2" type="DirectionalLight" parent="." index="6"]
-transform = Transform( 0.316087, 0.789819, -0.525618, -0.574674, 0.600213, 0.556322, 0.754877, 0.126213, 0.643608, 3.3539, 0.792482, -0.0333176 )
-light_energy = 0.169
-light_specular = 0.0
-
-[node name="TentacleNest" parent="." index="7" instance=ExtResource( 11 )]
+[node name="TentacleNest" parent="." index="5" instance=ExtResource( 11 )]
 transform = Transform( 1.228, 0, 0, 0, 1.228, 0, 0, 0, 1.228, 1.87194, 1.83752, 0.187143 )
 
 [node name="TentacleNest" parent="TentacleNest" index="0"]
-material/0 = SubResource( 5 )
+material/0 = SubResource( 7 )
 
 [node name="TentacleNestOutline" parent="TentacleNest" index="1"]
 material/0 = SubResource( 6 )

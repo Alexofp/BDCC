@@ -11,26 +11,25 @@ func _ready():
 	setBig()
 	tentacle.set_surface_material(0, preload("res://Player/Props/LatexTentacles.tres"))
 	tentacle_tiny.set_surface_material(0, preload("res://Player/Props/LatexTentacles.tres"))
-
+	setPlant()
+	
 func setPlant():
 	if(isPlant):
 		return
 	
-	tentacle.set_surface_material(0, preload("res://Player/Props/PlantTentacles.tres"))
-	tentacle_tiny.set_surface_material(0, preload("res://Player/Props/PlantTentacles.tres"))
-	$DirectionalLight.visible = true
-	$DirectionalLight2.visible = true
+	tentacle.set_surface_material(0, preload("res://Player/Props/PlantTentaclesCustom.tres"))
+	tentacle_tiny.set_surface_material(0, preload("res://Player/Props/PlantTentaclesCustom.tres"))
 	
 	isPlant = true
 
 func setLatex():
+	if(true):
+		return
 	if(!isPlant):
 		return
 	
 	tentacle.set_surface_material(0, preload("res://Player/Props/LatexTentacles.tres"))
 	tentacle_tiny.set_surface_material(0, preload("res://Player/Props/LatexTentacles.tres"))
-	$DirectionalLight.visible = false
-	$DirectionalLight2.visible = false
 	
 	isPlant = false
 

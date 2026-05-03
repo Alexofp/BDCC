@@ -9,7 +9,7 @@ func getVisibleName():
 	return "Milking in medical"
 
 func getActivityText():
-	var theText:String = "{npc.name} is being milked in the medical!"
+	var theText:String = "{npc.name} is being milked in the medical bay!"
 
 	if(lastReport != ""):
 		theText += "\n\nToday, {npc.he} produced this:\n"+lastReport

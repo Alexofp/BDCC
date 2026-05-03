@@ -3480,7 +3480,7 @@ func canStuffEggInto(_roleMain:int, _roleTarget:int, _bodypart:String) -> bool:
 func canStuffEggIntoRaw(_main:BaseCharacter, _target:BaseCharacter, _bodypart:String) -> bool:
 	if(!_main || !_target):
 		return false
-	if(!_target.isDynamicCharacter()): # Static characters don't know how to handle it, sorry
+	if(!_target.isDynamicCharacter() && !_target.isPlayer()): # Static characters don't know how to handle it, sorry
 		return false
 	
 	if(!_target.hasBodypart(_bodypart)):

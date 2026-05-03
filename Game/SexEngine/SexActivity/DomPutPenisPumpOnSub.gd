@@ -90,7 +90,9 @@ func milkingSub_processTurn():
 		return
 	
 	affectSub(getSubInfo().fetishScore({Fetish.SeedMilking: 1.0})+0.3, 0.03, -0.01, 0.0)
-	getSubInfo().addArousal(max(0.1, getSubInfo().fetishScore({Fetish.SeedMilking: 0.2})))
+	var arousalToAdd:float = max(0.1, getSubInfo().fetishScore({Fetish.SeedMilking: 0.2}))
+	getSubInfo().addArousal(arousalToAdd)
+	getSubInfo().stimulateArousalZone(arousalToAdd*0.5, S_PENIS, 0.5)
 	
 	timesMilked += 1
 	addTextPick([

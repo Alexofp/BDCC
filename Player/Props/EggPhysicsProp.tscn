@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Player/Props/TentacleEgg.glb" type="PackedScene" id=1]
 [ext_resource path="res://Player/Props/EggPhysicsProp.gd" type="Script" id=2]
-[ext_resource path="res://Player/Props/EggPlantMat.tres" type="Material" id=3]
+[ext_resource path="res://Player/Props/EggPlantMatCustom.tres" type="Material" id=4]
 
 [sub_resource type="PhysicsMaterial" id=4]
 friction = 0.93
@@ -31,6 +31,6 @@ shape = SubResource( 6 )
 transform = Transform( 0.266, 0, 0, 0, 0.266, 0, 0, 0, 0.266, 0, 0, 0 )
 
 [node name="TentacleEgg" parent="TentacleEgg" index="0"]
-material/0 = ExtResource( 3 )
+material/0 = ExtResource( 4 )
 
 [editable path="TentacleEgg"]
