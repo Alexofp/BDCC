@@ -10,6 +10,7 @@ func getName():
 func getPatternTexture():
 	return {
 		"": load("res://Player/Player3D/SkinsParts/Penis/OviPenis/Infected.png"),
+		"limp": load("res://Player/Player3D/SkinsParts/Penis/OviPenis/Infected_limp.png"),
 	}
 	
 	 

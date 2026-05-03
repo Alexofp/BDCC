@@ -668,8 +668,8 @@ func getFirstItemThatCoversBodypart(bodypartSlot):
 	return null
 
 func getRestraintsThatCanBeForcedDuringSex(tag):
-	var itemIDs = GlobalRegistry.getItemIDsByTag(tag)
-	var result = []
+	var itemIDs:Array = GlobalRegistry.getItemIDsByTag(tag)
+	var result:Array = []
 	
 	for itemID in itemIDs:
 		var potentialItem = GlobalRegistry.getItemRef(itemID)
@@ -680,13 +680,13 @@ func getRestraintsThatCanBeForcedDuringSex(tag):
 
 		if(hasSlotEquipped(slot)):
 			var ourItem = getEquippedItem(slot)
-			if(ourItem.isRestraint()):
+			if(ourItem.isRestraint() || ourItem.isImportant()):
 				continue
 		
 		var bodypartSlot = potentialItem.getRequiredBodypart()
 		var coversItem = getFirstItemThatCoversBodypart(bodypartSlot)
 		if(bodypartSlot != null && coversItem != null):
-			if(coversItem.isRestraint()):
+			if(coversItem.isRestraint() || coversItem.isImportant()):
 				continue
 		
 		result.append(itemID)

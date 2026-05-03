@@ -19,5 +19,7 @@ func getFlags():
 #		#
 		"Alex_ToldIsFather": flag(FlagType.Number),
 		"Alex_TimesMilkingPlayer": flag(FlagType.Number),
+		"Alex_CameInside": flag(FlagType.Bool),
 #		"AlexPC_GaveBirthTimes": flag(FlagType.Number),
+
 	}

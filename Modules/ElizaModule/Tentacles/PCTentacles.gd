@@ -60,10 +60,17 @@ func getBaseVirility() -> float:
 	return 0.0
 
 func createBodyparts():
+	# Will never be visible but still need this stuff for the sex activities to function
 	var penis = GlobalRegistry.createBodypart("humanpenis")
 	penis.lengthCM = 22
 	penis.ballsScale = 1
 	giveBodypartUnlessSame(penis)
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("humanhead"))
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anthrobody"))
+	var breasts = GlobalRegistry.createBodypart("humanbreasts")
+	breasts.size = 3
+	giveBodypartUnlessSame(breasts)
+	giveBodypartUnlessSame(GlobalRegistry.createBodypart("anus"))
 
 func getCustomAttribute(id):
 	if(id == BuffAttribute.OverstimulationThresholdAll):

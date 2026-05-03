@@ -753,6 +753,7 @@ func _react(_action: String, _args):
 	if(_action == "force_knot_in"):
 		if(!usedCondom):
 			GM.pc.cummedInVaginaBy("alexrynard")
+			setFlag("AcePregExpac.Alex_CameInside", true)
 		else:
 			addFilledCondomToLootIfPerk(getCharacter("alexrynard").createFilledCondom())
 		GM.pc.gotVaginaFuckedBy("alexrynard")
@@ -762,6 +763,8 @@ func _react(_action: String, _args):
 	if(_action == "force_knot_in1"):
 		if(!usedCondom):
 			GM.pc.cummedInAnusBy("alexrynard")
+			if(GM.pc.hasWombIn(BodypartSlot.Anus)):
+				setFlag("AcePregExpac.Alex_CameInside", true)
 		else:
 			addFilledCondomToLootIfPerk(getCharacter("alexrynard").createFilledCondom())
 		GM.pc.gotAnusFuckedBy("alexrynard")

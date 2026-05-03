@@ -1528,6 +1528,7 @@ func _react(_action: String, _args):
 			addFilledCondomToLootIfPerk(getCharacter("alexrynard").createFilledCondom())
 		else:
 			GM.pc.cummedInVaginaBy("alexrynard")
+			setFlag("AcePregExpac.Alex_CameInside", true)
 
 	if(_action == "after_cuddle"):
 		processTime(10*60)
@@ -1549,6 +1550,8 @@ func _react(_action: String, _args):
 			addFilledCondomToLootIfPerk(getCharacter("alexrynard").createFilledCondom())
 		else:
 			GM.pc.cummedInAnusBy("alexrynard")
+			if(GM.pc.hasWombIn(BodypartSlot.Anus)):
+				setFlag("AcePregExpac.Alex_CameInside", true)
 
 	if(_action == "novisor"):
 		GM.pc.getInventory().clearSlot(InventorySlot.Eyes)
