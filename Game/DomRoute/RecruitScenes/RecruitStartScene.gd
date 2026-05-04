@@ -23,6 +23,7 @@ func _run():
 		saynn("SOMETHING WENT WRONG, THERE IS NO CURRENT RECRUIT. SORRY.")
 		addButton("Continue", "See what happens next", "endthescene")
 		return
+	aimCameraAndSetLocName("hideout_near_break_room")
 	
 	var _recruit:RecruitBase = GM.main.RCS.getRecruit()
 	var _presenterID:String = _recruit.getPresenterCharID()
@@ -41,16 +42,57 @@ func _run():
 		
 		saynn("What do you wanna do?")
 		
-		saynn(_recruit.getHistoryString())
+		#saynn(_recruit.getHistoryString())
 		
 		addButton("Plan", "Make a plan and execute it", "plan")
 		addButton("Talk", "Go have a chat with them!", "talk")
-		addButton("Step away", "You changed your mind", "endthescene")
+		if(_recruit.hasHistory()):
+			addButton("History", "Try to recall your old plans", "history_menu")
+		addButton("Step away", "You changed your mind", "stepAway")
+	
+	if(state == "history_menu"):
+		saynn("You attempt to recall everything that you did with {npc.name}..")
+		saynn(_recruit.getHistoryString())
+		addButton("Back", "Back to planning", "")
 	
 	if(state == "plan"):
-		saynn("Make a plan!")
+		saynn("Make a plan that would break {npc.name} or make {npc.him} submit.")
 		
 		var _choices:Array = _recruit.choices
+		
+		sayn("Plan:")
+		for _i in _choices.size():
+			var theChoice:Dictionary = _choices[_i]
+			
+			var pickedText:String = "Undecided"
+			var theOptions:Array = theChoice["options"]
+			for _ii in theOptions.size():
+				var isSelected:bool = (choices.size() > _i) && (choices[_i] == _ii)
+				var theOption:Array = theOptions[_ii]
+				#var finalButtonIndx:int = baseButtonIndx + _ii*5
+				
+				if(isSelected):
+					pickedText = theOption[1] + "\n - "+theOption[2]+""
+			
+			sayn(str(_i+1)+") "+theChoice["name"]+": "+pickedText)
+		sayn("")
+		
+		var theExtras:Array = getExtras()
+		if(!theExtras.empty()):
+			sayn("Extras:")
+		var _ei:int = 0
+		for theExtraEntry in theExtras:
+			var theID:String = theExtraEntry["id"]
+			
+			if(extra.has(theID)):
+				var theOption:Array = theExtraEntry["options"][extra[theID]]
+				sayn(theExtraEntry["name"]+": "+theOption[1]+"\n - "+theOption[2])
+			else:
+				sayn(theExtraEntry["name"]+": Undecided")
+			_ei += 1
+		if(!theExtras.empty()):
+			sayn("")
+		
 		for _i in _choices.size():
 			var theChoice:Dictionary = _choices[_i]
 			addExtraButtonAt(_i, theChoice["name"]+":", theChoice["desc"], "pickNextOption", [_i])
@@ -67,8 +109,7 @@ func _run():
 				else:
 					addDisabledButtonAt(finalButtonIndx, "["+theOption[1]+"]", "(Selected)\n" + theOption[2])
 		
-		var theExtras:Array = getExtras()
-		var _ei:int = 0
+		_ei = 0
 		for theExtraEntry in theExtras:
 			var theID:String = theExtraEntry["id"]
 			
@@ -84,32 +125,37 @@ func _run():
 			if(theCanStart[0]):
 				addButtonAt(9, "START", "Execute the plan!", "readyToDoPlan")
 			else:
-				saynn("Can't do this plan: "+theCanStart[1])
+				saynn("[color=yellow]Current plan is impossible[/color]: "+theCanStart[1])
 		addButtonAt(14, "Cancel", "You changed your mind!", "")
 		
-		saynn(_recruit.getHistoryString())
+		#saynn(_recruit.getHistoryString())
 	
 	if(state == "readyToDoPlan"):
 		saynn("You have prepared the plan.")
 		var thePresenterName:String = getCharacter(_recruit.getPresenterCharID()).getName()
 		if(_hasPresenter):
 			saynn("[say="+_recruit.getPresenterCharID()+"]"+_recruit.getPresenterDialogue()+"[/say]")
-		addButton("You", "Execute the plan yourself", "startThePlan")
+		addButton("You", "Do the plan yourself", "startThePlan")
 		addButton(thePresenterName, "(Skip scene) Let "+thePresenterName+" do the plan, avoiding the need for you to see it", "helperStartsThePlan")
 	
 	if(state == "extraMenu"):
-		saynn("Pick the value!")
+		saynn("Pick how you want to do it! Extra choices don't affect the result.")
 		
 		addButton("Back", "You changed your mind", "plan")
 		var theExtras:Array = getExtras()
 		var theExtra:Dictionary = theExtras[selectedExtra]
+		
+		sayn(theExtra["name"])
+		
 		var theOptions:Array = theExtra["options"]
 		var _i:int = 0
 		for theOption in theOptions:
 			addButton(theOption[1], theOption[2], "pickExtra", [_i])
+			sayn(str(_i+1)+") "+theOption[1]+"\n - "+theOption[2])
 			_i += 1
 	
 	if(state == "afterPlan"):
+		aimCameraAndSetLocName("hideout_near_break_room")
 		saynn("The plan is completed.")
 		
 		saynn(_recruit.getColorStringForChoices(lastContext.choiceIDs))
@@ -123,8 +169,10 @@ func _run():
 		
 		# Start the next story scene
 		# If replay more, just end it?
-		if(lastContext.success):
-			addButton("Continue", "See what happens next", "endthescene")
+		if(GM.main.RCS.isReplayMode()):
+			addButton("Continue", "Enough fun", "continueAfterSuccess")
+		elif(lastContext.success):
+			addButton("Continue", "See what happens next", "continueAfterSuccess")
 		addButton("Try again", "Try a different plan!", "")
 	
 	if(state == "helperDoesThings"):
@@ -135,9 +183,36 @@ func _run():
 		
 		addButton("Continue", "See what happens next", "afterPlan")
 	
+	if(state == "afterTalked"):
+		aimCameraAndSetLocName("hideout_near_break_room")
+		if(_hasPresenter):
+			addCharacter(_presenterID)
+			playAnimation(StageScene.Duo, "stand", {npc=_presenterID})
+		else:
+			playAnimation(StageScene.Solo, "stand")
+		saynn("You have finished talking with {npc.name}!")
+		addButton("Continue", "See what happens next", "")
+	
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
+		return
+	if(_action == "stepAway"):
+		var _recruit:RecruitBase = GM.main.RCS.getRecruit()
+		if(GM.main.RCS.isReplayMode()):
+			GM.main.RCS.clearCurrent()
+		endScene()
+		return
+	if(_action == "continueAfterSuccess"):
+		if(GM.main.RCS.isReplayMode()):
+			GM.main.RCS.clearCurrent()
+			endScene()
+			return
+		var _recruit:RecruitBase = GM.main.RCS.getRecruit()
+		var theStorySceneID:String = _recruit.getStorySceneSuccess()
+		GM.main.RCS.clearCurrent()
+		endScene()
+		runScene(theStorySceneID)
 		return
 	if(_action == "setOption"):
 		choices[_args[0]] = _args[1]
@@ -158,6 +233,13 @@ func _react(_action: String, _args):
 		checkExtras()
 		return
 	
+	if(_action == "talk"):
+		aimCameraAndSetLocName("hideout_breakroom")
+		var _recruit:RecruitBase = GM.main.RCS.getRecruit()
+		runScene(_recruit.getTalkScene())
+		setState("afterTalked")
+		return
+	
 	if(_action == "startThePlan" || _action == "helperStartsThePlan"):
 		didPlanYourself = (_action == "startThePlan")
 		var _recruit:RecruitBase = GM.main.RCS.getRecruit()
@@ -165,6 +247,7 @@ func _react(_action: String, _args):
 		var theSceneID:String = _recruit.getSceneToPlay(getChoicesIDs(), getExtraWithIDs())
 		GM.main.RCS.submitContext(theContext)
 		if(didPlanYourself):
+			aimCameraAndSetLocName("hideout_breakroom")
 			runScene(theSceneID, [theContext], "planScene")
 			setState("afterPlan")
 		else:

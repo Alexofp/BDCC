@@ -15,6 +15,7 @@ func _init():
 
 func clearCurrent():
 	currentID = ""
+	replayMode = false
 
 func setCurrent(_id:String, _replayMode:bool = false) -> bool:
 	if(!recruits.has(_id)):

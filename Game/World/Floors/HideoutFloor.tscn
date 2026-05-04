@@ -35,6 +35,10 @@ roomName = "Hideout"
 roomID = "hideout_near_break_room"
 
 [node name="HideoutRoom7" parent="." index="6" instance=ExtResource( 1 )]
+self_modulate = Color( 0.5, 0.5, 0.5, 1 )
 position = Vector2( -128, 0 )
 roomName = "Hideout"
 roomID = "hideout_breakroom"
+canNorth = false
+roomColor = 7
+gridColor = 7

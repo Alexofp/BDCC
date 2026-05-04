@@ -5,6 +5,9 @@ var id:String = ""
 var difficulty:int = RecruitDifficulty.Easy
 var charID:String = ""
 
+var nextStoryScene:String = ""
+var talkScene:String = ""
+
 # To save
 var history:Array = [] # [["loving", "sex", "bondage"], ["strict", "painplay", "anal"], ...]
 var completed:bool = false
@@ -48,7 +51,7 @@ func isCombinationPossibleFinal(_choices:Array, _extras:Dictionary) -> Array:
 	for theExtra in theExtras:
 		var theID:String = theExtra["id"]
 		if(!_extras.has(theID)):
-			return [false, "'"+theExtra["name"]+"' option needs to be selected."]
+			return [false, "'"+theExtra["name"]+"' option needs to be picked."]
 	return isCombinationPossible(_choices, _extras)
 
 func getSceneToPlay(_choices:Array, _extras:Dictionary) -> String:
@@ -56,13 +59,14 @@ func getSceneToPlay(_choices:Array, _extras:Dictionary) -> String:
 
 # Happens during story after the breaking
 func getStorySceneSuccess() -> String:
-	return ""
+	return nextStoryScene
 
-func getStorySceneFail() -> String:
-	return ""
+# Not needed??
+#func getStorySceneFail() -> String:
+#	return ""
 
 func getTalkScene() -> String:
-	return ""
+	return talkScene
 
 func isArSame(_ar1:Array, _ar2:Array) -> bool:
 	if(_ar1.size() != _ar2.size()):
@@ -210,6 +214,9 @@ func onContext(_context:RecruitContext):
 	history.append(_context.choices)
 	while(history.size() > 10):
 		history.pop_front()
+
+func hasHistory() -> bool:
+	return !history.empty()
 
 func getHistoryString() -> String:
 	if(history.empty()):
