@@ -167,7 +167,13 @@ func _run():
 		saynn("[say=kait]Not really, this is my first time too. But I did watch and help a bit a few times. That doesn't matter right now, let's just do it. Ready when you are.[/say]")
 
 		saynn("Kait leans against the wall near the door, making sure Rahi doesn't escape.")
-
+		
+		saynn("[say=pc]One more question then. Kinks and fears are quite the opposites, you know. Which one is it?[/say]")
+		
+		saynn("[say=kait]Oh yeah, that's really important. If they're obeying, might as well give them a carrot. But if they're resisting.. I think you know now.[/say]")
+		
+		saynn("Rahi doesn't seem to be resisting. But who knows.")
+		
 		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):

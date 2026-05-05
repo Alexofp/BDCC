@@ -1,7 +1,7 @@
 extends RecruitTalkSceneBase
 
 func _init():
-	sceneID = "RecTalkRahi"
+	sceneID = "RahiRecTalk"
 
 func _reactInit():
 	allTopics = [

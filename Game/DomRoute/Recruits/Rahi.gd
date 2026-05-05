@@ -4,16 +4,16 @@ func _init():
 	id = "Rahi"
 	charID = "rahi"
 	difficulty = RecruitDifficulty.VeryEasy
-	talkScene = "RecTalkRahi"
+	talkScene = "RahiRecTalk"
 	choices = [
 		{
 			id = "tone",
 			name = "Tone",
 			desc = "Something something",
 			options = [
-				["loving", "Lovingly", "Do it lovingly", RecruitChoiceResult.Red],
-				["strict", "Strict", "Be extremely strict", RecruitChoiceResult.Yellow],
-				["mean", "Mean", "Be extremely mean and rough about it", RecruitChoiceResult.Green]
+				["gentle", "Gentle", "Be very gentle with Rahi", RecruitChoiceResult.Red],
+				["strict", "Strict", "Be extremely strict with Rahi", RecruitChoiceResult.Yellow],
+				["mean", "Mean", "Be extremely mean and rough with Rahi", RecruitChoiceResult.Green],
 			],
 		},
 		{
@@ -21,9 +21,9 @@ func _init():
 			name = "Main action",
 			desc = "Something something 2",
 			options = [
-				["sex", "Sex", "Do some sex", RecruitChoiceResult.Red],
-				["petplay", "Petplay", "Do some petplay", RecruitChoiceResult.Yellow],
-				["pain", "Painplay", "Do some painplay", RecruitChoiceResult.Green]
+				["sex", "Sex", "Have sex with Rahi", RecruitChoiceResult.Yellow],
+				["petplay", "Petplay", "Do some petplay with Rahi", RecruitChoiceResult.Green],
+				["pain", "Painplay", "Give that cat some spanks", RecruitChoiceResult.Red],
 			],
 		},
 		{
@@ -31,9 +31,9 @@ func _init():
 			name = "Special kink",
 			desc = "Something something 3",
 			options = [
-				["public", "In public", "Do it in public", RecruitChoiceResult.Red],
-				["bondage", "Bondage", "Do bondage", RecruitChoiceResult.Yellow],
-				["anal", "Anal-focus", "Do focus on anal", RecruitChoiceResult.Green]
+				["public", "In public", "Do it in public", RecruitChoiceResult.Yellow],
+				["bondage", "Bondage", "Do bondage", RecruitChoiceResult.Green],
+				["anal", "Anal-focus", "Do focus on anal", RecruitChoiceResult.Red],
 			],
 		},
 	]
@@ -63,3 +63,8 @@ func isCombinationPossible(_choices:Array, _extras:Dictionary) -> Array:
 			return [false, "You don't have any condoms to do this"]
 	
 	return [true, ""]
+
+func getSceneToPlay(_choices:Array, _extras:Dictionary) -> String:
+	if(_choices[1] == "sex"):
+		return "RahiRecSceneSex"
+	return "PlaceholderRecruitScene"
