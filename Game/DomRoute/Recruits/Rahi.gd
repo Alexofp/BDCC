@@ -44,8 +44,8 @@ func getExtraChoices(_choices:Array) -> Array:
 		if(GM.pc.hasReachablePenis()):
 			result.append({
 					id = "condom",
-					name = "Use condom",
-					desc = "Something mew mew",
+					name = "Condom",
+					desc = "Pick which condom you want to use, if any",
 					options = [
 						["no", "No condom", "Don't use a condom"],
 						["worst", "Worst condom", "Use the worst condom you have"],
@@ -53,8 +53,12 @@ func getExtraChoices(_choices:Array) -> Array:
 					],
 				})
 		else:
-			# Strapon
-			pass
+			result.append({
+					id = "strapon",
+					name = "Strapon",
+					desc = "Pick any strapon you wanna use.",
+					options = getStraponOptions(),
+				})
 	return result
 
 func isCombinationPossible(_choices:Array, _extras:Dictionary) -> Array:

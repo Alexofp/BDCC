@@ -227,6 +227,17 @@ func getHistoryString() -> String:
 	
 	return Util.join(result, "\n")
 
+func getStraponOptions() -> Array:
+	var result:Array = [
+		["default", "Default", "Use the strapon provided by your team"],
+	]
+	for strapon in GM.pc.getStrapons():
+		result.append([
+			strapon.uniqueID, strapon.getVisibleName(), strapon.getVisibleDescription(),
+		])
+	
+	return result
+
 func saveData() -> Dictionary:
 	return {
 		history = history,
