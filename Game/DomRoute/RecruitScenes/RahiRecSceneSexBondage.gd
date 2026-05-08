@@ -33,6 +33,7 @@ func _run():
 
 		addButton("Cuff her", "Time for bondage!", "do_bondage")
 	if(state == "do_bondage"):
+		playAnimation(StageScene.HangingDuo, "idle", {pc="pc", npc="rahi", npcBodyState={naked=true, hard=true}})
 		saynn("That shirt is only gonna get in the way. Without saying anything, you begin unbuttoning and taking it off.")
 
 		saynn("[say=rahi]W-what are you.. meow![/say]")
@@ -63,6 +64,7 @@ func _run():
 
 		addButton("More toys", "Put more things on Rahi", "more_toys")
 	if(state == "more_toys"):
+		playAnimation(StageScene.HangingSex, "tease", {pc="pc", npc="rahi", bodyState={naked=true, hard=true, condom=condomUsed}, npcBodyState={naked=true, hard=true}})
 		saynn("A strip of black cloth goes over her eyes, pulling her into complete darkness. Then comes the ballgag. You push the rubber ball against her lips until she parts them, the rubber sphere now holding her jaw open, her tongue drooling.")
 
 		saynn("[say=rahi]Mmph..[/say]")
@@ -85,6 +87,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "sex_part")
 	if(state == "sex_part"):
+		playAnimation(StageScene.HangingSex, "sex", {pc="pc", npc="rahi", bodyState={naked=true, hard=true, condom=condomUsed}, npcBodyState={naked=true, hard=true}})
 		saynn("Then you push inside..")
 
 		saynn("[say=rahi]Mmph-![/say]")
@@ -99,6 +102,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "sex_fast")
 	if(state == "sex_fast"):
+		playAnimation(StageScene.HangingSex, "fast", {pc="pc", npc="rahi", bodyState={naked=true, hard=true, condom=condomUsed}, npcBodyState={naked=true, hard=true}})
 		saynn("You pick up the pace, railing that slick pussy faster. Rahi's muffled moans get louder, her body squirming in the restraints, her inner walls clenching tightly around you, her clit still getting pleasured by the toy at the same time.")
 
 		saynn("[say=rahi]Mmmphh.. mmmphh-..[/say]")
@@ -115,6 +119,7 @@ func _run():
 
 		addButton("Cum inside", "Breed the kitty!", "sex_cum")
 	if(state == "sex_cum"):
+		playAnimation(StageScene.HangingSex, "inside", {pc="pc", npc="rahi", pcCum=cameInsideRahi, bodyState={naked=true, hard=true, condom=condomUsed}, npcBodyState={naked=true, hard=true}})
 		saynn("You keep fucking Rahi through her orgasm, through her squirming.. until she is whimpering and trying to push back against the chains."+str(" The pressure builds in your {pc.penis}.." if !straponUsed else "")+"")
 
 		if (straponUsed):
@@ -136,6 +141,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "after_care")
 	if(state == "after_care"):
+		playAnimation(StageScene.Cuddling, "idle", {pc="pc", npc="rahi", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
 		if (gentle):
 			saynn("After you're done.. you pull out slowly and carefully. Her legs are shaky so you lower her wrists gently, unclipping the cuffs one by one. Rahi slumps into your arms"+str(", your seed dripping out of her used pussy" if cameInsideRahi else ", her pussy dripping with juices")+". You unstrap the gag last.")
 

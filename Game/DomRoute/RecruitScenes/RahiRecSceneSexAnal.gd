@@ -14,12 +14,13 @@ func _init():
 func _run():
 	if(state == ""):
 		addCharacter("rahi")
+		aimCameraAndSetLocName("hideout_breakroom")
 		gentle = (c1 == 0)
 		mean = (c1 == 2)
 		condomType = extra("condom", "no")
 		condomUsed = (condomType != "no")
 		straponUsed = (extra("strapon", "") != "")
-		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcBodyState={leashedBy="pc"}})
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcBodyState={naked=true, leashedBy="pc"}})
 		aimCameraAndSetLocName("hideout_breakroom")
 		saynn("You tell Kait your plan.. and she gives you something.")
 
@@ -37,6 +38,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "sex_prepare")
 	if(state == "sex_prepare"):
+		playAnimation(StageScene.SexFisting, "tease", {pc="pc", npc="rahi", bodyState={naked=true, hard=true, condom=condomUsed}, npcBodyState={naked=true, hard=true}})
 		saynn("You squirt a generous amount of it onto your digits.. then kneel behind her and move her tail out of the way. Rahi gasps as you press one slick digit against her tight anal ring. Then she gasps even louder as you slowly work it inside her.")
 
 		saynn("[say=rahi]Is that.. it's too.. tight..[/say]")
@@ -59,6 +61,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "sex_part")
 	if(state == "sex_part"):
+		playAnimation(StageScene.SexLowDoggy, "sex", {pc="pc", npc="rahi", bodyState={naked=true, hard=true, condom=condomUsed}, npcBodyState={naked=true, hard=true}})
 		saynn("Then you push inside.")
 
 		saynn("[say=rahi]Aaah.. T-too much.. it's too thick.. meow..[/say]")
@@ -75,6 +78,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "sex_fast")
 	if(state == "sex_fast"):
+		playAnimation(StageScene.SexLowDoggy, "fast", {pc="pc", npc="rahi", bodyState={naked=true, hard=true, condom=condomUsed}, npcBodyState={naked=true, hard=true}})
 		saynn("You pick up the pace, railing that tight ass faster. Rahi's moans grow louder, more broken, her anal star desperately clenching around you.")
 
 		saynn("[say=rahi]Ah.. ah.. please.. slower.. meow..[/say]")
@@ -96,6 +100,7 @@ func _run():
 
 		addButton("Cum inside", "Fill her ass!", "sex_cum")
 	if(state == "sex_cum"):
+		playAnimation(StageScene.SexLowDoggy, "inside", {pc="pc", npc="rahi", pcCum=cameInsideRahi, bodyState={naked=true, hard=true, condom=condomUsed}, npcBodyState={naked=true, hard=true}})
 		saynn("You keep fucking Rahi's ass through her trembling, through her whimpering..")
 
 		if (straponUsed):
@@ -137,6 +142,11 @@ func _run():
 			saynn("[say=pc]Good girl.. Very good girl.[/say]")
 
 			saynn("[say=rahi]Th-thank you.. meow..[/say]")
+
+		addButton("Continue", "See what happens next", "after_care")
+	if(state == "after_care"):
+		playAnimation(StageScene.Cuddling, "idle", {pc="pc", npc="rahi", bodyState={naked=true}, npcBodyState={naked=true, hard=true}})
+		saynn("After everything, you pull the cat into a warm embrace.")
 
 		saynn("[say=pc]You're gonna work for me now, right?[/say]")
 
@@ -188,6 +198,10 @@ func _react(_action: String, _args):
 		if(condomUsed && !condomBroke):
 			addFilledCondomToLootIfPerk(GM.pc.createFilledCondom())
 		GM.pc.orgasmFrom("rahi")
+
+	if(_action == "after_care"):
+		processTime(5*60)
+		recRemoveStrapons()
 
 	setState(_action)
 

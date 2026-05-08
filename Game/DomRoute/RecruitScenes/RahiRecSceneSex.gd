@@ -112,7 +112,7 @@ func _run():
 
 		addButton("Cum inside", "Breed the kitty!", "sex_cum")
 	if(state == "sex_cum"):
-		playAnimation(StageScene.SexFreeStanding, "inside", {pc="pc", npc="rahi", pcCum=(!condomUsed || condomBroke), bodyState={naked=true, hard=true, condom=condomUsed}, npcBodyState={naked=true, hard=true}})
+		playAnimation(StageScene.SexFreeStanding, "inside", {pc="pc", npc="rahi", pcCum=cameInsideRahi, bodyState={naked=true, hard=true, condom=condomUsed}, npcBodyState={naked=true, hard=true}})
 		saynn("You keep fucking Rahi through her orgasm, through her squirming.. until she is whimpering and pushing back into you."+str(" The pressure builds in your {pc.penis}.." if !straponUsed else "")+"")
 
 		if (straponUsed):
