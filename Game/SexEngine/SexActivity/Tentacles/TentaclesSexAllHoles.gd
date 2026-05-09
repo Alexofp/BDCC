@@ -251,7 +251,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 				possible.append_array([
 					"Slick tips swell inside {sub.your} mouth and ass, then begin to pulse, pumping thick {dom.cum} deep into {sub.yourHis} holes all at once"+(", [b]fertilizing the eggs[/b]" if hasEggs else "")+".",
 					"The tendrils twitch and pulse, then unload. A gush of sticky {dom.cum} hits the back of {sub.your} throat while anothre floods {sub.yourHis} ass, filling it up."+(" [b]The nectar helps to fertilize the eggs[/b]." if hasEggs else "")+"",
-					"All at once, the tentacles erupt. Hot {dom.cum} pours down {sub.your} throat gets pumped into {sub.yourHis} {sub.analStretch} ass, stuffing it full."+(" [b]The nectar helps to fertilize the eggs[/b]." if hasEggs else "")+"",
+					"All at once, the tentacles erupt. Hot {dom.cum} pours down {sub.your} throat and gets pumped into {sub.yourHis} {sub.analStretch} ass, stuffing it full."+(" [b]The nectar helps to fertilize the eggs[/b]." if hasEggs else "")+"",
 				])
 			getDom().fillBalls(RNG.randf_range(0.9, 1.0))
 			cumInsideNoText(DOM_0, SUB_0, S_ANUS)
