@@ -28,6 +28,7 @@ roomID = "hideout_hq"
 [node name="HideoutRoom5" parent="." index="4" instance=ExtResource( 1 )]
 position = Vector2( -64, -64 )
 roomName = "Hideout"
+roomID = "hideout_west_corridor"
 
 [node name="HideoutRoom6" parent="." index="5" instance=ExtResource( 1 )]
 position = Vector2( -128, -64 )

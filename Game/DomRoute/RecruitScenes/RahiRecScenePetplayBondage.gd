@@ -12,7 +12,7 @@ func _run():
 		aimCameraAndSetLocName("hideout_breakroom")
 		gentle = (c1 == 0)
 		mean = (c1 == 2)
-		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="allfours", npcBodyState={naked=true, leashedBy="pc"}})
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcBodyState={naked=true, leashedBy="pc"}})
 		aimCameraAndSetLocName("hideout_breakroom")
 		saynn("You will need a lot of things for this one.. But Kait and Ans have provided you with some fun toys. It's good to have a team.")
 
@@ -32,6 +32,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "rahi_corset")
 	if(state == "rahi_corset"):
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="allfours", npcBodyState={naked=true, leashedBy="pc"}})
 		saynn("Rahi lowers herself, trembling a bit. You start with a corset, wrapping it around her waist and locking it tight. She gasps as her breath shortens.")
 
 		saynn("[say=rahi]M-meow.. t-tight..[/say]")
@@ -44,6 +45,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "rahi_bitchsuit")
 	if(state == "rahi_bitchsuit"):
+		playAnimation(StageScene.PuppySexOral, "tease", {pc="pc", npc="rahi", npcBodyState={naked=true, hard=true, leashedBy="pc"}})
 		saynn("After you're done, Rahi is left standing on her elbows and knees. Her hands and rear paws are free.. but she can only really just wiggle her toes or move her digits a bit.")
 
 		saynn("Rahi is clearly struggling with the bitchsuit, mewling softly as she almost topples.")
@@ -88,6 +90,8 @@ func _run():
 
 		addButton("Continue", "See what happens next", "corridor_bondage")
 	if(state == "corridor_bondage"):
+		playAnimation(StageScene.PuppyDuo, "walk", {pc="pc", npc="rahi", npcBodyState={naked=true, hard=true, leashedBy="pc"}, flipNPC=true, npcAction="walk"})
+		aimCameraAndSetLocName("hideout_west_corridor")
 		saynn("You exit the cell. Rahi crawls on her elbows and knees, blindly following the leash. Each movement makes the clamps tug on her nips.. the vibrator still buzzing away at her sex. She is not exactly the fastest.. but she is clearly trying. You've only just noticed how blushy her face is, her cheeks are glowing red.")
 
 		saynn("And so you walk your pup around the narrow maintenance corridor. There is still some trash around.. but you just pull on the leash each time Rahi is about to bump into something.")
@@ -101,6 +105,7 @@ func _run():
 		addButton("Continue", "See what happens next", "kait_meet")
 	if(state == "kait_meet"):
 		addCharacter("kait")
+		playAnimation(StageScene.PuppySexStart, "pat", {pc="kait", npc="rahi", npcBodyState={naked=true, hard=true}})
 		saynn("[say=kait]Ohh. You really did go all out on her. Look at that puppy![/say]")
 
 		saynn("Kait crouches near Rahi and starts giving her plenty of headpats and scritches.")
@@ -125,6 +130,8 @@ func _run():
 
 		addButton("Continue", "See what happens next", "avy_encounter")
 	if(state == "avy_encounter"):
+		playAnimation(StageScene.PuppySexStart, "sad", {pc="avy", npc="rahi", npcBodyState={naked=true, hard=true}})
+		aimCameraAndSetLocName("hideout_middle")
 		removeCharacter("kait")
 		addCharacter("avy")
 		saynn("Dark foxy approaches you two, a little smirk on her face.")
@@ -169,6 +176,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "back_to_cell_bondage")
 	if(state == "back_to_cell_bondage"):
+		playAnimation(StageScene.PuppySexStart, "start", {pc="pc", npc="rahi", npcBodyState={naked=true, hard=true, leashedBy="pc"}})
 		removeCharacter("avy")
 		saynn("You bring Rahi back into the cell. After the last step, she just flops onto the floor, blindfolded and bound, small shivers running through her.")
 
@@ -200,7 +208,7 @@ func _run():
 
 		saynn("You take your time, freeing each of her limbs. Then you leash her to the pipe again before grabbing all the toys and stepping outside.")
 
-		addButton("Continue", "See what happens next", "endthescene")
+		addButton("Continue", "See what happens next", "endthescene_actual")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -209,12 +217,15 @@ func _react(_action: String, _args):
 
 	if(_action == "rahi_corset"):
 		processTime(5*60)
+		putOn("rahi", "PuppyCorset")
 
 	if(_action == "rahi_bitchsuit"):
 		processTime(3*60)
+		putOn("rahi", "ballgag")
 
 	if(_action == "add_blindfold"):
 		processTime(3*60)
+		putOn("rahi", "blindfold")
 
 	if(_action == "corridor_bondage"):
 		processTime(5*60)
@@ -227,6 +238,13 @@ func _react(_action: String, _args):
 
 	if(_action == "back_to_cell_bondage"):
 		processTime(15*60)
+		putOff("rahi", "ballgag")
+		putOff("rahi", "blindfold")
+
+	if(_action == "endthescene_actual"):
+		putOff("rahi", "PuppyCorset")
+		endScene()
+		return
 
 	setState(_action)
 

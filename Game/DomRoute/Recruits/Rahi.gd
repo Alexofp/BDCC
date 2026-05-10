@@ -70,5 +70,17 @@ func isCombinationPossible(_choices:Array, _extras:Dictionary) -> Array:
 
 func getSceneToPlay(_choices:Array, _extras:Dictionary) -> String:
 	if(_choices[1] == "sex"):
-		return "RahiRecSceneSex"
+		if(_choices[2] == "public"):
+			return "RahiRecSceneSex"
+		if(_choices[2] == "bondage"):
+			return "RahiRecSceneSexBondage"
+		if(_choices[2] == "anal"):
+			return "RahiRecSceneSexAnal"
+	if(_choices[1] == "petplay"):
+		if(_choices[2] == "public"):
+			return "RahiRecScenePetplayPublic"
+		if(_choices[2] == "bondage"):
+			return "RahiRecScenePetplayBondage"
+		if(_choices[2] == "anal"):
+			return "RahiRecScenePetplayAnal"
 	return "PlaceholderRecruitScene"
