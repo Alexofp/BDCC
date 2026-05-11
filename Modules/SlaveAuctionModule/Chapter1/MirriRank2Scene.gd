@@ -448,7 +448,7 @@ func _run():
 
 		saynn("Mirri chuckles.. but is quickly silenced by your deep long kiss. Tongues get quickly involved, invading each other's mouths and sharing all the saliva during an intense, heated battle. Your kiss is passionate, raw, powerful.. as you both refuse to give an inch.")
 
-		saynn("You press her against the wall, hands gripping her tightly.. while she doesn't reist. Instead, she meets you with that same fire, her paws running up your back, her claws digging in, leaving marks all across it.")
+		saynn("You press her against the wall, hands gripping her tightly.. while she doesn't resist. Instead, she meets you with that same fire, her paws running up your back, her claws digging in, leaving marks all across it.")
 
 		saynn("[say=mirri]Yeah, I fucking hate you too~.[/say]")
 
