@@ -83,4 +83,11 @@ func getSceneToPlay(_choices:Array, _extras:Dictionary) -> String:
 			return "RahiRecScenePetplayBondage"
 		if(_choices[2] == "anal"):
 			return "RahiRecScenePetplayAnal"
+	if(_choices[1] == "pain"):
+		if(_choices[2] == "public"):
+			return "RahiRecScenePainPublic"
+		if(_choices[2] == "bondage"):
+			return "RahiRecScenePainBondage"
+		if(_choices[2] == "anal"):
+			return "RahiRecScenePainAnal"
 	return "PlaceholderRecruitScene"
