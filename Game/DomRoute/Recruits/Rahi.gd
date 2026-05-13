@@ -9,31 +9,31 @@ func _init():
 		{
 			id = "tone",
 			name = "Tone",
-			desc = "Something something",
+			desc = "What tone do you want to use while speaking with Rahi",
 			options = [
-				["gentle", "Gentle", "Be very gentle with Rahi", RecruitChoiceResult.Red],
-				["strict", "Strict", "Be extremely strict with Rahi", RecruitChoiceResult.Yellow],
-				["mean", "Mean", "Be extremely mean and rough with Rahi", RecruitChoiceResult.Green],
+				["gentle", "Gentle", "Use a very kind tone with Rahi", RecruitChoiceResult.Red],
+				["strict", "Strict", "Use a strict tone with Rahi", RecruitChoiceResult.Yellow],
+				["mean", "Mean", "Say mean and dirty things to Rahi", RecruitChoiceResult.Green],
 			],
 		},
 		{
 			id = "main",
 			name = "Main action",
-			desc = "Something something 2",
+			desc = "What should the main action be",
 			options = [
 				["sex", "Sex", "Have sex with Rahi", RecruitChoiceResult.Yellow],
 				["petplay", "Petplay", "Do some petplay with Rahi", RecruitChoiceResult.Green],
-				["pain", "Painplay", "Give that cat some spanks", RecruitChoiceResult.Red],
+				["pain", "Painplay", "Make that can feel some pain", RecruitChoiceResult.Red],
 			],
 		},
 		{
 			id = "special",
 			name = "Special kink",
-			desc = "Something something 3",
+			desc = "What special kink do you wanna incorporate",
 			options = [
 				["public", "In public", "Do it in public", RecruitChoiceResult.Yellow],
-				["bondage", "Bondage", "Do bondage", RecruitChoiceResult.Green],
-				["anal", "Anal-focus", "Do focus on anal", RecruitChoiceResult.Red],
+				["bondage", "Bondage", "Include a lot of bondage", RecruitChoiceResult.Green],
+				["anal", "Anal-focus", "Put a huge focus on anal", RecruitChoiceResult.Red],
 			],
 		},
 	]
@@ -56,7 +56,7 @@ func getExtraChoices(_choices:Array) -> Array:
 			result.append({
 					id = "strapon",
 					name = "Strapon",
-					desc = "Pick any strapon you wanna use.",
+					desc = "Pick which strapon you wanna use.",
 					options = getStraponOptions(),
 				})
 	return result

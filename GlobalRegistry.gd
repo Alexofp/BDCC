@@ -644,7 +644,7 @@ func registerEverything():
 		registerSceneFolder("res://Scenes/Mineshaft/")
 		registerSceneFolder("res://Game/NpcSlavery/SlaveActionScenes/")
 		registerSceneFolder("res://Game/NpcSlavery/SlaveActionScenes/Prostitution/")
-		registerSceneFolder("res://Game/DomRoute/RecruitScenes/")
+		registerSceneFolderDeep("res://Game/DomRoute/RecruitScenes/")
 		
 		var end2 = OS.get_ticks_usec()
 		var worker_time2 = (end2-start2)/1000000.0
@@ -911,6 +911,11 @@ func registerSceneFolder(folder: String):
 			file_name = dir.get_next()
 	else:
 		Log.printerr("An error occurred when trying to access the path "+folder)
+
+func registerSceneFolderDeep(folder: String):
+	var scripts = getScriptsInFoldersRecursive(folder)
+	for scriptPath in scripts:
+		registerScene(scriptPath)
 
 func registerBodypart(path: String, _authorOverride:String = ""):
 	var bodypart = load(path)

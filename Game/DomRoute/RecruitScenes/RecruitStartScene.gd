@@ -56,7 +56,9 @@ func _run():
 		addButton("Back", "Back to planning", "")
 	
 	if(state == "plan"):
-		saynn("Make a plan that would break {npc.name} or make {npc.him} submit.")
+		sayn("Make a plan that would break {npc.name} or make {npc.him} submit.")
+		
+		saynn("Difficulty: "+RecruitDifficulty.getName(_recruit.difficulty)+" ("+RecruitDifficulty.getDifficultyText(_recruit.difficulty)+")")
 		
 		var _choices:Array = _recruit.choices
 		
@@ -155,13 +157,17 @@ func _run():
 			_i += 1
 	
 	if(state == "afterPlan"):
+		if(_hasPresenter):
+			playAnimation(StageScene.Duo, "stand", {npc=_presenterID})
+		else:
+			playAnimation(StageScene.Solo, "stand")
 		aimCameraAndSetLocName("hideout_near_break_room")
 		saynn("The plan is completed.")
 		
 		saynn(_recruit.getColorStringForChoices(lastContext.choiceIDs))
 		
 		if(lastContext.perfect):
-			saynn("It went perfect!")
+			saynn("It went perfectly!")
 		elif(lastContext.success):
 			saynn("Success! Not everything was perfect but it was good enough.")
 		else:
