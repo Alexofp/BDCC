@@ -267,7 +267,7 @@ func getCharacter():
 		return get_parent()
 	return null
 		
-func equipItem(item):
+func equipItem(item) -> bool:
 	if(hasItem(item)):
 		removeItem(item)
 	
@@ -332,13 +332,16 @@ func unequipSlotRemoveIfRestraint(slot):
 		addItem(theitem)
 		return true
 
-func forceEquipRemoveOther(item):
+func forceEquipRemoveOther(item) -> bool:
 	var slot:String = item.getClothingSlot()
 	
 	if(hasSlotEquipped(slot)):
 		removeItemFromSlot(slot)
 	
 	return equipItem(item)
+
+func forceEquipRemoveOtherIfExists(item: ItemBase) -> bool:
+	return forceEquipRemoveOther(item) if item else false
 
 func forceEquipStoreOther(item):
 	var slot:String = item.getClothingSlot()
@@ -358,7 +361,17 @@ func forceEquipStoreOtherUnlessRestraint(item):
 			addItem(storedItem)
 	
 	return equipItem(item)
-	
+
+func forceEquipStoreOtherUnlessRestraintReturnOther(item: ItemBase):
+	var slot:String = item.getClothingSlot()
+	var storedItem = null
+	if(hasSlotEquipped(slot)):
+		storedItem = removeItemFromSlot(slot)
+		if(!storedItem.isRestraint() || storedItem.isImportant() || storedItem.isRestraintShouldKeep()):
+			addItem(storedItem)
+	equipItem(item)
+	return storedItem
+
 func equipItemBy(item, equipper):
 	var success = equipItem(item)
 	if(success):
