@@ -126,7 +126,7 @@ func doProgress(_context:Dictionary) -> Dictionary:
 
 func reactProgress(_context:Dictionary, _result:TFResult):
 	if(getStage() == 0):
-		addText("{npc.YouHe} {npc.youVerb('feel')} a strange warmth spreading through {npc.yourHis} [b]whole body[/b]. {npc.YouHe} {npc.youVerb('feel')} itching in completely random spots.")
+		addText("{npc.YouHe} {npc.youHeVerb('feel')} a strange warmth spreading through {npc.yourHis} [b]whole body[/b]. {npc.YouHe} {npc.youHeVerb('feel')} itching in completely random spots.")
 		return
 	addText(_result.getAllTFTexts())
 	

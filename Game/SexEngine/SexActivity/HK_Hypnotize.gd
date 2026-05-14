@@ -46,7 +46,7 @@ func init_processTurn():
 	else:
 		addTextPick([
 			"{dom.You} [rainbow freq=0.05 sat=0.5 val=1.0]{dom.youVerb('hum')} quietly[/rainbow] into {sub.yourHis} ear.",
-			"[rainbow freq=0.05 sat=0.5 val=1.0]A soft, melodic hum[/rainbow] escapes {dom.your} lips, creating a soothing atmosphere as {dom.youHe} gently {dom.youVerb('guide')} {sub.yourHis} consciousness into a realm of deep relaxation.",
+			"[rainbow freq=0.05 sat=0.5 val=1.0]A soft, melodic hum[/rainbow] escapes {dom.your} lips, creating a soothing atmosphere as {dom.youHe} gently {dom.youHeVerb('guide')} {sub.yourHis} consciousness into a realm of deep relaxation.",
 			"With a gentle whisper, {dom.you} {dom.youVerb('plunge')} {sub.yourHis} mind into a [rainbow freq=0.05 sat=0.5 val=1.0]hypnotic pool[/rainbow].",
 			"A soft murmur escapes {dom.your} lips, pulling {sub.you} into a [rainbow freq=0.05 sat=0.5 val=1.0]gentle embrace of hypnosis[/rainbow].",
 			"{dom.You} {dom.youVerb('hum')} a [rainbow freq=0.05 sat=0.5 val=1.0]soothing melody[/rainbow], and the vibrations resonate through {sub.yourHis} being.",

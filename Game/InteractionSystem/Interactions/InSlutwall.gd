@@ -21,7 +21,7 @@ func start(_pawns:Dictionary, _args:Dictionary):
 		punisherID = _args["punisherID"]
 
 func init_text():
-	saynn("{inmate.You} {inmate.youAre} stuck in the slutwall. {inmate.YouHe} {inmate.youAre} completely helpless with {inmate.yourHis} {inmate.thick} {butt} sticking out, free for anyone to fuck..")
+	saynn("{inmate.You} {inmate.youAre} stuck in the slutwall. {inmate.YouHe} {inmate.youAreHeIs} completely helpless with {inmate.yourHis} {inmate.thick} {butt} sticking out, free for anyone to fuck..")
 	saynn("The tipbox has "+str(tips)+" credits.. There is an automatic mechanism that would unlock {inmate.youHim} automatically at 10 credits..")
 	var thePawn = getRolePawn("inmate")
 	if(!thePawn.isPlayer()):
@@ -88,7 +88,7 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func after_rest_text():
-	saynn("{inmate.You} decide to stay quiet and just get some rest.")
+	saynn("{inmate.You} {inmate.youVerb('decide')} to stay quiet and just get some rest.")
 
 	addAction("continue", "Continue", "See what happens next", "default", 1.0, 0, {})
 

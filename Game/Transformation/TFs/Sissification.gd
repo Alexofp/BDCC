@@ -274,7 +274,7 @@ func reactProgress(_context:Dictionary, _result:TFResult):
 			]))
 		elif(penisStage == 2):
 			addText(RNG.pick([
-				"A shiver runs through {npc.youHim} as an unsettling coldness spreads through {npc.yourHis} cock. A feeling of.. dullness.. is creeping in.. making {npc.yourHis} member less and less sensitive. {npc.YouHe} {npc.youVerb('don', 'doesn')}'t need it anyway..",
+				"A shiver runs through {npc.youHim} as an unsettling coldness spreads through {npc.yourHis} cock. A feeling of.. dullness.. is creeping in.. making {npc.yourHis} member less and less sensitive. {npc.YouHe} {npc.youDontHeDoesnt} need it anyway..",
 			]))
 		else:
 			addText(RNG.pick([
@@ -311,7 +311,7 @@ func reactProgress(_context:Dictionary, _result:TFResult):
 		addText("What is happening with your body..")
 	else:
 		if(getPossibleSteps(getChar()).empty()):
-			addText("After all that, a sudden wave of realization washes over {npc.youHim}. {npc.YouHe} {npc.youAre} now a perfect sissy! {npc.YouHe} just need to take some MorphIn and make these changes permanent..")
+			addText("After all that, a sudden wave of realization washes over {npc.youHim}. {npc.YouHe} {npc.youAreHeIs} now a perfect sissy! {npc.YouHe} just need to take some MorphIn and make these changes permanent..")
 	
 	
 	if(step in ["shrinkpenis"]):

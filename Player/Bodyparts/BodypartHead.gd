@@ -29,4 +29,4 @@ func getHeadLength():
 	return 0.25
 
 func getTransformMorphMessage(_context:Dictionary) -> String:
-	return "The shape of {npc.yourHis} head begins to shift! Features morph and change, contours of {npc.yourHis} skull elongate and reshape into a different form. But somehow, {npc.yourHis} new face retains a hint of the old one. By the end of the process, {npc.youHe} now {npc.youVerb('have', 'has')} "+getAVulgarName()+"."
+	return "The shape of {npc.yourHis} head begins to shift! Features morph and change, contours of {npc.yourHis} skull elongate and reshape into a different form. But somehow, {npc.yourHis} new face retains a hint of the old one. By the end of the process, {npc.youHe} now {npc.youHaveHeHas} "+getAVulgarName()+"."

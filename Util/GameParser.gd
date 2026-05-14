@@ -100,18 +100,8 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array) -> Stri
 			return object.theyve()
 	if(_command in ["doesDo", "does"] && _args.size() == 0):
 		return object.doesDo()
-	if(_command == "youDo" && _args.size() == 0):
-		if(object.isPlayer()):
-			return "do"
-		else:
-			return object.doesDo()
 	if(_command in ["doesntDont", "doesnt"] && _args.size() == 0):
 		return object.doesntDont()
-	if(_command == "youDont" && _args.size() == 0):
-		if(object.isPlayer()):
-			return "don't"
-		else:
-			return object.doesntDont()
 	if(_command == "name" && _args.size() == 0):
 		return object.getName()		
 	if(_command == "nameS" && _args.size() == 0):
@@ -155,8 +145,18 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array) -> Stri
 		if(object.isPlayer()):
 			return "were"
 		else:
+			return "was"
+	if(_command in ["youWereHeWas", "youHeWas"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "were"
+		else:
 			return object.wasWere()
 	if(_command in ["youWerent"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "weren't"
+		else:
+			return "wasn't"
+	if(_command in ["youWerentHeWasnt", "youHeWasnt"] && _args.size() == 0):
 		if(object.isPlayer()):
 			return "weren't"
 		else:
@@ -165,8 +165,18 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array) -> Stri
 		if(object.isPlayer()):
 			return "are"
 		else:
+			return "is"
+	if(_command in ["youAreHeIs", "youHeIs"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "are"
+		else:
 			return object.isAre()
 	if(_command in ["youArent"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "aren't"
+		else:
+			return "isn't"
+	if(_command in ["youArentHeIsnt", "youHeIsnt"] && _args.size() == 0):
 		if(object.isPlayer()):
 			return "aren't"
 		else:
@@ -175,13 +185,50 @@ func callObjectFuncWrapper(_obj: String, _command: String, _args: Array) -> Stri
 		if(object.isPlayer()):
 			return "have"
 		else:
+			return "has"
+	if(_command in ["youHaveHeHas", "youHeHas"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "have"
+		else:
 			return object.hasHave()
 	if(_command == "youHavent" && _args.size() == 0):
 		if(object.isPlayer()):
 			return "haven't"
 		else:
+			return "hasn't"
+	if(_command in ["youHaventHeHasnt", "youHeHasnt"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "haven't"
+		else:
 			return object.hasHave() + "n't"
+	if(_command == "youDo" && _args.size() == 0):
+		if(object.isPlayer()):
+			return "do"
+		else:
+			return "does"
+	if(_command in ["youDoHeDoes", "youHeDoes"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "do"
+		else:
+			return object.doesDo()
+	if(_command == "youDont" && _args.size() == 0):
+		if(object.isPlayer()):
+			return "don't"
+		else:
+			return "doesn't"
+	if(_command in ["youDontHeDoesnt", "youHeDoesnt"] && _args.size() == 0):
+		if(object.isPlayer()):
+			return "don't"
+		else:
+			return object.doesntDont()
 	if(_command == "youVerb"):
+		if(object.isPlayer()):
+			return str(_args[0])
+		if(_args.size() == 1):
+			return str(_args[0]) + "s"
+		if(_args.size() == 2):
+			return str(_args[1])
+	if(_command == "youHeVerb"):
 		if(object.isPlayer()):
 			return str(_args[0])
 		if(_args.size() == 1):

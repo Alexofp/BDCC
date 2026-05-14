@@ -217,7 +217,7 @@ func reactProgress(_context:Dictionary, _result:TFResult):
 		addText("What is happening with your body..")
 	else:
 		if(getPossibleSteps(getChar()).empty()):
-			addText("After all that, a sudden wave of realization washes over {npc.youHim}. {npc.YouHe} {npc.youAre} now a perfect HuCow! {npc.YouHe} just need to take some MorphIn and make these changes permanent..")
+			addText("After all that, a sudden wave of realization washes over {npc.youHim}. {npc.YouHe} {npc.youAreHeIs} now a perfect HuCow! {npc.YouHe} just need to take some MorphIn and make these changes permanent..")
 	
 	if(step in ["switchbreasts", "incbreasts", "nipSen"]):
 		playAnim(StageScene.TFLook, "breasts", {bodyState={exposedChest=true}})

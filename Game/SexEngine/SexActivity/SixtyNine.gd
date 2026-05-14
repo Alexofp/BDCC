@@ -254,7 +254,7 @@ func init_doAction(_indx:int, _id:String, _action:Dictionary):
 			
 			text += RNG.pick([
 				"{dom.You} {dom.youVerb('take')} {sub.yourHis} {penis} into {dom.yourHis} mouth, {dom.yourHis} lips sliding down its length.",
-				"{dom.You} {dom.youVerb('wrap')} {dom.yourHis} lips around {sub.yourHis} {penis}, {dom.yourHis} tongue teasing along its sensitive tip as {dom.youHe} {dom.youVerb('bob')} {dom.yourHis} head up and down.",
+				"{dom.You} {dom.youVerb('wrap')} {dom.yourHis} lips around {sub.yourHis} {penis}, {dom.yourHis} tongue teasing along its sensitive tip as {dom.youHe} {dom.youHeVerb('bob')} {dom.yourHis} head up and down.",
 			])
 		else:
 			text += RNG.pick([
@@ -267,8 +267,8 @@ func init_doAction(_indx:int, _id:String, _action:Dictionary):
 			sendSexEvent(SexEvent.HolePenetrated, DOM_0, SUB_0, {hole=BodypartSlot.Head,engulfed=false,strapon=isWearingStrapon(DOM_0)})
 			
 			text += RNG.pick([
-				"Without warning, {dom.you} {dom.youVerb('shift')} {dom.yourHis} hips, lining up {dom.yourHis} {dom.penis} with {sub.yourHis} lips. With a firm thrust, {dom.youHe} {dom.youVerb('part')} {sub.yourHis} mouth, forcing {sub.youHim} to return the favor by taking {dom.youHim}.",
-				"{dom.You} {dom.youVerb('move')} {dom.yourHis} hips forward, guiding {dom.yourHis} {dom.penis} to {sub.yourHis} lips. {dom.YouHe} {dom.youVerb('push', 'pushes')} insistently, leaving {sub.youHim} no choice but to take {dom.youHim} in return.",
+				"Without warning, {dom.you} {dom.youVerb('shift')} {dom.yourHis} hips, lining up {dom.yourHis} {dom.penis} with {sub.yourHis} lips. With a firm thrust, {dom.youHe} {dom.youHeVerb('part')} {sub.yourHis} mouth, forcing {sub.youHim} to return the favor by taking {dom.youHim}.",
+				"{dom.You} {dom.youVerb('move')} {dom.yourHis} hips forward, guiding {dom.yourHis} {dom.penis} to {sub.yourHis} lips. {dom.YouHe} {dom.youHeVerb('push', 'pushes')} insistently, leaving {sub.youHim} no choice but to take {dom.youHim} in return.",
 			])
 		else:
 			text += RNG.pick([
@@ -299,7 +299,7 @@ func order_doAction(_indx:int, _id:String, _action:Dictionary):
 			
 			text += RNG.pick([
 				"Obediently, {sub.you} {sub.youVerb('part')} {sub.yourHis} lips and {sub.youVerb('take')} {dom.yourHis} {dom.penis} into {sub.yourHis} mouth, sucking eagerly.",
-				"{sub.You} {sub.youVerb('open')} {sub.yourHis} mouth wide, letting {dom.yourHis} {dom.penis} slide past {sub.yourHis} lips. With an eager tongue and slow, deliberate movements, {sub.youHe} {sub.youVerb('begin')} sucking {dom.youHim} off.",
+				"{sub.You} {sub.youVerb('open')} {sub.yourHis} mouth wide, letting {dom.yourHis} {dom.penis} slide past {sub.yourHis} lips. With an eager tongue and slow, deliberate movements, {sub.youHe} {sub.youHeVerb('begin')} sucking {dom.youHim} off.",
 			])
 		else:
 			text += RNG.pick([
@@ -312,7 +312,7 @@ func order_doAction(_indx:int, _id:String, _action:Dictionary):
 			
 			text += RNG.pick([
 				"In return, {dom.You} {dom.youVerb('take')} {sub.yourHis} {penis} into {dom.yourHis} mouth, {dom.yourHis} lips sliding down its length.",
-				"Feeling that, {dom.You} {dom.youVerb('wrap')} {dom.yourHis} lips around {sub.yourHis} {penis}, {dom.yourHis} tongue teasing along its sensitive tip as {dom.youHe} {dom.youVerb('bob')} {dom.yourHis} head up and down.",
+				"Feeling that, {dom.You} {dom.youVerb('wrap')} {dom.yourHis} lips around {sub.yourHis} {penis}, {dom.yourHis} tongue teasing along its sensitive tip as {dom.youHe} {dom.youHeVerb('bob')} {dom.yourHis} head up and down.",
 			])
 		else:
 			text += RNG.pick([
@@ -339,13 +339,13 @@ func order_doAction(_indx:int, _id:String, _action:Dictionary):
 			if(RNG.chance(50)):
 				failGoals()
 			endActivity()
-			addText("{sub.You} {sub.youVerb('bite')} {dom.your} genitals! {dom.YouHe} {dom.youVerb('cry', 'cries')} from pain and {dom.youVerb('pull')} away.")
+			addText("{sub.You} {sub.youVerb('bite')} {dom.your} genitals! {dom.YouHe} {dom.youHeVerb('cry', 'cries')} from pain and {dom.youHeVerb('pull')} away.")
 			react(SexReaction.PainGeneric)
 			return
 		else:
 			getDomInfo().addAnger(0.4)
 			state = ""
-			addText("{sub.You} {sub.youVerb('try', 'tries')} to bite {dom.you} but {dom.youHe} {dom.youVerb('avoid')} it!")
+			addText("{sub.You} {sub.youVerb('try', 'tries')} to bite {dom.you} but {dom.youHe} {dom.youHeVerb('avoid')} it!")
 			return
 
 func sex_getActions(_indx:int):

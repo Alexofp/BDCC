@@ -574,7 +574,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 				return
 	if(_id == "switchhole"):
 		switchCurrentActivityTo(switchHoleActivity)
-		addText("{dom.You} {dom.youVerb('switch', 'switches')} holes. {dom.YouHe} {dom.youAre} "+RNG.pick(["prodding", "teasing", "rubbing"])+" {sub.your} "+RNG.pick(otherHoleNames)+" now.")
+		addText("{dom.You} {dom.youVerb('switch', 'switches')} holes. {dom.YouHe} {dom.youAreHeIs} "+RNG.pick(["prodding", "teasing", "rubbing"])+" {sub.your} "+RNG.pick(otherHoleNames)+" now.")
 		return
 	if(_id in ["knotinside", "cuminside"]):
 		var cumData:Dictionary = doProcessCumInside(DOM_0, SUB_0, usedBodypart, (_id == "knotinside"))
