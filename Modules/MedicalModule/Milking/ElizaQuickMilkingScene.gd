@@ -27,10 +27,10 @@ func _reactInit():
 	if(GM.pc.hasReachablePenis() || GM.pc.isWearingChastityCage()):
 		amountCollected += GM.main.SCI.processMilkPlayerPenis()
 		penisMilked = true
-	if(GM.pc.hasReachablePenis()):
-		var thePump = GlobalRegistry.createItem("PenisPump")
-		displacedItemPenis = GM.pc.getInventory().forceEquipStoreOtherUnlessRestraintReturnOther(thePump)
-		hasPenisPump = true
+		if(GM.pc.hasReachablePenis() || GM.pc.getWornChastityCage().getRestraintData().canBeEasilyRemovedByDom()):
+			var thePump = GlobalRegistry.createItem("PenisPump")
+			displacedItemPenis = GM.pc.getInventory().forceEquipStoreOtherUnlessRestraintReturnOther(thePump)
+			hasPenisPump = true
 	if(GM.pc.hasReachableVagina()):
 		amountCollected += GM.main.SCI.processMilkPlayerVagina()
 		vaginaMilked = true
