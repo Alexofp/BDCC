@@ -383,7 +383,7 @@ func _run():
 
 		saynn("But you gotta resist still.")
 
-		addButton("Reist", "Try to get out of her grasp", "les5_lose")
+		addButton("Resist", "Try to get out of her grasp", "les5_lose")
 	if(state == "les5_lose"):
 		playAnimation(StageScene.SexFaceSitting, "sit", {pc="tavi", npc="pc", bodyState={naked=true}})
 		saynn("Tavi is behind you, holding your hair.. Best thing you can come up with is stomping on her feet.")
