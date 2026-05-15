@@ -294,6 +294,8 @@ var npcOwnerEvents:Dictionary = {}
 var npcOwnerEventIDsByTag:Dictionary = {}
 var npcOwnerTraits:Dictionary = {}
 var recruits:Dictionary = {}
+var missions:Dictionary = {}
+var missionQuests:Dictionary = {}
 
 var bodypartStorageNode
 
@@ -713,6 +715,7 @@ func registerEverything():
 	registerTransformationEffectsFolder("res://Game/Transformation/Effects/")
 	registerNurseryTaskFolder("res://Game/Science/NurseryTasks/")
 	registerRecruitFolder("res://Game/DomRoute/Recruits/")
+	registerMissionFolder("res://Game/DomRoute/Missions/")
 	
 	emit_signal("loadingUpdate", 11.0/totalStages, "Sex scenes")
 	yield(get_tree(), "idle_frame")
@@ -2942,6 +2945,31 @@ func createRecruit(id: String):
 func getRecruits():
 	return recruits
 
+
+
+func registerMission(path: String):
+	var loadedClass = load(path)
+	var object = loadedClass.new()
+	
+	missions[object.id] = object
+	var newQuest := MissionQuestProxy.new()
+	newQuest.mission = object
+	missionQuests[object.id] = newQuest
+
+func registerMissionFolder(folder: String):
+	var scripts = getScriptsInFoldersRecursive(folder)
+	for scriptPath in scripts:
+		registerMission(scriptPath)
+
+func getMission(id: String):
+	if(missions.has(id)):
+		return missions[id]
+	else:
+		Log.printerr("ERROR: mission with the id "+id+" wasn't found")
+		return null
+
+func getMissions():
+	return missions
 
 
 

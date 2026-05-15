@@ -35,6 +35,7 @@ var DrugDenRun:DrugDen
 var PS:PlayerSlaveryBase
 var PSH:PlayerSlaveryHolder = PlayerSlaveryHolder.new()
 var RCS:RecruitSystem = RecruitSystem.new()
+var MS:MissionSystem = MissionSystem.new()
 
 var staticCharacters:Dictionary = {}
 var charactersToUpdate:Array = []
@@ -515,6 +516,7 @@ func saveData():
 		}
 	else:
 		data["playerSlavery"] = null
+	data["missionSystem"] = MS.saveData()
 	
 	data["scenes"] = []
 	for scene in sceneStack:
@@ -557,6 +559,7 @@ func loadData(data):
 	PSH.loadData(SAVE.loadVar(data, "playerSlaveryHolder", {}))
 	RCS = RecruitSystem.new() # To reset all the state
 	RCS.loadData(SAVE.loadVar(data, "recruitSystem", {}))
+	MS.loadData(SAVE.loadVar(data, "missionSystem", {}))
 	
 	var scenes = SAVE.loadVar(data, "scenes", [])
 	
@@ -1685,11 +1688,29 @@ func getDebugActions():
 				},
 			],
 		},
+		{
+			"id": "startMission",
+			"name": "Start mission",
+			"args": [
+				{
+					"id": "mission",
+					"name": "Mission",
+					"type": "list",
+					"value": GlobalRegistry.missions.keys()[0] if GlobalRegistry.missions.size() > 0 else "",
+					"values": MS.getDebugMissionList(),
+				},
+			],
+		},
 	]
 
 func doDebugAction(id, args = {}):
 	print(id, " ", args)
 	
+	if(id == "startMission"):
+		if(!MS.canStartAnyMission()):
+			MS.cancelCurrentMission()
+		MS.startMission(args["mission"])
+		return
 	if(id == "startRecruit"):
 		if(GM.main.RCS.hasCurrent()):
 			addMessage("Can't start a recruiting scene. Already recruiting someone!")
