@@ -340,8 +340,11 @@ func forceEquipRemoveOther(item) -> bool:
 	
 	return equipItem(item)
 
-func forceEquipRemoveOtherIfExists(item: ItemBase) -> bool:
-	return forceEquipRemoveOther(item) if item else false
+func forceEquipReturnOther(item: ItemBase):
+	var slot: String = item.getClothingSlot()
+	var displacedItem = removeItemFromSlot(slot)
+	equipItem(item)
+	return displacedItem
 
 func forceEquipStoreOther(item):
 	var slot:String = item.getClothingSlot()
