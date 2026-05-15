@@ -318,12 +318,12 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		if(!RNG.chance(getSub().getPenetrateChanceBy(BodypartSlot.Head, getDomID()))):
 			var text:String = RNG.pick([
 				"{dom.You} {dom.youVerb('try', 'tries')} to force {sub.you} deeper onto {dom.yourHis} "+getDickName()+" but {sub.yourHis} throat is just too tight.",
-				"{dom.You} {dom.youVerb('try', 'tries')} to make {sub.you} deepthroat {dom.yourHis} "+getDickName()+" but {sub.youHe} {sub.youAre} just too tight.",
+				"{dom.You} {dom.youVerb('try', 'tries')} to make {sub.you} deepthroat {dom.yourHis} "+getDickName()+" but {sub.youHe} {sub.youAreHeIs} just too tight.",
 			])
 			if(isStocksSex()):
 				text = RNG.pick([
 				"{dom.You} {dom.youVerb('try', 'tries')} to force {dom.yourHis} "+getDickName()+" deeper but {sub.yourHis} throat is just too tight.",
-				"{dom.You} {dom.youVerb('try', 'tries')} to make {sub.you} deepthroat {dom.yourHis} "+getDickName()+" but {sub.youHe} {sub.youAre} just too tight.",
+				"{dom.You} {dom.youVerb('try', 'tries')} to make {sub.you} deepthroat {dom.yourHis} "+getDickName()+" but {sub.youHe} {sub.youAreHeIs} just too tight.",
 				])
 			getSub().gotOrificeStretchedBy(BodypartSlot.Head, getDomID(), true, 0.1)
 			stimulateSex(DOM_0, SUB_0, S_MOUTH, I_TEASE)
@@ -456,7 +456,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			if(RNG.chance(40)):
 				if(getDom().bodypartTransferFluidsTo(BodypartSlot.Vagina, getSubID(), BodypartSlot.Head, 0.1, 20.0)):
 					text += RNG.pick([ 
-						" {sub.YouHe} {sub.youVerb('get')} "+Util.capitalizeFirstLetter(getDom().getBodypartContentsStringList(BodypartSlot.Vagina))+" onto {sub.yourHis} tongue while eating {dom.yourHis} "+RNG.pick(["", "used ", "stuffed "])+RNG.pick(["pussy", "slit", "kitty"])+" out. [b]{sub.You} {sub.youVerb('swallow')} it all[/b].",
+						" {sub.YouHe} {sub.youHeVerb('get')} "+Util.capitalizeFirstLetter(getDom().getBodypartContentsStringList(BodypartSlot.Vagina))+" onto {sub.yourHis} tongue while eating {dom.yourHis} "+RNG.pick(["", "used ", "stuffed "])+RNG.pick(["pussy", "slit", "kitty"])+" out. [b]{sub.You} {sub.youVerb('swallow')} it all[/b].",
 					])
 		
 		#getDomInfo().stimulateArousalZone(0.05, BodypartSlot.Vagina, 0.25)
@@ -491,11 +491,11 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			getDomInfo().addAnger(1.0 - getDomInfo().fetishScore({Fetish.Masochism: 0.5}))
 			getDomInfo().addLust(-5 + 10 * getDomInfo().fetishScore({Fetish.Masochism: 1.0}))
 			endActivity()
-			addText("{sub.You} {sub.youVerb('bite')} {dom.your} genitals! {dom.YouHe} {dom.youVerb('cry', 'cries')} from pain and {dom.youVerb('pull')} away.")
+			addText("{sub.You} {sub.youVerb('bite')} {dom.your} genitals! {dom.YouHe} {dom.youHeVerb('cry', 'cries')} from pain and {dom.youHeVerb('pull')} away.")
 			return
 		else:
 			getDomInfo().addAnger(0.4)
-			addText("{sub.You} {sub.youVerb('try', 'tries')} to bite {dom.you} but {dom.youHe} {dom.youVerb('avoid')} it!")
+			addText("{sub.You} {sub.youVerb('try', 'tries')} to bite {dom.you} but {dom.youHe} {dom.youHeVerb('avoid')} it!")
 			return
 	if(_id == "pullaway"):
 		var successChance:float = getSubResistChance(30.0, 25.0)
@@ -517,7 +517,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			getSub().gotOrificeStretchedBy(BodypartSlot.Head, getDomID(), true, 0.1)
 			stimulateLick(SUB_0, DOM_0, S_PENIS, I_TEASE, SPEED_SLOW)
 			#affectDom(getDomInfo().fetishScore({Fetish.OralSexReceiving: 1.0}), 0.2*domSensitivity(), -0.03)
-			addText("{sub.You} {sub.youVerb('try', 'tries')} to get {dom.yourHis} "+getDickName()+" into {sub.yourHis} throat but "+RNG.pick(["it's too big", "{sub.youHe} {sub.youVerb('struggle')}", "{sub.youVerb('fail')}"])+".")
+			addText("{sub.You} {sub.youVerb('try', 'tries')} to get {dom.yourHis} "+getDickName()+" into {sub.yourHis} throat but "+RNG.pick(["it's too big", "{sub.youHe} {sub.youHeVerb('struggle')}", "{sub.youVerb('fail')}"])+".")
 			return
 		else:
 			state = "deepthroat"

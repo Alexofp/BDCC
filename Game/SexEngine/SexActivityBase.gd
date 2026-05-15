@@ -1942,28 +1942,28 @@ func doBlowjobTurnDom():
 	if(isWearingStrapon(DOM_0)):
 		if(getDomInfo(0).isReadyToCum()):
 			text += RNG.pick([
-				" {dom.YouHe} {dom.youAre} about to cum!",
-				" {dom.YouHe} {dom.youAre} edging {dom.yourself}.",
-				" {dom.YouHe} {dom.youAre} barely keeping {dom.yourself} from cumming.",
+				" {dom.YouHe} {dom.youAreHeIs} about to cum!",
+				" {dom.YouHe} {dom.youAreHeIs} edging {dom.yourself}.",
+				" {dom.YouHe} {dom.youAreHeIs} barely keeping {dom.yourself} from cumming.",
 				" {dom.YouHe} reached {dom.yourHis} peak!",
 			])
 		elif(getDomInfo(0).isCloseToCumming()):
 			text += RNG.pick([
-				" {dom.YouHe} {dom.youAre} gonna cum soon!",
+				" {dom.YouHe} {dom.youAreHeIs} gonna cum soon!",
 			])
 	else:
 		if(getDomInfo(0).isReadyToCum()):
 			text += RNG.pick([
-				" {dom.YouHe} {dom.youAre} about to cum!",
-				" {dom.YouHe} {dom.youAre} edging {dom.yourself}.",
+				" {dom.YouHe} {dom.youAreHeIs} about to cum!",
+				" {dom.YouHe} {dom.youAreHeIs} edging {dom.yourself}.",
 				" {dom.YourHis} "+RNG.pick(["cock", "dick", "member"])+" is twitching a lot.",
-				" {dom.YouHe} {dom.youAre} barely keeping {dom.yourself} from cumming.",
+				" {dom.YouHe} {dom.youAreHeIs} barely keeping {dom.yourself} from cumming.",
 				" {dom.YouHe} reached {dom.yourHis} peak!",
 			])
 		elif(getDomInfo(0).isCloseToCumming()):
 			text += RNG.pick([
-				" {dom.YouHe} {dom.youAre} leaking "+RNG.pick(["pre", "precum"])+" directly into that mouth.",
-				" {dom.YouHe} {dom.youAre} gonna cum soon!",
+				" {dom.YouHe} {dom.youAreHeIs} leaking "+RNG.pick(["pre", "precum"])+" directly into that mouth.",
+				" {dom.YouHe} {dom.youAreHeIs} gonna cum soon!",
 				" {dom.YourHis} "+RNG.pick(["cock", "dick", "member"])+" is twitching slightly.",
 			])
 	addText(text)
@@ -2006,28 +2006,28 @@ func doDeepthroatTurnDom():
 	if(isWearingStrapon(DOM_0)):
 		if(getDomInfo(0).isReadyToCum()):
 			text += RNG.pick([
-				" {dom.YouHe} {dom.youAre} about to cum!",
-				" {dom.YouHe} {dom.youAre} edging {dom.yourself}.",
-				" {dom.YouHe} {dom.youAre} barely keeping {dom.yourself} from cumming.",
+				" {dom.YouHe} {dom.youAreHeIs} about to cum!",
+				" {dom.YouHe} {dom.youAreHeIs} edging {dom.yourself}.",
+				" {dom.YouHe} {dom.youAreHeIs} barely keeping {dom.yourself} from cumming.",
 				" {dom.YouHe} reached {dom.yourHis} peak!",
 			])
 		elif(getDomInfo(0).isCloseToCumming()):
 			text += RNG.pick([
-				" {dom.YouHe} {dom.youAre} gonna cum soon!",
+				" {dom.YouHe} {dom.youAreHeIs} gonna cum soon!",
 			])
 	else:
 		if(getDomInfo(0).isReadyToCum()):
 			text += RNG.pick([
-				" {dom.YouHe} {dom.youAre} about to cum!",
-				" {dom.YouHe} {dom.youAre} edging {dom.yourself}.",
+				" {dom.YouHe} {dom.youAreHeIs} about to cum!",
+				" {dom.YouHe} {dom.youAreHeIs} edging {dom.yourself}.",
 				" {dom.YourHis} "+RNG.pick(["cock", "dick", "member"])+" is twitching a lot.",
-				" {dom.YouHe} {dom.youAre} barely keeping {dom.yourself} from cumming.",
+				" {dom.YouHe} {dom.youAreHeIs} barely keeping {dom.yourself} from cumming.",
 				" {dom.YouHe} reached {dom.yourHis} peak!",
 			])
 		elif(getDomInfo(0).isCloseToCumming()):
 			text += RNG.pick([
-				" {dom.YouHe} {dom.youAre} leaking "+RNG.pick(["pre", "precum"])+" directly into that mouth.",
-				" {dom.YouHe} {dom.youAre} gonna cum soon!",
+				" {dom.YouHe} {dom.youAreHeIs} leaking "+RNG.pick(["pre", "precum"])+" directly into that mouth.",
+				" {dom.YouHe} {dom.youAreHeIs} gonna cum soon!",
 				" {dom.YourHis} "+RNG.pick(["cock", "dick", "member"])+" is twitching slightly.",
 			])
 	
@@ -2091,11 +2091,11 @@ func doPussyLickingTurnDom():
 	
 	if(getDomInfo(0).isReadyToCum()):
 		text += RNG.pick([
-			" {dom.YouHe} {dom.youAre} about to cum!",
-			" {dom.YouHe} {dom.youAre} edging {dom.yourself}.",
+			" {dom.YouHe} {dom.youAreHeIs} about to cum!",
+			" {dom.YouHe} {dom.youAreHeIs} edging {dom.yourself}.",
 			" {dom.YourHis} "+RNG.pick(["pussy", "pussy slit"])+" is twitching a lot.",
 			" {dom.YourHis} "+RNG.pick(["pussy", "pussy slit"])+" is leaking arousal a lot.",
-			" {dom.YouHe} {dom.youAre} barely keeping {dom.yourself} from cumming.",
+			" {dom.YouHe} {dom.youAreHeIs} barely keeping {dom.yourself} from cumming.",
 			" {dom.YouHe} reached {dom.yourHis} peak!",
 		])
 	elif(getDomInfo(0).isCloseToCumming()):
@@ -2129,11 +2129,11 @@ func doPussyGrindingTurnDom():
 	
 	if(getDomInfo(0).isReadyToCum()):
 		text += RNG.pick([
-			" {dom.YouHe} {dom.youAre} about to cum!",
-			" {dom.YouHe} {dom.youAre} edging {dom.yourself}.",
+			" {dom.YouHe} {dom.youAreHeIs} about to cum!",
+			" {dom.YouHe} {dom.youAreHeIs} edging {dom.yourself}.",
 			" {dom.YourHis} "+RNG.pick(["pussy", "pussy slit"])+" is twitching a lot.",
 			" {dom.YourHis} "+RNG.pick(["pussy", "pussy slit"])+" is leaking arousal a lot.",
-			" {dom.YouHe} {dom.youAre} barely keeping {dom.yourself} from cumming.",
+			" {dom.YouHe} {dom.youAreHeIs} barely keeping {dom.yourself} from cumming.",
 			" {dom.YouHe} reached {dom.yourHis} peak!",
 		])
 	elif(getDomInfo(0).isCloseToCumming()):
@@ -2182,16 +2182,16 @@ func doBlowjobTurnSub():
 	
 	if(getSubInfo(0).isReadyToCum()):
 		text += RNG.pick([
-			" {sub.YouHe} {sub.youAre} about to cum!",
-			" {sub.YouHe} {sub.youAre} being edged by {dom.youHim}.",
+			" {sub.YouHe} {sub.youAreHeIs} about to cum!",
+			" {sub.YouHe} {sub.youAreHeIs} being edged by {dom.youHim}.",
 			" {sub.YourHis} "+RNG.pick(["cock", "dick", "member"])+" is twitching a lot.",
-			" {sub.YouHe} {sub.youAre} barely keeping {sub.yourself} from cumming.",
+			" {sub.YouHe} {sub.youAreHeIs} barely keeping {sub.yourself} from cumming.",
 			" {sub.YouHe} reached {sub.yourHis} peak!",
 		])
 	elif(getSubInfo(0).isCloseToCumming()):
 		text += RNG.pick([
-			" {sub.YouHe} {sub.youAre} leaking "+RNG.pick(["pre", "precum"])+" directly into {dom.yourHis} mouth.",
-			" {sub.YouHe} {sub.youAre} gonna cum soon!",
+			" {sub.YouHe} {sub.youAreHeIs} leaking "+RNG.pick(["pre", "precum"])+" directly into {dom.yourHis} mouth.",
+			" {sub.YouHe} {sub.youAreHeIs} gonna cum soon!",
 			" {sub.YourHis} "+RNG.pick(["cock", "dick", "member"])+" is twitching slightly.",
 		])
 	addText(text)
@@ -2238,11 +2238,11 @@ func doPussyLickingTurnSub():
 	
 	if(getSubInfo(0).isReadyToCum()):
 		text += RNG.pick([
-			" {sub.YouHe} {sub.youAre} about to cum!",
-			" {sub.YouHe} {sub.youAre} being kept on edge by {dom.youHim}.",
+			" {sub.YouHe} {sub.youAreHeIs} about to cum!",
+			" {sub.YouHe} {sub.youAreHeIs} being kept on edge by {dom.youHim}.",
 			" {sub.YourHis} "+RNG.pick(["pussy", "pussy slit"])+" is twitching a lot.",
 			" {sub.YourHis} "+RNG.pick(["pussy", "pussy slit"])+" is leaking arousal a lot.",
-			" {sub.YouHe} {sub.youAre} barely keeping {sub.yourself} from cumming.",
+			" {sub.YouHe} {sub.youAreHeIs} barely keeping {sub.yourself} from cumming.",
 			" {sub.YouHe} reached {sub.yourHis} peak!",
 		])
 	elif(getSubInfo(0).isCloseToCumming()):
@@ -2503,11 +2503,11 @@ func doProcessPussyGrind(_indxRider:int, _indxTarget:int):
 	
 	if(riderInfo.isReadyToCum()):
 		text += RNG.pick([
-			" {<RIDER>.YouHe} {<RIDER>.youAre} about to cum!",
-			" {<RIDER>.YouHe} {<RIDER>.youAre} edging {<RIDER>.yourself}.",
+			" {<RIDER>.YouHe} {<RIDER>.youAreHeIs} about to cum!",
+			" {<RIDER>.YouHe} {<RIDER>.youAreHeIs} edging {<RIDER>.yourself}.",
 			" {<RIDER>.YourHis} "+getNameHole(_indxRider, S_VAGINA)+" is twitching a lot.",
 			" {<RIDER>.YourHis} "+getNameHole(_indxRider, S_VAGINA)+" is leaking arousal a lot.",
-			" {<RIDER>.YouHe} {<RIDER>.youAre} barely keeping {<RIDER>.yourself} from cumming.",
+			" {<RIDER>.YouHe} {<RIDER>.youAreHeIs} barely keeping {<RIDER>.yourself} from cumming.",
 			" {<RIDER>.YouHe} reached {<RIDER>.yourHis} peak!",
 		])
 	elif(riderInfo.isCloseToCumming()):
@@ -2575,25 +2575,25 @@ func doProcessCumInside(_indxTop:int, _indxBottom:int, _hole:String, tryKnot:boo
 		if(!isRiding):
 			text += RNG.pick([
 				"{<TOP>.You} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} cock deep inside {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+" and force the knot in, stretching {<BOTTOM>.yourHis} "+getNameHole(_indxBottom, _hole)+" wide before [b]"+RNG.pick(["stuffing", "filling"])+" it full of {<TOP>.yourHis} seed[/b]!",
-				"{<TOP>.You} {<TOP>.youVerb('manage')} to force {<TOP>.yourHis} knot in, stretching {<BOTTOM>.you} out! {<TOP>.YouHe} {<TOP>.youVerb('grunt')} as {<TOP>.yourHis} cock starts shooting thick ropes of "+RNG.pick(["cum", "seed", "jizz", "semen"])+" deep [b]inside {<BOTTOM>.yourHis} "+wombText+"[/b]!",
-				"{<TOP>.Your} balls tense up as {<TOP>.youHe} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} cock deep. The knot slips in, stretching {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+" while [b]{<TOP>.youHe} {<TOP>.youAre} cumming inside[/b]!",
+				"{<TOP>.You} {<TOP>.youVerb('manage')} to force {<TOP>.yourHis} knot in, stretching {<BOTTOM>.you} out! {<TOP>.YouHe} {<TOP>.youHeVerb('grunt')} as {<TOP>.yourHis} cock starts shooting thick ropes of "+RNG.pick(["cum", "seed", "jizz", "semen"])+" deep [b]inside {<BOTTOM>.yourHis} "+wombText+"[/b]!",
+				"{<TOP>.Your} balls tense up as {<TOP>.youHe} "+RNG.pick(["{<TOP>.youHeVerb('ram')}", "{<TOP>.youHeVerb('shove')}", "{<TOP>.youHeVerb('slide')}"])+" {<TOP>.yourHis} cock deep. The knot slips in, stretching {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+" while [b]{<TOP>.youHe} {<TOP>.youAreHeIs} cumming inside[/b]!",
 				"{<TOP>.You} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} cock balls-deep. The knot stretches {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+" until finally slipping in. {<TOP>.You} {<TOP>.youVerb('grunt')} while [b]stuffing {<BOTTOM>.yourHis} "+wombText+"[/b]!",
 			])
 		else:
 			text += RNG.pick([
-				"{<BOTTOM>.You} just {<BOTTOM>.youVerb('keep')} riding {<TOP>.your} "+RNG.pick(["cock", "dick", "member"])+" hard until {<TOP>.yourHis} knot suddenly slips inside! [b]{<TOP>.You} {<TOP>.youVerb('moan')} as {<TOP>.youHe} {<TOP>.youVerb('cum')} inside {<BOTTOM>.yourHis} "+getNameHole(_indxBottom, _hole)+"[/b]!",
+				"{<BOTTOM>.You} just {<BOTTOM>.youVerb('keep')} riding {<TOP>.your} "+RNG.pick(["cock", "dick", "member"])+" hard until {<TOP>.yourHis} knot suddenly slips inside! [b]{<TOP>.You} {<TOP>.youVerb('moan')} as {<TOP>.youHe} {<TOP>.youHeVerb('cum')} inside {<BOTTOM>.yourHis} "+getNameHole(_indxBottom, _hole)+"[/b]!",
 			])
 	else:
 		if(!isRiding):
 			text += RNG.pick([
 				"{<TOP>.You} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} cock deep inside {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+" and [b]"+RNG.pick(["{<TOP>.youVerb('stuff')}", "{<TOP>.youVerb('fill')}"])+" it full of {<TOP>.yourHis} seed[/b]!",
 				"{<TOP>.You} {<TOP>.youVerb('grunt')} as {<TOP>.yourHis} cock starts shooting thick ropes of "+RNG.pick(["cum", "seed", "jizz", "semen"])+" deep [b]inside {<BOTTOM>.your} "+wombText+"[/b]!",
-				"{<TOP>.Your} balls tense up as {<TOP>.youHe} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} cock deep and [b]{<TOP>.youVerb('cum')} inside {<BOTTOM>.you}[/b]!",
+				"{<TOP>.Your} balls tense up as {<TOP>.youHe} "+RNG.pick(["{<TOP>.youHeVerb('ram')}", "{<TOP>.youHeVerb('shove')}", "{<TOP>.youHeVerb('slide')}"])+" {<TOP>.yourHis} cock deep and [b]{<TOP>.youVerb('cum')} inside {<BOTTOM>.you}[/b]!",
 				"{<TOP>.You} "+RNG.pick(["{<TOP>.youVerb('ram')}", "{<TOP>.youVerb('shove')}", "{<TOP>.youVerb('slide')}"])+" {<TOP>.yourHis} cock balls-deep and {<TOP>.youVerb('grunt')} while [b]stuffing {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+"[/b]!",
 			])
 		else:
 			text += RNG.pick([
-				"{<BOTTOM>.You} just {<BOTTOM>.youVerb('keep')} riding {<TOP>.your} "+RNG.pick(["cock", "dick", "member"])+" until [b]{<TOP>.youHe} {<TOP>.youVerb('cum')} inside {<BOTTOM>.yourHis} "+getNameHole(_indxBottom, _hole)+"[/b]!",
+				"{<BOTTOM>.You} just {<BOTTOM>.youVerb('keep')} riding {<TOP>.your} "+RNG.pick(["cock", "dick", "member"])+" until [b]{<TOP>.youHe} {<TOP>.youHeVerb('cum')} inside {<BOTTOM>.yourHis} "+getNameHole(_indxBottom, _hole)+"[/b]!",
 			])
 	text += RNG.pick([
 		" Waves after waves of sticky {<TOP>.cum} flow into {<BOTTOM>.yourHis} "+wombText+".",
@@ -2634,8 +2634,8 @@ func doProcessCumInside(_indxTop:int, _indxBottom:int, _hole:String, tryKnot:boo
 						"{<BOTTOM>.You} "+RNG.pick(["{<BOTTOM>.youVerb('nod')} and", "just"])+" {<BOTTOM>.youVerb('keep')} riding {<TOP>.your} "+RNG.pick(["cock", "dick", "member"])+".",
 					])
 				text += RNG.pick([
-					" {<TOP>.You} {<TOP>.youVerb('moan')} as {<TOP>.youHe} {<TOP>.youVerb('fill')} the condom inside {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+"!",
-					" {<TOP>.You} {<TOP>.youVerb('moan')} as {<TOP>.youHe} {<TOP>.youVerb('stuff')} the condom in {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+" full of {<TOP>.yourHis} "+RNG.pick(["cum", "seed", "jizz", "semen"])+"!",
+					" {<TOP>.You} {<TOP>.youVerb('moan')} as {<TOP>.youHe} {<TOP>.youHeVerb('fill')} the condom inside {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+"!",
+					" {<TOP>.You} {<TOP>.youVerb('moan')} as {<TOP>.youHe} {<TOP>.youHeVerb('stuff')} the condom in {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+" full of {<TOP>.yourHis} "+RNG.pick(["cum", "seed", "jizz", "semen"])+"!",
 				])
 			
 			var loadSize = topChar.cumInItem(condom)
@@ -2708,7 +2708,7 @@ func cumOnSelf(_indxWho:int, _indxCauser:int, uniqueOrgasm:String = "", extraOrg
 			howCumText = "is filling {<SUB>.yourHis} condom full"
 		if(theSpecialCase[0] == SexCumSpecialCase.PUMP):
 			howCumText = "is filling {<SUB>.yourHis} penis pump full"
-		var _theText := "{<SUB>.Your} cock "+howCumText+" as {<SUB>.youHe} {<SUB>.youVerb('orgasm')}"+extraOrgasmText+"!" # in such a humiliating way
+		var _theText := "{<SUB>.Your} cock "+howCumText+" as {<SUB>.youHe} {<SUB>.youHeVerb('orgasm')}"+extraOrgasmText+"!" # in such a humiliating way
 		if(theSpecialCase[0] == SexCumSpecialCase.NOTHING):
 			theChar.cummedOnBy(theChar.getID(), FluidSource.Penis)
 		_theText =_theText.replace("<SUB>", theInfo.getCharID()).replace("<DOM>", causerInfo.getCharID())
@@ -2751,7 +2751,7 @@ func cumInsideShare(_indxWho:int, _indxTarget1:int, _hole1:String, _indxTarget2:
 	target1.cummedInBodypartByAdvanced(_hole1, theChar.getID(), {}, null, _shareFirst)
 	target2.cummedInBodypartByAdvanced(_hole2, theChar.getID(), {}, null)
 	
-	addTextRaw(("{<TOP>.You} {<TOP>.youVerb('stuff')} {<BOTTOM1>.your} "+getNameHole(_indxTarget1, _hole1)+" with the first waves of {<TOP>.yourHis} {<TOP>.cum}. While the orgasm is still going, {<TOP>.youHe} quickly {<TOP>.youVerb('pull')} out and {<TOP>.youVerb('pump')} the rest into {<BOTTOM2>.your} "+getNameHole(_indxTarget2, _hole2)+", [b]sharing {<TOP>.your} load between them[/b]!").replace("<TOP>", theChar.getID()).replace("<BOTTOM1>", target1.getID()).replace("<BOTTOM2>", target2.getID()))
+	addTextRaw(("{<TOP>.You} {<TOP>.youVerb('stuff')} {<BOTTOM1>.your} "+getNameHole(_indxTarget1, _hole1)+" with the first waves of {<TOP>.yourHis} {<TOP>.cum}. While the orgasm is still going, {<TOP>.youHe} quickly {<TOP>.youHeVerb('pull')} out and {<TOP>.youHeVerb('pump')} the rest into {<BOTTOM2>.your} "+getNameHole(_indxTarget2, _hole2)+", [b]sharing {<TOP>.your} load between them[/b]!").replace("<TOP>", theChar.getID()).replace("<BOTTOM1>", target1.getID()).replace("<BOTTOM2>", target2.getID()))
 	
 	if(target1.hasWombIn(_hole1) && (target1Info is SexSubInfo)):
 		var beingBredScore:float = target1Info.fetishScore({Fetish.BeingBred: 1.0})
@@ -3079,11 +3079,11 @@ func cumOnto(_indxWho:int, _indxTarget:int, _extra:Dictionary = {}):
 			])
 	elif(isGeneric):
 		text = RNG.pick([
-			"{<TOP>.You} {<TOP>.youVerb('grunt')} as {<TOP>.youHe} [b]{<TOP>.youVerb('cum')} all over {<BOTTOM>.your} body and face[/b]!",
+			"{<TOP>.You} {<TOP>.youVerb('grunt')} as {<TOP>.youHe} [b]{<TOP>.youHeVerb('cum')} all over {<BOTTOM>.your} body and face[/b]!",
 		])
 		if(_indxWho == _indxTarget):
 			text = RNG.pick([
-				"{<TOP>.You} {<TOP>.youVerb('grunt')} as {<TOP>.youHe} [b]{<TOP>.youVerb('cum')} all over {<TOP>.yourHis} own belly[/b]!",
+				"{<TOP>.You} {<TOP>.youVerb('grunt')} as {<TOP>.youHe} [b]{<TOP>.youHeVerb('cum')} all over {<TOP>.yourHis} own belly[/b]!",
 			])
 	
 	
@@ -3281,11 +3281,11 @@ func strokePenis(_indxActor:int, _indxTarget:int):
 	
 	if(isCloseToCumming(_indxTarget) && !isStrapon(_indxTarget) && RNG.chance(30)):
 		addTextRaw(RNG.pick([
-			"{sub.YouHe} {sub.youAre} about to cum!",
-			"{sub.YouHe} {sub.youAre} being kept on edge by {dom.youHim}.",
+			"{sub.YouHe} {sub.youAreHeIs} about to cum!",
+			"{sub.YouHe} {sub.youAreHeIs} being kept on edge by {dom.youHim}.",
 			"{sub.YourHis} {sub.penisShort} is twitching and throbbing.",
 			"{sub.YourHis} {sub.penisShort} is leaking pre a lot.",
-			"{sub.YouHe} {sub.youAre} barely keeping {sub.yourself} from cumming.",
+			"{sub.YouHe} {sub.youAreHeIs} barely keeping {sub.yourself} from cumming.",
 			"{sub.YouHe} reached {sub.yourHis} peak!",
 		]).replace("dom.", actorInfo.getCharID()+".").replace("sub.", targetInfo.getCharID()+"."))
 	elif(isReadyToFuck(_indxTarget) && !isStrapon(_indxTarget) && RNG.chance(20)):
@@ -3319,11 +3319,11 @@ func cupballs(_indxWho:int, _indxTarget:int, poseDescription:String = ""):
 		])
 	elif(level <= 0.7):
 		text = RNG.pick([
-			"{dom.You} "+RNG.pick(["{dom.youVerb('grope')}", "{dom.youVerb('fondle')}", "{dom.youVerb('play')} with"])+" {sub.your} balls"+poseDescription+" and {dom.youVerb('feel')} quite some weight to them. But they still "+RNG.pick(["get even more heavy", "produce even more seed", "produce more cum"])+" as {dom.youHe} {dom.youVerb('tease')} them.",
+			"{dom.You} "+RNG.pick(["{dom.youVerb('grope')}", "{dom.youVerb('fondle')}", "{dom.youVerb('play')} with"])+" {sub.your} balls"+poseDescription+" and {dom.youVerb('feel')} quite some weight to them. But they still "+RNG.pick(["get even more heavy", "produce even more seed", "produce more cum"])+" as {dom.youHe} {dom.youHeVerb('tease')} them.",
 		])
 	else:
 		text = RNG.pick([
-			"{dom.You} "+RNG.pick(["{dom.youVerb('grope')}", "{dom.youVerb('fondle')}", "{dom.youVerb('play')} with"])+" {sub.your} balls"+poseDescription+" and {dom.youVerb('realize')} "+RNG.pick(["that they are full", "how heavy they are", "how much cum is stored in them"])+". They "+RNG.pick(["tense up slightly"])+" as {dom.youHe} {dom.youVerb('tease')} them.",
+			"{dom.You} "+RNG.pick(["{dom.youVerb('grope')}", "{dom.youVerb('fondle')}", "{dom.youVerb('play')} with"])+" {sub.your} balls"+poseDescription+" and {dom.youVerb('realize')} "+RNG.pick(["that they are full", "how heavy they are", "how much cum is stored in them"])+". They "+RNG.pick(["tense up slightly"])+" as {dom.youHe} {dom.youHeVerb('tease')} them.",
 		])
 	addTextRaw(text.replace("{dom.", "{"+theChar.getID()+".").replace("{sub.", "{"+target.getID()+"."))
 	cumProduction.fillPercent(0.2)

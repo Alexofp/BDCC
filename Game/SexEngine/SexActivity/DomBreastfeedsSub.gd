@@ -84,7 +84,7 @@ func feeding_processTurn():
 			"{sub.You} {sub.youVerb('suckle')} on {dom.your} nipples but no milk comes out.",
 			"{sub.You} {sub.youVerb('suckle')} on {dom.your} nipples, chasing the aftertaste of {dom.yourHis} milk.",
 			"{sub.You} {sub.youVerb('lick')} and {sub.youVerb('put')} pressure on {dom.your} nipples, trying to milk them.",
-			"{dom.You} {dom.youAre} trying to breastfeed {sub.you} but {dom.youHe} {dom.youAre} not lactating.",
+			"{dom.You} {dom.youAre} trying to breastfeed {sub.you} but {dom.youHe} {dom.youAreHeIs} not lactating.",
 		])
 		text += getExtraDomText(false)
 		

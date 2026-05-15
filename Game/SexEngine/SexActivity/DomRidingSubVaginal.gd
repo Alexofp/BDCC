@@ -422,9 +422,9 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "makeout"):
 		isMakingOut = true
 		if(!getSubInfo().isResistingSlightly()):
-			addText("{dom.You} {dom.youVerb('lean')} in closer, {dom.yourHis} lips locking with {sub.yourHis} in a deep, heated kiss. Kiss that keeps going. {sub.YouHe} {sub.youVerb('respond')}, opening {sub.yourHis} mouth to meet {dom.yourHis} tongue.")
+			addText("{dom.You} {dom.youVerb('lean')} in closer, {dom.yourHis} lips locking with {sub.yourHis} in a deep, heated kiss. Kiss that keeps going. {sub.YouHe} {sub.youHeVerb('respond')}, opening {sub.yourHis} mouth to meet {dom.yourHis} tongue.")
 		else:
-			addText("{dom.You} {dom.youVerb('lean')} in closer and {dom.youVerb('force')} a deep kiss despite {sub.your} muffled protests. {dom.YourHis} tongue pushes into that mouth, claiming it as {sub.youHe} {sub.youVerb('squirm')} beneath.")
+			addText("{dom.You} {dom.youVerb('lean')} in closer and {dom.youVerb('force')} a deep kiss despite {sub.your} muffled protests. {dom.YourHis} tongue pushes into that mouth, claiming it as {sub.youHe} {sub.youHeVerb('squirm')} beneath.")
 		return
 	if(_id == "stopmakeout"):
 		isMakingOut = false
@@ -493,11 +493,11 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		
 		if(knotSuccess):
 			text = RNG.pick([
-				"{dom.You} "+RNG.pick(["{dom.youVerb('nod')} and", "just"])+" {dom.youVerb('keep')} riding {sub.your} "+RNG.pick(["cock", "dick", "member"])+" hard until {sub.yourHis} knot suddenly slips inside! [b]{sub.You} {sub.youVerb('moan')} as {sub.youHe} {sub.youVerb('cum')} inside {dom.yourHis} "+RNG.pick(usedBodypartNames)+"[/b]!",
+				"{dom.You} "+RNG.pick(["{dom.youVerb('nod')} and", "just"])+" {dom.youVerb('keep')} riding {sub.your} "+RNG.pick(["cock", "dick", "member"])+" hard until {sub.yourHis} knot suddenly slips inside! [b]{sub.You} {sub.youVerb('moan')} as {sub.youHe} {sub.youHeVerb('cum')} inside {dom.yourHis} "+RNG.pick(usedBodypartNames)+"[/b]!",
 			])
 		else:
 			text = RNG.pick([
-				"{dom.You} "+RNG.pick(["{dom.youVerb('nod')} and", "just"])+" {dom.youVerb('keep')} riding {sub.your} "+RNG.pick(["cock", "dick", "member"])+" until [b]{sub.youHe} {sub.youVerb('cum')} inside {dom.yourHis} "+RNG.pick(usedBodypartNames)+"[/b]!",
+				"{dom.You} "+RNG.pick(["{dom.youVerb('nod')} and", "just"])+" {dom.youVerb('keep')} riding {sub.your} "+RNG.pick(["cock", "dick", "member"])+" until [b]{sub.youHe} {sub.youHeVerb('cum')} inside {dom.yourHis} "+RNG.pick(usedBodypartNames)+"[/b]!",
 			])
 		text += RNG.pick([
 			" Waves after waves of sticky "+RNG.pick(["cum", "seed", "jizz", "semen"])+" flow into {dom.yourHis} "+wombText+".",
@@ -524,8 +524,8 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 						"{dom.You} "+RNG.pick(["{dom.youVerb('nod')} and", "just"])+" {dom.youVerb('keep')} riding {sub.your} "+RNG.pick(["cock", "dick", "member"])+".",
 					])
 				text += RNG.pick([
-					" {sub.You} {sub.youVerb('moan')} as {sub.youHe} {sub.youVerb('fill')} the condom inside {dom.your} "+RNG.pick(usedBodypartNames)+"!",
-					" {sub.You} {sub.youVerb('moan')} as {sub.youHe} {sub.youVerb('stuff')} the condom in {dom.your} "+RNG.pick(usedBodypartNames)+" full of {sub.yourHis} "+RNG.pick(["cum", "seed", "jizz", "semen"])+"!",
+					" {sub.You} {sub.youVerb('moan')} as {sub.youHe} {sub.youHeVerb('fill')} the condom inside {dom.your} "+RNG.pick(usedBodypartNames)+"!",
+					" {sub.You} {sub.youVerb('moan')} as {sub.youHe} {sub.youHeVerb('stuff')} the condom in {dom.your} "+RNG.pick(usedBodypartNames)+" full of {sub.yourHis} "+RNG.pick(["cum", "seed", "jizz", "semen"])+"!",
 				])
 				var loadSize = getSub().cumInItem(condom)
 				getSubInfo().cum()
@@ -555,7 +555,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		return
 	if(_id == "makesubcumoutside"):
 		var text:String = RNG.pick([
-			"{dom.You} {dom.youVerb('ride')} {sub.yourHis} "+RNG.pick(["dick", "cock", "member"])+" until {sub.youHe} {sub.youAre} ready to cum. But {dom.you} {dom.youVerb('stop')} riding {sub.youHim} just in time!",
+			"{dom.You} {dom.youVerb('ride')} {sub.yourHis} "+RNG.pick(["dick", "cock", "member"])+" until {sub.youHe} {sub.youAreHeIs} ready to cum. But {dom.you} {dom.youVerb('stop')} riding {sub.youHim} just in time!",
 		])
 		state = ""
 		
@@ -730,7 +730,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 	if(_id == "warndom"):
 		state = "subabouttocum"
 		getDomInfo().addAnger(-0.05)
-		addText("{sub.You} {sub.youVerb('warn')} {dom.youHim} that {sub.youHe} {sub.youAre} "+RNG.pick(["about to cum", "close", "very close"])+".")
+		addText("{sub.You} {sub.youVerb('warn')} {dom.youHim} that {sub.youHe} {sub.youAreHeIs} "+RNG.pick(["about to cum", "close", "very close"])+".")
 		reactSub(SexReaction.WarnAboutToCum)
 		return
 	if(_id == "cuminside"):

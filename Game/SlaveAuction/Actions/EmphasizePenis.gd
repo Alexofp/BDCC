@@ -14,11 +14,11 @@ func getButtonDesc() -> String:
 
 func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 	if(_slaveTraits.has("PenisSmall") && _slaveTraits["PenisSmall"] > 0.0):
-		saynn("{presenter.You} {presenter.youVerb('walk')} up to the slave, a wicked smile curling on {presenter.yourHis} lips as {presenter.youHe} {presenter.youVerb('reach', 'reaches')} out. The bidders are watching closely. {presenter.YouHe} {presenter.youVerb('grab')} {slave.name}'s {slave.penis}, and {presenter.youVerb('give')} it a little tug, drawing a chuckle from some of the bidders.")
+		saynn("{presenter.You} {presenter.youVerb('walk')} up to the slave, a wicked smile curling on {presenter.yourHis} lips as {presenter.youHe} {presenter.youHeVerb('reach', 'reaches')} out. The bidders are watching closely. {presenter.YouHe} {presenter.youHeVerb('grab')} {slave.name}'s {slave.penis}, and {presenter.youHeVerb('give')} it a little tug, drawing a chuckle from some of the bidders.")
 		
 		sayPresenter("Take a look at this. {slave.He} might not be packing much down here, but I guarantee you, {slave.heShe}'ll make up for it in obedience. Look at how hard {slave.heShe} already is!")
 	
-		saynn("{presenter.YouHe} {presenter.youVerb('tease')} the small cock between {presenter.yourHis} fingers, holding it up as if putting it on display, making sure the bidders can see the full length as well as the size of the balls.")
+		saynn("{presenter.YouHe} {presenter.youHeVerb('tease')} the small cock between {presenter.yourHis} fingers, holding it up as if putting it on display, making sure the bidders can see the full length as well as the size of the balls.")
 		
 		sayPresenter("Imagine this little cock begging for attention while {slave.heShe} serves your every whim..")
 	if(_slaveTraits.has("PenisAverage") && _slaveTraits["PenisAverage"] > 0.0):
@@ -26,7 +26,7 @@ func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 		
 		sayPresenter("Take a look at this. {slave.HeShe} {slave.isAre} already hard, just from being up here. Imagine what {slave.heShe}'ll do when you give {slave.himHer} a real command.")
 	
-		saynn("{presenter.YouHe} slowly {presenter.youVerb('stroke')} the length, letting the bidders take in every inch. With a playful grin, {presenter.youHe} {presenter.youVerb('cup')} the balls too, presenting them in their full glory.")
+		saynn("{presenter.YouHe} slowly {presenter.youHeVerb('stroke')} the length, letting the bidders take in every inch. With a playful grin, {presenter.youHe} {presenter.youHeVerb('cup')} the balls too, presenting them in their full glory.")
 	
 		sayPresenter("This cock is going to give you everything you want, every time.")
 	if(_slaveTraits.has("PenisLong") && _slaveTraits["PenisLong"] > 0.0):
@@ -127,7 +127,7 @@ func getSlaveReaction(_char:BaseCharacter, _reactionType) -> String:
 		return RNG.pick([
 			"{slave.name} blinks rapidly, a look of confusion crossing {slave.hisHer} face as {presenter.you} {presenter.youVerb('tease')} {slave.hisHer} cock. {slave.HeShe} makes no effort to resist, but a hint of sadness lingers in {slave.hisHer} expression.",
 			"A soft, almost apologetic sigh escapes {slave.himHer} as {presenter.you} {presenter.youVerb('wrap')} {presenter.your} hand around {slave.hisHer} cock, the confusion mixing with a quiet resignation.",
-			"{slave.name}'s gaze flickers nervously, uncertain of the situation, but {slave.heShe} makes no effort to stop {presenter.you} as {presenter.youHe} {presenter.youVerb('display')} {slave.hisHer} cock for all to see.",
+			"{slave.name}'s gaze flickers nervously, uncertain of the situation, but {slave.heShe} makes no effort to stop {presenter.you} as {presenter.youHe} {presenter.youHeVerb('display')} {slave.hisHer} cock for all to see.",
 			"A faint, sorrowful expression tugs at {slave.hisHer} features, but {slave.name} allows {presenter.you} to handle {slave.hisHer} cock, the look of confusion growing in {slave.hisHer} eyes.",
 			"{slave.name} looks down sadly as {presenter.you} {presenter.youVerb('hold')} {slave.hisHer} cock for display, the sadness mixing with a deep confusion as the bidders inspect {slave.himHer}.",
 			"A soft breath escapes {slave.name}, confusion and sadness in {slave.hisHer} eyes, but no protest comes as {presenter.you} {presenter.youVerb('highlight')} {slave.hisHer} cock for the bidders.",

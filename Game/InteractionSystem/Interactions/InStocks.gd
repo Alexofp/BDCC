@@ -19,7 +19,7 @@ func start(_pawns:Dictionary, _args:Dictionary):
 		punisherID = _args["punisherID"]
 
 func init_text():
-	saynn("{inmate.You} {inmate.youAre} stuck in stocks, there is very little {inmate.youHe} can do, the movement of {inmate.yourHis} head and arms is blocked by a giant metal frame with 3 holes, its angle is forcing {inmate.youHe} to constantly stay bent forward, exposing {inmate.yourHis} butt, {inmate.yourHis} ankles are chained so {inmate.youHe} can’t really move them too. {inmate.YouHe} {inmate.youAre} completely helpless.")
+	saynn("{inmate.You} {inmate.youAre} stuck in stocks, there is very little {inmate.youHe} can do, the movement of {inmate.yourHis} head and arms is blocked by a giant metal frame with 3 holes, its angle is forcing {inmate.youHim} to constantly stay bent forward, exposing {inmate.yourHis} butt, {inmate.yourHis} ankles are chained so {inmate.youHe} can’t really move them too. {inmate.YouHe} {inmate.youAreHeIs} completely helpless.")
 	var thePawn = getRolePawn("inmate")
 	if(!thePawn.isPlayer()):
 		saynn("{inmate.name} has "+str(getRoleChar("inmate").getStamina())+" stamina left.")
@@ -77,7 +77,7 @@ func init_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 
 func after_rest_text():
-	saynn("{inmate.You} decide to stay quiet. {inmate.YouHe} {inmate.youAre} forced to stand in an uncomfortable pose, it’s humiliating but {inmate.youHe} {inmate.youVerb('get')} some rest.")
+	saynn("{inmate.You} {inmate.youVerb('decide')} to stay quiet. {inmate.YouHe} {inmate.youAreHeIs} forced to stand in an uncomfortable pose, it’s humiliating but {inmate.youHe} {inmate.youHeVerb('get')} some rest.")
 
 	addAction("continue", "Continue", "See what happens next", "default", 1.0, 0, {})
 
@@ -251,7 +251,7 @@ func save_after_help_do(_id:String, _args:Dictionary, _context:Dictionary):
 
 func about_to_shout_text():
 	if(getRoleChar("inmate").isGagged()):
-		saynn("{inmate.You} {inmate.youAre} gagged but {inmate.youHe} still {inmate.youVerb('try', 'tries')} to get some attention by wiggling {inmate.yourHis} body..")
+		saynn("{inmate.You} {inmate.youAre} gagged but {inmate.youHe} still {inmate.youHeVerb('try', 'tries')} to get some attention by wiggling {inmate.yourHis} body..")
 	else:
 		saynn("{inmate.You} {inmate.youVerb('try', 'tries')} to shout to get someone's attention..")
 		sayLine("inmate", "StocksShout", {main="inmate"})

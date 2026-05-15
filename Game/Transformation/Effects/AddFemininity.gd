@@ -44,12 +44,12 @@ func generateTransformText(_result:Dictionary):
 				" {npc.YourHis} voice sounds softer, more melodic.",
 				" {npc.YourHis} muscles are softening as they take on a more graceful shape.",
 				" {npc.YourHis} thighs begin to soften and round out, losing any muscular definition.",
-				" {npc.YouHe} {npc.youVerb('feel')} a deep, internal shift in {npc.yourHis} pelvis as it adjusts to a more feminine structure.",
+				" {npc.YouHe} {npc.youHeVerb('feel')} a deep, internal shift in {npc.yourHis} pelvis as it adjusts to a more feminine structure.",
 				" {npc.YourHis} jawline softens, and {npc.yourHis} cheekbones rise, creating a more delicate and feminine face.",
 				" {npc.YourHis} brow smooths out, and {npc.yourHis} lips plump slightly, becoming fuller and sexier.",
 				" A new, subtle scent begins to emanate from {npc.yourHis} skin, sweet and floral.",
 			])
-			text += " {npc.YouHe} {npc.youAre} now "+str(Util.roundF(newFemininity, 0))+"% feminine."
+			text += " {npc.YouHe} {npc.youAreHeIs} now "+str(Util.roundF(newFemininity, 0))+"% feminine."
 				
 			if(newFemininity >= 100):
 				text += " {npc.YourHis} femininity has hit its peak!"
@@ -76,12 +76,12 @@ func generateTransformText(_result:Dictionary):
 				" {npc.YourHis} voice sounds deeper, more resonant.",
 				" {npc.YourHis} muscles are firming up, gaining definition and strength.",
 				" {npc.YourHis} thighs begin to harden, losing any softness.",
-				" {npc.YouHe} {npc.youVerb('feel')} a deep, internal shift in {npc.yourHis} pelvis as it adjusts to a more masculine structure.",
+				" {npc.YouHe} {npc.youHeVerb('feel')} a deep, internal shift in {npc.yourHis} pelvis as it adjusts to a more masculine structure.",
 				" {npc.YourHis} jawline sharpens, and {npc.yourHis} brow becomes more pronounced, creating a more rugged and masculine face.",
 				" {npc.YourHis} brow furrows slightly, and {npc.yourHis} lips become thinner and more defined.",
 				" A new, subtle scent begins to emanate from {npc.yourHis} skin, musky and earthy.",
 			])
-			text += " {npc.YouHe} {npc.youAre} now " + str(Util.roundF(100.0 - newFemininity, 0)) + "% masculine."
+			text += " {npc.YouHe} {npc.youAreHeIs} now " + str(Util.roundF(100.0 - newFemininity, 0)) + "% masculine."
 
 			if(newFemininity <= 0):
 				text += " {npc.YourHis} masculinity has hit its peak!"

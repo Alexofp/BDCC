@@ -21,11 +21,11 @@ func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 	
 	if(hasVag):
 		if(vagTight && anusTight):
-			saynn("{presenter.You} {presenter.youVerb('step')} behind {slave.name}, grabbing {slave.hisHer} hips and pulling {slave.himHer} back slightly to display {slave.hisHer} perfectly toned body. Slowly, {presenter.youHe} {presenter.youVerb('spread')} {slave.hisHer} cheeks wide, revealing both {slave.hisHer} tight, inviting pussy and clenched anus to the bidders.")
+			saynn("{presenter.You} {presenter.youVerb('step')} behind {slave.name}, grabbing {slave.hisHer} hips and pulling {slave.himHer} back slightly to display {slave.hisHer} perfectly toned body. Slowly, {presenter.youHe} {presenter.youHeVerb('spread')} {slave.hisHer} cheeks wide, revealing both {slave.hisHer} tight, inviting pussy and clenched anus to the bidders.")
 			
 			sayPresenter("Take a look, folks! This slave comes with two tightly wrapped packages for your pleasure. You won’t find anything as snug as this, built to grip and squeeze every inch you give.")
 			
-			saynn("{presenter.YouHe} {presenter.youVerb('run')} your fingers teasingly around {slave.hisHer} holes, emphasizing just how firm and untouched they are.")
+			saynn("{presenter.YouHe} {presenter.youHeVerb('run')} your fingers teasingly around {slave.hisHer} holes, emphasizing just how firm and untouched they are.")
 			
 			sayPresenter("Both holes, perfectly tight, perfectly ready for whatever you choose.")
 		elif(vagTight || anusTight):
@@ -33,7 +33,7 @@ func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 			
 			sayPresenter("Let’s get a good look at what’s on offer. {slave.He} {slave.isAre} ready from both ends, eager and waiting for whatever you decide to fill.")
 			
-			saynn("{presenter.YouHe} {presenter.youVerb('make')} sure the bidders can see everything, running {presenter.yourHis} fingers near {slave.hisHer} openings.")
+			saynn("{presenter.YouHe} {presenter.youHeVerb('make')} sure the bidders can see everything, running {presenter.yourHis} fingers near {slave.hisHer} openings.")
 			
 			sayPresenter("Two perfect holes, versatile and ready for all kinds of play.")
 		else:
@@ -41,7 +41,7 @@ func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 			
 			sayPresenter("Here we have a slave who’s clearly seen some use! Look at how loose these holes are, ready to take whatever you throw at them.")
 		
-			saynn("{presenter.YouHe} {presenter.youVerb('trace')} the edges of both gaping entrances, showing just how open and inviting they are.")
+			saynn("{presenter.YouHe} {presenter.youHeVerb('trace')} the edges of both gaping entrances, showing just how open and inviting they are.")
 
 			sayPresenter("Plenty of space to fill, whether you choose the front or the back. It’s all ready for more!")
 	else:
@@ -50,7 +50,7 @@ func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 			
 			sayPresenter("Here we have a perfectly tight hole, ready for anyone who enjoys a little resistance. Just look at how clenched {slave.hisHer} little back door is.")
 			
-			saynn("{presenter.YouHe} {presenter.youVerb('press', 'presses')} lightly around the edge, letting the bidders get a clear view of the tightness.")
+			saynn("{presenter.YouHe} {presenter.youHeVerb('press', 'presses')} lightly around the edge, letting the bidders get a clear view of the tightness.")
 			
 			sayPresenter("Perfectly tight, ready to grip every inch you give.")
 		else:
@@ -58,7 +58,7 @@ func onAct(_char:BaseCharacter, _auction, _slaveTraits:Dictionary):
 			
 			sayPresenter("Now, this one here’s seen some use! Just look at how open this hole is, no need to worry about tightness here.")
 			
-			saynn("{presenter.YouHe} {presenter.youVerb('trace')} the edges, making sure the bidders can see how much room there is.")
+			saynn("{presenter.YouHe} {presenter.youHeVerb('trace')} the edges, making sure the bidders can see how much room there is.")
 			
 			sayPresenter("Plenty of space for any kind of play. This one’s ready to take whatever you’ve got!")
 	

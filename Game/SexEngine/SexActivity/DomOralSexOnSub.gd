@@ -97,11 +97,11 @@ func lickingcock_processTurn():
 	
 	if(getSubInfo().isReadyToCum()):
 		text += RNG.pick([
-			" {sub.YouHe} {sub.youAre} about to cum!",
-			" {sub.YouHe} {sub.youAre} being kept on edge by {dom.youHim}.",
+			" {sub.YouHe} {sub.youAreHeIs} about to cum!",
+			" {sub.YouHe} {sub.youAreHeIs} being kept on edge by {dom.youHim}.",
 			" {sub.YourHis} "+RNG.pick(["cock", "dick", "member"])+" is twitching and throbbing.",
 			" {sub.YourHis} "+RNG.pick(["cock", "dick", "member"])+" is leaking pre a lot.",
-			" {sub.YouHe} {sub.youAre} barely keeping {sub.yourself} from cumming.",
+			" {sub.YouHe} {sub.youAreHeIs} barely keeping {sub.yourself} from cumming.",
 			" {sub.YouHe} reached {sub.yourHis} peak!",
 		])
 	elif(getSubInfo().isCloseToCumming()):
@@ -135,11 +135,11 @@ func tonguefucking_processTurn():
 	
 	if(getSubInfo().isReadyToCum()):
 		text += RNG.pick([
-			" {sub.YouHe} {sub.youAre} about to cum!",
-			" {sub.YouHe} {sub.youAre} being edged by {dom.youHim}.",
+			" {sub.YouHe} {sub.youAreHeIs} about to cum!",
+			" {sub.YouHe} {sub.youAreHeIs} being edged by {dom.youHim}.",
 			" {sub.YourHis} "+RNG.pick(["pussy", "pussy slit"])+" is twitching a lot.",
 			" {sub.YourHis} "+RNG.pick(["pussy", "pussy slit"])+" is leaking arousal a lot.",
-			" {sub.YouHe} {sub.youAre} barely keeping {dom.yourself} from cumming.",
+			" {sub.YouHe} {sub.youAreHeIs} barely keeping {dom.yourself} from cumming.",
 			" {sub.YouHe} reached {sub.yourHis} peak!",
 		])
 	elif(getSubInfo().isCloseToCumming()):
@@ -290,7 +290,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 		var condomBroke:bool = false
 		if(getState() in ["subabouttocum", "licking", "tonguefucking"]):
 			text = RNG.pick([
-				"{dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} lips against {sub.yourHis} "+RNG.pick(["pussy", "slit", "sensitive folds", "petals"])+" and keep lapping up the arousal until [b]{sub.you} {sub.youVerb('cum')}[/b]! {sub.YourHis} juices rush into {dom.yourHis} mouth as {sub.youHe} squirts!",
+				"{dom.You} {dom.youVerb('press', 'presses')} {dom.yourHis} lips against {sub.yourHis} "+RNG.pick(["pussy", "slit", "sensitive folds", "petals"])+" and keep lapping up the arousal until [b]{sub.you} {sub.youVerb('cum')}[/b]! {sub.YourHis} juices rush into {dom.yourHis} mouth as {sub.youHe} {sub.youHeVerb('squirt')}!",
 			])
 			getDom().cummedInMouthBy(getSubID(), FluidSource.Vagina)
 			getSubInfo().cum()
@@ -439,7 +439,7 @@ func doAction(_indx:int, _id:String, _action:Dictionary):
 			setState("subabouttocum")
 		else:
 			setState("subabouttocumcock")
-		addText("{sub.You} {sub.youVerb('warn')} {dom.youHim} that {sub.youHe} {sub.youAre} "+RNG.pick(["about to cum", "close", "very close"])+".")
+		addText("{sub.You} {sub.youVerb('warn')} {dom.youHim} that {sub.youHe} {sub.youAreHeIs} "+RNG.pick(["about to cum", "close", "very close"])+".")
 		getDomInfo().addAnger(-0.05)
 		reactSub(SexReaction.WarnAboutToCum)
 		return

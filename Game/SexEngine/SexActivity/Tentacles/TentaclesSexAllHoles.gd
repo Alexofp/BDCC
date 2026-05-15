@@ -132,7 +132,7 @@ func sex_processTurn():
 			"{sub.YourHis} body shudders as a wave of pleasure is building deep inside.",
 			"{sub.You} {sub.youVerb('try', 'tries')} to moan, but the tentacle in {sub.yourHis} mouth muffles the sound into a gurgle.",
 			"{sub.YourHis} ass spasms, involuntarily gripping the slick tendril pumping into it.",
-			"{sub.YourHis} eyes roll back as {sub.youHe} {sub.youVerb('feel')} {sub.yourself} getting dangerously close.",
+			"{sub.YourHis} eyes roll back as {sub.youHe} {sub.youHeVerb('feel')} {sub.yourself} getting dangerously close.",
 		])
 		if(getSub().hasReachableVagina()):
 			possibleExtra.append_array([
