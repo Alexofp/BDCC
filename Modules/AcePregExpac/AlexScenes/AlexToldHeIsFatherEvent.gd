@@ -9,7 +9,7 @@ func registerTriggers(es):
 func react(_triggerID, _args):
 	if(!getModuleFlag("AcePregExpac", "Alex_ToldIsFather", 1)) || !GM.pc.isHeavilyPregnant():
 		return false
-	if(!getFlag("AcePregExpac.Alex_CameInside", false)):
+	if(!getModuleFlag("AcePregExpac", "Alex_CameInside", true)):
 		return false
 	
 	setModuleFlag("AcePregExpac", "Alex_ToldIsFather", 0)
