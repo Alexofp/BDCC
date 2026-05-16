@@ -2305,11 +2305,6 @@ func afterSexEnded(sexInfo):
 		if(resultText != null && resultText != ""):
 			GM.main.addMessage(resultText)
 	
-	if(!isPlayer()):
-		addLust(-getLust())
-		addPain(-getPain())
-		addStamina(getMaxStamina())
-
 	consciousness = 1.0
 	arousal = 0.0
 		
