@@ -184,6 +184,9 @@ func setCharactersEasyList(newChars:Array):
 		if(!currentCharactersVariants.has(charID)):
 			addCharacter(charID)
 
+func setCharacters(_newChars:Array):
+	setCharactersEasyList(_newChars)
+
 func _onSceneEnd():
 	pass
 

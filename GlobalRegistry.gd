@@ -647,6 +647,7 @@ func registerEverything():
 		registerSceneFolder("res://Game/NpcSlavery/SlaveActionScenes/")
 		registerSceneFolder("res://Game/NpcSlavery/SlaveActionScenes/Prostitution/")
 		registerSceneFolderDeep("res://Game/DomRoute/RecruitScenes/")
+		registerSceneFolderDeep("res://Game/DomRoute/MissionScenes/")
 		
 		var end2 = OS.get_ticks_usec()
 		var worker_time2 = (end2-start2)/1000000.0
