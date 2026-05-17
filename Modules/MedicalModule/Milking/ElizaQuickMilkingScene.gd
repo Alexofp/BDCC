@@ -6,6 +6,8 @@ var vaginaMilked = false
 var hasPenisPump = false
 var amountCollected = 0.0
 
+var displacedItems := LightInventory.new()
+
 func _init():
 	sceneID = "ElizaQuickMilkingScene"
 
@@ -19,14 +21,14 @@ func _reactInit():
 			var theFluids = thePump.getFluids()
 			if(theFluids):
 				theFluids.addFluid("Milk", 400.0)
-		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(thePump)
+		displacedItems.addItem(GM.pc.getInventory().forceEquipReturnOther(thePump))
 	if(GM.pc.hasReachablePenis() || GM.pc.isWearingChastityCage()):
 		amountCollected += GM.main.SCI.processMilkPlayerPenis()
 		penisMilked = true
-	if(GM.pc.hasReachablePenis()):
-		var thePump = GlobalRegistry.createItem("PenisPump")
-		GM.pc.getInventory().forceEquipStoreOtherUnlessRestraint(thePump)
-		hasPenisPump = true
+		if(GM.pc.hasReachablePenis() || GM.pc.getWornChastityCage().getRestraintData().canBeEasilyRemovedByDom()):
+			var thePump = GlobalRegistry.createItem("PenisPump")
+			displacedItems.addItem(GM.pc.getInventory().forceEquipReturnOther(thePump))
+			hasPenisPump = true
 	if(GM.pc.hasReachableVagina()):
 		amountCollected += GM.main.SCI.processMilkPlayerVagina()
 		vaginaMilked = true
@@ -47,7 +49,7 @@ func _run():
 
 		addButton("Continue", "See what happens next", "endthescene_removestuff")
 
-func _react(_action: String, _args):
+func _react(_action: String, _args) -> void:
 	if(_action == "endthescene"):
 		endScene()
 		return
@@ -57,7 +59,9 @@ func _react(_action: String, _args):
 			GM.pc.getInventory().clearSlot(InventorySlot.Penis)
 		if(breastsMilked):
 			GM.pc.getInventory().clearSlot(InventorySlot.UnderwearTop)
-		
+		for displacedItem in displacedItems.getAllItems():
+			GM.pc.getInventory().forceEquipRemoveOther(displacedItem)
+
 		playAnimation(StageScene.Duo, "stand", {npc="eliza"})
 		aimCameraAndSetLocName(GM.pc.getLocation())
 		endScene()
@@ -73,6 +77,7 @@ func saveData():
 	data["vaginaMilked"] = vaginaMilked
 	data["hasPenisPump"] = hasPenisPump
 	data["amountCollected"] = amountCollected
+	data["displacedItems"] = displacedItems.saveData()
 
 	return data
 
@@ -84,3 +89,4 @@ func loadData(data):
 	vaginaMilked = SAVE.loadVar(data, "vaginaMilked", false)
 	hasPenisPump = SAVE.loadVar(data, "hasPenisPump", false)
 	amountCollected = SAVE.loadVar(data, "amountCollected", 0.0)
+	displacedItems.loadData(SAVE.loadVar(data, "displacedItems", {}))
