@@ -35,7 +35,13 @@ func startMission(_id:String, _runScene:bool = true):
 		return
 	current = _id
 	flags[current] = {} # Reset all flags of this mission. Maybe not needed?
+	# Could instead save the old flags in case we're doing this mission for the second time
 	
+	var theStartLoc:String = theMission.getStartLoc()
+	if(!theStartLoc.empty()):
+		GM.pc.setLocation(theStartLoc)
+		GM.main.aimCameraAndSetLocName(theStartLoc)
+	theMission.onMissionStart()
 	if(_runScene):
 		GM.main.runScene(theMission.getStartScene())
 	GM.main.addMessage("Task accepted!")
@@ -61,7 +67,7 @@ func getDebugMissionList() -> Array:
 		result.append([missionID, missionID+":"+GlobalRegistry.missions[missionID].getName()])
 	return result
 
-func setFlag(_missionID:String, _flagID:String, _value):
+func setSpecificFlag(_missionID:String, _flagID:String, _value):
 	var theMission = GlobalRegistry.getMission(_missionID)
 	if(!theMission):
 		assert(false, "MISSION WITH ID "+_missionID+" IS NOT FOUND!")
@@ -79,15 +85,32 @@ func setFlag(_missionID:String, _flagID:String, _value):
 		return
 	flags[_missionID][_flagID] = _value
 
-func getFlag(_missionID:String, _flagID:String, _default = null):
+func getSpecificFlag(_missionID:String, _flagID:String, _default = null):
 	if(!flags.has(_missionID)):
 		return _default
 	if(!flags[_missionID].has(_flagID)):
 		return _default
 	return flags[_missionID][_flagID]
 
+func setFlag(_flagID:String, _value):
+	if(current.empty()):
+		assert(false, "TRYING TO SET A MISSION FLAG WHILE NOT ON A MISSION.")
+		return
+	setSpecificFlag(current, _flagID, _value)
+
+func getFlag(_flagID:String, _default = null):
+	if(current.empty()):
+		assert(false, "TRYING TO GET A MISSION FLAG WHILE NOT ON A MISSION.")
+		return _default
+	return getSpecificFlag(current, _flagID, _default)
+
 func isDoingMission(_id:String) -> bool:
 	return current == _id
+
+func getMission():
+	if(current.empty()):
+		return null
+	return GlobalRegistry.getMission(current)
 
 func saveData() -> Dictionary:
 	return {

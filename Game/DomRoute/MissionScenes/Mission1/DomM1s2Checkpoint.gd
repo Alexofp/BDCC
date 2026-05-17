@@ -97,9 +97,11 @@ func _run():
 
 		saynn("[say=nova]Let's escort you back to your cell~.[/say]")
 
+		saynn("Husky starts tugging on the leash, inviting Rahi to follow.")
+
 		saynn("[say=rahi]Uh.. oh.. um.. y-yeah.. um.. sure..[/say]")
 
-		saynn("Kait starts whispering to you.")
+		saynn("Kait starts whispering.")
 
 		saynn("[say=kait]Shit.. do we help her?[/say]")
 
@@ -109,6 +111,70 @@ func _run():
 
 		saynn("[say=avy]Don't be a pussy.[/say]")
 
+		saynn("Rahi follows the guard.. little steps. Her eyes frantically scan the surroundings..")
+
+		addButton("Continue", "See what happens next", "rahi_hits_her_toe")
+	if(state == "rahi_hits_her_toe"):
+		playAnimation(StageScene.Duo, "defeat", {pc="rahi", npc="nova", bodyState={leashedBy="nova"}})
+		saynn("They start going down the stairs.")
+
+		saynn("Suddenly, Rahi twists her ankle on one of them and falls with a loud mewl that echoes across the whole hall.")
+
+		saynn("[say=rahi]EEP![/say]")
+
+		saynn("The guard is quick to turn around and crouch near the poor feline. She starts assessing the damage.")
+
+		saynn("[say=rahi]Ow.. ow.. sorry.. ow-w..[/say]")
+
+		saynn("The husky carefully inspects Rahi's rear paw.")
+
+		saynn("[say=nova]It's not too bad. Such a clumsy girl~. Be more careful. Those little paws of yours weren't made for climbing it seems~.[/say]")
+
+		saynn("[say=rahi]S-sorry..[/say]")
+
+		saynn("[say=nova]It's okay, cutie. Can you walk?[/say]")
+
+		saynn("[say=rahi]Maybe.. can we maybe.. rest.. on the bench..[/say]")
+
+		saynn("[say=nova]Sure, I could use a lap kitty~. Let me help you get up. Name is Nova by the way.[/say]")
+
+		saynn("Nova leans closer to Rahi who puts her paws all over the guard's armor, trying to find something to grab onto.. yeah.")
+
+		saynn("The feline starts to slowly limp towards the nearest bench with Nova helping her. As this pair walks past you, kitty is quick to toss you something.. the badge. Perfect.")
+
+		saynn("Nova helps settle Rahi onto the bench.")
+
+		saynn("[say=nova]Do you want me to go find you a doctor?[/say]")
+
+		saynn("[say=rahi]No.. just.. stay near for a bit?..[/say]")
+
+		saynn("[say=nova]I can certainly do that~.[/say]")
+
+		saynn("Avy and Kait stay near to make sure Nova doesn't do anything silly.")
+
+		saynn("For you.. it's time to act.")
+
+		addButton("Elevator", "Go to the command deck", "go_elevator")
+	if(state == "go_elevator"):
+		playAnimation(StageScene.Solo, "stand")
+		GM.pc.setLocation("cd_near_elevator")
+		aimCameraAndSetLocName("cd_near_elevator")
+		setCharacters([])
+		saynn("You walk past the checkpoint and swiftly step inside the elevator before anyone can ask anything.")
+
+		saynn("There is a little slot in the lift's panel that you press the badge against.. which gives you access to the command deck floor.")
+
+		saynn("You press the button.. and wait as the doors close with an annoying screech. The metal room starts to ascend lazily.")
+
+		saynn("No going back now.")
+
+		saynn("Soon, the doors open.. revealing a long corridor. This area looks quite different from what you are used to. Many expensive-looking paintings on the walls, red cloth with golden accents everywhere. The tiled floor looks clean and shiny, it's covered with a long carpet so your feet don't feel cold as you step.")
+
+		saynn("You see a few guards patrolling this area already.")
+
+		saynn("Good thing you have those painkillers.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -122,5 +188,11 @@ func _react(_action: String, _args):
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
 		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
+
+	if(_action == "rahi_hits_her_toe"):
+		processTime(3*60)
+
+	if(_action == "go_elevator"):
+		processTime(3*60)
 
 	setState(_action)

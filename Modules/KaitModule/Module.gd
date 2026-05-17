@@ -19,6 +19,7 @@ func _init():
 			"res://Modules/KaitModule/Chapter1/DomCh1RahiBreakIntroScene.gd",
 			"res://Modules/KaitModule/Chapter1/DomCh1RahiBreakAfterScene.gd",
 			"res://Modules/KaitModule/KaitMissionSelectorScene.gd",
+			"res://Modules/KaitModule/MissionSimpleScene.gd",
 		]
 	characters = [
 	]
