@@ -19,6 +19,7 @@ func react(_triggerID, _args):
 		var theScene:Array = theMission.getEventSceneLoc(roomID)
 		if(theScene.empty()):
 			return false
+		theMission.onSceneStart(theScene[0], theScene[1] if theScene.size() > 1 else [])
 		runScene(theScene[0], theScene[1] if theScene.size() > 1 else [])
 		return true
 	

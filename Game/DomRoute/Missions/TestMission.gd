@@ -5,7 +5,7 @@ func _init():
 	name = "Test mission"
 	desc = "This is a test mission.\nMeow meow."
 	
-	startScene = "DomM1s1Intro"
+	startScene = "MeScene"
 	
 	flags = {
 		"TestFlag": flag(FlagType.Bool),

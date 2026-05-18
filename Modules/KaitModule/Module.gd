@@ -18,13 +18,14 @@ func _init():
 			"res://Modules/KaitModule/Chapter1/DomCh1RahiRecEnsScene.gd",
 			"res://Modules/KaitModule/Chapter1/DomCh1RahiBreakIntroScene.gd",
 			"res://Modules/KaitModule/Chapter1/DomCh1RahiBreakAfterScene.gd",
-			"res://Modules/KaitModule/KaitMissionSelectorScene.gd",
-			"res://Modules/KaitModule/MissionSimpleScene.gd",
+			"res://Modules/KaitModule/Hideout/KaitMissionSelectorScene.gd",
+			"res://Modules/KaitModule/Hideout/MissionSimpleScene.gd",
 		]
 	characters = [
 	]
 	items = []
 	events = [
+		"res://Modules/KaitModule/Hideout/EnterHideoutEvent.gd",
 	]
 	quests = [
 	]
@@ -43,3 +44,6 @@ func incAvySubmission():
 
 func incAvyLove():
 	pass
+
+func hasHideoutAccess() -> bool:
+	return true # Replace with a flag check
