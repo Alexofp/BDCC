@@ -4,6 +4,9 @@ class_name MissionSystem
 var current:String = ""
 var completed:Dictionary = {}
 var flags:Dictionary = {} # mission id = dictionary[flag id] = flag value
+var pcPain:int = 0
+var pcLust:int = 0
+var pcStamina:int = 0 # Missing stamina
 
 func getAllPossibleMissions() -> Array:
 	var result:Array = []
@@ -45,12 +48,29 @@ func startMission(_id:String, _runScene:bool = true):
 	if(_runScene):
 		GM.main.runScene(theMission.getStartScene())
 	GM.main.addMessage("Task accepted!")
+	pcPain = GM.pc.getPain()
+	pcLust = GM.pc.getLust()
+	pcStamina = GM.pc.getMaxStamina() - GM.pc.getStamina()
 
 func isCompleted(_missionID:String) -> bool:
 	return completed.has(_missionID)
 
 func cancelCurrentMission():
 	current = ""
+
+func failCurrentMission():
+	current = ""
+	
+func restartCurrentMission(_resetStats:bool = true):
+	if(!isOnMission()):
+		return
+	var theMissionID:String = current
+	cancelCurrentMission()
+	if(_resetStats):
+		GM.pc.addPain(pcPain - GM.pc.getPain())
+		GM.pc.addLust(pcLust - GM.pc.getLust())
+		GM.pc.addStamina(GM.pc.getMaxStamina() - pcStamina - GM.pc.getStamina())
+	startMission(theMissionID)
 
 func completeMission():
 	if(!isOnMission()):
@@ -94,13 +114,13 @@ func getSpecificFlag(_missionID:String, _flagID:String, _default = null):
 
 func setFlag(_flagID:String, _value):
 	if(current.empty()):
-		assert(false, "TRYING TO SET A MISSION FLAG WHILE NOT ON A MISSION.")
+		Log.printerr("TRYING TO SET A MISSION FLAG WHILE NOT ON A MISSION.")
 		return
 	setSpecificFlag(current, _flagID, _value)
 
 func getFlag(_flagID:String, _default = null):
 	if(current.empty()):
-		assert(false, "TRYING TO GET A MISSION FLAG WHILE NOT ON A MISSION.")
+		Log.printerr("TRYING TO GET A MISSION FLAG WHILE NOT ON A MISSION.")
 		return _default
 	return getSpecificFlag(current, _flagID, _default)
 
@@ -117,6 +137,9 @@ func saveData() -> Dictionary:
 		current = current,
 		completed = completed.keys(),
 		flags = flags,
+		pcPain = pcPain,
+		pcLust = pcLust,
+		pcStamina = pcStamina,
 	}
 
 func loadData(_data:Dictionary):
@@ -126,3 +149,6 @@ func loadData(_data:Dictionary):
 	for theMissionID in theCompletedKeys:
 		completed[theMissionID] = true
 	flags = SAVE.loadVar(_data, "flags", {})
+	pcPain = SAVE.loadVar(_data, "pcPain", 0)
+	pcLust = SAVE.loadVar(_data, "pcLust", 0)
+	pcStamina = SAVE.loadVar(_data, "pcStamina", 0)
