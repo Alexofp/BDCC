@@ -15,6 +15,7 @@ func _init():
 		"c4": flag(FlagType.Bool), # Checked cd_office4
 		"skar": flag(FlagType.Bool), # Went into cd_near_captain_office
 		"risha": flag(FlagType.Text), # "no", "kiss", "bite", "pp", "vag". How did player punish Risha
+		"helped": flag(FlagType.Text), # "avy", "kait"
 	}
 
 func getObjectives() -> Array:

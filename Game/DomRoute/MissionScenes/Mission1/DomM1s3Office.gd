@@ -226,6 +226,232 @@ func _run():
 		saynn("Time to go back to your team.")
 
 		addButton("Continue", "See what happens next", "go_back")
+	if(state == "go_back"):
+		setCharacters([])
+		playAnimation(StageScene.Solo, "stand")
+		aimCameraAndSetLocName("hall_elevator")
+		saynn("You rush back through the many command deck's corridors and get into the elevator.")
+
+		saynn("The badge seems to still work.. so you use it to make the lift go down to the cellblock.")
+
+		addButton("Continue", "See what happens next", "kait_nova")
+	if(state == "kait_nova"):
+		setCharacters(["avy", "kait", "nova", "rahi"])
+		aimCameraAndSetLocName("main_bench2")
+		playAnimation(StageScene.Duo, "stand", {pc="kait", npc="nova"})
+		GM.pc.setLocation("main_bench2")
+		saynn("[say=nova]What's your problem, inmate?[/say]")
+
+		saynn("[say=kait]You really should stay here for now.[/say]")
+
+		saynn("[say=nova]Why? That kitty cat is doing well, I made sure.[/say]")
+
+		saynn("Nova tries to walk past Kait, heading towards the checkpoint.. but the snow leopard keeps getting in the way.")
+
+		saynn("[say=nova]Now you're being kinda annoying, you know that?[/say]")
+
+		saynn("She pulls her stun baton out.. while her other paw is hovering just above the shock remote.")
+
+		saynn("[say=nova]Step aside, at once.[/say]")
+
+		saynn("The tension is rising fast.")
+
+		saynn("That's when Avy nudges your side.")
+
+		addButton("Continue", "See what happens next", "avy_offer")
+	if(state == "avy_offer"):
+		playAnimation(StageScene.Duo, "stand", {npc="avy"})
+		saynn("[say=avy]You got the papers?[/say]")
+
+		saynn("[say=pc]Yeah. Here is the badge, tell Rahi to put it back onto that guard. I will tell Kait she can stop blocking the path.[/say]")
+
+		saynn("[say=avy]Well.. What if you.. don't?[/say]")
+
+		saynn("Kait stands her ground, her claws extended.")
+
+		saynn("[say=pc]That guard is about to drop Kait.[/say]")
+
+		saynn("Avy chuckles softly.")
+
+		saynn("[say=avy]You know.. is that such a bad thing though?[/say]")
+
+		saynn("You tilt your head.")
+
+		saynn("[say=pc]Would you want that to happen to you?[/say]")
+
+		saynn("[say=avy]No, duh. But here is a difference. I'm not as annoying as she is.[/say]")
+
+		saynn("You don't say anything, just looking at her instead.")
+
+		saynn("[say=avy]C'mon, it will be funny. Maybe she likes pain, who knows, maybe she is a total painslut.[/say]")
+
+		saynn("Avy seems to have a different definition for 'funny'.")
+
+		saynn("[say=avy]We both know you're the leader here, not her~. That cat needs her wings to be clipped every once in a while.[/say]")
+
+		saynn("[say=nova]Last warning, inmate.[/say]")
+
+		saynn("Hm.")
+
+		addButton("Just watch", "(Avy's love +) Just stand and watch what happens", "kait_gets_rekt")
+		addButton("Intervene", "(Kait's love +) Go and tell Kait to stop before Nova drops her", "kait_gets_saved")
+	if(state == "kait_gets_saved"):
+		playAnimation(StageScene.Duo, "stand", {npc="nova"})
+		saynn("[say=pc]No, you're wrong, Avy.[/say]")
+
+		saynn("[say=avy]Whatever then..[/say]")
+
+		saynn("You rush to the pair and position yourself in front of Kait.")
+
+		saynn("[say=nova]Huh?[/say]")
+
+		saynn("[say=pc]If you have a problem with her, you also have a problem with me.[/say]")
+
+		saynn("[say=nova]I don't wanna have problems with either of you, you know? I just wanna go do my stuff.[/say]")
+
+		saynn("You stay quiet for a bit. Your ears pick up a subtle fox giggle.")
+
+		saynn("[say=pc]Go do your stuff then.[/say]")
+
+		saynn("You step aside.. and grab Kait's hand to make her do so as well.")
+
+		saynn("[say=nova]Well thank you. Finally.[/say]")
+
+		saynn("Nova walks past you two. You nod towards the smug Avy and then towards Rahi. She seems to understand the assignment.")
+
+		addButton("Continue", "See what happens next", "kait_talk_after_save")
+	if(state == "kait_talk_after_save"):
+		playAnimation(StageScene.Duo, "stand", {npc="kait"})
+		saynn("You turn towards Kait who is blushing a bit.")
+
+		saynn("[say=pc]You're good?[/say]")
+
+		saynn("[say=kait]Yep! Thank you. The guard, though, is getting away![/say]")
+
+		saynn("[say=pc]We got this, don't worry.[/say]")
+
+		saynn("You watch Rahi getting the badge from Avy.")
+
+		addButton("Continue", "See what happens next", "nova_gets_hugged")
+	if(state == "kait_gets_rekt"):
+		playAnimation(StageScene.Duo, "punch", {pc="kait", npc="nova", npcAction="hurt"})
+		saynn("You decide to just watch.")
+
+		saynn("[say=avy]Good choice~.[/say]")
+
+		saynn("Kait doesn't back down. Her claws are out, swiping at the air between her and Nova.")
+
+		saynn("[say=kait]You're not going anywhere unless I allow it! Do you hear me, dog?[/say]")
+
+		saynn("Kait scratches Nova's armor and then shoves her hard in the chest. The husky stumbles back a step but doesn't fall, her armor softening the blow. She tightens her grip on the stun baton and starts slowly approaching the feline.")
+
+		saynn("[say=kait]You're really asking for me? All of you staffers are gonna serve me soon![/say]")
+
+		addButton("Continue", "See what happens next", "kait_dodges_nova")
+	if(state == "kait_dodges_nova"):
+		playAnimation(StageScene.Duo, "dodge", {pc="kait", npc="nova", npcAction="stunbaton"})
+		saynn("Sparks fly off of the stun baton as Nova switches it on. The little scary blue lines of electricity keep bouncing on its tip.")
+
+		saynn("[say=nova]I don't think so.[/say]")
+
+		saynn("Nova swings at the cat.. but Kait manages to dodge it at the last moment!")
+
+		saynn("This makes the husky growl.")
+
+		saynn("Another swing.. Kait dodges to the side and swipes at the guard's armor again.")
+
+		saynn("[say=kait]I'm too fast, you can't hit me. Just submit![/say]")
+
+		addButton("Continue", "See what unexpected things happen next", "kait_gets_dropped")
+	if(state == "kait_gets_dropped"):
+		playAnimation(StageScene.Duo, "defeat", {pc="kait", npc="nova"})
+		saynn("A sudden impulse of electricity hits Kait like a brick. Her legs give out instantly and she drops to her knees, claws scraping uselessly against the floor as her whole body seizes up.")
+
+		saynn("[say=kait]AAGH-![/say]")
+
+		saynn("She grips her collar and cries out from immense pain. Even her tail is spazzing out erratically.")
+
+		saynn("Nova puts away her weapon.. and then pulls her hand away from the remote.")
+
+		saynn("[say=nova]There. I hate doing that, you know?[/say]")
+
+		saynn("Kait can only whimper back.")
+
+		saynn("[say=avy]Told you. All bark and zero bite. Great view though~.[/say]")
+
+		saynn("The guard begins walking away, still without her badge.")
+
+		saynn("[say=avy]I will go give Rahi the badge.[/say]")
+
+		addButton("Kait", "Go approach her", "kait_rekt_talk")
+	if(state == "kait_rekt_talk"):
+		playAnimation(StageScene.SexStart, "start", {pc="pc", npc="kait"})
+		saynn("You run up to Kait to check on her.")
+
+		saynn("[say=pc]You okay?[/say]")
+
+		saynn("[say=kait]Ugh.. I'm fine. What took you so long, the guard is getting away.[/say]")
+
+		saynn("[say=pc]We got it, don't worry.[/say]")
+
+		saynn("You watch Rahi getting the badge from Avy.")
+
+		addButton("Continue", "See what happens next", "nova_gets_hugged")
+	if(state == "nova_gets_hugged"):
+		playAnimation(StageScene.Hug, "hug", {pc="nova", npc="rahi"})
+		saynn("Rahi sprints towards the guard and gives her a sudden tight hug! It really startles the husky.")
+
+		saynn("[say=nova]Oh.. It's you again.[/say]")
+
+		saynn("[say=rahi]She just wanted to say thank you-u-u-u-u..[/say]")
+
+		saynn("The feline puts her paws all over the guard.. until the badge finds its old spot.")
+
+		saynn("[say=nova]Aw.. you're so sweet.[/say]")
+
+		saynn("Rahi purrs as she receives a few pats from the husky.")
+
+		saynn("[say=rahi]Meow meow meow..[/say]")
+
+		saynn("After giving the guard that proper hug, she takes a step back.")
+
+		saynn("[say=nova]Is your ankle okay?[/say]")
+
+		saynn("[say=rahi]Ankle? Oh.. yeah.. Uh.. it's fine now..[/say]")
+
+		saynn("[say=nova]I'm glad. See you around, kitty~.[/say]")
+
+		saynn("Rahi nods softly and leaves Nova's company.")
+
+		addButton("Continue", "See what happens next", "mission_completed")
+	if(state == "mission_completed"):
+		removeCharacter("nova")
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", pc="kait"})
+		saynn("Rahi makes sure Nova isn't watching anymore.. and then approaches you all.")
+
+		saynn("[say=rahi]All good?..[/say]")
+
+		saynn("[say=kait]Yeah, good job kitty. {pc.name}? Did you get the records?[/say]")
+
+		saynn("You hand Kait the papers. She gives them a quick glance.")
+
+		saynn("[say=kait]Perfect! Were there any problems?[/say]")
+
+		saynn("[say=pc]There was a mean guard. But I handled it.[/say]")
+
+		saynn("[say=kait]Good job! I think we can call this mission.. completed~.[/say]")
+
+		saynn("Avy's face expression distorts slightly.")
+
+		saynn("[say=avy]Oh my god. I will just go now.[/say]")
+
+		saynn("[say=kait]Sure, you do that. I will go over the records with Ans, see what we can dig up. I will be in the hideout.[/say]")
+
+		saynn("And just like that.. Everyone disperses.")
+
+		saynn("Feels good.. to accomplish something.")
+
+		addButton("Continue", "Mission completed!", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -270,6 +496,21 @@ func _react(_action: String, _args):
 
 	if(_action == "go_back"):
 		processTime(5*60)
+
+	if(_action == "kait_nova"):
+		processTime(3*60)
+
+	if(_action == "kait_gets_rekt"):
+		GM.main.MS.setFlag("helped", "avy")
+
+	if(_action == "kait_gets_saved"):
+		GM.main.MS.setFlag("helped", "kait")
+
+	if(_action == "kait_dodges_nova"):
+		processTime(3*60)
+
+	if(_action == "mission_completed"):
+		GM.main.MS.completeMission()
 
 	setState(_action)
 
