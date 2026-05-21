@@ -631,6 +631,7 @@ func registerEverything():
 	
 	registerEventFolder("res://Events/Event/")
 	registerEventFolder("res://Game/NpcSlavery/SlaveActivitiesEvents/")
+	registerEventFolder("res://Game/DomRoute/MissionEvents/")
 	registerDrugDenEventFolder("res://Game/DrugDen/Events/")
 	
 	emit_signal("loadingUpdate", 7.0/totalStages, "Scenes")

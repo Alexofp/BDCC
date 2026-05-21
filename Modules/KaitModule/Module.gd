@@ -2,10 +2,7 @@ extends Module
 
 func getFlags():
 	return {
-		# Gym module
-		#"Gym_RishaLastDayGotPaid": flag(FlagType.Number),
-		#"Gym_BullyGangIntroduced": flag(FlagType.Bool),
-		#"Gym_BullyGangPayed": flag(FlagType.Bool),
+		"m1gotpills": flag(FlagType.Bool), # mission 1, did we receive painkillers from Avy? Not a mission flag because we only wanna receive them once
 	}
 
 func _init():

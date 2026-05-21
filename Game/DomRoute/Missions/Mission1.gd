@@ -14,6 +14,7 @@ func _init():
 		"c3": flag(FlagType.Bool), # Checked cd_office3
 		"c4": flag(FlagType.Bool), # Checked cd_office4
 		"skar": flag(FlagType.Bool), # Went into cd_near_captain_office
+		"skarOutcome": flag(FlagType.Text), # "", "lost", "won", "sex"
 		"risha": flag(FlagType.Text), # "no", "kiss", "bite", "pp", "vag". How did player punish Risha
 		"helped": flag(FlagType.Text), # "avy", "kait"
 	}
@@ -63,6 +64,8 @@ func onSimpleScene(_eventID:String, _args:Array, _scene):
 func getEventSceneLoc(_loc:String) -> Array:
 	if(_loc == "cd_near_captain_office" && !getFlag("skar", false)):
 		return ["DomM1OptionalSkar", []]
+	if(_loc == "cd_near_captain_office" && getFlag("skar", false) && getFlag("skarOutcome", "") == ""):
+		return ["DomM1OptionalSkarFight", []]
 	return [] # [sceneid, args]
 
 func getStartSceneButtonsCharacter(_char:String) -> Array:

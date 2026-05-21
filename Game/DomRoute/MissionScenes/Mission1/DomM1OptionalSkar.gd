@@ -13,6 +13,8 @@ func _run():
 
 		saynn("You probably don't wanna approach him.. unless you wanna fight the dude.")
 
+		saynn("(( Approaching him again will trigger an optional hard encounter. ))")
+
 		addButton("Leave", "Take a step back", "endgoback")
 
 func _react(_action: String, _args):

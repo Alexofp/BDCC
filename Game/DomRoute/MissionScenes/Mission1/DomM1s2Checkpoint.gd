@@ -184,10 +184,14 @@ func _react(_action: String, _args):
 	if(_action == "avy_gives_painkillers"):
 		processTime(3*60)
 		
-		addMessage("You received 3x painkillers!")
-		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
-		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
-		GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
+		if(!getFlag("KaitModule.m1gotpills", false)):
+			addMessage("You received 3x painkillers!")
+			GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
+			GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
+			GM.pc.getInventory().addItem(GlobalRegistry.createItem("painkillers"))
+			getFlag("KaitModule.m1gotpills", true)
+		else:
+			addMessage("You already received painkillers from Avy before so you don't get any.")
 
 	if(_action == "rahi_hits_her_toe"):
 		processTime(3*60)
