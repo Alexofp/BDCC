@@ -2,7 +2,7 @@ extends MissionBase
 
 func _init():
 	id = "Mission1"
-	name = "Records"
+	name = "Paper Trail"
 	desc = "You need to get prison's staff/inmate records to figure out the best potential recruiting targets."
 	
 	startScene = "DomM1s1Intro"
@@ -14,10 +14,13 @@ func _init():
 		"c3": flag(FlagType.Bool), # Checked cd_office3
 		"c4": flag(FlagType.Bool), # Checked cd_office4
 		"skar": flag(FlagType.Bool), # Went into cd_near_captain_office
-		"skarOutcome": flag(FlagType.Text), # "", "lost", "won", "sex"
+		"skarOutcome": flag(FlagType.Text), # "", "lost", "won", "ridevag", "rideanal", "fuckhim", "ridevagout", "rideanalout"
 		"risha": flag(FlagType.Text), # "no", "kiss", "bite", "pp", "vag". How did player punish Risha
 		"helped": flag(FlagType.Text), # "avy", "kait"
 	}
+	
+	rewardExp = 50
+	rewardCredits = 3
 
 func getObjectives() -> Array:
 	var result:Array = []
@@ -60,12 +63,16 @@ func onSceneStart(_sceneID:String, _args:Array):
 func onSimpleScene(_eventID:String, _args:Array, _scene):
 	if(_eventID == "check"):
 		setFlag(_args[0], true)
+	if(_eventID == "skarNope"):
+		GM.pc.setLocation("cd_last_intersection")
 
 func getEventSceneLoc(_loc:String) -> Array:
 	if(_loc == "cd_near_captain_office" && !getFlag("skar", false)):
 		return ["DomM1OptionalSkar", []]
 	if(_loc == "cd_near_captain_office" && getFlag("skar", false) && getFlag("skarOutcome", "") == ""):
 		return ["DomM1OptionalSkarFight", []]
+	if(_loc == "cd_near_captain_office" && getFlag("skarOutcome", "") != ""):
+		return ["MissionSimpleScene", ["It's best not to go here anymore.. so you turn back.", "skarNope", []]]
 	return [] # [sceneid, args]
 
 func getStartSceneButtonsCharacter(_char:String) -> Array:

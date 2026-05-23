@@ -18,6 +18,45 @@ func getAllPossibleMissions() -> Array:
 	
 	return result
 
+func getAllPossibleMainMissions() -> Array:
+	var result:Array = []
+	for missionID in GlobalRegistry.missions:
+		var theMission = GlobalRegistry.missions[missionID]
+		if(!theMission.isSideMission() && theMission.isVisibleFinal()):
+			result.append(theMission)
+	return result
+
+func getAllPossibleSideMissions() -> Array:
+	var result:Array = []
+	for missionID in GlobalRegistry.missions:
+		var theMission = GlobalRegistry.missions[missionID]
+		if(theMission.isSideMission() && theMission.isVisibleFinal()):
+			result.append(theMission)
+	return result
+
+func getMissionStats() -> Array: # Check for secret missions?
+	var totalMissionAmount:int = 0
+	var completedMissionAmount:int = 0
+	var totalSideMissionAmount:int = 0
+	var completedSideMissionAmount:int = 0
+	for missionID in GlobalRegistry.missions:
+		var theMission = GlobalRegistry.missions[missionID]
+		if(!theMission.isSideMission()):
+			totalMissionAmount += 1
+			if(isCompleted(missionID)):
+				completedMissionAmount += 1
+		else:
+			totalSideMissionAmount += 1
+			if(isCompleted(missionID)):
+				completedSideMissionAmount += 1
+		
+	var result:Array = [
+		"Completed missions: "+str(completedMissionAmount)+"/"+str(totalMissionAmount),
+		"Side missions: "+str(completedSideMissionAmount)+"/"+str(totalSideMissionAmount),
+	]
+	
+	return result
+
 func isOnMission() -> bool:
 	if(!current.empty()):
 		return true
@@ -76,11 +115,15 @@ func completeMission():
 	if(!isOnMission()):
 		assert(false, "TRYING TO MARK MISSION AS COMPLETED WHEN WE'RE NOT ON A MISSION")
 		return
+	var wasAlreadyCompleted:bool = isCompleted(current)
+	var theMission = GlobalRegistry.getMission(current)
 	completed[current] = true
 	current = ""
 	GM.main.addMessage("Task completed!")
 	# Add experience here?
-
+	if(theMission):
+		theMission.giveRewardFinal(wasAlreadyCompleted)
+	
 func getDebugMissionList() -> Array:
 	var result:Array = []
 	for missionID in GlobalRegistry.missions:

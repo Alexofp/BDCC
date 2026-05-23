@@ -8,9 +8,15 @@ var desc:String = "Change me please please please"
 var startScene:String = "MISSING_MISSION_SCENE"
 var requiredMissions:Array = []
 var startLoc:String = "hideout_hq" # Player's starting loc
+var sideMission:bool = false
+var rewardExp:int = 0
+var rewardCredits:int = 0
+var rewardItems:Array = []
+var rewardExtra:String = ""
+var rewardRepeatRate:float = 0.1
 
 var flags:Dictionary
-
+	
 func isVisible() -> bool:
 	return true
 
@@ -56,6 +62,9 @@ func onSimpleScene(_eventID:String, _args:Array, _scene):
 func onMissionStart():
 	pass
 
+func giveReward(_isRepeat:bool):
+	pass
+
 func startSceneButton(_sceneID:String, _args:Array=[], _name:String = "Mission", _desc:String = "Start the mission-related scene!") -> Array:
 	return [_sceneID, _args, _name, _desc]
 
@@ -81,3 +90,41 @@ func flag(type:int) -> Dictionary:
 
 func getStartLoc() -> String:
 	return startLoc
+
+func isSideMission() -> bool:
+	return sideMission
+
+func getRewardString() -> String:
+	var result:Array = []
+	
+	if(rewardExp != 0):
+		result.append(str(rewardExp)+" Experience")
+	if(rewardCredits != 0):
+		result.append(str(rewardCredits)+"x Credits")
+	if(!rewardItems.empty()):
+		for theItemID in rewardItems:
+			var theItemRef = GlobalRegistry.getItemRef(theItemID)
+			if(!theItemRef):
+				continue
+			result.append(theItemRef.getName())
+	if(!rewardExtra.empty()):
+		result.append(rewardExtra)
+	return Util.join(result, ", ")
+
+func giveRewardFinal(_isRepeat:bool):
+	var finalRewardExp:int = rewardExp if !_isRepeat else int(rewardRepeatRate*rewardExp)
+	if(finalRewardExp != 0):
+		GM.main.addMessage("You received "+str(finalRewardExp)+" experience")
+		GM.pc.addExperience(finalRewardExp)
+	var finalRewardCredits:int = rewardCredits if !_isRepeat else int(rewardRepeatRate*rewardCredits)
+	if(finalRewardCredits != 0):
+		GM.main.addMessage("You received "+str(finalRewardCredits)+" credits")
+		GM.pc.addCredits(finalRewardCredits)
+	if(!_isRepeat):
+		for theItemID in rewardItems:
+			var theItem = GlobalRegistry.createItem(theItemID)
+			if(!theItem):
+				return
+			GM.pc.getInventory().addItem(theItem)
+			GM.main.addMessage("You received "+theItem.getAStackName())
+	giveReward(_isRepeat)

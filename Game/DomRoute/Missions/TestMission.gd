@@ -10,6 +10,7 @@ func _init():
 	flags = {
 		"TestFlag": flag(FlagType.Bool),
 	}
+	sideMission = true
 
 func getObjectives() -> Array:
 	var result:Array = []

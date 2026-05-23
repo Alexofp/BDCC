@@ -62,9 +62,9 @@ func _run():
 		saynn("Yeah, looks like this guy is protecting the captain's office. That's nice. But the doors are indeed closed. That's not as nice.")
 
 		addButton("Just leave", "Leave the guard be", "just_leave")
-		addButtonWithChecks("Ride (vaginal)", "Might as well ride his cock now!", "start_vag_ride", [], [[[ButtonChecks.HasReachableVagina]]])
-		addButtonWithChecks("Ride (anal)", "Might as well ride his cock now!", "start_anal_ride", [], [[[ButtonChecks.HasReachableVagina]]])
-		addButtonWithChecks("Fuck him", "Rail his ass!", "start_fuck_him", [], [[[ButtonChecks.HasReachablePenis]]])
+		addButtonWithChecks("Ride (vaginal)", "Might as well ride his cock now!", "start_vag_ride", [], [[ButtonChecks.HasReachableVagina]])
+		addButtonWithChecks("Ride (anal)", "Might as well ride his cock now!", "start_anal_ride", [], [[ButtonChecks.HasReachableVagina]])
+		addButtonWithChecks("Fuck him", "Rail his ass!", "start_fuck_him", [], [[ButtonChecks.HasReachablePenis]])
 	if(state == "just_leave"):
 		playAnimation(StageScene.Solo, "stand")
 		saynn("[say=pc]Oh well, enjoy your boring life then.[/say]")
