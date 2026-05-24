@@ -256,7 +256,7 @@ func _run():
 			addButtonWithChecks("Degrade Tavi", "Force her to act like a puppy", "degradeTavi", [], [ButtonChecks.NotHandsBlocked])
 		else:
 			addDisabledButton("Degrade Tavi", "Tavi needs to be at least a little bit obedient")
-		addDisabledButton("Fuck Tavi", "Not done :(")
+		#addDisabledButton("Fuck Tavi", "Not done :(")
 
 	if(state == "submit2"):
 		playAnimation(StageScene.Duo, "kneel", {npc="tavi"})

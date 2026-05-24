@@ -16,7 +16,7 @@ func isCompleted():
 	return GM.main.MS.isCompleted(mission.id)
 
 func isMainQuest():
-	return true
+	return !mission.isSideMission()
 
 func getPriority():
 	return 0

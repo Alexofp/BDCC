@@ -10,14 +10,18 @@ func _init():
 	author = "Rahi"
 	
 	scenes = [
-			"res://Modules/KaitModule/Chapter1/DomCh1s1AgreeScene.gd",
-			"res://Modules/KaitModule/Chapter1/DomCh1RahiRecScene.gd",
-			"res://Modules/KaitModule/Chapter1/DomCh1RahiRecEnsScene.gd",
-			"res://Modules/KaitModule/Chapter1/DomCh1RahiBreakIntroScene.gd",
-			"res://Modules/KaitModule/Chapter1/DomCh1RahiBreakAfterScene.gd",
-			"res://Modules/KaitModule/Hideout/KaitMissionSelectorScene.gd",
-			"res://Modules/KaitModule/Hideout/MissionSimpleScene.gd",
-		]
+		"res://Modules/KaitModule/Chapter0/DomCh0ArenaApproachFirst.gd",
+		"res://Modules/KaitModule/Chapter0/DomCh0OfferGotApple.gd",
+		"res://Modules/KaitModule/Chapter0/DomCh0OfferWonTavi.gd",
+	
+		"res://Modules/KaitModule/Chapter1/DomCh1s1AgreeScene.gd",
+		"res://Modules/KaitModule/Chapter1/DomCh1RahiRecScene.gd",
+		"res://Modules/KaitModule/Chapter1/DomCh1RahiRecEnsScene.gd",
+		"res://Modules/KaitModule/Chapter1/DomCh1RahiBreakIntroScene.gd",
+		"res://Modules/KaitModule/Chapter1/DomCh1RahiBreakAfterScene.gd",
+		"res://Modules/KaitModule/Hideout/KaitMissionSelectorScene.gd",
+		"res://Modules/KaitModule/Hideout/MissionSimpleScene.gd",
+	]
 	characters = [
 	]
 	items = []
