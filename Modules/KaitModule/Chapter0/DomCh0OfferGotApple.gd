@@ -31,7 +31,7 @@ func _run():
 
 		saynn("[say=pc]So?[/say]")
 
-		saynn("[say=kait]I just wanna offer you something different. I'm assembling a team. We might already have a plan brewing.[/say]")
+		saynn("[say=kait]I just wanna offer you something different. I'm assembling a team. We might already have a plan brewing about how to escape this gray box.[/say]")
 
 		saynn("We? That's interesting.")
 
