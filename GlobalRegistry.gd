@@ -324,20 +324,16 @@ func getLoadedMods() -> Array:
 	
 func getModsFolder() -> String:
 	var modsFolder = "user://mods"
-	if(OS.get_name() == "Android"):
-		var externalDir:String = "user://"
-		var finalDir = externalDir.plus_file("BDCCMods")
-		modsFolder = finalDir
-		var _ok = Directory.new().make_dir(modsFolder)
+	var dir = Directory.new()
+	if not dir.dir_exists(modsFolder):
+		var _ok = dir.make_dir_recursive(modsFolder)
 	return modsFolder
 
 func getDatapacksFolder() -> String:
 	var modsFolder = "user://datapacks"
-	if(OS.get_name() == "Android"):
-		var externalDir:String = "user://"
-		var finalDir = externalDir.plus_file("BDCCMods/Datapacks")
-		modsFolder = finalDir
-		var _ok = Directory.new().make_dir(modsFolder)
+	var dir = Directory.new()
+	if not dir.dir_exists(modsFolder):
+		var _ok = dir.make_dir_recursive(modsFolder)
 	return modsFolder
 	
 func getRawModList() -> Array:
@@ -2243,10 +2239,10 @@ func getSkinsAllKeys():
 
 func findCustomSkins():
 	var skinsFolder = "user://custom_skins"
-	if(OS.get_name() == "Android"):
-		var externalDir:String = "user://"
-		var finalDir = externalDir.plus_file("BDCCMods/custom_skins")
-		skinsFolder = finalDir
+	
+	var dir = Directory.new()
+	if not dir.dir_exists(skinsFolder):
+		var _ok = dir.make_dir_recursive(skinsFolder)
 	
 	for skinPath in Util.getFilesInFolder(skinsFolder):
 		var customSkin = preload("res://Player/Player3D/Skins/CustomSkin.gd").new()
