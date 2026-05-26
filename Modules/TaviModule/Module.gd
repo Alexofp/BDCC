@@ -466,3 +466,8 @@ func addCorruption(howMuch, showMessage = true):
 			GM.main.addMessage("Tavi's corruption has increased to "+str(Util.roundF(currentCorruption * 100.0, 1))+"%")
 		elif(diff < 0.0):
 			GM.main.addMessage("Tavi's corruption has decreased to "+str(Util.roundF(currentCorruption * 100.0, 1))+"%")
+
+func resetMainRoute():
+	resetAllFlagsWithExceptions({
+		
+	})

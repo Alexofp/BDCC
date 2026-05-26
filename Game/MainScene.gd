@@ -36,6 +36,7 @@ var PS:PlayerSlaveryBase
 var PSH:PlayerSlaveryHolder = PlayerSlaveryHolder.new()
 var RCS:RecruitSystem = RecruitSystem.new()
 var MS:MissionSystem = MissionSystem.new()
+var MRH:MainRouteHistory = MainRouteHistory.new()
 
 var staticCharacters:Dictionary = {}
 var charactersToUpdate:Array = []
@@ -517,6 +518,7 @@ func saveData():
 	else:
 		data["playerSlavery"] = null
 	data["missionSystem"] = MS.saveData()
+	data["mainRouteHistory"] = MRH.saveData()
 	
 	data["scenes"] = []
 	for scene in sceneStack:
@@ -560,6 +562,7 @@ func loadData(data):
 	RCS = RecruitSystem.new() # To reset all the state
 	RCS.loadData(SAVE.loadVar(data, "recruitSystem", {}))
 	MS.loadData(SAVE.loadVar(data, "missionSystem", {}))
+	MRH.loadData(SAVE.loadVar(data, "mainRouteHistory", {}))
 	
 	var scenes = SAVE.loadVar(data, "scenes", [])
 	
@@ -1701,11 +1704,20 @@ func getDebugActions():
 				},
 			],
 		},
+		{
+			"id": "allowMainRouteReset",
+			"name": "Allow Main Route reset",
+			"args": [
+			],
+		},
 	]
 
 func doDebugAction(id, args = {}):
 	print(id, " ", args)
 	
+	if(id == "allowMainRouteReset"):
+		GM.main.MRH.allowCanRestart(true)
+		return
 	if(id == "startMission"):
 		if(!MS.canStartAnyMission()):
 			MS.cancelCurrentMission()
@@ -2402,3 +2414,7 @@ func hasCommittedToMainRoute() -> bool:
 		return true
 	
 	return false
+
+# If we have gotten to any ending, we can restart the main route
+func canRestartMainRoute() -> bool:
+	return MRH.canRestartMainRoute()

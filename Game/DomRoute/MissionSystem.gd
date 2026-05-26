@@ -175,6 +175,12 @@ func getMission():
 		return null
 	return GlobalRegistry.getMission(current)
 
+# Called from KaitModule
+func resetMainRoute():
+	current = ""
+	completed.clear()
+	flags.clear()
+
 func saveData() -> Dictionary:
 	return {
 		current = current,

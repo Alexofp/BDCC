@@ -55,3 +55,10 @@ func incAvyLove():
 
 func hasHideoutAccess() -> bool:
 	return true # Replace with a flag check
+
+func resetMainRoute():
+	resetAllFlagsWithExceptions({
+		
+	})
+	GM.main.MS.resetMainRoute()
+	GM.main.RCS.resetMainRoute()

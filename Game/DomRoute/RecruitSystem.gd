@@ -48,6 +48,14 @@ func submitContext(_context:RecruitContext):
 	if(theRecruit):
 		theRecruit.onContext(_context)
 
+# Called from KaitModule
+func resetMainRoute():
+	currentID = ""
+	replayMode = false
+	for recID in recruits:
+		recruits[recID].completed = false
+		recruits[recID].history.clear()
+
 func saveData() -> Dictionary:
 	var recData:Dictionary = {}
 	for recruitID in recruits:
