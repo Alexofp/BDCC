@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="35" android:compileSdkVersionCodename="15" android:installLocation="auto" package="org.rahimew.bdcc" platformBuildVersionCode="35" platformBuildVersionName="15">
+    <supports-screens android:largeScreens="true" android:normalScreens="true" android:smallScreens="true" android:xlargeScreens="true"/>
+    <uses-feature android:glEsVersion="0x20000" android:required="true"/>
+    <application android:networkSecurityConfig="@xml/network_security_config" android:usesCleartextTraffic="true" android:allowBackup="true" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:debuggable="true" android:extractNativeLibs="true" android:hasFragileUserData="true" android:icon="@mipmap/icon" android:isGame="true" android:label="@string/godot_project_name_string" android:requestLegacyExternalStorage="true">
+        <meta-data android:name="org.godotengine.editor.version" android:value="3.6.2.stable"/>
+        <meta-data android:name="xr_mode_metadata_name" android:value="xr_mode_metadata_value"/>
+        <meta-data android:name="xr_hand_tracking_metadata_name" android:value="xr_hand_tracking_metadata_value"/>
+        <meta-data android:name="xr_hand_tracking_version_name" android:value="xr_hand_tracking_version_value"/>
+        <meta-data android:name="com.oculus.supportedDevices" android:value="all"/>
+        <activity android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|density" android:excludeFromRecents="false" android:exported="true" android:label="@string/godot_project_name_string" android:launchMode="singleInstancePerTask" android:name="com.godot.game.GodotApp" android:resizeableActivity="true" android:screenOrientation="userLandscape" android:theme="@style/GodotAppSplashTheme">
+            <meta-data android:name="com.oculus.vr.focusaware" android:value="true"/>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="com.oculus.intent.category.VR"/>
+            </intent-filter>
+        </activity>
+        <meta-data android:name="org.godotengine.library.version" android:value="3.6.2.stable"/>
+        <service android:name="org.godotengine.godot.GodotDownloaderService"/>
+        <activity android:exported="false" android:name="org.godotengine.godot.utils.ProcessPhoenix" android:process=":phoenix" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <provider android:authorities="org.rahimew.bdcc.fileprovider" android:exported="false" android:grantUriPermissions="true" android:name="androidx.core.content.FileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/godot_provider_paths"/>
+        </provider>
+        <provider android:authorities="org.rahimew.bdcc.fileprovider" android:exported="false" android:name="androidx.startup.InitializationProvider">
+            <meta-data android:name="androidx.profileinstaller.ProfileInstallerInitializer" android:value="androidx.startup"/>
+        </provider>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.profileinstaller.ProfileInstallReceiver" android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SKIP_FILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION"/>
+            </intent-filter>
+        </receiver>
+    </application>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS"/>
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_USER_DICTIONARY"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_USER_DICTIONARY"/>
+</manifest>
