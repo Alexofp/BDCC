@@ -5,10 +5,16 @@ var canJoinKait = false
 func _init():
 	sceneID = "DomCh0KaitTalkScene"
 
+func _reactInit():
+	if(GM.ES.triggerReact(Trigger.TalkingToNPC, ["kaitIntro"])):
+		endScene()
+		return
+
 func _run():
 	if(state == ""):
 		addCharacter("kait")
 		playAnimation(StageScene.Duo, "stand", {npc="kait"})
+		canJoinKait = (!GM.main.hasCommittedToMainRoute() && !getFlag("KaitModule.joinedTeam") && GlobalRegistry.getModule("FightClubModule").getAmountFightersWon() >= 3)
 		if (canJoinKait):
 			saynn("[say=kait]I saw what you did at the arena! I'm impressed. Wanna join me?[/say]")
 
@@ -22,6 +28,8 @@ func _run():
 		addButton("Talk", "See what you can talk about with her", "talk_menu")
 		addButton("Sex?", "Offer her some fun time", "sex_nope")
 		addButton("Leave", "Enough chatting", "endthescene")
+		GM.ES.triggerRun(Trigger.TalkingToNPC, ["kaitIntro"])
+		
 	if(state == "sex_nope"):
 		saynn("[say=pc]Wanna have some fun?[/say]")
 

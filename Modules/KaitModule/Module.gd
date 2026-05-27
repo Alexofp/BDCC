@@ -34,8 +34,10 @@ func _init():
 	events = [
 		"res://Modules/KaitModule/Chapter0/KaitMeetOfferEvent.gd",
 		"res://Modules/KaitModule/Hideout/EnterHideoutEvent.gd",
+		"res://Modules/KaitModule/Chapter0/DomCh0KaitTalkEvent.gd",
 	]
 	quests = [
+		"res://Modules/KaitModule/Chapter0/DomRouteIntroQuest.gd",
 	]
 
 func resetFlagsOnNewDay():
@@ -54,7 +56,9 @@ func incAvyLove():
 	pass
 
 func hasHideoutAccess() -> bool:
-	return true # Replace with a flag check
+	if(!getFlag("KaitModule.joinedTeam")):
+		return false
+	return true
 
 func resetMainRoute():
 	resetAllFlagsWithExceptions({

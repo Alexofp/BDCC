@@ -7,7 +7,10 @@ func _run():
 	if(state == ""):
 		addCharacter("kait")
 		playAnimation(StageScene.Duo, "kneel", {npc="kait"})
-
+	
+	var didCommit:bool = GM.main.hasCommittedToMainRoute()
+	var isOnKaitRoute:bool = getFlag("KaitModule.joinedTeam", false)
+	
 	if(state == ""):
 		saynn("Defeated, you cry out a painful noise and drop to your knees. Kait quickly dashes towards you and shoves her knee into your chest, making you fly back another meter before hitting the ground. Ow. She then pounces at you and pins to the floor.")
 
@@ -20,45 +23,93 @@ func _run():
 		addButton("A proposal", "See what happens next", "a_proposal")
 
 	if(state == "a_proposal"):
-		saynn("She is straddling you, using the weight of her body to keep you pinned. One of her arms is holding yours while another is threatening to shove claws into your neck.")
+		if(isOnKaitRoute):
+			saynn("She is straddling you, using the weight of her body to keep you pinned. One of her arms is holding yours while another is threatening to shove claws into your neck.")
+			
+			saynn("[say=kait]Good try. But I'm stronger.[/say]")
+			
+			saynn("You keep your chin high, just to avoid her accidently making a few extra holes in you.")
+			
+			saynn("[say=pc]Is that how you treat your teammates?[/say]")
+			
+			saynn("She puts more pressure on your neck, her claws are digging into your skin, causing more pain.")
+			
+			saynn("[say=kait]You know how this arena works. You signed up for this~.[/say]")
+			
+			saynn("[say=pc]Do your worst then.[/say]")
+			
+			saynn("She frowns and holds a constant eye contact with you. She then finally pulls her claws away and gets up before shoving a leg into your chest to keep you pinned.")
+			
+			saynn("[say=kait]Don't act like a sore loser. You're getting marked~.[/say]")
+			
+		else:
+			saynn("She is straddling you, using the weight of her body to keep you pinned. One of her arms is holding yours while another is threatening to shove claws into your neck.")
 
-		saynn("[say=kait]Who taught you to fight?[/say]")
+			saynn("[say=kait]Who taught you to fight?[/say]")
 
-		saynn("You keep your chin high, just to avoid her accidently making a few extra holes in you.")
+			saynn("You keep your chin high, just to avoid her accidently making a few extra holes in you.")
 
-		saynn("[say=pc]Everyone has to be taught how to fight?[/say]")
+			saynn("[say=pc]Everyone has to be taught how to fight?[/say]")
 
-		saynn("She puts more pressure on your neck, her claws are digging into your skin, causing more pain.")
+			saynn("She puts more pressure on your neck, her claws are digging into your skin, causing more pain.")
 
-		saynn("[say=kait]Without being taught you wouldn’t be able to get this far.[/say]")
+			saynn("[say=kait]Without being taught you wouldn’t be able to get this far.[/say]")
 
-		saynn("[say=pc]Well, I wasn’t taught by anyone.[/say]")
+			saynn("[say=pc]Well, I wasn’t taught by anyone.[/say]")
 
-		saynn("She frowns and holds a constant eye contact with you. She then finally pulls her claws away and gets up before shoving a leg into your chest to keep you pinned.")
+			saynn("She frowns and holds a constant eye contact with you. She then finally pulls her claws away and gets up before shoving a leg into your chest to keep you pinned.")
 
-		saynn("[say=kait]I’m Kait. I’m building a team.[/say]")
+			saynn("[say=kait]I’m Kait. I’m building a team.[/say]")
 
-		saynn("[say=pc]And why should I care?[/say]")
+			saynn("[say=pc]And why should I care?[/say]")
 
-		saynn("[say=kait]A team to escape from this rathole. I need people that can help me. Loyal people.[/say]")
+			saynn("[say=kait]A team to escape from this rathole. I need people that can help me. Loyal people.[/say]")
 
-		saynn("Hm. Escaping, huh. That could be your chance. The crowd starts to notice the lack of actions and boos.")
+			saynn("Hm. Escaping, huh. That could be your chance. The crowd starts to notice the lack of actions and boos.")
 
-		saynn("[say=pc]A lilac that wants to escape? That’s something new. How about you start with removing your leg, I can hardly breathe.[/say]")
+			saynn("[say=pc]A lilac that wants to escape? That’s something new. How about you start with removing your leg, I can hardly breathe.[/say]")
 
-		saynn("Kait sighs audibly and removes the pressure from your chest. She then offers you a hand.")
+			saynn("Kait sighs audibly and removes the pressure from your chest. She then offers you a hand.")
+			
+			if(didCommit && !isOnKaitRoute):
+				saynn("[say=pc]Too bad I guess. I've already made up my mind.[/say]")
+				
+				saynn("[say=kait]Really? What a shame. Whatever then.. I will mark you, like I said.[/say]")
+			else:
+				saynn("[say=pc]And what if I say no?[/say]")
 
-		saynn("[say=pc]And what if I say no?[/say]")
-
-		saynn("[say=kait]Then I will mark you, like I said.[/say]")
-
-		addDisabledButton("Agree", "Begin the Team Escape route (not done, sorry)")
+				saynn("[say=kait]Then I will mark you, like I said.[/say]")
+			
+		if(!didCommit):
+			addButton("Agree", "(Dom route) Agree to her proposal", "doAgree")
+		elif(!isOnKaitRoute):
+			addDisabledButton("Agree", "You have already commited to another main route, sorry.")
 		if(OPTIONS.isContentEnabled(ContentType.Watersports)):
 			addButton("Get pissed on", "You would rather suffer the consequences", "get_pissed_on")
 		else:
 			addDisabledButton("Get pissed on", "(Watersports content is disabled) You would rather suffer the consequences")
 		addButton("Get marked", "Get Kait’s scent on you but not in a gross way", "get_marked")
 		GM.ES.triggerRun("ArenaFighterPCLost", ["kait"])
+
+	if(state == "doAgree"):
+		setFlag("KaitModule.gotMetByKait", true)
+		setFlag("KaitModule.talkedKaitArena", true)
+		playAnimation(StageScene.Duo, "stand", {npc="kait"})
+		
+		saynn("[say=pc]Alright. I might join you.[/say]")
+		
+		#saynn("You help her to get up. The crowd begins to boo after your decision.")
+		saynn("The feline helps you to get up. The crowd begins to boo after her decision.")
+		
+		saynn("[say=kait]Good choice. I guess I don't have to humiliate you then, hah. Meet me near the arena.[/say]")
+		
+		saynn("[say=pc]Feeling sad for the audience?[/say]")
+		
+		saynn("[say=kait]Feeling sad that I didn't get to mark you~.[/say]")
+		
+		saynn("She lets you be and climbs over the fence.")
+		
+		addButton("Continue", "Time to leave", "endthescene")
 
 	if(state == "get_pissed_on"):
 		# (piss version)
@@ -67,14 +118,15 @@ func _run():
 			bodyState={exposedCrotch=true},
 			npcBodyState={},
 		})
+		
+		if(!isOnKaitRoute):
+			saynn("You shake your head at the offered hand and try to get up yourself.")
 
-		saynn("You shake your head at the offered hand and try to get up yourself.")
+			saynn("[say=pc]Nah, I can’t trust a lilac.[/say]")
 
-		saynn("[say=pc]Nah, I can’t trust a lilac.[/say]")
+			saynn("Just after saying that, you feel another knee being shoved into your chest. Ow. You fall onto your back again before you get a chance to stand up.")
 
-		saynn("Just after saying that, you feel another knee being shoved into your chest. Ow. You fall onto your back again before you get a chance to stand up.")
-
-		saynn("[say=kait]Where you do think you’re going.[/say]")
+			saynn("[say=kait]Where you do think you’re going.[/say]")
 
 		saynn("While you are busy squirming from pain and panting heavily, the lilac cat swiftly pulls down her shorts, exposing her cute black panties. She then stands above your head and swiftly kneels, using her powerful knees to pin your arms to the floor. You look up and see the relief of her pussy covered by a layer of thin black cloth from her panties.")
 
@@ -109,13 +161,14 @@ func _run():
 			npcBodyState={},
 		})
 		
-		saynn("You shake your head at the offered hand and try to get up yourself.")
+		if(!isOnKaitRoute):
+			saynn("You shake your head at the offered hand and try to get up yourself.")
 
-		saynn("[say=pc]Nah, I can’t trust a lilac.[/say]")
+			saynn("[say=pc]Nah, I can’t trust a lilac.[/say]")
 
-		saynn("Just after saying that, you feel another knee being shoved into your chest. Ow. You fall onto your back again before you get a chance to stand up.")
+			saynn("Just after saying that, you feel another knee being shoved into your chest. Ow. You fall onto your back again before you get a chance to stand up.")
 
-		saynn("[say=kait]Where you do think you’re going.[/say]")
+			saynn("[say=kait]Where you do think you’re going.[/say]")
 
 		saynn("While you are busy squirming from pain and panting heavily, the lilac cat swiftly pulls down her shorts, exposing her cute black panties. She then stands above your head and swiftly kneels, using her powerful knees to pin your arms to the floor. You look up and see the relief of her pussy covered by a layer of thin black cloth from her panties.")
 

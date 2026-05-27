@@ -8,45 +8,103 @@ func _run():
 		addCharacter("kait")
 		playAnimation(StageScene.Duo, "stand", {npc="kait", npcAction="kneel"})
 
+	var didCommit:bool = GM.main.hasCommittedToMainRoute()
+	var isOnKaitRoute:bool = getFlag("KaitModule.joinedTeam", false)
+
 	if(state == ""):
-		saynn("Kait cries out and falls down to her knees, too exhausted to continue fighting. She presses her hands into the ground and pants heavily. As you try to get closer, she recoils back into one of the fences.")
+		if(isOnKaitRoute):
+			saynn("Kait cries out and falls down to her knees, too exhausted to continue fighting. She presses her hands into the ground and pants heavily. As you try to get closer, she recoils back into one of the fences.")
+			
+			saynn("[say=kait]Ah.. I lost.[/say]")
+			
+			saynn("You stand where you are and decide to let her speak.")
+			
+			saynn("[say=kait]What are you gonna do to me, your fellow teammate?..[/say]")
+			
+			saynn("[say=pc]You know how this arena works.[/say]")
+			
+			saynn("[say=kait]I do.. well.. do your worst then. I can take it.[/say]")
+		else:
+			saynn("Kait cries out and falls down to her knees, too exhausted to continue fighting. She presses her hands into the ground and pants heavily. As you try to get closer, she recoils back into one of the fences.")
 
-		saynn("[say=kait]Wait!..[/say]")
+			saynn("[say=kait]Wait!..[/say]")
 
-		saynn("You stand where you are and decide to let her speak.")
+			saynn("You stand where you are and decide to let her speak.")
 
-		saynn("[say=kait]I’m Kait. I’m building a team.[/say]")
+			saynn("[say=kait]I’m Kait. I’m building a team.[/say]")
 
-		saynn("[say=pc]And why should I care?[/say]")
+			saynn("[say=pc]And why should I care?[/say]")
 
-		saynn("[say=kait]A team to escape from this rathole. I need people that can help me. People that can fight.. Like you![/say]")
+			saynn("[say=kait]A team to escape from this rathole. I need people that can help me. People that can fight.. Like you![/say]")
 
-		saynn("Hm. Escaping, huh. That could be your chance. Although. She is just a lilac. What can a single lilac do. The crowd starts to notice the lack of actions and boos.")
+			if(didCommit && !isOnKaitRoute):
+				saynn("[say=pc]Too bad. I've already made up my mind.[/say]")
+				
+				saynn("[say=kait]Really? Fuck.. whatever.. do your worst then..[/say]")
+			else:
+				saynn("Hm. Escaping, huh. That could be your chance. Although. She is just a lilac. What can a single lilac do. The crowd starts to notice the lack of actions and boos.")
 
-		saynn("[say=pc]And what if I say no?[/say]")
+				saynn("[say=pc]And what if I say no?[/say]")
 
-		saynn("Kait tilts her head down and then shrugs a second later.")
+				saynn("Kait tilts her head down and then shrugs a second later.")
 
-		saynn("[say=kait]Then just don’t stand in a way?.. I don’t wanna fight you, I wanna fight them, the corrupt evil fuckers that rule over us like we’re slaves.[/say]")
-
-		addDisabledButton("Join", "Begin the Team Escape route (not done, sorry)")
+				saynn("[say=kait]Then just don’t stand in a way?.. I don’t wanna fight you, I wanna fight them, the corrupt evil fuckers that rule over us like we’re slaves.[/say]")
+				
+		if(!didCommit):
+			addButton("Join", "(Dom route) Agree to her proposal", "doAgree")
+		elif(!isOnKaitRoute):
+			addDisabledButton("Join", "You have already commited to another main route, sorry.")
 		addButton("Just leave", "You don’t feel like doing anything with her", "just_leave")
 		addButton("Beat her up", "(brutal noncon) She is just a lilac slut, no need to listen to her", "beat_her_up")
 		GM.ES.triggerRun("ArenaFighterPCWon", ["kait"])
 
+	if(state == "doAgree"):
+		setFlag("KaitModule.gotMetByKait", true)
+		setFlag("KaitModule.talkedKaitArena", true)
+		playAnimation(StageScene.Duo, "stand", {npc="kait"})
+		
+		saynn("[say=pc]Alright. I might join you.[/say]")
+		
+		saynn("You help her to get up. The crowd begins to boo after your decision.")
+		
+		saynn("[say=kait]Good choice. Thanks for not.. uh.. doing anything bad to me.[/say]")
+		
+		saynn("[say=pc]You're very welcome.[/say]")
+		
+		saynn("[say=kait]Meet me near the arena. And then we can begin.[/say]")
+		
+		saynn("You watch her climb over the fence.")
+		
+		addButton("Continue", "Time to leave", "endthescene")
+
 	if(state == "just_leave"):
-		saynn("[say=pc]Your idea seems pretty bad. Look around. It’s a fortress. Just learn to live here.[/say]")
+		if(!isOnKaitRoute):
+			saynn("[say=pc]Your idea seems pretty bad. Look around. It’s a fortress. Just learn to live here.[/say]")
 
-		saynn("Kait growls and shows off her fangs.")
+			saynn("Kait growls and shows off her fangs.")
 
-		saynn("[say=kait]What if I don’t wanna? I’m not gonna give up no matter what.[/say]")
+			saynn("[say=kait]What if I don’t wanna? I’m not gonna give up no matter what.[/say]")
 
-		saynn("[say=pc]Well then you're gonna suffer here.[/say]")
+			saynn("[say=pc]Well then you're gonna suffer here.[/say]")
 
-		saynn("[say=kait]I’m suffering every single day of my life. But at least I’m fighting to try and change that.[/say]")
+			saynn("[say=kait]I’m suffering every single day of my life. But at least I’m fighting to try and change that.[/say]")
 
-		saynn("Now it’s your time to shrug. You do that and walk past her, proceeding to get over the fence. She tracks you with her gaze, getting slightly startled when you walk past.")
-
+			saynn("Now it’s your time to shrug. You do that and walk past her, proceeding to get over the fence. She tracks you with her gaze, getting slightly startled when you walk past.")
+		else:
+			saynn("You reach your hand out towards Kait.")
+			
+			saynn("[say=pc]Good try, Kait.[/say]")
+			
+			saynn("She blinks.. but then uses your hand to help her get up.")
+			
+			saynn("[say=kait]I totally expected you to fuck me up or something.[/say]")
+			
+			saynn("[say=pc]Expected or wished?[/say]")
+			
+			saynn("[say=kait]Pff![/say]")
+			
+			saynn("You watch her climb over the fence. The audience doesn't seem too happy.. but who cares.")
+		
 		# (scene ends)
 		addButton("Continue", "Time to leave", "endthescene")
 

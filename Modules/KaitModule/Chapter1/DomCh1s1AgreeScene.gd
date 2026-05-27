@@ -8,6 +8,7 @@ func _init():
 
 func _run():
 	if(state == ""):
+		GM.pc.setLocation("fight_announcer")
 		addCharacter("kait")
 		playAnimation(StageScene.Duo, "stand", {npc="kait"})
 		saynn("[say=pc]I think I might just accept your offer.[/say]")

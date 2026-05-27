@@ -169,6 +169,18 @@ static func markFighterAsDefeated(fighterID):
 	defeated[fighterID] = true
 	GM.main.setFlag("FightClubModule.FightClubDefeatedFighters", defeated)
 
+func getAmountFightersWon() -> int:
+	var ranks = FightClubRank.getAll()
+	var result:int = 0
+	for i in ranks.size():
+		var rankID = ranks[-i-1]
+		var fighters = GlobalRegistry.getFightClubFightersIDsByRank(rankID)
+		for i2 in fighters.size():
+			var fighterID = fighters[-i2-1]
+			if(isFighterDefeated(fighterID)):
+				result += 1
+	return result
+
 func isReadyToFightAvy():
 	var ranks = FightClubRank.getAll()
 	
