@@ -5,8 +5,10 @@ func _init():
 
 func _run():
 	if(state == ""):
+		aimCameraAndSetLocName("hideout_middle")
 		addCharacter("rahi")
 		addCharacter("kait")
+		setFlag("KaitModule.caughtRahi", true)
 		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="hurt", pc="kait", npcBodyState={leashedBy="kait"}})
 		saynn("[say=kait]You brought her in? Perfect.[/say]")
 
@@ -178,7 +180,9 @@ func _run():
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
+		GM.pc.setLocation("hideout_near_break_room")
 		endScene()
+		GM.main.RCS.setCurrent("Rahi")
 		return
 
 	if(_action == "do_assert_yourself"):
@@ -189,5 +193,6 @@ func _react(_action: String, _args):
 
 	if(_action == "explain_mechanic"):
 		processTime(3*60)
+		addMessage("Task updated!")
 
 	setState(_action)

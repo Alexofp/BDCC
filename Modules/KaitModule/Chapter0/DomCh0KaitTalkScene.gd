@@ -15,6 +15,9 @@ func _run():
 		addCharacter("kait")
 		playAnimation(StageScene.Duo, "stand", {npc="kait"})
 		canJoinKait = (!GM.main.hasCommittedToMainRoute() && !getFlag("KaitModule.joinedTeam") && GlobalRegistry.getModule("FightClubModule").getAmountFightersWon() >= 3)
+		
+		saynn("You're standing near a snow leopard named Kait, in the corner of the Underground.")
+		
 		if (canJoinKait):
 			saynn("[say=kait]I saw what you did at the arena! I'm impressed. Wanna join me?[/say]")
 

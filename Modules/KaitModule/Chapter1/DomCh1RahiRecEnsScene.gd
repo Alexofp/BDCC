@@ -113,7 +113,7 @@ func _react(_action: String, _args):
 
 	if(_action == "kait_finds"):
 		processTime(3*60)
-		endScene()
 		runScene("DomCh1RahiBreakIntroScene")
+		endScene()
 
 	setState(_action)

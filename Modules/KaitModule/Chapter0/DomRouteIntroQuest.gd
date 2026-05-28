@@ -20,6 +20,15 @@ func getProgress():
 		if(amountWon >= 3 && !getFlag("KaitModule.joinedTeam")):
 			result.append("Kait is ready to offer you to join the team! Go talk with her.")
 	
+	if(getFlag("KaitModule.joinedTeam")):
+		if(GlobalRegistry.getModule("RahiModule").isInSlavery()):
+			result.append("Go find Rahi and recruit her! She is probably in your cell.")
+		else:
+			result.append("Go find Rahi and recruit her! She is probably somewhere near the stocks.")
+	
+	if(getFlag("KaitModule.caughtRahi")):
+		result.append("You got Rahi! Now you just need to recruit her.")
+	
 	return result
 
 func isVisible():
@@ -30,7 +39,7 @@ func isVisible():
 	return getFlag("KaitModule.gotMetByKait") || getFlag("KaitModule.talkedKaitArena")
 
 func isCompleted():
-	return getFlag("KaitModule.joinedTeam")
+	return getFlag("KaitModule.introCompleted")
 
 func isMainQuest():
 	return true

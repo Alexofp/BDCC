@@ -15,12 +15,16 @@ func run(_triggerID, _args):
 	var hasHideout:bool = getModule("KaitModule").hasHideoutAccess()
 	if(!hasHideout):
 		return
+	var isDoingRec:bool = GM.main.RCS.hasCurrent()
 	
 	var theRoomID:String = _args[0]
 	
 	if(theRoomID == "hideout_enter"):
-		addButton("Exit hideout", "Exit your hideout!", "go", ["fight_announcer"])
-		addButton("Exit arena", "Exit your hideout and then also exit the arena! This is faster.", "go", ["gym_secret"])
+		if(isDoingRec):
+			addDisabledButton("Exit hideout", "Can't exit the hideout until you complete the recruitment!")
+		else:
+			addButton("Exit hideout", "Exit your hideout!", "go", ["fight_announcer"])
+			addButton("Exit arena", "Exit your hideout and then also exit the arena! This is faster.", "go", ["gym_secret"])
 	elif(theRoomID == "fight_announcer" || theRoomID == "gym_secret"):
 		addButton("Hideout", "Enter the hideout", "go", ["hideout_enter"])
 	

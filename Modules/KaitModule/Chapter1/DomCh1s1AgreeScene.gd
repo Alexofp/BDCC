@@ -442,7 +442,9 @@ func _react(_action: String, _args):
 
 	if(_action == "fake_out"):
 		processTime(5*60)
-		addMessage("Task added!")
+		setFlag("KaitModule.joinedTeam", true)
+		addMessage("Task updated!")
+		GM.main.applyAllWorldEdits()
 
 	setState(_action)
 

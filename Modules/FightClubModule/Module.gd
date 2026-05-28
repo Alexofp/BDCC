@@ -29,6 +29,15 @@ func getFlags():
 		"CanBuySlaveCollars": flag(FlagType.Bool),
 	}
 
+func resetMainRoute():
+	GM.main.clearFlag("FightClubModule.BulldogFirstTimeHappened")
+	GM.main.clearFlag("FightClubModule.BulldogSeduced")
+	GM.main.clearFlag("FightClubModule.BulldogBeatenUp")
+	GM.main.clearFlag("FightClubModule.BulldogBypassed")
+	#GM.main.clearFlag("FightClubModule.AnnouncerIntroduced")
+	#GM.main.clearFlag("FightClubModule.AnnouncerAskedAboutShop")
+	#GM.main.clearFlag("FightClubModule.AvyIntroduced")
+
 func _init():
 	id = "FightClubModule"
 	author = "Rahi"

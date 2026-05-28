@@ -5,6 +5,8 @@ func getFlags():
 		"gotMetByKait": flag(FlagType.Bool), # We met Kait and got told to find her in the arena
 		"talkedKaitArena": flag(FlagType.Bool), # We have talked with Kait near the arena
 		"joinedTeam": flag(FlagType.Bool), # PC joined Kait's team, we have committed to the dom main route
+		"caughtRahi": flag(FlagType.Bool), # Did we catch Rahi and bring her for recruiting
+		"introCompleted": flag(FlagType.Bool), # Did we recruit Rahi and got access to everything now
 		
 		"m1gotpills": flag(FlagType.Bool), # mission 1, did we receive painkillers from Avy? Not a mission flag because we only wanna receive them once
 	}
@@ -35,9 +37,14 @@ func _init():
 		"res://Modules/KaitModule/Chapter0/KaitMeetOfferEvent.gd",
 		"res://Modules/KaitModule/Hideout/EnterHideoutEvent.gd",
 		"res://Modules/KaitModule/Chapter0/DomCh0KaitTalkEvent.gd",
+		"res://Modules/KaitModule/Chapter1/DomCh1RahiRecEvent.gd",
+		"res://Modules/KaitModule/Hideout/HideoutFunctionsEvent.gd",
 	]
 	quests = [
 		"res://Modules/KaitModule/Chapter0/DomRouteIntroQuest.gd",
+	]
+	worldEdits = [
+		"res://Modules/KaitModule/Chapter0/KaitWorldEdit.gd",
 	]
 
 func resetFlagsOnNewDay():
@@ -56,7 +63,7 @@ func incAvyLove():
 	pass
 
 func hasHideoutAccess() -> bool:
-	if(!getFlag("KaitModule.joinedTeam")):
+	if(!getFlag("KaitModule.introCompleted")):
 		return false
 	return true
 

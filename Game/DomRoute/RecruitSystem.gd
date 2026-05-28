@@ -34,6 +34,11 @@ func getRecruit():
 		return null
 	return recruits[currentID]
 
+func getRecruitName() -> String:
+	if(!hasCurrent()):
+		return "Unknown"
+	return GlobalRegistry.getCharacter(recruits[currentID].charID).getName()
+
 func isReplayMode() -> bool:
 	return replayMode
 

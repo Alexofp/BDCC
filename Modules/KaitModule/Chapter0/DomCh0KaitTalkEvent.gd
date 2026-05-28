@@ -29,9 +29,11 @@ func onButton(_method, _args):
 			setFlag("KaitModule.talkedKaitArena", true)
 			if(getFlag("KaitModule.gotMetByKait")):
 				runScene("DomCh0ArenaApproach")
+				addMessage("Task updated!")
 			else:
 				getFlag("KaitModule.gotMetByKait", true) # ehh
 				runScene("DomCh0ArenaApproachFirst")
+				addMessage("New task added!")
 			return
 		
 		runScene("DomCh0KaitTalkScene")
