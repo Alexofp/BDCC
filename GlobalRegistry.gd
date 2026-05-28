@@ -327,8 +327,8 @@ func getModsFolder() -> String:
 	if(OS.get_name() == "Android"):
 		#var permissions: Array = OS.get_granted_permissions() #for Godot 3 branch
 		#if permissions.has("android.permission.READ_EXTERNAL_STORAGE"):
-		var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
-		var finalDir = externalDir.plus_file("BDCCMods")
+		var externalDir:String = "user://"
+		var finalDir = externalDir.plus_file("mods")
 		modsFolder = finalDir
 		var _ok = Directory.new().make_dir(modsFolder)
 	return modsFolder
@@ -338,8 +338,8 @@ func getDatapacksFolder() -> String:
 	if(OS.get_name() == "Android"):
 		#var permissions: Array = OS.get_granted_permissions() #for Godot 3 branch
 		#if permissions.has("android.permission.READ_EXTERNAL_STORAGE"):
-		var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
-		var finalDir = externalDir.plus_file("BDCCMods/Datapacks")
+		var externalDir:String = "user://"
+		var finalDir = externalDir.plus_file("datapacks")
 		modsFolder = finalDir
 		var _ok = Directory.new().make_dir(modsFolder)
 	return modsFolder
@@ -2248,8 +2248,8 @@ func getSkinsAllKeys():
 func findCustomSkins():
 	var skinsFolder = "user://custom_skins"
 	if(OS.get_name() == "Android"):
-		var externalDir:String = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
-		var finalDir = externalDir.plus_file("BDCCMods/custom_skins")
+		var externalDir:String = "user://"
+		var finalDir = externalDir.plus_file("custom_skins")
 		skinsFolder = finalDir
 	
 	for skinPath in Util.getFilesInFolder(skinsFolder):
