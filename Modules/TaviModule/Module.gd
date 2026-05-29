@@ -471,3 +471,4 @@ func resetMainRoute():
 	resetAllFlagsWithExceptions({
 		
 	})
+	GlobalRegistry.getCharacter("tavi").updateAppearance()

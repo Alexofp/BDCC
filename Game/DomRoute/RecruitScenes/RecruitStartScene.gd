@@ -162,7 +162,8 @@ func _run():
 		else:
 			playAnimation(StageScene.Solo, "stand")
 		aimCameraAndSetLocName("hideout_near_break_room")
-		saynn("The plan is completed.")
+		sayn("The plan is completed.")
+		saynn("Difficulty: "+RecruitDifficulty.getName(_recruit.difficulty)+" ("+RecruitDifficulty.getDifficultyText(_recruit.difficulty)+")")
 		
 		saynn(_recruit.getColorStringForChoices(lastContext.choiceIDs))
 		
