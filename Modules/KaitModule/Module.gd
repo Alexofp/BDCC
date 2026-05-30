@@ -2,8 +2,10 @@ extends Module
 
 func getFlags():
 	return {
+		"bredByAviArena": flag(FlagType.Bool), # Did player watch Kait get bred by Avy in the arena intro scene
 		"gotMetByKait": flag(FlagType.Bool), # We met Kait and got told to find her in the arena
 		"talkedKaitArena": flag(FlagType.Bool), # We have talked with Kait near the arena
+		"toldSaved": flag(FlagType.Bool), # The player has told Kait that they have saved her from getting bred by Avy
 		"joinedTeam": flag(FlagType.Bool), # PC joined Kait's team, we have committed to the dom main route
 		"caughtRahi": flag(FlagType.Bool), # Did we catch Rahi and bring her for recruiting
 		"introCompleted": flag(FlagType.Bool), # Did we recruit Rahi and got access to everything now

@@ -14,11 +14,11 @@ func _run():
 	if(state == ""):
 		addCharacter("kait")
 		playAnimation(StageScene.Duo, "stand", {npc="kait"})
-		canJoinKait = (!GM.main.hasCommittedToMainRoute() && !getFlag("KaitModule.joinedTeam") && GlobalRegistry.getModule("FightClubModule").getAmountFightersWon() >= 3)
-		
-		saynn("You're standing near a snow leopard named Kait, in the corner of the Underground.")
-		
-		if (canJoinKait):
+		canJoinKait = (!GM.main.hasCommittedToMainRoute() && !getFlag("KaitModule.joinedTeam") && (GlobalRegistry.getModule("FightClubModule").getAmountFightersWon() >= 3 || getFlag("KaitModule.toldSaved")))
+		if (getFlag("KaitModule.toldSaved")):
+			saynn("[say=kait]Thank you for saving my butt. Wanna join me?[/say]")
+
+		elif (canJoinKait):
 			saynn("[say=kait]I saw what you did at the arena! I'm impressed. Wanna join me?[/say]")
 
 		else:
@@ -71,6 +71,50 @@ func _run():
 		addButton("Arena", "Ask about this place", "ask_arena")
 		addButton("Crimes", "Ask her what did she do", "ask_crimes")
 		addButton("Freedom", "Ask her what she is gonna do after", "ask_freedom")
+		if (!getFlag("KaitModule.bredByAviArena") && !getFlag("KaitModule.toldSaved")):
+			addButton("Avy..", "Tell Kait that it was you who saved her from getting fucked by Avy", "ask_avy")
+	if(state == "ask_avy"):
+		saynn("[say=pc]I wanted to tell you something.[/say]")
+
+		saynn("[say=kait]Yeah?[/say]")
+
+		saynn("[say=pc]Back then.. when you were fighting Avy.. it was me.[/say]")
+
+		saynn("She raises a brow.")
+
+		saynn("[say=kait]You.. you're saying that it was you who distracted her?[/say]")
+
+		saynn("You nod.")
+
+		saynn("[say=kait]Oh. Hah. Hm..[/say]")
+
+		saynn("A rush of different thoughts hit her all at once.")
+
+		saynn("[say=kait]Part of me wishes that you didn't do that.[/say]")
+
+		saynn("[say=pc]You'd rather be fucked raw by Avy?[/say]")
+
+		saynn("[say=kait]Well.. not really. But I knew what I was signing up for. And this is only a small part of me that wishes that. The other part is really happy.[/say]")
+
+		saynn("She smiles cutely.")
+
+		saynn("[say=kait]So yeah.. Thank you.[/say]")
+
+		saynn("You nod.")
+
+		saynn("[say=pc]You knew her weak spot.[/say]")
+
+		saynn("[say=kait]Pfft, of course I did. That bitch loves bragging about her cock.[/say]")
+
+		saynn("She giggles.")
+
+		saynn("[say=kait]You know what.. I think I'd love to have someone like you in the team. I'm offering you to join me. I need help bringing this prison down to its knees.[/say]")
+
+		saynn("Looks like you don't have to fight in the arena anymore!")
+
+		saynn("[say=pc]I will think about it.[/say]")
+
+		addButton("Continue", "See what happens next", "talk_menu")
 	if(state == "ask_crimes"):
 		saynn("[say=pc]What did you do? To end up in this place?[/say]")
 
@@ -179,6 +223,10 @@ func _react(_action: String, _args):
 		endScene()
 		runScene("DomCh1s1AgreeScene")
 		return
+
+	if(_action == "ask_avy"):
+		setFlag("KaitModule.toldSaved", true)
+		addMessage("You can now join Kait's team!")
 
 	setState(_action)
 

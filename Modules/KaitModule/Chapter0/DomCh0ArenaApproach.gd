@@ -7,17 +7,39 @@ func _run():
 	if(state == ""):
 		addCharacter("kait")
 		playAnimation(StageScene.Duo, "stand", {npc="kait"})
-		saynn("You approach a familiar snow leopard that's wearing lilac colors.")
+		saynn("You approach a familiar snow leopard that's wearing lilac colors. Looks like she is wearing a fresh uniform actually.. makes sense. She looks a bit beat up still.")
 
-		saynn("[say=pc]Hey there. I managed to find you.[/say]")
+		saynn("[say=pc]Hey there. I managed to find you. That fight was rough.[/say]")
 
 		saynn("Her round ears perk towards your voice.")
 
-		saynn("[say=kait]Oh, you did it. Nice.[/say]")
+		if (getFlag("KaitModule.bredByAviArena")):
+			saynn("[say=kait]Yeah.. Avy.. that stupid bitch. At least I cleaned her cum out as fast as I could.[/say]")
+
+			saynn("[say=pc]Does that happen often?[/say]")
+
+			saynn("[say=kait]That was my first loss. I knew what I signed up for I guess.[/say]")
+
+			saynn("First loss.. but already a big one.")
+
+		else:
+			saynn("[say=kait]Yeah.. Avy.. that stupid bitch. At least I didn't get fucked, that would have been humiliating. Some kind soul decided to save me.[/say]")
+
+			saynn("You decide not to tell her who that soul was.. not yet at least.")
+
+			saynn("[say=pc]Does that happen often?[/say]")
+
+			saynn("[say=kait]Getting saved? Not really. Usually the crowd only makes it worse. I knew what I signed up for I guess.[/say]")
+
+			saynn("The crowd wants a good show.")
+
+		saynn("[say=pc]But yeah.. here I am.[/say]")
+
+		saynn("[say=kait]You did it. Nice.[/say]")
 
 		saynn("[say=pc]I did your test.[/say]")
 
-		saynn("Kait offers you a cute smile.")
+		saynn("Kait offers you a cute smile. Her bruises make her hiss soon after.")
 
 		saynn("[say=kait]Good job.[/say]")
 
@@ -41,7 +63,7 @@ func _run():
 
 		saynn("Right.")
 
-		saynn("[say=kait]If you win a few fights, that will be enough for me.[/say]")
+		saynn("[say=kait]Follow my steps. If you win a few fights, that will be enough for me.[/say]")
 
 		saynn("[say=pc]I have to fight in the arena?[/say]")
 

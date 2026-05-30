@@ -7,9 +7,33 @@ func _run():
 	if(state == ""):
 		addCharacter("kait")
 		playAnimation(StageScene.Duo, "stand", {npc="kait"})
-		saynn("You approach a snow leopard that's wearing lilac colors. She is not leaning against any walls.. so she is probably not a prostitute.. probably.")
+		saynn("You approach a snow leopard that's wearing lilac colors.. a fresh uniform actually. She is not leaning against any walls.. so she is probably not a prostitute.. probably.")
 
-		saynn("[say=pc]Hey there. What are doing?[/say]")
+		saynn("Oh yeah, you remember her. That's the snow leopard that was fighting at the arena when you arrived. She looks a bit beat up.. but at least she is not naked anymore.")
+
+		saynn("[say=pc]Hey there. That fight was rough.[/say]")
+
+		if (getFlag("KaitModule.bredByAviArena")):
+			saynn("[say=kait]Yeah.. Avy.. that stupid bitch. At least I cleaned her cum out as fast as I could.[/say]")
+
+			saynn("[say=pc]Does that happen often?[/say]")
+
+			saynn("[say=kait]That was my first loss. I knew what I signed up for I guess.[/say]")
+
+			saynn("First loss.. but already a big one.")
+
+		else:
+			saynn("[say=kait]Yeah.. Avy.. that stupid bitch. At least I didn't get fucked, that would have been humiliating. Some kind soul decided to save me.[/say]")
+
+			saynn("You decide not to tell her who that soul was.. not yet at least.")
+
+			saynn("[say=pc]Does that happen often?[/say]")
+
+			saynn("[say=kait]Getting saved? Not really. Usually the crowd only makes it worse. I knew what I signed up for I guess.[/say]")
+
+			saynn("The crowd wants a good show.")
+
+		saynn("[say=pc]What are you doing now?[/say]")
 
 		saynn("[say=kait]Me? Just resting before the next fight. I gotta get higher on the arena's leaderboard.[/say]")
 
@@ -17,7 +41,7 @@ func _run():
 
 		saynn("[say=pc]Just for fun?[/say]")
 
-		saynn("[say=kait]That's how I'm training. I might just look like a little weak lilac.. but I can punch, you know?[/say]")
+		saynn("[say=kait]That's how I'm training. I might just look like a little weak lilac.. but I can punch, you know? One day I will beat that whore.[/say]")
 
 		saynn("She is quite enthusiastic, you gotta give her that.")
 
