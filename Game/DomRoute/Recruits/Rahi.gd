@@ -5,7 +5,7 @@ func _init():
 	charID = "rahi"
 	difficulty = RecruitDifficulty.VeryEasy
 	talkScene = "RahiRecTalk"
-	nextStoryScene = "DomCh1RahiBreakAfterScene"
+	nextStoryScene = "DomM0RahiBreakAfterScene"
 	choices = [
 		{
 			id = "tone",

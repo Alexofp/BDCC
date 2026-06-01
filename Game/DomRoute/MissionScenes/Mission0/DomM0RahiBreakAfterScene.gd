@@ -1,7 +1,7 @@
 extends SceneBase
 
 func _init():
-	sceneID = "DomCh1RahiBreakAfterScene"
+	sceneID = "DomM0RahiBreakAfterScene"
 
 func _run():
 	if(state == ""):
@@ -197,7 +197,8 @@ func _react(_action: String, _args):
 	if(_action == "after_all"):
 		processTime(10*60)
 		setFlag("KaitModule.introCompleted", true)
-		addMessage("Task completed!")
-		addExperienceToPlayer(100)
-
+		#addMessage("Task completed!")
+		#addExperienceToPlayer(100)
+		GM.main.MS.completeMission()
+	
 	setState(_action)

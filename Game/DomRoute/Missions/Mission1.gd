@@ -19,6 +19,26 @@ func _init():
 		"helped": flag(FlagType.Text), # "avy", "kait"
 	}
 	
+	decisions = {
+		"helped": {
+			name = "Helped Kait",
+			outcomes = {
+				"avy": {
+					text = "No",
+					effects = [
+						DECISION_EFFECT_AVY_LOVE,
+					],
+				},
+				"kait": {
+					text = "Yes",
+					effects = [
+						DECISION_EFFECT_KAIT_LOVE,
+					],
+				},
+			},
+		}
+	}
+	
 	rewardExp = 50
 	rewardCredits = 3
 

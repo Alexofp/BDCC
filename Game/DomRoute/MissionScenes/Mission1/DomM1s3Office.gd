@@ -501,10 +501,12 @@ func _react(_action: String, _args):
 		processTime(3*60)
 
 	if(_action == "kait_gets_rekt"):
-		GM.main.MS.setFlag("helped", "avy")
+		#GM.main.MS.setFlag("helped", "avy")
+		GM.main.MS.setDecision("helped", "avy")
 
 	if(_action == "kait_gets_saved"):
-		GM.main.MS.setFlag("helped", "kait")
+		#GM.main.MS.setFlag("helped", "kait")
+		GM.main.MS.setDecision("helped", "kait")
 
 	if(_action == "kait_dodges_nova"):
 		processTime(3*60)

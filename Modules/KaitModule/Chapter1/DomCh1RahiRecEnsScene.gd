@@ -113,7 +113,7 @@ func _react(_action: String, _args):
 
 	if(_action == "kait_finds"):
 		processTime(3*60)
-		runScene("DomCh1RahiBreakIntroScene")
+		GM.main.MS.startMission("Mission0", true, false)
 		endScene()
 
 	setState(_action)

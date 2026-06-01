@@ -9,6 +9,7 @@ var startScene:String = "MISSING_MISSION_SCENE"
 var requiredMissions:Array = []
 var startLoc:String = "hideout_hq" # Player's starting loc
 var sideMission:bool = false
+var addAsAQuest:bool = true
 var rewardExp:int = 0
 var rewardCredits:int = 0
 var rewardItems:Array = []
@@ -16,7 +17,13 @@ var rewardExtra:String = ""
 var rewardRepeatRate:float = 0.1
 
 var flags:Dictionary
-	
+var decisions:Dictionary
+
+const DECISION_EFFECT_AVY_LOVE := 0
+const DECISION_EFFECT_KAIT_LOVE := 1
+const DECISION_EFFECT_AVY_OBEDIENCE := 2
+const DECISION_EFFECT_KAIT_OBEDIENCE := 3
+
 func isVisible() -> bool:
 	return true
 

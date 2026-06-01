@@ -1,7 +1,7 @@
 extends SceneBase
 
 func _init():
-	sceneID = "DomCh1RahiBreakIntroScene"
+	sceneID = "DomM0RahiBreakIntroScene"
 
 func _run():
 	if(state == ""):
@@ -186,10 +186,12 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "do_assert_yourself"):
-		getModule("KaitModule").incKaitSubmission()
+		#getModule("KaitModule").incKaitSubmission()
+		GM.main.MS.setDecision("kait", "assert")
 
 	if(_action == "do_let_her_keep_it"):
-		getModule("KaitModule").incKaitLove()
+		#getModule("KaitModule").incKaitLove()
+		GM.main.MS.setDecision("kait", "allow")
 
 	if(_action == "explain_mechanic"):
 		processTime(3*60)

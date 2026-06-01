@@ -2954,9 +2954,10 @@ func registerMission(path: String):
 	var object = loadedClass.new()
 	
 	missions[object.id] = object
-	var newQuest := MissionQuestProxy.new()
-	newQuest.mission = object
-	missionQuests[object.id] = newQuest
+	if(object.addAsAQuest):
+		var newQuest := MissionQuestProxy.new()
+		newQuest.mission = object
+		missionQuests[object.id] = newQuest
 
 func registerMissionFolder(folder: String):
 	var scripts = getScriptsInFoldersRecursive(folder)

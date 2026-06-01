@@ -34,6 +34,26 @@ func getAllPossibleSideMissions() -> Array:
 			result.append(theMission)
 	return result
 
+func getAllCompletedMainMissions() -> Array:
+	var result:Array = []
+	for missionID in completed:
+		if(!GlobalRegistry.missions.has(missionID)):
+			continue
+		var theMission = GlobalRegistry.missions[missionID]
+		if(!theMission.isSideMission()):
+			result.append(theMission)
+	return result
+
+func getAllCompletedSideMissions() -> Array:
+	var result:Array = []
+	for missionID in completed:
+		if(!GlobalRegistry.missions.has(missionID)):
+			continue
+		var theMission = GlobalRegistry.missions[missionID]
+		if(theMission.isSideMission()):
+			result.append(theMission)
+	return result
+
 func getMissionStats() -> Array: # Check for secret missions?
 	var totalMissionAmount:int = 0
 	var completedMissionAmount:int = 0
@@ -67,7 +87,7 @@ func canStartAnyMission() -> bool:
 		return false
 	return true
 
-func startMission(_id:String, _runScene:bool = true):
+func startMission(_id:String, _runScene:bool = true, _announceIt:bool = true):
 	if(!current.empty()):
 		assert(false, "TRYING TO START A MISSION BUT WE'RE ALREADY ARE ON ONE!")
 		return
@@ -86,7 +106,8 @@ func startMission(_id:String, _runScene:bool = true):
 	theMission.onMissionStart()
 	if(_runScene):
 		GM.main.runScene(theMission.getStartScene())
-	GM.main.addMessage("Task accepted!")
+	if(_announceIt):
+		GM.main.addMessage("Task accepted!")
 	pcPain = GM.pc.getPain()
 	pcLust = GM.pc.getLust()
 	pcStamina = GM.pc.getMaxStamina() - GM.pc.getStamina()
@@ -167,6 +188,13 @@ func getFlag(_flagID:String, _default = null):
 		return _default
 	return getSpecificFlag(current, _flagID, _default)
 
+func setDecision(_flagID:String, _value):
+	if(current.empty()):
+		Log.printerr("TRYING TO SET A MISSION DECISION WHILE NOT ON A MISSION.")
+		return
+	#var theMission = getMission()
+	setFlag(_flagID, _value)
+
 func isDoingMission(_id:String) -> bool:
 	return current == _id
 
@@ -175,6 +203,72 @@ func getMission():
 		return null
 	return GlobalRegistry.getMission(current)
 
+const DECISION_EFFECT_AVY_LOVE := 0
+const DECISION_EFFECT_KAIT_LOVE := 1
+const DECISION_EFFECT_AVY_OBEDIENCE := 2
+const DECISION_EFFECT_KAIT_OBEDIENCE := 3
+
+func getKaitLove() -> int:
+	return getEffectValue(DECISION_EFFECT_KAIT_LOVE)
+
+func getKaitObedience() -> int:
+	return getEffectValue(DECISION_EFFECT_KAIT_OBEDIENCE)
+
+func getAvyLove() -> int:
+	return getEffectValue(DECISION_EFFECT_AVY_LOVE)
+
+func getAvyObedience() -> int:
+	return getEffectValue(DECISION_EFFECT_AVY_OBEDIENCE)
+
+func getEffectValue(_effectID:int) -> int:
+	var result:int = 0
+	
+	for missionID in completed:
+		var theMission = GlobalRegistry.getMission(missionID)
+		if(!theMission):
+			continue
+		for theFlagID in theMission.decisions:
+			var theDecision:Dictionary = theMission.decisions[theFlagID]
+			var theOutcomes:Dictionary = theDecision.get("outcomes", {})
+			var theCurVal = getSpecificFlag(missionID, theFlagID, "")
+			if(!theOutcomes.has(theCurVal)):
+				continue
+			var theOutcome:Dictionary = theOutcomes[theCurVal]
+			
+			for theEffect in theOutcome["effects"]:
+				if(theEffect == _effectID):
+					result += 1
+	
+	return result
+
+func getDecisionsStrings(_missionID:String) -> Array:
+	#if(!isCompleted(_missionID)):
+	#	return []
+	var theMission = GlobalRegistry.getMission(_missionID)
+	if(!theMission):
+		return []
+	var result:Array = []
+	for theFlagID in theMission.decisions:
+		var theDecision:Dictionary = theMission.decisions[theFlagID]
+		var theOutcomes:Dictionary = theDecision.get("outcomes", {})
+		var theCurVal = getSpecificFlag(_missionID, theFlagID, "")
+		if(!theOutcomes.has(theCurVal)):
+			result.append(theDecision["name"]+": Unknown")
+			continue
+		var theEffectsStrArray:Array = []
+		var theOutcome:Dictionary = theOutcomes[theCurVal]
+		for theEffect in theOutcome.get("effects", []):
+			if(theEffect == DECISION_EFFECT_AVY_LOVE):
+				theEffectsStrArray.append("Avi's Love +")
+			elif(theEffect == DECISION_EFFECT_AVY_OBEDIENCE):
+				theEffectsStrArray.append("Avi's Obedience +")
+			elif(theEffect == DECISION_EFFECT_KAIT_LOVE):
+				theEffectsStrArray.append("Kait's Love +")
+			elif(theEffect == DECISION_EFFECT_KAIT_OBEDIENCE):
+				theEffectsStrArray.append("Kait's Obedience +")
+		result.append(theDecision["name"]+": "+theOutcome["text"]+("" if theEffectsStrArray.empty() else (" ("+Util.humanReadableList(theEffectsStrArray)+")")))
+	return result
+	
 # Called from KaitModule
 func resetMainRoute():
 	current = ""
