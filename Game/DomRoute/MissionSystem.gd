@@ -61,6 +61,8 @@ func getMissionStats() -> Array: # Check for secret missions?
 	var completedSideMissionAmount:int = 0
 	for missionID in GlobalRegistry.missions:
 		var theMission = GlobalRegistry.missions[missionID]
+		if(theMission.isDisabled()):
+			continue
 		if(!theMission.isSideMission()):
 			totalMissionAmount += 1
 			if(isCompleted(missionID)):

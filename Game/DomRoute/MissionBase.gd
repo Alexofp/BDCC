@@ -24,6 +24,10 @@ const DECISION_EFFECT_KAIT_LOVE := 1
 const DECISION_EFFECT_AVY_OBEDIENCE := 2
 const DECISION_EFFECT_KAIT_OBEDIENCE := 3
 
+# if true, doesn't even get counted into the total mission amount. Use for secret missions or whatever
+func isDisabled() -> bool:
+	return false
+
 func isVisible() -> bool:
 	return true
 
@@ -36,6 +40,8 @@ func isVisibleFinal() -> bool:
 			return false
 	
 	if(!isVisible()):
+		return false
+	if(isDisabled()):
 		return false
 	return true
 

@@ -12,6 +12,9 @@ func _init():
 	}
 	sideMission = true
 
+func isDisabled() -> bool:
+	return true
+
 func getObjectives() -> Array:
 	var result:Array = []
 	
