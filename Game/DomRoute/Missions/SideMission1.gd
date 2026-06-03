@@ -35,6 +35,6 @@ func _init():
 	addAsAQuest = false
 	sideMission = true
 	
-	rewardExp = 30
+	rewardExp = 10
 	rewardCredits = 10
 	rewardRepeatRate = 0.0
