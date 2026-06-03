@@ -162,7 +162,7 @@ func _run():
 		addButton("Continue", "See what happens next", "artica_becomes_sextoy")
 	if(state == "artica_becomes_sextoy"):
 		playAnimation(StageScene.Zonked, "tease", {pc="artica", npc="alexrynard", bodyState={naked=true, hard=true}})
-		saynn("Artica instantly slides off the chair, assuming a very lewd position on the floor, her legs raised high to her shoulders, her toes curling as her paws sneak under her balls, obediently spreading her pussy for the enginner, proudly showcasing the slick cyan love tunnel..")
+		saynn("Artica instantly slides off the chair, assuming a very lewd position on the floor, her legs raised high to her shoulders, her toes curling as her paws sneak under her balls, obediently spreading her pussy for the engineer, proudly showcasing the slick cyan love tunnel..")
 
 		saynn("Foxy looks at that sight.. and sighs.")
 
