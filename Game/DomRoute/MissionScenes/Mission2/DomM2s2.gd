@@ -1,9 +1,13 @@
 extends SceneBase
 
-var npcID = "nova"
+var npcID = ""
 
 func _init():
 	sceneID = "DomM2s2"
+
+func resolveCustomCharacterName(_charID):
+	if(_charID == "npc"):
+		return npcID
 
 func _run():
 	if(state == ""):
@@ -50,7 +54,7 @@ func _run():
 
 		saynn("[say=kait]Goddammit, nothing in this life is easy.[/say]")
 
-		saynn("[say=ferri]Hey![/say]")
+		saynn("[say=ferri]You![/say]")
 
 		saynn("That's an interesting voice.. You look around and see a scene unfolding.")
 
@@ -66,7 +70,7 @@ func _run():
 
 		saynn("[say=kait]Goddammit, nothing in this life is easy.[/say]")
 
-		saynn("[say=ferri]Hey![/say]")
+		saynn("[say=ferri]You![/say]")
 
 		saynn("That's an interesting voice.. You look around and see a scene unfolding.")
 
@@ -87,11 +91,11 @@ func _run():
 
 		saynn("[say=npc]That's it? Sure. Piss off before I smack you.[/say]")
 
-		saynn("The feline hybrid keeps advancing.")
+		saynn("The feline hybrid keeps advancing with a cheeky smile on her face.")
 
 		saynn("[say=ferri]I see so many weak spots in it though, it would be a shame if someone would exploit them~.[/say]")
 
-		saynn("[say=npc]You're asking for a buzzer now.[/say]")
+		saynn("[say=npc]Asking for a buzzer now.[/say]")
 
 		saynn("The guard certainly looks more tense now, {npc.he} starts reaching for {npc.his} shock remote.")
 
@@ -111,22 +115,235 @@ func _run():
 
 		saynn("[say=npc]Why not.[/say]")
 
+		saynn("Ferri takes a short pause.. but then smiles again.")
+
 		saynn("[say=ferri]Mrowr. I guess I will be swift then![/say]")
 
 		saynn("As soon as the guard's hand begins hovering over the remote, Ferri leaps at {npc.him}, trying to sink her huge fangs into the guard's neck!")
 
+		addButton("Continue", "See what happens next", "ferri_bites_guard")
+	if(state == "ferri_bites_guard"):
+		playAnimation(StageScene.Duo, "bite", {pc="ferri", npc=npcID, npcAction="hurt"})
+		saynn("The shock remote flies out of the guard's hand as Ferri leaps at {npc.him} and tries to sink her sharp fangs into any exposed skin.")
+
+		saynn("The guard manages to hold her back for now, {npc.his} armored forearms saving {npc.him}.")
+
+		saynn("[say=ferri]C'mon, you're so biteable![/say]")
+
+		saynn("[say=npc]You're making it worse for yourself, inmate.[/say]")
+
+		saynn("[say=ferri]Good![/say]")
+
+		saynn("Ferri thrashes in the guard's grip, her fangs snapping at empty air, her claws scratching against the armor, sending off sparks.")
+
+		saynn("Suddenly, the guard manages to get a grip on Ferri's horns.")
+
+		saynn("[say=ferri]H-hey-![/say]")
+
+		saynn("A shiver runs down Ferri's spine, her eyes go wide. She tries to break free but the guard just pulls her back, one of {npc.his} hands now reaching for the weapon.")
+
+		saynn("[say=ferri]Easy with the horns..[/say]")
+
 		addButton("Continue", "See what happens next", "ferri_gets_rekt")
 	if(state == "ferri_gets_rekt"):
-		playAnimation(StageScene.Duo, "defeat", {pc="ferri", npc=npcID})
-		saynn("The guard doesn't even flinch.")
+		playAnimation(StageScene.Duo, "defeat", {pc="ferri", npc=npcID, npcAction="stunbaton"})
+		saynn("Now that the guard has a good grip on Ferri, {npc.he} just smacks her with a stun baton once..")
 
+		saynn("[say=ferri]Aagh![/say]")
+
+		saynn("Ferri's legs give out instantly, dropping the dragon cat to her knees, her tail slamming against the floor. Her whole body shakes, teeth clenched.")
+
+		saynn("Ferri tries to say something cheeky. Only a strangled whimper comes out.")
+
+		saynn("You nudge Kait's side and whisper to her.")
+
+		saynn("[say=pc]And that's our chemist?[/say]")
+
+		saynn("[say=kait]Yep.[/say]")
+
+		saynn("The guard reaches into {npc.his} pouches and pulls out a muzzle. Ferri tries to pull away but her body is still busy twitching from the shock, allowing the guard to put the muzzle over her snout and get the leather straps nice and tight.")
+
+		saynn("[say=ferri]M-Mew..[/say]")
+
+		saynn("Then the guard yanks her arms behind her back. Cuffs click around her wrists, locking them together.")
+
+		saynn("[say=ferri]Eep..[/say]")
+
+		saynn("The final touch.. a leash gets clipped to her collar.")
+
+		saynn("[say=npc]There. I know you wanted stocks but you will have to settle for a week of solitary.[/say]")
+
+		saynn("[say=ferri]Wait! That's so mean![/say]")
+
+		saynn("[say=npc]Want two weeks?[/say]")
+
+		saynn("[say=ferri]Nyo.. mow-w..[/say]")
+
+		saynn("Looks like she crossed the wrong guard. {npc.He} {npc.verb('pull')} on the leash, inviting the hybrid to get up.")
+
+		saynn("Kait nudges you this time.")
+
+		saynn("[say=kait]We gotta do something. If we don't act now, we won't see her for a while.[/say]")
+
+		saynn("It seems so.")
+
+		saynn("[say=kait]And the stupid Avy isn't here still. GRRrr.. Whatever, I'm going for it.[/say]")
+
+		saynn("[say=pc]It's two versus one still, we can do it.[/say]")
+
+		addButton("Continue", "See what happens next", "kait_shoves_guard")
+	if(state == "kait_shoves_guard"):
+		playAnimation(StageScene.Duo, "kick", {pc="kait", npc=npcID, npcAction="hurt"})
+		saynn("Kait quickly walks up to the guard and introduces herself with a kick!")
+
+		saynn("[say=npc]Ugh.. What the..[/say]")
+
+		saynn("The guard stumbles and loses the leash in the process.")
+
+		saynn("[say=kait]You better just fuck off, guard. There is more where that came from.[/say]")
+
+		saynn("[say=npc]Really? I guess you're joining her then.[/say]")
+
+		saynn("{npc.He} {npc.verb('try', 'tries')} to feel {npc.his} shock remote but it's still on the floor somewhere. The stun baton is still there though.")
+
+		saynn("Ferri notices the opportunity.. and takes off running!")
+
+		saynn("[say=kait]Fuck, where the fuck are you going. Stop![/say]")
+
+		saynn("It's all going.. not the best. Kait quickly turns her head to you.")
+
+		saynn("[say=kait]I go after Ferri, you handle the guard![/say]")
+
+		saynn("And just like that, Kait takes off too, doing a swift half-circle around the angry guard and dashing after the dragon cat.")
+
+		saynn("[say=kait]Come here, you brat![/say]")
+
+		saynn("Looks like you will have to fight..")
+
+		addButton("Fight", "Start the fight", "start_fight")
+	if(state == "guard_fight_lost"):
+		playAnimation(StageScene.Solo, "kneel")
+		GM.pc.setLocation(GM.pc.getCellLocation())
+		aimCameraAndSetLocName("solitary_cell")
+		setCharacters([npcID])
+		saynn("You've lost the fight. Looks like you will be the one to spend time in solitary..")
+
+		saynn("Ferri is long gone. Looks like you will have to try to catch her some other time.")
+
+		saynn("Mission failed!")
+
+		addButton("Continue", "Stop the mission", "stopthemission")
+		addButton("Restart", "Try the mission again", "trymissionagain")
+	if(state == "guard_fight_won"):
+		setCharacters([npcID])
+		playAnimation(StageScene.Duo, "stand", {npc=npcID, npcAction="defeat"})
+		saynn("The guard hits the floor, unable to continue fighting.")
+
+		saynn("[say=npc]Ugh..[/say]")
+
+		saynn("[say=pc]Sorry, no time to chat, gotta run.[/say]")
+
+		saynn("You see {npc.him} reaching towards the shock remote that's on the floor. You swiftly approach the item and stomp on it a few times, crushing into bits and sparks.")
+
+		saynn("[say=pc]Nope.[/say]")
+
+		saynn("[say=npc]Fuck you.[/say]")
+
+		saynn("You nod and run into the same direction that Kait did before.")
+
+		addButton("Continue", "See what happens next", "run_after_kait")
+	if(state == "run_after_kait"):
+		setCharacters([])
+		aimCameraAndSetLocName("main_bench2")
+		saynn("You dash out of the high-sec cellblock and climb the stairs that lead into the main hall.")
+
+		saynn("No signs of Ferri or Kait anywhere around you. You climb the main platform too to make sure.")
+
+		saynn("[say=pc]Shit, where are they.[/say]")
+
+		saynn("You hear a very familiar noise coming from the bench nearby.")
+
+		saynn("[say=rahi]How is the.. thing going?[/say]")
+
+		addButton("Rahi!", "Ask the cat", "ask_the_cat")
+	if(state == "ask_the_cat"):
+		addCharacter("rahi")
+		playAnimation(StageScene.Duo, "stand", {npc="rahi", npcAction="sit"})
+		saynn("You turn your head and see Rahi sitting on the bench, legs tucked, tail resting in her lap, getting stroked by her paws.")
+
+		saynn("[say=pc]Rahi! Did you see someone run past you just now?[/say]")
+
+		saynn("[say=rahi]Oh.. yeah.. They were heading towards the bathroom..[/say]")
+
+		saynn("You give the kitty a quick pat on the head.")
+
+		saynn("[say=pc]Thank you. Gotta run.[/say]")
+
+		saynn("[say=rahi]Meow..[/say]")
+
+		saynn("After that, you switch to running again.")
+
+		addButton("Bathroom", "Go check it out!", "go_bathroom")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
 		endScene()
 		return
 
-	if(_action == "ferri_gets_rekt"):
+	if(_action == "ferri_intro_guard"):
+		npcID = NpcFinder.grabNpcIDFromPoolOrGenerate(CharacterPool.Guards, [], GuardGenerator.new(), {})
+
+	if(_action == "ferri_bites_guard"):
 		processTime(5*60)
 
+	if(_action == "ferri_gets_rekt"):
+		processTime(5*60)
+		putOn("ferri", "basketmuzzle")
+		putOn("ferri", "inmatewristcuffs")
+
+	if(_action == "start_fight"):
+		runScene("FightScene", [npcID], "guardFight")
+		return
+
+	if(_action == "stopthemission"):
+		processTime(60*60*3)
+		endScene()
+		GM.pc.setLocation(GM.pc.getCellLocation())
+		GM.main.MS.failCurrentMission()
+
+	if(_action == "trymissionagain"):
+		endScene()
+		GM.main.MS.restartCurrentMission()
+		return
+
+	if(_action == "run_after_kait"):
+		processTime(3*60)
+
+	if(_action == "go_bathroom"):
+		processTime(2*60)
+
 	setState(_action)
+
+func _react_scene_end(_tag, _result):
+	if(_tag == "guardFight"):
+		processTime(10 * 60)
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			setState("guard_fight_won")
+			addExperienceToPlayer(50)
+		else:
+			setState("guard_fight_lost")
+			addExperienceToPlayer(5)
+
+func saveData():
+	var data = .saveData()
+
+	data["npcID"] = npcID
+
+	return data
+
+func loadData(data):
+	.loadData(data)
+
+	npcID = SAVE.loadVar(data, "npcID", "")
