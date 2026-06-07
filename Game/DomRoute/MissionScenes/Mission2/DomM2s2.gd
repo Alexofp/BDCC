@@ -281,9 +281,194 @@ func _run():
 
 		saynn("[say=rahi]Meow..[/say]")
 
-		saynn("After that, you switch to running again.")
+		saynn("You got a small breather here.. But you switch to running again.")
 
 		addButton("Bathroom", "Go check it out!", "go_bathroom")
+	if(state == "go_bathroom"):
+		setCharacters(["ferri", "kait"])
+		playAnimation(StageScene.Duo, "stand", {pc="kait", npc="ferri"})
+		aimCameraAndSetLocName("main_dressing1")
+		GM.pc.setLocation("main_dressing1")
+		saynn("You find them both in the dressing room. Kait is busy panting near the entrance.. and Ferri is standing in the corner, showing her fangs.. even though she is still muzzled and cuffed.")
+
+		saynn("[say=kait]C'mon, you're helpless, give up already.[/say]")
+
+		saynn("[say=ferri]Oh yeah? Watch me![/say]")
+
+		saynn("Ferri smacks her muzzle against one of the lockers with a loud bang. Not the brightest idea.")
+
+		saynn("[say=ferri]Ouch.. mow..[/say]")
+
+		saynn("While Ferri is recovering, you stand beside Kait and get her attention.")
+
+		saynn("[say=pc]She is resisting?[/say]")
+
+		saynn("[say=kait]Damn right she is.[/say]")
+
+		saynn("[say=ferri]I ain't going with you anywhere! You're gonna turn me into one of those.. bitch prison sextoy pets.. I know it![/say]")
+
+		saynn("While you're busy talking, Ferri is trying to struggle off the cuffs. They're not budging exactly.")
+
+		saynn("[say=pc]Sure, if that's what you want.[/say]")
+
+		saynn("[say=ferri]M-mew! Do I look like I want that?[/say]")
+
+		saynn("Kait rolls her eyes.")
+
+		saynn("[say=kait]I'm getting tired of it.[/say]")
+
+		saynn("The snow leopard starts to slowly approach the dragon cat who sees that and pushes herself more into the corner.")
+
+		saynn("[say=ferri]I will bite you![/say]")
+
+		saynn("[say=kait]Uh huh. Just stand still and keep threatening me.[/say]")
+
+		saynn("Instead of going after Ferri, Kait seems to be trying to catch the leash that is still dangling from that red's collar. Smart.")
+
+		addButton("Continue", "See what happens next", "kait_grabs_leash")
+	if(state == "kait_grabs_leash"):
+		playAnimation(StageScene.Duo, "shove", {pc="kait", npc="ferri", npcBodyState={leashedBy="kait"}, npcAction="hurt"})
+		saynn("Kait keeps creeping closer and closer, reaching towards the dangling leash. All the while, Ferri leans away. No space to run.")
+
+		saynn("[say=kait]Submit already.[/say]")
+
+		saynn("[say=ferri]No![/say]")
+
+		saynn("Kait manages to grab the leash.")
+
+		saynn("[say=kait]Got you![/say]")
+
+		saynn("Kait yanks on it, pulling Ferri off balance.")
+
+		saynn("[say=ferri]Eep![/say]")
+
+		saynn("The dragon-cat stumbles, her cuffed arms swinging behind her.")
+
+		addButton("Continue", "See what happens next", "kait_gets_tail_swiped")
+	if(state == "kait_gets_tail_swiped"):
+		playAnimation(StageScene.Duo, "defeat", {pc="kait", npc="ferri", npcAction="dodge"})
+		saynn("But then..")
+
+		saynn("Ferri whips her tail around!")
+
+		saynn("BAM!")
+
+		saynn("The thick dragon tail slams into Kait's leg, swiping her off of her feet!")
+
+		saynn("[say=kait]Agh![/say]")
+
+		saynn("She crashes into a locker on her way down, adding to the pain.")
+
+		saynn("[say=kait]..fuck..[/say]")
+
+		saynn("Ferri stands over her, panting.")
+
+		saynn("[say=ferri]Shouldn't have gotten so close to me, kitty.[/say]")
+
+		saynn("She doesn't waste and starts smacking her cuffs against the edge of the locker. Again and again.")
+
+		addButton("Continue", "See what happens next", "ferri_frees_herself")
+	if(state == "ferri_frees_herself"):
+		playAnimation(StageScene.Duo, "stand", {npc="ferri"})
+		saynn("She manages to crack one of the cuffs, breaking it. Her paws come free. She uses them to rip the basket muzzle off her face.")
+
+		saynn("[say=ferri]Ahh.. much better![/say]")
+
+		saynn("Kait doesn't seem to be able to fight, the tail swipe knocked the wind out of her. But you're still blocking the only exit.")
+
+		saynn("[say=pc]Last chance to submit.[/say]")
+
+		saynn("Ferri grins and licks her exposed fangs.")
+
+		saynn("[say=ferri]Make me~.[/say]")
+
+		saynn("Looks like it's a fight!")
+
+		addButton("Fight", "Start the fight", "dom_start_fight")
+	if(state == "lost_ferri_fight"):
+		playAnimation(StageScene.GivingBirth, "idle")
+		saynn("You lost the fight!")
+
+		saynn("[say=ferri]Wow, this was too easy![/say]")
+
+		saynn("And so, Ferri managed to get away.")
+
+		saynn("Looks like you will have to try to catch her some other time.")
+
+		saynn("Mission failed!")
+
+		addButton("Continue", "Stop the mission", "stopthemission")
+		addButton("Restart", "Try the mission again", "trymissionagain")
+	if(state == "won_ferri_fight"):
+		playAnimation(StageScene.Duo, "stand", {npc="ferri", npcAction="defeat"})
+		saynn("Ferri is unable to fight any longer! She hits the floor.")
+
+		saynn("[say=ferri]Agh!..[/say]")
+
+		saynn("You're swift to grab the leash to her collar.")
+
+		saynn("[say=pc]Kait?[/say]")
+
+		saynn("[say=kait]I'm okay.. I still have the things.[/say]")
+
+		saynn("Kait gets up and approaches the dragon cat slowly, limping a bit. She crouches behind Ferri and wrenches her arms behind her back painfully.")
+
+		saynn("[say=ferri]Ow![/say]")
+
+		saynn("[say=kait]Shut up.[/say]")
+
+		saynn("She catches the tail and chains it to the cuffs too. The dropped muzzle gets put on her face again.")
+
+		saynn("[say=kait]We got you now, bitch.[/say]")
+
+		saynn("[say=ferri]No u..[/say]")
+
+		saynn("Kait pulls on the big tail for that.")
+
+		saynn("[say=ferri]Grrh..[/say]")
+
+		saynn("[say=kait]Let's go break her already.[/say]")
+
+		saynn("You pull up on the leash, kindly inviting Ferri to get up by making the collar dig into her neck.")
+
+		saynn("[say=ferri]Mew?.. eek..[/say]")
+
+		addButton("Hideout", "Throw Ferri into the cell!", "hideout_ferri")
+	if(state == "hideout_ferri"):
+		aimCameraAndSetLocName("hideout_breakroom")
+		GM.pc.setLocation("hideout_near_break_room")
+		playAnimation(StageScene.Duo, "stand", {npc="ferri", npcAction="sit"})
+		saynn("You pull on the leash, making Ferri walk behind you. Kait makes sure she doesn't try to escape again.")
+
+		saynn("Soon, you arrive at your hideout. You bring Ferri into the cell and connect the leash to one of the pipes.")
+
+		saynn("[say=ferri]What is this..[/say]")
+
+		saynn("[say=pc]Sit tight. We're gonna handle you soon.[/say]")
+
+		saynn("[say=ferri]Mow..[/say]")
+
+		saynn("You step out of the cell with Kait.")
+
+		addButton("Continue", "See what happens next", "avy_encounter")
+	if(state == "avy_encounter"):
+		setCharacters(["avy", "kait"])
+		playAnimation(StageScene.Duo, "stand", {pc="kait", npc="avy"})
+		aimCameraAndSetLocName("hideout_near_break_room")
+		saynn("As you step out, you instantly run into Avy.")
+
+		saynn("[say=kait]Avy! Where the fuck where you?![/say]")
+
+		saynn("[say=avy]I was looking for you, duh. I just had a sudden thing I had to attend to. Arena business.[/say]")
+
+		saynn("[say=kait]Arena business my ass! We could have used a pair of extra hands, you know?[/say]")
+
+		saynn("[say=avy]Hah. Wow, you really can't get a single thing done without me.[/say]")
+
+		saynn("[say=kait]Listen, if you're gonna do stupid shit, we will break you too, Avy![/say]")
+
+		saynn("[say=avy]I'd love to see you try.[/say]")
+
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -306,7 +491,6 @@ func _react(_action: String, _args):
 		return
 
 	if(_action == "stopthemission"):
-		processTime(60*60*3)
 		endScene()
 		GM.pc.setLocation(GM.pc.getCellLocation())
 		GM.main.MS.failCurrentMission()
@@ -319,8 +503,23 @@ func _react(_action: String, _args):
 	if(_action == "run_after_kait"):
 		processTime(3*60)
 
+	if(_action == "ask_the_cat"):
+		processTime(3*60)
+		GM.pc.addStamina(100)
+
 	if(_action == "go_bathroom"):
 		processTime(2*60)
+
+	if(_action == "ferri_frees_herself"):
+		putOff("ferri", "basketmuzzle")
+		putOff("ferri", "inmatewristcuffs")
+
+	if(_action == "dom_start_fight"):
+		runScene("FightScene", ["ferri"], "ferriFight")
+		return
+
+	if(_action == "hideout_ferri"):
+		processTime(3*60)
 
 	setState(_action)
 
@@ -331,9 +530,22 @@ func _react_scene_end(_tag, _result):
 		
 		if(battlestate == "win"):
 			setState("guard_fight_won")
-			addExperienceToPlayer(50)
+			addExperienceToPlayer(20)
 		else:
 			setState("guard_fight_lost")
+			addExperienceToPlayer(5)
+
+	if(_tag == "ferriFight"):
+		processTime(10 * 60)
+		var battlestate = _result[0]
+		
+		if(battlestate == "win"):
+			setState("won_ferri_fight")
+			addExperienceToPlayer(50)
+			putOn("ferri", "basketmuzzle")
+			putOn("ferri", "inmatewristcuffs")
+		else:
+			setState("lost_ferri_fight")
 			addExperienceToPlayer(5)
 
 func saveData():
