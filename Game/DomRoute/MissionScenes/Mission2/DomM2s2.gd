@@ -461,14 +461,98 @@ func _run():
 
 		saynn("[say=avy]I was looking for you, duh. I just had a sudden thing I had to attend to. Arena business.[/say]")
 
+		saynn("Kait clenches her fists while Avy just tilts her head, showing little interest.")
+
 		saynn("[say=kait]Arena business my ass! We could have used a pair of extra hands, you know?[/say]")
 
 		saynn("[say=avy]Hah. Wow, you really can't get a single thing done without me.[/say]")
 
 		saynn("[say=kait]Listen, if you're gonna do stupid shit, we will break you too, Avy![/say]")
 
+		saynn("Avy raises a brow, her gaze now focused on Kait's.")
+
 		saynn("[say=avy]I'd love to see you try.[/say]")
 
+		saynn("They will certainly fight if you don't intervene.")
+
+		addButton("Let them fight", "(Kait's obedience +) Let them fight. Kait will most likely lose", "let_fight")
+		addButton("Intervene", "(Avy's obedience +) Intervene and put Avy into her place", "intervene_avy")
+	if(state == "intervene_avy"):
+		playAnimation(StageScene.Duo, "stand", {npc="avy"})
+		saynn("You intervene, standing between the girls.")
+
+		saynn("[say=pc]Avy, tell me. Do you want to escape this prison?[/say]")
+
+		saynn("[say=avy]Obviously, that's why I'm here. These collars suck.[/say]")
+
+		saynn("Time to put some more pressure on her.")
+
+		saynn("[say=pc]This team needs people that won't fuck each other over. Can we rely on someone like you, Avy?[/say]")
+
+		saynn("[say=avy]Of course. Duh. I just had a thing I needed to do.[/say]")
+
+		saynn("She just keeps trying to excuse herself.")
+
+		saynn("[say=pc]Can you please take some responsibility and not just try to dodge it?[/say]")
+
+		saynn("Avy raises her chin high and crosses her arms. Two drilling gazes make her sigh and roll her eyes.")
+
+		saynn("[say=avy]Ugh. My bad?[/say]")
+
+		saynn("[say=pc]You can do better than that. You see how angry Kait still is? She is furious.[/say]")
+
+		saynn("Kait hears her name being mentioned and puts on an obviously grumpy face, nodding many times.")
+
+		saynn("[say=avy]Fine-e. I fucked up. A little bit. Happy?[/say]")
+
+		saynn("[say=pc]Are you happy, Kait?[/say]")
+
+		saynn("The snow leopard does a slow shrug.")
+
+		saynn("[say=pc]She is reasonably happy.[/say]")
+
+		saynn("Silence ensures.")
+
+		saynn("Avy is just standing still, her gaze jumping from one spot to another, her tail swishing low over the floor.")
+
+		saynn("[say=pc]Yes, you can go. We managed to salvage the situation.[/say]")
+
+		saynn("The foxy offers you a small nod.. and then goes away.")
+
+		addButton("Continue", "See what happens next", "pc_last_talk_with_kait")
+	if(state == "let_fight"):
+		playAnimation(StageScene.Duo, "hurt", {pc="kait", npc="avy", npcAction="shove"})
+		saynn("Kait raises her clawed paw and tries to scratch the fox!")
+
+		saynn("Unfortunately, Avy's reflexes are quick enough to catch a snow leopard's wrist. Avy then just makes the feline hit herself with her own fist. Bonk.")
+
+		saynn("[say=kait]Ouch.. huff.[/say]")
+
+		saynn("Avy chuckles")
+
+		saynn("[say=avy]I was busy. So chill, you dumb cat. I see you got it all done without me. Good job~.[/say]")
+
+		saynn("Kait receives her paw back. She shakes it and fixes the scruffy fur around her wrist.")
+
+		saynn("[say=pc]Maybe you shouldn't try to poke the bear, Kait.[/say]")
+
+		saynn("[say=kait]Fine, whatever.[/say]")
+
+		saynn("Avy smirks and then leaves you two be.")
+
+		addButton("Continue", "See what happens next", "pc_last_talk_with_kait")
+	if(state == "pc_last_talk_with_kait"):
+		setCharacters(["kait"])
+		playAnimation(StageScene.Duo, "stand", {npc="kait"})
+		saynn("Now that Avy left, Kait turns towards you.")
+
+		saynn("[say=kait]Anyway. We got Ferri but now we gotta break her! Talk to me when you wanna start outlining the plan, you know the drill.[/say]")
+
+		saynn("You nod.")
+
+		saynn("Time to do this.")
+
+		addButton("Continue", "See what happens next", "endthescene")
 
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -520,6 +604,17 @@ func _react(_action: String, _args):
 
 	if(_action == "hideout_ferri"):
 		processTime(3*60)
+
+	if(_action == "let_fight"):
+		GM.main.MS.setDecision("fight", "let")
+
+	if(_action == "intervene_avy"):
+		GM.main.MS.setDecision("fight", "stop")
+
+	if(_action == "pc_last_talk_with_kait"):
+		processTime(3*60)
+		addMessage("Task updated!")
+		GM.main.RCS.setCurrent("Ferri")
 
 	setState(_action)
 
