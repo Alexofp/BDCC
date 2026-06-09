@@ -546,8 +546,14 @@ func _run():
 		playAnimation(StageScene.Duo, "stand", {npc="kait"})
 		saynn("Now that Avy left, Kait turns towards you.")
 
-		saynn("[say=kait]Anyway. We got Ferri but now we gotta break her! Talk to me when you wanna start outlining the plan, you know the drill.[/say]")
-
+		saynn("[say=kait]Anyway. We got Ferri but now we gotta break her! I will strip her naked but leave the muzzle and the cuffs on.[/say]")
+		
+		saynn("That's a good idea, means you won't be in danger of getting bitten or scratched each time you enter the cell.")
+		
+		saynn("[say=pc]Sounds good, thanks.[/say]")
+		
+		saynn("[say=kait]Talk to me when you wanna start outlining the plan, you know the drill.[/say]")
+		
 		saynn("You nod.")
 
 		saynn("Time to do this.")
