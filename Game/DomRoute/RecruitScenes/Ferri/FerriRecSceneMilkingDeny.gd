@@ -9,7 +9,7 @@ func _reactInit():
 
 func _run():
 	if(state == ""):
-		addCharacter("ferri", ["ferri"])
+		addCharacter("ferri", ["naked"])
 		aimCameraAndSetLocName("hideout_breakroom")
 		playAnimation(StageScene.Grope, "grope", {pc="ferri", npc="pc", bodyState={naked=true, hard=true}})
 		saynn("You enter the cell and find Ferri. She is naked, cuffed and muzzled, her collar leashed to one of the pipes.")

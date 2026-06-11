@@ -12,7 +12,7 @@ func _reactInit():
 
 func _run():
 	if(state == ""):
-		addCharacter("ferri", ["ferri"])
+		addCharacter("ferri", ["naked"])
 		aimCameraAndSetLocName("hideout_breakroom")
 		mean = (c1 == 1)
 		degrading = (c1 == 2)

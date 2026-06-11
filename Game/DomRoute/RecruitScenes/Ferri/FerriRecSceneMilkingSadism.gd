@@ -9,7 +9,7 @@ func _reactInit():
 
 func _run():
 	if(state == ""):
-		addCharacter("ferri", ["ferri"])
+		addCharacter("ferri", ["naked"])
 		aimCameraAndSetLocName("hideout_breakroom")
 		saynn("You ask if your team can supply you with a particular item. There weren't any available but Kait managed to quickly make one out of all the scrap that's around. You keep it hidden for now though.")
 
