@@ -25,7 +25,7 @@ func _run():
 		saynn("Your slave's current name is {npc.name}.")
 		
 		if(npc.getFlag("OriginalName") != null && npc.getFlag("OriginalName") != npc.getName()):
-			saynn("You recall that {npc.his} original name was "+str(npc.getFlag("OriginalName", "Bob")))
+			saynn("You recall that {npc.his} original name was "+str(npc.getFlag("OriginalName", "Bob"))+".")
 		
 		if(npcSlavery.isMindBroken()):
 			saynn("[say=npc]..kh..[/say]")
@@ -49,7 +49,7 @@ func _run():
 		addButton("Cancel", "You changed your mind", "")
 	
 	if(state == "pick_name"):
-		saynn("Pick a new name for your slave")
+		say("Pick a new name for your slave:")
 		
 		var textBox:LineEdit = addTextbox("npc_name")
 		textBox.text = npc.getName()
@@ -57,6 +57,7 @@ func _run():
 		
 		addButton("Confirm", "Change the name", "do_pick_name")
 		addButton("Cancel", "You changed your mind", "")
+		addButtonAt(4, "Random?", "Help choose a random name", "do_random_name")
 	
 	if(state == "pick_desc"):
 		saynn("Pick a new description for your slave")
@@ -86,9 +87,19 @@ func _react(_action: String, _args):
 		return
 	
 	if(_action == "do_pick_name"):
-		if(setSlaveNameTo(getTextboxData("npc_name"))):
+		var new_name:String = ""
+		if(_args.size() > 0):
+			new_name = _args[0]
+		else:
+			new_name = getTextboxData("npc_name")
+
+		if(setSlaveNameTo(new_name)):
 			addMessage("You changed your slave's name!")
 			setState("")
+		return
+
+	if(_action == "do_random_name"):
+		runScene("CharacterNameGeneratorScene", [], "name_generator")
 		return
 	
 	if(_action == "do_reset_chatcolor"):
@@ -105,6 +116,11 @@ func _react(_action: String, _args):
 		return
 		
 	setState(_action)
+
+func _react_scene_end(_tag, _result):
+	if(_tag == "name_generator"):
+		if(_result.has("random_name")):
+			GM.main.pickOption("do_pick_name", [_result["random_name"]])
 
 func setSlaveNameTo(newname:String):
 	newname = newname.replace("{", "")
