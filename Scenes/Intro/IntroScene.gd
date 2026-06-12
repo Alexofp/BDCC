@@ -4,9 +4,9 @@ func _init():
 	sceneID = "IntroScene"
 
 func _initScene(_args = []):
-		var uniform = GlobalRegistry.createItem("CasualClothes")
-		
-		GM.pc.getInventory().equipItem(uniform)
+	var uniform = GlobalRegistry.createItem("CasualClothes")
+
+	GM.pc.getInventory().equipItem(uniform)
 
 func _run():
 	if(state == ""):
@@ -51,6 +51,7 @@ func _run():
 		var _ok = textBox.connect("text_entered", self, "onTextBoxEnterPressed")
 		
 		addButton("Confirm", "Choose this name", "setname")
+		addButtonAt(4, "Random?", "Help choose a random name", "randomname")
 		
 
 	if(state == "donecreating"):
@@ -321,15 +322,21 @@ func onTextBoxEnterPressed(_new_text:String):
 
 func _react(_action: String, _args):
 	if(_action == "setname"):
-		if(getTextboxData("player_name") == ""):
-			return
-		
-		GM.pc.setName(getTextboxData("player_name"))
+		if(_args.size() > 0):
+			GM.pc.setName(_args[0])
+		else:
+			if(getTextboxData("player_name") == ""):
+				return
+
+			GM.pc.setName(getTextboxData("player_name"))
 		
 		#setState("pickgender")
 		runScene("CharacterCreatorScene", [], "character_creator")
 		return
-		
+
+	if(_action == "randomname"):
+		runScene("CharacterNameGeneratorScene", [], "name_generator")
+		return
 
 	
 	if(_action == "endthisscene"):
@@ -365,6 +372,9 @@ func _react(_action: String, _args):
 	setState(_action)
 
 func _react_scene_end(_tag, _result):
+	if(_tag == "name_generator"):
+		if(_result.has("random_name")):
+			GM.main.pickOption("setname", [_result["random_name"]])
 	if(_tag == "character_creator"):
 		setFlag("Game_PickedStartingPerks", true)
 		if(!getFlag("PickedSkinAtLeastOnce")):
