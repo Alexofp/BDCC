@@ -2691,6 +2691,12 @@ func addTextTopBottom(_theText:String, _indxTop:int, _indxBottom:int):
 	_theText=_theText.replace("<TOP>", topInfo.getCharID()).replace("<BOTTOM>", bottomInfo.getCharID())
 	addTextRaw(_theText)
 
+func addTextTopBottomNotRaw(_theText:String, _indxTop:int, _indxBottom:int):
+	var topInfo:SexInfoBase = getDomOrSubInfo(_indxTop)
+	var bottomInfo:SexInfoBase = getDomOrSubInfo(_indxBottom)
+	_theText=_theText.replace("<TOP>", topInfo.getCharID()).replace("<BOTTOM>", bottomInfo.getCharID())
+	addText(_theText)
+
 # Doesn't output any text
 func cumOnSelf(_indxWho:int, _indxCauser:int, uniqueOrgasm:String = "", extraOrgasmText:String = " in such a humiliating way", orgasmReaction:int = SexReaction.OrgasmGeneric):
 	var theInfo:SexInfoBase = getDomOrSubInfo(_indxWho)
@@ -3262,7 +3268,7 @@ func cockWarmer(_indxBottom:int, _indxTop:int, _hole:String, _isKnot:bool = fals
 func rubPenisAgainst(_indxTop:int, _indxBottom:int, _hole:String):
 	if(!(_hole in [S_VAGINA, S_ANUS])):
 		return
-	addTextTopBottom("{<TOP>.You} {<TOP>.youVerb('rub')} {<TOP>.yourHis} {<TOP>.penisShort} against {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+" "+getThroughClothingText(_indxTop, S_PENIS)+".", _indxTop, _indxBottom)
+	addTextTopBottomNotRaw("{<TOP>.You} {<TOP>.youVerb('rub')} {<TOP>.yourHis} {<TOP>.penisShort} against {<BOTTOM>.your} "+getNameHole(_indxBottom, _hole)+getThroughClothingText(_indxTop, S_PENIS)+".", _indxTop, _indxBottom)
 	stimulateSex(_indxTop, _indxBottom, _hole, I_TEASE)
 
 func strokePenis(_indxActor:int, _indxTarget:int):
