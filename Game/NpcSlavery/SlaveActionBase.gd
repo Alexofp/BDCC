@@ -45,7 +45,7 @@ func getFinalVisibleDesc():
 		theDesc += "\nThis is "+rewardLevels[Util.mini(3, -rewardHint-1)]+""
 	
 	if(slaveMinLevel > 0):
-		theDesc += "\nSlave minimal level: "+str(slaveMinLevel)
+		theDesc += "\nSlave minimum level: "+str(slaveMinLevel)
 	if(!slaveSkillsRequired.empty()):
 		var reqs = []
 		for slaveType in slaveSkillsRequired:
