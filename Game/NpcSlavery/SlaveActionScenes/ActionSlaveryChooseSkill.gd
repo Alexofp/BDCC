@@ -60,7 +60,7 @@ func _run():
 				addDisabledButton(slaveTypeObj.getVisibleName(), "[color=red]Incompatible with this slave[/color]\n"+slaveTypeObj.getVisibleDesc())
 				continue
 			if(npcSlavery.getLevel() < slaveTypeObj.getMinimalSlaveLevel()):
-				addDisabledButton(slaveTypeObj.getVisibleName(), "[color=red]Minimal slave level required: "+str(slaveTypeObj.getMinimalSlaveLevel())+"[/color]\n"+slaveTypeObj.getVisibleDesc())
+				addDisabledButton(slaveTypeObj.getVisibleName(), "[color=red]Minimum slave level required: "+str(slaveTypeObj.getMinimalSlaveLevel())+"[/color]\n"+slaveTypeObj.getVisibleDesc())
 				continue
 			addButton(slaveTypeObj.getVisibleName(), slaveTypeObj.getVisibleDesc(), "learn_new", [slaveType])
 
