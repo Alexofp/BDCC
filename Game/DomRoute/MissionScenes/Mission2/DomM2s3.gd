@@ -3,6 +3,10 @@ extends SceneBase
 func _init():
 	sceneID = "DomM2s3"
 
+func _reactInit():
+	putOff("ferri", "inmatewristcuffs")
+	putOff("ferri", "basketmuzzle")
+
 func _run():
 	if(state == ""):
 		playAnimation(StageScene.Duo, "stand", {npc="kait"})
@@ -21,7 +25,7 @@ func _run():
 	if(state == "player_brings_ferri_out"):
 		addCharacter("ferri")
 		playAnimation(StageScene.Duo, "stand", {npc="ferri", npcBodyState={leashedBy="pc"}, npcAction="kneel"})
-		saynn("You go ahead and bring Ferri out, your hand holding her leash.")
+		saynn("You go ahead and bring Ferri out, your hand holding her leash. You also took off all the restraints that she had.")
 
 		saynn("[say=ferri]Mew..[/say]")
 

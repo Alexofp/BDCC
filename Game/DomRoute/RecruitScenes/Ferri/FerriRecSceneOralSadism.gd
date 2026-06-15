@@ -63,34 +63,34 @@ func _run():
 		saynn("[say=ferri]Mmnh..[/say]")
 
 		if (straponUsed):
-			saynn("You swiftly secure a strapon harness around your waist, the tip hovering near her maw.")
+			saynn("You also swiftly secure a strapon harness around your waist, the tip hovering near her maw.")
 
 			addButton("Continue", "See what happens next", "pp_fuck")
 		elif (!vagVariant):
-			saynn("Your cock is already out and hard, hovering near her maw.")
+			saynn("Your {pc.penis} is already out and hard, hovering near her maw.")
 
 			addButton("Continue", "See what happens next", "pp_fuck")
 		else:
-			saynn("Your pussy is already exposed, hovering near her maw.")
+			saynn("Your {pc.vaginaStretch} pussy is already exposed, hovering near her maw.")
 
 			addButton("Continue", "See what happens next", "vag_fuck")
 	if(state == "pp_fuck"):
 		playAnimation(StageScene.SexOralForced, "suck", {pc="pc", npc="ferri", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
 		saynn("You line yourself up a bit better. She shakes her head frantically, her tail thrashing. That bitch really wants it rough. Okay.")
 
-		saynn("Both of her paws are held by one of your hands while the other jumps onto her head, grabbing her by the hair and pulling on it, making her yelp and stop trying to turn away.")
+		saynn("Her paws are held by your right hand while your left one jumps onto her head, grabbing her by the hair and pulling on it, making her yelp and stop trying to turn away.")
 
-		saynn("That's when you guide your cock to the steel ring and push!")
+		saynn("That's when you guide your "+str("cock" if !straponUsed else "rubber toy")+" to the steel ring and push!")
 
 		saynn("[say=ferri]MMmph-..[/say]")
 
-		saynn("Your cock slides past her lips, over her feline tongue, and quickly hits the back of her throat. She gags instantly, her eyes watering.")
+		saynn("Your "+str("shaft" if !straponUsed else "strapon")+" slides past her lips, over her feline tongue, and quickly hits the back of her throat. She gags instantly, her eyes watering.")
 
 		saynn("[say=pc]"+str(ch1("Breathe through your nose. You'll need it.", "That's it. Take it. Take it all, slut.", "Choke on it, bitch."))+"[/say]")
 
 		saynn("She tries to bite down still, her jaw clenching. But all she can do is gag and drool.")
 
-		saynn("You push your cock deeper. Ferri's throat tightens around the tip of your member. She makes a wet, strangled noise.. and her whole body tenses. Her claws try to scratch at your arm but you don't let go of her wrists.")
+		saynn("You push your "+str("dick" if !straponUsed else "rubber cock")+" deeper. Ferri's throat tightens around the tip of your "+str("member" if !straponUsed else "shiny member")+". She makes a wet, strangled noise.. and her whole body tenses. Her claws try to scratch at your arm but you don't let go of her wrists.")
 
 		saynn("[say=ferri]Glrk-.. mmnn..[/say]")
 
@@ -121,37 +121,61 @@ func _run():
 
 		saynn("She tries to bite again, her jaw muscles tensing up as she clenches.. but the ring gag does its job. Her teeth just click against the steel.")
 
-		saynn("You feel the pressure building. Your balls tighten.")
+		if (straponUsed):
+			saynn("You feel the pressure building. Your balls tighten.")
 
-		saynn("[say=pc]"+str(ch1("I'm close. You're going to swallow every drop.", "I'm going to cum down your throat. Don't you dare waste a single drop.", "Open wider. I'm going to fill that throat. Maybe you'll drown. Wouldn't that be a shame."))+"[/say]")
+			saynn("[say=pc]"+str(ch1("I'm close. You're going to swallow every drop.", "I'm going to cum down your throat. Don't you dare waste a single drop.", "Open wider. I'm going to fill that throat. Maybe you'll drown. Wouldn't that be a shame."))+"[/say]")
+
+		else:
+			saynn("You aren't using a real cock.. But you still feel the desire to really ram it in..")
+
+			saynn("[say=pc]"+str(ch1("Get ready, cutie.", "Get ready, slut.", "Open wider, you stupid slut."))+"[/say]")
 
 		addButton("Continue", "See what happens next", "pp_cum")
 	if(state == "pp_cum"):
 		playAnimation(StageScene.SexOralForced, "suckinside", {pc="pc", npc="ferri", bodyState={naked=true, hard=true}, npcBodyState={naked=true, hard=true}})
-		saynn("One last hard thrust. You go as deep as you can, your cock pulses.")
+		if (!straponUsed):
+			saynn("One last hard thrust. You go as deep as you can, your cock pulses.")
 
-		saynn("[say=ferri]Mmmph-![/say]")
+			saynn("[say=ferri]Mmmph-![/say]")
 
-		saynn("You grunt as her clenching walls push you over the edge. Your member is throbbing as you unload down her throat, pumping your {pc.cum} down her belly. She gags and chokes at the same time, unable to grab any air while you're busy giving her a throatpie. Some seed shots back through her nostrils, making that dracat look pathetic indeed.")
+			saynn("You grunt as her clenching walls push you over the edge. Your member is throbbing as you unload down her throat, pumping your {pc.cum} down her belly. She gags and chokes at the same time, unable to grab any air while you're busy giving her a throatpie. Some seed shots back through her nostrils, making that dracat look pathetic indeed.")
 
-		saynn("[say=pc]"+str(ch1("Cute. You love cum, huh?", "Cum whore.", "What a cum whore."))+"[/say]")
+			saynn("[say=pc]"+str(ch1("Cute. You love cum, huh?", "Cum whore.", "What a cum whore."))+"[/say]")
 
-		saynn("You hold her there, on your cock for a long moment. More and more tears stream down her cheeks as you do, her cyan eyes getting weaker with every second.")
+			saynn("You hold her there, on your cock for a long moment. More and more tears stream down her cheeks as you do, her cyan eyes getting weaker with every second.")
 
-		saynn("Even though she is suffering.. for you it feels amazing. Your balls get drained hard by that slut's throat.")
+			saynn("Even though she is suffering.. for you it feels amazing. Your balls get drained hard by that slut's throat.")
+
+		else:
+			saynn("One last hard thrust. You go as deep as you can, ramming that rubber toy in!")
+
+			saynn("[say=ferri]Mmmph-![/say]")
+
+			saynn("You watch with great interest as she gags and chokes at the same time, unable to grab any air. Some of her own saliva shots back through her nostrils, making that dracat look pathetic indeed.")
+
+			saynn("[say=pc]"+str(ch1("Cute.", "Whore.", "What a whore."))+"[/say]")
+
+			saynn("You hold her there, on your shine shaft for a long moment. More and more tears stream down her cheeks as you do, her cyan eyes getting weaker with every second.")
+
+			saynn("Even though she is suffering.. for you it's entertaining.")
 
 		saynn("Still, it's probably enough for now.")
 
 		addButton("Continue", "See what happens next", "pp_pullout")
 	if(state == "pp_pullout"):
 		playAnimation(StageScene.GivingBirth, "idle", {pc="ferri", bodyState={naked=true, hard=true}})
-		saynn("When you finally pull out, Ferri collapses. She starts coughing loudly, spitting some of your seed out, as much as she can.")
+		saynn("When you finally pull out, Ferri collapses. She starts coughing loudly"+str(", spitting some of your seed out, as much as she can" if !straponUsed else " while you take off your strapon harness and put it away")+".")
 
 		saynn("[say=ferri]Ghk.. f-fuck.. ghk..[/say]")
 
 		saynn("You pick up the basket muzzle and replace the ring gag with it. Her fangs click against the metal but she doesn't bite you.. busy trying to recover her breath.")
 
-		saynn("[say=pc]"+str(ch1("You did well. I'm proud of you.", "Look at you. Drooling cum like the worthless bitch you are.", "Pathetic. Absolutely pathetic."))+"[/say]")
+		if (!straponUsed):
+			saynn("[say=pc]"+str(ch1("You did well. I'm proud of you.", "Look at you. Drooling cum like the worthless bitch you are.", "Pathetic. Absolutely pathetic."))+"[/say]")
+
+		else:
+			saynn("[say=pc]"+str(ch1("You did well. I'm proud of you.", "Look at you. Drooling like the worthless bitch you are.", "Pathetic. Absolutely pathetic."))+"[/say]")
 
 		saynn("Her tail curls around her, her chest moves fast.")
 
