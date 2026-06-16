@@ -141,3 +141,6 @@ func giveRewardFinal(_isRepeat:bool):
 			GM.pc.getInventory().addItem(theItem)
 			GM.main.addMessage("You received "+theItem.getAStackName())
 	giveReward(_isRepeat)
+
+func canCancelAtAnyTime() -> bool:
+	return true

@@ -5,6 +5,7 @@ var recruits:Dictionary = {}
 
 var currentID:String = ""
 var replayMode:bool = false # If true, doing the recruiting stuff won't trigger the story scene of the recruit
+var mission:bool = false # Was this recruitment started from a mission
 
 func _init():
 	for recruitID in GlobalRegistry.getRecruits():
@@ -17,11 +18,18 @@ func clearCurrent():
 	currentID = ""
 	replayMode = false
 
-func setCurrent(_id:String, _replayMode:bool = false) -> bool:
+func clearCurrentIfMission():
+	if(!mission):
+		return
+	currentID = ""
+	replayMode = false
+
+func setCurrent(_id:String, _replayMode:bool = false, _missionMode:bool = true) -> bool:
 	if(!recruits.has(_id)):
 		return false
 	currentID = _id
 	replayMode = _replayMode
+	mission = _missionMode
 	return true
 
 func hasCurrent() -> bool:
@@ -73,11 +81,13 @@ func saveData() -> Dictionary:
 		currentID = currentID,
 		recruits = recData,
 		replayMode = replayMode,
+		mission = mission,
 	}
 
 func loadData(_data:Dictionary):
 	currentID = SAVE.loadVar(_data, "currentID", "")
 	replayMode = SAVE.loadVar(_data, "replayMode", false)
+	mission = SAVE.loadVar(_data, "mission", false)
 	
 	# Assumes we re-create this system on load
 	var recData:Dictionary = SAVE.loadVar(_data, "recruits", {})

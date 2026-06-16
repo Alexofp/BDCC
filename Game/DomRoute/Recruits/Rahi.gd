@@ -4,7 +4,7 @@ func _init():
 	id = "Rahi"
 	charID = "rahi"
 	difficulty = RecruitDifficulty.VeryEasy
-	talkScene = "RahiRecTalk"
+	talkScene = id+"RecTalk"
 	nextStoryScene = "DomM0RahiBreakAfterScene"
 	choices = [
 		{
@@ -39,7 +39,7 @@ func _init():
 		},
 	]
 
-func getExtraChoices(_choices:Array) -> Array:
+func getExtraChoices(_choices:Array, _extras:Dictionary) -> Array:
 	var result:Array = []
 	if(_choices[1] == "sex"):
 		if(GM.pc.hasReachablePenis()):

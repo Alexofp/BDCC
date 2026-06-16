@@ -3,9 +3,10 @@ extends Character
 func _init():
 	id = "bulldog"
 	
-	npcLevel = 5
-	npcBasePain = 150
-	npcBaseLust = 150
+	npcLevel = 3
+	npcBasePain = 70
+	npcBaseLust = 70
+	npcBaseStamina = 80
 	npcCharacterType = CharacterType.Inmate
 	
 	pickedSkin="WoonaSkin"

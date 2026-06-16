@@ -312,7 +312,7 @@ func getExtras() -> Array:
 	if(!areChoicesFilled()):
 		return []
 	var _recruit:RecruitBase = GM.main.RCS.getRecruit()
-	return _recruit.getExtraChoices(getChoicesIDs())
+	return _recruit.getExtraChoices(getChoicesIDs(), extra)
 
 func checkExtras():
 	var _recruit:RecruitBase = GM.main.RCS.getRecruit()

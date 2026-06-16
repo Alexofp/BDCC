@@ -7,6 +7,7 @@ var flags:Dictionary = {} # mission id = dictionary[flag id] = flag value
 var pcPain:int = 0
 var pcLust:int = 0
 var pcStamina:int = 0 # Missing stamina
+var oldFlags:Dictionary = {} # The old flags of the mission that we have started again
 
 func getAllPossibleMissions() -> Array:
 	var result:Array = []
@@ -89,6 +90,18 @@ func canStartAnyMission() -> bool:
 		return false
 	return true
 
+func autoCompleteNextMainMission():
+	if(!current.empty()):
+		return
+	var theMainMissions:Array = GM.main.MS.getAllPossibleMainMissions()
+	if(theMainMissions.empty()):
+		return
+	var theMission = theMainMissions[0]
+	startMission(theMission.id, false, false)
+	for theDecisionID in theMission.decisions:
+		setDecision(theDecisionID, theMission.decisions[theDecisionID]["outcomes"].keys()[0])
+	completeMission()
+
 func startMission(_id:String, _runScene:bool = true, _announceIt:bool = true):
 	if(!current.empty()):
 		assert(false, "TRYING TO START A MISSION BUT WE'RE ALREADY ARE ON ONE!")
@@ -98,8 +111,8 @@ func startMission(_id:String, _runScene:bool = true, _announceIt:bool = true):
 		assert(false, "MISSION WITH ID "+_id+" IS NOT FOUND!")
 		return
 	current = _id
-	flags[current] = {} # Reset all flags of this mission. Maybe not needed?
-	# Could instead save the old flags in case we're doing this mission for the second time
+	oldFlags = flags[current].duplicate(true) if flags.has(current) else {} # Saving the old flags in case we're restarting
+	flags[current] = {} # Reset all flags of this mission
 	
 	var theStartLoc:String = theMission.getStartLoc()
 	if(!theStartLoc.empty()):
@@ -117,10 +130,29 @@ func startMission(_id:String, _runScene:bool = true, _announceIt:bool = true):
 func isCompleted(_missionID:String) -> bool:
 	return completed.has(_missionID)
 
+func canCancelCurrentMission() -> bool:
+	if(current.empty()):
+		return false
+	var theMission = GlobalRegistry.getMission(current)
+	if(!theMission):
+		return false
+	if(!theMission.canCancelAtAnyTime()):
+		return false
+	return true
+
 func cancelCurrentMission():
+	if(current.empty()):
+		return
+	if(oldFlags.empty()):
+		flags.erase(current)
+	else:
+		flags[current] = oldFlags # Restore old flags
+	oldFlags = {}
 	current = ""
+	GM.main.RCS.clearCurrentIfMission()
 
 func failCurrentMission():
+	flags.erase(current) # Make sure there is nothing recorded about what we did
 	current = ""
 	
 func restartCurrentMission(_resetStats:bool = true):
@@ -285,6 +317,7 @@ func saveData() -> Dictionary:
 		pcPain = pcPain,
 		pcLust = pcLust,
 		pcStamina = pcStamina,
+		oldFlags = oldFlags,
 	}
 
 func loadData(_data:Dictionary):
@@ -297,3 +330,4 @@ func loadData(_data:Dictionary):
 	pcPain = SAVE.loadVar(_data, "pcPain", 0)
 	pcLust = SAVE.loadVar(_data, "pcLust", 0)
 	pcStamina = SAVE.loadVar(_data, "pcStamina", 0)
+	oldFlags = SAVE.loadVar(_data, "oldFlags", {})

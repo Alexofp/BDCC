@@ -6,7 +6,7 @@ func _init():
 	desc = "Kait is trying to fix the TV in the other room."
 	
 	startScene = "DomSM2"
-	requiredMissions = ["Mission1"]
+	requiredMissions = ["Mission2"]
 	
 	flags = {
 		"kait": flag(FlagType.Text), # "pat", "strict"

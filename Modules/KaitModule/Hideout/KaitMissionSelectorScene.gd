@@ -52,7 +52,9 @@ func _run():
 		var theStats:Array = GM.main.MS.getMissionStats()
 		saynn(Util.join(theStats, "\n"))
 	
-	if(state == "history_menu"):
+	if(state == "history_menu" || state == "replay_menu"):
+		var _isReplay:bool = (state == "replay_menu")
+		addButton("Back", "Go back to the previous menu", "")
 		saynn("[b]=== History ====[/b]")
 		
 		var theMainMissions:Array = GM.main.MS.getAllCompletedMainMissions()
@@ -62,7 +64,8 @@ func _run():
 		var _i:int = 1
 		for theMission in theMainMissions:
 			sayMissionInfo(theMission, true)
-			#addButton(theMission.getName(), "Start this mission!", "startMission", [theMission.id])
+			if(_isReplay):
+				addButton(theMission.getName(), "Start this mission!", "startMission", [theMission.id])
 			_i += 1
 		
 		var theSideMissions:Array = GM.main.MS.getAllCompletedSideMissions()
@@ -71,10 +74,12 @@ func _run():
 			_i = 1
 			for theMission in theSideMissions:
 				sayMissionInfo(theMission, true)
-				#addButton(theMission.getName(), "Start this side mission!", "startMission", [theMission.id])
+				if(_isReplay):
+					addButton(theMission.getName(), "Start this side mission!", "startMission", [theMission.id])
 				_i += 1
 		
-		addButton("Back", "Go back to the previous menu", "")
+		if(!_isReplay):
+			addButton("Replay mission", "Choose which mission you want to replay", "replay_menu")
 	
 func _react(_action: String, _args):
 	if(_action == "endthescene"):
@@ -86,3 +91,17 @@ func _react(_action: String, _args):
 		return
 
 	setState(_action)
+
+func getDebugActions():
+	return [
+	{
+	"id": "completeNext",
+	"name": "Complete next main mission",
+	"args": [
+	],
+	},
+	]
+
+func doDebugAction(_id, _args = {}):
+	if(_id == "completeNext"):
+		GM.main.MS.autoCompleteNextMainMission()

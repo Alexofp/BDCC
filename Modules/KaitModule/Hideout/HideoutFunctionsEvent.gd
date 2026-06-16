@@ -15,6 +15,8 @@ func run(_triggerID, _args):
 	if(theRoomID == "hideout_hq" && getFlag("KaitModule.introCompleted")):
 		if(isOnMission):
 			addDisabledButton("Mission Board", "You are already on a mission")
+			if(GM.main.MS.canCancelCurrentMission()):
+				addButton("Cancel Mission", "Cancel the current mission", "cancelMission")
 		elif(isDoingRec):
 			addDisabledButton("Mission Board", "You can't do this while you're recruiting someone")
 		else:
@@ -32,3 +34,6 @@ func onButton(_method, _args):
 		runScene("RecruitStartScene")
 	if(_method == "missionboard"):
 		runScene("KaitMissionSelectorScene")
+	if(_method == "cancelMission"):
+		addMessage("You have cancelled the current mission!")
+		GM.main.MS.cancelCurrentMission()

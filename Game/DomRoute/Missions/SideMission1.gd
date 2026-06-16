@@ -2,7 +2,7 @@ extends MissionBase
 
 func _init():
 	id = "SideMission1"
-	name = "Go broke"
+	name = "Going broke"
 	desc = "Avy needs your help with returning a debt."
 	
 	startScene = "DomSM1"

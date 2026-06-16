@@ -19,7 +19,7 @@ func _run():
 		playAnimation(StageScene.Grope, "grope", {pc="ferri", npc="pc", bodyState={naked=true, hard=true}})
 		saynn("You enter the cell and find Ferri. She is naked, cuffed and muzzled, her collar leashed to one of the pipes.")
 
-		saynn("She is visibly upset, her tail wagging behind her, occasionally doing little flicks.")
+		saynn("She is visibly upset, her tail flicking behind her.")
 
 		saynn("As you step closer, she tries to kick you even. But the restraints throw her off balance, making her stumble instead.")
 
@@ -135,7 +135,7 @@ func _run():
 
 		saynn("You squeeze more and more, harder this time. It leads to little constant streams of Ferri's milk appearing all across her cyan areolas before flowing down to the tips of her nips and escaping into the bucket. Splat, splat splat..")
 
-		saynn("Ferri's head hands low, her ears are flat, her breathing comes in short, shaky gasps, her body squirming more and more.")
+		saynn("Ferri's head hangs low, her ears are flat, her breathing comes in short, shaky gasps, her body squirming more and more.")
 
 		addButton("Continue", "See what happens next", "ferri_cums")
 	if(state == "ferri_cums"):
@@ -158,7 +158,7 @@ func _run():
 
 		saynn("[say=ferri]Mmhh.. m-moo.. ahh..[/say]")
 
-		saynn("She cums hard, her nips squirting too in the process, spawning lots of thin fountains of milk all at one! You're quick to take advantage of that opportunity, your hands keep milking her udders, each squeeze drawing out more and more milk.. together with her moans.")
+		saynn("She cums hard, multiple little milk fountains appearing on her areolas! You're quick to take advantage of that opportunity, your hands keep milking her udders, each squeeze drawing out more and more milk.. together with her moans.")
 
 		saynn("Ferri's head begins thrashing side to side.")
 
@@ -190,7 +190,7 @@ func _run():
 
 		saynn("Ferri's glazed eyes focus just enough to part her lips. You press the milk to her tongue. She swallows weakly.")
 
-		saynn("Then you look at her breasts. Her nipples are no longer cyan. They're clearly sore, now with a red prominent red glow. Her areolas are puffy and irritated, clearly overworked.")
+		saynn("Then you look at her breasts. Her nipples are no longer cyan. They're clearly sore, now with a prominent red glow. Her areolas are puffy and irritated, clearly overworked.")
 
 		saynn("The bucket sits beneath her, full to the brim with dracat milk.")
 

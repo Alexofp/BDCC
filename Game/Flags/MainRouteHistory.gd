@@ -49,6 +49,7 @@ func resetMainRoute(_ending:int=-1):
 		var theModule = GlobalRegistry.modules[moduleID]
 		
 		theModule.resetMainRoute()
+	GM.main.applyAllWorldEdits()
 
 func saveData() -> Dictionary:
 	var theEndings:Array = []

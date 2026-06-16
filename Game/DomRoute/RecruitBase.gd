@@ -27,7 +27,7 @@ var choices:Array = [
 ]
 
 # Only gets called when all options are picked, gurantees that _choices has all the choices
-func getExtraChoices(_choices:Array) -> Array:
+func getExtraChoices(_choices:Array, _extras:Dictionary) -> Array:
 	#if(_choices[1] == "sex"):
 	return [
 		{
@@ -47,7 +47,7 @@ func isCombinationPossible(_choices:Array, _extras:Dictionary) -> Array:
 	return [true, ""]
 
 func isCombinationPossibleFinal(_choices:Array, _extras:Dictionary) -> Array:
-	var theExtras := getExtraChoices(_choices)
+	var theExtras := getExtraChoices(_choices, _extras)
 	for theExtra in theExtras:
 		var theID:String = theExtra["id"]
 		if(!_extras.has(theID)):

@@ -14,7 +14,7 @@ func _run():
 		playAnimation(StageScene.Grope, "grope", {pc="ferri", npc="pc", bodyState={naked=true, hard=true}})
 		saynn("You enter the cell and find Ferri. She is naked, cuffed and muzzled, her collar leashed to one of the pipes.")
 
-		saynn("She is visibly upset, her tail wagging behind her, occasionally doing little flicks.")
+		saynn("She is visibly upset, her tail flicking behind her.")
 
 		saynn("As you step closer, she tries to kick you even. But the restraints throw her off balance, making her stumble instead.")
 
@@ -26,7 +26,7 @@ func _run():
 
 		saynn("[say=ferri]Nnh.. quit it![/say]")
 
-		saynn("Your other hand slides up along the curves of her hips and belly, palm brushing against her fur for a bit until it finds her breast. Warm and soft. You make it bounce a bit, there is quite a bit of weight to it, her cyan nipple jiggles as you do that.")
+		saynn("Your other hand slides up along the curves of her hips and belly, palm brushing against her fur for a bit until it finds her breast. Warm and soft. You make it bounce a bit, there is quite a bit of weight to it.")
 
 		saynn("[say=ferri]Get your hand off my..[/say]")
 
