@@ -65,7 +65,7 @@ func _run():
 		for theMission in theMainMissions:
 			sayMissionInfo(theMission, true)
 			if(_isReplay):
-				addButton(theMission.getName(), "Start this mission!", "startMission", [theMission.id])
+				addButton(theMission.getName(), "Start this mission!", "replayMission", [theMission.id])
 			_i += 1
 		
 		var theSideMissions:Array = GM.main.MS.getAllCompletedSideMissions()
@@ -75,7 +75,7 @@ func _run():
 			for theMission in theSideMissions:
 				sayMissionInfo(theMission, true)
 				if(_isReplay):
-					addButton(theMission.getName(), "Start this side mission!", "startMission", [theMission.id])
+					addButton(theMission.getName(), "Start this side mission!", "replayMission", [theMission.id])
 				_i += 1
 		
 		if(!_isReplay):
@@ -88,6 +88,10 @@ func _react(_action: String, _args):
 	if(_action == "startMission"):
 		endScene()
 		GM.main.MS.startMission(_args[0])
+		return
+	if(_action == "replayMission"):
+		endScene()
+		GM.main.MS.startMission(_args[0], true, true, true)
 		return
 
 	setState(_action)

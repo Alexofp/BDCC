@@ -8,6 +8,7 @@ var pcPain:int = 0
 var pcLust:int = 0
 var pcStamina:int = 0 # Missing stamina
 var oldFlags:Dictionary = {} # The old flags of the mission that we have started again
+var replayMode:bool = false # Are we replaying a mission for the second time
 
 func getAllPossibleMissions() -> Array:
 	var result:Array = []
@@ -102,7 +103,7 @@ func autoCompleteNextMainMission():
 		setDecision(theDecisionID, theMission.decisions[theDecisionID]["outcomes"].keys()[0])
 	completeMission()
 
-func startMission(_id:String, _runScene:bool = true, _announceIt:bool = true):
+func startMission(_id:String, _runScene:bool = true, _announceIt:bool = true, _replayMode:bool = false):
 	if(!current.empty()):
 		assert(false, "TRYING TO START A MISSION BUT WE'RE ALREADY ARE ON ONE!")
 		return
@@ -113,6 +114,7 @@ func startMission(_id:String, _runScene:bool = true, _announceIt:bool = true):
 	current = _id
 	oldFlags = flags[current].duplicate(true) if flags.has(current) else {} # Saving the old flags in case we're restarting
 	flags[current] = {} # Reset all flags of this mission
+	replayMode = _replayMode
 	
 	var theStartLoc:String = theMission.getStartLoc()
 	if(!theStartLoc.empty()):
@@ -140,20 +142,28 @@ func canCancelCurrentMission() -> bool:
 		return false
 	return true
 
-func cancelCurrentMission():
-	if(current.empty()):
-		return
+func restoreOldFlags():
 	if(oldFlags.empty()):
 		flags.erase(current)
 	else:
 		flags[current] = oldFlags # Restore old flags
 	oldFlags = {}
+
+func cancelCurrentMission():
+	if(current.empty()):
+		return
+	restoreOldFlags()
 	current = ""
 	GM.main.RCS.clearCurrentIfMission()
 
 func failCurrentMission():
-	flags.erase(current) # Make sure there is nothing recorded about what we did
+	if(replayMode): # If we're replaying the mission, restore the old flags
+		restoreOldFlags()
+		replayMode = false
+	else:
+		flags.erase(current) # Make sure there is nothing recorded about what we did
 	current = ""
+	GM.main.RCS.clearCurrentIfMission()
 	
 func restartCurrentMission(_resetStats:bool = true):
 	if(!isOnMission()):
@@ -164,7 +174,7 @@ func restartCurrentMission(_resetStats:bool = true):
 		GM.pc.addPain(pcPain - GM.pc.getPain())
 		GM.pc.addLust(pcLust - GM.pc.getLust())
 		GM.pc.addStamina(GM.pc.getMaxStamina() - pcStamina - GM.pc.getStamina())
-	startMission(theMissionID)
+	startMission(theMissionID, true, true, replayMode)
 
 func completeMission():
 	if(!isOnMission()):
@@ -318,6 +328,7 @@ func saveData() -> Dictionary:
 		pcLust = pcLust,
 		pcStamina = pcStamina,
 		oldFlags = oldFlags,
+		replayMode = replayMode,
 	}
 
 func loadData(_data:Dictionary):
@@ -331,3 +342,4 @@ func loadData(_data:Dictionary):
 	pcLust = SAVE.loadVar(_data, "pcLust", 0)
 	pcStamina = SAVE.loadVar(_data, "pcStamina", 0)
 	oldFlags = SAVE.loadVar(_data, "oldFlags", {})
+	replayMode = SAVE.loadVar(_data, "replayMode", false)
