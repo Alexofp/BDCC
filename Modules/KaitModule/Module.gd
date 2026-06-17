@@ -29,6 +29,9 @@ func _init():
 		"res://Modules/KaitModule/Chapter1/DomCh1RahiRecEnsScene.gd",
 		"res://Modules/KaitModule/Hideout/KaitMissionSelectorScene.gd",
 		"res://Modules/KaitModule/Hideout/MissionSimpleScene.gd",
+		
+		"res://Modules/KaitModule/Avy/AvyObedienceMenuScene.gd",
+		"res://Modules/KaitModule/Avy/AvyObedienceLightDomScene.gd",
 	]
 	characters = [
 	]
@@ -48,18 +51,6 @@ func _init():
 	]
 
 func resetFlagsOnNewDay():
-	pass
-
-func incKaitSubmission():
-	pass
-
-func incKaitLove():
-	pass
-
-func incAvySubmission():
-	pass
-
-func incAvyLove():
 	pass
 
 func hasHideoutAccess() -> bool:
